@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle } from 'lucide-react';
+import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle, Globe } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
+import LivingWorldTab from './howto/LivingWorldTab.jsx';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop card with as
@@ -15,6 +16,9 @@ const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 const TABS = [
   { id:'quick',  label:'Quick Start',   Icon: Zap },
   { id:'power',  label:'Power User',    Icon: Star },
+  // "The Living World" sits between Power User and Under the Hood: the bridge
+  // from the static dossier to the premium living simulation.
+  { id:'living', label:'The Living World', Icon: Globe },
   { id:'logic',  label:'Under the Hood',Icon: Cpu },
   { id:'phil',   label:'DM Philosophy', Icon: BookOpen },
   { id:'ref',    label:'Reference',     Icon: List },
@@ -562,6 +566,7 @@ export default function HowToUse({ standalone=false }) {
         <div style={{ padding:'24px 28px' }}>
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
+          {activeTab==='living' && <LivingWorldTab />}
           {activeTab==='logic' && <LogicTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
@@ -595,6 +600,7 @@ export default function HowToUse({ standalone=false }) {
         <div style={{ padding:'14px', background:CARD, maxHeight:'60vh', overflowY:'auto' }}>
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
+          {activeTab==='living' && <LivingWorldTab />}
           {activeTab==='logic' && <LogicTab />}
           {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}

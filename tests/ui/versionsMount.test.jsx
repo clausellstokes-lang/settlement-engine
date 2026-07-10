@@ -17,7 +17,7 @@
  */
 
 import { describe, test, expect, vi } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: false, supabase: {} }));
@@ -61,4 +61,44 @@ describe('VersionsTab is mounted in the dossier (F26 pin)', () => {
     const mod = await import('../../src/components/settlement/VersionsTab.jsx');
     expect(typeof mod.default).toBe('function');
   });
+});
+
+// F26 generalized — kill the WHOLE drift class, not just the Versions tab. A
+// dossier tab component (a `*Tab.jsx` that default-exports a component and lives
+// in one of the dossier tab source dirs) that no OutputContainer lazy-import
+// references is a feature built + shipped-in-the-roadmap but unreachable in the
+// product — exactly how Version history shipped mounted-nowhere. This pin makes
+// that impossible for EVERY dossier tab: add a new `*Tab.jsx` to these dirs and
+// it must be wired into OutputContainer, or this reddens.
+describe('every dossier tab component is registered in OutputContainer (F26 class)', () => {
+  // The dossier tab component source dirs (relative to src/components). The lazy
+  // imports in OutputContainer are written relative to it, e.g.
+  // `import('./new/tabs/OverviewTab')` — some carry the `.jsx` extension, some
+  // do not, so the assertion matches an OPTIONAL extension.
+  const TAB_DIRS = ['new/tabs', 'settlement'];
+  const COMPONENTS = resolve(process.cwd(), 'src/components');
+
+  // Collect every dossier *Tab.jsx that default-exports a component.
+  const tabFiles = TAB_DIRS.flatMap(dir =>
+    readdirSync(resolve(COMPONENTS, dir))
+      .filter(name => /Tab\.jsx$/.test(name))
+      .filter(name => /export default/.test(readFileSync(resolve(COMPONENTS, dir, name), 'utf8')))
+      .map(name => ({ dir, base: name.replace(/\.jsx$/, ''), rel: `${dir}/${name.replace(/\.jsx$/, '')}` })),
+  );
+
+  test('the dossier tab dirs actually hold tab components (guards against a vacuous pass)', () => {
+    expect(tabFiles.length).toBeGreaterThan(1);
+  });
+
+  test.each(tabFiles.map(t => [t.rel, t]))(
+    '%s is lazy-imported in OutputContainer',
+    (_rel, tab) => {
+      // Match `import('./<dir>/<Name>')` or `import('./<dir>/<Name>.jsx')` with
+      // either quote style — the exact lazy-import form OutputContainer uses.
+      const re = new RegExp(
+        `import\\(\\s*['"]\\./${tab.dir}/${tab.base}(?:\\.jsx)?['"]\\s*\\)`,
+      );
+      expect(OUTPUT_CONTAINER_SRC).toMatch(re);
+    },
+  );
 });

@@ -139,15 +139,25 @@ export const FLAGS = Object.freeze({
   // Advance-scaling: an Advance runs N REAL one-week ticks (week=1, month=4,
   // season=12, year=48) with a determinate progress bar, a pause-at-forks
   // resume flow, and the auto-resolve toggle — instead of a single coarse step.
-  // HELD OFF in this tree: only the DOMAIN orchestrator (advanceInterval.js) has
-  // landed; the STORE integration the multi-tick UI needs (resolveIntervalMajors,
-  // advanceAutoResolve, pausedAdvance surfacing) has NOT, so the flag stays OFF
-  // and the Realm advances on the byte-identical single-tick path. Flip to true
-  // only once the world-pulse store slice threads the multi-tick session (a
-  // later wave); see useAdvanceSession.js.
+  // PROMOTED default-on after the multi-tick STORE integration landed
+  // (campaignWorldPulseSlice: the flag-branched advance, resolveIntervalMajors
+  // resume, advanceAutoResolve, pausedAdvance surfacing). Flag retained as a soak
+  // killswitch — set false (via env or localStorage) to fall back to the
+  // byte-identical single-tick advance path.
   advanceMultiTick: {
-    default: false,
-    description: 'Advance runs N real one-week ticks per interval (month=4, season=12, year=48) with a progress bar + pause/resume + auto-resolve toggle. HELD OFF: the multi-tick STORE integration is not landed in this tree; the single-tick advance path is authoritative.',
+    default: true,
+    description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) with a progress bar + pause/resume + auto-resolve toggle. Set false to fall back to the byte-identical single-tick advance.',
+  },
+  // Runs the multi-tick advance in a Web Worker so the main thread stays
+  // interactive during a long advance (a year is 48 synchronous kernel ticks). The
+  // worker runs the SAME pure simulate function with a custom-content snapshot, so
+  // output is byte-identical to the in-thread path; a killswitch fallback runs it
+  // in-thread when off (and it always runs in-thread in Node/tests/SSR, where there
+  // is no Worker). Set false (?flag.simAdvanceWorker=false) for instant per-browser
+  // rollback to the synchronous advance.
+  simAdvanceWorker: {
+    default: true,
+    description: 'Run the multi-tick world advance in a Web Worker (main thread stays interactive). Byte-identical output; set false to fall back to the in-thread advance.',
   },
   // The read-only surfacing layer for the war-economy phases. OFF by default.
   // When on, a "War & Resolve" Inspector tab reads each settlement's morale

@@ -1,0 +1,258 @@
+/**
+ * howto/LivingWorldTab.jsx — the About page's "The Living World" tab.
+ * Extracted from HowToUse.jsx (which sits at its line budget).
+ *
+ * The bridge from the static dossier to the premium living simulation:
+ *   - the landing thesis ("It generates a town in seconds, then it runs the
+ *     region for years"),
+ *   - the 3-rung value ladder (anon TRIES / free SAVES + full-size generation /
+ *     premium SIMULATES), lens-labeled — size is FREE and lives on the FREE rung,
+ *   - each premium system as a claim + a "how it stays coherent" line + a premium
+ *     chip + the opt-in / off-by-default / reversible qualifier.
+ *
+ * All copy lives in en.js (valueLadder / aboutLiving). Pure presentational.
+ */
+
+import { GOLD, GOLD_TXT, INK, BODY, SECOND as SEC, VIOLET, GREEN, RED, PROSE_MAX, SP, serif_, FS, swatch, BORDER } from '../theme.js';
+import { t, tx } from '../../copy/index.js';
+import { useReaderAudience } from '../../hooks/useReaderAudience.js';
+import Button from '../primitives/Button.jsx';
+import { navigate } from '../../hooks/useRoute.js';
+
+const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: SP.xl });
+const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
+// P11: ride the semantic AI/premium (VIOLET) and success (GREEN) tokens, not raw
+// swatch[] hex keys — the values are identical (violet-500 / green-600) so this
+// is a zero-pixel aliasing win that keeps these one-offs in the same channel as
+// the rest of the app instead of drifting.
+
+// 3-rung value ladder. Size is FREE — it lives on the FREE ("saves") rung, never
+// pitched as premium. The lens line tailors the headline to the reader.
+function ValueLadder() {
+  const audience = useReaderAudience();
+  const lensLine = t(`valueLadder.lens.${audience}`) || t('valueLadder.subhead');
+  const rungs = ['tries', 'saves', 'simulates'];
+  const accentFor = { tries: GREEN, saves: GOLD, simulates: VIOLET };
+  // P9: the ladder names each next rung — wire the already-authored CTA so a GM
+  // can climb it. Kept ghost/low-emphasis so the three rungs don't become three
+  // co-equal primaries (the tab's single high-emphasis action is the upsell CTA
+  // at the foot of the tab).
+  const ctaTargetFor = { tries: 'generate', saves: 'register', simulates: 'realm' };
+  return (
+    <section style={{ ...NO_BREAK, marginBottom: SP.xl }}>
+      <h2 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: '0 0 2px' }}>
+        {t('valueLadder.heading')}
+      </h2>
+      <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: '0 0 12px', fontStyle: 'italic' }}>
+        {lensLine}
+      </p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.md, alignItems: 'stretch' }}>
+        {rungs.map(key => {
+          const accent = accentFor[key];
+          // P5: the 3px top accent + the column gap carry the small-multiple
+          // grouping. The old `background: CARD` + borderRadius were inert (the
+          // shell fill is ALSO CARD, so the radius/fill drew nothing) — dropped,
+          // leaving the top rule to do the work and the padding to set the rhythm.
+          // P4: the conversion target ("simulates") gets a wider flex-basis so it
+          // wins on size as well as hue. P7: the gold eyebrow ("saves") rides
+          // GOLD_TXT as text; the eyebrow size is FS.xs to clear the label floor.
+          const focal = key === 'simulates';
+          const eyebrowColor = key === 'saves' ? GOLD_TXT : accent;
+          return (
+            <div key={key} style={{ flex: focal ? '1.4 1 240px' : '1 1 200px', minWidth: 0,
+              display: 'flex', flexDirection: 'column',
+              borderTop: `3px solid ${accent}`, paddingTop: 10, paddingRight: 4 }}>
+              <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em',
+                textTransform: 'uppercase', color: eyebrowColor }}>
+                {t(`valueLadder.rungs.${key}.eyebrow`)}
+              </div>
+              <h3 style={{ fontFamily: serif_, fontSize: focal ? FS.lg : FS.md, fontWeight: 600, color: INK, margin: '2px 0 6px' }}>
+                {t(`valueLadder.rungs.${key}.tier`)}
+              </h3>
+              <p style={{ fontSize: FS['12.5'], color: SEC, lineHeight: 1.6, margin: '0 0 10px' }}>
+                {t(`valueLadder.rungs.${key}.body`)}
+              </p>
+              <div style={{ marginTop: 'auto' }}>
+                <Button variant="ghost" size="sm" onClick={() => navigate(ctaTargetFor[key])}>
+                  {t(`valueLadder.rungs.${key}.cta`)}
+                </Button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+// One premium living-world system: claim + how-it-stays-coherent + premium chip +
+// the opt-in / off-by-default / reversible qualifier.
+function LivingSystemCard({ id }) {
+  const title = t(`aboutLiving.systems.${id}.title`);
+  const claim = t(`aboutLiving.systems.${id}.claim`);
+  const coherence = t(`aboutLiving.systems.${id}.coherence`);
+  // P5: flattened to the violet left-accent + spacing. The violet AI/premium
+  // layer is the one place a colored accent earns its place, but a full box on
+  // top of the shell card is still box-soup — the left rule + ~14px padding +
+  // between-block margin carry the grouping.
+  return (
+    <div style={{ ...NO_BREAK, borderLeft: `3px solid ${VIOLET}`,
+      paddingLeft: 14, marginBottom: SP.lg }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 5, flexWrap: 'wrap' }}>
+        <span style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK }}>{title}</span>
+        {/* P7: chip text raised to FS.xs (was 9px, below the persistent-label floor).
+            First-contact gloss: the bare tier name means nothing to a new GM, so a
+            native title= names it plainly as the paid simulation tier. */}
+        <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
+          style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`,
+          borderRadius: 999, padding: '2px 8px' }}>
+          {t('aboutLiving.premiumChip')}
+        </span>
+      </div>
+      <p style={{ fontSize: FS.sm, color: INK, lineHeight: 1.6, margin: '0 0 6px' }}>{claim}</p>
+      <p style={{ fontSize: FS['12.5'], color: SEC, lineHeight: 1.55, margin: '0 0 6px', fontStyle: 'italic' }}>
+        How it stays coherent: {coherence}
+      </p>
+      {/* P7: this qualifier carries the reversibility promise — raised to FS.xs
+          and BODY (was 9px MUT, failing on both contrast and the small-text floor). */}
+      <div style={{ fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.04em', color: BODY }}>
+        {t('aboutLiving.qualifier')}
+      </div>
+    </div>
+  );
+}
+
+// A fictional realm's pantheon caught mid-upheaval — a good patron losing its
+// rightful claim to a rising dark cult under a compromised throne. Illustrative
+// sample data (never a real save), labeled as such, so a FREE/anon reader can SEE
+// the living-faith system the premium tier runs. Mirrors WarFaithSection's read
+// surface (standings + legitimacy bands + contest odds + the divine mandate).
+const SAMPLE_PANTHEON = Object.freeze({
+  settlement: 'Highmoor',
+  deities: Object.freeze([
+    { name: 'Aurelia, the Dawnmother', tags: 'peaceful · good', share: 47, standing: 'ascendant', legitimacy: 0.33, isPatron: true },
+    { name: 'Vorr, the Iron Maw', tags: 'warlike · evil', share: 36, standing: 'established', legitimacy: 0.58 },
+    { name: 'The Hollow Choir', tags: 'neutral · neutral', share: 17, standing: 'cult', legitimacy: 0.18 },
+  ]),
+  contest: Object.freeze([
+    { name: 'Vorr', odds: 55 }, { name: 'Aurelia', odds: 40 }, { name: 'The Hollow Choir', odds: 5 },
+  ]),
+  mandate: 'A contested faith weakens the ruler’s divine mandate, and the throne wavers with it.',
+});
+
+/** 0..1 legitimacy → band + colour. Mirrors WarFaithSection.legitimacyBand. */
+function legBand(v) {
+  if (v >= 0.75) return { label: 'secure', color: GREEN };
+  if (v >= 0.5) return { label: 'established', color: GOLD_TXT };
+  if (v >= 0.25) return { label: 'tenuous', color: GOLD_TXT };
+  return { label: 'contested', color: RED };
+}
+
+// A read-only showcase of the living pantheon (sample data, all readers). Slots
+// before the value ladder so a free reader SEES the simulation depth, then climbs.
+function PantheonTeaser() {
+  const { settlement, deities, contest, mandate } = SAMPLE_PANTHEON;
+  return (
+    <section style={{ ...NO_BREAK, borderLeft: `3px solid ${VIOLET}`, paddingLeft: 14, marginBottom: SP.xl, maxWidth: PROSE_MAX }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
+        <span style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', color: VIOLET }}>
+          Sample pantheon
+        </span>
+        <span title="Cartographer is the paid tier that runs the living simulation, $5.99 a month."
+          style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+          color: VIOLET, background: `${VIOLET}14`, border: `1px solid ${VIOLET}40`, borderRadius: 999, padding: '2px 8px' }}>
+          {t('aboutLiving.premiumChip')}
+        </span>
+      </div>
+      <h3 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK, margin: '0 0 3px' }}>
+        The faiths of {settlement}, contested
+      </h3>
+      <p style={{ fontSize: FS['12.5'], color: SEC, lineHeight: 1.55, margin: '0 0 10px' }}>
+        Each settlement grows its own pantheon. Creeds win adherents, earn or lose the rightful claim to the
+        patron seat, and rise or fall with who holds power. Here a dark cult is overtaking the old church.
+      </p>
+      {deities.map((d) => {
+        const band = legBand(d.legitimacy);
+        return (
+          <div key={d.name} style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
+            <span style={{ fontSize: FS.sm, fontWeight: d.isPatron ? 700 : 500, color: d.isPatron ? INK : BODY, minWidth: 150 }}>
+              {d.name}{d.isPatron ? ' (patron)' : ''}
+            </span>
+            <span style={{ fontSize: FS.xs, color: SEC }}>
+              {d.share}% · {d.standing} · {d.tags} · legitimacy{' '}
+              <span style={{ color: band.color, fontWeight: 700 }}>{band.label}</span>
+            </span>
+          </div>
+        );
+      })}
+      <p style={{ fontSize: FS['12.5'], color: BODY, lineHeight: 1.55, margin: '8px 0 3px' }}>
+        <span style={{ fontWeight: 700, color: RED }}>Faith contest:</span> a rival presses the patron&apos;s claim.
+        Odds next turn: {contest.map((c, i) => `${i > 0 ? ', ' : ''}${c.name} ${c.odds}%`).join('')}.
+      </p>
+      <p style={{ fontSize: FS['12.5'], color: BODY, lineHeight: 1.55, margin: 0 }}>
+        <span style={{ fontWeight: 700, color: RED }}>Divine mandate:</span> {mandate}
+      </p>
+    </section>
+  );
+}
+
+export default function LivingWorldTab() {
+  const systems = Object.keys(tx('aboutLiving.systems') || {});
+  return (
+    <>
+      {/* Thesis */}
+      <div style={{ padding: '14px 16px', background: 'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
+        borderRadius: 7, marginBottom: SP.lg, maxWidth: PROSE_MAX }}>
+        <h2 style={{ fontFamily: serif_, fontSize: FS['18'], fontWeight: 600, color: GOLD, margin: '0 0 8px' }}>
+          {t('aboutLiving.thesis')}
+        </h2>
+        <p style={{ fontSize: FS.sm, color: swatch['#C8B098'], lineHeight: 1.7, margin: 0 }}>
+          {t('aboutLiving.thesisSub')}
+        </p>
+      </div>
+
+      {/* Settlement Progression — the six tiers as foundational world context,
+          before the value-ladder pitch. The infographic is self-contained (its
+          title and per-tier descriptions are baked into the art); the alt carries
+          the same progression for screen readers, so no visible caption is needed. */}
+      <figure style={{ margin: `0 0 ${SP.xl}px`, maxWidth: 1000 }}>
+        <img
+          src="/backgrounds/settlement-progression.jpg"
+          alt="Settlement Progression across the six tiers. A thorpe is a few huts and farmsteads with no formal defenses; a hamlet adds basic services and a local trade and farming focus; a village has densely clustered homes, a church or chapel, a market, and some defenses; a town is walled with diverse districts, markets and guilds, and a regional trade hub; a city has strong fortifications, many districts, extensive services, and major trade and industry; a metropolis has grand fortifications, advanced infrastructure, international trade, and complex governance. Each settlement grows through population, security, infrastructure, governance, and economy."
+          loading="lazy"
+          style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 8, border: `1px solid ${BORDER}`, boxShadow: '0 4px 14px rgba(27,20,8,0.10)' }}
+        />
+      </figure>
+
+      {/* A read-only taste of the living pantheon (sample data) — so a free reader
+          SEES the simulation depth that the premium tier runs, before the pitch. */}
+      <PantheonTeaser />
+
+      {/* The value ladder — anon tries / free saves + full-size / premium simulates */}
+      <ValueLadder />
+
+      {/* The systems — P10: skip the intro + grid entirely when the copy subtree
+          is missing/empty, so the lead-in never strands over a blank column. */}
+      {systems.length > 0 && (
+        <>
+          <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.6, margin: `0 0 ${SP.md}px`, maxWidth: PROSE_MAX }}>
+            {t('aboutLiving.intro')}
+          </p>
+          <div style={COLS()}>
+            {systems.map(id => <LivingSystemCard key={id} id={id} />)}
+          </div>
+        </>
+      )}
+
+      {/* P8/P9: the tab sells Cartographer-tier simulation but the premium chips
+          dead-end — close the upsell on the single high-emphasis next step. The
+          ai variant ties it to the violet premium channel used for the chips. */}
+      <div style={{ marginTop: SP.xl }}>
+        <Button variant="ai" size="lg" onClick={() => navigate('realm')}>
+          See the Realm
+        </Button>
+      </div>
+    </>
+  );
+}
