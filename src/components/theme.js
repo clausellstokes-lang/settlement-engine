@@ -55,6 +55,12 @@ export const CARD_HDR = L.CARD_HDR;
 // Flat aliases for dashed-key palette colors (P120 / V-2 color burn-down).
 export const VIOLET    = L.VIOLET;
 export const VIOLET_BG = L.VIOLET_BG;
+// VIOLET_DEEP / AMBER_DEEP — legible TEXT foregrounds for the violet/amber tint
+// surfaces (violet-500/amber-500 as text fail AA on their -100 tint). Values match
+// the reference tokens (violet-700 / amber-700); this is a token DEFINITION file,
+// exempt from no-raw-color.
+export const VIOLET_DEEP = '#6A3FBF'; // AI text on violet-100 (== color['violet-700'])
+export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const RED       = L.RED;
 export const RED_BG    = L.RED_BG;
 export const GREEN     = L.GREEN;

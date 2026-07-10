@@ -1,6 +1,6 @@
 {
-  "total": 2244,
-  "totalAny": 2205,
+  "total": 2290,
+  "totalAny": 2251,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -91,6 +91,14 @@
       "any": 6,
       "suppress": 0
     },
+    "src/domain/display/mobilizationStatus.js": {
+      "any": 7,
+      "suppress": 0
+    },
+    "src/domain/display/occupationStatus.js": {
+      "any": 8,
+      "suppress": 0
+    },
     "src/domain/display/pantheonDepth.js": {
       "any": 11,
       "suppress": 0
@@ -113,6 +121,10 @@
     },
     "src/domain/display/warStatus.js": {
       "any": 30,
+      "suppress": 0
+    },
+    "src/domain/display/worldSnapshotPublic.js": {
+      "any": 31,
       "suppress": 0
     },
     "src/domain/districtProfile.js": {

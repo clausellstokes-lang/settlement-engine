@@ -101,6 +101,22 @@ export function sanitizePublicValue(value, path = []) {
 }
 
 /**
+ * The stable per-NPC key the gallery member-override map (migration 092) is keyed
+ * by. Prefers the NPC's stored id (created NPCs carry `npc.<slug>_<hash>`); falls
+ * back to a name slug. The slug rule (snake_case, non-alnum → underscore,
+ * lower-cased) MUST match the server public._gallery_npc_key fallback byte-for-byte
+ * so a toggle written client-side targets the same NPC the server strips/reveals.
+ * @param {{ id?: string|number, name?: string }} npc
+ * @returns {string}
+ */
+export function galleryMemberKey(npc) {
+  const id = npc && npc.id != null ? String(npc.id) : '';
+  if (id) return id;
+  const slug = String(npc?.name || '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+  return `npc.${slug}`;
+}
+
+/**
  * Project a settlement to its public-safe form. Strips the recursive denylist,
  * drops top-level DM blocks explicitly, and reduces NPCs to a public allowlist
  * (no goal / secret / plotHooks / relationships).
