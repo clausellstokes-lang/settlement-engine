@@ -250,11 +250,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // factions drags effective security down inside this tick's onset /
   // exposure / capture rolls (the feedback loop), bounded so it never runs away.
   let guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);
-  // The religion layer is ACTIVE for the deity→corruption effects only when BOTH
-  // the opt-in flag AND the activation gate hold (≥1 settlement carries an
-  // embedded config.primaryDeitySnapshot). false ⇒ the corruption /
-  // capture gates are unrelaxed and deityDisfavor is 1.0 ⇒ byte-identical legacy.
-  const religionActive = simulationRules.religionDynamicsEnabled && isSubsystemActive(snapshot, 'religion');
+  // The religion layer's deity→corruption / deity→capture effects are LOCAL faith
+  // effects (Phase 4 W-F1): active whenever a deity is present — the activation gate
+  // ALONE (≥1 settlement carries an embedded config.primaryDeitySnapshot), no rule
+  // flag. This is the owner's standalone-faith doctrine (an evil patron rots its own
+  // town whether or not the campaign's cross-settlement SPREAD lane is enabled).
+  // Deity-free ⇒ inactive ⇒ the corruption / capture gates are unrelaxed and
+  // deityDisfavor is 1.0 ⇒ byte-identical legacy.
+  const religionActive = isSubsystemActive(snapshot, 'religion');
   const corruption = advanceNpcCorruption(worldState, snapshot, rng.fork('corruption'), { tick: worldState.tick, guildStrengthBy, religionActive });
   worldState = corruption.worldState;
   // Seat NPCs into their factions so internalSeats reflect who holds power.
@@ -793,12 +796,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
   }
   // Religion dynamics: the deity contest + conversion spread +
-  // religious_authority mint. DOUBLE-GATED, its OWN block parallel to the war
-  // block: it acts ONLY when BOTH the opt-in flag religionDynamicsEnabled AND the
-  // activation gate (≥1 settlement carries config.primaryDeitySnapshot) hold.
-  // Either false ⇒ pure no-op (no mints, no contests, no conversions) ⇒
-  // byte-identical legacy. A no-deity campaign is unchanged even with the flag on
-  // (the evaluator short-circuits on the activation gate before any fork/mint).
+  // religious_authority mint. Its OWN block parallel to the war block, TWO-LANE
+  // gated (Phase 4 W-F1): the LOCAL lane (per-settlement pantheon evolution,
+  // legitimacy, patron contest, the divine-mandate substrate) runs whenever the
+  // activation gate holds (≥1 settlement carries config.primaryDeitySnapshot) — no
+  // rule flag; the cross-settlement SPREAD lane (mints, carrier reach, prevalence,
+  // occupation pull) is gated INSIDE advanceReligionStates by faithSpreadEnabled.
+  // Activation gate false ⇒ pure no-op ⇒ byte-identical legacy (a no-deity campaign
+  // is unchanged even with spread on — the evaluator short-circuits before any
+  // fork/mint). See advanceReligionStates for the lane split.
   // Mirrors the war block: mint the religious_authority directed channels onto the
   // graph BEFORE candidate generation + apply, rebuild the snapshot so downstream
   // reads see the new faith paths, then thread the conversion outcomes (which
@@ -818,8 +824,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   let pantheonSeatSnapshot = null;
   /** @type {Record<string, any> | null} the evolved per-settlement pantheon ledger */
   let nextReligionStates = null;
-  const religionActiveThisTick = simulationRules.religionDynamicsEnabled && isSubsystemActive(postTimeSnapshot, 'religion');
-  if (religionActiveThisTick) {
+  const religionLocalActive = isSubsystemActive(postTimeSnapshot, 'religion');
+  if (religionLocalActive) {
     // Capture the PRE-conversion snapshot for seat aggregation BEFORE the contest's
     // fresh mints rebuild it. (Mints only add graph channels, not deity seats, so
     // either snapshot counts the same seats — but pinning the pre-contest one keeps
@@ -1025,7 +1031,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // below (Ascendancy / Twilight).
   /** @type {Array<{deityId:string, from:string, to:string}>} */
   let pantheonTierChanges = [];
-  if (religionActiveThisTick && pantheonSeatSnapshot) {
+  if (religionLocalActive && pantheonSeatSnapshot) {
     const advanced = advancePantheon({
       pantheon: memoryState.pantheon || {},
       snapshot: pantheonSeatSnapshot,

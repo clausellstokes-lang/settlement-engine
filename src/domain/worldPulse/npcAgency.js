@@ -667,13 +667,14 @@ export function relaxNpcStates(worldState) {
  * forked per (npc, tick) so replays are deterministic. No criminal institution →
  * no onset/exposure pressure (the rule).
  *
- * When `religionActive` (the caller's religionDynamicsEnabled +
- * isSubsystemActive gate) AND a settlement carries an embedded EVIL deity, the
- * onset gate is RELAXED (`hasCriminalInst || hasCorruptingDeity`) so the evil
- * deity can corrupt the faithful even in a crime-free town. A per-NPC,
- * bounded, centered-on-1.0 `deityDisfavor` then modulates the chosen knob (evil
- * → onset, good → exposure) by the NPC's AUTHORED alignment. `religionActive`
- * false (default) ⇒ deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
+ * When `religionActive` (the caller's deity-presence isSubsystemActive gate — a
+ * LOCAL faith effect, gated by deity presence ALONE post W-F1, not by any rule
+ * flag) AND a settlement carries an embedded EVIL deity, the onset gate is RELAXED
+ * (`hasCriminalInst || hasCorruptingDeity`) so the evil deity can corrupt the
+ * faithful even in a crime-free town. A per-NPC, bounded, centered-on-1.0
+ * `deityDisfavor` then modulates the chosen knob (evil → onset, good → exposure)
+ * by the NPC's AUTHORED alignment. `religionActive` false (deity-free) ⇒
+ * deityDisfavor 1.0, gate unrelaxed ⇒ byte-identical.
  *
  * @param {any} worldState
  * @param {any} snapshot
@@ -688,7 +689,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
   for (const item of (snapshot?.settlements || [])) {
     const climate = readCorruptionClimate(item.settlement);
     // The embedded deity snapshot (only consulted when the religion layer is
-    // ACTIVE — religionDynamicsEnabled + isSubsystemActive).
+    // ACTIVE — the deity-presence isSubsystemActive gate; a LOCAL faith effect).
     // null ⇒ deityDisfavor stays 1.0 and the gate is unrelaxed ⇒ byte-identical.
     const deity = religionActive ? (item.settlement?.config?.primaryDeitySnapshot || null) : null;
     const corruptingDeity = religionActive && hasCorruptingDeity(item.settlement);

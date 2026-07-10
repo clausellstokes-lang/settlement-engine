@@ -14,13 +14,23 @@
  * was superseded by this gradual driver and has been REMOVED — it was mounted
  * nowhere and silently duplicated the mint/carrier/occupation logic below.)
  *
- * DOUBLE GATE — byte-identical when dormant. Religion ACTS only when BOTH hold:
- *   (a) rules.religionDynamicsEnabled (the opt-in flag, default false), AND
- *   (b) isSubsystemActive(snapshot,'religion') (true iff ≥1 settlement carries
- *       an embedded config.primaryDeitySnapshot).
- * If EITHER is false ⇒ pure no-op returning empties (no mints, no contests, no
- * conversions) ⇒ byte-identical legacy. A no-deity campaign is unchanged even with
- * the flag on, because the activation gate short-circuits before any fork or mint.
+ * TWO-LANE GATE (Phase 4 W-F1) — byte-identical when dormant.
+ *   LOCAL lane — per-settlement pantheon evolution (entry-as-cult, share drift,
+ *   legitimacy, patron contest/schism, the divine-mandate substrate) runs whenever
+ *   isSubsystemActive(snapshot,'religion') holds (≥1 settlement carries an embedded
+ *   config.primaryDeitySnapshot OR a DM-imposed cult) — NO rule flag. This is the
+ *   owner's standalone-faith contract: a deity-bearing settlement evolves its faith
+ *   in place with no campaign toggle.
+ *   SPREAD lane — cross-settlement propagation (religious_authority mints, carrier
+ *   reach into OTHER settlements, regional prevalence, neighbour recognition,
+ *   occupation faith-pull) is opt-in via isFaithSpreadEnabled(rules): the
+ *   faithSpreadEnabled flag (default false), tolerant of the legacy
+ *   religionDynamicsEnabled alias.
+ * If the subsystem gate is false ⇒ pure no-op returning empties ⇒ byte-identical
+ * legacy (a no-deity campaign is unchanged even with spread on — the activation
+ * gate short-circuits before any fork or mint). Subsystem active but spread OFF ⇒
+ * no mints, no reach, no cross-settlement outcomes: each settlement's pantheon
+ * evolves as if it were the only faith-bearing settlement in the realm.
  *
  * DETERMINISM CONTRACT (sacred, identical to A1/A2):
  *   - No Date.now / Math.random / argless new Date. Gradual movement needs no RNG;
@@ -36,6 +46,7 @@
 import { mintDirectedChannel, stablePart } from '../region/graph.js';
 import { clamp01 } from '../region/contestMath.js';
 import { isSubsystemActive } from './subsystemActivation.js';
+import { isFaithSpreadEnabled } from './simulationRules.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
@@ -337,8 +348,15 @@ function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, 
  * @returns {{ religionStates: Record<string, any>|null, outcomes: any[], graphChannels: any[] }}
  */
 export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {}, rng = null }) {
-  if (!rules?.religionDynamicsEnabled) return { religionStates: null, outcomes: [], graphChannels: [] };
+  // LOCAL lane gate: deity presence alone (no rule flag). Deity-free ⇒ byte-identical
+  // (short-circuit before any fork/mint/state).
   if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [] };
+  // SPREAD lane gate: cross-settlement propagation is opt-in (faithSpreadEnabled,
+  // tolerant of the legacy religionDynamicsEnabled). When off, steps 1-2 (mints +
+  // carrier reach) and every cross-settlement read (prevalence + neighbour
+  // recognition via neighbourIds, occupation faith-pull) are skipped; step 3 evolves
+  // each settlement's pantheon in isolation.
+  const spread = isFaithSpreadEnabled(rules);
 
   /** @param {any} id */
   const nameFor = (id) => { const it = snapshot?.byId?.get?.(String(id)); return it?.name || it?.settlement?.name || String(id); };
@@ -349,53 +367,59 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   /** @type {Record<string, any>} */
   const religionStates = {};
   const bearers = deityBearers(snapshot);
-
-  // 1. Mint religious_authority channels along faith carriers (deity-gated, directed).
-  for (const fromId of bearers) {
-    const deity = deitySnapshotFor(snapshot, fromId);
-    const rankStrength = deityRankStrength(deity);
-    for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
-      if (strength < MIN_CARRIER) continue;
-      const mintStrength = clamp01(0.35 + strength * 0.4 + rankStrength * 0.25);
-      graphChannels.push(mintDirectedChannel({
-        type: CHANNEL_TYPE, from: fromId, to, strength: mintStrength, confidence: 0.75,
-        explanation: `${deity?.name || nameFor(fromId)} projects religious authority from ${nameFor(fromId)} to ${nameFor(to)}.`,
-        relationshipKey: `${CHANNEL_TYPE}.${stablePart(fromId)}.${stablePart(to)}`,
-        source: 'religious_authority_mint', now,
-      }));
-    }
-  }
-
-  // 2. Carrier reach: convertId → Map(deityRef → { deity, carrier, occupied }).
+  // convertId → Map(deityRef → { deity, carrier, occupied }). SPREAD-lane only; it
+  // stays EMPTY when spread is off, so every reach lookup in step 3 yields undefined
+  // and each settlement evolves in isolation (no carrier entries, no cross-settlement
+  // faith crossing a boundary).
   const reach = new Map();
-  /** @param {any} to @param {any} deity @param {number} carrier @param {boolean} [occupied] */
-  const note = (to, deity, carrier, occupied = false) => {
-    const t = String(to); const dref = String(deity?._deityRef || deity?.name || '');
-    if (!t || !dref) return;
-    if (!reach.has(t)) reach.set(t, new Map());
-    const m = reach.get(t); const prev = m.get(dref);
-    m.set(dref, { deity, carrier: Math.max(prev?.carrier ?? 0, carrier), occupied: occupied || Boolean(prev?.occupied) });
-  };
-  for (const fromId of bearers) {
-    const deity = deitySnapshotFor(snapshot, fromId);
-    if (!deity) continue;
-    // A faith's REACH (its primary entry/spread channel) scales with the SOURCE's size
-    // relative to the TARGET: a metropolis's creed spreads strongly to a small neighbour,
-    // a hamlet's barely reaches a city. The link must still clear MIN_CARRIER on its RAW
-    // strength to exist at all (the gate) — only the effective pull is size-weighted.
-    const sourceMass = faithMass(snapshot?.byId?.get?.(String(fromId))?.settlement);
-    for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
-      if (strength < MIN_CARRIER) continue;
-      const targetMass = faithMass(snapshot?.byId?.get?.(String(to))?.settlement);
-      note(to, deity, clamp01(strength * neighbourFaithInfluence(sourceMass, targetMass)));
+
+  if (spread) {
+    // 1. Mint religious_authority channels along faith carriers (deity-gated, directed).
+    for (const fromId of bearers) {
+      const deity = deitySnapshotFor(snapshot, fromId);
+      const rankStrength = deityRankStrength(deity);
+      for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
+        if (strength < MIN_CARRIER) continue;
+        const mintStrength = clamp01(0.35 + strength * 0.4 + rankStrength * 0.25);
+        graphChannels.push(mintDirectedChannel({
+          type: CHANNEL_TYPE, from: fromId, to, strength: mintStrength, confidence: 0.75,
+          explanation: `${deity?.name || nameFor(fromId)} projects religious authority from ${nameFor(fromId)} to ${nameFor(to)}.`,
+          relationshipKey: `${CHANNEL_TYPE}.${stablePart(fromId)}.${stablePart(to)}`,
+          source: 'religious_authority_mint', now,
+        }));
+      }
     }
-  }
-  if (occupations) {
-    for (const cid of Object.keys(occupations).sort(codepoint)) {
-      const occId = occupations[cid]?.occupierId ? String(occupations[cid].occupierId) : null;
-      if (!occId || occId === cid) continue;
-      const deity = deitySnapshotFor(snapshot, occId);
-      if (deity) note(cid, deity, OCC_CARRIER_FLOOR, true);
+
+    // 2. Carrier reach.
+    /** @param {any} to @param {any} deity @param {number} carrier @param {boolean} [occupied] */
+    const note = (to, deity, carrier, occupied = false) => {
+      const t = String(to); const dref = String(deity?._deityRef || deity?.name || '');
+      if (!t || !dref) return;
+      if (!reach.has(t)) reach.set(t, new Map());
+      const m = reach.get(t); const prev = m.get(dref);
+      m.set(dref, { deity, carrier: Math.max(prev?.carrier ?? 0, carrier), occupied: occupied || Boolean(prev?.occupied) });
+    };
+    for (const fromId of bearers) {
+      const deity = deitySnapshotFor(snapshot, fromId);
+      if (!deity) continue;
+      // A faith's REACH (its primary entry/spread channel) scales with the SOURCE's size
+      // relative to the TARGET: a metropolis's creed spreads strongly to a small neighbour,
+      // a hamlet's barely reaches a city. The link must still clear MIN_CARRIER on its RAW
+      // strength to exist at all (the gate) — only the effective pull is size-weighted.
+      const sourceMass = faithMass(snapshot?.byId?.get?.(String(fromId))?.settlement);
+      for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
+        if (strength < MIN_CARRIER) continue;
+        const targetMass = faithMass(snapshot?.byId?.get?.(String(to))?.settlement);
+        note(to, deity, clamp01(strength * neighbourFaithInfluence(sourceMass, targetMass)));
+      }
+    }
+    if (occupations) {
+      for (const cid of Object.keys(occupations).sort(codepoint)) {
+        const occId = occupations[cid]?.occupierId ? String(occupations[cid].occupierId) : null;
+        if (!occId || occId === cid) continue;
+        const deity = deitySnapshotFor(snapshot, occId);
+        if (deity) note(cid, deity, OCC_CARRIER_FLOOR, true);
+      }
     }
   }
 
@@ -413,7 +437,12 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     const tier = settlement.tier || settlement.config?.tier || 'village';
     const state = ensureReligionState(prior[cid], settlement, tier);
     const prevPatron = state.patronRef;
-    const neighbourIds = neighbourIdsOf(snapshot, cid);
+    // SPREAD-lane cross-settlement reads: neighbourIds feeds regional prevalence
+    // (deityLocalStrength) and neighbour recognition (deityLegitimacyTarget). With
+    // spread OFF the settlement recognizes no neighbours' faiths ⇒ both terms are
+    // zero ⇒ its shares/legitimacy evolve identically whether or not OTHER members
+    // carry deities (the settlementFaithStandalone contract).
+    const neighbourIds = spread ? neighbourIdsOf(snapshot, cid) : [];
     const moodDeity = patronSnapshot(state);
     // The ruling power as a character lens — drives both growth favour (here) and the
     // legitimacy target (below). Computed once per settlement per tick (deterministic).

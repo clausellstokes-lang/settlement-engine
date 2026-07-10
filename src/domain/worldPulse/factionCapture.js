@@ -26,8 +26,9 @@ import {
  * the capture ladder only with `hasCriminalInst`) is relaxed the SAME way as
  * the corruption.js onset gate — an embedded EVIL deity also enables the climb
  * in a crime-free town, so the evil-deity effect is NOT half-applied. Gated
- * behind `religionActive` (the caller's religionDynamicsEnabled +
- * isSubsystemActive). false (default) ⇒ gate unrelaxed ⇒ byte-identical.
+ * behind `religionActive` (the caller's deity-presence isSubsystemActive gate — a
+ * LOCAL faith effect, gated by deity presence ALONE post W-F1, not by any rule
+ * flag). false (deity-free) ⇒ gate unrelaxed ⇒ byte-identical.
  *
  * @param {any} worldState
  * @param {any} snapshot

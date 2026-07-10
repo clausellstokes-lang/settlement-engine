@@ -34,14 +34,24 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // all presets inherit it and presetId stays stable (guarded by
   // simulationRulesPreset.stability.test).
   settlementStrategyEnabled: false,
-  // Religion dynamics: the deity contest + conversion spread +
-  // religious_authority channel mint. Opt-in, DEFAULT FALSE. This is only ONE of
-  // the TWO gates: even with this true, religion stays a pure no-op until the
-  // activation gate fires (≥1 settlement carries config.primaryDeitySnapshot). So
-  // a default-true-but-deity-free campaign is byte-identical (the activation gate
-  // short-circuits before any fork/mint). Every named preset spreads
-  // DEFAULT_SIMULATION_RULES so all presets inherit it and presetId stays stable
-  // (guarded by simulationRulesPreset.stability.test).
+  // Faith SPREAD: cross-settlement faith propagation only — carrier reach into
+  // OTHER settlements, religious_authority mints, regional prevalence, neighbour
+  // recognition, occupation faith-pull. Opt-in, DEFAULT FALSE. This is the ONLY
+  // faith dynamic still gated by a rule flag: per-settlement LOCAL faith (contest /
+  // legitimacy / patron / divine mandate) is now gated by deity presence ALONE
+  // (isSubsystemActive) — the owner's standalone-faith contract. So a deity-bearing
+  // campaign with spread OFF still evolves each settlement's pantheon in place; it
+  // just never crosses a settlement boundary. Deity-free ⇒ byte-identical either
+  // way (the activation gate short-circuits before any fork/mint). Every named
+  // preset spreads DEFAULT_SIMULATION_RULES so all presets inherit it and presetId
+  // stays stable (guarded by simulationRulesPreset.stability.test).
+  faithSpreadEnabled: false,
+  // LEGACY (Phase 4 W-F1 migration, ratification 2): `religionDynamicsEnabled`
+  // pre-split gated ALL faith dynamics. It now maps to faithSpreadEnabled (the
+  // SPREAD lane) via the tolerant reader in normalizeSimulationRules — the two keys
+  // are kept in lockstep through the deprecation window (deleted in the Phase 6
+  // lifecycle pass). Retained default-false so old saves + the not-yet-migrated
+  // Living-World gate keep working. Preset-stable (inherited false everywhere).
   religionDynamicsEnabled: false,
   // Defender-side siege attrition (SPIKE). Opt-in, DEFAULT FALSE so every existing
   // campaign is byte-identical (a besieged town's home defense stays a fresh per-tick
@@ -154,6 +164,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'majorChangesRequireProposal',
   'warLayerEnabled',
   'settlementStrategyEnabled',
+  'faithSpreadEnabled',
   'religionDynamicsEnabled',
   'defenderAttritionEnabled',
   'warEconomyDrainEnabled',
@@ -223,8 +234,41 @@ export function normalizeSimulationRules(raw = {}) {
     const value = input[key];
     next[key] = typeof value === 'boolean' ? value : /** @type {Record<string, any>} */ (DEFAULT_SIMULATION_RULES)[key];
   }
+  // ── Faith-spread migration (Phase 4 W-F1 / ratification 2) ────────────────────
+  // The cross-settlement SPREAD lane is the only faith dynamic still gated by a
+  // rule flag: `faithSpreadEnabled`. It supersedes the pre-split
+  // `religionDynamicsEnabled` (which gated ALL faith dynamics). Through the
+  // deprecation window the two keys are kept in lockstep so every read surface
+  // agrees — the engine reads faithSpreadEnabled, the not-yet-migrated Living-World
+  // gate reads/writes religionDynamicsEnabled. The LEGACY key, when explicitly set,
+  // is authoritative (it is what that gate writes — its intent must win over a
+  // stale mirror carried in from a prior normalize); else the new key stands; else
+  // default false. Deleted in the Phase 6 lifecycle pass.
+  const legacySpread = typeof input.religionDynamicsEnabled === 'boolean' ? input.religionDynamicsEnabled : null;
+  const newSpread = typeof input.faithSpreadEnabled === 'boolean' ? input.faithSpreadEnabled : null;
+  const spread = legacySpread ?? newSpread ?? DEFAULT_SIMULATION_RULES.faithSpreadEnabled;
+  next.faithSpreadEnabled = spread;
+  next.religionDynamicsEnabled = spread;
   next.presetId = presetIdForRules(input, next);
   return next;
+}
+
+/**
+ * Tolerant read of the faith-SPREAD gate — the cross-settlement propagation lane
+ * (carrier reach, religious_authority mints, prevalence, neighbour recognition,
+ * occupation faith-pull). Honors the canonical `faithSpreadEnabled`; falls back to
+ * the pre-split `religionDynamicsEnabled` when the new key is absent (migration
+ * back-compat, ratification 2), so a raw/legacy rules object — an un-normalized
+ * fixture, an old save — still gates spread correctly. LOCAL per-settlement faith
+ * is NOT gated here: that is deity presence (isSubsystemActive) alone.
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {boolean}
+ */
+export function isFaithSpreadEnabled(rules) {
+  if (!rules || typeof rules !== 'object') return false;
+  if (typeof rules.religionDynamicsEnabled === 'boolean') return rules.religionDynamicsEnabled;
+  if (typeof rules.faithSpreadEnabled === 'boolean') return rules.faithSpreadEnabled;
+  return false;
 }
 
 export function propagationDepthForRules(raw = {}) {

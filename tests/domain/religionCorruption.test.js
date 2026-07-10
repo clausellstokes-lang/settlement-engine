@@ -15,10 +15,11 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature D (R3) — good/evil deity → corruption (OQ18) + warlike → aggressiveness
-// (OQ22). The deity effects are TRIPLE-GATED at the pulse (religionDynamicsEnabled
-// AND isSubsystemActive AND per-settlement deity presence); these unit tests drive
-// the pure transforms directly with `religionActive: true/false` to prove the gate
-// relaxation, the bounded damping, and the byte-identity dormancy anchor.
+// (OQ22). The deity→corruption effect is a LOCAL faith effect: post W-F1 it is gated
+// by deity presence (isSubsystemActive + per-settlement deity) ALONE — no rule flag
+// (the owner's standalone doctrine). These unit tests drive the pure transforms
+// directly with `religionActive: true/false` to prove the gate relaxation, the
+// bounded damping, and the deity-free byte-identity dormancy anchor.
 // ─────────────────────────────────────────────────────────────────────────────
 
 const EVIL = Object.freeze({ id: 'custom:malgrim', name: 'Malgrim', alignmentAxis: 'evil', temperamentAxis: 'neutral', rankAxis: 'major' });
@@ -480,10 +481,11 @@ describe('B5 — lawful/chaotic is a SEPARATE corruption lever (no double-count 
 // ── Full-pulse integration: the triple gate end-to-end ────────────────────────
 // Drives the REAL pulse (previewCampaignWorldPulse → advanceCampaignWorld →
 // advanceNpcCorruption / advanceFactionCapture / computeDispositionFactorMap),
-// proving (a) the deity effects only fire under religionDynamicsEnabled +
-// isSubsystemActive + per-settlement deity, and (b) a deity-embedded-but-flag-off
-// pulse is byte-identical (in npcStates) to a deity-free one.
-describe('R3 — full-pulse integration (the triple gate)', () => {
+// proving (a) the deity→corruption effect fires under deity presence
+// (isSubsystemActive + per-settlement deity) ALONE — the standalone-faith gate, no
+// rule flag — and (b) a DEITY-FREE pulse is byte-identical (in npcStates) whether
+// the spread flag is on or off.
+describe('R3 — full-pulse integration (the local faith gate)', () => {
   const NOW = '2026-01-01T00:00:00.000Z';
 
   // A poor, low-security but CRIME-FREE settlement (no criminal institution), so
@@ -566,19 +568,28 @@ describe('R3 — full-pulse integration (the triple gate)', () => {
     expect(corruptCount(result)).toBeGreaterThan(0);
   });
 
-  test('flag OFF + embedded evil deity is byte-identical (npcStates) to a deity-free campaign', () => {
-    const withDeityFlagOff = runManyTicks({ deity: EVIL, rules: { religionDynamicsEnabled: false } });
-    const noDeity = runManyTicks({ deity: null, rules: { religionDynamicsEnabled: false } });
-    // Strip per-id keys that mention the deity-bearing config; compare corruption
-    // state shape. The deity embed lives on the settlement config (not npcStates),
-    // so npcStates must match exactly between the two runs.
+  test('spread OFF + embedded evil deity STILL fires deity→corruption locally (deity presence is the only gate)', () => {
+    // Gate split (W-F1): deity→corruption is a LOCAL faith effect (the owner's
+    // standalone doctrine) — gated by deity presence (isSubsystemActive) ALONE, no
+    // rule flag. So the crime-free town corrupts under the evil patron whether or not
+    // the cross-settlement SPREAD lane runs.
+    const spreadOn = runManyTicks({ deity: EVIL, rules: { faithSpreadEnabled: true } });
+    const spreadOff = runManyTicks({ deity: EVIL, rules: { faithSpreadEnabled: false } });
+    expect(corruptCount(spreadOn)).toBeGreaterThan(0);
+    expect(corruptCount(spreadOff)).toBeGreaterThan(0);
+  });
+
+  test('a DEITY-FREE campaign is byte-identical (npcStates) regardless of the spread flag', () => {
+    // No deity ⇒ subsystem dormant ⇒ deity→corruption never engages ⇒ the two runs
+    // (spread off vs on) are byte-identical AND produce zero corruption (the anchor).
+    const off = runManyTicks({ deity: null, rules: { faithSpreadEnabled: false } });
+    const on = runManyTicks({ deity: null, rules: { faithSpreadEnabled: true } });
     const shape = (r) => Object.entries(r.worldState.npcStates || {})
       .map(([id, s]) => `${id}:${s.corruption}:${s.dotRank}:${s.ousted || false}`)
       .sort();
-    expect(shape(withDeityFlagOff)).toEqual(shape(noDeity));
-    // And the dormant run produced ZERO corruption (the crime-free gate held).
-    expect(corruptCount(noDeity)).toBe(0);
-    expect(corruptCount(withDeityFlagOff)).toBe(0);
+    expect(shape(off)).toEqual(shape(on));
+    expect(corruptCount(off)).toBe(0);
+    expect(corruptCount(on)).toBe(0);
   });
 
   // A RIVAL edge + a war_pressure stressor so the pulse produces a hostility
