@@ -9,7 +9,10 @@
 
 import Button from '../primitives/Button.jsx';
 
-export function IconButton({ children, onClick, title, primary, active, ...rest }) {
+export function IconButton({ children, onClick, title, primary, active, tier2: _tier2, ...rest }) {
+  // `tier2` is destructured (into an ignored local, not spread) to keep the
+  // non-standard attribute off the DOM; a non-primary/non-active control already
+  // resolves to the secondary variant it asks for.
   return (
     <Button
       variant={primary ? 'primary' : active ? 'gold' : 'secondary'}

@@ -23,7 +23,7 @@
  */
 
 import { useEffect } from 'react';
-import { Lock, Sparkles, Globe2, Flame, Users, ArrowUp, ArrowRight } from 'lucide-react';
+import { Lock, Sparkles, Globe, Flame, Users, ArrowUp, ArrowRight } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import {
@@ -353,7 +353,7 @@ export default function RealmDashboard({
   return (
     <div data-testid="realm-dashboard" style={{ display: 'grid', gap: SP.lg }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <Globe2 size={15} color={GOLD} />
+        <Globe size={15} color={GOLD} />
         {/* The section heading is quiet scent (FS.xs uppercase), not a competing
             focal element — de-emphasizing it lets the focal Conflict value be the
             single dominant entry point in the panel (P4 de-emphasize-to-emphasize). */}
@@ -420,7 +420,7 @@ export default function RealmDashboard({
             returns only contested prizes). Dormant ⇒ "–", same idiom as the
             War-weariest / Dominant-faith null cases above. */}
         <Stat
-          Icon={Globe2}
+          Icon={Globe}
           label="Trade routes flipped"
           value={tradeWars.length ? tradeWars.length : '–'}
           sub={tradeWars.length

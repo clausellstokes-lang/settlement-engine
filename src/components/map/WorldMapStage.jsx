@@ -3,16 +3,23 @@
  *
  * Extracted verbatim from WorldMap.jsx (no logic change). Pure presentational:
  * it renders either a campaign panel (Wizard News / World Pulse) or the
- * settlement palette + map container + overlays + layers panel. All state,
- * refs, and handlers live in the parent WorldMap and are passed in as props.
+ * settlement palette + map container + overlays + layers panel.
+ *
+ * Render-optimization (2026-06): the store-derived values this shell needs
+ * (mapMode, isDraggingOver, mapReady, imageMode, placements) are now read
+ * directly via useStore selectors instead of being prop-drilled. Only
+ * parent-owned refs/handlers/state remain as props. The component is wrapped in
+ * React.memo so an unrelated parent re-render no longer re-renders the stage.
+ * Rendered DOM is unchanged.
  */
 
-import { Suspense, lazy } from 'react';
-import { Loader } from 'lucide-react';
-import { flag } from '../../lib/flags.js';
+import { memo, Suspense, lazy } from 'react';
+import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
+import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, PARCH, FS, SP, R, swatch, PARCH_100 } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, R, swatch, PARCH_100 } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
 const PlacementDetailCard = lazy(() => import('./PlacementDetailCard.jsx'));
@@ -21,34 +28,49 @@ const LayersPanel     = lazy(() => import('./LayersPanel.jsx'));
 const SettlementPalette = lazy(() => import('./SettlementPalette.jsx'));
 const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./WorldPulsePanel.jsx'));
+const PantheonPanel   = lazy(() => import('./PantheonPanel.jsx'));
+// NOTE (4f-3): the persistent MapLegend is DEFERRED here. It depends on the
+// relationship-edge color refactor (map/relationshipEdgeStyle.js →
+// settlements/relationshipColors.js) that has not landed in this tree, and that
+// system touches the relationship-edge rendering our MapOverlay already
+// implements differently. Re-land the legend with that refactor in a later wave.
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
 // path). Bump this when you edit anything under /public/map.
 const FMG_URL = '/map/index.html?v=sfdrop12';
 
-export function WorldMapStage({
+function WorldMapStageImpl({
   showingWizardNews,
   showingWorldPulse,
+  showingPantheon,
   activeCampaign,
   activeSaves,
-  placements,
   mapContainerRef,
   handleDragOver,
   handleDragLeave,
   handleDrop,
-  isDraggingOver,
-  imageMode,
   iframeRef,
-  mapMode,
   bridgeReady,
   bridgeRef,
-  overlayTransformRef,
+  onOverlayTransform,
   onNavigate,
-  mapReady,
   showLayersPanel,
   setShowLayersPanel,
+  mapReloadKey = 0,
+  onReloadMap,
+  onCreateCampaign,
+  onSelectCampaign,
+  hasCampaigns = false,
 }) {
+  // Store-derived values read directly (formerly prop-drilled from WorldMap).
+  const placements    = useStore(s => s.mapState.placements);
+  const isDraggingOver = useStore(s => s.isDraggingOver);
+  const mapMode       = useStore(s => s.mapMode);
+  const mapReady      = useStore(s => s.mapReady);
+  const mapError      = useStore(s => s.mapError);
+  const setMapMode    = useStore(s => s.setMapMode);
+  const imageMode     = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
   return (
       showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -62,22 +84,32 @@ export function WorldMapStage({
             <WorldPulsePanel campaign={activeCampaign} />
           </Suspense>
         </div>
+      ) : showingPantheon ? (
+        <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+          <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
+            <PantheonPanel campaign={activeCampaign} />
+          </Suspense>
+        </div>
       ) : (
       <div style={{ display: 'flex', gap: SP.sm, flex: 1, minHeight: 0 }}>
-        {/* Settlement palette — left sidebar */}
-        <div style={{
-          width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
-          overflow: 'hidden',
-        }}>
+        {/* Settlement palette — left sidebar. The framed-column shell (the ONE
+            elevation each sidebar is allowed) is owned HERE by SidebarShell, the
+            SAME owner as the right LayersPanel, so the two flanking sidebars share
+            one systematic frame recipe instead of each self-framing with a
+            duplicated width/border/radius literal (P5). */}
+        <SidebarShell>
           <Suspense fallback={<div style={{ padding: SP.md, color: MUTED, fontSize: FS.sm }}>Loading…</div>}>
             <SettlementPalette
               saves={activeSaves}
               placements={placements}
               activeCampaign={activeCampaign}
+              onNavigate={onNavigate}
+              onCreateCampaign={onCreateCampaign}
+              onSelectCampaign={onSelectCampaign}
+              hasCampaigns={hasCampaigns}
             />
           </Suspense>
-        </div>
+        </SidebarShell>
 
         {/* Map container */}
         {/* a11y: passive drag-and-drop target (settlements are dragged from the
@@ -100,12 +132,32 @@ export function WorldMapStage({
         >
           {/* Custom image backdrop mode skips FMG entirely — MapOverlay renders
               the image + owns pan/zoom. Otherwise the FMG iframe is the bottom plane. */}
+          {/* SECURITY — same-origin FMG fork (public/map, vendored libs). This iframe
+              runs on the app origin and can therefore read the Supabase session in
+              localStorage. Containment that IS in place: (1) the bridge validates
+              event.origin === our origin AND event.source === this iframe, and posts
+              with an explicit origin target, never '*' (lib/mapBridge.js); (2) the
+              vercel.json CSP scopes connect-src for /map/ so a compromised lib can't
+              freely exfiltrate. Deliberately NOT sandboxed: an iframe with BOTH
+              allow-scripts and allow-same-origin (which FMG needs for its localStorage
+              /IndexedDB) can remove its own sandbox, so a same-origin sandbox is theater
+              against a compromised-script threat while risking the paid map; dropping
+              allow-same-origin instead denies FMG storage and breaks it. The real
+              isolation is serving /map/ from a SEPARATE ORIGIN (an infra change): the
+              bridge already speaks postMessage, so that is a src + origin-config swap,
+              not a rewrite. Tracked as the follow-up; do not add a same-origin sandbox. */}
           {!imageMode && (
             <iframe
+              // Keyed on mapReloadKey so the "Reload map" recovery action drops
+              // the dead iframe and mounts a fresh one (P10).
+              key={mapReloadKey}
               ref={iframeRef}
               data-tour="map"
               src={FMG_URL}
               title="Fantasy Map"
+              // Don't leak the parent URL (which can carry view/query state) to any
+              // request the map frame issues. Zero functional impact; small hardening.
+              referrerPolicy="no-referrer"
               style={{
                 width: '100%',
                 height: '100%',
@@ -123,7 +175,7 @@ export function WorldMapStage({
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
               {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} onTransform={onOverlayTransform} />
             </Suspense>
           )}
           <Suspense fallback={null}>
@@ -137,12 +189,40 @@ export function WorldMapStage({
               }}
             />
           </Suspense>
-          {/* P136 / M-6 — Hover peek. Self-gated; renders nothing
+          {/* Hover peek. Self-gated; renders nothing
               when no hover-id is set or when click-selection wins. */}
           <Suspense fallback={null}>
             <QuickInspector />
           </Suspense>
-          {!mapReady && !imageMode && (
+          {/* Recovery panel (P10): a failed/timed-out load replaces the
+              perpetual loader with a plain-language message + a primary
+              "Reload map" CTA and a secondary "Continue without terrain"
+              path, so the GM is never stranded on an endless spinner. */}
+          {mapError && !imageMode ? (
+            <div style={{
+              position: 'absolute', inset: 0, display: 'flex',
+              alignItems: 'center', justifyContent: 'center',
+              background: 'rgba(247,240,228,0.92)', backdropFilter: 'blur(2px)',
+              flexDirection: 'column', gap: SP.sm, padding: SP.lg, textAlign: 'center',
+            }}>
+              <AlertTriangle size={30} color={RED} />
+              <div style={{ fontSize: FS.md, fontWeight: 800, color: INK }}>
+                {String(mapError)}
+              </div>
+              <div style={{ fontSize: FS.sm, color: SECOND, maxWidth: 360, lineHeight: 1.4 }}>
+                The terrain engine couldn't start. Reload it, or keep working with
+                annotations on a blank canvas.
+              </div>
+              <div style={{ display: 'flex', gap: SP.sm, marginTop: SP.xs }}>
+                <Button variant="primary" size="md" icon={<RefreshCw size={14} />} onClick={onReloadMap}>
+                  Reload map
+                </Button>
+                <Button variant="ghost" size="md" onClick={() => setMapMode(MAP_MODES.ANNOTATE)}>
+                  Continue without terrain
+                </Button>
+              </div>
+            </div>
+          ) : !mapReady && !imageMode && (
             <div style={{
               position: 'absolute', inset: 0, display: 'flex',
               alignItems: 'center', justifyContent: 'center',
@@ -162,14 +242,13 @@ export function WorldMapStage({
                 borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
                 pointerEvents: 'none',
               }} />
-              {/* P111 / M-3 — Drop preview tooltip. Shows during drag with
+              {/* Drop preview tooltip. Shows during drag with
                   the data the user needs to decide if this is a sensible
                   placement: terrain hint + trade-route candidacy +
                   proximity to existing placements. We render a static
-                  hint card (top-right) under the flag — a future
-                  iteration can hover-follow the cursor with live FMG
-                  cell data. */}
-              {flag('mapDropPreview') && (
+                  hint card (top-right) — a future iteration can
+                  hover-follow the cursor with live FMG cell data. */}
+              {(
                 // a11y: presentational hint card (pointerEvents:'none'); the
                 // onMouseEnter is fire-and-forget analytics, not a user control.
                 // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -203,13 +282,38 @@ export function WorldMapStage({
           )}
         </div>
 
-        {/* Layers panel — right sidebar (toggleable) */}
+        {/* Layers panel — right sidebar (toggleable). Same SidebarShell owner as
+            the left palette so both sidebars carry one frame, not two. */}
         {showLayersPanel && (
-          <Suspense fallback={null}>
-            <LayersPanel onClose={() => setShowLayersPanel(false)} />
-          </Suspense>
+          <SidebarShell>
+            <Suspense fallback={null}>
+              <LayersPanel onClose={() => setShowLayersPanel(false)} />
+            </Suspense>
+          </SidebarShell>
         )}
       </div>
       )
   );
 }
+
+// The ONE framed-column shell for both flanking map sidebars (P5): width + the
+// single allowed border/radius/overflow live here so the palette and the layers
+// panel are pure content and the frame recipe can't drift between two owners.
+function SidebarShell({ children }) {
+  return (
+    <div style={{
+      width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+      overflow: 'hidden',
+    }}>
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Memoized so an unrelated parent re-render (e.g. toast/inspector state churn in
+ * WorldMap) doesn't re-render this shell. The remaining props are stable refs,
+ * parent-owned state, and callbacks the parent stabilizes with useCallback.
+ */
+export const WorldMapStage = memo(WorldMapStageImpl);

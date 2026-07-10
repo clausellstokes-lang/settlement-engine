@@ -21,6 +21,7 @@ import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '.
 import { validateDossier } from '../domain/validation/consistency.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
+import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
 import Button from './primitives/Button.jsx';
 import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 
@@ -77,6 +78,7 @@ export default function ShareToGallery({
   galleryTags = [],
   galleryShareNarrated = false,
   galleryShareDm = false,
+  galleryMemberOverrides = null,
   onSaved = null,
 }) {
   const auth = useStore(s => s.auth);
@@ -101,6 +103,15 @@ export default function ShareToGallery({
   const [shareNarrated, setShareNarrated] = useState(Boolean(galleryShareNarrated));
   // Opt-in: publish the full DM view (secrets, hooks, notes, compass) unstripped.
   const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
+  // Per-member (per-NPC) visibility overrides (migration 092/093). Each NPC
+  // inherits the settlement shareDm flag unless explicitly overridden here; we
+  // store ONLY the deltas so the column stays minimal and un-overridden members
+  // keep following the settlement flag as it changes.
+  const [memberOverrides, setMemberOverrides] = useState(() => (
+    galleryMemberOverrides && typeof galleryMemberOverrides === 'object' && !Array.isArray(galleryMemberOverrides)
+      ? galleryMemberOverrides
+      : {}
+  ));
   const canonReady = isCampaignCanonized(campaignState);
   const metadata = useMemo(() => ({
     description,
@@ -109,7 +120,8 @@ export default function ShareToGallery({
     tags: tagsInput,
     shareNarrated,
     shareDm,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm]);
+    memberOverrides,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, memberOverrides]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -300,6 +312,16 @@ export default function ShareToGallery({
           </span>
         </span>
       </label>
+      {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the
+          settlement has no member NPCs. Each member defaults to the settlement's
+          DM-reveal flag; a per-member toggle overrides just that NPC. */}
+      <GalleryMemberVisibility
+        settlement={settlement}
+        shareDm={shareDm}
+        importable={false}
+        memberOverrides={memberOverrides}
+        setMemberOverrides={setMemberOverrides}
+      />
       <Field label="Public description">
         <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>

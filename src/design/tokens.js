@@ -512,3 +512,16 @@ export const legacy = Object.freeze({
   PROSE_MAX: layout.prose,
   FORM_MAX:  layout.form,
 });
+
+// ── Realm/map chrome tokens (tree-shakeable standalone exports) ──────────────
+// GOLD_TXT / GOLD_SOFT / BORDER_STRONG live OUTSIDE the `legacy` (L) object on
+// purpose: they are consumed ONLY by the lazily-loaded Realm/map chrome
+// (WorldMapToolbar, RealmStrip, AdvanceAutoResolveToggle), so keeping them as
+// individual exports lets Rollup tree-shake them into the map chunk instead of
+// welding them into the first-paint `legacy` object (which every eager surface
+// pulls in). Values match the gold-800 / gold-100 scale steps + the WCAG-1.4.11
+// interactive-control border. tokens.js is the token SOURCE, so a raw hex here
+// is the canonical definition, not a fork.
+export const GOLD_TXT  = '#6A511F';  // legible gold TEXT on light / gold-tint surfaces (WCAG AA)
+export const GOLD_SOFT = '#F3E7C6';  // opaque soft-gold fill (tertiary gold button surface)
+export const BORDER_STRONG = '#A6863C'; // interactive-control border ≥3:1 vs card + page (WCAG 1.4.11)

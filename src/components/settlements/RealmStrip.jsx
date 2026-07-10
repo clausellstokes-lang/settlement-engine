@@ -20,7 +20,7 @@
  */
 
 import { liveSieges } from '../../domain/display/warStatus.js';
-import { GOLD_DEEP, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
+import { GOLD_TXT, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
 
@@ -134,7 +134,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       }}
     >
       <Seg title="In-world clock. One advance step is one month.">
-        <strong style={{ color: GOLD_DEEP, fontSize: FS.sm }}>{clock}</strong>
+        <strong style={{ color: GOLD_TXT, fontSize: FS.sm }}>{clock}</strong>
         <span style={{ color: BODY }}> · month {tick}</span>
       </Seg>
 
@@ -161,7 +161,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
 
       {pendingPropagation > 0 && (
         <Seg title="Committed member changes whose regional effects apply on the next Advance.">
-          <span data-testid="pending-propagation-cue" style={{ color: GOLD_DEEP, fontWeight: 700 }}>
+          <span data-testid="pending-propagation-cue" style={{ color: GOLD_TXT, fontWeight: 700 }}>
             {pendingPropagation} settlement{pendingPropagation === 1 ? '' : 's'} waiting to propagate
           </span>
           <span style={{ color: BODY }}> – advance to apply</span>

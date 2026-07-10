@@ -21,7 +21,7 @@
  * Pure presentational. No store, no rng, no wall clock, no mutation.
  */
 
-import { Activity, BookOpen, CalendarClock, Globe2, MapPin, Sparkles, Swords } from 'lucide-react';
+import { Activity, BookOpen, CalendarClock, Globe, MapPin, Sparkles, Swords } from 'lucide-react';
 
 import {
   BODY,
@@ -118,7 +118,7 @@ function DashboardSection({ dashboard }) {
   if (ruleChips.length === 0) return null;
   return (
     <section style={{ display: 'grid', gap: SP.sm }}>
-      <SectionHead Icon={Globe2}>State of the Realm</SectionHead>
+      <SectionHead Icon={Globe}>State of the Realm</SectionHead>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
         {ruleChips.map(chip => <Chip key={chip}>{chip}</Chip>)}
       </div>
@@ -253,7 +253,7 @@ function WarNetworkSection({ warNetwork }) {
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
           {tradeWars.map((w, i) => (
             <Chip key={w?.prizeId || i} title={`${w?.winnerName || 'A power'} seized ${w?.buyerName || 'a market'}`}>
-              <Globe2 size={11} color={GOLD} aria-hidden /> {w?.commodityLabel || 'Trade war'}
+              <Globe size={11} color={GOLD} aria-hidden /> {w?.commodityLabel || 'Trade war'}
             </Chip>
           ))}
         </div>

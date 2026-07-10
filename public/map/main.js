@@ -645,16 +645,17 @@ void (function addDragToUpload() {
               };
               console.log('[sfBridge] posting to parent:', msg);
               // Same-origin parent (the React app serves /map/ from itself).
-              // Targeting our own origin avoids leaking placement events to
-              // any third-party that might frame us in the future.
+              // FAIL-CLOSED: post only to our own concrete http(s) origin. If it
+              // can't be resolved (opaque/sandboxed/file:// iframe → "null"),
+              // REFUSE to post rather than broadcast to '*' — a wildcard target
+              // would leak placement events (settlement id/name/coords) to any
+              // origin holding a reference to this window (F6).
               if (window.parent) {
-                try {
-                  window.parent.postMessage(msg, window.location.origin);
-                } catch (e) {
-                  // window.location.origin can be 'null' inside a sandboxed
-                  // iframe (e.g. file://). Fall back to '*' only when we
-                  // can't compute a usable origin — never as the default.
-                  window.parent.postMessage(msg, '*');
+                var __origin = window.location.origin;
+                if (__origin && __origin !== 'null' && /^https?:\/\//.test(__origin)) {
+                  try {
+                    window.parent.postMessage(msg, __origin);
+                  } catch (e) { /* cross-origin / detached parent — drop */ }
                 }
               }
             } catch (err) {

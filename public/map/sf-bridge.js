@@ -242,15 +242,32 @@
   }
 
   // ── postMessage plumbing ────────────────────────────────────────────────
-  // Target our own origin (the parent serves /map/ from the same host).
-  // Falls back to '*' only when origin is unavailable (sandboxed iframes,
-  // file:// schemes); never uses '*' as the default.
+  // Target our own origin (the parent serves /map/ from the same host). The
+  // target origin is FAIL-CLOSED: if it can't be resolved to a concrete http(s)
+  // origin (opaque/sandboxed iframe → "null", file:// scheme → empty/"null"),
+  // we REFUSE to post rather than broadcast to '*'. A '*' target would leak the
+  // bridge's replies (which can carry map/campaign data) to any origin that
+  // happens to hold a reference to this window — so a failed origin computation
+  // must never fall back to broadcasting (F6).
+  function resolveParentOrigin() {
+    let origin;
+    try { origin = window.location.origin; } catch (_) { return null; }
+    // Opaque/file origins serialize to "null" (the string) or an empty value;
+    // neither is a safe postMessage target — treat both as unresolved.
+    if (!origin || origin === 'null') return null;
+    if (!/^https?:\/\//.test(origin)) return null;
+    return origin;
+  }
+
   function postToParent(msg) {
-    try {
-      window.parent.postMessage(msg, window.location.origin);
-    } catch (e) {
-      try { window.parent.postMessage(msg, '*'); } catch (_) { /* cross-origin */ }
+    const targetOrigin = resolveParentOrigin();
+    if (!targetOrigin) {
+      // Fail closed: no trustworthy target origin → do not post at all.
+      return;
     }
+    try {
+      window.parent.postMessage(msg, targetOrigin);
+    } catch (_) { /* cross-origin / detached parent — drop silently */ }
   }
 
   function reply(rid, payload) {

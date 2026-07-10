@@ -537,6 +537,26 @@ export const createCampaignSlice = (set, get) => {
       persistCampaignState(state, campaignId);
     }),
 
+  /**
+   * Patch a cached campaign row IN PLACE (mirrors settlementSlice's
+   * updateSavedSettlement). The maps editor re-renders off the cached campaign
+   * after a publish/edit without a refetch — e.g. stamping the gallery share
+   * kind/description or the just-captured thumbnail back onto the row so the
+   * tile reflects the edit immediately. Only patches an ACTIVE campaign; a
+   * missing/destroyed id is a no-op. Persists so the patch survives a reload.
+   * @param {string} campaignId
+   * @param {object} patch shallow keys to assign onto the campaign row
+   */
+  updateSavedCampaign: (campaignId, patch) =>
+    set(state => {
+      if (!patch || typeof patch !== 'object') return;
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      Object.assign(c, patch);
+      c.updatedAt = new Date().toISOString();
+      persistCampaignState(state, campaignId);
+    }),
+
   getCampaignWizardNews: (campaignId) => {
     const c = findActiveCampaign(get().campaigns, campaignId);
     return ensureWizardNewsFeed(c?.wizardNews);

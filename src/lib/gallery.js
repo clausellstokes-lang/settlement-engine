@@ -464,7 +464,13 @@ function sanitizeDossier(row) {
     // Owner opt-in: when gallery_share_dm is set, publish the full DM view
     // unstripped (the server RPC already returns it raw in that case; this keeps
     // the client defense-in-depth from re-stripping what the owner chose to show).
-    settlement:   toPublicSafe(row.data, { full: row.gallery_share_dm === true }),
+    // Per-member overrides (092/093) reveal/hide individual NPCs regardless of the
+    // settlement-level flag; the client projection mirrors the server splice.
+    settlement:   toPublicSafe(row.data, {
+      full: row.gallery_share_dm === true,
+      memberOverrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
+        ? row.gallery_member_overrides : null,
+    }),
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),
@@ -570,7 +576,38 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.shareDm !== undefined) {
     patch.gallery_share_dm = metadata.shareDm === true;
   }
+  // Per-member visibility overrides (migration 092/093): a keyed map of
+  // { revealDm?, allowImport? } that reveals/hides individual member NPCs
+  // independent of the settlement-level shareDm flag. Clamped on write (below).
+  if (metadata.memberOverrides !== undefined) {
+    patch.gallery_member_overrides = clampMemberOverrides(metadata.memberOverrides);
+  }
   return patch;
+}
+
+/**
+ * Final shape gate for the gallery_member_overrides column: keep only string keys
+ * mapping to an object with boolean revealDm / allowImport, capped at 1000 members
+ * so a hand-crafted payload can't bloat the row. Anything malformed collapses to {}.
+ * @param {any} raw
+ * @returns {Record<string, {revealDm?: boolean, allowImport?: boolean}>}
+ */
+function clampMemberOverrides(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  /** @type {Record<string, any>} */
+  const out = {};
+  let n = 0;
+  for (const [key, val] of Object.entries(raw)) {
+    if (n >= 1000) break;
+    if (typeof key !== 'string' || !key || key.length > 200) continue;
+    if (!val || typeof val !== 'object') continue;
+    /** @type {Record<string, boolean>} */
+    const entry = {};
+    if (typeof val.revealDm === 'boolean') entry.revealDm = val.revealDm;
+    if (typeof val.allowImport === 'boolean') entry.allowImport = val.allowImport;
+    if (Object.keys(entry).length) { out[key] = entry; n += 1; }
+  }
+  return out;
 }
 
 function isSafePublicImageUrl(value) {

@@ -71,6 +71,11 @@ export const BLUE      = L.BLUE;
 export const BLUE_BG   = L.BLUE_BG;
 export const GOLD_DEEP = L.GOLD_DEEP;
 export const PARCH_100 = L.PARCH_100;
+// GOLD_TXT / GOLD_SOFT / BORDER_STRONG are re-exported from their standalone
+// (tree-shakeable) token definitions — NOT the first-paint `legacy` object — so
+// the Realm/map chrome that consumes them keeps them in the lazy map chunk and
+// off the first-paint closure budget. See design/tokens.js.
+export { GOLD_TXT, GOLD_SOFT, BORDER_STRONG } from '../design/tokens.js';
 
 // swatch — exact-value migration swatchbook (see design/tokens.js). Routes the
 // long tail of raw inline hex colors through the token system with zero visual
@@ -107,3 +112,45 @@ export const FORM_MAX  = L.FORM_MAX;
 // of an empty string or an ad-hoc literal so every surface shows the same
 // placeholder for a missing value.
 export const EMPTY_VALUE = '—';
+
+// ── Chrome heights + mobile safe-area clearance ──────────────────────────────
+// One frozen source for the fixed-chrome pixel heights the layout paints, so
+// map/mobile surfaces stop re-deriving them with local constants. Mobile
+// clearances fold in the iOS/Android safe-area inset via `bottomClearance()` so
+// fixed content never tucks under the home indicator OR the bottom nav.
+//
+//   headerMobile  — the mobile sticky top bar (~59px painted).
+//   toolbarHeight — the dossier toolbar that pins under the header (~64px).
+//   bottomNav     — the 5-tab mobile bottom nav row (44px tap floor + borders).
+//   scrollPadDesktop — scroll-padding-top so anchored/focus scrolls clear chrome.
+//   mapShellOffset — viewport height the Realm map shell subtracts for the
+//                   desktop header + main padding + breathing room.
+//   mapShellMin    — the map shell's minimum height floor.
+//   fabLift / nudgeLift — how far fixed bottom overlays sit above the bottom nav.
+//   footerPadMobile / mainPadMobile — bottom padding clearing the fixed nav.
+//   stickyTop      — desktop sticky-aside top breathing gap.
+export const CHROME = Object.freeze({
+  headerMobile:    59,
+  toolbarHeight:   64,
+  bottomNav:       57,
+  scrollPadDesktop: 124,
+  mapShellOffset:  120,
+  mapShellMin:     500,
+  fabLift:         70,
+  nudgeLift:       92,
+  footerPadMobile: 88,
+  mainPadMobile:   100,
+  stickyTop:       12,
+});
+
+/**
+ * bottomClearance — safe-area-aware bottom offset for fixed/sticky mobile
+ * overlays. Adds the device home-indicator inset to a base px clearance so a
+ * FAB, nudge, footer, or scroll control always sits clear of BOTH the bottom
+ * nav and the safe area. On desktop, pass the plain px value instead.
+ *
+ * @param {number} basePx - base clearance in px above the viewport bottom.
+ * @returns {string} a CSS calc() expression, e.g. 'calc(70px + env(safe-area-inset-bottom))'.
+ */
+export const bottomClearance = (basePx) =>
+  `calc(${basePx}px + env(safe-area-inset-bottom))`;

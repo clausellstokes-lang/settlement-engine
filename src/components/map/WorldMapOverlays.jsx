@@ -1,6 +1,6 @@
 /**
  * WorldMapOverlays.jsx — floating overlays for the world map: toast, confirm
- * dialogs, simulation-rules dialog, and the guided tour.
+ * dialogs, simulation-rules dialog, guided tour, and the spinner keyframes.
  *
  * Extracted verbatim from WorldMap.jsx (no logic change). Pure presentational:
  * every piece of state and every handler lives in the parent WorldMap and is
@@ -8,7 +8,8 @@
  */
 
 import { Suspense, lazy } from 'react';
-import { sans, FS, R, swatch } from '../theme.js';
+import { sans, FS, R, ELEV, swatch } from '../theme.js';
+import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
@@ -23,6 +24,22 @@ export function WorldMapOverlays({
   mapSaveConfirm,
   setMapSaveConfirm,
   performSaveMap,
+  advanceConfirm,
+  advanceBody,
+  // Advance-scaling Stage 4: extra content for the Advance confirm dialog (the
+  // autoresolve toggle). null on the flag-OFF path, so the dialog is unchanged.
+  advanceExtra = null,
+  // #5: when the realm isn't canonized yet, the Advance dialog carries an inline
+  // Canonize CTA (removed the instant worldCanonized flips true) so the GM never
+  // has to leave the dialog, fail an advance, and hunt for the canonize control.
+  worldCanonized = true,
+  onCanonizeWorld,
+  canonizeBusy = false,
+  performAdvanceRealm,
+  setAdvanceConfirm,
+  importConfirm,
+  performImportImage,
+  cancelImportImage,
   showSimulationRules,
   activeCampaign,
   setShowSimulationRules,
@@ -31,17 +48,35 @@ export function WorldMapOverlays({
 }) {
   return (
     <>
-      {/* Toast */}
+      {/* Toast — an optional `action` renders a recovery CTA (P10) so an error
+          (e.g. "canonize first") offers a reachable next step, not a dead-end. */}
       {toast && (
         <div style={{
           position: 'fixed', bottom: 20, left: '50%', transform: 'translateX(-50%)',
+          display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
-          background: toast.kind === 'error' ? '#8a2a2a' : toast.kind === 'info' ? '#3a4a5a' : '#1a5a28',
+          background: toast.kind === 'error' ? swatch['#8A2A2A'] : toast.kind === 'info' ? swatch.info : swatch.success,
           color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
-          boxShadow: '0 6px 16px rgba(0,0,0,0.2)',
+          boxShadow: ELEV[2],
           zIndex: 100,
         }}>
-          {toast.text}
+          <span>{toast.text}</span>
+          {toast.action && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toast.action.onClick}
+              style={{
+                flexShrink: 0,
+                background: 'rgba(255,255,255,0.16)', color: swatch.white,
+                border: '1px solid rgba(255,255,255,0.4)', borderRadius: R.sm,
+                padding: '4px 10px', fontSize: FS.xs, fontWeight: 800,
+                minHeight: undefined,
+              }}
+            >
+              {toast.action.label}
+            </Button>
+          )}
         </div>
       )}
 
@@ -53,6 +88,53 @@ export function WorldMapOverlays({
         confirmLabel="Regenerate"
         onConfirm={performRegenerate}
         onCancel={() => setRegenerateConfirm(null)}
+      />
+
+      <ConfirmDialog
+        open={!!advanceConfirm}
+        title="Advance the realm?"
+        body={advanceBody || ''}
+        extra={
+          (!worldCanonized || advanceExtra) ? (
+            <>
+              {!worldCanonized && (
+                <div style={{
+                  background: swatch['#FAF8F4'], border: `1px solid ${swatch.stressAmber}55`,
+                  borderLeft: `3px solid ${swatch.stressAmber}`, borderRadius: R.sm,
+                  padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
+                }}>
+                  <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
+                    This realm isn't canonized yet — its history can't advance until it is.
+                    Canonize now to lock the world and begin its timeline.
+                  </div>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={onCanonizeWorld}
+                    disabled={canonizeBusy}
+                  >
+                    {canonizeBusy ? 'Canonizing…' : 'Canonize the world'}
+                  </Button>
+                </div>
+              )}
+              {advanceExtra}
+            </>
+          ) : null
+        }
+        confirmLabel="Advance Realm"
+        confirmDisabled={!worldCanonized}
+        onConfirm={performAdvanceRealm}
+        onCancel={() => setAdvanceConfirm(false)}
+      />
+
+      <ConfirmDialog
+        open={!!importConfirm}
+        tone="warning"
+        title="Import this image as the map?"
+        body="The image becomes the map's surface. This disables the generated terrain features and charted trails, and overwrites the current map. You can revert with Undo or by reverting to the generated terrain."
+        confirmLabel="Import image"
+        onConfirm={performImportImage}
+        onCancel={cancelImportImage}
       />
 
       <ConfirmDialog
@@ -74,10 +156,6 @@ export function WorldMapOverlays({
 
       {/* §16 — guided help walkthrough */}
       <WorldMapTour open={tourOpen} steps={WORLD_MAP_TOUR_STEPS} onClose={() => setTourOpen(false)} />
-
-      {/* Spinner keyframes (`.sf-spin`) now live globally in src/index.css so
-          the Button primitive's busy spinner animates everywhere, not only
-          while this world-map overlay is mounted. */}
     </>
   );
 }

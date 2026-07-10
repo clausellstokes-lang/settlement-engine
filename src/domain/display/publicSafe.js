@@ -106,7 +106,7 @@ export function sanitizePublicValue(value, path = []) {
  * back to a name slug. The slug rule (snake_case, non-alnum → underscore,
  * lower-cased) MUST match the server public._gallery_npc_key fallback byte-for-byte
  * so a toggle written client-side targets the same NPC the server strips/reveals.
- * @param {{ id?: string|number, name?: string }} npc
+ * @param {Record<string, unknown>} npc
  * @returns {string}
  */
 export function galleryMemberKey(npc) {
@@ -114,6 +114,28 @@ export function galleryMemberKey(npc) {
   if (id) return id;
   const slug = String(npc?.name || '').replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
   return `npc.${slug}`;
+}
+
+/**
+ * The public NPC allowlist projection: keep ONLY the fields safe for an anon read
+ * (no goal / secret / plotHooks / relationships). Used both for the default
+ * (stripped) member projection and for a per-member NON-reveal under overrides.
+ * @param {Record<string, unknown>} npc
+ */
+function publicNpc(npc) {
+  return {
+    id: npc.id,
+    name: npc.name,
+    role: npc.role,
+    title: npc.title,
+    category: npc.category,
+    personality: npc.personality,
+    physical: npc.physical,
+    factionAffiliation: npc.factionAffiliation,
+    secondaryAffiliation: npc.secondaryAffiliation,
+    presentation: npc.presentation,
+    influence: npc.influence,
+  };
 }
 
 /**
@@ -130,11 +152,26 @@ export function galleryMemberKey(npc) {
  * `gallery_share_narrated` toggle, so even in full mode we still drop the AI
  * base blobs defensively. SECURITY: full mode is reachable ONLY when the
  * gallery row's `gallery_share_dm` is true (set by the owner).
+ *
+ * `options.memberOverrides` is the per-NPC override map (keyed by galleryMemberKey,
+ * value { revealDm?, allowImport? }). Each member DEFAULTS to the settlement `full`
+ * flag; an explicit revealDm wins. A per-member reveal restores DM fields on THAT
+ * member alone and never widens settlement-level content. Mirrors the server's
+ * _gallery_apply_member_overrides (migration 093).
  * @param {unknown} settlement
- * @param {{ full?: boolean }} [options]
+ * @param {{ full?: boolean, memberOverrides?: Record<string, {revealDm?: boolean, allowImport?: boolean}>|null }} [options]
  * @returns {Record<string, any>}
  */
-export function toPublicSafe(settlement, { full = false } = {}) {
+export function toPublicSafe(settlement, { full = false, memberOverrides = null } = {}) {
+  // Per-NPC override map keyed by galleryMemberKey, value { revealDm?, allowImport? }.
+  // Each member DEFAULTS to the settlement `full` flag; an explicit revealDm wins.
+  // The settlement-level projection follows `full` ONLY — a per-member reveal restores
+  // DM fields on THAT member alone and never widens settlement-level content. Mirrors
+  // the server's _gallery_apply_member_overrides (migration 093).
+  const overrides = (memberOverrides && typeof memberOverrides === 'object' && !Array.isArray(memberOverrides))
+    ? memberOverrides : {};
+  /** @type {Record<string, unknown>} */
+  let result;
   if (full) {
     /** @type {Record<string, any>} */
     let clone;
@@ -168,8 +205,8 @@ export function toPublicSafe(settlement, { full = false } = {}) {
       if (Object.keys(compass).length) clone.aiSettlement = compass;
       else delete clone.aiSettlement;
     }
-    return clone;
-  }
+    result = clone;
+  } else {
   // Default projection — FAIL CLOSED. Gate the settlement ROOT to the top-level
   // allowlist first: any key not on PUBLIC_TOPLEVEL_KEYS is dropped, so a future
   // DM-private top-level field can't leak just because it misses the denylist
@@ -188,19 +225,41 @@ export function toPublicSafe(settlement, { full = false } = {}) {
     if (sanitized !== undefined) clean[key] = sanitized;
   }
   if (Array.isArray(clean.npcs)) {
-    clean.npcs = clean.npcs.map(npc => ({
-      id: npc.id,
-      name: npc.name,
-      role: npc.role,
-      title: npc.title,
-      category: npc.category,
-      personality: npc.personality,
-      physical: npc.physical,
-      factionAffiliation: npc.factionAffiliation,
-      secondaryAffiliation: npc.secondaryAffiliation,
-      presentation: npc.presentation,
-      influence: npc.influence,
-    })).filter(npc => npc.name || npc.role);
+    clean.npcs = clean.npcs.map(publicNpc).filter(npc => npc.name || npc.role);
   }
-  return clean;
+  result = clean;
+  }
+
+  // Per-member overrides: a member with no override follows the settlement `full`
+  // flag; an explicit revealDm wins. A REVEALED member is restored to its full DM
+  // record (spliced from a clone of the source); a non-revealed member is reduced to
+  // the public allowlist. Settlement-level content is untouched, so a hidden
+  // settlement with one revealed NPC exposes ONLY that NPC's DM fields. Mirrors the
+  // server's _gallery_apply_member_overrides (migration 093). With no overrides this
+  // is behaviour-preserving: default mode re-derives the same public allowlist, full
+  // mode restores each member to its (equivalent) full source record.
+  if (Array.isArray(result.npcs)) {
+    // Narrow the source (typed `unknown`) to an object without an any-cast, then
+    // read its member NPCs — Array.isArray narrows the branch to the element type.
+    const srcObj = /** @type {Record<string, unknown>} */ (
+      (settlement && typeof settlement === 'object' && !Array.isArray(settlement)) ? settlement : {}
+    );
+    const srcNpcs = Array.isArray(srcObj.npcs) ? srcObj.npcs : [];
+    /** @type {Record<string, unknown>[]} */
+    let fullSource;
+    try { fullSource = structuredClone(srcNpcs); }
+    catch { fullSource = JSON.parse(JSON.stringify(srcNpcs)); }
+    /** @type {Map<string, Record<string, unknown>>} */
+    const fullByKey = new Map();
+    for (const npc of fullSource) fullByKey.set(galleryMemberKey(npc), npc);
+    result.npcs = result.npcs
+      .map(npc => {
+        const key = galleryMemberKey(npc);
+        const ov = overrides[key];
+        const effReveal = ov && typeof ov.revealDm === 'boolean' ? ov.revealDm : full;
+        return effReveal ? (fullByKey.get(key) || npc) : publicNpc(npc);
+      })
+      .filter(npc => npc.name || npc.role);
+  }
+  return result;
 }

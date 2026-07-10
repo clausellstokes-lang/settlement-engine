@@ -134,6 +134,42 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Proof-forward Welcome page: hero unchanged, plus a proof band (sample dossier, anon only), an honest living-world strip, and a closing CTA band. OFF reverts to the current hero + three pillars + lifecycle spine.',
   },
+
+  // ── Simulation ──────────────────────────────────────────────────────────────
+  // Advance-scaling: an Advance runs N REAL one-week ticks (week=1, month=4,
+  // season=12, year=48) with a determinate progress bar, a pause-at-forks
+  // resume flow, and the auto-resolve toggle — instead of a single coarse step.
+  // HELD OFF in this tree: only the DOMAIN orchestrator (advanceInterval.js) has
+  // landed; the STORE integration the multi-tick UI needs (resolveIntervalMajors,
+  // advanceAutoResolve, pausedAdvance surfacing) has NOT, so the flag stays OFF
+  // and the Realm advances on the byte-identical single-tick path. Flip to true
+  // only once the world-pulse store slice threads the multi-tick session (a
+  // later wave); see useAdvanceSession.js.
+  advanceMultiTick: {
+    default: false,
+    description: 'Advance runs N real one-week ticks per interval (month=4, season=12, year=48) with a progress bar + pause/resume + auto-resolve toggle. HELD OFF: the multi-tick STORE integration is not landed in this tree; the single-tick advance path is authoritative.',
+  },
+  // The read-only surfacing layer for the war-economy phases. OFF by default.
+  // When on, a "War & Resolve" Inspector tab reads each settlement's morale
+  // signals — Hope, Resolve, Faith relation, Supply, pro-war / anti-war balance —
+  // and the same signals ground the AI narrative + daily-life prose. Pure display:
+  // it computes nothing the simulation doesn't already know and mutates no state.
+  warEconomySurfacing: {
+    default: false,
+    description: 'A read-only "War & Resolve" tab surfacing each settlement\'s Hope / Resolve / Faith relation / Supply / pro-war vs anti-war balance, and the same signals grounding the AI narrative + daily-life prose. Display-only; touches no simulation state.',
+  },
+
+  // ── Pricing copy ────────────────────────────────────────────────────────────
+  // The simulation-led copy ("Generate a town in seconds, then run the region for
+  // years.") vs. the old "unlimited saves" pitch. Default-ON: the live conversion
+  // surface must sell the actual moat (the war/trade/pantheon living simulation),
+  // not "unlimited saves" — a feature countless free tools offer. The storage/saves
+  // line stays a SECONDARY bullet. Size is FREE, so this variant must NOT pitch
+  // size/metropolis/capital as premium. Set false to A/B back to the old copy.
+  pricingSimulationCopy: {
+    default: true,
+    description: 'Simulation-led premium pricing copy. ON (default) = "generate a town, then run the region" — names the simulation, never size. OFF = the old "unlimited saves / full size" copy.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

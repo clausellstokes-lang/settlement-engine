@@ -28,17 +28,10 @@
  * @param {boolean} [props.hasCampaigns]        whether any campaign is selectable
  */
 import { Suspense, lazy } from 'react';
-import { SP } from '../theme.js';
+import { SP, CHROME, bottomClearance } from '../theme.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 
 const RealmDashboard = lazy(() => import('./RealmDashboard.jsx'));
-
-// Mobile chrome heights (px): slim top header + fixed bottom nav. Kept local
-// because our theme.js has no CHROME group; these match the app's mobile shell.
-const HEADER_MOBILE = 59;
-const BOTTOM_NAV = 57;
-// Safe-area-aware bottom offset so the gate never renders under the bottom nav.
-const bottomClearance = (basePx) => `calc(${basePx}px + env(safe-area-inset-bottom))`;
 
 export default function RealmMobileGate({
   campaign, canManageCampaigns, tier, onUpgrade, nameById,
@@ -50,8 +43,8 @@ export default function RealmMobileGate({
       style={{
         display: 'flex', flexDirection: 'column', gap: SP.md,
         padding: SP.sm,
-        minHeight: `calc(100vh - ${HEADER_MOBILE + BOTTOM_NAV}px)`,
-        paddingBottom: bottomClearance(BOTTOM_NAV + SP.lg),
+        minHeight: `calc(100vh - ${CHROME.headerMobile + CHROME.bottomNav}px)`,
+        paddingBottom: bottomClearance(CHROME.bottomNav + SP.lg),
       }}
     >
       <DesktopOnlyGate
