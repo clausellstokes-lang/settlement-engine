@@ -948,3 +948,20 @@ npcData's TRAIT_ALIGNMENT precedent to both axes).
 - Trait-neutral clergy = exact zero deltas (neutrality theorem); pure projection, rng-free.
 - LANDING: trait->plane table + piety bleed seam = W-F3 (seam shaped per-trait); full
   legitimacy/conversion/foothold consumption = W-F4.
+
+### Scoping rule — the seat steers, the pantheon contests, everything is alive (OWNER, 2026-07-10; BINDING on all W-F waves)
+The refinements above are patron-focused in language but the system is PANTHEON-WIDE:
+- LEGITIMACY is the ONLY seat-scoped quantity (the rightful claim to BE patron — accrued by
+  claimants, defended by the incumbent).
+- EVERYTHING ELSE runs PER-DEITY, ALWAYS ACTIVE, for every god present regardless of seat:
+  share/conversion dynamics, the local rank ladder (cult -> established -> ascendant), global
+  standings (faithMass / pantheon rankings), clergy character + targeted footholds, stance
+  relations between ALL pairs (a seatless rival cult still courts the greedy priest), spread
+  participation (when enabled).
+- THE PATRON'S PRIVILEGE IS THE MEGAPHONE: only the seat's god amplifies settlement CONDUCT
+  (war temperament, development discipline, corruption pressure, form synergy, peace-suing).
+  Minority faiths influence through their own live channels but never steer conduct until
+  they take the seat.
+- Implementers: never build patron-only dynamics for non-legitimacy quantities; never let a
+  minority faith steer conduct. The landed substrate already matches (local lane activates on
+  ANY deity presence; niche grid runs across the whole local pantheon).
