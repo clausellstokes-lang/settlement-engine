@@ -877,3 +877,21 @@ mechanism W-F2..W-F4 builds (seat changes, legitimacy crossings, stain, mandate 
 formation/betrayal) — pinned: no faith mutation ships with an empty reasons chain (extend the
 conversion machinery's existing causes pattern). W-F6 renders the chains as plain chronicle
 sentences. Emission at authorship, prose at the surface wave, a pin between them.
+
+### Portfolio-plausible spread (OWNER, 2026-07-10 — refines the portfolio allocation; lands W-F4 spread + W-F5 pool)
+Gods originate in custom content (user-authored) and the starting pantheon, and must SPREAD
+(when enabled) — so portfolio affinity gates the SPREAD LANE, not just post-arrival growth:
+- Affinity weights CHANNEL CARRIAGE and receptivity both: sea gods propagate port-to-port and
+  along river/coastal trade; a landlocked mine's plausible arrivals are forge/earth/death.
+- FIRST ESTABLISHMENT in a faithless settlement draws affinity-weighted with near-zero mass
+  for implausible portfolios — founding patrons are habitat-coherent essentially always.
+- "If" = rarely-with-a-story: a low-affinity god arrives ONLY via a coherent path (strong
+  prevalence in a connected partner + high channel traffic), lands as a MINORITY foreign cult
+  (never founding patron), and the carrying channel is the narrative justification — the
+  chronicle names it (legibility rule applies).
+- Taxonomy: HABITAT-BOUND portfolios (sea/harvest/forge/...) vs UNIVERSAL (death/craft/
+  knowledge/war) — universal gods arrive anywhere at neutral affinity, so a plausible first
+  arrival always exists; the W-F5 governed pool guarantees habitat coverage per cell.
+- USER FIAT bypasses plausibility (divine hand), then the fit loop + near-zero habitat
+  receptivity make the imposed mismatch wither per the reciprocal rule — consistent, not
+  special-cased.
