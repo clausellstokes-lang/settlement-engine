@@ -25,6 +25,7 @@
 
 import { cleanNum } from './placeholders.js';
 import { deriveMagicProfile } from '../magicProfile.js';
+import { formatCount } from '../formatNumber.js';
 
 const EXPORT_STATUS_LABEL = Object.freeze({
   none:             'No exports — economic isolation',
@@ -83,7 +84,11 @@ const VIABILITY_LABEL = Object.freeze({
  */
 function fmtInt(n) {
   const v = cleanNum(n);
-  return v == null ? null : Math.round(v).toLocaleString('en-US');
+  // formatCount, not toLocaleString('en-US'): even an explicit-locale Intl call
+  // depends on the host shipping full ICU data (small-icu Node silently falls
+  // back to a different locale). formatCount is table-free and byte-identical
+  // to en-US grouping for integers.
+  return v == null ? null : formatCount(Math.round(v));
 }
 
 /**

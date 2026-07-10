@@ -2,6 +2,7 @@ import { activeChannelsFrom } from '../region/index.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
+import { formatCount } from '../formatNumber.js';
 
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
@@ -320,8 +321,8 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
     summary: delta > 0
-      ? `${item.name || sourceId} gains about ${abs.toLocaleString()} people from favorable conditions.`
-      : `${item.name || sourceId} loses about ${abs.toLocaleString()} people from cumulative pressure${migrants ? `; about ${migrants.toLocaleString()} may migrate onward` : ''}.`,
+      ? `${item.name || sourceId} gains about ${formatCount(abs)} people from favorable conditions.`
+      : `${item.name || sourceId} loses about ${formatCount(abs)} people from cumulative pressure${migrants ? `; about ${formatCount(migrants)} may migrate onward` : ''}.`,
     reasons: [
       `Food ${score(pressureIdx, sourceId, 'food').toFixed(2)}, defense pressure ${score(pressureIdx, sourceId, 'conflict').toFixed(2)}, trade pressure ${score(pressureIdx, sourceId, 'trade').toFixed(2)}.`,
       `Interval ${interval.replace(/_/g, ' ')} with ${rules.intensity} intensity.`,

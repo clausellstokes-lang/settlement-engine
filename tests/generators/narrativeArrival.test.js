@@ -15,13 +15,22 @@
  * `|| fallback` never fired because an empty array is truthy.
  */
 
-import { describe, test, expect } from 'vitest';
+import { afterEach, beforeEach, describe, test, expect } from 'vitest';
 import {
   generateArrivalScene,
   generateSiegeCapability,
   ROUTE_TO_SCENE,
 } from '../../src/generators/narrativeGenerator.js';
 import { ARRIVAL_SCENES, ARRIVAL_ADDONS } from '../../src/data/narrativeData.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
+
+// generateArrivalScene draws through the ambient rngContext, which now fails
+// CLOSED (throws) with no active seeded RNG — so seed one per test. The
+// assertions below stay pool-wide (they accept ANY template of the mapped
+// pool), so they are independent of which draw the seed produces.
+beforeEach(() => setActiveRng(createPRNG('narrative-arrival-test')));
+afterEach(() => clearActiveRng());
 
 // The full route vocabulary the config UI / resolveConfig can produce.
 const ROUTES = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass'];
@@ -35,7 +44,7 @@ const settlementFor = (route) => ({
 });
 
 // Render every template of a pool so the assertion is independent of which
-// one the (unseeded) picker chose.
+// one the (seeded) picker chose.
 const renderPool = (pool, name, tier) =>
   (pool || []).map(t => (typeof t === 'function' ? t(name, tier) : t));
 

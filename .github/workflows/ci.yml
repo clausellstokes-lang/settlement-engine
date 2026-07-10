@@ -155,6 +155,51 @@ jobs:
       - name: Run edge-function Deno tests
         run: deno task test:edge
 
+  # ── Golden master under a hostile locale + timezone ──────────────────────────
+  # The `check` job runs the suite in CI's default C.UTF-8/UTC environment — the
+  # same class of environment the golden manifest was captured in, so a locale-
+  # dependent formatting or collation leak (toLocaleString rendering `8000` as
+  # "8.000", ICU collation reordering a sort) can sit green there forever and
+  # still break same-seed replay on a user's machine. This leg re-runs ONLY the
+  # golden/determinism suites (cheap — seconds of test time, not the full gate)
+  # under tr_TR.UTF-8 (the Turkish-I locale that breaks the most latent i18n
+  # assumptions; Node's ICU reads LANG/LC_ALL directly, so no locale-gen setup
+  # is needed) and a non-UTC, odd-offset timezone (Chatham, +12:45/+13:45). If
+  # any hash in the 155-config manifest depends on the host locale or clock,
+  # this job reds while `check` stays green — the exact leak the eslint
+  # locale-formatting ban and tests/lint/localeFormatGuard.test.js guard at
+  # edit time, proven end-to-end here.
+  determinism-hostile-locale:
+    name: Golden master under tr_TR + Chatham TZ
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      LANG: tr_TR.UTF-8
+      LC_ALL: tr_TR.UTF-8
+      TZ: Pacific/Chatham
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Golden + determinism suites (hostile locale/TZ)
+        run: >
+          npx vitest run
+          tests/property/generatorGoldenMaster.test.js
+          tests/pdf/goldenViewModel.test.js
+          tests/domain/determinismLeaks.test.js
+          tests/generators/customContentDeterminism.test.js
+          tests/domain/formatNumber.test.js
+          tests/kernel/rngContextFailClosed.test.js
+          tests/lint/localeFormatGuard.test.js
+          tests/lint/localeCompareGuard.test.js
+
   # ── Enforcement-spine mutation sweep (opt-in) ───────────────────────────────
   # Injects a deliberate regression per enforced invariant and asserts the gate
   # catches each one (scripts/mutation-sweep.sh). It runs a gate step PER mutation
@@ -190,7 +235,7 @@ jobs:
   # once configured, CI becomes the ONLY path to production.
   deploy:
     name: Deploy to production (gated)
-    needs: [check, e2e, deno-tests, coverage-floors]
+    needs: [check, e2e, deno-tests, coverage-floors, determinism-hostile-locale]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 10

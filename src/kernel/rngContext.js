@@ -5,8 +5,23 @@
  * All generator code that calls chance(), pick(), randInt(), shuffle(),
  * or weightedPick() from this module will use the seeded PRNG.
  *
- * When no PRNG is active (legacy code path or tests), falls back
- * to Math.random() transparently.
+ * FAIL CLOSED: when no PRNG is active, the helpers THROW. The old design
+ * fell back to Math.random() with a warn-once — but an ambient unseeded draw
+ * during what is meant to be a seeded run silently ships a settlement whose
+ * stored seed no longer replays, on every device, forever. That failure mode
+ * is invisible exactly where it matters (production generation), so the
+ * fallback is gone in EVERY environment: test, dev, and prod all throw. A
+ * loud crash at the draw site names the offending call and is fixable in
+ * minutes; silent non-reproducibility is discovered months later from a
+ * corrupted save. Every legitimate consumer either runs inside the pipeline's
+ * setActiveRng scope or takes an explicit rng (see crossSettlementConflicts);
+ * an audit found NO caller that needs ambient randomness.
+ *
+ * If a genuinely non-reproducible draw is ever needed OUTSIDE the seeded
+ * pipeline (UI-only dice, cosmetic jitter), do not re-add a fallback here —
+ * call unseededRandom() below at that specific site. It is deliberately a
+ * separate, greppable name so "which draws are unseeded?" stays a one-line
+ * search, and it refuses to run while a seeded generation is active.
  *
  * This avoids touching all 83 Math.random() call sites individually.
  * Instead, generators import from here instead of constants.js.
@@ -29,30 +44,37 @@ export function getActiveRng() {
   return _activeRng;
 }
 
-// Tests and a few legacy paths legitimately call these helpers with no active
-// RNG, so the Math.random() fallback must stay. But when it fires DURING what
-// is meant to be a seeded run it silently ships a settlement whose stored seed
-// no longer replays — the determinism footgun the audit flagged. Make it loud
-// OUTSIDE of tests: one warning per process, so a real leak surfaces in dev/
-// preview while the test suite (which uses the fallback by design) stays quiet.
-// Pair with the ESLint ban on raw Math.random() in src/generators.
-// Reach process via globalThis (cast to any): this file is in the tsc gate as
-// browser code with no @types/node, so a bare `process` reference would not
-// type-check. Undefined in the browser (warn fires in dev there); 'test' under
-// vitest (warn stays quiet for the fallback-by-design test suite).
-const _isTestEnv =
-  /** @type {any} */ (globalThis)?.process?.env?.NODE_ENV === 'test';
-let _warnedNoActiveRng = false;
-
-/** 0..1 random float, from the seeded PRNG if active, else a noisy fallback. */
+/**
+ * 0..1 random float from the seeded PRNG. Throws (fails CLOSED) when no
+ * seeded context is active — see the header for why there is no fallback.
+ */
 function _roll() {
   if (_activeRng) return _activeRng.random();
-  if (!_warnedNoActiveRng && !_isTestEnv) {
-    _warnedNoActiveRng = true;
-    console.warn(
-      '[rngContext] a PRNG helper was called with no active seeded RNG — '
-      + 'falling back to Math.random(). The result is NOT reproducible from its '
-      + 'seed; ensure setActiveRng() wraps the generation that called this.',
+  throw new Error(
+    '[rngContext] a PRNG helper was called with no active seeded RNG. '
+    + 'The result would not be reproducible from its seed, so this fails '
+    + 'closed. Fix: run inside the pipeline (setActiveRng wraps generation), '
+    + 'seed explicitly via setActiveRng(createPRNG(seed)) in tests, pass an '
+    + 'explicit rng to the callee, or — for intentionally non-reproducible, '
+    + 'non-pipeline draws only — call unseededRandom() from rngContext.js.',
+  );
+}
+
+/**
+ * THE explicit escape hatch: an intentionally non-reproducible 0..1 draw for
+ * code that runs OUTSIDE the seeded pipeline and genuinely wants ambient
+ * randomness. Never used by generators (the eslint determinism guard plus
+ * this deliberate name keep it out of the seeded trees); grep for
+ * `unseededRandom` to enumerate every sanctioned non-determinism site.
+ * Throws if a seeded generation is active — inside setActiveRng scope an
+ * "unseeded" draw is always a bug (use random() and the seed).
+ */
+export function unseededRandom() {
+  if (_activeRng) {
+    throw new Error(
+      '[rngContext] unseededRandom() called while a seeded RNG is active — '
+      + 'inside the pipeline every draw must come from the seed. Use random() '
+      + '(or the other rngContext helpers) instead.',
     );
   }
   return Math.random();
@@ -60,7 +82,7 @@ function _roll() {
 
 // ── Drop-in replacements for Math.random-based helpers ──────────────────────
 
-/** 0..1 random float. Uses seeded PRNG if active, else Math.random. */
+/** 0..1 random float from the seeded PRNG. Throws if none is active. */
 export function random() {
   return _roll();
 }

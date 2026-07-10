@@ -6,6 +6,7 @@ import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { SEVERITY } from '../../data/constants.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 import { getTradeRouteFeatures } from '../helpers.js';
+import { formatCount } from '../../domain/formatNumber.js';
 
 
 // ECONOMIC_CONSTANTS
@@ -291,7 +292,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       severity: SEVERITY.CRITICAL,
       category: 'Food Storage',
       title: 'No Grain Storage Facility',
-      description: `Settlement of ${population.toLocaleString()} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
+      description: `Settlement of ${formatCount(population)} lacks a granary — cannot buffer harvests or maintain strategic food reserves.`,
       impact: 'Vulnerable to seasonal shortages and siege starvation without grain reserves.',
       suggestedFixes: ['Add Town granary, City granaries, or State granary complex'],
     });

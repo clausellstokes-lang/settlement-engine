@@ -10,6 +10,7 @@ import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWaterDependency } from '../helpers.js';
 import { priorityToCategory } from './prosperity.js';
 import { deriveFoodBalanceAnalysis, deriveSupplyRiskAnalysis } from './foodBalance.js';
+import { formatCount } from '../../domain/formatNumber.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -284,7 +285,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
       severity: SEVERITY.CRITICAL,
       category: 'Economic Structure',
       title: 'No Trade Infrastructure',
-      description: `Population of ${population.toLocaleString()} without any markets or trade institutions.`,
+      description: `Population of ${formatCount(population)} without any markets or trade institutions.`,
       impact: 'Economy cannot support this population.',
       suggestedFixes: ["Add Market Square, Merchants' Quarter, or Trade Guild"],
     });
@@ -307,7 +308,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
         severity: water.strength === 'moderate' ? SEVERITY.INEFFICIENCY : SEVERITY.IMPLAUSIBLE,
         category: 'Economic Diversity',
         title: 'Insufficient Craft Industries',
-        description: `Population of ${population.toLocaleString()} with only ${craftCount} craft institution${craftCount !== 1 ? 's' : ''}. ${water.note}`,
+        description: `Population of ${formatCount(population)} with only ${craftCount} craft institution${craftCount !== 1 ? 's' : ''}. ${water.note}`,
         impact: water.buffered
           ? 'Craft economy depends on trade imports.'
           : 'Lacks diversity to employ the population.',

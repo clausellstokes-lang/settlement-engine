@@ -145,9 +145,16 @@ export default [
   // for the same reason (F13): it collates through the host ICU/locale tables,
   // so a sort that feeds rng draw order or persisted output can order non-ASCII
   // strings differently across devices/locales — use compareCodepoint from
-  // domain/deterministicSort.js. Errors here, so a new leak fails CI. The two
+  // domain/deterministicSort.js. Locale FORMATTING (toLocaleString /
+  // toLocaleDateString / toLocaleTimeString / Intl.*) is banned as the sibling
+  // class: it renders through the same host tables, so `8000` lands in persisted
+  // output as "8,000" on a US host and "8.000" on a German one (the re-grade
+  // found exactly this in the foodBalance viability warnings) — use formatCount
+  // from domain/formatNumber.js (the cross-device-stable number format).
+  // Errors here, so a new leak fails CI. The two
   // sanctioned non-determinism seams — prng.js (the sole seed-minting entry)
-  // and rngContext.js (the Math.random fallback itself) — now live in
+  // and rngContext.js (whose helpers now fail CLOSED with no seeded context;
+  // its unseededRandom() escape hatch is the one ambient draw) — live in
   // src/kernel/, OUTSIDE this block's src/generators/ scope, so they need no
   // explicit exemption: the ban simply doesn't reach them.
   {
@@ -170,6 +177,26 @@ export default [
           selector: "CallExpression[callee.property.name='localeCompare']",
           message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
         },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
       ],
     },
   },
@@ -178,9 +205,12 @@ export default [
   // The domain layer must be a pure function of its inputs (see P0.5, which removed
   // a flag()/Math.random() trio). This locks the entropy/env/config leak classes by
   // CONSTRUCTION: no Math.random(), no import.meta, no importing lib config/store
-  // modules (flags/saves/campaigns) from domain, and no localeCompare (F13 — the
+  // modules (flags/saves/campaigns) from domain, no localeCompare (F13 — the
   // host ICU/locale collation reorders non-ASCII strings across devices; use
-  // compareCodepoint from domain/deterministicSort.js). @enforced-by this rule block.
+  // compareCodepoint from domain/deterministicSort.js), and no locale FORMATTING
+  // (toLocaleString / toLocaleDateString / toLocaleTimeString / Intl.* — the same
+  // host tables render `8000` as "8,000" vs "8.000" depending on the device; use
+  // formatCount from domain/formatNumber.js). @enforced-by this rule block.
   // NOTE: the wall-clock ban (new Date()/Date.now()) is now active — the Phase-2
   // now-threading track (Track A) finished threading the ~20 `now = new Date()`
   // default-param fallbacks, so this block bans no-arg `new Date()` and `Date.now()`
@@ -213,6 +243,26 @@ export default [
         {
           selector: "CallExpression[callee.property.name='localeCompare']",
           message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
         },
       ],
       'no-restricted-imports': ['error', {
