@@ -1,73 +1,13 @@
 import { evaluateFactionRules } from './factionCompetition.js';
 import { evaluateNpcRules } from './npcAgency.js';
 import { evaluateRelationshipRules } from './relationshipEvolution.js';
+import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
+import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 
-/**
- * @typedef {Object} CePressure
- * @property {number} score
- * @property {string} kind
- * @property {string[]} reasons
- * @property {string} label
- * @property {string} [settlementId]
- * @property {string} [settlementName]
- */
-
-/**
- * @typedef {Object} Candidate
- * @property {string} [id]
- * @property {string} [type]
- * @property {string} [candidateType]
- * @property {string} [targetSaveId]
- * @property {string} [relationshipKey]
- * @property {string} [factionId]
- * @property {string} [npcId]
- * @property {string} [ruleId]
- * @property {string} [ruleFamily]
- * @property {string} [applyMode]
- * @property {number} severity
- * @property {number} [probability]
- * @property {number} [roll]
- * @property {string[]} [reasons]
- * @property {string[]} [conflictTags]
- * @property {{ settlementId?: string, flowKind?: string, [key: string]: * }} [metadata]
- * @property {{ kind?: string }} [proposalPayload]
- * @property {Object} [conflictResolution]
- */
-
-/**
- * @typedef {Object} CandidateBudgets
- * @property {number} [maxCandidates]
- * @property {number} [maxPerSettlement]
- * @property {number} [maxRelationshipLabelProposals]
- * @property {number} [maxGovernmentChallenges]
- * @property {number} [maxNpcProposals]
- */
-
-/**
- * @typedef {Object} WorldPulseSnapshot
- * @property {{ tick?: number, simulationRules?: Object }} [worldState]
- */
-
-/**
- * @typedef {Object} WorldPulseContext
- * @property {number} [tick]
- * @property {CePressure[]} [pressures]
- * @property {*} [pressureIndex]
- * @property {Object} [simulationRules]
- * @property {CandidateBudgets} [budgets]
- */
-
-/**
- * @typedef {Object} CandidateRng
- * @property {() => number} random
- * @property {(label: string) => CandidateRng} [fork]
- */
-
-/** @param {unknown} value */
-function stablePart(value) {
+function stablePart(/** @type {any} */ value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 }
 
@@ -83,18 +23,12 @@ export const VOLATILITY_MULTIPLIERS = Object.freeze({
   turbulent: 1.6,
 });
 
-/** @param {string} volatility */
-export function volatilityMultiplier(volatility) {
+export function volatilityMultiplier(/** @type {any} */ volatility) {
   return VOLATILITY_MULTIPLIERS[/** @type {keyof typeof VOLATILITY_MULTIPLIERS} */ (volatility)] ?? 1.0;
 }
 
-/**
- * @param {CePressure | null | undefined} pressure
- * @param {number} tick
- */
-function pressureConditionCandidate(pressure, tick) {
+function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick) {
   if (!pressure || pressure.score < 0.5) return null;
-  /** @type {Record<string, string>} */
   const archetypeByKind = {
     food: 'famine',
     disease: 'plague',
@@ -103,7 +37,6 @@ function pressureConditionCandidate(pressure, tick) {
     legitimacy: 'faction_challenge',
     crime: 'regional_criminal_pressure',
   };
-  /** @type {Record<string, string>} */
   const labelByKind = {
     food: 'Famine pressure',
     disease: 'Disease outbreak',
@@ -112,7 +45,7 @@ function pressureConditionCandidate(pressure, tick) {
     legitimacy: 'Legitimacy challenge',
     crime: 'Criminal pressure',
   };
-  const archetype = archetypeByKind[pressure.kind];
+  const archetype = archetypeByKind[/** @type {keyof typeof archetypeByKind} */ (pressure.kind)];
   if (!archetype) return null;
   return {
     id: `candidate.condition.${stablePart(pressure.kind)}.${stablePart(pressure.settlementId)}.${tick}`,
@@ -124,7 +57,7 @@ function pressureConditionCandidate(pressure, tick) {
     severity: pressure.score,
     probability: Math.min(0.42, 0.06 + pressure.score * 0.3),
     applyMode: pressure.score >= 0.72 ? 'proposal' : 'auto',
-    headline: `${labelByKind[pressure.kind]} may take hold`,
+    headline: `${labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)]} may take hold`,
     summary: `${pressure.settlementName} shows enough ${pressure.label.toLowerCase()} for a new condition to emerge.`,
     reasons: [
       ...pressure.reasons,
@@ -132,8 +65,8 @@ function pressureConditionCandidate(pressure, tick) {
     ],
     condition: {
       archetype,
-      label: labelByKind[pressure.kind],
-      description: `${labelByKind[pressure.kind]} emerged from accumulated campaign pressure.`,
+      label: labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)],
+      description: `${labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)]} emerged from accumulated campaign pressure.`,
       severity: pressure.score,
       status: pressure.score >= 0.7 ? 'worsening' : 'stable',
       duration: { elapsedTicks: 0, expiresAtTicks: pressure.score >= 0.75 ? 10 : 6 },
@@ -144,7 +77,7 @@ function pressureConditionCandidate(pressure, tick) {
       // ['public_legitimacy','trade_connectivity'] here used to override that for EVERY
       // pressure kind, so an emergent famine never lowered food_security and the loop's
       // organic feedback misrouted — the single most damaging wiring bug in the audit.
-      causes: pressure.reasons.map(reason => ({ source: 'world_pulse', effect: pressure.kind, reason })),
+      causes: pressure.reasons.map((/** @type {any} */ reason) => ({ source: 'world_pulse', effect: pressure.kind, reason })),
     },
     metadata: {
       pressureKind: pressure.kind,
@@ -154,8 +87,7 @@ function pressureConditionCandidate(pressure, tick) {
   };
 }
 
-/** @param {Candidate} candidate */
-function candidateIdentity(candidate) {
+function candidateIdentity(/** @type {any} */ candidate) {
   return [
     candidate.type,
     candidate.candidateType,
@@ -166,24 +98,18 @@ function candidateIdentity(candidate) {
 // Stable identity for ordering and rng forks. Candidate ids embed settlement /
 // relationship / faction ids and the tick — never the candidate's POSITION in
 // the saves array — so sorting and rolling by this key is order-independent.
-/** @param {Candidate} candidate */
-function stableCandidateKey(candidate) {
+function stableCandidateKey(/** @type {any} */ candidate) {
   return String(candidate.id || candidateIdentity(candidate));
 }
 
-/**
- * @param {Candidate} a
- * @param {Candidate} b
- */
-function compareStableKeys(a, b) {
+function compareStableKeys(/** @type {any} */ a, /** @type {any} */ b) {
   const keyA = stableCandidateKey(a);
   const keyB = stableCandidateKey(b);
   return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
 }
 
-/** @param {Candidate} candidate */
-function exclusiveTags(candidate) {
-  return (candidate.conflictTags || []).filter(tag =>
+function exclusiveTags(/** @type {any} */ candidate) {
+  const tags = (candidate.conflictTags || []).filter((/** @type {any} */ tag) =>
     /^label:/.test(tag)
     || /:government_change$/.test(tag)
     || /:institution:/.test(tag)
@@ -192,14 +118,26 @@ function exclusiveTags(candidate) {
     || /^population_transfer:[^:]+$/.test(tag)
     || /^npc:.+$/.test(tag)
     || /^faction:.+$/.test(tag)
+    || /^strategy:[^:]+$/.test(tag)
   );
+  // Strategy de-conflict: the strategy chooser emits one move per settlement under a
+  // `strategy:<S>` exclusive tag. A REACTIVE war candidate (hostileRules raid /
+  // occupation pressure) where S is the state-decided aggressor resolves to the
+  // SAME exclusive tag here — derived from its `metadata.aggressorSaveId` — so
+  // resolveCandidateConflicts admits exactly ONE for S and the strategy move (the
+  // higher-severity, structurally-prioritized candidate) wins. This makes the
+  // hard-override return-home suppress the reactive escalation WITHOUT touching the
+  // reactive rules. Only escalation-shaped war candidates carry an aggressor; a
+  // de-escalation / wind-down candidate has none, so it is never crowded out.
+  const aggressorId = candidate.metadata?.aggressorSaveId;
+  if (aggressorId != null && candidate.ruleFamily !== 'strategy') {
+    const tag = `strategy:${String(aggressorId)}`;
+    if (!tags.includes(tag)) tags.push(tag);
+  }
+  return tags;
 }
 
-/**
- * @param {Candidate[]} [candidates]
- * @param {CandidateBudgets} [budgets]
- */
-export function resolveCandidateConflicts(candidates = [], budgets = {}) {
+export function resolveCandidateConflicts(/** @type {any[]} */ candidates = [], /** @type {any} */ budgets = {}) {
   const maxCandidates = budgets.maxCandidates ?? 90;
   const maxPerSettlement = budgets.maxPerSettlement ?? 14;
   const maxRelationshipLabelProposals = budgets.maxRelationshipLabelProposals ?? 4;
@@ -240,7 +178,7 @@ export function resolveCandidateConflicts(candidates = [], budgets = {}) {
     if (candidate.proposalPayload?.kind === 'npc_action' && npcProposalCount >= maxNpcProposals) continue;
 
     const tags = exclusiveTags(candidate);
-    const blocker = tags.map(tag => usedTags.get(tag)).find(Boolean);
+    const blocker = tags.map((/** @type {any} */ tag) => usedTags.get(tag)).find(Boolean);
     if (blocker) continue;
 
     selected.push({
@@ -260,12 +198,8 @@ export function resolveCandidateConflicts(candidates = [], budgets = {}) {
   return selected.sort((a, b) => (b.severity - a.severity) || compareStableKeys(a, b));
 }
 
-/**
- * @param {WorldPulseSnapshot} snapshot
- * @param {WorldPulseContext} [context]
- */
-export function evaluateWorldPulseRules(snapshot, context = {}) {
-  const tick = /** @type {number} */ (Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0);
+export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {any} */ context = {}) {
+  const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const pressures = context.pressures || [];
   const pressureIndex = context.pressureIndex;
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
@@ -274,7 +208,7 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   if (rules.emergentEventsEnabled) {
     candidates.push(
       ...pressures
-        .map(pressure => pressureConditionCandidate(pressure, tick))
+        .map((/** @type {any} */ pressure) => pressureConditionCandidate(pressure, tick))
         .filter(Boolean),
     );
   }
@@ -282,15 +216,38 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
     candidates.push(...evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules }));
   }
   if (rules.relationshipDynamicsEnabled) {
-    candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, /** @type {{ tick?: number }} */ ({ ...context, tick, simulationRules: rules })));
+    candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
+  // The settlement strategy chooser. GATED behind
+  // settlementStrategyEnabled (default false ⇒ no candidate emitted, no rng draw ⇒
+  // byte-identical). Runs ONCE per settlement (not per edge), softmax-samples one
+  // move via the threaded rng (forked on `strategy:<S>:<tick>`), and emits a
+  // probability-1 candidate that flows through the SAME conflict resolution + apply.
+  // Its `strategy:<S>` exclusive tag de-conflicts with the reactive escalation for S.
+  candidates.push(...evaluateSettlementStrategyRules(snapshot, pressureIndex, {
+    ...context,
+    tick,
+    simulationRules: rules,
+    rng: /** @type {any} */ (context).rng,
+  }));
+  // NEIGHBOUR REACTIONS to a visibly-mobilizing rival/target/trade-
+  // dependent. GATED behind warLayerEnabled (default false ⇒ [] ⇒ byte-identical).
+  // rng-FREE here (the candidate's own downstream roll is the only stochastic step);
+  // reads the persisted worldState.warPosture written by the war block this tick.
+  // Each reactor shares a `strategy:<reactor>` exclusive tag so a reaction and a
+  // strategy move never double-fire for the same settlement.
+  candidates.push(...evaluateMobilizationReactions(snapshot, pressureIndex, {
+    ...context,
+    tick,
+    simulationRules: rules,
+  }));
   if (rules.npcAgencyEnabled) {
-    candidates.push(...evaluateNpcRules(/** @type {any} */ (snapshot), pressureIndex, /** @type {{ tick?: any }} */ ({ ...context, tick, simulationRules: rules })));
+    candidates.push(...evaluateNpcRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
   if (rules.factionCompetitionEnabled) {
-    candidates.push(...evaluateFactionRules(/** @type {any} */ (snapshot), pressureIndex, /** @type {{ tick?: number }} */ ({ ...context, tick, simulationRules: rules })));
+    candidates.push(...evaluateFactionRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));
   }
-  if (!['off', 'local'].includes(/** @type {string} */ (rules.propagationMode)) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
+  if (!['off', 'local'].includes(rules.propagationMode) && (rules.migrationFlowsEnabled || rules.tradeFlowsEnabled)) {
     candidates.push(...deriveFlowCandidates(snapshot, { tick, simulationRules: rules }).filter(candidate => {
       if (candidate.metadata?.flowKind === 'population') return rules.migrationFlowsEnabled;
       if (candidate.metadata?.flowKind === 'trade') return rules.tradeFlowsEnabled;
@@ -301,11 +258,7 @@ export function evaluateWorldPulseRules(snapshot, context = {}) {
   return resolveCandidateConflicts(candidates, context.budgets || {});
 }
 
-/**
- * @param {{ pressures?: CePressure[], relationshipCandidates?: Candidate[], npcCandidates?: Candidate[], factionCandidates?: Candidate[], tick?: number }} [input]
- */
-export function generateWorldPulseCandidates({ pressures = [], relationshipCandidates = [], npcCandidates = [], factionCandidates = [], tick = 0 } = {}) {
-  /** @type {Candidate[]} */
+export function generateWorldPulseCandidates(/** @type {any} */ { pressures = [], relationshipCandidates = [], npcCandidates = [], factionCandidates = [], tick = 0 } = {}) {
   const candidates = [];
   for (const pressure of pressures) {
     const condition = pressureConditionCandidate(pressure, tick);
@@ -323,25 +276,16 @@ export function generateWorldPulseCandidates({ pressures = [], relationshipCandi
 // iteration order — reordering the saves array can no longer reshuffle which
 // candidates pass. Test stubs without fork() fall back to the shared stream
 // (the constant-roll stubs in the suites are position-independent anyway).
-/**
- * @param {CandidateRng} rng
- * @param {Candidate} candidate
- */
-function candidateRoll(rng, candidate) {
+function candidateRoll(/** @type {any} */ rng, /** @type {any} */ candidate) {
   if (typeof rng.fork !== 'function') return rng.random();
   return rng.fork(`roll:${stableCandidateKey(candidate)}`).random();
 }
 
-/**
- * @param {Candidate[]} candidates
- * @param {CandidateRng} rng
- * @param {{ maxAuto?: number, maxProposals?: number, volatility?: number }} [options]
- */
-export function rollCandidates(candidates = [], rng, options = {}) {
+export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {any} */ rng, /** @type {any} */ options = {}) {
   const maxAuto = options.maxAuto ?? 6;
   const maxProposals = options.maxProposals ?? 5;
   // World volatility scales pass probability (default 1.0 = unchanged).
-  const volatility = /** @type {number} */ (Number.isFinite(options.volatility) ? options.volatility : 1);
+  const volatility = Number.isFinite(options.volatility) ? options.volatility : 1;
   const selected = [];
   const rollExplanations = [];
   let autoCount = 0;

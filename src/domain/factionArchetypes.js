@@ -79,7 +79,7 @@ function normCategory(value) {
  * infer from the name/label/type/description text. Returns FACTION_ARCHETYPES.OTHER
  * when nothing matches.
  *
- * @param {Object|string} faction
+ * @param {Object|string|null|undefined} faction
  * @returns {string} one of FACTION_ARCHETYPES.*
  */
 export function factionArchetype(faction) {

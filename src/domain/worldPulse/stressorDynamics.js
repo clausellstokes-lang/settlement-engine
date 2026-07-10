@@ -32,9 +32,9 @@ import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
+import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
-/** @param {any} value */
-function clamp01(value) {
+function clamp01(/** @type {any} */ value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
@@ -43,7 +43,6 @@ function clamp01(value) {
 // Same name-regex idiom the capacity model uses; counts are normalized at
 // 2 matching institutions = full credit so redundancy (not just presence)
 // is what earns the bonus.
-/** @type {Record<string, RegExp>} */
 const INSTITUTION_CLASSES = Object.freeze({
   food: /(granary|mill|farm|orchard|fishery|silo)/i,
   admin: /(court|hall|council|government|chancery|registry|moot|forum)/i,
@@ -54,44 +53,27 @@ const INSTITUTION_CLASSES = Object.freeze({
   finance: /(bank|counting|mint|exchange|guildhall)/i,
 });
 
-/**
- * @param {any} settlement
- * @param {any} className
- */
-export function institutionClassValue(settlement, className) {
-  const re = INSTITUTION_CLASSES[className];
+export function institutionClassValue(/** @type {any} */ settlement, /** @type {any} */ className) {
+  const re = INSTITUTION_CLASSES[/** @type {keyof typeof INSTITUTION_CLASSES} */ (className)];
   if (!re) return 0;
   const count = (settlement?.institutions || [])
     .filter((/** @type {any} */ inst) => re.test(String(inst?.name || ''))).length;
   return Math.min(1, count / 2);
 }
 
-/**
- * @param {any} snapshot
- * @param {any} settlementId
- */
-function edgesTouching(snapshot, settlementId) {
+function edgesTouching(/** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const id = String(settlementId);
   const edges = snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
   return edges.filter((/** @type {any} */ e) => String(e?.from) === id || String(e?.to) === id);
 }
 
-/**
- * @param {any} edge
- * @returns {any}
- */
-export function relationshipTypeOf(edge) {
-  // H12 shim: legacy saves carry the plural 'trade_partners' the old
+export function relationshipTypeOf(/** @type {any} */ edge) {
+  // Compatibility shim: legacy saves carry the plural 'trade_partners' the old
   // trade-route event wrote; read it as the canonical singular.
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
-/**
- * @param {any} snapshot
- * @param {any} settlementId
- * @param {any} channelType
- */
-function incomingChannels(snapshot, settlementId, channelType) {
+function incomingChannels(/** @type {any} */ snapshot, /** @type {any} */ settlementId, /** @type {any} */ channelType) {
   const id = String(settlementId);
   const channels = snapshot?.regionalGraph?.channels || snapshot?.channels || [];
   return channels.filter((/** @type {any} */ c) =>
@@ -104,13 +86,7 @@ function incomingChannels(snapshot, settlementId, channelType) {
 // A source is { kind, key?, weight, floor?, invert? } evaluated to 0..1 for
 // one settlement (a snapshot.byId entry: { settlement, causal, ... }).
 
-/**
- * @param {any} source
- * @param {any} entry
- * @param {any} snapshot
- * @param {any} settlementId
- */
-function sourceValue(source, entry, snapshot, settlementId) {
+function sourceValue(/** @type {any} */ source, /** @type {any} */ entry, /** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const settlement = entry?.settlement;
   switch (source.kind) {
     case 'causal': {
@@ -178,7 +154,6 @@ const DEFAULT_EFFECTS = Object.freeze({
   requireAllFloors: false,
 });
 
-/** @type {Record<string, any>} */
 export const STRESSOR_COUNTERFORCES = Object.freeze({
   siege: {
     // The conjunctive trio: defense readiness, stored food, and a populace
@@ -394,7 +369,6 @@ const FLOOR_MISS_CAP = 0.5;
 
 // Human names for counterforce sources — the resolution receipt prints these
 // ("Recovery led by stored food (0.83), trade connectivity (0.71)").
-/** @type {Record<string, string>} */
 const SOURCE_LABELS = Object.freeze({
   'food:resilience': 'food resilience',
   'food:storage': 'stored food',
@@ -406,9 +380,8 @@ const SOURCE_LABELS = Object.freeze({
   'ally:arcane_relief': 'external arcane relief',
 });
 
-/** @param {any} source */
-function sourceLabel(source) {
-  const direct = SOURCE_LABELS[`${source.kind}:${source.key}`];
+function sourceLabel(/** @type {any} */ source) {
+  const direct = SOURCE_LABELS[/** @type {keyof typeof SOURCE_LABELS} */ (`${source.kind}:${source.key}`)];
   if (direct) return direct;
   if (source.kind === 'institution') return `${source.key} institutions`;
   return String(source.key || source.kind).replace(/_/g, ' ');
@@ -426,7 +399,7 @@ function sourceLabel(source) {
  *          null when the type has no counterforce profile (unknown types).
  */
 export function counterforceAssessment(stressor, snapshot) {
-  const profile = STRESSOR_COUNTERFORCES[stressor?.type];
+  const profile = STRESSOR_COUNTERFORCES[/** @type {keyof typeof STRESSOR_COUNTERFORCES} */ (stressor?.type)];
   if (!profile) return null;
   const effects = { ...DEFAULT_EFFECTS, ...profile };
   const entries = (stressor.affectedSettlementIds || [])
@@ -487,11 +460,10 @@ export function counterforceAssessment(stressor, snapshot) {
 // for hard causal dependencies: a blockade famine cannot lift while the
 // siege stands, no matter the roll.
 
-/** @type {Record<string, any>} */
 export const STRESSOR_SYNERGIES = Object.freeze({
   famine: {
     disease_outbreak: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the sick cannot work the fields' },
-    siege: { blocksResolution: true, note: 'the blockade stands — no relief can arrive' },
+    siege: { blocksResolution: true, note: 'the blockade stands. No relief can arrive' },
   },
   siege: {
     wartime: { decayMult: 0.8, resolutionDelta: -0.04, note: 'the wider war keeps the besiegers supplied' },
@@ -502,7 +474,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   disease_outbreak: {
     famine: { decayMult: 0.6, resolutionDelta: -0.05, note: 'the hungry sicken faster' },
     mass_migration: { decayMult: 0.75, note: 'crowded camps spread contagion' },
-    magic_deadzone: { decayMult: 0.8, note: "the healers' magic is gone — only poultices remain" },
+    magic_deadzone: { decayMult: 0.8, note: "the healers' magic is gone. Only poultices remain" },
   },
   mass_migration: {
     famine: { decayMult: 0.8, note: 'hunger keeps people on the roads' },
@@ -525,7 +497,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
     insurgency: { decayMult: 1.25, resolutionDelta: 0.04, note: 'the resistance bleeds the garrison white' },
   },
   religious_conversion_fracture: {
-    occupation: { decayMult: 0.75, resolutionDelta: -0.04, note: "the occupier sponsors the new faith — the schism has a patron" },
+    occupation: { decayMult: 0.75, resolutionDelta: -0.04, note: "the occupier sponsors the new faith. The schism has a patron" },
   },
   infiltration: {
     criminal_corridor: { decayMult: 0.75, note: 'the corridor shelters the network' },
@@ -536,7 +508,7 @@ export const STRESSOR_SYNERGIES = Object.freeze({
   coup_detat: {
     succession_void: { decayMult: 0.7, resolutionDelta: -0.05, note: 'an empty line of succession invites the knives' },
     political_fracture: { decayMult: 0.75, resolutionDelta: -0.04, note: 'a paralyzed council cannot rally a defense' },
-    rebellion: { decayMult: 0.8, note: 'the streets are already burning — the palace is distracted' },
+    rebellion: { decayMult: 0.8, note: 'the streets are already burning. The palace is distracted' },
   },
   political_fracture: {
     coup_detat: { decayMult: 0.8, note: 'the coup deepens the constitutional void' },
@@ -548,18 +520,13 @@ export const STRESSOR_SYNERGIES = Object.freeze({
 
 const ACTIVE_SYNERGY_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
 
-/** @param {any} other */
-function isActiveCompanion(other) {
+function isActiveCompanion(/** @type {any} */ other) {
   const stage = other?.lifecycleStage
     || (other?.status && other.status !== 'active' ? other.status : 'active');
   return ACTIVE_SYNERGY_STAGES.has(stage);
 }
 
-/**
- * @param {any} a
- * @param {any} b
- */
-function shareSettlement(a, b) {
+function shareSettlement(/** @type {any} */ a, /** @type {any} */ b) {
   const mine = new Set((a?.affectedSettlementIds || []).map(String));
   return (b?.affectedSettlementIds || []).some((/** @type {any} */ id) => mine.has(String(id)));
 }
@@ -575,7 +542,7 @@ function shareSettlement(a, b) {
  *            blocksResolution: boolean, companions: string[] } | null}
  */
 export function synergyAssessment(stressor, allStressors = []) {
-  const table = STRESSOR_SYNERGIES[stressor?.type];
+  const table = STRESSOR_SYNERGIES[/** @type {keyof typeof STRESSOR_SYNERGIES} */ (stressor?.type)];
   if (!table) return null;
   let decayMult = 1;
   let resolutionDelta = 0;
@@ -584,7 +551,7 @@ export function synergyAssessment(stressor, allStressors = []) {
 
   for (const other of allStressors) {
     if (!other || other === stressor || other.id === stressor.id) continue;
-    const entry = table[other.type];
+    const entry = /** @type {any} */ (table)[other.type];
     if (!entry) continue;
     if (!shareSettlement(stressor, other)) continue;
     const isEcho = other.status === 'residual' || other.lifecycleStage === 'residual';
@@ -627,15 +594,10 @@ export function synergyAssessment(stressor, allStressors = []) {
 // `attackerLabel` (setStressorAttacker in stressors.js) when and if they
 // decide. Nothing downstream assumes an attacker exists.
 
-/** @type {Record<string, number>} */
 const HOSTILE_RANK = Object.freeze({ hostile: 3, cold_war: 2, rival: 1 });
 const MEMORY_LOOKBACK_TICKS = 12;
 
-/**
- * @param {any} snapshot
- * @param {any} settlementId
- */
-export function hostileNeighborsOf(snapshot, settlementId) {
+export function hostileNeighborsOf(/** @type {any} */ snapshot, /** @type {any} */ settlementId) {
   const id = String(settlementId);
   const out = [];
   for (const edge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
@@ -643,7 +605,7 @@ export function hostileNeighborsOf(snapshot, settlementId) {
     const to = String(edge?.to ?? '');
     if (from !== id && to !== id) continue;
     const type = relationshipTypeOf(edge);
-    const rank = HOSTILE_RANK[type];
+    const rank = HOSTILE_RANK[/** @type {keyof typeof HOSTILE_RANK} */ (type)];
     if (!rank) continue;
     out.push({ otherId: from === id ? to : from, type, rank });
   }
@@ -658,12 +620,7 @@ export function hostileNeighborsOf(snapshot, settlementId) {
  * histories for a recent hostile -> something-else label transition touching
  * this settlement. Returns the most recent within the lookback, or null.
  */
-/**
- * @param {any} snapshot
- * @param {any} settlementId
- * @param {any} currentTick
- */
-export function recentHostileMemory(snapshot, settlementId, currentTick) {
+export function recentHostileMemory(/** @type {any} */ snapshot, /** @type {any} */ settlementId, /** @type {any} */ currentTick) {
   const id = String(settlementId);
   const states = snapshot?.worldState?.relationshipStates || {};
   let best = null;
@@ -684,29 +641,33 @@ export function recentHostileMemory(snapshot, settlementId, currentTick) {
   return best;
 }
 
-const WAR_STRESSOR_TYPES = Object.freeze(['siege', 'wartime', 'occupation', 'betrayal']);
+// WAR_STRESSOR_TYPES now lives in a dependency-free leaf module so event
+// mutation can import it without pulling this heavy module's regional-graph
+// chain into its load graph (which created an init-order cycle). Re-exported
+// here (imported above for local use) so this module's existing consumers are
+// unaffected.
+export { WAR_STRESSOR_TYPES };
 
 // Table-facing hooks per spawn variant — the same catalog type is a
 // different adventure depending on who is behind it. Surfaced on the
 // stressor card and in the AI chronicle grounding.
-/** @type {Record<string, string[]>} */
 export const VARIANT_HOOKS = Object.freeze({
   foreign_sponsored: [
     'A courier carries coin that traces back across the border.',
-    'Exposing the sponsor would be a casus belli — if anyone dares name them aloud.',
+    'Exposing the sponsor would be a casus belli, if anyone dares name them aloud.',
     'Someone local is living slightly too well for their station.',
   ],
   abandoned_agent: [
     'The handler has gone silent; the last payment never came.',
     'A desperate asset with no patron would trade everything for protection.',
-    'Blackmail material is being sold off piecemeal — by someone with nothing left to lose.',
+    'Blackmail material is being sold off piecemeal, by someone with nothing left to lose.',
   ],
   internal_conspiracy: [
     'Loyalty tests are spreading through the council like a rash.',
     'The conspirators meet somewhere everyone trusts too much to search.',
   ],
   declared_war: [
-    'Their banners are open — but their supply lines are not invulnerable.',
+    'Their banners are open, but their supply lines are not invulnerable.',
     'A truce party waits for any honest broker.',
   ],
   unattributed: [
@@ -718,11 +679,11 @@ export const VARIANT_HOOKS = Object.freeze({
     'Collaborators and patriots eat at the same tables.',
   ],
   palace_coup: [
-    'Invitations to a private dinner are circulating — the guest list is the conspiracy.',
+    'Invitations to a private dinner are circulating. The guest list is the conspiracy.',
     'The seals on three official letters do not match the hands that signed them.',
   ],
   barracks_coup: [
-    'The garrison drilled at midnight without orders — or with orders no one admits giving.',
+    'The garrison drilled at midnight without orders, or with orders no one admits giving.',
     'Officers loyal to the seat are being reassigned to the walls, one by one.',
   ],
   merchant_cabal: [
@@ -735,18 +696,18 @@ export const VARIANT_HOOKS = Object.freeze({
   ],
   arcane_ascendancy: [
     'Wards around the council hall failed twice this tenday. The casters shrug.',
-    'Someone is scrying the seat of power — and wants it known.',
+    'Someone is scrying the seat of power, and wants it known.',
   ],
   council_schism: [
     'A rump session voted itself emergency powers while the chamber stood half empty.',
     'Two officials now claim the same seal, the same office, and the same tax.',
   ],
   popular_revolt: [
-    'The market square empties at the same hour every evening — somewhere, people are meeting.',
+    'The market square empties at the same hour every evening. Somewhere, people are meeting.',
     'A list of grievances was nailed to the courthouse door. Nobody has dared remove it.',
   ],
   servile_uprising: [
-    'Work songs in the fields have changed — the overseers do not understand the new words.',
+    'Work songs in the fields have changed. The overseers do not understand the new words.',
     'Manumission papers, real and forged, are changing hands at night.',
   ],
   tax_revolt: [
@@ -755,10 +716,10 @@ export const VARIANT_HOOKS = Object.freeze({
   ],
   arcane_burnout: [
     'Where the surge burned hottest, candles now gutter and wards lie cold.',
-    'The mages who fled the instability will not return — they say the ground itself is spent.',
+    'The mages who fled the instability will not return. They say the ground itself is spent.',
   ],
   leyline_silence: [
-    'No omen, no surge, no warning — the magic simply stopped answering.',
+    'No omen, no surge, no warning. The magic simply stopped answering.',
     'Hedge wizards are leaving quietly; the ones who stay have started learning herbcraft.',
   ],
 });
@@ -768,25 +729,13 @@ export const VARIANT_HOOKS = Object.freeze({
  * Returns an originContext to stamp on the newborn stressor, or null when
  * the type has no context-sensitive variants.
  */
-/**
- * @param {any} type
- * @param {any} settlementId
- * @param {any} snapshot
- * @param {number} [tick]
- */
-export function interpretStressorOrigin(type, settlementId, snapshot, tick = 0) {
+export function interpretStressorOrigin(/** @type {any} */ type, /** @type {any} */ settlementId, /** @type {any} */ snapshot, tick = 0) {
   const ctx = interpretOriginContext(type, settlementId, snapshot, tick);
   if (!ctx) return null;
-  return { ...ctx, hooks: VARIANT_HOOKS[ctx.variant] || [] };
+  return { ...ctx, hooks: VARIANT_HOOKS[/** @type {keyof typeof VARIANT_HOOKS} */ (ctx.variant)] || [] };
 }
 
-/**
- * @param {any} type
- * @param {any} settlementId
- * @param {any} snapshot
- * @param {number} [tick]
- */
-function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
+function interpretOriginContext(/** @type {any} */ type, /** @type {any} */ settlementId, /** @type {any} */ snapshot, tick = 0) {
   if (type === 'betrayal') {
     const hostiles = hostileNeighborsOf(snapshot, settlementId);
     if (hostiles.length) {
@@ -808,7 +757,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
         attackerSettlementId: null,
         attackerLabel: null,
         interpretedAtTick: tick,
-        reason: `The hostility that planted this agent ended ${memory.ticksAgo} tick(s) ago — the handler is gone, the asset remains.`,
+        reason: `The hostility that planted this agent ended ${memory.ticksAgo} tick(s) ago. The handler is gone, the asset remains.`,
       };
     }
     return {
@@ -817,7 +766,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       attackerSettlementId: null,
       attackerLabel: null,
       interpretedAtTick: tick,
-      reason: 'No hostile neighbor, no recent feud — the knife came from inside.',
+      reason: 'No hostile neighbor, no recent feud. The knife came from inside.',
     };
   }
 
@@ -841,7 +790,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       attackerLabel: null,
       sponsorSettlementId: null,
       interpretedAtTick: tick,
-      reason: 'No hostile neighbor claims this — the attacker is unnamed until the DM says otherwise.',
+      reason: 'No hostile neighbor claims this. The attacker is unnamed until the DM says otherwise.',
     };
   }
 
@@ -895,7 +844,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     return {
       ...base,
       variant: 'popular_revolt',
-      reason: 'The streets rose on their own — no faction owns this yet.',
+      reason: 'The streets rose on their own. No faction owns this yet.',
     };
   }
 
@@ -914,7 +863,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       interpretedAtTick: tick,
       reason: burnout
         ? 'The wild surge burned out and left dead ground behind it.'
-        : 'The leylines have simply gone quiet — no one yet knows why.',
+        : 'The leylines have simply gone quiet. No one yet knows why.',
     };
   }
 
@@ -922,7 +871,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
     const entry = snapshot?.byId?.get?.(String(settlementId));
     const contest = coupContenders(entry?.settlement);
     const leading = contest.challengers[0] || null;
-    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[leading.archetype]) || 'palace_coup';
+    const variant = (leading && COUP_VARIANT_BY_ARCHETYPE[/** @type {keyof typeof COUP_VARIANT_BY_ARCHETYPE} */ (leading.archetype)]) || 'palace_coup';
     // A hostile neighbor bankrolling the plot is sponsorship, not a separate
     // variant — the conspiracy's CHARACTER comes from who leads it.
     const hostiles = hostileNeighborsOf(snapshot, settlementId);
@@ -936,7 +885,7 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
       // Birth-time field snapshot — NARRATIVE only. The verdict recomputes
       // contenders from live state (the whole point of the brewing window is
       // that party/user action can change the field before the knives move).
-      contenders: contest.challengers.map((/** @type {any} */ c) => ({
+      contenders: contest.challengers.map(c => ({
         name: c.name, archetype: c.archetype, power: c.power, weight: c.weight,
       })),
       incumbent: { ...contest.incumbent },
@@ -946,8 +895,8 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
           : 'The conspiracy is still choosing its champion.',
         contest.incumbent.gated
           ? `${contest.incumbent.name || 'The seat'} can still present a case (weight ${contest.incumbent.amplifiedWeight} at ×${contest.incumbent.govMultiplier} legitimacy).`
-          : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers — its case will not even be heard.`,
-        ...(sponsor ? ['Foreign coin moves beneath it — a hostile neighbor is bankrolling the plot.'] : []),
+          : `${contest.incumbent.name || 'The seat'}'s amplified standing no longer ranks among the top three powers. Its case will not even be heard.`,
+        ...(sponsor ? ['Foreign coin moves beneath it. A hostile neighbor is bankrolling the plot.'] : []),
       ].join(' '),
     };
   }
@@ -956,7 +905,6 @@ function interpretOriginContext(type, settlementId, snapshot, tick = 0) {
 }
 
 // Which conspiracy a coup reads as, by the leading challenger's archetype.
-/** @type {Record<string, string>} */
 const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
   military: 'barracks_coup',
   merchant: 'merchant_cabal',
@@ -975,17 +923,11 @@ const COUP_VARIANT_BY_ARCHETYPE = Object.freeze({
  *
  * @returns {{ worldState: any, woundDown: any[] }}
  */
-/**
- * @param {any} worldState
- * @param {any} edge
- * @param {{ tick?: number, now?: any, toType?: any }} [options]
- */
-export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = null, toType = null } = {}) {
+export function windDownSponsoredStressors(/** @type {any} */ worldState, /** @type {any} */ edge, /** @type {any} */ { tick = 0, now = null, toType = null } = {}) {
   const a = String(edge?.from ?? '');
   const b = String(edge?.to ?? '');
   if (!a || !b) return { worldState, woundDown: [] };
-  /** @type {any[]} */
-  const woundDown = [];
+  const woundDown = /** @type {any[]} */ ([]);
   const stressors = (worldState?.stressors || []).map((/** @type {any} */ stressor) => {
     if (!WAR_STRESSOR_TYPES.includes(stressor?.type)) return stressor;
     if (['resolved', 'dormant', 'residual'].includes(stressor?.status)) return stressor;
@@ -1017,13 +959,7 @@ export function windDownSponsoredStressors(worldState, edge, { tick = 0, now = n
  * back onto the relationship edge, feeding relationshipMemory (which finally
  * gets a second mechanical producer).
  */
-/**
- * @param {any} worldState
- * @param {any} regionalGraph
- * @param {any[]} resolvedStressors
- * @param {number} [tick]
- */
-export function recordWarResolutionIncidents(worldState, regionalGraph, resolvedStressors = [], tick = 0) {
+export function recordWarResolutionIncidents(/** @type {any} */ worldState, /** @type {any} */ regionalGraph, /** @type {any[]} */ resolvedStressors = [], tick = 0) {
   let states = worldState?.relationshipStates || {};
   let changed = false;
   for (const stressor of resolvedStressors) {

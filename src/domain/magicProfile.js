@@ -22,7 +22,7 @@
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
-import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN } from './magicLedger.js';
+import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
@@ -62,9 +62,10 @@ const ROLE_BANDS = Object.freeze([
 /** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
 /** @typedef {{ source: string, effect: string, reason: string }} MagicContributor */
 /** @typedef {{ name?: string }} MagicInstitution */
+/** @typedef {{ _deityRef?: string, name?: string, alignmentAxis?: string, temperamentAxis?: string, rankAxis?: string }} DeitySnapshot */
 /**
  * @typedef {Object} MagicSettlement
- * @property {{ magicLevel?: string, magicExists?: boolean }} [config]
+ * @property {{ magicLevel?: string, magicExists?: boolean, primaryDeitySnapshot?: DeitySnapshot | null }} [config]
  * @property {MagicInstitution[]} [institutions]
  */
 /**
@@ -146,6 +147,21 @@ function deriveLegality(settlement, profiles, contributors) {
       source: arcane.id,
       effect: 'normalizes',
       reason: `${arcane.name} (power ${arcane.power}) normalizes arcane practice.`,
+    });
+  }
+
+  // A dominant major deity regulates magic (a theocracy polices arcane power).
+  // One band tighter for any major god; a WARLIKE/EVIL orthodoxy tightens a second
+  // step (it treats free magic as a rival authority). Gated on the embedded deity
+  // snapshot ⇒ a deity-free settlement is byte-identical.
+  const deity = dominantDeityOf(settlement);
+  if (deity) {
+    const steps = deityIsRegulatory(deity) ? DEITY_MAGIC_LEGALITY_STEPS.regulatory : DEITY_MAGIC_LEGALITY_STEPS.major;
+    legality = downBand(LEGALITY_BANDS, legality, steps);
+    contributors.push({
+      source: deity._deityRef || 'primaryDeity',
+      effect: 'theocratic_regulation',
+      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
     });
   }
   return legality;
@@ -230,7 +246,28 @@ function deriveRisk(settlement, causal, contributors) {
 function deriveReligiousAcceptance(settlement, profiles, contributors) {
   const religious = profiles.find(p => p.archetype === 'religious');
   const arcane = profiles.find(p => p.archetype === 'arcane');
+  const deity = dominantDeityOf(settlement);
+
+  // A dominant WARLIKE/EVIL major deity forces OPEN hostility toward magic
+  // regardless of the faction balance (the orthodoxy treats arcane power as a rival
+  // it must suppress). This OVERRIDES the faction-derived band. Gated on the deity
+  // snapshot ⇒ a deity-free settlement is byte-identical.
+  if (deity && deityIsRegulatory(deity)) {
+    contributors.push({
+      source: deity._deityRef || 'primaryDeity',
+      effect: 'hostile',
+      reason: `${deity.name || 'The patron deity'} (major, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority. Magic is openly opposed.`,
+    });
+    return 'hostile';
+  }
+
   if (!religious) {
+    // A benevolent major deity with no formal religious faction still makes the realm
+    // wary of magic (the orthodoxy exists in the snapshot even without a power bloc).
+    if (deity) {
+      contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) lends the realm a wary orthodoxy toward arcane practice.` });
+      return 'wary';
+    }
     contributors.push({ source: 'powerStructure', effect: 'no_religious', reason: 'No religious faction — acceptance defaults to indifferent.' });
     return 'indifferent';
   }
@@ -241,6 +278,11 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
     return 'hostile';
   }
   if (arcPower > relPower + 20) {
+    // A benevolent major deity tempers a syncretic balance into wary coexistence.
+    if (deity) {
+      contributors.push({ source: deity._deityRef || 'primaryDeity', effect: 'wary', reason: `${deity.name || 'The patron deity'} (major) keeps the realm wary even where arcane power runs strong.` });
+      return 'wary';
+    }
     contributors.push({ source: arcane?.id || 'powerStructure', effect: 'syncretic', reason: 'Arcane power dwarfs religious — magic woven into ritual.' });
     return 'syncretic';
   }
@@ -257,6 +299,14 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
  */
 function deriveRoles(settlement, profiles, capacity, contributors) {
   const magic = settlement.config?.magicLevel || 'low';
+  // The 'integral' role tier keyed on magic === 'pervasive', a band the GENERATOR
+  // never emits (getMagicLevel tops out at 'high'), so every procedurally-generated
+  // settlement's economic/military/infrastructure roles capped at 'common'. Route the
+  // top-band check through magicLedger's canonical band — which folds the generator's
+  // 'high' AND the legacy/manual 'pervasive' into the same top tier — the same fix
+  // capacityModel.deriveMagical already uses. 'high'-magic generated content can now
+  // reach 'integral'; legacy 'pervasive' configs are unchanged (both canon to 'high').
+  const topBand = magicLedger(settlement).magicLevel === 'high';
   const arcanePower = profiles.find(p => p.archetype === 'arcane')?.power || 0;
   const arcaneInstCount = institutionsByPattern(settlement, ARCANE_PATTERN).length;
   const healingInstCount = institutionsByPattern(settlement, HEALING_PATTERN).length;
@@ -282,10 +332,10 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
     return 'absent';
   }
 
-  const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, magic === 'pervasive');
-  const military     = role('military',     arcanePower >= 35, magic === 'pervasive' && arcanePower >= 50);
-  const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && (magic === 'high' || magic === 'pervasive'));
-  const infrastructure = role('infrastructure', arcaneInstCount >= 1 && (magic === 'high' || magic === 'pervasive'), magic === 'pervasive' && arcaneInstCount >= 1);
+  const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, topBand);
+  const military     = role('military',     arcanePower >= 35, topBand && arcanePower >= 50);
+  const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && topBand);
+  const infrastructure = role('infrastructure', arcaneInstCount >= 1, topBand && arcaneInstCount >= 1);
 
   return { economic, military, medical, infrastructure };
 }
@@ -384,16 +434,27 @@ export function summarizeMagic(settlement) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// W2a-prep — DORMANT deity ⇄ magic-legality substrate (ADDITIVE; zero callers in
-// this tree until W2a-main wires the deity-legality term into deriveLegality).
-// Copied verbatim from the reference tree's magicProfile.js. deriveMagicProfile
-// here does NOT yet consult these, so a deity-free save is byte-identical.
+// W2a-main — ACTIVE deity ⇄ magic-legality/acceptance coupling. deriveLegality and
+// deriveReligiousAcceptance now consult the embedded major-deity snapshot. Gated on
+// config.primaryDeitySnapshot ⇒ a deity-free save is byte-identical (proven by
+// z2MagicDeity's absent-deity suite). DEITY_MAGIC_LEGALITY_STEPS is the single source
+// the shared deityEffects coupling re-exports.
 // ─────────────────────────────────────────────────────────────────────────────
+
+/** The embedded major-deity snapshot, or null. ONLY a MAJOR god regulates a realm's
+ *  magic — a minor god or fringe cult lacks the institutional reach.
+ *  @param {MagicSettlement | null | undefined} settlement
+ *  @returns {DeitySnapshot | null} */
+function dominantDeityOf(settlement) {
+  const deity = settlement?.config?.primaryDeitySnapshot;
+  if (!deity || deity.rankAxis !== 'major') return null;
+  return deity;
+}
 
 /** True when the major deity is the kind that REGULATES magic hard — a warlike or
  *  evil orthodoxy polices arcane power as a rival authority. A good/neutral peacelike
  *  major god still tightens legality one notch (the theocracy term) but is not hostile.
- *  @param {any} deity
+ *  @param {DeitySnapshot} deity
  *  @returns {boolean} */
 export function deityIsRegulatory(deity) {
   return deity.temperamentAxis === 'warlike' || deity.alignmentAxis === 'evil';

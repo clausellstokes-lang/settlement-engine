@@ -18,37 +18,15 @@ const FIRST_NAMES = Object.freeze([
 // Dispositions that are NOT in CORRUPTIBLE_FLAWS — a successor won't instantly relapse.
 const HONEST_DOMINANT = Object.freeze(['diligent', 'earnest', 'principled', 'vigilant', 'dutiful', 'steadfast', 'plain-spoken']);
 const HONEST_FLAW = Object.freeze(['stubborn', 'proud', 'aloof', 'blunt', 'rigid', 'severe']);
-const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal — determined to stay above suspicion.';
-
-/**
- * @typedef {Object} SuccessorRng
- * @property {(arr: readonly string[]) => string} [pick]
- * @property {(min: number, max: number) => number} [randInt]
- * @property {(label: string) => SuccessorRng} [fork]
- */
-
-/**
- * @typedef {Object} OustedNpc
- * @property {string} [name]
- * @property {string} [role]
- * @property {string} [category]
- * @property {string} [factionAffiliation]
- * @property {string} [factionLink]
- * @property {string} [institutionId]
- * @property {*} [importance]
- * @property {{ modifier?: *, tell?: *, speech?: * }} [personality]
- * @property {{ short?: string, long?: string }} [goal]
- * @property {*} [power]
- * @property {*} [influence]
- */
+const SUCCESSOR_GOAL = 'Newly installed after a corruption scandal. Determined to stay above suspicion.';
 
 /**
  * Build a fresh successor for an ousted NPC, inheriting their seat.
- * @param {OustedNpc} [ousted]
- * @param {SuccessorRng} [rng]
+ * @param {import('../settlement.schema.js').SimNpc} ousted
+ * @param {any} [rng]
  */
 export function successorNpc(ousted = {}, rng) {
-  /** @param {readonly string[]} arr */
+  /** @param {readonly any[]} arr */
   const pick = (arr) => (rng && rng.pick ? rng.pick(arr) : arr[0]);
   const num = rng && rng.randInt ? rng.randInt(100000, 999999) : 100000;
   return {
@@ -79,18 +57,16 @@ export function successorNpc(ousted = {}, rng) {
 /**
  * Replace any NPC named in `oustedNames` with a fresh successor (same seat).
  * Pure; returns the same settlement reference when there's nothing to replace.
- */
-/**
- * @param {{ npcs?: OustedNpc[] } | null | undefined} settlement
- * @param {unknown[]} oustedNames
- * @param {SuccessorRng} [rng]
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} oustedNames
+ * @param {any} rng
  */
 export function replaceOustedNpcs(settlement, oustedNames, rng) {
-  const names = new Set((oustedNames || []).map((n) => String(n).toLowerCase()).filter(Boolean));
+  const names = new Set((oustedNames || []).map((/** @type {any} */ n) => String(n).toLowerCase()).filter(Boolean));
   if (!names.size || !Array.isArray(settlement?.npcs)) return settlement;
   let changed = false;
   let i = 0;
-  const npcs = settlement.npcs.map((npc) => {
+  const npcs = settlement.npcs.map((/** @type {any} */ npc) => {
     if (names.has(String(npc.name).toLowerCase())) {
       changed = true;
       const child = rng && rng.fork ? rng.fork(`succ:${i++}`) : rng;

@@ -310,6 +310,146 @@ const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
   },
+  // ── Geopolitical war layer — the AGGRESSOR's home conditions. Every
+  // pre-existing war archetype models the VICTIM; these model the cost a settlement
+  // pays to wage war. war_drain is the missing SOURCE of the economic-homeostasis
+  // loop (deriveEconomicCapacity subtracts severity×18 for any economic_capacity
+  // condition); it deliberately lists ONLY economic_capacity so it does not double-
+  // count with the trade/economy pressure archetypes in pressureModel. NOTE: the
+  // economic_capacity affectedSystems label is INERT in this tree (causalState does
+  // not yet derive that system variable — it lands with W2b); these templates are
+  // consumed only when the gated war layer STAMPS them, so a no-war settlement is
+  // byte-identical, and the catalog stays consistent with the war-layer archetype sets.
+  war_drain: {
+    label: 'War drain',
+    description: 'Sustaining a campaign abroad is bleeding the home economy.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 9,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
+  },
+  army_deployed: {
+    label: 'Army deployed',
+    description: 'The settlement\'s standing army is committed abroad, thinning the home garrison.',
+    affectedSystems: ['defense_readiness'],
+    defaultExpiresAtTicks: 9,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.5,
+  },
+  // The NON-REVERTING war-exhaustion SCAR (the homeostasis ratchet). war_drain is a
+  // reverting condition (re-upserted each tick from the live front count, drifting
+  // and expiring like any condition); the SCAR is the lasting mark a long war leaves.
+  war_exhaustion: {
+    label: 'War exhaustion',
+    description: 'Years of campaigning have left a lasting wound on the war economy and the public will to fight.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 18,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.4,
+  },
+  // ── WAR-ECONOMY MOBILIZATION. A settlement on a war footing shifts economic
+  // priorities toward the war effort BEFORE a shot is fired. Lighter than war_drain.
+  war_mobilization: {
+    label: 'War mobilization',
+    description: 'The settlement is shifting onto a war footing. Its economy is reorganizing for the coming campaign.',
+    affectedSystems: ['economic_capacity'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.35,
+  },
+  // ── REINFORCEMENT COST. Replenishing a deployed army DRAINS the origin: levies,
+  // coin, supply trains, and grain flow OUT to the front, and the home pays for it.
+  reinforcement_cost: {
+    label: 'Reinforcement burden',
+    description: 'The home keeps bleeding men, coin, and grain to the front to keep the army in the field.',
+    affectedSystems: ['economic_capacity', 'public_legitimacy', 'defense_readiness'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.4,
+  },
+  // The recovery counterpart of occupation (polarity clone of siege_lifted): an
+  // occupied settlement has been liberated and is rebuilding its authority.
+  occupation_lifted: {
+    label: 'Occupation lifted',
+    description: 'A foreign occupation has ended; the settlement is restoring its own authority.',
+    affectedSystems: ['defense_readiness', 'public_legitimacy', 'trade_connectivity', 'ruling_authority'],
+    defaultExpiresAtTicks: 6,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.3,
+  },
+  // Sending relief to a besieged ally strains capacity (alliance_burden shape).
+  relief_burden: {
+    label: 'Relief burden',
+    description: 'Marching relief to a besieged ally is straining local capacity.',
+    affectedSystems: ['defense_readiness', 'trade_connectivity', 'public_legitimacy'],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.45,
+  },
+  // ── Geopolitical war layer — trade war. A buyer realigning its primary supplier
+  // (the WINNER side's market gain is a mild local adjustment). Reversible, light.
+  trade_realignment: {
+    label: 'Trade realignment',
+    description: 'A new primary supplier is reshaping local trade flows.',
+    affectedSystems: ['trade_connectivity', 'public_legitimacy'],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.4,
+  },
+  // A vassal forced by its overlord into a dictated trade allocation. Routes the
+  // coercion through the vassal's trade/legitimacy capacity (the SAME systems
+  // vassal_extraction strains) so vassalStrain rises and vassal_rebellion stays
+  // reachable — a ruinous forced trade is not a silent one-way trap.
+  vassal_trade_coercion: {
+    label: 'Vassal trade coercion',
+    description: 'The overlord dictates the trade allocation, straining the local economy.',
+    affectedSystems: ['trade_connectivity', 'public_legitimacy', 'faction_power'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.5,
+  },
+  // ── STRATEGIC TRADE. trade_embargo is the DEPENDENT-side wound when a valuable,
+  // hard-to-replace trade tie is weaponized under military/religious tension. Stamped
+  // ONLY behind the gated war layer, so a no-war settlement never carries it.
+  trade_embargo: {
+    label: 'Trade embargo',
+    description: 'A critical supplier has cut off the flow. The dependent economy reels.',
+    affectedSystems: ['trade_connectivity', 'food_security', 'public_legitimacy'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.55,
+  },
+  // ── OCCUPATION layer. occupation_resistance is the OCCUPIED-side condition:
+  // sabotage, noncompliance, and an organizing resistance that harries the occupiers.
+  occupation_resistance: {
+    label: 'Occupation resistance',
+    description: 'Sabotage, noncompliance, and an organizing resistance harry the occupiers.',
+    affectedSystems: ['public_legitimacy', 'defense_readiness', 'economic_capacity', 'social_trust'],
+    defaultExpiresAtTicks: 7,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.45,
+  },
+  // occupation_burden is the OCCUPIER-side cost: garrisons, administrators, and
+  // suppression tie down strength across every occupation; OVEREXTENSION deepens it.
+  occupation_burden: {
+    label: 'Occupation burden',
+    description: 'Garrisoning and administering conquered settlements ties down the occupier\'s strength.',
+    affectedSystems: ['economic_capacity', 'defense_readiness', 'public_legitimacy'],
+    defaultExpiresAtTicks: 8,
+    defaultStatus: 'worsening',
+    defaultSeverity: 0.4,
+  },
+  // war_spoils is the OCCUPIER-side BENEFIT — the INVERSE of war_exhaustion. It does
+  // NOT list economic_capacity in affectedSystems — the deriver handles it by
+  // archetype so the generic drain scan never mistakes it for a cost.
+  war_spoils: {
+    label: 'War spoils',
+    description: 'Tribute, levies, and materiel from stabilized occupations sustain the war effort.',
+    affectedSystems: [],
+    defaultExpiresAtTicks: 5,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.3,
+  },
 });
 
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);

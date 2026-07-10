@@ -1,7 +1,8 @@
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
+import { deepClone } from '../clone.js';
 
-export const WORLD_STATE_SCHEMA_VERSION = 1;
+export const WORLD_STATE_SCHEMA_VERSION = 2;
 
 const MAX_HISTORY = 80;
 const MAX_PROPOSALS = 80;
@@ -10,44 +11,6 @@ const MAX_PROPOSALS = 80;
 // campaign that queues for hundreds of intentions without ever advancing time.
 const MAX_PENDING = 400;
 
-/**
- * @typedef {Object} WorldCalendar
- * @property {number} elapsedMonths
- * @property {number} month   1-12
- * @property {number} year    1-based campaign year
- * @property {string} season  'spring' | 'summer' | 'autumn' | 'winter'
- */
-
-/**
- * The campaign-level world-pulse state blob, persisted on the campaign record.
- * Collection entries stay loosely typed (Record) because they are produced by
- * many generators and normalized defensively on every read via ensureWorldState.
- *
- * @typedef {Object} WorldState
- * @property {number} schemaVersion
- * @property {(string|null)} canonizedAt
- * @property {number} tick
- * @property {WorldCalendar} calendar
- * @property {string} rngSeed
- * @property {string} volatility  'calm' | 'normal' | 'turbulent'
- * @property {ReturnType<typeof normalizeSimulationRules>} simulationRules
- * @property {Array<Record<string, unknown>>} stressors
- * @property {Record<string, unknown>} relationshipStates
- * @property {Record<string, unknown>} npcStates
- * @property {Record<string, unknown>} factionStates
- * @property {Array<Record<string, unknown>>} proposals
- * @property {Array<Record<string, unknown>>} pulseHistory
- * @property {Record<string, unknown>} settlementTickStates
- * @property {Array<Record<string, unknown>>} pendingEvents
- */
-
-/**
- * A persisted (possibly stale/partial) world state, plus the legacy top-level
- * `elapsedMonths` that predates the calendar object.
- * @typedef {Partial<WorldState> & { elapsedMonths?: number, calendar?: Partial<WorldCalendar> }} RawWorldState
- */
-
-/** @type {Readonly<Record<string, number>>} */
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
@@ -64,21 +27,14 @@ const INTERVAL_MONTHS = Object.freeze({
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 
 /**
- * @param {number | null | undefined} value
+ * @param {any} value
  * @param {number} [fallback]
- * @returns {number}
  */
 function finite(value, fallback = 0) {
-  // Number.isFinite is not a type-guard in the TS lib, so the true branch
-  // cannot narrow `value` to number without a runtime cast (comment-only pass).
-  // guaranteed number when Number.isFinite(value) is true
-  return Number.isFinite(value) ? /** @type {number} */ (value) : fallback;
+  return Number.isFinite(value) ? value : fallback;
 }
 
-/**
- * @param {unknown} value
- * @returns {string} lowercase snake_case id fragment, never empty
- */
+/** @param {any} value */
 export function stablePart(value) {
   return String(value || 'unknown')
     .toLowerCase()
@@ -87,26 +43,99 @@ export function stablePart(value) {
     .slice(0, 80) || 'unknown';
 }
 
-/**
- * @param {unknown} value
- * @returns {Array<Record<string, unknown>>} shallow clones of the entries ([] when not an array)
- */
+/** @param {any} value */
 function cloneArray(value) {
-  return Array.isArray(value) ? value.map(item => ({ ...item })) : [];
+  return Array.isArray(value) ? value.map((/** @type {any} */ item) => ({ ...item })) : [];
 }
 
-/**
- * @param {unknown} value
- * @returns {Record<string, unknown>} shallow clone ({} when not a plain object)
- */
+// Stressors are special: each item carries NESTED mutable structures
+// (affectedSettlementIds, severityBySettlement, causes). A shallow `{...item}`
+// (cloneArray) would alias those nested arrays/objects into the per-tick snapshot,
+// so any future in-place mutation of one (push/splice/index-assign, instead of the
+// normalizeStressor rebuild every current writer uses) would corrupt the persisted
+// pre-tick record and break determinism. Deep-clone each stressor through the
+// sanctioned seam so the snapshot can never alias live nested state. The cloned
+// values are deeply EQUAL to the source, so the dormancy / byte-identity invariants
+// are unaffected — this only removes the aliasing fragility the shallow clone relied
+// on an unenforced "writers always rebuild" convention to stay safe.
+/** @param {any} value */
+function cloneStressors(value) {
+  return Array.isArray(value) ? value.map((/** @type {any} */ item) => deepClone(item)) : [];
+}
+
+/** @param {any} value */
 function cloneObject(value) {
   return value && typeof value === 'object' && !Array.isArray(value) ? { ...value } : {};
 }
 
-/**
- * @param {{ id?: string, name?: string }} [campaign]
- * @returns {WorldState}
- */
+// cloneObject is SHALLOW. Nested simulation ledgers (dispositionStats, deployments,
+// and later pantheon) are read inside the per-tick snapshot and mutated across
+// ticks, so a shallow copy would let a snapshot alias live state and corrupt
+// determinism. These ledgers route through deepClone (the sole sanctioned clone
+// seam) instead. Non-objects normalize to an empty ledger.
+/** @param {any} value */
+function deepCloneLedger(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? deepClone(value) : {};
+}
+
+// CONDITIONAL ledger clone (the pantheon). UNLIKE the additive ledgers above, the
+// pantheon is CONDITIONALLY MATERIALIZED: it must be ABSENT from worldState while
+// religion is dormant so a legacy/deity-free campaign stays byte-identical under
+// the dormancy oracle (which treats an absent key as `{}`). So this returns
+// `undefined` (key omitted by the conditional spread below) when the value is
+// absent or empty, and a DEEP clone of a present, non-empty pantheon otherwise —
+// never the `{}` default deepCloneLedger materializes unconditionally.
+/** @param {any} value */
+function deepCloneConditionalLedger(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  if (Object.keys(value).length === 0) return undefined;
+  return deepClone(value);
+}
+
+// Forward-compatible worldState migration chain. Empty today (schemaVersion stays
+// 1; the new ledgers are ADDITIVE and need no migration — an absent key normalizes
+// to its empty default). Modelled on settlementMigrations: each entry bumps a
+// breaking shape. The first future BREAKING change registers its step here so the
+// upgrade path is explicit and ordered, never an ad-hoc inline coercion.
+/** @type {ReadonlyArray<{ to: number, migrate: (raw: any) => any }>} */
+const WORLD_STATE_MIGRATIONS = Object.freeze([
+  // v2 — the per-settlement pantheon renamed its leading deity from "chief" to
+  // "patron", unifying vocabulary with the DM "Assign patron deity" action. Rename
+  // the persisted religionStates keys in place. IDEMPOTENT: migrations run
+  // unconditionally, so a state already carrying patronRef (or no religionStates at
+  // all) passes through untouched.
+  { to: 2, migrate: (/** @type {any} */ raw) => {
+    const states = raw?.religionStates;
+    if (!states || typeof states !== 'object' || Array.isArray(states)) return raw;
+    let touched = false;
+    /** @type {Record<string, any>} */
+    const next = {};
+    for (const [cid, st] of Object.entries(states)) {
+      if (st && typeof st === 'object' && !Array.isArray(st)
+        && ('chiefRef' in st || 'chiefHeld' in st || 'chiefChallengeTicks' in st)) {
+        touched = true;
+        const { chiefRef, chiefHeld, chiefChallengeTicks, ...rest } = /** @type {any} */ (st);
+        next[cid] = {
+          ...rest,
+          ...(chiefRef !== undefined ? { patronRef: chiefRef } : {}),
+          ...(chiefHeld !== undefined ? { patronHeld: chiefHeld } : {}),
+          ...(chiefChallengeTicks !== undefined ? { patronChallengeTicks: chiefChallengeTicks } : {}),
+        };
+      } else {
+        next[cid] = st;
+      }
+    }
+    return touched ? { ...raw, religionStates: next, schemaVersion: 2 } : raw;
+  } },
+]);
+
+/** @param {any} raw */
+export function runWorldStateMigrations(raw = {}) {
+  const input = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {};
+  return WORLD_STATE_MIGRATIONS.reduce((state, step) => step.migrate(state), input);
+}
+
+/** @param {any} campaign */
 export function createDefaultWorldState(campaign = {}) {
   const seedPart = campaign.id || campaign.name || 'campaign';
   return {
@@ -132,21 +161,54 @@ export function createDefaultWorldState(campaign = {}) {
     // Campaign-clock: player events/edits authored on clock-bound member
     // settlements queue here and resolve simultaneously at the next pulse tick.
     pendingEvents: [],
+    // Additive simulation ledgers (the geopolitical layer). Empty on a fresh
+    // world; populated by later phases (dispositionStats: cross-settlement
+    // win/loss disposition memory; deployments: active army records;
+    // tradeWarState: per-prize primary-supplier crown + flip cooldown;
+    // warExhaustion: the NON-REVERTING per-home war-exhaustion scar that
+    // ratchets up with sustained deployment and decays only slowly, closing the
+    // homeostasis loop). A legacy keyless save normalizes equal to these empties —
+    // byte-neutral under the dormancy oracle. `pantheon` is intentionally NOT here
+    // (it is conditional).
+    dispositionStats: {},
+    deployments: {},
+    tradeWarState: {},
+    warExhaustion: {},
   };
 }
 
-/**
- * @param {RawWorldState | null | undefined} [raw]
- * @param {{ id?: string, name?: string }} [campaign]
- * @returns {WorldState}
- */
-export function ensureWorldState(raw = {}, campaign = {}) {
+export function ensureWorldState(rawInput = {}, campaign = {}) {
+  const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
-  /** @type {Partial<WorldCalendar>} */
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
+  // The SHALLOW `...cloneObject(raw)` spread would otherwise carry a
+  // present-but-EMPTY `pantheon:{}` through to the result (breaking dormancy). Strip
+  // it from the shallow spread; the conditional deep-clone below is the SOLE source
+  // of the key — materialized only when non-empty. `warPosture` is CONDITIONAL the
+  // same way: a no-war campaign carries NO warPosture key at all (byte-neutral under
+  // the dormancy oracle), so it is stripped here and re-added conditionally below.
+  const shallowRaw = cloneObject(raw);
+  if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
+  if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
+  if ('occupations' in shallowRaw) delete shallowRaw.occupations;
+  // religionStates — CONDITIONAL, same discipline as pantheon/occupations: the
+  // per-settlement pantheon ledger is ABSENT until religion is active (byte-identical
+  // dormant), stripped here and re-added conditionally below.
+  if ('religionStates' in shallowRaw) delete shallowRaw.religionStates;
+  // Advance-scaling Stage 3 — pausedAdvance is CONDITIONALLY MATERIALIZED, the same
+  // discipline as pantheon/warPosture/occupations: a campaign with NO advance in
+  // flight carries NO pausedAdvance key at all (so a dormant campaign serializes
+  // byte-identically to today under the dormancy oracle). Stripped from the shallow
+  // spread; re-added below ONLY when present and non-empty.
+  if ('pausedAdvance' in shallowRaw) delete shallowRaw.pausedAdvance;
+  const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
+  const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
+  const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
+  const clonedReligionStates = deepCloneConditionalLedger(raw?.religionStates);
+  const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
   return {
     ...base,
-    ...cloneObject(raw),
+    ...shallowRaw,
     schemaVersion: WORLD_STATE_SCHEMA_VERSION,
     canonizedAt: raw?.canonizedAt || null,
     tick: Math.max(0, Math.floor(finite(raw?.tick, 0))),
@@ -159,12 +221,9 @@ export function ensureWorldState(raw = {}, campaign = {}) {
       season: calendar.season || base.calendar.season,
     },
     rngSeed: raw?.rngSeed || base.rngSeed,
-    // Array.includes is not a type-guard, so TS cannot see that the true branch
-    // implies raw.volatility is a defined member of the whitelist (comment-only pass).
-    // includes(raw?.volatility) === true guarantees a valid string
-    volatility: ['calm', 'normal', 'turbulent'].includes(/** @type {string} */ (raw?.volatility)) ? /** @type {any} */ (raw).volatility : base.volatility,
+    volatility: ['calm', 'normal', 'turbulent'].includes(raw?.volatility) ? raw.volatility : base.volatility,
     simulationRules: normalizeSimulationRules(raw?.simulationRules),
-    stressors: cloneArray(raw?.stressors),
+    stressors: cloneStressors(raw?.stressors),
     relationshipStates: cloneObject(raw?.relationshipStates),
     npcStates: cloneObject(raw?.npcStates),
     factionStates: cloneObject(raw?.factionStates),
@@ -172,14 +231,54 @@ export function ensureWorldState(raw = {}, campaign = {}) {
     pulseHistory: cloneArray(raw?.pulseHistory).slice(-MAX_HISTORY),
     settlementTickStates: cloneObject(raw?.settlementTickStates),
     pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
+    // DEEP-cloned (not the shallow `...cloneObject(raw)` spread above) so a
+    // pre-tick snapshot never aliases live ledger state across ticks.
+    dispositionStats: deepCloneLedger(raw?.dispositionStats),
+    deployments: deepCloneLedger(raw?.deployments),
+    tradeWarState: deepCloneLedger(raw?.tradeWarState),
+    warExhaustion: deepCloneLedger(raw?.warExhaustion),
+    // Pantheon — CONDITIONAL materialization. Stripped from the shallow spread
+    // above; re-added here as a DEEP clone ONLY when present and non-empty, so a
+    // dormant/legacy world carries NO pantheon key (byte-identical under the
+    // dormancy oracle), while an active world's pantheon never aliases live state
+    // across ticks.
+    ...(clonedPantheon !== undefined ? { pantheon: clonedPantheon } : {}),
+    // religionStates — CONDITIONAL materialization (per-settlement pantheon: deities,
+    // adherent shares, niches, standings, chief). ABSENT until religion is active ⇒
+    // byte-identical dormant; DEEP-cloned when present so a pre-tick snapshot never
+    // aliases live share state across ticks.
+    ...(clonedReligionStates !== undefined ? { religionStates: clonedReligionStates } : {}),
+    // warPosture — CONDITIONAL materialization, identical discipline to pantheon:
+    // the per-settlement mobilization posture ledger ({ id -> { state, progress,
+    // sinceTick, covert } }). ABSENT while no settlement has left peace (a no-war /
+    // layer-off campaign carries NO warPosture key ⇒ byte-identical under the
+    // dormancy oracle), DEEP-cloned when present so a pre-tick snapshot never aliases
+    // live posture state across ticks.
+    ...(clonedWarPosture !== undefined ? { warPosture: clonedWarPosture } : {}),
+    // occupations — CONDITIONAL materialization, identical discipline to pantheon/
+    // warPosture: the per-OCCUPIED-settlement occupation-state ledger ({ occupiedId ->
+    // { occupierId, state, sinceTick, stateHeld, resistance, benefitYield, lastTick } }).
+    // ABSENT until the first conquest creates an occupation (a no-war / layer-off
+    // campaign carries NO occupations key ⇒ byte-identical under the dormancy oracle),
+    // DEEP-cloned when present so a pre-tick snapshot never aliases live occupation state
+    // across ticks (read-last/write-next).
+    ...(clonedOccupations !== undefined ? { occupations: clonedOccupations } : {}),
+    // pausedAdvance — CONDITIONAL materialization, identical discipline to pantheon/
+    // warPosture/occupations: the paused-Advance cursor ({ interval, ticksTotal,
+    // ticksDone, atTick, resumeTick, pendingMajors, preSnapshot, autoResolve,
+    // startedAt }). ABSENT when no advance is paused (a campaign with no advance in
+    // flight carries NO pausedAdvance key ⇒ byte-identical under the dormancy
+    // oracle), DEEP-cloned when present so a rehydrated cursor never aliases live
+    // state. CLEARING the pause writes pausedAdvance:null/absent ⇒ this returns
+    // undefined ⇒ the key is omitted (back to byte-neutral).
+    ...(clonedPausedAdvance !== undefined ? { pausedAdvance: clonedPausedAdvance } : {}),
   };
 }
 
 /**
- * @param {RawWorldState | null | undefined} worldState
- * @param {string} [now]
- * @param {{ id?: string, name?: string }} [campaign]
- * @returns {WorldState}
+ * @param {any} worldState
+ * @param {any} [now]
+ * @param {any} [campaign]
  */
 export function canonizeWorldState(worldState, now = wallClockNow(), campaign = {}) {
   const current = ensureWorldState(worldState, campaign);
@@ -190,12 +289,11 @@ export function canonizeWorldState(worldState, now = wallClockNow(), campaign = 
 }
 
 /**
- * @param {Partial<WorldCalendar>} [calendar]
- * @param {string} [interval]  a TickInterval key of INTERVAL_MONTHS; unknown values count as one month
- * @returns {WorldCalendar}
+ * @param {any} calendar
+ * @param {string} [interval]
  */
 export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
-  const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (INTERVAL_MONTHS[interval] ?? 1);
+  const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (/** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1);
   const wholeMonthIndex = Math.floor(elapsed);
   const month = (wholeMonthIndex % 12) + 1;
   const year = Math.floor(wholeMonthIndex / 12) + 1;
@@ -204,9 +302,8 @@ export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
 }
 
 /**
- * @param {{ type?: string, targetSaveId?: string, relationshipKey?: string, id?: string, candidateId?: string }} outcome
- * @param {number} tick
- * @returns {string} deterministic proposal id
+ * @param {any} outcome
+ * @param {any} tick
  */
 export function proposalIdFor(outcome, tick) {
   return [
@@ -219,18 +316,16 @@ export function proposalIdFor(outcome, tick) {
 }
 
 /**
- * @param {string | null | undefined} campaignId
- * @param {number} tick
- * @returns {string} deterministic pulse id
+ * @param {any} campaignId
+ * @param {any} tick
  */
 export function pulseIdFor(campaignId, tick) {
   return `world_pulse.${stablePart(campaignId)}.${tick}`;
 }
 
 /**
- * @param {RawWorldState | null | undefined} worldState
- * @param {Record<string, unknown>} record
- * @returns {WorldState}
+ * @param {any} worldState
+ * @param {any} record
  */
 export function appendPulseHistory(worldState, record) {
   const current = ensureWorldState(worldState);
@@ -239,13 +334,12 @@ export function appendPulseHistory(worldState, record) {
 }
 
 /**
- * @param {RawWorldState | null | undefined} worldState
- * @param {{ id: string } & Record<string, unknown>} proposal
- * @returns {WorldState}
+ * @param {any} worldState
+ * @param {any} proposal
  */
 export function upsertProposal(worldState, proposal) {
   const current = ensureWorldState(worldState);
-  const byId = new Map(current.proposals.map(item => [item.id, item]));
+  const byId = new Map(current.proposals.map((/** @type {any} */ item) => [item.id, item]));
   byId.set(proposal.id, { ...(byId.get(proposal.id) || {}), ...proposal });
   return {
     ...current,
@@ -254,17 +348,16 @@ export function upsertProposal(worldState, proposal) {
 }
 
 /**
- * @param {RawWorldState | null | undefined} worldState
- * @param {string} proposalId
- * @param {string} status
- * @param {{ updatedAt?: string } & Record<string, unknown>} [patch]
- * @returns {WorldState}
+ * @param {any} worldState
+ * @param {any} proposalId
+ * @param {any} status
+ * @param {any} [patch]
  */
 export function updateProposalStatus(worldState, proposalId, status, patch = {}) {
   const current = ensureWorldState(worldState);
   return {
     ...current,
-    proposals: current.proposals.map(proposal => (
+    proposals: current.proposals.map((/** @type {any} */ proposal) => (
       proposal.id === proposalId
         ? { ...proposal, ...patch, status, updatedAt: patch.updatedAt || wallClockNow() }
         : proposal

@@ -360,7 +360,7 @@ function topHooksBySeverity(settlement, n) {
  * @param {boolean} [options.dominantNpcsOnly=true]
  * @param {boolean} [options.includeContradictions=true]
  * @param {string|null} [options.userDirection=null]
- * @param {{settlementId?: unknown, generatedAtTick?: (number|null), relationships?: import('./worldPulse/relationshipMemory.js').RelationshipContextEntryInput[]} | null} [options.relationshipMemoryContext=null]
+ * @param {{settlementId?: unknown, generatedAtTick?: (number|null), relationships?: Array<Record<string, unknown>>} | null} [options.relationshipMemoryContext=null]
  * @returns {Object} AiGroundingPayload
  */
 export function buildAiGroundingPayload(settlement, options = {}) {

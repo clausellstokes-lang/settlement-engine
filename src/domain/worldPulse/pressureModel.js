@@ -1,75 +1,10 @@
-import { activeChannelsFrom } from '../region/index.js';
-
-/**
- * @typedef {Object} PressureCondition
- * @property {string} archetype
- * @property {string[]} [affectedSystems]
- */
-
-/**
- * @typedef {Object} PressureSettlement
- * @property {string} id
- * @property {string} [name]
- * @property {{ scores?: Record<string, number> }} [causal]
- * @property {PressureCondition[]} [activeConditions]
- */
-
-/**
- * @typedef {Object} RegionalEdge
- * @property {string} [id]
- * @property {string} [from]
- * @property {string} [to]
- * @property {string} [source]
- * @property {string} [target]
- */
-
-/**
- * @typedef {Object} RegionalChannel
- * @property {string} [type]
- * @property {string} [status]
- * @property {string} [from]
- * @property {string} [to]
- */
-
-/**
- * @typedef {Object} PMRelationshipState
- * @property {string} [relationshipType]
- * @property {number} [fear]
- * @property {number} [resentment]
- */
-
-/**
- * @typedef {Object} PressureSnapshot
- * @property {PressureSettlement[]} settlements
- * @property {{ calendar?: { season?: string }, relationshipStates?: Record<string, PMRelationshipState> }} worldState
- * @property {{ edges?: RegionalEdge[], channels?: RegionalChannel[] }} [regionalGraph]
- * @property {{ get?: (id: string) => (PressureSettlement | undefined) }} [byId]
- */
-
-/**
- * @typedef {Object} Pressure
- * @property {string} settlementId
- * @property {string} [settlementName]
- * @property {string} kind
- * @property {string} label
- * @property {number} score
- * @property {string[]} reasons
- */
-
-/**
- * @param {number} value
- * @returns {number}
- */
+/** @param {any} value @returns {number} */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
-/**
- * @param {number} score
- * @param {boolean} [invert]
- * @returns {number}
- */
+/** @param {any} score @param {boolean} [invert] @returns {number} */
 function pressureFromScore(score, invert = true) {
   const value = Number.isFinite(score) ? score : 50;
   return invert ? clamp01((70 - value) / 70) : clamp01(value / 100);
@@ -86,41 +21,55 @@ const SUPPLIER_FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', '
 const DISEASE_ARCHETYPES = new Set(['plague', 'regional_migration_pressure']);
 const CONFLICT_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap']);
 // Trade and economy share one commerce class: every route/market/tax archetype,
-// plus vassal_extraction — tribute drains wealth (R3 decision: it is NOT war,
-// so it must never read as conflict/defense pressure).
-const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions', 'vassal_extraction']);
+// plus vassal_extraction — tribute drains wealth (it is NOT war, so it must never
+// read as conflict/defense pressure). vassal_trade_coercion (gated) routes a
+// forced ruinous trade through the SAME trade pressure lever so vassalStrain rises
+// and `vassal_rebellion` stays reachable — byte-neutral when the war layer is OFF
+// (the condition never exists then).
+const TRADE_ARCHETYPES = new Set(['trade_route_cut', 'regional_route_disruption', 'regional_export_market_loss', 'regional_tax_revenue_disruption', 'regional_import_shortage', 'cold_war_sanctions', 'vassal_extraction', 'vassal_trade_coercion']);
 const LEGITIMACY_ARCHETYPES = new Set(['regional_authority_instability', 'corruption_exposed', 'dominant_npc_removed', 'regional_information_shock', 'regional_religious_pressure', 'government_overthrown']);
 const DEFENSE_ARCHETYPES = new Set(['war_pressure', 'regional_conflict_pressure', 'regional_protection_gap', 'rebellion']);
 const CRIME_ARCHETYPES = new Set(['regional_criminal_pressure', 'trade_route_cut', 'regional_route_disruption', 'famine', 'plague']);
 
 // Returns the deduped archetype ids that matched — reason strings must name
 // the real matched archetypes, never a fabricated classification.
-/**
- * @param {PressureSettlement} item
- * @param {Set<string>} archetypes
- * @param {string[]} [systems]
- * @returns {string[]}
- */
+/** @param {any} item @param {Set<string>} archetypes @param {string[]} [systems] @returns {string[]} */
 function matchedConditionArchetypes(item, archetypes, systems = []) {
   const matched = [];
   for (const c of item.activeConditions || []) {
     if (!c) continue;
     if (archetypes.has(c.archetype)) matched.push(c.archetype);
     else if (c.archetype === 'custom_crisis'
-      && (c.affectedSystems || []).some(s => systems.includes(s))) matched.push('custom_crisis');
+      && (c.affectedSystems || []).some(/** @param {any} s */ s => systems.includes(s))) matched.push('custom_crisis');
   }
   return [...new Set(matched)];
 }
 
-/**
- * @param {PressureSnapshot} snapshot
- * @param {string} settlementId
- * @param {string[]} [types]
- * @returns {number}
- */
-function countChannels(snapshot, settlementId, types = []) {
+// Build ONE from-keyed index of confirmed channels per pressure pass.
+// countChannels/activeChannelsFrom used to re-run ensureRegionalGraph (a full
+// graph re-normalize) on every call — ~3N times per tick. The snapshot's graph
+// is already ensured, so a single Map<fromId, channel[]> over its confirmed
+// channels lets the per-settlement lookups stay O(matching channels).
+/** @param {any} graph */
+function buildConfirmedChannelIndex(graph) {
+  /** @type {Map<string, any[]>} */
+  const index = new Map();
+  for (const channel of graph?.channels || []) {
+    if (channel?.status !== 'confirmed') continue;
+    const from = String(channel.from);
+    const bucket = index.get(from);
+    if (bucket) bucket.push(channel);
+    else index.set(from, [channel]);
+  }
+  return index;
+}
+
+/** @param {Map<string, any[]>} channelIndex @param {any} settlementId @param {string[]} [types] @returns {number} */
+function countChannels(channelIndex, settlementId, types = []) {
   const set = new Set(types);
-  return activeChannelsFrom(/** @type {import('../region/graph.js').RegionGraph} */ (snapshot.regionalGraph), settlementId, { types }).filter(channel => set.has(channel.type)).length;
+  const bucket = channelIndex.get(String(settlementId));
+  if (!bucket) return 0;
+  return bucket.filter(channel => set.has(channel.type)).length;
 }
 
 // ── Relationship → pressure feedback ─────────────────────────────────────────
@@ -130,11 +79,7 @@ function countChannels(snapshot, settlementId, types = []) {
 //   • a trade-dependency supplier in a food crisis raises the dependent's FOOD
 //     pressure (the supplier's famine becomes the dependent's problem)
 
-/**
- * @param {PressureSnapshot} snapshot
- * @param {string} settlementId
- * @returns {PMRelationshipState[]}
- */
+/** @param {any} snapshot @param {any} settlementId @returns {any[]} */
 function relationshipsTouching(snapshot, settlementId) {
   const sid = String(settlementId);
   const states = snapshot.worldState?.relationshipStates || {};
@@ -149,29 +94,21 @@ function relationshipsTouching(snapshot, settlementId) {
   return out;
 }
 
-/**
- * @param {PressureSnapshot} snapshot
- * @param {string} settlementId
- * @returns {number}
- */
+/** @param {any} snapshot @param {any} settlementId @returns {number} */
 function relationshipHostility(snapshot, settlementId) {
   let max = 0;
   for (const r of relationshipsTouching(snapshot, settlementId)) {
-    if (['hostile', 'cold_war', 'rival'].includes(/** @type {string} */ (r.relationshipType))) {
+    if (['hostile', 'cold_war', 'rival'].includes(r.relationshipType)) {
       max = Math.max(max, (r.fear || 0) * 0.6 + (r.resentment || 0) * 0.4);
     }
   }
   return max;
 }
 
-/**
- * @param {PressureSnapshot} snapshot
- * @param {string} settlementId
- * @returns {boolean}
- */
+/** @param {any} snapshot @param {any} settlementId @returns {boolean} */
 function supplierInFoodCrisis(snapshot, settlementId) {
   // trade_dependency channels point supplier → dependent.
-  const channels = (snapshot.regionalGraph?.channels || []).filter(c =>
+  const channels = (snapshot.regionalGraph?.channels || []).filter(/** @param {any} c */ c =>
     c.status === 'confirmed' && c.type === 'trade_dependency' && String(c.to) === String(settlementId));
   for (const c of channels) {
     const supplier = snapshot.byId?.get?.(String(c.from));
@@ -180,17 +117,16 @@ function supplierInFoodCrisis(snapshot, settlementId) {
   return false;
 }
 
-/**
- * @param {PressureSnapshot} snapshot
- * @returns {Pressure[]}
- */
+/** @param {any} snapshot @returns {any[]} */
 export function deriveSettlementPressures(snapshot) {
-  /** @type {Pressure[]} */
   const out = [];
   const season = snapshot.worldState.calendar?.season;
+  // Index the confirmed channels once for all per-settlement lookups
+  // below instead of re-normalizing the whole graph on each countChannels call.
+  const channelIndex = buildConfirmedChannelIndex(snapshot.regionalGraph);
 
   for (const item of snapshot.settlements) {
-    const scores = item.causal?.scores || /** @type {Record<string, number>} */ ({});
+    const scores = item.causal?.scores || {};
     const base = {
       settlementId: item.id,
       settlementName: item.name,
@@ -206,7 +142,7 @@ export function deriveSettlementPressures(snapshot) {
       food += 0.18;
       foodReasons.push(`active condition: ${foodConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
+    if (countChannels(channelIndex, item.id, ['trade_dependency']) > 0 && scores.trade_connectivity < 45) {
       food += 0.08;
       foodReasons.push('trade-dependent food access is strained');
     }
@@ -236,7 +172,7 @@ export function deriveSettlementPressures(snapshot) {
       conflict += 0.18;
       conflictReasons.push(`active condition: ${conflictConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['war_front', 'military_protection']) > 0) {
+    if (countChannels(channelIndex, item.id, ['war_front', 'military_protection']) > 0) {
       conflict += 0.08;
       conflictReasons.push('military regional channel exists');
     }
@@ -305,7 +241,7 @@ export function deriveSettlementPressures(snapshot) {
       defense += 0.16;
       defenseReasons.push(`active condition: ${defenseConditions.join(', ')}`);
     }
-    if (countChannels(snapshot, item.id, ['war_front']) > 0) {
+    if (countChannels(channelIndex, item.id, ['war_front']) > 0) {
       defense += 0.08;
       defenseReasons.push('war-front regional channel exists');
     }
@@ -327,14 +263,11 @@ export function deriveSettlementPressures(snapshot) {
   }));
 }
 
-/**
- * @param {Pressure[]} [pressures]
- * @returns {{ bySettlement: Record<string, Pressure[]>, get: (settlementId: string, kind: string) => (Pressure | null), strongest: (settlementId: string, kinds?: string[]) => (Pressure | null) }}
- */
+/** @param {any[]} [pressures] @returns {any} */
 export function pressureIndex(pressures = []) {
-  /** @type {Map<string, Pressure>} */
+  /** @type {Map<string, any>} */
   const map = new Map();
-  /** @type {Record<string, Pressure[]>} */
+  /** @type {Record<string, any[]>} */
   const bySettlement = {};
   for (const pressure of pressures) {
     map.set(`${pressure.settlementId}:${pressure.kind}`, pressure);
@@ -344,10 +277,12 @@ export function pressureIndex(pressures = []) {
   }
   return {
     bySettlement,
+    /** @param {any} settlementId @param {any} kind */
     get: (settlementId, kind) => map.get(`${settlementId}:${kind}`) || null,
-    strongest: (settlementId, kinds = []) => /** @type {Pressure[]} */ (kinds
+    /** @param {any} settlementId @param {any[]} [kinds] */
+    strongest: (settlementId, kinds = []) => kinds
       .map(kind => map.get(`${settlementId}:${kind}`))
-      .filter(Boolean))
+      .filter(Boolean)
       .sort((a, b) => b.score - a.score)[0] || null,
   };
 }

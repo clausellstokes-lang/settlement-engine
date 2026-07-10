@@ -13,43 +13,34 @@ const INTERVAL_MONTHS = Object.freeze({
 
 const MIGRATION_CHANNELS = Object.freeze(['migration_pressure', 'trade_route', 'political_authority', 'military_protection']);
 
-/** @typedef {{ get?: (id: any, kind: any) => ({ score?: number } | null | undefined) }} PdPressureIdx */
-/** @typedef {{ id?: any, name?: any, settlement?: { population?: number, activeConditions?: any[] }, activeConditions?: any[] }} Item */
-/** @typedef {Record<string, any>} Rules */
-/** @typedef {{ byId?: { get?: (id: any) => any }, regionalGraph?: any, settlements?: any[], worldState?: { simulationRules?: any, tick?: number } }} PdSnapshot */
-
 /**
- * @param {unknown} value
+ * @param {any} value
  * @param {number} [fallback]
- * @returns {number}
  */
 function finite(value, fallback = 0) {
-  return Number.isFinite(value) ? /** @type {number} */ (value) : fallback;
+  return Number.isFinite(value) ? value : fallback;
 }
 
 /**
  * @param {number} value
  * @param {number} min
  * @param {number} max
- * @returns {number}
  */
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
 
 /**
- * @param {PdPressureIdx | null | undefined} pressureIdx
+ * @param {any} pressureIdx
  * @param {any} settlementId
- * @param {string} kind
- * @returns {number}
+ * @param {any} kind
  */
 function score(pressureIdx, settlementId, kind) {
   return pressureIdx?.get?.(settlementId, kind)?.score || 0;
 }
 
 /**
- * @param {Item | null | undefined} item
- * @returns {any[]}
+ * @param {any} item
  */
 function conditionsFor(item) {
   return item?.activeConditions || item?.settlement?.activeConditions || [];
@@ -64,22 +55,33 @@ function conditionsFor(item) {
 const INFLUX_ARCHETYPES = new Set(['regional_migration_pressure']);
 const FOOD_CRISIS_ARCHETYPES = new Set(['famine', 'food_anchor_lost', 'regional_import_shortage']);
 const DISEASE_CRISIS_ARCHETYPES = new Set(['plague']);
-const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure']);
-const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap']);
+// Population is no longer blind to occupation or to the cost of waging war.
+// vassal_extraction is the canonical OCCUPATION condition (conditionPromotion maps
+// the 'occupied' stressor AND the conquest aftermath into it): an occupied town
+// bleeds people (extraction + a hated garrison). war_drain is the AGGRESSOR's home
+// condition: a settlement bankrupting itself abroad sheds people too. Both are
+// gated behind warLayerEnabled at the SOURCE (the war evaluator never mints
+// war_drain when OFF, and a generation-occupied town already carried
+// vassal_extraction before this change — but it never lost population for it until
+// now), so a no-war campaign that never stamps either is byte-identical.
+const WAR_CRISIS_ARCHETYPES = new Set(['war_pressure', 'vassal_extraction', 'war_drain']);
+const BURDEN_ARCHETYPES = new Set(['alliance_burden', 'regional_protection_gap', 'relief_burden']);
 // siege_lifted belongs HERE and only here: it is the post-siege recovery bonus.
-const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'stressor_residual']);
+const RECOVERY_ARCHETYPES = new Set(['siege_lifted', 'occupation_lifted', 'stressor_residual']);
 // One crisis-flight class feeds both the severe classifier and the
-// mass-emigration gate; recovery archetypes are deliberately absent.
-const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'regional_migration_pressure']);
+// mass-emigration gate; recovery archetypes are deliberately absent. Occupation
+// (vassal_extraction) drives REFUGEE FLIGHT — the column flees the occupier — so it
+// joins the flight set alongside war_pressure; war_drain is austerity, not flight,
+// so it stays out of the flight set (it presses the rate, not the emigration gate).
+const CRISIS_FLIGHT_ARCHETYPES = new Set(['famine', 'plague', 'war_pressure', 'vassal_extraction', 'regional_migration_pressure']);
 
 /**
- * @param {Item | null | undefined} item
+ * @param {any} item
  * @param {Set<string>} archetypes
  * @param {string[]} [systems]
- * @returns {boolean}
  */
 function hasConditionSignal(item, archetypes, systems = []) {
-  return conditionsFor(item).some(c => {
+  return conditionsFor(item).some((/** @type {any} */ c) => {
     if (!c) return false;
     if (archetypes.has(c.archetype)) return true;
     return c.archetype === 'custom_crisis'
@@ -88,18 +90,16 @@ function hasConditionSignal(item, archetypes, systems = []) {
 }
 
 /**
- * @param {string} interval
- * @returns {number}
+ * @param {any} interval
  */
 function intervalMagnitude(interval) {
-  const months = /** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1;
+  const months = INTERVAL_MONTHS[/** @type {keyof typeof INTERVAL_MONTHS} */ (interval)] ?? 1;
   return Math.max(0.25, Math.pow(months, 0.85));
 }
 
 /**
  * @param {any} saveId
  * @param {any} tick
- * @returns {string}
  */
 function migrationChoice(saveId, tick) {
   const text = `${saveId}:${tick}`;
@@ -109,14 +109,13 @@ function migrationChoice(saveId, tick) {
 }
 
 /**
- * @param {PdSnapshot | null | undefined} snapshot
+ * @param {any} snapshot
  * @param {any} sourceId
- * @returns {any[]}
  */
 function candidateDestinations(snapshot, sourceId) {
   const byId = snapshot?.byId;
   const ids = new Set();
-  for (const channel of activeChannelsFrom(snapshot?.regionalGraph, sourceId, { types: /** @type {string[]} */ (MIGRATION_CHANNELS) })) {
+  for (const channel of activeChannelsFrom(snapshot?.regionalGraph, sourceId, { types: [...MIGRATION_CHANNELS] })) {
     if (channel.to && String(channel.to) !== String(sourceId)) ids.add(String(channel.to));
   }
   for (const edge of snapshot?.regionalGraph?.edges || []) {
@@ -129,9 +128,8 @@ function candidateDestinations(snapshot, sourceId) {
 }
 
 /**
- * @param {Item} item
- * @param {PdPressureIdx | null | undefined} pressureIdx
- * @returns {number}
+ * @param {any} item
+ * @param {any} pressureIdx
  */
 function destinationScore(item, pressureIdx) {
   const id = item.id;
@@ -157,21 +155,19 @@ const RELATIONSHIP_DISPERSAL_WEIGHTS = Object.freeze({
   hostile: 0.15,
 });
 
-// H12 shim mirrored from stressorDynamics.relationshipTypeOf: legacy saves
-// carry the plural 'trade_partners'; read it as the canonical singular.
+// Compatibility shim mirrored from stressorDynamics.relationshipTypeOf: legacy
+// saves carry the plural 'trade_partners'; read it as the canonical singular.
 /**
  * @param {any} edge
- * @returns {string}
  */
 function edgeLabel(edge) {
   return canonicalRelationshipLabel(String(edge?.relationshipType || edge?.type || '').toLowerCase());
 }
 
 /**
- * @param {PdSnapshot | null | undefined} snapshot
+ * @param {any} snapshot
  * @param {any} sourceId
  * @param {any} destId
- * @returns {number}
  */
 function relationshipWeight(snapshot, sourceId, destId) {
   const a = String(sourceId);
@@ -181,7 +177,7 @@ function relationshipWeight(snapshot, sourceId, destId) {
     const from = String(edge?.from || edge?.source || '');
     const to = String(edge?.to || edge?.target || '');
     if (!((from === a && to === b) || (from === b && to === a))) continue;
-    const weight = /** @type {Record<string, number>} */ (RELATIONSHIP_DISPERSAL_WEIGHTS)[edgeLabel(edge)];
+    const weight = RELATIONSHIP_DISPERSAL_WEIGHTS[/** @type {keyof typeof RELATIONSHIP_DISPERSAL_WEIGHTS} */ (edgeLabel(edge))];
     if (weight != null) weights.push(weight);
   }
   if (!weights.length) return 1;
@@ -192,20 +188,26 @@ function relationshipWeight(snapshot, sourceId, destId) {
 }
 
 /**
- * @param {{ sourceId: any, migrants: number, snapshot: PdSnapshot | null | undefined, pressureIdx: PdPressureIdx | null | undefined, mode: any, tick: any }} params
- * @returns {{ mode: any, deltas: any[] }}
+ * Split `migrants` across candidate destinations. Exported for a focused
+ * conservation unit test (the split must never create or destroy population).
+ * @param {any} options
  */
-function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
+export function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, tick }) {
   const chosenMode = mode === 'roll' ? migrationChoice(sourceId, tick) : mode;
   if (chosenMode === 'void') return { mode: chosenMode, deltas: [] };
 
   // One weighted scorer everywhere: admission filter, ranking, and split
   // weights all see the same relationship-adjusted desirability.
-  const weightedScore = (/** @type {Item} */ item) =>
+  const weightedScore = (/** @type {any} */ item) =>
     destinationScore(item, pressureIdx) * relationshipWeight(snapshot, sourceId, item.id);
   const destinations = candidateDestinations(snapshot, sourceId)
-    .filter(item => weightedScore(item) >= 0.35)
-    .sort((a, b) => weightedScore(b) - weightedScore(a));
+    .filter((/** @type {any} */ item) => weightedScore(item) >= 0.35)
+    // Codepoint tie-break on id (matching religiousContest.js/tradeSalience.js): without
+    // it, two equal-score destinations rank by candidateDestinations' Set-build order, so a
+    // refactor that reorders edges/channels would silently perturb the migrant split and
+    // break the golden master. The id key makes the ranking order-independent.
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => (weightedScore(b) - weightedScore(a))
+      || (String(a.id) < String(b.id) ? -1 : String(a.id) > String(b.id) ? 1 : 0));
   if (!destinations.length) return { mode: 'void', deltas: [] };
 
   if (chosenMode === 'concentrated') {
@@ -220,9 +222,18 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
   let assigned = 0;
   const deltas = top.map((item, index) => {
     const last = index === top.length - 1;
+    const remaining = migrants - assigned;
+    // Clamp every non-last share to what's LEFT so the running total can never
+    // exceed `migrants`. Without this the Math.max(1,…) floor could over-assign
+    // when migrants < destinations (e.g. 2 migrants over 4 dests → [1,1,1,-1]),
+    // forcing the last delta negative; it was then filtered out, injecting phantom
+    // people (a non-conservation leak). Conservation now holds by construction:
+    // sum(deltas) === migrants exactly. Unreachable on the live path today (the
+    // mass-emigration gate floors migrants ≥ 11) but pinned so a future threshold
+    // change can't silently re-open it.
     const delta = last
-      ? migrants - assigned
-      : Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight)));
+      ? remaining
+      : Math.min(remaining, Math.max(1, Math.round(migrants * (Math.max(0.1, weightedScore(item)) / totalWeight))));
     assigned += delta;
     return { saveId: item.id, delta, reason: 'Displaced population disperses through regional links.' };
   }).filter(d => d.delta > 0);
@@ -230,10 +241,9 @@ function distributeMigrants({ sourceId, migrants, snapshot, pressureIdx, mode, t
 }
 
 /**
- * @param {Item} item
- * @param {PdPressureIdx | null | undefined} pressureIdx
- * @param {Rules} rules
- * @returns {number}
+ * @param {any} item
+ * @param {any} pressureIdx
+ * @param {any} rules
  */
 function populationPressureRate(item, pressureIdx, rules) {
   const id = item.id;
@@ -258,11 +268,10 @@ function populationPressureRate(item, pressureIdx, rules) {
 }
 
 /**
- * @param {Item} item
- * @param {PdPressureIdx | null | undefined} pressureIdx
- * @param {string} interval
- * @param {Rules} rules
- * @returns {{ pop: number, delta: number, severe: boolean } | null}
+ * @param {any} item
+ * @param {any} pressureIdx
+ * @param {any} interval
+ * @param {any} rules
  */
 function deltaForSettlement(item, pressureIdx, interval, rules) {
   const pop = Math.max(0, Math.round(finite(item?.settlement?.population, 0)));
@@ -278,8 +287,7 @@ function deltaForSettlement(item, pressureIdx, interval, rules) {
 }
 
 /**
- * @param {{ item: Item, interval: string, pressureIdx: PdPressureIdx | null | undefined, snapshot: PdSnapshot | null | undefined, rules: Rules, tick: any }} params
- * @returns {any}
+ * @param {any} options
  */
 function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }) {
   const result = deltaForSettlement(item, pressureIdx, interval, rules);
@@ -287,7 +295,16 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   const { pop, delta, severe } = result;
   const sourceId = String(item.id);
   const abs = Math.abs(delta);
-  const massThreshold = Math.max(25, Math.round(pop * 0.025));
+  // Scale the mass-emigration bar DOWN for sub-month intervals. The fixed
+  // 2.5%-of-pop bar was structurally unreachable at one_week — the GA cadence —
+  // where a max-crisis settlement's weekly loss (~2.2%) never crossed it; only
+  // one_month+ deltas did. The magnitude factor is clamped to 1 so the bar only
+  // ever lowers: at one_month+ it stays at the design 2.5%, because the loss delta
+  // is itself capped at pop*0.18 (the severe cap in deltaForSettlement). Letting the
+  // bar scale past that — e.g. pop*0.207 at one_year — would push it ABOVE the
+  // achievable delta and make mass emigration unreachable at long intervals instead
+  // (one_year reachability is pinned by worldPulseExpansion / migrationDispersal).
+  const massThreshold = Math.max(25, Math.round(pop * 0.025 * Math.min(1, intervalMagnitude(interval))));
   const isMassEmigration = delta < 0 && abs >= massThreshold && (severe || hasConditionSignal(item, CRISIS_FLIGHT_ARCHETYPES));
   const populationDeltas = [{ saveId: sourceId, delta, reason: delta > 0 ? 'Organic growth from favorable conditions.' : 'Population loss from cumulative settlement pressure.' }];
   let transferMode = null;
@@ -320,6 +337,11 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     probability: 1,
     applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto',
     headline: `${item.name || sourceId} population may ${delta > 0 ? 'grow' : 'fall'}`,
+    // formatCount (not toLocaleString): a bare toLocaleString() renders `12,000`
+    // on en-US ICU but `12 000`/`12.000` elsewhere, so persisted candidate
+    // summaries — and any golden over advance output — would drift by the runner's
+    // locale. formatCount is the locale-independent grouped formatter the engine
+    // pins everywhere (F13/localeFormatGuard); no host-ICU dependence at all.
     summary: delta > 0
       ? `${item.name || sourceId} gains about ${formatCount(abs)} people from favorable conditions.`
       : `${item.name || sourceId} loses about ${formatCount(abs)} people from cumulative pressure${migrants ? `; about ${formatCount(migrants)} may migrate onward` : ''}.`,
@@ -336,10 +358,9 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
 }
 
 /**
- * @param {PdSnapshot | null | undefined} snapshot
- * @param {PdPressureIdx | null | undefined} pressureIdx
- * @param {{ simulationRules?: any, tick?: any, interval?: string }} [context]
- * @returns {any[]}
+ * @param {any} snapshot
+ * @param {any} pressureIdx
+ * @param {any} [context]
  */
 export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || snapshot?.worldState?.simulationRules);
@@ -347,23 +368,60 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const interval = context.interval || 'one_month';
   return (snapshot?.settlements || [])
-    .map(item => populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }))
+    .map((/** @type {any} */ item) => populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }))
     .filter(Boolean);
 }
 
+// ── Migration staleness re-verify (self-contained; the same re-verify contract as
+// applyTierOutcomeToSettlement). A mass-emigration outcome can be applied MANY ticks
+// after it was generated (a long-parked proposal): by then the source may hold fewer
+// people than the stored debit. The source side always clamped at zero — but the
+// paired destination credits landed IN FULL, minting people out of thin air. The
+// apply pass hands every settlement of one outcome the SAME outcome object, source
+// first (populationDeltas order → affectedSaveIds order), so the source apply records
+// the REALIZED debit fraction here and each destination apply scales its credit by it
+// (floored, so Σ scaled credits ≤ the people who actually left). Keyed on outcome
+// object identity — scoped to a single apply pass, invisible to persistence. A
+// destination applied without a source record (source missing from the settlement
+// map) keeps the legacy full credit. Fresh (non-stale) outcomes realize fraction 1 ⇒
+// byte-identical.
+/** @type {WeakMap<object, number>} */
+const migrationRealizedFraction = new WeakMap();
+
 /**
- * @param {{ population?: number, populationHistory?: any[] } | null | undefined} settlement
- * @param {{ populationDeltas?: any[], generatedAtTick?: any, tick?: any, headline?: any, candidateType?: any, id?: any } | null | undefined} outcome
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} outcome
  * @param {any} saveId
- * @returns {any}
  */
 export function applyPopulationOutcomeToSettlement(settlement, outcome, saveId) {
   if (!settlement || !outcome?.populationDeltas) return settlement;
-  const delta = outcome.populationDeltas
+  let delta = outcome.populationDeltas
     .filter((/** @type {any} */ item) => String(item.saveId) === String(saveId))
-    .reduce((/** @type {number} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
+    .reduce((/** @type {any} */ sum, /** @type {any} */ item) => sum + (Number(item.delta) || 0), 0);
   if (!delta) return settlement;
   const current = Math.max(0, Math.round(finite(settlement.population, 0)));
+  // Paired source-debit / destination-credit outcomes (a settlement loses people
+  // and another gains them) must CONSERVE population even when applied stale — e.g.
+  // a parked proposal whose source has since shrunk. The source is the NEGATIVE-delta
+  // side: for population_emigration that is targetSaveId, but for flow_migration
+  // targetSaveId is the DESTINATION, so key the debit on `delta < 0` (each of these
+  // outcomes has exactly one negative side) rather than on targetSaveId. Record how
+  // many of the intended departures the depleted source could actually supply, then
+  // scale the paired credit by that realized fraction so Σcredits ≤ people who left.
+  // Requires source-first apply order (which the emigration guard already relies on
+  // and worldPulseFlowMigrationConservation.test pins for flow_migration).
+  if (outcome.candidateType === 'population_emigration' || outcome.candidateType === 'flow_migration') {
+    if (delta < 0) {
+      const debit = Math.abs(Math.round(delta));
+      const realized = Math.min(debit, current);
+      migrationRealizedFraction.set(outcome, debit > 0 ? realized / debit : 1);
+      delta = -realized;
+    } else if (delta > 0) {
+      const fraction = migrationRealizedFraction.get(outcome);
+      if (fraction != null && fraction < 1) delta = Math.floor(delta * fraction);
+    }
+    if (!delta) return settlement; // fully-stale debit/credit — no phantom history entry
+  }
   const nextPopulation = Math.max(0, current + Math.round(delta));
   return {
     ...settlement,

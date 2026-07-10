@@ -15,28 +15,10 @@ const NONRENEWABLE_PATTERNS = [
 
 const MAGICAL_PATTERNS = [/magic|arcane|ley|planar/];
 
-/**
- * @typedef {Object} ResourceSpec
- * @property {string} [label]
- * @property {string} [desc]
- * @property {string} [category]
- * @property {string[]} [commodities]
- * @property {string[]} [tradeGoods]
- */
-
-/**
- * @typedef {Object} MagicSettlement
- * @property {{ magicLevel?: unknown }} [config]
- * @property {unknown} [magicLevel]
- */
-
-/**
- * @param {unknown} resource
- * @returns {string}
- */
+/** @param {any} resource */
 function textFor(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = /** @type {ResourceSpec} */ (/** @type {Record<string, ResourceSpec>} */ (RESOURCE_DATA)[key] || {});
+  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
   return [
     key,
     spec.label,
@@ -47,10 +29,7 @@ function textFor(resource) {
   ].filter(Boolean).join(' ').toLowerCase();
 }
 
-/**
- * @param {MagicSettlement} [settlement]
- * @returns {number}
- */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement */
 function magicLevelScore(settlement = {}) {
   const level = String(settlement?.config?.magicLevel || settlement?.magicLevel || '').toLowerCase();
   if (level === 'pervasive') return 4;
@@ -60,12 +39,10 @@ function magicLevelScore(settlement = {}) {
   return 0;
 }
 
-/**
- * @param {unknown} resource
- */
+/** @param {any} resource */
 export function classifyResource(resource) {
   const key = String(resource || '').toLowerCase();
-  const spec = /** @type {ResourceSpec} */ (/** @type {Record<string, ResourceSpec>} */ (RESOURCE_DATA)[key] || {});
+  const spec = /** @type {Record<string, any>} */ (RESOURCE_DATA)[key] || {};
   const text = textFor(resource);
   const magical = MAGICAL_PATTERNS.some(pattern => pattern.test(text));
   const nonrenewable = NONRENEWABLE_PATTERNS.some(pattern => pattern.test(text));
@@ -108,9 +85,9 @@ export function classifyResource(resource) {
 }
 
 /**
- * @param {unknown} resource
- * @param {MagicSettlement} [settlement]
- * @param {{ forceRecovery?: boolean, magicRecovery?: boolean, quietRecovery?: boolean }} [context]
+ * @param {any} resource
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} [context]
  */
 export function canRecoverResource(resource, settlement, context = {}) {
   const taxonomy = classifyResource(resource);

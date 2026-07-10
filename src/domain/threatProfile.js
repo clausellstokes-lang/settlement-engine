@@ -232,7 +232,10 @@ export function severityToStage(severity) {
 
 /** @type {ReadonlyArray<{pattern: RegExp, type: string}>} */
 const TYPE_PATTERNS = Object.freeze([
-  { pattern: /siege|invasion|war/i,                 type: 'siege' },
+  // war is word-bounded (\bwar\b) so it no longer fires on substrings like
+  // 'seaward' / 'warden' / 'warehouse', which the old bare /war/ minted as
+  // phantom siege threats. siege/invasion/warfare stay as their own whole tokens.
+  { pattern: /siege|invasion|warfare|\bwar\b/i,     type: 'siege' },
   { pattern: /bandit|highwayman|raider/i,           type: 'bandit_raids' },
   { pattern: /plague|pestilence|epidemic|disease/i, type: 'plague' },
   { pattern: /famine|hunger|food.*deficit/i,        type: 'famine' },
@@ -240,9 +243,12 @@ const TYPE_PATTERNS = Object.freeze([
   { pattern: /cult|conspiracy|hidden/i,             type: 'cult' },
   { pattern: /corruption|graft|bribe/i,             type: 'corruption' },
   { pattern: /riot|unrest|protest|sedition/i,       type: 'unrest' },
+  // The specific arcane / wild-magic pattern MUST precede the generic monster
+  // 'wild' pattern below — 'wild magic' contains 'wild', so the old ordering
+  // misclassified arcane instability as monster_pressure. Specific-before-generic.
+  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /monster|beast|wilderness|wild/i,      type: 'monster_pressure' },
   { pattern: /dragon|undead|fey|abyss/i,            type: 'monster_pressure' },
-  { pattern: /arcane|magic|wild magic/i,            type: 'arcane_instability' },
   { pattern: /rival|neighbour|neighbor|hostile/i,   type: 'rival_neighbor' },
   { pattern: /economy|trade|market|wealth/i,        type: 'economic_collapse' },
 ]);
@@ -591,6 +597,29 @@ export function deriveAllThreatProfiles(settlement) {
   const sources = collectThreatSources(settlement);
   // filter(Boolean) removes the nulls; TS does not narrow the built-in Boolean callback
   return /** @type {ThreatProfile[]} */ (sources.map(s => deriveThreatProfile(s, settlement)).filter(Boolean));
+}
+
+/**
+ * Collapse an un-collapsed threat list to ONE profile per (type, target),
+ * keeping the highest-severity instance. deriveAllThreatProfiles enumerates each
+ * distinct threat surface, so the SAME underlying pressure can appear more than
+ * once (intentional for enumeration); summation consumers (capacity demand math)
+ * must collapse first via this helper so they do not double-count a single
+ * pressure. Determinism: iterates input order (collectThreatSources is
+ * deterministic) and keeps the first max-severity instance, so the per-(type,
+ * target) survivor and the demand it drives are byte-stable across runs.
+ * @param {any[]} profiles
+ * @returns {any[]} one profile per (type, target), max severity wins.
+ */
+export function dedupeThreatsByPressure(profiles) {
+  const byKey = new Map();
+  for (const p of profiles) {
+    if (!p) continue;
+    const key = `${p.type || 'other'}|${p.target || 'settlement'}`;
+    const prior = byKey.get(key);
+    if (!prior || (p.severity || 0) > (prior.severity || 0)) byKey.set(key, p);
+  }
+  return Array.from(byKey.values());
 }
 
 // ── Diagnostic helpers ───────────────────────────────────────────────────

@@ -126,7 +126,7 @@ function tradeScarcityFlows(snapshot, tick, requireProposal) {
   const out = [];
   for (const item of snapshot.settlements || []) {
     const supplierId = String(item.id);
-    const conditionCrisis = (item.activeConditions || []).some((/** @type {any} */ c) => TRADE_CRISIS.test(c.archetype || ''));
+    const conditionCrisis = (item.activeConditions || []).some(/** @param {any} c */ c => TRADE_CRISIS.test(c.archetype || ''));
     const connectivityCrisis = (item.causal?.scores?.trade_connectivity ?? 60) < 35;
     if (!conditionCrisis && !connectivityCrisis) continue;
     for (const channel of activeChannelsFrom(graph, supplierId, { types: ['trade_dependency'] })) {

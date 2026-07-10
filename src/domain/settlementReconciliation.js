@@ -30,7 +30,7 @@ function compactLabel(value) {
  */
 export function reconcileSettlementChange(nextSettlement, priorSettlement, options = {}) {
   if (!nextSettlement || !priorSettlement) return nextSettlement;
-  const carried = worldAuthoredConditions(priorSettlement).map(conditionId).filter(Boolean);
+  const carried = worldAuthoredConditions(/** @type {any} */ (priorSettlement)).map(conditionId).filter(Boolean);
   const reconciled = /** @type {ReconcilableSettlement} */ (
     preserveWorldConditions(nextSettlement, priorSettlement)
   );

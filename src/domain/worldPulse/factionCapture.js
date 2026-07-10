@@ -18,26 +18,41 @@
  */
 import {
   readCorruptionClimate, captureAdvanceChance, captureRecoverChance, advanceCaptureState,
-  guildEffectiveSecurity,
+  guildEffectiveSecurity, hasCorruptingDeity,
 } from '../corruption.js';
 
 /**
+ * The PARALLEL onset-style gate (a corrupt seat-holder climbs
+ * the capture ladder only with `hasCriminalInst`) is relaxed the SAME way as
+ * the corruption.js onset gate — an embedded EVIL deity also enables the climb
+ * in a crime-free town, so the evil-deity effect is NOT half-applied. Gated
+ * behind `religionActive` (the caller's religionDynamicsEnabled +
+ * isSubsystemActive). false (default) ⇒ gate unrelaxed ⇒ byte-identical.
+ *
  * @param {any} worldState
  * @param {any} snapshot
- * @param {any} rng
- * @param {{ tick?: number, guildStrengthBy?: Map<string, any>|null }} [options]
+ * @param {{ fork: (k:string)=>{ random: ()=>number } }} rng
+ * @param {{ tick?: number, guildStrengthBy?: Map<string, number>|null, religionActive?: boolean }} [opts]
+ * @returns {{ worldState: object, transitions: Array<object> }}
  */
-export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null } = {}) {
+export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, guildStrengthBy = null, religionActive = false } = {}) {
   const factionStates = { ...(worldState.factionStates || {}) };
   const npcStates = worldState.npcStates || {};
   const climateBy = new Map();
+  /** @type {Map<string, boolean>} */
+  const corruptingDeityBy = new Map();
   for (const item of (snapshot?.settlements || [])) {
     climateBy.set(String(item.id), readCorruptionClimate(item.settlement));
+    // Per-settlement evil-deity presence (only when the religion layer is
+    // ACTIVE). Absent ⇒ false ⇒ the gate behaves exactly as before.
+    corruptingDeityBy.set(String(item.id), religionActive && hasCorruptingDeity(item.settlement));
   }
 
   const transitions = [];
   for (const [fid, fs] of Object.entries(factionStates)) {
     const climate = climateBy.get(String(fs.settlementId)) || { security: 0.5, prosperity: 0.5, hasCriminalInst: false };
+    // Relax the parallel gate with the same additive evil-deity term.
+    const onsetEnabled = climate.hasCriminalInst || corruptingDeityBy.get(String(fs.settlementId)) === true;
 
     // Highest-ranked corrupt seat-holder drives the climb.
     let maxCorruptRank = 0;
@@ -46,14 +61,14 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
       if (st && st.corruption) maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
     }
 
-    // §corruption Phase 3 — guild strength drags effective security down here too.
+    // Guild strength drags effective security down here too.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(fs.settlementId)) : undefined;
     const effSecurity = gs != null ? guildEffectiveSecurity(climate.security, gs) : climate.security;
 
     const cur = fs.captureState || 'none';
     const local = rng.fork(`cap:${fid}:${tick}`);
     let next = cur;
-    if (maxCorruptRank > 0 && climate.hasCriminalInst) {
+    if (maxCorruptRank > 0 && onsetEnabled) {
       if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity })) {
         next = advanceCaptureState(cur, true);
       }
@@ -91,7 +106,7 @@ export function settlementCaptureState(factionStates, settlementId) {
   return LADDER[worst];
 }
 
-// ── Wave 7 #3 — capture transitions reach the DM ────────────────────────────
+// ── Capture transitions reach the DM ────────────────────────────────────────
 // advanceFactionCapture's transitions were recorded in the pulseRecord
 // (factionCaptureEvents) and consumed by NOBODY: the underworld could capture
 // the City Watch and the DM would never hear of it. The two builders below
@@ -143,13 +158,13 @@ function transitionSummary(t, settlementName) {
  * timestamps threaded, never minted.
  *
  * @param {any[]}    transitions  from advanceFactionCapture
- * @param {(id: any) => string} nameFor      settlementId → display name
+ * @param {Function} nameFor      settlementId → display name
  * @param {number}   tick
- * @param {string|null}   [now]
+ * @param {(string|null)}   [now]
  */
 export function captureTransitionNewsEntries(transitions = [], nameFor = (/** @type {any} */ id) => String(id), tick = 0, now = null) {
   const LADDER = ['none', 'adversarial', 'equilibrium', 'corrupted', 'capture'];
-  return transitions.filter(newsworthyTransition).map(t => {
+  return transitions.filter(newsworthyTransition).map((/** @type {any} */ t) => {
     const major = t.to === 'capture' || t.from === 'capture';
     const settlementName = nameFor(t.settlementId);
     return {
@@ -183,11 +198,9 @@ const MAX_CAMPAIGN_HISTORY_EVENTS = 20;
  * derives "defining crisis" / "recent disruption" from, same vocabulary and
  * caps as stressorAftermath's graduation stamp. Idempotent per
  * (faction, tick). Returns the same reference when nothing changed.
- */
-/**
- * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {any} transition
- * @param {number} tick
+ * @param {any} tick
  */
 export function withCaptureHistoryEvent(settlement, transition, tick) {
   if (!settlement || !transition) return settlement;
@@ -206,7 +219,7 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
     name: fell ? `The Capture of ${transition.name}` : `The Liberation of ${transition.name}`,
     type: 'corruption_scandal',
     description: fell
-      ? `${transition.name} fell under criminal control during the campaign — its formal authority became a front for the underworld.`
+      ? `${transition.name} fell under criminal control during the campaign. Its formal authority became a front for the underworld.`
       : `${transition.name} broke from criminal control during the campaign, though the arrangements it operated under are remembered.`,
     severity: fell ? 'major' : 'moderate',
     lastingEffects: fell
@@ -223,7 +236,7 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
     const oldest = campaignEvents
       .slice()
       .sort((/** @type {any} */ a, /** @type {any} */ b) => (a.tick ?? 0) - (b.tick ?? 0))[0];
-    nextEvents = nextEvents.filter(e => e !== oldest);
+    nextEvents = nextEvents.filter((/** @type {any} */ e) => e !== oldest);
   }
   return { ...settlement, history: { ...history, historicalEvents: nextEvents } };
 }
@@ -232,9 +245,7 @@ export function withCaptureHistoryEvent(settlement, transition, tick) {
  * Apply capture history to every affected settlement in a local map
  * (advanceCampaignWorld's settlement working set). Mirrors
  * recordGraduationsIntoHistory. Returns the count of settlements written.
- */
-/**
- * @param {Map<string, any>} localSettlements
+ * @param {any} localSettlements
  * @param {any[]} transitions
  * @param {number} tick
  */

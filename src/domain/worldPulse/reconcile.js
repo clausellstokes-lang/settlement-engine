@@ -17,13 +17,9 @@ import { deriveAllActiveConditions, isEventSourcedCondition, withActiveCondition
 
 const WORLD_CONDITION_SOURCE_PREFIXES = Object.freeze(['WORLD_PULSE', 'WORLD_STRESSOR', 'PARTY_ACTION', 'REGIONAL']);
 
-/** @typedef {import('../activeConditions.js').ActiveCondition} ActiveCondition */
-/** @typedef {import('../settlement.schema.js').CanonicalSettlement} CanonicalSettlement */
-
 /**
  * True when a condition was authored by the regional pulse / party action.
- * @param {ActiveCondition | null | undefined} condition
- * @returns {boolean}
+ * @param {any} condition
  */
 export function isWorldAuthoredCondition(condition) {
   // EVENT-promoted conditions are never world-authored — they survive
@@ -42,7 +38,7 @@ export function isWorldAuthoredCondition(condition) {
   if (String(condition?.archetype || '').startsWith('regional_')) return true;
   const src = String(condition?.triggeredAt?.sourceEventType || '');
   if (WORLD_CONDITION_SOURCE_PREFIXES.some(p => src.startsWith(p))) return true;
-  return (condition?.causes || []).some((/** @type {{ source?: string }} */ c) => {
+  return (condition?.causes || []).some(/** @param {any} c */ c => {
     const s = String(c?.source || '');
     return s === 'world_pulse' || s.startsWith('world_') || s.startsWith('party');
   });
@@ -50,8 +46,7 @@ export function isWorldAuthoredCondition(condition) {
 
 /**
  * The world/party-authored conditions currently on a settlement.
- * @param {CanonicalSettlement | null | undefined} settlement
- * @returns {ActiveCondition[]}
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function worldAuthoredConditions(settlement) {
   return deriveAllActiveConditions(settlement).filter(isWorldAuthoredCondition);
@@ -63,9 +58,9 @@ export function worldAuthoredConditions(settlement) {
  * consequences. Locally-authored conditions on `regenerated` are kept; world-
  * authored ones the regeneration dropped are re-attached (idempotent by id).
  *
- * @param {CanonicalSettlement | null | undefined} regenerated  the freshly regenerated/edited settlement
- * @param {CanonicalSettlement | null | undefined} prior        the settlement before regeneration
- * @returns {CanonicalSettlement | null | undefined} a new settlement
+ * @param {Object} regenerated  the freshly regenerated/edited settlement
+ * @param {Object} prior        the settlement before regeneration
+ * @returns {Object} a new settlement
  */
 export function preserveWorldConditions(regenerated, prior) {
   if (!regenerated || !prior) return regenerated;

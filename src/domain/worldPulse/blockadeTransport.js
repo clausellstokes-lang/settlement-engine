@@ -20,10 +20,7 @@ import { withImpairment, withoutEventImpairments } from '../entities/status.js';
 const AIRSHIP_RE = /airship/i;
 const CAUSE_PREFIX = 'stressor-blockade:';
 
-/**
- * @param {number | undefined} severity blockade stressor severity, 0-1
- * @returns {number} 'access' impairment severity to stamp on the dock
- */
+/** @param {number} [severity] */
 function blockadeSeverityToImpairment(severity) {
   // 0.4 (gate) → 0.46, 1.0 → 0.7: impaired, never inoperable — the dock
   // keeps flying, the math of HOW MUCH lands lives in foodStockpile.
@@ -31,10 +28,8 @@ function blockadeSeverityToImpairment(severity) {
 }
 
 /**
- * @typedef {import('../entities/status.js').Impairment} Impairment
- * @typedef {{ name?: string, impairments?: Impairment[] }} TransportInstitution
- * @param {{ institutions?: TransportInstitution[] }} settlement
- * @param {{ id?: string, severity?: number } | null | undefined} blockade - active siege/occupation stressor gripping this settlement, or null
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {import('../settlement.schema.js').SimStressor} blockade - active siege/occupation stressor gripping this settlement, or null
  * @param {{ now?: string }} [options]
  */
 export function applyBlockadeTransportImpairment(settlement, blockade, { now } = {}) {
@@ -49,11 +44,11 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
       const causeEventId = `${CAUSE_PREFIX}${blockade.id}`;
       const severity = blockadeSeverityToImpairment(blockade.severity);
       const existing = (inst.impairments || []).find(
-        (im) => im?.type === 'access' && im?.causeEventId === causeEventId
+        (/** @type {any} */ im) => im?.type === 'access' && im?.causeEventId === causeEventId
       );
       if (existing && existing.severity === severity) return inst; // already stamped at this grip
       changed = true;
-      return withImpairment(inst, {
+      return withImpairment(/** @type {any} */ (inst), {
         type: 'access',
         severity,
         causeEventId,
@@ -65,12 +60,12 @@ export function applyBlockadeTransportImpairment(settlement, blockade, { now } =
 
     // No active blockade: lift every impairment this module ever stamped.
     const stale = (inst.impairments || []).filter(
-      (im) => String(im?.causeEventId || '').startsWith(CAUSE_PREFIX)
+      (/** @type {any} */ im) => String(im?.causeEventId || '').startsWith(CAUSE_PREFIX)
     );
     if (!stale.length) return inst;
     changed = true;
     let cleared = inst;
-    for (const im of stale) cleared = withoutEventImpairments(cleared, im.causeEventId);
+    for (const im of stale) cleared = withoutEventImpairments(/** @type {any} */ (cleared), im.causeEventId);
     return cleared;
   });
 

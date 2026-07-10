@@ -78,14 +78,15 @@ describe('layer boundaries (F29)', () => {
   });
 
   test('dependency-cycle set equals the checked-in baseline (shrink-only)', () => {
-    // The four known, tolerated cycles (canonical form: members rotated so the
+    // The known, tolerated cycles (canonical form: members rotated so the
     // lexicographically-smallest file leads, edge order preserved). Killing one
     // → REMOVE it here (locks the win). Adding one → this fails, and the
     // answer is to break the cycle, not extend the list.
+    // (2026-07-10, W2a-main: the pulseKernel port's worldPulse restructure broke
+    // both worldPulse cycles — foodStockpile>stressors>stressorGates and
+    // relationshipEvolution>relationshipHierarchy — locked here, 4 → 2.)
     const ALLOWED = [
       'components/compendium/CustomContent.jsx > components/compendium/Dependencies.jsx',
-      'domain/worldPulse/foodStockpile.js > domain/worldPulse/stressors.js > domain/worldPulse/stressorGates.js',
-      'domain/worldPulse/relationshipEvolution.js > domain/worldPulse/relationshipHierarchy.js',
       'generators/helpers.js > generators/priorityHelpers.js',
     ];
 

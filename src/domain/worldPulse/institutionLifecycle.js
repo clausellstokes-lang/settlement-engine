@@ -31,6 +31,7 @@
  */
 
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
+import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';
 import { computeActiveChains, institutionMatchesProcessor } from '../../generators/computeActiveChains.js';
@@ -39,7 +40,6 @@ import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
-import { compareCodepoint } from '../deterministicSort.js';
 
 const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
@@ -47,9 +47,12 @@ const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ h
 // Codepoint tiebreak, NOT localeCompare: these sorts decide WHICH institution
 // is built or closed, and default-locale collation can reorder names across
 // machines, breaking replay determinism (the seedBetrayalTraitor rule in
-// applyWorldPulse.js). The comparator now lives in domain/deterministicSort.js —
-// the single sanctioned cross-device-stable string order.
-const byCodepoint = compareCodepoint;
+// applyWorldPulse.js).
+const byCodepoint = (/** @type {any} */ a, /** @type {any} */ b) => {
+  const x = String(a);
+  const y = String(b);
+  return x < y ? -1 : x > y ? 1 : 0;
+};
 
 // ── Tuning (every coefficient of the lifecycle in one place) ─────────────────
 export const INSTITUTION_LIFECYCLE_TUNING = Object.freeze({
@@ -108,8 +111,7 @@ export const INSTITUTION_LIFECYCLE_TUNING = Object.freeze({
 // is display-only (project memory) — sim health comes from causal.scores.
 const ECONOMY_SCORE_KEYS = Object.freeze(['trade_connectivity', 'labor_capacity', 'infrastructure_condition', 'food_security']);
 
-/** @param {any} [scores] */
-export function economyHealthScore(scores = {}) {
+export function economyHealthScore(/** @type {any} */ scores = {}) {
   let total = 0;
   for (const key of ECONOMY_SCORE_KEYS) {
     const value = Number(scores?.[key]);
@@ -119,8 +121,7 @@ export function economyHealthScore(scores = {}) {
 }
 
 /** 'prosperous' | 'declining' | null (the dead band between thresholds). */
-/** @param {any} health */
-export function classifyEconomyDirection(health) {
+export function classifyEconomyDirection(/** @type {any} */ health) {
   const t = INSTITUTION_LIFECYCLE_TUNING.thresholds;
   if (health >= t.prosperous) return 'prosperous';
   if (health <= t.declining) return 'declining';
@@ -128,23 +129,20 @@ export function classifyEconomyDirection(health) {
 }
 
 // ── Roster helpers ───────────────────────────────────────────────────────────
-/** @param {any} settlement */
-function activeInstitutions(settlement) {
+function activeInstitutions(/** @type {any} */ settlement) {
   return (settlement?.institutions || []).filter(
     (/** @type {any} */ inst) => inst && inst.status !== 'removed' && inst.status !== 'destroyed' && !inst._worldPulseInactive,
   );
 }
 
-/** @param {any} settlement */
-function resourceList(settlement) {
+function resourceList(/** @type {any} */ settlement) {
   return [
     ...(settlement?.config?.nearbyResources || []),
     ...(settlement?.nearbyResources || []),
   ].filter(Boolean).map(String).filter((value, index, arr) => arr.indexOf(value) === index);
 }
 
-/** @param {any} settlement */
-function depletedResources(settlement) {
+function depletedResources(/** @type {any} */ settlement) {
   const depleted = new Set(settlement?.config?.nearbyResourcesDepleted || settlement?.nearbyResourcesDepleted || []);
   const states = settlement?.config?.nearbyResourcesState || {};
   for (const [key, state] of Object.entries(states)) {
@@ -154,20 +152,17 @@ function depletedResources(settlement) {
   return [...depleted];
 }
 
-/** @param {any} settlement */
-function settlementTier(settlement) {
+function settlementTier(/** @type {any} */ settlement) {
   return TIER_ORDER.includes(settlement?.tier) ? settlement.tier : 'village';
 }
 
-/** @param {any} settlement */
-function tradeAccess(settlement) {
+function tradeAccess(/** @type {any} */ settlement) {
   return settlement?.economicState?.tradeAccess || settlement?.config?.tradeRouteAccess || 'road';
 }
 
 /** Fresh chain derivation — stored economicState.activeChains is generation-
  *  time stale, so the lifecycle recomputes from the live roster every tick. */
-/** @param {any} settlement */
-export function deriveLifecycleChains(settlement) {
+export function deriveLifecycleChains(/** @type {any} */ settlement) {
   const tier = settlementTier(settlement);
   const insts = activeInstitutions(settlement);
   return computeActiveChains(
@@ -185,14 +180,12 @@ export function deriveLifecycleChains(settlement) {
 // the corruption loop, and arcane chains follow magic priority, not economics.
 const EXCLUDED_NEED_KEYS = new Set(['criminal_economy', 'arcane_magical']);
 
-/** @param {any} tier */
-function tierRankOf(tier) {
+function tierRankOf(/** @type {any} */ tier) {
   const idx = TIER_ORDER.indexOf(tier);
   return idx >= 0 ? idx : TIER_ORDER.indexOf('village');
 }
 
-/** @param {any} innerChainId */
-function chainCatalogEntries(innerChainId) {
+function chainCatalogEntries(/** @type {any} */ innerChainId) {
   const matches = [];
   for (const [needKey, need] of Object.entries(SUPPLY_CHAIN_NEEDS)) {
     if (EXCLUDED_NEED_KEYS.has(needKey)) continue;
@@ -203,22 +196,12 @@ function chainCatalogEntries(innerChainId) {
   return matches;
 }
 
-/**
- * @param {any} localResources
- * @param {any} depletedSet
- * @param {any} needKey
- * @param {any} innerChainId
- */
-function resourceFeedsChain(localResources, depletedSet, needKey, innerChainId) {
+function resourceFeedsChain(/** @type {any} */ localResources, /** @type {any} */ depletedSet, /** @type {any} */ needKey, /** @type {any} */ innerChainId) {
   const composite = `${needKey}.${innerChainId}`;
   return localResources.some((/** @type {any} */ rk) => !depletedSet.has(rk) && (/** @type {any} */ (RESOURCE_TO_CHAINS)[rk] || []).includes(composite));
 }
 
-/**
- * @param {any} a
- * @param {any} b
- */
-function namesOverlap(a, b) {
+function namesOverlap(/** @type {any} */ a, /** @type {any} */ b) {
   const x = String(a || '').toLowerCase();
   const y = String(b || '').toLowerCase();
   if (!x || !y) return false;
@@ -227,12 +210,7 @@ function namesOverlap(a, b) {
 
 /** The cheap generation gates a candidate entry must pass before the pulse
  *  may erect it: tier-legal, no unverifiable constraints, no roster collision. */
-/**
- * @param {any} entry
- * @param {any} settlement
- * @param {any} existingNames
- */
-function passesBuildGates(entry, settlement, existingNames) {
+function passesBuildGates(/** @type {any} */ entry, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   if (!entry) return null;
   const tier = settlementTier(settlement);
   if (entry.nativeTier && !tierAtLeast(tier, entry.nativeTier)) return null;
@@ -261,12 +239,7 @@ function passesBuildGates(entry, settlement, existingNames) {
 }
 
 /** A catalog entry the settlement could actually erect, by exact name. */
-/**
- * @param {any} name
- * @param {any} settlement
- * @param {any} existingNames
- */
-function buildableCatalogEntry(name, settlement, existingNames) {
+function buildableCatalogEntry(/** @type {any} */ name, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   return passesBuildGates(catalogEntryByName(name), settlement, existingNames);
 }
 
@@ -279,12 +252,7 @@ function buildableCatalogEntry(name, settlement, existingNames) {
  * then emit the resolved EXACT catalog name (every economic join is
  * name-keyed, so only real catalog names may ever reach a build patch).
  */
-/**
- * @param {any} pattern
- * @param {any} settlement
- * @param {any} existingNames
- */
-function buildableEntryForProcessor(pattern, settlement, existingNames) {
+function buildableEntryForProcessor(/** @type {any} */ pattern, /** @type {any} */ settlement, /** @type {any} */ existingNames) {
   const exact = buildableCatalogEntry(pattern, settlement, existingNames);
   if (exact) return exact;
   const p = String(pattern || '').toLowerCase();
@@ -324,18 +292,14 @@ function buildableEntryForProcessor(pattern, settlement, existingNames) {
  * Returns [{name, category, spec, nativeTier, kind, affinity, reason, context}]
  * sorted best-first, deduped by institution name. Pure + deterministic.
  */
-/**
- * @param {any} settlement
- * @param {any} [precomputedChains]
- */
-export function detectInstitutionGaps(settlement, precomputedChains = null) {
+export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {any} */ precomputedChains = null) {
   if (!settlement) return [];
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const existingNames = existingInstitutionNames(settlement);
   const localResources = resourceList(settlement);
   const depletedSet = new Set(depletedResources(settlement));
   const tier = settlementTier(settlement);
-  const affinityOf = INSTITUTION_LIFECYCLE_TUNING.gapAffinity;
+  const affinityOf = /** @type {any} */ (INSTITUTION_LIFECYCLE_TUNING.gapAffinity);
   const found = new Map();
 
   const addGap = (/** @type {any} */ entry, /** @type {any} */ kind, /** @type {any} */ reason, /** @type {any} */ context) => {
@@ -346,7 +310,7 @@ export function detectInstitutionGaps(settlement, precomputedChains = null) {
       spec: entry.spec,
       nativeTier: entry.nativeTier,
       kind,
-      affinity: /** @type {any} */ (affinityOf)[kind] ?? 0.5,
+      affinity: affinityOf[kind] ?? 0.5,
       reason,
       context,
     });
@@ -442,11 +406,7 @@ export function detectInstitutionGaps(settlement, precomputedChains = null) {
   return [...found.values()].sort((a, b) => b.affinity - a.affinity || byCodepoint(a.name, b.name));
 }
 
-/**
- * @param {any} fragment
- * @param {any} tier
- */
-function lowerTierEntriesMatching(fragment, tier) {
+function lowerTierEntriesMatching(/** @type {any} */ fragment, /** @type {any} */ tier) {
   const needle = fragment.toLowerCase();
   const maxRank = tierRankOf(tier);
   const out = [];
@@ -459,17 +419,13 @@ function lowerTierEntriesMatching(fragment, tier) {
 }
 
 // ── Contribution + closure eligibility ──────────────────────────────────────
-/**
- * @param {any} a
- * @param {any} b
- */
-function tokenOverlap(a, b) {
+function tokenOverlap(/** @type {any} */ a, /** @type {any} */ b) {
   const tokens = String(a || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').split(/\s+/).filter(t => t.length >= 4);
   const haystack = String(b || '').toLowerCase();
   return tokens.some(t => haystack.includes(t));
 }
 
-// Wave 8: the 12-char-prefix PROCESSOR_MATCH moved into the shared id-first
+// The 12-char-prefix PROCESSOR_MATCH moved into the shared id-first
 // join (institutionMatchesProcessor) — stamped institutions compare by
 // catalogId, unstamped ones keep the legacy fuzzy name match.
 
@@ -485,16 +441,13 @@ const NOT_FOOD_RE = /saw|lumber|timber/;
  * highest, then live chain processors, then food anchors. Drives the closure
  * shield: the smithy a smithed-goods economy rests on closes last.
  */
-/**
- * @param {any} settlement
- * @param {any} inst
- * @param {any} [precomputedChains]
- */
-export function institutionContribution(settlement, inst, precomputedChains = null) {
+export function institutionContribution(/** @type {any} */ settlement, /** @type {any} */ inst, /** @type {any} */ precomputedChains = null) {
   if (!settlement || !inst) return 0;
   const chains = precomputedChains || deriveLifecycleChains(settlement);
   const weights = INSTITUTION_LIFECYCLE_TUNING.contribution;
-  const exportsList = settlement?.economicState?.primaryExports || [];
+  // canonExports (not economicState.primaryExports directly) so a legacy `exports`-
+  // aliased save still scores its export-anchor institutions instead of reading empty.
+  const exportsList = canonExports(settlement);
   const exportsText = exportsList.join(' ');
   // Canonical good ids alongside the token check: subsumption renames within
   // a good ('Boots and shoes' surviving as 'Leather goods') share no >=4-char
@@ -523,8 +476,7 @@ export function institutionContribution(settlement, inst, precomputedChains = nu
 }
 
 /** 0..1 — compounded impairment load (impaired institutions close first). */
-/** @param {any} inst */
-export function institutionImpairmentLoad(inst) {
+export function institutionImpairmentLoad(/** @type {any} */ inst) {
   let load = 0;
   if (inst?.status === 'impaired' || inst?.status === 'critical') load = 0.3;
   const impairments = Array.isArray(inst?.impairments) ? inst.impairments : [];
@@ -544,11 +496,7 @@ export function institutionImpairmentLoad(inst) {
  * rosters): catalogEntryByName alone returns the LOWEST tier's spec, and
  * e.g. 'Weekly market' is optional at village but required at town.
  */
-/**
- * @param {any} inst
- * @param {any} [settlement]
- */
-export function isClosableInstitution(inst, settlement = null) {
+export function isClosableInstitution(/** @type {any} */ inst, /** @type {any} */ settlement = null) {
   if (!inst || !inst.name) return false;
   if (inst.status === 'removed' || inst.status === 'destroyed' || inst._worldPulseInactive) return false;
   if (inst.required || inst.requiredForTier) return false;
@@ -560,7 +508,7 @@ export function isClosableInstitution(inst, settlement = null) {
   if (entry) {
     if (entry.spec.required) return false;
     if ((entry.spec.tags || []).includes('essential')) return false;
-    if (['government', 'waterSupply'].includes(/** @type {string} */ (entry.spec.exclusiveGroup))) return false;
+    if (['government', 'waterSupply'].includes(entry.spec.exclusiveGroup)) return false;
   }
   if (settlement) {
     const needle = String(inst.name).toLowerCase();
@@ -603,8 +551,7 @@ const LIFECYCLE_CLOSE_FATES = new Set(['shuttered', 'bankrupt', 'closed_for_want
 // flapping across the thresholds churn the same institution with no added
 // damping. The history cap (24) means only RECENT events damp — amnesty for
 // ancient history is the right shape for an equilibrium, not a ratchet.
-/** @param {any} settlement */
-function priorLifecycleCounts(settlement) {
+function priorLifecycleCounts(/** @type {any} */ settlement) {
   let builds = 0;
   let closes = 0;
   for (const entry of settlement?.institutionHistory || []) {
@@ -614,8 +561,7 @@ function priorLifecycleCounts(settlement) {
   return { builds, closes };
 }
 
-/** @param {any} inst */
-function closureFateForInstitution(inst) {
+function closureFateForInstitution(/** @type {any} */ inst) {
   const text = `${inst?.name || ''} ${(inst?.tags || []).join(' ')} ${inst?.category || ''}`.toLowerCase();
   if (/market|shop|tavern|inn|bath|theater|theatre|gambl|festival/.test(text)) return 'shuttered';
   if (/guild|craft|smith|mill|works|yard|forge|tannery|weaver/.test(text)) return 'bankrupt';
@@ -630,13 +576,7 @@ function closureFateForInstitution(inst) {
  * flow through rollCandidates (volatility + budgets) like tier/resource drift.
  * Pure + deterministic: no rng here; the probability rides on the candidate.
  */
-/**
- * @param {any} worldState
- * @param {any} snapshot
- * @param {any} pressureIdx
- * @param {any} [context]
- */
-export function evaluateInstitutionLifecycle(worldState, snapshot, pressureIdx, context = {}) {
+export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** @type {any} */ snapshot, /** @type {any} */ pressureIdx, /** @type {any} */ context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
   const tick = Number.isFinite(context.tick) ? context.tick : worldState?.tick || 0;
   if (!rules.institutionLifecycleEnabled) return { worldState, candidates: [] };
@@ -792,11 +732,7 @@ export function evaluateInstitutionLifecycle(worldState, snapshot, pressureIdx, 
 }
 
 // ── Outcome application ──────────────────────────────────────────────────────
-/**
- * @param {any} settlement
- * @param {any} entry
- */
-function appendInstitutionHistory(settlement, entry) {
+function appendInstitutionHistory(/** @type {any} */ settlement, /** @type {any} */ entry) {
   return [
     ...(Array.isArray(settlement.institutionHistory) ? settlement.institutionHistory.slice(-23) : []),
     entry,
@@ -809,11 +745,7 @@ function appendInstitutionHistory(settlement, entry) {
  * re-apply this from the stored outcome alone, possibly ticks later, so every
  * guard re-checks against the CURRENT settlement.
  */
-/**
- * @param {any} settlement
- * @param {any} outcome
- */
-export function applyInstitutionLifecycleOutcome(settlement, outcome) {
+export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, /** @type {any} */ outcome) {
   const patch = outcome?.institutionPatch;
   if (!settlement || !patch?.name) return settlement;
   const institutions = Array.isArray(settlement.institutions) ? settlement.institutions : [];

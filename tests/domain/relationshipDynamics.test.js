@@ -176,12 +176,17 @@ describe('relationship dynamics rulebook', () => {
       expect(candidate.targetSaveId).toBe('c');
     }
 
-    // No stronger side -> no patronage, whichever way it is authored.
+    // No stronger side -> no patronage, whichever way it is authored. Partners
+    // must be EQUAL across every strength axis — including economy, which now
+    // feeds settlementStrength (OQ7=A). The asymmetric `pressures` above (p
+    // economy 0.12 vs c 0.82) makes p the stronger side, so the "even" case uses
+    // identical base pressures for both.
+    const evenPressures = pressureIndex(pressureRows(['p', 'c']));
     const peers = evaluateRelationshipRules(snapshot({
       edges: [{ id: 'edge.p.c', from: 'p', to: 'c', relationshipType: 'trade_partner' }],
       states: states('edge.p.c'),
       items: { p: item('p'), c: item('c') },
-    }), pressures, { tick: 9 });
+    }), evenPressures, { tick: 9 });
     expect(peers.some(c => c.ruleId === 'trade_to_patron_client')).toBe(false);
   });
 

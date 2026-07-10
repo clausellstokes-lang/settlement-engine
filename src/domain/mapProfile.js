@@ -34,6 +34,7 @@
 import { deriveCausalState } from './causalState.js';
 import { deriveAllThreatProfiles } from './threatProfile.js';
 import { deriveRegionalGraph } from './regionalGraph.js';
+import { resolveTerrain } from './resolveTerrain.js';
 
 /** @typedef {import('./causalState.js').CausalState} CausalState */
 
@@ -125,7 +126,7 @@ const DEFENSIVE_TERRAIN_BANDS = Object.freeze([
 function deriveInputs(settlement) {
   const cfg = settlement.config || {};
   return {
-    terrain:          cfg.terrain          || null,
+    terrain:          resolveTerrain(cfg),
     biome:            cfg.biome            || null,
     riverAccess:      cfg.riverAccess      || cfg.river || null,
     roadAccess:       cfg.roadAccess       || cfg.road  || null,
@@ -172,16 +173,18 @@ function deriveRoadImportance(settlement, causal, contributors) {
  */
 function deriveDefensiveTerrain(settlement, causal, contributors) {
   const defense = causal.scores?.defense_readiness ?? 50;
-  const terrain = settlement.config?.terrain || '';
+  const terrain = resolveTerrain(settlement.config) || '';
   const hasWalls = /\bwall|\brampart|\bpalisade/i.test(JSON.stringify(settlement.defenseProfile || {}))
                 || (settlement.institutions || []).some(i => /wall|gate|fortress|citadel/i.test(String(i?.name || '')));
 
   let idx = 1; // 'open' baseline
-  if (/mountain|highland|peak|cliff/i.test(terrain))  { idx = 3; contributors.push({ source: 'config.terrain', effect: 'highland', reason: 'Mountain / cliff terrain is sheltered.' }); }
-  else if (/forest|wood|jungle/i.test(terrain))       { idx = 2; contributors.push({ source: 'config.terrain', effect: 'forest', reason: 'Forest terrain is mixed defensively.' }); }
-  else if (/swamp|marsh|bog/i.test(terrain))          { idx = 2; contributors.push({ source: 'config.terrain', effect: 'wetland', reason: 'Swamp impedes attackers.' }); }
-  else if (/plain|steppe|desert/i.test(terrain))      { idx = 0; contributors.push({ source: 'config.terrain', effect: 'open', reason: 'Plain / steppe / desert is exposed.' }); }
-  else if (/coast|island|harbor|port/i.test(terrain)) { idx = 2; contributors.push({ source: 'config.terrain', effect: 'coast', reason: 'Coast / port is mixed.' }); }
+  if (/mountain|highland|peak|cliff/i.test(terrain))  { idx = 3; contributors.push({ source: 'config.terrainType', effect: 'highland', reason: 'Mountain / cliff terrain is sheltered.' }); }
+  else if (/hill/i.test(terrain))                     { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'highland', reason: 'Hill country favours the defender; mixed.' }); }
+  else if (/forest|wood|jungle/i.test(terrain))       { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'forest', reason: 'Forest terrain is mixed defensively.' }); }
+  else if (/swamp|marsh|bog/i.test(terrain))          { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'wetland', reason: 'Swamp impedes attackers.' }); }
+  else if (/plain|steppe|desert|grass/i.test(terrain)){ idx = 0; contributors.push({ source: 'config.terrainType', effect: 'open', reason: 'Plain / steppe / desert is exposed.' }); }
+  else if (/coast|island|harbor|port/i.test(terrain)) { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'coast', reason: 'Coast / port is mixed.' }); }
+  else if (/river|lake|fjord/i.test(terrain))         { idx = 2; contributors.push({ source: 'config.terrainType', effect: 'riverside', reason: 'A river guards a flank; mixed.' }); }
 
   if (hasWalls && defense >= 55) {
     idx = Math.max(idx, 4);

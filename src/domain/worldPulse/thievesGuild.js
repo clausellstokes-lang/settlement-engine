@@ -19,29 +19,10 @@ const CRIMINAL_NAME_RE = /thieves|criminal|gang|smuggl|fence|black\s*market|unde
 const CAPTURED = new Set(['corrupted', 'capture']);
 
 /**
- * @typedef {import('../settlement.schema.js').Faction & { faction?: string }} GuildFaction
- */
-/**
- * @typedef {Record<string, unknown> & { powerStructure?: { factions?: GuildFaction[] }, thievesGuildStrength?: number }} GuildSettlement
- */
-/**
- * @typedef {Object} GuildFactionState
- * @property {string} captureState
- * @property {(string|number)} [settlementId]
- * @property {string} [name]
- * @property {string} [archetype]
- */
-/**
- * @typedef {Object} GuildSnapshotEntry
- * @property {(string|number)} [id]
- * @property {{ powerStructure?: { factions?: GuildFaction[] }, factions?: GuildFaction[] }} [settlement]
- */
-
-/**
  * Per-settlement guild strength (0..1), from the captured factions in that
  * settlement (power joined from the snapshot, diversity = distinct factions).
- * @param {{ factionStates?: Record<string, GuildFactionState> } | null | undefined} worldState
- * @param {{ settlements?: GuildSnapshotEntry[] } | null | undefined} snapshot
+ * @param {any} worldState
+ * @param {any} snapshot
  * @returns {Map<string, number>} settlementId → strength
  */
 export function computeGuildStrengthBy(worldState, snapshot) {
@@ -77,9 +58,8 @@ export function computeGuildStrengthBy(worldState, snapshot) {
  * Mirror the guild's strength onto a settlement: floor the criminal faction's
  * power and hard-cap its legitimacy, and stamp settlement.thievesGuildStrength
  * for the dossier. Pure; returns the same reference when nothing changed.
- * @param {GuildSettlement | null | undefined} settlement
- * @param {(number|string|null|undefined)} strength
- * @returns {GuildSettlement | null | undefined}
+ * @param {any} settlement
+ * @param {any} strength
  */
 export function applyGuildToSettlement(settlement, strength) {
   if (!settlement) return settlement;
@@ -92,11 +72,7 @@ export function applyGuildToSettlement(settlement, strength) {
     const mapped = facs.map((f) => {
       if (!CRIMINAL_NAME_RE.test(String(f.name || f.faction || ''))) return f;
       const power = Math.max(Number(f.power) || 0, floor);
-      const legitimacy = Math.min(
-        // guaranteed number when Number.isFinite(f.legitimacy) is true
-        Number.isFinite(f.legitimacy) ? /** @type {number} */ (f.legitimacy) : 50,
-        GUILD_TUNING.legitimacyCap,
-      );
+      const legitimacy = Math.min(Number.isFinite(f.legitimacy) ? f.legitimacy : 50, GUILD_TUNING.legitimacyCap);
       if (power === f.power && legitimacy === f.legitimacy) return f;
       changed = true;
       return { ...f, power, legitimacy };

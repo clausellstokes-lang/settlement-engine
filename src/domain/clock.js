@@ -14,3 +14,25 @@ export const wallClockNow = () => new Date().toISOString();
 
 /** @returns {number} the current wall-clock instant in epoch milliseconds. */
 export const wallClockMs = () => Date.now();
+
+/**
+ * Structural pin-`now` guard for the world-pulse kernel. A pulse entry point that
+ * falls back to the wall clock instead of a caller-pinned `now` makes two same-seed
+ * calls diverge byte-wise (every graph updatedAt / news discoveredAt differs),
+ * silently forfeiting reproducibility. This turns "pin `now`" from a convention every
+ * future caller must remember into a structural guard: in `NODE_ENV==='test'` an
+ * unpinned call throws; in the browser / production it is a no-op (real callers pin
+ * `now`, and the boundary wall-clock fallback is legitimate there). Mirrors
+ * residueStripGuard's test-gating.
+ * @param {string} site  the entry point name, for the error message
+ */
+export function assertNowPinnedInTest(site) {
+  const p = /** @type {any} */ (globalThis).process;
+  if (p && p.env && p.env.NODE_ENV === 'test') {
+    throw new Error(
+      `[clock] ${site} fell back to wallClockNow() with no pinned \`now\`. Pass an explicit ` +
+      `\`now\` (a fixed ISO-8601 string) — unpinned now makes same-seed runs diverge byte-wise, ` +
+      `forfeiting reproducibility. Production callers already pin it; a test must too.`,
+    );
+  }
+}

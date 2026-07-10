@@ -13,100 +13,10 @@ export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
 
-/**
- * Local structural typedefs. relationshipEvolution.js (the state factory) is
- * still untyped, so the shapes are declared here from the fields this module
- * actually reads; they belong in relationshipEvolution.js once it is typed.
- *
- * @typedef {Object} RelState  per-relationship evolution state (ensureRelationshipState output)
- * @property {string} relationshipType
- * @property {number} trust
- * @property {number} resentment
- * @property {number} dependency
- * @property {number} leverage
- * @property {number} pactStrength
- * @property {number} fear
- * @property {number} tradeBalance
- * @property {number} obligationFatigue
- * @property {number} militaryBurden
- * @property {number} overlordWeaknessStreak
- * @property {RawMemoryRecord[]=} recentIncidents
- * @property {RawMemoryRecord[]=} hierarchyResolutions
- * @property {RawMemoryRecord[]=} history
- * @property {PersistedMemoryBlob=} relationshipMemory
- *
- * @typedef {Object} RawMemoryRecord  loose incident/history/outcome row feeding memoryEntry
- * @property {(number|null)=} tick
- * @property {number=} severity
- * @property {{ severity?: number }=} outcome
- * @property {string=} type
- * @property {string=} candidateType
- * @property {string=} ruleId
- * @property {string=} summary
- * @property {string=} headline
- * @property {string=} reason
- * @property {string=} label
- * @property {string=} outcomeId
- *
- * @typedef {Object} MemoryEntry  scored, decayed memory row
- * @property {(number|null|undefined)} tick
- * @property {string} type
- * @property {string} label
- * @property {string} summary
- * @property {number} severity
- * @property {number} weight
- * @property {number} score
- *
- * @typedef {{ trade: number, security: number, authority: number, information: number, tribute: number }} FlowProfile
- *
- * @typedef {Object} PersistedMemoryBlob  the stamp refreshRelationshipMemory writes
- * @property {string} posture
- * @property {string=} postureLabel
- * @property {number} score
- * @property {number} dailyLifeWeight
- * @property {number=} asymmetry
- * @property {FlowProfile=} flowProfile
- * @property {MemoryEntry[]=} recentMemory
- * @property {string[]=} reasons
- *
- * @typedef {{ legacyRelationshipType?: (string|null) }} RelEdge  normalized edge (only the field read here)
- *
- * @typedef {Object} PostureRow  one relationship posture (build output)
- * @property {string} relationshipKey
- * @property {string} from
- * @property {string} to
- * @property {string} relationshipType
- * @property {(string|null)} legacyRelationshipType
- * @property {string} posture
- * @property {string} postureLabel
- * @property {number} memoryScore
- * @property {number} dailyLifeWeight
- * @property {number} asymmetry
- * @property {FlowProfile} flowProfile
- * @property {MemoryEntry[]} recentMemory
- * @property {string[]} reasons
- * @property {string[]} practicalEffects
- * @property {RelEdge} edge
- * @property {boolean=} persisted
- *
- * @typedef {Object} SnapshotItem  world-snapshot per-settlement row (fields read here)
- * @property {string=} name
- * @property {string=} tier
- * @property {{ tier?: string, population?: number | { total?: number } }=} settlement
- * @property {{ scores?: Record<string, number> }=} causal
- *
- * @typedef {{ byId?: Map<string, SnapshotItem>, regionalGraph?: { edges?: unknown[] }, relationships?: unknown[] }} SnapshotLike
- *
- * @typedef {{ id?: string, name?: string, settlement?: { id?: string, name?: string } }} SaveLike
- */
+const clamp01 = (/** @type {any} */ value) => Math.max(0, Math.min(1, Number(value) || 0));
 
-/** @type {(value: unknown) => number} */
-const clamp01 = (value) => Math.max(0, Math.min(1, Number(value) || 0));
+const round2 = (/** @type {any} */ value) => Math.round((Number(value) || 0) * 100) / 100;
 
-/** @type {(value: unknown) => number} */
-const round2 = (value) => Math.round((Number(value) || 0) * 100) / 100;
-
-/** @type {Readonly<Record<string, number>>} */
 const TYPE_DAILY_LIFE_BASE = Object.freeze({
   neutral: 0.08,
   trade_partner: 0.34,
@@ -120,7 +30,6 @@ const TYPE_DAILY_LIFE_BASE = Object.freeze({
   criminal_network: 0.48,
 });
 
-/** @type {Readonly<Record<string, string>>} */
 const POSTURE_LABELS = Object.freeze({
   stable_neutral: 'stable neutral posture',
   open_neutral: 'open but uncommitted neutral posture',
@@ -142,52 +51,31 @@ const POSTURE_LABELS = Object.freeze({
   covert_corridor: 'covert criminal-corridor posture',
 });
 
-/**
- * @param {unknown} value
- * @param {number} [max]
- * @returns {string}
- */
-function clipText(value, max = 220) {
+function clipText(/** @type {any} */ value, max = 220) {
   const text = String(value || '').replace(/\s+/g, ' ').trim();
   // Word-boundary truncation — a hard slice left mid-word fragments in
   // persisted memory summaries and AI context payloads.
   return truncateAtWord(text, max, '...');
 }
 
-/**
- * @param {string | null | undefined} type
- * @returns {string}
- */
-function titleForType(type) {
+function titleForType(/** @type {any} */ type) {
   return String(type || 'neutral').replace(/_/g, ' ');
 }
 
-/**
- * @param {SnapshotItem | null | undefined} item
- * @returns {number}
- */
-function tierRank(item) {
+function tierRank(/** @type {any} */ item) {
   const tier = item?.settlement?.tier || item?.tier || 'village';
   const rank = TIER_ORDER.indexOf(tier);
   return rank >= 0 ? rank : TIER_ORDER.indexOf('village');
 }
 
-/**
- * @param {SnapshotItem | null | undefined} item
- * @returns {number}
- */
-function population(item) {
+function population(/** @type {any} */ item) {
   const pop = item?.settlement?.population;
   if (typeof pop === 'number') return pop;
   if (pop && typeof pop.total === 'number') return pop.total;
   return 0;
 }
 
-/**
- * @param {SnapshotItem | null | undefined} item
- * @returns {number}
- */
-function settlementPower(item) {
+function settlementPower(/** @type {any} */ item) {
   if (!item) return 0.35;
   const popScore = Math.min(1, Math.log10(Math.max(10, population(item))) / 5);
   const tierScore = tierRank(item) / Math.max(1, TIER_ORDER.length - 1);
@@ -198,57 +86,39 @@ function settlementPower(item) {
   return clamp01(tierScore * 0.38 + popScore * 0.18 + economy * 0.18 + defense * 0.16 + legitimacy * 0.1);
 }
 
-/**
- * @param {SnapshotLike | null | undefined} snapshot
- * @param {string | number} saveId
- * @returns {SnapshotItem | null}
- */
-function itemFor(snapshot, saveId) {
+function itemFor(/** @type {any} */ snapshot, /** @type {any} */ saveId) {
   return snapshot?.byId?.get?.(String(saveId)) || null;
 }
 
-/**
- * @param {{ snapshot?: SnapshotLike | null, savedSettlements?: SaveLike[], saveId: string | number }} args
- * @returns {string}
- */
-function nameFor({ snapshot, savedSettlements, saveId }) {
+function nameFor(/** @type {any} */ { snapshot, savedSettlements, saveId }) {
   const id = String(saveId);
   const item = itemFor(snapshot, id);
   if (item?.name) return item.name;
-  const save = (savedSettlements || []).find(s => String(s.id || s.settlement?.id) === id);
+  const save = (savedSettlements || []).find((/** @type {any} */ s) => String(s.id || s.settlement?.id) === id);
   return save?.name || save?.settlement?.name || id;
 }
 
-/**
- * @param {number | null | undefined} eventTick
- * @param {number | null | undefined} [currentTick]
- * @param {{ halfLifeTicks?: number, maxLookbackTicks?: number }} [options]
- * @returns {number} 0..1 decay weight; 0.35 flat prior when the event has no tick
- */
 export function relationshipMemoryWeight(
-  eventTick,
+  /** @type {any} */ eventTick,
   currentTick = 0,
-  {
+  /** @type {any} */ {
     halfLifeTicks = RELATIONSHIP_MEMORY_HALF_LIFE_TICKS,
     maxLookbackTicks = RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS,
   } = {},
 ) {
-  if (!Number.isFinite(eventTick)) return 0.35;
-  // Number.isFinite is not a type-guard in the TS lib; the early return above guarantees a number
-  const age = Math.max(0, Number(currentTick || 0) - /** @type {number} */ (eventTick));
+  // Undated rows (legacy/malformed history with no tick) must NOT carry a fixed
+  // weight forever — that inflated memoryScore / dailyLifeWeight / posture
+  // classification permanently (e.g. nudging rival -> escalating_rivalry via
+  // memoryScore > 0.5). They age out to nothing instead; the apply path stamps
+  // worldState.tick on every fresh row, so the gap is only legacy data.
+  if (!Number.isFinite(eventTick)) return 0;
+  const age = Math.max(0, Number(currentTick || 0) - eventTick);
   if (age > maxLookbackTicks) return 0;
   return clamp01(Math.pow(0.5, age / Math.max(1, halfLifeTicks)));
 }
 
-/**
- * @param {RawMemoryRecord | null | undefined} raw
- * @param {number | null | undefined} currentTick
- * @param {string} [fallbackType]
- * @returns {MemoryEntry | null} null when the memory has fully decayed
- */
-function memoryEntry(raw, currentTick, fallbackType) {
-  // Number.isFinite(raw?.tick) === true guarantees raw is non-null here; the lib signature is not a type-guard
-  const tick = Number.isFinite(raw?.tick) ? /** @type {any} */ (raw).tick : null;
+function memoryEntry(/** @type {any} */ raw, /** @type {any} */ currentTick, /** @type {any} */ fallbackType) {
+  const tick = Number.isFinite(raw?.tick) ? raw.tick : null;
   const severity = clamp01(raw?.severity ?? raw?.outcome?.severity ?? 0.45);
   const weight = relationshipMemoryWeight(tick, currentTick);
   if (weight <= 0) return null;
@@ -265,20 +135,8 @@ function memoryEntry(raw, currentTick, fallbackType) {
   };
 }
 
-/**
- * @param {{
- *   worldState?: {
- *     proposals?: Array<{ status?: string, outcome?: { id?: string } }>,
- *     pulseHistory?: Array<{ tick?: number, selectedOutcomes?: Array<RawMemoryRecord & { relationshipKey?: string, applyMode?: string, id?: string, metadata?: { incidentType?: string }, proposalPayload?: { kind?: string } }> }>,
- *   } | null,
- *   relationshipKey: string,
- *   relState: RelState,
- *   currentTick: number | null | undefined,
- * }} args
- * @returns {MemoryEntry[]} top-8 scored memories, strongest first
- */
-function collectRelationshipMemories({ worldState, relationshipKey, relState, currentTick }) {
-  /** @type {MemoryEntry[]} */
+function collectRelationshipMemories(/** @type {any} */ { worldState, relationshipKey, relState, currentTick }) {
+  /** @type {any[]} */
   const out = [];
   // One world event lands in up to THREE stores: applyRelationshipPatch writes
   // a recentIncidents row AND (for label changes) a history row, while the
@@ -298,19 +156,13 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // outcome id joins FIRST, regardless of which tick the rows landed on.
   // The per-relationship stores then fill in only events the pulse window no
   // longer covers (party incidents, war resolutions, truncated history).
-  /** @type {Set<string>} */
   const seen = new Set();
-  /** @type {(tick: number | null | undefined, type: string | null | undefined) => (string | null)} */
-  const keyFor = (tick, type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
-  /** @type {(id: string | null | undefined) => (string | null)} */
-  const outcomeKeyFor = (id) => (id ? `outcome:${id}` : null);
-  /** @type {(entry: MemoryEntry | null, keys: Array<string | null>) => void} */
-  const add = (entry, keys) => {
+  const keyFor = (/** @type {any} */ tick, /** @type {any} */ type) => (Number.isFinite(tick) && type ? `${tick}:${type}` : null);
+  const outcomeKeyFor = (/** @type {any} */ id) => (id ? `outcome:${id}` : null);
+  const add = (/** @type {any} */ entry, /** @type {any} */ keys) => {
     if (!entry) return;
-    /** @type {string[]} */
-    // filter(Boolean) removes the nulls; TS does not narrow the built-in Boolean callback
-    const valid = /** @type {string[]} */ (keys.filter(Boolean));
-    if (valid.some(key => seen.has(key))) return;
+    const valid = keys.filter(Boolean);
+    if (valid.some((/** @type {any} */ key) => seen.has(key))) return;
     for (const key of valid) seen.add(key);
     out.push(entry);
   };
@@ -320,9 +172,8 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   // dismissed proposals must score nothing. Application is recorded twice:
   // accepting stamps the proposal row 'applied' (worldState.proposals), and
   // the apply-time writes stamp the outcome id onto every incident/history/
-  // hierarchy row (R3). Either marker admits the outcome; auto outcomes
+  // hierarchy row. Either marker admits the outcome; auto outcomes
   // applied at selection and need no marker.
-  /** @type {Set<string | undefined>} */
   const appliedMarkers = new Set();
   for (const proposal of worldState?.proposals || []) {
     if (proposal?.status === 'applied' && proposal?.outcome?.id) appliedMarkers.add(proposal.outcome.id);
@@ -373,12 +224,7 @@ function collectRelationshipMemories({ worldState, relationshipKey, relState, cu
   return out.sort((a, b) => b.score - a.score).slice(0, 8);
 }
 
-/**
- * @param {string} type
- * @param {RelState} relState
- * @returns {FlowProfile}
- */
-function flowProfile(type, relState) {
+function flowProfile(/** @type {any} */ type, /** @type {any} */ relState) {
   const trust = clamp01(relState.trust);
   const resentment = clamp01(relState.resentment);
   const dependency = clamp01(relState.dependency);
@@ -406,13 +252,7 @@ function flowProfile(type, relState) {
   }
 }
 
-/**
- * @param {string} type
- * @param {RelState} relState
- * @param {number} memoryScore
- * @returns {string} a POSTURE_LABELS key
- */
-function classifyPosture(type, relState, memoryScore) {
+function classifyPosture(/** @type {any} */ type, /** @type {any} */ relState, /** @type {any} */ memoryScore) {
   if (type === 'neutral') return relState.trust > 0.55 ? 'open_neutral' : 'stable_neutral';
   if (type === 'trade_partner') return relState.resentment > 0.34 || relState.tradeBalance < 0.38 ? 'strained_trade' : 'open_trade';
   if (type === 'allied') return relState.obligationFatigue > 0.45 || relState.resentment > 0.28 ? 'strained_alliance' : 'protective_alliance';
@@ -429,15 +269,8 @@ function classifyPosture(type, relState, memoryScore) {
   return 'stable_neutral';
 }
 
-/**
- * @param {string} type
- * @param {RelState} relState
- * @param {MemoryEntry[]} memories
- * @param {number} asymmetry
- * @returns {string[]}
- */
-function postureReasons(type, relState, memories, asymmetry) {
-  /** @type {string[]} */
+function postureReasons(/** @type {any} */ type, /** @type {any} */ relState, /** @type {any} */ memories, /** @type {any} */ asymmetry) {
+  /** @type {any[]} */
   const out = [];
   if (memories[0]) out.push(`Recent memory: ${memories[0].summary}`);
   if (relState.resentment > 0.5) out.push(`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.`);
@@ -452,12 +285,7 @@ function postureReasons(type, relState, memories, asymmetry) {
   return out.slice(0, 4);
 }
 
-/**
- * @param {string} type
- * @param {string} posture
- * @returns {string[]}
- */
-function practicalEffects(type, posture) {
+function practicalEffects(/** @type {any} */ type, /** @type {any} */ posture) {
   if (type === 'trade_partner') return posture === 'strained_trade'
     ? ['Merchants price risk into contracts.', 'Caravans delay departures or seek alternate routes.', 'Market gossip tracks shortages and favors.']
     : ['Caravans and market factors move with confidence.', 'Imported goods feel routine rather than exceptional.'];
@@ -489,18 +317,10 @@ function practicalEffects(type, posture) {
 // instead of recomputing — that read is what earns the field family its
 // persistence. Returns null (recompute fallback) for legacy saves that predate
 // the stamp or carry an unrecognizable posture.
-/**
- * @param {RelState} relState
- * @param {RelEdge} edge
- * @param {string} relationshipKey
- * @param {string | number} from
- * @param {string | number} to
- * @returns {PostureRow | null}
- */
-function persistedPostureRow(relState, edge, relationshipKey, from, to) {
+function persistedPostureRow(/** @type {any} */ relState, /** @type {any} */ edge, /** @type {any} */ relationshipKey, /** @type {any} */ from, /** @type {any} */ to) {
   const blob = relState?.relationshipMemory;
   if (!blob || typeof blob !== 'object') return null;
-  if (!POSTURE_LABELS[blob.posture]) return null;
+  if (!POSTURE_LABELS[/** @type {keyof typeof POSTURE_LABELS} */ (blob.posture)]) return null;
   if (!Number.isFinite(blob.score) || !Number.isFinite(blob.dailyLifeWeight)) return null;
   const type = relState.relationshipType;
   return {
@@ -510,7 +330,7 @@ function persistedPostureRow(relState, edge, relationshipKey, from, to) {
     relationshipType: type,
     legacyRelationshipType: edge.legacyRelationshipType || null,
     posture: blob.posture,
-    postureLabel: blob.postureLabel || POSTURE_LABELS[blob.posture],
+    postureLabel: blob.postureLabel || POSTURE_LABELS[/** @type {keyof typeof POSTURE_LABELS} */ (blob.posture)],
     memoryScore: round2(clamp01(blob.score)),
     dailyLifeWeight: round2(clamp01(blob.dailyLifeWeight)),
     asymmetry: round2(blob.asymmetry ?? 0),
@@ -527,29 +347,23 @@ function persistedPostureRow(relState, edge, relationshipKey, from, to) {
 
 /**
  * @param {{ worldState?: any, regionalGraph?: any, snapshot?: any, currentTick?: number|null, preferPersisted?: boolean }} [args]
- * @returns {PostureRow[]} sorted by dailyLifeWeight, strongest first
  */
 export function buildRelationshipPostures({ worldState = {}, regionalGraph = {}, snapshot = null, currentTick = null, preferPersisted = false } = {}) {
   const tick = Number.isFinite(currentTick) ? currentTick : Number(worldState?.tick) || 0;
   const states = worldState?.relationshipStates || {};
   const edges = regionalGraph?.edges || snapshot?.regionalGraph?.edges || snapshot?.relationships || [];
-  /** @type {PostureRow[]} */
   const postures = [];
 
   for (const rawEdge of edges) {
     const relationshipKey = relationshipKeyFromEdge(rawEdge);
     const edge = normalizeRelationshipEdge(rawEdge);
-    // ensureRelationshipState returns the fuller RelationshipState; this module
-    // reads its incident/history/hierarchy stores through the richer RelState
-    // memory-view (RawMemoryRecord rows), so surface it as RelState here and
-    // hand the raw state back to relationshipRoles (which reads overlord/patron ids).
-    const relState = /** @type {RelState} */ (/** @type {unknown} */ (ensureRelationshipState(edge, states[relationshipKey])));
+    const relState = ensureRelationshipState(edge, states[relationshipKey]);
     const rawSettlements = getRelationshipSettlements(edge);
     if (!rawSettlements.from || !rawSettlements.to) continue;
-    // H16: when a subjugation/patronage crowned the edge's authored 'to' side
+    // When a subjugation/patronage crowned the edge's authored 'to' side
     // the senior party is stamped on the STATE — present senior-first like
     // every other hierarchy edge so direction summaries stay truthful.
-    const roles = relationshipRoles(edge, /** @type {import('./relationshipEvolution.js').RelationshipState} */ (/** @type {unknown} */ (relState)));
+    const roles = relationshipRoles(edge, relState);
     const from = roles.reversed ? roles.seniorId : String(rawSettlements.from);
     const to = roles.reversed ? roles.juniorId : String(rawSettlements.to);
     if (preferPersisted) {
@@ -566,7 +380,7 @@ export function buildRelationshipPostures({ worldState = {}, regionalGraph = {},
     const asymmetry = round2(settlementPower(itemFor(snapshot, from)) - settlementPower(itemFor(snapshot, to)));
     const flow = flowProfile(type, relState);
     const reasons = postureReasons(type, relState, memories, asymmetry);
-    const dailyLifeWeight = clamp01((TYPE_DAILY_LIFE_BASE[type] ?? 0.12) + memoryScore * 0.35 + Math.max(0, relState.resentment - 0.35) * 0.18);
+    const dailyLifeWeight = clamp01((TYPE_DAILY_LIFE_BASE[/** @type {keyof typeof TYPE_DAILY_LIFE_BASE} */ (type)] ?? 0.12) + memoryScore * 0.35 + Math.max(0, relState.resentment - 0.35) * 0.18);
 
     postures.push({
       relationshipKey,
@@ -614,7 +428,7 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
       dailyLifeWeight: posture.dailyLifeWeight,
       flowProfile: posture.flowProfile,
       asymmetry: posture.asymmetry,
-      recentMemory: posture.recentMemory.slice(0, 4).map(({ tick, type, label, summary, severity, weight }) => ({
+      recentMemory: posture.recentMemory.slice(0, 4).map((/** @type {any} */ { tick, type, label, summary, severity, weight }) => ({
         tick,
         type,
         label,
@@ -638,14 +452,10 @@ export function refreshRelationshipMemory(worldState = {}, regionalGraph = {}, s
   return { ...worldState, relationshipStates };
 }
 
-/**
- * @param {PostureRow} posture
- * @param {string | number} settlementId
- * @returns {string}
- */
-function directionFor(posture, settlementId) {
+function directionFor(/** @type {any} */ posture, /** @type {any} */ settlementId) {
   const id = String(settlementId);
-  if (posture.from === id && posture.to === id) return 'self';
+  // (No self-loop branch: buildRelationshipPostures only emits pair edges with
+  // distinct from/to, so from === to === id is unreachable for a normal edge.)
   if (posture.from === id) {
     if (posture.relationshipType === 'vassal') return 'overlord_to_vassal';
     if (posture.relationshipType === 'patron') return 'patron_to_client';
@@ -659,13 +469,7 @@ function directionFor(posture, settlementId) {
   return 'indirect';
 }
 
-/**
- * @param {PostureRow} posture
- * @param {string | number} settlementId
- * @param {string} otherName
- * @returns {string}
- */
-function entrySummary(posture, settlementId, otherName) {
+function entrySummary(/** @type {any} */ posture, /** @type {any} */ settlementId, /** @type {any} */ otherName) {
   const direction = directionFor(posture, settlementId);
   if (direction === 'overlord_to_vassal') return `${otherName} is a vassal under a ${posture.postureLabel}.`;
   if (direction === 'vassal_to_overlord') return `${otherName} is the overlord; the settlement lives under a ${posture.postureLabel}.`;
@@ -675,19 +479,8 @@ function entrySummary(posture, settlementId, otherName) {
 }
 
 /**
- * @typedef {Object} RelationshipContextEntryInput  loose pre-sanitize context row
- * @property {unknown=} otherSettlementId
- * @property {unknown=} otherSettlementName
- * @property {unknown=} relationshipType
- * @property {unknown=} posture
- * @property {unknown=} direction
- * @property {unknown=} summary
- * @property {unknown[]=} practicalEffects
- * @property {Array<{ tick?: (number|null), label?: string, type?: string, summary?: string }>=} recentMemory
- *
- * @param {{ settlementId?: unknown, generatedAtTick?: (number|null), relationships?: RelationshipContextEntryInput[] } | null | undefined} context
+ * @param {any} context
  * @param {{ maxRelationships?: number, maxMemories?: number }} [options]
- * @returns {{ settlementId: (string|null), generatedAtTick: (number|null|undefined), emphasis: string, relationships: Array<Object> } | null}
  */
 export function sanitizeRelationshipMemoryContext(context, {
   maxRelationships = RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS,
@@ -695,7 +488,7 @@ export function sanitizeRelationshipMemoryContext(context, {
 } = {}) {
   if (!context || typeof context !== 'object') return null;
   const relationships = Array.isArray(context.relationships) ? context.relationships : [];
-  const sanitized = relationships.slice(0, maxRelationships).map(item => ({
+  const sanitized = relationships.slice(0, maxRelationships).map((/** @type {any} */ item) => ({
     otherSettlementId: item.otherSettlementId ? String(item.otherSettlementId) : null,
     otherSettlementName: clipText(item.otherSettlementName, 80),
     relationshipType: clipText(item.relationshipType, 40),
@@ -704,15 +497,15 @@ export function sanitizeRelationshipMemoryContext(context, {
     summary: clipText(item.summary, 240),
     practicalEffects: (Array.isArray(item.practicalEffects) ? item.practicalEffects : [])
       .slice(0, 4)
-      .map(text => clipText(text, 180)),
+      .map((/** @type {any} */ text) => clipText(text, 180)),
     recentMemory: (Array.isArray(item.recentMemory) ? item.recentMemory : [])
       .slice(0, maxMemories)
-      .map(memory => ({
+      .map((/** @type {any} */ memory) => ({
         tick: Number.isFinite(memory?.tick) ? memory.tick : null,
         label: clipText(memory?.label || memory?.type, 80),
         summary: clipText(memory?.summary, 200),
       })),
-  })).filter(item => item.otherSettlementName || item.summary);
+  })).filter((/** @type {any} */ item) => item.otherSettlementName || item.summary);
   if (!sanitized.length) return null;
   return {
     settlementId: context.settlementId ? String(context.settlementId) : null,
@@ -766,7 +559,7 @@ export function buildSettlementRelationshipMemoryContext({
       direction: directionFor(posture, id),
       summary: entrySummary(posture, id, otherSettlementName),
       practicalEffects: posture.practicalEffects,
-      recentMemory: posture.recentMemory.slice(0, maxMemories).map(memory => ({
+      recentMemory: posture.recentMemory.slice(0, maxMemories).map((/** @type {any} */ memory) => ({
         tick: memory.tick,
         label: memory.label,
         summary: memory.summary,

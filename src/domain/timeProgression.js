@@ -305,16 +305,23 @@ function applyFactionDeltasToSettlement(settlement, allDeltas) {
     }
 
     // Wealth / publicTrust / manpower: tracked in tick output (see
-    // composer below) but not yet stored on the faction. Tier 4.16
-    // will add the storage. We DO mirror them onto the faction as
-    // string-suffixed delta lines so consumers reading the live shape
-    // can show "wealth pressure" without a separate state surface.
+    // composer below) but not yet stored on the faction. We DO mirror them
+    // onto the faction as string-suffixed delta lines so consumers reading
+    // the live shape can show "wealth pressure" without a separate surface.
+    // Clone _timePressure before writing rather than mutating in place. The
+    // faction here is a shallow copy (`{ ...f }`), so an inherited _timePressure
+    // still points at the ORIGINAL faction's object — mutating it would leak into
+    // the input (corrupting the pre-tick snapshot the pause/resume re-run reads,
+    // and throwing on an immer-frozen input). A fresh copy keeps every tick pure.
+    let touchedPressure = false;
+    const nextPressure = { ...(faction._timePressure || {}) };
     for (const field of ['wealth', 'publicTrust', 'manpower']) {
       if (typeof deltas[field] === 'number') {
-        if (!faction._timePressure) faction._timePressure = {};
-        faction._timePressure[field] = (faction._timePressure[field] || 0) + deltas[field];
+        nextPressure[field] = (nextPressure[field] || 0) + deltas[field];
+        touchedPressure = true;
       }
     }
+    if (touchedPressure) faction._timePressure = nextPressure;
   }
 
   return cloned;

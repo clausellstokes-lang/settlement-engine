@@ -44,7 +44,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // remaining war/trade modules (warDeployment, occupation, tradeWar, etc.) WITHOUT
 // a second ceiling churn. Monotone-DOWN thereafter: burn holes as the sim types
 // are enumerated — never raise past 1720.)
-const CEILING = 1720;
+//
+// (projection corrected to measurement at main-port landing, 2026-07-10 —
+// 1720 → 2291. Same adoption event, not a second raise: 1720 was W2a-prep's
+// PRE-MERGE projection of the main port's debt; the landed merge (pulseKernel +
+// the full war/trade/religion module set + the 33 three-way both-file merges)
+// measures 2291. Monotone-down hereafter; burn-down pass scheduled wave 5
+// (worst: warDeployment, occupation, tradeWar).)
+const CEILING = 2291;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();

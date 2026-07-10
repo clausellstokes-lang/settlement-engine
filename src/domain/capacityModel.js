@@ -51,7 +51,7 @@
 import { deriveAllActiveConditions } from './activeConditions.js';
 import { deriveAllFactionProfiles } from './factionProfile.js';
 import { deriveAllSupplyChainStates } from './supplyChainState.js';
-import { deriveAllThreatProfiles } from './threatProfile.js';
+import { deriveAllThreatProfiles, dedupeThreatsByPressure } from './threatProfile.js';
 import { tradeRouteSemantics, tradeRouteTier } from './tradeRouteSemantics.js';
 import { canonStressors, canonExports } from './canonicalAccessors.js';
 import { foodLedger } from './foodLedger.js';
@@ -67,6 +67,7 @@ import { healingLedger } from './healingLedger.js';
  * @typedef {import('./settlement.schema.js').CapacityContributor} CapacityContributor
  * @typedef {import('./activeConditions.js').ActiveCondition} ActiveCondition
  * @typedef {import('./settlement.schema.js').ThreatProfile} ThreatProfile
+ * @typedef {import('./threatProfile.js').ThreatProfile} DerivedThreatProfile
  * @typedef {import('./factionProfile.js').FactionProfile} FactionProfile
  * @typedef {import('./settlement.schema.js').SupplyChainState} SupplyChainState
  * @typedef {import('./settlement.schema.js').StressorEntry} StressorEntry
@@ -107,7 +108,7 @@ import { healingLedger } from './healingLedger.js';
  * A supply-chain state as this module reads it. `status` is a plain
  * string (not the closed SupplyChainStatus union) because chains that
  * pass through applyRegionalPressureToStatus can carry legacy statuses.
- * @typedef {{ id: string, name: string, needKey?: string, status: string }} ChainLike
+ * @typedef {{ id: string, name: string, needKey?: string, status: string, regionalPressures?: Array<{ id: string, label?: string }> }} ChainLike
  */
 
 /**
@@ -116,7 +117,8 @@ import { healingLedger } from './healingLedger.js';
  * @property {ActiveCondition[]}  conditions
  * @property {FactionProfile[]}   profiles
  * @property {ChainLike[]}        chains
- * @property {ThreatProfile[]}    threats
+ * @property {DerivedThreatProfile[]}    threats
+ * @property {DerivedThreatProfile[]}    demandThreats
  */
 
 /**
@@ -150,6 +152,21 @@ export const CAPACITY_NAMES = Object.freeze([
   'transport',
   'religious_welfare',
   'craft',
+  'magical',
+]);
+
+// The five capacity lenses the product treats as outsider- and DM-facing:
+// food/defense/governance/healing/magic. labor, craft, transport, and
+// religious_welfare are internal substrate — a shortage in them is real for
+// the simulation but is not narrated as visible prose. aiGrounding.js holds
+// the same five-lens list for the AI payload; this constant lets non-AI
+// derivations (e.g. Outsider impressions) honour the same boundary so an
+// internal-only shortage never leaks into visible text.
+export const VISIBLE_CAPACITY_LENSES = Object.freeze([
+  'food_production',
+  'defense',
+  'administrative',
+  'healing',
   'magical',
 ]);
 
@@ -344,10 +361,16 @@ function deriveHealing(s, ctx) {
     supply -= 10; push(supplyContributors, 'institutions', 'absent', -10, 'No dedicated healing institutions or services.');
   }
 
-  // SUPPLY: magic level
-  const magic = s.config?.magicLevel || 'low';
-  if (magic === 'high' || magic === 'pervasive') {
+  // SUPPLY: magic level (conserved dial via magicLedger, matching deriveMagical).
+  // The prior `s.config?.magicLevel` read used a stale vocabulary: it missed the
+  // canonical 'medium' band (the widest tier) entirely and checked 'pervasive',
+  // which the generator never emits — so medium-magic settlements got zero
+  // magical-healing supply and biased toward strained.
+  const healMagic = magicLedger(s);
+  if (healMagic.present && healMagic.magicLevel === 'high') {
     supply += 10; push(supplyContributors, 'config.magicLevel', 'high', +10, `High magic supports magical healing.`);
+  } else if (healMagic.present && healMagic.magicLevel === 'medium') {
+    supply += 5; push(supplyContributors, 'config.magicLevel', 'medium', +5, `Moderate magic supports some magical healing.`);
   }
 
   // SUPPLY: religious faction power supports relief
@@ -368,7 +391,7 @@ function deriveHealing(s, ctx) {
       demand += m; push(demandContributors, cond.id, 'plague', +m, `${cond.label} overwhelms healing.`);
     }
   }
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'siege' || threat.type === 'monster_pressure') {
       const m = Math.round(threat.severity * 12);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives injury rates up.`);
@@ -424,16 +447,18 @@ function deriveDefense(s, ctx) {
     supply += 8; push(supplyContributors, 'faction.military', 'power', +8, `Military faction at power ${milPower}.`);
   }
 
-  // DEMAND: monsterThreat
-  const monster = s.config?.monsterThreat || 'safe';
-  if (monster === 'plagued') {
-    demand += 25; push(demandContributors, 'config.monsterThreat', 'plagued', +25, 'Region overrun with monsters.');
-  } else if (monster === 'frontier') {
-    demand += 15; push(demandContributors, 'config.monsterThreat', 'frontier', +15, 'Frontier monster pressure.');
-  }
-
-  // DEMAND: threats
-  for (const threat of ctx.threats) {
+  // DEMAND: threats. config.monsterThreat is intentionally NOT charged here
+  // directly — collectThreatSources already materializes it as a canonical
+  // monster_pressure threat (severity 0.85 plagued / 0.45 frontier), so the
+  // threat loop below is the single source of truth for monster demand.
+  // Charging both double-counted the same pressure and over-inflated defense
+  // demand for every frontier/plagued settlement.
+  //
+  // ctx.demandThreats is the pressure-deduped view (one row per (type,target),
+  // max severity): two hostile neighbours both ENUMERATE distinctly elsewhere,
+  // but charge defense demand once here so the band tracks the worst pressure
+  // rather than inflating on each duplicate.
+  for (const threat of ctx.demandThreats) {
     if (['siege', 'bandit_raids', 'rival_neighbor', 'monster_pressure'].includes(threat.type)) {
       const m = Math.round(threat.severity * 15);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} drives defense need.`);
@@ -544,6 +569,15 @@ function deriveFoodProduction(s, ctx) {
       supply -= 15; push(supplyContributors, c.id, c.status, -15, `${c.name} is ${c.status}.`);
     } else if (c.status !== 'stable') {
       supply -= 6; push(supplyContributors, c.id, c.status, -6, `${c.name} is ${c.status}.`);
+    }
+    // Surface the ORIGINATING regional condition as a (delta-0) contributor so
+    // conditionTrajectory's source-join sees it. The chain's degraded status
+    // already moved supply above; this row only carries provenance, so a chain
+    // dragged down by a worsening regional condition now reports trajectory
+    // 'worsening' instead of mis-reporting 'stable'.
+    for (const rp of Array.isArray(c.regionalPressures) ? c.regionalPressures : []) {
+      if (!rp || typeof rp.id !== 'string') continue;
+      push(supplyContributors, rp.id, 'regional_pressure', 0, `${rp.label || rp.id} pressures ${c.name}.`);
     }
   }
 
@@ -795,7 +829,7 @@ function deriveMagical(s, ctx) {
   }
 
   // DEMAND: threats requiring magical response + magical conditions
-  for (const threat of ctx.threats) {
+  for (const threat of ctx.demandThreats) {
     if (threat.type === 'arcane_instability' || threat.type === 'cult') {
       const m = Math.round(threat.severity * 14);
       demand += m; push(demandContributors, threat.id, threat.type, +m, `${threat.label} requires arcane response.`);
@@ -885,13 +919,17 @@ function finalizeCapacity(name, supply, demand, supplyContributors, demandContri
  * @returns {CapacityContext}
  */
 function buildContext(settlement) {
+  // @ts-ignore -- deriveAllThreatProfiles filter(Boolean)s its nulls at runtime; TS does not
+  // narrow through BooleanConstructor (same suppression as supplyChainState.js#deriveAllSupplyChainStates).
+  const threats = deriveAllThreatProfiles(settlement);
   return {
     conditions: deriveAllActiveConditions(settlement),
     profiles:   deriveAllFactionProfiles(settlement),
     chains:     deriveAllSupplyChainStates(settlement),
-    // @ts-ignore -- deriveAllThreatProfiles filter(Boolean)s its nulls at runtime; TS does not
-    // narrow through BooleanConstructor (same suppression as supplyChainState.js#deriveAllSupplyChainStates).
-    threats:    deriveAllThreatProfiles(settlement),
+    threats,
+    // demandThreats: pressure-deduped view (one row per (type,target), max severity)
+    // so the same underlying pressure is charged once by the demand loops.
+    demandThreats: dedupeThreatsByPressure(threats),
   };
 }
 

@@ -13,21 +13,14 @@ import { withImpairment } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { readCorruptionClimate, npcHomeInstitution } from '../corruption.js';
 
-/** @typedef {import('../entities/status.js').Impairment} Impairment */
-/** @typedef {import('../entities/propagate.js').PropagationInstitution} PropInstitution */
-/** @typedef {import('../entities/propagate.js').PropagationFaction} PropFaction */
-/** @typedef {import('../entities/propagate.js').PropagationSettlement} PropSettlement */
-
-/** @param {unknown} s @returns {string} */
+/** @param {any} s */
 const norm = (s) => String(s || '').trim().toLowerCase();
-/** @param {{ name?: string, faction?: string } | null | undefined} x @returns {string} */
+/** @param {any} x */
 const nameOf = (x) => x?.name || x?.faction || '';
 
 /**
- * @template {{ name?: string, faction?: string }} T
- * @param {T[] | null | undefined} arr
- * @param {unknown} name
- * @returns {T | null}
+ * @param {any} arr
+ * @param {any} name
  */
 function matchByName(arr, name) {
   const n = norm(name);
@@ -38,27 +31,27 @@ function matchByName(arr, name) {
 }
 
 /**
- * @param {PropSettlement} settlement
- * @param {PropInstitution} inst
- * @param {Impairment} impairment
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} inst
+ * @param {any} impairment
  */
 function impairInstitution(settlement, inst, impairment) {
-  const institutions = (settlement.institutions || []).map((i) => (i === inst ? withImpairment(i, impairment) : i));
+  const institutions = (settlement.institutions || []).map((/** @type {any} */ i) => (i === inst ? withImpairment(i, impairment) : i));
   return propagateImpairment({
     settlement: { ...settlement, institutions },
-    origin: { entityType: 'institution', entityId: /** @type {string} */ (inst.id || inst.name), impairment },
+    origin: { entityType: 'institution', entityId: inst.id || inst.name, impairment },
   });
 }
 
 /**
- * @param {PropSettlement} settlement
- * @param {PropFaction} fac
- * @param {Impairment} impairment
- * @param {boolean} inPower
+ * @param {any} settlement
+ * @param {import('../settlement.schema.js').SimFaction} fac
+ * @param {any} impairment
+ * @param {any} inPower
  */
 function impairFaction(settlement, fac, impairment, inPower) {
-  const list = /** @type {PropFaction[]} */ (inPower ? (/** @type {{ factions: PropFaction[] }} */ (settlement.powerStructure)).factions : settlement.factions);
-  const nextList = list.map((f) => (f === fac ? withImpairment(f, impairment) : f));
+  const list = inPower ? settlement.powerStructure.factions : settlement.factions;
+  const nextList = list.map((/** @type {any} */ f) => (f === fac ? withImpairment(f, impairment) : f));
   const next = inPower
     ? { ...settlement, powerStructure: { ...settlement.powerStructure, factions: nextList } }
     : { ...settlement, factions: nextList };
@@ -70,9 +63,9 @@ function impairFaction(settlement, fac, impairment, inPower) {
 
 /** Impair the named entity — an institution if one matches, else a faction. No-op
  *  when nothing matches (a corrupt NPC's home may not be a tracked institution).
- * @param {PropSettlement & { factions?: PropFaction[] }} settlement
- * @param {string} name
- * @param {Impairment} impairment
+ *  @param {import('../settlement.schema.js').SimSettlement} settlement
+ *  @param {any} name
+ *  @param {any} impairment
  */
 function impairByName(settlement, name, impairment) {
   if (!name) return settlement;
@@ -91,16 +84,15 @@ function impairByName(settlement, name, impairment) {
 }
 
 /**
- * @param {PropSettlement} settlement
+ * @param {object} settlement
  * @param {Array<{npcId:string,name:string,kind:string,criminalInstitution?:string,homeInstitution?:string}>} exposures
- * @param {{now?:string}} [opts]
+ * @param {{now?:string}} opts
  */
 export function applyCorruptionImpairments(settlement, exposures, { now } = {}) {
   if (!settlement || !Array.isArray(exposures) || !exposures.length) return settlement;
   let next = settlement;
   for (const e of exposures) {
     const severity = e.kind === 'ousted' ? 0.5 : 0.3;
-    /** @type {Impairment} */
     const base = { type: 'legitimacy', severity, causeEventId: `corruption:${e.npcId}:${e.kind}`, appliedAt: now };
     if (e.criminalInstitution) {
       next = impairByName(next, e.criminalInstitution, { ...base, description: `Exposure of ${e.name} disrupted ${e.criminalInstitution}.` });
@@ -114,13 +106,13 @@ export function applyCorruptionImpairments(settlement, exposures, { now } = {}) 
     // revealed institution drags onset security AND raises exposure
     // visibility for anyone still corrupt inside it.
     if (e.kind === 'ousted' && e.homeInstitution) {
-      next = impairByName(next, e.homeInstitution, /** @type {Impairment} */ ({
+      next = impairByName(next, e.homeInstitution, {
         type: 'corruption',
         severity: 0.45,
         causeEventId: `corruption:${e.npcId}:ousted:institutional`,
         appliedAt: now,
         description: `${e.name}'s network inside ${e.homeInstitution} is now public knowledge.`,
-      }));
+      });
     }
   }
   return next;
@@ -144,15 +136,14 @@ export function reformChance({ security = 0.4, prosperity = 0.4 } = {}) {
   return Math.max(REFORM_TUNING.min, Math.min(REFORM_TUNING.max, p));
 }
 
-/** @param {{ impairments?: Impairment[] } | null | undefined} inst @returns {boolean} */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function hasCorruptionImpairment(inst) {
-  return (inst?.impairments || []).some((i) => i?.type === 'corruption');
+  return (inst?.impairments || []).some((/** @type {any} */ i) => i?.type === 'corruption');
 }
 
 /**
- * @param {{ npcs?: Array<Record<string, unknown>> } | null | undefined} settlement
- * @param {unknown} instName
- * @returns {boolean}
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @param {any} instName
  */
 function harborsCorruptInsider(settlement, instName) {
   const n = norm(instName);
@@ -164,12 +155,9 @@ function harborsCorruptInsider(settlement, instName) {
   return false;
 }
 
-/**
- * @param {PropInstitution} inst
- * @returns {PropInstitution}
- */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function withoutCorruptionImpairments(inst) {
-  const filtered = (inst.impairments || []).filter((i) => i?.type !== 'corruption');
+  const filtered = (inst.impairments || []).filter((/** @type {any} */ i) => i?.type !== 'corruption');
   const status = filtered.length === 0 && inst.status === 'impaired' ? 'active' : inst.status;
   return { ...inst, impairments: filtered, status };
 }
@@ -178,7 +166,7 @@ function withoutCorruptionImpairments(inst) {
  * Roll reform for every corruption-impaired institution in a settlement.
  * Deterministic via the threaded rng (fork per institution name).
  *
- * @param {PropSettlement} settlement
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  * @param {{fork: (key: string) => {random: () => number}}} rng
  * @returns {{settlement: object, reformed: Array<{name: string}>}}
  */
@@ -191,11 +179,11 @@ export function advanceInstitutionReform(settlement, rng) {
   const chance = reformChance(climate);
   /** @type {Array<{name: string}>} */
   const reformed = [];
-  const nextInstitutions = institutions.map((inst) => {
+  const nextInstitutions = institutions.map((/** @type {any} */ inst) => {
     if (!hasCorruptionImpairment(inst)) return inst;
     if (harborsCorruptInsider(settlement, inst.name)) return inst; // rot still inside
     if (rng.fork(`reform:${norm(inst.name)}`).random() >= chance) return inst;
-    reformed.push({ name: /** @type {string} */ (inst.name) });
+    reformed.push({ name: inst.name });
     return withoutCorruptionImpairments(inst);
   });
   if (!reformed.length) return { settlement, reformed };

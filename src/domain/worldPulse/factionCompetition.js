@@ -1,22 +1,9 @@
 import { stablePart } from './worldState.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 
-/**
- * @typedef {Record<string, any>} FactionRec
- * @typedef {Record<string, any>} FactionState
- * @typedef {Record<string, any>} FcWorldState
- * @typedef {{ id: string, settlement?: Record<string, any>, [key: string]: any }} FcSnapshotItem
- * @typedef {{ faction: FactionRec, index: number, id: string, power: number, archetype: string }} FactionEntry
- * @typedef {{ settlements: FcSnapshotItem[], worldState: Record<string, any>, [key: string]: any }} FcSnapshot
- * @typedef {{ random: () => number, fork: (seed: string) => any }} Rng
- * @typedef {{ get?: (settlementId: string, kind: string) => ({ score?: number } | undefined) }} FcPressureIdx
- * @typedef {{ item: FcSnapshotItem, entry: FactionEntry, state: FactionState, tick: number, candidateType: string, ruleId: string, severity: number, probability: number, applyMode: string, reasons: string[], factionPatch: Record<string, any>, proposalPayload?: Record<string, any> | null, condition?: Record<string, any> | null, metadata?: Record<string, any>, conflictTags?: string[] }} CandidateArgs
- */
-
 // Canonical archetype → factionCompetition's local vocabulary (the FACTION_POWER_BASES
 // keys). Folds the archetypes this layer doesn't model: government/other → civic,
 // craft → merchant (economic production), occupation → military (an occupying force).
-/** @type {Readonly<Record<string, string>>} */
 const CANONICAL_TO_COMPETITION = Object.freeze({
   [FA.GOVERNMENT]: 'civic', [FA.NOBLE]: 'noble', [FA.MILITARY]: 'military',
   [FA.MERCHANT]: 'merchant', [FA.RELIGIOUS]: 'religious', [FA.CRIMINAL]: 'criminal',
@@ -35,7 +22,6 @@ export const GOVERNMENT_PREFERENCES = Object.freeze([
   'arcane_magocracy',
 ]);
 
-/** @type {Readonly<Record<string, string[]>>} */
 export const FACTION_POWER_BASES = Object.freeze({
   noble: ['legal_authority', 'land_rights', 'elite_patronage'],
   merchant: ['wealth', 'trade_connectivity', 'debt'],
@@ -58,7 +44,6 @@ export const FACTION_RULE_MATRIX = Object.freeze([
   'faction_exhaustion',
 ]);
 
-/** @type {Readonly<Record<string, string>>} */
 const GOVERNMENT_BY_ARCHETYPE = Object.freeze({
   noble: 'noble_patronage',
   merchant: 'merchant_charter',
@@ -71,7 +56,6 @@ const GOVERNMENT_BY_ARCHETYPE = Object.freeze({
   outsider: 'noble_patronage',
 });
 
-/** @type {Readonly<Record<string, string[]>>} */
 const LAW_PREFS_BY_ARCHETYPE = Object.freeze({
   noble: ['inheritance_rights', 'land_tenure', 'deference_laws'],
   merchant: ['contract_priority', 'tariff_control', 'debt_enforcement'],
@@ -84,39 +68,38 @@ const LAW_PREFS_BY_ARCHETYPE = Object.freeze({
   outsider: ['extraterritorial_rights', 'patron_treaties', 'trade_immunity'],
 });
 
-/** @param {unknown} value @returns {number} */
+/** @param {any} value */
 function clamp01(value) {
-  const n = Number.isFinite(value) ? /** @type {number} */ (value) : 0;
+  const n = Number.isFinite(value) ? value : 0;
   return Math.max(0, Math.min(1, n));
 }
 
-/** @param {Rng} rng @param {readonly string[]} arr @returns {string} */
+/** @param {any} rng @param {any} arr */
 function pick(rng, arr) {
   return arr[Math.floor(rng.random() * arr.length)] || arr[0];
 }
 
-/** @param {string} saveId @param {FactionRec | null | undefined} faction @param {number} index @returns {string} */
+/** @param {any} saveId @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionId(saveId, faction, index) {
   const name = faction?.id || faction?.faction || faction?.name || faction?.label || `faction_${index}`;
   return `${saveId}:${stablePart(name)}`;
 }
 
-/** @param {FactionRec} [faction] @returns {string} */
 function inferFactionArchetype(faction = {}) {
   // Delegates to the shared canonical detector so world-pulse classifies a faction
   // the same way factionProfile / factionResponses / factionRoles do. (The legacy
   // matcher here ignored faction.category; the canonical detector honors it.)
-  return CANONICAL_TO_COMPETITION[factionArchetype(faction)] || 'civic';
+  return (/** @type {any} */ (CANONICAL_TO_COMPETITION))[factionArchetype(faction)] || 'civic';
 }
 
-/** @param {FactionRec} [faction] @param {number} [index] @returns {number} */
+/** @param {import('../settlement.schema.js').SimFaction} faction @param {any} index */
 function factionPower(faction = {}, index = 0) {
   const raw = faction.power ?? faction.influence ?? faction.score ?? faction.weight;
   if (Number.isFinite(raw)) return raw > 1 ? clamp01(raw / 100) : clamp01(raw);
   return Math.max(0.18, 0.72 - index * 0.16);
 }
 
-/** @param {FcSnapshotItem} item @returns {FactionRec[]} */
+/** @param {any} item */
 function settlementFactions(item) {
   return item.settlement?.powerStructure?.factions
     || item.settlement?.factions
@@ -124,50 +107,49 @@ function settlementFactions(item) {
     || [];
 }
 
-/** @param {FcSnapshotItem} item */
+/** @param {any} item */
 function institutionsFor(item) {
   const fromServices = item.settlement?.services || item.settlement?.institutions || item.settlement?.infrastructure || [];
   return (Array.isArray(fromServices) ? fromServices : [])
-    .map((/** @type {Record<string, any>} */ entry, /** @type {number} */ index) => ({
+    .map((/** @type {any} */ entry, /** @type {any} */ index) => ({
       id: stablePart(entry.id || entry.name || entry.label || `institution_${index}`),
       name: entry.name || entry.label || entry.id || `Institution ${index + 1}`,
     }))
     .slice(0, 12);
 }
 
-/** @param {FcSnapshotItem} item @returns {FactionEntry[]} */
+/** @param {any} item */
 function topFactionEntries(item) {
   return settlementFactions(item)
-    .map((/** @type {FactionRec} */ faction, /** @type {number} */ index) => ({
+    .map((/** @type {any} */ faction, /** @type {any} */ index) => ({
       faction,
       index,
       id: factionId(item.id, faction, index),
       power: factionPower(faction, index),
       archetype: inferFactionArchetype(faction),
     }))
-    .sort((a, b) => b.power - a.power)
+    .sort((/** @type {any} */ a, /** @type {any} */ b) => b.power - a.power)
     .slice(0, 3);
 }
 
-/** @param {FcWorldState} worldState @param {FcSnapshot} snapshot @param {Rng} rng @returns {FcWorldState} */
+/** @param {any} worldState @param {any} snapshot @param {any} rng */
 export function ensureFactionStates(worldState, snapshot, rng) {
-  /** @type {Record<string, any>} */
   const factionStates = { ...(worldState.factionStates || {}) };
   for (const item of snapshot.settlements) {
     const entries = settlementFactions(item);
-    entries.forEach((/** @type {FactionRec} */ faction, /** @type {number} */ index) => {
+    entries.forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
       const id = factionId(item.id, faction, index);
       if (factionStates[id]) return;
       const local = rng.fork(`faction:${id}`);
       const archetype = inferFactionArchetype(faction);
-      const powerBases = FACTION_POWER_BASES[archetype] || FACTION_POWER_BASES.civic;
-      const lawPreferences = LAW_PREFS_BY_ARCHETYPE[archetype] || LAW_PREFS_BY_ARCHETYPE.civic;
+      const powerBases = (/** @type {any} */ (FACTION_POWER_BASES))[archetype] || FACTION_POWER_BASES.civic;
+      const lawPreferences = (/** @type {any} */ (LAW_PREFS_BY_ARCHETYPE))[archetype] || LAW_PREFS_BY_ARCHETYPE.civic;
       factionStates[id] = {
         factionId: id,
         settlementId: item.id,
         name: faction.faction || faction.name || faction.label || `Faction ${index + 1}`,
         archetype,
-        governmentPreference: faction.governmentPreference || GOVERNMENT_BY_ARCHETYPE[archetype] || pick(local, GOVERNMENT_PREFERENCES),
+        governmentPreference: faction.governmentPreference || (/** @type {any} */ (GOVERNMENT_BY_ARCHETYPE))[archetype] || pick(local, GOVERNMENT_PREFERENCES),
         powerBases: [...powerBases],
         controlledInstitutions: [],
         suppressedInstitutions: [],
@@ -182,19 +164,31 @@ export function ensureFactionStates(worldState, snapshot, rng) {
         riskTolerance: 0.22 + local.random() * 0.5,
         momentum: 0,
         exhaustion: 0,
-        captureState: faction.captureState || 'none', // §corruption Phase 2 — criminalCaptureState ladder
+        captureState: faction.captureState || 'none', // the criminalCaptureState ladder rung
         lastActedTick: null,
         recentAction: null,
       };
     });
   }
 
+  // Group faction states by settlement ONCE (insertion order preserved) so the
+  // rivals-seeding pass reads each settlement's peers directly instead of
+  // rescanning every faction per faction — O(F) rather than O(F^2).
+  /** @type {Map<string, any[]>} */
+  const factionsBySettlement = new Map();
+  for (const state of Object.values(factionStates)) {
+    if (!state) continue;
+    const sid = String(state.settlementId);
+    let list = factionsBySettlement.get(sid);
+    if (!list) { list = []; factionsBySettlement.set(sid, list); }
+    list.push(state);
+  }
   for (const state of Object.values(factionStates)) {
     if (!state || state.rivals?.length) continue;
-    state.rivals = Object.values(factionStates)
-      .filter(other => other.settlementId === state.settlementId && other.factionId !== state.factionId)
+    state.rivals = (factionsBySettlement.get(String(state.settlementId)) || [])
+      .filter((/** @type {any} */ other) => other.factionId !== state.factionId)
       .slice(0, 2)
-      .map(other => other.factionId);
+      .map((/** @type {any} */ other) => other.factionId);
   }
 
   return { ...worldState, factionStates };
@@ -222,7 +216,7 @@ export const FACTION_STATE_PRUNE_GRACE_TICKS = 3;
  * refills an emptied list from the live roster on the next pulse). Identity
  * no-op when nothing changes. Deterministic — derived purely from the snapshot.
  */
-/** @param {FcWorldState} worldState @param {FcSnapshot} snapshot @param {{ tick?: number, graceTicks?: number }} [options] @returns {FcWorldState} */
+/** @param {any} worldState @param {any} snapshot @param {any} [options] */
 export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks = FACTION_STATE_PRUNE_GRACE_TICKS } = {}) {
   const states = worldState?.factionStates || {};
   const ids = Object.keys(states);
@@ -232,15 +226,14 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
   const liveSettlementIds = new Set();
   for (const item of snapshot?.settlements || []) {
     liveSettlementIds.add(String(item.id));
-    settlementFactions(item).forEach((/** @type {FactionRec} */ faction, /** @type {number} */ index) => {
+    settlementFactions(item).forEach((/** @type {any} */ faction, /** @type {any} */ index) => {
       liveFactionIds.add(factionId(item.id, faction, index));
     });
   }
 
   let changed = false;
-  /** @type {Set<string>} */
   const prunedIds = new Set();
-  /** @type {Record<string, any>} */
+  /** @type {any} */
   const next = {};
   for (const [fid, state] of Object.entries(states)) {
     if (liveFactionIds.has(fid)) {
@@ -275,7 +268,7 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
   if (prunedIds.size) {
     for (const [fid, state] of Object.entries(next)) {
       const rivals = state.rivals || [];
-      const kept = rivals.filter((/** @type {string} */ rid) => !prunedIds.has(rid));
+      const kept = rivals.filter((/** @type {any} */ rid) => !prunedIds.has(rid));
       if (kept.length !== rivals.length) next[fid] = { ...state, rivals: kept };
     }
   }
@@ -286,9 +279,8 @@ export function pruneFactionStates(worldState, snapshot, { tick = 0, graceTicks 
 
 // Per-tick mean-reversion for faction momentum (exhaustion already self-limits
 // upward; this relaxes the build-up of momentum on quiet ticks).
-/** @param {FcWorldState} worldState @returns {FcWorldState} */
+/** @param {any} worldState */
 export function relaxFactionStates(worldState) {
-  /** @type {Record<string, any>} */
   const factionStates = { ...(worldState?.factionStates || {}) };
   for (const [id, s] of Object.entries(factionStates)) {
     factionStates[id] = { ...s, momentum: clamp01((s.momentum || 0) * 0.85) };
@@ -300,26 +292,34 @@ export function relaxFactionStates(worldState) {
 // faction's internalSeats reflect who actually holds its leader / lieutenant /
 // agent roles (wired from NPC dotRank + factionSeat). Highest dotRank wins each
 // seat. Also records memberNpcIds so faction power can read its roster.
-/** @param {FcWorldState} worldState @returns {FcWorldState} */
+/** @param {any} worldState */
 export function seatNpcsIntoFactions(worldState) {
-  /** @type {Record<string, any>} */
   const npcStates = worldState?.npcStates || {};
-  /** @type {Record<string, any>} */
   const factionStates = { ...(worldState?.factionStates || {}) };
+  // Group NPC states by settlement ONCE (insertion order preserved) so each
+  // faction only scans its OWN settlement's NPCs instead of the full roster —
+  // O(F + N) rather than O(F·N).
+  /** @type {Map<string, any[]>} */
+  const npcsBySettlement = new Map();
+  for (const npc of Object.values(npcStates)) {
+    const sid = String(npc.settlementId);
+    let list = npcsBySettlement.get(sid);
+    if (!list) { list = []; npcsBySettlement.set(sid, list); }
+    list.push(npc);
+  }
   for (const [fid, faction] of Object.entries(factionStates)) {
     const factionName = stablePart(faction.name);
-    const members = Object.values(npcStates).filter((/** @type {Record<string, any>} */ npc) =>
-      String(npc.settlementId) === String(faction.settlementId)
-      && (stablePart(npc.factionId) === factionName
+    const members = (npcsBySettlement.get(String(faction.settlementId)) || []).filter((/** @type {any} */ npc) =>
+      stablePart(npc.factionId) === factionName
         || `${faction.settlementId}:${stablePart(npc.factionId)}` === fid
-        || npc.factionId === fid),
+        || npc.factionId === fid,
     );
-    /** @type {Record<string, any>} */
+    /** @type {any} */
     const seats = { leader_champion: null, lieutenant_operator: null, agent_protege: null };
     for (const seat of Object.keys(seats)) {
       const best = members
-        .filter((/** @type {Record<string, any>} */ m) => m.factionSeat === seat)
-        .sort((/** @type {Record<string, any>} */ a, /** @type {Record<string, any>} */ b) => (b.dotRank || 0) - (a.dotRank || 0))[0];
+        .filter((/** @type {any} */ m) => m.factionSeat === seat)
+        .sort((/** @type {any} */ a, /** @type {any} */ b) => (b.dotRank || 0) - (a.dotRank || 0))[0];
       if (best) seats[seat] = { npcId: best.npcId, name: best.name, dotRank: best.dotRank };
     }
     factionStates[fid] = { ...faction, internalSeats: seats, memberNpcIds: members.map(m => m.npcId) };
@@ -338,13 +338,13 @@ const MOMENTUM_BANDS = Object.freeze([
   { min: -Infinity, band: 'quiet' },
 ]);
 
-/** @param {unknown} momentum @returns {string} */
+/** @param {any} momentum */
 export function factionMomentumBand(momentum) {
-  const m = Number.isFinite(momentum) ? /** @type {number} */ (momentum) : 0;
-  return (/** @type {{ min: number, band: string }} */ (MOMENTUM_BANDS.find(b => m >= b.min))).band;
+  const m = Number.isFinite(momentum) ? momentum : 0;
+  return (/** @type {any} */ (MOMENTUM_BANDS.find(b => m >= b.min))).band;
 }
 
-/** @param {unknown} a @param {unknown} b @returns {boolean} */
+/** @param {any} a @param {any} b */
 function sameStringList(a, b) {
   const left = Array.isArray(a) ? a : [];
   const right = Array.isArray(b) ? b : [];
@@ -352,13 +352,13 @@ function sameStringList(a, b) {
 }
 
 /**
- * Wave 7 #2 — the dossier stops lying: project each faction's LIVE state
+ * The dossier stops lying: project each faction's LIVE state
  * (worldState.factionStates) onto the settlement's powerStructure.factions
  * roster, which until now stayed generation-frozen while the pulse moved
  * capture rungs, momentum, rivalries, and institution control around it.
  *
  * Projected per roster entry (minimal additive fields, no reshaping):
- *   • captureState   — the §corruption Phase 2 rung (ensureFactionStates
+ *   • captureState   — the capture rung (ensureFactionStates
  *                      already reads this field back, so the loop closes)
  *   • momentumBand   — qualitative band of live momentum (see above)
  *   • rivals         — live rival faction NAMES (ids resolved via states)
@@ -368,23 +368,22 @@ function sameStringList(a, b) {
  * power scalar — the roster IS the live power source (competition normalizes
  * from it each tick; power transfers and the guild floor already write it).
  *
- * Discipline matches the R3 neighbourNetwork write-back: identity no-op when
+ * Discipline matches the neighbourNetwork write-back: identity no-op when
  * nothing moved (same settlement reference back), per-entry identity, and an
  * updatedByPulse provenance stamp only on entries that actually changed.
  * Quiet/empty live state is not materialized onto entries that never carried
  * the field — a fresh campaign's first pulse must not dirty every roster
  * with 'none'/'quiet'/[] noise.
  */
-/** @param {Record<string, any>} settlement @param {Record<string, any>} factionStates @param {string} settlementId @param {{ tick?: number }} [options] */
+/** @param {import('../settlement.schema.js').SimSettlement} settlement @param {any} factionStates @param {any} settlementId @param {any} [options] */
 export function projectFactionStatesOntoSettlement(settlement, factionStates, settlementId, { tick = 0 } = {}) {
   const factions = settlement?.powerStructure?.factions;
   if (!Array.isArray(factions) || !factions.length) return settlement;
   const states = factionStates || {};
   let touched = false;
-  const next = factions.map((/** @type {Record<string, any>} */ faction, /** @type {number} */ index) => {
+  const next = factions.map((/** @type {any} */ faction, /** @type {any} */ index) => {
     const state = states[factionId(settlementId, faction, index)];
     if (!state) return faction;
-    /** @type {Record<string, any>} */
     const patch = {};
 
     const captureState = state.captureState || 'none';
@@ -397,7 +396,7 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
       if (faction.momentumBand !== band) patch.momentumBand = band;
     }
 
-    const rivals = (state.rivals || []).map((/** @type {string} */ rid) => states[rid]?.name).filter(Boolean);
+    const rivals = (state.rivals || []).map((/** @type {any} */ rid) => states[rid]?.name).filter(Boolean);
     if (faction.rivals != null || rivals.length) {
       if (!sameStringList(faction.rivals, rivals)) patch.rivals = rivals;
     }
@@ -423,20 +422,19 @@ export function projectFactionStatesOntoSettlement(settlement, factionStates, se
   };
 }
 
-/** @param {FcPressureIdx} pressureIdx @param {string} settlementId @param {string} kind @returns {number} */
+/** @param {any} pressureIdx @param {any} settlementId @param {any} kind */
 function pressure(pressureIdx, settlementId, kind) {
   return pressureIdx.get?.(settlementId, kind)?.score || 0;
 }
 
-/** @param {number} score @returns {string} */
+/** @param {any} score */
 function legitimacyBand(score) {
   if (score >= 0.66) return 'crisis';
   if (score >= 0.44) return 'contested';
   return 'stable';
 }
 
-/** @param {CandidateArgs} args */
-function candidateBase({ item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
+function candidateBase(/** @type {any} */ { item, entry, state, tick, candidateType, ruleId, severity, probability, applyMode, reasons, factionPatch, proposalPayload = null, condition = null, metadata = {}, conflictTags = [] }) {
   return {
     id: `candidate.faction.${stablePart(candidateType)}.${stablePart(state.factionId)}.${tick}`,
     type: 'faction',
@@ -465,7 +463,7 @@ function candidateBase({ item, entry, state, tick, candidateType, ruleId, severi
   };
 }
 
-/** @param {FcSnapshotItem} item @param {FactionEntry} entry @param {FactionState} state @param {number} tick @param {number} legitimacy @param {number} conflict */
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
 function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
   const band = legitimacyBand(legitimacy);
   if (band === 'stable') return null;
@@ -517,7 +515,7 @@ function governmentChallenge(item, entry, state, tick, legitimacy, conflict) {
   });
 }
 
-/** @param {FcSnapshotItem} item @param {FactionEntry} entry @param {FactionState} state @param {number} tick @param {number} legitimacy @param {number} trade @param {number} crime */
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} trade @param {any} crime */
 function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime) {
   const institutions = institutionsFor(item);
   if (!institutions.length) return null;
@@ -563,7 +561,7 @@ function institutionCandidate(item, entry, state, tick, legitimacy, trade, crime
   });
 }
 
-/** @param {FcSnapshotItem} item @param {FactionEntry} entry @param {FactionState} state @param {number} tick @param {number} food @param {number} disease @param {number} trade */
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} food @param {any} disease @param {any} trade */
 function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
   const pressureScore = Math.max(food, disease, trade);
   if (pressureScore < 0.32) return null;
@@ -605,7 +603,7 @@ function serviceOrLawCandidate(item, entry, state, tick, food, disease, trade) {
   });
 }
 
-/** @param {FcSnapshotItem} item @param {FactionEntry} entry @param {FactionState} state @param {number} tick @param {number} legitimacy @param {number} conflict */
+/** @param {any} item @param {any} entry @param {any} state @param {any} tick @param {any} legitimacy @param {any} conflict */
 function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict) {
   if ((state.exhaustion || 0) > 0.62) {
     const severity = clamp01(0.28 + state.exhaustion * 0.44);
@@ -665,10 +663,9 @@ function rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conf
   });
 }
 
-/** @param {FcSnapshot} snapshot @param {FcPressureIdx} pressureIdx @param {{ tick?: number }} [options] @returns {Record<string, any>[]} */
+/** @param {any} snapshot @param {any} pressureIdx @param {any} [options] */
 export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
   const tick = options.tick ?? snapshot.worldState.tick + 1;
-  /** @type {Record<string, any>[]} */
   const out = [];
 
   for (const item of snapshot.settlements) {
@@ -690,30 +687,53 @@ export function evaluateFactionRules(snapshot, pressureIdx, options = {}) {
         institutionCandidate(item, entry, state, tick, legitimacy, trade, crime),
         serviceOrLawCandidate(item, entry, state, tick, food, disease, trade),
         rivalryOrExhaustionCandidate(item, entry, state, tick, legitimacy, conflict),
-      ];
-      out.push(.../** @type {Record<string, any>[]} */ (candidates.filter(Boolean)));
+      ].filter(Boolean);
+      out.push(...candidates);
     }
   }
 
   return out;
 }
 
-/** @param {FcSnapshot} snapshot @param {FcPressureIdx} pressureIdx @param {{ tick?: number }} [options] @returns {Record<string, any>[]} */
+/** @param {any} snapshot @param {any} pressureIdx @param {any} [options] */
 export function deriveFactionCandidates(snapshot, pressureIdx, options = {}) {
   return evaluateFactionRules(snapshot, pressureIdx, options);
 }
 
-/** @param {FcWorldState} worldState @param {Record<string, any>} outcome @returns {FcWorldState} */
+// Union of two id lists, LIVE order first, patch additions appended. Deterministic
+// (both inputs are deterministically ordered) and a byte-identical no-op when the
+// patch was authored against the live state (the auto/same-tick path).
+/** @param {any} liveList @param {any} patchList */
+function mergeInstitutionIds(liveList, patchList) {
+  return [...new Set([...(liveList || []), ...(patchList || [])])];
+}
+
+/** @param {any} worldState @param {any} outcome */
 export function applyFactionPatch(worldState, outcome) {
   if (!outcome?.factionId) return worldState;
-  /** @type {Record<string, any>} */
   const factionStates = { ...(worldState.factionStates || {}) };
   const current = factionStates[outcome.factionId] || {};
+  const patch = outcome.factionPatch || {};
+  // Candidates bake ABSOLUTE next-values at authoring time, but a proposal-mode
+  // outcome can be accepted many ticks later (applyWorldPulseProposal re-routes the
+  // STORED outcome back through here). Wholesale replacement would roll live state
+  // back to the stale authoring snapshot. Institution lists only ever ACCRETE at
+  // authoring (capture/suppression add one id, never remove), so a UNION with the
+  // live lists preserves both the patch's addition and every interim capture — and
+  // is byte-identical on same-tick application. lastActedTick is monotonic for the
+  // same reason: a late accept must not rewind the live cooldown. Clamped scalars
+  // (momentum/exhaustion/legitimacyClaim) stay last-write-wins — they carry no
+  // pre-value to rebase a delta from, and a bounded stale write self-corrects.
+  const lastActedTick = Math.max(
+    Number.isFinite(Number(current.lastActedTick)) ? Number(current.lastActedTick) : -Infinity,
+    Number.isFinite(Number(patch.lastActedTick)) ? Number(patch.lastActedTick) : -Infinity,
+  );
   factionStates[outcome.factionId] = {
     ...current,
-    ...(outcome.factionPatch || {}),
-    controlledInstitutions: outcome.factionPatch?.controlledInstitutions || current.controlledInstitutions || [],
-    suppressedInstitutions: outcome.factionPatch?.suppressedInstitutions || current.suppressedInstitutions || [],
+    ...patch,
+    controlledInstitutions: mergeInstitutionIds(current.controlledInstitutions, patch.controlledInstitutions),
+    suppressedInstitutions: mergeInstitutionIds(current.suppressedInstitutions, patch.suppressedInstitutions),
+    ...(Number.isFinite(lastActedTick) ? { lastActedTick } : {}),
   };
   return { ...worldState, factionStates };
 }

@@ -207,8 +207,14 @@ export function governingFactionOf(settlement) {
 // different rates — a garrison couples better than a craft guild. Influence
 // ranking still dominates (factors stay near 1).
 
-/** @type {Readonly<Record<string, number>>} */
-const COUP_COERCION = Object.freeze({
+/**
+ * Per-archetype coup-coercion factor. Also the single-source aggression baseline
+ * the war-layer disposition model (worldPulse/disposition.js) re-centers into a
+ * signed government tilt — exported (dormant for legacy campaigns; the disposition
+ * consumer is gated behind warLayerEnabled).
+ * @type {Readonly<Record<string, number>>}
+ */
+export const COUP_COERCION = Object.freeze({
   [A.MILITARY]: 1.25,
   [A.NOBLE]: 1.1,
   [A.ARCANE]: 1.05,
@@ -307,12 +313,13 @@ export function coupContenders(settlement) {
  * @param {{ random: () => number }} args.rng
  * @param {number} [args.severity]              coup severity at the verdict (0..1)
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
+ * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -333,7 +340,9 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     // ruling-authority score nudges ±0.125 across its full range.
     const severityDrag = 1.15 - 0.4 * clamp01(severity);
     const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {number} */ (rulingAuthorityScore) - 50) / 400 : 0;
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj));
+    // warSentimentAdj (P2): 0 when the flag is off ⇒ byte-identical. A war turning sour
+    // (negative sentiment) lowers the seat's hold-chance; a sustainable one raises it.
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0)));
   }
 
   const roll = rng.random();

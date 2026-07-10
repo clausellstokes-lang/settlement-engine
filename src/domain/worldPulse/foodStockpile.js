@@ -41,25 +41,15 @@
  */
 
 import { foodLedger } from '../foodLedger.js';
-import { effectiveStressorSeverity } from './stressors.js';
+import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
-/**
- * @typedef {{ name?: string, status?: string, _worldPulseInactive?: boolean, [key: string]: unknown }} InstitutionLike
- * @typedef {{ type?: string, lifecycleStage?: string, affectedSettlementIds?: unknown[], severity?: number, [key: string]: unknown }} StressorLike
- * @typedef {{ config?: { magicExists?: boolean }, institutions?: InstitutionLike[], tier?: string, economicState?: { foodSecurity?: Record<string, any>, [key: string]: unknown }, defenseProfile?: { scores?: Record<string, any>, economicGates?: Record<string, any>, [key: string]: unknown }, [key: string]: unknown }} FoodSettlement
- */
-
-/** @type {(v: number, lo: number, hi: number) => number} */
-const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
-/** @type {(v: number) => number} */
-const round1 = v => Math.round(v * 10) / 10;
+const clamp = (/** @type {any} */ v, /** @type {number} */ lo, /** @type {number} */ hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
+const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
 // one-decimal rounding would silently erase them.
-/** @type {(v: number) => number} */
-const round2 = v => Math.round(v * 100) / 100;
+const round2 = (/** @type {number} */ v) => Math.round(v * 100) / 100;
 
-/** @type {Readonly<Record<string, number>>} */
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
@@ -77,13 +67,19 @@ export const STOCKPILE_TUNING = Object.freeze({
   blockadeSeverityGate: 0.4,    // siege/occupation severity that cuts imports
   famineSeverityGate: 0.3,      // famine severity below this is ambient scarcity, not crop failure
   famineDeficitScale: 45,       // a full-severity famine cuts ~45% of need (production failure)
+  // A settlement with an active OUTBOUND deployment feeds its army from the
+  // home granary: the marching host eats ~12% of home need beyond civilian demand
+  // (mirrors economicGenerator's ×1.2 occupier consumption, the other side of the
+  // same coin). Lands on the SAME effectiveDeficit the blockade/famine use — never a
+  // parallel counter — so it composes (a deploying town also under famine drains
+  // faster) and the drawdown answers it. Gated on a live deployment; OFF ⇒ 0.
+  deploymentDrainPct: 12,
 });
 
 const ACTIVE_STAGES = new Set(['active', 'emerging', 'peaking', 'easing']);
-/** @type {Set<string | undefined>} */
 const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 
-// ── Blockade bypass channel — LIVE-FIRST (Wave 8 frozen-vs-live) ─────────
+// ── Blockade bypass channel — LIVE-FIRST (frozen-vs-live) ────────────────
 // Magical transport vs the blockade: a teleportation circle is point-to-
 // point — the besieger cannot interdict it; an airship dock keeps flying
 // but impaired against countermeasures. Either way the channel carries at
@@ -107,18 +103,13 @@ const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
 // already priced as airshipBesieged). Both paths stay gated on
 // magicExists — a no-magic world's circle is masonry, not a channel.
 
-/** @type {Set<string | undefined>} */
 const TRANSPORT_DOWN_STATUSES = new Set(['removed', 'destroyed', 'remnant']);
 // The engine's canonical standing predicate (institutionLifecycle's
 // activeInstitutions): removed/destroyed status OR the pulse-inactive flag.
-/** @type {(inst: InstitutionLike | null | undefined) => boolean} */
-const transportIsDown = (inst) =>
+const transportIsDown = (/** @type {any} */ inst) =>
   TRANSPORT_DOWN_STATUSES.has(inst?.status) || inst?._worldPulseInactive === true;
 
-/**
- * @param {InstitutionLike | null | undefined} inst
- * @returns {'teleport' | 'airship' | null}
- */
+/** @param {import('../settlement.schema.js').SimInstitution} inst */
 function transportChannelOf(inst) {
   const n = String(inst?.name || '').toLowerCase();
   if (n.includes('teleportation') || n.includes('planar') || n.includes('extradimensional')) return 'teleport';
@@ -128,9 +119,7 @@ function transportChannelOf(inst) {
 
 /** The magical import channel that can run a blockade, or null. Live-first;
  *  see the block comment above for the verdict-fallback contract.
- * @param {FoodSettlement | null | undefined} settlement
- * @returns {'teleport' | 'airship' | null}
- */
+ *  @param {import('../settlement.schema.js').SimSettlement} settlement */
 export function resolveBlockadeBypassChannel(settlement) {
   if (settlement?.config?.magicExists === false) return null;
   let sawTransportSignal = false;
@@ -163,7 +152,7 @@ export function resolveBlockadeBypassChannel(settlement) {
 const RESILIENCE_STORAGE_POINTS = 35;       // mirrors foodGenerator's storage slice
 const RESILIENCE_STORAGE_FULL_MONTHS = 12;  // …at months/12 scaling
 
-/** @param {number} months @returns {number} */
+/** @param {number} months */
 function resilienceStorageComponent(months) {
   return (clamp(months, 0, 24) / RESILIENCE_STORAGE_FULL_MONTHS) * RESILIENCE_STORAGE_POINTS;
 }
@@ -172,13 +161,11 @@ function resilienceStorageComponent(months) {
  * Storage capacity in months, mirroring the generator's granary tier table
  * (foodGenerator baseStorage) so play-time refills can't exceed what the
  * infrastructure could ever have held.
- * @param {FoodSettlement | null | undefined} settlement
- * @returns {number}
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
  */
 export function storageCapacityMonths(settlement) {
-  const names = (settlement?.institutions || []).map(i => String(i?.name || '').toLowerCase());
-  /** @param {...string} fragments */
-  const has = (...fragments) => names.some(n => fragments.some(f => n.includes(f)));
+  const names = (settlement?.institutions || []).map((/** @type {any} */ i) => String(i?.name || '').toLowerCase());
+  const has = (/** @type {string[]} */ ...fragments) => names.some((/** @type {string} */ n) => fragments.some(f => n.includes(f)));
   const tier = String(settlement?.tier || 'village');
   const base = has('state granary') ? (tier === 'metropolis' ? 12 : 8)
     : has('city granari') ? (tier === 'city' ? 7 : 5)
@@ -191,14 +178,11 @@ export function storageCapacityMonths(settlement) {
  * The active blockade (siege/occupation) gripping a settlement, if any.
  * `severity` on the returned object is the EFFECTIVE severity for THIS
  * settlement (a spread target carries an attenuated entry in the stressor's
- * severityBySettlement map, H8) — the gate and the drain math both run on
+ * severityBySettlement map) — the gate and the drain math both run on
  * the severity the settlement actually experiences. Origins (full severity)
  * return the stressor record itself, identity intact.
- */
-/**
- * @param {StressorLike[]} worldStateStressors
- * @param {string} settlementId
- * @returns {StressorLike | null}
+ * @param {any[]} worldStateStressors
+ * @param {any} settlementId
  */
 export function blockadeFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
@@ -224,11 +208,8 @@ export function blockadeFor(worldStateStressors = [], settlementId) {
  * As with blockadeFor, the returned `severity` is the EFFECTIVE severity for
  * THIS settlement (spread targets are attenuated via severityBySettlement),
  * so a spread famine drains the target's granary slower than the origin's.
- */
-/**
- * @param {StressorLike[]} worldStateStressors
- * @param {string} settlementId
- * @returns {StressorLike | null}
+ * @param {any[]} worldStateStressors
+ * @param {any} settlementId
  */
 export function famineFor(worldStateStressors = [], settlementId) {
   const sid = String(settlementId);
@@ -251,18 +232,18 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * written back through the same gate so the 'Disasters & Famine' row moves
  * with the granary instead of freezing at the generation value.
  *
- * @param {FoodSettlement} settlement
- * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any }} [options]
+ * @param {any} settlement
+ * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
  *                       resilienceScore: number, reliefPct: number, tithed: boolean,
  *                       blockaded: boolean, famished: boolean } | null }}
  */
-export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null } = {}) {
+export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null } = {}) {
   const ledger = foodLedger(settlement);
   if (!ledger.present) return { settlement, changed: false, summary: null };
   const fs = settlement.economicState?.foodSecurity || {};
-  const months = INTERVAL_MONTHS[interval] ?? 1;
+  const months = /** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1;
   const cap = storageCapacityMonths(settlement);
   const T = STOCKPILE_TUNING;
 
@@ -302,7 +283,15 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   const faminePct = famished
     ? clamp(famine.severity ?? 0, 0, 1) * T.famineDeficitScale
     : 0;
-  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct, 0, 95);
+  // An active OUTBOUND deployment eats the home granary (the army eats its
+  // home stockpile). Don't double-cut an origin already under blockade: a BESIEGED
+  // settlement's army defends home (the war layer never deploys a besieged town), and
+  // even on a legacy save the blockade cut already models a starving garrison — so
+  // the deploy drain only applies when the home is NOT itself blockaded. Lands on the
+  // same effectiveDeficit so it composes with famine and gets answered by the drawdown.
+  const deploying = !!deployment && !blockaded;
+  const deployDrainPct = deploying ? T.deploymentDrainPct : 0;
+  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct + deployDrainPct, 0, 95);
 
   if (effectiveDeficit <= 0) {
     // 1. Surplus fills, capped by the granary infrastructure.
@@ -366,6 +355,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       blockaded,
       blockadeBypass,
       famished,
+      deployed: deploying,
       lastTick: tick,
     },
   };
@@ -378,6 +368,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     fs.stockpile.blockaded !== blockaded
     || (fs.stockpile.blockadeBypass ?? null) !== blockadeBypass
     || fs.stockpile.famished !== famished
+    || (fs.stockpile.deployed ?? false) !== deploying
   );
   const changed = nextFoodSecurity.storageMonths !== fs.storageMonths
     || nextFoodSecurity.deficitPct !== fs.deficitPct
@@ -396,7 +387,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       ...(_disasterMoved ? {
         defenseProfile: {
           ...settlement.defenseProfile,
-          scores: { ...(/** @type {{ scores?: Record<string, any> }} */ (settlement.defenseProfile)).scores, disaster: nextDisaster },
+          scores: { ...settlement.defenseProfile.scores, disaster: nextDisaster },
         },
       } : {}),
     },
@@ -411,4 +402,53 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       famished,
     },
   };
+}
+
+// ── SACK FOOD SEIZURE (P3, flag warForageEnabled). A stormed granary is looted: the victor
+// carries off part of the conquered's stores. CONSERVED in ABSOLUTE food — storageMonths ×
+// population is proportional to real stored food (the per-capita monthly need is the same
+// constant on both sides, so it cancels in the transfer ratio) — with a spoilage SINK: the
+// victor gains no more absolute food than was seized, and any excess above its own granary
+// headroom is lost. So a conquest feeds the victor's war chest and starves the occupied town.
+export const SACK_FOOD_FRACTION = 0.5;           // half the conquered granary is looted
+export const FORAGE_FOOD_CAPTURE_FRACTION = 0.6; // 60% of the loot reaches the victor; the rest spoils / burns
+
+/**
+ * The conserved granary-seizure of a sack, in storageMonths. The conquered loses
+ * SACK_FOOD_FRACTION of its granary; the victor gains the captured share, re-expressed in
+ * ITS OWN months (÷ its population) and capped at its granary headroom. `gained × victorPop`
+ * is always ≤ `lost × conqueredPop` ⇒ absolute food is never minted. Null when there is
+ * nothing to seize (no granary ledger, zero population, or an empty granary).
+ *
+ * `takeFraction` / `captureFraction` default to the sack's aggressive values; a gentler pair
+ * models a voluntary levy (F2) drawing grain from a willing vassal. The same conserved
+ * arithmetic serves both — the source loses a fraction of its granary, the recipient gains
+ * the captured share re-expressed in its own months, never minting absolute food.
+ *
+ * @param {{ conqueredStorageMonths?: any, conqueredPopulation?: any, victorStorageMonths?: any, victorPopulation?: any, victorCapMonths?: any, takeFraction?: number, captureFraction?: number }} args
+ * @returns {{ lostMonths: number, gainedMonths: number } | null}
+ */
+export function computeSackFoodTransfer({ conqueredStorageMonths, conqueredPopulation, victorStorageMonths, victorPopulation, victorCapMonths, takeFraction = SACK_FOOD_FRACTION, captureFraction = FORAGE_FOOD_CAPTURE_FRACTION } = {}) {
+  const cMonths = Math.max(0, Number(conqueredStorageMonths) || 0);
+  const cPop = Math.max(0, Number(conqueredPopulation) || 0);
+  const vPop = Math.max(0, Number(victorPopulation) || 0);
+  const vMonths = Math.max(0, Number(victorStorageMonths) || 0);
+  const vCap = Math.max(0, Number(victorCapMonths) || 0);
+  // FLOOR (not round) the debit to 1 decimal so the source is NEVER over-drained:
+  // round1() could round the taken share UP past `takeFraction` of the true granary,
+  // over-debiting the conquered/levied source by up to ~0.05 months every tick (the
+  // levy F2 path reuses this each tick). Flooring makes the debit ≤ the intended
+  // fraction, and since `seizedAbs` derives from this same floored value the victor's
+  // gain stays ≤ what the source lost — a pure sink under BOTH rounding directions.
+  const lostMonths = Math.floor(Math.max(0, Number(takeFraction) || 0) * cMonths * 10) / 10;
+  if (lostMonths <= 0 || cPop <= 0 || vPop <= 0) return null;
+  const seizedAbs = lostMonths * cPop;                    // ∝ absolute food (per-capita need cancels)
+  const gainedAbs = Math.max(0, Math.min(1, Number(captureFraction))) * seizedAbs;
+  const headroom = Math.max(0, vCap - vMonths);
+  // FLOOR the seized share (not round) so rounding can only ever UNDER-credit the victor —
+  // absolute food is never minted: `gained × victorPop ≤ gainedAbs ≤ lost × conqueredPop`.
+  // The final round1 only cleans float error in the headroom cap (e.g. 8 − 7.9); the apply
+  // pass re-clamps to the granary capacity regardless.
+  const gainedMonths = round1(Math.min(Math.floor((gainedAbs / vPop) * 10) / 10, headroom));
+  return { lostMonths, gainedMonths: Math.max(0, gainedMonths) };
 }

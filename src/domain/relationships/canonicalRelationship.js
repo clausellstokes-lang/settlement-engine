@@ -118,7 +118,7 @@ export function relationshipLinkMetadata(definition, localRole) {
 /**
  * @param {{ from?: string, relationshipType?: string } | null | undefined} edge
  * @param {string} sourceId
- * @param {string} _targetId
+ * @param {string} [_targetId]
  * @returns {{ sourceRole: string, targetRole: string }}
  */
 export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
