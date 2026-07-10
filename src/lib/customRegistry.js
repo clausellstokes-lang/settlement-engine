@@ -42,6 +42,7 @@ export const REGISTRY_CATEGORIES = [
   'resources',
   'stressors',
   'tradeGoods',
+  'deities',
   'resourceChains',
 ];
 
@@ -55,6 +56,7 @@ export const CUSTOM_SLICE_KEY_FOR = {
   resources:      'resources',
   stressors:      'stressors',
   tradeGoods:     'tradeGoods',
+  deities:        'deities',
   resourceChains: null,  // not yet user-creatable
 };
 
@@ -97,7 +99,49 @@ export function parseRefId(refId) {
     const rest = refId.slice('custom:'.length);
     return { source: 'custom', localUid: rest || localUid };
   }
+  if (refId.startsWith('deity:')) {
+    // A minted deity identity ref: `deity:<scope>:<slug>` (scope = the authoring
+    // account's localUid). Scope is the account-local unique token that keeps two
+    // accounts' same-named homebrew deities from identity-merging. A scopeless
+    // legacy form `deity:<name>` parses with an empty scope (name-identity only).
+    const parts = refId.split(':');
+    return parts.length >= 3
+      ? { source: 'deity', scope: parts[1] || '', slug: parts.slice(2).join(':') }
+      : { source: 'deity', scope: '', slug: parts[1] || '' };
+  }
   return null;
+}
+
+/**
+ * Mint the STABLE, ACCOUNT-SCOPED identity ref for a deity — the id the embed
+ * bridge stamps onto config.primaryDeityRef / the frozen snapshot's `_deityRef`,
+ * and the key the pantheon ratchet identity-buckets by.
+ *
+ * Format `deity:<scope>:<slug>`, scope = the authoring account's local unique
+ * token for the deity (its `localUid`, falling back to `id`). This closes the
+ * cross-account identity-merge: two accounts' same-named homebrew deities
+ * ("War Father" vs "War Father") carry DISTINCT localUids → distinct refs, so a
+ * shared campaign keeps them two gods, while the SAME authored deity assigned to
+ * several settlements within ONE account keeps its single identity (same localUid
+ * → same ref → shared pantheon niche). The engine keeps treating the ref as
+ * opaque; only the MINTING moved off the name — deityIdOf's bare `deity:<name>`
+ * fallback (which name-collides) is now unreachable for an assigned deity.
+ *
+ * Returns null for a nameless raw. A scopeless raw (e.g. a future prebuilt deity
+ * with no localUid) mints `deity:<slug>` — the shared global pool where
+ * name-identity IS intentional.
+ *
+ * @param {{ name?: unknown, localUid?: unknown, id?: unknown } | null | undefined} raw
+ * @returns {string|null}
+ */
+export function mintDeityRef(raw) {
+  if (!raw) return null;
+  const slug = slugify(raw.name);
+  if (!slug) return null;
+  const scope = raw.localUid != null ? String(raw.localUid)
+    : raw.id != null ? String(raw.id)
+    : null;
+  return scope ? `deity:${scope}:${slug}` : `deity:${slug}`;
 }
 
 // ── Prebuilt enumerators ────────────────────────────────────────────────────
@@ -380,6 +424,7 @@ export function buildRegistry(customContent) {
     resources:      enumerateCustom('resources', customContent),
     stressors:      enumerateCustom('stressors', customContent),
     tradeGoods:     enumerateCustom('tradeGoods', customContent),
+    deities:        enumerateCustom('deities', customContent),
     resourceChains: [],
   };
 
@@ -407,9 +452,17 @@ export function buildRegistry(customContent) {
       if (!refId) return null;
       const direct = index.get(refId);
       if (direct) return direct;
+      const parsed = parseRefId(refId);
+      // A minted deity identity ref (`deity:<scope>:<slug>`) round-trips back to
+      // its authored deity via the scope (the localUid). The engine never does
+      // this — refs stay opaque there — but authoring surfaces that re-open the
+      // editor from an embedded snapshot resolve the source record this way.
+      if (parsed?.source === 'deity' && parsed.scope) {
+        const viaScope = index.get(`custom:${parsed.scope}`);
+        if (viaScope) return viaScope;
+      }
       // Best-effort: a bare name (legacy form) - try prebuilt name lookup.
       // This lets older saves whose deps stored raw names still resolve.
-      const parsed = parseRefId(refId);
       if (!parsed) {
         // Treat as a bare name across all categories.
         const slug = slugify(refId);

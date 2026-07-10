@@ -646,7 +646,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
             }}
           >
-            <BuyThisDossier settlement={settlement} />
+            <BuyThisDossier settlement={settlement} saveId={saveId} />
             <ShareToGallery
               saveId={saveId}
               isPublic={liveSaveEntry?.is_public}

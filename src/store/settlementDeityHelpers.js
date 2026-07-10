@@ -18,18 +18,22 @@
  * byte-identical. They dispatch via applyEvent and never touch the cloud-write
  * suppression / flush invariant themselves.
  *
- * Wave 4a composition note: deity-ref RESOLUTION runs through
- * buildRegistryFromStore → the customRegistry. Until the registry learns the
- * `deities` category (out of the 4a store fence; it lands with the customContent /
- * schema wave), an authored deity ref does not resolve and setPrimaryDeity refuses
- * (returns null). The mount is therefore DORMANT-but-correct: the clear (null) and
- * remove paths work today, and the resolve/embed path activates unchanged the
- * moment the registry gains deities — no store-side change required. This is the
- * dossier's anticipated "deity mounts ship dormant behind the missing registry
- * entries" state.
+ * Wave 4f composition note: deity-ref RESOLUTION runs through
+ * buildRegistryFromStore → the customRegistry, which now carries the `deities`
+ * category — so an authored deity ref resolves and the embed path is LIVE (the
+ * dormant-but-correct 4a state is closed).
+ *
+ * Identity minting (the cross-account collision fix): the ref we EMBED is NOT the
+ * `custom:<localUid>` we resolve with — it is a stable, account-scoped identity
+ * ref `deity:<scope>:<slug>` minted here via mintDeityRef(raw). scope is the
+ * authoring account's localUid for the deity, so two accounts' same-named homebrew
+ * gods carry distinct refs and never identity-merge in a shared campaign (the
+ * pantheon ratchet keys by this ref; deityIdOf's bare `deity:<name>` fallback,
+ * which name-collides, is now unreachable for an assigned deity). Resolution still
+ * accepts the incoming `custom:<localUid>`; only the embedded identity changed.
  */
 
-import { buildRegistryFromStore } from '../lib/customRegistry.js';
+import { buildRegistryFromStore, mintDeityRef } from '../lib/customRegistry.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
 
 /** Build the self-contained deity snapshot from an authored deity record. */
@@ -79,10 +83,12 @@ export function setPrimaryDeityImpl(get, deityRefId) {
   const entry = registry.resolve(deityRefId);
   const raw = entry?.raw;
   if (!raw) return null;                              // unknown ref — refuse.
+  // Embed the account-scoped IDENTITY ref, not the resolution ref (see header).
+  const deityRef = mintDeityRef(raw) || deityRefId;
   return state.applyEvent({
     type: 'SET_PRIMARY_DEITY',
-    targetId: deityRefId,
-    payload: { deityRef: deityRefId, snapshot: deitySnapshotFrom(raw) },
+    targetId: deityRef,
+    payload: { deityRef, snapshot: deitySnapshotFrom(raw) },
   });
 }
 
@@ -125,6 +131,8 @@ export function imposeCultImpl(get, deityRefId, removeRef = null) {
   const entry = registry.resolve(deityRefId);
   const raw = entry?.raw;
   if (!raw) return null;                              // unknown ref — refuse.
+  // Embed the account-scoped IDENTITY ref, not the resolution ref (see header).
+  const deityRef = mintDeityRef(raw) || deityRefId;
   const snapshot = deitySnapshotFrom(raw);
   // Pre-check placement with the same pure rule the handler uses, so a refused
   // imposition never logs a no-op event.
@@ -132,12 +140,12 @@ export function imposeCultImpl(get, deityRefId, removeRef = null) {
     patron: config.primaryDeitySnapshot || null,
     cults: Array.isArray(config.cultDeitySnapshots) ? config.cultDeitySnapshots : [],
     tier: state.settlement.tier || config.tier || 'village',
-    deity: { _deityRef: deityRefId, ...snapshot },
+    deity: { _deityRef: deityRef, ...snapshot },
   });
   if (probe.action === 'refused') return null;
   return state.applyEvent({
     type: 'IMPOSE_CULT',
-    targetId: deityRefId,
-    payload: { deityRef: deityRefId, snapshot },
+    targetId: deityRef,
+    payload: { deityRef, snapshot },
   });
 }

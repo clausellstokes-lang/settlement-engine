@@ -1,6 +1,6 @@
 {
-  "total": 2213,
-  "totalAny": 2174,
+  "total": 2244,
+  "totalAny": 2205,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -75,6 +75,10 @@
       "any": 17,
       "suppress": 0
     },
+    "src/domain/display/chronicleTimeline.js": {
+      "any": 14,
+      "suppress": 0
+    },
     "src/domain/display/deityEffects.js": {
       "any": 6,
       "suppress": 0
@@ -93,6 +97,14 @@
     },
     "src/domain/display/publicSafe.js": {
       "any": 3,
+      "suppress": 0
+    },
+    "src/domain/display/realmArcSummary.js": {
+      "any": 12,
+      "suppress": 0
+    },
+    "src/domain/display/regionWakeReplay.js": {
+      "any": 5,
       "suppress": 0
     },
     "src/domain/display/threatAssessment.js": {

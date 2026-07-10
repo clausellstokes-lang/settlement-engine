@@ -8,10 +8,12 @@
  *     snapshot into settlement.config — which flips the religion subsystem gate
  *     (subsystemActivation.js). This test is the proof the mount→gate contract is
  *     wired: once a deity is embedded, isSubsystemActive('religion') is true.
- *   • The mount is DORMANT-but-correct for RESOLUTION: OUR customRegistry does not
- *     yet carry the `deities` category (out of the 4a store fence), so an authored
- *     ref does not resolve and setPrimaryDeity refuses (null) — the clear/remove
- *     paths and the applyEvent embed contract still hold.
+ *   • RESOLUTION is LIVE post-4f: OUR customRegistry now carries the `deities`
+ *     category, so an AUTHORED ref resolves and embeds. A ref for a deity absent
+ *     from customContent still refuses (null) — the no-half-embed contract — and
+ *     the clear/remove + applyEvent embed contracts hold. (The end-to-end embed of
+ *     an authored deity, incl. the account-scoped identity mint, is pinned in
+ *     tests/store/deityRefCollision.test.js.)
  *   • renameSettlement / canonizeSavedSettlement — the identity-edit + list-canon
  *     affordances the Settlements panel consumes.
  *   • simulationRules opt-in flags (war/strategy/religion) default FALSE and
@@ -100,17 +102,15 @@ describe('settlementSlice deity mount — embed → religion gate', () => {
   test('setPrimaryDeity(null) is wired (dispatches applyEvent) and leaves the settlement dormant', () => {
     // Proves the store MOUNT is wired: the clear path delegates to the deity impl,
     // which dispatches SET_PRIMARY_DEITY through applyEvent and returns its envelope
-    // (not null). No embed appears — correct for a clear, and also because OUR
-    // domain EVENT_REGISTRY does not yet carry the SET_PRIMARY_DEITY spec (that entry
-    // is out of the 4a store fence — see the file header + the wave-4a report). The
-    // mount lights up end-to-end unchanged the moment the registry gains the entry.
+    // (not null). No embed appears — correct for a clear (a null payload sheds the
+    // patron); the non-null assign embed is pinned in deityRefCollision.test.js.
     const res = store.getState().setPrimaryDeity(null);
     expect(res).not.toBeNull();
     expect('primaryDeitySnapshot' in store.getState().settlement.config).toBe(false);
     expect(isSubsystemActive(worldSnapshot(store), 'religion')).toBe(false);
   });
 
-  test('setPrimaryDeity refuses an unresolvable ref (dormant registry — no half embed)', () => {
+  test('setPrimaryDeity refuses a ref for an unauthored deity (no half embed)', () => {
     const res = store.getState().setPrimaryDeity('custom:lu_nonexistent');
     expect(res).toBeNull();
     expect('primaryDeitySnapshot' in store.getState().settlement.config).toBe(false);

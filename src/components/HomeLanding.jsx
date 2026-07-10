@@ -14,10 +14,10 @@
  * states), and a closing CTA band that repeats the hero's primary. Flag off
  * renders the original hero + three pillars + lifecycle spine.
  *
- * NOTE: the region-wake replay proof card (RegionWakeReplay) is deferred — its
- * `domain/display/regionWakeReplay.js` projection is a domain-wave deliverable
- * not yet landed in this tree. The proof band shows the sample dossier alone
- * until it arrives; see the 4d-4f/domain handoff.
+ * The proof band carries two anon-only teasers: the sample dossier and the
+ * region-wake replay (RegionWakeReplay), a read-only scrub over a canned fixture
+ * projected through the same pure read-models the Realm uses — landed wave 4f
+ * alongside `domain/display/regionWakeReplay.js`.
  */
 import { lazy, Suspense, useEffect } from 'react';
 import { INK, PARCH_100, CARD, BORDER, BODY, SECOND, GOLD_DEEP, serif_, sans, FS, SP, R } from './theme.js';
@@ -42,6 +42,10 @@ const PILLARS = [
 // same condition below, so a member or a returning anon never sees an empty
 // band shell.
 const HomeSampleDossier = lazy(() => import('./home/HomeSampleDossier.jsx'));
+// The region-wake replay teaser, lazy like the sample dossier. It self-gates on
+// tier === 'anon' && !settlement too, and projects a canned fixture through the
+// Realm's own pure read-models — no live engine.
+const RegionWakeReplay = lazy(() => import('./home/RegionWakeReplay.jsx'));
 
 // A height-matched skeleton reserves the lazy card's space so the proof band
 // reads as "loading" rather than popping in and shifting layout (mirrors
@@ -182,6 +186,14 @@ export default function HomeLanding({ isMobile, signedIn, isPremium = false, onN
           <div style={{ maxWidth: 560, margin: '0 auto' }}>
             <Suspense fallback={<ProofSkeleton />}>
               <HomeSampleDossier />
+            </Suspense>
+          </div>
+          {/* The region-wake replay sits below the sample dossier: a static
+              artifact, then the living world in motion. Both self-gate on anon +
+              no settlement. Its CTA routes to the canonical premium-value surface. */}
+          <div style={{ maxWidth: 560, margin: `${SP.xl}px auto 0` }}>
+            <Suspense fallback={<ProofSkeleton />}>
+              <RegionWakeReplay onUpgrade={() => onNavigate('pricing')} />
             </Suspense>
           </div>
         </section>
