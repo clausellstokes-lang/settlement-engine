@@ -1025,6 +1025,11 @@ best in the world that resembles it (law already owns the long game via tenure/l
    TIER_ORDER from data/constants.js: thorp -> hamlet -> village -> town -> city ->
    metropolis) — fading with tier and the government form's law affinity (a thorp of eight
    souls has no law to resist a whisper; the chartered town does).
+4. COMPROMISE (OWNER): chaotic receptivity also scales with the settlement's compromise
+   depth (covert + revealed) — corruption is the product of both failed restraints, so deep
+   rot is chaos-friendly soil exactly as it is evil-friendly; complements the existing
+   evil-side amplifiers (COMPROMISE_EVIL_AMP / MOOD_EROSION stay as-is). The corruption
+   plane feeds back on BOTH of its own axes.
 CONSTRAINTS: asymmetric by design — chaos gains in disorder, lawful creeds take NO mirror
 penalty (no double-count). Modulates RECEPTIVITY, never patron FIT — what a settlement
 SUFFERS shapes who can convert it; what it CHOOSES shapes which god it keeps (endogeneity
