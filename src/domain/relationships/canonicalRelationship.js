@@ -8,6 +8,76 @@ const SYMMETRIC_TYPES = new Set([
   'criminal_network',
 ]);
 
+// ── Canonical relationship-label normalizer ─────────────────────────────────
+//
+// ONE alias table shared by every regional system (lib/relationshipGraph,
+// domain/regionalGraph, domain/region/graph) so a label authored as 'ally',
+// 'overlord', or the legacy plural 'trade_partners' resolves to the same
+// canonical base label everywhere instead of silently drifting in one
+// subsystem. Each subsystem still maps FROM this canonical label to its own
+// effect profile.
+//
+// This table is CROSS-VOCAB-SAFE: it only collapses spelling/synonym variants
+// onto a base label that every consumer already recognizes. It deliberately
+// does NOT collapse 'smuggling_partner' → 'criminal_network', because
+// 'smuggling_partner' is the CANONICAL term in the regional structural vocab
+// (REGIONAL_RELATIONSHIP_TYPES). That matrix-specific collapse lives in
+// canonicalPropagationLabel (see PROPAGATION_ALIASES below).
+/** @type {Readonly<Record<string, string>>} */
+const RELATIONSHIP_LABEL_ALIASES = Object.freeze({
+  // Legacy plural the old 'Opened Trade Route' event wrote.
+  trade_partners: 'trade_partner',
+  trade: 'trade_partner',
+  // Alliance spellings.
+  ally: 'allied',
+  alliance: 'allied',
+  allies: 'allied',
+  // Hierarchical synonyms (every consumer treats overlord/vassal as one edge).
+  overlord: 'vassal',
+  suzerain: 'vassal',
+  liege: 'vassal',
+  // Smuggling spelling drift onto the regional canonical term.
+  smuggling: 'smuggling_partner',
+  // Cold-war spelling drift.
+  coldwar: 'cold_war',
+  'cold-war': 'cold_war',
+});
+
+/**
+ * Normalize a raw/legacy relationship label to its canonical base label.
+ * Unknown labels pass through verbatim (trimmed) so subsystem-specific
+ * vocabularies (e.g. regional 'protector', 'tax_authority') are untouched.
+ *
+ * @param {string} label
+ * @returns {string}
+ */
+export function canonicalRelationshipLabel(label) {
+  const raw = String(label || '').trim();
+  return RELATIONSHIP_LABEL_ALIASES[raw.toLowerCase()] || raw;
+}
+
+// Matrix/channel-bundle vocabulary: canonical labels that have NO row in the
+// propagation matrix (lib/relationshipGraph PROPAGATION_MATRIX) map onto the
+// row that carries their semantics. Applied AFTER canonicalRelationshipLabel so
+// 'smuggling'→'smuggling_partner'→'criminal_network' resolves in one pass.
+// Kept separate from the cross-vocab table so the regional structural graph
+// keeps 'smuggling_partner' as a first-class type.
+/** @type {Readonly<Record<string, string>>} */
+const PROPAGATION_ALIASES = Object.freeze({
+  smuggling_partner: 'criminal_network',
+  criminal_corridor: 'criminal_network',
+});
+
+/**
+ * Normalize a relationship label to the propagation-matrix vocabulary.
+ * @param {string} label
+ * @returns {string}
+ */
+export function canonicalPropagationLabel(label) {
+  const base = canonicalRelationshipLabel(label);
+  return PROPAGATION_ALIASES[base.toLowerCase()] || base;
+}
+
 /** @type {Record<string, number>} */
 const TIER_RANK = {
   thorp: 0,
@@ -149,6 +219,7 @@ export function rolesForCanonicalEdge(edge, sourceId, _targetId) {
  * @property {string=} relationshipFrom
  * @property {string=} relationshipTo
  * @property {string=} localRelationshipRole
+ * @property {string=} sourceRole            authored canonical role on the source side
  * @property {string=} displayRelationshipType
  *
  * @param {RelationshipLinkLike | null | undefined} link
@@ -177,9 +248,62 @@ export function canonicalEdgeForLink(link, sourceSave, targetSave) {
     return { from: String(sourceId), to: String(targetId), relationshipType: 'patron' };
   }
   if (rawType === 'vassal' || rawType === 'overlord') {
+    // Prefer the link's AUTHORED direction over the size heuristic.
+    // A legacy save where the smaller settlement is canonically the overlord
+    // (a deposed-but-sovereign capital, a small theocratic seat) was silently
+    // inverted by strongerFirst, mis-attributing who owes/commands whom.
+    //   - canonical edge: from = overlord, to = vassal.
+    //   - a role hint ('overlord'/'vassal') on the SOURCE is directional.
+    //   - the raw word 'overlord' likewise means "the source is the overlord".
+    // Only when no directional signal exists do we fall back to strongerFirst.
+    const role = link?.localRelationshipRole || link?.sourceRole || link?.displayRelationshipType;
+    if (role === 'overlord' || rawType === 'overlord') {
+      return { from: String(sourceId), to: String(targetId), relationshipType: 'vassal' };
+    }
+    if (role === 'vassal') {
+      return { from: String(targetId), to: String(sourceId), relationshipType: 'vassal' };
+    }
     return { ...strongerFirst(sourceId, targetId, sourceSave, targetSave), relationshipType: 'vassal' };
   }
   return { from: String(sourceId), to: String(targetId), relationshipType: rawType };
+}
+
+// Asymmetric roles → a directional phrase template. The neighbour name fills the
+// {neighbour} slot so "overlord" reads as "Overlord of Thornmere" and its inverse
+// "Vassal to Ironhold". The symmetric relationships ('allied', 'hostile', ...) carry
+// no direction and are intentionally absent here — they fall through to the plain
+// titled label so nothing about their phrasing changes.
+/** @type {Readonly<Record<string, (n: string) => string>>} */
+const DIRECTIONAL_ROLE_PHRASES = Object.freeze({
+  overlord: n => `Overlord of ${n}`,
+  vassal: n => `Vassal to ${n}`,
+  patron: n => `Patron of ${n}`,
+  client: n => `Client of ${n}`,
+});
+
+/**
+ * Render the directional label for a neighbour link, naming WHICH SIDE this
+ * settlement is for the two asymmetric pairs (overlord/vassal, patron/client).
+ *
+ * The direction is read off the link's per-side role
+ * (`localRelationshipRole`, with `displayRelationshipType` as the legacy
+ * fallback), which the link composer already stamps from the canonical
+ * `sourceRole`/`targetRole`. A symmetric relationship, an unknown role, or a
+ * legacy row with neither field present returns null so the caller keeps its
+ * existing non-directional label (no regression).
+ *
+ * @param {{ localRelationshipRole?: string, displayRelationshipType?: string, relationshipType?: string } | null | undefined} link
+ *   the neighbourNetwork entry.
+ * @param {string} [neighbourName] the linked settlement's name (fills the slot).
+ * @returns {string|null} e.g. "Overlord of Thornmere", or null when not directional.
+ */
+export function directionalRelationshipLabel(link, neighbourName) {
+  const role = String(link?.localRelationshipRole || link?.displayRelationshipType || '').toLowerCase();
+  const phrase = DIRECTIONAL_ROLE_PHRASES[role];
+  if (!phrase) return null;
+  const name = String(neighbourName || '').trim();
+  if (!name) return null;
+  return phrase(name);
 }
 
 /**
@@ -192,5 +316,10 @@ export function localPropagationType(link) {
   if (role === 'patron') return 'client';
   if (role === 'vassal') return 'vassal';
   if (role === 'overlord') return 'client';
-  return link?.relationshipType || link?.type || 'neutral';
+  // A legacy link with a raw relationshipType ('ally', 'overlord',
+  // 'smuggling_partner', 'trade_partners') carries no localRelationshipRole, so
+  // it reached the propagation matrix unnormalized and silently fell through to
+  // 'neutral'. Route it through the matrix-vocab normalizer so it lands on a
+  // real matrix key (allied / vassal / criminal_network / trade_partner).
+  return canonicalPropagationLabel(link?.relationshipType || link?.type || 'neutral');
 }

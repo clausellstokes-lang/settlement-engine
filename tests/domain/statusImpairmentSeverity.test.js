@@ -21,8 +21,7 @@ import { assignNpcToRole } from '../../src/domain/entities/npcs.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
 describe('non-positive-severity impairments do not drive impaired status (HIGH)', () => {
-  // DEFERRED to entities wave — needs severity-gated impairment status in withImpairment (src/domain/entities/status.js); re-enable when it lands.
-  test.skip('withImpairment does NOT bump a clean entity for a negative-severity restoration', () => {
+  test('withImpairment does NOT bump a clean entity for a negative-severity restoration', () => {
     const next = withImpairment({ name: 'Council', status: STATUS_ACTIVE, impairments: [] }, {
       type: 'legitimacy', severity: -0.4, causeEventId: 'e1', description: 'Popular new leader is widely accepted.',
     });
@@ -33,8 +32,7 @@ describe('non-positive-severity impairments do not drive impaired status (HIGH)'
     expect(next.impairments).toHaveLength(1);
   });
 
-  // DEFERRED to entities wave — needs severity-gated impairment status in withImpairment/effectiveStatus (src/domain/entities/status.js); re-enable when it lands.
-  test.skip('a zero-severity impairment is also inert for status', () => {
+  test('a zero-severity impairment is also inert for status', () => {
     const next = withImpairment({ name: 'X' }, {
       type: 'capacity', severity: 0, causeEventId: 'e0', description: 'No-op',
     });
@@ -55,8 +53,7 @@ describe('non-positive-severity impairments do not drive impaired status (HIGH)'
     expect(effectiveStatus(inst)).toBe(STATUS_IMPAIRED);
   });
 
-  // DEFERRED to entities wave — needs severity-gated impairment status in withImpairment (src/domain/entities/status.js); re-enable when it lands.
-  test.skip('popular-leader appointment leaves a clean institution active, resilience intact', () => {
+  test('popular-leader appointment leaves a clean institution active, resilience intact', () => {
     // The popular branch pushes a severity -0.4 legitimacy bonus.
     const { restorations } = assignNpcToRole({
       npc: { name: 'Aldric', id: 'npc1' },
@@ -82,8 +79,7 @@ describe('non-positive-severity impairments do not drive impaired status (HIGH)'
   });
 });
 
-// DEFERRED to entities wave — needs isCovertOnlyImpairment in src/domain/entities/status.js; re-enable when it lands.
-describe.skip('covert-only impairments are hidden from public status (LOW)', () => {
+describe('covert-only impairments are hidden from public status (LOW)', () => {
   const covertCaptured = {
     name: 'Captured Guild', status: STATUS_IMPAIRED,
     impairments: [{ type: 'influence', severity: 0.5, causeEventId: 'covert-1', covert: true }],

@@ -1,6 +1,6 @@
 {
-  "total": 2195,
-  "totalAny": 2156,
+  "total": 2213,
+  "totalAny": 2174,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -112,7 +112,7 @@
       "suppress": 0
     },
     "src/domain/dossier/entityLinks.js": {
-      "any": 6,
+      "any": 24,
       "suppress": 0
     },
     "src/domain/events/applyEvent.js": {

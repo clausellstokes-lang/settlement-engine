@@ -24,8 +24,7 @@ const settlement = {
   ],
 };
 
-// DEFERRED to npcProfile-helpers wave — needs institutionsForPower in src/domain/npcProfile.js; re-enable when it lands.
-describe.skip('institutionsForPower — tag-driven footprint', () => {
+describe('institutionsForPower — tag-driven footprint', () => {
   it('maps a criminal power to tag-only criminal institutions the name match missed', () => {
     const out = institutionsForPower({ faction: 'The Shadow Hand', category: 'criminal' }, settlement);
     expect(out).toContain('Local fence');

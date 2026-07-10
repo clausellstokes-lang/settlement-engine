@@ -51,6 +51,10 @@
  *                                     auto-generated from propagation if absent)
  *  @property {(string|null)=} appliedAt  ISO timestamp; explicitly null when applied
  *                                     inside the pure event pipeline (no wall clock)
+ *  @property {boolean=} covert        hidden mark (a covert capture — institution-scope
+ *                                     Impose Corruption); bumps status but must never
+ *                                     surface as a visible "impaired" badge or drag
+ *                                     public derived state
  */
 
 /**
@@ -96,9 +100,58 @@ export function mkImpairment(type, severity, causeEventId, description) {
 }
 
 /**
+ * True when an entity carries impairment(s) and every one of them is covert —
+ * i.e. its 'impaired' status would be entirely a hidden mark with no public
+ * cause. A covert capture (institution-scope Impose Corruption) bumps status
+ * but must never surface as a visible "impaired" badge or drag public derived
+ * state. Centralized here so effectiveStatus / isFullyActive / withImpairment
+ * and deriveSystemState all share ONE definition of "covert-only".
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @returns {boolean}
+ */
+export function isCovertOnlyImpairment(entity) {
+  const imps = entity?.impairments;
+  if (!Array.isArray(imps) || !imps.length) return false;
+  return imps.every(imp => imp?.covert === true);
+}
+
+/**
+ * True when an impairment actually degrades the entity: it has positive
+ * effective severity AND is not a covert (hidden) mark. A non-positive
+ * severity is a RESTORATION patch (a popular leader's legitimacy bonus is
+ * stored as severity -0.4) — it must never push the entity into 'impaired'.
+ *
+ * @param {Impairment | null | undefined} imp
+ * @returns {boolean}
+ */
+function impairmentDegrades(imp) {
+  return (imp?.severity ?? 0) > 0 && imp?.covert !== true;
+}
+
+/**
+ * True when at least one impairment in the set visibly degrades the entity —
+ * the gate for reporting 'impaired'. An entity carrying only restoration
+ * patches (negative severity) and/or covert marks is NOT visibly impaired.
+ *
+ * @param {StatusEntity | null | undefined} entity
+ * @returns {boolean}
+ */
+function hasVisibleImpairment(entity) {
+  const imps = entity?.impairments;
+  if (!Array.isArray(imps) || !imps.length) return false;
+  return imps.some(impairmentDegrades);
+}
+
+/**
  * Determine the effective status of an entity given its impairments.
  * Status field on the entity wins if it's a removal/destruction state;
  * otherwise impairments determine impaired vs active.
+ *
+ * Only impairments that visibly degrade (positive severity, non-covert)
+ * count: a clean institution carrying a restoration patch (a popular
+ * leader's legitimacy bonus, stored as negative severity) or a covert-only
+ * capture reads ACTIVE, not impaired.
  *
  * @param {StatusEntity | null | undefined} entity   institution/faction/npc with optional `status` and `impairments`
  * @returns {EntityStatus}
@@ -107,8 +160,7 @@ export function effectiveStatus(entity) {
   if (!entity) return STATUS_ACTIVE;
   if (entity.status === STATUS_REMOVED || entity.status === STATUS_DESTROYED) return entity.status;
   if (entity.status === STATUS_VACANT)   return STATUS_VACANT;
-  const impairments = entity.impairments || [];
-  if (impairments.length > 0) return STATUS_IMPAIRED;
+  if (hasVisibleImpairment(entity)) return STATUS_IMPAIRED;
   return STATUS_ACTIVE;
 }
 
@@ -130,7 +182,7 @@ export function withImpairment(entity, impairment) {
   const prev = entity.impairments || [];
   // Idempotency: replace if same type + same cause
   const filtered = prev.filter(i => !(i.type === impairment.type && i.causeEventId === impairment.causeEventId));
-  return {
+  const withNext = {
     ...entity,
     // Do NOT default appliedAt to wall-clock: this runs inside the pure, seeded
     // event pipeline and a Date.now() here embedded nondeterministic timestamps
@@ -138,14 +190,14 @@ export function withImpairment(entity, impairment) {
     // explicitly (e.g. world-pulse `now`); the rest carry causeEventId for
     // provenance and the event log records the authoritative timestamp.
     impairments: [...filtered, { ...impairment, appliedAt: impairment.appliedAt ?? null }],
-    // Auto-bump status to impaired if it was active, but never override
-    // a removed/destroyed/vacant set explicitly.
-    status: (entity.status === STATUS_REMOVED ||
-             entity.status === STATUS_DESTROYED ||
-             entity.status === STATUS_VACANT)
-      ? entity.status
-      : STATUS_IMPAIRED,
   };
+  // Recompute status from the resulting set through the ONE canonical rule
+  // (effectiveStatus): impaired iff a visibly-degrading impairment remains,
+  // removed/destroyed/vacant preserved, otherwise active. Routing through it
+  // (rather than a hand-rolled ternary that unconditionally bumped to impaired)
+  // means adding a pure restoration patch (negative severity) or a covert-only
+  // mark correctly leaves a clean entity active.
+  return { ...withNext, status: effectiveStatus(withNext) };
 }
 
 /**
@@ -161,10 +213,12 @@ export function withoutEventImpairments(entity, causeEventId) {
   if (!entity) return entity;
   const prev = entity.impairments || [];
   const filtered = prev.filter(i => i.causeEventId !== causeEventId);
-  const status = filtered.length === 0 && entity.status === STATUS_IMPAIRED
-    ? STATUS_ACTIVE
-    : entity.status;
-  return { ...entity, impairments: filtered, status };
+  // Recompute through effectiveStatus so removing the last VISIBLE impairment
+  // drops 'impaired' → 'active' even when covert/restoration marks remain (the
+  // prior `filtered.length === 0` guard missed a non-empty-but-invisible
+  // remainder); removed/destroyed/vacant stay sticky.
+  const withFiltered = { ...entity, impairments: filtered };
+  return { ...withFiltered, status: effectiveStatus(withFiltered) };
 }
 
 /**

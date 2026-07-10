@@ -25,8 +25,7 @@ const settlement = {
   ],
 };
 
-// DEFERRED to npcProfile-helpers wave — needs institutionsForCategory in src/domain/npcProfile.js; re-enable when it lands.
-describe.skip('institutionsForCategory — every power gets its institutional footprint', () => {
+describe('institutionsForCategory — every power gets its institutional footprint', () => {
   it('maps a category to ALL matching institutions, not just the first', () => {
     const religious = institutionsForCategory('religious', settlement);
     expect(religious).toEqual(['Temple of the Dawn', 'Riverside Shrine']);

@@ -26,8 +26,7 @@ function settlementWithStableFactionId() {
   };
 }
 
-// DEFERRED to dossier wave — needs factionIdFromName entity-identity helper in src/domain/dossier/entityLinks.js; re-enable when it lands.
-describe.skip('faction identity — rename-tolerance seam', () => {
+describe('faction identity — rename-tolerance seam', () => {
   it('keeps the name-derived id as the PRIMARY key (legacy consumers still resolve)', () => {
     const index = buildDossierEntityIndex(settlementWithStableFactionId());
     const primary = factionIdFromName('Iron Guild');

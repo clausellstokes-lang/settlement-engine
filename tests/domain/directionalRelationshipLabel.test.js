@@ -17,8 +17,7 @@ function linkFor(selection) {
   return relationshipLinkMetadata(def, def.sourceRole);
 }
 
-// DEFERRED to relationships wave — needs directionalRelationshipLabel in src/domain/relationships/canonicalRelationship.js; re-enable when it lands.
-describe.skip('#4 directionalRelationshipLabel', () => {
+describe('#4 directionalRelationshipLabel', () => {
   it('labels the overlord side as "Overlord of {neighbour}"', () => {
     expect(directionalRelationshipLabel(linkFor('overlord_of'), 'Thornmere')).toBe('Overlord of Thornmere');
   });

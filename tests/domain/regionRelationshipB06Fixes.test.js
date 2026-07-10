@@ -28,16 +28,14 @@ import { deriveRegionalImpacts } from '../../src/domain/region/propagation.js';
 import { deriveRegionalLink } from '../../src/domain/regionalGraph.js';
 
 describe('B06 #3 — one shared canonical-label normalizer', () => {
-  // DEFERRED to relationships wave — needs canonicalRelationshipLabel export in src/domain/relationships/canonicalRelationship.js (region/graph.js delegation); re-enable when it lands.
-  it.skip('region/graph.js re-export delegates to the shared normalizer', () => {
+  it('region/graph.js re-export delegates to the shared normalizer', () => {
     // Same input must give the same output through both entry points.
     for (const raw of ['ally', 'alliance', 'overlord', 'trade_partners', 'coldwar', 'smuggling']) {
       expect(regionCanonicalLabel(raw)).toBe(canonicalRelationshipLabel(raw));
     }
   });
 
-  // DEFERRED to relationships wave — needs canonicalRelationshipLabel in src/domain/relationships/canonicalRelationship.js; re-enable when it lands.
-  it.skip('normalizes spelling/synonym variants to one canonical base', () => {
+  it('normalizes spelling/synonym variants to one canonical base', () => {
     expect(canonicalRelationshipLabel('ally')).toBe('allied');
     expect(canonicalRelationshipLabel('alliance')).toBe('allied');
     expect(canonicalRelationshipLabel('overlord')).toBe('vassal');
@@ -45,8 +43,7 @@ describe('B06 #3 — one shared canonical-label normalizer', () => {
     expect(canonicalRelationshipLabel('cold-war')).toBe('cold_war');
   });
 
-  // DEFERRED to relationships wave — needs canonicalRelationshipLabel + canonicalPropagationLabel in src/domain/relationships/canonicalRelationship.js; re-enable when it lands.
-  it.skip('keeps smuggling_partner as a first-class regional vocab term', () => {
+  it('keeps smuggling_partner as a first-class regional vocab term', () => {
     // CROSS-VOCAB-SAFE: the shared label table must NOT collapse
     // smuggling_partner to criminal_network (that lives in the matrix vocab).
     expect(canonicalRelationshipLabel('smuggling_partner')).toBe('smuggling_partner');
@@ -67,8 +64,7 @@ describe('B06 #3 — one shared canonical-label normalizer', () => {
   });
 });
 
-// DEFERRED to relationships wave — needs the smuggling_partner criminal-channel bundle in relationshipChannelBundle (src/domain/region/graph.js); re-enable when it lands.
-describe.skip('B06 #1 — smuggling_partner mints criminal channels', () => {
+describe('B06 #1 — smuggling_partner mints criminal channels', () => {
   it('produces criminal_corridor + information_flow channels', () => {
     const edge = { from: 'a', to: 'b', id: 'edge.a.b' };
     const bundle = relationshipChannelBundle(edge, 'smuggling_partner');
@@ -90,8 +86,7 @@ describe('B06 #5 — legacy hierarchical direction prefers authored direction', 
   const small = { id: 'small', tier: 'village', settlement: { population: 300 } };
   const big = { id: 'big', tier: 'city', settlement: { population: 12000 } };
 
-  // DEFERRED to relationships wave — needs localRelationshipRole authored-direction handling in canonicalEdgeForLink (src/domain/relationships/canonicalRelationship.js); re-enable when it lands.
-  it.skip('honors a role hint that the SMALLER settlement is the overlord', () => {
+  it('honors a role hint that the SMALLER settlement is the overlord', () => {
     // A deposed-but-sovereign capital: small is canonically the overlord.
     const edge = canonicalEdgeForLink(
       { relationshipType: 'vassal', localRelationshipRole: 'overlord' },
@@ -102,8 +97,7 @@ describe('B06 #5 — legacy hierarchical direction prefers authored direction', 
     expect(edge).toEqual({ from: 'small', to: 'big', relationshipType: 'vassal' });
   });
 
-  // DEFERRED to relationships wave — needs raw-'overlord' authored-direction handling in canonicalEdgeForLink (src/domain/relationships/canonicalRelationship.js); re-enable when it lands.
-  it.skip("treats a raw 'overlord' type as 'the source is the overlord'", () => {
+  it("treats a raw 'overlord' type as 'the source is the overlord'", () => {
     const edge = canonicalEdgeForLink({ relationshipType: 'overlord' }, small, big);
     expect(edge).toEqual({ from: 'small', to: 'big', relationshipType: 'vassal' });
   });
@@ -125,8 +119,7 @@ describe('B06 #5 — legacy hierarchical direction prefers authored direction', 
 });
 
 describe('B06 #7 — channelIdFor keeps distinct goods sets distinct', () => {
-  // DEFERRED to relationships wave — needs id-less goods label-fallback hashing in channelIdFor (src/domain/region/graph.js); re-enable when it lands.
-  it.skip('id-less goods objects do not collapse to one channel id', () => {
+  it('id-less goods objects do not collapse to one channel id', () => {
     const a = channelIdFor({ type: 'trade_dependency', from: 'x', to: 'y', goods: [{ label: 'Iron' }] });
     const b = channelIdFor({ type: 'trade_dependency', from: 'x', to: 'y', goods: [{ label: 'Grain' }] });
     expect(a).not.toBe(b);

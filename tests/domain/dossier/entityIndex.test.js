@@ -48,8 +48,7 @@ function sampleSettlement() {
   };
 }
 
-// DEFERRED to dossier wave — needs buildDossierEntityIndex .resolve/.deities/.resolveTradePartner in src/domain/dossier/entityLinks.js; re-enable when it lands.
-describe.skip('buildDossierEntityIndex', () => {
+describe('buildDossierEntityIndex', () => {
   it('resolves each entity type to the right { type, currentName, tab }', () => {
     const index = buildDossierEntityIndex(sampleSettlement());
 
@@ -214,8 +213,7 @@ describe.skip('buildDossierEntityIndex', () => {
  * the identity a link carries (entry.id) is what the card's focus effect matches.
  * (OverviewTab institutions, NeighbourLinkCard, WarFaithSection deity.)
  */
-// DEFERRED to dossier wave — needs buildDossierEntityIndex .resolve/.deities + localNpcId in src/domain/dossier/entityLinks.js; re-enable when it lands.
-describe.skip('dossier sink anchors + ids', () => {
+describe('dossier sink anchors + ids', () => {
   it('institution: link routes to overview and the index anchor == the sink pill anchor', () => {
     const s = sampleSettlement();
     const index = buildDossierEntityIndex(s);

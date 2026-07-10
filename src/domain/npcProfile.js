@@ -23,6 +23,8 @@
  * self-contained, same constraint Phases 9-12 honored.
  */
 
+import { institutionMatchesRegex } from './institutionClassify.js';
+
 // ── Category → archetype mapping ────────────────────────────────────────
 // The generator's `category` field already aligns reasonably well with
 // the faction archetype vocabulary established in Phase 9. We map them
@@ -323,6 +325,135 @@ function inferInstitutionLink(npc, settlement) {
     inst && typeof inst.name === 'string' && hint.test(inst.name)
   );
   return match ? `institution.${snakeCase(match.name)}` : null;
+}
+
+// ── Power-tab institutional footprint (UI-only) ─────────────────────────────
+// The Power tab needs a power's FULL institutional footprint, keyed by the
+// power's DOMAIN category (military/religious/economy/…). This is a separate,
+// UI-only vocabulary from the archetype-keyed CATEGORY_INSTITUTION_HINTS above
+// (which drives the golden-adjacent inferInstitutionLink and must not shift):
+//   - keyed by the power DOMAIN word ('economy', not the 'merchant' archetype);
+//   - the craft name hint also accepts guild/hall (a cooper's guild hall IS a
+//     craft institution);
+//   - and a TAG affinity table, the PRIMARY signal, since a "Local fence" or
+//     "Smuggling ring" carries the `criminal` tag but no criminal NAME keyword.
+// Pure, UI-only (not consumed by the generator), so it evolves without a
+// golden-master regen.
+/** @type {Readonly<Record<string, RegExp>>} */
+const POWER_DOMAIN_HINTS = Object.freeze({
+  military:   /watch|garrison|militia|guard|barracks|patrol/i,
+  government: /council|hall|government|courthouse|reeve|mayor|chamber|seat/i,
+  religious:  /temple|shrine|church|abbey|cathedral|monastery|chapel/i,
+  economy:    /market|guild|hall|broker|exchange|warehouse|bank|docks/i,
+  craft:      /smithy|forge|workshop|carpenter|tannery|brewery|guild|hall/i,
+  criminal:   /tavern|den|gang|black\s+market/i,
+  arcane:     /mage|wizard|college|alchemist|library|laboratory|tower|sanctum/i,
+});
+
+// The generator emits magic/crafts/noble (not arcane/craft/government); map them
+// so the hint/tag lookup lands on a real domain rather than falling through.
+/** @type {Readonly<Record<string, string>>} */
+const POWER_DOMAIN_ALIASES = Object.freeze({
+  crafts: 'craft',
+  magic:  'arcane',
+  noble:  'government',
+});
+
+// Domain -> institution TAG affinity. Tag matching is the PRIMARY signal: every
+// catalog institution is tagged, and tags don't suffer the misses/false-positives
+// of name matching. Tags overlap by design (a guild hall is ['guild','market']),
+// so one institution can belong to several powers at once. The generic `trade`
+// tag is excluded — it is "participates in commerce", not "is an economic org".
+/** @type {Readonly<Record<string, string[]>>} */
+const POWER_DOMAIN_TAGS = Object.freeze({
+  military:   ['military', 'defense', 'fortification', 'law_enforcement'],
+  government: ['civic', 'legal', 'law_enforcement'],
+  religious:  ['religious', 'church', 'monastery', 'divine'],
+  economy:    ['market', 'banking', 'guild', 'port', 'warehouse', 'economy'],
+  craft:      ['guild', 'metalwork', 'textile', 'leather', 'timber'],
+  criminal:   ['criminal', 'smuggling', 'underground'],
+  arcane:     ['arcane', 'alchemy', 'planar', 'enchanting'],
+});
+
+/** @param {string | null | undefined} category @returns {string | null} */
+function resolvePowerDomain(category) {
+  const raw = typeof category === 'string' ? category.toLowerCase() : category;
+  if (!raw) return null;
+  return POWER_DOMAIN_ALIASES[raw] || raw;
+}
+
+/**
+ * All settlement institutions whose name fits a DOMAIN category's hint — the
+ * power-tab counterpart to inferInstitutionLink. That answers "which institution
+ * is THIS npc tied to" (first match, one result); this answers "which
+ * institutions does a power of this CATEGORY touch" (every match). A power row
+ * uses it so it shows its institutional footprint even with no sub-faction
+ * members to infer from (e.g. Religious Authorities surfacing the temple/shrine).
+ *
+ * Returns DISPLAY NAMES (deduped, source order); the caller resolves rename-safe
+ * ids via the entity index.
+ *
+ * @param {string} category  a faction/power domain (military/religious/economy/…)
+ * @param {{ institutions?: Array<{ name?: string }> } | null | undefined} settlement
+ * @returns {string[]} matching institution display names (deduped, source order)
+ */
+export function institutionsForCategory(category, settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0) return [];
+  const resolved = resolvePowerDomain(category);
+  const hint = resolved ? POWER_DOMAIN_HINTS[resolved] : undefined;
+  if (!hint) return [];
+  const seen = new Set();
+  /** @type {string[]} */
+  const out = [];
+  for (const inst of institutions) {
+    if (!inst || typeof inst.name !== 'string' || !institutionMatchesRegex(inst, hint)) continue;
+    if (seen.has(inst.name)) continue;
+    seen.add(inst.name);
+    out.push(inst.name);
+  }
+  return out;
+}
+
+/**
+ * A power's full institutional footprint — every institution that LOGICALLY
+ * belongs to this power (faction). Three signals, unioned:
+ *   1. TAGS — the institution carries a tag in this power's domain affinity
+ *      (primary; see POWER_DOMAIN_TAGS).
+ *   2. NAME — the institution name fits the domain hint (fallback for untagged
+ *      entries; same hints institutionsForCategory uses).
+ *   3. EXPLICIT — the institution was pulled into existence BY this faction at
+ *      generation (`factionSource` === the power's name).
+ * Because tags overlap, an institution can belong to several powers at once.
+ *
+ * Returns DISPLAY NAMES (deduped, source order). Pure, UI-only.
+ *
+ * @param {{ faction?: string, category?: string } | null | undefined} faction  a power-structure faction
+ * @param {{ institutions?: Array<{ name?: string, tags?: string[], factionSource?: string }> } | null | undefined} settlement
+ * @returns {string[]} matching institution display names
+ */
+export function institutionsForPower(faction, settlement) {
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  if (institutions.length === 0 || !faction) return [];
+  const resolved = resolvePowerDomain(faction.category);
+  const hint = resolved ? POWER_DOMAIN_HINTS[resolved] : undefined;
+  const tags = resolved ? POWER_DOMAIN_TAGS[resolved] : undefined;
+  const factionName = typeof faction.faction === 'string' ? faction.faction : null;
+  const seen = new Set();
+  /** @type {string[]} */
+  const out = [];
+  for (const inst of institutions) {
+    if (!inst || typeof inst.name !== 'string' || seen.has(inst.name)) continue;
+    const instTags = Array.isArray(inst.tags) ? inst.tags : [];
+    const byTag     = !!tags && instTags.some(t => tags.includes(t));
+    const byName    = !!hint && hint.test(inst.name);
+    const byFaction = !!factionName && inst.factionSource === factionName;
+    if (byTag || byName || byFaction) {
+      seen.add(inst.name);
+      out.push(inst.name);
+    }
+  }
+  return out;
 }
 
 // ── Relationship-triangle inference ─────────────────────────────────────
