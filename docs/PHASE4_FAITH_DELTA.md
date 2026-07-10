@@ -769,3 +769,21 @@ target B's alignment. Staged execution:
 - **W-F7:** re-certification becomes a FULL re-run against the W-F0 baseline (not a delta) —
   the niche-composition change requires it. Envelope targets: the self-balancing property above
   must be OBSERVABLE (no runaway pole across the config grid).
+
+### The risk-calculator fidelity term (OWNER, 2026-07-10 — lands in W-F4)
+The war feasibility gate (worldPulse/feasibilityGate.js — the existing "risk calculator") is
+obeyed with alignment-conditioned fidelity: LAWFUL actors follow its verdict to the letter;
+toward neutral and chaos the actor decides on a NOISY ESTIMATE of the true inputs, margin of
+error increasing substantially and scaling (superlinear toward the chaotic pole).
+- DETERMINISM: the error term is a seeded draw from the actor's per-decision rng fork —
+  replay-identical; chaos in the fiction, never in the engine.
+- SCOPE: the same discipline term governs war initiation, deployment sizing, AND suing for
+  peace (a chaotic actor misjudges when it is losing — fights past exhaustion or quits
+  winnable wars). Composes with stance x piety: settlement governance sets base discipline;
+  the patron's law axis pulls on it scaled by piety.
+- BALANCE CAUTION (binding on W-F7 certification): the calculator is itself a model with
+  blind spots — some calculator-refused wars are genuinely winnable, and only high-error
+  actors ever discover them. The W-F7 envelopes must show chaotic actors winning SOME
+  refused-rated wars (variance with occasional payoff); if chaos is a pure tax, the term is
+  mistuned. Lawful realms: fewer, better wars; chaotic realms: more, noisier wars; neither
+  pole runs away.
