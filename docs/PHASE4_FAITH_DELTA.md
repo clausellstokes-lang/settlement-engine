@@ -1020,8 +1020,11 @@ best in the world that resembles it (law already owns the long game via tenure/l
    plague, siege, succession void).
 2. WAR STATES: warPosture/occupation/siege extend the bonus — the existing warbound-
    conversion mechanism folds onto the chaos axis in W-F4's re-keying.
-3. LOW TIERS: standing chaotic receptivity bonus in hamlet/village tiers, fading with tier
-   and the government form's law affinity (frontier camp = open soil; chartered town = not).
+3. LOW TIERS: standing chaotic receptivity bonus across the SMALL_TIERS ladder — strongest
+   at THORP (the most structure-less tier), then hamlet, then village (use the canonical
+   TIER_ORDER from data/constants.js: thorp -> hamlet -> village -> town -> city ->
+   metropolis) — fading with tier and the government form's law affinity (a thorp of eight
+   souls has no law to resist a whisper; the chartered town does).
 CONSTRAINTS: asymmetric by design — chaos gains in disorder, lawful creeds take NO mirror
 penalty (no double-count). Modulates RECEPTIVITY, never patron FIT — what a settlement
 SUFFERS shapes who can convert it; what it CHOOSES shapes which god it keeps (endogeneity
