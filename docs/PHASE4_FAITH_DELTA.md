@@ -997,3 +997,18 @@ CANONICAL CASE (owner's): LE runner-up behind a CE seat — evil channels flow U
 (no moral opposition), chaos-derived channels moderate as the orderly rival closes: the
 city stays wicked while becoming organized about it; the eventual seat change is a
 reformation of HOW, not WHETHER. Transitions interpolate on exactly the contested axis.
+
+### The chaos font — CONTINGENT, soak-gated (OWNER, 2026-07-10; designed now, armed only on evidence)
+FOUNDED WORRY: the system tilts lawful structurally (optimal-planner economies, durable
+treaties, lawful-evil as evil's best cooperation, lawful-leaning government forms, tenure-
+flavored legitimacy). Whether tilt becomes monoculture is a tuning question — VERIFY FIRST.
+- W-F7 measures the long-run plane distribution in extended soaks. IF lawful share drifts
+  beyond a defined target band (band set at W-F7 from the W-F0 baseline; goal = prevent
+  monoculture, NOT parity — settled realms may lean lawful, they must not calcify), arm:
+- THE MECHANISM: chaotic alignments get stronger EMERGENCE rates — new-cult seeding/minting
+  skews chaotic in the alignment-weighted (seeded, deterministic) birth distribution — with
+  ZERO change to growth, conversion, amplification, or any downstream dynamic. Chaos is more
+  fecund at birth, then lives or dies by the defined rules. Order accumulates; chaos
+  regenerates; expected texture = high-turnover chaotic fringe around a stable lawful core.
+- Applies wherever cults organically emerge (mints, spontaneous births, W-F5 pool weighting
+  if generation shows the same tilt). Never touches user-authored deities.
