@@ -965,3 +965,22 @@ The refinements above are patron-focused in language but the system is PANTHEON-
 - Implementers: never build patron-only dynamics for non-legitimacy quantities; never let a
   minority faith steer conduct. The landed substrate already matches (local lane activates on
   ANY deity presence; niche grid runs across the whole local pantheon).
+
+### The opposed-runner-up dampener (OWNER, 2026-07-10 — the transition counterforce; lands W-F3 seam + W-F4 consumption)
+The megaphone is not absolute: if the next ONE or TWO highest-ranking gods in the local
+pantheon are diametrically opposed to the patron, they DAMPEN the seat's conduct
+amplification, proportional to the conversion (share) and/or legitimacy gaps between them
+and the seat.
+- MECHANICS: D = sum over next 1-2 ranked rivals of opposition(patron, rival) x
+  closeness(rival, seat), opposition from the stance plane geometry (diametric = max),
+  closeness from share/legitimacy gap (small gap = strong dampening); effective megaphone =
+  amplifier x (1 - D), FLOOR-clamped (the seat always steers something). Aligned runners-up
+  dampen ZERO — kin pantheons amplify undiluted; only opposed strength mutes.
+- PURPOSE — TRANSITIONS: conduct interpolates through seat changes (the incumbent's grip
+  fades as the opposed challenger climbs) — no behavioral cliffs; the age of faith wanes
+  before it falls.
+- EMERGENT (bind to W-F7): pluralistic contested settlements behave moderately, homogeneous
+  devout ones at full amplitude (conduct amplitude inversely correlates with opposed-
+  plurality); seat transitions show no discontinuity beyond the dampener's gradient.
+- Deterministic, pure, tick-start with the piety composite; cause chains per the legibility
+  law ("the Lawgiver's word is muted — half the city prays to the Deep").
