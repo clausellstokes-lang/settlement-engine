@@ -787,3 +787,22 @@ error increasing substantially and scaling (superlinear toward the chaotic pole)
   refused-rated wars (variance with occasional payoff); if chaos is a pure tax, the term is
   mistuned. Lawful realms: fewer, better wars; chaotic realms: more, noisier wars; neither
   pole runs away.
+
+### The corruption-plane amplifier (OWNER, 2026-07-10 — lands in W-F3 with the piety amplifiers)
+Corruption/compromise amplification (institutions AND individuals) scales across the full
+two-axis plane: STRONGEST at chaos x evil, CLOSING TO ZERO at lawful x good. The corner is
+SUPERADDITIVE — the two restraints are independent (good = conscience, law = systems) and
+corruption requires both absent, so their failures multiply. Neutral plane-center ~= 1.0
+(baseline unchanged).
+- COMPOSITION: patron deity's plane position gives direction/strength; piety gives bleed-through
+  (stance x piety pattern; deity-free or zero-piety => multiplier 1.0, byte-identical — the
+  neutrality theorem extends over this surface).
+- SCOPE: scales the PRESSURE channels only — institution capture/compromise rates, NPC
+  corruptible-flaw expression, climate drift. Corruption already stamped into the world is not
+  retroactively erased; a lawful-good conversion starves the rot forward, never launders history.
+- CLAMP (binding on W-F7): the chaos x evil corner is dramatic, not degenerate — devout-CE
+  settlements sit at a clamped maximum (playable thieves'-city, not collapse). Envelope targets:
+  devout-LG ~= zero new compromise, devout-CE = clamped max, neutral = baseline, no runaway
+  anywhere on the plane.
+- The W-F3 amplified-site table gains the corruption-pressure rows; the surface consumes
+  W-F2's derived evil01/chaos01.
