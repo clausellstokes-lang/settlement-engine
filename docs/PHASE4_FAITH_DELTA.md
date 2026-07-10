@@ -840,3 +840,24 @@ LE x LE > LE x CE >= CE x CE. The earlier asymmetry remains the cap: even the st
 lawful-evil compact is transactional and betrayal-priced — evil's best cooperation approaches
 good's consolidated baseline, never exceeds it. (Devils hold treaties; demons can't hold a
 handshake — derived, not declared.)
+
+### The reciprocal patron loop (OWNER, 2026-07-10 — lands W-F4; envelopes W-F7)
+Patron deities are CHOSEN and RETAINED by three inputs: legitimacy, conversion (adherent
+share), and ALIGNMENT FIT — how much the settlement's own actions align with the deity's
+two-axis position. The relationship is RECIPROCAL BUT NOT PERPETUAL: the patron's amplifiers
+shape conduct, aligned conduct feeds the patron's hold, and the loop must be continuously fed
+— fit DECAYS, so drifting conduct erodes patronage.
+- ENDOGENEITY FILTER (strict): the fit measure reads ONLY the settlement's own domestic
+  conduct — development discipline, governance actions, corruption/purge events, internal
+  contests. EXCLUDED ENTIRELY: external actions/situations (war, trade, partnerships) and
+  the USER and PARTY. Foreign policy is governed by the stance/discipline amplifiers but
+  never feeds patron fit; the DM's hand is divine fiat, not evidence.
+- CONSEQUENCE (bind as behavior): SET_PRIMARY_DEITY (a user action) sets the patron but does
+  not feed the loop — an imposed patron over misaligned conduct erodes unless conduct comes
+  to match or the user re-intervenes. The imposed-god-that-withers is a native story arc.
+- COUNTERFORCES: incumbency is contested from within — rival cults via the niche grid,
+  misaligned-faction agitation, internal contest events. Patron status = homeostasis under
+  pressure, never ownership.
+- STABILITY (binding on W-F7): the feedback gain is SUBCRITICAL — entrenchment is strong,
+  absorbing states don't exist. Long-soak envelope: patron transitions continue at realistic
+  rates vs the W-F0 hold-rate baseline; no cell of the config grid locks permanently.
