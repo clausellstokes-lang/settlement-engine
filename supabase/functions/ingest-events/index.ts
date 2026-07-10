@@ -1,7 +1,9 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { EVENTS, EVENT_CLASS, EVENT_NAME_RE, EDIT_KINDS } from '../_shared/analyticsEventsBundle.js';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 /**
  * ingest-events — first-party analytics sink (docs/simulation-intelligence-layer.md §5).
@@ -17,29 +19,27 @@ const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
 const SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
 const PEPPER = Deno.env.get('ANALYTICS_HASH_PEPPER') || '';
 
+// Test seam: production always uses the real createClient. A test may swap in a
+// recording admin stub so the branch-level behaviour (e.g. the fail-closed rate
+// limiter) can be exercised without network. Inert unless explicitly set.
+// deno-lint-ignore no-explicit-any
+type AdminFactory = (url: string, key: string) => any;
+let adminFactory: AdminFactory = createClient;
+export function __setSupabaseFactory(fn: AdminFactory | null): void {
+  adminFactory = fn ?? createClient;
+}
+
 const KNOWN_EVENTS = new Set(Object.values(EVENTS));
 const RESEARCH_NAMES = new Set(
   Object.entries(EVENTS).filter(([k]) => EVENT_CLASS[k] === 'research').map(([, v]) => v),
 );
 const KNOWN_EDIT_KINDS = new Set(EDIT_KINDS);
 
+// CORS: fail-closed via the shared allowlist (_shared/cors.ts). Previously this
+// emitted '*' on a missing Origin; the shared helper pins to the first allowed
+// host instead and accepts the Cloudflare Pages preview origin. POST/OPTIONS.
 function corsHeaders(req: Request) {
-  const allowed = [
-    Deno.env.get('CLIENT_URL') || '',
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req.headers.get('Origin') || '';
-  const accepted = !origin || allowed.includes(origin);
-  return {
-    'Access-Control-Allow-Origin': accepted ? (origin || '*') : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(accepted ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 function json(payload: unknown, status: number, headers: Record<string, string>) {
@@ -66,15 +66,36 @@ const boolOrNull = (v: unknown) => (typeof v === 'boolean' ? v : null);
 const strArr = (v: unknown) =>
   Array.isArray(v) ? v.filter((x) => typeof x === 'string' && x.length <= 64).slice(0, 64) : null;
 
-/** Server-side prose backstop: drop string props longer than 64 chars. */
-function stripProps(props: unknown): Record<string, unknown> {
-  if (!props || typeof props !== 'object') return {};
-  const out: Record<string, unknown> = {};
-  for (const [k, v] of Object.entries(props as Record<string, unknown>)) {
-    if (typeof v === 'string' && v.length > 64) continue;
-    out[k] = v;
+/**
+ * Server-side prose backstop: drop string props longer than 64 chars at ANY
+ * depth (the old top-level-only filter let `{ note: { text: '…prose…' } }`
+ * through untouched). Recursion is bounded: anything nested deeper than
+ * MAX_PROP_DEPTH is dropped outright. The DB adds a hard 8KB pg_column_size
+ * check on props (036), so this is prose/PII hygiene, not the size backstop.
+ * Exported for the regression test.
+ */
+const MAX_PROP_STRING = 64;
+const MAX_PROP_DEPTH = 4;
+function stripPropValue(v: unknown, depth: number): unknown {
+  if (typeof v === 'string') return v.length > MAX_PROP_STRING ? undefined : v;
+  if (Array.isArray(v)) {
+    if (depth >= MAX_PROP_DEPTH) return undefined;
+    return v.map((x) => stripPropValue(x, depth + 1)).filter((x) => x !== undefined).slice(0, 64);
   }
-  return out;
+  if (v && typeof v === 'object') {
+    if (depth >= MAX_PROP_DEPTH) return undefined;
+    const out: Record<string, unknown> = {};
+    for (const [k, x] of Object.entries(v as Record<string, unknown>)) {
+      const stripped = stripPropValue(x, depth + 1);
+      if (stripped !== undefined) out[k] = stripped;
+    }
+    return out;
+  }
+  return v; // number / boolean / null pass through
+}
+export function stripProps(props: unknown): Record<string, unknown> {
+  if (!props || typeof props !== 'object' || Array.isArray(props)) return {};
+  return stripPropValue(props, 0) as Record<string, unknown>;
 }
 
 // deno-lint-ignore no-explicit-any
@@ -101,7 +122,12 @@ async function resolveUserActor(admin: any, userId: string, deviceKey: string | 
   return actor;
 }
 
-serve(async (req: Request) => {
+// Body cap in BYTES, not UTF-16 code units: `text.length` let ~192KB of 3-byte
+// UTF-8 under a 64KB "cap" (the same bug generate-narrative and
+// generate-chronicle fixed with regression tests).
+const MAX_BODY_BYTES = 64 * 1024;
+
+export async function handleIngestEvents(req: Request): Promise<Response> {
   const headers = corsHeaders(req);
   if (req.method === 'OPTIONS') return new Response(null, { headers });
 
@@ -115,14 +141,33 @@ serve(async (req: Request) => {
   let body: Record<string, unknown>;
   try {
     const text = await req.text();
-    if (text.length > 64 * 1024) return json({ error: 'too_large' }, 413, headers);
+    if (new TextEncoder().encode(text).length > MAX_BODY_BYTES) return json({ error: 'too_large' }, 413, headers);
     body = JSON.parse(text);
   } catch {
     return json({ error: 'invalid_json' }, 400, headers);
   }
 
-  const admin = createClient(SUPABASE_URL, SERVICE_KEY);
+  const admin = adminFactory(SUPABASE_URL, SERVICE_KEY);
   const meta = readRequestMeta(req);
+
+  // ── Anti-abuse IP gate (consulted BEFORE the device actor is resolved+inserted) ──
+  // The per-actor/device rate key below is derived from the client-controlled
+  // body.deviceToken, so rotating that token per request mints a fresh "under-rate"
+  // key every time — a single host could otherwise drive UNBOUNDED inserts across four
+  // tables (device link, rate bucket, up to 50 events, 2 snapshots). This IP-dimension
+  // gate bounds that trivial amplification: a single host is capped regardless of how
+  // many device tokens it rotates. The ceiling is deliberately GENEROUS — 2000/hour vs
+  // the 120/hour per device — so a shared NAT of many honest users is not throttled;
+  // it exists to stop unbounded amplification, not to meter legitimate telemetry. A
+  // distinct `ipall:` bucket keeps it separate from the tokenless `ip:` fallback below.
+  // (x-forwarded-for is spoofable — see readRequestMeta — so an attacker rotating BOTH
+  // the token AND XFF is bounded only at the platform/proxy layer; this closes the
+  // trivial single-host case, which was the open hole.) Fail CLOSED: only a definite
+  // `true` proceeds, matching the actor-key check below.
+  const { data: ipUnderRate, error: ipRateErr } = await admin.rpc('ingest_check_rate', {
+    p_key: `ipall:${meta.ip}`, p_max: 2000, p_window_seconds: 3600,
+  });
+  if (ipRateErr || ipUnderRate === false) return json({ error: 'rate_limited' }, 429, headers);
 
   // ── Resolve actor (JWT → identity link, adopting device actor; else device) ──
   const authHeader = req.headers.get('Authorization') || '';
@@ -152,8 +197,12 @@ serve(async (req: Request) => {
 
   // ── Rate limit (per actor / device / ip) ────────────────────────────────────
   const rateKey = actorId ? `u:${actorId}` : (deviceKey ? `d:${deviceKey}` : `ip:${meta.ip}`);
-  const { data: underRate } = await admin.rpc('ingest_check_rate', { p_key: rateKey });
-  if (underRate === false) return json({ error: 'rate_limited' }, 429, headers);
+  // Fail CLOSED (mirrors account-actions / log-client-error): a null/undefined
+  // result from an RPC error must NOT sail through as "under rate" on this
+  // anonymous verify_jwt=false, service-role-writing path. Only a definite
+  // `underRate === true` may proceed; anything else (false OR an error) is 429.
+  const { data: underRate, error: rateErr } = await admin.rpc('ingest_check_rate', { p_key: rateKey });
+  if (rateErr || underRate === false) return json({ error: 'rate_limited' }, 429, headers);
 
   const batchId = uuidOrNull(body.batchId) || crypto.randomUUID();
   const sessionId = uuidOrNull(body.sessionId);
@@ -277,4 +326,6 @@ serve(async (req: Request) => {
   }
 
   return json({ accepted, rejected }, 202, headers);
-});
+}
+
+serve(handleIngestEvents);

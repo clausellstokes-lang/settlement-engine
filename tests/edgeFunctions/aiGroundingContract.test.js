@@ -40,10 +40,14 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..', '..');
-const EDGE = readFileSync(
-  join(ROOT, 'supabase', 'functions', 'generate-narrative', 'index.ts'),
-  'utf8',
-);
+// generate-narrative's prompt/cache/json layers were split into sibling modules;
+// concat index.ts + those so these static source assertions find each symbol
+// (summarizeSettlement, PRESERVATION_RULES, REFINEMENT_PASSES, isEmptyPayload, …)
+// wherever it now lives.
+const GEN_NARR_DIR = join(ROOT, 'supabase', 'functions', 'generate-narrative');
+const EDGE = ['index.ts', 'prompts.ts', 'promptCache.ts', 'jsonUtils.ts']
+  .map((f) => readFileSync(join(GEN_NARR_DIR, f), 'utf8'))
+  .join('\n');
 
 // ─────────────────────────────────────────────────────────────────────
 // Tier 6.2 — settlement-summary parity
@@ -68,7 +72,11 @@ describe('Tier 6.2 — generate-narrative summarizeSettlement covers every aiGro
   });
 
   it('surfaces config (terrain, culture, tradeRouteAccess, monsterThreat)', () => {
-    expect(EDGE).toMatch(/terrain:\s*s\.config\?\./);
+    // Terrain flows through the local resolveTerrain mirror (terrainType
+    // first, terrainOverride only when not the 'auto' UI sentinel) — never a
+    // raw config read, which grounded the model in the literal string 'auto'.
+    expect(EDGE).toMatch(/terrain:\s*resolveTerrain\(s\.config\)/);
+    expect(EDGE).toMatch(/terrainOverride !== 'auto'/);
     expect(EDGE).toMatch(/culture:\s*s\.config\?\.culture/);
     expect(EDGE).toMatch(/tradeRouteAccess:\s*s\.config\?\.tradeRouteAccess/);
     expect(EDGE).toMatch(/monsterThreat:\s*s\.config\?\.monsterThreat/);
@@ -472,7 +480,10 @@ describe('Tier 6 — AI model strategy is explicit', () => {
   });
 
   it('chooses the model from the requested phase on the selected profile', () => {
-    expect(EDGE).toMatch(/const profile = MODEL_PROFILES\[modelPreference\]/);
+    // The provider dispatch resolves the profile from the preference and the
+    // model from the requested phase (moved into dispatch() by the provider-
+    // abstraction refactor; callModel now layers a peer fallback on top).
+    expect(EDGE).toMatch(/MODEL_PROFILES\[preference\]\s*\|\|\s*MODEL_PROFILES\[DEFAULT_MODEL_PREFERENCE\]/);
     expect(EDGE).toMatch(/const model = profile\[phase\]/);
   });
 });

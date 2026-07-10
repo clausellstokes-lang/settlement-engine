@@ -375,10 +375,23 @@ deno_version = 2
 # [edge_runtime.secrets]
 # secret_key = "env(SECRET_VALUE)"
 
-# Functions that must NOT have the platform JWT gate. Stripe posts a signature,
-# not a Supabase JWT — with verify_jwt on (the default), the platform rejects the
-# webhook before signature verification and payments never credit. Pinning it here
-# means the flag can't be forgotten on `supabase functions deploy`.
+# ── verify_jwt is pinned EXPLICITLY for EVERY function ───────────────────────
+# config.toml is the source of truth for `supabase functions deploy`, so pinning
+# each function's intent here makes deploys deterministic — the platform JWT gate
+# can never be silently flipped by a forgotten/remembered `--no-verify-jwt` flag.
+# scripts/deploy.sh DERIVES its `--no-verify-jwt` posture by parsing this file, so
+# config and deploy can never drift (killed the split-brain where create-checkout
+# was deployed --no-verify-jwt with no config entry and verify-checkout-session was
+# never deployed at all). A function whose intent is "do my own auth" (signature,
+# shared secret, or a per-request anon path) MUST be verify_jwt = false, or the
+# platform rejects it before its own auth runs. Enforced by
+# tests/edgeFunctions/verifyJwtPins.test.js (every function dir must have an
+# explicit pin here) and tests/edgeFunctions/verifyJwtPosture.contract.test.js
+# (config is the single source of truth deploy.sh parses).
+
+# ── verify_jwt = false: functions that authenticate themselves ───────────────
+# Stripe posts a signature, not a Supabase JWT — with the gate on, the platform
+# rejects the webhook before signature verification and payments never credit.
 [functions.stripe-webhook]
 verify_jwt = false
 
@@ -387,17 +400,75 @@ verify_jwt = false
 [functions.verify-single-dossier]
 verify_jwt = false
 
-# Anonymous analytics ingest — unauthenticated by design (the device token is a
-# body field, not a JWT). This is the SINGLE SOURCE OF TRUTH for the flag:
-# scripts/deploy.sh derives its `--no-verify-jwt` posture by parsing this file, so
-# the config/deploy split-brain (create-checkout was deployed --no-verify-jwt with
-# no matching config entry; verify-checkout-session was never deployed at all)
-# can't recur. Every function NOT pinned `verify_jwt = false` here deploys
-# JWT-gated (the platform default): create-checkout, verify-checkout-session,
-# generate-narrative, generate-chronicle, admin-actions, create-customer-portal,
-# send-email, analytics-export.
+# Public analytics sink — anonymous traffic IS the point. The function stitches an
+# optional JWT when present but must accept anon (no-JWT) posts; the gate would
+# reject the whole anon funnel.
 [functions.ingest-events]
 verify_jwt = false
+
+# Anonymous client-error sink (errorReporter.js). A crash report has no JWT
+# (sendBeacon cannot set headers; the crash may precede auth), so it self-defends
+# with the botGuard, payload length-bounding, a hashed IP, and a per-IP rate
+# limit. The platform gate would reject every anon report.
+[functions.log-client-error]
+verify_jwt = false
+
+# Cron-invoked export (pg_net) authenticated by the x-export-secret shared secret,
+# not a JWT — fail-closed on a wrong/missing secret inside the function. The gate
+# would reject the cron call (no user JWT) and the export would never run.
+[functions.analytics-export]
+verify_jwt = false
+
+# Cron-invoked nightly AI-pricing resync (migration 115, pg_net → this function)
+# authenticated by the x-cron-secret shared secret (PRICING_RESYNC_CRON_SECRET),
+# not a JWT — fail-closed on a wrong/missing secret (403) and refuses to run when
+# the secret is unconfigured (503). The platform gate would reject the cron call
+# (no user JWT) and the nightly resync would never run.
+[functions.pricing-resync-cron]
+verify_jwt = false
+
+# Per-template self-auth: authenticated templates read the recipient from
+# auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
+# recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
+# would block the anonymous cap_warning email (anon users have no user JWT).
+[functions.send-email]
+verify_jwt = false
+
+# Logged-OUT password recovery (Auth Phase 2): the caller has NO JWT (they forgot
+# their password). The function defends itself with a hard per-IP + per-email rate
+# limit, the botGuard, and JSON-only parsing, and calls the service-role-only
+# recovery RPCs (066). The platform gate would reject the whole anon recovery flow.
+[functions.auth-recovery]
+verify_jwt = false
+
+# ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
+# Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
+# on any of these would expose an authenticated/money/admin endpoint to unauth
+# traffic. Each also re-checks auth (and role, where relevant) inside the handler.
+[functions.create-checkout]
+verify_jwt = true
+
+# Account-bound checkout-session verification (credit packs / premium / founder):
+# requires Authorization: Bearer <supabase JWT> and asserts the session's bound
+# user id matches the caller. OURS-only function (no counterpart on the parallel
+# line); pinned true so a stray --no-verify-jwt can't expose it to unauth traffic.
+[functions.verify-checkout-session]
+verify_jwt = true
+
+[functions.create-customer-portal]
+verify_jwt = true
+
+[functions.generate-narrative]
+verify_jwt = true
+
+[functions.generate-chronicle]
+verify_jwt = true
+
+[functions.account-actions]
+verify_jwt = true
+
+[functions.admin-actions]
+verify_jwt = true
 
 [analytics]
 enabled = true

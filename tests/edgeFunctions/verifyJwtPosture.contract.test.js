@@ -44,13 +44,18 @@ const INTENDED_ANON = new Set([
   'stripe-webhook',        // authenticated by the Stripe signature header
   'verify-single-dossier', // anon buyers; the Stripe session id is the trust anchor
   'ingest-events',         // anonymous analytics; device token is a body field
+  'log-client-error',      // anon crash sink; sendBeacon cannot set a JWT header
+  'analytics-export',      // cron pg_net; x-export-secret shared secret, not a JWT
+  'pricing-resync-cron',   // cron pg_net; x-cron-secret shared secret, not a JWT
+  'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
+  'auth-recovery',         // logged-out password recovery; the caller has no JWT
 ]);
 // Everything else must be JWT-gated (platform default), notably:
 const INTENDED_JWT = [
   'create-checkout',          // supabase-js sends the anon key (a valid JWT) even for anon single-dossier
   'verify-checkout-session',  // requires Authorization: Bearer <supabase JWT>
-  'generate-narrative', 'generate-chronicle', 'admin-actions',
-  'create-customer-portal', 'send-email', 'analytics-export',
+  'generate-narrative', 'generate-chronicle', 'admin-actions', 'account-actions',
+  'create-customer-portal',
 ];
 
 describe('verify_jwt posture — config.toml is the single source of truth', () => {

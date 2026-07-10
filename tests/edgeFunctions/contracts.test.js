@@ -1,15 +1,28 @@
 /**
  * tests/edgeFunctions/contracts.test.js — Tier 3.3 comprehensive contract tests.
  *
- * Edge functions live in supabase/functions/<name>/index.ts. They use
- * Deno-specific APIs and esm.sh imports that vitest cannot import
- * directly. Full runtime integration tests (calling the real handler
- * against a Postgres test instance) require a parallel Deno test
- * runner — a separate infrastructure decision.
+ * ── STRUCTURAL COMPLEMENT, NOT A SUBSTITUTE ──────────────────────────────
+ * This vitest file greps the Deno/TypeScript edge sources rather than running
+ * them: edge functions live in supabase/functions/<name>/index.ts, use
+ * Deno-specific APIs + esm.sh URL imports, and CANNOT be imported into vitest.
+ * It is a DELIBERATE COMPLEMENT to — never a replacement for — the EXECUTING
+ * Deno suite that runs the real handlers:
  *
- * This file is the next-best layer of defence: STATIC SOURCE
- * INSPECTION that catches the regressions that cost real money or
- * leak data:
+ *   • Executed by `deno task test:edge` (see deno.json) in CI's `deno-tests`
+ *     job (.github/workflows/ci.yml).
+ *   • Those *.test.ts suites RUN the money-path trust boundaries against
+ *     forged vs. signed requests — e.g. supabase/functions/stripe-webhook/
+ *     index.test.ts (forged webhook → 400, zero DB writes) and
+ *     generate-narrative/refundPolicy.test.ts (refund decision). Behavior a
+ *     regex-over-source contract can only *approximate*, they *prove*.
+ *
+ * The two layers are load-bearing together: the `bothLayersPresent` meta-test
+ * below fails if the executing Deno complement is ever deleted, so this grep
+ * file can never be silently left as the *only* coverage.
+ *
+ * What THIS layer is the next-best (and always-run, since `deno-tests` is not
+ * yet a REQUIRED status check) defence for — the regressions that cost real
+ * money or leak data:
  *
  *   • Missing env var → 500s at runtime
  *   • Missing signature verification → arbitrary writes from anyone
@@ -36,7 +49,17 @@ const FUNCTIONS_DIR = join(ROOT, 'supabase', 'functions');
 const MIGRATIONS_DIR = join(ROOT, 'supabase', 'migrations');
 
 function readFunction(name) {
-  return readFileSync(join(FUNCTIONS_DIR, name, 'index.ts'), 'utf8');
+  const main = readFileSync(join(FUNCTIONS_DIR, name, 'index.ts'), 'utf8');
+  // generate-narrative's prompt/cache/json layers were split into sibling modules;
+  // concat them so these source-contract assertions find symbols wherever they now
+  // live (the handler/money-path logic stays in index.ts).
+  if (name === 'generate-narrative') {
+    const extra = ['prompts.ts', 'promptCache.ts', 'jsonUtils.ts']
+      .map((f) => readFileSync(join(FUNCTIONS_DIR, name, f), 'utf8'))
+      .join('\n');
+    return `${main}\n${extra}`;
+  }
+  return main;
 }
 
 function readMigrations() {
@@ -50,6 +73,47 @@ function readMigrations() {
 function readMigration(name) {
   return readFileSync(join(MIGRATIONS_DIR, name), 'utf8');
 }
+
+// ─────────────────────────────────────────────────────────────────────────
+// Meta — this grep layer must never be the ONLY edge coverage
+// ─────────────────────────────────────────────────────────────────────────
+
+describe('edge contracts are a complement to the executing Deno suite', () => {
+  // These structural greps are the always-run half of a two-layer defence; the
+  // other half EXECUTES the handlers under Deno (deno.json `test:edge`, CI's
+  // `deno-tests` job). If someone deletes the executing suite for a money-path
+  // function, this file would silently become the only coverage — a regression
+  // from "behavior proven" to "source shape asserted". Pin the complement's
+  // existence so that can't happen unnoticed.
+  const MONEY_PATH_DENO_SUITES = [
+    join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'create-checkout', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'verify-single-dossier', 'index.test.ts'),
+    join(FUNCTIONS_DIR, 'generate-narrative', 'refundPolicy.test.ts'),
+  ];
+
+  for (const suite of MONEY_PATH_DENO_SUITES) {
+    it(`executing Deno suite present: ${suite.replace(ROOT + '/', '')}`, () => {
+      expect(
+        existsSync(suite),
+        `Missing executing Deno test ${suite} — the grep contracts in this ` +
+          'file are a COMPLEMENT, not a substitute. Restore the *.test.ts suite ' +
+          '(runs under `deno task test:edge` in the deno-tests CI job).',
+      ).toBe(true);
+    });
+  }
+
+  it('the executing suites actually invoke a handler (not empty stubs)', () => {
+    // A one-line grep that the trust-boundary suite EXECUTES the handler — so an
+    // emptied-out .test.ts that still exists on disk can't satisfy the presence
+    // check above while covering nothing. Deno test files call `Deno.test(...)`.
+    const webhookSuite = readFileSync(
+      join(FUNCTIONS_DIR, 'stripe-webhook', 'index.test.ts'),
+      'utf8',
+    );
+    expect(webhookSuite).toMatch(/Deno\.test\s*\(/);
+  });
+});
 
 // ─────────────────────────────────────────────────────────────────────────
 // stripe-webhook
@@ -106,11 +170,17 @@ describe('Tier 3.3 — stripe-webhook signature verification', () => {
   });
 
   it('verifies signature BEFORE creating the admin client', () => {
-    // NOTE: this static order-check is now superseded behaviorally by the EXECUTED
-    // boundary test in supabase/functions/stripe-webhook/index.test.ts (forged
-    // requests get 400 with zero DB writes). Kept until the deno-tests CI job is
-    // confirmed green (tests-tooling.6 prunes it then). The admin-client line is
-    // `const supabase = (deps.adminClient ?? adminClient)()` post-edges.2 DI seam.
+    // NOTE (tests-tooling.6): this static order-check is superseded BEHAVIORALLY by
+    // the EXECUTED boundary test in supabase/functions/stripe-webhook/index.test.ts
+    // (forged requests get 400 with zero DB writes) — now verified passing locally
+    // under Deno (`deno task test:edge`, 4/4). It is DELIBERATELY NOT pruned yet:
+    // the Deno suite runs in the separate `deno-tests` CI job, which is NOT part of
+    // `npm run check` and NOT yet a REQUIRED status check (branch protection is the
+    // outstanding owner action). Until the Deno job is an enforced gate, deleting
+    // this vitest contract would move the trust-boundary coverage from always-run
+    // to non-enforced — a regression. Prune once `deno-tests` is required on master.
+    // The admin-client line is `const supabase = (deps.adminClient ?? adminClient)()`
+    // post-edges.2 DI seam.
     const constructIdx = src.search(/constructEvent(Async)?\s*\(/);
     const adminIdx = src.search(/const supabase\s*=[^;]*\badminClient\b/);
     expect(constructIdx).toBeGreaterThan(0);
@@ -179,7 +249,21 @@ describe('Tier 3.3 — stripe-webhook event coverage', () => {
   });
 
   it('founder_lifetime grants the one-time 30 credit bonus', () => {
-    expect(src).toMatch(/grantCredits\([\s\S]{0,200}30[\s\S]{0,200}founder_grant/);
+    // grantCreditsForSessionOnce is the idempotent wrapper (dedups on session id).
+    // The amount is the named FOUNDER_CREDIT_BONUS (pinned = 30 here so the grant AND
+    // the refund clawback that reverses it stay in sync).
+    expect(src).toMatch(/FOUNDER_CREDIT_BONUS\s*=\s*30\b/);
+    expect(src).toMatch(/grantCredits(?:ForSessionOnce)?\([\s\S]{0,200}FOUNDER_CREDIT_BONUS[\s\S]{0,200}founder_grant/);
+  });
+
+  it('a refunded/disputed founder_lifetime charge reverses the founder grant', () => {
+    // charge.refunded / charge.dispute.created must free the is_founder seat, downgrade
+    // premium, and claw the bonus — otherwise a refunded founder keeps everything free
+    // and permanently consumes one of the 30 advertised seats.
+    expect(src).toMatch(/clawbackFounderForSession\s*\(/);
+    expect(src).toMatch(/is_founder:\s*false/);
+    expect(src).toMatch(/handle_premium_downgrade/);
+    expect(src).toMatch(/founder_clawback:/);
   });
 
   it('downgrades through the retention RPC, not a bare profile tier write', () => {
@@ -303,6 +387,58 @@ describe('Tier 3.3 — generate-narrative credit handling', () => {
   });
 });
 
+describe('Tier 3.3 — generate-narrative folds daily life into the single narrative spend', () => {
+  let src;
+  beforeAll(() => { src = readFunction('generate-narrative'); });
+
+  it('spends credits exactly once (single spend_credits call in the whole function)', () => {
+    // MONEY PATH: the narrative run now also produces daily life. There must be
+    // exactly ONE spend_credits call for the whole request — a second spend
+    // would double-charge the bundled run.
+    const spendCalls = src.match(/\.rpc\(\s*['"]spend_credits['"]/g) || [];
+    expect(spendCalls.length).toBe(1);
+  });
+
+  it('the narrative branch runs the daily-life passes (DAILY_LIFE_FIELDS) too', () => {
+    // The narrative path must iterate DAILY_LIFE_FIELDS and build daily-life
+    // prompts so daily life is generated inside the narrative run.
+    const narrativeMarker = src.indexOf('NARRATIVE: thesis + refinement passes');
+    expect(narrativeMarker).toBeGreaterThan(-1);
+    const narrativeBranch = src.slice(narrativeMarker);
+    expect(narrativeBranch).toMatch(/DAILY_LIFE_FIELDS/);
+    expect(narrativeBranch).toMatch(/buildDailyLifePrompt/);
+  });
+
+  it('streams daily-life beats under a dailyLife.<beat> field path', () => {
+    // The client routes `dailyLife.<beat>` messages into aiDailyLife state.
+    expect(src).toMatch(/field:\s*`dailyLife\.\$\{beat\}`/);
+  });
+
+  it('returns daily life on the narrative done payload', () => {
+    // The bundled daily life must ride home in the done event so the client
+    // can persist both halves of the run.
+    const doneIdx = src.lastIndexOf('done: true');
+    expect(doneIdx).toBeGreaterThan(-1);
+    // The done block that closes the narrative run includes a dailyLife key.
+    const tail = src.slice(doneIdx, doneIdx + 600);
+    expect(tail).toMatch(/dailyLife/);
+  });
+
+  it('a daily-life beat failure does NOT refund (partial-result policy)', () => {
+    // The folded daily-life loop must not call refund() on a beat failure —
+    // it records the failed field and continues, matching the refinement
+    // passes. The beat catch handler pushes the failed beat to failedFields
+    // (and logs it) rather than refunding.
+    expect(src).toMatch(/failedFields\.push\(`dailyLife\.\$\{beat\}`\)/);
+    // And the daily-life fold must not refund inline.
+    const foldIdx = src.indexOf('Phase 3: daily-life beats');
+    expect(foldIdx).toBeGreaterThan(-1);
+    const doneIdx = src.indexOf('done: true', foldIdx);
+    const foldBlock = src.slice(foldIdx, doneIdx);
+    expect(foldBlock).not.toMatch(/await refund\(\)/);
+  });
+});
+
 describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', () => {
   let src;
   let pricing;
@@ -359,6 +495,134 @@ describe('Tier 3.3 — generate-narrative cost catalog must match pricing.js', (
     // the funnel argument (smaller pack must enable a full week of prep)
     // would no longer hold.
     expect(serverNarrative).not.toBe(legacyNarrative);
+  });
+
+  // The fast-model schedule (Haiku/mini peers) is a SECOND money path: the
+  // server CREDIT_COSTS *_fast keys must mirror the client FAST_AI_COSTS table.
+  // The standard-cost tests above pin NEW_AI_COSTS only; without these, the
+  // fast costs could silently drift cross-side and over/under-charge.
+  it('narrative_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?narrative_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'narrative');
+    expect(srv, 'server narrative_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS narrative not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('dailyLife_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?dailyLife_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'dailyLife');
+    expect(srv, 'server dailyLife_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS dailyLife not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+
+  it('progression_fast cost in server matches FAST_AI_COSTS in client', () => {
+    const srv = src.match(/CREDIT_COSTS[\s\S]*?progression_fast:\s*(\d+)/)?.[1];
+    const cli = extractFromBlock(pricing, 'FAST_AI_COSTS', 'progression');
+    expect(srv, 'server progression_fast cost not found').toBeTruthy();
+    expect(cli, 'client FAST_AI_COSTS progression not found').toBeTruthy();
+    expect(srv).toBe(cli);
+  });
+});
+
+describe('migration 114 AI-pricing config is lockstep with the client + 057', () => {
+  // The pricing-resync system (migration 114) adds a config-backed CHARGE path:
+  // spend_credits(feature, p_profile) reads ai_credit_costs from system_config,
+  // and get_ai_pricing serves the same schedule to the client. Three couplings
+  // MUST stay pinned or the CHARGE silently drifts from the display / the seed:
+  //   (a) 114's spend_credits fallback CASE == 057's CASE (config-absent = 057),
+  //   (b) 114's ai_credit_costs SEED == the client NEW_AI_COSTS / FAST_AI_COSTS,
+  //   (c) 114's seeded profile keys == the 8 AI_MODEL_OPTIONS keys.
+  let mig114;
+  let mig057;
+  let pricing;
+  beforeAll(() => {
+    mig114 = readMigration('114_ai_pricing_config.sql');
+    // 057 = the net-current spend_credits body 114 forked from (per the house
+    // migration-recreate rule). Its CASE is the config-absent fallback 114 keeps
+    // verbatim. The filename carries the account-status recreate of spend_credits.
+    mig057 = readMigration('057_enforce_account_status_writes.sql');
+    pricing = readFileSync(join(ROOT, 'src', 'config', 'pricing.js'), 'utf8');
+  });
+
+  /**
+   * Pull the `case feature ... end` credit map out of a spend_credits body as a
+   * {feature: cost} object. Anchors on `case feature` (the CASE both 057 and
+   * 114's fallback share) so an unrelated CASE elsewhere in the file can't match.
+   */
+  function extractSpendCase(sql) {
+    const m = sql.match(/case\s+feature([\s\S]*?)end/i);
+    if (!m) return null;
+    const out = {};
+    for (const line of m[1].matchAll(/when\s+'([a-z_]+)'\s+then\s+(\d+)/gi)) {
+      out[line[1]] = Number(line[2]);
+    }
+    return out;
+  }
+
+  it('(a) 114 spend_credits fallback CASE equals the 057 CASE verbatim (config-absent = 057)', () => {
+    const case114 = extractSpendCase(mig114);
+    const case057 = extractSpendCase(mig057);
+    expect(case057, '057 CASE not found').toBeTruthy();
+    expect(case114, '114 fallback CASE not found').toBeTruthy();
+    // Every 057 branch must be present in 114 with the identical cost — including
+    // the chronicle:2 flat that never joins the calibrated system.
+    expect(case114).toEqual(case057);
+    // Spot-pin the money-bearing literals so a whole-map swap can't pass silently.
+    expect(case114.chronicle).toBe(2);
+    expect(case114.narrative).toBe(3);
+    expect(case114.dailyLife).toBe(4);
+    expect(case114.progression).toBe(5);
+    expect(case114.narrative_fast).toBe(2);
+    expect(case114.dailyLife_fast).toBe(3);
+    expect(case114.progression_fast).toBe(4);
+  });
+
+  it('(b) 114 ai_credit_costs SEED equals client NEW_AI_COSTS (standard) / FAST_AI_COSTS (fast)', () => {
+    // Extract the seeded per-profile costs from the ai_credit_costs insert. Each
+    // profile row is `'<key>', jsonb_build_object('narrative', N, 'dailyLife', N,
+    // 'progression', N)`. Reuse the client-block extractor for the source-of-truth.
+    const num = (block, field) => Number(block.match(new RegExp(`${field}:\\s*(\\d+)`))[1]);
+    const stdBlock = pricing.match(/NEW_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const fastBlock = pricing.match(/FAST_AI_COSTS\s*=\s*Object\.freeze\(\{[\s\S]*?\}\)/)[0];
+    const std = { narrative: num(stdBlock, 'narrative'), dailyLife: num(stdBlock, 'dailyLife'), progression: num(stdBlock, 'progression') };
+    const fast = { narrative: num(fastBlock, 'narrative'), dailyLife: num(fastBlock, 'dailyLife'), progression: num(fastBlock, 'progression') };
+
+    // Isolate the ai_credit_costs seed insert (the 'profiles' jsonb) so we don't
+    // accidentally read get_ai_pricing's in-function `defaults` table below it.
+    const seedM = mig114.match(/'ai_credit_costs'[\s\S]*?on conflict \(key\) do nothing;/i);
+    expect(seedM, 'ai_credit_costs seed insert not found').toBeTruthy();
+    const seed = seedM[0];
+
+    // Parse each `'<profile>', jsonb_build_object('narrative', N, 'dailyLife', N, 'progression', N)` row.
+    const rows = [...seed.matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative',\s*(\d+),\s*'dailyLife',\s*(\d+),\s*'progression',\s*(\d+)\)/gi)];
+    expect(rows.length, '114 ai_credit_costs seed profile rows not parsed').toBe(8);
+
+    // The costTier for each profile comes from AI_MODEL_OPTIONS (client source of truth).
+    const optsBlock = pricing.match(/AI_MODEL_OPTIONS\s*=\s*Object\.freeze\(\[[\s\S]*?\]\);/)[0];
+    const tierOf = (key) => {
+      const entry = optsBlock.match(new RegExp(`key:\\s*'${key}'[\\s\\S]*?costTier:\\s*'(standard|fast)'`));
+      return entry ? entry[1] : null;
+    };
+
+    for (const [, profile, nar, daily, prog] of rows) {
+      const expected = tierOf(profile) === 'fast' ? fast : std;
+      expect(Number(nar), `${profile}.narrative seed drifted from client`).toBe(expected.narrative);
+      expect(Number(daily), `${profile}.dailyLife seed drifted from client`).toBe(expected.dailyLife);
+      expect(Number(prog), `${profile}.progression seed drifted from client`).toBe(expected.progression);
+    }
+  });
+
+  it('(c) the 8 profile keys seeded in 114 equal the AI_MODEL_OPTIONS keys', () => {
+    const optsBlock = pricing.match(/AI_MODEL_OPTIONS\s*=\s*Object\.freeze\(\[[\s\S]*?\]\);/)[0];
+    const clientKeys = [...optsBlock.matchAll(/key:\s*'([a-z0-9_]+)'/gi)].map((m) => m[1]).sort();
+    expect(clientKeys.length, 'expected 8 client model keys').toBe(8);
+
+    const seedM = mig114.match(/'ai_credit_costs'[\s\S]*?on conflict \(key\) do nothing;/i);
+    const seedKeys = [...seedM[0].matchAll(/'(anthropic_[a-z0-9_]+|openai_[a-z0-9_]+)',\s*jsonb_build_object\('narrative'/gi)]
+      .map((m) => m[1]).sort();
+    expect(seedKeys, '114 seed profile keys drifted from AI_MODEL_OPTIONS').toEqual(clientKeys);
   });
 });
 
@@ -776,7 +1040,9 @@ describe('Tier 3.3 — create-checkout authentication', () => {
 
   it('verifies the user before creating any Stripe session', () => {
     const authIdx = src.search(/auth\.getUser\s*\(/);
-    const sessIdx = src.search(/stripe\.checkout\.sessions\.create/);
+    // The handler was refactored to a DI seam (edges.2): the Stripe client may
+    // be referenced as `stripe` or the injected `stripeApi`. Accept both.
+    const sessIdx = src.search(/stripe(Api)?\.checkout\.sessions\.create/);
     expect(authIdx).toBeGreaterThan(0);
     expect(sessIdx).toBeGreaterThan(0);
     expect(authIdx).toBeLessThan(sessIdx);
@@ -878,14 +1144,20 @@ describe('single-dossier payment verification', () => {
   beforeAll(() => { src = readFunction('verify-single-dossier'); });
 
   it('retrieves the Stripe session server-side', () => {
-    expect(src).toMatch(/stripe\.checkout\.sessions\.retrieve/);
+    // DI seam (edges.2): the Stripe client may be `stripe` or injected `stripeApi`.
+    expect(src).toMatch(/stripe(Api)?\.checkout\.sessions\.retrieve/);
   });
 
-  it('requires a complete paid single-dossier session with matching token', () => {
+  it('requires a complete paid single-dossier session with a constant-time token match', () => {
     expect(src).toMatch(/session\.status\s*===\s*['"]complete['"]/);
     expect(src).toMatch(/payment_status/);
     expect(src).toMatch(/metadata\?\.product\s*===\s*['"]single_dossier['"]/);
-    expect(src).toMatch(/metadata\?\.checkout_token\s*===\s*checkoutToken/);
+    // Token compare is CONSTANT-TIME (timingSafeEqualStr over checkout_token vs
+    // checkoutToken), not a leaky `===`, and its boolean is ANDed into `verified`
+    // so a wrong/absent token cannot satisfy the gate (edges: timing-safe hardening).
+    expect(src).toMatch(/timingSafeEqualStr\([\s\S]{0,160}checkoutToken/);
+    expect(src).toMatch(/checkout_token/);
+    expect(src).toMatch(/&&\s*tokenMatches/);
   });
 });
 
@@ -897,9 +1169,16 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
     expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
   });
 
-  it('declares an allowed-origins list (not "*")', () => {
-    expect(src).toMatch(/settlementforge\.com/);
-    expect(src).toMatch(/localhost/);
+  it('sources the origin allowlist from the shared module (not "*")', () => {
+    // The per-function inline allowlist was consolidated into
+    // supabase/functions/_shared/cors.ts (one list, no drift). create-checkout
+    // now imports getCorsHeaders from there rather than declaring its own hosts.
+    expect(src).toMatch(/from\s+['"]\.\.\/_shared\/cors\.ts['"]/);
+    expect(src).not.toMatch(/Access-Control-Allow-Origin['"]\s*:\s*['"]\*['"]/);
+    const shared = readFileSync(join(FUNCTIONS_DIR, '_shared', 'cors.ts'), 'utf8');
+    expect(shared).toMatch(/settlementforge\.com/);
+    expect(shared).toMatch(/localhost/);
+    expect(shared).toMatch(/settlement-engine\.pages\.dev/);
   });
 });
 
@@ -914,6 +1193,11 @@ const ALL_FUNCTIONS = [
   'admin-actions',
   'create-checkout',
   'verify-single-dossier',
+  // migration 115 — the nightly pricing-resync dispatcher target. It satisfies the
+  // no-secrets + serve + ESM-import sweeps below; it is NOT in FUNCTIONS_WITH_GUARD
+  // (it is cron-secret-gated, not user-facing — the same reasoning that exempts
+  // stripe-webhook, though this one DOES still call botGuard at the door).
+  'pricing-resync-cron',
 ];
 
 describe('Tier 3.3 — no plaintext secrets committed', () => {
@@ -977,10 +1261,7 @@ describe('Tier 3.3 — every function uses Deno serve + ESM imports', () => {
   it('every function calls serve()', () => {
     for (const name of ALL_FUNCTIONS) {
       const src = readFunction(name);
-      // serve() may be top-level OR guarded behind `if (import.meta.main)` — the
-      // standard Deno idiom that lets a module export its handler for execution
-      // tests without binding the shared test port. Allow leading indentation.
-      expect(src.match(/^\s*serve\s*\(/m), name).toBeTruthy();
+      expect(src.match(/^serve\s*\(/m), name).toBeTruthy();
     }
   });
 });
@@ -1166,7 +1447,10 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
     // path is still mandatory for every NON-single_dossier product,
     // and supabase_user_id still comes from the server-verified JWT
     // for any product that does provide auth.
-    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product(?:\s*,\s*checkoutToken)?(?:\s*,\s*settlement)?\s*\}\s*=\s*await\s*req\.json/);
+    // The destructure now also carries checkoutToken (P95) and redeemCode
+    // (107) — the CONTRACT here is only the position of the body parse
+    // relative to auth, so match the leading `product` and tolerate the rest.
+    const bodyIdx = checkoutSrc.search(/const\s*\{\s*product\b[^}]*\}\s*=\s*await\s*req\.json/);
     const authIdx = checkoutSrc.search(/getUser\s*\(/);
     expect(bodyIdx).toBeGreaterThan(0);
     expect(authIdx).toBeGreaterThan(0);
@@ -1183,7 +1467,7 @@ describe('Tier 0.5 — create-checkout metadata population is server-controlled'
   it('product is validated against PRICE_MAP before being put into metadata', () => {
     // Pattern: !PRICE_MAP[product] → throw → never reaches checkout.create.
     const validateIdx = checkoutSrc.search(/!PRICE_MAP\[product\]/);
-    const createIdx   = checkoutSrc.search(/stripe\.checkout\.sessions\.create/);
+    const createIdx   = checkoutSrc.search(/stripe(Api)?\.checkout\.sessions\.create/);
     expect(validateIdx).toBeGreaterThan(0);
     expect(createIdx).toBeGreaterThan(0);
     expect(validateIdx).toBeLessThan(createIdx);

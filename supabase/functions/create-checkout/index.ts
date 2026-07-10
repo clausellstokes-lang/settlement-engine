@@ -4,7 +4,7 @@
  * Creates a Stripe Checkout session for any of:
  *   - Credit packs (new schedule:  25 / 60 / 150)
  *   - Credit packs (legacy:         5 / 15 / 40)  — kept for refund/replay
- *   - Premium subscription ($6/mo)
+ *   - Premium subscription ($5.99/mo)
  *   - Founder Lifetime ($99 one-time)
  *   - Single-dossier microtransaction ($2.99 one-time)
  *
@@ -13,12 +13,15 @@
  * legacy SKUs stay listed so refund and replay links keep resolving
  * after the catalog rotates.
  *
- * Single-dossier durability (findings F21/F23): before creating the Stripe
- * session for `single_dossier`, the settlement in the request body is persisted
- * server-side in `dossier_purchases` keyed by the client's one-time
- * checkout_token. That makes the paid dossier recoverable even if the buyer's
- * localStorage stash is lost, overwritten by a second Buy click, or on another
- * device. The stash is now a fallback, not the source of truth.
+ * Redeem codes (migration 107): an authenticated purchase may carry an
+ * optional `redeemCode`. The code is resolved SERVER-SIDE via the
+ * reserve_redemption RPC (guarded atomic seat claim) — the client never
+ * supplies a coupon id or credit amount. free_month codes ride the session
+ * as a server-attached discount (NEVER allow_promotion_codes); credits
+ * codes attach nothing here — the webhook grants them when the paid
+ * session completes (apply_redemption). A code that fails to reserve
+ * degrades to a non-fatal `redeemNotice` in the response: a bad code must
+ * never fail a paying checkout.
  *
  * Environment variables (set in Supabase dashboard):
  *   STRIPE_SECRET_KEY                 — Stripe secret key
@@ -28,7 +31,7 @@
  *     STRIPE_PRICE_CREDITS_25         — 25-credit pack  ($4.99)
  *     STRIPE_PRICE_CREDITS_60         — 60-credit pack  ($9.99)
  *     STRIPE_PRICE_CREDITS_150        — 150-credit pack ($19.99)
- *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($6/mo)
+ *     STRIPE_PRICE_PREMIUM            — Cartographer subscription ($5.99/mo)
  *     STRIPE_PRICE_FOUNDER_LIFETIME   — Founder Lifetime ($99 one-time)
  *     STRIPE_PRICE_SINGLE_DOSSIER     — Single-dossier microtransaction ($2.99)
  *
@@ -41,27 +44,15 @@
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { botGuard } from '../_shared/requestMeta.ts';
+// Structured error logging for the money path (review B16 observability).
+import { logError } from '../_shared/logError.ts';
+// One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
-const defaultStripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
-
-// Service-role admin client (bypasses RLS). Used to look up the caller's Stripe
-// customer id and to persist the single-dossier settlement. Exposed as a
-// factory so tests can inject a recording stub via deps.adminClient.
-function adminClient() {
-  return createClient(
-    Deno.env.get('SUPABASE_URL')!,
-    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
-  );
-}
-
-// Upper bound on a persisted single-dossier settlement. A real settlement JSON
-// is a few tens of KB; 512KB is generous headroom while keeping the row (and any
-// abusive payload) bounded. Rejected pre-payment so the buyer sees the error
-// before Stripe collects a cent.
-const MAX_DOSSIER_BYTES = 512 * 1024;
+const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
 const PRICE_MAP: Record<string, string> = {
   // ── Active catalog ───────────────────────────────────────────────────────
@@ -97,46 +88,113 @@ const CREDIT_AMOUNTS: Record<string, number> = {
 // in src/config/pricing.js.
 const SUBSCRIPTION_PRODUCTS = new Set(['premium']);
 
-/** Build CORS headers dynamically from the request origin. */
-function getCorsHeaders(req?: Request) {
-  const clientUrl = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    clientUrl,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req?.headers?.get('Origin') || '';
-  const match = allowed.includes(origin) || !origin;
-  return {
-    'Access-Control-Allow-Origin': match ? (origin || '*') : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(match ? { 'Vary': 'Origin' } : {}),
-  };
-}
+// Founder Lifetime is advertised as "X of 30 seats remaining". Keep in sync
+// with `seatLimit` in src/config/pricing.js and FOUNDER_SEAT_CAP in
+// src/lib/founderSeats.js (the pricing-page counter reads the same
+// founder_seats_taken() RPC this gate does).
+const FOUNDER_SEAT_LIMIT = 30;
 
-function json(body: unknown, status: number, corsHeaders: Record<string, string>) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-  });
-}
+// Server-side delivery stash (dossier_purchases, migration 122): an anonymous
+// single_dossier buyer's settlement is persisted here at checkout, keyed on the
+// checkout_token, so delivery survives a wiped localStorage (the webhook binds
+// the Stripe session id; verify-single-dossier reads it back). Cap the stashed
+// payload so a malformed/oversized settlement is rejected pre-payment rather than
+// bloating the row. Coexists with the durable-rights entitlement (108) — they key
+// on different anchors (checkout_token here; account+save/token-hash there).
+const MAX_DOSSIER_BYTES = 512 * 1024;
 
 /**
- * Exported (not just inlined into serve) so the size guard + dossier-persistence
- * behavior can be EXECUTION-tested: index.test.ts injects a recording supabase
- * stub via `deps.adminClient` and a Stripe stub via `deps.stripe`. Production
- * passes nothing, so behavior is identical to the previous inline handler.
+ * Build CORS headers from the shared allowlist (_shared/cors.ts). Fail-closed,
+ * never '*' for this credentialed money endpoint; the shared list also accepts
+ * the Cloudflare Pages preview origin. Advertises POST/OPTIONS.
  */
+function getCorsHeaders(req?: Request) {
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
+}
+
+/** Default user-scoped client (anon key + the caller's Authorization header). */
+function defaultUserClient(authHeader: string) {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_ANON_KEY')!,
+    { global: { headers: { Authorization: authHeader } } },
+  );
+}
+
+/** Default service-role client (bypasses RLS for the profile read/write). */
+function defaultAdminClient() {
+  return createClient(
+    Deno.env.get('SUPABASE_URL')!,
+    Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,
+  );
+}
+
+// ── Redeem codes (migration 107) ─────────────────────────────────────────────
+//
+// The applies_to/mode gate now lives INSIDE reserve_redemption (migration 112): it
+// refuses a mismatch BEFORE creating the once-per-user row, so a code entered in the
+// wrong modal is never burned. create-checkout passes p_mode and handles the
+// 'mode_mismatch' reason like any other non-fatal redeem notice.
+
+/**
+ * Hand a just-reserved seat back when the code cannot ride this checkout
+ * (applies_to/mode mismatch, or Stripe refused the session after the seat was
+ * taken). There is deliberately no "unreserve" RPC, so this walks the same
+ * lifecycle an abandoned checkout does: bind a phantom session id (write-once)
+ * then revert it (claim-once flip + guarded uses_count decrement). The
+ * (code, user) row persists as 'reverted' — once-per-user-EVER, identical to
+ * an expired session. Best-effort: failures log and leave the reserved row as
+ * the operator's remediation surface; they never fail the checkout path.
+ */
+async function releaseUnusedReservation(
+  // Typed against the CONCRETE client (the webhook's helper idiom): the bare
+  // `ReturnType<typeof createClient>` resolves the uninstantiated generic to a
+  // never-schema client whose rpc() rejects argument objects under deno check.
+  admin: ReturnType<typeof defaultAdminClient>,
+  userId: string,
+  redemptionId: string,
+): Promise<void> {
+  // Never a real Stripe session id (those are `cs_…`), so the webhook's
+  // apply/revert lookups can never collide with it.
+  const phantomSessionId = `released:${redemptionId}`;
+  try {
+    const { data: bound, error: bindErr } = await admin.rpc('bind_redemption_session', {
+      p_redemption_id: redemptionId,
+      p_session_id: phantomSessionId,
+    });
+    if (bindErr || !bound?.ok) {
+      throw new Error(bindErr?.message ?? `bind refused: ${bound?.reason ?? 'unknown'}`);
+    }
+    const { data: reverted, error: revertErr } = await admin.rpc('revert_redemption', {
+      p_session_id: phantomSessionId,
+    });
+    if (revertErr || !reverted?.ok) {
+      throw new Error(revertErr?.message ?? `revert refused: ${reverted?.reason ?? 'unknown'}`);
+    }
+  } catch (err) {
+    logError('create-checkout', userId, err, {
+      stage: 'release_unused_redemption', redemption_id: redemptionId,
+    });
+  }
+}
+
+// Exported (not just inlined into serve) so the money gate can be EXECUTION-
+// tested: index.test.ts feeds requests with injected stubs and asserts the
+// credits/product are derived server-side from PRICE_MAP/CREDIT_AMOUNTS and the
+// user_id put into session.metadata comes from the verified JWT, never the
+// request body. `deps` is the optional injection seam; production passes nothing.
 export async function handleCreateCheckout(
   req: Request,
-  deps: { adminClient?: typeof adminClient; stripe?: Stripe } = {},
+  deps: {
+    stripeClient?: typeof stripe;
+    userClient?: (authHeader: string) => ReturnType<typeof createClient>;
+    adminClient?: () => ReturnType<typeof createClient>;
+  } = {},
 ): Promise<Response> {
+  const stripeApi = deps.stripeClient ?? stripe;
+  const userClient = deps.userClient ?? defaultUserClient;
+  const adminClient = deps.adminClient ?? defaultAdminClient;
   const corsHeaders = getCorsHeaders(req);
-  const stripe = deps.stripe ?? defaultStripe;
 
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -148,10 +206,17 @@ export async function handleCreateCheckout(
   const guard = botGuard(req, 'create-checkout');
   if (guard.reject) return guard.reject;
 
+  // Hoisted above the try so the catch can attribute a failure to the acting user
+  // (when one was resolved) in the structured error log.
+  let user: { id: string; email?: string | null } | null = null;
+
   try {
     // Parse request body first so we know whether the product requires auth.
-    // `settlement` is only meaningful for single_dossier (persisted below).
-    const { product, checkoutToken, settlement } = await req.json();
+    // saveId (optional, single_dossier only): when a SIGNED-IN buyer picks a
+    // saved settlement at checkout, the durable-rights entitlement (108) binds
+    // to it. It is verified for ownership below and stashed in the session
+    // metadata; the webhook grants the right on the paid session.
+    const { product, checkoutToken, redeemCode, saveId, settlement } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
     }
@@ -168,27 +233,30 @@ export async function handleCreateCheckout(
       throw new Error('A valid dossier checkout token is required');
     }
 
-    // ── Single-dossier: persist the settlement server-side BEFORE payment ────
-    // (findings F21/F23) so the paid dossier survives a lost/overwritten
-    // localStorage stash or a device switch. The size guard is a hard 413 the
-    // client surfaces PRE-payment; a transient DB error falls back to the client
-    // stash rather than blocking a buyer who is about to pay.
+    // ── Delivery stash (migration 122): persist the settlement server-side, keyed
+    // on the checkout_token, BEFORE the Stripe session is created. These guards are
+    // explicit early returns (NOT thrown) so the buyer sees the size/serialize error
+    // pre-payment — routing them through the generic outer catch would surface only
+    // "Checkout could not be started". The persist itself is best-effort: a DB
+    // failure logs and falls back to the client-side stash (checkout still proceeds).
     if (isAnonymousProduct && settlement !== undefined && settlement !== null) {
       let byteSize: number;
       try {
         byteSize = new TextEncoder().encode(JSON.stringify(settlement)).length;
-      } catch {
-        return json({ error: 'The settlement could not be serialized for checkout.' }, 400, corsHeaders);
+      } catch (_e) {
+        return new Response(
+          JSON.stringify({ error: 'The settlement could not be serialized for checkout.' }),
+          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+        );
       }
       if (byteSize > MAX_DOSSIER_BYTES) {
-        return json(
-          { error: `This settlement is too large to purchase (${byteSize} bytes; limit ${MAX_DOSSIER_BYTES}). Trim it and try again.` },
-          413,
-          corsHeaders,
+        return new Response(
+          JSON.stringify({ error: `This settlement is too large to purchase (limit ${MAX_DOSSIER_BYTES} bytes).` }),
+          { status: 413, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
         );
       }
       try {
-        const admin = (deps.adminClient ?? adminClient)();
+        const admin = adminClient();
         const { error: upsertErr } = await admin
           .from('dossier_purchases')
           .upsert(
@@ -196,25 +264,20 @@ export async function handleCreateCheckout(
             { onConflict: 'checkout_token' },
           );
         if (upsertErr) {
-          console.warn('[create-checkout] dossier persist failed; client stash will be the fallback:', upsertErr.message);
+          console.warn('[create-checkout] dossier persist failed; client stash fallback:', upsertErr.message);
         }
       } catch (e) {
-        console.warn('[create-checkout] dossier persist threw; client stash will be the fallback:', (e as Error)?.message ?? 'unknown');
+        console.warn('[create-checkout] dossier persist threw; client stash fallback:', e instanceof Error ? e.message : String(e));
       }
     }
 
     const authHeader = req.headers.get('Authorization');
-    let user: { id: string; email?: string | null } | null = null;
 
     if (authHeader) {
       // If auth is provided (even for an anonymous-allowed product), try
       // to resolve the user so the purchase binds to the account when
       // possible. Failures fall through to anonymous handling.
-      const supabase = createClient(
-        Deno.env.get('SUPABASE_URL')!,
-        Deno.env.get('SUPABASE_ANON_KEY')!,
-        { global: { headers: { Authorization: authHeader } } },
-      );
+      const supabase = userClient(authHeader);
       const { data: { user: authedUser }, error: authError } = await supabase.auth.getUser();
       if (!authError && authedUser) {
         user = { id: authedUser.id, email: authedUser.email ?? null };
@@ -225,6 +288,58 @@ export async function handleCreateCheckout(
       throw new Error('Missing authorization header');
     }
 
+    // Founder Lifetime seat gate — the advertised "X of 30 seats" contract is
+    // enforced HERE, not just displayed. founder_seats_taken() (migration 010)
+    // is the same counter the pricing page renders; once the cap is reached no
+    // new founder checkout session can be created. FAIL CLOSED on a counter
+    // error: blocking a sale we could have made beats selling seat 31 of an
+    // advertised-30 product. Two truly-concurrent checkouts at seat 29 can
+    // still race past this gate — that residual is a one-off refund, not a
+    // standing hole in the contract.
+    if (product === 'founder_lifetime') {
+      const { data: seatsTaken, error: seatErr } = await adminClient().rpc('founder_seats_taken');
+      if (seatErr) throw new Error(`Founder seat check failed: ${seatErr.message}`);
+      if (typeof seatsTaken !== 'number') throw new Error('Founder seat check returned no count');
+      if (seatsTaken >= FOUNDER_SEAT_LIMIT) {
+        throw new Error(`Founder Lifetime is sold out (${seatsTaken}/${FOUNDER_SEAT_LIMIT} seats taken)`);
+      }
+    }
+
+    // ── Durable-rights save binding (108): single_dossier + signed-in only ──
+    // A signed-in single_dossier buyer MAY pick one saved settlement to bind the
+    // durable re-download right to. Verify server-side that the save EXISTS and
+    // belongs to THIS authed user before stashing it in the metadata: a forged
+    // or foreign saveId must never bind rights to someone else's save. Reject
+    // with the SAME generic 400 every other checkout failure returns (never echo
+    // whose save it is). A signed-in purchase with NO saveId stays valid — the
+    // one-shot download semantics still apply, and the buyer can retro-claim the
+    // voucher to a save later. Anonymous purchases ignore saveId entirely (the
+    // durable ledger keys on the account).
+    let verifiedSaveId: string | null = null;
+    if (product === 'single_dossier' && user && saveId !== undefined && saveId !== null && saveId !== '') {
+      if (typeof saveId !== 'string') {
+        logError('create-checkout', user.id, 'non-string saveId on single_dossier checkout', { stage: 'verify_save_ownership' });
+        throw new Error('Invalid save reference');
+      }
+      const admin = adminClient();
+      const { data: save, error: saveErr } = await admin
+        .from('settlements')
+        .select('id, user_id')
+        .eq('id', saveId)
+        .maybeSingle();
+      if (saveErr || !save || save.user_id !== user.id) {
+        // Missing, foreign, or unreadable — never bind the right, and never
+        // reveal which case it was. Fail the whole checkout (a client that
+        // sent a saveId meant to bind it; silently dropping it would leave the
+        // buyer paying with no durable right against the save they chose).
+        logError('create-checkout', user.id, saveErr?.message ?? 'save not found or not owned', {
+          stage: 'verify_save_ownership', save_id: saveId,
+        });
+        throw new Error('Invalid save reference');
+      }
+      verifiedSaveId = save.id as string;
+    }
+
     const priceId = PRICE_MAP[product];
     if (!priceId) throw new Error(`Price ID not configured for ${product}`);
 
@@ -232,7 +347,7 @@ export async function handleCreateCheckout(
     let stripeCustomerId: string | null = null;
 
     if (user) {
-      const admin = (deps.adminClient ?? adminClient)();
+      const admin = adminClient();
       const { data: profile } = await admin
         .from('profiles')
         .select('stripe_customer_id')
@@ -244,7 +359,7 @@ export async function handleCreateCheckout(
         : null;
 
       if (!stripeCustomerId) {
-        const customer = await stripe.customers.create({
+        const customer = await stripeApi.customers.create({
           email: user.email || undefined,
           metadata: { supabase_user_id: user.id },
         });
@@ -256,23 +371,69 @@ export async function handleCreateCheckout(
       }
     }
 
+    const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
+
+    // ── Redeem code (107): reserve the seat BEFORE the session exists ──────
+    // reserve_redemption is the authoritative gate (guarded atomic uses_count
+    // increment + the once-per-user row); validate_redeem_code was only the UX
+    // echo. Redeeming requires an account — the once-per-user gate keys on
+    // user_id — so an anonymous purchase ignores the code with a notice.
+    // EVERY failure path here is NON-FATAL by design: a bad code must degrade
+    // to a notice, never fail a paying checkout.
+    let redeemNotice: string | null = null;
+    let redemptionId: string | null = null;
+    let redeemCoupon: string | null = null;
+    if (typeof redeemCode === 'string' && redeemCode.trim() !== '') {
+      if (!user) {
+        redeemNotice = 'Redeem codes need a signed-in account, so this purchase continues without one.';
+      } else {
+        const admin = adminClient();
+        // p_mode lets reserve_redemption reject an applies_to/mode mismatch BEFORE it
+        // creates the once-per-user row (112) — so a code typed into the wrong modal is
+        // never burned. The mismatch comes back as reason 'mode_mismatch' with no seat held.
+        const { data: reservation, error: reserveErr } = await admin.rpc('reserve_redemption', {
+          p_code: redeemCode.trim(),
+          p_user: user.id,
+          p_mode: mode,
+        });
+        if (reserveErr || !reservation?.ok) {
+          if (reserveErr) {
+            logError('create-checkout', user.id, reserveErr.message, { stage: 'reserve_redemption' });
+          }
+          // The RPC's reasons are already enumeration-collapsed; only the
+          // caller's OWN prior redemption reads differently (truthful to the
+          // one user it cannot leak to). mode_mismatch consumed NO redemption —
+          // the code stays usable on the correct purchase type.
+          redeemNotice = reservation?.reason === 'already_used'
+            ? 'That code has already been redeemed on this account, so this purchase continues at the regular price.'
+            : reservation?.reason === 'mode_mismatch'
+              ? 'That code does not apply to this type of purchase, so this purchase continues at the regular price.'
+              : 'That code could not be applied, so this purchase continues at the regular price.';
+        } else {
+          redemptionId = reservation.redemption_id as string;
+          if (reservation.kind === 'free_month' && typeof reservation.stripe_coupon_id === 'string' && reservation.stripe_coupon_id) {
+            redeemCoupon = reservation.stripe_coupon_id;
+          }
+          // kind='credits' attaches NO Stripe discount: the webhook grants
+          // credit_amount once the PAID session completes (apply_redemption).
+        }
+      }
+    }
+
     // Create Stripe checkout session. For anonymous purchases we omit
     // customer_email — Stripe collects it on the checkout page and
     // sends it back on session.completed via session.customer_details
     // and session.customer (which the webhook reads).
-    //
-    // single_dossier success_url also carries `dt=<checkout_token>` so the
-    // returning browser recovers the EXACT token for this purchase (the URL only
-    // gets session_id from Stripe). That closes F21(a): a second Buy click gets
-    // its own token/session/row, and each return page verifies precisely its own.
-    const mode = SUBSCRIPTION_PRODUCTS.has(product) ? 'subscription' : 'payment';
-    const successUrl = isAnonymousProduct
-      ? `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}&dt=${encodeURIComponent(checkoutToken)}`
-      : `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}`;
     const sessionParams: Record<string, unknown> = {
       mode,
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: successUrl,
+      // For an anonymous single_dossier, echo the delivery token (dt = the
+      // checkout_token) on the success URL so the returning browser can recover
+      // the exact token and re-fetch its server-stashed settlement (122) even if
+      // localStorage was wiped between checkout and return.
+      success_url: isAnonymousProduct
+        ? `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}&dt=${encodeURIComponent(checkoutToken)}`
+        : `${clientUrl}?checkout=success&product=${product}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${clientUrl}?checkout=cancelled`,
       metadata: {
         supabase_user_id: user?.id ?? '',
@@ -280,6 +441,10 @@ export async function handleCreateCheckout(
         credits: String(CREDIT_AMOUNTS[product] || 0),
         anonymous: isAnonymousProduct && !user ? 'true' : 'false',
         checkout_token: isAnonymousProduct ? checkoutToken : '',
+        // Durable-rights save binding (108): only ever the server-VERIFIED save
+        // id for a signed-in single_dossier buyer, never a raw body value. The
+        // webhook reads this to grant the entitlement.
+        save_id: verifiedSaveId ?? '',
       },
     };
     if (stripeCustomerId) {
@@ -287,24 +452,63 @@ export async function handleCreateCheckout(
     } else if (user?.email) {
       sessionParams.customer_email = user.email;
     }
-    const session = await stripe.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    if (redeemCoupon) {
+      // Server-attached discount ONLY. NEVER allow_promotion_codes: the
+      // hosted checkout page must not become a coupon-guessing surface, and
+      // the webhook's zero-dollar gates (referral grant, redeem apply) assume
+      // every discount on a session was placed by this line.
+      sessionParams.discounts = [{ coupon: redeemCoupon }];
+    }
+
+    let session: { id: string; url: string | null };
+    try {
+      session = await stripeApi.checkout.sessions.create(sessionParams as Parameters<typeof stripe.checkout.sessions.create>[0]);
+    } catch (createErr) {
+      // Stripe refused the session (e.g. a deleted coupon id on the code):
+      // the reserved seat must not leak — hand it back before failing.
+      if (redemptionId && user) {
+        await releaseUnusedReservation(adminClient(), user.id, redemptionId);
+      }
+      throw createErr;
+    }
+
+    if (redemptionId) {
+      // Stamp the session id onto the reserved seat so the webhook can flip
+      // it: apply_redemption on paid completion, revert_redemption on expiry.
+      // Write-once in the RPC (a retry with the same id succeeds idempotently).
+      // NON-FATAL: the session already exists and (for free_month) carries the
+      // discount, so a bind failure must not kill the checkout — the
+      // structured log + the unbound reserved row are the operator's
+      // remediation surface.
+      const { data: bound, error: bindErr } = await adminClient().rpc('bind_redemption_session', {
+        p_redemption_id: redemptionId,
+        p_session_id: session.id,
+      });
+      if (bindErr || !bound?.ok) {
+        logError('create-checkout', user?.id ?? null, bindErr?.message ?? `bind refused: ${bound?.reason ?? 'unknown'}`, {
+          stage: 'bind_redemption_session', redemption_id: redemptionId, session_id: session.id,
+        });
+      }
+    }
 
     return new Response(
-      JSON.stringify({ url: session.url }),
+      JSON.stringify(redeemNotice ? { url: session.url, redeemNotice } : { url: session.url }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    // One structured line per checkout failure so the money path is greppable.
+    // The real message (which may carry Stripe/Postgres internals) is logged
+    // server-side; the client only ever sees a generic string.
+    logError('create-checkout', user?.id ?? null, message);
     return new Response(
-      JSON.stringify({ error: message }),
+      JSON.stringify({ error: 'Checkout could not be started' }),
       { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
     );
   }
 }
 
-// Bind the HTTP listener only when run as the entrypoint. Guarding on
-// import.meta.main keeps the Deno test suite (which imports this module for its
-// exported handler) from starting a second server on the shared port.
-if (import.meta.main) {
-  serve((req) => handleCreateCheckout(req));
-}
+// Wrap in a 1-arg lambda so the handler's optional `deps` param doesn't clash with
+// std/http's Handler signature (req, connInfo) — `deno check` (check:edge) flagged
+// the direct `serve(handler)` as a Handler-shape mismatch. The deps default applies.
+serve((req) => handleCreateCheckout(req));
