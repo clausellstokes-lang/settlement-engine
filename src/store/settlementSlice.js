@@ -90,6 +90,17 @@ import {
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
 // for the per-action before/after mapping and the C2/C3 loose-field TODOs.
 import { makeActionResult } from './actionResult.js';
+// Wave 4a store composition — the god-slice + identity-edit action bodies adopted
+// from the reference tree's helper split (§2B). setPrimaryDeity/imposeCult are the
+// STORE half of the embed-on-assign bridge that flips the religion subsystem gate
+// (subsystemActivation.js reads config.primaryDeitySnapshot / cultDeitySnapshots);
+// the rename/canon-by-id/flavor/neighbour actions are the identity-edit surface the
+// Settlements-list + change-queue affordances consume. See each helper's header.
+import { setPrimaryDeityImpl, imposeCultImpl } from './settlementDeityHelpers.js';
+import {
+  renameSettlementImpl, syncActiveNeighbourFieldsImpl,
+  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl,
+} from './settlementRenameHelpers.js';
 
 /**
  * Coarse SystemState summary for an ActionResult before/after slice — the four
@@ -1758,4 +1769,57 @@ export const createSettlementSlice = (set, get) => ({
       state.systemState = null;
     }
   }),
+
+  // ── Deity / cult mounts (Wave 4a) ─────────────────────────────────────────
+  // The STORE half of the embed-on-assign bridge. Thin delegations: the impls
+  // resolve the deity ref against customContent HERE (intent time) and dispatch
+  // SET_PRIMARY_DEITY / IMPOSE_CULT through applyEvent with the frozen snapshot in
+  // the payload, so the pure mutate handler + pulse read ONLY config.*DeitySnapshot
+  // and the religion subsystem gate (subsystemActivation.js) flips off the embed.
+  // The return value is applyEvent's ActionResult envelope (null when refused).
+  setPrimaryDeity: (deityRefId) => setPrimaryDeityImpl(get, deityRefId),
+  imposeCult: (deityRefId, removeRef = null) => imposeCultImpl(get, deityRefId, removeRef),
+
+  // ── Identity edits + canon-by-id (Wave 4a) ────────────────────────────────
+  // The always-allowed town rename, the Settlements-list canonize-by-id, and the
+  // change-queue flavor/neighbour companions. Delegated to settlementRenameHelpers.
+  renameSettlement: (id, newName) => renameSettlementImpl(get, set, id, newName),
+  syncActiveNeighbourFields: (neighbourFields) => syncActiveNeighbourFieldsImpl(get, set, neighbourFields),
+  recordCanonFlavorEntry: (entry) => recordCanonFlavorEntryImpl(get, set, entry),
+  canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
+
+  /**
+   * Instrumentation hook for the REAL (cloud/localStorage) save path — the
+   * Save-to-Library buttons + the SAVE_SETTLEMENT auth intent call
+   * savesService.save() directly and rehydrate via setSavedSettlements, bypassing
+   * any store save action, so the pricing moments + 'saved' research fingerprint
+   * never fire for real users without an explicit hook (F34). Call this AFTER a
+   * successful save AND after savedSettlements is refreshed.
+   *
+   * Wave 4a composition (§2B): the moment/fingerprint block routes through OUR
+   * extracted saveMoments.recordSaveMomentForActiveSave (session-deduped per save
+   * id, authoritative post-save count, generation-id spine) rather than a second
+   * inline funnel copy. Fully fire-and-forget — never throws, never blocks the save.
+   *
+   * HANDOFF (pricing sub-wave 4e): §2B also has notePersistedSave arm the
+   * same-device dossier retro auto-upgrade (108). That is DEFERRED here because its
+   * module (src/lib/dossierRetroClaim.js) has not landed in this tree — a static
+   * `import('../lib/dossierRetroClaim.js')` fails BOTH tsc and `vite build` on a
+   * missing target. 4e must add, right after the saveMoments call:
+   *   if (saveId != null) import('../lib/dossierRetroClaim.js')
+   *     .then(({ runDossierRetroClaimForSave }) => runDossierRetroClaimForSave({ settlement, saveId, get }))
+   *     .catch(() => {});
+   *
+   * @param {object} settlement the settlement that was just persisted
+   * @param {string|number} [saveId] the real save's id (from savesService.save)
+   * @returns {void}
+   */
+  notePersistedSave: (settlement, saveId) => {
+    try {
+      import('./saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId, settlement, store: { getState: get } }))
+        .catch(() => { /* instrumentation must never block a save */ });
+    } catch { /* instrumentation must never throw */ }
+  },
 });
