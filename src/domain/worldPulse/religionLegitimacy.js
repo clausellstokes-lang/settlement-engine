@@ -26,6 +26,9 @@ import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcC
 // law position (lawSign: +1 lawful · −1 chaotic · 0 neutral/legacy) off the ONE
 // axis projection, so a law-neutral/legacy patron contributes EXACTLY 0.
 import { lawSign } from './deityStance.js';
+// Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
+// (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
+import { evil01, chaos01 } from './deityAxes.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
@@ -72,6 +75,31 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   // elsewhere). Bounded (max ±SYNERGY_W × composite piety) and piety-scaled; EXACTLY 0
   // for a law-neutral/legacy patron or a settlement with no measured piety.
   SYNERGY_W: 0.06,
+  // ── W-F4 RECIPROCAL PATRON LOOP (owner addendum 2026-07-10) ─────────────────
+  // A patron is chosen AND RETAINED partly by ALIGNMENT FIT: how much the settlement's
+  // OWN ENDOGENOUS conduct matches the deity's two-axis plane. The relationship is
+  // reciprocal but NOT perpetual — the fit is re-derived from CURRENT conduct each tick
+  // (drifting conduct erodes the signal) and the LAG step decays legitimacy toward it,
+  // so an imposed patron over misaligned conduct WITHERS unless conduct comes to match.
+  // ENDOGENEITY (strict): the conduct plane reads ONLY domestic signals — governance
+  // character, corruption/compromise depth, and the settlement's own governance-form law
+  // affinity. War, trade, partnerships, the USER, and the PARTY are EXCLUDED (foreign
+  // policy and divine fiat never feed the loop). SIGNED and 0 at a neutral deity OR
+  // neutral conduct ⇒ byte-identical for legacy/neutral deities. SUBCRITICAL: the swing
+  // is bounded and small (no absorbing state — entrenchment is strong, not ownership).
+  CONDUCT_FIT_W: 0.14,          // max legitimacy swing from ±full conduct alignment
+  CONDUCT_GOV_W: 0.6,           // governance-character weight in the conduct plane…
+  CONDUCT_COMPROMISE_W: 0.4,    // …vs corruption/compromise depth
+  // ── W-F4 CLERGY LEGITIMACY DRAG (owner clergy-lens addendum) ────────────────
+  // A scandalous priesthood is a legitimacy drag: the god's seat is only as clean as
+  // the clergy who minister it. Keyed on the influence-weighted corruptible-flaw taint,
+  // SHARPENED when the compromise is already publicly REVEALED (a covert stain hurts
+  // less than an open scandal). Cross-term: a HOSTILE court (a ruler misaligned with the
+  // patron) amplifies the scandal, a SYNERGISTIC court shields it. EXACTLY 0 for an
+  // unflawed / trait-neutral / no-religious-faction priesthood ⇒ byte-identical.
+  CLERGY_SCANDAL_W: 0.16,       // max legitimacy drag from a fully-tainted revealed priesthood
+  CLERGY_REVEALED_SHARPEN: 0.6, // extra weight on the REVEALED share of the taint (covert→revealed)
+  CLERGY_COURT_AMP: 0.5,        // hostile court amplifies / synergistic court shields the scandal
 });
 
 // Each governance form carries a signed law-axis affinity (+1 lawful … −1 chaotic,
@@ -86,8 +114,10 @@ const GOVERNMENT_LAW_AFFINITY = /** @type {Array<[RegExp, number]>} */ ([
 ]);
 
 /** Signed law-axis affinity of a governance form (+1 lawful … −1 chaotic, 0 centre/unknown).
+ *  Exported so the W-F4 crisis-conversion term can fade the small-tier chaos bonus by how
+ *  lawful the government is (a chartered town resists the whisper a thorp cannot).
  *  @param {string|null|undefined} government @returns {number} */
-function governmentLawAffinity(government) {
+export function governmentLawAffinity(government) {
   const g = String(government || '').toLowerCase();
   for (const [re, v] of GOVERNMENT_LAW_AFFINITY) if (re.test(g)) return v;
   return 0;
@@ -279,15 +309,54 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
 }
 
 /**
+ * The settlement's ENDOGENOUS conduct plane (evilness, chaoticness), each 0..1 and
+ * 0.5-neutral, from DOMESTIC signals ONLY: governance character (lens.align, 0 evil …
+ * 1 good), corruption/compromise depth, and the settlement's own governance-FORM law
+ * affinity. No external actions (war/trade/partnerships), no user/party. Pure.
+ * @param {{ align?: number, compromise?: number }} lens
+ * @param {string|null|undefined} government
+ * @returns {{ evil01: number, chaos01: number }}
+ */
+function conductPlane(lens, government) {
+  const T = RELIGION_LEGITIMACY_TUNING;
+  const compromise = clamp01(Number(lens?.compromise) || 0);
+  const align = Number.isFinite(lens?.align) ? clamp01(Number(lens.align)) : 0.5;   // 0 evil … 1 good
+  const rot = 0.5 + 0.5 * compromise;                                               // 0.5 clean … 1 rotten
+  const conductEvil01 = clamp01((1 - align) * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W);
+  const govChaos = (1 - governmentLawAffinity(government)) / 2;                      // 0 lawful … 1 chaotic (0.5 neutral)
+  const conductChaos01 = clamp01(govChaos * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W);
+  return { evil01: conductEvil01, chaos01: conductChaos01 };
+}
+
+/**
+ * Signed ALIGNMENT FIT ∈ [−1,+1] of a deity's plane with the settlement's endogenous
+ * conduct: per-axis agreement (both same sign ⇒ aligned, opposite ⇒ opposed), averaged.
+ * EXACTLY 0 for a neutral deity (evil01/chaos01 = 0.5) OR neutral conduct ⇒ the reciprocal
+ * loop is invisible to legacy/neutral fixtures. Pure — read from CURRENT conduct only, so
+ * a drift in conduct erodes the signal (the "continuously fed / never perpetual" rule).
+ * @param {{ alignmentAxis?: string, lawAxis?: string }} deity
+ * @param {{ align?: number, compromise?: number }} lens
+ * @param {string|null|undefined} government
+ * @returns {number}
+ */
+function conductFitSignal(deity, lens, government) {
+  const c = conductPlane(lens, government);
+  const agreeMoral = (evil01(deity) - 0.5) * (c.evil01 - 0.5) * 4;   // −1..+1; 0 at neutral either side
+  const agreeLaw = (chaos01(deity) - 0.5) * (c.chaos01 - 0.5) * 4;
+  const s = 0.5 * (agreeMoral + agreeLaw);
+  return s < -1 ? -1 : s > 1 ? 1 : s;
+}
+
+/**
  * The 0..1 legitimacy TARGET a deity drifts toward this tick. Composes ruler
  * endorsement, neighbour recognition, accumulated tenure, and chronicle momentum,
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
  *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any,
- *   government?:string|null, pietyMult?:number|null }} args
+ *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
@@ -314,7 +383,24 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   // byte-identical. Governance form read off powerStructure (passed by the driver).
   const gov = government ?? settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName;
   const synergy = pietyMult == null ? 0 : T.SYNERGY_W * governmentLawFit(deity, gov) * pietyMult;
-  return clamp01(base + instTerm + synergy - stain);
+  // W-F4 reciprocal patron loop: an endogenous conduct-alignment term grafted onto the
+  // W_RULER family. Gated on a measured piety record (pietyMult != null) — the SAME
+  // discipline as synergy — so static/unit fixtures without piety are byte-identical, and
+  // SET_PRIMARY_DEITY (which mints no piety and no conduct fit) never feeds the loop: an
+  // imposed patron over misaligned conduct withers here until conduct comes to match.
+  // SIGNED (raises the aligned patron, erodes the misaligned) and 0 for a neutral deity.
+  const conductFit = pietyMult == null ? 0 : T.CONDUCT_FIT_W * conductFitSignal(deity, L, gov);
+  // W-F4 clergy legitimacy drag: a scandalous priesthood erodes the seat's standing,
+  // sharpened when the taint is publicly REVEALED, and modulated by the court — a ruler
+  // HOSTILE to the patron amplifies the scandal, a synergistic one shields it. EXACTLY 0
+  // for an unflawed / trait-neutral / no-religious-faction priesthood ⇒ byte-identical.
+  let clergyDrag = 0;
+  if (clergy && Number(clergy.weight) > 0) {
+    const scandal = clamp01(Number(clergy.taint) + T.CLERGY_REVEALED_SHARPEN * Number(clergy.revealedTaint));
+    const courtMod = 1 + T.CLERGY_COURT_AMP * (0.5 - deityRulerFit(deity, L)) * 2;   // hostile ⇒ >1, synergistic ⇒ <1
+    clergyDrag = T.CLERGY_SCANDAL_W * scandal * courtMod;
+  }
+  return clamp01(base + instTerm + synergy + conductFit - stain - clergyDrag);
 }
 
 /**

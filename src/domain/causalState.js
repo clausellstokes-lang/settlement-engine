@@ -69,6 +69,30 @@ import { WAR_RECOVERY_CONDITIONS } from './worldPulse/archetypeCatalog.js';
 // major/minor/cult religious-authority lift still has exactly one source.
 import { DEITY_RANK_AUTHORITY } from './deityConstants.js';
 
+// Phase 4 W-F4 (piety sites #6/#9): the LOCAL piety amplifier, read straight off
+// the projected read-model (config.faithProfile.piety, minted by the pulse at
+// tick END and consumed at the next tick's derive — the anti-runaway tick-START
+// measurement). A PLAIN FIELD READ, deliberately not a worldPulse import: it keeps
+// causalState off the cycle-sensitive layer boundary the header guards, and reads
+// 1.0 when absent — so GENERATION (which never projects a piety record) and every
+// deity-free settlement stay byte-identical. `localMult` ∈ ~[0.65,1.65] is the raw
+// local amplifier (clergy-distorted); `megaphoneLaw` ∈ [0.4,1] is the LAW-channel
+// opposed-runner-up dampener (an orderly rival muting a chaotic patron, or vice
+// versa) that the law-derived lift (site #9) takes per the per-axis dampener rule.
+/** @param {CausalSettlementSource | null | undefined} s
+ *  @returns {{ localMult: number, megaphoneLaw: number }} */
+function pietyLocalAmp(s) {
+  // The projected piety read-model is not declared on CausalSettlementSource.config
+  // (it is minted by the pulse), so bridge through `unknown` to a structural read —
+  // no `any` (the domain any-ratchet stays flat). Absent record ⇒ 1.0.
+  const cfg = /** @type {{ faithProfile?: { piety?: { localMult?: number, dampener?: { megaphoneLaw?: number } } } } | undefined} */ (
+    /** @type {unknown} */ (s?.config));
+  const p = cfg?.faithProfile?.piety;
+  const localMult = p && Number.isFinite(p.localMult) ? Number(p.localMult) : 1;
+  const megaphoneLaw = p && p.dampener && Number.isFinite(p.dampener.megaphoneLaw) ? Number(p.dampener.megaphoneLaw) : 1;
+  return { localMult, megaphoneLaw };
+}
+
 // ── Local typedefs ───────────────────────────────────────────────────────
 
 /** @typedef {import('./settlement.schema.js').FactionProfile} FactionProfile */
@@ -843,13 +867,20 @@ function deriveLawOrder(s) {
   // the two never double-count.
   const lawDir = deityLawDirection(s?.config?.primaryDeitySnapshot);
   if (lawDir !== 0) {
-    const lift = lawDir * DEITY_LAW_TUNING.lawOrderSwing;
+    // Site #9 (a LAW-derived site): piety amplifies the law swing, dampened on the
+    // LAW channel by an opposed runner-up (megaphoneLaw) — the orderly rival muting
+    // a chaotic patron's erosion, or the chaotic rival muting a lawful patron's
+    // grip, per the per-axis opposed-runner-up rule. amp = 1.0 (no record) ⇒
+    // Math.round(±swing) = the original integer lift, suffix omitted ⇒ byte-identical.
+    const { localMult, megaphoneLaw } = pietyLocalAmp(s);
+    const amp = localMult * megaphoneLaw;
+    const lift = Math.round(lawDir * DEITY_LAW_TUNING.lawOrderSwing * amp);
     score += lift;
     const deity = s.config?.primaryDeitySnapshot;
     push(contributors, deity?._deityRef || 'primaryDeity', lawDir > 0 ? 'lawful_patron' : 'chaotic_patron', lift,
       `${deity?.name || 'The patron deity'} (${deity?.lawAxis}) ${lawDir > 0
         ? 'strengthens law & order'
-        : 'erodes order and tolerates corruption'}.`);
+        : 'erodes order and tolerates corruption'}${amp !== 1 ? ` (piety ×${amp.toFixed(2)})` : ''}.`);
   }
 
   return { score, contributors };
@@ -996,9 +1027,15 @@ function deriveReligiousAuthority(s) {
   const deity = s.config?.primaryDeitySnapshot;
   const rankLift = deity ? /** @type {Record<string, number>} */ (DEITY_RANK_AUTHORITY)[String(deity.rankAxis)] : undefined;
   if (deity && rankLift != null) {
-    score += rankLift;
-    push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', rankLift,
-      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority.`);
+    // Site #6: a devout settlement's patron anchors authority harder — the LOCAL
+    // piety amplifier (localMult) scales the rank lift, inside the score clamp.
+    // localMult = 1.0 (no projected record) ⇒ Math.round(rankLift) = rankLift and
+    // the suffix is omitted ⇒ byte-identical for generation / deity-free / tick-0.
+    const { localMult } = pietyLocalAmp(s);
+    const lift = Math.round(rankLift * localMult);
+    score += lift;
+    push(contributors, deity._deityRef || 'primaryDeity', 'deity_patronage', lift,
+      `${deity.name || 'The patron deity'} (${deity.rankAxis}) anchors religious authority${localMult !== 1 ? ` (piety ×${localMult.toFixed(2)})` : ''}.`);
   }
 
   return { score, contributors };

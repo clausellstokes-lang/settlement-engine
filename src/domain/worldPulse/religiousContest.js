@@ -51,9 +51,11 @@ import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
-import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
-import { deityTemper } from './deityAxes.js';
+import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
+import { deityTemper, chaos01 } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
+import { effectiveStressorSeverity } from './stressorSeverity.js';
+import { prosperityRank } from '../../data/constants.js';
 // Phase 4 W-F3 — the piety amplifier (§2.3 sites #1/#4/#5) + the clergy lens. All
 // reads go through the identity short-circuit (absent record ⇒ 1.0), so every
 // deity-free / tick-0 / zero-span path stays byte-identical.
@@ -114,6 +116,76 @@ const OCC_CARRIER_FLOOR = 0.5;          // an occupation is itself a strong fait
 // Temperament / alignment axes mapped onto a line so opposition = distance.
 const TEMPER_POS = /** @type {Record<string, number>} */ (Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0 }));
 const ALIGN_POS = /** @type {Record<string, number>} */ (Object.freeze({ evil: 0, neutral: 0.5, good: 1 }));
+
+// ── CRISIS CONVERSION — "chaos converts in the cracks" (owner, 2026-07-10) ─────
+// Each pole converts best in the world that resembles it: law owns the long game
+// (tenure/legitimacy), so the SHORT-run counterforce is a CHAOS-SIDE receptivity
+// bonus where order is broken. It is ADDITIVE to a newcomer's receptivity (never
+// its patron FIT — endogeneity intact), keyed on the deity's chaos coordinate so a
+// lawful/neutral creed gets EXACTLY ZERO (asymmetric by design — no lawful mirror
+// penalty), and it reads a bounded DISORDER scalar over the owner's five contexts:
+// active stressors, war/occupation, the small-tier ladder (strongest at thorp,
+// faded by the government's lawfulness), compromise depth, and inverse prosperity.
+// DISORDER is 0 in a stable high-tier peaceful settlement ⇒ zero lift ⇒ byte-
+// identical (and every deity-free / law-neutral / lawful-patron fixture is untouched).
+const CRISIS_CONVERSION_TUNING = Object.freeze({
+  W_STRESSOR: 0.35,     // 1. active stressor load/severity on the settlement
+  W_WAR: 0.25,          // 2. war/occupation state (the warbound pull folds toward chaos)
+  W_TIER: 0.20,         // 3. SMALL_TIERS ladder — strongest at thorp, faded by govt lawfulness
+  W_COMPROMISE: 0.25,   // 4. compromise depth (covert+revealed rot is chaos-friendly soil)
+  W_PROSPERITY: 0.20,   // 5. inverse prosperity — chaos recruits where law didn't pay
+  // SMALL_TIERS chaos ladder (0 for town/city/metropolis — canonical TIER_ORDER).
+  TIER_LADDER: /** @type {Record<string, number>} */ (Object.freeze({ thorp: 1, hamlet: 0.6, village: 0.3 })),
+  TIER_LAW_FADE: 0.5,   // a fully-lawful government halves the small-tier bonus
+  DISORDER_MAX: 1,      // hard cap on the combined disorder scalar
+  RECEPTIVITY_MAX: 0.6, // max receptivity lift a fully-chaotic creed gets at max disorder
+});
+
+/** @param {number} x @returns {number} */
+const pos = (x) => (x > 0 ? x : 0);
+/** @param {number} x @param {number} lo @param {number} hi @returns {number} */
+const clampTo = (x, lo, hi) => (x < lo ? lo : x > hi ? hi : x);
+
+// Statuses at which a stressor no longer exerts live pressure.
+const INERT_STRESSOR_STATUS = /** @type {Set<string>} */ (new Set(['resolved', 'dormant', 'residual']));
+
+/**
+ * The 0..1 DISORDER of settlement C — the owner's five crisis contexts combined and
+ * capped. This is CHAOS-agnostic (it describes the settlement, not the creed); the
+ * chaos-side gating happens in deityLocalStrength. Pure, deterministic, tick-start.
+ * @param {{ settlement: { powerStructure?: { government?: string|null, governingName?: string|null }, economicState?: { prosperity?: string|null } } | null,
+ *   tier: string, cid: string,
+ *   occupations: Record<string, { occupierId?: string|number } | undefined> | null,
+ *   lens: { compromise?: number } | null,
+ *   worldState: { stressors?: import('../settlement.schema.js').SimStressor[] } | null }} args
+ * @returns {number}
+ */
+function crisisDisorder01({ settlement, tier, cid, occupations, lens, worldState }) {
+  const T = CRISIS_CONVERSION_TUNING;
+  // 1. active stressor load — summed effective severity of live stressors on C.
+  let stressorLoad = 0;
+  for (const s of (Array.isArray(worldState?.stressors) ? worldState.stressors : [])) {
+    if (INERT_STRESSOR_STATUS.has(String(s?.status))) continue;
+    if (!(s?.affectedSettlementIds || []).map(String).includes(String(cid))) continue;
+    stressorLoad += effectiveStressorSeverity(s, cid);
+  }
+  const stressor01 = clamp01(stressorLoad);
+  // 2. war/occupation state (siege/war manifest as stressors above; occupation is
+  //    the explicit garrison state, folding the warbound pull toward the chaos axis).
+  const war01 = occupations?.[String(cid)]?.occupierId ? 1 : 0;
+  // 3. small-tier ladder, faded by the government's lawfulness.
+  const govLaw = clampTo(governmentLawAffinity(settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName), 0, 1);
+  const tier01 = (T.TIER_LADDER[String(tier)] ?? 0) * (1 - T.TIER_LAW_FADE * govLaw);
+  // 4. compromise depth (the rulerLens covert+revealed proxy).
+  const comp01 = clamp01(Number(lens?.compromise) || 0);
+  // 5. inverse prosperity (0 when unknown — a fresh/standalone settlement injects none).
+  const rank = prosperityRank(settlement?.economicState?.prosperity);
+  const prosperity01 = rank >= 0 ? 1 - rank / 6 : 0;
+  return clampTo(
+    T.W_STRESSOR * stressor01 + T.W_WAR * war01 + T.W_TIER * tier01 + T.W_COMPROMISE * comp01 + T.W_PROSPERITY * prosperity01,
+    0, T.DISORDER_MAX,
+  );
+}
 
 /**
  * The occupation faith-pull an occupier O exerts on the city C it holds.
@@ -334,14 +406,20 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass) {
  * + corruption climate), AND by the CHRONICLE — recent settlement events that match the
  * faith's character spike its conversion (action-alignment, temporal + fading).
  * Occupation force-pull is layered on by the caller.
- * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number }} args
+ * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number, crisisDisorder?: number }} args
  */
-function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass }) {
+function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder = 0 }) {
   const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass));
   // Receptivity: the settlement's mood resists alien creeds — but a COMPROMISED populace
   // resists LESS (frayed moral fabric), so deeper corruption opens the door wider.
   const counter = moodDeity ? incumbentCounterForce(deity, moodDeity) * (1 - RELIGION_LEGITIMACY_TUNING.COMPROMISE_MOOD_EROSION * clamp01(Number(lens?.compromise) || 0)) : 0;
-  const fit = 1 - counter;
+  // Crisis conversion (chaos converts in the cracks): a CHAOS-SIDE creed reads extra
+  // receptivity where order is broken, ADDITIVE to fit and proportional to the deity's
+  // chaos coordinate × the settlement's disorder. EXACTLY 0 for a lawful/neutral creed
+  // (no mirror penalty) or a stable-peace settlement (crisisDisorder 0) ⇒ byte-identical.
+  const chaosSide = pos(2 * chaos01(deity) - 1);   // 0 lawful/neutral … 1 chaotic
+  const crisisLift = chaosSide * clamp01(crisisDisorder) * CRISIS_CONVERSION_TUNING.RECEPTIVITY_MAX;
+  const fit = 1 - counter + crisisLift;
   // Growth favour: who holds power + the corruption climate speed or slow conversion.
   const growth = lens ? deityGrowthFavor(deity, lens) : 0.5;
   // Chronicle: recent events whose character matches this faith spike its growth (and
@@ -475,6 +553,11 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // Religious-institution backing (0..1): temples lend creed-agnostic legitimacy to
     // whatever faith holds the seat. Computed once per settlement (read off institutions).
     const institutionBacking = institutionBackingOf(settlement);
+    // The clergy plane (W-F3 leaf) — WHO ministers, distinct from who governs. Computed
+    // ONCE per settlement and shared by the legitimacy target (W-F4 scandal drag) and the
+    // piety record (W-F3 bleed-through). Zero on every field for an unflawed / no-clergy
+    // priesthood ⇒ byte-identical.
+    const clergyPlane = readClergyPlane(settlement);
     // This settlement's faith mass (by current tier) — scales how hard neighbouring
     // faiths press on it: a small settlement is swayed strongly by a big neighbour.
     const targetMass = faithMass(settlement);
@@ -485,6 +568,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // no measured piety, so the legitimacy synergy stays exactly 0 on those fixtures.
     const pietyMult = pietyMultOf(settlement);
     const pietySynergy = settlement?.config?.faithProfile?.piety ? pietyMult : null;
+    // Crisis conversion: the settlement's DISORDER (owner's five contexts), computed once
+    // per settlement per tick. Chaos-side newcomers read extra receptivity from it inside
+    // deityLocalStrength; a stable high-tier peaceful settlement reads 0 (byte-identical).
+    const crisisDisorder = crisisDisorder01({ settlement, tier, cid, occupations, lens, worldState });
 
     // 3a. entries — faiths reaching C not yet present (or resurging from suppression).
     if (reaching) {
@@ -495,7 +582,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         // Site #1 (conversion pressure): amplify the target-side local strength — a
         // devout town is a fiercer battleground both to hold and to take. The
         // occupation lift (#2) inherits via this amplified strength (not double-counted).
-        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass }));
+        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder }));
         if (occupied) {
           const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
           if (pull) {
@@ -515,7 +602,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       const carrier = reaching?.get(dref)?.carrier ?? (dref === state.patronRef ? 0.5 : 0.25);   // home faith keeps innate footing
       // Site #1 (share targets): the SAME target-side piety amplification on every
       // present faith's growth toward its strength (hold AND take, symmetric).
-      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass }));
+      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder }));
     }
     advanceShares(state, strengthByRef);
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
@@ -524,7 +611,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       const entry = state.deities[dref];
       if (entry.suppressed) continue;
-      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor, government: settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName, pietyMult: pietySynergy });
+      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor, government: settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName, pietyMult: pietySynergy, clergy: clergyPlane });
       stepDeityLegitimacy(entry, target);
     }
     // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
@@ -548,7 +635,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       authority01,
       institutionBacking,
       devotion01: devotionOf(state),
-      clergy: readClergyPlane(settlement),
+      clergy: clergyPlane,
       realmMult,
       dampener: oppositionDampener(state),
     });
