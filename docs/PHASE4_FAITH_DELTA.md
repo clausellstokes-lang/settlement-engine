@@ -913,3 +913,16 @@ the spread-plausibility problem existed only because mechanical habitats were in
   demand proves it. W-F5's governed starting-pantheon pool carries VARIETY as content
   (name/flavor archetypes), not mechanics.
 The legibility allocation (cause chains pinned at authorship, prose at W-F6) is unaffected.
+
+### The clergy lens (OWNER, 2026-07-10 — lands W-F3/W-F4)
+The character of the RELIGIOUS AUTHORITY's own NPCs — temperament and flaws of the faction's
+staffing clergy, aggregated by orgPower — modulates the LOCAL faith dynamics (distinct from
+the existing ruler/compromised-rulership lens, which reads who governs, not who ministers):
+(a) PIETY bleed-through — flawed/compromised clergy weaken or DISTORT the amplifier (the
+god's influence arrives through bad priests); (b) LEGITIMACY — a scandalous high priest is a
+legitimacy drag, sharpened when covert compromise turns revealed; (c) CONVERSION defense
+where appropriate — zealous clergy resist rival cults, corruptible ones leave the door open.
+Substrate exists (npcAlignmentScore/npcCorruptibleFlaw imports, orgPower); the wiring is new.
+Closes the loop with evil-corrupts-own-faithful: an evil patron degrades its clergy, whose
+flaws erode the legitimacy keeping it seated — evil faiths carry their own succession crisis.
+Cause chains per the legibility law; neutral/unflawed clergy = exact zero deltas.
