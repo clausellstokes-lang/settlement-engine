@@ -1,7 +1,7 @@
 /**
  * Property-based tests for the full generation pipeline.
  *
- *   1. Generation never throws across the (tier × culture × terrain ×
+ *   1. Generation never throws across the (tier × culture × terrainOverride ×
  *      tradeRouteAccess) config space
  *   2. Output is structurally complete — required fields present and
  *      well-typed, regardless of config
@@ -13,8 +13,11 @@
  * specific points in the config space. Properties fuzz the rest. If a
  * new tier × terrain combination breaks the engine, the fixed-fixture
  * tests miss it but a property catches it and shrinks the failure to a
- * minimal repro. numRuns is intentionally low (~15-25) because each
- * generation runs the full pipeline (~10ms each, ~250ms per property).
+ * minimal repro. numRuns is bounded by the cost of the full pipeline
+ * (~10ms each): the single-generation properties run ~100 cases, while
+ * the seed-sensitivity property runs fewer cases because each case does
+ * 16 generations (8 paired runs), keeping the per-property wall time
+ * comparable.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -23,17 +26,22 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 
 // Valid values cribbed from src/data/constants.js + existing fixtures.
 // Random/custom tiers are excluded because they trigger different code
-// paths the example tests cover better.
+// paths the example tests cover better. terrainOverride is the LIVE terrain
+// key (terrainHelpers.getTerrainType / resolveConfig read it; a bare `terrain`
+// is inert), and its seven tokens are the vocabulary the pipeline actually
+// resolves — so this axis fuzzes real terrain branches, not a dead field. The
+// extra 'auto' token leaves terrainOverride unpinned, so the terrain comes from
+// the route (route-derived terrain) — fuzzing that branch too.
 const tier            = fc.constantFrom('thorp', 'hamlet', 'village', 'town', 'city', 'metropolis');
 const culture         = fc.constantFrom('germanic', 'celtic', 'norse', 'mediterranean');
-const terrain         = fc.constantFrom('grassland', 'forest', 'river', 'coastal', 'mountains', 'swamp');
+const terrainOverride = fc.constantFrom('plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert', 'auto');
 const tradeRoute      = fc.constantFrom('road', 'river', 'port', 'crossroads', 'isolated', 'none');
 const monsterThreat   = fc.constantFrom('safe', 'civilized', 'frontier', 'plagued');
 
 const configArb = fc.record({
   settType:         tier,
   culture,
-  terrain,
+  terrainOverride,
   tradeRouteAccess: tradeRoute,
   monsterThreat,
 });
@@ -61,7 +69,7 @@ describe('pipeline (property-based)', () => {
   test('generation never throws across the config space', () => {
     fc.assert(fc.property(configArb, (config) => {
       expect(() => gen(config)).not.toThrow();
-    }), { numRuns: 25 });
+    }), { numRuns: 100 });
   });
 
   test('output is structurally complete for any valid config', () => {
@@ -87,7 +95,7 @@ describe('pipeline (property-based)', () => {
       expect(s.history).toBeDefined();
       // EconomicState always present.
       expect(s.economicState).toBeDefined();
-    }), { numRuns: 25 });
+    }), { numRuns: 100 });
   });
 
   test('same seed produces structurally identical output (determinism)', () => {
@@ -95,7 +103,7 @@ describe('pipeline (property-based)', () => {
       const a = gen(config, { seed: SEED });
       const b = gen(config, { seed: SEED });
       expect(fingerprint(a)).toEqual(fingerprint(b));
-    }), { numRuns: 15 });
+    }), { numRuns: 100 });
   });
 
   test('same seed produces a DEEP-identical settlement (full-JSON determinism)', () => {
@@ -109,7 +117,7 @@ describe('pipeline (property-based)', () => {
       const a = gen(config, { seed: SEED });
       const b = gen(config, { seed: SEED });
       expect(JSON.stringify(a)).toBe(JSON.stringify(b));
-    }), { numRuns: 15 });
+    }), { numRuns: 100 });
   });
 
   test('different seeds usually produce different fingerprints (seed sensitivity)', () => {
@@ -131,14 +139,14 @@ describe('pipeline (property-based)', () => {
       // legitimately match across seeds. But if ALL 8 pairs match, the
       // seed is being ignored.
       expect(differingPairs).toBeGreaterThanOrEqual(3);
-    }), { numRuns: 6 });
+    }), { numRuns: 25 });
   });
 
   // Bonus: thorps are tiny — population should fit in the tier band.
   test('thorps stay under 60 population', () => {
-    fc.assert(fc.property(culture, terrain, (cul, terr) => {
-      const s = gen({ settType: 'thorp', culture: cul, terrain: terr, tradeRouteAccess: 'isolated' });
+    fc.assert(fc.property(culture, terrainOverride, (cul, terr) => {
+      const s = gen({ settType: 'thorp', culture: cul, terrainOverride: terr, tradeRouteAccess: 'isolated' });
       expect(s.population).toBeLessThanOrEqual(60);
-    }), { numRuns: 12 });
+    }), { numRuns: 100 });
   });
 });
