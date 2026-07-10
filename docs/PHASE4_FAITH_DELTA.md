@@ -1030,6 +1030,9 @@ best in the world that resembles it (law already owns the long game via tenure/l
    rot is chaos-friendly soil exactly as it is evil-friendly; complements the existing
    evil-side amplifiers (COMPROMISE_EVIL_AMP / MOOD_EROSION stay as-is). The corruption
    plane feeds back on BOTH of its own axes.
+5. LOW PROSPERITY (OWNER): chaotic receptivity scales inversely with the settlement's
+   prosperity (existing economicState measure) — prosperity is the lawful planner's reward,
+   so its absence marks where order failed to deliver; chaos recruits where law didn't pay.
 CONSTRAINTS: asymmetric by design — chaos gains in disorder, lawful creeds take NO mirror
 penalty (no double-count). Modulates RECEPTIVITY, never patron FIT — what a settlement
 SUFFERS shapes who can convert it; what it CHOOSES shapes which god it keeps (endogeneity
