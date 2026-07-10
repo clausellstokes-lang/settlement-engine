@@ -44,6 +44,7 @@ schema churns after surfaces are adopted. <!-- @enforced-by the provenance pin, 
 | **Launch health** (client_error_events 081, edge error rates, refund rates) | Alert thresholds tested against injected errors | The launch-day watch board | SLO drift tracking |
 | **Worldbuilder dataset** | Schema + k-anonymized export pipeline built and PROVEN on the synthetic corpus (a synthetic sample is itself publishable/demoable) | Accumulation begins — consented `production` corpus only, structure-only (never names/prose/secrets, per the Privacy & data copy) | Versioned snapshots ship when per-cell n ≥ registry floors |
 | **Statistical guards** | Per-metric min-n floors + methods added to METRICS_REGISTRY.md; enforced by pin | Same guards protect the small launch cohorts from misleading reads | Same guards gate dataset snapshot releases |
+| **Retention pull** (owner gap item, 2026-07-10) | "Your realm this week" digest engine built + tested against synthetic chronicles (pg_cron rollup → send-email template, honoring the account email-prefs/unsubscribe that land in merge wave 4); in-app "while you were away" panel ships live immediately | Digest cron arms for consented `production` users | The living world writes to lapsed DMs — the sim as its own re-engagement engine |
 
 ## 3. The switchboard
 
