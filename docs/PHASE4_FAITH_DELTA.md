@@ -926,3 +926,25 @@ Substrate exists (npcAlignmentScore/npcCorruptibleFlaw imports, orgPower); the w
 Closes the loop with evil-corrupts-own-faithful: an evil patron degrades its clergy, whose
 flaws erode the legitimacy keeping it seated — evil faiths carry their own succession crisis.
 Cause chains per the legibility law; neutral/unflawed clergy = exact zero deltas.
+
+### Clergy lens REFINED — per-trait plane projection (OWNER, 2026-07-10; supersedes the aggregate form above)
+Not an aggregate clergy-quality scalar: EACH specific temperament and EACH specific flaw
+individually carries a lean on (lawful|neutral|chaotic) x (good|neutral|evil) — one
+trait->plane mapping table (coarse leans, many traits neutral, content-reviewable; extends
+npcData's TRAIT_ALIGNMENT precedent to both axes).
+- NPC reading = influence-weighted sum of their traits' leans, COMPLICATED BY COMPROMISED
+  (compromise shifts/reweights the reading); faction reading = NPC readings x orgPower,
+  scaled by the religious authority's strength; CROSS-TERM: the ruling authority's alignment
+  synergy with the deity modulates how much clergy character matters (hostile court amplifies
+  scandals, synergistic court shields).
+- CONSUMPTION: character-fit of ministering clergy vs the patron's plane position ->
+  legitimacy; misaligned influential clergy -> conversion as TARGETED FOOTHOLDS (the rival
+  whose plane matches a specific NPC's traits recruits THAT NPC — usurpation is cast, named,
+  and narratable per the legibility law); coherence of clergy with patron -> piety
+  bleed-through (amplification).
+- CONFLICTED NPCs: a single NPC's conflicting flaw/temperament leans are NOT averaged away —
+  variance = instability of their standing with the patron and their availability to
+  usurpers; aligned traits = coherent, stronger transmission.
+- Trait-neutral clergy = exact zero deltas (neutrality theorem); pure projection, rng-free.
+- LANDING: trait->plane table + piety bleed seam = W-F3 (seam shaped per-trait); full
+  legitimacy/conversion/foothold consumption = W-F4.
