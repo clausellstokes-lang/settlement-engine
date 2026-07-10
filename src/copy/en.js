@@ -24,6 +24,12 @@
  * (so the bug is loud, not silent).
  *
  * Source: UI Redesign PDF §18 (page-by-page verbatim copy reference).
+ *
+ * This is the SINGLE copy registry. The retired copy/strings.js `COPY` map
+ * was folded in here (its surfaces — generate/save/detail/events/timeline/ai/
+ * export/pricing-moments/state/lifecycle — all resolve through `t()`/`tx()`),
+ * so there is exactly one source per fact (F45). See the Wave 4b sub-wave plan
+ * for the strings.js → en.js key-mapping table.
  */
 
 export const en = Object.freeze({
@@ -44,7 +50,7 @@ export const en = Object.freeze({
   },
 
   // ── Hero (homepage anonymous-first generator) ─────────────────────────────
-  // Pre-P117 strings preserved for the legacy hero variant. The two-voice
+  // Original strings preserved for the legacy hero variant. The two-voice
   // rewrite lives under `hero.v2.*` and is selected when the
   // `homepage.heroV2` flag is on.
   hero: {
@@ -55,7 +61,7 @@ export const en = Object.freeze({
     cta:        'Begin a settlement',
     ctaSubline: 'No account needed. Your first dossier is yours to keep.',
     note:       'Free anonymous generations are capped at town size. Sign in to push further.',
-    // ── P117 two-voice rewrite ──────────────────────────────────────────
+    // ── Two-voice rewrite ───────────────────────────────────────────────
     v2: {
       headline:     'Most generators roll on a table.',
       headlineAccent: 'This one simulates.',
@@ -63,14 +69,23 @@ export const en = Object.freeze({
       ctaTemplate:  'Forge a {tier} →',
       subline:      '{remaining} of {cap} free today · no account',
     },
-    // ── P108 anon cap as unlock (X-5) ───────────────────────────────────
+    // ── Anonymous cap framed as an unlock ───────────────────────────────
     capUnlock: {
       headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:       'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
-      sideDoor:   'or just take this one: buy the dossier for $2.99 ↓',
+      sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
-    // ── P115 return-visit ───────────────────────────────────────────────
+    // ── At-cap unlock copy rendered by HomeHero ─────────────────────────
+    // `spent` is the quiet recap; `unlockTpl` is the louder next-step value.
+    // The lead phrase is bolded in JSX, so it lives in its own key and the
+    // template carries a {signin} placeholder where that bold span renders.
+    anonCap: {
+      signin:    'Sign in (free)',
+      spent:     'You’ve explored hamlet, village, town.',
+      unlockTpl: '{signin} to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+    },
+    // ── Return-visit ────────────────────────────────────────────────────
     welcomeBack: {
       eyebrow:    'Welcome back',
       titleTpl:   'It’s been {days} days, {name}.',
@@ -88,6 +103,12 @@ export const en = Object.freeze({
     subtitle: 'Pick a size and a region. The rest is up to the simulator.',
     button:   'Generate',
     subline:  'Roughly 10 to 20 seconds. Watch the pipeline as it runs.',
+    // Pre-generate config-screen header (canonical PageHeader idiom).
+    introEyebrow:  'Forge a settlement',
+    introTitle:    'Create a settlement',
+    // Mode-specific guidance, chunked to one idea per sentence (voice rule 6).
+    introSubtitleBasic:    'Pick a character and set the foundations, then generate. The simulator fills in everything else. To shape institutions, services, and trade yourself, switch to Advanced.',
+    introSubtitleAdvanced: 'Pick a character and the foundations. Open Fine-tune and the deep constraints to control institutions, services, and trade. Generate when ready.',
     sizes: {
       thorp:   'Thorpe',
       hamlet:  'Hamlet',
@@ -104,6 +125,12 @@ export const en = Object.freeze({
       city:    'Politics. Districts. Things that go wrong at scale.',
       metropolis: 'The seat of something larger than itself.',
     },
+    // Mode selector (migrated from copy/strings.js `generate.*`). One verb per
+    // action class: Forge (first generation) / Reforge (regenerate). "Draft" is
+    // the artifact noun (draft → canon lifecycle is preserved).
+    quickMode:    { title: 'Basic Generate',    cta: 'Forge a Draft',  subtitle: 'Minimal config. Set the foundations and go.' },
+    advancedMode: { title: 'Advanced Generate', cta: 'Forge a Draft',  subtitle: 'Full configuration, step by step' },
+    regenerate:   { cta: 'Reforge Draft',       confirm: 'Reforge the settlement? All unsaved placements will be lost.' },
   },
 
   // ── Pipeline rail ("How this was simulated") ──────────────────────────────
@@ -119,15 +146,26 @@ export const en = Object.freeze({
 
   // ── Auth modal ────────────────────────────────────────────────────────────
   auth: {
+    modalTitle: 'Welcome back',
     title:    'Sign in to keep your work',
-    subtitle: 'Saves, exports, larger settlements, and the Neighbourhood System.',
-    signinSubtitle: 'Sign in to keep your work: saves, exports, larger settlements, and the Neighbourhood System.',
-    signupSubtitle: 'Create a free {tier} account to save your work, push to larger sizes, and link settlements in the Neighbourhood System.',
+    subtitle: 'Saves, larger settlements, and the Neighbourhood System.',
+    signinSubtitle: 'Sign in to keep your work: saves, larger settlements, and the Neighbourhood System.',
+    signupSubtitle: 'Create a free {tier} account to save your work, reach larger sizes, and link settlements in the Neighbourhood System.',
+    resetPageSubtitle: 'We will email you a secure link to set a new password.',
     discord: {
       label:       'Continue with Discord',
       placeholder: 'Coming soon. We’re finishing the OAuth review.',
     },
     google:  { label: 'Continue with Google' },
+    oauth: {
+      // Divider shown above the Google/Discord buttons, which sit BELOW the
+      // email/password form as alternatives to the primary password path.
+      divider:  'or continue with',
+      // Safe, non-leaky fallback when an OAuth sign-in fails for an unknown
+      // reason. The account-linking conflict message is generated in
+      // lib/auth.js (describeOAuthError) so it can stay close to the error.
+      failed:   'Sign-in failed. Please try again.',
+    },
     email: {
       label:       'Send a magic link',
       placeholder: 'you@example.com',
@@ -135,75 +173,223 @@ export const en = Object.freeze({
     },
     password: {
       label:    'Sign in with a password',
+      show:     'Show password',
+      hide:     'Hide password',
       forgot:   'Forgot password?',
       register: 'Create an account',
     },
     button: {
-      working:     'Working...',
-      sendLink:    'Send sign-in link',
-      createAcct:  'Create account',
-      signIn:      'Sign in',
+      working:        'Working...',
+      sendLink:       'Send sign-in link',
+      emailLink:      'Email me a sign-in link',
+      createAcct:     'Create account',
+      signIn:         'Sign in',
+      resend:         'Resend link',
+      differentEmail: 'Use a different email',
+      backToSignIn:   'Back to sign in',
+      // ── Retained from OUR AuthPanel (surviving until 4d adopts their auth
+      //    surfaces): the "more sign-in options" disclosure + method toggle.
       moreOpen:    'More sign-in options',
       moreClose:   'Hide more options',
       usePassword: 'Use a password instead',
       useMagic:    'Use a magic link instead (recommended)',
     },
+    // Password-reset request: the prose intro and the post-send confirmation.
+    // Formal register, no contractions (auth/security copy).
+    reset: {
+      prose: 'Enter your email address and we will send a link to reset your password.',
+      sent:  'Check your email for a password reset link.',
+    },
+    // Forgot-password challenge flow (the multi-step reset mode). Step 1 looks
+    // the email up; step 2 asks ONE of the account's two security questions at
+    // random; a correct answer mails the reset link. The user chose to reveal
+    // whether an account exists, so `noAccount` is an honest miss. Formal
+    // register, no contractions (auth/security copy).
+    recovery: {
+      lookupProse:   'Enter your email address. If it has an account with a security question set, we will ask you that question to confirm it is you.',
+      lookupCta:     'Continue',
+      noAccount:     'We could not find an account for that email address. Check the spelling, or create a new account.',
+      noQuestion:    'This account does not have a security question set, so it cannot be recovered this way. Try an email sign-in link instead.',
+      questionProse: 'Answer your security question to confirm this account is yours.',
+      answerLabel:   'Your answer',
+      verifyCta:     'Verify answer',
+      sent:          'That matched. Check your email for a link to set a new password.',
+      wrongAnswer:   'That answer did not match. Check it and try again.',
+      tooMany:       'Too many attempts. Wait a few minutes, then try again.',
+      unavailable:   'Account recovery is unavailable right now. Please try again shortly.',
+      startOver:     'Start over with a different email',
+    },
+    // Set-new-password page (the recovery-link landing). When a recovery session
+    // is active the form below completes the reset; otherwise the page falls back
+    // to the request form. Formal register, no contractions (auth/security copy).
+    setNew: {
+      title:        'Set a new password',
+      prose:        'Choose a new password for your account. You are signed in through your recovery link.',
+      requestProse: 'This page completes a password reset. Open it from the link in your reset email, or request a new link below.',
+      newLabel:     'New password',
+      confirmLabel: 'Confirm new password',
+      submit:       'Set new password',
+      success:      'Your password is set. Taking you to your settlements…',
+      failed:       'We could not set your password. The recovery link may have expired. Request a fresh one.',
+      requestLink:  'Send a reset link',
+    },
+    // Magic-link "check your inbox" close. {email} is interpolated; the link
+    // window is a scannable spec, so a digit is acceptable there.
+    magic: {
+      sent: 'Check {email} for a sign-in link. The link works for 1 hour.',
+    },
+    // Post sign-up email verification close. {email} is interpolated.
+    // `sent` is AuthPanel's inline close; the rest power the /verify-email
+    // link-landing page, a thin status surface over auth state (loading /
+    // confirmed / expired). Supabase confirms via the emailed link, so there
+    // is no code field here.
+    verify: {
+      sent:       'We sent a confirmation link to {email}. Check your inbox and click the link to activate your account.',
+      title:      'Verify your email',
+      confirming: 'Confirming your email…',
+      confirmed:  'Your email is confirmed. Taking you to your settlements…',
+      expired:    'This confirmation link is invalid or has expired. Try signing in. If your account is not active yet, request a fresh link.',
+      continue:   'Continue',
+      goSignIn:   'Go to Sign In',
+      // The post-signup "check your inbox" screen now waits for the confirmation
+      // link and signs the original window in automatically. These lines explain
+      // that wait, calmly, with no countdown drama.
+      polling:    'Keep this window open. The moment you confirm your email, here or on any device, we will sign you in automatically.',
+      pollingTimedOut: 'We are still waiting on your confirmation. Once you have clicked the link, you can sign in directly.',
+    },
+    // Security questions, captured at sign-up (email/password accounts only).
+    // The answers are hashed on the server and never reach the client; these
+    // strings are the form labels and validation messages. Formal register, no
+    // contractions (auth/security copy).
+    security: {
+      heading:     'Security questions',
+      prose:       'Pick two questions and answer them. We will ask one of them at random if you ever need to recover your account.',
+      question1:   'First question',
+      question2:   'Second question',
+      answer1:      'Answer to the first question',
+      answer2:      'Answer to the second question',
+      choosePrompt: 'Choose a question',
+      error: {
+        bothRequired: 'Choose both questions and answer each one.',
+        distinct:     'Choose two different questions.',
+      },
+      // Non-fatal: the account exists, but the answers did not save on the first
+      // try. We point the user at the account-page section that now exists for
+      // setting them later (see security.account below).
+      saveDeferred: 'Your account is ready. You can set your security questions later in the Account recovery questions section of your account page.',
+      // Account-page section: a signed-in user sets or replaces their two
+      // recovery questions here. Formal register, no contractions.
+      account: {
+        heading:     'Account recovery questions',
+        prose:       'Set two questions and answers. If you ever forget your password, we will ask one of them at random to confirm the account is yours.',
+        statusSet:    'Your recovery questions are set.',
+        statusNotSet: 'You have not set any recovery questions yet.',
+        currentLabel: 'Current questions',
+        edit:        'Set recovery questions',
+        replace:     'Replace recovery questions',
+        cancel:      'Cancel',
+        save:        'Save recovery questions',
+        saving:      'Saving',
+        saved:       'Your recovery questions are saved.',
+        saveError:   'We could not save your recovery questions. Please try again.',
+        // Gentle, non-blocking nudge shown on the account page when no questions
+        // are set. Points to this same section.
+        nudge:       'Set up account recovery questions so you can reset your password if you ever forget it.',
+      },
+    },
+    // Minimal email-confirmation landing page. The confirmation link lands here,
+    // NOT in the original signup window — that window polls and signs itself in.
+    // This page just confirms the click and invites the user to close the tab.
+    confirm: {
+      title:       'Email confirmed',
+      confirming:  'Confirming…',
+      confirmed:   'Your email is confirmed. You can close this tab. Your original window is signing you in.',
+      // Browsers block scripts from closing tabs the user opened, so the close
+      // button is best-effort and we say so plainly.
+      closeTab:    'Close this tab',
+      closeNote:   'If this tab does not close, you can close it yourself.',
+      failed:      'We could not confirm this link. It may have expired. Return to sign in and request a fresh one.',
+      goSignIn:    'Go to sign in',
+    },
     placeholder: {
-      email:    'Email address',
-      password: 'Password',
+      email:           'Email address',
+      password:        'Password',
+      confirmPassword: 'Confirm password',
     },
     rememberMe: 'Remember me on this device',
     localMode:  'Running in local mode. No backend configured.',
     error: {
       generic:    'Something went wrong. Try again.',
-      invalid:    'That email or password didn’t work.',
+      invalid:    'That email or password did not work.',
       rateLimit:  'Too many attempts. Try again in a minute.',
       network:    'No network. Check your connection.',
+      // Bare fallbacks for the auth handlers. Each states what went wrong and
+      // what to do, with no blame. Formal register, no contractions (auth copy).
+      // The catch sites keep `e.message || t(...)` so an upstream lib message
+      // still wins; only these literals moved off the handler.
+      passwordTooShort: 'Your password must be at least six characters.',
+      passwordMismatch: 'Those passwords do not match.',
+      passwordRequired: 'Enter a new password to continue.',
+      emailRequired:    'Enter your email address to continue.',
+      signInFailed:     'We could not sign you in. Please try again.',
+      signUpFailed:     'We could not create your account. Please try again.',
+      resetFailed:      'We could not send the password reset link. Please try again.',
+      magicLinkFailed:  'We could not send the sign-in link. Please try again.',
+      oauthFailed:      'We could not complete the sign-in. Please try again.',
     },
     legal: 'By continuing you agree to the Terms and Privacy Policy.',
   },
 
   // ── Pricing ───────────────────────────────────────────────────────────────
   pricing: {
+    eyebrow:      'Plans',
     pageTitle:    'Pricing',
-    pageSubtitle: 'Pay once for credits. Subscribe if you want more room.',
+    pageSubtitle: 'Generate a town in seconds. Then run the region for years.',
     antiAi:       'Settlements are simulated from constraints, not generated by AI. Only the optional Narrative Layer uses language synthesis, and it grounds itself in the simulator output.',
     tiers: {
+      heading:     'Subscription tiers',
       wanderer: {
         name:        'Wanderer',
         priceLabel:  'Free',
         priceSub:    'forever',
         tagline:     'For the curious DM trying things out.',
         cta:         'Start free',
+        // Size is FREE: a free account generates ANY size up to metropolis
+        // (anon visitors cap at town — signing up is what unlocks full size).
         features: [
+          'Generate any size, from hamlet to metropolis',
           '3 saved settlements',
-          'Up to town size',
-          'PDF export of any saved dossier',
+          'Share your settlements to the community Gallery',
+          'Keep any dossier’s PDF for $2.99, yours to re-download',
           'Pay-per-use narrative refinement (credit packs)',
         ],
       },
       cartographer: {
         name:        'Cartographer',
-        priceLabel:  '$6',
+        priceLabel:  '$5.99',
         priceSub:    'per month',
-        tagline:     'For the DM running a real campaign.',
+        tagline:     'For the DM running a campaign.',
         cta:         'Subscribe',
+        // NOTE: size is FREE (free accounts reach metropolis), so "capital size"
+        // is no longer a premium bullet. The premium product is the living
+        // SIMULATION; storage/saves stays as a secondary bullet.
         features: [
-          'Unlimited saves',
-          'Up to capital size',
-          'Neighbourhood System (linked settlements)',
-          'PDF + JSON export',
-          'Map supply chains across settlements',
-          'Pay-per-use narrative refinement (credit packs)',
+          'Advance time and run the region for years',
+          'Campaigns: link settlements into one living world',
+          'The self-ending war layer + the living pantheon',
+          'Custom content + import settlements from the Gallery',
+          'Unlimited saves + cloud sync',
+          'Unlimited PDF and JSON export of every settlement',
+          '30 narrative credits every month, then pay-per-use packs',
         ],
       },
       founder: {
         name:        'Founder Lifetime',
         priceLabel:  '$99',
         priceSub:    'one-time',
-        tagline:     'The first 500 supporters keep Cartographer forever.',
+        tagline:     'The first 30 supporters keep Cartographer forever.',
         cta:         'Claim a Founder seat',
-        seatsRemaining: '{remaining} of 500 seats remaining.',
+        seatsRemaining: '{remaining} of 30 seats remaining.',
         features: [
           'Everything in Cartographer, forever',
           'Founder badge on your dossiers',
@@ -220,13 +406,95 @@ export const en = Object.freeze({
     },
     creditPacks: {
       heading:  'Narrative Credit Packs',
-      subhead:  'Buy in bulk for a deeper discount. Credits never expire.',
+      subhead:  'A credit refines one settlement\'s data into narrated prose. Buy in bulk for a deeper discount. Purchased credits never expire.',
       pack:     '{credits} credits',
       perEach:  '{price}/ea',
       best:     'Best value',
       value:    'Most popular',
     },
     faqLink: 'See the full pricing FAQ',
+
+    // ── Simulation-led pricing variant (A/B) ───────────────────────────────
+    // Selected when the `pricingSimulationCopy` flag is ON. Leads with the
+    // actual premium product — the living simulation — and DELIBERATELY names
+    // NO size/metropolis/capital as a premium feature (size is free). The
+    // storage/saves line stays present but as a SECONDARY bullet. The
+    // Wanderer variant explicitly states full-size generation is free.
+    variant: {
+      pageSubtitle: 'Generate a town in seconds. Then run the region for years.',
+      tiers: {
+        wanderer: {
+          tagline:  'Generate any size from hamlet to metropolis, free. See if a campaign takes root.',
+          features: [
+            'Generate any size, from hamlet to metropolis, free',
+            '3 saved settlements',
+            'Share your settlements to the community Gallery',
+            'Keep any dossier’s PDF for $2.99, yours to re-download',
+            'Pay-per-use narrative refinement (credit packs)',
+          ],
+        },
+        cartographer: {
+          tagline:  'Generate a town in seconds, then run the region for years.',
+          features: [
+            'Advance time and the region runs for years',
+            'The self-ending war layer: sieges, coalitions, conquest',
+            'The living pantheon: deities contest converts and rise',
+            'Campaigns + a chronicle that writes itself',
+            'Custom content + import settlements from the Gallery',
+            'Unlimited saves + cloud sync',   // secondary bullet — storage stays
+            'Unlimited PDF and JSON export of every settlement',
+            '30 narrative credits every month, then pay-per-use packs',
+          ],
+        },
+        founder: {
+          tagline:  'The whole living simulation, forever. Pay once.',
+          features: [
+            'Everything in Cartographer, forever',
+            'Founder badge on your dossiers',
+            'Direct line to the dev (Discord)',
+            'Early access to new simulators',
+          ],
+        },
+      },
+    },
+  },
+
+  // ── The "What the Realm unlocks" value ladder ────────────────────────────
+  // Three rungs (anon TRIES / free SAVES + full-size generation / premium
+  // SIMULATES), lens-labeled. Size is FREE — it lives on the FREE rung, never
+  // pitched as premium. Rendered on the About landing + the canonical
+  // premium-value surface (PricingPage). Lens labels tailor the headline to
+  // the reader (new DM → "a great town in seconds"; worldbuilder → "a living
+  // region you can run").
+  valueLadder: {
+    heading:  'Three rungs, one engine',
+    subhead:  'It generates a town in seconds, then it runs the region for years.',
+    lens: {
+      new:          'A great town in seconds, then a region that grows with you.',
+      intermediate: 'A town a week, then a campaign that runs itself.',
+      worldbuilder: 'A living region you can run for years.',
+    },
+    rungs: {
+      tries: {
+        eyebrow: 'Try it',
+        tier:    'No account',
+        body:    'Generate a coherent town up to town size, no signup. See the moat before you commit.',
+        cta:     'Forge a settlement',
+      },
+      saves: {
+        eyebrow: 'Save it',
+        tier:    'Free account',
+        // Full-size generation belongs to the FREE rung — size is not premium.
+        body:    'A free account generates any size, from hamlet to metropolis, and saves your work. Keep any dossier’s PDF for $2.99.',
+        cta:     'Create a free account',
+      },
+      simulates: {
+        eyebrow: 'Run it',
+        tier:    'Cartographer',
+        body:    'Advance time and the region runs for years: wars ignite and end, faiths rise, trade routes flip, and a chronicle writes itself. Off by default, opt-in, reversible.',
+        cta:     'See what the Realm unlocks',
+      },
+    },
   },
 
   // ── AI feature labels (with inline cost) ─────────────────────────────────
@@ -260,6 +528,10 @@ export const en = Object.freeze({
     // ai.narrative.button / ai.insufficient) of always pluralizing "credits" —
     // the narrative cost is 3 (fast 2), so the singular case never renders.
     inlineHint:   '{cost} credits · streams section by section · partial failures keep your raw draft intact',
+    // Regenerate / progress verbs (migrated from copy/strings.js `ai.*`).
+    regenerateCta:  'Regenerate narrative',
+    regenerateHint: '{cost} credits · replaces the current prose with a fresh pass',
+    progressCta:    'Apply event and progress narrative',
   },
 
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
@@ -294,6 +566,19 @@ export const en = Object.freeze({
       step3Body:    'Sign in and your work survives the tab close. Your first three saves are free.',
       dismiss:      'I’ve got it from here',
     },
+    firstRun: {
+      stepCounter:  'Step {current} of {total}',
+      step0Title:   "Let's build your first settlement",
+      step0Body:    'Pick a size below (Thorp is small, Metropolis is huge), then click Generate. You can always regenerate or tweak the sliders.',
+      step1Title:   'Ready to forge your world',
+      step1Body:    'Hit the Generate button below. Every click rolls a fresh settlement shaped by your choices. Economy, factions, NPCs, crises.',
+      step2Title:   'Here it is. Explore the tabs',
+      step2Body:    'Each tab reveals a different layer: Summary hooks, Daily Life, Economics, Power, NPCs, History, and more. Click around.',
+      step3Title:   "You're all set",
+      step3Body:    'Save this to your library, keep its PDF for $2.99, or start a new settlement. The top tabs hold the Compendium, the World Map, and deeper guides.',
+      finish:       'Finish tour',
+      dismiss:      'Dismiss onboarding',
+    },
     checklist: {
       title:           'Get the most from SettlementForge',
       subtitle:        'Five small things. Knock them out as you explore.',
@@ -302,13 +587,13 @@ export const en = Object.freeze({
       itemRail:        'Tap a step in the simulation rail',
       itemSave:        'Save the dossier',
       itemNeighbour:   'Link a second settlement (Neighbourhood System)',
-      completeBadge:   'Complete!',
+      completeBadge:   'Complete',
     },
   },
 
   // ── Account page ─────────────────────────────────────────────────────────
   account: {
-    setDisplayName:        'Set Display Name',
+    setDisplayName:        'Set display name',
     subscriptionHeading:   'Subscription & Credits',
     profileHeading:        'Profile',
     cardCurrentTier:       'Current Tier',
@@ -316,19 +601,41 @@ export const en = Object.freeze({
     cardSaves:             'Saved Settlements',
     fullAccess:            'Full Access',
     purchaseCreditsLabel:  'Purchase Credits (Volume Discounts)',
-    purchaseErrorTitle:    'Purchase couldn’t start. Try again or refresh the page.',
+    purchaseErrorTitle:    'Purchase could not start. Try again or refresh the page.',
+    // Referral card (107). The founder variant swaps the reward: a free month
+    // is worthless against a lifetime seat, so founders earn credits instead.
+    referralLabel:         'Refer a Friend',
+    referralBody:          'Share your account ID. When someone subscribes for the first time and names it, you both get a month on us.',
+    referralBodyFounder:   'Share your account ID. When someone subscribes for the first time and names it, you get 10 credits.',
+    referralCopy:          'Copy account ID',
+    referralCopied:        'Copied',
+    referralNoId:          'Your account ID is assigned shortly after sign-up. Check back in a moment.',
+    // Redeem block (107). Unknown / expired / exhausted codes all read the
+    // same line on purpose, mirroring the validator's anti-enumeration.
+    redeemLabel:           'Redeem a Code',
+    redeemHint:            'Enter a code and we will check it before you pick a purchase.',
+    redeemPlaceholder:     'SFC-XXXXXXXXXXXX',
+    redeemApply:           'Apply',
+    redeemChecking:        'Checking...',
+    redeemValid:           'Code accepted. It will be applied at checkout.',
+    redeemAlreadyUsed:     'That code has already been redeemed on this account.',
+    redeemInvalid:         'That code is not live.',
+    redeemCheckFailed:     'The code could not be checked. Try once more.',
+    redeemUnavailable:     'Codes cannot be checked in this environment.',
+    redeemChoosePurchase:  'Choose a purchase',
   },
 
   // ── Gallery (public dossier listing) ────────────────────────────────────
   gallery: {
+    eyebrow:      'From the community',
     pageTitle:    'Gallery',
     pageSubtitle: 'Settlements other DMs have shared. Browse for inspiration; click a tile to read the full dossier.',
     antiAi:       'Every dossier in the gallery was simulated, not AI-generated. The settlements are derived from the same constraint engine, coherent because the simulator made them so.',
     forgeYourOwn: 'Forge your own',
     untitled:     'Untitled settlement',
     emptyTitle:   'No public dossiers yet.',
-    emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent, crawlable page.',
-    loadError:    'Couldn’t load the gallery. Try again in a moment.',
+    emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent page anyone can find.',
+    loadError:    'The gallery could not be loaded. Try again in a moment.',
     backToList:   'Back to gallery',
   },
 
@@ -358,7 +665,7 @@ export const en = Object.freeze({
   // "re-run the narrative now" or "carry on with the raw simulation".
   staleNarrative: {
     heading:         'The narrative is now out of date.',
-    body:            'Your change is applied. The AI narrative on this save was written against the previous state — its prose doesn’t know about what just happened.',
+    body:            'Your change is applied. The prose on this save was written against the previous state, so it does not yet know what just happened.',
     regenerateTitle: 'Regenerate narrative',
     regenerateBody:  'Re-run the narrative against the new state. Spends {cost} credits.',
     continueTitle:   'Continue with raw simulation',
@@ -369,12 +676,31 @@ export const en = Object.freeze({
   // ── Purchase modal (credit packs + single dossier) ──────────────────────
   purchase: {
     title:             'Buy more credits',
-    subtitle:          'Credits never expire and apply to every narrative refinement feature.',
+    subtitle:          'Purchased credits never expire and apply to every narrative refinement feature (monthly Cartographer credits reset each cycle).',
     packsHeading:      'Narrative Credit Packs (Volume Discounts)',
     bestLabel:         'Best value',
     valueLabel:        'Most popular',
     perCreditTemplate: '{price}/credit',
-    failureMessage:    'Couldn’t start checkout. Try once more.',
+    failureMessage:    'Checkout could not start. Try once more.',
+    // Redeem-code disclosure (107). The code is advisory input; create-checkout
+    // re-validates and reserves it, and a code that does not fit comes back as
+    // a non-fatal notice while the purchase proceeds at the regular price.
+    haveCode:          'Have a code?',
+    codeLabel:         'Redeem code',
+    codePlaceholder:   'SFC-XXXXXXXXXXXX',
+    codeAttached:      'This code rides along at checkout. If it does not fit the purchase, checkout continues at the regular price.',
+    // Referral intent field (107). A rejection is a note, never a blocker.
+    referredByLabel:       'Referred by someone? Their account ID',
+    referredByPlaceholder: 'SF-XXXXXXX',
+    referredByRecord:      'Record referral',
+    referredByRecording:   'Recording...',
+    referralRecorded:      'Referral recorded. The reward follows your first payment.',
+    referralSelf:          'That is your own account ID, so the referral was not recorded.',
+    referralUnknown:       'That account ID was not recognized, so the referral was not recorded.',
+    referralAlready:       'A referral is already recorded on this account.',
+    referralCap:           'That account has reached its referral limit, so the referral was not recorded.',
+    referralInactive:      'Referrals need an active account, so this one was not recorded.',
+    referralFailed:        'The referral could not be recorded. Checkout is unaffected.',
   },
 
   // ── Errors (user-facing only — internal logs stay in console) ────────────
@@ -411,18 +737,39 @@ export const en = Object.freeze({
     afterAuthHint: 'We’ll save your dossier as soon as you’re in.',
     successTpl:    'Saved as {settlementName}. Find it in Settlements.',
     limitReached:  'You’ve hit the {limit}-save cap on the free tier.',
+    // Migrated from copy/strings.js `save.*`.
+    cloud:     'Save Draft to Cloud',
+    saved:     'Draft saved',
+    overwrite: 'Save replaces the existing draft for this slot.',
   },
 
-  // ── Detail-view actions (migrated from copy/strings.js) ──────────────────
+  // ── Detail-view actions (migrated from copy/strings.js `detail.*`) ────────
   detail: {
     canonizeCta:  'Canonize for Campaign',
     canonizeHint: 'Marks this town as part of your campaign world. Future changes become events on a timeline.',
+    canonizeAfter:  'Canon. Changes from here become campaign events.',
+    resetToDraft:   'Reset to Draft',
+    // Plural handled by the caller: pass {count} and {noun} ('entry'/'entries').
+    resetWarning:   'Reset to draft and discard {count} timeline {noun}? This cannot be undone.',
+    backToList:     'Back to list',
+    // The next-action rail's gold rung for a canon settlement that has not yet
+    // entered the Realm. Naming the destination ("the Realm") gives the step
+    // strong information scent without inventing a new action.
+    sendToRealmCta:  'Send it to the Realm',
+    sendToRealmHint: 'Place this canon settlement in the Realm so the region advances around it.',
+    openRealmCta:    'Open the Realm',
+    openRealmHint:   'This settlement lives in the Realm. Open it to advance the region.',
   },
 
-  // ── Export sheet (migrated from copy/strings.js) ─────────────────────────
+  // ── Export sheet (migrated from copy/strings.js `export.*`) ───────────────
   export: {
     primaryCta: 'Export Dossier',
     sheetTitle: 'Export Dossier',
+    variants: {
+      draft_brief:     { label: 'Draft Brief',     desc: 'Quick prep doc. No timeline, no canon-only chapters.' },
+      canon_dossier:   { label: 'Canon Dossier',   desc: 'Full campaign-ready document with current state and timeline.' },
+      timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap: cover, current state, and timeline. For reviewing what changed since last session.' },
+    },
   },
 
   // ── World-state badges + tooltips (migrated from copy/strings.js) ─────────
@@ -446,10 +793,77 @@ export const en = Object.freeze({
     },
   },
 
+  // ── Event composer (migrated from copy/strings.js `events.*`) ─────────────
+  events: {
+    panelTitleDraft: 'Test a Change (Draft)',
+    panelTitleCanon: 'Apply In-World Event',
+    previewCta:      'Preview',
+    applyDraftCta:   'Apply',
+    applyCanonCta:   'Apply to Timeline',
+    cancelCta:       'Cancel',
+  },
+
+  // ── Timeline panel (migrated from copy/strings.js `timeline.*`) ───────────
+  timeline: {
+    title:        'Timeline',
+    emptyState:   'Apply an in-world event to start the timeline.',
+    undoTooltip:  'Undo this event. Restores prior state.',
+  },
+
+  // ── The lifecycle spine (migrated from copy/strings.js `lifecycle.*`) ─────
+  // Draft, Saved, Canon, In the Realm, Shared. Labels name each step; hints
+  // carry the next-step scent. Read by primitives/LifecycleSpine. Voice stays
+  // plain and diegetic.
+  lifecycle: {
+    labels: {
+      draft:     'Draft',
+      saved:     'Saved',
+      canon:     'Canon',
+      simulated: 'In the Realm',
+      shared:    'Shared',
+    },
+    hints: {
+      draft:     'Forged and editable.',
+      saved:     'Kept in your library.',
+      canon:     'Part of your campaign world.',
+      simulated: 'Living in the Realm.',
+      shared:    'Published to the gallery.',
+    },
+  },
+
+  // ── Two-canon vocabulary consolidation (PRODUCT_COHERENCE.md gaps 1 + 3) ──
+  // The word "Canon" was overloaded across three axes: the settlement lifecycle
+  // transition (settlementSlice canonize()), the campaign world-clock transition
+  // (canonizeCampaignWorld), and per-entity provenance (domain/canonStatus.js).
+  // Two different acts shared one bare label, so the most important transition in
+  // the product happened invisibly. This block gives each act its own
+  // UNAMBIGUOUS label; "Canon" stays reserved for the settlement lifecycle phase
+  // in user copy. Surface adoption sub-waves (4h + the accept/reject surfaces)
+  // consume these keys.
+  canon: {
+    // Settlement lifecycle transition — marks ONE settlement as campaign canon.
+    markCanon:      'Mark Canon',
+    markCanonHint:  'Marks this settlement as part of your campaign world. Changes from here are logged as events on a timeline.',
+    markedCanon:    'Marked Canon. Changes from here become campaign events.',
+    // Campaign world-clock transition — a DIFFERENT act. Starting the clock
+    // advances the region around every canon settlement.
+    startWorldClock:     'Start the World Clock',
+    startWorldClockHint: 'Starts the campaign world clock so the region advances around your canon settlements.',
+    // Per-entity provenance (domain/canonStatus.js) relabeled OFF the word
+    // "Canon" so an entity badge never collides with the lifecycle phase.
+    provenance: {
+      locked:   'Locked',
+      pinned:   'Pinned',
+      optional: 'Optional',
+    },
+  },
+
   // ── Pricing-moment registry (P103 / X-2) ─────────────────────────────────
   // The single moment registry: lib/pricingMoments.js resolves copy by reason
   // through tx('moments.<reason>'). Keep keys snake_case to match the
-  // pricingMoments.js storage layout.
+  // pricingMoments.js storage layout. This is the CONSOLIDATED set: the base
+  // value moments plus the conversion-arc and simulation-intent moments that
+  // used to live only in the retired copy/strings.js pricing.moments block.
   moments: {
     first_canonize: {
       headline: 'You just made a town part of your campaign.',
@@ -467,33 +881,50 @@ export const en = Object.freeze({
       headline: 'Save your campaign across devices.',
       body:     'Upgrade syncs your settlements, drafts, and canon timelines to your account.',
     },
-    founder_eligible: {
-      headline: 'You’ve earned this offer.',
-      body:     'Five settlements, neighbours linked, exports shipped. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
-    },
     first_save: {
       headline: 'Save it. Come back tomorrow.',
       body:     'Your dossier is yours to keep. Free tier holds 3 saves, plenty for a campaign’s first arc.',
     },
     anon_cap_hit: {
       headline: 'You’ve explored hamlet, village, town.',
-      body:     'Sign in (free) to unlock thorp through metropolis, save unlimited drafts, and export the PDF.',
+      body:     'Sign in (free) to reach thorp through metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',
-      body:     'Wanderer gives you 3 exports a month. Cartographer is unlimited, plus cloud sync: phone, laptop, table.',
+      body:     'Save this settlement and keep its PDF for $2.99, yours to re-download. Cartographer exports every settlement, unlimited, with cloud sync.',
     },
     third_save: {
       headline: 'You’re building a campaign.',
-      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, the neighbour network, all six sizes, and full export.',
+      body:     'Wanderer caps at 3 saves. Cartographer unlocks unlimited saves, cloud sync, the neighbour network, and full export.',
     },
     regen_burst: {
       headline: 'You’re pushing the engine.',
-      body:     'Locks, drift, chronicle: Cartographer surfaces the worldbuilder-tier controls.',
+      body:     'Locks, drift, chronicle: Cartographer hands you the worldbuilder controls.',
     },
     map_clicked: {
       headline: 'World Map unlocks with Cartographer.',
-      body:     'Place settlements, draw routes, surface supply-chain stress. Your campaigns become a place.',
+      body:     'Place settlements, draw routes, trace where the supply chains strain. Your campaign becomes a map.',
+    },
+    // ── The Realm hub locked-state teaser ────────────────────────────────
+    // Fired from the Realm Dashboard when an anon/free user opens the Realm.
+    map_realm_teaser: {
+      headline: 'The Realm is where your world comes alive.',
+      body:     'Advance time and watch wars ignite and end, faiths rise, and the chronicle write itself. Cartographer runs the living simulation across your whole campaign.',
+    },
+    // ── Simulation-intent moments ────────────────────────────────────────
+    // Fired when a non-premium user reaches toward a specific simulation system.
+    // Each NAMES that system (never size — size is free).
+    first_advance_attempt: {
+      headline: 'Advance Time runs the region forward.',
+      body:     'Push the world a month and the whole region responds. Wars, faiths, trade, population: each change derived, not rolled. Cartographer unlocks the living simulation.',
+    },
+    war_layer_curiosity: {
+      headline: 'The war layer ends its own wars.',
+      body:     'Sieges form, coalitions gather, settlements fall, and war-exhaustion drives the realm back to peace. Cartographer turns it on. It stays off by default until you do.',
+    },
+    pantheon_preview: {
+      headline: 'The pantheon is alive.',
+      body:     'Deities contest converts, win seats, and rise from cult to major across your region. Cartographer unlocks the living pantheon, opt-in and reversible.',
     },
     weekly_user: {
       headline: 'Three sessions in two weeks.',
@@ -501,28 +932,34 @@ export const en = Object.freeze({
     },
     welcome_credit: {
       headline: 'Try the Narrative Layer once, on us.',
-      body:     'One credit on every signup. The AI prose pass turns this town’s data into prose your players can hear.',
+      body:     'Your first Narrative is on us. It turns this town’s data into prose your players can hear.',
+    },
+    founder_eligible: {
+      headline: 'You’ve earned this offer.',
+      body:     'Five settlements, neighbours linked, dossiers exported. Founder Lifetime is $99: lifetime Cartographer access and a seat in the credits.',
     },
   },
 
   // ── Audience-led pricing tile copy (P122 / X-10) ─────────────────────────
   // The three tiers each get an audience-shifted pitch line that
   // PricingPage surfaces above the existing feature list.
+  // NOTE: size is FREE (free accounts reach metropolis), so NO pitch line here
+  // sells size/metropolis/capital as premium. Premium is the simulation.
   pricingPitch: {
     wanderer: {
-      lineNew:          'Three towns, fully prepped. Find out if this works for you.',
-      lineIntermediate: 'Three towns. Free forever. See if a session a week earns the upgrade.',
-      lineWorldbuilder: 'Try the engine. Three towns is enough to see if the moat is real.',
+      lineNew:          'Generate any size, free. Find out if it works for you.',
+      lineIntermediate: 'Any size, free forever. See if a session a week calls for more.',
+      lineWorldbuilder: 'Try the engine, full size. Three saves is enough to see if the coherence holds.',
     },
     cartographer: {
-      lineNew:          'When you’re ready for a campaign instead of an evening: unlimited saves, every size.',
-      lineIntermediate: 'For DMs running a town a week. Unlimited saves, every size, full export.',
-      lineWorldbuilder: 'The worldbuilder’s tier: neighbour network, locks, drift, full export.',
+      lineNew:          'When you’re ready for a campaign instead of an evening: advance time and watch the region run.',
+      lineIntermediate: 'For DMs running a town a week. Advance time, link a campaign, let the chronicle write itself.',
+      lineWorldbuilder: 'The worldbuilder’s tier: the war layer, the pantheon, campaigns, and the chronicle.',
     },
     founder: {
-      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, ship every settlement.',
-      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 500 seats only.',
-      lineWorldbuilder: 'For DMs building campaigns. Pay once, ship every settlement you’ll ever run.',
+      lineNew:          'For DMs who already know they’ll build campaigns. Pay once, run every region.',
+      lineIntermediate: 'Two years of Cartographer for $99. Lifetime access. 30 seats only.',
+      lineWorldbuilder: 'For DMs running living regions. Pay once, run every campaign you’ll ever build.',
     },
   },
 
@@ -572,9 +1009,60 @@ export const en = Object.freeze({
     commit:          'Commit',
     revert:          'Revert',
     cascadeHeading:  'What changes if you apply these edits',
+    // Muted hint beneath the Generate Narrative button when a per-model token
+    // estimate is available. Calm archivist voice: a plain size read, not a
+    // sales pitch. {n} is already rounded to the nearest thousand by the caller;
+    // {model} is the display label for the reader's chosen narration model.
+    tokenEstimate: 'Runs about {n}k tokens on {model}.',
+  },
+
+  // ── PDF export ladder (migration 108) ──────────────────────────────────────
+  // The Buy CTA on a saved dossier, its unsaved-first state, and the anonymous
+  // pre-checkout ladder popup. Calm archivist voice: state the offer plainly,
+  // present the one-time download AS one-time (the retro auto-upgrade is a
+  // grace we never promise up front, since it depends on browser storage).
+  dossierExport: {
+    // Free account, dossier SAVED, no durable right yet.
+    buySaved: {
+      cta:      'Keep the PDF for this settlement · {price}',
+      subline:  'A one-time purchase. The download stays yours for as long as this settlement is in your library.',
+      busy:     'Redirecting…',
+      error:    'Checkout could not start. Please try again.',
+    },
+    // Free account, dossier NOT saved yet. Durable rights attach to a save, so
+    // the honest path is to save first.
+    saveFirst: {
+      cta:      'Save this settlement to buy its PDF',
+      subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
+      atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
+    },
+    // Anonymous pre-checkout ladder popup.
+    ladder: {
+      title:    'How would you like your dossier?',
+      intro:    'Three ways to take this settlement with you.',
+      account: {
+        label:       'Create a free account',
+        description: 'Save this settlement, then buy its PDF once and keep re-downloading it. No card to start.',
+      },
+      cartographer: {
+        label:       'Consider Cartographer',
+        description: 'Unlimited PDFs of every settlement you save, plus the living simulation. {price}/mo.',
+      },
+      oneTime: {
+        label:       'Continue with the one-time download',
+        description: 'Pay {price} once and download this dossier now. No account needed.',
+      },
+      cancel:   'Never mind',
+    },
+    // Silent same-device retro auto-upgrade confirmation toast.
+    claimed:  'This settlement’s PDF is yours. You bought it before you signed up.',
   },
 
   // ── Workshop (P107 / CP-2) ───────────────────────────────────────────────
+  // OUR-side surface copy retained (the /workshop route + ModeSelector wiring
+  // still resolve these). Their tree deleted its Workshop block; we keep ours
+  // so no surviving OUR consumer sees a missing key. Surface waves drop this
+  // together with the Workshop feature if it is fully retired.
   workshop: {
     navLabel:       'Workshop',
     locked:         'Workshop unlocks with Cartographer.',
@@ -600,14 +1088,14 @@ export const en = Object.freeze({
       },
       worldbuilder: {
         eyebrow: 'For the worldbuilder',
-        body:    'Salt-road supply chain breaks at Whitestone Pass → preserved-meat exports halt in 11 days. Famine cascade primed. Pull any thread and the next one tightens.',
+        body:    'The salt road breaks at Whitestone Pass and preserved-meat exports halt in 11 days. The famine cascade is primed. Pull any thread and the next one tightens.',
       },
       fridaysSession: {
         eyebrow: 'For Friday’s session',
         body:    '“The wall-fund ledger has gone missing. The Captain blames the merchants. The merchants blame the militia. Someone is hiding it in plain sight.”',
       },
     },
-    footer: 'A real settlement from the simulator. Yours generates in eight seconds.',
+    footer: 'A whole settlement from the simulator. Yours generates in eight seconds.',
   },
 
   // ── First-dossier teaching callouts (P130 / O-2) ─────────────────────────
@@ -634,7 +1122,9 @@ export const en = Object.freeze({
   footer: {
     tagline:  'A simulator for Dungeon Masters.',
     antiAi:   'Simulated, not AI-generated.',
+    about:    'About',
     pricing:  'Pricing',
+    compendium: 'Compendium',
     gallery:  'Gallery',
     discord:  'Discord',
     privacy:  'Privacy',
@@ -643,14 +1133,93 @@ export const en = Object.freeze({
     copyright: '© {year} SettlementForge',
   },
 
+  // ── AuthModal premium blurb (simulation-led) ──────────────────────────────
+  // Rewritten to lead with the SIMULATION, not storage. Size is free — a free
+  // account unlocks FULL-SIZE generation, so it sits on the free line, never
+  // the premium one.
+  authBlurb: {
+    freeLabel:    'Free account',
+    freeBody:     'Generate any size, from hamlet to metropolis, and save your work. Keep any dossier’s PDF for $2.99.',
+    premiumLabel: 'Cartographer',
+    premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
+  },
+
+  // ── Welcome page (HomeLanding) proof-forward V2 bands ─────────────────────
+  // Net-new band headings + the closing line for the flag-gated landingV2
+  // variant. The hero copy stays inline in HomeLanding.jsx (pinned); only the
+  // new bands route through here. House voice: short, diegetic, sentence case,
+  // no em dash, no exclamation.
+  landing: {
+    proofHeading:   'See one for yourself.',
+    proofSub:       'A sample dossier, and a region advanced four months. No account, nothing to install.',
+    livingHeading:  'Then the years pass.',
+    livingSub:      'Advance time and the region keeps its own history. These are the systems that run once you do.',
+    livingCta:      'See how the Living World works',
+    closingLine:    'Your table is waiting.',
+  },
+
+  // ── About "The Living World" tab + landing thesis ─────────────────────────
+  // The About page is reframed as LANDING + HOW-TO around one thesis. The
+  // Living World tab names each premium system as a claim + a one-line
+  // "how it stays coherent" + the opt-in / off-by-default / reversible
+  // qualifier. Size is FREE and is never sold here as premium.
+  aboutLiving: {
+    headerEyebrow: 'How the simulator works',
+    headerTitle:   'About SettlementForge',
+    thesis:      'It generates a town in seconds, then it runs the region for years.',
+    thesisSub:   'The static dossier is the start. Advance time and the whole region becomes a living, self-consistent simulation: wars that end themselves, faiths that rise, a chronicle that writes itself.',
+    premiumChip: 'Cartographer',
+    qualifier:   'Off by default · opt-in · reversible',
+    intro:       'These are the systems the simulation runs once you advance time. Each one is premium, opt-in, and off until you turn it on. A peacetime, non-campaign save renders exactly as it does today.',
+    systems: {
+      advanceTime: {
+        title:     'Advance Time',
+        claim:     'Push the world forward a month at a time and the whole region responds at once.',
+        coherence: 'Every change is derived from the same causal substrate the dossier already shows. Nothing moves at random, and each shift carries its own record of what changed and why.',
+      },
+      war: {
+        title:     'The self-ending war',
+        claim:     'Sieges form, coalitions gather, settlements fall, yet wars burn themselves out.',
+        coherence: 'War drains the economy, which feeds war-exhaustion, which drives the realm back to peace. The homeostasis is the engine, not a script.',
+      },
+      pantheon: {
+        title:     'The living pantheon',
+        claim:     'Deities contest converts, win seats, and rise from cult to major across the region.',
+        coherence: 'Faith couples back into the world: alignment shifts corruption, temperament shifts aggression, rank shifts magic legality. These are the same constants the dossier reads.',
+      },
+      chronicle: {
+        title:     'The chronicle',
+        claim:     'Every advance writes itself into a scrubbable history of what happened and to whom.',
+        coherence: 'The chronicle is derived from the pulse record, not authored separately. It can only say what the simulation actually did.',
+      },
+    },
+  },
+
+  // ── Anon "Watch a region wake up" replay ──────────────────────────────────
+  // A READ-ONLY, deterministic, pre-baked sequence over a small canned fixture,
+  // rendered through the EXISTING projections (no live engine, no rng). The
+  // anon teaser that lets a no-account user SEE the premium product.
+  replay: {
+    eyebrow:  'A region waking up',
+    title:    'Watch a region wake up',
+    subtitle: 'One campaign, advanced four months. No account, the same read-outs the simulation produces.',
+    stepLabel: 'Month {step} of {total}',
+    prev:     'Back',
+    next:     'Advance a month',
+    restart:  'Restart',
+    footer:   'This is the living world. Cartographer runs it across your whole campaign.',
+    cta:      'See what the Realm unlocks',
+    empty:    'At peace.',
+  },
+
   // P138 / AC-4 — Inline FAQ on the Account page. Each entry is a
   // short Q + a 1-2 sentence A. Keep tone plain and free of marketing
   // hedge — these are the answers users would otherwise email support
   // for. Edit freely; the keys are stable.
   accountFaq: {
     creditGrant: {
-      q: 'How does the welcome credit work?',
-      a: "On signup, every account gets one free Narrative credit. It refines your first saved settlement into prose. Once spent, it doesn't come back. Buy more from the Subscription panel.",
+      q: 'How does the free first Narrative work?',
+      a: "Every account gets one free Narrative. It refines a saved settlement into prose, and it costs you nothing the first time. After that, AI actions spend credits: a Narrative is 3, Daily Life is 4, and a Progression pass is 5. Buy more from the Subscription panel.",
     },
     cancelAnytime: {
       q: 'Can I cancel my subscription?',
@@ -662,7 +1231,7 @@ export const en = Object.freeze({
     },
     founderLifetime: {
       q: 'What is the Founder Lifetime plan?',
-      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 500 buyers; the counter is live above this FAQ.',
+      a: 'A one-time payment that unlocks every current and future tier for the life of the product. Capped at the first 30 buyers; the counter is live above this FAQ.',
     },
     galleryPrivacy: {
       q: 'Is my settlement private when I save it?',

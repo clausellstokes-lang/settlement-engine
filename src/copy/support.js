@@ -13,7 +13,7 @@
 
 export const SUPPORT_EMAIL =
   (typeof import.meta !== 'undefined' && import.meta.env?.VITE_SUPPORT_EMAIL) ||
-  'support@settlementforge.com';
+  'settlementforge@gmail.com';
 
 /** Build a `mailto:` href with an optional subject line. */
 export function supportMailto(subject) {
