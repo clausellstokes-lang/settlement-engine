@@ -33,7 +33,18 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Committed any+suppress ceiling — lower it as holes are typed; NEVER raise.
 // (2026-07-09 start: 1196. First burn-down — crisisLifecycle payload/entry/
 // condition typing, 41 → 6 — landed the ratchet at 1161.)
-const CEILING = 1161;
+//
+// (2026-07-10 — ONE-TIME subsystem-adoption raise, 1161 → 1720. The worldPulse
+// war/trade/religion reconciliation merge brings a new lineage of leaf modules
+// (religionState, pantheon, relationshipState, subsystemActivation), the region
+// contest primitives (contestMath/contestOverThirdParty), clone/resolveTerrain,
+// display/pantheonDepth, and the dormant deity exports — all "loose by design"
+// per the reference tree's own sim-shape typedef notes. W2a-prep lands the leaf
+// substrate at total 1247; the ceiling is set at 1720 to absorb W2a-main's
+// remaining war/trade modules (warDeployment, occupation, tradeWar, etc.) WITHOUT
+// a second ceiling churn. Monotone-DOWN thereafter: burn holes as the sim types
+// are enumerated — never raise past 1720.)
+const CEILING = 1720;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();

@@ -149,6 +149,25 @@ export const FIELD_ALIASES = Object.freeze({
  *   Optional AI-generated prose layers. Distinct from canon facts.
  */
 
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-prep — MINIMAL simulation flat-shape typedefs (ADDITIVE, JSDoc-only, dormant).
+// The verbatim-ported sim/religion leaf modules (worldPulse/religionState.js et al.)
+// and the dormant corruption deity block annotate params with
+// `import('.../settlement.schema.js').SimSettlement` / `.SimNpc`. Our tree does not
+// yet carry the reference tree's full Sim* typedef family, so these two LOOSE aliases
+// (`Record<string, any>` — every field access resolves to `any`, matching the
+// reference family's `& Record<string, any>` intent) exist only to keep those files
+// verbatim + the typecheck green. They emit NO runtime code and change no output.
+//
+// NOTE for W2a-main: when you port the reference settlement.schema.js, REPLACE these
+// two aliases with the full Sim* family (SimSettlement/SimNpc/SimFaction/SimInstitution
+// /SimStressor/SimSupplyChain/SimPowerStructure/SimEconomicState/SimDefenseProfile/
+// SimResourceAnalysis/SimHistory) — a duplicate typedef name would otherwise collide.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** @typedef {Record<string, any>} SimSettlement */
+/** @typedef {Record<string, any>} SimNpc */
+
 /**
  * @typedef {Object} SettlementIdentity
  * @property {string} name

@@ -1,6 +1,6 @@
 {
-  "total": 1161,
-  "totalAny": 1121,
+  "total": 1247,
+  "totalAny": 1207,
   "totalSuppress": 40,
   "files": {
     "src/domain/activeConditions.js": {
@@ -31,6 +31,10 @@
       "any": 0,
       "suppress": 4
     },
+    "src/domain/clone.js": {
+      "any": 3,
+      "suppress": 0
+    },
     "src/domain/coherence/checkDraftEdit.js": {
       "any": 8,
       "suppress": 0
@@ -44,7 +48,7 @@
       "suppress": 1
     },
     "src/domain/corruption.js": {
-      "any": 2,
+      "any": 3,
       "suppress": 0
     },
     "src/domain/counterfactual.js": {
@@ -73,6 +77,10 @@
     },
     "src/domain/display/institutionProfile.js": {
       "any": 6,
+      "suppress": 0
+    },
+    "src/domain/display/pantheonDepth.js": {
+      "any": 11,
       "suppress": 0
     },
     "src/domain/display/publicSafe.js": {
@@ -148,7 +156,7 @@
       "suppress": 0
     },
     "src/domain/magicProfile.js": {
-      "any": 3,
+      "any": 4,
       "suppress": 0
     },
     "src/domain/npcProfile.js": {
@@ -163,6 +171,10 @@
       "any": 1,
       "suppress": 0
     },
+    "src/domain/region/contestOverThirdParty.js": {
+      "any": 1,
+      "suppress": 0
+    },
     "src/domain/region/deriveRegionalState.js": {
       "any": 2,
       "suppress": 0
@@ -172,7 +184,7 @@
       "suppress": 0
     },
     "src/domain/region/graph.js": {
-      "any": 19,
+      "any": 20,
       "suppress": 0
     },
     "src/domain/region/propagation.js": {
@@ -187,8 +199,12 @@
       "any": 28,
       "suppress": 0
     },
+    "src/domain/resolveTerrain.js": {
+      "any": 1,
+      "suppress": 0
+    },
     "src/domain/settlement.schema.js": {
-      "any": 3,
+      "any": 5,
       "suppress": 0
     },
     "src/domain/simulationSpine.js": {
@@ -263,6 +279,10 @@
       "any": 73,
       "suppress": 0
     },
+    "src/domain/worldPulse/pantheon.js": {
+      "any": 24,
+      "suppress": 0
+    },
     "src/domain/worldPulse/partyImpact.js": {
       "any": 24,
       "suppress": 0
@@ -287,6 +307,14 @@
       "any": 12,
       "suppress": 0
     },
+    "src/domain/worldPulse/relationshipState.js": {
+      "any": 8,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/religionState.js": {
+      "any": 28,
+      "suppress": 0
+    },
     "src/domain/worldPulse/stressorDynamics.js": {
       "any": 65,
       "suppress": 0
@@ -297,6 +325,10 @@
     },
     "src/domain/worldPulse/stressors.js": {
       "any": 96,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/subsystemActivation.js": {
+      "any": 5,
       "suppress": 0
     },
     "src/domain/worldPulse/successorNpc.js": {

@@ -841,3 +841,56 @@ export function buildRegionalIndexes(graph) {
   }
   return { outgoingBySettlement, incomingBySettlement, channelsByType };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-prep — DORMANT directed-mint substrate (ADDITIVE; zero callers in this tree
+// until W2a-main's war/religion layer mints fronts + authority edges through it).
+// Copied verbatim from the reference tree. Uses only nowIso() + normalizeChannel,
+// both already defined above.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Mint a single DIRECTED regional channel that is NOT implied by a relationship
+ * label — the one home for ad-hoc directed mints driven by the simulation rather
+ * than diplomacy: a coalition war_front (each attacker → the besieged target)
+ * and a deity-gated religious_authority edge (faith carrier → convert).
+ * Returns a normalized channel, or null if the type/endpoints are
+ * invalid. Deterministic: the id derives from type+from+to and `now` is INJECTED
+ * (the pulse passes its tick clock — never wall-time here).
+ *
+ * @param {Object} args
+ * @param {string} args.type      - a REGIONAL_CHANNEL_TYPES member (e.g. 'war_front')
+ * @param {string} args.from
+ * @param {string} args.to
+ * @param {number} [args.strength]
+ * @param {number} [args.confidence]
+ * @param {string} [args.explanation]
+ * @param {string} [args.visibility]
+ * @param {string} [args.status]
+ * @param {string|null} [args.relationshipKey] - provenance back to a stressor/contest
+ * @param {string} [args.source]   - evidence source tag
+ * @param {string|null} [args.now]
+ * @returns {object|null}
+ */
+export function mintDirectedChannel({
+  type, from, to, strength = 0.7, confidence = 0.7, explanation = '',
+  visibility, status = 'confirmed', relationshipKey = null, source = 'directed_mint', now = null,
+}) {
+  const stamp = now || nowIso();
+  return normalizeChannel({
+    type,
+    from,
+    to,
+    direction: 'directed',
+    status,
+    strength,
+    confidence,
+    explanation,
+    ...(visibility ? { visibility } : {}),
+    relationshipKey,
+    discoveredAt: stamp,
+    confirmedAt: stamp,
+    updatedAt: stamp,
+    evidence: [{ source, reason: explanation || `${from} → ${to} ${type}`, outcomeId: null }],
+  }, /** @type {any} */ (stamp));
+}

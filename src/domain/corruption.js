@@ -382,3 +382,128 @@ export function patronageSecurityDrag(settlement) {
     revealed,
   };
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-prep — DORMANT deity substrate (ADDITIVE; zero callers in this tree until
+// the pulseKernel/religion merge lands in W2a-main). Copied verbatim from the
+// reference tree's corruption.js. Nothing below is on any live path today, so a
+// deity-free save is byte-identical.
+//
+// NOTE for W2b's corruption.js port: the reference `npcAlignmentScore` imports
+// TRAIT_ALIGNMENT from data/npcData.js — but our npcData.js does not yet carry
+// that map (it lands with the religion merge). Per the same single-source
+// pattern this wave uses for DEITY_RANK_AUTHORITY, TRAIT_ALIGNMENT is owned
+// locally HERE for now so the dormant export resolves; when W2b re-ports
+// corruption.js it should source TRAIT_ALIGNMENT from data/npcData.js and drop
+// this local copy (they are byte-identical to the reference npcData map).
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Signed good↔evil conscience weight per authored personality descriptor.
+ *  Copied verbatim from the reference data/npcData.js TRAIT_ALIGNMENT map; owned
+ *  locally here only until W2b's npcData port carries it (see note above). A
+ *  descriptor absent from this map contributes EXACTLY 0 (neutral).
+ *  @type {Readonly<Record<string, number>>} */
+const TRAIT_ALIGNMENT = Object.freeze({
+  // ── good-leaning conscience (positive vocab → +) ──────────────────────────
+  compassionate: 0.85,
+  merciful: 0.85,
+  generous: 0.7,
+  magnanimous: 0.75,
+  'warm-hearted': 0.65,
+  principled: 0.8,
+  incorruptible: 1,
+  'fair-minded': 0.7,
+  honest: 0.75,
+  forthright: 0.6,
+  loyal: 0.4,
+  humble: 0.45,
+  protective: 0.45,
+  pious: 0.5,
+  brave: 0.35,
+  patient: 0.3,
+  // ── evil-leaning disposition (negative vocab → −) ─────────────────────────
+  cruel: -0.9,
+  'cold-blooded': -0.9,
+  ruthless: -0.85,
+  callous: -0.7,
+  wrathful: -0.65,
+  vengeful: -0.65,
+  vindictive: -0.7,
+  deceitful: -0.7,
+  manipulative: -0.7,
+  mendacious: -0.65,
+  corrupt: -0.85,
+  greedy: -0.6,
+  'self-serving': -0.55,
+  hypocritical: -0.5,
+  domineering: -0.45,
+  imperious: -0.4,
+  petty: -0.3,
+  // ── neutral vocab → mild signed nudges (modifier slot) ────────────────────
+  zealous: -0.2,
+  opportunistic: -0.3,
+  cynical: -0.2,
+  hedonistic: -0.25,
+  pragmatic: -0.1,
+  idealistic: 0.3,
+  stoic: 0.1,
+});
+
+// A bounded, centered-on-1.0 multiplier into the corruption knobs for a good/evil
+// deity. Span is deliberately small (±0.40) so the deity tilts the equilibrium,
+// never overwhelms the security/prosperity counter-force.
+export const DEITY_CORRUPTION_TUNING = Object.freeze({
+  // Max swing of the centered-on-1.0 multiplier at full per-NPC disfavor.
+  // 0.40 ⇒ multiplier ∈ [0.60, 1.40] — bounded, well inside the equilibrium.
+  span: 0.40,
+  // The deity's own alignment-axis magnitude as a signed direction.
+  axisSign: Object.freeze({ evil: -1, good: 1, neutral: 0 }),
+});
+
+/** Lowercased authored personality descriptor strings for an NPC: reads the
+ *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
+ *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
+ * @param {import('./settlement.schema.js').SimNpc} npc @returns {string[]} */
+function authoredAlignmentTraits(npc = {}) {
+  const p = npc?.personality;
+  if (!p) return [];
+  if (typeof p === 'string') return [p];
+  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
+  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+}
+
+/** Signed good↔evil conscience score for an NPC's AUTHORED personality (Σ of
+ *  TRAIT_ALIGNMENT weights, clamped to [-1, 1]). + is good-leaning, − is
+ *  evil-leaning. Absent personality ⇒ 0 (neutral, no signal).
+ * @param {import('./settlement.schema.js').SimNpc} npc @returns {number} */
+export function npcAlignmentScore(npc) {
+  let score = 0;
+  for (const trait of authoredAlignmentTraits(npc)) {
+    const w = /** @type {Record<string, number>} */ (TRAIT_ALIGNMENT)[String(trait).trim().toLowerCase()];
+    if (Number.isFinite(w)) score += w;
+  }
+  return clamp(score, -1, 1);
+}
+
+/** The signed alignment direction of an embedded deity snapshot: evil → −1,
+ *  good → +1, neutral / absent → 0.
+ * @param {any} deity @returns {-1|0|1} */
+export function deityAlignmentDirection(deity) {
+  if (!deity) return 0;
+  const sign = /** @type {Record<string, number>} */ (DEITY_CORRUPTION_TUNING.axisSign)[deity.alignmentAxis];
+  return /** @type {-1|0|1} */ (Number.isFinite(sign) ? sign : 0);
+}
+
+// Lawful/chaotic deity → corruption-TOLERANCE. A DISTINCT lever from the good/
+// evil knobs above: it shifts how much corruption a settlement TOLERATES (order
+// enforcement), consumed primarily by law_order — never re-applied to onset/
+// exposure, so it can never double-count the good/evil magnitude.
+export const DEITY_LAW_TUNING = Object.freeze({
+  // The law-axis magnitude as a signed direction: lawful +1 (raises order /
+  // lowers tolerance), chaotic −1 (lowers order / raises tolerance), else 0.
+  axisSign: Object.freeze({ lawful: 1, chaotic: -1, neutral: 0 }),
+  // The law_order score swing a fully lawful/chaotic patron applies.
+  lawOrderSwing: 8,
+  // The signed corruption-TOLERANCE shift (0..1 scale): chaotic → +, lawful → −.
+  tolerance: 0.15,
+});

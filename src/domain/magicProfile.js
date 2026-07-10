@@ -382,3 +382,25 @@ export function summarizeMagic(settlement) {
     `Roles — economic: ${m.roles.economic}; military: ${m.roles.military}; medical: ${m.roles.medical}; infrastructure: ${m.roles.infrastructure}.`,
   ];
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// W2a-prep — DORMANT deity ⇄ magic-legality substrate (ADDITIVE; zero callers in
+// this tree until W2a-main wires the deity-legality term into deriveLegality).
+// Copied verbatim from the reference tree's magicProfile.js. deriveMagicProfile
+// here does NOT yet consult these, so a deity-free save is byte-identical.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** True when the major deity is the kind that REGULATES magic hard — a warlike or
+ *  evil orthodoxy polices arcane power as a rival authority. A good/neutral peacelike
+ *  major god still tightens legality one notch (the theocracy term) but is not hostile.
+ *  @param {any} deity
+ *  @returns {boolean} */
+export function deityIsRegulatory(deity) {
+  return deity.temperamentAxis === 'warlike' || deity.alignmentAxis === 'evil';
+}
+
+// The number of band-steps a MAJOR deity tightens magic legality by: one for any
+// major god (the theocracy term), a second for a WARLIKE/EVIL orthodoxy that
+// polices arcane power as a rival authority. Exported as the single source the
+// shared deityEffects coupling reads (proven equal to deriveLegality's inline use).
+export const DEITY_MAGIC_LEGALITY_STEPS = Object.freeze({ regulatory: 2, major: 1 });
