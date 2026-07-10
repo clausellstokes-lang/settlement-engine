@@ -15,6 +15,7 @@
 import { supabase, isConfigured } from './supabase.js';
 import { getActivePacks, findPackByKey, SINGLE_DOSSIER } from '../config/pricing.js';
 import { fetchCreditBalanceFromLedger } from './creditLedger.js';
+import { track, EVENTS, Funnel } from './analytics.js';
 
 // PRODUCTS preserves the historical shape (object keyed by product id)
 // so existing imports (PurchaseModal, AccountPage) keep working. The
@@ -65,10 +66,21 @@ const PRODUCTS = new Proxy({}, {
 
 /**
  * Create a Stripe Checkout session and redirect.
+ *
+ * A redeem code (migration 107) is resolved entirely server-side: the edge
+ * function reserves it and attaches any discount itself. When the code did not
+ * apply, checkout still proceeds and the server sends back a non-fatal
+ * `redeemNotice` — returned here so callers can toast it (the redirect to
+ * Stripe follows regardless).
+ *
  * @param {string} product — A key from the active PRODUCTS catalog or a legacy pack key.
- * @param {{ checkoutToken?: string, settlement?: object }} options — For
- *        single_dossier, `settlement` is persisted server-side before payment so
- *        the paid dossier survives a lost/overwritten local stash (F21/F23).
+ * @param {{ checkoutToken?: string, settlement?: object, redeemCode?: string, saveId?: string }} options
+ *   For single_dossier, `settlement` is persisted server-side before payment so
+ *   the paid dossier survives a lost/overwritten local stash (F21/F23).
+ *   `saveId` (single_dossier + signed-in only): binds the durable export right
+ *   to that SAVED settlement (migration 108). The server re-verifies ownership;
+ *   an anonymous checkout ignores it.
+ * @returns {Promise<{ redeemNotice: string|null }>}
  */
 export async function startCheckout(product, options = {}) {
   if (!isConfigured) {
@@ -96,12 +108,27 @@ export async function startCheckout(product, options = {}) {
     throw new Error('You must be signed in to purchase');
   }
 
-  const body = { product, checkoutToken };
+  // Only send a non-empty trimmed code; the server treats anything else as
+  // "no code". Case is preserved — codes are matched exactly server-side.
+  const redeemCode = typeof options.redeemCode === 'string' && options.redeemCode.trim()
+    ? options.redeemCode.trim()
+    : undefined;
+
+  // saveId (durable-rights binding, 108): only meaningful for a SIGNED-IN
+  // single_dossier buyer picking one saved settlement to bind the right to. The
+  // server verifies ownership and ignores it for anonymous checkouts.
+  const saveId = product === 'single_dossier' && typeof options.saveId === 'string' && options.saveId.trim()
+    ? options.saveId.trim()
+    : undefined;
+
   // Only single_dossier carries a settlement to persist; other products bind to
   // the account server-side and never ship the artifact through checkout.
-  if (isAnonymousProduct && options.settlement) {
-    body.settlement = options.settlement;
-  }
+  const body = {
+    product, checkoutToken,
+    ...(redeemCode ? { redeemCode } : {}),
+    ...(saveId ? { saveId } : {}),
+    ...(isAnonymousProduct && options.settlement ? { settlement: options.settlement } : {}),
+  };
 
   const { data, error } = await supabase.functions.invoke('create-checkout', { body });
 
@@ -116,6 +143,30 @@ export async function startCheckout(product, options = {}) {
 
   // Redirect to Stripe
   window.location.href = data.url;
+  return { redeemNotice: data.redeemNotice ?? null };
+}
+
+/**
+ * Emit the paid-conversion success events for a completed checkout return
+ * (premium / founder_lifetime / credit packs) — the counterpart of the success
+ * toast/landing surfaces. Fired at App reconcile OUTCOME.SUCCESS, only once the
+ * entitlement is verified server-side (never from the ?checkout=success URL
+ * alone). The single-dossier one-shot emits its own event from the landing page
+ * after Stripe verification instead. Fire-and-forget: track() never throws.
+ *
+ * This tree's analytics taxonomy has no dedicated credit-pack success event;
+ * the paid-conversion funnel below still counts credit-pack purchases. premium
+ * emits PREMIUM_PURCHASED; founder_lifetime is covered by its own tile surface.
+ */
+export function trackCheckoutSuccess(product) {
+  if (product === 'premium') {
+    track(EVENTS.PREMIUM_PURCHASED);
+  }
+  Funnel.paidAction({
+    kind: product === 'premium' ? 'premium'
+      : product === 'founder_lifetime' ? 'founder_lifetime'
+        : 'credit_pack',
+  });
 }
 
 /** Create a Stripe Billing Portal session and redirect the signed-in user. */

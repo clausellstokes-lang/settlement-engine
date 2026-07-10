@@ -1821,5 +1821,14 @@ export const createSettlementSlice = (set, get) => ({
           recordSaveMomentForActiveSave({ saveId, settlement, store: { getState: get } }))
         .catch(() => { /* instrumentation must never block a save */ });
     } catch { /* instrumentation must never throw */ }
+    // Arm the same-device dossier retro auto-upgrade (108): if THIS settlement was
+    // bought anonymously on this device before sign-up, silently attach its durable
+    // export right now that it has a real save id. Fully fire-and-forget — dynamic
+    // import so a missing target never breaks tsc/build, and never blocks the save.
+    try {
+      if (saveId != null) import('../lib/dossierRetroClaim.js')
+        .then(({ runDossierRetroClaimForSave }) => runDossierRetroClaimForSave({ settlement, saveId, get }))
+        .catch(() => {});
+    } catch { /* retro claim must never throw */ }
   },
 });

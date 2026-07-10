@@ -27,7 +27,17 @@ export const createUiSlice = (set, get) => ({
     tableViewOpen: false,
   },
 
+  // Quiet confirmation for a same-device dossier retro auto-upgrade (108). Set
+  // by the silent post-save claim when a durable right attaches to a just-saved
+  // settlement; the App renders it as one transient toast and clears it. Null =
+  // nothing to show. Transient (deliberately left out of the persist partialize).
+  dossierClaimToast: null,
+
   // ── Actions ──────────────────────────────────────────────────────────────
+
+  /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
+  setDossierClaimToast: (message) =>
+    set(state => { state.dossierClaimToast = message || null; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>

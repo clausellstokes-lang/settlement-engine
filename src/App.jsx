@@ -59,6 +59,17 @@ const DevEmailBanner = lazy(() => import('./components/dev/DevEmailBanner.jsx'))
 // Active pricing-moment card — inline, not a modal. Renders when a moment fires;
 // cooldown enforced by the moments library so it can't hammer the user.
 const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentCard.jsx'));
+// Global floating feedback affordance (files a support ticket, tagged with the
+// active generation-id spine). Always mounted, self-gating on `visible`, so lazy
+// keeps its code + icons off the entry's first-paint closure.
+const FeedbackWidget = lazy(() => import('./components/FeedbackWidget.jsx'));
+
+// Auth + checkout chrome the floating feedback widget stays off (its own
+// contract): the sign-in door, recovery, and the single-dossier landing.
+const AUTH_ROUTE_VIEWS = new Set([
+  'signin', 'register', 'reset-password', 'set-new-password',
+  'verify-email', 'confirm-email', 'dossier-success',
+]);
 
 // Mobile bottom nav: an EXPLICIT priority order rather than slicing the desktop
 // NAV order, otherwise inserting/reordering a NAV item silently evicts whatever
@@ -130,6 +141,10 @@ export default function App() {
   const migrateLocalCustomContentToCloud = useStore(s => s.migrateLocalCustomContentToCloud);
   const clearCloudCustomContent = useStore(s => s.clearCloudCustomContent);
   const [checkoutToast, setCheckoutToast] = useState(null);
+  // Same-device dossier retro auto-upgrade confirmation (108): the silent
+  // post-save claim sets this; App renders it as one calm transient toast.
+  const dossierClaimToast = useStore(s => s.dossierClaimToast);
+  const setDossierClaimToast = useStore(s => s.setDossierClaimToast);
 
   // ── Bare-root front door ──────────────────────────────────────────────────
   // The bare root (settlementforge.com) canonicalizes for EVERYONE, but not to
@@ -182,12 +197,38 @@ export default function App() {
 
       if (result.status === 'success') {
         if (result.product === 'single_dossier') {
-          const { attachPendingDossierCheckout } = await import('./lib/pendingDossier.js');
+          const { attachPendingDossierCheckout, readPendingDossier } = await import('./lib/pendingDossier.js');
+          // Two single_dossier checkouts land on the SAME return URL. The ANON
+          // one-shot is fingerprinted by its dt token (or a pending-dossier stash
+          // written before the Stripe redirect) — NOT the live auth tier: a buyer
+          // who signed in DURING the round-trip is still an anonymous one-shot
+          // (no durable right was granted server-side, its PDF lives only in the
+          // stash). Keying on auth tier would strand their download.
+          const isAnonOneShot = !!(result.dossierToken || readPendingDossier());
+          if (!isAnonOneShot) {
+            // No token, no stash → a SIGNED-IN buyer of a SAVED dossier bought a
+            // DURABLE right (108), granted server-side by the webhook keyed to the
+            // saveId they picked. Drop the durable-rights read cache so the saved
+            // dossier refetches its (now true) right on next view, and confirm
+            // calmly — no landing page, no navigation.
+            useStore.getState().clearDossierEntitlements?.();
+            setCheckoutToast({ text: 'Your dossier PDF is unlocked. It stays yours while this settlement is saved.', persistent: false });
+            setTimeout(() => { if (!cancelled) setCheckoutToast(null); }, 4000);
+            return;
+          }
           // Bind Stripe's session to THIS purchase's token (the dt param) so
           // concurrent purchases never cross-contaminate (F21). Forward
           // session_id + dt to the landing page so it can verify precisely its own
           // paid session — even on a different device where no stash exists.
           attachPendingDossierCheckout(result.sessionId, result.dossierToken || null);
+          // Arm the same-device retro-claim voucher with the paid session id (108),
+          // so a later sign-up + save of this settlement can silently attach the
+          // durable export right. Best-effort; a missing voucher just means the
+          // anonymous one-shot stays a one-shot.
+          try {
+            const { attachDossierClaimSession } = await import('./lib/dossierClaimStash.js');
+            attachDossierClaimSession(result.sessionId);
+          } catch { /* non-fatal */ }
           const search = [
             result.sessionId ? `session_id=${encodeURIComponent(result.sessionId)}` : '',
             result.dossierToken ? `dt=${encodeURIComponent(result.dossierToken)}` : '',
@@ -209,6 +250,10 @@ export default function App() {
         });
         if (cancelled) return;
         if (outcome.outcome === OUTCOME.SUCCESS) {
+          // Paid-conversion funnel: fire ONLY on a server-verified success (never
+          // from the ?checkout=success URL alone). checkCheckoutResult() already
+          // consumed the URL params, so a remount can never double-fire.
+          stripeLib.trackCheckoutSuccess(result.product);
           const msg = result.product === 'premium'
             ? 'Cartographer activated!'
             : result.product === 'founder_lifetime'
@@ -244,6 +289,13 @@ export default function App() {
     });
     return () => { cancelled = true; };
   }, [initAuth, initOnboarding, setCreditBalance]);
+
+  // Auto-dismiss the dossier retro-claim confirmation toast after a short read.
+  useEffect(() => {
+    if (!dossierClaimToast) return undefined;
+    const id = setTimeout(() => setDossierClaimToast(null), 6000);
+    return () => clearTimeout(id);
+  }, [dossierClaimToast, setDossierClaimToast]);
 
   useEffect(() => {
     if (!authLoading && authTier !== 'anon') {
@@ -833,6 +885,13 @@ export default function App() {
         </Suspense>
       )}
 
+      {/* ── Feedback widget (global floating affordance) ─────────
+          Off the auth/checkout chrome; self-contained (reads the store, owns its
+          open/submit state) so the mount is a one-liner. */}
+      <Suspense fallback={null}>
+        <FeedbackWidget visible={!AUTH_ROUTE_VIEWS.has(view)} />
+      </Suspense>
+
       {/* ── Checkout result notice ────────────────────────────────
           F23: `checkoutToast` is { text, persistent }. A confirmed success is a
           brief green auto-dismiss toast; a "still processing" / failed-to-confirm
@@ -864,6 +923,28 @@ export default function App() {
               />
             </span>
           )}
+        </div>
+      )}
+
+      {/* ── Dossier retro-claim confirmation ──────────────────────
+          A quiet, single confirmation that a durable PDF right silently attached
+          to a just-saved settlement bought before sign-up. Calm parchment styling
+          (not the green success gradient) — it is a gentle grace, not a purchase
+          receipt. role="status" so it is announced. */}
+      {dossierClaimToast && (
+        <div
+          role="status"
+          style={{
+            position: 'fixed', bottom: SP.xxl, left: '50%', transform: 'translateX(-50%)',
+            zIndex: 2000, maxWidth: 'min(92vw, 420px)',
+            padding: `${SP.md}px ${SP.lg}px`,
+            background: PARCH_100, color: BODY,
+            border: `1px solid ${BORDER}`, borderRadius: R.lg,
+            fontSize: FS.sm, fontWeight: 600, fontFamily: sans, lineHeight: 1.45,
+            boxShadow: '0 6px 24px rgba(0,0,0,0.18)',
+          }}
+        >
+          {dossierClaimToast}
         </div>
       )}
 
