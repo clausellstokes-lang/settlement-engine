@@ -830,3 +830,13 @@ trickster god over a dukedom; the lawgiver's temple in a freebooter port). THEOC
 case: its affinity IS the patron's position — synergy by construction (which is why
 religious_authority already amplifies everything else). Neutrality theorem holds: deity-free
 or zero-piety => no synergy term, byte-identical.
+
+### Evil-pact cohesion (OWNER, 2026-07-10 — lands W-F4, inter-deity alliance/betrayal channel)
+Evil deities DO band together for convenience, and pact cohesion within evil scales on the LAW
+axis: two lawful-evil deities bond more strongly than ANY combination containing a chaotic-evil
+party — semantics: evil-pact cohesion amplification keys on the MINIMUM lawfulness across the
+parties (the least lawful member sets the ceiling); betrayal hazard scales inversely. So
+LE x LE > LE x CE >= CE x CE. The earlier asymmetry remains the cap: even the strongest
+lawful-evil compact is transactional and betrayal-priced — evil's best cooperation approaches
+good's consolidated baseline, never exceeds it. (Devils hold treaties; demons can't hold a
+handshake — derived, not declared.)
