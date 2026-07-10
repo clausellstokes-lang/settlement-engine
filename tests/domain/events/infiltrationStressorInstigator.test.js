@@ -27,29 +27,29 @@ const infiltrated = (instigator, instigatorRelationship) => ({
 });
 
 describe('#3 infiltration-stressor instigator → configurable souring', () => {
-  // DEFERRED to events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('defaults to rival when no relationship is chosen', () => {
+  // Landed events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js
+  it('defaults to rival when no relationship is chosen', () => {
     const next = mutateSettlement({ settlement: base('neutral'), event: infiltrated('Stonehaven') });
     expect(relOf(next, 'Stonehaven')).toBe('rival');
     expect(relOf(next, 'Irontown')).toBe('trade_partner'); // untouched
   });
 
-  // DEFERRED to events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('sours to the chosen relationship for each allowed level', () => {
+  // Landed events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js
+  it('sours to the chosen relationship for each allowed level', () => {
     for (const rel of ['rival', 'cold_war', 'hostile']) {
       const next = mutateSettlement({ settlement: base('neutral'), event: infiltrated('Stonehaven', rel) });
       expect(relOf(next, 'Stonehaven')).toBe(rel);
     }
   });
 
-  // DEFERRED to events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('falls back to rival for an out-of-set relationship value', () => {
+  // Landed events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js
+  it('falls back to rival for an out-of-set relationship value', () => {
     const next = mutateSettlement({ settlement: base('neutral'), event: infiltrated('Stonehaven', 'allied') });
     expect(relOf(next, 'Stonehaven')).toBe('rival');
   });
 
-  // DEFERRED to events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('ESCALATES a milder edge (rival → cold_war)', () => {
+  // Landed events wave — needs APPLY_STRESSOR infiltration-instigator souring (instigatorRelationship) in src/domain/events/mutate.js
+  it('ESCALATES a milder edge (rival → cold_war)', () => {
     const next = mutateSettlement({ settlement: base('rival'), event: infiltrated('Stonehaven', 'cold_war') });
     expect(relOf(next, 'Stonehaven')).toBe('cold_war');
   });

@@ -26,8 +26,8 @@ function applyThenUndo(before, event) {
   return { after, undone };
 }
 
-// DEFERRED to events wave — needs pre-add entity-graph snapshot for idempotent ADD_INSTITUTION/ADD_FACTION undo in src/domain/events/undoEvent.js; re-enable when it lands.
-describe.skip('undo of an idempotent ADD restores the pre-add removed state', () => {
+// Landed events wave — needs pre-add entity-graph snapshot for idempotent ADD_INSTITUTION/ADD_FACTION undo in src/domain/events/undoEvent.js
+describe('undo of an idempotent ADD restores the pre-add removed state', () => {
   it('REMOVE_INSTITUTION then ADD_INSTITUTION (same name): undoing the ADD returns it to REMOVED', () => {
     const base = {
       name: 'Oakmere',

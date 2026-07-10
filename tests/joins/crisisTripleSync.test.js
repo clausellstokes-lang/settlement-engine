@@ -597,9 +597,12 @@ describe('source scan — the trio is written only through the lifecycle', () =>
   });
 
   test('the wiring is live, not vacuously empty', () => {
-    // mutate.js routes the crisis events through the lifecycle…
-    expect(codeOf('domain/events/mutate.js')).toMatch(/\bcrisisOnset\(/);
-    expect(codeOf('domain/events/mutate.js')).toMatch(/\bcrisisResolve\(/);
+    // the mutation layer routes the crisis events through the lifecycle. The
+    // world-facing handlers (applyStressor / resolveStressor) live in
+    // mutateWorld.js since the mutate.js god-module split (the router only
+    // dispatches); the crisis lifecycle calls are there.
+    expect(codeOf('domain/events/mutateWorld.js')).toMatch(/\bcrisisOnset\(/);
+    expect(codeOf('domain/events/mutateWorld.js')).toMatch(/\bcrisisResolve\(/);
     // …the store consumes the directives (forward + undo + snapshot)…
     expect(codeOf('store/settlementSlice.js')).toMatch(/\btwinDirectiveForEvent\(/);
     expect(codeOf('store/settlementSlice.js')).toMatch(/\bcrisisWithdraw\(/);

@@ -14,10 +14,14 @@ import {
 // The ENGINE sources of truth (the inline couplings the engine actually applies).
 import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../../../src/domain/corruption.js';
 import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../../../src/domain/worldPulse/disposition.js';
-// DEITY_RANK_AUTHORITY is OWNED by deityEffects in this merge program (causalState.js
-// lands in a later wave and imports it from here — the single-source contract), so the
-// engine source of truth for the rank lift IS deityEffects.
-import { DEITY_RANK_AUTHORITY } from '../../../src/domain/display/deityEffects.js';
+// DEITY_RANK_AUTHORITY's single source is the dependency-free leaf
+// domain/deityConstants.js (amended W2b contract): the engine (causalState)
+// imports the leaf directly — routing through deityEffects would close the
+// causalState>deityEffects>magicProfile cycle the shrink-only layer baseline
+// forbids — and deityEffects re-exports the same object for display consumers.
+// Importing the ENGINE side from the leaf makes the referential pin below prove
+// the re-export is the leaf's object, never a hand-copied drift.
+import { DEITY_RANK_AUTHORITY } from '../../../src/domain/deityConstants.js';
 import {
   DEITY_MAGIC_LEGALITY_STEPS,
   deriveMagicProfile,

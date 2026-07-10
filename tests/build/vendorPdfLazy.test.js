@@ -77,7 +77,39 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // paint-UI static import of a heavy generator (which would drag the engine
 // chunk back in). Check the closure listing the test prints and route the
 // offending edge through kernel / engine-core / a leaf instead.
-const CLOSURE_BUDGET_BYTES = 1_377_000; // 1,311,612 measured + ~5%
+//
+// (2026-07-10, W2b — the ceiling HOLDS at the pre-W2b 1,377,000 because the
+// sim-applier leaf extraction absorbed the wave's eager cost.) The events wave
+// added SHIFT_TIER / IMPOSE_CULT / APPLY_STRESSOR-souring to the event-mutation
+// vocabulary (domain/events/mutateEntities.js + mutateWorld.js, statically
+// reachable from the eager store via mutate.js). Their handlers reuse the landed
+// sim's single-source appliers, which initially dragged the fat sim modules
+// (+~83 kB min) into this closure. Fixed by the mandated leaf extraction (the
+// domain/deityConstants.js pattern):
+//   worldPulse/tierOutcomeApply.js    — applyTierOutcomeToSettlement + its
+//     catalog helpers (imports only institutionalCatalog, data/constants, and
+//     the stablePart slug leaf); tierResourceDynamics.js re-exports verbatim.
+//   worldPulse/cultImpositionApply.js — reconcileCultImposition + nicheOf/
+//     capacityForTier/deityRankStrength + the SLOTS_BY_TIER and
+//     DEITY_RANK_STRENGTH tables (zero imports); religionState.js and
+//     pantheon.js re-export / fold them back.
+//   worldPulse/stablePart.js          — the id-slug (zero imports); worldState.js
+//     re-exports it, so the eager applier mints byte-identical institution ids.
+// The heavy evaluation machinery (worldState, simulationRules, resourceTaxonomy,
+// goodsCatalog, pantheon, relationshipState, canonicalAccessors, supplyChainData)
+// stays lazy — the 514 kB engine chunk is asserted ABSENT above. Remaining W2b
+// additions that legitimately ride first paint: the event handlers themselves,
+// warStressorTypes (zero imports) + canonicalRelationship (import-free, ~7 kB —
+// small APPLY_STRESSOR vocabulary leaves, NOT worth their own split), plus
+// institutionClassify, deityConstants, the causalState 16-variable growth, and
+// the npcData trait tables. NET: MEASURED 1,368,015 raw bytes (7 chunks)
+// post-extraction — up ~56 kB from the 2026-07-09 pre-W2b 1,311,612 (the legit
+// additions above), but still UNDER the pre-W2b 1,377,000 ceiling, which is
+// therefore RESTORED UNCHANGED: W2b lands net-zero against the first-paint
+// budget. If this fails high, the extraction leaked or a new eager heavy edge
+// re-entered — read the closure listing the test prints and route it through
+// kernel / engine-core / a leaf.
+const CLOSURE_BUDGET_BYTES = 1_377_000; // pre-W2b ceiling restored; measured 1,368,015 post-extraction (2026-07-10)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

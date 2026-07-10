@@ -1766,3 +1766,101 @@ export const TRAIT_AGGRESSION = Object.freeze({
   cautious: -0.25,
   reserved: -0.15,
 });
+
+/**
+ * TRAIT_ALIGNMENT — signed good↔evil weights over the AUTHORED personality
+ * descriptor vocabulary (the NPC_PERSONALITY_TRAITS positive/negative/neutral
+ * descriptor strings above).
+ *
+ * The sibling of TRAIT_AGGRESSION. It reads the SAME AUTHORED
+ * `npc.personality.{dominant,flaw,modifier}` strings (what the dossier shows),
+ * NEVER the RNG-rolled `npcStates.alignment` (write-only, dossier-mismatched). It
+ * encodes HOW an individual NPC responds to an embedded deity's good/evil axis —
+ * NOT the deity's own alignment.
+ *
+ * Convention: a POSITIVE weight is a GOOD-leaning conscience (compassionate,
+ * principled, merciful) — such an NPC is MORE incorruptible under a good deity
+ * and MORE RESISTANT to an evil deity's corruption. A NEGATIVE weight is an
+ * EVIL-leaning disposition (cruel, ruthless, deceitful) — such an NPC corrupts
+ * FASTER under an evil deity and is harder for a good deity to reform. The
+ * per-NPC disfavor at the call site is the DOT PRODUCT of this signed score with
+ * the deity's signed alignment direction (see corruption.npcAlignmentScore).
+ *
+ * Magnitudes are bounded (|w| ≤ 1) and intentionally modest. A descriptor absent
+ * from this map contributes EXACTLY 0 (neutral). Keys are lowercased descriptor
+ * strings; lookups normalize case + trim. Pure data — frozen so a typo'd key
+ * reads as `undefined` (→ 0), not a silent miss.
+ *
+ * SINGLE SOURCE: consumed by domain/corruption.js (npcAlignmentScore); the
+ * dormant war/religion layer reads it there. Previously carried a local copy in
+ * corruption.js until this npcData home landed (W2b).
+ * @type {Readonly<Record<string, number>>}
+ */
+export const TRAIT_ALIGNMENT = Object.freeze({
+  // ── good-leaning conscience (positive vocab → +) ──────────────────────────
+  compassionate: 0.85,
+  merciful: 0.85,
+  generous: 0.7,
+  magnanimous: 0.75,
+  'warm-hearted': 0.65,
+  principled: 0.8,
+  incorruptible: 1,
+  'fair-minded': 0.7,
+  honest: 0.75,
+  forthright: 0.6,
+  loyal: 0.4,
+  humble: 0.45,
+  protective: 0.45,
+  pious: 0.5,
+  brave: 0.35,
+  patient: 0.3,
+  // ── evil-leaning disposition (negative vocab → −) ─────────────────────────
+  cruel: -0.9,
+  'cold-blooded': -0.9,
+  ruthless: -0.85,
+  callous: -0.7,
+  wrathful: -0.65,
+  vengeful: -0.65,
+  vindictive: -0.7,
+  deceitful: -0.7,
+  manipulative: -0.7,
+  mendacious: -0.65,
+  corrupt: -0.85,
+  greedy: -0.6,
+  'self-serving': -0.55,
+  hypocritical: -0.5,
+  domineering: -0.45,
+  imperious: -0.4,
+  petty: -0.3,
+  // ── neutral vocab → mild signed nudges (modifier slot) ────────────────────
+  zealous: -0.2,
+  opportunistic: -0.3,
+  cynical: -0.2,
+  hedonistic: -0.25,
+  pragmatic: -0.1,
+  idealistic: 0.3,
+  stoic: 0.1,
+});
+
+/**
+ * TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable weights deciding which of an
+ * NPC's two corruption-relevant personality slots survive generation:
+ *   • `dominant` (a steady TEMPERAMENT) makes an NPC harder for the world-pulse
+ *     sim to turn.
+ *   • `flaw` (greed, ambition, a vice) is the weakness organized crime leverages
+ *     to turn an NPC. No flaw ⇒ nothing to leverage ⇒ the sim can never turn them.
+ *
+ * The four buckets are independent presence outcomes (weights sum to 1.0). A
+ * solid majority keep a flaw (both + flawOnly = 70%) so the background sim still
+ * has people to turn; only 10% have neither slot. The roll is drawn from the
+ * seeded PRNG so generation stays reproducible. This governs ONLY trait
+ * presence — it does NOT touch the manual "Impose corruption" DM override, which
+ * works on any NPC with no flaw check.
+ * @type {Readonly<{both:number, flawOnly:number, temperamentOnly:number, neither:number}>}
+ */
+export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
+  both: 0.40,
+  flawOnly: 0.30,
+  temperamentOnly: 0.20,
+  neither: 0.10,
+});

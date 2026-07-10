@@ -367,8 +367,8 @@ describe('TRAIT_ALIGNMENT reads the AUTHORED personality (OQ13)', () => {
     expect(npcAlignmentScore({})).toBe(0);
   });
 
-  // DEFERRED to W2b corruption wave — needs npcData TRAIT_ALIGNMENT export; re-enable when it lands.
-  it.skip('the lexicon is signed: good descriptors positive, evil negative', () => {
+  // Landed W2b corruption wave — npcData TRAIT_ALIGNMENT export (single source).
+  it('the lexicon is signed: good descriptors positive, evil negative', () => {
     expect(TRAIT_ALIGNMENT.compassionate).toBeGreaterThan(0);
     expect(TRAIT_ALIGNMENT.incorruptible).toBeGreaterThan(0);
     expect(TRAIT_ALIGNMENT.cruel).toBeLessThan(0);

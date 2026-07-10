@@ -22,8 +22,8 @@ import { deepClone } from '../../src/domain/clone.js';
 // ── Finding 3: social_trust reads legacy numeric legitimacy ─────────────────
 
 describe('deriveSocialTrust — legacy numeric legitimacy (Finding 3)', () => {
-  // DEFERRED to W2b causalState wave — needs causalState deriveSocialTrust legacy numeric-legitimacy read; re-enable when it lands.
-  it.skip('moves social_trust when legitimacy is a bare number (legacy save)', () => {
+  // Landed W2b causalState wave — needs causalState deriveSocialTrust legacy numeric-legitimacy read
+  it('moves social_trust when legitimacy is a bare number (legacy save)', () => {
     const neutral = deriveSystemVariable('social_trust', {
       powerStructure: { publicLegitimacy: 50 },
     });
@@ -48,8 +48,8 @@ describe('deriveSocialTrust — legacy numeric legitimacy (Finding 3)', () => {
 // ── Finding 4: tick-invariant fallback condition id ─────────────────────────
 
 describe('conditionIdFromArchetype — tick-invariant fallback (Finding 4)', () => {
-  // DEFERRED to W2b causalState wave — needs activeConditions.conditionIdFromArchetype tick-invariant fallback id; re-enable when it lands.
-  it.skip('produces the same fallback id regardless of tick', () => {
+  // Landed W2b causalState wave — needs activeConditions.conditionIdFromArchetype tick-invariant fallback id
+  it('produces the same fallback id regardless of tick', () => {
     const a = conditionIdFromArchetype('plague', { label: 'Plague', tick: 0 });
     const b = conditionIdFromArchetype('plague', { label: 'Plague', tick: 17 });
     expect(a).toBe(b);
@@ -126,8 +126,8 @@ describe('deepClone — structuredClone fidelity (Finding 9)', () => {
 // ── Finding 10: lower_is_better problem-term phrasing ───────────────────────
 
 describe('summarizeCausalState — lower_is_better problem framing (Finding 10)', () => {
-  // DEFERRED to W2b causalState wave — needs causalState summarizeCausalState lower_is_better problem framing; re-enable when it lands.
-  it.skip('phrases rampant crime in problem terms, not the inverted band word', () => {
+  // Landed W2b causalState wave — needs causalState summarizeCausalState lower_is_better problem framing
+  it('phrases rampant crime in problem terms, not the inverted band word', () => {
     // Drive criminal_opportunity HIGH: low legitimacy + a corruption condition.
     const settlement = {
       powerStructure: { publicLegitimacy: { score: 5, label: 'Crisis' } },

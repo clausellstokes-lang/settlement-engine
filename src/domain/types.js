@@ -69,7 +69,8 @@
  *           | 'RESOLVE_STRESSOR' | 'ADD_TRADE_GOOD' | 'REMOVE_TRADE_GOOD'
  *           | 'ADD_RESOURCE' | 'REMOVE_RESOURCE'
  *           | 'ADD_FACTION' | 'IMPOSE_CORRUPTION' | 'SETTLEMENT_DISPUTE'
- *           | 'PROMOTE_NPC' | 'DEMOTE_NPC'} EventType
+ *           | 'PROMOTE_NPC' | 'DEMOTE_NPC'
+ *           | 'SET_PRIMARY_DEITY' | 'IMPOSE_CULT' | 'SHIFT_TIER'} EventType
  *
  * The full canonical event vocabulary across both shipping waves.
  *   Foundation (v1):      ADD/REMOVE/DAMAGE_INSTITUTION, DEPLETE_RESOURCE, CUT_TRADE_ROUTE

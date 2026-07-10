@@ -273,8 +273,8 @@ describe('B2 — reinforcement (pure)', () => {
 });
 
 describe('B2 — reinforcement drains the origin (integration)', () => {
-  // DEFERRED to W2b causalState wave — needs causalState economic_capacity system variable; re-enable when it lands.
-  test.skip('a sustained deployment stamps reinforcement_cost, dropping the origin economic_capacity', () => {
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
+  test('a sustained deployment stamps reinforcement_cost, dropping the origin economic_capacity', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = HOSTILE_EDGES('strong', 'weak');
     const channels = [{ type: 'war_front', from: 'strong', to: 'weak', status: 'confirmed' }];

@@ -46,8 +46,8 @@ function assign(settlement, deityRef, snapshot) {
 }
 
 describe('SET_PRIMARY_DEITY — the embed bridge', () => {
-  // DEFERRED to events wave — needs events/mutate SET_PRIMARY_DEITY handling; re-enable when it lands.
-  test.skip('writes config.primaryDeityRef + a resolved snapshot', () => {
+  // 
+  test('writes config.primaryDeityRef + a resolved snapshot', () => {
     const next = assign(baseSettlement(), 'custom:lu_vael', SNAPSHOT);
     expect(next.config.primaryDeityRef).toBe('custom:lu_vael');
     expect(next.config.primaryDeitySnapshot).toMatchObject({
@@ -61,15 +61,15 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
     });
   });
 
-  // DEFERRED to events wave — needs events/mutate SET_PRIMARY_DEITY handling; re-enable when it lands.
-  test.skip('a legacy 3-axis snapshot (no lawAxis) embeds lawAxis as neutral (back-compat)', () => {
+  // 
+  test('a legacy 3-axis snapshot (no lawAxis) embeds lawAxis as neutral (back-compat)', () => {
     const legacy = { name: 'Old God', alignmentAxis: 'neutral', temperamentAxis: 'neutral', rankAxis: 'minor' };
     const next = assign(baseSettlement(), 'custom:old_god', legacy);
     expect(next.config.primaryDeitySnapshot.lawAxis).toBe('neutral');
   });
 
-  // DEFERRED to events wave — needs events/mutate SET_PRIMARY_DEITY handling; re-enable when it lands.
-  test.skip('the snapshot is self-contained — mutating the source does not change it', () => {
+  // 
+  test('the snapshot is self-contained — mutating the source does not change it', () => {
     const source = { ...SNAPSHOT };
     const next = assign(baseSettlement(), 'custom:lu_vael', source);
     // Mutate the authored deity afterward.
@@ -79,8 +79,8 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
     expect(next.config.primaryDeitySnapshot.name).toBe('Vael');
   });
 
-  // DEFERRED to events wave — needs events/mutate SET_PRIMARY_DEITY handling; re-enable when it lands.
-  test.skip('no wall-clock / stray field leaks into the embedded snapshot', () => {
+  // 
+  test('no wall-clock / stray field leaks into the embedded snapshot', () => {
     const next = assign(baseSettlement(), 'custom:lu_vael', { ...SNAPSHOT, _embeddedAt: '2026-06-18T00:00:00Z', secret: 42 });
     const snap = next.config.primaryDeitySnapshot;
     expect(snap._embeddedAt).toBeUndefined();
@@ -101,8 +101,8 @@ describe('SET_PRIMARY_DEITY — the embed bridge', () => {
 });
 
 describe('deriveReligiousAuthority — deity term + condition scan', () => {
-  // DEFERRED to W2b causalState wave — needs causalState deity religious_authority lift in deriveSystemVariable; re-enable when it lands.
-  test.skip('a major-deity settlement has higher religious_authority than the same settlement without', () => {
+  // 
+  test('a major-deity settlement has higher religious_authority than the same settlement without', () => {
     const plain = baseSettlement();
     const withDeity = assign(baseSettlement(), 'custom:lu_vael', SNAPSHOT);
 
@@ -111,8 +111,8 @@ describe('deriveReligiousAuthority — deity term + condition scan', () => {
     expect(deityScore).toBeGreaterThan(plainScore);
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState deity religious_authority lift in deriveSystemVariable; re-enable when it lands.
-  test.skip('tier-scaled: a major deity lifts more than a cult', () => {
+  // 
+  test('tier-scaled: a major deity lifts more than a cult', () => {
     const major = assign(baseSettlement(), 'custom:lu_major', { ...SNAPSHOT, rankAxis: 'major' });
     const cult = assign(baseSettlement(), 'custom:lu_cult', { ...SNAPSHOT, rankAxis: 'cult' });
     const majorScore = deriveSystemVariable('religious_authority', major).score;
@@ -129,8 +129,8 @@ describe('deriveReligiousAuthority — deity term + condition scan', () => {
     expect(hasDeityContributor).toBe(false);
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState deriveReligiousAuthority religious_authority condition scan; re-enable when it lands.
-  test.skip('the new condition scan picks up a religious_authority-affecting condition', () => {
+  // Landed W2b causalState wave — causalState deriveReligiousAuthority religious_authority condition scan.
+  test('the new condition scan picks up a religious_authority-affecting condition', () => {
     // A settlement carrying regional_religious_pressure (now declares
     // religious_authority) gains a religious_pressure contributor.
     const withCond = baseSettlement({

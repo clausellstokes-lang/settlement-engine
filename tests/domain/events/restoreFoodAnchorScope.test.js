@@ -22,8 +22,8 @@ const run = (s, type, targetId, payload) => mutateSettlement({
   settlement: s, event: { id: 'e1', type, targetId, payload },
 });
 
-// DEFERRED to events wave — needs food_anchor_lost wind-down on the RESTORE_/ADD_INSTITUTION handlers in src/domain/events/mutate.js; re-enable when it lands.
-describe.skip('food_anchor_lost winds down when the anchor is restored / re-opened', () => {
+// Landed events wave — needs food_anchor_lost wind-down on the RESTORE_/ADD_INSTITUTION handlers in src/domain/events/mutate.js
+describe('food_anchor_lost winds down when the anchor is restored / re-opened', () => {
   it('REMOVE then ADD a granary clears the food_anchor_lost crisis its loss raised', () => {
     const base = {
       name: 'Town',
@@ -128,8 +128,8 @@ describe.skip('food_anchor_lost winds down when the anchor is restored / re-open
   });
 });
 
-// DEFERRED to events wave — needs removal-scoped impairment clearing in the idempotent ADD_INSTITUTION/ADD_FACTION re-add path in src/domain/events/mutate.js; re-enable when it lands.
-describe.skip('idempotent re-add clears ONLY the removal, not unrelated impairments', () => {
+// Landed events wave — needs removal-scoped impairment clearing in the idempotent ADD_INSTITUTION/ADD_FACTION re-add path in src/domain/events/mutate.js
+describe('idempotent re-add clears ONLY the removal, not unrelated impairments', () => {
   it('ADD_INSTITUTION on a removed institution preserves an impairment from an unrelated event', () => {
     const base = {
       name: 'Town',

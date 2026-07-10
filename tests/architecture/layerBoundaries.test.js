@@ -85,6 +85,11 @@ describe('layer boundaries (F29)', () => {
     // (2026-07-10, W2a-main: the pulseKernel port's worldPulse restructure broke
     // both worldPulse cycles — foodStockpile>stressors>stressorGates and
     // relationshipEvolution>relationshipHierarchy — locked here, 4 → 2.)
+    // (2026-07-10, W2b: the causalState port would have closed a NEW
+    // causalState>deityEffects>magicProfile cycle by importing
+    // DEITY_RANK_AUTHORITY via display/deityEffects.js; refused — the constant
+    // moved to the dependency-free leaf domain/deityConstants.js, causalState
+    // imports the leaf, deityEffects re-exports it, and the baseline stays at 2.)
     const ALLOWED = [
       'components/compendium/CustomContent.jsx > components/compendium/Dependencies.jsx',
       'generators/helpers.js > generators/priorityHelpers.js',

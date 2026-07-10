@@ -80,12 +80,16 @@ const TIER_RANK = Object.freeze({ cult: 0, minor: 1, major: 2 });
 const TIER_FOR_RANK = Object.freeze(['cult', 'minor', 'major']);
 
 // Deity rank → base 0..1 strength (major god > minor god > cult). The canonical
-// source the religion contest reads as its `deityRankStrength` base; lives here on
-// the zero-import tuning leaf so both the engine and the presentation layer read
-// ONE constant (a re-tune flows to both) without the display importing the contest
-// engine. Keyed identically for `tier` (pantheon ledger) and `rankAxis` (deity
-// snapshot) — the label sets match.
-const DEITY_RANK_STRENGTH = Object.freeze({ major: 0.95, minor: 0.6, cult: 0.35 });
+// source moved one leaf deeper (W2b byte-budget extraction): it now lives in
+// ./cultImpositionApply.js — the dependency-FREE applier leaf the eager
+// IMPOSE_CULT event handler reads — so the handler avoids pulling this module
+// (which carries the pantheon ratchet kernel) into the first-paint closure.
+// Imported + folded into PANTHEON_TUNING below, so every existing consumer
+// (the religion contest's `deityRankStrength` base, the presentation layer via
+// PANTHEON_TUNING) still reads ONE constant and a re-tune flows to all. Keyed
+// identically for `tier` (pantheon ledger) and `rankAxis` (deity snapshot) —
+// the label sets match.
+import { DEITY_RANK_STRENGTH } from './cultImpositionApply.js';
 
 /**
  * The numeric rank of a tier label (cult 0 / minor 1 / major 2). Unknown labels

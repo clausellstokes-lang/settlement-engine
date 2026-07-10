@@ -778,7 +778,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   },
 
   PROMOTE_NPC: {
-    label: 'Promote NPC',
+    label: 'Promote/Demote NPC',
     description: 'An NPC rises within their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction. The peer is displaced downward.',
     requiresTarget: true,
     targetPrompt: 'NPC who rises',

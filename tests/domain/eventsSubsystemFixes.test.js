@@ -52,8 +52,8 @@ describe('assignNpcMutation heals only the filled vacancy (#1)', () => {
     };
   }
 
-  // DEFERRED to events wave — needs fillsVacancyEventId vacancy-discriminator staffing recovery in assignNpcMutation in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('fillsVacancyEventId clears ONLY that kill\'s staffing impairment', () => {
+  // Landed events wave — needs fillsVacancyEventId vacancy-discriminator staffing recovery in assignNpcMutation in src/domain/events/mutate.js
+  test('fillsVacancyEventId clears ONLY that kill\'s staffing impairment', () => {
     const s = settlementWithTwoVacancies();
     const next = mutateSettlement({
       settlement: s,
@@ -68,8 +68,8 @@ describe('assignNpcMutation heals only the filled vacancy (#1)', () => {
     expect(remaining[0].causeEventId).toBe('kill.sergeant');
   });
 
-  // DEFERRED to events wave — needs role vacancy-discriminator staffing recovery in assignNpcMutation in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('role discriminator clears only the same-role vacancy', () => {
+  // Landed events wave — needs role vacancy-discriminator staffing recovery in assignNpcMutation in src/domain/events/mutate.js
+  test('role discriminator clears only the same-role vacancy', () => {
     const s = settlementWithTwoVacancies();
     const next = mutateSettlement({
       settlement: s,
@@ -104,8 +104,8 @@ describe('target-less PLAGUE / REFUGEE_WAVE onsets get distinct ids (#2)', () =>
   const plagueArchetype = (s) => (s.activeConditions || []).filter(c => c.archetype === 'plague');
   const migrationArchetype = (s) => (s.activeConditions || []).filter(c => c.archetype === 'regional_migration_pressure');
 
-  // DEFERRED to events wave — needs distinct condition ids for target-less PLAGUE onsets in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('two consecutive unnamed plagues compound (do not overwrite)', () => {
+  // Landed events wave — needs distinct condition ids for target-less PLAGUE onsets in src/domain/events/mutate.js
+  test('two consecutive unnamed plagues compound (do not overwrite)', () => {
     let s = { institutions: [], npcs: [], config: {}, activeConditions: [] };
     s = mutateSettlement({ settlement: s, event: ev('PLAGUE', { id: 'plague-1', payload: { severity: 0.5 } }) });
     s = mutateSettlement({ settlement: s, event: ev('PLAGUE', { id: 'plague-2', payload: { severity: 0.7 } }) });
@@ -114,8 +114,8 @@ describe('target-less PLAGUE / REFUGEE_WAVE onsets get distinct ids (#2)', () =>
     expect(new Set(conds.map(c => c.id)).size).toBe(2);
   });
 
-  // DEFERRED to events wave — needs distinct condition ids for target-less REFUGEE_WAVE onsets in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('two consecutive unnamed refugee waves compound', () => {
+  // Landed events wave — needs distinct condition ids for target-less REFUGEE_WAVE onsets in src/domain/events/mutate.js
+  test('two consecutive unnamed refugee waves compound', () => {
     let s = { institutions: [], npcs: [], config: {}, activeConditions: [] };
     s = mutateSettlement({ settlement: s, event: ev('REFUGEE_WAVE', { id: 'wave-1', payload: { size: 'small' } }) });
     s = mutateSettlement({ settlement: s, event: ev('REFUGEE_WAVE', { id: 'wave-2', payload: { size: 'large' } }) });
@@ -157,20 +157,20 @@ describe('batch validation guards missing hard references (#3)', () => {
     config: {},
   };
 
-  // DEFERRED to events wave — needs eventConsumes relationship-neighbour hard-reference in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('eventConsumes now lists the relationship neighbour ref', () => {
+  // Landed events wave — needs eventConsumes relationship-neighbour hard-reference in src/domain/events/batch.js
+  test('eventConsumes now lists the relationship neighbour ref', () => {
     expect(eventConsumes(ev('BROKERED_ALLIANCE', { targetId: 'Riverford' })))
       .toEqual([{ kind: 'neighbour', ref: 'Riverford' }]);
   });
 
-  // DEFERRED to events wave — needs eventConsumes KILL_LEADER npc hard-reference in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('KILL_LEADER hard-requires the NPC', () => {
+  // Landed events wave — needs eventConsumes KILL_LEADER npc hard-reference in src/domain/events/batch.js
+  test('KILL_LEADER hard-requires the NPC', () => {
     expect(eventConsumes(ev('KILL_LEADER', { targetId: 'npc.mayor' })))
       .toEqual([{ kind: 'npc', ref: 'npc.mayor' }]);
   });
 
-  // DEFERRED to events wave — needs eventConsumes swapWithName peer hard-reference in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('PROMOTE_NPC validates the swapWithName peer alternative', () => {
+  // Landed events wave — needs eventConsumes swapWithName peer hard-reference in src/domain/events/batch.js
+  test('PROMOTE_NPC validates the swapWithName peer alternative', () => {
     expect(eventConsumes(ev('PROMOTE_NPC', { targetId: 'npc.deputy', payload: { swapWithName: 'The Mayor' } })))
       .toEqual([{ kind: 'npc', ref: 'npc.deputy' }, { kind: 'npc', ref: 'The Mayor' }]);
   });
@@ -180,29 +180,29 @@ describe('batch validation guards missing hard references (#3)', () => {
     expect(ok).toBe(true);
   });
 
-  // DEFERRED to events wave — needs validateBatch phantom-neighbour blocking in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('relationship event with a phantom neighbour blocks', () => {
+  // Landed events wave — needs validateBatch phantom-neighbour blocking in src/domain/events/batch.js
+  test('relationship event with a phantom neighbour blocks', () => {
     const { ok, warnings } = validateBatch(settlement, [ev('SETTLEMENT_DISPUTE', { targetId: 'Nowhere' })]);
     expect(ok).toBe(false);
     expect(warnings.some(w => w.severity === 'block')).toBe(true);
   });
 
-  // DEFERRED to events wave — needs validateBatch KILL_LEADER phantom-NPC blocking in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('KILL_LEADER with a phantom NPC blocks; a real one passes', () => {
+  // Landed events wave — needs validateBatch KILL_LEADER phantom-NPC blocking in src/domain/events/batch.js
+  test('KILL_LEADER with a phantom NPC blocks; a real one passes', () => {
     expect(validateBatch(settlement, [ev('KILL_LEADER', { targetId: 'npc.ghost' })]).ok).toBe(false);
     expect(validateBatch(settlement, [ev('KILL_LEADER', { targetId: 'npc.mayor' })]).ok).toBe(true);
   });
 
-  // DEFERRED to events wave — needs validateBatch phantom swapWithName-peer blocking in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('PROMOTE_NPC with a phantom swapWithName peer blocks', () => {
+  // Landed events wave — needs validateBatch phantom swapWithName-peer blocking in src/domain/events/batch.js
+  test('PROMOTE_NPC with a phantom swapWithName peer blocks', () => {
     const { ok } = validateBatch(settlement, [
       ev('PROMOTE_NPC', { targetId: 'npc.deputy', payload: { swapWithName: 'A Stranger' } }),
     ]);
     expect(ok).toBe(false);
   });
 
-  // DEFERRED to events wave — needs eventConsumes npcOrFactionOrInstitution ref for EXPOSE_CORRUPTION in src/domain/events/batch.js; re-enable when it lands.
-  test.skip('EXPOSE_CORRUPTION accepts an NPC target (npc/faction/institution)', () => {
+  // Landed events wave — needs eventConsumes npcOrFactionOrInstitution ref for EXPOSE_CORRUPTION in src/domain/events/batch.js
+  test('EXPOSE_CORRUPTION accepts an NPC target (npc/faction/institution)', () => {
     expect(eventConsumes(ev('EXPOSE_CORRUPTION', { targetId: 'npc.mayor' })))
       .toEqual([{ kind: 'npcOrFactionOrInstitution', ref: 'npc.mayor' }]);
     expect(validateBatch(settlement, [ev('EXPOSE_CORRUPTION', { targetId: 'npc.mayor' })]).ok).toBe(true);
@@ -236,8 +236,8 @@ describe('faction responses classify via the registry (#5)', () => {
 // ── #7 swapNpcStanding swaps presence as well as value ──────────────────────
 
 describe('swapNpcStanding never writes field:undefined (#7)', () => {
-  // DEFERRED to events wave — needs swapNpcStanding presence-swap (no field:undefined writes) in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('a field present on only one peer ends up present on the OTHER, absent on the first', () => {
+  // Landed events wave — needs swapNpcStanding presence-swap (no field:undefined writes) in src/domain/events/mutate.js
+  test('a field present on only one peer ends up present on the OTHER, absent on the first', () => {
     const s = {
       institutions: [],
       npcs: [
@@ -284,8 +284,8 @@ describe('removedThreat prefers exact match (#8)', () => {
     expect(names).not.toContain('Rats');
   });
 
-  // DEFERRED to events wave — needs removedThreat short-label substring guard in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('a 1-3 char label no longer matches greedily by substring', () => {
+  // Landed events wave — needs removedThreat short-label substring guard in src/domain/events/mutate.js
+  test('a 1-3 char label no longer matches greedily by substring', () => {
     const s = {
       institutions: [],
       npcs: [],
@@ -300,8 +300,8 @@ describe('removedThreat prefers exact match (#8)', () => {
 });
 
 describe('recoveredResource clears the live depleted entry by slug tolerance (#8)', () => {
-  // DEFERRED to events wave — needs recoveredResource slug-tolerant depleted-entry clearing in src/domain/events/mutate.js; re-enable when it lands.
-  test.skip('a verbatim custom-name depleted entry is cleared even when the target slugifies', () => {
+  // Landed events wave — needs recoveredResource slug-tolerant depleted-entry clearing in src/domain/events/mutate.js
+  test('a verbatim custom-name depleted entry is cleared even when the target slugifies', () => {
     const s = {
       institutions: [],
       npcs: [],

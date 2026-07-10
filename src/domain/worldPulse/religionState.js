@@ -18,13 +18,18 @@
  */
 
 import { clamp01 } from './relationshipState.js';
-import { PANTHEON_TUNING } from './pantheon.js';
 import { popToTier } from '../../data/constants.js';
-
-const DEITY_RANK_STRENGTH = PANTHEON_TUNING.DEITY_RANK_STRENGTH;
+// The cult-imposition APPLIER + its two small tables moved VERBATIM to the
+// dependency-free leaf ./cultImpositionApply.js (W2b byte-budget extraction) so
+// the eager IMPOSE_CULT event handler reuses them WITHOUT dragging this module
+// (+ relationshipState + the pantheon kernel) into the first-paint closure.
+// Imported + re-exported verbatim here — every sim consumer is unchanged, and
+// SLOTS_BY_TIER folds back into RELIGION_TUNING below (one source per table).
+import { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition, SLOTS_BY_TIER } from './cultImpositionApply.js';
+export { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition };
 
 export const RELIGION_TUNING = Object.freeze({
-  SLOTS_BY_TIER: Object.freeze({ thorp: 1, hamlet: 2, village: 2, town: 3, city: 5, metropolis: 7 }),
+  SLOTS_BY_TIER,
   CULT_SEED_SHARE: 4,         // an arriving cult's seed share
   SHARE_STEP_MAX: 6,          // max adherent-share a deity gains/loses per tick (gradual)
   PUSH_MARGIN: 1.1,           // same-niche push-out: newcomer claim must beat incumbent share ×this
@@ -55,15 +60,7 @@ export const RELIGION_TUNING = Object.freeze({
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
-/** A deity's niche key — its temperament × alignment. @param {any} d @returns {string} */
-export function nicheOf(d) {
-  return `${d?.temperamentAxis || 'neutral'}:${d?.alignmentAxis || 'neutral'}`;
-}
-
-/** Slot capacity for a settlement tier (how many faiths the populace sustains). @param {string} tier */
-export function capacityForTier(tier) {
-  return /** @type {Record<string, number>} */ (RELIGION_TUNING.SLOTS_BY_TIER)[tier] ?? 2;
-}
+// (nicheOf / capacityForTier live in ./cultImpositionApply.js — re-exported above.)
 
 // ── Faith MASS: a settlement's weight in PROJECTING and RESISTING cross-settlement
 // faith influence. A bigger settlement sways its smaller neighbours strongly and barely
@@ -94,10 +91,7 @@ export function neighbourFaithInfluence(neighbourMass, targetMass) {
   return Math.max(MASS_INFLUENCE_MIN, Math.min(MASS_INFLUENCE_MAX, r));
 }
 
-/** 0..1 global-rank strength of a deity (major > minor > cult). @param {any} d */
-export function deityRankStrength(d) {
-  return /** @type {Record<string,number>} */ (DEITY_RANK_STRENGTH)[d?.rankAxis] ?? DEITY_RANK_STRENGTH.minor;
-}
+// (deityRankStrength lives in ./cultImpositionApply.js — re-exported above.)
 
 /** Active (non-suppressed) deity refs, codepoint-sorted. @param {Record<string, any>} deities */
 function activeRefs(deities) {
@@ -208,53 +202,8 @@ export function ensureReligionState(state, settlement, tier) {
   return s;
 }
 
-/**
- * Reconcile a DM-imposed CULT into a settlement's persistent cult list, honoring
- * tier capacity (the patron reserves one slot) and the one-deity-per-niche rule
- * (temperament × alignment). A large settlement (more slots) hosts cults across the
- * full niche grid; a small one (few slots) reconciles by refusing or evicting the
- * weakest existing cult. PURE: returns the next cult array + an outcome tag; never
- * touches the patron. The incoming `deity` must already be embed-shaped + frozen
- * (the handler owns the field discipline, mirroring setPrimaryDeity).
- * @param {{ patron?: any, cults?: any[], tier?: string, deity: any }} args
- * @returns {{ cults: any[], action: 'added'|'replaced'|'evicted'|'refused', reason: string, evicted: (string|null) }}
- */
-export function reconcileCultImposition({ patron = null, cults = [], tier = 'village', deity }) {
-  const list = Array.isArray(cults) ? cults.filter(Boolean) : [];
-  const ref = String(deity?._deityRef || deity?.name || '');
-  if (!ref) return { cults: list, action: 'refused', reason: 'invalid', evicted: null };
-  // A deity cannot be both patron and cult.
-  if (patron && String(patron._deityRef || patron.name || '') === ref) {
-    return { cults: list, action: 'refused', reason: 'is_patron', evicted: null };
-  }
-  const niche = nicheOf(deity);
-  // NOTE: a cult imposed in the PATRON's niche is NOT refused — it enters as a
-  // contestant and triggers the seeded patron contest (resolvePatronContest) in the
-  // pulse. It still occupies a cult slot, so capacity/eviction below applies.
-  // Same-niche existing cult → replace it (idempotent refresh, or a niche swap).
-  const sameNicheIdx = list.findIndex((c) => nicheOf(c) === niche);
-  if (sameNicheIdx >= 0) {
-    const replaced = String(list[sameNicheIdx]?._deityRef || list[sameNicheIdx]?.name || '');
-    const next = list.slice();
-    next[sameNicheIdx] = deity;
-    return { cults: next, action: 'replaced', reason: replaced === ref ? 'refresh' : 'niche_swap', evicted: replaced === ref ? null : replaced };
-  }
-  // Capacity: total deities (patron + cults) ≤ tier slots ⇒ cult slots = slots − patron.
-  const cultCapacity = Math.max(0, capacityForTier(tier) - (patron ? 1 : 0));
-  if (list.length < cultCapacity) {
-    return { cults: [...list, deity], action: 'added', reason: 'open_slot', evicted: null };
-  }
-  if (cultCapacity === 0) {
-    return { cults: list, action: 'refused', reason: 'no_cult_slots', evicted: null };
-  }
-  // Capacity full → evict the WEAKEST existing cult (lowest global rank; codepoint
-  // tiebreak) so the imposition seats (a small settlement reconciles by displacement).
-  const weakest = list.slice().sort((a, b) =>
-    (deityRankStrength(a) - deityRankStrength(b)) || codepoint(String(a?._deityRef || a?.name || ''), String(b?._deityRef || b?.name || '')))[0];
-  const weakestRef = String(weakest?._deityRef || weakest?.name || '');
-  const next = list.filter((c) => String(c?._deityRef || c?.name || '') !== weakestRef);
-  return { cults: [...next, deity], action: 'evicted', reason: 'capacity_full', evicted: weakestRef };
-}
+// (reconcileCultImposition lives in ./cultImpositionApply.js — re-exported above:
+// the IMPOSE_CULT handler and the sim read the SAME single-source applier.)
 
 /**
  * Attempt to bring a newcomer deity into the settlement this tick. Implements the

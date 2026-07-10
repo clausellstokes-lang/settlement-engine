@@ -165,8 +165,8 @@ describe('war layer — deployment + drain', () => {
     expect(drain.condition.severity).toBeGreaterThan(0);
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState economic_capacity system variable; re-enable when it lands.
-  test.skip('war_drain drains the home economic_capacity (the homeostasis SOURCE is live)', () => {
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
+  test('war_drain drains the home economic_capacity (the homeostasis SOURCE is live)', () => {
     const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
     const edges = {
       settlementIds: ['strong', 'weak'],

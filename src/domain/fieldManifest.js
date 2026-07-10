@@ -184,7 +184,10 @@ export const FROZEN_VS_LIVE = Object.freeze([
     path: 'tier',
     field: 'tier',
     mode: 'live',
-    pulseWriter: 'src/domain/worldPulse/tierResourceDynamics.js#applyTierOutcomeToSettlement',
+    // The applier moved VERBATIM to the tierOutcomeApply.js leaf (W2b byte-budget
+    // extraction); tierResourceDynamics.js re-exports it, but the manifest names
+    // the file that DEFINES the writer (the source-scan pin reads definitions).
+    pulseWriter: 'src/domain/worldPulse/tierOutcomeApply.js#applyTierOutcomeToSettlement',
     writeProbe: '(?<![.\\w\'"`:])tier\\s*:',
     displayRule: 'Live BY PROPOSAL: tier moves only through the proposal gate, with the '
       + 're-verify-current-state apply guard (C2).',

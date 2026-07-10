@@ -7,7 +7,7 @@
  *   - corruption.js     DEITY_CORRUPTION_TUNING  — good/evil → corruption direction+magnitude
  *   - corruption.js     DEITY_LAW_TUNING         — lawful/chaotic → law_order + corruption-tolerance
  *   - disposition.js    DEITY_TEMPER_SIGN, AGGRESSION_TUNING.W_DEITY — warlike/peacelike → aggression
- *   - deityEffects.js   DEITY_RANK_AUTHORITY     — major/minor/cult → religious_authority lift
+ *   - deityConstants.js DEITY_RANK_AUTHORITY     — major/minor/cult → religious_authority lift
  *   - magicProfile.js   DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory — major (+ warlike/evil) → magic legality
  *
  * This module RE-EXPORTS those engine constants (it does not re-tune them) so the
@@ -17,13 +17,17 @@
  * here automatically; a hand-copied number would silently drift, which is exactly
  * what this seam prevents.
  *
- * SINGLE-SOURCE OWNERSHIP of DEITY_RANK_AUTHORITY. In the reference tree this
- * constant lives in causalState.js and deityEffects imports it. In this merge
- * program causalState.js is owned by a later wave (W2b) and does not yet carry the
- * symbol, so — per the program's single-source rule — deityEffects.js DEFINES and
- * OWNS DEITY_RANK_AUTHORITY here. W2b CONTRACT: when you port causalState.js,
- * IMPORT DEITY_RANK_AUTHORITY from this module (do NOT redefine it) so the
- * major/minor/cult religious-authority lift has exactly one source.
+ * DEITY_RANK_AUTHORITY: single source = deityConstants.js, re-exported here for
+ * display consumers. The constant lives in the dependency-free leaf
+ * domain/deityConstants.js so the ENGINE (causalState.deriveReligiousAuthority)
+ * imports it there directly — importing it via THIS module would close the
+ * causalState > deityEffects > magicProfile > causalState cycle (this module
+ * re-exports magicProfile's deity-magic constants, and magicProfile reads
+ * deriveCausalState), which the shrink-only layer-boundary baseline forbids.
+ * Display consumers keep importing it from here (a verbatim re-export — the
+ * referential-identity pin in tests/domain/display/deityEffects.test.js proves
+ * it is the leaf's object, never a copy), so the major/minor/cult
+ * religious-authority lift still has exactly one source.
  *
  * PRESENTATION ONLY. Pure, rng-free, no mutation, no store/React. A deity-free
  * settlement (no embedded snapshot) yields an EMPTY effect list — the dormancy
@@ -40,12 +44,10 @@
 import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../corruption.js';
 import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../worldPulse/disposition.js';
 import { DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory } from '../magicProfile.js';
-
-// major/minor/cult → religious_authority lift. OWNED HERE (single source — see the
-// W2b CONTRACT in the module header): the reference tree keeps this in causalState.js,
-// but that file lands in a later wave, so this module is its canonical home. W2b's
-// causalState port must import this, never redefine it.
-export const DEITY_RANK_AUTHORITY = Object.freeze({ major: 18, minor: 10, cult: 5 });
+// major/minor/cult → religious_authority lift. Single source = deityConstants.js
+// (a dependency-free leaf; see the module header for why the engine reads the
+// leaf while display consumers read this re-export).
+import { DEITY_RANK_AUTHORITY } from '../deityConstants.js';
 
 // Re-export the engine couplings verbatim — this module is the named single
 // source the UI imports, while the values remain owned by the engine.
@@ -56,6 +58,7 @@ export {
   AGGRESSION_TUNING,
   DEITY_MAGIC_LEGALITY_STEPS,
   deityIsRegulatory,
+  DEITY_RANK_AUTHORITY,
 };
 
 /**

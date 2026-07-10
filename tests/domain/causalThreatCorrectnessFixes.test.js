@@ -54,8 +54,8 @@ describe('deriveRulingAuthority — exact governing-faction join', () => {
     },
   });
 
-  // DEFERRED to W2b causalState wave — needs deriveRulingAuthority exact-join fix; re-enable when it lands.
-  it.skip('attributes governing power to the EXACT governing faction, not a leading-token sibling', () => {
+  // Landed W2b causalState wave — needs deriveRulingAuthority exact-join fix
+  it('attributes governing power to the EXACT governing faction, not a leading-token sibling', () => {
     const v = deriveSystemVariable('ruling_authority', rosterSharingLeadingToken('Merchant League'));
     const governing = v.contributors.find(c => c.effect === 'governing_power');
     expect(governing).toBeTruthy();
@@ -96,8 +96,8 @@ describe('deriveRulingAuthority — exact governing-faction join', () => {
     expect(governing.delta).toBe(20); // (70-30)*0.5
   });
 
-  // DEFERRED to W2b causalState wave — needs deriveRulingAuthority exact-join fix; re-enable when it lands.
-  it.skip('does NOT mint a join on a mid-token prefix (the substring misroute can never recur)', () => {
+  // Landed W2b causalState wave — needs deriveRulingAuthority exact-join fix
+  it('does NOT mint a join on a mid-token prefix (the substring misroute can never recur)', () => {
     // "Merchantmen" begins with "merchant" but NOT on a word boundary — the old
     // substring bug would have matched the "Merchant" faction; the whole-word
     // fallback must reject it, so there is NO governing_power contributor.

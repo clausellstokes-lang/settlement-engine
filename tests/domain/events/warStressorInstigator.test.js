@@ -21,15 +21,15 @@ const war = (instigator, stressorType = 'siege') => ({
 });
 
 describe('#1 war-stressor instigator → hostile', () => {
-  // DEFERRED to events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('flips the named instigator to hostile on a siege', () => {
+  // Landed events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js
+  it('flips the named instigator to hostile on a siege', () => {
     const next = mutateSettlement({ settlement: base('neutral'), event: war('Stonehaven') });
     expect(relOf(next, 'Stonehaven')).toBe('hostile');
     expect(relOf(next, 'Irontown')).toBe('trade_partner'); // untouched
   });
 
-  // DEFERRED to events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('flips for every WAR_STRESSOR_TYPES variant', () => {
+  // Landed events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js
+  it('flips for every WAR_STRESSOR_TYPES variant', () => {
     for (const t of ['siege', 'wartime', 'occupation', 'betrayal']) {
       const next = mutateSettlement({ settlement: base('neutral'), event: war('Stonehaven', t) });
       expect(relOf(next, 'Stonehaven')).toBe('hostile');
@@ -51,8 +51,8 @@ describe('#1 war-stressor instigator → hostile', () => {
     expect(next.neighbourNetwork.find((n) => n.name === 'Stonehaven')._relationshipEventId).toBeUndefined();
   });
 
-  // DEFERRED to events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js; re-enable when it lands.
-  it.skip('ESCALATES a cold_war neighbour to hostile (cold_war is below hostile on the adversarial axis)', () => {
+  // Landed events wave — needs APPLY_STRESSOR war-stressor instigator-to-hostile souring in src/domain/events/mutate.js
+  it('ESCALATES a cold_war neighbour to hostile (cold_war is below hostile on the adversarial axis)', () => {
     // A war stressor targets the top of the axis (hostile). cold_war ranks below
     // it, so a siege escalates the edge the rest of the way to open hostility —
     // the no-downgrade guard only blocks SOFTENING, never escalation.

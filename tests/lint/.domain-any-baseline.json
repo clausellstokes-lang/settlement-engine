@@ -1,7 +1,7 @@
 {
-  "total": 2291,
-  "totalAny": 2251,
-  "totalSuppress": 40,
+  "total": 2195,
+  "totalAny": 2156,
+  "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
       "any": 22,
@@ -29,7 +29,7 @@
     },
     "src/domain/causalState.js": {
       "any": 0,
-      "suppress": 4
+      "suppress": 3
     },
     "src/domain/clock.js": {
       "any": 1,
@@ -120,7 +120,7 @@
       "suppress": 0
     },
     "src/domain/events/batch.js": {
-      "any": 14,
+      "any": 15,
       "suppress": 0
     },
     "src/domain/events/drainQueuedEvents.js": {
@@ -132,7 +132,19 @@
       "suppress": 2
     },
     "src/domain/events/mutate.js": {
-      "any": 82,
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/events/mutateEntities.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/events/mutateHelpers.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/events/mutateWorld.js": {
+      "any": 2,
       "suppress": 0
     },
     "src/domain/events/registry.js": {
@@ -140,7 +152,7 @@
       "suppress": 0
     },
     "src/domain/events/undoEvent.js": {
-      "any": 26,
+      "any": 3,
       "suppress": 0
     },
     "src/domain/factionArchetypes.js": {
@@ -281,6 +293,10 @@
     },
     "src/domain/worldPulse/coup.js": {
       "any": 9,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/cultImpositionApply.js": {
+      "any": 6,
       "suppress": 0
     },
     "src/domain/worldPulse/decisionTier.js": {
@@ -424,7 +440,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/religionState.js": {
-      "any": 28,
+      "any": 22,
       "suppress": 0
     },
     "src/domain/worldPulse/religiousContest.js": {
@@ -445,6 +461,10 @@
     },
     "src/domain/worldPulse/simulationRules.js": {
       "any": 12,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/stablePart.js": {
+      "any": 1,
       "suppress": 0
     },
     "src/domain/worldPulse/stressorAftermath.js": {
@@ -479,8 +499,12 @@
       "any": 4,
       "suppress": 0
     },
+    "src/domain/worldPulse/tierOutcomeApply.js": {
+      "any": 20,
+      "suppress": 0
+    },
     "src/domain/worldPulse/tierResourceDynamics.js": {
-      "any": 66,
+      "any": 46,
       "suppress": 0
     },
     "src/domain/worldPulse/tradeSalience.js": {
@@ -504,7 +528,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/worldState.js": {
-      "any": 34,
+      "any": 33,
       "suppress": 0
     }
   }

@@ -1,6 +1,7 @@
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
+import { stablePart } from './stablePart.js';
 
 export const WORLD_STATE_SCHEMA_VERSION = 2;
 
@@ -34,14 +35,11 @@ function finite(value, fallback = 0) {
   return Number.isFinite(value) ? value : fallback;
 }
 
-/** @param {any} value */
-export function stablePart(value) {
-  return String(value || 'unknown')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 80) || 'unknown';
-}
+// stablePart moved to the dependency-free leaf ./stablePart.js (W2b byte-budget
+// extraction) so the eager tier-outcome applier mints identical ids without
+// importing this module; imported above (this module still uses it) and
+// re-exported verbatim — every consumer is unchanged.
+export { stablePart };
 
 /** @param {any} value */
 function cloneArray(value) {

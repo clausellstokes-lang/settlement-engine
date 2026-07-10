@@ -91,29 +91,15 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
     expect(denyLine[1]).toMatch(/\|seed\|_config\)?/);
   });
 
-  // ── SQL ⇄ JS drift pin — PENDING the src/domain publicSafe.js twin merge ─────
-  // The JS twin (PUBLIC_TOPLEVEL_KEYS) must be reconciled to CANONICAL_ALLOWLIST
-  // (drop _seed/_config, add the 4 relationship/history keys). That file is owned
-  // by the src/domain merge wave (out of this wave's scope), so until it lands the
-  // strict SQL⇄JS equality would fail on the KNOWN transitional delta. This pin is
-  // SKIPPED here and MUST be re-enabled (unskipped) by the wave that updates
-  // src/domain/display/publicSafe.js — at which point SQL == JS == canonical.
-  it.skip('[re-enable after publicSafe.js twin merge] SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
+  // ── SQL ⇄ JS drift pin — src/domain publicSafe.js twin merged (W2b) ──────────
+  // The JS twin (PUBLIC_TOPLEVEL_KEYS) has been reconciled to CANONICAL_ALLOWLIST
+  // (dropped _seed/_config, added the 4 relationship/history keys) by the src/domain
+  // merge wave, so SQL == JS == canonical now holds strictly. The transitional
+  // delta guard that lived here (asserting the KNOWN {seed/config} vs {4 render
+  // keys} lag) was DELETED at the same time — its whole purpose was to stay green
+  // while the twin lagged; both arrays are now equal.
+  it('SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
     expect(parseSqlAllowlist(sql).sort()).toEqual([...PUBLIC_TOPLEVEL_KEYS].sort());
-  });
-
-  it('the KNOWN Wave-1 delta between SQL and the current JS twin is exactly {seed/config} vs {4 render keys}', () => {
-    // A LIVE transitional guard: green while the twin lags, and it catches any
-    // OTHER drift. When src/domain updates publicSafe.js both arrays go empty and
-    // this must be tightened to the strict equality above (then delete this).
-    const sqlSet = new Set(parseSqlAllowlist(sql));
-    const jsSet = new Set(PUBLIC_TOPLEVEL_KEYS);
-    const sqlOnly = [...sqlSet].filter(k => !jsSet.has(k)).sort();
-    const jsOnly = [...jsSet].filter(k => !sqlSet.has(k)).sort();
-    expect(sqlOnly).toEqual(
-      ['crossSettlementConflicts', 'interSettlementRelationships', 'neighbourNetwork', 'populationHistory'],
-    );
-    expect(jsOnly).toEqual(['_config', '_seed']);
   });
 });
 

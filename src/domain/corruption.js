@@ -19,64 +19,10 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
-
-// NOTE for W2b's corruption.js port: the reference `npcAlignmentScore` imports
-// TRAIT_ALIGNMENT from data/npcData.js — but our npcData.js does not yet carry
-// that map (W2a-main adds only TRAIT_AGGRESSION; TRAIT_ALIGNMENT lands with W2b's
-// corruption re-port). Per the single-source pattern this program uses, it is
-// owned locally HERE for now so the dormant export resolves; when W2b re-ports
-// corruption.js it should source TRAIT_ALIGNMENT from data/npcData.js and drop
-// this local copy (they are byte-identical to the reference npcData map).
-/** Signed good↔evil conscience weight per authored personality descriptor.
- *  Copied verbatim from the reference data/npcData.js TRAIT_ALIGNMENT map; owned
- *  locally here only until W2b's npcData port carries it. A descriptor absent
- *  from this map contributes EXACTLY 0 (neutral).
- *  @type {Readonly<Record<string, number>>} */
-const TRAIT_ALIGNMENT = Object.freeze({
-  // ── good-leaning conscience (positive vocab → +) ──────────────────────────
-  compassionate: 0.85,
-  merciful: 0.85,
-  generous: 0.7,
-  magnanimous: 0.75,
-  'warm-hearted': 0.65,
-  principled: 0.8,
-  incorruptible: 1,
-  'fair-minded': 0.7,
-  honest: 0.75,
-  forthright: 0.6,
-  loyal: 0.4,
-  humble: 0.45,
-  protective: 0.45,
-  pious: 0.5,
-  brave: 0.35,
-  patient: 0.3,
-  // ── evil-leaning disposition (negative vocab → −) ─────────────────────────
-  cruel: -0.9,
-  'cold-blooded': -0.9,
-  ruthless: -0.85,
-  callous: -0.7,
-  wrathful: -0.65,
-  vengeful: -0.65,
-  vindictive: -0.7,
-  deceitful: -0.7,
-  manipulative: -0.7,
-  mendacious: -0.65,
-  corrupt: -0.85,
-  greedy: -0.6,
-  'self-serving': -0.55,
-  hypocritical: -0.5,
-  domineering: -0.45,
-  imperious: -0.4,
-  petty: -0.3,
-  // ── neutral vocab → mild signed nudges (modifier slot) ────────────────────
-  zealous: -0.2,
-  opportunistic: -0.3,
-  cynical: -0.2,
-  hedonistic: -0.25,
-  pragmatic: -0.1,
-  idealistic: 0.3,
-  stoic: 0.1,
-});
+// TRAIT_ALIGNMENT is single-sourced in data/npcData.js (beside TRAIT_AGGRESSION).
+// npcAlignmentScore below reads it; the W2b port dropped the local copy that once
+// lived here (byte-identical to this npcData home) so there is exactly one source.
+import { TRAIT_ALIGNMENT } from '../data/npcData.js';
 
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)

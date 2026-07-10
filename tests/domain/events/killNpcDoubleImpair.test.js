@@ -30,8 +30,8 @@ const settlement = () => ({
   }],
 });
 
-// DEFERRED to events wave — needs kill-NPC double-impair fix (propagation visited-set seeding) in src/domain/events/mutate.js; re-enable when it lands.
-describe.skip('KILL_NPC double-application', () => {
+// Landed events wave — needs kill-NPC double-impair fix (propagation visited-set seeding) in src/domain/events/mutate.js
+describe('KILL_NPC double-application', () => {
   it('impairs each linked entity EXACTLY once at full direct severity (no propagated clobber)', () => {
     const next = mutateSettlement({
       settlement: settlement(),
@@ -58,7 +58,14 @@ describe.skip('KILL_NPC double-application', () => {
     expect(leadership[0].severity).toBe(1.0);
   });
 
-  it('a KEY (non-pillar) npc death lands EXACTLY ONE faction dimension (membership), no spurious leadership crisis', () => {
+  // DEFERRED to the propagation wave — killNpcMutation's double-impair re-assert
+  // landed (mutateEntities.js), but suppressing the spurious propagated LEADERSHIP
+  // hit on the directly-wounded faction needs the per-impairment-TYPE visited-set
+  // keying in src/domain/entities/propagate.js (theirs keys visited by
+  // entityType:entityId:impairmentType and seeds the direct hits). That file is
+  // out of this wave's fence (landed worldPulse depends on its propagation), so
+  // this stays skipped until the propagate.js port lands. re-enable then.
+  it.skip('a KEY (non-pillar) npc death lands EXACTLY ONE faction dimension (membership), no spurious leadership crisis', () => {
     // killNpc stamps MEMBERSHIP for a key npc (leadership is pillar-only). The
     // propagation must agree: before the fix, mapDimension mapped a key npc's
     // weight-0.7 edge to LEADERSHIP, so the faction ended with BOTH membership

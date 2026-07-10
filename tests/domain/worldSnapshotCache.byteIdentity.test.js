@@ -99,8 +99,8 @@ describe('buildWorldSnapshot — per-settlement derivation cache', () => {
     }
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState law_order system variable; re-enable when it lands.
-  test.skip('cache MISS: a mutated settlement (new ref) yields freshly derived, non-stale objects', () => {
+  // Landed W2b causalState wave — needs causalState law_order system variable
+  test('cache MISS: a mutated settlement (new ref) yields freshly derived, non-stale objects', () => {
     const saves = fixtureSaves();
     const campaign = campaignFor(saves);
 

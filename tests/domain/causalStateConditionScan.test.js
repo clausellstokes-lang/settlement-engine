@@ -36,8 +36,8 @@ const town = (activeConditions = []) => ({
   activeConditions,
 });
 
-// DEFERRED to W2b causalState wave — needs causalState applyConditions condition-scan re-port; re-enable when it lands.
-describe.skip('the condition scan is ONE implementation (source pin)', () => {
+// Landed W2b causalState wave — needs causalState applyConditions condition-scan re-port
+describe('the condition scan is ONE implementation (source pin)', () => {
   it('causalState.js contains exactly one affectedSystems.includes — inside applyConditions', () => {
     const hits = SRC.match(/affectedSystems\.includes/g) || [];
     expect(
@@ -57,8 +57,8 @@ describe.skip('the condition scan is ONE implementation (source pin)', () => {
   });
 });
 
-// DEFERRED to W2b causalState wave — needs causalState applyConditions condition-scan re-port; re-enable when it lands.
-describe.skip('applyConditions system literals are joined-safe (source pin)', () => {
+// Landed W2b causalState wave — needs causalState applyConditions condition-scan re-port
+describe('applyConditions system literals are joined-safe (source pin)', () => {
   // Each deriver passes its system name to applyConditions as a bare STRING
   // literal — applyConditions matches it against cond.affectedSystems.includes
   // exactly, so the literal must (a) be a real SYSTEM_VARIABLE and (b) match the
@@ -111,8 +111,8 @@ describe.skip('applyConditions system literals are joined-safe (source pin)', ()
 });
 
 describe('applyConditions behaviour (through real derivers)', () => {
-  // DEFERRED to W2b causalState wave — needs causalState lift-polarity re-port (signed applyConditions mode); re-enable when it lands.
-  it.skip('signed mode: a lift RAISES and a pressure LOWERS the same variable', () => {
+  // Landed W2b causalState wave — needs causalState lift-polarity re-port (signed applyConditions mode)
+  it('signed mode: a lift RAISES and a pressure LOWERS the same variable', () => {
     const base = deriveSystemVariable('food_security', town());
     const lift = deriveSystemVariable('food_security',
       town([{ archetype: 'siege_lifted', severity: 0.3, affectedSystems: ['food_security'] }]));
@@ -130,8 +130,8 @@ describe('applyConditions behaviour (through real derivers)', () => {
     expect(deriveSystemVariable('criminal_opportunity', town(cond)).score).toBeGreaterThan(baseCrime.score);
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState applyConditions zero-magnitude skip; re-enable when it lands.
-  it.skip('zero-magnitude conditions are skipped uniformly — no phantom zero-delta contributors', () => {
+  // Landed W2b causalState wave — needs causalState applyConditions zero-magnitude skip
+  it('zero-magnitude conditions are skipped uniformly — no phantom zero-delta contributors', () => {
     // severity 0.01 rounds to 0 at every scale in use (12–20). The normalizer
     // regenerates condition ids from the archetype, so match by that.
     const v = deriveSystemVariable('trade_connectivity',
@@ -139,8 +139,8 @@ describe('applyConditions behaviour (through real derivers)', () => {
     expect(v.contributors.some(c => String(c.source).includes('famine'))).toBe(false);
   });
 
-  // DEFERRED to W2b causalState wave — needs causalState economic_capacity system variable; re-enable when it lands.
-  it.skip('the war_spoils special seam still ADDS to economic_capacity while ordinary conditions drain it', () => {
+  // Landed W2b causalState wave — needs causalState economic_capacity system variable
+  it('the war_spoils special seam still ADDS to economic_capacity while ordinary conditions drain it', () => {
     const base = deriveSystemVariable('economic_capacity', town());
     const spoils = deriveSystemVariable('economic_capacity',
       town([{ archetype: 'war_spoils', severity: 0.5, affectedSystems: [] }]));

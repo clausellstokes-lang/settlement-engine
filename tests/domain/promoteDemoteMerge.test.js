@@ -55,12 +55,15 @@ function applyThenUndo(before, event) {
 }
 
 describe('#2c — composer offers ONE merged action', () => {
-  // DEFERRED to events wave — needs the PROMOTE_NPC "Promote/Demote NPC" relabel in src/domain/events/registry.js; re-enable when it lands.
-  test.skip('PROMOTE_NPC is relabeled "Promote/Demote NPC"', () => {
+  // Landed events wave — PROMOTE_NPC relabeled in src/domain/events/registry.js.
+  test('PROMOTE_NPC is relabeled "Promote/Demote NPC"', () => {
     expect(EVENT_REGISTRY.PROMOTE_NPC.label).toBe('Promote/Demote NPC');
   });
 
-  // DEFERRED to events wave — needs DEMOTE_NPC in NON_AUTHORABLE_EVENTS (composer companion of the promote/demote merge, lands in src/components/settlement/eventComposer/EventComposerConstants.js, not src/domain/events/); re-enable when it lands.
+  // DEFERRED to the components wave — DEMOTE_NPC in NON_AUTHORABLE_EVENTS lands in
+  // src/components/settlement/eventComposer/EventComposerConstants.js (a component
+  // file, out of this domain wave's fence). The registry half (PROMOTE_NPC relabel)
+  // landed above; re-enable when the composer-constants change lands.
   test.skip('DEMOTE_NPC is hidden from the authoring menu but stays a registry type', () => {
     expect(NON_AUTHORABLE_EVENTS.has('DEMOTE_NPC')).toBe(true);
     expect(NON_AUTHORABLE_EVENTS.has('PROMOTE_NPC')).toBe(false);
