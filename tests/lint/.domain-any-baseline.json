@@ -1,0 +1,319 @@
+{
+  "total": 1161,
+  "totalAny": 1121,
+  "totalSuppress": 40,
+  "files": {
+    "src/domain/activeConditions.js": {
+      "any": 22,
+      "suppress": 0
+    },
+    "src/domain/aiGrounding.js": {
+      "any": 1,
+      "suppress": 4
+    },
+    "src/domain/aiOverlayVerifier.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/canonStatus.js": {
+      "any": 0,
+      "suppress": 3
+    },
+    "src/domain/canonicalAccessors.js": {
+      "any": 0,
+      "suppress": 2
+    },
+    "src/domain/capacityModel.js": {
+      "any": 0,
+      "suppress": 1
+    },
+    "src/domain/causalState.js": {
+      "any": 0,
+      "suppress": 4
+    },
+    "src/domain/coherence/checkDraftEdit.js": {
+      "any": 8,
+      "suppress": 0
+    },
+    "src/domain/conditionPromotion.js": {
+      "any": 5,
+      "suppress": 0
+    },
+    "src/domain/contradictions.js": {
+      "any": 0,
+      "suppress": 1
+    },
+    "src/domain/corruption.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/counterfactual.js": {
+      "any": 18,
+      "suppress": 0
+    },
+    "src/domain/crisisLifecycle.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/dailyLife.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/defenseLedger.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/devAnomalies.js": {
+      "any": 17,
+      "suppress": 0
+    },
+    "src/domain/display/dossierViewModel.js": {
+      "any": 5,
+      "suppress": 1
+    },
+    "src/domain/display/institutionProfile.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/display/publicSafe.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/display/threatAssessment.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/districtProfile.js": {
+      "any": 5,
+      "suppress": 0
+    },
+    "src/domain/dossier/chronicleFeed.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/dossier/entityLinks.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/events/applyEvent.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/events/batch.js": {
+      "any": 14,
+      "suppress": 0
+    },
+    "src/domain/events/drainQueuedEvents.js": {
+      "any": 9,
+      "suppress": 0
+    },
+    "src/domain/events/eventPipeline.js": {
+      "any": 2,
+      "suppress": 2
+    },
+    "src/domain/events/mutate.js": {
+      "any": 82,
+      "suppress": 0
+    },
+    "src/domain/events/registry.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/events/undoEvent.js": {
+      "any": 26,
+      "suppress": 0
+    },
+    "src/domain/factionArchetypes.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/foodLedger.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/historyBeats.js": {
+      "any": 15,
+      "suppress": 0
+    },
+    "src/domain/hookEscalation.js": {
+      "any": 18,
+      "suppress": 0
+    },
+    "src/domain/inferSupplyChains.js": {
+      "any": 0,
+      "suppress": 4
+    },
+    "src/domain/magicLedger.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/magicProfile.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/npcProfile.js": {
+      "any": 21,
+      "suppress": 0
+    },
+    "src/domain/pendingEdits.js": {
+      "any": 13,
+      "suppress": 0
+    },
+    "src/domain/provenance.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/region/deriveRegionalState.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/region/discoverDependencyCandidates.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/region/graph.js": {
+      "any": 19,
+      "suppress": 0
+    },
+    "src/domain/region/propagation.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/relationships/canonicalRelationship.js": {
+      "any": 0,
+      "suppress": 1
+    },
+    "src/domain/relationships/neighbourBackLink.js": {
+      "any": 28,
+      "suppress": 0
+    },
+    "src/domain/settlement.schema.js": {
+      "any": 3,
+      "suppress": 0
+    },
+    "src/domain/simulationSpine.js": {
+      "any": 11,
+      "suppress": 0
+    },
+    "src/domain/stressorPicker.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/supplyChainState.js": {
+      "any": 0,
+      "suppress": 11
+    },
+    "src/domain/threatProfile.js": {
+      "any": 0,
+      "suppress": 4
+    },
+    "src/domain/timeProgression.js": {
+      "any": 0,
+      "suppress": 2
+    },
+    "src/domain/types.js": {
+      "any": 1,
+      "suppress": 0
+    },
+    "src/domain/userEdits.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/advanceCampaignWorld.js": {
+      "any": 26,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/applyWorldPulse.js": {
+      "any": 51,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/candidateEvents.js": {
+      "any": 5,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/chronicle.js": {
+      "any": 7,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/coup.js": {
+      "any": 9,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/factionCapture.js": {
+      "any": 22,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/factionCompetition.js": {
+      "any": 33,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/flows.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/foodStockpile.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/institutionLifecycle.js": {
+      "any": 79,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/npcAgency.js": {
+      "any": 73,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/partyImpact.js": {
+      "any": 24,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/populationDynamics.js": {
+      "any": 43,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/realmEvents.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/relationshipEvolution.js": {
+      "any": 26,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/relationshipHierarchy.js": {
+      "any": 40,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/relationshipMemory.js": {
+      "any": 12,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/stressorDynamics.js": {
+      "any": 65,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/stressorGates.js": {
+      "any": 79,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/stressors.js": {
+      "any": 96,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/successorNpc.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/tierResourceDynamics.js": {
+      "any": 2,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/worldSnapshot.js": {
+      "any": 6,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/worldState.js": {
+      "any": 1,
+      "suppress": 0
+    }
+  }
+}
