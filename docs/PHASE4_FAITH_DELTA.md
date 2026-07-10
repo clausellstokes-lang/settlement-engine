@@ -895,3 +895,21 @@ Gods originate in custom content (user-authored) and the starting pantheon, and 
 - USER FIAT bypasses plausibility (divine hand), then the fit loop + near-zero habitat
   receptivity make the imposed mismatch wither per the reciprocal rule — consistent, not
   special-cased.
+
+### PORTFOLIO RESOLUTION — SUPERSEDES the two portfolio addenda above (OWNER + architect, 2026-07-10)
+The owner's simpler instinct wins and the architect's mechanical-portfolio design is WITHDRAWN:
+the spread-plausibility problem existed only because mechanical habitats were introduced; the
+"comprehensive taxonomy for wide audiences" requirement is unsatisfiable for a mechanical enum
+(any closed set fights someone's homebrew) and trivially satisfied by flavor.
+- **Portfolio = OPTIONAL FREE-TEXT FLAVOR FIELD** in the custom-content deity creator (schema +
+  authoring UI in W-F5/W-F6; validateDeity gains the optional field, no CHECK constraint).
+  ZERO engine mechanics: no affinity tables, no channel weighting, no habitat taxonomy, no
+  first-arrival gating. Spread stays pure prevalence-and-channels as certified.
+- **True-neutral stays consistent with the rest of the pantheon** — its distinctiveness is
+  behavioral neutrality itself plus authored flavor.
+- **Phase 5** keys content variants (hooks, shrine/temple descriptions, blessings prose) off
+  the flavor field when present, plane position when absent.
+- Mechanical portfolios remain a FUTURE system on a clean seam, built only if post-launch
+  demand proves it. W-F5's governed starting-pantheon pool carries VARIETY as content
+  (name/flavor archetypes), not mechanics.
+The legibility allocation (cause chains pinned at authorship, prose at W-F6) is unaffected.
