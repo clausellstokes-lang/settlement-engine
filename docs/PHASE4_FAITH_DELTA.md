@@ -861,3 +861,19 @@ shape conduct, aligned conduct feeds the patron's hold, and the loop must be con
 - STABILITY (binding on W-F7): the feedback gain is SUBCRITICAL — entrenchment is strong,
   absorbing states don't exist. Long-soak envelope: patron transitions continue at realistic
   rates vs the W-F0 hold-rate baseline; no cell of the config grid locks permanently.
+
+### The two gaps — architect's allocation (owner delegated 2026-07-10: "i leave the gaps to you")
+**Portfolios (the quiet middle).** Deities gain a PORTFOLIO/domain (harvest, sea, storm, death,
+craft, knowledge, ...) in W-F5 with the starting pantheon: (a) niche differentiation at
+generation (no duplicate portfolios in a starting cell); (b) ONE mechanical hook through an
+EXISTING seam — portfolio-terrain/economy AFFINITY feeds the receptivity term
+(deityLocalStrength) that already drives growth. True-neutral faiths become distinctive by
+HABITAT, not new physics; the plane keeps ethos/conduct, portfolio owns where faiths thrive.
+Orthogonality preserved. Portfolio-flavored content (hooks/blessings/descriptions) = Phase 5.
+Full mechanical portfolio effects = future axis, deliberately out of Phase 4.
+
+**Legibility (the last mile).** Cause-chain emission is REQUIRED AT AUTHORSHIP for every faith
+mechanism W-F2..W-F4 builds (seat changes, legitimacy crossings, stain, mandate shifts, pact
+formation/betrayal) — pinned: no faith mutation ships with an empty reasons chain (extend the
+conversion machinery's existing causes pattern). W-F6 renders the chains as plain chronicle
+sentences. Emission at authorship, prose at the surface wave, a pin between them.
