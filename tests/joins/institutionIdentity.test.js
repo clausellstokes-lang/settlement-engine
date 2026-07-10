@@ -411,8 +411,14 @@ describe('export institution gates decide by id, keep the mill special-case', ()
 // ── 3e. tradeDependencies join is id-first (A+ generators.7) ──────────────────
 
 describe('tradeDependencies join matches by id, not a fragile name prefix', () => {
-  const CFG = { settType: 'town', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'isolated', monsterThreat: 'civilized' };
-  const SEED = 'golden-master-v1';
+  // Wave-3 migration: the fixture used the DEAD `terrain` key (inert echo) and a
+  // stale local 'golden-master-v1' seed string. Re-pinned on the LIVE
+  // terrainOverride vocabulary (forest — the terrain the isolated route honestly
+  // reaches) at a seed verified to reproduce BOTH pinned behaviors: a timber
+  // chain with no false flour-Mill join, and a garrison chain whose dependency
+  // resolves to 'Town watch'.
+  const CFG = { settType: 'town', culture: 'germanic', terrainOverride: 'forest', tradeRouteAccess: 'isolated', monsterThreat: 'civilized' };
+  const SEED = 'inst-id-v3-1';
 
   it('a flour "Mill" dependency no longer false-joins the timber/lumber chain', () => {
     // The prefix heuristic matched dependency "Mill" against the timber chain's

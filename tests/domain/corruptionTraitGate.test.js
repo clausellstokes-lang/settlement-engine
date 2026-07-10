@@ -31,13 +31,7 @@ import { mutateSettlement } from '../../src/domain/events/mutate.js';
 afterEach(() => clearActiveRng());
 
 // ── 1. Trait-presence distribution yields all four combos over seeds ─────────
-// DEFERRED to generators/golden-regen wave — the npcData TRAIT_PRESENCE_DISTRIBUTION
-// export landed (W2b), but these tests import generateReligionType from
-// src/generators/npcGenerator.js (NOT exported there yet) and assert it DRAWS from
-// the distribution. Wiring generateReligionType to the distribution changes NPC
-// trait presence at generation time, which shifts the 155-config golden — so it
-// must ride the generators wave's golden regen. Re-enable when that lands.
-describe.skip('TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable, all four combos appear', () => {
+describe('TRAIT_PRESENCE_DISTRIBUTION — seeded, tunable, all four combos appear', () => {
   it('weights are frozen and sum to 1.0', () => {
     expect(Object.isFrozen(TRAIT_PRESENCE_DISTRIBUTION)).toBe(true);
     const { both, flawOnly, temperamentOnly, neither } = TRAIT_PRESENCE_DISTRIBUTION;

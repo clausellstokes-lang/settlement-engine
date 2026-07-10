@@ -35,7 +35,7 @@ import { promoteStressorsToConditions, reapplyEventConditions } from '../../doma
 // The canonical defense-readiness -> legitimacy table. This file used to carry a
 // stale local copy that LACKED 'Lightly Defended', so the real-label patch below
 // reverted that band's provisional contribution to 0 on every generated settlement.
-import { DEFENSE_CONTRIB } from '../factionDynamics.js';
+import { DEFENSE_CONTRIB, legitimacyDefScale } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
@@ -152,7 +152,10 @@ registerStep('assembleSettlement', {
   if (settlement.powerStructure?.publicLegitimacy && settlement.defenseProfile?.readiness?.label) {
     const realDefLabel = settlement.defenseProfile.readiness.label;
     const provLeg      = settlement.powerStructure.publicLegitimacy;
-    const realDefContrib = DEFENSE_CONTRIB[realDefLabel] ?? 0;
+    // Apply the SAME tier scale computePublicLegitimacy used for the provisional
+    // contribution — the unscaled patch stamped spurious small-tier legitimacy
+    // crises (a thorp's "Vulnerable" readiness is normal, not policy failure).
+    const realDefContrib = Math.round((DEFENSE_CONTRIB[realDefLabel] ?? 0) * legitimacyDefScale(tier));
     const delta = realDefContrib - (provLeg.breakdown?.defense ?? 0);
 
     if (delta !== 0) {

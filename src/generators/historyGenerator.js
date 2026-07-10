@@ -10,6 +10,8 @@
  */
 
 import { POLITICAL_FLAVOR } from './narrativeText.js';
+import { resolvePrimaryStress } from './stressPriority.js';
+import { deriveTradeCommodity } from './tradeCommodity.js';
 import { getInstFlags, getStressFlags, pick, pickRandom2, random01, randInt } from './helpers.js';
 import { random as _rng } from '../kernel/rngContext.js';
 
@@ -116,25 +118,10 @@ const _getSettlementHistoryNote = (events, _tier, _config) => {
 const buildHistoryContext = (config, institutions = [], economicState = null, powerStructure = null) => {
   const { tradeRouteAccess: route = 'road', magicLevel = 'medium', monsterThreat: threat = 'frontier' } = config;
 
-  // Determine primary trade commodity
+  // Determine primary trade commodity — unified scan (tradeCommodity.js); the
+  // strict variant (null fallback) because history prose interpolates it.
   const exports = economicState?.primaryExports || [];
-  const tradeCommodity = (() => {
-    if (!exports.length) return null;
-    const first = exports[0].toLowerCase();
-    if (first.includes('timber') || first.includes('lumber') || first.includes('wood')) return 'timber';
-    if (first.includes('grain') || first.includes('wheat') || first.includes('rye')) return 'grain';
-    if (first.includes('fish') || first.includes('seafood')) return 'fish';
-    if (first.includes('wool') || first.includes('textile') || first.includes('cloth')) return 'wool';
-    if (first.includes('iron') || first.includes('metal') || first.includes('steel')) return 'iron';
-    if (first.includes('stone') || first.includes('marble') || first.includes('quarry')) return 'stone';
-    if (first.includes('gem') || first.includes('jewel') || first.includes('crystal')) return 'gems';
-    if (first.includes('potion') || first.includes('alchemical') || first.includes('reagent')) return 'alchemy';
-    if (first.includes('craft') || first.includes('tool') || first.includes('manufactured')) return 'crafts';
-    if (first.includes('livestock') || first.includes('cattle') || first.includes('sheep')) return 'livestock';
-    if (first.includes('salt')) return 'salt';
-    if (first.includes('spice') || first.includes('exotic')) return 'spices';
-    return null;
-  })();
+  const tradeCommodity = deriveTradeCommodity(economicState);
 
   // Determine dominant guild
   const guildInsts = institutions.filter(i => {
@@ -589,25 +576,7 @@ const buildHistoricalEvent = (
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   // Resolve faction names for text substitution
   const govFaction = factions.find(f => f.isGoverning)?.faction || 'the governing authority';
@@ -670,11 +639,20 @@ const buildHistoricalEvent = (
     if ((economicViability.issues?.length || 0) > 0) {
       const tmpl = HISTORICAL_EVENTS_DATA.find(e => e.type === 'resource_scarcity');
       if (tmpl && _rng() > 0.4) {
-        const commodity = economicState?.tradeCommodity || 'key goods';
+        const commodity = deriveTradeCommodity(economicState) || 'key goods';
+        // Viability issues carry `.description` canonically; only stress-derived ones
+        // also set `.message`. Reading `.message` alone interpolated the literal
+        // 'undefined' into dossier/PDF/AI-grounding prose for every description-only
+        // top issue (isolated towns, non-stress import dependencies — the majority).
+        // Fall back to `.description`, and omit the trailing sentence entirely when
+        // neither is present rather than emitting a dangling clause.
+        const topIssue = economicViability.issues[0];
+        const issueText = topIssue?.message ?? topIssue?.description ?? '';
+        const lead = `The supply of ${commodity} — the settlement's economic backbone — is under pressure.`;
         selected.push({
           ...tmpl,
-          description: `The supply of ${commodity} — the settlement's economic backbone — is under pressure. ${economicViability.issues[0].message}`,
-          specificIssue: economicViability.issues[0].message,
+          description: issueText ? `${lead} ${issueText}` : lead,
+          specificIssue: issueText,
         });
         usedTypes.add('resource_scarcity');
       }
@@ -738,7 +716,10 @@ const buildHistoricalEvent = (
 
   // Fill remaining slots with random tensions
   // Suppress magical events in no-magic worlds
-  const magicFilter = config?.magicExists === false ? e => e.type !== 'magical' : () => true;
+  // The real catalog type is 'magical_controversy' (see HISTORICAL_EVENTS_DATA)
+  // — the old 'magical' token matched nothing, so arcane events leaked into
+  // no-magic campaigns.
+  const magicFilter = config?.magicExists === false ? e => e.type !== 'magical_controversy' : () => true;
   const pool = HISTORICAL_EVENTS_DATA.filter(e => !usedTypes.has(e.type) && magicFilter(e));
   while (selected.length < targetCount && pool.length > 0) {
     let candidate = pick(pool);

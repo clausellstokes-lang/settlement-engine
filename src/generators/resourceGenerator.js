@@ -50,6 +50,40 @@ export const resolveNearbyCommodities = (config = {}, terrainType) => {
   return TERRAIN_DATA[terrainType]?.allowedResources?.slice() || [];
 };
 
+// ─── terrain-vocabulary synonym matcher ───────────────────────────────────────
+// RESOURCE_CHAINS.rawResource is an idealized DISPLAY string ("copper ore",
+// "gemstones") that renders verbatim in the gap/critical report, while
+// TERRAIN_DATA.allowedResources names the same material with its own token
+// ("copper", "gemstone_deposits"). The plain substring join left four chains
+// matching NO terrain. This table bridges the two AT THE MATCHER — it never
+// renames the displayed rawResource.
+const RAW_RESOURCE_TERRAIN_SYNONYMS = {
+  'copper ore':      ['copper'],
+  'gold/silver ore': ['precious_metals'],
+  'gemstones':       ['gemstone_deposits'],
+  'glass sand':      ['glass_sand'],
+  // 'flax' and 'grapes' match their terrain-vocabulary tokens verbatim (no entry
+  // needed); 'animal hides' is the display name for the 'hides' token.
+  'animal hides':    ['hides'],
+};
+export const terrainSynonymsFor = (rawResource) =>
+  RAW_RESOURCE_TERRAIN_SYNONYMS[String(rawResource || '').toLowerCase()] || [];
+
+// Does a terrain's controlled vocabulary permit this raw resource? Preserves the
+// original substring rule ("timber" still matches "mountain_timber") and adds the
+// synonym token — a strict superset, so only the synonym chains gain a match.
+// TERRAIN side only: the nearby-resource side keeps OUR tokensReconcile below
+// (commodity-token reconciliation), which the terrain vocabulary must not adopt
+// ("glass sand" must not activate on generic coastal "sand").
+export const terrainAllowsResource = (allowedResources, rawResource) => {
+  const raw = String(rawResource || '').toLowerCase();
+  const synonyms = terrainSynonymsFor(rawResource);
+  return (allowedResources || []).some((r) => {
+    const v = String(r).toLowerCase();
+    return v.includes(raw) || synonyms.some((s) => v.includes(s));
+  });
+};
+
 // ─── evaluateEconomicActivity ─────────────────────────────────────────────────
 // Return resource chains that are active given the terrain and present resources.
 
@@ -69,8 +103,15 @@ const evaluateEconomicActivity = (terrainType, nearbyResources) => {
   if (!terrain) return [];
   const active = [];
   Object.entries(RESOURCE_CHAINS).forEach(([chainKey, chain]) => {
-    const terrainAllows  = terrain.allowedResources.some(r => r.toLowerCase().includes(chain.rawResource.toLowerCase()));
-    const resourcePresent = nearbyResources.some(r => tokensReconcile(r, chain.rawResource));
+    const terrainAllows  = terrainAllowsResource(terrain.allowedResources, chain.rawResource);
+    // Nearby side: OUR tokensReconcile (commodity-token reconciliation) PLUS the
+    // synonym bridge — their tree used exact synonym membership here; ours uses
+    // reconciliation, but either way the display string "gemstones" must find the
+    // vocabulary token "gemstone_deposits" or the chain stays dormant on the very
+    // terrain that owns it.
+    const resourcePresent = nearbyResources.some(r =>
+      tokensReconcile(r, chain.rawResource) ||
+      terrainSynonymsFor(chain.rawResource).some(s => tokensReconcile(r, s)));
     if (terrainAllows && resourcePresent) {
       active.push({ ...chain, chainKey });
     }
@@ -130,8 +171,7 @@ const buildViabilityReport = (terrainType, institutions) => {
   Object.entries(RESOURCE_CHAINS).forEach(([, chain]) => {
     const hasProcessingInst = chain.processingInstitutions.some(name =>
       institutions.some(i => i.name === name));
-    const terrainHasResource = terrain.allowedResources.some(r =>
-      r.toLowerCase().includes(chain.rawResource.toLowerCase()));
+    const terrainHasResource = terrainAllowsResource(terrain.allowedResources, chain.rawResource);
 
     if (hasProcessingInst && !terrainHasResource) {
       report.critical.push(chain.rawResource);

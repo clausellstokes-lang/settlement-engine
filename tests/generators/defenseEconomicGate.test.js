@@ -16,10 +16,11 @@
 
 import { describe, expect, test } from 'vitest';
 import { generateDefenseProfile } from '../../src/generators/defenseGenerator.js';
+import { computeEffectiveMagicPresence } from '../../src/generators/priorityHelpers.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { deriveDefenseReadiness } from '../../src/domain/display/defenseDisplay.js';
 
-function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, stressTypes = [], magicExists = false, institutions } = {}) {
+function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, priorityReligion = 30, stressTypes = [], magicExists = false, institutions } = {}) {
   return {
     name: 'Gatewatch',
     tier: 'town',
@@ -31,7 +32,7 @@ function town({ priorityEconomy = 50, priorityCriminal = 20, priorityMagic = 0, 
       priorityEconomy,
       priorityMilitary: 40,
       priorityCriminal,
-      priorityReligion: 30,
+      priorityReligion,
       priorityMagic,
       stressTypes,
     },
@@ -241,5 +242,96 @@ describe('magical defense respects degraded magic influence', () => {
     }));
     expect(healthy.scores.magical).toBeGreaterThan(0);
     expect(rotten.scores.magical).toBeLessThan(healthy.scores.magical);
+  });
+
+  test('a healthy settlement is not taxed by the health gate (identity, not slider-ratio)', () => {
+    // The gate divides degraded influence by the UNGATED presence score, so a
+    // prosperous low-crime town multiplies by ~1.0. The old slider divisor
+    // (presence score is well below the raw slider) shaved ~30% off healthy
+    // settlements and double-counted weak presence.
+    const cfg = { magicExists: true, priorityMagic: 70, priorityEconomy: 70, priorityCriminal: 10 };
+    const healthy = generateDefenseProfile(town({ ...cfg, institutions: arcaneInstitutions }));
+    const presence = computeEffectiveMagicPresence(arcaneInstitutions, {
+      magicExists: true, priorityMagic: 70, nearbyResources: [],
+    });
+    // Ungated baseline: presence score + the arcane-guild profile bonus (+8).
+    expect(healthy.scores.magical).toBe(Math.min(100, presence.score + 8));
+  });
+});
+
+describe('stacking famine mitigation never worsens the penalty', () => {
+  // Druid wardens alone reduce the famine penalties to -8 econ / -5 mil.
+  // Divine (Create Food and Water) CAPS at -12 / -6 — layering it on top of
+  // druids must keep the druid numbers, not raise them back up.
+  const FAITHFUL_GROVE = [
+    { name: 'Granary' },
+    { name: 'Market Square' },
+    { name: 'Town Watch' },
+    { name: 'Druid Circle' },
+    { name: 'Parish Church' },
+  ];
+  const faminePenalties = ({ priorityReligion }) => {
+    const mk = (stressTypes) => generateDefenseProfile(town({
+      magicExists: true, priorityMagic: 40, priorityReligion,
+      institutions: FAITHFUL_GROVE, stressTypes,
+    })).scores;
+    const fed = mk([]);
+    const starving = mk(['famine']);
+    return { econ: fed.economic - starving.economic, mil: fed.military - starving.military };
+  };
+
+  test('divine + druid famine mitigation is at least as good as druid alone', () => {
+    const druidOnly = faminePenalties({ priorityReligion: 30 }); // parish present, relPri too low for divine
+    const druidAndDivine = faminePenalties({ priorityReligion: 70 });
+    expect(druidAndDivine.econ).toBeLessThanOrEqual(druidOnly.econ);
+    expect(druidAndDivine.mil).toBeLessThanOrEqual(druidOnly.mil);
+    // Divine caps at -12/-6, above the druid -8/-5 floor: layering it changes
+    // nothing, so the two profiles lose exactly the same amount to famine.
+    // (Both diffs also carry famine's shared upstream economy degradation,
+    // which is identical across the two configs and cancels out.)
+    expect(druidAndDivine.econ).toBe(druidOnly.econ);
+    expect(druidAndDivine.mil).toBe(druidOnly.mil);
+  });
+});
+
+describe('garrison chain import credit (chainHealthy respects provisioning)', () => {
+  // A connected town's garrison chain that is vulnerable ONLY because its
+  // upstream provisioning chain is missing still earns the +5 military credit —
+  // the garrison is supplied by imports. An isolated settlement, or a chain
+  // with a genuine LOCAL impairment (trade dependency / active substitute),
+  // keeps the -5 penalty.
+  const withChains = (s, activeChains, tradeRouteAccess) => {
+    const out = { ...s, economicState: { ...s.economicState, activeChains } };
+    if (tradeRouteAccess) out.config = { ...s.config, tradeRouteAccess };
+    return out;
+  };
+  const GARRISON_INSTITUTIONS = [
+    { name: 'Granary' }, { name: 'Market Square' }, { name: 'Town Watch' }, { name: 'Garrison' },
+  ];
+  const base = () => town({ institutions: GARRISON_INSTITUTIONS });
+
+  test('upstream-missing-but-importable garrison chain earns the credit instead of the penalty', () => {
+    const importable = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'] },
+    ]));
+    const noChain = generateDefenseProfile(withChains(base(), []));
+    // Credit (+5), not penalty (-5): strictly above the chainless baseline.
+    expect(importable.scores.military).toBe(noChain.scores.military + 5);
+  });
+
+  test('an ISOLATED settlement with the same missing upstream keeps the penalty', () => {
+    const isolatedVulnerable = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'] },
+    ], 'isolated'));
+    const isolatedNoChain = generateDefenseProfile(withChains(base(), [], 'isolated'));
+    expect(isolatedVulnerable.scores.military).toBe(isolatedNoChain.scores.military - 5);
+  });
+
+  test('a genuine local impairment (trade dependency) is never credited', () => {
+    const locallyImpaired = generateDefenseProfile(withChains(base(), [
+      { chainId: 'garrison', status: 'vulnerable', upstreamMissing: ['food_processing'], dependency: { institution: 'Grain factor' } },
+    ]));
+    const noChain = generateDefenseProfile(withChains(base(), []));
+    expect(locallyImpaired.scores.military).toBe(noChain.scores.military - 5);
   });
 });

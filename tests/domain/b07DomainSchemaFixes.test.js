@@ -78,8 +78,7 @@ describe('magicProfile — generator-vocabulary high magic can reach integral ro
 // entityCatalog stamps a profile-derived id (faction.<slug>); lookupTagForEntity
 // used to match raw `.id === catalogId`, missing it entirely and tagging it
 // generated/draft — so a LOCKED legacy faction got rerolled instead of preserved.
-// DEFERRED to generators wave — needs regenerationMode locked-entity preservation (src/generators); re-enable when it lands.
-describe.skip('regenerationMode — preserves locked/canon entities lacking a stored id (#4)', () => {
+describe('regenerationMode — preserves locked/canon entities lacking a stored id (#4)', () => {
   function fixtureWithIdlessEntities() {
     return {
       name: 'Hollowmere',
@@ -138,8 +137,7 @@ describe.skip('regenerationMode — preserves locked/canon entities lacking a st
 describe('settlementReconciliation — deterministic at (#5)', () => {
   const prior = { activeConditions: [] };
 
-  // DEFERRED to generators wave — needs settlementReconciliation at:null determinism re-port; re-enable when it lands.
-  it.skip('records at:null (not wall-clock) when options.now is omitted', () => {
+  it('records at:null (not wall-clock) when options.now is omitted', () => {
     const merged = reconcileSettlementChange({ name: 'A', activeConditions: [] }, prior, {
       source: 'regenerate',
       changeType: 'GENERATE_SETTLEMENT',
@@ -147,8 +145,7 @@ describe('settlementReconciliation — deterministic at (#5)', () => {
     expect(merged.reconciliationLog.at(-1).at).toBeNull();
   });
 
-  // DEFERRED to generators wave — needs settlementReconciliation at:null determinism re-port; re-enable when it lands.
-  it.skip('two reconciles with the same inputs and no now produce identical log entries', () => {
+  it('two reconciles with the same inputs and no now produce identical log entries', () => {
     const opts = { source: 'regenerate', changeType: 'GENERATE_SETTLEMENT', changeLabel: 'A' };
     const a = reconcileSettlementChange({ name: 'A', activeConditions: [] }, prior, opts);
     const b = reconcileSettlementChange({ name: 'A', activeConditions: [] }, prior, opts);
@@ -166,8 +163,7 @@ describe('settlementReconciliation — deterministic at (#5)', () => {
 
 // ── #6 migration runner surfaces forward-versioned saves ───────────────────
 describe('settlementMigrations — surfaces a forward-versioned save (#6)', () => {
-  // DEFERRED to generators wave — needs settlementMigrations forward-version warn re-port; re-enable when it lands.
-  it.skip('warns (no longer silent) for schemaVersion > SCHEMA_VERSION and passes through unchanged', () => {
+  it('warns (no longer silent) for schemaVersion > SCHEMA_VERSION and passes through unchanged', () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     const future = { name: 'Tomorrowtown', schemaVersion: SCHEMA_VERSION + 5 };
     const out = migrateSettlementToLatest(future);

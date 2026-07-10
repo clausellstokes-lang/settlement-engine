@@ -108,7 +108,10 @@ export function generateFactionStructuralNpcs(faction, institutions = []) {
       linkedInstitutionIds: linkedInstId ? [linkedInstId] : [],
       linkedFactionIds: factionId ? [factionId] : [],
       // Defaults for the structural fields the impairment engine reads.
-      influence: def.importance === 'pillar' ? 75 : def.importance === 'key' ? 50 : 25,
+      // Influence is a BAND STRING everywhere it is consumed (npcComponents,
+      // campaign PDF filter `influence === 'high'`) — the prior numeric 75/50/25
+      // silently failed every consumer comparison.
+      influence: def.importance === 'pillar' ? 'high' : def.importance === 'key' ? 'moderate' : 'low',
       legitimacyContribution: def.importance === 'pillar' ? 30 : 10,
       stabilityContribution:  def.importance === 'pillar' ? 25 : 8,
       generatedAs: 'faction_structural',  // marker for migration / debugging

@@ -317,12 +317,15 @@ const computeDefenseScores = (
     if (hasDivine)      magical = Math.min(100, magical + Math.round(relPri * 0.12)); // divine healing, morale
     if (hasDruid)       magical = Math.min(100, magical + 6);  // nature warding, terrain knowledge
     if (hasArcaneGuild) magical = Math.min(100, magical + 8);  // organized wards, counterspells
-    // Wire the (previously dead) magInfluence parameter: it is the slider
-    // AFTER economy/crime degradation (priorityHelpers getInstFlags), so a
-    // destitute, crime-ridden city's underfunded and compromised practitioners
-    // drag arcane defense down — same gate shape as the economic dimension.
+    // Wire the (previously dead) magInfluence parameter: it is the effective
+    // presence score AFTER economy/crime degradation (priorityHelpers
+    // getInstFlags), so a destitute, crime-ridden city's underfunded and
+    // compromised practitioners drag arcane defense down — same gate shape as
+    // the economic dimension. Divide by the UNGATED presence score (not the
+    // raw slider): the ratio isolates the degradation multipliers, ~1.0 for a
+    // healthy settlement, without double-counting weak presence.
     if (magPri > 0) {
-      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, magPri)));
+      const magHealthMult = Math.min(1, Math.max(0.45, magInfluence / Math.max(1, _magicPresence.score)));
       magical = Math.round(magical * magHealthMult);
     } else {
       magical = Math.round(magical);
@@ -363,10 +366,13 @@ const computeDefenseScores = (
       milPenalty  = Math.round(milPenalty  * 0.5); // -10 → -5
       monsterPenalty = Math.round(monsterPenalty * 0.5); // wardens keep patrols fed
     }
-    // Divine: Create Food and Water, Bless crops
+    // Divine: Create Food and Water, Bless crops. A mitigation CAPS the
+    // penalty — Math.min, never Math.max: the old Math.max form WORSENED the
+    // score whenever the druid branch had already reduced the penalty below
+    // the divine cap (stacking two mitigations must not out-penalize one).
     if (hasDivine) {
-      econPenalty = Math.max(Math.round(econPenalty * 0.6), Math.round(20 * 0.6)); // -20 → -12
-      milPenalty  = Math.max(Math.round(milPenalty  * 0.6), Math.round(10 * 0.6)); // -10 → -6
+      econPenalty = Math.min(econPenalty, Math.round(20 * 0.6)); // -20 → -12 (caps)
+      milPenalty  = Math.min(milPenalty,  Math.round(10 * 0.6)); // -10 → -6 (caps)
     }
     // Arcane: minor Goodberry, Plant Growth
     if (hasArcane && magPri >= 50)
@@ -564,18 +570,32 @@ export function generateDefenseProfile(settlement) {
   let chainMilBonus  = 0;
   let chainEconBonus = 0;
 
-  // Garrison chain: fully operational = +5 military, vulnerable (no provisions) = -5
+  // A military chain counts as healthy when it is operational/running, OR it is
+  // vulnerable ONLY because its upstream provisioning chain (food_processing→grain,
+  // fortification→stone) is absent/strained AND the settlement can provision via
+  // trade. A connected city's garrison is supplied by IMPORTS even when it has no
+  // local bakers/butchers (upstreamMissing) — the old flat -5 wrongly penalized that,
+  // killing the +5/+6/+4 credit at city/metropolis. But an ISOLATED settlement
+  // genuinely cannot import, so a missing/weak upstream there KEEPS the penalty.
+  // A real LOCAL impairment (trade dependency / active substitute) is never healthy.
+  const canProvision = (settlement.config?.tradeRouteAccess || settlement.tradeRoute || 'road') !== 'isolated';
+  const chainHealthy = (c) =>
+    !!c && (c.status === 'operational' || c.status === 'running' ||
+      (c.status === 'vulnerable' && !c.dependency && !c.substituteActive && canProvision &&
+        ((c.upstreamMissing && c.upstreamMissing.length) || (c.upstreamWeak && c.upstreamWeak.length))));
+
+  // Garrison chain: healthy = +5 military, genuinely vulnerable (no provisions) = -5
   if (garrisonChain) {
-    if (garrisonChain.status === 'operational' || garrisonChain.status === 'running') chainMilBonus  += 5;
+    if (chainHealthy(garrisonChain)) chainMilBonus  += 5;
     else if (garrisonChain.status === 'vulnerable' || garrisonChain.status === 'impaired')  chainMilBonus  -= 5;
   }
-  // Fortification chain: operational = +6 military (walls maintained), impaired = -4
+  // Fortification chain: healthy = +6 military (walls maintained), impaired = -4
   if (fortificationChain) {
-    if (fortificationChain.status === 'operational' || fortificationChain.status === 'running') chainMilBonus  += 6;
+    if (chainHealthy(fortificationChain)) chainMilBonus  += 6;
     else if (fortificationChain.status === 'impaired') chainMilBonus -= 4;
   }
-  // Mercenary chain active and healthy = +4 military (contract force available)
-  if (mercenaryChain && (mercenaryChain.status === 'operational' || mercenaryChain.status === 'running')) {
+  // Mercenary chain healthy = +4 military (contract force available)
+  if (chainHealthy(mercenaryChain)) {
     chainMilBonus += 4;
   }
   // Food processing chain healthy = +5 economic defense (logistics well-supplied)

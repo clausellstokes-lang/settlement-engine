@@ -273,6 +273,9 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 (he.desc || '') +
                 " The pastoral burden of wartime — soldiers praying before departure, families grieving — has made the institution indispensable in a way it wasn't before.")));
         }),
+          // Siege pushes its own 'War Council' first (see the under_siege block);
+          // siege AND wartime together minted TWO War Councils in one roster.
+          factions.some((he) => he.faction === 'War Council') ||
           factions.push({
             faction: 'War Council',
             power: ye ? 20 : 25,

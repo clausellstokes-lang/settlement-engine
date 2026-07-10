@@ -28,7 +28,8 @@ import {
 const NPC_PAIR_CATS = {
   trade_partner: ['economy'], allied: ['economy', 'military'], patron: ['military', 'economy'],
   client: ['economy'], rival: ['economy', 'military'], cold_war: ['military', 'criminal'],
-  hostile: ['military'], vassal: ['military', 'economy'], neutral: ['economy'],
+  hostile: ['military'], vassal: ['military', 'economy'], criminal_network: ['criminal', 'economy'],
+  neutral: ['economy'],
 };
 /** @type {Record<string, (a: any, ar: any, b: any, br: any, bs: any) => string>} */
 const CONTACT_DESC = {
@@ -40,6 +41,7 @@ const CONTACT_DESC = {
   cold_war:      (a, ar, b, br, bs) => `${a} (${ar}) runs quiet intelligence operations against ${b} (${br}) of ${bs}, officially unacknowledged.`,
   hostile:       (a, ar, b, br, bs) => `${a} (${ar}) and ${b} (${br}) of ${bs} are active enemies.`,
   vassal:        (a, ar, b, br, bs) => `${a} (${ar}) coordinates obligations and protection with ${b} (${br}) of ${bs}.`,
+  criminal_network: (a, ar, b, br, bs) => `${a} (${ar}) maintains quiet smuggling arrangements with ${b} (${br}) of ${bs}, unacknowledged by either settlement.`,
   neutral:       (a, ar, b, br, bs) => `${a} (${ar}) has occasional dealings with ${b} (${br}) in ${bs}.`,
 };
 

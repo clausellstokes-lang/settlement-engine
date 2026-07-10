@@ -4,12 +4,14 @@
  */
 
 import { getInstFlags, getStressFlags, pick, priorityToMultiplier, randInt } from './helpers.js';
+import { deriveTradeCommodity } from './tradeCommodity.js';
+import { roleToCategory, roleTakesMerchantStress, institutionCategoryFlags } from './roleCategory.js';
 import { getUpgradeOpportunities } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
 
 import { NAMING_DATA } from '../data/namingData.js';
-import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
+import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
 import { computeRelTension } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
@@ -231,13 +233,45 @@ const filterByGuild = (institutions, culture, tier, config = {}, usedTitles) => 
 // NPC_TITLE_DATA
 
 // generateReligionType
-const generateReligionType = () => ({
-  dominant: pickFromArray(NPC_PERSONALITY_TRAITS.positive),
-  flaw: pickFromArray(NPC_PERSONALITY_TRAITS.negative),
-  modifier: pickFromArray(NPC_PERSONALITY_TRAITS.neutral),
-  tell: pickFromArray(MANNERISMS),
-  speech: pickFromArray(SPEECH_PATTERNS),
-});
+// Draws BOTH raw trait candidates first (preserving rng draw order, so the
+// existing downstream stream is unperturbed when a trait is kept), then a SINGLE
+// seeded roll decides which of {dominant=temperament, flaw} survive — making the
+// two corruption-relevant slots INDEPENDENTLY optional per
+// TRAIT_PRESENCE_DISTRIBUTION. A surviving trait keeps its drawn candidate; a
+// dropped one becomes null (absent). Consumers tolerate absence: npcCorruptibleFlaw
+// returns null with no flaw, and the personality string builders use .filter(Boolean).
+// Exported for the corruption-trait-gate distribution tests.
+export const generateReligionType = () => {
+  const dominantCand = pickFromArray(NPC_PERSONALITY_TRAITS.positive);
+  const flawCand = pickFromArray(NPC_PERSONALITY_TRAITS.negative);
+  const modifier = pickFromArray(NPC_PERSONALITY_TRAITS.neutral);
+  const tell = pickFromArray(MANNERISMS);
+  const speech = pickFromArray(SPEECH_PATTERNS);
+
+  // ONE seeded roll AFTER both pickFromArray calls — walk the cumulative bands of
+  // TRAIT_PRESENCE_DISTRIBUTION to pick a presence bucket. Drawing the roll last
+  // means kept-trait NPCs leave the downstream rng position unchanged relative
+  // to draw ORDER (one extra draw total per NPC, same for every bucket).
+  const d = TRAIT_PRESENCE_DISTRIBUTION;
+  const r = _rng();
+  let dominant;
+  let flaw;
+  if (r < d.both) {
+    dominant = dominantCand;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly) {
+    dominant = null;
+    flaw = flawCand;
+  } else if (r < d.both + d.flawOnly + d.temperamentOnly) {
+    dominant = dominantCand;
+    flaw = null;
+  } else {
+    dominant = null;
+    flaw = null;
+  }
+
+  return { dominant, flaw, modifier, tell, speech };
+};
 
 // generateNPCAppearance
 const generateNPCAppearance = (r = 'other') => ({
@@ -402,10 +436,10 @@ const generateFactionLeader = (_category = 'other', config = {}, institutions = 
     magic: config.priorityMagic ?? 50,
     criminal: config.priorityCriminal ?? 50,
   };
-  const names = (institutions || []).map(i => (i.name || '').toLowerCase());
-  const hasCriminal = names.some(n => n.includes('thieves') || n.includes('black market') || n.includes('smuggl'));
-  const hasMagic = names.some(n => n.includes('wizard') || n.includes('mage') || n.includes('alchemist'));
-  const hasReligion = names.some(n => n.includes('church') || n.includes('cathedral') || n.includes('monastery'));
+  // Metadata-first category flags (roleCategory.js): catalog group + tags with
+  // name-keyword fallback for unstamped institutions — the old name-substring
+  // triple missed renamed/consolidated criminal/magic/religious institutions.
+  const { hasCriminal, hasMagic, hasReligion } = institutionCategoryFlags(institutions);
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
 
   // Secret type weights driven by institution presence and priorities
@@ -1004,31 +1038,22 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 
     // Stress-modified goals
     if (stressType && enriched.goal) {
-      const isGov =
-        roleLower.includes('mayor') ||
-        roleLower.includes('elder') ||
-        roleLower.includes('reeve') ||
-        roleLower.includes('steward') ||
-        roleLower.includes('governor') ||
-        roleLower.includes('council');
-      const isMil =
-        roleLower.includes('captain') ||
-        roleLower.includes('commander') ||
-        roleLower.includes('constable') ||
-        roleLower.includes('warden') ||
-        roleLower.includes('marshal');
-      const isRel =
-        roleLower.includes('priest') ||
-        roleLower.includes('cleric') ||
-        roleLower.includes('bishop') ||
-        roleLower.includes('abbot') ||
-        roleLower.includes('friar') ||
-        roleLower.includes('monk');
-      const isMerchant =
-        roleLower.includes('merchant') ||
-        roleLower.includes('guild') ||
-        roleLower.includes('factor') ||
-        roleLower.includes('overseer');
+      // Classify the role via the shared role→category map (longest-keyword-first)
+      // instead of four hand-rolled substring lists. The override below is keyed
+      // gov/mil/rel/merchant; map the role's category onto those buckets, keeping
+      // the same gov > mil > rel > merchant priority via the selector's branch
+      // order. The merchant bucket uses roleTakesMerchantStress, NOT a bare
+      // roleCat === 'economy', so guild/overseer crafts roles (e.g. 'Journeyman
+      // Overseer', 'Craft Guild Representative') still get the merchant override
+      // the pre-unification merchant test (merchant|guild|factor|overseer) gave
+      // them — longest-keyword-first would otherwise resolve them to crafts and
+      // silently drop the override. Pure string work — no rng, so draw order is
+      // unchanged.
+      const roleCat = roleToCategory(roleLower);
+      const isGov = roleCat === 'government';
+      const isMil = roleCat === 'military';
+      const isRel = roleCat === 'religious';
+      const isMerchant = roleTakesMerchantStress(roleLower);
 
       const STRESS_GOAL_OVERRIDES = {
         wartime: {
@@ -1521,7 +1546,7 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
   // Build config context for NPC generation
   const npcConfig = {
     ...config,
-    _tradeCommodity: settlement.economicState?.primaryExports?.[0]?.split(' ')?.[0]?.toLowerCase() || null,
+    _tradeCommodity: deriveTradeCommodity(settlement.economicState, { firstWordFallback: true }),
     _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null,
     _prosperity: settlement.economicState?.prosperity || null,
   };

@@ -16,8 +16,7 @@ import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 const base = (over = {}) => ({ name: 'Duplicate', tier: 'town', population: 1000, ...over });
 
 describe('contentId fallback — disambiguating entropy', () => {
-  // DEFERRED to generators wave — needs the normalizeSettlement content-id disambiguating-entropy re-port (src/domain/normalizeSettlement.js); re-enable when it lands.
-  it.skip('two id-less settlements with SAME name/tier/pop but different composition get DISTINCT ids', () => {
+  it('two id-less settlements with SAME name/tier/pop but different composition get DISTINCT ids', () => {
     const a = normalizeSettlement(base({ npcs: [{ name: 'A' }] }));
     const b = normalizeSettlement(base({ npcs: [{ name: 'A' }, { name: 'B' }] }));
     expect(a.id).toMatch(/^s_[0-9a-f]{16}$/);
@@ -25,8 +24,7 @@ describe('contentId fallback — disambiguating entropy', () => {
     expect(a.id).not.toBe(b.id);
   });
 
-  // DEFERRED to generators wave — needs the normalizeSettlement content-id disambiguating-entropy re-port (src/domain/normalizeSettlement.js); re-enable when it lands.
-  it.skip('distinguishes on any structural axis (factions, institutions, neighbours, events, resources)', () => {
+  it('distinguishes on any structural axis (factions, institutions, neighbours, events, resources)', () => {
     const ids = [
       normalizeSettlement(base({ powerStructure: { factions: [{ faction: 'X' }] } })).id,
       normalizeSettlement(base({ institutions: [{ name: 'Watch' }] })).id,

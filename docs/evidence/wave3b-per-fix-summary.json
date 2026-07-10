@@ -1,0 +1,128 @@
+[
+  {
+    "id": "B2-E4",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage01-B2-E4"
+  },
+  {
+    "id": "B1",
+    "changed": 148,
+    "paths": 103,
+    "npcChurn": 45,
+    "stage": "stage02-B1"
+  },
+  {
+    "id": "C1C2C3",
+    "changed": 102,
+    "paths": 20,
+    "npcChurn": 0,
+    "stage": "stage03-C1C2C3"
+  },
+  {
+    "id": "A1D1",
+    "changed": 41,
+    "paths": 2,
+    "npcChurn": 0,
+    "stage": "stage04-A1D1"
+  },
+  {
+    "id": "A2",
+    "changed": 51,
+    "paths": 6,
+    "npcChurn": 0,
+    "stage": "stage05-A2"
+  },
+  {
+    "id": "A3",
+    "changed": 85,
+    "paths": 1,
+    "npcChurn": 0,
+    "stage": "stage06-A3"
+  },
+  {
+    "id": "D2",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage07-D2"
+  },
+  {
+    "id": "D3",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage08-D3"
+  },
+  {
+    "id": "A4",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage09-A4"
+  },
+  {
+    "id": "D4",
+    "changed": 59,
+    "paths": 49,
+    "npcChurn": 0,
+    "stage": "stage10-D4"
+  },
+  {
+    "id": "E2",
+    "changed": 186,
+    "paths": 25,
+    "npcChurn": 12,
+    "stage": "stage11-E2"
+  },
+  {
+    "id": "B3B4",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage12-B3B4"
+  },
+  {
+    "id": "E3",
+    "changed": 187,
+    "paths": 115,
+    "npcChurn": 187,
+    "stage": "stage13-E3"
+  },
+  {
+    "id": "D5",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage14-D5"
+  },
+  {
+    "id": "D6D7",
+    "changed": 6,
+    "paths": 5,
+    "npcChurn": 0,
+    "stage": "stage15-D6D7"
+  },
+  {
+    "id": "B5E1E5",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage16-B5E1E5"
+  },
+  {
+    "id": "DEFERRED",
+    "changed": 0,
+    "paths": 0,
+    "npcChurn": 0,
+    "stage": "stage17-deferred"
+  },
+  {
+    "id": "FGD-foraging",
+    "changed": 4,
+    "paths": 1,
+    "npcChurn": 0,
+    "stage": "stage18-final"
+  }
+]

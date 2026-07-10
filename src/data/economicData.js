@@ -1019,7 +1019,7 @@ export const INSTITUTION_FINISHED_GOODS_DEMAND = {
     suppliers: {
       'apothecary':                     { supply: 1 },
       'apothecary district':            { supply: 2 },
-      'foraging':                       { supply: 1 },  // partial: covers herbs not minerals
+      'foraging_areas':                 { supply: 1 },  // resource key (herbs); was dead 'foraging' — no '_' so it took the institution-name path and matched nothing
       'magical_node':                   { supply: 1 },  // resource key check
     },
     importLabels: [

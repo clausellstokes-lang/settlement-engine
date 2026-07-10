@@ -17,8 +17,7 @@ const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
 describe('faction power sums to exactly 100 across all tiers', () => {
   for (const tier of TIERS) {
-    // DEFERRED to generators wave — needs the faction power-sum rebalance (renormalize after applyLegitimacyMultipliers) in src/generators/; re-enable when it lands.
-    it.skip(`${tier}: every non-empty faction roster sums to 100`, () => {
+    it(`${tier}: every non-empty faction roster sums to 100`, () => {
       for (let i = 0; i < 25; i++) {
         const s = generateSettlementPipeline({ settType: tier, culture: 'germanic' }, null, { seed: `fps-${tier}-${i}`, customContent: {} });
         const facs = s.powerStructure?.factions || [];

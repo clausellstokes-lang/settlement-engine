@@ -44,7 +44,7 @@ export const STRESS_TYPE_MAP = {
   },
   politically_fractured: {
     label: "Politically Fractured",
-    icon: "️",
+    icon: "",
     colour: "#5a4a1a",
     probability: 0.034,
     requiresTier: null,
@@ -68,7 +68,7 @@ export const STRESS_TYPE_MAP = {
   },
   recently_betrayed: {
     label: "Recently Betrayed",
-    icon: "️",
+    icon: "",
     colour: "#6b1a2a",
     probability: 0.027,
     requiresTier: null,
@@ -136,7 +136,7 @@ export const STRESS_TYPE_MAP = {
   },
   religious_conversion: {
     label: "Religious Conversion",
-    icon: "️",
+    icon: "",
     colour: "#3a1a5a",
     probability: 0.023,
     requiresTier: null,
@@ -148,7 +148,7 @@ export const STRESS_TYPE_MAP = {
   },
   slave_revolt: {
     label: "Slave Revolt",
-    icon: "️",
+    icon: "",
     colour: "#6b1a1a",
     probability: 0.012,
     requiresTier: "town",

@@ -3,7 +3,7 @@
  */
 
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
-import { SEVERITY } from '../../data/constants.js';
+import { SEVERITY, tierAtLeast } from '../../data/constants.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 import { getTradeRouteFeatures } from '../helpers.js';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -357,6 +357,96 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
 
 
 // deriveSupplyRiskAnalysis
+/**
+ * Does the settlement have a local processor for a must-import staple, so importing
+ * the raw resource is a genuine dependency (not just a passthrough)?
+ *
+ * Needles are matched against the lowercased institution name; the grain branch
+ * excludes sawmills ('sawmill'.includes('mill') is true). At city+ the match broadens
+ * to the renamed/consolidated institutions ('City granaries', 'Specialized
+ * metalworkers') the town-tier needles miss — without it, 72.5% of metropolises
+ * reported ZERO deps.
+ *
+ * @param {Array<{ name?: string, tags?: string[] }>} institutions
+ * @param {string} resource
+ * @param {{ tier?: string }} config
+ * @returns {boolean}
+ */
+export function hasImportProcessor(institutions, resource, config) {
+  const bigTier = tierAtLeast(config?.tier, 'city');
+  const r = resource.toLowerCase();
+  return institutions.some((i) => {
+    const n = (i.name || '').toLowerCase();
+    const t = i.tags || [];
+    return (
+      (r.includes('grain')  && ((n.includes('mill') && !n.includes('sawmill')) || (bigTier && n.includes('granar')))) ||
+      (r.includes('timber') && (n.includes('sawmill') || (bigTier && n.includes('carpenter')))) ||
+      (r.includes('metal')  && (n.includes('smith') || n.includes('smelter') || (bigTier && (n.includes('metalwork') || t.includes('metalwork')))))
+    );
+  });
+}
+
+/**
+ * Push tier-scaled baseline provisioning dependencies onto `warnings`.
+ *
+ * The per-capita food model lets a dense city/metropolis on fertile terrain appear
+ * self-sufficient (it "grows" its own staples within its walls), reporting zero import
+ * dependency — false: a real urban centre imports staple food + bulk materials from its
+ * hinterland. Without this, 72.5% of metropolises reported ZERO economic dependencies
+ * (tier-inverted). City+ only; mutates `warnings` in place.
+ *
+ * @param {Array<Object>} warnings  Warning list mutated in place.
+ * @param {{ tier?: string }} config
+ * @param {{ deficitPercent?: number }} [foodBalance]
+ */
+export function appendProvisioningAtScaleDeps(warnings, config, foodBalance) {
+  if (!tierAtLeast(config?.tier, 'city')) return;
+
+  // Skip the staple-food baseline when the food model already shows a deficit
+  // (it emits a 'Food Production' DEPENDENCY that owns the grain import), or when
+  // a per-resource grain import already fired. Prevents a cross-function
+  // double-count under stress: a famine on fertile terrain otherwise produced
+  // BOTH 'Food Import Requirement' and this baseline.
+  // >= 20 (not > 20): the food model fires its warning on the UNROUNDED deficit
+  // > 20, but foodBalance.deficitPercent is rounded (20.4 -> 20), so a strict
+  // > 20 here let the boundary cases through and double-counted.
+  const foodDeficit = (foodBalance?.deficitPercent || 0) >= 20;
+  const hasGrainDep = warnings.some(w => w.severity === SEVERITY.DEPENDENCY && /grain|food/i.test(`${w.title} ${w.category || ''}`));
+  if (!hasGrainDep && !foodDeficit) {
+    warnings.push({
+      severity: SEVERITY.DEPENDENCY,
+      category: 'Provisioning at Scale',
+      title: 'Imports staple food at urban scale',
+      description: `A ${config.tier} cannot grow its staples within its walls; it depends on a steady grain supply from the surrounding region.`,
+      impact: 'A disrupted supply line means hunger within days.',
+      suggestedFixes: ['Secure and protect the regional grain-supply network'],
+    });
+  }
+  // Bulk materials/fuel — every city/metro imports these at scale, so the headline
+  // metric is never a false zero for a dense urban centre (city was still 11.7% zero on
+  // grain/timber/metal-free mustImport terrains like hills before this floor).
+  warnings.push({
+    severity: SEVERITY.DEPENDENCY,
+    category: 'Provisioning at Scale',
+    title: 'Imports bulk materials and fuel',
+    description: `A ${config.tier} consumes building materials and fuel faster than any local hinterland can supply.`,
+    impact: 'Construction and industry stall when material convoys are interrupted.',
+    suggestedFixes: ['Diversify material supply routes and hold strategic reserves'],
+  });
+  // Imperial-scale finished goods & luxuries — metropolis throughput only (keeps metro
+  // dependency count above city).
+  if (config?.tier === 'metropolis') {
+    warnings.push({
+      severity: SEVERITY.DEPENDENCY,
+      category: 'Provisioning at Scale',
+      title: 'Imports finished goods and luxuries',
+      description: 'An imperial metropolis depends on a constant inflow of finished goods, textiles, and luxuries its populace and elite demand.',
+      impact: 'Shortfalls drive price spikes, unrest, and loss of prestige.',
+      suggestedFixes: ['Maintain long-haul trade relationships and bonded warehousing'],
+    });
+  }
+}
+
 export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance) => {
   const issues = [];
   const warnings = [];
@@ -405,15 +495,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
   const mustImport = terrain?.mustImport || config?.mustImport;
   if (mustImport) {
     mustImport.forEach((resource) => {
-      const hasProcessor = institutions.some((i) => {
-        const n = (i.name || '').toLowerCase();
-        return (
-          (resource.toLowerCase().includes('grain') && n.includes('mill') && !n.includes('sawmill')) ||
-          (resource.toLowerCase().includes('timber') && n.includes('sawmill')) ||
-          (resource.toLowerCase().includes('metal') && (n.includes('smith') || n.includes('smelter')))
-        );
-      });
-      if (hasProcessor) {
+      if (hasImportProcessor(institutions, resource, config)) {
         warnings.push({
           severity: SEVERITY.DEPENDENCY,
           category: 'Resource Import',
@@ -437,6 +519,10 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
       }
     });
   }
+
+  // Tier-scale baseline provisioning dependency for urban centres (city+).
+  // Mutates warnings in place.
+  appendProvisioningAtScaleDeps(warnings, config, foodBalance);
 
   return { issues, warnings, plotHooks: hooks };
 };

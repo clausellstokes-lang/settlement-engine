@@ -6,6 +6,8 @@ import { random as _rng } from '../../kernel/rngContext.js';
 import { customDeps as _customDeps } from '../../lib/dependencyEngine.js';
 import { COMMODITY_CATEGORY_MAP, GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { TIER_ORDER } from '../../data/constants.js';
+import { tradeRouteTier } from '../../domain/tradeRouteSemantics.js';
 
 
 // deriveLocalCommodities
@@ -116,7 +118,14 @@ export const generateTradeIncomeStreams = (tier, institutions = [], route = 'roa
       const name = typeof item === 'string' ? item : item?.name || '';
       return !(hasSaltLocal && !isEntrepot && hasEconomicKeyword(name));
     });
-  const imports = getUpgradeChain(tier, route, false, goodsToggles);
+  // Tier-connectivity: is this settlement plugged into a higher-tier trading
+  // partner? True when a bound imported neighbour outranks it, or when it sits
+  // on a major-artery route (crossroads/port) that by construction reaches
+  // higher-tier hubs. This is the real isFromHigher signal that selects the
+  // fromHigher/fromCityOrMetropolis/fromMetropolis upgrade-import pools.
+  const _neighbourTierIdx = TIER_ORDER.indexOf(config._importedNeighbor?.tier ?? '');
+  const isFromHigher = _neighbourTierIdx > TIER_ORDER.indexOf(tier) || tradeRouteTier(route) === 'major';
+  const imports = getUpgradeChain(tier, route, isFromHigher, goodsToggles);
   const bonuses = [];
   if (isEntrepot && route === 'crossroads' && !['thorp', 'hamlet'].includes(tier))
     bonuses.push({
@@ -376,18 +385,25 @@ const UPGRADE_GOODS_BY_TIER = {
 };
 
 
-// getUpgradeChain
-const getUpgradeChain = (tier, route, isFromHigher = false, goodsToggles = {}) => {
+// getUpgradeChain — exported for the focused unit tests (tier-connectivity pool
+// selection); production callers go through generateTradeIncomeStreams.
+export const getUpgradeChain = (tier, route, isFromHigher = false, goodsToggles = {}) => {
   // Isolated settlements have no trade access — no upgrade goods come in from outside
   if (route === 'isolated') return [];
   const tierData = UPGRADE_GOODS_BY_TIER[tier] || {};
   const result = [];
+  // Pool selection is driven by tier-CONNECTIVITY (isFromHigher: the settlement
+  // is connected to a higher-tier trading partner), NOT by the route category.
+  // `route` here is a route type (road/river/crossroads/port/isolated) and can
+  // never equal a tier name — the old `route === 'city' || route === 'metropolis'`
+  // guards made the fromCityOrMetropolis/fromMetropolis pools unreachable, so
+  // fromHinterland always shadowed them for town/city. The higher-tier pools are
+  // tested BEFORE fromHinterland so a real higher-tier connection selects them.
   let source = 'basic';
   if (isFromHigher && tierData.fromHigher) source = 'fromHigher';
-  else if ((route === 'city' || route === 'metropolis') && tierData.fromCityOrMetropolis)
-    source = 'fromCityOrMetropolis';
+  else if (isFromHigher && tierData.fromCityOrMetropolis) source = 'fromCityOrMetropolis';
+  else if (isFromHigher && tierData.fromMetropolis) source = 'fromMetropolis';
   else if (tierData.fromHinterland) source = 'fromHinterland';
-  else if (tierData.fromMetropolis && route === 'metropolis') source = 'fromMetropolis';
   (tierData[source] || []).forEach((item) => {
     const toggleKey = `${tier}_import_${item.name}`;
     const isService =

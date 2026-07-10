@@ -18,7 +18,7 @@
  * replaces by stable id, so re-running promotion never duplicates a condition.
  */
 
-import { deriveActiveCondition, withActiveCondition, withoutActiveCondition } from './activeConditions.js';
+import { deriveActiveCondition, withActiveCondition, withoutActiveCondition, CONDITION_ARCHETYPE_TEMPLATES } from './activeConditions.js';
 import { canonStressors } from './canonicalAccessors.js';
 
 // Ordered stressor (type/name) fragment -> condition archetype. First match wins.
@@ -90,6 +90,53 @@ export function archetypeForStressor(stressor) {
 }
 
 /**
+ * Settlement-state severity modifier for generation-derived conditions.
+ * Asymmetric and conservative: base archetype defaults already sit at 0.45-0.7
+ * (medium/high), so a typical settlement (modifier ~ 0) stays there. 'critical'
+ * (>=0.75) is reserved for the gravest archetypes when several crisis drivers
+ * genuinely stack; 'low' (<0.25) needs a calm, prosperous, well-defended place.
+ * Makes the low/critical severity bands actually generatable — a fixed catalog
+ * default meant every generated condition landed in the same band.
+ * @param {{ config?: { monsterThreat?: string }, monsterThreat?: string,
+ *           defenseProfile?: { scores?: { military?: number, internal?: number, economic?: number } },
+ *           economicState?: { prosperity?: string,
+ *                             foodSecurity?: { deficitPct?: number, isSurplus?: boolean } } }} settlement
+ * @returns {number}
+ */
+function settlementSeverityModifier(settlement) {
+  let m = 0;
+  const cfg = settlement.config || {};
+  const threat = cfg.monsterThreat || settlement.monsterThreat;
+  if (threat === 'plagued') m += 0.12;
+  else if (threat === 'heartland') m -= 0.12;
+  const sc = settlement.defenseProfile?.scores;
+  if (sc) {
+    const avg = ((sc.military || 0) + (sc.internal || 0) + (sc.economic || 0)) / 3;
+    if (avg < 30) m += 0.10;
+    else if (avg >= 75) m -= 0.10;
+  }
+  const food = settlement.economicState?.foodSecurity;
+  if (typeof food?.deficitPct === 'number' && food.deficitPct > 30) m += 0.10;
+  else if (food?.isSurplus) m -= 0.08;
+  const pros = settlement.economicState?.prosperity;
+  if (pros === 'Subsistence' || pros === 'Struggling' || pros === 'Poor') m += 0.06;
+  else if (pros === 'Prosperous' || pros === 'Wealthy') m -= 0.06;
+  return Math.max(-0.25, Math.min(0.18, m));
+}
+
+/**
+ * Generation-derived severity: archetype default nudged by settlement state.
+ * @param {string} archetype
+ * @param {number} modifier
+ * @returns {number}
+ */
+function deriveGenerationSeverity(archetype, modifier) {
+  const tmpl = /** @type {Record<string, { defaultSeverity?: number }>} */ (CONDITION_ARCHETYPE_TEMPLATES)[archetype];
+  const base = tmpl?.defaultSeverity ?? 0.45;
+  return Math.max(0, Math.min(1, +(base + modifier).toFixed(3)));
+}
+
+/**
  * Return a new settlement with an activeCondition for every live-crisis stressor.
  * No-op (returns the input) when there are no promotable stressors.
  *
@@ -107,6 +154,7 @@ export function archetypeForStressor(stressor) {
  */
 export function promoteStressorsToConditions(settlement, origin = null) {
   if (!settlement) return settlement;
+  const sevMod = settlementSeverityModifier(settlement);
   // Collapse to ONE condition per archetype, keeping the highest severity. Two
   // distinct stressors that map to the same archetype (e.g. "plague" + "fever
   // outbreak" -> plague) describe one crisis; emitting two conditions would
@@ -146,9 +194,11 @@ export function promoteStressorsToConditions(settlement, origin = null) {
     }
     next = withActiveCondition(next, {
       archetype,
-      // Carry the strongest stressor severity when present; else the catalog
-      // default (deriveActiveCondition fills it from the archetype template).
-      severity: severity == null ? undefined : severity,
+      // Carry the strongest stressor severity when present; else derive it from
+      // the archetype default nudged by settlement state, so the low/critical
+      // bands are reachable at generation (a bare catalog default never left
+      // the medium band).
+      severity: severity == null ? deriveGenerationSeverity(archetype, sevMod) : severity,
       triggeredAt: {
         sourceEventType: authored ? origin.sourceEventType : 'GENERATION',
         sourceEventTargetId: archetype,

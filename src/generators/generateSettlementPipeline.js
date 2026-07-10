@@ -88,7 +88,9 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  */
 export function regenNPCsPipeline(settlement, config, options = {}) {
   const seed = options.seed || generateSeed();
-  setActiveRng(createPRNG(seed));
+  // Save/restore: a regen called from inside an outer seeded run must restore
+  // the outer RNG, not clear it to null (setActiveRng returns the prior RNG).
+  const prevRng = setActiveRng(createPRNG(seed));
   try {
     const npcs = generateNPCs({
       tier: settlement.tier,
@@ -119,7 +121,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     const conflicts = generateConflicts(factions, relationships, config, settlement.institutions || []);
     return { npcs, relationships, factions, conflicts, _regenSeed: seed };
   } finally {
-    clearActiveRng();
+    clearActiveRng(prevRng);
   }
 }
 
@@ -132,13 +134,14 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
  */
 export function regenHistoryPipeline(settlement, config, options = {}) {
   const seed = options.seed || generateSeed();
-  setActiveRng(createPRNG(seed));
+  // Save/restore: same re-entrancy contract as regenNPCsPipeline.
+  const prevRng = setActiveRng(createPRNG(seed));
   try {
     return generateHistory(
       settlement.tier, config, settlement.institutions || [],
       settlement.economicViability, settlement.economicState, settlement.powerStructure
     );
   } finally {
-    clearActiveRng();
+    clearActiveRng(prevRng);
   }
 }

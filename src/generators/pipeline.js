@@ -170,8 +170,12 @@ export function runPipeline(initialContext, rng, options = {}) {
       }
     }
     // Set the global PRNG context so sub-generators (chance/pick/randInt)
-    // automatically use the seeded PRNG instead of Math.random()
-    setActiveRng(stepRng);
+    // automatically use the seeded PRNG instead of Math.random().
+    // Save/restore: capture the previously-active RNG so a pipeline run nested
+    // inside an outer seeded run restores the outer context instead of wiping
+    // it to null (which, under the fail-closed kernel, would make the outer
+    // run's next draw throw).
+    const prevRng = setActiveRng(stepRng);
     try {
       const patch = step.fn(ctx, stepRng);
       if (patch && typeof patch === 'object') {
@@ -189,7 +193,7 @@ export function runPipeline(initialContext, rng, options = {}) {
       }
       if (onStep) onStep(name, ctx, patch);
     } finally {
-      clearActiveRng();
+      clearActiveRng(prevRng);
     }
   }
 

@@ -123,6 +123,11 @@ export const buildGovernanceLabels = ({
                 ? (Me = 'Stable (theocratic governance)')
                 : (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'Hostile rival' ||
                     (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'hostile_rival' ||
+                    // canonical short tokens (canonicalRelationship.js) — the band
+                    // previously matched only the legacy/compound spellings, so a
+                    // neighbour emitting plain 'hostile'/'rival' never read Tense.
+                    (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'hostile' ||
+                    (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'rival' ||
                     (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'cold_war' ||
                     (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'Cold war' ||
                     (tradeRoute == null ? void 0 : tradeRoute.relationshipType) === 'tense'

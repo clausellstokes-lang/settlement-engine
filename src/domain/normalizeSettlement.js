@@ -78,13 +78,51 @@ function idFromSeed(seed) {
   return `s_${part1}${part2}`;
 }
 
+/**
+ * A rename-STABLE structural fingerprint of a settlement's identifying content.
+ * Folds in the SHAPE of the sub-collections (counts) rather than any display
+ * name, so two settlements that differ in composition get distinct fingerprints
+ * WITHOUT the fingerprint moving when a name is edited. This is the
+ * disambiguating entropy contentId adds to the {tier, population} core: it
+ * separates two genuinely-different id-less settlements that happen to share a
+ * name/tier/population, while a pure rename leaves it unchanged.
+ *
+ * Only lengths (not contents) are read so the fingerprint stays cheap and does
+ * not drift when e.g. an NPC inside the list is renamed — it moves only when the
+ * settlement's structural composition actually changes.
+ * @param {Record<string, unknown> | null | undefined} s
+ * @returns {number[]}
+ */
+function structuralFingerprint(s) {
+  /** @param {unknown} v @returns {number} */
+  const len = (v) => (Array.isArray(v) ? v.length : 0);
+  const holder = /** @type {{ npcs?: unknown, institutions?: unknown, powerStructure?: { factions?: unknown }, factions?: unknown, neighbourNetwork?: unknown, history?: { historicalEvents?: unknown }, config?: { nearbyResources?: unknown } } | null | undefined} */ (s);
+  return [
+    len(holder?.npcs),
+    len(holder?.institutions),
+    len(holder?.powerStructure?.factions ?? holder?.factions),
+    len(holder?.neighbourNetwork),
+    len(holder?.history?.historicalEvents),
+    len(holder?.config?.nearbyResources),
+  ];
+}
+
 // Deterministic fallback id for settlements lacking BOTH an id and a _seed (rare —
 // imported / mock data). Derived from identifying content via idFromSeed so the same
 // settlement always normalizes to the same id. Math.random here produced a fresh id
 // on every load, violating this file's idempotency contract
 // (normalize(normalize(s)) === normalize(s)).
+//
+// DISAMBIGUATION: the payload is {name, tier, population} PLUS a rename-stable
+// structural fingerprint (sub-collection counts). Two DISTINCT id-less settlements
+// that share name/tier/population but differ in composition now get DISTINCT ids
+// (the finding's collision), while a pure rename still shifts only the name term —
+// the structural fingerprint (and thus the bulk of the identity) is unchanged, so
+// the id stays as stable as a content hash can be against renames. A settlement
+// with a real id or _seed never reaches here, so the blast radius is imported/mock
+// data only.
 /**
- * @param {{ name?: unknown, tier?: unknown, population?: unknown } | null | undefined} settlement
+ * @param {Record<string, unknown> | null | undefined} settlement
  * @returns {string}
  */
 function contentId(settlement) {
@@ -92,6 +130,7 @@ function contentId(settlement) {
     name: settlement?.name ?? null,
     tier: settlement?.tier ?? null,
     population: settlement?.population ?? null,
+    fingerprint: structuralFingerprint(settlement),
   }));
 }
 

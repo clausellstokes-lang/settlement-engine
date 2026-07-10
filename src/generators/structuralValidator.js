@@ -10,6 +10,7 @@ export { getBaseChance } from './institutionProbability.js';
 import {GOODS_MODIFIERS_BY_TIER} from '../data/tradeGoodsData.js';
 import {GATE_FEATURES, INSTITUTION_SPATIAL, GOVERNMENT_INSTITUTIONS} from '../data/spatialData.js';
 import { RESOURCE_DATA } from '../data/resourceData.js';
+import { TIER_ORDER } from '../data/constants.js';
 
 // RELATION_TYPES re-exported as alias so existing importers don't break.
 export { SPECIAL_RESOURCES as RELATION_TYPES } from '../data/resourceData.js';
@@ -335,6 +336,13 @@ export const checkStructuralValidity = (institutions, config = {}) => {
 
   const instNames    = institutions.map(i => i.name);
   const expandedSet  = [...expandInstitutionSet(instNames)];
+  // Institutions the DM deliberately overrode above their native tier carry
+  // `outOfTier`. For those, the GATE_FEATURES minTier check is the SAME fact as
+  // the by-design out-of-tier contradiction surfaced below, so firing both would
+  // double-report one override as a violation-to-fix AND an intentional choice.
+  // Skip the redundant minTier warning for deliberate overrides (the by_design
+  // entry covers it). Non-tier prerequisites (the `requires` gate) still apply.
+  const outOfTierNames = new Set(institutions.filter(i => i.outOfTier).map(i => i.name));
 
   const {
     tier           = 'town',
@@ -354,7 +362,7 @@ export const checkStructuralValidity = (institutions, config = {}) => {
   Object.entries(GATE_FEATURES).forEach(([instName, gate]) => {
     if (!instNames.includes(instName)) return;
 
-    if (gate.minTier && !tierAtLeast(tier, gate.minTier)) {
+    if (gate.minTier && !tierAtLeast(tier, gate.minTier) && !outOfTierNames.has(instName)) {
       violations.push({
         type:        'tier_violation',
         institution: instName,
@@ -693,7 +701,14 @@ export const checkStructuralValidity = (institutions, config = {}) => {
     // ── Out-of-tier contradictions (by-design) ─────────────────────────────────
   // These are not errors — they're DM choices. Surface them in Viability as
   // "By Design Contradictions" so the DM knows the tension exists.
-  const outOfTierInsts = (institutions || []).filter(i => i.outOfTier);
+  // Defense-in-depth: an override is only a contradiction when the institution's
+  // native tier is genuinely ABOVE the settlement's scale. A lower- or equal-tier
+  // institution carrying outOfTier (e.g. from a stale draft/edit path) is a
+  // metropolis naturally containing smaller infrastructure — not a contradiction.
+  // Unknown native tier (indexOf === -1) is treated conservatively as NOT above.
+  const settlementRank = TIER_ORDER.indexOf(tier);
+  const outOfTierInsts = (institutions || []).filter(i =>
+    i.outOfTier && TIER_ORDER.indexOf(i.nativeTier) > settlementRank);
   outOfTierInsts.forEach(inst => {
     violations.push({
       type:        'out_of_tier',

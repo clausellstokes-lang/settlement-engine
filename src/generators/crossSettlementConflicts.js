@@ -24,6 +24,8 @@ const CONFLICT_CATS = {
   rival:         ['economy', 'military', 'criminal'],
   cold_war:      ['military', 'criminal', 'government'],
   hostile:       ['military', 'criminal'],
+  vassal:        ['military', 'economy', 'government'],
+  criminal_network: ['criminal', 'economy'],
   neutral:       ['economy'],
 };
 
@@ -58,6 +60,15 @@ const CONFLICT_NATURE = {
   hostile: {
     military:   ['open border skirmish', 'raid and reprisal cycle', 'siege posture standoff'],
     criminal:   ['sabotage operation', 'assassination contract', 'destabilization campaign'],
+  },
+  vassal: {
+    military:   ['levy obligation dispute', 'garrison quartering grievance', 'muster quota standoff'],
+    economy:    ['tribute assessment dispute', 'harvest levy conflict'],
+    government: ['charter rights dispute', 'homage renewal grievance'],
+  },
+  criminal_network: {
+    criminal:   ['contraband route dispute', 'fence territory disagreement', 'exposed informant incident'],
+    economy:    ['smuggled goods pricing conflict', 'front operation ownership dispute'],
   },
   neutral: {
     economy:    ['tariff dispute', 'waypoint access disagreement'],
@@ -96,6 +107,14 @@ function buildConflictDesc(npcA, npcB, settA, settB, relType, nature, rng) {
       `${npcA.name} and ${settB.name}'s ${npcB.name} are on opposite sides of an active ${nature} — formal violence is a matter of timing.`,
       `The ${nature} between ${npcA.name} and ${npcB.name} of ${settB.name} has claimed blood on both sides.`,
     ],
+    vassal: [
+      `${npcB.name} of ${settB.name} is pressing ${npcA.name} over a ${nature} — the oath holds, but its terms are contested.`,
+      `A ${nature} has strained relations between ${npcA.name} and ${settB.name}'s ${npcB.name}, who speaks for the liege's interests.`,
+    ],
+    criminal_network: [
+      `${npcA.name} and ${settB.name}'s ${npcB.name} are quietly at odds over a ${nature} — neither can bring the matter to any authority.`,
+      `A ${nature} has soured the arrangement between ${npcA.name} and ${npcB.name} of ${settB.name} — the network still runs, but trust is thin.`,
+    ],
     neutral: [
       `${npcA.name} and ${settB.name}'s ${npcB.name} have a routine ${nature} that hasn't been resolved cleanly.`,
     ],
@@ -126,6 +145,12 @@ function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
     ],
     trade_partner: [
       `${facA.name} and ${settB.name}'s ${facB.name} share a market agreement, but competition still flares at the edges.`,
+    ],
+    vassal: [
+      `${facB.name} of ${settB.name} presses feudal claims on ${facA.name}, which complies in public and resists in private.`,
+    ],
+    criminal_network: [
+      `${facA.name} and ${settB.name}'s ${facB.name} share routes and fences — the partnership is profitable, and neither side trusts it.`,
     ],
     neutral: [
       `${facA.name} and ${settB.name}'s ${facB.name} maintain careful distance, neither allied nor opposed.`,
@@ -211,7 +236,7 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
 
   // ── Faction engagement ─────────────────────────────────────────────────────
   // Only for relationship types where factions clash meaningfully
-  const doFaction = ['rival','cold_war','hostile','allied','patron'].includes(relType);
+  const doFaction = ['rival','cold_war','hostile','allied','patron','vassal','criminal_network'].includes(relType);
   if (doFaction) {
     const factionsA = settlementA.factions || [];
     const factionsB = settlementB.factions || [];

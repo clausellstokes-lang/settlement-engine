@@ -403,8 +403,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           : 'Iron imported from mining regions and worked locally; this income stream is vulnerable to supply disruption.',
       });
     }
+    // Timber income. Old needles 'forest_access'/'timber_rights' matched no
+    // catalog key (hasNearbyResource is a substring test over real resource
+    // keys) → only managed_forest ever fired; 'timber' catches all timber
+    // resources (mountain_timber, shipbuilding_timber, timber).
     if (
-      hasNearbyResource('managed_forest', 'forest_access', 'timber_rights') &&
+      hasNearbyResource('managed_forest', 'timber') &&
       !hasIncomeSource('timber') &&
       !hasIncomeSource('lumber')
     ) {
@@ -555,6 +559,11 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     });
   }
   const tradeDependencies = [];
+  // Stage-5 ledger: what the military/slave-trade stage actually pushed, so the
+  // Stage-7 chain override (which rebuilds primaryExports/primaryImports from
+  // the chain pipeline) can re-seat these entries instead of discarding them.
+  const stage5PushedExports = [];
+  const stage5PushedImports = [];
   {
     const tierIndex = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'].indexOf(tier),
       instNamesLower = (institutions || []).map(function (inst) {
@@ -587,6 +596,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         })
       ) {
         primaryExports.push(militaryExport);
+        stage5PushedExports.push(militaryExport);
       }
     }
     // Slave trade — probabilistic at town+ scale; the _rng() draw is load-bearing
@@ -611,13 +621,16 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
                   ? 'Captive trade — war captives and debtors sold through established trafficking networks'
                   : 'Slave trade — human trafficking and forced labour; legally tolerated or actively regulated';
         primaryExports.push(slaveTradeLabel);
+        stage5PushedExports.push(slaveTradeLabel);
         if (
           isSlaveMarket &&
           !primaryImports.some(function (imp) {
             return imp.toLowerCase().includes('slave');
           })
         ) {
-          primaryImports.push('Enslaved labour — purchased from regional trafficking networks');
+          const slaveImportLabel = 'Enslaved labour — purchased from regional trafficking networks';
+          primaryImports.push(slaveImportLabel);
+          stage5PushedImports.push(slaveImportLabel);
         }
       }
     }
@@ -715,7 +728,10 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       fishing_grounds: 'Salted fish (fishing grounds exhausted)',
       coal_deposits: 'Coal and fuel (local seams exhausted)',
       stone_quarry: 'Dressed stone (local quarry depleted)',
-      clay_pits: 'Clay and ceramics materials (pits exhausted)',
+      // 'clay_pits' matched no key (real: 'river_clay'); non-managed timber had no entry.
+      river_clay: 'Clay and ceramics materials (deposits exhausted)',
+      mountain_timber: 'Timber (mountain stands cleared)',
+      shipbuilding_timber: 'Shipbuilding timber (coastal stands cleared)',
     };
     depletedResources.forEach((res) => {
       const importLabel = DEPLETED_IMPORT_MAP[res];
@@ -736,6 +752,26 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   });
   primaryImports.length = 0;
   chainImports.forEach((imp) => primaryImports.push(imp));
+  // Re-seat Stage 5's military/slave-trade exports (and the paired enslaved-
+  // labour import): the chain pipeline doesn't model them, so the override
+  // above would otherwise discard legitimately-produced entries. The Stage 5
+  // RNG draw has already fired by this point — nothing here touches the
+  // stream. Dedup mirrors Stage 5's own keyword guards so a chain/service
+  // export that already covers the ground wins.
+  stage5PushedExports.forEach((e) => {
+    const eLow = e.toLowerCase();
+    const isMilitaryEntry = eLow.includes('military') || eLow.includes('mercenary');
+    const covered = primaryExports.some((g) => {
+      const gLow = g.toLowerCase();
+      return isMilitaryEntry
+        ? gLow.includes('military') || gLow.includes('mercenary')
+        : gLow.includes('slave');
+    });
+    if (!covered) primaryExports.push(e);
+  });
+  stage5PushedImports.forEach((i) => {
+    if (!primaryImports.some((g) => g.toLowerCase().includes('slave'))) primaryImports.push(i);
+  });
 
   // ── Isolated thorp/hamlet: subsistence economy — no imports or exports ────
   // These settlements have no trade route and cannot participate in external trade.

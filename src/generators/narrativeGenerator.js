@@ -21,7 +21,10 @@
  */
 
 import { random as _rng } from '../kernel/rngContext.js';
+import { resolvePrimaryStress } from './stressPriority.js';
 import { pick, pickRandom, pickRandom2, random01 } from './helpers.js';
+import { resolveTerrain } from '../domain/resolveTerrain.js';
+import { deriveTradeCommodity } from './tradeCommodity.js';
 
 import {
   ARRIVAL_SCENES,
@@ -308,25 +311,7 @@ const genSettSummary = settlement => {
   } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const factions = powerStructure.factions || [];
   const govFaction =
@@ -368,27 +353,10 @@ const genSettSummary = settlement => {
         f.faction?.toLowerCase().includes('quarantine'),
     )?.faction || null;
 
-  // Primary commodity
-  const commodity = (() => {
-    const exp = economicState?.primaryExports?.[0] || '';
-    for (const [kw, label] of [
-      ['grain', 'grain'],
-      ['wheat', 'grain'],
-      ['fish', 'fish'],
-      ['iron', 'iron'],
-      ['timber', 'timber'],
-      ['salt', 'salt'],
-      ['stone', 'stone'],
-      ['wool', 'wool'],
-      ['silk', 'silk'],
-      ['spice', 'spice'],
-      ['herb', 'medicinal herbs'],
-      ['ale', 'ale'],
-    ]) {
-      if (exp.toLowerCase().includes(kw)) return label;
-    }
-    return exp.split(' ')[0].toLowerCase() || 'trade goods';
-  })();
+  // Primary commodity — unified scan (tradeCommodity.js). 'trade goods' fallback:
+  // this feeds replaceTokens, which leaves the literal "{commodity}" in prose on
+  // a falsy substitution, so the result must never be empty.
+  const commodity = deriveTradeCommodity(economicState, { firstWordFallback: true, fallback: 'trade goods' });
 
   return {
     name,
@@ -424,30 +392,18 @@ export const genArrivalDetail = (config, economicContext = null) => {
   const commodity = economicContext?.tradeCommodity || null;
   const prosperity = economicContext?.prosperity || 'Moderate';
   const stresses = config?.stressTypes?.length ? config.stressTypes : config?.stressType ? [config.stressType] : [];
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const tier = config?.tier || config?.settType || 'town';
 
-  // Terrain narrative hooks (why the settlement is here)
-  let reasonPool = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
+  // Terrain narrative hooks (why the settlement is here). TERRAIN_NARRATIVE_HOOKS
+  // mixes terrain keys (mountain/forest/plains) with route keys (port/road/isolated),
+  // but the lookup only ever used `route` — so the 18 terrain-specific founding hooks
+  // never fired (a mountain settlement got generic road/port reasons instead of its
+  // "rich mineral deposits" / "strategic pass" ones). Prefer the settlement's resolved
+  // terrain, fall back to route, then isolated.
+  const terrain = resolveTerrain(config);
+  let reasonPool = TERRAIN_NARRATIVE_HOOKS[terrain] || TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
 
   // Add commodity-specific reasons
   if (commodity) {
@@ -658,41 +614,11 @@ const genPressureDetail = settlement => {
   const hasInst = kw => instNames.some(n => n.includes(kw));
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
-  const commodity = (() => {
-    const exp = economicState?.primaryExports?.[0] || '';
-    for (const [kw, label] of [
-      ['grain', 'grain'],
-      ['fish', 'fish'],
-      ['iron', 'iron'],
-      ['timber', 'timber'],
-      ['salt', 'salt'],
-      ['stone', 'stone'],
-      ['wool', 'wool'],
-    ]) {
-      if (exp.toLowerCase().includes(kw)) return label;
-    }
-    return exp.split(' ')[0].toLowerCase() || null;
-  })();
+  // Unified scan (tradeCommodity.js); the pressure templates carry their own
+  // per-sentence defaults, so a plausible first word beats null here.
+  const commodity = deriveTradeCommodity(economicState, { firstWordFallback: true });
 
   const factions = powerStructure?.factions || [];
   const govFaction =
@@ -746,6 +672,11 @@ const genPressureDetail = settlement => {
     healersRef: healerRef,
     stresses: stresses.map(type => ({ type })),
     commodity,
+    // compound: the economic/military/criminal effectiveness triplet the
+    // wartime/mass_migration/insurgency PRESSURE_SENTENCES closures branch on
+    // (r.compound?.economyOutput / militaryEffective / criminalEffective). Without
+    // this the closures always hit their '|| default' fallback (dead compound branch).
+    compound: economicState?.compound || undefined,
     prosperity: economicState?.prosperity || 'Moderate',
     govFaction,
     topFaction: topFaction || govFaction,
@@ -964,7 +895,6 @@ const buildPoliticalNarrative = (npc, index, summary, allNpcs) => {
  */
 export const generateSettlementReason = (tier, route, neighbor, _config = {}, foodBalance = null) => {
   const lines = [];
-  const _routeHooks = TERRAIN_NARRATIVE_HOOKS[route] || TERRAIN_NARRATIVE_HOOKS.isolated;
 
   // Meaningful food deficit? rawDeficit is the pre-import gap (need − production);
   // deficit is the residual after imports/magic. Either one signals the settlement
@@ -1097,25 +1027,7 @@ export const generateArrivalScene = settlement => {
   const { name, tier, config = {}, institutions = [], stress } = settlement;
 
   const stresses = (stress ? (Array.isArray(stress) ? stress : [stress]) : []).map(s => s.type);
-  const primaryStress = stresses.length
-    ? [
-        'under_siege',
-        'occupied',
-        'famine',
-        'plague_onset',
-        'politically_fractured',
-        'recently_betrayed',
-        'succession_void',
-        'indebted',
-        'infiltrated',
-        'monster_pressure',
-        'insurgency',
-        'mass_migration',
-        'wartime',
-        'religious_conversion',
-        'slave_revolt',
-      ].find(s => stresses.includes(s)) || stresses[0]
-    : null;
+  const primaryStress = resolvePrimaryStress(stresses);
 
   const culture = config.culture || 'germanic';
   const magicPriority = config.priorityMagic ?? 50;

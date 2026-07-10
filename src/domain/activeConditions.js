@@ -46,7 +46,9 @@
 // keys match factionRelationshipUpdate.js so a condition's archetype is
 // directly applicable to recalculateFactionRelationships.
 
-const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
+// Exported for conditionPromotion's generation-severity derivation (the
+// archetype defaultSeverity is the base the settlement-state modifier nudges).
+export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
   plague: {
     label: 'Plague',
     description: 'A virulent illness spreads through the settlement.',

@@ -120,15 +120,18 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
   // criminal services even when no criminal institution was rolled.
   // NOTE: this unwinds the original minified grouping FAITHFULLY — the village
   // fallback and the contraband push were NESTED inside the outer (town+) gate,
-  // so they only evaluate when it passed. In particular the village fallback's
-  // own conditions can never hold here (the outer gate requires a non-village
-  // tier, and the first push makes buckets.criminal non-empty); it is preserved
-  // as-is because this is a pure de-minification, not a logic change.
+  // so they only evaluate when it passed. The village fallback's own conditions
+  // can never hold here (non-village outer gate; first push fills the bucket);
+  // preserved as-is (same tier-before-sentinel read as the outer gate).
+  // Resolve the real tier first: config.settType may be the 'random'/'custom'
+  // sentinel (a non-tier string that slips past this small-tier gate), while
+  // resolveConfig writes the true tier to config.tier. Prefer config.tier —
+  // mirrors institutionProbability.js.
   if (
     !hasCriminalInst &&
     (criminalEffective >= 38 || securityRatio < 1.2) &&
     buckets.criminal.length === 0 &&
-    !['thorp', 'hamlet', 'village'].includes(config.settType || config.tier || 'village')
+    !['thorp', 'hamlet', 'village'].includes(config.tier || config.settType || 'village')
   ) {
     if (securityRatio < 0.6) {
       buckets.criminal.push(
@@ -162,7 +165,7 @@ export const generateAvailableServices = (tier, institutions, opts = {}, config 
       criminalEffective >= 55 &&
       securityRatio < 0.5 &&
       buckets.criminal.length === 0 &&
-      ['village'].includes(config.settType || config.tier || '')
+      ['village'].includes(config.tier || config.settType || '')
     ) {
       if (securityRatio < 0.4) {
         buckets.criminal.push(

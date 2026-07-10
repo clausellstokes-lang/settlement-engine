@@ -37,6 +37,18 @@ export const FACTION_DESCRIPTORS = {
     "The Underground",
     "The Black Circle",
   ],
+  crafts: [
+    "The Artisans' Compact",
+    "The Craftsmen's League",
+    "The Makers' Guild-Alliance",
+    "The Artificers' Circle",
+  ],
+  noble: [
+    "The Highborn Circle",
+    "The Peerage",
+    "The Old Houses",
+    "The Landed Bloc",
+  ],
   other: [
     "The Independent Bloc",
     "The Free Alliance",

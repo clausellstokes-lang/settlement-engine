@@ -356,7 +356,10 @@ registerStep('assembleInstitutions', {
   // Out-of-tier forced institutions
   const fullCatalogAllTiers = (() => {
     const all = {};
-    ['thorp','hamlet','village','town','city'].forEach(t => {
+    // 'metropolis' included: its catalog entries were unreachable for forced
+    // out-of-tier overrides (a town could force a city institution but never a
+    // metropolis one).
+    ['thorp','hamlet','village','town','city','metropolis'].forEach(t => {
       const tc = institutionalCatalog[t] || {};
       Object.entries(tc).forEach(([cat, insts]) => {
         if (!all[cat]) all[cat] = {};

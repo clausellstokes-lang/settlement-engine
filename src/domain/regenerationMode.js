@@ -24,6 +24,19 @@
  */
 
 import { entityCatalog } from './explanation.js';
+import { deriveFactionProfile } from './factionProfile.js';
+import { deriveActiveCondition } from './activeConditions.js';
+
+// Same slug transform entityCatalog uses for institution/npc ids, replicated
+// here (the catalog's copy is module-private) so the reverse lookup re-derives
+// the IDENTICAL id the catalog emitted.
+/**
+ * @param {unknown} s
+ * @returns {string}
+ */
+function snakeCase(s) {
+  return String(s).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '').toLowerCase();
+}
 import { tagEntityCanon } from './canonStatus.js';
 
 // ── Catalog ──────────────────────────────────────────────────────────────
@@ -215,23 +228,46 @@ function lookupTagForEntity(settlement, catalogEntry) {
   // can tag it. For derived entities (system_variable, capacity,
   // district, etc.) the raw object isn't on the settlement — we treat
   // those as generated/draft.
+  //
+  // CRITICAL: entityCatalog stamps a PROFILE-DERIVED id (deriveFactionProfile,
+  // deriveActiveCondition's conditionId, `institution.<slug>` / `npc.<slug>`),
+  // NOT the raw object's `.id` — legacy factions of shape {faction, power, desc}
+  // carry no stored `.id` at all. Matching raw `.id === catalogId` therefore
+  // missed every such entity and tagged it generated/draft, so a user-locked or
+  // canon faction/condition got rerolled by Rebalance/Reforge instead of
+  // preserved (silent loss of user canon). Match by the SAME derived id the
+  // catalog used.
   const id = catalogEntry.id;
   const type = catalogEntry.type;
 
   if (type === 'institution') {
-    const inst = (settlement.institutions || []).find(i => i?.id === id);
+    const inst = (settlement.institutions || []).find(i =>
+      i?.id === id || `institution.${snakeCase(i?.name || '')}` === id);
     return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (inst || {}));
   }
   if (type === 'faction') {
-    const f = (/** @type {{powerStructure?: {factions?: Array<{id?: string}>}}} */ (settlement).powerStructure?.factions || []).find(fac => fac?.id === id);
+    // Mirror deriveAllFactionProfiles' source order so a faction stored under
+    // any of the legacy containers resolves the same way the catalog derived it.
+    const holder = /** @type {{powerStructure?: {factions?: Array<Record<string, unknown>>}, power?: {factions?: Array<Record<string, unknown>>}, factions?: Array<Record<string, unknown>>}} */ (settlement);
+    const factions = holder.powerStructure?.factions
+                  || holder.power?.factions
+                  || holder.factions
+                  || [];
+    const f = factions.find(fac =>
+      fac?.id === id || deriveFactionProfile(fac, settlement)?.id === id);
     return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (f || {}));
   }
   if (type === 'npc') {
-    const n = (settlement.npcs || []).find(npc => npc?.id === id);
+    // Catalog stamps `npc.id || npc.<slug>`; legacy NPCs lacking a stored id
+    // were missed the same way factions were (see note above).
+    const npcs = /** @type {Array<{ id?: string, name?: string }>} */ (settlement.npcs || []);
+    const n = npcs.find(npc =>
+      npc?.id === id || `npc.${snakeCase(npc?.name || 'unnamed')}` === id);
     return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (n || {}));
   }
   if (type === 'condition') {
-    const c = (settlement.activeConditions || []).find(cond => cond?.id === id);
+    const c = (settlement.activeConditions || []).find(cond =>
+      cond?.id === id || deriveActiveCondition(cond)?.id === id);
     return tagEntityCanon(/** @type {import('./canonStatus.js').CanonTaggable} */ (c || {}));
   }
   // Derived entities default to generated/draft.

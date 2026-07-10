@@ -412,11 +412,11 @@ export const TERRAIN_DATA = {
     allowedResources: [
       "grain",
       "wheat",
-      "barley",
+      "flax",
       "oats",
       "livestock",
       "wool",
-      "leather",
+      "hides",
       "dairy",
       "vegetables",
       "hay",
@@ -516,7 +516,7 @@ export const TERRAIN_DATA = {
     description: "Settlement in rolling hills or highland terrain",
     allowedResources: [
       "stone",
-      "clay",
+      "grapes",
       "iron ore",
       "copper",
       "livestock",

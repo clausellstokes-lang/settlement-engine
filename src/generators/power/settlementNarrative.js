@@ -35,6 +35,19 @@ const STRESS_RUMORS = [
   (rel) => rel.tension,
 ];
 
+// resolvePartyPair — resolve two party display names (with fallbacks), then
+// dedupe: upstream, topFaction falls back to govFaction and the governing
+// faction is often also the most powerful, so both slots can resolve to the
+// same name ("Corrupt Council and Corrupt Council"). Returns [first, null]
+// when only one distinct party exists so callers can switch to a
+// single-party phrasing.
+const resolvePartyPair = (a, fallbackA, b, fallbackB) => {
+  const first = a || fallbackA;
+  const second = b || fallbackB;
+  const samePlace = (first || '').trim().toLowerCase() === (second || '').trim().toLowerCase();
+  return samePlace ? [first, null] : [first, second];
+};
+
 // genSuccessionNarr — build a list of narrative sentences from a settlement
 // context object `ctx`, each gated on a tension/state condition.
 export const genSuccessionNarr = (ctx) => {
@@ -68,10 +81,16 @@ export const genSuccessionNarr = (ctx) => {
     narratives.push(
       `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus — ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
     );
-  if (ctx.prosperity === 'Poor')
-    narratives.push(
-      `${ctx.name} is poor enough that every resource decision is a political one; ${ctx.govFaction || 'the council'} and ${ctx.topFaction || 'the merchant class'} disagree about who bears the cost.`
+  if (ctx.prosperity === 'Poor') {
+    const [costGov, costTop] = resolvePartyPair(
+      ctx.govFaction, 'the council', ctx.topFaction, 'the merchant class'
     );
+    narratives.push(
+      costTop
+        ? `${ctx.name} is poor enough that every resource decision is a political one; ${costGov} and ${costTop} disagree about who bears the cost.`
+        : `${ctx.name} is poor enough that every resource decision is a political one; ${costGov} decides who bears the cost, and is resented for it.`
+    );
+  }
   if (ctx.commodity && ctx.isCrossroads)
     narratives.push(
       `${ctx.name} sits where trade roads cross; its ${ctx.commodity} trade moves through it in both directions, and whoever controls the tariff controls the settlement's revenue — a fact not lost on ${ctx.topFaction || 'the guilds'}.`
@@ -85,13 +104,26 @@ export const genSuccessionNarr = (ctx) => {
     ((stabilityFractured = ctx.stability) != null && stabilityFractured.includes('Fractured')) ||
     ((stabilityVolatile = ctx.stability) != null && stabilityVolatile.includes('Volatile'))
   )
-    narratives.push(
-      `${ctx.name} looks stable from the outside; the relationship between ${ctx.topFaction || 'the dominant faction'} and ${ctx.govFaction || 'the council'} is more contested than it appears.`
+  {
+    const [contestTop, contestGov] = resolvePartyPair(
+      ctx.topFaction, 'the dominant faction', ctx.govFaction, 'the council'
     );
-  if (ctx.topTension === 'economic_disparity')
     narratives.push(
-      `The wealth gap in ${ctx.name} has become a fact of daily life — ${ctx.topFaction || 'the merchant class'} controls the surplus and ${ctx.govFaction || 'the council'} cannot or will not force redistribution. Resentment is structural now, not episodic.`
+      contestGov
+        ? `${ctx.name} looks stable from the outside; the relationship between ${contestTop} and ${contestGov} is more contested than it appears.`
+        : `${ctx.name} looks stable from the outside; ${contestTop}'s hold on that stability is more contested than it appears.`
     );
+  }
+  if (ctx.topTension === 'economic_disparity') {
+    const [surplusTop, surplusGov] = resolvePartyPair(
+      ctx.topFaction, 'the merchant class', ctx.govFaction, 'the council'
+    );
+    narratives.push(
+      surplusGov
+        ? `The wealth gap in ${ctx.name} has become a fact of daily life — ${surplusTop} controls the surplus and ${surplusGov} cannot or will not force redistribution. Resentment is structural now, not episodic.`
+        : `The wealth gap in ${ctx.name} has become a fact of daily life — ${surplusTop} controls the surplus and will not redistribute it. Resentment is structural now, not episodic.`
+    );
+  }
   if (ctx.topTension === 'religious_tension')
     narratives.push(
       `Two versions of faith are competing in ${ctx.name}; both claim legitimacy and both have the ear of someone powerful. ${ctx.govFaction || 'The council'} has avoided taking sides so far, which means both factions resent it equally.`
@@ -108,10 +140,16 @@ export const genSuccessionNarr = (ctx) => {
     narratives.push(
       `The threat approaching ${ctx.name} is not yet visible to most residents. ${ctx.topNPCName || 'The most senior figure'} knows the intelligence and has not shared it. The decision about when to share it — and how — is the real crisis.`
     );
-  if (ctx.topTension === 'resource_scarcity' && ctx.commodity)
-    narratives.push(
-      `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${ctx.topFaction || 'The merchant class'} knows the real numbers. ${ctx.govFaction || 'The council'} has been told a different version.`
+  if (ctx.topTension === 'resource_scarcity' && ctx.commodity) {
+    const [numbersTop, numbersGov] = resolvePartyPair(
+      ctx.topFaction, 'The merchant class', ctx.govFaction, 'The council'
     );
+    narratives.push(
+      numbersGov
+        ? `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${numbersTop} knows the real numbers. ${numbersGov} has been told a different version.`
+        : `${ctx.name}'s ${ctx.commodity} supply is tighter than the official position acknowledges. ${numbersTop} knows the real numbers and has kept them close.`
+    );
+  }
   if (ctx.topTension === 'resource_scarcity' && !ctx.commodity)
     narratives.push(
       `Something essential in ${ctx.name} is running short — food, water, or coin. The shortage is being managed through allocation decisions that are, functionally, political decisions. ${ctx.govFaction || 'The council'} controls the allocation.`
