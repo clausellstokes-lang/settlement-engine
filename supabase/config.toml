@@ -441,6 +441,14 @@ verify_jwt = false
 [functions.auth-recovery]
 verify_jwt = false
 
+# Dynamic OG-card renderer for shared /gallery/:slug unfurls. The callers ARE the
+# unfurl bots (facebookexternalhit, Twitterbot, Discordbot, Slackbot) — they carry
+# NO Supabase JWT, so the platform gate would 401 every social preview. It reads
+# only already-public data (the get_gallery_dossier sanitizer, anon key, coarse
+# columns) and takes no write path, so anonymous access is the whole point.
+[functions.og-image]
+verify_jwt = false
+
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
 # Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
 # on any of these would expose an authenticated/money/admin endpoint to unauth

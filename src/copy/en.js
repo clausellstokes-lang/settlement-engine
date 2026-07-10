@@ -770,6 +770,12 @@ export const en = Object.freeze({
       canon_dossier:   { label: 'Canon Dossier',   desc: 'Full campaign-ready document with current state and timeline.' },
       timeline_packet: { label: 'Timeline Packet', desc: 'Lean recap: cover, current state, and timeline. For reviewing what changed since last session.' },
     },
+    // Share-card export: a single PNG you can drop straight into Discord or a
+    // forum post. Not premium-gated.
+    imageCta:       'Export Image',
+    imageBusy:      'Building image...',
+    imageTitle:     'Download a share card (PNG) with this settlement’s name, tier, and headline stats.',
+    imageError:     'Could not build the share image. Try again.',
   },
 
   // ── World-state badges + tooltips (migrated from copy/strings.js) ─────────

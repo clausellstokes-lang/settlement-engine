@@ -49,6 +49,7 @@ const INTENDED_ANON = new Set([
   'pricing-resync-cron',   // cron pg_net; x-cron-secret shared secret, not a JWT
   'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
+  'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards
 ]);
 // Everything else must be JWT-gated (platform default), notably:
 const INTENDED_JWT = [

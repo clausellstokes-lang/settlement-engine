@@ -133,6 +133,21 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // pass-then-fail at this ceiling tonight). NO further per-wave bumps: wave 5
 // owns the reduction program — registry-prose split, copy-namespace
 // segmentation, measurement determinization — and ratchets DOWN from here.
+// (2026-07-10, 4g) ceiling HOLDS at 1,410,000, and 4g BUYS headroom back. The
+// share loop's seo.js additions (per-route OG/Twitter image trio + the site
+// WebSite/SoftwareApplication JSON-LD) rode the eager entry and pushed the
+// closure to 1,412,642 (OVER). Two moves absorbed it and then some:
+//   • the map-only lucide split — icons imported ONLY by src/components/map/**
+//     (20 of them) now ride a lazy 'vendor-icons-map' chunk, shrinking the
+//     first-paint vendor-icons chunk 31,750 -> 27,751 (see vite.config
+//     computeMapOnlyLucideIcons); and
+//   • the per-shared-dossier head enricher (setSharedDossierMeta) moved to the
+//     lazy lib/seoDossier.js so only the gallery surface pays for it, not the
+//     entry.
+// NET MEASURED 1,407,4xx (`npm run build`) — back UNDER the ceiling (~2.6 kB
+// headroom) with the icon split's margin restored. If this fails high, re-measure the closure
+// listing the test prints; the map split can only ever move MAP-EXCLUSIVE icons
+// out (safety invariant enforced by tests/build/iconChunkSplit.test.js).
 const CLOSURE_BUDGET_BYTES = 1_410_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static

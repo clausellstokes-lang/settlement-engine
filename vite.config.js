@@ -77,6 +77,64 @@ const isEngineSharedDomain = (id) => {
   return false;
 };
 
+// ── Map-only lucide icons (split them out of the first-paint vendor-icons) ────
+// lucide-react ships one module per icon (dist/esm/icons/<kebab>.js), but a
+// single `vendor-icons` chunk collects EVERY icon the app uses anywhere. Because
+// first-paint UI imports SOME icons, that whole chunk lands in the first-paint
+// static closure — so every icon only the (lazy) World Map surfaces use was
+// still paying first-paint bytes, coupling the byte budget to map work that has
+// nothing to do with first paint.
+//
+// This DERIVES, from the source graph, the set of icons imported ONLY by
+// src/components/map/** and nowhere else, and routes just those into a separate
+// 'vendor-icons-map' chunk that loads with the map. An icon shared with any
+// non-map surface stays in vendor-icons (first paint), so nothing a first-paint
+// view needs can be moved out — the split is provably safe and can only shrink
+// first paint. Not hand-curated (mirrors the ENGINE_SHARED_DOMAIN derivation),
+// so a new map-only icon auto-moves and a newly-shared one auto-returns.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget) +
+//              tests/build/iconChunkSplit.test.js (the split's shape).
+function computeMapOnlyLucideIcons() {
+  const walk = (d, out = []) => {
+    if (!existsSync(d)) return out;
+    for (const e of readdirSync(d)) {
+      const p = join(d, e);
+      if (statSync(p).isDirectory()) walk(p, out);
+      else if (/\.(jsx?|tsx?)$/.test(e)) out.push(p);
+    }
+    return out;
+  };
+  const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').replace(/([a-z])([0-9])/g, '$1-$2').toLowerCase();
+  const iconsOf = (file) => {
+    const code = readFileSync(file, 'utf8');
+    const set = new Set();
+    for (const m of code.matchAll(/import\s*\{([^}]*)\}\s*from\s*['"]lucide-react['"]/g)) {
+      for (let part of m[1].split(',')) {
+        const name = part.trim().split(/\s+as\s+/)[0].trim(); // `X as Y` → X
+        if (/^[A-Z][A-Za-z0-9]*$/.test(name)) set.add(name);
+      }
+    }
+    return set;
+  };
+  const MAP_DIR = join(SRC, 'components', 'map');
+  const mapIcons = new Set();
+  const otherIcons = new Set();
+  for (const f of walk(SRC)) {
+    const target = f.startsWith(MAP_DIR) ? mapIcons : otherIcons;
+    for (const i of iconsOf(f)) target.add(i);
+  }
+  const mapOnly = new Set();
+  for (const i of mapIcons) if (!otherIcons.has(i)) mapOnly.add(kebab(i));
+  return mapOnly;
+}
+const MAP_ONLY_ICONS = computeMapOnlyLucideIcons();
+// Match `/lucide-react/dist/esm/icons/<kebab>.js` (never the barrel) and test
+// membership in the derived map-only set.
+const isMapOnlyLucideIcon = (id) => {
+  const m = id.match(/lucide-react\/dist\/esm\/icons\/([a-z0-9-]+)\.[cm]?js/);
+  return !!m && MAP_ONLY_ICONS.has(m[1]);
+};
+
 export default defineConfig({
   // Vite/Vitest's Rolldown parser still needs an explicit JSX transform
   // path for .jsx test files. Without this, component tests that contain
@@ -181,7 +239,10 @@ export default defineConfig({
           if (id.includes('node_modules/zustand') || id.includes('node_modules/immer'))
             return 'vendor-state';
           if (id.includes('node_modules/lucide-react'))
-            return 'vendor-icons';
+            // Icons used ONLY by the (lazy) World Map ride their own chunk so
+            // they stop paying first-paint bytes; everything else stays in the
+            // first-paint vendor-icons chunk. See computeMapOnlyLucideIcons.
+            return isMapOnlyLucideIcon(id) ? 'vendor-icons-map' : 'vendor-icons';
           if (id.includes('node_modules/@supabase'))
             return 'vendor-supabase';
           if (id.includes('node_modules/html2canvas'))

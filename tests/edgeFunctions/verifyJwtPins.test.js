@@ -45,6 +45,10 @@ const SELF_AUTH_FALSE = new Set([
   // migration 115 — cron-invoked (pg_net), authenticated by the x-cron-secret
   // shared secret, not a JWT. Same posture as analytics-export.
   'pricing-resync-cron',
+  // og-image — the callers ARE unfurl bots (no JWT); it reads only already-public
+  // gallery data and takes no write path. The platform gate would 401 every social
+  // preview. See supabase/functions/og-image/index.ts.
+  'og-image',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

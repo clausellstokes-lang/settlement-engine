@@ -1,5 +1,5 @@
 import { useState, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2} from 'lucide-react';
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2, Image as ImageIcon} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -34,6 +34,8 @@ import ExportSheet      from './settlement/ExportSheet.jsx';
 import SuccessorPrompt  from './settlement/SuccessorPrompt.jsx';
 import RegionalImpactInbox from './region/RegionalImpactInbox.jsx';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
+import { downloadShareCard, settlementToShareSummary } from '../lib/shareImage.js';
+import { t } from '../copy/index.js';
 // Tier 7.15 — phased UI redesign rollout: the Narrated/Raw chip below
 // migrates from an inline ad-hoc <span> to the StateBadge primitive,
 // which centralizes the visual styling and the role="status" a11y
@@ -187,6 +189,7 @@ export default function SettlementDetail({
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
+  const [imageExporting, setImageExporting] = useState(false); // share-image (PNG) export spinner
 
   // AI-1: pull the saved settlement's persisted ai_data into the aiSlice
   // when this detail view opens (or when switching between saves). Without
@@ -327,6 +330,25 @@ export default function SettlementDetail({
     }
   };
 
+  // Share-image export: a single PNG share card (name + tier + terrain + a few
+  // coarse stats) for dropping into Discord / a forum post. NOT premium-gated —
+  // sharing is the growth loop. Coarse projection only: no seed, no DM notes.
+  const handleExportImage = async () => {
+    if (imageExporting) return;
+    setImageExporting(true);
+    setPdfError(null);
+    try {
+      const summary = settlementToShareSummary(detail.settlement);
+      await downloadShareCard(summary);
+      useStore.getState().markExported?.();
+    } catch (err) {
+      console.error('[image export] failed:', err);
+      setPdfError(t('export.imageError'));
+    } finally {
+      setImageExporting(false);
+    }
+  };
+
     return<div>
       {/* Local keyframe so the export-button spinner animates even when
           OutputContainer (which also defines @keyframes spin) isn't mounted. */}
@@ -408,6 +430,16 @@ export default function SettlementDetail({
             title="Choose Draft Brief / Canon Dossier / Timeline Packet."
           >
             {exporting ? 'Building PDF…' : 'Export Dossier'}
+          </Button>
+          <Button
+            variant="secondary"
+            size="sm"
+            busy={imageExporting}
+            icon={<ImageIcon size={12}/>}
+            onClick={handleExportImage}
+            title={t('export.imageTitle')}
+          >
+            {imageExporting ? t('export.imageBusy') : t('export.imageCta')}
           </Button>
           {saveId && (
             <Button

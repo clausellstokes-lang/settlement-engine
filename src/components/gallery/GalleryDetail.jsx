@@ -29,6 +29,7 @@ import {
 import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDossier } from './galleryUtils.js';
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import { setSharedDossierMeta } from '../../lib/seoDossier.js';
 import Button from '../primitives/Button.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
@@ -79,6 +80,17 @@ export default function GalleryDetail({
   const ownedSave = (auth?.user && dossier?.slug)
     ? (savedSettlements || []).find(sv => sv.public_slug && sv.public_slug === dossier.slug)
     : null;
+
+  // Rich unfurl for the share loop: once the (already public, sanitized) dossier
+  // is loaded, upgrade the document head to the settlement's real name + coarse
+  // facts and emit its CreativeWork JSON-LD. applyDocumentHead already pointed
+  // og:image at the dynamic card from the slug; this adds the named title so the
+  // share reads as THIS settlement, not the generic gallery. The next route
+  // change's applyDocumentHead resets everything.
+  React.useEffect(() => {
+    if (dossier?.slug) setSharedDossierMeta(dossier);
+  }, [dossier]);
+
   if (loading) {
     return (
       <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
