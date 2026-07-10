@@ -1012,3 +1012,18 @@ flavored legitimacy). Whether tilt becomes monoculture is a tuning question — 
   regenerates; expected texture = high-turnover chaotic fringe around a stable lawful core.
 - Applies wherever cults organically emerge (mints, spontaneous births, W-F5 pool weighting
   if generation shows the same tilt). Never touches user-authored deities.
+
+### Chaos converts in the cracks (OWNER, 2026-07-10 — architect's which/how; lands W-F4)
+Chaotic-side creeds gain CONVERSION receptivity where order is broken — each pole converts
+best in the world that resembles it (law already owns the long game via tenure/legitimacy):
+1. ACTIVE STRESSORS: chaotic receptivity scales with live stressor load/severity (famine,
+   plague, siege, succession void).
+2. WAR STATES: warPosture/occupation/siege extend the bonus — the existing warbound-
+   conversion mechanism folds onto the chaos axis in W-F4's re-keying.
+3. LOW TIERS: standing chaotic receptivity bonus in hamlet/village tiers, fading with tier
+   and the government form's law affinity (frontier camp = open soil; chartered town = not).
+CONSTRAINTS: asymmetric by design — chaos gains in disorder, lawful creeds take NO mirror
+penalty (no double-count). Modulates RECEPTIVITY, never patron FIT — what a settlement
+SUFFERS shapes who can convert it; what it CHOOSES shapes which god it keeps (endogeneity
+intact). Capped, deterministic, exactly zero in stable high-tier peace. W-F7 envelope:
+crisis-conversion correlation present, no runaway.
