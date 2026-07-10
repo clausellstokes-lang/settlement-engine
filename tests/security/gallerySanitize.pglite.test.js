@@ -1,6 +1,6 @@
 /**
  * gallerySanitize.pglite.test.js — EXECUTION test for the SERVER public
- * projection _gallery_sanitize_public_json (migration 050 §3).
+ * projection _gallery_sanitize_public_json (Wave-1 fused migration 123 §3).
  *
  * The drift pin (gallerySanitizeAllowlist.contract.test.js) proves the SQL and
  * JS allowlists are the same SET; this proves the SQL sanitizer actually BEHAVES
@@ -16,7 +16,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
-const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '050_money_and_public_projection_hardening.sql');
+const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
 const migExists = existsSync(MIGRATION);
 
 function extractFn(sql, name) {
@@ -58,7 +58,7 @@ describe.runIf(migExists)('_gallery_sanitize_public_json — execution + client 
       [JSON.stringify(SETTLEMENT)],
     )).rows[0];
     serverOut = row.j;
-  });
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   it('keeps the allowlisted public fields (including the narrated prose)', () => {
     for (const k of ['name', 'tier', 'population', 'coherenceNotes', 'history', 'npcs', 'thesis', 'dailyLife']) {

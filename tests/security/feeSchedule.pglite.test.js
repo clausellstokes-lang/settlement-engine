@@ -134,7 +134,7 @@ describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_cred
     `);
     await db.exec(extractFn('018', 'get_credit_balance'));
     await db.exec(extractFn('024', 'spend_credits'));
-  });
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');

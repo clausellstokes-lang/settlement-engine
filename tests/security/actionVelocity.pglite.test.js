@@ -1,18 +1,27 @@
 /**
  * actionVelocity.pglite.test.js — EXECUTION-level tests for the per-user
- * velocity guards (migration 052).
+ * velocity guards (migration 125, the Wave-1 rebuild of our former 052).
  *
  * The Phase-3 re-grade held SECURITY at A- on exactly this gap: toggle_gallery_
- * vote / add_gallery_comment (019) and generate-narrative were economically- or
- * auth-gated only, with no independent RATE ceiling — an authenticated account
- * could flood comments / toggle-vote at wire speed / hammer the model.
+ * vote / add_gallery_comment were economically- or auth-gated only, with no
+ * independent RATE ceiling — an authenticated account could flood comments /
+ * toggle-vote at wire speed.
  *
- * These pins load the ACTUAL, NET-CURRENT function bodies from migration 052
- * into in-process Postgres (pglite) and drive them until the ceiling bites, so a
+ * WAVE-1 RECONCILIATION (fusion spec C) pinned here:
+ *   • The velocity guards are folded into THEIR 059 bodies, so the RPCs now carry
+ *     the account_is_active() banned-account gate AHEAD of the velocity guard. The
+ *     audit flagged that a verbatim-052 port would silently DELETE that gate; this
+ *     file pins that BOTH the account gate AND the velocity ceiling are live.
+ *   • consume_narrate_rate_limit was DROPPED (their consume_ai_generate_rate_limit
+ *     is the narrate limiter). Its tests are removed and a pin asserts it no longer
+ *     exists anywhere in the chain.
+ *
+ * These pins load the ACTUAL, NET-CURRENT function bodies from migration 125 into
+ * in-process Postgres (pglite) and drive them until the ceiling bites, so a
  * regression in the guard (a later migration dropping it, an off-by-one in the
- * limit) can't ship green. auth.uid() is a settable GUC stub; the gallery /
- * counter tables are minimal mirrors (no auth.users FK). Everything else is the
- * real PL/pgSQL, including the atomic upsert counter and the wrappers.
+ * limit) can't ship green. auth.uid() + account_is_active() are settable-GUC
+ * stubs; the gallery / counter tables are minimal mirrors (no auth.users FK).
+ * Everything else is the real PL/pgSQL, including the atomic upsert counter.
  *
  * LIMITATION: pglite is single-connection, so TRUE concurrent races can't be
  * exercised; the atomic guard is verified by its logical effect (the Nth call
@@ -24,19 +33,19 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const dir = resolve(process.cwd(), 'supabase', 'migrations');
-const MIG_052 = resolve(dir, '052_action_velocity_guards.sql');
-const allExist = existsSync(MIG_052);
+const MIG_125 = resolve(dir, '125_action_velocity_guards.sql');
+const allExist = existsSync(MIG_125);
 
 /** Extract a function definition verbatim: from `create or replace function
  *  public.<name>` to the first `$$;`. */
 function extractFn(src, name) {
   const m = src.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
-  if (!m) throw new Error(`could not extract ${name} from migration 052`);
+  if (!m) throw new Error(`could not extract ${name} from migration 125`);
   return m[0];
 }
 
 /** The net-current definition of a public function across ALL migrations in file
- *  order (the LAST create-or-replace wins) — used for the drift pin below. */
+ *  order (the LAST create-or-replace wins) — used for the drift pins below. */
 function netCurrentFn(name) {
   const files = readdirSync(dir).filter(f => /^\d.*\.sql$/.test(f)).sort();
   let last = null;
@@ -55,16 +64,22 @@ const SETTLEMENT = '33333333-3333-3333-3333-333333333333';
 
 let db;
 const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
+const setActive = (v) => db.exec(`set test.active = '${v}';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 
 describe.runIf(allExist)('action velocity guards — execution against the real SQL (pglite)', () => {
   beforeAll(async () => {
-    const src = readFileSync(MIG_052, 'utf-8');
+    const src = readFileSync(MIG_125, 'utf-8');
     db = new PGlite();
     await db.exec(`
       create schema if not exists auth;
       create or replace function auth.uid() returns uuid language sql stable as $fn$
         select nullif(current_setting('test.uid', true), '')::uuid
+      $fn$;
+      -- account_is_active (057) stub — the 059 bodies fused into 125 gate on it.
+      -- Settable GUC (default true) so a test can exercise the banned-account gate.
+      create or replace function public.account_is_active(p uuid) returns boolean language sql stable as $fn$
+        select coalesce(nullif(current_setting('test.active', true), '')::boolean, true)
       $fn$;
 
       -- Minimal mirrors of the tables the gallery RPCs touch (no auth.users FK).
@@ -88,7 +103,7 @@ describe.runIf(allExist)('action velocity guards — execution against the real 
         deleted_at timestamptz
       );
     `);
-    // The counter table + the real function bodies from migration 052.
+    // The counter table + the real function bodies from migration 125.
     await db.exec(`
       create table public.user_action_rate_limits (
         user_key     uuid        not null,
@@ -99,15 +114,15 @@ describe.runIf(allExist)('action velocity guards — execution against the real 
       );
     `);
     await db.exec(extractFn(src, '_consume_action_rate_limit'));
-    await db.exec(extractFn(src, 'consume_narrate_rate_limit'));
     await db.exec(extractFn(src, 'toggle_gallery_vote'));
     await db.exec(extractFn(src, 'add_gallery_comment'));
-  });
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   beforeEach(async () => {
     await db.exec('truncate public.settlements, public.gallery_votes, public.gallery_comments, public.user_action_rate_limits cascade;');
     await db.exec(`insert into public.settlements (id, is_public, user_id) values ('${SETTLEMENT}', true, '${OTHER}');`);
     await asUser(UID);
+    await setActive('true');
   });
 
   // ── toggle_gallery_vote — 60/hour ────────────────────────────────────────────
@@ -151,31 +166,36 @@ describe.runIf(allExist)('action velocity guards — execution against the real 
     await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`)).resolves.toBeTruthy();
   });
 
-  // ── consume_narrate_rate_limit — 40/hour, returns { allowed } ────────────────
-  it('narrate limiter returns allowed for 40 calls then denies the 41st', async () => {
-    for (let i = 0; i < 40; i++) {
-      const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
-      expect(r.allowed).toBe(true);
-      expect(r.limit).toBe(40);
-    }
-    const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
-    expect(r.allowed).toBe(false);
-    expect(r.count).toBe(41);
-    expect(r.window_seconds).toBe(3600);
-  });
-
-  it('narrate limiter fails open for an unauthenticated caller (no uid)', async () => {
-    await db.exec(`set test.uid = '';`);
-    const { r } = await scalar(`select public.consume_narrate_rate_limit() as r`);
-    expect(r.allowed).toBe(true);
+  // ── 059 account-status gate SURVIVES the velocity fusion (audit surprise #3) ──
+  // A verbatim-052 port would have dropped this gate. Both gallery RPCs must still
+  // reject a banned/disabled/soft-deleted account BEFORE any velocity accounting.
+  it('rejects a non-active (banned) account on BOTH gallery RPCs, ahead of the counter', async () => {
+    await setActive('false');
+    await expect(db.query(`select public.toggle_gallery_vote('${SETTLEMENT}')`))
+      .rejects.toThrow(/account is not active/i);
+    await expect(db.query(`select public.add_gallery_comment('${SETTLEMENT}', 'nope')`))
+      .rejects.toThrow(/account is not active/i);
+    // The banned attempts never touched the velocity counter.
+    expect((await scalar(`select count(*)::int n from public.user_action_rate_limits`)).n).toBe(0);
   });
 });
 
-// ── Drift pin: the guard cannot silently disappear from a later redefinition ──
+// ── Drift pins: the guards cannot silently disappear, and the narrate limiter
+// is gone for good (fusion C decision). ──────────────────────────────────────
 describe.runIf(allExist)('velocity-guard drift pin', () => {
   it('the net-current gallery RPCs still call the velocity counter', () => {
     expect(netCurrentFn('toggle_gallery_vote')).toMatch(/_consume_action_rate_limit\(\s*auth\.uid\(\)\s*,\s*'gallery_vote'/);
     expect(netCurrentFn('add_gallery_comment')).toMatch(/_consume_action_rate_limit\(\s*auth\.uid\(\)\s*,\s*'gallery_comment'/);
-    expect(netCurrentFn('consume_narrate_rate_limit')).toMatch(/_consume_action_rate_limit\(\s*v_uid\s*,\s*'narrate'/);
+  });
+
+  it('the net-current gallery RPCs still carry the 059 account_is_active gate', () => {
+    expect(netCurrentFn('toggle_gallery_vote')).toMatch(/account_is_active\(\s*auth\.uid\(\)\s*\)/);
+    expect(netCurrentFn('add_gallery_comment')).toMatch(/account_is_active\(\s*auth\.uid\(\)\s*\)/);
+  });
+
+  it('consume_narrate_rate_limit was dropped — no definition anywhere in the chain', () => {
+    // Fusion C retired the parallel hourly narrate ceiling in favour of
+    // consume_ai_generate_rate_limit (079/087). It must not reappear.
+    expect(netCurrentFn('consume_narrate_rate_limit')).toBeNull();
   });
 });

@@ -22,9 +22,14 @@ import { resolve, join } from 'node:path';
 
 const ROOT = resolve(process.cwd());
 const MIG_009 = join(ROOT, 'supabase', 'migrations', '009_profile_security.sql');
+// refund_credits net-current body is the Wave-1 fused 123 (FOR UPDATE + elevated
+// skip from 087 + no-op idempotency + ledger-recompute counter), NOT 009's
+// original counter body. Behaviour assertions below read 123; the signature +
+// admin_grant_credits/spend_credits existence checks stay on 009.
+const MIG_123 = join(ROOT, 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
 const AUDIT_DOC = join(ROOT, 'docs', 'refund-ledger-audit.md');
 
-const migExists = existsSync(MIG_009);
+const migExists = existsSync(MIG_009) && existsSync(MIG_123);
 
 describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit paths)', () => {
   const sql = readFileSync(MIG_009, 'utf-8');
@@ -95,23 +100,26 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     expect(body).toMatch(/amount\s*>\s*\d{4,}/);  // looks for `if amount > 10000` etc.
   });
 
-  // ── Money-math SAFETY CLAUSES (static, refund/admin only) ───────────────────
+  // ── Money-math SAFETY CLAUSES (static) — pinned to the fused net-current 123 ─
   // The audit flagged that the credit math is asserted statically, never run.
-  // These raise the static floor for the RPCs whose CURRENT definition lives in
-  // 009 (refund_credits, admin_grant_credits). NOTE: spend_credits is NOT here
-  // — its net-current body is the ledger-allocation rewrite in migration 024,
-  // not 009's counter version, so asserting 009's body would test dead SQL.
-  // spend_credits (plus refund/grant) are now EXECUTED end-to-end against the
-  // real net-current SQL in tests/security/creditLedger.pglite.test.js.
-  const refundBody = sql.match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i)?.[0] || '';
+  // These raise the static floor for refund_credits (net-current body = 123).
+  // NOTE: spend_credits is NOT here — its net-current body is the ledger-allocation
+  // rewrite in migration 024, not 009's counter version. spend_credits (plus
+  // refund/grant) are EXECUTED end-to-end against the real net-current SQL in
+  // tests/security/creditLedger.pglite.test.js.
+  const refundBody = readFileSync(MIG_123, 'utf-8')
+    .match(/create\s+or\s+replace\s+function\s+public\.refund_credits[\s\S]*?\$\$;/i)?.[0] || '';
 
-  it('refund_credits is idempotent — refuses to refund the same spend twice', () => {
+  it('refund_credits is idempotent via a STRUCTURAL no-op (not a raise) — an at-least-once retry returns the balance', () => {
     expect(refundBody).toBeTruthy();
-    // Must look for an existing refund grant correlated to this spend and bail,
-    // so a retried/duplicated refund can't double-credit the account.
-    expect(refundBody).toMatch(/exists\s*\(/i);
+    // Fused 123: the idempotency is a unique_violation catch that returns the
+    // current balance — NOT the 085/087 `raise 'already refunded'` (which would
+    // fire false "contact support" alarms on the edge refund retry path). This is
+    // load-bearing: the no-op retry behaviour MUST hold.
     expect(refundBody).toMatch(/refund_of/i);
-    expect(refundBody).toMatch(/already\s+refunded/i);
+    expect(refundBody).toMatch(/unique_violation/i);
+    expect(refundBody).toMatch(/return\s+public\.get_credit_balance/i);
+    expect(refundBody).not.toMatch(/already\s+refunded/i);
   });
 
   it('refund_credits validates the target is a spend row and authorizes the caller', () => {
@@ -120,8 +128,17 @@ describe.runIf(migExists)('Tier 9.9 — RPC contract (ledger-consistent credit p
     expect(refundBody).toMatch(/not\s+authorized/i);
   });
 
-  it('refund_credits credits back via arithmetic, never a stored snapshot', () => {
-    expect(refundBody).toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
+  it('refund_credits RECOMPUTES the counter from the ledger (never incremental arithmetic)', () => {
+    // Fused 123: `new_balance := get_credit_balance(...); update profiles set
+    // credits = new_balance` — heals drift, unlike 085/087's `credits + amount`.
+    expect(refundBody).toMatch(/get_credit_balance\s*\(\s*spend_row\.user_id\s*\)/i);
+    expect(refundBody).toMatch(/set\s+credits\s*=\s*new_balance/i);
+    expect(refundBody).not.toMatch(/credits\s*=\s*credits\s*\+\s*spend_row\.amount/i);
+  });
+
+  it('refund_credits serializes with FOR UPDATE and skips elevated spends (087 hardening preserved)', () => {
+    expect(refundBody).toMatch(/for\s+update/i);
+    expect(refundBody).toMatch(/elevated/i);
   });
 });
 

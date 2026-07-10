@@ -44,6 +44,13 @@ jobs:
       - name: Validate data
         run: npm run validate:data
 
+      # Migration-chain ledger: contiguity + the applied-head marker
+      # (supabase/applied-head.json). Catches double-booked or gapped
+      # migration numbers at CI time; the pending-deploy window is
+      # visible-not-fatal, matching the manual `supabase db push` flow.
+      - name: Validate migration head
+        run: npm run validate:migration-head
+
       - name: Validate edge functions
         run: npm run validate:edge
 

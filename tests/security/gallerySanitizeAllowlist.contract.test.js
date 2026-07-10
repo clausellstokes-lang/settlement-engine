@@ -23,13 +23,33 @@ import { resolve } from 'node:path';
 import { toPublicSafe, PUBLIC_TOPLEVEL_KEYS } from '../../src/domain/display/publicSafe.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
-const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '050_money_and_public_projection_hardening.sql');
+const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
+
+// ── The MERGED (Wave-1) canonical top-level allowlist ────────────────────────
+// This is the fused 123 SQL allowlist and the source of truth the JS twin
+// (src/domain/display/publicSafe.js PUBLIC_TOPLEVEL_KEYS) must be reconciled TO
+// by the src/domain merge wave. Wave-1 changed our pre-merge list by:
+//   • REMOVING '_seed' + '_config' (secret on every shared surface — 099/121).
+//   • ADDING crossSettlementConflicts, interSettlementRelationships,
+//     neighbourNetwork, populationHistory (top-level keys their post-088 public
+//     dossier serves AND renders in the anonymous playerView — reconciled per the
+//     Wave-0 audit's fusion spec B step 6).
+const CANONICAL_ALLOWLIST = [
+  'activeConditions', 'arrivalScene', 'availableServices', 'coherenceNotes', 'config',
+  'conflicts', 'crossSettlementConflicts', 'dailyLife', 'defenseProfile', 'economicState',
+  'economicViability', 'factions', 'generatorVersion', 'history', 'id',
+  'institutions', 'interSettlementRelationships', 'name', 'neighborRelationship', 'neighbourNetwork',
+  'npcs', 'population', 'populationHistory', 'powerStructure', 'pressureSentence',
+  'prominentRelationship', 'relationships', 'resourceAnalysis', 'schemaVersion', 'settlementReason',
+  'simulationVersion', 'spatialLayout', 'stress', 'stressors', 'structuralSuggestions',
+  'structuralViolations', 'thesis', 'tier',
+];
 
 /** Parse the `public_toplevel constant text[] := array[ '…','…' ];` literal from
- *  migration 050 into a JS array of the quoted keys. */
+ *  the fused migration 123 into a JS array of the quoted keys. */
 function parseSqlAllowlist(sql) {
   const m = sql.match(/public_toplevel\s+constant\s+text\[\]\s*:=\s*array\[([\s\S]*?)\]/i);
-  if (!m) throw new Error('could not find public_toplevel allowlist in migration 050');
+  if (!m) throw new Error('could not find public_toplevel allowlist in migration 123');
   return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
 }
 
@@ -38,24 +58,22 @@ const migExists = existsSync(MIGRATION);
 describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)', () => {
   const sql = readFileSync(MIGRATION, 'utf-8');
 
-  it('the migration flips to a top-level allowlist (not a bare denylist)', () => {
+  it('the migration keeps a top-level allowlist gate (not a bare denylist)', () => {
     // The settlement ROOT gate is the allowlist; the deeper denylist stays.
     expect(sql).toMatch(/is_toplevel\s+and\s+not\s*\(key\s*=\s*any\(public_toplevel\)\)/);
     expect(sql).toMatch(/not\s+is_toplevel\s+and\s+key\s*~\*/); // denylist only deeper
   });
 
-  it('the SQL allowlist and JS PUBLIC_TOPLEVEL_KEYS are identical sets', () => {
+  it('the SQL 123 allowlist equals the merged canonical set (no dupes)', () => {
     const sqlKeys = parseSqlAllowlist(sql).sort();
-    const jsKeys = [...PUBLIC_TOPLEVEL_KEYS].sort();
-    expect(sqlKeys).toEqual(jsKeys);
-    // No accidental duplicates on either side.
+    expect(sqlKeys).toEqual([...CANONICAL_ALLOWLIST].sort());
     expect(new Set(sqlKeys).size).toBe(sqlKeys.length);
-    expect(new Set(jsKeys).size).toBe(jsKeys.length);
   });
 
-  it('the allowlist excludes the known leak-prone / DM-private top-level keys', () => {
-    const set = new Set(PUBLIC_TOPLEVEL_KEYS);
+  it('the SQL allowlist drops _seed/_config and every leak-prone / DM-private key', () => {
+    const set = new Set(parseSqlAllowlist(sql));
     for (const forbidden of [
+      '_seed', '_config', // Wave-1: seed/raw-config are secret; dropped from the allowlist.
       'aiData', 'aiSettlement', 'aiDailyLife', 'aiOverlays', 'userCanon',
       'dmNotes', 'dmCompass', 'dossierNotes', 'notes', 'narrativeNotes', 'tabNotes',
       'plotHooks', 'pinnedNpc', 'identityMarkers', 'frictionPoints', 'connectionsMap',
@@ -63,6 +81,39 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
     ]) {
       expect(set.has(forbidden)).toBe(false);
     }
+  });
+
+  it('the SQL denylist folds in seed/_config so nested config._seed cannot leak (099)', () => {
+    // `config` is allowlisted at top level, so the deeper denylist MUST carry the
+    // seed/_config tokens (fusion spec B step 3 / audit surprise #4).
+    const denyLine = sql.match(/not\s+is_toplevel\s+and\s+key\s*~\*\s*'([^']+)'/i);
+    expect(denyLine, 'deeper denylist regex present').toBeTruthy();
+    expect(denyLine[1]).toMatch(/\|seed\|_config\)?/);
+  });
+
+  // ── SQL ⇄ JS drift pin — PENDING the src/domain publicSafe.js twin merge ─────
+  // The JS twin (PUBLIC_TOPLEVEL_KEYS) must be reconciled to CANONICAL_ALLOWLIST
+  // (drop _seed/_config, add the 4 relationship/history keys). That file is owned
+  // by the src/domain merge wave (out of this wave's scope), so until it lands the
+  // strict SQL⇄JS equality would fail on the KNOWN transitional delta. This pin is
+  // SKIPPED here and MUST be re-enabled (unskipped) by the wave that updates
+  // src/domain/display/publicSafe.js — at which point SQL == JS == canonical.
+  it.skip('[re-enable after publicSafe.js twin merge] SQL 123 allowlist == JS PUBLIC_TOPLEVEL_KEYS', () => {
+    expect(parseSqlAllowlist(sql).sort()).toEqual([...PUBLIC_TOPLEVEL_KEYS].sort());
+  });
+
+  it('the KNOWN Wave-1 delta between SQL and the current JS twin is exactly {seed/config} vs {4 render keys}', () => {
+    // A LIVE transitional guard: green while the twin lags, and it catches any
+    // OTHER drift. When src/domain updates publicSafe.js both arrays go empty and
+    // this must be tightened to the strict equality above (then delete this).
+    const sqlSet = new Set(parseSqlAllowlist(sql));
+    const jsSet = new Set(PUBLIC_TOPLEVEL_KEYS);
+    const sqlOnly = [...sqlSet].filter(k => !jsSet.has(k)).sort();
+    const jsOnly = [...jsSet].filter(k => !sqlSet.has(k)).sort();
+    expect(sqlOnly).toEqual(
+      ['crossSettlementConflicts', 'interSettlementRelationships', 'neighbourNetwork', 'populationHistory'],
+    );
+    expect(jsOnly).toEqual(['_config', '_seed']);
   });
 });
 

@@ -9,9 +9,11 @@
  *
  * This closes that gap WITHOUT Docker: it loads the ACTUAL, NET-CURRENT function
  * bodies — spend_credits from migration 024 (the ledger-allocation rewrite, NOT
- * the superseded 009 counter version), get_credit_balance + credit_spend_
- * allocations from 018, refund_credits + admin_grant_credits from 009 — into an
- * in-process Postgres (pglite) and exercises them. auth.uid() /
+ * the superseded 009 counter version), get_credit_balance from 110 (the IDOR-
+ * guarded net-current reader), refund_credits from the Wave-1 fused 123 (FOR
+ * UPDATE + elevated-skip from 087 + no-op idempotency + ledger-recompute counter),
+ * admin_grant_credits from 009 — into an in-process Postgres (pglite) and
+ * exercises them. auth.uid() /
  * current_user_is_privileged are settable GUC stubs; _audit_action is a no-op;
  * the credit tables are minimal mirrors (no auth.users FK). Everything else is
  * the real PL/pgSQL, including FIFO grant allocation and expiry filtering.
@@ -58,8 +60,8 @@ const MIG = {
   '009': resolve(dir, '009_profile_security.sql'),
   '018': resolve(dir, '018_account_billing_models_credits.sql'),
   '024': resolve(dir, '024_billing_retention_and_atomic_mutations.sql'),
-  '047': resolve(dir, '047_refund_credits_service_role.sql'),
-  '050': resolve(dir, '050_money_and_public_projection_hardening.sql'),
+  '110': resolve(dir, '110_restrict_get_credit_balance_to_owner.sql'),
+  '123': resolve(dir, '123_money_and_public_projection_hardening.sql'),
 };
 const allExist = Object.values(MIG).every(existsSync);
 
@@ -135,23 +137,25 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
         primary key (spend_id, grant_id)
       );
     `);
-    // Structural refund idempotency (migration 050, superseding 047's narrower
-    // predicate): at most one refund grant per spend row, keyed on the refund_of
-    // correlation field itself, so a double-refund fails at the DB even under a race.
+    // Structural refund idempotency — the APPLIED backstop index (087, re-asserted
+    // by the fused 123): at most one refund grant per spend row, keyed on the
+    // refund_of correlation field, predicate source='refund'. The 123 refund body's
+    // unique_violation catch fires on THIS index, so the scaffold mirrors it exactly.
     await db.exec(`
-      create unique index if not exists idx_credit_ledger_one_refund_per_spend
+      create unique index if not exists ux_credit_ledger_one_refund_per_spend
         on public.credit_ledger ((metadata->>'refund_of'))
-        where metadata->>'refund_of' is not null;
+        where source = 'refund';
     `);
-    // Load the REAL, net-current function bodies. refund_credits comes from 050
-    // (recompute-from-ledger counter + idempotent no-op on the unique index),
-    // NOT the superseded 009 body (unconditional auth.uid() raise — finding F1)
-    // or 047 (incremental `credits + amount` counter drift + raise-on-duplicate).
-    await db.exec(extractFn('018', 'get_credit_balance'));
+    // Load the REAL, net-current function bodies. refund_credits comes from the
+    // Wave-1 fused 123 (FOR UPDATE + elevated-skip from 087 + recompute-from-ledger
+    // counter + idempotent no-op on the ux_ index), NOT the superseded 085/087 body
+    // (incremental `credits + amount` drift + raise-on-duplicate) or 009 (F1 raise).
+    // get_credit_balance is the net-current 110 (IDOR-guarded).
+    await db.exec(extractFn('110', 'get_credit_balance'));
     await db.exec(extractFn('024', 'spend_credits'));
-    await db.exec(extractFn('050', 'refund_credits'));
+    await db.exec(extractFn('123', 'refund_credits'));
     await db.exec(extractFn('009', 'admin_grant_credits'));
-  });
+  }, 30000); // PGlite WASM cold-start is ~8s in CI/dev — beyond the 10s hook default.
 
   beforeEach(async () => {
     await db.exec('truncate public.profiles, public.credit_spend_allocations, public.credit_ledger, public.credit_transactions cascade;');
@@ -223,7 +227,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
     await grant(UID, 10);
     const { r } = await scalar("select public.spend_credits('narrative') as r");
     await db.query(`select public.refund_credits('${r.spend_id}', null)`);
-    // 050: a duplicate refund no longer RAISES — it returns the current balance.
+    // 123: a duplicate refund no longer RAISES — it returns the current balance.
     const second = await scalar(`select public.refund_credits('${r.spend_id}', null) as b`);
     expect(second.b).toBe(10);
     expect(await balanceOf(UID)).toBe(10);
@@ -297,7 +301,7 @@ describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite
   });
 
   // ── COUNTER RECOMPUTE (F1 residue): profiles.credits must track the ledger.
-  //    047 bumped it with incremental `credits + amount`; 050 recomputes from
+  //    085/087 bumped it with incremental `credits + amount`; 123 recomputes from
   //    get_credit_balance() like spend/grant. Pin that the counter equals the
   //    ledger sum after spend → refund → refund (the duplicate is a no-op).
   it('recomputes profiles.credits from the ledger after spend then refund (no drift)', async () => {

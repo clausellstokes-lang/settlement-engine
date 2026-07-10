@@ -1,6 +1,14 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 049_dossier_purchases.sql — server-side settlement store for the anonymous
+-- 122_dossier_purchases.sql — server-side settlement store for the anonymous
 -- single-dossier ($2.99) microtransaction.
+--
+-- MERGE PROVENANCE (Wave-1): this is our former 049_dossier_purchases.sql,
+-- renumbered onto the adopted 047–121 chain VERBATIM (no name collision — their
+-- 108 single-dossier entitlement ledger uses a different table,
+-- single_dossier_purchases). The edge-side three-way merge (our server-delivery
+-- stash vs their durable-entitlement/token-hash claim) is a separate wave (W1b);
+-- this migration only ports the TABLE + purge, which is inert until the edge
+-- functions write to it.
 --
 -- Why this exists (review findings F21 + F23): the single-dossier flow used to
 -- keep the purchased settlement ONLY in the buyer's localStorage across the

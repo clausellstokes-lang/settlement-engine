@@ -1,17 +1,37 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 052_action_velocity_guards.sql — per-USER velocity ceilings on the
--- authenticated community + AI actions the abuse-model audit flagged as
--- economically-gated-only: add_gallery_comment / toggle_gallery_vote (019) and
--- the generate-narrative edge function.
+-- 125_action_velocity_guards.sql — per-USER velocity ceilings on the
+-- authenticated community actions the abuse-model audit flagged as
+-- economically-gated-only: add_gallery_comment / toggle_gallery_vote.
 --
--- Why this exists (Phase-3 re-grade, SECURITY & TRUST):
---   • toggle_gallery_vote (019:366) and add_gallery_comment (019:461)
---     authenticate + length-check but have NO velocity guard — an authenticated
---     account can flood comments onto any public dossier (rows persist even
---     though the display list caps at 100) or toggle-vote at wire speed.
---   • generate-narrative's per-user cap is purely ECONOMIC (it spends credits
---     before calling the model), so a credit-rich or elevated account has no
---     independent RATE ceiling. Credits bound TOTAL spend; this bounds RATE.
+-- MERGE PROVENANCE (Wave-1, fusion spec C). Our former 052 rebuilt onto the
+-- adopted chain, with THREE reconciliations vs a verbatim port:
+--
+--   1. GALLERY GUARDS FOLD INTO THEIR 059 BODIES, NOT 019. Our 052 redefined
+--      toggle_gallery_vote / add_gallery_comment as "verbatim 019 body + guard".
+--      But the net-current body of both is 059 (enforce_account_status_rls),
+--      which inserts a `if not public.account_is_active(auth.uid()) then raise`
+--      banned-account gate right after the auth check. A verbatim-052 port would
+--      SILENTLY DELETE that gate — a security regression. Here the velocity guard
+--      is inserted into their 059 bodies, right AFTER the account_is_active gate,
+--      preserving everything else 059 established. delete_gallery_comment (059)
+--      needs no guard and is deliberately NOT redefined, so 059 stays net-current
+--      for it.
+--
+--   2. consume_narrate_rate_limit IS DROPPED (not ported). Our 052 added a second,
+--      tighter hourly ceiling (40/3600s, user client) over generate-narrative on
+--      top of the ECONOMIC credit gate. Their 079/087 already ship
+--      consume_ai_generate_rate_limit (config-driven, default 86400s/60, service-
+--      role) and their generate-narrative already calls it. Two parallel limiters
+--      = two round-trips + duplicated infra for one behaviour, so the narrate
+--      ceiling is retired: their consume_ai_generate_rate_limit is THE narrate
+--      limiter. (If an hourly cap is ever wanted on top of their daily one, add a
+--      second bucket via their ai_user_rate_limit config, not a parallel RPC.)
+--      Nothing to DROP on replay — the function never existed on this chain (our
+--      052 never deployed anywhere); it is simply never created.
+--
+--   3. The generic user_action_rate_limits infra (counter table + private
+--      counting helper + cleanup fn + cron) has ZERO counterpart on their side
+--      and ports cleanly — it is the substrate the two gallery guards key on.
 --
 -- The mechanism mirrors the proven per-IP limiters (034 email, 035 dossier-
 -- verify) but keys on auth.uid() (these callers are all authenticated). One
@@ -90,48 +110,11 @@ $$;
 
 revoke all on function public._consume_action_rate_limit(uuid, text, integer) from public;
 
--- ── Narrate ceiling (called from the generate-narrative edge fn, as the user) ─
--- Server-fixed 40 generations/hour/user. generate-narrative calls this on the
--- user client BEFORE the credit spend and FAILS OPEN (a limiter outage must
--- never block a legitimate paying user); only an explicit { allowed:false }
--- throttles. Returns jsonb so the edge can read `allowed` + `window_seconds` for
--- a Retry-After hint. Takes no client arguments — the ceiling is not tunable
--- from the wire.
-create or replace function public.consume_narrate_rate_limit()
-returns jsonb
-language plpgsql
-security definer
-set search_path = public, pg_temp
-as $$
-declare
-  v_uid    uuid    := auth.uid();
-  v_limit  constant integer := 40;
-  v_window constant integer := 3600;
-  v_count  integer;
-begin
-  -- The endpoint is auth-gated upstream, so a null uid shouldn't happen; if it
-  -- does, fail open (can't per-user throttle an anonymous caller).
-  if v_uid is null then
-    return jsonb_build_object('allowed', true, 'count', 0, 'limit', v_limit, 'window_seconds', v_window);
-  end if;
-
-  v_count := public._consume_action_rate_limit(v_uid, 'narrate', v_window);
-
-  return jsonb_build_object(
-    'allowed',        (v_count <= v_limit),
-    'count',          v_count,
-    'limit',          v_limit,
-    'window_seconds', v_window
-  );
-end;
-$$;
-
-revoke all on function public.consume_narrate_rate_limit() from public;
-grant execute on function public.consume_narrate_rate_limit() to authenticated, service_role;
-
--- ── toggle_gallery_vote — REDEFINED with a 60/hour per-user velocity guard ────
--- Verbatim body of 019:366 with the guard added right after the auth check;
--- everything else (target check, toggle semantics, return shape) is unchanged.
+-- ── toggle_gallery_vote — THEIR 059 body + a 60/hour per-user velocity guard ──
+-- Net-current body is 059 (enforce_account_status_rls): reproduced VERBATIM,
+-- including the account_is_active banned-account gate, with ONLY the velocity
+-- guard added right after that gate. Everything else (target check, toggle
+-- semantics, return shape, grant posture) is unchanged.
 create or replace function public.toggle_gallery_vote(target_settlement_id uuid)
 returns table (net_votes integer, voted boolean)
 language plpgsql
@@ -142,9 +125,12 @@ begin
   if auth.uid() is null then
     raise exception 'Sign in to vote';
   end if;
+  if not public.account_is_active(auth.uid()) then
+    raise exception 'account is not active';
+  end if;
 
-  -- Velocity guard: at most 60 accepted toggles/hour/user. Wire-speed toggling
-  -- is bot behaviour; a human votes a handful of times.
+  -- Velocity guard (125): at most 60 accepted toggles/hour/user. Wire-speed
+  -- toggling is bot behaviour; a human votes a handful of times.
   if public._consume_action_rate_limit(auth.uid(), 'gallery_vote', 3600) > 60 then
     raise exception 'You are voting too quickly — please slow down and try again shortly.';
   end if;
@@ -180,8 +166,9 @@ $$;
 revoke execute on function public.toggle_gallery_vote(uuid) from public;
 grant execute on function public.toggle_gallery_vote(uuid) to authenticated;
 
--- ── add_gallery_comment — REDEFINED with a 20/hour per-user velocity guard ────
--- Verbatim body of 019:461 with the guard added right after the auth check.
+-- ── add_gallery_comment — THEIR 059 body + a 20/hour per-user velocity guard ──
+-- Net-current body is 059: reproduced VERBATIM, including the account_is_active
+-- banned-account gate, with ONLY the velocity guard added right after that gate.
 create or replace function public.add_gallery_comment(target_settlement_id uuid, comment_body text)
 returns uuid
 language plpgsql
@@ -194,9 +181,12 @@ begin
   if auth.uid() is null then
     raise exception 'Sign in to comment';
   end if;
+  if not public.account_is_active(auth.uid()) then
+    raise exception 'account is not active';
+  end if;
 
-  -- Velocity guard: at most 20 accepted comments/hour/user. Comment storage is
-  -- otherwise unbounded (the display list caps at 100 but the rows persist);
+  -- Velocity guard (125): at most 20 accepted comments/hour/user. Comment storage
+  -- is otherwise unbounded (the display list caps at 100 but the rows persist);
   -- 20/hour is generous for a human and useless as a flood vector.
   if public._consume_action_rate_limit(auth.uid(), 'gallery_comment', 3600) > 20 then
     raise exception 'You are commenting too quickly — please slow down and try again shortly.';
@@ -225,7 +215,12 @@ $$;
 revoke execute on function public.add_gallery_comment(uuid, text) from public;
 grant execute on function public.add_gallery_comment(uuid, text) to authenticated;
 
--- ── Stale-row cleanup (mirrors 035) ─────────────────────────────────────────
+comment on function public.toggle_gallery_vote(uuid) is
+  'Toggle the caller''s upvote on a public settlement. 059: rejects a non-active account. 125: 60 accepted toggles/hour/user velocity ceiling.';
+comment on function public.add_gallery_comment(uuid, text) is
+  'Authenticated comment on a public settlement. 059: rejects a non-active account. 125: 20 accepted comments/hour/user velocity ceiling.';
+
+-- ── Stale-row cleanup (mirrors 035/079) ──────────────────────────────────────
 create or replace function public.cleanup_user_action_rate_limits(
   p_retention_seconds integer default 86400
 )
@@ -250,7 +245,7 @@ $$;
 revoke all on function public.cleanup_user_action_rate_limits(integer) from public;
 grant execute on function public.cleanup_user_action_rate_limits(integer) to service_role;
 
--- Schedule the purge (defensive pg_cron install, mirroring 034/035). The table
+-- Schedule the purge (defensive pg_cron install, mirroring 034/035/079). The table
 -- is self-bounding per window even without this; cleanup just reclaims space.
 do $$
 begin

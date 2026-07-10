@@ -1,5 +1,12 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 051_consent_research_optout_default.sql — the owner-ratified research OPT-OUT.
+-- 124_consent_research_optout_default.sql — the owner-ratified research OPT-OUT.
+--
+-- MERGE PROVENANCE (Wave-1): our former 051, renumbered onto the adopted chain.
+-- telemetry_consent is owned by 036 (the only migration that touches it — it
+-- creates the column with default '{"essential":true,"research":false,
+-- "ai_prose":false}'). This is an idempotent ALTER … SET DEFAULT that flips only
+-- the `research` flag going forward; no other migration in 037–123 redefines the
+-- column default, so 036 → 124 is the whole provenance.
 --
 -- Consent model v2 (client side: src/lib/consent.js). `research` flips from an
 -- opt-IN default (false) to an opt-OUT default (true): new users contribute

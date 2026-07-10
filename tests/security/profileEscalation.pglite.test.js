@@ -98,6 +98,16 @@ describe.runIf(present)('profiles RLS column-lock — executed against the NET-C
       create or replace function auth.uid() returns uuid language sql stable as $fn$
         select nullif(current_setting('test.uid', true), '')::uuid
       $fn$;
+      -- account_is_active (057) stub — the net-current self-update policy (087,
+      -- forked through 059) gates USING + WITH CHECK on it. Return true so an
+      -- active account's display_name update is admitted; the escalation
+      -- rejections are driven by the column pins, independent of this.
+      create or replace function public.account_is_active(p uuid) returns boolean language sql stable as $fn$
+        select true
+      $fn$;
+      -- Columns the net-current 087 policy pins (beyond the original set): the
+      -- WITH CHECK subqueries read each pinned column via an is-not-distinct-from
+      -- self-subquery, so every pinned column must exist on this scaffold table.
       create table public.profiles (
         id uuid primary key,
         role text not null default 'user',
@@ -105,7 +115,13 @@ describe.runIf(present)('profiles RLS column-lock — executed against the NET-C
         credits integer not null default 0,
         is_founder boolean not null default false,
         stripe_customer_id text,
+        stripe_subscription_id text,
         email text,
+        banned_at timestamptz,
+        disabled_at timestamptz,
+        deleted_at timestamptz,
+        account_number text,
+        external_name text,
         display_name text,
         updated_at timestamptz default now()
       );
@@ -125,7 +141,7 @@ describe.runIf(present)('profiles RLS column-lock — executed against the NET-C
       create role nosuperuser nologin;
       grant select, update on public.profiles to nosuperuser;
     `);
-  });
+  }, 30000); // PGlite WASM cold-start is ~8s under parallel load — beyond the 10s default.
 
   beforeEach(reseed);
 
