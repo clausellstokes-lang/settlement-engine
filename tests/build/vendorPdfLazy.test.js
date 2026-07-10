@@ -109,7 +109,16 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // budget. If this fails high, the extraction leaked or a new eager heavy edge
 // re-entered — read the closure listing the test prints and route it through
 // kernel / engine-core / a leaf.
-const CLOSURE_BUDGET_BYTES = 1_377_000; // pre-W2b ceiling restored; measured 1,368,015 post-extraction (2026-07-10)
+// (2026-07-10, W2b-r + 4a) 1,377,000 -> 1,382,000: wave 4a's deity store mounts
+// (+~9 KB entry) consumed the extraction headroom (HEAD measured 1,377,320 on a
+// clean build — the 4a gate passed at the ceiling's jitter margin), and W2b-r's
+// three event-registry entries add 2,742 B of composer-facing copy
+// (SET_PRIMARY_DEITY / IMPOSE_CULT / SHIFT_TIER — canonical descriptions, same
+// shape as every existing entry). Measured 1,380,062; +~2 KB headroom only.
+// RATCHET-DOWN PATH (wave 5): evaluate code-splitting EVENT_REGISTRY's narrate/
+// description prose out of first paint (the validation path needs only the type
+// table); then return toward ~1,370,000.
+const CLOSURE_BUDGET_BYTES = 1_382_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
