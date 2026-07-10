@@ -984,3 +984,16 @@ and the seat.
   plurality); seat transitions show no discontinuity beyond the dampener's gradient.
 - Deterministic, pure, tick-start with the piety composite; cause chains per the legibility
   law ("the Lawgiver's word is muted — half the city prays to the Deep").
+
+### Dampener REFINED — per-axis decomposition (OWNER, 2026-07-10; supersedes the diametric form)
+Opposition decomposes BY AXIS: D_law (law-chaos opposition x closeness) and D_moral
+(good-evil opposition x closeness), each summed over the next 1-2 ranked rivals. Every
+amplified site is dampened ONLY on the axis it extends from — the site table gains an
+AXIS-SOURCE tag: law-derived sites (fidelity/discipline, form synergy, treaty durability)
+take D_law; moral-derived sites (stance targets/consolidation channels) take D_moral;
+product sites (corruption plane) take both, combined monotone + floor-clamped. Kin on an
+axis contribute ZERO on that axis.
+CANONICAL CASE (owner's): LE runner-up behind a CE seat — evil channels flow UNDILUTED
+(no moral opposition), chaos-derived channels moderate as the orderly rival closes: the
+city stays wicked while becoming organized about it; the eventual seat change is a
+reformation of HOW, not WHETHER. Transitions interpolate on exactly the contested axis.
