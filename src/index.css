@@ -206,6 +206,92 @@ button {
     var(--page-bg, none);
 }
 
+/* Disciplined clean-view backgrounds (P5 / P12). CLEAN_VIEWS
+   (config/pageBackgrounds.js) paint the per-image painting BELOW a flat-cream
+   header band: the page header sits on solid cream that fades into the painting
+   over the content region, so bare header text is never scanned through texture
+   while the painting still earns its place. App sets --page-bg + the profile
+   class; the profile tunes how much cream to hold based on the per-image
+   art-direction (busy = strongest cream, dark = show more, calm = hold high). */
+.page-painted {
+  background-color: #f7f0e4;
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.97) 0,
+      rgba(247, 240, 228, 0.80) 200px,
+      rgba(247, 240, 228, 0.62) 460px),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.page-painted.scrim-busy {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.98) 0,
+      rgba(247, 240, 228, 0.88) 220px,
+      rgba(247, 240, 228, 0.74) 520px),
+    var(--page-bg, none);
+}
+.page-painted.scrim-dark {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.95) 0,
+      rgba(247, 240, 228, 0.72) 200px,
+      rgba(247, 240, 228, 0.52) 460px),
+    var(--page-bg, none);
+}
+.page-painted.scrim-calm {
+  background-image:
+    linear-gradient(to bottom,
+      rgba(247, 240, 228, 0.98) 0,
+      rgba(247, 240, 228, 0.86) 220px,
+      rgba(247, 240, 228, 0.70) 500px),
+    var(--page-bg, none);
+}
+
+/* Dark-hero band (HomeLanding). The OPPOSITE polarity of the cream painted
+   pages: a radial ink scrim, darkest behind the centred headline and easing
+   toward the edges, so the maps / books / quill of create.jpg stay visible
+   while the cream hero text keeps its contrast. App/HomeLanding set --page-bg. */
+.hero-dark {
+  position: relative;
+  background-color: #1c1409;
+  background-image:
+    radial-gradient(ellipse at center,
+      rgba(18, 12, 5, 0.52) 0%,
+      rgba(18, 12, 5, 0.74) 62%,
+      rgba(18, 12, 5, 0.90) 100%),
+    var(--page-bg, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Skip-to-content link — the first focusable element in the DOM (App.jsx).
+   Visually hidden until focused, then slides into the top-left so keyboard / SR
+   users can jump past the header/nav straight to <main id="main-content">. */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -56px;
+  z-index: 300;
+  padding: 10px 18px;
+  background: #1c1409;
+  color: #e8c98a;
+  border: 1px solid rgba(160, 118, 42, 0.6);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 8px;
+  outline: 2px solid #c9a24c;
+  outline-offset: 2px;
+}
+
 /* Scaled-down settlement scene behind a Create-page mode card. The image
    URL comes from the --card-bg custom property; the overlay is heavier than
    the page (card copy is dense) and lifts on the active card to reveal more

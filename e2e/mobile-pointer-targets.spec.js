@@ -47,7 +47,10 @@ test.describe('P99 mobile pointer targets — anonymous landing', () => {
       try { localStorage.clear(); } catch { /* sandboxed storage — accept */ }
       try { sessionStorage.clear(); } catch { /* sandboxed storage — accept */ }
     });
-    await page.goto('/', { waitUntil: 'networkidle' });
+    // The bare root front-doors to /home (marketing landing) for anon now; this
+    // suite measures the Create-page generator hero's touch targets, so it enters
+    // /create directly.
+    await page.goto('/create', { waitUntil: 'networkidle' });
   });
 
   test('every interactive element is at least 44×44 px', async ({ page }) => {

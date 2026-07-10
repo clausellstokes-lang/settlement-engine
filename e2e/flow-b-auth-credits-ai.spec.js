@@ -84,7 +84,10 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     await page.addInitScript(() => {
       try { localStorage.clear(); sessionStorage.clear(); } catch { /* ignore */ }
     });
-    await page.goto('/');
+    // Front door: bare root → /home (anon) now shows the marketing landing, not
+    // the Create hero. Enter /create directly so waitForHero + the header/auth
+    // assertions still target the Create-page chrome.
+    await page.goto('/create');
     await waitForHero(page);
   });
 
@@ -255,7 +258,8 @@ test.describe('Tier 3.7 Flow B (live) — full auth + Stripe + AI integration', 
   test.skip(!LIVE_AUTH, 'Skipped without E2E_LIVE_AUTH=1');
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/');
+    // Enter the Create page directly (the bare root now front-doors to /home).
+    await page.goto('/create');
   });
 
   test('signin → pricing modal → AI narrative completes', async ({ page }) => {

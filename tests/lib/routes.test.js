@@ -12,6 +12,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   ROUTES,
+  NAV,
   resolveLocation,
   viewToPath,
   titleForView,
@@ -167,6 +168,47 @@ describe('routes — titles + guards', () => {
   it('isKnownView distinguishes declared views', () => {
     expect(isKnownView('settlements')).toBe(true);
     expect(isKnownView('nope')).toBe(false);
+  });
+});
+
+describe('routes — wave 4 IA (home / realm / nav / legal)', () => {
+  it('home + realm resolve and round-trip', () => {
+    expect(resolveLocation('/home').view).toBe('home');
+    expect(resolveLocation('/realm').view).toBe('realm');
+    expect(viewToPath('home')).toBe('/home');
+    expect(viewToPath('realm')).toBe('/realm');
+  });
+
+  it('legacy ?view=map aliases straight into the Realm hub', () => {
+    const r = resolveLocation('/?view=map');
+    expect(r.view).toBe('realm');
+    expect(r.legacy).toBe(true);
+  });
+
+  it('the /map PATH still resolves (App redirects it to /realm)', () => {
+    expect(resolveLocation('/map').view).toBe('map');
+  });
+
+  it('exposes NAV derived from the nav metadata, sorted by order', () => {
+    const ids = NAV.map(n => n.id);
+    expect(ids).toEqual(['home', 'generate', 'settlements', 'realm', 'compendium', 'gallery', 'howto']);
+    const orders = NAV.map(n => n.order);
+    expect([...orders].sort((a, b) => a - b)).toEqual(orders);
+    for (const n of NAV) {
+      expect(isKnownView(n.id)).toBe(true);
+      expect(typeof n.label).toBe('string');
+      expect(n.label.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('legal pages are public (no guard) routes that round-trip', () => {
+    for (const v of ['terms', 'privacy', 'refunds']) {
+      expect(guardForView(v)).toBeUndefined();
+      expect(resolveLocation(viewToPath(v)).view).toBe(v);
+    }
+    expect(viewToPath('terms')).toBe('/terms');
+    expect(viewToPath('privacy')).toBe('/privacy');
+    expect(viewToPath('refunds')).toBe('/refunds');
   });
 });
 

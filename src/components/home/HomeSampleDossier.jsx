@@ -45,11 +45,15 @@ const CALLOUTS = [
 
 export default function HomeSampleDossier() {
   const tier = useStore(s => s.auth.tier);
-  const settlement = useStore(s => s.settlement);
+  // F40: this card only reads `settlement` for TRUTHINESS (the self-gate). Now
+  // that it mounts on /home for every anon cold visitor, subscribing to the
+  // whole object would re-render it on every event apply / pulse writeback. Take
+  // the boolean instead — it flips only when a settlement appears.
+  const hasSettlement = useStore(s => !!s.settlement);
 
   // Fire once per session on first eligible render.
   useEffect(() => {
-    if (tier !== 'anon' || settlement) return;
+    if (tier !== 'anon' || hasSettlement) return;
     try {
       const key = 'sf:sample_dossier_viewed';
       if (typeof sessionStorage !== 'undefined' &&
@@ -58,10 +62,10 @@ export default function HomeSampleDossier() {
         Funnel.track(EVENTS.DOSSIER_PREVIEW_VIEWED, { source: 'home_sample' });
       }
     } catch { /* storage unavailable; non-fatal */ }
-  }, [tier, settlement]);
+  }, [tier, hasSettlement]);
 
   if (tier !== 'anon') return null;
-  if (settlement) return null;
+  if (hasSettlement) return null;
 
   const name = t('sampleDossier.header.name');
   const meta = t('sampleDossier.header.meta');

@@ -78,7 +78,11 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
         sessionStorage.clear();
       } catch { /* private mode etc. */ }
     });
-    await page.goto('/');
+    // The bare root now canonicalizes via the front door (anon → /home marketing
+    // landing; members → /create). This suite exercises the Create-page HomeHero
+    // and generation flow, so it enters /create directly rather than bouncing
+    // through the landing.
+    await page.goto('/create');
   });
 
   test('homepage renders the HomeHero with eyebrow / title / subtitle', async ({ page }) => {

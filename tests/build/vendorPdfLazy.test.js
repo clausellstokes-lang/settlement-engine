@@ -118,7 +118,17 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // RATCHET-DOWN PATH (wave 5): evaluate code-splitting EVENT_REGISTRY's narrate/
 // description prose out of first paint (the validation path needs only the type
 // table); then return toward ~1,370,000.
-const CLOSURE_BUDGET_BYTES = 1_382_000;
+// (2026-07-10, 4b/4c) 1,382,000 -> 1,400,000: the single-source copy registry
+// (en.js 676 -> 1,245 lines, owner-ratified consolidation) rides the first-paint
+// data chunk; 4b's gate measured green but HEAD then measured 1,398,495 — the
+// SECOND measurement instability at this ceiling tonight (see 4a jitter note).
+// 4c NET-REDUCED the closure to 1,395,755 (lazy HomeLanding/PostGenCoach/DEV
+// panels/CampaignSyncBanner). RATCHET-DOWN PATH (4h/wave 5): (a) namespace-level
+// lazy segmentation of the copy registry (deep-surface namespaces load with
+// their surfaces), (b) the registry-prose code-split from the W2b-r note,
+// (c) make this measurement deterministic — investigate chunk-assembly
+// nondeterminism before trusting sub-kilobyte margins again.
+const CLOSURE_BUDGET_BYTES = 1_400_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

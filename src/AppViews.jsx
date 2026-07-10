@@ -1,0 +1,106 @@
+/**
+ * AppViews.jsx — the route→component registry, extracted from App.jsx.
+ *
+ * App.jsx owns the shell (header, nav, footer, modals, global effects); THIS file
+ * owns the one place that maps the current `view` to the page component that renders
+ * it, plus the code-split (lazy) imports for those pages. Splitting it keeps the shell
+ * legible and gives the view table a single home. `Loading` lives here because both
+ * the shell's Suspense fallback and the guarded-view loaders need it.
+ *
+ * Pure presentational: every input is a prop (no store reads), so it re-renders only
+ * when the shell passes new values.
+ *
+ * NOTE on HomeLanding: the redesign template imported it statically (the Welcome
+ * landing IS first paint for anon). This tree's first-paint byte budget is tighter
+ * (the kernel/engine extraction shrank the entry), and a static HomeLanding pushed
+ * the entry static closure over budget (tests/build/vendorPdfLazy.test.js). It is
+ * lazy here — the shell's Suspense shows the brief Loading fallback before the hero.
+ * Its proof card lazy-loads from inside HomeLanding.
+ */
+import { Suspense, lazy } from 'react';
+import { IconsContext } from './components/primitives/IconsContext.js';
+import { MUTED, sans } from './components/theme.js';
+
+// Lazy-loaded views (code-split off the first-paint graph).
+const HomeLanding     = lazy(() => import('./components/HomeLanding.jsx'));
+const GenerateWizard  = lazy(() => import('./components/GenerateWizard.jsx'));
+const SettlementsPanel = lazy(() => import('./components/SettlementsPanel'));
+const CompendiumPanel = lazy(() => import('./components/CompendiumPanel'));
+const HowToUse        = lazy(() => import('./components/HowToUse'));
+const WorldMap         = lazy(() => import('./components/WorldMap.jsx'));
+const AccountPage      = lazy(() => import('./components/AccountPage.jsx'));
+const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
+const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
+const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
+const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
+// Dedicated auth routes (/signin · /register · /reset-password · /verify-email).
+// Thin page wrappers around the same <AuthPanel> the modal renders. The
+// set-new-password and confirm-email pages are 4d deliverables (auth wave) and
+// are not yet in this tree, so those routes resolve but render nothing until 4d
+// lands them (see the 4d handoff).
+const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
+const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
+const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
+const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
+// Legal / trust pages (4c). Lazy — they are off the first-paint graph.
+const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
+const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
+const RefundsPage       = lazy(() => import('./components/legal/RefundsPage.jsx'));
+
+export function Loading() {
+  return (
+    <div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
+      Loading...
+    </div>
+  );
+}
+
+/**
+ * Render the page component for the current `view`. Wrapped by the shell in a
+ * Suspense + FeatureErrorBoundary, so this returns bare view content.
+ */
+export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, isElevated, authLoading, params }) {
+  return (
+    <>
+      {view === 'generate'    && <GenerateWizard isMobile={isMobile} onSignIn={() => setAuthModalOpen(true)} onNavigate={setView} />}
+      {/* Home is the Welcome landing. A bare root visit ('/') canonicalizes here
+          for logged-out visitors (the front-door effect in App); members are sent
+          to /create instead. The page adapts its CTAs by auth state. */}
+      {view === 'home'        && <HomeLanding isMobile={isMobile} signedIn={authTier !== 'anon'} isPremium={authTier === 'premium' || isElevated} onNavigate={setView} onSignIn={() => setAuthModalOpen(true)} />}
+      {view === 'settlements' && <SettlementsPanel onNavigate={setView} routeId={params.id} />}
+      {/* The Realm hub. WorldMap is the Realm body; `map` still renders it for the
+          one frame before the redirect effect upgrades the URL to /realm, so
+          there's no blank flash. The Realm map is the ONE icons-on surface — the
+          IconsContext.Provider opts this subtree in; everything else renders
+          icons-off via the default (false) IconsContext. */}
+      {(view === 'realm' || view === 'map') && (
+        <IconsContext.Provider value={true}><WorldMap onNavigate={setView} /></IconsContext.Provider>
+      )}
+      {view === 'compendium'  && <CompendiumPanel standalone />}
+      {view === 'howto'       && <HowToUse standalone />}
+      {/* Guarded views: render only once authorized. The guard effect
+          redirects unauthorized visitors; until the session resolves we
+          show the loader rather than flash (or crash on) gated content. */}
+      {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
+      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
+      {view === 'pricing'     && <PricingPage onNavigate={setView} />}
+      {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
+      {view === 'terms'       && <TermsPage />}
+      {view === 'privacy'     && <PrivacyPage />}
+      {view === 'refunds'     && <RefundsPage />}
+      {view === 'dossier-success' && (
+        <SingleDossierSuccessPage
+          onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}
+          onGenerateAnother={() => setView('generate')}
+        />
+      )}
+      {view === 'signin'         && <SignInPage />}
+      {view === 'register'       && <RegisterPage />}
+      {view === 'reset-password' && <ResetPasswordPage />}
+      {view === 'verify-email'   && <VerifyEmailPage />}
+    </>
+  );
+}
+
+// Suspense re-exported so App can keep its shell wrapping terse if desired.
+export { Suspense };

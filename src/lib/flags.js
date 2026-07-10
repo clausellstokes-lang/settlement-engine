@@ -124,6 +124,16 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
+  // Wave 4c — proof-forward Welcome page. Hero band is UNCHANGED; the flag adds
+  // a proof band (sample dossier, anon cold-visitors only), an honest
+  // living-world strip (all auth states), and a closing CTA band. Promoted
+  // default-ON per reconciliation decision 7 (landing/IA accept wholesale). The
+  // kill-switch is kept: set false to revert to the hero + three pillars +
+  // lifecycle spine.
+  landingV2: {
+    default: true,
+    description: 'Proof-forward Welcome page: hero unchanged, plus a proof band (sample dossier, anon only), an honest living-world strip, and a closing CTA band. OFF reverts to the current hero + three pillars + lifecycle spine.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

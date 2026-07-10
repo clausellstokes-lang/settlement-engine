@@ -2,7 +2,6 @@
   "src/App.jsx",
   "src/components/AccountPage.jsx",
   "src/components/ChroniclePanel.jsx",
-  "src/components/ComparePage.jsx",
   "src/components/CompendiumPanel.jsx",
   "src/components/EntityPicker.jsx",
   "src/components/HomeHero.jsx",
