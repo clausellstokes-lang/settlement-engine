@@ -69,6 +69,17 @@ import {
   getRelationshipSettlements,
 } from './relationshipEvolution.js';
 
+/**
+ * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
+ * @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot
+ * @typedef {import('./pulseShapes.js').WorldState} WorldState
+ * @typedef {import('./pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('./pulseShapes.js').DeploymentRecord} DeploymentRecord
+ * @typedef {import('./pulseShapes.js').OccupationRecord} OccupationRecord
+ * @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome
+ * @typedef {import('./pulseShapes.js').SettlementItem} SettlementItem
+ */
+
 /** @param {any} a @param {any} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
 
@@ -424,7 +435,7 @@ export function advanceOccupationState(record, suitability, tick = null) {
  * The containment cap is the keystone: an occupier's TOTAL benefit is bounded regardless
  * of how many settlements it holds, so occupations cannot compound into unbounded strength.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger (post state/resistance advance).
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger (post state/resistance advance).
  * @param {(id:string)=>any} occupiedItemFor  pre-tick snapshot item for an occupied id.
  * @returns {{ perOccupier: Record<string, number>, perOccupation: Record<string, number> }}
  *   perOccupier: occupierId → total capped benefit (0..OCCUPIER_BENEFIT_CONTAINMENT).
@@ -474,7 +485,7 @@ export function computeOccupierBenefit(occupations, occupiedItemFor) {
  * burden is NOT total-capped: it scales with the count, so a greedy occupier degrades
  * itself (the overextension property). Returns occupierId → total burden severity.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger.
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger.
  * @returns {Record<string, number>}
  */
 export function computeOccupierBurden(occupations) {
@@ -510,8 +521,8 @@ export function computeOccupierBurden(occupations) {
  * deployment from the occupier onto it)? A liberated/relieved occupation loses this. Used to
  * tilt the stabilization suitability (a garrison helps hold the ground). Pure read of the
  * post-mint graph + deployments.
- * @param {any} graph
- * @param {Record<string, any>} deployments
+ * @param {RegionGraph} graph
+ * @param {Record<string, DeploymentRecord>} deployments
  * @param {string} occupierId
  * @param {string} occupiedId
  * @returns {boolean}
@@ -602,7 +613,7 @@ export function liberatedIdsFrom(returnOutcomes = []) {
 /**
  * Find the regional-graph edge between two settlements (either orientation), returning
  * its canonical relationship key + the raw edge. Null when no edge exists. Pure read.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @param {string} a
  * @param {string} b
  * @returns {{ key: string, edge: any }|null}
@@ -629,8 +640,8 @@ function edgeBetween(snapshot, a, b) {
  * occupied edge so applyRelationshipLabelToGraph can relabel it; skipped if no edge exists
  * (the apply path needs an edge to relabel). Codepoint-sorted; emits once on arrival.
  *
- * @param {Record<string, any>} occupations  the NEXT-tick ledger.
- * @param {any} snapshot   the pre-tick snapshot (for the occupier↔occupied edge).
+ * @param {Record<string, OccupationRecord>} occupations  the NEXT-tick ledger.
+ * @param {PulseSnapshot} snapshot   the pre-tick snapshot (for the occupier↔occupied edge).
  * @param {(id:string)=>any} nameFor
  * @param {number} tick
  * @param {Set<string>|null} [arrivedThisTick]  occupied ids that FIRST reached `vassalized`
@@ -713,10 +724,10 @@ export function vassalizationOutcomes(occupations, snapshot, nameFor, tick, arri
  *     relationship outcomes for occupations that reached `vassalized`.
  *
  * @param {Object} args
- * @param {any} args.snapshot        the SINGLE pre-tick snapshot (byId carries settlement + causal).
- * @param {any} args.worldState      carries the pre-tick occupations ledger.
- * @param {any} args.graph           the POST-mint regional graph (for garrison-presence reads).
- * @param {Record<string, any>} args.deployments  the live one-army ledger (post war-layer).
+ * @param {PulseSnapshot} args.snapshot        the SINGLE pre-tick snapshot (byId carries settlement + causal).
+ * @param {WorldState} args.worldState      carries the pre-tick occupations ledger.
+ * @param {RegionGraph} args.graph           the POST-mint regional graph (for garrison-presence reads).
+ * @param {Record<string, DeploymentRecord>} args.deployments  the live one-army ledger (post war-layer).
  * @param {any[]} [args.warOutcomes]  this tick's war-layer outcomes (fresh conquests).
  * @param {any[]} [args.returnOutcomes]  this tick's deployment-return outcomes (liberations).
  * @param {number} [args.tick]
@@ -977,7 +988,7 @@ export const OCCUPATION_TUNING = Object.freeze({
 /**
  * Detect a vassal edge `homeId` is the JUNIOR of (re-export of the deploymentReturn idiom
  * for occupation-aware liberation in tests/integration). Pure read of the pre-tick edges.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @param {string} homeId
  * @returns {string|null} the overlord id, or null.
  */

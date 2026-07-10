@@ -85,7 +85,8 @@ jobs:
 
       # Vitest: unit + property-based (fast-check) engine tests, domain +
       # store + lib integration, component/UI smoke, a11y, security, and
-      # edge-function contract tests. ~2,600 tests across ~170 files.
+      # edge-function contract tests. (Live total: see this step's log — the
+      # hardcoded count drifted, so it is no longer pinned in this comment.)
       - name: Run tests
         run: npm run test
 
@@ -113,14 +114,42 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      # Install BOTH engines the e2e projects use. The `mobile-safari` project
+      # (playwright.config.js) is the iPhone 13 device profile, whose
+      # defaultBrowserType is WEBKIT — so the mobile-pointer-targets step below
+      # launches webkit, not chromium. Installing chromium alone (the prior bug)
+      # left that step trying to launch a browser that was never installed
+      # ("Executable doesn't exist … webkit"); the anti-vacuity guards below now
+      # also make an all-skipped mobile run a hard failure instead of green-on-
+      # nothing, so the missing engine can no longer hide.
+      - name: Install Playwright browsers (chromium + webkit)
+        run: npx playwright install --with-deps chromium webkit
+
+      # Static anti-vacuity guard: prove the project actually enumerates specs
+      # BEFORE running (a renamed/typo'd project would list zero tests and exit 0).
+      - name: Guard chromium e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects chromium
 
       - name: Run Chromium E2E
-        run: npx playwright test --project=chromium
+        run: npx playwright test --project=chromium --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-chromium.json
+
+      # Runtime anti-vacuity guard: prove the run actually EXECUTED tests (not
+      # all-skipped-but-exit-0). Reads Playwright's JSON result.
+      - name: Guard chromium e2e executed (runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-chromium.json
+
+      - name: Guard mobile e2e is not vacuous (static)
+        run: node scripts/check-e2e-not-vacuous.mjs --projects mobile-safari
 
       - name: Audit mobile pointer targets
-        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari
+        run: npx playwright test e2e/mobile-pointer-targets.spec.js --project=mobile-safari --reporter=github,json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: playwright-mobile.json
+
+      - name: Guard mobile e2e executed (runtime)
+        run: node scripts/check-e2e-not-vacuous.mjs --results playwright-mobile.json
 
   # Execution tests for the Supabase edge functions (Deno runtime, not vitest).
   # The money-path trust boundaries (stripe-webhook signature verification; later
@@ -214,7 +243,7 @@ jobs:
   # manual workflow_dispatch trigger it. The fresh checkout is clean, so the
   # script's dirty-tree guard is a no-op here; a MISSED regression (a gate that
   # stayed green under a planted bug) exits nonzero and fails this job.
-  mutation-sweep:
+  mutation-sweep:  # deploy-gate: optional — weekly/manual, never reports on a push
     name: Enforcement mutation sweep (weekly / manual)
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
@@ -233,6 +262,48 @@ jobs:
       - name: Run mutation sweep
         run: bash scripts/mutation-sweep.sh
 
+  # ── Religion-balance soak lane (opt-in) ─────────────────────────────────────
+  # The scripts/audit/religion-*.mjs probes drive the faith subsystem across many
+  # seeded trials (patron-contest hold rates, schism drift, divine-mandate → coup
+  # coupling, growth↔legitimacy balance) and emit distribution tables the owner
+  # reads when TUNING the constants. They are DIAGNOSTIC probes: they log surfaces
+  # and never assert a threshold, so they exit 0 by design — this lane produces
+  # log artifacts for human review, it is not a pass/fail gate (a balance drift
+  # shows up as a shifted distribution in the log, not a red build). Kept OFF the
+  # per-push/PR hot path (each soak runs thousands of seeded pulse ticks) — only
+  # the weekly cron and a manual workflow_dispatch trigger it, exactly like the
+  # mutation sweep above.
+  #
+  # Approx runtime at the iteration counts below (ubuntu-latest, in-memory, no I/O):
+  #   religion-balance     (--seeds 300 --ticks 80)  ~5-10s   (pure domain fns)
+  #   religion-soak        (--seeds 40  --ticks 60)  ~10-30s  (advanceReligionStates)
+  #   religion-coup-soak   (--seeds 10  --ticks 100) ~1-3min  (3k full-kernel pulses)
+  # The 20-minute timeout is generous headroom over the ~4-minute total.
+  religion-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Religion balance soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Religion balance surfaces
+        run: node scripts/audit/religion-balance.mjs --seeds 300 --ticks 80
+
+      - name: Religion live-loop soak
+        run: node scripts/audit/religion-soak.mjs --seeds 40 --ticks 60
+
+      - name: Divine-mandate → coup coupling soak
+        run: node scripts/audit/religion-coup-soak.mjs --seeds 10 --ticks 100
+
   # ── Production deploy gated on the full green gate (finding F35) ─────────────
   # "The gate is the product": production must advance only through CI. This job
   # runs ONLY after check + e2e + deno-tests pass, ONLY on master. It is a safe
@@ -240,7 +311,7 @@ jobs:
   # secret AND turn OFF Vercel's push auto-deploy (see docs/DEPLOY.md). Until
   # then it logs and skips (green), so adding it can't break the current flow;
   # once configured, CI becomes the ONLY path to production.
-  deploy:
+  deploy:  # deploy-gate: optional — this job IS the deploy action, not a gate on it
     name: Deploy to production (gated)
     needs: [check, e2e, deno-tests, coverage-floors, determinism-hostile-locale]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
@@ -264,3 +335,31 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: npx vercel deploy --prod --token "$VERCEL_TOKEN" --yes
+
+  # ── Post-CI Vercel Deploy-Hook retrigger (composes with the fail-closed gate) ──
+  # The vercel.json `ignoreCommand` (scripts/vercel-ignore-build.mjs) is fail-
+  # CLOSED: a push-triggered Vercel build runs seconds after the push, long before
+  # CI can report, so that build is ALWAYS skipped ("checks not yet reported") and
+  # Vercel never re-evaluates on its own. This job closes the loop: on a master
+  # push, AFTER the same gating jobs the CI-native `deploy` job needs, it POSTs the
+  # Vercel Deploy Hook so a FRESH deployment runs with CI now green and the gate
+  # PROCEEDS. Opt-in via the VERCEL_DEPLOY_HOOK_URL secret — a no-op when unset, so
+  # nothing regresses for an operator who redeploys manually. This is the "Vercel-
+  # drives-the-deploy" half; the `deploy` job above is the "CI-drives-the-deploy"
+  # half — defense-in-depth, and either can ship once its secret is configured.
+  redeploy:  # deploy-gate: optional — the retrigger runs AFTER the gates; it must not gate itself
+    name: Retrigger Vercel deploy (post-CI)
+    needs: [check, e2e, deno-tests, coverage-floors, determinism-hostile-locale]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: POST the Vercel Deploy Hook (opt-in; no-op when the secret is unset)
+        env:
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL not set — skipping redeploy hook (manual/dashboard redeploy still works)."
+            exit 0
+          fi
+          curl -fsS -X POST "$VERCEL_DEPLOY_HOOK_URL"

@@ -58,6 +58,35 @@ function appVersion() {
   try { return import.meta.env.VITE_APP_VERSION || undefined; } catch { return undefined; }
 }
 
+// ── Provenance corpus stamp (PHASE6_DATA_LIFECYCLE.md §1) ─────────────────────
+// Every envelope is stamped with the corpus it came from so the research plane
+// can filter by data source (and structurally exclude synthetic/dogfood from any
+// production dataset): 'synthetic' = deterministic sweeps + e2e/test runs;
+// 'dogfood' = the owner's / elevated users' own usage; 'production' = real users
+// (the default). Precedence: synthetic wins even for an elevated user (an e2e run
+// is synthetic regardless of who is logged in), matching §1's "e2e runs" row.
+function isSyntheticContext() {
+  try {
+    const env = /** @type {any} */ (import.meta.env) || {};
+    if (env.MODE === 'test') return true;                 // vitest / unit
+    if (env.VITE_E2E_LOCAL_DATA === 'true') return true;  // playwright / e2e
+  } catch { /* import.meta may be unavailable */ }
+  try { if (/** @type {any} */ (globalThis)?.process?.env?.VITEST) return true; } catch { /* ignore */ }
+  return false;
+}
+// The elevated-user signal is injected via a setter seam (analyticsQueue imports
+// no user/session module by design — same pattern as the sessionId seam). Until a
+// host registers a getter, the dogfood branch simply never fires and stamps stay
+// synthetic|production, which is the correct default for anonymous/pre-wiring use.
+let _elevatedGetter = () => false;
+/** Register the "is this an elevated (owner/dev/admin) actor" predicate for the dogfood stamp. */
+export function setAnalyticsElevated(fn) { _elevatedGetter = typeof fn === 'function' ? fn : () => false; }
+function resolveCorpus() {
+  if (isSyntheticContext()) return 'synthetic';
+  try { if (_elevatedGetter()) return 'dogfood'; } catch { /* a bad getter must never break transport */ }
+  return 'production';
+}
+
 // Tracked retry handle so a queued backoff retry can be cancelled when a later
 // flush already succeeded (no double-fire) and on reset (no cross-test leak).
 let _retryTimer = null;
@@ -208,6 +237,7 @@ function buildEnvelope() {
     appVersion: appVersion(),
     eventsRev: EVENTS_REV,
     consent: c.research ? 'research' : 'product',
+    corpus: resolveCorpus(),
     droppedCount: _droppedCount || undefined,
     events: _events.map((e, i) => ({ seq: i, event: e.event, ts: e.ts, props: e.props, subjectId: e.subjectId })),
     edits: _edits.map((e, i) => ({ seq: 1000 + i, ...e })),

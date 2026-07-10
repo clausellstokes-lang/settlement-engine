@@ -1,6 +1,6 @@
 {
-  "total": 2290,
-  "totalAny": 2251,
+  "total": 2252,
+  "totalAny": 2213,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -388,7 +388,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/occupation.js": {
-      "any": 40,
+      "any": 28,
       "suppress": 0
     },
     "src/domain/worldPulse/pantheon.js": {
@@ -413,6 +413,10 @@
     },
     "src/domain/worldPulse/pulseKernel.js": {
       "any": 21,
+      "suppress": 0
+    },
+    "src/domain/worldPulse/pulseShapes.js": {
+      "any": 19,
       "suppress": 0
     },
     "src/domain/worldPulse/realmEvents.js": {
@@ -536,11 +540,11 @@
       "suppress": 0
     },
     "src/domain/worldPulse/tradeWar.js": {
-      "any": 39,
+      "any": 19,
       "suppress": 0
     },
     "src/domain/worldPulse/warDeployment.js": {
-      "any": 89,
+      "any": 64,
       "suppress": 0
     },
     "src/domain/worldPulse/warFrontReads.js": {

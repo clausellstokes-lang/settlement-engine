@@ -13,6 +13,15 @@ the analytics sink. Each declares, in a machine-checkable shape:
 - **Cell grid** — the dimensions it is broken down by (the GROUP BY).
 - **Suppression floor** — the minimum cell size shown; smaller cells are hidden so
   a rate can't re-identify a handful of users.
+- **Stage** — the activation stage at which the metric goes live and becomes
+  trustworthy: `pre-launch` (measurable now against synthetic/dogfood corpora),
+  `at-launch`, or `post-launch` (per [PHASE6_DATA_LIFECYCLE.md](./PHASE6_DATA_LIFECYCLE.md) §2).
+- **Min-n floor** — the per-cell sample floor below which the metric renders
+  "insufficient n" (the statistical guard behind every read; §5). Distinct in
+  intent from the display suppression floor above, though they coincide
+  numerically today.
+- **Method** — how the number is computed: `funnel-conversion` (distinct actors
+  advancing between events) or `rate` (occurrences ÷ denominator within the cell).
 
 The pin also enforces COVERAGE: every event in `EVENTS` is either a **Source
 event** of some metric here or listed under **Exempt events** with a rationale.
@@ -29,6 +38,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Denominator:** distinct anonymous actors who saw `anon_cap_unlock_shown`.
 - **Cell grid:** day-cohort × entry_route_kind × `is_return`.
 - **Suppression floor:** 25 actors per cell.
+- **Stage:** at-launch — needs real anonymous traffic; rehearsable pre-launch on synthetic/dogfood.
+- **Min-n floor:** 25 actors per cell.
+- **Method:** funnel-conversion.
 
 ## M2 — Sign-in → first-save activation
 
@@ -39,6 +51,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Cell grid:** day-cohort × tier-of-first-save × day-gap band (signin→first save).
   The `generation_milestone` (milestone=`save`) fingerprint cells first-save shape.
 - **Suppression floor:** 25 actors per cell.
+- **Stage:** at-launch — needs real signed-in cohorts; rehearsable pre-launch on synthetic/dogfood.
+- **Min-n floor:** 25 actors per cell.
+- **Method:** funnel-conversion.
 
 ## M3 — First-narrate → pack purchase
 
@@ -48,6 +63,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Denominator:** actors with a first `ai_narrative_completed`.
 - **Cell grid:** day-cohort × credits_remaining_band-at-first-narrate × tier.
 - **Suppression floor:** 25 actors per cell.
+- **Stage:** at-launch — depends on real purchase behaviour after a first narrate.
+- **Min-n floor:** 25 actors per cell.
+- **Method:** funnel-conversion.
 
 ## M4 — Locked-destination → checkout
 
@@ -56,6 +74,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Denominator:** actors who saw `locked_destination_shown`.
 - **Cell grid:** destination_kind × tier × day-cohort.
 - **Suppression floor:** 25 actors per cell.
+- **Stage:** at-launch — the checkout leg needs real paying traffic.
+- **Min-n floor:** 25 actors per cell.
+- **Method:** funnel-conversion.
 
 ## M5 — Reroll rate by fingerprint cell
 
@@ -68,6 +89,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
   (the coarse `generation_milestone` fingerprint), reroll counted from
   `regeneration_triggered`.
 - **Suppression floor:** 50 generations per cell (structural cells are coarser).
+- **Stage:** pre-launch — structural reroll needs only generation traffic (synthetic/dogfood suffices).
+- **Min-n floor:** 50 generations per cell.
+- **Method:** rate.
 
 ## M6 — Abandonment by config
 
@@ -78,6 +102,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Denominator:** generations (`generation_milestone` milestone=`generate`).
 - **Cell grid:** tier × terrain_class × stress_types × coherence flags.
 - **Suppression floor:** 50 generations per cell.
+- **Stage:** pre-launch — abandonment is a generation-side join, measurable on synthetic/dogfood.
+- **Min-n floor:** 50 generations per cell.
+- **Method:** rate.
 
 ## M7 — Pricing-moment effectiveness
 
@@ -86,6 +113,9 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Denominator:** `pricing_moment_shown` for the moment kind.
 - **Cell grid:** moment_reason × tier × day-cohort.
 - **Suppression floor:** 25 actors per cell.
+- **Stage:** at-launch — pricing-moment engagement needs live pricing surfaces in front of real users.
+- **Min-n floor:** 25 actors per cell.
+- **Method:** rate.
 
 ---
 

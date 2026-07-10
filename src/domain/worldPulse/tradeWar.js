@@ -58,6 +58,15 @@ import {
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { stablePart } from './worldState.js';
 
+/**
+ * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
+ * @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot
+ * @typedef {import('./pulseShapes.js').WorldState} WorldState
+ * @typedef {import('./pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome
+ * @typedef {import('./pulseShapes.js').Rng} Rng
+ */
+
 const CHANNEL_TYPE = 'trade_primacy';
 const TRADE_CARRIERS = ['trade_dependency', 'trade_route', 'export_market'];
 // A challenger needs a minimally-complete supply chain to even contest.
@@ -86,7 +95,7 @@ function goodId(value) {
  * the SAME `settlementStrength` over the SAME pressure index the war layer and
  * the relationship contests read, so the trade war's economic term can never
  * diverge from war's confidence gate.
- * @param {any} snapshot @returns {(id: any) => number}
+ * @param {PulseSnapshot} snapshot @returns {(id: any) => number}
  */
 function buildStrengthLookup(snapshot) {
   const pIndex = pressureIndex(deriveSettlementPressures(snapshot));
@@ -104,7 +113,7 @@ function buildStrengthLookup(snapshot) {
 /**
  * The relationship state between two settlements, resolved from the pre-tick
  * edges + relationshipStates. Returns `{ relState, edge, roles }` or null.
- * @param {any} snapshot @param {any} a @param {any} b
+ * @param {PulseSnapshot} snapshot @param {any} a @param {any} b
  */
 function relationshipBetween(snapshot, a, b) {
   const states = snapshot?.worldState?.relationshipStates || {};
@@ -127,7 +136,7 @@ function relationshipBetween(snapshot, a, b) {
  * trust, relationshipType, and (negatively) resentment/fear. A hostile/cold_war
  * tie takes a significant-but-not-fatal demerit (never a hard zero — §3.2).
  * No relationship ⇒ a neutral baseline.
- * @param {any} snapshot @param {any} supplierId @param {any} buyerId @returns {number}
+ * @param {PulseSnapshot} snapshot @param {string} supplierId @param {string} buyerId @returns {number}
  */
 function diplomaticStanding(snapshot, supplierId, buyerId) {
   const rel = relationshipBetween(snapshot, supplierId, buyerId);
@@ -150,7 +159,7 @@ function diplomaticStanding(snapshot, supplierId, buyerId) {
 /**
  * Is C a vassal of X, with the overlord able to compel C's trade? Returns the
  * overlord id when X is C's overlord (the hard-override holder), else null.
- * @param {any} snapshot @param {any} buyerId @param {any} supplierId
+ * @param {PulseSnapshot} snapshot @param {string} buyerId @param {string} supplierId
  */
 function overlordOver(snapshot, buyerId, supplierId) {
   const rel = relationshipBetween(snapshot, supplierId, buyerId);
@@ -165,7 +174,7 @@ function overlordOver(snapshot, buyerId, supplierId) {
 /**
  * Confirmed trade carriers INTO buyer C, codepoint-keyed. Each yields the
  * supplier id and channel strength; goods are matched to the commodity.
- * @param {any} snapshot @param {any} buyerId @param {any} commodityId @returns {Map<string, any>}
+ * @param {PulseSnapshot} snapshot @param {string} buyerId @param {string} commodityId @returns {Map<string, any>}
  */
 function suppliersInto(snapshot, buyerId, commodityId) {
   const id = String(buyerId);
@@ -189,7 +198,7 @@ function suppliersInto(snapshot, buyerId, commodityId) {
 
 /**
  * Codepoint-sorted commodities C imports (primaryImports), as canonical ids.
- * @param {any} snapshot @param {any} buyerId @returns {string[]}
+ * @param {PulseSnapshot} snapshot @param {string} buyerId @returns {string[]}
  */
 function importedCommodities(snapshot, buyerId) {
   const entry = snapshot?.byId?.get?.(String(buyerId));
@@ -202,7 +211,7 @@ function importedCommodities(snapshot, buyerId) {
 
 /**
  * Does supplier X export commodity K (production eligibility, §3.2)?
- * @param {any} snapshot @param {any} supplierId @param {any} commodityId @returns {boolean}
+ * @param {PulseSnapshot} snapshot @param {string} supplierId @param {string} commodityId @returns {boolean}
  */
 function exportsCommodity(snapshot, supplierId, commodityId) {
   const entry = snapshot?.byId?.get?.(String(supplierId));
@@ -237,7 +246,7 @@ function deriveIncumbent(supplierStrengths) {
  * imports, can't leave a stale `tradeWarState` entry growing unbounded — the
  * pruneFactionStates/pruneNpcStates hygiene the war/occupation layers already
  * have. Derived purely from the pre-tick snapshot (deterministic).
- * @param {any} snapshot @param {string[]} buyers @returns {Set<string>}
+ * @param {PulseSnapshot} snapshot @param {string[]} buyers @returns {Set<string>}
  */
 function liveTradeWarPrizeKeys(snapshot, buyers) {
   const keys = new Set();
@@ -282,9 +291,9 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * Evaluate the trade war for one tick.
  *
  * @param {Object} args
- * @param {any} args.snapshot   the SINGLE pre-tick world snapshot
- * @param {any} args.worldState
- * @param {{ random: () => number, fork: (label:string) => any }} args.rng
+ * @param {PulseSnapshot} args.snapshot   the SINGLE pre-tick world snapshot
+ * @param {WorldState} args.worldState
+ * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean }} args.rules

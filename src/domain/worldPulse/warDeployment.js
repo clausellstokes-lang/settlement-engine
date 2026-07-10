@@ -50,6 +50,21 @@ import { computeReinforcement, applyReinforcementToRecord } from './reinforcemen
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
 
+/**
+ * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
+ * index-signature-backed loose bags. Aliased locally so annotations read
+ * `@param {PulseSnapshot} snapshot` instead of `@param {PulseSnapshot} snapshot`.
+ * @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot
+ * @typedef {import('./pulseShapes.js').WorldState} WorldState
+ * @typedef {import('./pulseShapes.js').RegionGraph} RegionGraph
+ * @typedef {import('./pulseShapes.js').WarSlice} WarSlice
+ * @typedef {import('./pulseShapes.js').DeploymentRecord} DeploymentRecord
+ * @typedef {import('./pulseShapes.js').CapacityEnvelope} CapacityEnvelope
+ * @typedef {import('./pulseShapes.js').PulseOutcome} PulseOutcome
+ * @typedef {import('./pulseShapes.js').SettlementItem} SettlementItem
+ * @typedef {import('./pulseShapes.js').Rng} Rng
+ */
+
 // ── Tunables (calibration is load-bearing — see GEOPOLITICAL_WAR_LAYER §2.4/§6) ──
 // HOSTILE_CONFIDENCE gates whether a settlement is strong enough to open a war at
 // all (the relationship-confidence input). CONQUEST_MARGIN keeps a deploy from
@@ -154,7 +169,7 @@ const LEVY_STRAIN_GROSS_PER_TICK = LEVY_STRAIN_PER_TICK + EXHAUSTION_DECAY_PER_T
  * fraction of each allied/vassal/patron neighbour's home defense — but an ally that is
  * ITSELF under siege this tick can't spare relief. Pure + order-independent (codepoint-
  * sorted). Mirrors the hostile-edge reader; returns 0 for a friendless target.
- * @param {any} snapshot @param {string} targetId @param {(id:any)=>any} capacityFor @param {Set<string>} besiegedSet
+ * @param {PulseSnapshot} snapshot @param {string} targetId @param {(id:any)=>any} capacityFor @param {Set<string>} besiegedSet
  * @returns {number}
  */
 export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) {
@@ -187,7 +202,7 @@ export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet) 
  * orientation as the fallback) and only the SENIOR side may levy its junior — a junior
  * levying its own OVERLORD is excluded exactly like the 'patron' direction is. Pure,
  * codepoint-sorted, order-independent.
- * @param {any} snapshot @param {string} homeId @param {Set<string>} excludeSet
+ * @param {PulseSnapshot} snapshot @param {string} homeId @param {Set<string>} excludeSet
  * @returns {string[]}
  */
 export function computeLevySources(snapshot, homeId, excludeSet) {
@@ -282,10 +297,10 @@ const DEPLOY_RESIDUE_TYPES = new Set([
  * Pure — reads `war` + the pre-tick ledger, returns a new war-shape slice, never mutates.
  *
  * @param {Object} args
- * @param {{ outcomes: any[], deployments: Record<string, any>, warExhaustion: Record<string, number>, graphChannels: any[] }} args.war
+ * @param {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, warExhaustion: Record<string, number>, graphChannels: any[] }} args.war
  * @param {ReadonlySet<string>|null} args.suppressedIds  the dismissed/deferred major outcome ids (null ⇒ no-op).
  * @param {Record<string, number>} [args.preTickWarExhaustion]  the pre-tick (worldState) scar ledger.
- * @returns {{ deployments: Record<string, any>, warExhaustion: Record<string, number>, outcomes: any[], graphChannels: any[] }}
+ * @returns {{ deployments: Record<string, DeploymentRecord>, warExhaustion: Record<string, number>, outcomes: PulseOutcome[], graphChannels: any[] }}
  */
 export function stripSuppressedDeployResidue({ war, suppressedIds, preTickWarExhaustion = {} }) {
   const base = {
@@ -432,7 +447,7 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * or withdrawal): a resolved siege must drop its war_front channel(s) to 'dormant' so the
  * next tick does not re-discover the same besieger→target front and re-fire the conquest.
  * Codepoint-sorted for determinism.
- * @param {any} graph
+ * @param {RegionGraph} graph
  * @param {any} fromId
  * @param {any} toId
  * @returns {string[]}
@@ -454,7 +469,7 @@ function warFrontChannelIds(graph, fromId, toId) {
  * pressure vector is the SAME one the relationship contests read (buildPressureSummary
  * over the derived pressure index), so a deploy-confidence gate and the subjugation
  * gate can never diverge. Returns `(id) => number` 0..1, defaulting to 0 for unknown.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @returns {(id: any) => number}
  */
 function buildStrengthLookup(snapshot) {
@@ -488,8 +503,8 @@ function buildStrengthLookup(snapshot) {
  * The siege contest reads the besieger's `offensive` (force at the walls) vs the
  * defender's `homeDefense` (force on the walls). Cached per id; zero envelope for an
  * unknown id.
- * @param {any} snapshot
- * @param {Record<string, any>} deployments  the live one-army ledger (army-away read).
+ * @param {PulseSnapshot} snapshot
+ * @param {Record<string, DeploymentRecord>} deployments  the live one-army ledger (army-away read).
  * @returns {(id: any) => { theoretical: number, offensive: number, homeDefense: number, facets: any }}
  */
 function buildCapacityLookup(snapshot, deployments) {
@@ -531,11 +546,11 @@ function buildCapacityLookup(snapshot, deployments) {
  *
  * @param {Object} args
  * @param {string} args.targetId
- * @param {{ offensive: number, facets: any }} args.cap   the origin capacity envelope.
+ * @param {CapacityEnvelope} args.cap   the origin capacity envelope.
  * @param {number} args.tick
  * @param {number} args.logisticsBurden  0..1 distance/route burden to the target.
  * @param {string} [args.role]
- * @returns {any} the enriched deployment record.
+ * @returns {DeploymentRecord} the enriched deployment record.
  */
 function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege' }) {
   const facets = cap.facets || {};
@@ -576,11 +591,11 @@ function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'sie
  * capacity model so attrition has something to deplete. Deterministic; never mutates
  * input.
  *
- * @param {any} record
- * @param {{ offensive: number, facets: any }} cap   the origin capacity envelope.
+ * @param {DeploymentRecord} record
+ * @param {CapacityEnvelope} cap   the origin capacity envelope.
  * @param {number} tick
  * @param {number} logisticsBurden
- * @returns {any}
+ * @returns {DeploymentRecord}
  */
 function ensureStatefulRecord(record, cap, tick, logisticsBurden) {
   const r = record || {};
@@ -610,8 +625,8 @@ function ensureStatefulRecord(record, cap, tick, logisticsBurden) {
  * whether it is itself threatened (besieged/occupied ⇒ it cannot reinforce abroad).
  * Pure read of the pre-tick snapshot + the capacity facets.
  *
- * @param {any} snapshot
- * @param {any} graph
+ * @param {PulseSnapshot} snapshot
+ * @param {RegionGraph} graph
  * @param {(id:any)=>{ facets:any }} capacityFor
  * @param {Record<string, number>} warExhaustion
  * @param {string} id
@@ -643,7 +658,7 @@ function buildOriginEnvelope(snapshot, graph, capacityFor, warExhaustion, id) {
  * conservative read of edge `distance`/`weight` with a neutral default — the
  * reinforcement model damps the flow ∝ this.
  *
- * @param {any} graph
+ * @param {RegionGraph} graph
  * @param {string} fromId
  * @param {string} targetId
  * @returns {number} 0 (short/secure) .. 1 (long/unsafe)
@@ -666,7 +681,7 @@ function logisticsBurdenFor(graph, fromId, targetId) {
 /**
  * A settlement is "besieged/occupied" if any CONFIRMED war_front points AT it. A
  * besieged settlement cannot itself open a new siege (its army defends home).
- * @param {any} graph
+ * @param {RegionGraph} graph
  * @param {any} id
  * @returns {boolean}
  */
@@ -677,7 +692,7 @@ function isBesieged(graph, id) {
 /**
  * Hostile targets of a settlement, read from the pre-tick relationshipStates +
  * edges. Returns codepoint-sorted target ids the settlement could besiege.
- * @param {any} snapshot
+ * @param {PulseSnapshot} snapshot
  * @param {any} fromId
  * @returns {string[]}
  */
@@ -928,14 +943,14 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * Evaluate the war layer for one tick.
  *
  * @param {Object} args
- * @param {any} args.snapshot       the SINGLE pre-tick world snapshot (byId carries
+ * @param {PulseSnapshot} args.snapshot       the SINGLE pre-tick world snapshot (byId carries
  *                                  settlement + causal + save; regionalGraph is pre-tick)
- * @param {any} args.worldState
- * @param {{ random: () => number, fork: (label:string) => any }} args.rng
+ * @param {WorldState} args.worldState
+ * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
  * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean }} args.rules
- * @returns {{ outcomes: any[], deployments: Record<string, any>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
+ * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
  *   - graphChannels: war_front directed channels to upsert into the regional graph

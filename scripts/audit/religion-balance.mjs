@@ -8,7 +8,7 @@
  */
 import { resolvePatronContest, advanceShares, RELIGION_TUNING } from '../../src/domain/worldPulse/religionState.js';
 import { deityGrowthFavor, RELIGION_LEGITIMACY_TUNING } from '../../src/domain/worldPulse/religionLegitimacy.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const arg = (n, d) => { const i = process.argv.indexOf(`--${n}`); return i !== -1 ? Number(process.argv[i + 1]) : d; };
 const SEEDS = arg('seeds', 300);

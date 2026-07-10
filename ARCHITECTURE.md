@@ -41,11 +41,20 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
-             the **campaign world-pulse simulation** (`worldPulse/` — ages a
-             canonized region tick-by-tick: proposals, party impacts, the multi-
-             tick interval orchestrator), regional causality (`region/`), and the
-             fail-closed public-safe display projection (`display/`).
-             Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
+             the **campaign world-pulse simulation** (`worldPulse/` — ~74 modules
+             that age a canonized region tick-by-tick: proposals, party impacts,
+             the multi-tick interval orchestrator, PLUS the geopolitical
+             subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
+             `mobilization`), trade war & blockade (`tradeWar`/`blockadeTransport`/
+             `tradeSalience`), religion (`religionState`/`pantheon`/`religiousContest`/
+             divine mandate), coups & faction competition, and NPC agency; the
+             shared sim-shape typedefs live in `pulseShapes.js`), regional causality
+             (`region/`), and the fail-closed public-safe display projection
+             (`display/`). Every roll forks a seeded, injected RNG (determinism is
+             sacred — no Date.now/Math.random). Was the only gate-typechecked layer;
+             the gate now covers the full tree, and `worldPulse/` also carries a
+             strict-typecheck ratchet + an any-cast burn-down ratchet
+             (scripts/count-domain-any.mjs). <!-- @enforced-by tsconfig.full.json + tsconfig.domain-strict.json + tests/lint/domainAnyCastBaseline.test.js -->
 store/       Zustand slices (15) — the single client state container, incl. the
              campaign world-pulse, regional, and account-import slices.
 components/   React UI. Inline-styled, token-driven. Large feature panels +

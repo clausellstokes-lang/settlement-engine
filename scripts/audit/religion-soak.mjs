@@ -12,7 +12,7 @@ import { advanceReligionStates } from '../../src/domain/worldPulse/religiousCont
 import { patronSnapshot } from '../../src/domain/worldPulse/religionState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { createPRNG } from '../../src/generators/prng.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 const arg = (n, d) => { const i = process.argv.indexOf(`--${n}`); return i !== -1 ? Number(process.argv[i + 1]) : d; };
 const SEEDS = arg('seeds', 40);

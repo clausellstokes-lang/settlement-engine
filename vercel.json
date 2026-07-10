@@ -1,6 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "rewrites": [
     { "source": "/gallery/:slug", "destination": "/api/gallery-meta?slug=:slug" },
     { "source": "/((?!.*\\.).*)", "destination": "/index.html" }

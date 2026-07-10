@@ -12,7 +12,7 @@ vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
 vi.mock('../../src/lib/consent.js', () => ({ getConsent: () => ({ essential: true, research: true }) }));
 
 import {
-  enqueueEvent, enqueueSnapshot, flush, debugSnapshot, __resetQueueForTests,
+  enqueueEvent, enqueueSnapshot, flush, debugSnapshot, setAnalyticsElevated, __resetQueueForTests,
 } from '../../src/lib/analyticsQueue.js';
 
 beforeEach(() => {
@@ -99,6 +99,53 @@ describe('per-record cap rejects an oversize record at enqueue', () => {
     enqueueSnapshot({ id: 'huge', blob: 'x'.repeat(100 * 1024) });
     expect(debugSnapshot().depth).toBe(0);
     expect(debugSnapshot().dropped).toBe(1);
+  });
+});
+
+describe('provenance corpus stamp (PHASE6_DATA_LIFECYCLE.md §1)', () => {
+  const VALID = ['synthetic', 'dogfood', 'production'];
+  const flushAndReadCorpus = () => {
+    const fetchMock = vi.fn(() => new Promise(() => {})); // stay in-flight
+    vi.stubGlobal('fetch', fetchMock);
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();
+    return JSON.parse(fetchMock.mock.calls[0][1].body).corpus;
+  };
+
+  test('every emitted envelope carries a valid corpus stamp', () => {
+    expect(VALID).toContain(flushAndReadCorpus());
+  });
+
+  test('under the vitest/e2e harness the stamp is synthetic (detection is wired, not hardcoded)', () => {
+    // import.meta.env.MODE === 'test' (+ process.env.VITEST) is the synthetic signal.
+    expect(flushAndReadCorpus()).toBe('synthetic');
+  });
+
+  test('synthetic precedence: an elevated actor under a synthetic run still stamps synthetic', () => {
+    setAnalyticsElevated(() => true);
+    try {
+      expect(flushAndReadCorpus()).toBe('synthetic');
+    } finally {
+      setAnalyticsElevated(null);
+    }
+  });
+
+  test('outside a synthetic context: elevated → dogfood, everyone else → production', () => {
+    // Turn OFF the synthetic signals so the dogfood/production branch is reached.
+    vi.stubEnv('MODE', 'production');
+    const origVitest = process.env.VITEST;
+    delete process.env.VITEST;
+    try {
+      expect(flushAndReadCorpus()).toBe('production');
+
+      __resetQueueForTests();
+      setAnalyticsElevated(() => true);
+      expect(flushAndReadCorpus()).toBe('dogfood');
+    } finally {
+      setAnalyticsElevated(null);
+      if (origVitest !== undefined) process.env.VITEST = origVitest;
+      vi.unstubAllEnvs();
+    }
   });
 });
 

@@ -148,6 +148,34 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // headroom) with the icon split's margin restored. If this fails high, re-measure the closure
 // listing the test prints; the map split can only ever move MAP-EXCLUSIVE icons
 // out (safety invariant enforced by tests/build/iconChunkSplit.test.js).
+//
+// ── (wave 5b) MEASUREMENT-DETERMINISM ROOT CAUSE ────────────────────────────
+// The "pass-then-fail at the jitter margin" incidents above (4a/4b/4d) read as
+// build NON-DETERMINISM. Wave 5b investigated it empirically: two BACK-TO-BACK
+// `npm run build`s of the SAME tree produce a BYTE-IDENTICAL closure (1,407,359
+// across the same 7 chunks — data / index / engine-core / vendor-react /
+// vendor-icons / vendor-state / kernel). So within a fixed tree + toolchain the
+// measurement is DETERMINISTIC. The historical "instability" was NOT same-tree
+// chunk-assembly jitter — it was (1) cross-COMMIT first-paint growth (the gate
+// ran on commit A; a later HEAD measured higher because it genuinely added
+// first-paint code) and (2) the residual cross-ENVIRONMENT risk (CI's Node/OS
+// vs a dev machine can shift Rollup output a few hundred bytes) — both hiding
+// behind a sub-3 kB margin. That margin, not nondeterminism, is what made the
+// gate look flaky.
+//
+// Consequence for the ratchet: this budget is deliberately NOT tightened here.
+// The wave-5 reduction program's ratchet-DOWN to ≤1,377,000 is CONTINGENT on
+// first SHRINKING the closure — (a) code-splitting EVENT_REGISTRY narrate/
+// description prose out of first paint, (b) namespace-level lazy segmentation of
+// the copy registry (deep-surface namespaces load with their surfaces). Those
+// are large refactors of the domain event registry + the copy loader seam that
+// risk golden byte-identity and were held for a dedicated, verifiable pass (the
+// exact seams are mapped: registry.js EventSpec prose vs the eager store→
+// eventPipeline/batch validation path; en.js's account/auth/pricing/gallery/
+// moments/valueLadder/aboutLiving namespaces). Tightening the 2.6 kB margin
+// WITHOUT that closure reduction would only re-create the pass-then-fail bumps
+// this wave exists to end, so the budget HOLDS at 1,410,000 until the closure
+// itself comes down. Monotone-down thereafter; never raise.
 const CLOSURE_BUDGET_BYTES = 1_410_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static

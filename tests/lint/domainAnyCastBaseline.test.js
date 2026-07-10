@@ -51,7 +51,16 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // the full war/trade/religion module set + the 33 three-way both-file merges)
 // measures 2291. Monotone-down hereafter; burn-down pass scheduled wave 5
 // (worst: warDeployment, occupation, tradeWar).)
-const CEILING = 2291;
+//
+// (wave 5b burn-down, 2026-07-10 — 2291 → 2252. The war/trade/occupation modules
+// get named, index-signature-backed sim-shape typedefs (src/domain/worldPulse/
+// pulseShapes.js): warDeployment 89→64, occupation 40→28, tradeWar 39→19. JSDoc-
+// only, zero runtime change (golden byte-identical), strict-0 preserved. The
+// shared pulseShapes module carries an 18-hole fixed cost that amortizes as more
+// war/pulse files adopt the shapes — the mechanism is now in place for the next
+// wave to keep burning down factionCompetition/npcAgency/institutionLifecycle/
+// etc. Ceiling lowered to the measured total. Monotone-down; never raise.)
+const CEILING = 2252;
 
 const baseline = JSON.parse(readFileSync(join(ROOT, 'tests/lint/.domain-any-baseline.json'), 'utf8'));
 const current = countDomain();

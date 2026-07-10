@@ -33,7 +33,7 @@ function loadRegistry() {
   const sourceEvents = new Set();
   let inExempt = false;
   const exemptEvents = new Set();
-  const labelCounts = { Question: 0, 'Source events': 0, Denominator: 0, 'Cell grid': 0, 'Suppression floor': 0 };
+  const labelCounts = { Question: 0, 'Source events': 0, Denominator: 0, 'Cell grid': 0, 'Suppression floor': 0, Stage: 0, 'Min-n floor': 0, Method: 0 };
 
   for (const line of lines) {
     if (/^##\s+Exempt events\s*$/.test(line)) { inExempt = true; continue; }
@@ -88,5 +88,9 @@ describe('metrics registry', () => {
     expect(labelCounts.Denominator).toBe(n);
     expect(labelCounts['Cell grid']).toBe(n);
     expect(labelCounts['Suppression floor']).toBe(n);
+    // Phase-6 pull-forward: stage + min-n floor + method per metric (PHASE6 §5).
+    expect(labelCounts.Stage).toBe(n);
+    expect(labelCounts['Min-n floor']).toBe(n);
+    expect(labelCounts.Method).toBe(n);
   });
 });
