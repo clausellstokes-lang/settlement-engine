@@ -806,3 +806,27 @@ corruption requires both absent, so their failures multiply. Neutral plane-cente
   anywhere on the plane.
 - The W-F3 amplified-site table gains the corruption-pressure rows; the surface consumes
   W-F2's derived evil01/chaos01.
+
+### Development fidelity + government-form synergy (OWNER, 2026-07-10)
+
+**Development fidelity (lands W-F4 with the discipline term's other consumers).** The existing
+optimal development planner — expand the strongest viable value chain; on reasonable saturation
+(no metals => no mine) pivot to the next — is the LAWFUL pole's behavior exactly. Chaotic
+patronage injects the same seeded, piety-scaled estimate-noise into the VALUE RANKING itself:
+suboptimal expansions, late pivots, lingering on saturated chains. Reading pinned: "good
+economies" = the healthy-economy baseline planner; law-chaos modulates decision QUALITY;
+good-evil keeps trade CONDUCT via the stance heuristic. Emergent property (bind to W-F7 /
+Phase-6 envelopes): chaotic misdevelopment = accidental diversification — lawful economies
+show higher peak prosperity AND higher depletion/trade-shock fragility; chaotic show lower
+peaks, fatter survival tails. Same variance-with-payoff law as the war calculator.
+
+**Government-form x law-axis synergy (the fourth amplifier — lands W-F3; LAW AXIS ONLY, never
+good x evil: the FORM of rule is a law-chaos matter, its CONDUCT is good-evil).** Each
+governance form carries a law-axis affinity: feudal/royal/dukedom/magistracy => lawful;
+free-towns/frontier compacts/tribal moots => chaotic-lean; merchant councils => center;
+criminal syndicates => chaotic. Patron law-position vs the form's affinity feeds legitimacy
+weight, mandate strength, and stability — piety-scaled; mismatch = legitimacy friction (the
+trickster god over a dukedom; the lawgiver's temple in a freebooter port). THEOCRACY special
+case: its affinity IS the patron's position — synergy by construction (which is why
+religious_authority already amplifies everything else). Neutrality theorem holds: deity-free
+or zero-piety => no synergy term, byte-identical.
