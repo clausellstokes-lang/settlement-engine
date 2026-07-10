@@ -148,6 +148,124 @@ async function supabaseResetPassword(email) {
   if (error) throw error;
 }
 
+// ── Security questions + gated account recovery (migrations 066-068) ─────────
+//
+// `RECOVERY_RATE_LIMITED` is a stable sentinel the UI can branch on to show the
+// "too many attempts" copy and back off, distinct from a plain wrong answer.
+// `RECOVERY_UNAVAILABLE` covers an outage / opaque transport error.
+const RECOVERY_RATE_LIMITED = 'recovery_rate_limited';
+const RECOVERY_UNAVAILABLE = 'recovery_unavailable';
+
+/**
+ * Persist the caller's two security answers via the SECURITY DEFINER RPC
+ * `set_my_security_answers` (migration 066). The RPC needs auth.uid(), so this
+ * MUST run with a live session — at sign-up that means AFTER the polling
+ * auto-login succeeds (signUp itself returns no session when email confirmation
+ * is enabled). The raw answers are hashed server-side and never persisted in
+ * plaintext; only the stable question ids and the bcrypt hashes are stored.
+ *
+ * @param {{ q1: string, a1: string, q2: string, a2: string }} answers
+ */
+async function supabaseSetSecurityAnswers({ q1, a1, q2, a2 }) {
+  const { error } = await supabase.rpc('set_my_security_answers', {
+    p_q1: q1,
+    p_a1: a1,
+    p_q2: q2,
+    p_a2: a2,
+  });
+  if (error) throw error;
+}
+
+/**
+ * Read which of the caller's two security-question slots are set, via the
+ * SECURITY DEFINER RPC `get_my_security_question_ids` (migration 066). Returns
+ * the stored `{ slot, questionId }` pairs (NEVER the answer hash). Needs a live
+ * session (auth.uid()); returns an empty array on any failure so the UI degrades
+ * to a "not set yet" state rather than throwing.
+ *
+ * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+ */
+async function supabaseGetSecurityQuestionIds() {
+  try {
+    const { data, error } = await supabase.rpc('get_my_security_question_ids');
+    if (error || !Array.isArray(data)) return [];
+    return data.map((row) => ({
+      slot: Number(row.slot),
+      questionId: String(row.question_id),
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// supabase.functions.invoke surfaces a non-2xx as `error` with the JSON body on
+// error.context; normalize both the happy path and the rate-limit/outage cases
+// into a shape the store + UI can branch on without knowing transport details.
+async function readRecoveryError(error) {
+  try {
+    const body = await error?.context?.json?.();
+    if (body && typeof body === 'object') return body;
+  } catch {
+    // No JSON body (network error, opaque response) — fall through to status.
+  }
+  const status = error?.context?.status;
+  if (status === 429) return { error: 'rate_limited' };
+  if (status === 503) return { error: 'rate_limit_unavailable' };
+  return null;
+}
+
+/**
+ * Step 1 of recovery: look up an email and get ONE random security question.
+ * Returns { exists, slot, questionId }. `exists:false` is a legitimate answer
+ * (the operator chose reveal-as-described) — the edge function still rate-limits
+ * it. A rate-limit or outage maps to a thrown Error tagged with a stable `code`.
+ *
+ * @param {string} email
+ * @returns {Promise<{ exists: boolean, slot: number|null, questionId: string|null }>}
+ */
+async function supabaseRecoveryLookup(email) {
+  const { data, error } = await supabase.functions.invoke('auth-recovery', {
+    body: { action: 'lookup', email },
+  });
+  if (error) {
+    const body = await readRecoveryError(error);
+    /** @type {Error & { code?: string }} */
+    const err = new Error('Recovery lookup failed.');
+    if (body?.error === 'rate_limited') err.code = RECOVERY_RATE_LIMITED;
+    else err.code = RECOVERY_UNAVAILABLE;
+    throw err;
+  }
+  return {
+    exists: data?.exists === true,
+    slot: typeof data?.slot === 'number' ? data.slot : null,
+    questionId: typeof data?.questionId === 'string' ? data.questionId : null,
+  };
+}
+
+/**
+ * Step 2 of recovery: submit the answer to the question chosen in step 1. On a
+ * correct answer the edge function mails the reset link and we return ok:true;
+ * a wrong answer returns ok:false. A rate-limit / outage throws a coded Error so
+ * the UI can show the back-off copy rather than a generic "wrong answer".
+ *
+ * @param {{ email: string, slot: number, answer: string }} args
+ * @returns {Promise<{ ok: boolean }>}
+ */
+async function supabaseRecoveryVerify({ email, slot, answer }) {
+  const { data, error } = await supabase.functions.invoke('auth-recovery', {
+    body: { action: 'verify', email, slot, answer },
+  });
+  if (error) {
+    const body = await readRecoveryError(error);
+    /** @type {Error & { code?: string }} */
+    const err = new Error('Recovery verification failed.');
+    if (body?.error === 'rate_limited') err.code = RECOVERY_RATE_LIMITED;
+    else err.code = RECOVERY_UNAVAILABLE;
+    throw err;
+  }
+  return { ok: data?.ok === true };
+}
+
 /**
  * Magic-link / OTP sign-in. Sends a one-time link to the user's email;
  * clicking it completes auth without a password. WCAG 2.2 SC 3.3.8
@@ -377,6 +495,48 @@ async function mockUpdatePassword() {
   // No-op in mock mode
 }
 
+/**
+ * Mock security-answer save — local dev has no server hash, so we only record
+ * which question ids were chosen (never any answer text) so mockGetSecurity
+ * QuestionIds can read them back. Keeps the sign-up flow exercisable end-to-end.
+ *
+ * @param {{ q1?: string, a1?: string, q2?: string, a2?: string }} [answers]
+ */
+async function mockSetSecurityAnswers({ q1, q2 } = {}) {
+  const saved = mockLoadAuth();
+  if (!saved) return;
+  mockSaveAuth({ ...saved, securityQuestionIds: [
+    { slot: 1, questionId: q1 },
+    { slot: 2, questionId: q2 },
+  ] });
+}
+
+/** Mock equivalent — reads back the question ids recorded by mockSetSecurityAnswers. */
+async function mockGetSecurityQuestionIds() {
+  const saved = mockLoadAuth();
+  const ids = saved?.securityQuestionIds;
+  return Array.isArray(ids) ? ids : [];
+}
+
+/**
+ * Mock recovery lookup — local dev has no real account store, so we pretend the
+ * typed email always exists and ask the first security question. Lets the
+ * forgot-password challenge flow be exercised end-to-end without a backend.
+ */
+async function mockRecoveryLookup() {
+  await new Promise(r => setTimeout(r, 150));
+  return { exists: true, slot: 1, questionId: 'first_pet' };
+}
+
+/**
+ * Mock recovery verify — in local dev any non-empty answer "matches" so the flow
+ * reaches its check-your-email close. No real link is mailed.
+ */
+async function mockRecoveryVerify({ answer }) {
+  await new Promise(r => setTimeout(r, 150));
+  return { ok: Boolean(String(answer || '').trim()) };
+}
+
 async function mockUpdateDisplayName() {
   // No-op in mock mode
 }
@@ -412,6 +572,15 @@ export const auth = {
   updatePassword:     isConfigured ? supabaseUpdatePassword      : mockUpdatePassword,
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
+  // Security questions + gated recovery (migrations 066-068).
+  setSecurityAnswers:     isConfigured ? supabaseSetSecurityAnswers     : mockSetSecurityAnswers,
+  getSecurityQuestionIds: isConfigured ? supabaseGetSecurityQuestionIds : mockGetSecurityQuestionIds,
+  recoveryLookup:     isConfigured ? supabaseRecoveryLookup      : mockRecoveryLookup,
+  recoveryVerify:     isConfigured ? supabaseRecoveryVerify      : mockRecoveryVerify,
   onAuthChange:       isConfigured ? supabaseOnAuthChange        : mockOnAuthChange,
   isConfigured,
 };
+
+// Stable sentinel the forgot-password UI branches on to show the back-off copy
+// (distinct from a plain wrong answer). See supabaseRecoveryLookup/Verify.
+export { RECOVERY_RATE_LIMITED };

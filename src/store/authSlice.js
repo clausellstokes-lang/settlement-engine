@@ -295,6 +295,80 @@ export const createAuthSlice = (set, get) => ({
   },
 
   /**
+   * Persist the two security answers captured at sign-up. Thin pass-through to
+   * the auth service's set_my_security_answers RPC wrapper — the RPC needs a
+   * live session (auth.uid()), so the caller fires this only AFTER a session
+   * exists (i.e. once the post-signup polling auto-login succeeds). The raw
+   * answers are hashed server-side; nothing sensitive lands in the store.
+   *
+   * @param {{ q1: string, a1: string, q2: string, a2: string }} answers
+   */
+  authSetSecurityAnswers: async (answers) => {
+    await authService.setSecurityAnswers(answers);
+  },
+
+  /**
+   * Read which of the caller's two security-question slots are currently set,
+   * so the account page can show "set / not set" status. Thin pass-through to
+   * the auth service's get_my_security_question_ids RPC wrapper — it returns
+   * only the {slot, questionId} pairs (never the answer hash) and needs a live
+   * session. Degrades to an empty array on any failure.
+   *
+   * @returns {Promise<Array<{ slot: number, questionId: string }>>}
+   */
+  authGetSecurityQuestionIds: async () => {
+    return authService.getSecurityQuestionIds();
+  },
+
+  /**
+   * Forgot-password challenge — step 1. Look up an email through the
+   * `auth-recovery` edge function and get ONE random security question. The raw
+   * answer hash never reaches the client; this returns only
+   * { exists, slot, questionId }. A rate-limit / outage throws a coded Error
+   * (e.code, see RECOVERY_RATE_LIMITED) so the UI can back off rather than treat
+   * it as a missing account. Thin pass-through; nothing lands in state.
+   *
+   * @param {string} email
+   * @returns {Promise<{ exists: boolean, slot: number|null, questionId: string|null }>}
+   */
+  authRecoveryLookup: async (email) => {
+    return authService.recoveryLookup(email);
+  },
+
+  /**
+   * Forgot-password challenge — step 2. Submit the answer for the question
+   * chosen in step 1. On a correct answer the edge function mails the reset link
+   * and this resolves { ok: true }; a wrong answer resolves { ok: false }. A
+   * rate-limit / outage throws a coded Error. The answer is sent straight to the
+   * function and never persisted in the store.
+   *
+   * @param {{ email: string, slot: number, answer: string }} args
+   * @returns {Promise<{ ok: boolean }>}
+   */
+  authRecoveryVerify: async ({ email, slot, answer }) => {
+    return authService.recoveryVerify({ email, slot, answer });
+  },
+
+  /**
+   * Set a new password for the CURRENT session. Used by the set-new-password
+   * page once a recovery session is active (the recovery link established it).
+   * Unlike a signed-in password change this has no current-password re-auth gate
+   * — the recovery session IS the proof of identity. The auth-state listener
+   * picks up the now-fully-authed session; failures (e.g. expired link) surface
+   * to the caller.
+   *
+   * @param {string} newPassword
+   */
+  authUpdatePassword: async (newPassword) => {
+    try {
+      await authService.updatePassword(newPassword);
+    } catch (e) {
+      set(state => { state.auth.error = e.message; });
+      throw e;
+    }
+  },
+
+  /**
    * Send magic-link / OTP sign-in email. WCAG 2.2 SC 3.3.8 (Accessible
    * Authentication, Minimum) prefers this path over password recall.
    * Resolution happens via the auth-state listener on link click — no

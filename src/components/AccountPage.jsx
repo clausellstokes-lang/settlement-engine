@@ -26,6 +26,8 @@ import Button from './primitives/Button.jsx';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
+import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
+import AccountEmailPreferencesSection from './account/AccountEmailPreferencesSection.jsx';
 // FAQ relocated to the About page (spec §13); the full accordion (AccountFAQ)
 // is rendered there now, with a slim pointer left on this page.
 
@@ -257,6 +259,14 @@ export default function AccountPage({ onNavigateAdmin }) {
         supportMessage={supportMessage} setSupportMessage={setSupportMessage}
         supportSending={supportSending} handleSendSupport={handleSendSupport}
       />
+
+      {/* ── Account recovery questions (Auth Phase 2) ───────────────
+          The one place a signed-in account sets/replaces the two security
+          questions the logged-out ForgotPasswordFlow verifies against. */}
+      <AccountRecoveryQuestionsSection />
+
+      {/* ── Email preferences (per-category opt-out; migration 126) ── */}
+      <AccountEmailPreferencesSection />
 
       {/* ── Developer / Admin Panel link ────────────────────────── */}
       {isElevated && onNavigateAdmin && (

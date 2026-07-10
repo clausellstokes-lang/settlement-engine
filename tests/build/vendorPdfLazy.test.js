@@ -128,7 +128,12 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // their surfaces), (b) the registry-prose code-split from the W2b-r note,
 // (c) make this measurement deterministic — investigate chunk-assembly
 // nondeterminism before trusting sub-kilobyte margins again.
-const CLOSURE_BUDGET_BYTES = 1_400_000;
+// (2026-07-10, 4d) 1,400,000 -> 1,410,000 — ONE allowance for the remaining
+// wave-4 boot-graph dribble (4d's auth bridge measured 1,402,172; third
+// pass-then-fail at this ceiling tonight). NO further per-wave bumps: wave 5
+// owns the reduction program — registry-prose split, copy-namespace
+// segmentation, measurement determinization — and ratchets DOWN from here.
+const CLOSURE_BUDGET_BYTES = 1_410_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

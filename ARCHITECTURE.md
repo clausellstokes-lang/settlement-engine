@@ -106,7 +106,7 @@ saves when the shape changes.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 14 slices, with `immer + persist +
+One Zustand store composed from 15 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.
@@ -135,7 +135,7 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (125) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (126) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —

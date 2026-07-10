@@ -33,15 +33,20 @@ const AdminPanel       = lazy(() => import('./components/AdminPanel.jsx'));
 const PricingPage      = lazy(() => import('./components/PricingPage.jsx'));
 const GalleryPage      = lazy(() => import('./components/GalleryPage.jsx'));
 const SingleDossierSuccessPage = lazy(() => import('./components/SingleDossierSuccessPage.jsx'));
-// Dedicated auth routes (/signin · /register · /reset-password · /verify-email).
-// Thin page wrappers around the same <AuthPanel> the modal renders. The
-// set-new-password and confirm-email pages are 4d deliverables (auth wave) and
-// are not yet in this tree, so those routes resolve but render nothing until 4d
-// lands them (see the 4d handoff).
+// Dedicated auth routes (/signin · /register · /reset-password · /verify-email
+// · /set-new-password · /confirm-email). Thin page wrappers around the same
+// <AuthPanel> the modal renders, plus the two recovery/confirmation landings.
+// SetNewPasswordPage (/set-new-password) is where the auth-recovery edge
+// function's emailed reset link lands; ConfirmEmailPage (/confirm-email) is the
+// sign-up confirmation landing. Both are standalone status pages (they read
+// auth/recovery state, not AuthPanel), lazy like the rest of this table so they
+// stay off the first-paint graph.
 const SignInPage        = lazy(() => import('./components/auth/SignInPage.jsx'));
 const RegisterPage      = lazy(() => import('./components/auth/RegisterPage.jsx'));
 const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage.jsx'));
+const SetNewPasswordPage = lazy(() => import('./components/auth/SetNewPasswordPage.jsx'));
 const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
+const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.jsx'));
 // Legal / trust pages (4c). Lazy — they are off the first-paint graph.
 const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
 const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
@@ -94,10 +99,12 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           onGenerateAnother={() => setView('generate')}
         />
       )}
-      {view === 'signin'         && <SignInPage />}
-      {view === 'register'       && <RegisterPage />}
-      {view === 'reset-password' && <ResetPasswordPage />}
-      {view === 'verify-email'   && <VerifyEmailPage />}
+      {view === 'signin'           && <SignInPage />}
+      {view === 'register'         && <RegisterPage />}
+      {view === 'reset-password'   && <ResetPasswordPage />}
+      {view === 'set-new-password' && <SetNewPasswordPage />}
+      {view === 'verify-email'     && <VerifyEmailPage />}
+      {view === 'confirm-email'    && <ConfirmEmailPage />}
     </>
   );
 }

@@ -41,6 +41,7 @@ import { createCampaignWorldPulseSlice } from './campaignWorldPulseSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
+import { createAccountImportSlice } from './accountImportSlice.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
 
@@ -63,6 +64,7 @@ export const useStore = create(
           ...createCustomContentSlice(set, get),
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),
+          ...createAccountImportSlice(set, get),
         })),
         {
           name: 'settlementforge',

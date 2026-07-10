@@ -116,6 +116,32 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }
   );
 }
 
+/**
+ * A labelled <select> matching Input's chrome — used by the security-question
+ * pickers at sign-up. `ariaLabel` names the control (the visible label is the
+ * chosen option text, not a persistent label), so it stays accessible without a
+ * separate <label> element.
+ */
+export function Select({ value, onChange, ariaLabel, children }) {
+  return (
+    <select
+      aria-label={ariaLabel}
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      style={{
+        width: '100%',
+        padding: `${SP.md}px ${SP.lg - 2}px`,
+        border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        fontSize: FS['14'], fontFamily: sans,
+        background: swatch.white, color: INK, outline: 'none',
+        boxSizing: 'border-box', cursor: 'pointer',
+      }}
+    >
+      {children}
+    </select>
+  );
+}
+
 export function Checkbox({ checked, onChange, label }) {
   const id = `checkbox-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (

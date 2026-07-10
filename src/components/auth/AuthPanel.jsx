@@ -25,6 +25,7 @@ import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
   // width:100%, variants primary/success/danger/ghost) — kept under an alias so
@@ -51,7 +52,6 @@ export default function AuthPanel({
 }) {
   const authSignUp = useStore(s => s.authSignUp);
   const authSignIn = useStore(s => s.authSignIn);
-  const authResetPassword = useStore(s => s.authResetPassword);
   const authMagicLink = useStore(s => s.authMagicLink);
   const authOAuth = useStore(s => s.authOAuth);
 
@@ -128,20 +128,6 @@ export default function AuthPanel({
     }
   };
 
-  const handleResetPassword = async () => {
-    if (!email.trim()) { setError('Enter your email address'); return; }
-    setError(null);
-    setLoading(true);
-    try {
-      await authResetPassword(email.trim());
-      setMessage('Check your email for a password reset link.');
-    } catch (e) {
-      setError(e.message || 'Password reset failed');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleMagicLink = async () => {
     if (!email.trim()) { setError('Enter your email address'); return; }
     setError(null);
@@ -176,24 +162,13 @@ export default function AuthPanel({
     );
   }
 
-  // ── Password reset request ────────────────────────────────────────────────
+  // ── Forgot-password challenge (Auth Phase 2, gated recovery) ──────────────
+  // The reset mode is the security-question challenge (email → one random
+  // question → the auth-recovery edge function mails the set-new-password link),
+  // NOT a bare "email me a link". The self-contained flow owns its own steps;
+  // decision 8's "security questions + gated recovery" posture, as-shipped.
   if (mode === 'reset') {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
-        <p style={{ fontSize: FS.md, color: SECOND, margin: 0, lineHeight: 1.5 }}>
-          Enter your email and we'll send a link to reset your password.
-        </p>
-        {error && <Alert type="error">{error}</Alert>}
-        {message && <Alert type="success">{message}</Alert>}
-        <Input type="email" placeholder="Email address" value={email} onChange={setEmail} />
-        <AuthCTAButton onClick={handleResetPassword} disabled={loading}>
-          {loading ? 'Sending...' : 'Send Reset Link'}
-        </AuthCTAButton>
-        <Button variant="ghost" size="sm" onClick={() => requestMode('signin')}>
-          Back to Sign In
-        </Button>
-      </div>
-    );
+    return <ForgotPasswordFlow onBackToSignIn={() => requestMode('signin')} />;
   }
 
   // ── Sign-in / Sign-up ─────────────────────────────────────────────────────

@@ -117,4 +117,36 @@ export const supabase = isConfigured
     })
   : null;
 
+// ── Password-recovery flow latch ────────────────────────────────────────────
+// A genuine PASSWORD_RECOVERY event (fired by detectSessionInUrl when the
+// recovery link's token is parsed on load) is the ONLY authorization the
+// set-new-password page trusts. It is latched here at client creation so a
+// pre-mount firing (the hash parse is async and may complete before the page
+// subscribes) is not lost, and read on mount.
+//
+// In-memory only: nothing sensitive is stored, and it never survives a reload —
+// so a forged URL or a stale tab cannot resurrect it. Fail-closed lifecycle:
+// the flag is cleared on USER_UPDATED (the password was rotated, recovery done)
+// and on SIGNED_OUT, so it can never authorize an unrelated later session.
+let recoveryFlowActive = false;
+
+/** True once a genuine PASSWORD_RECOVERY event has fired (and not yet consumed). */
+export function hasActiveRecoveryFlow() {
+  return recoveryFlowActive;
+}
+
+/** Clear the recovery flag once the page has consumed it (one-shot, fail-closed). */
+export function consumeRecoveryFlow() {
+  recoveryFlowActive = false;
+}
+
+if (supabase) {
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'PASSWORD_RECOVERY') recoveryFlowActive = true;
+    // The flow is over once the password is rotated or the user signs out;
+    // never let the flag linger to authorize a later, unrelated session.
+    else if (event === 'USER_UPDATED' || event === 'SIGNED_OUT') recoveryFlowActive = false;
+  });
+}
+
 export { isConfigured };
