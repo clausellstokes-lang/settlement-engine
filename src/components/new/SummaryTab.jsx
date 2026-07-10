@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED, EMPTY_VALUE } from '../theme.js';
+import { formatCount } from '../../domain/formatNumber.js';
 import { TIER_LABELS, catColor } from './design';
 import { serif, TabIntro } from './Primitives';
 import { BODY, FACTION_COLORS } from './tabConstants.js';
@@ -123,7 +124,7 @@ function SummaryTab({ settlement:r }) {
   const copyText=()=>{
     const lines=[
       `# ${name}`,
-      `*${tierLabel} · Pop. ${pop?.toLocaleString()} · ${tradeAccess} · ${hist?.age||'?'} years old*`,
+      `*${tierLabel} · Pop. ${formatCount(pop)} · ${tradeAccess} · ${hist?.age||'?'} years old*`,
       stresses.length?'\n**Active Crisis:** '+stresses.map(v=>`${v.label} - ${v.crisisHook}`).join(' | '):'',
       r.arrivalScene?`\n> ${r.arrivalScene}`:'',
       `\n**${characterSentence(r)}**`,
@@ -161,7 +162,7 @@ function SummaryTab({ settlement:r }) {
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:10,marginBottom:8}}>
           <div style={{minWidth:0,flex:1}}>
             <div style={{...serif,fontSize:isMobile?22:28,fontWeight:600,color:swatch['#C49A3C'],lineHeight:1.1,marginBottom:4}}>{name}</div>
-            <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {pop?.toLocaleString()} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
+            <div style={{fontSize:FS.xs,color:swatch.inkMag3,letterSpacing:'0.02em'}}>{tierLabel} · {formatCount(pop)} pop. · {tradeAccess} · est. {hist?.age?`~${hist.age} yrs ago`:'unknown'}</div>
           </div>
           <Button variant="gold" size="md" onClick={copyText} style={{flexShrink:0}}>
             {copied?'✓ Copied!':'Copy'}

@@ -7,6 +7,7 @@
  * future campaign sub-slices a single import home for the shared persistence
  * surface. The module never imports campaignSlice, so there is no cycle.
  */
+import { deepClone } from '../domain/clone.js';
 import { saves as savesService } from '../lib/saves.js';
 import { campaigns as campaignService, isCampaignActive } from '../lib/campaigns.js';
 import {
@@ -28,26 +29,15 @@ import {
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
-  // Roadmap P3: structuredClone is materially faster than JSON round-tripping the
-  // large (~1.8MB @ 10 members) settlement/campaignState payloads the world-pulse
-  // persist path deep-clones. It is native in Node ≥17 and every modern browser
-  // (and the vitest node env). We keep a JSON fallback for TWO cases so the exact
-  // prior semantics are preserved on every path this helper already served:
-  //   1. A runtime without structuredClone (feature-detect).
-  //   2. Inputs structuredClone REFUSES to clone — it throws DataCloneError on
-  //      Immer draft proxies (several call sites clone a live draft, e.g.
-  //      capturePulseSnapshot) and on any function/Symbol-carrying value. JSON
-  //      silently drops those; the catch reproduces that exact behaviour.
-  // Net: a pure speedup on the common plain-object payloads (the ones actually
-  // uploaded), with byte-identical results to before on the draft/exotic paths.
-  if (typeof structuredClone === 'function') {
-    try {
-      return structuredClone(value);
-    } catch {
-      return JSON.parse(JSON.stringify(value));
-    }
-  }
-  return JSON.parse(JSON.stringify(value));
+  // P3.1 clone-seam centralization: delegate to the SINGLE sanctioned seam
+  // (domain/clone.js `deepClone`) instead of hand-rolling structuredClone + a JSON
+  // fallback here. deepClone is structuredClone-primary with a DataCloneError-only
+  // JSON fallback — the exact behaviour this helper needs for the large (~1.8MB @ 10
+  // members) settlement/campaignState payloads and for the Immer draft proxies /
+  // function-carrying values several call sites (e.g. capturePulseSnapshot) clone.
+  // The name + null short-circuit stay so callers are untouched; the bare
+  // hand-rolled JSON round-trip leaves the store tree (deepCloneHotPath lint).
+  return deepClone(value);
 }
 
 /** Unique, sorted channel-type enums from an array of regional impacts. */

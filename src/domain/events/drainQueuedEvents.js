@@ -32,6 +32,7 @@
  *             partyImpacts: Array<{ action:object, originSettlementId:string }>,
  *             drainedCount: number }}
  */
+import { deepClone } from '../clone.js';
 import { applyEvent as domainApplyEvent } from './applyEvent.js';
 import { layerAuthoredDeltas } from './eventPipeline.js';
 import { mapEventToPartyImpact } from './partyEventLinkage.js';
@@ -42,7 +43,7 @@ import { wallClockNow } from '../clock.js';
 
 /** @param {*} value */
 function clone(value) {
-  return value == null ? value : JSON.parse(JSON.stringify(value));
+  return value == null ? value : deepClone(value);
 }
 
 /**

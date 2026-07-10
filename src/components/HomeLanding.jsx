@@ -159,7 +159,7 @@ export default function HomeLanding({ isMobile, signedIn, isPremium = false, onN
               Living World tab (the Realm / Cartographer story). */}
           {signedIn ? (
             <div style={{ marginTop: SP.md, display: 'flex', justifyContent: 'center' }}>
-              <Button variant="ghost" size="sm" onClick={() => onNavigate('howto', { search: '?tab=living' })} style={{ fontFamily: sans, fontSize: FS.xs, color: 'rgba(244,234,208,0.72)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+              <Button variant="ghost" size="sm" onClick={() => onNavigate('howto', { search: '?tab=logic' })} style={{ fontFamily: sans, fontSize: FS.xs, color: 'rgba(244,234,208,0.72)', textDecoration: 'underline', textUnderlineOffset: 3 }}>
                 Learn more about the simulator and the Realm map for Cartographers
               </Button>
             </div>
@@ -243,7 +243,7 @@ export default function HomeLanding({ isMobile, signedIn, isPremium = false, onN
             {t('aboutLiving.qualifier')}
           </div>
           <div style={{ marginTop: SP.lg, display: 'flex', justifyContent: 'center' }}>
-            <Button variant="ghost" size="sm" onClick={() => onNavigate('howto', { search: '?tab=living' })}>
+            <Button variant="ghost" size="sm" onClick={() => onNavigate('howto', { search: '?tab=logic' })}>
               {t('landing.livingCta')}
             </Button>
           </div>

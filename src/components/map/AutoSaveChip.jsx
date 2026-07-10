@@ -101,7 +101,7 @@ export default function AutoSaveChip({ saving = false }) {
     <span
       role="status"
       aria-live="polite"
-      title={saved ? `Last saved at ${new Date(saved).toLocaleString()}` : 'Not yet saved'}
+      title={saved ? `Last saved at ${new Date(saved).toLocaleString('en-US')}` : 'Not yet saved'}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '3px 9px',

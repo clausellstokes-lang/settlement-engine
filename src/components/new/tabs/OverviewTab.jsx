@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
 import {Ti, serif, Section, TabIntro} from '../Primitives';
+import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
@@ -86,7 +87,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.tier}</span>
           <span style={{fontSize:FS.sm,color:MUTED}}>·</span>
-          <span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{r.population?.toLocaleString()} pop.</span>
+          <span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{formatCount(r.population)} pop.</span>
           {r.config?.tradeRouteAccess&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span></>}
           {hist.age&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{hist.age} years old</span></>}
         </div>

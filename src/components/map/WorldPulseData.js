@@ -2,6 +2,7 @@
 // WorldPulsePanel.jsx. These translate the ids/shape the simulation records into
 // the strings the World Pulse cards read. No JSX, no state — pure functions and
 // the small constant Sets the panel filters stressors against.
+import { formatCount } from '../../domain/formatNumber.js';
 
 export function percent(value) {
   return `${Math.round((Number.isFinite(value) ? value : 0) * 100)}%`;
@@ -13,7 +14,7 @@ export function human(value) {
 
 export function signedNumber(value) {
   const n = Math.round(Number(value) || 0);
-  return `${n > 0 ? '+' : ''}${n.toLocaleString()}`;
+  return `${n > 0 ? '+' : ''}${formatCount(n)}`;
 }
 
 export function unique(values = []) {

@@ -405,7 +405,7 @@ export default function AdminPanel({ onBack }) {
                   {msg.message}
                 </div>
                 <div style={{ fontSize: FS.xxs, color: MUTED }}>
-                  From: {msg.email} &middot; {new Date(msg.created_at).toLocaleDateString()}
+                  From: {msg.email} &middot; {new Date(msg.created_at).toLocaleDateString('en-US')}
                 </div>
               </div>
             ))}

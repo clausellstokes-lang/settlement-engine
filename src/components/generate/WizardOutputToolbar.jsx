@@ -10,6 +10,7 @@
 import { ArrowLeft, Zap } from 'lucide-react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 
 export function WizardOutputToolbar({
   settlement,
@@ -44,7 +45,7 @@ export function WizardOutputToolbar({
           {settlement.name || 'Untitled Settlement'}
         </div>
         <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-          {settlement.tier || 'Settlement'} &middot; Pop. {settlement.population?.toLocaleString?.() || '?'}
+          {settlement.tier || 'Settlement'} &middot; Pop. {settlement.population != null ? formatCount(settlement.population) : '?'}
         </div>
       </div>
 

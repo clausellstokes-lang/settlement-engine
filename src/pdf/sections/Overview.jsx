@@ -16,6 +16,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 import {
   ChapterBand, ChapterHeadline, StatStrip, ThreeCol, BulletList, HairRule,
 } from '../primitives/Dense.jsx';
@@ -31,7 +32,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
   const id = vm.identity;
 
-  const populationFmt = id.population ? id.population.toLocaleString() : null;
+  const populationFmt = id.population ? formatCount(id.population) : null;
   const ageFmt = id.age ? `${id.age} yr${id.age === 1 ? '' : 's'}` : null;
 
   return (

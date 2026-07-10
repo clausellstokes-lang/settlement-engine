@@ -24,6 +24,8 @@
  * Pure; never mutates its input.
  */
 
+import { deepClone } from '../clone.js';
+
 // ── Public top-level allowlist ──────────────────────────────────────────────
 // Character-identical (order-independent) to the FUSED migration 123's
 // public_toplevel array inside _gallery_sanitize_public_json (our 050
@@ -174,9 +176,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
   let result;
   if (full) {
     /** @type {Record<string, any>} */
-    let clone;
-    try { clone = structuredClone(settlement || {}); }
-    catch { clone = JSON.parse(JSON.stringify(settlement || {})); }
+    const clone = deepClone(settlement || {});
     // AI prose blobs are the narrated toggle's domain, not this one.
     delete clone.aiData;
     delete clone.aiDailyLife;
@@ -246,9 +246,7 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     );
     const srcNpcs = Array.isArray(srcObj.npcs) ? srcObj.npcs : [];
     /** @type {Record<string, unknown>[]} */
-    let fullSource;
-    try { fullSource = structuredClone(srcNpcs); }
-    catch { fullSource = JSON.parse(JSON.stringify(srcNpcs)); }
+    const fullSource = deepClone(srcNpcs);
     /** @type {Map<string, Record<string, unknown>>} */
     const fullByKey = new Map();
     for (const npc of fullSource) fullByKey.set(galleryMemberKey(npc), npc);

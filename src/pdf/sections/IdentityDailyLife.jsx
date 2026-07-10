@@ -15,6 +15,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
+import { formatCount } from '../../domain/formatNumber.js';
 import {
   ChapterBand, KeyValRow, HairRule, Tag,
 } from '../primitives/Dense.jsx';
@@ -33,7 +34,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm }) {
   const idRows = [
     { label: 'Name',          value: id.name },
     { label: 'Tier',          value: id.tier || '—' },
-    { label: 'Population',    value: id.population ? id.population.toLocaleString() : '—' },
+    { label: 'Population',    value: id.population ? formatCount(id.population) : '—' },
     id.dominantRace   ? { label: 'Dominant Race', value: humanize(id.dominantRace) } : null,
     id.terrain        ? { label: 'Terrain',       value: humanize(id.terrain) } : null,
     id.layout         ? { label: 'Layout',        value: humanize(id.layout) } : null,

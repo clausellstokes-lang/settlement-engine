@@ -13,6 +13,7 @@
  * higher altitude — prose is short, lists are wide, the goal is DM at-a-glance.
  */
 import { jsPDF } from 'jspdf';
+import { formatCount } from '../domain/formatNumber.js';
 import { autoLayout } from './graphLayout.js';
 import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relationshipGraph.js';
 import { truncateAtWord } from '../lib/text.js';
@@ -207,7 +208,7 @@ function buildCover(d, campaign, settlements) {
   };
 
   statRow(col1X, gy,      'Settlements',  settlements.length);
-  statRow(col2X, gy,      'Population',   totalPop.toLocaleString());
+  statRow(col2X, gy,      'Population',   formatCount(totalPop));
   statRow(col1X, gy + 8,  'NPCs',         totalNPCs);
   statRow(col2X, gy + 8,  'Cultures',     cultures.size);
 
@@ -241,7 +242,7 @@ function buildCover(d, campaign, settlements) {
 
   // Footer byline
   d.setFont('helvetica','italic'); d.setFontSize(7); st(d, MUTED);
-  d.text(`Generated ${new Date().toLocaleDateString()}`, centerX, PH - 20, { align: 'center' });
+  d.text(`Generated ${new Date().toLocaleDateString('en-US')}`, centerX, PH - 20, { align: 'center' });
   d.text('SettlementForge', centerX, PH - 15, { align: 'center' });
 }
 
@@ -292,7 +293,7 @@ function buildIndex(d, campaignName, settlements, pageN) {
 
     d.setFont('helvetica','normal'); d.setFontSize(7); st(d, BROWN);
     d.text(truncate(st_.tier || '-', 14), ML + 65, y);
-    d.text(String((Number(st_.population) || 0).toLocaleString()), ML + 95, y);
+    d.text(String(formatCount(Number(st_.population) || 0)), ML + 95, y);
     d.text(truncate(String(st_.culture || '-').replace(/_/g,' '), 20), ML + 118, y);
 
     d.setFont('helvetica','bold');
@@ -564,7 +565,7 @@ function buildDigest(d, campaignName, settlements, pageN) {
       d.setFont('helvetica','bold'); d.setFontSize(7);
       return d.getStringUnitWidth(label) * 7 / d.internal.scaleFactor + 4;
     };
-    const pops = (Number(st_.population) || 0).toLocaleString();
+    const pops = formatCount(Number(st_.population) || 0);
     const right1 = `${pops} pop`;
     const right2 = s(st_.tier || '');
     const right3 = s(String(st_.culture || '').replace(/_/g,' '));

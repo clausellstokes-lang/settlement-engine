@@ -60,11 +60,11 @@ describe('#2c — composer offers ONE merged action', () => {
     expect(EVENT_REGISTRY.PROMOTE_NPC.label).toBe('Promote/Demote NPC');
   });
 
-  // DEFERRED to the components wave — DEMOTE_NPC in NON_AUTHORABLE_EVENTS lands in
-  // src/components/settlement/eventComposer/EventComposerConstants.js (a component
-  // file, out of this domain wave's fence). The registry half (PROMOTE_NPC relabel)
-  // landed above; re-enable when the composer-constants change lands.
-  test.skip('DEMOTE_NPC is hidden from the authoring menu but stays a registry type', () => {
+  // LANDED (Wave 4h) — DEMOTE_NPC now sits in NON_AUTHORABLE_EVENTS in
+  // src/components/settlement/eventComposer/EventComposerConstants.js, so the composer
+  // offers only the merged "Promote/Demote NPC" (PROMOTE_NPC) action while DEMOTE_NPC
+  // stays a first-class registry type for old-log + world-sim back-compat.
+  test('DEMOTE_NPC is hidden from the authoring menu but stays a registry type', () => {
     expect(NON_AUTHORABLE_EVENTS.has('DEMOTE_NPC')).toBe(true);
     expect(NON_AUTHORABLE_EVENTS.has('PROMOTE_NPC')).toBe(false);
     // Still first-class in the engine (back-compat for old logs + world sim).

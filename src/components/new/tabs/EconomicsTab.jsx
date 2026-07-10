@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
+import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -245,7 +246,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
       <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         {[
           {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
-          {label:'Food',value:foodLabel,sub:fb?`${fb.dailyProduction?.toLocaleString()} / ${fb.dailyNeed?.toLocaleString()} lbs/day`:undefined,color:foodColor},
+          {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
         ].map(({label,value,sub,color})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>
@@ -358,9 +359,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         {/* Balance bar */}
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:FS.xs,color:swatch.inkMag3,marginBottom:4}}>
-            <span>Production: {fb.dailyProduction?.toLocaleString()} lbs/day</span>
-            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {fb.importCoverage.toLocaleString()} imported</span>}
-            <span>Need: {fb.dailyNeed?.toLocaleString()} lbs/day</span>
+            <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
+            {fb.importCoverage>0&&<span style={{color:swatch['#2A5A8A']}}>+ {formatCount(fb.importCoverage)} imported</span>}
+            <span>Need: {formatCount(fb.dailyNeed)} lbs/day</span>
           </div>
           <div style={{height:10,background:swatch['#E8DCC8'],borderRadius:5,overflow:'hidden',position:'relative'}}>
             {/* Production bar */}

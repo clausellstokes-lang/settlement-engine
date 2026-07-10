@@ -17,6 +17,7 @@ import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, GOLD_BG, INK, sans, FS, R } from '../theme.js';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import Button from '../primitives/Button.jsx';
+import { t } from '../../copy/index.js';
 
 const COLORS = {
   draft: { bg: '#f3ead8', fg: '#6a4a1c', border: '#c8a96a', icon: Edit3,      label: 'Draft' },
@@ -92,7 +93,7 @@ export default function PhaseBadge() {
             onClick={onCanonize}
             title="Mark as canon. Start tracking in-world events on a timeline"
           >
-            Canonize
+            {t('canon.markCanon')}
           </Button>
         )}
         {phase === 'canon' && !clockBound && (
@@ -126,7 +127,7 @@ export default function PhaseBadge() {
         tone="warning"
         title="Mark settlement as canon?"
         body="Future changes will be logged as in-world events with timeline entries."
-        confirmLabel="Canonize"
+        confirmLabel={t('canon.markCanon')}
         onConfirm={confirmCanonize}
         onCancel={() => setConfirmAction(null)}
       />

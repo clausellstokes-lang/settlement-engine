@@ -26,7 +26,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
 
   if (!active) {
     const retainedUntil = campaign.retentionExpiresAt
-      ? new Date(campaign.retentionExpiresAt).toLocaleDateString()
+      ? new Date(campaign.retentionExpiresAt).toLocaleDateString('en-US')
       : null;
     return (
       <div style={{

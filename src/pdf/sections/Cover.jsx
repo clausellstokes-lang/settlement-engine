@@ -124,7 +124,7 @@ function CrisisRow({ chips }) {
 }
 
 export function Cover({ settlement, narrativeMode = false, vm, isFounder = false, isAnonymous = false }) {
-  const date = new Date().toLocaleDateString(undefined, {
+  const date = new Date().toLocaleDateString('en-US', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
 

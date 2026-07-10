@@ -27,6 +27,7 @@
 import { useMemo } from 'react';
 import { FS, VIOLET, swatch, EMPTY_VALUE } from '../theme.js';
 import { useStore } from '../../store';
+import { formatCount } from '../../domain/formatNumber.js';
 
 const GOLD = swatch['#C9A24C'];
 const INK = swatch['#1B1408'];
@@ -54,7 +55,7 @@ export default function QuickInspector() {
   const s = save.settlement || save;
   const name = s.name || save.name || 'Unnamed';
   const tier = s.tier || save.tier || EMPTY_VALUE;
-  const pop = (s.population || 0).toLocaleString();
+  const pop = formatCount(s.population || 0);
   const pressure = s.pressureSentence || '';
   const topHook = (() => {
     const hooks = Array.isArray(s.plotHooks) ? s.plotHooks

@@ -13,6 +13,7 @@
  * the crisis-twin directive, and the crisisTripleSync structural pins assert
  * that the twin actions are referenced from settlementSlice itself.
  */
+import { deepClone } from '../domain/clone.js';
 import { inferSuccessors } from '../domain/entities/successors.js';
 import { inferImportance } from '../domain/entities/npcs.js';
 
@@ -28,23 +29,13 @@ const MAX_VERSION_HISTORY = 50;
 
 export function cloneJson(value) {
   if (value === undefined || value === null) return value;
-  // Roadmap P3 (global): structuredClone is materially faster than JSON round-
-  // tripping the large settlement/versionHistory payloads this path deep-clones,
-  // and is native in Node ≥17 + every modern browser (and the vitest node env).
-  // The JSON fallback preserves the exact prior semantics on the two paths where
-  // structuredClone can't help: a runtime lacking it, and inputs it REFUSES to
-  // clone — it throws DataCloneError on Immer draft proxies (several call sites
-  // clone a live draft) and on function/Symbol-carrying values, which JSON drops
-  // silently. Kept identical to campaignSliceShared.cloneJson so both store-level
-  // clone helpers behave the same. See that copy for the full rationale.
-  if (typeof structuredClone === 'function') {
-    try {
-      return structuredClone(value);
-    } catch {
-      return JSON.parse(JSON.stringify(value));
-    }
-  }
-  return JSON.parse(JSON.stringify(value));
+  // P3.1 clone-seam centralization: delegate to the SINGLE sanctioned seam
+  // (domain/clone.js `deepClone`) — structuredClone-primary with a DataCloneError-only
+  // JSON fallback — instead of hand-rolling the same round-trip. Correct for the large
+  // settlement/versionHistory payloads this path clones and for the Immer draft proxies
+  // / function-carrying values it may see. The name + null short-circuit stay so callers
+  // are untouched; the hand-rolled JSON round-trip leaves the store tree.
+  return deepClone(value);
 }
 
 export function cappedVersionHistory(history) {
@@ -124,7 +115,7 @@ export function pickleCampaignState(state) {
   return {
     phase:         state.phase || 'draft',
     eventLog:      Array.isArray(state.eventLog) ? [...state.eventLog] : [],
-    systemState:   state.systemState ? JSON.parse(JSON.stringify(state.systemState)) : null,
+    systemState:   state.systemState ? deepClone(state.systemState) : null,
     locks:         state.locks ? { ...state.locks } : {},
     generatedAt:   state.generatedAt || null,
     editedAt:      new Date().toISOString(),

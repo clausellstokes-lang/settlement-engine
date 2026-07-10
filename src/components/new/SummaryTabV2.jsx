@@ -27,6 +27,7 @@
 
 import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
+import { formatCount } from '../../domain/formatNumber.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import Button from '../primitives/Button.jsx';
 
@@ -143,7 +144,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
         }}>
           {String(settlement.tier || 'SETTLEMENT').toUpperCase()}
           {settlement.population != null && (
-            <> · {settlement.population.toLocaleString()} pop</>
+            <> · {formatCount(settlement.population)} pop</>
           )}
           {settlement.config?.tradeRouteAccess && (
             <> · {String(settlement.config.tradeRouteAccess).replace(/_/g, ' ')}</>

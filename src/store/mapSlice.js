@@ -13,6 +13,7 @@
  * terrain mode support.
  */
 
+import { deepClone } from '../domain/clone.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 
@@ -125,14 +126,14 @@ const MAP_UNDO_KEYS = ['placements', 'labels', 'markers', 'forests'];
 function snapshotAnnotations(mapState) {
   const snap = {};
   for (const k of MAP_UNDO_KEYS) {
-    snap[k] = JSON.parse(JSON.stringify(mapState[k] ?? (k === 'placements' ? {} : [])));
+    snap[k] = deepClone(mapState[k] ?? (k === 'placements' ? {} : []));
   }
   return snap;
 }
 
 function restoreAnnotations(mapState, snap) {
   for (const k of MAP_UNDO_KEYS) {
-    if (snap[k] !== undefined) mapState[k] = JSON.parse(JSON.stringify(snap[k]));
+    if (snap[k] !== undefined) mapState[k] = deepClone(snap[k]);
   }
 }
 

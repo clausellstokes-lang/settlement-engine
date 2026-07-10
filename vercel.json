@@ -1,7 +1,8 @@
 {
-  "buildCommand": "npx vite build",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "rewrites": [
+    { "source": "/gallery/:slug", "destination": "/api/gallery-meta?slug=:slug" },
     { "source": "/((?!.*\\.).*)", "destination": "/index.html" }
   ]
 }

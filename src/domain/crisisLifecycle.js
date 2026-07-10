@@ -37,6 +37,7 @@
  * Pure functions — no store, no React, no I/O, no timestamps, no rng.
  */
 
+import { deepClone } from './clone.js';
 import { withActiveCondition, withEventConditionsSynced } from './activeConditions.js';
 import { archetypeForStressor, promoteStressorsToConditions } from './conditionPromotion.js';
 import { STRESSOR_CATALOG, normalizeStressor } from './worldPulse/stressors.js';
@@ -603,5 +604,5 @@ export function crisisTwinFor(worldStressors, event, settlementId) {
       && (String(n.originSettlementId || '') === sid
         || (n.affectedSettlementIds || []).map(String).includes(sid));
   });
-  return raw ? JSON.parse(JSON.stringify(raw)) : null;
+  return raw ? deepClone(raw) : null;
 }

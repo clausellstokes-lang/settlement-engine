@@ -613,7 +613,7 @@ export const createSettlementSlice = (set, get) => ({
       if (targetSaveId) {
         const idx = s.savedSettlements.findIndex(e => String(e.id) === String(targetSaveId));
         if (idx === -1) return;
-        s.savedSettlements[idx].settlement = JSON.parse(JSON.stringify(target.settlement));
+        s.savedSettlements[idx].settlement = cloneJson(target.settlement);
         persistedSettlement = cloneJson(s.savedSettlements[idx].settlement);
         persistedHistory = cloneJson(s.savedSettlements[idx].versionHistory || []);
       }
@@ -956,7 +956,7 @@ export const createSettlementSlice = (set, get) => ({
 
     // Capture the pre-regen snapshot before mutation so the delta
     // composer has a clean `before` reference.
-    const before = JSON.parse(JSON.stringify(settlement));
+    const before = cloneJson(settlement);
 
     if (section === 'npcs') {
       const parts = eng.regenNPCsPipeline(settlement, cfg);

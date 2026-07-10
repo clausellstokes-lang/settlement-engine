@@ -92,7 +92,7 @@ function Entry({ entry, isLatest, onUndo }) {
           {entry.narrativeSummary || entry.event.type}
         </span>
         <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
-          {ts.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
+          {ts.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
         </span>
         {isLatest && (
           <Button

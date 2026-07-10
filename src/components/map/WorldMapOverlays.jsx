@@ -11,6 +11,7 @@ import { Suspense, lazy } from 'react';
 import { sans, FS, R, ELEV, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
+import { t } from '../../copy/index.js';
 import WorldMapTour from './WorldMapTour.jsx';
 import { WORLD_MAP_TOUR_STEPS } from './WorldMapTourSteps.js';
 
@@ -104,8 +105,8 @@ export function WorldMapOverlays({
                   padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
                 }}>
                   <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>
-                    This realm isn't canonized yet — its history can't advance until it is.
-                    Canonize now to lock the world and begin its timeline.
+                    This realm's world clock hasn't started yet — its history can't advance until it does.
+                    Start the World Clock to lock the world and begin its timeline.
                   </div>
                   <Button
                     variant="primary"
@@ -113,7 +114,7 @@ export function WorldMapOverlays({
                     onClick={onCanonizeWorld}
                     disabled={canonizeBusy}
                   >
-                    {canonizeBusy ? 'Canonizing…' : 'Canonize the world'}
+                    {canonizeBusy ? 'Starting…' : t('canon.startWorldClock')}
                   </Button>
                 </div>
               )}

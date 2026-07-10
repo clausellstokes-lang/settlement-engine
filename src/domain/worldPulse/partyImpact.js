@@ -24,6 +24,7 @@
  *  - Pure + deterministic: no rolls, no `new Date()` — the caller threads `now`.
  */
 
+import { deepClone } from '../clone.js';
 import { ensureWorldState, stablePart } from './worldState.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } from './stressors.js';
@@ -394,7 +395,7 @@ export function applyPartyImpact({ campaign, saves = [], action, now = null } = 
     partyAction: action,
     settlementUpdates: (result.settlementUpdates || []).map(update => ({
       ...update,
-      settlement: update.settlement == null ? update.settlement : JSON.parse(JSON.stringify(update.settlement)),
+      settlement: update.settlement == null ? update.settlement : deepClone(update.settlement),
     })),
   };
 }

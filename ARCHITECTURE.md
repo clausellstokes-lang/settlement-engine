@@ -40,16 +40,23 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              their influence-scoring spine) rides a separate first-paint
              `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
-             entities, contradictions, provenance, migrations, schema, summary.
+             entities, contradictions, provenance, migrations, schema, summary,
+             the **campaign world-pulse simulation** (`worldPulse/` — ages a
+             canonized region tick-by-tick: proposals, party impacts, the multi-
+             tick interval orchestrator), regional causality (`region/`), and the
+             fail-closed public-safe display projection (`display/`).
              Was the only gate-typechecked layer; the gate now covers the full tree. <!-- @enforced-by tsconfig.full.json -->
-store/       Zustand slices (14) — the single client state container.
+store/       Zustand slices (15) — the single client state container, incl. the
+             campaign world-pulse, regional, and account-import slices.
 components/   React UI. Inline-styled, token-driven. Large feature panels +
              primitives/ (accessible Dialog/Button/Toast, no native dialogs;
              raw <button> outside primitives/ is forbidden for new files —
              @enforced-by jsx-hygiene/no-raw-button + tests/lint/rawButtonBaseline.test.js,
-             existing 118 files burning down; every icon-only button must carry an
+             existing files burning down; every icon-only button must carry an
              accessible name — @enforced-by jsx-hygiene/icon-button-needs-label) +
-             new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ + auth/.
+             new/tabs/ (dossier tabs) + gallery/ (community gallery) + map/ (World
+             Map + Realm hub) + auth/ + account/ + admin/ + pricing/ + purchase/ +
+             home/ (landing) + region/ + legal/ (terms/privacy/refunds).
 pdf/         PDF generation: sections/ + primitives/ + lib/viewModel.js.
 lib/         Services + glue: saves (Supabase+localStorage), analytics, flags,
              routes, authIntents, customRegistry, dependencyEngine.
@@ -124,12 +131,17 @@ Auth is **two orthogonal axes**: `tier` (anon / free / premium) × `role`
 
 `lib/routes.js` is the single source of truth: a `ROUTES` table mapping internal
 `view` ids ⇄ public paths, plus guards (`auth` / `elevated`). `App.jsx` switches
-on `view`; a single `NAV` array (Create · Settlements · World Map · Compendium ·
-Gallery · About) lives in `App.jsx`, with Pricing as a secondary header link
-(`HERO_LINKS`). The former `/compare` pages are a tab on the **About** page
-(renamed from "How To Use"); Workshop / "Custom Generate" was removed entirely.
-`/workshop` and `/compare*` stay as routes that redirect to those surfaces. The
-mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
+on `view`; the **`NAV` is derived from the `ROUTES` table** (Create · Welcome ·
+Library · Realm · Compendium · Gallery · About), with Pricing as a secondary
+header link. `/` is a marketing front door that resolves to the **Welcome/home**
+landing (returning members route on to their workspace). The former `/compare`
+pages are a tab on the **About** page (renamed from "How To Use"); Workshop /
+"Custom Generate" was removed entirely. `/workshop` and `/compare*` stay as routes
+that redirect to those surfaces. Public gallery dossiers deep-link at
+`/gallery/:slug`, prerendered with per-slug OG tags for non-JS scrapers by
+`api/gallery-meta.js` (a Vercel rewrite that precedes the SPA catch-all). The
+mobile bottom-nav caps at 5 items (Realm is off the mobile bottom nav); desktop
+shows all visible items.
 
 ---
 
@@ -140,7 +152,11 @@ mobile bottom-nav caps at 5 items (slice); desktop shows all visible items.
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
   votes, comments, privacy sanitization, reports, moderation (019-022), all via
-  SECURITY DEFINER RPCs with sanitized public reads. RLS is the security spine.
+  SECURITY DEFINER RPCs with sanitized public reads. The chain extends through
+  the subscription/pricing + referral + dossier-entitlement models, world-pulse
+  atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
+  consent + velocity guards, and gallery view-dedup — up to the current head. RLS
+  is the security spine.
 - **functions/** (Deno edge):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
@@ -184,7 +200,7 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~6,400 tests / ~545 files (unit, property-based, domain/
+- **test** — Vitest, ~7,000 tests / ~589 files (unit, property-based, domain/
   store/lib integration, component/UI smoke, a11y, security, edge-function).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).

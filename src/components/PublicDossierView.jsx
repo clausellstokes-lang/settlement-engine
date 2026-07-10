@@ -30,7 +30,7 @@ const BODY  = swatch['#4A3B22'];
 function formatDate(iso) {
   if (!iso) return '';
   try {
-    return new Date(iso).toLocaleDateString(undefined, {
+    return new Date(iso).toLocaleDateString('en-US', {
       year: 'numeric', month: 'long', day: 'numeric',
     });
   } catch {

@@ -24,6 +24,7 @@
 import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
+import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
 import IconButton from './primitives/IconButton.jsx';
 
@@ -115,7 +116,7 @@ export default function TableView({ settlement, onClose }) {
             }}>
               {String(settlement?.tier || 'SETTLEMENT').toUpperCase()}
               {settlement?.population != null && (
-                <> · {settlement.population.toLocaleString()} pop</>
+                <> · {formatCount(settlement.population)} pop</>
               )}
               {prosperity && <> · {String(prosperity).toUpperCase()}</>}
             </div>

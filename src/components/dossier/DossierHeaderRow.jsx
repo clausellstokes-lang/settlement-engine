@@ -1,4 +1,5 @@
 import { FS, swatch } from '../theme.js';
+import { formatCount } from '../../domain/formatNumber.js';
 import { RefreshCw } from 'lucide-react';
 import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
@@ -40,7 +41,7 @@ export default function DossierHeaderRow({
               <div style={{ display: 'flex', gap: 8, marginTop: 5, flexWrap: 'wrap', alignItems: 'center' }}>
                 <span style={{ fontSize: FS.sm, color: swatch.mutedBrown, textTransform: 'capitalize', fontWeight: 600 }}>{TIER_LABELS[settlement.tier] || settlement.tier}</span>
                 <span style={{ fontSize: FS.sm, color: swatch.inkMag3 }}>{'\u00b7'}</span>
-                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.population?.toLocaleString() + ' pop.'}</span>
+                <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{formatCount(settlement.population) + ' pop.'}</span>
                 {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
                 {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' ? 'Embattled' : 'Frontier'}</span>}
                 {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}

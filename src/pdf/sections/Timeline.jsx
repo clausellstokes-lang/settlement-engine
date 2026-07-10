@@ -42,7 +42,7 @@ export function Timeline({ settlement, narrativeMode, vm }) {
 
 function Entry({ entry }) {
   const ts = new Date(entry.appliedAt);
-  const tsLabel = ts.toLocaleString(undefined, {
+  const tsLabel = ts.toLocaleString('en-US', {
     year: 'numeric', month: 'short', day: 'numeric',
     hour: 'numeric', minute: '2-digit',
   });

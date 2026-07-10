@@ -56,7 +56,7 @@ export default function AdminAnalyticsPanel() {
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.sm }}>
         <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>Analytics</h3>
-        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString()}</span>}
+        {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
       <div role="tablist" aria-label="Dashboard" style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs, margin: `${SP.sm}px 0` }}>

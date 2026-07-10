@@ -374,7 +374,7 @@ export default function WorldMap({ onNavigate } = {}) {
     } else {
       const saveRec = (live.savedSettlements || []).find(s => s.id === data.id);
       if (saveRec && !isCanonSave(saveRec)) {
-        placementReject = 'Only canon settlements can be placed. Canonize it first.';
+        placementReject = 'Only canon settlements can be placed. Mark it Canon first.';
       } else if (Object.values(live.mapState?.placements || {}).some(p => p.settlementId === data.id)) {
         placementReject = `${data.name || 'That settlement'} is already on this map.`;
       }

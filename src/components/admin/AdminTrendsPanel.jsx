@@ -275,7 +275,7 @@ export default function AdminTrendsPanel() {
           <Button variant="gold" size="sm" onClick={load} busy={loading}>{loading ? 'Loading…' : 'Refresh'}</Button>
         </div>
       </div>
-      {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString()}</div>}
+      {refreshedAt && <div style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans, marginTop: 4 }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</div>}
       {softError && (
         <p style={{ fontSize: FS.xs, color: swatch.danger || RED, fontFamily: sans, marginTop: SP.xs }}>
           Some panels couldn’t load: {softError}. (Needs migrations 036–040 deployed.)

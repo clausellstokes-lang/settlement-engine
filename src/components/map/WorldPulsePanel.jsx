@@ -19,6 +19,7 @@ import {
   stressorSummary,
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
+import { t } from '../../copy/index.js';
 
 export default function WorldPulsePanel({ campaign }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
@@ -69,7 +70,7 @@ export default function WorldPulsePanel({ campaign }) {
     try {
       await canonizeCampaignWorld(campaign.id);
     } catch (err) {
-      setActionError(`Canonize failed: ${err?.message || err}`);
+      setActionError(`Starting the world clock failed: ${err?.message || err}`);
     } finally {
       setCanonBusy(false);
     }
@@ -125,13 +126,13 @@ export default function WorldPulsePanel({ campaign }) {
             </div>
           )}
           <OutcomeCard
-            title="Canonize the campaign world first"
-            summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions as canon."
+            title="Start the campaign's World Clock first"
+            summary="World Pulse advancement starts after you lock the map, placements, and campaign assumptions and start the world clock."
             severity={0.45}
             details={['required before advancement']}
             actions={(
-              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Canonize campaign world">
-                <BookMarked size={13} /> {canonBusy ? 'Canonizing' : 'Canonize world'}
+              <SmallButton tone="good" onClick={runCanonizeWorld} disabled={canonBusy} title="Start the campaign's world clock">
+                <BookMarked size={13} /> {canonBusy ? 'Starting…' : t('canon.startWorldClock')}
               </SmallButton>
             )}
           />

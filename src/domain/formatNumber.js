@@ -23,6 +23,24 @@
  *
  * Pure, dependency-free (domain-kernel style): no imports, no rng, no clock —
  * the same doctrine as deterministicSort.js.
+ *
+ * ─── DISPLAY-LAYER RULING (Wave 4h — fixed en-US formatting EVERYWHERE) ───
+ * The same fixed formatting applies to the DISPLAY layer (src/components, src/pdf,
+ * src/utils exports), not only to persisted/replayed output. The architect's UX
+ * call: a shared artifact must render IDENTICALLY for a DM in Berlin and one in
+ * Boston — consistency beats locale-honoring for shareable content. So every count
+ * a component or PDF shows routes through `formatCount` (device-independent en-US
+ * grouping), and the few genuine DATE renders — which need the ICU calendar and so
+ * cannot use formatCount — pin an EXPLICIT 'en-US' locale (never a bare no-arg or
+ * `undefined`-locale toLocale* call, which reads the host locale). This is applied
+ * by CONVENTION in the display trees (screen + exports), not by the eslint
+ * determinism ban, which stays scoped to src/generators + src/domain; the
+ * localeFormatGuard lint pins those engine trees, and this comment is the
+ * standing rationale for the component/pdf convention.
+ *
+ * If locale-aware display is ever wanted it must be display-ONLY (never export/PDF,
+ * whose goldens are byte-stable and support-diffable), set per-ACCOUNT not
+ * per-device, and never feed generation or fingerprints (F13 doctrine).
  */
 
 // Group the integer part in threes with ',' — the fixed, cross-device-stable

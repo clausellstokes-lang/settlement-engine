@@ -61,7 +61,7 @@ function relativeTime(iso) {
 
 function absoluteTime(iso) {
   if (!iso) return '';
-  try { return new Date(iso).toLocaleString(); } catch (_) { return iso; }
+  try { return new Date(iso).toLocaleString('en-US'); } catch (_) { return iso; }
 }
 
 // Chip with label + icon.

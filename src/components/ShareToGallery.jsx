@@ -18,6 +18,7 @@ import { useMemo, useState } from 'react';
 import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
+import { t } from '../copy/index.js';
 import { validateDossier } from '../domain/validation/consistency.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
@@ -163,7 +164,7 @@ export default function ShareToGallery({
 
   async function handlePublish() {
     if (!canonReady) {
-      setError('Canonize the campaign world before sharing this dossier publicly.');
+      setError(`${t('canon.startWorldClock')} before sharing this dossier publicly.`);
       return;
     }
     // Trust gate (feature doc §1b): never publish a dossier whose facts
@@ -488,7 +489,7 @@ export default function ShareToGallery({
       }}>
         {canonReady
           ? "Public dossiers appear in the gallery. Your name and email stay private. Your settlement's event chronicle (event titles and summaries) is publicly visible on the gallery page."
-          : 'Canonize this campaign world before sharing the dossier publicly.'}
+          : `${t('canon.startWorldClock')} before sharing the dossier publicly.`}
       </span>
       {aiOverlayNote}
       {detailsForm}

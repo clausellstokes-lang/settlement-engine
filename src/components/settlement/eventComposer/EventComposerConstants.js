@@ -76,10 +76,15 @@ export const RELATIONSHIP_LABELS = Object.freeze({
 //     one-off events — a stressor IS the ongoing condition these represented.
 //   - DAMAGE_INSTITUTION duplicated IMPAIR_INSTITUTION once the severity slider
 //     was hidden, so Impair Institution is the single "weaken it" action.
+//   - DEMOTE_NPC merged into PROMOTE_NPC (#2c): the composer offers ONE relabeled
+//     action "Promote/Demote NPC" (a promote of A IS a demote of B — one shared
+//     standing swap). DEMOTE_NPC stays a FIRST-CLASS engine type for back-compat
+//     (old event logs + the world sim still apply/undo it), just not authorable.
 export const NON_AUTHORABLE_EVENTS = new Set([
   'KILL_LEADER',
   'CUT_TRADE_ROUTE',          // §9b — replaced by Settlement Dispute (neighbour + relationship)
   'DAMAGE_INSTITUTION',
+  'DEMOTE_NPC',               // #2c — folded into the merged "Promote/Demote NPC" action
   'REFUGEE_WAVE',
   'PLAGUE',
   'RAID_OR_MONSTER_ATTACK',

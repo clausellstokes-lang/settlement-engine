@@ -13,6 +13,7 @@
 import { useMemo } from 'react';
 import { X, ExternalLink, Trash2 } from 'lucide-react';
 import { useStore } from '../../store';
+import { formatCount } from '../../domain/formatNumber.js';
 import { INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, FS, SP, R, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -105,7 +106,7 @@ export default function PlacementDetailCard({ onOpenDetail }) {
           {name}
         </div>
         <div style={{ fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: SP.sm }}>
-          {tier}{pop ? ` · ${pop.toLocaleString()} pop` : ''}
+          {tier}{pop ? ` · ${formatCount(pop)} pop` : ''}
         </div>
 
         {(culture || terrain) && (

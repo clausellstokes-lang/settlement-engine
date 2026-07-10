@@ -67,8 +67,10 @@ function computeItems({ phase, eventCount, narrated, _settlement, save, handlers
   } else if (phase === 'draft' && handlers.onCanonize) {
     items.push({
       id: 'canonize', primary: true, Icon: BookMarked,
-      label: t('detail.canonizeCta'),
-      hint:  t('detail.canonizeHint'),
+      // Two-canon vocabulary: the SETTLEMENT act is "Mark Canon" (distinct from the
+      // campaign "Start the World Clock"). See src/copy/en.js canon.* + PRODUCT_COHERENCE gap 1.
+      label: t('canon.markCanon'),
+      hint:  t('canon.markCanonHint'),
       onClick: handlers.onCanonize,
     });
   } else if (phase === 'canon' && handlers.onApplyEvent) {

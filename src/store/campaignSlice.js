@@ -510,7 +510,7 @@ export const createCampaignSlice = (set, get) => {
       if (!c) return;
       // Pull a deep-cloneable copy of mapState. Override wins if provided.
       const source = mapStateOverride || state.mapState;
-      const clean = JSON.parse(JSON.stringify(source || {}));
+      const clean = cloneJson(source || {});
       c.mapState = {
         schemaVersion: SCHEMA_VERSION,
         fmgSnapshot: clean.fmgSnapshot || null,

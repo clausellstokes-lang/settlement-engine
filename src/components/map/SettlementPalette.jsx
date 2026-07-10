@@ -9,6 +9,7 @@
 import { useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical } from 'lucide-react';
 import { useStore } from '../../store';
+import { formatCount } from '../../domain/formatNumber.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch, EMPTY_VALUE } from '../theme.js';
 
 export default function SettlementPalette({ saves = [], placements = {}, activeCampaign }) {
@@ -241,7 +242,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
           )}
         </div>
         <div style={{ fontSize: FS.xxs, color: SECOND, marginTop: 1 }}>
-          {tier} · {pop.toLocaleString()}
+          {tier} · {formatCount(pop)}
         </div>
         {(threat || stressLabel) && (
           <div style={{
