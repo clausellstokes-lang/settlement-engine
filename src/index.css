@@ -3,9 +3,24 @@
 /* ─────────────────────────────────────────────────────────────────────
    Self-hosted fonts. These used to load from the Google Fonts CDN via a
    render-blocking stylesheet link in index.html; that stylesheet is gone.
-   We now serve the SAME TTFs the PDF path already ships (public/fonts/
-   Lora + Nunito) so the web UI and the exported dossier read in one type
-   voice, with no third-party origin on the critical path.
+   The web UI and the exported dossier read in one type voice (Lora + Nunito)
+   with no third-party origin on the critical path.
+
+   FORMAT — the browser is served WOFF2 (brotli-compressed). WOFF2 is ~65%
+   smaller than the source TTF (the Lora/Nunito faces drop from ~125–135 KB
+   each to ~42–49 KB), so first paint fetches a fraction of the bytes. Every
+   supported browser reads WOFF2 (React 19 itself won't run on anything old
+   enough to lack it), so there is no TTF fallback in the src lists here — a
+   TTF fallback would be dead weight the browser never fetches.
+     The TTFs still SHIP under public/fonts, but only the PDF path consumes
+     them: @react-pdf/renderer registers fonts through fontkit, which can't
+     open WOFF2 the way it opens TTF, so src/pdf/theme.js keeps registering the
+     .ttf?v=2 URLs. Those are fetched only at PDF-export time, never on first
+     paint — so the heavy TTF bytes never touch the landing critical path.
+   Regenerate the WOFF2 from the TTFs with fontTools:
+     python3 -c "from fontTools.ttLib import TTFont; \
+       f=TTFont('public/fonts/X.ttf'); f.flavor='woff2'; f.save('public/fonts/X.woff2')"
+   (needs the `brotli` python package). Guarded by tests/build/fontsAndMeta.test.js.
 
    Every face uses swap display — text paints immediately in the fallback and
    swaps to the web font when it arrives; never a blank (invisible) FOIT.
@@ -25,39 +40,33 @@
    (Nunito 500/600) are synthesized by the browser from the nearest face, as
    they were under the Google variable font. font-family stacks in tokens.js
    keep system fallbacks (system-ui / Georgia) for the pre-swap frame.
-
-   WOFF2 FOLLOW-UP — woff2 would cut these ~125KB TTFs to ~40KB each, but
-   generating it needs brotli (fonttools[woff2]) which isn't installable here
-   without a network fetch. The TTFs are already-shipped assets, so we serve
-   them as-is; add the woff2 conversions (and list them first in each src) when
-   the toolchain is available. Guarded by tests/build/fontsAndMeta.test.js.
    ───────────────────────────────────────────────────────────────────── */
 
 /* Sans — Nunito (exact token name match). */
 @font-face {
   font-family: 'Nunito';
-  src: url('/fonts/Nunito-Regular.ttf') format('truetype');
+  src: url('/fonts/Nunito-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Nunito';
-  src: url('/fonts/Nunito-Italic.ttf') format('truetype');
+  src: url('/fonts/Nunito-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Nunito';
-  src: url('/fonts/Nunito-Bold.ttf') format('truetype');
+  src: url('/fonts/Nunito-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Nunito';
-  src: url('/fonts/Nunito-ExtraBold.ttf') format('truetype');
+  src: url('/fonts/Nunito-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -68,56 +77,56 @@
    names resolve to the same self-hosted files. */
 @font-face {
   font-family: 'Lora';
-  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  src: url('/fonts/Lora-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('/fonts/Lora-Italic.ttf') format('truetype');
+  src: url('/fonts/Lora-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  src: url('/fonts/Lora-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Lora';
-  src: url('/fonts/Lora-BoldItalic.ttf') format('truetype');
+  src: url('/fonts/Lora-BoldItalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Crimson Text'; /* alias → Lora files (see note above) */
-  src: url('/fonts/Lora-Regular.ttf') format('truetype');
+  src: url('/fonts/Lora-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Crimson Text';
-  src: url('/fonts/Lora-Italic.ttf') format('truetype');
+  src: url('/fonts/Lora-Italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Crimson Text';
-  src: url('/fonts/Lora-Bold.ttf') format('truetype');
+  src: url('/fonts/Lora-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Crimson Text';
-  src: url('/fonts/Lora-BoldItalic.ttf') format('truetype');
+  src: url('/fonts/Lora-BoldItalic.woff2') format('woff2');
   font-weight: 700;
   font-style: italic;
   font-display: swap;

@@ -235,3 +235,92 @@ describe('Tier 9.7 — source uses dynamic import for PDF generation', () => {
     });
   }
 });
+
+// ── F41 — PDF render runs in a Web Worker ────────────────────────────────────
+// @react-pdf's toBlob() reconcile + layout + serialization used to freeze the
+// main thread for multiple seconds on a big dossier. The render now lives in
+// src/utils/pdfRender.worker.js; src/utils/generateSettlementPDF.js posts the
+// serializable SettlementPDF props to it and receives the Blob back. These
+// source contracts pin the architecture:
+//
+//   1. The main-thread entry has NO static import of @react-pdf/renderer —
+//      the worker carries its own bundle; the main thread touches vendor-pdf
+//      only via the dynamic-import fallback (worker construction failure).
+//   2. The entry constructs the worker with Vite's statically-analyzable
+//      `new Worker(new URL('…', import.meta.url), { type: 'module' })` form —
+//      anything else and Vite can't emit the worker as its own lazy asset.
+//   3. The fallback is feature-detected (`typeof Worker`), never user-agent
+//      sniffed.
+//   4. The worker module imports the window shim BEFORE @react-pdf — the
+//      vendor browser build reads `window.*` unguarded, and module graphs
+//      evaluate dependencies in import order, so ordering IS the fix.
+
+describe('F41 — PDF worker source contracts', () => {
+  const entrySrc = readFileSync(resolve(process.cwd(), 'src/utils/generateSettlementPDF.js'), 'utf-8');
+  const workerSrc = readFileSync(resolve(process.cwd(), 'src/utils/pdfRender.worker.js'), 'utf-8');
+
+  it('generateSettlementPDF.js has NO static @react-pdf/renderer import (worker owns the render)', () => {
+    expect(entrySrc).not.toMatch(/^import\s.*from\s+['"]@react-pdf\/renderer['"]/m);
+    // The fallback still reaches the renderer — dynamically.
+    expect(entrySrc).toMatch(/import\(['"]@react-pdf\/renderer['"]\)/);
+  });
+
+  it('generateSettlementPDF.js constructs the render worker via the Vite worker syntax', () => {
+    expect(entrySrc).toMatch(/new Worker\(\s*new URL\(['"]\.\/pdfRender\.worker\.js['"],\s*import\.meta\.url\)/);
+    expect(entrySrc).toMatch(/type:\s*['"]module['"]/);
+  });
+
+  it('generateSettlementPDF.js feature-detects Worker (no user-agent sniffing)', () => {
+    expect(entrySrc).toMatch(/typeof Worker/);
+    expect(entrySrc).not.toMatch(/userAgent/);
+  });
+
+  it('pdfRender.worker.js imports the window shim BEFORE @react-pdf/renderer', () => {
+    const shimAt = workerSrc.indexOf("import './pdfWorkerShim.js'");
+    const pdfAt = workerSrc.search(/import\s.*from\s+['"]@react-pdf\/renderer['"]/);
+    expect(shimAt, 'worker must import ./pdfWorkerShim.js').toBeGreaterThanOrEqual(0);
+    expect(pdfAt, 'worker must import @react-pdf/renderer').toBeGreaterThanOrEqual(0);
+    expect(shimAt, 'shim import must precede the @react-pdf import').toBeLessThan(pdfAt);
+    // And it renders the real document component.
+    expect(workerSrc).toMatch(/from\s+['"]\.\.\/pdf\/SettlementPDF\.jsx['"]/);
+  });
+
+  // The worker's own module scope must stay free of dynamic import() —
+  // Vite's default worker.format is 'iife', which hard-fails the build on a
+  // code-split worker graph. (Vendored deps are checked by the build itself;
+  // this pins our file so a future edit fails with a named culprit.)
+  it('pdfRender.worker.js contains no dynamic import()', () => {
+    const code = workerSrc
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    expect(code).not.toMatch(/import\(/);
+  });
+});
+
+// ── F41 — built worker asset (needs dist/) ───────────────────────────────────
+describe.runIf(distExists)('F41 — PDF worker chunk contract', () => {
+  it('the worker is emitted as its own asset and carries the PDF stack', () => {
+    const files = readdirSync(assetsDir);
+    const worker = files.find(f => /^pdfRender\.worker-[A-Za-z0-9_-]+\.js$/.test(f));
+    expect(worker, 'expected a pdfRender.worker-<hash>.js asset').toBeDefined();
+    // It must actually contain the renderer — a tiny worker file would mean
+    // the PDF stack silently failed to bundle in and the render will throw.
+    const size = statSync(join(assetsDir, worker)).size;
+    expect(size).toBeGreaterThan(500_000);
+  });
+
+  it('the worker asset is ABSENT from the entry transitive static closure', () => {
+    const { files } = entryStaticClosure();
+    const workerInClosure = files.filter(f => /^pdfRender\.worker-/.test(f));
+    expect(
+      workerInClosure,
+      `the PDF worker reached first paint via the static graph. Closure:\n  ${files.join('\n  ')}`,
+    ).toHaveLength(0);
+  });
+
+  it('index.html does NOT preload the PDF worker', () => {
+    const html = readFileSync(join(distDir, 'index.html'), 'utf-8');
+    const preloadRe = /<link\s+rel="modulepreload"[^>]*href="[^"]*pdfRender\.worker[^"]*"/g;
+    expect(html.match(preloadRe) || []).toHaveLength(0);
+  });
+});

@@ -16,17 +16,20 @@
 
       Preload the two faces the first paint actually needs so the browser
       fetches them in parallel with the CSS rather than discovering them after
-      it parses @font-face:
+      it parses @font-face. WOFF2 (brotli) — ~65% smaller than the source TTF,
+      so the critical-path font bytes drop from ~258 KB to ~88 KB:
         · Nunito-Regular  — the app body font (body { font-family: 'Nunito' }).
         · Lora-Bold       — the display/heading serif (largest above-the-fold
                             text; the token asks for it via the 'Crimson Text'
                             alias — see the @font-face comment in index.css).
+      The preloaded format MUST match the @font-face src the browser resolves
+      (both WOFF2) or the preload is wasted and the face is fetched again.
       Fonts are always fetched in CORS mode, so `crossorigin` is required on the
       preload even though these are same-origin, or the preload is discarded and
       re-fetched.
     -->
-    <link rel="preload" href="/fonts/Nunito-Regular.ttf" as="font" type="font/ttf" crossorigin />
-    <link rel="preload" href="/fonts/Lora-Bold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/Nunito-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Lora-Bold.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- ── Social / unfurl metadata (Open Graph + Twitter) ────────────────────
       These STATIC tags give the landing page a rich unfurl in Slack, iMessage,
