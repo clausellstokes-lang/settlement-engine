@@ -18,14 +18,22 @@
  * religionState.js imports + re-exports every function here verbatim, so every
  * sim consumer (religiousContest, religionLegitimacy, tests) is unchanged and
  * each function/table keeps exactly one source.
+ *
+ * The ONE import (the dependency-free deityAxes leaf) is the temper-derivation
+ * shim: the niche key reads a deity's temperament THROUGH `deityTemper` (Phase 4
+ * W-F2) rather than off the raw field, so the warlike/peacelike axis can become
+ * derived-from-alignment in W-F4/W-F5. For every EXISTING deity the shim returns
+ * the stored value verbatim ⇒ byte-identical here.
  */
+
+import { deityTemper } from './deityAxes.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /** A deity's niche key — its temperament × alignment. @param {any} d @returns {string} */
 export function nicheOf(d) {
-  return `${d?.temperamentAxis || 'neutral'}:${d?.alignmentAxis || 'neutral'}`;
+  return `${deityTemper(d) || 'neutral'}:${d?.alignmentAxis || 'neutral'}`;
 }
 
 // Slot capacity per settlement tier (how many faiths the populace sustains).

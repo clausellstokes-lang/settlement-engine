@@ -52,6 +52,8 @@ import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
+import { deityTemper } from './deityAxes.js';
+import { methodClash, STANCE_TUNING } from './deityStance.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -124,7 +126,7 @@ function occupationFaithPull(snapshot, occupations, occupierId, convertId) {
   const established = clamp01(1 - (Number(rec.resistance) || 0));          // garrison in control vs still fighting
   const control = clamp01(force * (0.4 + 0.6 * established));
   const deity = deitySnapshotFor(snapshot, occupierId);
-  const warbound = String(deity?.temperamentAxis || '') === 'warlike';
+  const warbound = deityTemper(deity) === 'warlike';                       // through the W-F2 shim (stored verbatim)
   return { control, warbound };
 }
 
@@ -139,12 +141,15 @@ function occupationFaithPull(snapshot, occupations, occupierId, convertId) {
  */
 function incumbentCounterForce(occDeity, incDeity) {
   if (!incDeity) return 0;                                                  // no entrenched faith → no resistance
-  const tGap = Math.abs((TEMPER_POS[occDeity?.temperamentAxis] ?? 0.5) - (TEMPER_POS[incDeity?.temperamentAxis] ?? 0.5)); // 0..1
+  const tGap = Math.abs((TEMPER_POS[deityTemper(occDeity) ?? 'neutral'] ?? 0.5) - (TEMPER_POS[deityTemper(incDeity) ?? 'neutral'] ?? 0.5)); // 0..1 (temper via the W-F2 shim)
   const aGap = Math.abs((ALIGN_POS[occDeity?.alignmentAxis] ?? 0.5) - (ALIGN_POS[incDeity?.alignmentAxis] ?? 0.5));       // 0..1
   // Adjacent temperament (gap ≤ 0.5) mounts NO temperament resistance; an opposed
   // temperament (warlike↔peaceful, gap = 1) does. Opposed alignment resists too.
   const tempResist = Math.max(0, tGap - 0.5) * 2;                           // 0 at gap ≤ 0.5, 1 at gap = 1
-  return clamp01(0.6 * tempResist + 0.6 * aGap);                            // either opposition alone can substantially counter
+  // W-F2 law-METHOD term: opposed law axes (lawful↔chaotic) add resistance; 0 for
+  // any law-neutral/legacy creed ⇒ byte-identical on every existing fixture.
+  const methodResist = STANCE_TUNING.LAW_METHOD_COUNTER * methodClash(occDeity, incDeity);
+  return clamp01(0.6 * tempResist + 0.6 * aGap + methodResist);             // either opposition alone can substantially counter
 }
 
 /**

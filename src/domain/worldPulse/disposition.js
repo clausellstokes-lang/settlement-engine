@@ -41,6 +41,7 @@ import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf, COUP_COERCION } from '../rulingPower.js';
 import { TRAIT_AGGRESSION } from '../../data/npcData.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
+import { deityTemper } from './deityAxes.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -164,10 +165,12 @@ export const DEITY_TEMPER_SIGN = Object.freeze({ warlike: 1, peacelike: -1, neut
 
 /** Signed warlike drive for a settlement's embedded primary-deity snapshot.
  *  0 (no tilt) when there is no deity, a neutral-temperament deity, or an
- *  unrecognized axis — the byte-identity anchor for a deity-free settlement.
+ *  unrecognized axis — the byte-identity anchor for a deity-free settlement. The
+ *  temperament is read THROUGH the W-F2 shim (deityTemper), which returns the
+ *  stored axis verbatim for every existing deity ⇒ byte-identical.
  * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number} */
 function deityTemperDrive(settlement) {
-  const axis = settlement?.config?.primaryDeitySnapshot?.temperamentAxis;
+  const axis = deityTemper(settlement?.config?.primaryDeitySnapshot) ?? 'neutral';
   const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[axis];
   return Number.isFinite(sign) ? sign : 0;
 }

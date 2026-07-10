@@ -27,6 +27,11 @@ import { popToTier } from '../../data/constants.js';
 // SLOTS_BY_TIER folds back into RELIGION_TUNING below (one source per table).
 import { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition, SLOTS_BY_TIER } from './cultImpositionApply.js';
 export { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition };
+// Phase 4 W-F2 — the inter-deity stance leaf. The LOCAL lane consumes the law-METHOD
+// terms only (methodClash / lawSign), gated on the law axis so every law-neutral
+// legacy fixture stays byte-identical; the good–evil fields are the W-F4 global lane.
+import { deityTemper } from './deityAxes.js';
+import { methodClash, lawSign, STANCE_TUNING } from './deityStance.js';
 
 export const RELIGION_TUNING = Object.freeze({
   SLOTS_BY_TIER,
@@ -391,7 +396,17 @@ export function resolvePatronContest(state, rng) {
   // even across niches, with no DM imposition. This is the "top three compete when
   // legitimacy is low" rule: a rotten regime's patron is toppled by a more-rightful faith.
   const patronLegit = patronRef ? clamp01(Number(state.deities[patronRef].legitimacy) || 0) : 1;
-  const organic = Boolean(patronRef) && patronLegit < T.LEGIT_ORGANIC_CONTEST
+  // W-F2 LOCAL lane: a rival whose METHOD opposes the patron's (lawful↔chaotic)
+  // destabilizes the seat — it raises the legitimacy floor at which the patron
+  // becomes organically contestable. methodClash is 0 for every law-neutral/legacy
+  // pair, so this threshold is unchanged (byte-identical) on existing fixtures.
+  const patronDeity = patronRef ? state.deities[patronRef].snapshot : null;
+  let methodPressure = 0;
+  if (patronRef) for (const k of active) {
+    if (k !== patronRef) methodPressure = Math.max(methodPressure, methodClash(patronDeity, state.deities[k].snapshot));
+  }
+  const organicFloor = T.LEGIT_ORGANIC_CONTEST + STANCE_TUNING.CONTEST_METHOD * methodPressure;
+  const organic = Boolean(patronRef) && patronLegit < organicFloor
     && active.some((k) => k !== patronRef && state.deities[k].standing !== 'cult'
          && contestWeightOf(state, k, patronRef) > contestWeightOf(state, patronRef, patronRef));
   const contested = sameNiche || organic;
@@ -480,19 +495,27 @@ function mandateGovWeight(government) {
   return 0;  // merchant / council / republic / oligarchy / confederation — no divine mandate
 }
 
-/** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. @param {any} deity @param {any} government */
+/** Regime↔patron alignment fit (0..1): kindred props more, mismatch less. The
+ * temper is read through the W-F2 shim (stored verbatim ⇒ byte-identical), and a
+ * bounded LAW term folds in the axis the mandate was blind to: a lawful patron
+ * props traditional rule harder, a chaotic patron props it less. The law term is 0
+ * for a law-neutral/legacy patron (lawSign 0) ⇒ byte-identical on every existing
+ * fixture; only law-authored patrons shift. @param {any} deity @param {any} government */
 function mandateAlignmentFit(deity, government) {
   const g = String(government || '').toLowerCase();
   if (/theocra/.test(g)) return 1;                                  // a theocracy IS its patron's faith
-  const temper = deity?.temperamentAxis, align = deity?.alignmentAxis;
+  const temper = deityTemper(deity), align = deity?.alignmentAxis;
+  const law = lawSign(deity);                                       // +1 lawful · −1 chaotic · 0 neutral/legacy
   let fit = 0.75;
   if (/despot|autocra|imperial|empire/.test(g)) {                   // martial / authoritarian
     if (temper === 'warlike') fit += 0.25; if (align === 'evil') fit += 0.1;
     if (temper === 'peaceful') fit -= 0.25; if (align === 'good') fit -= 0.1;
+    fit -= STANCE_TUNING.MANDATE_LAW * Math.max(0, -law);           // a chaotic patron props despots-by-fear LESS
   } else if (/monarch|feudal|kingdom|throne|royal|king|queen/.test(g)) {   // traditional order
     if (align === 'good' || align === 'neutral') fit += 0.15;
     if (temper === 'peaceful' || temper === 'neutral') fit += 0.1;
     if (align === 'evil') fit -= 0.15;
+    fit += STANCE_TUNING.MANDATE_LAW * law;                         // a lawful patron props traditional monarchy harder
   }
   return clamp01(fit);
 }
