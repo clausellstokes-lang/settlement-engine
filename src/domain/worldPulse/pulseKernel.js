@@ -18,6 +18,7 @@ import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
 import { advanceReligionStates } from './religiousContest.js';
+import { realmPietyMult } from './piety.js';
 import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
@@ -52,7 +53,7 @@ import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
-import { normalizeSimulationRules } from './simulationRules.js';
+import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval } from './pulseHelpers.js';
@@ -824,6 +825,8 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   let pantheonSeatSnapshot = null;
   /** @type {Record<string, any> | null} the evolved per-settlement pantheon ledger */
   let nextReligionStates = null;
+  /** @type {Record<string, import('./piety.js').PietyRecord> | null} W-F3: this tick's piety read-model per settlement */
+  let nextPietyByCid = null;
   const religionLocalActive = isSubsystemActive(postTimeSnapshot, 'religion');
   if (religionLocalActive) {
     // Capture the PRE-conversion snapshot for seat aggregation BEFORE the contest's
@@ -831,6 +834,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // either snapshot counts the same seats — but pinning the pre-contest one keeps
     // the aggregation provably pre-tick.)
     pantheonSeatSnapshot = postTimeSnapshot;
+    // W-F3: the realm-piety multiplier g, measured at tick START off the pre-tick
+    // snapshot's projected faithProfile.piety (the anti-runaway seam). Exactly 1.0 when
+    // spread is off / no campaign (toggle-gated) ⇒ byte-identical.
+    const realmMult = realmPietyMult(postTimeSnapshot?.settlements, { spread: isFaithSpreadEnabled(simulationRules) });
     const religion = advanceReligionStates({
       snapshot: postTimeSnapshot,
       worldState,
@@ -838,9 +845,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       now,
       rules: simulationRules,
       rng,                       // DI the pulse PRNG (forked per settlement for the patron contest)
+      realmMult,
     });
     religiousOutcomes = religion.outcomes;
     nextReligionStates = religion.religionStates;
+    nextPietyByCid = religion.pietyByCid;
     // The winner banks a win, the displaced incumbent a loss — read from the
     // PRE-TICK snapshot's deity assignments, never this tick's fresh re-embed.
     pendingFaithDeltas = collectFaithDeltas(religion, pantheonSeatSnapshot);
@@ -1066,7 +1075,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // discredited one erodes it (feeding the coup cluster). No-op without religionStates,
     // a non-royal/theocratic government, or a deity-free settlement (byte-identical).
     if (nextReligionStates) {
-      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId);
+      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid);
       projected = applyDivineMandate(projected);
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };

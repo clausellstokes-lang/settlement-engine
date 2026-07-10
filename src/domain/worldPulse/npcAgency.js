@@ -6,6 +6,10 @@ import {
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor,
 } from '../corruption.js';
+// Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
+// pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
+// position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
+import { corruptionPlaneMultOf } from './piety.js';
 
 export const NPC_ROLE_ARCHETYPES = Object.freeze({
   ruler: {
@@ -702,6 +706,10 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
     // a crime-free town ("the faithful are corrupted from within"). Additive
     // and 0 when no deity ⇒ a deity-free town is byte-identical.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeity;
+    // W-F3 site #7: the corruption-plane amplifier over the onset rate — a devout
+    // chaotic-evil patron makes the rot spread faster, a lawful-good one starves it.
+    // 1.0 for a deity-free / legacy 3-axis / non-devout settlement ⇒ byte-identical.
+    const planePressureMult = deity ? corruptionPlaneMultOf(item.settlement, deity) : 1;
     // Real thieves-guild strength (if threaded) drags effective security down
     // (the feedback loop); falls back to the crime proxy.
     const gs = guildStrengthBy ? guildStrengthBy.get(String(item.id)) : undefined;
@@ -744,7 +752,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
         // where criminal infrastructure exists (RELAXED for an evil deity).
         // A prior exposure (organic or DM) makes re-corruption progressively
         // harder. An evil deity's onset disfavor rides here.
-        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness })) {
+        if (onsetEnabled && flaw && local.random() < onsetHazard({ crime: climate.crime, security: onsetSecurity, prosperity: climate.prosperity, priorExposures, deityDisfavor: disfavor.onset, steadiness, pressureMult: planePressureMult })) {
           npcStates[id] = {
             ...s,
             corruption: true,

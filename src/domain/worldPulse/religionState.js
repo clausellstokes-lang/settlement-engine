@@ -32,6 +32,10 @@ export { nicheOf, capacityForTier, deityRankStrength, reconcileCultImposition };
 // legacy fixture stays byte-identical; the good–evil fields are the W-F4 global lane.
 import { deityTemper } from './deityAxes.js';
 import { methodClash, lawSign, STANCE_TUNING } from './deityStance.js';
+// Phase 4 W-F3 — the piety amplifier read helper. pietyMultOf is the identity
+// short-circuit reader (absent record ⇒ literal 1.0), so the mandate coupling is
+// byte-identical on every deity-free / tick-0 / zero-span fixture.
+import { pietyMultOf } from './piety.js';
 
 export const RELIGION_TUNING = Object.freeze({
   SLOTS_BY_TIER,
@@ -451,8 +455,12 @@ export function patronSnapshot(state) {
  * rightful-claim axis, which folds in the compromise chain), blended with share
  * dominance and damped when contested. Identity no-op when the settlement has no state.
  * @param {import('../settlement.schema.js').SimSettlement} settlement @param {Record<string, any>} religionStates @param {string} saveId
+ * @param {Record<string, import('./piety.js').PietyRecord>|null} [pietyByCid] W-F3: the
+ *   tick's piety read-model per settlement (from advanceReligionStates). Attached to
+ *   faithProfile.piety so next tick's amplified sites read it (tick-START measurement);
+ *   absent ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the oracle.
  */
-export function projectReligionStateOntoSettlement(settlement, religionStates, saveId) {
+export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null) {
   const state = religionStates?.[String(saveId)];
   if (!state || !state.deities) return settlement;
   const active = activeRefs(state.deities);
@@ -469,9 +477,14 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
   // damped when a rival presses. This is what props or fails the throne (applyDivineMandate).
   const patronSecurity = clamp01((0.7 * patronLegit + 0.3 * (patronShare / 100)) * (contested ? 0.65 : 1));
   const snap = patronSnapshot(state);
+  // W-F3: attach the piety read-model (derived-never-stored) when the tick computed one
+  // for this settlement — the tick-START source next tick's amplified sites read. Absent
+  // ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the dormancy oracle.
+  const piety = pietyByCid ? pietyByCid[String(saveId)] : null;
   const faithProfile = {
     patron: snap ? { name: snap.name, deityRef: state.patronRef, share: patronShare, legitimacy: patronLegit } : null,
     deities, contested, patronSecurity,
+    ...(piety ? { piety } : {}),
   };
   return { ...settlement, config: { ...settlement.config, faithProfile } };
 }
@@ -539,7 +552,12 @@ export function applyDivineMandate(settlement) {
   const security = clamp01(Number(profile.patronSecurity) || 0);
   const base = security - 0.45;                  // >0 props, <0 erodes
   const fitFactor = base >= 0 ? fit : 1;         // a mismatched patron props LESS; erosion is fit-agnostic
-  const target = 50 + weight * base * MANDATE_RANGE * fitFactor;
+  // W-F3 site #3: the piety amplifier scales the mandate TARGET swing (a devout city's
+  // divine mandate swings harder in both directions) — the per-tick MANDATE_STEP clamp
+  // below is UNCHANGED, so per-tick boundedness holds. 1.0 (byte-identical) with no
+  // projected piety record (deity-free / tick-0 / zero-span).
+  const pietyMult = pietyMultOf(settlement);
+  const target = 50 + weight * base * MANDATE_RANGE * fitFactor * pietyMult;
   const delta = Math.max(-MANDATE_STEP, Math.min(MANDATE_STEP, (target - leg.score) * MANDATE_PULL));
   const nextScore = Math.round(Math.max(0, Math.min(100, leg.score + delta)));
   if (nextScore === leg.score) return settlement;

@@ -42,6 +42,10 @@ import { governingFactionOf, COUP_COERCION } from '../rulingPower.js';
 import { TRAIT_AGGRESSION } from '../../data/npcData.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
 import { deityTemper } from './deityAxes.js';
+// Phase 4 W-F3 site #8 — the local piety amplifier on the deity-temper drive term.
+// pietyLocalMultOf is the identity short-circuit reader (absent record ⇒ 1.0), so a
+// deity-free / tick-0 / zero-span settlement is byte-identical.
+import { pietyLocalMultOf } from './piety.js';
 
 const A = FACTION_ARCHETYPES;
 
@@ -231,8 +235,10 @@ export function computeAggressiveness(item, worldState, opts = {}) {
 
   // ONE additive warlike-deity term into the SAME drive
   // sum — never a parallel multiplier. 0 when no deity ⇒ the legacy blend ⇒
-  // byte-identical.
-  const deityTemper = deityTemperDrive(settlement);
+  // byte-identical. W-F3 site #8: the LOCAL piety amplifier scales this term (a devout
+  // settlement's patron tilts its posture harder); 1.0 with no piety record, and the
+  // whole term is 0 for a neutral/absent deity regardless, so byte-identity holds.
+  const deityTemper = deityTemperDrive(settlement) * pietyLocalMultOf(settlement);
 
   const drive = W_GOV * gov + W_PERS * pers + W_HIST * hist + W_DEITY * deityTemper;
   if (drive === 0) return 1.0; // no signal anywhere ⇒ the byte-identity anchor

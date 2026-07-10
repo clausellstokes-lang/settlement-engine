@@ -292,6 +292,19 @@ function deityDisfavorMult(mult) {
   return clamp(mult, lo, hi);
 }
 
+// ── W-F3 corruption-plane PRESSURE seam ─────────────────────────────────────
+// The corruption-plane amplifier (piety.corruptionPlaneMult) is a SETTLEMENT-level
+// multiplier over the pressure RATE — distinct from the per-NPC deityDisfavor knob
+// above — passed by the pulse callers (npcAgency / factionCapture) as `pressureMult`.
+// It defaults to 1.0 ⇒ byte-identical (deity-free / legacy 3-axis / non-devout), and
+// is sanity-bounded here; the pressure function's own final min/max clamp is the real
+// containment, so the plane can tilt the forward rate but never death-spiral it.
+const PRESSURE_MULT_MAX = 2.0;
+/** @param {number} mult @returns {number} */
+function pressureRateMult(mult) {
+  return Number.isFinite(mult) ? clamp(mult, 0, PRESSURE_MULT_MAX) : 1.0;
+}
+
 /**
  * Generation-time corruption probability for an ELIGIBLE NPC with a criminal
  * institution present. Caller must check eligibility + criminal presence first.
@@ -319,10 +332,12 @@ export function spawnCorruptionChance({ crime = 0, security = 0.5, prosperity = 
  * resisting the pull: a flaw+temperament NPC turns at `steadiness`× a flaw-only
  * NPC's rate. Defaults to 1.0 ⇒ no temperament / dormant is byte-identical.
  *
- * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number}} [args]
+ * `pressureMult` is the W-F3 corruption-plane amplifier (1.0 default ⇒ byte-identical).
+ *
+ * @param {{crime?:number, security?:number, prosperity?:number, priorExposures?:number, deityDisfavor?:number, steadiness?:number, pressureMult?:number}} [args]
  * @returns {number}
  */
-export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1 } = {}) {
+export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, priorExposures = 0, deityDisfavor = 1, steadiness = 1, pressureMult = 1 } = {}) {
   const t = CORRUPTION_TUNING.onset;
   let p = t.base + n01(crime) * t.crime - n01(security) * t.security - n01(prosperity) * t.prosperity;
   // A burned official is warier + more watched: each prior exposure makes
@@ -331,6 +346,9 @@ export function onsetHazard({ crime = 0, security = 0.5, prosperity = 0.5, prior
   p *= deityDisfavorMult(deityDisfavor);
   // A steady temperament resists the pull (post-sum threshold shift, not a draw).
   p *= clamp(steadiness, 0, 1);
+  // The settlement-level corruption-plane amplifier (chaotic-evil patron + piety ⇒ the
+  // rot spreads faster; lawful-good ⇒ it is starved). 1.0 ⇒ byte-identical.
+  p *= pressureRateMult(pressureMult);
   return clamp(p, t.min, t.max);
 }
 
@@ -358,6 +376,10 @@ export function exposureChance({ security = 0.5, prosperity = 0.5, guildStrength
   // A repeat offender draws more scrutiny: each prior exposure makes re-exposure easier.
   p *= 1 + t.repeatBoost * Math.max(0, priorExposures);
   p *= deityDisfavorMult(deityDisfavor);
+  // NOTE: exposure is the SELF-CLEANING counter-force, not a corruption PRESSURE channel,
+  // so the W-F3 corruption-plane amplifier deliberately does NOT ride here (owner scope:
+  // "pressure channels only") — amplifying the counter-force would make devout-CE clean
+  // up faster, the opposite of the intent.
   return clamp(p, t.min, t.max);
 }
 
@@ -407,10 +429,11 @@ export const CAPTURE_TUNING = Object.freeze({
 
 /** Per-tick chance a faction with a corrupt seat-holder climbs the ladder. The
  *  corrupt member's seat rank (1=agent..3=leader) drives it; security+prosperity
- *  damp it. */
-export function captureAdvanceChance({ rank = 1, security = 0.5, prosperity = 0.5 } = {}) {
+ *  damp it. `pressureMult` is the W-F3 corruption-plane amplifier over the INSTITUTION
+ *  capture rate (a pressure channel) — 1.0 default ⇒ byte-identical. */
+export function captureAdvanceChance({ rank = 1, security = 0.5, prosperity = 0.5, pressureMult = 1 } = {}) {
   const t = CAPTURE_TUNING.advance;
-  const p = t.base + n01((Number(rank) || 1) / 3) * t.rank - n01(security) * t.security - n01(prosperity) * t.prosperity;
+  const p = (t.base + n01((Number(rank) || 1) / 3) * t.rank - n01(security) * t.security - n01(prosperity) * t.prosperity) * pressureRateMult(pressureMult);
   return clamp(p, t.min, t.max);
 }
 

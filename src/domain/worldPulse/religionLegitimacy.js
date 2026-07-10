@@ -22,6 +22,10 @@
 
 import { deityRankStrength, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcCorruptibleFlaw } from '../corruption.js';
+// Phase 4 W-F3 — the government-form × law-axis synergy reads the patron's signed
+// law position (lawSign: +1 lawful · −1 chaotic · 0 neutral/legacy) off the ONE
+// axis projection, so a law-neutral/legacy patron contributes EXACTLY 0.
+import { lawSign } from './deityStance.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
@@ -61,7 +65,49 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   COMPROMISE_TRADITION_FADE: 0.5, // fraction of tenure+neighbour weight stripped at full compromise (entrenched faiths keep some)
   W_INSTITUTION: 0.12,            // max legitimacy a temple-rich settlement lends the ESTABLISHED faith (a bounded
                                   // bonus atop the sum-1 base — creed-agnostic structural backing that entrenches incumbents)
+  // W-F3 government-form × law-axis synergy: a patron whose law position MATCHES the
+  // governance form's law affinity earns extra legitimacy standing; a mismatch (the
+  // trickster over a dukedom, the lawgiver in a freebooter port) is a friction. LAW
+  // AXIS ONLY — the FORM of rule is a law-chaos matter (conduct is good-evil, handled
+  // elsewhere). Bounded (max ±SYNERGY_W × composite piety) and piety-scaled; EXACTLY 0
+  // for a law-neutral/legacy patron or a settlement with no measured piety.
+  SYNERGY_W: 0.06,
 });
+
+// Each governance form carries a signed law-axis affinity (+1 lawful … −1 chaotic,
+// 0 centre) — the "how ordered is the FORM of rule" reading the owner named. Matched
+// by name like mandateGovWeight. THEOCRACY is special (its affinity IS the patron's
+// own law position — synergy by construction), handled in governmentLawFit.
+const GOVERNMENT_LAW_AFFINITY = /** @type {Array<[RegExp, number]>} */ ([
+  [/crimin|syndicate|thiev|outlaw|pirate|bandit/, -1.0],                 // criminal syndicates ⇒ chaotic
+  [/free.?town|frontier|tribal|moot|clan|nomad|compact|commune|anarch/, -0.6], // free-towns / frontier / tribal ⇒ chaotic-lean
+  [/merchant|council|republic|oligarch|confeder|guild|senate|parliament/, 0], // merchant councils ⇒ centre
+  [/monarch|feudal|autocra|imperial|empire|kingdom|throne|royal|king|queen|emperor|duke|dukedom|magistr|magocra|despot|dynast|principality/, 1.0], // feudal/royal/dukedom/magistracy ⇒ lawful
+]);
+
+/** Signed law-axis affinity of a governance form (+1 lawful … −1 chaotic, 0 centre/unknown).
+ *  @param {string|null|undefined} government @returns {number} */
+function governmentLawAffinity(government) {
+  const g = String(government || '').toLowerCase();
+  for (const [re, v] of GOVERNMENT_LAW_AFFINITY) if (re.test(g)) return v;
+  return 0;
+}
+
+/**
+ * The signed government-form × patron-law ALIGNMENT ∈ [−1, +1]: +1 when the patron's
+ * law position matches the form's affinity (prop), −1 on full mismatch (friction), 0
+ * for a law-neutral/legacy patron (lawSign 0) — the byte-identity anchor. A THEOCRACY's
+ * affinity IS the patron's own law position, so alignment = lawSign² ∈ {0, +1}: synergy
+ * by construction, and still 0 for a law-neutral patron. Pure.
+ * @param {{ lawAxis?: string }|null|undefined} deity @param {string|null|undefined} government @returns {number}
+ */
+export function governmentLawFit(deity, government) {
+  const law = lawSign(deity);                       // +1 lawful · −1 chaotic · 0 neutral/legacy
+  if (law === 0) return 0;
+  const g = String(government || '').toLowerCase();
+  const affinity = /theocra/.test(g) ? law : governmentLawAffinity(government);
+  return law * affinity;                            // ∈ [−1, +1]
+}
 
 const clamp01 = (/** @type {number} */ n) => (n < 0 ? 0 : n > 1 ? 1 : n);
 
@@ -92,8 +138,9 @@ export function institutionBackingOf(settlement) {
   return clamp01(weighted / INSTITUTION_SAT);
 }
 
-/** Importance → org-power weight (mirrors entities/npcs importanceWeight). @param {import('../settlement.schema.js').SimNpc} npc */
-function orgPower(npc) {
+/** Importance → org-power weight (mirrors entities/npcs importanceWeight). Exported so
+ *  the clergy lens (W-F3) aggregates the priesthood on the SAME weight. @param {import('../settlement.schema.js').SimNpc} npc */
+export function orgPower(npc) {
   const w = /** @type {Record<string, number>} */ ({ minor: 0.0, notable: 0.4, key: 0.7, pillar: 1.0 });
   return w[String(npc?.importance || 'minor')] ?? 0;
 }
@@ -236,10 +283,11 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
  * endorsement, neighbour recognition, accumulated tenure, and chronicle momentum,
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
- *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any }} args
+ *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any,
+ *   government?:string|null, pietyMult?:number|null }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
@@ -260,7 +308,13 @@ export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, d
   // Religious-institution backing: temples lend bounded, creed-agnostic legitimacy to
   // the faith that holds the seat (scaled by its standing) — entrenching the incumbent.
   const instTerm = T.W_INSTITUTION * clamp01(institutionBacking) * (STANDING_BACKING[entry?.standing] ?? 0.1);
-  return clamp01(base + instTerm - stain);
+  // W-F3 government-form × law synergy: a law-matched patron earns standing, a mismatch
+  // frets it — piety-scaled, and EXACTLY 0 for a law-neutral/legacy patron (governmentLawFit)
+  // OR when no piety was measured (pietyMult null ⇒ deity-free / tick-0 / unit fixtures) ⇒
+  // byte-identical. Governance form read off powerStructure (passed by the driver).
+  const gov = government ?? settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName;
+  const synergy = pietyMult == null ? 0 : T.SYNERGY_W * governmentLawFit(deity, gov) * pietyMult;
+  return clamp01(base + instTerm + synergy - stain);
 }
 
 /**

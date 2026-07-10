@@ -54,6 +54,11 @@ import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolve
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
 import { deityTemper } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
+// Phase 4 W-F3 — the piety amplifier (§2.3 sites #1/#4/#5) + the clergy lens. All
+// reads go through the identity short-circuit (absent record ⇒ 1.0), so every
+// deity-free / tick-0 / zero-span path stays byte-identical.
+import { pietyMultOf, pietyRecord, devotionOf, amplifierTag, oppositionDampener } from './piety.js';
+import { readClergyPlane } from './clergyTraitPlane.js';
 
 // Regional-prevalence reinforcement: a deity grows stronger in C for each neighbour
 // of C that already holds it as patron (geographic faith clustering), capped.
@@ -228,9 +233,9 @@ function faithCarriersOut(snapshot, fromId) {
  * ONCE per convert and a re-fire merges (the apply-side commutative merge). The
  * outcome ALSO carries `deityReembed` so the apply pass re-embeds the winning
  * neighbour's snapshot onto C's config.primaryDeitySnapshot.
- * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any, cause?: string }} args
+ * @param {{ id: any, targetSaveId: any, severity: any, headline: any, summary: any, reasons: any, tick: any, sourceEventTargetId: any, deityReembed: any, cause?: string, amplifiers?: {localMult:number,realmMult:number}|null }} args
  */
-function conversionOutcome({ id, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, deityReembed, cause = 'contest' }) {
+function conversionOutcome({ id, targetSaveId, severity, headline, summary, reasons, tick, sourceEventTargetId, deityReembed, cause = 'contest', amplifiers = null }) {
   const stressor = normalizeStressor({
     type: 'religious_conversion_fracture',
     originSettlementId: targetSaveId,
@@ -256,6 +261,10 @@ function conversionOutcome({ id, targetSaveId, severity, headline, summary, reas
       durationPolicy: stressor.durationPolicy,
       spreadChannels: stressor.spreadChannels,
       conversionCause: cause,
+      // W-F3: name both piety multipliers on the receipt (owner: "name both
+      // multipliers with causes"). Omitted entirely when no piety was measured, so a
+      // legacy/deity-free conversion outcome is byte-identical.
+      ...(amplifiers ? { amplifiers } : {}),
     },
     // The embed bridge: the apply pass re-embeds this winning-neighbour snapshot
     // onto the convert's config.primaryDeitySnapshot (copied from the neighbour's
@@ -350,12 +359,15 @@ function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, 
  * @param {any} [args.rng]  the pulse PRNG (DI'd, not imported — keeps the domain off
  *   the generators layer). The patron contest forks it per settlement; forking is
  *   consumption-independent, so it never perturbs the rest of the pulse's RNG stream.
- * @returns {{ religionStates: Record<string, any>|null, outcomes: any[], graphChannels: any[] }}
+ * @param {number} [args.realmMult]  W-F3: the realm-piety multiplier g, computed at tick
+ *   START by the kernel (1.0 when spread is off / no campaign). Amplifies the spread-lane
+ *   mints (site #5) and composes into each settlement's composite; 1.0 ⇒ byte-identical.
+ * @returns {{ religionStates: Record<string, any>|null, outcomes: any[], graphChannels: any[], pietyByCid: Record<string, import('./piety.js').PietyRecord> }}
  */
-export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {}, rng = null }) {
+export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rules = {}, rng = null, realmMult = 1 }) {
   // LOCAL lane gate: deity presence alone (no rule flag). Deity-free ⇒ byte-identical
   // (short-circuit before any fork/mint/state).
-  if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [] };
+  if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [], pietyByCid: {} };
   // SPREAD lane gate: cross-settlement propagation is opt-in (faithSpreadEnabled,
   // tolerant of the legacy religionDynamicsEnabled). When off, steps 1-2 (mints +
   // carrier reach) and every cross-settlement read (prevalence + neighbour
@@ -371,6 +383,11 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   const graphChannels = [];
   /** @type {Record<string, any>} */
   const religionStates = {};
+  // W-F3: the per-settlement piety read-model (derived, NOT persisted into
+  // religionStates) — the kernel projects it onto faithProfile.piety, and next tick's
+  // amplified sites read it (tick-START measurement). Empty ⇒ no faithProfile.piety.
+  /** @type {Record<string, import('./piety.js').PietyRecord>} */
+  const pietyByCid = {};
   const bearers = deityBearers(snapshot);
   // convertId → Map(deityRef → { deity, carrier, occupied }). SPREAD-lane only; it
   // stays EMPTY when spread is off, so every reach lookup in step 3 yields undefined
@@ -385,7 +402,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       const rankStrength = deityRankStrength(deity);
       for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
         if (strength < MIN_CARRIER) continue;
-        const mintStrength = clamp01(0.35 + strength * 0.4 + rankStrength * 0.25);
+        // W-F3 site #5: the realm-piety multiplier amplifies the mint strength (a very
+        // religious realm projects authority harder). Spread-lane-only by construction;
+        // realmMult is 1.0 (byte-identical) whenever spread is off / no campaign.
+        const mintStrength = clamp01((0.35 + strength * 0.4 + rankStrength * 0.25) * realmMult);
         graphChannels.push(mintDirectedChannel({
           type: CHANNEL_TYPE, from: fromId, to, strength: mintStrength, confidence: 0.75,
           explanation: `${deity?.name || nameFor(fromId)} projects religious authority from ${nameFor(fromId)} to ${nameFor(to)}.`,
@@ -458,6 +478,13 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // This settlement's faith mass (by current tier) — scales how hard neighbouring
     // faiths press on it: a small settlement is swayed strongly by a big neighbour.
     const targetMass = faithMass(settlement);
+    // W-F3: the TICK-START piety composite for this settlement, read off LAST tick's
+    // projected faithProfile.piety (the anti-runaway seam — this tick's amplified
+    // effects cannot re-enter this tick's piety). 1.0 (byte-identical) on tick-0 /
+    // deity-free / zero-span. `pietySynergy` is the same value but NULL when there is
+    // no measured piety, so the legitimacy synergy stays exactly 0 on those fixtures.
+    const pietyMult = pietyMultOf(settlement);
+    const pietySynergy = settlement?.config?.faithProfile?.piety ? pietyMult : null;
 
     // 3a. entries — faiths reaching C not yet present (or resurging from suppression).
     if (reaching) {
@@ -465,7 +492,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         const { deity, carrier, occupied } = reaching.get(dref);
         const cur = state.deities[dref];
         if (cur && !cur.suppressed) continue;
-        let strength = deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass });
+        // Site #1 (conversion pressure): amplify the target-side local strength — a
+        // devout town is a fiercer battleground both to hold and to take. The
+        // occupation lift (#2) inherits via this amplified strength (not double-counted).
+        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass }));
         if (occupied) {
           const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
           if (pull) {
@@ -483,7 +513,9 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       if (state.deities[dref].suppressed) continue;
       const carrier = reaching?.get(dref)?.carrier ?? (dref === state.patronRef ? 0.5 : 0.25);   // home faith keeps innate footing
-      strengthByRef[dref] = deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass });
+      // Site #1 (share targets): the SAME target-side piety amplification on every
+      // present faith's growth toward its strength (hold AND take, symmetric).
+      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass }));
     }
     advanceShares(state, strengthByRef);
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
@@ -492,7 +524,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       const entry = state.deities[dref];
       if (entry.suppressed) continue;
-      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor });
+      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor, government: settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName, pietyMult: pietySynergy });
       stepDeityLegitimacy(entry, target);
     }
     // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
@@ -502,6 +534,24 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     const contestRng = rng?.fork ? rng.fork(`religion-contest::${tick}::${cid}`) : null;
     if (!contestRng || !resolvePatronContest(state, contestRng)) selectPatron(state);
     religionStates[cid] = state;
+
+    // W-F3: derive THIS tick's piety read-model from the EVOLVED state (authority from
+    // the causal religious_authority score — rank-derived fallback when the causal
+    // snapshot is absent; institution + devotion + the clergy lens). The kernel projects
+    // it onto faithProfile.piety, and NEXT tick's amplified sites read it. Side read-model
+    // only — it does not touch THIS tick's mechanics, so unit fixtures stay byte-identical.
+    const causalAuthority = snapshot?.byId?.get?.(cid)?.causal?.scores?.religious_authority;
+    const authority01 = Number.isFinite(causalAuthority)
+      ? clamp01(Number(causalAuthority) / 100)
+      : clamp01(0.3 + 0.4 * deityRankStrength(patronSnapshot(state)));
+    pietyByCid[cid] = pietyRecord({
+      authority01,
+      institutionBacking,
+      devotion01: devotionOf(state),
+      clergy: readClergyPlane(settlement),
+      realmMult,
+      dampener: oppositionDampener(state),
+    });
 
     // 3c. patron change → a gradual conversion outcome (re-embed the new patron).
     if (state.patronRef && state.patronRef !== prevPatron) {
@@ -514,20 +564,27 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         e.heresyStain = Math.max(Number(e.heresyStain) || 0, RELIGION_TUNING.LEGIT_STAIN_IMPOSED);
       }
       const newPatron = patronSnapshot(state);
+      // Site #4 (contest stakes): a devout city's conversion is a bigger crisis — the
+      // severity scales with the target's piety (0.5 exactly when no record). The
+      // amplifier tag (localMult/realmMult) rides the receipt for legibility.
+      const amplifiers = amplifierTag(settlement);
+      const reasons = [`${newPatron?.name || 'a rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`];
+      if (amplifiers && pietyMult !== 1) reasons.push(`Deep local devotion (piety ×${pietyMult.toFixed(2)}) sharpened the upheaval.`);
       if (newPatron) outcomes.push(conversionOutcome({
         cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',
         id: `world_stressor.religious_conversion_fracture.${stablePart(cid)}`,
         targetSaveId: cid,
-        severity: 0.5,
+        severity: clamp01(0.5 * pietyMult),
         headline: `${nameFor(cid)} turns to the faith of ${newPatron.name || 'a new creed'}`,
         summary: `After a long contest of devotion, ${newPatron.name || 'a rising faith'} has become the patron creed of ${nameFor(cid)}.`,
-        reasons: [`${newPatron.name || 'a rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`],
+        reasons,
         tick,
         sourceEventTargetId: cid,
         deityReembed: { snapshot: newPatron, fromSettlementId: cid },
+        amplifiers,
       }));
     }
   }
 
-  return { religionStates, outcomes, graphChannels };
+  return { religionStates, outcomes, graphChannels, pietyByCid };
 }

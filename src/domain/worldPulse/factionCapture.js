@@ -20,6 +20,9 @@ import {
   readCorruptionClimate, captureAdvanceChance, captureRecoverChance, advanceCaptureState,
   guildEffectiveSecurity, hasCorruptingDeity,
 } from '../corruption.js';
+// Phase 4 W-F3 site #7 — the corruption-plane amplifier over the INSTITUTION capture
+// rate (a pressure channel). 1.0 (byte-identical) for deity-free / legacy / non-devout.
+import { corruptionPlaneMultOf } from './piety.js';
 
 /**
  * The PARALLEL onset-style gate (a corrupt seat-holder climbs
@@ -42,11 +45,16 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
   const climateBy = new Map();
   /** @type {Map<string, boolean>} */
   const corruptingDeityBy = new Map();
+  /** @type {Map<string, number>} the corruption-plane capture-rate amplifier per settlement */
+  const planeMultBy = new Map();
   for (const item of (snapshot?.settlements || [])) {
     climateBy.set(String(item.id), readCorruptionClimate(item.settlement));
     // Per-settlement evil-deity presence (only when the religion layer is
     // ACTIVE). Absent ⇒ false ⇒ the gate behaves exactly as before.
     corruptingDeityBy.set(String(item.id), religionActive && hasCorruptingDeity(item.settlement));
+    // Corruption-plane amplifier over the capture rate (1.0 when inactive / legacy /
+    // non-devout ⇒ byte-identical).
+    planeMultBy.set(String(item.id), religionActive ? corruptionPlaneMultOf(item.settlement) : 1);
   }
 
   const transitions = [];
@@ -70,7 +78,7 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
     const local = rng.fork(`cap:${fid}:${tick}`);
     let next = cur;
     if (maxCorruptRank > 0 && onsetEnabled) {
-      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity })) {
+      if (local.random() < captureAdvanceChance({ rank: maxCorruptRank, security: effSecurity, prosperity: climate.prosperity, pressureMult: planeMultBy.get(String(fs.settlementId)) ?? 1 })) {
         next = advanceCaptureState(cur, true);
       }
     } else if (cur !== 'none') {
