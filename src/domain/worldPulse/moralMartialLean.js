@@ -26,6 +26,16 @@
  *
  * PURE: no rng, no wall-clock, no mutation. A settlement with none of these
  * institutions reads {0,0} ⇒ the endogenous-conduct term is 0 ⇒ byte-identical.
+ *
+ * PHASE 5 SPLIT (2026-07-11). This leaf stays CANONICAL for the leans generation
+ * reads — it is frozen here, imports NOTHING, and is NOT extended to new catalog
+ * institutions (that would flip settlements the golden manifest already pins from
+ * {0,0} to a live lean). Phase 5's fuller per-institution coding lives in the
+ * generation-inert side-car domain/display/institutionVocabulary.js (INSTITUTION_MORAL_LEAN
+ * is a SUPERSET; INSTITUTION_MARTIAL_ROLE carries role tags while the lawful/
+ * chaotic FORM stays here). tests/data/institutionVocabulary.test.js is the DRIFT
+ * PIN: it asserts the side-car agrees with this leaf on every seed-overlap value.
+ * Keep this leaf import-free; the pin lives in the test, never a cross-import.
  */
 
 /** @typedef {{ cruelty: number, disorder: number }} PlaneLean signed −1..+1 on each axis */

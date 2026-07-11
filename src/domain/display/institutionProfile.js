@@ -12,9 +12,11 @@
  *   - power     → the backing faction in the settlement's power structure
  *   - defense   → the defence role it fills (defenseProfile.institutions buckets)
  *
- * `oneLiner` is intentionally null: a hand-authored short description is Phase 5
- * work. We derive nothing fake to fill it — the card simply omits that row until
- * real copy exists.
+ * `oneLiner` is the authored institution identity: a short, generic, DM-usable
+ * description read from the Phase 5 vocabulary side-car (./institutionVocabulary.js)
+ * by canonical name. It is UI-only content, never generation output. Custom /
+ * DM institutions with no authored identity resolve to null, and the card
+ * honestly omits that row rather than inventing copy.
  */
 
 import { institutionHasAnyTag } from '../../lib/entities.js';
@@ -22,6 +24,7 @@ import { RESOURCE_CHAINS } from '../../data/resourceData.js';
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
+import { identityForInstitution } from './institutionVocabulary.js';
 
 /**
  * @typedef {Object} InstitutionContribution
@@ -281,5 +284,5 @@ export function deriveInstitutionProfile(institution, settlement = {}) {
     });
   }
 
-  return { name, oneLiner: null, contributions };
+  return { name, oneLiner: identityForInstitution(inst), contributions };
 }

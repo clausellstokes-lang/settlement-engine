@@ -71,14 +71,23 @@ describe('InstitutionLink — opens the card with derived content', () => {
 });
 
 describe('InstitutionCard — direct render', () => {
-  test('renders the derived profile and omits the null one-liner row', () => {
+  test('renders the derived profile and the authored one-liner', () => {
     render(<InstitutionCard open institution={mill} settlement={settlement} onClose={() => {}} />);
     const dialog = screen.getByRole('dialog');
     expect(dialog).toBeTruthy();
     // The Processes / Gates contributions render their derived detail.
     expect(screen.getByText('Milled flour')).toBeTruthy();
-    // oneLiner is null → no paragraph invents copy; the header still shows the name.
+    // Phase 5: the authored identity one-liner renders above the contributions.
+    expect(screen.getByText(/grinds the district's grain/i)).toBeTruthy();
     expect(screen.getByRole('heading', { name: 'Mill' })).toBeTruthy();
+  });
+
+  test('honesty gate: an institution with no authored identity renders no one-liner', () => {
+    const custom = { name: 'The Broken Wheel Meetinghouse', priorityCategory: 'economy' };
+    render(<InstitutionCard open institution={custom} settlement={settlement} onClose={() => {}} />);
+    expect(screen.getByRole('heading', { name: 'The Broken Wheel Meetinghouse' })).toBeTruthy();
+    // No fabricated copy: the card omits the one-liner row entirely.
+    expect(screen.queryByText(/grinds the district/i)).toBeNull();
   });
 
   test('closed card renders nothing', () => {
