@@ -7,6 +7,7 @@ import { EditableText } from '../primitives/EditableText.jsx';
 import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { describeCompromiseLifecycle } from '../../domain/display/causeLifecycleVocabulary.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -139,6 +140,9 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   const publicTraits = traits.filter(t => t.visibility !== 'gm');
+  // W-C5: the worldPulse-attributed cause + lifecycle stage, rendered through the
+  // generic content floor. Null unless the world pulse touched this compromise.
+  const compromiseLc = describeCompromiseLifecycle(npc.compromiseLifecycle);
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
@@ -202,10 +206,18 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
           {(npc.corrupt || npc.ousted) && (
             <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap',margin:'6px 0',fontSize:FS.xs}}>
               {npc.corrupt ? (
+                // W-C5: the lifecycle stage tunes the badge — a historicized compromise
+                // reads muted ("Longstanding"), an exposed one reads "Exposed", the rest
+                // "Compromised". Falls back to the plain badge when the pulse never touched it.
                 <span style={{
-                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.danger,
-                  background:'rgba(139,26,26,0.12)',border:'1px solid rgba(139,26,26,0.4)',borderRadius:4,padding:'1px 6px',
-                }}>Compromised</span>
+                  fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
+                  ...(compromiseLc?.tone === 'muted'
+                    ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.10)', border:'1px solid rgba(120,90,40,0.35)' }
+                    : compromiseLc?.tone === 'exposed'
+                      ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.12)', border:'1px solid rgba(120,90,40,0.4)' }
+                      : { color:swatch.danger, background:'rgba(139,26,26,0.12)', border:'1px solid rgba(139,26,26,0.4)' }),
+                  borderRadius:4,padding:'1px 6px',
+                }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
@@ -216,6 +228,9 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
                 <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to {npc.corruptTies.criminalInstitution}</span>
               )}
             </div>
+          )}
+          {npc.corrupt && compromiseLc?.phrase && (
+            <p style={{fontSize:FS.xs,color:swatch.inkMag3,margin:'2px 0 6px',lineHeight:1.4,fontStyle:'italic'}}>{compromiseLc.phrase}</p>
           )}
           {npc.replacedNpc && (
             <div style={{margin:'6px 0',fontSize:FS.xs,color:swatch.inkMag3,fontStyle:'italic'}}>

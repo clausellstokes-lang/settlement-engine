@@ -58,6 +58,7 @@ import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { evaluateMoralInstitutionPressure, evaluateMoralInstitutionFounding } from './moralInstitutionPressure.js';
 import { advanceInstitutionTolerance } from './institutionTolerance.js';
+import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecycleNewsEntries } from './causeLifecycle.js';
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
@@ -1184,6 +1185,53 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       const rest = { ...memoryState }; delete rest.institutionTolerance; memoryState = rest;
     }
   }
+  // W-C5 CAUSE-RESOLUTION LIFECYCLE — the last simulation mechanic. READ-LAST/WRITE-NEXT,
+  // post-apply: reads this tick's SETTLED compromise + condition state, LAZILY attributes a
+  // real cause to each compromise on first touch (worldState-owned; generation schemas
+  // unchanged), and — when an attributed cause genuinely CLEARS and HOLDS the hysteresis
+  // window — evolves the compromise by exactly one of re-cause / reform / historicize (trait
+  // plane + seeded fork), or overrides it via the exposure / infrastructure-death terminals.
+  // The ledger is a PASSIVE annotation (no simulated quantity reads it); the only mutation is
+  // REFORM clearing a tag (undo-clean). Gated so a corruption-free world with no lingering
+  // ledger never enters the pass ⇒ byte-neutral under the dormancy oracle; a world whose
+  // causes never resolve is exact prior bytes (the dormancy law).
+  /** @type {Set<string>} conditionIds reformed this tick (tags to clear on the settlements) */
+  let causeReformedIds = new Set();
+  /** @type {import('./causeLifecycle.js').LifecycleEvent[]} the lifecycle events (receipts + notable-transition news) */
+  let causeLifecycleEvents = [];
+  const anyCompromise = Object.values(memoryState.npcStates || {}).some((/** @type {{ corruption?: boolean }} */ s) => s?.corruption === true);
+  if (memoryState.causeLifecycle !== undefined || anyCompromise) {
+    const lifecycle = advanceCauseLifecycle({
+      snapshot: pantheonSeatSnapshot || postTimeSnapshot,
+      worldState: memoryState,
+      priorLedger: memoryState.causeLifecycle || null,
+      rng: rng.fork('cause-resolution'),
+      tick: worldState.tick,
+    });
+    causeLifecycleEvents = lifecycle.events;
+    // Materialize the ledger only when non-empty; drop the key otherwise (dormancy oracle).
+    if (lifecycle.causeLifecycleByCid && Object.keys(lifecycle.causeLifecycleByCid).length) {
+      memoryState = { ...memoryState, causeLifecycle: lifecycle.causeLifecycleByCid };
+    } else if (memoryState.causeLifecycle !== undefined) {
+      const rest = { ...memoryState }; delete rest.causeLifecycle; memoryState = rest;
+    }
+    // REFORM (undo-clean): a reformed captain comes clean — clear the npcState corruption
+    // (so next tick's mirror agrees) exactly as the ouster path does, minus the ouster/replace.
+    if (lifecycle.reforms.length) {
+      causeReformedIds = new Set(lifecycle.reforms.map((r) => r.conditionId));
+      const npcStates = { ...(memoryState.npcStates || {}) };
+      let mutated = false;
+      for (const r of lifecycle.reforms) {
+        const st = npcStates[r.conditionId];
+        if (!st || st.corruption !== true) continue;
+        npcStates[r.conditionId] = {
+          ...st, corruption: false, corruptionProfile: { corrupted: false, vector: null }, corruptionHeat: 0,
+        };
+        mutated = true;
+      }
+      if (mutated) memoryState = { ...memoryState, npcStates };
+    }
+  }
   // The dossier stops lying: project the per-faction live state
   // (capture rung, momentum band, rivals, institution control) onto each
   // settlement's powerStructure.factions. Seam choice: HERE, after
@@ -1202,6 +1250,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (nextReligionStates) {
       projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid, nextMartialByCid);
       projected = applyDivineMandate(projected);
+    }
+    // W-C5: stamp the lazy compromise-lifecycle display read-model onto compromised NPCs
+    // (the generic floor reads it) + clear the tag on bearers reformed this tick. Byte-inert
+    // to every mechanic (a display annotation); a no-op when no ledger/reform touches this cid.
+    if (memoryState.causeLifecycle || causeReformedIds.size) {
+      projected = projectCauseLifecycleOntoSettlement(
+        projected, memoryState.causeLifecycle || null, update.saveId, worldState.tick, causeReformedIds,
+      );
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
   });
@@ -1239,6 +1295,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     factionCaptureEvents: (factionCapture.transitions || []).slice(0, 24).map((/** @type {any} */ t) => ({
       settlementId: t.settlementId, name: t.name, from: t.from, to: t.to,
     })),
+    // W-C5: the cause-resolution-lifecycle receipts (attribution + every transition),
+    // carrying the conjunction key W2 consumes. Absent when nothing moved (dormancy-neutral).
+    ...(causeLifecycleEvents.length ? {
+      causeLifecycleEvents: causeLifecycleEvents.slice(0, 24).map((e) => ({
+        settlementId: e.cid, npcId: e.npcId, name: e.name, stage: e.stage,
+        causeClass: e.causeClass, family: e.family, priorCause: e.priorCause,
+        ageBand: e.ageBand, conjunctionKey: e.conjunctionKey,
+      })),
+    } : {}),
   };
   // Realm-scope arcs: promote stressors shared across many settlements into
   // named realm-wide Wizard News ("The Great Hunger", "The War"), plus the
@@ -1296,7 +1361,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const captureNewsEntries = captureTransitionNewsEntries(
     factionCapture.transitions, settlementNameFor, worldState.tick, now,
   );
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries, ...pantheonArcEntries];
+  // W-C5: the notable cause-lifecycle transitions reach the Chronicle (a captain re-caused,
+  // reformed, historicized, exposed, or re-adjudicated). Attribution is the resting state and
+  // emits no headline. Empty when nothing transitioned ⇒ byte-neutral.
+  const causeLifecycleNews = causeLifecycleNewsEntries(
+    causeLifecycleEvents, settlementNameFor, worldState.tick, now,
+  );
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...realmEntries, ...pantheonArcEntries];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,

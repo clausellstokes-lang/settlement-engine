@@ -71,20 +71,25 @@ Liveness checks per tick on sustaining-cause entities; both terminals cause-chai
 canon-entering.
 
 ## The temporal constitution (OWNER, 2026-07-11 — audit + registry = Phase 5 W3; age bands = W2 selectors)
-THE TICK IS ONE WEEK (owner-corrected 2026-07-11; verified in advanceInterval.js: "a
-one_year advance is 48 synchronous one-week ticks" — 4-week months, 12-week seasons,
-48-week year). The architect's earlier month assumption was WRONG and may have propagated
-into implementer tuning justifications — the audit must therefore NORMALIZE EVERY constant
-to tick=week, not merely inventory them.
+THE TICK IS ONE WEEK, on the COMMITTED 4-4-5 calendar (corrected 2026-07-11 to the landed
+Calendar Option A, commits 6ca73878 + 888c2769; verified in advanceInterval.js: "a one_year
+advance is 52 synchronous one-week ticks" — 4-week months on the 4/4/5 quarter grid,
+THIRTEEN-week seasons (four equal 13-week quarters; the 5-week months 3/6/9/12 close each
+season), a FIFTY-TWO-week year). The calendar LAW in code is worldState.js's INTERVAL_WEEKS
+{one_week:1, one_month:4, one_season:13, one_year:52} + MONTH_END_WEEKS — derive from those,
+never restate them. The architect's earlier month assumption was WRONG and may have
+propagated into implementer tuning justifications — the audit must therefore NORMALIZE EVERY
+constant to tick=week, not merely inventory them.
 1. AGE BANDS bind the cause-status dimension: this-week (1) / this-month (<=4) /
-   this-season (<=12) / this-year (<=48) / years-past (>48), read from elapsed ticks. PIN:
+   this-season (<=13) / this-year (<=52) / years-past (>52), read from elapsed ticks
+   (domain/ageBands.js — pinned equal to INTERVAL_WEEKS by test). PIN:
    historicizing language ("the lean years") is impossible below the years threshold;
    freshly-resolved causes read fresh ("the pay came through just last month").
 2. THE TEMPORAL REGISTRY: one documented table — constant, world-time meaning, intuitive
    justification IN WEEKS — covering every time constant (legitimacy LAG ~5-6wk half-life,
    piety ~11wk (~a season — audit whether devotion should be slower), tenure half 8wk =
    2 months, stain, sink/revival rates, readiness up (~2-3wk spike), betrayal cooldown 8wk,
-   abolition arc ~5wk to floor, chronicle window 12wk = one season (reads well), rust,
+   abolition arc ~5wk to floor, chronicle window 12wk (~a season; a 4-4-5 season is 13wk), rust,
    cause-status thresholds, ...). COMPLETENESS PIN: no unregistered time constant ships.
 3. FIRST AUDIT CATCH, NOW SEVERE (fix in W3): readiness DOWN_DECAY 0.04/tick = ~17 WEEKS
    (~4 months) against a specced "generation" (~20 years ~= 1,000 ticks => ~0.001-class

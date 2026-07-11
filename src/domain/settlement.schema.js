@@ -780,6 +780,7 @@ export const FIELD_ALIASES = Object.freeze({
  * @property {string|null}   corruptionVector     How they are compromised (corruptionPass.js mirror).
  * @property {number}        timesExposed         How many times their corruption has been surfaced.
  * @property {boolean}       ousted               Whether they have been removed from their seat.
+ * @property {({ causeClass: string, family: string, stage: string, situation: string, role: string, originTick: number|null, resolvedTick: number|null, historicizedTick: number|null, exposedTick: number|null, ageBand: string|null })|null} [compromiseLifecycle]  W-C5 cause-resolution lifecycle RAW stamp (attributed cause + stage + situation + tick stamps + age band; the conjunction key W2 keys off). Null unless the world pulse touched this compromise; the lazy dossier card runs it through the generic content floor.
  * @property {string[]}      leverage             What they control.
  * @property {string[]}      vulnerabilities      What hangs over their head.
  * @property {string[]}      offerToPlayers       Hooks the players can engage with.

@@ -137,7 +137,7 @@ export const FLAGS = Object.freeze({
 
   // ── Simulation ──────────────────────────────────────────────────────────────
   // Advance-scaling: an Advance runs N REAL one-week ticks (week=1, month=4,
-  // season=12, year=48) with a determinate progress bar, a pause-at-forks
+  // season=13, year=52) with a determinate progress bar, a pause-at-forks
   // resume flow, and the auto-resolve toggle — instead of a single coarse step.
   // PROMOTED default-on after the multi-tick STORE integration landed
   // (campaignWorldPulseSlice: the flag-branched advance, resolveIntervalMajors
@@ -146,7 +146,7 @@ export const FLAGS = Object.freeze({
   // byte-identical single-tick advance path.
   advanceMultiTick: {
     default: true,
-    description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=12, year=48) with a progress bar + pause/resume + auto-resolve toggle. Set false to fall back to the byte-identical single-tick advance.',
+    description: 'PROMOTED default-on; flag retained as soak killswitch. Advance runs N real one-week ticks per interval (month=4, season=13, year=52) with a progress bar + pause/resume + auto-resolve toggle. Set false to fall back to the byte-identical single-tick advance.',
   },
   // Runs the multi-tick advance in a Web Worker so the main thread stays
   // interactive during a long advance (a year is 48 synchronous kernel ticks). The

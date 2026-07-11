@@ -22,10 +22,16 @@ import { flag } from '../lib/flags.js';
 import { useStore } from '../store/index.js';
 import { ADVANCE_ERROR_TEXT } from './useRealmInspector.js';
 
-// Interval → real one-week tick count, mirroring the domain's weeksPerInterval.
-// Seeds the progress bar's "of Y" total at click time without importing the heavy
-// (lazy-loaded) domain module. The legacy single-tick path collapses this to 1.
-const ADVANCE_TICKS = { one_week: 1, one_month: 4, one_season: 12, one_year: 48 };
+// Interval → real one-week tick count, mirroring the domain's weeksPerInterval
+// (worldState.js INTERVAL_WEEKS, on the committed 4-4-5 calendar: 13-week seasons,
+// 52-week years). Seeds the progress bar's "of Y" total at click time WITHOUT
+// importing the heavy (lazy-loaded) domain module, which would drag
+// simulationRules/clock/clone into this hook's chunk and threaten the first-paint
+// budget. The value is kept in sync by a drift-pin test that asserts equality with
+// the single-source INTERVAL_WEEKS (tests/hooks/advanceTicksDrift.test.js) — the
+// pin that would have caught the 48→52 calendar change here. The legacy
+// single-tick path collapses this to 1.
+export const ADVANCE_TICKS = { one_week: 1, one_month: 4, one_season: 13, one_year: 52 };
 
 // Progress channel from the multi-tick orchestrator: advanceInterval.js
 // dispatches this CustomEvent on globalThis after EVERY completed kernel tick

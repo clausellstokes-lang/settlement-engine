@@ -551,6 +551,14 @@ export function deriveNpcProfile(npc, settlement) {
     timesExposed:     npc.timesExposed || 0,
     ousted:           npc.ousted === true,
 
+    // W-C5 cause-resolution lifecycle: the RAW worldPulse-attributed stamp
+    // ({causeClass, family, stage, situation, role, tick stamps, ageBand}) — carries
+    // the conjunction key W2 keys off. Null for a compromise the pulse never touched
+    // (never-advanced settlement). Kept RAW here (no display-vocabulary import) so the
+    // structured model stays first-paint-inert; the lazy dossier card runs it through
+    // the generic content floor (describeCompromiseLifecycle) at render.
+    compromiseLifecycle: npc.compromiseLifecycle || null,
+
     // Tier 4.5 structured fields — leverage / vulnerability from template,
     // augmented with the NPC's own secret stakes / plot hooks.
     leverage:        [...template.leverage],
