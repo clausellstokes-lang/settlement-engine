@@ -219,6 +219,45 @@ justified. A settlement-level **Rumors & News** tab inside the World tab surface
 - It POPULATES the settlement dossier's Rumors & News tab as an item whose COMPLETENESS/ACCURACY
   is a function of how far down the telephone chain that settlement sits.
 
+**CARRIERS — trade dominates peacetime, but SEVEN channels carry news (owner, round 9).**
+Information propagates over a UNION of channel-topologies, each with its own GRAPH, SPEED,
+FIDELITY profile, BIAS (= a §4f distortion operator), and NEWS-TYPE affinity. The Rumors & News
+tab aggregates what arrives via ALL of them; the MIX shifts with circumstance.
+- TRADE (dominant, PEACETIME) — the trade route graph; broad reach, moderate fidelity (the
+  telephone), merchant bias; carries commercial + general news. The bulk carrier when routes are open.
+- ARMIES (WARTIME) — follows DIRECTED army movement (not a network); martial bias; carries FRONT
+  news (battles, troop movements, sieges) + its own campaign's PROPAGANDA. An army moving through a
+  peaceful region brings the war with it.
+- REFUGEES (round-5 migration) — follow migration routes (toward safe/similar/prosperous); they ARE
+  the news of their origin's collapse — high emotional salience, distortion biased toward CATASTROPHE
+  (traumatized, exaggerated). A refugee wave is a propagation front of "something terrible happened at X."
+- FAITH NETWORKS — pilgrims / missionaries / clergy over the RELIGION graph (co-religionists, a
+  SEPARATE topology overlaid on geography — reaches across political/trade boundaries); faith bias
+  (reframed in the deity's lens); carries religious news (a miracle, a heresy, a schism, a W-C4
+  deity activation). News travels to fellow believers even where no trade goes.
+- COURIERS — dedicated POINT-TO-POINT carriers (diplomatic dispatches, proclamations, guild post):
+  faster, TARGETED (sender→specific recipient, not broadcast), HIGH fidelity (a written sealed
+  letter resists telephone decay), low distortion — but INTERCEPTABLE (a captured courier = the
+  message doesn't arrive + intelligence to the captor). Institutional/premium (a postal/courier institution).
+- CRIMINALS (round-4/6/7 smuggle network) — the UNDERGROUND channel: follows the smuggle network
+  (thrives in embattled/high-crime/corrupt regions), reaches the underworld ACROSS gates that block
+  official trade; carries illicit news + black-market intelligence. Public face = low-fidelity
+  whispers (rumor), but the network itself may hold HIGH-fidelity spy intelligence.
+- MAGIC — teleport circles (round 7: instant, high-fidelity, zero hops) + scrying/sending: the
+  fastest, most accurate channel where it exists, TARGETED, but MAGIC-gated (none in a magic-opt-out
+  world), rare/premium, limited reach (only where magic infrastructure is).
+- WARTIME↔PEACETIME SHIFT (the payoff): in peace, trade carries the bulk (broad, moderate fidelity).
+  As routes are cut (embattlement/siege), the surviving news shifts to armies (front), refugees
+  (catastrophe), couriers (if not intercepted), smugglers (underground), and magic (if any). A
+  BESIEGED settlement's information DIET changes — it stops hearing merchant news and hears only what
+  refugees/smugglers/magic bring: the round-8 "goes dark" made precise (dark to trade, not to the
+  underground). And CHANNEL DIVERSITY *is* the §4f cross-confirmation mechanism — the entrepôt hears
+  an event via trade AND couriers AND faith AND refugees and triangulates; a one-channel town cannot.
+- NEWS-TYPE AFFINITY: an event's TYPE steers which channel carries it best — economic→trade,
+  military→armies/couriers, disaster→refugees, religious→faith, diplomatic→couriers, illicit→criminals,
+  any-fast→magic/couriers. So a religious schism reaches a trade-less town via pilgrims; a market
+  crash reaches it via merchants; each channel is blind to the news it doesn't carry.
+
 **Fidelity decay — HOW information degrades (the heart of it), a layered model:**
 1. COMPLETENESS decay — details drop. The event has structured fields (who/what/where/when/
    magnitude/cause); each hop, low-salience fields have a seeded chance to fall away. Hops 1–3 ≈
