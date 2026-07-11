@@ -152,8 +152,8 @@ export const landing = {
     cta:      'Forge your first settlement',
     // 'Free. No account needed.' removed here (owner) — the hero already says it.
     tiers: [
-      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up. Up to Town size, nothing kept.' },
-      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size, a Library to keep them, PDF export, and sharing to the Gallery.' },
+      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, completely randomized, no sign-up. Up to Town size, nothing kept.' },
+      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library to keep them, PDF export, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, gallery import.', accent: true },
       { name: 'Founder',      badge: 'Lifetime',          body: 'Everything Cartographer runs, forever. One payment, no clock.' },
     ],
