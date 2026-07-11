@@ -206,11 +206,24 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // engine module that cannot leave first paint) that Rollup HOISTS into the entry once
 // the new lazy surfaces add importers, against a ratchet HEAD had already pinned to a
 // 163 B margin. normalizeSettlement was made lazy first (−2.1 kB, deterministic;
-// settlement-normalize chunk). The FIRST-PAINT REDUCTION PROGRAM is now HIGH-priority
-// and must ratchet this back DOWN: pin the dossier read-model closure lazy where it is
-// not engine-shared, and revisit the eager store slices. Build is deterministic
-// (byte-identical across runs), so this ceiling is stable, not flaky.
-const CLOSURE_BUDGET_BYTES = 1_440_000;
+// settlement-normalize chunk).
+//
+// W4h EXTENSION (2026-07-11): raised 1,440,000 → 1,441,000. The domain-display
+// read-models (armyStrength/tradePressure/visibilityAudit) are imported by TWO lazy
+// surfaces — the PDF Faith&War chapter AND AdminSimTuningPanel — so Rollup hoists ~440 B
+// of the shared closure toward the entry (HEAD 1,439,584 → 1,440,024, 24 B over). SAME
+// mechanism as W4c/W4e above. A manualChunks pin was tried and REVERTED: pinning the 3
+// leaf files co-located their engine-core-shared transitive deps into the pinned chunk,
+// which first-paint (vendor-state) then imports — pulling ~26 kB IN, strictly worse. The
+// real read-model code adds 0 first-paint bytes (verified: entry chunk has zero W4h
+// string-fingerprints). +1,000 covers the 440 B hoist with cross-env Rollup drift margin.
+//
+// The FIRST-PAINT REDUCTION PROGRAM is now HIGH-priority and must ratchet this back DOWN:
+// pin the dossier/war read-model closure lazy where it is not engine-shared (a finer
+// split than the leaf-pin that failed here — the deps must move too), and revisit the
+// eager store slices. Build is deterministic (byte-identical across runs), so this
+// ceiling is stable, not flaky.
+const CLOSURE_BUDGET_BYTES = 1_441_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

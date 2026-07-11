@@ -10,21 +10,23 @@
  *   - settlementWarStatus / liveTradeWars / dispositionStandings  (warStatus.js)
  *   - settlementWarExhaustion / warExhaustionBand / occupiedSettlements
  *   - settlementMobilization                                (mobilizationStatus.js)
+ *   - deployedArmyStatus                                    (armyStrength.js)
  *   - settlementOccupation / occupierHoldings               (occupationStatus.js)
+ *   - settlementTradePressure                               (tradePressure.js)
  *   - pantheonStandings / deityDisplayName                  (pantheonDepth.js)
  *   - realmArcLines                                         (realmArcSummary.js)
  *   - describeDeityEffects                                  (deityEffects.js)
  *   - computeAggressiveness                                 (disposition.js)
  *   - divineMandateStatus / patronContestOdds               (religionState.js)
  *
- * OUR-FLOOR ADAPTATION. THEIRS also read `deployedArmyStatus` (armyStrength.js)
- * and `settlementTradePressure` (tradePressure.js) — two display selectors that
- * do not exist in this tree (the W4b/W4e war/faith port did not bring them).
- * Rather than stub them, those two B-track surfaces (army-in-the-field, trade-
- * pressure ties) are OMITTED: `army` stays null and `tradePressure` stays []. The
- * FaithWar chapter degrades to exactly its off-state for those two lines and
- * renders everything else (siege / occupation / exhaustion / standing / trade
- * wars / deity / pantheon / arcs / mandate / contest).
+ * W4h RE-ADOPTION. `deployedArmyStatus` (armyStrength.js) and
+ * `settlementTradePressure` (tradePressure.js) are now present in this tree (the
+ * W4h domain-display port brought the two pure read-models the earlier war/faith
+ * port dropped), so the two B-track surfaces they feed — the army-in-the-field
+ * line and the trade-pressure ties — are WIRED instead of stubbed. Both remain
+ * PLAYER-SAFE (includeCovert defaults false ⇒ no covert smuggling / GM state) and
+ * self-gating: an army-less / trade-less settlement still collapses to the exact
+ * off-state (`army: null`, `tradePressure: []`), so a peacetime save is unchanged.
  *
  * THE DEITY SNAPSHOT FIELDS ARE `rankAxis` / `alignmentAxis` / `temperamentAxis`
  * (the embedded `config.primaryDeitySnapshot`). We READ those `*Axis` fields —
@@ -60,7 +62,9 @@ import {
   occupiedSettlements,
 } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
+import { deployedArmyStatus } from '../../domain/display/armyStrength.js';
 import { settlementOccupation, occupierHoldings } from '../../domain/display/occupationStatus.js';
+import { settlementTradePressure } from '../../domain/display/tradePressure.js';
 import { pantheonStandings, deityDisplayName } from '../../domain/display/pantheonDepth.js';
 import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
@@ -137,13 +141,15 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // ── B-track surfaces (heuristic, PLAYER-SAFE). The PDF is shareable/exported, so
   // covert state is EXCLUDED (includeCovert defaults false) — same channel-
   // visibility convention as the screen's WarFaithTab + the gallery sanitizer.
-  // OUR-floor: deployedArmyStatus + settlementTradePressure are absent, so the
-  // army-in-the-field + trade-pressure surfaces are omitted (null / []).
+  // W4h: deployedArmyStatus + settlementTradePressure are now present ⇒ the army-
+  // in-the-field + trade-pressure surfaces are WIRED (each self-gates to null / []).
   const mobilization = id ? settlementMobilization({ settlementId: id, worldState }) : null;
-  const army = null; // armyStrength.js absent in this tree — surface omitted.
+  const army = id ? deployedArmyStatus({ settlementId: id, worldState, nameFor }) : null;
   const occupationLive = id ? settlementOccupation({ settlementId: id, worldState, nameFor }) : null;
   const holdings = id ? occupierHoldings({ settlementId: id, worldState, nameFor }) : null;
-  const tradeTies = []; // tradePressure.js absent in this tree — surface omitted.
+  const tradeTies = id
+    ? settlementTradePressure({ settlementId: id, regionalGraph, settlements: occItems, worldState, includeCovert: false, nameFor })
+    : [];
 
   // ── Settlement-local aggressiveness (meaningful even without a campaign) ──
   const aggrItem = { id: id || s?.id, settlement: s };
@@ -199,7 +205,7 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // This is the byte-identity seam: identical result with/without an empty
   // worldState, and identical result for campaign === null.
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow
-    || !!mobilization || !!occupationLive || !!holdings;
+    || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0;
   if (!hasLive && !deity && !cults.length && !livePantheon.length) return null;
 
   const tradeWars = tradeWarsRaw.map(t => {
@@ -232,14 +238,14 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     tradeWars,
     // ── B-track heuristic surfaces (player-safe; mirror WarFaithTab) ──────
     mobilization: mobilization ? { phrase: mobilization.phrase, ticksToDeploy: mobilization.ticksToDeploy } : null,
-    army,
+    army: army ? { targetName: army.targetName, remainingPhrase: army.remainingPhrase, conditionPhrase: army.conditionPhrase } : null,
     occupationLive: occupationLive
       ? { occupierName: occupationLive.occupierName, statePhrase: occupationLive.statePhrase, resistancePhrase: occupationLive.resistancePhrase }
       : null,
     holdings: holdings
       ? { holds: holdings.holds.map(h => h.name), stretchedThin: holdings.stretchedThin, strengthened: holdings.strengthened }
       : null,
-    tradePressure: tradeTies,
+    tradePressure: tradeTies.map(t => ({ partnerName: t.partnerName, phrase: t.phrase, role: t.role })),
     deity,
     // Realm-scope context (pantheon + named arcs) — same selectors the Realm
     // surfaces read. Both [] when religion / war is dormant.

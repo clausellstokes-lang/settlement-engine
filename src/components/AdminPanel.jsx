@@ -22,6 +22,7 @@ import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
 import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
+import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
 import Button from './primitives/Button.jsx';
 import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, PAGE_MAX } from './theme.js';
 
@@ -171,6 +172,17 @@ export default function AdminPanel({ onBack }) {
 
       <Section title="Analytics" icon={BarChart3}>
         <AdminAnalyticsPanel />
+      </Section>
+
+      {/* Simulation tuning — read-only diagnostics over the live campaigns'
+          worldState ledgers through the SAME pure display read-models the DM
+          surfaces + PDF consume: war activity, deployed-army attrition, latent
+          host strength, occupations, pantheon standings, coarse balance
+          warnings, dormant-subsystem verification, and the player-safe
+          visibility audit (proves no covert/GM state leaks to a player view).
+          No engine mutation, no rng, no wall clock. */}
+      <Section title="Simulation Tuning" icon={Zap}>
+        <AdminSimTuningPanel />
       </Section>
     </div>
   );
