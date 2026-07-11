@@ -62,7 +62,7 @@ describe('HomeLanding — scrollable landing', () => {
     await screen.findByText(landing.closer.h2, {}, { timeout: 10_000 });
     const h1s = container.querySelectorAll('h1');
     expect(h1s).toHaveLength(1);
-    expect(h1s[0].textContent).toBe(landing.hero.h1);
+    expect(h1s[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
   });
 
   test('all six section headings render from the copy registry', async () => {

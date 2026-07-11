@@ -25,8 +25,10 @@ export const landing = {
   // removed entirely — no replacement — so the category framing doesn't exclude
   // simulation fans, worldbuilders, and would-be DMs. The H1 leads.
   hero: {
-    h1:        'Your players have a thousand choices. Now you have every answer.',
-    sub:       'SettlementForge generates living towns: economies, people, tensions, history. Then it simulates how they change. Not a dice roll. A world that holds together.',
+    // Two lines, one sentence each (rendered with a <br> in HomeLanding).
+    h1a:       'Your players have a thousand choices.',
+    h1b:       'Now you have every answer.',
+    sub:       'SettlementForge generates living towns: economies, people, tensions, history. Then it simulates how they change. A world that holds together.',
     cta:       'Forge your first settlement',
     signin:    'Sign in',
     reassure:  'Free. No account needed to forge your first town.',
@@ -165,7 +167,7 @@ export const landing = {
 /**
  * tl — resolve a dotted key against the landing namespace. Mirrors copy/index's
  * t() semantics (dotted path + optional {name} interpolation), scoped to the
- * `landing` object so keys are relative: tl('hero.h1'), tl('forge.sizes').
+ * `landing` object so keys are relative: tl('hero.h1a'), tl('forge.sizes').
  * Returns strings interpolated; returns arrays/objects (size/tier/pin lists)
  * verbatim for the components to map over. Loud in DEV on a miss, quiet in PROD.
  */

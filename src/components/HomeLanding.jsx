@@ -75,7 +75,7 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
             fontWeight: 600, lineHeight: 1.12, color: PARCH, textWrap: 'balance',
             textShadow: '0 2px 12px rgba(0,0,0,0.55)',
           }}>
-            {tl('hero.h1')}
+            {tl('hero.h1a')}<br />{tl('hero.h1b')}
           </h1>
           <p style={{
             margin: `0 0 ${SP.xl + SP.sm}px`, maxWidth: 640, fontFamily: serif_, fontStyle: 'italic',
