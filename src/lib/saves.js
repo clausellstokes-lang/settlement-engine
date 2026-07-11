@@ -11,11 +11,29 @@
  */
 
 import { supabase, isConfigured } from './supabase.js';
-import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 import { ACTIVE_SAVE_STATE, activeSaveCount, isSaveActive } from './saveAccess.js';
 import { buildNeighbourBackLink } from '../domain/relationships/neighbourBackLink.js';
 
 const LOCAL_KEY = 'dnd_settlement_saves';
+
+/**
+ * normalizeSettlement wraps the ~30 kB settlement-migration closure. It's only
+ * needed on POST-first-paint paths (loading / saving / importing settlements —
+ * never on the anon landing), so we lazy-load it rather than statically import
+ * it. saves.js is pulled into the eager first-paint chain (store → saves), and
+ * a static edge from here to normalizeSettlement dragged that closure into the
+ * first-paint bundle non-deterministically (build-determinism + first-paint
+ * budget regression). The dynamic import keeps it out of the entry's static
+ * closure. migrateSettlementShape stays SYNCHRONOUS, reading the memoized ref;
+ * every async caller awaits loadNormalize() ONCE before mapping with it.
+ */
+let _normalize = null;
+async function loadNormalize() {
+  if (!_normalize) {
+    _normalize = (await import('../domain/normalizeSettlement.js')).normalizeSettlement;
+  }
+  return _normalize;
+}
 
 /** Generate a client-side UUID for saves we must reference before insert
  *  (the bidirectional link embeds the new save's id in both rows). */
@@ -172,7 +190,7 @@ function withNeighbourNetworkFromRelationship(settlement) {
  */
 function migrateSettlementShape(entry) {
   if (!entry || !entry.settlement) return entry;
-  return { ...entry, settlement: normalizeSettlement(entry.settlement) };
+  return { ...entry, settlement: _normalize(entry.settlement) };
 }
 
 // ── Supabase methods ────────────────────────────────────────────────────────
@@ -183,6 +201,7 @@ async function supabaseList() {
     .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, is_public, public_slug, gallery_description, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
+  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
   return data.map(row => {
     const accessState = row.access_state || ACTIVE_SAVE_STATE;
     const usable = accessState === ACTIVE_SAVE_STATE;
@@ -277,6 +296,7 @@ async function supabaseListActiveByName(name) {
     .select('id, name, tier, data, access_state')
     .eq('name', name);
   if (error) throw error;
+  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
   return (data || []).map(row => migrateSettlementShape(migrateSaveToV2({
     id:         row.id,
     name:       row.name,
@@ -398,6 +418,7 @@ async function localList() {
   // default canonical containers). Cost is trivial — both adapters are
   // pure object spreads — and it makes the rest of the app symmetric
   // with the Supabase path.
+  await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
   return localLoad().map(entry => ({ accessState: ACTIVE_SAVE_STATE, ...entry })).map(migrateSaveToV2).map(migrateSettlementShape);
 }
 

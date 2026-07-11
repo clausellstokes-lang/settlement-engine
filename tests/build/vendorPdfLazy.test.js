@@ -198,7 +198,19 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // (registry-prose split + copy-namespace segmentation, seams mapped since wave 5b)
 // remains FORMALLY SCHEDULED as its own wave before Phase 5 and ratchets DOWN
 // from here.
-const CLOSURE_BUDGET_BYTES = 1_411_000;
+//
+// REUNIFICATION ALLOWANCE (2026-07-11, owner-approved): raised 1,411,000 → 1,440,000
+// for the Phase-5 reunification's Gallery-import (W4c) + dossier Substrate/Magic/
+// War&Faith tabs (W4e). The overage is NOT their own code (all lazy) — it is shared
+// dossier/war read-models (dossierViewModel, warStatus, causalState — the latter an
+// engine module that cannot leave first paint) that Rollup HOISTS into the entry once
+// the new lazy surfaces add importers, against a ratchet HEAD had already pinned to a
+// 163 B margin. normalizeSettlement was made lazy first (−2.1 kB, deterministic;
+// settlement-normalize chunk). The FIRST-PAINT REDUCTION PROGRAM is now HIGH-priority
+// and must ratchet this back DOWN: pin the dossier read-model closure lazy where it is
+// not engine-shared, and revisit the eager store slices. Build is deterministic
+// (byte-identical across runs), so this ceiling is stable, not flaky.
+const CLOSURE_BUDGET_BYTES = 1_440_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

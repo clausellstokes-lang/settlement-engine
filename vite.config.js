@@ -298,6 +298,36 @@ export default defineConfig({
           if (id.includes('/src/generators/lookups.js'))
             return 'data';
 
+          // ── Settlement normalize/migration closure (its own LAZY chunk) ──
+          // normalizeSettlement + its settlementMigrations chain (~30 kB) are the
+          // canonical-shape adapter run on load / save / import and as
+          // assembleSettlement's final generation step. Because a GENERATOR
+          // (steps/assembleSettlement.js) statically imports normalizeSettlement,
+          // computeEngineSharedDomain() auto-seeds BOTH modules into
+          // ENGINE_SHARED_DOMAIN — which would route them into the EAGER
+          // engine-core chunk (isEngineSharedDomain below) and drag the whole
+          // migration closure into first paint, even though no anon-landing path
+          // ever needs it. It also made the first-paint budget NON-DETERMINISTIC:
+          // depending on Rollup's grouping the closure counted ~+200 B (stub) or
+          // ~+30 kB (whole closure). Pin the two modules into their own small
+          // lazy chunk instead. This is safe by construction:
+          //   • The eager save/import modules (lib/saves.js, lib/accountImport.js)
+          //     DYNAMIC-import normalizeSettlement (memoized loaders), so no eager
+          //     chunk statically edges into this one.
+          //   • assembleSettlement reaches it from the lazy `engine` chunk
+          //     (engine → settlement-normalize is lazy → lazy).
+          //   • Its only OUTWARD static edge is settlement.schema.js, which stays
+          //     in engine-core — the safe lazy → eager direction, never the
+          //     reverse (nothing in engine-core imports normalize/migrations).
+          // Removing them from engine-core is what actually reclaims the ~30 kB
+          // AND makes the measurement deterministic. Must match BEFORE the
+          // isEngineSharedDomain rule below.
+          // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte
+          //   budget + engine-absent-from-closure).
+          if (id.includes('/src/domain/normalizeSettlement.js') ||
+              id.includes('/src/domain/settlementMigrations.js'))
+            return 'settlement-normalize';
+
           // ── Engine-core (the first-paint slice of the {generators,domain} ──
           // engine layers). Two kinds of module live here:
           //

@@ -22,7 +22,7 @@
 
 import { saves as savesService } from '../lib/saves.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
-import { validateAccountImport, prepareSettlementEntry } from '../lib/accountImport.js';
+import { validateAccountImport, prepareSettlementEntry, ensureNormalizeLoaded } from '../lib/accountImport.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { persistCampaignState } from './campaignSliceShared.js';
 
@@ -72,6 +72,10 @@ export const createAccountImportSlice = (set, get) => ({
     const importedAt = new Date().toISOString();
 
     // Stage 2–3: per-record validate + migrate-forward + ownership-remap scrub.
+    // prepareSettlementEntry normalizes each record synchronously via a lazily-
+    // imported normalizeSettlement (kept off the first-paint static closure), so
+    // warm that ref once before the loop.
+    await ensureNormalizeLoaded();
     const prepared = [];
     const settlementsSkipped = [];
     for (const raw of rawSettlements) {

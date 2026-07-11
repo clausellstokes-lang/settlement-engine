@@ -26,7 +26,24 @@
  */
 
 import { ACCOUNT_EXPORT_VERSION } from './accountData.js';
-import { normalizeSettlement } from '../domain/normalizeSettlement.js';
+
+/**
+ * normalizeSettlement wraps the ~30 kB settlement-migration closure — only ever
+ * exercised once the user is actively importing (well past first paint). This
+ * module is eagerly reached at first paint via store → accountImportSlice, so a
+ * static import edge from here dragged that closure into the first-paint bundle
+ * non-deterministically (build-determinism + first-paint budget regression).
+ * Lazy-load it instead: prepareSettlementEntry stays a SYNCHRONOUS pure function
+ * reading the memoized ref, and the async importAccountData caller awaits
+ * ensureNormalizeLoaded() ONCE before the per-record loop (mirrors saves.js).
+ */
+let _normalize = null;
+export async function ensureNormalizeLoaded() {
+  if (!_normalize) {
+    _normalize = (await import('../domain/normalizeSettlement.js')).normalizeSettlement;
+  }
+  return _normalize;
+}
 
 /**
  * Hard read cap (bytes). Well above any legitimate export — a free user holds 3
@@ -120,10 +137,13 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
 
   // Migrate-forward + canonicalize. normalizeSettlement runs the migration chain
   // (forward-version guard included) as its final step; a record this build
-  // can't read throws and is dropped, never mis-migrated into the library.
+  // can't read throws and is dropped, never mis-migrated into the library. The
+  // caller (importAccountData) awaits ensureNormalizeLoaded() before this loop,
+  // so the lazily-imported ref is populated; a null ref throws here and is caught
+  // as an unsupported-shape drop — fail-closed, same as any migration throw.
   let normalized;
   try {
-    normalized = normalizeSettlement(rawSettlement);
+    normalized = _normalize(rawSettlement);
   } catch {
     return { ok: false, reason: 'Could not read this settlement (unsupported shape).' };
   }
