@@ -98,7 +98,7 @@ to tick=week, not merely inventory them.
 5. SANCTIONED FAST PATHS, explicitly marked (the owner's extreme-case exception):
    compromise-fiat legitimacy collapse, conquest conversion — deliberate, documented, rare.
 
-## The Repaint Wave (OWNER, 2026-07-11 — Phase 5, between the engine companion and session mode)
+## The Repaint + Reunification Wave (OWNER, 2026-07-11 — Phase 5, between the engine companion and session mode)
 The merge left a VISUAL SEAM: adopted surfaces (landing/pricing/legal) wear the reference
 universe's page-shell language; kept-functional-core surfaces (GenerateWizard, Library/
 SettlementsPanel, CompendiumPanel, GalleryPage shell, Realm inner panels, WizardNewsPanel,
@@ -113,3 +113,11 @@ universe's page/layout work.
 - Session mode is built AFTER the repaint (born into the new shell). F-ledger screening,
   ratchets/budget hold, all lazy, browser-verify the seam is gone (landing -> wizard ->
   library -> dossier reads as ONE product).
+- REUNIFICATION (owner, same directive): the merge's keep-our-cores decisions dropped THEIR
+  FEATURES living inside kept surfaces, not just chrome — confirmed: OAuth sign-in buttons
+  (Google/Discord; flags+backend landed, UI never adopted), advance-time from the Library,
+  "and so much more." A read-only FEATURE-PARITY AUDIT is combing every surface/control/
+  setting/flag in their tree vs ours into memory/feature-parity-ledger.md (present/partial/
+  absent/ours-better + transplant notes + top-20 ranked). The wave executes against that
+  ledger as its checklist: their features transplanted, our logic preserved inside, F-ledger
+  screening as always. Nothing ships on memory of the diff — only on the ledger.
