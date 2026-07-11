@@ -1091,3 +1091,23 @@ aversion; keeps the term subcritical against devout lock-in).
   by legitimacy meanwhile, and TERMINATES IN TRANSITION via the contest machinery —
   apostasy spirals end in seat changes at realistic rates, never settlement-wide
   faithlessness (sink bounded). Endogeneity filter applies identically.
+
+### Morally-coded institutions — the visible battleground (OWNER, 2026-07-11; catalog coding = Phase 5, lifecycle mechanism = W-F8 post-trial)
+Non-criminal but morally-loaded institutions (slave markets, gambling houses, fighting pits,
+debtor's prisons, workhouses — AND the good pole: almshouses, hospices, sanctuaries) carry a
+plane lean (the clergy-trait projection pattern; no new vocabulary): MORAL axis = tolerance
+of CRUELTY, LAW axis = tolerance of DISORDER. Exceptions derive, never special-cased:
+CG tolerates the gambling house but abolishes the slave market; LE runs the market and
+shutters the rowdy pits; LG tolerates neither and raises orderly charity; CE keeps what bleeds.
+- MECHANISM: institution-lifecycle viability pressure = patron-fit x piety megaphone,
+  per-axis dampened by opposed runners-up (a divided city cannot purge decisively);
+  emergence weighting skews new seeding toward morally-fit institutions (birth distribution,
+  the font pattern). BUILT or TORN DOWN by who holds the seat.
+- ENDOGENEITY CLOSURE: abolition/founding IS endogenous conduct — feeds the fit loop; a
+  good-patroned town that KEEPS its slave market is visibly, mechanically drifting (the
+  standing building = drift made brick; prime hook material).
+- ECONOMIC TENSION: moral pressure vs the institution's economic value is a real trade-off
+  (the devout town pays for its conscience in prosperity) — narrated, never elided.
+- CONSTRAINTS: arcs not insta-demolition (clamped per-tick pressure); neutral/absent patron =
+  exact zero (theorem); cause chains name every closure ("the temple led the abolition");
+  W-F8 envelope: institution mix correlates with patron alignment across the grid, no flips.
