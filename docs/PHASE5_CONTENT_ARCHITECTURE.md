@@ -97,3 +97,19 @@ to tick=week, not merely inventory them.
    normalization, institution founding).
 5. SANCTIONED FAST PATHS, explicitly marked (the owner's extreme-case exception):
    compromise-fiat legitimacy collapse, conquest conversion — deliberate, documented, rare.
+
+## The Repaint Wave (OWNER, 2026-07-11 — Phase 5, between the engine companion and session mode)
+The merge left a VISUAL SEAM: adopted surfaces (landing/pricing/legal) wear the reference
+universe's page-shell language; kept-functional-core surfaces (GenerateWizard, Library/
+SettlementsPanel, CompendiumPanel, GalleryPage shell, Realm inner panels, WizardNewsPanel,
+authUI, HowToUse frame) still render pre-merge layouts. Owner directive: match the reference
+universe's page/layout work.
+- ADOPT their Page/PageHeader-shell versions of the seven seam surfaces, PRESERVING our
+  logic inside them (the standard re-land pattern, pointed at presentation): our wizard's
+  E4 fixes, anti-repetition wiring, BuyThisDossier threading, dossier fixes all survive.
+- LIBRARY RICHNESS GAP: adopt their four missing components — BulkActionBar, HealthPip,
+  SaveQuotaMeter, LivingWorldSignalRow — the Library becomes a dashboard of living places,
+  not a list.
+- Session mode is built AFTER the repaint (born into the new shell). F-ledger screening,
+  ratchets/budget hold, all lazy, browser-verify the seam is gone (landing -> wizard ->
+  library -> dossier reads as ONE product).
