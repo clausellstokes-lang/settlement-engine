@@ -29,11 +29,7 @@ const SettlementPalette = lazy(() => import('./SettlementPalette.jsx'));
 const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const WorldPulsePanel = lazy(() => import('./WorldPulsePanel.jsx'));
 const PantheonPanel   = lazy(() => import('./PantheonPanel.jsx'));
-// NOTE (4f-3): the persistent MapLegend is DEFERRED here. It depends on the
-// relationship-edge color refactor (map/relationshipEdgeStyle.js →
-// settlements/relationshipColors.js) that has not landed in this tree, and that
-// system touches the relationship-edge rendering our MapOverlay already
-// implements differently. Re-land the legend with that refactor in a later wave.
+const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
@@ -193,6 +189,12 @@ function WorldMapStageImpl({
               when no hover-id is set or when click-selection wins. */}
           <Suspense fallback={null}>
             <QuickInspector />
+          </Suspense>
+          {/* UX Phase 5 — persistent collapsible legend (channel/relationship colors,
+              war glyphs, impact-magnitude scale). Default-collapsed; bottom-left so it
+              never collides with the right-dock Realm Inspector. */}
+          <Suspense fallback={null}>
+            <MapLegend />
           </Suspense>
           {/* Recovery panel (P10): a failed/timed-out load replaces the
               perpetual loader with a plain-language message + a primary

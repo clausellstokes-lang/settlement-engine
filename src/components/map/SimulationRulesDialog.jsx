@@ -8,10 +8,14 @@ import {
   normalizeSimulationRules,
 } from '../../domain/worldPulse/index.js';
 import {
-  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, RED, SP, sans,
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import PageHeader from '../primitives/PageHeader.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import GateToggle from './SimulationRulesGateToggle.jsx';
+import DisclosureHeader from './SimulationRulesDisclosure.jsx';
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -48,6 +52,33 @@ const TOGGLES = [
   ['majorChangesRequireProposal', 'Major proposals'],
 ];
 
+// ── UX Phase 4 — the THREE living-world system gates ─────────────────────────
+// These default to FALSE (see DEFAULT_SIMULATION_RULES) and, until this dialog
+// shipped, had NO UI toggle ANYWHERE, leaving the premium war/strategy/religion
+// engine unreachable. Each carries a one-line "what it does" plus the byte-
+// identical-when-off promise. They render in a separate "advanced" group below the
+// 12 core toggles, and (unlike the core toggles, which are on-unless-explicitly-
+// false) are shown as OFF unless explicitly true, matching their false default.
+//
+// Tier note: the dialog only renders for canManageCampaigns (paying) users, so the
+// tier gate lives UPSTREAM (RealmDashboard handles the free/anon locked state and
+// any pricing-moment prompts). These are in-app subsystem opt-ins, never a tier
+// wall, so there is no flat denial to soften here.
+//
+// Faith reconciliation (OUR floor): the religion gate keys on `religionDynamicsEnabled`,
+// the LEGACY-authoritative alias. normalizeSimulationRules mirrors it to OUR canonical
+// `faithSpreadEnabled` in lockstep (legacy wins when explicitly set), so this toggle
+// drives the engine's granular faith-spread gate without replacing it — the OURS-ahead
+// gate the dashboard LivingWorldGates also reads/writes.
+const ADVANCED_GATES = [
+  ['warLayerEnabled', 'War layer',
+    'Armies march, sieges form, conquests change rulers. Off = no war fronts (byte-identical to today).'],
+  ['settlementStrategyEnabled', 'Settlement strategy',
+    'Settlements choose to defend, deploy, or sue for peace. Off = no strategy candidates.'],
+  ['religionDynamicsEnabled', 'Religion dynamics',
+    'Deities contest converts and gain seats, but only once a settlement carries a patron deity (or an imposed cult). Off or deity-free equals no faith drift.'],
+];
+
 function human(value) {
   return String(value || '').replace(/_/g, ' ');
 }
@@ -71,11 +102,12 @@ function Field({ label, children }) {
   );
 }
 
-function Select({ id, value, options, onChange }) {
+function Select({ id, value, options, onChange, disabled = false }) {
   return (
     <select
       id={id}
       value={value}
+      disabled={disabled}
       onChange={event => onChange(event.target.value)}
       style={{
         width: '100%',
@@ -88,6 +120,8 @@ function Select({ id, value, options, onChange }) {
         fontFamily: sans,
         fontSize: FS.sm,
         fontWeight: 800,
+        opacity: disabled ? 0.85 : 1,
+        cursor: disabled ? 'default' : undefined,
       }}
     >
       {options.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
@@ -95,7 +129,7 @@ function Select({ id, value, options, onChange }) {
   );
 }
 
-function Toggle({ checked, label, onChange }) {
+function Toggle({ checked, label, onChange, disabled = false }) {
   const controlId = useId();
   return (
     <label htmlFor={controlId} style={{
@@ -106,18 +140,20 @@ function Toggle({ checked, label, onChange }) {
       padding: '6px 8px',
       border: `1px solid ${BORDER2}`,
       borderRadius: R.md,
-      background: checked ? 'rgba(201,162,76,0.12)' : CARD,
+      background: checked ? GOLD_BG : CARD,
       color: INK,
       fontFamily: sans,
       fontSize: FS.xs,
       fontWeight: 850,
-      cursor: 'pointer',
+      cursor: disabled ? 'default' : 'pointer',
+      opacity: disabled ? 0.85 : 1,
     }}>
       <input
         id={controlId}
         type="checkbox"
         aria-label={label}
         checked={checked}
+        disabled={disabled}
         onChange={event => onChange(event.target.checked)}
       />
       <span>{label}</span>
@@ -160,18 +196,47 @@ export default function SimulationRulesDialog({ open, campaign, onClose }) {
 function SimulationRulesDialogContent({ campaign, onClose }) {
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
   const previewWorldPulse = useStore(s => s.previewCampaignWorldPulse);
+  // While this campaign's advance is in flight the store no-ops the rules write
+  // (it would be clobbered by the advance's wholesale worldState replace), so a
+  // Save would silently drop the GM's edit. Subscribe to the advanceInFlight LIST
+  // itself (not the stable isAdvanceInFlight fn ref) so the disable + hint re-render
+  // the instant an advance starts or ends — same membership test the store uses.
+  const advanceInFlightList = useStore(s => s.advanceInFlight);
+  const advanceBlocked = !!(
+    campaign?.id
+    && Array.isArray(advanceInFlightList)
+    && advanceInFlightList.some(id => String(id) === String(campaign.id))
+  );
+  // Trap focus inside the modal, close on Escape, and restore focus to the
+  // trigger on unmount (a11y: the dialog previously closed only on outside
+  // mousedown — no Escape, no focus containment). This content only mounts while
+  // the dialog is open, so the hook's `open` flag is always true here.
+  const dialogRef = useDialogFocusTrap(true, onClose);
+  const titleId = useId();
   const [draft, setDraft] = useState(() => normalizeSimulationRules(campaign?.worldState?.simulationRules));
   const [busy, setBusy] = useState(false);
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewResult, setPreviewResult] = useState(null);
   const [error, setError] = useState(null);
+  // Progressive disclosure: presets stay open; the Detail toggles and the Engine
+  // living-world gates collapse into groups. Detail defaults closed. The Engine
+  // group holds the ADVERTISED war/religion gates (off by default, previously
+  // buried here), so default it OPEN while they're still off — surfaced on first open.
+  const [detailOpen, setDetailOpen] = useState(false);
+  const [engineOpen, setEngineOpen] = useState(() => !draft.warLayerEnabled && !draft.religionDynamicsEnabled);
 
   const presets = Object.values(SIMULATION_RULE_PRESETS);
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;
   const previewOutcomes = previewResult?.pulseRecord?.selectedOutcomes || previewResult?.selected || [];
 
   const setField = (key, value) => {
-    setDraft(current => normalizeSimulationRules({ ...current, [key]: value }));
+    setDraft(current => {
+      const merged = { ...current, [key]: value };
+      // Store-seam mirror: drift OFF cascades War + Strategy off; War ON locks Strategy on.
+      if (!merged.relationshipDynamicsEnabled) { merged.warLayerEnabled = false; merged.settlementStrategyEnabled = false; }
+      if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
+      return normalizeSimulationRules(merged);
+    });
     setPreviewResult(null);
   };
 
@@ -199,6 +264,10 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
 
   const save = async () => {
     if (!campaign?.id || busy) return;
+    // The store no-ops the rules write while the realm advances; refuse here so
+    // Save never reports success over a dropped write. The button is also disabled
+    // off advanceBlocked — this is the belt-and-braces guard.
+    if (advanceBlocked) { setError('The realm is advancing. Give it a moment, then save your rules.'); return; }
     setBusy(true);
     setError(null);
     try {
@@ -234,9 +303,11 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
       }}
     >
       <section
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label="Simulation rules"
+        aria-labelledby={titleId}
+        tabIndex={-1}
         style={{
           width: 'min(100%, 640px)',
           maxHeight: 'min(92vh, 760px)',
@@ -270,23 +341,43 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             <Settings2 size={17} />
           </div>
           <div style={{ minWidth: 0, flex: 1 }}>
-            <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, lineHeight: 1.2, fontWeight: 900 }}>
-              Simulation Rules
-            </h2>
-            <div style={{ marginTop: 4, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750 }}>
-              {[campaign?.name || 'Campaign', activePreset?.label || 'Custom'].join(' - ')}
-            </div>
+            {/* PageHeader carries the title/subtitle in the shared header idiom
+                (serif title, italic subtitle); the gold Settings2 chip and the
+                IconButton close stay in this header row. */}
+            <PageHeader
+              size="sm"
+              as="h2"
+              id={titleId}
+              title="Simulation rules"
+              subtitle={(
+                <span>
+                  {campaign?.name || 'Campaign'}
+                  <span style={{ margin: '0 0.4em', color: MUTED }}>·</span>
+                  {activePreset?.label || 'Custom'}
+                </span>
+              )}
+              actions={(
+                <IconButton
+                  Icon={X}
+                  label="Close simulation rules"
+                  onClick={onClose}
+                  tone="ghost"
+                  size="lg"
+                />
+              )}
+            />
           </div>
-          <IconButton
-            Icon={X}
-            label="Close simulation rules"
-            onClick={onClose}
-            tone="ghost"
-            size="lg"
-          />
         </header>
 
         <div style={{ padding: SP.lg, display: 'grid', gap: SP.lg }}>
+          {advanceBlocked && (
+            <div
+              data-testid="rules-advance-blocked" role="status" aria-live="polite"
+              style={{ border: `1px solid ${GOLD}`, borderRadius: R.md, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+            >
+              The realm is advancing. Give it a moment, then save your rules.
+            </div>
+          )}
           {error && (
             <div style={{
               border: '1px solid rgba(197,74,74,0.45)',
@@ -318,6 +409,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                     key={preset.id}
                     type="button"
                     onClick={() => applyPreset(preset.id)}
+                    disabled={advanceBlocked}
                     style={{
                       display: 'grid',
                       gap: 5,
@@ -326,9 +418,10 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       textAlign: 'left',
                       border: `1px solid ${selected ? GOLD : BORDER2}`,
                       borderRadius: R.md,
-                      background: selected ? 'rgba(201,162,76,0.12)' : CARD,
+                      background: selected ? GOLD_BG : CARD,
                       color: INK,
-                      cursor: 'pointer',
+                      cursor: advanceBlocked ? 'default' : 'pointer',
+                      opacity: advanceBlocked ? 0.85 : 1,
                     }}
                   >
                     <span style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
@@ -348,35 +441,110 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             )}
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 170px), 1fr))',
-            gap: SP.md,
-          }}>
-            <Field label="Propagation">
-              <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} onChange={value => setField('propagationMode', value)} />
-            </Field>
-            <Field label="Intensity">
-              <Select value={draft.intensity} options={INTENSITY_OPTIONS} onChange={value => setField('intensity', value)} />
-            </Field>
-            <Field label="Migration">
-              <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} onChange={value => setField('migrationMode', value)} />
-            </Field>
+          {/* ── DETAIL altitude: the propagation/intensity/migration selects and
+              the 12 fine-grained subsystem toggles, behind a disclosure so the
+              dialog opens on presets, not a wall of switches. ───────────────── */}
+          <div style={{ display: 'grid', gap: SP.sm }}>
+            <DisclosureHeader
+              open={detailOpen}
+              onToggle={() => setDetailOpen(o => !o)}
+              regionId={`${titleId}-detail`}
+              title="Detail toggles"
+              summary="Propagation, intensity, migration, and the twelve subsystem switches."
+            />
+            {detailOpen && (
+              <div id={`${titleId}-detail`} style={{ display: 'grid', gap: SP.lg }}>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 170px), 1fr))',
+                  gap: SP.md,
+                }}>
+                  <Field label="Propagation">
+                    <Select value={draft.propagationMode} options={PROPAGATION_OPTIONS} disabled={advanceBlocked} onChange={value => setField('propagationMode', value)} />
+                  </Field>
+                  <Field label="Intensity">
+                    <Select value={draft.intensity} options={INTENSITY_OPTIONS} disabled={advanceBlocked} onChange={value => setField('intensity', value)} />
+                  </Field>
+                  <Field label="Migration">
+                    <Select value={draft.migrationMode} options={MIGRATION_OPTIONS} disabled={advanceBlocked} onChange={value => setField('migrationMode', value)} />
+                  </Field>
+                </div>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
+                  gap: SP.sm,
+                }}>
+                  {TOGGLES.map(([key, label]) => (
+                    <Toggle
+                      key={key}
+                      label={label}
+                      checked={draft[key] !== false}
+                      disabled={advanceBlocked}
+                      onChange={value => setField(key, value)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
-            gap: SP.sm,
-          }}>
-            {TOGGLES.map(([key, label]) => (
-              <Toggle
-                key={key}
-                label={label}
-                checked={draft[key] !== false}
-                onChange={value => setField(key, value)}
-              />
-            ))}
+          {/* ── ENGINE altitude — UX Phase 4 living-world systems ─────────────
+              The three premium gates (war / strategy / religion) that had no
+              UI toggle anywhere until now. Each defaults OFF and is byte-
+              identical when off. This is the fix that makes the premium engine
+              reachable. Now behind its own disclosure as the deepest altitude. */}
+          <div style={{ display: 'grid', gap: SP.sm }}>
+            <DisclosureHeader
+              open={engineOpen}
+              onToggle={() => setEngineOpen(o => !o)}
+              regionId={`${titleId}-engine`}
+              title="Engine gates (advanced)"
+              summary="Opt-in living-world subsystems, off by default and byte-identical to today while off."
+            />
+            {engineOpen && (
+              <div id={`${titleId}-engine`} style={{
+                display: 'grid',
+                gap: SP.sm,
+                padding: SP.md,
+                border: `1px solid ${GOLD}`,
+                borderRadius: R.md,
+                background: GOLD_BG,
+              }}>
+                <div style={{ display: 'grid', gap: 2 }}>
+                  <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
+                    Living-world systems (advanced)
+                  </div>
+                  <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+                    Opt-in subsystems, off by default. Each is byte-identical to today while off. Turn one on and the realm starts moving.
+                  </div>
+                </div>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
+                  gap: SP.sm,
+                }}>
+                  {ADVANCED_GATES.map(([key, label, description]) => {
+                    // Settlement Strategy is auto-enabled and locked on while War
+                    // is on (it has no inputs without war fronts).
+                    const forcedByWar = key === 'settlementStrategyEnabled' && draft.warLayerEnabled === true;
+                    // War IS a relationship dynamic: Relationships off ⇒ these gates stay locked off.
+                    const blockedByDrift = (key === 'warLayerEnabled' || key === 'settlementStrategyEnabled') && draft.relationshipDynamicsEnabled !== true;
+                    return (
+                      <GateToggle
+                        key={key}
+                        label={label}
+                        description={forcedByWar ? `${description} Auto-enabled by the War layer.` : description}
+                        checked={draft[key] === true}
+                        disabled={forcedByWar || blockedByDrift || advanceBlocked}
+                        disabledReason={blockedByDrift ? 'Needs the Relationships toggle: war is a relationship dynamic, so a frozen web cannot raise fronts.' : advanceBlocked && !forcedByWar ? 'The realm is advancing…' : ''}
+                        onChange={value => setField(key, value)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           <div style={{
@@ -452,7 +620,15 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           <footer style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
             <Button variant="secondary" onClick={reset} disabled={busy}>Reset</Button>
             <Button variant="secondary" onClick={onClose} disabled={busy}>Cancel</Button>
-            <Button variant="primary" onClick={save} busy={busy}>Save</Button>
+            <Button
+              variant="primary"
+              onClick={save}
+              busy={busy}
+              disabled={advanceBlocked}
+              title={advanceBlocked ? 'The realm is advancing. Give it a moment, then save your rules.' : undefined}
+            >
+              Save
+            </Button>
           </footer>
         </div>
       </section>

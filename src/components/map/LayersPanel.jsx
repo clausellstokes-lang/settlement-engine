@@ -201,6 +201,11 @@ export default function LayersPanel({ onClose }) {
           </div>
         )}
         <LayerToggle
+          label="War & faith"
+          checked={layers.warFaith !== false}
+          onChange={() => toggleLayer('warFaith')}
+        />
+        <LayerToggle
           label="GM regional channels"
           checked={layers.regionalShowGm !== false}
           onChange={() => toggleLayer('regionalShowGm')}
@@ -237,6 +242,11 @@ export default function LayersPanel({ onClose }) {
           label="Culture regions"
           checked={!!layers.nativeCultureRegions}
           onChange={() => toggleLayer('nativeCultureRegions')}
+        />
+        <LayerToggle
+          label="Biomes"
+          checked={!!layers.nativeBiomes}
+          onChange={() => toggleLayer('nativeBiomes')}
         />
       </div>
     </div>

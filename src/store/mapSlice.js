@@ -59,6 +59,12 @@ const DEFAULT_LAYERS = {
   regionalImpactStatusFilter: ['queued', 'applied', 'resolved'],
   regionalMinSeverity: 0,
   regionalShowGm: true,
+  // Spatial war/faith glyph overlay (WarFaithMapOverlay). Default ON so a live
+  // war campaign shows its deployment arrows / siege rings / occupation shading;
+  // a dormant world renders nothing regardless (empty read-models). Present in
+  // DEFAULT_LAYERS so the LayersPanel "War & faith" toggle is a real toggle (the
+  // toggleLayer guard no-ops keys absent from this map).
+  warFaith: true,
   roads: true,
   labels: true,
   markers: true,
