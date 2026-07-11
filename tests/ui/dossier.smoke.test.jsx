@@ -92,4 +92,18 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(typeof mod.default).toBe('function');
   });
+
+  // Phase 5 W4e — the three dossier-depth tabs register into the Systems group,
+  // and the OURS-ahead mounted Versions tab is NOT displaced from Notes.
+  test('Systems group registers the Substrate / Magic / War & Faith sub-tabs', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.systems.tabs).toEqual(
+      expect.arrayContaining(['substrate', 'magic', 'war_faith']),
+    );
+  });
+
+  test('the mounted Versions tab (F26) stays registered under Notes', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
+  });
 });

@@ -55,9 +55,9 @@ const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
 const PowerTab = lazy(() => import('./new/tabs/PowerTab'));
 // Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
-// legitimacy / cause chains), tier-gated inside. Lazy so the faith read-model +
-// deityEffects only load when a dossier is actually opened (ratchet: faith lazy).
-const FaithSection = lazy(() => import('./settlement/FaithSection.jsx'));
+// legitimacy / cause chains), tier-gated inside. It now renders inside the
+// dedicated War & Faith tab (WarFaithTab, W4e) rather than under Power, so it's
+// still lazy — loaded with the WarFaithTab chunk on first open (ratchet: faith lazy).
 // Phase 5 W-C4 — the patron/cult ASSIGNMENT control (the write half of the
 // embed-on-assign bridge). Editable dossiers only; self-gates by tier inside
 // (premium write · lapsed read-only · free upsell). Lazy so the registry + copy
@@ -72,6 +72,16 @@ const DailyLifeTab = lazy(() => import('./new/tabs/DailyLifeTab'));
 const RelationshipsTab = lazy(() => import('./new/tabs/RelationshipsTab'));
 const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
 const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
+// Phase 5 W4e — dossier depth. Each lazy so the causal / magic / war read-models
+// only load when the tab is first opened. new/tabs is NOT in the icon-split lazy
+// dir, so these strip entries reuse icons ALREADY imported above (Cog / Sparkles /
+// Swords) and add nothing to the first-paint vendor-icons chunk.
+const SubstrateTab = lazy(() => import('./new/tabs/SubstrateTab.jsx'));
+const MagicTab = lazy(() => import('./new/tabs/MagicTab.jsx'));
+// War & Faith — composes OUR gated FaithSection (the constitutional premium seam)
+// with a war half from OUR warResolve read-models. NEVER THEIRS' ungated
+// WarFaithSection / useSettlementLiveWorld (those leak the live pantheon).
+const WarFaithTab = lazy(() => import('./new/tabs/WarFaithTab.jsx'));
 
 
 // P102 / D-1 — Thematic group tabs façade (spec §8: Summary / Systems / World /
@@ -96,7 +106,7 @@ const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
 // from the strip by the resolver below.
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability'] },
+  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
   world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
@@ -110,6 +120,11 @@ const TABS = [
   { id: 'defense',    label: 'Defense',    Icon: Swords },
   { id: 'resources',  label: 'Resources',  Icon: Package },
   { id: 'viability',  label: 'Viability',  Icon: CircleCheckBig },
+  // Phase 5 W4e — the causal-engine + magic reads. Always available (every
+  // settlement derives a substrate / magic posture); each self-handles dormancy
+  // inside. Reuse already-bundled icons (Cog / Sparkles) — no new first-paint icon.
+  { id: 'substrate',  label: 'Substrate',  Icon: Cog },
+  { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
@@ -197,6 +212,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
   // PendingChangesBar's drawer where the cascade preview lives.
   const queueEdit = useStore(s => s.queueEdit);
+  // Phase 5 W4e — War & Faith tab presence inputs. Viewer tier + campaign
+  // membership decide whether the tab (war half + the GATED faith half) has
+  // anything to show. These gate PRESENCE, not content — they never read the live
+  // pantheon; faith content stays behind FaithSection's premium seam.
+  const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
+  const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
 
   const rawSettlement = propSettlement || storeSettlement;
   // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
@@ -378,10 +399,23 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     if (t.id === 'dm_notes' && readOnly && !saveId) return false;
     return true;
   });
+  // Phase 5 W4e — War & Faith presence. The faith half renders SOMETHING unless
+  // the viewer is premium/elevated with no deity embed (FaithSection's HIDDEN
+  // mode): an embed → the read-only panel for all; a non-premium owner → the
+  // generic teaser (names NO deity). So the tab shows when the faith half would
+  // render OR the town is in a live campaign (war state). Premium + deity-free +
+  // non-campaign ⇒ no tab; a public deity-free dossier stays clean. Presence is
+  // tier-gated the SAME way FaithSection's CONTENT is — it never leaks a name.
+  const faithHasEmbed = !!(rawSettlement?.config?.primaryDeitySnapshot && typeof rawSettlement.config.primaryDeitySnapshot === 'object');
+  const hasWarFaith = faithHasEmbed || inCampaign || (!viewerIsPremium && !publicDossier);
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
     ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
+    // War & Faith (Systems) — OUR gated FaithSection + a war half from OUR
+    // warResolve read-models. Reuses the already-bundled Swords glyph (no new
+    // first-paint icon). Presence gate above.
+    ...(hasWarFaith ? [{ id:'war_faith', label:'War & Faith', Icon: Swords }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
@@ -549,15 +583,20 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />
           {/* The patron/cult assignment control — the settlement editor's write
               surface for the SET_PRIMARY_DEITY canon event. Editable dossiers only
-              (never a public/shared read-only view); self-gates by tier inside. */}
+              (never a public/shared read-only view); self-gates by tier inside.
+              (W4e) The faith READ surface moved to the dedicated War & Faith tab;
+              the assignment WRITE control stays under Power — deity assignment
+              props/erodes the ruler's legitimacy, so it belongs with governance. */}
           {!readOnly && <Suspense fallback={null}><DeityAssignmentPanel /></Suspense>}
-          {/* Faith rides under Power (its divine mandate props/erodes the ruler's
-              legitimacy). Self-gates by tier: full panel when embeds are present
-              (premium/lapsed/shared), generic true-neutral teaser for free/anon,
-              nothing for a premium deity-free town. */}
-          <FaithSection settlement={s} publicDossier={publicDossier} />
         </>
       );
+      case 'substrate':  return <SubstrateTab settlement={s} />;
+      case 'magic':      return <MagicTab settlement={s} />;
+      // War & Faith — OUR gated FaithSection + a war half from OUR light
+      // warStatus read-models. FaithSection self-gates by tier (full panel on an embed,
+      // generic teaser for free/anon naming NO deity, nothing for a premium
+      // deity-free town). Never THEIRS' ungated pantheon-leaking section.
+      case 'war_faith':  return <WarFaithTab settlement={s} saveId={saveId} publicDossier={publicDossier} />;
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;
