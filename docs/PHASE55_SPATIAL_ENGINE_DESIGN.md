@@ -580,6 +580,46 @@ YOU may misread their silence (a fine settlement whose couriers were merely dela
 alarm). Absence is the timeliness axis run to its limit: a belief with no update becomes, in time,
 indistinguishable from no belief at all — and acting on that void is its own risk.
 
+**ROUND 15 — RESTRAINT (owner): alignment shapes distortion STYLE (not amount); risk is a FRAMEWORK
+(not one utility).** Two corrections that keep the model from collapsing into behavioral homogeneity.
+
+(A) ALIGNMENT = a distortion STYLE / SIGNATURE — TENDENCIES, not deterministic moral laws. It changes
+HOW distortion occurs, NOT merely HOW MUCH (SUPERSEDES the round-11 scalar lawful=faithful / chaotic=
+noisy / evil=deceptive). Each alignment has characteristic STRENGTHS + WEAKNESSES via FIVE levers:
+SOURCE PREFERENCE, willingness to ALTER FRAMING, UNCERTAINTY TOLERANCE, INCENTIVE TO MANIPULATE,
+INSTITUTIONAL TRANSMISSION STYLE.
+- LAWFUL ≠ accurate — fidelity to the OFFICIAL CHANNEL/PROCEDURE: preserves official errors, prefers
+  stale formal reports, repeats propaganda faithfully, SUPPRESSES unauthorized truth, REJECTS credible
+  informal sources. Reliable-but-BRITTLE (great at the official version, deaf to the informal truth that
+  contradicts it).
+- CHAOTIC ≠ incoherent — DECENTRALIZED/informal: fast, redundant, locally accurate, censorship-resistant,
+  good at informal corroboration; but NO canonical version. Resilient-but-UNCANONICAL.
+- EVIL ≠ deceptive — SELF-serving: an evil regime may keep RUTHLESSLY ACCURATE intel for ITSELF (it
+  values control) while feeding OTHERS deception. Accurate-inward, deceptive-outward.
+- GOOD may distort UNINTENTIONALLY — softens bad news, protects victims, AMPLIFIES MORAL framing.
+  Compassionate-but-softening.
+So a lawful and a chaotic settlement, given the SAME events, build DIFFERENTLY-SHAPED belief maps (the
+lawful confident in its official — possibly wrong — version; the chaotic holding multiple noisy-but-
+sometimes-truer ones), and their styles CLASH on contact (a lawful bureaucracy rejecting a chaotic
+network's credible informal warning ⇒ misjudgment). Distortion has CHARACTER, not just magnitude — the
+round-13 organic PRNG is the undirected noise; alignment-style is the SHAPE of the directed distortion.
+
+(B) RISK ASSESSMENT = a FRAMEWORK, not one universal utility with coefficients (else technically elegant
+but BEHAVIORALLY HOMOGENEOUS). Shared SHAPE: BELIEFS + OBJECTIVES + DISPOSITION + CONSTRAINTS → DECISION
+SCORE. What DIFFERS is the OBJECTIVES, which are ACTOR/FACTION-SPECIFIC (ties round 14):
+- MERCHANT council → revenue loss, route reliability, credit exposure.
+- WARLORD → prestige, military opportunity, perceived weakness.
+- CHURCH → heresy, legitimacy, sacred access.
+- REFUGEE household → survival, distance, kinship, border hostility.
+BELIEFS = the factional belief map (round 14); DISPOSITION = alignment/temperament (the 15A style + risk
+tolerance + manipulation incentive); CONSTRAINTS = the physical layer (resources/readiness/geography/
+funding). The governing coalition scores with ITS objectives (sets strategy); DISSENT (round 14) is now
+DEEPER — factions see the SAME situation and reach OPPOSITE conclusions because they OPTIMIZE DIFFERENT
+THINGS (merchants vs warlord on the same war), not merely because they hold different beliefs. IMPL: the
+settlementStrategy SCORER must become OBJECTIVE-PARAMETERIZED (a pluggable objective set per actor/faction),
+NOT one war-utility with coefficients; disposition.js supplies disposition, the belief map the beliefs, the
+physical layer the constraints. Elegance WITHOUT homogeneity.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
