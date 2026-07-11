@@ -947,3 +947,94 @@ mover exists (a settlement can only "ramp / preempt / defend an ally" once readi
 are modelled). The belief-map primitive (a settlement's bounded, distorted model of others) is its
 keystone and should be grounded before build — expect it to reuse the same per-settlement ledger +
 the includeCovert reveal for the DM's "truth vs belief vs divergence" view.
+
+---
+
+# PART IV — GROUNDING VERDICT for ROUNDS 10-13 (2026-07-11, workflow wf_78289e7a-bd2)
+
+The belief/decision/risk layer, verified. HEADLINE: rounds 10-13 are BYTE-ADDITIVE but require a
+CODE RE-PLUMB — and every hard part already has a home in the tree. The engine is NOT a black-box
+omniscient rules-machine: a real per-settlement DECISION chooser exists; it just reasons over ground
+truth today. The belief map is the ONE net-new structure. Nothing here is a rewrite.
+
+## IV.1 The central question, answered — the engine ALREADY decides
+`settlementStrategy.js` (`evaluateSettlementStrategyRules`, gated `simulationRules.settlementStrategyEnabled`,
+default OFF) is a real per-settlement chooser: it enumerates moves (defend/hold/deploy/sue_for_peace/
+return_home), scores them, and softmax-samples one via a SEEDED per-settlement fork. So round 10
+attaches to an EXISTING faculty — it is not new AI. Today it reads GROUND TRUTH at exactly THREE seams:
+`buildStrengthLookup` (:111 — targets' TRUE strength, `margin = sStrength − strengthFor(targetId)`),
+`contextFor` (:164 — hostileTargets/vassals from relationshipStates), and `isBesieged`/warFronts
+(:101). Round 10 = interpose a per-observer BELIEF projection at those three reads; the softmax scorer
+downstream is UNCHANGED. That is the whole attachment.
+
+## IV.2 What already exists (the substrate is unusually ready)
+- DECISION chooser — settlementStrategy.js (above). Attachment = 3 reads.
+- DEGRADATION operator — `fidelityNoise.js` (fidelityFactor/chaosPull, alignment-conditioned, seeded
+  fork, a NEUTRALITY THEOREM: forks NO rng + returns identity when the pull is 0). Today it distorts a
+  settlement's reading of its OWN exhaustion (perceivedPeaceExhaustion); it is the round-11 INTENTIONAL/
+  directed axis, reusable as the belief-projection's distortion operator.
+- SEEDED PRNG — createPRNG/.fork (prng.js:22-72), threaded from the pulseKernel confluence (:230). The
+  round-13 ORGANIC per-hop roll is a NEW labeled fork off it (`rumor-organic:${eventId}:${carrierId}:
+  ${edgeId}:${hop}`), DISTINCT from fidelityNoise — the two round-13 sources map to two code homes.
+- PERSISTENCE / DORMANCY ORACLE — worldState conditional-materialized ledgers (warPosture/occupations/
+  martialReadiness/conquestFeeds…) stripped from the shallow spread + re-added only when non-empty
+  (ensureWorldState + deepCloneConditionalLedger, worldState.js:214-249) ⇒ byte-identical when absent.
+  The belief-map ledger keyed under a NEW `spatialCanonVersion` marker inherits this verbatim; a
+  schemaVersion migration chain exists (WORLD_STATE_SCHEMA_VERSION=2, :117-160).
+- DM REVEAL — the includeCovert/includeGroundTruth selector convention (mobilizationStatus.js:84-118,
+  visibilityAudit.js, liveWorld.js). The "truth vs belief vs divergence" view is a pure selector on it.
+- CARDINALITY BOUND — regionalGraph is SPARSE (center + declared neighbours). relationshipStates is
+  O(edges) SYMMETRIC (one record/edge); the belief map is its DIRECTED, PARTIAL, nested variant
+  { observerId → { subjectId → { readiness, alignment, faith, allianceLabel, confidence, lastUpdateTick } } },
+  martialReadiness `{cid→{readiness01,experience01}}` being the single-level precedent.
+
+## IV.3 The one net-new structure + its determinism discipline
+The BELIEF MAP has zero substrate today (every cross-settlement input is ground truth). It is the
+keystone of rounds 10-13. Determinism/perf fixes the stress-test demands (all satisfiable on the
+existing substrate):
+1. CARDINALITY — bound STRUCTURALLY: materialize an (observer,subject) entry ONLY when a rumor
+   actually reached the observer (NEVER pre-populate all-pairs); the sparse informational neighbourhood
+   is the cap. Else the directed/partial map turns the sparse graph dense (naive O(N²)).
+2. FOLD ORDER — apply a TOTAL order key (tick desc, score desc, fidelity desc, compareCodepoint(packetId))
+   to all packets targeting an observer BEFORE folding into its belief; codepoint-sort observers+subjects.
+   (A Map-iteration-order fold breaks replay.)
+3. TWO DISTORTION SOURCES don't collide — organic = the new `rumor-organic:…` fork off pulseKernel:230;
+   directed = fidelityNoise's injected rng. Separate labels ⇒ independent streams.
+4. ABSENCE — key PURELY on `currentTick − lastUpdateTick` (arithmetic, NO rng, no separate structure);
+   timeliness is deterministic (age is not a roll). Confidence decays off the same delta.
+5. SEAM FALLBACK (byte-identity) — make it explicit + gated: `spatialCanonVersion` ABSENT ⇒ read ground
+   truth exactly as today (the proven default-off path, byte-identical); PRESENT but NO belief record ⇒
+   a MAX-UNCERTAINTY belief (this is round-13 absence-as-information at the seam).
+
+## IV.4 The corrections the stress-test forces (fold into PART I/§4g)
+- "ADDITIVE" is byte-true but understated: it is byte-additive (identity-fallback gated on
+  spatialCanonVersion, the fidelityNoise neutrality-theorem discipline) AND a code RE-PLUMB (every
+  cross-settlement OBJECT read re-routed through ONE pure selector `belief(observer,subject,worldState)`).
+  Describe the work honestly as "re-plumb the decision object-reads," not "a new layer beside."
+- GATE ORTHOGONALLY: gate the belief projection on `spatialCanonVersion`, NOT on the existing war
+  toggles (settlementStrategyEnabled) — the war faculty is already live for some campaigns.
+- SELF vs OTHER carve-out: round-12's "NO ground-truth input to ANY decision" is unimplementable
+  literally — a settlement CAN read its OWN true state. Correct boundary: only CROSS-settlement OBJECT
+  reads (others' strength/alliances/fortifications/alignment/faith) route through the belief map;
+  SELF-reads stay ground truth.
+- ROUND-11's "three risk assessments already exist" overstates — only the WAR faculty is real code
+  today. The war faculty is the SOLE v1 attachment for belief-driven decisions; routing- and army-
+  strategy risk assessments ship WITH their movers.
+- SETTLEMENT ALIGNMENT is on the critical path for FIVE mechanics (culture, moral drift, info-handling,
+  the risk faculty, and the migration/contraband that sit below the belief layer) — promote III.4-1(a)
+  DERIVE-endogenously to EARLY/foundational: add computeLawfulness/computeMalice as SIBLINGS of the
+  existing `computeAggressiveness` (disposition.js:221), reusing TRAIT_ALIGNMENT + deity evil01/chaos01
+  axes + governance. (A derivation home + precedent already exist — this is not a new subsystem.)
+
+## IV.5 Revised build order (supersedes PART III §III.3 tail for rounds 10-13)
+Round 10 was under-decomposed (a cheap half bundled with a mover-dependent half). Split it:
+- Derive SETTLEMENT ALIGNMENT (disposition.js siblings) — foundational, unblocks five mechanics.
+- STEP 3.5 — Rumors & News, trade-carrier only (PART III), + the round-13 organic PRNG roll + the info-
+  quality vector fields on the per-settlement rumor ledger.
+- WAVE A (right after 3.5, ZERO new movers) — the BELIEF MAP + belief-sourced war POSTURE (re-plumb the
+  three settlementStrategy reads) + misjudgment-as-a-cause + absence-as-uncertainty. This ships the
+  valuable half of the fog of war on the chooser that already exists — high value, no military layer.
+- WAVE B (after the §5 army-transit + §7 movers) — belief-driven physical MOVEMENT (preempt/defend-ally/
+  reinforce) + moral drift + the ally-intel/betrayal channel + teleport-bloc economics.
+Everything downstream stays as PART III. The belief layer's payoff arrives EARLY and cheap; only its
+physical-consequence half waits on the movers.
