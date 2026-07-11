@@ -75,7 +75,7 @@ export const fixture = {
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Odhrán MacCarthy, mayor",
-        "rest": " — goal: use current stability to address structural vulnerabilities before conditions change."
+        "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
       },
       {
         "kind": "Hook",
@@ -94,18 +94,18 @@ export const fixture = {
       },
       {
         "label": "route",
-        "text": "road — Picked from pool: road, road, road, isolated, isolated."
+        "text": "road · Picked from pool: road, road, road, isolated, isolated."
       },
       {
         "label": "resource",
-        "text": "mountain_timber — present but depleted (Tier-weighted depletion (20%) marked this resource as depleted.)"
+        "text": "mountain_timber · present but depleted (Tier-weighted depletion (20%) marked this resource as depleted.)"
       },
       {
         "label": "institution",
-        "text": "travelers_inn — selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)"
+        "text": "travelers_inn · selected (Base chance 59% lifted by ×1.56 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width — three chances of it against two of nothing — and the mountain timber that raised the travelers’ inn is mostly cut out. What remains worth holding is the seat: the Free Alliance and the Establishment both want the council chair, and both are leaning on the same neutral name to declare before the session. Rónnat Sullivan is about to call something in, and half the inn seems to know what. The mayor wants the cracks mended while the weather holds; no one asks which cracks he means."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain timber that raised the travelers’ inn is mostly cut out. What remains worth holding is the seat: the Free Alliance and the Establishment both want the council chair, and both are leaning on the same neutral name to declare before the session. Rónnat Sullivan is about to call something in, and half the inn seems to know what. The mayor wants the cracks mended while the weather holds; no one asks which cracks he means."
   },
   "realm": {
     "whyTrace": [

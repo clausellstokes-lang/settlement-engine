@@ -244,9 +244,9 @@ const instReceipt =
 const lastCause = (e) => e.causes?.[e.causes.length - 1]?.reason || e.causes?.[0]?.reason || '';
 const receipts = [
   conflict && { label: 'conflict', text: `${conflict.parties.join(' × ')} · ${conflict.issue.toLowerCase()} · stakes: ${conflict.stakes.toLowerCase()}` },
-  route && { label: 'route', text: `${cfg.tradeRouteAccess} — ${route.causes?.[0]?.reason || route.result}` },
-  resourceReceipt && { label: 'resource', text: `${String(resourceReceipt.targetId).replace('resource.', '')} — ${String(resourceReceipt.result).replace(/_/g, ' ')} (${lastCause(resourceReceipt)})` },
-  instReceipt && { label: 'institution', text: `${String(instReceipt.targetId).replace('institution.', '')} — ${instReceipt.result} (${instReceipt.causes?.[0]?.reason || ''})` },
+  route && { label: 'route', text: `${cfg.tradeRouteAccess} · ${route.causes?.[0]?.reason || route.result}` },
+  resourceReceipt && { label: 'resource', text: `${String(resourceReceipt.targetId).replace('resource.', '')} · ${String(resourceReceipt.result).replace(/_/g, ' ')} (${lastCause(resourceReceipt)})` },
+  instReceipt && { label: 'institution', text: `${String(instReceipt.targetId).replace('institution.', '')} · ${instReceipt.result} (${instReceipt.causes?.[0]?.reason || ''})` },
 ].filter(Boolean).slice(0, 4);
 
 // Why-trace — three real band crossings. Preference order keeps the landing's
@@ -354,7 +354,7 @@ if (crime) {
 // pressure sentence, the mayor's goal). It must be revisited whenever the
 // fixture is regenerated: if the receipts change, this prose is stale until
 // re-grounded.
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width — three chances of it against two of nothing — and the mountain timber that raised the travelers’ inn is mostly cut out. What remains worth holding is the seat: the Free Alliance and the Establishment both want the council chair, and both are leaning on the same neutral name to declare before the session. Rónnat Sullivan is about to call something in, and half the inn seems to know what. The mayor wants the cracks mended while the weather holds; no one asks which cracks he means.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain timber that raised the travelers’ inn is mostly cut out. What remains worth holding is the seat: the Free Alliance and the Establishment both want the council chair, and both are leaning on the same neutral name to declare before the session. Rónnat Sullivan is about to call something in, and half the inn seems to know what. The mayor wants the cracks mended while the weather holds; no one asks which cracks he means.';
 
 const fixture = {
   seed, weeks: WEEKS,
@@ -372,7 +372,7 @@ const fixture = {
     prose: arrival,
     pressure: town.pressureSentence || '',
     hooks: [
-      npc && { kind: 'NPC', tone: 'success', tag: 'derived · npcs', lead: `${npc.name}, ${String(npc.role || '').toLowerCase()}`, rest: ` — goal: ${npc.goal.short.replace(/\.$/, '').toLowerCase()}.` },
+      npc && { kind: 'NPC', tone: 'success', tag: 'derived · npcs', lead: `${npc.name}, ${String(npc.role || '').toLowerCase()}`, rest: ` · goal: ${npc.goal.short.replace(/\.$/, '').toLowerCase()}.` },
       conflict?.plotHooks?.[0] && { kind: 'Hook', tone: 'warning', tag: 'derived · factions', text: conflict.plotHooks[0] },
     ].filter(Boolean),
     hooksMore: Math.max(0, hooksTotal - 1) + Math.max(0, npcGoals - 1),
@@ -410,6 +410,11 @@ const banner = `/**
 
 export const fixture = `;
 
-writeFileSync(MODULE_PATH, banner + JSON.stringify(fixture, null, 2) + ';\n');
+// Belt-and-suspenders (owner directive: no em dashes on the landing page). The
+// templates above already emit ' · '; this strips any em dash an engine-derived
+// prose field (why-trace reason, chronicle line, arrival scene) might carry
+// through a future regen, replacing it with a comma so the fixture stays clean.
+const body = JSON.stringify(fixture, null, 2).replace(/ — /g, ', ').replace(/—/g, ', ');
+writeFileSync(MODULE_PATH, banner + body + ';\n');
 console.log(`[landing-fixture] emitted → ${MODULE_PATH}`);
 console.log(`  town=${fixture.town.name} pop=${fixture.town.population} receipts=${receipts.length} whyTrace=${whyTrace.length} chronicle=${chronPicks.length} rels=${relChips.length}`);
