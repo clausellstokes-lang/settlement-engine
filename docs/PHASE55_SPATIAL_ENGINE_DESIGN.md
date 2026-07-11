@@ -406,6 +406,45 @@ thus a CLIQUE OF THE WILLING — a magical trade+intelligence bloc transcending 
 by DIPLOMACY; for allies a high-fidelity geography-independent intelligence channel (round-9 magic),
 for the friendless-isolated, useless.
 
+**TELEPORT-BLOC ECONOMICS under siege (owner, round 11).** A circle link is SIEGE-PROOF — it is not a
+land route, so the besieger cannot cut the EDGE, only STARVE the NODE. So a besieged circle-holder
+STILL trades/shares with its bloc — but BOTH sides suffer: the besieged node's own land-trade is cut,
+so it contributes LESS into the bloc (node-starvation), and a partner that depended on it receives
+less. This is the round-3 supply network run on an UN-INTERDICTABLE topology: node-starvation is the
+ONLY attack vector on a circle edge. Emergent (and legitimate) strategy: a NETWORK of isolated circle-
+holders whose collective outputs COVER each other's inputs is SELF-SUFFICIENT and land-siege-immune —
+a well-composed bloc is resilient; an ill-composed one (all leaning on ONE land-trading member)
+collapses in value the moment that member is besieged. The bloc's PROSPERITY is bounded by what the
+bloc collectively produces, not by any road.
+
+**ALLY INFORMATION-SHARING, ALIGNMENT-GOVERNED HANDLING & BETRAYAL (owner, round 11).** A DELIBERATE
+ally-sharing channel, DISTINCT from the ambient §4f telephone: allies ACTIVELY share HIGH-CONFIDENCE
+intel with one another at PRESERVED fidelity — matters of importance / national security. It is
+directed (rides couriers/circles, not hop-degraded), TRUSTED (relayed faithfully, not garbled), and
+CONFIDENCE-GATED (only high-confidence intel is shared as ACTIONABLE — you don't pass a vague rumor as
+fact). So a well-allied lawful bloc has SUPERIOR collective intelligence: its members' belief maps
+converge toward TRUTH via pooled intel (a strategic advantage — they act soundly, §4g misjudgment falls).
+- ALIGNMENT GOVERNS HANDLING — this fills the §4f PASSIVE distortion operators with AGENCY, on a clean
+  2-axis map onto the (derived) settlement alignment:
+  • LAW↔CHAOS = FIDELITY of transmission. LAWFUL MINIMIZES mutation (faithful relay — records, honors
+    the message; a HIGH-FIDELITY node that reduces the telephone weathering hop-to-hop). CHAOTIC is
+    UNPREDICTABLE (high-variance — may embellish, garble, sit on it, or act rashly; adds NOISE).
+  • GOOD↔EVIL = HONESTY / INTENT of transmission. GOOD shares TRUE for mutual benefit. EVIL DISTORTS
+    for SELF-benefit — STRATEGIC, DIRECTED deception (feeds allies FALSE intel, manipulates the mill to
+    its advantage; intent, not random noise).
+- BETRAYAL / COMPROMISED-ALLY LEAK: a settlement shares based on who it BELIEVES is an ally (§4g belief
+  map), NOT who truly is. A PRESUMED ally that has TURNED / been compromised is a LEAK — it relays your
+  high-confidence intel to the REAL ENEMY, who uses it to TIP a war. Intelligence security becomes real:
+  a cautious/lawful settlement VETS before sharing; a naive/trusting one leaks. Wires the belief-map's
+  ALLIANCE accuracy + the corruption/compromise system (a compromised ally is an intel leak).
+- THE DARK EMERGENT (the deepest moral↔information coupling): an EVIL settlement WEAPONIZES the layer —
+  feeds FALSE high-confidence intel to a lawful-good neighbour ⇒ the neighbour acts on it ⇒ attacks
+  unjustly ⇒ DRIFTS toward the manipulator's alignment (§4g moral drift). Evil corrupts good THROUGH
+  information: the manipulator engineers the tragedy of the deceived-good actor, and profits.
+- SUBSTRATE NOTE: this makes the absent SETTLEMENT-ALIGNMENT field (PART III §III.4-1) TRIPLY required —
+  culture (§II.5-2) + moral drift (§4g) + info-handling (here) — reinforcing DERIVE-it-endogenously
+  (governance + dominant faith + recent acts) over a new authored field.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
