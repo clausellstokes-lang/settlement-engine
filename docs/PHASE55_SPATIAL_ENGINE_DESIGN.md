@@ -283,6 +283,19 @@ possible), in three groups:
 The rumor packet carries the CONTENT + TRUST vector; each axis has its own decay rule + operators.
 EXCLUSIVITY is a world-level derivation (how widely an event's rumor has propagated).
 
+**ORGANIC DEGRADATION IS PRNG-GATED (owner, round 13).** The CONTENT-axis weathering (completeness/
+accuracy/framing drift) is ORGANIC — a SEEDED PRNG ROLL per hop, NOT a fixed decrement. It is a
+DISTRIBUTION, and the tails matter: a piece of news CAN survive PERFECTLY PRESERVED across the whole
+map (RARE but real), and can also garble severely. So there are TWO distinct distortion SOURCES that
+compose on every packet: (1) ORGANIC degradation — PRNG-gated, UNDIRECTED noise (the telephone), and
+(2) INTENTIONAL distortion — alignment-DIRECTED, self-serving (round 11: evil distorts for gain,
+framing bias). Final packet state = base content − organic PRNG weathering ± intentional directed
+distortion of the relayers it crossed. SEEDED (per event/carrier/edge/hop fork, PART III §III.2-5) ⇒
+the "roll" is deterministic on replay. Consequence: the SAME event propagates at DIFFERENT fidelities
+down DIFFERENT chains (the eastern chain garbles, the northern preserves) — so §4f cross-confirmation
+has real work to do, and the rare perfectly-preserved long-range truth is a genuine (lucky) event.
+Timeliness is the exception — it degrades DETERMINISTICALLY with distance/time (age is not a roll).
+
 **Fidelity decay — HOW each axis degrades (the layered model; maps onto the vector above):**
 1. COMPLETENESS decay — details drop. The event has structured fields (who/what/where/when/
    magnitude/cause); each hop, low-salience fields have a seeded chance to fall away. Hops 1–3 ≈
@@ -513,6 +526,23 @@ army (cut its couriers) is a first-class objective. REINFORCEMENTS are just anot
 ATTRITION through danger, and if they meet an enemy army en route it is a BATTLE / SKIRMISH (§5
 collision, scaled to the forces). Reinforcement + courier + caravan together are the army's supply-and-
 information UMBILICAL to home; severing it starves the army of both matériel and intelligence at once.
+
+**ABSENCE OF INFORMATION IS INFORMATION — the most uncertain kind (owner, round 13).** Silence from a
+route/direction/settlement is itself a SIGNAL — maximally AMBIGUOUS (cut off? besieged? fallen?
+isolated? or just a delayed courier? — you don't know WHICH, only that something MIGHT have changed).
+It is NOT a new channel or a "no-news message"; it is a DERIVED BELIEF-MAP property + the limiting case
+of the TIMELINESS axis (§4f): for each settlement/route an actor cares about, track WEEKS-SINCE-LAST-
+UPDATE; as silence grows, CONFIDENCE in the prior belief DECAYS toward MAXIMUM UNCERTAINTY, and that
+rising uncertainty IS the signal the §4g/round-11 risk assessment reads. It DRIVES ACTION per
+disposition: a cautious/lawful actor treats silence as danger (assume the worst about a silent ally/
+front — ramp, or send a SCOUT/courier to probe, which closes the loop by generating a returning
+report); a naive/chaotic one ignores it and is SURPRISED. It ties the whole design together: a
+besieged/isolated settlement (§4e/§7) going DARK (§4f) is EXPERIENCED by its allies AS absence — the
+trigger to decide whether to relieve it; §4g road-block/blackout WEAPONIZES absence (deny the enemy
+news ⇒ engineer their uncertainty ⇒ their mis-assessment), but double-edged — silencing THEM also means
+YOU may misread their silence (a fine settlement whose couriers were merely delayed reads as a false
+alarm). Absence is the timeliness axis run to its limit: a belief with no update becomes, in time,
+indistinguishable from no belief at all — and acting on that void is its own risk.
 
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
