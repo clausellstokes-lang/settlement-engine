@@ -108,8 +108,11 @@ months/years, the EXCESS population MIGRATES along ROUTES to the closest reachab
   LOW PROSPERITY also push population out, weighted by the whole situation (siege + famine + low
   prosperity hemorrhages; a prosperous peaceful town with a food dip barely loses any).
 - DESTINATION SELECTION (pull + avoidance, PRNG-gated at various levels): migrants prefer the
-  CLOSEST reachable settlement (path cost) with the LEAST DRIFT from their own culture/religion
-  AND the LEAST HOSTILITY. Under war or large culture/religion gaps they SHY AWAY from the
+  CLOSEST reachable settlement (path cost) with the LEAST DRIFT from their own culture/religion,
+  the LEAST HOSTILITY, AND (round 6) the HIGHEST PROSPERITY — a fourth, gravity-like axis: most
+  also head for the richest reachable neighbour. This is the §4b entrepôt PULL loop made an
+  explicit migration term (hubs concentrate people; the four axes trade off, weighted + PRNG-
+  gated). Under war or large culture/religion gaps they SHY AWAY from the
   hostile/instigating settlement — but NOT ALL do (a scatter fraction goes to the "wrong" place).
   Most cluster in the nearest friendly similar town; some disperse. Makes culture/religion a
   MIGRATION factor that FEEDS BACK into the destination (a similar-culture influx reinforces it;
@@ -125,6 +128,26 @@ months/years, the EXCESS population MIGRATES along ROUTES to the closest reachab
   tolerance buffer + graded rates must prevent regional oscillation/collapse (A's refugees strain
   B strain C…). Fixes a review nit too: mass migration is a REAL event, so population change stops
   being "+3 residents/week" noise and becomes signal worth a headline.
+
+## 4d. Contraband, gate policy, and smuggling risk tolerance (owner, round 6)
+Gates gain a POLICY dimension beyond the round-4 toll rate: a settlement may PROHIBIT or
+CONFISCATE specific GOODS CATEGORIES at its gates when they violate its LAW/CULTURE/ALIGNMENT
+(SLAVES the flagship example — a settlement that outlaws slavery seizes a slave caravan; a
+culturally-different or lawful gate bans what its neighbour trades freely). This makes smuggling
+TWO-SIDED: round-4 smuggling evaded HOSTILE interception; round-6 smuggling also evades LEGAL/
+MORAL PROHIBITION. Smugglers can attempt to run prohibited cargo through a banning gate.
+- RISK-TOLERANCE RANGE: the smuggle attempt itself (whether to try, how much to risk) is weighted
+  by the mover's RISK TOLERANCE — the SAME cheap-vs-safe / alignment-fidelity pattern as routing
+  (§2 routing risk): a bold/chaotic smuggler runs contraband a cautious/lawful trader wouldn't,
+  and mis-weights the danger; a seasoned one reads it true. So smuggling volume is a distribution,
+  not a constant — some cargoes never attempt the run, some brazen ones do and are caught.
+- COUPLINGS: contraband status is RELATIONAL (a good is contraband w.r.t. the transiting gate's
+  law/culture, not intrinsically) → reuses the culture/alignment distance the migration §4c and
+  faith systems already compute. Confiscation feeds the seizing settlement (loot, W-C2 conscience-
+  gated) and denies the destination (the §7 interdiction path). Corruption is still the hinge: a
+  corrupt gate that officially bans slaves takes a bribe and waves them through anyway (prohibition
+  on paper, leak in practice). Slavery/contraband trade thus becomes a moral-economic axis with a
+  legal force (prohibition/confiscation) and its counterforce (smuggling, risk-tolerance-gated).
 
 ## 5. The military layer
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
