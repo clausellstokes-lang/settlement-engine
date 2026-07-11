@@ -58,6 +58,11 @@ const PowerTab = lazy(() => import('./new/tabs/PowerTab'));
 // legitimacy / cause chains), tier-gated inside. Lazy so the faith read-model +
 // deityEffects only load when a dossier is actually opened (ratchet: faith lazy).
 const FaithSection = lazy(() => import('./settlement/FaithSection.jsx'));
+// Phase 5 W-C4 — the patron/cult ASSIGNMENT control (the write half of the
+// embed-on-assign bridge). Editable dossiers only; self-gates by tier inside
+// (premium write · lapsed read-only · free upsell). Lazy so the registry + copy
+// only load when a dossier is opened (ratchet: assignment lazy).
+const DeityAssignmentPanel = lazy(() => import('./settlement/DeityAssignmentPanel.jsx'));
 const DefenseTab = lazy(() => import('./new/tabs/DefenseTab'));
 const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
 const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
@@ -532,6 +537,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />
+          {/* The patron/cult assignment control — the settlement editor's write
+              surface for the SET_PRIMARY_DEITY canon event. Editable dossiers only
+              (never a public/shared read-only view); self-gates by tier inside. */}
+          {!readOnly && <Suspense fallback={null}><DeityAssignmentPanel /></Suspense>}
           {/* Faith rides under Power (its divine mandate props/erodes the ruler's
               legitimacy). Self-gates by tier: full panel when embeds are present
               (premium/lapsed/shared), generic true-neutral teaser for free/anon,

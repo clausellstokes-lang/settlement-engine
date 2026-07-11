@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, swatch } from '../theme.js';
 import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions } from '../../domain/customContentSchema.js';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions,
+  DEITY_ALIGNMENT, DEITY_LAW, DEITY_TIER, DEITY_PORTFOLIO_MAX_LENGTH } from '../../domain/customContentSchema.js';
+import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
+import { td } from '../../copy/deityAuthoring.js';
+import DeityEffectPreview from './DeityEffectPreview.jsx';
+import PantheonActivationStrip from './PantheonActivationStrip.jsx';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
 import { useStore } from '../../store/index.js';
@@ -69,6 +74,12 @@ export const CUSTOM_CATEGORIES = [
         hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
     ],
   },
+  // Deities — homebrew gods (premium custom content). PURE authoring: the axes
+  // ride an embed only once a DM ASSIGNS the deity as a settlement's patron
+  // (DeityAssignmentPanel → the SET_PRIMARY_DEITY canon event); tier NEVER touches
+  // generation. `portfolio` is a free-text flavor field with ZERO mechanics.
+  { key:'deities',      label:'Deities',      Icon:Sparkles,  color:'#7c3aed', singular:'Deity',
+    fields:['name','alignmentAxis','lawAxis','rankAxis','portfolio','domain'] },
   { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
     fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
     dependencies: [
@@ -117,10 +128,28 @@ const FIELD_HINTS = {
   agenda:         'What this faction is trying to achieve.',
   scale:          'How much reach and influence this faction has.',
   methods:        'How it pursues its agenda — e.g. bribery, force, diplomacy.',
+  // Deities — the axis hints explain what each axis DOES in the engine (copy in
+  // the lazy deityAuthoring namespace, so it never rides first paint).
+  alignmentAxis:  td('form.alignmentHint'),
+  lawAxis:        td('form.lawHint'),
+  rankAxis:       td('form.rankHint'),
+  portfolio:      td('form.portfolioHint'),
+  domain:         td('form.domainHint'),
+};
+
+// Field-label overrides — nicer than the auto camelCase split for deity axes.
+const FIELD_LABELS = {
+  alignmentAxis: td('form.alignmentLabel'),
+  lawAxis:       td('form.lawLabel'),
+  rankAxis:      td('form.rankLabel'),
+  portfolio:     td('form.portfolioLabel'),
+  domain:        td('form.domainLabel'),
 };
 
 // §14 — resolve a stored enum key to its human label for the detail view.
 const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
+// Compact capitalize for a stored enum key (deity axis chips).
+const cap = (s) => (s ? String(s).charAt(0).toUpperCase() + String(s).slice(1) : s);
 
 /**
  * CustomItemAttributes — the post-creation "detail sheet" for a saved custom
@@ -142,6 +171,12 @@ export function CustomItemAttributes({ item }) {
   if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
   if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
   if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
+  // Deity axes — moral / order / rank / domain (never the derived temper). Use
+  // the compact capitalized key, not the verbose enum label.
+  if (item.alignmentAxis) chips.push({ label: `Moral · ${cap(item.alignmentAxis)}`, color: '#7c3aed' });
+  if (item.lawAxis && item.lawAxis !== 'neutral') chips.push({ label: `Order · ${cap(item.lawAxis)}`, color: '#7c3aed' });
+  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#6a3fbf' });
+  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5010' });
   if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
   if (!chips.length) return null;
   return (
@@ -318,11 +353,19 @@ export function CustomContentManager({ search }) {
 
   const handleSave = () => {
     if (!draft.name?.trim()) return;
+    // Deities: the schema requires a stored temperamentAxis, but temper is RETIRED
+    // as a load-bearing field (derived from the moral + order axes). Derive it at
+    // save so stored === derived — the decoupled-temper fixture class can never
+    // enter through authored content (mirrors the deityPool discipline). The
+    // author never sets it (see form.temperNote); it is engine-inert.
+    const toSave = activeCat === 'deities'
+      ? { ...draft, lawAxis: draft.lawAxis || 'neutral', temperamentAxis: deityTemper({ alignmentAxis: draft.alignmentAxis, lawAxis: draft.lawAxis }) }
+      : draft;
     if (editingId) {
-      updateCustomItem(activeCat, editingId, draft);
+      updateCustomItem(activeCat, editingId, toSave);
       setEditingId(null);
     } else {
-      addCustomItem(activeCat, draft);
+      addCustomItem(activeCat, toSave);
       setAddingNew(false);
     }
     setDraft({});
@@ -413,27 +456,53 @@ export function CustomContentManager({ search }) {
       case 'commodities': return <input {...shared} placeholder="Comma-separated (e.g. iron ore, coal, gemstones)" onChange={e=>setDraft(d=>({...d,commodities:e.target.value}))}/>;
       case 'affects': return renderPills('affects', STRESSOR_AFFECT_CATEGORIES, '#8b1a1a');
       case 'description': return <textarea {...shared} rows={2} placeholder="Description..." style={{...shared.style, resize:'vertical'}}/>;
+      // ── Deity axes (moral / order / rank) + portfolio flavor + domain ────────
+      case 'alignmentAxis': return <select {...shared} value={val||''}><option value="">Select…</option>{DEITY_ALIGNMENT.map(a=><option key={a.key} value={a.key}>{a.label}</option>)}</select>;
+      case 'lawAxis': return <select {...shared} value={val||'neutral'}>{DEITY_LAW.map(l=><option key={l.key} value={l.key}>{l.label}</option>)}</select>;
+      case 'rankAxis': return <select {...shared} value={val||''}><option value="">Select…</option>{DEITY_TIER.map(r=><option key={r.key} value={r.key}>{r.label}</option>)}</select>;
+      case 'portfolio': {
+        const pv = draft.portfolio || '';
+        return (
+          <>
+            <textarea {...shared} value={pv} rows={2} maxLength={DEITY_PORTFOLIO_MAX_LENGTH} placeholder={td('form.portfolioPlaceholder')} style={{...shared.style, resize:'vertical'}}/>
+            <div style={{ textAlign:'right', fontSize:FS.micro, color:MUT, marginTop:2 }}>{pv.length} / {DEITY_PORTFOLIO_MAX_LENGTH}</div>
+          </>
+        );
+      }
+      case 'domain': return <input {...shared} placeholder={td('form.domainPlaceholder')}/>;
       default: return <input {...shared} placeholder={field.charAt(0).toUpperCase()+field.slice(1)}/>;
     }
   };
 
+  const singular = catDef.singular || catDef.label.slice(0,-1);
   const renderForm = () => (
     <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
       <div style={{ fontSize:FS.xs, fontWeight:700, color:swatch.magic, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
-        {editingId ? 'Edit Item' : 'New Custom ' + catDef.label.slice(0,-1)}
+        {editingId ? 'Edit Item' : 'New Custom ' + singular}
       </div>
+      {activeCat === 'deities' && (
+        <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5, marginBottom:8 }}>{td('form.intro')}</div>
+      )}
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
         {catDef.fields.map(f => (
           <div key={f}>
             {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the renderField control + has matching htmlFor, but the static nesting check can't see through renderField(). label-has-associated-control passes. */}
             <label htmlFor={`ccm-field-${f}`} style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>
-              {f.replace(/([A-Z])/g,' $1')}
+              {FIELD_LABELS[f] || f.replace(/([A-Z])/g,' $1')}
               {renderField(f)}
             </label>
             {FIELD_HINTS[f] && <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:2, lineHeight:1.4 }}>{FIELD_HINTS[f]}</div>}
           </div>
         ))}
       </div>
+
+      {/* Deities — the derived-temper note + the live single-source effect preview. */}
+      {activeCat === 'deities' && (
+        <>
+          <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:6, lineHeight:1.4 }}>{td('form.temperNote')}</div>
+          <DeityEffectPreview draft={draft} />
+        </>
+      )}
 
       {/* Dependencies — collapsible. Categories without `dependencies` skip this. */}
       {Array.isArray(catDef.dependencies) && catDef.dependencies.length > 0 && (
@@ -445,7 +514,7 @@ export function CustomContentManager({ search }) {
       )}
 
       <div style={{ display:'flex', gap:6, marginTop:8 }}>
-        <Button variant="ai" size="sm" onClick={handleSave} disabled={!draft.name?.trim()}>{editingId?'Update':'Add'}</Button>
+        <Button variant="ai" size="sm" onClick={handleSave} disabled={!draft.name?.trim() || (activeCat==='deities' && (!draft.alignmentAxis || !draft.rankAxis))}>{editingId?'Update':'Add'}</Button>
         <Button variant="secondary" size="sm" onClick={resetDraft}>Cancel</Button>
       </div>
     </div>
@@ -467,13 +536,16 @@ export function CustomContentManager({ search }) {
         })}
       </div>
 
+      {/* Deities — the OUR-milestones activation/dormancy strip (name-free). */}
+      {activeCat === 'deities' && <PantheonActivationStrip />}
+
       {/* Supply Chains: discovered + verified, not hand-authored — its own manager. */}
       {activeCat === 'supplyChains' && <SupplyChainsManager />}
 
       {/* Add button */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
         <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); }} style={{ marginBottom:10 }}>
-          Add Custom {catDef.label.slice(0,-1)}
+          Add Custom {singular}
         </Button>
       )}
 
@@ -496,7 +568,7 @@ export function CustomContentManager({ search }) {
                 <IconButton Icon={Edit3} label="Edit item" tone="ghost" size="sm" onClick={() => handleEdit(item)} />
                 <IconButton Icon={Trash2} label="Delete item" tone="danger" size="sm" onClick={() => setDeleteId(deleteId===item.id?null:item.id)} />
               </div>
-              {item.description && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description}</div>}
+              {(item.description || item.portfolio) && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{item.description || item.portfolio}</div>}
               <CustomItemAttributes item={item} />
               {item.tags && <div style={{ display:'flex', gap:3, flexWrap:'wrap', marginTop:4 }}>{(typeof item.tags==='string'?item.tags.split(','):item.tags).map((t,i)=><Tag key={i} label={t.trim()} color={MUT}/>)}</div>}
               {/* Affects pills (stressors only) */}
