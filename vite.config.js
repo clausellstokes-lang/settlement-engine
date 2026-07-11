@@ -94,7 +94,18 @@ const isEngineSharedDomain = (id) => {
 // so a new map-only icon auto-moves and a newly-shared one auto-returns.
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget) +
 //              tests/build/iconChunkSplit.test.js (the split's shape).
-function computeMapOnlyLucideIcons() {
+// The lazy route surfaces whose icons must not pay first-paint bytes. map/**
+// keeps its own `vendor-icons-map` chunk (the existing pin); the rest share
+// `vendor-icons-lazy`. Adding a dir here can only SHRINK first paint or do
+// nothing — an icon used by ANY file outside these dirs (i.e. any first-paint
+// or shared surface) is excluded from both lazy sets, so nothing a first-paint
+// view needs is ever routed to a lazy chunk. A mislabeled (actually-eager) dir
+// is harmless: its icons ride vendor-icons-lazy, which a first-paint static
+// import would simply pull back into the closure — safe, never broken.
+const LAZY_ICON_DIRS = ['settlements', 'account', 'admin', 'gallery', 'compendium']
+  .map((d) => join(SRC, 'components', d));
+const MAP_DIR = join(SRC, 'components', 'map');
+function computeLucideIconSplit() {
   const walk = (d, out = []) => {
     if (!existsSync(d)) return out;
     for (const e of readdirSync(d)) {
@@ -116,23 +127,37 @@ function computeMapOnlyLucideIcons() {
     }
     return set;
   };
-  const MAP_DIR = join(SRC, 'components', 'map');
+  const inMap = (f) => f.startsWith(MAP_DIR);
+  const inLazy = (f) => inMap(f) || LAZY_ICON_DIRS.some((d) => f.startsWith(d));
   const mapIcons = new Set();
-  const otherIcons = new Set();
+  const nonMapIcons = new Set();
+  const eagerIcons = new Set(); // imported by any file OUTSIDE the lazy dirs
   for (const f of walk(SRC)) {
-    const target = f.startsWith(MAP_DIR) ? mapIcons : otherIcons;
-    for (const i of iconsOf(f)) target.add(i);
+    const icons = iconsOf(f);
+    const lazy = inLazy(f);
+    const map = inMap(f);
+    for (const i of icons) {
+      (map ? mapIcons : nonMapIcons).add(i);
+      if (!lazy) eagerIcons.add(i);
+    }
   }
-  const mapOnly = new Set();
-  for (const i of mapIcons) if (!otherIcons.has(i)) mapOnly.add(kebab(i));
-  return mapOnly;
+  const mapOnly = new Set();  // map-exclusive → vendor-icons-map (existing pin)
+  const lazyOnly = new Set(); // other lazy-only (incl. map+other-lazy) → vendor-icons-lazy
+  for (const i of new Set([...mapIcons, ...nonMapIcons])) {
+    if (eagerIcons.has(i)) continue;                 // a first-paint file needs it → stays
+    if (mapIcons.has(i) && !nonMapIcons.has(i)) mapOnly.add(kebab(i));
+    else if (mapIcons.has(i) || nonMapIcons.has(i)) lazyOnly.add(kebab(i));
+  }
+  return { mapOnly, lazyOnly };
 }
-const MAP_ONLY_ICONS = computeMapOnlyLucideIcons();
-// Match `/lucide-react/dist/esm/icons/<kebab>.js` (never the barrel) and test
-// membership in the derived map-only set.
-const isMapOnlyLucideIcon = (id) => {
+const { mapOnly: MAP_ONLY_ICONS, lazyOnly: LAZY_ONLY_ICONS } = computeLucideIconSplit();
+// Match `/lucide-react/dist/esm/icons/<kebab>.js` (never the barrel) → its chunk.
+const lucideIconChunk = (id) => {
   const m = id.match(/lucide-react\/dist\/esm\/icons\/([a-z0-9-]+)\.[cm]?js/);
-  return !!m && MAP_ONLY_ICONS.has(m[1]);
+  if (!m) return 'vendor-icons';
+  if (MAP_ONLY_ICONS.has(m[1])) return 'vendor-icons-map';
+  if (LAZY_ONLY_ICONS.has(m[1])) return 'vendor-icons-lazy';
+  return 'vendor-icons';
 };
 
 export default defineConfig({
@@ -239,10 +264,11 @@ export default defineConfig({
           if (id.includes('node_modules/zustand') || id.includes('node_modules/immer'))
             return 'vendor-state';
           if (id.includes('node_modules/lucide-react'))
-            // Icons used ONLY by the (lazy) World Map ride their own chunk so
-            // they stop paying first-paint bytes; everything else stays in the
-            // first-paint vendor-icons chunk. See computeMapOnlyLucideIcons.
-            return isMapOnlyLucideIcon(id) ? 'vendor-icons-map' : 'vendor-icons';
+            // Icons used ONLY by lazy route surfaces (map → vendor-icons-map;
+            // settlements/account/admin/gallery/compendium → vendor-icons-lazy)
+            // stop paying first-paint bytes; everything a first-paint or shared
+            // surface uses stays in vendor-icons. See computeLucideIconSplit.
+            return lucideIconChunk(id);
           if (id.includes('node_modules/@supabase'))
             return 'vendor-supabase';
           if (id.includes('node_modules/html2canvas'))
