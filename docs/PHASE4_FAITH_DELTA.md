@@ -1135,3 +1135,25 @@ generation — the peace dividend).
   observable in long-peace soaks; NO permanent war-machine lock-in.
 - Arcs not steps (LAG both directions); neutral/absent inputs = exact zero; cause chains
   ("a generation without war has softened the garrison town"); deterministic, tick-start.
+
+### Readiness quality + strategic rust (OWNER, 2026-07-11 — extends the W-F8 martial-readiness brief)
+1. READINESS -> DEPLOYED QUALITY: high readiness (war economy, institutions, religion,
+   leadership) also grants SLOWER ATTRITION DECAY throughout deployment and HIGHER EFFECTIVE
+   STATS for deployed forces — drilled levies, maintained arms, supply that reaches the
+   front. Brake: flows through the existing capacity math (efficiency, never invincibility);
+   the three militarism brakes still govern.
+2. STRATEGIC RUST (the second fidelity term): a recency-weighted EXPERIENCE scalar from the
+   settlement's actual engagement history — skirmishes/sieges/wins/losses all teach,
+   weighted to the recent, growing with engagement, decaying through extended peace. Feeds
+   the SAME fidelityNoise seam as chaosPull: total error = temperamental indiscipline
+   (alignment) + institutional rust (inexperience). NON-BINARY, scaling both directions.
+   - THE COUNTERWEIGHT ON LAW: lawful realms fight rarely => rusty when they finally do
+     (the 1914 problem, derived); chaotic realms skirmish constantly => sharp instincts
+     under noisy temperament. Law's discipline tax, mirroring chaos's fecundity dividend.
+   - BOUNDS: rust CAPS (degraded, never random); experience never cures the chaos term
+     (floors); border realms stay sharp, interior empires soften. Seeded, deterministic,
+     cause-chained ("a generation of peace has dulled the war council").
+   - ENVELOPE (W-F8): error margin correlates inversely with recency-weighted engagement;
+     long-peace realms observably blunder their first wars; no compounding with readiness
+     into invincible veteran-states (rust and readiness are independent axes: a ready-but-
+     rusty fortress town is expressible, as is a threadbare-but-sharp raider camp).
