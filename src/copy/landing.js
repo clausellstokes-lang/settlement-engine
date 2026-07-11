@@ -155,7 +155,7 @@ export const landing = {
       { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, completely randomized, no sign-up. Up to Town size, nothing kept.' },
       { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library to keep them, PDF export, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, gallery import.', accent: true },
-      { name: 'Founder',      badge: 'Lifetime',          body: 'Everything Cartographer runs, forever. One payment, no clock.' },
+      { name: 'Founder',      badge: 'Premium · Lifetime', body: 'Everything Cartographer runs, forever. One payment, no clock.' },
     ],
     fullPricing: 'Full pricing',
   },
