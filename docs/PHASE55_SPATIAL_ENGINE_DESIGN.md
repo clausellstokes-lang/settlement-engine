@@ -327,6 +327,93 @@ RUMOR. The tab name "Rumors & News" is literally the fidelity axis.
 - ENDOGENEITY: the rumor mill is WORLD-driven (events + trade), party-INDEPENDENT — the party
   RECEIVES rumors, never feeds propagation/fit math. (Party-as-carrier — the PCs spreading news as
   they travel — is a tempting FUTURE extension; the core stays party-independent to hold the law.)
+
+## 4g. Belief-driven action — the fog of war closes the loop (owner, round 10)
+Rounds 8–9 produce INFORMATION; round 10 makes settlements ACT on it — imperfectly — and their
+actions become new information. This is the loop that makes the world self-driving and, more
+importantly, STORY-GENERATING: stories come from actors deciding on incomplete/false information
+and being wrong. The world stops being OMNISCIENT. Each settlement acts on what it BELIEVES; the
+gap between belief and truth is where war, tragedy, and moral consequence live.
+
+**THE MASTER LOOP:** event → propagates as rumor (§4f + round-9 carriers) → updates a settlement's
+BELIEFS → drives a DECISION (weighted, PRNG-gated) → the action is a new event → propagates …
+
+**THE CORE PRIMITIVE — per-settlement BELIEF STATE.** For a settlement to act on what it believes
+(which differs from truth), it holds a BELIEF MAP: its own possibly-wrong model of the world —
+what it thinks other settlements' readiness / alignment / faith / ALLIANCES / intentions are.
+Bounded (only settlements it has news of — its informational neighbourhood), derived
+deterministically from propagation, distorted by §4f fidelity. This is round 10's biggest new
+structure. The DM sees GROUND TRUTH + each settlement's BELIEF MAP + the DIVERGENCE — i.e. watches
+misunderstandings brew ("B believes A is about to attack — false — and is about to preempt").
+
+**THE WAR-DECISION MODEL (the heart):** a settlement's posture is a THREAT ASSESSMENT over its
+BELIEFS, not over ground truth.
+- Owner example A: A & B hostile; A ramps war readiness. B (by TEMPERAMENT) may not react — UNTIL
+  it HEARS a rumor that A is ramping to strike it or an ALLY. Then B ramps too, and (aggressive
+  temperament + high perceived threat + PRNG) may launch a PREEMPTIVE STRIKE to catch A off guard.
+- Owner example B: B marches on A who NEVER HEARD a rumor (no channel reached it — round 9), never
+  ramped, defenses lacking → B achieves a SIEGE before A even knew. INFORMATION STARVATION is a
+  military vulnerability, and it is exploitable.
+- Decision weights: TEMPERAMENT (aggressive/cautious/pacific), CURRENT DYNAMICS (relationship/
+  hostility), PRIOR HISTORY (past wars/betrayals), CULTURE DRIFT (round 6/7 distance), ALIGNMENT,
+  READINESS — over the BELIEVED threat, scaled by the rumor's CONFIDENCE. Escalation ladder:
+  do-nothing → ramp readiness (defensive) → preemptive strike (aggressive) → mobilize to defend an ally.
+- MISJUDGMENT is first-class and PRNG-gated, scaled INVERSELY by confidence: low-fidelity info ⇒
+  higher chance of a WRONG call (attack on a false/exaggerated rumor, over/under-react). So the
+  QUALITY of a settlement's information determines the QUALITY of its decisions — the well-informed
+  entrepôt (§4f cross-confirmation) acts soundly; the ill-informed backwater blunders into war. A
+  FALSE rumor can start a REAL war. The misjudgment is a legible CAUSE (W-C5).
+
+**INFORMATION-ASYMMETRY EXPLOITS (the strategic layer) — SPEED vs INFORMATION is a race:**
+- SURPRISE: strike before the target hears. If the army outruns the rumor of its own mobilization,
+  the defender can't ramp. Round-9 carrier SPEEDS become strategically central.
+- ROAD-BLOCKING (owner): an army on a road BLOCKS trade/rumors BEHIND it — its own movement
+  suppresses the warning that would precede it (generalizes §7 interception to INFORMATION).
+- TRADE BLACKOUT (owner): a settlement can temporarily block ALL trade in/out to DENY the enemy
+  intelligence about its preparations (or deny its own people destabilizing news) — information
+  denial as strategy. Mobilization is itself a rumor-generating event; blackout + road-block + a
+  fast army is the play to WIN THE RACE and preserve surprise.
+
+**STATE-CHANGE NEWS — not just events, but changes of NATURE, and they can be WRONG:**
+- RELIGION / ALIGNMENT changes propagate (a conversion, an alignment drift), distorted ("they
+  converted" heard as "they've fallen to a dark cult"). Neighbours update BELIEFS ⇒ cultureDistance
+  (§II.5-2) + hostility shift ⇒ trade/migration/faith adjust.
+- ALLIANCE / RELATIONSHIP state is ITSELF propagated info and can be STALE/FALSE — a settlement may
+  believe X & Y allied when they've secretly broken, or not know Z joined the enemy. ALLY CONFUSION:
+  • ALLY-DEFENDS-AHEAD (owner): A mobilizes to defend ally B (A heard B is threatened) while B does
+    NOT know A is coming, or doesn't even know it's threatened — asymmetric ally awareness (A rides
+    to rescue an oblivious or startled B).
+  • WRONG INTERPRETATION (owner): A's DEFENSIVE march is misread as AGGRESSION by a culturally-
+    distant/hostile observer C (§4f hostility distortion) ⇒ C launches a preemptive strike thinking
+    A comes for them ⇒ a CASCADING misread war nobody intended. The richest emergent drama in the design.
+
+**MORAL DRIFT FROM UNJUST ACTION (owner, delegated to architect):** a settlement that INSTIGATES a
+conflict while IN THE WRONG (acting on a false rumor, attacking a non-threatening/innocent target)
+suffers ALIGNMENT DRIFT — sharpest for a LAWFUL-GOOD actor (the gap between professed alignment and
+the unjust act). Magnitude scales with WHO it is against (innocent/weak/ally = worse) and PAST
+RELATIONS (a former friend = worse). Wires to W-C2 CONSCIENCE (already forecloses immoral conquest),
+the corruption/compromise system, and W-C5 (the unjust war becomes a CAUSE driving further drift or
+a later reckoning/reform). The fog of war becomes MORALLY LOADED: a good settlement DECEIVED into an
+unjust war pays a moral price — the tragedy of the well-intentioned deceived, and a self-correcting
+arc (drift → reckoning, or a spiral).
+
+**TELEPORT-TRADE CONSTRAINT (owner, round-7 refinement):** an ISOLATED teleport-circle settlement
+can trade ONLY via its circle, and ONLY with OTHER circle-holders that are NON-HOSTILE to it.
+Isolated + circle + ≥1 friendly circle-holder ⇒ trades/shares info through the circle network (a
+gate-bypassing, geography-independent bloc). Isolated + circle + ALL other circle-holders hostile ⇒
+FULLY cut off (the circle is dead weight without a willing counterpart). The teleport network is
+thus a CLIQUE OF THE WILLING — a magical trade+intelligence bloc transcending geography but bounded
+by DIPLOMACY; for allies a high-fidelity geography-independent intelligence channel (round-9 magic),
+for the friendless-isolated, useless.
+
+**Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
+deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
+settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
+not feed the decision math; party-as-rumor-carrier stays the opt-in future extension). DORMANCY: no
+spatial info layer ⇒ no belief maps ⇒ decisions fall back to today's model; the belief-driven
+decision layer is ADDITIVE, downstream of §4f + round-9 (build the rumor mill first, then this).
+
+## 5. The military layer
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
   position each tick.
 - **Collision.** Two hostile armies on crossing paths can meet BETWEEN settlements — a field
