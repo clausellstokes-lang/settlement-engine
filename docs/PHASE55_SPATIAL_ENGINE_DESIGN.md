@@ -1,10 +1,15 @@
 # Phase 5.5 — The Spatial Engine (design synthesis)
 
-STATUS: DESIGN (owner directives 2026-07-11, three rounds, synthesized by the architect).
+STATUS: DESIGN — GROUNDED (owner directives 2026-07-11, SIX rounds, synthesized by the
+architect; verified against the tree 2026-07-11 by workflow wf_d0c0299d-226 — see PART II).
 Depends on the Realm map as a stable first-class surface (the reunification's W4b surfaced
 its war/faith layer). To be built AFTER the reunification, with the determinism/dormancy
 contract nailed here before implementation — the same discipline as PHASE4_FAITH_DELTA.
 Raw directive log: memory/spatial-engine-direction.md.
+PART I (§0–§10) is the owner's vision as synthesized. PART II is the code-grounded feasibility
+verdict + the decisions the owner must make before build. READ PART II FIRST if you are scoping
+the build — the vision as written is not buildable until the keystone (a persisted, deterministic
+cost field) is resolved.
 
 ## 0. The thesis
 Today the simulation is ASPATIAL. "Neighbours" are an abstract graph; trade, faith, war, and
@@ -242,3 +247,147 @@ Control of the route GATES, at three intensities:
   rests on reconstructing that geometry deterministically. Verify in the map/campaign store.
 - **Combat-model tuning** needs a soak (envelope the upset-probability clamp so it never reads
   as a slot machine, per the "no hand of miracle" law).
+
+---
+
+# PART II — GROUNDING VERDICT (2026-07-11, verified against the tree)
+
+Workflow wf_d0c0299d-226: 6 agents mapped each system the spatial layer must hook into
+(file:line facts); 5 adversarially attacked determinism / cascade / dormancy / performance /
+completeness. Headline: **the vision is coherent and the seams to attach to exist, but it is
+NOT buildable as written.** It rests on one primitive the codebase does not have and the design
+never chose how to build — a persisted, deterministic cost field — and four constitutional
+axes (determinism, dormancy, cascade-stability, completeness) come back RED until that and a
+handful of owner decisions are resolved. Every RED is fixable; none is fatal. The fix is
+smaller and more disciplined than the full vision, and it converges on ONE move.
+
+## II.1 The substrate reality (the feasibility check, answered)
+What OUR canon map state ACTUALLY persists (mapSlice.js:98-123, campaignSlice.js:520-542):
+- `fmgSnapshot` — an OPAQUE ~1MB base64 blob = the fantasy-map generator's native serialization.
+  It is the ONLY carrier of terrain / heightmap / biome / river geometry, and **nothing in
+  src/** parses it.** It is re-materializable only by injecting it back into the FMG iframe.
+- `seed`, and `placements` = { burgId → { settlementId, x, y, cellId } } (x/y are FMG map-pixel
+  coords; cellId is pack-relative, meaningful only against the same reloaded pack).
+- `customBackdrop` (imported-image maps → a flat plain, NO cost field); `labels/markers/forests`
+  (decorative pins/strokes — NOT terrain, NOT user-drawn roads); `layers/viewport` (render only).
+- NOT PERSISTED anywhere engine-readable: a cost field, a heightmap array, per-settlement
+  terrain/elevation, a distance matrix, road polylines (roads are DERIVED render-only), gates,
+  or neighbour tiers.
+- The ONLY routing code in the repo (sf-bridge.js:617-851) is a real biome/elevation/river
+  cost field + A* — but it runs INSIDE the FMG iframe, async over postMessage, wall-clock-timeout
+  bounded (RoadsLayer.jsx 20s), iteration-capped (MAX_ITER=25000, returns null on cap), over raw
+  floats, and its output is discarded each session. It is the §2 math the design wants — in the
+  wrong layer, under the wrong contract.
+
+**Consequence:** §1's keystone — "the spatial graph is a PURE, seeded function of the canonized
+map state ⇒ byte-identical sim" — is UNSATISFIABLE from persisted state today. This is THE
+gating fact; rounds 2–7 all assume it is solved.
+
+## II.2 The keystone move (resolves determinism + dormancy + premium at once)
+Extract a FROZEN spatial digest ONCE, at the canonize seam, and make every advance a pure
+READER of it. The seam already exists and already does exactly this shape for topology:
+`canonizeCampaignWorld` (campaignWorldPulseSlice.js:187) stamps `worldState.canonizedAt` and
+snapshots the aspatial `regionalGraph` beside it. The spatial digest slots in right there.
+- **Port routing out of the iframe** into a pure seeded kernel module (lift landCost/seaCost +
+  A*, sf-bridge.js:655-764). It must NEVER traverse the iframe bridge for sim.
+- **Quantize to integers** at extraction (integer cost field, integer path costs) so route cost
+  is exact and gate/neighbour-tier membership — a step function of cost — cannot flip on a float
+  tie. Explicit A* tie-breaks (equal-f → lower cell index; equal-g → lower predecessor index).
+- **Persist the digest as immutable canon DATA** in `worldState` (versioned + strip-migrated
+  like the existing worldState discipline), treated like the fmgSnapshot blob: authored once,
+  NEVER recomputed. Goldens pin the frozen digest, not a from-seed recomputation.
+- Because the digest is authored at canonize and only READ thereafter, the advance is tier-blind
+  and byte-identical across clients → **premium, dormancy, and determinism all fall out of this
+  one decision.**
+
+## II.3 The four RED breaks and their fixes
+1. **Determinism (RED).** iframe/async/timeout/float routing → non-reproducible. FIX = II.2
+   (pure kernel + frozen integer digest) + per-roll fork keys from stable composite keys
+   (`fork('smuggle:'+shipmentId+':'+tick)`, `fork('scatter:'+sourceId+':'+tick)`,
+   `fork('battle:'+[a,b].sort().join()+':'+tick)`), + sort every spatial entity set by codepoint
+   id before mutating (conquestFeeds discipline), + thread the integer tick as the ONLY time
+   source (extend the no-Date grep-gate to spatial/ — the tick-49 pulseKernel class of bug).
+2. **Dormancy / premium (RED).** The proposed predicate (`canonizedAt` + a placement) is ALREADY
+   TRUE for essentially every campaign in the wild → shipping would retroactively light up the
+   installed base and break byte-identity, with NO entitlement seam on the advance path. FIX =
+   gate on a NEW marker that did not exist before (`worldState.spatialCanonVersion`), stamped
+   ONLY by an explicit spatial opt-in / re-canonize action, behind an entitlement read AT the
+   store canonize call site (mirror the settlementSlice tier split; domain stays tier-blind).
+   Old saves have no marker ⇒ stay aspatial ⇒ byte-identical. Write the digest under a NEW
+   worldState key materialized only when the marker is present (don't bump mapState schema —
+   that would rewrite every stored map on load and perturb the aspatial golden corpus).
+3. **Cascade / stability (RED).** The "every force has a counterforce" claim does NOT hold on the
+   prosperity/migration axis: (a) the megacity loop (entrepôt growth → prosperity → prosperity-
+   gravity migration → more growth) is UNDAMPED — toll-greed self-correction damps a different
+   sub-loop; (b) an EXISTING migration mode (`distributeMigrants` 'concentrated') dumps 100% of a
+   region's refugees into destinations[0] in ONE tick — round-6 prosperity gravity would weaponize
+   it; (c) the named chain-collapse damper (mortality, Σarrivals < migrants) DOESN'T EXIST and
+   collides with the current population-conservation invariant + an existing abs*0.45 origin-loss
+   proxy (double-mortality landmine). FIXES: add size-scaling congestion pushback (per-capita
+   prosperity saturation, crowding-driven food deficit, rising crime with size) so a hub's pull
+   DECAYS as it fills; forbid/ floor-scatter the 'concentrated' mode when spatial is active;
+   build the §3 arrival-tick transport LAG first (lag is itself the stabilizer that smooths the
+   wave); reconcile the 0.45 proxy vs new mortality (pick one) with a conservation-ledger soak
+   asserting Σarrivals + Σdeaths == Σdepartures; give embattlement HYSTERESIS (enter>X, exit<Y,
+   min dwell) + a continuous decaying scalar so it can't flip-flop tick-to-tick.
+4. **Completeness / contradictions (RED).** Beyond the cost field: (a) the static-cached-routes
+   claim CONTRADICTS §4b/§6/§4c/§5 all re-routing dynamically — resolve by splitting the cache:
+   canonize-frozen BASE cost field + all-pairs base routes, then a per-DISPATCH re-weighting pass
+   overlaying current tolls + per-mover danger, picking the route at dispatch (not per-tick);
+   (b) cost→WEEKS is completely undefined yet §3/§4/§4c/§5 all need it — needs an owner calibration
+   anchor; (c) culture-distance (§4c least-drift, §4d contraband) DOESN'T EXIST and §4d's claim to
+   "reuse §4c's culture distance" is circular — owner must choose fold-into-faith/alignment vs a
+   new persisted culture coordinate; (d) TERRITORY (the gate primitive for §4b/§4d/§7) isn't
+   persisted — define it in the canonize extraction (Voronoi region / route cell-sequence); (e)
+   define the per-gate event PIPELINE once (smuggle roll → interception seize → contraband
+   confiscation → toll) since confiscation vs interception seize the same shipment via different
+   conscience-gated paths; (f) smuggle = ONE per-shipment roll against the route's worst gate (not
+   per-gate, or long hostile routes become impossible and contradict the "besieged trickle");
+   (g) reconcile redefined SIEGE with the EXISTING blockadeTransport 'access' impairment +
+   foodStockpile siege drawdown (generalize, don't double-count); (h) §8 imported-map flat-plain
+   contradicts everything (no persisted overlay to route on).
+
+## II.4 Performance (yellow — survivable with two fixes the doc omits)
+- The "O(N²) shortest-paths cached" claim uses the WRONG algorithm. Do NOT compute all-pairs
+  cell-level A*. Run ONE multi-source Dijkstra over the cost field seeded from ALL settlements at
+  once → a Voronoi-of-settlements partition in O(cells·log cells), independent of N²; yields
+  nearest-settlement per cell, territory, gates, and base distances in a single pass.
+- Per-tick is NOT "just advance ledgers" IF §6 re-pathfinds per mover. Confine per-tick routing
+  to RE-SCORING a small fixed set of candidate routes (k-shortest, cached at canonize) against the
+  current embattlement field — never re-pathfind. Propagate fronts hop-by-hop over the sparse
+  graph with an 'already-reached' guard (not origin-to-all-N broadcast). Pre-rank the K cheapest
+  producers per (institution,input) once at canonize; per tick advance ledgers + fire arrivals.
+
+## II.5 Owner decisions required BEFORE build (surfaced by the grounding)
+1. **Cost→weeks calibration.** "A typical adjacent primary hop = N weeks" (sets map scale / pacing
+   feel). Linchpin of all propagation/caravan/migration/army timing. OWNER anchor needed.
+2. **Culture-distance representation.** (a) fold culture into faith/alignment axes (cheap, lossy)
+   or (b) commit to a new persisted culture coordinate (net-new authoring). Faith-distance IS
+   buildable today from deity axes; culture is only a display string (settlement.schema L94).
+3. **Imported / flat maps.** (a) build a real persisted terrain/road authoring layer, (b) restrict
+   spatial to GENERATED maps + keep imported aspatial, or (c) accept degenerate straight-line
+   spatial on imported maps. (Recommend (b) for v1.)
+4. **Cost-field construction fork.** canonize-time one-shot iframe extraction (frozen digest) vs a
+   headless deterministic reconstructor. (Recommend extraction — smaller, reuses the working
+   iframe router once, and the frozen-digest discipline is what makes replay sound.)
+
+## II.6 The minimal coherent build slice (v1 — proves the seam, ships value)
+The full 6-round vision is a program; the SMALLEST thing that delivers real value and proves the
+determinism/dormancy seam is far smaller. Recommended v1 spine, in order:
+1. **Spatial-canon marker + entitled canonize** (the dormancy/premium seam) — no behavior yet,
+   just the opt-in switch + entitlement read + a persisted (empty) digest key. Goldens unchanged.
+2. **Frozen integer spatial digest** at canonize: port the iframe router once, multi-source
+   Dijkstra → per-cell nearest settlement, territory, gates, neighbour tiers, base distance
+   matrix. Pure, seeded, quantized, persisted, immutable. This is the keystone; everything else
+   is downstream.
+3. **Distance/terrain modulation of what ALREADY propagates** — replace the aspatial regionalGraph
+   weights in trade/faith/news with base-distance-weighted ones + cost→weeks latency (the §3
+   propagation front). This alone makes the map govern the sim and is a complete, shippable story.
+4. THEN, incrementally, the richer layers (embattlement routing, caravans/supply-starvation,
+   migration w/ mortality, army transit + combat resolution, tolls/entrepôt, contraband/smuggle) —
+   each its own fenced wave with its own soak, in roughly that dependency order. Migration-with-
+   mortality and army-combat are the two highest-risk (conservation invariant; the war convergence
+   point) and want dedicated soaks.
+
+Sequence still holds: AFTER the reunification stabilizes the Realm surfaces. The determinism +
+dormancy contract above is now nailed; the owner decisions in II.5 are the remaining gate.
