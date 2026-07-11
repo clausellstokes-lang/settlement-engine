@@ -3,22 +3,27 @@
  * credits, roles, and system configuration.
  *
  * Only accessible to users with 'developer' or 'admin' role.
- * Protected writes go through the admin-actions edge function so role,
- * tier, founder, and credit changes are audited server-side.
+ * Protected reads AND writes go through the admin-actions edge function so
+ * everything is role-gated and audited server-side. In particular the user
+ * console is the audited, redacted AdminUsersPanel (list_users / get_user_*),
+ * never a raw client-side `profiles.select('*')` — that raw read shipped every
+ * user's email + columns to the browser, unaudited, and has been removed.
  */
 import { useState, useEffect, useCallback } from 'react';
 import {
-  Users, Shield, Zap, Search, ChevronLeft,
-  Check, X, AlertCircle, RefreshCw, Crown, Flag, BarChart3, TrendingUp,
+  Users, Shield, Zap, ChevronLeft, RefreshCw, Crown, Flag,
+  BarChart3, TrendingUp, AlertCircle,
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
+import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
+import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
+import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
 import Button from './primitives/Button.jsx';
-import IconButton from './primitives/IconButton.jsx';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
   return (
@@ -44,215 +49,43 @@ function Section({ title, icon: Icon, children, actions }) {
   );
 }
 
-/** Inline user row with editable credits/tier/role */
-function UserRow({ user, onUpdate }) {
-  const [editing, setEditing] = useState(null); // 'credits' | 'tier' | 'role' | null
-  const [editValue, setEditValue] = useState('');
-  const [saving, setSaving] = useState(false);
-
-  const startEdit = (field, currentValue) => {
-    setEditing(field);
-    setEditValue(String(currentValue || ''));
-  };
-
-  const saveEdit = async () => {
-    if (!editing) return;
-    setSaving(true);
-    try {
-      const body = editing === 'credits'
-        ? {
-            action: 'update_user_credits',
-            userId: user.id,
-            credits: parseInt(editValue, 10) || 0,
-          }
-        : {
-            action: 'update_user_metadata',
-            userId: user.id,
-            metadata: { [editing]: editValue },
-          };
-
-      const { data, error } = await supabase.functions.invoke('admin-actions', { body });
-      if (error) throw error;
-      if (data?.error) {
-        throw new Error(data.error);
-      }
-
-      onUpdate();
-      setEditing(null);
-    } catch (e) {
-      console.error('Failed to update user:', e);
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const roleBg = {
-    developer: 'rgba(124,58,237,0.1)',
-    admin: 'rgba(220,38,38,0.1)',
-    user: 'transparent',
-  };
-
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.sm,
-      padding: `${SP.sm + 2}px ${SP.md}px`,
-      background: roleBg[user.role] || 'transparent',
-      borderRadius: R.md, fontSize: FS.sm, fontFamily: sans,
-      borderBottom: `1px solid ${BORDER2}`,
-    }}>
-      {/* Email */}
-      <div style={{ flex: 2, minWidth: 0 }}>
-        <div style={{ fontWeight: 600, color: INK, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {user.display_name || user.email || user.id.slice(0, 8)}
-        </div>
-        <div style={{ fontSize: FS.xxs, color: MUTED, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {user.email || user.id}
-        </div>
-      </div>
-
-      {/* Role */}
-      <div style={{ flex: 1, minWidth: 70 }}>
-        {editing === 'role' ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <select value={editValue} onChange={e => setEditValue(e.target.value)}
-              style={{ fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}` }}>
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-              <option value="developer">Developer</option>
-            </select>
-            <IconButton Icon={Check} label="Save role" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
-          </div>
-        ) : (
-          <Button variant="ghost" size="sm" onClick={() => startEdit('role', user.role)}
-            style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.xxs, fontWeight: 700,
-              color: user.role === 'developer' ? '#7c3aed' : user.role === 'admin' ? '#dc2626' : MUTED,
-              textTransform: 'uppercase',
-            }}>
-            {user.role || 'user'}
-          </Button>
-        )}
-      </div>
-
-      {/* Tier */}
-      <div style={{ flex: 1, minWidth: 60 }}>
-        {editing === 'tier' ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <select value={editValue} onChange={e => setEditValue(e.target.value)}
-              style={{ fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}` }}>
-              <option value="free">Free</option>
-              <option value="premium">Premium</option>
-            </select>
-            <IconButton Icon={Check} label="Save tier" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
-          </div>
-        ) : (
-          <Button variant="ghost" size="sm" onClick={() => startEdit('tier', user.tier || 'free')}
-            style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.xxs, fontWeight: 600,
-              color: user.tier === 'premium' ? '#2a7a2a' : GOLD,
-              textTransform: 'uppercase',
-            }}>
-            {user.tier || 'free'}
-          </Button>
-        )}
-      </div>
-
-      {/* Credits */}
-      <div style={{ flex: 1, minWidth: 60, textAlign: 'right' }}>
-        {editing === 'credits' ? (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 2, justifyContent: 'flex-end' }}>
-            <input type="number" aria-label="Credits" value={editValue} onChange={e => setEditValue(e.target.value)}
-              onKeyDown={e => e.key === 'Enter' && saveEdit()}
-              style={{ width: 60, fontSize: FS.xxs, padding: '2px 4px', borderRadius: R.sm, border: `1px solid ${GOLD}`, textAlign: 'right' }}
-              // eslint-disable-next-line jsx-a11y/no-autofocus -- inline edit field should focus on open
-              autoFocus />
-            <IconButton Icon={Check} label="Save credits" onClick={saveEdit} disabled={saving} tone="default" size="sm" />
-            <IconButton Icon={X} label="Cancel" onClick={() => setEditing(null)} tone="danger" size="sm" />
-          </div>
-        ) : (
-          <Button variant="ghost" size="sm" onClick={() => startEdit('credits', user.credits)}
-            icon={<Zap size={11} />}
-            style={{
-              minHeight: 'auto', padding: 0, border: 'none', background: 'none',
-              fontSize: FS.sm, fontWeight: 700, color: swatch['#7C3AED'],
-            }}>
-            {user.credits ?? 0}
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-}
-
 export default function AdminPanel({ onBack }) {
-  const _auth = useStore(s => s.auth);
   const isElevated = useStore(s => s.isElevated());
 
-  const [users, setUsers] = useState([]);
-  const [usersLoading, setUsersLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
   const [stats, setStats] = useState(null);
-  const [supportMessages, setSupportMessages] = useState([]);
-  const [supportLoading, setSupportLoading] = useState(true);
 
-  // Fetch users from profiles
-  const fetchUsers = useCallback(async () => {
+  // KPI figures via the audited admin-actions `get_stats` action. It returns
+  // aggregate counts ONLY (total / premium / credits pool) — no raw PII crosses
+  // into the browser. This replaces the former raw `profiles.select('*')` client
+  // read, which returned every user's email + columns to any elevated role,
+  // unaudited. The full user console below is the redacted AdminUsersPanel.
+  const fetchStats = useCallback(async () => {
     if (!supabase) return;
-    setUsersLoading(true);
     try {
-      let query = supabase.from('profiles').select('*').order('created_at', { ascending: false }).limit(100);
-      if (searchQuery.trim()) {
-        query = query.or(`email.ilike.%${searchQuery}%,display_name.ilike.%${searchQuery}%`);
-      }
-      const { data, error } = await query;
+      const { data, error } = await supabase.functions.invoke('admin-actions', {
+        body: { action: 'get_stats' },
+      });
       if (error) throw error;
-      setUsers(data || []);
-
-      // Compute stats
-      const total = data?.length || 0;
-      const premiumCount = data?.filter(u => u.tier === 'premium').length || 0;
-      const totalCredits = data?.reduce((sum, u) => sum + (u.credits || 0), 0) || 0;
-      setStats({ total, premiumCount, totalCredits });
+      if (data?.error) throw new Error(data.error);
+      setStats({
+        total: data?.total ?? 0,
+        premiumCount: data?.premiumCount ?? 0,
+        totalCredits: data?.totalCredits ?? 0,
+      });
     } catch (e) {
-      console.error('Failed to fetch users:', e);
-    } finally {
-      setUsersLoading(false);
-    }
-  }, [searchQuery]);
-
-  // Fetch support messages
-  const fetchSupport = useCallback(async () => {
-    if (!supabase) return;
-    setSupportLoading(true);
-    try {
-      const { data, error } = await supabase
-        .from('support_messages')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(50);
-      if (error) throw error;
-      setSupportMessages(data || []);
-    } catch (e) {
-      console.error('Failed to fetch support:', e);
-    } finally {
-      setSupportLoading(false);
+      console.error('Failed to fetch stats:', e);
     }
   }, []);
 
-  // Mount-fetch pattern: the two fetches each setState internally,
-  // which trips react-hooks/set-state-in-effect under React Compiler.
-  // Migrating away requires a query library (TanStack Query, SWR) or
-  // Suspense — outside the scope of this panel's one-time admin load.
+  // Mount-fetch pattern: fetchStats setStates internally, which trips
+  // react-hooks/set-state-in-effect under React Compiler. Migrating away
+  // requires a query library (TanStack Query, SWR) or Suspense — outside the
+  // scope of this panel's one-time admin load.
   useEffect(() => {
     /* eslint-disable react-hooks/set-state-in-effect */
-    fetchUsers();
-    fetchSupport();
+    fetchStats();
     /* eslint-enable react-hooks/set-state-in-effect */
-  }, [fetchUsers, fetchSupport]);
+  }, [fetchStats]);
 
   if (!isElevated) {
     return (
@@ -275,10 +108,13 @@ export default function AdminPanel({ onBack }) {
             Back
           </Button>
         )}
-        <div>
+        <div style={{ flex: 1 }}>
           <h1 style={{ margin: 0, fontSize: FS.xxl, fontFamily: serif_, color: INK }}>Admin Panel</h1>
           <div style={{ fontSize: FS.sm, color: MUTED }}>Manage users, credits, and system settings</div>
         </div>
+        <Button variant="ghost" size="sm" onClick={fetchStats} icon={<RefreshCw size={12} />}>
+          Refresh
+        </Button>
       </div>
 
       {/* Stats cards */}
@@ -302,64 +138,31 @@ export default function AdminPanel({ onBack }) {
         </div>
       )}
 
-      {/* User management */}
-      <Section title="User Management" icon={Users} actions={
-        <Button variant="ghost" size="sm" onClick={fetchUsers} icon={<RefreshCw size={12} />}>
-          Refresh
-        </Button>
-      }>
-        {/* Search */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: SP.sm,
-          padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-          background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
-        }}>
-          <Search size={14} color={MUTED} />
-          <input
-            type="text" aria-label="Search users by email or name" placeholder="Search users by email or name..."
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && fetchUsers()}
-            style={{
-              flex: 1, border: 'none', outline: 'none',
-              fontSize: FS.sm, fontFamily: sans, background: 'transparent',
-            }}
-          />
-        </div>
-
-        {/* Column headers */}
-        <div style={{
-          display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
-          fontSize: FS.xxs, fontWeight: 700, color: MUTED,
-          textTransform: 'uppercase', letterSpacing: '0.06em',
-          borderBottom: `1px solid ${BORDER}`, marginBottom: SP.xs,
-        }}>
-          <span style={{ flex: 2 }}>User</span>
-          <span style={{ flex: 1 }}>Role</span>
-          <span style={{ flex: 1 }}>Tier</span>
-          <span style={{ flex: 1, textAlign: 'right' }}>Credits</span>
-        </div>
-
-        {/* User list */}
-        {usersLoading ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>Loading users...</div>
-        ) : users.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>No users found</div>
-        ) : (
-          <div style={{ maxHeight: 400, overflowY: 'auto' }}>
-            {users.map(user => (
-              <UserRow key={user.id} user={user} onUpdate={fetchUsers} />
-            ))}
-          </div>
-        )}
-
-        <div style={{ fontSize: FS.xxs, color: MUTED, marginTop: SP.sm, textAlign: 'center' }}>
-          Click any value to edit it inline. Changes are saved immediately.
-        </div>
+      {/* User management — audited, redacted search / inspect / act console.
+          No raw profiles read: the only user source is the audited list_users /
+          get_user_* edge actions. Reveal-full requires a reason and is audited. */}
+      <Section title="User Management" icon={Users}>
+        <AdminUsersPanel />
       </Section>
 
       <Section title="Gallery Reports" icon={Flag}>
         <GalleryModerationPanel />
+      </Section>
+
+      {/* Support queue — claim / transition / reply / internal-note / link-FAQ,
+          all through the audited admin-actions ticket handlers (list_ticket_pool
+          / list_ticket_thread / claim_ticket / set_ticket_status /
+          post_ticket_reply / link_ticket_faq). Replaces the former read-only
+          support_messages client list. */}
+      <Section title="Support Queue" icon={AlertCircle}>
+        <SupportQueuePanel />
+      </Section>
+
+      {/* AI pricing — operator resync cockpit for the shared pricingResync module
+          (admin-actions ai_pricing_resync), plus the nightly cron status/toggle.
+          Dry-run is the checkbox default, so mounting never risks a stray write. */}
+      <Section title="AI Pricing" icon={RefreshCw}>
+        <AiPricingResyncPanel />
       </Section>
 
       <Section title="Usage Trends" icon={TrendingUp}>
@@ -368,49 +171,6 @@ export default function AdminPanel({ onBack }) {
 
       <Section title="Analytics" icon={BarChart3}>
         <AdminAnalyticsPanel />
-      </Section>
-
-      {/* Support Messages */}
-      <Section title="Support Messages" icon={AlertCircle} actions={
-        <Button variant="ghost" size="sm" onClick={fetchSupport} icon={<RefreshCw size={12} />}>
-          Refresh
-        </Button>
-      }>
-        {supportLoading ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>Loading...</div>
-        ) : supportMessages.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontSize: FS.sm }}>No support messages</div>
-        ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, maxHeight: 400, overflowY: 'auto' }}>
-            {supportMessages.map(msg => (
-              <div key={msg.id} style={{
-                padding: `${SP.sm + 2}px ${SP.md}px`,
-                background: msg.status === 'new' ? '#fef9ee' : CARD_HDR,
-                border: `1px solid ${msg.status === 'new' ? GOLD : BORDER2}`,
-                borderRadius: R.md,
-              }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: SP.xs }}>
-                  <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{msg.subject}</span>
-                  <span style={{
-                    fontSize: FS.xxs, fontWeight: 600,
-                    padding: '1px 6px', borderRadius: R.sm,
-                    background: msg.status === 'new' ? GOLD_BG : '#e0e0e0',
-                    color: msg.status === 'new' ? GOLD : MUTED,
-                    textTransform: 'uppercase',
-                  }}>
-                    {msg.status}
-                  </span>
-                </div>
-                <div style={{ fontSize: FS.sm, color: SECOND, lineHeight: 1.5, marginBottom: SP.xs }}>
-                  {msg.message}
-                </div>
-                <div style={{ fontSize: FS.xxs, color: MUTED }}>
-                  From: {msg.email} &middot; {new Date(msg.created_at).toLocaleDateString('en-US')}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </Section>
     </div>
   );
