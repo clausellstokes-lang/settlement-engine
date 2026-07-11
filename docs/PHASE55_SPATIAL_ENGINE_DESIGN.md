@@ -258,7 +258,28 @@ tab aggregates what arrives via ALL of them; the MIX shifts with circumstance.
   any-fast→magic/couriers. So a religious schism reaches a trade-less town via pilgrims; a market
   crash reaches it via merchants; each channel is blind to the news it doesn't carry.
 
-**Fidelity decay — HOW information degrades (the heart of it), a layered model:**
+**INFORMATION-QUALITY VECTOR (owner, round 12 — supersedes scalar "fidelity").** Information is NOT
+"payload + one fidelity number." It has SEPARABLE, ORTHOGONAL properties that decay INDEPENDENTLY
+(any combination is possible). The owner's THREE (confirmed):
+- COMPLETENESS — how much of the original REMAINS (details retained vs dropped).
+- ACCURACY — whether the RETAINED facts are CORRECT (a fact can survive intact yet be WRONG).
+- FRAMING — how the facts are INTERPRETED (the lens/spin; the §4f distortion operators live here).
+ARCHITECT PROPOSES (round-12 assessment, pending owner nod) three more separable axes:
+- TIMELINESS / RECENCY — the AGE: true-when-sent can be STALE-now because the world moved (an army
+  acts on where the enemy WAS). Orthogonal to the three (complete + accurate-when-true + unframed can
+  still be false-now). The single biggest addition; the latency model (§3) produces it.
+- PROVENANCE / CREDIBILITY — which source/carrier + how trustworthy (round-11 source reliability +
+  manipulation risk). Drives how much a receiver TRUSTS it; the packet must carry its source.
+- CORROBORATION / CONFIDENCE — how many INDEPENDENT sources agree (§4f cross-confirmation). Separable
+  from accuracy (you can be confidently WRONG if many repeat one falsehood, or accurately-informed
+  yet unable to trust single-source intel). The receiver's assessed P(accurate).
+Taxonomy: CONTENT axes = what the message says + when it was true (completeness/accuracy/framing/
+timeliness); TRUST axes = how much to believe it (provenance/corroboration). A strategic WORLD-level
+property — EXCLUSIVITY/REACH (who ELSE knows; secret vs public) — is what makes information VALUABLE
+(surprise = intel the enemy lacks, §4g) and is tracked across the world, not on a single packet.
+The rumor packet carries this VECTOR; each axis has its own decay rule + operators.
+
+**Fidelity decay — HOW each axis degrades (the layered model; maps onto the vector above):**
 1. COMPLETENESS decay — details drop. The event has structured fields (who/what/where/when/
    magnitude/cause); each hop, low-salience fields have a seeded chance to fall away. Hops 1–3 ≈
    complete or lightly lacking; far hops know only "there was a battle near X," not who won or why.
@@ -465,6 +486,29 @@ is the SAME one that sets its EPISTEMIC weighting (lawful weights sources faithf
 erratically, evil self-servingly). ONE risk-assessment faculty, two domains — physical danger +
 epistemic reliability — the seam that UNIFIES the rounds 1-7 physical layer with the rounds 8-11
 information layer into one decision model.
+
+**INFORMATION IS PRIOR TO RISK ASSESSMENT (owner, round 12 — the strict ordering).** The foundation of
+risk assessment IS information. The ordering is strict: the INFORMATION NETWORK comes FIRST and
+constructs the believed picture of EVERYTHING a risk assessment needs — military might, siege
+fortifications, supply-chain strength/resilience, alliances, trades — NONE of which an actor knows as
+ground truth; it knows only what its network reported (each input carrying the round-12 quality
+vector). ONLY THEN is risk assessment deployed, over that available (believed) picture. So there is NO
+ground-truth input to any decision: every object input is itself belief-sourced. This SHARPENS the
+"two layers" above — it is not object-risk-over-truth + epistemic-risk-on-top; correctly, ALL object
+inputs are belief-sourced and epistemic quality is a property OF each input. Information is the
+foundation; risk assessment is strictly downstream.
+
+**DEPLOYED ARMIES as mobile information nodes (owner, round 12).** A deployed army GATHERS intel from
+each settlement it reaches/passes (local reports) AND receives a directed stream from HOME — couriers,
+stopped caravans, and reinforcements — updating its BEST COURSE OF ACTION, weighted by that intel's
+quality. An army's decisions run the SAME §4g risk assessment on the information REACHING it: an army
+far from home, its couriers intercepted (§4g road-blocking) and moving through hostile territory, is
+INFORMATION-STARVED ⇒ mis-assesses ⇒ walks into traps / misjudges enemy strength. Blinding the enemy
+army (cut its couriers) is a first-class objective. REINFORCEMENTS are just another army-in-transit
+(§5): they travel roads + embattled/hostile regions BY CHOICE (the §6 cheap-vs-safe routing), take
+ATTRITION through danger, and if they meet an enemy army en route it is a BATTLE / SKIRMISH (§5
+collision, scaled to the forces). Reinforcement + courier + caravan together are the army's supply-and-
+information UMBILICAL to home; severing it starves the army of both matériel and intelligence at once.
 
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
