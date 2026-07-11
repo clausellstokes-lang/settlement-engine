@@ -17,9 +17,9 @@ async function loadWithStubs({ rpcImpl = vi.fn(), isConfigured = true } = {}) {
 }
 
 describe('Tier 7.6 — founder seat helpers', () => {
-  it('FOUNDER_SEAT_CAP is the documented value (500)', async () => {
+  it('FOUNDER_SEAT_CAP is the documented value (30)', async () => {
     const mod = await loadWithStubs();
-    expect(mod.FOUNDER_SEAT_CAP).toBe(500);
+    expect(mod.FOUNDER_SEAT_CAP).toBe(30);
   });
 });
 
@@ -66,9 +66,9 @@ describe('fetchFounderSeatsTaken()', () => {
 
 describe('fetchFounderSeatsRemaining()', () => {
   it('returns cap - taken when taken is valid', async () => {
-    const rpc = vi.fn().mockResolvedValue({ data: 50, error: null });
+    const rpc = vi.fn().mockResolvedValue({ data: 5, error: null });
     const mod = await loadWithStubs({ rpcImpl: rpc });
-    expect(await mod.fetchFounderSeatsRemaining()).toBe(450);
+    expect(await mod.fetchFounderSeatsRemaining()).toBe(25);
   });
 
   it('clamps to 0 when taken exceeds cap', async () => {
@@ -80,7 +80,7 @@ describe('fetchFounderSeatsRemaining()', () => {
   it('clamps to cap when taken is 0', async () => {
     const rpc = vi.fn().mockResolvedValue({ data: 0, error: null });
     const mod = await loadWithStubs({ rpcImpl: rpc });
-    expect(await mod.fetchFounderSeatsRemaining()).toBe(500);
+    expect(await mod.fetchFounderSeatsRemaining()).toBe(30);
   });
 
   it('returns null when underlying fetch returns null', async () => {

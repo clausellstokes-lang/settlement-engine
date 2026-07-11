@@ -229,6 +229,34 @@ function GalleryCards({ onNavigate }) {
 }
 
 // ── 06 · Set out — tier strip + footer ───────────────────────────────────────
+// Live founder-seat counter (owner: "link it to the amount of seats available").
+// Lazy-imports the seat module so supabase never rides the eager chunk; the RPC
+// read is anon-safe and 5-minute cached. Falls back to the static cap line when
+// the count is unavailable (null), so a backend hiccup never breaks the card.
+function FounderSeatLine() {
+  const [seats, setSeats] = useState(null); // { remaining, cap } once loaded
+  useEffect(() => {
+    let alive = true;
+    import('../../lib/founderSeats.js')
+      .then(async (m) => {
+        const remaining = await m.fetchFounderSeatsRemaining();
+        if (alive) setSeats({ remaining, cap: m.FOUNDER_SEAT_CAP });
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+  const cap = seats?.cap ?? 30;
+  const remaining = seats?.remaining;
+  return (
+    <div style={{
+      marginTop: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+      letterSpacing: '0.06em', textTransform: 'uppercase', color: 'rgba(224,192,128,1)',
+    }}>
+      {typeof remaining === 'number' ? `${remaining}/${cap} seats left` : `Limited to ${cap} seats`}
+    </div>
+  );
+}
+
 function TierStrip() {
   const tiers = tl('closer.tiers') || [];
   return (
@@ -261,6 +289,7 @@ function TierStrip() {
           <div style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 600, lineHeight: 1.55, color: 'rgba(251,245,230,0.85)' }}>
             {tier.body}
           </div>
+          {tier.seatLive && <FounderSeatLine />}
         </div>
       ))}
     </div>

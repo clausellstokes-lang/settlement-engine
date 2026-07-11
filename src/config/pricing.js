@@ -207,7 +207,7 @@ export const TIERS = Object.freeze({
     priceCents:   9900,                   // $99 one-time
     billing:      'lifetime',
     oneTimeCredits: 30,
-    seatLimit:    500,
+    seatLimit:    30,                     // 30 founder seats (server enforces this in create-checkout)
     saveLimit:    Infinity,
     maxSize:      'capital',
     features: {

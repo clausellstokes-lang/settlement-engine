@@ -10,9 +10,9 @@
  *   future change (caching, batching with other unauth reads) lives
  *   in one place rather than scattered across components.
  *
- * Caching: each call hits the network. The pricing page mounts once
- * per visit, so this is fine. If the surface is added to the
- * homepage hero, switch to a 5-minute in-memory cache.
+ * Caching: a 5-minute in-memory cache (below). The landing tier strip and
+ * the pricing page both read this; the count moves slowly, and the landing
+ * is high-traffic, so a fetch on every mount would be wasteful.
  *
  * Failure mode: any error returns null. The pricing page hides the
  * counter line when null so a transient backend hiccup doesn't break
@@ -22,11 +22,16 @@
 import { supabase, isConfigured } from './supabase.js';
 
 /**
- * Cap from the Founder Lifetime SKU contract. Mirrors the copy in
- * src/copy/en.js#seatsRemaining and the contract in
- * docs/abuse-model.md.
+ * Cap from the Founder Lifetime SKU contract. The SERVER is the source of
+ * truth: create-checkout/index.ts enforces FOUNDER_SEAT_LIMIT = 30 (it sells
+ * out at 30/30). This mirrors that, alongside en.js#seatsRemaining ("of 30
+ * seats") and TIERS.founder.seatLimit.
  */
-export const FOUNDER_SEAT_CAP = 500;
+export const FOUNDER_SEAT_CAP = 30;
+
+// 5-minute in-memory cache of the successful taken-count (see module note).
+let _seatCache = null; // { at: epochMs, value: number }
+const SEAT_CACHE_MS = 5 * 60 * 1000;
 
 /**
  * Returns the current taken-seat count.
@@ -35,6 +40,7 @@ export const FOUNDER_SEAT_CAP = 500;
  */
 export async function fetchFounderSeatsTaken() {
   if (!isConfigured) return null;
+  if (_seatCache && (Date.now() - _seatCache.at) < SEAT_CACHE_MS) return _seatCache.value;
   try {
     const { data, error } = await supabase.rpc('founder_seats_taken');
     if (error) {
@@ -43,6 +49,7 @@ export async function fetchFounderSeatsTaken() {
     }
     const n = Number(data);
     if (!Number.isFinite(n) || n < 0) return null;
+    _seatCache = { at: Date.now(), value: n };  // cache only successful reads
     return n;
   } catch (e) {
     console.warn('[founderSeats] unexpected error', e);
