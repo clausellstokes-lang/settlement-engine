@@ -358,18 +358,37 @@ snapshots the aspatial `regionalGraph` beside it. The spatial digest slots in ri
   graph with an 'already-reached' guard (not origin-to-all-N broadcast). Pre-rank the K cheapest
   producers per (institution,input) once at canonize; per tick advance ledgers + fire arrivals.
 
-## II.5 Owner decisions required BEFORE build (surfaced by the grounding)
-1. **Cost→weeks calibration.** "A typical adjacent primary hop = N weeks" (sets map scale / pacing
-   feel). Linchpin of all propagation/caravan/migration/army timing. OWNER anchor needed.
-2. **Culture-distance representation.** (a) fold culture into faith/alignment axes (cheap, lossy)
-   or (b) commit to a new persisted culture coordinate (net-new authoring). Faith-distance IS
-   buildable today from deity axes; culture is only a display string (settlement.schema L94).
-3. **Imported / flat maps.** (a) build a real persisted terrain/road authoring layer, (b) restrict
-   spatial to GENERATED maps + keep imported aspatial, or (c) accept degenerate straight-line
-   spatial on imported maps. (Recommend (b) for v1.)
-4. **Cost-field construction fork.** canonize-time one-shot iframe extraction (frozen digest) vs a
-   headless deterministic reconstructor. (Recommend extraction — smaller, reuses the working
-   iframe router once, and the frozen-digest discipline is what makes replay sound.)
+## II.5 Owner decisions — SETTLED (2026-07-11; owner delegated 1/3/4 to architect judgment,
+##       decided 2 explicitly). These are now BINDING; do not re-litigate.
+1. **Cost→weeks calibration — SETTLED (architect judgment).** Anchor: a typical PRIMARY-tier
+   (adjacent) hop ≈ **1 week**; SECONDARY ≈ 2–3 weeks; TERTIARY/distant ≈ 4+ weeks; the map
+   DIAMETER ≈ one SEASON (~13 weeks). i.e. weeks = f(pathCost) calibrated so the MEDIAN inter-
+   settlement hop is ~1–2 weeks and cross-map ~1 season, times readiness/terrain speed multipliers
+   (§5). Consequence "a week-old event hasn't crossed the map" holds for anything past a primary
+   neighbour — the design's intent. Retunable in the propagation soak; this is the starting anchor.
+2. **Culture-distance — SETTLED (owner, explicit).** Culture is NOT ethnographic/civilizational
+   identity (NOT "Germanic vs East Asian"). It is a **DERIVED behavioral/economic SIMILARITY** — a
+   composite distance computed from state the engine already has, NEVER a new authored coordinate:
+   - FAITH proximity (dominant-deity evil01/chaos01 axes, or a share-ledger cosine over
+     religionState.deities — buildable today);
+   - ALIGNMENT proximity (settlement alignment axes);
+   - ECONOMY / WAYS OF LIFE (economic profile / dominant industries / wealth band / trade-route
+     access — the settlement's economic character);
+   - RECENT ACTIVITY + TRADE TIES (shared recent history + established trade relationships — two
+     settlements that trade heavily and share events are "close").
+   So culture is ENDOGENOUS (emergent from belief + economy + behaviour + ties), matching the
+   engine's derived-not-rolled law. The §4c migration "least-drift" axis and the §4d "culturally-
+   different" contraband gate BOTH read this ONE composite metric (`cultureDistance(a,b)`), built
+   as a new pure selector over existing state — no new persisted culture field, no authoring.
+3. **Imported / flat maps — SETTLED (architect judgment): option (b).** v1 restricts the spatial
+   engine to GENERATED maps; IMPORTED-image maps stay ASPATIAL (byte-identical to today) until a
+   real persisted terrain/road authoring layer is built later. Avoids the flat-plain degenerate-
+   routing contradiction; the spatial-canon marker simply isn't offered for imported maps in v1.
+4. **Cost-field construction — SETTLED (architect judgment): canonize-time one-shot extraction.**
+   At the entitled canonize seam, run the existing iframe router ONCE over frozen placements and
+   persist a FROZEN, quantized-integer spatial digest into worldState (immutable, never recomputed;
+   goldens pin the digest). No headless FMG reconstructor for v1 — reuse the working router once,
+   and the frozen-digest discipline is what makes replay byte-identical.
 
 ## II.6 The minimal coherent build slice (v1 — proves the seam, ships value)
 The full 6-round vision is a program; the SMALLEST thing that delivers real value and proves the
