@@ -258,26 +258,30 @@ tab aggregates what arrives via ALL of them; the MIX shifts with circumstance.
   any-fast→magic/couriers. So a religious schism reaches a trade-less town via pilgrims; a market
   crash reaches it via merchants; each channel is blind to the news it doesn't carry.
 
-**INFORMATION-QUALITY VECTOR (owner, round 12 — supersedes scalar "fidelity").** Information is NOT
-"payload + one fidelity number." It has SEPARABLE, ORTHOGONAL properties that decay INDEPENDENTLY
-(any combination is possible). The owner's THREE (confirmed):
-- COMPLETENESS — how much of the original REMAINS (details retained vs dropped).
-- ACCURACY — whether the RETAINED facts are CORRECT (a fact can survive intact yet be WRONG).
-- FRAMING — how the facts are INTERPRETED (the lens/spin; the §4f distortion operators live here).
-ARCHITECT PROPOSES (round-12 assessment, pending owner nod) three more separable axes:
-- TIMELINESS / RECENCY — the AGE: true-when-sent can be STALE-now because the world moved (an army
-  acts on where the enemy WAS). Orthogonal to the three (complete + accurate-when-true + unframed can
-  still be false-now). The single biggest addition; the latency model (§3) produces it.
-- PROVENANCE / CREDIBILITY — which source/carrier + how trustworthy (round-11 source reliability +
-  manipulation risk). Drives how much a receiver TRUSTS it; the packet must carry its source.
-- CORROBORATION / CONFIDENCE — how many INDEPENDENT sources agree (§4f cross-confirmation). Separable
-  from accuracy (you can be confidently WRONG if many repeat one falsehood, or accurately-informed
-  yet unable to trust single-source intel). The receiver's assessed P(accurate).
-Taxonomy: CONTENT axes = what the message says + when it was true (completeness/accuracy/framing/
-timeliness); TRUST axes = how much to believe it (provenance/corroboration). A strategic WORLD-level
-property — EXCLUSIVITY/REACH (who ELSE knows; secret vs public) — is what makes information VALUABLE
-(surprise = intel the enemy lacks, §4g) and is tracked across the world, not on a single packet.
-The rumor packet carries this VECTOR; each axis has its own decay rule + operators.
+**INFORMATION-QUALITY VECTOR (owner, round 12 — supersedes scalar "fidelity"; all axes CONFIRMED,
+architect additions PROMOTED by owner 2026-07-11).** Information is NOT "payload + one fidelity
+number." It is a VECTOR of SEPARABLE, ORTHOGONAL properties that decay INDEPENDENTLY (any combination
+possible), in three groups:
+- CONTENT — what the message says, how true, how spun, and whether it is STILL true:
+  • COMPLETENESS — how much of the original REMAINS (details retained vs dropped).
+  • ACCURACY — whether the RETAINED facts are CORRECT (a fact can survive intact yet be WRONG).
+  • FRAMING — how the facts are INTERPRETED (the lens/spin; the §4f distortion operators live here).
+  • TIMELINESS / RECENCY — the AGE: true-when-sent can be STALE-now because the world MOVED (an army
+    acts on where the enemy WAS; an ally is defended against a threat already passed). Orthogonal to
+    the other three (complete + accurate-when-true + unframed can still be FALSE-NOW). In a world that
+    travels in WEEKS, the deadliest failure is a TRUE fact three weeks out of date — this is the axis
+    that turns the §3 latency model from a mere delay into a RISK.
+- TRUST — how much a receiver should BELIEVE it (feeds the §4g risk-assessment weighting):
+  • PROVENANCE / CREDIBILITY — which source/carrier + how trustworthy (round-11 source reliability +
+    manipulation risk). The packet MUST carry its source so the receiver can weight it.
+  • CORROBORATION / CONFIDENCE — how many INDEPENDENT sources agree (§4f cross-confirmation). Separable
+    from accuracy — you can be confidently WRONG (a falsehood arriving by five routes) or accurately-
+    informed yet unable to trust single-source intel. The receiver's assessed P(accurate).
+- STRATEGIC (world-level, not per-packet):
+  • EXCLUSIVITY / REACH — who ELSE knows (secret vs public). What makes information VALUABLE (surprise
+    = intel the enemy lacks, §4g); tracked across the world, defended by blackout/road-block (§4g).
+The rumor packet carries the CONTENT + TRUST vector; each axis has its own decay rule + operators.
+EXCLUSIVITY is a world-level derivation (how widely an event's rumor has propagated).
 
 **Fidelity decay — HOW each axis degrades (the layered model; maps onto the vector above):**
 1. COMPLETENESS decay — details drop. The event has structured fields (who/what/where/when/
