@@ -735,7 +735,9 @@ export default function App() {
         </main>
 
         {/* ── Footer ──────────────────────────────────────────────
-            Pricing | Contact | Terms | Privacy | Refunds above the copyright line.
+            Pricing | Contact | Terms | Privacy above the copyright line. Refunds
+            is no longer its own link — the refund policy now lives in the Terms
+            "Refunds and cancellation" section (the /refunds URL still resolves).
             Contact routes through supportMailto() so the address is a one-line
             change in copy/support.js, never a hardcoded literal in the shell. */}
         <footer style={{
@@ -777,11 +779,6 @@ export default function App() {
             <Button variant="ghost" size="sm" onClick={() => setView('privacy')}
               style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
               {t('footer.privacy')}
-            </Button>
-            <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>|</span>
-            <Button variant="ghost" size="sm" onClick={() => setView('refunds')}
-              style={{ color: PARCH_100, fontFamily: sans, fontSize: FS.sm, fontWeight: 500, letterSpacing: '0.04em', minHeight: isMobile ? 44 : undefined }}>
-              {t('footer.refunds')}
             </Button>
           </nav>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>

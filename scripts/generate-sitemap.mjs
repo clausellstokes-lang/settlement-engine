@@ -28,10 +28,14 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 // Mirrors seo.js NOINDEX_VIEWS + robots.txt. App / auth / transient routes that
 // must never appear in the sitemap. Kept in lockstep by tests/build/sitemap.test.js.
+// `refunds` is here (not a content route): the standalone refund page was retired
+// into the Terms "Refunds and cancellation" section, so /refunds now renders the
+// same content as /terms — indexing it would duplicate /terms.
 export const NOINDEX_VIEWS = new Set([
   'settlements', 'realm', 'map', 'workshop', 'account', 'admin',
   'signin', 'register', 'reset-password', 'set-new-password',
   'verify-email', 'confirm-email', 'dossier-success',
+  'refunds',
 ]);
 
 // Retired redirect surfaces (kept in ROUTES so old links still resolve, but they
@@ -51,7 +55,6 @@ const HINTS = {
   howto:      { changefreq: 'monthly', priority: '0.6' },
   terms:      { changefreq: 'yearly',  priority: '0.3' },
   privacy:    { changefreq: 'yearly',  priority: '0.3' },
-  refunds:    { changefreq: 'yearly',  priority: '0.3' },
 };
 
 // The seven compendium sections (CompendiumPanel TABS) — each gets its own URL.

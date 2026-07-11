@@ -47,10 +47,11 @@ const ResetPasswordPage = lazy(() => import('./components/auth/ResetPasswordPage
 const SetNewPasswordPage = lazy(() => import('./components/auth/SetNewPasswordPage.jsx'));
 const VerifyEmailPage   = lazy(() => import('./components/auth/VerifyEmailPage.jsx'));
 const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.jsx'));
-// Legal / trust pages (4c). Lazy — they are off the first-paint graph.
+// Legal / trust pages (4c). Lazy — they are off the first-paint graph. The
+// retired /refunds URL renders TermsPage (scrolled to its Refunds section), so
+// there is no separate RefundsPage chunk.
 const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
 const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
-const RefundsPage       = lazy(() => import('./components/legal/RefundsPage.jsx'));
 
 export function Loading() {
   return (
@@ -92,7 +93,11 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
-      {view === 'refunds'     && <RefundsPage />}
+      {/* /refunds is retired as a standalone page — its content is now the Terms
+          "Refunds and cancellation" section. The old URL still resolves: it
+          renders Terms and scrolls to that subsection, so no emailed/shared
+          refund link breaks. */}
+      {view === 'refunds'     && <TermsPage scrollToId="terms-refunds" />}
       {view === 'dossier-success' && (
         <SingleDossierSuccessPage
           onSignUp={() => { setView('generate'); setAuthModalOpen(true); }}

@@ -1135,7 +1135,6 @@ export const en = Object.freeze({
     discord:  'Discord',
     privacy:  'Privacy',
     terms:    'Terms',
-    refunds:  'Refunds',
     contact:  'Contact',
     copyright: '© {year} SettlementForge',
   },

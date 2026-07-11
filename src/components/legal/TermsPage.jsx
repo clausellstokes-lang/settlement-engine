@@ -1,12 +1,36 @@
 /**
  * legal/TermsPage.jsx — /terms. Honest, plain-language terms for an indie SaaS,
- * written from how SettlementForge actually works. Not yet reviewed legal text
- * (see the under-review banner).
+ * written from how SettlementForge actually works. Carries the "Refunds and
+ * cancellation" section (id terms-refunds) — the refund/cancellation policy that
+ * used to be the standalone /refunds page. That URL now renders THIS page,
+ * scrolled to that section (see the `scrollToId` prop + AppViews), so old links
+ * still land on the refund policy. Numbers live on the Pricing page, never here
+ * (F22). Not yet reviewed legal text (see the under-review banner).
  */
+import { useEffect } from 'react';
 import LegalPage, { LegalSection, LegalP, LegalList } from './LegalPage.jsx';
+import { INK } from '../theme.js';
 import { supportMailto } from '../../copy/support.js';
 
-export default function TermsPage() {
+export default function TermsPage({ scrollToId = null } = {}) {
+  // When the retired /refunds URL lands here (AppViews renders
+  // <TermsPage scrollToId="terms-refunds" /> for view 'refunds'), bring the
+  // reader to the Refunds and cancellation subsection on mount. Smooth unless
+  // the reader prefers reduced motion. The short delay lets the section mount
+  // first (same idiom as CompendiumPanel's anchor scroll).
+  useEffect(() => {
+    if (!scrollToId || typeof window === 'undefined') return;
+    const reduce = typeof window.matchMedia === 'function'
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const timer = setTimeout(() => {
+      const el = document.getElementById(scrollToId);
+      if (el && typeof el.scrollIntoView === 'function') {
+        el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [scrollToId]);
+
   return (
     <LegalPage
       eyebrow="Legal"
@@ -61,7 +85,56 @@ export default function TermsPage() {
           Paid plans, one-time purchases, and narrative credits are described on
           the Pricing page, which is the source of truth for what each option
           includes and costs. Payments are processed by Stripe. How cancellations
-          and refunds work is set out on the Refunds page.
+          and refunds work is set out in the Refunds and cancellation section
+          below.
+        </LegalP>
+      </LegalSection>
+
+      {/* Refunds and cancellation — the real billing semantics, moved here from
+          the retired standalone /refunds page. The former section headings
+          survive as bold lead-in labels. Numbers stay on the Pricing page,
+          never here (F22). */}
+      <LegalSection heading="Refunds and cancellation" id="terms-refunds">
+        <LegalP>
+          <strong style={{ color: INK }}>Narrative credits.</strong> The optional
+          Narrative Layer spends credits per generation. If a narration fails, its
+          credit is returned automatically. You are only charged for narrations
+          you actually receive. Your first narration is free: the server grants it
+          without spending a credit.
+        </LegalP>
+        <LegalP>
+          <strong style={{ color: INK }}>The single dossier PDF.</strong> A single
+          dossier is a one-time purchase of a settlement’s PDF. After purchase the
+          PDF is delivered on the success page, and it stays yours to re-download
+          for as long as that settlement is saved. If you delete the settlement,
+          the download right for it is forfeited. If a purchase is charged but the
+          PDF never delivers, contact support and we will make it right.
+        </LegalP>
+        <LegalP>
+          <strong style={{ color: INK }}>Cartographer subscription.</strong> The
+          Cartographer plan is billed monthly through Stripe. You can cancel at
+          any time from your account. When you cancel, your access continues to
+          the end of the billing period you have already paid for, and you are not
+          charged again. We do not generally refund partial months, except where
+          consumer law in your jurisdiction requires it.
+        </LegalP>
+        <LegalP>
+          <strong style={{ color: INK }}>Founder Lifetime.</strong> The Founder
+          tier is a one-time purchase of lifetime access rather than a recurring
+          subscription. If you believe you were charged in error, contact support
+          with your Stripe receipt and we will review it.
+        </LegalP>
+        <LegalP>
+          <strong style={{ color: INK }}>How to request a refund.</strong> Reaching us:
+        </LegalP>
+        <LegalList items={[
+          'Contact support from the email associated with your account.',
+          'Include your Stripe receipt or the reference shown on the checkout confirmation.',
+          'Tell us what happened. Charges for something you never received, such as an undelivered PDF or a failed narration that did not auto-refund, are corrected.',
+        ]} />
+        <LegalP>
+          Billing or refund question? Reach us at{' '}
+          <a href={supportMailto('Refund request')}>our support inbox</a>.
         </LegalP>
       </LegalSection>
 
