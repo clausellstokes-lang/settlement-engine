@@ -1074,3 +1074,20 @@ were missing for the full "becomes pious or not" story:
 Both inert under the neutrality theorem (no deities / no piety record => untouched);
 subcritical, clamped, cause-chained; W-F7 envelopes: hysteresis visible in transition arcs,
 secular share bounded (no atheist collapse), revival correlates with crisis.
+
+### Conduct drift erodes piety (OWNER, 2026-07-10 — completes the reciprocal loop; lands with momentum/sink, W-F7-certified)
+The conduct-alignment drift that already erodes LEGITIMACY (the political question: should
+this god rule?) now also erodes PIETY (the devotional question: do we still feel it?).
+piety's local derivation gains a conduct-fit factor REUSING W-F4a's endogenous conduct-plane
+signal (never recomputed), delivered through the devotional-momentum LAG so disillusionment
+is an arc. ASYMMETRY (architect ruling): drift erodes faster than agreement builds (loss
+aversion; keeps the term subcritical against devout lock-in).
+- NEW FAILURE MODES EXPRESSED: the hollow established church (legitimate seat, emptying
+  pews) and the fervent young cult (illegitimate, devout). Political vs lived religion.
+- COMPOSITION: drift-eroded piety + prosperity => unaffiliated leak (secularization with a
+  CAUSE); revival via crisis or via a new patron matching current conduct (conversion as
+  homecoming). The imposed-god-withers arc now fails BOTH loops.
+- SPIRAL BRAKE (binding W-F7): drift->piety->megaphone->drift is bounded by the LAG, held
+  by legitimacy meanwhile, and TERMINATES IN TRANSITION via the contest machinery —
+  apostasy spirals end in seat changes at realistic rates, never settlement-wide
+  faithlessness (sink bounded). Endogeneity filter applies identically.
