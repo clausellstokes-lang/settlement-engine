@@ -1179,3 +1179,25 @@ provisioning (food ledger), smithies/armories (conversion institutions), healers
 - Cause chains throughout; neutrality (no war, no readiness record => inert); envelopes join
   W-F8/Phase-5: supply-gap penalties observable, conquest-revenue asymmetry across the moral
   plane, mercenary compensation bounded.
+
+### The institutional plane + propagation (OWNER, 2026-07-11 — catalog = Phase 5; ecology/propagation = the Phase-5 engine companion wave)
+Generalizes the moral-institution coding to the FULL catalog: every institution carries a
+two-axis position (prisons/courts = lawful-not-evil; free markets/festivals = chaotic-lean;
+slave market = lawful-evil; fighting pits = chaotic-evil; almshouse = lawful-good; most
+cluster near center).
+- INSTITUTIONS AS CONDUCT: the settlement's institutional CENTER OF MASS feeds the
+  endogenous conduct-plane signal directly — what a settlement builds is its most durable
+  chosen evidence; the fit loop reads the skyline.
+- INSTITUTIONAL ECOLOGY (plane geometry, never pair tables): near-plane institutions
+  reinforce (prison + slave market = penal slavery; temple + almshouse compound); opposed
+  ones COMPETE for the settlement's soul through lifecycle pressure — resolved by patron,
+  piety, economics; cause-chained.
+- PROPAGATION — TRADE NORMALIZES, FAITH PRESCRIBES: sustained trade with a settlement erodes
+  resistance to its institutional pattern (commerce launders, slow, dampened); a spreading
+  creed carries its institutional PROGRAM (conversion -> the buildings its plane demands).
+  Reverse: EMBARGO AS CONSCIENCE — refusing the slaver's coin is a moral act with real
+  economic cost (trade's first alignment-textured mechanism; the good league's weapon).
+- Neutrality: centered institutions and absent patrons exert ~zero; arcs not flips; both
+  propagation channels ride existing graph channels; envelopes join the Phase-5 companion:
+  institutional mix correlates with patron plane AND with trade-partner mix; no
+  normalization runaway (embargoes and faith programs are counterforces to each other).
