@@ -306,7 +306,6 @@ function LandingFooter({ onNavigate }) {
     }}>
       <MapIcon size={15} color={GOLD} aria-hidden="true" />
       <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: GOLD }}>{tl('footer.brand')}</span>
-      <span style={{ fontFamily: MONO, fontSize: FS.xs, color: 'rgba(244,234,208,0.55)' }}>{tl('footer.tagline')}</span>
       <span style={{ marginLeft: 'auto', display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {links.map((label) => (
           <Button

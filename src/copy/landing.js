@@ -113,7 +113,7 @@ export const landing = {
     micro: 'Turns on when you do. The free tier keeps working.',
     whyTraceTitle: 'Advance time · week {week}',
     whyTraceTag:   'why-trace',
-    derivedLine:   'Derived, never rolled. Every change carries its cause.',
+    derivedLine:   'Every change carries its cause.',
     clockLabel: 'Realm clock',
     clockValue: 'Week {week}, Year 1',
     clockCta:   'Advance time',
@@ -162,7 +162,6 @@ export const landing = {
 
   // ── Footer ──────────────────────────────────────────────────────────────────
   footer: {
-    tagline: 'derived, never rolled',
     brand:   'settlementforge',
     links:   ['Compendium', 'Pricing', 'Account'],
   },
