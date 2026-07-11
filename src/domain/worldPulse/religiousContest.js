@@ -50,8 +50,8 @@ import { isFaithSpreadEnabled } from './simulationRules.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
-import { ensureReligionState, attemptEntry, advanceShares, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
-import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
+import { ensureReligionState, attemptEntry, advanceShares, applyUnaffiliatedSink, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
+import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, conductFitSignal, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
 import { deityTemper, chaos01 } from './deityAxes.js';
 import { methodClash, STANCE_TUNING } from './deityStance.js';
 // Phase 4 W-F4b — the SPREAD-lane inter-deity stance CONSUMER (betrayal/pact events,
@@ -624,7 +624,13 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // deity-free / zero-span. `pietySynergy` is the same value but NULL when there is
     // no measured piety, so the legitimacy synergy stays exactly 0 on those fixtures.
     const pietyMult = pietyMultOf(settlement);
-    const pietySynergy = settlement?.config?.faithProfile?.piety ? pietyMult : null;
+    const priorPiety = settlement?.config?.faithProfile?.piety;
+    const pietySynergy = priorPiety ? pietyMult : null;
+    // W-F5.5 DEVOTIONAL MOMENTUM: last tick's LAGGED reading is the anchor this tick's
+    // piety approaches. Null on the FIRST measurement (deity-free / tick-0 / no-piety) ⇒
+    // the record seeds AT target ⇒ byte-identical. The single tick-start gate (priorPiety
+    // present) arms momentum, conduct drift, AND the unaffiliated sink together.
+    const priorLocal01 = priorPiety && Number.isFinite(priorPiety.local01) ? clamp01(Number(priorPiety.local01)) : null;
     // Crisis conversion: the settlement's DISORDER (owner's five contexts), computed once
     // per settlement per tick. Chaos-side newcomers read extra receptivity from it inside
     // deityLocalStrength; a stable high-tier peaceful settlement reads 0 (byte-identical).
@@ -677,25 +683,50 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // flip. The PRNG is forked per settlement+tick ⇒ reproducible, never Math.random.
     const contestRng = rng?.fork ? rng.fork(`religion-contest::${tick}::${cid}`) : null;
     if (!contestRng || !resolvePatronContest(state, contestRng)) selectPatron(state);
-    religionStates[cid] = state;
 
-    // W-F3: derive THIS tick's piety read-model from the EVOLVED state (authority from
-    // the causal religious_authority score — rank-derived fallback when the causal
-    // snapshot is absent; institution + devotion + the clergy lens). The kernel projects
-    // it onto faithProfile.piety, and NEXT tick's amplified sites read it. Side read-model
-    // only — it does not touch THIS tick's mechanics, so unit fixtures stay byte-identical.
+    // W-F3 authority reading (tick-start causal religious_authority score, rank fallback) —
+    // shared by the unaffiliated sink (its LOW-authority term) and the piety record below.
     const causalAuthority = snapshot?.byId?.get?.(cid)?.causal?.scores?.religious_authority;
     const authority01 = Number.isFinite(causalAuthority)
       ? clamp01(Number(causalAuthority) / 100)
       : clamp01(0.3 + 0.4 * deityRankStrength(patronSnapshot(state)));
-    pietyByCid[cid] = pietyRecord({
+
+    // W-F5.5 THE UNAFFILIATED SINK: comfort empties the pews, crisis calls them home. Runs
+    // AFTER the pantheon machinery (entries/shares/legitimacy/patron all decided on the full
+    // 100-point faithful pool — byte-identical logic) as a terminal secular skim. Gated on a
+    // MEASURED tick-start piety record (priorPiety) ⇒ inert (no 'none' bucket, deities stay
+    // at 100) on every deity-free / tick-0 / no-piety fixture. secularPull = CALM
+    // (1 − crisisDisorder: prosperity + stability + peace) × LOW religious authority.
+    let sink = { share: 0, rising: false };
+    if (priorPiety) {
+      const secularPull = clamp01((1 - crisisDisorder) * (1 - authority01));
+      sink = applyUnaffiliatedSink(state, { secularPull, crisisDisorder });
+    }
+    religionStates[cid] = state;
+
+    // W-F3/W-F5.5: derive THIS tick's piety read-model from the EVOLVED (secularized) state.
+    // DEVOTIONAL MOMENTUM lags local01 toward its structural target from priorLocal01;
+    // CONDUCT DRIFT feeds that target the patron's endogenous conduct fit (W-F4a's signal,
+    // REUSED via conductFitSignal — never recomputed), asymmetric per the loss-aversion
+    // ruling. Both are 0/seed-at-target on the first measurement ⇒ byte-identical. The kernel
+    // projects the record onto faithProfile.piety; NEXT tick's amplified sites read it.
+    const conductFit = priorPiety
+      ? conductFitSignal(patronSnapshot(state), lens, settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName)
+      : 0;
+    const rec = pietyRecord({
       authority01,
       institutionBacking,
       devotion01: devotionOf(state),
       clergy: clergyPlane,
       realmMult,
       dampener: oppositionDampener(state),
+      priorLocal01,
+      conductFit,
     });
+    // Legibility law: name the secular/revival driver on the record ('complacency drains the
+    // pews' / 'crisis calls the faithful home'), keyed for the W-F6 chronicle renderer.
+    if (sink.share > 0) rec.causes.push({ source: sink.rising ? 'secularization' : 'revival', value: clamp01(sink.share / 100) });
+    pietyByCid[cid] = rec;
 
     // Item 3 — TARGETED FOOTHOLDS (spread-gated; rides item 1's outcome plumbing). A
     // present RIVAL creed recruits the SPECIFIC influential minister whose authored

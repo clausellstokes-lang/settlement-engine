@@ -64,6 +64,19 @@ export const RELIGION_TUNING = Object.freeze({
                               // discredited patron faces a challenge from any established rival (even
                               // cross-niche), no DM imposition required ("when legitimacy is low, the top
                               // three compete"). A more-rightful rival can then topple it via the roll.
+  // ── THE UNAFFILIATED SINK (owner piety-dynamics addendum, 2026-07-10) ──────────
+  // A 'none' bucket in the 100-point ledger: adherents drift to indifference under a
+  // sustained golden age with a WEAK church (prosperity + stability + LOW religious
+  // authority — comfort empties the pews), and flood BACK to the pantheon under crisis
+  // (crisisDisorder01 = revival). Completes the historical cycle piety→order→prosperity
+  // →secularization→crisis→revival and is a second brake on lawful drift (golden ages
+  // quietly empty their own pews). Slow, clamped, BOUNDED (SINK_MAX < 100 ⇒ no atheist
+  // collapse — a secular city, never a godless one); 'none' is a SCALAR field, never a
+  // deity entry, so it never ranks, contests, or holds the seat. Gated on a measured
+  // piety record ⇒ inert (byte-identical) wherever the neutrality theorem holds.
+  SINK_MAX: 45,               // hard ceiling on the unaffiliated share (majority-faithful always)
+  SINK_SECULAR_RATE: 0.02,    // per-tick fraction of the remaining headroom that leaks to 'none' at full secular pull (slow)
+  SINK_REVIVAL_RATE: 0.06,    // per-tick fraction of the current 'none' a full crisis reclaims (revival outpaces drift — the great awakening)
 });
 
 /** @param {string} a @param {string} b @returns {number} */
@@ -108,19 +121,22 @@ function activeRefs(deities) {
 }
 
 /**
- * Largest-remainder renorm of ACTIVE deity shares to sum exactly 100 (integer
- * points). File-local mirror of powerGenerator's renormalizeFactionPower so the
- * pantheon and the power system enforce the same conserved-share invariant.
- * @param {Record<string, any>} deities
+ * Largest-remainder renorm of ACTIVE deity shares to sum exactly `target` integer points
+ * (default 100 — the conserved-pantheon invariant). File-local mirror of powerGenerator's
+ * renormalizeFactionPower. `target < 100` is the UNAFFILIATED-SINK case: the faithful
+ * occupy (100 − noneShare) and the 'none' bucket holds the rest — proportions preserved,
+ * so revival reabsorbs share back into the pantheon.
+ * @param {Record<string, any>} deities @param {number} [target]
  */
-export function renormShares(deities) {
+export function renormShares(deities, target = 100) {
   const keys = activeRefs(deities);
   if (!keys.length) return;
+  const T = Math.max(0, Math.round(Number(target) || 0));
   const total = keys.reduce((t, k) => t + Math.max(0, Number(deities[k].share) || 0), 0);
-  if (total <= 0) { const even = Math.floor(100 / keys.length); keys.forEach((k, i) => { deities[k].share = even + (i < 100 - even * keys.length ? 1 : 0); }); return; }
+  if (total <= 0) { const even = Math.floor(T / keys.length); keys.forEach((k, i) => { deities[k].share = even + (i < T - even * keys.length ? 1 : 0); }); return; }
   let assigned = 0;
-  const rows = keys.map((k) => { const exact = Math.max(0, Number(deities[k].share) || 0) / total * 100; const floor = Math.floor(exact); assigned += floor; return { k, floor, rem: exact - floor }; });
-  let leftover = 100 - assigned;
+  const rows = keys.map((k) => { const exact = Math.max(0, Number(deities[k].share) || 0) / total * T; const floor = Math.floor(exact); assigned += floor; return { k, floor, rem: exact - floor }; });
+  let leftover = T - assigned;
   rows.slice().sort((a, b) => (b.rem - a.rem) || codepoint(a.k, b.k)).forEach((r) => { if (leftover > 0) { r.floor++; leftover--; } });
   for (const r of rows) deities[r.k].share = r.floor;
 }
@@ -294,6 +310,43 @@ export function advanceShares(state, strengthByRef) {
   renormShares(deities);
   for (const k of keys) deities[k].standing = standingFor(deities[k].share, deities[k].standing);
   pruneSuppressed(state);
+}
+
+/**
+ * THE UNAFFILIATED SINK — secularization + revival on a per-settlement religion state.
+ * Moves adherent share between the pantheon and a scalar 'none' bucket (part of the same
+ * 100-point ledger) and re-normalizes the faithful into (100 − round(noneShare)).
+ * `secularPull` (0..1 = prosperity + stability + LOW religious authority — comfort empties
+ * the pews) leaks share TO 'none', bounded by SINK_MAX so a secular city never becomes a
+ * godless one; `crisisDisorder` (0..1) drains it BACK to the pantheon (revival, faster than
+ * the drift). 'none' is a FLOAT accumulator that NEVER enters state.deities — it can never
+ * rank, contest, or hold the seat. Standings are recomputed on the secularized shares (the
+ * hollow church: deep secularization can demote even the patron). Returns the visible share
+ * + trend for the legibility receipt; a no-op (no faith) returns { share: 0, rising: false }.
+ * Deterministic, mutates state. Conditional-materialization: the noneShare key is absent
+ * once fully faithful again.
+ * @param {{ deities: Record<string, { share: number, standing: string, suppressed?: boolean }>, noneShare?: number }} state
+ * @param {{ secularPull?: number, crisisDisorder?: number }} [opts]
+ * @returns {{ share: number, rising: boolean }}
+ */
+export function applyUnaffiliatedSink(state, { secularPull = 0, crisisDisorder = 0 } = {}) {
+  const T = RELIGION_TUNING;
+  const keys = activeRefs(state.deities);
+  if (!keys.length) return { share: 0, rising: false };
+  const prev = Math.max(0, Math.min(T.SINK_MAX, Number(state.noneShare) || 0));   // float accumulator
+  const pull = clamp01(Number(secularPull) || 0);
+  const crisis = clamp01(Number(crisisDisorder) || 0);
+  const gain = T.SINK_SECULAR_RATE * pull * (T.SINK_MAX - prev);   // approach SINK_MAX under comfort
+  const drain = T.SINK_REVIVAL_RATE * crisis * prev;               // revival reclaims the unaffiliated
+  const none = Math.max(0, Math.min(T.SINK_MAX, prev + gain - drain));
+  const noneInt = Math.round(none);
+  renormShares(state.deities, 100 - noneInt);
+  for (const k of keys) state.deities[k].standing = standingFor(state.deities[k].share, state.deities[k].standing);
+  // Conditional materialization: keep the float while the bucket is VISIBLE (rounds to ≥1)
+  // or still ACCRUING (rising sub-visible) — otherwise (fully faithful again) drop the key.
+  if (noneInt > 0 || none > prev) state.noneShare = none;
+  else if ('noneShare' in state) delete state.noneShare;
+  return { share: noneInt, rising: none > prev };
 }
 
 /** Drop suppressed cults that have fully faded (kept only as latent memory while share 0 a while). @param {any} state */
@@ -481,9 +534,13 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
   // for this settlement — the tick-START source next tick's amplified sites read. Absent
   // ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the dormancy oracle.
   const piety = pietyByCid ? pietyByCid[String(saveId)] : null;
+  // The UNAFFILIATED SINK bucket (W-F5.5): the % of the town that keeps no god, surfaced
+  // for the faith panel. Conditional — absent (byte-identical) wherever the sink never ran.
+  const unaffiliated = Math.round(Number(state.noneShare) || 0);
   const faithProfile = {
     patron: snap ? { name: snap.name, deityRef: state.patronRef, share: patronShare, legitimacy: patronLegit } : null,
     deities, contested, patronSecurity,
+    ...(unaffiliated > 0 ? { unaffiliated } : {}),
     ...(piety ? { piety } : {}),
   };
   return { ...settlement, config: { ...settlement.config, faithProfile } };

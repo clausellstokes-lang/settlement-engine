@@ -51,6 +51,23 @@ export const PIETY_TUNING = Object.freeze({
   PIVOT_REALM: 0.35,
   SPAN_REALM: 0.5,     // g ∈ [0.825, 1.325] — global tilt gentler than local
   MULT_MIN: 0.5, MULT_MAX: 2.0,   // hard composite bound (owner's ~0.5–2.0)
+  // ── DEVOTIONAL MOMENTUM + CONDUCT DRIFT (owner piety-dynamics addenda, 2026-07-10) ─
+  // Piety is the SLOWEST-moving faith quantity. The measured local01 does not snap to
+  // its structural target — it LAGS toward it (legitimacy's pattern), so becoming pious
+  // or secular is an ARC, not a step: a burned church holds its flock for years, a new
+  // temple stands empty a while. PIETY_LAG is HALF legitimacy's 0.12 (religionLegitimacy
+  // LAG) — felt devotion trails even the rightful-claim axis (half-life ~11 ticks vs
+  // legitimacy's ~5). First measurement seeds AT the target (no cold-start artifact).
+  PIETY_LAG: 0.06,
+  // Conduct drift: the town that no longer LIVES like its god feels less of it. The
+  // structural target gains a signed conduct-fit term (W-F4a's endogenous conduct-plane
+  // signal, REUSED — never recomputed), delivered through the same LAG so disillusion is
+  // an arc. ASYMMETRIC (architect ruling): DRIFT (fit<0) erodes ~2× faster than agreement
+  // (fit>0) builds — loss aversion, and the brake that keeps the term SUBCRITICAL against
+  // devout lock-in. 0 for a neutral deity OR neutral conduct ⇒ byte-identical (the signal
+  // itself is 0 there); 0 with no conduct-fit passed ⇒ pre-momentum record byte-identical.
+  CONDUCT_PIETY_W: 0.15,   // max piety-target swing from ±full conduct alignment
+  DRIFT_ASYMMETRY: 2,      // loss aversion: negative fit weighs 2× — pews empty before the throne falls
   // ── CLERGY bleed-through (the owner's clergy-lens addendum) ────────────────
   // Flawed / evil-leaning clergy DISTORT the amplifier: the god's influence
   // arrives through bad priests, so the local multiplier's deviation from 1.0 is
@@ -105,7 +122,8 @@ const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
  * @property {Array<{ ref: string, oppLaw: number, oppMoral: number, closeness: number }>} rivals
  */
 /** @typedef {Object} PietyRecord
- * @property {number} local01              0..1 weighted piety reading
+ * @property {number} local01              0..1 LAGGED piety reading (devotional momentum)
+ * @property {number} structuralTarget     0..1 structural + conduct-fit target local01 lags toward
  * @property {number} localMult            f(localPiety), clergy-distorted — 1.0-exact when neutral
  * @property {number} realmMult            g(realmPiety) — 1.0-exact when toggle-gated / no campaign
  * @property {number} composite            clamp(localMult × realmMult × megaphoneCombined) — mixed sites consume this
@@ -234,13 +252,27 @@ export function oppositionDampener(state) {
  * megaphone (mixed sites), `moralMult` folds in the MORAL megaphone only (the corruption
  * channel — a fellow-evil rival does not mute the seat's corruption drive). Both hard-
  * clamped. Pure.
+ * DEVOTIONAL MOMENTUM: `local01` is the LAGGED reading, not the raw structural sum. The
+ * structural inputs (+ the signed `conductFit` term) form the TARGET; the record's local01
+ * approaches it from `priorLocal01` at PIETY_LAG. `priorLocal01` absent (first measurement)
+ * ⇒ seed AT target (no cold-start). `conductFit` 0 (default) + no prior ⇒ local01 = the raw
+ * structural sum = the pre-momentum record, byte-identical.
  * @param {{ authority01?: number, institutionBacking?: number, devotion01?: number,
- *   clergy?: ClergyPlaneReading|null, realmMult?: number, dampener?: OppositionDampener|null }} args
+ *   clergy?: ClergyPlaneReading|null, realmMult?: number, dampener?: OppositionDampener|null,
+ *   priorLocal01?: number|null, conductFit?: number }} args
  * @returns {PietyRecord}
  */
-export function pietyRecord({ authority01 = 0, institutionBacking = 0, devotion01 = 0, clergy = null, realmMult = 1, dampener = null } = {}) {
+export function pietyRecord({ authority01 = 0, institutionBacking = 0, devotion01 = 0, clergy = null, realmMult = 1, dampener = null, priorLocal01 = null, conductFit = 0 } = {}) {
   const T = PIETY_TUNING;
-  const local01 = localPiety01({ authority01, institutionBacking, devotion01 });
+  const structural = localPiety01({ authority01, institutionBacking, devotion01 });
+  // Conduct drift feeds the TARGET (asymmetric: drift erodes 2× faster than agreement builds).
+  const fit = clamp(Number(conductFit) || 0, -1, 1);
+  const conductTerm = T.CONDUCT_PIETY_W * (fit >= 0 ? fit : T.DRIFT_ASYMMETRY * fit);
+  const target = clamp01(structural + conductTerm);
+  // Devotional momentum: lag the recorded reading toward the target; seed at target first tick.
+  const local01 = Number.isFinite(priorLocal01)
+    ? clamp01(/** @type {number} */ (priorLocal01) + T.PIETY_LAG * (target - /** @type {number} */ (priorLocal01)))
+    : target;
   const rawLocalMult = localMultFromLocal01(local01);
   const integ = clergyIntegrity(clergy);
   const localMult = 1 + integ * (rawLocalMult - 1);   // clergy distortion (exact 1× when integ = 1)
@@ -256,8 +288,12 @@ export function pietyRecord({ authority01 = 0, institutionBacking = 0, devotion0
   ];
   if (integ < 1) causes.push({ source: 'clergy_distortion', value: 1 - integ });
   if (damp.megaphoneCombined < 1) causes.push({ source: 'opposed_rivals', value: 1 - damp.megaphoneCombined });
+  // Legibility law: name the conduct-fit driver. Erosion ('the town no longer lives like
+  // its god') and its inverse are both surfaced; omitted entirely at fit 0 (byte-identical).
+  if (conductTerm < 0) causes.push({ source: 'conduct_drift', value: -conductTerm });
+  else if (conductTerm > 0) causes.push({ source: 'conduct_alignment', value: conductTerm });
   const clergyOut = clergy || { e: 0, c: 0, taint: 0, variance: 0, revealedTaint: 0, weight: 0 };
-  return { local01, localMult, realmMult: rMult, composite, moralMult, clergyIntegrity: integ, causes, clergy: clergyOut, dampener: damp };
+  return { local01, structuralTarget: target, localMult, realmMult: rMult, composite, moralMult, clergyIntegrity: integ, causes, clergy: clergyOut, dampener: damp };
 }
 
 // ── realm aggregate (tick-start, in the kernel) ───────────────────────────────

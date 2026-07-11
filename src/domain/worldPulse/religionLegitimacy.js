@@ -334,12 +334,15 @@ function conductPlane(lens, government) {
  * EXACTLY 0 for a neutral deity (evil01/chaos01 = 0.5) OR neutral conduct ⇒ the reciprocal
  * loop is invisible to legacy/neutral fixtures. Pure — read from CURRENT conduct only, so
  * a drift in conduct erodes the signal (the "continuously fed / never perpetual" rule).
+ * REUSED by the piety amplifier (W-F5.5 conduct-drift-erodes-piety): the SAME endogenous
+ * signal that erodes legitimacy also erodes felt devotion — exported so piety never
+ * recomputes it (the owner's "reuse, never recompute" mandate).
  * @param {{ alignmentAxis?: string, lawAxis?: string }} deity
  * @param {{ align?: number, compromise?: number }} lens
  * @param {string|null|undefined} government
  * @returns {number}
  */
-function conductFitSignal(deity, lens, government) {
+export function conductFitSignal(deity, lens, government) {
   const c = conductPlane(lens, government);
   const agreeMoral = (evil01(deity) - 0.5) * (c.evil01 - 0.5) * 4;   // −1..+1; 0 at neutral either side
   const agreeLaw = (chaos01(deity) - 0.5) * (c.chaos01 - 0.5) * 4;
