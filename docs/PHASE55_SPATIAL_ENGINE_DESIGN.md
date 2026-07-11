@@ -154,6 +154,47 @@ MORAL PROHIBITION. Smugglers can attempt to run prohibited cargo through a banni
   on paper, leak in practice). Slavery/contraband trade thus becomes a moral-economic axis with a
   legal force (prohibition/confiscation) and its counterforce (smuggling, risk-tolerance-gated).
 
+## 4e. Movement modalities — isolation, teleport circles, airships (owner, round 7)
+The base spatial layer is the TERRESTRIAL cost field. These three are each a DIFFERENT kind of
+EXCEPTION to it — all captured deterministically at canonize, all magic/tech/premium-gated where
+appropriate, all keeping the forces↔counterforces law. They cut across trade + land + war + faith
++ migration, so they live at the substrate level (§2) even though listed here.
+- ISOLATED SETTLEMENTS = DISCONNECTION, an EMERGENT property of the cost field, not a new mechanic.
+  A settlement whose least-cost LAND route to everything is prohibitive/infinite (an island, a
+  mountain fastness, a disconnected graph component) is isolated. The digest already knows this
+  (connectivity is a Dijkstra by-product). CONSEQUENCES, holistically: siege-RESISTANT by land
+  (hard to interdict what has no land route — §7 siege needs sea/air control too); chronically
+  TRADE-STARVED (few/no supply routes ⇒ standing supply-starved risk, high stockpile reliance);
+  faith/news LAGGED or never-reached (the §3 propagation front can't cross); migration-TRAPPED
+  (excess pop can't leave by land ⇒ higher origin-mortality OR forced sea route). Isolation's
+  COUNTERFORCE is exactly the next two (and sea lanes): a teleport circle or airship de-isolates.
+  Make isolation a LEGIBLE derived state (the dossier explains "cut off by land: no viable route").
+- TELEPORTATION CIRCLES = a ZERO-cost, ZERO-latency, GATE-BYPASSING EDGE between two specific
+  settlements (MAGIC-gated ⇒ absent in a magic-opt-out world; premium; rare/expensive). It
+  collapses distance: the two become adjacent for faith spread, news, and (bounded) trade. But the
+  counterforces are sharp: it is a SEIZABLE CHOKEPOINT (control it → control the link; disable/
+  destroy it in war = a strategic objective that severs the link); THROUGHPUT-BOUNDED (people,
+  messages, limited high-value goods per week — NOT an army pipeline or bulk grain); and a SINGLE
+  POINT OF FAILURE. Trade through it bypasses land interception; a besieged settlement WITH a
+  circle can't be fully starved by a land siege alone (the circle is the smuggle-route-of-last-
+  resort — §7's trickle, magically). War: capturing/collapsing the enemy's circle is a real
+  objective. It is an AUTHORED edge in the frozen digest (DM-placed or generated), so determinism
+  holds.
+- AIRSHIPS = a PARALLEL AERIAL cost field: straight-line, terrain-IGNORING, gate-BYPASSING — but
+  NOT distance-free (time ∝ straight-line distance, faster than land) and carrying its own risk
+  profile (weather, AERIAL interception, range/fuel limits, LOWER volume than a caravan). Tech/
+  magic/premium-advanced-gated (a per-settlement capability flag). The big consequence: airships
+  DEFEAT land interdiction — an airship resupplies a besieged settlement over the walls, so §7
+  SIEGE becomes "control the land AND the air"; total interdiction now requires AIR SUPERIORITY
+  (the counterforce: aerial interception / an enemy air arm). Airship trade is faster but lower-
+  volume and interception-risked; military air-mobility extends reach but is bounded (can't move a
+  whole army cheaply). Modeled as a second, flatter cost field the aerial-capable settlements read.
+- UNIFYING: all three are modifiers on the ONE base cost field, frozen at canonize (teleport links
+  = authored edges; airship capability = a per-settlement flag enabling the aerial layer; isolation
+  = derived connectivity). Determinism + dormancy + magic-opt-out + premium all hold. Each keeps a
+  counterforce: isolation↔sea/air/teleport access; teleport-power↔single-point-of-failure + magic
+  dependency; airship-interdiction-defeat↔air-superiority requirement.
+
 ## 5. The military layer
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
   position each tick.
@@ -376,10 +417,34 @@ snapshots the aspatial `regionalGraph` beside it. The spatial digest slots in ri
      access — the settlement's economic character);
    - RECENT ACTIVITY + TRADE TIES (shared recent history + established trade relationships — two
      settlements that trade heavily and share events are "close").
-   So culture is ENDOGENOUS (emergent from belief + economy + behaviour + ties), matching the
-   engine's derived-not-rolled law. The §4c migration "least-drift" axis and the §4d "culturally-
-   different" contraband gate BOTH read this ONE composite metric (`cultureDistance(a,b)`), built
-   as a new pure selector over existing state — no new persisted culture field, no authoring.
+   - GOVERNANCE DRIFT (owner, round 7) — political/governing similarity, TWO sub-terms over
+     existing `powerStructure` state (governanceType / governingName / previousGovernments):
+       (i) REGIME-TYPE distance, computed over three governance AXES so it works for whatever
+       governanceType strings the generator emits (no hardcoded pair table):
+         • CONCENTRATION of power — autocratic/single-ruler → oligarchic/council → popular/
+           distributed → none (anarchy/lawless);
+         • LEGITIMACY SOURCE — divine (theocracy) / arcane (magocracy) / hereditary (monarchy,
+           feudal) / martial (junta, warlord) / mercantile (plutocracy, merchant guild) /
+           popular (republic, commune) / tribal (clan);
+         • RULE OF LAW — lawful-bureaucratic → personalist → lawless.
+         Distance = weighted gap in that 3-axis space. So: two theocracies ≈ very close; theocracy
+         vs magocracy = same concentration, ADJACENT legitimacy (both special-caste rule) ⇒
+         moderately close; monarchy vs junta = same concentration, different legitimacy (hereditary
+         vs martial); merchant republic vs plutocracy = close (mercantile + semi-distributed);
+         anarchy = far from every concentrated form. "Some are more similar than others" falls out
+         of the axis geometry rather than a lookup.
+       (ii) GOVERNING-POWER IDENTITY — do they answer to the SAME sovereign/faction (governingName /
+       allegiance)? Same overlord ⇒ close; RIVAL overlords ⇒ distant; HOSTILE rival overlords ⇒
+       distant AND it feeds the §4c hostility axis (double push away). This makes CONQUEST matter
+       for culture: when A conquers B, B's governingName → A's, so over the following weeks/months
+       B DRIFTS toward A's governance even while its faith/economy lag — a long-horizon culture
+       shift wired to the W-C2 conquest system. previousGovernments gives the drift a memory
+       (a recently-conquered settlement still carries its old regime's residue for a while).
+   So culture is ENDOGENOUS (emergent from belief + alignment + economy + behaviour + ties +
+   governance), matching the engine's derived-not-rolled law. The §4c migration "least-drift" axis
+   and the §4d "culturally-different" contraband gate BOTH read this ONE composite metric
+   (`cultureDistance(a,b)`), built as a new pure selector over existing state — no new persisted
+   culture field, no authoring.
 3. **Imported / flat maps — SETTLED (architect judgment): option (b).** v1 restricts the spatial
    engine to GENERATED maps; IMPORTED-image maps stay ASPATIAL (byte-identical to today) until a
    real persisted terrain/road authoring layer is built later. Avoids the flat-plain degenerate-
