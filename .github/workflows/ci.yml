@@ -99,6 +99,19 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Post-build verification: the dist-reading chunk contracts in tests/build/
+      # (vendor-pdf lazy isolation, the engine-chunk split, the first-paint
+      # closure RATCHET) are `runIf(distExists)` and silently NO-OP in the "Run
+      # tests" step above — a fresh checkout has no dist/ yet. Re-run the suite
+      # AFTER the build with VERIFY_DIST=1, which turns a missing dist/ into a
+      # HARD failure so a chunk contract can never count green having verified
+      # nothing. Locally, `npm run check` chains this same step after its build
+      # (the pre-fix ordering measured the PREVIOUS run's dist — a one-run lag
+      # that let W-F0..W-F6 first-paint growth ride a green gate to +293 B over
+      # budget before anything tripped).
+      - name: Verify bundle chunk contracts (post-build, anti-vacuity)
+        run: npm run verify:dist
+
   e2e:
     name: Chromium end-to-end
     runs-on: ubuntu-latest

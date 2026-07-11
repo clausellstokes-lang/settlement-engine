@@ -28,7 +28,8 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
-    "check": "npm run validate:data && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run typecheck && npm run typecheck:domain:strict && npm run lint && npm run test && npm run build",
+    "verify:dist": "VERIFY_DIST=1 vitest run tests/build/",
+    "check": "npm run validate:data && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run typecheck && npm run typecheck:domain:strict && npm run lint && npm run test && npm run build && npm run verify:dist",
     "check:quick": "npm run lint && npm run test",
     "prepare": "husky"
   },
