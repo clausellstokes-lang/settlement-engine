@@ -54,3 +54,18 @@ conjunction space gains a fourth dimension — cause-status: live | historicized
 resolved — with transition prose ("the garrison was funded; the ledger never closed").
 Coverage ladder extends over the new dimension. Third instance of the memory principle:
 piety lags, armies rust, habits outlive their reasons.
+
+### The two terminals (OWNER, 2026-07-11 — closes the lifecycle)
+The re-cause/reform/historicize branches are the COVERT lifecycle, and they run only until:
+1. EXPOSURE (covert -> revealed): the thread exits the quiet branches into the PUBLIC arc —
+   scandal, legitimacy drag, justice textured by the settlement's law axis (lawful tries,
+   chaotic mobs or shrugs, evil promotes). Revealed corruption never quietly historicizes.
+2. INFRASTRUCTURE DEATH: sustaining causes must be LIVE entities (the paying syndicate, the
+   fence, the backed habit). When the related criminal institution is destroyed (abolition,
+   purge, war), every thread keyed to it RE-ADJUDICATES immediately: resolve (the
+   arrangement died with its paymaster) or re-cause to another live patron if character
+   reaches for one — receipt either way. Habit survives resolved circumstances, never
+   demolished infrastructure. Destroying the den cauterizes its threads — targeting it is
+   mechanically meaningful.
+Liveness checks per tick on sustaining-cause entities; both terminals cause-chained and
+canon-entering.
