@@ -17,6 +17,11 @@ import { registerStep } from '../pipeline.js';
 import {
   readCorruptionClimate, npcCorruptibleFlaw, corruptionVectorForFlaw, spawnCorruptionChance,
 } from '../../domain/corruption.js';
+// Phase 4 W-F5 stage 2: corruption onset finally leaves RECEIPTS — one trace per
+// corrupted NPC naming the flaw, the climate, and the roll odds (the ledger's
+// long-owed explanation layer; rides the same generator-golden regen as the
+// starting pantheon). Deterministic: recordTrace stamps ts off ctx._traceClock.
+import { recordTrace } from '../../domain/trace.js';
 
 // Corrupted short-term goal by corruption vector — replaces the NPC's normal
 // short goal so their motivation reads as compromised at the table.
@@ -70,5 +75,26 @@ registerStep('corruptionPass', {
     if (npc.goal && typeof npc.goal === 'object') {
       npc.goal = { ...npc.goal, short: CORRUPT_SHORT_GOAL[vector] || CORRUPT_SHORT_GOAL.greed };
     }
+
+    // The receipt: WHY this NPC was generated already corrupted, and WHAT the
+    // corruption feeds. Emitted ONLY on onset (a clean roster stays traceless ⇒
+    // byte-identical), so the golden-diff class is exactly the corrupted cohort.
+    recordTrace(ctx, {
+      targetType: 'npc',
+      targetId: String(npc.id || npc.name || 'npc'),
+      step: 'corruptionPass',
+      result: 'corrupted',
+      causes: [
+        { source: `flaw.${flaw}`, effect: `corruption vector: ${vector}`,
+          reason: `A ${flaw} flaw gave the rot its opening.` },
+        { source: 'corruption.climate', effect: `onset chance ${p.toFixed(3)}`,
+          reason: `Criminal institutions (${climate.criminalInstitutions.join(', ')}) sustain a live corruption climate here.` },
+      ],
+      downstreamEffects: [
+        { target: crimInst, effect: 'gains a compromised insider' },
+        { target: guild, effect: 'holds leverage',
+          reason: 'The corrupt tie runs to the local underworld.' },
+      ],
+    });
   }
 });

@@ -78,14 +78,18 @@ describe('describeDeityEffects — per-axis', () => {
     );
   });
 
-  test('warlike → aggression string', () => {
-    expect(describeDeityEffects({ temperamentAxis: 'warlike' })).toContain(
+  // W-F5 re-fixture (axis retirement): temper DERIVES from alignment, so the
+  // warlike/peacelike display cases are authored via alignment (evil ⇒ warlike,
+  // good ⇒ peacelike); the stored temperamentAxis mirrors the derivation and is
+  // inert to the read.
+  test('warlike (derived from evil alignment) → aggression string', () => {
+    expect(describeDeityEffects({ alignmentAxis: 'evil', temperamentAxis: 'warlike' })).toContain(
       "Warlike, and raises the realm's aggression",
     );
   });
 
-  test('peacelike → aggression-tempering string', () => {
-    expect(describeDeityEffects({ temperamentAxis: 'peacelike' })).toContain(
+  test('peacelike (derived from good alignment) → aggression-tempering string', () => {
+    expect(describeDeityEffects({ alignmentAxis: 'good', temperamentAxis: 'peacelike' })).toContain(
       "Peacelike, and tempers the realm's aggression",
     );
   });
@@ -103,7 +107,9 @@ describe('describeDeityEffects — per-axis', () => {
   });
 
   test('a warlike/evil major god is the OPENLY OPPOSED magic variant', () => {
-    expect(describeDeityEffects({ rankAxis: 'major', temperamentAxis: 'warlike' })).toContain(
+    // Temper derives from alignment: the warlike orthodoxy IS the evil-aligned
+    // god (both entrances of deityIsRegulatory's disjunction land here).
+    expect(describeDeityEffects({ rankAxis: 'major', alignmentAxis: 'evil', temperamentAxis: 'warlike' })).toContain(
       'Tightens magic legality: the art is openly opposed',
     );
     expect(describeDeityEffects({ rankAxis: 'major', alignmentAxis: 'evil' })).toContain(

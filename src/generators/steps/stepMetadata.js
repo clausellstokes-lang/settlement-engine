@@ -152,6 +152,18 @@ export const STEP_METADATA = Object.freeze({
       return n ? `${n} corrupted figure${n === 1 ? '' : 's'}` : 'No corruption climate';
     },
   },
+  seedStartingPantheon: {
+    label: 'Seed the latent pantheon',
+    description: 'Bake a latent patron and minor cults into the seed, weighted by terrain, culture, and who governs. Dormant until faith is activated.',
+    // LATENCY DISCIPLINE (premium gate): the rail summary reports COUNTS ONLY —
+    // it must never name a latent deity (no generation-time surface may).
+    summary: (ctx) => {
+      const latent = ctx.effectiveConfig?.latentPantheon;
+      if (!latent?.patron) return 'No faith seeded';
+      const cults = latent.cults?.length || 0;
+      return cults ? `A patron and ${cults} cult${cults === 1 ? '' : 's'} lie latent in the seed` : 'A patron lies latent in the seed';
+    },
+  },
   generateNarratives: {
     label: 'Compose narratives',
     description: 'Write the prose layer — history, defense, daily-life, and per-faction asides.',

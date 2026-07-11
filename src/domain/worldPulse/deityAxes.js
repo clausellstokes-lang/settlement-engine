@@ -14,10 +14,13 @@
  * `deriveTemper` is the axis-integration DERIVATION: warlike/peacelike/neutral is
  * no longer an independent stored axis — it falls out of the two alignment axes
  * (evil + chaos push warlike; good + law push peacelike; the neutral core reads
- * neutral). `deityTemper` is the read-time SHIM every temper reader now routes
- * through: for an EXISTING deity (one that carries a stored temperamentAxis — every
- * deity today) it returns that value VERBATIM, so this wave is byte-identical; only
- * a DERIVED-only deity (no stored axis; W-F4/W-F5) actually runs the derivation.
+ * neutral). `deityTemper` is the read-time DERIVATION every temper reader routes
+ * through: it ALWAYS derives from the two alignment axes and NEVER consults a
+ * stored `temperamentAxis`. The temperament axis is RETIRED as a load-bearing
+ * field (W-F5 stage 1 — the axis-retirement wave dropped the byte-identity
+ * short-circuit): the stored field still persists harmlessly in embeds and the DB
+ * (migrations 049/056 keep the column + CHECK), but it is inert to every engine
+ * temper read. Only a null/absent deity ⇒ undefined.
  *
  * (Homed in worldPulse rather than the domain/deityConstants leaf so the W-F2 diff
  * stays clear of that leaf's edge-function bundle; corruption.js can still import it
@@ -52,8 +55,8 @@ export function chaos01(deity) {
 
 // Weights for the intrinsic-temper derivation. Intent (good–evil) dominates the
 // niche-grid temper; chaos adds belligerence (method); a dead-band around the
-// neutral core reads 'neutral'. INERT this wave — the shim returns stored values
-// for every existing deity — so these tune only DERIVED-only deities (W-F4/W-F5).
+// neutral core reads 'neutral'. LIVE for every deity (W-F5 stage 1 retired the
+// stored-value short-circuit), so these weights now shape every engine temper read.
 export const TEMPER_DERIVATION = Object.freeze({
   W_EVIL: 0.7,      // evil ⇒ warlike, good ⇒ peacelike (intent leads intrinsic temper)
   W_CHAOS: 0.3,     // chaos adds belligerence; lawful order is calmer
@@ -80,16 +83,16 @@ export function deriveTemper(evilCoord, chaosCoord, context) {
 }
 
 /**
- * The READ-TIME temperament shim. For an EXISTING deity (one carrying a stored
- * temperamentAxis — every deity today) returns that value VERBATIM, so every
- * temper reader is byte-identical this wave; for a DERIVED-only deity (no stored
- * axis; W-F4/W-F5) derives it from the two alignment axes. A null/absent deity ⇒
- * undefined (the callers' pre-existing neutral fallback). Pure.
+ * The READ-TIME temperament DERIVATION. Temper is derived from the two alignment
+ * axes (evil01 + chaos01) for EVERY deity — a stored `temperamentAxis` is NO LONGER
+ * consulted (axis retirement, W-F5 stage 1 dropped the byte-identity short-circuit).
+ * A null/absent deity ⇒ undefined (the callers' pre-existing neutral fallback). The
+ * `temperamentAxis` field remains in the typedef because embeds/DB still carry it,
+ * but it is inert to this read. Pure.
  * @param {{ temperamentAxis?: string, alignmentAxis?: string, lawAxis?: string } | null} [deity]
  * @returns {string | undefined}
  */
 export function deityTemper(deity) {
   if (!deity) return undefined;
-  if (deity.temperamentAxis != null) return deity.temperamentAxis;
   return deriveTemper(evil01(deity), chaos01(deity));
 }

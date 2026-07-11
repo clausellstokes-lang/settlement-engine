@@ -24,8 +24,12 @@ import { createPRNG } from '../../src/kernel/prng.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
-function deity(name, { rank = 'major', law = 'neutral', temper = 'neutral' } = {}) {
-  return { _deityRef: `custom:lu_${name.toLowerCase()}`, name, alignmentAxis: 'neutral', temperamentAxis: temper, lawAxis: law, rankAxis: rank };
+function deity(name, { rank = 'major', law = 'neutral', align = 'neutral' } = {}) {
+  // W-F5 stage-1 re-fixture (axis retirement): temper DERIVES from alignment, so the
+  // authoring knob is `align` (never a stored temper). The embedded temperamentAxis
+  // mirrors the derivation for shape honesty — it is inert to every engine temper read.
+  const temper = align === 'evil' ? 'warlike' : align === 'good' ? 'peacelike' : 'neutral';
+  return { _deityRef: `custom:lu_${name.toLowerCase()}`, name, alignmentAxis: align, temperamentAxis: temper, lawAxis: law, rankAxis: rank };
 }
 
 function settlement(name, { patron, prosperity = 'Moderate', crimeZero = false } = {}) {
@@ -51,16 +55,21 @@ const save = (id, name, opts) => ({ id, name, phase: 'canon', settlement: settle
 /**
  * Drive N ticks of the source creed spreading into convert C, feeding religionStates
  * back each tick. Returns C's share of the source creed after N ticks. A LAW-NEUTRAL
- * PEACELIKE incumbent keeps C contested and sits in a DIFFERENT niche (so the neutral-
- * niche source coexists), while methodClash(source, incumbent) = 0 for both a chaotic
- * and a lawful source — isolating the crisis receptivity lift as the only differentiator.
+ * GOOD-aligned incumbent (derived temper: peacelike) keeps C contested and sits in a
+ * DIFFERENT niche (so the neutral-niche source coexists), while methodClash(source,
+ * incumbent) = 0 for both a chaotic and a lawful source — isolating the crisis
+ * receptivity lift as the only differentiator.
  */
 function convertShare({ sourceLaw, prosperity, stressed, crimeZero = false }, ticks = 40) {
   // Ranks chosen so the source's equilibrium share is STRENGTH-limited (not step-
   // limited): a step-limited climb hides the receptivity lift; the equilibrium plateau
   // exposes it. Run to equilibrium (~40 ticks) so the plateau, not the climb, is read.
-  const src = deity('Storm', { rank: 'minor', law: sourceLaw, temper: 'neutral' });
-  const incumbent = deity('Faded', { rank: 'cult', law: 'neutral', temper: 'peacelike' });
+  // The incumbent is GOOD-aligned so its DERIVED niche (peacelike:good) stays distinct
+  // from the neutral-aligned source's (neutral:neutral) — coexistence preserved, and
+  // both the chaotic and lawful source variants face the SAME incumbent (aligned
+  // channels cancel in the comparison; the crisis lift stays the only differentiator).
+  const src = deity('Storm', { rank: 'minor', law: sourceLaw });
+  const incumbent = deity('Faded', { rank: 'cult', law: 'neutral', align: 'good' });
   const saves = [save('src', 'Src', { patron: src }), save('cconv', 'Cconv', { prosperity, patron: incumbent, crimeZero })];
   const stressors = stressed ? [{ id: 'st1', type: 'famine', status: 'active', severity: 0.9, affectedSettlementIds: ['cconv'] }] : [];
   const regionalGraph = ensureRegionalGraph({ edges: [{ id: 'edge.src.cconv', from: 'src', to: 'cconv', relationshipType: 'allied' }], channels: [] });

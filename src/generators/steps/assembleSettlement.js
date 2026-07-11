@@ -40,7 +40,9 @@ import { DEFENSE_CONTRIB, legitimacyDefScale } from '../factionDynamics.js';
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
-  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
+  // seedStartingPantheon mutates effectiveConfig (the deity embeds) and must
+  // land before the settlement.config spread below (Phase 4 W-F5 stage 2).
+  deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'seedStartingPantheon', 'structuralValidationPass'],
   reads: ['availableServices', 'conflicts', 'culture', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'history', 'institutions', 'neighbourProfile', 'npcs', 'population', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: ['settlement'],
   // normalizes the power roster in place; F8 also re-renders each stress entry's

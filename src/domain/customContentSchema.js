@@ -197,6 +197,14 @@ export const DEITY_LAW = Object.freeze([
 ]);
 export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
 
+// Portfolio (Phase 4 W-F5, owner-ratified): an OPTIONAL FREE-TEXT FLAVOR FIELD —
+// what the god is "of", in the author's own words. PURE CONTENT with ZERO
+// mechanics: no engine module reads it; it rides the embed for display only.
+// Absence is always tolerated (every pre-W-F5 deity has none); a present value
+// must be free text within the authoring cap (exported for the authoring
+// surface's counter — W-F6 wires the input field).
+export const DEITY_PORTFOLIO_MAX_LENGTH = 500;
+
 /**
  * Validate an authored deity record. Returns { ok, errors } — mirrors the
  * write-time validation the other buckets perform implicitly (a name is
@@ -213,7 +221,11 @@ export const DEITY_LAW_KEYS = Object.freeze(DEITY_LAW.map((l) => l.key));
  * 056 DB CHECK mirrors exactly this: NULL/absent lawAxis is admitted, a present
  * bad value rejected.
  *
- * @param {{ name?: unknown, alignmentAxis?: unknown, temperamentAxis?: unknown, rankAxis?: unknown, lawAxis?: unknown }} [deity]
+ * The `portfolio` field (Phase 4 W-F5) is likewise ADDITIVE-TOLERANT: an
+ * optional free-text flavor field with zero mechanics. Absence is always fine;
+ * a present value must be a string within DEITY_PORTFOLIO_MAX_LENGTH.
+ *
+ * @param {{ name?: unknown, alignmentAxis?: unknown, temperamentAxis?: unknown, rankAxis?: unknown, lawAxis?: unknown, portfolio?: unknown }} [deity]
  * @returns {{ ok: boolean, errors: string[] }}
  */
 export function validateDeity(deity = {}) {
@@ -237,6 +249,15 @@ export function validateDeity(deity = {}) {
   // present-but-invalid value. `== null` covers both undefined and null.
   if (deity?.lawAxis != null && !DEITY_LAW_KEYS.includes(/** @type {string} */ (deity.lawAxis))) {
     errors.push(`lawAxis must be one of: ${DEITY_LAW_KEYS.join(', ')}.`);
+  }
+  // portfolio (W-F5): OPTIONAL free-text flavor, zero mechanics. Absence is
+  // always tolerated; a present value must be free text within the cap.
+  if (deity?.portfolio != null) {
+    if (typeof deity.portfolio !== 'string') {
+      errors.push('portfolio must be free text (a string).');
+    } else if (deity.portfolio.length > DEITY_PORTFOLIO_MAX_LENGTH) {
+      errors.push(`portfolio must stay within ${DEITY_PORTFOLIO_MAX_LENGTH} characters.`);
+    }
   }
   return { ok: errors.length === 0, errors };
 }

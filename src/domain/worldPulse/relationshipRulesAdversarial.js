@@ -10,6 +10,9 @@ import { previewRelationshipHierarchyCascade } from './relationshipHierarchy.js'
 import { isBattlefieldPrimary } from './relationshipCompatibility.js';
 import { hash01, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, subjugationDirection, supplyExposure } from './relationshipRuleHelpers.js';
 import { neutralRules, tradePartnerRules, alliedRules, patronRules, clientRules, vassalRules } from './relationshipRulesCore.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
+// alignment axes — the stored temperamentAxis (and its legacy spellings) is inert.
+import { deityTemper } from './deityAxes.js';
 
 function rivalRules(/** @type {any} */ ctx) {
   const { relState, sourcePressure, targetPressure } = ctx;
@@ -537,13 +540,13 @@ function criminalNetworkRules(/** @type {any} */ ctx) {
 // info is threaded or the tie is not critical / no tension spike.
 
 // A settlement's embedded deity temper sign: warlike +1, peacelike −1, else 0.
-// Reads the resolved primaryDeitySnapshot (store-decoupled), tolerant of the two
-// field spellings the snapshot uses across phases.
+// Reads the resolved primaryDeitySnapshot (store-decoupled). Temper comes from
+// the DERIVATION (deityAxes.deityTemper — axis retirement, W-F5 stage 2): the
+// stored temperamentAxis and its legacy spellings are inert to this read.
 function deityTemperSign(/** @type {any} */ settlement) {
-  const deity = settlement?.config?.primaryDeitySnapshot;
-  const axis = String(deity?.temperamentAxis || deity?.temperAxis || deity?.temper || '');
-  if (/warlike|war/i.test(axis)) return 1;
-  if (/peace/i.test(axis)) return -1;
+  const axis = deityTemper(settlement?.config?.primaryDeitySnapshot);
+  if (axis === 'warlike') return 1;
+  if (axis === 'peacelike') return -1;
   return 0;
 }
 

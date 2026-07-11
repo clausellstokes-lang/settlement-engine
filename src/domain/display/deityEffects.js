@@ -44,6 +44,10 @@
 import { DEITY_CORRUPTION_TUNING, DEITY_LAW_TUNING } from '../corruption.js';
 import { DEITY_TEMPER_SIGN, AGGRESSION_TUNING } from '../worldPulse/disposition.js';
 import { DEITY_MAGIC_LEGALITY_STEPS, deityIsRegulatory } from '../magicProfile.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): the display temper sign reads
+// the SAME derivation the engine reads (deityAxes.deityTemper) — a stored
+// temperamentAxis is inert, so display can never disagree with the engine drive.
+import { deityTemper } from '../worldPulse/deityAxes.js';
 // major/minor/cult → religious_authority lift. Single source = deityConstants.js
 // (a dependency-free leaf; see the module header for why the engine reads the
 // leaf while display consumers read this re-export).
@@ -142,10 +146,12 @@ function alignmentDir(deity) {
   return Number.isFinite(sign) ? sign : 0;
 }
 
-/** The signed temperament direction of a deity snapshot: warlike +1, peacelike −1, else 0.
+/** The signed temperament direction of a deity snapshot: warlike +1, peacelike −1,
+ * else 0. Temper via the DERIVATION (axis retirement, W-F5) — the same read the
+ * engine's disposition drive makes, so display and engine cannot diverge.
  * @param {any} deity @returns {number} */
 function temperamentDir(deity) {
-  const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[deity?.temperamentAxis];
+  const sign = /** @type {Record<string, number>} */ (DEITY_TEMPER_SIGN)[deityTemper(deity) ?? ''];
   return Number.isFinite(sign) ? sign : 0;
 }
 

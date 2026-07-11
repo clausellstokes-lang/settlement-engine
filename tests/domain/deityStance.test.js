@@ -212,26 +212,30 @@ describe('deityConstants — axis projections + the temper-derivation shim', () 
     expect(deriveTemper(evil01(LN), chaos01(LN))).toBe('neutral');
   });
 
-  test('the SHIM returns the stored temperament VERBATIM for every existing deity (byte-compat)', () => {
+  test('temper is DERIVED from the alignment axes for every deity — a stored temperamentAxis is IGNORED (W-F5 stage 1 axis retirement)', () => {
+    // The stored-value short-circuit is retired: an evil+chaotic deity derives
+    // 'warlike' no matter what temperamentAxis it carries (the field is now inert).
     for (const stored of ['warlike', 'peacelike', 'peaceful', 'neutral', 'scheming', '']) {
       const deity = { alignmentAxis: 'evil', lawAxis: 'chaotic', temperamentAxis: stored };
-      expect(deityTemper(deity)).toBe(stored);           // NEVER the derived value
+      expect(deityTemper(deity)).toBe('warlike');        // ALWAYS the derived value, never the stored one
     }
   });
 
-  test('the SHIM derives ONLY when there is no stored axis (the W-F4/W-F5 path)', () => {
+  test('temper derives from the two alignment axes; a null/absent deity ⇒ undefined', () => {
     expect(deityTemper({ alignmentAxis: 'evil', lawAxis: 'chaotic' })).toBe('warlike'); // derived
     expect(deityTemper({ alignmentAxis: 'good', lawAxis: 'lawful' })).toBe('peacelike');
+    expect(deityTemper({ alignmentAxis: 'neutral', lawAxis: 'neutral' })).toBe('neutral');
     expect(deityTemper(null)).toBeUndefined();
     expect(deityTemper(undefined)).toBeUndefined();
   });
 
-  test('the niche key reads temper THROUGH the shim — stored verbatim ⇒ unchanged', () => {
-    // Every existing deity carries a stored temperamentAxis, so nicheOf is byte-identical.
+  test('the niche key reads DERIVED temper — niche = derived-temperament × alignment', () => {
+    // Temper derives from alignment now (evil⇒warlike, good⇒peacelike, neutral⇒neutral),
+    // so the niche key falls out of the two axes; a stored temperamentAxis is ignored.
     expect(nicheOf({ temperamentAxis: 'warlike', alignmentAxis: 'evil' })).toBe('warlike:evil');
     expect(nicheOf({ temperamentAxis: 'peacelike', alignmentAxis: 'good' })).toBe('peacelike:good');
     expect(nicheOf({})).toBe('neutral:neutral');
-    // a DERIVED-only deity (no stored temper) gets the derived niche — the W-F4 activation.
+    // a deity's niche is its DERIVED temper × alignment — no stored temper needed.
     expect(nicheOf({ alignmentAxis: 'evil', lawAxis: 'chaotic' })).toBe('warlike:evil');
   });
 });

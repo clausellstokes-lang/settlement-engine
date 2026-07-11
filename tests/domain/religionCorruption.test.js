@@ -24,8 +24,12 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
 const EVIL = Object.freeze({ id: 'custom:malgrim', name: 'Malgrim', alignmentAxis: 'evil', temperamentAxis: 'neutral', rankAxis: 'major' });
 const GOOD = Object.freeze({ id: 'custom:lumina', name: 'Lumina', alignmentAxis: 'good', temperamentAxis: 'neutral', rankAxis: 'major' });
-const WARLIKE = Object.freeze({ id: 'custom:kaor', name: 'Kaor', alignmentAxis: 'neutral', temperamentAxis: 'warlike', rankAxis: 'major' });
-const PEACELIKE = Object.freeze({ id: 'custom:serel', name: 'Serel', alignmentAxis: 'neutral', temperamentAxis: 'peacelike', rankAxis: 'major' });
+// W-F5 stage-1 re-fixture (axis retirement): temper DERIVES from alignment, so a
+// warlike-drive deity is authored EVIL-aligned and a peacelike-drive deity
+// GOOD-aligned. The stored temperamentAxis matches the derivation for shape
+// honesty — it is inert to every engine temper read; the alignment carries the drive.
+const WARLIKE = Object.freeze({ id: 'custom:kaor', name: 'Kaor', alignmentAxis: 'evil', temperamentAxis: 'warlike', rankAxis: 'major' });
+const PEACELIKE = Object.freeze({ id: 'custom:serel', name: 'Serel', alignmentAxis: 'good', temperamentAxis: 'peacelike', rankAxis: 'major' });
 
 // A CRIME-FREE town: NO criminal institution (the actual onset gate is
 // hasCriminalInst, an institution check — independent of the crime/security

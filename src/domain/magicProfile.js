@@ -24,6 +24,12 @@ import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
 import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
+// Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
+// alignment axes — never read off the stored temperamentAxis field — so the
+// regulatory-orthodoxy read can no longer disagree with the niche/warbound/
+// mandate temper. deityAxes is a dependency-free leaf (no cycle; its bytes ride
+// the aiGrounding edge bundle, rebuilt with this change).
+import { deityTemper } from './worldPulse/deityAxes.js';
 
 const MAGIC_LEVEL_VALUES = Object.freeze({
   // Canonical bands the GENERATOR emits (getMagicLevel: 0=none, <=25 low, <=65 medium, else high).
@@ -161,7 +167,7 @@ function deriveLegality(settlement, profiles, contributors) {
     contributors.push({
       source: deity._deityRef || 'primaryDeity',
       effect: 'theocratic_regulation',
-      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
+      reason: `${deity.name || 'The patron deity'} (major${deityIsRegulatory(deity) ? `, ${deityTemper(deity) === 'warlike' ? 'warlike' : 'evil'}` : ''}) regulates arcane practice as a rival authority.`,
     });
   }
   return legality;
@@ -256,7 +262,7 @@ function deriveReligiousAcceptance(settlement, profiles, contributors) {
     contributors.push({
       source: deity._deityRef || 'primaryDeity',
       effect: 'hostile',
-      reason: `${deity.name || 'The patron deity'} (major, ${deity.temperamentAxis === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority. Magic is openly opposed.`,
+      reason: `${deity.name || 'The patron deity'} (major, ${deityTemper(deity) === 'warlike' ? 'warlike' : 'evil'}) brooks no rival to its authority. Magic is openly opposed.`,
     });
     return 'hostile';
   }
@@ -457,7 +463,11 @@ function dominantDeityOf(settlement) {
  *  @param {DeitySnapshot} deity
  *  @returns {boolean} */
 export function deityIsRegulatory(deity) {
-  return deity.temperamentAxis === 'warlike' || deity.alignmentAxis === 'evil';
+  // Temper via the DERIVATION (axis retirement, W-F5): a stored temperamentAxis
+  // is inert to this read. Under the current derivation weights warlike ⟺ evil
+  // alignment, so a regulatory orthodoxy is exactly the evil-aligned major god;
+  // the disjunction stays for the day derivation weights let temper diverge.
+  return deityTemper(deity) === 'warlike' || deity.alignmentAxis === 'evil';
 }
 
 // The number of band-steps a MAJOR deity tightens magic legality by: one for any
