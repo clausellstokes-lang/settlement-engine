@@ -1111,3 +1111,27 @@ shutters the rowdy pits; LG tolerates neither and raises orderly charity; CE kee
 - CONSTRAINTS: arcs not insta-demolition (clamped per-tick pressure); neutral/absent patron =
   exact zero (theorem); cause chains name every closure ("the temple led the abolition");
   W-F8 envelope: institution mix correlates with patron alignment across the grid, no flips.
+
+### Martial readiness — war habituation and the peace dividend (OWNER, 2026-07-11; lands W-F8 with the moral-institution pressure)
+GAP (verified): war memory exists in relationships (disposition ratchets, grievances) and
+wounds (exhaustion, damage) but NOT in structure — five sieges leave a settlement
+economically identical to unbroken peace. NEW: a per-settlement READINESS scalar with
+asymmetric hysteresis (war experience spikes it in seasons; extended peace decays it over a
+generation — the peace dividend).
+- INPUTS: endogenous war experience (mobilizations, sieges endured, occupations survived) +
+  threat environment + the patron's DERIVED TEMPER through the megaphone (war-gods hold the
+  edge; peacelike patrons accelerate the dividend — and a war machine under a gentle god is
+  CONDUCT DRIFT, so the fit loop pressures demilitarization). LAW textures the form: lawful
+  readiness = standing institutions (garrisons, armories); chaotic = warrior culture, bands.
+- EXPRESSION (the W-F8 seams): institution emergence/viability weighting (martial
+  institutions rise/fall with readiness — catalog coding joins Phase 5 beside the moral
+  leans); readiness tilt in the development value-ranking (war-supporting chains score
+  higher in militarized towns); faster mobilization + gentler first-tick attrition for the
+  practiced.
+- THE MILITARISM SPIRAL, braked at birth: readiness -> cheaper war -> more war -> readiness.
+  Brakes: UPKEEP DRAG on prosperity (guns-vs-butter — garrison economies are poorer in
+  peace; merchant factions agitate), the peace decay, and conduct-fit under non-warlike
+  patrons. ENVELOPE (W-F8): militarization correlates with war history; demilitarization
+  observable in long-peace soaks; NO permanent war-machine lock-in.
+- Arcs not steps (LAG both directions); neutral/absent inputs = exact zero; cause chains
+  ("a generation without war has softened the garrison town"); deterministic, tick-start.
