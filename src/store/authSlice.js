@@ -450,7 +450,11 @@ export const createAuthSlice = (set, get) => ({
       // In real mode the browser is navigating away; no UI update needed.
       return result;
     } catch (e) {
-      set(state => { state.auth.loading = false; state.auth.error = e.message; });
+      // Prefer the safe, non-leaky userMessage set by describeOAuthError in
+      // lib/auth.js (e.g. a not-yet-enabled provider). Rethrow the original
+      // error object so the caller can also read `e.userMessage`.
+      const safe = e.userMessage || e.message;
+      set(state => { state.auth.loading = false; state.auth.error = safe; });
       throw e;
     }
   },

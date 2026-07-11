@@ -273,8 +273,8 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         {isAnon && atCap ? (
           // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
           // Lead with what signin gets you, not with what you've used up.
-          // Side-door $2.99 link below catches intermediates who just need
-          // Friday's town.
+          // (The old "$2.99 buy this dossier" side-door was removed — it was a
+          // no-op CTA scrolling to an anchor that renders nowhere on home.)
           <>
           <div style={{
             padding: SP.lg,
@@ -301,20 +301,11 @@ export default function HomeHero({ onSignIn, onNavigate }) {
               >
                 Create free account →
               </Button>
-              <div style={{
-                marginTop: SP.md, paddingTop: SP.sm,
-                borderTop: `1px dashed ${BORDER}`,
-                fontSize: FS.xs, color: swatch.inkMag3, fontStyle: 'italic',
-              }}>
-                or just take this one{' '}
-                <button
-                  type="button"
-                  onClick={(e) => { e.preventDefault(); document.querySelector('[data-buy-this-dossier]')?.scrollIntoView({ behavior: 'smooth' }); }}
-                  style={{ color: GOLD_DEEP, fontWeight: 700, fontStyle: 'normal', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline' }}
-                >
-                  buy the dossier for $2.99 ↓
-                </button>
-              </div>
+              {/* The "$2.99 buy this dossier" side-door was removed: it scrolled
+                  to a [data-buy-this-dossier] anchor that renders nowhere on the
+                  home surface (a no-op money CTA). A dead, paid control is the
+                  worst trust signal to this audience; the free-account path above
+                  is the one honest action here. */}
             </div>
             <AnonTierTeaser onSignIn={onSignIn} />
           </>

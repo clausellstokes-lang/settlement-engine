@@ -31,27 +31,31 @@ describe('flag() resolution', () => {
     for (const [name, decl] of Object.entries(FLAGS)) {
       expect(flag(name)).toBe(decl.default);
     }
-    // discordOauth defaults to false (off until OAuth review).
-    expect(flag('discordOauth')).toBe(false);
+    // discordOauth defaults to true (OAuth buttons shipped flag-on; a
+    // not-yet-enabled provider degrades to a calm message via describeOAuthError).
+    expect(flag('discordOauth')).toBe(true);
   });
 
   it('localStorage override beats default', () => {
-    // An explicit true override wins over the false default…
+    // An explicit true override is honored…
     setFlagOverride('discordOauth', true);
     expect(flag('discordOauth')).toBe(true);
 
     // …and an explicit false override is honored, not treated as "unset"
-    // (guards the nullish-coalescing precedence in flag()).
+    // (guards the nullish-coalescing precedence in flag()) — this also proves
+    // an override wins even against the true registry default.
     setFlagOverride('discordOauth', false);
     expect(flag('discordOauth')).toBe(false);
   });
 
   it('removing the override falls back to default', () => {
-    setFlagOverride('discordOauth', true);
-    expect(flag('discordOauth')).toBe(true);
+    // Override opposite the registry default, then clear it and confirm the
+    // value reverts to the default (discordOauth defaults to true).
+    setFlagOverride('discordOauth', false);
+    expect(flag('discordOauth')).toBe(false);
 
     setFlagOverride('discordOauth', null);
-    expect(flag('discordOauth')).toBe(false);
+    expect(flag('discordOauth')).toBe(true);
   });
 
   it('URL parameter beats localStorage', () => {

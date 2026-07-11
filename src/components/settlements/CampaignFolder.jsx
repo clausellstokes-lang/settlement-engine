@@ -13,6 +13,7 @@ import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
+import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
@@ -95,6 +96,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           onCancel={() => setConfirmDelete(false)}
         />
       )}
+
+      {/* State-of-the-realm strip — self-hides when the world is dormant (not
+          canonized), so it's byte-identical for a non-simulated campaign. */}
+      {!collapsed && <RealmStrip campaign={campaign} settlements={settlements} />}
 
       {!collapsed && (
         <RegionalGraphSummary

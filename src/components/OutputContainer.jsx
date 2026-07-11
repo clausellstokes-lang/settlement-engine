@@ -385,6 +385,16 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
+    // Relationships — the full relational web (RelationshipsTab). Declared in
+    // TAB_GROUPS.world + renderTab but was never registered here, so the resolver
+    // dropped it and only the narrower Neighbours tab rendered. Shown when the
+    // settlement surfaces any relational content.
+    ...(rawSettlement?.relationships?.length || rawSettlement?.factions?.length
+      || rawSettlement?.neighbourNetwork?.length || rawSettlement?.neighborRelationship?.name
+      // Reuses the already-bundled Users glyph (relationships = people/factions)
+      // so registering the tab adds no new icon to the first-paint vendor-icons
+      // chunk — keeps the closure ratchet green.
+      ? [{ id:'relationships', label:'Relationships', Icon: Users }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : []),
     // Versions — the P109/E-5 snapshot timeline. Owner-only (revert mutates the

@@ -39,12 +39,12 @@ import { useSyncExternalStore } from 'react';
 export const FLAGS = Object.freeze({
   // ── Auth ─────────────────────────────────────────────────────────────────
   discordOauth: {
-    default: false,
-    description: 'Discord OAuth button (off until the OAuth review completes).',
+    default: true,
+    description: 'Discord OAuth sign-in button. Safe flag-on: an unconfigured provider degrades to a calm message.',
   },
   googleOauth: {
-    default: false,
-    description: 'Google OAuth button (off until the Supabase provider is configured).',
+    default: true,
+    description: 'Google OAuth sign-in button. Safe flag-on: an unconfigured provider degrades to a calm message.',
   },
 
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
@@ -113,8 +113,8 @@ export const FLAGS = Object.freeze({
     description: 'P123 / A-2: drop mobile top header; auth chip joins bottom nav.',
   },
   compendiumInlineHelp: {
-    default: false,
-    description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet.',
+    default: true,
+    description: 'P126 / CP-1: "?" affordance on every config control opens Compendium snippet. Promoted on.',
   },
   summaryMagazineV2: {
     default: true,

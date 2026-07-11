@@ -314,6 +314,24 @@ async function mockSignInWithMagicLink(email) {
  *
  * @param {'google' | 'discord' | 'github'} provider
  */
+/**
+ * Map a raw Supabase OAuth error to a safe, non-leaky display string. The
+ * load-bearing case for shipping the OAuth buttons flag-on before the dashboard
+ * providers are configured: a "provider not enabled" error reads as a calm
+ * "not available right now" instead of a raw Supabase error or a crash.
+ * (Richer identity-collision copy is THEIRS' W4 refinement — out of scope here.)
+ *
+ * @param {{ message?: string, code?: string } | null} error
+ * @returns {string} a safe message to show the user
+ */
+function describeOAuthError(error) {
+  const raw = String(error?.message || '').toLowerCase();
+  if (raw.includes('not enabled') || raw.includes('unsupported provider')) {
+    return 'That sign-in option isn’t available right now. Use your email instead.';
+  }
+  return 'Sign-in failed. Please try again.';
+}
+
 async function supabaseSignInWithOAuth(provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
@@ -321,7 +339,13 @@ async function supabaseSignInWithOAuth(provider) {
       redirectTo: `${window.location.origin}`,
     },
   });
-  if (error) throw error;
+  if (error) {
+    // `userMessage` is our own safe-display augmentation; the Supabase AuthError
+    // type doesn't declare it, so attach it through a loose cast. Callers
+    // (authSlice.authOAuth → AuthPanel) prefer it over the raw message.
+    /** @type {any} */ (error).userMessage = describeOAuthError(error);
+    throw error;
+  }
   // signInWithOAuth returns a redirect URL but Supabase navigates the
   // browser itself, so the caller never resolves to a session — that
   // arrives via onAuthStateChange once the user lands back on our origin.

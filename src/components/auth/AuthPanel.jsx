@@ -76,8 +76,11 @@ export default function AuthPanel({
     else setMode(next);
   };
 
-  const showGoogle  = flag('googleOauth');
-  const showDiscord = flag('discordOauth');
+  // OAuth is a sign-IN affordance only — keep the sign-up tab short (email +
+  // password + recovery), so the provider buttons never render on 'signup'.
+  const oauthAllowed = mode === 'signin';
+  const showGoogle  = oauthAllowed && flag('googleOauth');
+  const showDiscord = oauthAllowed && flag('discordOauth');
 
   const handleOAuth = async (provider) => {
     setError(null);
@@ -89,7 +92,10 @@ export default function AuthPanel({
       }
       // Real mode: Supabase has navigated away; nothing more to do.
     } catch (e) {
-      setError(e.message || 'OAuth sign-in failed');
+      // `userMessage` is the safe, non-leaky string set by describeOAuthError in
+      // lib/auth.js — e.g. a not-yet-enabled provider maps to a calm "sign-in
+      // option isn't available" rather than a raw Supabase error.
+      setError(e.userMessage || e.message || 'OAuth sign-in failed');
     } finally {
       setLoading(false);
     }
@@ -214,8 +220,7 @@ export default function AuthPanel({
               glyph={<DiscordGlyph />}
               label="Discord"
               onClick={() => handleOAuth('discord')}
-              disabled={true}
-              soonNote={t('auth.discord.placeholder')}
+              disabled={loading || !isConfigured}
             />
           )}
           {showGoogle && (
