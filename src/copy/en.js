@@ -1151,19 +1151,13 @@ export const en = Object.freeze({
     premiumBody:  'Advance time and run the region for years: the self-ending war, the living pantheon, campaigns, and a chronicle that writes itself.',
   },
 
-  // ── Welcome page (HomeLanding) proof-forward V2 bands ─────────────────────
-  // Net-new band headings + the closing line for the flag-gated landingV2
-  // variant. The hero copy stays inline in HomeLanding.jsx (pinned); only the
-  // new bands route through here. House voice: short, diegetic, sentence case,
-  // no em dash, no exclamation.
-  landing: {
-    proofHeading:   'See one for yourself.',
-    proofSub:       'A sample dossier, and a region advanced four months. No account, nothing to install.',
-    livingHeading:  'Then the years pass.',
-    livingSub:      'Advance time and the region keeps its own history. These are the systems that run once you do.',
-    livingCta:      'See how the Living World works',
-    closingLine:    'Your table is waiting.',
-  },
+  // NOTE: the Welcome-page copy namespace `landing.*` moved to its own module
+  // (src/copy/landing.js) as part of the scrollable-landing rebuild. It is
+  // lazily SEGMENTED — the copy AND its tl() lookup ride the lazy HomeLanding
+  // chunk — so its ~4 kB of verbatim marketing copy never rides the eager
+  // first-paint entry chunk (first-paint byte budget). The old flag-gated V2
+  // band keys (proofHeading/livingHeading/closingLine/…) were removed with the
+  // band rewrite; nothing else referenced them.
 
   // ── About "The Living World" tab + landing thesis ─────────────────────────
   // The About page is reframed as LANDING + HOW-TO around one thesis. The

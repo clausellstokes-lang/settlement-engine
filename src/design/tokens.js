@@ -498,6 +498,10 @@ export const legacy = Object.freeze({
     pico: 7, nano: 8, micro: 9, xxs: 10, xs: 11, sm: 12, md: 13, lg: 15, xl: 17, xxl: 20, h1: 24,
     '7.5': 7.5, '8.5': 8.5, '9.5': 9.5, '10.5': 10.5, '11.5': 11.5, '12.5': 12.5, '13.5': 13.5,
     '14': 14, '14.5': 14.5, '16': 16, '18': 18, '22': 22, '26': 26, '28': 28, '32': 32, '36': 36,
+    // Display steps for the scrollable landing hero + section headings (spec §6:
+    // hero h1 58px, closer h2 44px, section h2 34px). Additive — no existing key
+    // changes, so every other surface renders byte-identically.
+    '34': 34, '44': 44, '58': 58,
   },
   // ELEV — the 3-tier elevation (box-shadow) scale, exposed to legacy
   // importers. 1 = default cards, 2 = hover/sticky chrome, 3 = modals/popovers.

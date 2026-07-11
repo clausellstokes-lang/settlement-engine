@@ -124,15 +124,15 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P142 / D-6: 380px phone-optimized session-running view of a settlement.',
   },
-  // Wave 4c — proof-forward Welcome page. Hero band is UNCHANGED; the flag adds
-  // a proof band (sample dossier, anon cold-visitors only), an honest
-  // living-world strip (all auth states), and a closing CTA band. Promoted
-  // default-ON per reconciliation decision 7 (landing/IA accept wholesale). The
-  // kill-switch is kept: set false to revert to the hero + three pillars +
-  // lifecycle spine.
+  // DEPRECATED (no longer read). The Welcome page was rewritten wholesale into
+  // the scrollable salt-road landing (HomeLanding + home/LandingBelowFold), which
+  // does NOT fork on this flag — HomeLanding was its sole consumer and the flag
+  // read was removed with the rewrite. The registry entry is kept (registry
+  // entries are not deleted); it is now inert. Safe to retire in a later flag
+  // sweep once no analytics/config references remain.
   landingV2: {
     default: true,
-    description: 'Proof-forward Welcome page: hero unchanged, plus a proof band (sample dossier, anon only), an honest living-world strip, and a closing CTA band. OFF reverts to the current hero + three pillars + lifecycle spine.',
+    description: 'DEPRECATED / inert — the scrollable landing no longer forks on this flag (HomeLanding rewrite). Kept as a registry entry only.',
   },
 
   // ── Simulation ──────────────────────────────────────────────────────────────

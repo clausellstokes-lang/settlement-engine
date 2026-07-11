@@ -14,6 +14,7 @@
     "fix:data": "node scripts/fix-duplicate-keys.js",
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
     "optimize:backgrounds": "node scripts/optimize-backgrounds.mjs",
+    "optimize:landing-backgrounds": "node scripts/optimize-landing-backgrounds.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.full.json",
     "typecheck:domain": "tsc --noEmit",
     "typecheck:domain:strict": "node scripts/check-domain-strict.mjs",

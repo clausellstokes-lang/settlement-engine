@@ -335,7 +335,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                   ? t('hero.v2.ctaTemplate', { tier: t(`generate.sizes.${pickedSize}`).toLowerCase() })
                   : isAnon
                     ? t('hero.cta')
-                    : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
+                    : `Forge a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
             </Button>
             {isAnon && (
               <p style={{

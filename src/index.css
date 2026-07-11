@@ -269,6 +269,68 @@ button {
   background-repeat: no-repeat;
 }
 
+/* ── Scrollable Welcome page (HomeLanding + home/LandingBelowFold) ───────────
+   The painted-scene section scrims. Colors stay in CSS (no raw color leaks into
+   JS — visual-budget lint); the per-section scene URL is passed in from JS as
+   the --sf-scene custom property (a url(), not a color). Scrim alphas are the
+   landing spec §5 values. */
+
+/* Hero — dark linear ink scrim over the village scene. This is the ONLY layer
+   on the whole page with background-attachment: fixed (spec §8 perf). iOS
+   Safari ignores `fixed` and falls back to scroll, which degrades cleanly. */
+.sf-landing-hero {
+  background-image:
+    linear-gradient(rgba(20, 14, 5, 0.52), rgba(20, 14, 5, 0.7)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 86vh;
+}
+
+/* Sections 01 · Forge and 04 · The Realm — cream scrim over their painted
+   scenes (thorpe / city), attachment scroll (never more than one fixed layer). */
+.sf-landing-scene-cream {
+  background-image:
+    linear-gradient(rgba(247, 240, 228, 0.66), rgba(247, 240, 228, 0.72)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+/* Closer 06 · Set out — dark scrim over the create scene, attachment scroll. */
+.sf-landing-scene-dark {
+  background-image:
+    linear-gradient(rgba(20, 14, 5, 0.66), rgba(20, 14, 5, 0.8)),
+    var(--sf-scene, none);
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+/* Scroll cue (hero → #forge). The gentle bounce is decorative; the global
+   reduced-motion rule in styles/a11y.css collapses it (animation-duration:1ms),
+   and this explicit override kills it outright — spec §9/§10. */
+@keyframes sf-cue-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.sf-landing-cue { animation: sf-cue-bounce 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sf-landing-cue { animation: none; }
+}
+
+/* 03 · The voice — plain parchment at the page-body cream (#F7F0E4). This exact
+   tone has no semantic token (the brief/commons plains use parchment-50, a
+   token), so its one background lives here in CSS rather than as a raw hex in
+   JS (visual-budget lint). Hairline top/bottom borders are set inline (BORDER
+   token). */
+.sf-landing-voice { background-color: #f7f0e4; }
+
 /* Skip-to-content link — the first focusable element in the DOM (App.jsx).
    Visually hidden until focused, then slides into the top-left so keyboard / SR
    users can jump past the header/nav straight to <main id="main-content">. */
