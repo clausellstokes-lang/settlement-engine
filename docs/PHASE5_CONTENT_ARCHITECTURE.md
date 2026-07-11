@@ -71,19 +71,25 @@ Liveness checks per tick on sustaining-cause entities; both terminals cause-chai
 canon-entering.
 
 ## The temporal constitution (OWNER, 2026-07-11 — audit + registry = Phase 5 W3; age bands = W2 selectors)
-THE TICK IS A MONTH. Every temporal element in the system carries an explicit, documented,
-intuitively-chosen world-time duration — and PROSE MUST READ THE ACTUAL AGE of things.
-1. AGE BANDS bind the cause-status dimension: this-month / this-season / this-year /
-   years-past, read from elapsed ticks. PIN: historicizing language ("the lean years") is
-   impossible below the years threshold; freshly-resolved causes read fresh ("the pay came
-   through just last month; the ledger hasn't closed").
+THE TICK IS ONE WEEK (owner-corrected 2026-07-11; verified in advanceInterval.js: "a
+one_year advance is 48 synchronous one-week ticks" — 4-week months, 12-week seasons,
+48-week year). The architect's earlier month assumption was WRONG and may have propagated
+into implementer tuning justifications — the audit must therefore NORMALIZE EVERY constant
+to tick=week, not merely inventory them.
+1. AGE BANDS bind the cause-status dimension: this-week (1) / this-month (<=4) /
+   this-season (<=12) / this-year (<=48) / years-past (>48), read from elapsed ticks. PIN:
+   historicizing language ("the lean years") is impossible below the years threshold;
+   freshly-resolved causes read fresh ("the pay came through just last month").
 2. THE TEMPORAL REGISTRY: one documented table — constant, world-time meaning, intuitive
-   justification — covering every time constant (legitimacy LAG ~5mo half-life, piety ~11mo,
-   tenure 8mo, stain, sink/revival, readiness up ~a season, betrayal cooldown 8mo, abolition
-   arc ~5mo+, chronicle window 12mo, rust, cause-status thresholds, ...). COMPLETENESS PIN:
-   no mechanism ships a time constant unregistered.
-3. FIRST AUDIT CATCH (fix in W3): readiness DOWN_DECAY 0.04/tick = ~17-month half-life, but
-   the spec says "a generation" — re-tune toward ~0.01 (or revise the claim); envelope-check.
+   justification IN WEEKS — covering every time constant (legitimacy LAG ~5-6wk half-life,
+   piety ~11wk (~a season — audit whether devotion should be slower), tenure half 8wk =
+   2 months, stain, sink/revival rates, readiness up (~2-3wk spike), betrayal cooldown 8wk,
+   abolition arc ~5wk to floor, chronicle window 12wk = one season (reads well), rust,
+   cause-status thresholds, ...). COMPLETENESS PIN: no unregistered time constant ships.
+3. FIRST AUDIT CATCH, NOW SEVERE (fix in W3): readiness DOWN_DECAY 0.04/tick = ~17 WEEKS
+   (~4 months) against a specced "generation" (~20 years ~= 1,000 ticks => ~0.001-class
+   decay); re-tune with envelope checks. Sweep every W-F5.5/W-F8 constant for
+   month-assumption contamination.
 4. UNBOUNDED ITEMS GET DURATIONS: army travel costs route-hops in ticks (channel-graph
    distance — no instant arrivals); sieges run distribution-bounded months; famine
    onset/recovery follows stockpile burn arithmetic; audit anything else with an implicit
