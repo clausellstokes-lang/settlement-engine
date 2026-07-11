@@ -54,6 +54,10 @@ const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
 const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
 const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
 const PowerTab = lazy(() => import('./new/tabs/PowerTab'));
+// Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
+// legitimacy / cause chains), tier-gated inside. Lazy so the faith read-model +
+// deityEffects only load when a dossier is actually opened (ratchet: faith lazy).
+const FaithSection = lazy(() => import('./settlement/FaithSection.jsx'));
 const DefenseTab = lazy(() => import('./new/tabs/DefenseTab'));
 const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
 const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
@@ -525,7 +529,16 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
-      case 'power':      return <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />;
+      case 'power':      return (
+        <>
+          <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />
+          {/* Faith rides under Power (its divine mandate props/erodes the ruler's
+              legitimacy). Self-gates by tier: full panel when embeds are present
+              (premium/lapsed/shared), generic true-neutral teaser for free/anon,
+              nothing for a premium deity-free town. */}
+          <FaithSection settlement={s} publicDossier={publicDossier} />
+        </>
+      );
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;

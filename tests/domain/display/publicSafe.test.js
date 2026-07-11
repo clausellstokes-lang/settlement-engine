@@ -39,9 +39,33 @@ describe('toPublicSafe (§1k)', () => {
   });
 
   it('PRIVATE_KEY_RE matches the documented private keys', () => {
-    for (const k of ['secret', 'private', 'dmNotes', 'gmGuidance', 'guidance', 'plotHook', 'hook', 'compass', 'chronicle', 'aiData', 'aiSettlement', 'aiDailyLife', 'narrativeNotes', 'pinnedNpc']) {
+    for (const k of ['secret', 'private', 'dmNotes', 'gmGuidance', 'guidance', 'plotHook', 'hook', 'compass', 'chronicle', 'aiData', 'aiSettlement', 'aiDailyLife', 'narrativeNotes', 'pinnedNpc', 'latentPantheon']) {
       expect(PRIVATE_KEY_RE.test(k)).toBe(true);
     }
+  });
+
+  it('strips config.latentPantheon (unrevealed seed) but keeps the activated live embeds', () => {
+    // Phase 4 premium gate: config is allowlisted at the top level, so a nested
+    // latentPantheon would ride through without the denylist token. The ACTIVATED
+    // embeds (primaryDeitySnapshot / cultDeitySnapshots / primaryDeityRef /
+    // faithProfile) carry no such token and stay visible — a shared premium
+    // pantheon displays read-only to all viewers, the latent seed never does.
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      config: {
+        latentPantheon: { patron: { name: 'The Deep', _deityRef: 'deity:core:the_deep' } },
+        primaryDeityRef: 'deity:core:sun',
+        primaryDeitySnapshot: { name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' },
+        cultDeitySnapshots: [{ name: 'Ash', alignmentAxis: 'evil' }],
+        faithProfile: { patron: { name: 'Sun', share: 62 } },
+      },
+    });
+    expect(out.config).toBeTruthy();
+    expect(out.config.latentPantheon).toBeUndefined();
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
+    expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
+    expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
   });
 });
 

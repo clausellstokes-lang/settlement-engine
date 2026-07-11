@@ -66,7 +66,16 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // top level, a nested `config._seed` / `config._config` can never leak on a
 // public projection. The settlement's own top-level `_seed`/`_config` are already
 // dropped by the fail-closed allowlist above; this is the defense-in-depth twin.
-export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|seed|_config)/i;
+// LATENT PANTHEON (Phase 4 W-F6, THE PREMIUM GATE): `config.latentPantheon` is the
+// starting pantheon baked into EVERY seed but UNREVEALED until premium activation
+// (latentPantheon.js). It is DM-only secret content — the gods the dossier has not
+// yet named — so it is dropped here (config is allowlisted at top level, so a nested
+// config.latentPantheon would otherwise ride through). The ACTIVATED live embeds
+// (primaryDeitySnapshot / cultDeitySnapshots / primaryDeityRef / faithProfile) match
+// none of these tokens and stay visible — a shared premium pantheon displays
+// read-only to all viewers, the latent seed never does. Mirrored server-side by
+// migration 128 (both _gallery_sanitize_public_json + _gallery_world_snapshot_is_safe).
+export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
 
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.

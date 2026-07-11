@@ -1,6 +1,7 @@
 /**
  * gallerySanitize.pglite.test.js — EXECUTION test for the SERVER public
- * projection _gallery_sanitize_public_json (Wave-1 fused migration 123 §3).
+ * projection _gallery_sanitize_public_json (Wave-1 fused migration 123 §3, amended
+ * net-current by 128 to strip the latent pantheon).
  *
  * The drift pin (gallerySanitizeAllowlist.contract.test.js) proves the SQL and
  * JS allowlists are the same SET; this proves the SQL sanitizer actually BEHAVES
@@ -8,27 +9,43 @@
  * output field-for-field on a representative settlement. The function is
  * self-contained (recurses only into itself), so it loads verbatim into pglite
  * with no stubs.
+ *
+ * It loads the NET-CURRENT sanitizer (latest-wins across all migrations), so a
+ * later amendment (e.g. `latentPantheon` in 128) is exercised, not a superseded
+ * definition.
  */
 
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
-import { readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { resolve, join } from 'node:path';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
-const MIGRATION = resolve(process.cwd(), 'supabase', 'migrations', '123_money_and_public_projection_hardening.sql');
-const migExists = existsSync(MIGRATION);
+const MIGRATIONS_DIR = resolve(process.cwd(), 'supabase', 'migrations');
 
-function extractFn(sql, name) {
-  const m = sql.match(new RegExp(`create\\s+or\\s+replace\\s+function\\s+public\\.${name}\\b[\\s\\S]*?\\$\\$;`, 'i'));
-  if (!m) throw new Error(`could not extract ${name}`);
-  return m[0];
+/** Latest-wins extraction of the net-current `_gallery_sanitize_public_json`
+ *  function body across all migrations (file order). Returns the LAST definition so
+ *  the EFFECTIVE server sanitizer is tested, not a superseded one. */
+function netCurrentSanitizerSql() {
+  if (!existsSync(MIGRATIONS_DIR)) return null;
+  const files = readdirSync(MIGRATIONS_DIR).filter((f) => /^\d.*\.sql$/.test(f)).sort();
+  const re = /create\s+or\s+replace\s+function\s+public\._gallery_sanitize_public_json\b[\s\S]*?\$\$;/ig;
+  let last = null;
+  for (const f of files) {
+    const src = readFileSync(join(MIGRATIONS_DIR, f), 'utf-8');
+    const matches = src.match(re);
+    if (matches && matches.length) last = matches[matches.length - 1];
+  }
+  return last;
 }
+
+const SANITIZER_SQL = netCurrentSanitizerSql();
 
 // A representative settlement: allowlisted public content, generation-time private
 // leakers (aiOverlays/userCanon/simulationTrace), the narrated public prose
 // (thesis/dailyLife), later-attached DM blocks, a nested DM key inside an allowed
-// subtree, and NPCs with private fields.
+// subtree, NPCs with private fields, and a `config` carrying the LATENT pantheon
+// (unrevealed — must strip) alongside the ACTIVATED live embeds (must survive).
 const SETTLEMENT = {
   name: 'Brackwater', tier: 'town', population: 1200,
   coherenceNotes: 'a public contradiction note',
@@ -36,6 +53,15 @@ const SETTLEMENT = {
   npcs: [{ id: 'n1', name: 'Aldric', role: 'Mayor', influence: 80, goal: 'seize power', secret: 'bastard heir', plotHooks: ['x'], relationships: [{}] }],
   thesis: 'A salt town that forgot its founding.',
   dailyLife: 'Dawn over the brine flats.',
+  config: {
+    // UNREVEALED — the Phase 4 premium gate secret; must never reach anon.
+    latentPantheon: { patron: { name: 'The Deep', _deityRef: 'deity:core:the_deep' }, cults: [{ name: 'Ash' }] },
+    // ACTIVATED live embeds — a shared premium pantheon is visible read-only to all.
+    primaryDeityRef: 'deity:core:sun',
+    primaryDeitySnapshot: { name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' },
+    cultDeitySnapshots: [{ name: 'Ash', alignmentAxis: 'evil' }],
+    faithProfile: { patron: { name: 'Sun', share: 62 } },
+  },
   // generation-time private (denylist MISSED these — the leak the flip closes):
   aiOverlays: [{ prose: 'ai' }], userCanon: { homebrew: 'mine' }, simulationTrace: [{ step: 1 }],
   // later-attached DM blocks + a brand-new key the OLD denylist would miss:
@@ -46,13 +72,12 @@ const SETTLEMENT = {
 
 let db;
 
-describe.runIf(migExists)('_gallery_sanitize_public_json — execution + client parity (pglite)', () => {
+describe.runIf(!!SANITIZER_SQL)('_gallery_sanitize_public_json — execution + client parity (pglite)', () => {
   let serverOut;
 
   beforeAll(async () => {
     db = new PGlite();
-    const sql = readFileSync(MIGRATION, 'utf-8');
-    await db.exec(extractFn(sql, '_gallery_sanitize_public_json'));
+    await db.exec(SANITIZER_SQL);
     const row = (await db.query(
       `select public._gallery_sanitize_public_json($1::jsonb) as j`,
       [JSON.stringify(SETTLEMENT)],
@@ -81,6 +106,15 @@ describe.runIf(migExists)('_gallery_sanitize_public_json — execution + client 
   it('still strips DM-private keys nested inside an allowed subtree', () => {
     expect(serverOut.history.dmNote).toBeUndefined();
     expect(serverOut.history.currentTensions).toEqual(['visible']);
+  });
+
+  it('(128) strips config.latentPantheon but keeps the activated live embeds', () => {
+    expect(serverOut.config).toBeTruthy();
+    expect(serverOut.config.latentPantheon, 'the unrevealed latent pantheon must not leak').toBeUndefined();
+    expect(serverOut.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(serverOut.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
+    expect(serverOut.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
+    expect(serverOut.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
   });
 
   it('reduces NPCs to the public field allowlist (033, intact)', () => {

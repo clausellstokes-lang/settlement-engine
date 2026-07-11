@@ -52,10 +52,11 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
   // renamed migration must surface loudly, not silently drop this coverage.
   it('locates the net-current _gallery_world_snapshot_is_safe across migrations', () => {
     expect(SCANNER.sql, 'no _gallery_world_snapshot_is_safe found in any migration').toBeTruthy();
-    // It must carry the hardened HARD-DENY list (deferredPartyImpacts is fix 3) and
-    // the 127 `_config` denylist token.
+    // It must carry the hardened HARD-DENY list (deferredPartyImpacts is fix 3),
+    // the 127 `_config` denylist token, and the 128 `latentPantheon` token.
     expect(SCANNER.sql).toMatch(/deferredPartyImpacts/);
     expect(SCANNER.sql).toMatch(/_config/);
+    expect(SCANNER.sql).toMatch(/latentPantheon/i);
   });
 
   beforeAll(async () => {
@@ -104,6 +105,20 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
     expect(await isSafe({ schemaVersion: 1, nested: [{ _config: { supplyChain: 1 } }] })).toBe(false);
     // Contains-semantics: a key that merely embeds the token is rejected too.
     expect(await isSafe({ schemaVersion: 1, raw_config: 1 })).toBe(false);
+  });
+
+  it('(128) rejects the latentPantheon unrevealed-starting-pantheon channel at any depth', async () => {
+    // The LATENT PANTHEON is baked into every seed but UNREVEALED until premium
+    // activation (Phase 4 premium gate): the gods a dossier has not yet named. The
+    // client PRIVATE_KEY_RE drops it; 128 mirrors that in the server scanner so a
+    // world snapshot embedding a settlement config cannot carry it to anon.
+    expect(await isSafe({ schemaVersion: 1, latentPantheon: { patron: { name: 'X' } } })).toBe(false);
+    expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { latentPantheon: {} } } } })).toBe(false);
+    // Contains-semantics: a key that merely embeds the token is rejected too.
+    expect(await isSafe({ schemaVersion: 1, latentPantheonRef: 1 })).toBe(false);
+    // But the ACTIVATED live embeds are NOT rejected — a shared premium pantheon is
+    // visible read-only to all (the owner's premium-gate ruling).
+    expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { primaryDeitySnapshot: { name: 'Sun' } } } } })).toBe(true);
   });
 
   it('passes a clean schemaVersion = 1 snapshot', async () => {

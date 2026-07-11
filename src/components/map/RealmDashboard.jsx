@@ -362,7 +362,7 @@ export default function RealmDashboard({
         </h3>
       </div>
 
-      {/* Living-world gates: Relationship drift / War layer / Faith dynamics.
+      {/* Living-world gates: Relationship drift / War layer / Faith spread.
           Campaign-scoped controls surfaced ON the realm (the DM's world view),
           mirroring the Library campaign card; both write the same normalized
           simulationRules seam. The full rule set stays in SimulationRulesDialog. */}

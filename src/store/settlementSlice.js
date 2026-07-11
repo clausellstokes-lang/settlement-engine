@@ -44,6 +44,7 @@ function loadEngine() {
 }
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
+import { activateLatentPantheon } from '../domain/worldPulse/latentPantheon.js';
 import {
   buildEdit as _pe_buildEdit,
   appendEdit as _pe_appendEdit,
@@ -263,6 +264,33 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
         Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
       }
     } catch { /* linkage is best-effort */ }
+  }
+}
+
+/**
+ * W-F6 THE PREMIUM GATE — the store-side half of the latent-pantheon activation
+ * seam (owner 2026-07-10; PHASE4_FAITH_DELTA). The generation pipeline bakes a
+ * starting pantheon LATENTLY into every seed (config.latentPantheon), identical
+ * for all tiers — tier never touches generation. This is where the key turns:
+ * a PREMIUM (or elevated) account activates on generation-complete / save-open,
+ * copying the latent patron + cults into the LIVE embeds via the pure, rng-free,
+ * idempotent activateLatentPantheon. FREE / ANON never activate — the latent
+ * record stays private (stripped from every public projection, publicSafe.js /
+ * migration 128) and the engine stays the certified inert ground state (the
+ * neutrality theorem). Defensive: any auth-read failure ⇒ no activation.
+ * @template T
+ * @param {T} settlement
+ * @param {() => any} get  the store getter (auth tier + role live here)
+ * @returns {T}
+ */
+function activateFaithIfEntitled(settlement, get) {
+  try {
+    const s = typeof get === 'function' ? get() : null;
+    const entitled = s?.auth?.tier === 'premium'
+      || (typeof s?.isElevated === 'function' && s.isElevated());
+    return entitled ? activateLatentPantheon(settlement) : settlement;
+  } catch {
+    return settlement;
   }
 }
 
@@ -793,19 +821,25 @@ export const createSettlementSlice = (set, get) => ({
           changeType: 'GENERATE_SETTLEMENT',
           changeLabel: result?.name,
         });
+      // W-F6 THE PREMIUM GATE — turn the key at generation-complete. A premium
+      // account activates the seed's latent starting pantheon into live embeds
+      // (day-one faith life); free/anon leave it latent + private. Idempotent,
+      // rng-free, tier-gated — the golden (generator output) is untouched because
+      // this fires in the STORE, after the pipeline.
+    const withFaith = activateFaithIfEntitled(reconciled, get);
       // Derive the SystemState immediately so the UI never sees a settlement
       // without its accompanying state snapshot. The domain function is
       // pure — no store, no React — and tolerant of partial inputs, so a
       // sparse settlement still produces a usable state.
     let systemState = null;
     try {
-      systemState = deriveSystemState(reconciled);
+      systemState = deriveSystemState(withFaith);
     } catch (e) {
       console.warn('[settlementSlice] deriveSystemState failed:', e);
     }
     const now = new Date().toISOString();
     set(state => {
-        state.settlement = reconciled;
+        state.settlement = withFaith;
         state.activeSaveId = null;
         state.lastSeed = seed;
         state.lastCtx = capturedCtx;
@@ -905,7 +939,11 @@ export const createSettlementSlice = (set, get) => ({
       recordGenerationMilestone('generate', reconciled, { generationId: genId });
     }).catch(() => {});
 
-    return reconciled;
+    // Return the activated settlement so a caller that saves the return value
+    // persists the SAME faith-active shape the store holds (state.settlement =
+    // withFaith). Generation telemetry above intentionally reads `reconciled`
+    // (generator truth — activation is a post-pipeline store overlay).
+    return withFaith;
   },
 
   setSettlement: (settlement) =>
@@ -1722,7 +1760,15 @@ export const createSettlementSlice = (set, get) => ({
   hydrateFromSave: (save) => set(state => {
     if (!save) return;
     const cs = save.campaignState || {};
-    state.settlement     = save.settlement || state.settlement;
+    // W-F6 THE PREMIUM GATE — turn the key on open. A premium (or upgraded)
+    // account activates the seed's latent starting pantheon into live embeds:
+    // "the gods were always there, latent in the seed". Idempotent (a save that
+    // already carries live embeds is unchanged) + tier-gated (free/anon load the
+    // save verbatim, faith latent + private).
+    const loadedSettlement = save.settlement
+      ? activateFaithIfEntitled(save.settlement, get)
+      : null;
+    state.settlement     = loadedSettlement || state.settlement;
     state.activeSaveId   = save.id || null;
     // Recover the seed from the save (row column first, then the blob's stamped
     // `_seed`), and NEVER fall back to the stale session seed (finding F2): the
@@ -1762,8 +1808,8 @@ export const createSettlementSlice = (set, get) => ({
     // re-derive from the settlement so the rail/timeline never crashes.
     if (cs.systemState) {
       state.systemState = cs.systemState;
-    } else if (save.settlement) {
-      try { state.systemState = deriveSystemState(save.settlement); }
+    } else if (loadedSettlement) {
+      try { state.systemState = deriveSystemState(loadedSettlement); }
       catch (e) { state.systemState = null; }
     } else {
       state.systemState = null;

@@ -12,8 +12,14 @@
  *     web cannot raise fronts. Renders disabled until drift is on; turning
  *     drift off cascades war off (armies wind down and march home on the next
  *     advance via the deploymentReturn machinery).
- *   Faith dynamics      (religionDynamicsEnabled, default OFF)
- *     The deity contest and conversion spread.
+ *   Faith spread        (faithSpreadEnabled, default OFF)
+ *     Cross-settlement propagation ONLY. Since the W-F1 gate split, each
+ *     settlement's own pantheon — the deity contest, rank ladder, legitimacy,
+ *     and patron seat — runs LOCALLY the moment it carries a deity, with no
+ *     flag. This gate opens only the borders: a dominant creed spreading along
+ *     trade / alliance / war ties into its neighbours. (Writes the canonical
+ *     faithSpreadEnabled key; normalizeSimulationRules keeps the legacy
+ *     religionDynamicsEnabled in sync until its Phase-6 deprecation.)
  *
  * These write the OWNING campaign's simulationRules through the SAME
  * normalized store seam as the Realm's SimulationRulesDialog
@@ -48,10 +54,10 @@ export const LIVING_WORLD_GATES = Object.freeze([
     description: 'Armies march, sieges form, conquests change rulers. Off: no war fronts.',
   }),
   Object.freeze({
-    key: 'religionDynamicsEnabled',
-    label: 'Faith dynamics',
+    key: 'faithSpreadEnabled',
+    label: 'Faith spread',
     moment: 'pantheon_preview',
-    description: 'Deities contest converts and gain seats once a settlement carries a patron deity. Off, or deity-free: no faith drift.',
+    description: 'Faith crosses BETWEEN settlements — a dominant creed spreads along trade, alliance, and war ties into its neighbours. Off: each settlement still grows its own pantheon, but no creed reaches across the borders.',
   }),
 ]);
 
