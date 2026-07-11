@@ -242,7 +242,7 @@ function TierStrip() {
           border: tier.accent ? '1px solid rgba(224,192,128,0.55)' : '1px solid rgba(244,234,208,0.25)',
           borderRadius: R.lg, padding: '18px 20px',
         }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -350,6 +350,10 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
             <h2 id="sf-voice-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('voice.h2')}</h2>
             <p style={{ ...proseStyle, margin: 0 }}>{tl('voice.body')}</p>
+            {/* AI disclosure: upfront, deliberately understated (owner). */}
+            <p style={{ margin: `${SP.sm}px 0 0`, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: SECOND }}>
+              {tl('voice.aiNote')}
+            </p>
           </div>
           <VoiceCards />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: SP.md, marginTop: SP.xl, flexWrap: 'wrap' }}>
@@ -423,9 +427,6 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           </p>
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <Button variant="primary" size="lg" onClick={() => onNavigate('generate')}>{tl('closer.cta')}</Button>
-          </div>
-          <div style={{ marginTop: SP.md, fontFamily: sans, fontSize: FS.sm, fontWeight: 700, color: 'rgba(251,245,230,0.7)' }}>
-            {tl('closer.reassure')}
           </div>
         </div>
         <TierStrip />
