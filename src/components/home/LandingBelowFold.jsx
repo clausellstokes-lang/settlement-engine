@@ -244,10 +244,19 @@ function TierStrip() {
         }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
+            {/* Per-segment badge colour: a 'Premium' segment always renders gold
+                (so Founder's "Premium · Lifetime" matches Cartographer's gold
+                PREMIUM); everything else follows the tier's accent. */}
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
-              color: tier.accent ? 'rgba(224,192,128,1)' : 'rgba(244,234,208,0.7)',
-            }}>{tier.badge}</span>
+            }}>
+              {String(tier.badge).split(' · ').map((seg, i) => (
+                <span key={seg}>
+                  {i > 0 && <span style={{ color: 'rgba(244,234,208,0.7)' }}>{' · '}</span>}
+                  <span style={{ color: (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)' : 'rgba(244,234,208,0.7)' }}>{seg}</span>
+                </span>
+              ))}
+            </span>
           </div>
           <div style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 600, lineHeight: 1.55, color: 'rgba(251,245,230,0.85)' }}>
             {tier.body}
