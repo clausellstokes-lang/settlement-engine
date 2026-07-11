@@ -1157,3 +1157,25 @@ generation — the peace dividend).
      long-peace realms observably blunder their first wars; no compounding with readiness
      into invincible veteran-states (rust and readiness are independent axes: a ready-but-
      rusty fortress town is expressible, as is a threadbare-but-sharp raider camp).
+
+### The war-supply web (OWNER, 2026-07-11 — catalog coding = Phase 5; seams = W-F8/existing supplyCompleteness)
+Map the institutions and chains NECESSARY FOR WAR into a named table (WAR_SUPPLY_CHAINS +
+war-role institution tags): ore -> smelting -> weapons/armor (advanced arms = the deep
+chain), leather -> tanneries -> harness, horses/stables, timber -> siege works,
+provisioning (food ledger), smithies/armories (conversion institutions), healers/temples
+(field medicine), and IRREGULAR capacity: mercenary companies + adventurer guilds.
+- READINESS BECOMES MATERIAL: W-F8's development tilt reads this table (named targets, not
+  heuristics); deployed quality keys on the web's DEPTH via the existing supplyCompleteness
+  machinery — a war without iron fields worse steel (gaps => attrition/stat penalties).
+- CONQUEST FEEDS, CONSCIENCE PRICES: captives from conquered settlements flow to slave
+  markets, loot to markets — war PAYS through exactly the institutions the moral-pressure
+  system governs. The LE conqueror profits; the LG realm's abolition forecloses the revenue:
+  good kingdoms fight POORER wars, a certifiable economic asymmetry.
+- THE COMPENSATING MARKET: mercenaries/adventurer guilds let gold buy sharpness (offsets
+  rust/readiness PARTIALLY, never fully — the condottieri pattern; rich-soft republics hire
+  swords). Hired capacity carries stance-driven loyalty hazard (transactional allies — the
+  evil-pact betrayal physics wearing a company banner; the free company that turns at the
+  siege). Costs prosperity; braked by price + hazard + partial-offset cap.
+- Cause chains throughout; neutrality (no war, no readiness record => inert); envelopes join
+  W-F8/Phase-5: supply-gap penalties observable, conquest-revenue asymmetry across the moral
+  plane, mercenary compensation bounded.
