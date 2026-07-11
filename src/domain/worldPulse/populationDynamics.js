@@ -4,11 +4,15 @@ import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { formatCount } from '../formatNumber.js';
 
+// Duration-in-months per interval, mirroring the canonical 4-weeks-per-month /
+// 52-week-year mapping (worldState.js INTERVAL_MONTHS): one_season = 13 weeks =
+// 3.25 months, one_year = 13 months. Keeps a direct coarse call growing the
+// SAME population as the orchestrator's decomposed weekly ticks.
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
-  one_season: 3,
-  one_year: 12,
+  one_season: 3.25,
+  one_year: 13,
 });
 
 const MIGRATION_CHANNELS = Object.freeze(['migration_pressure', 'trade_route', 'political_authority', 'military_protection']);

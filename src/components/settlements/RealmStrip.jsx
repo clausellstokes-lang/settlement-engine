@@ -2,7 +2,8 @@
  * RealmStrip — the campaign-folder "state of the realm" header strip (UX overhaul
  * Phase 3, plan §4.2). Surfaces, only when the campaign world is canonized /
  * simulated:
- *   - the in-world clock (season · month/year · tick)
+ *   - the in-world clock (season · year · week-tick; weeks are canonical —
+ *     one kernel tick is one week, 13 four-week months to the 52-week year)
  *   - the active-siege count           (liveSieges)
  *   - the dominant-faith pill          (top pantheon tier, by seats)
  *   - the Wizard-News recency          (latest entry tick vs current tick)
@@ -133,9 +134,9 @@ export default function RealmStrip({ campaign, settlements = [] }) {
         fontFamily: sans, fontSize: FS.xs, color: BODY,
       }}
     >
-      <Seg title="In-world clock. One advance step is one month.">
+      <Seg title="In-world clock. One tick is one week; a year is 52 weeks.">
         <strong style={{ color: GOLD_TXT, fontSize: FS.sm }}>{clock}</strong>
-        <span style={{ color: BODY }}> · month {tick}</span>
+        <span style={{ color: BODY }}> · week {tick}</span>
       </Seg>
 
       <Seg title="Active sieges in the realm">
@@ -154,7 +155,7 @@ export default function RealmStrip({ campaign, settlements = [] }) {
       {newsAge != null && (
         <Seg title="Wizard News recency">
           <span style={{ color: BODY }}>
-            {newsAge === 0 ? 'News this month' : `News ${newsAge} month${newsAge === 1 ? '' : 's'} ago`}
+            {newsAge === 0 ? 'News this week' : `News ${newsAge} week${newsAge === 1 ? '' : 's'} ago`}
           </span>
         </Seg>
       )}

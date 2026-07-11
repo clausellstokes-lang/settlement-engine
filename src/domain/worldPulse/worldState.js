@@ -12,19 +12,36 @@ const MAX_PROPOSALS = 80;
 // campaign that queues for hundreds of intentions without ever advancing time.
 const MAX_PENDING = 400;
 
+// Calendar unification (Option A, architect ruling 2026-07-11): WEEKS ARE
+// CANONICAL. The temporal constitution fixes tick = 1 week, month = 4 weeks,
+// year = 52 weeks — so the display year is THIRTEEN four-week months (13×4=52,
+// the only self-consistent triple). This table is duration-in-MONTHS per DM
+// interval and mirrors weeksPerInterval (advanceInterval.js) exactly at 4 weeks
+// per month: every entry is weeks/4, so a coarse advance and its decomposed
+// weekly ticks accumulate IDENTICAL elapsedMonths (0.25 is a dyadic rational —
+// binary-exact, no float drift), and the derived month/year/season agree on
+// both paths by construction.
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
-  one_season: 3,
-  one_year: 12,
+  one_season: 3.25,
+  one_year: 13,
 });
 
-// Months 1-3 are SPRING — createDefaultWorldState seeds {month:1, season:'spring'}
-// and that seeded default is the documented intent. (The array used to start at
-// winter, so the very first tick flipped a fresh campaign spring->winter and the
-// pressure model's +0.08 winter food bias skewed early famines.) Mid-campaign
-// saves shift their season LABEL one step on the next tick; pressure bias is now
-// consistent with the label.
+const MONTHS_PER_YEAR = 13;  // 13 four-week months = 52 weeks
+const WEEKS_PER_YEAR = 52;
+const WEEKS_PER_SEASON = 13; // four equal 13-week quarters
+
+// The year opens in SPRING — createDefaultWorldState seeds {month:1,
+// season:'spring'} and that seeded default is the documented intent. (The array
+// used to start at winter, so the very first tick flipped a fresh campaign
+// spring->winter and the pressure model's +0.08 winter food bias skewed early
+// famines.) Seasons derive from WEEK-OF-YEAR as four 13-week quarters (weeks
+// 0-12 spring … 39-51 winter), NOT from the month index: 13 months cannot split
+// into four equal month-runs, so the season grid lives on weeks — a season
+// boundary can land mid-month (month 4 opens in spring and turns summer at week
+// 13). Mid-campaign saves shift their season LABEL at most one step on the next
+// tick; pressure bias stays consistent with the label.
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 
 /**
@@ -307,9 +324,14 @@ export function canonizeWorldState(worldState, now = wallClockNow(), campaign = 
 export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
   const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (/** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1);
   const wholeMonthIndex = Math.floor(elapsed);
-  const month = (wholeMonthIndex % 12) + 1;
-  const year = Math.floor(wholeMonthIndex / 12) + 1;
-  const season = SEASONS[Math.floor(((month - 1) % 12) / 3)] || 'spring';
+  // 13-month display year (weeks canonical): month index 1..13, year rolls at 13.
+  const month = (wholeMonthIndex % MONTHS_PER_YEAR) + 1;
+  const year = Math.floor(wholeMonthIndex / MONTHS_PER_YEAR) + 1;
+  // Season from WEEK-OF-YEAR (four 13-week quarters), never the month index.
+  // elapsedMonths only ever accumulates exact quarter-months (INTERVAL_MONTHS),
+  // so elapsed*4 is an exact integer week count — no float drift at the floor.
+  const weekOfYear = Math.floor(elapsed * 4) % WEEKS_PER_YEAR;
+  const season = SEASONS[Math.floor(weekOfYear / WEEKS_PER_SEASON)] || 'spring';
   return { elapsedMonths: elapsed, month, year, season };
 }
 

@@ -6,6 +6,7 @@ import {
   createDefaultWorldState,
   previewCampaignWorldPulse,
   pruneFactionStates,
+  weeksPerInterval,
 } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 
@@ -36,21 +37,84 @@ describe('world calendar — month/season agreement', () => {
     expect(result.calendar.season).toBe('spring');
   });
 
-  test('month -> season mapping agrees with the seeded default across a full year wrap', () => {
-    const expected = {
-      1: 'spring', 2: 'spring', 3: 'spring',
-      4: 'summer', 5: 'summer', 6: 'summer',
-      7: 'autumn', 8: 'autumn', 9: 'autumn',
-      10: 'winter', 11: 'winter', 12: 'winter',
+  // Calendar unification (Option A): weeks are canonical — 13 four-week months
+  // to the 52-week year, seasons as four 13-week quarters of the WEEK grid.
+  test('seasons are four 13-week quarters of the 52-week year (weekly walk + wrap)', () => {
+    let calendar = createDefaultWorldState({ id: 'cal' }).calendar;
+    for (let week = 1; week <= 52; week++) {
+      calendar = advanceWorldCalendar(calendar, 'one_week');
+      // Week-of-year after this tick (week 52 wraps to week 0 of year 2).
+      const weekOfYear = week % 52;
+      const expected = ['spring', 'summer', 'autumn', 'winter'][Math.floor(weekOfYear / 13)];
+      expect(`${week}:${calendar.season}`).toBe(`${week}:${expected}`);
+    }
+    // Full wrap: 52 weeks later it is month 1 of year 2, week-of-year 0 — spring
+    // again, agreeing with the seeded default for a year's opening.
+    expect(calendar).toMatchObject({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+  });
+
+  test('month-boundary seasons across the 13-month year (4/3/3/3 quarters at month starts)', () => {
+    // Sampled at whole-month boundaries (one_month steps). Months and seasons
+    // live on different grids: month 4 OPENS in spring (week 12) and turns
+    // summer mid-month (week 13) — the label at a month boundary is the season
+    // of that month's first week.
+    const expectedAtMonthStart = {
+      1: 'spring', 2: 'spring', 3: 'spring', 4: 'spring',
+      5: 'summer', 6: 'summer', 7: 'summer',
+      8: 'autumn', 9: 'autumn', 10: 'autumn',
+      11: 'winter', 12: 'winter', 13: 'winter',
     };
     let calendar = createDefaultWorldState({ id: 'cal' }).calendar;
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 13; i++) {
       calendar = advanceWorldCalendar(calendar, 'one_month');
-      expect(`${calendar.month}:${calendar.season}`).toBe(`${calendar.month}:${expected[calendar.month]}`);
+      expect(`${calendar.month}:${calendar.season}`).toBe(`${calendar.month}:${expectedAtMonthStart[calendar.month]}`);
     }
-    // Full wrap: twelve months later it is month 1 of year 2 — spring again,
-    // agreeing with the seeded default for month 1.
-    expect(calendar).toMatchObject({ month: 1, year: 2, season: 'spring' });
+    // Full wrap: thirteen months later it is month 1 of year 2 — spring again.
+    expect(calendar).toMatchObject({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+  });
+
+  test('COARSE == WEEKLY: every DM interval lands the byte-identical calendar either way', () => {
+    // The unification invariant: one coarse advanceWorldCalendar(interval) call
+    // equals its decomposed one-week walk — same elapsedMonths, month, year,
+    // season. Checked from a fresh year AND from a mid-year offset (catches
+    // boundary-anchored derivations that only agree at week 0).
+    const starts = [];
+    starts.push(createDefaultWorldState({ id: 'cal' }).calendar);
+    let mid = createDefaultWorldState({ id: 'cal' }).calendar;
+    for (let i = 0; i < 7; i++) mid = advanceWorldCalendar(mid, 'one_week');
+    starts.push(mid);
+
+    for (const start of starts) {
+      for (const [interval, weeks] of Object.entries(weeksPerInterval)) {
+        const coarse = advanceWorldCalendar(start, interval);
+        let weekly = start;
+        for (let i = 0; i < weeks; i++) weekly = advanceWorldCalendar(weekly, 'one_week');
+        expect(weekly).toEqual(coarse);
+      }
+    }
+
+    // The headline landing: a one_year advance is year+1, month 1, week-of-year
+    // 0 (the new year's opening week) — identical on BOTH paths per the loop
+    // above; this pins the absolute values too.
+    const year = advanceWorldCalendar(createDefaultWorldState({ id: 'cal' }).calendar, 'one_year');
+    expect(year).toEqual({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+  });
+
+  test('kernel integration: one coarse one_year preview and 52 threaded one_week previews land the identical calendar', () => {
+    // Same invariant one level up — through the pulse kernel's calendar wiring,
+    // not just the pure helper. (Tick counts differ by design: the coarse call
+    // is ONE kernel tick of one_year duration — a legacy preview shape — while
+    // the real Advance path runs 52 one-week ticks. The CALENDAR must agree.)
+    const base = { id: 'cal-eq', name: 'Calendar', settlementIds: [] };
+    const coarse = previewCampaignWorldPulse({ campaign: base, saves: [], interval: 'one_year', now: NOW });
+    let campaign = base;
+    let last = null;
+    for (let i = 0; i < 52; i++) {
+      last = previewCampaignWorldPulse({ campaign, saves: [], interval: 'one_week', now: NOW });
+      campaign = { ...campaign, worldState: last.worldState };
+    }
+    expect(last.calendar).toEqual(coarse.calendar);
+    expect(coarse.calendar).toMatchObject({ month: 1, year: 2, season: 'spring' });
   });
 });
 

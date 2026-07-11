@@ -114,8 +114,8 @@ describe('advanceFoodStockpile()', () => {
       foodSecurity: { deficitPct: 80, surplusPct: 0, storageMonths: 1, importDependency: 0 },
     });
     const { settlement } = advanceFoodStockpile(s, { interval: 'one_year', tick: 1 });
-    // Covering 75% of need for 12 months would cost 9 months of food; only
-    // half of the single stored month may be spent.
+    // Covering 75% of need for the 13-month year would cost 9.75 months of
+    // food; only half of the single stored month may be spent.
     expect(settlement.economicState.foodSecurity.storageMonths).toBeCloseTo(0.5, 2);
     expect(settlement.economicState.foodSecurity.deficitPct).toBeGreaterThan(70);
   });

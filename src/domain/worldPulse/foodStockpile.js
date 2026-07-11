@@ -50,11 +50,15 @@ const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // one-decimal rounding would silently erase them.
 const round2 = (/** @type {number} */ v) => Math.round(v * 100) / 100;
 
+// Duration-in-months per interval, mirroring the canonical 4-weeks-per-month /
+// 52-week-year mapping (worldState.js INTERVAL_MONTHS): one_season = 13 weeks =
+// 3.25 months, one_year = 13 months. Keeps a direct coarse call consuming the
+// SAME months of food as the orchestrator's decomposed weekly ticks.
 const INTERVAL_MONTHS = Object.freeze({
   one_week: 0.25,
   one_month: 1,
-  one_season: 3,
-  one_year: 12,
+  one_season: 3.25,
+  one_year: 13,
 });
 
 export const STOCKPILE_TUNING = Object.freeze({
