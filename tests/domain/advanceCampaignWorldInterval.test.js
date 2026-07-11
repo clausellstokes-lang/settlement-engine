@@ -3,14 +3,14 @@
  *
  * Pins the EQUIVALENCE INVARIANT of the multi-tick orchestrator:
  *   • simulateCampaignWorldInterval('one_year') composes EXACTLY the same end
- *     worldState + settlementUpdates as 48 sequential one_week kernel calls that
+ *     worldState + settlementUpdates as 52 sequential one_week kernel calls that
  *     thread state forward (same seed → identical).
- *   • the interval → week-count table (week=1, month=4, season=12, year=48).
+ *   • the interval → week-count table (week=1, month=4, season=13, year=52).
  *   • determinism: the same seed twice → identical composed output.
  *
  * The orchestrator is PURELY ADDITIVE: it reuses the existing one-week kernel
  * (simulateCampaignWorldPulse) verbatim, so this file builds its own oracle by
- * running that kernel 48 times by hand and threading the output of each tick
+ * running that kernel 52 times by hand and threading the output of each tick
  * into the next — the same carry-over the orchestrator performs internally.
  */
 
@@ -137,7 +137,7 @@ function runWeeksByHand(campaign, saves, weeks) {
 
 describe('Advance-scaling Stage 1 — interval orchestrator', () => {
   test('weeksPerInterval is the single-source week-count table', () => {
-    expect(weeksPerInterval).toEqual({ one_week: 1, one_month: 4, one_season: 12, one_year: 48 });
+    expect(weeksPerInterval).toEqual({ one_week: 1, one_month: 4, one_season: 13, one_year: 52 });
   });
 
   test("one_month == 4 one-week ticks: end tick advances by 4", async () => {
@@ -154,34 +154,34 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
     expect(viaInterval.settlementUpdates).toEqual(viaKernel.settlementUpdates);
   });
 
-  test('EQUIVALENCE: one_year composes EXACTLY 48 sequential threaded one-week kernel calls', async () => {
+  test('EQUIVALENCE: one_year composes EXACTLY 52 sequential threaded one-week kernel calls', async () => {
     const { campaign, saves } = buildFixture();
     const composed = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
-    const oracle = runWeeksByHand(campaign, saves, 48);
+    const oracle = runWeeksByHand(campaign, saves, 52);
 
     // End worldState is identical (terminal tick, calendar, every ledger).
     expect(composed.worldState).toEqual(oracle.last.worldState);
-    expect(composed.worldState.tick).toBe(48);
+    expect(composed.worldState.tick).toBe(52);
     // The composed settlementUpdates equal the id-accumulated (last-write-wins)
-    // updates threaded across the 48 ticks.
+    // updates threaded across the 52 ticks.
     expect(composed.settlementUpdates).toEqual(oracle.settlementUpdates);
     // Terminal world artifacts (regionalGraph, wizardNews) come from the last tick.
     expect(composed.regionalGraph).toEqual(oracle.last.regionalGraph);
     expect(composed.wizardNews).toEqual(oracle.last.wizardNews);
   });
 
-  test('Stage 5 RING POLICY: a 48-tick one_year advance writes EXACTLY ONE pulseHistory record', async () => {
+  test('Stage 5 RING POLICY: a 52-tick one_year advance writes EXACTLY ONE pulseHistory record', async () => {
     const { campaign, saves } = buildFixture();
-    // Fresh world has an empty ring; a 48-tick year must grow it by exactly 1
-    // (the final composed record), NOT 48 (which would burn 48/80 of the ring).
+    // Fresh world has an empty ring; a 52-tick year must grow it by exactly 1
+    // (the final composed record), NOT 52 (which would burn 52/80 of the ring).
     const before = (campaign.worldState.pulseHistory || []).length;
     const composed = await simulateCampaignWorldInterval({ campaign, saves, interval: 'one_year', commit: true, now: NOW });
-    expect(composed.worldState.tick).toBe(48);
+    expect(composed.worldState.tick).toBe(52);
     expect(composed.worldState.pulseHistory.length).toBe(before + 1);
     // The retained record is the FINAL tick's composed beat (the terminal tick),
     // not an interior one.
     const kept = composed.worldState.pulseHistory[composed.worldState.pulseHistory.length - 1];
-    expect(kept.tick).toBe(48);
+    expect(kept.tick).toBe(52);
     expect(kept.committed).toBe(true);
   });
 
@@ -278,7 +278,7 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
   });
 
   // REPRODUCING regression for "multi-tick advance freezes the UI": a one_year
-  // advance ran up to 48 synchronous one-week kernel passes on the main thread
+  // advance ran up to 52 synchronous one-week kernel passes on the main thread
   // with no yield, blocking any paint until the whole advance finished. The fix
   // makes the orchestrator async and yields to the event loop between tick
   // batches. These pin both halves: it MUST be awaitable (returns a Promise) and
@@ -292,7 +292,7 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
 
     // A microtask queued NOW must get a chance to run before the advance resolves,
     // proving the orchestrator hands control back to the event loop mid-run rather
-    // than monopolising the thread for all 48 ticks.
+    // than monopolising the thread for all 52 ticks.
     let microtaskRanBeforeResolve = false;
     let resolved = false;
     promise.then(() => { resolved = true; });
@@ -301,8 +301,8 @@ describe('Advance-scaling Stage 1 — interval orchestrator', () => {
     const composed = await promise;
     expect(microtaskRanBeforeResolve).toBe(true);
     // Byte-equivalence is unchanged: the yields only change WHEN ticks run.
-    expect(composed.worldState.tick).toBe(48);
-    const oracle = runWeeksByHand(campaign, saves, 48);
+    expect(composed.worldState.tick).toBe(52);
+    const oracle = runWeeksByHand(campaign, saves, 52);
     expect(composed.worldState).toEqual(oracle.last.worldState);
     expect(composed.settlementUpdates).toEqual(oracle.settlementUpdates);
   });

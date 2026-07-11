@@ -1212,7 +1212,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     factionCapture.transitions, settlementNameFor, worldState.tick, now,
   );
   const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...realmEntries, ...pantheonArcEntries];
-  const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend) : applied.wizardNews;
+  // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
+  // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
+  // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
+  // pantheon) leaked wall-clock time into the composed output — a latent determinism/
+  // equivalence break that only bit once an advance reached such a tick.
+  const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to

@@ -32,7 +32,7 @@ import Button from '../primitives/Button.jsx';
 // Advance-scaling Stage 4: interval → its real one-week tick count, so the
 // end-of-advance chronicle summary can gather the whole interval's beats (not just
 // the final tick). Mirrors the domain's weeksPerInterval.
-const INTERVAL_WEEKS = { one_week: 1, one_month: 4, one_season: 12, one_year: 48 };
+import { weeksPerInterval as INTERVAL_WEEKS } from '../../domain/worldPulse/advanceInterval.js';
 
 const INTERVAL_LABEL = { one_week: 'week', one_month: 'month', one_season: 'season', one_year: 'year' };
 

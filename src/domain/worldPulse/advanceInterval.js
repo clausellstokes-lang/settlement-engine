@@ -11,7 +11,7 @@ import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
 
 // Yield the main thread every YIELD_EVERY_TICKS kernel passes so a long advance
-// (a one_year advance is 48 synchronous one-week ticks) does not freeze the UI:
+// (a one_year advance is 52 synchronous one-week ticks — 4-week months, 13-week seasons, a 52-week year) does not freeze the UI:
 // the await hands control back to the event loop, letting the toolbar progress
 // paint between batches. Purely a scheduling seam — it sits BETWEEN ticks and
 // touches no per-tick compute, so determinism + the golden / pause-resume
@@ -85,8 +85,8 @@ function reportAdvanceProgress(onProgress, detail) {
 export const weeksPerInterval = Object.freeze({
   one_week: 1,
   one_month: 4,
-  one_season: 12,
-  one_year: 48,
+  one_season: 13,
+  one_year: 52,
 });
 
 /**
@@ -171,7 +171,7 @@ function foldUpdatesOntoSaves(saves, updates) {
  * times and composes the per-tick outputs into ONE result with the SAME shape the
  * kernel returns. The kernel is pure and re-seeds per tick, so this is
  * deterministic with no seed plumbing — `simulateCampaignWorldInterval(year)`
- * composes EXACTLY the same end state as 48 sequential one_week kernel calls.
+ * composes EXACTLY the same end state as 52 sequential one_week kernel calls.
  *
  * AUTORESOLVE (Stage 3):
  *   • autoResolve ON (default) — every tick auto-resolves its majors (the Stage
@@ -231,7 +231,7 @@ function foldUpdatesOntoSaves(saves, updates) {
  *   detail is also dispatched as ADVANCE_PROGRESS_EVENT on globalThis.
  *
  * ASYNC: the orchestrator is async + yields to the event loop every
- * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 48
+ * YIELD_EVERY_TICKS ticks (see yieldToEventLoop) so a long advance (up to 52
  * one-week kernel passes for a one_year) does not block the main thread and the
  * toolbar progress can paint. The yields sit strictly BETWEEN ticks, so the
  * per-tick compute, the tick ORDER, and the composed output are byte-identical
