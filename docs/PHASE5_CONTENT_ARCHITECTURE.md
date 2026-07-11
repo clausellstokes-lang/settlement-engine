@@ -34,3 +34,23 @@ conjunction-family; the 0.20%/6.3% repeat gates must be beaten and tightened.
 ## Downstream
 Phase 6's funnel measures which conjunctions DMs copy (feedback widget + generation_id) —
 content investment follows demand. The W2 reviewed golden regen carries the multiplication.
+
+## Cause-resolution lifecycle (OWNER, 2026-07-11 — machinery = Phase 5 W3 engine companion; variants = W2)
+When a situation RESOLVES (the garrison gets funded) but its effect (the captain's
+corruption) was keyed to it, the adjudication is DERIVED FROM CHARACTER, never fixed:
+1. RE-CAUSE (organically, in canon): the greedy-flawed captain finds a new patron for the
+   old habit — need became appetite; new cause minted with its receipt.
+2. RESOLVE/REFORM: the dutiful captain whose corruption was purely situational heals when
+   the pressure lifts — sole-cause effects can end. (The redemption arc: without this the
+   world darkens monotonically; with it, reform is earned by character and climate.)
+3. HISTORICIZE: the weak-willed captain's habit outlives its reason — originating cause
+   becomes PAST, a sustaining cause (habit) carries it forward.
+Selection inputs: the NPC's trait plane + settlement corruption climate (plane multiplier —
+rotten cities rarely reform; devout LG purge arcs invite it) + patron pressure. Seeded,
+deterministic, cause-chained; transitions are pulse events entering canon (receipt spine,
+DM-visible, undoable).
+STRUCTURAL: cause chains gain TEMPORAL STATUS (originating vs sustaining), and the content
+conjunction space gains a fourth dimension — cause-status: live | historicized | re-caused |
+resolved — with transition prose ("the garrison was funded; the ledger never closed").
+Coverage ladder extends over the new dimension. Third instance of the memory principle:
+piety lags, armies rust, habits outlive their reasons.
