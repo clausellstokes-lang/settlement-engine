@@ -91,6 +91,41 @@ and isolates the cut-off. It also explains MECHANICALLY why crossroads towns bec
 wealthy trade hubs — the emergent coherence the review found most convincing, now derived
 from position rather than a generation roll.
 
+## 4c. Population as a spatial flow — migration (owner, round 5)
+Population gets a carrying-capacity RELEASE VALVE tied to the supply network. A settlement
+sustains stable heuristic growth up to a FOOD-DEFICIT TOLERANCE (~20% anchor — architect to
+tune, and make CONTEXT-DEPENDENT: a prosperous, well-connected entrepôt imports to cover a
+larger deficit; a poor cut-off town tolerates far less). BEYOND the tolerance, over weeks/
+months/years, the EXCESS population MIGRATES along ROUTES to the closest reachable neighbours.
+- MORTALITY (two sinks, "make something of it"): some die at the ORIGIN (starvation — the weak,
+  the old, those who can't travel) and some die ON THE ROAD in transit (the journey's toll —
+  distance, terrain, and especially embattled/hostile passage: refugees through a war zone die
+  more, the SAME routing-danger term as caravans/armies). So the destination receives FEWER than
+  left (attrition = self-limiting; migration is no perfect conveyor). Deaths are EVENTS/hooks (a
+  decimated refugee column; the causal ledger explains a settlement's shrink as emigration AND
+  starvation).
+- MULTI-FACTOR PUSH (holistic, sliding): food deficit is one driver; WAR, other stressors, and
+  LOW PROSPERITY also push population out, weighted by the whole situation (siege + famine + low
+  prosperity hemorrhages; a prosperous peaceful town with a food dip barely loses any).
+- DESTINATION SELECTION (pull + avoidance, PRNG-gated at various levels): migrants prefer the
+  CLOSEST reachable settlement (path cost) with the LEAST DRIFT from their own culture/religion
+  AND the LEAST HOSTILITY. Under war or large culture/religion gaps they SHY AWAY from the
+  hostile/instigating settlement — but NOT ALL do (a scatter fraction goes to the "wrong" place).
+  Most cluster in the nearest friendly similar town; some disperse. Makes culture/religion a
+  MIGRATION factor that FEEDS BACK into the destination (a similar-culture influx reinforces it;
+  a large different-culture influx shifts it — coupling to the faith/culture spread mechanics).
+- REGIONAL EMERGENCE (with §4b entrepôt): prosperous hubs ATTRACT migrants (pull → more growth,
+  bounded), crisis zones SHED them → the map develops population CENTRES and GHOST TOWNS from the
+  sim, not a roll. This is the demographic counterpart of the trade flows: PUSH (deficit/war/low-
+  prosperity) ↔ PULL (prosperity/safety/cultural-similarity), with FRICTION (mortality/distance).
+- IMPLEMENTATION: enhances OUR existing populationDynamics/migrationFlows when the spatial layer
+  is active (route-based, distance-weighted destinations); an aggregate migration-flow record per
+  active push (in-transit ledger, not per-person), seeded, bounded. Without a canon map it falls
+  back to the current aspatial migration. DAMPING (soak-gated): mortality + attrition + the
+  tolerance buffer + graded rates must prevent regional oscillation/collapse (A's refugees strain
+  B strain C…). Fixes a review nit too: mass migration is a REAL event, so population change stops
+  being "+3 residents/week" noise and becomes signal worth a headline.
+
 ## 5. The military layer
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
   position each tick.
