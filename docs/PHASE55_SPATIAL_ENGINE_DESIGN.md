@@ -1198,7 +1198,9 @@ for the spatial engine, gating every wave):
 Beyond migration + prosperity, spatial systems create at least four more centrality loops — all historically
 plausible, all needing explicit BRAKES:
 - ENTREPÔT: more trade → better infrastructure → lower route cost → more trade. BRAKES: congestion, rent
-  extraction / toll-greed reroute (round 4, already partial), infrastructure MAINTENANCE cost, wartime targeting.
+  extraction / toll-greed reroute (round-4 DESIGN, UNBUILT — the grounding confirmed ZERO trade-side damping
+  exists in-tree today; the brake MUST be co-built WITH the toll/entrepôt mover, not assumed), infrastructure
+  MAINTENANCE cost, wartime targeting.
 - RELIGIOUS-CENTER: more pilgrims → more legitimacy → more institutions → more pilgrims. BRAKES: political
   resentment (a dominant faith breeds dissent/heresy), capacity ceilings, rival centers, the faith-contest mechanics.
 - MILITARY CHOKEPOINT: strategic position → investment → control → more strategic importance. BRAKES: wartime
@@ -1213,3 +1215,89 @@ plausible, all needing explicit BRAKES:
   because it concentrates RISK: everyone wants to take it, cut it, or feed it lies. Centrality invites its own
   undoing — the force/counterforce law at the systemic scale. Each loop still needs its LOCAL brakes (above);
   the systemic brake ensures no single settlement runs away to dominate the whole realm.
+
+---
+
+# PART VI — GROUNDING VERDICT for ROUNDS 14-16 (2026-07-11, workflow wf_89ef3442-512)
+
+The factional/objective refinements + the 6 hardening requirements, verified. HEADLINE: rounds 14-16
+are ADDITIVE, BYTE-SAFE, and TRACTABLE — the coherence risks are almost all SEQUENCING (what must
+co-ship with what), NOT architecture; every hard part has a home in the tree. Two things must NOT be
+deferred; several owner decisions surface.
+
+## VI.1 Feasibility per item
+- SCORER objective-parameterization (15B) — YELLOW, FEASIBLE + localized. ALL scoring lives in ONE pure
+  function (settlementStrategy.js enumerateMoves :264-317, four inlined coefficient formulas); softmax/
+  sample downstream is objective-AGNOSTIC. Lift the formulas into a DEFAULT ScoringObjective descriptor
+  (byte-identical), then pass a per-actor objective set. GAP: the move SET is WAR-ONLY — a merchant
+  (revenue/reliability/credit) or church objective has NO enumerable levers to score over yet; disposition
+  is a SCALAR (computeAggressiveness only). So objective-parameterization ships in two steps (VI.3).
+- FACTION state (14/15) — YELLOW, keying is SOLID. deriveFactionProfile.id = `faction.<snake>` is stable +
+  already used by factionRelationshipUpdate; factions even carry an `informationAccess` resource (a native
+  hook for factional info). GAPS: (1) id is DERIVED not stored (cheap to derive); (2) TWO type vocabularies
+  (stored `category` vs derived `archetype`) — pick ONE canonical set before keying faction-type objectives
+  (recommend archetype — the round-15 examples map onto it); (3) NO governing COALITION — a single
+  isGoverning SEAT + governingName, no supporters field (owner decision, VI.4).
+- fidelityNoise STYLE (15A) — YELLOW. The seam to widen is cut (chaosPullOf), BUT settlement-level ALIGNMENT
+  DOESN'T EXIST (only deity-axis/NPC) and the good/evil axis is ENTIRELY UNWIRED into fidelity today (only
+  the deity chaos axis). Styling by settlement law+good REQUIRES the unbuilt computeLawfulness/computeMalice
+  (disposition.js siblings) — reconfirms alignment-derivation is on the critical path.
+- COST-LAW versioning + carrier profiles (16.1/16.2) — YELLOW, but the version axes belong IN THE KEYSTONE
+  (VI.2). The 3 axes are NEW sibling scalars stamped into the FROZEN DIGEST at canonize — NOT a schemaVersion
+  migration (that reduce is single-scalar, shape-only). NOTE: `geometryVersion` NAME-COLLIDES with a live
+  runtime store field — rename (e.g. spatialGeometryVersion).
+- RUMOR lineage + source-correlation (16.3) — RED-as-greenfield, but SEQUENCING-critical (VI.2). The
+  canonical event id EXISTS (sourceEvent.id, propagation.js:1067) as the lineage ROOT; everything above it
+  is net-new (grep: ZERO hits for corroborat/crossConfirm/independence/sourceCorrelation). wizardNews is a
+  SINGLE-observer DM formatter, not a multi-observer graph. The look-alikes (admitStrongest, deriveNewsThreads)
+  are TRAPS (dedup/thread, no independence).
+- BELIEF-UPDATE rule (16.4) — YELLOW, has a PRECISE precedent: model a pure `advanceBeliefMaps({snapshot,
+  priorLedger, incomingReports, tick})` node-for-node on advanceInstitutionTolerance (institutionTolerance.js:172)
+  — per-(observer,subject,attribute) = weighted combine of decayed-prior + reports. GAP: its INDEPENDENCE
+  weight consumes 16.3's lineage (so they co-ship); a v1 could stub independence=1 but loses the fix.
+- INVARIANT infra + brakes (16.5/16.6) — YELLOW. Infra READY: extend the no-Date/unseeded grep-gates +
+  domainWallClock scan to region/; reuse normalizeForDormancy as the dormant-spatial oracle; add a spatial
+  golden master. The route-invariants have nothing to test until the keystone builds (front-heavy cost, VI.3).
+  BRAKES: the entrepôt loop has ZERO trade-side damping in-tree (the "toll-reroute already partial" claim was
+  FALSE — now corrected in V.6); each new loop's brake co-builds with its mover.
+
+## VI.2 The TWO must-NOT-defer sequencing findings
+1. **Lineage IDs must be threaded at STEP 3.5 (the rumor mill), from day one.** Independence-weighted
+   cross-confirmation (16.3) is a MUST-FIX CO-REQUISITE of ANY confidence-raising cross-confirmation — NOT a
+   later hardening pass — because **retrofitting lineage onto already-distorted historical reports is
+   IMPOSSIBLE.** Thread `lineageIds[]` (rooted at sourceEvent.id) onto the rumor packet + per-settlement
+   ledger at 3.5 (cheap field-threading). If 3.5 ships without it, the entrepôt "best-informed" advantage is
+   an ILLUSION (it hears one lie five times) and the belief-update independence weight has nothing to read.
+2. **Cost-law + geometry versioning belong IN the keystone wave.** Stamp spatialGeometryVersion +
+   costLawVersion into the frozen digest AT canonizeCampaignWorld (II.6 step 2), not deferred — a route
+   depends on how cost is computed, so the interpretation version must be frozen WITH the geometry or old
+   routes drift on any later cost-law change.
+
+## VI.3 Build-order corrections (fold into IV.5 / II.6)
+- WAVE A is under-specified — AMEND to: belief map + **V.4 reconciliation rule** + **independence-weighting
+  (fed by step-3.5 lineage)** + belief-sourced war posture + absence-as-uncertainty. (Wave A cannot ship the
+  belief map without the update rule.) Model advanceBeliefMaps on advanceInstitutionTolerance.
+- OBJECTIVE-parameterization (15B) is WAVE B, not Wave A — Wave A's down-payment is ONLY lifting the four
+  coefficient formulas into a DEFAULT ScoringObjective descriptor (golden-pinned byte-identical). Full
+  per-faction objectives + the new non-war MOVE LEVERS (merchant reroute/embargo/credit; church) are Wave B.
+- ALIGNMENT derivation (computeLawfulness/computeMalice) stays FOUNDATIONAL/early — it now gates fidelity-
+  STYLE (15A), the risk framework's disposition vector (15B), moral drift, culture, AND info-handling.
+- The keystone digest holds {land cost field + territory/gates/tiers/distance matrix} PLUS OPTIONAL separate
+  air/teleport edge sets (materialized only when those modalities are enabled) — V.2's "different graphs"
+  don't fit "one frozen geometry," so scope them as optional sibling edge sets.
+- INVARIANT-test budget is FRONT-HEAVY: the keystone wave carries an outsized route-determinism proof cost
+  (integer tie-break, dormant byte-identity, old-save identity-fallback); budget it higher, ~20-30% on later waves.
+
+## VI.4 New owner decisions surfaced (rounds 14-16)
+1. **Governing coalition** — Wave A's one belief map is "the governing coalition's operational belief," but
+   code has a SINGLE isGoverning seat + no supporters. DECIDE: derive the coalition (governing seat + factions
+   allied by relationship archetype) as a pure selector, OR default factionId to the single governing seat in
+   v1. (Recommend: default to the seat in Wave A; derive the coalition in Wave B with the faction objectives.)
+2. **Systemic centrality brake (V.6)** — the coupled self-limiting brake is EMERGENT and has no cross-loop
+   machinery, so it can't be relied on DURING incremental waves. DECIDE: accept temporary runaway during the
+   build (rely on emergence once all loops+brakes land), OR add an explicit hard hub-size/centrality CEILING
+   as a floor. (Recommend: explicit ceiling as a soak-guard, relax it as the emergent brakes prove out.)
+3. **Cost-law re-canonize policy** — on a costLawVersion bump, what happens to the INSTALLED BASE of spatial
+   canons? (re-derive on next open behind the entitlement, or freeze old canons on their old law forever.)
+4. **Canonical objective/faction-type key** — pick `archetype` (9-value) over `category` as the one key for
+   faction-type objectives (the round-15 examples map onto archetype cleanly).
