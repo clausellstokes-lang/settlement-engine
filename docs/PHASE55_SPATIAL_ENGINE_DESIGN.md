@@ -74,6 +74,23 @@ and religious spread inherit the same distance + latency.
   DM-facing (a map of dots is noise) — caravans are ENGINE state that surfaces ONLY as hooks/
   consequences (a loss, an interception, an arrival that lifts a starvation).
 
+## 4b. Entrepôt progression — geography as economic destiny (owner, round 4)
+Position on the route network is a GROWTH DRIVER. A settlement that is FREQUENTLY an
+intermediary (a gate many routes pass through) has natural ENTREPÔT PROGRESSION: it
+develops transshipment institutions (warehouses, customs house, carriers' guild, money
+changers, coaching inns — exactly the Sanctavilla profile the July-11 external review
+praised) and grows its economy through TOLL and GATE-TAX revenue on the pass-through
+trade. This is a SPATIALLY-DRIVEN founding/growth lane on the W-C3 founding + tier
+machinery: a per-settlement "intermediary frequency" metric (derived from how many active
+routes cross it) drives the progression. SELF-BALANCING (the counterforce is built in):
+tolls set too high divert trade to alternate routes via the cheap-vs-safe router (§6), so
+a greedy toll-town prices itself out — a natural equilibrium, no hard ceiling needed,
+though a capacity cap prevents runaway. This is the CONSTRUCTIVE half of the spatial
+economy (embattlement/interdiction is the destructive half): geography rewards the hubs
+and isolates the cut-off. It also explains MECHANICALLY why crossroads towns become
+wealthy trade hubs — the emergent coherence the review found most convincing, now derived
+from position rather than a generation roll.
+
 ## 5. The military layer
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
   position each tick.
@@ -113,6 +130,19 @@ Control of the route GATES, at three intensities:
   institutions starve as stockpiles deplete ⇒ cascading supply-starved impairments over weeks ⇒
   the settlement weakens and falls. A siege is a SUPPLY mechanic (starvation + time), not a
   hitpoint bar. This is how siege is explained from now on.
+- **SMUGGLING — the counterforce to interception (owner, round 4).** Interception/siege is NOT
+  a hard binary. Even through a hostile/occupied gate, a caravan gets a SEEDED PRNG CHANCE to
+  smuggle through, weighted by a SMUGGLE NETWORK's strength, the goods (bulky/valuable = harder),
+  and — critically — the intercepting gate's CORRUPTION (a bribed/compromised gate is a LEAKY
+  one). This wires the criminal/corruption systems into the spatial layer: the recurring
+  compromised-guard-captain lets shipments slip for a cut; a besieged settlement with smuggler
+  contacts partially resupplies (a TRICKLE that slows starvation, not lifts it). The smuggle
+  network's strength derives from the settlement's criminal opportunity / thieves-guild / criminal
+  institutions (so high-crime and embattled regions are paradoxically MORE porous). Bounded like
+  combat (no hand of miracle): a tight, honest siege has a very low smuggle rate; a corrupt loose
+  one much higher. The DM is kept aware of smuggle networks as a factor (hooks: a ring supplying a
+  besieged ally; a corrupt blockade captain running a smuggle op). Seized-vs-smuggled is the
+  per-shipment roll; conscience (W-C2) still gates what the interceptor does with what it takes.
 
 ## 8. The DM authoring layer
 - **Forced roads / trade routes** (§2) — authored low-cost edges overriding the terrain route.
@@ -133,6 +163,13 @@ Control of the route GATES, at three intensities:
 - **Danger is relative to the mover.** Per-mover embattlement (the retreating army; the caravan
   bound for its enemy) means the danger term is f(route, mover's allegiance/tolerance), not just
   the terrain.
+- **Forces AND counterforces (the design's balance principle).** Every spatial force has a
+  built-in counterforce, which is what prevents runaway and manufactures emergent equilibria +
+  drama: movement ↔ friction (distance/terrain); embattlement ramp ↔ security/crime recovery;
+  interception/siege ↔ smuggling; entrepôt toll-growth ↔ toll-greed self-correction (movers route
+  around a greedy gate). Corruption is the hinge that connects them — a corrupt gate is both a
+  greedy toll-taker AND a leaky smuggle seam, tying the criminal/corruption plane to spatial
+  strategy.
 - **Everything derives from canon.** Map (generated OR user-authored overlay) + established trade
   links + region ramp values ⇒ the whole spatial simulation, seeded and reproducible. The only
   randomness is the bounded, non-catastrophic banditry roll on trade. Dormancy holds throughout.
