@@ -48,8 +48,14 @@ const storeState = {
   isElevated: () => false,
   isDeveloper: () => false,
   savedSettlements: [],
+  campaigns: [],
   maxSaves: () => 3,
+  canSave: () => true,
   authSignOut: vi.fn(),
+  removeSavedSettlement: vi.fn(),
+  clearSavedSettlements: vi.fn(),
+  deleteCampaign: vi.fn(),
+  importAccountData: vi.fn(),
   setAuth: vi.fn(),
 };
 

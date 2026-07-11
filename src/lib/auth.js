@@ -585,6 +585,11 @@ function mockOnAuthChange() {
 
 // ── Exported API (auto-selects Supabase or mock) ────────────────────────────
 
+// Lazily load the Account "Security" methods, kept OFF the first-paint closure.
+// Typed Promise<any> so the wrapper arrows below don't have to reconcile the
+// module's mock-vs-supabase union return types (JS/tsc inference noise only).
+const loadAuthSecurity = () => /** @type {Promise<any>} */ (import('./authSecurity.js'));
+
 export const auth = {
   signUp:             isConfigured ? supabaseSignUp             : mockSignUp,
   signIn:             isConfigured ? supabaseSignIn              : mockSignIn,
@@ -594,6 +599,18 @@ export const auth = {
   getSession:         isConfigured ? supabaseGetSession          : mockGetSession,
   resetPassword:      isConfigured ? supabaseResetPassword       : mockResetPassword,
   updatePassword:     isConfigured ? supabaseUpdatePassword      : mockUpdatePassword,
+  // Login & security (Account "Security" section) — the implementations live in
+  // the LAZILY-loaded ./authSecurity.js so their bodies stay OFF the first-paint
+  // entry closure (they are only ever called from the lazy Account page). Each
+  // is exposed via a thin dynamic-import wrapper, so callers still route through
+  // the auth service + real supabase-js exactly as before.
+  reauthenticateWithPassword: (p) => loadAuthSecurity().then(m => m.reauthenticateWithPassword(p)),
+  changePassword:     (args) => loadAuthSecurity().then(m => m.changePassword(args)),
+  getIdentities:      () => loadAuthSecurity().then(m => m.getIdentities()),
+  linkIdentity:       (provider) => loadAuthSecurity().then(m => m.linkIdentity(provider)),
+  unlinkIdentity:     (identity) => loadAuthSecurity().then(m => m.unlinkIdentity(identity)),
+  signOutEverywhere:  () => loadAuthSecurity().then(m => m.signOutEverywhere()),
+  getAccountNumber:   () => loadAuthSecurity().then(m => m.getAccountNumber()),
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
   // Security questions + gated recovery (migrations 066-068).
