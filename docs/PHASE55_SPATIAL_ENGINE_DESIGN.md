@@ -693,3 +693,119 @@ determinism/dormancy seam is far smaller. Recommended v1 spine, in order:
 
 Sequence still holds: AFTER the reunification stabilizes the Realm surfaces. The determinism +
 dormancy contract above is now nailed; the owner decisions in II.5 are the remaining gate.
+
+---
+
+# PART III — GROUNDING VERDICT for ROUNDS 7-10 (2026-07-11, workflow wf_b5680ccc-13d)
+
+Verified rounds 7-9 (movement modalities, governance, Rumors & News, carriers) against the tree;
+round 10 (belief-driven action) is NOT yet grounded (arrived after) — see III.5. HEADLINE: rounds
+7-9 are MORE feasible than rounds 1-6 — the crown's substrate already EXISTS. But three structural
+conflicts with the PART-II keystone must be resolved, and two of round 8's three invariants (dormant⇒
+prior-bytes; premium) DO NOT hold as the doc wrote them. All fixable; the fixes SHRINK the build.
+
+## III.1 Substrate reality (what the new layers can hook into)
+- RUMOR EVENT SUBSTRATE (round 8) — **GREEN.** OUR Wizard News pipeline (src/domain/region/
+  wizardNews.js) already IS the structured event substrate: a versioned typed `WizardNewsEntry`
+  (tick/scope/significance/score/severity/kind/channelType/settlementIds/sourceEventId), a SALIENCE
+  engine (scoreImpact/significanceForImpact — the round-8 triage gate, already load-bearing per
+  chronicle.js), origin→target route traces (sourceSettlementId→targetSettlementId + pathSettlementIds
+  on regional impacts), a bounded persisted ledger (campaign.wizardNews, MAX_ENTRIES=240), arc-
+  threading (deriveNewsThreads), a per-settlement surface filter (WizardNewsPanel partitions "your
+  settlements" vs "elsewhere"), and a module literally named `fidelityNoise.js` (a candidate distortion
+  primitive — verify shape). The crown's substrate is built; round 8 is an ADDITIVE extension.
+- CARRIER PROPAGATION (round 9) — **YELLOW, primitive exists.** `activeChannelsFrom(graph,id,{types})`
+  IS "outbound edges of carrier-type T" — each of the 7 carriers is a types-filter over ONE directed
+  graph; hop-by-hop decayed propagation exists (region/propagation.js). GAPS: 4/7 carriers net-new/
+  half-present — FAITH as a distinct CO-RELIGIONIST topology is ABSENT (religious edges ride geographic
+  carriers today, so faith can't reach believers where no trade goes — must be built); SMUGGLE is only
+  authored-relationship-derived (no goods/gate/corruption discovery); ARMIES/REFUGEES don't move
+  spatially yet (they ride their unbuilt movers).
+- PREMIUM/DM REVEAL seam (round 8) — **YELLOW + a doc CORRECTION.** The reveal is NOT the FaithSection
+  deity-name seam (that gates by DATA PRESENCE — fields stripped upstream). It is the `includeCovert` /
+  `includeGroundTruth` READ-MODEL convention (mobilizationStatus.js / the W4h tradePressure.js): the
+  same record exists; a pure `settlementRumors({worldState, settlement, includeGroundTruth=false})`
+  selector decides whether to attach ground-truth+provenance. Build the rumor reveal on THAT pattern.
+- GOVERNANCE (round 7) — **YELLOW.** Regime-type distance attaches via `factionArchetype()` (a 13-enum
+  classifier) as the bridge from the free-string governance label to the 3-axis coordinate — but that
+  archetype→{concentration,legitimacy,ruleOfLaw} table must be BUILT. previousGovernments[] gives the
+  residue memory. **NO settlement-level ALIGNMENT field exists** (every `alignment` is deity-axis or
+  NPC) — so both the culture "alignment axis" AND round-10 MORAL DRIFT have no substrate (the only
+  regime-legitimacy signal is publicLegitimacy). This is a real gap + an owner decision (III.4).
+- MODALITIES (round 7) — **YELLOW.** Airship = a per-settlement capability boolean gated like
+  config.magicExists, additive like the proven simulationRules *Enabled flags (default off ⇒ byte-
+  identical). Magic opt-out precedent exists (config.magicExists) for teleport suppression. BUT no
+  connectivity/isolation DETECTION exists (isolation today = a user-chosen config string, not a
+  Dijkstra by-product), and all three modalities still ride the PART-II cost-field keystone.
+
+## III.2 The architectural refinements the stress-test forced
+1. **The digest SPLITS in two (resolves the keystone conflict).** Round-9's faith co-religionist
+   channel is keyed on LIVE mutable deity state and CANNOT sit in the ONE frozen cost-field digest.
+   So the digest is TWO-TIER: (a) FROZEN GEOMETRY (cost field / territory / gates / neighbour tiers /
+   distance matrix — immutable at canonize, PART II) and (b) LIVE CHANNEL OVERLAYS (faith co-
+   religionist graph, governance, cultureDistance, embattlement) — recomputed each eval, made
+   deterministic by pure-fn + codepoint-sorted iteration. This supersedes the PART-I implication that
+   ALL channels ride one frozen graph.
+2. **The FROZEN-vs-LIVE law (state it explicitly).** Geometry is frozen at canonize. Governance,
+   culture, faith, and embattlement are LIVE reads SAMPLED AT THE HOP TICK and BAKED into the rumor
+   packet at that hop — NEVER recomputed on read. Without this, a conquest mid-transit rewrites an
+   in-flight packet retroactively and replay diverges. (This is the precise form of the round-7
+   "culture is a live read" note.)
+3. **Rumors: do NOT touch WizardNewsEntry.** Treating fidelity/hop/provenance as an additive schema
+   bump BREAKS dormant⇒prior-bytes (campaign.wizardNews is written on EVERY advance for EVERY campaign
+   with no spatial gate). Instead: put the rumor packet + a SEPARATE per-settlement rumor LEDGER (top-K
+   by fidelity+recency+significance, tick-age expiry) under a NEW worldState key materialized ONLY when
+   worldState.spatialCanonVersion is present. Keep realm news out of the rumor ledger (else rumor volume
+   evicts real news from the global 240 feed).
+4. **TWO records, whitelisted player projection (premium).** The omniscient source entry is DM/premium
+   (includeGroundTruth). The per-settlement PLAYER belief is a DEGRADED projection from a WHITELISTED
+   field set with value-level scrub — deity names ONLY when they resolve to an ACTIVATED public snapshot
+   (never latentPantheon), causeClass/covert-corruption DROPPED. If the player sees the raw wizardNews
+   entry, the whole DM-vs-player asymmetry collapses AND it leaks gated names. Non-negotiable.
+5. **Determinism plumbing (round 8-9).** The news pipeline is deterministic TODAY only because it is
+   PRNG-free / single-graph / depth-1 / globally-capped. Adding seeded distortion needs: a TOTAL order
+   key `(tick desc, score desc, fidelity desc, compareCodepoint(packetId))` applied BEFORE any top-K or
+   cross-confirmation fold (never fold incrementally during iteration); a REAL already-reached guard
+   (a Set keyed `${carrierId}:${eventId}:${settlementId}` — the doc's stated shape doesn't exist in the
+   forked code, which is maxDepth-1 + O(n) indexOf); distortion forked per (event,carrier,edge,hop)
+   NOT per (event,settlement) — the latter defeats cross-confirmation independence AND omits the tick;
+   thread rng.fork once at the pulseKernel confluence, codepoint-sort settlements/carriers/packets
+   before ANY draw; extend the no-Date + unseeded-random grep-gates to region/ and the news append path;
+   expiry keyed on `currentTick - entry.tick`, NEVER createdAt (wall-clock ⇒ golden flake).
+6. **Cross-confirmation guard split.** CONTINUATION guard per-(event,carrier); RECORDING per-(event,
+   settlement,carrier) — up to `carrierCount` bounded arrivals per settlement per event, so the entrepôt
+   can triangulate without the propagation front ballooning.
+
+## III.3 The build-order correction — the CROWN ships EARLY
+Dependency inversion in PART-II II.6: Rumors & News (the owner's crown) was specced to ride five
+UNBUILT movers (caravans, army-transit, spatial refugees, smuggle-runs, teleport), which buried it at
+step 4 behind the two highest-risk waves. FIX — insert it as **STEP 3.5**, TRADE-CARRIER-ONLY:
+- After II.6 step 3 (distance modulation), before embattlement/caravans/army/migration.
+- Trade-carrier propagation + fidelity decay + the DM-vs-player reveal on the `includeCovert` seam +
+  the additive-under-spatial-key ledger. Cutting trade edges already makes a besieged settlement go
+  dark on the trade carrier (the round-9 info-diet shift, trade-only); the underground/front/faith/
+  courier/magic carriers are LATER enrichment, each sequenced WITH its mover.
+- This ships the single most compelling DM feature on the substrate that already exists (wizardNews),
+  years before the full military layer. It is the highest value-to-effort wave in the whole program.
+Then round 10 (belief-driven action) rides on top of the rumor ledger (III.5).
+
+## III.4 New owner decisions surfaced (rounds 7-10)
+1. **Settlement ALIGNMENT representation** — absent today, but REQUIRED by the culture alignment axis
+   AND round-10 moral drift. Decide: (a) derive a settlement alignment from its governance + dominant
+   faith + recent acts (endogenous, cheap, fits the derived-not-rolled law — RECOMMENDED), or (b) add a
+   persisted settlement alignment field (authoring). Until decided, the moral-drift mechanic (round 10)
+   and the culture alignment term have no home.
+2. **Co-religionist faith topology keying** — recommend edges keyed on SHARED DOMINANT DEITY, CAPPED to
+   k-nearest co-religionists by the frozen distance matrix (sparse + deterministic + still crosses
+   political/trade boundaries). Explicitly NOT all-pairs (dense, breaks the sparse-graph perf budget).
+3. **Non-trade carrier sequencing** — each of armies/refugees/smuggle/courier/magic ships WITH its
+   mover wave, not up front. The wartime info-diet shift is a LATE feature, trade-dark being the v1 form.
+
+## III.5 Round 10 (belief-driven action) — not yet grounded, but placed
+Round 10 is the most DOWNSTREAM layer: it needs the per-settlement rumor ledger (step 3.5) AND a
+per-settlement BELIEF MAP built on top of it, AND the absent settlement-alignment field (III.4-1) for
+its moral-drift arc. Provisional placement: a wave AFTER step 3.5 and after the war/mobilization
+mover exists (a settlement can only "ramp / preempt / defend an ally" once readiness + army-transit
+are modelled). The belief-map primitive (a settlement's bounded, distorted model of others) is its
+keystone and should be grounded before build — expect it to reuse the same per-settlement ledger +
+the includeCovert reveal for the DM's "truth vs belief vs divergence" view.
