@@ -1038,3 +1038,23 @@ penalty (no double-count). Modulates RECEPTIVITY, never patron FIT — what a se
 SUFFERS shapes who can convert it; what it CHOOSES shapes which god it keeps (endogeneity
 intact). Capped, deterministic, exactly zero in stable high-tier peace. W-F7 envelope:
 crisis-conversion correlation present, no runaway.
+
+### THE PREMIUM GATE — faith visibility & activation by tier (OWNER, 2026-07-10; AMENDS the W-F5 starting-pantheon design)
+Deities are constructed only in custom content => premium-gated, as is the Realm. Tier rules:
+- FREE/ANON: faith is STATIC and GENERIC — a true-neutral presence naming NO deities or
+  pantheons, generic (neutral = 1.0) amplifier. The dossier HIDES/GATES all faith surfaces
+  (panel, pantheon, deity references) behind premium. The entire pantheon system does not
+  apply to them experientially.
+- LAPSED PREMIUM: settlements carrying deity/pantheon embeds from their premium period stay
+  VISIBLE READ-ONLY (their owned data); no new activations; no time advance (existing free
+  rule) => static dossier.
+- PREMIUM: full system; day-one faith life per the earlier ratification.
+IMPLEMENTATION LAW — TIER NEVER TOUCHES GENERATION (determinism): the pipeline generates the
+starting pantheon LATENTLY for every seed (identical data all tiers; ONE golden per seed);
+generation-time prose/hooks never name latent deities. A POST-GENERATION ACTIVATION SEAM
+(store action, no rng — copies latent patron into live embeds) fires for premium accounts at
+generation-complete; free = zero embeds => engine inert by the neutrality theorem (the free
+tier IS the certified ground state). Upgrade = activation fires on open ("the gods were
+always there, latent in the seed"). GALLERY: shared deity-bearing settlements display their
+pantheon read-only to all viewers (sharer's content; premium's best advertisement).
+Dossier gating + generic-faith copy = W-F6. Latent step + activation seam = W-F5 stage 2.
