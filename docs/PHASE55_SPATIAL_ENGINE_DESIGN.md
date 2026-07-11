@@ -384,6 +384,42 @@ deterministically from propagation, distorted by §4f fidelity. This is round 10
 structure. The DM sees GROUND TRUTH + each settlement's BELIEF MAP + the DIVERGENCE — i.e. watches
 misunderstandings brew ("B believes A is about to attack — false — and is about to preempt").
 
+**A SETTLEMENT IS A POLITY, NOT ONE ACTOR — the belief map is FACTIONAL (owner, round 14 — corrects
+the round-10 framing).** "The settlement believes X" FLATTENS the factional richness the engine already
+models. WHO believes? ruler / council / merchants / clergy / military command / criminal network /
+public / bureaucracy — each with DIFFERENT sources, incentives, and information QUALITY. THE KEY
+INSIGHT: the round-9 CARRIERS ARE THE FACTION INFORMATION ORGANS — each faction is fed by its own channel:
+- TRADE carrier → MERCHANTS (know a road is unsafe before the mayor does).
+- ARMIES / couriers → MILITARY COMMAND (accurate troop reports, poor food-price intel).
+- FAITH network / pilgrims → CLERGY (news arrives via pilgrims).
+- SMUGGLE network → CRIMINAL network (smuggling routes invisible to formal authorities).
+- ambient REFUGEE / public rumor → the PUBLIC (believes the distorted version).
+- diplomatic COURIERS → GOVERNMENT / bureaucracy.
+So faction belief maps are NOT new work — they are the NATURAL PARTITION of the information the carriers
+already deliver; the single settlement map was an over-simplification that DISCARDED the carrier↔faction
+alignment the design already had.
+- V1 (do NOT block on this): ONE canonical belief map, defined EXPLICITLY as THE GOVERNING COALITION'S
+  CURRENT OPERATIONAL BELIEF (governingName + its supporting factions), NOT "the objective settlement
+  mind." It drives the settlementStrategy chooser (PART IV). BUT the data model carries an OPTIONAL
+  FACTION KEY from DAY ONE so the seam is real, not retrofitted:
+  beliefMaps[observer][factionId?][subject], factionId defaulting to the governing coalition.
+- EXTENSION (where relevant — not every settlement needs all six): per-faction belief (government /
+  military / merchant / religious / public / criminal), each fed by its carrier(s) + INTRA-settlement
+  intel sharing (round 11 applied INTERNALLY — factions share/withhold from each other, alignment-colored).
+  Then: the GOVERNING COALITION sets STRATEGIC action (its operational belief = the v1 map); other factions
+  create (a) DISSENT — belief diverging from the coalition's is an internal STRESSOR (ties stressorDynamics
+  / council_schism / legitimacy); (b) LEAKAGE — a faction leaks its private intel to the public (rumor), to
+  another faction, or OUTWARD to an enemy (round-11 betrayal at settlement scale, via the per-institution
+  corruption/compromise system); (c) ALTERNATIVE ACTIONS in its own domain (merchants reroute trade, clergy
+  send missionaries, the criminal net runs smuggling, a faction stages a COUP if belief + power justify it).
+- WILLFUL IGNORANCE: "the ruler deliberately ignores accurate information" = a government-faction belief
+  that WON'T UPDATE from a better-informed faction — a disposition/corruption trait (epistemic closure),
+  itself a modeled behaviour and a CAUSE (W-C5) of misjudgment + eventual dissent.
+This makes MISJUDGMENT (round 10) FACTIONAL — the coalition acts on ITS belief while ignoring a better-
+informed faction (the mayor marches because he ignored the merchants) — a failure of INTERNAL information
+flow, not just external fidelity. Preserves tractability (v1 = one map) without ever assuming a single
+settlement mind in the data model.
+
 **THE WAR-DECISION MODEL (the heart):** a settlement's posture is a THREAT ASSESSMENT over its
 BELIEFS, not over ground truth.
 - Owner example A: A & B hostile; A ramps war readiness. B (by TEMPERAMENT) may not react — UNTIL
@@ -1034,6 +1070,12 @@ Round 10 was under-decomposed (a cheap half bundled with a mover-dependent half)
 - WAVE A (right after 3.5, ZERO new movers) — the BELIEF MAP + belief-sourced war POSTURE (re-plumb the
   three settlementStrategy reads) + misjudgment-as-a-cause + absence-as-uncertainty. This ships the
   valuable half of the fog of war on the chooser that already exists — high value, no military layer.
+  DATA-MODEL NOTE (round 14): the belief-map ledger key carries an OPTIONAL FACTION dimension from day one
+  — beliefMaps[observer][factionId?][subject] — with factionId DEFAULTING to the governing coalition in
+  Wave A (one map, defined as the governing coalition's operational belief). This costs nothing in v1 but
+  preserves the seam so per-faction belief (merchant/military/clergy/criminal/public/government, each fed
+  by its round-9 carrier) can be added later WITHOUT a schema break. Do NOT bake a single-settlement-mind
+  assumption into the key.
 - WAVE B (after the §5 army-transit + §7 movers) — belief-driven physical MOVEMENT (preempt/defend-ally/
   reinforce) + moral drift + the ally-intel/betrayal channel + teleport-bloc economics.
 Everything downstream stays as PART III. The belief layer's payoff arrives EARLY and cheap; only its
