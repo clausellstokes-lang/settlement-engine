@@ -36,6 +36,8 @@ import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardChipRow } from './generate/WizardChipRow.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
+import ExportDraftButton from './generate/ExportDraftButton.jsx';
+import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
 const OutputContainer = lazy(() => import('./OutputContainer'));
@@ -107,6 +109,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const clearLoadedFromSave = useStore(s => s.clearLoadedFromSave);
   const clearNeighbour  = useStore(s => s.clearNeighbour);
   const clearSettlement = useStore(s => s.clearSettlement);
+  const setSettlement   = useStore(s => s.setSettlement);
 
   // P100 / X-1 — Pipeline reveal state. When `pipelineRevealActive` is
   // true, the dossier is hidden behind the reveal overlay. Once the
@@ -119,6 +122,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const [showOutput, setShowOutput] = useState(true);
   const [generateError, setGenerateError] = useState(null);
   const [pendingExit, setPendingExit] = useState(null); // 'back' | 'new' — RNG unsaved-exit confirm
+  // Recoverable unsaved dossier. If a save stalled and the user reloaded to
+  // recover, the generated settlement is gone from the store (never persisted)
+  // but a draft survives in localStorage. Read once at init; the restore banner
+  // only renders in the empty state (no settlement), so no mount effect is needed.
+  const [restorableDraft, setRestorableDraft] = useState(() => readDraft());
 
   // ── Analytics: wizard-funnel session bookkeeping ─────────────────────────
   // Plain refs so they never trigger renders. `generatedThisSession` flips
@@ -296,6 +304,20 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
+  // Restore the recovered dossier into the store. The draft is kept (not cleared)
+  // until a save actually lands, so a second stall/reload can recover again.
+  const handleRestoreDraft = useCallback(() => {
+    if (!restorableDraft?.settlement) return;
+    if (typeof setSettlement === 'function') setSettlement(restorableDraft.settlement);
+    setShowOutput(true);
+    setRestorableDraft(null);
+  }, [restorableDraft, setSettlement]);
+
+  const handleDismissDraft = useCallback(() => {
+    clearDraft();
+    setRestorableDraft(null);
+  }, []);
+
   // Onboarding coach step tracking
   const onboardingActive = useStore(s => s.onboardingActive);
   const onboardingStep = useStore(s => s.onboardingStep);
@@ -340,16 +362,38 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   if (!wizardMode && !settlement) {
     return (
-      <WizardEmptyState
-        showHomeHero={showHomeHero}
-        showModePicker={showModePicker}
-        isMobile={isMobile}
-        wizardMode={wizardMode}
-        setWizardMode={setWizardMode}
-        authTier={authTier}
-        onSignIn={onSignIn}
-        onNavigate={onNavigate}
-      />
+      <>
+        {restorableDraft && (
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', padding: `${SP.md}px 0 0` }}>
+            <div style={{
+              background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8,
+              padding: '12px 16px', display: 'flex', flexWrap: 'wrap', alignItems: 'center',
+              gap: 12, justifyContent: 'space-between',
+            }}>
+              <div style={{ fontFamily: sans, fontSize: FS.sm, color: swatch['#5A3A00'], flex: '1 1 280px' }}>
+                <strong>A save was interrupted.</strong>{' '}
+                Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
+                {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
+                  ? `"${restorableDraft.name}"` : 'settlement'} is still here.
+              </div>
+              <div style={{ display: 'flex', gap: SP.sm }}>
+                <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
+                <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
+              </div>
+            </div>
+          </div>
+        )}
+        <WizardEmptyState
+          showHomeHero={showHomeHero}
+          showModePicker={showModePicker}
+          isMobile={isMobile}
+          wizardMode={wizardMode}
+          setWizardMode={setWizardMode}
+          authTier={authTier}
+          onSignIn={onSignIn}
+          onNavigate={onNavigate}
+        />
+      </>
     );
   }
 
@@ -639,14 +683,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             </div>
           </Suspense>
 
-          {/* Save to library */}
-          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: SP.xs }}>
+          {/* Save to library — the primary post-generate action. Export PDF sits
+              beside it for export-capable tiers (Cartographer / Founder /
+              elevated), who can export the unsaved draft directly; it self-hides
+              for free + anon (who save first, or take the hero Buy CTA). */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', gap: SP.sm, flexWrap: 'wrap', paddingTop: SP.xs }}>
             <SaveToLibraryButton
               settlement={settlement}
               canSave={canSave}
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
+            <ExportDraftButton />
           </div>
 
           {/* P134 / W-4 — post-generate "what's next" guide. Closes out the

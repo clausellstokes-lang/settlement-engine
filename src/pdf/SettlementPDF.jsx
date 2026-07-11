@@ -38,9 +38,10 @@ import { PlotHooks } from './sections/PlotHooks.jsx';
 import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
+import { FaithWar } from './sections/FaithWar.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
-import { PDF_VARIANTS, shouldInclude } from './variants.js';
+import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from './variants.js';
 
 export function SettlementPDF({
   settlement,
@@ -54,10 +55,19 @@ export function SettlementPDF({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-  // Audit recommendation: three export variants, same engine
-  // underneath. Defaults to canon_dossier (the previous behavior) so
-  // legacy callers that don't supply a variant get exactly what they
-  // got before this feature landed.
+  // The LIVE campaign world for this settlement ({ worldState, regionalGraph,
+  // settlements?, nameById? }). Threaded ONLY for premium exports. When absent /
+  // dormant the liveWorld slice resolves to null and the Faith & War chapter
+  // renders nothing ⇒ byte-identical to a non-campaign export.
+  campaign = null,
+  // The faith premium seam, mirroring the screen's FaithSection. Only a premium /
+  // elevated exporter unlocks the Faith & War chapter; a free / lapsed / anon
+  // export keeps the DEFAULT (false) ⇒ no faith chapter, no deity names in the
+  // PDF. The caller (the export surface) passes the tier result.
+  faithUnlocked = false,
+  // Audit recommendation: export variants, same engine underneath. Defaults to
+  // canon_dossier (the previous behavior) so legacy callers that don't supply a
+  // variant get exactly what they got before this feature landed.
   variant = 'canon_dossier',
   // Founder Lifetime exporters see a small parchment-gold "Founder
   // Edition" badge on the cover. Defaults false so historical PDFs
@@ -71,7 +81,7 @@ export function SettlementPDF({
   const safe = settlement || {};
   const vm = buildViewModel({
     settlement, aiSettlement, aiDailyLife, narrativeMode,
-    systemState, eventLog, phase,
+    systemState, eventLog, phase, campaign,
   });
   const useAi = vm.narrativeMode;
   const variantSpec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;
@@ -79,6 +89,14 @@ export function SettlementPDF({
   const inc = (key) => shouldInclude(variantSpec.chapters[key], ctx);
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
+  // The live "Faith & War" chapter — variant + canon gated, self-gating on the
+  // dormant liveWorld slice, AND premium-gated (faithUnlocked). All three must
+  // pass; a free/anon export (faithUnlocked=false) or a dormant slice ⇒ no
+  // chapter ⇒ no deity names ⇒ byte-identical.
+  const showFaithWar = faithChapterVisible({
+    variant, phase, hasLiveWorld: !!vm.liveWorld, faithUnlocked,
+    narrated: useAi, eventCount: eventLog?.length || 0,
+  });
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -92,6 +110,7 @@ export function SettlementPDF({
     inc('npcQuickRef')         && { no: '03',  title: 'NPC Quick Reference', note: 'index' },
     showState                  && { no: '03B', title: 'Current State', note: '4-dim snapshot' },
     showTimeline               && { no: '03C', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
+    showFaithWar               && { no: '03D', title: 'Faith & War', note: 'live campaign state' },
     inc('notableNpcs')         && { no: '04',  title: 'Notable NPCs', note: 'detailed sheets' },
     inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
     inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
@@ -121,6 +140,7 @@ export function SettlementPDF({
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}

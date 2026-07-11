@@ -7,6 +7,7 @@ import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import { td } from '../../copy/deityAuthoring.js';
 import DeityEffectPreview from './DeityEffectPreview.jsx';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
+import ContentPackBar from './ContentPackBar.jsx';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
 import { useStore } from '../../store/index.js';
@@ -522,6 +523,9 @@ export function CustomContentManager({ search }) {
 
   return (
     <div>
+      {/* Content packs — export/import authored content as a portable JSON pack
+          (premium; file-based, no backend). */}
+      <ContentPackBar />
       {/* Category tabs */}
       <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:12 }}>
         {CUSTOM_CATEGORIES.map(c => {

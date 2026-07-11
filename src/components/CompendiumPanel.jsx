@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2 } from 'lucide-react';
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
-import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
+import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, LivingWorldTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { CustomContentManager } from './compendium/CustomContent.jsx';
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
@@ -14,6 +14,7 @@ const TABS = [
   { id:'economy',     label:'Economy',            Icon: Coins },
   { id:'power',       label:'Power & Factions',   Icon: Shield },
   { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
+  { id:'living',      label:'Living World',       Icon: Globe },
   { id:'stress',      label:'Stress',             Icon: AlertTriangle },
   { id:'neighbour',   label:'Neighbour System',   Icon: Link2 },
   { id:'institutions',label:'Institutions',       Icon: Building2 },
@@ -36,6 +37,7 @@ const ANCHOR_TO_TAB = Object.freeze({
   'magic':        'arcane',
   'cultures':     'arcane',
   'religion':     'arcane',
+  'living-world': 'living',
   'stress':       'stress',
   'threat':       'stress',
   'neighbours':   'neighbour',
@@ -58,6 +60,8 @@ const TAB_META = Object.freeze({
                   desc: 'Forty-plus settlement archetypes (Merchant Republic, Mage Theocracy, Frontier Outpost, Crusader Synthesis) keyed to slider + threat conditions.' },
   arcane:       { title: 'Magic & religion reference: SettlementForge Compendium',
                   desc: 'How magic and religious institutions interact in the simulator: heresy suppression, arcane economy, theocratic governance, sacred goods trade.' },
+  living:       { title: 'Living World reference: SettlementForge Compendium',
+                  desc: 'The systems that wake once a campaign advances: the causal substrate, pressures, the world pulse, the war layer, and the living pantheon. Opt-in, off by default.' },
   stress:       { title: 'Stress conditions: SettlementForge Compendium',
                   desc: 'Famine, siege, plague, political fracture, monster pressure: how each stress shifts institutions, factions, and supply chains.' },
   neighbour:    { title: 'Neighbour System reference: SettlementForge Compendium',
@@ -138,6 +142,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
       case 'economy':      return <EconomyTab/>;
       case 'power':        return <PowerTab_ search={q}/>;
       case 'arcane':       return <ArcaneTab/>;
+      case 'living':       return <LivingWorldTab/>;
       case 'stress':       return <StressTab search={q}/>;
       case 'neighbour':    return <NeighbourTab search={q}/>;
       case 'institutions': return <InstitutionsTab config={config} search={search}/>;

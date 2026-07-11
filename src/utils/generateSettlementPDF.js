@@ -184,9 +184,17 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState = null,
     eventLog = [],
     phase = 'draft',
-    // Audit recommendation: three export variants. Default preserves
-    // the previous behavior so any pre-existing caller gets the same
-    // PDF it always got.
+    // The LIVE campaign world ({ worldState, regionalGraph, settlements?,
+    // nameById? } — PLAIN, structured-cloneable data so the worker path (F41) is
+    // preserved; never a nameFor function). Threaded ONLY for premium exports;
+    // null ⇒ no live-campaign Faith & War chapter.
+    campaign = null,
+    // The faith premium seam (mirrors the screen's FaithSection). Only a
+    // premium / elevated export unlocks the Faith & War chapter. Default false ⇒
+    // free / lapsed / anon exports never carry deity names.
+    faithUnlocked = false,
+    // Audit recommendation: export variants. Default preserves the previous
+    // behavior so any pre-existing caller gets the same PDF it always got.
     variant = 'canon_dossier',
     // Founder Lifetime exporters get a "Founder Edition" badge on the
     // cover. The flag is read at export time so revoking founder status
@@ -219,6 +227,8 @@ export async function generateSettlementPDF(settlement, options = {}) {
     systemState,
     eventLog,
     phase,
+    campaign,
+    faithUnlocked,
     variant,
     isFounder,
     isAnonymous,

@@ -149,3 +149,33 @@ export function InstitutionsTab({ _config, search }) {
     </div>
   </>;
 }
+
+// ── Living World — the campaign-advance reference tab ────────────────────────
+// Static, curated reference over the living-world systems (no backend, no store).
+// Each group is [title, accent color, prose]. Accents are display-only literals,
+// same convention as CAT_COLORS above.
+const LIVING_WORLD_GROUPS = [
+  ['Causal Substrate', '#1a3a7a',
+    'Sixteen canonical variables (legitimacy, food security, unrest, religious authority, …) the engine carries per settlement. Generation seeds them; each advance re-derives them from prior state, never wall-clock.'],
+  ['Pressures and Strength', '#a0762a',
+    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. They roll up into a single defend-or-yield signal that drives strategy.'],
+  ['World Pulse', '#1a5a28',
+    'The per-tick advance: stressors fire, populations and trade drift, institutions are born and die, proposals queue for the DM. Off-by-default toggles keep a peacetime save byte-identical.'],
+  ['War Layer', '#8b1a1a',
+    'Armies march, sieges form, conquests change rulers; warExhaustion rises until a self-ending peace. Entirely dormant unless the War-layer rule is enabled.'],
+  ['Religion and Pantheon', '#7a5a1a',
+    'Assigned deities contest converts, gain seats, and steer corruption / aggression / magic legality through their axes. Dormant until a primary deity is assigned and Religion dynamics are on.'],
+];
+
+export function LivingWorldTab() {
+  return <>
+    <p id="living-world" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
+      The generator builds a town in seconds; the <strong>living world</strong> then runs the region for
+      years. These are the systems that wake up once a campaign advances. Each is opt-in, off by default,
+      and silent for a non-campaign save.
+    </p>
+    {LIVING_WORLD_GROUPS.map(([title, accent, body]) => (
+      <Card key={title} title={title} accent={accent}>{body}</Card>
+    ))}
+  </>;
+}

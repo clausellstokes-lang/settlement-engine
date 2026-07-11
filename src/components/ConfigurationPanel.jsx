@@ -6,6 +6,7 @@ import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } fro
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
+import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
@@ -473,6 +474,10 @@ export default function ConfigurationPanel(){
       <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
       <div style={{marginTop:10}}><Collapsible title="Nearby Resources" status={config.nearbyResourcesRandom!==false?'Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
       <div style={{marginTop:6}}><Collapsible title="Settlement Stress" status={config.selectedStressesRandom!==false?'Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      {/* Place in Region — birth-time campaign + patron-deity intent (premium;
+          free sees a teaser). Mounted pre-generation so the choice bakes into
+          settlement._config and persists on save. */}
+      <div style={{marginTop:10}}><PlaceInRegionCard/></div>
     </div>
   </div>;
 }

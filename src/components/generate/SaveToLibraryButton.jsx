@@ -9,6 +9,7 @@
 
 import { useState } from 'react';
 import { saves as savesService } from '../../lib/saves.js';
+import { writeDraft, clearDraft } from '../../lib/pendingSaveDraft.js';
 import { useStore } from '../../store';
 import { sans, FS, SP, swatch } from '../theme.js';
 import { Save } from 'lucide-react';
@@ -26,14 +27,21 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
     if (!settlement || saving) return;
     setSaveError(null);
     setSaving(true);
+    const payload = {
+      name: settlement.name || 'Untitled Settlement',
+      tier: settlement.tier || 'unknown',
+      settlement,
+      config: settlement._config || null,
+    };
+    // Safety net: stash the dossier locally BEFORE the network call. If the save
+    // stalls and the user refreshes to recover, the empty-state offers to restore
+    // it (the generated settlement is never persisted in the store otherwise).
+    // Left in place on failure so a reload can still recover; cleared on success.
+    writeDraft(payload);
     try {
-      const saveId = await savesService.save({
-        name: settlement.name || 'Untitled Settlement',
-        tier: settlement.tier || 'unknown',
-        settlement,
-        config: settlement._config || null,
-      });
+      const saveId = await savesService.save(payload);
       setSaved(true);
+      clearDraft();
       setTimeout(() => setSaved(false), 3000);
       // F34 — this is a REAL save chokepoint. Fire the first_save/third_save
       // pricing moment + 'saved' research capture here (the dead store

@@ -29,6 +29,7 @@ import {
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { humanize } from './format.js';
+import { buildPdfLiveWorld } from './liveWorld.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -168,7 +169,13 @@ export function buildViewModel({
   systemState = null,
   eventLog = [],
   phase = 'draft',
-} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string }} */ ({})) {
+  // The LIVE campaign world for this settlement ({ worldState, regionalGraph,
+  // settlements?, nameById? }). Threaded ONLY for premium exports. When absent /
+  // dormant the liveWorld slice resolves to `null` — so a non-campaign / free /
+  // anon export is byte-identical (the Faith & War chapter renders nothing, and
+  // SettlementPDF additionally gates it on the faith premium seam).
+  campaign = null,
+} = /** @type {{ settlement?: any, aiSettlement?: any, aiDailyLife?: any, narrativeMode?: boolean, systemState?: any, eventLog?: any[], phase?: string, campaign?: any }} */ ({})) {
   const raw = settlement || {};
   const ai = aiSettlement || null;
   const useAi = !!(narrativeMode && ai);
@@ -183,6 +190,9 @@ export function buildViewModel({
     systemState,
     eventLog,
     phase,
+    // Live campaign slice for the Faith & War chapter. `null` off-campaign /
+    // dormant ⇒ chapter renders nothing.
+    liveWorld: buildPdfLiveWorld({ settlement: raw, campaign }),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
     identity:      identitySlice(active),
