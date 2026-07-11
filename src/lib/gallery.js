@@ -34,7 +34,13 @@ export const GALLERY_SORT_OPTIONS = Object.freeze([
   ['name_asc', 'A-Z'],
 ]);
 
-const FILTER_ARRAY_KEYS = Object.freeze(['tier', 'terrain', 'governmentType', 'magicLevel', 'stability']);
+// IN-list facets the public feed accepts. governmentType + stability were
+// dropped: the engine writes a free-text faction name / composite label for
+// each, so no bounded sidebar vocabulary can ever match them, AND the server
+// list RPC (list_gallery_dossiers, migration 063/071) never filtered on them —
+// they were dead chips. culture + prosperity are the bounded-vocab facets the
+// server actually honors (migration 063).
+const FILTER_ARRAY_KEYS = Object.freeze(['tier', 'terrain', 'magicLevel', 'culture', 'prosperity']);
 
 /**
  * Publish a settlement to the gallery. Returns the public slug the
@@ -66,6 +72,54 @@ export async function unpublishSettlement(settlementId) {
   const { error } = await supabase.rpc('unpublish_settlement', { target_id: settlementId });
   if (error) throw new Error(error.message || 'Unpublish failed');
   try { track(EVENTS.GALLERY_UNPUBLISHED, {}); } catch { /* never affects unpublish */ }
+}
+
+/**
+ * Fetch a clone-ready dossier payload for IMPORT. Server-gated on
+ * gallery_importable + is_public + auth (migration 048): returns null when the
+ * dossier isn't importable / not found / the caller is anonymous. The payload
+ * is the SAME sanitized projection the gallery page shows (never raw data, never
+ * the generation seed) — importing exposes nothing the viewer didn't already see.
+ */
+export async function fetchDossierForImport(slug) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!slug || typeof slug !== 'string') return null;
+  const { data, error } = await supabase.rpc('import_gallery_dossier', { dossier_slug: slug });
+  if (error) throw new Error(error.message || 'Import fetch failed');
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row) return null;
+  return { id: row.id, name: row.name, tier: row.tier, settlement: stripImportConfidential(row.data) };
+}
+
+/**
+ * Client defense-in-depth for the import payload. The import_gallery_dossier RPC
+ * is server-gated and already sanitized, but every OTHER gallery read re-clamps
+ * client-side because RLS/raw writes mean the row can't be fully trusted — this
+ * path is no exception. Strip only the keys that are NEVER legitimately shared
+ * (non-lossy for an opted-in DM share's secrets/hooks/prose): the generation
+ * seed (the RPC contract promises it is absent) and the DM scratch notes that
+ * toPublicSafe drops even in owner-opted full mode (publicSafe.js).
+ */
+function stripImportConfidential(data) {
+  if (!data || typeof data !== 'object') return data;
+  const out = { ...data };
+  // Contract: "never the generation seed". The engine persists it as `_seed`
+  // (top-level AND config._seed) plus the raw authoring `_config` — with any of
+  // them, the importer could regenerate the full UNSANITIZED settlement through
+  // the deterministic engine. `seed` covers drifted/legacy shapes. `config`
+  // itself stays (it drives public display facets); clone it before deleting so
+  // the caller's row object is never mutated.
+  delete out.seed;
+  delete out._seed;
+  delete out._config;
+  if (out.config && typeof out.config === 'object') {
+    out.config = { ...out.config };
+    delete out.config._seed;
+  }
+  delete out.dmNotes;        // truly-confidential DM scratch — dropped even in full mode
+  delete out.dossierNotes;
+  delete out.narrativeNotes;
+  return out;
 }
 
 export async function updateGalleryMetadata(settlementId, metadata = {}) {
@@ -478,6 +532,11 @@ function sanitizeDossier(row) {
     // DM mode (not player view), or the DM tabs/secrets stay hidden despite the
     // data being present. See PublicDossierView.
     shareDm:      row.gallery_share_dm === true,
+    // Owner opt-in: gates the "Import" affordance on the detail page (the
+    // import_gallery_dossier RPC is the server-authoritative gate; this only
+    // decides whether to SHOW the button). get_gallery_dossier returns this flag
+    // (migration 047/071).
+    importable:   row.gallery_importable === true,
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
@@ -543,6 +602,11 @@ function normalizeGalleryFilters(filters = {}) {
   if (filters.hasImage) out.hasImage = true;
   if (filters.hasComments) out.hasComments = true;
   if (filters.curatedOnly) out.curatedOnly = true;
+  // Patron-deity presence facet (gallery_facet_deity, migration 063).
+  if (filters.hasDeity) out.hasDeity = true;
+  // Owner import opt-in facet (gallery_importable, migration 047; surfaced as a
+  // list facet by migration 071). Narrows to dossiers their owner allowed to clone.
+  if (filters.importable) out.importable = true;
   return out;
 }
 
@@ -581,6 +645,35 @@ function galleryMetadataPatch(metadata = {}) {
   // independent of the settlement-level shareDm flag. Clamped on write (below).
   if (metadata.memberOverrides !== undefined) {
     patch.gallery_member_overrides = clampMemberOverrides(metadata.memberOverrides);
+  }
+  // Owner opt-in: let other users import (clone) this public dossier into their
+  // own library. Off by default; the import RPC honors this flag (migration 047).
+  if (metadata.importable !== undefined) {
+    patch.gallery_importable = metadata.importable === true;
+  }
+  // §S4 — the public-safe realm-arc digest (war/pantheon epic). A DERIVED scalar,
+  // not the raw chronicle. Sanitized to plain bounded text so the gallery row can
+  // never carry markup or an unbounded blob (migration 070).
+  if (metadata.realmArcSummary !== undefined) {
+    const summary = sanitizeRealmArcSummary(String(metadata.realmArcSummary || ''));
+    patch.gallery_realm_arc_summary = summary || null;
+  }
+  // Facet snapshots (migration 063). Captured at publish/re-share time from the
+  // REAL settlement attributes — culture/prosperity/deity from the persisted
+  // data, atWar from the owning campaign's LIVE war ledger (which the gallery row
+  // cannot recompute on its own). ShareToGallery derives these; clamp + null
+  // empties here so a facet column never holds an empty string.
+  if (metadata.facetCulture !== undefined) {
+    patch.gallery_facet_culture = String(metadata.facetCulture || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.facetProsperity !== undefined) {
+    patch.gallery_facet_prosperity = String(metadata.facetProsperity || '').trim().slice(0, 64) || null;
+  }
+  if (metadata.facetDeity !== undefined) {
+    patch.gallery_facet_deity = String(metadata.facetDeity || '').trim().slice(0, 120) || null;
+  }
+  if (metadata.facetAtWar !== undefined) {
+    patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
   return patch;
 }

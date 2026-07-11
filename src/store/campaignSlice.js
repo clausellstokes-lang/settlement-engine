@@ -431,6 +431,19 @@ export const createCampaignSlice = (set, get) => {
     return campaignId;
   },
 
+  /**
+   * Clone a public, owner-opted-in gallery dossier into the caller's library.
+   * Thin wrapper: the full body (server-gated fetch + settlement migration chain +
+   * save) lives in a LAZY sibling so neither the gallery client nor
+   * normalizeSettlement's transitive closure ride the first-paint entry — this is
+   * a cold, import-click-only path. See galleryImportSettlement.js for the premium
+   * gate + clone/scrub contract.
+   */
+  importGallerySettlement: async (slug) => {
+    const { importGallerySettlementImpl } = await import('./galleryImportSettlement.js');
+    return importGallerySettlementImpl(get, set, slug);
+  },
+
   renameCampaign: (id, name) =>
     set(state => {
       const c = findActiveCampaign(state.campaigns, id);

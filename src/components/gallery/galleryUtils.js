@@ -1,8 +1,17 @@
-export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis', 'capital'];
-export const TERRAIN_OPTIONS = ['forest', 'plains', 'hills', 'mountains', 'coast', 'river', 'desert', 'swamp', 'tundra', 'underground'];
-export const GOVERNMENT_OPTIONS = ['monarchy', 'council', 'elder council', 'oligarchy', 'guild', 'theocracy', 'military', 'assembly', 'criminal'];
-export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high', 'wild', 'forbidden'];
-export const STABILITY_OPTIONS = ['stable', 'strained', 'unstable', 'crisis', 'collapsing'];
+// Facet vocabularies aligned to what the engine ACTUALLY persists AND what the
+// server list RPC filters on (migration 063/071). 'capital' is dropped — the
+// generator never emits it (TIER_ORDER stops at metropolis).
+export const TIER_OPTIONS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+// config.terrainType vocabulary (resolveConfig + getTerrainType). The old list
+// used display synonyms (coast/river/mountains) that never matched the stored
+// values, so those chips filtered to nothing; these are the real ones.
+export const TERRAIN_OPTIONS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+// getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
+export const MAGIC_OPTIONS = ['none', 'low', 'medium', 'high'];
+// resolveConfig's canonical 11-culture catalog.
+export const CULTURE_OPTIONS = ['germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek'];
+// economicState.prosperity vocabulary (generateEconomicNarrative LABELS).
+export const PROSPERITY_OPTIONS = ['Struggling', 'Poor', 'Moderate', 'Comfortable', 'Prosperous', 'Wealthy'];
 
 export const REPORT_REASON_OPTIONS = [
   ['unsafe_content', 'Unsafe content'],

@@ -14,12 +14,18 @@ import { saves as savesService } from '../lib/saves.js';
 export const EMPTY_GALLERY_FILTERS = Object.freeze({
   tier: [],
   terrain: [],
-  governmentType: [],
   magicLevel: [],
-  stability: [],
+  // Bounded-vocab facets the server list RPC actually honors (migration 063).
+  // governmentType/stability were dropped: the engine writes free-text values no
+  // sidebar vocabulary can match, and the RPC never filtered on them.
+  culture: [],
+  prosperity: [],
   hasImage: false,
   hasComments: false,
   curatedOnly: false,
+  // Owner import opt-in + patron-deity presence facets (migrations 047/063).
+  importable: false,
+  hasDeity: false,
   // §5 — "My Settlements": client-only filter that swaps the feed for the
   // owner-scoped list_my_gallery_dossiers RPC (ignored by the public feed's
   // server-side filter normalizer, which allowlists keys).
@@ -47,6 +53,8 @@ export function useGalleryPageState(routeSlug = null) {
   const [dossierError, setDossierError] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
   const [reportBusyId, setReportBusyId] = useState(null);
+  const [importBusyId, setImportBusyId] = useState(null);
+  const [importedSlugs, setImportedSlugs] = useState(() => new Set());
   const [actionError, setActionError] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
@@ -230,6 +238,28 @@ export function useGalleryPageState(routeSlug = null) {
     }
   }, [auth?.user, reportBusyId]);
 
+  const importDossier = useCallback(async (item) => {
+    if (!auth?.user) {
+      setActionError('Sign in to import settlements into your library.');
+      setActionNotice(null);
+      return;
+    }
+    const slug = item?.slug;
+    if (!slug || importBusyId) return;
+    setImportBusyId(slug);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      await useStore.getState().importGallerySettlement(slug);
+      setImportedSlugs(prev => new Set(prev).add(slug));
+      setActionNotice('Imported to your library.');
+    } catch (err) {
+      setActionError(err?.message || 'Import could not be completed.');
+    } finally {
+      setImportBusyId(null);
+    }
+  }, [auth?.user, importBusyId]);
+
   const setDossierCommentCount = useCallback((count) => {
     const nextCount = Math.max(0, Number(count) || 0);
     setDossier(current => current ? { ...current, commentCount: nextCount } : current);
@@ -254,6 +284,8 @@ export function useGalleryPageState(routeSlug = null) {
     dossierError,
     voteBusyId,
     reportBusyId,
+    importBusyId,
+    importedSlugs,
     actionError,
     actionNotice,
     loadMore,
@@ -264,6 +296,7 @@ export function useGalleryPageState(routeSlug = null) {
     clearFilters,
     voteOn,
     reportOn,
+    importDossier,
     setDossierCommentCount,
   };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, ChevronLeft, Eye, MessageCircle, Share2 } from 'lucide-react';
+import { Check, ChevronLeft, Download, Eye, MessageCircle, Share2 } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
 import { TIER_LABELS } from '../new/design.js';
@@ -63,10 +63,14 @@ export default function GalleryDetail({
   onOpen,
   onVote,
   onReport,
+  onImport,
   onCommentCountChange,
   voteBusy,
   reportBusy,
+  importBusy,
+  imported,
   auth,
+  onNavigate,
 }) {
   const [shared, setShared] = React.useState(false);
   const onShare = async () => {
@@ -119,6 +123,15 @@ export default function GalleryDetail({
     dossier.publishedAt ? `shared ${formatDate(dossier.publishedAt)}` : null,
   ].filter(Boolean);
 
+  // Importing another DM's settlement is a premium feature (parity with map
+  // import); sharing your own to the gallery is free. tier==='premium' covers
+  // Cartographer + Founder; dev/admin pass for testing.
+  const isPremium = auth?.tier === 'premium' || auth?.role === 'developer' || auth?.role === 'admin';
+  // Base eligibility: an owner-opted-in importable dossier the signed-in viewer
+  // doesn't already own. A non-premium viewer still sees an "Import (premium)"
+  // upgrade next-step (not a dead-end) that routes to pricing.
+  const importEligible = dossier.importable && auth?.user && !ownedSave;
+
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
@@ -147,6 +160,8 @@ export default function GalleryDetail({
             galleryTags={ownedSave.gallery_tags}
             galleryShareNarrated={ownedSave.gallery_share_narrated}
             galleryShareDm={ownedSave.gallery_share_dm}
+            galleryImportable={ownedSave.gallery_importable}
+            galleryMemberOverrides={ownedSave.gallery_member_overrides}
             // Re-fetch the dossier in place after a save so the public view
             // reflects the new narrated / DM-visibility choices — WITHOUT a full
             // page reload (which would land on a fresh gallery URL where saves
@@ -184,6 +199,29 @@ export default function GalleryDetail({
               </p>
             )}
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap' }}>
+              {importEligible && isPremium ? (
+                <Button
+                  variant={imported ? 'success' : 'primary'}
+                  size="md"
+                  onClick={() => onImport?.(dossier)}
+                  busy={importBusy}
+                  disabled={imported || importBusy}
+                  title={imported ? 'Imported to your library' : 'Clone the public-safe version into your library'}
+                  icon={imported ? <Check size={13} /> : <Download size={13} />}
+                >
+                  {imported ? 'Imported' : 'Import'}
+                </Button>
+              ) : importEligible ? (
+                <Button
+                  variant="primary"
+                  size="md"
+                  onClick={() => onNavigate?.('pricing')}
+                  icon={<Download size={13} />}
+                  title="Importing a settlement into your library is a Cartographer feature"
+                >
+                  Import (premium)
+                </Button>
+              ) : null}
               <VoteButton
                 count={dossier.netVotes}
                 voted={dossier.voteState?.voted}

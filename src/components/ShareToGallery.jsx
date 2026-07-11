@@ -20,6 +20,9 @@ import { useStore } from '../store/index.js';
 import { publishSettlement, unpublishSettlement, updateGalleryMetadata } from '../lib/gallery.js';
 import { t } from '../copy/index.js';
 import { validateDossier } from '../domain/validation/consistency.js';
+import { resolveTerrain } from '../domain/resolveTerrain.js';
+import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
+import { settlementWarStatus } from '../domain/display/warStatus.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
@@ -44,13 +47,17 @@ function isCampaignCanonized(campaignState) {
   );
 }
 
-function suggestedTagsFor(settlement = {}) {
+export function suggestedTagsFor(settlement = {}) {
+  // Read the attributes the engine actually persists (config.terrainType via
+  // resolveTerrain, the governing faction name, config.culture) — the old paths
+  // (config.terrain, powerStructure.governmentType, viability.stability) were
+  // never written, so every suggested-tag list silently dropped them.
   return [
     settlement.tier,
-    settlement.config?.terrain,
+    resolveTerrain(settlement.config),
     settlement.config?.magicLevel ? `${settlement.config.magicLevel} magic` : null,
-    settlement.powerStructure?.governmentType,
-    settlement.viability?.stability,
+    settlement.config?.culture,
+    settlement.powerStructure?.government || settlement.powerStructure?.governingName,
     settlement.config?.nearbyResources?.[0],
   ].filter(Boolean).slice(0, 6);
 }
@@ -79,6 +86,7 @@ export default function ShareToGallery({
   galleryTags = [],
   galleryShareNarrated = false,
   galleryShareDm = false,
+  galleryImportable = false,
   galleryMemberOverrides = null,
   onSaved = null,
 }) {
@@ -88,6 +96,13 @@ export default function ShareToGallery({
   // lib/gallery.js), so a published dossier is always the RAW simulation. Read
   // the save's AI data so we can say plainly when the prose won't be included.
   const liveAiData = useStore(s => (saveId ? (s.savedSettlements || []).find(x => x.id === saveId)?.aiData : null));
+  // §S4 — the campaign this save belongs to, for the public-safe realm-arc digest
+  // and the live at-war facet (which the gallery row cannot recompute on its own).
+  const owningCampaign = useStore(s => {
+    if (!saveId) return null;
+    return (s.campaigns || []).find(c => (c.settlementIds || []).map(String).includes(String(saveId))) || null;
+  });
+  const allSaves = useStore(s => s.savedSettlements);
 
   const [isPublic, setIsPublic] = useState(Boolean(isPublicProp));
   const [slug, setSlug]         = useState(slugProp || null);
@@ -104,6 +119,8 @@ export default function ShareToGallery({
   const [shareNarrated, setShareNarrated] = useState(Boolean(galleryShareNarrated));
   // Opt-in: publish the full DM view (secrets, hooks, notes, compass) unstripped.
   const [shareDm, setShareDm] = useState(Boolean(galleryShareDm));
+  // Opt-in: let other users import (clone) this public dossier into their library.
+  const [importable, setImportable] = useState(Boolean(galleryImportable));
   // Per-member (per-NPC) visibility overrides (migration 092/093). Each NPC
   // inherits the settlement shareDm flag unless explicitly overridden here; we
   // store ONLY the deltas so the column stays minimal and un-overridden members
@@ -114,6 +131,41 @@ export default function ShareToGallery({
       : {}
   ));
   const canonReady = isCampaignCanonized(campaignState);
+  // §S4 — derive the public-safe realm-arc digest from the owning campaign's LIVE
+  // war/pantheon ledgers. Empty for a no-war/no-deity campaign (the field is then
+  // omitted). This is a DERIVED scalar, never the raw chronicle.
+  const realmArcSummary = useMemo(() => {
+    if (!owningCampaign) return '';
+    const ids = new Set((owningCampaign.settlementIds || []).map(String));
+    const settlements = (allSaves || [])
+      .filter(sv => ids.has(String(sv.id)))
+      .map(sv => ({ id: sv.id, name: sv.name || sv.settlement?.name, settlement: sv.settlement }));
+    return buildRealmArcSummary({
+      worldState: owningCampaign.worldState,
+      regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+      settlements,
+    });
+  }, [owningCampaign, allSaves]);
+  // Gallery facet snapshot (migration 063). Read from the REAL settlement
+  // attributes (not the owner tags): culture + prosperity + patron deity from the
+  // persisted data, and the live at-war flag from the owning campaign's war
+  // ledger. Captured here so the gallery row can filter on them without
+  // recomputing live campaign state. Empty/absent ⇒ omitted (the column nulls).
+  const facets = useMemo(() => {
+    const warStatus = owningCampaign
+      ? settlementWarStatus({
+          settlementId: saveId,
+          worldState: owningCampaign.worldState,
+          regionalGraph: owningCampaign.regionalGraph || owningCampaign.worldState?.regionalGraph,
+        })
+      : null;
+    return {
+      facetCulture: settlement?.config?.culture || '',
+      facetProsperity: settlement?.economicState?.prosperity || '',
+      facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
+      facetAtWar: warStatus?.atWar === true,
+    };
+  }, [owningCampaign, saveId, settlement]);
   const metadata = useMemo(() => ({
     description,
     imageUrl,
@@ -121,8 +173,11 @@ export default function ShareToGallery({
     tags: tagsInput,
     shareNarrated,
     shareDm,
+    importable,
     memberOverrides,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, memberOverrides]);
+    realmArcSummary,
+    ...facets,
+  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -193,6 +248,8 @@ export default function ShareToGallery({
           gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
           gallery_share_dm: shareDm,
           gallery_share_narrated: shareNarrated,
+          gallery_importable: importable,
+          gallery_member_overrides: memberOverrides,
         });
       } catch { /* non-fatal */ }
     } catch (e) {
@@ -223,6 +280,8 @@ export default function ShareToGallery({
         gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
         gallery_share_dm: shareDm,
         gallery_share_narrated: shareNarrated,
+        gallery_importable: importable,
+        gallery_member_overrides: memberOverrides,
       });
       setSavedDetails(true);
       setTimeout(() => setSavedDetails(false), 1600);
@@ -313,13 +372,30 @@ export default function ShareToGallery({
           </span>
         </span>
       </label>
+      {/* Owner opt-in: allow other users to import (clone) this public dossier. */}
+      <label htmlFor="share-to-gallery-importable" style={{
+        display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
+        padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+      }}>
+        <input
+          id="share-to-gallery-importable"
+          type="checkbox"
+          aria-label="Allow others to import this settlement"
+          checked={importable}
+          onChange={event => setImportable(event.target.checked)}
+          style={{ marginTop: 2, flexShrink: 0 }}
+        />
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.45 }}>
+          <strong style={{ color: INK }}>Allow others to import this settlement</strong> — let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
+        </span>
+      </label>
       {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the
           settlement has no member NPCs. Each member defaults to the settlement's
-          DM-reveal flag; a per-member toggle overrides just that NPC. */}
+          DM-reveal and import flags; a per-member toggle overrides just that NPC. */}
       <GalleryMemberVisibility
         settlement={settlement}
         shareDm={shareDm}
-        importable={false}
+        importable={importable}
         memberOverrides={memberOverrides}
         setMemberOverrides={setMemberOverrides}
       />

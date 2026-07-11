@@ -15,19 +15,22 @@ import {
 } from '../theme.js';
 import {
   activeFilterCount,
-  GOVERNMENT_OPTIONS,
+  CULTURE_OPTIONS,
   human,
   MAGIC_OPTIONS,
-  STABILITY_OPTIONS,
+  PROSPERITY_OPTIONS,
   TERRAIN_OPTIONS,
   TIER_OPTIONS,
 } from './galleryUtils.js';
 
-function SidebarSection({ title, children }) {
+function SidebarSection({ title, count = 0, children }) {
   return (
     <section style={{ display: 'grid', gap: 8 }}>
       <h3 style={{
         margin: 0,
+        display: 'flex',
+        alignItems: 'center',
+        gap: 6,
         color: INK,
         fontFamily: sans,
         fontSize: FS.xs,
@@ -36,6 +39,24 @@ function SidebarSection({ title, children }) {
         letterSpacing: 0,
       }}>
         {title}
+        {count > 0 && (
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: 16,
+            height: 16,
+            padding: '0 5px',
+            borderRadius: 999,
+            background: GOLD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xxs,
+            fontWeight: 950,
+          }}>
+            {count}
+          </span>
+        )}
       </h3>
       {children}
     </section>
@@ -114,23 +135,25 @@ export default function GallerySidebar({ filters, onToggleArray, onToggleBool, o
         </SidebarSection>
       )}
       {!filters.mine && (<>
-      <SidebarSection title="Tier">
+      <SidebarSection title="Tier" count={filters.tier?.length || 0}>
         <FilterChips options={TIER_OPTIONS} value={filters.tier} onToggle={option => onToggleArray('tier', option)} />
       </SidebarSection>
-      <SidebarSection title="Terrain">
+      <SidebarSection title="Terrain" count={filters.terrain?.length || 0}>
         <FilterChips options={TERRAIN_OPTIONS} value={filters.terrain} onToggle={option => onToggleArray('terrain', option)} />
       </SidebarSection>
-      <SidebarSection title="Government">
-        <FilterChips options={GOVERNMENT_OPTIONS} value={filters.governmentType} onToggle={option => onToggleArray('governmentType', option)} />
-      </SidebarSection>
-      <SidebarSection title="Magic">
+      <SidebarSection title="Magic" count={filters.magicLevel?.length || 0}>
         <FilterChips options={MAGIC_OPTIONS} value={filters.magicLevel} onToggle={option => onToggleArray('magicLevel', option)} />
       </SidebarSection>
-      <SidebarSection title="Stability">
-        <FilterChips options={STABILITY_OPTIONS} value={filters.stability} onToggle={option => onToggleArray('stability', option)} />
+      <SidebarSection title="Culture" count={filters.culture?.length || 0}>
+        <FilterChips options={CULTURE_OPTIONS} value={filters.culture} onToggle={option => onToggleArray('culture', option)} />
+      </SidebarSection>
+      <SidebarSection title="Prosperity" count={filters.prosperity?.length || 0}>
+        <FilterChips options={PROSPERITY_OPTIONS} value={filters.prosperity} onToggle={option => onToggleArray('prosperity', option)} />
       </SidebarSection>
       <SidebarSection title="Surface">
         <div style={{ display: 'grid', gap: 8 }}>
+          <ToggleRow checked={filters.importable} label="Importable" onChange={value => onToggleBool('importable', value)} />
+          <ToggleRow checked={filters.hasDeity} label="Has patron deity" onChange={value => onToggleBool('hasDeity', value)} />
           <ToggleRow checked={filters.hasImage} label="Has image" onChange={value => onToggleBool('hasImage', value)} />
           <ToggleRow checked={filters.hasComments} label="Has comments" onChange={value => onToggleBool('hasComments', value)} />
           <ToggleRow checked={filters.curatedOnly} label="Curated only" onChange={value => onToggleBool('curatedOnly', value)} />

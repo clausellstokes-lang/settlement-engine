@@ -55,6 +55,8 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     dossierError,
     voteBusyId,
     reportBusyId,
+    importBusyId,
+    importedSlugs,
     actionError,
     actionNotice,
     loadMore,
@@ -65,6 +67,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     clearFilters,
     voteOn,
     reportOn,
+    importDossier,
     setDossierCommentCount,
   } = useGalleryPageState(routeSlug);
 
@@ -80,9 +83,13 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
         onOpen={openDossier}
         onVote={voteOn}
         onReport={reportOn}
+        onImport={importDossier}
         onCommentCountChange={setDossierCommentCount}
         voteBusy={!!voteBusyId}
         reportBusy={!!reportBusyId}
+        importBusy={!!importBusyId}
+        imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
+        onNavigate={onNavigate}
         auth={auth}
       />
     );
