@@ -331,6 +331,15 @@ button {
    token). */
 .sf-landing-voice { background-color: #f7f0e4; }
 
+/* 02 · The brief — deliberate incompleteness (owner amendment W-L2/1): the
+   mini-dossier's final prose line fades out mid-thought, signalling the rest
+   lives in the dossier the visitor forges themselves. A text mask, not a color
+   (safe over any surface, no contrast trap for the fully-visible portion). */
+.sf-landing-prose-fade {
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, rgba(0, 0, 0, 0.15) 100%);
+  mask-image: linear-gradient(180deg, #000 55%, rgba(0, 0, 0, 0.15) 100%);
+}
+
 /* Skip-to-content link — the first focusable element in the DOM (App.jsx).
    Visually hidden until focused, then slides into the top-left so keyboard / SR
    users can jump past the header/nav straight to <main id="main-content">. */

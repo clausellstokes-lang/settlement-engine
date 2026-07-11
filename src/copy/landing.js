@@ -57,6 +57,10 @@ export const landing = {
   },
 
   // ── 02 · The brief ──────────────────────────────────────────────────────────
+  // Owner amendment W-L2/1: the dossier artifact's CONTENT (town, prose, hooks)
+  // is no longer authored copy — it is FROZEN REAL ENGINE OUTPUT from
+  // src/components/home/landingFixture.js (the Briarhollow/Maera demo copy is
+  // retired). Only connective strings live here.
   brief: {
     waypoint: '02 · The brief',
     h2:      'Read the Summary tab. That’s your session prep.',
@@ -64,41 +68,36 @@ export const landing = {
     library: 'Sign in free to keep every town in your Library, organized by campaign.',
     cta:     'Forge a settlement',
     link:    'Read on — the voice',
-    dossier: {
-      eyebrow:    'River village · Temperate forest',
-      name:       'Briarhollow',
-      population: 'Population 412',
-      tabs:       ['Summary', 'Systems', 'World', 'Notes'],
-      prose:       'Briarhollow sits where the salt road forks to meet the river. Grain moves downriver, timber up, and the garrison eats on the tavern’s contract.',
-      proseItalic: 'The baker owes the miller for three seasons of flour — and has stopped speaking to him entirely.',
-      hooks: [
-        { kind: 'NPC',  tone: 'success', tag: 'derived · factions',      lead: 'Maera Voss, miller', rest: ' — goal: call in the baker’s debt before first frost, publicly.' },
-        { kind: 'Hook', tone: 'warning', tag: 'derived · supply-chain',  text: 'The garrison’s ration contract lapses at week’s end — and the tavern’s bread comes from the baker who owes the mill.' },
-      ],
-      save:     'Save to Library',
-      saveNote: 'free account · keeps every draft',
-    },
+    tabs:    ['Summary', 'Systems', 'World', 'Notes'],
+    population: 'Population {n}',
+    more:    '+{n} more in the dossier',
+    save:     'Save to Library',
+    saveNote: 'free account · keeps every draft',
+    // The one interactive artifact control (owner addition W-L2/5): replays the
+    // fixture's exact seed + config through the SAME forge action as every
+    // other generation — same anon cap, no special path. Determinism, quietly.
+    forgeExact:    'Forge this exact town',
+    deterministic: 'Same seed, same town. Every time.',
   },
 
   // ── 03 · The voice ──────────────────────────────────────────────────────────
+  // RAW receipts + NARRATED prose come from the fixture module: the receipts
+  // are real trace output; the narration is owner-sanctioned stock prose
+  // grounded exclusively in them.
   voice: {
     waypoint: '03 · The voice',
     h2:     'The same facts, in a voice for the table.',
     body:   'The Narrative Layer turns raw simulation into table-ready prose. It never invents facts — everything it needs is already in the brief.',
     rawTag: 'what the engine derived',
-    raw: [
-      'tension: miller–baker debt · 3 seasons unpaid',
-      'leverage: mill monopoly · nearest wheel 1 day’s ride',
-      'trigger: first frost — debt callable',
-      'stakes: tavern bread → garrison rations',
-    ],
     credit:      '1 credit',
-    narrated:    'The baker hasn’t spoken to the miller since midsummer. Three seasons of flour stand between them, and the first frost will call the debt due — publicly, if Maera has her way. The garrison eats on the tavern’s contract; the tavern bakes with borrowed flour. Everyone in Briarhollow can count.',
     cta:         'Narrate',
     pricingLink: 'Credit pricing',
   },
 
   // ── 04 · The Realm ──────────────────────────────────────────────────────────
+  // Why-trace rows, chronicle entries, relationship chips, and map pins come
+  // from the fixture module — real band deltas with real engine causes, real
+  // generated neighbor names. Only connective strings live here.
   realm: {
     waypoint:     '04 · The Realm',
     waypointPill: 'Cartographer',
@@ -107,36 +106,21 @@ export const landing = {
     body2: 'Then advance time. Wars ignite and resolve, faiths rise, prices move — and every change tells you why.',
     cta:   'See Cartographer',
     micro: 'Turns on when you do. The free tier keeps working.',
-    whyTraceTitle: 'Advance time — month 7',
+    whyTraceTitle: 'Advance time — week {week}',
     whyTraceTag:   'why-trace',
     derivedLine:   'Derived, never rolled — every change carries its cause.',
-    deltas: [
-      { axis: 'Economic capacity',    from: 'Steady', to: 'Contested', tone: 'warning', reason: 'Blockade at the salt road; the garrison deployed abroad.' },
-      { axis: 'Faith',                from: 'Waning', to: 'Rising',    tone: 'success', reason: 'The harvest cult wins a second shrine; the river god wanes.' },
-      { axis: 'Criminal opportunity', from: 'Steady', to: 'Abundant',  tone: 'danger',  reason: 'Grain moving off-ledger behind the mill.' },
-    ],
     clockLabel: 'Realm clock',
-    clockValue: 'Month 7, Year 1',
+    clockValue: 'Week {week}, Year 1',
     clockCta:   'Advance time',
-    pins: [
-      { name: 'Highcandle',  dotTone: 'danger',  tag: 'At war',  tagTone: 'danger'  },
-      { name: 'Briarhollow', dotTone: 'gold' },
-      { name: 'Fenwick',     dotTone: 'success', tag: 'Famine', tagTone: 'warning' },
-    ],
     chronicleTitle: 'The Chronicle',
     chronicleTag:   'writes itself',
-    chronicle: [
-      { kind: 'war',      tone: 'war',      month: 'Month 7', text: 'Highcandle’s levy marches on Oldkeep over the disputed iron road.' },
-      { kind: 'faith',    tone: 'faith',    month: 'Month 7', text: 'The harvest cult wins a second shrine in Briarhollow.' },
-      { kind: 'economic', tone: 'economic', month: 'Month 6', text: 'Famine in Fenwick drives grain prices up across the southern reach.' },
-    ],
-    relationships: [
-      { text: 'Briarhollow ⇆ Fenwick · grain for timber', tone: 'neutral' },
-      { text: 'Highcandle ⤬ Oldkeep · the iron road',     tone: 'danger'  },
-    ],
   },
 
   // ── 05 · The commons ────────────────────────────────────────────────────────
+  // Owner amendment W-L2/3: up to FOUR real published gallery settlements render
+  // here (fetched on below-fold mount, ranked by the strongest signal gallery.js
+  // actually tracks); the decorative cards below fill any remaining slots, and a
+  // failed/empty fetch renders all four decorative — zero layout shift.
   commons: {
     waypoint: '05 · The commons',
     // Owner amendment: was 'Towns other DMs have forged.' — softened to not
@@ -145,10 +129,13 @@ export const landing = {
     body: 'Don’t want to configure anything? Walk the Gallery and take a town that’s already lived a little. Admire and share freely; fork one into your own Library with Cartographer.',
     cta:  'Browse the gallery',
     fork: 'Fork',
+    open: 'Open',
+    votes: '{n} votes',
     cards: [
       { name: 'The Drowned Spire', author: 'mistwarden', pop: '412', size: 'City',    scene: 'city',    pos: 'center 30%' },
       { name: 'Ashfall Crossing',  author: 'dm_corvid',  pop: '388', size: 'Town',    scene: 'thorpe',  pos: 'center 55%' },
       { name: 'Greyharbor',        author: 'quiethand',  pop: '291', size: 'Village', scene: 'village', pos: 'center 40%' },
+      { name: 'Saltmere Ford',     author: 'lanternkeep', pop: '203', size: 'Village', scene: 'thorpe',  pos: 'center 20%' },
     ],
   },
 
