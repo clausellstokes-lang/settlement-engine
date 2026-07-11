@@ -1398,3 +1398,69 @@ deferred; several owner decisions surface.
    canons? (re-derive on next open behind the entitlement, or freeze old canons on their old law forever.)
 4. **Canonical objective/faction-type key** — pick `archetype` (9-value) over `category` as the one key for
    faction-type objectives (the round-15 examples map onto archetype cleanly).
+
+---
+
+# PART VII — CONTROL-LAYER VERIFICATION + THE CL-0 PLAN (Fable, 2026-07-11, wf_f37edb68-de4)
+
+Five seams verified (3 structured Opus verifiers + 2 manager-verified directly after degenerate
+structured output). HEADLINE: §11 lands on far MORE existing machinery than the round-17 capture assumed.
+**Today's build already IS "DM-Advanced progression + Routine Autonomy"** — the §11 recommended default.
+
+## VII.1 What verification established
+- **simulationRules is the seam, verbatim.** Flat object: 3 enums + 24 booleans, `normalizeSimulationRules`
+  (simulationRules.js:224 — fail-CLOSED boolean coercion, enum clamps, faith legacy-key lockstep :255).
+  Persists at `campaign.worldState.simulationRules`; normalized on EVERY read/write/kernel-entry
+  (worldState.js:176,277; campaignWorldPulseSlice.js:215-219; pulseKernel.js:229). Mid-advance write guard
+  already exists (slice:205). schemaVersion=1 const, tolerant-reader back-compat (no migration ladder).
+- **PRESETS ALREADY EXIST** — 3 named (quiet_local / realistic_regional=default / dramatic_campaign),
+  `applyPreset` populates the whole draft, and `presetIdForRules` (:214) BACK-DERIVES the preset by
+  structural match — the "Living Realm (modified)" inference is already-built machinery. Grow 3 → 5
+  (§11's Static/Narrative/Living-Realm/Full-Sim/Custom map onto this system).
+- **THE PROPOSAL/APPROVAL SYSTEM ALREADY EXISTS.** Candidates carry per-candidate `applyMode`
+  ('proposal'|'auto'); `worldState.proposals` + `applyWorldPulseProposal`/`dismissWorldPulseProposal`
+  (slice:349,419) + WorldPulsePanel = a live DM approve/dismiss queue. `majorChangesRequireProposal`
+  DEFAULTS TRUE. §11's Political-Autonomy modes map onto EXISTING machinery: dm_only = force-all-proposal;
+  recommendations ≈ dm_only + rationale; routine = TODAY'S DEFAULT (majors→proposal, routine→auto);
+  full = majorChangesRequireProposal=false. CL-3's "approval queue" is an EXTENSION, not greenfield.
+- **INITIATION is already per-domain** for the 9 candidate domains — candidateEvents.js:201-258 wraps each
+  domain's emission in `if (rules.<domain>Enabled)`; off ⇒ zero candidates ⇒ no rng ⇒ byte-identical.
+- **The AUTHORITY axis is global + INCONSISTENT** — the flag is honored by tier/resource families
+  (tierResourceDynamics.js:157,373) but **4 candidate families escalate on severity ALONE and never consult
+  it** (changeAuthorityPolicy.js:267 documents this as an unresolved decision). Tri-state work = make
+  authority PER-DOMAIN + make all families consult one policy — with legacy defaults reproducing today's
+  behavior EXACTLY per family.
+- **WAR CONFLATES initiate+resolve under one boolean** — warLayerEnabled gates evaluateWarLayer
+  (pulseKernel.js:530-537) which both OPENS sieges and RESOLVES them, INLINE, outside the candidate/proposal
+  machinery; the 8 war sub-flags are resolution-only modifiers (warDeployment.js:1173-1185). A war DM-Driven
+  tri-state requires a REAL SPLIT REFACTOR (route war-initiation through the proposal path) — deferred past
+  CL-0; the war row ships Off/Autonomous only, with DM-Driven arriving with the war-layer rework.
+- **PROGRESSION is 100% DM-triggered today** (all advance call sites are UI paths; no timers) — today IS
+  DM-Advanced. FROZEN = a cheap store guard + disabled UI. Living/Autonomous = the one net-new mechanism
+  (capped deterministic advance-on-open catch-up; owner decision; pin-now discipline makes it safe).
+- **RECEIPTS: the exact procedure is verified.** Emit at the single choke point updateCampaignSimulationRules
+  (slice:219): append a `kind:'ruleset_change'` entry via the public appendWizardNewsEntries (normalizeEntry
+  needs no change — kind is free-form) + fold a record into a NEW conditionally-materialized
+  `worldState.rulesetLog` (strip@~241 / clone@~249 / spread@~343 in worldState.js). ONE design ruling needed:
+  deepCloneConditionalLedger is OBJECT-ONLY (rejects arrays) ⇒ **rulesetLog is an OBJECT keyed by change id**
+  (`rc_<tick>_<seq>`), not an array. RULING MADE — object-keyed.
+- **§11 prose correction:** the CL-0 aspatial profile does NOT live "under the spatial-canon marker" — rules
+  already live at worldState.simulationRules (campaign-scoped, aspatial). Only the SPATIAL axes' digest
+  versions (geometry/cost-law/overlay) ride the spatial-canon marker. The rulesetLog is a plain conditional
+  ledger. (Scoping fix to §11's "canonical + versioned" paragraph.)
+- **Cleanup found:** LivingWorldGates.jsx still reads/writes the LEGACY religionDynamicsEnabled key directly —
+  migrate it to the canonical path in CL-0.
+
+## VII.2 The CL-0 wave (final — brief at docs/briefs/CL0_CONTROL_LAYER_BRIEF.md)
+Aspatial control-layer core; ships independent of any spatial wave; value at every tier. Contents:
+profile extension (worldProgression/politicalAutonomy/infoMode/spatialMode/travelMode enums + per-domain
+tri-states derived from the 24 booleans; absent-key = legacy defaults, VIRTUAL, no write), pure
+`validateSimulationProfile` (versioned, coercion-receipted), per-domain AUTHORITY plumbing for the candidate
+domains (+ fix the 4 rogue families to consult policy, legacy-defaults byte-exact), FROZEN progression guard,
+politicalAutonomy modes on the existing proposal machinery, presets 3→5, dialog v2 (preset picker prominent +
+axis cards + tri-state rows + fiction-not-internals copy + dependency gating), rulesetLog + ruleset_change
+receipts, LivingWorldGates legacy-key cleanup. DEFERRED from CL-0: war DM-Driven (needs the split refactor),
+Living/Autonomous progression (owner decision + catch-up), all spatial/travel/info modes beyond today's
+values (cards render, locked to available modes). Gates: goldens byte-identical (virtual-default discipline),
+legacy-normalization byte-exactness test PER FLAG, settings-history replay invariant, the usual suite.
+SEQUENCING (manager): after W2 closes the reunification; CL-0 is then the first brick of Phase 5.5.
