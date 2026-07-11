@@ -20,7 +20,9 @@ import { evaluateTradeWar } from './tradeWar.js';
 import { advanceReligionStates } from './religiousContest.js';
 import { realmPietyMult } from './piety.js';
 import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
-import { advanceMartialReadiness } from './martialReadiness.js';
+import { advanceMartialReadiness, buildThreatByCid } from './martialReadiness.js';
+import { advanceConquestFeeds } from './conquestFeeds.js';
+import { advanceMercenaryMarket } from './mercenaryMarket.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
@@ -1097,6 +1099,57 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = { ...memoryState, martialReadiness: nextMartialByCid };
     } else if (memoryState.martialReadiness !== undefined) {
       const rest = { ...memoryState }; delete rest.martialReadiness; memoryState = rest;
+    }
+  }
+  // W-C2 CONQUEST FEEDS — READ-LAST/WRITE-NEXT (post-apply), gated on the war layer (or a
+  // lingering ledger to decay). A CONQUEST this tick seeds a FRESH occupation
+  // (memoryState.occupations[takenId].sinceTick === tick) whose occupierId is the VICTOR;
+  // each pays the victor a LOOT pulse (always) and a CAPTIVE pulse (only where a standing
+  // slave-market survives the conscience gate). The ledger DECAYS every tick and drops to
+  // absent when the pulses fade — a world that stops conquering returns to byte-neutral.
+  if (simulationRules.warLayerEnabled || memoryState.conquestFeeds !== undefined) {
+    const occLedger = memoryState.occupations || {};
+    /** @type {Array<{ victorId: string, takenId: string, kind: string, severity: number }>} */
+    const freshConquests = [];
+    for (const o of war.outcomes || []) {
+      if (o?.candidateType !== 'conquest') continue;
+      const takenId = String(o.targetSaveId);
+      const occ = occLedger[takenId];
+      // A dismissed / deferred conquest never seeds an occupation ⇒ no feed (the occupation
+      // seed already excludes it). Only THIS tick's freshly-seeded occupation qualifies.
+      if (!occ || occ.occupierId == null || Number(occ.sinceTick) !== Number(worldState.tick)) continue;
+      const kind = Array.isArray(o.populationDeltas) && o.populationDeltas.length ? 'sack' : 'capture';
+      freshConquests.push({ victorId: String(occ.occupierId), takenId, kind, severity: Number(o.severity) || 0.6 });
+    }
+    const conquest = advanceConquestFeeds({
+      snapshot: pantheonSeatSnapshot || postTimeSnapshot,
+      priorLedger: memoryState.conquestFeeds || null,
+      conquests: freshConquests,
+    });
+    if (conquest.conquestFeedsByCid && Object.keys(conquest.conquestFeedsByCid).length) {
+      memoryState = { ...memoryState, conquestFeeds: conquest.conquestFeedsByCid };
+    } else if (memoryState.conquestFeeds !== undefined) {
+      const rest = { ...memoryState }; delete rest.conquestFeeds; memoryState = rest;
+    }
+  }
+  // W-C2 MERCENARY / ADVENTURER-GUILD COMPENSATING MARKET — READ-LAST/WRITE-NEXT, gated on
+  // the war layer (or a lingering ledger to clear). Where a settlement's war EXPOSURE
+  // (threat index + this-tick engagement) exceeds its native CAPABILITY (readiness + supply
+  // quality) AND it has local mercenary/adventurer-guild institutions, a rented-force market
+  // activates — the supplement/upkeep-cost/fidelity-penalty legs the next tick's deployment
+  // and economy seams read. Materializes ONLY where a market is active ⇒ byte-neutral otherwise.
+  if (simulationRules.warLayerEnabled || memoryState.mercenaryMarket !== undefined) {
+    const mercSnapshot = pantheonSeatSnapshot || postTimeSnapshot;
+    const merc = advanceMercenaryMarket({
+      snapshot: mercSnapshot,
+      worldState: memoryState,
+      threatByCid: buildThreatByCid(mercSnapshot, memoryState),
+      martialByCid: nextMartialByCid,
+    });
+    if (merc.mercenaryMarketByCid && Object.keys(merc.mercenaryMarketByCid).length) {
+      memoryState = { ...memoryState, mercenaryMarket: merc.mercenaryMarketByCid };
+    } else if (memoryState.mercenaryMarket !== undefined) {
+      const rest = { ...memoryState }; delete rest.mercenaryMarket; memoryState = rest;
     }
   }
   // The dossier stops lying: project the per-faction live state

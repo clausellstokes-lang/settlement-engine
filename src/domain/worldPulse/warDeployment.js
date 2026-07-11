@@ -55,6 +55,12 @@ import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 // never invincibility) + a `readiness` stamp the attrition kernel reads for slower decay.
 // readinessOf 0 (no martial record) ⇒ no lift, no stamp ⇒ byte-identical.
 import { readinessOf, effectiveStatMult, rustOf } from './martialReadiness.js';
+// W-C2 rented force: a settlement meeting war exposure through the mercenary market gets a
+// bounded readiness SUPPLEMENT (force it didn't train) at the deploy seam and a hired-steel
+// FIDELITY PENALTY at the war-decision reads (folded into the rust arg — it composes with
+// chaosPull+rust under fidelityNoise's TOTAL_MAX cap, never forking the geometry). Both 0
+// when no active market ⇒ byte-identical.
+import { mercSupplementOf, mercFidelityPenaltyOf } from './mercenaryMarket.js';
 import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
@@ -1091,6 +1097,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // Copy the NON-REVERTING war-exhaustion scar ledger (read-last/write-next).
   /** @type {Record<string, number>} */
   const warExhaustion = { ...(worldState?.warExhaustion || {}) };
+  // W-C2: the rented-force market ledger (written last tick). Absent ⇒ every reader 0 ⇒
+  // byte-identical. Read at the war-decision (fidelity) + deploy (supplement) seams below.
+  const mercLedger = worldState?.mercenaryMarket || null;
 
   const settlementNameFor = (/** @type {any} */ id) => {
     const item = snapshot?.byId?.get?.(String(id));
@@ -1219,7 +1228,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // fidelity pull — 0 (⇒ the classify inputs stay TRUE, byte-identical) unless it
     // carries a chaotic-devout patron with a projected piety record.
     const attackerFidelity = besiegers.length ? chaosPullOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) : 0;
-    const attackerRust = besiegers.length ? rustOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) : 0;
+    // W-C2: hired steel reads the risk calculator worse than sworn steel — the mercenary
+    // fidelity penalty is ADDED to the rust magnitude (both are institutional-inexperience
+    // errors; fidelityFactor sums them under TOTAL_MAX). 0 when no active market ⇒ byte-identical.
+    const attackerRust = besiegers.length
+      ? rustOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) + mercFidelityPenaltyOf(mercLedger, besiegers[0])
+      : 0;
     const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
@@ -1532,9 +1546,12 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       tick,
       logisticsBurden: logisticsBurdenFor(graph, fromId, chosenTarget),
       role: 'siege',
-      readiness: readinessOf(fromSettlement),
+      // W-C2: a settlement short of its exposure BUYS readiness through the mercenary market
+      // (bounded supplement — force it didn't train). 0 when no active market ⇒ byte-identical.
+      readiness: clamp01(readinessOf(fromSettlement) + mercSupplementOf(mercLedger, fromId)),
       // W-C1 item 1a: the sizing DECISION — a rusty realm over/under-commits (rust 0 ⇒ no fork).
-      sizing: { rng, cid: String(fromId), rust: rustOf(fromSettlement) },
+      // W-C2: hired steel adds its fidelity penalty to the sizing rust (mis-sized commitment).
+      sizing: { rng, cid: String(fromId), rust: rustOf(fromSettlement) + mercFidelityPenaltyOf(mercLedger, fromId) },
       // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
       qualityMult: qualityMultFor(fromId),
     });

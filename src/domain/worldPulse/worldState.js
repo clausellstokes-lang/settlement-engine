@@ -230,12 +230,23 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   // a patron, so a deity-free / war-free campaign carries NO key (byte-identical under
   // the dormancy oracle). Stripped here, re-added conditionally below.
   if ('martialReadiness' in shallowRaw) delete shallowRaw.martialReadiness;
+  // conquestFeeds — CONDITIONAL (W-C2): the per-victor DECAYING loot/captive prosperity
+  // pulse ledger. ABSENT until the first conquest feeds a victor (a no-war / layer-off
+  // campaign carries NO key ⇒ byte-identical under the dormancy oracle); the pulses decay
+  // to nothing and the key drops back to absent. Stripped here, re-added conditionally.
+  if ('conquestFeeds' in shallowRaw) delete shallowRaw.conquestFeeds;
+  // mercenaryMarket — CONDITIONAL (W-C2): the per-settlement rented-force market ledger.
+  // ABSENT until war-shortfall demand meets local mercenary supply (a no-war / no-shortfall
+  // campaign carries NO key ⇒ byte-identical), materialized only where a market is active.
+  if ('mercenaryMarket' in shallowRaw) delete shallowRaw.mercenaryMarket;
   const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
   const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
   const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
   const clonedReligionStates = deepCloneConditionalLedger(raw?.religionStates);
   const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
   const clonedMartialReadiness = deepCloneConditionalLedger(raw?.martialReadiness);
+  const clonedConquestFeeds = deepCloneConditionalLedger(raw?.conquestFeeds);
+  const clonedMercenaryMarket = deepCloneConditionalLedger(raw?.mercenaryMarket);
   return {
     ...base,
     ...shallowRaw,
@@ -320,6 +331,16 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // oracle), DEEP-cloned when present so a pre-tick snapshot never aliases live
     // readiness across ticks (read-last/write-next).
     ...(clonedMartialReadiness !== undefined ? { martialReadiness: clonedMartialReadiness } : {}),
+    // conquestFeeds — CONDITIONAL materialization (W-C2), identical discipline to
+    // martialReadiness: the per-victor { loot, captive, causes } decaying pulse ledger.
+    // ABSENT until the first conquest feeds a victor (byte-identical dormant), DEEP-cloned
+    // when present so a pre-tick snapshot never aliases live pulse state (read-last/write-next).
+    ...(clonedConquestFeeds !== undefined ? { conquestFeeds: clonedConquestFeeds } : {}),
+    // mercenaryMarket — CONDITIONAL materialization (W-C2), same discipline: the per-
+    // settlement { shortfall, presence, activity, supplement, prosperityCost,
+    // fidelityPenalty, causes } rented-force ledger. ABSENT until shortfall demand meets
+    // local mercenary supply (byte-identical dormant), DEEP-cloned when present.
+    ...(clonedMercenaryMarket !== undefined ? { mercenaryMarket: clonedMercenaryMarket } : {}),
   };
 }
 

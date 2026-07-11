@@ -46,6 +46,12 @@ import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './
 import { institutionMoralLean, institutionMartialLean } from './moralMartialLean.js';
 import { readinessOf } from './martialReadiness.js';
 import { martialEmergenceTilt } from './moralInstitutionPressure.js';
+// W-C2: a fresh conquest's loot/captive windfall LIFTS the victor's economy-health
+// composite (a bounded, decaying market boom ⇒ likelier builds) and a rented-force upkeep
+// drain LOWERS it (guns-vs-butter). Both read from worldState ledgers written last tick
+// (read-last/write-next); both 0 when absent ⇒ byte-identical for a no-conquest / no-merc world.
+import { conquestProsperityFor } from './conquestFeeds.js';
+import { mercProsperityCostOf } from './mercenaryMarket.js';
 
 const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
@@ -590,12 +596,23 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
   const candidates = [];
   const multiplier = intensityMultiplier(rules);
+  // W-C2 economy pulses (read-last/write-next): the victor's conquest-feed prosperity boom
+  // and the rented-force upkeep drain. Absent ledger ⇒ 0 everywhere ⇒ byte-identical.
+  const conquestLedger = worldState?.conquestFeeds || null;
+  const mercLedger = worldState?.mercenaryMarket || null;
 
   for (const item of snapshot?.settlements || []) {
     const settlement = item.settlement || {};
     const previous = settlementTickStates[item.id] || {};
     const prior = previous.economyDrift || null;
-    const health = economyHealthScore(item.causal?.scores);
+    // W-C2: fold the conquest-loot/captive windfall (+) and mercenary upkeep drain (−) into
+    // the economy-health composite the build/close gate reads. Both 0 when their ledgers are
+    // absent ⇒ health is exactly economyHealthScore ⇒ byte-identical.
+    const prosperityPulse = conquestProsperityFor(conquestLedger, item.id);
+    const mercCost = mercProsperityCostOf(mercLedger, item.id);
+    const health = (prosperityPulse || mercCost)
+      ? clamp01(economyHealthScore(item.causal?.scores) + prosperityPulse - mercCost)
+      : economyHealthScore(item.causal?.scores);
     const direction = classifyEconomyDirection(health);
 
     let drift;
