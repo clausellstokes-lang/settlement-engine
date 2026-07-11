@@ -108,6 +108,13 @@ function authPayload(user, session, profile, extra = {}) {
 async function supabaseSignUp(email, password) {
   const { data, error } = await supabase.auth.signUp({ email, password });
   if (error) throw error;
+  // Supabase returns an OBFUSCATED user with an EMPTY identities array when the
+  // email already belongs to an account (it declines to leak existence via an
+  // error). Surface that so the UI can steer the user to sign-in / reset instead
+  // of "succeeding" into a dead verification limbo. (RP-1 item 5.)
+  if (data?.user && Array.isArray(data.user.identities) && data.user.identities.length === 0) {
+    return { existingAccount: true };
+  }
   const profile = await fetchProfileAuth(data.user);
   return authPayload(data.user, data.session, profile, {
     needsVerification: !data.session, // email confirmation required

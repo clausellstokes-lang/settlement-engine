@@ -58,6 +58,7 @@ export default function AuthPanel({
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // sign-up + password path only
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
@@ -72,6 +73,7 @@ export default function AuthPanel({
     setError(null);
     setMessage(null);
     setMoreOpen(false);
+    setConfirmPassword('');
     if (onModeChange) onModeChange(next);
     else setMode(next);
   };
@@ -118,11 +120,19 @@ export default function AuthPanel({
   const handleSignUp = async () => {
     if (!email.trim() || !password) return;
     if (password.length < 6) { setError('Password must be at least 6 characters'); return; }
+    // Confirm-password mismatch guard: a typo'd password would otherwise create
+    // an account the user can never sign back into. Block submit and say so.
+    if (password !== confirmPassword) { setError(t('auth.error.passwordMismatch')); return; }
     setError(null);
     setLoading(true);
     try {
-      const { needsVerification } = await authSignUp(email.trim(), password);
-      if (needsVerification) {
+      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password);
+      if (existingAccount) {
+        // Supabase reports a signup for an already-registered email with empty
+        // identities and no error / no email — the verify screen would never
+        // resolve. Point the user at sign-in / reset instead of a dead end.
+        setError('That email may already have an account. Try signing in, or reset your password.');
+      } else if (needsVerification) {
         setMode('verify'); // inline "check your inbox" — no route change
       } else {
         onAuthed?.();
@@ -235,9 +245,12 @@ export default function AuthPanel({
         </div>
       )}
 
-      <Input type="email" placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
+      <Input type="email" label={t('auth.placeholder.email')} placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
       {authMethod === 'password' && (
-        <Input type="password" placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+        <Input type="password" label={t('auth.placeholder.password')} placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+      )}
+      {authMethod === 'password' && mode === 'signup' && (
+        <Input type="password" label={t('auth.placeholder.confirmPassword')} placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
       )}
 
       {authMethod === 'password' && mode === 'signin' && (
@@ -273,7 +286,7 @@ export default function AuthPanel({
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); }}
+            onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); setConfirmPassword(''); }}
             style={{ justifyContent: 'flex-start' }}
           >
             {authMethod === 'magic' ? t('auth.button.usePassword') : t('auth.button.useMagic')}

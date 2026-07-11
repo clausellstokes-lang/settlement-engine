@@ -14,7 +14,7 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
-import { ConfirmDialog } from './primitives/Dialog.jsx';
+import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -254,6 +254,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     if (!readOnly && trackTabExplored) trackTabExplored();
   };
   const [pendingAiAction, setPendingAiAction] = useState(null);
+  // Regenerating the narrative discards the current prose (and spends credits
+  // when configured). When prose already exists we gate the destructive run
+  // behind a discard-confirm; first generation has nothing to lose, so the
+  // friction only applies when something is actually at risk.
+  const [pendingRegenerate, setPendingRegenerate] = useState(false);
   const [localAiLoading, setLocalAiLoading] = useState(false);
   const [localAiError, setLocalAiError]     = useState(null);
   const [aiProgress, setAiProgress] = useState('');
@@ -308,7 +313,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         const result = await runTemplateNarrative(rawSettlement, msg => setAiProgress(msg));
         setAiSettlement?.(result);
       } catch (e) {
-        setLocalAiError(e.message);
+        // Never surface a raw transport/engine message on the trust surface;
+        // log it and show GM-facing domain language instead.
+        console.error('[OutputContainer] local narrative generation failed', e);
+        setLocalAiError(toFriendlyAiError(e));
       } finally {
         setLocalAiLoading(false);
         setAiProgress('');
@@ -330,7 +338,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     executeAiAction(kind);
   };
 
-  const runNarrativeLayer = () => requestAiAction('narrative');
+  // A full narrative already exists → regenerate is destructive, so gate the
+  // discard-and-spend behind a confirm. aiIsFullSettlement guards the
+  // compass-only partial (public shareDm dossier never trips it); first
+  // generation (no prose yet) proceeds straight through.
+  const runNarrativeLayer = () => (aiIsFullSettlement ? setPendingRegenerate(true) : requestAiAction('narrative'));
+  const confirmRegenerate = () => { setPendingRegenerate(false); requestAiAction('narrative'); };
 
   // Pin props for the NPCs tab — only surface when we have a real save to
   // persist onto AND we're not in read-only mode. `pinnedIds` is a Set of
@@ -868,15 +881,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           />
         </Suspense>
       )}
-      <ConfirmDialog
-        open={!!pendingAiAction}
-        tone="warning"
-        title="Send campaign context?"
-        body="Your Campaign Context from Notes will be woven into the narration as established lore. Settlement facts still take precedence. DM Notes stay private and are not included."
-        confirmLabel="Send context"
-        cancelLabel="Cancel"
-        onConfirm={confirmGuidedAiAction}
-        onCancel={() => setPendingAiAction(null)}
+      <DossierAiConfirms
+        pendingAiAction={pendingAiAction} onConfirmContext={confirmGuidedAiAction} onCancelContext={() => setPendingAiAction(null)}
+        pendingRegenerate={pendingRegenerate} onConfirmRegenerate={confirmRegenerate} onCancelRegenerate={() => setPendingRegenerate(false)}
+        regenerateBody={`This discards the current narrative prose and generates a new one${isConfigured ? `, spending ${getCost('narrative')} credits` : ''}. The raw simulation is unchanged.`}
       />
     </>
   );

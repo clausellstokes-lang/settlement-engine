@@ -13,9 +13,12 @@
  *               state is observable via WorldMap's local saving flag)
  *
  * The "dirty" state derives from comparing the live mapState to the
- * campaign's persisted mapState (deep-equal on placements/labels). A
- * cheap fingerprint check (Object.keys lengths + JSON length) is good
- * enough; the user rarely cares about precise diff.
+ * campaign's persisted mapState via a CONTENT-AWARE fingerprint. An earlier
+ * count-only key (placement ids + layer counts) left the chip reading "Saved"
+ * while the map was actually dirty: a drag-move (placement x/y changes, id set
+ * unchanged) and a rename (label/marker text changes, count unchanged) both
+ * slipped past it. The fingerprint now folds in placement coordinates and
+ * annotation content, so any editable mutation flips the chip to "dirty".
  *
  * Self-gated on activeCampaignId. When there is no active campaign, the
  * chip renders nothing — the save target is undefined, so a save-status
@@ -46,15 +49,27 @@ function formatRelative(savedAt) {
   return `${d}d ago`;
 }
 
-/** Cheap fingerprint of the parts of mapState the user can edit. Used
- *  to spot "dirty" without a deep equality on every render. */
-function fingerprint(s) {
-  if (!s) return '';
-  const placements = Object.keys(s.placements || {}).sort().join(',');
-  const labelCount = (s.labels?.length || 0);
-  const markerCount = (s.markers?.length || 0);
-  const forestCount = (s.forests?.length || 0);
-  return `${placements}|${labelCount}|${markerCount}|${forestCount}`;
+/** Content-aware fingerprint of the parts of mapState the user can edit. Folds
+ *  in placement coordinates/ids AND annotation content (label/marker/forest
+ *  geometry + text), so a drag-move or a rename flips it — a count-only key
+ *  caught neither and left the chip stuck on "Saved" over a dirty map. Cheap
+ *  enough to run on each render without a deep equality. */
+function fingerprint(m) {
+  const s = m || {};
+  const placements = Object.entries(s.placements || {})
+    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+    .map(([k, p]) => `${k}:${p?.x},${p?.y},${p?.cellId ?? ''},${p?.settlementId ?? ''}`)
+    .join(',');
+  const labels = (s.labels || [])
+    .map(l => `${l?.id}:${l?.x},${l?.y},${l?.rotation ?? 0},${l?.fontSize ?? ''},${l?.color ?? ''},${l?.fontFamily ?? ''},${l?.text ?? ''}`)
+    .join(';');
+  const markers = (s.markers || [])
+    .map(mk => `${mk?.id}:${mk?.x},${mk?.y},${mk?.icon ?? ''},${mk?.color ?? ''},${mk?.title ?? ''},${mk?.note ?? ''}`)
+    .join(';');
+  const forests = (s.forests || [])
+    .map(f => `${f?.id}:${f?.x},${f?.y},${f?.radius ?? ''},${f?.density ?? ''},${f?.treeStyle ?? ''}`)
+    .join(';');
+  return `${placements}|${labels}|${markers}|${forests}|${s.customBackdrop?.imageUrl || ''}`;
 }
 
 export default function AutoSaveChip({ saving = false }) {

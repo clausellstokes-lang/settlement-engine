@@ -6,12 +6,15 @@
  * controls from one source. No logic lives here — just inputs, buttons,
  * alerts, the OAuth button + brand glyphs, and the page shell chrome.
  */
-import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon } from 'lucide-react';
+import { useState, useId } from 'react';
+import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
   SP, R, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
+import IconButton from '../primitives/IconButton.jsx';
+import { t } from '../../copy/index.js';
 
 // ── OAuth brand glyphs ──────────────────────────────────────────────────────
 // Inline SVG (vs. a brand-icon package) to control bundle size — each glyph
@@ -96,23 +99,79 @@ export function OrDivider() {
   );
 }
 
-export function Input({ type = 'text', placeholder, value, onChange, onKeyDown }) {
-  return (
+export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, label }) {
+  // Password fields get an in-field show/hide toggle so the user can verify what
+  // they typed (a real a11y + typo-safety win, load-bearing for the confirm-
+  // password field). The toggle is a keyboard-operable IconButton (native
+  // <button>, aria-pressed + aria-label from the copy registry) at the 36px
+  // target, without changing the Input prop API its call sites depend on.
+  const [reveal, setReveal] = useState(false);
+  const isPassword = type === 'password';
+  const effectiveType = isPassword && reveal ? 'text' : type;
+  // Stable id for a VISIBLE, persistent label (a <span> wired via
+  // aria-labelledby) when `label` is given — this replaces the
+  // placeholder-as-only-name anti-pattern where the sighted name vanished the
+  // instant the user typed. aria-label stays as the fallback (so call sites
+  // without a `label` render byte-identically); when a visible label exists
+  // aria-labelledby takes precedence per ARIA. A <span> + labelledby (not a
+  // <label> element) avoids the password toggle tripping a <label>'s
+  // focus-the-input default.
+  const labelId = useId();
+
+  const field = (
     <input
-      type={type}
+      type={effectiveType}
       placeholder={placeholder}
       aria-label={placeholder}
+      {...(label ? { 'aria-labelledby': labelId } : {})}
       value={value}
       onChange={e => onChange(e.target.value)}
       onKeyDown={onKeyDown}
       style={{
-        width: '100%', padding: `${SP.md}px ${SP.lg - 2}px`,
+        width: '100%',
+        // Leave room for the trailing toggle on password fields so the text
+        // never runs under it.
+        padding: isPassword
+          ? `${SP.md}px 44px ${SP.md}px ${SP.lg - 2}px`
+          : `${SP.md}px ${SP.lg - 2}px`,
         border: `1px solid ${BORDER}`, borderRadius: R.lg,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
       }}
     />
+  );
+
+  const control = !isPassword ? field : (
+    <div style={{ position: 'relative' }}>
+      {field}
+      <div style={{ position: 'absolute', top: '50%', right: SP.xs, transform: 'translateY(-50%)' }}>
+        <IconButton
+          Icon={reveal ? EyeOff : Eye}
+          label={reveal ? t('auth.password.hide') : t('auth.password.show')}
+          tone="ghost"
+          size="lg"
+          pressed={reveal}
+          onClick={() => setReveal(r => !r)}
+        />
+      </div>
+    </div>
+  );
+
+  // No label → the bare control (aria-label carries the name, byte-identical to
+  // before). With a label, render it visibly above the control as a <span>
+  // wired via aria-labelledby so the name persists after the placeholder clears.
+  if (!label) return control;
+  return (
+    <div>
+      <span id={labelId} style={{
+        display: 'block', marginBottom: SP.xs,
+        fontSize: FS.sm, fontWeight: 700, color: SECOND, fontFamily: sans,
+      }}>
+        {label}
+      </span>
+      {control}
+    </div>
   );
 }
 

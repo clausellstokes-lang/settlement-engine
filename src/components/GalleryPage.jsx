@@ -6,6 +6,7 @@
  */
 
 import { useState } from 'react';
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
@@ -72,61 +73,83 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
   } = useGalleryPageState(routeSlug);
 
   if (activeSlug) {
+    // Resilience: a public dossier is third-party, server-projected data — a
+    // malformed gallery payload (bad chronicle, missing fields) must degrade to
+    // a recoverable in-place fallback, not blank the whole app. resetKey is the
+    // slug so opening a different dossier clears a stale error.
     return (
-      <GalleryDetail
-        dossier={dossier}
-        loading={dossierLoading}
-        error={dossierError}
-        actionError={actionError}
-        actionNotice={actionNotice}
-        onBack={backToList}
-        onOpen={openDossier}
-        onVote={voteOn}
-        onReport={reportOn}
-        onImport={importDossier}
-        onCommentCountChange={setDossierCommentCount}
-        voteBusy={!!voteBusyId}
-        reportBusy={!!reportBusyId}
-        importBusy={!!importBusyId}
-        imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
-        onNavigate={onNavigate}
-        auth={auth}
-      />
+      <FeatureErrorBoundary
+        label="GalleryPage.detail"
+        kind="react.render.gallery"
+        fallbackTitle="This gallery dossier could not be displayed."
+        resetKeys={[activeSlug]}
+      >
+        <GalleryDetail
+          dossier={dossier}
+          loading={dossierLoading}
+          error={dossierError}
+          actionError={actionError}
+          actionNotice={actionNotice}
+          onBack={backToList}
+          onOpen={openDossier}
+          onVote={voteOn}
+          onReport={reportOn}
+          onImport={importDossier}
+          onCommentCountChange={setDossierCommentCount}
+          voteBusy={!!voteBusyId}
+          reportBusy={!!reportBusyId}
+          importBusy={!!importBusyId}
+          imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
+          onNavigate={onNavigate}
+          auth={auth}
+        />
+      </FeatureErrorBoundary>
     );
   }
 
   return (
     <>
       <GalleryTabs tab={tab} setTab={setTab} />
-      {tab === 'maps' ? (
-        <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
-          <GalleryMaps onNavigate={onNavigate} />
-        </div>
-      ) : (
-        <GalleryList
-          items={items}
-          total={total}
-          hasMore={hasMore}
-          listLoading={listLoading}
-          listError={listError}
-          actionError={actionError}
-          actionNotice={actionNotice}
-          sort={sort}
-          setSort={setSort}
-          search={search}
-          setSearch={setSearch}
-          filters={filters}
-          voteBusyId={voteBusyId}
-          loadMore={loadMore}
-          openDossier={openDossier}
-          toggleArrayFilter={toggleArrayFilter}
-          toggleBoolFilter={toggleBoolFilter}
-          clearFilters={clearFilters}
-          voteOn={voteOn}
-          onNavigate={onNavigate}
-          isSignedIn={!!auth?.user}
-        />
-      )}
+      {/* Resilience: the browsing list + the maps grid render server-projected
+          community payloads. A throw in either degrades to a recoverable
+          in-place fallback rather than a full-app white screen. resetKey is the
+          active tab so toggling tabs clears a stale error. */}
+      <FeatureErrorBoundary
+        label="GalleryPage.list"
+        kind="react.render.gallery"
+        fallbackTitle="The gallery could not be displayed."
+        resetKeys={[tab]}
+      >
+        {tab === 'maps' ? (
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
+            <GalleryMaps onNavigate={onNavigate} />
+          </div>
+        ) : (
+          <GalleryList
+            items={items}
+            total={total}
+            hasMore={hasMore}
+            listLoading={listLoading}
+            listError={listError}
+            actionError={actionError}
+            actionNotice={actionNotice}
+            sort={sort}
+            setSort={setSort}
+            search={search}
+            setSearch={setSearch}
+            filters={filters}
+            voteBusyId={voteBusyId}
+            loadMore={loadMore}
+            openDossier={openDossier}
+            toggleArrayFilter={toggleArrayFilter}
+            toggleBoolFilter={toggleBoolFilter}
+            clearFilters={clearFilters}
+            voteOn={voteOn}
+            onNavigate={onNavigate}
+            isSignedIn={!!auth?.user}
+          />
+        )}
+      </FeatureErrorBoundary>
     </>
   );
 }

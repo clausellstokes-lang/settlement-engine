@@ -290,7 +290,7 @@ export const createAuthSlice = (set, get) => ({
       } else {
         set(state => { state.auth.loading = false; });
       }
-      return { needsVerification: result.needsVerification };
+      return { needsVerification: result.needsVerification, existingAccount: result.existingAccount };
     } catch (e) {
       set(state => { state.auth.loading = false; state.auth.error = e.message; });
       throw e;
