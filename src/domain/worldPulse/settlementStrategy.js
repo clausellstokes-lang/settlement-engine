@@ -52,9 +52,13 @@ import { computeAggressiveness } from './disposition.js';
 import { softmaxWeights, stableSampleByWeight, clamp01, hash01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
+import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
+import { rustOf } from './martialReadiness.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+/** @typedef {{ fork?: (key: string) => { random: () => number } }|null} RngLike */
 
 // The hostile/adversarial axis a settlement can act on (besiege / escalate).
 const HOSTILE_TYPES = new Set(['hostile', 'cold_war', 'rival']);
@@ -130,6 +134,25 @@ function economicExhaustion(item) {
   const cap = item?.causal?.scores?.economic_capacity;
   if (!Number.isFinite(cap)) return 0;
   return clamp01(1 - cap / 100);
+}
+
+/**
+ * The PERCEIVED war-bankruptcy at the peace threshold (W-C1 item 1b). The sue-for-peace
+ * decision reads its own economic exhaustion (war bankruptcy) through the SAME alignment-
+ * conditioned fidelity noise as the war-entry siege classify: a lawful/seasoned realm
+ * reads the calculator TRUE, a chaotic-devout one mis-reads, and strategic RUST worsens
+ * everyone — so rust/chaos yield a DELAYED or PREMATURE suit. The per-decision fork is
+ * seeded (site `sue_for_peace`, key `peace_threshold`) ⇒ replay-identical, and returns the
+ * TRUE exhaustion (factor 1, NO rng forked) when chaosPull 0 AND rust 0 — every deity-free /
+ * lawful / no-martial-record actor is byte-identical. Pure given the injected rng.
+ * @param {{ exhaustion: number, rng: RngLike, tick: number, sId: string|number, chaosPull: number, rust: number }} args
+ * @returns {number}
+ */
+function perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust }) {
+  if (!(chaosPull > 0) && !(rust > 0)) return exhaustion;   // true reading ⇒ byte-identical (no fork)
+  return clamp01(exhaustion * fidelityFactor({
+    rng, site: 'sue_for_peace', tick, cid: String(sId), decisionKey: 'peace_threshold', chaosPull, rust,
+  }));
 }
 
 /**
@@ -246,9 +269,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * scored from aggressiveness, strength vs targets, current war/siege state, vassal
  * status, and economic exhaustion. Returns `[{ move, score }, ...]` sorted by move
  * key (NOT by score) so the softmax input order is canonical and order-free.
- * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number }} args
+ * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number,
+ *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0 }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   /** @type {Record<string, number>} */
@@ -281,7 +305,10 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion }) {
   const peaceGateOpen = !ctx.homeBesieged && !ctx.vassalBesieged;
   const inConflict = ctx.hostileTargets.length > 0 || ctx.besieging.length > 0;
   if (peaceGateOpen && inConflict) {
-    scored.sue_for_peace = clamp01(0.15 + exhaustion * 0.6 - aggr * 0.4);
+    // W-C1 item 1b: the peace-threshold reading is MISREAD toward chaos + rust (a delayed
+    // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
+    const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
+    scored.sue_for_peace = clamp01(0.15 + perceived * 0.6 - aggr * 0.4);
   }
 
   return Object.keys(scored)
@@ -296,9 +323,9 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion }) {
  * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
  * exclusive group and so suppresses the reactive escalation for S — the chooser
  * decided NOT to escalate this tick, with no stray world-state cost.
- * @param {{ move: string, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number }} args
+ * @param {{ move: string, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number }} args
  */
-function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFor }) {
+function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0 }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
   if (move === 'sue_for_peace') {
@@ -317,6 +344,20 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     const toType = PEACE_STEP[/** @type {keyof typeof PEACE_STEP} */ (fromType)];
     if (!toType) return null;
     const key = relationshipKeyFromEdge(edge);
+    // W-C1 item 1b legibility: name the war-bankruptcy reading + any chaos/rust misread of it.
+    const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
+    const reasons = [
+      `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
+      'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
+    ];
+    if (perceived !== exhaustion) {
+      const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
+        : chaosPull > 0 ? "its patron's chaos"
+        : 'a rusty army';
+      reasons.push(
+        `A misread of war-bankruptcy — ${driver} distorted the reading (perceived ${perceived.toFixed(2)} vs true ${exhaustion.toFixed(2)}), so the suit came ${perceived > exhaustion ? 'early' : 'late'}.`,
+      );
+    }
     return strategyCandidate({
       move,
       sId,
@@ -324,10 +365,7 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
       severity: MOVE_SEVERITY,
       headline: `${name} sues for peace`,
       summary: `War-weary and economically drained, ${name} seeks to wind the conflict down.`,
-      reasons: [
-        `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
-        'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
-      ],
+      reasons,
       proposal: {
         relationshipKey: key,
         relationshipPatch: { proposedRelationshipType: toType, trajectory: 'transitioning' },
@@ -454,7 +492,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     // ── Else: enumerate → score → softmax → sample ONE move. ─────────────────────
     const aggressiveness = computeAggressiveness(item, worldState);
     const exhaustion = economicExhaustion(item);
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion });
+    // W-C1 item 1b: the fidelity pulls on the peace-threshold reading (0 for a lawful/
+    // seasoned/deity-free settlement ⇒ enumerate/emit read the TRUE exhaustion, byte-identical).
+    const settlement = item?.settlement;
+    const chaosPull = chaosPullOf(settlement);
+    const rust = rustOf(settlement);
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng, tick, chaosPull, rust });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
@@ -473,7 +516,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     if (idx < 0 || idx >= moves.length) idx = 0;
     const chosen = moves[idx].move;
 
-    const candidate = emitMove({ move: chosen, sId, item, ctx, tick, exhaustion, snapshot, strengthFor });
+    const candidate = emitMove({ move: chosen, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng, chaosPull, rust });
     if (candidate) out.push(candidate);
   }
 

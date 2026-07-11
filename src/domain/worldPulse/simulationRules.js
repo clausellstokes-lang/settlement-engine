@@ -102,6 +102,13 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // rebellious (and, with warDispositionEnabled, more couplable — it can end the arrangement
   // by coup). Nested under warLayerEnabled. Preset-stable.
   warLevyEnabled: false,
+  // Supply-gap deployed quality (W-C1 item 3). Opt-in, DEFAULT FALSE ⇒ byte-identical (a
+  // supply-starved war economy fields the same army as a self-sufficient arsenal — the gap
+  // this closes). When true, a settlement's deployed force strength + attrition-mitigating
+  // kit scale by its war-supply completeness (supplyCompleteness over the core war kit),
+  // floored so a chainless settlement still fields a degraded force. Does NOT feed readiness
+  // (training vs kit). Nested under warLayerEnabled. Preset-stable.
+  warSupplyQualityEnabled: false,
   migrationMode: 'roll',
 });
 
@@ -173,6 +180,7 @@ const BOOLEAN_KEYS = Object.freeze([
   'allyDefenseEnabled',
   'warForageEnabled',
   'warLevyEnabled',
+  'warSupplyQualityEnabled',
 ]);
 
 const RULE_COMPARISON_KEYS = Object.freeze([

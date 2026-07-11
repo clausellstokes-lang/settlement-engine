@@ -88,16 +88,23 @@ describe('W-F8 martial readiness ratchet', () => {
     expect(warFooting01({})).toBe(0);
   });
 
-  it('spikes fast under war, decays slow in peace (~generation half-life)', () => {
+  it('spikes fast under war, decays slow in peace (years-scale erosion, W-C1 item 4)', () => {
     // Spike: a few sustained war ticks climb readiness quickly.
     let r = 0;
     for (let i = 0; i < 4; i++) r = stepReadiness(r, 0.9, {});
     expect(r).toBeGreaterThan(0.5);
-    // Decay: many peace ticks are needed to shed it (slow). Half-life target ~17 ticks.
-    let d = r; let ticks = 0;
-    while (d > r / 2 && ticks < 100) { d = stepReadiness(d, 0, {}); ticks++; }
-    expect(ticks).toBeGreaterThan(12);
-    expect(ticks).toBeLessThan(30);
+    // Decay (week tick): peacetime erosion is a YEARS-scale arc — DOWN_DECAY 0.002 ⇒
+    // half-life ~346 wk ≈ 6.7 yr — NOT the old months-scale (~17 wk / ~4 mo). Halving a
+    // garrison's edge takes years, not a season.
+    let d = r; let half = 0;
+    while (d > r / 2 && half < 2000) { d = stepReadiness(d, 0, {}); half++; }
+    expect(half).toBeGreaterThan(52);    // more than a YEAR to halve (52 wk) — years scale, not seasons
+    expect(half).toBeGreaterThan(250);
+    expect(half).toBeLessThan(450);      // ~346 wk ≈ 6.7 yr band
+    // Full demilitarization (readiness → the drop threshold) is a DECADES-scale arc.
+    let e = r; let full = 0;
+    while (e > 0.005 && full < 10000) { e = stepReadiness(e, 0, {}); full++; }
+    expect(full).toBeGreaterThan(520);   // > a decade (52 wk × 10) to fully rust away
   });
 
   it('peacelike patron accelerates the peace dividend; warlike holds the edge', () => {

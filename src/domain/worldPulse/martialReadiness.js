@@ -47,6 +47,8 @@
 
 import { deityTemper } from './deityAxes.js';
 import { pietyMultOf } from './piety.js';
+import { isLiveWarFront } from './warFrontReads.js';
+import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
 export const MARTIAL_READINESS_TUNING = Object.freeze({
   // ── the instantaneous war-footing INTENSITY (0..1 accrual driver) ──────────
@@ -62,9 +64,28 @@ export const MARTIAL_READINESS_TUNING = Object.freeze({
   FOOTING_MOBILIZED_LIFT: 0.22, // mobilized / deploying (transient)
   FOOTING_ALERT_LIFT: 0.12,     // ramping (alert / war_preparation) (transient)
   FOOTING_THREAT_W: 0.3,     // weight on the threat environment (0..1 neighbour belligerence)
+  // ── THREAT ENVIRONMENT (W-C1 item 2) — the EXTERNAL menace read ONLY from the
+  // world's WAR RECORDS (never user/party actions). A live war front on the border,
+  // an occupation next door, or a war-type stressor (siege/wartime/occupation/betrayal —
+  // the last IS the deity stance-lane hostility) touching the settlement or a neighbour
+  // keeps a town armed; peace with none lets readiness decay. Presence-based, capped at 1.
+  // CONSTRAINT (not history): EXACTLY 0 when the world carries no such record, so the
+  // footing threat term is 0 and the tick is BIT-IDENTICAL to the pre-W-C1 engine (the
+  // neutrality theorem). Magnitudes are bounded weights, not temporal rates. ───────────
+  THREAT_FRONT: 0.5,         // a LIVE (war-layer, provenance-gated) war front on the border — the classic menace
+  THREAT_OCCUPY: 0.4,        // an occupation touching the neighbourhood — conquest is near
+  THREAT_RAID: 0.35,         // a war-type stressor touching self/neighbour (raids, sieges, betrayals actualized)
   // ── asymmetric hysteresis (the peace dividend) — the RATCHET ───────────────
   UP_ACCRUE: 0.28,           // readiness SPIKES: saturating accrual per war tick (fast, seasons)
-  DOWN_DECAY: 0.04,          // …and DECAYS slowly in peace — half-life ~17 ticks (a generation)
+  // WEEK-SCALE CONSTRAINT (W-C1 item 4): a tick is ONE WEEK, so peacetime readiness must
+  // erode on a YEARS scale and fully demilitarize on a DECADES scale (not seasons). The
+  // prior 0.04 was month-contaminated (half-life ~17 weeks ≈ 4 months ⇒ full rust in ~2
+  // years — a garrison forgets war in a season). 0.002 ⇒ retention 0.998/wk ⇒ half-life
+  // ln(0.5)/ln(0.998) ≈ 346 wk ≈ 6.7 yr (readiness HALVES over years); full erosion to the
+  // READINESS_EPS drop from a maxed 1.0 ≈ 2650 wk ≈ 51 yr (demilitarization over DECADES).
+  // The patron megaphone spreads this 3 yr (peacelike, ×2.2) … 17 yr (warlike, ×0.4). Soak:
+  // docs/evidence/phase5-wc1/ decay-half-life table.
+  DOWN_DECAY: 0.002,         // peace erosion of readiness — half-life ~6.7 yr at week scale (neutral patron)
   // patron temper (derived) through the megaphone: warlike HOLDS the edge (accrues
   // faster, decays slower), peacelike RELEASES it (the accelerated peace dividend).
   PEACE_DIVIDEND_W: 1.2,     // peacelike megaphone speeds the decay (× up to 1+this)
@@ -309,6 +330,112 @@ const READINESS_EPS = 0.005;   // below this on BOTH scalars ⇒ drop the entry 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
+const WAR_STRESSOR_TYPE_SET = new Set(WAR_STRESSOR_TYPES);
+
+/** @typedef {{ type?: string, status?: string, from?: string|number, to?: string|number, evidence?: Array<{ source?: string }> }} WarChannelLike */
+/** @typedef {{ from?: string|number, to?: string|number }} GraphEdgeLike */
+/** @typedef {{ type?: string, affectedSettlementIds?: Array<string|number> }} ThreatStressorLike */
+
+/**
+ * The 0..1 THREAT-ENVIRONMENT reading from three presence signals (W-C1 item 2). Each
+ * is TRUE iff the corresponding hostile WORLD RECORD touches the settlement or a
+ * neighbour. Bounded (clamped to 1) and EXACTLY 0 when all three are false — the
+ * neutrality anchor: no war record ⇒ 0 ⇒ the footing threat term is 0 ⇒ byte-identical.
+ * @param {{ frontNear?: boolean, occupyNear?: boolean, raidNear?: boolean }} signals
+ * @returns {number}
+ */
+export function threatEnvironment01({ frontNear = false, occupyNear = false, raidNear = false } = {}) {
+  const T = MARTIAL_READINESS_TUNING;
+  return clamp01(
+    (frontNear ? T.THREAT_FRONT : 0)
+    + (occupyNear ? T.THREAT_OCCUPY : 0)
+    + (raidNear ? T.THREAT_RAID : 0),
+  );
+}
+
+/**
+ * Build the per-cid THREAT-ENVIRONMENT index (0..1) from the world's WAR RECORDS ONLY:
+ * live (provenance-gated) war fronts, occupations, and war-type stressors, projected
+ * onto each settlement and its RELATIONSHIP-graph neighbours. STRICTLY ENDOGENOUS — reads
+ * war-layer ledgers + stressors, never a user/party action. Pure, codepoint-order-free
+ * (all reads are membership tests). Returns an EMPTY map when the world carries no such
+ * record (⇒ every threat is 0 ⇒ the neutrality theorem: bit-identical prior behaviour).
+ * @param {(SnapshotLike & { regionalGraph?: { channels?: WarChannelLike[], edges?: GraphEdgeLike[] } })|null|undefined} snapshot
+ * @param {(MartialWorldState & { stressors?: ThreatStressorLike[] })|null|undefined} worldState
+ * @returns {Map<string, number>}
+ */
+export function buildThreatByCid(snapshot, worldState) {
+  /** @type {Map<string, number>} */
+  const out = new Map();
+  const rg = snapshot?.regionalGraph;
+  const channels = rg && Array.isArray(rg.channels) ? rg.channels : [];
+  const edges = rg && Array.isArray(rg.edges) ? rg.edges : [];
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : {};
+  const stressors = worldState && Array.isArray(worldState.stressors) ? worldState.stressors : [];
+
+  // The three HOT sets: ids that carry a hostile record this tick.
+  const frontHot = new Set();
+  for (const ch of channels) {
+    // Only a LIVE war-layer front (isLiveWarFront skips hostile-relationship phantom
+    // fronts) is a menace — the same provenance gate the siege loop uses.
+    if (!isLiveWarFront(ch)) continue;
+    if (ch.from != null) frontHot.add(String(ch.from));
+    if (ch.to != null) frontHot.add(String(ch.to));
+  }
+  const occupyHot = new Set();
+  for (const k of Object.keys(occupations)) {
+    occupyHot.add(String(k));                                   // the occupied town
+    const occ = occupations[k];
+    if (occ && occ.occupierId != null) occupyHot.add(String(occ.occupierId));  // its occupier
+  }
+  const raidHot = new Set();
+  for (const s of stressors) {
+    if (!WAR_STRESSOR_TYPE_SET.has(String(s?.type))) continue;  // war-type only (famine/etc. excluded)
+    for (const id of (Array.isArray(s?.affectedSettlementIds) ? s.affectedSettlementIds : [])) raidHot.add(String(id));
+  }
+  if (!frontHot.size && !occupyHot.size && !raidHot.size) return out;   // no war record ⇒ empty ⇒ byte-identical
+
+  // Relationship-graph adjacency (a hostile record on a NEIGHBOUR is a menacing border).
+  /** @type {Map<string, Set<string>>} */
+  const neighbours = new Map();
+  const link = (/** @type {string} */ a, /** @type {string} */ b) => {
+    if (!neighbours.has(a)) neighbours.set(a, new Set());
+    /** @type {Set<string>} */ (neighbours.get(a)).add(b);
+  };
+  for (const e of edges) {
+    const from = e?.from != null ? String(e.from) : null;
+    const to = e?.to != null ? String(e.to) : null;
+    if (from == null || to == null) continue;
+    link(from, to); link(to, from);
+  }
+
+  const nearHot = (/** @type {string} */ cid, /** @type {Set<string>} */ hot) => {
+    if (!hot.size) return false;
+    if (hot.has(cid)) return true;
+    const nb = neighbours.get(cid);
+    if (!nb) return false;
+    for (const n of nb) if (hot.has(n)) return true;
+    return false;
+  };
+
+  // Materialize a threat entry for every id that has ANY hostile record near it. A cid
+  // with no near-hot record is simply absent (threat 0 ⇒ the reader defaults to 0).
+  const candidates = new Set([...frontHot, ...occupyHot, ...raidHot]);
+  for (const set of [frontHot, occupyHot, raidHot]) for (const id of set) {
+    const nb = neighbours.get(id);
+    if (nb) for (const n of nb) candidates.add(n);
+  }
+  for (const cid of candidates) {
+    const t = threatEnvironment01({
+      frontNear: nearHot(cid, frontHot),
+      occupyNear: nearHot(cid, occupyHot),
+      raidNear: nearHot(cid, raidHot),
+    });
+    if (t > 0) out.set(cid, t);
+  }
+  return out;
+}
+
 /**
  * The tick-END readiness/experience pass (the kernel driver). READ-LAST/WRITE-NEXT: for
  * each FAITH settlement (a religionState with a patron — the faith gate keeps deity-free
@@ -335,6 +462,8 @@ export function advanceMartialReadiness({ snapshot, worldState, religionStates, 
     const occ = occupations[k];
     if (occ && occ.occupierId != null) occupierSet.add(String(occ.occupierId));
   }
+  // W-C1 item 2: the THREAT-ENVIRONMENT index (empty ⇒ every threat 0 ⇒ byte-identical).
+  const threatByCid = buildThreatByCid(snapshot, worldState);
   /** @type {Record<string, MartialRecord>} */
   const out = {};
   for (const cid of Object.keys(states).sort(codepoint)) {
@@ -351,7 +480,8 @@ export function advanceMartialReadiness({ snapshot, worldState, religionStates, 
     const occupied = occupations[cid] !== undefined;
     const occupying = occupierSet.has(String(cid));
     const exh = clamp01(Number(exhaustion[cid]) || 0);
-    const footing = warFooting01({ mobilized, alert, deployed, occupied, occupying, exhaustion: exh, threat: 0 });
+    const threat = threatByCid.get(String(cid)) || 0;   // 0 when the world has no war record ⇒ byte-identical
+    const footing = warFooting01({ mobilized, alert, deployed, occupied, occupying, exhaustion: exh, threat });
     const engage = engagement01({ deployed, besieged: mobilized, occupied, winloss: 0 });
     const temperSign = patronTemperSign(patron);
     const composite = Number(piety[cid]?.composite);
@@ -363,6 +493,7 @@ export function advanceMartialReadiness({ snapshot, worldState, religionStates, 
     /** @type {Array<{ source: string, value: number }>} */
     const causes = [];
     if (footing > 0) causes.push({ source: 'war_footing', value: footing });
+    if (threat > 0) causes.push({ source: 'threat_environment', value: threat });
     if (readiness01 > READINESS_EPS && footing <= 0) causes.push({ source: 'peace_dividend', value: readiness01 });
     if (temperSign !== 0 && megaphoneBleed > 0) causes.push({ source: temperSign > 0 ? 'war_patron' : 'peace_patron', value: megaphoneBleed });
     if (experience01 < 1) causes.push({ source: 'strategic_rust', value: rustMagnitude(experience01) });

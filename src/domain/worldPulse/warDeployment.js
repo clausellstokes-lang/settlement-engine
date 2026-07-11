@@ -55,6 +55,7 @@ import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
 // never invincibility) + a `readiness` stamp the attrition kernel reads for slower decay.
 // readinessOf 0 (no martial record) ⇒ no lift, no stamp ⇒ byte-identical.
 import { readinessOf, effectiveStatMult, rustOf } from './martialReadiness.js';
+import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
@@ -560,16 +561,29 @@ function buildCapacityLookup(snapshot, deployments) {
  * @param {number} args.logisticsBurden  0..1 distance/route burden to the target.
  * @param {string} [args.role]
  * @param {number} [args.readiness]  0..1 martial readiness (W-F8) — lifts effective strength + stamps the record; 0 ⇒ byte-identical.
+ * @param {{ rng: { fork?: (key: string) => { random: () => number } }|null, cid: string, rust: number }|null} [args.sizing]  W-C1 item 1a: the per-decision SIZING rust fork (over/under-commit). null / rust 0 ⇒ factor 1 (no rng) ⇒ byte-identical.
+ * @param {number} [args.qualityMult]  W-C1 item 3: FLOORED deployed-quality (supply-gap) multiplier; 1 ⇒ byte-identical.
  * @returns {DeploymentRecord} the enriched deployment record.
  */
-function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege', readiness = 0 }) {
+function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege', readiness = 0, sizing = null, qualityMult = 1 }) {
   const facets = cap.facets || {};
   const norm = (/** @type {any} */ v, /** @type {number} */ fallback) =>
     Number.isFinite(v) ? clamp01(v / 100) : fallback;
   // W-F8: readiness lifts effective strength (drilled levies, maintained arms, supply that
   // reaches the front) — efficiency via the existing capacity math; 1× at readiness 0.
   const rdy = clamp01(readiness);
-  const start = Math.max(0, Number(cap.offensive) || 0) * (rdy > 0 ? effectiveStatMult(rdy) : 1);
+  // W-C1 item 1a — DEPLOYMENT SIZING RUST: a rusty realm mis-sizes the force it commits
+  // (over/under-commit). The error is a SEEDED per-decision fork scaled by rustMagnitude
+  // (chaosPull 0 here — sizing is the rust axis) so it caps at RUST_MAX_ERROR geometry.
+  // rust 0 (seasoned / no martial record) ⇒ factor 1, NO rng forked ⇒ byte-identical.
+  const sizingFactor = sizing && sizing.rng && sizing.rust > 0
+    ? fidelityFactor({ rng: sizing.rng, site: 'deployment_sizing', tick, cid: String(sizing.cid), decisionKey: `commit:${stablePart(targetId)}`, chaosPull: 0, rust: sizing.rust })
+    : 1;
+  // W-C1 item 3 — SUPPLY-GAP QUALITY: a supply-starved war economy fields a degraded force.
+  // Scales the committed strength AND (below) the equipment/supply facets that mitigate
+  // attrition. 1 (flag off / full self-supply) ⇒ byte-identical.
+  const qMult = Number.isFinite(qualityMult) && qualityMult > 0 ? qualityMult : 1;
+  const start = Math.max(0, Number(cap.offensive) || 0) * (rdy > 0 ? effectiveStatMult(rdy) : 1) * sizingFactor * qMult;
   return {
     targetId,
     sinceTick: tick,
@@ -581,15 +595,21 @@ function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'sie
     // W-F8 readiness stamp (the attrition kernel reads it for slower decay). Conditional
     // — a home with no martial record stamps nothing ⇒ byte-identical deployment ledger.
     ...(rdy > 0 ? { readiness: rdy } : {}),
+    // W-C1 receipts: stamp the sizing bias / deployed quality ONLY when non-trivial so a
+    // no-rust / flag-off / full-supply deployment carries neither (byte-identical ledger).
+    ...(sizingFactor !== 1 ? { sizingBias: sizingFactor } : {}),
+    ...(qMult !== 1 ? { deployedQuality: qMult } : {}),
     reinforcementFlow: 0,
     deploymentAge: 0,
     // ── supporting facets (0..1) — seeded from the model, eroded by attrition,
     // lifted by reinforcement. manpower/institutions feed morale; logistics feeds
     // supply + food; materiel feeds equipment; will/materiel feed magic support. ─
     manpower: norm(facets.manpower, 0.5),
-    supplyIntegrity: norm(facets.logistics, 0.5),
+    // W-C1 item 3: poor war-supply degrades the kit that mitigates attrition — a badly
+    // equipped/provisioned force bleeds faster. qMult 1 ⇒ the pre-W-C1 facets, byte-identical.
+    supplyIntegrity: clamp01(norm(facets.logistics, 0.5) * qMult),
     morale: clamp01((norm(facets.will, 0.5) + norm(facets.manpower, 0.5)) / 2),
-    equipmentCondition: norm(facets.materiel, 0.5),
+    equipmentCondition: clamp01(norm(facets.materiel, 0.5) * qMult),
     magicSupport: norm(facets.materiel, 0.5),
     commandQuality: norm(facets.institutions, 0.5),
     foodReserve: norm(facets.logistics, 0.5),
@@ -613,7 +633,7 @@ function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'sie
  * @param {number} logisticsBurden
  * @returns {DeploymentRecord}
  */
-function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0) {
+function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0, qualityMult = 1) {
   const r = record || {};
   const rdy = clamp01(readiness);
   if (Number.isFinite(r.maxStartStrength) && Number.isFinite(r.currentEffectiveStrength)) {
@@ -635,6 +655,10 @@ function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0)
     logisticsBurden,
     role: r.role || 'siege',
     readiness: rdy,
+    // W-C1 item 3: quality applies to a light-record MIGRATION too (the army's kit is read
+    // on first materialization). NO sizing rust here — the sizing DECISION is at the
+    // new-deploy site, not a migration. qualityMult 1 (flag off) ⇒ byte-identical.
+    qualityMult,
   });
   // Preserve the original sinceTick so deploymentAge reflects the true campaign length.
   const sinceTick = Number.isFinite(r.sinceTick) ? r.sinceTick : tick;
@@ -989,7 +1013,7 @@ function pickOccupier(besiegers, capacityFor, effectiveStrengthFor) {
  * @param {Rng} args.rng
  * @param {number} args.tick
  * @param {string|null} [args.now]
- * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean }} args.rules
+ * @param {{ warLayerEnabled?: boolean, defenderAttritionEnabled?: boolean, warSupplyQualityEnabled?: boolean }} args.rules
  * @returns {{ outcomes: PulseOutcome[], deployments: Record<string, DeploymentRecord>, graphChannels: any[], retiredChannels: string[], resolvedDeployments: any[], dispositionDeltas: Array<{id:string, outcome:'win'|'loss', magnitude?:number, sourceConquestId?:string}>, warExhaustion: Record<string, number>, defenderSiegeLedger?: (Record<string, any>|null) }}
  *   - outcomes: probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  *   - deployments: the UPDATED one-army ledger to persist onto worldState
@@ -1139,6 +1163,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // ongoing sieges survive the end-of-loop prune, so the ledger can never leak.
   const defenderAttritionEnabled = !!(/** @type {any} */ (rules)?.defenderAttritionEnabled);
   const warEconomyEnabled = !!(/** @type {any} */ (rules)?.warEconomyDrainEnabled);
+  // W-C1 item 3 — SUPPLY-GAP QUALITY: a flag-gated war-outcome spike (the house pattern of
+  // its siblings above). OFF ⇒ deployedQualityMult never read, qualityMult 1 everywhere ⇒
+  // byte-identical (the war-test corpus + golden fixtures never seed a quality penalty).
+  const warSupplyQualityEnabled = !!(rules?.warSupplyQualityEnabled);
+  const qualityMultFor = (/** @type {string|number} */ id) => (warSupplyQualityEnabled ? deployedQualityMult(snapshot, String(id)) : 1);
   const defenderResolveEnabled = !!(/** @type {any} */ (rules)?.defenderResolveEnabled);
   const allyDefenseEnabled = !!(/** @type {any} */ (rules)?.allyDefenseEnabled);
   const warForageEnabled = !!(/** @type {any} */ (rules)?.warForageEnabled);
@@ -1496,13 +1525,18 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // time (full-strength token: maxStartStrength = currentEffectiveStrength = the
     // origin's offensive capacity). Attrition degrades it, reinforcement replenishes
     // it, the siege verdict reads its currentEffectiveStrength.
+    const fromSettlement = snapshot?.byId?.get?.(String(fromId))?.settlement;
     deployments[fromId] = seedDeploymentState({
       targetId: chosenTarget,
       cap: fromCap,
       tick,
       logisticsBurden: logisticsBurdenFor(graph, fromId, chosenTarget),
       role: 'siege',
-      readiness: readinessOf(snapshot?.byId?.get?.(String(fromId))?.settlement),
+      readiness: readinessOf(fromSettlement),
+      // W-C1 item 1a: the sizing DECISION — a rusty realm over/under-commits (rust 0 ⇒ no fork).
+      sizing: { rng, cid: String(fromId), rust: rustOf(fromSettlement) },
+      // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
+      qualityMult: qualityMultFor(fromId),
     });
     graphChannels.push(mintDirectedChannel({
       type: 'war_front',
@@ -1529,6 +1563,19 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // outcome to drop the new deployment + its front when the siege is deferred/dismissed.
     const fromName = settlementNameFor(fromId);
     const chosenName = settlementNameFor(chosenTarget);
+    // W-C1 legibility: name the two new martial causes when they moved the committed force.
+    const seededRec = deployments[fromId];
+    const deployReasons = [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
+    if (Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
+      deployReasons.push(
+        `A rusty command ${seededRec.sizingBias > 1 ? 'over' : 'under'}-committed the force (sizing ×${seededRec.sizingBias.toFixed(2)}).`,
+      );
+    }
+    if (Number.isFinite(seededRec?.deployedQuality) && seededRec.deployedQuality !== 1) {
+      deployReasons.push(
+        `Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`,
+      );
+    }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
       type: 'strategy_deploy',
@@ -1541,7 +1588,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       severity: clamp01(0.5 + fromStrength * 0.2),
       headline: `${fromName} marches on ${chosenName}`,
       summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
-      reasons: [`${fromName} is war-ready and ${chosenName} is a feasible target.`],
+      reasons: deployReasons,
       sourceEventTargetId: chosenTarget,
     });
   }
