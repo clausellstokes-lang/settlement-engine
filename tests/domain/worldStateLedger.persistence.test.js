@@ -74,6 +74,10 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     // lifted into the calendar (proves the fallback path was exercised, not skipped).
     const legacy = ensureWorldState(raws.legacyKeyless, CAMPAIGN);
     expect(legacy.calendar.elapsedMonths).toBe(9);
+    // 4-4-5 back-compat: the canonical integer weeks derive from the SAME
+    // lifted months (legacy writers accumulated 0.25/week ⇒ 9 months = 36
+    // weeks) — never 0-reset beside a non-zero months field.
+    expect(legacy.calendar.elapsedWeeks).toBe(36);
   });
 
   // INVARIANT 2: documented default shape for an empty raw.
@@ -84,6 +88,7 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(out.canonizedAt).toBeNull();
     expect(out.tick).toBe(0);
     expect(out.calendar).toEqual({
+      elapsedWeeks: 0,
       elapsedMonths: 0,
       month: 1,
       year: 1,
@@ -240,6 +245,7 @@ describe('worldState ledger persistence — ensureWorldState normalize/round-tri
     expect(out.calendar.month).toBe(1);
     expect(out.calendar.year).toBe(1);
     expect(out.calendar.elapsedMonths).toBe(0);
+    expect(out.calendar.elapsedWeeks).toBe(0);
     expect(out.volatility).toBe('normal');
     // Unknown-but-truthy season is PRESERVED (the code only falls back on falsy).
     expect(out.calendar.season).toBe('harvest_moon');

@@ -12,36 +12,43 @@ const MAX_PROPOSALS = 80;
 // campaign that queues for hundreds of intentions without ever advancing time.
 const MAX_PENDING = 400;
 
-// Calendar unification (Option A, architect ruling 2026-07-11): WEEKS ARE
-// CANONICAL. The temporal constitution fixes tick = 1 week, month = 4 weeks,
-// year = 52 weeks — so the display year is THIRTEEN four-week months (13×4=52,
-// the only self-consistent triple). This table is duration-in-MONTHS per DM
-// interval and mirrors weeksPerInterval (advanceInterval.js) exactly at 4 weeks
-// per month: every entry is weeks/4, so a coarse advance and its decomposed
-// weekly ticks accumulate IDENTICAL elapsedMonths (0.25 is a dyadic rational —
-// binary-exact, no float drift), and the derived month/year/season agree on
-// both paths by construction.
-const INTERVAL_MONTHS = Object.freeze({
-  one_week: 0.25,
-  one_month: 1,
-  one_season: 3.25,
-  one_year: 13,
+// Calendar unification (Option B' — the 4-4-5 week grid, owner ruling
+// 2026-07-11, superseding the 13-month Option A): INTEGER WEEKS ARE CANONICAL.
+// The temporal constitution fixes tick = 1 week and year = 52 weeks; the
+// display year is a REGULAR 12-month calendar laid over that grid — four
+// 13-week seasons, each split into months of 4, 4, and 5 weeks (4+4+5 = 13,
+// ×4 = 52). Every month boundary lands on a week boundary, a season is exactly
+// 3 months (months 1-3 spring … 10-12 winter), and nothing drifts: the advance
+// path stores/advances integer elapsed weeks and DERIVES every label from them
+// (never accumulates float months), so coarse == weekly holds by integer
+// construction.
+//
+// This is the SINGLE-SOURCE interval → week-count table (weeksPerInterval in
+// advanceInterval.js re-exports it verbatim; keep them one object).
+export const INTERVAL_WEEKS = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 13,
+  one_year: 52,
 });
 
-const MONTHS_PER_YEAR = 13;  // 13 four-week months = 52 weeks
+const MONTHS_PER_YEAR = 12;  // regular 12-month display year over 52 weeks
 const WEEKS_PER_YEAR = 52;
 const WEEKS_PER_SEASON = 13; // four equal 13-week quarters
+// Cumulative month-END weeks of the 4-4-5 grid: month m spans week-of-year
+// [MONTH_END_WEEKS[m-2] (or 0), MONTH_END_WEEKS[m-1]). The 5-week months are
+// 3, 6, 9, 12 — the season-closing months.
+const MONTH_END_WEEKS = Object.freeze([4, 8, 13, 17, 21, 26, 30, 34, 39, 43, 47, 52]);
 
 // The year opens in SPRING — createDefaultWorldState seeds {month:1,
 // season:'spring'} and that seeded default is the documented intent. (The array
 // used to start at winter, so the very first tick flipped a fresh campaign
 // spring->winter and the pressure model's +0.08 winter food bias skewed early
 // famines.) Seasons derive from WEEK-OF-YEAR as four 13-week quarters (weeks
-// 0-12 spring … 39-51 winter), NOT from the month index: 13 months cannot split
-// into four equal month-runs, so the season grid lives on weeks — a season
-// boundary can land mid-month (month 4 opens in spring and turns summer at week
-// 13). Mid-campaign saves shift their season LABEL at most one step on the next
-// tick; pressure bias stays consistent with the label.
+// 0-12 spring … 39-51 winter); under the 4-4-5 month grid those quarters are
+// exactly months 1-3 / 4-6 / 7-9 / 10-12, so month labels and season labels
+// never disagree. Mid-campaign saves shift their season LABEL at most one step
+// on the next tick; pressure bias stays consistent with the label.
 const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
 
 /**
@@ -158,6 +165,7 @@ export function createDefaultWorldState(campaign = {}) {
     canonizedAt: null,
     tick: 0,
     calendar: {
+      elapsedWeeks: 0,
       elapsedMonths: 0,
       month: 1,
       year: 1,
@@ -237,6 +245,17 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     calendar: {
       ...base.calendar,
       ...calendar,
+      // Canonical integer weeks — tolerant read (new elapsedWeeks, else the
+      // legacy 0.25/week months × 4). The months fallback must be the SAME
+      // normalized value written below (including the legacy-keyless top-level
+      // raw.elapsedMonths lift), or an old keyless save would read weeks 0
+      // beside months 9 and the next advance would reset the clock. Idempotent:
+      // re-ensuring a normalized state reads back the same integer. NO save
+      // migration; the legacy elapsedMonths field is preserved as stored.
+      elapsedWeeks: weeksFromCalendar({
+        elapsedWeeks: calendar.elapsedWeeks,
+        elapsedMonths: Math.max(0, finite(calendar.elapsedMonths, finite(raw?.elapsedMonths, 0))),
+      }),
       elapsedMonths: Math.max(0, finite(calendar.elapsedMonths, finite(raw?.elapsedMonths, 0))),
       month: Math.max(1, Math.floor(finite(calendar.month, 1))),
       year: Math.max(1, Math.floor(finite(calendar.year, 1))),
@@ -318,21 +337,62 @@ export function canonizeWorldState(worldState, now = wallClockNow(), campaign = 
 }
 
 /**
+ * Canonical integer elapsed weeks for a stored calendar — the TOLERANT READ.
+ * New-format calendars carry `elapsedWeeks` (integer, authoritative). Legacy
+ * saves carry only `elapsedMonths`, which every pre-4-4-5 writer accumulated at
+ * exactly 0.25/week (4-week months), so weeks = months × 4 recovers the integer
+ * exactly; Math.round guards float residue. NO save migration — old shapes read
+ * losslessly forever, and the next advance writes the new field alongside.
+ * @param {{elapsedWeeks?: number|null, elapsedMonths?: number|null}|null|undefined} calendar
+ * @returns {number}
+ */
+function weeksFromCalendar(calendar = {}) {
+  const direct = finite(calendar?.elapsedWeeks, NaN);
+  if (Number.isFinite(direct)) return Math.max(0, Math.floor(direct));
+  return Math.max(0, Math.round(finite(calendar?.elapsedMonths, 0) * 4));
+}
+
+/**
+ * Derive the full display calendar from canonical integer elapsed weeks — the
+ * ONLY place week-of-year becomes month/year/season labels. 4-4-5 grid: month
+ * from the cumulative MONTH_END_WEEKS table, season = 13-week quarter, year
+ * rolls at week 52. `elapsedMonths` is retained as a DERIVED legacy field
+ * (weeks × 12/52 = weeks × 3/13; a full year lands exactly 12) so persisted
+ * shapes and public snapshots keep the key — it is never read back for
+ * advancement when elapsedWeeks is present.
+ * @param {number} elapsedWeeks
+ */
+function calendarFromWeeks(elapsedWeeks) {
+  const weeks = Math.max(0, Math.floor(finite(elapsedWeeks, 0)));
+  const weekOfYear = weeks % WEEKS_PER_YEAR;
+  const year = Math.floor(weeks / WEEKS_PER_YEAR) + 1;
+  const monthIdx = MONTH_END_WEEKS.findIndex((end) => weekOfYear < end);
+  const month = monthIdx === -1 ? MONTHS_PER_YEAR : monthIdx + 1;
+  const season = SEASONS[Math.floor(weekOfYear / WEEKS_PER_SEASON)] || 'spring';
+  return {
+    elapsedWeeks: weeks,
+    elapsedMonths: (weeks * 3) / 13,
+    month,
+    year,
+    season,
+  };
+}
+
+/**
+ * Advance the display calendar by one DM interval. INTEGER WEEKS ARE CANONICAL:
+ * the prior week count is read tolerantly (weeksFromCalendar), the interval's
+ * week count (INTERVAL_WEEKS) is added, and every label re-derives from the sum
+ * (calendarFromWeeks) — no float accumulation anywhere, so one coarse call and
+ * its decomposed one-week walk land byte-identical calendars by construction.
+ * Note the DM one_month interval is 4 weeks: on a 5-week label-month it
+ * advances slightly less than one month label (13 four-week advances = exactly
+ * one year) — accepted under the 4-4-5 ruling.
  * @param {any} calendar
  * @param {string} [interval]
  */
 export function advanceWorldCalendar(calendar = {}, interval = 'one_month') {
-  const elapsed = Math.max(0, finite(calendar.elapsedMonths, 0)) + (/** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1);
-  const wholeMonthIndex = Math.floor(elapsed);
-  // 13-month display year (weeks canonical): month index 1..13, year rolls at 13.
-  const month = (wholeMonthIndex % MONTHS_PER_YEAR) + 1;
-  const year = Math.floor(wholeMonthIndex / MONTHS_PER_YEAR) + 1;
-  // Season from WEEK-OF-YEAR (four 13-week quarters), never the month index.
-  // elapsedMonths only ever accumulates exact quarter-months (INTERVAL_MONTHS),
-  // so elapsed*4 is an exact integer week count — no float drift at the floor.
-  const weekOfYear = Math.floor(elapsed * 4) % WEEKS_PER_YEAR;
-  const season = SEASONS[Math.floor(weekOfYear / WEEKS_PER_SEASON)] || 'spring';
-  return { elapsedMonths: elapsed, month, year, season };
+  const stepWeeks = /** @type {Record<string, number>} */ (INTERVAL_WEEKS)[interval] ?? INTERVAL_WEEKS.one_month;
+  return calendarFromWeeks(weeksFromCalendar(calendar) + stepWeeks);
 }
 
 /**

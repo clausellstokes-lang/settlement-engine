@@ -5,7 +5,7 @@
 // plus the Stage 3 autoresolve pause/resume state machine and the Stage 5
 // history-ring collapse. Imports the kernel + the shared helpers (saveId,
 // usableTickInterval); never imported BY the kernel (keeps the chain acyclic).
-import { ensureWorldState } from './worldState.js';
+import { ensureWorldState, INTERVAL_WEEKS } from './worldState.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
 import { simulateCampaignWorldPulse } from './pulseKernel.js';
 import { saveId, usableTickInterval } from './pulseHelpers.js';
@@ -80,14 +80,13 @@ function reportAdvanceProgress(onProgress, detail) {
 // Advance-scaling Stage 1: an Advance runs N REAL one-week ticks. The interval
 // the DM picks is a DURATION, not a single coarse step — `simulateCampaignWorldPulse`
 // is already a correct, pure one-week kernel (bumps tick +1, re-seeds its PRNG
-// per tick), so N weeks is N kernel calls, ALWAYS at one_week granularity. This
-// single-source table is the ONLY place interval → week-count lives.
-export const weeksPerInterval = Object.freeze({
-  one_week: 1,
-  one_month: 4,
-  one_season: 13,
-  one_year: 52,
-});
+// per tick), so N weeks is N kernel calls, ALWAYS at one_week granularity. The
+// single-source interval → week-count table lives in worldState.js
+// (INTERVAL_WEEKS, beside the 4-4-5 calendar that derives labels from the same
+// grid); re-exported here VERBATIM (the same frozen object) under the
+// established public name so every consumer — the orchestrator, the store,
+// ChronicleScrollback — keeps its import path.
+export const weeksPerInterval = INTERVAL_WEEKS;
 
 /**
  * Map a DM-facing interval onto its real one-week tick count (≥1).

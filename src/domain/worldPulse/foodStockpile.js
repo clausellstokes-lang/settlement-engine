@@ -50,16 +50,26 @@ const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // one-decimal rounding would silently erase them.
 const round2 = (/** @type {number} */ v) => Math.round(v * 100) / 100;
 
-// Duration-in-months per interval, mirroring the canonical 4-weeks-per-month /
-// 52-week-year mapping (worldState.js INTERVAL_MONTHS): one_season = 13 weeks =
-// 3.25 months, one_year = 13 months. Keeps a direct coarse call consuming the
-// SAME months of food as the orchestrator's decomposed weekly ticks.
-const INTERVAL_MONTHS = Object.freeze({
-  one_week: 0.25,
-  one_month: 1,
-  one_season: 3.25,
-  one_year: 13,
+// WEEK-denominated interval durations (the canonical grid — mirrors
+// worldState.js INTERVAL_WEEKS), converted to storage-month units at the ONE
+// boundary below: under the 4-4-5 calendar (52 weeks = 12 months) a week is
+// 12/52 = 3/13 of a month, so months = (weeks × 3) / 13 — the identical float
+// expression on the production weekly path and on a direct coarse call.
+// (Exactness across paths is moot here anyway: the orchestrator only ever
+// ticks one_week; the coarse entries are reached solely by direct unit-test
+// calls.) A one_year coarse call consumes exactly 12 months (156/13 is exact).
+const INTERVAL_WEEKS = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 13,
+  one_year: 52,
 });
+
+/** @param {string} interval */
+function monthsForInterval(interval) {
+  const weeks = /** @type {Record<string, number>} */ (INTERVAL_WEEKS)[interval] ?? INTERVAL_WEEKS.one_month;
+  return (weeks * 3) / 13;
+}
 
 export const STOCKPILE_TUNING = Object.freeze({
   fillRate: 0.6,                // fraction of the surplus that actually reaches storage
@@ -247,7 +257,7 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   const ledger = foodLedger(settlement);
   if (!ledger.present) return { settlement, changed: false, summary: null };
   const fs = settlement.economicState?.foodSecurity || {};
-  const months = /** @type {Record<string, number>} */ (INTERVAL_MONTHS)[interval] ?? 1;
+  const months = monthsForInterval(interval);
   const cap = storageCapacityMonths(settlement);
   const T = STOCKPILE_TUNING;
 

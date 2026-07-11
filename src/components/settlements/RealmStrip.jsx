@@ -3,7 +3,8 @@
  * Phase 3, plan §4.2). Surfaces, only when the campaign world is canonized /
  * simulated:
  *   - the in-world clock (season · year · week-tick; weeks are canonical —
- *     one kernel tick is one week, 13 four-week months to the 52-week year)
+ *     one kernel tick is one week; the 52-week year is a regular 12-month
+ *     calendar on the 4-4-5 week grid, seasons = exactly 3 months)
  *   - the active-siege count           (liveSieges)
  *   - the dominant-faith pill          (top pantheon tier, by seats)
  *   - the Wizard-News recency          (latest entry tick vs current tick)

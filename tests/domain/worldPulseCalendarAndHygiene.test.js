@@ -37,8 +37,9 @@ describe('world calendar — month/season agreement', () => {
     expect(result.calendar.season).toBe('spring');
   });
 
-  // Calendar unification (Option A): weeks are canonical — 13 four-week months
-  // to the 52-week year, seasons as four 13-week quarters of the WEEK grid.
+  // Calendar unification (Option B', the 4-4-5 week grid): integer weeks are
+  // canonical — a regular 12-month display year over exactly 52 weeks, each
+  // 13-week season split into months of 4, 4, and 5 weeks.
   test('seasons are four 13-week quarters of the 52-week year (weekly walk + wrap)', () => {
     let calendar = createDefaultWorldState({ id: 'cal' }).calendar;
     for (let week = 1; week <= 52; week++) {
@@ -49,34 +50,47 @@ describe('world calendar — month/season agreement', () => {
       expect(`${week}:${calendar.season}`).toBe(`${week}:${expected}`);
     }
     // Full wrap: 52 weeks later it is month 1 of year 2, week-of-year 0 — spring
-    // again, agreeing with the seeded default for a year's opening.
-    expect(calendar).toMatchObject({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+    // again, agreeing with the seeded default for a year's opening. The legacy
+    // elapsedMonths field derives from weeks (×3/13): a full year is exactly 12.
+    expect(calendar).toMatchObject({ elapsedWeeks: 52, elapsedMonths: 12, month: 1, year: 2, season: 'spring' });
   });
 
-  test('month-boundary seasons across the 13-month year (4/3/3/3 quarters at month starts)', () => {
-    // Sampled at whole-month boundaries (one_month steps). Months and seasons
-    // live on different grids: month 4 OPENS in spring (week 12) and turns
-    // summer mid-month (week 13) — the label at a month boundary is the season
-    // of that month's first week.
-    const expectedAtMonthStart = {
-      1: 'spring', 2: 'spring', 3: 'spring', 4: 'spring',
-      5: 'summer', 6: 'summer', 7: 'summer',
-      8: 'autumn', 9: 'autumn', 10: 'autumn',
-      11: 'winter', 12: 'winter', 13: 'winter',
-    };
+  test('month labels follow the 4-4-5 cumulative week table, and seasons are exactly months 1-3/4-6/7-9/10-12', () => {
+    // The 4-4-5 grid: cumulative month-end weeks. The 5-week months (3, 6, 9,
+    // 12) close their seasons, so every month boundary is a week boundary and a
+    // season is exactly three whole months.
+    const MONTH_END_WEEKS = [4, 8, 13, 17, 21, 26, 30, 34, 39, 43, 47, 52];
+    let calendar = createDefaultWorldState({ id: 'cal' }).calendar;
+    for (let week = 1; week <= 52; week++) {
+      calendar = advanceWorldCalendar(calendar, 'one_week');
+      const weekOfYear = week % 52;
+      const expectedMonth = MONTH_END_WEEKS.findIndex(end => weekOfYear < end) + 1;
+      expect(`${week}:${calendar.month}`).toBe(`${week}:${expectedMonth}`);
+      // Month↔season agreement — the 4-4-5 selling point: no mid-month season flips.
+      const seasonOfMonth = ['spring', 'summer', 'autumn', 'winter'][Math.ceil(calendar.month / 3) - 1];
+      expect(`${week}:${calendar.season}`).toBe(`${week}:${seasonOfMonth}`);
+    }
+  });
+
+  test('the DM one_month interval is 4 weeks: 13 four-week advances = exactly one year', () => {
+    // On a 5-week label-month a one_month advance moves slightly less than one
+    // month label (accepted under the 4-4-5 ruling), so the sampled month
+    // sequence repeats each season-closing 5-week month once — and thirteen
+    // 4-week advances land exactly on the year boundary.
+    const expectedMonthSequence = [2, 3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1];
     let calendar = createDefaultWorldState({ id: 'cal' }).calendar;
     for (let i = 0; i < 13; i++) {
       calendar = advanceWorldCalendar(calendar, 'one_month');
-      expect(`${calendar.month}:${calendar.season}`).toBe(`${calendar.month}:${expectedAtMonthStart[calendar.month]}`);
+      expect(`${i}:${calendar.month}`).toBe(`${i}:${expectedMonthSequence[i]}`);
     }
-    // Full wrap: thirteen months later it is month 1 of year 2 — spring again.
-    expect(calendar).toMatchObject({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+    expect(calendar).toMatchObject({ elapsedWeeks: 52, elapsedMonths: 12, month: 1, year: 2, season: 'spring' });
   });
 
   test('COARSE == WEEKLY: every DM interval lands the byte-identical calendar either way', () => {
     // The unification invariant: one coarse advanceWorldCalendar(interval) call
-    // equals its decomposed one-week walk — same elapsedMonths, month, year,
-    // season. Checked from a fresh year AND from a mid-year offset (catches
+    // equals its decomposed one-week walk — same elapsedWeeks, elapsedMonths,
+    // month, year, season. Holds by INTEGER construction (weeks add, labels
+    // derive). Checked from a fresh year AND from a mid-year offset (catches
     // boundary-anchored derivations that only agree at week 0).
     const starts = [];
     starts.push(createDefaultWorldState({ id: 'cal' }).calendar);
@@ -94,10 +108,24 @@ describe('world calendar — month/season agreement', () => {
     }
 
     // The headline landing: a one_year advance is year+1, month 1, week-of-year
-    // 0 (the new year's opening week) — identical on BOTH paths per the loop
-    // above; this pins the absolute values too.
+    // 0 (the new year's opening week), spring — identical on BOTH paths per the
+    // loop above; this pins the absolute values too (elapsedMonths-equivalent 12).
     const year = advanceWorldCalendar(createDefaultWorldState({ id: 'cal' }).calendar, 'one_year');
-    expect(year).toEqual({ elapsedMonths: 13, month: 1, year: 2, season: 'spring' });
+    expect(year).toEqual({ elapsedWeeks: 52, elapsedMonths: 12, month: 1, year: 2, season: 'spring' });
+  });
+
+  test('PERSISTENCE BACK-COMPAT: a legacy calendar (elapsedMonths only, 0.25/week) reads losslessly', () => {
+    // Every pre-4-4-5 writer accumulated elapsedMonths at exactly 0.25/week.
+    // A stored shape with NO elapsedWeeks must recover the integer week count
+    // (months × 4) and continue advancing on the new grid with no migration.
+    const legacy = { elapsedMonths: 3, month: 4, year: 1, season: 'summer' };
+    const advanced = advanceWorldCalendar(legacy, 'one_week');
+    // 3 months × 4 = 12 weeks elapsed; +1 week = 13 → summer opens, month 4.
+    expect(advanced).toEqual({ elapsedWeeks: 13, elapsedMonths: 3, month: 4, year: 1, season: 'summer' });
+    // And a new-format calendar prefers its integer weeks over the derived
+    // legacy field (which is NOT ×0.25/week anymore).
+    const roundTrip = advanceWorldCalendar(advanced, 'one_week');
+    expect(roundTrip.elapsedWeeks).toBe(14);
   });
 
   test('kernel integration: one coarse one_year preview and 52 threaded one_week previews land the identical calendar', () => {

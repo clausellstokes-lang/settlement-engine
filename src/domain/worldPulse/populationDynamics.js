@@ -4,16 +4,26 @@ import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
 import { formatCount } from '../formatNumber.js';
 
-// Duration-in-months per interval, mirroring the canonical 4-weeks-per-month /
-// 52-week-year mapping (worldState.js INTERVAL_MONTHS): one_season = 13 weeks =
-// 3.25 months, one_year = 13 months. Keeps a direct coarse call growing the
-// SAME population as the orchestrator's decomposed weekly ticks.
-const INTERVAL_MONTHS = Object.freeze({
-  one_week: 0.25,
-  one_month: 1,
-  one_season: 3.25,
-  one_year: 13,
+// WEEK-denominated interval durations (the canonical grid — mirrors
+// worldState.js INTERVAL_WEEKS), converted to month units at the ONE boundary
+// below: under the 4-4-5 calendar (52 weeks = 12 months) a week is 12/52 =
+// 3/13 of a month, so months = (weeks × 3) / 13 — the identical float
+// expression on the production weekly path and on a direct coarse call.
+// (Exactness across paths is moot here anyway: the orchestrator only ever
+// ticks one_week; the coarse entries are reached solely by direct unit-test
+// calls.) A one_year coarse call grows exactly 12 months' worth (156/13 exact).
+const INTERVAL_WEEKS = Object.freeze({
+  one_week: 1,
+  one_month: 4,
+  one_season: 13,
+  one_year: 52,
 });
+
+/** @param {string} interval */
+function monthsForInterval(interval) {
+  const weeks = /** @type {Record<string, number>} */ (INTERVAL_WEEKS)[interval] ?? INTERVAL_WEEKS.one_month;
+  return (weeks * 3) / 13;
+}
 
 const MIGRATION_CHANNELS = Object.freeze(['migration_pressure', 'trade_route', 'political_authority', 'military_protection']);
 
@@ -97,7 +107,7 @@ function hasConditionSignal(item, archetypes, systems = []) {
  * @param {any} interval
  */
 function intervalMagnitude(interval) {
-  const months = INTERVAL_MONTHS[/** @type {keyof typeof INTERVAL_MONTHS} */ (interval)] ?? 1;
+  const months = monthsForInterval(interval);
   return Math.max(0.25, Math.pow(months, 0.85));
 }
 
