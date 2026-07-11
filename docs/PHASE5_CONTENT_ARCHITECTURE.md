@@ -69,3 +69,25 @@ The re-cause/reform/historicize branches are the COVERT lifecycle, and they run 
    mechanically meaningful.
 Liveness checks per tick on sustaining-cause entities; both terminals cause-chained and
 canon-entering.
+
+## The temporal constitution (OWNER, 2026-07-11 — audit + registry = Phase 5 W3; age bands = W2 selectors)
+THE TICK IS A MONTH. Every temporal element in the system carries an explicit, documented,
+intuitively-chosen world-time duration — and PROSE MUST READ THE ACTUAL AGE of things.
+1. AGE BANDS bind the cause-status dimension: this-month / this-season / this-year /
+   years-past, read from elapsed ticks. PIN: historicizing language ("the lean years") is
+   impossible below the years threshold; freshly-resolved causes read fresh ("the pay came
+   through just last month; the ledger hasn't closed").
+2. THE TEMPORAL REGISTRY: one documented table — constant, world-time meaning, intuitive
+   justification — covering every time constant (legitimacy LAG ~5mo half-life, piety ~11mo,
+   tenure 8mo, stain, sink/revival, readiness up ~a season, betrayal cooldown 8mo, abolition
+   arc ~5mo+, chronicle window 12mo, rust, cause-status thresholds, ...). COMPLETENESS PIN:
+   no mechanism ships a time constant unregistered.
+3. FIRST AUDIT CATCH (fix in W3): readiness DOWN_DECAY 0.04/tick = ~17-month half-life, but
+   the spec says "a generation" — re-tune toward ~0.01 (or revise the claim); envelope-check.
+4. UNBOUNDED ITEMS GET DURATIONS: army travel costs route-hops in ticks (channel-graph
+   distance — no instant arrivals); sieges run distribution-bounded months; famine
+   onset/recovery follows stockpile burn arithmetic; audit anything else with an implicit
+   clock (conversion arcs, occupation consolidation, mercenary contracts, trade
+   normalization, institution founding).
+5. SANCTIONED FAST PATHS, explicitly marked (the owner's extreme-case exception):
+   compromise-fiat legitimacy collapse, conquest conversion — deliberate, documented, rare.
