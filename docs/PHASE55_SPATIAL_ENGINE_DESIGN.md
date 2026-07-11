@@ -721,6 +721,103 @@ Control of the route GATES, at three intensities:
 - **Combat-model tuning** needs a soak (envelope the upset-probability clamp so it never reads
   as a slot machine, per the "no hand of miracle" law).
 
+## 11. The simulation CONTROL LAYER — the full sim is a CEILING, not a philosophy (owner, round 17)
+The full spatial simulation is the engine's MAXIMUM CAPABILITY, NOT a mandatory campaign philosophy.
+One causal model; the DM chooses how much geography, delay, misinformation, drift, and autonomy enters.
+This directly RESOLVES the agency concern the empirical assessment surfaced (the world tends to
+equilibrium under autoresolve, and autonomy shifts drama-generation into the engine): autonomy becomes
+a DIAL, not a mandate. Turning any layer OFF PRESERVES all state (routes/beliefs/pending/history) — never
+deletes.
+
+**FOUR INDEPENDENT AXES (the core model — better than "spatial on/off"):**
+1. Does GEOGRAPHY constrain interaction? 2. Does MOVEMENT consume time? 3. Is INFORMATION incomplete/
+distorted? 4. May ACTORS decide without DM approval? — orthogonal, combine meaningfully (geography-but-
+instant; slow-but-accurate; instant-but-distorted; imperfect-beliefs-but-DM-approval; autonomous-but-
+omniscient). ARCHITECT NOTE: the four axes ARE the design's internal LAYERS decomposed — axis1 = cost
+field/spatial graph (§2 / PART II); axis2 = cost→weeks latency + carrier speeds (round 6 / §V.2); axis3 =
+rumor/belief/info-quality (rounds 8-16); axis4 = the settlementStrategy chooser + belief-driven action
+(rounds 10-16). The control layer is the USER-FACING PROJECTION of the layered architecture — and the
+layers are ALREADY separable (dormancy oracle, conditional materialization), which is exactly what makes
+independent axes possible. The control layer VALIDATES the layering.
+
+**5-PART CONTROL HIERARCHY:**
+1. WORLD PROGRESSION (parent): Frozen (DM edits state manually) / DM-Advanced (changes only on DM advance/
+   resolve) / Living (routine systems advance with time) / Autonomous (+ political actors initiate).
+2. SPATIAL MODEL (3-4 levels, not boolean): Ignore Geography / Abstract Distance (nearby/regional/distant
+   bands) / Mapped Geography (distance + basic routes) / Full Spatial (terrain cost/chokepoints/rerouting/
+   interdiction/congestion/movement-modes). Ignore-Geography disables terrain-cost/route/chokepoint/
+   attrition/entrepôt/blockade/isolation — trade/migration/religion/war still exist ABSTRACTLY.
+3. TRAVEL + PROPAGATION TIME (separate from geography): Instant / Compressed / Standard / Slow / Custom.
+   Human benchmark: "avg continent crossing = 1wk / 1mo / 2mo / custom" → a global movement multiplier.
+   Advanced: per-domain speed modifiers (courier/army/caravan/migration/pilgrim/maritime/magical). DEFAULT
+   = ONE global control (most DMs never tune seven carrier classes).
+4. INFORMATION MODEL (MODES, not toggles): Omniscient (canonical state to all; disables distortion/lineage/
+   corroboration/carrier-access/silence — factions still DISAGREE via different OBJECTIVES, not facts) /
+   Perfect-but-Delayed (accurate but arrives by travel time; keeps surprise/response-delay/isolation/
+   outdated-knowledge WITHOUT misinformation) / Unreliable News (wrong/incomplete/biased, simplified belief
+   handling) / Full Information Simulation (carrier access + organic degradation + directed distortion +
+   lineage corroboration + silence-as-uncertainty + factional belief maps + coalition reconciliation).
+   ARCHITECT: Perfect-but-Delayed is the SLEEPER — it delivers the full STRATEGIC payoff (the round-12
+   staleness→risk, the stale-army-position problem) WITHOUT the misinformation-management burden, is CHEAP
+   (latency without the fidelity vector), and is likely the mode MOST DMs run. Build it FIRST of the modes.
+5. POLITICAL AUTONOMY (resolves agency): DM-Decisions-Only (engine computes consequences, initiates no
+   major action) / Recommendations (factions propose + explain) / Routine-Autonomy (ordinary auto, major
+   need approval) / Full-Autonomy. Separate APPROVAL THRESHOLD (ask about minor/major/catastrophic/none).
+   Routine-Autonomy = best active default. Auto: trade/couriers/minor-migration/ally-seeking/patrols/local
+   outreach/info-gathering. Approval-required: war/coup/annex/raze/mass-expulsion/alliance-break/purge.
+
+**DOMAIN MODULES (existing toggles → TRI-STATE, below the general controls):** war, trade drift, migration,
+religion spread, diplomacy, disease, criminal, magic, culture, founding/abandonment. Each: OFF (engine
+neither initiates nor propagates) / DM-DRIVEN (engine processes consequences after the DM introduces it) /
+AUTONOMOUS (engine may initiate + propagate). KEY DISTINCTION: "autonomous war OFF" ≠ "DM can't create war"
+— it means the engine won't INDEPENDENTLY escalate border tension into war; a DM-created war still resolves.
+System-ABSENT vs system-AWAITING-DM-INITIATION, consistent everywhere. ARCHITECT: this grounds onto the
+EXISTING simulationRules (settlementStrategyEnabled + war/trade/religion flags, normalizeSimulationRules) —
+the booleans BECOME the tri-states; the control layer EXTENDS simulationRules, it is not net-new infra. The
+tri-state can ship NOW, independent of the spatial engine.
+
+**DEPENDENCY GATING (a CORRECTNESS property, not just UX — prevents meaningless/incoherent combos):**
+frozen ⇒ hide autonomous/drift/propagation/auto-movement/periodic-belief-update (settings preserved, reactivate
+on resume); ignore-geography ⇒ hide terrain/route/blockade/chokepoint/congestion/distance-mortality/isolation
++ limit travel to instant/abstract; instant-travel ⇒ hide speed-multipliers/latency/in-transit (geography may
+STILL gate whether a route is possible/blocked); omniscient ⇒ hide distortion/lineage/corroboration/carrier-
+access/silence (objectives + political disagreement REMAIN); faction-beliefs-off ⇒ read canonical OR one
+polity operational belief; autonomous-war-off ⇒ hide independent-declaration/auto-escalation/auto-mobilization
+but PERMIT DM-created wars + defensive consequences + approved mobilization.
+
+**PRESETS (essential — most users never touch the dependency tree; presets POPULATE the settings, modifiable
+without losing coherence):** STATIC CAMPAIGN (generator + recordkeeping: DM-advanced / geo-ignored / instant /
+omniscient / DM-only / drift-off) · NARRATIVE CAMPAIGN (authored, reacts without taking over: DM-advanced /
+abstract / compressed / perfect-but-delayed / recommendations / selected-drift) · LIVING REALM (best general
+default: mapped-geo / standard / unreliable / routine-autonomy / major-approval) · FULL SIMULATION ("Dwarf
+Fortress mode": full cost field / physical time / complete carrier+belief / autonomous / all domains) ·
+CUSTOM. ARCHITECT: the presets ARE the incremental BUILD MILESTONES — DM-Decisions-Only IS TODAY (the
+empirically-verified current build = the bottom corner of the control space); LIVING REALM (perfect-but-
+delayed + mapped-geo + routine-autonomy) ships the STRATEGIC CORE (fog-of-war via delay + geography +
+autonomy) WITHOUT the full distortion/belief machinery — a shippable product milestone BELOW full simulation.
+Build UP the axes; every level is shippable and useful.
+
+**CANONICAL + VERSIONED (these change the LAWS of campaign history, not cosmetic prefs):** record which rules
+were active, when a setting changed, which pending processes were affected, and which rules produced each
+result — a RULESET-CHANGE RECEIPT (the §V.1 cost-law-versioning + route-receipt discipline, generalized to
+ALL rules). On a rule change affecting IN-FLIGHT movement: DM policy (preserve-existing-arrivals / recalculate
+/ apply-to-new-only); SAFEST DEFAULT = preserve existing, apply new PROSPECTIVELY (never retroactively rewrite
+history). Same for enabling imperfect-info midway: historical reports without lineage CANNOT gain provenance —
+apply prospectively. ARCHITECT: the ruleset becomes another VERSIONED axis alongside geometry/cost-law/overlay
+(§V.1), living in the canonized worldState under the spatial-canon marker, same freeze-old/apply-new discipline.
+
+**THE PRODUCT PRINCIPLE (binding):** controls describe FICTIONAL ASSUMPTIONS, not engine internals. GOOD:
+"Ignore distance" / "News is always accurate" / "Major actions require approval" / "A continent takes one
+month to cross" / "Trade relationships change autonomously". BAD: "Disable cost-field digest" / "Bypass packet
+lineage" / "Set reconciliation coefficient" / "Disable independence weighting". The DM chooses WHAT KIND OF
+WORLD; the engine chooses the correct implementation. (This is ALSO a correctness guard — a DM cannot set
+distortion-on / lineage-off; the mode grouping guarantees a coherent mechanism set.)
+
+**PLACEMENT (owner):** the controls live on the REALM PAGE (campaign-scoped world laws). Grounds onto the
+EXISTING SimulationRulesDialog (map/realm surface — the flat toggle list RP-1 just hardened with a focus-trap
++ mid-advance write guard): grow it from flat toggles into a preset-picker-prominent / advanced-axes-behind-
+disclosure hierarchy.
+
 ---
 
 # PART II — GROUNDING VERDICT (2026-07-11, verified against the tree)
