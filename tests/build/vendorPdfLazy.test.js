@@ -176,12 +176,28 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // WITHOUT that closure reduction would only re-create the pass-then-fail bumps
 // this wave exists to end, so the budget HOLDS at 1,410,000 until the closure
 // itself comes down. Monotone-down thereafter; never raise.
-// (2026-07-11, W-F7 landing) 1,410,000 -> 1,411,000: a +293 B PRE-EXISTING drift
-// (proven byte-identical with all W-F7 src stashed — shared-checkout dependency
-// drift at the razor margin, the chronic ceiling issue). ONE drift allowance;
-// the reduction program (registry-prose split + copy-namespace segmentation,
-// seams mapped since wave 5b) is now FORMALLY SCHEDULED as its own wave before
-// Phase 5 and ratchets DOWN from here.
+// (2026-07-11, W-F7 landing) 1,410,000 -> 1,411,000: a +293 B overage, pre-existing
+// relative to W-F7 (byte-identical with all W-F7 src stashed).
+// ROOT-CAUSE CORRECTION (2026-07-11 post-landing forensics): NOT dependency drift.
+// A fresh `npm ci` from the committed lockfile rebuilds to 1,410,293 byte-for-byte
+// (runtime deps in the lock are unchanged since Jun 16 — the only later lock change
+// added `sharp`, a devDependency), and an isolated-worktree per-wave bisect shows
+// deterministic COMMITTED-SOURCE growth from the wave-5b baseline 1,407,359:
+//   +463 (W-F0/F1)  +506 (W-F2)  +160 (W-F3)  +420 (W-F4a)  +595 (W-F5)
+//   +790 (W-F6, crosses 1,410,000)  = +2,934 total
+// — ordinary eager-surface accretion of the Phase 4 faith waves eating the 2.6 kB
+// wave-5b margin. It rode green gates because the ratchet was VACUOUS at gate time:
+// `npm run check` ran `test` BEFORE `build`, so this suite measured the PREVIOUS
+// run's dist (W-F6's gate measured the W-F5.5 closure, 1,409,503 — under budget),
+// and this chain's ci.yml lost the post-build VERIFY_DIST=1 re-run in the
+// reconciliation (master's a50efa2e chain had it; the merged ci.yml did not).
+// Both gates are now fixed: `check` chains `npm run verify:dist` after its build,
+// and ci.yml re-runs tests/build/ post-build. ONE growth allowance — and note the
+// remaining margin is a razor 707 B while cross-environment Rollup output can shift
+// a few hundred bytes, so the reduction program is load-bearing, not aspirational:
+// (registry-prose split + copy-namespace segmentation, seams mapped since wave 5b)
+// remains FORMALLY SCHEDULED as its own wave before Phase 5 and ratchets DOWN
+// from here.
 const CLOSURE_BUDGET_BYTES = 1_411_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static

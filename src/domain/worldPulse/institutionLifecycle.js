@@ -40,6 +40,12 @@ import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
+// W-F8: the moral/martial abolition applier re-verifies the lean at apply time; the build
+// lane tilts martial-gap emergence toward militarized towns (the war-supply birth
+// distribution). readinessOf 0 (no martial record) ⇒ tilt 1 ⇒ byte-identical seeding.
+import { institutionMoralLean, institutionMartialLean } from './moralMartialLean.js';
+import { readinessOf } from './martialReadiness.js';
+import { martialEmergenceTilt } from './moralInstitutionPressure.js';
 
 const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
@@ -623,6 +629,20 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
       const chains = deriveLifecycleChains(settlement);
       const gaps = detectInstitutionGaps(settlement, chains);
       if (!gaps.length) continue;
+      // W-F8 EMERGENCE WEIGHTING: a militarized town seeds MARTIAL institutions sooner
+      // (garrison/armoury — the war-supply birth distribution). Lift the affinity of any
+      // martial gap by the readiness tilt and re-sort; readiness 0 ⇒ tilt 1 ⇒ byte-identical
+      // ordering. (Full moral-institution founding joins Phase 5 with the catalog coding.)
+      const martialReadiness01 = readinessOf(settlement);
+      if (martialReadiness01 > 0) {
+        const tilt = martialEmergenceTilt(martialReadiness01);
+        for (const g of gaps) {
+          if (institutionMartialLean({ name: g.name, category: g.category, tags: g.spec?.tags })) {
+            g.affinity = Math.min(1, (Number(g.affinity) || 0) * tilt);
+          }
+        }
+        gaps.sort((a, b) => b.affinity - a.affinity || (String(a.name) < String(b.name) ? -1 : String(a.name) > String(b.name) ? 1 : 0));
+      }
       const gap = gaps[0];
       const probability = buildChance({ streak: drift.streak, health, affinity: gap.affinity, priorBuilds });
       if (probability <= 0) continue;
@@ -842,6 +862,45 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
         tier: settlement.tier || null,
         outcomeId: outcome.id || null,
         reason: patch.reason || 'Sustained economic decline.',
+      }),
+    };
+  }
+
+  // W-F8 MORAL/MARTIAL ABOLITION — the faith seat tears down a morally-loaded (or a
+  // lapsed martial) institution. Distinct from economic 'close': it is driven by patron
+  // conduct, so it does NOT gate on the criminal-syndicate exemption (the owner deems
+  // these morally-loaded-but-NON-criminal). Re-verifies at apply time (self-contained,
+  // proposal-safe): the institution must STILL be present, morally-coded or martial, and
+  // NOT required/essential/tier-required (a patron cannot abolish the town's granary).
+  if (patch.action === 'abolish') {
+    if (index < 0) return settlement;
+    const target = institutions[index];
+    if (target._worldPulseInactive || ['removed', 'destroyed', 'remnant'].includes(String(target.status || '').toLowerCase())) return settlement;
+    if (target.required || target.requiredForTier) return settlement;
+    const stillLoaded = institutionMoralLean(target) || institutionMartialLean(target);
+    if (!stillLoaded) return settlement;
+    const fate = patch.fate || 'abolished';
+    const abolished = {
+      ...target,
+      status: 'remnant',
+      _worldPulseInactive: true,
+      _worldPulseMorallyAbolished: true,
+      worldPulseFate: fate,
+      closedByWorldPulseOutcomeId: outcome.id || null,
+      remnantReason: patch.reason || `${fate === 'disbanded' ? 'Disbanded' : 'Abolished'} by the settlement's patron.`,
+    };
+    const next = [...institutions];
+    next[index] = abolished;
+    return {
+      ...settlement,
+      institutions: next,
+      institutionHistory: appendInstitutionHistory(settlement, {
+        name: target.name,
+        category: target.category || null,
+        fate,
+        tier: settlement.tier || null,
+        outcomeId: outcome.id || null,
+        reason: patch.reason || 'Abolished by the patron seat.',
       }),
     };
   }

@@ -150,6 +150,38 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.config.tradeRouteAccess).toBe('road');
   });
 
+  it('(121/129) strips BOTH generation-seed carriers (_seed / _regenSeed / _config) in full mode', () => {
+    // W-F8 diagnostic: full mode deep-clones and only deletes named DM blocks, so it
+    // skipped the fail-closed allowlist that drops seeds in default mode — leaking a
+    // reproducibility secret on a DM-full share. Mirrors server migration 121/129
+    // (`- '_seed' - '_regenSeed' - '_config'` on _gallery_dm_full_json, plus config._seed).
+    const out = toPublicSafe({
+      name: 'Foo', tier: 'town',
+      _seed: 'seed-abc', _regenSeed: 'regen-xyz', _config: { intent: 'x' },
+      plotHooks: ['the heir is hidden'],
+      config: { _seed: 'nested-seed', primaryDeityRef: 'deity:core:sun', tradeRouteAccess: 'road' },
+    }, { full: true });
+    // The owner's DM content survives full mode…
+    expect(out.plotHooks).toEqual(['the heir is hidden']);
+    // …but a generation seed is confidential in EVERY gallery view, DM-full included.
+    expect(out._seed).toBeUndefined();
+    expect(out._regenSeed).toBeUndefined();
+    expect(out._config).toBeUndefined();
+    // config survives with its own nested _seed removed; benign config + embeds stay.
+    expect(out.config).toBeTruthy();
+    expect(out.config._seed).toBeUndefined();
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.tradeRouteAccess).toBe('road');
+  });
+
+  it('does not mutate the input in full mode when stripping seed carriers', () => {
+    const input = { name: 'X', _seed: 's', _regenSeed: 'r', _config: {}, config: { _seed: 'ns', primaryDeityRef: 'd' } };
+    toPublicSafe(input, { full: true });
+    expect(input._seed).toBe('s');
+    expect(input._regenSeed).toBe('r');
+    expect(input.config._seed).toBe('ns');
+  });
+
   it('does not mutate the input config in full mode when stripping latentPantheon', () => {
     const input = { name: 'X', config: { latentPantheon: { patron: { name: 'The Deep' } }, primaryDeityRef: 'deity:core:sun' } };
     toPublicSafe(input, { full: true });

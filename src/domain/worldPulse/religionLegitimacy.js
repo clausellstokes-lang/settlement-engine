@@ -29,6 +29,13 @@ import { lawSign } from './deityStance.js';
 // Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
 // (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
 import { evil01, chaos01 } from './deityAxes.js';
+// Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
+// STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
+// and its martial readiness (a maintained war machine is warlike conduct). Both close
+// the fit loop: keeping a cruel institution under a good patron, or arming under a
+// peacelike one, registers as DRIFT. Both read 0 for a settlement with none ⇒ byte-identical.
+import { settlementMoralConductLean } from './moralMartialLean.js';
+import { settlementMartialConductLean } from './martialReadiness.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
 const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
@@ -90,6 +97,14 @@ export const RELIGION_LEGITIMACY_TUNING = Object.freeze({
   CONDUCT_FIT_W: 0.14,          // max legitimacy swing from ±full conduct alignment
   CONDUCT_GOV_W: 0.6,           // governance-character weight in the conduct plane…
   CONDUCT_COMPROMISE_W: 0.4,    // …vs corruption/compromise depth
+  // ── W-F8 endogenous STRUCTURE terms (moral institutions + martial readiness) ──
+  // Additive nudges on the conduct plane from the settlement's own STANDING structure,
+  // both EXACTLY 0 when absent (no morally-coded institution / no readiness record) ⇒
+  // byte-identical. The moral term shifts BOTH axes (cruelty→evil, disorder→chaos);
+  // the martial term shifts toward the warlike quadrant (evil+chaos), so a peacelike
+  // patron over a war machine reads a mismatch (the demilitarization pressure).
+  CONDUCT_MORAL_INST_W: 0.3,    // signed cruelty/disorder lean of morally-coded institutions
+  CONDUCT_MARTIAL_W: 0.35,      // warlike lean from martial readiness (already 0..~0.6 signed +)
   // ── W-F4 CLERGY LEGITIMACY DRAG (owner clergy-lens addendum) ────────────────
   // A scandalous priesthood is a legitimacy drag: the god's seat is only as clean as
   // the clergy who minister it. Keyed on the influence-weighted corruptible-flaw taint,
@@ -180,7 +195,7 @@ export function orgPower(npc) {
  * lean, how much org-power backs it, and the corruption it sits in. Folds the
  * governing faction's archetype with its strongest linked NPC's authored alignment.
  * @param {import('../settlement.schema.js').SimSettlement} settlement
- * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number }}
+ * @returns {{ temper: number, align: number, power: number, corrupt: number, compromise: number, moralLean: { cruelty: number, disorder: number }, martialLean: number }}
  */
 export function rulerLens(settlement) {
   const ps = settlement?.powerStructure || {};
@@ -216,7 +231,13 @@ export function rulerLens(settlement) {
   const crimInst = climate.hasCriminalInst ? clamp01(0.3 + 0.18 * (Array.isArray(climate.criminalInstitutions) ? climate.criminalInstitutions.length : 1)) : 0;
   const factionDark = String(ruler?.archetype) === 'criminal' ? 0.5 : 0;
   const compromise = clamp01(0.35 * crime + 0.28 * crimInst + 0.40 * rulerFlaw + 0.25 * factionDark);
-  return { temper: clamp01(lean.temper), align, power, corrupt: crime, compromise };
+  // W-F8: the settlement's own STANDING structure as endogenous conduct — its
+  // morally-coded institutions ({cruelty,disorder} signed lean) and its martial
+  // readiness (signed warlike lean). Both 0 when absent ⇒ the conduct plane is
+  // unchanged ⇒ byte-identical for every settlement without them.
+  const moralLean = settlementMoralConductLean(settlement);
+  const martialLean = settlementMartialConductLean(settlement);
+  return { temper: clamp01(lean.temper), align, power, corrupt: crime, compromise, moralLean, martialLean };
 }
 
 /** 0..1 fit between a deity and a ruling-power lens (alignment + temperament). @param {any} deity @param {{temper:number,align:number}} lens */
@@ -313,7 +334,7 @@ export function chronicleMomentum(worldState, cid, deity, lens) {
  * 0.5-neutral, from DOMESTIC signals ONLY: governance character (lens.align, 0 evil …
  * 1 good), corruption/compromise depth, and the settlement's own governance-FORM law
  * affinity. No external actions (war/trade/partnerships), no user/party. Pure.
- * @param {{ align?: number, compromise?: number }} lens
+ * @param {{ align?: number, compromise?: number, moralLean?: { cruelty?: number, disorder?: number }, martialLean?: number }} lens
  * @param {string|null|undefined} government
  * @returns {{ evil01: number, chaos01: number }}
  */
@@ -322,9 +343,16 @@ function conductPlane(lens, government) {
   const compromise = clamp01(Number(lens?.compromise) || 0);
   const align = Number.isFinite(lens?.align) ? clamp01(Number(lens.align)) : 0.5;   // 0 evil … 1 good
   const rot = 0.5 + 0.5 * compromise;                                               // 0.5 clean … 1 rotten
-  const conductEvil01 = clamp01((1 - align) * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W);
+  // W-F8 endogenous STRUCTURE nudges — 0 when absent (⇒ byte-identical). Signed
+  // cruelty/disorder from morally-coded institutions; signed warlike lean from readiness
+  // (pushes BOTH axes toward the warlike evil+chaos quadrant).
+  const moral = lens?.moralLean || { cruelty: 0, disorder: 0 };
+  const martial = Number(lens?.martialLean) || 0;
+  const evilStruct = (Number(moral.cruelty) || 0) * T.CONDUCT_MORAL_INST_W + martial * T.CONDUCT_MARTIAL_W;
+  const chaosStruct = (Number(moral.disorder) || 0) * T.CONDUCT_MORAL_INST_W + martial * T.CONDUCT_MARTIAL_W;
+  const conductEvil01 = clamp01((1 - align) * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W + evilStruct);
   const govChaos = (1 - governmentLawAffinity(government)) / 2;                      // 0 lawful … 1 chaotic (0.5 neutral)
-  const conductChaos01 = clamp01(govChaos * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W);
+  const conductChaos01 = clamp01(govChaos * T.CONDUCT_GOV_W + rot * T.CONDUCT_COMPROMISE_W + chaosStruct);
   return { evil01: conductEvil01, chaos01: conductChaos01 };
 }
 

@@ -371,6 +371,20 @@ export function pietyLawMegaphoneOf(settlement) {
   return p && p.dampener && Number.isFinite(p.dampener.megaphoneLaw) ? p.dampener.megaphoneLaw : 1;
 }
 
+/** LAW-channel bleed-through 0..1 — the symmetric twin of pietyMoralBleedOf: the base
+ *  amplifier (localMult × realmMult) muted by the LAW megaphone only (a law-opposed
+ *  runner-up dilutes the seat's order/disorder drive; a moral-opposed one does not).
+ *  Computed from the EXISTING record fields (no stored key) so the piety record shape is
+ *  unchanged. 0 when absent / not devout. Read by W-F8's moral-institution LAW-axis
+ *  pressure. @param {SimSettlement} settlement @returns {number} */
+export function pietyLawBleedOf(settlement) {
+  const p = pietyOf(settlement);
+  if (!p) return 0;
+  const base = (Number.isFinite(p.localMult) ? p.localMult : 1) * (Number.isFinite(p.realmMult) ? p.realmMult : 1);
+  const megaLaw = p.dampener && Number.isFinite(p.dampener.megaphoneLaw) ? p.dampener.megaphoneLaw : 1;
+  return clamp01(base * megaLaw - 1);
+}
+
 /** The `{ localMult, realmMult }` receipt tag for an amplified outcome, or null when there is
  *  no record (so deity-free outcomes carry no tag). @param {SimSettlement} settlement
  *  @returns {{ localMult: number, realmMult: number } | null} */

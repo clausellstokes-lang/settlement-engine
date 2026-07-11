@@ -198,6 +198,18 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clone.dmNotes;
     delete clone.notes;
     delete clone.narrativeNotes;
+    // SEED POSTURE (099/121 → mirrored here, W-F8): a generation seed is CONFIDENTIAL in
+    // every gallery view — even a DM-full share. The owner's opt-in reveals authored
+    // DM-private content (secrets, hooks, compass); a seed replays the procedural output
+    // and is never that. Default mode already drops these via the fail-closed top-level
+    // allowlist (+ the recursive `seed`/`_config` denylist); full mode skips that gate, so
+    // strip BOTH top-level generation-seed carriers (_seed / _regenSeed) + _config here,
+    // exactly as dmNotes above is. Mirrors server migration 121/129 (`- '_seed' -
+    // '_regenSeed' - '_config'` on _gallery_dm_full_json); pinned against the SQL by the
+    // full-mode seed test. (regenNPCsPipeline stamps _regenSeed at the settlement top level.)
+    delete clone._seed;
+    delete clone._regenSeed;
+    delete clone._config;
     // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting
     // pantheon (config.latentPantheon) NEVER leaves the account — not even on a
     // DM-full share. The owner's gallery_share_dm opt-in reveals THEIR authored
@@ -211,6 +223,9 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     // stay — a shared premium pantheon displays read-only to all viewers.
     if (clone.config && typeof clone.config === 'object' && !Array.isArray(clone.config)) {
       delete clone.config.latentPantheon;
+      // …and the seed carried INSIDE config (migration 121/129 keeps config but removes
+      // config._seed): the nested twin of the top-level strip above.
+      delete clone.config._seed;
     }
     // aiSettlement is a full refined-settlement clone — its PROSE is governed by
     // gallery_share_narrated, NOT this toggle. But the DM Compass (which the owner

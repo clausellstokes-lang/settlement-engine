@@ -27,6 +27,9 @@
  */
 
 import { resolveSettlementTerrain } from '../resolveTerrain.js';
+// W-F8: readiness quality — drilled/maintained forces bleed slower (decay) and hold the
+// opening tick gentler (first-tick). Both 1× at readiness 0 ⇒ byte-identical.
+import { attritionDecayMult, firstTickAttritionMult } from './martialReadiness.js';
 
 const clamp01 = (/** @type {any} */ v) => Math.max(0, Math.min(1, Number(v) || 0));
 
@@ -166,6 +169,7 @@ export function relativeStrengthTilt(attackerCurrent, defenderCurrent, isAttacke
  * @param {number} args.fortification       0..1 — the defender's fortification strength.
  * @param {{ supplyIntegrity?: number, morale?: number, magicSupport?: number, foodReserve?: number }} [args.facets]
  *        the THIS-army's mitigating facets (0..1 each). Defaults to neutral 0.5.
+ * @param {number} [args.readiness]  0..1 martial readiness (W-F8) — gentler first-tick + slower decay; 0 ⇒ byte-identical.
  * @returns {{ lossFraction: number, reasons: string[] }}
  */
 export function computeEngagementAttrition({
@@ -176,6 +180,7 @@ export function computeEngagementAttrition({
   deploymentAge = 0,
   fortification = 0,
   facets = {},
+  readiness = 0,
 }) {
   const reasons = [];
   const base = isAttacker ? BASE_ATTACKER_LOSS : BASE_DEFENDER_LOSS;
@@ -202,11 +207,19 @@ export function computeEngagementAttrition({
     SUPPLY_MITIGATION * supply + MORALE_MITIGATION * morale + MAGIC_MITIGATION * magic + FOOD_MITIGATION * food,
   );
 
-  let loss = base * bandMult * tilt * ageRamp * fortMult * (1 - mitigation);
+  // W-F8 MARTIAL READINESS quality: drilled, maintained, well-supplied forces bleed
+  // slower THROUGHOUT (decayMult ≤1) and hold the OPENING tick gentler (the practiced
+  // first shock, deploymentAge ≤1). Both EXACTLY 1 at readiness 0 ⇒ byte-identical.
+  // Efficiency, never invincibility — the loss still clamps at MAX_LOSS_FRACTION.
+  const rdy = clamp01(readiness);
+  const decayMult = attritionDecayMult(rdy);
+  const firstTickMult = (Number(deploymentAge) || 0) <= 1 ? firstTickAttritionMult(rdy) : 1;
+
+  let loss = base * bandMult * tilt * ageRamp * fortMult * (1 - mitigation) * decayMult * firstTickMult;
   loss = Math.max(0, Math.min(MAX_LOSS_FRACTION, loss));
 
   reasons.push(
-    `${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}% → ${(loss * 100).toFixed(1)}% lost.`,
+    `${isAttacker ? 'Attacker' : 'Defender'} band ${band} (×${bandMult.toFixed(2)}), strength-tilt ×${tilt.toFixed(2)}, age-ramp ×${ageRamp.toFixed(2)}, fortification ×${fortMult.toFixed(2)}, mitigation ${(mitigation * 100).toFixed(0)}%${rdy > 0 ? `, readiness ×${(decayMult * firstTickMult).toFixed(2)}` : ''} → ${(loss * 100).toFixed(1)}% lost.`,
   );
 
   return { lossFraction: clamp01(loss), reasons };
@@ -247,6 +260,7 @@ export function applyAttritionToRecord(record, { isAttacker, band, attackerCurre
     deploymentAge: Number(r.deploymentAge) || 0,
     fortification,
     facets,
+    readiness: Number(r.readiness) || 0,   // W-F8: stamped at seedDeploymentState; 0 ⇒ byte-identical
   });
   const lostPoints = current * lossFraction;
   const nextStrength = Math.max(0, current - lostPoints);

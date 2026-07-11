@@ -39,6 +39,13 @@ export const FIDELITY_TUNING = Object.freeze({
   SUPERLINEAR_EXP: 1.6,  // >1 ⇒ error grows superlinearly toward the chaotic pole
   MAX_ERROR: 0.6,        // hard cap on |signed error| (the playable-but-dramatic bound)
   CHAOS_PULL_MAX: 2.0,   // clamp on chaosPull (pietyLocalMult can reach ~1.65)
+  // W-F8 STRATEGIC RUST — the SECOND fidelity term. total error = chaos (temperamental
+  // indiscipline) + rust (institutional inexperience), the two INDEPENDENT and summed, so
+  // experience never CURES the chaos term (its own floor stands) and a lawful realm still
+  // blunders its first war after a long peace (the 1914 problem). The rust magnitude is
+  // supplied by the caller (rustMagnitude in martialReadiness), already capped; here we only
+  // cap the COMBINED error. rust defaults 0 ⇒ every existing call site is byte-identical.
+  TOTAL_MAX: 0.75,       // hard cap on |chaos + rust| combined signed error
 });
 
 /** @param {number} x @returns {number} */
@@ -81,11 +88,17 @@ export function fidelityErrorMagnitude(chaosPull) {
  * rng — when chaosPull ≤ 0 or the rng is absent, so a lawful/neutral/no-piety actor's
  * estimate equals the truth and the rng stream is untouched (byte-identical). Pure
  * given the injected rng.
- * @param {{ rng: { fork?: (key: string) => { random: () => number } }|null, site: string, tick: number|string, cid: string, decisionKey: string, chaosPull: number }} args
+ * W-F8: an optional `rust` magnitude (0..) is ADDED to the chaos magnitude before the cap —
+ * the second, INDEPENDENT fidelity term (institutional inexperience). rust 0 (default) ⇒
+ * mag = the chaos magnitude ⇒ byte-identical to the pre-W-F8 factor at every existing site;
+ * a lawful/neutral patron (chaosPull 0) with rust > 0 still forks and errs (the 1914 problem).
+ * @param {{ rng: { fork?: (key: string) => { random: () => number } }|null, site: string, tick: number|string, cid: string, decisionKey: string, chaosPull: number, rust?: number }} args
  * @returns {number}
  */
-export function fidelityFactor({ rng, site, tick, cid, decisionKey, chaosPull }) {
-  const mag = fidelityErrorMagnitude(chaosPull);
+export function fidelityFactor({ rng, site, tick, cid, decisionKey, chaosPull, rust = 0 }) {
+  const chaosMag = fidelityErrorMagnitude(chaosPull);
+  const rustMag = Math.max(0, Number(rust) || 0);
+  const mag = Math.min(FIDELITY_TUNING.TOTAL_MAX, chaosMag + rustMag);   // independent floors, capped sum
   if (mag <= 0 || !rng?.fork) return 1;
   const u = rng.fork(`fidelity::${site}::${tick}::${cid}::${decisionKey}`).random();
   return 1 + (2 * u - 1) * mag;   // signed error in [−mag, +mag]

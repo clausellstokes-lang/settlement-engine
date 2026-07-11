@@ -12,6 +12,11 @@ import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 // no-piety) ⇒ factor 1, no rng forked ⇒ byte-identical; and with no injected rng the
 // term is inert, so every existing evaluateTierResourceDynamics caller is unchanged.
 import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
+// W-F8: the martial-readiness tilt on the value ranking — war-supply chains score higher
+// in a militarized town, civilian chains take an upkeep drag (guns-vs-butter, brake 1).
+// readinessOf 0 (no martial record) ⇒ both factors 1 ⇒ byte-identical.
+import { readinessOf, readinessValueTilt, readinessUpkeepDrag } from './martialReadiness.js';
+import { isWarSupplyResource } from './moralMartialLean.js';
 
 // Minimum pressure for the city+ depletion floor to fire. The tier branch used to
 // emit depletion candidates regardless of pressure, so a quiescent zero-pressure
@@ -329,6 +334,12 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
   // pressure equals the true pressure, byte-identical) unless it carries a chaotic-devout
   // patron with a projected piety record. Computed once per settlement.
   const chaosPull = rng ? chaosPullOf(settlement) : 0;
+  // W-F8: the militarization state — 0 (both readiness factors 1, byte-identical) unless a
+  // projected martial record is present. rng-gated like chaosPull so rng-less estimate
+  // paths stay byte-identical. Precomputed per settlement (the value tilt / upkeep drag).
+  const readiness01 = rng ? readinessOf(settlement) : 0;
+  const warSupplyTilt = readiness01 > 0 ? readinessValueTilt(settlement) : 1;   // ≥1 on war-supply chains
+  const upkeepDrag = readiness01 > 0 ? readinessUpkeepDrag(settlement) : 1;     // ≤1 on civilian chains
   const out = [];
 
   for (const resource of resources.slice(0, 8)) {
@@ -336,14 +347,18 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
     const economicRole = resourceEconomicRole(settlement, resource);
     const taxonomy = classifyResource(resource);
     const tradeLoad = economicRole === 'primary_export' || economicRole === 'export_and_import' ? 0.12 : economicRole === 'primary_import' ? 0.06 : 0;
+    // W-F8 readiness tilt on the VALUE ranking: a militarized town leans into war-supply
+    // chains (ore/smelting/weapons/leather/horses/timber — WAR_SUPPLY_CHAINS) and lets
+    // civilian chains take the garrison-upkeep drag. Factor 1 when no martial record.
+    const readinessTilt = readiness01 > 0 ? (isWarSupplyResource(resource) ? warSupplyTilt : upkeepDrag) : 1;
     // The chaotic-devout economy acts on a NOISY per-chain estimate of pressure (its
     // value ranking) — so it over/under-develops the wrong chains. Seeded per (site,
     // tick,settlement,resource); factor EXACTLY 1 (byte-identical) when chaosPull ≤ 0.
     const perceivedNoise = fidelityFactor({ rng, site: 'development', tick, cid: String(item.id), decisionKey: `chain:${resource}`, chaosPull });
-    const effectivePressure = clamp01((pressureScore + tradeLoad) * perceivedNoise);
+    const effectivePressure = clamp01((pressureScore + tradeLoad) * perceivedNoise * readinessTilt);
     // The same noisy estimate governs the RECOVERY decision (a chaotic economy is late
     // to reopen a saturated chain). Equals pressureScore exactly when chaosPull ≤ 0.
-    const perceivedPressureScore = clamp01(pressureScore * perceivedNoise);
+    const perceivedPressureScore = clamp01(pressureScore * perceivedNoise * readinessTilt);
     if (state !== 'depleted' && (effectivePressure >= 0.64 || (rank >= tierRank('city') && effectivePressure >= RESOURCE_CITY_FLOOR_PRESSURE))) {
       const severity = clamp01(effectivePressure * 0.55 + rank / (TIER_ORDER.length - 1) * 0.35 + multiplier * 0.1);
       out.push({

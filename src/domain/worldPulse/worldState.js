@@ -199,11 +199,18 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   // byte-identically to today under the dormancy oracle). Stripped from the shallow
   // spread; re-added below ONLY when present and non-empty.
   if ('pausedAdvance' in shallowRaw) delete shallowRaw.pausedAdvance;
+  // martialReadiness — CONDITIONAL (W-F8): the per-settlement martial-readiness /
+  // strategic-experience ledger ({ cid -> { readiness01, experience01 } }). A faith-
+  // gated, war-experience-driven quantity — ABSENT until a settlement first arms under
+  // a patron, so a deity-free / war-free campaign carries NO key (byte-identical under
+  // the dormancy oracle). Stripped here, re-added conditionally below.
+  if ('martialReadiness' in shallowRaw) delete shallowRaw.martialReadiness;
   const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
   const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
   const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
   const clonedReligionStates = deepCloneConditionalLedger(raw?.religionStates);
   const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
+  const clonedMartialReadiness = deepCloneConditionalLedger(raw?.martialReadiness);
   return {
     ...base,
     ...shallowRaw,
@@ -270,6 +277,13 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     // state. CLEARING the pause writes pausedAdvance:null/absent ⇒ this returns
     // undefined ⇒ the key is omitted (back to byte-neutral).
     ...(clonedPausedAdvance !== undefined ? { pausedAdvance: clonedPausedAdvance } : {}),
+    // martialReadiness — CONDITIONAL materialization (W-F8), identical discipline to
+    // religionStates: the per-settlement { readiness01, experience01 } ledger with
+    // asymmetric hysteresis. ABSENT until a settlement first arms under a patron (a
+    // deity-free / war-free campaign carries NO key ⇒ byte-identical under the dormancy
+    // oracle), DEEP-cloned when present so a pre-tick snapshot never aliases live
+    // readiness across ticks (read-last/write-next).
+    ...(clonedMartialReadiness !== undefined ? { martialReadiness: clonedMartialReadiness } : {}),
   };
 }
 

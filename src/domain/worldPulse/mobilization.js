@@ -40,6 +40,7 @@
 import { computeAggressiveness } from './disposition.js';
 import { foodLedger } from '../foodLedger.js';
 import { clamp01 } from '../region/contestMath.js';
+import { readinessMobilizationMult } from './martialReadiness.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -191,7 +192,9 @@ export function rampReadiness(item, worldState) {
     + ECONOMY_RAMP_WEIGHT * (economy / 100 - 0.5)
     + LEGITIMACY_RAMP_WEIGHT * (legit / 100 - 0.5);
   // A neutral settlement (drive 0) multiplies by 1.0; +0.5 drive → ~1.5×; −0.5 → ~0.5×.
-  return Math.max(0.25, 1 + drive);
+  // W-F8: a MILITARIZED town mobilizes FASTER — the practiced march sooner. Factor ≥1,
+  // exactly 1 (byte-identical) when the settlement carries no projected martial record.
+  return Math.max(0.25, 1 + drive) * readinessMobilizationMult(item?.settlement);
 }
 
 /**

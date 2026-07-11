@@ -51,6 +51,10 @@ import { fidelityFactor, chaosPullOf } from './fidelityNoise.js';
 import { formatCount } from '../formatNumber.js';
 import { isWarReady } from './mobilization.js';
 import { applyAttritionToRecord, fortificationStrength } from './attrition.js';
+// W-F8: a militarized home fields BETTER forces — higher effective strength (efficiency,
+// never invincibility) + a `readiness` stamp the attrition kernel reads for slower decay.
+// readinessOf 0 (no martial record) ⇒ no lift, no stamp ⇒ byte-identical.
+import { readinessOf, effectiveStatMult, rustOf } from './martialReadiness.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
@@ -555,13 +559,17 @@ function buildCapacityLookup(snapshot, deployments) {
  * @param {number} args.tick
  * @param {number} args.logisticsBurden  0..1 distance/route burden to the target.
  * @param {string} [args.role]
+ * @param {number} [args.readiness]  0..1 martial readiness (W-F8) — lifts effective strength + stamps the record; 0 ⇒ byte-identical.
  * @returns {DeploymentRecord} the enriched deployment record.
  */
-function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege' }) {
+function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege', readiness = 0 }) {
   const facets = cap.facets || {};
   const norm = (/** @type {any} */ v, /** @type {number} */ fallback) =>
     Number.isFinite(v) ? clamp01(v / 100) : fallback;
-  const start = Math.max(0, Number(cap.offensive) || 0);
+  // W-F8: readiness lifts effective strength (drilled levies, maintained arms, supply that
+  // reaches the front) — efficiency via the existing capacity math; 1× at readiness 0.
+  const rdy = clamp01(readiness);
+  const start = Math.max(0, Number(cap.offensive) || 0) * (rdy > 0 ? effectiveStatMult(rdy) : 1);
   return {
     targetId,
     sinceTick: tick,
@@ -570,6 +578,9 @@ function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'sie
     maxStartStrength: start,
     currentEffectiveStrength: start,
     accumulatedAttrition: 0,
+    // W-F8 readiness stamp (the attrition kernel reads it for slower decay). Conditional
+    // — a home with no martial record stamps nothing ⇒ byte-identical deployment ledger.
+    ...(rdy > 0 ? { readiness: rdy } : {}),
     reinforcementFlow: 0,
     deploymentAge: 0,
     // ── supporting facets (0..1) — seeded from the model, eroded by attrition,
@@ -602,14 +613,19 @@ function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'sie
  * @param {number} logisticsBurden
  * @returns {DeploymentRecord}
  */
-function ensureStatefulRecord(record, cap, tick, logisticsBurden) {
+function ensureStatefulRecord(record, cap, tick, logisticsBurden, readiness = 0) {
   const r = record || {};
+  const rdy = clamp01(readiness);
   if (Number.isFinite(r.maxStartStrength) && Number.isFinite(r.currentEffectiveStrength)) {
     // Already stateful — keep the live strength, only backfill an absent burden/age.
+    // W-F8: refresh the readiness stamp so an ongoing siege tracks the home's evolving
+    // militarization. Conditional — 0 keeps whatever the record already carried (or
+    // nothing), so a pre-W-F8 / deity-free record stays byte-identical.
     return {
       ...r,
       logisticsBurden: Number.isFinite(r.logisticsBurden) ? r.logisticsBurden : clamp01(logisticsBurden),
       deploymentAge: Number.isFinite(r.deploymentAge) ? r.deploymentAge : Math.max(0, tick - (Number(r.sinceTick) || tick)),
+      ...(rdy > 0 ? { readiness: rdy } : (Number.isFinite(r.readiness) ? { readiness: r.readiness } : {})),
     };
   }
   const seeded = seedDeploymentState({
@@ -618,6 +634,7 @@ function ensureStatefulRecord(record, cap, tick, logisticsBurden) {
     tick,
     logisticsBurden,
     role: r.role || 'siege',
+    readiness: rdy,
   });
   // Preserve the original sinceTick so deploymentAge reflects the true campaign length.
   const sinceTick = Number.isFinite(r.sinceTick) ? r.sinceTick : tick;
@@ -766,10 +783,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0 }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -814,11 +831,15 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   // (the owner's variance-with-occasional-payoff). attackerFidelity 0 ⇒ factor 1, NO
   // rng forked ⇒ byte-identical for every deity-free / lawful / no-piety besieger.
   const decisionCid = besiegers.length ? String(besiegers[0]) : String(targetId);
-  const estAttacker = attackerFidelity > 0
-    ? Math.max(0, coalitionCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `own:${stablePart(targetId)}`, chaosPull: attackerFidelity }))
+  // W-F8: STRATEGIC RUST adds to the estimate error even for a lawful/neutral (chaosPull 0)
+  // besieger — a long-peace realm misjudges its FIRST war (the 1914 problem). rust 0 ⇒
+  // no added noise; attackerFidelity 0 AND rust 0 ⇒ NO rng forked ⇒ byte-identical.
+  const estimateNoisy = attackerFidelity > 0 || attackerRust > 0;
+  const estAttacker = estimateNoisy
+    ? Math.max(0, coalitionCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `own:${stablePart(targetId)}`, chaosPull: attackerFidelity, rust: attackerRust }))
     : coalitionCurrent;
-  const estDefender = attackerFidelity > 0
-    ? Math.max(0, defenderCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `foe:${stablePart(targetId)}`, chaosPull: attackerFidelity }))
+  const estDefender = estimateNoisy
+    ? Math.max(0, defenderCurrent * fidelityFactor({ rng, site: 'war_initiation', tick, cid: decisionCid, decisionKey: `foe:${stablePart(targetId)}`, chaosPull: attackerFidelity, rust: attackerRust }))
     : defenderCurrent;
   const { verdict, ratio, reasons } = classifyFeasibility({
     attackerCurrent: estAttacker,
@@ -1063,7 +1084,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     if (!rec?.targetId) continue;
     const burden = logisticsBurdenFor(graph, fromId, rec.targetId);
     const cap = capacityFor(fromId);
-    const stateful = ensureStatefulRecord(rec, cap, tick, burden);
+    const stateful = ensureStatefulRecord(rec, cap, tick, burden, readinessOf(snapshot?.byId?.get?.(String(fromId))?.settlement));
     // ── HOMEOSTASIS RE-COUPLING: the home's live war-exhaustion / war-drain
     // erodes the offensive capacity (cap.offensive subtracts those). A war-weary home
     // FIELDS A WEAKER ARMY, so cap the army's effective strength at the live offensive
@@ -1169,7 +1190,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // fidelity pull — 0 (⇒ the classify inputs stay TRUE, byte-identical) unless it
     // carries a chaotic-devout patron with a projected piety record.
     const attackerFidelity = besiegers.length ? chaosPullOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) : 0;
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity });
+    const attackerRust = besiegers.length ? rustOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) : 0;
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
@@ -1480,6 +1502,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       tick,
       logisticsBurden: logisticsBurdenFor(graph, fromId, chosenTarget),
       role: 'siege',
+      readiness: readinessOf(snapshot?.byId?.get?.(String(fromId))?.settlement),
     });
     graphChannels.push(mintDirectedChannel({
       type: 'war_front',

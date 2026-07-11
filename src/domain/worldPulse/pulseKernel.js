@@ -20,6 +20,7 @@ import { evaluateTradeWar } from './tradeWar.js';
 import { advanceReligionStates } from './religiousContest.js';
 import { realmPietyMult } from './piety.js';
 import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
+import { advanceMartialReadiness } from './martialReadiness.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { deploymentReturnOutcomes } from './deploymentReturn.js';
 import { evaluateOccupations } from './occupation.js';
@@ -53,6 +54,7 @@ import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
+import { evaluateMoralInstitutionPressure } from './moralInstitutionPressure.js';
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
@@ -883,6 +885,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     simulationRules,
   });
   worldState = instLifecycle.worldState;
+  // W-F8 MORAL/MARTIAL institution VIABILITY — the visible battleground. Built/torn down by
+  // who holds the patron seat; gated on a patron (config.primaryDeitySnapshot) ⇒ byte-
+  // identical without faith. Reads the tick-START projected piety megaphone + readiness off
+  // postTimeSnapshot. Its candidates roll through rollCandidates like the economy lane's.
+  const moralInst = evaluateMoralInstitutionPressure(worldState, postTimeSnapshot, {
+    tick: worldState.tick,
+    simulationRules,
+  });
+  worldState = moralInst.worldState;
   const structuralCandidates = evaluatePopulationDynamics(postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -926,7 +937,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates];
   const { selected, rollExplanations } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
@@ -1065,6 +1076,29 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   if (nextReligionStates && Object.keys(nextReligionStates).length) {
     memoryState = { ...memoryState, religionStates: nextReligionStates };
   }
+  // W-F8 MARTIAL READINESS / STRATEGIC EXPERIENCE — READ-LAST/WRITE-NEXT, gated on active
+  // religion (the faith gate keeps deity-free worlds byte-identical). Reads THIS tick's war
+  // ledgers (warPosture/deployments/occupations/warExhaustion on memoryState) + the patron's
+  // derived temper through the piety megaphone, ratchets readiness (structural, slow) and
+  // EMAs experience (recency-sharp, fast), and CONDITIONALLY materializes the ledger — an
+  // all-decayed / war-free faith world drops the key (byte-neutral under the dormancy oracle).
+  /** @type {Record<string, import('./martialReadiness.js').MartialRecord>|null} */
+  let nextMartialByCid = null;
+  if (religionLocalActive && nextReligionStates) {
+    const martial = advanceMartialReadiness({
+      snapshot: pantheonSeatSnapshot || postTimeSnapshot,
+      worldState: memoryState,
+      religionStates: nextReligionStates,
+      pietyByCid: nextPietyByCid,
+      priorMartial: memoryState.martialReadiness || null,
+    });
+    nextMartialByCid = martial.martialByCid;
+    if (nextMartialByCid && Object.keys(nextMartialByCid).length) {
+      memoryState = { ...memoryState, martialReadiness: nextMartialByCid };
+    } else if (memoryState.martialReadiness !== undefined) {
+      const rest = { ...memoryState }; delete rest.martialReadiness; memoryState = rest;
+    }
+  }
   // The dossier stops lying: project the per-faction live state
   // (capture rung, momentum band, rivals, institution control) onto each
   // settlement's powerStructure.factions. Seam choice: HERE, after
@@ -1081,7 +1115,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // discredited one erodes it (feeding the coup cluster). No-op without religionStates,
     // a non-royal/theocratic government, or a deity-free settlement (byte-identical).
     if (nextReligionStates) {
-      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid);
+      projected = projectReligionStateOntoSettlement(projected, nextReligionStates, update.saveId, nextPietyByCid, nextMartialByCid);
       projected = applyDivineMandate(projected);
     }
     return projected === update.settlement ? update : { ...update, settlement: projected };
@@ -1093,7 +1127,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
+    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + moralInst.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
@@ -1199,7 +1233,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates],
+    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,

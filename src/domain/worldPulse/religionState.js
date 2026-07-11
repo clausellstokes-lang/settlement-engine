@@ -512,8 +512,12 @@ export function patronSnapshot(state) {
  *   tick's piety read-model per settlement (from advanceReligionStates). Attached to
  *   faithProfile.piety so next tick's amplified sites read it (tick-START measurement);
  *   absent ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the oracle.
+ * @param {Record<string, import('./martialReadiness.js').MartialRecord>|null} [martialByCid]
+ *   W-F8: the tick's martial-readiness/experience read-model per settlement. Attached to
+ *   faithProfile.martial (conditional) so next tick's expression sites read it; absent for
+ *   a war-free faith settlement ⇒ no martial key ⇒ byte-identical under the oracle.
  */
-export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null) {
+export function projectReligionStateOntoSettlement(settlement, religionStates, saveId, pietyByCid = null, martialByCid = null) {
   const state = religionStates?.[String(saveId)];
   if (!state || !state.deities) return settlement;
   const active = activeRefs(state.deities);
@@ -534,6 +538,9 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
   // for this settlement — the tick-START source next tick's amplified sites read. Absent
   // ⇒ no piety key ⇒ deity-free / pre-amplifier byte-identity under the dormancy oracle.
   const piety = pietyByCid ? pietyByCid[String(saveId)] : null;
+  // W-F8: the martial read-model (readiness / experience), conditional — absent for a
+  // war-free faith settlement ⇒ no martial key ⇒ byte-identical under the dormancy oracle.
+  const martial = martialByCid ? martialByCid[String(saveId)] : null;
   // The UNAFFILIATED SINK bucket (W-F5.5): the % of the town that keeps no god, surfaced
   // for the faith panel. Conditional — absent (byte-identical) wherever the sink never ran.
   const unaffiliated = Math.round(Number(state.noneShare) || 0);
@@ -542,6 +549,7 @@ export function projectReligionStateOntoSettlement(settlement, religionStates, s
     deities, contested, patronSecurity,
     ...(unaffiliated > 0 ? { unaffiliated } : {}),
     ...(piety ? { piety } : {}),
+    ...(martial ? { martial } : {}),
   };
   return { ...settlement, config: { ...settlement.config, faithProfile } };
 }
