@@ -445,6 +445,27 @@ converge toward TRUTH via pooled intel (a strategic advantage — they act sound
   culture (§II.5-2) + moral drift (§4g) + info-handling (here) — reinforcing DERIVE-it-endogenously
   (governance + dominant faith + recent acts) over a new authored field.
 
+**RISK ASSESSMENT IS THE UNIFYING FACULTY — information is its meta-layer (owner, round 11).** ALL of
+the above "goes into risk assessment." Everything a settlement DECIDES already runs through a RISK
+ASSESSMENT — the design has it in three places: routing cheap-vs-safe (§2/§6), army strategy/retreat
+(§5), and the war threat-assessment (§4g). The information dynamics (rounds 8-11) are NOT a parallel
+system; they are the INPUT-QUALITY dimension of that machinery. A risk assessment is now TWO layers:
+- OBJECT risk — how dangerous is this route / enemy / trade / conversion — computed over BELIEFS
+  (§4g belief map), NOT ground truth.
+- EPISTEMIC risk (round 11) — how RELIABLE is the information behind the belief: CONFIDENCE (§4f
+  fidelity — low confidence WIDENS the risk band); SOURCE RELIABILITY (round-11 alignment — a lawful
+  ally's intel weighted up, a chaotic/evil source discounted/suspected); CROSS-CONFIRMATION (§4f —
+  multi-source tightens the estimate, single-source is riskier to act on); and MANIPULATION RISK
+  (round 11 — "could this be planted by an enemy?" is itself a risk term, and discounting for it is
+  the DEFENSE against evil's weaponized false intel).
+MISJUDGMENT (§4g) is precisely a FAILURE at the epistemic layer — acting on unreliable intel as if
+certain. And the SAME alignment-governed faculty governs BOTH layers: the disposition that sets an
+actor's PHYSICAL risk tolerance (§2/§6 — lawful/seasoned reads danger true, chaotic/rusty mis-weights)
+is the SAME one that sets its EPISTEMIC weighting (lawful weights sources faithfully, chaotic
+erratically, evil self-servingly). ONE risk-assessment faculty, two domains — physical danger +
+epistemic reliability — the seam that UNIFIES the rounds 1-7 physical layer with the rounds 8-11
+information layer into one decision model.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
