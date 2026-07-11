@@ -251,10 +251,19 @@ function deityNameForRef(snapshot, deityId) {
  * @param {any} [args.snapshot]  the pre-tick snapshot, to resolve deity names.
  * @param {number} [args.tick]
  * @param {(string|null)} [args.now]
+ * @param {number} [args.realmMult]  Phase 4 W-F7 amplified-site #10 (narrative
+ *   salience): the realm-piety multiplier scales each arc's SIGNIFICANCE WEIGHT
+ *   (score) — a pantheon crossing in a devout realm ranks higher, in a secular one
+ *   lower. Exactly 1.0 when faith-spread is off / no realm (realmPietyMult is
+ *   toggle-gated), so a deity-free or spread-off pulse is byte-identical. The E4
+ *   feed-distribution caps (normalizeEntry round + sortEntries + MAX_ENTRIES slice)
+ *   then apply UNCHANGED: significance stays 'major', so salience can REORDER the
+ *   feed but never lets a news TYPE breach its share gate (it never floods).
  * @returns {Array<Object>} Wizard-News-shaped realm entries (may be empty)
  */
-export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0, now = null } = {}) {
+export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0, now = null, realmMult = 1 } = {}) {
   if (!Array.isArray(changes) || !changes.length) return [];
+  const g = Number.isFinite(realmMult) && realmMult > 0 ? realmMult : 1;
   const entries = [];
   const ordered = [...changes].sort((a, b) => (String(a.deityId) < String(b.deityId) ? -1 : String(a.deityId) > String(b.deityId) ? 1 : 0));
   for (const change of ordered) {
@@ -268,7 +277,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         tick,
         scope: 'realm',
         significance: 'major',
-        score: 86,
+        score: Math.round(86 * g),
         headline: `The Ascendancy of ${name}`,
         summary: `${name} has risen to a major power in the realm's pantheon. Temples multiply, rivals bend the knee, and the faithful walk the roads in numbers.`,
         kind: 'pantheon',
@@ -291,7 +300,7 @@ export function synthesizePantheonArcs({ changes = [], snapshot = null, tick = 0
         tick,
         scope: 'realm',
         significance: 'major',
-        score: 84,
+        score: Math.round(84 * g),
         headline: `The Twilight of ${name}`,
         summary: `${name} has fallen to a cult: abandoned altars, scattered clergy, and a faith remembered more than practised.`,
         kind: 'pantheon',

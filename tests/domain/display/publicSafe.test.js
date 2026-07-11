@@ -120,6 +120,42 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.aiSettlement).toBeUndefined();
   });
 
+  it('(129) strips config.latentPantheon even in full mode but keeps the activated embeds', () => {
+    // W-F7 premium gate: the DM-full opt-in reveals the owner's OWN DM-private
+    // content, but the latent pantheon is content the dossier has not yet NAMED —
+    // unrevealed by definition, so it NEVER leaves the account, not even here.
+    // Mirrors server migration 129 (_gallery_dm_full_json).
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      plotHooks: ['the heir is hidden'],
+      config: {
+        latentPantheon: { patron: { name: 'The Deep', _deityRef: 'deity:core:the_deep' }, cults: [{ name: 'Ash' }] },
+        primaryDeityRef: 'deity:core:sun',
+        primaryDeitySnapshot: { name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' },
+        cultDeitySnapshots: [{ name: 'Ash', alignmentAxis: 'evil' }],
+        faithProfile: { patron: { name: 'Sun', share: 62 } },
+        tradeRouteAccess: 'road',
+      },
+    }, { full: true });
+    // The owner's DM content survives full mode…
+    expect(out.plotHooks).toEqual(['the heir is hidden']);
+    expect(out.config).toBeTruthy();
+    // …but the unrevealed latent seed does not.
+    expect(out.config.latentPantheon).toBeUndefined();
+    // The activated live embeds + benign config stay.
+    expect(out.config.primaryDeityRef).toBe('deity:core:sun');
+    expect(out.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
+    expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
+    expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
+    expect(out.config.tradeRouteAccess).toBe('road');
+  });
+
+  it('does not mutate the input config in full mode when stripping latentPantheon', () => {
+    const input = { name: 'X', config: { latentPantheon: { patron: { name: 'The Deep' } }, primaryDeityRef: 'deity:core:sun' } };
+    toPublicSafe(input, { full: true });
+    expect(input.config.latentPantheon).toEqual({ patron: { name: 'The Deep' } });
+  });
+
   it('default (no option / full:false) still strips DM-private content', () => {
     const stripped = toPublicSafe(dm());
     expect(stripped.plotHooks).toBeUndefined();

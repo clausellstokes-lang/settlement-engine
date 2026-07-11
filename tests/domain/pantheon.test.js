@@ -302,6 +302,27 @@ describe('pantheon — realm arcs (Ascendancy / Twilight)', () => {
   test('a minor↔minor drift emits nothing', () => {
     expect(synthesizePantheonArcs({ changes: [{ deityId: 'x', from: 'cult', to: 'minor' }], snapshot, tick: 5 })).toEqual([]);
   });
+
+  test('(W-F7 site #10) realmMult scales the arc salience score; default 1.0 is byte-identical', () => {
+    const change = [{ deityId: 'custom:lu_vael', from: 'minor', to: 'major' }];
+    const base = synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW });
+    const devout = synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: 1.325 });
+    const secular = synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: 0.825 });
+    // Default (no realmMult) == explicit 1.0 == the pre-W-F7 constant (byte-identity).
+    expect(base[0].score).toBe(86);
+    expect(synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: 1 })[0].score).toBe(86);
+    // A devout realm ranks the ascendancy higher; a secular realm lower.
+    expect(devout[0].score).toBe(Math.round(86 * 1.325));
+    expect(secular[0].score).toBe(Math.round(86 * 0.825));
+    expect(devout[0].score).toBeGreaterThan(base[0].score);
+    expect(secular[0].score).toBeLessThan(base[0].score);
+    // Significance stays 'major' — salience reorders, it never floods (E4 envelope intact).
+    expect(devout[0].significance).toBe('major');
+    expect(secular[0].significance).toBe('major');
+    // A bad/absent realmMult is treated as 1.0 (defensive).
+    expect(synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: 0 })[0].score).toBe(86);
+    expect(synthesizePantheonArcs({ changes: change, snapshot, tick: 5, now: NOW, realmMult: NaN })[0].score).toBe(86);
+  });
 });
 
 // ── 7. advancePantheon end-to-end (ratchet + seats + tier) ────────────────────

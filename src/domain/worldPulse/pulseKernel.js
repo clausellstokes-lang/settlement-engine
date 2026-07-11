@@ -827,6 +827,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   let nextReligionStates = null;
   /** @type {Record<string, import('./piety.js').PietyRecord> | null} W-F3: this tick's piety read-model per settlement */
   let nextPietyByCid = null;
+  // W-F3/W-F7: the realm-piety multiplier, hoisted so amplified-site #10 (pantheon
+  // arc salience, below) reads the SAME tick-start value the contest used. Default
+  // 1.0 (religion inactive ⇒ no arcs anyway, and 1.0 is the neutral/byte-identical
+  // value); assigned inside the active block off the pre-tick snapshot.
+  let realmMult = 1;
   const religionLocalActive = isSubsystemActive(postTimeSnapshot, 'religion');
   if (religionLocalActive) {
     // Capture the PRE-conversion snapshot for seat aggregation BEFORE the contest's
@@ -837,7 +842,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // W-F3: the realm-piety multiplier g, measured at tick START off the pre-tick
     // snapshot's projected faithProfile.piety (the anti-runaway seam). Exactly 1.0 when
     // spread is off / no campaign (toggle-gated) ⇒ byte-identical.
-    const realmMult = realmPietyMult(postTimeSnapshot?.settlements, { spread: isFaithSpreadEnabled(simulationRules) });
+    realmMult = realmPietyMult(postTimeSnapshot?.settlements, { spread: isFaithSpreadEnabled(simulationRules) });
     const religion = advanceReligionStates({
       snapshot: postTimeSnapshot,
       worldState,
@@ -1154,6 +1159,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     snapshot: pantheonSeatSnapshot,
     tick: worldState.tick,
     now,
+    // W-F7 amplified-site #10: the realm-piety multiplier (measured at tick start,
+    // exactly 1.0 when spread is off ⇒ byte-identical) scales the arc's salience.
+    realmMult,
   });
   const aftermathEntries = [
     ...aftermathNewsEntries(agedStressors.resolved, worldState.tick, now),

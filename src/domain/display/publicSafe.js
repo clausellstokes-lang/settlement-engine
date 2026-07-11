@@ -198,6 +198,20 @@ export function toPublicSafe(settlement, { full = false, memberOverrides = null 
     delete clone.dmNotes;
     delete clone.notes;
     delete clone.narrativeNotes;
+    // LATENT PANTHEON (Phase 4 W-F7, THE PREMIUM GATE): the unrevealed starting
+    // pantheon (config.latentPantheon) NEVER leaves the account — not even on a
+    // DM-full share. The owner's gallery_share_dm opt-in reveals THEIR authored
+    // DM-private content (secrets, hooks, compass, NPC goals); the latent seed is
+    // content the dossier has not yet NAMED — unrevealed by definition — so it is
+    // stripped even here. (Default mode already drops it via the recursive
+    // `latentPantheon` denylist token; full mode skips that recursion, so strip it
+    // explicitly, exactly as dmNotes above is.) Mirrored server-side by migration
+    // 129 (_gallery_dm_full_json). The ACTIVATED live embeds (primaryDeitySnapshot /
+    // cultDeitySnapshots / primaryDeityRef / faithProfile) carry no such key and
+    // stay — a shared premium pantheon displays read-only to all viewers.
+    if (clone.config && typeof clone.config === 'object' && !Array.isArray(clone.config)) {
+      delete clone.config.latentPantheon;
+    }
     // aiSettlement is a full refined-settlement clone — its PROSE is governed by
     // gallery_share_narrated, NOT this toggle. But the DM Compass (which the owner
     // explicitly opted to reveal) lives on it. Preserve ONLY the four DM-Compass
