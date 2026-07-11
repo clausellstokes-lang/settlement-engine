@@ -1120,3 +1120,96 @@ Round 10 was under-decomposed (a cheap half bundled with a mover-dependent half)
   reinforce) + moral drift + the ally-intel/betrayal channel + teleport-bloc economics.
 Everything downstream stays as PART III. The belief layer's payoff arrives EARLY and cheap; only its
 physical-consequence half waits on the movers.
+
+---
+
+# PART V — TECHNICAL HARDENING REQUIREMENTS (owner, round 16) — BINDING
+
+Six engineering requirements that every spatial wave must satisfy. These are not new mechanics; they
+are the "actually works, stays balanced, stays deterministic, stays EXPLAINABLE" contract.
+
+## V.1 The cost field must be STABLE + EXPLAINABLE — three version axes + route receipts
+The two-tier digest (PART III §III.2-1: FROZEN GEOMETRY vs LIVE OVERLAYS) is correct but INSUFFICIENT.
+- FROZEN GEOMETRY: elevation, terrain, permanent water, base road geometry, fixed crossings, distance.
+- LIVE OVERLAYS: road damage, occupation, weather, embattlement, blockade, border closure, magical
+  access, temporary bridges, seasonal passability.
+- ADD VERSIONED INTERPRETATION (the real gap): a route depends not only on the map but on HOW cost is
+  computed. If the slope-cost LAW later changes, old campaign routes would shift even though the map did
+  not. So the spatial canon carries THREE version axes, not one: `geometryVersion` (the frozen digest),
+  `costLawVersion` (the interpretation — how slope/terrain/river costs map to numbers), `overlayVersion`
+  (the live layer). Old canon freezes under its (geometry, cost-law) pair; changing the cost law is a
+  DISCRETE re-canonize event (bump costLawVersion + re-derive), never a silent drift on load.
+- ROUTE EXPLANATION RECEIPTS: every route carries a RECEIPT — why it costs what it costs, which segments,
+  which overlays applied (the causal-legibility law from the dossier / W-C5, applied to geometry). The DM
+  can always ask "why this road?" This is also the determinism audit trail.
+
+## V.2 Carriers use DIFFERENT route preferences over the SAME geometry — do NOT collapse to one shortest-path
+The shared frozen geometry is common; ROUTE CHOICE is CARRIER-SPECIFIC (a per-carrier cost PROFILE that
+re-weights geometry + overlays by that carrier's priorities). Refines PART III's multigraph.
+- TRADE → low cost + high capacity. ARMIES → width, terrain, supply, hostility. REFUGEES → safety +
+  destination pull. SMUGGLERS → concealment. MISSIONARIES → population + religious opportunity. RUMORS →
+  high-connectivity social channels. COURIERS → speed. AIRSHIPS / TELEPORT → DIFFERENT GRAPHS entirely
+  (the aerial field / the circle network — not a re-weight of land geometry, a separate edge set).
+- IMPL: geometry (frozen, shared) → per-carrier cost profile (a pure function weighting geometry+overlays)
+  → carrier route. Land carriers share the geometry with different profiles; air/teleport carry their own
+  graphs. The k-shortest candidate cache (PART II §II.4) is computed PER CARRIER PROFILE.
+
+## V.3 Rumor cardinality could EXPLODE — canonical identity + lineage + the FALSE-CORROBORATION fix
+One event × many carriers × paths × settlements × distortion operators × retellings ⇒ an explosion of
+rumor objects. The sparse directed belief map (PART IV) helps, but the EVENT layer needs consolidation:
+- CANONICAL EVENT IDENTITY — one stable id per real event (the wizardNews `sourceEventId` → graph.eventLog
+  is the existing substrate, PART III).
+- LINEAGE IDs — every rumor descendant records which telling it descends from.
+- MERGE RULES for near-equivalent reports; SALIENCE thresholds; EXPIRATION; PER-OBSERVER INFORMATION
+  BUDGETS (a settlement holds only top-K live rumors).
+- SOURCE-CORRELATION TRACKING — THE critical one, and a CORRECTION to round-8 cross-confirmation: cross-
+  confirmation must weight by INDEPENDENCE, not count. Five retellings that all trace to ONE origin are
+  NOT five corroborating sources — they are one source echoed. Cross-confirmation reads the LINEAGE: reports
+  sharing an origin/lineage corroborate LITTLE or nothing; only genuinely INDEPENDENT observations raise
+  confidence. Without this the entrepôt's "best-informed" advantage (§4f) is an illusion — it just hears the
+  same lie five times. This is essential; the belief-update rule (V.4) consumes the independence signal.
+
+## V.4 Belief updates need a CONFLICT-RESOLUTION rule (the missing piece)
+When a settlement holds contradictory reports (army = 5,000 per an old official report; a merchant says
+2,000; refugees report total defeat; a spy says intact; no courier in 3 weeks), belief must update by a
+CONSISTENT RULE or beliefs become an arbitrary pile of reports, not actionable state. NOT necessarily full
+Bayesian, but a defined weighted reconciliation. THE KEY SYNTHESIS: the update rule is where rounds 12/13/15
+get CONSUMED — it is not new machinery:
+- WEIGHT each report by: SOURCE RELIABILITY / provenance (round 12), RECENCY / timeliness (round 12),
+  INDEPENDENCE / lineage (V.3), EXISTING PRIOR + its confidence.
+- FILTER by disposition (round 15A): POLITICAL / CONFIRMATION BIAS decides which reports are ACCEPTED vs
+  REJECTED (a lawful ruler rejects the informal spy report; a confirmation-biased one over-weights reports
+  matching its prior; an evil one weights by self-interest).
+- CONTRADICTION raises UNCERTAINTY (the belief becomes "contested" — itself a driver of probing/caution).
+- CONFIDENCE DECAYS with silence (round 13 absence). Result: a per-(observer, subject, attribute) belief =
+  a weighted reconciliation, deterministic (seeded where any tie-break/sampling occurs), NOT last-writer-wins.
+
+## V.5 Determinism makes tuning laborious — a spatial INVARIANT TEST SUITE (real burden, same discipline)
+The fork + total-order-fold design (PART III §III.2-5, IV.3) is correct, but the spatial engine multiplies
+the places where ordering + stable identity matter. Required INVARIANT/property tests (the golden-equivalent
+for the spatial engine, gating every wave):
+- same (event, path, carrier, hop) ⇒ identical degradation; REROUTING doesn't change UNRELATED rumor
+  outcomes; adding an UNRELATED settlement doesn't reroll existing routes; STABLE tie-break among equal-cost
+  paths; live overlays affect ONLY dependent outcomes; DORMANT spatial canon ⇒ byte-identical; OLD saves ⇒
+  identity-fallback correct. These extend the existing no-Date / unseeded-random grep-gates + golden discipline
+  to region/ + the spatial modules. The test burden is significant and non-optional — budget for it per wave.
+
+## V.6 Positive-feedback loops are BROADER than migration — apply force/counterforce rigorously
+Beyond migration + prosperity, spatial systems create at least four more centrality loops — all historically
+plausible, all needing explicit BRAKES:
+- ENTREPÔT: more trade → better infrastructure → lower route cost → more trade. BRAKES: congestion, rent
+  extraction / toll-greed reroute (round 4, already partial), infrastructure MAINTENANCE cost, wartime targeting.
+- RELIGIOUS-CENTER: more pilgrims → more legitimacy → more institutions → more pilgrims. BRAKES: political
+  resentment (a dominant faith breeds dissent/heresy), capacity ceilings, rival centers, the faith-contest mechanics.
+- MILITARY CHOKEPOINT: strategic position → investment → control → more strategic importance. BRAKES: wartime
+  TARGETING (the more vital, the bigger the target), RIVAL ROUTE INVESTMENT (others build around it, like the
+  toll reroute), maintenance.
+- INFORMATION-CENTER: more carriers → better info → better decisions → more stability → more carriers. BRAKES:
+  single-point-of-failure targeting, the round-11 MANIPULATION risk (a rich info-center is the juiciest target
+  for planted intel), capacity.
+- THE SYSTEMIC BRAKE (architect synthesis): all four are the SAME shape (positive feedback via centrality), and
+  they are COUPLED — a settlement that wins all four becomes a mega-hub, which makes it the biggest TARGET, the
+  biggest single-point-of-failure, and the juiciest mark for manipulation. So TOTAL centrality is SELF-LIMITING
+  because it concentrates RISK: everyone wants to take it, cut it, or feed it lies. Centrality invites its own
+  undoing — the force/counterforce law at the systemic scale. Each loop still needs its LOCAL brakes (above);
+  the systemic brake ensures no single settlement runs away to dominate the whole realm.
