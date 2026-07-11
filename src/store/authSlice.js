@@ -25,15 +25,16 @@ import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 
 // Source of truth for tier ceilings is src/config/pricing.js — TIERS.{key}.maxSize.
 // This map mirrors those ceilings so the auth-gating layer never drifts:
-//   wanderer/free    → town       (pricing.js:85)
-//   cartographer/    → capital    (pricing.js:102)
-//   founder lifetime → capital    (pricing.js:119)
+//   wanderer/free    → capital    (a free account unlocks every size)
+//   cartographer/    → capital
+//   founder lifetime → capital
 //
-// Anonymous gets the same ceiling as Wanderer (town) so the funnel hero can
-// preview at the same tier the user would reach by signing up.
+// Anonymous ALONE is capped at town: the no-account funnel previews up to Town,
+// and signing up for a free account unlocks the full size ladder (the landing's
+// locked City/Metropolis pills are the sign-in conversion hook).
 const TIER_GATE = {
   anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'town',    maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
+  free:    { maxTier: 'capital', maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
   premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
 };
 

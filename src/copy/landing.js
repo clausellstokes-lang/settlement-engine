@@ -43,7 +43,7 @@ export const landing = {
     axiom: 'Every dossier answers the same question: given these constraints, what must this place be?',
     cta:   'Forge a settlement',
     micro: 'No account needed',
-    ceiling: 'Free mode forges up to a Town. Sign in for all sizes, saving, and full Basic / Advanced control.',
+    ceiling: 'Without an account, forge up to a Town. Sign in free for every size, saving, and full Basic / Advanced control.',
     draftTitle: 'Instant draft',
     draftHint:  'pick a size and go',
     sizes: [
@@ -153,7 +153,7 @@ export const landing = {
     // 'Free. No account needed.' removed here (owner) — the hero already says it.
     tiers: [
       { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up. Up to Town size, nothing kept.' },
-      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account: keep a Library, canonize your towns, export the PDF, and share to the Gallery.' },
+      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size, a Library to keep them, PDF export, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, gallery import.', accent: true },
       { name: 'Founder',      badge: 'Lifetime',          body: 'Everything Cartographer runs, forever. One payment, no clock.' },
     ],

@@ -137,10 +137,11 @@ describe('TIERS', () => {
     expect(TIERS).toHaveProperty('founder');
   });
 
-  it('wanderer is free and capped at town size', () => {
+  it('wanderer is free, saves 3, and unlocks every size', () => {
     expect(TIERS.wanderer.priceCents).toBe(0);
     expect(TIERS.wanderer.saveLimit).toBe(3);
-    expect(TIERS.wanderer.maxSize).toBe('town');
+    // A free account unlocks the full size ladder; only anonymous is town-capped.
+    expect(TIERS.wanderer.maxSize).toBe('capital');
   });
 
   it('cartographer is $6/mo and unlocks neighbourhood + supply chain', () => {

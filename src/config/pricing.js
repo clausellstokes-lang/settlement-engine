@@ -173,7 +173,7 @@ export const TIERS = Object.freeze({
     billing:      'forever',
     seatLimit:    null,                   // unlimited seats
     saveLimit:    3,
-    maxSize:      'town',                 // anonymous now also gets town
+    maxSize:      'capital',              // a free account unlocks every size (anon alone is town-capped)
     features: {
       neighbourhoodSystem: false,
       pdfExport:           true,
