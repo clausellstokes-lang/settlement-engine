@@ -1058,3 +1058,19 @@ tier IS the certified ground state). Upgrade = activation fires on open ("the go
 always there, latent in the seed"). GALLERY: shared deity-bearing settlements display their
 pantheon read-only to all viewers (sharer's content; premium's best advertisement).
 Dossier gating + generic-faith copy = W-F6. Latent step + activation seam = W-F5 stage 2.
+
+### Piety dynamics review — two gaps closed (OWNER question + architect remedy, 2026-07-10; lands W-F6-adjacent/W-F7-certified)
+The structural inputs (authority/backing/devotion) are dynamic and certified, but two arcs
+were missing for the full "becomes pious or not" story:
+1. DEVOTIONAL MOMENTUM (piety hysteresis): measured piety approaches its structural target
+   through a LAG (legitimacy's pattern) — a burned church doesn't collapse devotion in a
+   month; a new temple stands empty for years. Becoming pious/secular = an ARC, not a step.
+2. THE UNAFFILIATED SINK (secularization): a "none" bucket in the share ledger — share leaks
+   toward indifference under sustained prosperity + stability + low authority, and drains
+   back to the pantheon under crisis (harvested by the crisis-receptivity contexts =
+   REVIVAL). Completes the historical cycle piety -> order -> prosperity -> secularization ->
+   crisis -> revival; second natural brake on lawful drift (golden ages quietly empty their
+   own pews); enables the secular mercantile city and the great-awakening arc.
+Both inert under the neutrality theorem (no deities / no piety record => untouched);
+subcritical, clamped, cause-chained; W-F7 envelopes: hysteresis visible in transition arcs,
+secular share bounded (no atheist collapse), revival correlates with crisis.
