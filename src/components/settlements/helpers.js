@@ -53,6 +53,31 @@ export function hasAiData(save) {
   return !!ai && typeof ai === 'object' && Object.keys(ai).length > 0;
 }
 
+/**
+ * Pure computation behind a bulk delete: given the current saves and the ids to
+ * remove, return the surviving saves (with neighbour links to the deleted ones
+ * cleaned up) and the list of ids whose settlement object actually changed. The
+ * caller owns the side effects (analytics, setSaves, persistence).
+ * @param {Array<any>} saves
+ * @param {Array<string>} ids
+ * @returns {{ remaining: Array<any>, modifiedIds: Array<string> }}
+ */
+export function computeBulkDelete(saves, ids) {
+  const idSet = new Set(ids.map(String));
+  const deletedSaves = saves.filter(s => idSet.has(String(s.id)));
+  const deletedNames = new Set(deletedSaves.map(d => d?.settlement?.name).filter(Boolean));
+  const survivors = saves.filter(s => !idSet.has(String(s.id)));
+  const remaining = survivors.map(s => {
+    const cleanNet = (s.settlement?.neighbourNetwork || []).filter(n => !idSet.has(String(n.id)) && !deletedNames.has(n.name));
+    const cleanISR = (s.settlement?.interSettlementRelationships || []).filter(r => !deletedNames.has(r.partnerSettlement));
+    if (cleanNet.length === (s.settlement?.neighbourNetwork || []).length
+      && cleanISR.length === (s.settlement?.interSettlementRelationships || []).length) return s;
+    return { ...s, settlement: { ...s.settlement, neighbourNetwork: cleanNet, interSettlementRelationships: cleanISR } };
+  });
+  const modifiedIds = remaining.filter((s, i) => s !== survivors[i]).map(s => s.id);
+  return { remaining, modifiedIds };
+}
+
 export function regionalCountsForSave(campaign, saveId) {
   const impacts = campaign?.regionalGraph?.queuedImpacts || [];
   const counts = { queued: 0, applied: 0, resolved: 0, ignored: 0, expired: 0 };

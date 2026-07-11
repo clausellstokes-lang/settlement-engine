@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen} from 'lucide-react';
+import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, FolderOpen, Clock} from 'lucide-react';
 
 // Campaign PDF export pulls in jsPDF (~200KB) plus the campaign layout.
 // Lazy-load on user action so the Settlements first paint stays light —
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD, INK, MUTED, SECOND, BORDER, sans, serif_, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
+import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
@@ -17,10 +18,43 @@ import RealmStrip from './RealmStrip.jsx';
 import { regionalCountsForSave } from './helpers.js';
 
 // ── Campaign Folder ──────────────────────────────────────────────────────────
-export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns }) {
+export function CampaignFolder({ campaign, settlements, allModifiers, onViewSettlement, deleteId, setDeleteId, deleteConfirmed, campaigns, addToCampaign, removeFromCampaign, onDeleteCampaign, onRenameCampaign, toggleCollapsed, onDiscoverRegional, onConfirmRegionalChannel, onApplyRegionalImpact, onIgnoreRegionalImpact, onResolveRegionalImpact, onAdvanceRegionalImpacts, onApplyAllRegionalImpacts, onIgnoreAllRegionalImpacts, onReactivate, canReactivate, reactivatingId, canManageCampaigns, onCanonize, onAdvanceTime, onCreateCampaign, onNavigate, worldCanonized, selectMode = false, selectedIds, onToggleSelect }) {
+  const worldState = campaign?.worldState || null;
+  const regionalGraph = campaign?.regionalGraph || campaign?.worldState?.regionalGraph || null;
+  const nameFor = (id) => {
+    const match = (settlements || []).find(sv => String(sv?.id) === String(id));
+    return match?.name || match?.settlement?.name || String(id);
+  };
+  // Disable Advance while a tick is already running for THIS campaign — the store
+  // also no-ops a re-entrant advance, but greying the button stops the double-click
+  // from queuing a second intent + gives the DM visible feedback the tick is busy.
+  const advanceInFlight = useStore(s => s.isAdvanceInFlight(campaign?.id));
   const [editing, setEditing] = useState(false);
   const [editDraft, setEditDraft] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // Campaign PDF export is async (lazy-loaded jsPDF). Without a handler that
+  // awaits + catches, a throw (malformed save, jsPDF fault) became a silent
+  // unhandled rejection — the user clicked "PDF" and nothing happened. Track
+  // busy + error so the click always has visible feedback.
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState(null);
+  // How far one Advance Time step carries the campaign world. Mirrors the World
+  // Map toolbar's interval picker (one_week..one_year), defaulting to one month —
+  // the same default the store's advanceCampaignWorld uses.
+  const [advanceInterval, setAdvanceInterval] = useState('one_month');
+  const handleExportPdf = async (e) => {
+    e.stopPropagation();
+    if (pdfBusy) return;
+    setPdfError(null);
+    setPdfBusy(true);
+    try {
+      await generateCampaignPDF(campaign, settlements);
+    } catch (err) {
+      setPdfError(err?.message ? `PDF export failed: ${err.message}` : 'PDF export failed. Please try again.');
+    } finally {
+      setPdfBusy(false);
+    }
+  };
   const collapsed = campaign.collapsed;
   const retainedInactive = !isCampaignActive(campaign);
   const active = !retainedInactive && canManageCampaigns;
@@ -72,20 +106,63 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
         {!editing && (
           <div style={{ display:'flex', gap:2, alignItems:'center' }}>
+            {/* Interval picker for the advance — Week/Month/Season/Year, mirroring
+                the World Map toolbar so the DM can choose how far one step carries
+                the campaign world. Disabled in lockstep with the button; stops
+                propagation so opening the dropdown never toggles the folder. */}
+            <select
+              aria-label="Advance interval"
+              value={advanceInterval}
+              onChange={(e) => setAdvanceInterval(e.target.value)}
+              onClick={(e) => e.stopPropagation()}
+              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
+              title="How far one Advance Time step carries the campaign world"
+              style={{ fontSize:FS.xs, fontFamily:sans, color:INK, background:CARD, border:`1px solid ${BORDER}`, borderRadius:5, padding:'4px 6px', cursor: advanceInFlight ? 'default' : 'pointer' }}>
+              <option value="one_week">Week</option>
+              <option value="one_month">Month</option>
+              <option value="one_season">Season</option>
+              <option value="one_year">Year</option>
+            </select>
+            {/* Advance Time — a per-CAMPAIGN action. Premium gate: the whole folder
+                only renders (active) for canManageCampaigns, so free/anon never
+                reach this button. Disabled until the world is canonized. */}
+            <Button
+              variant="secondary"
+              size="sm"
+              icon={<Clock size={10}/>}
+              onClick={(e) => { e.stopPropagation(); if (!advanceInFlight) onAdvanceTime?.(campaign.id, advanceInterval); }}
+              disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
+              title={!worldCanonized
+                ? 'Canonize this campaign world on the World Map before advancing time'
+                : advanceInFlight
+                  ? 'Advancing the world…'
+                  : 'Advance the campaign world and open the Realm'}>
+              {advanceInFlight ? 'Advancing…' : 'Advance Time'}
+            </Button>
             <Button
               variant="danger"
               size="sm"
               icon={<FileText size={10}/>}
-              onClick={(e) => { e.stopPropagation(); generateCampaignPDF(campaign, settlements); }}
-              disabled={settlements.length === 0}
+              onClick={handleExportPdf}
+              disabled={settlements.length === 0 || pdfBusy}
               title="Export Campaign PDF">
-              PDF
+              {pdfBusy ? 'Exporting…' : 'PDF'}
             </Button>
             <IconButton Icon={Edit3} label="Rename campaign" onClick={() => { setEditing(true); setEditDraft(campaign.name); }} tone="ghost" size="sm"/>
             <IconButton Icon={X} label="Delete campaign" onClick={() => setConfirmDelete(!confirmDelete)} tone="danger" size="sm" pressed={confirmDelete}/>
           </div>
         )}
       </div>
+
+      {/* Campaign PDF export error — inline alert so a failed export is never silent */}
+      {pdfError && (
+        <div
+          role="alert"
+          style={{ padding:'6px 12px', fontSize:FS.xs, color:RED, background:RED_BG, fontFamily:sans }}
+        >
+          {pdfError}
+        </div>
+      )}
 
       {/* Campaign delete confirmation */}
       {confirmDelete && (
@@ -132,7 +209,18 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               regionalCounts={regionalCountsForSave(campaign, s.id)}
               onReactivate={onReactivate}
               canReactivate={canReactivate}
-              reactivatingId={reactivatingId}/>
+              reactivatingId={reactivatingId}
+              onCanonize={onCanonize}
+              onAdvanceTime={onAdvanceTime}
+              onCreateCampaign={onCreateCampaign}
+              onNavigate={onNavigate}
+              canManageCampaigns={canManageCampaigns}
+              worldState={worldState}
+              regionalGraph={regionalGraph}
+              nameFor={nameFor}
+              selectMode={selectMode}
+              selected={!!selectedIds?.has?.(s.id)}
+              onToggleSelect={onToggleSelect}/>
           ))}
         </div>
       )}

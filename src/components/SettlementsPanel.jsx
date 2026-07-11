@@ -18,13 +18,18 @@ import {
   relationshipLinkMetadata,
 } from '../domain/relationships/canonicalRelationship.js';
 import { buildInterSettlementNPCs } from '../domain/relationships/neighbourBackLink.js';
+import { useLibraryBulkSelect } from '../hooks/useLibraryBulkSelect.js';
+import { useLibraryLiveWorld } from '../hooks/useLibraryLiveWorld.js';
 import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './library/LibraryToolbar.jsx';
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
-import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData } from './settlements/helpers.js';
+import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
 import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
+import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
+import BulkActionBar from './settlements/BulkActionBar.jsx';
+import { ADVANCE_TIME_NAV_TARGET } from './settlements/advanceTimeTarget.js';
 import Button from './primitives/Button.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
@@ -61,6 +66,10 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const toggleCampaignCollapsed = useStore(s => s.toggleCampaignCollapsed);
   const addToCampaign = useStore(s => s.addToCampaign);
   const removeFromCampaign = useStore(s => s.removeFromCampaign);
+  // W4a — Library living surface: canonize-from-list, per-campaign advance-time.
+  const canonizeSavedSettlement = useStore(s => s.canonizeSavedSettlement);
+  const setActiveCampaign = useStore(s => s.setActiveCampaign);
+  const advanceCampaignWorld = useStore(s => s.advanceCampaignWorld);
   const discoverCampaignRegionalChannels = useStore(s => s.discoverCampaignRegionalChannels);
   const setRegionalChannelStatus = useStore(s => s.setRegionalChannelStatus);
   const applyQueuedRegionalImpact = useStore(s => s.applyQueuedRegionalImpact);
@@ -394,6 +403,24 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     persistBatch(updated, modifiedIds, { deletes: [id] });
   };
 
+  // ── Bulk delete ───────────────────────────────────────────────────────────
+  // Remove every selected id in ONE batch (so neighbour cleanup + persistence run
+  // against a single coherent snapshot, not N racing closures over a stale list).
+  // The pure array work lives in computeBulkDelete; this owns the side effects.
+  const bulkDeleteConfirmed = (ids) => {
+    const idSet = new Set(ids.map(String));
+    for (const ds of saves.filter(s => idSet.has(String(s.id)))) {
+      track(EVENTS.SETTLEMENT_DELETED, {
+        canon_phase: canonPhaseOf(ds), age_days_band: dayGapBand(lastEditedMs(ds)),
+        had_ai_data: hasAiData(ds), was_published: !!ds.is_public,
+      });
+    }
+    const { remaining, modifiedIds } = computeBulkDelete(saves, ids);
+    setSaves(remaining);
+    if (detail?.saveData?.id && idSet.has(String(detail.saveData.id))) setDetail(null);
+    persistBatch(remaining, modifiedIds, { deletes: ids });
+  };
+
   // ── Link ────────────────────────────────────────────────────────────────
   const handleLink = (linkedSave, relType) => {
     const definition = relationshipDefinition(
@@ -471,6 +498,36 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     setShowNewCampaign(false);
   };
 
+  // Routes a card's "Create a campaign" CTA to the panel's new-campaign input
+  // (which autoFocuses on open), so the kebab's no-campaign state has a real path
+  // forward instead of a path-less label.
+  const openCreateCampaign = useCallback(() => setShowNewCampaign(true), []);
+
+  // ── Canonize (from the library row kebab) ─────────────────────────────────
+  // Promote a draft save to canon straight from the list. The store action owns
+  // the mutation + persistence; the savedSettlements subscription refreshes the
+  // local list, so the row flips draft → Canon. Guarded (active + draft); the
+  // action also no-ops on already-canon.
+  const handleCanonize = useCallback((s) => {
+    if (!isSaveActive(s) || canonPhaseOf(s) !== 'draft') return;
+    canonizeSavedSettlement(s.id);
+  }, [canonizeSavedSettlement]);
+
+  // ── Advance Time (per campaign, from the list) ────────────────────────────
+  // PREMIUM GATE: advancing is Cartographer. The CampaignFolder only renders its
+  // Advance controls for canManageCampaigns (premium/elevated); free/anon reach
+  // an upgrade preview on the card kebab, never a working advance. This handler
+  // advances the campaign world one interval, sets it active, then deep-links to
+  // the Realm (ADVANCE_TIME_NAV_TARGET.view). The store's advanceCampaignWorld
+  // returns {ok:false} for a non-canonized / in-flight campaign — a defensive
+  // guard since the button is already disabled when the world isn't canonized.
+  const handleAdvanceCampaignTime = useCallback(async (campaignId, interval = 'one_month') => {
+    const result = await advanceCampaignWorld(campaignId, interval);
+    if (result && result.ok === false) return; // not canonized / in-flight / nothing to do
+    setActiveCampaign(campaignId);
+    onNavigate?.(ADVANCE_TIME_NAV_TARGET.view);
+  }, [advanceCampaignWorld, setActiveCampaign, onNavigate]);
+
   const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
     applyQueuedRegionalImpact(campaignId, impactId);
   }, [applyQueuedRegionalImpact]);
@@ -501,13 +558,31 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   const [libraryQuery, setLibraryQuery] = useState('');
   const [librarySort, setLibrarySort] = useState('recent');
   const [libraryFilters, setLibraryFilters] = useState({});
+
+  // Save → owning campaign + the living-world filter context (reuses the same
+  // owning-campaign worldState the cards render from — one source of truth, no
+  // divergent recompute) for the "At war" / campaign filters.
+  const { filterContext } = useLibraryLiveWorld(activeCampaigns);
+
   const filteredSaves = useMemo(() => {
     return _applyLibraryFilters(saves, {
       query: libraryQuery,
       sort: librarySort,
       filters: libraryFilters,
-    });
-  }, [saves, libraryQuery, librarySort, libraryFilters]);
+    }, filterContext);
+  }, [saves, libraryQuery, librarySort, libraryFilters, filterContext]);
+
+  // ── Bulk multi-select (state + actions live in the extracted hook) ─────────
+  const bulk = useLibraryBulkSelect({
+    saves,
+    addToCampaign,
+    canonizeSavedSettlement,
+    bulkDeleteConfirmed,
+    isActive: isSaveActive,
+    isDraft: (sv) => canonPhaseOf(sv) === 'draft',
+  });
+  const { selectMode, selectedIds, toggleSelect } = bulk;
+
   // Set of save ids surviving the active query/filter — the rendered collections
   // below intersect with this so the toolbar isn't inert.
   const filteredIds = useMemo(() => new Set(filteredSaves.map(s => s.id)), [filteredSaves]);
@@ -562,7 +637,18 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         </div>
       )}
 
-      {/* P108 / E-6 — Library toolbar (search + sort + filter chips). */}
+      {/* Save-quota meter + funnel header (W4a) — COUNT limit, never a size cap.
+          The cap (max) is the store's maxSaves() (free floor 3, premium ∞) — read,
+          not hardcoded. 'Sign in' routes to the sign-in flow; 'Upgrade' to pricing. */}
+      <SaveQuotaMeter
+        tier={authTier}
+        used={activeSlotsUsed}
+        max={maxSaves}
+        onUpgrade={() => onNavigate?.('pricing')}
+        onSignIn={() => onNavigate?.('signin')}
+      />
+
+      {/* Library toolbar (search + sort + Filters▾ + Select). */}
       {saves.length > 0 && (
         <LibraryToolbar
           query={libraryQuery}
@@ -573,7 +659,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           setFilters={setLibraryFilters}
           totalCount={saves.length}
           visibleCount={filteredSaves.length}
+          campaigns={activeCampaigns}
+          selectMode={selectMode}
+          onToggleSelectMode={bulk.toggleMode}
         />
+      )}
+
+      {/* Bulk multi-select action bar + its delete confirm (W4a). */}
+      {selectMode && saves.length > 0 && (
+        <BulkActionBar bulk={bulk} campaigns={activeCampaigns} canManageCampaigns={canManageCampaigns} />
       )}
 
       {/* The old "Saved Settlements / Save Current Settlement / N of ∞ slots"
@@ -634,7 +728,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onReactivate={handleReactivateSave}
                 canReactivate={canReactivateInactive}
                 reactivatingId={reactivatingId}
-                canManageCampaigns={canManageCampaigns}/>
+                canManageCampaigns={canManageCampaigns}
+                onCanonize={handleCanonize}
+                onAdvanceTime={handleAdvanceCampaignTime}
+                onCreateCampaign={openCreateCampaign}
+                onNavigate={onNavigate}
+                worldCanonized={!!campaign.worldState?.canonizedAt}
+                selectMode={selectMode}
+                selectedIds={selectedIds}
+                onToggleSelect={toggleSelect}/>
             );
           })}
 
@@ -655,7 +757,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                     currentCampaignId={null}
                     onReactivate={handleReactivateSave}
                     canReactivate={canReactivateInactive}
-                    reactivatingId={reactivatingId}/>
+                    reactivatingId={reactivatingId}
+                    onCanonize={handleCanonize}
+                    onAdvanceTime={handleAdvanceCampaignTime}
+                    onCreateCampaign={openCreateCampaign}
+                    onNavigate={onNavigate}
+                    canManageCampaigns={canManageCampaigns}
+                    selectMode={selectMode}
+                    selected={selectedIds.has(s.id)}
+                    onToggleSelect={toggleSelect}/>
                 ))}
               </div>
             </div>
