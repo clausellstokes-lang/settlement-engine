@@ -323,6 +323,13 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   'Great cathedral': "A metropolitan cathedral and the seat of the region's highest religious authority, drawing pilgrims from afar.",
   'Major monasteries (5-10)': 'Several great monastic houses whose scholarly, contemplative, and charitable work runs at scale.',
   'Hospital network': 'Multiple hospitals and infirmaries across a metropolis, organized medical care at population scale.',
+  // W-C3 item 1: the MORAL FOUNDING set (lifecycle-only, raised post-generation by the
+  // patron seat; keyed in the founding catalog, never in the generation catalog).
+  Hospice: 'A house of care for the dying and the incurably ill poor, kept by the faithful. No one is turned away for want of coin.',
+  Orphanage: 'A house that takes in parentless children and raises them until they can be apprenticed or placed. Order and mercy under the temple hand.',
+  'House of healing': 'A free infirmary that tends the sick and injured poor without fee. Mercy made into a standing institution.',
+  'Fighting pit': 'A ring where the desperate and the enslaved fight for a paying crowd. Blood for coin, rowdy and cruel.',
+  "Debtors' yard": 'A walled yard where those who cannot pay are worked until their debt is cleared. Sanctioned harshness, orderly and profitable.',
 });
 
 /**
@@ -369,6 +376,16 @@ export const INSTITUTION_MORAL_LEAN = Object.freeze({
   'Small prison/stocks': { cruelty: 0.1, disorder: -0.6 },
   'Large prison': { cruelty: 0.1, disorder: -0.6 },
   'Massive prison': { cruelty: 0.1, disorder: -0.6 },
+  // W-C3 item 1: the MORAL FOUNDING set. These values are the SINGLE SOURCE shared with
+  // domain/worldPulse/foundingCatalog.js (the founding-lane engine coding); pinned equal
+  // by tests/data/institutionVocabulary.test.js. Where a name also matches the frozen
+  // moralMartialLean regex (Hospice, Fighting pit, Almshouse-above) the value is identical
+  // to it, so a founded instance reads the same lean by stamp or by name.
+  Hospice: { cruelty: -0.8, disorder: -0.1 },
+  Orphanage: { cruelty: -0.7, disorder: -0.2 },
+  'House of healing': { cruelty: -0.6, disorder: -0.1 },
+  'Fighting pit': { cruelty: 0.55, disorder: 0.85 },
+  "Debtors' yard": { cruelty: 0.6, disorder: -0.6 },
 });
 
 /**

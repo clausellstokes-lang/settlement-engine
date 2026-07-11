@@ -297,7 +297,7 @@ function deityBearerPairs(snapshot, bearers) {
  * @param {any} fromId
  * @returns {Array<{ to: string, strength: number }>}
  */
-function faithCarriersOut(snapshot, fromId) {
+export function faithCarriersOut(snapshot, fromId) {
   const id = String(fromId);
   const byTo = new Map();
   const note = (/** @type {any} */ to, /** @type {number} */ strength) => {
@@ -331,6 +331,40 @@ function faithCarriersOut(snapshot, fromId) {
   return [...byTo.entries()]
     .map(([to, strength]) => ({ to, strength }))
     .sort((x, y) => codepoint(x.to, y.to));
+}
+
+/**
+ * FAITH-PRESCRIBES REACH (W-C3 item 2b): for each patron-bearing settlement, its plane
+ * reaches CONVERT settlements over the SAME faith carriers (faithCarriersOut — this does NOT
+ * build a second graph), at MASS-ATTENUATED strength (a metropolis's faith presses a hamlet
+ * harder than the reverse — the neighbourFaithInfluence precedent). Returns
+ * convertId → Array<{ patron, strength }> with strength bounded 0..1 and deterministically
+ * ordered. Deity-free ⇒ empty map ⇒ byte-identical. Consumed by the moral-institution
+ * pressure lane to press converts' institutions toward their patron's plane.
+ * @param {{ settlements?: Array<{ id?: (string|number), settlement?: { config?: { primaryDeitySnapshot?: { name?: string, alignmentAxis?: string, lawAxis?: string } } } }>, byId?: Map<string, { settlement?: object }>, regionalGraph?: object, relationships?: unknown[] }} snapshot
+ * @returns {Map<string, Array<{ patron: { name?: string, alignmentAxis?: string, lawAxis?: string }, strength: number }>>}
+ */
+export function buildFaithReach(snapshot) {
+  /** @type {Map<string, Array<{ patron: { name?: string, alignmentAxis?: string, lawAxis?: string }, strength: number }>>} */
+  const reach = new Map();
+  for (const item of snapshot?.settlements || []) {
+    const patron = item?.settlement?.config?.primaryDeitySnapshot;
+    if (!patron) continue;
+    const bearerMass = faithMass(item.settlement);
+    for (const { to, strength } of faithCarriersOut(snapshot, item.id)) {
+      const target = snapshot?.byId?.get?.(String(to));
+      if (!target) continue;
+      const sigma = clamp01(strength * neighbourFaithInfluence(bearerMass, faithMass(target.settlement)));
+      if (sigma <= 0) continue;
+      const list = reach.get(String(to)) || [];
+      list.push({ patron, strength: sigma });
+      reach.set(String(to), list);
+    }
+  }
+  for (const [, list] of reach) {
+    list.sort((a, b) => codepoint(String(a.patron?.name || ''), String(b.patron?.name || '')) || b.strength - a.strength);
+  }
+  return reach;
 }
 
 /**

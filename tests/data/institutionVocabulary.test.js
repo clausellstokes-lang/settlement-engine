@@ -22,6 +22,12 @@
 import { describe, test, expect } from 'vitest';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { institutionMoralLean, institutionMartialLean } from '../../src/domain/worldPulse/moralMartialLean.js';
+// W-C3 item 1: the founding-catalog names are legitimate side-car keys (lifecycle-only
+// institutions the founding lane raises). They are NOT in the generation catalog
+// (golden-inert by construction) but they DO appear on settlements post-founding, so
+// they carry an authored identity + moral lean here. Unioned into CATALOG_NAMES so the
+// coverage/no-orphan pins recognize them; their leans are pinned equal below.
+import { FOUNDING_INSTITUTIONS } from '../../src/domain/worldPulse/foundingCatalog.js';
 import {
   INSTITUTION_IDENTITY,
   INSTITUTION_MORAL_LEAN,
@@ -47,7 +53,11 @@ const INSTANCES = (() => {
   }
   return m;
 })();
-const CATALOG_NAMES = new Set(INSTANCES.keys());
+// Coverage/no-orphan domain = generation catalog names ∪ founding-catalog names. The
+// instance-based pins below (drift, badge, martial) still iterate INSTANCES only, since
+// founded institutions are not generated.
+const FOUNDING_NAMES = FOUNDING_INSTITUTIONS.map((e) => e.name);
+const CATALOG_NAMES = new Set([...INSTANCES.keys(), ...FOUNDING_NAMES]);
 const ARRAY_MAPS = { INSTITUTION_MARTIAL_ROLE, INSTITUTION_WAR_SUPPLY, INSTITUTION_FLAVOR_AFFINITY };
 
 describe('institutionVocabulary — key integrity', () => {
@@ -119,6 +129,25 @@ describe('institutionVocabulary — moral/martial single-source drift pin', () =
       if (!Array.isArray(roles) || roles.length === 0) problems.push(`${inst.name}: engine-martial but no role tag`);
     }
     expect(problems, problems.join('\n')).toEqual([]);
+  });
+
+  test('INSTITUTION_MORAL_LEAN agrees with the founding-catalog engine seed', () => {
+    // The founding catalog's `lean` is the engine coding the founding lane reads; the
+    // side-car must carry the IDENTICAL value (single source + drift pin, W-C3 item 1).
+    const problems = [];
+    for (const entry of FOUNDING_INSTITUTIONS) {
+      const side = INSTITUTION_MORAL_LEAN[entry.name];
+      if (!side) { problems.push(`${entry.name}: founding-coded but absent from side-car`); continue; }
+      if (side.cruelty !== entry.lean.cruelty || side.disorder !== entry.lean.disorder) {
+        problems.push(`${entry.name}: drift founding=${JSON.stringify(entry.lean)} side=${JSON.stringify(side)}`);
+      }
+    }
+    expect(problems, problems.join('\n')).toEqual([]);
+  });
+
+  test('every founding institution carries an authored identity', () => {
+    const missing = FOUNDING_NAMES.filter((n) => !(n in INSTITUTION_IDENTITY));
+    expect(missing, `founding institutions with no identity: ${missing.join(', ')}`).toEqual([]);
   });
 
   test('all moral leans are signed and in range [-1, 1]', () => {

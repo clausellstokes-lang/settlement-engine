@@ -57,6 +57,10 @@ import {
 } from './relationshipEvolution.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { stablePart } from './worldState.js';
+// W-C3 item 2c EMBARGO AS CONSCIENCE: a buyer whose EFFECTIVE tolerance abhors a supplier's
+// active morally-loaded institutions penalizes that supplier's trade score. Absent objection
+// ⇒ mult 1 ⇒ byte-identical partner selection (the neutrality interlock the brief names).
+import { effectiveToleranceOf, institutionConscience } from './institutionTolerance.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js).
@@ -307,6 +311,12 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
   }
 
   const strengthFor = buildStrengthLookup(snapshot);
+  // item 2c: per-settlement effective tolerance (patron conviction + trade drift) + a supplier's
+  // standing institutions, for the conscience embargo. Absent ledger ⇒ tolerance is the patron
+  // conviction; a neutral buyer or a supplier with no abhorrent institution ⇒ mult 1 (identical).
+  const toleranceLedger = worldState?.institutionTolerance || null;
+  const toleranceFor = (/** @type {string} */ id) => effectiveToleranceOf(snapshot?.byId?.get?.(String(id))?.settlement || {}, toleranceLedger, id);
+  const institutionsFor = (/** @type {string} */ id) => snapshot?.byId?.get?.(String(id))?.settlement?.institutions || [];
   const outcomes = [];
   const graphChannels = [];
   // Disposition write-side: id-stable win/loss attributions from the trade
@@ -344,6 +354,8 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
   }
 
   for (const buyerId of buyers) {
+    // item 2c: the buyer's effective tolerance is fixed across its commodity contests.
+    const buyerTol = toleranceFor(buyerId);
     for (const commodityId of importedCommodities(snapshot, buyerId)) {
       // Candidate suppliers = confirmed carriers into C for K whose supplier
       // both exports K and clears the minimum-chain gate.
@@ -373,7 +385,11 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         if (rel && ['allied', 'patron', 'vassal'].includes(rel.relState.relationshipType)) {
           scoreFor = clamp01(scoreFor + 0.15);
         }
-        return { id: supplierId, scoreFor };
+        // item 2c EMBARGO AS CONSCIENCE: applied LAST so it bites even a friendly supplier —
+        // conscience is not free and takes no compensating bonus. mult 1 ⇒ byte-identical.
+        const consc = institutionConscience(buyerTol, institutionsFor(supplierId));
+        if (consc.mult < 1) scoreFor = clamp01(scoreFor * consc.mult);
+        return { id: supplierId, scoreFor, embargo: consc.mult < 1 ? consc : null };
       });
 
       // ── HARD OVERRIDE: an overlord compels its vassal C's trade. The FIRST
@@ -508,6 +524,12 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         /** @type {any} */ (graphChannels[graphChannels.length - 1]).goods = realignGoods;
       }
 
+      // item 2c: if the buyer's conscience embargoed the DISPLACED supplier, the flip IS the
+      // curtailment — name it in the receipt. Absent embargo ⇒ null ⇒ reasons byte-identical.
+      const defeatedEmbargo = contenders.find(c => c.id === defeatedId)?.embargo;
+      const embargoReason = defeatedEmbargo && defeatedEmbargo.worst
+        ? `Trade with ${nameFor(defeatedId)} curtailed: the plane objects to the ${String(defeatedEmbargo.worst).toLowerCase()}.`
+        : null;
       outcomes.push(conditionOutcome({
         id: `world_outcome.trade_realignment.${prizeId}.${tick}`,
         archetype: 'trade_realignment',
@@ -515,10 +537,15 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         severity: 0.4,
         headline: `${nameFor(buyerId)} turns to ${nameFor(winnerId)} for ${commodityLabelFor(commodityId)}`,
         summary: `${nameFor(winnerId)} has displaced ${defeatedId ? nameFor(defeatedId) : 'the prior supplier'} as ${nameFor(buyerId)}'s primary source of ${commodityLabelFor(commodityId)}.`,
-        reasons: [`Primary ${commodityLabelFor(commodityId)} supplier flipped to ${nameFor(winnerId)}.`],
+        reasons: embargoReason
+          ? [`Primary ${commodityLabelFor(commodityId)} supplier flipped to ${nameFor(winnerId)}.`, embargoReason]
+          : [`Primary ${commodityLabelFor(commodityId)} supplier flipped to ${nameFor(winnerId)}.`],
         tick,
         sourceEventTargetId: winnerId,
-        causes: [{ source: winnerId, effect: 'trade_realignment', reason: `${nameFor(winnerId)} won the trade contest over ${nameFor(buyerId)}.` }],
+        causes: [
+          { source: winnerId, effect: 'trade_realignment', reason: `${nameFor(winnerId)} won the trade contest over ${nameFor(buyerId)}.` },
+          ...(embargoReason ? [{ source: buyerId, effect: 'conscience_embargo', reason: embargoReason }] : []),
+        ],
       }));
 
       // ── Wind-down vs conquest escalation for the defeated incumbent A. ──────

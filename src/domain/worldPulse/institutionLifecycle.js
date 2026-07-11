@@ -922,5 +922,77 @@ export function applyInstitutionLifecycleOutcome(/** @type {any} */ settlement, 
     };
   }
 
+  // W-C3 item 1: the MORAL FOUNDING lane RAISES a new benevolent/exploitative
+  // institution under the patron seat. Distinct from economic 'build' (a supply-chain
+  // gap): it stamps the founding-catalog moral lean onto the instance so the ecology
+  // (faith-prescribes abolition, conduct) can later recognize a lifecycle-only
+  // institution the frozen name/tag leaf does not. Self-contained + proposal-safe:
+  // idempotent when a same-name institution already STANDS; re-raises a shuttered
+  // remnant of the same name (a good patron rebuilds the almshouse it once let close).
+  if (patch.action === 'found') {
+    const moralLean = patch.moralLean && Number.isFinite(patch.moralLean.cruelty) && Number.isFinite(patch.moralLean.disorder)
+      ? { cruelty: patch.moralLean.cruelty, disorder: patch.moralLean.disorder }
+      : null;
+    if (index >= 0) {
+      const existing = institutions[index];
+      const standing = existing.status !== 'removed' && existing.status !== 'destroyed'
+        && existing.status !== 'remnant' && existing.status !== 'ruined' && !existing._worldPulseInactive;
+      if (standing) return settlement; // already stands ⇒ idempotent
+      const raised = {
+        ...existing,
+        status: 'active',
+        _worldPulseInactive: false,
+        _worldPulseEconomyClosed: false,
+        _worldPulseMorallyAbolished: false,
+        worldPulseFate: null,
+        _worldPulseFounded: true,
+        _worldPulseFoundingSet: patch.set || existing._worldPulseFoundingSet || null,
+        ...(moralLean ? { moralLean } : {}),
+        foundedByWorldPulseOutcomeId: outcome.id || null,
+        builtReason: patch.reason || existing.builtReason || null,
+      };
+      const next = [...institutions];
+      next[index] = raised;
+      return {
+        ...settlement,
+        institutions: next,
+        institutionHistory: appendInstitutionHistory(settlement, {
+          name: existing.name,
+          category: existing.category || patch.category || null,
+          fate: 'founded',
+          tier: settlement.tier || null,
+          outcomeId: outcome.id || null,
+          reason: patch.reason || 'Re-founded by the patron seat.',
+        }),
+      };
+    }
+    const founded = {
+      id: `institution.${stablePart(patch.name)}`,
+      name: patch.name,
+      category: patch.category || 'civic',
+      status: 'active',
+      description: patch.description || '',
+      tags: Array.isArray(patch.tags) ? [...patch.tags] : [],
+      required: false,
+      ...(moralLean ? { moralLean } : {}),
+      _worldPulseFounded: true,
+      _worldPulseFoundingSet: patch.set || null,
+      foundedByWorldPulseOutcomeId: outcome.id || null,
+      builtReason: patch.reason || null,
+    };
+    return {
+      ...settlement,
+      institutions: [...institutions, founded],
+      institutionHistory: appendInstitutionHistory(settlement, {
+        name: founded.name,
+        category: founded.category,
+        fate: 'founded',
+        tier: settlement.tier || null,
+        outcomeId: outcome.id || null,
+        reason: patch.reason || 'Founded by the patron seat.',
+      }),
+    };
+  }
+
   return settlement;
 }

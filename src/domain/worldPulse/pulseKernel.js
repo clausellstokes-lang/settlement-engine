@@ -17,7 +17,7 @@ import { evaluateWarLayer, stripSuppressedDeployResidue } from './warDeployment.
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
 import { evaluateTradeWar } from './tradeWar.js';
-import { advanceReligionStates } from './religiousContest.js';
+import { advanceReligionStates, buildFaithReach } from './religiousContest.js';
 import { realmPietyMult } from './piety.js';
 import { projectReligionStateOntoSettlement, applyDivineMandate } from './religionState.js';
 import { advanceMartialReadiness, buildThreatByCid } from './martialReadiness.js';
@@ -56,7 +56,8 @@ import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
-import { evaluateMoralInstitutionPressure } from './moralInstitutionPressure.js';
+import { evaluateMoralInstitutionPressure, evaluateMoralInstitutionFounding } from './moralInstitutionPressure.js';
+import { advanceInstitutionTolerance } from './institutionTolerance.js';
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
@@ -891,11 +892,25 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // who holds the patron seat; gated on a patron (config.primaryDeitySnapshot) ⇒ byte-
   // identical without faith. Reads the tick-START projected piety megaphone + readiness off
   // postTimeSnapshot. Its candidates roll through rollCandidates like the economy lane's.
+  // item 2b FAITH PRESCRIBES: build the cross-settlement reach (which foreign patrons reach
+  // which converts, at carrier-attenuated strength) once, over the EXISTING faith carriers.
+  // Empty for a deity-free / carrier-less world ⇒ the moral lane stays local ⇒ byte-identical.
+  const faithReach = simulationRules.institutionLifecycleEnabled ? buildFaithReach(postTimeSnapshot) : null;
   const moralInst = evaluateMoralInstitutionPressure(worldState, postTimeSnapshot, {
     tick: worldState.tick,
     simulationRules,
+    faithReach,
   });
   worldState = moralInst.worldState;
+  // W-C3 item 1 MORAL FOUNDING lane — the mirror of the abolition lane: new benevolent/
+  // exploitative institutions RAISED by who holds the patron seat, weighted by the moral
+  // plane. Gated on a patron ⇒ byte-identical without faith; years-scale, so it never
+  // fires inside a golden's few-tick window (accrues sub-floor, emits nothing).
+  const moralFounding = evaluateMoralInstitutionFounding(worldState, postTimeSnapshot, {
+    tick: worldState.tick,
+    simulationRules,
+  });
+  worldState = moralFounding.worldState;
   const structuralCandidates = evaluatePopulationDynamics(postTimeSnapshot, pIndex, {
     tick: worldState.tick,
     interval: tickInterval,
@@ -939,7 +954,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
   const { selected, rollExplanations } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
@@ -1150,6 +1165,23 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       memoryState = { ...memoryState, mercenaryMarket: merc.mercenaryMarketByCid };
     } else if (memoryState.mercenaryMarket !== undefined) {
       const rest = { ...memoryState }; delete rest.mercenaryMarket; memoryState = rest;
+    }
+  }
+  // W-C3 item 2a TRADE NORMALIZES TOLERANCE — READ-LAST/WRITE-NEXT, gated on the moral
+  // systems (or a lingering ledger to relax). Each settlement's institution-tolerance
+  // OFFSET drifts, at a multi-year half-life, toward the mass-weighted average of its trade
+  // partners' effective tolerances (read from the PRIOR ledger, so this tick's founding read
+  // last tick's drift). Materializes ONLY where drift is non-negligible ⇒ byte-neutral for a
+  // world with no trade or all-neutral planes; the key is dropped when nothing drifts.
+  if (simulationRules.institutionLifecycleEnabled || memoryState.institutionTolerance !== undefined) {
+    const tolerance = advanceInstitutionTolerance({
+      snapshot: pantheonSeatSnapshot || postTimeSnapshot,
+      worldState: memoryState,
+    });
+    if (tolerance.institutionToleranceByCid && Object.keys(tolerance.institutionToleranceByCid).length) {
+      memoryState = { ...memoryState, institutionTolerance: tolerance.institutionToleranceByCid };
+    } else if (memoryState.institutionTolerance !== undefined) {
+      const rest = { ...memoryState }; delete rest.institutionTolerance; memoryState = rest;
     }
   }
   // The dossier stops lying: project the per-faction live state
