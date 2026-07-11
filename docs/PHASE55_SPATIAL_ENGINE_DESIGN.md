@@ -195,7 +195,99 @@ appropriate, all keeping the forces↔counterforces law. They cut across trade +
   counterforce: isolation↔sea/air/teleport access; teleport-power↔single-point-of-failure + magic
   dependency; airship-interdiction-defeat↔air-superiority requirement.
 
-## 5. The military layer
+## 4f. Rumors & News — the information layer / the telephone (owner, round 8)
+The §3 propagation layer given NARRATIVE CONTENT + FIDELITY DECAY. Information is a CONTAGION
+that rides the trade network and DEGRADES as it travels — a game of telephone. This is the
+single most DM-usable output of the whole spatial engine: "what your players have heard" vs
+"what actually happened," spatially grounded, with unreliability pre-computed and causally
+justified. A settlement-level **Rumors & News** tab inside the World tab surfaces it.
+
+**The core loop (owner's model, verbatim intent):**
+- An EVENT occurs at an origin (site zero) — war/conquest/deity activation/famine/founding/
+  scandal/corruption-reveal/siege/notable-death. The engine already emits these (worldPulse,
+  causeLifecycle W-C5). Not all travel — a SIGNIFICANCE gate (magnitude × drama) decides whether
+  an event enters the rumor network and HOW FAR it travels before fading (big news travels far;
+  routine ticks — "+3 residents" — never leave town). *This significance gate doubles as the
+  event-triage/aggregation layer the external review asked for: only signal propagates; local
+  noise stays local.*
+- The next trade CARAVAN leaving site zero after the event CARRIES the rumor (the §4 invisible
+  in-transit ledger — same caravans, now with a payload of news). On arrival it INFECTS the next
+  settlement's rumor mill, which RE-EMITS to its own onward trade partners. Propagation is
+  HOP-BY-HOP over the sparse trade graph with an already-reached guard (the exact perf-safe shape
+  the grounding critique demanded — never origin-to-all-N broadcast). LATENCY = the caravan's
+  travel weeks (round-6 cost→weeks): a distant settlement hears the news LATE.
+- It POPULATES the settlement dossier's Rumors & News tab as an item whose COMPLETENESS/ACCURACY
+  is a function of how far down the telephone chain that settlement sits.
+
+**Fidelity decay — HOW information degrades (the heart of it), a layered model:**
+1. COMPLETENESS decay — details drop. The event has structured fields (who/what/where/when/
+   magnitude/cause); each hop, low-salience fields have a seeded chance to fall away. Hops 1–3 ≈
+   complete or lightly lacking; far hops know only "there was a battle near X," not who won or why.
+2. DISTORTION / mutation — fields ALTER, not just drop (the "way off base" case): a name garbles
+   or swaps for a more famous one; magnitude inflates/deflates (500 dead → "thousands" or "a
+   scuffle"); cause gets reattributed (a famine → "a curse from the gods"); winner/loser can flip.
+3. CROSS-CONFIRMATION (the corrector) — a settlement that receives the SAME event via MULTIPLE
+   INDEPENDENT routes gets HIGHER fidelity (the versions triangulate). So the §4b ENTREPÔT — the
+   crossroads many routes cross — is not just economically central but INFORMATIONALLY central:
+   the best-informed place, a rumor CLEARINGHOUSE. A settlement at the end of one long single
+   chain gets the most degraded version.
+
+**What COLORS the distortion — every other system becomes a distortion operator:**
+- FAITH bias — a rumor passing through a deity-X settlement is reframed in X's lens (a victory →
+  "X's blessing"; a plague → "X's punishment of heretics").
+- POLITICAL/allegiance bias — passing through settlements under governing power Y, it spins toward
+  Y (round-7 governance/allegiance: the conqueror's loyal towns tell conquest as liberation; the
+  old regime's tell it as atrocity).
+- CULTURE-DISTANCE bias — the more culturally distant (round-6/7 `cultureDistance`) the receiver
+  from the source, the more it garbles (foreign events misunderstood, re-framed to local sense).
+- HOSTILITY bias — a rumor about an enemy, received in a hostile settlement, distorts ADVERSARIALLY
+  (exaggerate their defeats, minimize their wins, impute malice).
+- RECEIVER fidelity — a settlement with scholarship/a library/high legitimacy PRESERVES fidelity;
+  high-corruption/low-legitimacy DISTORTS more; a spy/intelligence institution READS THROUGH the
+  distortion (sees closer to truth than its hop-distance would give). So the SAME event arrives at
+  two settlements as two different STORIES because it crossed different faiths, powers, cultures.
+
+**"News" vs "Rumor" = the two ends of the fidelity spectrum.** The one system renders a fresh,
+close, cross-confirmed arrival as NEWS and a stale, distant, single-chain, distorted arrival as
+RUMOR. The tab name "Rumors & News" is literally the fidelity axis.
+
+**DM vs PLAYERS — information asymmetry as the product feature (mirrors the faith seam):**
+- The tab shows the rumor AS THE SETTLEMENT BELIEVES IT (player-facing, shareable, the lower-tier
+  surface). For the DM ONLY (premium/DM-gated, exactly like the FaithSection deity-name seam):
+  the GROUND TRUTH (what actually happened), the PROVENANCE (hops, which route, what got dropped/
+  mutated), and the CONFIDENCE. The DM runs the table on the players' partial/false picture while
+  knowing the truth AND precisely where the players are wrong. Free/anon/lapsed never get the
+  omniscient view — they see only the in-world rumor. (Premium law holds: tier never touches
+  generation; premium unlocks the DM's-eye reveal.)
+
+**Time — rumors live, get corrected, entrench, fade (ties to W-C5 causeLifecycle):**
+- Rumors have a LIFESPAN — hot when fresh, fading with age. A later, more complete arrival can
+  SUPERSEDE/CORRECT an earlier one (a correction propagates BEHIND the original: "the general we
+  heard dead is alive"). When a cause RESOLVES (W-C5), the resolution propagates as a follow-up.
+- ENTRENCHMENT — a false rumor that arrives first and isn't corrected can become "known" locally
+  (esp. in low-fidelity / culturally-distant / isolated settlements): a persistent local
+  misconception the DM can exploit. A feature, not a bug.
+
+**Isolation & movement modalities (round 7) read straight through:**
+- NO TRADE ⇒ NO RUMOR MILL (owner, explicit). An isolated settlement is informationally DARK —
+  knows only local events + whatever the rare sea/air/teleport link brings. Isolation's FIFTH
+  consequence: ignorance of the wider world. A BESIEGED settlement goes progressively dark as its
+  routes are cut — a chilling, realistic siege effect (it stops hearing the world as it starves).
+- TELEPORT CIRCLES carry rumors INSTANTLY and at HIGH fidelity (zero hops = no telephone decay) —
+  a privileged accurate window on the linked partner even when land news is slow and garbled.
+  AIRSHIPS carry news fast but still hop (aerial routes) — faster, not more accurate.
+
+**Determinism / dormancy / performance / endogeneity:**
+- DETERMINISM: rumor packets + distortion draws are seeded from stable composite forks
+  (`rumor:${eventId}:${carrierId}:${hop}`, `distort:${eventId}:${settlementId}`); hop-by-hop over
+  the sparse graph, already-reached guard, sorted mutation order. Same seed ⇒ same rumor mill.
+- DORMANCY: no canon map / no trade ⇒ no propagation ⇒ settlements show only local events (today's
+  behavior). Additive, materialized only when spatial trade is active; gated behind the spatial-
+  canon marker. Rumors EXPIRE/decay so a settlement holds only its top-K live items (bounded
+  ledger — the propagation-front balloon the grounding flagged is capped by significance + expiry).
+- ENDOGENEITY: the rumor mill is WORLD-driven (events + trade), party-INDEPENDENT — the party
+  RECEIVES rumors, never feeds propagation/fit math. (Party-as-carrier — the PCs spreading news as
+  they travel — is a tempting FUTURE extension; the core stays party-independent to hold the law.)
 - **Travel time** (weeks) along routes; terrain + readiness modulate speed. Armies advance a
   position each tick.
 - **Collision.** Two hostile armies on crossing paths can meet BETWEEN settlements — a field
