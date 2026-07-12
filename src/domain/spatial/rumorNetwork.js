@@ -65,9 +65,12 @@ import { infoModeOf } from '../worldPulse/simulationRules.js';
 
 // ── The tuning constants (documented here; retuned in the checkpoint soak) ───
 
-/** The one carrier this wave ships (armies/refugees/faith/courier/criminal/
- *  magic ship WITH their movers, post-checkpoint — scope law §3.1). */
+/** The one carrier STEP 3.5 shipped; each other carrier lights WITH its mover
+ *  (round 9). M5 lights the ARMY carrier: a marching army carries the news of the
+ *  settlements it passes to the next stop on its path (framing 'army'). Same shape
+ *  as trade — an additional relay conduit, keyed under the same per-event record. */
 export const RUMOR_CARRIER_TRADE = 'trade';
+export const RUMOR_CARRIER_ARMY = 'army';
 
 /** The regional-graph channel types merchant traffic rides (the P0 economic
  *  set): a confirmed channel of any of these types carries news BOTH ways
@@ -284,6 +287,42 @@ export function tradeNeighbours(graph, settlementId) {
 }
 
 /**
+ * The ARMY-carrier neighbour map (M5, round 9). A marching army carries the news of
+ * the settlements it passes to the NEXT stop on its route. Given the in-transit
+ * armies' remaining paths, build settlementId → the adjacent path settlements (both
+ * directions along the route — an army relays news forward and back over the leg it
+ * travels), deduped codepoint-first edge, codepoint-sorted. EMPTY when no army paths
+ * are supplied ⇒ the army lane is dormant ⇒ byte-identical (the rumor golden has no
+ * armies afield). Same shape as tradeNeighbours.
+ * @param {Array<string[]>|null|undefined} armyPaths remaining routes of in-transit armies
+ * @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>}
+ */
+export function armyPathNeighbourMap(armyPaths) {
+  /** @type {Map<string, Map<string, string>>} */
+  const byNode = new Map();
+  const link = (/** @type {string} */ a, /** @type {string} */ b) => {
+    if (a === b) return;
+    const edgeId = compareCodepoint(a, b) < 0 ? `army.${a}.${b}` : `army.${b}.${a}`;
+    const cur = byNode.get(a) || new Map();
+    const prior = cur.get(b);
+    if (prior === undefined || compareCodepoint(edgeId, prior) < 0) cur.set(b, edgeId);
+    byNode.set(a, cur);
+  };
+  for (const path of Array.isArray(armyPaths) ? armyPaths : []) {
+    const nodes = Array.isArray(path) ? path.map(String) : [];
+    for (let i = 0; i + 1 < nodes.length; i++) { link(nodes[i], nodes[i + 1]); link(nodes[i + 1], nodes[i]); }
+  }
+  /** @type {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+  const out = new Map();
+  for (const [node, neighbours] of byNode) {
+    out.set(node, [...neighbours.entries()]
+      .map(([neighbourId, edgeId]) => ({ neighbourId, edgeId }))
+      .sort((a, b) => compareCodepoint(a.neighbourId, b.neighbourId)));
+  }
+  return out;
+}
+
+/**
  * Capture-time content whitelist (§III.2-4's first layer): ONLY structured
  * fields are copied off a feed entry — never headline/summary/tags/reasons
  * prose — so an arrival record cannot carry a latent deity name or covert tag
@@ -425,10 +464,13 @@ export function degradeTelling(record, fork, digest) {
  *   byte-identical.
  * @param {RumorRng | null} [args.rng]  the pulse rng confluence. Required only
  *   by Unreliable relays; Perfect-but-Delayed and dormant paths never touch it.
+ * @param {Array<string[]> | null} [args.armyPaths]  M5 army carrier (round 9): the
+ *   in-transit armies' routes. A marching army relays news along its path. EMPTY /
+ *   absent ⇒ the army lane is dormant ⇒ byte-identical (the trade lane is untouched).
  * @returns {{ next: RumorLedgers | null, changed: boolean }}  next=null ⇒ the
  *   key should be absent (empty ledger drops, the conditional-ledger idiom).
  */
-export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null }) {
+export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null }) {
   const prior = /** @type {RumorLedgers | null} */ (
     hasSpatialLedger(worldState, 'rumorLedgers')
       ? asLedgers(getSpatialLedger(worldState, 'rumorLedgers'))
@@ -532,6 +574,9 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
   // pairs, so a delivered packet is never due the same tick it was emitted.
   /** @type {Array<{ targetId: string, key: string, packet: RumorArrivalRecord }>} */
   const deliveries = [];
+  // M5 army carrier: the in-transit armies' path adjacencies (dormant + empty when no
+  // armyPaths supplied ⇒ the army lane never fires ⇒ byte-identical).
+  const armyNeighbours = armyPathNeighbourMap(armyPaths);
   for (const sid of [...working.keys()].sort(compareCodepoint)) {
     const records = /** @type {Map<string, RumorArrivalRecord>} */ (working.get(sid));
     for (const key of [...records.keys()].sort(compareCodepoint)) {
@@ -543,50 +588,59 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       if (record.hopCount >= maxHopsFor(record)) continue;  // hop budget spent
       const hop = record.hopCount + 1;
       const relayTelling = `t${hop}:${record.eventRef}@${sid}`;
-      for (const { neighbourId, edgeId } of tradeNeighbours(graph, sid)) {
-        const weeks = hopWeeks(digest, sid, neighbourId, season);
-        const travelTicks = Math.max(1, finiteNumber(weeks, 1));
-        let fidelity = {
-          completeness01: record.completeness01,
-          accuracy01: record.accuracy01,
-          content: record.content,
-        };
-        if (mode === 'unreliable') {
-          // THE fork law (§III.2-5): per event+carrier+edge+hop, NEVER per
-          // settlement, off the pulse confluence. Perfect-but-Delayed forks
-          // NOTHING (this branch is the only rng touch in the module).
-          if (!rng) continue; // no confluence threaded ⇒ no distorted relay
-          const fork = rng.fork(`rumor-organic:${record.eventRef}:${RUMOR_CARRIER_TRADE}:${edgeId}:${hop}`);
-          fidelity = degradeTelling(record, fork, digest);
-        }
-        deliveries.push({
-          targetId: neighbourId,
-          key,
-          packet: {
-            eventRef: record.eventRef,
-            eventTick: record.eventTick,
-            carrier: RUMOR_CARRIER_TRADE,
-            arrivalTick: now + travelTicks,
-            hopCount: hop,
-            lineageIds: [...record.lineageIds, relayTelling],
-            // The packet's independence root is ITS OWN telling's origin
-            // (lineageIds[1]) — never the relayer's merged corroboration, so
-            // an echo chain stays independence-1 (the V.3 pin).
-            corroborationRoots: [record.lineageIds[1]],
-            provenance: {
-              originId: record.provenance.originId,
-              relayIds: [...record.provenance.relayIds, sid],
+      // Fan out over each carrier's neighbours. TRADE first (byte-identical to
+      // pre-M5); then ARMY (round 9) — an army carries the news of where it has been
+      // to the next stop. Same packet shape; only the carrier tag / framing / fork
+      // carrier differ (per event+carrier+edge+hop — the §III.2-5 fork law).
+      /** @param {string} carrier @param {string} framingTag @param {Array<{ neighbourId: string, edgeId: string }>} neighbours */
+      const relayVia = (carrier, framingTag, neighbours) => {
+        for (const { neighbourId, edgeId } of neighbours) {
+          const weeks = hopWeeks(digest, sid, neighbourId, season);
+          const travelTicks = Math.max(1, finiteNumber(weeks, 1));
+          let fidelity = {
+            completeness01: record.completeness01,
+            accuracy01: record.accuracy01,
+            content: record.content,
+          };
+          if (mode === 'unreliable') {
+            // THE fork law (§III.2-5): per event+carrier+edge+hop, NEVER per
+            // settlement, off the pulse confluence. Perfect-but-Delayed forks
+            // NOTHING (this branch is the only rng touch in the module).
+            if (!rng) continue; // no confluence threaded ⇒ no distorted relay
+            const fork = rng.fork(`rumor-organic:${record.eventRef}:${carrier}:${edgeId}:${hop}`);
+            fidelity = degradeTelling(record, fork, digest);
+          }
+          deliveries.push({
+            targetId: neighbourId,
+            key,
+            packet: {
+              eventRef: record.eventRef,
+              eventTick: record.eventTick,
+              carrier,
+              arrivalTick: now + travelTicks,
+              hopCount: hop,
+              lineageIds: [...record.lineageIds, relayTelling],
+              // The packet's independence root is ITS OWN telling's origin
+              // (lineageIds[1]) — never the relayer's merged corroboration, so
+              // an echo chain stays independence-1 (the V.3 pin).
+              corroborationRoots: [record.lineageIds[1]],
+              provenance: {
+                originId: record.provenance.originId,
+                relayIds: [...record.provenance.relayIds, sid],
+              },
+              completeness01: fidelity.completeness01,
+              accuracy01: fidelity.accuracy01,
+              framing: [...new Set([...record.framing, framingTag])].sort(compareCodepoint),
+              significance: record.significance,
+              score: record.score,
+              content: fidelity.content,
+              relayedTick: null,
             },
-            completeness01: fidelity.completeness01,
-            accuracy01: fidelity.accuracy01,
-            framing: [...new Set([...record.framing, 'merchant'])].sort(compareCodepoint),
-            significance: record.significance,
-            score: record.score,
-            content: fidelity.content,
-            relayedTick: null,
-          },
-        });
-      }
+          });
+        }
+      };
+      relayVia(RUMOR_CARRIER_TRADE, 'merchant', tradeNeighbours(graph, sid));
+      relayVia(RUMOR_CARRIER_ARMY, 'army', armyNeighbours.get(sid) || []);
     }
   }
   for (const { targetId, key, packet } of deliveries) {

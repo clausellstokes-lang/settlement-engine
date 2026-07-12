@@ -59,6 +59,8 @@ import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceR
 import { advanceSettlementSupply } from './supplyKernel.js';
 import { releaseMigrationArrivals, dispatchMigrations } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
+import { advanceArmyTransit } from './armyTransitKernel.js';
+import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
@@ -1503,7 +1505,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
   // pantheon) leaked wall-clock time into the composed output — a latent determinism/
   // equivalence break that only bit once an advance reached such a tick.
-  const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
+  let wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
   // STEP 3.5 — RUMORS & NEWS (trade carrier). AFTER the tick's feed is fully
   // composed (the seeds read the same entries the DM reads), the rumor network
   // advances one step: expire by tick-age, seed this window's significant
@@ -1515,6 +1517,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // byte-identical. Proposal/party applies outside this kernel seed at the
   // next pulse via the module's feed lookback (idempotent per event+witness).
   {
+    // M5 army carrier: the prior-tick in-transit armies' routes (empty when none
+    // afield ⇒ the army lane is dormant ⇒ byte-identical). Armies carry rumors along
+    // their path (round 9), same shape as the trade carrier.
+    const transitLedger = armyTransitLedger(memoryState);
+    const armyPaths = transitLedger
+      ? Object.keys(transitLedger).sort().map((id) => transitLedger[id].path).filter((p) => Array.isArray(p) && p.length > 1)
+      : null;
     const rumors = advanceRumorLedgers({
       worldState: memoryState,
       feedEntries: wizardNews?.entries || [],
@@ -1522,6 +1531,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       tick: worldState.tick,
       season: roadSeason,
       rng,
+      armyPaths,
     });
     if (rumors.changed) {
       if (rumors.next) {
@@ -1627,6 +1637,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         tick: worldState.tick,
       });
       if (migration.changed) memoryState = migration.worldState;
+    }
+  }
+  // Phase 5.5 mover M5 — ARMY-TRANSIT + FIELD COMBAT (the war convergence). AFTER the
+  // war layer resolved sieges + persisted the one-army deployments: each committed army
+  // gains a POSITION along its march (planMarch over the frozen digest, the M1 danger
+  // re-score); two HOSTILE in-transit armies whose remaining paths cross meet in the
+  // OPEN — a FIELD BATTLE (the §5 clamped resolver, no hand of miracle), whose bounded
+  // attrition mauls the loser (never annihilates) and writes back onto its deployment
+  // (a battered army besieges weaker). The COURIER UMBILICAL grows an army's belief-
+  // staleness while its route home is cut (info-starved ⇒ mis-assesses); INACTIVE under
+  // omniscient. AGGREGATE counts only — no named NPC touched. DORMANT (no spatial
+  // marker) ⇒ changed:false ⇒ byte-identical (the aspatial war layer runs verbatim).
+  {
+    const armyTransit = advanceArmyTransit({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      digest: memoryState.spatialDigest,
+      graph: applied.regionalGraph,
+      rng: rng.fork('army-transit'),
+      season: roadSeason,
+      tick: worldState.tick,
+      now,
+    });
+    if (armyTransit.changed) memoryState = armyTransit.worldState;
+    if (armyTransit.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now });
     }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);

@@ -68,6 +68,9 @@ import { deriveDecisionTier } from './decisionTier.js';
 // M2b: the supply-interdiction read (0 when the shipment ledger is absent / dormant
 // ⇒ resolveSiegeVerdict's term is 0 ⇒ the aspatial siege path is byte-identical).
 import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
+// M5: the spatial marker gate for SIEGE-AS-STARVATION. false off the marker (every
+// aspatial world) ⇒ resolveSiegeVerdict runs the capacity-roll VERBATIM ⇒ byte-identical.
+import { armyTransitActive } from '../spatial/armyTransit.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -142,6 +145,23 @@ export const WILL_CAPITULATE_FLOOR = -0.72;
 // by how starved the town is (supplyInterdiction 0..1). DORMANT: supplyInterdiction 0
 // ⇒ the term is exactly 0 ⇒ the aspatial siege path resolves BYTE-IDENTICALLY.
 const SUPPLY_INTERDICTION_STRENGTH = 2;
+
+// Phase 5.5 mover M5 — SIEGE-AS-STARVATION (the FULL replacement). On the SPATIAL
+// path (marker present ⇒ spatialSiege) the capacity-roll CORE of the siege verdict
+// (SIEGE_CAPACITY_K·(coalition − defender)) is CLEANLY REPLACED by the supply
+// mechanic: fall is driven by supply INTERDICTION × siege TIME, minus RELIEF — "a
+// siege is a supply mechanic (starvation + time), not a hitpoint bar" (design §7).
+// The feasibility gate, outcome bands, will/capitulation, hard ceiling, and the roll
+// fork are UNCHANGED. OFF the marker (spatialSiege false — every aspatial world + all
+// 6 siege pins) the capacity-roll runs VERBATIM ⇒ byte-identical. The two cores are
+// mutually exclusive (an if/else) — NO dual siege math on either path.
+// STARVE_K: the log-odds slope at full starvation×time; STARVE_FULL_TICKS: ticks of
+// TOTAL interdiction to fully starve a town; STARVE_RELIEF_BIAS: how much ally/supply
+// relief pushes back toward holding. Reuses SIEGE_CAPACITY_HOLD_BIAS (home-ground
+// defender advantage) + the will bias — the anti-snowball envelope is preserved.
+const STARVE_K = 6;
+const STARVE_FULL_TICKS = 12; // a season of total interdiction fully starves the town
+const STARVE_RELIEF_BIAS = 3;
 
 /**
  * The defender's WILL-to-resist score ∈ [-1, 1], composed from leadership/faith
@@ -823,10 +843,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number, spatialSiege?: boolean }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0 }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0, spatialSiege = false }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -965,11 +985,25 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   }
 
   // ── PLAUSIBLE band (or a satisfied override) → the stochastic siege roll. A resolute
-  // defender's willBias lowers pFall (holds); a crumbling one raises it. M2b: a supply-
-  // interdicted (starved) defender's hold weakens — the term RAISES pFall, scaled by how
-  // starved it is. supplyInterdiction 0 (aspatial / fed) ⇒ +0 ⇒ byte-identical logOdds. ─
-  const supplyPush = SUPPLY_INTERDICTION_STRENGTH * clamp01(supplyInterdiction);
-  const logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias + supplyPush;
+  // defender's willBias lowers pFall (holds); a crumbling one raises it. TWO MUTUALLY-
+  // EXCLUSIVE cores (never both — no dual siege math):
+  //   • SPATIAL (M5, spatialSiege) — SIEGE-AS-STARVATION. The capacity-roll core is
+  //     GONE; fall is driven by supply INTERDICTION × siege TIME minus RELIEF (design
+  //     §7). No interdiction ⇒ the town holds (you must cut the roads); a long TOTAL
+  //     interdiction starves it out. Feasibility/bands/will/ceiling all still apply.
+  //   • ASPATIAL (every legacy world + the 6 siege pins) — the capacity-roll VERBATIM,
+  //     with the M2b supply-interdiction AUGMENT term. supplyInterdiction 0 ⇒ +0 ⇒
+  //     byte-identical. This branch is BYTE-FOR-BYTE the pre-M5 formula. ──────────────
+  let logOdds;
+  if (spatialSiege) {
+    const interdiction = clamp01(supplyInterdiction);
+    const timeFactor = clamp01(siegeAge / STARVE_FULL_TICKS);
+    const relief01 = clamp01((Number(defenderReliefBonus) || 0) / Math.max(1, defenderCurrent));
+    logOdds = STARVE_K * interdiction * timeFactor - STARVE_RELIEF_BIAS * relief01 - SIEGE_CAPACITY_HOLD_BIAS - willBias;
+  } else {
+    const supplyPush = SUPPLY_INTERDICTION_STRENGTH * clamp01(supplyInterdiction);
+    logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias + supplyPush;
+  }
   const pFall = clamp01(logistic(logOdds));
   const roll = rng.fork(`siege:${stablePart(targetId)}:${tick}`).random();
   const falls = roll < pFall;
@@ -1079,6 +1113,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   }
 
   const graph = snapshot?.regionalGraph || {};
+  // M5: SIEGE-AS-STARVATION gate. On the spatial path (marker present) the siege
+  // verdict resolves by supply interdiction × time (not the capacity roll). false off
+  // the marker ⇒ every verdict runs the capacity-roll VERBATIM ⇒ byte-identical.
+  const spatialSiege = armyTransitActive(/** @type {{ spatialCanonVersion?: unknown }} */ (worldState));
   // settlementStrength stays the RELATIONSHIP-dynamics confidence input (unchanged).
   const strengthFor = buildStrengthLookup(snapshot);
   // The war-specific MILITARY CAPACITY model (theoretical/current). The
@@ -1250,7 +1288,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // M2b: how supply-starved the besieged target is (prior-tick shipment ledger). 0 on
     // the aspatial path (no marker / no ledger) ⇒ the verdict term contributes 0.
     const supplyInterdiction = supplyInterdictionLevel(worldState, targetId);
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust, supplyInterdiction });
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust, supplyInterdiction, spatialSiege });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front
