@@ -15,8 +15,15 @@ Content is keyed to CONJUNCTIONS, not entities: (role x situation x cause).
   trade-strangled), war (levied-away, garrison-drained, siege-scarred, occupation), faith
   (conduct-drift, conversion-pressure, secularization, clergy-scandal), corruption
   (captured, scandal).
-The dimensions multiply: ~30 roles x ~12 situations x ~10 cause classes x >=3 variants —
-a few thousand authored lines covering a space that feels bottomless.
+The dimensions multiply over the BUILT key (corrected 2026-07-11 by the W2 architect ruling,
+docs/briefs/W2_CONJUNCTION_CONTENT_BRIEF.md — the earlier ~30x~12x~10 estimate here described
+a key space the engine never emits): the W-C5 conjunction key is {role, situation, causeClass,
+lifecycleStage} with 12 roles (npcAgency NPC_ROLE_ARCHETYPES) x 2 situations
+(compromised-covert | compromised-revealed, causeLifecycle bearerSituation) x 14 cause classes
+(causeVocabulary CAUSE_CLASSES) x 6 lifecycle stages (attributed, re-caused, reformed,
+historicized, exposed-public, re-adjudicated) = 2,016 conjunctions, x 1-2 authored variants —
+a couple thousand authored lines covering a space that feels bottomless. W2 authors against
+the built key only; content for situations the engine cannot emit is waste.
 
 ## The specific-yet-generic rule
 Every variant names the MECHANISM structurally, never the setting: template slots

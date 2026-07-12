@@ -7,7 +7,7 @@ import { EditableText } from '../primitives/EditableText.jsx';
 import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
-import { describeCompromiseLifecycle } from '../../domain/display/causeLifecycleVocabulary.js';
+import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -140,9 +140,11 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
   const infColor = npc.influence==='high' ? '#a0762a' : npc.influence==='moderate' ? '#6b5340' : '#9c8068';
   const traits = normalizeNpcTraits(npc);
   const publicTraits = traits.filter(t => t.visibility !== 'gm');
-  // W-C5: the worldPulse-attributed cause + lifecycle stage, rendered through the
-  // generic content floor. Null unless the world pulse touched this compromise.
-  const compromiseLc = describeCompromiseLifecycle(npc.compromiseLifecycle);
+  // W-C5/W2: the worldPulse-attributed cause + lifecycle stage, rendered through
+  // the W2 conjunction ladder (specific -> role -> class -> the W-C5 generic
+  // floor). Null unless the world pulse touched this compromise. The npc pin key
+  // seeds variant selection so two bearers of one conjunction read differently.
+  const compromiseLc = describeCompromiseConjunction(npc.compromiseLifecycle, npcPinKey(npc));
 
   // Pin UI is optional. When `onTogglePin` isn't provided (read-only views,
   // unsaved settlements) the icon doesn't render at all. `pinnedIds` is a Set
