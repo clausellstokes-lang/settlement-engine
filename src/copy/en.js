@@ -635,6 +635,8 @@ export const en = Object.freeze({
     untitled:     'Untitled settlement',
     emptyTitle:   'No public dossiers yet.',
     emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent page anyone can find.',
+    emptyFilteredBody: 'No settlements match your filters.',
+    clearFilters: 'Clear filters',
     loadError:    'The gallery could not be loaded. Try again in a moment.',
     backToList:   'Back to gallery',
   },

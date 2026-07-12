@@ -47,7 +47,13 @@ function StatusMessage({ tone = 'info', children }) {
       ? { border: RED, bg: RED_BG, color: RED }
       : { border: BLUE, bg: BLUE_BG, color: BLUE };
   return (
-    <div style={{ border: `1px solid ${cfg.border}`, borderRadius: R.md, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+    // Announce to screen readers, matching GalleryList's StatusMessage (this
+    // detail-page copy was silent): an error is assertive, success/info polite.
+    <div
+      role={tone === 'danger' ? 'alert' : 'status'}
+      aria-live={tone === 'danger' ? 'assertive' : 'polite'}
+      style={{ border: `1px solid ${cfg.border}`, borderRadius: R.md, background: cfg.bg, color: cfg.color, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+    >
       {children}
     </div>
   );
@@ -96,9 +102,15 @@ export default function GalleryDetail({
   }, [dossier]);
 
   if (loading) {
+    // Skeleton the dossier open so the detail load reads as a page, not a bare
+    // sentence: an aria-hidden hero placeholder (mirrors the GalleryImage hero
+    // height) inside the page container, with the polite announce on the wrapper.
     return (
-      <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
-        Opening settlement...
+      <div role="status" aria-live="polite" style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, display: 'grid', gap: SP.lg }}>
+        <div aria-hidden="true" style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, minHeight: 310, boxShadow: '0 4px 14px rgba(27,20,8,0.08)' }} />
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, textAlign: 'center' }}>
+          Opening settlement...
+        </div>
       </div>
     );
   }

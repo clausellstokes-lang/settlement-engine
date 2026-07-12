@@ -1,5 +1,3 @@
-import { Search } from 'lucide-react';
-
 import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
   BORDER,
@@ -7,13 +5,12 @@ import {
   BODY,
   FS,
   INK,
-  MUTED,
   R,
   SP,
   sans,
 } from '../theme.js';
 
-export default function GalleryTopbar({ search, setSearch, sort, setSort, total, loading }) {
+export default function GalleryTopbar({ search, setSearch, sort, setSort, total, loading, disabled = false }) {
   return (
     <div className="gallery-topbar" style={{
       display: 'grid',
@@ -22,19 +19,20 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       marginBottom: SP.md,
     }}>
       <label htmlFor="gallery-search" style={{ position: 'relative', minWidth: 0 }}>
-        <Search size={15} color={MUTED} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)' }} />
         <input
           id="gallery-search"
           type="search"
           aria-label="Search settlements"
+          aria-describedby={disabled ? 'gallery-search-off' : undefined}
           value={search}
           onChange={event => setSearch(event.target.value)}
           placeholder="Search settlements"
+          disabled={disabled}
           style={{
             width: '100%',
-            minHeight: 38,
+            minHeight: 44,
             boxSizing: 'border-box',
-            padding: '8px 10px 8px 32px',
+            padding: '8px 10px',
             border: `1px solid ${BORDER}`,
             borderRadius: R.md,
             background: CARD,
@@ -42,14 +40,17 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
             fontFamily: sans,
             fontSize: FS.sm,
             fontWeight: 800,
+            cursor: disabled ? 'not-allowed' : 'text',
+            opacity: disabled ? 0.6 : 1,
           }}
         />
       </label>
       <select
         value={sort}
         onChange={event => setSort(event.target.value)}
+        aria-label="Sort settlements"
         style={{
-          minHeight: 38,
+          minHeight: 44,
           border: `1px solid ${BORDER}`,
           borderRadius: R.md,
           background: CARD,
@@ -62,7 +63,11 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       >
         {GALLERY_SORT_OPTIONS.map(([id, label]) => <option key={id} value={id}>{label}</option>)}
       </select>
-      <div className="sf-readable-strip" style={{
+      {/* The single polite live region for list-load status: always mounted, its
+          text transitions 'Loading settlements...' → 'N public settlement(s)'
+          across first load, query change, and load-more. The list/detail
+          skeletons stay aria-hidden so the load is announced exactly once. */}
+      <div className="sf-readable-strip" role="status" aria-live="polite" style={{
         gridColumn: '1 / -1',
         color: BODY,
         fontFamily: sans,
@@ -72,6 +77,21 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
       }}>
         {loading ? 'Loading settlements...' : `${total ?? 0} public settlement${total === 1 ? '' : 's'}`}
       </div>
+      {/* "My Settlements" mode swaps to the owner-scoped feed, which the search
+          field cannot filter — disable it and surface the cause next to the
+          control so the disabled state reads as intentional, not broken. */}
+      {disabled && (
+        <div id="gallery-search-off" style={{
+          gridColumn: '1 / -1',
+          color: BODY,
+          fontFamily: sans,
+          fontSize: FS.xs,
+          fontWeight: 750,
+          justifySelf: 'start',
+        }}>
+          Search is off in your settlements
+        </div>
+      )}
     </div>
   );
 }
