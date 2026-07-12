@@ -70,8 +70,8 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 
 ### 0.0.3 IN-FLIGHT / ON THE DESK (update on every dispatch + landing)
 - STEP 3.5 RUMORS & NEWS: COMMITTED (this commit) — manager-reviewed under the Opus handoff.
-- W5 RE-MERGE: chip session ENDED — branch awaits manager merge review (§7.1 protocol; its base
-  was corrected mid-session to df217415-lineage; 8 named conflict files were the work). NEXT ON DESK.
+- W5 RE-MERGE: BLOCKED on ⚠️ OWNER headroom decision (see §0.6 — +1,000 budget raise vs FP-2).
+  NOT merged; deferred (cosmetic, non-blocking). Branch 312a5025 preserved in worktree amazing-thompson.
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
   Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
   adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
@@ -145,6 +145,16 @@ state briefing: what exists unstaged, what remains, any tree changes since dispa
 rewrite what exists"; (3) if the tree went quiet 15+ min with no completion, ping the same way.
 
 ## 0.6 The parking lot (append here; do not act without a ruling)
+- (W5, 2026-07-12) ⚠️ OWNER DECISION — W5 RE-MERGE IS BLOCKED ON HEADROOM. The W5 cosmetic sweep
+  (branch 312a5025, worktree amazing-thompson; 68 files, gate-green on base df217415, ONLY
+  OutputContainer.jsx conflicts with current HEAD) adds ~+1,000 eager first-paint bytes (two eager
+  configSlice store-slice feature fields — the monolithic-store issue). It self-raised the budget
+  1,256,000→1,257,000 "OWNER-RATIFICATION PENDING". Current headroom is 63B, so it does NOT fit.
+  Opus-manager will NOT self-authorize a budget raise (§0.2/§0.0.2). OWNER PICKS: (a) ratify the
+  +1,000 raise (cosmetic-worth-it call), OR (b) run FP-2 (the parked store-slice split) first to
+  reclaim headroom, then merge W5 at 1,256,000. W5 is cosmetic + non-critical-path — deferring it
+  blocks nothing. Merge protocol when unblocked: resolve OutputContainer (3.5 extracted
+  dossierLazyTabs; W5 has dossier polish — keep both), full battery, §7.1.
 - (5.5-K, 2026-07-12) LIVE PACK.CELLS CAPTURE: the keystone proved its digest against INJECTED pack
   fixtures; the real FMG-iframe read-only capture seam (extract pack.cells H/biome/r/c once at
   canonize) is UNWIRED — it belongs to 5.5-M (MODULATION), the first CONSUMER. MODULATION's dispatch
