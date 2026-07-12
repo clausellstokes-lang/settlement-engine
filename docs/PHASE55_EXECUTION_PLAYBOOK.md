@@ -570,6 +570,66 @@ infoMode completes: 'full' (factional beliefs + reconciliation) joins the ladder
 (Full Simulation = everything, honestly). Soak: a catch-up of 26 weeks == 26 manual ticks,
 byte-identical. Sensitive: catch-up determinism (the pin-now discipline); expiry never deadlocks.
 
+### M11 — WORLD-AS-ACTOR SHOCKS (owner round 21, 2026-07-12; depends: M4; army coupling: M5)
+Two fenced sub-waves. The world's non-political forces finally ACT: pestilence that travels, calamity
+that strikes. Both: AGGREGATE-population only (product boundary — the sim NEVER kills a named NPC;
+at-risk/displaced flags are DM hooks); receipts mandatory; every rate a frozen, documented, owner-
+retunable constant; PRNG = seeded forks from stable composite keys, codepoint-sorted mutation.
+
+**M11a — PESTILENCE (the traveling plague).** ONE PLAGUE TRUTH: no second plague system — the
+epidemic ledger (nested under spatialLedgers, marker-gated, ZERO eager bytes post-FP-R) MATERIALIZES
+the EXISTING plague stressor at each settlement it reaches (reconcile like M4's origin-loss rule);
+aspatial worlds keep today's plague byte-identically — the marker gates only the TRAVEL. Propagation:
+plague travels AS INFORMATION TRAVELS — hop-by-hop along ACTIVE trade channels + M2 shipment arrivals
+(+ M5 army movements once they exist) at hopWeeks latency, seeded per-edge forks
+(`plague:spread:${edgeId}:${tick}`); import pressure scales with inbound volume (ports run hotter).
+Onset: seeded draw scaled by density/tier + trade volume MINUS the care counterforce. THE CARE
+COUNTERFORCE reads the INSTITUTION ROSTER, never the magic toggle (a no-magic world simply lacks
+druids/alchemists): churches + church-derivatives, hospitals/healing houses, druidic institutions,
+alchemists each add care capacity with DIMINISHING stacking returns, CAPPED (the SECURITY_MAX_RELIEF
+pattern — a temple city resists, is never immune); care suppresses EMERGENCE and raises RECOVERY
+(shortens survival). Density-vs-care tension is the texture: cities burn hot-and-short, care-poor
+villages smolder. ARMIES: plague level joins the mover hazard read as a GRADED SCALAR in route +
+engagement scoring (M1 discipline, never a boolean) weighted by W0 risk tolerance — a lawful
+commander waits out the pestilence; an army interacting with a plagued settlement rolls seeded
+contraction (`plague:army:${armyId}:${settlementId}:${tick}`), a contracted army takes an
+effective-strength impairment AND becomes a VECTOR to its next stop. RELIGIOUS INFLUENCE (both
+directions): while active, religious authorities gain a TEMPORARY standing/influence modifier +
+piety pulse (formalizing the existing plague→temple-relief seam), REVERTING on clearance; clears-
+fast-under-care = the temple's triumph, rages-unchecked feeds the existing piety-crisis/abandonment
+seam. The QUARANTINE DILEMMA emerges free: movers re-route around plagued hubs (the hazard term) →
+isolation → M2 supply risk. CO-BUILT BRAKES: recovery floor (NO perma-plague — every record clears),
+the counterforce cap, per-tick spread bounded (cascade-depth cap). Soak: 20y port-seeded two-region
+run — the front walks the network at hopWeeks-consistent arrival ticks; care-rich clears faster than
+care-poor; armies avoid + contract + carry; influence pulses and reverts; every record eventually
+clears; dormant byte-identity. Sensitive: ONE plague truth (grep: no parallel system); the cap; the
+army term is a scalar; the roster-read (no toggle read).
+
+**M11b — CALAMITY (natural disaster).** A VERY RARE instantaneous shock with a LONG, fully EMERGENT
+economic tail. Frequency: realm-expected once per 10-20 years → per-settlement-year hazard
+`1/(HAZARD_YEARS × N)`, ONE seeded annual draw (`disaster:${settlementId}:${year}`); cooldown WITHOUT
+new state — the minted permanent history stamp IS the cooldown record (no re-strike within
+COOLDOWN_YEARS of a prior stamp). Terrain-keyed type table (flood/riverside, fire/dense-timber,
+quake/mountain, storm/coastal — the riverside town's flood-year is legible destiny). THE STRIKE
+(bounded): seeded selection of K non-required institutions (K tier-capped 1..4, candidates codepoint-
+sorted); SUBSUMPTION FIRST — an UPGRADE_CHAINS member DEMOTES down its chain, a multi-instance
+category COLLAPSES to one survivor ("the lodging district is one lodge now"), singletons are
+DESTROYED (hand-of-god); `required` institutions NEVER selected (the hard bound). Aggregate
+population death: a seeded, BOUNDED, tier-scaled fraction (significant but survivable — the exodus
+is the real depopulator, and it is recoverable drama). THE TAIL IS EMERGENT, ZERO NEW MECHANISM:
+destroyed producers sever M2 supply links (downstream starvation risk); broken activeChains
+re-reconcile the economy; lost livelihoods enter M4 AS DEPARTURES with the disaster receipt (the
+mass exodus — and M4's conservation ledger MUST still balance through it, asserted); population loss
+demotes the tier EMERGENTLY via popToTier (never forced); the legitimacy hit + a W-C5 'disaster
+response' cause puts the ruler under coup-readable pressure. Mint the NAMED permanent stamp ("The
+Great Fire of Thornwood, year 12"). GATE: a CL rules flag, preset-gated (ON in dramatic/full-sim
+presets, default OFF → byte-identical); the spatial tails ride the marker; aspatial fallback = the
+existing population-flight term. Soak: 50y realm run — frequency lands in the 10-20y band; NO
+annihilation (bounds + the M4/M2 brakes hold — no chain-collapse); the tail composes end-to-end
+(strike → starvation-risk → exodus → legitimacy → pressure) with every step receipted; cooldown-via-
+stamp works; byte-identical with the flag off. Sensitive: required-never-selected; the death-fraction
+bound; M4 conservation through the exodus; the frequency + cooldown constants.
+
 ## 7.2 The round-21+ backlog (frozen out of v1; triage at Phase 6 ⚠️ OWNER)
 W2-style voice sidecars for war/faith/trade news (the pillar-inventory prescription — cheap, high
 value, candidates for EARLY post-launch or even Phase-6 punch-list graduation); numeric prices;
@@ -588,7 +648,8 @@ pre-stamps); dramatic_campaign preset depth review; population-attractor retune 
 
 The shippable milestone. It is REACHED when all of the following are committed and green:
 1. The FULL ladder committed + green: Wave A, ALL merges (§6.1 — W5/Session-Foundry), and the ENTIRE
-   mover ladder M1-M10 (PART 7, each with its own soak).
+   mover ladder M1-M11 (PART 7, each with its own soak; M11 added by owner round 21, 2026-07-12 —
+   the checkpoint validates THROUGH M11).
 2. The LIVING REALM PRESET delivers, on a premium canonized realm: mapped geography (digest),
    seasons (food year), distance-weighted trade/faith, perfect-but-delayed news (or unreliable if
    the DM dials it), routine autonomy with major-approval, belief-sourced war posture with legible

@@ -1601,3 +1601,51 @@ Living/Autonomous progression (owner decision + catch-up), all spatial/travel/in
 values (cards render, locked to available modes). Gates: goldens byte-identical (virtual-default discipline),
 legacy-normalization byte-exactness test PER FLAG, settings-history replay invariant, the usual suite.
 SEQUENCING (manager): after W2 closes the reunification; CL-0 is then the first brick of Phase 5.5.
+
+# ROUND 21 — WORLD-AS-ACTOR SHOCKS: PESTILENCE + CALAMITY (owner, 2026-07-12) → M11
+
+The owner's directive (verbatim intent): plagues should TRAVEL the same way information travels; in
+a magic-on world the counterforce is the care roster — druids, any church or church-derivative,
+hospitals and the like, alchemists — suppressing both the EMERGENCE of the plague stressor and how
+long it SURVIVES; an army interacting with a plagued settlement is likely to CONTRACT it and should
+weigh that in its risk assessment (avoid until it passes); PRNG placed where appropriate; plagued
+towns give TEMPORARY influence to religious authorities. Natural disaster: a very quick event with a
+LONG TAIL of economic disaster — seeded selection of non-required institutions destroyed outright
+(hand-of-god) or DEMOTED under a subsumption rule (a lodging district reduced to its one surviving
+lodge); bounded and reasonable; possibly a tier demotion if unlucky, possibly a complete economic
+rearrangement; significant populace death and MASS EXODUS (livelihoods removed); the ruling leader
+under heavy pressure. VERY rare but not impossible — realm-wide roughly once per settlement every
+10-20 years.
+
+ARCHITECT'S REFINEMENTS (accepted into the M11 spec, playbook PART 7):
+1. ONE PLAGUE TRUTH — the epidemic ledger EXTENDS the existing plague stressor (materializes it at
+   arrival; reconcile like M4's origin-loss rule). Never a parallel plague system. Aspatial worlds
+   keep today's plague byte-identically; the spatial marker gates only the TRAVEL.
+2. The counterforce reads the INSTITUTION ROSTER, never the magic toggle — a no-magic world lacks
+   the care institutions at generation, so the counterforce weakens with zero special-casing.
+   Diminishing stacking returns + a hard cap (the SECURITY_MAX_RELIEF pattern): resist, never immune.
+3. Density-vs-care is the texture: cities burn hot-and-short, care-poor villages smolder; ports run
+   hotter (inbound volume). Emerges from two opposing scalars, no authored cases.
+4. Armies: plague joins the mover hazard read as a GRADED SCALAR (M1 discipline) weighted by W0 risk
+   tolerance; contraction is a seeded roll; a contracted army is impaired AND a vector to its next
+   stop. Besieging a plagued city becomes priceable folly.
+5. Religious influence swings BOTH ways: clears-fast-under-care = the temple's triumph (temporary
+   influence + piety pulse, reverting on clearance); rages-unchecked feeds the existing
+   piety-crisis/abandonment seam. Formalizes the existing plague→temple-relief seam.
+6. The quarantine dilemma emerges FREE from composition: hazard-term re-routing isolates a plagued
+   hub → M2 supply risk. No new mechanism.
+7. Calamity subsumption rides the existing catalog machinery: UPGRADE_CHAINS demote, multi-instance
+   categories collapse to one survivor, singletons destroyed, `required` NEVER selected.
+8. Tier demotion EMERGES via popToTier from death+exodus arithmetic — never authored.
+9. The long tail is the ladder's composition payoff, zero new mechanism: severed M2 links, economy
+   re-reconcile, M4 departures (conservation asserted through the exodus), W-C5 'disaster response'
+   cause, coup-readable legitimacy pressure.
+10. Frequency 1/(HAZARD_YEARS × N) per settlement-year, seeded annual draw; the cooldown is DERIVED
+    from the minted permanent history stamp (zero new state). Death fraction bounded + tier-scaled
+    (significant but survivable — exodus is the real depopulator, and it is recoverable drama).
+11. PRODUCT BOUNDARY (owner, this session): mortality is AGGREGATE ONLY — named NPCs are never
+    killed by the sim; at-risk/displaced flags are DM hooks.
+
+SEQUENCING: M11 appends to the mover ladder (depends M4 hard — exodus; the army coupling term ships
+with/after M5). The Living Realm checkpoint (PART 5) now validates THROUGH M11. Full dispatch-ready
+spec: playbook PART 7 §M11a/M11b.
