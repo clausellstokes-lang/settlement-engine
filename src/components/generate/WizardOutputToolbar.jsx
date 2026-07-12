@@ -15,7 +15,7 @@
 
 import { lazy, Suspense } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS, CHROME } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 
@@ -27,6 +27,7 @@ export function WizardOutputToolbar({
   handleBack,
   handleGenerate,
   handleNewSettlement,
+  maxWidth,
 }) {
   return (
     <div style={{
@@ -35,7 +36,18 @@ export function WizardOutputToolbar({
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
       borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
-      position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
+      // Cap the toolbar to the dossier's column and centre it so on wide screens
+      // its edges align to the PAGE_MAX dossier below instead of overhanging full
+      // <main> width. Applied to the toolbar's OWN box — it must NOT be wrapped in
+      // a height-collapsed parent, or it would lose its sticky containing block
+      // and scroll away with the dossier.
+      maxWidth, marginLeft: 'auto', marginRight: 'auto', width: '100%',
+      // Pin below the sticky app header. On mobile the header is slim
+      // (CHROME.headerMobile) and also sticky at top:0; pinning this bar at the
+      // header's height stacks the two cleanly instead of letting the toolbar
+      // slide UNDER the header. zIndex 40 keeps it above the dossier but below
+      // the header (z:50), so the header always wins the overlap.
+      position: 'sticky', top: isMobile ? CHROME.headerMobile : 60, zIndex: 40,
     }}>
       {/* Back is a subordinate nav/reset that discards the just-earned draft —
           it must not out-shout the dossier or Save. Demoted to the same
@@ -97,15 +109,17 @@ export function WizardOutputToolbar({
         >
           <span aria-hidden="true">↻ </span>Regenerate draft
         </Button>
-        {/* "New" restarts from the Create landing with a clean slate — a
-            quiet outline. Save (below the dossier) is the one primary. */}
+        {/* "New Draft" restarts from the Create landing with a clean slate — a
+            quiet outline. Save (below the dossier) is the one primary. (OUR
+            handleNewSettlement returns to the Create landing / mode picker, so
+            the title says so rather than master's "same generation path".) */}
         <Button
           variant="secondary"
           size="md"
           onClick={handleNewSettlement}
-          title="Start a fresh draft from the Create landing. The current draft is discarded."
+          title="Start a fresh draft from the Create landing. Your current draft is cleared."
         >
-          New
+          New Draft
         </Button>
       </div>
     </div>

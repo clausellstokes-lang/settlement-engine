@@ -50,7 +50,7 @@ function markDismissed() {
   }
 }
 
-export default function WelcomeCreditCard({ saveId = null }) {
+export default function WelcomeCreditCard({ saveId = null, onVisibilityChange }) {
   const tier = useStore(s => s.auth.tier);
   const userId = useStore(s => s.auth.user?.id);
   const savedCount = useStore(s => s.savedSettlements?.length || 0);
@@ -59,6 +59,16 @@ export default function WelcomeCreditCard({ saveId = null }) {
 
   const [dismissed, setDismissed] = useState(() => readDismissed());
   const [welcomeUnspent, setWelcomeUnspent] = useState(false);
+
+  // Report visibility upward so the dossier shell can suppress its OTHER violet
+  // narrative pitch (the DossierActionBand eyebrow/copy/buttons) while this card
+  // is showing — only one Narrate pitch should compete for the focal point in
+  // the chrome stack at a time. Mirrors the card's own early-return predicate.
+  const isVisible = !dismissed && welcomeUnspent && !!settlement;
+  useEffect(() => {
+    onVisibilityChange?.(isVisible);
+    return () => onVisibilityChange?.(false);
+  }, [isVisible, onVisibilityChange]);
 
   // Ask the server whether the welcome credit is still available. We do
   // this once per mount + on user id change. The fetch is small and only

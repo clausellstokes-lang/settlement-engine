@@ -65,6 +65,9 @@ export default function DossierTabStrip({
                   id={'sf-tab-' + id}
                   role="tab"
                   aria-selected={active}
+                  // Completes the WAI-ARIA tabs relationship: this tab points at
+                  // the content panel OutputContainer labels with the matching id.
+                  aria-controls={'sf-panel-' + id}
                   // Roving tabIndex: only the selected tab is tabbable; the rest are
                   // reached via the arrow-key handler on the tablist.
                   tabIndex={active ? 0 : -1}

@@ -22,7 +22,7 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
@@ -35,6 +35,7 @@ import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { ModeSelector } from './generate/ModeSelector.jsx';
 import { StepIndicator } from './generate/StepIndicator.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
+import BuyThisDossier from './BuyThisDossier.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardChipRow } from './generate/WizardChipRow.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
@@ -311,6 +312,25 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
+
+  // ── Scroll-padding so the pinned chrome never hides a dossier control ──
+  // While the dossier is on screen, two stacked sticky bars pin to the top of
+  // the window scroller: the app header and the WizardOutputToolbar (pinned at
+  // the header's height on mobile so the two STACK). A focus move or anchored
+  // scroll into a dossier section would otherwise land the target flush under
+  // that chrome, hiding the very control the user jumped to. scroll-padding-top
+  // on the document element (the real scroller) reserves the chrome's height so
+  // those scrolls stop just below it. Scoped to the visible-dossier window and
+  // fully reverted on teardown so other views keep the default behaviour. (B4b.)
+  const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
+  useEffect(() => {
+    if (!dossierVisible || typeof document === 'undefined') return undefined;
+    const root = document.documentElement;
+    const prev = root.style.scrollPaddingTop;
+    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
+    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    return () => { root.style.scrollPaddingTop = prev; };
+  }, [dossierVisible, isMobile]);
 
   // Restore the recovered dossier into the store. The draft is kept (not cleared)
   // until a save actually lands, so a second stall/reload can recover again.
@@ -680,6 +700,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             handleBack={handleBack}
             handleGenerate={handleGenerate}
             handleNewSettlement={handleNewSettlement}
+            maxWidth={PAGE_MAX}
           />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
@@ -702,6 +723,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
+            {/* Buy this dossier — the anonymous/free one-time purchase CTA,
+                mirrored from master's Save row (B4a). Self-gates by tier/config
+                (hidden for export-capable tiers), so it never competes with the
+                Save/Export primaries when they apply. */}
+            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
           </div>
 
