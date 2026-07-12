@@ -33,7 +33,7 @@ function hostileGraph() {
 
 /** Two settlement items for the smuggling fixture. */
 function hostileMembers() {
-  const mk = (/** @type {string} */ id, /** @type {string} */ name, /** @type {any} */ eco) => ({
+  const mk = (/** @type {string} */ id, /** @type {string} */ name, /** @type {{ exports?: string[], imports?: string[] }} */ eco) => ({
     id,
     settlement: {
       id, name, tier: 'town', population: 4000,
