@@ -76,6 +76,11 @@ state briefing: what exists unstaged, what remains, any tree changes since dispa
 rewrite what exists"; (3) if the tree went quiet 15+ min with no completion, ping the same way.
 
 ## 0.6 The parking lot (append here; do not act without a ruling)
+- (5.5-K, 2026-07-12) LIVE PACK.CELLS CAPTURE: the keystone proved its digest against INJECTED pack
+  fixtures; the real FMG-iframe read-only capture seam (extract pack.cells H/biome/r/c once at
+  canonize) is UNWIRED — it belongs to 5.5-M (MODULATION), the first CONSUMER. MODULATION's dispatch
+  MUST wire the live read-only capture behind the entitled canonize action + answer the extraction-
+  determinism question against a REAL map (the freeze-first-capture ruling stands if two captures differ).
 - (FP-1, 2026-07-12) EAGER STORE SLICES: the monolithic 15-slice create() has no lazy-registration
   pattern; the remaining entry weight is the slices themselves (settlementSlice 88K, aiSlice 58K,
   campaign trio ~89K unmin). Needs ⚠️ OWNER-approved dynamic-slice-injection architecture
