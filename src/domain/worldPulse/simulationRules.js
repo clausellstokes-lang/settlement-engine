@@ -196,9 +196,12 @@ const OPEN = Object.freeze({
 // FIRST — a keyless legacy save whose rules match the defaults must keep
 // inferring 'realistic_regional' (byte-identical presetId), never
 // 'living_realm' (identical until SEASONS-A lit seasonsEnabled there). The
-// four §11 presets follow; their forward axes (spatial / travel / info /
-// progression) ride at their LOCKED values from the default spread, so preset
-// identity survives when those axes light up in later waves. dramatic_campaign
+// four §11 presets follow; their still-locked forward axes (spatial / travel /
+// progression) ride at the default spread's values, and the UNLOCKED infoMode
+// (STEP 3.5: living_realm → perfect_delayed, full_simulation → unreliable) is
+// deliberately NOT a comparison key, so preset identity survives as axes light
+// up in later waves (a pre-3.5 save carrying living_realm with the old
+// omniscient clamp keeps its presetId — byte-identical). dramatic_campaign
 // carries an explicit politicalAutonomy:'full' so its profile view agrees with
 // its flag-off rules (the normalizer's flag↔autonomy lockstep would otherwise
 // see a conflict).
@@ -237,6 +240,10 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   living_realm: preset('living_realm', 'Living Realm', {
     politicalAutonomy: 'routine',
     seasonsEnabled: true,
+    // STEP 3.5: the §11 sleeper — true news that travels by road. Inert until
+    // the realm canonizes a spatial digest (the engine gate); NOT a comparison
+    // key, so pre-3.5 saves carrying this preset keep their identity.
+    infoMode: 'perfect_delayed',
   }),
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
@@ -257,6 +264,8 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warLevyEnabled: true,
     warDispositionEnabled: true,
     seasonsEnabled: true,
+    // STEP 3.5: the full sim hears the world as rumor — distance breeds error.
+    infoMode: 'unreliable',
   }),
 });
 
@@ -306,6 +315,25 @@ export function worldProgressionOf(rules) {
 }
 
 /**
+ * Effective info-mode read (Phase 5.5 STEP 3.5 — the §11 information axis,
+ * UNLOCKED). Two live modes beyond the omniscient default: 'perfect_delayed'
+ * (true news, arrives by travel time — no distortion) and 'unreliable' (the
+ * fidelity vector + organic degradation). 'delayed' is the pre-3.5 catalog
+ * rung name, honoured as an input alias. Everything else — the forward 'full'
+ * (needs factional beliefs, Wave A+) and garbage — FAILS CLOSED to
+ * 'omniscient' (today's behavior; the coercion law reports it). Total on
+ * garbage; virtual-profile reads resolve to the omniscient legacy default.
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {'omniscient' | 'perfect_delayed' | 'unreliable'}
+ */
+export function infoModeOf(rules) {
+  const v = rules && typeof rules === 'object' ? rules.infoMode : null;
+  if (v === 'perfect_delayed' || v === 'unreliable') return v;
+  if (v === 'delayed') return 'perfect_delayed';
+  return 'omniscient';
+}
+
+/**
  * Effective political-autonomy read (CL-0, total on garbage). An explicit
  * valid mode wins; otherwise the legacy majorChangesRequireProposal flag maps
  * in — true (or absent/garbage, the fail-closed default) → 'routine' (today's
@@ -330,8 +358,10 @@ export function politicalAutonomyOf(rules) {
 function rulesMatchPreset(rules, preset) {
   // The legacy comparison keys compare raw; the profile axes compare through
   // their EFFECTIVE reads so a virtual (untouched) profile still matches a
-  // preset that carries the same world explicitly. spatialMode/travelMode/
-  // infoMode clamp to single values today, so comparing them is vacuous.
+  // preset that carries the same world explicitly. spatialMode/travelMode
+  // clamp to single values today (vacuous compares); infoMode is UNLOCKED but
+  // deliberately excluded — comparing it would collapse every pre-3.5 save of
+  // a live-info preset (stored omniscient under the old clamp) to 'custom'.
   return RULE_COMPARISON_KEYS.every(key => rules[key] === preset?.rules?.[key])
     && worldProgressionOf(rules) === worldProgressionOf(preset?.rules)
     && politicalAutonomyOf(rules) === politicalAutonomyOf(preset?.rules);
@@ -399,14 +429,18 @@ export function normalizeSimulationRules(raw = {}) {
   //   • politicalAutonomy: all four modes live; garbage derives from the legacy
   //     flag (true→routine, false→full), and the flag then MIRRORS the mode
   //     (full→false, else true) so every legacy flag reader stays consistent.
-  //   • spatialMode/travelMode/infoMode: single meaningful value today — any
-  //     other value coerces to it (ignore/instant/omniscient).
+  //   • spatialMode/travelMode: single meaningful value today — any other
+  //     value coerces to it (ignore/instant).
+  //   • infoMode (STEP 3.5, unlocked): omniscient / perfect_delayed /
+  //     unreliable are live; 'delayed' aliases in; 'full' + garbage fail
+  //     closed to omniscient (infoModeOf).
   // validateSimulationProfile (simulationProfile.js, lazy) reports these
   // coercions as data; this normalizer IS its canonicalization step.
   if (PROFILE_KEYS.some(key => key in input)) {
     Object.assign(next, PROFILE_DEFAULTS, {
       worldProgression: worldProgressionOf(input),
       politicalAutonomy: politicalAutonomyOf(input),
+      infoMode: infoModeOf(input),
     });
     next.majorChangesRequireProposal = next.politicalAutonomy !== 'full';
   } else {

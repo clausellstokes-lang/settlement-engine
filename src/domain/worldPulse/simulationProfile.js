@@ -36,7 +36,11 @@ import { appendWizardNewsEntries } from '../region/wizardNews.js';
 export const WORLD_PROGRESSION_MODES = Object.freeze(['frozen', 'dm_advanced', 'living', 'autonomous']);
 export const SPATIAL_MODES = Object.freeze(['ignore', 'abstract', 'mapped', 'full']);
 export const TRAVEL_MODES = Object.freeze(['instant', 'compressed', 'standard', 'slow']);
-export const INFO_MODES = Object.freeze(['omniscient', 'delayed', 'unreliable', 'full']);
+// STEP 3.5 unlocked the middle rungs: 'perfect_delayed' (the pre-3.5 catalog
+// spelled this rung 'delayed' — infoModeOf honours the old token as an input
+// alias) and 'unreliable' are live; 'full' (the carrier/belief web) stays a
+// rendered-but-locked ceiling until Wave A+.
+export const INFO_MODES = Object.freeze(['omniscient', 'perfect_delayed', 'unreliable', 'full']);
 
 /**
  * @typedef {object} ProfileCoercion
@@ -117,14 +121,20 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
     ),
   },
   {
+    // STEP 3.5: perfect_delayed + unreliable are LIVE (the rumor network);
+    // this law now guards only the residue — the forward 'full' mode (needs
+    // the carrier/belief web, Wave A+) and garbage fail closed to omniscient.
+    // The 'delayed' → 'perfect_delayed' rename is an ALIAS, not a coercion:
+    // the mode the DM chose is the mode stored, so it does not report.
     law: 'information_not_yet_built',
     kind: 'stored',
     apply: (input, canonical) => (
       'infoMode' in input && input.infoMode !== canonical.infoMode
+      && !(input.infoMode === 'delayed' && canonical.infoMode === 'perfect_delayed')
         ? {
           key: 'infoMode', from: input.infoMode, to: canonical.infoMode,
           kind: 'stored', law: 'information_not_yet_built',
-          message: 'News does not yet travel or distort — everyone knows the true state of the world.',
+          message: 'That full web of carriers and whispers is not yet woven — news can be all-knowing, true-but-slow, or unreliable.',
         }
         : null
     ),
@@ -259,6 +269,11 @@ const CHANGE_PHRASES = {
   worldProgression: value => (value === 'frozen'
     ? 'time is now frozen'
     : 'time now passes as you advance it'),
+  infoMode: value => ({
+    omniscient: 'all news is now true and immediate',
+    perfect_delayed: 'news now travels — true, but only as fast as the roads',
+    unreliable: 'news now travels and twists — distance breeds rumor',
+  })[/** @type {string} */ (value)] || 'the realm follows a new custom of news',
   majorChangesRequireProposal: value => (value
     ? 'major turns now ask you first'
     : 'major turns now land on their own'),
@@ -287,7 +302,7 @@ const CHANGE_PHRASES = {
 
 // The headline leads with the most world-defining change present.
 const PHRASE_PRIORITY = Object.freeze([
-  'presetId', 'worldProgression', 'politicalAutonomy', 'warLayerEnabled',
+  'presetId', 'worldProgression', 'politicalAutonomy', 'infoMode', 'warLayerEnabled',
   'faithSpreadEnabled', 'settlementStrategyEnabled', 'relationshipDynamicsEnabled',
   'tradeFlowsEnabled', 'migrationFlowsEnabled', 'seasonsEnabled', 'majorChangesRequireProposal',
 ]);

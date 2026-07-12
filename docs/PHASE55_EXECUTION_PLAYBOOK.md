@@ -42,12 +42,18 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | Session mode + Foundry (merged from claude/peaceful-volhard-0ad3f1) | df217415 (5 commits) | Foundry VTT export + Session Mode; faithEventFilter default-closed (manager-read, 50/50 tests); zero conflicts |
 | 5.5-M MODULATION + live capture | 18fc15f2 | trade/faith × distanceWeight (floor .35, modulated EXACTLY once), propagation ARRIVAL LATENCY (spatialArrivals ledger, news dated at arrival), hopWeeks calibration receipt (1wk/median-primary-hop); live read-only getSpatialPack bridge + capture registry; freeze-first-capture encoded; +17B (ledger key literal, keystone precedent) |
 | any-cast restoration | b6959c9a | the parallel-worktree tax typed honestly: 13 holes→0 across keystone/worldState/faithEventFilter; ratchet EXACTLY 2252; esbuild-proven comments-only |
-| Playbook + re-scope | 53943214, 2ebe1fd6 | this document; then OWNER RE-SCOPE: movers M1-M10 = LAUNCH content, specs at dispatch depth |
+| Playbook + re-scope + ledger | 53943214, 2ebe1fd6, 759de2de | this document; OWNER RE-SCOPE (movers=launch); the STATE LEDGER (0.0) |
+| STEP 3.5 RUMORS & NEWS + Perfect-but-Delayed | (this commit) | rumorNetwork.js (packet + per-settlement top-K ledger, hop-by-hop trade carrier, lineageIds day-one, independence-weighted corroboration, organic degradation tailed distribution, tick-age expiry); settlementRumors.js read-model (DM truth vs player WHITELIST — enumerated, deity-name fails CLOSED, latentPantheon excluded — manager-verified constitutional); infoMode omniscient/perfect_delayed/unreliable (living_realm→delayed, full_sim→unreliable, prospective floor); RumorsTab lazy. wizardNews schema UNTOUCHED (0-line diff). ⚠️ +243B eager (spec-mandated §3.2-7 wiring) → closure 1,255,937/1,256,000 = **63B HEADROOM** |
 | Design doc (companion) | many (98e2aed8…d5672d31 range) | 20 owner rounds + PARTS I-VII (6 grounding passes); §11 control layer; II.5 + VI.4 decisions settled |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
 - BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,256,000 (FP-1 ratchet; never raise without owner);
   any-cast ceiling 2252 EXACT (fix types, never widen); domain-strict 0/0.
+  ⚠️ HEADROOM CRITICAL as of 3.5: only **63 BYTES** free (closure 1,255,937). Wave A MUST stay fully
+  lazy (its belief-ledger key ≈ one CONDITIONAL_LEDGER_KEYS literal ~17-25B fits; the selector +
+  reconciliation + DM read-model are all LAZY worldPulse/display — no eager cost). Any wave that
+  needs eager bytes beyond ~40B STOPs → triggers FP-2 (the parked store-slice split, ⚠️ owner-gated)
+  OR a design tweak to keep it lazy. The store-slice reclaim (§0.6) is the release valve if pressed.
 - OWNER RE-SCOPE (2026-07-12): the M1-M10 mover ladder is LAUNCH content; Phase 6 after M10;
   checkpoint = validation milestone only.
 - SETTLED DESIGN DECISIONS: design doc §II.5 (cost→weeks 1wk/primary-hop; culture = derived
@@ -63,10 +69,13 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   merge-base before work (the W5 re-merge self-correction).
 
 ### 0.0.3 IN-FLIGHT / ON THE DESK (update on every dispatch + landing)
-- STEP 3.5 RUMORS & NEWS: implementer RUNNING (dispatched off b6959c9a, contract = PART 3).
+- STEP 3.5 RUMORS & NEWS: COMMITTED (this commit) — manager-reviewed under the Opus handoff.
 - W5 RE-MERGE: chip session ENDED — branch awaits manager merge review (§7.1 protocol; its base
-  was corrected mid-session to df217415-lineage; 8 named conflict files were the work).
-- NEXT AFTER 3.5: Wave A (PART 4) → checkpoint (PART 5) → M1..M10 (PART 8) → Phase 6 → launch.
+  was corrected mid-session to df217415-lineage; 8 named conflict files were the work). NEXT ON DESK.
+- MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
+  Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
+  adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
+- NEXT: W5 merge review → Wave A (PART 4) → checkpoint (PART 5) → M1..M10 (PART 8) → Phase 6 → launch.
 - OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
   catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
 - FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check

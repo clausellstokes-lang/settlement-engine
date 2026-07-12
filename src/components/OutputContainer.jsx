@@ -14,6 +14,7 @@ import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
+import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
@@ -42,46 +43,16 @@ import DossierTabStrip from './dossier/DossierTabStrip.jsx';
 import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 
 // ── Lazy-loaded tabs (each loads only when first viewed) ────────────────────
-const SummaryTab = lazy(() => import('./new/SummaryTab'));
-// P129 / D-2 — Magazine-spread Summary V2. Self-gated by the
-// `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
-// loads in parallel so toggling the flag is instant.
-const SummaryTabV2 = lazy(() => import('./new/SummaryTabV2.jsx'));
-const PlotHooksTab = lazy(() => import('./new/tabs/PlotHooksTab.jsx'));
-const ChronicleTab = lazy(() => import('./new/tabs/ChronicleTab.jsx'));
-const VersionsTab = lazy(() => import('./settlement/VersionsTab.jsx'));
-const OverviewTab = lazy(() => import('./new/tabs/OverviewTab'));
-const EconomicsTab = lazy(() => import('./new/tabs/EconomicsTab'));
-const ServicesTab = lazy(() => import('./new/tabs/ServicesTab'));
-const PowerTab = lazy(() => import('./new/tabs/PowerTab'));
-// Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
-// legitimacy / cause chains), tier-gated inside. It now renders inside the
-// dedicated War & Faith tab (WarFaithTab, W4e) rather than under Power, so it's
-// still lazy — loaded with the WarFaithTab chunk on first open (ratchet: faith lazy).
-// Phase 5 W-C4 — the patron/cult ASSIGNMENT control (the write half of the
-// embed-on-assign bridge). Editable dossiers only; self-gates by tier inside
-// (premium write · lapsed read-only · free upsell). Lazy so the registry + copy
-// only load when a dossier is opened (ratchet: assignment lazy).
-const DeityAssignmentPanel = lazy(() => import('./settlement/DeityAssignmentPanel.jsx'));
-const DefenseTab = lazy(() => import('./new/tabs/DefenseTab'));
-const NPCsTab = lazy(() => import('./new/tabs/NPCsTab'));
-const HistoryTab = lazy(() => import('./new/tabs/HistoryTab'));
-const ResourcesTab = lazy(() => import('./new/tabs/ResourcesTab'));
-const ViabilityTab = lazy(() => import('./new/tabs/ViabilityTab'));
-const DailyLifeTab = lazy(() => import('./new/tabs/DailyLifeTab'));
-const RelationshipsTab = lazy(() => import('./new/tabs/RelationshipsTab'));
-const DMCompassTab = lazy(() => import('./new/tabs/DMCompassTab'));
-const NotesTab = lazy(() => import('./new/tabs/NotesTab.jsx'));
-// Phase 5 W4e — dossier depth. Each lazy so the causal / magic / war read-models
-// only load when the tab is first opened. new/tabs is NOT in the icon-split lazy
-// dir, so these strip entries reuse icons ALREADY imported above (Cog / Sparkles /
-// Swords) and add nothing to the first-paint vendor-icons chunk.
-const SubstrateTab = lazy(() => import('./new/tabs/SubstrateTab.jsx'));
-const MagicTab = lazy(() => import('./new/tabs/MagicTab.jsx'));
-// War & Faith — composes OUR gated FaithSection (the constitutional premium seam)
-// with a war half from OUR warResolve read-models. NEVER THEIRS' ungated
-// WarFaithSection / useSettlementLiveWorld (those leak the live pantheon).
-const WarFaithTab = lazy(() => import('./new/tabs/WarFaithTab.jsx'));
+// Extracted VERBATIM to the sibling registry (the DossierGroupTabStrip idiom)
+// so this file stays under the max-lines ratchet as tabs accrue; chunking is
+// unchanged (same per-tab dynamic imports, now declared one hop away).
+import {
+  ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel,
+  EconomicsTab, HistoryTab, MagicTab, NPCsTab, NotesTab, OverviewTab,
+  PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
+  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, VersionsTab,
+  ViabilityTab, WarFaithTab,
+} from './dossier/dossierLazyTabs.js';
 
 
 // P102 / D-1 — Thematic group tabs façade (spec §8: Summary / Systems / World /
@@ -107,7 +78,7 @@ const WarFaithTab = lazy(() => import('./new/tabs/WarFaithTab.jsx'));
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  world:   { label: 'World',   tabs: ['relationships', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
@@ -218,6 +189,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // pantheon; faith content stays behind FaithSection's premium seam.
   const viewerIsPremium = useStore(s => s.auth?.tier === 'premium' || (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
+  // Phase 5.5 STEP 3.5 — Rumors & News tab presence: the owning campaign's
+  // world carries a rumor ledger (the conditionally-materialized rumorLedgers
+  // key exists only under a spatial canon + a live infoMode). Dormant /
+  // legacy / omniscient campaigns have no key ⇒ no tab ⇒ the dossier UI is
+  // byte-identical. Boolean-only selector; the ledger itself is read lazily
+  // inside RumorsTab.
+  const hasRumorLedger = useStore(s => campaignHasRumorLedger(s.campaigns, saveId));
 
   const rawSettlement = propSettlement || storeSettlement;
   // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
@@ -444,6 +422,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       ? [{ id:'relationships', label:'Relationships', Icon: Users }] : []),
     ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
       ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : []),
+    // Rumors & News (World) — present ONLY when the owning campaign's rumor
+    // ledger exists (spatial canon + live infoMode). Reuses the already-bundled
+    // ScrollText glyph — no new first-paint icon.
+    ...(hasRumorLedger ? [{ id:'rumors', label:'Rumors & News', Icon: ScrollText }] : []),
     // Versions — the P109/E-5 snapshot timeline. Owner-only (revert mutates the
     // save): needs an owning saved entry and never renders on the public player
     // view. Self-gates further inside (versionHistory flag, tier lock).
@@ -610,6 +592,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // generic teaser for free/anon naming NO deity, nothing for a premium
       // deity-free town). Never THEIRS' ungated pantheon-leaking section.
       case 'war_faith':  return <WarFaithTab settlement={s} saveId={saveId} publicDossier={publicDossier} />;
+      // Rumors & News — the trade-carrier rumor ledger, player-scrubbed; the
+      // DM-truth reveal self-gates inside (premium owner, never playerView /
+      // public dossier — the includeGroundTruth convention).
+      case 'rumors':     return <RumorsTab settlement={s} saveId={saveId} playerView={playerView} publicDossier={publicDossier} />;
       case 'defense':    return <DefenseTab settlement={s} narrativeNote={null} />;
       case 'npcs':       return <NPCsTab npcs={s.npcs} settlement={s} onRerollNPCs={onRegenerate ? () => onRegenerate('npcs') : null} narrativeNote={null} pinnedIds={pinnedIds} onTogglePin={onTogglePin} />;
       case 'history':    return <HistoryTab settlement={s} narrativeNote={null} recentEvents={recentEvents} onReroll={onRegenerate ? () => onRegenerate('history') : null} />;

@@ -52,6 +52,7 @@ import { computeDispositionFactorMap } from './disposition.js';
 import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
+import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
@@ -1423,6 +1424,34 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // pantheon) leaked wall-clock time into the composed output — a latent determinism/
   // equivalence break that only bit once an advance reached such a tick.
   const wizardNews = newsToAppend.length ? appendWizardNewsEntries(applied.wizardNews, newsToAppend, { now }) : applied.wizardNews;
+  // STEP 3.5 — RUMORS & NEWS (trade carrier). AFTER the tick's feed is fully
+  // composed (the seeds read the same entries the DM reads), the rumor network
+  // advances one step: expire by tick-age, seed this window's significant
+  // events at their witness settlements, relay due tellings one trade hop
+  // (hopWeeks latency; organic degradation forks `rumor-organic:…` off THIS
+  // kernel's rng confluence in 'unreliable' mode only — Perfect-but-Delayed
+  // forks nothing). DORMANT (no spatial digest / infoMode omniscient) ⇒
+  // changed:false ⇒ memoryState untouched, zero forks, zero new keys —
+  // byte-identical. Proposal/party applies outside this kernel seed at the
+  // next pulse via the module's feed lookback (idempotent per event+witness).
+  {
+    const rumors = advanceRumorLedgers({
+      worldState: memoryState,
+      feedEntries: wizardNews?.entries || [],
+      graph: applied.regionalGraph,
+      tick: worldState.tick,
+      rng,
+    });
+    if (rumors.changed) {
+      if (rumors.next) {
+        memoryState = { ...memoryState, rumorLedgers: rumors.next };
+      } else if ('rumorLedgers' in memoryState) {
+        // Everything expired: the conditional key drops back to absent.
+        const { rumorLedgers: _drained, ...rest } = memoryState;
+        memoryState = rest;
+      }
+    }
+  }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to

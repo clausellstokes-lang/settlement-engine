@@ -41,6 +41,15 @@ const OUTPUT_CONTAINER_SRC = readFileSync(
   resolve(process.cwd(), 'src/components/OutputContainer.jsx'),
   'utf8',
 );
+// STEP 3.5 extracted the tab lazy-import registry VERBATIM to the sibling leaf
+// (the DossierGroupTabStrip max-lines idiom); the wiring pin now spans both
+// files: the registry declares the lazy imports, OutputContainer imports the
+// registry and renders the tabs.
+const LAZY_TABS_SRC = readFileSync(
+  resolve(process.cwd(), 'src/components/dossier/dossierLazyTabs.js'),
+  'utf8',
+);
+const DOSSIER_WIRING_SRC = OUTPUT_CONTAINER_SRC + LAZY_TABS_SRC;
 
 describe('VersionsTab is mounted in the dossier (F26 pin)', () => {
   test('the notes tab group registers the versions tab', async () => {
@@ -51,8 +60,11 @@ describe('VersionsTab is mounted in the dossier (F26 pin)', () => {
   test('OutputContainer registers, lazy-imports, and renders VersionsTab', () => {
     // Tab entry exists (flat-strip mode shows it too, not just the group view).
     expect(OUTPUT_CONTAINER_SRC).toMatch(/id:\s*'versions'/);
-    // The component is actually imported…
-    expect(OUTPUT_CONTAINER_SRC).toMatch(/import\('\.\/settlement\/VersionsTab\.jsx'\)/);
+    // The component is actually imported (via the extracted lazy-tab registry)…
+    expect(LAZY_TABS_SRC).toMatch(/import\('\.\.\/settlement\/VersionsTab\.jsx'\)/);
+    // …the registry is actually wired into OutputContainer (a dangling registry
+    // must not satisfy this pin)…
+    expect(OUTPUT_CONTAINER_SRC).toMatch(/from '\.\/dossier\/dossierLazyTabs\.js'/);
     // …and the tab switch renders it with the owning save entry.
     expect(OUTPUT_CONTAINER_SRC).toMatch(/case 'versions':\s*return <VersionsTab save=\{liveSaveEntry\}/);
   });
@@ -72,9 +84,11 @@ describe('VersionsTab is mounted in the dossier (F26 pin)', () => {
 // it must be wired into OutputContainer, or this reddens.
 describe('every dossier tab component is registered in OutputContainer (F26 class)', () => {
   // The dossier tab component source dirs (relative to src/components). The lazy
-  // imports in OutputContainer are written relative to it, e.g.
-  // `import('./new/tabs/OverviewTab')` — some carry the `.jsx` extension, some
-  // do not, so the assertion matches an OPTIONAL extension.
+  // imports live in the extracted registry (dossier/dossierLazyTabs.js, paths
+  // like `import('../new/tabs/OverviewTab')`) or, for the non-tab lazies, in
+  // OutputContainer itself (`import('./…')`) — some carry the `.jsx` extension,
+  // some do not, so the assertion matches either dot-prefix and an OPTIONAL
+  // extension across the COMBINED wiring source.
   const TAB_DIRS = ['new/tabs', 'settlement'];
   const COMPONENTS = resolve(process.cwd(), 'src/components');
 
@@ -93,12 +107,13 @@ describe('every dossier tab component is registered in OutputContainer (F26 clas
   test.each(tabFiles.map(t => [t.rel, t]))(
     '%s is lazy-imported in OutputContainer',
     (_rel, tab) => {
-      // Match `import('./<dir>/<Name>')` or `import('./<dir>/<Name>.jsx')` with
-      // either quote style — the exact lazy-import form OutputContainer uses.
+      // Match `import('./<dir>/<Name>')`, `import('../<dir>/<Name>')` (the
+      // registry's one-hop-away form), with an optional `.jsx` and either
+      // quote style — the exact lazy-import forms the dossier wiring uses.
       const re = new RegExp(
-        `import\\(\\s*['"]\\./${tab.dir}/${tab.base}(?:\\.jsx)?['"]\\s*\\)`,
+        `import\\(\\s*['"]\\.\\.?/${tab.dir}/${tab.base}(?:\\.jsx)?['"]\\s*\\)`,
       );
-      expect(OUTPUT_CONTAINER_SRC).toMatch(re);
+      expect(DOSSIER_WIRING_SRC).toMatch(re);
     },
   );
 });

@@ -239,10 +239,19 @@ export function createDefaultWorldState(campaign = {}) {
 //                        Materialized ONLY under the spatial-canon marker while
 //                        something is travelling; absent (byte-identical) on the
 //                        aspatial path and whenever the front is empty.
+//   • rumorLedgers     — the per-settlement RUMOR ledgers (Phase 5.5 STEP 3.5,
+//                        spatial/rumorNetwork.js): { settlementId →
+//                        { 'trade:<eventRef>' → arrival record } }, top-K
+//                        bounded, tick-age expiry. Materialized ONLY under the
+//                        spatial-canon marker while infoMode is a live mode
+//                        ('perfect_delayed' / 'unreliable') and something has
+//                        been heard; absent (byte-identical) on the aspatial /
+//                        omniscient path. Dialling infoMode back to omniscient
+//                        PRESERVES an existing ledger (never deletes).
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
-  'spatialDigest', 'spatialArrivals',
+  'spatialDigest', 'spatialArrivals', 'rumorLedgers',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

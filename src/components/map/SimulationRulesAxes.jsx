@@ -1,4 +1,5 @@
 import {
+  infoModeOf,
   politicalAutonomyOf,
   worldProgressionOf,
 } from '../../domain/worldPulse/simulationRules.js';
@@ -67,13 +68,16 @@ export const AXES = [
     ],
   },
   {
+    // STEP 3.5: the middle rungs are LIVE. On a realm without a canonized map
+    // the choice is stored and waits (word needs roads to travel); on a
+    // canonized realm the trade roads carry — and, on Unreliable, twist — it.
     key: 'infoMode',
     title: 'News',
     question: 'Is knowledge of the world complete?',
     options: [
       ['omniscient', 'All-knowing', 'Everyone knows the true state of the world.', true],
-      ['delayed', 'Accurate but slow', 'News is true but arrives by road. Arrives with travel time.', false],
-      ['unreliable', 'Unreliable', 'News arrives wrong, partial, or biased. Arrives in a later chapter.', false],
+      ['perfect_delayed', 'Accurate but slow', 'News is true but travels by road — a mapped realm learns of distant events late.', true],
+      ['unreliable', 'Unreliable', 'News travels and twists: distance breeds rumor, error, and echo. A mapped realm hears the world as its roads tell it.', true],
       ['full', 'Rumor and lies', 'Carriers, distortion, and silence. Arrives in a later chapter.', false],
     ],
   },
@@ -86,7 +90,7 @@ export function axisValue(draft, key) {
   if (key === 'politicalAutonomy') return politicalAutonomyOf(draft);
   if (key === 'spatialMode') return 'ignore';
   if (key === 'travelMode') return 'instant';
-  return 'omniscient';
+  return infoModeOf(draft);
 }
 
 // ── The per-domain tri-state rows (§11 domain modules) ──────────────────────

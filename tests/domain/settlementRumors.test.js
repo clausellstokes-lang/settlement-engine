@@ -1,0 +1,249 @@
+/**
+ * settlementRumors.test.js — STEP 3.5 read-model contract: the DM/player
+ * split on the includeCovert/includeGroundTruth convention, and THE
+ * ADVERSARIAL WHITELIST SCRUB (§3.3): a free/anon projection NEVER contains a
+ * latent deity name, a covert tag, or a ground-truth field — attacked with a
+ * deity-carrying event fixture that plants the name in every channel an entry
+ * has (structured field, headline, tags, causeClass).
+ */
+import { describe, expect, it } from 'vitest';
+
+import {
+  activatedDeityNamesFrom,
+  confidenceBand,
+  distanceBand,
+  freshnessBand,
+  hasRumorLedgers,
+  settlementRumors,
+} from '../../src/domain/display/settlementRumors.js';
+import { advanceRumorLedgers, rumorEventKey } from '../../src/domain/spatial/rumorNetwork.js';
+import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
+import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
+import { createPRNG } from '../../src/kernel/prng.js';
+
+const DEITY = 'Maglubiyet the Latent';
+const IDS = ['a', 'b', 'c', 'd'];
+
+function digestFor(ids = IDS) {
+  const pack = makeGridPack({ cols: 24, rows: 18 });
+  const placements = placeSettlements(pack, ids.length).map((p, i) => ({ id: ids[i], cellId: p.cellId }));
+  return buildSpatialDigest({ pack, placements });
+}
+
+const tradeChannel = (id, from, to) => ({ id, type: 'trade_route', from, to, status: 'confirmed' });
+const GRAPH = { channels: [
+  tradeChannel('ch.a.b', 'a', 'b'),
+  tradeChannel('ch.b.c', 'b', 'c'),
+  tradeChannel('ch.c.d', 'c', 'd'),
+] };
+
+/**
+ * THE ADVERSARIAL FIXTURE — a deity-carrying, covert-cause event that plants
+ * the latent name in EVERY channel a feed entry has. The capture whitelist
+ * must keep the prose out entirely; the projection scrub must gate the
+ * structured deityName and drop causeClass.
+ */
+function deityEvent({ tick = 5 } = {}) {
+  return {
+    id: `wizard_news.${tick}.applied.evtD`,
+    tick,
+    significance: 'major',
+    score: 92,
+    severity: 0.85,
+    scope: 'regional',
+    kind: 'applied',
+    impactKind: 'religious_pressure',
+    settlementIds: ['a'],
+    sourceEventId: 'evtD',
+    headline: `${DEITY}'s wrath strikes Ashford`,
+    summary: `The cult of ${DEITY} is blamed for the burning granaries.`,
+    tags: ['world_pulse', DEITY, 'covert_corruption'],
+    reasons: [`${DEITY} demanded tribute`],
+    causeClass: 'covert_corruption',
+    deityName: DEITY,
+  };
+}
+
+/** Drive the pure advance to a settled ledger and hand back a worldState. */
+function worldWith({ mode = 'unreliable', entries = [deityEvent()], to = 14, seed = 'sr' } = {}) {
+  const digest = digestFor();
+  let ledgers = null;
+  for (let tick = 5; tick <= to; tick += 1) {
+    const result = advanceRumorLedgers({
+      worldState: {
+        simulationRules: { infoMode: mode },
+        spatialCanonVersion: 1,
+        spatialDigest: digest,
+        ...(ledgers ? { rumorLedgers: ledgers } : {}),
+      },
+      feedEntries: entries,
+      graph: GRAPH,
+      tick,
+      rng: createPRNG(`${seed}::tick:${tick}`),
+    });
+    if (result.changed) ledgers = result.next;
+  }
+  return { tick: to, rumorLedgers: ledgers };
+}
+
+describe('THE ADVERSARIAL WHITELIST SCRUB (free/anon projection)', () => {
+  it('a player projection never contains the deity name, the covert tag, or a ground-truth field', () => {
+    const worldState = worldWith({});
+    for (const sid of IDS) {
+      const rumors = settlementRumors({ worldState, settlementId: sid });
+      const serialized = JSON.stringify(rumors);
+      // The latent deity name is NOWHERE in the player projection…
+      expect(serialized.includes(DEITY)).toBe(false);
+      expect(serialized.toLowerCase().includes('maglubiyet')).toBe(false);
+      // …nor the covert cause class…
+      expect(serialized.includes('covert')).toBe(false);
+      expect(serialized.includes('causeClass')).toBe(false);
+      // …nor any fidelity/provenance/lineage internal.
+      for (const banned of ['completeness01', 'accuracy01', 'provenance', 'lineageIds', 'corroborationRoots', 'truth', 'relayIds', 'originId', 'score']) {
+        expect(serialized.includes(banned), `player projection leaks ${banned} at ${sid}`).toBe(false);
+      }
+    }
+  });
+
+  it('the player field set is EXACTLY the whitelist — nothing rides along', () => {
+    const worldState = worldWith({});
+    const rumors = settlementRumors({ worldState, settlementId: 'b' });
+    expect(rumors.length).toBeGreaterThan(0);
+    for (const rumor of rumors) {
+      expect(Object.keys(rumor).sort()).toEqual([
+        'agoTicks', 'arrivalTick', 'carrier', 'confidence', 'deityName',
+        'detail', 'distance', 'freshness', 'headline', 'id', 'knownWhenTick',
+        'magnitude', 'significance', 'subjectIds', 'whereId',
+      ].sort());
+    }
+  });
+
+  it('the deity name appears ONLY when it resolves to an ACTIVATED public snapshot', () => {
+    const worldState = worldWith({});
+    // Fail-closed default: no activated set ⇒ scrubbed (asserted above). Now
+    // the anti-vacuity half: with the name in the ACTIVATED set, it renders.
+    const activated = new Set([DEITY]);
+    const rumors = settlementRumors({
+      worldState, settlementId: 'b', activatedDeityNames: activated,
+    });
+    const withDeity = rumors.find((r) => r.deityName === DEITY);
+    expect(withDeity).toBeTruthy();
+    expect(withDeity.detail.includes(DEITY)).toBe(true);
+    // A DIFFERENT activated name still scrubs this one.
+    const other = settlementRumors({
+      worldState, settlementId: 'b', activatedDeityNames: new Set(['Pelor']),
+    });
+    expect(JSON.stringify(other).includes(DEITY)).toBe(false);
+  });
+
+  it('event prose (headline/summary/tags/reasons) never enters the packet at all', () => {
+    // Even the DM view cannot recover the entry's PROSE from the record —
+    // only the structured fields; the true headline arrives via the explicit
+    // wizardNews join. So a player surface can never leak it by accident.
+    const worldState = worldWith({});
+    const dm = settlementRumors({ worldState, settlementId: 'b', includeGroundTruth: true });
+    expect(dm.length).toBeGreaterThan(0);
+    const serialized = JSON.stringify(dm.map((r) => ({ ...r, truth: { ...r.truth, deityName: null, causeClass: null } })));
+    expect(serialized.includes('wrath strikes')).toBe(false);
+    expect(serialized.includes('burning granaries')).toBe(false);
+  });
+});
+
+describe('the DM projection (includeGroundTruth — premium/DM surfaces only)', () => {
+  it('adds ground truth + provenance + divergence on top of the player fields', () => {
+    const worldState = worldWith({});
+    const feed = { entries: [deityEvent()] };
+    const rumors = settlementRumors({
+      worldState, settlementId: 'c', includeGroundTruth: true, wizardNews: feed,
+    });
+    expect(rumors.length).toBeGreaterThan(0);
+    const rumor = rumors[0];
+    expect(rumor.truth).toBeTruthy();
+    expect(rumor.truth.eventRef).toBe('evtD');
+    expect(rumor.truth.causeClass).toBe('covert_corruption'); // DM sees the covert cause
+    expect(rumor.truth.deityName).toBe(DEITY);                // …and the raw name
+    expect(rumor.truth.provenance.originId).toBe('a');
+    expect(Array.isArray(rumor.truth.lineageIds)).toBe(true);
+    expect(rumor.truth.lineageIds[0]).toBe('evtD');
+    expect(typeof rumor.truth.independentSources).toBe('number');
+    expect(rumor.truth.trueHeadline).toBe(`${DEITY}'s wrath strikes Ashford`);
+    expect(Array.isArray(rumor.truth.divergence)).toBe(true);
+  });
+});
+
+describe('read-model mechanics', () => {
+  it('in-transit records are invisible until they arrive (both projections)', () => {
+    const digest = digestFor();
+    // One advance tick: 'b' holds an IN-TRANSIT record (arrival 6 > tick 5).
+    const step = advanceRumorLedgers({
+      worldState: { simulationRules: { infoMode: 'perfect_delayed' }, spatialCanonVersion: 1, spatialDigest: digest },
+      feedEntries: [deityEvent()],
+      graph: GRAPH,
+      tick: 5,
+    });
+    const inTransit = step.next?.b?.[rumorEventKey('evtD')];
+    expect(inTransit).toBeTruthy();
+    expect(inTransit.arrivalTick).toBeGreaterThan(5);
+    const atFive = { tick: 5, rumorLedgers: step.next };
+    expect(settlementRumors({ worldState: atFive, settlementId: 'b' })).toEqual([]);
+    expect(settlementRumors({ worldState: atFive, settlementId: 'b', includeGroundTruth: true })).toEqual([]);
+    // Once the clock reaches the arrival tick, it shows.
+    const later = { tick: inTransit.arrivalTick, rumorLedgers: step.next };
+    expect(settlementRumors({ worldState: later, settlementId: 'b' }).length).toBe(1);
+  });
+
+  it('is inert-not-crash on garbage and absent ledgers', () => {
+    expect(settlementRumors({ worldState: null, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: {}, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: { rumorLedgers: [] }, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: { rumorLedgers: { a: null } }, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: worldWith({}), settlementId: null })).toEqual([]);
+    expect(hasRumorLedgers(null)).toBe(false);
+    expect(hasRumorLedgers({ rumorLedgers: {} })).toBe(false);
+    expect(hasRumorLedgers(worldWith({}))).toBe(true);
+  });
+
+  it('renders fiction from names, not ids, and bands the internals', () => {
+    const worldState = worldWith({ mode: 'perfect_delayed' });
+    const names = new Map([['a', 'Ashford'], ['b', 'Briarwatch'], ['c', 'Crownhold'], ['d', 'Deepmoor']]);
+    const rumors = settlementRumors({
+      worldState, settlementId: 'd', nameFor: (id) => names.get(id) || id,
+    });
+    expect(rumors.length).toBe(1);
+    const rumor = rumors[0];
+    expect(rumor.headline.includes('Ashford')).toBe(true);
+    expect(['fresh', 'recent', 'old']).toContain(rumor.freshness);
+    expect(['firsthand', 'nearby word', 'distant word']).toContain(rumor.distance);
+    expect(['certain', 'corroborated', 'credible', 'unverified']).toContain(rumor.confidence);
+    // Perfect-but-Delayed keeps full detail: magnitude + when are known.
+    expect(rumor.magnitude).toBeTruthy();
+    expect(rumor.knownWhenTick).toBe(5);
+  });
+
+  it('bands behave at their edges', () => {
+    expect(freshnessBand(0)).toBe('fresh');
+    expect(freshnessBand(4)).toBe('recent');
+    expect(freshnessBand(9)).toBe('old');
+    expect(distanceBand(0)).toBe('firsthand');
+    expect(distanceBand(2)).toBe('nearby word');
+    expect(distanceBand(3)).toBe('distant word');
+    expect(confidenceBand({ hopCount: 0, corroborationRoots: ['x'] })).toBe('certain');
+    expect(confidenceBand({ hopCount: 3, corroborationRoots: ['x', 'y'] })).toBe('corroborated');
+    expect(confidenceBand({ hopCount: 1, corroborationRoots: ['x'] })).toBe('credible');
+    expect(confidenceBand({ hopCount: 3, corroborationRoots: ['x'] })).toBe('unverified');
+  });
+
+  it('activatedDeityNamesFrom reads ONLY the public embedded snapshots', () => {
+    const saves = [
+      { settlement: { config: { primaryDeitySnapshot: { name: 'Pelor' }, cultDeitySnapshots: [{ name: 'The Maw' }] } } },
+      { settlement: { config: { latentPantheon: [{ name: DEITY }] } } }, // latent NEVER enters
+      null,
+      { settlement: {} },
+    ];
+    const names = activatedDeityNamesFrom(saves);
+    expect(names.has('Pelor')).toBe(true);
+    expect(names.has('The Maw')).toBe(true);
+    expect(names.has(DEITY)).toBe(false);
+    expect(activatedDeityNamesFrom(null).size).toBe(0);
+  });
+});
