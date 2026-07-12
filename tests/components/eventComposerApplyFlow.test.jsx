@@ -22,7 +22,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 
 import EventComposer from '../../src/components/settlement/EventComposer.jsx';
-import { EVENT_REGISTRY } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY } from '../../src/domain/events/registryFull.js';
 
 // Both EventComposer and StaleNarrativeModal read the same zustand entry
 // point; a selector-over-plain-object stub keeps the real store (persist,

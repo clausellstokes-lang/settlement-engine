@@ -169,9 +169,7 @@ export const RERUN_KEYS_FOR_EVENT = {
 export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   ADD_INSTITUTION: {
     label: 'Add institution',
-    description: 'A new institution is established. New civic capacity, new factional weight.',
     requiresTarget: true,
-    targetPrompt: 'Institution name (e.g. "Granary", "Temple of Mercy")',
     stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
@@ -187,9 +185,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   REMOVE_INSTITUTION: {
     label: 'Remove institution',
-    description: 'An institution closes or is dissolved. Its services and authority disappear.',
     requiresTarget: true,
-    targetPrompt: 'Institution name to remove',
     stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
@@ -204,9 +200,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   DAMAGE_INSTITUTION: {
     label: 'Damage institution',
-    description: 'An institution is damaged but not destroyed. Reduced capacity, recoverable.',
     requiresTarget: true,
-    targetPrompt: 'Institution name to damage',
     stateDeltas(event) {
       const kind = classifyInstitution(event.targetId);
       const base = INSTITUTION_KIND_DELTAS[kind] || INSTITUTION_KIND_DELTAS.other;
@@ -225,9 +219,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   DEPLETE_RESOURCE: {
     label: 'Deplete resource',
-    description: 'A resource node is exhausted, contaminated, or otherwise lost.',
     requiresTarget: true,
-    targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
     stateDeltas() {
       // Flat impact — resource loss always hurts resilience and bumps
       // resource pressure regardless of which resource. Specifics
@@ -241,9 +233,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   CUT_TRADE_ROUTE: {
     label: 'Cut trade route',
-    description: 'A trade route is closed, blockaded, or rendered unsafe. Imports/exports stall.',
     requiresTarget: false,
-    targetPrompt: 'Optional: which route (e.g. "river road", "south bridge")',
     stateDeltas() {
       return { resilience: -12, resourcePressure: +12, externalThreat: +5 };
     },
@@ -258,9 +248,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   // it sets (neutral/rival/cold_war/hostile) drives the severity + the mutation.
   SETTLEMENT_DISPUTE: {
     label: 'Settlement dispute',
-    description: 'A dispute sours relations with a neighbouring settlement, downgrading the relationship.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
     stateDeltas(event) {
       const rel = event.payload?.relationshipType || 'rival';
       const sev = rel === 'hostile' ? 1 : rel === 'cold_war' ? 0.7 : rel === 'rival' ? 0.45 : 0.2;
@@ -278,9 +266,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   DESTROY_SETTLEMENT: {
     label: 'Destroy settlement',
-    description: 'The settlement is destroyed, abandoned, or rendered uninhabitable. Kept as campaign history rather than deleted.',
     requiresTarget: false,
-    targetPrompt: 'Optional cause (e.g. "dragon fire", "flood", "siege")',
     stateDeltas() {
       return { resilience: -100, volatility: +20, externalThreat: +20, resourcePressure: +15 };
     },
@@ -299,9 +285,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   ADD_NPC: {
     label: 'Add NPC',
-    description: 'A new NPC arrives, is appointed, inherits office, or is recruited.',
     requiresTarget: true,
-    targetPrompt: 'NPC name (or "role @ institution" — e.g. "High Priestess @ Temple")',
     stateDeltas(event) {
       // Adding a key NPC slightly improves resilience; minor NPCs are noise.
       const importance = event.payload?.importance || 'notable';
@@ -317,9 +301,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   KILL_NPC: {
     label: 'Kill / remove NPC',
-    description: 'An NPC dies, is exiled, or otherwise leaves play. Linked institutions and factions are affected.',
     requiresTarget: true,
-    targetPrompt: 'NPC name to remove',
     stateDeltas(event) {
       // Severity scales by importance. Pillar NPC death shakes the
       // settlement; minor NPCs leave no engine trace.
@@ -338,9 +320,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   ASSIGN_NPC_TO_ROLE: {
     label: 'Assign NPC to role',
-    description: 'Place an NPC into an institution role, partially or fully restoring vacated capacity.',
     requiresTarget: true,
-    targetPrompt: 'NPC name to assign',
     stateDeltas(event) {
       const quality = event.payload?.quality || 'competent';
       const map = {
@@ -367,9 +347,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   IMPAIR_INSTITUTION: {
     label: 'Impair institution',
-    description: 'Mark an institution as impaired along a chosen dimension (legitimacy, influence, capacity, etc.).',
     requiresTarget: true,
-    targetPrompt: 'Institution name',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.5);
       return { resilience: -Math.round(sev * 12), volatility: +Math.round(sev * 6) };
@@ -382,18 +360,14 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   RESTORE_INSTITUTION: {
     label: 'Restore institution',
-    description: 'Recovery from a prior impairment. Removes impairments tagged with the chosen cause event.',
     requiresTarget: true,
-    targetPrompt: 'Institution name',
     stateDeltas() { return { resilience: +6 }; },
     narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   IMPAIR_FACTION: {
     label: 'Impair faction',
-    description: 'A faction loses leadership, legitimacy, wealth, or another dimension.',
     requiresTarget: true,
-    targetPrompt: 'Faction name',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.5);
       return { volatility: +Math.round(sev * 10) };
@@ -406,18 +380,14 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   RESTORE_FACTION: {
     label: 'Restore faction',
-    description: 'A faction recovers from a prior impairment.',
     requiresTarget: true,
-    targetPrompt: 'Faction name',
     stateDeltas() { return { volatility: -5 }; },
     narrate(event) { return `${labelOf(event.targetId)} recovered.`; },
   },
 
   ADD_FACTION: {
     label: 'Add faction',
-    description: 'A new faction forms or arrives: a guild, cult, syndicate, or noble bloc. A fresh contender for power and influence.',
     requiresTarget: true,
-    targetPrompt: 'Faction name (e.g. "Dockworkers Guild", "Ashen Hand")',
     stateDeltas() {
       // A new organized power center adds friction until the balance settles.
       return { volatility: 5 };
@@ -434,9 +404,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   KILL_LEADER: {
     label: 'Kill leader',
-    description: 'The settlement\'s ruling figure dies, is exiled, or is removed. Major consequences for legitimacy and faction balance.',
     requiresTarget: true,
-    targetPrompt: 'Leader\'s name (NPC)',
     stateDeltas() {
       // Always a pillar-tier consequence regardless of authored importance —
       // killing the LEADER is the structural shock by definition.
@@ -450,9 +418,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   EXPOSE_CORRUPTION: {
     label: 'Expose corruption',
-    description: 'A corrupt NPC is publicly revealed (or a faction/institution). The NPC is cleaned + scarred, and both the criminal institution they answered to and their home institution are tarnished; legitimacy collapses and rivals exploit the vacuum.',
     requiresTarget: true,
-    targetPrompt: 'Corrupt NPC, faction, or institution name',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.7);
       return {
@@ -467,9 +433,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   IMPOSE_CORRUPTION: {
     label: 'Impose corruption',
-    description: 'A criminal organization in the settlement gets its hooks into a clean NPC. The NPC becomes COVERTLY corrupt and tied to that organization — so the dossier flags them, faction capture advances from the new corrupt seat, and a future Expose Corruption brings the reckoning. Quieter than exposure: the rot is hidden, not yet public.',
     requiresTarget: true,
-    targetPrompt: 'Clean NPC to turn (pick the organization below)',
     stateDeltas(event) {
       // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
       const sev = Number(event.payload?.severity ?? 0.5);
@@ -486,9 +450,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   REFUGEE_WAVE: {
     label: 'Refugee wave',
-    description: 'A surge of refugees arrives. Population spikes; food security and infrastructure strain. Faction politics shift.',
     requiresTarget: false,
-    targetPrompt: 'Optional: source region (e.g. "the eastern border")',
     stateDeltas(event) {
       const size = event.payload?.size || 'medium';   // small | medium | large
       const map = {
@@ -507,9 +469,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   PLAGUE: {
     label: 'Plague',
-    description: 'A disease outbreak. Population pressure on healing institutions; quarantine erodes order; faction responses diverge sharply.',
     requiresTarget: false,
-    targetPrompt: 'Optional: disease name (e.g. "Red Cough")',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.6);
       return {
@@ -526,9 +486,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   RAID_OR_MONSTER_ATTACK: {
     label: 'Raid or monster attack',
-    description: 'External force strikes — bandits, monsters, an enemy patrol. Defenders mobilize; civilians take losses.',
     requiresTarget: false,
-    targetPrompt: 'Optional: source (e.g. "frost trolls", "Iron Crow bandits")',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.6);
       return {
@@ -547,9 +505,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   REMOVED_THREAT: {
     label: 'Removed threat',
-    description: 'Players neutralized an active threat. External pressure eases, defenders recover footing.',
     requiresTarget: false,
-    targetPrompt: 'Optional: threat name (e.g. "bandit captain", "blight fey")',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.6);
       return {
@@ -568,9 +524,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   // settlement to Allied. Volatility settles; mutual defense + trade improve.
   BROKERED_ALLIANCE: {
     label: 'Brokered alliance',
-    description: 'Formalize an alliance with a neighbouring settlement. Relations become Allied; volatility settles and mutual defense improves.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
     stateDeltas() {
       return { volatility: -7, resilience: +6, resourcePressure: -3 };
     },
@@ -581,9 +535,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   STARTED_RIOT: {
     label: 'Started riot',
-    description: 'Players triggered or fanned a public disturbance. Legitimacy slips; criminal opportunity rises.',
     requiresTarget: false,
-    targetPrompt: 'Optional: district or trigger (e.g. "Lower Quarter")',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.6);
       return {
@@ -601,9 +553,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
   // neighbouring settlement (allied / client / patron / trade_partners).
   OPENED_TRADE_ROUTE: {
     label: 'Opened trade route',
-    description: 'Open a trade relationship with a neighbouring settlement. Imports flow, merchant wealth rises, smuggling premiums collapse.',
     requiresTarget: true,
-    targetPrompt: 'Neighbouring settlement',
     stateDeltas() {
       return { resilience: +9, resourcePressure: -7, volatility: -3 };
     },
@@ -615,9 +565,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   RECOVERED_RESOURCE: {
     label: 'Recovered resource',
-    description: 'A previously depleted or lost resource is recovered or replenished. Resource pressure eases.',
     requiresTarget: true,
-    targetPrompt: 'Resource name (e.g. "iron vein", "river fish")',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.7);
       return {
@@ -634,9 +582,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   APPLY_STRESSOR: {
     label: 'Apply stressor',
-    description: 'An active crisis grips the settlement — pick any stressor from the full catalog, including your custom ones. Logged as an in-world onset; the matching condition feeds the causal substrate, and in a canon campaign it also becomes a roaming world-pulse stressor.',
     requiresTarget: true,
-    targetPrompt: 'Stressor (from the catalog)',
     stateDeltas(event) {
       const sev = Number(event.payload?.severity ?? 0.6);
       const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
@@ -657,9 +603,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   CHANGE_RULING_POWER: {
     label: 'Change ruling power',
-    description: "Hand the government to a different authoritative power — coup, election, succession, conquest, or appointment. The governing body persists; who commands it changes, and the government type reshapes to the new power's preference.",
     requiresTarget: true,
-    targetPrompt: 'Faction that takes power',
     stateDeltas(event) {
       const cause = event.payload?.cause || 'coup';
       const map = {
@@ -686,9 +630,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   RESOLVE_STRESSOR: {
     label: 'Remove stressor',
-    description: 'An active crisis ends — pick one of the settlement\'s current stressors. The stress entry is removed, its promoted condition winds down, and in a canon campaign the roaming world-pulse twin resolves with its residual aftermath.',
     requiresTarget: true,
-    targetPrompt: 'Stressor currently gripping the settlement',
     stateDeltas(event, settlement) {
       // The inverse of APPLY_STRESSOR, scaled by the REMOVED entry's recorded
       // severity (the registry computes from the BEFORE settlement, so the
@@ -720,9 +662,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   ADD_TRADE_GOOD: {
     label: 'Add trade good',
-    description: 'A new good enters the settlement\'s trade profile — exported, imported, or (for an entrepôt) re-exported in transit through its warehouses.',
     requiresTarget: true,
-    targetPrompt: 'Good label (e.g. "Salted fish", "Rare spices")',
     stateDeltas(event) {
       // A new import eases material pressure; a new export firms up the
       // economic base. Small numbers — one good is a dial, not a shock.
@@ -741,9 +681,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   REMOVE_TRADE_GOOD: {
     label: 'Remove trade good',
-    description: 'A good drops out of the settlement\'s trade profile — the market moved on, the supplier dried up, or the route no longer carries it.',
     requiresTarget: true,
-    targetPrompt: 'Trade good to remove',
     stateDeltas() {
       // The inverse dial of ADD_TRADE_GOOD's export case; direction isn't
       // known at removal (the label is stripped from every list it sits in).
@@ -756,9 +694,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   ADD_RESOURCE: {
     label: 'Add resource',
-    description: 'A new resource node is discovered or opened nearby — a vein struck, fields cleared, grounds claimed. Supply chains can activate on the next rederivation.',
     requiresTarget: true,
-    targetPrompt: 'Resource (from the catalog, or a custom name)',
     stateDeltas() {
       // The counterpart of DEPLETE_RESOURCE's flat hit, slightly damped —
       // discovering a node helps less suddenly than losing one hurts.
@@ -781,7 +717,6 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   SET_PRIMARY_DEITY: {
     label: 'Assign patron deity',
-    description: 'A settlement adopts (or sheds) its patron deity — the leading creed of the pantheon. The resolved deity snapshot is embedded on the settlement record so the religion substrate reads it without ever touching the custom-content store. No deity ⇒ the religion layer stays dormant.',
     requiresTarget: false,
     stateDeltas(event) {
       // A change of patron god is a legitimacy/ritual event, not an economic
@@ -806,7 +741,6 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   IMPOSE_CULT: {
     label: 'Impose a cult',
-    description: "A cult-level deity is seeded into the settlement BENEATH the patron — a secondary faith taking root in its own niche (temperament × alignment). Large settlements sustain more cults across the niche grid; small ones reconcile by displacing the weakest cult, or refuse when only the patron's slot remains. The resolved snapshot is embedded on the settlement so the religion substrate reads it without touching the custom-content store.",
     requiresTarget: false,
     stateDeltas(event) {
       // A new cult stirs the populace — a small unrest ripple, the rough inverse
@@ -828,7 +762,6 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   SHIFT_TIER: {
     label: 'Promote or demote tier',
-    description: "Force the settlement up or down one size tier (thorp through metropolis), a DM override of the organic growth-and-decline drift. Population resettles into the new tier's band, and the institution roster reconciles exactly as an organic shift would: a promotion raises the institutions the larger tier sustains, while a demotion leaves the ones it can no longer support behind as ruined remnants (a watch-post where a garrison stood, a privatized market, a hollowed-out hall) rather than erasing them.",
     requiresTarget: false,
     stateDeltas(event) {
       // Growth steadies a settlement; forced decline unsettles it. A rough mirror.
@@ -845,9 +778,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   REMOVE_RESOURCE: {
     label: 'Remove resource',
-    description: 'A resource node is lost outright — claimed by another power, rendered unreachable, or struck from the map. Harsher than depletion: nothing is left to recover.',
     requiresTarget: true,
-    targetPrompt: 'Nearby resource to remove',
     stateDeltas() {
       // Same flat shock as DEPLETE_RESOURCE — the chains read the same loss.
       return { resilience: -10, resourcePressure: +18 };
@@ -859,9 +790,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   PROMOTE_NPC: {
     label: 'Promote/Demote NPC',
-    description: 'An NPC rises within their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction. The peer is displaced downward.',
     requiresTarget: true,
-    targetPrompt: 'NPC who rises',
     stateDeltas() {
       // A reshuffle inside one faction: friction, not crisis.
       return { volatility: +3 };
@@ -877,9 +806,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
 
   DEMOTE_NPC: {
     label: 'Demote NPC',
-    description: 'An NPC is pushed down the ranks of their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction who steps over them.',
     requiresTarget: true,
-    targetPrompt: 'NPC who falls',
     stateDeltas() {
       return { volatility: +3 };
     },

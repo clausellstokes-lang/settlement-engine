@@ -223,7 +223,53 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // split than the leaf-pin that failed here — the deps must move too), and revisit the
 // eager store slices. Build is deterministic (byte-identical across runs), so this
 // ceiling is stable, not flaky.
-const CLOSURE_BUDGET_BYTES = 1_441_000;
+//
+// ── (2026-07-12, FP-1) THE REDUCTION PROGRAM LANDED: 1,441,000 → 1,256,000 ──
+// Baseline measured 1,440,968 (32 B headroom); five seams, measured one at a
+// time (`npm run build` + this closure BFS after each), every change kept only
+// on a measured reduction:
+//   • copy-namespace segmentation  −38,195 → 1,402,773. App.jsx was the ONLY
+//     eager copy consumer and read ONLY footer.* — it now imports the eagerly
+//     segmented copy/footer.js (local t(), same semantics), so copy/index.js +
+//     the whole en.js registry ride lazy chunks. en.js spreads footer back in;
+//     the full tree stays single-sourced for tests/linter.
+//   • registry-prose split         −7,978 → 1,394,795. EVENT_REGISTRY's 38
+//     description/targetPrompt strings (composer-only prose) moved to
+//     domain/events/registryProse.js; registryFull.js folds them back onto the
+//     same spec objects and the composer surfaces import THAT. The eager
+//     pipeline (label/requiresTarget/stateDeltas/narrate) is untouched.
+//   • dossier read-model split     −33,487 → 1,361,308. deriveExportPosture —
+//     the ONE display derivation the eager deriveSystemState needs — extracted
+//     to the dependency-free leaf domain/display/exportPosture.js (re-exported
+//     by dossierViewModel). That cut the eager edge into dossierViewModel →
+//     magicProfile → capacityModel (~80 kB source). This is the FINER split
+//     W4h's failed leaf-pin pointed at: move the function, not the chunk pin;
+//     causalState (ENGINE-SHARED) untouched.
+//   • data-chunk split             −86,440 → 1,274,868. The single 'data'
+//     chunk carried EVERY src/data table into first paint. vite.config now
+//     derives the eager module graph (CHUNK-level: main.jsx graph + engine-
+//     core spine + ENGINE_SHARED_DOMAIN + kernel + data-routed libs — a static
+//     edge from any eager chunk would drag a lazy chunk back in) and routes
+//     only eager-reachable tables into 'data'; the rest (namingData,
+//     historyData, sample*, …) ride the new lazy 'data-lazy' chunk (~86 kB,
+//     zero static imports).
+//   • icon split, graph-derived    −20,898 → 1,253,970. vendor-icons now keeps
+//     ONLY icons the eager module graph imports (9 at landing); the old
+//     five-dir LAZY_ICON_DIRS list is retired and every other icon rides
+//     vendor-icons-lazy / vendor-icons-map. iconChunkSplit.test.js's size
+//     clause updated for the flipped relation (the eager chunk may now be
+//     smaller than the map chunk — that is the point).
+// NOT DONE, deliberately: the eager store slices (settlementSlice/aiSlice/
+// campaign*) stay eager — the store is a monolithic 15-slice create() with no
+// lazy-registration pattern; inventing one was out of the wave's fence
+// (STOP-AND-REPORT filed). The store's event-mutation domain vocabulary
+// (stressors/mutate*/region — W2b-blessed) rides with it.
+// MEASURED 1,253,970 (7 chunks: data / engine-core / index / kernel /
+// vendor-icons / vendor-react / vendor-state), byte-identical across
+// back-to-back builds. Ceiling = measured + ~2 kB cross-env Rollup margin.
+// Monotone ratchet: DOWN only, never up without a deliberate, documented
+// owner-approved reason.
+const CLOSURE_BUDGET_BYTES = 1_256_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

@@ -77,6 +77,81 @@ const isEngineSharedDomain = (id) => {
   return false;
 };
 
+// ── The eager (first-paint) module graph ─────────────────────────────────────
+// The set of source modules that land in an EAGER chunk — i.e. a chunk inside
+// the entry's transitive static closure. This is the single derivation the
+// first-paint splits below (lazy-only lucide icons, lazy-only data tables)
+// classify against: a module/icon/table is "eager" iff something in THIS set
+// statically reaches it. CHUNK-level, not entry-module-level: the seeds are
+// every module the manualChunks rules route into an eager chunk —
+//   • the src/main.jsx static graph            (the entry chunk itself),
+//   • the engine-core generator spine + ENGINE_SHARED_DOMAIN (engine-core),
+//   • src/kernel/**                            (kernel),
+//   • lookups.js + customRegistry + dependencyEngine (routed to 'data') —
+// because a static edge from ANY of those chunks into a "lazy" chunk would
+// drag that chunk straight back into the first-paint closure (the W4h lesson:
+// follow the chunk graph, not intuition). Dynamic import() is a lazy boundary
+// and is deliberately NOT followed. Misclassifying a module as eager is
+// harmless (its bytes just stay in first paint); a missed eager edge re-enters
+// the closure and fails the first-paint byte budget loudly.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
+function computeEagerModuleGraph() {
+  const walk = (d, out = []) => {
+    if (!existsSync(d)) return out;
+    for (const e of readdirSync(d)) {
+      const p = join(d, e);
+      if (statSync(p).isDirectory()) walk(p, out);
+      else if (/\.jsx?$/.test(e)) out.push(p);
+    }
+    return out;
+  };
+  const resolveRel = (from, spec) => {
+    if (!spec.startsWith('.')) return null;
+    const base = resolve(dirname(from), spec);
+    for (const c of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')])
+      if (existsSync(c) && statSync(c).isFile()) return c;
+    return null;
+  };
+  // Static edges only — `[^'"()]` keeps dynamic `import(...)` out of the
+  // `from`-clause match, so a dynamic import stays a lazy boundary.
+  const importsOf = (file) => {
+    const code = readFileSync(file, 'utf8')
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '');
+    const specs = [];
+    for (const m of code.matchAll(/(?:^|[^.\w])import\s+(?:[^'"()]*?\sfrom\s+)?['"]([^'"]+)['"]/g)) specs.push(m[1]);
+    for (const m of code.matchAll(/(?:^|[^.\w])export\s+[^'"]*?\sfrom\s+['"]([^'"]+)['"]/g)) specs.push(m[1]);
+    return specs.map((s) => resolveRel(file, s)).filter(Boolean);
+  };
+  const seeds = [
+    join(SRC, 'main.jsx'),
+    // engine-core generator spine (the explicit pins in manualChunks below)
+    join(SRC, 'generators/structuralValidator.js'),
+    join(SRC, 'generators/helpers.js'),
+    join(SRC, 'generators/priorityHelpers.js'),
+    join(SRC, 'generators/institutionProbability.js'),
+    join(SRC, 'generators/neighbourGenerator.js'),
+    join(SRC, 'generators/crossSettlementConflicts.js'),
+    join(SRC, 'generators/steps/stepMetadata.js'),
+    // libs routed into the eager 'data' chunk below
+    join(SRC, 'generators/lookups.js'),
+    join(SRC, 'lib/customRegistry.js'),
+    join(SRC, 'lib/dependencyEngine.js'),
+    // kernel chunk
+    ...walk(join(SRC, 'kernel')),
+    // engine-core's shared-domain members (fragments → absolute paths)
+    ...[...ENGINE_SHARED_DOMAIN].map((frag) => join(ROOT, frag.slice(1))),
+  ].filter((p) => existsSync(p));
+  const seen = new Set(seeds);
+  const queue = [...seeds];
+  while (queue.length) {
+    const f = queue.shift();
+    for (const dep of importsOf(f)) if (!seen.has(dep)) { seen.add(dep); queue.push(dep); }
+  }
+  return seen;
+}
+const EAGER_MODULES = computeEagerModuleGraph();
+
 // ── Map-only lucide icons (split them out of the first-paint vendor-icons) ────
 // lucide-react ships one module per icon (dist/esm/icons/<kebab>.js), but a
 // single `vendor-icons` chunk collects EVERY icon the app uses anywhere. Because
@@ -94,16 +169,18 @@ const isEngineSharedDomain = (id) => {
 // so a new map-only icon auto-moves and a newly-shared one auto-returns.
 // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget) +
 //              tests/build/iconChunkSplit.test.js (the split's shape).
-// The lazy route surfaces whose icons must not pay first-paint bytes. map/**
-// keeps its own `vendor-icons-map` chunk (the existing pin); the rest share
-// `vendor-icons-lazy`. Adding a dir here can only SHRINK first paint or do
-// nothing — an icon used by ANY file outside these dirs (i.e. any first-paint
-// or shared surface) is excluded from both lazy sets, so nothing a first-paint
-// view needs is ever routed to a lazy chunk. A mislabeled (actually-eager) dir
-// is harmless: its icons ride vendor-icons-lazy, which a first-paint static
-// import would simply pull back into the closure — safe, never broken.
-const LAZY_ICON_DIRS = ['settlements', 'account', 'admin', 'gallery', 'compendium']
-  .map((d) => join(SRC, 'components', d));
+// An icon is EAGER iff a module in the eager first-paint graph
+// (EAGER_MODULES above) imports it — those stay in vendor-icons. Everything
+// else is lazy-only: map-exclusive icons keep their own `vendor-icons-map`
+// chunk (the existing pin); the rest share `vendor-icons-lazy`. This replaced
+// the old hand-listed LAZY_ICON_DIRS (FP-1): the dir list only ever covered
+// five surfaces, so every icon used by an unlisted lazy surface (settlement
+// detail, dossier tabs, wizard, auth, …) still paid first-paint bytes. The
+// graph derivation is exact and self-maintaining: an icon a new eager module
+// imports auto-returns to vendor-icons; one that loses its last eager
+// importer auto-moves out. A missed eager edge is caught loudly — the eager
+// chunk would statically pull vendor-icons-lazy back into the closure and the
+// first-paint byte budget fails.
 const MAP_DIR = join(SRC, 'components', 'map');
 function computeLucideIconSplit() {
   const walk = (d, out = []) => {
@@ -128,17 +205,15 @@ function computeLucideIconSplit() {
     return set;
   };
   const inMap = (f) => f.startsWith(MAP_DIR);
-  const inLazy = (f) => inMap(f) || LAZY_ICON_DIRS.some((d) => f.startsWith(d));
   const mapIcons = new Set();
   const nonMapIcons = new Set();
-  const eagerIcons = new Set(); // imported by any file OUTSIDE the lazy dirs
+  const eagerIcons = new Set(); // imported by a module in the eager first-paint graph
   for (const f of walk(SRC)) {
     const icons = iconsOf(f);
-    const lazy = inLazy(f);
     const map = inMap(f);
     for (const i of icons) {
       (map ? mapIcons : nonMapIcons).add(i);
-      if (!lazy) eagerIcons.add(i);
+      if (EAGER_MODULES.has(f)) eagerIcons.add(i);
     }
   }
   const mapOnly = new Set();  // map-exclusive → vendor-icons-map (existing pin)
@@ -158,6 +233,33 @@ const lucideIconChunk = (id) => {
   if (MAP_ONLY_ICONS.has(m[1])) return 'vendor-icons-map';
   if (LAZY_ONLY_ICONS.has(m[1])) return 'vendor-icons-lazy';
   return 'vendor-icons';
+};
+
+// ── Eager data tables (split the lazy-only tables out of first paint) ─────────
+// A single `data` chunk used to collect EVERY src/data table. Because first-
+// paint code (store/domain/lookups) statically reaches SOME of them, that whole
+// chunk rode the first-paint static closure — so every generator-only table
+// (namingData, historyData, …, ~140 kB source) paid first-paint bytes for
+// generation work that is fetched lazily anyway.
+//
+// A table is EAGER iff a module in the eager first-paint graph (EAGER_MODULES
+// above — chunk-level, so engine-core / kernel / data-routed members count as
+// eager importers too) statically reaches it; only those ride the first-paint
+// 'data' chunk. Every other table rides 'data-lazy' (fetched with whichever
+// lazy chunk first imports it). Not hand-curated (same derivation family as
+// ENGINE_SHARED_DOMAIN / the icon split): a table a new eager module imports
+// auto-returns to 'data'; one that loses its last eager importer auto-moves
+// out. Misclassifying eager is harmless (stays in 'data'); a missed eager
+// edge only re-enters the closure, which the first-paint byte budget fails
+// loudly. @enforced-by tests/build/vendorPdfLazy.test.js.
+const EAGER_DATA = new Set(
+  [...EAGER_MODULES]
+    .filter((p) => p.startsWith(`${join(SRC, 'data')}/`))
+    .map((p) => p.slice(ROOT.length)),
+);
+const isEagerData = (id) => {
+  for (const frag of EAGER_DATA) if (id.includes(frag)) return true;
+  return false;
 };
 
 export default defineConfig({
@@ -422,8 +524,13 @@ export default defineConfig({
           // into first paint. Let it fall through to the 'data' rule below.
           if (id.includes('/src/data/narrativeData.js'))
             return 'engine';
+          // Only the tables an eager chunk statically reaches ride the
+          // first-paint 'data' chunk; the rest (generator-only naming/history/
+          // sample tables, …) ride 'data-lazy' and are fetched with whichever
+          // lazy chunk first imports them. Derived, not curated — see
+          // computeEagerDataModules above. @enforced-by vendorPdfLazy.test.js.
           if (id.includes('/src/data/'))
-            return 'data';
+            return isEagerData(id) ? 'data' : 'data-lazy';
         },
       },
     },

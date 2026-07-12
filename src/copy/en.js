@@ -30,7 +30,14 @@
  * export/pricing-moments/state/lifecycle — all resolve through `t()`/`tx()`),
  * so there is exactly one source per fact (F45). See the Wave 4b sub-wave plan
  * for the strings.js → en.js key-mapping table.
+ *
+ * FIRST-PAINT NOTE: this module (via copy/index.js) is imported ONLY by lazy
+ * surfaces. The eager app shell reads its one namespace (`footer`) through
+ * copy/footer.js. Never add an eager static import of this file — the whole
+ * registry would re-enter the first-paint entry closure.
  */
+
+import { footer } from './footer.js';
 
 export const en = Object.freeze({
   // ── Common ────────────────────────────────────────────────────────────────
@@ -1125,19 +1132,11 @@ export const en = Object.freeze({
   },
 
   // ── Footer ────────────────────────────────────────────────────────────────
-  footer: {
-    tagline:  'A simulator for Dungeon Masters.',
-    antiAi:   'Simulated, not AI-generated.',
-    about:    'About',
-    pricing:  'Pricing',
-    compendium: 'Compendium',
-    gallery:  'Gallery',
-    discord:  'Discord',
-    privacy:  'Privacy',
-    terms:    'Terms',
-    contact:  'Contact',
-    copyright: '© {year} SettlementForge',
-  },
+  // Lives in copy/footer.js (EAGERLY segmented with its own t() — the app
+  // shell's footer is the one first-paint copy consumer, and importing it from
+  // here would drag this whole registry into the eager entry chunk). Spread
+  // back in so the full `en` tree stays complete for tests + the copy linter.
+  footer,
 
   // ── AuthModal premium blurb (simulation-led) ──────────────────────────────
   // Rewritten to lead with the SIMULATION, not storage. Size is free — a free

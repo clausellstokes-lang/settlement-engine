@@ -67,12 +67,21 @@ describe('map-only lucide icon split', () => {
     if (!existsSync(assets)) return; // build-dependent; vendorPdfLazy covers the budget
     const files = readdirSync(assets);
     const mapChunk = files.find((f) => /^vendor-icons-map-.*\.js$/.test(f));
-    const mainChunk = files.find((f) => /^vendor-icons-[^m].*\.js$/.test(f));
+    const eagerChunk = files.find((f) => /^vendor-icons-(?!map-|lazy-).*\.js$/.test(f));
     expect(mapChunk, 'vendor-icons-map chunk should be emitted').toBeTruthy();
-    // The map chunk carries only the moved icons, so it is smaller than the
-    // first-paint icon chunk.
-    if (mapChunk && mainChunk) {
-      expect(statSync(join(assets, mapChunk)).size).toBeLessThan(statSync(join(assets, mainChunk)).size);
+    expect(eagerChunk, 'a first-paint vendor-icons chunk should still be emitted').toBeTruthy();
+    // FP-1 flipped the old map-vs-main size relation: vendor-icons now carries
+    // ONLY the icons the eager module graph imports (a handful), so it can
+    // legitimately be SMALLER than the 20-icon map chunk. The stable shape
+    // contract is that both lazy splits carry real weight while the eager
+    // chunk stays small: the map chunk must be smaller than the combined
+    // lazy+eager icon surface (i.e. it is a strict subset of the split, not
+    // a re-merged catch-all).
+    if (mapChunk && eagerChunk) {
+      const total = files
+        .filter((f) => /^vendor-icons-.*\.js$/.test(f))
+        .reduce((s, f) => s + statSync(join(assets, f)).size, 0);
+      expect(statSync(join(assets, mapChunk)).size).toBeLessThan(total / 2);
     }
   });
 });

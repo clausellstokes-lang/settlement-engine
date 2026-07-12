@@ -12,7 +12,9 @@
 import { useState, useMemo } from 'react';
 import { Zap, X, Check } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { EVENT_REGISTRY } from '../../domain/events/registry.js';
+// registryFull = registry + composer prose (description/targetPrompt) — see
+// registryProse.js; registry.js alone carries only the eager pipeline fields.
+import { EVENT_REGISTRY } from '../../domain/events/registryFull.js';
 import { inferImportance } from '../../domain/entities/npcs.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../domain/roles/roleCatalog.js';
 import { factionCompendium } from '../../domain/factions/factionCatalog.js';

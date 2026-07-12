@@ -23,7 +23,11 @@
  */
 
 import { bandFor, clamp01 } from './bands.js';
-import { deriveExportPosture } from '../display/dossierViewModel.js';
+// Import the posture LEAF, not dossierViewModel — this module is EAGER
+// (store → event pipeline), and the full display model would drag ~35 kB
+// (dossierViewModel + magicProfile) into the first-paint entry closure
+// (FP-1 read-model split; tests/build/vendorPdfLazy.test.js byte budget).
+import { deriveExportPosture } from '../display/exportPosture.js';
 import { isIsolatedRoute } from '../tradeRouteSemantics.js';
 import { canonStressors, canonImports } from '../canonicalAccessors.js';
 import { foodLedger } from '../foodLedger.js';

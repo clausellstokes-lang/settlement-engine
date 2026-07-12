@@ -357,12 +357,6 @@ function npcConscienceScore(npc) {
   return Math.max(-1, Math.min(1, score));
 }
 
-/**
- * The importance × governing-power weighted mean of NPC conscience scores —
- * personalityDrive's exact aggregation shape over TRAIT_ALIGNMENT instead of
- * TRAIT_AGGRESSION. Empty / no scoring NPCs ⇒ 0 (no signal). Order-independent.
- * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
- */
 /** The governing entry for an alignment read. ONE typed shim for the
  *  SimSettlement ↔ RulingPowerSettlement structural mismatch (the
  *  `powerStructure.stability` string-vs-number widening) so the three
@@ -375,6 +369,12 @@ function governingEntryOf(settlement) {
   );
 }
 
+/**
+ * The importance × governing-power weighted mean of NPC conscience scores —
+ * personalityDrive's exact aggregation shape over TRAIT_ALIGNMENT instead of
+ * TRAIT_AGGRESSION. Empty / no scoring NPCs ⇒ 0 (no signal). Order-independent.
+ * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
+ */
 function conscienceDrive(settlement) {
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
   if (!npcs.length) return 0;

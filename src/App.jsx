@@ -27,7 +27,10 @@ import { useFocusOnViewChange } from './hooks/useFocusOnViewChange.js';
 import { guardForView, viewToPath, NAV } from './lib/routes.js';
 import { applyDocumentHead } from './lib/seo.js';
 import { supportMailto } from './copy/support.js';
-import { t } from './copy/index.js';
+// The eager shell reads ONLY footer.* copy — copy/footer.js carries that one
+// namespace with an identical t(). Importing copy/index.js here would drag the
+// whole en.js registry into the first-paint entry closure (byte budget).
+import { t } from './copy/footer.js';
 import {
   GOLD, GOLD_BG, INK, INK_DEEP, PARCH_100, BORDER, BODY,
   VIOLET, VIOLET_BG, MUTED, sans, serif_, SP, R, FS, swatch,

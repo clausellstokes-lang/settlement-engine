@@ -9,7 +9,7 @@
 
 import { X, Check } from 'lucide-react';
 import { validateBatch } from '../../../domain/events/batch.js';
-import { EVENT_REGISTRY } from '../../../domain/events/registry.js';
+import { EVENT_REGISTRY } from '../../../domain/events/registryFull.js';
 import { GOLD, INK, MUTED, sans, FS, SP, R, swatch } from '../../theme.js';
 import { labelOfTarget } from './helpers.js';
 import { DeltaRow } from './PreviewPanel.jsx';

@@ -26,15 +26,14 @@
 import { cleanNum } from './placeholders.js';
 import { deriveMagicProfile } from '../magicProfile.js';
 import { formatCount } from '../formatNumber.js';
+// The export-posture derivation lives in its own dependency-free leaf so the
+// EAGER deriveSystemState.js can reach it without dragging this whole display
+// model (and its magicProfile edge) into the first-paint entry closure
+// (FP-1 read-model split; see exportPosture.js). Re-exported below so every
+// display surface keeps importing it from here.
+import { deriveExportPosture } from './exportPosture.js';
 
-const EXPORT_STATUS_LABEL = Object.freeze({
-  none:             'No exports — economic isolation',
-  limited:          'Limited export access',
-  vulnerable:       'Exports exist but trade routes are vulnerable',
-  entrepot:         'Entrepôt — re-exports transit goods',
-  import_dependent: 'Import-dependent',
-  established:      'Active exports',
-});
+export { deriveExportPosture } from './exportPosture.js';
 
 const VIABILITY_LABEL = Object.freeze({
   not_viable:      'Not viable',
@@ -89,15 +88,6 @@ function fmtInt(n) {
   // back to a different locale). formatCount is table-free and byte-identical
   // to en-US grouping for integers.
   return v == null ? null : formatCount(Math.round(v));
-}
-
-/**
- * @param {unknown} v
- * @returns {unknown[]}
- */
-function toArray(v) {
-  if (Array.isArray(v)) return v.filter(Boolean);
-  return v ? [v] : [];
 }
 
 /**
@@ -167,34 +157,8 @@ export function deriveFoodBalance(settlement) {
   };
 }
 
-/**
- * Export posture (§1d). Single source for "does this settlement export, and
- * how exposed is that trade?". Reads economicState.primaryExports (what the
- * Economics surface shows), falling back to the legacy economicState.exports.
- *
- * @param {DossierSettlementView | null | undefined} settlement
- */
-export function deriveExportPosture(settlement) {
-  /** @type {EconStateView} */
-  const eco = settlement?.economicState || {};
-  const primary = toArray(eco.primaryExports);
-  const exports = primary.length ? primary : toArray(eco.exports);
-  const count = exports.length;
-  const isEntrepot = !!eco.isEntrepot;
-  const access = settlement?.economicViability?.metrics?.tradeAccess
-              || settlement?.config?.tradeRouteAccess
-              || 'unknown';
-
-  /** @type {keyof typeof EXPORT_STATUS_LABEL} */
-  let status;
-  if (count === 0)               status = 'none';
-  else if (isEntrepot)           status = 'entrepot';
-  else if (access === 'isolated') status = 'vulnerable';
-  else if (count === 1)          status = 'limited';
-  else                           status = 'established';
-
-  return { status, label: EXPORT_STATUS_LABEL[status], exports, count, isEntrepot, access };
-}
+// deriveExportPosture (§1d) moved to ./exportPosture.js (re-exported above) —
+// see the import note at the top of this file.
 
 /**
  * The canonical display model. M0.1 surfaces foodBalance + exportPosture.
