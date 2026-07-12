@@ -102,8 +102,8 @@ export function OrDivider() {
 export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, label }) {
   // Password fields get an in-field show/hide toggle so the user can verify what
   // they typed (a real a11y + typo-safety win, load-bearing for the confirm-
-  // password field). The toggle is a keyboard-operable IconButton (native
-  // <button>, aria-pressed + aria-label from the copy registry) at the 36px
+  // password field). The toggle is a keyboard-operable IconButton (a native
+  // button element, aria-pressed + aria-label from the copy registry) at the 36px
   // target, without changing the Input prop API its call sites depend on.
   const [reveal, setReveal] = useState(false);
   const isPassword = type === 'password';
