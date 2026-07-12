@@ -300,7 +300,10 @@ The shippable milestone. It is REACHED when all of the following are committed a
 5. 🔱 FABLE-ON-RETURN: the checkpoint grade-check (mini re-review of affected dimensions) — if
    Fable is unavailable, Phase 6 may START but not SHIP without it.
 
-# PART 6 — PHASE 6: LAUNCH READINESS (runs at the checkpoint)
+# PART 6 — PHASE 6: LAUNCH READINESS (⚠️ OWNER RE-SCOPE 2026-07-12: runs AFTER the PART-8 mover
+# ladder, not at the checkpoint — the movers are launch content. The PART-5 checkpoint remains the
+# mid-program VALIDATION milestone: its soak + grade-check run after Wave A as written, then the
+# ladder proceeds M1→M10, then THIS part, then launch.)
 
 Sequenced program (each its own fenced wave, same protocol):
 1. DATA LIFECYCLE — pre-launch: schema/migration audit (the head/net-current ledger, fusion specs
@@ -336,39 +339,163 @@ deity names, gate load-bearing); (6) exact-stage commit.
 lands (it adds UI surfaces against a budget FP-1 is rewriting). The faithEventFilter seam is the
 sensitive read. W5 (worktree amazing-euclid) merges when its session ends, same protocol.
 
-# PART 8 — POST-LAUNCH TERRITORY (designed, deliberately deferred — DO NOT BUILD PRE-LAUNCH)
+# PART 8 — THE MOVER LADDER (⚠️ OWNER RE-SCOPE 2026-07-12: LAUNCH CONTENT, no longer post-launch)
+## Dispatch-ready specs, PART-3 depth. Order BINDING. Each wave = mover + CO-BUILT brake + OWN soak.
+## Launch boundary moved: Living Realm checkpoint (PART 5) stays as the mid-program VALIDATION
+## milestone after Wave A; PHASE 6 now runs AFTER M10, and launch follows Phase 6. The everything-on
+## soak covers all movers ONCE, at the end. Universal laws for every M-wave: dormant (no marker /
+## flag off) ⇒ byte-identical; conditionally-materialized ledgers (object-keyed); seeded forks from
+## stable composite keys; codepoint-sorted mutation order; tick-time only; carriers ship WITH their
+## movers (round 9); every wave re-runs the prior soaks green; any-cast 0-hole; the manager checklist §0.3.
 
-## 8.1 The heavy-mover ladder (each = mover + its CO-BUILT BRAKE + its OWN soak; order binding)
-1. EMBATTLEMENT ROUTING — the ramp + security counterforce + hysteresis band (PART II §II.3-3);
-   brake: min-dwell + continuous scalar. Unlocks cheap-vs-safe routing.
-2. CARAVANS/SUPPLY-STARVATION — per-institution links, in-transit ledgers, the SUPPLY-STARVED
-   impairment generalizing blockadeTransport (PART III trade grounding); brake: multi-source
-   allocation ≥2 paths asserted for critical inputs (PART II §II.3-3-fix). Siege-as-interdiction
-   replaces the capacity-roll core AFTER this lands (war pillar thin-spot #2).
-3. SEASONS-B — winter travel multipliers on the cost field (the §4i spatial half; the seasonal
-   overlay slot materializes; versioned under costLawVersion).
-4. MIGRATION-WITH-MORTALITY — §4c full model; brakes: congestion pushback, scatter-floor (forbid
-   'concentrated' under spatial), the conservation-ledger soak (Σarrivals+Σdeaths==Σdepartures);
-   reconcile the 0.45 origin-loss proxy (PART II §II.3-3).
-5. ARMY-TRANSIT + FIELD COMBAT — position-along-path ledgers, collision→field battle, travel
-   fatigue, the bounded sigmoid resolver (§5); war pillar thin-spot #1 closes; reinforcements as
-   armies-in-transit (round 12); brake: the no-hand-of-miracle clamp + exhaustion homeostasis
-   (already built).
-6. ENTREPÔT/TOLLS — intermediary-frequency growth + toll economics; brake: toll-greed reroute +
-   congestion + maintenance (V.6 — NO trade-side damping exists yet; co-build, the VI.1 correction).
-7. CONTRABAND/SMUGGLE — gate policy + risk-tolerance smuggling (rounds 4/6); the per-gate pipeline
-   order: smuggle→intercept→confiscate→toll (PART II §II.3-4-e); brake: conscience + detection.
-8. SEA LANES MATERIALIZED — the §4j reserved slot lights up: port eligibility (geography ∧
-   institutions), naval blockade, piracy, storm season, ship-crew carrier. Ports re-derive on
-   founding events.
-9. WAVE B — faction belief maps (carriers=organs, round 14), objective-parameterized scoring with
-   the NEW non-war move levers (VI.3), moral drift (alignment consumers light up), ally-intel/
-   betrayal (round 11), teleport blocs, the war INITIATE/RESOLVE SPLIT (unlocks war DM-Driven).
-10. CL-3 — approval-queue extensions (thresholds, hold-then-expire ⚠️ OWNER: expiry policy),
-    Living/Autonomous progression (⚠️ OWNER: advance-on-open catch-up wanted?), Recommendations
-    rationale surface.
-Each mover wave ALSO lights its carrier in the rumor network (round 9: the carrier ships WITH its
-mover) and re-runs the checkpoint soak with the new layer on.
+### M1 — EMBATTLEMENT ROUTING (depends: 5.5-M)
+Embattlement = a first-class CONTINUOUS region scalar in a new conditional ledger: ramp inputs =
+occupation, active siege, pyrrhic war aftermath (war_exhaustion), high crime; counterforce = security
+institutions + falling crime (the W-C3 machinery). HYSTERESIS is the co-built brake (PART II §II.3-3):
+enter >X, exit <Y<X, minimum dwell ticks — routing reads the SCALAR (graded cost), never a boolean.
+Cheap-vs-safe = RE-SCORING the k cached candidate routes per mover risk tolerance (k-shortest cached
+at canonize per §II.4 — NEVER re-pathfind per tick); risk tolerance from settlementAlignment (W0) via
+the rust/fidelity read (lawful/seasoned reads danger true). Trade through embattled routes: seeded
+sporadic banditry loss — bounded, non-catastrophic (fork `banditry:${shipmentId}:${tick}`; v1 applies
+to channel strength, real shipments arrive with M2). Fence: src/domain/spatial/embattlement.js +
+distanceRead re-score + the ramp-input reads. Soak: threshold-jitter fixture NEVER flip-flops; 10y
+embattled-border run bounded. Sensitive reads: the hysteresis constants; the scalar never gates a
+boolean anywhere.
+
+### M2 — CARAVANS / SUPPLY-STARVATION (depends: M1)
+Per-CONSUMING-INSTITUTION supply links: at trade-establishment, pre-rank the K cheapest reachable
+producers per (institution, input) from the digest (§II.4 — failover is O(K) list-walk, never a
+re-solve). In-transit SHIPMENT ledger: ONE record per active link {institutionId, input, sourceId,
+arrivalTick} riding hopWeeks — aggregate, bounded, conditionally materialized. NEW impairment kind
+SUPPLY-STARVED in entities/status.js, GENERALIZING blockadeTransport's access impairment (one
+starvation ledger — §II.3-4-g; foodStockpile REMAINS the food-specific buffer, no double-count);
+per-input stockpile buffers generalize the foodStockpile pattern (iron etc.); triggers ONLY on
+extended total cut (all K sources severed AND buffer empty); TEMPORARY (lifts on arrival); the causal
+receipt is mandatory ("the smithy starves: the iron road is cut under the siege of X; no shipment in
+N weeks"); resolution rides W-C5. Basic interception: a hostile-to-destination gate on the route cuts
+the shipment (full smuggle counterplay = M7). M2b (same wave, AUGMENT not replace): resolveSiegeVerdict
+gains a supply-interdiction TERM (a supply-starved besieged settlement's hold weakens) — the full
+siege-as-starvation replacement completes in M5. CO-BUILT BRAKE: assert ≥2 independent source paths
+for critical inputs at establishment (else flag, don't starve — §II.3-3). Soak: siege-starvation
+cascade depth/rate capped; 10y supply-web run. Sensitive: ledger cardinality (records = active links,
+never per-wagon); the generalized impairment does not re-trigger blockadeTransport's.
+
+### M3 — SEASONS-B: WINTER ROADS (depends: M2; small)
+The seasonalOverlay reserved slot materializes: per-season cost multipliers, MULTIPLICATIVE with
+terrain (mountains → near-impassable, plains merely slow — round 19 slow-not-sever), versioned under
+costLawVersion/overlayVersion (a cost-law change = receipted re-canonize per §V.1). Consequences
+emerge, not authored: winter arrival ticks lengthen (info runs cold), the SPRING THAW news burst
+appears in the rumor ledger, campaign season emerges by cost. Storm-season hooks pre-wired for M8's
+sea lanes. Soak: the annual route-rhythm visible in arrival distributions; hungry-gap × slow-roads
+composition bounded (a snowed-in famine town must be rescuable by spring, not annihilated — tune with
+the SEASONS-A constants).
+
+### M4 — MIGRATION-WITH-MORTALITY (depends: M3; HIGH-RISK — owner reviews the population-attractor
+### finding BEFORE dispatch ⚠️)
+The §4c full model: context-dependent carrying-capacity tolerance (prosperity + connectivity +
+granary raise it); excess migrates along routes; TWO mortality sinks (origin + road, road deaths
+scale with M1 embattlement + M3 season — refugees through a winter war zone die more) — both EVENTS
+with receipts; destination = the 4-axis weighted choice (closest / least cultureDistance / least
+hostile / richest) with a PRNG scatter fraction. cultureDistance(a,b) is BUILT HERE: the pure
+composite selector (faith proximity via deity axes + alignment proximity via W0's settlementAlignment
++ economy/ways-of-life + trade ties + governance drift via factionArchetype 3-axis — rounds 6/7,
+§II.5-2). Arrival feedback: same-faith influx reinforces, different-faith shifts (bounded).
+CO-BUILT BRAKES (all mandatory, §II.3-3): congestion pushback (hub pull DECAYS as it fills —
+per-capita saturation + crowding deficit + size-scaled crime), scatter-floor (the 'concentrated'
+distribution mode FORBIDDEN under spatial), transport lag (the arrival queue), reconcile the
+abs*0.45 origin-loss proxy (it BECOMES the origin-mortality stage — never both), and THE
+CONSERVATION-LEDGER SOAK: Σarrivals + Σmodeled-deaths == Σdepartures, exact, asserted. Soak: the
+multi-year war+famine regional run — no chain-collapse (A→B→C), no megacity, the W0 population-
+attractor retune validated here. Sensitive: the conservation assertion; the scatter floor constant;
+cultureDistance is a LIVE read (never frozen).
+
+### M5 — ARMY-TRANSIT + FIELD COMBAT (depends: M4; the war convergence)
+Armies gain position-along-path ledgers (travel weeks via hopWeeks × army speed; readiness/terrain
+modulate); CROSSING-PATH COLLISION → field battle: the §5 bounded resolver — win probability = a
+sigmoid over effective strength (readiness × supplyQuality × size × funding × defender's-ground ×
+travel-fatigue), CLAMPED so P(upset)→0 past threshold (no-hand-of-miracle; fork
+`battle:${[a,b].sort().join(':')}:${tick}`); retreat = per-mover embattlement (§6). REINFORCEMENTS =
+armies-in-transit on the same ledger; the COURIER UMBILICAL (round 12): an army's belief-staleness
+grows when its route home is cut (reads the Wave-A belief machinery — an info-starved army
+mis-assesses; blinding the enemy's couriers becomes a real tactic). SIEGE-AS-STARVATION completes:
+the capacity-roll core is REPLACED by the supply mechanic (M2's interdiction term + time + relief),
+keeping the feasibility gate + outcome bands. The army/frontline carrier lights in the rumor network.
+BRAKES: the clamp + the exhaustion homeostasis (already built + soak-verified). Soak: the
+war-distribution certification RE-RUN (frequencies/outcomes/exhaustion curves within envelopes) +
+a 30y two-power border war that ENDS endogenously. Sensitive: the sigmoid constants; collision
+detection is O(armies²) per tick — armies are few, assert a bound; the old capacity-roll path must
+be cleanly gone (no dual siege math).
+
+### M6 — ENTREPÔT / TOLLS (depends: M2)
+Intermediary-frequency metric derived from digest gate-crossings of ACTIVE M2 shipment routes (not
+raw geometry — earned centrality); frequent intermediaries accrue toll/gate-tax prosperity + unlock
+transshipment institutions on the W-C3 founding lane (warehouse, customs house, carriers' guild).
+Toll term joins the M1 route re-score: greedy tolls divert shipments (the self-balancing reroute).
+CO-BUILT BRAKES (V.6 + VI.1 — NO trade damping exists in-tree; build all of it here): congestion
+(throughput ceiling per gate), infrastructure maintenance cost (toll income has upkeep), wartime
+targeting (an entrepôt is a fat siege target — feeds M5 threat), rent extraction bounded. Soak: the
+megacity loop — 30y, no runaway hub (Gini-style bound on prosperity concentration asserted).
+Sensitive: the metric reads SHIPMENTS not geometry; the brake constants.
+
+### M7 — CONTRABAND / SMUGGLE (depends: M6 + M4's cultureDistance)
+Gates gain POLICY: prohibit/confiscate goods categories violating law/culture/alignment (contraband
+is RELATIONAL — cultureDistance + the governing archetype decide; slaves the flagship, data-driven
+category table). The smuggle network: strength from criminal opportunity + thieves-guild (the
+EXISTING saturation cap re-validated as the brake); smuggle attempts are RISK-TOLERANCE-gated
+(alignment fidelity — bold/chaotic runs what cautious/lawful won't). THE PER-GATE PIPELINE ORDER IS
+LAW (§II.3-4-e): smuggle roll → (if detected ∧ hostile) interception seizure → (elif contraband)
+confiscation → else toll. Smuggle = ONE per-shipment roll vs the route's WORST gate (§II.3-4-f — the
+besieged trickle survives); corruption is the hinge (a corrupt gate leaks); conscience gates every
+seizure's take (W-C2). The criminal/underground rumor carrier lights. Soak: the siege-trickle
+envelope (a besieged settlement with smugglers starves SLOWER, never not-at-all); guild strength
+stays bounded. Sensitive: the pipeline order in code matches the law; the worst-gate rule.
+
+### M8 — SEA LANES MATERIALIZED (depends: M5; §4j verbatim)
+The seaLanes reserved slot lights: PORT ELIGIBILITY = geography ∧ institutions (coastal/river cell +
+dock/harbor/shipwright from the catalog — derived at digest, RE-DERIVED on founding events via the
+receipted re-canonize path); sea/river edge set connects eligible ports (cheap + high-capacity — the
+historical order-of-magnitude, constants documented); the ISOLATION INVERSION lands (island + port =
+hub); NAVAL BLOCKADE = holding the water gate (M5 siege interdiction needs land ∧ sea for ports);
+PIRACY = the M1 danger term on lanes; STORM SEASON = M3's hooks; the SHIP-CREW carrier lights
+(fast port-to-port rumors — ports become info brokers); refugee sea passage (funded sail, desperate
+walk) joins M4's destination choice. NO fleet combat (sea-interdiction abstraction only). Soak:
+island-hub economics; blockade-starvation parity with land sieges. Sensitive: port derivation purity;
+the re-derive-on-founding receipt.
+
+### M9 — WAVE B: THE POLITICAL DEPTH (depends: M5 + Wave A; the largest M-wave — consider splitting
+### at dispatch into M9a scorer/factions + M9b intel/moral if the implementer reports scope strain)
+(1) FACTION BELIEF MAPS: the belief ledger's factionId dimension activates — per-faction beliefs fed
+by their round-9 carrier organs (merchants←trade, military←couriers/armies, clergy←faith when lit,
+criminal←smuggle, public←ambient); the governing COALITION derives (seat + relationship-allied
+factions — VI.4-1's deferred half); dissent = belief divergence as an internal stressor
+(council_schism); faction LEAKAGE via the compromise system. (2) OBJECTIVE-PARAMETERIZED SCORING:
+enumerateMoves' default descriptor (Wave A's down-payment) gains per-archetype objective sets +
+the NEW non-war move levers (merchant: reroute/embargo/credit; church: missionize/legitimacy;
+warlord: prestige/opportunity) — VI.1's two-step completes. (3) MORAL DRIFT: unjust instigation
+(acting on false belief against a non-threat) drifts settlementAlignment — sharpest for lawful-good,
+scaled by victim innocence + past relations; wired to W-C2 conscience + W-C5 (the unjust war is a
+CAUSE with a reckoning arc). (4) ALLY-INTEL/BETRAYAL: the deliberate high-confidence sharing channel
+(couriers/circles, preserved fidelity, confidence-gated); alignment styles the handling (round 15A —
+lawful faithful-but-brittle, evil accurate-inward/deceptive-outward); the COMPROMISED-ALLY LEAK
+(shares route to the real enemy — belief-map alliance accuracy becomes load-bearing). (5) TELEPORT
+BLOCS: the teleportEdges slot lights (authored premium edges, magic-gated); zero-hop hi-fi intel +
+bounded trade; the bloc = clique-of-the-willing; node-starvation economics (round 11). (6) THE WAR
+INITIATE/RESOLVE SPLIT: evaluateWarLayer's initiation routes through the candidate/proposal
+machinery → war's DM-Driven tri-state unlocks (the CL-0 deferral closes). Soak: full-info 30y; an
+evil-manipulation arc OCCURS and stays bounded; coalition dissent → coup pathway exercised.
+Sensitive: the initiate/resolve split preserves the war-behavior pins under legacy flags; faction
+belief cardinality (observer×faction×subject — the sparse-arrival law extends per-faction).
+
+### M10 — CL-3: FULL AUTONOMY CONTROLS (depends: M9)
+The approval queue EXTENDS to actor-initiated majors (M9's autonomous declarations/coups route
+through it under 'routine'): pending-actions ledger + realm UI; HOLD-THEN-EXPIRE semantics — the
+proposing actor holds a defensive posture N weeks then the proposal EXPIRES TO DECLINE (⚠️ OWNER
+may override the expiry policy; never block the advance). Recommendations mode gains the rationale
+surface (candidates' reasons[] rendered). LIVING/AUTONOMOUS progression ships: capped deterministic
+advance-on-open catch-up (calendar-delta → N ticks, receipted; ⚠️ OWNER: confirm wanted + the cap).
+infoMode completes: 'full' (factional beliefs + reconciliation) joins the ladder; presets re-audited
+(Full Simulation = everything, honestly). Soak: a catch-up of 26 weeks == 26 manual ticks,
+byte-identical. Sensitive: catch-up determinism (the pin-now discipline); expiry never deadlocks.
 
 ## 8.2 The round-21+ backlog (frozen out of v1; triage at Phase 6 ⚠️ OWNER)
 W2-style voice sidecars for war/faith/trade news (the pillar-inventory prescription — cheap, high
