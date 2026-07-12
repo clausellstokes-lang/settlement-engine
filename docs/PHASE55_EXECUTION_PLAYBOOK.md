@@ -17,6 +17,62 @@ the constitution → check after each fix).
 
 # PART 0 — THE OPERATING PROTOCOL (read first, every session)
 
+## 0.0 THE STATE LEDGER (the portable truth — a successor AI starts HERE)
+This ledger is maintained BY LAW (§0.3 step 7): every commit appends/updates a row. It is the
+in-repo replacement for any assistant's private memory. Companion state that does NOT transfer to
+a new AI: the Claude memory dir + session task lists — everything needed is HERE + the design doc
++ docs/briefs/ + git history. Amendment history for the docs themselves is in `git log --follow`.
+
+### 0.0.1 ACCOMPLISHED (chronological, with commit hashes — verify any claim via `git show <hash>`)
+| Wave / act | Commit(s) | What + notable deviations |
+|---|---|---|
+| Reunification W4a-W4e (Library/Realm/Gallery/Account/Dossier) | pre-24858b5d history | product surfaces onto OUR floor; W4e held the FaithSection constitutional gate |
+| W4f Generate/PDF/Compendium | 24858b5d | draft export, save recovery, sealed Faith&War PDF chapter (three-fold gate, test-pinned) |
+| W4g Admin | 1af43b01 | THE PII FIX: raw profiles.select gone, audited edge only; SimTuning stop-reported |
+| W4h domain-display read-models | 56ca62ad | armyStrength/tradePressure/visibilityAudit verbatim (lineages had converged); budget→1,441,000 |
+| RP-1 regressions | 508713fb | 7 real defects incl. AutoSaveChip integrity + SimRules write-guard; item 5 completed by manager |
+| W4f last-mile | 2674802f | premium Faith&War chapter now REACHES premium exports (was dead-pathed); nameById plain-map law |
+| W2 conjunction content | d7cc13df | 1,662 lines / all 2,016 conjunctions above floor; display sidecar + 4-rung ladder; goldens untouched |
+| Chip fixes | 85bb8c51, a6f2a5bb | generator fails closed on options-in-neighbour-slot (killed the trace flake); copy-pin re-point |
+| CL-0 control layer | 0359d243 | profile enums (virtual, absent=legacy-byte-exact), authorityFor, FROZEN mode, presets 3→5, rulesetLog receipts, dialog v2; REAL BUG fixed (LivingWorldGates faith toggle was droppable); worldState ledgers consolidated data-driven |
+| 5.5-W0 foundations | dd4f522c | computeLawfulness/computeMalice + settlementAlignment (substrate, no consumers); temporal audit ZERO violations + gate extended; maintained 30y soak (FINDINGS: stasis on record; population→~390-470 attractor under war depth ⚠️ owner-parked); trade-primitive tests (premise corrected: suites existed); A3 full_simulation war sub-flags lit (+192B) |
+| FP-1 first-paint | 4edc5bf8 (+a0145671 parking) | −186,998B (−13%): segmented copy, registry-prose split, exportPosture leaf, DERIVED data-chunk graph, graph-derived icons; budget 1,441,000→1,256,000 RATCHETED; store-slices STOP→parked §0.6 |
+| SEASONS-A food year | b17b89db | granary rhythm term-for-term-zero at swing=0 (byte-identity by construction); hungry gap emergent; seeded year variance; seasonsEnabled default OFF, living_realm+full_simulation lit; regenerated CL-0 pin STRUCTURALLY verified. Noted: pre-existing living_realm saves re-infer realistic_regional (accepted display-only drift) |
+| 5.5-K KEYSTONE (merged from claude/sad-poitras-1d587b) | f4d1aeef (+9f3c48d6 parking) | frozen integer digest (multi-source Dijkstra, territory/gates/tiers/distances/receipts, 3 version axes, 4 reserved null slots); digest sizes 47/61/87KB; DEVIATION: pack.cells capture was an INJECTED seam → wired later in 5.5-M; worldState auto-merge with SEASONS-A verified |
+| Session mode + Foundry (merged from claude/peaceful-volhard-0ad3f1) | df217415 (5 commits) | Foundry VTT export + Session Mode; faithEventFilter default-closed (manager-read, 50/50 tests); zero conflicts |
+| 5.5-M MODULATION + live capture | 18fc15f2 | trade/faith × distanceWeight (floor .35, modulated EXACTLY once), propagation ARRIVAL LATENCY (spatialArrivals ledger, news dated at arrival), hopWeeks calibration receipt (1wk/median-primary-hop); live read-only getSpatialPack bridge + capture registry; freeze-first-capture encoded; +17B (ledger key literal, keystone precedent) |
+| any-cast restoration | b6959c9a | the parallel-worktree tax typed honestly: 13 holes→0 across keystone/worldState/faithEventFilter; ratchet EXACTLY 2252; esbuild-proven comments-only |
+| Playbook + re-scope | 53943214, 2ebe1fd6 | this document; then OWNER RE-SCOPE: movers M1-M10 = LAUNCH content, specs at dispatch depth |
+| Design doc (companion) | many (98e2aed8…d5672d31 range) | 20 owner rounds + PARTS I-VII (6 grounding passes); §11 control layer; II.5 + VI.4 decisions settled |
+
+### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
+- BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,256,000 (FP-1 ratchet; never raise without owner);
+  any-cast ceiling 2252 EXACT (fix types, never widen); domain-strict 0/0.
+- OWNER RE-SCOPE (2026-07-12): the M1-M10 mover ladder is LAUNCH content; Phase 6 after M10;
+  checkpoint = validation milestone only.
+- SETTLED DESIGN DECISIONS: design doc §II.5 (cost→weeks 1wk/primary-hop; culture = derived
+  behavioral composite; imported maps aspatial v1; one-shot extraction) + §VI.4 (coalition = seat
+  in v1; centrality ceiling as soak-guard; archetype = the faction key) + belief cold-start =
+  ground-truth-at-canonize + envelope 5-30 settlements + round-18 (no party vantage; NPC excursions
+  protected) + round-19 seasons + round-20 ports.
+- ACCEPTED DRIFT CLASS: preset re-inference on newly-lit keys (A3, SEASONS-A) — display-only.
+- KNOWN OPEN FINDINGS: population attractor (owner-parked, gates M4); legibility-at-density
+  (feed 240-cap, backlog); analytics dual-import build warnings (pre-existing); 15 lint advisories.
+- INCIDENT PATTERNS (proven recoveries): session-limit agent deaths → §0.5; worktree-lane
+  baseline collisions → type honestly at merge (b6959c9a); mis-cut worktree base → verify
+  merge-base before work (the W5 re-merge self-correction).
+
+### 0.0.3 IN-FLIGHT / ON THE DESK (update on every dispatch + landing)
+- STEP 3.5 RUMORS & NEWS: implementer RUNNING (dispatched off b6959c9a, contract = PART 3).
+- W5 RE-MERGE: chip session ENDED — branch awaits manager merge review (§7.1 protocol; its base
+  was corrected mid-session to df217415-lineage; 8 named conflict files were the work).
+- NEXT AFTER 3.5: Wave A (PART 4) → checkpoint (PART 5) → M1..M10 (PART 8) → Phase 6 → launch.
+- OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
+  catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
+- FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check
+  (PART 9); interim grade on record: A overall (A+ bones / B+ experiential voice — the sidecar
+  backlog is the named fix).
+
 ## 0.1 The roles, and what changes when Fable is absent
 - FABLE (when available): architecture rulings, wave sequencing changes, brief authorship for
   UNSPECCED work, the per-wave review judgment calls, the final grade-check.
@@ -52,6 +108,10 @@ the constitution → check after each fix).
    foreign unstaged work), `--no-verify`, a message following the house style: what + why +
    the laws held + gate numbers (closure bytes, test counts).
 6. Update the task list; dispatch the next wave per §0.4.
+7. **UPDATE THE STATE LEDGER (§0.0) — BY LAW.** Append the wave's row to 0.0.1 (hash, what,
+   deviations), record any new ruling/amendment in 0.0.2, and refresh 0.0.3 (in-flight/desk/
+   queues). The ledger update rides the SAME commit as the wave (or the very next one). A wave
+   is not "done" until its ledger row exists — this document is the successor's memory.
 
 ## 0.4 THE DISPATCH ORDER (the ladder — sequential chain, ONE optional chip ahead)
 CURRENT (as of this writing): FP-1 in flight (budget-exclusive) · W5 chip in its worktree ·
