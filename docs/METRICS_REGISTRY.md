@@ -153,6 +153,7 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
 - `regional_impact_status_changed`, `regional_graph_snapshot`, `regional_arc_emerged`, `regional_propagation_applied`
 - `neighbour_generated`, `neighbour_linked`, `map_opened`, `map_placement_added`
 - `map_placement_removed`, `map_route_drawn`, `map_saved`, `pdf_export_completed`
+- `foundry_export_completed`
 - `gallery_published`, `gallery_unpublished`, `gallery_dossier_viewed`, `gallery_engagement`
 - `gallery_imported`, `settlement_reopened`, `settlement_deleted`, `library_viewed`
 - `session_started`, `settlement_fingerprint_captured`, `consent_updated`
