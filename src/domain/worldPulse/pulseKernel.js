@@ -53,6 +53,8 @@ import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeS
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
+import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
+import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
@@ -1482,6 +1484,48 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       } else if ('beliefMaps' in memoryState) {
         // Everything decayed below the floor: the conditional key drops to absent.
         const { beliefMaps: _forgotten, ...rest } = memoryState;
+        memoryState = rest;
+      }
+    }
+  }
+  // Phase 5.5 mover M1 — EMBATTLEMENT (read-last/write-next). AFTER war/occupation
+  // resolution: each region's CONTINUOUS danger scalar advances under hysteresis
+  // from its ramp inputs (occupation, active siege, war_exhaustion, high crime)
+  // minus a bounded security counterforce. Routing/trade read the SCALAR (a graded
+  // cost), never the internal hysteresis phase. The ramp-input READS live here (the
+  // worldPulse ledgers are in hand); embattlement.js owns the pure combination +
+  // the scalar/hysteresis step. DORMANT (no spatial marker) ⇒ changed:false ⇒
+  // memoryState untouched, zero new keys — byte-identical.
+  if (embattlementActive(memoryState)) {
+    const occ = /** @type {Record<string, { state?: string }>} */ (memoryState.occupations || {});
+    const exh = /** @type {Record<string, number>} */ (memoryState.warExhaustion || {});
+    const graph = postTimeSnapshot.regionalGraph;
+    const priorEmb = /** @type {Record<string, unknown>} */ (memoryState.embattlement || {});
+    const ids = new Set([
+      ...(postTimeSnapshot.settlements || []).map((/** @type {{ id?: unknown }} */ s) => String(s.id)),
+      ...Object.keys(occ), ...Object.keys(exh), ...Object.keys(priorEmb),
+    ]);
+    /** @type {Record<string, number>} */
+    const threats = {};
+    for (const id of ids) {
+      threats[id] = rampThreat({
+        occupationState: occ[id]?.state ?? null,
+        besieged: warFrontsInto(graph, id).length > 0,
+        warExhaustion01: Number(exh[id]) || 0,
+        crime01: pIndex.get(id, 'crime')?.score || 0,
+        // Security counterforce: high defensive readiness (low defense pressure)
+        // graduates a disorder-driven region out; it can't nullify a live siege
+        // (SECURITY_MAX_RELIEF caps the relief in embattlement.js).
+        security01: 1 - (pIndex.get(id, 'defense')?.score || 0),
+      });
+    }
+    const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });
+    if (emb.changed) {
+      if (emb.next) {
+        memoryState = { ...memoryState, embattlement: emb.next };
+      } else if ('embattlement' in memoryState) {
+        // Every region graduated back to calm: the conditional key drops to absent.
+        const { embattlement: _cleared, ...rest } = memoryState;
         memoryState = rest;
       }
     }

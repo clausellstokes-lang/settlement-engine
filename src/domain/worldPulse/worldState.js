@@ -256,10 +256,18 @@ export function createDefaultWorldState(campaign = {}) {
 //                        while infoMode is a live mode (the SAME gate as
 //                        rumorLedgers, ORTHOGONAL to settlementStrategyEnabled);
 //                        absent (byte-identical) on the aspatial / omniscient path.
+//   • embattlement     — the per-region EMBATTLEMENT scalar ledger (Phase 5.5
+//                        mover M1, spatial/embattlement.js): { settlementId →
+//                        { level, phase, sinceTick, lastTick } } — a CONTINUOUS
+//                        0..1 danger scalar (routing reads the scalar, never a
+//                        boolean) with an internal hysteresis latch. Materialized
+//                        ONLY under the spatial-canon marker AND only for
+//                        settlements actually under threat (sparse); absent
+//                        (byte-identical) on the aspatial / peaceful path.
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
-  'spatialDigest', 'spatialArrivals', 'rumorLedgers', 'beliefMaps',
+  'spatialDigest', 'spatialArrivals', 'rumorLedgers', 'beliefMaps', 'embattlement',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

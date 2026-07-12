@@ -74,7 +74,8 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  * full builder shape lives in spatialDigest.js).
  * @typedef {{ settlementIds?: string[],
  *   distanceMatrix?: Record<string, Record<string, number>>,
- *   tiers?: Record<string, Record<string, number>> }} SpatialDigest
+ *   tiers?: Record<string, Record<string, number>>,
+ *   gates?: Array<{ between?: [string, string], cost?: number }> }} SpatialDigest
  */
 
 /**
@@ -322,4 +323,164 @@ export function distanceLegibility(digest, fromId, toId) {
   const label = band === 'distant' ? 'a distant supplier' : 'a regional supplier';
   const phrase = `${label} (≈${w} week${w === 1 ? '' : 's'} away)`;
   return { weeks: w, weight, band, phrase };
+}
+
+// ── The k-shortest CANDIDATE ROUTE seam (the danger-routing re-score input) ────
+// The keystone digest freezes the settlement geometry but ships NO alternate-route
+// cache (it has territory/gates/tiers/distanceMatrix/routeReceipts — verified
+// against buildSpatialDigest). The M1 cheap-vs-safe re-score needs CANDIDATE routes
+// per O-D pair; per §II.4 they are "cached at canonize, never re-pathfound per
+// tick." We DERIVE them deterministically from the frozen `gates` (the sparse
+// settlement adjacency) — a pure function of the immutable digest — and MEMOIZE
+// them on the digest object (WeakMap, keyed by identity), so the derivation runs
+// once per pair and every per-tick read is a cache hit. No keystone amendment.
+
+// How many candidate routes to cache per O-D pair (the primary + up to K-1
+// single-edge-detour alternates). Small: a mover picks among a few plausible roads.
+export const K_CANDIDATES = 3;
+
+/** The frozen digest's gate adjacency (id → Map(neighbourId → integer cost)),
+ *  memoized per digest object. Pure derivation from digest.gates. */
+/** @type {WeakMap<object, Map<string, Map<string, number>>>} */
+const ADJ_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
+function gateAdjacency(digest) {
+  const memo = ADJ_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  /** @type {Map<string, Map<string, number>>} */
+  const adj = new Map();
+  const link = (/** @type {string} */ a, /** @type {string} */ b, /** @type {number} */ cost) => {
+    if (!adj.has(a)) adj.set(a, new Map());
+    const m = /** @type {Map<string, number>} */ (adj.get(a));
+    const prev = m.get(b);
+    if (prev == null || cost < prev) m.set(b, cost);
+  };
+  const gates = Array.isArray(digest?.gates) ? digest.gates : [];
+  for (const g of gates) {
+    const pair = Array.isArray(g?.between) ? g.between : [];
+    const a = pair[0] == null ? null : String(pair[0]);
+    const b = pair[1] == null ? null : String(pair[1]);
+    const cost = finiteNum(g?.cost);
+    if (a == null || b == null || a === b || cost == null || cost < 0) continue;
+    link(a, b, cost);
+    link(b, a, cost);
+  }
+  if (digest && typeof digest === 'object') ADJ_MEMO.set(/** @type {object} */ (digest), adj);
+  return adj;
+}
+
+/**
+ * Deterministic Dijkstra over the gate adjacency: the cheapest path a→b avoiding a
+ * set of undirected edges (encoded "lo|hi"). Tie-breaks (equal tentative cost) keep
+ * the LOWER-codepoint predecessor, and the frontier pops the lowest cost then lowest
+ * codepoint node — so the result is a pure function of the graph, not heap order.
+ * @param {Map<string, Map<string, number>>} adj @param {string} from @param {string} to
+ * @param {Set<string>} blockedEdges
+ * @returns {{ path: string[], cost: number }|null}
+ */
+function shortestPath(adj, from, to, blockedEdges) {
+  if (from === to) return { path: [from], cost: 0 };
+  /** @type {Map<string, number>} */
+  const dist = new Map([[from, 0]]);
+  /** @type {Map<string, string>} */
+  const prev = new Map();
+  /** @type {Set<string>} */
+  const done = new Set();
+  for (;;) {
+    // Pick the un-finalized node with the lowest (cost, codepoint id).
+    let u = null;
+    let best = Infinity;
+    for (const [node, d] of dist) {
+      if (done.has(node)) continue;
+      if (d < best || (d === best && (u == null || node < u))) { best = d; u = node; }
+    }
+    if (u == null) break;
+    if (u === to) break;
+    done.add(u);
+    const nbrs = adj.get(u);
+    if (!nbrs) continue;
+    for (const nb of [...nbrs.keys()].sort()) {
+      if (done.has(nb)) continue;
+      const edgeKey = u < nb ? `${u}|${nb}` : `${nb}|${u}`;
+      if (blockedEdges.has(edgeKey)) continue;
+      const w = /** @type {number} */ (nbrs.get(nb));
+      const cand = best + w;
+      const known = dist.has(nb) ? /** @type {number} */ (dist.get(nb)) : Infinity;
+      // Strict-less updates; equal-cost keeps the lower-codepoint predecessor.
+      if (cand < known || (cand === known && u < /** @type {string} */ (prev.get(nb) ?? '￿'))) {
+        dist.set(nb, cand);
+        prev.set(nb, u);
+      }
+    }
+  }
+  // We break exactly when `to` is the minimum un-finalized node (its dist optimal)
+  // or when the frontier empties; in the latter case `to` never received a finite
+  // dist. So a present dist for `to` is both reachable AND optimal.
+  if (!dist.has(to)) return null;
+  /** @type {string[]} */
+  const path = [to];
+  let cur = to;
+  while (cur !== from) {
+    const p = prev.get(cur);
+    if (p == null) return null;
+    path.push(p);
+    cur = p;
+  }
+  path.reverse();
+  return { path, cost: /** @type {number} */ (dist.get(to)) };
+}
+
+/** @param {{ path: string[], cost: number }} r */
+const routeSig = (r) => r.path.join('>');
+
+/** Per-digest candidate-route cache: digest → (`from|to|k` → routes). */
+/** @type {WeakMap<object, Map<string, Array<{ path: string[], cost: number }>>>} */
+const CANDIDATE_MEMO = new WeakMap();
+
+/**
+ * The k cheapest candidate routes between two settlements over the frozen geometry:
+ * the shortest path plus single-edge-detour alternates (each avoids one edge of the
+ * primary, yielding a genuinely different — usually longer — road), deduped and
+ * ranked by (cost asc, codepoint path). A pure function of the frozen digest,
+ * MEMOIZED per (digest, pair) so it is derived once and re-scored (never re-solved)
+ * per tick. Empty when the pair is unreachable / unmapped.
+ * @param {SpatialDigest} digest @param {string|number} fromId @param {string|number} toId
+ * @param {number} [k]
+ * @returns {Array<{ path: string[], cost: number }>}
+ */
+export function candidateRoutes(digest, fromId, toId, k = K_CANDIDATES) {
+  const from = String(fromId);
+  const to = String(toId);
+  const kk = Number.isInteger(k) && k > 0 ? k : K_CANDIDATES;
+  if (!digest || typeof digest !== 'object') return from === to ? [{ path: [from], cost: 0 }] : [];
+  let byPair = CANDIDATE_MEMO.get(/** @type {object} */ (digest));
+  if (!byPair) { byPair = new Map(); CANDIDATE_MEMO.set(/** @type {object} */ (digest), byPair); }
+  const cacheKey = `${from}|${to}|${kk}`;
+  const cached = byPair.get(cacheKey);
+  if (cached) return cached;
+
+  /** @type {Array<{ path: string[], cost: number }>} */
+  let routes = [];
+  if (from === to) {
+    routes = [{ path: [from], cost: 0 }];
+  } else {
+    const adj = gateAdjacency(digest);
+    const primary = shortestPath(adj, from, to, new Set());
+    if (primary) {
+      routes.push(primary);
+      const seen = new Set([routeSig(primary)]);
+      // Remove each edge of the primary in turn → the cheapest detour around it.
+      for (let i = 0; i + 1 < primary.path.length; i++) {
+        const a = primary.path[i];
+        const b = primary.path[i + 1];
+        const edgeKey = a < b ? `${a}|${b}` : `${b}|${a}`;
+        const alt = shortestPath(adj, from, to, new Set([edgeKey]));
+        if (alt && !seen.has(routeSig(alt))) { routes.push(alt); seen.add(routeSig(alt)); }
+      }
+      routes.sort((x, y) => (x.cost - y.cost) || (routeSig(x) < routeSig(y) ? -1 : routeSig(x) > routeSig(y) ? 1 : 0));
+      routes = routes.slice(0, kk);
+    }
+  }
+  byPair.set(cacheKey, routes);
+  return routes;
 }
