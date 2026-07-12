@@ -40,6 +40,23 @@ import './steps/index.js';
  * @returns {Object} Complete settlement data object (same shape as old generateSettlement)
  */
 export function generateSettlementPipeline(config = {}, importedNeighbour = null, options = {}) {
+  // Fail CLOSED on the options-in-the-neighbour-slot misuse: a caller that
+  // writes generateSettlementPipeline(config, { seed, customContent }) has put
+  // its options bag in the importedNeighbour parameter. The seed is then
+  // silently discarded and generation falls through to generateSeed() —
+  // non-reproducible output from a call site that believes it is seeded (the
+  // exact failure mode rngContext.js fails closed against). A real imported
+  // neighbour is a generated settlement: it carries `_seed`, never `seed` or
+  // `customContent`.
+  if (importedNeighbour && typeof importedNeighbour === 'object'
+      && ('seed' in importedNeighbour || 'customContent' in importedNeighbour)) {
+    throw new Error(
+      '[generateSettlementPipeline] the second argument is importedNeighbour, '
+      + 'but it looks like an options bag (it has `seed`/`customContent`). '
+      + 'Pass options third: generateSettlementPipeline(config, null, { seed, ... }) '
+      + '— otherwise the seed is silently ignored and the run is not reproducible.',
+    );
+  }
   const seed = options.seed || config._seed || generateSeed();
   const rng = createPRNG(seed);
 
