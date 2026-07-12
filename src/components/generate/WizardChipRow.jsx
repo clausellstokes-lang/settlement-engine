@@ -10,8 +10,9 @@
 
 import { X } from 'lucide-react';
 import { swatch, BORDER, CARD_HDR, SP, FS } from '../theme.js';
-import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import Segmented from '../primitives/Segmented.jsx';
+import { MODE_OPTIONS } from './ChangeModeBar.jsx';
 
 export function WizardChipRow({
   wizardMode,
@@ -27,15 +28,19 @@ export function WizardChipRow({
       padding: `${SP.xs}px ${SP.sm}px`,
       flexWrap: 'wrap', fontSize: FS.xs,
     }}>
-      {wizardMode === 'advanced' && (
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => setWizardMode('basic')}
-        >
-          Switch to Basic →
-        </Button>
-      )}
+      {/* Two-way Basic⇄Advanced switch (was a one-way "Switch to Basic →"
+          button). Same options as ChangeModeBar so the two chrome variants
+          read as one control. Same-mode taps are ignored so re-tapping the
+          active side can't reset the wizard step. */}
+      <Segmented
+        options={MODE_OPTIONS}
+        value={wizardMode === 'advanced' ? 'advanced' : 'basic'}
+        onChange={(id) => {
+          if (id !== (wizardMode === 'advanced' ? 'advanced' : 'basic')) setWizardMode(id);
+        }}
+        size="sm"
+        ariaLabel="Generation mode"
+      />
       {loadedFromSave && (
         <span style={{
           padding: '3px 9px', fontSize: FS.xxs, fontWeight: 700,

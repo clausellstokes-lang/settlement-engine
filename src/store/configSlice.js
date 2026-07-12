@@ -47,6 +47,11 @@ export const createConfigSlice = (set, get) => ({
   svcPanelOpen:     false,
   showAdvanced:     false,
   randomSliderMode: true,
+  // Character card: the GM explicitly clicked the Custom chip. Breaks the
+  // tie when the live slider values exactly match a preset (the default 50s
+  // equal `balanced`), so the Custom chip is reachable. Session-only UI
+  // intent — deliberately NOT persisted (not in partialize).
+  customSlidersExplicit: false,
 
   // Loaded-from-save indicator
   loadedFromSave: null,            // { name, tier } or null
@@ -90,6 +95,9 @@ export const createConfigSlice = (set, get) => ({
 
   setRandomSliderMode: (val) =>
     set(state => { state.randomSliderMode = val; }),
+
+  setCustomSlidersExplicit: (val) =>
+    set(state => { state.customSlidersExplicit = val; }),
 
   setLoadedFromSave: (val) =>
     set(state => { state.loadedFromSave = val; }),

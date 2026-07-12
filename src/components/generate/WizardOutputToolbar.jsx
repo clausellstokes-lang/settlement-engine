@@ -1,34 +1,49 @@
 /**
  * WizardOutputToolbar.jsx — sticky back-navigation toolbar.
  *
- * Extracted byte-for-byte from GenerateWizard.jsx. The sticky toolbar
- * above the generated dossier: Back-to-config button, settlement name +
- * tier/pop summary, and a New button. Presentational — every value and
- * handler arrives via props; state and handlers stay in the parent.
+ * Extracted byte-for-byte from GenerateWizard.jsx, then grown a right-hand
+ * utility cluster: the sticky toolbar above the generated dossier carries
+ * Back, the settlement name + tier/pop summary, and the quiet utilities —
+ * "How this was simulated" (SimulationDrawer trigger), Regenerate, and New.
+ * Presentational — every value and handler arrives via props; state and
+ * handlers stay in the parent.
+ *
+ * SimulationDrawer is lazy so the drawer (and its PipelineRail import graph)
+ * stays off this toolbar's synchronous path — the wizard chunk must not
+ * statically re-absorb the dossier drawer.
  */
 
-import { ArrowLeft, Zap } from 'lucide-react';
+import { lazy, Suspense } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
+
+const SimulationDrawer = lazy(() => import('../dossier/SimulationDrawer.jsx'));
 
 export function WizardOutputToolbar({
   settlement,
   isMobile,
   handleBack,
+  handleGenerate,
   handleNewSettlement,
 }) {
   return (
     <div style={{
-      display: 'flex', alignItems: 'center', gap: SP.md,
+      display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap',
       padding: `${SP.md}px ${SP.lg}px`,
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
       borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
       position: 'sticky', top: isMobile ? 0 : 52, zIndex: 40,
     }}>
+      {/* Back is a subordinate nav/reset that discards the just-earned draft —
+          it must not out-shout the dossier or Save. Demoted to the same
+          secondary outline as the utility cluster so Save (below) stays the
+          single primary of the post-generate region; the ArrowLeft icon keeps
+          the affordance. */}
       <Button
-        variant="gold"
+        variant="secondary"
         size="md"
         icon={<ArrowLeft size={14} />}
         onClick={handleBack}
@@ -49,20 +64,46 @@ export function WizardOutputToolbar({
         </div>
       </div>
 
-      {/* Save UX consolidation (code-review fix): there was a
-          second, smaller save button here that called
-          savesService.save directly with no error toast, no
-          "saved" feedback, and no canSave server-side gate.
-          Removed — the SaveToLibraryButton lower in the page
-          is the single canonical save action. Two save buttons
-          pointing at the same outcome was confusing and meant
-          users frequently clicked the worse one. */}
-      <div style={{ display: 'flex', gap: SP.xs }}>
+      {/* Utility cluster — How this was simulated, Regenerate, New, clustered
+          to the right of the identity. (A second inline save button used to
+          live here; it was removed in favour of the single canonical
+          SaveToLibraryButton below the dossier, since two saves pointing at
+          the same outcome confused users.) Save stays the one primary;
+          everything here is a quiet secondary. On desktop it sits to the right
+          of the name; on mobile, where the name takes its own wrapped row, the
+          cluster left-aligns and may grow full-width so the three controls
+          read as a calm row under the name rather than crowding the right
+          edge. */}
+      <div style={{
+        display: 'flex', gap: SP.xs, flexWrap: 'wrap',
+        justifyContent: isMobile ? 'flex-start' : 'flex-end',
+        ...(isMobile ? { flex: '1 1 100%' } : null),
+      }}>
+        {/* "How this was simulated" — the metadata drawer trigger, hoisted
+            from the dossier action band so the utility controls cluster
+            together. Lazy + null fallback: the trigger simply pops in. */}
+        <Suspense fallback={null}>
+          <SimulationDrawer variant="toolbar" />
+        </Suspense>
+        {/* Regenerate — re-rolls a fresh draft from the same config (the
+            current draft is discarded). A quiet secondary; Save below stays
+            the primary. */}
         <Button
-          variant="primary"
+          variant="secondary"
           size="md"
-          icon={<Zap size={14} />}
+          onClick={handleGenerate}
+          aria-label="Regenerate draft"
+          title="Roll a fresh draft from the same configuration. The current draft is discarded."
+        >
+          <span aria-hidden="true">↻ </span>Regenerate draft
+        </Button>
+        {/* "New" restarts from the Create landing with a clean slate — a
+            quiet outline. Save (below the dossier) is the one primary. */}
+        <Button
+          variant="secondary"
+          size="md"
           onClick={handleNewSettlement}
+          title="Start a fresh draft from the Create landing. The current draft is discarded."
         >
           New
         </Button>

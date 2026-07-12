@@ -9,10 +9,22 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
+
+// Below-hero proof cards lazy-load; reserve their space with a height-matched
+// skeleton so the acquisition surface reads as "loading", not a blank gap that
+// pops in and shifts layout on cold connections (P9: skeletons over null).
+function ProofSkeleton({ height }) {
+  return (
+    <div aria-hidden="true" style={{
+      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      opacity: 0.6,
+    }} />
+  );
+}
 
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
@@ -20,11 +32,11 @@ import Button from '../primitives/Button.jsx';
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 
-// experience-product-fit-3 — the anon "watch a region wake up" living-world teaser.
-// Built, copy-registered, and domain-tested but never mounted. Rendered below the
-// sample dossier for anon visitors so the /create audience SEES the premium
-// simulation in motion (deterministic pre-baked frames through the real
-// projections). Self-gates on anon + no settlement; a lazy chunk ⇒ zero first-paint.
+// "Watch a region wake up" read-only replay. Self-gates inside on
+// anon + no-settlement (same as the sample dossier), so it renders nothing
+// once the visitor has the real thing. Mounted beside the sample dossier so
+// the teaser ladder reads: proof of the static dossier → proof of the LIVING
+// world.
 const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
 export function WizardEmptyState({
@@ -42,16 +54,19 @@ export function WizardEmptyState({
       {showHomeHero && (
         <>
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          <Suspense fallback={null}>
-            <HomeSampleDossier />
-          </Suspense>
-          {/* experience-product-fit-3: the living-world replay teaser below the
-              sample dossier (anon only, self-gating). The CTA routes to the
-              canonical premium-value surface (PricingPage), mirroring the
-              component's registered copy. */}
-          <Suspense fallback={null}>
-            <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
-          </Suspense>
+          {/* The two anon proof cards sit side by side on wider screens and
+              stack on narrow ones (see .sf-proof-pair), so they stop doubling
+              the landing's vertical length: proof of the static dossier beside
+              proof of the living world. Both self-gate anon-only, so signed-in
+              users see nothing here. */}
+          <div className="sf-proof-pair">
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <HomeSampleDossier />
+            </Suspense>
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
+            </Suspense>
+          </div>
         </>
       )}
       {!showHomeHero && (

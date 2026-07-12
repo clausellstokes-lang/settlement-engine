@@ -17,6 +17,8 @@ vi.mock('../../src/store/index.js', () => {
     institutionToggles: {},
     servicesToggles: {},
     goodsToggles: {},
+    campaigns: [],
+    customContent: {},
   };
   function useStore(selector) { return selector(data); }
   useStore.getState = () => data;
@@ -34,6 +36,8 @@ describe('WizardCloseout — W-2 close-out card', () => {
       institutionToggles: {},
       servicesToggles: {},
       goodsToggles: {},
+      campaigns: [],
+      customContent: {},
     });
   });
   afterEach(() => cleanup());
@@ -56,22 +60,24 @@ describe('WizardCloseout — W-2 close-out card', () => {
     expect(screen.getByText('On')).toBeTruthy();
   });
 
-  it('shows "Balanced" when no slider is emphasized, else the emphasis list', () => {
-    const { rerender } = render(<WizardCloseout />);
-    expect(screen.getByText('Balanced')).toBeTruthy();
-
-    useStore.__set({ config: { priorityEconomy: 80, priorityMagic: 70 } });
-    rerender(<WizardCloseout />);
-    expect(screen.getByText('Economy · Magic')).toBeTruthy();
-  });
-
-  it('summarizes "no constraints" when nothing is forced/excluded', () => {
+  it('leads with "Fully procedural" when config == defaults (the delta is the focal line)', () => {
     render(<WizardCloseout />);
-    expect(screen.getByText('No manual constraints — fully procedural.')).toBeTruthy();
+    // P3: when nothing deviates from a default roll, say so outright as the headline.
+    expect(screen.getByText(/fully procedural/i)).toBeTruthy();
   });
 
-  it('summarizes forced/excluded counts when constraints exist', () => {
+  it('promotes the priority emphasis into the focal delta line', () => {
+    useStore.__set({ config: { priorityEconomy: 80, priorityMagic: 70 } });
+    render(<WizardCloseout />);
+    // Emphasis is now the focal "<x>-led" delta, not a quiet "Priorities:" line.
+    expect(screen.getByText(/Economy · Magic-led/)).toBeTruthy();
+    // …and "Fully procedural" no longer shows, since the config deviated.
+    expect(screen.queryByText(/fully procedural/i)).toBeNull();
+  });
+
+  it('promotes forced/excluded counts into the focal delta line', () => {
     useStore.__set({
+      config: {},
       institutionToggles: {
         'town::market::Bank': { allow: true, require: true, forceExclude: false },
         'town::faith::Temple': { allow: false, require: false, forceExclude: true },
@@ -81,7 +87,8 @@ describe('WizardCloseout — W-2 close-out card', () => {
       },
     });
     render(<WizardCloseout />);
-    // Bank + iron forced; Temple excluded.
-    expect(screen.getByText('2 forced · 1 excluded')).toBeTruthy();
+    // Bank + iron forced; Temple excluded — surfaced as the delta, not buried.
+    expect(screen.getByText(/2 forced · 1 excluded/)).toBeTruthy();
+    expect(screen.queryByText(/fully procedural/i)).toBeNull();
   });
 });
