@@ -1,3 +1,5 @@
+import { SEASONS_TUNING } from './seasons.js';
+
 /** @param {any} value @returns {number} */
 function clamp01(value) {
   const n = Number.isFinite(value) ? value : 0;
@@ -121,6 +123,11 @@ function supplierInFoodCrisis(snapshot, settlementId) {
 export function deriveSettlementPressures(snapshot) {
   const out = [];
   const season = snapshot.worldState.calendar?.season;
+  // SEASONS-A texture terms, flag-gated (rules are kernel-normalized; a raw
+  // fixture's explicit boolean reads the same). OFF ⇒ this function is
+  // byte-identical to legacy — including the pre-existing UNGATED +0.08
+  // winter food bias below, which predates the flag and must stay.
+  const seasonsOn = snapshot.worldState?.simulationRules?.seasonsEnabled === true;
   // Index the confirmed channels once for all per-settlement lookups
   // below instead of re-normalizing the whole graph on each countChannels call.
   const channelIndex = buildConfirmedChannelIndex(snapshot.regionalGraph);
@@ -150,7 +157,19 @@ export function deriveSettlementPressures(snapshot) {
       food += 0.12;
       foodReasons.push('a trade-dependency supplier is in a food crisis');
     }
-    out.push({ ...base, kind: 'food', label: 'Food pressure', score: clamp01(food), reasons: foodReasons });
+    // SEASONS-A texture (score-NEUTRAL — the granary arithmetic already moves
+    // food_security through deficitPct; this only makes the existing entries
+    // say so): a winter town living off thin stores reads as such, and the
+    // note rides the famine-pressure candidate's existing summary template.
+    let seasonNote = null;
+    if (seasonsOn && season === 'winter') {
+      const fsNow = item.settlement?.economicState?.foodSecurity;
+      if (fsNow?.stockpile && (Number(fsNow.storageMonths) || 0) < 1) {
+        foodReasons.push('stores run low in the deep of winter');
+        seasonNote = 'The stores run low in the deep of winter.';
+      }
+    }
+    out.push({ ...base, kind: 'food', label: 'Food pressure', score: clamp01(food), reasons: foodReasons, ...(seasonNote ? { seasonNote } : {}) });
 
     const diseaseReasons = [];
     let disease = pressureFromScore(scores.healing_capacity);
@@ -253,6 +272,13 @@ export function deriveSettlementPressures(snapshot) {
     if (crimeConditions.length) {
       crime += 0.12;
       crimeReasons.push(`active condition: ${crimeConditions.join(', ')}`);
+    }
+    // SEASONS-A: the lean winter raises criminal desperation — a small,
+    // bounded seasonal term on the EXISTING crime-pressure input (constant
+    // documented in seasons.js SEASONS_TUNING). Flag-off ⇒ absent.
+    if (seasonsOn && season === 'winter') {
+      crime += SEASONS_TUNING.leanWinterCrimePressure;
+      crimeReasons.push('the lean winter breeds desperation');
     }
     out.push({ ...base, kind: 'crime', label: 'Criminal pressure', score: clamp01(crime), reasons: crimeReasons });
   }

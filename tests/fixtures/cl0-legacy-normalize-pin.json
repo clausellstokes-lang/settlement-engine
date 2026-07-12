@@ -28,6 +28,7 @@
     "warForageEnabled": false,
     "warLevyEnabled": false,
     "warSupplyQualityEnabled": false,
+    "seasonsEnabled": false,
     "migrationMode": "roll"
   },
   "perFlag": {
@@ -61,6 +62,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -92,6 +94,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -125,6 +128,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -156,6 +160,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -189,6 +194,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -220,6 +226,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -253,6 +260,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -284,6 +292,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -317,6 +326,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -348,6 +358,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -381,6 +392,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -412,6 +424,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -445,6 +458,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -476,6 +490,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -509,6 +524,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -540,6 +556,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -573,6 +590,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -604,6 +622,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -637,6 +656,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -668,6 +688,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -701,6 +722,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -732,6 +754,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -765,6 +788,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -796,6 +820,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -829,6 +854,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -860,6 +886,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -893,6 +920,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -924,6 +952,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -957,6 +986,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -988,6 +1018,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1021,6 +1052,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1052,6 +1084,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1085,6 +1118,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1116,6 +1150,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1149,6 +1184,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1180,6 +1216,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1213,6 +1250,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1244,6 +1282,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1277,6 +1316,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1308,6 +1348,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1341,6 +1382,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1372,6 +1414,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1405,6 +1448,7 @@
         "warForageEnabled": true,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1436,6 +1480,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1469,6 +1514,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": true,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1500,6 +1546,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1533,6 +1580,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": true,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "false": {
@@ -1564,6 +1612,73 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
+        "migrationMode": "roll"
+      }
+    },
+    "seasonsEnabled": {
+      "true": {
+        "schemaVersion": 1,
+        "presetId": "living_realm",
+        "propagationMode": "first_order",
+        "intensity": "conservative",
+        "stressorsEnabled": true,
+        "emergentEventsEnabled": true,
+        "relationshipDynamicsEnabled": true,
+        "npcAgencyEnabled": true,
+        "factionCompetitionEnabled": true,
+        "populationDynamicsEnabled": true,
+        "migrationFlowsEnabled": true,
+        "tradeFlowsEnabled": true,
+        "resourceDriftEnabled": true,
+        "tierDriftEnabled": true,
+        "institutionLifecycleEnabled": true,
+        "majorChangesRequireProposal": true,
+        "warLayerEnabled": false,
+        "settlementStrategyEnabled": false,
+        "faithSpreadEnabled": false,
+        "religionDynamicsEnabled": false,
+        "defenderAttritionEnabled": false,
+        "warEconomyDrainEnabled": false,
+        "defenderResolveEnabled": false,
+        "warDispositionEnabled": false,
+        "allyDefenseEnabled": false,
+        "warForageEnabled": false,
+        "warLevyEnabled": false,
+        "warSupplyQualityEnabled": false,
+        "seasonsEnabled": true,
+        "migrationMode": "roll"
+      },
+      "false": {
+        "schemaVersion": 1,
+        "presetId": "realistic_regional",
+        "propagationMode": "first_order",
+        "intensity": "conservative",
+        "stressorsEnabled": true,
+        "emergentEventsEnabled": true,
+        "relationshipDynamicsEnabled": true,
+        "npcAgencyEnabled": true,
+        "factionCompetitionEnabled": true,
+        "populationDynamicsEnabled": true,
+        "migrationFlowsEnabled": true,
+        "tradeFlowsEnabled": true,
+        "resourceDriftEnabled": true,
+        "tierDriftEnabled": true,
+        "institutionLifecycleEnabled": true,
+        "majorChangesRequireProposal": true,
+        "warLayerEnabled": false,
+        "settlementStrategyEnabled": false,
+        "faithSpreadEnabled": false,
+        "religionDynamicsEnabled": false,
+        "defenderAttritionEnabled": false,
+        "warEconomyDrainEnabled": false,
+        "defenderResolveEnabled": false,
+        "warDispositionEnabled": false,
+        "allyDefenseEnabled": false,
+        "warForageEnabled": false,
+        "warLevyEnabled": false,
+        "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1597,6 +1712,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "local": {
@@ -1628,6 +1744,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "first_order": {
@@ -1659,6 +1776,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "full": {
@@ -1690,6 +1808,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1723,6 +1842,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "normal": {
@@ -1754,6 +1874,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "dramatic": {
@@ -1785,6 +1906,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       }
     },
@@ -1818,6 +1940,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "roll"
       },
       "void": {
@@ -1849,6 +1972,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "void"
       },
       "distributed": {
@@ -1880,6 +2004,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "distributed"
       },
       "concentrated": {
@@ -1911,6 +2036,7 @@
         "warForageEnabled": false,
         "warLevyEnabled": false,
         "warSupplyQualityEnabled": false,
+        "seasonsEnabled": false,
         "migrationMode": "concentrated"
       }
     }

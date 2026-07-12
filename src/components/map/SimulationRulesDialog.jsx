@@ -259,6 +259,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
       migration: 'migrationFlowsEnabled',
       war: 'warLayerEnabled',
       strategy: 'settlementStrategyEnabled',
+      seasons: 'seasonsEnabled',
     };
     setField(flagByDomain[domain], enabled);
   };

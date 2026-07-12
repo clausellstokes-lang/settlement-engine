@@ -30,6 +30,12 @@
  *
  *   node scripts/audit/whole-world-soak.mjs [--years 30] [--seed w0-soak]
  *                                           [--divergence-years 5] [--json]
+ *                                           [--seasons on|off]
+ *
+ * SEASONS-A: full_simulation now lights seasonsEnabled, so the default soak
+ * runs the food year. `--seasons off` restores the pre-seasons variant for
+ * A/B comparison; `--seasons on` is explicit. (One soak, flag-varied — never
+ * a second soak script.)
  */
 
 import { createHash } from 'node:crypto';
@@ -46,6 +52,7 @@ const YEARS = Math.max(1, Number(arg('years', 30)));
 const SEED = String(arg('seed', 'w0-soak'));
 const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-years', 5))));
 const AS_JSON = process.argv.includes('--json');
+const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
 const NOW = '2026-07-12T00:00:00.000Z'; // pinned — one instant for the whole soak
 
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
@@ -111,7 +118,10 @@ function buildFixture(seed) {
       // FULL SIMULATION — the §11 ceiling preset: war layer + strategy + faith
       // spread + (W0-A3) the eight war-depth sub-flags. The soak exercises the
       // deepest composed stack the control layer can turn on.
-      simulationRules: { ...SIMULATION_RULE_PRESETS.full_simulation.rules },
+      simulationRules: {
+        ...SIMULATION_RULE_PRESETS.full_simulation.rules,
+        ...(SEASONS === 'on' ? { seasonsEnabled: true } : SEASONS === 'off' ? { seasonsEnabled: false } : {}),
+      },
       stressors: [],
     },
   };
@@ -211,7 +221,7 @@ const check = (ok, name, detail) => {
   if (!ok) failures.push(name);
 };
 
-console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", full_simulation preset, now pinned ${NOW}\n`);
+console.log(`# whole-world soak — ${YEARS} years × ${REGION.length} settlements, seed "${SEED}", full_simulation preset (seasons ${SEASONS}), now pinned ${NOW}\n`);
 
 console.log('## run A (primary)');
 const runA = await runYears(SEED, YEARS, 'A');

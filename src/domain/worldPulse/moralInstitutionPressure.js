@@ -32,6 +32,7 @@ import { stablePart } from './stablePart.js';
 // never imports (proven byte-identical by generatorGoldenMaster). Its `lean` is the
 // engine coding the founding fit reads AND the value stamped onto the founded instance.
 import { FOUNDING_INSTITUTIONS } from './foundingCatalog.js';
+import { SEASONS_TUNING } from './seasons.js';
 // W-C3 item 2a: the founding weights read a settlement's EFFECTIVE tolerance (patron
 // conviction + trade-normalized drift), not the raw patron plane — "trade normalizes what
 // you tolerate." Absent ledger ⇒ effective === baseline conviction ⇒ byte-identical.
@@ -86,7 +87,7 @@ const pos = (x) => (x > 0 ? x : 0);
 /** @typedef {{ name?: string, id?: string|number, category?: string, priorityCategory?: string, tags?: string[], status?: unknown, required?: boolean, requiredForTier?: boolean, _worldPulseInactive?: boolean }} InstLike */
 /** @typedef {{ institutions?: InstLike[], config?: { primaryDeitySnapshot?: DeitySnapshot, faithProfile?: { martial?: { footing?: number } } } }} SettlementLike */
 /** @typedef {{ acc?: Record<string, number>, lastCandidateTick?: (number|null) }} ViabilityMeta */
-/** @typedef {{ tick?: number, simulationRules?: object, institutionTolerance?: Record<string, { cruelty: number, disorder: number }>, settlementTickStates?: Record<string, { moralViability?: ViabilityMeta, moralFounding?: ViabilityMeta }> }} PressureWorldState */
+/** @typedef {{ tick?: number, simulationRules?: object, calendar?: { season?: string }, institutionTolerance?: Record<string, { cruelty: number, disorder: number }>, settlementTickStates?: Record<string, { moralViability?: ViabilityMeta, moralFounding?: ViabilityMeta }> }} PressureWorldState */
 /** @typedef {{ tick?: number, simulationRules?: object, faithReach?: (Map<string, Array<{ patron: DeitySnapshot, strength: number }>>|null) }} PressureContext */
 /** @typedef {{ settlements?: Array<{ id?: string|number, name?: string, settlement?: SettlementLike }> }} PressureSnapshot */
 /** @typedef {Record<string, unknown>} CandidateLike */
@@ -482,7 +483,15 @@ export function evaluateMoralInstitutionFounding(worldState, snapshot, context =
       const patronName = String(patron.name || 'the patron');
       const cause = foundingCause(entry, patron);
       const severity = clamp01(0.34 + best.accum * 0.3);
-      const probability = clamp01(MORAL_PRESSURE_TUNING.FOUNDING_EMIT_P + best.accum * 0.3);
+      // SEASONS-A: founding favors the building season — a MULTIPLIER on the
+      // emission probability (spring/summer up, winter down; constants in
+      // seasons.js SEASONS_TUNING), never a gate: the integrator still accrues
+      // year-round and a winter crossing still arms a candidate. Flag-off ⇒ ×1.
+      const seasonWeight = rules.seasonsEnabled === true
+        ? (/** @type {Record<string, number>} */ (SEASONS_TUNING.foundingSeasonWeight)[
+          String(worldState?.calendar?.season)] ?? 1)
+        : 1;
+      const probability = clamp01((MORAL_PRESSURE_TUNING.FOUNDING_EMIT_P + best.accum * 0.3) * seasonWeight);
       candidates.push({
         id: `candidate.institution.found.${stablePart(cid)}.${best.key}.${tick}`,
         type: 'institution',

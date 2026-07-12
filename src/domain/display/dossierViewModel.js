@@ -275,6 +275,75 @@ export function deriveBlockadeRelief(settlement) {
   return { available: true, blockaded, bypass, display };
 }
 
+// ── SEASONS-A: the seasonal granary read ─────────────────────────────────────
+// Self-contained on the stockpile bookkeeping advanceFoodStockpile stamps
+// UNDER seasonsEnabled (season/seasonWeek/seasonalSwingPct/seasonalEvent —
+// fieldManifest rows). A flag-off or never-pulsed settlement carries no season
+// field ⇒ available:false and the surface says nothing (dormancy-clean).
+
+/** @type {Readonly<Record<string, string>>} */
+const SEASON_TITLE = Object.freeze({ spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' });
+/** @type {Readonly<Record<string, string>>} */
+const SEASONAL_EVENT_NOTE = Object.freeze({
+  hard_winter: 'A hard winter grips the year.',
+  drought: 'Drought struck the harvest.',
+  bountiful: 'A bountiful year.',
+});
+const WEEKS_PER_SEASON = 13;
+const SEASON_ORDER = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
+
+/** "early/mid/late <season>" for a 1-based week-of-year, DM-speakable.
+ *  @param {number} weekOfYear */
+function seasonPhaseLabel(weekOfYear) {
+  const w0 = ((Math.floor(weekOfYear) - 1) % 52 + 52) % 52;
+  const season = SEASON_ORDER[Math.floor(w0 / WEEKS_PER_SEASON)] || 'spring';
+  const wos = (w0 % WEEKS_PER_SEASON) + 1;
+  const phase = wos <= 4 ? 'early' : wos <= 9 ? 'mid' : 'late';
+  return `${phase} ${season}`;
+}
+
+/**
+ * The dossier's seasonal food read (design §4i item 6): current season, the
+ * granary level against its derived capacity as a band, and — while in
+ * drawdown — a derived "stores will last until ~X" projection from the
+ * CURRENT release rate (reliefPct is % of need released this tick; a week
+ * costs (reliefPct/100)×(3/13) months under the 4-4-5 calendar). Derived,
+ * fiction-level, never a mechanism name.
+ * @param {DossierSettlementView | null | undefined} settlement
+ */
+export function deriveGranaryOutlook(settlement) {
+  const fs = /** @type {{ storageMonths?: unknown, stockpile?: { capacityMonths?: unknown, reliefPct?: unknown, season?: string|null, seasonWeek?: unknown, seasonalEvent?: string|null } | null } | null} */ (
+    settlement?.economicState?.foodSecurity || null
+  );
+  const sp = fs?.stockpile || null;
+  if (!sp || !sp.season) {
+    return { available: false, season: null, band: null, display: null, lastsUntil: null, yearEvent: null };
+  }
+  const level = cleanNum(fs?.storageMonths, 0) ?? 0;
+  const cap = cleanNum(sp.capacityMonths, 0) ?? 0;
+  const frac = cap > 0 ? level / cap : 0;
+  const band = frac >= 0.75 ? 'well stocked' : frac >= 0.4 ? 'stocked' : frac >= 0.15 ? 'thin' : 'nearly empty';
+  const seasonTitle = SEASON_TITLE[/** @type {string} */ (sp.season)] || String(sp.season);
+  // Drawdown projection: only while stores are actually being released.
+  const reliefPct = cleanNum(sp.reliefPct, 0) ?? 0;
+  const drawPerWeek = (reliefPct / 100) * (3 / 13);
+  let lastsUntil = null;
+  if (drawPerWeek > 0 && level > 0) {
+    const weeksLeft = Math.round(level / drawPerWeek);
+    lastsUntil = weeksLeft > 52 ? 'beyond the year' : `~${seasonPhaseLabel((cleanNum(sp.seasonWeek, 1) ?? 1) + weeksLeft)}`;
+  } else if (drawPerWeek > 0) {
+    lastsUntil = 'already spent';
+  }
+  const yearEvent = SEASONAL_EVENT_NOTE[/** @type {string} */ (sp.seasonalEvent)] || null;
+  const display = [
+    `${seasonTitle} — the granary is ${band} (${level.toFixed(1)} of ${cap.toFixed(1)} months)`,
+    lastsUntil && lastsUntil !== 'already spent' ? `stores will last until ${lastsUntil}` : null,
+    lastsUntil === 'already spent' ? 'the granary is spent' : null,
+    yearEvent,
+  ].filter(Boolean).join('. ');
+  return { available: true, season: sp.season, band, level, capacity: cap, lastsUntil, yearEvent, display };
+}
+
 /** @type {Readonly<Record<string, string>>} */
 const MAGIC_ROLE_LABEL = Object.freeze({
   economic:       'Economic',

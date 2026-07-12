@@ -52,8 +52,9 @@ describe('simulation rules preset — stability under future-flag churn', () => 
   });
 
   // CL-0 byte-stability: keyless default rules still infer the LEGACY default
-  // preset (realistic_regional), not living_realm — the two are structurally
-  // the same world, and catalog order is what keeps old saves byte-identical.
+  // preset (realistic_regional), not living_realm — the two were structurally
+  // the same world until SEASONS-A lit seasonsEnabled on living_realm (catalog
+  // order remains the guard either way, and keeps old saves byte-identical).
   test('keyless default rules keep inferring realistic_regional', () => {
     const keyless = { ...SIMULATION_RULE_PRESETS.realistic_regional.rules };
     delete keyless.presetId;

@@ -200,6 +200,11 @@ export const SIMULATION_DOMAINS = Object.freeze({
   religion: Object.freeze({ flag: 'faithSpreadEnabled', dmDriven: 'live' }),
   war: Object.freeze({ flag: 'warLayerEnabled', dmDriven: 'deferred' }),
   strategy: Object.freeze({ flag: 'settlementStrategyEnabled', dmDriven: 'live' }),
+  // SEASONS-A: the food year. dmDriven 'deferred' here means the row NEVER
+  // presents a 'dm' middle state — not because a split is pending (war's
+  // reason) but because there is nothing to approve: the year turns by
+  // arithmetic, no candidates, no proposals. Off/On only.
+  seasons: Object.freeze({ flag: 'seasonsEnabled', dmDriven: 'deferred' }),
 });
 
 /**
@@ -275,13 +280,16 @@ const CHANGE_PHRASES = {
   migrationFlowsEnabled: value => (value
     ? 'people now move on their own'
     : 'migrations now wait for your word'),
+  seasonsEnabled: value => (value
+    ? 'the year now turns — harvests fill the granaries and winters draw them down'
+    : 'the seasons now hold still'),
 };
 
 // The headline leads with the most world-defining change present.
 const PHRASE_PRIORITY = Object.freeze([
   'presetId', 'worldProgression', 'politicalAutonomy', 'warLayerEnabled',
   'faithSpreadEnabled', 'settlementStrategyEnabled', 'relationshipDynamicsEnabled',
-  'tradeFlowsEnabled', 'migrationFlowsEnabled', 'majorChangesRequireProposal',
+  'tradeFlowsEnabled', 'migrationFlowsEnabled', 'seasonsEnabled', 'majorChangesRequireProposal',
 ]);
 
 /** @param {string} key */

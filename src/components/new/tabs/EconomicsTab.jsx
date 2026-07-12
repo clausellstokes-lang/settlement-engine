@@ -8,7 +8,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
-import { deriveFoodBalance } from '../../../domain/display/dossierViewModel.js';
+import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
 import Button from '../../primitives/Button.jsx';
 
 // ── Status palette for chain cards ────────────────────────────────────────
@@ -216,6 +216,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
   const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
 
+  // SEASONS-A: the seasonal granary read (available only on campaigns whose
+  // pulse runs with seasons on — the stockpile record carries the season).
+  const granary = deriveGranaryOutlook(s);
+  const granaryColor = granary.available
+    ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28')
+    : '#a0762a';
+
   return (
     <div style={{...sans}}>
       <TabIntro tabKey="economics" />
@@ -247,6 +254,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         {[
           {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor},
           {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor},
+          ...(granary.available?[{label:'Season',value:granary.display.split(' — ')[0],sub:granary.display.split(' — ').slice(1).join(' — '),color:granaryColor}]:[]),
         ].map(({label,value,sub,color})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,borderRadius:6,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:FS.xxs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>{label}</div>

@@ -137,6 +137,11 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // floored so a chainless settlement still fields a degraded force. Does NOT feed readiness
   // (training vs kit). Nested under warLayerEnabled. Preset-stable.
   warSupplyQualityEnabled: false,
+  // SEASONS-A: the aspatial food year (season clock, renewable cycling, granary
+  // rhythm, seeded inter-annual variance, seasonal texture). Opt-in, DEFAULT
+  // FALSE ⇒ byte-identical (no fields, no draws, no reads on the off path).
+  // Lit by living_realm + full_simulation. Preset-stable (inherited false).
+  seasonsEnabled: false,
   migrationMode: 'roll',
   // ── Simulation profile (CL-0) — the §11 control axes at today's build ──────
   // These defaults ARE today's engine: DM-advanced progression (every advance is
@@ -190,7 +195,7 @@ const OPEN = Object.freeze({
 // them, but the CL-0 dialog grid surfaces only the four §11 presets) stays
 // FIRST — a keyless legacy save whose rules match the defaults must keep
 // inferring 'realistic_regional' (byte-identical presetId), never
-// 'living_realm' (structurally the same world + an explicit autonomy). The
+// 'living_realm' (identical until SEASONS-A lit seasonsEnabled there). The
 // four §11 presets follow; their forward axes (spatial / travel / info /
 // progression) ride at their LOCKED values from the default spread, so preset
 // identity survives when those axes light up in later waves. dramatic_campaign
@@ -231,6 +236,7 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   }),
   living_realm: preset('living_realm', 'Living Realm', {
     politicalAutonomy: 'routine',
+    seasonsEnabled: true,
   }),
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
@@ -250,6 +256,7 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warForageEnabled: true,
     warLevyEnabled: true,
     warDispositionEnabled: true,
+    seasonsEnabled: true,
   }),
 });
 

@@ -99,12 +99,14 @@ const DOMAIN_ROWS = [
   ['religion', 'Faith spread', 'Creeds cross borders along trade, alliance, and war ties.'],
   ['war', 'War', 'Armies march, sieges form, conquests change rulers.'],
   ['strategy', 'Ambition', 'Settlements choose to defend, deploy, or sue for peace.'],
+  ['seasons', 'Seasons', 'The turning year: harvests fill the granaries, winter draws them down.'],
 ];
 
 const DOMAIN_STATE_LABELS = { off: 'Off', dm: 'By your leave', auto: 'On its own' };
 
 const DRIFT_REASON = 'Needs Diplomacy: war is a relationship dynamic, so a frozen web cannot raise fronts.';
 const WAR_DM_DEFERRED = 'War by-your-leave arrives with the war-layer rework. Off still lets you narrate wars yourself; the engine just never starts one.';
+const SEASONS_DM = 'The year turns of its own accord — there is no leave to ask of winter.';
 const DM_STATE_GLOBAL = 'Approval is realm-wide today: set “Who decides” to “Your word only” or “Proposes to you”. Per-domain approval arrives in a later chapter.';
 
 // One selectable world-assumption chip inside an axis card or domain row.
@@ -262,7 +264,7 @@ export function DomainRows({ draft, advanceBlocked, onSetDomain }) {
                   label={DOMAIN_STATE_LABELS.dm}
                   selected={state === 'dm'}
                   disabled
-                  reason={warRow ? WAR_DM_DEFERRED : DM_STATE_GLOBAL}
+                  reason={warRow ? WAR_DM_DEFERRED : domain === 'seasons' ? SEASONS_DM : DM_STATE_GLOBAL}
                   onSelect={() => {}}
                 />
                 <OptionChip

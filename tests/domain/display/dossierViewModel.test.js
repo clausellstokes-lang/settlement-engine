@@ -6,6 +6,7 @@ import {
   deriveMagicPosture,
   deriveBlockadeRelief,
   deriveDossierViewModel,
+  deriveGranaryOutlook,
 } from '../../../src/domain/display/dossierViewModel.js';
 import { sanitizePublicValue, PRIVATE_KEY_RE } from '../../../src/domain/display/publicSafe.js';
 
@@ -297,6 +298,73 @@ describe('deriveBlockadeRelief (Wave 8 — blockadeBypass gains its reader)', ()
     const b = deriveBlockadeRelief(withStockpile({ blockaded: true, blockadeBypass: 'teleport' }));
     expect(sanitizePublicValue({ blockade: b })).toEqual({ blockade: b });
     for (const key of Object.keys(b)) {
+      expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
+    }
+  });
+});
+
+describe('deriveGranaryOutlook (SEASONS-A — the seasonal food read)', () => {
+  const seasonal = (patch = {}, fsPatch = {}) => ({
+    economicState: {
+      foodSecurity: {
+        deficitPct: 5,
+        storageMonths: 1.3,
+        ...fsPatch,
+        stockpile: {
+          capacityMonths: 5,
+          reliefPct: 0,
+          season: 'winter',
+          seasonWeek: 44,
+          seasonalSwingPct: -19.4,
+          seasonalEvent: null,
+          ...patch,
+        },
+      },
+    },
+  });
+
+  it('is unavailable without a seasonal record (flag-off / never-pulsed ⇒ silent)', () => {
+    expect(deriveGranaryOutlook(null).available).toBe(false);
+    expect(deriveGranaryOutlook({ economicState: { foodSecurity: {} } }).available).toBe(false);
+    // a flag-off pulse record (no season field) stays unavailable
+    expect(deriveGranaryOutlook({
+      economicState: { foodSecurity: { stockpile: { capacityMonths: 5, blockaded: false } } },
+    }).available).toBe(false);
+  });
+
+  it('reads the season + a level-vs-capacity band, DM-speakable', () => {
+    const o = deriveGranaryOutlook(seasonal());
+    expect(o.available).toBe(true);
+    expect(o.season).toBe('winter');
+    expect(o.band).toBe('thin'); // 1.3 of 5 months
+    expect(o.display).toContain('Winter');
+    expect(o.display).toContain('thin');
+  });
+
+  it('projects "stores will last until ~X" from the CURRENT drawdown rate', () => {
+    // reliefPct 20 ⇒ a week costs (20/100)×(3/13) ≈ 0.046 months ⇒ ~28 weeks
+    // from week 44 ⇒ week ~72 ⇒ ~week 20 of next year ⇒ summer.
+    const o = deriveGranaryOutlook(seasonal({ reliefPct: 20 }));
+    expect(o.lastsUntil).toMatch(/^~(early|mid|late) (spring|summer)$/);
+    // a granary already at zero while releasing reads as spent
+    const spent = deriveGranaryOutlook(seasonal({ reliefPct: 20 }, { storageMonths: 0 }));
+    expect(spent.lastsUntil).toBe('already spent');
+    // no drawdown ⇒ no projection
+    expect(deriveGranaryOutlook(seasonal()).lastsUntil).toBe(null);
+  });
+
+  it('names the seeded year character (hard winter / drought / bountiful)', () => {
+    expect(deriveGranaryOutlook(seasonal({ seasonalEvent: 'hard_winter' })).yearEvent)
+      .toBe('A hard winter grips the year.');
+    expect(deriveGranaryOutlook(seasonal({ seasonalEvent: 'drought' })).display)
+      .toContain('Drought struck the harvest.');
+    expect(deriveGranaryOutlook(seasonal()).yearEvent).toBe(null);
+  });
+
+  it('every field survives the public-safe projection (denylist check)', () => {
+    const o = deriveGranaryOutlook(seasonal({ seasonalEvent: 'bountiful' }));
+    expect(sanitizePublicValue({ granary: o })).toEqual({ granary: o });
+    for (const key of Object.keys(o)) {
       expect(PRIVATE_KEY_RE.test(key), `field name "${key}" trips the publicSafe denylist`).toBe(false);
     }
   });

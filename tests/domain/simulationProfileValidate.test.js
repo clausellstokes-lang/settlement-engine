@@ -8,6 +8,7 @@ import { describe, expect, test } from 'vitest';
 
 import {
   PROFILE_KEYS,
+  SIMULATION_RULE_PRESETS,
   normalizeSimulationRules,
   politicalAutonomyOf,
   worldProgressionOf,
@@ -148,6 +149,19 @@ describe('domainState — the derived tri-state over the boolean storage', () =>
     // War's initiate/resolve split has not landed — its row is Off/Autonomous only.
     expect(domainState(rules, 'war')).toBe('auto');
     expect(SIMULATION_DOMAINS.war.dmDriven).toBe('deferred');
+  });
+
+  test('seasons (SEASONS-A): off by default, auto when lit, and NEVER dm (nothing to approve)', () => {
+    expect(domainState(normalizeSimulationRules({}), 'seasons')).toBe('off');
+    expect(domainState({ seasonsEnabled: true }, 'seasons')).toBe('auto');
+    const dmRules = normalizeSimulationRules({ politicalAutonomy: 'dm_only', seasonsEnabled: true });
+    expect(domainState(dmRules, 'seasons')).toBe('auto');
+    expect(SIMULATION_DOMAINS.seasons.dmDriven).toBe('deferred');
+    expect(SIMULATION_DOMAINS.seasons.flag).toBe('seasonsEnabled');
+    // the two flag-lit presets carry it; the legacy trio + the quiet presets don't
+    expect(domainState(SIMULATION_RULE_PRESETS.living_realm.rules, 'seasons')).toBe('auto');
+    expect(domainState(SIMULATION_RULE_PRESETS.full_simulation.rules, 'seasons')).toBe('auto');
+    expect(domainState(SIMULATION_RULE_PRESETS.realistic_regional.rules, 'seasons')).toBe('off');
   });
 
   test('the booleans remain the storage: no tri-state key is ever persisted', () => {

@@ -350,6 +350,25 @@ function calendarFromWeeks(elapsedWeeks) {
 }
 
 /**
+ * SEASONS-A: the season clock — a PURE function of the canonical week tick
+ * (worldState.js owns the calendar law; the 13-week quarters ARE the seasons).
+ * Agrees with calendarFromWeeks' season label by construction (same SEASONS
+ * table, same quarter math). weekOfYear/weekOfSeason are 1-based (spring is
+ * weeks 1-13). No state, no rng.
+ * @param {number} weekTick  canonical elapsed weeks (calendar.elapsedWeeks)
+ */
+export function seasonForTick(weekTick) {
+  const weeks = Math.max(0, Math.floor(finite(weekTick, 0)));
+  const weekOfYear = weeks % WEEKS_PER_YEAR;
+  return {
+    season: SEASONS[Math.floor(weekOfYear / WEEKS_PER_SEASON)] || 'spring',
+    weekOfYear: weekOfYear + 1,
+    weekOfSeason: (weekOfYear % WEEKS_PER_SEASON) + 1,
+    year: Math.floor(weeks / WEEKS_PER_YEAR) + 1,
+  };
+}
+
+/**
  * Advance the display calendar by one DM interval. INTEGER WEEKS ARE CANONICAL:
  * the prior week count is read tolerantly (weeksFromCalendar), the interval's
  * week count (INTERVAL_WEEKS) is added, and every label re-derives from the sum

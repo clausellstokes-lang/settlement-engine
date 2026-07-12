@@ -64,7 +64,10 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
     // 'proposal' only under the new dm_only/recommendations autonomy modes.
     applyMode: authorityFor(rules, 'pressure_event', pressure.score >= 0.72 ? 'proposal' : 'auto'),
     headline: `${labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)]} may take hold`,
-    summary: `${pressure.settlementName} shows enough ${pressure.label.toLowerCase()} for a new condition to emerge.`,
+    // SEASONS-A: pressureModel stamps a seasonNote on flag-on winter food
+    // pressures ("stores run low…"); its presence IS the gate — absent
+    // flag-off, so the legacy summary bytes are untouched.
+    summary: `${pressure.settlementName} shows enough ${pressure.label.toLowerCase()} for a new condition to emerge.${pressure.seasonNote ? ` ${pressure.seasonNote}` : ''}`,
     reasons: [
       ...pressure.reasons,
       'Organic settlement drift is conservative: pressure must pass a gate before it can roll.',

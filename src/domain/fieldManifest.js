@@ -271,6 +271,20 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
     consumers: ['src/domain/display/dossierViewModel.js'], // Wave 8: deriveBlockadeRelief
   },
   {
+    // SEASONS-A: the seasonal stockpile bookkeeping (written ONLY under
+    // seasonsEnabled; deriveGranaryOutlook is its display reader).
+    field: 'seasonWeek',
+    path: 'economicState.foodSecurity.stockpile.seasonWeek',
+    producer: 'src/domain/worldPulse/foodStockpile.js',
+    consumers: ['src/domain/display/dossierViewModel.js'],
+  },
+  {
+    field: 'seasonalEvent',
+    path: 'economicState.foodSecurity.stockpile.seasonalEvent',
+    producer: 'src/domain/worldPulse/foodStockpile.js',
+    consumers: ['src/domain/display/dossierViewModel.js'],
+  },
+  {
     // Entity-identity package: generation stamps canonical institution ids
     // alongside labels; joins flip id-first with label-fallback for legacy
     // and DM-authored content. institutionLifecycle.js consumes the field

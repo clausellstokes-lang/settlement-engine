@@ -246,14 +246,31 @@ export function famineFor(worldStateStressors = [], settlementId) {
  * written back through the same gate so the 'Disasters & Famine' row moves
  * with the granary instead of freezing at the generation value.
  *
+ * SEASONS-A (`seasonal` option, kernel-threaded ONLY when seasonsEnabled): the
+ * food year enters HERE, at the consumption point of the production read. The
+ * signed seasonal swing (seasons.js — % of need; harvest positive, winter
+ * negative, biome-amplituded, variance-scaled) lands on the SAME effective
+ * ledger the blockade/famine cuts use:
+ *   • a winter shortfall first eats the structural surplus, then joins the
+ *     effective deficit (so the drawdown answers it — the granary carries the
+ *     town through winter, and the LATE-WINTER HUNGRY GAP is what an empty
+ *     granary looks like to the existing deficit/famine machinery);
+ *   • a harvest boost first covers the structural deficit + cuts, then BANKS
+ *     (the summer/fall refill), capped by the same infrastructure ceiling.
+ * `seasonal` null/absent ⇒ every seasonal term is exactly 0 and the arithmetic
+ * below reduces to the legacy expressions term-for-term — byte-identical (the
+ * constitutional law; pinned by the goldens + seasonsDormancy tests).
+ *
+ * @typedef {{ season: string, weekOfYear: number, weekOfSeason: number,
+ *            year: number, variance: string|null, swingPts: number }} SeasonalFoodContext
  * @param {any} settlement
- * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any }} [options]
+ * @param {{ interval?: string, tick?: number, blockade?: any, famine?: any, deployment?: any, seasonal?: SeasonalFoodContext|null }} [options]
  * @returns {{ settlement: Object, changed: boolean,
  *            summary: { storageMonths: number, effectiveDeficitPct: number,
  *                       resilienceScore: number, reliefPct: number, tithed: boolean,
  *                       blockaded: boolean, famished: boolean } | null }}
  */
-export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null } = {}) {
+export function advanceFoodStockpile(settlement, { interval = 'one_month', tick = 0, blockade = null, famine = null, deployment = null, seasonal = null } = {}) {
   const ledger = foodLedger(settlement);
   if (!ledger.present) return { settlement, changed: false, summary: null };
   const fs = settlement.economicState?.foodSecurity || {};
@@ -305,11 +322,31 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // same effectiveDeficit so it composes with famine and gets answered by the drawdown.
   const deploying = !!deployment && !blockaded;
   const deployDrainPct = deploying ? T.deploymentDrainPct : 0;
-  let effectiveDeficit = clamp(baseDeficitPct + blockadePct + faminePct + deployDrainPct, 0, 95);
+  // SEASONS-A: the signed seasonal production term, split into its shortfall
+  // and boost faces. All three terms are EXACTLY 0 when `seasonal` is absent,
+  // so the deficit/inflow expressions below reduce to the legacy arithmetic
+  // term-for-term (every legacy addend is ≥ 0, so the added Math.max(0,·) is
+  // the identity on the off path — byte-identical by construction).
+  const seasonalCutPct = seasonal ? Math.max(0, -(Number(seasonal.swingPts) || 0)) : 0;
+  const seasonalBoostPct = seasonal ? Math.max(0, Number(seasonal.swingPts) || 0) : 0;
+  // A structural surplus absorbs the winter shortfall before it becomes unmet
+  // need (a surplus town's fields still out-produce its tables in a lean season).
+  const seasonalCutNetPct = Math.max(0, seasonalCutPct - baseSurplusPct);
+  let effectiveDeficit = clamp(
+    Math.max(0, baseDeficitPct + blockadePct + faminePct + deployDrainPct + seasonalCutNetPct - seasonalBoostPct),
+    0, 95,
+  );
 
   if (effectiveDeficit <= 0) {
-    // 1. Surplus fills, capped by the granary infrastructure.
-    storage = Math.min(cap, storage + months * (baseSurplusPct / 100) * T.fillRate);
+    // 1. Surplus fills, capped by the granary infrastructure. The harvest
+    // boost banks whatever is LEFT after covering the structural deficit and
+    // the external cuts; a winter shortfall smaller than the surplus eats the
+    // bankable surplus first. Both adjustments are 0 without `seasonal`.
+    const seasonalInflowPct = seasonal
+      ? Math.max(0, seasonalBoostPct - (baseDeficitPct + blockadePct + faminePct + deployDrainPct))
+        - Math.min(seasonalCutPct, baseSurplusPct)
+      : 0;
+    storage = Math.min(cap, storage + months * (Math.max(0, baseSurplusPct + seasonalInflowPct) / 100) * T.fillRate);
   } else if (storage < T.reserveTitheFloorMonths && effectiveDeficit < T.reserveTitheDeficitCap) {
     // 2. Reserve tithe: mild hardship, empty granary — divert a slice into
     // storage and let the table feel it.
@@ -371,6 +408,17 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
       famished,
       deployed: deploying,
       lastTick: tick,
+      // SEASONS-A bookkeeping — present ONLY under the flag (keys appended
+      // after lastTick so the flag-off record's key order is untouched). The
+      // dossier's seasonal read (deriveGranaryOutlook) is self-contained on
+      // these: season + week place the settlement in the year, swing explains
+      // the ledger, the variance names the year's character.
+      ...(seasonal ? {
+        season: seasonal.season,
+        seasonWeek: seasonal.weekOfYear,
+        seasonalSwingPct: round1(seasonal.swingPts),
+        seasonalEvent: seasonal.variance ?? null,
+      } : {}),
     },
   };
 
@@ -384,11 +432,21 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
     || fs.stockpile.famished !== famished
     || (fs.stockpile.deployed ?? false) !== deploying
   );
+  // SEASONS-A: the season clock ticks weekly, so a seasonal record that moved
+  // (week/season/variance) counts as change even when the rounded numbers held
+  // still. False whenever `seasonal` is absent (flag-off byte-identity).
+  const _seasonMoved = !!seasonal && (
+    !fs.stockpile
+    || fs.stockpile.seasonWeek !== seasonal.weekOfYear
+    || fs.stockpile.season !== seasonal.season
+    || (fs.stockpile.seasonalEvent ?? null) !== (seasonal.variance ?? null)
+  );
   const changed = nextFoodSecurity.storageMonths !== fs.storageMonths
     || nextFoodSecurity.deficitPct !== fs.deficitPct
     || nextFoodSecurity.resilienceScore !== fs.resilienceScore
     || _disasterMoved
     || _flagsMoved
+    || _seasonMoved
     || !fs.stockpile;
   if (!changed) return { settlement, changed: false, summary: null };
 

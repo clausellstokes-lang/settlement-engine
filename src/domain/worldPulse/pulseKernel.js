@@ -9,7 +9,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
-import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor } from './worldState.js';
+import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor, seasonForTick } from './worldState.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
@@ -29,6 +29,7 @@ import { evaluateOccupations } from './occupation.js';
 import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
+import { seasonalContextFor, seasonalBoundaryEntries } from './seasons.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
@@ -312,6 +313,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const localSettlements = new Map();
   const settlementTickStates = { ...(worldState.settlementTickStates || {}) };
   const timeTicks = [];
+  // ── SEASONS-A: the food year (design §4i), flag-gated at the CL-0 seam.
+  // OFF ⇒ seasonClock stays null ⇒ every settlement's `seasonal` stays null ⇒
+  // advanceFoodStockpile runs its legacy arithmetic byte-identically, no rng
+  // is forked, no field is written (the dormancy-oracle discipline). ON ⇒ the
+  // clock reads the ADVANCED calendar's canonical integer weeks (consistent
+  // with the calendar labels the pressure model already reads), and each
+  // settlement gets its biome-amplituded, variance-scaled swing. The variance
+  // draw forks the tick-invariant WORLD seed (`season:<year>:<sid>`) so every
+  // week of a year reads the same verdict (seasons.js).
+  const seasonsOn = simulationRules.seasonsEnabled === true;
+  const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null;
+  // Flag-on granary states for the season boundary markers (harvest thinness,
+  // hungry-gap direness) — collected from this tick's stockpile advance.
+  /** @type {Array<{ id: string, name: string, storageMonths: number, deficitPct: number }>} */
+  const seasonalFoodStates = [];
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
     /** @type {any} */
@@ -329,13 +345,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const deployment = simulationRules.warLayerEnabled
       ? (worldState.deployments?.[String(item.id)] || null)
       : null;
+    const seasonal = seasonClock
+      ? seasonalContextFor({
+          rngSeed: startingWorldState.rngSeed,
+          clock: seasonClock,
+          settlement: result.newSettlement,
+          settlementId: item.id,
+        })
+      : null;
     const stocked = advanceFoodStockpile(result.newSettlement, {
       interval: tickInterval,
       tick: worldState.tick,
       blockade,
       famine: famineFor(worldState.stressors, item.id),
       deployment,
+      seasonal,
     });
+    if (seasonsOn) {
+      // The advance summary carries the post-advance granary numbers; null
+      // (no food ledger / unchanged) reads as an empty, quiet granary.
+      seasonalFoodStates.push({
+        id: String(item.id),
+        name: item.name || String(item.id),
+        storageMonths: stocked.summary ? stocked.summary.storageMonths : 0,
+        deficitPct: stocked.summary ? stocked.summary.effectiveDeficitPct : 0,
+      });
+    }
     // Siege vs the airship dock: blockade-running impairs the dock itself —
     // a visible 'access' impairment while the siege grips, lifted when it ends.
     const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now });
@@ -1367,7 +1402,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const causeLifecycleNews = causeLifecycleNewsEntries(
     causeLifecycleEvents, settlementNameFor, worldState.tick, now,
   );
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...realmEntries, ...pantheonArcEntries];
+  // SEASONS-A: the season boundary markers — the ONE new news kind
+  // ('season_marker': harvest at the autumn boundary, hungry_gap at month 12).
+  // Deterministic (no rng), realm-scope, minted only when the flag-on window
+  // (prev advanced week → this advanced week) crosses a boundary. Empty
+  // flag-off ⇒ byte-neutral.
+  const seasonMarkerEntries = seasonsOn
+    ? seasonalBoundaryEntries({
+        prevWeeks: startingWorldState.calendar?.elapsedWeeks ?? 0,
+        weeks: worldState.calendar.elapsedWeeks,
+        tick: worldState.tick,
+        now,
+        foodStates: seasonalFoodStates,
+      })
+    : [];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
