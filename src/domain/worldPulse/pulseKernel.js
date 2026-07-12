@@ -57,6 +57,8 @@ import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
 import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceRead.js';
 import { advanceSettlementSupply } from './supplyKernel.js';
+import { releaseMigrationArrivals, dispatchMigrations } from './migrationKernel.js';
+import { migrationActive } from '../spatial/migration.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
@@ -501,6 +503,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       now,
     });
     if (supply.changed) worldState = supply.worldState;
+  }
+
+  // Phase 5.5 mover M4 — MIGRATION ARRIVALS (the transport-lag RELEASE). Before the
+  // apply pass so the credit flows through the settlement map to persistence (as the
+  // supply buffers do): every in-transit refugee column whose arrivalTick has come
+  // LANDS — its (mortality-reduced) survivors credit the destination's population. The
+  // DISPATCH half (this tick's shed pools → new columns) runs POST-APPLY with the
+  // movers. DORMANT (no spatial marker / no columns due) ⇒ a no-op, byte-identical.
+  {
+    const arrivals = releaseMigrationArrivals({ worldState, localSettlements, settlements: snapshot?.settlements || [], tick: worldState.tick });
+    if (arrivals.changed) worldState = arrivals.worldState;
   }
 
   const postTimeSaves = saves.map(save => {
@@ -989,6 +1002,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     tick: worldState.tick,
     interval: tickInterval,
     simulationRules,
+    // M4: when the spatial-canon marker is present, populationDynamics hands the
+    // mass-emigration DISTRIBUTION off to the migration mover (marks a spatialEmigration
+    // shed pool, sheds the same `abs`, distributes nothing here) — the origin-loss-proxy
+    // reconciliation. Absent ⇒ the aspatial distribution runs verbatim (byte-identical).
+    spatialActive: migrationActive(worldState),
   });
   // Read LAST-TICK disposition memory into per-settlement multipliers
   // (centered on 1.0). The next-tick WRITE (ratchet from this tick's resolved
@@ -1577,6 +1595,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         // Every region graduated back to calm: the conditional sub-ledger drops to absent.
         memoryState = dropSpatialLedger(memoryState, 'embattlement');
       }
+    }
+  }
+  // Phase 5.5 mover M4 — MIGRATION DISPATCH (the shed-pool → in-transit columns half).
+  // AFTER the apply pass debited each origin its `abs` (byte-parity origin trajectory):
+  // for every APPLIED mass-emigration event (the spatialEmigration marker populationDynamics
+  // stamped under the marker), plan the fate — the origin's carrying-capacity tolerance,
+  // the 4-axis reachable destinations (a LIVE cultureDistance read + the congestion +
+  // scatter-floor brakes), the TWO mortality sinks (origin + embattlement×season road) —
+  // ASSERT the conservation invariant, and enqueue the arrival columns (which the RELEASE
+  // half lands hopWeeks later). AGGREGATE counts only — no named NPC is ever touched.
+  // DORMANT (no spatial marker / no emigration events) ⇒ changed:false ⇒ byte-identical.
+  if (migrationActive(memoryState)) {
+    /** @type {Array<{ originId: string, loss: number }>} */
+    const emigrationEvents = [];
+    for (const outcome of outcomesToApply) {
+      const shed = outcome?.metadata?.spatialEmigration;
+      if (outcome?.candidateType === 'population_emigration' && shed && Number(shed.loss) > 0) {
+        emigrationEvents.push({ originId: String(outcome.targetSaveId), loss: Math.max(0, Math.floor(Number(shed.loss))) });
+      }
+    }
+    if (emigrationEvents.length) {
+      const migration = dispatchMigrations({
+        events: emigrationEvents,
+        snapshot: postTimeSnapshot,
+        pIndex,
+        digest: memoryState.spatialDigest,
+        worldState: memoryState,
+        rng,
+        season: roadSeason,
+        tick: worldState.tick,
+      });
+      if (migration.changed) memoryState = migration.worldState;
     }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);

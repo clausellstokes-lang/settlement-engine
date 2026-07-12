@@ -303,7 +303,7 @@ function deltaForSettlement(item, pressureIdx, interval, rules) {
 /**
  * @param {any} options
  */
-function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }) {
+function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick, spatialActive }) {
   const result = deltaForSettlement(item, pressureIdx, interval, rules);
   if (!result) return null;
   const { pop, delta, severe } = result;
@@ -323,19 +323,34 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
   const populationDeltas = [{ saveId: sourceId, delta, reason: delta > 0 ? 'Organic growth from favorable conditions.' : 'Population loss from cumulative settlement pressure.' }];
   let transferMode = null;
   let migrants = 0;
+  // M4 (MIGRATION-WITH-MORTALITY) hand-off: the shed pool the spatial mover consumes.
+  let spatialEmigration = null;
 
   if (isMassEmigration && rules.migrationFlowsEnabled && !['off', 'local'].includes(rules.propagationMode)) {
-    migrants = Math.max(0, Math.round(abs * 0.45));
-    const transfer = distributeMigrants({
-      sourceId,
-      migrants,
-      snapshot,
-      pressureIdx,
-      mode: rules.migrationMode,
-      tick,
-    });
-    transferMode = transfer.mode;
-    populationDeltas.push(...transfer.deltas);
+    if (spatialActive) {
+      // M4 spatial path (Phase 5.5): the origin sheds the SAME `abs` (byte-parity
+      // origin trajectory) but its FATE — the 4-axis route-based destinations, the
+      // TWO mortality sinks, the transport-lag arrival — is the migrationKernel's
+      // job, dispatched POST-APPLY from this marker. The aspatial `abs*0.45` proxy
+      // is RECONCILED into the spatial ORIGIN-MORTALITY stage (never both), so we do
+      // NOT distribute here: no same-tick destination credits, no `abs*0.45`. The
+      // destinations receive their (mortality-reduced, lagged) arrivals later, via
+      // the in-transit column ledger — the conservation invariant holds there.
+      spatialEmigration = { loss: abs };
+      transferMode = 'spatial';
+    } else {
+      migrants = Math.max(0, Math.round(abs * 0.45));
+      const transfer = distributeMigrants({
+        sourceId,
+        migrants,
+        snapshot,
+        pressureIdx,
+        mode: rules.migrationMode,
+        tick,
+      });
+      transferMode = transfer.mode;
+      populationDeltas.push(...transfer.deltas);
+    }
   }
 
   const major = abs >= Math.max(80, Math.round(pop * 0.04)) || migrants >= Math.max(60, Math.round(pop * 0.025));
@@ -366,7 +381,10 @@ function populationCandidate({ item, interval, pressureIdx, snapshot, rules, tic
     ].filter(Boolean),
     populationDeltas,
     generatedAtTick: tick,
-    metadata: { populationKind: kind, transferMode, migrants },
+    // spatialEmigration (M4): the shed-pool marker the migrationKernel reads POST-APPLY
+    // to dispatch the spatial migration (destinations + mortality + transport lag).
+    // Present ONLY on the spatial path (absent ⇒ the aspatial candidate is byte-identical).
+    metadata: { populationKind: kind, transferMode, migrants, ...(spatialEmigration ? { spatialEmigration } : {}) },
     conflictTags: [`population:${sourceId}`],
   };
 }
@@ -381,8 +399,12 @@ export function evaluatePopulationDynamics(snapshot, pressureIdx, context = {}) 
   if (!rules.populationDynamicsEnabled) return [];
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const interval = context.interval || 'one_month';
+  // M4 gate: the spatial migration mover owns the DISTRIBUTION when the spatial-canon
+  // marker is present (context.spatialActive). Absent/undefined ⇒ the aspatial path
+  // runs verbatim (byte-identical) — the injected boolean adds no spatial import here.
+  const spatialActive = !!context.spatialActive;
   return (snapshot?.settlements || [])
-    .map((/** @type {any} */ item) => populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick }))
+    .map((/** @type {any} */ item) => populationCandidate({ item, interval, pressureIdx, snapshot, rules, tick, spatialActive }))
     .filter(Boolean);
 }
 
