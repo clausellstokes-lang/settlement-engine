@@ -712,6 +712,51 @@ resource/granary cycle is populationDynamics/foodStockpile work and does NOT nee
   overlay on the cost field, versioned under the cost-law per §V.1's "seasonal passability").
 Dormancy/determinism: season = f(tick); amplitude = f(canon biome); variance = seeded; OFF ⇒ prior bytes.
 
+## 4j. Water — sea lanes, rivers, and the PORT rule (owner, round 20; settles the keystone reservation)
+Water becomes the HIGHWAY it historically was — but access is EARNED, not free. The owner's rule:
+
+**PORT ELIGIBILITY = GEOGRAPHY ∧ INSTITUTIONS (both required, both derived):**
+- PROXIMITY: the settlement must be in CLOSE PROXIMITY to navigable water (coastal cell / river course /
+  lake shore, read from the canon map — FMG already carries coastlines + rivers; the threshold is a
+  digest-time derivation).
+- CAPABILITY: the settlement must HAVE a water-access institution — mapped from the EXISTING institution
+  catalog at build time (dock, harbor, shipwright, fishery, ferry, port authority — the build enumerates
+  the actual catalog; no new authored flag).
+- GEOGRAPHY IS NECESSARY, INSTITUTIONS ARE SUFFICIENT: a landlocked settlement can NEVER buy its way onto
+  the water; a coastal settlement WITHOUT a dock is a beach, not a port — and can BECOME a port by
+  FOUNDING one (the W-C3 founding lane gains its most consequential candidate: building a harbor changes
+  the settlement's destiny). Ports are therefore fully DERIVED and can EMERGE mid-campaign.
+
+**THE SEA/RIVER EDGE SET (the keystone schema reservation, now SETTLED):** water lanes are a SEPARATE
+edge set in the frozen digest (the PART VI air/teleport pattern — optional sibling edge sets beside the
+land cost field), materialized only when ≥2 eligible ports exist. Sea lanes connect eligible sea-ports;
+river lanes connect river-ports ALONG the river course. Port = the settlement's WATER GATE (the §2 gate
+concept, maritime).
+
+**ECONOMICS — water is cheap and big:** water transport is the historical order-of-magnitude advantage —
+LOW cost, HIGH capacity vs land. Consequences: PORT CITIES emerge as a distinct settlement destiny beside
+the entrepôt (and a port-entrepôt is the richest thing on the map); the ISOLATION INVERSION is fixed — an
+island with a harbor is a HUB, not a hermit (round-7 isolation now reads "no viable LAND route AND no
+port"); import-dependent coastal towns lean on the sea lane their granary math assumes.
+
+**EVERYTHING COMPOSES (each existing mechanic gains a maritime face):**
+- SIEGE: a port city's interdiction now requires land AND SEA control (extends the round-7 air logic —
+  "control the land and the air" becomes "…and the harbor"). NAVAL BLOCKADE = holding the water gate;
+  a blockade-runner is the maritime smuggler (round-4 smuggle machinery, wet).
+- PIRACY = maritime banditry: the §6 danger term on sea lanes, with pirate pressure as the embattlement
+  analog for a lane; the smuggle network's sea arm moves contraband between ports that ban it (§4d).
+- SEASONS (round 19 composes): STORM SEASON — winter closes/prices-up the cheap sea route exactly when
+  the granary math bites; a port town that leans on winter grain ships is gambling with the §4i hungry gap.
+- INFORMATION: ship crews are a FAST, LONG-RANGE rumor carrier between ports (a round-9 carrier variant —
+  port-to-port news skips the land chain entirely; two ports gossip across a sea the land takes a season
+  to walk around). Port cities become information brokers between coastlines.
+- MIGRATION: refugees take ship where ports exist (§4c gains a sea route — with passage costs that make
+  it selective); the desperate walk, the funded sail.
+**V1 SCOPE (architect):** edges + port-gates + blockade/piracy as danger terms + the carrier variant.
+NO fleet combat / naval warfare layer in v1 (a "sea interdiction" abstraction covers blockade; navies are
+a future wave if ever). Determinism/dormancy: eligibility derived at digest time from canon map +
+institution roster; re-derived on founding events; no ports ⇒ no edge set ⇒ prior bytes.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
