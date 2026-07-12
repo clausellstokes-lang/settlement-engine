@@ -1,5 +1,7 @@
 import { useState, useEffect, lazy, Suspense, Component } from 'react';
-import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2, Image as ImageIcon} from 'lucide-react';
+// Drama (the theatre masks) is already in the first-paint icon set via the
+// Plot Hooks tab — reusing it for Session Mode adds no vendor-icons bytes.
+import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2, Image as ImageIcon, Drama} from 'lucide-react';
 import ShareToGallery from './ShareToGallery.jsx';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -15,12 +17,15 @@ const generateFoundryModule = (...args) =>
   import('../foundry/generateFoundryModule.js').then(m => m.generateFoundryModule(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
 import { flag } from '../lib/flags.js';
-// Already in this component's transitive graph via the store's campaignSlice —
-// a direct import adds no new bytes to the chunk.
-import { isCampaignActive } from '../lib/campaigns.js';
+// The shared export seam (campaign assembly + faith premium gate) — one
+// resolver for BOTH export formats so PDF and Foundry can never drift.
+import { resolveExportSeam } from './settlementDetail/resolveExportSeam.js';
 import { useStore } from '../store/index.js';
 
 const OutputContainer = lazy(() => import('./OutputContainer'));
+// W-Session — the distraction-free run-of-play takeover. Lazy like TableView:
+// the chunk loads only when the DM actually opens it (zero first-paint bytes).
+const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
@@ -61,55 +66,6 @@ const REL_COLORS = {
   client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
-
-/**
- * The shared export seam — resolves the owning campaign (plain cloneable
- * data) and the faith premium gate for a saved settlement. Used by BOTH
- * export formats (PDF + Foundry module) so they can never drift.
- *
- * W4f dead-path fix: the owning campaign is resolved so a premium canon
- * export actually carries the live-world Faith & War chapter. Membership is
- * the store's String-normalized scan (matches isSettlementClockBound —
- * number/string id mixes resolve).
- *
- * F41: the campaign payload must be PLAIN CLONEABLE DATA — a nameById map,
- * never a nameFor function. A function would DataCloneError the PDF worker
- * postMessage and silently demote every export to the main-thread fallback.
- * liveWorld.js prefers nameById natively.
- */
-function resolveExportSeam(liveStore, saveId) {
-  const sid = saveId != null ? String(saveId) : null;
-  const owning = sid
-    ? (liveStore.campaigns || []).find(
-        c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid),
-      ) || null
-    : null;
-  let campaign = null;
-  if (owning) {
-    const memberIds = new Set((owning.settlementIds || []).map(String));
-    const memberSaves = (liveStore.savedSettlements || [])
-      .filter(e => memberIds.has(String(e?.id)));
-    const nameById = {};
-    for (const entry of memberSaves) {
-      const id = entry?.id ?? entry?.settlement?.id;
-      const name = entry?.name || entry?.settlement?.name;
-      if (id != null && name) nameById[String(id)] = name;
-    }
-    campaign = {
-      settlementId: saveId,
-      worldState: owning.worldState || null,
-      regionalGraph: owning.regionalGraph || owning.worldState?.regionalGraph || null,
-      settlements: memberSaves,
-      nameById,
-    };
-  }
-  // The faith premium seam — mirrors FaithSection's screen gate
-  // (tier === 'premium' || elevated). Free / lapsed / anon exports thread
-  // false, so faithChapterVisible's default-safe gate stays load-bearing.
-  const faithUnlocked = liveStore.auth?.tier === 'premium'
-    || (typeof liveStore.isElevated === 'function' ? liveStore.isElevated() : false);
-  return { campaign, faithUnlocked };
-}
 
 class DetailErrorBoundary extends Component {
   constructor(props) {
@@ -244,6 +200,7 @@ export default function SettlementDetail({
   const [_saved,       _setSaved]      = useState(false);
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
+  const [sessionOpen, setSessionOpen] = useState(false); // W-Session run-of-play takeover
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
@@ -498,6 +455,17 @@ export default function SettlementDetail({
               ? 'Edit (Premium)'
               : (editMode ? 'Stop Editing' : 'Edit Dossier')}
           </Button>
+          {flag('sessionMode') && (
+            <Button
+              variant="gold"
+              size="sm"
+              icon={<Drama size={12}/>}
+              onClick={() => setSessionOpen(true)}
+              title="A distraction-free run-of-play view for the table: tonight's beats, key NPCs, hooks, and the live world state."
+            >
+              Session Mode
+            </Button>
+          )}
           <Button
             variant="danger"
             size="sm"
@@ -532,6 +500,19 @@ export default function SettlementDetail({
           )}
         </div>
       </div>
+
+      {/* W-Session — the run-of-play takeover. Mounted once (outside the
+          editMode fork) following the TableView doctrine: flag-gated, lazy,
+          the chunk loads only while open. */}
+      {sessionOpen && flag('sessionMode') && (
+        <Suspense fallback={null}>
+          <SessionMode
+            settlement={detail.settlement}
+            saveId={saveId}
+            onClose={() => setSessionOpen(false)}
+          />
+        </Suspense>
+      )}
 
       {/* Share to Gallery — revealed by the header's "Share to Gallery" button
           (in line with Edit Dossier / Export Dossier). The publish flow has an
