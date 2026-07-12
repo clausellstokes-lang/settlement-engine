@@ -54,6 +54,7 @@ import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
+import { advanceSettlementSupply } from './supplyKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
@@ -467,6 +468,29 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     let pruned = false;
     for (const id of oustedIds) { if (npcStates[id]) { delete npcStates[id]; pruned = true; } }
     if (pruned) worldState = { ...worldState, npcStates };
+  }
+
+  // Phase 5.5 mover M2 — CARAVANS / SUPPLY-STARVATION. Before the war layer (so a
+  // supply-starved besieged town's weakened hold feeds THIS tick's siege verdict via
+  // M2b): advance the AGGREGATE in-transit shipment ledger over the active consuming
+  // links (pre-ranked reachable producers from the frozen digest; O(K) failover; basic
+  // interception; banditry on the delivered quantity), write the per-input buffers +
+  // the SUPPLY-STARVED impairment onto the settlements, and the ledger onto worldState.
+  // DORMANT (no spatial marker / no non-food cross-settlement links) ⇒ a no-op, nothing
+  // touched — byte-identical. Food stays with foodStockpile (no double-count).
+  {
+    const supply = advanceSettlementSupply({
+      snapshot,
+      localSettlements,
+      worldState,
+      graph: snapshot.regionalGraph,
+      digest: worldState.spatialDigest,
+      tick: worldState.tick,
+      tickWeeks: { one_week: 1, one_month: 4, one_season: 13, one_year: 52 }[tickInterval] || 1,
+      rng,
+      now,
+    });
+    if (supply.changed) worldState = supply.worldState;
   }
 
   const postTimeSaves = saves.map(save => {

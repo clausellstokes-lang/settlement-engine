@@ -29,7 +29,21 @@
  *   vacant     — institution exists but lacks leadership (an NPC slot is empty)
  */
 
-/** @typedef {'capacity'|'legitimacy'|'influence'|'wealth'|'staffing'|'infrastructure'|'access'|'corruption'} InstitutionImpairmentType */
+/** @typedef {'capacity'|'legitimacy'|'influence'|'wealth'|'staffing'|'infrastructure'|'access'|'corruption'|'supply_starved'} InstitutionImpairmentType
+ *
+ *   supply_starved — Phase 5.5 mover M2 (CARAVANS): a consuming institution whose
+ *      input road is TOTALLY cut (every pre-ranked reachable producer severed AND
+ *      its per-input stockpile buffer drained) is supply-starved. It GENERALIZES
+ *      the narrow 'access' impairment (blockadeTransport's siege-throttled airship
+ *      dock) to arbitrary inputs (the iron road, the timber road, …) under ONE
+ *      starvation ledger (design §II.3-4-g) — foodStockpile stays the food-specific
+ *      buffer, never double-counted. TEMPORARY: it lifts the moment a shipment
+ *      arrives. Stamped/lifted under its OWN cause namespace (see
+ *      spatial/supplyShipments.js SUPPLY_STARVED_CAUSE_PREFIX), disjoint from
+ *      blockadeTransport's 'stressor-blockade:' causes, so the two never re-trigger
+ *      each other. Materialized ONLY under the spatial-canon marker (dormant ⇒ the
+ *      impairment never appears ⇒ byte-identical).
+ */
 
 /** @typedef {'leadership'|'legitimacy'|'wealth'|'coercive_capacity'|'membership'|'public_support'|'access'|'legal_standing'|'internal_unity'} FactionImpairmentType */
 

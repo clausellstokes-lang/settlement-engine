@@ -65,6 +65,9 @@ import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
 import { deriveDecisionTier } from './decisionTier.js';
+// M2b: the supply-interdiction read (0 when the shipment ledger is absent / dormant
+// ⇒ resolveSiegeVerdict's term is 0 ⇒ the aspatial siege path is byte-identical).
+import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -132,6 +135,13 @@ const SIEGE_CAPACITY_HOLD_BIAS = 3;
 // collapsed and the town yields deterministically (surrender rather than storm).
 const WILL_BIAS_STRENGTH = 2.2;
 export const WILL_CAPITULATE_FLOOR = -0.72;
+// Phase 5.5 mover M2b — SUPPLY INTERDICTION. A supply-starved besieged town's hold
+// WEAKENS: its input roads are cut, so its garrison fights hungry (the design's
+// siege-as-starvation, whose FULL replacement lands in M5 — here it is an AUGMENTING
+// term). Max upward shift on the fall log-odds (comparable to the hold bias), scaled
+// by how starved the town is (supplyInterdiction 0..1). DORMANT: supplyInterdiction 0
+// ⇒ the term is exactly 0 ⇒ the aspatial siege path resolves BYTE-IDENTICALLY.
+const SUPPLY_INTERDICTION_STRENGTH = 2;
 
 /**
  * The defender's WILL-to-resist score ∈ [-1, 1], composed from leadership/faith
@@ -813,10 +823,10 @@ function conditionOutcome({ id, archetype, targetSaveId, severity, headline, sum
  * stochastic roll also produces an OUTCOME BAND (narrow/decisive/costly) the caller
  * feeds into attrition.
  *
- * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number }} args
+ * @param {{ targetId: any, besiegers: any[], capacityFor: (id: any) => { offensive: number, homeDefense: number, facets: any }, effectiveStrengthFor: (id:any)=>(number|null), defenderItem: any, rng: any, tick: any, siegeAge?: number, defenderStrengthOverride?: (number|null), defenderResolveEnabled?: boolean, defenderReliefBonus?: number, attackerFidelity?: number, attackerRust?: number, supplyInterdiction?: number }} args
  * @returns {{ falls: boolean, harass: boolean, forcedLift: boolean, verdict: string, ratio: number, pFall: number, roll: number, coalitionCurrent: number, defenderCurrent: number, band: string, reasons: string[], capitulation?: boolean }}
  */
-export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0 }) {
+export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge = 0, defenderStrengthOverride = null, defenderResolveEnabled = false, defenderReliefBonus = 0, attackerFidelity = 0, attackerRust = 0, supplyInterdiction = 0 }) {
   // Coalition strength sums member EFFECTIVE strengths (codepoint-sorted membership)
   // → order-independent: the army at the walls IS the offensive force, depleted by
   // attrition. Each besieger contributes its STATEFUL currentEffectiveStrength when it
@@ -955,8 +965,11 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   }
 
   // ── PLAUSIBLE band (or a satisfied override) → the stochastic siege roll. A resolute
-  // defender's willBias lowers pFall (holds); a crumbling one raises it. ────────────
-  const logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias;
+  // defender's willBias lowers pFall (holds); a crumbling one raises it. M2b: a supply-
+  // interdicted (starved) defender's hold weakens — the term RAISES pFall, scaled by how
+  // starved it is. supplyInterdiction 0 (aspatial / fed) ⇒ +0 ⇒ byte-identical logOdds. ─
+  const supplyPush = SUPPLY_INTERDICTION_STRENGTH * clamp01(supplyInterdiction);
+  const logOdds = SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent) - SIEGE_CAPACITY_HOLD_BIAS - willBias + supplyPush;
   const pFall = clamp01(logistic(logOdds));
   const roll = rng.fork(`siege:${stablePart(targetId)}:${tick}`).random();
   const falls = roll < pFall;
@@ -1234,7 +1247,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const attackerRust = besiegers.length
       ? rustOf(snapshot?.byId?.get?.(String(besiegers[0]))?.settlement) + mercFidelityPenaltyOf(mercLedger, besiegers[0])
       : 0;
-    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust });
+    // M2b: how supply-starved the besieged target is (prior-tick shipment ledger). 0 on
+    // the aspatial path (no marker / no ledger) ⇒ the verdict term contributes 0.
+    const supplyInterdiction = supplyInterdictionLevel(worldState, targetId);
+    const verdict = resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiveStrengthFor, defenderItem, rng, tick, siegeAge, defenderStrengthOverride, defenderResolveEnabled, defenderReliefBonus, attackerFidelity, attackerRust, supplyInterdiction });
 
     // ── ATTRITION: degrade every committed BESIEGER's field army after the
     // engagement. Each army is attrited ONLY when it is the attacker on its OWN front

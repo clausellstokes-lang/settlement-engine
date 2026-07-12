@@ -264,10 +264,20 @@ export function createDefaultWorldState(campaign = {}) {
 //                        ONLY under the spatial-canon marker AND only for
 //                        settlements actually under threat (sparse); absent
 //                        (byte-identical) on the aspatial / peaceful path.
+//   • supplyShipments  — the IN-TRANSIT supply-shipment ledger (Phase 5.5 mover
+//                        M2, spatial/supplyShipments.js): ONE record per ACTIVE
+//                        LINK, keyed `${settlementId}:${institutionId}:${input}` →
+//                        { institutionId, settlementId, input, sourceId,
+//                        arrivalTick, starving } — AGGREGATE (records = active
+//                        links, NEVER per-wagon). Materialized ONLY under the
+//                        spatial-canon marker AND only while a caravan rides or a
+//                        link starves (sparse); absent (byte-identical) on the
+//                        aspatial / self-sufficient path.
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
   'spatialDigest', 'spatialArrivals', 'rumorLedgers', 'beliefMaps', 'embattlement',
+  'supplyShipments',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
