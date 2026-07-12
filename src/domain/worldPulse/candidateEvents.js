@@ -5,7 +5,8 @@ import { evaluateSettlementStrategyRules } from './settlementStrategy.js';
 import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
-import { normalizeSimulationRules } from './simulationRules.js';
+import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
+import { authorityFor } from './changeAuthorityPolicy.js';
 
 function stablePart(/** @type {any} */ value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
@@ -27,7 +28,7 @@ export function volatilityMultiplier(/** @type {any} */ volatility) {
   return VOLATILITY_MULTIPLIERS[/** @type {keyof typeof VOLATILITY_MULTIPLIERS} */ (volatility)] ?? 1.0;
 }
 
-function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick) {
+function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any} */ tick, /** @type {Record<string, unknown> | null} */ rules = null) {
   if (!pressure || pressure.score < 0.5) return null;
   const archetypeByKind = {
     food: 'famine',
@@ -56,7 +57,12 @@ function pressureConditionCandidate(/** @type {any} */ pressure, /** @type {any}
     targetSaveId: pressure.settlementId,
     severity: pressure.score,
     probability: Math.min(0.42, 0.06 + pressure.score * 0.3),
-    applyMode: pressure.score >= 0.72 ? 'proposal' : 'auto',
+    // pressure_event is one of the four severity-gated ROGUE families: its
+    // severity-only escalation (never the majorChangesRequireProposal flag) IS
+    // its legacy default, encoded verbatim as the legacyMode argument —
+    // authorityFor passes it through untouched under routine/full and forces
+    // 'proposal' only under the new dm_only/recommendations autonomy modes.
+    applyMode: authorityFor(rules, 'pressure_event', pressure.score >= 0.72 ? 'proposal' : 'auto'),
     headline: `${labelByKind[/** @type {keyof typeof labelByKind} */ (pressure.kind)]} may take hold`,
     summary: `${pressure.settlementName} shows enough ${pressure.label.toLowerCase()} for a new condition to emerge.`,
     reasons: [
@@ -208,7 +214,7 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   if (rules.emergentEventsEnabled) {
     candidates.push(
       ...pressures
-        .map((/** @type {any} */ pressure) => pressureConditionCandidate(pressure, tick))
+        .map((/** @type {any} */ pressure) => pressureConditionCandidate(pressure, tick, rules))
         .filter(Boolean),
     );
   }
@@ -255,7 +261,27 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     }));
   }
 
-  return resolveCandidateConflicts(candidates, context.budgets || {});
+  // ── Political-autonomy AUTHORITY routing (Phase 5.5 CL-0) ──────────────────
+  // The choke point that routes EVERY stochastic candidate family — including
+  // the modules this file composes (stressors, relationships, factions, NPCs,
+  // flows, strategy, mobilization reactions) — through the per-domain authority
+  // policy. Under routine/full autonomy authorityFor returns each candidate's
+  // OWN applyMode verbatim, so the map below yields the IDENTICAL object
+  // references and the output is byte-exact legacy. Under the new dm_only/
+  // recommendations modes every candidate is forced to 'proposal' (the DM's
+  // word, or a recommendation carrying the candidate's existing reasons[] as
+  // its rationale). Guaranteed residual aftermaths never pass through here —
+  // they are consequences, not initiations, and stay auto by design.
+  const autonomy = politicalAutonomyOf(rules);
+  const routed = autonomy === 'dm_only' || autonomy === 'recommendations'
+    ? candidates.map(candidate => {
+      if (!candidate) return candidate;
+      const applyMode = authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode);
+      return applyMode === candidate.applyMode ? candidate : { ...candidate, applyMode };
+    })
+    : candidates;
+
+  return resolveCandidateConflicts(routed, context.budgets || {});
 }
 
 export function generateWorldPulseCandidates(/** @type {any} */ { pressures = [], relationshipCandidates = [], npcCandidates = [], factionCandidates = [], tick = 0 } = {}) {

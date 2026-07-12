@@ -5,6 +5,12 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { stablePart } from './worldState.js';
 import { intensityMultiplier, normalizeSimulationRules } from './simulationRules.js';
+// CL-0: every candidate family consults the per-domain change-authority policy.
+// authorityFor passes each site's legacy gate through VERBATIM under
+// routine/full autonomy (byte-identical), and forces 'proposal' under the new
+// dm_only/recommendations modes. Tier/resource candidates do NOT flow through
+// the evaluateWorldPulseRules choke point, so they consult the policy here.
+import { authorityFor } from './changeAuthorityPolicy.js';
 import { canRecoverResource, classifyResource } from './resourceTaxonomy.js';
 // Phase 4 W-F4b (item 2b) — development fidelity: a chaotic-devout economy mis-RANKS
 // its value chains, acting on a NOISY ESTIMATE of resource pressure (suboptimal
@@ -153,8 +159,10 @@ function tierCandidate(item, drift, tick, rules) {
     // Honor majorChangesRequireProposal, consistent with resource_depletion in
     // this module: a tier change stays a DM proposal under the conservative
     // default (flag on), and auto-applies only when a campaign opts out of
-    // proposal gating (flag off, e.g. dramatic_campaign).
-    applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto',
+    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate
+    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;
+    // forced to proposal under dm_only/recommendations).
+    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),
     headline: `${item.name || item.id} may ${drift.direction === 'promotion' ? 'rise' : 'fall'} to ${drift.toTier}`,
     summary: `${item.name || item.id} has met ${drift.direction} eligibility for ${drift.streak} advancement(s).`,
     reasons: [
@@ -370,7 +378,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         targetSaveId: item.id,
         severity,
         probability: clamp01(0.05 + severity * 0.34),
-        applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto',
+        applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'),
         headline: `${resource.replace(/_/g, ' ')} may be depleted`,
         summary: `${item.name || item.id} is consuming ${resource.replace(/_/g, ' ')} faster than it recovers.`,
         reasons: [
@@ -411,7 +419,7 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         targetSaveId: item.id,
         severity,
         probability: clamp01((slow ? 0.02 : 0.08) + severity * (slow ? 0.1 : 0.34)),
-        applyMode: 'auto',
+        applyMode: authorityFor(rules, 'resource_recovery', 'auto'),
         headline: `${resource.replace(/_/g, ' ')} may recover`,
         summary: `${item.name || item.id} consumes less ${resource.replace(/_/g, ' ')}, allowing it to become available again.`,
         reasons: [

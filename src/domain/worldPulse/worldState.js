@@ -200,53 +200,50 @@ export function createDefaultWorldState(campaign = {}) {
   };
 }
 
+// The CONDITIONALLY-MATERIALIZED worldState ledgers, in their RESULT-SPREAD
+// ORDER (load-bearing: the order below IS the serialized key order, and the
+// dormancy oracle / byte-identity goldens pin serialized bytes — append only).
+// Each is ABSENT while its subsystem is dormant (so a legacy campaign
+// serializes byte-identically to today under the dormancy oracle) and
+// DEEP-cloned when present so a pre-tick snapshot never aliases live state:
+//   • pantheon         — the deity ledger (wins/losses/seats/tier).
+//   • religionStates   — per-settlement pantheon (deities/shares/niches/patron).
+//   • warPosture       — per-settlement mobilization posture ({ id -> { state,
+//                        progress, sinceTick, covert } }); absent while at peace.
+//   • occupations      — per-OCCUPIED-settlement occupation state (occupierId,
+//                        state, sinceTick, resistance, …); absent until conquest.
+//   • pausedAdvance    — the paused-Advance cursor (Advance-scaling Stage 3);
+//                        clearing the pause drops the key back to absent.
+//   • martialReadiness — per-settlement { readiness01, experience01 } (W-F8);
+//                        absent until a settlement first arms under a patron.
+//   • conquestFeeds    — per-victor decaying loot/captive pulses (W-C2); decays
+//                        back to absent.
+//   • mercenaryMarket  — per-settlement rented-force market (W-C2).
+//   • rulesetLog       — ruleset-change receipts (CL-0), an OBJECT keyed
+//                        rc_<tick>_<seq> (deepCloneConditionalLedger rejects
+//                        arrays); absent until the first effective rules edit.
+const CONDITIONAL_LEDGER_KEYS = Object.freeze([
+  'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
+  'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
+]);
+
 export function ensureWorldState(rawInput = {}, campaign = {}) {
   const raw = runWorldStateMigrations(rawInput);
   const base = createDefaultWorldState(campaign);
   const calendar = raw?.calendar && typeof raw.calendar === 'object' ? raw.calendar : {};
   // The SHALLOW `...cloneObject(raw)` spread would otherwise carry a
-  // present-but-EMPTY `pantheon:{}` through to the result (breaking dormancy). Strip
-  // it from the shallow spread; the conditional deep-clone below is the SOLE source
-  // of the key — materialized only when non-empty. `warPosture` is CONDITIONAL the
-  // same way: a no-war campaign carries NO warPosture key at all (byte-neutral under
-  // the dormancy oracle), so it is stripped here and re-added conditionally below.
+  // present-but-EMPTY conditional ledger (e.g. `pantheon:{}`) through to the
+  // result, breaking dormancy. Strip every conditional key from the shallow
+  // spread; the conditional deep-clone pass below is the SOLE source of those
+  // keys — each materialized only when present and non-empty.
   const shallowRaw = cloneObject(raw);
-  if ('pantheon' in shallowRaw) delete shallowRaw.pantheon;
-  if ('warPosture' in shallowRaw) delete shallowRaw.warPosture;
-  if ('occupations' in shallowRaw) delete shallowRaw.occupations;
-  // religionStates — CONDITIONAL, same discipline as pantheon/occupations: the
-  // per-settlement pantheon ledger is ABSENT until religion is active (byte-identical
-  // dormant), stripped here and re-added conditionally below.
-  if ('religionStates' in shallowRaw) delete shallowRaw.religionStates;
-  // Advance-scaling Stage 3 — pausedAdvance is CONDITIONALLY MATERIALIZED, the same
-  // discipline as pantheon/warPosture/occupations: a campaign with NO advance in
-  // flight carries NO pausedAdvance key at all (so a dormant campaign serializes
-  // byte-identically to today under the dormancy oracle). Stripped from the shallow
-  // spread; re-added below ONLY when present and non-empty.
-  if ('pausedAdvance' in shallowRaw) delete shallowRaw.pausedAdvance;
-  // martialReadiness — CONDITIONAL (W-F8): the per-settlement martial-readiness /
-  // strategic-experience ledger ({ cid -> { readiness01, experience01 } }). A faith-
-  // gated, war-experience-driven quantity — ABSENT until a settlement first arms under
-  // a patron, so a deity-free / war-free campaign carries NO key (byte-identical under
-  // the dormancy oracle). Stripped here, re-added conditionally below.
-  if ('martialReadiness' in shallowRaw) delete shallowRaw.martialReadiness;
-  // conquestFeeds — CONDITIONAL (W-C2): the per-victor DECAYING loot/captive prosperity
-  // pulse ledger. ABSENT until the first conquest feeds a victor (a no-war / layer-off
-  // campaign carries NO key ⇒ byte-identical under the dormancy oracle); the pulses decay
-  // to nothing and the key drops back to absent. Stripped here, re-added conditionally.
-  if ('conquestFeeds' in shallowRaw) delete shallowRaw.conquestFeeds;
-  // mercenaryMarket — CONDITIONAL (W-C2): the per-settlement rented-force market ledger.
-  // ABSENT until war-shortfall demand meets local mercenary supply (a no-war / no-shortfall
-  // campaign carries NO key ⇒ byte-identical), materialized only where a market is active.
-  if ('mercenaryMarket' in shallowRaw) delete shallowRaw.mercenaryMarket;
-  const clonedPantheon = deepCloneConditionalLedger(raw?.pantheon);
-  const clonedWarPosture = deepCloneConditionalLedger(raw?.warPosture);
-  const clonedOccupations = deepCloneConditionalLedger(raw?.occupations);
-  const clonedReligionStates = deepCloneConditionalLedger(raw?.religionStates);
-  const clonedPausedAdvance = deepCloneConditionalLedger(raw?.pausedAdvance);
-  const clonedMartialReadiness = deepCloneConditionalLedger(raw?.martialReadiness);
-  const clonedConquestFeeds = deepCloneConditionalLedger(raw?.conquestFeeds);
-  const clonedMercenaryMarket = deepCloneConditionalLedger(raw?.mercenaryMarket);
+  /** @type {Record<string, unknown>} */
+  const conditionalLedgers = {};
+  for (const key of CONDITIONAL_LEDGER_KEYS) {
+    if (key in shallowRaw) delete shallowRaw[key];
+    const cloned = deepCloneConditionalLedger(raw?.[key]);
+    if (cloned !== undefined) conditionalLedgers[key] = cloned;
+  }
   return {
     ...base,
     ...shallowRaw,
@@ -289,58 +286,11 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     deployments: deepCloneLedger(raw?.deployments),
     tradeWarState: deepCloneLedger(raw?.tradeWarState),
     warExhaustion: deepCloneLedger(raw?.warExhaustion),
-    // Pantheon — CONDITIONAL materialization. Stripped from the shallow spread
-    // above; re-added here as a DEEP clone ONLY when present and non-empty, so a
-    // dormant/legacy world carries NO pantheon key (byte-identical under the
-    // dormancy oracle), while an active world's pantheon never aliases live state
-    // across ticks.
-    ...(clonedPantheon !== undefined ? { pantheon: clonedPantheon } : {}),
-    // religionStates — CONDITIONAL materialization (per-settlement pantheon: deities,
-    // adherent shares, niches, standings, chief). ABSENT until religion is active ⇒
-    // byte-identical dormant; DEEP-cloned when present so a pre-tick snapshot never
-    // aliases live share state across ticks.
-    ...(clonedReligionStates !== undefined ? { religionStates: clonedReligionStates } : {}),
-    // warPosture — CONDITIONAL materialization, identical discipline to pantheon:
-    // the per-settlement mobilization posture ledger ({ id -> { state, progress,
-    // sinceTick, covert } }). ABSENT while no settlement has left peace (a no-war /
-    // layer-off campaign carries NO warPosture key ⇒ byte-identical under the
-    // dormancy oracle), DEEP-cloned when present so a pre-tick snapshot never aliases
-    // live posture state across ticks.
-    ...(clonedWarPosture !== undefined ? { warPosture: clonedWarPosture } : {}),
-    // occupations — CONDITIONAL materialization, identical discipline to pantheon/
-    // warPosture: the per-OCCUPIED-settlement occupation-state ledger ({ occupiedId ->
-    // { occupierId, state, sinceTick, stateHeld, resistance, benefitYield, lastTick } }).
-    // ABSENT until the first conquest creates an occupation (a no-war / layer-off
-    // campaign carries NO occupations key ⇒ byte-identical under the dormancy oracle),
-    // DEEP-cloned when present so a pre-tick snapshot never aliases live occupation state
-    // across ticks (read-last/write-next).
-    ...(clonedOccupations !== undefined ? { occupations: clonedOccupations } : {}),
-    // pausedAdvance — CONDITIONAL materialization, identical discipline to pantheon/
-    // warPosture/occupations: the paused-Advance cursor ({ interval, ticksTotal,
-    // ticksDone, atTick, resumeTick, pendingMajors, preSnapshot, autoResolve,
-    // startedAt }). ABSENT when no advance is paused (a campaign with no advance in
-    // flight carries NO pausedAdvance key ⇒ byte-identical under the dormancy
-    // oracle), DEEP-cloned when present so a rehydrated cursor never aliases live
-    // state. CLEARING the pause writes pausedAdvance:null/absent ⇒ this returns
-    // undefined ⇒ the key is omitted (back to byte-neutral).
-    ...(clonedPausedAdvance !== undefined ? { pausedAdvance: clonedPausedAdvance } : {}),
-    // martialReadiness — CONDITIONAL materialization (W-F8), identical discipline to
-    // religionStates: the per-settlement { readiness01, experience01 } ledger with
-    // asymmetric hysteresis. ABSENT until a settlement first arms under a patron (a
-    // deity-free / war-free campaign carries NO key ⇒ byte-identical under the dormancy
-    // oracle), DEEP-cloned when present so a pre-tick snapshot never aliases live
-    // readiness across ticks (read-last/write-next).
-    ...(clonedMartialReadiness !== undefined ? { martialReadiness: clonedMartialReadiness } : {}),
-    // conquestFeeds — CONDITIONAL materialization (W-C2), identical discipline to
-    // martialReadiness: the per-victor { loot, captive, causes } decaying pulse ledger.
-    // ABSENT until the first conquest feeds a victor (byte-identical dormant), DEEP-cloned
-    // when present so a pre-tick snapshot never aliases live pulse state (read-last/write-next).
-    ...(clonedConquestFeeds !== undefined ? { conquestFeeds: clonedConquestFeeds } : {}),
-    // mercenaryMarket — CONDITIONAL materialization (W-C2), same discipline: the per-
-    // settlement { shortfall, presence, activity, supplement, prosperityCost,
-    // fidelityPenalty, causes } rented-force ledger. ABSENT until shortfall demand meets
-    // local mercenary supply (byte-identical dormant), DEEP-cloned when present.
-    ...(clonedMercenaryMarket !== undefined ? { mercenaryMarket: clonedMercenaryMarket } : {}),
+    // The conditionally-materialized ledgers, in CONDITIONAL_LEDGER_KEYS order
+    // (see the catalog comment above ensureWorldState — that order IS the
+    // serialized key order the byte-identity invariants pin). Each key appears
+    // ONLY when its deep-cloned value is present and non-empty.
+    ...conditionalLedgers,
   };
 }
 

@@ -31,7 +31,7 @@ import {
   ensureWorldState,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
 } from '../domain/worldPulse/worldState.js';
-import { normalizeSimulationRules } from '../domain/worldPulse/simulationRules.js';
+import { normalizeSimulationRules, worldProgressionOf } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, syncCampaignSnapshot,
   flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
@@ -94,6 +94,34 @@ function loadWorldEngine() {
   return _worldEnginePromise;
 }
 
+// ── Lazy control-layer profile tools (Phase 5.5 CL-0) ─────────────────────
+// validateSimulationProfile + the ruleset-change receipt builder live in the
+// lazily-loaded simulationProfile.js leaf so the first-paint entry closure
+// (byte-budgeted) carries none of it. Rules edits are async user actions, so
+// they simply await this memoized loader — same pattern as loadWorldEngine.
+let _profileToolsPromise = null;
+function loadProfileTools() {
+  if (!_profileToolsPromise) {
+    _profileToolsPromise = import('../domain/worldPulse/simulationProfile.js');
+  }
+  return _profileToolsPromise;
+}
+
+// FROZEN progression guard (CL-0 item 4): worldProgression 'frozen' parks time
+// itself — advance/resume/preview no-op at the store, the same no-op-with-
+// typed-reason discipline as the isAdvanceInFlight guard. State is FULLY
+// preserved (nothing is deleted or rewritten); unfreezing restores everything,
+// because freezing never touched anything but the rules. worldProgressionOf is
+// a virtual read: an untouched campaign has no worldProgression key and reads
+// 'dm_advanced' — this guard is byte-invisible to legacy saves.
+// The typed no-op result is shared (callers treat advance results as
+// read-only; ADVANCE_ERROR_TEXT maps the reason to plain language).
+const WORLD_FROZEN_RESULT = Object.freeze({ ok: false, reason: 'world_frozen' });
+// Frozen read against the STORED rules of a campaign (advance/resume guards).
+function frozenFor(get, campaignId) {
+  return worldProgressionOf(findActiveCampaign(get().campaigns, campaignId)?.worldState?.simulationRules) === 'frozen';
+}
+
 // ── Cross-slice contract ──────────────────────────────────────────────────
 // All 14 slices share ONE Immer store, so coupling is by shared state on the
 // draft + get() method calls — not imports. This slice's contract:
@@ -146,6 +174,11 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return null;
+    // FROZEN guard (CL-0): preview is an advance-shaped read, so it honors the
+    // EFFECTIVE rules it would run under — a dialog previewing an unfrozen
+    // draft over a frozen campaign still works (that is the what-if the dialog
+    // exists for); a frozen effective world previews nothing.
+    if (worldProgressionOf(options.simulationRules || campaign.worldState?.simulationRules) === 'frozen') return null;
     // Load the heavy preview machinery only once we know there's a campaign to
     // preview (keeps the not-found path from touching the lazy engine chunk).
     const { previewCampaignWorldPulse: domainPreviewCampaignWorldPulse } = await loadWorldEngine();
@@ -203,6 +236,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // edited mid-advance would be silently reverted by the Phase-2 commit (the
     // running interval computed from the OLD rules), so block the write instead.
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // CL-0: the merge/canonicalize/diff/receipt work is pure and rides the lazy
+    // profile-tools chunk (loaded BEFORE set(), used synchronously inside it).
+    const { prepareRulesUpdate } = await loadProfileTools();
     let campaignPersist = /** @type {any} */ (null);
     let normalizedRules = /** @type {any} */ (null);
     const now = new Date().toISOString();
@@ -210,13 +246,19 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
       const worldState = ensureWorldState(c.worldState, c);
-      // Build the plain rules object first so the telemetry read below is NOT an
-      // Immer draft proxy (which would be revoked once set() returns).
-      normalizedRules = normalizeSimulationRules({
-        ...(worldState.simulationRules || {}),
-        ...(patch || {}),
-      });
-      c.worldState = { ...worldState, simulationRules: normalizedRules };
+      // prepareRulesUpdate merges + canonicalizes (validateSimulationProfile →
+      // normalizeSimulationRules, so this write stays the single normalization
+      // choke point) and, on any EFFECTIVE change, folds a ruleset-change
+      // receipt into the conditionally-materialized worldState.rulesetLog
+      // (OBJECT keyed rc_<tick>_<seq>) + appends a kind:'ruleset_change' realm
+      // entry to the wizard news. No effective change ⇒ nextWorldState carries
+      // no receipt and nextWizardNews is null — byte-invisible. The plain
+      // objects it returns are built OUTSIDE the draft so the telemetry read
+      // below is never a revoked Immer proxy.
+      const prepared = prepareRulesUpdate(worldState, patch || {}, c.wizardNews, now);
+      normalizedRules = prepared.canonical;
+      c.worldState = prepared.nextWorldState;
+      if (prepared.nextWizardNews) c.wizardNews = prepared.nextWizardNews;
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
@@ -248,6 +290,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // sets pausedAdvance, so this is inert when the flag is OFF.
     if (get().getPausedAdvance(campaignId)) {
       return { ok: false, reason: 'advance_paused' };
+    }
+    // FROZEN guard (CL-0, checked synchronously like the guards above): a
+    // frozen world does not advance. Typed no-op so the caller's toast can
+    // explain in plain language; unfreeze in Simulation rules to resume.
+    if (frozenFor(get, campaignId)) {
+      return WORLD_FROZEN_RESULT;
     }
     set(state => {
       state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];
@@ -310,6 +358,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // typed result; advanceCampaignWorld's parked-pause guard blocks the reverse race.
     if (get().isAdvanceInFlight(campaignId)) {
       return { ok: false, reason: 'advance_in_flight' };
+    }
+    // FROZEN guard (CL-0): resuming a paused interval runs real ticks, so a
+    // frozen world blocks it the same way it blocks a fresh advance. The
+    // parked cursor is untouched — unfreeze and the resume works verbatim.
+    if (frozenFor(get, campaignId)) {
+      return WORLD_FROZEN_RESULT;
     }
     set(state => {
       state.advanceInFlight = [...(state.advanceInFlight || []), campaignId];

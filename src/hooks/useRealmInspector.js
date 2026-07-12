@@ -27,6 +27,7 @@ export const ADVANCE_ERROR_TEXT = Object.freeze({
   // Typed no-op reasons from the store guards (campaignWorldPulseSlice):
   advance_in_flight: 'The realm is already advancing. Give it a moment.',
   advance_paused: 'This realm has a paused advance. Resume it (or undo it) before advancing again.',
+  world_frozen: 'Time is frozen in this world — nothing moves until you unfreeze it. Change World progression in Simulation rules to advance.',
 });
 
 // The old campaign-workspace tabs map onto Inspector sections. The

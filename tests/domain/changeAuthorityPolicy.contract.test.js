@@ -75,10 +75,13 @@ const SOURCE_ANCHORS = Object.freeze({
   flow_migration: "applyMode: requireProposal && fraction >= MIGRATION_PROPOSAL_FRACTION ? 'proposal' : 'auto'",
   flow_trade_scarcity: "applyMode: requireProposal && severity >= TRADE_PROPOSAL_SEVERITY ? 'proposal' : 'auto'",
   population_dynamics: "applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto'",
-  tier_drift_collapse: "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
+  tier_drift_collapse: "applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto')",
   institution_lifecycle: "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
-  // severity-gated: proposal on severity alone, no flag.
-  pressure_event: "applyMode: pressure.score >= 0.72 ? 'proposal' : 'auto'",
+  // severity-gated: proposal on severity alone, no flag. Since CL-0 the legacy
+  // severity gate is the legacyMode argument fed through authorityFor, which
+  // passes it through VERBATIM under routine/full autonomy (byte-identical) and
+  // forces 'proposal' only under the new dm_only/recommendations modes.
+  pressure_event: "applyMode: authorityFor(rules, 'pressure_event', pressure.score >= 0.72 ? 'proposal' : 'auto')",
   faction_competition: "applyMode: severity >= 0.74 ? 'proposal' : 'auto'",
   stressor_escalation: "applyMode: severity >= 0.78 ? 'proposal' : 'auto'",
   relationship_evolution: 'applyMode: severity >= 0.72 ? "proposal" : "auto"',
@@ -91,7 +94,7 @@ const SOURCE_ANCHORS = Object.freeze({
   npc_adversarial_action: "const proposal = severity >= action.proposalAt || ['defect', 'sabotage', 'seek_promotion', 'undermine_rival'].includes(actionFamily);",
   faction_government_challenge: "ruleId: `faction_${band}_government_challenge`,\n    severity,\n    probability: (band === 'crisis' ? 0.12 : 0.04) + severity * (band === 'crisis' ? 0.34 : 0.22),\n    applyMode: 'proposal'",
   relationship_label_change: 'candidateType,\n    applyMode: "proposal",',
-  tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign).\n    applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto',",
+  tier_change: "ruleFamily: 'tier',\n    targetSaveId: item.id,\n    severity: drift.severity,\n    probability: chance,\n    // Honor majorChangesRequireProposal, consistent with resource_depletion in\n    // this module: a tier change stays a DM proposal under the conservative\n    // default (flag on), and auto-applies only when a campaign opts out of\n    // proposal gating (flag off, e.g. dramatic_campaign). CL-0: the flag gate\n    // is the LEGACY mode fed through authorityFor (verbatim under routine/full;\n    // forced to proposal under dm_only/recommendations).\n    applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto'),",
   // structural-proposal: auto by default; one branch routes via a proposal-only lever.
   strategy_move: "applyMode: proposal ? 'proposal' : 'auto'",
   // auto: bounded logical consequences. Anchored on the ruleId + applyMode block
@@ -161,16 +164,39 @@ describe('change-authority contract — newly-mapped sites carry their live auth
     );
   });
 
-  // tierResourceDynamics has TWO distinct applyMode gates, both now flag-gated:
-  // the tier change (flag alone) and resource_depletion (flag + severity).
-  // Assert BOTH live so a flip at either site is caught despite sharing a module.
-  test('tierResourceDynamics keeps both the flag-gated tier gate and the flag-gated depletion gate', () => {
+  // tierResourceDynamics has THREE distinct applyMode gates, all routed
+  // through authorityFor since CL-0 (tier/resource candidates never pass the
+  // evaluateWorldPulseRules choke point, so they consult the policy at-site):
+  // the tier change (flag alone), resource_depletion (flag + severity), and
+  // resource_recovery (auto). The LEGACY gate rides as the legacyMode argument,
+  // verbatim, so routine/full behavior is byte-identical to pre-CL0.
+  // Assert all three live so a flip at any site is caught despite sharing a module.
+  test('tierResourceDynamics keeps its three authority-routed gates', () => {
     const src = sourceFor('tierResourceDynamics.js');
     expect(src).toContain("ruleFamily: 'tier',");
-    expect(src).toContain("applyMode: rules.majorChangesRequireProposal ? 'proposal' : 'auto'"); // tierCandidate (flag-gated)
     expect(src).toContain(
-      "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
-    ); // resource_depletion (flag-gated)
+      "applyMode: authorityFor(rules, 'tier_change', rules.majorChangesRequireProposal ? 'proposal' : 'auto')",
+    ); // tierCandidate (flag-gated legacy mode)
+    expect(src).toContain(
+      "applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto')",
+    ); // resource_depletion (flag+severity legacy mode)
+    expect(src).toContain(
+      "applyMode: authorityFor(rules, 'resource_recovery', 'auto')",
+    ); // resource_recovery (auto legacy mode)
+  });
+
+  // CL-0: the evaluateWorldPulseRules choke point routes EVERY stochastic
+  // candidate family through authorityFor — the seam that makes the four
+  // severity-gated rogue families (pressure_event, faction_competition,
+  // stressor_escalation, relationship_evolution) consult the per-domain
+  // authority policy without rewriting their modules. Under routine/full it
+  // returns each candidate's own applyMode verbatim (byte-identical, pinned by
+  // authorityLegacyPin.test.js); under dm_only/recommendations it forces
+  // proposal.
+  test('evaluateWorldPulseRules routes all candidates through authorityFor', () => {
+    const src = sourceFor('candidateEvents.js');
+    expect(src).toContain("authorityFor(rules, candidate.ruleFamily || candidate.candidateType, candidate.applyMode)");
+    expect(src).toContain("resolveCandidateConflicts(routed, context.budgets || {})");
   });
 
   // The relationship rules have TWO distinct gates too: labelProposal (always

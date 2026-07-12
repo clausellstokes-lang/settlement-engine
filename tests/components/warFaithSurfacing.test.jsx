@@ -148,9 +148,10 @@ describe('SimulationRulesDialog engine gates', () => {
       onClose={onClose}
     />);
 
-    // The Engine disclosure defaults open while the gates are off — the gates render.
-    fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Religion dynamics' }));
+    // CL-0 dialog v2: the engine gates became the per-domain tri-state rows.
+    // "On its own" (auto) on the War and Faith-spread rows is the same write.
+    fireEvent.click(screen.getByTestId('domain-war-auto'));
+    fireEvent.click(screen.getByTestId('domain-religion-auto'));
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
 
     await waitFor(() => {
@@ -158,8 +159,9 @@ describe('SimulationRulesDialog engine gates', () => {
         warLayerEnabled: true,
         // War auto-enables Settlement Strategy (cascade).
         settlementStrategyEnabled: true,
-        // Religion gate keys on the legacy alias; normalize mirrors it to OUR
-        // canonical faithSpreadEnabled — the OURS-ahead granular gate, kept in sync.
+        // The faith row pair-writes the canonical faithSpreadEnabled AND its
+        // legacy religionDynamicsEnabled mirror so the write survives the
+        // normalizer's legacy-wins lockstep (the CL-0 LivingWorldGates fix).
         religionDynamicsEnabled: true,
         faithSpreadEnabled: true,
       }));

@@ -33,7 +33,7 @@ describe('SimulationRulesDialog', () => {
         }],
       },
     });
-    actions.updateCampaignSimulationRules.mockResolvedValue({ presetId: 'dramatic_campaign' });
+    actions.updateCampaignSimulationRules.mockResolvedValue({ presetId: 'full_simulation' });
     const onClose = vi.fn();
 
     render(<SimulationRulesDialog
@@ -42,15 +42,19 @@ describe('SimulationRulesDialog', () => {
       onClose={onClose}
     />);
 
-    fireEvent.click(screen.getByText('Dramatic Campaign'));
+    // CL-0 dialog v2: the grid carries the four §11 presets (the legacy trio
+    // stays resolvable in the catalog but off the grid).
+    fireEvent.click(screen.getByText('Full Simulation'));
     fireEvent.click(screen.getByRole('button', { name: 'Preview' }));
 
     await waitFor(() => {
       expect(actions.previewCampaignWorldPulse).toHaveBeenCalledWith('camp-1', 'one_month', {
         simulationRules: expect.objectContaining({
-          presetId: 'dramatic_campaign',
-          intensity: 'dramatic',
+          presetId: 'full_simulation',
+          propagationMode: 'full',
           majorChangesRequireProposal: false,
+          politicalAutonomy: 'full',
+          warLayerEnabled: true,
         }),
       });
     });
@@ -59,7 +63,7 @@ describe('SimulationRulesDialog', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Save' }));
     await waitFor(() => {
       expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-1', expect.objectContaining({
-        presetId: 'dramatic_campaign',
+        presetId: 'full_simulation',
       }));
       expect(onClose).toHaveBeenCalled();
     });

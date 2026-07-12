@@ -84,7 +84,20 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
     if (!campaignId || busy || blockedByDrift) return;
     setBusyKey(gate.key);
     try {
-      await updateRules?.(campaignId, { [gate.key]: next });
+      // CL-0 legacy-key cleanup: the faith gate writes the CANONICAL
+      // faithSpreadEnabled AND its legacy religionDynamicsEnabled mirror in one
+      // patch. Writing the canonical key alone is silently DROPPED: the store
+      // merges the patch over stored rules whose normalize-materialized legacy
+      // mirror (religionDynamicsEnabled:false) is authoritative in the
+      // normalizer's lockstep, so { faithSpreadEnabled: true } normalized back
+      // to false (verified empirically pre-CL0 — the gate could never turn
+      // faith on). Pair-writing keeps THIS control's intent authoritative
+      // through the deprecation window; the pair collapses to one key in the
+      // Phase 6 lifecycle pass.
+      const patch = gate.key === 'faithSpreadEnabled'
+        ? { faithSpreadEnabled: next, religionDynamicsEnabled: next }
+        : { [gate.key]: next };
+      await updateRules?.(campaignId, patch);
     } finally {
       setBusyKey(null);
     }

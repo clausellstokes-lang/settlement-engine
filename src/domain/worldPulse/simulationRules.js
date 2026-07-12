@@ -4,6 +4,34 @@ export const MIGRATION_MODES = Object.freeze(['roll', 'void', 'distributed', 'co
 export const SIMULATION_RULES_SCHEMA_VERSION = 1;
 export const CUSTOM_SIMULATION_PRESET_ID = 'custom';
 export const DEFAULT_SIMULATION_PRESET_ID = 'realistic_regional';
+// ── Simulation-profile axes (Phase 5.5 CL-0, design §11) ────────────────────
+// The four §11 political-autonomy modes, all live today: dm_only /
+// recommendations force EVERY candidate to a DM proposal; routine is TODAY'S
+// behavior (majors propose, routine consequences auto-apply); full is the
+// legacy flag-off behavior. The other profile axes (worldProgression /
+// spatialMode / travelMode / infoMode) accept only today's meaningful values —
+// forward values FAIL CLOSED to the safe default in the normalizer (the
+// richer catalogs + the dependency-gating matrix live in the lazily-loaded
+// simulationProfile.js so first paint carries none of it).
+export const POLITICAL_AUTONOMY_MODES = Object.freeze(['dm_only', 'recommendations', 'routine', 'full']);
+export const SIMULATION_PROFILE_VERSION = 1;
+// The profile keys are VIRTUAL until touched: normalizeSimulationRules strips
+// them from its output when the INPUT carries none, so a campaign that never
+// touched the new controls persists byte-identically to today (the CL-0
+// constitutional law). Touch ANY profile key and the whole profile
+// materializes, canonical and versioned.
+// The default profile — spread into DEFAULT_SIMULATION_RULES and reused by the
+// normalizer's fail-closed materialize branch (spatial/travel/info accept only
+// these values today; worldProgression/politicalAutonomy override on top).
+const PROFILE_DEFAULTS = Object.freeze({
+  worldProgression: 'dm_advanced',
+  politicalAutonomy: 'routine',
+  spatialMode: 'ignore',
+  travelMode: 'instant',
+  infoMode: 'omniscient',
+  profileVersion: SIMULATION_PROFILE_VERSION,
+});
+export const PROFILE_KEYS = Object.freeze(Object.keys(PROFILE_DEFAULTS));
 
 export const DEFAULT_SIMULATION_RULES = Object.freeze({
   schemaVersion: SIMULATION_RULES_SCHEMA_VERSION,
@@ -110,45 +138,107 @@ export const DEFAULT_SIMULATION_RULES = Object.freeze({
   // (training vs kit). Nested under warLayerEnabled. Preset-stable.
   warSupplyQualityEnabled: false,
   migrationMode: 'roll',
+  // ── Simulation profile (CL-0) — the §11 control axes at today's build ──────
+  // These defaults ARE today's engine: DM-advanced progression (every advance is
+  // a DM action), routine political autonomy (majors propose, routine
+  // consequences apply), no geography, instant travel, omniscient information.
+  // VIRTUAL for untouched campaigns: the normalizer strips them from its output
+  // when the input carries none (see PROFILE_KEYS above), so their presence in
+  // this default object adds NO persisted bytes to a legacy save. Shared with
+  // the normalizer's materialize branch via PROFILE_DEFAULTS below.
+  ...PROFILE_DEFAULTS,
 });
 
+/**
+ * Compact preset constructor — every preset spreads DEFAULT_SIMULATION_RULES so
+ * new flags inherit their defaults and presetId stays stable (guarded by
+ * simulationRulesPreset.stability.test). NOTE the catalog carries NO summary
+ * copy since CL-0: the dialog owns its fiction-level card copy (lazy chunk) and
+ * nothing else consumed `summary` — this catalog rides the byte-budgeted
+ * first-paint entry closure, so dead display strings were dropped.
+ * @param {string} id
+ * @param {string} label
+ * @param {Record<string, unknown>} [overrides]
+ */
+function preset(id, label, overrides = {}) {
+  return Object.freeze({
+    id, label,
+    rules: Object.freeze({ ...DEFAULT_SIMULATION_RULES, presetId: id, ...overrides }),
+  });
+}
+
+// Shared override shapes (byte-budget dedupe; every key already exists in
+// DEFAULT_SIMULATION_RULES, so spreads never change preset key order): QUIET =
+// the low-volatility local world (quiet_local / narrative_campaign); OPEN =
+// the no-approval wide world (dramatic_campaign / full_simulation).
+const QUIET = Object.freeze({
+  propagationMode: 'local',
+  intensity: 'conservative',
+  migrationFlowsEnabled: false,
+  migrationMode: 'void',
+});
+const OPEN = Object.freeze({
+  propagationMode: 'full',
+  majorChangesRequireProposal: false,
+  politicalAutonomy: 'full',
+  migrationMode: 'distributed',
+});
+
+// KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
+// so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —
+// resolvable forever: old saves carry their ids, the realm toolbar chips apply
+// them, but the CL-0 dialog grid surfaces only the four §11 presets) stays
+// FIRST — a keyless legacy save whose rules match the defaults must keep
+// inferring 'realistic_regional' (byte-identical presetId), never
+// 'living_realm' (structurally the same world + an explicit autonomy). The
+// four §11 presets follow; their forward axes (spatial / travel / info /
+// progression) ride at their LOCKED values from the default spread, so preset
+// identity survives when those axes light up in later waves. dramatic_campaign
+// carries an explicit politicalAutonomy:'full' so its profile view agrees with
+// its flag-off rules (the normalizer's flag↔autonomy lockstep would otherwise
+// see a conflict).
 export const SIMULATION_RULE_PRESETS = Object.freeze({
-  quiet_local: Object.freeze({
-    id: 'quiet_local',
-    label: 'Quiet Local',
-    summary: 'Low volatility, local propagation, and proposal gates for major changes.',
-    rules: Object.freeze({
-      ...DEFAULT_SIMULATION_RULES,
-      presetId: 'quiet_local',
-      propagationMode: 'local',
-      intensity: 'conservative',
-      factionCompetitionEnabled: false,
-      migrationFlowsEnabled: false,
-      tradeFlowsEnabled: false,
-      migrationMode: 'void',
-    }),
+  quiet_local: preset('quiet_local', 'Quiet Local', {
+    ...QUIET,
+    factionCompetitionEnabled: false,
+    tradeFlowsEnabled: false,
   }),
-  realistic_regional: Object.freeze({
-    id: 'realistic_regional',
-    label: 'Realistic Regional',
-    summary: 'Default regional simulation with conservative approval gates.',
-    rules: Object.freeze({
-      ...DEFAULT_SIMULATION_RULES,
-      presetId: DEFAULT_SIMULATION_PRESET_ID,
-    }),
+  realistic_regional: preset(DEFAULT_SIMULATION_PRESET_ID, 'Realistic Regional', {}),
+  dramatic_campaign: preset('dramatic_campaign', 'Dramatic Campaign', {
+    ...OPEN,
+    intensity: 'dramatic',
   }),
-  dramatic_campaign: Object.freeze({
-    id: 'dramatic_campaign',
-    label: 'Dramatic Campaign',
-    summary: 'Higher intensity, wider propagation, and fewer proposal gates.',
-    rules: Object.freeze({
-      ...DEFAULT_SIMULATION_RULES,
-      presetId: 'dramatic_campaign',
-      propagationMode: 'full',
-      intensity: 'dramatic',
-      majorChangesRequireProposal: false,
-      migrationMode: 'distributed',
-    }),
+  static_campaign: preset('static_campaign', 'Static Campaign', {
+    propagationMode: 'off',
+    intensity: 'conservative',
+    stressorsEnabled: false,
+    emergentEventsEnabled: false,
+    relationshipDynamicsEnabled: false,
+    npcAgencyEnabled: false,
+    factionCompetitionEnabled: false,
+    populationDynamicsEnabled: false,
+    migrationFlowsEnabled: false,
+    tradeFlowsEnabled: false,
+    resourceDriftEnabled: false,
+    tierDriftEnabled: false,
+    institutionLifecycleEnabled: false,
+    migrationMode: 'void',
+    politicalAutonomy: 'dm_only',
+  }),
+  narrative_campaign: preset('narrative_campaign', 'Narrative Campaign', {
+    ...QUIET,
+    politicalAutonomy: 'recommendations',
+  }),
+  living_realm: preset('living_realm', 'Living Realm', {
+    politicalAutonomy: 'routine',
+  }),
+  full_simulation: preset('full_simulation', 'Full Simulation', {
+    ...OPEN,
+    intensity: 'normal',
+    warLayerEnabled: true,
+    settlementStrategyEnabled: true,
+    faithSpreadEnabled: true,
+    religionDynamicsEnabled: true,
   }),
 });
 
@@ -156,32 +246,18 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
  * @typedef {Partial<typeof DEFAULT_SIMULATION_RULES> & Record<string, unknown>} SimulationRulesInput
  */
 
-const BOOLEAN_KEYS = Object.freeze([
-  'stressorsEnabled',
-  'emergentEventsEnabled',
-  'relationshipDynamicsEnabled',
-  'npcAgencyEnabled',
-  'factionCompetitionEnabled',
-  'populationDynamicsEnabled',
-  'migrationFlowsEnabled',
-  'tradeFlowsEnabled',
-  'resourceDriftEnabled',
-  'tierDriftEnabled',
-  'institutionLifecycleEnabled',
-  'majorChangesRequireProposal',
-  'warLayerEnabled',
-  'settlementStrategyEnabled',
-  'faithSpreadEnabled',
-  'religionDynamicsEnabled',
-  'defenderAttritionEnabled',
-  'warEconomyDrainEnabled',
-  'defenderResolveEnabled',
-  'warDispositionEnabled',
-  'allyDefenseEnabled',
-  'warForageEnabled',
-  'warLevyEnabled',
-  'warSupplyQualityEnabled',
-]);
+// Every boolean rule flag, DERIVED from the default surface (CL-0 byte-budget
+// consolidation: the previous 24-entry quoted list duplicated the keys of
+// DEFAULT_SIMULATION_RULES verbatim, in the same order — the derivation is the
+// exact reconstruction the preset-stability and fail-closed test oracles
+// already use). A new boolean flag added to DEFAULT_SIMULATION_RULES joins the
+// fail-closed coercion + preset comparison automatically, which was always the
+// intent of the hand-maintained list.
+const BOOLEAN_KEYS = Object.freeze(
+  Object.keys(DEFAULT_SIMULATION_RULES).filter(
+    key => typeof (/** @type {Record<string, unknown>} */ (DEFAULT_SIMULATION_RULES)[key]) === 'boolean',
+  ),
+);
 
 const RULE_COMPARISON_KEYS = Object.freeze([
   'propagationMode',
@@ -200,11 +276,47 @@ function enumValue(value, allowed, fallback) {
 }
 
 /**
+ * Effective world-progression read (CL-0, total on garbage). VIRTUAL: an
+ * absent/unknown value IS today's behavior — dm_advanced (every advance is a DM
+ * action). Only an explicit 'frozen' changes anything; the forward
+ * 'living'/'autonomous' values fail closed here until those modes are built.
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {'frozen' | 'dm_advanced'}
+ */
+export function worldProgressionOf(rules) {
+  return rules && rules.worldProgression === 'frozen' ? 'frozen' : 'dm_advanced';
+}
+
+/**
+ * Effective political-autonomy read (CL-0, total on garbage). An explicit
+ * valid mode wins; otherwise the legacy majorChangesRequireProposal flag maps
+ * in — true (or absent/garbage, the fail-closed default) → 'routine' (today's
+ * conservative behavior), explicit false → 'full' (the legacy flag-off
+ * behavior, e.g. dramatic_campaign). This mapping is what keeps an untouched
+ * campaign byte-identical per flag.
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {'dm_only' | 'recommendations' | 'routine' | 'full'}
+ */
+export function politicalAutonomyOf(rules) {
+  const r = rules && typeof rules === 'object' ? rules : {};
+  const mode = /** @type {string} */ (r.politicalAutonomy);
+  return POLITICAL_AUTONOMY_MODES.includes(mode)
+    ? /** @type {'dm_only' | 'recommendations' | 'routine' | 'full'} */ (mode)
+    : (r.majorChangesRequireProposal === false ? 'full' : 'routine');
+}
+
+/**
  * @param {Record<string, any>} rules
  * @param {any} preset
  */
 function rulesMatchPreset(rules, preset) {
-  return RULE_COMPARISON_KEYS.every(key => rules[key] === preset?.rules?.[key]);
+  // The legacy comparison keys compare raw; the profile axes compare through
+  // their EFFECTIVE reads so a virtual (untouched) profile still matches a
+  // preset that carries the same world explicitly. spatialMode/travelMode/
+  // infoMode clamp to single values today, so comparing them is vacuous.
+  return RULE_COMPARISON_KEYS.every(key => rules[key] === preset?.rules?.[key])
+    && worldProgressionOf(rules) === worldProgressionOf(preset?.rules)
+    && politicalAutonomyOf(rules) === politicalAutonomyOf(preset?.rules);
 }
 
 /**
@@ -257,6 +369,31 @@ export function normalizeSimulationRules(raw = {}) {
   const spread = legacySpread ?? newSpread ?? DEFAULT_SIMULATION_RULES.faithSpreadEnabled;
   next.faithSpreadEnabled = spread;
   next.religionDynamicsEnabled = spread;
+  // ── Simulation profile (Phase 5.5 CL-0) — VIRTUAL until touched ────────────
+  // THE CONSTITUTIONAL LAW: absent profile = legacy behavior, byte-exact,
+  // virtual. If the input carries NO profile key, the output carries none
+  // (delete the defaults the spread pulled in) — an untouched campaign persists
+  // byte-identically to today and reads its effective profile through the
+  // worldProgressionOf/politicalAutonomyOf accessors. Touch ANY profile key and
+  // the whole profile materializes, fail-closed:
+  //   • worldProgression: only 'frozen' is meaningful; 'living'/'autonomous'
+  //     are ACCEPTED but coerce to 'dm_advanced' until built.
+  //   • politicalAutonomy: all four modes live; garbage derives from the legacy
+  //     flag (true→routine, false→full), and the flag then MIRRORS the mode
+  //     (full→false, else true) so every legacy flag reader stays consistent.
+  //   • spatialMode/travelMode/infoMode: single meaningful value today — any
+  //     other value coerces to it (ignore/instant/omniscient).
+  // validateSimulationProfile (simulationProfile.js, lazy) reports these
+  // coercions as data; this normalizer IS its canonicalization step.
+  if (PROFILE_KEYS.some(key => key in input)) {
+    Object.assign(next, PROFILE_DEFAULTS, {
+      worldProgression: worldProgressionOf(input),
+      politicalAutonomy: politicalAutonomyOf(input),
+    });
+    next.majorChangesRequireProposal = next.politicalAutonomy !== 'full';
+  } else {
+    for (const key of PROFILE_KEYS) delete next[key];
+  }
   next.presetId = presetIdForRules(input, next);
   return next;
 }

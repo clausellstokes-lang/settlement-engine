@@ -32,18 +32,33 @@ const BOOLEAN_KEYS = Object.entries(DEFAULT_SIMULATION_RULES)
 const RULE_COMPARISON_KEYS = [...ENUM_COMPARISON_KEYS, ...BOOLEAN_KEYS];
 
 const PRESET_IDS = Object.keys(SIMULATION_RULE_PRESETS);
+// The legacy trio must stay resolvable forever (old saves carry these ids; the
+// realm toolbar chips apply them) AND must stay FIRST in the catalog: the
+// keyless inference in presetIdForRules returns the FIRST structural match, so
+// a legacy default-rules save keeps inferring realistic_regional, never the
+// structurally-identical living_realm.
+const LEGACY_PRESET_IDS = ['quiet_local', 'realistic_regional', 'dramatic_campaign'];
+const CL0_PRESET_IDS = ['static_campaign', 'narrative_campaign', 'living_realm', 'full_simulation'];
 
 describe('simulation rules preset — stability under future-flag churn', () => {
   // Anti-vacuity: the catalog and the comparison-key set are non-trivial. If
   // either collapsed to empty/one, the per-preset loops below would be vacuous.
-  test('there are exactly 3 named presets and a non-trivial comparison-key set', () => {
-    expect(PRESET_IDS.sort()).toEqual(
-      ['dramatic_campaign', 'quiet_local', 'realistic_regional'],
-    );
+  test('the catalog is the legacy trio FIRST plus the four §11 presets', () => {
+    expect(PRESET_IDS).toEqual([...LEGACY_PRESET_IDS, ...CL0_PRESET_IDS]);
     // 3 enum keys + the boolean toggle bank — proves we actually reconstructed
     // a meaningful key set, not an empty array that makes #2 always pass.
     expect(BOOLEAN_KEYS.length).toBeGreaterThan(5);
     expect(RULE_COMPARISON_KEYS.length).toBe(ENUM_COMPARISON_KEYS.length + BOOLEAN_KEYS.length);
+  });
+
+  // CL-0 byte-stability: keyless default rules still infer the LEGACY default
+  // preset (realistic_regional), not living_realm — the two are structurally
+  // the same world, and catalog order is what keeps old saves byte-identical.
+  test('keyless default rules keep inferring realistic_regional', () => {
+    const keyless = { ...SIMULATION_RULE_PRESETS.realistic_regional.rules };
+    delete keyless.presetId;
+    expect(normalizeSimulationRules(keyless).presetId).toBe('realistic_regional');
+    expect(normalizeSimulationRules({}).presetId).toBe('realistic_regional');
   });
 
   // #1 — each named preset round-trips to ITSELF (no collapse to 'custom').

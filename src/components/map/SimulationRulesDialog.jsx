@@ -1,12 +1,14 @@
-import { cloneElement, isValidElement, useId, useState } from 'react';
+import { cloneElement, isValidElement, useId, useMemo, useState } from 'react';
 import { Eye, Settings2, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import {
-  DEFAULT_SIMULATION_RULES,
   SIMULATION_RULE_PRESETS,
   normalizeSimulationRules,
-} from '../../domain/worldPulse/index.js';
+  worldProgressionOf,
+} from '../../domain/worldPulse/simulationRules.js';
+import { validateSimulationProfile } from '../../domain/worldPulse/simulationProfile.js';
+import { DomainRows, WorldLawAxes } from './SimulationRulesAxes.jsx';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
@@ -14,8 +16,22 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
-import GateToggle from './SimulationRulesGateToggle.jsx';
 import DisclosureHeader from './SimulationRulesDisclosure.jsx';
+
+/*
+ * Dialog v2 (Phase 5.5 CL-0, design §11): preset-picker-prominent, then the
+ * five world-law AXIS cards, then the per-domain tri-state rows, with the
+ * fine-grained subsystem switches behind the Detail disclosure.
+ *
+ * THE COPY LAW (binding, §11): every control describes a FICTIONAL ASSUMPTION
+ * about the world — "time is frozen", "news is always accurate", "trade adjusts
+ * on its own" — never an engine mechanism. The DM chooses what kind of world;
+ * the engine chooses the implementation.
+ *
+ * Preserved from RP-1 verbatim: the focus trap (useDialogFocusTrap) and the
+ * mid-advance write guard (banner + disabled Save + the belt-and-braces check
+ * in save()); tests/ui/simulationRulesDialog.writeGuard.test.jsx pins both.
+ */
 
 const PROPAGATION_OPTIONS = [
   ['full', 'Full regional'],
@@ -37,46 +53,31 @@ const MIGRATION_OPTIONS = [
   ['concentrated', 'Concentrate'],
 ];
 
+// The fine-grained subsystem switches that stay behind Detail. Diplomacy,
+// trade, migration, faith, war, and ambition moved UP into the tri-state
+// domain rows; the approval flag moved up into the "Who decides" axis.
 const TOGGLES = [
   ['emergentEventsEnabled', 'Emergents'],
   ['stressorsEnabled', 'Stressors'],
-  ['relationshipDynamicsEnabled', 'Relationships'],
   ['npcAgencyEnabled', 'NPC agency'],
   ['factionCompetitionEnabled', 'Factions'],
   ['populationDynamicsEnabled', 'Population'],
-  ['migrationFlowsEnabled', 'Migration flows'],
-  ['tradeFlowsEnabled', 'Trade flows'],
   ['resourceDriftEnabled', 'Resources'],
   ['tierDriftEnabled', 'Promotion/demotion'],
   ['institutionLifecycleEnabled', 'Institution lifecycle'],
-  ['majorChangesRequireProposal', 'Major proposals'],
 ];
 
-// ── UX Phase 4 — the THREE living-world system gates ─────────────────────────
-// These default to FALSE (see DEFAULT_SIMULATION_RULES) and, until this dialog
-// shipped, had NO UI toggle ANYWHERE, leaving the premium war/strategy/religion
-// engine unreachable. Each carries a one-line "what it does" plus the byte-
-// identical-when-off promise. They render in a separate "advanced" group below the
-// 12 core toggles, and (unlike the core toggles, which are on-unless-explicitly-
-// false) are shown as OFF unless explicitly true, matching their false default.
-//
-// Tier note: the dialog only renders for canManageCampaigns (paying) users, so the
-// tier gate lives UPSTREAM (RealmDashboard handles the free/anon locked state and
-// any pricing-moment prompts). These are in-app subsystem opt-ins, never a tier
-// wall, so there is no flat denial to soften here.
-//
-// Faith reconciliation (OUR floor): the religion gate keys on `religionDynamicsEnabled`,
-// the LEGACY-authoritative alias. normalizeSimulationRules mirrors it to OUR canonical
-// `faithSpreadEnabled` in lockstep (legacy wins when explicitly set), so this toggle
-// drives the engine's granular faith-spread gate without replacing it — the OURS-ahead
-// gate the dashboard LivingWorldGates also reads/writes.
-const ADVANCED_GATES = [
-  ['warLayerEnabled', 'War layer',
-    'Armies march, sieges form, conquests change rulers. Off = no war fronts (byte-identical to today).'],
-  ['settlementStrategyEnabled', 'Settlement strategy',
-    'Settlements choose to defend, deploy, or sue for peace. Off = no strategy candidates.'],
-  ['religionDynamicsEnabled', 'Religion dynamics',
-    'Deities contest converts and gain seats, but only once a settlement carries a patron deity (or an imposed cult). Off or deity-free equals no faith drift.'],
+// The §11 preset grid: the four control-layer presets. The legacy trio
+// (quiet_local / realistic_regional / dramatic_campaign) stays resolvable in
+// SIMULATION_RULE_PRESETS — old saves keep their identity and the realm
+// toolbar chips keep working — but this grid tells the §11 story. Richer,
+// fiction-level card copy lives HERE (lazy chunk) so the entry-closure preset
+// catalog carries only its short summaries.
+const GRID_PRESETS = [
+  ['static_campaign', 'A recorded world: nothing moves unless you move it.'],
+  ['narrative_campaign', 'An authored world that reacts and proposes, but never takes over.'],
+  ['living_realm', 'Routine life runs itself; the major turns still ask you first.'],
+  ['full_simulation', 'The whole engine: war, faith, trade, and politics act on their own.'],
 ];
 
 function human(value) {
@@ -218,26 +219,48 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewResult, setPreviewResult] = useState(null);
   const [error, setError] = useState(null);
-  // Progressive disclosure: presets stay open; the Detail toggles and the Engine
-  // living-world gates collapse into groups. Detail defaults closed. The Engine
-  // group holds the ADVERTISED war/religion gates (off by default, previously
-  // buried here), so default it OPEN while they're still off — surfaced on first open.
+  // Progressive disclosure: presets + axes + domain rows stay open; the
+  // fine-grained Detail toggles collapse. Detail defaults closed.
   const [detailOpen, setDetailOpen] = useState(false);
-  const [engineOpen, setEngineOpen] = useState(() => !draft.warLayerEnabled && !draft.religionDynamicsEnabled);
 
-  const presets = Object.values(SIMULATION_RULE_PRESETS);
   const activePreset = SIMULATION_RULE_PRESETS[draft.presetId] || null;
   const previewOutcomes = previewResult?.pulseRecord?.selectedOutcomes || previewResult?.selected || [];
 
-  const setField = (key, value) => {
+  // The dependency-gating record for the CURRENT draft — coercions as data
+  // (validateSimulationProfile), consumed for the honest disabled states.
+  const gating = useMemo(() => validateSimulationProfile(draft), [draft]);
+  const frozen = worldProgressionOf(draft) === 'frozen';
+  const frozenAutonomyLaw = gating.coercions.find(c => c.law === 'frozen_world_pauses_autonomy') || null;
+
+  const setFields = (patch) => {
     setDraft(current => {
-      const merged = { ...current, [key]: value };
-      // Store-seam mirror: drift OFF cascades War + Strategy off; War ON locks Strategy on.
+      const merged = { ...current, ...patch };
+      // Store-seam mirror: Diplomacy OFF cascades War + Ambition off; War ON locks Ambition on.
       if (!merged.relationshipDynamicsEnabled) { merged.warLayerEnabled = false; merged.settlementStrategyEnabled = false; }
       if (merged.warLayerEnabled) merged.settlementStrategyEnabled = true;
       return normalizeSimulationRules(merged);
     });
     setPreviewResult(null);
+  };
+  const setField = (key, value) => setFields({ [key]: value });
+
+  // Domain rows write the flags (the booleans REMAIN the storage; the tri-state
+  // is the read model). The faith row pair-writes its legacy mirror so the
+  // canonical write survives the normalizer's legacy-wins lockstep — same fix
+  // as LivingWorldGates (verified: a lone faithSpreadEnabled write is dropped).
+  const setDomainEnabled = (domain, enabled) => {
+    if (domain === 'religion') {
+      setFields({ faithSpreadEnabled: enabled, religionDynamicsEnabled: enabled });
+      return;
+    }
+    const flagByDomain = {
+      diplomacy: 'relationshipDynamicsEnabled',
+      trade: 'tradeFlowsEnabled',
+      migration: 'migrationFlowsEnabled',
+      war: 'warLayerEnabled',
+      strategy: 'settlementStrategyEnabled',
+    };
+    setField(flagByDomain[domain], enabled);
   };
 
   const applyPreset = (presetId) => {
@@ -248,7 +271,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   };
 
   const runPreview = async () => {
-    if (!campaign?.id || previewBusy) return;
+    if (!campaign?.id || previewBusy || frozen) return;
     setPreviewBusy(true);
     setError(null);
     try {
@@ -281,7 +304,9 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
   };
 
   const reset = () => {
-    setDraft(normalizeSimulationRules(DEFAULT_SIMULATION_RULES));
+    // normalize({}) is the untouched-campaign default — it carries NO profile
+    // keys, so resetting a legacy campaign never materializes the profile.
+    setDraft(normalizeSimulationRules({}));
     setPreviewResult(null);
   };
 
@@ -309,8 +334,8 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
         aria-labelledby={titleId}
         tabIndex={-1}
         style={{
-          width: 'min(100%, 640px)',
-          maxHeight: 'min(92vh, 760px)',
+          width: 'min(100%, 680px)',
+          maxHeight: 'min(92vh, 800px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
           borderRadius: R.lg,
@@ -395,20 +420,21 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
 
           <div style={{ display: 'grid', gap: SP.sm }}>
             <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
-              Preset
+              What kind of world is this?
             </div>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 150px), 1fr))',
               gap: SP.sm,
             }}>
-              {presets.map(preset => {
-                const selected = draft.presetId === preset.id;
+              {GRID_PRESETS.map(([presetId, cardCopy]) => {
+                const preset = SIMULATION_RULE_PRESETS[presetId];
+                const selected = draft.presetId === presetId;
                 return (
                   <button
-                    key={preset.id}
+                    key={presetId}
                     type="button"
-                    onClick={() => applyPreset(preset.id)}
+                    onClick={() => applyPreset(presetId)}
                     disabled={advanceBlocked}
                     style={{
                       display: 'grid',
@@ -428,29 +454,43 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       {preset.label}
                     </span>
                     <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.35 }}>
-                      {preset.summary}
+                      {cardCopy}
                     </span>
                   </button>
                 );
               })}
             </div>
-            {!activePreset && (
+            {!GRID_PRESETS.some(([presetId]) => presetId === draft.presetId) && (
               <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
-                Custom
+                {activePreset ? `${activePreset.label} (a classic preset)` : 'Custom — this world follows its own laws.'}
               </div>
             )}
           </div>
 
+          {/* ── The five world-law AXES (§11) + the per-domain tri-state rows.
+              Extracted to SimulationRulesAxes.jsx (max-lines discipline, same
+              split as SimulationRulesDisclosure). */}
+          <WorldLawAxes
+            draft={draft}
+            advanceBlocked={advanceBlocked}
+            frozenAutonomyLaw={frozenAutonomyLaw}
+            onSetField={setField}
+          />
+          <DomainRows
+            draft={draft}
+            advanceBlocked={advanceBlocked}
+            onSetDomain={setDomainEnabled}
+          />
+
           {/* ── DETAIL altitude: the propagation/intensity/migration selects and
-              the 12 fine-grained subsystem toggles, behind a disclosure so the
-              dialog opens on presets, not a wall of switches. ───────────────── */}
+              the remaining fine-grained subsystem toggles, behind a disclosure. */}
           <div style={{ display: 'grid', gap: SP.sm }}>
             <DisclosureHeader
               open={detailOpen}
               onToggle={() => setDetailOpen(o => !o)}
               regionId={`${titleId}-detail`}
               title="Detail toggles"
-              summary="Propagation, intensity, migration, and the twelve subsystem switches."
+              summary="Propagation, intensity, migration, and the eight subsystem switches."
             />
             {detailOpen && (
               <div id={`${titleId}-detail`} style={{ display: 'grid', gap: SP.lg }}>
@@ -489,64 +529,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             )}
           </div>
 
-          {/* ── ENGINE altitude — UX Phase 4 living-world systems ─────────────
-              The three premium gates (war / strategy / religion) that had no
-              UI toggle anywhere until now. Each defaults OFF and is byte-
-              identical when off. This is the fix that makes the premium engine
-              reachable. Now behind its own disclosure as the deepest altitude. */}
-          <div style={{ display: 'grid', gap: SP.sm }}>
-            <DisclosureHeader
-              open={engineOpen}
-              onToggle={() => setEngineOpen(o => !o)}
-              regionId={`${titleId}-engine`}
-              title="Engine gates (advanced)"
-              summary="Opt-in living-world subsystems, off by default and byte-identical to today while off."
-            />
-            {engineOpen && (
-              <div id={`${titleId}-engine`} style={{
-                display: 'grid',
-                gap: SP.sm,
-                padding: SP.md,
-                border: `1px solid ${GOLD}`,
-                borderRadius: R.md,
-                background: GOLD_BG,
-              }}>
-                <div style={{ display: 'grid', gap: 2 }}>
-                  <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
-                    Living-world systems (advanced)
-                  </div>
-                  <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
-                    Opt-in subsystems, off by default. Each is byte-identical to today while off. Turn one on and the realm starts moving.
-                  </div>
-                </div>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
-                  gap: SP.sm,
-                }}>
-                  {ADVANCED_GATES.map(([key, label, description]) => {
-                    // Settlement Strategy is auto-enabled and locked on while War
-                    // is on (it has no inputs without war fronts).
-                    const forcedByWar = key === 'settlementStrategyEnabled' && draft.warLayerEnabled === true;
-                    // War IS a relationship dynamic: Relationships off ⇒ these gates stay locked off.
-                    const blockedByDrift = (key === 'warLayerEnabled' || key === 'settlementStrategyEnabled') && draft.relationshipDynamicsEnabled !== true;
-                    return (
-                      <GateToggle
-                        key={key}
-                        label={label}
-                        description={forcedByWar ? `${description} Auto-enabled by the War layer.` : description}
-                        checked={draft[key] === true}
-                        disabled={forcedByWar || blockedByDrift || advanceBlocked}
-                        disabledReason={blockedByDrift ? 'Needs the Relationships toggle: war is a relationship dynamic, so a frozen web cannot raise fronts.' : advanceBlocked && !forcedByWar ? 'The realm is advancing…' : ''}
-                        onChange={value => setField(key, value)}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-
           <div style={{
             display: 'grid',
             gap: SP.sm,
@@ -570,12 +552,17 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 icon={<Eye size={13} />}
                 onClick={runPreview}
                 busy={previewBusy}
-                disabled={!campaign?.id}
+                disabled={!campaign?.id || frozen}
+                title={frozen ? 'Time is frozen — there is nothing to preview until it thaws.' : undefined}
               >
                 Preview
               </Button>
             </div>
-            {previewResult ? (
+            {frozen ? (
+              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, borderRadius: R.md, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+                Time is frozen: the world will not advance (the Advance action is disabled) until you set Time back to “On your mark”. Everything is preserved exactly as it stands.
+              </div>
+            ) : previewResult ? (
               <>
                 <div style={{
                   display: 'grid',
