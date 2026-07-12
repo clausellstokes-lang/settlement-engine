@@ -649,6 +649,69 @@ EXCURSION model, never emigration:
   missionary). While away, the NPC's dossier card shows the absence + expected return (legibility);
   the destination's dossier gains a visitor hook. Deterministic, bounded, conditionally materialized.
 
+## 4i. The turning of the year — SEASONS (owner, round 19; architect expansion ratified-in-principle)
+The 4-4-5 calendar's 13-week quarters BECOME the four seasons (spring wks 1-13, summer 14-26, fall
+27-39, winter 40-52). Season is a PURE FUNCTION of the tick — deterministic, no roll. Seasons give the
+world an annual HEARTBEAT: a recurring, endogenous stress test that fights the stasis finding without
+any actor doing anything. The year itself becomes a character.
+
+**THE FOOD YEAR (owner, verbatim intent — the core loop):**
+- RENEWABLE natural resources (animals/hunting, fisheries, farming) cycle: ABUNDANT through the growing
+  year → TEMPORARILY DEPLETED in winter → REPLENISH TO ABUNDANT in spring. Temporary, deterministic,
+  biome-modulated (tundra harsh, temperate standard, coastal milder — amplitude from the canon biome).
+- The GRANARY is the rhythm's buffer: food supply in winter depends on GRANARY STORAGE. Granaries REFILL
+  their deficit through SUMMER and FALL (the harvest), DRAW DOWN through winter. Implementation: the
+  EXISTING foodStockpile becomes the granary LEVEL; CAPACITY derives from tier/institutions/prosperity
+  (a proper granary is infrastructure — derived, not authored).
+- THE ANNUAL DRAMA CURVE this creates: FALL is the anxious season (did the harvest fill the stores?);
+  EARLY WINTER is comfortable; LATE WINTER is the crisis point (stores run dry BEFORE spring — the
+  historical "hungry gap"); SPRING is relief. A poor harvest + low granary at winter's onset = famine
+  pressure → the whole downstream (§4c migration, mortality, unrest) — WITHOUT any war. And WAR COMPOSES
+  chillingly: an army that burns or FORAGES a harvest in autumn (§5 forage/levy) inflicts a DELAYED
+  catastrophe — war in autumn kills in late winter. The DM sees it coming for a season.
+
+**WINTER TRAVEL — SLOW, NOT SEVER (owner, explicit):** winter applies a seasonal MULTIPLIER to the cost
+field rather than closing routes — and it is MULTIPLICATIVE with terrain, so already-slow terrain
+(mountains) degrades toward effective-impassability while plains merely slow. Nothing is hard-isolated;
+everything is priced. DYNAMIC consequences compose across every layer:
+- INFORMATION RUNS COLD: couriers/caravans slow ⇒ the rumor mill slows ⇒ timeliness (§4f) decays faster
+  in winter ⇒ belief staleness and absence-uncertainty (round 13) RISE seasonally. News freezes with the
+  roads. THE SPRING THAW becomes an annual INFORMATION EVENT — a burst of catch-up news as the passes
+  reopen and a winter's worth of world arrives at once (the most immersive single consequence).
+- THE CAMPAIGN SEASON EMERGES ENDOGENOUSLY: armies are never forbidden to march in winter — it is simply
+  terrible (slow + supply consumption up + the granary math working against the mover). Wars naturally
+  pause in winter and resume in spring BY COST, not by rule. A WINTER SIEGE becomes a starvation RACE:
+  the besieged drain their granary faster while the besieger's supply lines crawl — brutal for both,
+  historically exact.
+- TRADE BREATHES: caravan volume drops in winter; import-dependent settlements lean on stockpiles;
+  supply-starvation risk (§4) is seasonal; the entrepôt's warehouses matter most in February. (If SEA
+  LANES are ratified: storm seasons close the cheap route in winter — the two decisions compose.)
+- MIGRATION: fleeing in winter is desperation — §4c road mortality is seasonal; spring is the migration
+  season. (Named NPCs remain excursion-protected per §4h — seasonality never rolls against the cast.)
+
+**SEASONAL TEXTURE (the immersion layer — cheap reads off the season clock):** harvest festivals in
+fall, midwinter rites, spring renewal — faith events keyed to the season (a harvest deity's great moment;
+pilgrim traffic slows in winter with the roads); lean winters raise criminal desperation (crime pressure
+seasonal — the crime↔security counterforce gets a rhythm); founding happens in spring/summer (the W-C3
+founding lane gains a seasonal gate); institution activity reads seasonally (the mill after harvest, the
+fishery in season) — display-level vocabulary, not new mechanics.
+
+**INTER-ANNUAL VARIANCE (architect — the "no two winters alike" knob):** purely deterministic seasons
+would make every year rhythmically identical. Layer RARE, SEEDED severity draws per (year, region):
+a HARD WINTER (severity multiplier), a DROUGHT (summer replenishment partially fails), a BOUNTIFUL
+HARVEST. Same discipline as organic rumor degradation (round 13): PRNG-gated, bounded, seeded fork
+(`season:${year}:${region}`) ⇒ deterministic on replay, but the years differ — and a hard winter after
+a war-burned harvest is an emergent catastrophe no one authored.
+
+**ARCHITECT NOTE — SEASONS SPLIT ACROSS THE BUILD (important):** the food year is ASPATIAL — the
+resource/granary cycle is populationDynamics/foodStockpile work and does NOT need the cost field. So:
+- SEASONS-A (aspatial): resource cycling + granary rhythm + festivals/crime/founding texture — can ship
+  EARLY (alongside/just after CL-0), gated as a CONTROL-LAYER DOMAIN MODULE (`seasonsEnabled` tri-state;
+  default OFF ⇒ byte-identical; Living Realm+ presets turn it on — CL-0 just built exactly this seam).
+- SEASONS-B (spatial): the travel/information/campaign-rhythm half — rides the keystone (a seasonal
+  overlay on the cost field, versioned under the cost-law per §V.1's "seasonal passability").
+Dormancy/determinism: season = f(tick); amplitude = f(canon biome); variance = seeded; OFF ⇒ prior bytes.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
