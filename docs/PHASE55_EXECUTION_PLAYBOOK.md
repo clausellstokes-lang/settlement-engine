@@ -505,18 +505,54 @@ a 30y two-power border war that ENDS endogenously. Sensitive: the sigmoid consta
 detection is O(armies²) per tick — armies are few, assert a bound; the old capacity-roll path must
 be cleanly gone (no dual siege math).
 
-### M6 — ENTREPÔT / TOLLS (depends: M2)
-Intermediary-frequency metric derived from digest gate-crossings of ACTIVE M2 shipment routes (not
-raw geometry — earned centrality); frequent intermediaries accrue toll/gate-tax prosperity + unlock
-transshipment institutions on the W-C3 founding lane (warehouse, customs house, carriers' guild).
-Toll term joins the M1 route re-score: greedy tolls divert shipments (the self-balancing reroute).
-CO-BUILT BRAKES (V.6 + VI.1 — NO trade damping exists in-tree; build all of it here): congestion
-(throughput ceiling per gate), infrastructure maintenance cost (toll income has upkeep), wartime
-targeting (an entrepôt is a fat siege target — feeds M5 threat), rent extraction bounded. Soak: the
-megacity loop — 30y, no runaway hub (Gini-style bound on prosperity concentration asserted).
-Sensitive: the metric reads SHIPMENTS not geometry; the brake constants.
+### M6 — COMMODITY FLOW + ENTREPÔTS (RESCOPED, owner round 22; depends: M2, M4; four fenced parts)
+**M6a COMMODITY CONTINUITY (round 22.3):** goods gain origin→destination PHYSICAL truth. Finite
+ORIGIN STOCKS (production rates derived from activeChains — producers stop being infinite
+fountains); QUANTITY-denominated per-(settlement,good) stockpiles (upgrading M2's time-denominated
+buffers — reconcile, never both); EN-ROUTE DEPLETION at consuming intermediaries (a caravan is
+tapped along its route); the destination's stockpile drains until the next SOURCED caravan lands.
+THE GOODS-CONSERVATION INVARIANT (the M4 pattern applied to goods): Σproduced == Σin-transit +
+Σconsumed + Σstockpiled, EXACT, asserted. Guard-rails: AGGREGATE always (one caravan record per
+link — the M2 cardinality law; stock = sparse scalar only where activeChains produce/consume); NO
+NUMERIC PRICES (backlog-frozen) — stock levels surface as qualitative shortage/adequate/surplus
+BANDS feeding the existing prosperity/impairment reads.
+**M6b ENTREPÔTS/TOLLS (the original spec):** intermediary-frequency metric from gate-crossings of
+ACTIVE shipments (earned centrality — now REAL, it reads M6a's tapped flow); toll/gate-tax
+prosperity + transshipment institutions on the W-C3 founding lane (warehouse, customs house,
+carriers' guild); the toll term joins the M1 re-score (greedy tolls divert — self-balancing).
+CO-BUILT BRAKES (V.6+VI.1, all here): gate throughput ceiling, toll upkeep, wartime targeting (a
+fat entrepôt feeds M5 threat), rent extraction bounded.
+**M6c THE DISPATCH EV — GREED vs DANGER (round 22.4):** the caravan GO/NO-GO becomes an
+expected-value decision under fog (origin-side; M1's re-score stays the route-side). DETERRENT =
+the BELIEVED destination stressor (belief map, never truth — stale rumor turns a caravan from a
+recovered town; an unheard outbreak lets one walk in), with PER-STRESSOR danger shapes: plague =
+crew contraction + next-stop refusal (M11a); occupation = confiscation/extraction risk — an
+EXTRACTIVE occupier DAMPENS, never severs (it wants the tax); siege ≈ absolute; embattlement =
+already M1's. Caution = the ONE W0 risk-tolerance read (never a second alignment derivation).
+ATTRACTION = NEED-PREMIUM (the destination's M6a shortage band on exactly the carried goods) ×
+DYNAMIC APPETITE: a bounded per-settlement scalar that RISES on profitable risky deliveries
+(receipted), FALLS on losses (banditry/contraction/confiscation), DECAYS toward a disposition
+baseline from merchant-faction strength + alignment. Emergent: the most cut-off towns attract the
+boldest merchants — quarantines CREATE their blockade-runners. EV overrides ride existing edges:
+vassal tribute coercion (must-go), ally relief (trade-as-peace). Decision = threshold + dwell (the
+M1 hysteresis discipline), seeded tie-break.
+**M6d FLOW-DERIVED ECONOMICS (round 22.2):** GENERATION IS SACRED (ruling) — seeded exports/imports/
+prosperity stay the byte-identical baseline; measured flow drives only the LIVE DRIFT, under the
+marker. Grounded seam: supplyKernel currently DISCARDS arrivals (pulseKernel reads only .changed)
+→ a sparse windowed arrivals-tally under spatialLedgers (zero eager) written at the supplyKernel
+outcome loop + a marker-gated display selector (the settlementRumors dormancy shape: absent ⇒
+[]/null ⇒ the tab renders today's generation-time reads byte-identically). Modality is a ROSTER
+read (docks/airship-dock institutions; teleport = M9's slot). No movers ⇒ no live trade effects:
+isolation = autarky; blockade/winter/quarantine become economically real with zero new mechanism.
+Soak: the megacity loop (30y, Gini-style concentration bound) + the goods-conservation multi-year
+run + an EV fixture (premium beats danger at the documented threshold; appetite rises/falls/decays).
+Sensitive: the conservation assertion; no-prices (bands only); the ONE caution read; the appetite
+bounds; generation-baseline byte-identity on the aspatial path.
 
 ### M7 — CONTRABAND / SMUGGLE (depends: M6 + M4's cultureDistance)
+[Round 22.4 framing: smuggling is THE TAIL OF THE GREED CURVE — when M6c's dispatch EV goes
+negative (danger too high for legal trade), the UNMET need-premium spills into the criminal
+channel. One continuous economic logic: honest caravan → risk-taking merchant → smuggler.]
 Gates gain POLICY: prohibit/confiscate goods categories violating law/culture/alignment (contraband
 is RELATIONAL — cultureDistance + the governing archetype decide; slaves the flagship, data-driven
 category table). The smuggle network: strength from criminal opportunity + thieves-guild (the
@@ -604,7 +640,13 @@ directions): while active, religious authorities gain a TEMPORARY standing/influ
 piety pulse (formalizing the existing plague→temple-relief seam), REVERTING on clearance; clears-
 fast-under-care = the temple's triumph, rages-unchecked feeds the existing piety-crisis/abandonment
 seam. The QUARANTINE DILEMMA emerges free: movers re-route around plagued hubs (the hazard term) →
-isolation → M2 supply risk. CO-BUILT BRAKES: recovery floor (NO perma-plague — every record clears),
+isolation → M2 supply risk. TRADE REFUSAL (round 22.1): a settlement may TURN AWAY caravans from a
+source it BELIEVES plagued (the belief map, never truth — stale rumor refuses a recovered town; an
+unheard outbreak slips through; texture varies by infoMode) via the M2 severance-predicate seam,
+decided with the M1 hysteresis pattern (enter/exit + dwell — no gate-flicker), caution from the ONE
+W0 risk-tolerance read. The cost is free on both sides: the refuser's failover walks costlier or
+drains toward supply_starved; the refused exporter's outbound flow (and M6d dependency effects)
+drop. The refused-glut ↔ refuser-shortage pair prices BOTH sides (owner: "at cost of course"). CO-BUILT BRAKES: recovery floor (NO perma-plague — every record clears),
 the counterforce cap, per-tick spread bounded (cascade-depth cap). Soak: 20y port-seeded two-region
 run — the front walks the network at hopWeeks-consistent arrival ticks; care-rich clears faster than
 care-poor; armies avoid + contract + carry; influence pulses and reverts; every record eventually

@@ -1649,3 +1649,62 @@ ARCHITECT'S REFINEMENTS (accepted into the M11 spec, playbook PART 7):
 SEQUENCING: M11 appends to the mover ladder (depends M4 hard — exodus; the army coupling term ships
 with/after M5). The Living Realm checkpoint (PART 5) now validates THROUGH M11. Full dispatch-ready
 spec: playbook PART 7 §M11a/M11b.
+
+# ROUND 22 — THE TRADE-DECISION LAYER: refusal, flow-derived economics, commodity continuity, greed-vs-danger (owner, 2026-07-12)
+
+The owner's four directives (verbatim intent):
+1. Settlements may TURN AWAY caravans from settlements they HEARD are plagued — at a cost to their
+   own trade.
+2. Economic trade dependency (the economics tab) should be determined by MEASURED PHYSICAL FLOW —
+   how many caravans / teleportation / airship dockings / dock landings come in and out. No movers
+   ⇒ no trade effects for economics.
+3. Trade goods must have ORIGIN→DESTINATION CONTINUITY: a town needing ore gets it from a caravan
+   that travelled from an ore-EXPORTING settlement; that caravan's stock DEPLETES at each
+   intermediary that consumes ore until the destination; the destination's stockpile drains until
+   another sourced caravan arrives.
+4. Caravans from a town that has HEARD of a stressor (plague, occupation, any) at a destination may
+   CHOOSE to avoid it — weighted by what the caravan CARRIES vs what the destination NEEDS (profit,
+   amongst other scenarios). GREED is weighed against DANGER, and the greed must be DYNAMIC.
+
+ARCHITECT'S REFINEMENTS (all accepted into the specs):
+1. REFUSAL reads the BELIEF MAP, never ground truth (stale rumor refuses a recovered town; an
+   unheard outbreak slips through) — the decision uses the M1 hysteresis pattern (enter/exit + dwell,
+   no gate-flicker), caution from the SAME W0 risk-tolerance read as M1 (one alignment read, never
+   two). The cost is free on both sides: M2 failover walks to a costlier producer / drains toward
+   supply_starved; the refused exporter's outbound flow (and point-2 dependency effects) drop.
+2. DEPENDENCY-FROM-FLOW: GENERATION IS SACRED (ruling) — seeded exports/imports/prosperity stay the
+   byte-identical baseline; measured flow drives only the LIVE DRIFT on top, under the marker.
+   GROUNDED: M2's kernel currently DISCARDS arrivals (pulseKernel reads only supply.changed; zero
+   throughput counts exist anywhere) → the build is a small arrivals-tally seam at supplyKernel
+   (sparse windowed tally under spatialLedgers, zero eager bytes) + a marker-gated display selector
+   (the settlementRumors.js dormancy shape). Modality is a ROSTER READ (docks/airship-dock
+   institutions detectable; teleport = M9's slot). Isolation⇒autarky; blockade/winter/quarantine
+   become economically real with no new mechanism.
+3. COMMODITY CONTINUITY = the RESCOPED M6 ("COMMODITY FLOW + ENTREPÔTS"): finite origin stocks
+   (production rates from activeChains), QUANTITY-denominated stockpiles (upgrading M2's
+   time-denominated buffers), EN-ROUTE DEPLETION at consuming intermediaries (= entrepôt
+   transshipment — one physical model with the tolls), destination stockpile drains until the next
+   sourced caravan. THE GOODS-CONSERVATION INVARIANT (the M4 pattern applied to goods):
+   Σproduced == Σin-transit + Σconsumed + Σstockpiled, exact, asserted. Guard-rails: AGGREGATE
+   always (one caravan record per link; stock = sparse scalar per (settlement, good) only where
+   activeChains produce/consume); NO NUMERIC PRICES (stock levels surface as qualitative
+   shortage/adequate/surplus BANDS feeding existing prosperity/impairment reads).
+4. GREED-VS-DANGER = the DISPATCH EV DECISION (origin-side; M1's route re-score stays the
+   route-side): deterrent = BELIEVED destination stressor (per-stressor danger shapes: plague =
+   contraction + next-stop refusal; occupation = confiscation/extraction — an EXTRACTIVE occupier
+   dampens, never severs, it wants the tax; siege = near-absolute; embattlement = already M1's) ×
+   the ONE caution read. Attraction = NEED-PREMIUM (destination's shortage band on exactly the
+   carried goods — no prices) × DYNAMIC APPETITE: a bounded per-settlement scalar that RISES on
+   profitable risky deliveries (receipted: "emboldened by the Ashford run"), FALLS on losses
+   (banditry/contraction/confiscation events), and DECAYS toward a disposition baseline from
+   merchant-faction strength + alignment. Emergent: cut-off towns attract the boldest merchants —
+   quarantines CREATE their own blockade-runners. THE M7 UNIFICATION: when the EV goes negative,
+   the unmet need-premium SPILLS INTO THE CRIMINAL CHANNEL — smuggling is the TAIL OF THE GREED
+   CURVE (thievesGuildStrength), not a bolt-on. Secondary EV overrides ride existing machinery:
+   vassal tribute coercion (must-go), ally relief (trade-as-peace).
+
+SEQUENCING: point 1 + plague-specific dangers → M11a; points 2+3+4 → the RESCOPED M6 (commodity
+flow + entrepôts + dispatch EV + the flow-derived economics read-model); the greed spillover → M7.
+Ladder order unchanged: M5 → M6(rescoped) → M7 → M8 → M9 → M10 → M11. GROUNDING: wf_ba5fd568-e31
+(economics-tab derivation, embargo/severance seams, commodity substrate — full JSON in the session
+task output).
