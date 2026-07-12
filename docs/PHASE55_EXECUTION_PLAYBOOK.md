@@ -43,7 +43,8 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | 5.5-M MODULATION + live capture | 18fc15f2 | trade/faith × distanceWeight (floor .35, modulated EXACTLY once), propagation ARRIVAL LATENCY (spatialArrivals ledger, news dated at arrival), hopWeeks calibration receipt (1wk/median-primary-hop); live read-only getSpatialPack bridge + capture registry; freeze-first-capture encoded; +17B (ledger key literal, keystone precedent) |
 | any-cast restoration | b6959c9a | the parallel-worktree tax typed honestly: 13 holes→0 across keystone/worldState/faithEventFilter; ratchet EXACTLY 2252; esbuild-proven comments-only |
 | Playbook + re-scope + ledger | 53943214, 2ebe1fd6, 759de2de | this document; OWNER RE-SCOPE (movers=launch); the STATE LEDGER (0.0) |
-| STEP 3.5 RUMORS & NEWS + Perfect-but-Delayed | (this commit) | rumorNetwork.js (packet + per-settlement top-K ledger, hop-by-hop trade carrier, lineageIds day-one, independence-weighted corroboration, organic degradation tailed distribution, tick-age expiry); settlementRumors.js read-model (DM truth vs player WHITELIST — enumerated, deity-name fails CLOSED, latentPantheon excluded — manager-verified constitutional); infoMode omniscient/perfect_delayed/unreliable (living_realm→delayed, full_sim→unreliable, prospective floor); RumorsTab lazy. wizardNews schema UNTOUCHED (0-line diff). ⚠️ +243B eager (spec-mandated §3.2-7 wiring) → closure 1,255,937/1,256,000 = **63B HEADROOM** |
+| STEP 3.5 RUMORS & NEWS + Perfect-but-Delayed | 884b5011 | rumorNetwork.js (packet + per-settlement top-K ledger, hop-by-hop trade carrier, lineageIds day-one, independence-weighted corroboration, organic degradation tailed distribution, tick-age expiry); settlementRumors.js read-model (DM truth vs player WHITELIST — enumerated, deity-name fails CLOSED, latentPantheon excluded — manager-verified constitutional); infoMode omniscient/perfect_delayed/unreliable (living_realm→delayed, full_sim→unreliable, prospective floor); RumorsTab lazy. wizardNews schema UNTOUCHED. +243B eager (spec-mandated §3.2-7) → closure 1,255,937/1,256,000 |
+| WAVE A THE BELIEF MAP | (this commit) | beliefMap.js — the belief() selector w/ IDENTITY FALLBACK (dormant/self ⇒ the ORIGINAL ground-truth fn verbatim, zero forks — manager-read); advanceBeliefMaps modeled node-for-node on advanceInstitutionTolerance (independence-weighted reconciliation, silence-decay, contradiction-widens, cold-start=ground-truth-at-canonize); the 3 settlementStrategy reads re-plumbed; misjudgment-as-cause (W-C5-shaped + news) when belief diverges >2 bands; scoringObjective.js default descriptor (byte-identical); settlementBeliefs.js DM read-model (truth/belief/divergence). Gate = spatialCanonVersion+infoMode NEVER settlementStrategyEnabled (pinned). +13B eager (the beliefMaps ledger key) → closure 1,255,950/1,256,000 = **50B HEADROOM**. CL-0 rogue-family war pins replay identical; suite 7819/7819 |
 | Design doc (companion) | many (98e2aed8…d5672d31 range) | 20 owner rounds + PARTS I-VII (6 grounding passes); §11 control layer; II.5 + VI.4 decisions settled |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
@@ -69,7 +70,9 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   merge-base before work (the W5 re-merge self-correction).
 
 ### 0.0.3 IN-FLIGHT / ON THE DESK (update on every dispatch + landing)
-- STEP 3.5 RUMORS & NEWS: COMMITTED (this commit) — manager-reviewed under the Opus handoff.
+- STEP 3.5 RUMORS & NEWS: COMMITTED 884b5011 — manager-reviewed under the Opus handoff.
+- WAVE A THE BELIEF MAP: COMMITTED (this commit) — the belief/decision layer complete; the fog of
+  war is real. NEXT actionable dispatch: the M1-M10 mover ladder (PART 7) — start M1 (embattlement).
 - W5 RE-MERGE: BLOCKED on ⚠️ OWNER headroom decision (see §0.6 — +1,000 budget raise vs FP-2).
   NOT merged; deferred (cosmetic, non-blocking). Branch 312a5025 preserved in worktree amazing-thompson.
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;

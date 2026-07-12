@@ -248,10 +248,18 @@ export function createDefaultWorldState(campaign = {}) {
 //                        been heard; absent (byte-identical) on the aspatial /
 //                        omniscient path. Dialling infoMode back to omniscient
 //                        PRESERVES an existing ledger (never deletes).
+//   • beliefMaps       — the per-settlement BELIEF maps (Phase 5.5 WAVE A,
+//                        worldPulse/beliefMap.js): { observerId → { factionId →
+//                        { subjectId → belief record } } } — the FACTION dimension
+//                        ('seat' in v1 = the governing coalition) present from day
+//                        one. Materialized ONLY under the spatial-canon marker
+//                        while infoMode is a live mode (the SAME gate as
+//                        rumorLedgers, ORTHOGONAL to settlementStrategyEnabled);
+//                        absent (byte-identical) on the aspatial / omniscient path.
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
-  'spatialDigest', 'spatialArrivals', 'rumorLedgers',
+  'spatialDigest', 'spatialArrivals', 'rumorLedgers', 'beliefMaps',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

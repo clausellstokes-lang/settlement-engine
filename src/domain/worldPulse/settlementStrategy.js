@@ -54,6 +54,16 @@ import { stablePart } from './worldState.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
 import { rustOf } from './martialReadiness.js';
+// Phase 5.5 WAVE A — THE BELIEF MAP. The three cross-settlement reads below route
+// through the belief selector; the identity fallback (marker absent / omniscient /
+// self) returns ground truth verbatim, forking no rng ⇒ byte-exact today.
+import {
+  beliefsActive, belief, readBeliefStrength, readBeliefRelationship,
+  strengthBandOf, detectMisjudgment, BELIEF_TUNING,
+} from './beliefMap.js';
+// The scorer down-payment (VI.3): the four move formulas, lifted to a default
+// descriptor, reconstructed byte-identical below.
+import { DEFAULT_SCORING_OBJECTIVE } from './scoringObjective.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -103,6 +113,69 @@ function isBesieged(graph, id) {
 }
 
 /**
+ * The observer's belief about whether `subject` is besieged. SELF (observer ===
+ * subject) and the DORMANT path read ground truth verbatim (byte-exact). When
+ * beliefs are live: a held, CONFIDENT belief lets the observer know a real siege;
+ * an info-starved observer (no belief record) is UNAWARE (the lord who never
+ * hears his vassal is besieged, so never marches to relieve it). Never invents a
+ * siege that is not real (Wave A: no false-siege belief — that field is Wave B).
+ * @param {unknown} observer @param {unknown} subject @param {unknown} graph
+ * @param {import('./beliefMap.js').BeliefWorldState} worldState @param {boolean} active @returns {boolean}
+ */
+function beliefAwareBesieged(observer, subject, graph, worldState, active) {
+  const truth = isBesieged(graph, subject);
+  if (!active || String(observer) === String(subject)) return truth; // self / dormant ⇒ byte-exact
+  const b = belief(String(observer), String(subject), worldState);
+  if (b.source === 'truth') return truth;
+  if (b.source === 'unknown') return false;             // absence-as-information: unaware
+  return truth && b.record.confidence01 >= BELIEF_TUNING.SIEGE_AWARENESS_CONFIDENCE;
+}
+
+/** The GROUND-TRUTH relationship label between two settlements (for misjudgment
+ *  divergence), 'neutral' when no edge pairs them.
+ * @param {{ worldState?: { relationshipStates?: Record<string, unknown> } }} snapshot @param {unknown} a @param {unknown} b @returns {string} */
+function trueRelationshipType(snapshot, a, b) {
+  const rawEdge = hostileEdgeBetween(snapshot, a, b);
+  if (!rawEdge) return 'neutral';
+  const relState = ensureRelationshipState(
+    normalizeRelationshipEdge(rawEdge),
+    snapshot?.worldState?.relationshipStates?.[relationshipKeyFromEdge(rawEdge)],
+  );
+  return relState.relationshipType;
+}
+
+/** The misjudgment (or null) an observer commits by marching on `target`: its
+ *  BELIEVED strength band + relationship vs the GROUND TRUTH. Reads the raw
+ *  ground-truth strength lookup (`trueStrengthFor`), never the belief-wrapped one.
+ * @param {string} observer @param {string} target @param {import('./beliefMap.js').BeliefWorldState} worldState
+ * @param {{ worldState?: { relationshipStates?: Record<string, unknown> } }} snapshot @param {((id: string) => number)|null} trueStrengthFor */
+function misjudgmentFor(observer, target, worldState, snapshot, trueStrengthFor) {
+  const b = belief(observer, target, worldState);
+  const believedStrengthBand = b.source === 'belief' ? b.record.strengthBand : BELIEF_TUNING.NEUTRAL_STRENGTH_BAND;
+  const believedRelationship = b.source === 'belief' ? b.record.allianceLabel : 'unknown';
+  const confidence01 = b.source === 'belief' ? b.record.confidence01 : 0;
+  return detectMisjudgment({
+    observerId: observer,
+    subjectId: target,
+    believedStrengthBand,
+    trueStrengthBand: strengthBandOf(trueStrengthFor ? trueStrengthFor(target) : 0.5),
+    believedRelationship,
+    trueRelationship: trueRelationshipType(snapshot, observer, target),
+    confidence01,
+  });
+}
+
+/** A concise chooser-side reason line naming the misjudgment (the fuller receipt
+ *  is the wizardNews entry beliefMisjudgmentNewsEntries composes).
+ * @param {import('./beliefMap.js').Misjudgment} mis @param {string} name @param {string} targetName */
+function misjudgmentReason(mis, name, targetName) {
+  const parts = [];
+  if (mis.kinds.includes('strength')) parts.push("a stale read of its rival’s strength");
+  if (mis.kinds.includes('relationship')) parts.push('a hostility the world has already left behind');
+  return `${name} marches on ${targetName} through ${parts.join(' and ')} (confidence ${mis.confidence01.toFixed(2)}) — a misjudgment.`;
+}
+
+/**
  * Per-settlement strength lookup from the SINGLE pre-tick snapshot, using the SAME
  * pressure index the relationship contests + the war layer read — so the chooser's
  * "do I out-muscle this target?" can never diverge from the deploy gate.
@@ -122,6 +195,18 @@ function buildStrengthLookup(snapshot, pressureIdx) {
     cache.set(key, strength);
     return strength;
   };
+}
+
+/**
+ * The observer's BELIEF-SOURCED strength lookup: the raw ground-truth `strengthFor`
+ * for a SELF read, else the observer's banded belief (or the neutral mid band when
+ * it holds no belief — max-uncertainty). Used ONLY when beliefs are live; the
+ * dormant path passes the raw `strengthFor` unchanged (byte-exact, zero forks).
+ * @param {(id: string) => number} strengthFor @param {string} observer @param {import('./beliefMap.js').BeliefWorldState} worldState
+ * @returns {(id: unknown) => number}
+ */
+function makeBeliefStrengthFor(strengthFor, observer, worldState) {
+  return (subject) => readBeliefStrength(observer, String(subject), worldState, strengthFor(String(subject)));
 }
 
 /**
@@ -161,8 +246,9 @@ function perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust 
  * (or any vassal) is besieged/occupied. All sets codepoint-sorted / order-free.
  * @param {any} snapshot @param {any} graph @param {any} sId
  */
-function contextFor(snapshot, graph, sId) {
+function contextFor(snapshot, graph, sId, active = false) {
   const states = snapshot?.worldState?.relationshipStates || {};
+  const worldState = snapshot?.worldState;
   const id = String(sId);
   const hostileTargets = new Set();
   const vassalIds = new Set();
@@ -177,18 +263,26 @@ function contextFor(snapshot, graph, sId) {
     const other = a === id ? b : a;
     if (!snapshot?.byId?.has?.(other)) continue;
 
-    if (HOSTILE_TYPES.has(relState.relationshipType)) {
+    // WAVE A: the observer targets on the relationship it BELIEVES (possibly a
+    // STALE hostility — the ally-confusion war). Dormant / no-belief ⇒ the true
+    // (declared, public) label verbatim ⇒ byte-exact + non-paranoid.
+    const perceivedType = active
+      ? readBeliefRelationship(id, other, worldState, relState.relationshipType)
+      : relState.relationshipType;
+    if (HOSTILE_TYPES.has(perceivedType)) {
       hostileTargets.add(other);
     }
-    // A vassal obligation: S is the senior (overlord) of `other`.
+    // A vassal obligation reads the TRUE label — a vassalage is a formal, known
+    // bond (the lord knows his own vassals); the belief fogs their STATE, not the
+    // contract. (beliefAwareBesieged below fogs whether he knows they are besieged.)
     if (relState.relationshipType === 'vassal') {
       const { seniorId, juniorId } = relationshipRoles(edge, relState);
       if (String(seniorId) === id) vassalIds.add(String(juniorId));
     }
   }
 
-  const homeBesieged = isBesieged(graph, id);
-  const vassalBesieged = [...vassalIds].some((vid) => isBesieged(graph, vid));
+  const homeBesieged = beliefAwareBesieged(id, id, graph, worldState, active); // self ⇒ truth
+  const vassalBesieged = [...vassalIds].some((vid) => beliefAwareBesieged(id, vid, graph, worldState, active));
 
   return {
     hostileTargets: [...hostileTargets].sort(codepoint),
@@ -275,18 +369,25 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
 function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0 }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
+  // The scorer down-payment (VI.3): the four move coefficients now live in the
+  // DEFAULT descriptor; the arithmetic below is the SAME expression in the SAME
+  // order, so scores are byte-identical (Wave B parameterizes the descriptor).
+  const O = DEFAULT_SCORING_OBJECTIVE;
   /** @type {Record<string, number>} */
   const scored = {};
 
   // defend — always legal. Strong when besieged or when the settlement is weak.
-  scored.defend = clamp01(0.35 + (ctx.homeBesieged ? 0.4 : 0) + (0.5 - sStrength) * 0.4 - aggr * 0.3);
+  scored.defend = clamp01(O.defend.base + (ctx.homeBesieged ? O.defend.besiegedBonus : 0) + (0.5 - sStrength) * O.defend.weaknessBonus - aggr * O.defend.aggrDamp);
 
   // hold — passive status-quo. The baseline fallback; mildly favored by a pacific
   // disposition and an exhausted economy that can't afford a new front.
-  scored.hold = clamp01(0.4 - aggr * 0.2 + exhaustion * 0.15);
+  scored.hold = clamp01(O.hold.base - aggr * O.hold.aggrDamp + exhaustion * O.hold.exhaustionBonus);
 
   // deploy — only legal if NOT besieged at home, confident, and there's a hostile
   // target it clearly out-muscles. Scaled by aggressiveness; damped by exhaustion.
+  // WAVE A: `strengthFor(targetId)` is the observer's BELIEVED strength of the
+  // target (banded) when beliefs are live — so an over-confident misjudgment
+  // marches, and a misinformed one holds.
   if (!ctx.homeBesieged) {
     let best = -Infinity;
     for (const targetId of ctx.hostileTargets) {
@@ -294,7 +395,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
       if (margin > best) best = margin;
     }
     if (best > -Infinity && best > 0.05) {
-      scored.deploy = clamp01(0.3 + best * 0.6 + aggr * 0.5 - exhaustion * 0.4);
+      scored.deploy = clamp01(O.deploy.base + best * O.deploy.marginGain + aggr * O.deploy.aggrGain - exhaustion * O.deploy.exhaustionDamp);
     }
   }
 
@@ -308,7 +409,7 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     // W-C1 item 1b: the peace-threshold reading is MISREAD toward chaos + rust (a delayed
     // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
     const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
-    scored.sue_for_peace = clamp01(0.15 + perceived * 0.6 - aggr * 0.4);
+    scored.sue_for_peace = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
   }
 
   return Object.keys(scored)
@@ -323,9 +424,9 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
  * INERT marker (no condition, no patch) that still wins the `strategy:<S>`
  * exclusive group and so suppresses the reactive escalation for S — the chooser
  * decided NOT to escalate this tick, with no stray world-state cost.
- * @param {{ move: string, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number }} args
+ * @param {{ move: string, sId: any, item: any, ctx: any, tick: number, exhaustion: number, snapshot: any, strengthFor: (id: any) => number, rng?: RngLike, chaosPull?: number, rust?: number, worldState?: import('./beliefMap.js').BeliefWorldState, beliefActive?: boolean, trueStrengthFor?: ((id: string) => number)|null }} args
  */
-function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0 }) {
+function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng = null, chaosPull = 0, rust = 0, worldState = null, beliefActive = false, trueStrengthFor = null }) {
   const name = item?.name || item?.settlement?.name || String(sId);
 
   if (move === 'sue_for_peace') {
@@ -385,19 +486,35 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     // own gate passes. We emit a guaranteed army_deployed-flavored marker so the
     // posture is visible AND it wins the exclusive group over the reactive raid.
     const target = ctx.hostileTargets.find((/** @type {any} */ t) => strengthFor(sId) > strengthFor(t)) || ctx.hostileTargets[0];
+    // WAVE A misjudgment-as-cause: the chooser committed to an offensive on a
+    // BELIEF about the target. If that belief diverges from ground truth beyond
+    // the band (a stale strength read, or a hostility the world has left behind),
+    // stamp the misjudgment — the fog of war made a legible, DM-visible cause.
+    // Null (byte-neutral) when the belief is sound OR beliefs are dormant.
+    const misjudgment = beliefActive && target
+      ? misjudgmentFor(String(sId), String(target), worldState, snapshot, trueStrengthFor)
+      : null;
+    const targetName = target ? (snapshot?.byId?.get?.(String(target))?.name || target) : 'its rival';
     return strategyCandidate({
       move,
       sId,
       tick,
       severity: MOVE_SEVERITY,
       headline: `${name} resolves to march`,
-      summary: `${name} commits to an offensive posture against ${target ? (snapshot?.byId?.get?.(String(target))?.name || target) : 'its rival'}.`,
-      reasons: [`${name}'s strategy chooser selected an offensive deployment.`],
+      summary: `${name} commits to an offensive posture against ${targetName}.`,
+      reasons: [
+        `${name}'s strategy chooser selected an offensive deployment.`,
+        ...(misjudgment ? [misjudgmentReason(misjudgment, name, targetName)] : []),
+      ],
+      metadata: misjudgment ? { misjudgment } : undefined,
       condition: {
         archetype: 'army_deployed',
         severity: clamp01(MOVE_SEVERITY * 0.6),
         triggeredAt: { tick, sourceEventType: 'SETTLEMENT_STRATEGY', sourceEventTargetId: String(sId) },
-        causes: [{ source: String(sId), effect: 'army_deployed', reason: `${name} mustered its army for an offensive.` }],
+        causes: [
+          { source: String(sId), effect: 'army_deployed', reason: `${name} mustered its army for an offensive.` },
+          ...(misjudgment ? [{ source: String(sId), effect: 'misjudged_war', reason: `${name} acted on a mistaken belief about ${targetName}.` }] : []),
+        ],
       },
     });
   }
@@ -441,6 +558,11 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
   const deployments = worldState.deployments || {};
   const rng = context.rng;
   const strengthFor = buildStrengthLookup(snapshot, pressureIdx);
+  // WAVE A: are beliefs live for this campaign? The gate is ORTHOGONAL to
+  // settlementStrategyEnabled (spatialCanonVersion + a non-omniscient infoMode).
+  // FALSE ⇒ every cross-settlement read below falls back to ground truth verbatim
+  // ⇒ byte-identical to the pre-Wave-A chooser.
+  const beliefActive = beliefsActive(worldState);
 
   const out = [];
 
@@ -453,7 +575,10 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
   for (const sId of settlementIds) {
     const item = snapshot?.byId?.get?.(sId);
     if (!item) continue;
-    const ctx = contextFor(snapshot, graph, sId);
+    const ctx = contextFor(snapshot, graph, sId, beliefActive);
+    // The observer's belief-sourced strength lookup (self ⇒ truth). Dormant ⇒ the
+    // raw ground-truth lookup unchanged (byte-exact).
+    const strengthForObs = beliefActive ? makeBeliefStrengthFor(strengthFor, sId, worldState) : strengthFor;
     const deployment = deployments[sId];
     const hasArmyAbroad = !!deployment?.targetId;
 
@@ -497,7 +622,7 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const settlement = item?.settlement;
     const chaosPull = chaosPullOf(settlement);
     const rust = rustOf(settlement);
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng, tick, chaosPull, rust });
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
@@ -516,7 +641,11 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     if (idx < 0 || idx >= moves.length) idx = 0;
     const chosen = moves[idx].move;
 
-    const candidate = emitMove({ move: chosen, sId, item, ctx, tick, exhaustion, snapshot, strengthFor, rng, chaosPull, rust });
+    const candidate = emitMove({
+      move: chosen, sId, item, ctx, tick, exhaustion, snapshot,
+      strengthFor: strengthForObs, rng, chaosPull, rust,
+      worldState, beliefActive, trueStrengthFor: strengthFor,
+    });
     if (candidate) out.push(candidate);
   }
 

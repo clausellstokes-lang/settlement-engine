@@ -53,6 +53,7 @@ import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeS
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
+import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
@@ -1403,6 +1404,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const causeLifecycleNews = causeLifecycleNewsEntries(
     causeLifecycleEvents, settlementNameFor, worldState.tick, now,
   );
+  // WAVE A: the fog of war made a legible cause. When the chooser committed an
+  // offensive this tick on a BELIEF that diverged from the truth beyond the band,
+  // its candidate carries `metadata.misjudgment`; the house-voice receipt names
+  // what was believed, what was true, and how stale the read was. Empty (byte-
+  // neutral) when beliefs are dormant or every acting belief was sound.
+  const beliefMisjudgmentNews = beliefMisjudgmentNewsEntries(
+    selectedForApply, settlementNameFor, worldState.tick, now,
+  );
   // SEASONS-A: the season boundary markers — the ONE new news kind
   // ('season_marker': harvest at the autumn boundary, hungry_gap at month 12).
   // Deterministic (no rng), realm-scope, minted only when the flag-on window
@@ -1417,7 +1426,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         foodStates: seasonalFoodStates,
       })
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
@@ -1448,6 +1457,31 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       } else if ('rumorLedgers' in memoryState) {
         // Everything expired: the conditional key drops back to absent.
         const { rumorLedgers: _drained, ...rest } = memoryState;
+        memoryState = rest;
+      }
+    }
+  }
+  // WAVE A — THE BELIEF MAP (read-last/write-next). AFTER the rumor network
+  // advances (beliefs consume this tick's arrivals), each settlement's belief
+  // model updates: cold-start seeds the declared neighbourhood to ground truth on
+  // the first active tick, then per (observer, subject) it reconciles fresh
+  // reports (re-anchor toward truth, degraded by fidelity, independence-weighted)
+  // or decays confidence for silence — pure arithmetic, NO rng. NEXT tick's
+  // chooser reads these beliefs. DORMANT (no spatial marker / infoMode omniscient)
+  // ⇒ changed:false ⇒ memoryState untouched, zero new keys — byte-identical.
+  {
+    const beliefs = advanceBeliefMaps({
+      snapshot: postTimeSnapshot,
+      pressureIdx: pIndex,
+      worldState: memoryState,
+      tick: worldState.tick,
+    });
+    if (beliefs.changed) {
+      if (beliefs.next) {
+        memoryState = { ...memoryState, beliefMaps: beliefs.next };
+      } else if ('beliefMaps' in memoryState) {
+        // Everything decayed below the floor: the conditional key drops to absent.
+        const { beliefMaps: _forgotten, ...rest } = memoryState;
         memoryState = rest;
       }
     }
