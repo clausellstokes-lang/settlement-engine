@@ -620,6 +620,35 @@ settlementStrategy SCORER must become OBJECTIVE-PARAMETERIZED (a pluggable objec
 NOT one war-utility with coefficients; disposition.js supplies disposition, the belief map the beliefs, the
 physical layer the constraints. Elegance WITHOUT homogeneity.
 
+## 4h. Round 18 (owner rulings on the architect's gap review)
+**(A) NO party-vantage concept — REJECTED; the per-settlement mill IS the table surface.** The party's
+location is DM FLAVOR, not engine state. The Rumors & News tab serves the table directly: the DM holds
+the full truth (the includeGroundTruth reveal); the party experiences the settlement's rumor mill as
+written. The PLAYER-FACING surface is the EXISTING share-to-gallery pipeline: **sharing strips the DM
+truth** (ground-truth/provenance/confidence fields removed) so players browse the rumor mill as the
+settlement believes it. IMPLEMENTATION SEAM: this is exactly the PART III §III.2-4 whitelisted player
+projection — applied at the gallery/publicSafe stripping seam (the same discipline that strips deity
+fields today). ONE seam, already specced; no new party-position state anywhere. (Endogeneity untouched.)
+
+**(B) NAMED-NPC EXCURSIONS — ACCEPTED, with the owner's protective constraints (BINDING):**
+Named NPCs are the settlement's CAST; the dossier's integrity depends on them. So NPC movement is the
+EXCURSION model, never emigration:
+- HOME BASE IS HOME BASE. Named NPCs mostly STAY. When one relocates, it is a BOUNDED ROUND-TRIP with a
+  DETERMINED duration (a week / a month / a season / a year — chosen deterministically at departure) and
+  they RETURN home. Departure, arrival-at-destination, and return are EVENTS/hooks — including the
+  natural party hook ("follow the envoy to X and back").
+- PROTECTED TRAVEL. Named NPCs travel INDIVIDUALLY and are IMMUNE to banditry/attrition/travel mortality —
+  they CANNOT die unnecessarily. The travel-risk layer (§6 danger terms) does NOT roll against them.
+- THE RARE EXCEPTION is a STRESSOR, not a death: very rarely, an excursion is disrupted by a stressor-
+  class event (detained, stranded, caught behind a siege) that RESOLVES — and when the stressor resolves,
+  the NPC RETURNS. The disruption is itself a hook (rescue/escort/negotiate), tied to the W-C5 cause/
+  stressor lifecycle so it always has a legible resolution path. Never a random grave on the road.
+- IMPLEMENTATION: excursions ride the EXISTING movers (courier/caravan/pilgrim/refugee flows as carriers)
+  as a payload — {npcId, purpose, destination, departTick, returnTick} on the in-transit ledger; the
+  W-C5 lifecycle already creates the travelers (the exposed captain fleeing to a patron, the envoy, the
+  missionary). While away, the NPC's dossier card shows the absence + expected return (legibility);
+  the destination's dossier gains a visitor hook. Deterministic, bounded, conditionally materialized.
+
 **Determinism / endogeneity / dormancy:** decisions are SEEDED PRNG over BELIEFS (themselves
 deterministic functions of propagation) ⇒ same seed ⇒ same misjudgments ⇒ same wars. ENDOGENEITY:
 settlements act on their own beliefs — world-driven, party-INDEPENDENT (the party observes; it does
