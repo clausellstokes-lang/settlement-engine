@@ -222,10 +222,36 @@ export function createDefaultWorldState(campaign = {}) {
 //   • rulesetLog       — ruleset-change receipts (CL-0), an OBJECT keyed
 //                        rc_<tick>_<seq> (deepCloneConditionalLedger rejects
 //                        arrays); absent until the first effective rules edit.
+//   • spatialDigest    — the FROZEN spatial canon digest (Phase 5.5 KEYSTONE):
+//                        an OBJECT { spatialGeometryVersion, costLawVersion,
+//                        overlayVersion, costField, territory, gates, tiers,
+//                        distanceMatrix, routeReceipts, reserved:{…} } authored
+//                        ONCE at an entitled spatial canonize and never
+//                        recomputed. Absent until an explicit spatial opt-in
+//                        (see the spatialCanonVersion marker below) ⇒ every
+//                        aspatial/legacy campaign serializes byte-identically.
+//                        deepCloneConditionalLedger rejects arrays, so the digest
+//                        is object-shaped at the top level (its costField /
+//                        distanceMatrix arrays live INSIDE that object).
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
+  'spatialDigest',
 ]);
+
+// The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
+// (not a ledger, so it is NOT in CONDITIONAL_LEDGER_KEYS): the positive-integer
+// `spatialCanonVersion`, stamped ONLY by an explicit spatial opt-in at the
+// canonize seam. Its PRESENCE is the dormancy/premium gate every spatial reader
+// keys on — NEVER the pre-existing canonizedAt (which is true for essentially
+// every campaign in the wild, so gating on it would retro-light the installed
+// base and break byte-identity). ensureWorldState materializes it only when the
+// raw carries a valid version, so an aspatial/legacy save (no marker) is
+// byte-identical forever. A valid version is a positive integer.
+/** @param {any} value */
+function normalizeSpatialCanonVersion(value) {
+  return Number.isInteger(value) && value > 0 ? value : null;
+}
 
 export function ensureWorldState(rawInput = {}, campaign = {}) {
   const raw = runWorldStateMigrations(rawInput);
@@ -237,6 +263,13 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   // spread; the conditional deep-clone pass below is the SOLE source of those
   // keys — each materialized only when present and non-empty.
   const shallowRaw = cloneObject(raw);
+  // Spatial-canon marker (Phase 5.5 KEYSTONE): a conditionally-present SCALAR gate.
+  // Strip it from the shallow spread and re-materialize it ONLY when the raw
+  // carries a valid positive-integer version — so a legacy/aspatial save (no
+  // marker) serializes byte-identically (absent === no key) and a garbage value
+  // (string / non-positive / float) can never leak through unnormalized.
+  if ('spatialCanonVersion' in shallowRaw) delete shallowRaw.spatialCanonVersion;
+  const spatialCanonVersion = normalizeSpatialCanonVersion(raw?.spatialCanonVersion);
   /** @type {Record<string, unknown>} */
   const conditionalLedgers = {};
   for (const key of CONDITIONAL_LEDGER_KEYS) {
@@ -286,6 +319,11 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
     deployments: deepCloneLedger(raw?.deployments),
     tradeWarState: deepCloneLedger(raw?.tradeWarState),
     warExhaustion: deepCloneLedger(raw?.warExhaustion),
+    // Spatial-canon marker — present ONLY when the raw carried a valid version
+    // (spread from a single-key object so an absent marker adds no key at all,
+    // keeping every aspatial save byte-identical). Its presence gates the
+    // spatialDigest reader; it serializes just before the conditional ledgers.
+    ...(spatialCanonVersion !== null ? { spatialCanonVersion } : {}),
     // The conditionally-materialized ledgers, in CONDITIONAL_LEDGER_KEYS order
     // (see the catalog comment above ensureWorldState — that order IS the
     // serialized key order the byte-identity invariants pin). Each key appears

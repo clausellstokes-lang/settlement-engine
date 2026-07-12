@@ -231,6 +231,54 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     return campaignPersist?.snapshot?.find(c => c.id === campaignId)?.worldState || null;
   },
 
+  /**
+   * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in at the canonize seam. Stamps
+   * the NEW `worldState.spatialCanonVersion` marker and freezes an immutable
+   * spatial digest (territory / gates / neighbour tiers / distance matrix / route
+   * receipts) into `worldState.spatialDigest`. This is a DISTINCT action from the
+   * plain canonizeCampaignWorld so the aspatial path stays byte-identical: an
+   * existing campaign that never opts in carries NO marker and NO digest ⇒ its
+   * bytes never change (the dormancy contract).
+   *
+   * The entitlement + generated-map gates are read HERE, at the store call site
+   * (mirroring settlementSlice's tier split); the domain module stays tier-blind.
+   * The pack.cells capture is an INJECTED seam (`options.captureSpatialPack`) —
+   * the live-iframe capture is a fence-bounded follow-up (see the KEYSTONE
+   * report), so the default returns null and the action cleanly no-ops (writing
+   * NOTHING) rather than persist a partial digest. The pure digest builder is
+   * loaded via a DYNAMIC import so src/domain/spatial never enters the first-paint
+   * static closure.
+   *
+   * Re-canonize (a later placement/forced-road after opt-in) simply calls this
+   * again: it re-captures, re-derives, and BUMPS spatialCanonVersion. The digest
+   * is NEVER re-derived on load or per tick — only by this explicit action.
+   *
+   * @param {string} campaignId
+   * @param {{ captureSpatialPack?: (ctx:{campaignId:string, get:Function}) =>
+   *   Promise<{pack:any, placements:Array<{id:any,cellId:any}>}|null> }} [options]
+   * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
+   */
+  canonizeCampaignWorldSpatial: async (campaignId, options = {}) => {
+    // Advance-concurrency guard — a spatial canonize is a worldState mutation, so
+    // it is blocked mid-advance for the same reason the other pulse mutators are.
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
+    const state = get();
+    const campaign = findActiveCampaign(state.campaigns, campaignId);
+    if (!campaign) return { ok: false, reason: 'not_found' };
+    // ENTITLEMENT — read at the store call site (settlementSlice tier-split
+    // pattern). The domain stays tier-blind; the key turns HERE.
+    if (state.auth?.tier !== 'premium') return { ok: false, reason: 'not_entitled' };
+    // GENERATED maps only (II.5-3): an imported / custom-backdrop map has no
+    // persisted terrain to route on, so it stays aspatial (byte-identical).
+    if (state.mapState?.customBackdrop?.imageUrl) return { ok: false, reason: 'not_generated_map' };
+    // Delegate the capture + digest build + size guard + persist to the lazily-
+    // loaded body — it (and the whole src/domain/spatial graph it pulls) stays OUT
+    // of the first-paint entry closure. The cheap gates above ran synchronously so
+    // a non-entitled / imported-map / mid-advance reach is blocked before the load.
+    const { runSpatialCanonize } = await import('./campaignSpatialCanonize.js');
+    return runSpatialCanonize({ set, get, campaignId, options });
+  },
+
   updateCampaignSimulationRules: async (campaignId, patch = {}) => {
     // Advance-concurrency guard — see the advanceInFlight contract above. Rules
     // edited mid-advance would be silently reverted by the Phase-2 commit (the

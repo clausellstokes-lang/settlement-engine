@@ -38,6 +38,7 @@ import { useId, useMemo, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { normalizeSimulationRules } from '../../domain/worldPulse/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
+import Button from '../primitives/Button.jsx';
 import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, R, SP } from '../theme.js';
 
 export const LIVING_WORLD_GATES = Object.freeze([
@@ -62,6 +63,87 @@ export const LIVING_WORLD_GATES = Object.freeze([
 ]);
 
 const DRIFT_REASON = 'Needs Relationship drift: war is a relationship dynamic, so a frozen web cannot raise fronts.';
+
+/**
+ * Phase 5.5 KEYSTONE — the ENTITLED spatial opt-in, surfaced beside the living-
+ * world gates. Unlike the gates (persistent toggles), mapping geography is a
+ * one-shot canonize ACTION that freezes an immutable spatial digest into the
+ * campaign's worldState. It appears ONLY for a loaded GENERATED map (imported /
+ * custom-backdrop maps stay aspatial — II.5-3) and reflects whether the realm has
+ * been mapped (worldState.spatialCanonVersion). Premium-gated the same way the
+ * gates are: a non-premium reach fires the pricing moment. The store action is
+ * the source of truth — it re-reads the entitlement + generated-map + capture
+ * gates at the call site, so this control is purely an affordance.
+ *
+ * NB: the live pack.cells capture is a deferred, fence-bounded seam (see the
+ * KEYSTONE report), so today the action returns 'spatial_capture_unavailable' and
+ * this control shows a truthful "needs the map view" note rather than silently
+ * doing nothing. When the capture handler lands, the same control lights up.
+ */
+function SpatialCanonGate({ campaign, canWrite }) {
+  const canonizeSpatial = useStore(s => s.canonizeCampaignWorldSpatial);
+  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
+  const tier = useStore(s => s.auth?.tier);
+  const isImportedMap = useStore(s => !!s.mapState?.customBackdrop?.imageUrl);
+  const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState('');
+
+  // Only offered for GENERATED maps (imported maps have no terrain to route on).
+  if (isImportedMap) return null;
+
+  const version = Number(campaign?.worldState?.spatialCanonVersion) || 0;
+  const mapped = version > 0;
+
+  const handleLockedReach = () => {
+    triggerPricingMoment('map_realm_teaser', setActivePricingMoment, { tier });
+    setPurchaseModalOpen?.(true);
+  };
+
+  const onClick = async () => {
+    if (!canWrite) { handleLockedReach(); return; }
+    if (!campaign?.id || busy) return;
+    setBusy(true);
+    setNote('');
+    try {
+      const result = await canonizeSpatial?.(campaign.id);
+      if (result && result.ok === false) {
+        setNote(
+          result.reason === 'spatial_capture_unavailable' ? 'Open the world map to map geography.'
+            : result.reason === 'not_entitled' ? '' // handled by the locked reach
+              : result.reason === 'not_generated_map' ? 'Only generated maps can be mapped.'
+                : 'Could not map geography.',
+        );
+        if (result.reason === 'not_entitled') handleLockedReach();
+      }
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div style={{ display: 'grid', gap: 2 }}>
+      <Button
+        data-testid="spatial-canon-gate"
+        variant={mapped ? 'gold' : 'secondary'}
+        size="sm"
+        busy={busy}
+        title={mapped
+          ? `Geography mapped (spatial canon v${version}). Re-map to refreeze after new placements.`
+          : 'Freeze this realm’s geography — territories, routes, and distances become canon the simulation reads.'}
+        onClick={onClick}
+        style={{ fontSize: FS.xxs, fontWeight: 900, minHeight: 26, padding: '4px 8px' }}
+      >
+        {mapped ? 'Geography mapped ✓' : busy ? 'Mapping…' : 'Map geography'}
+      </Button>
+      {note && (
+        <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
+          {note}
+        </span>
+      )}
+    </div>
+  );
+}
 
 function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
   const updateRules = useStore(s => s.updateCampaignSimulationRules);
@@ -165,6 +247,7 @@ export default function LivingWorldGates({ campaign, canWrite = false, showHint 
             setBusyKey={setBusyKey}
           />
         ))}
+        <SpatialCanonGate campaign={campaign} canWrite={canWrite} />
       </div>
       {showHint && driftOff && (
         <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 700, lineHeight: 1.4 }}>
