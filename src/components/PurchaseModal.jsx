@@ -22,6 +22,7 @@ import { GOLD, GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_
 import IconButton from './primitives/IconButton.jsx';
 import RedeemCodeField from './purchase/RedeemCodeField.jsx';
 import ReferralIntentField from './purchase/ReferralIntentField.jsx';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
@@ -35,6 +36,10 @@ export default function PurchaseModal({ onClose }) {
   const [redeemNotice, setRedeemNotice] = useState(null);
   // Referral intent (107): self-gates to signed-in, unpaid, never-referred.
   const referral = useReferralIntent();
+
+  // Shared modal focus management: focus-in, Tab cycling, Escape-to-close, and
+  // focus restore on unmount. Replaces the hand-rolled backdrop role=button.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   // Keep the cross-surface stash in sync with the field so the code survives
   // closing this modal and buying from Pricing instead (and vice versa).
@@ -59,7 +64,11 @@ export default function PurchaseModal({ onClose }) {
       if (notice) setRedeemNotice(notice);
       // Redirects to Stripe — won't reach here unless it fails
     } catch (e) {
-      setError(e.message);
+      // P11 — keep the raw Stripe/network text out of the purchase surface
+      // (console only) and show the reader a domain-language message, matching
+      // PricingPage's checkout error handling.
+      console.error('Checkout failed:', e);
+      setError(t('purchase.failureMessage'));
       setLoading(null);
     }
   };
@@ -74,12 +83,9 @@ export default function PurchaseModal({ onClose }) {
   }));
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click-to-close; keyboard dismissal (Escape) is handled by useDialogFocusTrap.
     <div
       onClick={onClose}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
-      role="button"
-      tabIndex={0}
-      aria-label={t('common.close')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.6)',
@@ -89,6 +95,8 @@ export default function PurchaseModal({ onClose }) {
     >
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         onClick={e => e.stopPropagation()}
         onKeyDown={e => e.stopPropagation()}
         role="dialog"
