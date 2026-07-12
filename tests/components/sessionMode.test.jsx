@@ -149,4 +149,55 @@ describe('SessionMode — the constitutional faith seam', () => {
     render(<SessionMode settlement={s} saveId="11" onClose={() => {}} />);
     expect(screen.getByTestId('faith-section')).toBeTruthy();
   });
+
+  it('PREMIUM + deity-free: no Faith section and no dead Faith nav button', () => {
+    useStore.__set({ auth: { tier: 'premium' } });
+    const { container } = render(
+      <SessionMode settlement={settlementFixture({ config: {} })} saveId="11" onClose={() => {}} />,
+    );
+    expect(container.querySelector('#sf-session-faith')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Faith' })).toBeNull();
+  });
+
+  it('FREE viewer: deity-event narration is dropped from the recent-events tail', () => {
+    useStore.__set({
+      auth: { tier: 'free' },
+      phase: 'canon',
+      eventLog: [
+        { event: { type: 'ADD_INSTITUTION', description: 'A granary is raised' }, narrativeSummary: 'The granary rises.' },
+        { event: { type: 'SET_PRIMARY_DEITY', description: 'A god is proclaimed' }, narrativeSummary: `${LATENT_NAME} is proclaimed the settlement's patron deity.` },
+      ],
+    });
+    const { container } = render(
+      <SessionMode settlement={settlementFixture()} saveId="11" onClose={() => {}} />,
+    );
+    expect(container.textContent).toContain('The granary rises.');
+    expect(container.textContent).not.toContain(LATENT_NAME);
+  });
+
+  it('PREMIUM viewer keeps deity events in the tail', () => {
+    useStore.__set({
+      auth: { tier: 'premium' },
+      eventLog: [
+        { event: { type: 'SET_PRIMARY_DEITY', description: 'A god is proclaimed' }, narrativeSummary: 'Varisha is proclaimed patron.' },
+      ],
+      // premium + latent-only would hide FaithSection; give it an embed so the
+      // fixture stays representative of a deity-carrying canon settlement
+    });
+    const s = settlementFixture({
+      config: { primaryDeitySnapshot: { name: 'Varisha', rankAxis: 'major', alignmentAxis: 'evil', domain: 'forge' } },
+    });
+    const { container } = render(<SessionMode settlement={s} saveId="11" onClose={() => {}} />);
+    expect(container.textContent).toContain('Varisha is proclaimed patron.');
+  });
+});
+
+describe('SessionMode — modal focus management', () => {
+  it('moves focus inside the dialog on mount (the aria-modal promise)', () => {
+    const { container } = render(
+      <SessionMode settlement={settlementFixture()} saveId="11" onClose={() => {}} />,
+    );
+    const dialog = container.querySelector('[role="dialog"]');
+    expect(dialog.contains(document.activeElement)).toBe(true);
+  });
 });

@@ -97,6 +97,12 @@ function buildReadme({ name, moduleId, journalFile }) {
     'Create a Journal Entry in your world, right-click it in the sidebar →',
     `**Import Data**, and select \`data/${journalFile}\` from this archive.`,
     '',
+    '## Re-exporting after the world changes',
+    'The loader skips the import while journals from this module exist in the',
+    'world. To re-import a fresh export of the same settlement and variant,',
+    'delete the previously imported journal entry (or its folder) first, then',
+    'reload the world.',
+    '',
     'Compatible with Foundry VTT v11–v13. Content is plain journal pages',
     '(markdown) — no game-system dependency.',
     '',
@@ -118,7 +124,11 @@ function buildReadme({ name, moduleId, journalFile }) {
 export function buildFoundryModuleFiles({ settlement, vm, variant = 'canon_dossier', faithUnlocked = false }) {
   const name = settlement?.name || 'Unnamed Settlement';
   const slug = slugify(name);
-  const moduleId = `settlementforge-${slug}-${idTail(settlement)}`;
+  // The VARIANT is part of the module identity: the loader's idempotency
+  // check keys on moduleId, so without it a second variant of the same
+  // settlement would install but silently never import its journals.
+  const variantSlug = { draft_brief: 'draft', canon_dossier: 'canon', timeline_packet: 'timeline', campaign_state: 'war' }[variant] || slugify(variant);
+  const moduleId = `settlementforge-${slug}-${variantSlug}-${idTail(settlement)}`;
 
   const pages = buildJournalPages(vm, { variant, faithUnlocked });
 

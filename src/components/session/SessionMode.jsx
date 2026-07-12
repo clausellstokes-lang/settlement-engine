@@ -27,11 +27,13 @@
  * first-paint bytes. Esc closes.
  */
 
-import { useEffect, useMemo } from "react";
+import { useMemo } from 'react';
 import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { FS, ELEV, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
+import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
@@ -163,17 +165,21 @@ function WarPanel({ war }) {
  *   lazily only while open (the TableView doctrine).
  */
 export default function SessionMode({ settlement, saveId = null, onClose }) {
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  // Real modal semantics behind aria-modal: focus moves in, Tab is trapped,
+  // Escape dismisses (stacked-aware), and focus restores to the trigger on
+  // close — the shared primitive every modal here uses.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   const phase = useStore(s => s.phase);
   const systemState = useStore(s => s.systemState);
   const eventLog = useStore(s => s.eventLog);
   const campaigns = useStore(s => s.campaigns);
   const savedSettlements = useStore(s => s.savedSettlements);
+  // The FaithSection premium expression, needed here only to decide section /
+  // nav PRESENCE (FaithSection itself still owns the content gate).
+  const tier = useStore(s => s.auth?.tier);
+  const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
+  const isPremium = tier === 'premium' || elevated;
 
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
@@ -188,7 +194,18 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
     ['Resilience', systemState.resilience], ['Volatility', systemState.volatility],
     ['Threat', systemState.externalThreat], ['Resources', systemState.resourcePressure],
   ].filter(([, d]) => d) : [];
-  const recent = (Array.isArray(eventLog) ? eventLog : []).slice(-3).reverse();
+  // The faith seam applies to the event tail too: the deity event kinds embed
+  // the deity's name in their generated narration, so a non-premium viewer's
+  // tail drops them (mirrors the Foundry timeline gate).
+  const recent = (Array.isArray(eventLog) ? eventLog : [])
+    .filter(e => isPremium || !isFaithEventEntry(e))
+    .slice(-3).reverse();
+
+  // Faith section PRESENCE mirrors WarFaithTab's faithWillRender: an embed
+  // renders to everyone; free/anon get the teaser; premium + deity-free is
+  // FaithSection's HIDDEN mode ⇒ no section, no dead nav button.
+  const faithVisible = !!(settlement?.config?.primaryDeitySnapshot
+    && typeof settlement.config.primaryDeitySnapshot === 'object') || !isPremium;
 
   // Quick-nav targets are DOM ids (the overlay owns the document while open),
   // which keeps render free of ref reads.
@@ -196,13 +213,14 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
     entries.length ? ["Tonight", "sf-session-tonight"] : null,
     (dims.length || recent.length || settlement?.pressureSentence) ? ["State", "sf-session-state"] : null,
     war ? ["War", "sf-session-war"] : null,
-    ["Faith", "sf-session-faith"],
+    faithVisible ? ["Faith", "sf-session-faith"] : null,
     npcs.length ? ["NPCs", "sf-session-npcs"] : null,
     hooks.length ? ["Hooks", "sf-session-hooks"] : null,
   ].filter(Boolean);
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-label={`Session mode: ${settlement?.name || 'settlement'}`}
@@ -335,11 +353,14 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           )}
 
           {/* The constitutional faith seam — FaithSection self-gates:
-              embeds render to everyone, free/anon get the nameless teaser,
-              premium-with-no-deity renders nothing. */}
-          <section id="sf-session-faith" aria-label="Faith">
-            <FaithSection settlement={settlement} />
-          </section>
+              embeds render to everyone, free/anon get the nameless teaser.
+              faithVisible mirrors its HIDDEN mode (premium + deity-free) so
+              the section and its nav entry disappear together. */}
+          {faithVisible && (
+            <section id="sf-session-faith" aria-label="Faith">
+              <FaithSection settlement={settlement} />
+            </section>
+          )}
 
           {npcs.length > 0 && (
             <section id="sf-session-npcs" aria-label="Key NPCs">

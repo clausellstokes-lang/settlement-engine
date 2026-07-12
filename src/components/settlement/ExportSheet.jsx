@@ -54,8 +54,12 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
   const [useAi, setUseAi] = useState(hasAi);
   // W-Session — export format. 'pdf' is the default and the only option when
   // the caller doesn't provide onExportFoundry (drafts, legacy mounts).
+  // effectiveFormat guards the stranded case: a picked 'foundry' survives in
+  // state across close/reopen, but if the prop is withdrawn meanwhile (flag
+  // killswitch), the CTA must fall back to PDF rather than call undefined.
   const hasFoundry = typeof onExportFoundry === 'function';
   const [format, setFormat] = useState('pdf');
+  const effectiveFormat = hasFoundry ? format : 'pdf';
 
   if (!open) return null;
 
@@ -156,13 +160,13 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
           <Button
             variant="primary"
             size="sm"
-            onClick={() => (format === 'foundry' ? onExportFoundry(picked, useAi) : onExport(picked, useAi))}
+            onClick={() => (effectiveFormat === 'foundry' ? onExportFoundry(picked, useAi) : onExport(picked, useAi))}
             disabled={exporting}
             busy={exporting}
           >
             {exporting
-              ? (format === 'foundry' ? 'Building Module…' : 'Building PDF…')
-              : <>Export {format === 'foundry' ? `${PDF_VARIANTS[picked].label} Module` : PDF_VARIANTS[picked].label}</>}
+              ? (effectiveFormat === 'foundry' ? 'Building Module…' : 'Building PDF…')
+              : <>Export {effectiveFormat === 'foundry' ? `${PDF_VARIANTS[picked].label} Module` : PDF_VARIANTS[picked].label}</>}
           </Button>
         </footer>
       </div>

@@ -20,7 +20,8 @@
  */
 
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from '../pdf/variants.js';
-import { cap, humanize, hookText, label } from '../pdf/lib/format.js';
+import { cap, humanize, hookText, label, stripZwnj } from '../pdf/lib/format.js';
+import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -29,10 +30,16 @@ import {
 
 // ── markdown assembly helpers ────────────────────────────────────────────────
 
-/** Escape a value for interpolation into markdown page content. */
+/**
+ * Escape a value for interpolation into markdown page content. Also strips
+ * the ZWNJ (U+200C) that format.js's noLig() inserts as a PDF-renderer-only
+ * fontkit workaround — every helper-derived string funnels through here, so
+ * the journal markdown never carries the F24 corruption class (invisible
+ * characters that break Foundry text search and contaminate copy-paste).
+ */
 export function esc(v) {
   if (v == null) return '';
-  return String(v)
+  return stripZwnj(String(v))
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -44,10 +51,24 @@ const has = (v) => v != null && v !== '' && !(Array.isArray(v) && v.length === 0
 /** `**Label:** value` bullet — skipped when the value is empty. */
 const kv = (labelText, value) => (has(value) ? `- **${labelText}:** ${esc(value)}` : null);
 
-/** Join non-empty lines into a markdown block. */
-const md = (...lines) => lines.flat().filter(Boolean).join('\n');
+/**
+ * Join lines into a markdown block. Empty strings are KEPT — they are the
+ * blank-line separators markdown structure depends on (paragraph breaks, list
+ * termination, blockquote ends); only null/undefined/false conditionals drop.
+ * Runs of 3+ newlines collapse, but edges are preserved so a nested block's
+ * leading '' spacer still separates it from the parent's previous line — the
+ * final page trims its edges once, in buildJournalPages' push().
+ */
+const md = (...lines) => lines
+  .flat()
+  .filter(v => v || v === '')
+  .join('\n')
+  .replace(/\n{3,}/g, '\n\n');
 
 const bullet = (v) => (has(v) ? `- ${esc(v)}` : null);
+
+/** The italic section lede — emitted only when the headline has something to say. */
+const lede = (headline) => (headline ? `*${esc(headline)}*` : null);
 
 // NotableNPCs tiering rule (mirrors src/pdf/sections/NotableNPCs.jsx): the
 // top 3 by power, plus anyone at power ≥ 80, get their own page.
@@ -61,7 +82,7 @@ function notableNpcs(sorted) {
 function overviewPage(vm) {
   const o = vm.overview; const id = vm.identity;
   return md(
-    `*${esc(overviewHeadline(o, id))}*`,
+    lede(overviewHeadline(o, id)),
     '',
     kv('Tier', id.tier),
     kv('Population', id.population),
@@ -116,7 +137,7 @@ function npcQuickRefPage(vm) {
   const npcs = vm.npcs.sorted || [];
   if (!npcs.length) return null;
   return md(
-    `*${esc(npcsHeadline(vm.npcs))}*`,
+    lede(npcsHeadline(vm.npcs)),
     '',
     '| Name | Role | Faction | Power |',
     '| --- | --- | --- | --- |',
@@ -153,7 +174,7 @@ function plotHooksPage(vm) {
     byCategory.get(cat).push(h);
   }
   return md(
-    `*${esc(hooksHeadline(vm.hooks))}*`,
+    lede(hooksHeadline(vm.hooks)),
     [...byCategory.entries()].map(([cat, hooks]) => md(
       '', `## ${esc(cap(humanize(cat)))}`,
       hooks.map(h => `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)}${h.priority ? ` · ${esc(h.priority)}` : ''})*`),
@@ -164,7 +185,7 @@ function plotHooksPage(vm) {
 function powerPage(vm) {
   const p = vm.power;
   return md(
-    `*${esc(powerHeadline(p, vm.identity))}*`,
+    lede(powerHeadline(p, vm.identity)),
     '',
     kv('Government', p.governmentType),
     kv('Stability', typeof p.stability === 'object' ? (p.stability?.label ?? p.stability?.value) : p.stability),
@@ -195,7 +216,7 @@ function servicesPage(vm) {
   const s = vm.services;
   const avail = Object.entries(s.available || {}).filter(([, v]) => v);
   return md(
-    `*${esc(servicesHeadline(s))}*`,
+    lede(servicesHeadline(s)),
     avail.length ? md('', '## Available services', avail.map(([k]) => bullet(humanize(k)))) : null,
     (s.notableAbsences || []).length ? md('', '## Notably absent for the tier',
       s.notableAbsences.map(a => bullet(typeof a === 'string' ? humanize(a) : (a?.label || a?.name || '')))) : null,
@@ -223,7 +244,7 @@ function economicsPage(vm) {
   const e = vm.economics;
   const fb = e.foodBalance || {};
   return md(
-    `*${esc(economicsHeadline(e))}*`,
+    lede(economicsHeadline(e)),
     '',
     kv('Prosperity', e.prosperity),
     kv('Complexity', e.economicComplexity),
@@ -240,7 +261,7 @@ function economicsPage(vm) {
 function resourcesPage(vm) {
   const r = vm.resources;
   return md(
-    `*${esc(resourcesHeadline(r))}*`,
+    lede(resourcesHeadline(r)),
     '',
     kv('Terrain', r.terrain),
     kv('Strategic value', typeof r.strategicValue === 'object' ? (r.strategicValue?.label ?? r.strategicValue?.value) : r.strategicValue),
@@ -255,15 +276,18 @@ function resourcesPage(vm) {
 
 function defensePage(vm) {
   const d = vm.defense;
-  const forces = Array.isArray(d.armedForces) ? d.armedForces : [];
+  // deriveArmedForces returns GROUPED arrays (the PDF DefenseSecurity chapter
+  // iterates the same keys); entries carry name/desc/source.
+  const forces = ['fortifications', 'standing', 'contracted', 'charter', 'arcane']
+    .flatMap(k => d.armedForces?.[k] || []);
   return md(
-    `*${esc(defenseHeadline(d, vm.identity))}*`,
+    lede(defenseHeadline(d, vm.identity)),
     '',
     kv('Readiness', d.readiness?.label),
     kv('Safety', d.safetyLabel),
     d.militaryStress ? kv('Military status', d.militaryStress.label || humanize(d.militaryStress.type)) : null,
     forces.length ? md('', '## Armed forces', forces.map(f =>
-      bullet(typeof f === 'string' ? f : `${f.label || f.name || ''}${f.detail ? ` — ${f.detail}` : ''}${f.note ? ` — ${f.note}` : ''}`)) ) : null,
+      bullet(typeof f === 'string' ? f : `${f.name || ''}${f.desc ? ` — ${f.desc}` : ''}${f.source ? ` (${f.source})` : ''}`)) ) : null,
     (d.criminalOps || []).length ? md('', '## Criminal operations', d.criminalOps.map(o =>
       `- **${esc(o.name)}**${o.note ? ` — ${esc(o.note)}` : ''}`)) : null,
     (d.vulnerabilities || []).length ? md('', '## Vulnerabilities',
@@ -275,7 +299,7 @@ function historyPage(vm) {
   const h = vm.history;
   const f = h.founding || {};
   return md(
-    `*${esc(historyHeadline(h))}*`,
+    lede(historyHeadline(h)),
     '',
     kv('Age', h.age),
     kv('Founded by', f.foundedBy),
@@ -291,7 +315,7 @@ function historyPage(vm) {
 function viabilityPage(vm) {
   const v = vm.viability;
   return md(
-    `*${esc(viabilityHeadline(v))}*`,
+    lede(viabilityHeadline(v)),
     '',
     kv('Verdict', v.verdict ? humanize(v.verdict) : null),
     v.summary ? md('', esc(v.summary)) : null,
@@ -304,7 +328,7 @@ function relationshipsPage(vm) {
   const r = vm.relationships;
   const pr = r.prominentRelationship;
   return md(
-    `*${esc(relationshipsHeadline(r))}*`,
+    lede(relationshipsHeadline(r)),
     (r.neighbours || []).length ? md('', '## Neighbours', r.neighbours.map(n =>
       `- **${esc(n.name)}**${n.type ? ` *(${esc(humanize(n.type))})*` : ''}${n.description ? ` — ${esc(n.description)}` : ''}`)) : null,
     pr ? md('', '## Prominent relationship',
@@ -312,8 +336,12 @@ function relationshipsPage(vm) {
   ) || null;
 }
 
-function timelinePage(vm) {
-  const entries = vm.eventLog || [];
+function timelinePage(vm, { faithUnlocked = false } = {}) {
+  // THE faith seam applies to the event log too: the deity event kinds embed
+  // the deity's name in their generated narration, so a free/lapsed/anon
+  // export drops those entries (the Faith & War page gate alone would not
+  // stop the Timeline page from carrying the name).
+  const entries = gateFaithEvents(vm.eventLog, { faithUnlocked });
   if (!entries.length) return null;
   return md(entries.map(en => {
     const ev = en?.event || {};
@@ -389,7 +417,10 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   const inc = (key) => shouldInclude(spec.chapters[key], ctx);
 
   const pages = [];
-  const push = (name, markdown) => { if (markdown) pages.push({ name, markdown }); };
+  const push = (name, markdown) => {
+    const trimmed = typeof markdown === 'string' ? markdown.replace(/^\n+/, '').replace(/\n+$/, '') : markdown;
+    if (trimmed) pages.push({ name, markdown: trimmed });
+  };
 
   if (inc('overview'))            push('Overview', overviewPage(vm));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
@@ -411,7 +442,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   if (inc('historyFounding'))     push('History & Founding', historyPage(vm));
   if (inc('viabilityAssessment')) push('Viability Assessment', viabilityPage(vm));
   if (inc('relationships'))       push('Relationships & Neighbours', relationshipsPage(vm));
-  if (inc('timeline'))            push('Timeline', timelinePage(vm));
+  if (inc('timeline'))            push('Timeline', timelinePage(vm, { faithUnlocked }));
 
   // THE premium faith seam — the same pure predicate the PDF uses, verbatim.
   // faithUnlocked defaults false (safe); dormant liveWorld (null) also gates.

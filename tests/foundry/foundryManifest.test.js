@@ -19,6 +19,10 @@ const settlementFixture = (over = {}) => ({
     { name: 'Old Tam', role: 'Innkeep', power: 20 },
   ],
   history: { historicalEvents: [{ type: 'fire', title: 'The Ember Fire', yearsAgo: 12 }] },
+  powerStructure: {
+    governmentType: 'council',
+    factions: [{ faction: 'The River Guild', power: 60, isGoverning: true, desc: 'Toll-keepers of the ford.' }],
+  },
   ...over,
 });
 
@@ -34,11 +38,16 @@ describe('module manifest (module.json)', () => {
   const { moduleId, files } = buildFor();
   const manifest = JSON.parse(fileByTail(files, 'module.json').data);
 
-  it('id is a valid Foundry module id and unique per settlement', () => {
+  it('id is a valid Foundry module id and unique per settlement AND variant', () => {
     expect(manifest.id).toBe(moduleId);
     expect(manifest.id).toMatch(/^settlementforge-[a-z0-9-]+$/);
     // the settlement's stable content-id tail keeps two settlements side-by-side
     expect(manifest.id).toMatch(/ef567890$|f567890$|567890$/);
+    // the variant is part of the identity — the loader's idempotency check
+    // keys on moduleId, so a second variant of the same settlement must not
+    // collide with (and be silently skipped as) the first
+    const other = buildFor({}, { variant: 'campaign_state' });
+    expect(other.moduleId).not.toBe(moduleId);
   });
 
   it('declares v11–v13 compatibility and the loader esmodule', () => {
@@ -125,10 +134,41 @@ describe('variant chapter inclusion (shared with the PDF)', () => {
   });
 });
 
-describe('content escaping', () => {
+describe('content escaping + markdown hygiene', () => {
   it('esc() neutralizes raw HTML and markdown metacharacters', () => {
     expect(esc('<img src=x onerror=alert(1)>')).not.toContain('<img');
     expect(esc('a *bold* [link] `tick`')).toBe('a \\*bold\\* \\[link\\] \\`tick\\`');
+  });
+
+  it('no page carries the PDF ZWNJ ligature workaround (U+200C) — the F24 corruption class', () => {
+    // 'Shellfish'/'fisherman' would pick up noLig() ZWNJs via hookText/humanize.
+    const { files } = buildFor({
+      npcs: [{ name: 'Alia', role: 'Fisher', power: 50, plotHooks: ['Find the missing fisherman before the floods'] }],
+    });
+    for (const f of files) {
+      expect(String(f.data).includes('‌'), f.path).toBe(false);
+    }
+  });
+
+  it('no page emits a bare "**" junk line (null headline) and headings sit after blank lines', () => {
+    const sparse = { id: 's_ffff000011112222', name: 'Quiet Vale' }; // thin: most headlines null
+    const vm = buildViewModel({ settlement: sparse, phase: 'canon' });
+    const { pages } = buildFoundryModuleFiles({ settlement: sparse, vm, variant: 'canon_dossier' });
+    for (const p of pages) {
+      expect(p.markdown.split('\n').includes('**'), p.name).toBe(false);
+    }
+    // structure: every non-leading heading is preceded by a blank line so
+    // markdown lists/paragraphs terminate before it (Foundry's converter
+    // treats glued lines as one block)
+    const { pages: fullPages } = buildFor();
+    for (const p of fullPages) {
+      const lines = p.markdown.split('\n');
+      lines.forEach((line, i) => {
+        if (i > 0 && line.startsWith('## ')) {
+          expect(lines[i - 1], `${p.name}: "${line}" must follow a blank line`).toBe('');
+        }
+      });
+    }
   });
 
   it('hostile settlement names cannot smuggle HTML into journal markdown', () => {

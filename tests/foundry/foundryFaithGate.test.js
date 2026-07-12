@@ -40,7 +40,22 @@ const deitySettlement = () => ({
   },
 });
 
-const vmFor = (phase = 'canon') => buildViewModel({ settlement: deitySettlement(), phase });
+// A canon event log carrying the deity event kinds whose generated narration
+// EMBEDS the deity name (registry SET_PRIMARY_DEITY/IMPOSE_CULT narrate) —
+// the Timeline leak channel the gate must also close.
+const deityEventLog = () => [
+  {
+    event: { type: 'ADD_INSTITUTION', description: 'A granary is raised' },
+    narrativeSummary: 'The granary rises by the river ward.',
+  },
+  {
+    event: { type: 'SET_PRIMARY_DEITY', description: `${DEITY_NAME} is proclaimed` },
+    narrativeSummary: `${DEITY_NAME} is proclaimed the settlement's patron deity.`,
+  },
+];
+
+const vmFor = (phase = 'canon', eventLog = []) =>
+  buildViewModel({ settlement: deitySettlement(), phase, eventLog });
 
 const pageNames = (pages) => pages.map(p => p.name);
 
@@ -84,10 +99,28 @@ describe('buildJournalPages — the premium/campaign gate', () => {
   });
 });
 
+describe('the Timeline page — the event-log leak channel is gated too', () => {
+  it('a free export drops deity-event entries; non-faith events survive', () => {
+    const vm = vmFor('canon', deityEventLog());
+    const pages = buildJournalPages(vm, { variant: 'canon_dossier', faithUnlocked: false });
+    const timeline = pages.find(p => p.name === 'Timeline');
+    expect(timeline).toBeTruthy();
+    expect(timeline.markdown).toContain('granary');
+    expect(timeline.markdown).not.toContain(DEITY_NAME);
+  });
+
+  it('a premium export keeps the deity events on the timeline', () => {
+    const vm = vmFor('canon', deityEventLog());
+    const pages = buildJournalPages(vm, { variant: 'canon_dossier', faithUnlocked: true });
+    const timeline = pages.find(p => p.name === 'Timeline');
+    expect(timeline.markdown).toContain(DEITY_NAME);
+  });
+});
+
 describe('module file set — the guarantee holds STRING-LEVEL over every emitted byte', () => {
-  it('a free/anon export of the deity settlement contains the deity name NOWHERE', () => {
+  it('a free/anon export of the deity settlement contains the deity name NOWHERE — even with deity events in the log', () => {
     const settlement = deitySettlement();
-    const vm = buildViewModel({ settlement, phase: 'canon' });
+    const vm = buildViewModel({ settlement, phase: 'canon', eventLog: deityEventLog() });
     // The gate — not a data absence — is what protects privacy:
     expect(vm.liveWorld?.deity?.name).toBe(DEITY_NAME);
     const { files } = buildFoundryModuleFiles({ settlement, vm, variant: 'canon_dossier', faithUnlocked: false });
