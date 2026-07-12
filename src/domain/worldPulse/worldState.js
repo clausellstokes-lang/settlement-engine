@@ -254,7 +254,8 @@ const CONDITIONAL_LEDGER_KEYS = Object.freeze([
 // base and break byte-identity). ensureWorldState materializes it only when the
 // raw carries a valid version, so an aspatial/legacy save (no marker) is
 // byte-identical forever. A valid version is a positive integer.
-/** @param {any} value */
+/** @param {number} value  the raw persisted marker candidate — runtime-defended
+ *  (Number.isInteger) so a garbage persisted value still normalizes to null */
 function normalizeSpatialCanonVersion(value) {
   return Number.isInteger(value) && value > 0 ? value : null;
 }

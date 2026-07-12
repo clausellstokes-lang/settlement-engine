@@ -47,6 +47,44 @@ import {
   terrainClassOf,
 } from './spatialCost.js';
 
+// ── Input shapes (the captured pack + placements the builder consumes) ───────
+/**
+ * The frozen FMG cell arrays as a capture hands them over (pack.cells). Every
+ * field is optional — a ragged or partial capture is normalized by
+ * normalizeSpatialPack (absent arrays read as empty; cellCount clamps to the
+ * shortest driving array).
+ * @typedef {Object} SpatialPackCells
+ * @property {number[]} [h]      per-cell height (FMG 0..100; land >= 20)
+ * @property {number[]} [biome]  per-cell FMG biome id
+ * @property {number[]} [r]      per-cell river id (0 = none)
+ * @property {Array<[number, number]|number[]>} [p]  per-cell centroid [x, y]
+ * @property {number[][]} [c]    per-cell adjacent cell ids
+ */
+
+/**
+ * A captured FMG pack (the digest builder's raw input) — nullish-tolerant.
+ * @typedef {{ cells?: SpatialPackCells | null } | null | undefined} CapturedSpatialPack
+ */
+
+/**
+ * One raw settlement placement row as callers supply it (the live capture, the
+ * store seam, or a test fixture): settlement id + FMG cell. Tolerant — the row
+ * may be nullish and its fields loosely typed; resolveSeeds normalizes
+ * (String/Number) and drops the invalid.
+ * @typedef {{ id?: string|number|null, cellId?: number|string|null } | null | undefined} SpatialPlacementRow
+ */
+
+/**
+ * One primary-hop route receipt (§V.1): the gate crossing between two adjacent
+ * territories, its total cost, the boundary segment, and the cost attributed by
+ * terrain class — the "why this road?" audit trail.
+ * @typedef {Object} RouteReceipt
+ * @property {[string, string]} between  the two settlement ids (codepoint-sorted)
+ * @property {number} cost               total primary-hop cost (integer)
+ * @property {Array<{ cellA: number, cellB: number, cost: number, terrainA: string, terrainB: string }>} segments
+ * @property {Record<string, number>} byTerrain  cost attributed per terrain class
+ */
+
 // The version axes this build stamps. Bumping any of these is a DISCRETE re-
 // canonize event (§V.1): an existing frozen digest keeps its own axes forever —
 // only an explicit spatial re-canonize re-derives. Never a silent drift on load.
@@ -108,9 +146,10 @@ function makeHeap() {
  * cellCount is the shortest of the driving arrays (h drives land/impassable, p
  * drives geometry, c drives adjacency) so a ragged capture can't index off the
  * end. Pure structural read; no mutation of the input.
- * @param {any} pack
+ * @param {CapturedSpatialPack} pack
  */
 export function normalizeSpatialPack(pack) {
+  /** @type {SpatialPackCells} */
   const cells = pack?.cells || {};
   const h = Array.isArray(cells.h) ? cells.h : [];
   const biome = Array.isArray(cells.biome) ? cells.biome : [];
@@ -126,7 +165,7 @@ export function normalizeSpatialPack(pack) {
  * sorted by codepoint id, each land + on a distinct cell (the lower-id settlement
  * keeps a shared cell). Impassable (non-land) or off-map seeds are dropped and
  * reported so the caller can see why a settlement is absent from the digest.
- * @param {Array<{id:any, cellId:any}>} placements
+ * @param {SpatialPlacementRow[] | null | undefined} placements
  * @param {{ h:number[], cellCount:number }} pack
  */
 export function resolveSeeds(placements, pack) {
@@ -149,11 +188,16 @@ export function resolveSeeds(placements, pack) {
   return { seeds, skipped };
 }
 
-// Sorted-key object builder — insert keys in a stable order so JSON.stringify is
-// byte-identical across builds (non-integer string keys serialize in insertion
-// order; we always insert sorted).
-function sortedObject(/** @type {Array<[string, any]>} */ entries) {
-  /** @type {Record<string, any>} */
+/**
+ * Sorted-key object builder — insert keys in a stable order so JSON.stringify is
+ * byte-identical across builds (non-integer string keys serialize in insertion
+ * order; we always insert sorted). Value-type-preserving.
+ * @template V
+ * @param {Array<[string, V]>} entries
+ * @returns {Record<string, V>}
+ */
+function sortedObject(entries) {
+  /** @type {Record<string, V>} */
   const out = {};
   for (const [k, v] of entries.slice().sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0))) {
     out[k] = v;
@@ -165,7 +209,7 @@ const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `
 
 /**
  * Build the frozen spatial digest. The ONE public entry point.
- * @param {{ pack:any, placements:Array<{id:any,cellId:any}>,
+ * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
  *           overlayVersion?:number }} input
  */
@@ -313,9 +357,9 @@ export function buildSpatialDigest(input) {
   }
 
   // ── outputs: sorted, id-keyed, byte-stable ─────────────────────────────────
-  /** @type {Array<[string, any]>} */
+  /** @type {Array<[string, Record<string, number>]>} */
   const distanceEntries = [];
-  /** @type {Array<[string, any]>} */
+  /** @type {Array<[string, Record<string, number>]>} */
   const tierEntries = [];
   for (let i = 0; i < N; i++) {
     const depth = tierRow(i);
@@ -338,7 +382,7 @@ export function buildSpatialDigest(input) {
     const g = crossings[key];
     return { between: [g.a, g.b], cellA: g.cellA, cellB: g.cellB, cost: g.cost };
   });
-  /** @type {Array<[string, any]>} */
+  /** @type {Array<[string, RouteReceipt]>} */
   const receiptEntries = gateKeys.map((key) => {
     const g = crossings[key];
     // The primary-hop crossing, attributed to the terrain class of each boundary
