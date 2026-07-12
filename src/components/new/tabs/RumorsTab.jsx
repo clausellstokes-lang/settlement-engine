@@ -150,7 +150,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   const view = useMemo(() => {
     if (!sid || !Array.isArray(campaigns)) return null;
     const campaign = campaigns.find(c =>
-      (c.settlementIds || []).map(String).includes(sid) && c.worldState?.rumorLedgers);
+      (c.settlementIds || []).map(String).includes(sid) && c.worldState?.spatialLedgers?.rumorLedgers);
     if (!campaign) return null;
     const rumors = settlementRumors({
       worldState: campaign.worldState,

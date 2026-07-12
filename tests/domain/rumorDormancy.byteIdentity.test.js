@@ -94,29 +94,29 @@ function driveTicks(campaign, ticks = 10) {
 describe('STEP 3.5 dormancy — omniscient / no-marker ⇒ zero new keys', () => {
   it('ensureWorldState adds no rumor key to any save without one', () => {
     const ws = ensureWorldState({ rngSeed: 's', tick: 3 }, { id: 'c1' });
-    expect('rumorLedgers' in ws).toBe(false);
-    // An empty/garbage rumorLedgers never materializes either.
+    expect('spatialLedgers' in ws).toBe(false);
+    // An empty/garbage spatialLedgers namespace never materializes either.
     for (const bad of [{}, [], null, 'x']) {
-      const w = ensureWorldState({ rngSeed: 's', tick: 3, rumorLedgers: bad }, { id: 'c1' });
-      expect('rumorLedgers' in w).toBe(false);
+      const w = ensureWorldState({ rngSeed: 's', tick: 3, spatialLedgers: bad }, { id: 'c1' });
+      expect('spatialLedgers' in w).toBe(false);
     }
   });
 
   it('a present, non-empty ledger round-trips through the conditional clone', () => {
     const ledger = { a: { 'trade:evt1': { eventRef: 'evt1', arrivalTick: 4, hopCount: 0 } } };
-    const ws = ensureWorldState({ rngSeed: 's', tick: 3, rumorLedgers: ledger }, { id: 'c1' });
-    expect(ws.rumorLedgers).toEqual(ledger);
-    expect(ws.rumorLedgers).not.toBe(ledger); // deep-cloned, never aliased
+    const ws = ensureWorldState({ rngSeed: 's', tick: 3, spatialLedgers: { rumorLedgers: ledger } }, { id: 'c1' });
+    expect(ws.spatialLedgers.rumorLedgers).toEqual(ledger);
+    expect(ws.spatialLedgers.rumorLedgers).not.toBe(ledger); // deep-cloned, never aliased
   });
 
   it('SPATIAL + omniscient (virtual profile): the kernel materializes NO rumor key over 10 ticks', () => {
     const ws = driveTicks(makeCampaign({ spatial: true, infoMode: null }), 10);
-    expect('rumorLedgers' in ws).toBe(false);
+    expect(ws.spatialLedgers?.rumorLedgers).toBeUndefined();
   });
 
   it('ASPATIAL + a live infoMode: still NO rumor key (word needs roads)', () => {
     const ws = driveTicks(makeCampaign({ spatial: false, infoMode: 'perfect_delayed' }), 6);
-    expect('rumorLedgers' in ws).toBe(false);
+    expect(ws.spatialLedgers?.rumorLedgers).toBeUndefined();
   });
 
   it('the omniscient spatial run is byte-identical to the same run under the dormancy oracle', () => {
@@ -129,13 +129,14 @@ describe('STEP 3.5 dormancy — omniscient / no-marker ⇒ zero new keys', () =>
 describe('STEP 3.5 live — the kernel wires the rumor network (anti-vacuity)', () => {
   it('SPATIAL + perfect_delayed materializes rumor ledgers, deterministic across two runs', () => {
     const one = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 10);
-    expect(one.rumorLedgers && typeof one.rumorLedgers).toBe('object');
-    expect(Object.keys(one.rumorLedgers).length).toBeGreaterThan(0);
+    const oneRumors = one.spatialLedgers?.rumorLedgers;
+    expect(oneRumors && typeof oneRumors).toBe('object');
+    expect(Object.keys(oneRumors).length).toBeGreaterThan(0);
     // Perfect-but-Delayed two-run determinism at the WHOLE-worldState level.
     const two = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 10);
     expect(JSON.stringify(one)).toBe(JSON.stringify(two));
     // Lineage rooting holds all the way through the real kernel.
-    for (const ledger of Object.values(one.rumorLedgers)) {
+    for (const ledger of Object.values(oneRumors)) {
       for (const record of Object.values(ledger)) {
         expect(record.lineageIds[0]).toBe(record.eventRef);
         expect(record.carrier).toBe('trade');
@@ -147,7 +148,7 @@ describe('STEP 3.5 live — the kernel wires the rumor network (anti-vacuity)', 
 
   it('perfect_delayed fidelity is perfect; unreliable same-seed identical + cross-seed divergent', () => {
     const pd = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 10);
-    for (const ledger of Object.values(pd.rumorLedgers)) {
+    for (const ledger of Object.values(pd.spatialLedgers.rumorLedgers)) {
       for (const record of Object.values(ledger)) {
         expect(record.completeness01).toBe(1);
         expect(record.accuracy01).toBe(1);
@@ -155,17 +156,17 @@ describe('STEP 3.5 live — the kernel wires the rumor network (anti-vacuity)', 
     }
     const un1 = driveTicks(makeCampaign({ spatial: true, infoMode: 'unreliable' }), 10);
     const un2 = driveTicks(makeCampaign({ spatial: true, infoMode: 'unreliable' }), 10);
-    expect(JSON.stringify(un1.rumorLedgers)).toBe(JSON.stringify(un2.rumorLedgers));
+    expect(JSON.stringify(un1.spatialLedgers.rumorLedgers)).toBe(JSON.stringify(un2.spatialLedgers.rumorLedgers));
     const seeded = makeCampaign({ spatial: true, infoMode: 'unreliable' });
     seeded.worldState.rngSeed = 'sp-rumor-other';
     const un3 = driveTicks(seeded, 10);
-    expect(JSON.stringify(un1.rumorLedgers)).not.toBe(JSON.stringify(un3.rumorLedgers));
+    expect(JSON.stringify(un1.spatialLedgers.rumorLedgers)).not.toBe(JSON.stringify(un3.spatialLedgers.rumorLedgers));
   });
 
   it('a settlement hears a distant event LATER than the witness (latency through the kernel)', () => {
     const ws = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 10);
     let sawLag = false;
-    for (const ledger of Object.values(ws.rumorLedgers)) {
+    for (const ledger of Object.values(ws.spatialLedgers.rumorLedgers)) {
       for (const record of Object.values(ledger)) {
         if (record.hopCount > 0) {
           expect(record.arrivalTick).toBeGreaterThan(record.eventTick);

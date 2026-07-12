@@ -88,31 +88,31 @@ function driveTicks(campaign, ticks = 8) {
 }
 
 describe('WAVE A dormancy — omniscient / no-marker ⇒ zero new belief keys', () => {
-  it('ensureWorldState adds no beliefMaps key to a save without one; garbage never materializes', () => {
+  it('ensureWorldState adds no spatialLedgers key to a save without one; garbage never materializes', () => {
     const ws = ensureWorldState({ rngSeed: 's', tick: 3 }, { id: 'c1' });
-    expect('beliefMaps' in ws).toBe(false);
+    expect('spatialLedgers' in ws).toBe(false);
     for (const bad of [{}, [], null, 'x']) {
-      const w = ensureWorldState({ rngSeed: 's', tick: 3, beliefMaps: bad }, { id: 'c1' });
-      expect('beliefMaps' in w).toBe(false);
+      const w = ensureWorldState({ rngSeed: 's', tick: 3, spatialLedgers: bad }, { id: 'c1' });
+      expect('spatialLedgers' in w).toBe(false);
     }
   });
 
   it('a present, non-empty 3-level belief ledger round-trips through the conditional clone', () => {
     const ledger = { a: { [GOVERNING_SEAT_KEY]: { b: { readiness: 0, strengthBand: 2, allianceLabel: 'hostile', faithLabel: null, confidence01: 1, lastUpdateTick: 0 } } } };
-    const ws = ensureWorldState({ rngSeed: 's', tick: 3, spatialCanonVersion: 1, beliefMaps: ledger }, { id: 'c1' });
-    expect(ws.beliefMaps).toEqual(ledger);
-    expect(ws.beliefMaps).not.toBe(ledger); // deep-cloned, never aliased
-    expect(ws.beliefMaps.a[GOVERNING_SEAT_KEY]).not.toBe(ledger.a[GOVERNING_SEAT_KEY]);
+    const ws = ensureWorldState({ rngSeed: 's', tick: 3, spatialCanonVersion: 1, spatialLedgers: { beliefMaps: ledger } }, { id: 'c1' });
+    expect(ws.spatialLedgers.beliefMaps).toEqual(ledger);
+    expect(ws.spatialLedgers.beliefMaps).not.toBe(ledger); // deep-cloned, never aliased
+    expect(ws.spatialLedgers.beliefMaps.a[GOVERNING_SEAT_KEY]).not.toBe(ledger.a[GOVERNING_SEAT_KEY]);
   });
 
   it('SPATIAL + omniscient (virtual profile): the kernel materializes NO belief key over 8 ticks', () => {
     const ws = driveTicks(makeCampaign({ spatial: true, infoMode: null }), 8);
-    expect('beliefMaps' in ws).toBe(false);
+    expect(ws.spatialLedgers?.beliefMaps).toBeUndefined();
   });
 
   it('ASPATIAL + a live infoMode: still NO belief key (beliefs need the spatial marker)', () => {
     const ws = driveTicks(makeCampaign({ spatial: false, infoMode: 'unreliable' }), 6);
-    expect('beliefMaps' in ws).toBe(false);
+    expect(ws.spatialLedgers?.beliefMaps).toBeUndefined();
   });
 
   it('the omniscient spatial run is byte-identical across two runs (dormancy oracle)', () => {
@@ -125,16 +125,17 @@ describe('WAVE A dormancy — omniscient / no-marker ⇒ zero new belief keys', 
 describe('WAVE A live — the kernel wires the belief map (anti-vacuity)', () => {
   it('SPATIAL + a live infoMode materializes belief maps (cold-start), deterministic across two runs', () => {
     const one = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 6);
-    expect(one.beliefMaps && typeof one.beliefMaps).toBe('object');
-    expect(Object.keys(one.beliefMaps).length).toBeGreaterThan(0);
+    const oneBeliefs = one.spatialLedgers?.beliefMaps;
+    expect(oneBeliefs && typeof oneBeliefs).toBe('object');
+    expect(Object.keys(oneBeliefs).length).toBeGreaterThan(0);
     const two = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 6);
-    expect(JSON.stringify(one.beliefMaps)).toBe(JSON.stringify(two.beliefMaps));
+    expect(JSON.stringify(oneBeliefs)).toBe(JSON.stringify(two.spatialLedgers?.beliefMaps));
     // The faction dimension ('seat') is present from day one; beliefs are sparse
     // (only relationship-adjacent + heard-about subjects), never all-pairs.
     let entries = 0;
-    for (const obs of Object.keys(one.beliefMaps)) {
-      expect(GOVERNING_SEAT_KEY in one.beliefMaps[obs]).toBe(true);
-      entries += Object.keys(one.beliefMaps[obs][GOVERNING_SEAT_KEY]).length;
+    for (const obs of Object.keys(oneBeliefs)) {
+      expect(GOVERNING_SEAT_KEY in oneBeliefs[obs]).toBe(true);
+      entries += Object.keys(oneBeliefs[obs][GOVERNING_SEAT_KEY]).length;
     }
     expect(entries).toBeGreaterThan(0);
     expect(entries).toBeLessThan(IDS.length * IDS.length); // sparse, not N^2
@@ -143,7 +144,7 @@ describe('WAVE A live — the kernel wires the belief map (anti-vacuity)', () =>
   it('cold-start seeds beliefs at ground truth — the relationship label the observer declares', () => {
     // After ONE tick, a↔b is freshly cold-started to the hostile edge label.
     const ws = driveTicks(makeCampaign({ spatial: true, infoMode: 'perfect_delayed' }), 1);
-    const ab = ws.beliefMaps?.a?.[GOVERNING_SEAT_KEY]?.b;
+    const ab = ws.spatialLedgers?.beliefMaps?.a?.[GOVERNING_SEAT_KEY]?.b;
     expect(ab).toBeTruthy();
     expect(ab.allianceLabel).toBe('hostile');
     expect(ab.confidence01).toBe(1);       // cold-start certainty
@@ -153,13 +154,13 @@ describe('WAVE A live — the kernel wires the belief map (anti-vacuity)', () =>
   it('dialling infoMode BACK to omniscient PRESERVES an existing ledger (never deletes)', () => {
     const live = makeCampaign({ spatial: true, infoMode: 'perfect_delayed' });
     const afterLive = driveTicks(live, 3);
-    expect('beliefMaps' in afterLive).toBe(true);
+    expect(afterLive.spatialLedgers?.beliefMaps).toBeTruthy();
     // Now advance ONE omniscient tick on the built-up state.
     const dialledBack = {
       ...live,
       worldState: { ...afterLive, simulationRules: { ...afterLive.simulationRules, infoMode: 'omniscient' } },
     };
     const r = simulateCampaignWorldPulse({ campaign: dialledBack, saves: saves(), interval: 'one_week', now: NOW });
-    expect('beliefMaps' in r.worldState).toBe(true); // preserved, not dropped
+    expect(r.worldState.spatialLedgers?.beliefMaps).toBeTruthy(); // preserved, not dropped
   });
 });

@@ -139,7 +139,7 @@ function projectionFor({ seed, ticks, interval, spatial }) {
       const type = String(o?.candidateType || o?.type || 'unknown');
       candidateTypes[type] = (candidateTypes[type] || 0) + 1;
     }
-    if (r.worldState?.spatialArrivals && Object.keys(r.worldState.spatialArrivals).length) arrivalTicksSeen += 1;
+    if (r.worldState?.spatialLedgers?.spatialArrivals && Object.keys(r.worldState.spatialLedgers.spatialArrivals).length) arrivalTicksSeen += 1;
     const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
     saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
     campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.worldState?.regionalGraph || campaign.regionalGraph };
@@ -154,7 +154,7 @@ function projectionFor({ seed, ticks, interval, spatial }) {
   return normalizeForDormancy({
     tick: campaign.worldState?.tick ?? null,
     marker: campaign.worldState?.spatialCanonVersion ?? null,
-    arrivalKeys: Object.keys(campaign.worldState?.spatialArrivals || {}).sort(),
+    arrivalKeys: Object.keys(campaign.worldState?.spatialLedgers?.spatialArrivals || {}).sort(),
     arrivalTicksSeen,
     queuedImpacts: (campaign.worldState?.regionalGraph?.queuedImpacts || campaign.regionalGraph?.queuedImpacts || []).length,
     patrons,

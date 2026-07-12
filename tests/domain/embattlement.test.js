@@ -66,7 +66,7 @@ function worldWithLevels(levels) {
   for (const [id, level] of Object.entries(levels)) {
     embattlement[id] = { level, phase: 'embattled', sinceTick: 0, lastTick: 0 };
   }
-  return { spatialCanonVersion: 1, embattlement };
+  return { spatialCanonVersion: 1, spatialLedgers: { embattlement } };
 }
 
 /** A tiny deterministic rng exposing the kernel PRNG's `.random()` surface. The
@@ -277,7 +277,7 @@ describe('M1 embattlement — advance + dormancy', () => {
     expect(out).toEqual({ next: null, changed: false });
     // A pre-existing ledger is PRESERVED untouched off the marker (never deleted).
     const prior = { x: { level: 0.4, phase: 'embattled', sinceTick: 0, lastTick: 0 } };
-    const out2 = advanceEmbattlement({ threats: { x: 0.9 }, worldState: { embattlement: prior }, tick: 3 });
+    const out2 = advanceEmbattlement({ threats: { x: 0.9 }, worldState: { spatialLedgers: { embattlement: prior } }, tick: 3 });
     expect(out2.changed).toBe(false);
     expect(out2.next).toBe(prior);
   });
@@ -293,11 +293,11 @@ describe('M1 embattlement — advance + dormancy', () => {
   it('a run that graduates every region back to calm drops the key', () => {
     let world = { spatialCanonVersion: 1 };
     let out = advanceEmbattlement({ threats: { x: 0.9 }, worldState: world, tick: 0 });
-    world = { ...world, embattlement: out.next };
+    world = { ...world, spatialLedgers: { ...world.spatialLedgers, embattlement: out.next } };
     // Long calm stretch ⇒ dwell satisfied, level decays below MIN_LEVEL ⇒ pruned.
     for (let i = 1; i < 120 && out.next; i++) {
       out = advanceEmbattlement({ threats: { x: 0 }, worldState: world, tick: i });
-      world = out.next ? { ...world, embattlement: out.next } : world;
+      world = out.next ? { ...world, spatialLedgers: { ...world.spatialLedgers, embattlement: out.next } } : world;
     }
     expect(out.next).toBeNull(); // the whole ledger drops back to absent
   });
@@ -323,7 +323,7 @@ describe('M1 embattlement — advance + dormancy', () => {
         expect(ids).toContain(id);
       }
       expect(Object.keys(led).length).toBeLessThanOrEqual(ids.length); // never unbounded
-      world = { ...world, embattlement: out.next || undefined };
+      world = { ...world, spatialLedgers: { ...world.spatialLedgers, embattlement: out.next || undefined } };
     }
   });
 
@@ -333,7 +333,7 @@ describe('M1 embattlement — advance + dormancy', () => {
       const snaps = [];
       for (let tick = 0; tick < 40; tick++) {
         const out = advanceEmbattlement({ threats: { x: (tick % 5) / 5, y: 0.9 }, worldState: world, tick });
-        world = { ...world, embattlement: out.next || undefined };
+        world = { ...world, spatialLedgers: { ...world.spatialLedgers, embattlement: out.next || undefined } };
         snaps.push(JSON.stringify(out.next ?? null));
       }
       return snaps.join('|');

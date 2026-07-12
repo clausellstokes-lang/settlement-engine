@@ -254,7 +254,7 @@ describe('M2 — banditry integration (real, delivered shipments; deterministic 
     const digest = lineDigest();
     const link = ironLink(0, true);
     // An embattled source ⇒ banditry may nick the delivered quantity; still bounded.
-    const world = worldWith({ embattlement: { p1: { level: 0.9, phase: 'embattled', sinceTick: 0, lastTick: 0 } } });
+    const world = worldWith({ spatialLedgers: { embattlement: { p1: { level: 0.9, phase: 'embattled', sinceTick: 0, lastTick: 0 } } } });
     const arriving = { institutionId: 'smithy', settlementId: 'c', input: 'iron', sourceId: 'p1', arrivalTick: 2, starving: false };
     const run = () => stepSupplyLink(link, arriving, clearCtx({ tick: 2, worldState: world, rng: forkRng() })).bufferWeeks;
     expect(run()).toBe(run()); // deterministic
@@ -304,7 +304,7 @@ describe('M2b — the siege interdiction term (weakens a starved defender; 0 oth
       [linkKey('d', 'x', 'y')]: { settlementId: 'd', starving: true },
     };
     // 1 of c's 2 links starving ⇒ 0.5; d's link is a different settlement.
-    expect(supplyInterdictionLevel(worldWith({ supplyShipments: ledger }), 'c')).toBeCloseTo(0.5, 10);
+    expect(supplyInterdictionLevel(worldWith({ spatialLedgers: { supplyShipments: ledger } }), 'c')).toBeCloseTo(0.5, 10);
   });
 });
 
@@ -349,7 +349,7 @@ describe('M2 — the orchestrator: dormancy + determinism + sparsity', () => {
     expect(out).toEqual({ next: null, changed: false, outcomes: {} });
     // A pre-existing ledger is PRESERVED untouched off the marker (never deleted).
     const prior = { [linkKey('c', 'smithy', 'iron')]: { institutionId: 'smithy', settlementId: 'c', input: 'iron', sourceId: 'p1', arrivalTick: 9, starving: false } };
-    const out2 = advanceSupplyShipments({ links: [ironLink(0)], worldState: { supplyShipments: prior }, digest: lineDigest(), tick: 1, rng: forkRng() });
+    const out2 = advanceSupplyShipments({ links: [ironLink(0)], worldState: { spatialLedgers: { supplyShipments: prior } }, digest: lineDigest(), tick: 1, rng: forkRng() });
     expect(out2.changed).toBe(false);
     expect(out2.next).toBe(prior);
   });
@@ -364,7 +364,7 @@ describe('M2 — the orchestrator: dormancy + determinism + sparsity', () => {
         const out = advanceSupplyShipments({ links, worldState: world, digest, tick, rng: forkRng(),
           sourceSeveredFor: (_d, s) => tick > 5 && tick < 12 && s === 'p1', // a mid-run severance
           hostileToDestinationFor: () => false, riskToleranceFor: () => 1 });
-        world = { ...world, supplyShipments: out.next || undefined };
+        world = { ...world, spatialLedgers: { ...world.spatialLedgers, supplyShipments: out.next || undefined } };
         snaps.push(JSON.stringify(out.next ?? null));
       }
       return snaps.join('|');

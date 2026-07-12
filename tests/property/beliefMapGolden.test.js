@@ -91,7 +91,7 @@ function projectionFor({ seed, ticks, infoMode }) {
     campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph, wizardNews: r.wizardNews };
   }
   const tick = campaign.worldState?.tick ?? 0;
-  const maps = campaign.worldState?.beliefMaps || {};
+  const maps = campaign.worldState?.spatialLedgers?.beliefMaps || {};
   /** @type {Record<string, Record<string, unknown>>} */
   const summary = {};
   for (const obs of Object.keys(maps).sort()) {

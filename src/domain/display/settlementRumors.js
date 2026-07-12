@@ -37,6 +37,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -282,7 +283,7 @@ function severityBand(severity) {
  * deterministic total order (arrival desc, score desc, codepoint key).
  *
  * @param {Object} args
- * @param {{ tick?: number, rumorLedgers?: Record<string, Record<string, RumorArrivalRecord>> } |
+ * @param {{ tick?: number, spatialLedgers?: unknown } |
  *   null | undefined} args.worldState
  * @param {unknown} args.settlementId
  * @param {boolean} [args.includeGroundTruth]  DM/premium surfaces ⇒ true;
@@ -303,7 +304,8 @@ export function settlementRumors({
   wizardNews = null,
 } = /** @type {never} */ ({})) {
   if (settlementId == null) return [];
-  const ledgers = worldState?.rumorLedgers;
+  const ledgers = /** @type {Record<string, Record<string, RumorArrivalRecord>> | undefined} */ (
+    getSpatialLedger(worldState, 'rumorLedgers'));
   if (!ledgers || typeof ledgers !== 'object' || Array.isArray(ledgers)) return [];
   const ledger = ledgers[String(settlementId)];
   if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) return [];
@@ -324,10 +326,10 @@ export function settlementRumors({
 /**
  * Panel presence gate: does this campaign's world carry ANY rumor ledger?
  * Dormant (no key) ⇒ false ⇒ no surface renders ⇒ byte-identical UI.
- * @param {{ rumorLedgers?: Record<string, unknown> } | null | undefined} worldState
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  */
 export function hasRumorLedgers(worldState) {
-  const ledgers = worldState?.rumorLedgers;
+  const ledgers = getSpatialLedger(worldState, 'rumorLedgers');
   return !!ledgers && typeof ledgers === 'object' && !Array.isArray(ledgers)
     && Object.keys(ledgers).length > 0;
 }
@@ -338,7 +340,7 @@ export function hasRumorLedgers(worldState) {
  * dormant / legacy / omniscient campaigns have no key ⇒ false ⇒ no tab ⇒ the
  * dossier UI is byte-identical.
  * @param {Array<{ settlementIds?: Array<string | number>,
- *   worldState?: { rumorLedgers?: Record<string, unknown> } } | null> | null | undefined} campaigns
+ *   worldState?: { spatialLedgers?: unknown } } | null> | null | undefined} campaigns
  * @param {unknown} saveId
  * @returns {boolean}
  */

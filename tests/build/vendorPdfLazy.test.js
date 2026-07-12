@@ -269,7 +269,31 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // back-to-back builds. Ceiling = measured + ~2 kB cross-env Rollup margin.
 // Monotone ratchet: DOWN only, never up without a deliberate, documented
 // owner-approved reason.
-const CLOSURE_BUDGET_BYTES = 1_256_000;
+//
+// ── (2026-07-12, FP-R) SPATIAL LEDGER CONSOLIDATION: 1,256,000 → 1,255,985 ──
+// The five Phase 5.5 spatial mover ledgers (spatialArrivals, rumorLedgers,
+// beliefMaps, embattlement, supplyShipments) each used to be its OWN top-level
+// worldState key, enumerated as a string literal in the EAGER
+// CONDITIONAL_LEDGER_KEYS array (worldState.js) — so each new mover ledger cost
+// ~13-18 first-paint bytes and the array had only 17 B of headroom left, too
+// little for the remaining movers M4-M10. They now nest under ONE conditional
+// key, `worldState.spatialLedgers`, so the eager array carries a single name for
+// the whole family and a NEW mover ledger costs ZERO first-paint bytes (it nests
+// via the distanceRead.js setSpatialLedger accessor — no eager-array touch). The
+// namespace is deep-cloned/dropped-when-empty exactly as the five keys were, so
+// every dormant golden stays byte-identical (no fixture carries any of the five).
+// Pure refactor: the accessors live in the existing lazy distanceRead.js chunk
+// (the sibling of activeSpatialDigest), so NO new chunk / preload-manifest entry
+// was minted — an earlier attempt that put them in a fresh module leaked ~37 B
+// into the entry's __vitePreload map and undershot the reclaim (net −16 B); the
+// distanceRead home recovers the full reclaim.
+// MEASURED 1,255,921 (same 7 chunks), a 62 B reclaim from the pre-wave 1,255,983.
+// Budget lowered 1,256,000 → 1,255,985 — locking in the reclaim while RESERVING a
+// ~64 B working margin (1,255,985 − 1,255,921) for the incidental (non-ledger)
+// eager costs of the remaining movers M4-M10, deliberately NOT ratcheting to the
+// bone (M3 once hit a +49 B Rollup chunk-graph artifact; this margin absorbs one).
+// Monotone-down thereafter.
+const CLOSURE_BUDGET_BYTES = 1_255_985;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

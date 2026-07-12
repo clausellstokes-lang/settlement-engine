@@ -74,7 +74,7 @@ function worldWith({ mode = 'unreliable', entries = [deityEvent()], to = 14, see
         simulationRules: { infoMode: mode },
         spatialCanonVersion: 1,
         spatialDigest: digest,
-        ...(ledgers ? { rumorLedgers: ledgers } : {}),
+        ...(ledgers ? { spatialLedgers: { rumorLedgers: ledgers } } : {}),
       },
       feedEntries: entries,
       graph: GRAPH,
@@ -83,7 +83,7 @@ function worldWith({ mode = 'unreliable', entries = [deityEvent()], to = 14, see
     });
     if (result.changed) ledgers = result.next;
   }
-  return { tick: to, rumorLedgers: ledgers };
+  return { tick: to, spatialLedgers: { rumorLedgers: ledgers } };
 }
 
 describe('THE ADVERSARIAL WHITELIST SCRUB (free/anon projection)', () => {
@@ -184,22 +184,22 @@ describe('read-model mechanics', () => {
     const inTransit = step.next?.b?.[rumorEventKey('evtD')];
     expect(inTransit).toBeTruthy();
     expect(inTransit.arrivalTick).toBeGreaterThan(5);
-    const atFive = { tick: 5, rumorLedgers: step.next };
+    const atFive = { tick: 5, spatialLedgers: { rumorLedgers: step.next } };
     expect(settlementRumors({ worldState: atFive, settlementId: 'b' })).toEqual([]);
     expect(settlementRumors({ worldState: atFive, settlementId: 'b', includeGroundTruth: true })).toEqual([]);
     // Once the clock reaches the arrival tick, it shows.
-    const later = { tick: inTransit.arrivalTick, rumorLedgers: step.next };
+    const later = { tick: inTransit.arrivalTick, spatialLedgers: { rumorLedgers: step.next } };
     expect(settlementRumors({ worldState: later, settlementId: 'b' }).length).toBe(1);
   });
 
   it('is inert-not-crash on garbage and absent ledgers', () => {
     expect(settlementRumors({ worldState: null, settlementId: 'a' })).toEqual([]);
     expect(settlementRumors({ worldState: {}, settlementId: 'a' })).toEqual([]);
-    expect(settlementRumors({ worldState: { rumorLedgers: [] }, settlementId: 'a' })).toEqual([]);
-    expect(settlementRumors({ worldState: { rumorLedgers: { a: null } }, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: { spatialLedgers: { rumorLedgers: [] } }, settlementId: 'a' })).toEqual([]);
+    expect(settlementRumors({ worldState: { spatialLedgers: { rumorLedgers: { a: null } } }, settlementId: 'a' })).toEqual([]);
     expect(settlementRumors({ worldState: worldWith({}), settlementId: null })).toEqual([]);
     expect(hasRumorLedgers(null)).toBe(false);
-    expect(hasRumorLedgers({ rumorLedgers: {} })).toBe(false);
+    expect(hasRumorLedgers({ spatialLedgers: { rumorLedgers: {} } })).toBe(false);
     expect(hasRumorLedgers(worldWith({}))).toBe(true);
   });
 

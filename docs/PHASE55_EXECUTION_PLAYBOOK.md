@@ -88,7 +88,16 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   the 17B. THEN M4 = THE OWNER GATE (population-attractor review + the budget-reclaim decision:
   RECOMMEND nesting the spatial mover ledgers under one namespace key to reclaim the per-mover
   eager cost, over the store-slice FP-2/W5 path). The new-key movers M4/M5/M6 do NOT fit 17B.
-- M3 SEASONS-B / WINTER ROADS: COMMITTED (this commit) — mover ladder #3; the digest's reserved
+- FP-R SPATIAL LEDGER CONSOLIDATION: COMMITTED (this commit) — the budget reclaim gating M4/M5/M6.
+  The 5 spatial mover ledgers (spatialArrivals/rumorLedgers/beliefMaps/embattlement/supplyShipments)
+  now nest under ONE conditional key `spatialLedgers` (accessors homed in the lazy distanceRead.js —
+  a fresh module leaked a chunk-manifest entry, so it was folded in). Eager array 5 literals → 1;
+  closure 1,255,983 → 1,255,921 (−62B); budget RATCHETED DOWN 1,256,000 → 1,255,985 (64B reserved
+  margin). A NEW mover ledger (M4 migration) now costs ZERO eager bytes (setSpatialLedger + generic
+  ensureWorldState). Goldens byte-identical (0 fixtures touched, all 5 dormant); deep-clone-no-alias
+  contract preserved at the relocated path; any-cast 2252; full suite 7887/7887. THE BUDGET WALL IS
+  CLEARED — M4/M5/M6 are now budget-free.
+- M3 SEASONS-B / WINTER ROADS: COMMITTED ce949b8f — mover ladder #3; the digest's reserved
   seasonalOverlay slot lit (read-time per-season × terrain cost, frozen matrix untouched, slow-not-
   sever). BUDGET-FREE (closure UNCHANGED 1,255,983 / 17B headroom). OWNER DELEGATION (2026-07-12,
   "continue M3 to M4"): the owner handed me the M4 gate — I take the population-attractor tuning +

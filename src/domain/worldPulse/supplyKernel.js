@@ -34,6 +34,7 @@ import {
   advanceSupplyShipments, supplyActive, rankSupplySources, linkKey,
   SUPPLY_STARVED_IMPAIRMENT, SUPPLY_STARVED_CAUSE_PREFIX, SUPPLY_TUNING,
 } from '../spatial/supplyShipments.js';
+import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
 /** @typedef {ReturnType<typeof normalizeGood>} CatalogGood */
@@ -282,14 +283,11 @@ export function advanceSettlementSupply({ snapshot, localSettlements, worldState
     localSettlements.set(sid, settlement);
   }
 
-  // Write the AGGREGATE ledger onto worldState (conditional key, drop-when-empty).
+  // Write the AGGREGATE ledger onto worldState (conditional sub-ledger, drop-when-empty).
   let nextWorldState = worldState;
   if (out.changed) {
-    if (out.next) nextWorldState = { ...worldState, supplyShipments: out.next };
-    else if (worldState && 'supplyShipments' in worldState) {
-      const { supplyShipments: _drop, ...rest } = worldState;
-      nextWorldState = rest;
-    }
+    if (out.next) nextWorldState = setSpatialLedger(worldState, 'supplyShipments', out.next);
+    else nextWorldState = dropSpatialLedger(worldState, 'supplyShipments');
   }
   return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals };
 }

@@ -51,7 +51,7 @@
  * mirroring the embattlement.js discipline.
  */
 
-import { pathCost, calibration, isMapped } from './distanceRead.js';
+import { pathCost, calibration, isMapped, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { chooseRoute, banditryLoss, embattlementLevel } from './embattlement.js';
 
 // The generalized supply-starvation impairment kind + its cause namespace. The
@@ -88,7 +88,7 @@ export const SUPPLY_TUNING = Object.freeze({
  * reads the marker, the routing reads the embattlement field, the interdiction
  * read reads the ledger). Compatible with the embattlement.js reader shapes.
  * @typedef {{ spatialCanonVersion?: unknown, spatialDigest?: unknown,
- *   embattlement?: unknown, supplyShipments?: unknown }} SupplyWorldState
+ *   spatialLedgers?: unknown }} SupplyWorldState
  */
 
 /** @typedef {import('./distanceRead.js').SpatialDigest} SpatialDigest */
@@ -429,8 +429,8 @@ export function advanceSupplyShipments({
   links, worldState, digest, tick, tickWeeks, season = null,
   rng = null, sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, severingCauseFor,
 }) {
-  const prior = worldState && typeof worldState === 'object' && 'supplyShipments' in worldState
-    ? /** @type {Record<string, ShipmentRecord>} */ (asObject(worldState.supplyShipments))
+  const prior = hasSpatialLedger(worldState, 'supplyShipments')
+    ? /** @type {Record<string, ShipmentRecord>} */ (asObject(getSpatialLedger(worldState, 'supplyShipments')))
     : null;
   if (!supplyActive(worldState)) {
     return { next: prior && Object.keys(prior).length ? prior : null, changed: false, outcomes: {} };
@@ -485,7 +485,7 @@ export function advanceSupplyShipments({
  */
 export function supplyInterdictionLevel(worldState, settlementId) {
   if (!supplyActive(worldState)) return 0;
-  const ledger = asObject(worldState?.supplyShipments);
+  const ledger = asObject(getSpatialLedger(worldState, 'supplyShipments'));
   const sid = String(settlementId);
   let total = 0;
   let starving = 0;

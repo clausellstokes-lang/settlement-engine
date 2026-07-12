@@ -42,7 +42,7 @@ describe('WAVE A — beliefsActive gate', () => {
 
 // ── The selector — identity fallback (byte-exact) ─────────────────────────────
 describe('WAVE A — belief selector identity fallback', () => {
-  const active = { spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' }, beliefMaps: { a: { [GOVERNING_SEAT_KEY]: { b: { ...GT } } } } };
+  const active = { spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' }, spatialLedgers: { beliefMaps: { a: { [GOVERNING_SEAT_KEY]: { b: { ...GT } } } } } };
 
   it('SELF and DORMANT reads resolve to truth', () => {
     expect(belief('a', 'a', active).source).toBe('truth');       // self carve-out

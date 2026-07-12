@@ -60,7 +60,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { activeSpatialDigest, hopWeeks } from './distanceRead.js';
+import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { infoModeOf } from '../worldPulse/simulationRules.js';
 
 // ── The tuning constants (documented here; retuned in the checkpoint soak) ───
@@ -173,7 +173,7 @@ export const RUMOR_FIDELITY_FLOOR = 0.05;
 /**
  * The worldState members this module reads (tolerant projection — the kernel
  * hands the full ensured worldState).
- * @typedef {{ rumorLedgers?: unknown, simulationRules?: Record<string, unknown>,
+ * @typedef {{ spatialLedgers?: unknown, simulationRules?: Record<string, unknown>,
  *   rulesetLog?: Record<string, RulesetReceiptRead>, spatialCanonVersion?: number,
  *   spatialDigest?: import('./distanceRead.js').SpatialDigest }} RumorWorldStateRead
  */
@@ -430,8 +430,8 @@ export function degradeTelling(record, fork, digest) {
  */
 export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null }) {
   const prior = /** @type {RumorLedgers | null} */ (
-    worldState && typeof worldState === 'object' && 'rumorLedgers' in worldState
-      ? asLedgers(worldState.rumorLedgers)
+    hasSpatialLedger(worldState, 'rumorLedgers')
+      ? asLedgers(getSpatialLedger(worldState, 'rumorLedgers'))
       : null
   );
   const digest = activeSpatialDigest(worldState);

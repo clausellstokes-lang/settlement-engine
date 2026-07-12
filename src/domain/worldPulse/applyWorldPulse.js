@@ -12,7 +12,7 @@ import {
   syncRelationshipChannelBundle,
 } from '../region/index.js';
 import { queueRegionalImpacts } from '../region/graph.js';
-import { activeSpatialDigest } from '../spatial/distanceRead.js';
+import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
@@ -760,7 +760,8 @@ export function applyWorldPulseOutcomes({
   // tick's cross-settlement impacts are PARKED (delayed by travel distance) and
   // previously-parked, now-due arrivals are RELEASED at tick start.
   const spatialDigest = activeSpatialDigest(state);
-  let spatialArrivals = spatialDigest ? state?.spatialArrivals : undefined;
+  let spatialArrivals = /** @type {import('../spatial/spatialArrival.js').ArrivalLedger | undefined} */ (
+    spatialDigest ? getSpatialLedger(state, 'spatialArrivals') : undefined);
   // Stressor ids already written by an EARLIER outcome in this same apply
   // pass. A second outcome touching the same id (escalate after spread,
   // multi-target spread of one record) must field-MERGE with the first write,
@@ -1042,10 +1043,9 @@ export function applyWorldPulseOutcomes({
   if (spatialDigest) {
     const nextArrivals = spatialArrivals && Object.keys(spatialArrivals).length ? spatialArrivals : null;
     if (nextArrivals) {
-      state = { ...state, spatialArrivals: nextArrivals };
-    } else if (state && 'spatialArrivals' in state) {
-      const { spatialArrivals: _drop, ...rest } = state;
-      state = rest;
+      state = setSpatialLedger(state, 'spatialArrivals', nextArrivals);
+    } else {
+      state = dropSpatialLedger(state, 'spatialArrivals');
     }
   }
 

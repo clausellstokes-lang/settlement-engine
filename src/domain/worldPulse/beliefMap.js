@@ -56,6 +56,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
+import { hasSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 
 // ── The v1 faction slot (present from day one; the governing coalition) ───────
 /** The single faction key v1 carries — the governing seat's operational belief.
@@ -174,13 +175,13 @@ function asObject(v) {
 /**
  * The observer's belief record about a subject (the governing-seat slot), or
  * null. Total on garbage.
- * @param {{ beliefMaps?: unknown } | null | undefined} worldState
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  * @param {string} observerId @param {string} subjectId
  * @param {string} [factionId]
  * @returns {BeliefRecord | null}
  */
 export function beliefRecord(worldState, observerId, subjectId, factionId = GOVERNING_SEAT_KEY) {
-  const maps = asObject(worldState?.beliefMaps);
+  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
   const byFaction = asObject(maps[String(observerId)]);
   const bySubject = asObject(byFaction[String(factionId)]);
   const rec = bySubject[String(subjectId)];
@@ -208,7 +209,7 @@ export function beliefRecord(worldState, observerId, subjectId, factionId = GOVE
  * { source: 'belief' }. Marker present + NO record ⇒ { source: 'unknown' }
  * (max-uncertainty — absence-as-information at the seam, §IV.3-5).
  * @param {string} observerId @param {string} subjectId
- * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, beliefMaps?: unknown } | null | undefined} worldState
+ * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, spatialLedgers?: unknown } | null | undefined} worldState
  * @returns {BeliefResolution}
  */
 export function belief(observerId, subjectId, worldState) {
@@ -225,7 +226,7 @@ export function belief(observerId, subjectId, worldState) {
  * (max-uncertainty). `truthStrength` is the ground-truth value the caller already
  * computed — returned EXACTLY when the fallback fires (zero rng).
  * @param {string} observerId @param {string} subjectId
- * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, beliefMaps?: unknown } | null | undefined} worldState
+ * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, spatialLedgers?: unknown } | null | undefined} worldState
  * @param {number} truthStrength
  * @returns {number}
  */
@@ -242,7 +243,7 @@ export function readBeliefStrength(observerId, subjectId, worldState, truthStren
  * absence is NON-paranoid: the label the observer knows), or the believed (and
  * possibly STALE) allianceLabel.
  * @param {string} observerId @param {string} subjectId
- * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, beliefMaps?: unknown } | null | undefined} worldState
+ * @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, spatialLedgers?: unknown } | null | undefined} worldState
  * @param {string} truthType
  * @returns {string}
  */
@@ -300,7 +301,7 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * caller hands the full ensured worldState). Exported so the chooser's re-plumbed
  * reads can annotate their casts without widening to `any`.
  * @typedef {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>,
- *   beliefMaps?: unknown, rumorLedgers?: unknown, warPosture?: unknown,
+ *   spatialLedgers?: unknown, warPosture?: unknown,
  *   relationshipStates?: unknown } | null | undefined} BeliefWorldState
  */
 
@@ -509,15 +510,15 @@ function sortReports(rows) {
  * @param {Object} args
  * @param {BeliefSnapshot | null | undefined} args.snapshot  the tick snapshot (settlements, byId, regionalGraph)
  * @param {unknown} args.pressureIdx  the pressure index (settlementStrength input)
- * @param {{ beliefMaps?: unknown, rumorLedgers?: unknown, warPosture?: unknown,
+ * @param {{ spatialLedgers?: unknown, warPosture?: unknown,
  *   relationshipStates?: unknown, spatialCanonVersion?: unknown,
  *   simulationRules?: Record<string, unknown> }} args.worldState  the ensured worldState
  * @param {number} args.tick
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
 export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
-  const prior = worldState && typeof worldState === 'object' && 'beliefMaps' in worldState
-    ? asObject(worldState.beliefMaps)
+  const prior = hasSpatialLedger(worldState, 'beliefMaps')
+    ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
   if (!beliefsActive(worldState)) {
     return { next: prior && Object.keys(prior).length ? prior : null, changed: false };
@@ -551,7 +552,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
   }
 
   // ── NORMAL PATH: reconcile / decay per (observer, subject). ─────────────────
-  const rumorLedgers = asObject(worldState.rumorLedgers);
+  const rumorLedgers = asObject(getSpatialLedger(worldState, 'rumorLedgers'));
   // Every observer that either holds a belief OR heard a rumor this window.
   const observers = new Set([...Object.keys(prior), ...Object.keys(rumorLedgers), ...neighbours.keys()].map(String));
   /** @type {Record<string, Record<string, Record<string, BeliefRecord>>>} */

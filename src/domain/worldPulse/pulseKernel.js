@@ -10,6 +10,7 @@ import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor, seasonForTick } from './worldState.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
@@ -1506,11 +1507,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (rumors.changed) {
       if (rumors.next) {
-        memoryState = { ...memoryState, rumorLedgers: rumors.next };
-      } else if ('rumorLedgers' in memoryState) {
-        // Everything expired: the conditional key drops back to absent.
-        const { rumorLedgers: _drained, ...rest } = memoryState;
-        memoryState = rest;
+        memoryState = setSpatialLedger(memoryState, 'rumorLedgers', rumors.next);
+      } else {
+        // Everything expired: the conditional sub-ledger drops back to absent.
+        memoryState = dropSpatialLedger(memoryState, 'rumorLedgers');
       }
     }
   }
@@ -1531,11 +1531,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     });
     if (beliefs.changed) {
       if (beliefs.next) {
-        memoryState = { ...memoryState, beliefMaps: beliefs.next };
-      } else if ('beliefMaps' in memoryState) {
-        // Everything decayed below the floor: the conditional key drops to absent.
-        const { beliefMaps: _forgotten, ...rest } = memoryState;
-        memoryState = rest;
+        memoryState = setSpatialLedger(memoryState, 'beliefMaps', beliefs.next);
+      } else {
+        // Everything decayed below the floor: the conditional sub-ledger drops to absent.
+        memoryState = dropSpatialLedger(memoryState, 'beliefMaps');
       }
     }
   }
@@ -1551,7 +1550,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const occ = /** @type {Record<string, { state?: string }>} */ (memoryState.occupations || {});
     const exh = /** @type {Record<string, number>} */ (memoryState.warExhaustion || {});
     const graph = postTimeSnapshot.regionalGraph;
-    const priorEmb = /** @type {Record<string, unknown>} */ (memoryState.embattlement || {});
+    const priorEmb = /** @type {Record<string, unknown>} */ (getSpatialLedger(memoryState, 'embattlement') || {});
     const ids = new Set([
       ...(postTimeSnapshot.settlements || []).map((/** @type {{ id?: unknown }} */ s) => String(s.id)),
       ...Object.keys(occ), ...Object.keys(exh), ...Object.keys(priorEmb),
@@ -1573,11 +1572,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });
     if (emb.changed) {
       if (emb.next) {
-        memoryState = { ...memoryState, embattlement: emb.next };
-      } else if ('embattlement' in memoryState) {
-        // Every region graduated back to calm: the conditional key drops to absent.
-        const { embattlement: _cleared, ...rest } = memoryState;
-        memoryState = rest;
+        memoryState = setSpatialLedger(memoryState, 'embattlement', emb.next);
+      } else {
+        // Every region graduated back to calm: the conditional sub-ledger drops to absent.
+        memoryState = dropSpatialLedger(memoryState, 'embattlement');
       }
     }
   }

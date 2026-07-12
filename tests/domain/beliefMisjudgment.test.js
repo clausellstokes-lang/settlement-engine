@@ -43,9 +43,9 @@ function fixture({ spatial = true, infoMode = 'unreliable', beliefs = true } = {
     simulationRules: { settlementStrategyEnabled: true, warLayerEnabled: true, ...(infoMode ? { infoMode } : {}) },
     ...(spatial ? { spatialCanonVersion: 1 } : {}),
     ...(spatial && beliefs
-      ? { beliefMaps: { aggressor: { [GOVERNING_SEAT_KEY]: {
+      ? { spatialLedgers: { beliefMaps: { aggressor: { [GOVERNING_SEAT_KEY]: {
           fortress: { readiness: 0, strengthBand: 0, allianceLabel: 'hostile', faithLabel: null, confidence01: 0.7, lastUpdateTick: 2 },
-        } } } }
+        } } } } }
       : {}),
   };
   return {

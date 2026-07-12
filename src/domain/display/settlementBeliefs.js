@@ -24,6 +24,7 @@
 
 import { compareCodepoint } from '../deterministicSort.js';
 import { GOVERNING_SEAT_KEY, strengthOfBand } from '../worldPulse/beliefMap.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
 
 /** @typedef {import('../worldPulse/beliefMap.js').BeliefRecord} BeliefRecord */
 
@@ -126,7 +127,7 @@ function divergenceOf(rec, truth) {
  * divergence against the current truth.
  *
  * @param {Object} args
- * @param {{ tick?: number, beliefMaps?: Record<string, unknown> } | null | undefined} args.worldState
+ * @param {{ tick?: number, spatialLedgers?: unknown } | null | undefined} args.worldState
  * @param {unknown} args.observerId
  * @param {boolean} [args.includeGroundTruth]  DM/premium ⇒ true; player ⇒ false (default).
  * @param {string} [args.factionId]  which faction slot (v1: the governing seat).
@@ -145,7 +146,7 @@ export function settlementBeliefs({
 } = /** @type {never} */ ({})) {
   if (!includeGroundTruth) return []; // player projection: beliefs are DM-only
   if (observerId == null) return [];
-  const maps = asObject(worldState?.beliefMaps);
+  const maps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
   const byFaction = asObject(maps[String(observerId)]);
   const bySubject = asObject(byFaction[String(factionId)]);
   const tick = Math.max(0, finiteNumber(worldState?.tick, 0));
@@ -182,9 +183,9 @@ export function settlementBeliefs({
 /**
  * Panel-presence gate: does this world carry ANY belief map? Dormant (no key) ⇒
  * false ⇒ no "what they believe" surface renders ⇒ byte-identical UI.
- * @param {{ beliefMaps?: Record<string, unknown> } | null | undefined} worldState
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  */
 export function hasBeliefMaps(worldState) {
-  const maps = worldState?.beliefMaps;
+  const maps = getSpatialLedger(worldState, 'beliefMaps');
   return !!maps && typeof maps === 'object' && !Array.isArray(maps) && Object.keys(maps).length > 0;
 }

@@ -76,7 +76,7 @@ function driveAndObserve(spatial, ticks = 6) {
   let sawQueuedWhileNoLedger = false;
   for (let t = 0; t < ticks; t++) {
     const r = simulateCampaignWorldPulse({ campaign, saves: s, interval: 'one_month', now: NOW });
-    const arr = r.worldState?.spatialArrivals;
+    const arr = r.worldState?.spatialLedgers?.spatialArrivals;
     const queued = (r.regionalGraph?.queuedImpacts || []).length;
     if (arr && Object.keys(arr).length) sawParked = true;
     if (queued > 0 && (!arr || !Object.keys(arr).length)) sawQueuedWhileNoLedger = true;
@@ -120,7 +120,7 @@ describe('MODULATION — arrival latency wiring', () => {
     const ledger = { 'regional_impact.parked': { arrivalTick: 5, targetId: 'b', sourceId: 'a', impact: dueImpact } };
     const worldState = {
       tick: 5, rngSeed: 'sp-int', simulationRules: { propagationMode: 'first_order' },
-      spatialCanonVersion: 1, spatialDigest: digest, spatialArrivals: ledger,
+      spatialCanonVersion: 1, spatialDigest: digest, spatialLedgers: { spatialArrivals: ledger },
     };
     const snapshot = {
       worldState,
@@ -137,7 +137,7 @@ describe('MODULATION — arrival latency wiring', () => {
     });
     // The due arrival drained into the regional queue and left the ledger.
     expect(result.regionalGraph.queuedImpacts.some((i) => i.id === 'regional_impact.parked')).toBe(true);
-    expect(result.worldState.spatialArrivals?.['regional_impact.parked']).toBeUndefined();
+    expect(result.worldState.spatialLedgers?.spatialArrivals?.['regional_impact.parked']).toBeUndefined();
 
     // Aspatial control (no marker): the same pre-seeded ledger is NOT drained.
     const aspatialWs = { ...worldState };

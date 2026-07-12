@@ -233,51 +233,50 @@ export function createDefaultWorldState(campaign = {}) {
 //                        deepCloneConditionalLedger rejects arrays, so the digest
 //                        is object-shaped at the top level (its costField /
 //                        distanceMatrix arrays live INSIDE that object).
-//   • spatialArrivals  — the propagation ARRIVAL QUEUE (Phase 5.5 MODULATION):
-//                        cross-settlement regional impacts IN TRANSIT, keyed by
-//                        impact id → { arrivalTick, targetId, sourceId, impact }.
-//                        Materialized ONLY under the spatial-canon marker while
-//                        something is travelling; absent (byte-identical) on the
-//                        aspatial path and whenever the front is empty.
-//   • rumorLedgers     — the per-settlement RUMOR ledgers (Phase 5.5 STEP 3.5,
-//                        spatial/rumorNetwork.js): { settlementId →
-//                        { 'trade:<eventRef>' → arrival record } }, top-K
-//                        bounded, tick-age expiry. Materialized ONLY under the
-//                        spatial-canon marker while infoMode is a live mode
-//                        ('perfect_delayed' / 'unreliable') and something has
-//                        been heard; absent (byte-identical) on the aspatial /
-//                        omniscient path. Dialling infoMode back to omniscient
-//                        PRESERVES an existing ledger (never deletes).
-//   • beliefMaps       — the per-settlement BELIEF maps (Phase 5.5 WAVE A,
-//                        worldPulse/beliefMap.js): { observerId → { factionId →
-//                        { subjectId → belief record } } } — the FACTION dimension
-//                        ('seat' in v1 = the governing coalition) present from day
-//                        one. Materialized ONLY under the spatial-canon marker
-//                        while infoMode is a live mode (the SAME gate as
-//                        rumorLedgers, ORTHOGONAL to settlementStrategyEnabled);
-//                        absent (byte-identical) on the aspatial / omniscient path.
-//   • embattlement     — the per-region EMBATTLEMENT scalar ledger (Phase 5.5
-//                        mover M1, spatial/embattlement.js): { settlementId →
-//                        { level, phase, sinceTick, lastTick } } — a CONTINUOUS
-//                        0..1 danger scalar (routing reads the scalar, never a
-//                        boolean) with an internal hysteresis latch. Materialized
-//                        ONLY under the spatial-canon marker AND only for
-//                        settlements actually under threat (sparse); absent
-//                        (byte-identical) on the aspatial / peaceful path.
-//   • supplyShipments  — the IN-TRANSIT supply-shipment ledger (Phase 5.5 mover
-//                        M2, spatial/supplyShipments.js): ONE record per ACTIVE
-//                        LINK, keyed `${settlementId}:${institutionId}:${input}` →
-//                        { institutionId, settlementId, input, sourceId,
-//                        arrivalTick, starving } — AGGREGATE (records = active
-//                        links, NEVER per-wagon). Materialized ONLY under the
-//                        spatial-canon marker AND only while a caravan rides or a
-//                        link starves (sparse); absent (byte-identical) on the
-//                        aspatial / self-sufficient path.
+//   • spatialLedgers   — the Phase 5.5 SPATIAL LEDGER NAMESPACE (FP-R): the ONE
+//                        conditional container for every spatial mover ledger, so
+//                        the eager array carries ONE name for the whole family and
+//                        a NEW mover ledger costs ZERO first-paint bytes (it nests
+//                        here via distanceRead.js's setSpatialLedger, invisible to
+//                        this array). Materialized ONLY when ≥1 sub-ledger is
+//                        present (deepCloneConditionalLedger drops an empty object;
+//                        dropSpatialLedger drops the namespace when its last
+//                        sub-ledger drains) ⇒ an aspatial/legacy campaign carries no
+//                        `spatialLedgers` key and serializes byte-identically. The
+//                        deep-clone-no-alias invariant is preserved: the whole
+//                        namespace is deep-cloned (recursively — every sub-ledger
+//                        fresh) exactly as each top-level ledger was before. The
+//                        sub-ledgers (each accessed via distanceRead.js, live path
+//                        `worldState.spatialLedgers.<key>`) are:
+//                          · spatialArrivals — propagation ARRIVAL QUEUE (5.5-M):
+//                            cross-settlement impacts IN TRANSIT, impact id →
+//                            { arrivalTick, targetId, sourceId, impact }; present
+//                            while something travels.
+//                          · rumorLedgers    — per-settlement RUMOR ledgers (STEP
+//                            3.5, spatial/rumorNetwork.js): { settlementId →
+//                            { 'trade:<eventRef>' → arrival record } }, top-K
+//                            bounded, tick-age expiry; present under a live infoMode
+//                            ('perfect_delayed'/'unreliable'). Dialling infoMode back
+//                            to omniscient PRESERVES an existing ledger.
+//                          · beliefMaps      — per-settlement BELIEF maps (WAVE A,
+//                            worldPulse/beliefMap.js): { observerId → { factionId →
+//                            { subjectId → belief record } } }; present under a live
+//                            infoMode (same gate as rumorLedgers).
+//                          · embattlement    — per-region EMBATTLEMENT scalar ledger
+//                            (M1, spatial/embattlement.js): { settlementId →
+//                            { level, phase, sinceTick, lastTick } } — a CONTINUOUS
+//                            0..1 danger scalar with a hysteresis latch; present for
+//                            settlements under threat (sparse).
+//                          · supplyShipments — IN-TRANSIT supply-shipment ledger
+//                            (M2, spatial/supplyShipments.js): ONE record per ACTIVE
+//                            LINK, keyed `${settlementId}:${institutionId}:${input}`
+//                            → { institutionId, settlementId, input, sourceId,
+//                            arrivalTick, starving } — AGGREGATE; present while a
+//                            caravan rides or a link starves (sparse).
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
-  'spatialDigest', 'spatialArrivals', 'rumorLedgers', 'beliefMaps', 'embattlement',
-  'supplyShipments',
+  'spatialDigest', 'spatialLedgers',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

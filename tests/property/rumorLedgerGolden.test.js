@@ -91,7 +91,7 @@ function projectionFor({ seed, ticks, infoMode }) {
   }
   /** @type {Record<string, Record<string, unknown>>} */
   const ledgerSummary = {};
-  const ledgers = campaign.worldState?.rumorLedgers || {};
+  const ledgers = campaign.worldState?.spatialLedgers?.rumorLedgers || {};
   for (const sid of Object.keys(ledgers).sort()) {
     /** @type {Record<string, unknown>} */
     const bySid = {};

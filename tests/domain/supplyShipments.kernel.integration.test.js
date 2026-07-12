@@ -91,7 +91,7 @@ describe('M2 caravans — kernel integration', () => {
   it('materializes the AGGREGATE shipment ledger under the spatial marker (non-food web)', () => {
     const ws = run({ spatial: true });
     expect(ws.spatialCanonVersion).toBe(1);
-    const ledger = ws.supplyShipments;
+    const ledger = ws.spatialLedgers?.supplyShipments;
     expect(ledger && typeof ledger === 'object').toBe(true);
     const keys = Object.keys(ledger);
     expect(keys.length).toBeGreaterThan(0);
@@ -108,17 +108,17 @@ describe('M2 caravans — kernel integration', () => {
   it('DORMANT: the same campaign without the marker carries NO supplyShipments key', () => {
     const ws = run({ spatial: false });
     expect('spatialCanonVersion' in ws).toBe(false);
-    expect('supplyShipments' in ws).toBe(false); // byte-identical dormancy
+    expect(ws.spatialLedgers?.supplyShipments).toBeUndefined(); // byte-identical dormancy
   });
 
   it('FOOD stays with foodStockpile: a food-only web never materializes a ledger', () => {
     const ws = run({ spatial: true, food: true });
     expect(ws.spatialCanonVersion).toBe(1);
-    expect('supplyShipments' in ws).toBe(false); // food excluded — no double-count
+    expect(ws.spatialLedgers?.supplyShipments).toBeUndefined(); // food excluded — no double-count
   });
 
   it('is deterministic: two spatial runs produce byte-identical ledgers', () => {
-    expect(JSON.stringify(run({ spatial: true }).supplyShipments || null))
-      .toBe(JSON.stringify(run({ spatial: true }).supplyShipments || null));
+    expect(JSON.stringify(run({ spatial: true }).spatialLedgers?.supplyShipments || null))
+      .toBe(JSON.stringify(run({ spatial: true }).spatialLedgers?.supplyShipments || null));
   });
 });

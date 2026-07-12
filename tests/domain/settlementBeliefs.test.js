@@ -16,14 +16,14 @@ import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 function world() {
   return {
     tick: 20,
-    beliefMaps: {
+    spatialLedgers: { beliefMaps: {
       alderport: { [GOVERNING_SEAT_KEY]: {
         // a STALE belief: alderport thinks Grimhold negligible + still an enemy
         grimhold: { readiness: 0, strengthBand: 0, allianceLabel: 'hostile', faithLabel: 'Old Sea-God', confidence01: 0.35, lastUpdateTick: 4 },
         // a CURRENT, confident belief
         rivermouth: { readiness: 0.75, strengthBand: 3, allianceLabel: 'trade_partner', faithLabel: null, confidence01: 0.9, lastUpdateTick: 19 },
       } },
-    },
+    } },
   };
 }
 

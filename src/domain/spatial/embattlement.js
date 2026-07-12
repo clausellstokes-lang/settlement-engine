@@ -63,7 +63,7 @@
  * module.
  */
 
-import { candidateRoutes, calibration, seasonalPathCost } from './distanceRead.js';
+import { candidateRoutes, calibration, seasonalPathCost, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 
 // ── Tuning (documented here; retuned in the M1 + checkpoint soaks) ────────────
 export const EMBATTLEMENT_TUNING = Object.freeze({
@@ -239,13 +239,13 @@ function recordOf(ledger, id) {
  * Pure + deterministic.
  * @param {Object} args
  * @param {Record<string, number>|null|undefined} args.threats  settlementId → threat T(0..1)
- * @param {{ embattlement?: unknown, spatialCanonVersion?: unknown }} args.worldState
+ * @param {{ spatialLedgers?: unknown, spatialCanonVersion?: unknown }} args.worldState
  * @param {number} args.tick
  * @returns {{ next: Record<string, EmbattlementRecord>|null, changed: boolean }}
  */
 export function advanceEmbattlement({ threats, worldState, tick }) {
-  const prior = worldState && typeof worldState === 'object' && 'embattlement' in worldState
-    ? /** @type {Record<string, EmbattlementRecord>} */ (asObject(worldState.embattlement))
+  const prior = hasSpatialLedger(worldState, 'embattlement')
+    ? /** @type {Record<string, EmbattlementRecord>} */ (asObject(getSpatialLedger(worldState, 'embattlement')))
     : null;
   if (!embattlementActive(worldState)) {
     return { next: prior && Object.keys(prior).length ? prior : null, changed: false };
@@ -269,11 +269,11 @@ export function advanceEmbattlement({ threats, worldState, tick }) {
  * A settlement's current embattlement LEVEL (0..1), or 0 when absent/dormant. The
  * ONE read every consumer uses — always a graded scalar, never compared to a
  * threshold to gate behavior.
- * @param {{ embattlement?: unknown }|null|undefined} worldState @param {string|number} id
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState @param {string|number} id
  * @returns {number}
  */
 export function embattlementLevel(worldState, id) {
-  const rec = recordOf(asObject(worldState?.embattlement), String(id));
+  const rec = recordOf(asObject(getSpatialLedger(worldState, 'embattlement')), String(id));
   return rec ? clamp01(finiteNumber(rec.level, 0)) : 0;
 }
 
@@ -306,7 +306,7 @@ export function riskToleranceFromAlignment(alignment) {
  * Re-score ONE candidate route against the current embattlement field for a mover
  * of the given risk tolerance. Pure; danger is a GRADED read of the level scalar
  * over the traversed hops (path after the origin) — never a boolean gate.
- * @param {string[]} path @param {{ embattlement?: unknown }|null|undefined} worldState
+ * @param {string[]} path @param {{ spatialLedgers?: unknown }|null|undefined} worldState
  * @param {number} baseCost @param {number} riskTolerance @param {number} medianHopCost
  * @returns {ScoredRoute}
  */
@@ -341,7 +341,7 @@ export function scoreRoute(path, worldState, baseCost, riskTolerance, medianHopC
  * lengthens its arrival (routeWeeks). No season / no overlay ⇒ the frozen
  * geometric cost, byte-identical.
  * @param {import('./distanceRead.js').SpatialDigest} digest
- * @param {{ embattlement?: unknown }|null|undefined} worldState
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState
  * @param {string|number} fromId @param {string|number} toId @param {number} riskTolerance
  * @param {string|null} [season]
  * @returns {ScoredRoute|null}
