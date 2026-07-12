@@ -187,19 +187,12 @@ export const en = Object.freeze({
     },
     button: {
       working:        'Working...',
-      sendLink:       'Send sign-in link',
       emailLink:      'Email me a sign-in link',
       createAcct:     'Create account',
       signIn:         'Sign in',
       resend:         'Resend link',
       differentEmail: 'Use a different email',
       backToSignIn:   'Back to sign in',
-      // ── Retained from OUR AuthPanel (surviving until 4d adopts their auth
-      //    surfaces): the "more sign-in options" disclosure + method toggle.
-      moreOpen:    'More sign-in options',
-      moreClose:   'Hide more options',
-      usePassword: 'Use a password instead',
-      useMagic:    'Use a magic link instead (recommended)',
     },
     // Password-reset request: the prose intro and the post-send confirmation.
     // Formal register, no contractions (auth/security copy).

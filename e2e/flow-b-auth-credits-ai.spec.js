@@ -121,49 +121,36 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
     await expect(page.getByRole('button', { name: /^Create account$/i })).toBeVisible();
   });
 
-  test('AuthModal primary CTA reflects current auth method (magic by default)', async ({ page }) => {
+  test('AuthModal primary path is password: fields + CTA render with no clicks', async ({ page }) => {
     await openAuthModal(page);
-    // The default auth method is magic-link → CTA reads "Send sign-in link".
-    await expect(page.getByRole('button', { name: /Send sign-in link/i })).toBeVisible();
+    // Password is the primary inline path (W5.1 design inversion): the
+    // password field and the "Sign in" CTA are visible immediately — no
+    // disclosure to open, no method toggle. `exact` keeps the sentence-case
+    // CTA ("Sign in") distinct from the title-case tab ("Sign In").
+    await expect(page.getByPlaceholder(/^Password$/)).toBeVisible();
+    await expect(page.getByRole('dialog').getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
   });
 
-  test('"More sign-in options" disclosure reveals the password toggle', async ({ page }) => {
+  test('signin shows "Remember me on this device" with no clicks', async ({ page }) => {
     await openAuthModal(page);
-    // Disclosure step 1: expand the panel. Its label flips between
-    // "More sign-in options" / "Hide more options", so we use the
-    // collapsed-state label to click, then verify by collapsed→expanded
-    // class swap (the new label appears).
-    const expandBtn = page.getByRole('button', { name: /^More sign-in options$/i });
-    await expect(expandBtn).toBeVisible();
-    await expandBtn.click();
-    // After click: the button's text is now "Hide more options".
-    await expect(page.getByRole('button', { name: /^Hide more options$/i })).toBeVisible();
-    // The "Use a password instead" toggle appears inside the panel.
-    const switchToPwd = page.getByRole('button', { name: /Use a password instead/i });
-    await expect(switchToPwd).toBeVisible();
-    // Step 2: switch to password mode.
-    await switchToPwd.click();
-    // Password input becomes available.
-    await expect(page.getByPlaceholder(/^Password$/i)).toBeVisible();
-    // Primary CTA changes to "Sign in" (not "Send sign-in link").
-    await expect(page.getByRole('button', { name: /^Sign in$/i }).last()).toBeVisible();
-  });
-
-  test('password-mode signin reveals "Remember me on this device"', async ({ page }) => {
-    await openAuthModal(page);
-    await page.getByRole('button', { name: /^More sign-in options$/i }).click();
-    await page.getByRole('button', { name: /Use a password instead/i }).click();
     await expect(page.getByText(/Remember me on this device/i)).toBeVisible();
   });
 
-  test('submitting an empty email does NOT make a network request', async ({ page }) => {
+  test('the email sign-in link is an explicit alternative below the form', async ({ page }) => {
+    await openAuthModal(page);
+    // The magic-link path survives the inversion as a full-width alternative
+    // under the primary CTA (with the OAuth providers when their flags are on).
+    await expect(page.getByRole('button', { name: /Email me a sign-in link/i })).toBeVisible();
+  });
+
+  test('requesting a sign-in link with an empty email does NOT make a network request', async ({ page }) => {
     await openAuthModal(page);
     let supabaseCalled = false;
     page.on('request', (req) => {
       if (/supabase|auth/i.test(req.url())) supabaseCalled = true;
     });
-    // Click the magic-link CTA without filling the email.
-    await page.getByRole('button', { name: /Send sign-in link/i }).click();
+    // Click the email-link alternative without filling the email.
+    await page.getByRole('button', { name: /Email me a sign-in link/i }).click();
     // Give time for any spurious request to surface.
     await page.waitForTimeout(500);
     expect(supabaseCalled).toBe(false);
