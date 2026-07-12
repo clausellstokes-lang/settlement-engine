@@ -31,7 +31,8 @@
     "src/lib/**/*.js",
     "src/hooks/**/*.js",
     "src/generators/**/*.js",
-    "src/pdf/**/*.js"
+    "src/pdf/**/*.js",
+    "src/foundry/**/*.js"
   ],
   "exclude": [
     "node_modules",

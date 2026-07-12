@@ -8,7 +8,13 @@ import IconButton from './primitives/IconButton.jsx';
 // detail view doesn't pay for export machinery up front.
 const generateSettlementPDF = (...args) =>
   import('../utils/generateSettlementPDF.js').then(m => m.generateSettlementPDF(...args));
+// W-Session: Foundry VTT module export (zip of journal JSON + manifest).
+// Same lazy doctrine — the builder chunk (view model + zip writer) loads on
+// the user's export click, never up front (tests/build/foundryLazy.test.js).
+const generateFoundryModule = (...args) =>
+  import('../foundry/generateFoundryModule.js').then(m => m.generateFoundryModule(...args));
 import { validateDossier } from '../domain/validation/consistency.js';
+import { flag } from '../lib/flags.js';
 // Already in this component's transitive graph via the store's campaignSlice —
 // a direct import adds no new bytes to the chunk.
 import { isCampaignActive } from '../lib/campaigns.js';
@@ -55,6 +61,55 @@ const REL_COLORS = {
   client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
+
+/**
+ * The shared export seam — resolves the owning campaign (plain cloneable
+ * data) and the faith premium gate for a saved settlement. Used by BOTH
+ * export formats (PDF + Foundry module) so they can never drift.
+ *
+ * W4f dead-path fix: the owning campaign is resolved so a premium canon
+ * export actually carries the live-world Faith & War chapter. Membership is
+ * the store's String-normalized scan (matches isSettlementClockBound —
+ * number/string id mixes resolve).
+ *
+ * F41: the campaign payload must be PLAIN CLONEABLE DATA — a nameById map,
+ * never a nameFor function. A function would DataCloneError the PDF worker
+ * postMessage and silently demote every export to the main-thread fallback.
+ * liveWorld.js prefers nameById natively.
+ */
+function resolveExportSeam(liveStore, saveId) {
+  const sid = saveId != null ? String(saveId) : null;
+  const owning = sid
+    ? (liveStore.campaigns || []).find(
+        c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid),
+      ) || null
+    : null;
+  let campaign = null;
+  if (owning) {
+    const memberIds = new Set((owning.settlementIds || []).map(String));
+    const memberSaves = (liveStore.savedSettlements || [])
+      .filter(e => memberIds.has(String(e?.id)));
+    const nameById = {};
+    for (const entry of memberSaves) {
+      const id = entry?.id ?? entry?.settlement?.id;
+      const name = entry?.name || entry?.settlement?.name;
+      if (id != null && name) nameById[String(id)] = name;
+    }
+    campaign = {
+      settlementId: saveId,
+      worldState: owning.worldState || null,
+      regionalGraph: owning.regionalGraph || owning.worldState?.regionalGraph || null,
+      settlements: memberSaves,
+      nameById,
+    };
+  }
+  // The faith premium seam — mirrors FaithSection's screen gate
+  // (tier === 'premium' || elevated). Free / lapsed / anon exports thread
+  // false, so faithChapterVisible's default-safe gate stays load-bearing.
+  const faithUnlocked = liveStore.auth?.tier === 'premium'
+    || (typeof liveStore.isElevated === 'function' ? liveStore.isElevated() : false);
+  return { campaign, faithUnlocked };
+}
 
 class DetailErrorBoundary extends Component {
   constructor(props) {
@@ -293,7 +348,9 @@ export default function SettlementDetail({
     });
   };
 
-  const handlePdfExport = async (variant, useAi = narrated) => {
+  // One export runner for both formats (kind: 'pdf' | 'foundry') so the
+  // campaign assembly and the faith premium seam can never drift between them.
+  const runExport = async (kind, variant, useAi = narrated) => {
     if (exporting) return;
     setPdfError(null);
     setExporting(true);
@@ -309,45 +366,8 @@ export default function SettlementDetail({
     } catch { /* a validator fault must never break export */ }
     try {
       const liveStore = useStore.getState();
-      // W4f dead-path fix: resolve the owning campaign for this saved
-      // settlement so a premium canon export actually carries the live-world
-      // Faith & War chapter. Membership is the store's String-normalized scan
-      // (matches isSettlementClockBound — number/string id mixes resolve).
-      const sid = saveId != null ? String(saveId) : null;
-      const owning = sid
-        ? (liveStore.campaigns || []).find(
-            c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid),
-          ) || null
-        : null;
-      // F41: the campaign payload must be PLAIN CLONEABLE DATA — a nameById
-      // map, never a nameFor function. A function would DataCloneError the
-      // worker postMessage and silently demote every export to the
-      // main-thread fallback. liveWorld.js prefers nameById natively.
-      let campaign = null;
-      if (owning) {
-        const memberIds = new Set((owning.settlementIds || []).map(String));
-        const memberSaves = (liveStore.savedSettlements || [])
-          .filter(e => memberIds.has(String(e?.id)));
-        const nameById = {};
-        for (const entry of memberSaves) {
-          const id = entry?.id ?? entry?.settlement?.id;
-          const name = entry?.name || entry?.settlement?.name;
-          if (id != null && name) nameById[String(id)] = name;
-        }
-        campaign = {
-          settlementId: saveId,
-          worldState: owning.worldState || null,
-          regionalGraph: owning.regionalGraph || owning.worldState?.regionalGraph || null,
-          settlements: memberSaves,
-          nameById,
-        };
-      }
-      // The faith premium seam — mirrors FaithSection's screen gate
-      // (tier === 'premium' || elevated). Free / lapsed / anon exports thread
-      // false, so faithChapterVisible's default-safe gate stays load-bearing.
-      const faithUnlocked = liveStore.auth?.tier === 'premium'
-        || (typeof liveStore.isElevated === 'function' ? liveStore.isElevated() : false);
-      await generateSettlementPDF(detail.settlement, {
+      const { campaign, faithUnlocked } = resolveExportSeam(liveStore, saveId);
+      const exportOpts = {
         aiSettlement, aiDailyLife, narrativeMode: useAi,
         systemState: liveStore.systemState,
         eventLog: liveStore.eventLog,
@@ -355,9 +375,18 @@ export default function SettlementDetail({
         campaign,
         faithUnlocked,
         variant,
-        isFounder: liveStore.isFounder?.() ?? false,
-      });
+      };
+      if (kind === 'foundry') {
+        await generateFoundryModule(detail.settlement, exportOpts);
+      } else {
+        await generateSettlementPDF(detail.settlement, {
+          ...exportOpts,
+          isFounder: liveStore.isFounder?.() ?? false,
+        });
+      }
       liveStore.markExported?.();
+      // The canon-export pricing moment covers the export FAMILY — a Foundry
+      // module of a canon settlement signals the same conversion intent.
       if (liveStore.phase === 'canon' && variant !== 'draft_brief') {
         triggerPricingMoment('first_canon_export', () => {
           liveStore.setPurchaseModalOpen?.(true);
@@ -365,13 +394,18 @@ export default function SettlementDetail({
       }
       setExportSheetOpen(false);
     } catch (err) {
-      console.error('[PDF export] failed:', err);
+      console.error(`[${kind} export] failed:`, err);
       const msg = err?.message || String(err) || 'unknown error';
-      setPdfError(`PDF export failed: ${msg}`);
+      setPdfError(`${kind === 'foundry' ? 'Foundry' : 'PDF'} export failed: ${msg}`);
     } finally {
       setExporting(false);
     }
   };
+  const handlePdfExport     = (variant, useAi = narrated) => runExport('pdf', variant, useAi);
+  const handleFoundryExport = (variant, useAi = narrated) => runExport('foundry', variant, useAi);
+  // W-Session flag: when off, ExportSheet gets no onExportFoundry and renders
+  // its pre-wave PDF-only layout (the prop is optional by design).
+  const foundryEnabled = flag('foundryExport');
 
   // Share-image export: a single PNG share card (name + tier + terrain + a few
   // coarse stats) for dropping into Discord / a forum post. NOT premium-gated —
@@ -593,13 +627,15 @@ export default function SettlementDetail({
           here at the dossier level rather than at App-root. */}
       <SuccessorPrompt />
 
-      {/* PDF export variant picker — opened by the Export Dossier button
-          in the header. Closed by Cancel or successful export. */}
+      {/* Export variant picker — opened by the Export Dossier button in the
+          header. Closed by Cancel or successful export. PDF always; the
+          Foundry VTT module format appears behind the foundryExport flag. */}
       <ExportSheet
         open={exportSheetOpen}
         exporting={exporting}
         onClose={() => setExportSheetOpen(false)}
         onExport={handlePdfExport}
+        onExportFoundry={foundryEnabled ? handleFoundryExport : undefined}
       />
       {pdfError && (
         <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
@@ -670,6 +706,7 @@ export default function SettlementDetail({
             exporting={exporting}
             onClose={() => setExportSheetOpen(false)}
             onExport={handlePdfExport}
+            onExportFoundry={foundryEnabled ? handleFoundryExport : undefined}
           />
           {pdfError && (
             <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>

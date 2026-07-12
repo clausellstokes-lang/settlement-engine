@@ -36,9 +36,12 @@ const VARIANT_ICON = {
  * @param {boolean} props.open
  * @param {() => void} props.onClose
  * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} props.onExport
+ * @param {(variant: 'draft_brief'|'canon_dossier'|'timeline_packet', useAi?: boolean) => Promise<void>} [props.onExportFoundry]
+ *   Optional Foundry VTT module export (W-Session). When absent the sheet
+ *   renders exactly as before — no Format section, PDF-only.
  * @param {boolean} [props.exporting]
  */
-export default function ExportSheet({ open, onClose, onExport, exporting }) {
+export default function ExportSheet({ open, onClose, onExport, onExportFoundry, exporting }) {
   const phase    = useStore(s => s.phase);
   const eventCount = useStore(s => s.eventLog?.length ?? 0);
   const suggested = suggestVariant(phase, eventCount);
@@ -49,6 +52,10 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
   const aiSettlement = useStore(s => s.aiSettlement);
   const hasAi = !!aiSettlement;
   const [useAi, setUseAi] = useState(hasAi);
+  // W-Session — export format. 'pdf' is the default and the only option when
+  // the caller doesn't provide onExportFoundry (drafts, legacy mounts).
+  const hasFoundry = typeof onExportFoundry === 'function';
+  const [format, setFormat] = useState('pdf');
 
   if (!open) return null;
 
@@ -92,6 +99,31 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
           ))}
         </div>
 
+        {hasFoundry && (
+          <div style={{ padding: '0 12px 8px' }}>
+            <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Format</div>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
+                <Button
+                  key={opt.id}
+                  variant={format === opt.id ? 'gold' : 'secondary'}
+                  size="sm"
+                  onClick={() => setFormat(opt.id)}
+                  aria-pressed={format === opt.id}
+                  style={{ flex: 1 }}
+                >
+                  {opt.label}
+                </Button>
+              ))}
+            </div>
+            {format === 'foundry' && (
+              <div style={{ fontSize: FS.xxs, color: swatch.inkMag3, fontStyle: 'italic', lineHeight: 1.4, marginTop: 6 }}>
+                A module zip: the dossier as journal pages. Extract into Foundry&apos;s Data/modules and enable — the journals import on first load.
+              </div>
+            )}
+          </div>
+        )}
+
         {hasAi && (
           <div style={{ padding: '0 12px 4px' }}>
             <div style={{ fontSize: FS.xxs, fontWeight: 700, color: swatch.inkMag3, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 6 }}>Source</div>
@@ -124,11 +156,13 @@ export default function ExportSheet({ open, onClose, onExport, exporting }) {
           <Button
             variant="primary"
             size="sm"
-            onClick={() => onExport(picked, useAi)}
+            onClick={() => (format === 'foundry' ? onExportFoundry(picked, useAi) : onExport(picked, useAi))}
             disabled={exporting}
             busy={exporting}
           >
-            {exporting ? 'Building PDF…' : <>Export {PDF_VARIANTS[picked].label}</>}
+            {exporting
+              ? (format === 'foundry' ? 'Building Module…' : 'Building PDF…')
+              : <>Export {format === 'foundry' ? `${PDF_VARIANTS[picked].label} Module` : PDF_VARIANTS[picked].label}</>}
           </Button>
         </footer>
       </div>

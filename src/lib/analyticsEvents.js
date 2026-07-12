@@ -169,6 +169,7 @@ export const EVENTS = Object.freeze({
 
   // ── v2: sharing / export ───────────────────────────────────────────────
   PDF_EXPORT_COMPLETED:           'pdf_export_completed',
+  FOUNDRY_EXPORT_COMPLETED:       'foundry_export_completed',
   GALLERY_PUBLISHED:              'gallery_published',
   GALLERY_UNPUBLISHED:            'gallery_unpublished',
   GALLERY_DOSSIER_VIEWED:         'gallery_dossier_viewed',

@@ -169,6 +169,16 @@ export const FLAGS = Object.freeze({
     description: 'A read-only "War & Resolve" tab surfacing each settlement\'s Hope / Resolve / Faith relation / Supply / pro-war vs anti-war balance, and the same signals grounding the AI narrative + daily-life prose. Display-only; touches no simulation state.',
   },
 
+  // ── W-Session surfaces (docs/briefs/SESSION_FOUNDRY_SCOPE.md) ──────────────
+  sessionMode: {
+    default: true,
+    description: 'W-Session: distraction-free run-of-play overlay on a saved settlement.',
+  },
+  foundryExport: {
+    default: true,
+    description: 'W-Session: Foundry VTT module export beside the PDF in ExportSheet.',
+  },
+
   // ── Pricing copy ────────────────────────────────────────────────────────────
   // The simulation-led copy ("Generate a town in seconds, then run the region for
   // years.") vs. the old "unlimited saves" pitch. Default-ON: the live conversion
