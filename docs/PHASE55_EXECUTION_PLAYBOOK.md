@@ -75,8 +75,8 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
   Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
   adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
-- NEXT: W5 merge review → Wave A (PART 4) → checkpoint (PART 5) → merges (PART 6) → M1..M10 movers
-  (PART 7) → Phase 6 launch-readiness (PART 8) → launch.
+- NEXT: W5 merge review → Wave A (PART 4) → merges (PART 6) → M1..M10 movers (PART 7) → the Living
+  Realm checkpoint (PART 5, the final everything-on validation) → Phase 6 launch-readiness (PART 8) → launch.
 - OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
   catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
 - FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check
@@ -135,7 +135,8 @@ Session/Foundry branch awaiting merge review (§6.2).
 4. Dispatch 5.5-M (MODULATION_BRIEF.md — verify the committed digest shape first).
 5. 5.5-M lands → commit → dispatch STEP 3.5 (the full spec is §3 of this playbook).
 6. 3.5 lands → commit → dispatch WAVE A (the full spec is §4 of this playbook).
-7. Wave A lands → commit → THE LIVING REALM CHECKPOINT (§5) → Phase 6 (§6).
+7. Wave A lands → commit → merges (PART 6) → the M1-M10 mover ladder (PART 7, each its own wave) →
+   THE LIVING REALM CHECKPOINT (PART 5, the everything-on validation) → Phase 6 (PART 8) → launch.
 CONCURRENCY LAW: never more than TWO heavy lanes total (incl. chips); the budget-touching lane
 runs exclusive; never chip a wave whose upstream interface is uncommitted.
 
@@ -362,24 +363,6 @@ rogue-family fixture must still replay identically under legacy defaults).
 
 ---
 
-# PART 5 — THE LIVING REALM CHECKPOINT (definition of done)
-
-The shippable milestone. It is REACHED when all of the following are committed and green:
-1. The ladder through Wave A (FP-1, SEASONS-A, Keystone, Modulation, 3.5, Wave A) + the W5 and
-   Session/Foundry merges (§7).
-2. The LIVING REALM PRESET delivers, on a premium canonized realm: mapped geography (digest),
-   seasons (food year), distance-weighted trade/faith, perfect-but-delayed news (or unreliable if
-   the DM dials it), routine autonomy with major-approval, belief-sourced war posture with legible
-   misjudgments, ruleset receipts. Free/anon/legacy campaigns: byte-identical to today.
-3. THE CHECKPOINT SOAK: whole-world-soak extended to run the living_realm preset on a canonized
-   spatial fixture — 30 years, byte-identical re-run, bounded populations (⚠️ OWNER: review the
-   population-attractor tuning finding from the W0 soak BEFORE this preset inherits war depth),
-   stressors non-frozen post-seasons (the stasis fix evidenced), rumor/belief ledgers bounded.
-4. A FULL manager validation pass (the §0.3 checklist over the combined tree + an adversarial
-   premium/faith-seam sweep — the wf_59bcd3b3 pattern).
-5. 🔱 FABLE-ON-RETURN: the checkpoint grade-check (mini re-review of affected dimensions) — if
-   Fable is unavailable, Phase 6 may START but not SHIP without it.
-
 # PART 6 — MERGES + IN-FLIGHT (the near-term desk)
 
 ## 6.1 Merging worktree branches (W5, Session/Foundry, keystone-if-chipped)
@@ -396,9 +379,10 @@ sensitive read. W5 (worktree amazing-euclid) merges when its session ends, same 
 
 # PART 7 — THE MOVER LADDER (⚠️ OWNER RE-SCOPE 2026-07-12: LAUNCH CONTENT, no longer post-launch)
 ## Dispatch-ready specs, PART-3 depth. Order BINDING. Each wave = mover + CO-BUILT brake + OWN soak.
-## Launch boundary moved: Living Realm checkpoint (PART 5) stays as the mid-program VALIDATION
-## milestone after Wave A; PHASE 6 now runs AFTER M10, and launch follows Phase 6. The everything-on
-## soak covers all movers ONCE, at the end. Universal laws for every M-wave: dormant (no marker /
+## Execution order (owner 2026-07-12): this ladder runs BEFORE the Living Realm checkpoint (PART 5) —
+## the checkpoint is the FINAL everything-on validation of the mover-COMPLETE engine, then Phase 6
+## (PART 8), then launch. Each mover has its OWN incremental soak; the checkpoint's soak is the single
+## holistic pass over all movers at the end. Universal laws for every M-wave: dormant (no marker /
 ## flag off) ⇒ byte-identical; conditionally-materialized ledgers (object-keyed); seeded forks from
 ## stable composite keys; codepoint-sorted mutation order; tick-time only; carriers ship WITH their
 ## movers (round 9); every wave re-runs the prior soaks green; any-cast 0-hole; the manager checklist §0.3.
@@ -562,10 +546,30 @@ map); warding-vs-scrying info-defense; feed retention (non-recency major-arc pin
 scale fix); the two temporal structural notes (mergeStressorUpsert bornTick; dead wallClockNow
 pre-stamps); dramatic_campaign preset depth review; population-attractor retune (from the W0 soak).
 
-# PART 8 — PHASE 6: LAUNCH READINESS (runs AFTER the PART-7 mover ladder — relocated here 2026-07-12
-# per owner so the document reads in EXECUTION order: Wave A → checkpoint (PART 5) → merges (PART 6)
-# → movers M1-M10 (PART 7) → THIS part → launch. The PART-5 checkpoint stays the mid-program
-# VALIDATION milestone; launch-readiness runs once, here, on the full mover-complete engine.)
+# PART 5 — THE LIVING REALM CHECKPOINT (definition of done — runs AFTER the PART-7 mover ladder)
+# (owner order 2026-07-12: the checkpoint is the FINAL validation of the COMPLETE, mover-finished
+# engine, immediately before Phase 6 launch-readiness. Execution/reading flow: Wave A → merges
+# (PART 6) → M1-M10 movers (PART 7) → THIS checkpoint (PART 5) → Phase 6 (PART 8) → launch. Numbers
+# read 6,7,5,8,9 by owner directive; the SEQUENCE is what governs, per §0.4.)
+
+The shippable milestone. It is REACHED when all of the following are committed and green:
+1. The FULL ladder committed + green: Wave A, ALL merges (§6.1 — W5/Session-Foundry), and the ENTIRE
+   mover ladder M1-M10 (PART 7, each with its own soak).
+2. The LIVING REALM PRESET delivers, on a premium canonized realm: mapped geography (digest),
+   seasons (food year), distance-weighted trade/faith, perfect-but-delayed news (or unreliable if
+   the DM dials it), routine autonomy with major-approval, belief-sourced war posture with legible
+   misjudgments, ruleset receipts, + the mover layers (embattlement, caravans, migration, field
+   combat, entrepôts, smuggle, sea lanes, the political depth). Free/anon/legacy: byte-identical.
+3. THE CHECKPOINT SOAK: whole-world-soak on the living_realm preset + a canonized spatial fixture —
+   30 years, byte-identical re-run, bounded populations (⚠️ OWNER: the population-attractor tuning
+   finding gates M4 long before this), stressors non-frozen (the stasis fix evidenced), all ledgers
+   (rumor/belief/shipment/arrival/embattlement) bounded. This is the everything-on validation.
+4. A FULL manager validation pass (the §0.3 checklist over the combined tree + an adversarial
+   premium/faith-seam sweep — the wf_59bcd3b3 pattern).
+5. 🔱 FABLE-ON-RETURN: the checkpoint grade-check (mini re-review of affected dimensions) — if
+   Fable is unavailable, Phase 6 may START but not SHIP without it.
+
+# PART 8 — PHASE 6: LAUNCH READINESS (runs AFTER the PART-5 checkpoint)
 
 Sequenced program (each its own fenced wave, same protocol):
 1. DATA LIFECYCLE — pre-launch: schema/migration audit (the head/net-current ledger, fusion specs
