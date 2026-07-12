@@ -55,7 +55,13 @@ ruleTester.run('no-raw-color-literal', visualBudget.rules['no-raw-color-literal'
 
 // ── 2. Occurrence-budget ratchet ─────────────────────────────────────────────
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const BUDGET = 1546; // committed max raw-color-literal occurrences — only lower it, never raise.
+const BUDGET = 1427; // committed max raw-color-literal occurrences — only lower it, never raise.
+// W5 (2026-07-12): ratcheted 1546 -> 1427. The W5 cosmetic wave migrated its
+// map/threat palette onto swatch tokens (settlementThreat + the two AA swatches
+// in design/tokens.js) rather than raw literals. W5's own lineage measured 1424;
+// this review-fixes lineage (post W5 re-apply) carries 3 additional raw-color
+// literals from its own advanced work, so the floor lands at the MEASURED 1427
+// — still a monotone-down ratchet from 1546 (−119), gate green.
 
 const PURE_HEX = /^#[0-9a-fA-F]{3,8}$/;
 const isTokenSource = (rel) => /(?:design\/tokens|components\/theme)\b|src\/design\//.test(rel);
