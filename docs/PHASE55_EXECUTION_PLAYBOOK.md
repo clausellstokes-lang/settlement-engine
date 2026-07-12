@@ -75,7 +75,8 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
   Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
   adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
-- NEXT: W5 merge review → Wave A (PART 4) → checkpoint (PART 5) → M1..M10 (PART 8) → Phase 6 → launch.
+- NEXT: W5 merge review → Wave A (PART 4) → checkpoint (PART 5) → merges (PART 6) → M1..M10 movers
+  (PART 7) → Phase 6 launch-readiness (PART 8) → launch.
 - OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
   catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
 - FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check
@@ -124,13 +125,13 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 
 ## 0.4 THE DISPATCH ORDER (the ladder — sequential chain, ONE optional chip ahead)
 CURRENT (as of this writing): FP-1 in flight (budget-exclusive) · W5 chip in its worktree ·
-Session/Foundry branch awaiting merge review (§7.2).
+Session/Foundry branch awaiting merge review (§6.2).
 1. FP-1 lands → commit → note the NEW budget number.
 2. Dispatch SEASONS-A (brief: SEASONS_A_BRIEF.md) in the main session.
    SIMULTANEOUSLY (optional, if lanes allow): chip 5.5-K (KEYSTONE_BRIEF.md) in a worktree —
    the ONE safe parallel wave (disjoint fence, no entry bytes, longest critical path).
-   Also: run the §7.2 Session/Foundry merge review.
-3. SEASONS-A lands → commit. Keystone lands → merge per §7.1 + commit.
+   Also: run the §6.2 Session/Foundry merge review.
+3. SEASONS-A lands → commit. Keystone lands → merge per §6.1 + commit.
 4. Dispatch 5.5-M (MODULATION_BRIEF.md — verify the committed digest shape first).
 5. 5.5-M lands → commit → dispatch STEP 3.5 (the full spec is §3 of this playbook).
 6. 3.5 lands → commit → dispatch WAVE A (the full spec is §4 of this playbook).
@@ -154,7 +155,7 @@ rewrite what exists"; (3) if the tree went quiet 15+ min with no completion, pin
   +1,000 raise (cosmetic-worth-it call), OR (b) run FP-2 (the parked store-slice split) first to
   reclaim headroom, then merge W5 at 1,256,000. W5 is cosmetic + non-critical-path — deferring it
   blocks nothing. Merge protocol when unblocked: resolve OutputContainer (3.5 extracted
-  dossierLazyTabs; W5 has dossier polish — keep both), full battery, §7.1.
+  dossierLazyTabs; W5 has dossier polish — keep both), full battery, §6.1.
 - (5.5-K, 2026-07-12) LIVE PACK.CELLS CAPTURE: the keystone proved its digest against INJECTED pack
   fixtures; the real FMG-iframe read-only capture seam (extract pack.cells H/biome/r/c once at
   canonize) is UNWIRED — it belongs to 5.5-M (MODULATION), the first CONSUMER. MODULATION's dispatch
@@ -379,34 +380,9 @@ The shippable milestone. It is REACHED when all of the following are committed a
 5. 🔱 FABLE-ON-RETURN: the checkpoint grade-check (mini re-review of affected dimensions) — if
    Fable is unavailable, Phase 6 may START but not SHIP without it.
 
-# PART 6 — PHASE 6: LAUNCH READINESS (⚠️ OWNER RE-SCOPE 2026-07-12: runs AFTER the PART-8 mover
-# ladder, not at the checkpoint — the movers are launch content. The PART-5 checkpoint remains the
-# mid-program VALIDATION milestone: its soak + grade-check run after Wave A as written, then the
-# ladder proceeds M1→M10, then THIS part, then launch.)
+# PART 6 — MERGES + IN-FLIGHT (the near-term desk)
 
-Sequenced program (each its own fenced wave, same protocol):
-1. DATA LIFECYCLE — pre-launch: schema/migration audit (the head/net-current ledger, fusion specs
-   per memory/wave0-migration-audit.md), storage quotas, export/delete completeness (GDPR-shaped),
-   anon→free→premium upgrade paths carry all state. At-launch: seeding, onboarding fixtures,
-   the landing fixture regen (memory: phase5-engine-companion-complete NEXT item). Post-launch:
-   backup/restore discipline, migration-forward policy (the CL-0 ruleset + cost-law receipts are
-   the versioning pattern), telemetry review (EVENTS.* audit — no PII, no deity leaks).
-2. THE PUNCH LIST — sweep the parking lot (§0.6), the round-21+ backlog triage (§8.2 — what
-   graduates into launch, owner call ⚠️), the deferred small items (aiPricing slice, EventComposer
-   leftovers if W5 didn't land them, the dead-simulation-case cleanup).
-3. THE EVERYTHING-ON SOAK — ONE soak, the full_simulation preset on a spatial fixture (covers
-   spatial once, not twice): 30y determinism + the war-distribution certification (the W-C1..C5
-   distributions against their design envelopes — war frequency, siege outcomes, exhaustion
-   curves, occupation ladders; the soak asserts ENVELOPES, documents drift).
-4. SECURITY/ABUSE PASS — the admin edge actions audit (rate limits, authz on every admin-actions
-   verb), share/gallery scrub adversarial sweep, RLS review on new tables/keys.
-5. LAUNCH GATE — all ratchets green at their POST-FP-1 values; the golden corpus regenerated ONCE
-   with a reviewed UPDATE_GOLDEN protocol IF (and only if) any approved behavior change requires
-   it (owner sign-off ⚠️); CI green end-to-end.
-
-# PART 7 — MERGES + IN-FLIGHT (the near-term desk)
-
-## 7.1 Merging worktree branches (W5, Session/Foundry, keystone-if-chipped)
+## 6.1 Merging worktree branches (W5, Session/Foundry, keystone-if-chipped)
 Protocol per branch: (1) read ITS report/commits; (2) rebase onto current HEAD (or merge if rebase
 is noisy — prefer rebase for linear history); (3) resolve conflicts PREFERRING HEAD's constitutional
 seams (budget test, simulationRules, worldState) and the branch's own feature files; (4) run the
@@ -414,11 +390,11 @@ FULL battery on the merged tree (this is where parallel lanes pay their serializ
 for it); (5) the faith/premium adversarial check on any branch adding surfaces (Session/Foundry's
 faithEventFilter seam gets the FaithSection-equivalence test treatment: free/anon fixture, no
 deity names, gate load-bearing); (6) exact-stage commit.
-## 7.2 Session/Foundry branch (claude/peaceful-volhard-0ad3f1, 5 commits) — review AFTER FP-1
+## 6.2 Session/Foundry branch (claude/peaceful-volhard-0ad3f1, 5 commits) — review AFTER FP-1
 lands (it adds UI surfaces against a budget FP-1 is rewriting). The faithEventFilter seam is the
 sensitive read. W5 (worktree amazing-euclid) merges when its session ends, same protocol.
 
-# PART 8 — THE MOVER LADDER (⚠️ OWNER RE-SCOPE 2026-07-12: LAUNCH CONTENT, no longer post-launch)
+# PART 7 — THE MOVER LADDER (⚠️ OWNER RE-SCOPE 2026-07-12: LAUNCH CONTENT, no longer post-launch)
 ## Dispatch-ready specs, PART-3 depth. Order BINDING. Each wave = mover + CO-BUILT brake + OWN soak.
 ## Launch boundary moved: Living Realm checkpoint (PART 5) stays as the mid-program VALIDATION
 ## milestone after Wave A; PHASE 6 now runs AFTER M10, and launch follows Phase 6. The everything-on
@@ -576,7 +552,7 @@ infoMode completes: 'full' (factional beliefs + reconciliation) joins the ladder
 (Full Simulation = everything, honestly). Soak: a catch-up of 26 weeks == 26 manual ticks,
 byte-identical. Sensitive: catch-up determinism (the pin-now discipline); expiry never deadlocks.
 
-## 8.2 The round-21+ backlog (frozen out of v1; triage at Phase 6 ⚠️ OWNER)
+## 7.2 The round-21+ backlog (frozen out of v1; triage at Phase 6 ⚠️ OWNER)
 W2-style voice sidecars for war/faith/trade news (the pillar-inventory prescription — cheap, high
 value, candidates for EARLY post-launch or even Phase-6 punch-list graduation); numeric prices;
 miracles/divine-agency + lived-practice faith content (rituals, holy days, named clergy); peace
@@ -585,6 +561,31 @@ adventure sites); map-as-legibility-surface (fronts/embattlement/trade-flow rend
 map); warding-vs-scrying info-defense; feed retention (non-recency major-arc pinning, the 240-cap
 scale fix); the two temporal structural notes (mergeStressorUpsert bornTick; dead wallClockNow
 pre-stamps); dramatic_campaign preset depth review; population-attractor retune (from the W0 soak).
+
+# PART 8 — PHASE 6: LAUNCH READINESS (runs AFTER the PART-7 mover ladder — relocated here 2026-07-12
+# per owner so the document reads in EXECUTION order: Wave A → checkpoint (PART 5) → merges (PART 6)
+# → movers M1-M10 (PART 7) → THIS part → launch. The PART-5 checkpoint stays the mid-program
+# VALIDATION milestone; launch-readiness runs once, here, on the full mover-complete engine.)
+
+Sequenced program (each its own fenced wave, same protocol):
+1. DATA LIFECYCLE — pre-launch: schema/migration audit (the head/net-current ledger, fusion specs
+   per memory/wave0-migration-audit.md), storage quotas, export/delete completeness (GDPR-shaped),
+   anon→free→premium upgrade paths carry all state. At-launch: seeding, onboarding fixtures,
+   the landing fixture regen (memory: phase5-engine-companion-complete NEXT item). Post-launch:
+   backup/restore discipline, migration-forward policy (the CL-0 ruleset + cost-law receipts are
+   the versioning pattern), telemetry review (EVENTS.* audit — no PII, no deity leaks).
+2. THE PUNCH LIST — sweep the parking lot (§0.6), the round-21+ backlog triage (§7.2 — what
+   graduates into launch, owner call ⚠️), the deferred small items (aiPricing slice, EventComposer
+   leftovers if W5 didn't land them, the dead-simulation-case cleanup).
+3. THE EVERYTHING-ON SOAK — ONE soak, the full_simulation preset on a spatial fixture (covers
+   spatial once, not twice): 30y determinism + the war-distribution certification (the W-C1..C5
+   distributions against their design envelopes — war frequency, siege outcomes, exhaustion
+   curves, occupation ladders; the soak asserts ENVELOPES, documents drift).
+4. SECURITY/ABUSE PASS — the admin edge actions audit (rate limits, authz on every admin-actions
+   verb), share/gallery scrub adversarial sweep, RLS review on new tables/keys.
+5. LAUNCH GATE — all ratchets green at their POST-FP-1 values; the golden corpus regenerated ONCE
+   with a reviewed UPDATE_GOLDEN protocol IF (and only if) any approved behavior change requires
+   it (owner sign-off ⚠️); CI green end-to-end.
 
 # PART 9 — STANDING ITEMS + THE FINAL GRADE-CHECK
 
