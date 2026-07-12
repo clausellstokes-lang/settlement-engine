@@ -39,9 +39,10 @@
 
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf, COUP_COERCION } from '../rulingPower.js';
-import { TRAIT_AGGRESSION } from '../../data/npcData.js';
+import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcData.js';
+import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
-import { deityTemper } from './deityAxes.js';
+import { deityTemper, evil01, chaos01 } from './deityAxes.js';
 // Phase 4 W-F3 site #8 — the local piety amplifier on the deity-temper drive term.
 // pietyLocalMultOf is the identity short-circuit reader (absent record ⇒ 1.0), so a
 // deity-free / tick-0 / zero-span settlement is byte-identical.
@@ -278,4 +279,276 @@ export function computeDispositionFactorMap(snapshot, worldState) {
 
 export const AGGRESSION_TUNING = Object.freeze({
   W_GOV, W_PERS, W_HIST, W_DEITY, MULTIPLIER_SPAN, GOVERNING_UPWEIGHT, OCCUPATION_AGGRESSION,
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Phase 5.5 W0 — DERIVED SETTLEMENT ALIGNMENT (computeLawfulness / computeMalice)
+//
+// The two 0..1 alignment coordinates of a SETTLEMENT, derived — never authored,
+// never persisted — as SIBLINGS of computeAggressiveness (same shape: pure,
+// centered signed drive, tanh-squashed). The design ruling (PHASE55 §IV.4 /
+// §VI.1-15A): settlement alignment is on the critical path for culture, moral
+// drift, info-handling, the risk faculty, and fidelity STYLE — and it must be
+// a LIVE read over state the engine already has:
+//
+//   MALICE (the good–evil axis, 0 saintly … 1 malicious, 0.5 neutral):
+//     1. conscience   — importance × governing-power weighted mean of
+//                       TRAIT_ALIGNMENT over the AUTHORED npc.personality
+//                       strings (the same OQ13 authored-only discipline as
+//                       TRAIT_AGGRESSION; + is a GOOD conscience, so it enters
+//                       the malice drive NEGATED).
+//     2. deityEvil    — the embedded primary deity's evil01 coordinate
+//                       (deityAxes), re-centered signed. Absent deity reads the
+//                       0.5 midpoint ⇒ 0 drive (the fidelityNoise neutrality
+//                       discipline).
+//     3. govMalice    — the governing archetype's malice band (criminal /
+//                       occupation regimes are predatory; everything else 0).
+//     4. recentActs   — cheap signals ALREADY on the worldState: the
+//                       war-exhaustion scar (sustained war-waging) and held
+//                       OCCUPATIONS (conquest feeds). No new state is plumbed.
+//
+//   LAWFULNESS (the law–chaos axis, 0 lawless … 1 lawful-bureaucratic, 0.5 neutral):
+//     1. govLaw       — the governing archetype's rule-of-law band
+//                       (lawful-bureaucratic > personalist > lawless — the
+//                       §II.5-2 regime axis, keyed on the canonical archetype).
+//     2. deityChaos   — the patron's chaos01 coordinate, signed AGAINST
+//                       lawfulness (a chaotic god means the streets shrug).
+//     3. legitimacy   — publicLegitimacy through governanceLedger (the one
+//                       null-safe read-point); a legitimate order enforces its
+//                       law, a collapsed one cannot. `present:false` ⇒ 0 drive.
+//     4. occupied     — a settlement under an ACTIVE occupation (worldState
+//                       .occupations[id]) lives under imposed martial rule, not
+//                       its own law — a signed drag.
+//
+// NEUTRALITY ANCHOR (constitutional for this wave): a settlement with NO deity,
+// NO scoring traits, NO recognized governing archetype, NO legitimacy record,
+// and NO war ledgers reads EXACTLY 0.5 on both axes — so a sparse/legacy fixture
+// carries no phantom alignment. NO consumer is wired this wave (substrate only);
+// fidelityNoise stays deity-driven until Wave A widens it.
+//
+// Determinism: pure — no rng, no wall-clock, no mutation; every aggregation is
+// a commutative weighted sum (order-independent); total on garbage inputs.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * The recent-acts slice of worldState the alignment axes read (all optional —
+ * an absent ledger is the no-signal midpoint).
+ * @typedef {Object} AlignmentActsSource
+ * @property {Record<string, number>} [warExhaustion]  0..1 sustained-war scars by settlement id
+ * @property {Record<string, { occupierId?: string|number } | null | undefined>} [occupations]  active occupations by OCCUPIED id
+ */
+
+/**
+ * A worldSnapshot settlement item (or a bare settlement — the tolerant
+ * `item?.settlement || item` calling convention computeAggressiveness uses).
+ * @typedef {{ id?: string|number, settlement?: import('../settlement.schema.js').SimSettlement }} AlignmentItem
+ */
+
+/** Signed good↔evil conscience score for one NPC's authored personality
+ *  (Σ of TRAIT_ALIGNMENT weights; + is good-leaning — corruption.js's
+ *  npcAlignmentScore convention, read through the same authoredTraits slots).
+ * @param {import('../settlement.schema.js').SimNpc} npc @returns {number} */
+function npcConscienceScore(npc) {
+  let score = 0;
+  for (const trait of authoredTraits(npc)) {
+    const w = /** @type {Record<string, number>} */ (TRAIT_ALIGNMENT)[String(trait).trim().toLowerCase()];
+    if (Number.isFinite(w)) score += w;
+  }
+  return Math.max(-1, Math.min(1, score));
+}
+
+/**
+ * The importance × governing-power weighted mean of NPC conscience scores —
+ * personalityDrive's exact aggregation shape over TRAIT_ALIGNMENT instead of
+ * TRAIT_AGGRESSION. Empty / no scoring NPCs ⇒ 0 (no signal). Order-independent.
+ * @param {import('../settlement.schema.js').SimSettlement} settlement @returns {number}
+ */
+/** The governing entry for an alignment read. ONE typed shim for the
+ *  SimSettlement ↔ RulingPowerSettlement structural mismatch (the
+ *  `powerStructure.stability` string-vs-number widening) so the three
+ *  alignment readers don't each re-route it.
+ * @param {import('../settlement.schema.js').SimSettlement} settlement
+ * @returns {ReturnType<typeof governingFactionOf>} */
+function governingEntryOf(settlement) {
+  return governingFactionOf(
+    /** @type {import('../rulingPower.js').RulingPowerSettlement} */ (/** @type {unknown} */ (settlement)),
+  );
+}
+
+function conscienceDrive(settlement) {
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  if (!npcs.length) return 0;
+  const governing = governingEntryOf(settlement);
+  const governingPower = governing ? normFactionPower(governing) : 0.5;
+
+  let weighted = 0;
+  let totalWeight = 0;
+  for (const npc of npcs) {
+    const score = npcConscienceScore(npc);
+    if (score === 0) continue; // no authored conscience signal — contributes nothing
+    const w = importanceWeight(npc) * governingPower * GOVERNING_UPWEIGHT;
+    if (w <= 0) continue;
+    weighted += score * w;
+    totalWeight += w;
+  }
+  return totalWeight > 0 ? weighted / totalWeight : 0;
+}
+
+// Governing-archetype RULE-OF-LAW band (signed): the §II.5-2 axis rendered onto
+// the canonical archetypes. Bureaucratic/institutional rule enforces written
+// law; personalist/martial-imposed rule bends it; criminal rule IS lawlessness.
+// OTHER (no recognized governing entry) is 0 — the neutrality anchor.
+/** @type {Readonly<Record<string, number>>} */
+const GOV_LAW_BAND = Object.freeze({
+  [A.GOVERNMENT]: 0.6, [A.CIVIC]: 0.6, [A.MILITARY]: 0.4, [A.RELIGIOUS]: 0.35,
+  [A.NOBLE]: 0.25, [A.MERCHANT]: 0.15, [A.CRAFT]: 0.15, [A.LABOR]: 0.1,
+  [A.ARCANE]: 0.1, [A.OUTSIDER]: 0, [A.OCCUPATION]: -0.35, [A.CRIMINAL]: -0.7,
+  [A.OTHER]: 0,
+});
+
+// Governing-archetype MALICE band (signed): only predatory regimes read
+// malicious — a criminal syndicate in the seat, or rule at spearpoint. Everything
+// else is 0: an ordinary government is not good or evil BY FORM (conscience,
+// deity, and acts carry that).
+/** @type {Readonly<Record<string, number>>} */
+const GOV_MALICE_BAND = Object.freeze({
+  [A.CRIMINAL]: 0.6, [A.OCCUPATION]: 0.45,
+});
+
+// Blend weights. Like the aggression kernel: the tanh squash bounds the combined
+// drive, so the weights express RELATIVE authority, not a partition of 1.
+// Malice: authored conscience carries the most signal (who RUNS the place),
+// the patron tilts, regime form and recent acts are modest.
+const W_MAL_CONSCIENCE = 0.45;
+const W_MAL_DEITY = 0.35;
+const W_MAL_GOV = 0.3;
+const W_MAL_ACTS = 0.3;
+// Lawfulness: regime form leads (law is an institution), the patron and the
+// standing legitimacy of the order are moderate, occupation drags.
+const W_LAW_GOV = 0.45;
+const W_LAW_DEITY = 0.3;
+const W_LAW_LEGITIMACY = 0.25;
+const W_LAW_OCCUPIED = 0.25;
+// The occupied-drag magnitude (an active worldState occupation record).
+const OCCUPIED_LAW_DRAG = 1;
+// Recent-acts saturation: one held occupation is a strong conquest signal; a
+// second saturates the term (min with 1 below).
+const OCCUPATION_MALICE_PER_HOLDING = 0.6;
+
+/** 0..1 squash of a signed drive, EXACTLY 0.5 at zero drive (the neutrality anchor).
+ * @param {number} drive @returns {number} */
+function squash01(drive) {
+  if (drive === 0) return 0.5;
+  return 0.5 + 0.5 * Math.tanh(drive);
+}
+
+/** The worldState id for a snapshot item, or null.
+ * @param {{ id?: string|number }|null|undefined} item @returns {string|null} */
+function itemId(item) {
+  return item?.id != null ? String(item.id) : null;
+}
+
+/** How many ACTIVE occupations `id` currently HOLDS as the occupier (the
+ *  conquest feed — worldState.occupations is keyed by the OCCUPIED id and
+ *  carries `occupierId`). 0 on an absent/garbage ledger. Order-independent.
+ * @param {AlignmentActsSource|null|undefined} worldState @param {string|null} id @returns {number} */
+function occupationsHeldBy(worldState, id) {
+  if (id == null) return 0;
+  const occupations = worldState?.occupations;
+  if (!occupations || typeof occupations !== 'object') return 0;
+  let held = 0;
+  for (const key of Object.keys(occupations)) {
+    const rec = occupations[key];
+    if (rec && String(rec.occupierId) === id) held += 1;
+  }
+  return held;
+}
+
+/** Is `id` itself under an active occupation record?
+ * @param {AlignmentActsSource|null|undefined} worldState
+ * @param {string|null} id @returns {boolean} */
+function isOccupied(worldState, id) {
+  if (id == null) return false;
+  const occupations = worldState?.occupations;
+  if (!occupations || typeof occupations !== 'object') return false;
+  return !!occupations[id];
+}
+
+/** The 0..1 war-exhaustion scar for `id` (worldState.warExhaustion — the
+ *  ratcheted sustained-war ledger). 0 when absent/garbage.
+ * @param {AlignmentActsSource|null|undefined} worldState @param {string|null} id @returns {number} */
+function warExhaustionOf(worldState, id) {
+  if (id == null) return 0;
+  const scar = worldState?.warExhaustion?.[id];
+  return Number.isFinite(scar) ? Math.max(0, Math.min(1, Number(scar))) : 0;
+}
+
+/**
+ * The settlement's LAWFULNESS coordinate: 0 lawless … 1 lawful-bureaucratic,
+ * EXACTLY 0.5 with no signal. Sibling of computeAggressiveness — pure, centered,
+ * tanh-squashed; a DERIVED live read, never persisted (the round-7 "culture is
+ * a LIVE read" law). No consumer is wired this wave.
+ *
+ * @param {AlignmentItem|null} [item] - a worldSnapshot settlement item.
+ * @param {AlignmentActsSource|null} [worldState] - carries the occupation ledger (occupied drag).
+ * @returns {number} 0..1; EXACTLY 0.5 when there is no signal at all.
+ */
+export function computeLawfulness(item, worldState) {
+  const settlement = /** @type {import('../settlement.schema.js').SimSettlement} */ (
+    /** @type {unknown} */ (item?.settlement || item || {})
+  );
+  const id = itemId(item);
+
+  const govBand = GOV_LAW_BAND[factionArchetype(governingEntryOf(settlement))];
+  const gov = Number.isFinite(govBand) ? govBand : 0;
+  // chaos01 reads 0.5 for a neutral/absent/legacy patron ⇒ 0 drive. Signed
+  // AGAINST lawfulness: a chaotic patron erodes the rule of law.
+  const deityChaos = -(2 * chaos01(settlement?.config?.primaryDeitySnapshot) - 1);
+  const ledger = governanceLedger(settlement);
+  const legitimacy = ledger.present ? (ledger.legitimacyScore - 50) / 50 : 0;
+  const occupied = isOccupied(worldState, id) ? -OCCUPIED_LAW_DRAG : 0;
+
+  const drive = W_LAW_GOV * gov + W_LAW_DEITY * deityChaos
+    + W_LAW_LEGITIMACY * legitimacy + W_LAW_OCCUPIED * occupied;
+  return squash01(drive);
+}
+
+/**
+ * The settlement's MALICE coordinate: 0 saintly … 1 malicious, EXACTLY 0.5 with
+ * no signal. Sibling of computeAggressiveness — pure, centered, tanh-squashed;
+ * a DERIVED live read, never persisted. No consumer is wired this wave.
+ *
+ * @param {AlignmentItem|null} [item] - a worldSnapshot settlement item.
+ * @param {AlignmentActsSource|null} [worldState] - carries warExhaustion + occupations (recent acts).
+ * @returns {number} 0..1; EXACTLY 0.5 when there is no signal at all.
+ */
+export function computeMalice(item, worldState) {
+  const settlement = /** @type {import('../settlement.schema.js').SimSettlement} */ (
+    /** @type {unknown} */ (item?.settlement || item || {})
+  );
+  const id = itemId(item);
+
+  // + conscience is GOOD-leaning ⇒ negated into the malice drive.
+  const conscience = -conscienceDrive(settlement);
+  // evil01 reads 0.5 for a neutral/absent/legacy patron ⇒ 0 drive.
+  const deityEvil = 2 * evil01(settlement?.config?.primaryDeitySnapshot) - 1;
+  const govBand = GOV_MALICE_BAND[factionArchetype(governingEntryOf(settlement))];
+  const gov = Number.isFinite(govBand) ? govBand : 0;
+  // Recent acts: the sustained-war scar + held occupations, saturating at 1.
+  const acts = Math.min(
+    1,
+    warExhaustionOf(worldState, id)
+      + OCCUPATION_MALICE_PER_HOLDING * occupationsHeldBy(worldState, id),
+  );
+
+  const drive = W_MAL_CONSCIENCE * conscience + W_MAL_DEITY * deityEvil
+    + W_MAL_GOV * gov + W_MAL_ACTS * acts;
+  return squash01(drive);
+}
+
+export const ALIGNMENT_TUNING = Object.freeze({
+  W_MAL_CONSCIENCE, W_MAL_DEITY, W_MAL_GOV, W_MAL_ACTS,
+  W_LAW_GOV, W_LAW_DEITY, W_LAW_LEGITIMACY, W_LAW_OCCUPIED,
+  OCCUPIED_LAW_DRAG, OCCUPATION_MALICE_PER_HOLDING,
+  GOV_LAW_BAND, GOV_MALICE_BAND,
 });

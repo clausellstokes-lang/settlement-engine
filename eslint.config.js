@@ -274,6 +274,37 @@ export default [
     },
   },
 
+  // ── Phase 5.5 W0 — the wall-clock ban extended to the REMAINING sim-path dirs ─
+  // The temporal audit (docs/TEMPORAL_AUDIT.md) found the no-Date gates covered
+  // src/generators + src/domain but NOT the other two directories on the
+  // simulation path: src/workers (the advance worker — same code as the main
+  // thread, so an ambient wall-clock read there would silently fork worker vs
+  // main-thread bytes) and src/kernel (rngContext/prng — the sanctioned
+  // NON-determinism seams, which must stay the ONLY ones). Both were verified
+  // CLEAN at extension time, so this lands as a hard error with no debt.
+  // src/kernel/prng.js is the one exemption: generateSeed() mints fresh seeds
+  // from Date.now()+Math.random() BY DESIGN (the documented sole seed-minting
+  // entry — mirroring src/domain/clock.js for the domain block above).
+  // The store/lib/components layers are deliberately NOT covered: they are the
+  // boundary where wall-clock legitimately enters (the pinned-`now` mints,
+  // user-action timestamps, analytics) — see the audit's boundary table.
+  {
+    files: ['src/workers/**/*.js', 'src/kernel/**/*.js'],
+    ignores: ['src/kernel/prng.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock on the sim path — thread `now` from the caller (the store boundary mints it; wallClockNow() in domain/clock.js is the domain seam).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() reads wall-clock on the sim path — thread a value in (only src/kernel/prng.js generateSeed may mint ambient entropy).',
+        },
+      ],
+    },
+  },
+
   // ── Accessibility (jsx-a11y) — ERROR (hardened 2026-06) ──────────────────────
   // The component/PDF JSX layer is excluded from tsc and had no a11y linting, so
   // accessibility gaps accumulated invisibly. These started at WARN for an

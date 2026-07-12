@@ -239,6 +239,17 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     settlementStrategyEnabled: true,
     faithSpreadEnabled: true,
     religionDynamicsEnabled: true,
+    // W0-A3: Full Simulation is the CEILING (§11 "Dwarf Fortress mode") — the
+    // whole war stack runs at depth, so the eight war sub-flags ship LIT here
+    // and ONLY here (living_realm and the legacy trio inherit their defaults).
+    defenderAttritionEnabled: true,
+    warEconomyDrainEnabled: true,
+    warSupplyQualityEnabled: true,
+    defenderResolveEnabled: true,
+    allyDefenseEnabled: true,
+    warForageEnabled: true,
+    warLevyEnabled: true,
+    warDispositionEnabled: true,
   }),
 });
 

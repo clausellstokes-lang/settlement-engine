@@ -123,6 +123,43 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     }
   });
 
+  // W0-A3 — the Full Simulation preset runs the war stack AT DEPTH: the eight
+  // war sub-flags ship lit in full_simulation ONLY. living_realm and the legacy
+  // trio inherit the default-false bank, and full_simulation still round-trips
+  // to its own id (the flags are comparison keys, defined in every preset via
+  // the DEFAULT spread — churn-guard #2 covers the definedness half).
+  const WAR_DEPTH_FLAGS = [
+    'defenderAttritionEnabled',
+    'warEconomyDrainEnabled',
+    'warSupplyQualityEnabled',
+    'defenderResolveEnabled',
+    'allyDefenseEnabled',
+    'warForageEnabled',
+    'warLevyEnabled',
+    'warDispositionEnabled',
+  ];
+  test('full_simulation lights ALL EIGHT war sub-flags; every other preset keeps them dark', () => {
+    // The eight are real boolean rule keys (anti-drift: renaming one in the
+    // source must fail here, not silently test a ghost key).
+    for (const flag of WAR_DEPTH_FLAGS) {
+      expect(BOOLEAN_KEYS, `${flag} is a real boolean rule key`).toContain(flag);
+    }
+    for (const flag of WAR_DEPTH_FLAGS) {
+      expect(SIMULATION_RULE_PRESETS.full_simulation.rules[flag], `full_simulation.${flag}`).toBe(true);
+      expect(DEFAULT_SIMULATION_RULES[flag], `default ${flag} stays false`).toBe(false);
+    }
+    for (const id of PRESET_IDS.filter(p => p !== 'full_simulation')) {
+      for (const flag of WAR_DEPTH_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} stays dark`).toBe(false);
+      }
+    }
+    // Round-trip: the lit preset still infers ITSELF, and a keyless copy of its
+    // rules (an old save that lost its presetId) re-infers full_simulation.
+    const keyless = { ...SIMULATION_RULE_PRESETS.full_simulation.rules };
+    delete keyless.presetId;
+    expect(normalizeSimulationRules(keyless).presetId).toBe('full_simulation');
+  });
+
   // #5 — custom detection still fires (proves matching is not always-true).
   test('flipping one comparison key away from every preset yields custom', () => {
     const base = SIMULATION_RULE_PRESETS.dramatic_campaign.rules;
