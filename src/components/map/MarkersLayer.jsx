@@ -44,7 +44,7 @@ function Marker({ marker, onEditMarker }) {
   function handlePointerDown(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    setSelected(marker.id);
+    setSelected(marker.id, 'marker');
     const pt = eventToMap(e);
     if (!pt) return;
     dragRef.current = {

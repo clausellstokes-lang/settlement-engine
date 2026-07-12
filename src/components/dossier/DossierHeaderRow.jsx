@@ -5,6 +5,7 @@ import { TIER_LABELS } from '../new/design';
 import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
 import Button from '../primitives/Button.jsx';
+import { threatDisplay } from '../map/settlementThreat.js';
 
 // Dossier header bar — extracted verbatim from OutputContainer's render.
 // Presentational only: every value/handler arrives via props; the parent
@@ -43,7 +44,14 @@ export default function DossierHeaderRow({
                 <span style={{ fontSize: FS.sm, color: swatch.inkMag3 }}>{'\u00b7'}</span>
                 <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{formatCount(settlement.population) + ' pop.'}</span>
                 {settlement.config?.tradeRouteAccess && <span style={{ fontSize: FS.sm, color: swatch.mutedBrown }}>{settlement.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
-                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? '#c87060' : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{settlement.config.monsterThreat === 'plagued' ? 'Embattled' : 'Frontier'}</span>}
+                {/* The threat WORD comes from the shared threatDisplay helper so
+                    a given monsterThreat reads identically here and in the
+                    SettlementPalette pill (P2) — the old inline map showed the
+                    SAME value as a different word on each surface ('plagued' →
+                    "Embattled", 'embattled' → "Frontier"). Colors stay
+                    parchment-toned for the dark header bar; only the label is
+                    unified. */}
+                {settlement.config?.monsterThreat && settlement.config.monsterThreat !== 'frontier' && <span style={{ fontSize: FS.xs, fontWeight: 700, color: settlement.config.monsterThreat === 'plagued' ? swatch.stressAmber : swatch['#C49A3C'], background: 'rgba(196,154,60,0.12)', borderRadius: 3, padding: '2px 7px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{threatDisplay(settlement.config.monsterThreat)?.label || settlement.config.monsterThreat}</span>}
                 {stressObj && <span style={{ fontSize: FS.xxs, fontWeight: 800, color: swatch.stressAmber, background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 4, padding: '2px 8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{stressObj.label}</span>}
               </div>
             </div>

@@ -88,7 +88,7 @@ function Forest({ forest }) {
   function handlePointerDown(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    setSelected(forest.id);
+    setSelected(forest.id, 'forest');
     const pt = eventToMap(e);
     if (!pt) return;
     dragRef.current = {

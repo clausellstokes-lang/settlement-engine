@@ -254,6 +254,8 @@ export const swatch = Object.freeze({
   '#C0CCE8': '#c0cce8',
   '#C49A3C': '#c49a3c',
   '#C54A4A': '#c54a4a',
+  '#C87060': '#c87060', // settlement threat: embattled FILL/border tint (text fails AA — see #A0492F)
+  '#A0492F': '#a0492f', // settlement threat: embattled TEXT (5.84:1 on CARD — the AA-passing step of #C87060)
   '#C88A8A': '#c88a8a',
   '#C8A0F0': '#c8a0f0',
   '#C8B098': '#c8b098',
