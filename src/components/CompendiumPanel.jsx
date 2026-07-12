@@ -71,7 +71,13 @@ const TAB_META = Object.freeze({
 });
 
 export default function CompendiumPanel({ config, standalone=false }) {
-  const [mode, setMode] = useState('catalog'); // 'catalog' | 'custom'
+  // Honor a ?mode=custom deep-link on mount (the EventComposer deity field's
+  // "Author a deity" CTA lands here) so the custom-content tab opens directly.
+  const initialMode = (() => {
+    if (typeof window === 'undefined') return 'catalog';
+    return new URLSearchParams(window.location.search).get('mode') === 'custom' ? 'custom' : 'catalog';
+  })();
+  const [mode, setMode] = useState(initialMode); // 'catalog' | 'custom'
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
   // open the right section. Falls back to 'tiers' when missing/invalid.
   //

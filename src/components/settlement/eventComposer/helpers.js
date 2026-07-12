@@ -82,6 +82,26 @@ export function buildTargetOptions(settlement, collectionKey) {
   return out;
 }
 
+/**
+ * {id, name} options for OPENED_TRADE_ROUTE's optional campaign-settlement
+ * target: every OTHER active-campaign member of the active save. Resolved from
+ * the raw campaigns array keyed by activeSaveId (the PendingIntentions pattern),
+ * so a trade route can open with any campaign peer, not only a linked neighbour.
+ */
+export function campaignPeerOptions(campaigns, savedSettlements, activeSaveId) {
+  if (activeSaveId == null) return [];
+  const sid = String(activeSaveId);
+  const c = (campaigns || []).find(x =>
+    (x?.accessState || 'active') === 'active'
+    && (x.settlementIds || []).map(String).includes(sid));
+  if (!c) return [];
+  const others = new Set((c.settlementIds || []).map(String).filter(id => id !== sid));
+  return (savedSettlements || [])
+    .filter(save => others.has(String(save.id)))
+    .map(save => ({ id: String(save.id), name: String(save.settlement?.name || save.name || save.id) }))
+    .filter(o => o.id && o.name);
+}
+
 export function labelOfTarget(targetId) {
   const tail = String(targetId || '').split('.').pop();
   return tail.replace(/_/g, ' ');

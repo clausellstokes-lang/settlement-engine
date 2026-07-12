@@ -37,7 +37,7 @@ import { buildRegistryFromStore, mintDeityRef } from '../lib/customRegistry.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
 
 /** Build the self-contained deity snapshot from an authored deity record. */
-function deitySnapshotFrom(raw) {
+export function deitySnapshotFrom(raw) {
   return {
     name: raw.name,
     alignmentAxis: raw.alignmentAxis,
