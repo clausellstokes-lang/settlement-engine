@@ -241,6 +241,7 @@ export function starvationReceipt({ institutionName, input, cause, weeksCut } = 
  * severed/unroutable/intercepted (the total-cut precondition for starvation).
  * @param {Array<{ sourceId: string, cost: number }>} rankedSources
  * @param {{ digest: SpatialDigest, worldState: SupplyWorldState, destinationId: string, riskTolerance: number,
+ *   season?: string|null,
  *   sourceSevered: (id: string) => boolean, isHostileToDestination: (id: string) => boolean }} ctx
  * @returns {{ sourceId: string, route: import('./embattlement.js').ScoredRoute }|null}
  */
@@ -249,7 +250,7 @@ export function pickSource(rankedSources, ctx) {
   for (const src of list) {
     const sourceId = String(src.sourceId);
     if (ctx.sourceSevered && ctx.sourceSevered(sourceId)) continue; // producer output cut at origin
-    const route = chooseRoute(ctx.digest, ctx.worldState, sourceId, ctx.destinationId, ctx.riskTolerance);
+    const route = chooseRoute(ctx.digest, ctx.worldState, sourceId, ctx.destinationId, ctx.riskTolerance, ctx.season ?? null);
     if (!route || !route.path.length) continue; // unroutable this tick
     if (routeIntercepted(route.path, ctx.isHostileToDestination)) continue; // hostile gate cuts it
     return { sourceId, route };
@@ -310,10 +311,14 @@ function allSourcesSevered(rankedSources, sourceSevered) {
  *   (e) STARVE — ONLY when every source is severed AND the buffer is empty AND the
  *       link is NOT fragile (the ≥2-source brake): latch starving + emit the receipt.
  * Pure + deterministic given the forked rng.
+ * SEASONS-B (M3): `ctx.season` rides chooseRoute (route CHOICE reshaped by winter)
+ * and, because the chosen route's baseCost is then season-adjusted, the dispatched
+ * shipment's arrivalTick lengthens in winter (routeWeeks). No season / no overlay
+ * ⇒ the geometric route + arrival, byte-identical.
  * @param {SupplyLink} link
  * @param {ShipmentRecord|null} prior
  * @param {{ digest: SpatialDigest, worldState: SupplyWorldState, tick: number, tickWeeks?: number,
- *   riskTolerance: number, rng?: { fork?: (k: string) => { random: () => number } }|null,
+ *   riskTolerance: number, season?: string|null, rng?: { fork?: (k: string) => { random: () => number } }|null,
  *   sourceSevered: (id: string) => boolean, isHostileToDestination: (id: string) => boolean,
  *   severingCause?: string }} ctx
  * @returns {LinkOutcome}
@@ -342,7 +347,7 @@ export function stepSupplyLink(link, prior, ctx) {
     const stillClear = ctx.sourceSevered && ctx.sourceSevered(record.sourceId)
       ? false
       : !routeIntercepted(
-          chooseRoute(ctx.digest, ctx.worldState, record.sourceId, destinationId, ctx.riskTolerance)?.path || [],
+          chooseRoute(ctx.digest, ctx.worldState, record.sourceId, destinationId, ctx.riskTolerance, ctx.season ?? null)?.path || [],
           ctx.isHostileToDestination,
         );
     if (!stillClear) record = null; // the caravan is cut — failover below re-dispatches
@@ -366,7 +371,7 @@ export function stepSupplyLink(link, prior, ctx) {
   if (!record) {
     const picked = pickSource(link.rankedSources, {
       digest: ctx.digest, worldState: ctx.worldState, destinationId,
-      riskTolerance: ctx.riskTolerance, sourceSevered: ctx.sourceSevered,
+      riskTolerance: ctx.riskTolerance, season: ctx.season ?? null, sourceSevered: ctx.sourceSevered,
       isHostileToDestination: ctx.isHostileToDestination,
     });
     if (picked) {
@@ -410,6 +415,8 @@ export function stepSupplyLink(link, prior, ctx) {
  * @param {SpatialDigest} args.digest
  * @param {number} args.tick
  * @param {number} [args.tickWeeks]
+ * @param {string|null} [args.season]  SEASONS-B: the current road season (derived
+ *   free from seasonForTick). Null / no overlay ⇒ no seasonal modulation.
  * @param {{ fork?: (k: string) => { random: () => number } }|null} [args.rng]
  * @param {(destId: string, sourceId: string) => boolean} [args.sourceSeveredFor]
  * @param {(destId: string, gateId: string) => boolean} [args.hostileToDestinationFor]
@@ -419,7 +426,7 @@ export function stepSupplyLink(link, prior, ctx) {
  *   outcomes: Record<string, LinkOutcome> }}
  */
 export function advanceSupplyShipments({
-  links, worldState, digest, tick, tickWeeks,
+  links, worldState, digest, tick, tickWeeks, season = null,
   rng = null, sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, severingCauseFor,
 }) {
   const prior = worldState && typeof worldState === 'object' && 'supplyShipments' in worldState
@@ -440,7 +447,7 @@ export function advanceSupplyShipments({
   for (const key of [...byKey.keys()].sort()) {
     const link = byKey.get(key);
     const ctx = {
-      digest, worldState, tick, tickWeeks,
+      digest, worldState, tick, tickWeeks, season,
       rng,
       riskTolerance: riskToleranceFor ? finiteNumber(riskToleranceFor(link), 1) : 1,
       sourceSevered: (/** @type {string} */ id) => !!(sourceSeveredFor && sourceSeveredFor(String(link.settlementId), id)),

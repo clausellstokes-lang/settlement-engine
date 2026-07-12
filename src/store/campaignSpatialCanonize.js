@@ -18,7 +18,7 @@ import {
   buildSpatialDigest,
   SPATIAL_GEOMETRY_VERSION,
   COST_LAW_VERSION,
-  OVERLAY_VERSION,
+  SEASONAL_OVERLAY_VERSION,
 } from '../domain/spatial/index.js';
 import { canonizeWorldState } from '../domain/worldPulse/worldState.js';
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
@@ -57,7 +57,12 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     placements: captured.placements,
     spatialGeometryVersion: SPATIAL_GEOMETRY_VERSION,
     costLawVersion: COST_LAW_VERSION,
-    overlayVersion: OVERLAY_VERSION,
+    // SEASONS-B (M3): a NEW canon lights the seasonal-road overlay (per-season ×
+    // per-terrain cost law) under overlayVersion SEASONAL_OVERLAY_VERSION — the
+    // §V.1 receipted re-canonize. Existing saved canons keep their frozen v1 (no
+    // overlay) and read with no seasonal modulation (dormant, byte-identical).
+    overlayVersion: SEASONAL_OVERLAY_VERSION,
+    seasonalRoads: true,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {

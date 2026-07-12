@@ -53,12 +53,15 @@ function asObject(v) {
  * (LOCAL same-settlement, unmapped, or unreachable) is returned in `passthrough`
  * for the caller to queue immediately (the aspatial behaviour).
  *
+ * SEASONS-B (M3): with a `season` AND a seasonal overlay on the digest, a parked
+ * cross-settlement impact's travel (hopWeeks) lengthens in winter — propagation,
+ * like news, runs cold. Null / no overlay ⇒ geometric latency, byte-identical.
  * @param {ArrivalLedger|undefined} current   worldState.spatialArrivals (or undefined)
  * @param {Array<TravellingImpact>} impacts   the impacts derived this tick
- * @param {{ digest: import('./distanceRead.js').SpatialDigest, tick:number }} ctx
+ * @param {{ digest: import('./distanceRead.js').SpatialDigest, tick:number, season?:string|null }} ctx
  * @returns {{ next: ArrivalLedger, passthrough: Array<TravellingImpact> }}
  */
-export function parkArrivals(current, impacts, { digest, tick }) {
+export function parkArrivals(current, impacts, { digest, tick, season = null }) {
   const next = { ...asObject(current) };
   /** @type {Array<TravellingImpact>} */
   const passthrough = [];
@@ -77,7 +80,7 @@ export function parkArrivals(current, impacts, { digest, tick }) {
       passthrough.push(impact);
       continue;
     }
-    const weeks = hopWeeks(digest, sourceId, targetId);
+    const weeks = hopWeeks(digest, sourceId, targetId, season);
     // Unmapped / unreachable pair ⇒ null ⇒ keep the aspatial instant path.
     if (weeks == null || weeks <= 0) {
       passthrough.push(impact);

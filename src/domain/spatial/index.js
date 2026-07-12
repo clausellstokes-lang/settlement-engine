@@ -28,6 +28,10 @@ export {
   quantizeCellCost,
   quantizeDist,
   buildCostField,
+  SEASONAL_OVERLAY_VERSION,
+  SLOW_NOT_SEVER_MAX,
+  SEASON_TERRAIN_COST,
+  buildSeasonalOverlay,
 } from './spatialCost.js';
 
 export {

@@ -143,7 +143,17 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     expect(ws.spatialCanonVersion).toBe(1);
     expect(ws.spatialDigest).toBeTruthy();
     expect(ws.spatialDigest.settlementIds.length).toBe(6);
-    expect(ws.spatialDigest.reserved).toEqual({ airField: null, seaLanes: null, seasonalOverlay: null, teleportEdges: null });
+    // SEASONS-B (M3): a NEW live canon LIGHTS the seasonal-road overlay under
+    // overlayVersion 2 (the §V.1 receipted re-canonize). The OTHER three reserved
+    // slots stay null (their own waves light them). Existing SAVED canons keep
+    // their frozen v1 (no overlay) and read dormant — byte-identical.
+    expect(ws.spatialDigest.overlayVersion).toBe(2);
+    expect(ws.spatialDigest.reserved.airField).toBeNull();
+    expect(ws.spatialDigest.reserved.seaLanes).toBeNull();
+    expect(ws.spatialDigest.reserved.teleportEdges).toBeNull();
+    expect(ws.spatialDigest.reserved.seasonalOverlay).toBeTruthy();
+    expect(ws.spatialDigest.reserved.seasonalOverlay.version).toBe(2);
+    expect(ws.spatialDigest.reserved.seasonalOverlay.seasonTerrainCost.winter.mountain).toBeGreaterThan(1);
     // canonizedAt is stamped too (a spatial canonize IS a canonize).
     expect(ws.canonizedAt).toBeTruthy();
 

@@ -29,7 +29,7 @@ import { evaluateOccupations } from './occupation.js';
 import { addRegionalChannels, setRegionalChannelStatus } from '../region/graph.js';
 import { aftermathNewsEntries, graduationNewsEntries, recordGraduationsIntoHistory } from './stressorAftermath.js';
 import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js';
-import { seasonalContextFor, seasonalBoundaryEntries } from './seasons.js';
+import { seasonalContextFor, seasonalBoundaryEntries, seasonalThawEntries } from './seasons.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
 import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
@@ -54,6 +54,7 @@ import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
+import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceRead.js';
 import { advanceSettlementSupply } from './supplyKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
@@ -329,6 +330,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // week of a year reads the same verdict (seasons.js).
   const seasonsOn = simulationRules.seasonsEnabled === true;
   const seasonClock = seasonsOn ? seasonForTick(worldState.calendar.elapsedWeeks) : null;
+  // ── SEASONS-B (M3): WINTER ROADS. The road season is derived FREE from the
+  // ADVANCED calendar (seasonForTick), INDEPENDENT of the food-year flag: seasonal
+  // roads gate on the digest's seasonalOverlay, not seasonsEnabled. Threaded into
+  // every spatial travel read (supply routes, rumor relays, propagation arrivals).
+  // A dormant / pre-M3 digest has no overlay ⇒ every seasonal read is multiplier
+  // 1.0 ⇒ byte-identical whether or not the season is threaded.
+  const roadSeason = seasonForTick(worldState.calendar.elapsedWeeks).season;
   // Flag-on granary states for the season boundary markers (harvest thinness,
   // hungry-gap direness) — collected from this tick's stockpile advance.
   /** @type {Array<{ id: string, name: string, storageMonths: number, deficitPct: number }>} */
@@ -487,6 +495,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       digest: worldState.spatialDigest,
       tick: worldState.tick,
       tickWeeks: { one_week: 1, one_month: 4, one_season: 13, one_year: 52 }[tickInterval] || 1,
+      season: roadSeason,
       rng,
       now,
     });
@@ -1073,6 +1082,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     outcomes: outcomesToApply,
     tick: worldState.tick,
     now,
+    season: roadSeason,
     simulationRules,
   });
 
@@ -1452,7 +1462,23 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         foodStates: seasonalFoodStates,
       })
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries];
+  // SEASONS-B (M3): the SPRING-THAW news burst — fires on the winter→spring
+  // crossing ONLY when the seasonal-road overlay is active (a world whose roads
+  // actually freeze). Realm-scope, scored above the rumor notable floor so it
+  // SEEDS the rumor ledger (the visible burst as the passes reopen). Gated on the
+  // OVERLAY, not seasonsEnabled — winter roads are independent of the food year.
+  // Empty (byte-neutral) when the overlay is dormant or no crossing this window.
+  const thawDigest = activeSpatialDigest(memoryState);
+  const thawEntries = activeSeasonalOverlay(thawDigest)
+    ? seasonalThawEntries({
+        prevWeeks: startingWorldState.calendar?.elapsedWeeks ?? 0,
+        weeks: worldState.calendar.elapsedWeeks,
+        tick: worldState.tick,
+        now,
+        settlementIds: thawDigest?.settlementIds || [],
+      })
+    : [];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
@@ -1475,6 +1501,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       feedEntries: wizardNews?.entries || [],
       graph: applied.regionalGraph,
       tick: worldState.tick,
+      season: roadSeason,
       rng,
     });
     if (rumors.changed) {

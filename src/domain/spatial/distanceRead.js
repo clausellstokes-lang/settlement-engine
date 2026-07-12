@@ -35,6 +35,21 @@
  *                             (self excluded; only finite/reachable pairs).
  *   - digest.tiers          : sortedObject { [id]: { [neighbourId]: 1|2|3 } }
  *                             (1 = primary/adjacent territory neighbour).
+ *
+ * SEASONS-B (M3): a NEW digest may carry a frozen `reserved.seasonalOverlay`
+ * (a per-season × per-terrain cost LAW). When present, the OPTIONAL `season`
+ * argument on pathCost/hopWeeks (and seasonalPathCost, used by the route
+ * re-score) applies a MULTIPLICATIVE, terrain-weighted, FINITE surcharge at READ
+ * TIME — the frozen distanceMatrix is never re-baked. A digest WITHOUT the
+ * overlay (every pre-M3 canon / golden) reads with multiplier 1.0 ⇒ byte-
+ * identical, whether or not a season is threaded (the dormancy gate).
+ *
+ * The seasonal READ (the terrain-weighted blend) lives HERE, reading the cost law
+ * straight off the frozen overlay object (self-describing) — so this reader keeps
+ * its "no heavy imports" leaf property (importing spatialCost would give that
+ * module a second distinct-chunk importer and force it into a shared chunk, adding
+ * eager first-paint bytes). The builder side (the cost table + buildSeasonalOverlay)
+ * stays in spatialCost.
  */
 
 // ── Calibration constants (the §II.5-1 anchors; retunable in the soak) ───────
@@ -75,7 +90,9 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  * @typedef {{ settlementIds?: string[],
  *   distanceMatrix?: Record<string, Record<string, number>>,
  *   tiers?: Record<string, Record<string, number>>,
- *   gates?: Array<{ between?: [string, string], cost?: number }> }} SpatialDigest
+ *   gates?: Array<{ between?: [string, string], cost?: number }>,
+ *   routeReceipts?: Record<string, { cost?: number, byTerrain?: Record<string, number> }>,
+ *   reserved?: { seasonalOverlay?: SeasonalOverlay | null } }} SpatialDigest
  */
 
 /**
@@ -95,6 +112,76 @@ export function activeSpatialDigest(worldState) {
   if (!digest || typeof digest !== 'object') return null;
   if (!digest.distanceMatrix || typeof digest.distanceMatrix !== 'object') return null;
   return digest;
+}
+
+/** The codepoint-stable unordered pair key (matches the digest's routeReceipts keys). */
+/** @param {string} a @param {string} b @returns {string} */
+function pairKey(a, b) {
+  return a < b ? `${a}|${b}` : `${b}|${a}`;
+}
+
+/**
+ * @typedef {{ version?: number, seasonTerrainCost?: Record<string, Record<string, number>> }} SeasonalOverlay
+ */
+
+/**
+ * THE SEASONAL DORMANCY GATE (M3). Returns the frozen `seasonalOverlay` cost law
+ * ONLY when the digest carries a populated, versioned overlay (a NEW canon built
+ * by the entitled M3 re-canonize). EVERY pre-M3 digest — every committed golden —
+ * has `reserved.seasonalOverlay = null`, so this returns null ⇒ every seasonal
+ * read below is multiplier 1.0 ⇒ the pre-M3 cost path EXACTLY (byte-identical).
+ * @param {SpatialDigest & { reserved?: { seasonalOverlay?: unknown } } | null | undefined} digest
+ * @returns {SeasonalOverlay | null}
+ */
+export function activeSeasonalOverlay(digest) {
+  const ov = /** @type {{ reserved?: { seasonalOverlay?: unknown } } | null | undefined} */ (digest)?.reserved?.seasonalOverlay;
+  if (!ov || typeof ov !== 'object') return null;
+  const overlay = /** @type {SeasonalOverlay} */ (ov);
+  // A populated, positive-versioned overlay is active. The gate is forward-
+  // compatible: the overlay is SELF-DESCRIBING (carries its own seasonTerrainCost),
+  // so the reader honours any version's own frozen law rather than pinning one M3
+  // constant — no cross-module import needed for the gate.
+  if (!(typeof overlay.version === 'number' && Number.isInteger(overlay.version) && overlay.version >= 1)) return null;
+  if (!overlay.seasonTerrainCost || typeof overlay.seasonTerrainCost !== 'object') return null;
+  return overlay;
+}
+
+/**
+ * The FINITE seasonal multiplier for one terrain class in one season, read off a
+ * frozen overlay's own cost law. Unknown season/class ⇒ 1.0. Always ≥ 1 and ≤ the
+ * overlay's table max (SLOW, NOT SEVER) by construction.
+ * @param {SeasonalOverlay | null | undefined} overlay
+ * @param {string|null|undefined} season @param {string|null|undefined} terrainClass
+ * @returns {number}
+ */
+function seasonTerrainFactor(overlay, season, terrainClass) {
+  const table = overlay && overlay.seasonTerrainCost;
+  const row = table && season != null ? table[String(season)] : null;
+  const v = row && terrainClass != null ? row[String(terrainClass)] : undefined;
+  return typeof v === 'number' && Number.isFinite(v) && v > 0 ? v : 1;
+}
+
+/**
+ * The cost-weighted seasonal multiplier for a route/edge whose cost breaks down by
+ * terrain class (a routeReceipt's `byTerrain`): a weighted average of the per-class
+ * factors — a mostly-mountain hop reads near the mountain factor, a plains hop near
+ * 1. FINITE, in [1, the table max]; empty/absent composition ⇒ 1.0.
+ * @param {SeasonalOverlay | null | undefined} overlay
+ * @param {Record<string, number> | null | undefined} byTerrain
+ * @param {string|null|undefined} season
+ * @returns {number}
+ */
+export function terrainBlendMultiplier(overlay, byTerrain, season) {
+  if (!overlay || season == null || !byTerrain || typeof byTerrain !== 'object') return 1;
+  let num = 0;
+  let den = 0;
+  for (const cls of Object.keys(byTerrain)) {
+    const cost = byTerrain[cls];
+    if (!(typeof cost === 'number' && Number.isFinite(cost) && cost > 0)) continue;
+    num += cost * seasonTerrainFactor(overlay, season, cls);
+    den += cost;
+  }
+  return den > 0 ? num / den : 1;
 }
 
 // Per-digest calibration memo. WeakMap ⇒ GC-friendly and keyed on identity; the
@@ -210,18 +297,32 @@ export function calibrationReceipt(digest) {
 }
 
 /**
- * Raw frozen integer distance between two settlements, or null when the pair is
- * unreachable / absent / identical. Pure matrix read.
+ * Frozen integer distance between two settlements, or null when the pair is
+ * unreachable / absent / identical.
+ *
+ * SEASONS-B (M3): with an OPTIONAL `season` AND a seasonalOverlay on the digest,
+ * the frozen base cost is multiplied by the route's terrain-weighted seasonal
+ * factor at READ TIME (never re-baking the matrix). No season, or no overlay (any
+ * pre-M3 digest) ⇒ the raw frozen distance, byte-identical.
  * @param {SpatialDigest} digest @param {string|number} fromId @param {string|number} toId
+ * @param {string|null} [season]
  * @returns {number|null}
  */
-export function pathCost(digest, fromId, toId) {
+export function pathCost(digest, fromId, toId, season = null) {
   const a = String(fromId);
   const b = String(toId);
   if (a === b) return 0;
   const row = digest?.distanceMatrix?.[a];
   if (!row || typeof row !== 'object') return null;
-  return finiteNum(row[b]);
+  const base = finiteNum(row[b]);
+  if (base == null || base <= 0 || season == null) return base;
+  const overlay = activeSeasonalOverlay(digest);
+  if (!overlay) return base; // dormant / pre-M3 ⇒ the frozen distance exactly
+  // Decompose the composite pair into its cheapest primary-hop path so the
+  // seasonal factor is terrain-weighted over the road actually travelled.
+  const candidates = candidateRoutes(digest, a, b, 1);
+  const path = candidates.length ? candidates[0].path : [a, b];
+  return Math.round(base * pathSeasonMultiplier(digest, path, season));
 }
 
 /**
@@ -231,11 +332,18 @@ export function pathCost(digest, fromId, toId) {
  * latency cross-settlement hop) and capped at MAX_HOP_WEEKS.
  *   - same settlement           ⇒ 0 (a local effect has no travel time).
  *   - unreachable / absent pair  ⇒ null (caller decides: no spatial delay).
+ *
+ * SEASONS-B (M3): the OPTIONAL `season` rides the season-aware pathCost, so a
+ * winter route over mountains lengthens (info runs cold) while the calibration
+ * (weeks-per-cost) stays the frozen geometric anchor. No season / no overlay ⇒
+ * the geometric weeks, byte-identical. Still floored ≥ 1 and capped at
+ * MAX_HOP_WEEKS — so even a max-winter mountain hop is SLOW, never infinite.
  * @param {SpatialDigest} digest @param {string|number} fromId @param {string|number} toId
+ * @param {string|null} [season]
  * @returns {number|null}
  */
-export function hopWeeks(digest, fromId, toId) {
-  const cost = pathCost(digest, fromId, toId);
+export function hopWeeks(digest, fromId, toId, season = null) {
+  const cost = pathCost(digest, fromId, toId, season);
   if (cost == null) return null;
   if (cost === 0) return 0;
   const { weeksPerCost } = calibration(digest);
@@ -483,4 +591,67 @@ export function candidateRoutes(digest, fromId, toId, k = K_CANDIDATES) {
   }
   byPair.set(cacheKey, routes);
   return routes;
+}
+
+// ── SEASONS-B (M3): the read-time seasonal surcharge ──────────────────────────
+// A route's terrain composition is FROZEN in the digest's routeReceipts.byTerrain
+// (per primary hop); the seasonalOverlay carries the per-season × per-terrain cost
+// law. These helpers blend the two at READ TIME (never re-baking the frozen
+// matrix). All FINITE + ≥ 1 (SLOW, NOT SEVER). Dormant (no overlay / no season)
+// ⇒ 1.0 ⇒ byte-identical.
+
+/**
+ * The seasonal multiplier for a single primary-hop edge a↔b in a season, from its
+ * routeReceipt's terrain composition. 1.0 when the overlay/season is absent or the
+ * pair has no receipt (not a primary hop). In [1, SLOW_NOT_SEVER_MAX].
+ * @param {SpatialDigest} digest @param {string|number} fromId @param {string|number} toId @param {string|null} [season]
+ * @returns {number}
+ */
+export function edgeSeasonMultiplier(digest, fromId, toId, season = null) {
+  const overlay = activeSeasonalOverlay(digest);
+  if (!overlay || season == null) return 1;
+  const receipt = digest?.routeReceipts?.[pairKey(String(fromId), String(toId))];
+  return receipt && receipt.byTerrain ? terrainBlendMultiplier(overlay, receipt.byTerrain, season) : 1;
+}
+
+/**
+ * The cost-weighted seasonal multiplier for a whole route PATH (a sequence of
+ * settlement ids, each consecutive pair a primary hop). A weighted average of its
+ * edges' seasonal factors, so a route dominated by a mountain hop reads near the
+ * mountain factor while a plains route reads near 1. FINITE, in
+ * [1, SLOW_NOT_SEVER_MAX]; 1.0 when dormant / seasonless / < 2 nodes.
+ * @param {SpatialDigest} digest @param {Array<string|number>} path @param {string|null} [season]
+ * @returns {number}
+ */
+export function pathSeasonMultiplier(digest, path, season = null) {
+  const overlay = activeSeasonalOverlay(digest);
+  const nodes = Array.isArray(path) ? path : [];
+  if (!overlay || season == null || nodes.length < 2) return 1;
+  const receipts = digest && digest.routeReceipts;
+  let num = 0;
+  let den = 0;
+  for (let i = 0; i + 1 < nodes.length; i++) {
+    const receipt = receipts ? receipts[pairKey(String(nodes[i]), String(nodes[i + 1]))] : undefined;
+    if (!receipt) continue;
+    const edgeCost = finiteNum(receipt.cost);
+    if (edgeCost == null || edgeCost <= 0) continue;
+    num += edgeCost * terrainBlendMultiplier(overlay, receipt.byTerrain, season);
+    den += edgeCost;
+  }
+  return den > 0 ? num / den : 1;
+}
+
+/**
+ * The season-adjusted integer cost of traversing a known route PATH of frozen
+ * `baseCost`: baseCost × the path's terrain-weighted seasonal multiplier. The
+ * route re-score (embattlement.chooseRoute) and the caravan arrival clock
+ * (supplyShipments.routeWeeks) minimize / schedule on THIS, so winter both
+ * reshapes route CHOICE and lengthens arrivals. No season ⇒ baseCost unchanged.
+ * @param {SpatialDigest} digest @param {Array<string|number>} path @param {number} baseCost @param {string|null} [season]
+ * @returns {number}
+ */
+export function seasonalPathCost(digest, path, baseCost, season = null) {
+  const base = Math.max(0, finiteNum(baseCost) ?? 0);
+  if (season == null) return base;
+  return Math.round(base * pathSeasonMultiplier(digest, path, season));
 }

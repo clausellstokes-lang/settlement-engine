@@ -63,7 +63,7 @@
  * module.
  */
 
-import { candidateRoutes, calibration } from './distanceRead.js';
+import { candidateRoutes, calibration, seasonalPathCost } from './distanceRead.js';
 
 // ── Tuning (documented here; retuned in the M1 + checkpoint soaks) ────────────
 export const EMBATTLEMENT_TUNING = Object.freeze({
@@ -334,19 +334,27 @@ export function scoreRoute(path, worldState, baseCost, riskTolerance, medianHopC
  * memoized once — never re-pathfound) against the live embattlement field, and
  * pick the minimum effective cost (deterministic codepoint tie-break on the path).
  * Returns null when the pair is unreachable / unmapped.
+ * SEASONS-B (M3): with a `season` AND a seasonal overlay on the digest, each
+ * candidate is RE-COST by the current season × its terrain composition BEFORE
+ * scoring — so winter reshapes route CHOICE (a mountain pass balloons near-
+ * impassable; the longer plains detour wins) and the returned route's baseCost
+ * lengthens its arrival (routeWeeks). No season / no overlay ⇒ the frozen
+ * geometric cost, byte-identical.
  * @param {import('./distanceRead.js').SpatialDigest} digest
  * @param {{ embattlement?: unknown }|null|undefined} worldState
  * @param {string|number} fromId @param {string|number} toId @param {number} riskTolerance
+ * @param {string|null} [season]
  * @returns {ScoredRoute|null}
  */
-export function chooseRoute(digest, worldState, fromId, toId, riskTolerance) {
+export function chooseRoute(digest, worldState, fromId, toId, riskTolerance, season = null) {
   const candidates = candidateRoutes(digest, fromId, toId);
   if (!candidates.length) return null;
   const medianHopCost = calibration(digest).medianPrimaryHopCost;
   /** @type {ScoredRoute|null} */
   let best = null;
   for (const cand of candidates) {
-    const scored = scoreRoute(cand.path, worldState, cand.cost, riskTolerance, medianHopCost);
+    const seasonalCost = seasonalPathCost(digest, cand.path, cand.cost, season);
+    const scored = scoreRoute(cand.path, worldState, seasonalCost, riskTolerance, medianHopCost);
     if (!best
       || scored.effectiveCost < best.effectiveCost
       || (scored.effectiveCost === best.effectiveCost && scored.path.join('>') < best.path.join('>'))) {

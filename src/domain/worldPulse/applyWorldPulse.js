@@ -715,6 +715,9 @@ function seedBetrayalTraitor(/** @type {any} */ { state, settlementUpdates, save
  * @param {any[]} [args.outcomes]
  * @param {number} [args.tick]
  * @param {string} [args.now]
+ * @param {string|null} [args.season]  SEASONS-B (M3): the current road season, so
+ *   parked cross-settlement propagation arrivals lengthen in winter (info runs
+ *   cold). Null / no overlay ⇒ geometric latency, byte-identical.
  * @param {boolean} [args.advanceNewsTick]
  * @param {boolean} [args.advanceRegionalImpacts]
  * @param {any} [args.simulationRules]
@@ -728,6 +731,7 @@ export function applyWorldPulseOutcomes({
   outcomes = [],
   tick,
   now,
+  season = null,
   advanceNewsTick = true,
   advanceRegionalImpacts: shouldAdvanceRegionalImpacts = true,
   simulationRules = null,
@@ -842,7 +846,7 @@ export function applyWorldPulseOutcomes({
         });
         graph = propagation.graph;
         if (spatialDigest) {
-          const parked = parkArrivals(spatialArrivals, propagation.impacts, { digest: spatialDigest, tick: tick ?? 0 });
+          const parked = parkArrivals(spatialArrivals, propagation.impacts, { digest: spatialDigest, tick: tick ?? 0, season });
           spatialArrivals = parked.next;
           // LOCAL / unmapped / unreachable impacts have no travel time ⇒ queue now
           // (the aspatial instant path); only genuine cross-settlement hops delay.

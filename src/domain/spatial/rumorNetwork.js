@@ -419,12 +419,16 @@ export function degradeTelling(record, fork, digest) {
  * @param {RumorGraphRead} args.graph
  *   the post-apply regional graph (the trade edges).
  * @param {number} args.tick  the current pulse tick (integer weeks).
+ * @param {string|null} [args.season]  SEASONS-B (M3): the current road season.
+ *   With a seasonal overlay on the digest, winter LENGTHENS each relay's travel
+ *   (hopWeeks) so news runs cold; null / no overlay ⇒ geometric latency,
+ *   byte-identical.
  * @param {RumorRng | null} [args.rng]  the pulse rng confluence. Required only
  *   by Unreliable relays; Perfect-but-Delayed and dormant paths never touch it.
  * @returns {{ next: RumorLedgers | null, changed: boolean }}  next=null ⇒ the
  *   key should be absent (empty ledger drops, the conditional-ledger idiom).
  */
-export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, rng = null }) {
+export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null }) {
   const prior = /** @type {RumorLedgers | null} */ (
     worldState && typeof worldState === 'object' && 'rumorLedgers' in worldState
       ? asLedgers(worldState.rumorLedgers)
@@ -540,7 +544,7 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, rng 
       const hop = record.hopCount + 1;
       const relayTelling = `t${hop}:${record.eventRef}@${sid}`;
       for (const { neighbourId, edgeId } of tradeNeighbours(graph, sid)) {
-        const weeks = hopWeeks(digest, sid, neighbourId);
+        const weeks = hopWeeks(digest, sid, neighbourId, season);
         const travelTicks = Math.max(1, finiteNumber(weeks, 1));
         let fidelity = {
           completeness01: record.completeness01,

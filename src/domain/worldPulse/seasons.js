@@ -196,7 +196,7 @@ export function isLateWinter(clock) {
  * @typedef {{ id: string, tick: number, createdAt: string, scope: string,
  *            kind: string, impactKind: string, significance: string,
  *            severity: number, headline: string, summary: string,
- *            settlementIds: string[], reasons: string[] }} SeasonMarkerEntry
+ *            settlementIds: string[], reasons: string[], score?: number }} SeasonMarkerEntry
  * @param {{ prevWeeks: number, weeks: number, tick: number, now: string,
  *           foodStates: Array<{ id: string, name: string, storageMonths: number, deficitPct: number }> }} args
  * @returns {SeasonMarkerEntry[]} wizard-news entries (possibly empty)
@@ -247,6 +247,49 @@ export function seasonalBoundaryEntries({ prevWeeks, weeks, tick, now, foodState
           : 'The last weeks of winter thin the granaries; the realm waits on the spring.',
         settlementIds: dire.length ? dire.map((s) => String(s.id)) : allIds,
         reasons: dire.map((s) => `${s.name}: stores below half a month with a ${Math.round(s.deficitPct)}% deficit.`),
+      });
+    }
+  }
+  return entries;
+}
+
+/**
+ * SEASONS-B (M3): the SPRING-THAW news burst — the ONE new spatial season marker
+ * ('season_marker', impactKind 'spring_thaw'). Deterministic (no rng), realm-
+ * scope, minted when the advanced-week window crosses INTO spring (week-of-year 1):
+ * the passes open, caravans move again, and the winter's held news travels the
+ * roads at last. Emitted BY THE CALLER only when the SEASONAL-ROAD OVERLAY is
+ * active (a world whose roads actually freeze); scored above the rumor notable
+ * floor so it SEEDS the rumor ledger (the visible burst). Parallels
+ * seasonalBoundaryEntries but is spatial-gated, not food-year-gated.
+ *
+ * @param {{ prevWeeks: number, weeks: number, tick: number, now: string,
+ *           settlementIds?: Array<string|number> }} args
+ * @returns {SeasonMarkerEntry[]}
+ */
+export function seasonalThawEntries({ prevWeeks, weeks, tick, now, settlementIds = [] }) {
+  const entries = [];
+  const from = Math.max(0, Math.floor(prevWeeks));
+  const to = Math.max(from, Math.floor(weeks));
+  const ids = [...new Set((settlementIds || []).map((v) => String(v)).filter((v) => v !== ''))].sort();
+  for (let w = from + 1; w <= to; w += 1) {
+    const clock = seasonForTick(w);
+    if (clock.season === 'spring' && clock.weekOfSeason === 1) {
+      entries.push({
+        id: `wizard_news.season.spring_thaw.${clock.year}.${tick}`,
+        tick,
+        createdAt: now,
+        scope: 'realm',
+        kind: 'season_marker',
+        impactKind: 'spring_thaw',
+        significance: 'notable',
+        // Above RUMOR_NOTABLE_SCORE_FLOOR (60) so the thaw seeds the rumor ledger.
+        score: 70,
+        severity: 0.4,
+        headline: 'The roads thaw',
+        summary: 'The spring thaw opens the passes; caravans move again and the winter\'s held news travels the roads at last.',
+        settlementIds: ids,
+        reasons: [],
       });
     }
   }

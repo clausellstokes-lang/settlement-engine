@@ -177,11 +177,14 @@ function atWar(graph, gateId, destId) {
  * @param {SpatialDigest|null|undefined} args.digest    the frozen spatial digest
  * @param {number} args.tick
  * @param {number} [args.tickWeeks]
+ * @param {string|null} [args.season]  SEASONS-B (M3): the current road season
+ *   (winter lengthens caravan arrivals + reshapes route choice). Null / no
+ *   overlay ⇒ geometric routing, byte-identical.
  * @param {{ fork?: (k: string) => { random: () => number } }|null} [args.rng]
  * @param {string|null} [args.now]
  * @returns {{ worldState: Record<string, unknown>, changed: boolean, starvations: string[], arrivals: string[] }}
  */
-export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, rng = null, now = null }) {
+export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
   if (!supplyActive(worldState) || !digest) return { worldState, changed: false, starvations: [], arrivals: [] };
 
   const producers = buildProducerIndex(snapshot);
@@ -220,7 +223,7 @@ export function advanceSettlementSupply({ snapshot, localSettlements, worldState
   };
 
   const out = advanceSupplyShipments({
-    links, worldState, digest, tick, tickWeeks, rng,
+    links, worldState, digest, tick, tickWeeks, season, rng,
     sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, severingCauseFor,
   });
 

@@ -67,6 +67,53 @@ export const TERRAIN_CLASSES = Object.freeze([
 ]);
 export const MOUNTAIN_HEIGHT = 60; // matches the iframe's elevMult knee (h > 60)
 
+// ── SEASONS-B (M3): the seasonal cost overlay LAW ─────────────────────────────
+// The reserved `seasonalOverlay` digest slot (§4i, round 19) materializes as a
+// per-SEASON × per-TERRAIN-CLASS cost MULTIPLIER — a MULTIPLICATIVE layer on top
+// of the frozen base cost field. It is versioned + frozen INTO the digest at an
+// entitled re-canonize (§V.1: "old canon freezes under its own cost-law; a change
+// is a discrete re-canonize event, never a silent drift"), and applied at READ
+// TIME in distanceRead (the frozen distanceMatrix is NEVER re-baked).
+//
+// ROUND 19 — SLOW, NOT SEVER: winter makes a mountain pass NEAR-impassable
+// (a large multiplier) but NEVER infinite/cut — so a snowed-in town is dear to
+// reach yet still RESCUABLE by spring. Every entry is a FINITE multiplier ≥ 1
+// (a seasonal cost is never a discount, and never a severance).
+export const SEASONAL_OVERLAY_VERSION = 2;
+
+// The hard bound the SLOW-NOT-SEVER law guarantees: no terrain in any season
+// multiplies cost by more than this FINITE factor (winter × mountain is the
+// worst case). The read-time blend is a cost-weighted average of table entries,
+// so a route's effective multiplier is always in [1, SLOW_NOT_SEVER_MAX].
+export const SLOW_NOT_SEVER_MAX = 6;
+
+// The per-season × per-terrain multiplier table (the cost LAW). Keyed by the
+// SEASONS-A season labels × the terrainClassOf vocabulary. Summer is the
+// baseline (1.0 on land — the good campaigning season); winter is harshest
+// (mountain 6× near-impassable-but-finite, deep wetland/tundra slow); spring/
+// autumn are the mud/rain shoulders. 'water' stays 1.0 (the land digest never
+// routes on it). Every value FINITE and ≥ 1, and ≤ SLOW_NOT_SEVER_MAX.
+export const SEASON_TERRAIN_COST = Object.freeze({
+  spring: Object.freeze({ water: 1, desert: 1.1, grassland: 1.15, forest: 1.2, wetland: 1.4, tundra: 1.3, glacier: 1.7, mountain: 1.6 }),
+  summer: Object.freeze({ water: 1, desert: 1.0, grassland: 1.0, forest: 1.0, wetland: 1.0, tundra: 1.0, glacier: 1.2, mountain: 1.0 }),
+  autumn: Object.freeze({ water: 1, desert: 1.0, grassland: 1.05, forest: 1.15, wetland: 1.3, tundra: 1.25, glacier: 1.5, mountain: 1.35 }),
+  winter: Object.freeze({ water: 1, desert: 1.2, grassland: 1.5, forest: 1.8, wetland: 2.3, tundra: 2.8, glacier: 5.0, mountain: 6.0 }),
+});
+
+/**
+ * The seasonal overlay OBJECT stamped into the frozen digest's reserved slot at
+ * an entitled M3 re-canonize. Self-describing (carries its own version + the full
+ * cost law) so an old canon freezes under its own table forever (§V.1) and a
+ * future law change is a discrete re-canonize, never a silent drift on load. The
+ * READ side (the terrain-weighted blend) lives in distanceRead — it reads
+ * seasonTerrainCost straight off this frozen object, so this module needs no
+ * reader import (which would force spatialCost into a shared chunk).
+ * @returns {{ version: number, seasonTerrainCost: typeof SEASON_TERRAIN_COST }}
+ */
+export function buildSeasonalOverlay() {
+  return { version: SEASONAL_OVERLAY_VERSION, seasonTerrainCost: SEASON_TERRAIN_COST };
+}
+
 /** @param {number|undefined} h @param {number|undefined} b */
 export function terrainClassOf(h, b) {
   const height = Number(h) || 0;

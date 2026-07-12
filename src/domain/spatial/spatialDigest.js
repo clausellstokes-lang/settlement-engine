@@ -45,6 +45,8 @@ import {
   quantizeCellCost,
   quantizeDist,
   terrainClassOf,
+  buildSeasonalOverlay,
+  SEASONAL_OVERLAY_VERSION,
 } from './spatialCost.js';
 
 // ── Input shapes (the captured pack + placements the builder consumes) ───────
@@ -92,12 +94,15 @@ export const SPATIAL_GEOMETRY_VERSION = 1;
 export const COST_LAW_VERSION = 1;
 export const OVERLAY_VERSION = 1;
 
-// The four reserved edge/overlay slots, schema-present + null this wave. Frozen
+// The four reserved edge/overlay slots, schema-present + null by default. Frozen
 // so every digest carries the same shape and a materializing wave (§4j sea lanes,
 // air/teleport edge sets, §4i seasonal overlay) can light its slot without a
-// schema break.
-function reservedSlots() {
-  return { airField: null, seaLanes: null, seasonalOverlay: null, teleportEdges: null };
+// schema break. M3 (SEASONS-B) lights `seasonalOverlay` ON OPT-IN ONLY: default
+// (every pre-M3 canon / golden) stays null ⇒ the seasonal read is dormant ⇒
+// byte-identical. The OTHER three stay null (their own waves light them).
+/** @param {object|null} [seasonalOverlay] */
+function reservedSlots(seasonalOverlay = null) {
+  return { airField: null, seaLanes: null, seasonalOverlay: seasonalOverlay ?? null, teleportEdges: null };
 }
 
 // ── A deterministic integer binary min-heap (dist asc, then cell index asc) ──
@@ -209,18 +214,29 @@ const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `
 
 /**
  * Build the frozen spatial digest. The ONE public entry point.
+ * SEASONS-B (M3): `seasonalRoads:true` LIGHTS the reserved seasonalOverlay slot
+ * (a per-season × per-terrain cost law) and stamps overlayVersion to
+ * SEASONAL_OVERLAY_VERSION — a DISCRETE re-canonize (§V.1). Omitted (the default,
+ * and every existing golden/canon) ⇒ overlay null, overlayVersion 1 ⇒ dormant,
+ * byte-identical.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
- *           overlayVersion?:number }} input
+ *           overlayVersion?:number, seasonalRoads?:boolean }} input
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);
   const arrays = { h: pack.h, biome: pack.biome, r: pack.r };
   const { seeds, skipped } = resolveSeeds(input?.placements, pack);
 
+  // M3 opt-in: the seasonal overlay is frozen INTO this canon; dormant by default.
+  const seasonalRoads = input?.seasonalRoads === true;
+  const seasonalOverlay = seasonalRoads ? buildSeasonalOverlay() : null;
+
   const spatialGeometryVersion = Number.isInteger(input?.spatialGeometryVersion) ? input.spatialGeometryVersion : SPATIAL_GEOMETRY_VERSION;
   const costLawVersion = Number.isInteger(input?.costLawVersion) ? input.costLawVersion : COST_LAW_VERSION;
-  const overlayVersion = Number.isInteger(input?.overlayVersion) ? input.overlayVersion : OVERLAY_VERSION;
+  const overlayVersion = Number.isInteger(input?.overlayVersion)
+    ? input.overlayVersion
+    : (seasonalRoads ? SEASONAL_OVERLAY_VERSION : OVERLAY_VERSION);
 
   const costField = buildCostField(arrays, pack.cellCount);
   let landCellCount = 0;
@@ -423,6 +439,6 @@ export function buildSpatialDigest(input) {
     distanceMatrix: sortedObject(distanceEntries),
     gates,
     routeReceipts: sortedObject(receiptEntries),
-    reserved: reservedSlots(),
+    reserved: reservedSlots(seasonalOverlay),
   };
 }
