@@ -16,6 +16,7 @@
 
 import { useEffect } from 'react';
 import { createBridgeSingleton } from '../lib/mapBridge.js';
+import { registerSpatialCaptureBridge, unregisterSpatialCaptureBridge } from '../lib/spatialCaptureRegistry.js';
 
 const LOAD_TIMEOUT_MS = 15000;
 
@@ -38,6 +39,9 @@ export function useMapBridge({
   useEffect(() => {
     const bridge = createBridgeSingleton(() => iframeRef.current);
     bridgeRef.current = bridge;
+    // Expose the live bridge to the (lazy) spatial-canonize path, which lives in a
+    // different subtree than the World Map and so can't receive it via props.
+    registerSpatialCaptureBridge(bridge);
 
     // Load watchdog: if `ready` never fires (iframe 404 / hang), flip the map
     // into a recoverable error state with a domain message + "Reload map" CTA.
@@ -94,6 +98,7 @@ export function useMapBridge({
       offPlaced?.();
       offRemoved?.();
       offClearedAll?.();
+      unregisterSpatialCaptureBridge(bridge);
       bridge.destroy();
       bridgeRef.current = null;
     };

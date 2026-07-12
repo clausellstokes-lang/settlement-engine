@@ -11,6 +11,9 @@ import {
   stablePart,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
+import { queueRegionalImpacts } from '../region/graph.js';
+import { activeSpatialDigest } from '../spatial/distanceRead.js';
+import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths } from './foodStockpile.js';
 import { applyRelationshipPatch, relationshipKeyFromEdge, relationshipRoles } from './relationshipEvolution.js';
 import { refreshRelationshipMemory } from './relationshipMemory.js';
@@ -747,6 +750,13 @@ export function applyWorldPulseOutcomes({
   const autoApplied = [];
   const proposals = [];
   const newsEntries = [];
+  // SPATIAL (5.5-M item 4): the propagation ARRIVAL front. The digest is present
+  // ONLY under the entitled spatial-canon marker ⇒ null keeps every step below on
+  // the aspatial instant-propagation path (byte-identical). When present, this
+  // tick's cross-settlement impacts are PARKED (delayed by travel distance) and
+  // previously-parked, now-due arrivals are RELEASED at tick start.
+  const spatialDigest = activeSpatialDigest(state);
+  let spatialArrivals = spatialDigest ? state?.spatialArrivals : undefined;
   // Stressor ids already written by an EARLIER outcome in this same apply
   // pass. A second outcome touching the same id (escalate after spread,
   // multi-target spread of one record) must field-MERGE with the first write,
@@ -763,6 +773,14 @@ export function applyWorldPulseOutcomes({
   if (shouldAdvanceRegionalImpacts && propagationDepth > 0) {
     const beforeRegionalAdvance = graph;
     graph = advanceRegionalImpacts(graph, 1, { currentTick: tick, now });
+    // SPATIAL: release the cross-settlement impacts that have ARRIVED this tick
+    // (parked on earlier ticks) into the regional queue — the existing machinery
+    // then materializes them + dates their Wizard News at this ARRIVAL tick.
+    if (spatialDigest) {
+      const drain = drainDueArrivals(spatialArrivals, tick ?? 0);
+      spatialArrivals = drain.next;
+      if (drain.due.length) graph = queueRegionalImpacts(graph, drain.due, { now });
+    }
     newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeRegionalAdvance, graph, { tick, createdAt: now }));
   }
 
@@ -818,8 +836,18 @@ export function applyWorldPulseOutcomes({
           visibleSettlementIds,
           maxDepth: propagationDepth,
           now,
+          // SPATIAL: under the marker, DON'T queue impacts instantly — park the
+          // cross-settlement ones so they arrive hopWeeks later (news at arrival).
+          queueImpacts: !spatialDigest,
         });
         graph = propagation.graph;
+        if (spatialDigest) {
+          const parked = parkArrivals(spatialArrivals, propagation.impacts, { digest: spatialDigest, tick: tick ?? 0 });
+          spatialArrivals = parked.next;
+          // LOCAL / unmapped / unreachable impacts have no travel time ⇒ queue now
+          // (the aspatial instant path); only genuine cross-settlement hops delay.
+          if (parked.passthrough.length) graph = queueRegionalImpacts(graph, parked.passthrough, { now });
+        }
         newsEntries.push(...deriveWizardNewsEntriesFromGraphChange(beforeGraph, graph, { tick, createdAt: now }));
       }
     }
@@ -1002,6 +1030,20 @@ export function applyWorldPulseOutcomes({
 
   feed = appendWizardNewsEntries(feed, newsEntries, { now });
   state = refreshRelationshipMemory(state, graph, snapshot, { currentTick: tick });
+
+  // SPATIAL: fold the arrival queue back onto worldState — PRESENT only under the
+  // marker while impacts are in transit, DROPPED (dormant / byte-identical) when
+  // empty or on the aspatial path. ensureWorldState's conditional-ledger pass then
+  // clones it like every other conditional key.
+  if (spatialDigest) {
+    const nextArrivals = spatialArrivals && Object.keys(spatialArrivals).length ? spatialArrivals : null;
+    if (nextArrivals) {
+      state = { ...state, spatialArrivals: nextArrivals };
+    } else if (state && 'spatialArrivals' in state) {
+      const { spatialArrivals: _drop, ...rest } = state;
+      state = rest;
+    }
+  }
 
   return {
     worldState: state,

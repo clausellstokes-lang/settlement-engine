@@ -23,6 +23,7 @@ import {
 import { canonizeWorldState } from '../domain/worldPulse/worldState.js';
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { captureSpatialPack as liveCaptureSpatialPack } from '../lib/spatialPackCapture.js';
 
 // Hard ceiling on the frozen digest so a spatial canonize can never bloat a save
 // with megabytes of canon data. The dense-array digest holds a realistic ~8k-cell
@@ -42,9 +43,13 @@ const SPATIAL_DIGEST_MAX_BYTES = 400_000;
  * @returns {Promise<{ok:boolean, reason?:string, spatialCanonVersion?:number, digestBytes?:number}>}
  */
 export async function runSpatialCanonize({ set, get, campaignId, options = {} }) {
+  // The LIVE read-only iframe capture is the default (ITEM 0 — the keystone's
+  // deferred seam, now wired); tests inject a deterministic fixture capture. When
+  // no map view is mounted the live capture returns null ⇒ a byte-invisible no-op
+  // reported as `spatial_capture_unavailable`.
   const capture = typeof options.captureSpatialPack === 'function'
     ? options.captureSpatialPack
-    : async () => null;
+    : liveCaptureSpatialPack;
   const captured = await capture({ campaignId, get });
   if (!captured || !captured.pack) return { ok: false, reason: 'spatial_capture_unavailable' };
   const digest = buildSpatialDigest({

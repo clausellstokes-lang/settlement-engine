@@ -47,6 +47,7 @@ import { mintDirectedChannel, stablePart } from '../region/graph.js';
 import { clamp01 } from '../region/contestMath.js';
 import { isSubsystemActive } from './subsystemActivation.js';
 import { isFaithSpreadEnabled } from './simulationRules.js';
+import { activeSpatialDigest, mappedDistanceWeight } from '../spatial/distanceRead.js';
 import { normalizeStressor } from './stressors.js';
 import { PANTHEON_TUNING } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
@@ -341,12 +342,17 @@ export function faithCarriersOut(snapshot, fromId) {
  * convertId → Array<{ patron, strength }> with strength bounded 0..1 and deterministically
  * ordered. Deity-free ⇒ empty map ⇒ byte-identical. Consumed by the moral-institution
  * pressure lane to press converts' institutions toward their patron's plane.
- * @param {{ settlements?: Array<{ id?: (string|number), settlement?: { config?: { primaryDeitySnapshot?: { name?: string, alignmentAxis?: string, lawAxis?: string } } } }>, byId?: Map<string, { settlement?: object }>, regionalGraph?: object, relationships?: unknown[] }} snapshot
+ * @param {{ settlements?: Array<{ id?: (string|number), settlement?: { config?: { primaryDeitySnapshot?: { name?: string, alignmentAxis?: string, lawAxis?: string } } } }>, byId?: Map<string, { settlement?: object }>, regionalGraph?: object, relationships?: unknown[], worldState?: { spatialCanonVersion?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest } }} snapshot
  * @returns {Map<string, Array<{ patron: { name?: string, alignmentAxis?: string, lawAxis?: string }, strength: number }>>}
  */
 export function buildFaithReach(snapshot) {
   /** @type {Map<string, Array<{ patron: { name?: string, alignmentAxis?: string, lawAxis?: string }, strength: number }>>} */
   const reach = new Map();
+  // SPATIAL (5.5-M item 3): a distant patron's reach into a convert's institutions
+  // ATTENUATES with travel distance ("conversion pressure localizes"). digest is
+  // null (⇒ dw 1.0, byte-identical) unless the entitled spatial-canon marker is
+  // present on the snapshot's worldState.
+  const digest = activeSpatialDigest(snapshot?.worldState);
   for (const item of snapshot?.settlements || []) {
     const patron = item?.settlement?.config?.primaryDeitySnapshot;
     if (!patron) continue;
@@ -354,7 +360,8 @@ export function buildFaithReach(snapshot) {
     for (const { to, strength } of faithCarriersOut(snapshot, item.id)) {
       const target = snapshot?.byId?.get?.(String(to));
       if (!target) continue;
-      const sigma = clamp01(strength * neighbourFaithInfluence(bearerMass, faithMass(target.settlement)));
+      const dw = digest ? mappedDistanceWeight(digest, String(item.id), to) : 1;
+      const sigma = clamp01(strength * dw * neighbourFaithInfluence(bearerMass, faithMass(target.settlement)));
       if (sigma <= 0) continue;
       const list = reach.get(String(to)) || [];
       list.push({ patron, strength: sigma });
@@ -456,16 +463,20 @@ function neighbourIdsOf(snapshot, id) {
  * weighted by THEIR deity rank AND by the SIZE ASYMMETRY between that neighbour and this
  * settlement — a neighbouring metropolis's creed presses hard on a village, while a
  * hamlet's barely registers on a city (via neighbourFaithInfluence on faith mass).
- * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef @param {number} [targetMass]
+ * SPATIAL (5.5-M item 3): each contributing neighbour's influence is attenuated by
+ * travel distance from C when the spatial-canon digest is present — a distant co-
+ * adherent's prevalence presses less. spatialDigest null ⇒ dw 1.0 ⇒ byte-identical.
+ * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef @param {number} [targetMass] @param {string} [cid] @param {import('../spatial/distanceRead.js').SpatialDigest|null} [spatialDigest]
  */
-function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass) {
+function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest = null) {
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
     if (!snap || String(snap._deityRef || snap.name) !== String(deityRef)) continue;
     const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
     const influence = neighbourFaithInfluence(faithMass(nItem), targetMass);   // bigger neighbour ⇒ stronger pull
-    acc += PREVALENCE_PER_NEIGHBOUR * (0.5 + 0.5 * deityRankStrength(snap)) * influence;
+    const dw = spatialDigest && cid ? mappedDistanceWeight(spatialDigest, cid, nid) : 1;
+    acc += PREVALENCE_PER_NEIGHBOUR * (0.5 + 0.5 * deityRankStrength(snap)) * influence * dw;
   }
   return Math.min(PREVALENCE_MAX, acc);
 }
@@ -477,10 +488,10 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass) {
  * + corruption climate), AND by the CHRONICLE — recent settlement events that match the
  * faith's character spike its conversion (action-alignment, temporal + fading).
  * Occupation force-pull is layered on by the caller.
- * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number, crisisDisorder?: number }} args
+ * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number, crisisDisorder?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest|null }} args
  */
-function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder = 0 }) {
-  const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass));
+function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder = 0, spatialDigest = null }) {
+  const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest));
   // Receptivity: the settlement's mood resists alien creeds — but a COMPROMISED populace
   // resists LESS (frayed moral fabric), so deeper corruption opens the door wider.
   const counter = moodDeity ? incumbentCounterForce(deity, moodDeity) * (1 - RELIGION_LEGITIMACY_TUNING.COMPROMISE_MOOD_EROSION * clamp01(Number(lens?.compromise) || 0)) : 0;
@@ -523,6 +534,12 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   // recognition via neighbourIds, occupation faith-pull) are skipped; step 3 evolves
   // each settlement's pantheon in isolation.
   const spread = isFaithSpreadEnabled(rules);
+  // SPATIAL (5.5-M item 3): only lit when spread is ON *and* the entitled spatial-
+  // canon marker is present. Null ⇒ every distanceWeight below is 1.0 ⇒ the faith
+  // spread lane is byte-identical to the aspatial path (distant co-adherents count
+  // full). When present, carrier reach + regional prevalence attenuate by travel
+  // distance — conversion pressure localizes.
+  const spatialDigest = spread ? activeSpatialDigest(worldState) : null;
 
   /** @param {any} id */
   const nameFor = (id) => { const it = snapshot?.byId?.get?.(String(id)); return it?.name || it?.settlement?.name || String(id); };
@@ -584,7 +601,10 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
         if (strength < MIN_CARRIER) continue;
         const targetMass = faithMass(snapshot?.byId?.get?.(String(to))?.settlement);
-        note(to, deity, clamp01(strength * neighbourFaithInfluence(sourceMass, targetMass)));
+        // SPATIAL item 3: the effective carrier PULL (not the MIN_CARRIER existence
+        // gate above) attenuates with travel distance — a distant creed presses less.
+        const dw = spatialDigest ? mappedDistanceWeight(spatialDigest, fromId, to) : 1;
+        note(to, deity, clamp01(strength * dw * neighbourFaithInfluence(sourceMass, targetMass)));
       }
     }
     if (occupations) {
@@ -679,7 +699,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         // Site #1 (conversion pressure): amplify the target-side local strength — a
         // devout town is a fiercer battleground both to hold and to take. The
         // occupation lift (#2) inherits via this amplified strength (not double-counted).
-        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder }));
+        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest }));
         if (occupied) {
           const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
           if (pull) {
@@ -699,7 +719,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       const carrier = reaching?.get(dref)?.carrier ?? (dref === state.patronRef ? 0.5 : 0.25);   // home faith keeps innate footing
       // Site #1 (share targets): the SAME target-side piety amplification on every
       // present faith's growth toward its strength (hold AND take, symmetric).
-      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder }));
+      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest }));
     }
     advanceShares(state, strengthByRef);
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —

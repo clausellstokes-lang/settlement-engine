@@ -75,10 +75,10 @@ const DRIFT_REASON = 'Needs Relationship drift: war is a relationship dynamic, s
  * the source of truth — it re-reads the entitlement + generated-map + capture
  * gates at the call site, so this control is purely an affordance.
  *
- * NB: the live pack.cells capture is a deferred, fence-bounded seam (see the
- * KEYSTONE report), so today the action returns 'spatial_capture_unavailable' and
- * this control shows a truthful "needs the map view" note rather than silently
- * doing nothing. When the capture handler lands, the same control lights up.
+ * NB: the live pack.cells capture is wired (5.5-M) — a READ-ONLY one-shot read of
+ * the mounted FMG iframe. With no map view open the capture is unavailable, so the
+ * action returns 'spatial_capture_unavailable' and this control shows a truthful
+ * "open the world map" note; open the map and the same control maps the realm.
  */
 function SpatialCanonGate({ campaign, canWrite }) {
   const canonizeSpatial = useStore(s => s.canonizeCampaignWorldSpatial);

@@ -850,6 +850,44 @@
       }
     },
 
+    // ── Spatial pack capture (Phase 5.5 MODULATION — the keystone's live seam) ──
+    // READ-ONLY snapshot of the terrain cell arrays the parent needs to freeze a
+    // spatial digest at an entitled canonize: h (height), biome, r (river flag), p
+    // (cell centroid [x,y]), c (neighbour adjacency). It MUTATES NOTHING — it only
+    // copies the already-generated pack arrays out (the pure digest builder runs
+    // parent-side over this capture, never over the iframe). TypedArrays are
+    // converted to plain arrays so the parent's normalizeSpatialPack (which uses
+    // Array.isArray) reads them; p/c are already plain arrays. Because the pack is
+    // static in memory once generated, two captures of the same map are identical
+    // (the parent asserts this and freezes the first regardless — freeze-first).
+    'settlementEngine:getSpatialPack'(data, rid) {
+      try {
+        const cells = pack?.cells;
+        if (!cells || !cells.h || !cells.c) {
+          return reply(rid, { type: 'fmg:spatialPackReply', pack: null });
+        }
+        const plain = (arr) => (Array.isArray(arr) ? arr : (arr ? Array.from(arr) : []));
+        reply(rid, {
+          type: 'fmg:spatialPackReply',
+          pack: {
+            cells: {
+              h: plain(cells.h),
+              biome: plain(cells.biome),
+              r: plain(cells.r),
+              // p is an array of [x,y] pairs, c an array of neighbour-index arrays;
+              // both are already plain arrays in the pack — copy the outer array so
+              // the reply can't alias live pack state.
+              p: Array.isArray(cells.p) ? cells.p.map((pt) => (Array.isArray(pt) ? [pt[0], pt[1]] : pt)) : [],
+              c: Array.isArray(cells.c) ? cells.c.map((nb) => (Array.isArray(nb) ? nb.slice() : plain(nb))) : [],
+            },
+          },
+        });
+      } catch (err) {
+        console.warn('[sfBridge] getSpatialPack failed', err);
+        replyError(rid, 'fmg:spatialPackReply', err);
+      }
+    },
+
     'settlementEngine:getViewport'(data, rid) {
       reply(rid, { type: 'fmg:viewportReply', ...getCurrentViewport() });
     },

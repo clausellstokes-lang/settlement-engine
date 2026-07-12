@@ -233,10 +233,16 @@ export function createDefaultWorldState(campaign = {}) {
 //                        deepCloneConditionalLedger rejects arrays, so the digest
 //                        is object-shaped at the top level (its costField /
 //                        distanceMatrix arrays live INSIDE that object).
+//   • spatialArrivals  — the propagation ARRIVAL QUEUE (Phase 5.5 MODULATION):
+//                        cross-settlement regional impacts IN TRANSIT, keyed by
+//                        impact id → { arrivalTick, targetId, sourceId, impact }.
+//                        Materialized ONLY under the spatial-canon marker while
+//                        something is travelling; absent (byte-identical) on the
+//                        aspatial path and whenever the front is empty.
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
-  'spatialDigest',
+  'spatialDigest', 'spatialArrivals',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

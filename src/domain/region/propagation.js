@@ -1021,6 +1021,7 @@ function slimChange(change) {
  * @param {number} [args.maxDepth]
  * @param {number} [args.waveDecay]
  * @param {(string|null)} [args.now]
+ * @param {boolean} [args.queueImpacts]
  */
 export function propagateRegionalEvent(args = {}) {
   const {
@@ -1034,6 +1035,11 @@ export function propagateRegionalEvent(args = {}) {
     maxDepth = 1,
     waveDecay = 0.45,
     now = null,
+    // SPATIAL (5.5-M item 4): when false, derive + audit the impacts but do NOT
+    // queue them to the graph — the caller parks them in the worldState arrival
+    // queue instead (they land later, at their travel-distance arrival tick).
+    // Defaults true ⇒ every existing caller is byte-identical.
+    queueImpacts = true,
   } = args;
   const current = ensureRegionalGraph(graph || {}, { now });
   const localDelta = deriveLocalDelta(beforeSettlement, afterSettlement, { event: /** @type {import('./deriveRegionalState.js').RegionEvent} */ (event) });
@@ -1068,7 +1074,7 @@ export function propagateRegionalEvent(args = {}) {
     changes: (localDelta.changes || []).map(slimChange),
     impactIds: impacts.map(i => i.id),
   }, { now });
-  nextGraph = queueRegionalImpacts(nextGraph, impacts, { now });
+  if (queueImpacts) nextGraph = queueRegionalImpacts(nextGraph, impacts, { now });
 
   return {
     graph: nextGraph,

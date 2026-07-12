@@ -273,6 +273,12 @@ export function createMapBridge(getIframe, opts = {}) {
       call('settlementEngine:setViewport', { cx, cy, scale, duration }),
     fitMap: () => call('settlementEngine:fitMap'),
 
+    // ── Spatial pack capture (Phase 5.5 — read-only terrain snapshot) ─────
+    // One-shot READ of the FMG pack cell arrays for freezing a spatial digest at
+    // canonize. Read-only (no mutation); a generous timeout because it copies a
+    // full-map cell payload out of the iframe once.
+    getSpatialPack: () => call('settlementEngine:getSpatialPack', {}, { timeout: 20000 }),
+
     // ── Map snapshot (campaign save/load) ─────────────────────────────────
     saveSnapshot: () => call('settlementEngine:saveSnapshot', {}, { timeout: 15000 }),
     loadSnapshot: (snapshot) =>
