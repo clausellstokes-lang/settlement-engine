@@ -10,8 +10,17 @@ ledger — never from a session digest.
 > - 2026-07-13: Program opened on branch `review-fixes-2026-07-08` @ 62c81a0c (M11b calamity tip,
 >   clean tree). Phase S (survey) DISPATCHED: workflow `wf_c21bb055-cb9` — 28 Fable agents
 >   (18 subsystem readers + 10 dimension reviewers), running in background. Baseline full gate
->   (`npm run check`) running concurrently on the clean tree; result to be recorded here.
+>   (`npm run check`) on the clean tree: **GREEN, exit 0 — 8,348/8,348 tests (726 files),
+>   verify:dist 108/108** (2026-07-13, run under survey load; the known pipeline.property flake
+>   did NOT fire). Any red later in this program is program-caused until proven otherwise.
 >   Nothing committed by this program yet except this doc.
+> - 2026-07-13 ~19:40: Phase S landed WITH A CUT: 20/28 agents completed (9.4M survey tokens,
+>   1,837 tool uses, ~63min) → 208 findings (0 critical / 44 high / 85 medium / 79 low; 190
+>   surveyor-confirmed). 8 slices died on the 5h session limit (build-tooling-docs + 7 dimensions);
+>   re-dispatched post-reset via workflow resume (cached prefix + live re-runs). Phase A COMPLETE:
+>   assessment + full findings register committed as docs/COMPREHENSIVE_REVIEW_2026-07-13.md.
+>   Phase V DISPATCHED: Opus verifiers — 2 independent lenses per high finding, 1 per medium;
+>   79 lows deferred to implementation-time verification (recorded deferral, not dropped).
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
@@ -33,11 +42,10 @@ migrations, schema/persistence shape changes, data deletion, security posture, p
 behavior, budget raises, golden regens.
 
 ## Phase plan (checkboxes are the resume pointer)
-- [ ] **Phase S — SURVEY** (Fable): 18 subsystem readers + 10 dimension reviewers, structured
-      findings. Workflow `wf_c21bb055-cb9`; script + journal under the session dir (see Artifacts).
-- [ ] **Phase A — ASSESSMENT** (Fable main loop): synthesize into
-      `docs/COMPREHENSIVE_REVIEW_2026-07-13.md` (the deliverable: holistic assessment + the full
-      findings register). COMMIT it — that makes the survey durable across sessions.
+- [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
+      re-dispatched via resume of `wf_c21bb055-cb9`; their reports append to the register on landing.
+- [x] **Phase A — ASSESSMENT** (Fable main loop): committed as
+      `docs/COMPREHENSIVE_REVIEW_2026-07-13.md` (holistic assessment + 208-finding register).
 - [ ] **Phase V — VERIFY** (Opus, `model:'opus'` on every agent): adversarial verification of every
       actionable finding (refuters; majority vote on majors). Verdicts appended to the review doc.
 - [ ] **Phase P — WAVE PLAN** (Fable architect): confirmed findings → fix waves (small, independently
