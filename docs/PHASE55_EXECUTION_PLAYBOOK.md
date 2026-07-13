@@ -257,7 +257,36 @@ margin). Rulings:
   set the const to measured+~50B, never exceed a ceiling the owner has to re-ratify). ⚠️ ACCEPTED
   DRIFT: full_simulation→worldProgression:'autonomous' changes a rulesMatchPreset key, so pre-M10b
   saved full-sim campaigns re-infer a different presetId (display-only; same class as SEASONS-A).
-  Budget: NOT a raise — FP-2 reclaim funds it.
+  Budget: NOT a raise — FP-2a's −2,448 B reclaim funds it (margin 2,468 B; M10b +86B fits).
+  ── M10b IMPLEMENTATION-READY FLOW DESIGN (surveyed 2026-07-13; decided on best judgment, VETOABLE) ──
+  SURFACE MAPPED: worldState.tick is the authoritative clock; advanceCampaignWorld(campaignId, interval,
+  {now}) (campaignWorldPulseSlice.js:322) runs ticksForInterval(interval) deterministic one-week kernel
+  calls; campaign open = setActiveCampaign (campaignSlice.js:614). DETERMINISM IS INHERITED: catch-up =
+  loop N one_week advanceCampaignWorld calls ⇒ byte-identical to N manual one-week advances BY
+  CONSTRUCTION (same kernel, same N) — the soak just confirms it.
+  THE DECISIONS (each vetoable):
+  1. worldProgressionOf returns 'living'/'autonomous' verbatim (they are already valid enum values). The
+     existing `=== 'frozen'` consumers are UNAFFECTED (living/autonomous ≠ frozen, same as dm_advanced) ⇒
+     no advance-block change. NEW accessor advancesOnOpen(rules) = living||autonomous.
+  2. CATCH-UP FLOW: on setActiveCampaign of an advancesOnOpen campaign, N = min(floor((now −
+     lastLivingAdvanceAt)/WEEK_MS), CATCH_UP_CAP_WEEKS=26); loop N one_week advanceCampaignWorld({now});
+     autoResolve = (worldProgression==='autonomous') — autonomous auto-resolves proposals, 'living'
+     QUEUES them (DM reviews the backlog on open). Past cap: run 26, set stamp = now (calendar advances,
+     sim stops at cap — the owner ruling).
+  3. ⚠️ NEW PERSISTED STATE = worldState.lastLivingAdvanceAt (wall-clock ms) — this is the OWNER'S
+     MOST-BITTEN BUG CLASS. It MUST be traced + pinned across EVERY lifecycle path: canonize (stamp = now),
+     each advance (re-stamp), UNDO (undoLastPulse must restore the prior stamp — else catch-up double-runs),
+     REGEN/clone, MIGRATE (absent on legacy saves ⇒ treat as "no catch-up owed", never a 1970 epoch delta),
+     persist round-trip. Absent ⇒ advancesOnOpen is false-by-default (dm_advanced) ⇒ goldens byte-identical.
+     `now` is INJECTED (options.now), never Date.now() in the engine — the store passes it at the call site.
+  4. Preset: full_simulation gains worldProgression:'autonomous' + commodityFlowEnabled:true +
+     allyIntelSharingEnabled:true (the last two just LIGHT already-built M6a/M9b features). UI: flip the two
+     `false` flags at SimulationRulesAxes.jsx:33-34 to `true`.
+  5. GATE: goldens byte-identical (default rules ⇒ dormant); a determinism pin (26 catch-up == 26 manual,
+     byte-identical); an UNDO-survives pin (stamp restored) + a legacy-save pin (absent stamp ⇒ no phantom
+     catch-up); verify:dist re-measures the +86B (must fit the 2,468 B margin) + ratchets the budget DOWN
+     to the post-M10b/W5 closure; any-cast 2252. STATUS: NOT built — the persisted-state lifecycle deserves
+     a fresh focused pass (Opus @ session-end 2026-07-13 declined to rush the owner's most-bitten class).
 - (W5) ✅ RULED — RE-APPLY after FP-2, no raise. Cosmetic sweep, branch 312a5025 (reachable via
   claude/adoring-wescoff-6a25a8). CORRECTIONS: true delta 68 files (+3355/-1077) vs its OWN base
   df217415; a direct `git merge` applies -25,330 deletions / 189 files and REVERTS the M-ladder —
