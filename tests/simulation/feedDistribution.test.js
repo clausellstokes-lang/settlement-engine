@@ -19,15 +19,21 @@
  *     falling back to the transition kind),
  *   - assert the most common type's share is under the anti-monoculture gate.
  *
- * MEASURED BASELINE (this tree, 2026-07): 1200 entries across the 5-campaign
- * corpus span 31 distinct types; the dominant type ("population_growth") is
- * 23.6% of the feed, then npc_suppress 17.9%, crime_pressure 10.6%. The gate is
- * the anti-monoculture ceiling (0.45) — roughly double the measured max, so
- * ordinary tuning has generous headroom while a regression that re-introduces a
- * single-type flood (e.g. the pre-E4 guaranteed overlord-weakness beat, which
- * does NOT appear in the top ranks here) trips it. Determinism:
- * advanceCampaignWorld threads its own seeded RNG + codepoint sorts, so the same
- * corpus produces the same feed byte-for-byte; the shares above are reproducible.
+ * MEASURED BASELINE (this tree, 2026-07; arc-aware 240-cap retention): 1200
+ * entries across the 5-campaign corpus span 32 distinct types; the dominant type
+ * ("population_growth") is 25.8% of the feed, then npc_suppress 12.7%,
+ * crime_pressure 11.4%. wizardNews.capEntries keeps the RECENCY window intact and
+ * only RESCUES the orphaned heads of major arcs that recency would flush (one slot
+ * per story), so each campaign's feed — which reaches the 240-cap here — stays
+ * close to the pure-recency distribution (the earlier pure-recency baseline was
+ * population_growth 23.6%, npc_suppress 17.9%, crime_pressure 10.6%; the head
+ * rescues surface one extra type and shift the tail). The gate is the
+ * anti-monoculture ceiling (0.45) — well above the measured max, so ordinary tuning
+ * has generous headroom while a regression that re-introduces a single-type flood
+ * (e.g. the pre-E4 guaranteed overlord-weakness beat, which does NOT appear in the
+ * top ranks here) trips it. Determinism: advanceCampaignWorld threads its own
+ * seeded RNG + codepoint sorts, so the same corpus produces the same feed
+ * byte-for-byte; the shares above are reproducible.
  */
 
 import { describe, expect, test } from 'vitest';
