@@ -63,6 +63,7 @@ import { advanceEntrepotLayer } from './entrepotKernel.js';
 import { entrepotTargetPremium } from '../spatial/entrepots.js';
 import { releaseMigrationArrivals, dispatchMigrations, collectRealizedEmigrationEvents } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
+import { advanceCalamity } from './calamityKernel.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
@@ -1407,7 +1408,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // read the post-outcome factionStates (this tick's factionPatches and
   // capture transitions included), and this file owns the pulse sequencing.
   // Identity no-op per settlement: an untouched roster keeps its reference.
-  const settlementUpdates = applied.settlementUpdates.map(update => {
+  let settlementUpdates = applied.settlementUpdates.map(update => {
     let projected = projectFactionStatesOntoSettlement(
       update.settlement, memoryState.factionStates, update.saveId, { tick: worldState.tick },
     );
@@ -1840,6 +1841,44 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (pestilence.changed) memoryState = pestilence.worldState;
     if (pestilence.newsEntries.length) {
       wizardNews = appendWizardNewsEntries(wizardNews, pestilence.newsEntries, { now });
+    }
+  }
+  // Phase 5.5 mover M11b — CALAMITY (the natural disaster). LAST in the tick (its
+  // strike reads THIS tick's fully-settled world). A VERY RARE annual draw: on a
+  // year-boundary crossing, each settlement rolls the 1/(HAZARD_YEARS × N) hazard
+  // (cooldown-via-stamp — the settlement's own calamityHistory is the record), and
+  // on a strike the terrain-keyed disaster knocks down K non-required institutions
+  // (subsumption FIRST — demote/collapse/destroy; required NEVER selected), kills a
+  // bounded tier-scaled aggregate fraction, mints the NAMED permanent stamp, and
+  // sets the LONG EMERGENT TAIL loose: destroyed producers break their activeChains
+  // (M2 severs downstream next tick), the mass exodus rides M4's REALIZED-DEBIT path
+  // (collectRealizedEmigrationEvents → dispatchMigrations — conservation asserted;
+  // aspatial falls back to the existing population-flight term), the population loss
+  // demotes the tier via popToTier (never forced), and a "disaster response"
+  // legitimacy condition puts the ruler under coup-readable pressure. GATED behind
+  // the CL flag disastersEnabled ⇒ DORMANT (a complete no-op) when off ⇒ byte-
+  // identical (aspatial AND spatial goldens). AGGREGATE-only — no named NPC touched.
+  {
+    const calamity = advanceCalamity({
+      settlementUpdates,
+      worldState: memoryState,
+      snapshot: postTimeSnapshot,
+      digest: memoryState.spatialDigest,
+      pIndex,
+      rules: simulationRules,
+      rng: rng.fork('calamity'),
+      season: roadSeason,
+      prevWeeks: startingWorldState.calendar?.elapsedWeeks ?? 0,
+      weeks: worldState.calendar.elapsedWeeks,
+      tick: worldState.tick,
+      now,
+    });
+    if (calamity.changed) {
+      memoryState = calamity.worldState;
+      settlementUpdates = calamity.settlementUpdates;
+      if (calamity.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, calamity.newsEntries, { now });
+      }
     }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
