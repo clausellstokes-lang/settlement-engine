@@ -1,6 +1,7 @@
-import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
+import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
+import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
 import { useStore } from '../../store/index.js';
@@ -79,6 +80,11 @@ function NewsEntry({ entry, compact = false, nameById }) {
   const settlementNames = (entry.settlementIds || [])
     .map(id => nameById?.get(String(id)))
     .filter(Boolean);
+  // The crier's voice: a short, in-world line a herald would proclaim about a
+  // war/faith/trade beat. Pure display sidecar (domain/display/newsVoice.js);
+  // null for out-of-scope news, so the quote only shows when it has something
+  // to say.
+  const voiceLine = newsVoiceLine(entry);
 
   return (
     <article style={{
@@ -136,6 +142,24 @@ function NewsEntry({ entry, compact = false, nameById }) {
             overflowWrap: 'anywhere',
           }}>
             {entry.summary}
+          </p>
+        )}
+
+        {voiceLine && (
+          <p style={{
+            display: 'flex',
+            gap: 6,
+            alignItems: 'flex-start',
+            margin: '6px 0 0',
+            color: MUTED,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            fontStyle: 'italic',
+            lineHeight: 1.45,
+            overflowWrap: 'anywhere',
+          }}>
+            <Megaphone size={13} color={MUTED} style={{ flexShrink: 0, marginTop: 2 }} />
+            <span>&#8220;{voiceLine}&#8221;</span>
           </p>
         )}
 
