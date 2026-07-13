@@ -1,6 +1,13 @@
 # THE ROUND-21+ BACKLOG PROGRAM — PLAN
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - Wave 2 (IMPLEMENTED + VALIDATED, ⚠️ BLOCKED on FP-2, pending branch 2f4f7b58) — FEED RETENTION:
+>   arc-aware 240-cap that rescues orphaned major-arc HEADS while preserving the recency window.
+>   seasonsMiniSoak FIXED, goldens byte-identical, feedDistribution re-baselined, sim suite 47/47.
+>   BUT the feed engine wizardNews.js is EAGERLY store-imported → +363B first-paint (1,255,965→
+>   1,256,348), OVER the 1,255,985 ratchet. Owner ruled FP-2-first (no raise), so it lands after FP-2
+>   reclaims headroom (or an owner-authorized raise). **KEY DISCOVERY: "budget-free" ≠ engine-touching;
+>   only LAZY DISPLAY additions + byte-neutral cleanups are truly budget-free — new engine code is eager.**
 > - Wave 1 (shipped, 25003430) — VOICE SIDECARS: `src/domain/display/newsVoice.js` (pure display
 >   read-model, zero imports) + `WizardNewsPanel` wiring; each war/faith/trade news item gains a
 >   deterministic in-world crier line (FNV-1a variant, impactKind-primary categorization, 57 lines).
@@ -113,10 +120,22 @@ content/mechanic systems (miracles, peace treaties) get a design pass before an 
 ## Owner-decision queue (parked, deliberate)
 - **Budget path — RULED (parallel session, 2026-07-13): FP-2-first, NO raise.** The owner chose to
   reclaim first-paint headroom via FP-2 (the store-slice split) rather than raise CLOSURE_BUDGET_BYTES.
-  So the eager backlog items (numeric prices, map-as-legibility) and M10b unblock behind FP-2's reclaim,
-  NOT a budget bump — see the sibling branch `claude/phase55-parking-lot` (4 commits off 5ea117ec,
-  unmerged) and memory `parking-lot-adjudication-2026-07-13`. This program stays lazy/budget-free until
-  that headroom lands; RECONCILE with the parking-lot branch before any eager round-21 wave.
+  So the eager backlog items and M10b unblock behind FP-2's reclaim, NOT a budget bump — see the sibling
+  branch `claude/phase55-parking-lot` (4 commits off 5ea117ec, unmerged) and memory
+  `parking-lot-adjudication-2026-07-13`. RECONCILE with the parking-lot branch before any eager wave.
+- **⚠️ BUDGET FORK (surfaced 2026-07-13, awaiting owner): Wave 2 feed-retention is +363B eager and
+  blocked.** Two owner directives are in tension: the FP-2-first ruling (no raise) vs this session's
+  "take the risk if objectively better." I decided the ruling-consistent path (defer behind FP-2), but
+  a budget raise is OWNER-GATED and cannot be self-enacted. OWNER PICKS: (a) enact the parked +1,000
+  raise (1,255,985→~1,256,985, W5 precedent) to land Wave 2 (and unblock other eager waves) NOW, or
+  (b) keep FP-2-first — Wave 2 (pending branch 2f4f7b58) + eager waves wait for FP-2's reclaim.
+  Recommendation: (b) unless the owner wants to accelerate; feed-retention only matters at scale
+  (>240-entry feeds), which are the long-run campaigns FP-2 targets anyway.
+- **Which waves are budget-gated (need FP-2/raise) vs budget-free:** budget-FREE (do now) = lazy display
+  (numeric-prices read-model, voice sidecars ✓) + byte-neutral cleanups (Wave 3 pre-stamp collapse) +
+  constant retunes (Wave 5 population, though that shifts goldens → owner regen) + reviews (Wave 4).
+  Budget-GATED (need FP-2) = feed-retention (Wave 2), warding-vs-scrying (new engine mechanic),
+  map-as-legibility (eager UI). Ruins-as-artifacts stays blocked on M11b.
 - **Ladder tail vs backlog** — M11 (last mover) and M10b remain unbuilt; owner directed the backlog
   first. RUINS needs M11b. Flag if the owner wants M11 slotted in. (M10b is now owned by the parking-lot
   stream: CAP=26, FP-2-gated.)
