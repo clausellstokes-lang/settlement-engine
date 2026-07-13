@@ -1,6 +1,13 @@
 # THE ROUND-21+ BACKLOG PROGRAM — PLAN
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - Wave 1 (shipped, 25003430) — VOICE SIDECARS: `src/domain/display/newsVoice.js` (pure display
+>   read-model, zero imports) + `WizardNewsPanel` wiring; each war/faith/trade news item gains a
+>   deterministic in-world crier line (FNV-1a variant, impactKind-primary categorization, 57 lines).
+>   Byte-inert: closure UNCHANGED 1,255,965, three goldens byte-identical, lazy-only. +6 pins (newsVoice
+>   11→17 tests). Verify: independent full gate + a 5-lens adversarial review (no must-fix, no scope
+>   violation) + a fix-up round. ONE PRE-EXISTING env red: `pipeline.property` seed-sensitivity times
+>   out at 20s under machine load ~273 — CONFIRMED identical on untouched base 5ea117ec, not this wave.
 > - Program opened 2026-07-13 (Opus 4.8 main loop, owner-directed) from the playbook §7.2 backlog.
 >   Owner triage calls (this session): first-wave pick DELEGATED to me → voice sidecars; budget
 >   posture = **lazy/budget-free only** (no CLOSURE_BUDGET_BYTES raise this program without a fresh
@@ -48,7 +55,7 @@ a plan-note commit. **Push/deploy/master-merge are NEVER part of the loop** (own
 
 ## The waves (triaged 2026-07-13; sequenced by value/cost/dependency/budget)
 
-### Wave 1 — VOICE SIDECARS for war/faith/trade news (risk: low) — IN PROGRESS
+### Wave 1 — VOICE SIDECARS for war/faith/trade news (risk: low) — SHIPPED (25003430)
 Item: §7.2 "W2-style voice sidecars for war/faith/trade news" (the playbook's named first win).
 Design: a new display read-model `src/domain/display/newsVoice.js` resolves a `wizardNews` entry to an
 in-world crier/herald VOICE line — categorized war | faith | trade from `channelType`+`impactKind`,
@@ -93,18 +100,38 @@ budget call; everything that couples to the unbuilt ladder tail (ruins→M11b) w
 content/mechanic systems (miracles, peace treaties) get a design pass before an implementer wave.
 
 ## Deferred (documented — NOT bugs to re-find)
-- (none yet)
+- **Wave 1 — "convoy" wording kept.** The content-scope review flagged "convoy" (×2) as faintly modern;
+  it is period-plausible and kept. Not a defect.
+- **Wave 1 — voice line renders on every arc stage, kept.** A multi-stage news arc shows a crier line
+  on the head AND on each earlier stage (each stage is a distinct beat with its own voice); the earlier
+  stages are collapsed behind `<details>` by default, so it is opt-in detail, not a wall of quotes.
+  Considered and kept, not a bug.
+- **Wave 1 — VOICE_FLOOR genericness, kept.** The per-category floor is the never-reached fallback (all
+  12 cells authored + `bucketFor` total + the empty-array guard); its plainer register is by design and
+  never renders. If a floor line is ever promoted into a live cell, rewrite it to cell register first.
 
 ## Owner-decision queue (parked, deliberate)
-- **Budget raise** — the eager items (numeric prices, map-as-legibility, M10b) stay parked until the
-  owner ratifies a CLOSURE_BUDGET_BYTES raise. Recommendation carried from triage: batch them behind
-  one measured raise rather than piecemeal.
+- **Budget path — RULED (parallel session, 2026-07-13): FP-2-first, NO raise.** The owner chose to
+  reclaim first-paint headroom via FP-2 (the store-slice split) rather than raise CLOSURE_BUDGET_BYTES.
+  So the eager backlog items (numeric prices, map-as-legibility) and M10b unblock behind FP-2's reclaim,
+  NOT a budget bump — see the sibling branch `claude/phase55-parking-lot` (4 commits off 5ea117ec,
+  unmerged) and memory `parking-lot-adjudication-2026-07-13`. This program stays lazy/budget-free until
+  that headroom lands; RECONCILE with the parking-lot branch before any eager round-21 wave.
 - **Ladder tail vs backlog** — M11 (last mover) and M10b remain unbuilt; owner directed the backlog
-  first. RUINS needs M11b. Flag if the owner wants M11 slotted in.
+  first. RUINS needs M11b. Flag if the owner wants M11 slotted in. (M10b is now owned by the parking-lot
+  stream: CAP=26, FP-2-gated.)
 - **population-attractor retune** — a shipped, owner-delegated M4 constant; re-tuning changes same-seed
   outputs → surface soak findings + recommendation, owner ratifies before any golden shift.
 
 ## Judgment calls (each vetoable)
+> Wave 1 decisions (delegated 2026-07-13; each vetoable):
+> - Categorization is **impactKind-primary**: an entry's impactKind classifies it (faith/war/trade)
+>   first, and channelType is only a fallback when impactKind is uninformative. Chosen over the initial
+>   per-category OR (which let a war *channel* outrank a trade *impact*) because the voice should follow
+>   what the news IS, not the channel it rode. Byte-inert on real entries (impactKind alone classifies
+>   every current entry); it only differs on the war-channel + trade-impact cross case. Veto reverts the
+>   newsVoiceCategory ordering in newsVoice.js.
+
 > Program open (delegated 2026-07-13; each vetoable; all favor the owner's stated values):
 > - Chose **voice sidecars** as Wave 1 (owner delegated the pick). Cheapest high-value item, lazy,
 >   the playbook's named first win. Veto → pick another Wave-1 item; nothing is committed yet.
