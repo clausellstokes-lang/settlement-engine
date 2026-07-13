@@ -64,6 +64,7 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | Design doc (companion) | many (98e2aed8…d5672d31 range) | 20 owner rounds + PARTS I-VII (6 grounding passes); §11 control layer; II.5 + VI.4 decisions settled |
 | Parking-lot F24 fix | c85781f0 (cherry-pick of 6faa1045) | the STRANDED F24 fix landed on review-fixes: AccountPage profileSourceKey NUL join-separator → '|' (ephemeral memo, behavior-safe). src/ NUL scan 2→1 (the remaining one is the supplyCompleteness delimiter, §0.0.2). eslint clean; account smoke 2/2 |
 | Parking-lot 5.5-K freeze-first guard | 47ccd6dd | +3 pins for the previously-uncovered live-capture double-read (differ⇒warn+return-FIRST; match⇒no-warn; throw⇒swallowed). Structural-prevention; 0 product code, 0 first-paint bytes. Seam already fully wired 5.5-M @ 18fc15f2 → §0.6 stale note corrected |
+| FP-2a aiSlice reclaim (first store-slice split) | 715fe7b2 | −2,448 B closure (1,255,965→1,253,517) via the loadEngine pattern: lib/ai.js + narrativeMutations.js (both SOLE-imported by aiSlice, reached only from async actions after the sync prefix) dynamic-imported at their call sites, memoized. NOT the §0.7 eager-stub/body-extraction — that defers each action's sync prefix (set(aiLoading)+abort stamp) and broke F18. Budget UNCHANGED 1,255,985 (headroom now funds M10b+W5). Recorded shift: generateNarrative invoked one microtask later (loadEngine ordering); F18 abort contract intact; 2 F18 tests yield one tick. Goldens store-free ⇒ byte-identical. Gate: full suite 8,259/8,259; verify:dist 18/18 |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
 - BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
@@ -145,7 +146,11 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   hold is satisfied — the owner decided, not the manager) — see §0.6.0. FP-2-first funding (no raise);
   M10b catch-up CAP=26 calendar-advances-past-cap; F24 AccountPage fixed (c85781f0); 5.5-K stale note
   corrected + guarded (47ccd6dd). Working branch claude/phase55-parking-lot off review-fixes-2026-07-08.
-- FP-2 STORE-SLICE SPLIT: SPECCED + READY — NOT started (2026-07-13, Opus). Full implementation-ready
+- FP-2a aiSlice: ✅ LANDED 715fe7b2 (2026-07-13, Opus) — −2,448 B closure via the loadEngine dep-import
+  pattern (§0.7.3 correction: the eager-stub/body-extraction defers sync prefixes — do NOT use it).
+  Budget still 1,255,985; the reclaim FUNDS M10b+W5 with no raise. FP-2b/c (settlementSlice, campaign
+  trio) are OPTIONAL further ratchet-down (same dep-import pattern), NOT needed for the endgame.
+- FP-2 STORE-SLICE SPLIT (spec): SPECCED + READY (2026-07-13, Opus). Full implementation-ready
   spec at §0.7 (design + byte-identity de-risking + sequence). The ratified shared unblock; lands BEFORE
   M10b/W5 as its own focused wave (FP-2a aiSlice first). No FP-2 code written this session.
 - W5 RE-MERGE: ✅ RULED FP-2-first (§0.6.1) — re-apply after FP-2, no raise; MUST cherry-pick (a direct
@@ -305,7 +310,22 @@ state ⇒ lazy registration cannot break rehydration. Verifier estimate ~80–13
 ~25K); the owner-need is only ~976B (M10b +86B + W5 ~890B) — any reclaim clearing that with margin funds
 BOTH and lets the budget RATCHET DOWN.
 
-### 0.7.3 THE DESIGN — SAFE VARIANT (async-orchestrator lazification; ZERO race)
+### 0.7.3 THE DESIGN
+⚠️ CORRECTION (FP-2a @ 715fe7b2 proved it): the body-extraction below is WRONG. Moving an async
+action's BODY behind `await import()` defers the action's SYNCHRONOUS PREFIX (the guards, set(loading),
+the abort-controller stamp that run before the first real await) by a microtask — observable, and it
+broke the aiSlice F18 abort tests. The CORRECT pattern (used by FP-2a, and by settlementSlice's
+loadEngine all along): KEEP the action eager in xSlice.js; dynamic-import only its heavy SOLE-IMPORTED
+DEPS at the call site, AFTER the sync prefix (`const { generateNarrative } = await loadAiLib();` right
+before the transport call). Memoize the loader. This reclaims the deps' chunk with the sync prefix
+intact; the one shift is the dep-consuming call fires one microtask later (benign; matches loadEngine).
+Measure per slice — FP-2a's reclaim was 2,448 B (mostly lib/ai.js), NOT the ~25K the verifier guessed
+(the orchestration BODY code stays eager; only sole-imported deps reclaim). FP-2a already funds M10b+W5;
+FP-2b (settlementSlice) + FP-2c (campaign trio) are OPTIONAL further ratchet-down, same dep-import
+pattern. The eager-stub/body-extraction design that follows is SUPERSEDED — kept only as the record of
+why it fails.
+
+### 0.7.3-OLD THE DESIGN — SUPERSEDED eager-stub variant (do NOT use; see the correction above)
 Each heavy slice mixes small SYNC setters/getters with big ASYNC orchestrators (generateSettlement,
 requestNarrative/DailyLife/Progression, importGalleryMap*, advance/preview worldpulse, …). The async
 bodies are the bulk of the reclaim AND the only ones a lazy stub can serve WITHOUT a timing race — a
