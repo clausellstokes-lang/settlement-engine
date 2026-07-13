@@ -280,6 +280,62 @@ margin). Rulings:
   MUST hold; the full golden battery + any-cast 2252 gate every step. persist partialize never persists
   these slices (store/index.js:71), so rehydration can't break.
 
+## 0.7 FP-2 WAVE SPEC (implementation-ready; owner ruled FP-2-first 2026-07-13)
+The ratified store-slice split, written to the depth an Opus implementer executes without architectural
+guessing (§0.1). It is the shared unblock for M10b + W5.
+
+### 0.7.1 THE KEY DE-RISKING (verified 2026-07-13 — CORRECTS the FP-2 verifier's "dominant risk")
+The byte-identity GOLDENS ARE STORE-FREE: no test under tests/property/*Golden.test.js (nor tests/
+generators|domain|build|simulation) imports store/index.js, useStore, or any heavy-slice creator
+(grep-verified). The generator/worldPulse/pdf goldens exercise the PURE headless engine directly (the
+store's own comment: the generator is "runnable headlessly … free of any zustand/react import"); the
+slices reach the engine via DYNAMIC loadEngine() (settlementSlice.js:28-33 = import('../generators/…')),
+so the ~529KB engine chunk is ALREADY lazy. ⇒ An FP-2 store refactor CANNOT shift golden bytes —
+same-seed byte-identity (law 1) is ORTHOGONAL to this wave. Real blast radius = the ~27 STORE-BEHAVIOR
+tests (tests/store/*, tests/joins/* — they drive the slices' actions directly) + verify:dist (reclaim +
+budget). This makes FP-2 materially SAFER than the verifier feared.
+
+### 0.7.2 WHAT RECLAIMS (and what does NOT)
+Reclaim = the heavy slices' ORCHESTRATION code (action bodies), NOT their state (small) and NOT the
+generator (already lazy). Heavy slices, imported ONLY by store/index.js (grep-verified): settlementSlice
+(91,648B src) / aiSlice (60,313B) / campaignSlice (31,847B) / campaignRegionalSlice (30,931B) /
+campaignWorldPulseSlice (35,376B). persist partialize (store/index.js:71) NEVER persists any heavy-slice
+state ⇒ lazy registration cannot break rehydration. Verifier estimate ~80–130K minified reclaim (floor
+~25K); the owner-need is only ~976B (M10b +86B + W5 ~890B) — any reclaim clearing that with margin funds
+BOTH and lets the budget RATCHET DOWN.
+
+### 0.7.3 THE DESIGN — SAFE VARIANT (async-orchestrator lazification; ZERO race)
+Each heavy slice mixes small SYNC setters/getters with big ASYNC orchestrators (generateSettlement,
+requestNarrative/DailyLife/Progression, importGalleryMap*, advance/preview worldpulse, …). The async
+bodies are the bulk of the reclaim AND the only ones a lazy stub can serve WITHOUT a timing race — a
+sync setter cannot await a dynamic import on first call. So:
+- Split each heavy slice into EAGER `xSlice.js` (state + SYNC actions + ASYNC stubs) and LAZY
+  `xSliceBody.js` (the async orchestrator bodies + heavy helpers they pull).
+- Each ASYNC action becomes a stub: `async (...a) => { await ensureXBody(set,get); return get().name(...a) }`,
+  where ensureXBody idempotently dynamic-imports xSliceBody ONCE and runs installXBody(set,get), which
+  set()-merges the real async actions OVER the stubs; call #2 onward hits the real action.
+- SYNC actions + all state STAY EAGER, unchanged (small code; no race, no contract change).
+- MANIFEST + WALKER (structural-prevention): xSlice.js exports ASYNC_ACTION_NAMES (the stub list); a
+  walker test asserts it EXACTLY matches the async actions installXBody provides — so a new async action
+  can't be added to the body without a stub (which would 404 the eager call before hydration).
+  @enforced-by a new tests/store/lazySliceManifest.test.js.
+REJECTED VARIANT (recorded, per deep-work): a single eager-microtask hydration of the WHOLE slice
+(sync + async) avoids the split but leaves a real-if-practically-impossible race for a sync setter fired
+before the microtask install resolves — a quiet-lie risk. The async-only split has NO race and is the
+recommended first cut; a later pass MAY lazify big sync bodies (recordSnapshot/revertToSnapshot/applyEvent
+in settlementSlice) ONLY behind a proven-safe sync-hydration guard, owner-reviewed.
+
+### 0.7.4 SEQUENCE + GATE (one gateable commit per slice — foundation-then-consumers)
+Prove the pattern on ONE slice first (recommend aiSlice — clean async orchestrators, verifier floor
+~25K), MEASURE the reclaim via a build + tests/build/vendorPdfLazy.test.js, verify that slice's store
+tests + the FULL suite green + the goldens still byte-identical (proof-by-running: they can't change),
+then extend slice-by-slice: FP-2a aiSlice → FP-2b settlementSlice → FP-2c campaign trio. After the LAST
+slice, RATCHET CLOSURE_BUDGET_BYTES DOWN to the new measured closure (only-shrinks) — that ratchet is
+what funds M10b + W5 at no raise. Per-wave gate = the slice's store/join tests + full suite + build +
+verify:dist + any-cast 2252 + the manifest walker; one commit per slice; ledger row per §0.3-7.
+THEN unblocked: M10b (§0.6.1, CAP=26, re-measure the +86B at build) and W5 (§0.6.1, cherry-pick onto the
+reclaimed budget — NEVER merge 312a5025 directly).
+
 ---
 
 # PART 1 — 5.5-K: THE KEYSTONE (brief committed: docs/briefs/KEYSTONE_BRIEF.md)
