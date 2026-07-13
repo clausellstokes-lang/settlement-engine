@@ -30,6 +30,8 @@ import {
   prospectiveFloorTick,
   rumorEventKey,
   tradeNeighbours,
+  smugglePathNeighbourMap,
+  RUMOR_CARRIER_CRIMINAL,
 } from '../../src/domain/spatial/rumorNetwork.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -65,7 +67,7 @@ function majorEntry({ ref = 'evt1', tick = 5, witnesses = ['a'], score = 90, sev
 }
 
 /** Drive N ticks of the pure advance and return the final ledgers. */
-function drive({ ids, graph, entries, mode, seed = 'rumor-test', from = 5, to = 20, worldExtra = {} }) {
+function drive({ ids, graph, entries, mode, seed = 'rumor-test', from = 5, to = 20, worldExtra = {}, smugglePaths = null }) {
   const digest = digestFor(ids);
   let ledgers = null;
   for (let tick = from; tick <= to; tick += 1) {
@@ -82,6 +84,7 @@ function drive({ ids, graph, entries, mode, seed = 'rumor-test', from = 5, to = 
       graph,
       tick,
       rng,
+      smugglePaths,
     });
     if (result.changed) ledgers = result.next;
   }
@@ -505,5 +508,38 @@ describe('helpers', () => {
     expect(merged.completeness01).toBe(0.95);           // the better telling supersedes
     expect(merged.corroborationRoots).toEqual(['t0:evt1@a', 't0:evt1@e']); // union, sorted
     expect(merged.relayedTick).toBe(8);                 // the guard stamp survives
+  });
+});
+
+// ── M7 — the CRIMINAL / underground rumor carrier (round 9) ───────────────────
+describe('M7 — the criminal rumor carrier (smuggle runs carry news)', () => {
+  it('smugglePathNeighbourMap links a run\'s endpoints both ways with a crime-prefixed edge', () => {
+    const map = smugglePathNeighbourMap([['harbor', 'freehold']]);
+    expect(map.get('harbor').map((n) => n.neighbourId)).toEqual(['freehold']);
+    expect(map.get('freehold').map((n) => n.neighbourId)).toEqual(['harbor']);
+    // Codepoint-stable, shared both directions, never colliding with the trade/army lanes.
+    expect(map.get('harbor')[0].edgeId).toBe('crime.freehold.harbor');
+    expect(map.get('freehold')[0].edgeId).toBe('crime.freehold.harbor');
+  });
+
+  it('is EMPTY (dormant) when no smuggle paths are supplied — the criminal lane is off', () => {
+    expect(smugglePathNeighbourMap(null).size).toBe(0);
+    expect(smugglePathNeighbourMap([]).size).toBe(0);
+    expect(RUMOR_CARRIER_CRIMINAL).toBe('criminal');
+  });
+
+  it('a smuggle run carries news to a town NO trade channel reaches (the underground conduit)', () => {
+    // 'a' and 'b' share NO trade channel — the honest network never connects them. A smuggle
+    // run a↔b is the only conduit; the criminal carrier delivers the rumor of the event at 'a'.
+    const ids = ['a', 'b'];
+    const graph = { channels: [] }; // no trade edges at all
+    const noCarrier = drive({ ids, graph, entries: [majorEntry({ witnesses: ['a'] })], mode: 'perfect_delayed' });
+    const withCarrier = drive({ ids, graph, entries: [majorEntry({ witnesses: ['a'] })], mode: 'perfect_delayed', smugglePaths: [['a', 'b']] });
+    // Without the criminal lane, 'b' never hears it.
+    expect(noCarrier?.b?.[rumorEventKey('evt1')]).toBeFalsy();
+    // With a smuggle run a↔b, the criminal carrier relays it (framing 'criminal').
+    const atB = withCarrier?.b?.[rumorEventKey('evt1')];
+    expect(atB).toBeTruthy();
+    expect(atB.framing).toContain('criminal');
   });
 });

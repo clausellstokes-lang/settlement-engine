@@ -41,8 +41,12 @@ import {
 import {
   believedDestinationDanger, merchantBaseline, emboldenedReceipt,
 } from '../spatial/dispatchEV.js';
+import {
+  criminalNetworkStrength, boldnessFromCaution, contrabandCategoryOf, isContraband,
+} from '../spatial/smuggle.js';
 import { riskToleranceFromAlignment } from '../spatial/embattlement.js';
 import { settlementAlignment } from './settlementAlignment.js';
+import { buildCultureVector } from './migrationKernel.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { advanceTradeFlowTally, settlementModalityWeight } from '../spatial/tradeFlow.js';
@@ -437,6 +441,14 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
   // appetite / willingness ledger materializes (both sparse, pruned to baseline / willing).
   const ev = buildDispatchEV({ worldState, graph, itemById, localSettlements });
 
+  // Phase 5.5 mover M7 — CONTRABAND / SMUGGLE (the criminal tail of the same trade bundle).
+  // Runs under the SAME double gate (marker + commodity-flow opt-in). A hostile gate stops
+  // hard-cutting: ONE smuggle roll vs the route's WORST gate at arrival (seizure → confiscation
+  // → toll, §II.3-4-e), gated by the endpoints' thieves-guilds + the gate's corruption + the
+  // ONE W0 boldness read; a legally-refused / blockaded link can spill to the criminal channel
+  // (the besieged TRICKLE); seizures are conscience-gated. Absent ⇒ M6 arrival byte-identical.
+  const smuggle = buildSmuggleContext({ worldState, graph, itemById, localSettlements });
+
   // M6d FLOW-DERIVED ECONOMICS: capture the PRE-advance shipment ledger so an arrival
   // this tick (its record consumed by advanceCommodityFlow) can still be traced to its
   // SOURCE settlement for the outbound half of the throughput tally.
@@ -445,7 +457,7 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
 
   const out = advanceCommodityFlow({
     producers, links, worldState, digest, tick, tickWeeks, season, rng,
-    sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor, ev,
+    sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor, ev, smuggle,
   });
 
   // THE GOODS-CONSERVATION INVARIANT — assert every tick (exact integers). On a
@@ -630,6 +642,106 @@ function buildDispatchEV({ worldState, graph, itemById, localSettlements }) {
     override: (link, sourceId) => (String(occupations[String(sourceId)]?.occupierId ?? '') === String(link.settlementId) ? 'must-go' : null),
   };
 }
+
+// ── M7: the SMUGGLE context (the criminal tail — the live reads smuggle.js consumes) ──
+/**
+ * Build the smuggle context: the endpoints' criminal-network strength (thieves-guild, the
+ * saturating-cap brake), the transit gate's CORRUPTION (its guild — the leaky-gate hinge)
+ * and CONSCIENCE (its alignment — the W-C2 seizure-take gate), the mover's BOLDNESS (1 − the
+ * ONE W0 caution read), and the RELATIONAL contraband rule (cultureDistance(gate, origin) +
+ * the gate's alignment). All reads memoized per settlement. Same live snapshot/worldState
+ * sources as buildDispatchEV; culture vectors are the M4 LIVE read (never the frozen digest).
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.worldState
+ * @param {unknown} args.graph
+ * @param {Map<string, SupplySnapItem>} args.itemById
+ * @param {Map<string, SupplySettlement>} args.localSettlements
+ * @returns {import('../spatial/commodityFlow.js').SmuggleContext}
+ */
+function buildSmuggleContext({ worldState, itemById, localSettlements }) {
+  const settlementOf = (/** @type {string} */ id) => localSettlements.get(id) || itemById.get(id)?.settlement || null;
+  /** @type {Map<string, number>} */
+  const guildMemo = new Map();
+  const guildOf = (/** @type {string} */ id) => {
+    const cached = guildMemo.get(id);
+    if (cached != null) return cached;
+    const g = criminalStrength01Of(settlementOf(id));
+    guildMemo.set(id, g);
+    return g;
+  };
+  /** @type {Map<string, { lawfulness01: number, malice01: number }>} */
+  const alignMemo = new Map();
+  const alignOf = (/** @type {string} */ id) => {
+    const cached = alignMemo.get(id);
+    if (cached) return cached;
+    const item = itemById.get(id) || (localSettlements.get(id) ? { id, settlement: localSettlements.get(id) } : null);
+    const a = settlementAlignment(
+      /** @type {import('./disposition.js').AlignmentItem} */ (/** @type {unknown} */ (item)),
+      /** @type {import('./disposition.js').AlignmentActsSource} */ (/** @type {unknown} */ (worldState)),
+    );
+    const out = { lawfulness01: num01(a?.lawfulness01, 0.5), malice01: num01(a?.malice01, 0.5) };
+    alignMemo.set(id, out);
+    return out;
+  };
+  /** @type {Map<string, import('../spatial/cultureDistance.js').CultureVector>} */
+  const cultureMemo = new Map();
+  const cultureOf = (/** @type {string} */ id) => {
+    const cached = cultureMemo.get(id);
+    if (cached) return cached;
+    const item = itemById.get(id) || (localSettlements.get(id) ? { id, settlement: localSettlements.get(id) } : { id });
+    const v = buildCultureVector(/** @type {Parameters<typeof buildCultureVector>[0]} */ (/** @type {unknown} */ (item)), worldState);
+    cultureMemo.set(id, v);
+    return v;
+  };
+  /** @type {Map<string, string|null>} */
+  const contrabandCatMemo = new Map();
+  const contrabandCatOf = (/** @type {string} */ goodId) => {
+    if (contrabandCatMemo.has(goodId)) return /** @type {string|null} */ (contrabandCatMemo.get(goodId));
+    const cat = String(normalizeGood(goodId)?.category || 'other');
+    const c = contrabandCategoryOf(cat, goodId);
+    contrabandCatMemo.set(goodId, c);
+    return c;
+  };
+  return {
+    networkStrength: (originId, destId) => criminalNetworkStrength(guildOf(String(originId)), guildOf(String(destId))),
+    corruptionOf: (gateId) => guildOf(String(gateId)),
+    // Conscience: a GOOD + LAWFUL gate rejects looting (loots little); an evil/chaotic one takes near-all.
+    conscienceOf: (gateId) => { const a = alignOf(String(gateId)); return clampUnit(0.6 * (1 - a.malice01) + 0.4 * a.lawfulness01); },
+    boldnessOf: (originId) => boldnessFromCaution(riskToleranceFromAlignment(alignOf(String(originId)))),
+    // The RELATIONAL contraband rule: cultureDistance(gate, origin) + the gate's own alignment.
+    isContrabandAt: (gateId, originId, goodId) => isContraband({
+      category: contrabandCatOf(String(goodId)), gateVector: cultureOf(String(gateId)), originVector: cultureOf(String(originId)),
+    }),
+    // The resistance category: the contraband category (slaves/military/…) or the catalog category.
+    categoryOf: (goodId) => contrabandCatOf(String(goodId)) || String(normalizeGood(goodId)?.category || 'other'),
+  };
+}
+
+/**
+ * The criminal-network strength (0..1) of a settlement: the stamped thievesGuildStrength (the
+ * saturating guild cap — the BRAKE), else the strongest CRIMINAL faction's normalized power.
+ * @param {SupplySettlement | null | undefined} settlement @returns {number}
+ */
+export function criminalStrength01Of(settlement) {
+  const s = settlement || {};
+  const stamped = Number(/** @type {{ thievesGuildStrength?: number }} */ (s).thievesGuildStrength);
+  if (Number.isFinite(stamped) && stamped > 0) return clampUnit(stamped);
+  const bearing = /** @type {FactionBearing} */ (/** @type {unknown} */ (s));
+  const factions = bearing.factions || bearing.powerStructure?.factions || bearing.powerFactions || bearing.politics?.factions || [];
+  let best = 0;
+  for (const f of Array.isArray(factions) ? factions : []) {
+    if (factionArchetype(f) !== FACTION_ARCHETYPES.CRIMINAL) continue;
+    const raw = Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0);
+    const v = Number.isFinite(raw) ? clampUnit(raw > 1 ? raw / 100 : raw) : 0;
+    if (v > best) best = v;
+  }
+  return best;
+}
+
+/** @param {number} x @returns {number} 0..1 clamp */
+function clampUnit(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+/** @param {unknown} v @param {number} fallback @returns {number} finite 0..1 */
+function num01(v, fallback) { return typeof v === 'number' && Number.isFinite(v) ? clampUnit(v) : fallback; }
 
 /**
  * @typedef {{ name?: string, category?: string, power?: number, strength?: number,

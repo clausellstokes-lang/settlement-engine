@@ -76,6 +76,10 @@ import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { chooseRoute, banditryLoss, embattlementLevel } from './embattlement.js';
 import { supplyActive, routeIntercepted, routeWeeks, pickSource, starvationReceipt } from './supplyShipments.js';
 import { dispatchDecision, appetiteOf, stepAppetite, needPremium, DISPATCH_TUNING } from './dispatchEV.js';
+import {
+  worstGate, smuggleSuccessChance, smuggleDetected, smugglePipeline, seizureTake,
+  goodsResistance, smuggleDispatchWarrant,
+} from './smuggle.js';
 
 /** @typedef {import('./distanceRead.js').SpatialDigest} SpatialDigest */
 /** @typedef {import('./supplyShipments.js').SupplyLink} SupplyLink */
@@ -296,6 +300,10 @@ export function assertGoodsConservation(acc) {
  * @property {number} [ranDanger] M6c: the believed danger this caravan set out into
  *   (only stamped when ≥ RISKY_DANGER_FLOOR — a peaceful record is byte-identical to
  *   M6a). Read at arrival/cut to move the origin's dynamic appetite.
+ * @property {boolean} [smuggle] M7: this caravan is a SMUGGLE run — the criminal channel
+ *   dispatched it when the legal EV refused / the road was blocked (the M6c EV-spill).
+ *   Only stamped on smuggle runs (a legal record is byte-identical to M6a); read by the
+ *   pulse kernel to light the criminal rumor carrier along the run's endpoints.
  */
 
 /**
@@ -316,6 +324,14 @@ export function assertGoodsConservation(acc) {
  *   unmet-demand-under-danger signal (undefined when M6c dormant ⇒ M6a outcome shape).
  * @property {number} [believedDanger]      M6c: the belief-gated destination danger read
  *   for the refusal (the M7 signal's magnitude).
+ * @property {'seizure'|'confiscation'|'smuggled'} [smuggleBranch]  M7: the arrival smuggle
+ *   pipeline outcome at the worst gate this tick — a SEIZURE (hostile), a CONFISCATION
+ *   (contraband), or SMUGGLED through (the trickle delivered). Undefined ⇒ no gate event
+ *   (M6 arrival shape). Read for the DM smuggle-hook receipts.
+ * @property {string} [smuggleGateId]       M7: the worst gate the roll was made against.
+ * @property {number} [seizedTake]          M7: units the seizer looted (conscience-gated).
+ * @property {boolean} [smuggleDispatched]  M7: the criminal channel dispatched this link
+ *   this tick (the EV-spill / besieged-trickle run) — lights the criminal rumor carrier.
  */
 
 /** The codepoint-stable ledger key for a link (uniqueness ⇒ cardinality = links). */
@@ -340,19 +356,43 @@ export function commodityLinkKey(settlementId, institutionId, input) {
  *   the EV overrides (vassal tribute must-go / ally relief). Absent ⇒ no override.
  */
 
+/**
+ * M7 — the SMUGGLE context the kernel threads (the criminal tail of the same trade
+ * bundle). ABSENT ⇒ no smuggle roll, no contraband policy, no criminal carrier ⇒ the M6
+ * arrival path runs verbatim, byte-identical. Every read is per-endpoint or per-gate; the
+ * pure engine (smuggle.js) owns the decision math (worst gate, roll, pipeline, take).
+ * @typedef {Object} SmuggleContext
+ * @property {(originId: string, destId: string) => number} networkStrength  the shipment's
+ *   criminal-network strength (criminalNetworkStrength over the endpoints' thieves-guilds).
+ * @property {(gateId: string) => number} corruptionOf  the gate's corruption / leakiness
+ *   (its thieves-guild strength) — the HINGE that raises smuggle success (a leaky gate leaks).
+ * @property {(gateId: string) => number} conscienceOf  the gate's conscience read (0 evil …
+ *   1 good/lawful) — W-C2 gates a seizure's loot TAKE.
+ * @property {(originId: string) => number} boldnessOf  the mover's boldness (1 − the ONE W0
+ *   caution read) — the risk-tolerance ATTEMPT gate.
+ * @property {(gateId: string, originId: string, goodId: string) => boolean} isContrabandAt
+ *   the RELATIONAL contraband rule (cultureDistance(gate, origin) + the gate's alignment).
+ * @property {(goodId: string) => (string|null)} categoryOf  the good's contraband category
+ *   (for the smuggle resistance read); null ⇒ freely traded.
+ */
+
 // ── Cut-check for an in-transit record (M2 parity: severed source / hostile gate) ──
 /**
  * @param {CommodityShipment} rec
  * @param {{ digest: SpatialDigest, worldState: { spatialLedgers?: unknown }, riskTolerance: number, season: string|null,
  *   sourceSevered: (id: string) => boolean, isHostileToDestination: (id: string) => boolean }} ctx
+ * @param {boolean} [skipInterception]  M7: when the smuggle layer is live the hostile-gate
+ *   cut is DEFERRED to the arrival smuggle pipeline (ONE roll vs the worst gate — a hostile
+ *   gate no longer HARD-cuts mid-transit; the caravan gets its smuggle chance at the gate).
+ *   Absent/false ⇒ the M2/M6 interception cut runs verbatim (byte-identical).
  * @returns {boolean} true when the caravan is cut mid-transit (its carried load is lost)
  */
-function shipmentCut(rec, ctx) {
+function shipmentCut(rec, ctx, skipInterception) {
   if (ctx.sourceSevered(String(rec.sourceId))) return true;
   const route = chooseRoute(ctx.digest, ctx.worldState, String(rec.sourceId), String(rec.settlementId), ctx.riskTolerance, ctx.season);
   const path = route && Array.isArray(route.path) ? route.path : [];
   if (!path.length) return true; // unroutable now ⇒ stranded ⇒ cut
-  return routeIntercepted(path, ctx.isHostileToDestination);
+  return skipInterception ? false : routeIntercepted(path, ctx.isHostileToDestination);
 }
 
 // ── THE ORCHESTRATOR — advance the whole commodity flow one tick ──────────────
@@ -385,6 +425,12 @@ function shipmentCut(rec, ctx) {
  *   M6a. Present ⇒ the origin's greed-vs-danger EV gates each dispatch (belief-gated
  *   deterrent, dynamic appetite, the M1 hysteresis), risky-run outcomes move the
  *   per-origin appetite, and EV-refused links expose the M7 unmet-demand signal.
+ * @param {SmuggleContext | null} [args.smuggle]  M7 THE SMUGGLE LAYER (the criminal tail).
+ *   ABSENT ⇒ no smuggle roll, no contraband policy, no criminal carrier ⇒ the interception
+ *   cut + arrival run verbatim, BYTE-IDENTICAL to M6. Present ⇒ a hostile gate no longer
+ *   hard-cuts (ONE smuggle roll vs the route's WORST gate at arrival: seizure → confiscation
+ *   → toll, §II.3-4-e), a legally-refused / blocked link can spill to the criminal channel
+ *   (the besieged TRICKLE), and seizures are conscience-gated (W-C2).
  * @returns {{ nextStocks: Record<string, Record<string, number>>|null,
  *   nextShipments: Record<string, CommodityShipment>|null,
  *   nextAppetite: Record<string, import('./dispatchEV.js').AppetiteRecord>|null,
@@ -395,7 +441,7 @@ function shipmentCut(rec, ctx) {
 export function advanceCommodityFlow({
   producers, links, worldState, digest, tick, tickWeeks, season = null, rng = null,
   sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor,
-  ev = null,
+  ev = null, smuggle = null,
 }) {
   const T = COMMODITY_TUNING;
   const now = intNonNeg(tick, 0);
@@ -492,6 +538,10 @@ export function advanceCommodityFlow({
   const carriedForward = {};
   /** @type {Set<string>} */
   const arrivedKeys = new Set();
+  // M7: per-link smuggle-pipeline outcomes this tick (seizure / confiscation / smuggled
+  // through). Empty + unread when the smuggle layer is dormant ⇒ M6 outcome shape.
+  /** @type {Record<string, { branch: 'seizure'|'confiscation'|'smuggled', gateId: string, take?: number }>} */
+  const smuggleArrivals = {};
   for (const key of Object.keys(priorShipments).sort()) {
     const raw = asObject(priorShipments[key]);
     const link = linkByKey.get(key);
@@ -511,7 +561,10 @@ export function advanceCommodityFlow({
       digest, worldState, season: season ?? null, riskTolerance: 1,
       sourceSevered: () => false, isHostileToDestination: () => false,
     };
-    if (shipmentCut(rec, ctx)) {
+    // M7: with the smuggle layer live, a HOSTILE gate no longer HARD-cuts mid-transit —
+    // the caravan gets its ONE smuggle roll at the arrival gate below (§II.3-4-f). The
+    // severed-source / unroutable cut still applies. Dormant ⇒ M2/M6 interception verbatim.
+    if (shipmentCut(rec, ctx, !!smuggle)) {
       lost += rec.carried; // cut mid-transit ⇒ load lost
       // M6c: a RISKY caravan CUT COWS its origin's appetite (a loss it can feel).
       if (ev && ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) bumpAppetite(rec.sourceId, 'lost');
@@ -519,10 +572,56 @@ export function advanceCommodityFlow({
     }
 
     if (now >= rec.arrivalTick) {
-      // EN-ROUTE DEPLETION — intermediaries that consume the good tap the caravan.
-      let remaining = rec.carried;
       const route = chooseRoute(digest, worldState, rec.sourceId, rec.settlementId, ctx.riskTolerance, season ?? null);
       const path = route && Array.isArray(route.path) ? route.path : [];
+
+      // ── M7 THE PER-GATE PIPELINE (§II.3-4-e) — ONE roll vs the route's WORST gate.
+      //    smuggle roll → (detected ∧ hostile) SEIZURE → (elif contraband) CONFISCATION →
+      //    else TOLL (delivered — the besieged TRICKLE survives). Only when the layer is
+      //    live AND the worst gate poses a threat; otherwise the M6 arrival runs unchanged.
+      if (smuggle && path.length > 2) {
+        const worst = worstGate(path.slice(1, -1).map((gid) => ({
+          id: String(gid),
+          hostile: ctx.isHostileToDestination(String(gid)),
+          contraband: smuggle.isContrabandAt(String(gid), rec.sourceId, rec.input),
+          danger: embattlementLevel(worldState, String(gid)),
+        })));
+        if (worst && (worst.kind === 'hostile' || worst.kind === 'contraband')) {
+          const chance = smuggleSuccessChance({
+            network: smuggle.networkStrength(rec.sourceId, rec.settlementId),
+            corruption: smuggle.corruptionOf(worst.id),
+            goodsResistance: goodsResistance(smuggle.categoryOf(rec.input)),
+            boldness: smuggle.boldnessOf(rec.sourceId),
+          });
+          const forked = rng && typeof rng.fork === 'function' ? rng.fork(`smuggle:${key}:${rec.arrivalTick}`) : null;
+          const draw = forked ? clamp01(finiteNumber(forked.random(), 1)) : 1;
+          const detected = smuggleDetected(chance, draw);
+          const branch = smugglePipeline({ detected, hostile: worst.kind === 'hostile', contraband: worst.kind === 'contraband' });
+          if (branch === 'seizure' || branch === 'confiscation') {
+            // The destination is DENIED the load. A SEIZURE loots a conscience-gated TAKE
+            // to the gate (W-C2 — an evil seizer takes near-all, a good one little); the
+            // rest spoils. A CONFISCATION frees/destroys the whole contraband load.
+            lost += rec.carried;
+            let take = 0;
+            if (branch === 'seizure') {
+              take = seizureTake(rec.carried, smuggle.conscienceOf(worst.id));
+              if (take > 0) {
+                setStock(stocks, worst.id, rec.input, stockOf(stocks, worst.id, rec.input, 0) + take);
+                lost -= take; // the looted units survive as the gate's stock (conservation)
+              }
+            }
+            smuggleArrivals[key] = { branch, gateId: worst.id, ...(take > 0 ? { take } : {}) };
+            // A RISKY caravan lost to a seizure/confiscation COWS its origin's appetite.
+            if (ev && ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) bumpAppetite(rec.sourceId, 'lost');
+            continue; // no delivery — the shortage persists (the DM's smuggle hook)
+          }
+          // detected === false ⇒ SMUGGLED THROUGH: falls to TOLL ⇒ delivered (the trickle).
+          if (!detected) smuggleArrivals[key] = { branch: 'smuggled', gateId: worst.id };
+        }
+      }
+
+      // EN-ROUTE DEPLETION — intermediaries that consume the good tap the caravan.
+      let remaining = rec.carried;
       for (let i = 1; i < path.length - 1 && remaining > 0; i++) {
         const interId = String(path[i]);
         if (!(consumesGood && consumesGood(interId, rec.input))) continue;
@@ -588,6 +687,9 @@ export function advanceCommodityFlow({
     let evRefused;
     /** @type {number|undefined} */
     let evBelievedDanger;
+    // M7: did the CRIMINAL channel dispatch this link this tick (the EV-spill / trickle)?
+    /** @type {boolean|undefined} */
+    let smuggleDispatched;
     if (!record && cur < target) {
       // FAILOVER — the cheapest source that is clear AND holds ≥ ORIGIN_MIN_AVAILABLE.
       const stocked = (link.rankedSources || []).filter((s) => stockOf(stocks, String(s.sourceId), gid, 0) >= T.ORIGIN_MIN_AVAILABLE);
@@ -595,13 +697,17 @@ export function advanceCommodityFlow({
         digest, worldState, destinationId: sid, riskTolerance: ctx.riskTolerance, season: season ?? null,
         sourceSevered: ctx.sourceSevered, isHostileToDestination: ctx.isHostileToDestination,
       });
+      let goDispatch = false;
+      let isSmuggle = false;
+      /** @type {{ sourceId: string, route: import('./embattlement.js').ScoredRoute }|null} */
+      let dispatchPick = picked || null;
       if (picked) {
         const originId = String(picked.sourceId);
         // ── THE GREED-vs-DANGER DISPATCH EV (M6c). Absent ev ⇒ dispatch UNCONDITIONALLY
         //    (M6a verbatim). Present ⇒ the origin weighs the destination's need-premium ×
         //    its dynamic appetite against the BELIEVED danger × its caution, with the M1
         //    hysteresis; a refusal leaves the shortage to persist (the M7 signal).
-        let goDispatch = true;
+        goDispatch = true;
         if (ev) {
           const baseline = finiteNumber(ev.baseline(originId), DISPATCH_TUNING.BASELINE_MID);
           const appetite = appetiteOf(priorAppetite, originId, baseline);
@@ -620,24 +726,45 @@ export function advanceCommodityFlow({
           if (decision.willingness) nextWillingness[key] = decision.willingness; // still refusing ⇒ latch
           if (decision.refuse) evRefused = true; // the caravan did not go ⇒ shortage persists (M7 seam)
         }
-        if (goDispatch) {
-          const originAvail = stockOf(stocks, originId, gid, 0);
-          const want = Math.min(target - cur, T.MAX_SHIP, originAvail);
-          if (want >= T.MIN_SHIP) {
-            setStock(stocks, originId, gid, originAvail - want); // finite origin DEPLETES
-            record = {
-              institutionId: String(link.institutionId), settlementId: sid, input: gid,
-              sourceId: originId, arrivalTick: now + routeWeeks(digest, picked.route.baseCost),
-              carried: want, starving: false,
-            };
-            // M6c: stamp the danger it set out into (only when RISKY) so the arrival can
-            // embolden the origin — a peaceful record stays byte-identical to M6a.
-            if (ev && evBelievedDanger != null && evBelievedDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) {
-              record.ranDanger = round4(evBelievedDanger);
-            }
-            nextShipments[key] = record;
-            dispatched = true;
+        // ── M7 THE EV-SPILL (round 22.4): the legal caravan REFUSED but the road is clear —
+        //    the criminal channel runs the deep-shortage link (the tail of the greed curve).
+        if (smuggle && !goDispatch && smuggleDispatchWarrant({
+          needPremium: needPremium(cur, target), network: smuggle.networkStrength(originId, sid), boldness: smuggle.boldnessOf(originId),
+        })) { goDispatch = true; isSmuggle = true; }
+      } else if (smuggle) {
+        // ── M7 THE BESIEGED TRICKLE (§II.3-4-f): every legal route is blocked (all sources
+        //    severed / intercepted). The smuggler runs the blockaded road anyway — pick a
+        //    source IGNORING hostility; the ONE arrival roll then decides seizure vs trickle.
+        const smuggPick = pickSource(stocked, {
+          digest, worldState, destinationId: sid, riskTolerance: ctx.riskTolerance, season: season ?? null,
+          sourceSevered: ctx.sourceSevered, isHostileToDestination: () => false,
+        });
+        if (smuggPick && smuggleDispatchWarrant({
+          needPremium: needPremium(cur, target), network: smuggle.networkStrength(String(smuggPick.sourceId), sid), boldness: smuggle.boldnessOf(String(smuggPick.sourceId)),
+        })) { dispatchPick = smuggPick; goDispatch = true; isSmuggle = true; }
+      }
+      if (goDispatch && dispatchPick) {
+        const originId = String(dispatchPick.sourceId);
+        // A smuggle run stamps the danger it ran so its arrival outcome moves the appetite.
+        if (isSmuggle && ev && evBelievedDanger == null) evBelievedDanger = round4(finiteNumber(ev.believedDanger(originId, sid), 0));
+        const originAvail = stockOf(stocks, originId, gid, 0);
+        const want = Math.min(target - cur, T.MAX_SHIP, originAvail);
+        if (want >= T.MIN_SHIP) {
+          setStock(stocks, originId, gid, originAvail - want); // finite origin DEPLETES
+          record = {
+            institutionId: String(link.institutionId), settlementId: sid, input: gid,
+            sourceId: originId, arrivalTick: now + routeWeeks(digest, dispatchPick.route.baseCost),
+            carried: want, starving: false,
+          };
+          // M6c: stamp the danger it set out into (only when RISKY) so the arrival can
+          // embolden the origin — a peaceful record stays byte-identical to M6a.
+          if (ev && evBelievedDanger != null && evBelievedDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) {
+            record.ranDanger = round4(evBelievedDanger);
           }
+          // M7: mark the smuggle run (lights the criminal rumor carrier at the pulse kernel).
+          if (isSmuggle) { record.smuggle = true; smuggleDispatched = true; }
+          nextShipments[key] = record;
+          dispatched = true;
         }
       }
     }
@@ -654,12 +781,17 @@ export function advanceCommodityFlow({
       : null;
     if (record) record.starving = starving;
 
+    const smuggleArrival = smuggleArrivals[key];
     outcomes[key] = {
       settlementId: sid, input: gid, institutionId: String(link.institutionId),
       institutionName: link.institutionName, stock: cur, target,
       band: commodityBand(cur, target), starving,
       arrived: arrivedKeys.has(key), receipt, fragile,
       ...(evRefused ? { evRefused, believedDanger: evBelievedDanger } : {}),
+      // M7: the arrival smuggle-pipeline outcome + the criminal-dispatch flag (undefined ⇒
+      // no gate event / no spill this tick ⇒ M6 outcome shape).
+      ...(smuggleArrival ? { smuggleBranch: smuggleArrival.branch, smuggleGateId: smuggleArrival.gateId, ...(smuggleArrival.take ? { seizedTake: smuggleArrival.take } : {}) } : {}),
+      ...(smuggleDispatched ? { smuggleDispatched: true } : {}),
     };
     // A starving link with no caravan still leaves a ledger latch (M2 parity, for the
     // M2b interdiction read) — a sourceId-less, 0-carry record.

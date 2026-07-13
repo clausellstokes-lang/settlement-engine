@@ -12,7 +12,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
-import { merchantStrength01Of } from '../../src/domain/worldPulse/supplyKernel.js';
+import { merchantStrength01Of, criminalStrength01Of } from '../../src/domain/worldPulse/supplyKernel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -120,5 +120,18 @@ describe('M6c — the merchant-faction strength read (appetite baseline driver)'
     expect(merchantStrength01Of({ powerStructure: { factions: [{ name: 'Trade House', power: 60 }] } })).toBeCloseTo(0.6, 5);
     expect(merchantStrength01Of({ factions: [{ name: 'The Watch', category: 'military', power: 90 }] })).toBe(0);
     expect(merchantStrength01Of(null)).toBe(0);
+  });
+});
+
+describe('M7 — the criminal-network strength read (the smuggle-network driver)', () => {
+  it('prefers the stamped thievesGuildStrength (the saturating guild cap)', () => {
+    expect(criminalStrength01Of({ thievesGuildStrength: 0.7 })).toBeCloseTo(0.7, 5);
+    expect(criminalStrength01Of({ thievesGuildStrength: 5 })).toBe(1);   // clamped to the cap
+  });
+  it('falls back to the max CRIMINAL-archetype faction power; a non-criminal town ⇒ 0', () => {
+    expect(criminalStrength01Of({ factions: [{ name: 'Thieves’ Guild', category: 'criminal', power: 60 }] })).toBeCloseTo(0.6, 5);
+    expect(criminalStrength01Of({ powerStructure: { factions: [{ name: 'Smuggling Ring', power: 40 }] } })).toBeCloseTo(0.4, 5);
+    expect(criminalStrength01Of({ factions: [{ name: "Merchants' Guild", category: 'merchant', power: 90 }] })).toBe(0);
+    expect(criminalStrength01Of(null)).toBe(0);
   });
 });

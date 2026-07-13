@@ -71,6 +71,11 @@ import { infoModeOf } from '../worldPulse/simulationRules.js';
  *  as trade — an additional relay conduit, keyed under the same per-event record. */
 export const RUMOR_CARRIER_TRADE = 'trade';
 export const RUMOR_CARRIER_ARMY = 'army';
+/** M7 (round 9): the CRIMINAL/underground carrier lights WITH its smuggle movers — a
+ *  smuggle run carries the news of the towns it runs between (framing 'criminal'). Same
+ *  shape as the trade/army carriers; an additive lane, keyed under the same per-event
+ *  record. EMPTY when no smuggle runs are afield ⇒ the lane is dormant ⇒ byte-identical. */
+export const RUMOR_CARRIER_CRIMINAL = 'criminal';
 
 /** The regional-graph channel types merchant traffic rides (the P0 economic
  *  set): a confirmed channel of any of these types carries news BOTH ways
@@ -298,17 +303,35 @@ export function tradeNeighbours(graph, settlementId) {
  * @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>}
  */
 export function armyPathNeighbourMap(armyPaths) {
+  return pathNeighbourMap(armyPaths, 'army');
+}
+
+/**
+ * The CRIMINAL-carrier neighbour map (M7, round 9). A smuggle run carries the news of the
+ * towns it runs between to the next stop — same shape as the army carrier, edge-prefixed
+ * 'crime' so its edge ids never collide with the trade/army lanes. EMPTY when no smuggle
+ * paths are supplied ⇒ the criminal lane is dormant ⇒ byte-identical (the trade/army lanes
+ * are untouched). @param {Array<string[]>|null|undefined} smugglePaths @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+export function smugglePathNeighbourMap(smugglePaths) {
+  return pathNeighbourMap(smugglePaths, 'crime');
+}
+
+/** The shared mover-path neighbour builder (army + criminal carriers). Links adjacent path
+ *  nodes BOTH ways (a mover relays news forward and back over the leg it travels), deduped
+ *  codepoint-first edge, codepoint-sorted. @param {Array<string[]>|null|undefined} paths
+ *  @param {string} edgePrefix @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+function pathNeighbourMap(paths, edgePrefix) {
   /** @type {Map<string, Map<string, string>>} */
   const byNode = new Map();
   const link = (/** @type {string} */ a, /** @type {string} */ b) => {
     if (a === b) return;
-    const edgeId = compareCodepoint(a, b) < 0 ? `army.${a}.${b}` : `army.${b}.${a}`;
+    const edgeId = compareCodepoint(a, b) < 0 ? `${edgePrefix}.${a}.${b}` : `${edgePrefix}.${b}.${a}`;
     const cur = byNode.get(a) || new Map();
     const prior = cur.get(b);
     if (prior === undefined || compareCodepoint(edgeId, prior) < 0) cur.set(b, edgeId);
     byNode.set(a, cur);
   };
-  for (const path of Array.isArray(armyPaths) ? armyPaths : []) {
+  for (const path of Array.isArray(paths) ? paths : []) {
     const nodes = Array.isArray(path) ? path.map(String) : [];
     for (let i = 0; i + 1 < nodes.length; i++) { link(nodes[i], nodes[i + 1]); link(nodes[i + 1], nodes[i]); }
   }
@@ -467,10 +490,13 @@ export function degradeTelling(record, fork, digest) {
  * @param {Array<string[]> | null} [args.armyPaths]  M5 army carrier (round 9): the
  *   in-transit armies' routes. A marching army relays news along its path. EMPTY /
  *   absent ⇒ the army lane is dormant ⇒ byte-identical (the trade lane is untouched).
+ * @param {Array<string[]> | null} [args.smugglePaths]  M7 criminal carrier (round 9): the
+ *   in-transit smuggle runs' [source, destination] legs. A smuggler relays news between the
+ *   towns it runs. EMPTY / absent ⇒ the criminal lane is dormant ⇒ byte-identical.
  * @returns {{ next: RumorLedgers | null, changed: boolean }}  next=null ⇒ the
  *   key should be absent (empty ledger drops, the conditional-ledger idiom).
  */
-export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null }) {
+export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null, smugglePaths = null }) {
   const prior = /** @type {RumorLedgers | null} */ (
     hasSpatialLedger(worldState, 'rumorLedgers')
       ? asLedgers(getSpatialLedger(worldState, 'rumorLedgers'))
@@ -577,6 +603,9 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
   // M5 army carrier: the in-transit armies' path adjacencies (dormant + empty when no
   // armyPaths supplied ⇒ the army lane never fires ⇒ byte-identical).
   const armyNeighbours = armyPathNeighbourMap(armyPaths);
+  // M7 criminal carrier: the in-transit smuggle runs' path adjacencies (dormant + empty
+  // when no smugglePaths supplied ⇒ the criminal lane never fires ⇒ byte-identical).
+  const criminalNeighbours = smugglePathNeighbourMap(smugglePaths);
   for (const sid of [...working.keys()].sort(compareCodepoint)) {
     const records = /** @type {Map<string, RumorArrivalRecord>} */ (working.get(sid));
     for (const key of [...records.keys()].sort(compareCodepoint)) {
@@ -641,6 +670,7 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       };
       relayVia(RUMOR_CARRIER_TRADE, 'merchant', tradeNeighbours(graph, sid));
       relayVia(RUMOR_CARRIER_ARMY, 'army', armyNeighbours.get(sid) || []);
+      relayVia(RUMOR_CARRIER_CRIMINAL, 'criminal', criminalNeighbours.get(sid) || []);
     }
   }
   for (const { targetId, key, packet } of deliveries) {

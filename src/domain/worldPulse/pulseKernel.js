@@ -1545,6 +1545,16 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const armyPaths = transitLedger
       ? Object.keys(transitLedger).sort().map((id) => transitLedger[id].path).filter((p) => Array.isArray(p) && p.length > 1)
       : null;
+    // M7 criminal carrier: this tick's SMUGGLE runs (marked on the supplyShipments ledger)
+    // relay news between the towns they run — a [source, destination] leg per run. EMPTY when
+    // no smuggle runs are afield ⇒ the criminal lane is dormant ⇒ byte-identical.
+    const shipLedger = /** @type {Record<string, { smuggle?: unknown, sourceId?: unknown, settlementId?: unknown }> | null} */ (
+      getSpatialLedger(memoryState, 'supplyShipments'));
+    const smugglePaths = shipLedger
+      ? Object.keys(shipLedger).sort().map((k) => shipLedger[k])
+          .filter((r) => r && r.smuggle === true && r.sourceId && r.settlementId && String(r.sourceId) !== String(r.settlementId))
+          .map((r) => [String(r.sourceId), String(r.settlementId)])
+      : null;
     const rumors = advanceRumorLedgers({
       worldState: memoryState,
       feedEntries: wizardNews?.entries || [],
@@ -1553,6 +1563,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       season: roadSeason,
       rng,
       armyPaths,
+      smugglePaths: smugglePaths && smugglePaths.length ? smugglePaths : null,
     });
     if (rumors.changed) {
       if (rumors.next) {
