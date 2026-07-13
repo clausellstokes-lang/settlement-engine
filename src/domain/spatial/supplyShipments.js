@@ -334,8 +334,15 @@ export function stepSupplyLink(link, prior, ctx) {
   // sourced input is ordinary trade). A fragile critical input is flagged, never starved.
   const fragile = redundancy.fragile && link.critical !== false;
 
+  // Rehydrate ONLY a real in-transit shipment. The starvation SENTINEL the orchestrator
+  // persists for a totally-cut link (sourceId '', arrivalTick -1) is a latch, NOT a
+  // caravan: rehydrating it would trip ARRIVE (tick >= -1 is always true) and refill the
+  // buffer for free with the road still severed — lifting starvation after one tick. Drop
+  // it; STARVE below re-derives starvation from THIS tick's cut state, and priorStarving
+  // (read above) still de-dups the receipt so the sentinel only suppresses a re-emit.
   /** @type {ShipmentRecord|null} */
   let record = prior && typeof prior === 'object' && !Array.isArray(prior)
+    && String(prior.sourceId) !== '' && Number(prior.arrivalTick) >= 0
     ? { institutionId: String(link.institutionId), settlementId: destinationId, input: String(link.input),
         sourceId: String(prior.sourceId), arrivalTick: Math.floor(finiteNumber(prior.arrivalTick, tick)), starving: priorStarving }
     : null;
@@ -376,9 +383,16 @@ export function stepSupplyLink(link, prior, ctx) {
     });
     if (picked) {
       const weeks = routeWeeks(ctx.digest, picked.route.baseCost);
+      // arrivalTick rides the PULSE clock (tick increments once per pulse), but routeWeeks
+      // is in real WEEKS — convert by the tick span so a coarse (monthly/seasonal) interval
+      // doesn't stretch caravan latency by the tickWeeks factor while the buffer DRAW (above)
+      // already drains in real weeks. Weekly ticks (tickWeeks 1) are unchanged:
+      // round(weeks / 1) === weeks, byte-identical.
+      const tw = tickWeeks > 0 ? tickWeeks : SUPPLY_TUNING.DEFAULT_TICK_WEEKS;
+      const pulsesToArrive = Math.max(1, Math.round(weeks / tw));
       record = {
         institutionId: String(link.institutionId), settlementId: destinationId, input: String(link.input),
-        sourceId: picked.sourceId, arrivalTick: tick + weeks, starving: false,
+        sourceId: picked.sourceId, arrivalTick: tick + pulsesToArrive, starving: false,
       };
     }
   }

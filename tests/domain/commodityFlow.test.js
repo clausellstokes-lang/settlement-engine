@@ -182,6 +182,28 @@ describe('M6a — EN-ROUTE DEPLETION: a consuming intermediary taps the caravan'
   });
 });
 
+describe('M7 — the smuggle marker survives an in-transit reconstruction', () => {
+  it('a smuggle run still in transit keeps smuggle:true (the criminal rumor lane stays lit)', () => {
+    const digest = lineDigestPMC();
+    const key = commodityLinkKey('C', 'smithy', 'iron');
+    const links = [{ institutionId: 'smithy', institutionName: 'the smithy', settlementId: 'C', input: 'iron',
+      rankedSources: rankSupplySources(digest, 'C', ['P']), bufferWeeks: 0, critical: true }];
+    const producers = [{ settlementId: 'P', good: 'iron', rate: 3, cap: 18 }];
+    // A smuggle caravan in transit P→C, NOT arriving this tick (arrivalTick 5) ⇒ carried
+    // forward. The OLD reconstruction dropped smuggle, so the run went dark mid-transit and
+    // the criminal rumor carrier (pulseKernel reads r.smuggle) fell silent until arrival.
+    const ws = worldOn({ spatialLedgers: { supplyShipments: {
+      [key]: { institutionId: 'smithy', settlementId: 'C', input: 'iron', sourceId: 'P', arrivalTick: 5, carried: 8, starving: false, smuggle: true },
+    } } });
+    const out = advanceCommodityFlow({ producers, links, worldState: ws, digest, tick: 0, rng: forkRng(),
+      consumesGood: (sid, gid) => gid === 'iron' && sid === 'C' });
+    const carried = out.nextShipments[key];
+    expect(carried).toBeTruthy();
+    expect(carried.arrivalTick).toBe(5);  // still in transit (did not arrive)
+    expect(carried.smuggle).toBe(true);    // the marker survived reconstruction
+  });
+});
+
 describe('M6a — THE GOODS-CONSERVATION INVARIANT (multi-tick, exact every tick)', () => {
   it('assertGoodsConservation catches an imbalance', () => {
     expect(assertGoodsConservation({ before: 10, produced: 5, after: 12, consumed: 3, lost: 0 })).toBe(true);

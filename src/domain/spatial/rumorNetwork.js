@@ -410,6 +410,12 @@ export function mergeArrival(existing, incoming) {
     ...better,
     corroborationRoots: roots,
     relayedTick: existing.relayedTick ?? null,
+    // FIRST-HEARD wins the arrival: a settlement that already received this telling
+    // (existing.arrivalTick) must never 'un-hear' it because a more-complete but still
+    // IN-TRANSIT telling (a later arrivalTick) won pickBetterTelling on completeness/hops.
+    // Keep the earliest arrival so the read model (arrivalTick <= tick) never drops a
+    // rumor the settlement already knew and relayed. Equal ticks ⇒ byte-identical.
+    arrivalTick: Math.min(existing.arrivalTick, incoming.arrivalTick),
   };
 }
 

@@ -228,6 +228,17 @@ describe('season boundary markers (the ONE new news kind)', () => {
     const both = seasonalBoundaryEntries({ prevWeeks: 20, weeks: 52, tick: 1, now: 'T', foodStates });
     expect(both.map((e) => e.impactKind).sort()).toEqual(['harvest', 'hungry_gap']);
   });
+
+  test('the harvest news EXCLUDES a settlement with no food ledger (present:false sentinel is not thin stores)', () => {
+    const foodStates = [
+      { id: 'a', name: 'Ashford', present: true, storageMonths: 2.4, deficitPct: 0 },   // healthy, HAS a ledger
+      { id: 'x', name: 'Unledgered', present: false, storageMonths: 0, deficitPct: 0 }, // NO food ledger ⇒ sentinel 0
+    ];
+    const [harvest] = seasonalBoundaryEntries({ prevWeeks: 25, weeks: 26, tick: 26, now: 'T', foodStates });
+    // The no-ledger settlement's sentinel storageMonths 0 must NOT read as "thin stores".
+    expect(harvest.reasons).toHaveLength(0);
+    expect(harvest.summary).not.toContain('thin stores');
+  });
 });
 
 describe('seasonalContextFor — the kernel-threaded per-settlement context', () => {

@@ -508,6 +508,26 @@ describe('helpers', () => {
     expect(merged.completeness01).toBe(0.95);           // the better telling supersedes
     expect(merged.corroborationRoots).toEqual(['t0:evt1@a', 't0:evt1@e']); // union, sorted
     expect(merged.relayedTick).toBe(8);                 // the guard stamp survives
+    expect(merged.arrivalTick).toBe(8);                 // FIRST-HEARD wins (min of 8, 9) — never un-heard
+  });
+
+  it('mergeArrival keeps the EARLIEST arrival so a settlement never un-hears a known rumor', () => {
+    // 'arrived' was received at tick 3 (already known + relayed). 'inTransit' is a
+    // more-complete telling still on the road (future arrivalTick 11) that wins
+    // pickBetterTelling on completeness/hops. The merged record must keep arrivalTick 3 —
+    // else the read model (arrivalTick <= tick) drops the rumor for ticks 3..10.
+    const arrived = {
+      eventRef: 'evt1', eventTick: 1, carrier: 'trade', arrivalTick: 3, hopCount: 3,
+      lineageIds: ['evt1', 't0:evt1@o', 't1:evt1@b', 't2:evt1@a'], corroborationRoots: ['t0:evt1@o'],
+      provenance: { originId: 'o', relayIds: ['o', 'b', 'a'] },
+      completeness01: 0.6, accuracy01: 0.9, framing: ['merchant'], significance: 'major', score: 80,
+      content: { what: 'import_shortage', whereId: 'o', scope: 'regional', magnitude: 2, partyIds: ['o'], causeClass: null, deityName: null },
+      relayedTick: 3,
+    };
+    const inTransit = { ...arrived, completeness01: 0.95, hopCount: 2, arrivalTick: 11, lineageIds: ['evt1', 't0:evt1@o', 't1:evt1@a'], corroborationRoots: ['t0:evt1@o'], relayedTick: null };
+    const merged = mergeArrival(arrived, inTransit);
+    expect(merged.completeness01).toBe(0.95);  // still adopts the better content
+    expect(merged.arrivalTick).toBe(3);         // but NEVER un-hears — earliest arrival wins
   });
 });
 

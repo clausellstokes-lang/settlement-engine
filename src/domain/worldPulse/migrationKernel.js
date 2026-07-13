@@ -276,6 +276,39 @@ export function releaseMigrationArrivals({ worldState, localSettlements, settlem
  */
 
 /**
+ * REALIZED-DEBIT RECONCILIATION (the conservation guard on the shed pool). Collect the
+ * mass-emigration events whose origin was ACTUALLY DEBITED by this tick's apply pass, so
+ * the dispatch releases survivors only for population an origin truly lost — never
+ * minting people. The exclusion that matters:
+ *   - a PROPOSAL-mode outcome is QUEUED, not applied: applyWorldPulse.js's
+ *     `applyMode === 'proposal'` branch upserts a pending proposal and `continue`s
+ *     BEFORE applyOutcomeToSettlement debits the origin. Its people stay put, so
+ *     dispatching its `spatialEmigration.loss` would MINT them at the destinations
+ *     (origin undebited + arrivals credited = net population created). Reachable via
+ *     populationDynamics.js: a MAJOR emigration under `majorChangesRequireProposal`
+ *     routes to applyMode 'proposal'. The migration releases only once the DM APPROVES
+ *     it and the proposal resolver forces applyMode 'auto' (the debit is then realized).
+ * AUTO-mode ⇒ every emigration flows through ⇒ byte-identical to the pre-guard path.
+ * @param {Array<{ applyMode?: string, candidateType?: string, targetSaveId?: (string|number),
+ *   metadata?: { spatialEmigration?: { loss?: (number|string) } | null } | null }>|null|undefined} outcomes
+ *   this tick's outcomesToApply (the queued set, pre-realization)
+ * @returns {EmigrationEvent[]} the debited shed pools, safe to dispatch
+ */
+export function collectRealizedEmigrationEvents(outcomes) {
+  /** @type {EmigrationEvent[]} */
+  const events = [];
+  for (const outcome of outcomes || []) {
+    // Queued (proposal) ⇒ origin NOT debited this tick ⇒ never dispatch (would mint).
+    if (outcome?.applyMode === 'proposal') continue;
+    const shed = outcome?.metadata?.spatialEmigration;
+    if (outcome?.candidateType === 'population_emigration' && shed && Number(shed.loss) > 0) {
+      events.push({ originId: String(outcome.targetSaveId), loss: Math.max(0, Math.floor(Number(shed.loss))) });
+    }
+  }
+  return events;
+}
+
+/**
  * Dispatch this tick's applied mass-emigration events into in-transit columns: per
  * event, build the reachable-destination candidates + plan the fate (two mortality
  * sinks, 4-axis destinations, congestion + scatter brakes), ASSERT conservation, and

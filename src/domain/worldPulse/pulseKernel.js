@@ -61,7 +61,7 @@ import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceR
 import { advanceSettlementSupply } from './supplyKernel.js';
 import { advanceEntrepotLayer } from './entrepotKernel.js';
 import { entrepotTargetPremium } from '../spatial/entrepots.js';
-import { releaseMigrationArrivals, dispatchMigrations } from './migrationKernel.js';
+import { releaseMigrationArrivals, dispatchMigrations, collectRealizedEmigrationEvents } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
@@ -359,7 +359,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const roadSeason = seasonForTick(worldState.calendar.elapsedWeeks).season;
   // Flag-on granary states for the season boundary markers (harvest thinness,
   // hungry-gap direness) — collected from this tick's stockpile advance.
-  /** @type {Array<{ id: string, name: string, storageMonths: number, deficitPct: number }>} */
+  /** @type {Array<{ id: string, name: string, present: boolean, storageMonths: number, deficitPct: number }>} */
   const seasonalFoodStates = [];
   for (const item of snapshot.settlements) {
     const previousTickState = settlementTickStates[item.id] || null;
@@ -400,6 +400,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       seasonalFoodStates.push({
         id: String(item.id),
         name: item.name || String(item.id),
+        // present:false marks a settlement with NO food ledger (summary null). Its
+        // storageMonths 0 is a SENTINEL, not a real empty granary — the harvest news
+        // filter excludes it so it is never miscounted as holding thin stores.
+        present: !!stocked.summary,
         storageMonths: stocked.summary ? stocked.summary.storageMonths : 0,
         deficitPct: stocked.summary ? stocked.summary.effectiveDeficitPct : 0,
       });
@@ -1763,14 +1767,12 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // half lands hopWeeks later). AGGREGATE counts only — no named NPC is ever touched.
   // DORMANT (no spatial marker / no emigration events) ⇒ changed:false ⇒ byte-identical.
   if (migrationActive(memoryState)) {
-    /** @type {Array<{ originId: string, loss: number }>} */
-    const emigrationEvents = [];
-    for (const outcome of outcomesToApply) {
-      const shed = outcome?.metadata?.spatialEmigration;
-      if (outcome?.candidateType === 'population_emigration' && shed && Number(shed.loss) > 0) {
-        emigrationEvents.push({ originId: String(outcome.targetSaveId), loss: Math.max(0, Math.floor(Number(shed.loss))) });
-      }
-    }
+    // REALIZED-DEBIT RECONCILIATION (conservation): dispatch survivors ONLY for the
+    // emigration shed pools an origin was ACTUALLY DEBITED this tick. A proposal-mode
+    // outcome sits in outcomesToApply but the apply pass QUEUED it (never debited the
+    // origin) — dispatching it would MINT population. collectRealizedEmigrationEvents
+    // excludes those; auto-mode emigrations flow through byte-identically.
+    const emigrationEvents = collectRealizedEmigrationEvents(outcomesToApply);
     if (emigrationEvents.length) {
       const migration = dispatchMigrations({
         events: emigrationEvents,

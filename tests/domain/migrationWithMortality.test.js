@@ -28,6 +28,7 @@ import {
 import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING } from '../../src/domain/spatial/cultureDistance.js';
 import {
   buildCultureVector, dispatchMigrations, releaseMigrationArrivals, originTolerance,
+  collectRealizedEmigrationEvents,
 } from '../../src/domain/worldPulse/migrationKernel.js';
 
 // ── Fixtures ──────────────────────────────────────────────────────────────────
@@ -59,6 +60,72 @@ function makePIndex(map = {}) {
 function baseWorld(digest) {
   return { spatialCanonVersion: 1, spatialDigest: digest, tick: 0 };
 }
+
+// ── REALIZED-DEBIT RECONCILIATION: the shed pool releases only when debited ──
+describe('M4 — realized-debit reconciliation: proposal-mode emigration must not mint', () => {
+  const emig = (id, loss, applyMode) => ({
+    candidateType: 'population_emigration',
+    targetSaveId: id,
+    applyMode,
+    metadata: { spatialEmigration: { loss } },
+  });
+
+  it('an AUTO-mode emigration flows through (byte-identical to the pre-guard loop)', () => {
+    // undefined applyMode (the common case) and explicit 'auto' both pass through.
+    const events = collectRealizedEmigrationEvents([emig('s001', 400, undefined), emig('s002', 250, 'auto')]);
+    expect(events).toEqual([{ originId: 's001', loss: 400 }, { originId: 's002', loss: 250 }]);
+  });
+
+  it('a PROPOSAL-mode emigration is EXCLUDED — its origin was queued, not debited (no mint)', () => {
+    // A major emigration under majorChangesRequireProposal is queued as a proposal:
+    // applyWorldPulse.js `continue`s before the origin debit. Dispatching its loss would
+    // MINT population at the destinations. The guard drops it from the dispatch set.
+    // (This is the regression: without the `applyMode === 'proposal'` skip, the pre-guard
+    // loop returned this event and the kernel dispatched 400 undebited survivors.)
+    expect(collectRealizedEmigrationEvents([emig('s001', 400, 'proposal')])).toEqual([]);
+  });
+
+  it('mixes correctly: auto emigrations dispatch, the proposal one is held back', () => {
+    const events = collectRealizedEmigrationEvents([
+      emig('s001', 400, 'auto'),
+      emig('s002', 900, 'proposal'), // queued — must NOT dispatch (would mint 900)
+      emig('s003', 120, undefined),
+    ]);
+    expect(events).toEqual([{ originId: 's001', loss: 400 }, { originId: 's003', loss: 120 }]);
+    // The proposal origin contributes ZERO to the dispatched loss — no minted survivors.
+    expect(events.reduce((s, e) => s + e.loss, 0)).toBe(520);
+  });
+
+  it('ignores non-emigration outcomes and zero/absent/negative shed markers', () => {
+    expect(collectRealizedEmigrationEvents([
+      { candidateType: 'population_growth', targetSaveId: 's001', metadata: {} },
+      emig('s002', 0, 'auto'),        // zero shed ⇒ nothing to dispatch
+      { candidateType: 'population_emigration', targetSaveId: 's003' }, // no metadata
+      { candidateType: 'population_emigration', targetSaveId: 's004', metadata: { spatialEmigration: { loss: -5 } } },
+    ])).toEqual([]);
+    expect(collectRealizedEmigrationEvents(null)).toEqual([]);
+    expect(collectRealizedEmigrationEvents(undefined)).toEqual([]);
+  });
+
+  it('CONSERVATION when wired to dispatchMigrations: the proposal pool never departs', () => {
+    // Wire the helper to dispatchMigrations exactly as the kernel does. The proposal
+    // event (loss 500) is excluded; dispatched departures == the auto pool only, and the
+    // proposal origin never appears in a receipt — so no undebited survivor is minted.
+    const digest = digest8();
+    const ids = digest.settlementIds;
+    const snapshot = { settlements: ids.map((id) => makeItem(id, { population: 1000 })), regionalGraph: { edges: [] } };
+    const worldState = baseWorld(digest);
+    const outcomesToApply = [
+      emig(ids[1], 300, 'auto'),
+      emig(ids[2], 500, 'proposal'), // the leak: queued, origin not debited
+    ];
+    const events = collectRealizedEmigrationEvents(outcomesToApply);
+    const dispatch = dispatchMigrations({ events, snapshot, pIndex: makePIndex(), digest, worldState, rng: createPRNG('rd'), season: 'summer', tick: 0 });
+    const dispatchedDepartures = dispatch.receipts.reduce((s, r) => s + r.departures, 0);
+    expect(dispatchedDepartures).toBe(300);               // ONLY the auto pool departed
+    expect(dispatch.receipts.some((r) => r.originId === ids[2])).toBe(false); // proposal origin absent
+  });
+});
 
 // ── DORMANCY ──────────────────────────────────────────────────────────────────
 describe('M4 — DORMANCY: no marker ⇒ no-op, byte-identical', () => {

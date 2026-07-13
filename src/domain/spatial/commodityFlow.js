@@ -554,6 +554,12 @@ export function advanceCommodityFlow({
     // M6c: the believed danger this caravan set out into (0 when absent / peaceful).
     const ranDanger = ev ? finiteNumber(raw.ranDanger, 0) : 0;
     if (ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) rec.ranDanger = round4(ranDanger);
+    // M7: carry the smuggle marker across in-transit ticks. Without it a multi-tick smuggle
+    // run loses smuggle:true on reconstruction and the criminal rumor carrier (pulseKernel
+    // reads r.smuggle on the just-advanced ledger) goes dark after the dispatch tick — the
+    // besieged trickle would light the crime lane once, then vanish mid-transit. A
+    // non-smuggle record has no smuggle field ⇒ byte-identical (the lane stays dormant).
+    if (raw.smuggle) rec.smuggle = true;
     // A ledger-only starvation latch (M2 wrote sourceId '' / arrivalTick -1) carries no
     // goods — drop it (this tick recomputes starvation fresh).
     if (!rec.sourceId || rec.carried <= 0) continue;

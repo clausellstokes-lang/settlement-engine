@@ -198,7 +198,7 @@ export function isLateWinter(clock) {
  *            severity: number, headline: string, summary: string,
  *            settlementIds: string[], reasons: string[], score?: number }} SeasonMarkerEntry
  * @param {{ prevWeeks: number, weeks: number, tick: number, now: string,
- *           foodStates: Array<{ id: string, name: string, storageMonths: number, deficitPct: number }> }} args
+ *           foodStates: Array<{ id: string, name: string, present?: boolean, storageMonths: number, deficitPct: number }> }} args
  * @returns {SeasonMarkerEntry[]} wizard-news entries (possibly empty)
  */
 export function seasonalBoundaryEntries({ prevWeeks, weeks, tick, now, foodStates = [] }) {
@@ -211,7 +211,10 @@ export function seasonalBoundaryEntries({ prevWeeks, weeks, tick, now, foodState
     const clock = seasonForTick(w);
     // Entering autumn: the harvest marker (fires once, at the quarter boundary).
     if (clock.season === 'autumn' && clock.weekOfSeason === 1) {
-      const thin = foodStates.filter((s) => s.storageMonths < 1);
+      // present !== false: a settlement with NO food ledger (present:false) carries a
+      // sentinel storageMonths 0 that must NOT read as "thin stores". Legacy callers that
+      // omit `present` are unaffected (undefined !== false ⇒ counted as before).
+      const thin = foodStates.filter((s) => s.present !== false && s.storageMonths < 1);
       entries.push({
         id: `wizard_news.season.harvest.${clock.year}.${tick}`,
         tick,
@@ -231,7 +234,7 @@ export function seasonalBoundaryEntries({ prevWeeks, weeks, tick, now, foodState
     }
     // Entering month 12: the hungry gap (the historical late-winter crisis window).
     if (clock.season === 'winter' && clock.weekOfSeason === T.lateWinterWeekOfSeason) {
-      const dire = foodStates.filter((s) => s.storageMonths < T.direStorageMonths && s.deficitPct > T.direDeficitPct);
+      const dire = foodStates.filter((s) => s.present !== false && s.storageMonths < T.direStorageMonths && s.deficitPct > T.direDeficitPct);
       entries.push({
         id: `wizard_news.season.hungry_gap.${clock.year}.${tick}`,
         tick,

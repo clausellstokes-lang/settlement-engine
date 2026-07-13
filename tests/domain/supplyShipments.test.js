@@ -247,6 +247,39 @@ describe('M2 — starvation: only on extended TOTAL cut + empty buffer; TEMPORAR
     expect(fed.starving).toBe(false); // TEMPORARY — lifted on arrival
     expect(fed.bufferWeeks).toBeGreaterThan(0); // the caravan refilled the buffer
   });
+
+  it('the starvation SENTINEL is NOT misread as an arrival when only real sources are severed', () => {
+    // The production predicate (warFrontsInto) severs the REAL producers p1/p2 but NOT the
+    // sentinel's empty sourceId '' (no war front targets ''). The OLD code rehydrated the
+    // sentinel as an in-transit record, so ARRIVE (tick >= -1, always true) refilled the
+    // buffer for free and lifted starvation with the road still cut. The guard drops it.
+    const link = ironLink(0, true); // empty buffer
+    const onlyRealSevered = (id) => id === 'p1' || id === 'p2';
+    const sentinel = { institutionId: 'smithy', settlementId: 'c', input: 'iron', sourceId: '', arrivalTick: -1, starving: true };
+    const out = stepSupplyLink(link, sentinel, clearCtx({ tick: 5, sourceSevered: onlyRealSevered }));
+    expect(out.arrived).toBe(false);   // the sentinel must NOT "arrive"
+    expect(out.bufferWeeks).toBe(0);   // no phantom refill
+    expect(out.starving).toBe(true);   // starvation PERSISTS while the road stays cut
+  });
+});
+
+describe('M2 — caravan latency rides the PULSE clock (coarse intervals do not stretch it)', () => {
+  it('dispatch scales arrivalTick by the tick span, not tick + routeWeeks', () => {
+    const digest = lineDigest();
+    const link = { institutionId: 'smithy', settlementId: 'c', input: 'iron',
+      rankedSources: rankSupplySources(digest, 'c', ['p1', 'p2']), bufferWeeks: T.BUFFER_WEEKS, critical: true };
+    const picked = pickSource(link.rankedSources, {
+      digest, worldState: worldWith(), destinationId: 'c', riskTolerance: 1,
+      sourceSevered: () => false, isHostileToDestination: () => false,
+    });
+    const routeW = routeWeeks(digest, picked.route.baseCost);
+    expect(routeW).toBeGreaterThanOrEqual(2); // fixture guard: route long enough for span-scaling to bite
+    const weekly = stepSupplyLink(link, null, clearCtx({ tick: 0, tickWeeks: 1 }));
+    const monthly = stepSupplyLink(link, null, clearCtx({ tick: 0, tickWeeks: 4 }));
+    expect(weekly.record.arrivalTick).toBe(routeW);                              // weekly pulses: unchanged (byte-identical)
+    expect(monthly.record.arrivalTick).toBe(Math.max(1, Math.round(routeW / 4))); // monthly: span-scaled, not tick + routeW
+    expect(monthly.record.arrivalTick).toBeLessThan(weekly.record.arrivalTick);   // the coarse interval no longer 4x-parks the caravan
+  });
 });
 
 describe('M2 — banditry integration (real, delivered shipments; deterministic + bounded)', () => {
