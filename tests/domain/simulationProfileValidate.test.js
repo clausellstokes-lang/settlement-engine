@@ -59,23 +59,31 @@ describe('validateSimulationProfile — total, deterministic, idempotent', () =>
     }
   });
 
-  test('forward values fail closed and are reported as stored coercions', () => {
-    // M10a: infoMode 'full' is now a LIVE rung, so a garbage infoMode is used here
-    // to exercise information_not_yet_built (the still-locked forward axes —
-    // progression living/autonomous [M10b], geography, travel — remain clamped).
+  test('unrecognized progression + still-locked forward axes fail closed as stored coercions', () => {
+    // M10a: infoMode 'full' is a LIVE rung, so a garbage infoMode exercises
+    // information_not_yet_built. M10b: living/autonomous SHIP, so an UNRECOGNIZED
+    // worldProgression value is what fails closed now (geography/travel stay locked).
     const { canonical, coercions } = validateSimulationProfile({
-      worldProgression: 'autonomous', spatialMode: 'mapped', travelMode: 'slow', infoMode: 'garble',
+      worldProgression: 'nonsense', spatialMode: 'mapped', travelMode: 'slow', infoMode: 'garble',
     });
     expect(canonical.worldProgression).toBe('dm_advanced');
     expect(canonical.spatialMode).toBe('ignore');
     expect(canonical.travelMode).toBe('instant');
     expect(canonical.infoMode).toBe('omniscient');
     const byKey = Object.fromEntries(coercions.map(c => [c.key, c]));
-    expect(byKey.worldProgression.law).toBe('progression_not_yet_built');
+    expect(byKey.worldProgression.law).toBe('progression_unrecognized');
     expect(byKey.spatialMode.law).toBe('geography_not_yet_built');
     expect(byKey.travelMode.law).toBe('instant_travel_without_geography');
     expect(byKey.infoMode.law).toBe('information_not_yet_built');
     for (const c of coercions) expect(c.kind).toBe('stored');
+  });
+
+  test('M10b: living/autonomous progression is ACCEPTED (no coercion)', () => {
+    for (const mode of ['living', 'autonomous']) {
+      const { canonical, coercions } = validateSimulationProfile({ worldProgression: mode });
+      expect(canonical.worldProgression).toBe(mode);
+      expect(coercions.find(c => c.key === 'worldProgression')).toBeUndefined();
+    }
   });
 
   test('frozen pauses autonomy PRESENTATION-only: the stored setting survives', () => {
@@ -112,11 +120,13 @@ describe('validateSimulationProfile — total, deterministic, idempotent', () =>
 });
 
 describe('accessors — virtual reads are total and legacy-faithful', () => {
-  test('worldProgressionOf: only explicit frozen freezes; everything else is dm_advanced', () => {
+  test('worldProgressionOf: frozen freezes, living/autonomous pass through (M10b), else dm_advanced', () => {
     expect(worldProgressionOf(undefined)).toBe('dm_advanced');
     expect(worldProgressionOf({})).toBe('dm_advanced');
-    expect(worldProgressionOf({ worldProgression: 'living' })).toBe('dm_advanced');
+    expect(worldProgressionOf({ worldProgression: 'living' })).toBe('living');
+    expect(worldProgressionOf({ worldProgression: 'autonomous' })).toBe('autonomous');
     expect(worldProgressionOf({ worldProgression: 'frozen' })).toBe('frozen');
+    expect(worldProgressionOf({ worldProgression: 'nonsense' })).toBe('dm_advanced');
   });
 
   test('politicalAutonomyOf: explicit mode wins; else the legacy flag maps in', () => {

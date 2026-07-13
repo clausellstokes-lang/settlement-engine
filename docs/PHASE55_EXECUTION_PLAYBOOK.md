@@ -65,6 +65,7 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | Parking-lot F24 fix | c85781f0 (cherry-pick of 6faa1045) | the STRANDED F24 fix landed on review-fixes: AccountPage profileSourceKey NUL join-separator → '|' (ephemeral memo, behavior-safe). src/ NUL scan 2→1 (the remaining one is the supplyCompleteness delimiter, §0.0.2). eslint clean; account smoke 2/2 |
 | Parking-lot 5.5-K freeze-first guard | 47ccd6dd | +3 pins for the previously-uncovered live-capture double-read (differ⇒warn+return-FIRST; match⇒no-warn; throw⇒swallowed). Structural-prevention; 0 product code, 0 first-paint bytes. Seam already fully wired 5.5-M @ 18fc15f2 → §0.6 stale note corrected |
 | FP-2a aiSlice reclaim (first store-slice split) | 715fe7b2 | −2,448 B closure (1,255,965→1,253,517) via the loadEngine pattern: lib/ai.js + narrativeMutations.js (both SOLE-imported by aiSlice, reached only from async actions after the sync prefix) dynamic-imported at their call sites, memoized. NOT the §0.7 eager-stub/body-extraction — that defers each action's sync prefix (set(aiLoading)+abort stamp) and broke F18. Budget UNCHANGED 1,255,985 (headroom now funds M10b+W5). Recorded shift: generateNarrative invoked one microtask later (loadEngine ordering); F18 abort contract intact; 2 F18 tests yield one tick. Goldens store-free ⇒ byte-identical. Gate: full suite 8,259/8,259; verify:dist 18/18 |
+| M10b LIVING/AUTONOMOUS + CAPPED CATCH-UP (mover ladder #10, part b — M10 COMPLETE) | (this commit) | worldProgressionOf/advancesOnOpen accept living/autonomous (validator coercion progression_not_yet_built→progression_unrecognized); CATCH_UP_CAP_WEEKS=26 (owner default). catchUpCampaignWorld: capped whole-week catch-up = N one-week advanceCampaignWorld calls ⇒ DETERMINISM byte-identical to N manual (JSON-equal pin); autonomous auto-resolves / living pauses on a major. NEW PERSISTED STATE worldState.lastLivingAdvanceAt (wall-clock cursor) stamped at store level post-advance, UNDO-restored (pin), legacy/first-open SEEDS (never a 1970 delta), calendar-advances-past-cap. Trigger: WorldPulsePanel useEffect (once/open, Date.now). full_simulation preset lights worldProgression:'autonomous'+commodityFlowEnabled+allyIntelSharingEnabled; UI toggles enabled. +1,376 B eager (NOT +86 — trim available §0.8) → closure 1,254,893 ≤ 1,255,985 (margin 1,092). ⚠️ ACCEPTED preset-reinference drift (autonomous full-sim). Gate: catchUp 6/6; goldens byte-identical; profile pins updated; full suite green; verify:dist 18/18 |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
 - BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
@@ -150,6 +151,14 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   pattern (§0.7.3 correction: the eager-stub/body-extraction defers sync prefixes — do NOT use it).
   Budget still 1,255,985; the reclaim FUNDS M10b+W5 with no raise. FP-2b/c (settlementSlice, campaign
   trio) are OPTIONAL further ratchet-down (same dep-import pattern), NOT needed for the endgame.
+- M10b LIVING/AUTONOMOUS + CAPPED CATCH-UP: ✅ LANDED (2026-07-13, Opus) — M10 COMPLETE. Catch-up == N
+  manual advances (determinism pin, JSON-equal); new persisted cursor lastLivingAdvanceAt is undo-restored
+  + legacy-seeded; +1,376 B eager (trim available §0.8) → closure 1,254,893 (margin 1,092). Full suite
+  8,266/8,266; verify:dist 18/18. NEXT: M10b eager-trim → W5 → budget ratchet-down (§0.8).
+- ⚠️ MERGE (2026-07-13): claude/phase55-parking-lot MERGED to review-fixes-2026-07-08, which had advanced
+  (parallel Round-21 stream: W1 voice sidecars 25003430 + M11a PESTILENCE + their handoff
+  docs/PHASE55_ROUND21_BACKLOG_PLAN.md @ 9298b6c4). Clean merge (zero file overlap). The ladder is now at
+  M10 COMPLETE + M11a; M11b (calamity) is that stream's WIP. See §0.8 for the post-merge next steps.
 - FP-2 STORE-SLICE SPLIT (spec): SPECCED + READY (2026-07-13, Opus). Full implementation-ready
   spec at §0.7 (design + byte-identity de-risking + sequence). The ratified shared unblock; lands BEFORE
   M10b/W5 as its own focused wave (FP-2a aiSlice first). No FP-2 code written this session.
@@ -285,8 +294,16 @@ margin). Rulings:
   5. GATE: goldens byte-identical (default rules ⇒ dormant); a determinism pin (26 catch-up == 26 manual,
      byte-identical); an UNDO-survives pin (stamp restored) + a legacy-save pin (absent stamp ⇒ no phantom
      catch-up); verify:dist re-measures the +86B (must fit the 2,468 B margin) + ratchets the budget DOWN
-     to the post-M10b/W5 closure; any-cast 2252. STATUS: NOT built — the persisted-state lifecycle deserves
-     a fresh focused pass (Opus @ session-end 2026-07-13 declined to rush the owner's most-bitten class).
+     to the post-M10b/W5 closure; any-cast 2252. STATUS: ✅ BUILT + VERIFIED 2026-07-13 (Opus) — the flow
+     above shipped exactly as designed. The determinism pin (JSON-equal: 5-week catch-up == 5 manual
+     one-week advances) + the undo-restores-cursor pin + seed/up-to-date/cap/dormancy pins are green
+     (tests/store/catchUpCampaignWorld.test.js, 6/6); goldens byte-identical; the profile validator +
+     worldProgressionOf now ACCEPT living/autonomous (was 'progression_not_yet_built' → renamed
+     'progression_unrecognized'; two pins updated). ⚠️ EAGER COST +1,376 B (NOT the +86 B estimate — the
+     catchUpCampaignWorld action body rides the eager slice; FITS the budget, margin 1,092 B, FP-2a's
+     reclaim still covers M10b+W5). TRIM AVAILABLE (§0.8): lazify the catch-up body via loadWorldEngine
+     (the same FP-2a pattern) to reclaim ~800 B. TRIGGER: WorldPulsePanel fires the catch-up once on open
+     for a living/autonomous campaign (Date.now-derived; cursor makes a same-week remount a no-op).
 - (W5) ✅ RULED — RE-APPLY after FP-2, no raise. Cosmetic sweep, branch 312a5025 (reachable via
   claude/adoring-wescoff-6a25a8). CORRECTIONS: true delta 68 files (+3355/-1077) vs its OWN base
   df217415; a direct `git merge` applies -25,330 deletions / 189 files and REVERTS the M-ladder —
@@ -385,6 +402,46 @@ what funds M10b + W5 at no raise. Per-wave gate = the slice's store/join tests +
 verify:dist + any-cast 2252 + the manifest walker; one commit per slice; ledger row per §0.3-7.
 THEN unblocked: M10b (§0.6.1, CAP=26, re-measure the +86B at build) and W5 (§0.6.1, cherry-pick onto the
 reclaimed budget — NEVER merge 312a5025 directly).
+
+## 0.8 IMMEDIATE NEXT STEPS (post-merge handoff — Opus, 2026-07-13, in priority order)
+This session (branch claude/phase55-parking-lot, MERGED to review-fixes-2026-07-08) shipped: the parking-lot
+ADJUDICATION (§0.6.0) + F24 AccountPage NUL fix + 5.5-K freeze-first guard + FP-2a (−2,448 B) + M10b
+(living/autonomous catch-up, +1,376 B). Net budget: closure 1,254,893 ≤ 1,255,985 (margin 1,092 B). NOTE:
+the merge folded in the PARALLEL session's Round-21 W1 (voice sidecars 25003430) + M11a PESTILENCE + docs
+(their handoff = docs/PHASE55_ROUND21_BACKLOG_PLAN.md @ 9298b6c4 — READ IT; that stream owns the round-21
+backlog + M11). Their work is budget-free/lazy, so the merged closure ≈ this branch's; RE-MEASURE
+verify:dist on the merged tree before trusting any number. ⚠️ src/domain/spatial/calamity.js is that
+session's UNCOMMITTED WIP (M11b) in the main worktree — FOREIGN, do not touch.
+
+1. **M10b EAGER-COST TRIM (byte-discipline, ~800 B reclaim)** — M10b landed at +1,376 B, not the +86 B
+   estimate, because catchUpCampaignWorld's body sits eager in campaignWorldPulseSlice.js (the hot slice).
+   Lazify it via the FP-2a/loadEngine pattern: move the body to campaignAdvanceSession.js as
+   `runCatchUpCampaignWorld({set,get,campaignId,options})`, leave a thin eager wrapper
+   `catchUpCampaignWorld: async (id,opts) => (await loadWorldEngine()).runCatchUpCampaignWorld({...})`.
+   Optionally also move the ~10-line post-advance stamp block into runAdvanceCampaignWorld (it's store-level,
+   not the kernel — goldens unaffected). Re-run tests/store/catchUpCampaignWorld.test.js + verify:dist. This
+   restores M10b toward the estimate and lets the budget ratchet DOWN meaningfully.
+2. **W5 RE-APPLY (§0.6.1)** — cherry-pick the W5 cosmetic sweep (312a5025, via claude/adoring-wescoff-6a25a8;
+   NEVER `git merge` — reverts the M-ladder, −25,330). ~+890 B eager. ⚠️ CHECK FIT: margin is now 1,092 B, so
+   W5 fits (→ ~200 B) ONLY if M10b is trimmed first (step 1) OR you accept the thin margin. Resolve
+   OutputContainer.jsx keeping BOTH 3.5's dossierLazyTabs and W5's dossier polish; do NOT apply W5's raw-color
+   1546→1424 ratchet without its palette migration; the 11th W5 commit 6faa1045 is already landed (c85781f0)
+   — skip it. Full gate battery.
+3. **RATCHET CLOSURE_BUDGET_BYTES DOWN** (constitutional §0.2-5, only-shrinks) — after M10b-trim + W5 land,
+   set the budget const (tests/build/vendorPdfLazy.test.js) to the new measured closure + a ~50 B artifact
+   margin. This is the ratchet-down FP-2 was ruled for; do it as its own tiny commit.
+4. **The empirical 5.5-K determinism check** — the live capture seam is wired + guarded (§0.6.1); the ONE
+   residual is running an entitled canonize against a REAL FMG map to confirm two reads are byte-identical
+   (freeze-first already handles either outcome). Owner deferred this to the Living-Realm checkpoint SOAK.
+5. **supplyCompleteness.js:158 NUL** (§0.0.2) — the second live NUL byte (an intentional-looking cache-key
+   delimiter). Owner-surfaced, left as-is; decide at the master-merge byte-integrity pass.
+6. **FP-2b / FP-2c** (§0.7, OPTIONAL) — settlementSlice + campaign-trio dep-import reclaim (same loadEngine
+   pattern). Not needed for the endgame; pure further ratchet-down. settlementSlice already uses loadEngine
+   for the generator, so its unique reclaim is smaller.
+7. **THE ENDGAME** — per memory/handoff-plan-post-ladder: the mover ladder is now at M10 COMPLETE + M11a
+   (pestilence); M11b (calamity, WIP) + the round-21 backlog continue on the parallel stream, then the
+   Living-Realm checkpoint SOAKS + everything-on TUNING (next-AI), then the MASTER MERGE (the high-risk item
+   — memory/third-lineage-mystifying-ride) + push/deploy.
 
 ---
 

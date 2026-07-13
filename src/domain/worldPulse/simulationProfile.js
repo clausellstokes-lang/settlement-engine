@@ -63,16 +63,17 @@ export const INFO_MODES = Object.freeze(['omniscient', 'perfect_delayed', 'unrel
 /** @type {ReadonlyArray<{ law: string, kind: 'stored'|'presentation', apply: (input: Record<string, unknown>, canonical: Record<string, unknown>) => ProfileCoercion | null }>} */
 export const PROFILE_COERCION_LAWS = Object.freeze([
   {
-    // Forward progression modes are accepted but the engine cannot yet carry
-    // time on its own — fail closed to DM-advanced until Living/Autonomous ship.
-    law: 'progression_not_yet_built',
+    // M10b: the four progression modes (frozen/dm_advanced/living/autonomous) are
+    // ALL accepted now — Living/Autonomous ship the advance-on-open catch-up. This
+    // law only fires for an UNRECOGNIZED value, which fails closed to DM-advanced.
+    law: 'progression_unrecognized',
     kind: 'stored',
     apply: (input, canonical) => (
       'worldProgression' in input && input.worldProgression !== canonical.worldProgression
         ? {
           key: 'worldProgression', from: input.worldProgression, to: canonical.worldProgression,
-          kind: 'stored', law: 'progression_not_yet_built',
-          message: 'The world cannot yet carry time on its own — it moves when you advance it.',
+          kind: 'stored', law: 'progression_unrecognized',
+          message: 'That world-progression setting isn’t recognized — defaulting to advancing it yourself.',
         }
         : null
     ),

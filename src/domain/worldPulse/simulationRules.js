@@ -267,6 +267,15 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // M10a (CL-3): the full sim completes the info ladder — the 'full' ceiling
     // (factional beliefs + reconciliation, carried at the unreliable distortion).
     infoMode: 'full',
+    // M10b: the ceiling carries its OWN story forward — autonomous advance-on-open
+    // catch-up, with commodity continuity + ally-intel sharing LIT (the already-
+    // built M6a/M9b features a preset must enable). commodityFlowEnabled/
+    // allyIntelSharingEnabled are opt-in keys ABSENT from DEFAULT_SIMULATION_RULES,
+    // so they ride the ...input spread and touch NO pinned fixture (byte-identical
+    // off; lit only for a Full Simulation campaign).
+    worldProgression: 'autonomous',
+    commodityFlowEnabled: true,
+    allyIntelSharingEnabled: true,
   }),
 });
 
@@ -306,14 +315,42 @@ function enumValue(value, allowed, fallback) {
 /**
  * Effective world-progression read (CL-0, total on garbage). VIRTUAL: an
  * absent/unknown value IS today's behavior — dm_advanced (every advance is a DM
- * action). Only an explicit 'frozen' changes anything; the forward
- * 'living'/'autonomous' values fail closed here until those modes are built.
+ * action). 'frozen' stops advances; 'living'/'autonomous' (M10b) additionally
+ * advance the world ON OPEN (capped catch-up — advancesOnOpen). Existing campaigns
+ * carry neither living nor autonomous, so this is byte-identical for them; only a
+ * campaign that OPTED INTO living/autonomous reads a new value here (which the
+ * `=== 'frozen'` consumers ignore, and rulesMatchPreset distinguishes — the
+ * accepted preset-reinference drift, same class as SEASONS-A).
  * @param {Record<string, unknown> | null | undefined} rules
- * @returns {'frozen' | 'dm_advanced'}
+ * @returns {'frozen' | 'dm_advanced' | 'living' | 'autonomous'}
  */
 export function worldProgressionOf(rules) {
-  return rules && rules.worldProgression === 'frozen' ? 'frozen' : 'dm_advanced';
+  const v = rules && typeof rules === 'object' ? rules.worldProgression : null;
+  return (v === 'frozen' || v === 'living' || v === 'autonomous') ? v : 'dm_advanced';
 }
+
+/**
+ * M10b: does this world advance ON OPEN (the capped catch-up)? True for the two
+ * forward progression modes; false for frozen/dm_advanced (and everything legacy,
+ * where worldProgression is absent) — so the catch-up is strictly opt-in and
+ * dormant for every existing campaign.
+ * @param {Record<string, unknown> | null | undefined} rules
+ * @returns {boolean}
+ */
+export function advancesOnOpen(rules) {
+  const v = worldProgressionOf(rules);
+  return v === 'living' || v === 'autonomous';
+}
+
+/**
+ * M10b OWNER-DECISION DEFAULT (2026-07-13, ruled by the owner; retunable — the
+ * ACTOR_MAJOR_HOLD_WEEKS pattern). A living/autonomous world simulates AT MOST this
+ * many weeks of catch-up when reopened, so a long absence never locks the UI on
+ * load with an unbounded advance. Past the cap the calendar advances to "now" but
+ * the simulation stops here (owner ruling: calendar-advances-past-cap). 26 = half a
+ * game-year, and the value the design's catch-up soak exercises byte-identically.
+ */
+export const CATCH_UP_CAP_WEEKS = 26;
 
 /**
  * Effective info-mode read (Phase 5.5 STEP 3.5 — the §11 information axis,

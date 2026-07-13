@@ -30,8 +30,8 @@ export const AXES = [
     options: [
       ['frozen', 'Frozen', 'Time stands still. You reshape the world by hand.', true],
       ['dm_advanced', 'On your mark', 'The world changes only when you advance it.', true],
-      ['living', 'Living', 'Routine life advances with time itself. Arrives in a later chapter.', false],
-      ['autonomous', 'Autonomous', 'The realm carries its own story forward. Arrives in a later chapter.', false],
+      ['living', 'Living', 'Routine life advances with time itself — the world catches up when you return.', true],
+      ['autonomous', 'Autonomous', 'The realm carries its own story forward — it advances and acts on its own while you are away.', true],
     ],
   },
   {
