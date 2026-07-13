@@ -37,6 +37,8 @@ import { enqueuePulseEffect } from '../lib/analyticsQueue.js';
 import {
   extractPulseSummary, extractPulseEffects, extractStressorTransitions,
 } from '../lib/pulseFingerprint.js';
+// Coarse, id-free spatial/mover usage summary (side-channel; lazy — see spatialUsage.js).
+import { extractSpatialUsage } from '../lib/spatialUsage.js';
 import {
   extractRegionalGraphSnapshot, extractRegionalArcs, extractRegionalPropagation,
 } from '../lib/regionalFingerprint.js';
@@ -266,6 +268,9 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
       track(EVENTS.WORLD_PULSE_ADVANCED, {
         ...extractPulseSummary(result, interval),
         events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
+        // Spatial-engine usage: which movers fired + which preset/flags this tick ran
+        // under (read-only off the post-tick worldState; empty when aspatial).
+        ...extractSpatialUsage(result.worldState),
       });
       // Per-type stressor transitions (research-class; gated inside track()).
       track(EVENTS.WORLD_STRESSOR_TRANSITIONS, extractStressorTransitions(result));
@@ -407,6 +412,7 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
     track(EVENTS.WORLD_PULSE_ADVANCED, {
       ...extractPulseSummary(result, result.interval),
       events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
+      ...extractSpatialUsage(result.worldState),
     });
   }
 
