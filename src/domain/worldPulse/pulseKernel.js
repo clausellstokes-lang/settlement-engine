@@ -64,7 +64,7 @@ import { migrationActive } from '../spatial/migration.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { warFrontsInto } from './warFrontReads.js';
-import { advanceBeliefMaps, beliefMisjudgmentNewsEntries } from './beliefMap.js';
+import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
@@ -423,6 +423,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // institution/faction. Flows through settlementMap →
   // settlementUpdates → persistence. (The replacement NPC is seeded further below.)
   const reformEvents = [];
+  // M9a DISSENT: the PRIOR-tick per-faction belief maps (read-last/write-next — the
+  // advance runs below). Null (skipped) when beliefs are dormant ⇒ byte-identical.
+  const beliefMapsPrior = beliefsActive(worldState) ? getSpatialLedger(worldState, 'beliefMaps') : null;
   for (const sid of [...localSettlements.keys()]) {
     let s = mirrorCorruptionOntoSettlement(localSettlements.get(sid), worldState.npcStates, String(sid));
     const exps = (corruption.exposures || []).filter((e) => String(e.settlementId) === String(sid));
@@ -464,6 +467,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // who inherits their seat in the faction/power.
     const oustedNames = exps.filter((e) => e.kind === 'ousted').map((e) => e.name);
     if (oustedNames.length) s = replaceOustedNpcs(s, oustedNames, rng.fork(`replace:${sid}:${worldState.tick}`));
+    // M9a DISSENT → council_schism: a faction reading the world materially
+    // differently from the ruling coalition splits the council — a legible internal
+    // stressor (an activeCondition; no mechanical coup this wave). Pure detection off
+    // the prior-tick belief map; null (agreement / no differentiated faction belief /
+    // dormant) ⇒ no condition ⇒ byte-identical.
+    if (beliefMapsPrior) {
+      const schism = detectCouncilSchism({
+        observerId: sid,
+        factionMaps: /** @type {Record<string, unknown>} */ (beliefMapsPrior)[String(sid)],
+        coalition: governingCoalition(s),
+      });
+      if (schism) {
+        // Copy passed INLINE (not a CONDITION_ARCHETYPE_TEMPLATES entry) so the
+        // condition is well-formed without touching the EAGER activeConditions
+        // module — M9a is budget-free (this kernel is the lazy engine chunk).
+        s = withActiveCondition(s, {
+          archetype: 'council_schism',
+          label: 'Council schism',
+          description: 'The ruling council is split: a faction reads the outside world differently from the seat.',
+          affectedSystems: ['public_legitimacy', 'faction_power', 'social_trust'],
+          severity: schism.severity,
+          triggeredAt: { tick: worldState.tick, sourceEventType: 'BELIEF_DISSENT', sourceEventTargetId: String(sid) },
+          causes: [{
+            source: `faction:${schism.factionKey}`,
+            effect: 'council_schism',
+            reason: schism.relFlip
+              ? `The ${schism.factionKey} faction reads ${schism.subjectId} on a different footing than the seat — a stance the ruling coalition has not accepted.`
+              : `The ${schism.factionKey} faction reads ${schism.subjectId}'s strength ${schism.bandGap} bands from the seat's; the council is split over which threat is real.`,
+          }],
+        });
+      }
+    }
     localSettlements.set(sid, s);
   }
 

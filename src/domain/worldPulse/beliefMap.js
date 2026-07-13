@@ -54,15 +54,41 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
 import { hasSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 
-// ── The v1 faction slot (present from day one; the governing coalition) ───────
-/** The single faction key v1 carries — the governing seat's operational belief.
- *  Real per-faction keys (merchant/military/clergy/criminal/public) light in
- *  Wave B; the dimension EXISTS now so that is a value change, not a schema break. */
+// ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
+/** The governing seat's operational belief — the v1 map that DRIVES the war
+ *  chooser (settlementStrategy). Fed by ALL reports (byte-identical to Wave A);
+ *  M9a leaves this slot UNCHANGED and lights the per-faction slots ALONGSIDE it. */
 export const GOVERNING_SEAT_KEY = 'seat';
+
+/** The populace's common-knowledge belief — fed by the AMBIENT stream (firsthand,
+ *  un-carrier-tagged tellings) PLUS whatever a COMPROMISED faction leaks (M9a
+ *  leakage). A political faction, always eligible (the populace needs no roster seat). */
+export const PUBLIC_FACTION_KEY = 'public';
+
+/**
+ * M9a — THE CARRIER↔FACTION PARTITION (design §VI, "faction belief maps are the
+ * NATURAL PARTITION of the information the carriers already deliver"). A rumor
+ * arrival carries carrier-bias FRAMING tags (round-9 carriers: trade→'merchant',
+ * army→'army', smuggle→'criminal', ship→'ship', faith→'faith'). Each political
+ * faction's belief is fed ONLY by the reports whose carrier feeds it:
+ *   merchant  ← the TRADE carrier (framing 'merchant')
+ *   military  ← the ARMY / courier carrier (framing 'army')
+ *   criminal  ← the SMUGGLE carrier (framing 'criminal')
+ *   religious ← the FAITH carrier (framing 'faith') — a SEAM: no faith carrier is
+ *               lit yet, so this slot stays empty until the faith mover lights it.
+ * The 'public' slot is the AMBIENT (untagged) stream, handled separately. Frozen so
+ * a typo'd archetype reads `undefined`. */
+export const FACTION_CARRIER_FRAMING = Object.freeze({
+  merchant: 'merchant',
+  military: 'army',
+  criminal: 'criminal',
+  religious: 'faith',
+});
 
 // ── Tuning (documented here; retuned in the checkpoint soak) ──────────────────
 export const BELIEF_TUNING = Object.freeze({
@@ -450,19 +476,27 @@ function relationshipNeighbourhood(snapshot, worldState) {
  * The rumor arrivals that inform an observer's beliefs, indexed subject → reports.
  * Reads the observer's 3.5 rumor ledger; a record about subject S (S in whereId ∪
  * partyIds, S != observer) with arrivalTick ≤ now is a report about S.
+ * M9a: an optional `matchFraming(framing[])` predicate PARTITIONS the ledger by
+ * carrier (the per-faction slots pass one; the seat passes null ⇒ ALL reports ⇒
+ * byte-identical to Wave A).
  * @param {unknown} observerLedger  worldState.rumorLedgers[observerId]
  * @param {string} observerId @param {number} now
+ * @param {((framing: string[]) => boolean) | null} [matchFraming]
  * @returns {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>}
  */
-function reportsBySubject(observerLedger, observerId, now) {
+function reportsBySubject(observerLedger, observerId, now, matchFraming = null) {
   /** @type {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>} */
   const out = new Map();
   const ledger = asObject(observerLedger);
   for (const key of Object.keys(ledger)) {
-    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown } | null } */ (ledger[key]);
+    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown } | null } */ (ledger[key]);
     if (!rec || typeof rec !== 'object') continue;
     const arrivalTick = Math.floor(finiteNumber(rec.arrivalTick, Infinity));
     if (arrivalTick > now) continue; // in transit — not yet heard
+    if (matchFraming) {
+      const framing = Array.isArray(rec.framing) ? rec.framing.map(String) : [];
+      if (!matchFraming(framing)) continue; // not this faction's carrier — skip
+    }
     const content = asObject(rec.content);
     const parties = new Set(
       [content.whereId, ...(Array.isArray(content.partyIds) ? content.partyIds : [])]
@@ -498,6 +532,168 @@ function sortReports(rows) {
     || compareCodepoint(a.report.sortKey, b.report.sortKey));
 }
 
+// ── M9a: the faction roster + the governing coalition (design §VI.4-1) ─────────
+/** The faction roster the belief layer reads off a snapshot item (the SAME source
+ *  npcAgency / thievesGuild read — powerStructure first, then the loose aliases).
+ *  @param {SnapItem | null | undefined} item @returns {Array<Record<string, unknown>>} */
+function settlementFactionRoster(item) {
+  const it = asObject(item);
+  const s = it.settlement && typeof it.settlement === 'object' ? asObject(it.settlement) : it;
+  const facs = asObject(s.powerStructure).factions || s.factions || s.powerFactions || asObject(s.politics).factions;
+  return Array.isArray(facs) ? /** @type {Array<Record<string, unknown>>} */ (facs) : [];
+}
+
+/** A faction is COMPROMISED (owner vocab = corruption; covert or revealed) when it
+ *  carries a corruption/covert impairment, sits at a captured underworld rung, or
+ *  the corruption pass stamped a vector on it. Its private intel LEAKS (M9a).
+ *  @param {unknown} faction @returns {boolean} */
+export function isFactionCompromised(faction) {
+  if (!faction || typeof faction !== 'object') return false;
+  const f = /** @type {Record<string, unknown>} */ (faction);
+  const imps = f.impairments;
+  if (Array.isArray(imps) && imps.some((i) => i && (i.type === 'corruption' || i.covert === true))) return true;
+  const cap = f.captureState;
+  const capObj = asObject(cap);
+  const rung = typeof cap === 'string' ? cap : (capObj.rung || capObj.state);
+  if (rung === 'corrupted' || rung === 'capture') return true;
+  return !!f.corruptionVector;
+}
+
+/**
+ * The observer's per-faction belief slots to build: archetype → { framingTag }
+ * for each faction present whose archetype maps to a carrier, plus the set of
+ * carrier framing tags a COMPROMISED faction leaks (into the public slot).
+ * @param {SnapItem | null | undefined} item
+ * @returns {{ slots: Map<string, { framingTag: string }>, leakedTags: Set<string> }}
+ */
+function observerFactionSlots(item) {
+  /** @type {Map<string, { framingTag: string }>} */
+  const slots = new Map();
+  /** @type {Set<string>} */
+  const leakedTags = new Set();
+  for (const fac of settlementFactionRoster(item)) {
+    const archetype = factionArchetype(fac);
+    const framingTag = /** @type {Record<string, string>} */ (FACTION_CARRIER_FRAMING)[archetype];
+    if (!framingTag) continue; // government / noble / civic / … have no carrier feed
+    if (!slots.has(archetype)) slots.set(archetype, { framingTag });
+    if (isFactionCompromised(fac)) leakedTags.add(framingTag);
+  }
+  return { slots, leakedTags };
+}
+
+/** The governing seat faction: the isGoverning flag wins; else the highest-power
+ *  faction (codepoint tie-break for determinism). Null on an empty roster.
+ *  @param {Array<Record<string, unknown>>} roster @returns {Record<string, unknown> | null} */
+function pickGoverningFaction(roster) {
+  /** @type {Record<string, unknown> | null} */
+  let seat = null;
+  let topPower = -Infinity;
+  for (const fac of roster) {
+    if (fac.isGoverning) return fac;
+    const p = Number(fac.power);
+    const power = Number.isFinite(p) ? p : 0;
+    if (seat === null || power > topPower) { topPower = power; seat = fac; }
+  }
+  return seat;
+}
+
+/** The archetypes the governing seat treats as OPPONENTS — the seat's declared
+ *  `rivals` (names/ids resolved back to roster archetypes). Absent ⇒ empty (a
+ *  unified council: absence-of-rivalry reads as allied).
+ *  @param {Record<string, unknown> | null} seatFac
+ *  @param {Array<Record<string, unknown>>} roster @returns {Set<string>} */
+function coalitionOpponents(seatFac, roster) {
+  /** @type {Set<string>} */
+  const opponents = new Set();
+  const rivals = seatFac ? seatFac.rivals : null;
+  if (!Array.isArray(rivals) || !rivals.length) return opponents;
+  const rivalKeys = new Set(rivals.map((r) => String(r && typeof r === 'object' ? (r.id ?? r.name ?? r.faction ?? '') : r).toLowerCase()).filter(Boolean));
+  for (const fac of roster) {
+    const keys = [fac.id, fac.name, fac.faction].map((x) => String(x || '').toLowerCase()).filter(Boolean);
+    if (keys.some((k) => rivalKeys.has(k))) opponents.add(factionArchetype(fac));
+  }
+  return opponents;
+}
+
+/**
+ * Derive the governing COALITION (design §VI.4-1's deferred half): the governing
+ * seat's archetype + the archetypes of the factions ALLIED to it (present factions
+ * not on the seat's rivals). The coalition's operational belief IS the `seat` slot;
+ * membership colours DISSENT (an in-coalition faction diverging is the sharper
+ * schism). Pure.
+ * @param {SnapItem | null | undefined} item
+ * @returns {{ governing: string | null, members: Set<string>, opponents: Set<string> }}
+ */
+export function governingCoalition(item) {
+  const roster = settlementFactionRoster(item);
+  const seatFac = pickGoverningFaction(roster);
+  const governing = seatFac ? factionArchetype(seatFac) : null;
+  const opponents = coalitionOpponents(seatFac, roster);
+  /** @type {Set<string>} */
+  const members = new Set();
+  if (governing && governing !== 'other') members.add(governing);
+  for (const fac of roster) {
+    const a = factionArchetype(fac);
+    if (a && a !== 'other' && !opponents.has(a)) members.add(a);
+  }
+  return { governing, members, opponents };
+}
+
+/**
+ * Reconcile ONE faction slot (seat or a per-faction slot) from its DECAYED prior +
+ * this window's (already carrier-filtered) reports. This is the Wave-A per-subject
+ * loop, lifted verbatim so the seat slot stays byte-identical while the per-faction
+ * slots reuse the SAME reconciliation core.
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.priorSlot
+ * @param {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>} args.reports
+ * @param {GroundTruthCtx} args.ctx
+ * @param {Map<string, Map<string, string>>} args.neighbours
+ * @param {string} args.observerId @param {number} args.now
+ * @returns {{ bySubject: Record<string, BeliefRecord>, pruned: boolean }}
+ */
+function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now }) {
+  const T = BELIEF_TUNING;
+  const subjectIds = new Set([...Object.keys(priorSlot), ...reports.keys()].map(String));
+  /** @type {Record<string, BeliefRecord>} */
+  const bySubject = {};
+  let pruned = false;
+  for (const subjectId of [...subjectIds].sort(compareCodepoint)) {
+    const priorRec = /** @type {BeliefRecord | null} */ (
+      priorSlot[subjectId] && typeof priorSlot[subjectId] === 'object' ? priorSlot[subjectId] : null
+    );
+    const rows = reports.get(subjectId) || [];
+    // Reports FRESH since the last refresh (existing belief) or recent enough to
+    // materialize (new belief) — bounds resurrection of a pruned belief.
+    const freshRows = sortReports(rows.filter(({ arrivalTick }) => (priorRec
+      ? arrivalTick > Math.floor(finiteNumber(priorRec.lastUpdateTick, -Infinity))
+      : now - arrivalTick <= T.MATERIALIZE_WINDOW)));
+    const freshReports = freshRows.map((row) => row.report);
+
+    if (!priorRec && !freshReports.length) continue; // no belief, no fresh word
+
+    // The current true relationship label observer↔subject (for the re-anchor).
+    const trueType = neighbours.get(observerId)?.get(subjectId) || priorRec?.allianceLabel || 'unknown';
+    const groundTruth = groundTruthBelief(subjectId, trueType, ctx, now);
+
+    let record;
+    if (freshReports.length) {
+      const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
+      const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent) } : null;
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now });
+    } else {
+      // Silence: decay confidence, keep the frozen value.
+      const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
+      const conf = decayedConfidence(/** @type {BeliefRecord} */ (priorRec).confidence01, silent);
+      record = { .../** @type {BeliefRecord} */ (priorRec), confidence01: round4(conf) };
+    }
+
+    if (record.confidence01 < T.MIN_CONFIDENCE) { pruned = true; continue; } // forgotten
+    bySubject[subjectId] = record;
+  }
+  return { bySubject, pruned };
+}
+
 /**
  * Advance the belief maps one tick (design §4g / V.4). DORMANT (marker absent or
  * infoMode omniscient) ⇒ { next: prior, changed: false } — zero work, an existing
@@ -531,7 +727,6 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
   const ctx = { byId, pressureIdx, worldState };
   const neighbours = relationshipNeighbourhood(snapshot, worldState);
   const priorPresent = !!prior && Object.keys(prior).length > 0;
-  const T = BELIEF_TUNING;
 
   // ── COLD-START: seed the declared neighbourhood to ground truth, once. ──────
   if (!priorPresent) {
@@ -560,51 +755,130 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
   let mutated = false;
 
   for (const observerId of [...observers].sort(compareCodepoint)) {
-    const priorSeat = asObject(asObject(asObject(prior)[observerId])[GOVERNING_SEAT_KEY]);
-    const reports = reportsBySubject(rumorLedgers[observerId], observerId, now);
-    // Subjects to consider: prior beliefs ∪ subjects heard about this window.
-    const subjectIds = new Set([...Object.keys(priorSeat), ...reports.keys()].map(String));
-    /** @type {Record<string, BeliefRecord>} */
-    const bySubject = {};
-    for (const subjectId of [...subjectIds].sort(compareCodepoint)) {
-      const priorRec = /** @type {BeliefRecord | null} */ (
-        priorSeat[subjectId] && typeof priorSeat[subjectId] === 'object' ? priorSeat[subjectId] : null
-      );
-      const rows = reports.get(subjectId) || [];
-      // Reports FRESH since the last refresh (existing belief) or recent enough to
-      // materialize (new belief) — bounds resurrection of a pruned belief.
-      const freshRows = sortReports(rows.filter(({ arrivalTick }) => (priorRec
-        ? arrivalTick > Math.floor(finiteNumber(priorRec.lastUpdateTick, -Infinity))
-        : now - arrivalTick <= T.MATERIALIZE_WINDOW)));
-      const freshReports = freshRows.map((row) => row.report);
+    const priorObserver = asObject(asObject(prior)[observerId]);
+    const item = byId.get(String(observerId));
 
-      if (!priorRec && !freshReports.length) continue; // no belief, no fresh word
+    // ── The SEAT slot (the governing coalition's operational belief) — ALL reports,
+    //    byte-identical to Wave A: the whole ledger reconciled through reconcileSlot. ─
+    const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
+    const seat = reconcileSlot({
+      priorSlot: priorSeat,
+      reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
+      ctx, neighbours, observerId, now,
+    });
+    if (seat.pruned) mutated = true;
 
-      // The current true relationship label observer↔subject (for the re-anchor).
-      const trueType = neighbours.get(observerId)?.get(subjectId) || priorRec?.allianceLabel || 'unknown';
-      const groundTruth = groundTruthBelief(subjectId, trueType, ctx, now);
-
-      let record;
-      if (freshReports.length) {
-        const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
-        const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent) } : null;
-        record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now });
-      } else {
-        // Silence: decay confidence, keep the frozen value.
-        const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
-        const conf = decayedConfidence(/** @type {BeliefRecord} */ (priorRec).confidence01, silent);
-        record = { .../** @type {BeliefRecord} */ (priorRec), confidence01: round4(conf) };
+    // ── The PER-FACTION slots (M9a) — each fed by its round-9 carrier's partition of
+    //    the SAME ledger; sparse (materialized only where the faction is present AND
+    //    a carrier-tagged report arrived / a prior slot survives). A COMPROMISED
+    //    faction LEAKS its carrier into the public stream. ─────────────────────────
+    /** @type {Record<string, Record<string, BeliefRecord>>} */
+    const factionSlots = {};
+    if (item) {
+      const { slots, leakedTags } = observerFactionSlots(item);
+      for (const archetype of [...slots.keys()].sort(compareCodepoint)) {
+        const framingTag = /** @type {{ framingTag: string }} */ (slots.get(archetype)).framingTag;
+        const built = reconcileSlot({
+          priorSlot: asObject(priorObserver[archetype]),
+          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
+          ctx, neighbours, observerId, now,
+        });
+        if (built.pruned) mutated = true;
+        if (Object.keys(built.bySubject).length) factionSlots[archetype] = built.bySubject;
       }
-
-      if (record.confidence01 < T.MIN_CONFIDENCE) { mutated = true; continue; } // forgotten
-      bySubject[subjectId] = record;
+      // public ← AMBIENT (untagged firsthand) ∪ LEAKED (compromised carriers).
+      const publicBuilt = reconcileSlot({
+        priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
+        reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
+          (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
+        ctx, neighbours, observerId, now,
+      });
+      if (publicBuilt.pruned) mutated = true;
+      if (Object.keys(publicBuilt.bySubject).length) factionSlots[PUBLIC_FACTION_KEY] = publicBuilt.bySubject;
     }
-    if (Object.keys(bySubject).length) next[observerId] = { [GOVERNING_SEAT_KEY]: bySubject };
+
+    // Assemble the observer's faction dimension: seat + per-faction, codepoint-sorted
+    // keys (byte-stable). Empty rosters ⇒ { seat } only ⇒ byte-identical to Wave A.
+    /** @type {Record<string, Record<string, BeliefRecord>>} */
+    const observerOut = {};
+    if (Object.keys(seat.bySubject).length) observerOut[GOVERNING_SEAT_KEY] = seat.bySubject;
+    for (const k of Object.keys(factionSlots).sort(compareCodepoint)) observerOut[k] = factionSlots[k];
+    if (Object.keys(observerOut).length) {
+      /** @type {Record<string, Record<string, BeliefRecord>>} */
+      const sorted = {};
+      for (const k of Object.keys(observerOut).sort(compareCodepoint)) sorted[k] = observerOut[k];
+      next[observerId] = sorted;
+    }
   }
 
   const nextOrNull = Object.keys(next).length ? next : null;
   const changed = mutated || JSON.stringify(prior ?? null) !== JSON.stringify(nextOrNull);
   return { next: changed ? nextOrNull : prior, changed };
+}
+
+// ── M9a: DISSENT — the internal schism (belief divergence across the factions) ─
+/** The relationship labels the schism reads as "hostile" for a stance flip. */
+const SCHISM_HOSTILE = new Set(['hostile', 'cold_war', 'rival']);
+
+/**
+ * @typedef {Object} CouncilSchism
+ * @property {string} observerId       the settlement whose council is split
+ * @property {string} factionKey       the dissenting faction (a per-faction slot key)
+ * @property {string} subjectId        the subject the factions read differently
+ * @property {number} bandGap          |faction band − seat band|
+ * @property {boolean} relFlip         faction ⇄ seat disagree on hostility
+ * @property {boolean} inCoalition     the dissenter sits INSIDE the governing coalition
+ * @property {number} confidence01     the dissenting faction's confidence
+ * @property {number} severity         0..1 schism severity
+ */
+
+/**
+ * DISSENT (design §VI, round 14): a faction believing something MATERIALLY different
+ * from the coalition's operational (seat) belief is an internal STRESSOR — the
+ * council is split (the merchants know a rival is formidable while the mayor, acting
+ * on stale word, still thinks it slight). Reads the observer's OWN faction slots
+ * against its seat slot; returns the SHARPEST divergence (or null when the council
+ * agrees / holds no differentiated faction belief). Pure; deterministic (codepoint
+ * fold, no rng). The coalition colours severity: an IN-coalition dissenter is the
+ * worse schism (the ruling bloc itself is divided).
+ * @param {Object} args
+ * @param {string} args.observerId
+ * @param {unknown} args.factionMaps  the observer's slots (belief maps for observerId)
+ * @param {{ members?: Set<string> } | null} [args.coalition]
+ * @returns {CouncilSchism | null}
+ */
+export function detectCouncilSchism({ observerId, factionMaps, coalition = null }) {
+  const maps = asObject(factionMaps);
+  const seat = asObject(maps[GOVERNING_SEAT_KEY]);
+  if (!Object.keys(seat).length) return null;
+  const members = coalition && coalition.members instanceof Set ? coalition.members : new Set();
+  /** @type {CouncilSchism | null} */
+  let worst = null;
+  for (const factionKey of Object.keys(maps).sort(compareCodepoint)) {
+    if (factionKey === GOVERNING_SEAT_KEY) continue;
+    const slot = asObject(maps[factionKey]);
+    for (const subjectId of Object.keys(slot).sort(compareCodepoint)) {
+      const fRec = /** @type {BeliefRecord} */ (slot[subjectId]);
+      const sRec = /** @type {BeliefRecord} */ (seat[subjectId]);
+      if (!fRec || !sRec || typeof fRec !== 'object' || typeof sRec !== 'object') continue;
+      // The dissenting faction must be CONFIDENT for its divergence to split the
+      // council (a vague hunch is not a schism).
+      if (clamp01(fRec.confidence01) < BELIEF_TUNING.SIEGE_AWARENESS_CONFIDENCE) continue;
+      const bandGap = Math.abs(Math.round(finiteNumber(fRec.strengthBand, 2)) - Math.round(finiteNumber(sRec.strengthBand, 2)));
+      const relFlip = SCHISM_HOSTILE.has(String(fRec.allianceLabel)) !== SCHISM_HOSTILE.has(String(sRec.allianceLabel));
+      if (bandGap < BELIEF_TUNING.MISJUDGE_BAND_DELTA && !relFlip) continue; // no material divergence
+      const inCoalition = members.has(factionKey);
+      const severity = clamp01(0.3 + 0.12 * bandGap + (relFlip ? 0.15 : 0) + (inCoalition ? 0.15 : 0));
+      /** @type {CouncilSchism} */
+      const cand = {
+        observerId: String(observerId), factionKey, subjectId: String(subjectId),
+        bandGap, relFlip, inCoalition,
+        confidence01: round4(clamp01(fRec.confidence01)), severity: round4(severity),
+      };
+      if (!worst || cand.severity > worst.severity) worst = cand; // first (codepoint) wins ties
+    }
+  }
+  return worst;
 }
 
 // ── Misjudgment-as-cause (the fog of war made DM-visible) ─────────────────────

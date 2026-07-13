@@ -59,11 +59,13 @@ import { rustOf } from './martialReadiness.js';
 // self) returns ground truth verbatim, forking no rng ⇒ byte-exact today.
 import {
   beliefsActive, belief, readBeliefStrength, readBeliefRelationship,
-  strengthBandOf, detectMisjudgment, BELIEF_TUNING,
+  strengthBandOf, detectMisjudgment, BELIEF_TUNING, governingCoalition,
 } from './beliefMap.js';
-// The scorer down-payment (VI.3): the four move formulas, lifted to a default
-// descriptor, reconstructed byte-identical below.
-import { DEFAULT_SCORING_OBJECTIVE } from './scoringObjective.js';
+// The scorer (VI.3 down-payment → M9a two-step completion): the base-move formulas
+// live in a DEFAULT descriptor (reconstructed byte-identical below); M9a adds the
+// per-archetype objective SETS + the non-war MOVE LEVERS, selected by the governing
+// seat's archetype when the political-depth marker (beliefsActive) is live.
+import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjective.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -97,6 +99,22 @@ const STRATEGY_K = 3.5;
 // recall always wins its group.
 const MOVE_SEVERITY = 0.72;
 const OVERRIDE_SEVERITY = 0.95;
+
+// M9a NON-WAR LEVERS — the house-voice copy for the merchant / church / warlord
+// moves. They emit as INERT posture markers (no condition, no proposal — like
+// defend/hold): a merchant-governed seat that picks `reroute` over `deploy` still
+// wins the strategy:<S> exclusive group (suppressing the reactive escalation) but
+// mutates no world state. The apply-side economic effects (an actual reroute /
+// embargo) are the M9b seam.
+const LEVER_COPY = Object.freeze({
+  reroute: { headline: (/** @type {string} */ n) => `${n} reroutes its trade`, summary: (/** @type {string} */ n) => `${n}'s merchants steer their caravans around the danger rather than answer it with steel.` },
+  embargo: { headline: (/** @type {string} */ n, /** @type {string} */ t) => `${n} closes its markets to ${t}`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} answers ${t} with an embargo — economic pressure in the place of a march.` },
+  credit: { headline: (/** @type {string} */ n) => `${n} extends its credit`, summary: (/** @type {string} */ n) => `${n}'s houses underwrite their partners, buying influence with coin instead of arms.` },
+  missionize: { headline: (/** @type {string} */ n) => `${n} sends out missionaries`, summary: (/** @type {string} */ n) => `${n} spreads its faith outward rather than its soldiers.` },
+  legitimacy: { headline: (/** @type {string} */ n) => `${n} shores up its legitimacy`, summary: (/** @type {string} */ n) => `${n}'s clergy consolidate the seat's authority at home.` },
+  prestige: { headline: (/** @type {string} */ n) => `${n} seeks a stroke of prestige`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} eyes a glorious blow against ${t}.` },
+  opportunity: { headline: (/** @type {string} */ n) => `${n} weighs an opportunity`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} marks ${t} as ripe — a chance more than a grievance.` },
+});
 
 // warFrontsInto / warFrontsFrom are the PROVENANCE-GATED reads from ./warFrontReads.js
 // (imported above). The local copies here used to treat ANY confirmed war_front as a
@@ -363,18 +381,32 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * scored from aggressiveness, strength vs targets, current war/siege state, vassal
  * status, and economic exhaustion. Returns `[{ move, score }, ...]` sorted by move
  * key (NOT by score) so the softmax input order is canonical and order-free.
+ * M9a: `objective` selects the coefficient set (DEFAULT ⇒ byte-identical Wave-A
+ * scoring; a per-archetype set shifts the base-move balance AND adds its non-war
+ * levers). A default objective has NO `levers`, so the lever block never runs and
+ * the returned move set is IDENTICAL to Wave A's.
  * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number,
- *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number }} args
+ *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number,
+ *   objective?: import('./scoringObjective.js').ScoringObjective }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0 }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
-  // The scorer down-payment (VI.3): the four move coefficients now live in the
-  // DEFAULT descriptor; the arithmetic below is the SAME expression in the SAME
-  // order, so scores are byte-identical (Wave B parameterizes the descriptor).
-  const O = DEFAULT_SCORING_OBJECTIVE;
+  // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
+  // the arithmetic below is the SAME expression in the SAME order, so a DEFAULT
+  // objective is byte-identical to Wave A (M9a's per-archetype sets re-tune it).
+  const O = objective || DEFAULT_SCORING_OBJECTIVE;
   /** @type {Record<string, number>} */
   const scored = {};
+
+  // The best strength margin over any hostile target (−Infinity when none). Hoisted
+  // so both `deploy` and the warlord levers read the SAME value; calling strengthFor
+  // regardless of siege state is a pure cached lookup (no scored-output change).
+  let bestMargin = -Infinity;
+  for (const targetId of ctx.hostileTargets) {
+    const margin = sStrength - strengthFor(targetId);
+    if (margin > bestMargin) bestMargin = margin;
+  }
 
   // defend — always legal. Strong when besieged or when the settlement is weak.
   scored.defend = clamp01(O.defend.base + (ctx.homeBesieged ? O.defend.besiegedBonus : 0) + (0.5 - sStrength) * O.defend.weaknessBonus - aggr * O.defend.aggrDamp);
@@ -388,15 +420,8 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   // WAVE A: `strengthFor(targetId)` is the observer's BELIEVED strength of the
   // target (banded) when beliefs are live — so an over-confident misjudgment
   // marches, and a misinformed one holds.
-  if (!ctx.homeBesieged) {
-    let best = -Infinity;
-    for (const targetId of ctx.hostileTargets) {
-      const margin = sStrength - strengthFor(targetId);
-      if (margin > best) best = margin;
-    }
-    if (best > -Infinity && best > 0.05) {
-      scored.deploy = clamp01(O.deploy.base + best * O.deploy.marginGain + aggr * O.deploy.aggrGain - exhaustion * O.deploy.exhaustionDamp);
-    }
+  if (!ctx.homeBesieged && bestMargin > -Infinity && bestMargin > 0.05) {
+    scored.deploy = clamp01(O.deploy.base + bestMargin * O.deploy.marginGain + aggr * O.deploy.aggrGain - exhaustion * O.deploy.exhaustionDamp);
   }
 
   // sue_for_peace — GATED: S and ALL its vassals must be free (not besieged/
@@ -410,6 +435,33 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
     const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
     scored.sue_for_peace = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
+  }
+
+  // M9a NON-WAR LEVERS — enumerate the archetype's own moves (merchant reroute/
+  // embargo/credit; church missionize/legitimacy; warlord prestige/opportunity).
+  // ONLY present when the objective carries a `levers` bag (a per-archetype set), so
+  // a DEFAULT-scored settlement never reaches here ⇒ byte-identical. Scores are pure
+  // functions of the same signals; the formulas own the arithmetic (VI.3 pattern).
+  if (O.levers) {
+    const posMargin = bestMargin > -Infinity ? Math.max(0, bestMargin) : 0;
+    const hostile = ctx.hostileTargets.length > 0 ? 1 : 0;
+    const peace = 1 - hostile;
+    const besieged = ctx.homeBesieged ? 1 : 0;
+    for (const name of Object.keys(O.levers)) {
+      const L = /** @type {Record<string, number>} */ (O.levers[name]);
+      let v;
+      switch (name) {
+        case 'reroute': v = L.base + exhaustion * L.exhaustionGain + besieged * L.besiegedBonus; break;
+        case 'embargo': v = L.base + hostile * L.hostileGain - exhaustion * L.exhaustionDamp; break;
+        case 'credit': v = L.base + peace * L.peaceGain - aggr * L.aggrDamp; break;
+        case 'missionize': v = L.base + peace * L.peaceGain - aggr * L.aggrDamp; break;
+        case 'legitimacy': v = L.base + besieged * L.besiegedBonus + exhaustion * L.exhaustionGain; break;
+        case 'prestige': v = L.base + aggr * L.aggrGain + hostile * L.hostileGain; break;
+        case 'opportunity': v = L.base + posMargin * L.marginGain + aggr * L.aggrGain; break;
+        default: continue;
+      }
+      scored[name] = clamp01(v);
+    }
   }
 
   return Object.keys(scored)
@@ -519,6 +571,26 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     });
   }
 
+  // M9a NON-WAR LEVER (merchant/church/warlord) — an INERT posture marker (no
+  // condition, no proposal), same de-conflict role as defend/hold. The settlement
+  // reached for an economic / religious / opportunistic move instead of a war one;
+  // it still wins the strategy:<S> exclusive group. Apply-side effects are M9b.
+  if (/** @type {Record<string, unknown>} */ (LEVER_COPY)[move]) {
+    const copy = /** @type {{ headline: (n: string, t: string) => string, summary: (n: string, t: string) => string }} */ (
+      /** @type {Record<string, unknown>} */ (LEVER_COPY)[move]);
+    const target = ctx.hostileTargets[0];
+    const targetName = target ? (snapshot?.byId?.get?.(String(target))?.name || String(target)) : 'its rivals';
+    return strategyCandidate({
+      move,
+      sId,
+      tick,
+      severity: MOVE_SEVERITY,
+      headline: copy.headline(name, targetName),
+      summary: copy.summary(name, targetName),
+      reasons: [`${name}'s strategy chooser reached for the ${move} lever rather than a war move.`],
+    });
+  }
+
   // defend / hold — a benign, guaranteed posture marker. It carries the
   // strategy:<S> exclusive tag so the reactive escalation for S is suppressed (the
   // settlement chose NOT to escalate this tick), but applies a low-severity
@@ -622,7 +694,11 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const settlement = item?.settlement;
     const chaosPull = chaosPullOf(settlement);
     const rust = rustOf(settlement);
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust });
+    // M9a: the objective SET the governing seat scores over. DORMANT (beliefs off) OR
+    // a seat archetype with no override ⇒ DEFAULT ⇒ byte-identical Wave-A scoring;
+    // a merchant/church/warlord seat re-tunes the balance + adds its non-war levers.
+    const objective = beliefActive ? objectiveForArchetype(governingCoalition(item).governing) : DEFAULT_SCORING_OBJECTIVE;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
@@ -656,3 +732,7 @@ export const STRATEGY_TUNING = Object.freeze({ STRATEGY_K, MOVE_SEVERITY, OVERRI
 // `hash01` is imported for parity with the contest fork recipe; re-exported so
 // tests can assert the fork-key discipline without reaching into contestMath.
 export { hash01 };
+// M9a: the pure move-enumeration core, exported so the scorer tests can assert the
+// objective-parameterization (default byte-identity + per-archetype ranking + the
+// non-war levers) without driving the softmax/candidate machinery.
+export { enumerateMoves };
