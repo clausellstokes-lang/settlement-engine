@@ -33,7 +33,7 @@ import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js
 import { seasonalContextFor, seasonalBoundaryEntries, seasonalThawEntries } from './seasons.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
-import { ensureAllRelationshipStates, relaxRelationshipStates } from './relationshipEvolution.js';
+import { ensureAllRelationshipStates, relaxRelationshipStates, settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
 import { ensureNpcStates, pruneNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import {
@@ -49,7 +49,7 @@ import {
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
-import { computeDispositionFactorMap } from './disposition.js';
+import { computeDispositionFactorMap, computeLawfulness, computeMalice } from './disposition.js';
 import { computeTradeSalienceMap, computeSecondaryStatusOverlay } from './tradeSalience.js';
 import { collectDispositionDeltas } from './dispositionDeltas.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
@@ -65,6 +65,7 @@ import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
+import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
@@ -1623,6 +1624,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       pressureIdx: pIndex,
       worldState: memoryState,
       tick: worldState.tick,
+      // M9b component (4): the deliberate ally-intel sharing channel — OPT-IN
+      // (allyIntelSharingEnabled, absent from DEFAULT_SIMULATION_RULES ⇒ off by
+      // default even on a belief-active campaign ⇒ byte-identical). Styling reads the
+      // sharer's DERIVED alignment (which folds this-tick-prior moral drift — an evil
+      // sharer deceives, a lawful one relays faithfully).
+      allyIntel: simulationRules.allyIntelSharingEnabled === true ? {
+        enabled: true,
+        alignmentOf: (/** @type {string} */ id) => {
+          const it = postTimeSnapshot?.byId?.get?.(String(id));
+          return { lawfulness01: computeLawfulness(it, memoryState), malice01: computeMalice(it, memoryState) };
+        },
+      } : null,
     });
     if (beliefs.changed) {
       if (beliefs.next) {
@@ -1630,6 +1643,57 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       } else {
         // Everything decayed below the floor: the conditional sub-ledger drops to absent.
         memoryState = dropSpatialLedger(memoryState, 'beliefMaps');
+      }
+    }
+  }
+  // Phase 5.5 M9b component (3) — MORAL DRIFT (read-last/write-next). AFTER the belief
+  // advance: a settlement that INSTIGATED an offensive THIS tick on a FALSE belief —
+  // marching on a target the world no longer counts an enemy (M9a's relationship
+  // misjudgment: acting against a NON-THREAT) — pays a MORAL PRICE. Its derived
+  // settlementAlignment DRIFTS (toward malice + lawlessness), sharpest for a lawful-
+  // good aggressor (W-C2 conscience), scaled by victim innocence + past relations,
+  // and the arc SELF-CORRECTS (decays toward zero — the reckoning) unless reinforced
+  // (the spiral). PURE, NO rng. DORMANT (beliefs off / no unjust act / no prior drift)
+  // ⇒ changed:false ⇒ memoryState untouched, the ledger absent ⇒ the alignment reads
+  // are byte-identical (they have no other live consumer this wave).
+  if (beliefsActive(memoryState)) {
+    /** @type {import('../spatial/moralDrift.js').MoralDriftDeltaInput[]} */
+    const instigations = [];
+    for (const outcome of selectedForApply) {
+      const mis = outcome?.metadata?.misjudgment;
+      // UNJUST = the relationship misjudgment (believed hostile, truly not — a march on
+      // a non-threat). A pure strength misjudgment is a blunder against a REAL enemy,
+      // not an injustice, so it does NOT drift alignment.
+      if (!mis || typeof mis !== 'object' || !Array.isArray(mis.kinds) || !mis.kinds.includes('relationship')) continue;
+      const actorId = String(mis.observerId);
+      const victimId = String(mis.subjectId);
+      const actorItem = postTimeSnapshot?.byId?.get?.(actorId);
+      const victimItem = postTimeSnapshot?.byId?.get?.(victimId);
+      if (!actorItem || !victimItem) continue;
+      instigations.push({
+        actorId,
+        victimId,
+        // W-C2 conscience: the lawful-good gap reads the actor's DERIVED alignment
+        // (which already folds any PRIOR drift — the spiral self-limits as it corrupts).
+        actorLawfulness01: computeLawfulness(actorItem, memoryState),
+        actorMalice01: computeMalice(actorItem, memoryState),
+        // Victim innocence: a saintly (low-malice) + weak victim is the worse target.
+        victimMalice01: computeMalice(victimItem, memoryState),
+        victimStrength01: settlementStrength(victimItem, buildPressureSummary(pIndex, victimId)),
+        trueRelationship: String(mis.trueRelationship),
+      });
+    }
+    if (instigations.length || getSpatialLedger(memoryState, 'moralDrift')) {
+      const drift = advanceMoralDrift({ instigations, worldState: memoryState, tick: worldState.tick });
+      if (drift.changed) {
+        memoryState = drift.next
+          ? setSpatialLedger(memoryState, 'moralDrift', drift.next)
+          : dropSpatialLedger(memoryState, 'moralDrift');
+      }
+      // The reckoning receipts (a good polity's conscience curdling) reach the Chronicle,
+      // appended like the army-transit news. Empty ⇒ byte-neutral.
+      if (drift.reckonings.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, moralReckoningNewsEntries(drift.reckonings, settlementNameFor, worldState.tick, now), { now });
       }
     }
   }

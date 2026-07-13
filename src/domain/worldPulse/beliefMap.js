@@ -639,6 +639,216 @@ export function governingCoalition(item) {
   return { governing, members, opponents };
 }
 
+// ── M9b component (4): ALLY-INTEL SHARING + THE COMPROMISED-ALLY LEAK ──────────
+// (design §4g round 11 "ALLY INFORMATION-SHARING, ALIGNMENT-GOVERNED HANDLING &
+// BETRAYAL"; round 15A intel STYLES). A DELIBERATE high-confidence sharing channel
+// DISTINCT from the ambient telephone: allies actively share HIGH-CONFIDENCE intel
+// at PRESERVED fidelity — so a well-allied lawful bloc's beliefs converge toward
+// TRUTH (misjudgment falls). ALIGNMENT STYLES the handling (2-axis map onto the
+// derived settlement alignment): LAW↔CHAOS = FIDELITY (lawful faithful, chaotic
+// noisy); GOOD↔EVIL = HONESTY (good shares TRUE, evil DISTORTS for self-benefit —
+// feeds allies FALSE high-confidence intel). A settlement shares based on who it
+// BELIEVES is an ally (its belief map), NOT who truly is — so a PRESUMED ally that
+// has TURNED or been COMPROMISED is a LEAK: it relays the sharer's high-confidence
+// intel to the sharer's REAL ENEMY, who uses it to tip a war. Belief-map alliance
+// ACCURACY becomes load-bearing (a correct belief that the ally turned ⇒ no share ⇒
+// no leak). OPT-IN (allyIntelSharingEnabled) — OFF ⇒ this pass never runs ⇒ the M9a
+// advance is byte-identical. Extends M9a's INTRA-settlement leakedTags to the OUTWARD
+// leak. PURE, NO rng (styling is a deterministic function of the alignment coords).
+
+/** The friendly relationship axis a settlement shares intel across. */
+const FRIENDLY_LABELS = new Set(['allied', 'trade_partner', 'patron', 'client', 'vassal']);
+
+export const ALLY_INTEL_TUNING = Object.freeze({
+  // Only HIGH-CONFIDENCE beliefs are shared as ACTIONABLE (you don't pass a vague
+  // rumor as fact).
+  SHARE_CONFIDENCE_FLOOR: 0.6,
+  // A sharer shares only with an ESTABLISHED believed-ally (a vague "maybe friendly"
+  // is not a courier channel).
+  VET_CONFIDENCE: 0.5,
+  // A relayed lawful/faithful belief keeps (nearly) its confidence — the high-fidelity
+  // node that reduces the telephone weathering.
+  RELAY_KEEP: 0.95,
+  // Above this malice, the sharer DECEIVES (evil, accurate-inward / deceptive-outward).
+  EVIL_FLOOR: 0.6,
+  // Below this lawfulness (and not evil), the sharer is NOISY (chaotic, high-variance).
+  CHAOS_CEIL: 0.4,
+  // The chaotic-noise confidence damp (a garbled relay).
+  NOISE_DAMP: 0.5,
+  // The enemy's confidence in the LEAKED (accurate) intel — actionable, war-tipping.
+  LEAK_CONFIDENCE: 0.9,
+  // A deceiver reports a non-hostile subject as MOBILIZING (the false-threat readiness).
+  DECEIT_READINESS: 0.75,
+});
+
+/** A settlement is COMPROMISED (its intel security is broken) when ANY faction on its
+ *  roster is compromised (the M9a intra-settlement leak source, read at settlement scope).
+ *  @param {SnapItem | null | undefined} item @returns {boolean} */
+export function settlementCompromised(item) {
+  return settlementFactionRoster(item).some((fac) => isFactionCompromised(fac));
+}
+
+/**
+ * Style a shared belief by the SHARER's derived alignment (round 15A). FAITHFUL
+ * (lawful/good): the belief preserved at near-full confidence. DECEPTIVE (evil):
+ * paint a non-hostile subject as a MOBILIZING, beatable ENEMY at high confidence
+ * (the manipulation that engineers an unjust war — couples to moral drift). NOISY
+ * (chaotic): the belief garbled toward neutral at reduced confidence. Pure.
+ * @param {BeliefRecord} rec  the sharer's belief about the subject
+ * @param {{ lawfulness01: number, malice01: number }} align
+ * @param {number} now
+ * @returns {BeliefRecord}
+ */
+function styleSharedBelief(rec, align, now) {
+  const T = ALLY_INTEL_TUNING;
+  const malice = clamp01(finiteNumber(align?.malice01, 0.5));
+  const lawful = clamp01(finiteNumber(align?.lawfulness01, 0.5));
+  if (malice > T.EVIL_FLOOR) {
+    // DECEPTIVE-OUTWARD: report a non-hostile subject as a hostile, mobilizing, and
+    // (slightly under-stated) beatable threat — the false high-confidence intel.
+    const nonHostile = !new Set(['hostile', 'cold_war', 'rival']).has(String(rec.allianceLabel));
+    return {
+      readiness: round4(nonHostile ? T.DECEIT_READINESS : clamp01(rec.readiness)),
+      strengthBand: nonHostile ? clamp(Math.round(rec.strengthBand) - 1, 0, STRENGTH_BANDS - 1) : rec.strengthBand,
+      allianceLabel: nonHostile ? 'hostile' : rec.allianceLabel,
+      faithLabel: rec.faithLabel,
+      confidence01: round4(clamp01(rec.confidence01)), // presented as FACT
+      lastUpdateTick: now,
+    };
+  }
+  if (lawful < T.CHAOS_CEIL) {
+    // NOISY: garble toward the neutral band, drop confidence (an unreliable relay).
+    return {
+      readiness: round4(clamp01(0.5 * rec.readiness + 0.5 * BELIEF_TUNING.NEUTRAL_READINESS)),
+      strengthBand: clamp(Math.round(0.5 * rec.strengthBand + 0.5 * BELIEF_TUNING.NEUTRAL_STRENGTH_BAND), 0, STRENGTH_BANDS - 1),
+      allianceLabel: rec.allianceLabel,
+      faithLabel: rec.faithLabel,
+      confidence01: round4(clamp01(rec.confidence01 * T.NOISE_DAMP)),
+      lastUpdateTick: now,
+    };
+  }
+  // FAITHFUL: the belief relayed at (near) full fidelity.
+  return {
+    readiness: round4(clamp01(rec.readiness)),
+    strengthBand: rec.strengthBand,
+    allianceLabel: rec.allianceLabel,
+    faithLabel: rec.faithLabel,
+    confidence01: round4(clamp01(rec.confidence01) * T.RELAY_KEEP),
+    lastUpdateTick: now,
+  };
+}
+
+/**
+ * The deliberate ally-intel sharing pass (design §4g round 11). Runs AFTER the M9a
+ * per-observer reconcile, over the seat slots. Each sharer S shares its
+ * HIGH-CONFIDENCE seat beliefs with every settlement it BELIEVES is an ally
+ * (friendly seat label + vetted confidence), STYLED by S's alignment; a receiver
+ * ADOPTS a shared belief when it out-confidences its own (actionable intel
+ * re-anchors — convergence toward truth for honest allies). THE LEAK: when a
+ * believed-ally receiver has TRULY TURNED (hostile to S) or is COMPROMISED, S's
+ * high-confidence SELF intel leaks to S's REAL ENEMY (accurate, war-tipping). PURE,
+ * deterministic (codepoint folds, no rng); returns a NEW maps (untouched observers
+ * keep their reference).
+ * @param {Object} args
+ * @param {Record<string, Record<string, Record<string, BeliefRecord>>>} args.maps
+ * @param {GroundTruthCtx} args.ctx
+ * @param {Map<string, Map<string, string>>} args.neighbours  observer → subject → trueType
+ * @param {(id: string) => { lawfulness01: number, malice01: number }} args.alignmentOf
+ * @param {number} args.now
+ * @returns {Record<string, Record<string, Record<string, BeliefRecord>>>}
+ */
+export function applyAllyIntelSharing({ maps, ctx, neighbours, alignmentOf, now }) {
+  const T = ALLY_INTEL_TUNING;
+  const HOSTILE = new Set(['hostile', 'cold_war', 'rival']);
+  const align = (/** @type {string} */ id) => {
+    const a = alignmentOf ? alignmentOf(id) : null;
+    return { lawfulness01: clamp01(finiteNumber(a?.lawfulness01, 0.5)), malice01: clamp01(finiteNumber(a?.malice01, 0.5)) };
+  };
+  // receiverId → subjectId → the highest-priority injected belief.
+  /** @type {Map<string, Map<string, BeliefRecord>>} */
+  const injections = new Map();
+  const inject = (/** @type {string} */ receiverId, /** @type {string} */ subjectId, /** @type {BeliefRecord} */ record) => {
+    if (String(receiverId) === String(subjectId)) return; // never a self-belief
+    if (!injections.has(receiverId)) injections.set(receiverId, new Map());
+    const m = /** @type {Map<string, BeliefRecord>} */ (injections.get(receiverId));
+    const cur = m.get(subjectId);
+    if (!cur || record.confidence01 > cur.confidence01) m.set(subjectId, record); // strongest telling wins
+  };
+
+  for (const sharerId of Object.keys(maps).sort(compareCodepoint)) {
+    const sharerSeat = asObject(asObject(maps[sharerId])[GOVERNING_SEAT_KEY]);
+    const sharerAlign = align(sharerId);
+    const trueOf = neighbours.get(sharerId) || new Map();
+    // Believed allies of the sharer (its OWN seat map — who IT thinks is friendly).
+    const believedAllies = Object.keys(sharerSeat).filter((rid) => {
+      const rec = /** @type {BeliefRecord} */ (sharerSeat[rid]);
+      return rec && typeof rec === 'object'
+        && FRIENDLY_LABELS.has(String(rec.allianceLabel))
+        && clamp01(rec.confidence01) >= T.VET_CONFIDENCE;
+    }).sort(compareCodepoint);
+    if (!believedAllies.length) continue;
+
+    // The sharer's high-confidence, shareable beliefs about third parties.
+    const shareable = Object.keys(sharerSeat).filter((sid) => {
+      const rec = /** @type {BeliefRecord} */ (sharerSeat[sid]);
+      return rec && typeof rec === 'object' && clamp01(rec.confidence01) >= T.SHARE_CONFIDENCE_FLOOR;
+    });
+
+    for (const receiverId of believedAllies) {
+      if (!ctx.byId.has(receiverId)) continue;
+      // POOL: share styled beliefs about third parties into the receiver's seat.
+      for (const subjectT of shareable) {
+        if (subjectT === receiverId) continue; // don't tell an ally about itself
+        const styled = styleSharedBelief(/** @type {BeliefRecord} */ (sharerSeat[subjectT]), sharerAlign, now);
+        inject(receiverId, subjectT, styled);
+      }
+      // THE COMPROMISED-ALLY LEAK: the believed-ally has TRULY turned (hostile to the
+      // sharer) or is compromised ⇒ the sharer's high-confidence SELF intel reaches
+      // the sharer's REAL enemies (accurate — the enemy can tip a war on it).
+      const trueRel = String(trueOf.get(receiverId) || 'unknown');
+      const turned = HOSTILE.has(trueRel) || settlementCompromised(ctx.byId.get(receiverId));
+      if (!turned) continue;
+      for (const [enemyId, enemyRel] of trueOf) {
+        if (!HOSTILE.has(String(enemyRel)) || enemyId === receiverId || !ctx.byId.has(enemyId)) continue;
+        const trueTypeES = neighbours.get(enemyId)?.get(sharerId) || 'unknown';
+        const leaked = groundTruthBelief(sharerId, /** @type {string} */ (trueTypeES), ctx, now);
+        leaked.confidence01 = round4(T.LEAK_CONFIDENCE);
+        inject(enemyId, sharerId, leaked); // the enemy learns the sharer's true footing
+      }
+    }
+  }
+
+  if (!injections.size) return maps;
+  const out = { ...maps };
+  for (const receiverId of [...injections.keys()].sort(compareCodepoint)) {
+    const subjectMap = /** @type {Map<string, BeliefRecord>} */ (injections.get(receiverId));
+    const priorObserver = asObject(maps[receiverId]);
+    const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
+    /** @type {Record<string, BeliefRecord>} */
+    const nextSeat = { ...(/** @type {Record<string, BeliefRecord>} */ (priorSeat)) };
+    let touched = false;
+    for (const subjectId of [...subjectMap.keys()].sort(compareCodepoint)) {
+      const shared = /** @type {BeliefRecord} */ (subjectMap.get(subjectId));
+      const cur = /** @type {BeliefRecord | undefined} */ (nextSeat[subjectId]);
+      // ACTIONABLE re-anchor: adopt when the shared belief out-confidences the receiver's
+      // own (a well-informed ally sharpens the picture; a weaker telling is ignored).
+      if (!cur || shared.confidence01 > clamp01(cur.confidence01)) { nextSeat[subjectId] = shared; touched = true; }
+    }
+    if (!touched) continue;
+    /** @type {Record<string, BeliefRecord>} */
+    const sortedSeat = {};
+    for (const k of Object.keys(nextSeat).sort(compareCodepoint)) sortedSeat[k] = nextSeat[k];
+    /** @type {Record<string, Record<string, BeliefRecord>>} */
+    const nextObserver = {};
+    for (const k of Object.keys(priorObserver).sort(compareCodepoint)) {
+      nextObserver[k] = k === GOVERNING_SEAT_KEY ? sortedSeat : /** @type {Record<string, BeliefRecord>} */ (priorObserver[k]);
+    }
+    if (!(GOVERNING_SEAT_KEY in nextObserver)) nextObserver[GOVERNING_SEAT_KEY] = sortedSeat;
+    out[receiverId] = nextObserver;
+  }
+  return out;
+}
+
 /**
  * Reconcile ONE faction slot (seat or a per-faction slot) from its DECAYED prior +
  * this window's (already carrier-filtered) reports. This is the Wave-A per-subject
@@ -710,9 +920,13 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now })
  *   relationshipStates?: unknown, spatialCanonVersion?: unknown,
  *   simulationRules?: Record<string, unknown> }} args.worldState  the ensured worldState
  * @param {number} args.tick
+ * @param {{ enabled?: boolean, alignmentOf?: (id: string) => { lawfulness01: number, malice01: number } } | null} [args.allyIntel]
+ *   M9b component (4): the deliberate ally-intel sharing channel. ABSENT / disabled
+ *   ⇒ the sharing pass never runs ⇒ the M9a advance is BYTE-IDENTICAL (the opt-in
+ *   gate — allyIntelSharingEnabled, off by default even on a belief-active campaign).
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -811,7 +1025,14 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick }) {
     }
   }
 
-  const nextOrNull = Object.keys(next).length ? next : null;
+  // M9b component (4): the deliberate ally-intel sharing channel (OPT-IN). AFTER the
+  // per-observer reconcile, allies pool high-confidence intel (styled by alignment) +
+  // a compromised believed-ally leaks the sharer's intel to its real enemy. Disabled
+  // ⇒ `next` is returned unchanged ⇒ byte-identical to the M9a advance.
+  const shared = allyIntel?.enabled
+    ? applyAllyIntelSharing({ maps: next, ctx, neighbours, alignmentOf: allyIntel.alignmentOf || (() => ({ lawfulness01: 0.5, malice01: 0.5 })), now })
+    : next;
+  const nextOrNull = Object.keys(shared).length ? shared : null;
   const changed = mutated || JSON.stringify(prior ?? null) !== JSON.stringify(nextOrNull);
   return { next: changed ? nextOrNull : prior, changed };
 }

@@ -43,6 +43,12 @@ import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcData.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';
+// Phase 5.5 M9b — MORAL DRIFT (component 3). The unjust-instigation accumulator
+// drifts the derived alignment: its malice term folds into computeMalice's recent-
+// acts saturation, its lawlessness term is a signed drag on computeLawfulness.
+// ABSENT ledger ⇒ {0,0} ⇒ +0 ⇒ BYTE-IDENTICAL (the alignment reads have no other
+// live consumer this wave, so a dormant world is untouched).
+import { moralDriftTerm, MORAL_DRIFT_TUNING } from '../spatial/moralDrift.js';
 // Phase 4 W-F3 site #8 — the local piety amplifier on the deity-temper drive term.
 // pietyLocalMultOf is the identity short-circuit reader (absent record ⇒ 1.0), so a
 // deity-free / tick-0 / zero-span settlement is byte-identical.
@@ -336,6 +342,7 @@ export const AGGRESSION_TUNING = Object.freeze({
  * @typedef {Object} AlignmentActsSource
  * @property {Record<string, number>} [warExhaustion]  0..1 sustained-war scars by settlement id
  * @property {Record<string, { occupierId?: string|number } | null | undefined>} [occupations]  active occupations by OCCUPIED id
+ * @property {unknown} [spatialLedgers]  the nested spatial-ledger namespace (M9b moral-drift accumulator)
  */
 
 /**
@@ -507,9 +514,12 @@ export function computeLawfulness(item, worldState) {
   const ledger = governanceLedger(settlement);
   const legitimacy = ledger.present ? (ledger.legitimacyScore - 50) / 50 : 0;
   const occupied = isOccupied(worldState, id) ? -OCCUPIED_LAW_DRAG : 0;
+  // M9b moral drift: an unjust war flouts the professed order — a signed drag on
+  // lawfulness. 0 when the drift ledger is absent ⇒ −0 ⇒ byte-identical.
+  const moralLawDrag = MORAL_DRIFT_TUNING.LAW_DRAG_WEIGHT * moralDriftTerm(worldState, id).lawlessness;
 
   const drive = W_LAW_GOV * gov + W_LAW_DEITY * deityChaos
-    + W_LAW_LEGITIMACY * legitimacy + W_LAW_OCCUPIED * occupied;
+    + W_LAW_LEGITIMACY * legitimacy + W_LAW_OCCUPIED * occupied - moralLawDrag;
   return squash01(drive);
 }
 
@@ -534,11 +544,14 @@ export function computeMalice(item, worldState) {
   const deityEvil = 2 * evil01(settlement?.config?.primaryDeitySnapshot) - 1;
   const govBand = GOV_MALICE_BAND[factionArchetype(governingEntryOf(settlement))];
   const gov = Number.isFinite(govBand) ? govBand : 0;
-  // Recent acts: the sustained-war scar + held occupations, saturating at 1.
+  // Recent acts: the sustained-war scar + held occupations + the M9b moral-drift
+  // malice accumulator (unjust instigation), saturating at 1. The drift term is 0
+  // when its ledger is absent ⇒ +0 ⇒ byte-identical to the pre-M9b acts reading.
   const acts = Math.min(
     1,
     warExhaustionOf(worldState, id)
-      + OCCUPATION_MALICE_PER_HOLDING * occupationsHeldBy(worldState, id),
+      + OCCUPATION_MALICE_PER_HOLDING * occupationsHeldBy(worldState, id)
+      + moralDriftTerm(worldState, id).malice,
   );
 
   const drive = W_MAL_CONSCIENCE * conscience + W_MAL_DEITY * deityEvil
