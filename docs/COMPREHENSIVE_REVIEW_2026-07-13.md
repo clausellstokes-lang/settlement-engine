@@ -188,9 +188,12 @@ math. The boundaries the owner drew are boundaries the code actually has.
    constitution law 3 (free/anon never see live deity names) is **unenforced in prod** for the
    latent pantheon. `validate:migration-head` only warns. Recommend: deploy the migration chain
    (owner-gated) and make the gate fail-on-pending-privacy-migration.
-2. **The free-tier PDF monetization fork**: pricing copy sells $2.99-per-PDF; the shipped gate
-   gives free users unlimited export. Pick one before launch; the fix program will then align all
-   six surfaces to a single tier-facts module.
+2. **The free-tier PDF monetization fork — ✅ OWNER-RULED 2026-07-13 (in-session):** free tier
+   pays $2.99 per dossier PDF; ONLY premium gets unlimited export. The shipped gate (free =
+   unlimited export) is the WRONG side; the pricing-page copy was right. Fix program mandate:
+   flip the export gate to entitlement-per-dossier for non-premium (ride the existing
+   single-dossier ladder: BuyThisDossier / dossier_purchases / verify-single-dossier), premium
+   unlimited, and align all six tier-fact surfaces to one derived facts module.
 3. **Preset honesty**: `disastersEnabled` (+20B, fits budget per M11b's stop-and-report),
    `commodityFlowEnabled`, infoMode defaults — the drama is owner-gated dark. The fix program can
    wire seams and surfaces, but lighting the presets is a paid-surface/product call.

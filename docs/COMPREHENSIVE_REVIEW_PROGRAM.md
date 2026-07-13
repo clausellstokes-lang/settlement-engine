@@ -41,6 +41,12 @@ been "within the constitution" — §0.2-6). Owner-gated classes are NEVER self-
 migrations, schema/persistence shape changes, data deletion, security posture, paid-surface
 behavior, budget raises, golden regens.
 
+## Owner rulings landed during this program (binding on wave plans)
+- **2026-07-13 — PDF export monetization:** free tier pays $2.99 per dossier PDF; only premium
+  gets unlimited export. The shipped free-unlimited-export gate is wrong; flip it to the existing
+  single-dossier entitlement ladder. Pricing-page copy was already correct; align the other five
+  tier-fact surfaces to it via one derived tier-facts module. (Review doc §6.2 updated in place.)
+
 ## Phase plan (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
       re-dispatched via resume of `wf_c21bb055-cb9`; their reports append to the register on landing.
