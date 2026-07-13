@@ -141,6 +141,26 @@ export function occupationTermOf(state) {
   return Number.isFinite(t) ? t : 0;
 }
 
+// ── M6b ENTREPÔTS: the TOLL read that joins this module's route re-score ───────
+/**
+ * The toll surcharge (in median-primary-hop units) a mover pays to route THROUGH
+ * settlement `id`, read straight off the M6b `entrepots` ledger (written by
+ * spatial/entrepots.js under the SAME commodity-flow gate). ABSENT (dormant / no
+ * sustained centrality) ⇒ 0 ⇒ scoreRoute's toll term is 0 ⇒ the M1 re-score is
+ * BYTE-IDENTICAL. This is the seam by which a GREEDY toll DIVERTS shipments to a
+ * cheaper detour (the self-balancing reroute) — exactly as `embattlementLevel` is the
+ * seam by which danger diverts them. The rate is rent-bounded (TOLL_MAX) at write time.
+ * @param {{ spatialLedgers?: unknown }|null|undefined} worldState @param {string|number} id
+ * @returns {number} ≥ 0 (median-hop units)
+ */
+export function tollRateOf(worldState, id) {
+  const ledger = getSpatialLedger(worldState, 'entrepots');
+  const ns = ledger && typeof ledger === 'object' && !Array.isArray(ledger) ? /** @type {Record<string, unknown>} */ (ledger) : null;
+  const rec = ns ? ns[String(id)] : null;
+  const toll = rec && typeof rec === 'object' && !Array.isArray(rec) ? /** @type {Record<string, unknown>} */ (rec).toll : undefined;
+  return typeof toll === 'number' && Number.isFinite(toll) && toll > 0 ? toll : 0;
+}
+
 // ── The activation gate (dormancy / byte-identity seam) ───────────────────────
 /**
  * Embattlement is LIVE iff the spatial-canon marker is present. It is a PHYSICAL
@@ -161,8 +181,14 @@ export function embattlementActive(worldState) {
  * inputs minus the (bounded) security counterforce. Pure; the caller supplies the
  * primitives read from the worldPulse ledgers (occupation state, siege flag,
  * war_exhaustion scar, crime pressure, security level).
+ * M6b WARTIME TARGETING (§V.6): an OPTIONAL, already-bounded `targetPremium01` (the
+ * entrepôt's wealth-as-target premium, entrepots.entrepotTargetPremium) is ADDED to the
+ * ramp — a fat crossroads is the first target in wartime. It is capped below ENTER at
+ * its source so it never ALONE embattles a peaceful hub. Absent (default 0) ⇒
+ * BYTE-IDENTICAL (every M1 call site that does not pass it).
  * @param {{ occupationState?: string|null, besieged?: boolean,
- *   warExhaustion01?: number, crime01?: number, security01?: number }} [inputs]
+ *   warExhaustion01?: number, crime01?: number, security01?: number,
+ *   targetPremium01?: number }} [inputs]
  * @returns {number} T in [0, 1]
  */
 export function rampThreat(inputs = {}) {
@@ -173,7 +199,8 @@ export function rampThreat(inputs = {}) {
   const crime = clamp01(finiteNumber(inputs.crime01, 0));
   const highCrime = crime <= T.CRIME_FLOOR ? 0 : (crime - T.CRIME_FLOOR) / (1 - T.CRIME_FLOOR);
   const sec = clamp01(finiteNumber(inputs.security01, 0));
-  const ramp = T.W_SIEGE * siegeTerm + T.W_OCC * occTerm + T.W_EXH * exh + T.W_CRIME * highCrime;
+  const target = Math.max(0, finiteNumber(inputs.targetPremium01, 0));
+  const ramp = T.W_SIEGE * siegeTerm + T.W_OCC * occTerm + T.W_EXH * exh + T.W_CRIME * highCrime + target;
   const relief = Math.min(T.SECURITY_MAX_RELIEF, T.W_SEC * sec);
   return clamp01(ramp - relief);
 }
@@ -299,13 +326,20 @@ export function riskToleranceFromAlignment(alignment) {
  * @property {number} baseCost      the frozen geometric cost (distanceRead)
  * @property {number} danger        Σ embattlement level over the traversed hops
  * @property {number} dangerCost    the risk-weighted danger surcharge (cost units)
- * @property {number} effectiveCost baseCost + dangerCost (what the mover minimizes)
+ * @property {number} toll          Σ toll rate over the INTERMEDIARIES (median-hop units)
+ * @property {number} tollCost      the toll surcharge (cost units) — M6b entrepôts
+ * @property {number} effectiveCost baseCost + dangerCost + tollCost (what the mover minimizes)
  */
 
 /**
- * Re-score ONE candidate route against the current embattlement field for a mover
- * of the given risk tolerance. Pure; danger is a GRADED read of the level scalar
- * over the traversed hops (path after the origin) — never a boolean gate.
+ * Re-score ONE candidate route against the current embattlement field AND the M6b
+ * toll field for a mover of the given risk tolerance. Pure; danger is a GRADED read of
+ * the level scalar over the traversed hops (path after the origin) — never a boolean
+ * gate. The TOLL surcharge (§4b) is Σ tollRateOf over the INTERMEDIARIES only (a toll is
+ * levied on PASS-THROUGH, not at the origin you leave or the destination you reach); it
+ * is NOT risk-discounted (a toll is a real monetary cost every mover pays, unlike danger
+ * which the bold under-weight). Both are 0 when their ledgers are absent (dormant) ⇒
+ * BYTE-IDENTICAL to the pre-M6b re-score.
  * @param {string[]} path @param {{ spatialLedgers?: unknown }|null|undefined} worldState
  * @param {number} baseCost @param {number} riskTolerance @param {number} medianHopCost
  * @returns {ScoredRoute}
@@ -317,14 +351,19 @@ export function scoreRoute(path, worldState, baseCost, riskTolerance, medianHopC
   const m = Math.max(1, finiteNumber(medianHopCost, 1));
   let danger = 0;
   for (let i = 1; i < nodes.length; i++) danger += embattlementLevel(worldState, nodes[i]);
+  let toll = 0;
+  for (let i = 1; i < nodes.length - 1; i++) toll += tollRateOf(worldState, nodes[i]);
   const dangerCost = rt * T.DANGER_PENALTY * m * danger;
+  const tollCost = m * toll;
   const base = Math.max(0, finiteNumber(baseCost, 0));
   return {
     path: nodes.slice(),
     baseCost: base,
     danger: round4(danger),
     dangerCost: round4(dangerCost),
-    effectiveCost: round4(base + dangerCost),
+    toll: round4(toll),
+    tollCost: round4(tollCost),
+    effectiveCost: round4(base + dangerCost + tollCost),
   };
 }
 

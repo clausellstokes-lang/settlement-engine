@@ -57,6 +57,8 @@ import { advanceRumorLedgers } from '../spatial/rumorNetwork.js';
 import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
 import { activeSpatialDigest, activeSeasonalOverlay } from '../spatial/distanceRead.js';
 import { advanceSettlementSupply } from './supplyKernel.js';
+import { advanceEntrepotLayer } from './entrepotKernel.js';
+import { entrepotTargetPremium } from '../spatial/entrepots.js';
 import { releaseMigrationArrivals, dispatchMigrations } from './migrationKernel.js';
 import { migrationActive } from '../spatial/migration.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
@@ -505,6 +507,25 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       now,
     });
     if (supply.changed) worldState = supply.worldState;
+  }
+
+  // Phase 5.5 mover M6b — ENTREPÔTS / TOLLS. AFTER the supply pass (so it tallies THIS
+  // tick's just-advanced shipment ledger): earn each pass-through settlement its
+  // centrality from the REAL gate-crossings, derive its rent-bounded toll (which joins
+  // the M1 re-score so greedy tolls divert — self-balancing), and found transshipment
+  // institutions on sustained hubs (the W-C3 lane). The toll PROSPERITY + wartime-target
+  // premium are read read-last/write-next by the institution lane + rampThreat below.
+  // DORMANT (no marker / commodity-flow opt-in off) ⇒ a no-op, byte-identical.
+  {
+    const entrepots = advanceEntrepotLayer({
+      localSettlements,
+      settlements: snapshot?.settlements || [],
+      worldState,
+      digest: worldState.spatialDigest,
+      tick: worldState.tick,
+      season: roadSeason,
+    });
+    if (entrepots.changed) worldState = entrepots.worldState;
   }
 
   // Phase 5.5 mover M4 — MIGRATION ARRIVALS (the transport-lag RELEASE). Before the
@@ -1595,6 +1616,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         // graduates a disorder-driven region out; it can't nullify a live siege
         // (SECURITY_MAX_RELIEF caps the relief in embattlement.js).
         security01: 1 - (pIndex.get(id, 'defense')?.score || 0),
+        // M6b WARTIME TARGETING (brake 3): a fat entrepôt's bounded wealth-premium
+        // makes it the first target in wartime (0 when the entrepôt layer is dormant).
+        targetPremium01: entrepotTargetPremium(memoryState, id),
       });
     }
     const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });

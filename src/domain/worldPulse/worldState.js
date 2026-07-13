@@ -273,6 +273,16 @@ export function createDefaultWorldState(campaign = {}) {
 //                            → { institutionId, settlementId, input, sourceId,
 //                            arrivalTick, starving } — AGGREGATE; present while a
 //                            caravan rides or a link starves (sparse).
+//                          · commodityStocks — per-(settlement,good) QUANTITY stock
+//                            (M6a, spatial/commodityFlow.js): { settlementId →
+//                            { goodId → units } }; present under the commodity-flow
+//                            opt-in where activeChains produce/consume (sparse).
+//                          · entrepots       — per-settlement EARNED CENTRALITY + toll
+//                            (M6b, spatial/entrepots.js): { settlementId →
+//                            { centrality, toll, since, lastTick } } — centrality from
+//                            REAL gate-crossings, a rent-bounded toll that joins the M1
+//                            re-score; present for settlements trade flows through under
+//                            the commodity-flow opt-in (sparse).
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',

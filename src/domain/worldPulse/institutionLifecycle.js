@@ -52,6 +52,7 @@ import { martialEmergenceTilt } from './moralInstitutionPressure.js';
 // (read-last/write-next); both 0 when absent ⇒ byte-identical for a no-conquest / no-merc world.
 import { conquestProsperityFor } from './conquestFeeds.js';
 import { mercProsperityCostOf } from './mercenaryMarket.js';
+import { tollProsperityFor } from '../spatial/entrepots.js';
 
 const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
@@ -608,10 +609,14 @@ export function evaluateInstitutionLifecycle(/** @type {any} */ worldState, /** 
     // W-C2: fold the conquest-loot/captive windfall (+) and mercenary upkeep drain (−) into
     // the economy-health composite the build/close gate reads. Both 0 when their ledgers are
     // absent ⇒ health is exactly economyHealthScore ⇒ byte-identical.
+    // M6b: the entrepôt's toll income (+, net of upkeep) is the third pulse — a settlement
+    // trade flows THROUGH grows transshipment institutions sooner. 0 when the entrepôt layer
+    // is dormant ⇒ byte-identical.
     const prosperityPulse = conquestProsperityFor(conquestLedger, item.id);
     const mercCost = mercProsperityCostOf(mercLedger, item.id);
-    const health = (prosperityPulse || mercCost)
-      ? clamp01(economyHealthScore(item.causal?.scores) + prosperityPulse - mercCost)
+    const tollPulse = tollProsperityFor(worldState, item.id);
+    const health = (prosperityPulse || mercCost || tollPulse)
+      ? clamp01(economyHealthScore(item.causal?.scores) + prosperityPulse - mercCost + tollPulse)
       : economyHealthScore(item.causal?.scores);
     const direction = classifyEconomyDirection(health);
 
