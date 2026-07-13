@@ -20,9 +20,7 @@
  * AI features are gated by credits (creditsSlice), not account tier.
  */
 
-import { generateNarrative } from '../lib/ai.js';
 import { saves as savesService } from '../lib/saves.js';
-import { applyRenameToAiData } from '../lib/narrativeMutations.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel, isFastModelPreference } from '../config/pricing.js';
 import { track, EVENTS } from '../lib/analytics.js';
@@ -36,6 +34,24 @@ import { buildChronicleFeed, selectChronicleContext } from '../domain/dossier/ch
 // here. They are only needed by buildDailyLifeRelationshipMemory(), inside the
 // async requestDailyLife action, so they are dynamic-imported there to keep the
 // heavy relationship-evolution graph off the first-paint boot path.
+
+// FP-2a first-paint reclaim (−2,448 B closure): lib/ai.js (the AI transport) and
+// narrativeMutations.js are SOLE-imported by this slice and only reached from
+// inside async actions, AFTER each action's synchronous prefix (the guards, credit
+// check, set(aiLoading), and the F18/F19 abort-controller stamp ALL still run
+// synchronously). Dynamic-importing them at the call site — memoized like
+// settlementSlice's loadEngine() — keeps them off the first-paint entry closure.
+// The one observable shift: the transport (generateNarrative) is invoked one
+// microtask LATER than before (the loadEngine ordering). The F18 abort CONTRACT is
+// unchanged — the controller + its signal are stamped synchronously and a late
+// result is still discarded — but two F18 tests that introspected the mock's
+// SYNCHRONOUS capture now yield one tick first (see aiSlice.orchestration.test.js).
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget).
+let _aiLibPromise;
+const loadAiLib = () => {
+  if (!_aiLibPromise) _aiLibPromise = import('../lib/ai.js');
+  return _aiLibPromise;
+};
 
 // ── Verifier integration ────────────────────────────────────────────────────
 //
@@ -525,6 +541,7 @@ export const createAiSlice = (set, get) => ({
       : [];
 
     try {
+      const { generateNarrative } = await loadAiLib();
       const { result, creditsRemaining, partialFailure, failedFields } =
         await generateNarrative('narrative', settlement, saveId, {
           pinnedNpcIds,
@@ -761,6 +778,7 @@ export const createAiSlice = (set, get) => ({
     let fieldsDone = 0;
 
     try {
+      const { generateNarrative } = await loadAiLib();
       const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
         aiGuidance,
         modelPreference,
@@ -965,6 +983,7 @@ export const createAiSlice = (set, get) => ({
     let fieldsDone = 0;
 
     try {
+      const { generateNarrative } = await loadAiLib();
       const { result, creditsRemaining, partialFailure, failedFields } =
         await generateNarrative('progression', settlement, saveId, {
           pinnedNpcIds,
@@ -1281,6 +1300,7 @@ export const createAiSlice = (set, get) => ({
     const entry = state.savedSettlements.find(s => s.id === saveId);
     if (!entry) return;
 
+    const { applyRenameToAiData } = await import('../lib/narrativeMutations.js');
     const nextAiData = applyRenameToAiData(entry.aiData, oldName, newName);
     // If nothing changed (no narrative, or the name didn't appear anywhere),
     // skip the network round-trip.

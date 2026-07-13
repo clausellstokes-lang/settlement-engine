@@ -215,7 +215,12 @@ describe('F18 — abort / stall clears the loading lock and allows retry', () =>
     const { resolve, signal } = deferredGen();
 
     const inflight = store.getState().requestNarrative(SAVE_ID);
-    expect(store.getState().aiLoading).toBe(true);
+    expect(store.getState().aiLoading).toBe(true); // the sync prefix (guards + set(aiLoading) + abort stamp) still runs synchronously
+    // FP-2a: lib/ai.js is now dynamic-imported (settlementSlice loadEngine pattern),
+    // so the transport (generateNarrative) is invoked one microtask later — yield so
+    // it receives the controller signal before we assert on it. The abort CONTRACT is
+    // unchanged (controller + signal are stamped synchronously; late results discarded).
+    await new Promise((r) => setTimeout(r));
     expect(signal()).toBeDefined();
 
     store.getState().cancelAiGeneration();
@@ -235,6 +240,8 @@ describe('F18 — abort / stall clears the loading lock and allows retry', () =>
 
     const inflight = store.getState().requestNarrative(SAVE_ID);
     expect(store.getState().aiLoading).toBe(true);
+    // FP-2a: yield for the dynamic-imported transport call (see the cancel test above).
+    await new Promise((r) => setTimeout(r));
 
     store.getState().clearAiSettlement();
     expect(signal().aborted).toBe(true);
