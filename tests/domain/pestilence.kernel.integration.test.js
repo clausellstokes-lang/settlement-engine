@@ -17,6 +17,9 @@
  */
 import { describe, it, expect } from 'vitest';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
+import { advanceSettlementPestilence } from '../../src/domain/worldPulse/pestilenceKernel.js';
+import { evaluateWorldPulseRules } from '../../src/domain/worldPulse/candidateEvents.js';
+import { normalizeStressor } from '../../src/domain/worldPulse/stressors.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
@@ -183,5 +186,84 @@ describe('M11a pestilence — kernel integration (the traveling plague)', () => 
     const source = saves.find((s) => s.id === 'sourcetown');
     const npcs = source?.settlement?.npcs || [];
     expect(npcs.some((n) => n.name === 'Aldric the Elder')).toBe(true); // aggregate-only — no npc fate
+  });
+});
+
+// ── FIX #1 — the materialization dedup keys on the REAL minted id (UUID-safe) ──
+// The kernel mints `world_stressor.disease_outbreak.<stablePart(id)>` (idFor slugs the origin,
+// [^a-z0-9]+→_). The dedup guard used to key on the RAW settlement id — for a production UUID
+// (hyphens) that MISSES the real minted id (underscores), so a settlement that already carries an
+// active disease_outbreak got a SECOND identical-id record when the front onset there, breaking
+// ONE PLAGUE TRUTH (and byte-drift: duplicate-id arrays collapse order-dependently). Clean-slug
+// fixtures (sourcetown/midvale) hid it because stablePart(slug) === slug.
+describe('M11a pestilence — FIX #1: UUID-shaped id dedup (no double-mint)', () => {
+  const UUID = '3f2a9b1c-7d4e-4a1b-9c2d-1e2f3a4b5c6d';
+  const ALWAYS = { fork: () => ({ random: () => 0 }) }; // onset always takes hold
+
+  it('a UUID settlement already carrying an active disease_outbreak is NOT double-minted when the front onsets', () => {
+    // The settlement already has an active disease_outbreak (its canonical, stablePart-slugged id)
+    // AND the epidemic front independently landed here (incubating, incubation elapsed) with a
+    // source — so this tick the front ONSETS and tries to materialize the plague that is already here.
+    const existing = { ...normalizeStressor({ type: 'disease_outbreak', originSettlementId: UUID, severity: 0.7, affectedSettlementIds: [UUID] }), status: 'active', lifecycleStage: 'active' };
+    const worldState = {
+      spatialCanonVersion: 1, tick: 2,
+      stressors: [existing],
+      spatialLedgers: { epidemic: { [UUID]: {
+        phase: 'incubating', level: 0, arrivedTick: 0, incubateUntil: 1, sinceTick: 0,
+        lastTick: 0, activeSince: 0, refractoryUntil: 0, sourceId: 'src-town',
+      } } },
+    };
+    const snapshot = { settlements: [{ id: UUID, name: 'Ashford', settlement: { tier: 'town', population: 1800, institutions: [] } }] };
+    const r = advanceSettlementPestilence({ snapshot, worldState, digest: null, graph: null, rng: ALWAYS, season: null, tick: 2, now: NOW });
+    const plagues = (r.worldState.stressors || []).filter((s) => s.type === 'disease_outbreak' && s.originSettlementId === UUID);
+    // ONE PLAGUE TRUTH: exactly one record, and one distinct stored id (pre-fix this was TWO,
+    // both id `world_stressor.disease_outbreak.<uuid-underscores>` under different Map keys).
+    expect(plagues.length).toBe(1);
+    expect(new Set(plagues.map((p) => String(p.id))).size).toBe(1);
+  });
+});
+
+// ── FIX #2 — the reconcile drops ONLY the trade spread the front replaces ─────
+// disease_outbreak.spreadChannels = [trade_route, migration_pressure, service_dependency]; the
+// spatial front travels ONLY trade-type channels + M2 shipments. The old reconcile dropped EVERY
+// aspatial disease spread under the marker, so the migration_pressure + service_dependency vectors
+// (refugee + service routes) silently vanished — on-marker reach was STRICTLY LESS than aspatial.
+// Now only the front-carried TRADE spread is dropped; migration/service spread is preserved.
+describe('M11a pestilence — FIX #2: reconcile preserves the non-trade spread the front never carries', () => {
+  const snap = (marker) => ({
+    worldState: {
+      tick: 5,
+      ...(marker ? { spatialCanonVersion: 1 } : {}),
+      simulationRules: { stressorsEnabled: true, propagationMode: 'full' },
+      stressors: [{ id: 'world_stressor.disease_outbreak.a', type: 'disease_outbreak', status: 'active', lifecycleStage: 'active', severity: 0.9, originSettlementId: 'a', affectedSettlementIds: ['a'] }],
+    },
+    // B reachable from the infected A ONLY via migration_pressure; C ONLY via trade_route.
+    regionalGraph: ensureRegionalGraph({ channels: [
+      { id: 'ch.ab', type: 'migration_pressure', from: 'a', to: 'b', status: 'confirmed' },
+      { id: 'ch.ac', type: 'trade_route', from: 'a', to: 'c', status: 'confirmed' },
+    ] }),
+    byId: new Map([
+      ['a', { id: 'a', name: 'A', settlement: { population: 2000 }, activeConditions: [] }],
+      ['b', { id: 'b', name: 'B', settlement: { population: 1500 }, activeConditions: [] }],
+      ['c', { id: 'c', name: 'C', settlement: { population: 1500 }, activeConditions: [] }],
+    ]),
+    settlements: [
+      { id: 'a', name: 'A', activeConditions: [], causal: { scores: {} } },
+      { id: 'b', name: 'B', activeConditions: [], causal: { scores: {} } },
+      { id: 'c', name: 'C', activeConditions: [], causal: { scores: {} } },
+    ],
+  });
+  const spreadTo = (cands, id) => cands.filter((c) => c?.candidateType === 'stressor_spread_disease_outbreak' && c.targetSaveId === id);
+
+  it('OFF the marker: BOTH the migration (B) and trade (C) aspatial spread candidates fire (byte-identical legacy)', () => {
+    const cands = evaluateWorldPulseRules(snap(false), { tick: 5, pressureIndex: new Map() });
+    expect(spreadTo(cands, 'b').length).toBe(1);
+    expect(spreadTo(cands, 'c').length).toBe(1);
+  });
+
+  it('ON the marker: the migration spread (B) is PRESERVED (front never carries it); the trade spread (C) is reconciled out', () => {
+    const cands = evaluateWorldPulseRules(snap(true), { tick: 5, pressureIndex: new Map() });
+    expect(spreadTo(cands, 'b').length).toBe(1); // refugee vector preserved — reach ≥ aspatial
+    expect(spreadTo(cands, 'c').length).toBe(0); // the front replaces the trade spread (no double-count)
   });
 });

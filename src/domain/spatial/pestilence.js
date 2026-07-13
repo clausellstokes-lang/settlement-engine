@@ -101,9 +101,19 @@ export const EPIDEMIC_TUNING = Object.freeze({
   LEVEL_RELAX_BASE: 0.14, // decays while recovering
   LEVEL_RELAX_CARE: 0.3, // + care·this — care shortens survival (faster relax)
   MIN_LEVEL: 0.02, // prune floor
-  // LIFECYCLE — the recovery floor + the refractory window (co-built brakes).
+  // LIFECYCLE — the recovery floor + the refractory windows (co-built brakes).
   RECOVERY_FLOOR_TICKS: 26, // force-recover after this many active ticks (NO perma-front)
-  REFRACTORY_TICKS: 8, // a cleared/fizzled node resists re-seeding this long
+  REFRACTORY_TICKS: 8, // a FIZZLED front (onset never took hold) resists re-seeding this long
+  // POST-CLEARANCE settlement REFRACTORY (FIX #3, the cluster-drain brake). neighboursOf is
+  // BIDIRECTIONAL (tradeNeighbours reads both-way edges), so a dense care-poor cluster could
+  // re-seed endlessly: a node's front clears + prunes, a still-active neighbour re-seeds it,
+  // it re-onsets + re-mints — per-record clearance holds but the SYSTEM never drains. A node
+  // that HELD the plague and cleared therefore resists re-seeding + re-onset (its recovering
+  // record persists) for this bounded window — comfortably longer than RECOVERY_FLOOR_TICKS so
+  // a bounded cluster's re-infection wave outruns its own refractory tail and the ledger drains.
+  // Owner-retunable in the checkpoint soak (raise to localize an outbreak harder; never < the
+  // recovery floor, or the drain guarantee weakens back toward the level-decay accident).
+  CLEARED_REFRACTORY_TICKS: 40,
   // RELIGIOUS INFLUENCE — the bounded temple standing pulse (rises with level, reverts).
   TEMPLE_PULSE_MAX: 0.25,
   // ARMIES — the graded hazard penalty (read primitive; the coupling itself is fenced).
@@ -521,8 +531,13 @@ export function advancePestilence(inputs) {
       const stressorGone = !inputs.stressorActiveAt(id);
       const floorHit = (now - rec.activeSince) >= T.RECOVERY_FLOOR_TICKS;
       if (stressorGone || floorHit) {
-        // Enter recovery (the RECOVERY FLOOR brake fires here at the latest).
-        next[id] = { ...rec, phase: 'recovering', sinceTick: now, lastTick: now, refractoryUntil: now + T.REFRACTORY_TICKS };
+        // Enter recovery (the RECOVERY FLOOR brake fires here at the latest). Stamp the LONGER
+        // post-clearance settlement refractory (FIX #3): a node that HELD the plague resists
+        // re-seeding/re-onset for CLEARED_REFRACTORY_TICKS — its recovering record persists that
+        // whole window (the prune below waits on refractoryUntil), so a bidirectional neighbour
+        // cannot immediately re-seed it and the cluster's re-infection loop drains. (The FIZZLE
+        // path above never took hold, so it keeps the SHORT REFRACTORY_TICKS.)
+        next[id] = { ...rec, phase: 'recovering', sinceTick: now, lastTick: now, refractoryUntil: now + T.CLEARED_REFRACTORY_TICKS };
         clearances.push({ id });
         continue;
       }
@@ -531,9 +546,17 @@ export function advancePestilence(inputs) {
       continue;
     }
 
-    // recovering — relax (faster under care), prune when spent + past refractory.
+    // recovering — relax (faster under care), prune when spent AND past the refractory window.
+    // ⚠️ ARMY-VECTOR CONSUMER NOTE (armyPlagueHazard, when wired): the level relaxes toward ~0
+    // here while the settlement may STILL carry an active disease_outbreak stressor (recovery is
+    // the FRONT winding down, not the stressor resolving) — so a level-only read would call a
+    // still-plagued town SAFE mid-cycle. The army-vector pass must OR the graded level with the
+    // stressor's own presence/severity (effectiveStressorSeverity), not gate on level alone.
     const relax = clamp01(T.LEVEL_RELAX_BASE + T.LEVEL_RELAX_CARE * Math.max(0, finiteNumber(inputs.care01Of(id), 0)));
     const level = clamp01(rec.level * (1 - relax));
+    // Prune only once BOTH the level is spent AND the post-clearance refractory has elapsed — the
+    // refractory (CLEARED_REFRACTORY_TICKS on a real clearance) is the binding term, so the
+    // recovering record lingers as the settlement-level cooldown, then clears — NO perma-front.
     if (level < T.MIN_LEVEL && now >= rec.refractoryUntil) continue; // prune (clears — no perma-front)
     next[id] = { ...rec, level: round4(level), lastTick: now };
   }

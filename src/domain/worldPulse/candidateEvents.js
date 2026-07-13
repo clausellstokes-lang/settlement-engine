@@ -7,6 +7,8 @@ import { evaluateStressorRules, stressorCandidateForPressure } from './stressors
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+import { activeChannelsFrom } from '../region/index.js';
+import { RUMOR_TRADE_CHANNEL_TYPES } from '../spatial/rumorNetwork.js';
 
 function stablePart(/** @type {any} */ value) {
   return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
@@ -207,6 +209,35 @@ export function resolveCandidateConflicts(/** @type {any[]} */ candidates = [], 
   return selected.sort((a, b) => (b.severity - a.severity) || compareStableKeys(a, b));
 }
 
+/**
+ * FIX #2 (M11a reconcile, no over-suppression): does the epidemic FRONT actually carry
+ * disease_outbreak to this aspatial spread candidate's target? The spatial front travels
+ * ONLY trade-type channels (RUMOR_TRADE_CHANNEL_TYPES) + M2 shipments — so under the marker
+ * it REPLACES the aspatial TRADE-channel spread, but NOT the migration_pressure /
+ * service_dependency spread it never travels. Return true (⇒ drop) only when a plague-
+ * affected source reaches the target over a trade-type channel; otherwise the aspatial
+ * spread is PRESERVED (on-marker reach stays ≥ aspatial reach — the refugee/service vectors
+ * never silently vanish; FIX #1's dedupe keeps a both-reached node to ONE stressor). The
+ * forward-directed check mirrors spreadTargetsFor's own traversal and is conservative toward
+ * PRESERVE (a target reachable only via a reverse trade edge is kept, then deduped).
+ * @param {import('../region/graph.js').RegionGraph} graph
+ * @param {{ targetSaveId?: unknown, affectedSettlementIds?: unknown }} candidate
+ * @returns {boolean}
+ */
+function frontCarriesDiseaseTo(graph, candidate) {
+  const target = String(candidate?.targetSaveId ?? '');
+  if (!target) return false;
+  const affected = Array.isArray(candidate?.affectedSettlementIds) ? candidate.affectedSettlementIds : [];
+  for (const src of affected) {
+    const from = String(src);
+    if (!from || from === target) continue;
+    for (const channel of activeChannelsFrom(graph, from, { types: [...RUMOR_TRADE_CHANNEL_TYPES] })) {
+      if (String(channel?.to) === target) return true;
+    }
+  }
+  return false;
+}
+
 export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {any} */ context = {}) {
   const tick = Number.isFinite(context.tick) ? context.tick : snapshot?.worldState?.tick || 0;
   const pressures = context.pressures || [];
@@ -224,18 +255,23 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
   if (rules.stressorsEnabled) {
     const stressorCandidates = evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules });
     // M11a RECONCILE (ONE PLAGUE TRUTH, no double-count). Under the spatial-canon marker the
-    // plague's TRAVEL is owned by the epidemic FRONT (spatial mover M11a / pestilenceKernel),
-    // which materializes this same disease_outbreak stressor hop-by-hop at hopWeeks latency. So
-    // the aspatial ONE-HOP channel spread of disease_outbreak is dropped here — M4's origin-loss
-    // rule: the spatial front REPLACES the aspatial spread, never both. Absent the marker (aspatial
-    // / peaceful-spatial goldens carry no active disease_outbreak) the filter removes nothing ⇒
+    // plague's TRADE-channel TRAVEL is owned by the epidemic FRONT (spatial mover M11a /
+    // pestilenceKernel), which materializes this same disease_outbreak stressor hop-by-hop at
+    // hopWeeks latency along trade-type channels + M2 shipments. So ONLY the aspatial spread the
+    // front REPLACES is dropped here — a disease_outbreak spread candidate whose target a plague-
+    // affected source reaches over a TRADE-type channel (M4's origin-loss rule: the spatial front
+    // replaces the aspatial spread, never both). The migration_pressure / service_dependency spread
+    // the front does NOT travel is PRESERVED (the refugee/service epidemic vectors must not vanish
+    // when the marker is on — on-marker reach ≥ aspatial reach). Absent the marker (aspatial /
+    // peaceful-spatial goldens carry no active disease_outbreak) the filter removes nothing ⇒
     // BYTE-IDENTICAL. Reconciled at THIS lazy call site (candidateEvents rides the engine chunk),
     // NOT inside evaluateStressorRules, so it costs ZERO first-paint bytes (evaluateStressorRules is
     // bundled into the first-paint closure via its catalog exports — a suppression there would ship).
     const marker = snapshot?.worldState?.spatialCanonVersion;
     const epidemicTravelActive = Number.isInteger(marker) && Number(marker) > 0;
     candidates.push(...(epidemicTravelActive
-      ? stressorCandidates.filter(c => c?.candidateType !== 'stressor_spread_disease_outbreak')
+      ? stressorCandidates.filter(c => c?.candidateType !== 'stressor_spread_disease_outbreak'
+          || !frontCarriesDiseaseTo(snapshot?.regionalGraph, c))
       : stressorCandidates));
   }
   if (rules.relationshipDynamicsEnabled) {

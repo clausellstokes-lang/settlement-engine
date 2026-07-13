@@ -229,9 +229,6 @@ export function advanceSettlementPestilence({ snapshot, worldState, digest, grap
     const list = /** @type {PestStressor[]} */ (Array.isArray(nextWorldState.stressors) ? nextWorldState.stressors.slice() : []);
     const byId = new Map(list.map((s) => [String(s.id), s]));
     for (const mat of [...result.materializations].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))) {
-      const canonicalId = `world_stressor.disease_outbreak.${mat.id}`;
-      const existing = byId.get(canonicalId);
-      if (existing && isLivePlague(existing)) { continue; } // ONE truth: never double-mint
       const sourceName = mat.sourceId ? String(itemById.get(mat.sourceId)?.name || mat.sourceId) : 'an unknown source';
       const minted = normalizeStressor({
         type: 'disease_outbreak',
@@ -248,6 +245,14 @@ export function advanceSettlementPestilence({ snapshot, worldState, digest, grap
         createdAt: now || null,
         updatedAt: now || null,
       });
+      // Dedup on the SAME canonical id normalizeStressor/idFor actually mints — idFor slugs
+      // the origin via stablePart ([^a-z0-9]+→_), so a raw-`mat.id` key (production ids are
+      // UUIDs with hyphens) MISSES the real minted id (underscores) and DOUBLE-mints,
+      // violating ONE PLAGUE TRUTH. Keying off the minted record's own id can never drift
+      // from the mint transform (clean-slug fixtures were byte-identical either way).
+      const canonicalId = String(minted.id);
+      const existing = byId.get(canonicalId);
+      if (existing && isLivePlague(existing)) { continue; } // ONE PLAGUE TRUTH: never double-mint
       byId.set(canonicalId, /** @type {PestStressor} */ (minted));
       receipts.push({ id: mat.id, kind: 'materialized', severity: mat.severity, sourceId: mat.sourceId });
       newsEntries.push(materializationNews(mat.id, sourceName, mat.severity, itemById.get(mat.id)?.name, tick, now));

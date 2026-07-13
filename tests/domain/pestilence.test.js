@@ -373,6 +373,65 @@ describe('M11a pestilence — 20-year port-seeded two-region soak', () => {
   });
 });
 
+describe('M11a pestilence — FIX #3: a dense re-seed cycle drains (no cluster-level perma-front)', () => {
+  // The original soak (above) used a FORWARD-ONLY LINE, so its single wave ran off the end and
+  // died — it structurally could not exercise a re-seed CYCLE. The real kernel's carriers CLOSE
+  // cycles: tradeNeighbours is bidirectional AND M2 shipment edges are directed producer→consumer,
+  // so a circular supply loop (n0→n1→…→n15→n0) is an ordinary neighboursOf topology. A rotating
+  // front on such a cycle re-enters nodes it already burned; whether it DRAINS turns on the
+  // settlement-level refractory outlasting the wave's lap time. (NB: a purely BIDIRECTIONAL ring
+  // self-drains — the two counter-waves ANNIHILATE where they meet — so the perma-front needs a
+  // net-DIRECTED cycle; the fix's cleared-refractory is what guarantees the drain either way.)
+  //
+  // BEFORE the fix, a cleared node's record pruned after only the level-decay accident (~26 ticks),
+  // shorter than this cycle's lap, so the wave lapped forever: the ledger NEVER emptied and the
+  // plague re-materialized ~1300+ times over this horizon. WITH CLEARED_REFRACTORY_TICKS (40) the
+  // cleared node stays refractory past the lap, the wave catches its own tail, and the ledger drains.
+  it('a directed 16-node supply-loop, care-poor, drains to EMPTY within a bounded horizon', () => {
+    const N = 16;
+    const DWELL = 8; // the materialized disease_outbreak's episodic active lifetime (care-poor)
+    // The directed carrier cycle (a circular shipment loop): each node's only carrier is the hot
+    // edge to the next node — n0→n1→…→n15→n0.
+    const nbMap = {};
+    for (let i = 0; i < N; i++) {
+      nbMap[`n${i}`] = [{ to: `n${(i + 1) % N}`, edgeId: `ship.n${i}.n${(i + 1) % N}`, weeks: 1, hot: true }];
+    }
+    let ws = { ...MARKER };
+    // The abstracted stressor lifecycle: a node's disease_outbreak is "active" from take-hold for
+    // DWELL ticks, then ages out (each re-materialization renews it) — the same modelling the soak uses.
+    const stressorUntil = {};
+    let totalMaterializations = 0;
+    let everInfected = 0;
+    const HORIZON = 5 * 52; // 5 years weekly — comfortably past the measured drain (~tick 76)
+    for (let t = 0; t < HORIZON; t++) {
+      const stressorActive = (id) => stressorUntil[id] != null && t < stressorUntil[id];
+      const r = advancePestilence({
+        worldState: ws,
+        seedIds: t === 0 ? ['n0'] : Object.keys(stressorUntil).filter(stressorActive).sort(),
+        seedSeverityOf: () => 0.8,
+        stressorActiveAt: (id) => stressorActive(String(id)),
+        neighboursOf: (id) => nbMap[id] || [],
+        density01Of: () => 0.9, // dense
+        tradeVolume01Of: () => 0.6,
+        importVolume01Of: () => 0.3,
+        care01Of: () => 0, // care-POOR (no counterforce relief)
+        rng: ALWAYS, // every spread + onset fires — the worst case for the drain
+        tick: t,
+      });
+      if (t === 0) stressorUntil.n0 = DWELL;
+      for (const m of r.materializations) { stressorUntil[m.id] = t + DWELL; totalMaterializations += 1; everInfected += 1; }
+      ws = r.next ? { ...MARKER, spatialLedgers: { epidemic: r.next } } : { ...MARKER };
+    }
+    // The cycle WAS infected (non-vacuous: the wave walked the whole loop at least once).
+    expect(everInfected).toBeGreaterThanOrEqual(N - 1);
+    // NO perma-front: the epidemic ledger DRAINS TO EMPTY (pre-fix it never emptied — the wave lapped).
+    expect(ws.spatialLedgers?.epidemic).toBeUndefined();
+    // Re-materialization is BOUNDED — the plague did not re-mint endlessly (pre-fix: ~1300+ over this
+    // horizon; a handful of laps at most here).
+    expect(totalMaterializations).toBeLessThan(60);
+  });
+});
+
 describe('M11a pestilence — activation gate', () => {
   it('epidemicActive tracks the spatial-canon marker only', () => {
     expect(epidemicActive({ spatialCanonVersion: 1 })).toBe(true);
