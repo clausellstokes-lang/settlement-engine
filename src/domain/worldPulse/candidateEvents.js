@@ -222,7 +222,21 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     );
   }
   if (rules.stressorsEnabled) {
-    candidates.push(...evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules }));
+    const stressorCandidates = evaluateStressorRules(snapshot, pressureIndex, { ...context, tick, pressures, simulationRules: rules });
+    // M11a RECONCILE (ONE PLAGUE TRUTH, no double-count). Under the spatial-canon marker the
+    // plague's TRAVEL is owned by the epidemic FRONT (spatial mover M11a / pestilenceKernel),
+    // which materializes this same disease_outbreak stressor hop-by-hop at hopWeeks latency. So
+    // the aspatial ONE-HOP channel spread of disease_outbreak is dropped here — M4's origin-loss
+    // rule: the spatial front REPLACES the aspatial spread, never both. Absent the marker (aspatial
+    // / peaceful-spatial goldens carry no active disease_outbreak) the filter removes nothing ⇒
+    // BYTE-IDENTICAL. Reconciled at THIS lazy call site (candidateEvents rides the engine chunk),
+    // NOT inside evaluateStressorRules, so it costs ZERO first-paint bytes (evaluateStressorRules is
+    // bundled into the first-paint closure via its catalog exports — a suppression there would ship).
+    const marker = snapshot?.worldState?.spatialCanonVersion;
+    const epidemicTravelActive = Number.isInteger(marker) && Number(marker) > 0;
+    candidates.push(...(epidemicTravelActive
+      ? stressorCandidates.filter(c => c?.candidateType !== 'stressor_spread_disease_outbreak')
+      : stressorCandidates));
   }
   if (rules.relationshipDynamicsEnabled) {
     candidates.push(...evaluateRelationshipRules(snapshot, pressureIndex, { ...context, tick, simulationRules: rules }));

@@ -65,6 +65,7 @@ import { releaseMigrationArrivals, dispatchMigrations, collectRealizedEmigration
 import { migrationActive } from '../spatial/migration.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
+import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
@@ -1811,6 +1812,34 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (armyTransit.changed) memoryState = armyTransit.worldState;
     if (armyTransit.newsEntries.length) {
       wizardNews = appendWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now });
+    }
+  }
+  // Phase 5.5 mover M11a — PESTILENCE (the traveling plague). AFTER the war/army layer +
+  // the stressor aging/apply (so it reads THIS tick's live disease_outbreak stressors as
+  // seeds): the epidemic FRONT propagates hop-by-hop along active trade channels + M2
+  // shipment arrivals at hopWeeks latency (seeded per-edge forks; ports run hotter; the
+  // per-tick spread bounded), rolls onset (density/tier + volume − the roster-read care
+  // counterforce) where it lands, and MATERIALIZES the ORDINARY disease_outbreak stressor
+  // where it takes hold (ONE PLAGUE TRUTH — the same stressor, so it feeds the existing
+  // revival + gods_abandonment faith seams; a causal receipt on every mint). The aspatial
+  // one-hop disease spread is reconciled OUT under the marker (candidateEvents' lazy call site
+  // filters the spread candidate — no double-count). Co-built brakes: recovery floor (no perma-front), the care cap, the
+  // spread bound. AGGREGATE-only — no named NPC touched. DORMANT (no spatial marker) ⇒
+  // changed:false ⇒ memoryState untouched, zero new keys — the existing plague byte-identical.
+  {
+    const pestilence = advanceSettlementPestilence({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      digest: memoryState.spatialDigest,
+      graph: applied.regionalGraph,
+      rng: rng.fork('pestilence'),
+      season: roadSeason,
+      tick: worldState.tick,
+      now,
+    });
+    if (pestilence.changed) memoryState = pestilence.worldState;
+    if (pestilence.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, pestilence.newsEntries, { now });
     }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
