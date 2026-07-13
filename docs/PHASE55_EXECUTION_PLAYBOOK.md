@@ -145,8 +145,9 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   hold is satisfied — the owner decided, not the manager) — see §0.6.0. FP-2-first funding (no raise);
   M10b catch-up CAP=26 calendar-advances-past-cap; F24 AccountPage fixed (c85781f0); 5.5-K stale note
   corrected + guarded (47ccd6dd). Working branch claude/phase55-parking-lot off review-fixes-2026-07-08.
-- FP-2 STORE-SLICE SPLIT: IN FLIGHT (this session, Opus) — the ratified shared unblock; placeholder-then-
-  hydrate lazy registration; lands BEFORE M10b/W5; gates on the full golden battery (byte-identity law).
+- FP-2 STORE-SLICE SPLIT: SPECCED + READY — NOT started (2026-07-13, Opus). Full implementation-ready
+  spec at §0.7 (design + byte-identity de-risking + sequence). The ratified shared unblock; lands BEFORE
+  M10b/W5 as its own focused wave (FP-2a aiSlice first). No FP-2 code written this session.
 - W5 RE-MERGE: ✅ RULED FP-2-first (§0.6.1) — re-apply after FP-2, no raise; MUST cherry-pick (a direct
   merge reverts the M-ladder, -25,330). Branch 312a5025 reachable via claude/adoring-wescoff-6a25a8
   (NOT amazing-thompson — that worktree was repurposed to claude/elastic-leavitt-50d90e @ d024286e).
