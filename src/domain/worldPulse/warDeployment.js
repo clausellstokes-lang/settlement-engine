@@ -51,6 +51,9 @@ import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } fro
 // proposalPayload whose apply re-mints the siege (applyWorldPulse). changeAuthorityPolicy
 // already rides the lazy pulse chunk (candidateEvents imports it) ⇒ zero new eager bytes.
 import { authorityFor } from './changeAuthorityPolicy.js';
+// M10a — the HOLD dedup: a proposal-gated (held) war-init must not re-propose the
+// same siege every tick while it sits pending in the approval queue.
+import { pendingActorMajorFor } from './actorMajorApproval.js';
 // Phase 4 W-F4b (item 2a) — the alignment-conditioned fidelity term: a chaotic-devout
 // besieger classifies the matchup on a NOISY ESTIMATE of the true capacities (fights
 // refused wars / quits winnable ones), then the roll below reads the TRUE values.
@@ -1567,6 +1570,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
 
   for (const fromId of candidateIds) {
     if (deployments[fromId]) continue;                 // one-army constraint
+    // M10a — HOLD (dedup): a HELD war-init (warInitMode 'proposal') withholds the
+    // deployment, so the mobilized besieger would otherwise re-propose the SAME
+    // siege every tick, spamming the approval queue. While a pending strategy_deploy
+    // proposal for this besieger sits unresolved, the actor HOLDS — no duplicate.
+    // The legacy/auto path mints inline (caught by the one-army gate above) and
+    // never holds ⇒ this guard is byte-invisible when initiation is not proposal-gated.
+    if (warInitMode === 'proposal' && pendingActorMajorFor(worldState, 'strategy_deploy', fromId)) continue;
     if (clearedAttackers.has(fromId)) continue;        // army just returned this tick
     if (isBesieged(graph, fromId)) continue;           // can't march while besieged/occupied
     // MOBILIZATION POSTURE GATE (the keystone): a settlement cannot launch a

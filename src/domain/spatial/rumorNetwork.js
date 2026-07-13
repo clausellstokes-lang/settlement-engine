@@ -656,9 +656,12 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
             content: record.content,
           };
           // HI-FI carriers (M9c teleport: the zero-hop magic channel) NEVER weather — the
-          // telling crosses at preserved fidelity even in 'unreliable' mode (round 11: the
+          // telling crosses at preserved fidelity even in distorting modes (round 11: the
           // fastest, most accurate channel where it exists), so they draw NO organic fork.
-          if (mode === 'unreliable' && !hiFi) {
+          // M10a: 'full' (the ceiling) is an 'unreliable' SUPERSET — it carries the same
+          // organic distortion ON TOP of the M9a factional-belief layer, so news still
+          // twists with distance under full simulation. perfect_delayed remains undistorted.
+          if ((mode === 'unreliable' || mode === 'full') && !hiFi) {
             // THE fork law (§III.2-5): per event+carrier+edge+hop, NEVER per
             // settlement, off the pulse confluence. Perfect-but-Delayed forks
             // NOTHING (this branch is the only rng touch in the module).

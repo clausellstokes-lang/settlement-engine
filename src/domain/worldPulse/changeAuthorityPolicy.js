@@ -1,4 +1,5 @@
 import { politicalAutonomyOf } from './simulationRules.js';
+import { isActorInitiatedMajorType, routineMajorApprovalEnabled } from './actorMajorApproval.js';
 
 /**
  * domain/worldPulse/changeAuthorityPolicy.js — the canonical change-authority
@@ -309,5 +310,15 @@ export const CHANGE_AUTHORITY_FLAGGED = Object.freeze([
 export function authorityFor(rules, changeType, legacyMode = 'auto') {
   const autonomy = politicalAutonomyOf(rules);
   if (autonomy === 'dm_only' || autonomy === 'recommendations') return 'proposal';
+  // M10a — CL-3: routine finally keeps the §11 promise ("ordinary auto, MAJORS
+  // need approval") for the ACTOR-INITIATED majors — a war declaration
+  // (strategy_deploy) or a coup (coup_succeeded) route through the approval queue.
+  // GATED behind the opt-in routineMajorApproval so a routine-DEFAULT profile
+  // (the M9d siege pins, the goldens — flag ABSENT) stays VERBATIM/byte-identical.
+  // Every non-major changeType (every ruleFamily the choke point passes) falls
+  // through to legacyMode untouched, so nothing else moves.
+  if (autonomy === 'routine'
+      && isActorInitiatedMajorType(changeType)
+      && routineMajorApprovalEnabled(rules)) return 'proposal';
   return legacyMode;
 }

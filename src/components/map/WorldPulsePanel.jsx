@@ -19,6 +19,7 @@ import {
   stressorSummary,
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
+import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
 
 export default function WorldPulsePanel({ campaign }) {
@@ -39,6 +40,20 @@ export default function WorldPulsePanel({ campaign }) {
   const pulseHistory = worldState.pulseHistory || [];
   const latestPulse = pulseHistory[pulseHistory.length - 1] || null;
   const rules = worldState.simulationRules || {};
+  // M10a (CL-3) — the RATIONALE surface. The realm's approval custom frames the
+  // pending queue: recommendations proposes WITH its reasoning, dm_only asks about
+  // everything, and routine-with-major-approval routes the actor-initiated majors
+  // (a war declaration, a coup) here. Each card already renders the candidate's
+  // reasons[] as its rationale; this note names WHY the turn is waiting on the DM.
+  const autonomy = politicalAutonomyOf(rules);
+  const routineMajorApproval = autonomy === 'routine' && rules.routineMajorApproval === true;
+  const proposalNote = autonomy === 'recommendations'
+    ? 'The realm recommends these turns and shows its reasoning with each — apply or dismiss.'
+    : autonomy === 'dm_only'
+      ? 'Every major turn awaits your word. Each carries the reasoning behind it.'
+      : routineMajorApproval
+        ? 'Routine life runs itself; the campaign-altering turns — a war declaration, a coup — wait here for your word (they stand down on their own if left unanswered).'
+        : null;
   const rolls = latestPulse?.rollExplanations || [];
   const resolved = latestPulse?.resolvedStressors || [];
   const appliedOutcomes = latestPulse?.selectedOutcomes || [];
@@ -202,6 +217,11 @@ export default function WorldPulsePanel({ campaign }) {
           {actionError && (
             <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
               {actionError}
+            </div>
+          )}
+          {pending.length > 0 && proposalNote && (
+            <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
+              {proposalNote}
             </div>
           )}
           {pending.length === 0 ? (

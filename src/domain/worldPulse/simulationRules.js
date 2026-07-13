@@ -264,8 +264,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warLevyEnabled: true,
     warDispositionEnabled: true,
     seasonsEnabled: true,
-    // STEP 3.5: the full sim hears the world as rumor — distance breeds error.
-    infoMode: 'unreliable',
+    // M10a (CL-3): the full sim completes the info ladder — the 'full' ceiling
+    // (factional beliefs + reconciliation, carried at the unreliable distortion).
+    infoMode: 'full',
   }),
 });
 
@@ -319,16 +320,18 @@ export function worldProgressionOf(rules) {
  * UNLOCKED). Two live modes beyond the omniscient default: 'perfect_delayed'
  * (true news, arrives by travel time — no distortion) and 'unreliable' (the
  * fidelity vector + organic degradation). 'delayed' is the pre-3.5 catalog
- * rung name, honoured as an input alias. Everything else — the forward 'full'
- * (needs factional beliefs, Wave A+) and garbage — FAILS CLOSED to
- * 'omniscient' (today's behavior; the coercion law reports it). Total on
- * garbage; virtual-profile reads resolve to the omniscient legacy default.
+ * rung name, honoured as an input alias. M10a (CL-3) UNLOCKS the ceiling rung
+ * 'full': the complete factional-belief experience — the M9a per-faction belief
+ * maps + reconciliation, carried at the 'unreliable' distortion (rumorNetwork
+ * treats 'full' as an 'unreliable' SUPERSET). Garbage still FAILS CLOSED to
+ * 'omniscient'. Total on garbage; virtual-profile reads resolve to the
+ * omniscient legacy default.
  * @param {Record<string, unknown> | null | undefined} rules
- * @returns {'omniscient' | 'perfect_delayed' | 'unreliable'}
+ * @returns {'omniscient' | 'perfect_delayed' | 'unreliable' | 'full'}
  */
 export function infoModeOf(rules) {
   const v = rules && typeof rules === 'object' ? rules.infoMode : null;
-  if (v === 'perfect_delayed' || v === 'unreliable') return v;
+  if (v === 'perfect_delayed' || v === 'unreliable' || v === 'full') return v;
   if (v === 'delayed') return 'perfect_delayed';
   return 'omniscient';
 }

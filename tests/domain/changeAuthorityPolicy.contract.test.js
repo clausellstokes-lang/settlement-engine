@@ -105,8 +105,11 @@ const SOURCE_ANCHORS = Object.freeze({
   occupation_vassalized: "ruleId: 'occupation_vassalized',\n      ruleFamily: 'relationship',\n      applyMode: 'auto'",
   npc_goal_culmination: "probability: 0.9,\n    applyMode: 'auto'",
   trade_war: "ruleId: `trade_war_${archetype}`,\n    ruleFamily: 'stressor',\n    applyMode: 'auto'",
-  // auto with a separate lock axis (NOT the proposal flag).
-  coup_succeeded: "applyMode: locked ? 'proposal' : 'auto'",
+  // auto with a separate lock axis (NOT the proposal flag). M10a routes the coup
+  // through authorityFor: the lock-escalation gate (locked ? 'proposal' : 'auto')
+  // is the LEGACY mode fed through — verbatim under routine/full, forced to
+  // proposal under dm_only/recommendations and routine-with-major-approval.
+  coup_succeeded: "applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto')",
 });
 
 describe('change-authority contract — source anchors match the policy', () => {

@@ -38,8 +38,9 @@ export const SPATIAL_MODES = Object.freeze(['ignore', 'abstract', 'mapped', 'ful
 export const TRAVEL_MODES = Object.freeze(['instant', 'compressed', 'standard', 'slow']);
 // STEP 3.5 unlocked the middle rungs: 'perfect_delayed' (the pre-3.5 catalog
 // spelled this rung 'delayed' — infoModeOf honours the old token as an input
-// alias) and 'unreliable' are live; 'full' (the carrier/belief web) stays a
-// rendered-but-locked ceiling until Wave A+.
+// alias) and 'unreliable' are live. M10a (CL-3) unlocks the CEILING 'full' (the
+// M9a factional-belief web + reconciliation, carried at the unreliable
+// distortion). The whole ladder is now live.
 export const INFO_MODES = Object.freeze(['omniscient', 'perfect_delayed', 'unreliable', 'full']);
 
 /**
@@ -121,11 +122,11 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
     ),
   },
   {
-    // STEP 3.5: perfect_delayed + unreliable are LIVE (the rumor network);
-    // this law now guards only the residue — the forward 'full' mode (needs
-    // the carrier/belief web, Wave A+) and garbage fail closed to omniscient.
-    // The 'delayed' → 'perfect_delayed' rename is an ALIAS, not a coercion:
-    // the mode the DM chose is the mode stored, so it does not report.
+    // STEP 3.5 + M10a: perfect_delayed, unreliable, AND the 'full' ceiling are
+    // all LIVE now; this law guards only the RESIDUE — a garbage infoMode fails
+    // closed to omniscient. The 'delayed' → 'perfect_delayed' rename is an ALIAS,
+    // not a coercion (the mode the DM chose is stored). A live mode canonicalizes
+    // to itself, so input === canonical and the law does not fire for it.
     law: 'information_not_yet_built',
     kind: 'stored',
     apply: (input, canonical) => (
@@ -134,7 +135,7 @@ export const PROFILE_COERCION_LAWS = Object.freeze([
         ? {
           key: 'infoMode', from: input.infoMode, to: canonical.infoMode,
           kind: 'stored', law: 'information_not_yet_built',
-          message: 'That full web of carriers and whispers is not yet woven — news can be all-knowing, true-but-slow, or unreliable.',
+          message: 'That is not a custom of news the realm keeps — news can be all-knowing, true-but-slow, unreliable, or the full web of carriers and whispers.',
         }
         : null
     ),
@@ -278,6 +279,7 @@ const CHANGE_PHRASES = {
     omniscient: 'all news is now true and immediate',
     perfect_delayed: 'news now travels — true, but only as fast as the roads',
     unreliable: 'news now travels and twists — distance breeds rumor',
+    full: 'each faction now believes its own version — news travels, twists, and is reconciled from many tellings',
   })[/** @type {string} */ (value)] || 'the realm follows a new custom of news',
   majorChangesRequireProposal: value => (value
     ? 'major turns now ask you first'

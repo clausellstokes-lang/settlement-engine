@@ -31,6 +31,11 @@
 import { stablePart } from './worldState.js';
 import { resolveCoupVerdict } from '../rulingPower.js';
 import { computeWarSentiment } from './disposition.js';
+// M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
+// through the shared authority policy so the seat-change joins the approval queue
+// under the forcing modes AND under routine-with-major-approval (byte-identical
+// verbatim under legacy routine/full — the flag is absent there).
+import { authorityFor } from './changeAuthorityPolicy.js';
 
 // How strongly war sentiment shifts the coup hold-chance (P2). Modest — a sour war
 // tilts the seat's footing, it does not by itself topple a secure ruler.
@@ -81,9 +86,12 @@ function clamp(min, max, value) {
  * @param {number} [args.tick]
  * @param {Record<string, number>} [args.warExhaustion]  P2: the war-exhaustion scar ledger
  * @param {boolean} [args.warDispositionEnabled]  P2 flag: fold war sentiment into the hold-chance
+ * @param {Record<string, unknown>} [args.rules]  M10a: the simulation rules — the coup's applyMode
+ *   routes through authorityFor (verbatim under legacy routine/full; proposal under the forcing
+ *   modes and routine-with-major-approval).
  * @returns {any[]} outcomes for applyWorldPulseOutcomes (deterministic, probability 1)
  */
-export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false }) {
+export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false, rules = {} }) {
   const outcomes = [];
   for (const stressor of resolved) {
     if (stressor?.type !== COUP_STRESSOR_TYPE) continue;
@@ -160,7 +168,12 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
       type: 'power_transfer',
       candidateType: 'coup_succeeded',
       ruleId: 'coup_verdict_fall',
-      applyMode: locked ? 'proposal' : 'auto',
+      // M10a — the coup's LEGACY applyMode (locked ⇒ proposal, else auto — the
+      // player-lock escalation) is the legacyMode fed through authorityFor:
+      // VERBATIM under routine/full (byte-identical), forced to 'proposal' under
+      // dm_only/recommendations and under routine-with-major-approval (a coup is an
+      // actor-initiated major). No fresh rng — the verdict already rolled.
+      applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto'),
       severity: clamp(0.45, 1, severity),
       headline: `${verdict.winner.name} seizes power in ${settlementName}`,
       summary: `The ${String(incumbentName).toLowerCase()} fell. ${verdict.winner.name} now commands the government, and the settlement holds its breath.`,

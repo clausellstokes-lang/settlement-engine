@@ -277,4 +277,40 @@ describe('WorldPulsePanel', () => {
     expect(screen.queryByTitle('Name attacker')).toBeNull();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
   });
+
+  // M10a (CL-3) — the RATIONALE surface. A pending proposal already renders its
+  // reasons[]; this note frames WHY the queue is waiting, per the realm's custom.
+  const panelWith = (simulationRules) => ({
+    id: 'camp-r', name: 'Realm',
+    worldState: {
+      canonizedAt: '2026-01-01T00:00:00.000Z',
+      tick: 3, calendar: { season: 'spring' }, simulationRules,
+      proposals: [{
+        id: 'p-war', status: 'pending', tick: 3,
+        headline: 'Ironhold marches on Thornmere', summary: 'The campaign is opened.',
+        severity: 0.7, reasons: ['Ironhold is war-ready and Thornmere is a feasible target.'],
+      }],
+      pulseHistory: [],
+    },
+  });
+
+  test('recommendations mode surfaces the rationale framing note', () => {
+    render(<WorldPulsePanel campaign={panelWith({ politicalAutonomy: 'recommendations' })} />);
+    expect(screen.getByText(/recommends these turns and shows its reasoning/i)).toBeTruthy();
+    // The candidate's reason renders as its rationale.
+    expect(screen.getByText('Ironhold is war-ready and Thornmere is a feasible target.')).toBeTruthy();
+  });
+
+  test('routine-with-major-approval frames the actor-initiated majors waiting for a word', () => {
+    render(<WorldPulsePanel campaign={panelWith({ politicalAutonomy: 'routine', routineMajorApproval: true })} />);
+    expect(screen.getByText(/campaign-altering turns .* wait here for your word/i)).toBeTruthy();
+  });
+
+  test('routine-DEFAULT (no opt-in) shows NO framing note (byte-identical presentation)', () => {
+    render(<WorldPulsePanel campaign={panelWith({ politicalAutonomy: 'routine' })} />);
+    expect(screen.queryByText(/wait here for your word/i)).toBeNull();
+    expect(screen.queryByText(/recommends these turns/i)).toBeNull();
+    // The proposal + its reason still render — only the mode note is gated.
+    expect(screen.getByText('Ironhold marches on Thornmere')).toBeTruthy();
+  });
 });

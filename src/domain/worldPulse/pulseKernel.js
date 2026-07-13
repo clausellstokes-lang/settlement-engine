@@ -14,6 +14,8 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatia
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
 import { coupVerdictOutcomes, isCoupResidualOutcome } from './coup.js';
+// M10a — CL-3: the hold-then-expire pass for held actor-initiated majors.
+import { expireStaleActorMajors } from './actorMajorApproval.js';
 import { evaluateWarLayer, stripSuppressedDeployResidue } from './warDeployment.js';
 import { evaluateMobilization } from './mobilization.js';
 import { mobilizationEffects } from './mobilizationEffects.js';
@@ -244,6 +246,13 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   const simulationRules = normalizeSimulationRules(startingWorldState.simulationRules);
   const rng = createPRNG(`${startingWorldState.rngSeed}::tick:${startingWorldState.tick + 1}::${tickInterval}`);
   let worldState = { ...nextWorldStateForPulse(startingWorldState, campaign, tickInterval), simulationRules };
+  // M10a — CL-3 HOLD-THEN-EXPIRE: retire any actor-initiated-major proposal (a held
+  // war declaration / coup) that has waited ACTOR_MAJOR_HOLD_WEEKS with no DM word —
+  // the actor stands down (expire-to-decline). Byte-invisible for legacy/default
+  // worlds (they never hold such a proposal: the routing is gated off) — the SAME
+  // worldState reference is returned. Runs BEFORE the war/coup layers so an expired
+  // hold no longer blocks a fresh attempt (the dedup reads pending only).
+  worldState = expireStaleActorMajors(worldState, worldState.tick, now);
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
   worldState = ensureAllRelationshipStates(worldState, snapshot);
@@ -321,6 +330,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         tick: worldState.tick,
         warExhaustion: worldState.warExhaustion || {},
         warDispositionEnabled: simulationRules.warDispositionEnabled,
+        // M10a — route the coup's applyMode through the approval queue under the
+        // forcing modes / routine-with-major-approval (verbatim under legacy).
+        rules: simulationRules,
       })
     : [];
 

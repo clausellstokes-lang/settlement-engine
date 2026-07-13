@@ -60,8 +60,11 @@ describe('validateSimulationProfile — total, deterministic, idempotent', () =>
   });
 
   test('forward values fail closed and are reported as stored coercions', () => {
+    // M10a: infoMode 'full' is now a LIVE rung, so a garbage infoMode is used here
+    // to exercise information_not_yet_built (the still-locked forward axes —
+    // progression living/autonomous [M10b], geography, travel — remain clamped).
     const { canonical, coercions } = validateSimulationProfile({
-      worldProgression: 'autonomous', spatialMode: 'mapped', travelMode: 'slow', infoMode: 'full',
+      worldProgression: 'autonomous', spatialMode: 'mapped', travelMode: 'slow', infoMode: 'garble',
     });
     expect(canonical.worldProgression).toBe('dm_advanced');
     expect(canonical.spatialMode).toBe('ignore');

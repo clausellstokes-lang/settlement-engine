@@ -2,11 +2,12 @@
  * infoModeUnlock.test.js — STEP 3.5 CL wiring: the §11 information axis stops
  * being locked. Pins:
  *   • infoModeOf: live modes pass, the pre-3.5 'delayed' catalog token aliases
- *     to 'perfect_delayed', 'full' + garbage fail CLOSED to 'omniscient'.
+ *     to 'perfect_delayed'; M10a (CL-3) UNLOCKS the 'full' ceiling; garbage fails
+ *     CLOSED to 'omniscient'.
  *   • normalizeSimulationRules preserves a live infoMode through the profile
  *     materialize branch; a VIRTUAL (untouched) profile still persists none.
- *   • Preset wiring: living_realm → perfect_delayed, full_simulation →
- *     unreliable; preset identity is STABLE for pre-3.5 saves that stored the
+ *   • Preset wiring: living_realm → perfect_delayed, full_simulation → full
+ *     (M10a); preset identity is STABLE for pre-3.5 saves that stored the
  *     old omniscient clamp (infoMode is deliberately not a comparison key).
  *   • Ruleset receipts fire on an infoMode change (prepareRulesUpdate:
  *     changedKeys + the rulesetLog receipt + the wizard-news realm entry) —
@@ -33,22 +34,22 @@ describe('infoModeOf — the effective read', () => {
     expect(infoModeOf({ infoMode: 'perfect_delayed' })).toBe('perfect_delayed');
     expect(infoModeOf({ infoMode: 'unreliable' })).toBe('unreliable');
     expect(infoModeOf({ infoMode: 'delayed' })).toBe('perfect_delayed'); // pre-3.5 alias
-    expect(infoModeOf({ infoMode: 'full' })).toBe('omniscient');         // Wave A+ — fails closed
+    expect(infoModeOf({ infoMode: 'full' })).toBe('full');               // M10a — the ceiling is live
     expect(infoModeOf({ infoMode: 'omniscient' })).toBe('omniscient');
     expect(infoModeOf({})).toBe('omniscient');
     expect(infoModeOf(null)).toBe('omniscient');
-    expect(infoModeOf({ infoMode: 42 })).toBe('omniscient');
+    expect(infoModeOf({ infoMode: 42 })).toBe('omniscient');             // garbage still fails closed
   });
 });
 
 describe('normalizeSimulationRules — the canonical write', () => {
   it('preserves a live infoMode when the profile materializes', () => {
-    for (const mode of ['perfect_delayed', 'unreliable']) {
+    for (const mode of ['perfect_delayed', 'unreliable', 'full']) {
       const rules = normalizeSimulationRules({ infoMode: mode });
       expect(rules.infoMode).toBe(mode);
     }
     expect(normalizeSimulationRules({ infoMode: 'delayed' }).infoMode).toBe('perfect_delayed');
-    expect(normalizeSimulationRules({ infoMode: 'full' }).infoMode).toBe('omniscient');
+    expect(normalizeSimulationRules({ infoMode: 'garble' }).infoMode).toBe('omniscient');
   });
 
   it('a VIRTUAL profile stays virtual: no profile key touched ⇒ none persisted', () => {
@@ -64,9 +65,9 @@ describe('normalizeSimulationRules — the canonical write', () => {
 });
 
 describe('preset wiring (§3.2-7)', () => {
-  it('living_realm carries perfect_delayed; full_simulation carries unreliable', () => {
+  it('living_realm carries perfect_delayed; full_simulation carries full (M10a)', () => {
     expect(SIMULATION_RULE_PRESETS.living_realm.rules.infoMode).toBe('perfect_delayed');
-    expect(SIMULATION_RULE_PRESETS.full_simulation.rules.infoMode).toBe('unreliable');
+    expect(SIMULATION_RULE_PRESETS.full_simulation.rules.infoMode).toBe('full');
     // The legacy trio + the quieter §11 presets stay omniscient.
     for (const id of ['quiet_local', 'realistic_regional', 'dramatic_campaign', 'static_campaign', 'narrative_campaign']) {
       expect(SIMULATION_RULE_PRESETS[id].rules.infoMode, id).toBe('omniscient');
@@ -78,7 +79,7 @@ describe('preset wiring (§3.2-7)', () => {
     expect(living.infoMode).toBe('perfect_delayed');
     expect(living.presetId).toBe('living_realm');
     const full = normalizeSimulationRules(SIMULATION_RULE_PRESETS.full_simulation.rules);
-    expect(full.infoMode).toBe('unreliable');
+    expect(full.infoMode).toBe('full');
     expect(full.presetId).toBe('full_simulation');
   });
 
@@ -97,8 +98,9 @@ describe('preset wiring (§3.2-7)', () => {
 });
 
 describe('the coercion matrix (validateSimulationProfile)', () => {
-  it('live modes coerce nothing; the alias reports nothing; full still reports', () => {
-    for (const mode of ['perfect_delayed', 'unreliable', 'omniscient']) {
+  it('live modes coerce nothing; the alias reports nothing; garbage still reports', () => {
+    // M10a: 'full' joins the live rungs — it coerces nothing (it IS stored).
+    for (const mode of ['perfect_delayed', 'unreliable', 'full', 'omniscient']) {
       const { canonical, coercions } = validateSimulationProfile({ infoMode: mode });
       expect(canonical.infoMode).toBe(mode);
       expect(coercions.filter((c) => c.key === 'infoMode')).toEqual([]);
@@ -107,10 +109,10 @@ describe('the coercion matrix (validateSimulationProfile)', () => {
     const alias = validateSimulationProfile({ infoMode: 'delayed' });
     expect(alias.canonical.infoMode).toBe('perfect_delayed');
     expect(alias.coercions.filter((c) => c.key === 'infoMode')).toEqual([]);
-    // 'full' fails closed AND reports.
-    const full = validateSimulationProfile({ infoMode: 'full' });
-    expect(full.canonical.infoMode).toBe('omniscient');
-    const hit = full.coercions.find((c) => c.key === 'infoMode');
+    // A GARBAGE mode still fails closed AND reports (the law survives 'full's unlock).
+    const garbage = validateSimulationProfile({ infoMode: 'garble' });
+    expect(garbage.canonical.infoMode).toBe('omniscient');
+    const hit = garbage.coercions.find((c) => c.key === 'infoMode');
     expect(hit?.law).toBe('information_not_yet_built');
     expect(hit?.kind).toBe('stored');
   });
