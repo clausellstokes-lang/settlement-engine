@@ -34,6 +34,10 @@ import {
   advanceSupplyShipments, supplyActive, rankSupplySources, linkKey,
   SUPPLY_STARVED_IMPAIRMENT, SUPPLY_STARVED_CAUSE_PREFIX, SUPPLY_TUNING,
 } from '../spatial/supplyShipments.js';
+import {
+  advanceCommodityFlow, commodityFlowActive, productionRateFor, originStockCap,
+  assertGoodsConservation, COMMODITY_TUNING,
+} from '../spatial/commodityFlow.js';
 import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
@@ -188,6 +192,14 @@ function atWar(graph, gateId, destId) {
 export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
   if (!supplyActive(worldState) || !digest) return { worldState, changed: false, starvations: [], arrivals: [] };
 
+  // Phase 5.5 mover M6a — COMMODITY CONTINUITY. When the commodity-flow opt-in is
+  // set (on top of the spatial marker) the QUANTITY-denominated model REPLACES M2's
+  // time-buffer path (one representation, gated — never both). Off the opt-in, the M2
+  // path below runs verbatim (pre-M6a byte-identity).
+  if (commodityFlowActive(worldState)) {
+    return advanceCommodityContinuity({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season, rng, now });
+  }
+
   const producers = buildProducerIndex(snapshot);
   /** @type {SupplyLink[]} */
   const links = [];
@@ -291,3 +303,193 @@ export function advanceSettlementSupply({ snapshot, localSettlements, worldState
   }
   return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals };
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Phase 5.5 mover M6a — COMMODITY CONTINUITY (the finite-stock kernel adapter).
+// Runs INSTEAD of the M2 path when the commodity-flow opt-in is set (commodityFlowActive).
+// Reuses M2's producer index + consuming-link derivation + impairment write-back;
+// swaps the time-buffer engine for the QUANTITY-denominated commodityFlow engine
+// (finite origin stocks, en-route depletion, the goods-conservation invariant).
+// ══════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Count the activeChains that PRODUCE a good — a chain whose `outputs` include it, or
+ * whose exportable `resource` is it. The production-RATE driver (finite origin stocks:
+ * more producing chains ⇒ a faster fountain). @param {SupplySettlement} settlement
+ * @param {string} goodId @returns {number}
+ */
+export function countProducingChains(settlement, goodId) {
+  const chains = settlement?.economicState?.activeChains || [];
+  let n = 0;
+  for (const chain of chains) {
+    let makes = false;
+    for (const output of /** @type {string[]} */ (/** @type {{ outputs?: string[] }} */ (chain)?.outputs || [])) {
+      if (normalizeGood(output)?.id === goodId) { makes = true; break; }
+    }
+    if (!makes && /** @type {{ exportable?: boolean }} */ (chain)?.exportable && normalizeGood(chain?.resource)?.id === goodId) makes = true;
+    if (makes) n += 1;
+  }
+  return n;
+}
+
+/**
+ * The sparse producer sources: each (settlement, good) that EXPORTS a shippable good,
+ * with a finite production RATE derived from its activeChains + the warehouse cap. A
+ * producer is materialized ONLY for goods it actually exports (sparse — no dense matrix).
+ * @param {SupplySnapshot} snapshot @param {Map<string, SupplySettlement>} localSettlements
+ * @returns {import('../spatial/commodityFlow.js').CommodityProducer[]}
+ */
+export function buildProducers(snapshot, localSettlements) {
+  /** @type {import('../spatial/commodityFlow.js').CommodityProducer[]} */
+  const producers = [];
+  const seen = new Set();
+  for (const item of snapshot?.settlements || []) {
+    const sid = String(item.id);
+    const settlement = localSettlements.get(sid) || item.settlement;
+    if (!settlement) continue;
+    for (const label of canonExports(settlement) || []) {
+      const g = normalizeGood(/** @type {import('../region/goodsCatalog.js').GoodInput} */ (label));
+      if (!g || !isShippableInput(g)) continue;
+      const pk = `${sid}:${g.id}`;
+      if (seen.has(pk)) continue;
+      seen.add(pk);
+      const rate = productionRateFor({ producingChainCount: countProducingChains(settlement, g.id) });
+      producers.push({ settlementId: sid, good: g.id, rate, cap: originStockCap(rate) });
+    }
+  }
+  return producers;
+}
+
+/**
+ * Advance the M6a commodity-continuity layer one tick (finite origin stocks, quantity
+ * stockpiles, en-route depletion, the goods-conservation invariant). Same return shape
+ * as advanceSettlementSupply. Writes the `commodityStocks` + `supplyShipments`
+ * sub-ledgers (both under spatialLedgers — zero eager bytes) and the SUPPLY-STARVED
+ * impairment (reusing M2's stamping) driven by the shortage/starvation band.
+ * @param {Object} args
+ * @param {SupplySnapshot} args.snapshot
+ * @param {Map<string, SupplySettlement>} args.localSettlements
+ * @param {Record<string, unknown>} args.worldState
+ * @param {unknown} args.graph
+ * @param {SpatialDigest} args.digest
+ * @param {number} args.tick
+ * @param {number} [args.tickWeeks]
+ * @param {string|null} [args.season]
+ * @param {{ fork?: (k: string) => { random: () => number } }|null} [args.rng]
+ * @param {string|null} [args.now]
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, starvations: string[], arrivals: string[] }}
+ */
+export function advanceCommodityContinuity({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
+  const producerIndex = buildProducerIndex(snapshot);
+  /** @type {import('../spatial/commodityFlow.js').CommodityLink[]} */
+  const links = [];
+  /** @type {Map<string, { settlementId: string, input: string, institutionName: string|null }>} */
+  const meta = new Map();
+  /** @type {Map<string, SupplySnapItem>} */
+  const itemById = new Map((snapshot?.settlements || []).map((it) => [String(it.id), it]));
+  // consumesGood(settlementId, goodId): is (settlement, good) a tracked consuming link?
+  // (the en-route tap predicate — an intermediary that imports the good taps a passing caravan).
+  /** @type {Map<string, Set<string>>} */
+  const consumeIndex = new Map();
+  for (const item of snapshot?.settlements || []) {
+    const destId = String(item.id);
+    const settlement = localSettlements.get(destId) || item.settlement;
+    if (!settlement) continue;
+    for (const link of deriveConsumingLinks(settlement, destId, producerIndex, digest)) {
+      links.push(link);
+      const real = resolveConsumingInstitution(settlement, link.input);
+      meta.set(linkKey(destId, link.institutionId, link.input), { settlementId: destId, input: link.input, institutionName: real });
+      const set = consumeIndex.get(destId) || new Set();
+      set.add(String(link.input));
+      consumeIndex.set(destId, set);
+    }
+  }
+  const producers = buildProducers(snapshot, localSettlements);
+  if (!links.length && !producers.length) return { worldState, changed: false, starvations: [], arrivals: [] };
+
+  // Live predicates (M2 parity): a besieged producer's output is cut; a gate at war
+  // with the destination intercepts the caravan; the severing cause names the besieger.
+  const sourceSeveredFor = (/** @type {string} */ _destId, /** @type {string} */ sourceId) => warFrontsInto(graph, sourceId).length > 0;
+  const hostileToDestinationFor = (/** @type {string} */ destId, /** @type {string} */ gateId) => atWar(graph, gateId, destId);
+  const riskToleranceFor = () => SUPPLY_RISK_TOLERANCE;
+  const consumesGood = (/** @type {string} */ settlementId, /** @type {string} */ goodId) => !!consumeIndex.get(settlementId)?.has(goodId);
+  const severingCauseFor = (/** @type {import('../spatial/commodityFlow.js').CommodityLink} */ link) => {
+    for (const src of link.rankedSources || []) {
+      const besiegers = warFrontsInto(graph, String(src.sourceId));
+      if (besiegers.length) return `the siege of ${itemById.get(besiegers[0])?.name || besiegers[0]}`;
+    }
+    return undefined;
+  };
+
+  const out = advanceCommodityFlow({
+    producers, links, worldState, digest, tick, tickWeeks, season, rng,
+    sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor,
+  });
+
+  // THE GOODS-CONSERVATION INVARIANT — assert every tick (exact integers). On a
+  // (by-construction impossible) imbalance, refuse to persist inconsistent state.
+  if (!assertGoodsConservation(out.accounting)) {
+    return { worldState, changed: false, starvations: [], arrivals: [] };
+  }
+
+  // ── Write-back: the SUPPLY-STARVED impairment per settlement (band-driven), reusing
+  //    M2's disjoint cause namespace. Stocks live in the commodityStocks ledger (NOT
+  //    economicState.inputStockpiles — the M2 representation) so there is no double-count.
+  /** @type {Map<string, { starve: Array<{ inst: string, receipt: string|null }>, feed: string[] }>} */
+  const perSettlement = new Map();
+  const starvations = [];
+  const arrivals = [];
+  for (const key of Object.keys(out.outcomes)) {
+    const outcome = out.outcomes[key];
+    const m = meta.get(key);
+    if (!m) continue;
+    if (outcome.arrived) arrivals.push(key);
+    if (outcome.receipt) starvations.push(outcome.receipt);
+    if (m.institutionName) {
+      const bucket = perSettlement.get(m.settlementId) || { starve: [], feed: [] };
+      if (outcome.starving) bucket.starve.push({ inst: m.institutionName, receipt: outcome.receipt });
+      else bucket.feed.push(m.institutionName);
+      perSettlement.set(m.settlementId, bucket);
+    }
+  }
+  for (const [sid, bucket] of perSettlement) {
+    let settlement = localSettlements.get(sid) || itemById.get(sid)?.settlement;
+    if (!settlement) continue;
+    const feedSet = new Set(bucket.feed.map((n) => n.toLowerCase()));
+    const starveMap = new Map(bucket.starve.map((s) => [s.inst.toLowerCase(), s]));
+    const institutions = (settlement.institutions || []).map((inst) => {
+      const name = String(inst?.name || '').toLowerCase();
+      const starve = starveMap.get(name);
+      if (starve) {
+        return withImpairment(inst, {
+          type: SUPPLY_STARVED_IMPAIRMENT, severity: 0.6,
+          causeEventId: `${SUPPLY_STARVED_CAUSE_PREFIX}${sid}`,
+          description: starve.receipt || 'Supply-starved: an input road is cut.',
+          appliedAt: now,
+        });
+      }
+      if (feedSet.has(name)) {
+        const stale = (inst.impairments || []).filter((im) => String(im?.causeEventId || '').startsWith(SUPPLY_STARVED_CAUSE_PREFIX));
+        let cleared = inst;
+        for (const im of stale) cleared = withoutEventImpairments(cleared, im.causeEventId);
+        return cleared;
+      }
+      return inst;
+    });
+    localSettlements.set(sid, { ...settlement, institutions });
+  }
+
+  // Write the two sub-ledgers (commodityStocks + supplyShipments) under spatialLedgers.
+  let nextWorldState = worldState;
+  if (out.changed) {
+    nextWorldState = out.nextStocks
+      ? setSpatialLedger(nextWorldState, 'commodityStocks', out.nextStocks)
+      : dropSpatialLedger(nextWorldState, 'commodityStocks');
+    nextWorldState = out.nextShipments
+      ? setSpatialLedger(nextWorldState, 'supplyShipments', out.nextShipments)
+      : dropSpatialLedger(nextWorldState, 'supplyShipments');
+  }
+  return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals };
+}
+
+export { COMMODITY_TUNING };
