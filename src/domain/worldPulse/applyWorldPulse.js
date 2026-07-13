@@ -11,7 +11,7 @@ import {
   stablePart,
   syncRelationshipChannelBundle,
 } from '../region/index.js';
-import { queueRegionalImpacts } from '../region/graph.js';
+import { queueRegionalImpacts, addRegionalChannels, mintDirectedChannel } from '../region/graph.js';
 import { activeSpatialDigest, getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { parkArrivals, drainDueArrivals } from '../spatial/spatialArrival.js';
 import { storageCapacityMonths } from './foodStockpile.js';
@@ -812,6 +812,30 @@ export function applyWorldPulseOutcomes({
       proposals.push(proposal);
       newsEntries.push(newsEntryForOutcome(outcome, tick, 'proposal'));
       continue;
+    }
+
+    // M9d — THE WAR INITIATE/RESOLVE SPLIT (apply side). A strategy_deploy that carries
+    // a `siege_initiation` payload is a DM-Driven war-initiation whose deployment seed +
+    // war_front were WITHHELD by evaluateWarLayer (the mint is HELD under dm_only /
+    // recommendations). Reaching apply as 'auto' means the DM APPROVED it (the proposal
+    // resolver forces applyMode:'auto'), so re-mint the held siege NOW: install the seeded
+    // deployment record on worldState.deployments and mint the war_front on the graph.
+    // The next war tick reads a live siege and resolves it through the UNCHANGED
+    // resolveSiegeVerdict path. LEGACY war initiations carry no such payload (they minted
+    // inline in evaluateWarLayer), so this branch never fires ⇒ byte-identical. Guarded on
+    // an absent existing record so a re-applied proposal can't double-seed an army.
+    if (outcome.proposalPayload?.kind === 'siege_initiation') {
+      const pay = outcome.proposalPayload;
+      const besieger = String(pay.besieger);
+      if (pay.deployment && !(state.deployments && state.deployments[besieger])) {
+        state = { ...state, deployments: { ...(state.deployments || {}), [besieger]: clone(pay.deployment) } };
+      }
+      if (pay.warFront) {
+        const frontChannel = /** @type {import('../region/graph.js').RegionChannel} */ (mintDirectedChannel({ ...pay.warFront, now }));
+        graph = addRegionalChannels(graph, [frontChannel], { now });
+      }
+      // Falls through: the strategy_deploy itself is a settlement-state no-op (its home
+      // conditions re-upsert on the NEXT war tick once the deployment is live).
     }
 
     for (const saveId of affectedSaveIdsForOutcome(outcome)) {

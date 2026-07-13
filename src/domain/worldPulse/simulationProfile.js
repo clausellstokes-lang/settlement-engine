@@ -199,16 +199,20 @@ export function validateSimulationProfile(raw) {
 // 'auto' = the engine may initiate and propagate.
 /**
  * @type {Readonly<Record<string, { flag: string, dmDriven: 'live'|'deferred' }>>}
- *   dmDriven 'deferred': the war domain cannot present a DM-driven middle state
- *   until the initiate/resolve split (PART VII.1) — evaluateWarLayer both opens
- *   and resolves sieges inline, outside the proposal machinery.
+ *   dmDriven 'live': the domain can present the DM-driven middle state — under
+ *   dm_only / recommendations autonomy its introductions route through the
+ *   proposal queue. War became 'live' at M9d (the initiate/resolve split, PART
+ *   VII.1): siege INITIATION now routes through the proposal machinery (held +
+ *   re-minted on approval) while RESOLUTION stays inline and unchanged.
  */
 export const SIMULATION_DOMAINS = Object.freeze({
   diplomacy: Object.freeze({ flag: 'relationshipDynamicsEnabled', dmDriven: 'live' }),
   trade: Object.freeze({ flag: 'tradeFlowsEnabled', dmDriven: 'live' }),
   migration: Object.freeze({ flag: 'migrationFlowsEnabled', dmDriven: 'live' }),
   religion: Object.freeze({ flag: 'faithSpreadEnabled', dmDriven: 'live' }),
-  war: Object.freeze({ flag: 'warLayerEnabled', dmDriven: 'deferred' }),
+  // M9d: the war row now ships Off / DM-Driven / Autonomous — the initiate/resolve
+  // split (evaluateWarLayer + applyWorldPulse) closed the CL-0 deferral.
+  war: Object.freeze({ flag: 'warLayerEnabled', dmDriven: 'live' }),
   strategy: Object.freeze({ flag: 'settlementStrategyEnabled', dmDriven: 'live' }),
   // SEASONS-A: the food year. dmDriven 'deferred' here means the row NEVER
   // presents a 'dm' middle state — not because a split is pending (war's
@@ -225,8 +229,9 @@ export const SIMULATION_DOMAINS = Object.freeze({
  * In CL-0 the 'dm' state is GLOBAL — it reflects the dm_only/recommendations
  * autonomy modes (which force every candidate to a proposal), because
  * per-domain authority overrides are a future seam (authorityFor already
- * accepts the domain for exactly that reason). War never reports 'dm'
- * (initiate/resolve are still fused — the row ships Off/Autonomous).
+ * accepts the domain for exactly that reason). As of M9d war reports 'dm' like
+ * every other live domain — the initiate/resolve split routes siege initiation
+ * through the proposal queue under dm_only/recommendations.
  *
  * @param {Record<string, unknown> | null | undefined} rules
  * @param {string} domain  A SIMULATION_DOMAINS key.

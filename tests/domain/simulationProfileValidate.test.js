@@ -142,13 +142,17 @@ describe('domainState — the derived tri-state over the boolean storage', () =>
     expect(domainState({ religionDynamicsEnabled: true }, 'religion')).toBe('auto');
   });
 
-  test('dm_only/recommendations present enabled domains as dm; war never does', () => {
+  test('dm_only/recommendations present enabled domains as dm — war included (M9d split landed)', () => {
     const rules = normalizeSimulationRules({ politicalAutonomy: 'dm_only', warLayerEnabled: true });
     expect(domainState(rules, 'trade')).toBe('dm');
     expect(domainState(rules, 'diplomacy')).toBe('dm');
-    // War's initiate/resolve split has not landed — its row is Off/Autonomous only.
-    expect(domainState(rules, 'war')).toBe('auto');
-    expect(SIMULATION_DOMAINS.war.dmDriven).toBe('deferred');
+    // M9d — the initiate/resolve split landed: siege initiation routes through the
+    // proposal queue under dm_only/recommendations, so the war row is now Off/DM/Auto.
+    expect(domainState(rules, 'war')).toBe('dm');
+    expect(SIMULATION_DOMAINS.war.dmDriven).toBe('live');
+    // Under routine/full (legacy) war stays 'auto' — the inline mint runs byte-identically.
+    expect(domainState(normalizeSimulationRules({ politicalAutonomy: 'routine', warLayerEnabled: true }), 'war')).toBe('auto');
+    expect(domainState(normalizeSimulationRules({ politicalAutonomy: 'full', warLayerEnabled: true }), 'war')).toBe('auto');
   });
 
   test('seasons (SEASONS-A): off by default, auto when lit, and NEVER dm (nothing to approve)', () => {

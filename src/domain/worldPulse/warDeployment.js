@@ -43,6 +43,14 @@ import { logistic, clamp01 } from '../region/contestMath.js';
 import { stablePart } from './worldState.js';
 import { deriveMilitaryCapacity } from './militaryStrength.js';
 import { classifyFeasibility, verdictPermitsSiege, verdictAllowsHarassment } from './feasibilityGate.js';
+// M9d — THE WAR INITIATE/RESOLVE SPLIT: siege INITIATION routes its applyMode through
+// the SAME per-domain authority policy every candidate family consults. Under legacy
+// autonomy (routine / full — the pre-CL0 world) authorityFor returns the legacy 'auto'
+// VERBATIM ⇒ the inline mint runs byte-identically. Under the DM-Driven forcing modes
+// (dm_only / recommendations) it returns 'proposal' ⇒ the mint is HELD and carried in a
+// proposalPayload whose apply re-mints the siege (applyWorldPulse). changeAuthorityPolicy
+// already rides the lazy pulse chunk (candidateEvents imports it) ⇒ zero new eager bytes.
+import { authorityFor } from './changeAuthorityPolicy.js';
 // Phase 4 W-F4b (item 2a) — the alignment-conditioned fidelity term: a chaotic-devout
 // besieger classifies the matchup on a NOISY ESTIMATE of the true capacities (fights
 // refused wars / quits winnable ones), then the roll below reads the TRUE values.
@@ -1547,6 +1555,16 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     .map((/** @type {any} */ item) => String(item.id))
     .sort(codepoint);
 
+  // M9d — THE INITIATION AUTHORITY: opening a NEW siege is a campaign-altering major.
+  // Its applyMode is now resolved through the shared authority policy (once — a pure
+  // read of `rules`, no rng). LEGACY (routine / full autonomy, incl. absent rules) ⇒
+  // 'auto' VERBATIM: the mint runs inline exactly as before (byte-identical). DM-DRIVEN
+  // (dm_only / recommendations) ⇒ 'proposal': the deployment seed + war_front are HELD
+  // this tick and carried in the outcome's proposalPayload, so the DM's approval re-mints
+  // the siege and a decline/expiry opens no war. Resolution (resolveSiegeVerdict) is
+  // untouched — only initiation splits.
+  const warInitMode = authorityFor(rules, 'strategy_deploy', 'auto');
+
   for (const fromId of candidateIds) {
     if (deployments[fromId]) continue;                 // one-army constraint
     if (clearedAttackers.has(fromId)) continue;        // army just returned this tick
@@ -1594,7 +1612,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // origin's offensive capacity). Attrition degrades it, reinforcement replenishes
     // it, the siege verdict reads its currentEffectiveStrength.
     const fromSettlement = snapshot?.byId?.get?.(String(fromId))?.settlement;
-    deployments[fromId] = seedDeploymentState({
+    // Seed the deployment record HERE regardless of mode — the sizing rust fork
+    // (seedDeploymentState → fidelityFactor when rust>0) MUST fire at THIS point so the
+    // rng-draw order the siege pins depend on is preserved on the legacy path. Under
+    // DM-Driven the seeded record rides the proposalPayload instead of the live ledger.
+    const seededRecord = seedDeploymentState({
       targetId: chosenTarget,
       cap: fromCap,
       tick,
@@ -1609,7 +1631,10 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
       qualityMult: qualityMultFor(fromId),
     });
-    graphChannels.push(mintDirectedChannel({
+    // The war_front channel PARAMS (the `now` stamp is applied at mint time). On the
+    // legacy path they are minted immediately (below); under DM-Driven they ride the
+    // proposalPayload verbatim and the apply re-mints an identical front on approval.
+    const frontParams = {
       type: 'war_front',
       from: fromId,
       to: chosenTarget,
@@ -1618,8 +1643,16 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       explanation: `${settlementNameFor(fromId)} marches on ${settlementNameFor(chosenTarget)}.`,
       relationshipKey: `war_front.${stablePart(fromId)}.${stablePart(chosenTarget)}`,
       source: 'war_layer_deploy',
-      now,
-    }));
+    };
+    if (warInitMode !== 'proposal') {
+      // LEGACY / AUTO — install the siege inline, byte-identically to the pre-M9d engine.
+      deployments[fromId] = seededRecord;
+      graphChannels.push(mintDirectedChannel({ ...frontParams, now }));
+    }
+    // DM-DRIVEN — the deployment + front are WITHHELD: no ledger seed, no graph mint
+    // this tick. Step 5 (home conditions) never sees this deployer, so no war_drain /
+    // army_deployed / exhaustion ratchet accrues until the DM approves. The apply of the
+    // proposal (below) re-mints the held siege from the payload.
 
     // ── SIEGE INITIATION as a deferrable MAJOR. Opening a NEW siege is a
     // campaign-altering move (a strategy_deploy, listed in decisionTier's
@@ -1635,7 +1668,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const fromName = settlementNameFor(fromId);
     const chosenName = settlementNameFor(chosenTarget);
     // W-C1 legibility: name the two new martial causes when they moved the committed force.
-    const seededRec = deployments[fromId];
+    // Read the just-seeded record directly (under DM-Driven it is NOT in `deployments`).
+    const seededRec = seededRecord;
     const deployReasons = [`${fromName} is war-ready and ${chosenName} is a feasible target.`];
     if (Number.isFinite(seededRec?.sizingBias) && seededRec.sizingBias !== 1) {
       deployReasons.push(
@@ -1653,7 +1687,8 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       candidateType: 'strategy_deploy',
       ruleId: 'war_layer_strategy_deploy',
       ruleFamily: 'stressor',
-      applyMode: 'auto',
+      // LEGACY ⇒ 'auto' (byte-identical); DM-DRIVEN ⇒ 'proposal' (routes to the queue).
+      applyMode: warInitMode,
       probability: 1,
       targetSaveId: fromId,
       severity: clamp01(0.5 + fromStrength * 0.2),
@@ -1661,6 +1696,21 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       summary: `${fromName} commits its army to a siege of ${chosenName}. The campaign is opened.`,
       reasons: deployReasons,
       sourceEventTargetId: chosenTarget,
+      // M9d — the siege-initiation payload. Present ONLY under DM-Driven (the legacy
+      // outcome is byte-identical — no field added). On approval, applyWorldPulseOutcomes
+      // re-mints the WITHHELD deployment + war_front from this payload. `deployment` is the
+      // seeded army record; `warFront` the channel params (minus `now`, applied at mint).
+      ...(warInitMode === 'proposal'
+        ? {
+          proposalPayload: {
+            kind: 'siege_initiation',
+            besieger: String(fromId),
+            besieged: String(chosenTarget),
+            deployment: seededRecord,
+            warFront: frontParams,
+          },
+        }
+        : {}),
     });
   }
 
