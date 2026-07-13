@@ -62,10 +62,15 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | M9d WAR INITIATE/RESOLVE SPLIT (mover ladder #9, part d — component 6; M9 COMPLETE) | (this commit) | [GATE-REVIEW ONLY] Siege INITIATION routes its applyMode through the per-domain authority policy (warInitMode = authorityFor(rules,'strategy_deploy','auto')) so war's DM-Driven tri-state unlocks (the CL-0 deferral CLOSES); RESOLUTION untouched. The extraction: seedDeploymentState fires at the SAME point (rng order preserved — the seededRecord held in a local); LEGACY/auto ⇒ verbatim inline mint (deployments[from]=seededRecord + mintDirectedChannel); DM-DRIVEN ⇒ the mint is WITHHELD, the strategy_deploy outcome carries proposalPayload{kind:'siege_initiation', deployment, warFront}, and applyWorldPulse re-mints on approval (re-minted force .toEqual's the legacy record; double-seed guarded). LEGACY BYTE-IDENTITY (manager-verified): pulseKernel UNTOUCHED (residue-strip byte-identical; no residue under DM-Driven); the proposalPayload conditional spread adds NO key on the legacy path; the 6 siege pins + war certification + CL-0 pins (authorityLegacyPin, changeAuthorityPolicy.contract) BYTE-IDENTICAL. DM-Driven routed path verified (pending→approve re-mints / decline→no war / resolution unchanged). COALITION-DISSENT→COUP soak: a schism-depressed Crisis seat opens the coup gate, resolves through the real kernel into a two-sided fork (both coup_succeeded AND coup_suppressed across seeds, bounded). BUDGET-FREE → closure 1,255,959 UNCHANGED. Gates (manager gate-review): M9d 13/13; 6 siege pins + certification + CL-0 + all 19 goldens byte-identical; any-cast 2252; build+verify:dist 108/108; full suite 8225/8225. ✅ M9 COMPLETE (a+b+c+d). NEXT: M10 CL-3 — the KNOWN eager-adder / budget-decision point (26B margin) |
 | M10a CL-3 APPROVAL QUEUE (mover ladder #10, part a — owner SPLIT the budget-blocked M10) | (this commit) | [GATE-REVIEW ONLY] M10 measured +122B eager (over the 26B margin) → owner chose SPLIT: M10a (fits) now, M10b (+86B, needs a budget raise) deferred (parking lot §0.6). CRUX RESOLVED: routing war-init/coup to proposals under PLAIN routine breaks the M9d/siege pins (they expect the inline auto-mint under virtual routine) → gated behind a 0-EAGER opt-in simulationRules.routineMajorApproval (tolerant read, ABSENT from DEFAULT ⇒ no accessor branch, no eager key; absent ⇒ routing dormant ⇒ byte-identical). (1) APPROVAL-QUEUE: authorityFor gains one gated branch — under routine+opt-in an ACTOR-INITIATED major (strategy_deploy war decl / coup_succeeded) returns 'proposal', else legacyMode verbatim; war rides M9d's siege_initiation payload (re-mint deepEqual the legacy inline); coup threaded through authorityFor, fires once (stressor consumed at resolution), re-applies deterministically; pending-actions = the existing worldState.proposals (0 eager) + WorldPulsePanel approve/dismiss. (2) HOLD-THEN-EXPIRE (actorMajorApproval.js, lazy): a major waits ACTOR_MAJOR_HOLD_WEEKS=6 (⚠️ owner-decision default, named+documented+retunable) then EXPIRES-TO-DECLINE; NO deadlock (expiry only retires, never blocks the advance; legacy returns the SAME worldState ref); HOLD dedup so a besieger doesn't re-propose each tick. (3) RATIONALE surface (mode-aware note, gated off under routine-default ⇒ byte-identical). (4) infoMode 'full' (the ONLY eager change, +6B net: +12B infoModeOf branch − ~6B shorter preset string) — an unreliable-superset (M9a factional beliefs + distortion). BYTE-IDENTITY (grep+run): goldens have ZERO coup/strategy_deploy markers, siege pins run with no opt-in ⇒ CL-0 pins + 6 siege pins + war certification + coalitionDissentCoup + all 45 goldens BYTE-IDENTICAL. Closure 1,255,965 ≤ 1,255,985 (20B margin). Gates (manager gate-review): M10a 18/18 + 3 panel; CL-0/siege/coup/goldens byte-identical; any-cast 2252; build+verify:dist 108/108; full suite 8246/8246. ⚠️ M10b DEFERRED (§0.6: catch-up cap + worldProgression living/autonomous + preset mover-flags, +86B, needs budget raise) |
 | Design doc (companion) | many (98e2aed8…d5672d31 range) | 20 owner rounds + PARTS I-VII (6 grounding passes); §11 control layer; II.5 + VI.4 decisions settled |
+| Parking-lot F24 fix | c85781f0 (cherry-pick of 6faa1045) | the STRANDED F24 fix landed on review-fixes: AccountPage profileSourceKey NUL join-separator → '|' (ephemeral memo, behavior-safe). src/ NUL scan 2→1 (the remaining one is the supplyCompleteness delimiter, §0.0.2). eslint clean; account smoke 2/2 |
+| Parking-lot 5.5-K freeze-first guard | 47ccd6dd | +3 pins for the previously-uncovered live-capture double-read (differ⇒warn+return-FIRST; match⇒no-warn; throw⇒swallowed). Structural-prevention; 0 product code, 0 first-paint bytes. Seam already fully wired 5.5-M @ 18fc15f2 → §0.6 stale note corrected |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
-- BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,256,000 (FP-1 ratchet; never raise without owner);
-  any-cast ceiling 2252 EXACT (fix types, never widen); domain-strict 0/0.
+- BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
+  FP-R consolidation down-ratchet →1,255,985; never raise without owner). CURRENT closure 1,255,965 =
+  20B margin (post-M10a; MEASURED 2026-07-13). Owner ruling 2026-07-13: FP-2 (store-slice split)
+  RECLAIMS headroom for M10b+W5 rather than a budget raise — see §0.6.0. any-cast ceiling 2252 EXACT
+  (fix types, never widen); domain-strict 0/0.
   ⚠️ HEADROOM CRITICAL as of 3.5: only **63 BYTES** free (closure 1,255,937). Wave A MUST stay fully
   lazy (its belief-ledger key ≈ one CONDITIONAL_LEDGER_KEYS literal ~17-25B fits; the selector +
   reconciliation + DM read-model are all LAZY worldPulse/display — no eager cost). Any wave that
@@ -80,7 +85,11 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   protected) + round-19 seasons + round-20 ports.
 - ACCEPTED DRIFT CLASS: preset re-inference on newly-lit keys (A3, SEASONS-A) — display-only.
 - KNOWN OPEN FINDINGS: population attractor (owner-parked, gates M4); legibility-at-density
-  (feed 240-cap, backlog); analytics dual-import build warnings (pre-existing); 15 lint advisories.
+  (feed 240-cap, backlog); analytics dual-import build warnings (pre-existing); 15 lint advisories;
+  supplyCompleteness.js:158 carries a NUL-byte (`\x00`) cache-key delimiter between supplierId and
+  commodityId — INTENTIONAL (collision-safe) but trips the F24 clean-NUL-scan discipline; owner-surfaced
+  2026-07-13, left as-is pending their call (the ONLY remaining NUL in src/ after AccountPage fix
+  c85781f0; use the python byte-count check per F24 memory — plain `grep -P '\x00'` misses it).
 - INCIDENT PATTERNS (proven recoveries): session-limit agent deaths → §0.5; worktree-lane
   baseline collisions → type honestly at merge (b6959c9a); mis-cut worktree base → verify
   merge-base before work (the W5 re-merge self-correction).
@@ -132,8 +141,15 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
   the budget-reclaim approach on best judgment, conservative + retunable constants, DOCUMENTED here
   for later owner review. NEXT: the budget reclaim (ledger-namespace consolidation) must land BEFORE
   M4/M5/M6 — 17B does not fit a new migration ledger key. Then M4 migration-with-mortality.
-- W5 RE-MERGE: BLOCKED on ⚠️ OWNER headroom decision (see §0.6 — +1,000 budget raise vs FP-2).
-  NOT merged; deferred (cosmetic, non-blocking). Branch 312a5025 preserved in worktree amazing-thompson.
+- PARKING-LOT ADJUDICATION: ✅ RULED 2026-07-13 (owner, in-session; the "do NOT self-rule on §0.6"
+  hold is satisfied — the owner decided, not the manager) — see §0.6.0. FP-2-first funding (no raise);
+  M10b catch-up CAP=26 calendar-advances-past-cap; F24 AccountPage fixed (c85781f0); 5.5-K stale note
+  corrected + guarded (47ccd6dd). Working branch claude/phase55-parking-lot off review-fixes-2026-07-08.
+- FP-2 STORE-SLICE SPLIT: IN FLIGHT (this session, Opus) — the ratified shared unblock; placeholder-then-
+  hydrate lazy registration; lands BEFORE M10b/W5; gates on the full golden battery (byte-identity law).
+- W5 RE-MERGE: ✅ RULED FP-2-first (§0.6.1) — re-apply after FP-2, no raise; MUST cherry-pick (a direct
+  merge reverts the M-ladder, -25,330). Branch 312a5025 reachable via claude/adoring-wescoff-6a25a8
+  (NOT amazing-thompson — that worktree was repurposed to claude/elastic-leavitt-50d90e @ d024286e).
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
   Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
   adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
@@ -209,35 +225,60 @@ state briefing: what exists unstaged, what remains, any tree changes since dispa
 rewrite what exists"; (3) if the tree went quiet 15+ min with no completion, ping the same way.
 
 ## 0.6 The parking lot (append here; do not act without a ruling)
-- (M10b, 2026-07-13) ⚠️ DEFERRED — M10b BLOCKED ON A BUDGET RAISE. M10 (CL-3) split: M10a
-  (approval-queue + hold-then-expire + rationale + infoMode 'full', +12B) ships within the 26B
-  margin; M10b — LIVING/AUTONOMOUS worldProgression + the CAPPED CATCH-UP + the full_simulation
-  preset mover-flags (commodityFlowEnabled/allyIntelSharingEnabled/worldProgression:'autonomous')
-  — is **+86B eager** and needs CLOSURE_BUDGET_BYTES raised (1,255,985 → ~1,256,100+, the W5-style
-  eager-feature bump; measurement in scratchpad/measure.mjs). The +86B is genuine (three engine
-  modes + everything-on preset), NOT bloat — a reclaim is the wrong tool (FP-R already harvested
-  the fruit). Owner chose SPLIT (2026-07-13). M10b also carries the catch-up-CAP owner-decision
-  constant. Land M10b with the raise in the endgame (before/with the master merge).
-- (W5, 2026-07-12) ⚠️ OWNER DECISION — W5 RE-MERGE IS BLOCKED ON HEADROOM. The W5 cosmetic sweep
-  (branch 312a5025, worktree amazing-thompson; 68 files, gate-green on base df217415, ONLY
-  OutputContainer.jsx conflicts with current HEAD) adds ~+1,000 eager first-paint bytes (two eager
-  configSlice store-slice feature fields — the monolithic-store issue). It self-raised the budget
-  1,256,000→1,257,000 "OWNER-RATIFICATION PENDING". Current headroom is 63B, so it does NOT fit.
-  Opus-manager will NOT self-authorize a budget raise (§0.2/§0.0.2). OWNER PICKS: (a) ratify the
-  +1,000 raise (cosmetic-worth-it call), OR (b) run FP-2 (the parked store-slice split) first to
-  reclaim headroom, then merge W5 at 1,256,000. W5 is cosmetic + non-critical-path — deferring it
-  blocks nothing. Merge protocol when unblocked: resolve OutputContainer (3.5 extracted
-  dossierLazyTabs; W5 has dossier polish — keep both), full battery, §6.1.
-- (5.5-K, 2026-07-12) LIVE PACK.CELLS CAPTURE: the keystone proved its digest against INJECTED pack
-  fixtures; the real FMG-iframe read-only capture seam (extract pack.cells H/biome/r/c once at
-  canonize) is UNWIRED — it belongs to 5.5-M (MODULATION), the first CONSUMER. MODULATION's dispatch
-  MUST wire the live read-only capture behind the entitled canonize action + answer the extraction-
-  determinism question against a REAL map (the freeze-first-capture ruling stands if two captures differ).
-- (FP-1, 2026-07-12) EAGER STORE SLICES: the monolithic 15-slice create() has no lazy-registration
-  pattern; the remaining entry weight is the slices themselves (settlementSlice 88K, aiSlice 58K,
-  campaign trio ~89K unmin). Needs ⚠️ OWNER-approved dynamic-slice-injection architecture
-  (preserving persist/devtools/subscribeWithSelector semantics) as its own wave — FP-2 if wanted.
-  NOT blocking: post-FP-1 headroom is ample (budget 1,256,000, ~2KB margin at measured).
+### 0.6.0 BATCHED ADJUDICATION — OWNER RULED 2026-07-13 (Opus manager surfaced; owner decided)
+All four parked items adjudicated in one batch with verified numbers (workflow wf_31ef114d + independent
+checks; base review-fixes-2026-07-08 @ 5ea117ec, closure MEASURED 1,255,965 / budget 1,255,985 / 20B
+margin). Rulings:
+- FUNDING (M10b + W5): **FP-2 FIRST, NO RAISE.** The owner chose the store-slice split over a budget
+  raise — FP-2 reclaims ~80–130K eager (measured directional), absorbing both M10b (+86B) and W5
+  (~+890B) with headroom to ratchet the budget DOWN. FP-2 lands FIRST; M10b + W5 then land at the
+  reclaimed budget. (Overrides the earlier "raise 1,255,985→1,256,100+" recommendation.)
+- M10b CATCH-UP: **BUILD IT.** Living/autonomous advance-on-open catch-up CONFIRMED wanted;
+  CATCH_UP_CAP_WEEKS = 26 (named/retunable, ACTOR_MAJOR_HOLD_WEEKS pattern; the design's soak value =
+  half a game-year); PAST-CAP SEMANTICS = the calendar advances but simulation stops at the cap.
+- F24: **AccountPage NUL fixed now** (cherry-picked 6faa1045 → c85781f0). supplyCompleteness.js:158
+  NUL SURFACED (owner's call — see §0.0.2 KNOWN OPEN FINDINGS); left as-is for now.
+- SCOPE: work on branch claude/phase55-parking-lot off review-fixes-2026-07-08; ratified + non-gated
+  work lands there, gate-green, for the owner to fast-forward. Push/merge to review-fixes is owner-only.
+
+### 0.6.1 The items (status after the 2026-07-13 ruling)
+- (M10b) ✅ RULED — BUILD after FP-2. LIVING/AUTONOMOUS worldProgression + CAPPED CATCH-UP
+  (CATCH_UP_CAP_WEEKS=26, calendar-advances-past-cap) + full_simulation preset flags
+  (commodityFlowEnabled/allyIntelSharingEnabled/worldProgression:'autonomous'). worldProgressionOf
+  today only distinguishes 'frozen' (simulationRules.js:314); 'living'/'autonomous' fail closed +
+  UI-disabled; catch-up entirely unbuilt (forward-ref actorMajorApproval.js:39). +86B is an ESTIMATE
+  (the cited scratchpad/measure.mjs is GONE — re-measure at build via tests/build/vendorPdfLazy.test.js;
+  set the const to measured+~50B, never exceed a ceiling the owner has to re-ratify). ⚠️ ACCEPTED
+  DRIFT: full_simulation→worldProgression:'autonomous' changes a rulesMatchPreset key, so pre-M10b
+  saved full-sim campaigns re-infer a different presetId (display-only; same class as SEASONS-A).
+  Budget: NOT a raise — FP-2 reclaim funds it.
+- (W5) ✅ RULED — RE-APPLY after FP-2, no raise. Cosmetic sweep, branch 312a5025 (reachable via
+  claude/adoring-wescoff-6a25a8). CORRECTIONS: true delta 68 files (+3355/-1077) vs its OWN base
+  df217415; a direct `git merge` applies -25,330 deletions / 189 files and REVERTS the M-ladder —
+  MUST cherry-pick / re-apply, never merge. Eager delta ~+890B MEASURED (not "+1,000"); the two eager
+  fields are configSlice.customSlidersExplicit + mapSlice.selectedAnnotationKind (DIFFERENT slices,
+  not "two configSlice fields"). Re-base conflict surface = 2 files (OutputContainer.jsx — keep BOTH
+  3.5's dossierLazyTabs and W5's dossier polish — + the budget const). ⚠️ do NOT apply W5's raw-color
+  ratchet 1546→1424 without its palette-token migration (review-fixes still has 1546). The 11th W5
+  commit 6faa1045 (F24 AccountPage fix) is ALREADY cherry-picked (c85781f0) — do not double-apply.
+- (5.5-K) ✅ CORRECTED — NOTHING TO BUILD; note was STALE. The live FMG-iframe read-only capture seam
+  is FULLY WIRED both sides by 5.5-M @ 18fc15f2: iframe handler sf-bridge.js:863 (copies
+  h/biome/r/p/c — broader than the old note's "H/biome/r/c"), client RPC mapBridge.js:280, freeze-first
+  double-capture spatialPackCapture.js:91, registry + canonize integration (dormant
+  spatial_capture_unavailable fallback). Contradicted the playbook's own ledger row 43. RESIDUAL:
+  only the EMPIRICAL determinism check against a REAL map — DEFERRED to the checkpoint soak (freeze-first
+  is a total function over both outcomes, so it's non-blocking). Freeze-first now has a guard test
+  (tests/lib/spatialPackCapture.test.js, commit 47ccd6dd, +3 pins).
+- (FP-1/FP-2) ✅ RULED — APPROVED as its own wave, lands FIRST (the shared unblock the owner chose over
+  a raise). The monolithic 15-slice create() (store/index.js:48) statically imports the heavy feature
+  slices (settlementSlice/aiSlice/campaign trio) into the eager index chunk. ARCHITECTURE (candidate A,
+  placeholder-then-hydrate): eager create() composes only the core slices + seeds each heavy slice's
+  small INITIAL STATE eagerly (so selectors + subscribeWithSelector see a stable shape); each heavy
+  ACTION is a thin stub that on first call dynamic-imports the real slice, runs its creator, merges via
+  set(), then invokes the real action. Reclaim ~80–130K minified (directional; exact needs the build).
+  ⚠️ DOMINANT RISK: the store orchestrates generation — same-seed byte-identity (constitutional law 1)
+  MUST hold; the full golden battery + any-cast 2252 gate every step. persist partialize never persists
+  these slices (store/index.js:71), so rehydration can't break.
 
 ---
 
