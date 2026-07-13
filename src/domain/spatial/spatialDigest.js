@@ -48,6 +48,7 @@ import {
   buildSeasonalOverlay,
   SEASONAL_OVERLAY_VERSION,
 } from './spatialCost.js';
+import { buildSeaLanes } from './seaLanes.js';
 
 // ── Input shapes (the captured pack + placements the builder consumes) ───────
 /**
@@ -97,12 +98,15 @@ export const OVERLAY_VERSION = 1;
 // The four reserved edge/overlay slots, schema-present + null by default. Frozen
 // so every digest carries the same shape and a materializing wave (§4j sea lanes,
 // air/teleport edge sets, §4i seasonal overlay) can light its slot without a
-// schema break. M3 (SEASONS-B) lights `seasonalOverlay` ON OPT-IN ONLY: default
-// (every pre-M3 canon / golden) stays null ⇒ the seasonal read is dormant ⇒
-// byte-identical. The OTHER three stay null (their own waves light them).
-/** @param {object|null} [seasonalOverlay] */
-function reservedSlots(seasonalOverlay = null) {
-  return { airField: null, seaLanes: null, seasonalOverlay: seasonalOverlay ?? null, teleportEdges: null };
+// schema break. M3 (SEASONS-B) lights `seasonalOverlay` ON OPT-IN ONLY; M8 (SEA
+// LANES) lights `seaLanes` ON OPT-IN ONLY. Default (every pre-M3/M8 canon / golden)
+// keeps EVERY slot null ⇒ the seasonal + sea reads are dormant ⇒ byte-identical.
+// The KEY ORDER is fixed (airField, seaLanes, seasonalOverlay, teleportEdges) so a
+// materializing wave changes a slot's VALUE, never the serialized shape. The other
+// slots stay null (their own waves light them).
+/** @param {object|null} [seasonalOverlay] @param {object|null} [seaLanes] */
+function reservedSlots(seasonalOverlay = null, seaLanes = null) {
+  return { airField: null, seaLanes: seaLanes ?? null, seasonalOverlay: seasonalOverlay ?? null, teleportEdges: null };
 }
 
 // ── A deterministic integer binary min-heap (dist asc, then cell index asc) ──
@@ -219,9 +223,15 @@ const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `
  * SEASONAL_OVERLAY_VERSION — a DISCRETE re-canonize (§V.1). Omitted (the default,
  * and every existing golden/canon) ⇒ overlay null, overlayVersion 1 ⇒ dormant,
  * byte-identical.
+ * SEA LANES (M8): `seaLanes:true` LIGHTS the reserved seaLanes slot — port
+ * eligibility (geography ∧ institution, derived here) + the cheap high-capacity
+ * water edge set (§4j). Placements may carry an `institutions` roster (the
+ * capability read); with fewer than two ELIGIBLE ports the slot stays null (the
+ * dormancy floor). Omitted, or opted-in but portless (every existing golden/canon)
+ * ⇒ seaLanes null ⇒ dormant, byte-identical.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
- *           overlayVersion?:number, seasonalRoads?:boolean }} input
+ *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean }} input
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);
@@ -231,6 +241,27 @@ export function buildSpatialDigest(input) {
   // M3 opt-in: the seasonal overlay is frozen INTO this canon; dormant by default.
   const seasonalRoads = input?.seasonalRoads === true;
   const seasonalOverlay = seasonalRoads ? buildSeasonalOverlay() : null;
+
+  // M8 opt-in: derive ports (geography ∧ institution) + the water edge set, frozen
+  // INTO this canon under the reserved seaLanes slot; dormant (null) by default and
+  // whenever fewer than two eligible ports exist. The institution roster rides the
+  // placement rows (`institutions`), so eligibility is a pure function of the frozen
+  // geometry + the roster — re-derived on founding events by a re-canonize (§4j).
+  const seaLanesOptIn = input?.seaLanes === true;
+  /** @type {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} */
+  const institutionsById = {};
+  if (seaLanesOptIn) {
+    for (const pl of Array.isArray(input?.placements) ? input.placements : []) {
+      const id = pl == null ? '' : String(pl.id ?? '');
+      const insts = pl && /** @type {{ institutions?: unknown }} */ (pl).institutions;
+      if (id !== '' && Array.isArray(insts)) institutionsById[id] = insts;
+    }
+  }
+  // The edge set is built LATER (after the land distance matrix), so a sea lane can be
+  // pruned when the land route already beats it (§4j domination — a dominated sea lane
+  // is never traversed and would corrupt the storm-vs-terrain cost attribution).
+  /** @type {ReturnType<typeof buildSeaLanes>} */
+  let seaLanes = null;
 
   const spatialGeometryVersion = Number.isInteger(input?.spatialGeometryVersion) ? input.spatialGeometryVersion : SPATIAL_GEOMETRY_VERSION;
   const costLawVersion = Number.isInteger(input?.costLawVersion) ? input.costLawVersion : COST_LAW_VERSION;
@@ -353,6 +384,19 @@ export function buildSpatialDigest(input) {
     }
   }
 
+  // ── M8 SEA LANES: build the water edge set now the FROZEN LAND distance matrix is
+  //    complete, so a dominated sea lane (land already cheaper) is pruned (§4j). The
+  //    land-cost accessor reads the sparse graph's Floyd-Warshall result; an unmapped
+  //    pair reads Infinity ⇒ any water lane between them is non-dominated (an island).
+  if (seaLanesOptIn) {
+    const idxOf = new Map(idOf.map((id, i) => [id, i]));
+    const landCost = (/** @type {string} */ a, /** @type {string} */ b) => {
+      const ia = idxOf.get(a); const ib = idxOf.get(b);
+      return ia == null || ib == null ? Infinity : dist[ia][ib];
+    };
+    seaLanes = buildSeaLanes(pack, seeds, institutionsById, landCost);
+  }
+
   // ── Step 4b: neighbour tiers (BFS depth on the unweighted sparse graph) ────
   // 1 = primary (direct territory neighbour), 2 = secondary (2 hops), 3 =
   // tertiary/distant (3+ hops or the whole reachable remainder).
@@ -439,6 +483,6 @@ export function buildSpatialDigest(input) {
     distanceMatrix: sortedObject(distanceEntries),
     gates,
     routeReceipts: sortedObject(receiptEntries),
-    reserved: reservedSlots(seasonalOverlay),
+    reserved: reservedSlots(seasonalOverlay, seaLanes),
   };
 }

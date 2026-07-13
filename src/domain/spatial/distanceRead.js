@@ -92,7 +92,7 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  *   tiers?: Record<string, Record<string, number>>,
  *   gates?: Array<{ between?: [string, string], cost?: number }>,
  *   routeReceipts?: Record<string, { cost?: number, byTerrain?: Record<string, number> }>,
- *   reserved?: { seasonalOverlay?: SeasonalOverlay | null } }} SpatialDigest
+ *   reserved?: { seasonalOverlay?: SeasonalOverlay | null, seaLanes?: SeaLanes | null } }} SpatialDigest
  */
 
 /**
@@ -208,6 +208,16 @@ function pairKey(a, b) {
   return a < b ? `${a}|${b}` : `${b}|${a}`;
 }
 
+/** Add a directed edge a→b to an adjacency map, keeping the CHEAPEST cost on a
+ *  parallel edge. Shared by gateAdjacency (land gates) + seaLaneAdjacency (sea edges).
+ *  @param {Map<string, Map<string, number>>} adj @param {string} a @param {string} b @param {number} cost */
+function linkMin(adj, a, b, cost) {
+  if (!adj.has(a)) adj.set(a, new Map());
+  const m = /** @type {Map<string, number>} */ (adj.get(a));
+  const prev = m.get(b);
+  if (prev == null || cost < prev) m.set(b, cost);
+}
+
 /**
  * @typedef {{ version?: number, seasonTerrainCost?: Record<string, Record<string, number>> }} SeasonalOverlay
  */
@@ -270,6 +280,126 @@ export function terrainBlendMultiplier(overlay, byTerrain, season) {
     den += cost;
   }
   return den > 0 ? num / den : 1;
+}
+
+// ── SEA LANES (M8): the self-describing frozen slot read (mirror the seasonal read) ─
+// Like the seasonal overlay, the seaLanes slot is SELF-DESCRIBING — it carries its
+// own version + ports + edge set + storm-season law — so this leaf reader honours
+// the frozen slot straight off the digest object WITHOUT importing the seaLanes
+// builder (which pulls the institution catalog). A pre-M8 digest has
+// `reserved.seaLanes = null` ⇒ every read below is inert ⇒ byte-identical.
+
+/**
+ * @typedef {{ version?: number, ports?: string[],
+ *   edges?: Array<{ between?: [string, string], cost?: number, capacity?: number }>,
+ *   stormSeasonCost?: Record<string, number> }} SeaLanes
+ */
+
+/**
+ * THE SEA-LANE DORMANCY GATE (M8). Returns the frozen seaLanes edge set ONLY when
+ * the digest carries a populated, versioned slot (a NEW canon built by the entitled
+ * M8 re-canonize with ≥2 eligible ports). EVERY pre-M8 digest — every committed
+ * golden — has `reserved.seaLanes = null`, so this returns null ⇒ the sea-augmented
+ * routing + storm read are dormant ⇒ the pre-M8 land path EXACTLY (byte-identical).
+ * @param {SpatialDigest & { reserved?: { seaLanes?: unknown } } | null | undefined} digest
+ * @returns {SeaLanes | null}
+ */
+export function activeSeaLanes(digest) {
+  const sl = /** @type {{ reserved?: { seaLanes?: unknown } } | null | undefined} */ (digest)?.reserved?.seaLanes;
+  if (!sl || typeof sl !== 'object') return null;
+  const lanes = /** @type {SeaLanes} */ (sl);
+  if (!(typeof lanes.version === 'number' && Number.isInteger(lanes.version) && lanes.version >= 1)) return null;
+  if (!Array.isArray(lanes.edges) || lanes.edges.length === 0) return null;
+  return lanes;
+}
+
+// Per-digest port-id set memo ⇒ isPort is O(1) (the pathCost hot-loop gate reads it).
+/** @type {WeakMap<object, Set<string>>} */
+const PORT_SET_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Set<string>} */
+function portSet(digest) {
+  const lanes = activeSeaLanes(digest);
+  if (!lanes || !Array.isArray(lanes.ports)) return EMPTY_STRING_SET;
+  const memo = PORT_SET_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  const set = new Set(lanes.ports.map(String));
+  if (digest && typeof digest === 'object') PORT_SET_MEMO.set(/** @type {object} */ (digest), set);
+  return set;
+}
+const EMPTY_STRING_SET = /** @type {Set<string>} */ (new Set());
+
+/** Is `id` an eligible PORT (a node the frozen seaLanes set connects)? O(1). @param {SpatialDigest} digest @param {string|number} id */
+export function isPort(digest, id) {
+  return portSet(digest).has(String(id));
+}
+
+// Per-digest sea-lane adjacency memo (id → Map(portId → integer lane cost)). Pure
+// derivation from the frozen edge set; memoized on the digest object (identity).
+/** @type {WeakMap<object, Map<string, Map<string, number>>>} */
+const SEA_ADJ_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
+export function seaLaneAdjacency(digest) {
+  const lanes = activeSeaLanes(digest);
+  if (!lanes) return new Map();
+  const memo = SEA_ADJ_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  /** @type {Map<string, Map<string, number>>} */
+  const adj = new Map();
+  // activeSeaLanes already guarantees a non-empty edges array (?? [] only satisfies
+  // the optional-typed field for strict — never taken at runtime).
+  for (const e of lanes.edges ?? []) {
+    const pair = Array.isArray(e?.between) ? e.between : [];
+    const a = pair[0] == null ? null : String(pair[0]);
+    const b = pair[1] == null ? null : String(pair[1]);
+    const cost = finiteNum(e?.cost);
+    if (a == null || b == null || a === b || cost == null || cost <= 0) continue;
+    linkMin(adj, a, b, cost); linkMin(adj, b, a, cost);
+  }
+  if (digest && typeof digest === 'object') SEA_ADJ_MEMO.set(/** @type {object} */ (digest), adj);
+  return adj;
+}
+
+// Per-digest ship-carrier neighbour-map memo (the derivation is digest-invariant).
+/** @type {WeakMap<object, Map<string, Array<{ neighbourId: string, edgeId: string }>>>} */
+const SEA_NBR_MEMO = new WeakMap();
+
+/**
+ * The port-to-port neighbour map for the SHIP-CREW rumor carrier (round 9): each
+ * port → its sea-lane-connected ports, codepoint-sorted, edge-prefixed 'sea' so the
+ * carrier's edge ids never collide with the trade/army/criminal lanes. EMPTY when
+ * the seaLanes slot is dormant ⇒ the ship lane never fires ⇒ byte-identical. News
+ * over these lanes travels at the SEA-AWARE hopWeeks (fast — the cheap lane cost),
+ * so two ports gossip across a sea the land takes a season to walk around.
+ * @param {SpatialDigest} digest
+ * @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>}
+ */
+export function seaLaneNeighbourMap(digest) {
+  if (digest && typeof digest === 'object') {
+    const memo = SEA_NBR_MEMO.get(/** @type {object} */ (digest));
+    if (memo) return memo;
+  }
+  const adj = seaLaneAdjacency(digest);
+  /** @type {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+  const out = new Map();
+  for (const [node, nbrs] of adj) {
+    out.set(node, [...nbrs.keys()].sort().map((neighbourId) => ({
+      neighbourId,
+      edgeId: node < neighbourId ? `sea.${node}.${neighbourId}` : `sea.${neighbourId}.${node}`,
+    })));
+  }
+  if (digest && typeof digest === 'object') SEA_NBR_MEMO.set(/** @type {object} */ (digest), out);
+  return out;
+}
+
+/**
+ * The STORM-SEASON multiplier for a sea lane in a season, read off the slot's own
+ * self-describing law. Unknown/absent season ⇒ 1.0. Always ≥ 1 (slow, not sever).
+ * @param {SeaLanes | null | undefined} lanes @param {string|null|undefined} season @returns {number}
+ */
+function stormSeasonFactor(lanes, season) {
+  const table = lanes && lanes.stormSeasonCost;
+  const v = table && season != null ? table[String(season)] : undefined;
+  return typeof v === 'number' && Number.isFinite(v) && v >= 1 ? v : 1;
 }
 
 // Per-digest calibration memo. WeakMap ⇒ GC-friendly and keyed on identity; the
@@ -401,16 +531,45 @@ export function pathCost(digest, fromId, toId, season = null) {
   const b = String(toId);
   if (a === b) return 0;
   const row = digest?.distanceMatrix?.[a];
-  if (!row || typeof row !== 'object') return null;
-  const base = finiteNum(row[b]);
-  if (base == null || base <= 0 || season == null) return base;
+  const landBase = row && typeof row === 'object' ? finiteNum(row[b]) : null;
+  const seaLanes = activeSeaLanes(digest);
   const overlay = activeSeasonalOverlay(digest);
-  if (!overlay) return base; // dormant / pre-M3 ⇒ the frozen distance exactly
-  // Decompose the composite pair into its cheapest primary-hop path so the
-  // seasonal factor is terrain-weighted over the road actually travelled.
-  const candidates = candidateRoutes(digest, a, b, 1);
-  const path = candidates.length ? candidates[0].path : [a, b];
-  return Math.round(base * pathSeasonMultiplier(digest, path, season));
+
+  // ── FAST PATH — no read-time surcharge to apply (no season; or neither overlay nor
+  // sea lanes). Returns the sea-aware base with an O(1) gate. SEA LANES (M8): escalate
+  // to the sea-augmented route ONLY when the slot is lit AND at least one endpoint is a
+  // PORT (a sea lane can only shorten/reach a route that embarks at a port), so a
+  // landlocked↔landlocked pair keeps the O(1) frozen-matrix read — the
+  // distanceWeight/tradeSalience/religiousContest hot-loop guard. Dormant (pre-M8, or a
+  // non-port pair) ⇒ the branch is skipped ⇒ the land distance EXACTLY (byte-identical).
+  if (season == null || (!overlay && !seaLanes)) {
+    let base = landBase != null && landBase > 0 ? landBase : null;
+    if (seaLanes && (isPort(digest, a) || isPort(digest, b))) {
+      const routes = candidateRoutes(digest, a, b, 1);
+      const seaCost = routes.length ? finiteNum(routes[0].cost) : null;
+      if (seaCost != null && seaCost > 0 && (base == null || seaCost < base)) base = seaCost;
+    }
+    return base;
+  }
+
+  // ── SEASONAL / STORM SURCHARGE PATH — an overlay or sea lanes, and a season. Draw
+  // BOTH the base cost AND the season blend from ONE consistent cheapest route
+  // (candidateRoutes — land-only pre-M8, sea-augmented on a lit world; the SAME call
+  // M3 already ran per seasonal read, so no new hot-loop cost). The frozen distance
+  // matrix is NEVER re-baked. Land hops weather the seasonal terrain law; sea hops the
+  // storm law (pathSeasonMultiplier), so base + multiplier ride the SAME road.
+  const routes = candidateRoutes(digest, a, b, 1);
+  let base = landBase != null && landBase > 0 ? landBase : null;
+  let routePath = [a, b];
+  if (routes.length) {
+    const routeCost = finiteNum(routes[0].cost);
+    if (routeCost != null && routeCost > 0 && (base == null || routeCost <= base)) {
+      base = routeCost;
+      routePath = routes[0].path;
+    }
+  }
+  if (base == null || base <= 0) return base;
+  return Math.round(base * pathSeasonMultiplier(digest, routePath, season));
 }
 
 /**
@@ -535,8 +694,10 @@ export function distanceLegibility(digest, fromId, toId) {
 // single-edge-detour alternates). Small: a mover picks among a few plausible roads.
 export const K_CANDIDATES = 3;
 
-/** The frozen digest's gate adjacency (id → Map(neighbourId → integer cost)),
- *  memoized per digest object. Pure derivation from digest.gates. */
+/** The frozen digest's LAND gate adjacency (id → Map(neighbourId → integer cost)),
+ *  memoized per digest object. Pure derivation from digest.gates — land only, so a
+ *  purely inland trip routes overland (the sea graph is a SEPARATE, port-gated
+ *  augmentation; see augmentedAdjacency). Pre-M8 + inland routing is byte-identical. */
 /** @type {WeakMap<object, Map<string, Map<string, number>>>} */
 const ADJ_MEMO = new WeakMap();
 /** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
@@ -545,12 +706,6 @@ function gateAdjacency(digest) {
   if (memo) return memo;
   /** @type {Map<string, Map<string, number>>} */
   const adj = new Map();
-  const link = (/** @type {string} */ a, /** @type {string} */ b, /** @type {number} */ cost) => {
-    if (!adj.has(a)) adj.set(a, new Map());
-    const m = /** @type {Map<string, number>} */ (adj.get(a));
-    const prev = m.get(b);
-    if (prev == null || cost < prev) m.set(b, cost);
-  };
   const gates = Array.isArray(digest?.gates) ? digest.gates : [];
   for (const g of gates) {
     const pair = Array.isArray(g?.between) ? g.between : [];
@@ -558,11 +713,48 @@ function gateAdjacency(digest) {
     const b = pair[1] == null ? null : String(pair[1]);
     const cost = finiteNum(g?.cost);
     if (a == null || b == null || a === b || cost == null || cost < 0) continue;
-    link(a, b, cost);
-    link(b, a, cost);
+    linkMin(adj, a, b, cost);
+    linkMin(adj, b, a, cost);
   }
   if (digest && typeof digest === 'object') ADJ_MEMO.set(/** @type {object} */ (digest), adj);
   return adj;
+}
+
+// SEA LANES (M8): the AUGMENTED routing graph = the land gates PLUS the frozen water
+// edge set, memoized. Used ONLY for a trip INVOLVING a port (routingAdjacency gates on
+// isPort) — an island port becomes reachable (isolation inversion) and a cheap sea lane
+// wins over a long land haul, while a purely inland↔inland trip keeps the land-only
+// gateAdjacency (the v1 model + the hot-loop guard). Domination is pruned at BUILD time
+// (a dominated sea lane is never emitted), so a folded sea edge is only ever the CHEAPER
+// of land/sea for its pair — the storm-vs-terrain attribution in pathSeasonMultiplier is
+// therefore always correct. Dormant (no sea lanes) ⇒ returns the land adjacency itself.
+/** @type {WeakMap<object, Map<string, Map<string, number>>>} */
+const AUG_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
+function augmentedAdjacency(digest) {
+  const seaAdj = seaLaneAdjacency(digest);
+  if (seaAdj.size === 0) return gateAdjacency(digest);
+  const memo = AUG_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  /** @type {Map<string, Map<string, number>>} */
+  const adj = new Map();
+  for (const [a, nbrs] of gateAdjacency(digest)) adj.set(a, new Map(nbrs)); // copy (never mutate the land memo)
+  for (const [a, nbrs] of seaAdj) {
+    for (const [b, cost] of nbrs) linkMin(adj, a, b, cost);
+  }
+  if (digest && typeof digest === 'object') AUG_MEMO.set(/** @type {object} */ (digest), adj);
+  return adj;
+}
+
+/** The routing graph for a specific O-D pair: the sea-AUGMENTED graph when the slot is
+ *  lit AND the trip INVOLVES a port (either endpoint is a port); otherwise the land-only
+ *  graph. This is the ONE gate that makes "sea lanes shortcut trips involving a port; a
+ *  purely inland-to-inland trip routes overland" consistent across candidateRoutes /
+ *  chooseRoute / pathCost. @param {SpatialDigest} digest @param {string} a @param {string} b
+ *  @returns {Map<string, Map<string, number>>} */
+function routingAdjacency(digest, a, b) {
+  if (activeSeaLanes(digest) && (isPort(digest, a) || isPort(digest, b))) return augmentedAdjacency(digest);
+  return gateAdjacency(digest);
 }
 
 /**
@@ -660,7 +852,9 @@ export function candidateRoutes(digest, fromId, toId, k = K_CANDIDATES) {
   if (from === to) {
     routes = [{ path: [from], cost: 0 }];
   } else {
-    const adj = gateAdjacency(digest);
+    // Port-gated routing graph: sea-augmented for a trip involving a port, land-only
+    // otherwise (a purely inland↔inland trip routes overland). Pre-M8 ⇒ always land.
+    const adj = routingAdjacency(digest, from, to);
     const primary = shortestPath(adj, from, to, new Set());
     if (primary) {
       routes.push(primary);
@@ -713,13 +907,27 @@ export function edgeSeasonMultiplier(digest, fromId, toId, season = null) {
  */
 export function pathSeasonMultiplier(digest, path, season = null) {
   const overlay = activeSeasonalOverlay(digest);
+  const seaLanes = activeSeaLanes(digest);
   const nodes = Array.isArray(path) ? path : [];
-  if (!overlay || season == null || nodes.length < 2) return 1;
+  if ((!overlay && !seaLanes) || season == null || nodes.length < 2) return 1;
   const receipts = digest && digest.routeReceipts;
+  const seaAdj = seaLanes ? seaLaneAdjacency(digest) : null;
+  const storm = stormSeasonFactor(seaLanes, season);
   let num = 0;
   let den = 0;
   for (let i = 0; i + 1 < nodes.length; i++) {
-    const receipt = receipts ? receipts[pairKey(String(nodes[i]), String(nodes[i + 1]))] : undefined;
+    const u = String(nodes[i]);
+    const v = String(nodes[i + 1]);
+    // SEA LANES (M8): a water hop weathers the STORM season (its own frozen law),
+    // weighted by the lane cost. Checked FIRST (a chosen route hop taken over water
+    // is a sea lane even if the ports are also land-adjacent). Dormant ⇒ never fires.
+    const seaCost = seaAdj ? seaAdj.get(u)?.get(v) : undefined;
+    if (seaCost != null && seaCost > 0) {
+      num += seaCost * storm;
+      den += seaCost;
+      continue;
+    }
+    const receipt = receipts ? receipts[pairKey(u, v)] : undefined;
     if (!receipt) continue;
     const edgeCost = finiteNum(receipt.cost);
     if (edgeCost == null || edgeCost <= 0) continue;

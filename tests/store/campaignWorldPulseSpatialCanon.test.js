@@ -42,7 +42,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
+import { makeGridPack, placeSettlements, placePortSettlements } from '../fixtures/spatialPackFixtures.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -98,6 +98,14 @@ function fixtureCapture(count = 6) {
   return async () => ({ pack, placements });
 }
 
+// A capture whose placements carry water-access institutions on coastal/river cells
+// (the M8 port-eligibility CAPABILITY read) ⇒ the live canonize LIGHTS the sea lanes.
+function portCapture() {
+  const pack = makeGridPack({ cols: 24, rows: 18 });
+  const placements = placePortSettlements(pack, { nCoastal: 3, nRiver: 2, nInland: 3 });
+  return async () => ({ pack, placements });
+}
+
 describe('KEYSTONE — entitled spatial canonize at the store', () => {
   beforeEach(() => { installLocalStorage(); localStorage.removeItem('sf_campaigns'); });
 
@@ -149,6 +157,9 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     // their frozen v1 (no overlay) and read dormant — byte-identical.
     expect(ws.spatialDigest.overlayVersion).toBe(2);
     expect(ws.spatialDigest.reserved.airField).toBeNull();
+    // SEA LANES (M8): the live canon opts into seaLanes too, but THIS capture's
+    // placements carry no water-access institutions ⇒ no eligible ports ⇒ the slot
+    // stays null (the dormancy floor). A port-carrying capture lights it (below).
     expect(ws.spatialDigest.reserved.seaLanes).toBeNull();
     expect(ws.spatialDigest.reserved.teleportEdges).toBeNull();
     expect(ws.spatialDigest.reserved.seasonalOverlay).toBeTruthy();
@@ -163,6 +174,28 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     const ws2 = store.getState().campaigns[0].worldState;
     expect(ws2.spatialCanonVersion).toBe(2);
     expect(ws2.spatialDigest.settlementIds.length).toBe(9);
+  });
+
+  test('SEA LANES (M8): a port-carrying capture LIGHTS the seaLanes slot (the opt-in)', async () => {
+    const store = makeStore();
+    seedStore(store);
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: portCapture() });
+    expect(result.ok).toBe(true);
+    const ws = store.getState().campaigns[0].worldState;
+    const seaLanes = ws.spatialDigest.reserved.seaLanes;
+    // ≥2 eligible ports (geography ∧ institution) ⇒ the frozen sea edge set materializes.
+    expect(seaLanes).toBeTruthy();
+    expect(seaLanes.version).toBe(1);
+    expect(seaLanes.ports.length).toBeGreaterThanOrEqual(2);
+    // A SPARSE, water-reachability-constrained edge set (not the O(P²) clique).
+    expect(seaLanes.edges.length).toBeGreaterThan(0);
+    expect(seaLanes.edges.length).toBeLessThanOrEqual((seaLanes.ports.length * (seaLanes.ports.length - 1)) / 2);
+    expect(seaLanes.stormSeasonCost.winter).toBeGreaterThan(seaLanes.stormSeasonCost.summer);
+    // The other reserved slots + geometry axes are unchanged by lighting sea lanes.
+    expect(ws.spatialDigest.reserved.airField).toBeNull();
+    expect(ws.spatialDigest.reserved.teleportEdges).toBeNull();
+    expect(ws.spatialDigest.spatialGeometryVersion).toBe(1);
+    expect(ws.spatialDigest.costLawVersion).toBe(1);
   });
 
   test('the PLAIN canonizeCampaignWorld never stamps a spatial marker', async () => {

@@ -42,3 +42,18 @@ export {
   resolveSeeds,
   buildSpatialDigest,
 } from './spatialDigest.js';
+
+export {
+  SEA_LANE_VERSION,
+  SEA_COST_PER_DIST,
+  SEA_LANE_CAPACITY,
+  SEA_LANE_K_NEIGHBOURS,
+  STORM_SEASON_COST,
+  waterAccessInstitutionNames,
+  hasWaterAccessInstitution,
+  isCoastalCell,
+  isRiverCell,
+  derivePortEligibility,
+  buildSeaLaneSet,
+  buildSeaLanes,
+} from './seaLanes.js';

@@ -60,7 +60,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
+import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger, seaLaneNeighbourMap } from './distanceRead.js';
 import { infoModeOf } from '../worldPulse/simulationRules.js';
 
 // ── The tuning constants (documented here; retuned in the checkpoint soak) ───
@@ -76,6 +76,13 @@ export const RUMOR_CARRIER_ARMY = 'army';
  *  shape as the trade/army carriers; an additive lane, keyed under the same per-event
  *  record. EMPTY when no smuggle runs are afield ⇒ the lane is dormant ⇒ byte-identical. */
 export const RUMOR_CARRIER_CRIMINAL = 'criminal';
+/** M8 (round 9): the SHIP-CREW carrier lights WITH the sea lanes — a ship crew carries
+ *  the news of its home port to the next port, FAST + LONG-RANGE (port-to-port news skips
+ *  the land chain: two ports gossip across a sea the land takes a season to walk around).
+ *  Same shape as the trade/army/criminal carriers; an additive lane, keyed under the same
+ *  per-event record, at the SEA-AWARE hopWeeks (the cheap lane cost ⇒ few weeks). EMPTY
+ *  when the seaLanes slot is dormant ⇒ the ship lane never fires ⇒ byte-identical. */
+export const RUMOR_CARRIER_SHIP = 'ship';
 
 /** The regional-graph channel types merchant traffic rides (the P0 economic
  *  set): a confirmed channel of any of these types carries news BOTH ways
@@ -606,6 +613,10 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
   // M7 criminal carrier: the in-transit smuggle runs' path adjacencies (dormant + empty
   // when no smugglePaths supplied ⇒ the criminal lane never fires ⇒ byte-identical).
   const criminalNeighbours = smugglePathNeighbourMap(smugglePaths);
+  // M8 ship-crew carrier: the FROZEN sea-lane port adjacencies (port → connected ports).
+  // A ship crew relays news port-to-port over the cheap fast lane. EMPTY when the seaLanes
+  // slot is dormant ⇒ the ship lane never fires ⇒ byte-identical (the other lanes untouched).
+  const shipNeighbours = seaLaneNeighbourMap(digest);
   for (const sid of [...working.keys()].sort(compareCodepoint)) {
     const records = /** @type {Map<string, RumorArrivalRecord>} */ (working.get(sid));
     for (const key of [...records.keys()].sort(compareCodepoint)) {
@@ -671,6 +682,7 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       relayVia(RUMOR_CARRIER_TRADE, 'merchant', tradeNeighbours(graph, sid));
       relayVia(RUMOR_CARRIER_ARMY, 'army', armyNeighbours.get(sid) || []);
       relayVia(RUMOR_CARRIER_CRIMINAL, 'criminal', criminalNeighbours.get(sid) || []);
+      relayVia(RUMOR_CARRIER_SHIP, 'ship', shipNeighbours.get(sid) || []);
     }
   }
   for (const { targetId, key, packet } of deliveries) {

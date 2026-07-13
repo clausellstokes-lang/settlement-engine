@@ -117,6 +117,238 @@ export function placeSettlements(pack, count, prefix = 's') {
 }
 
 /**
+ * Place `nCoastal` coastal ports + `nRiver` river ports + `nInland` landlocked
+ * settlements on the grid (Phase 5.5 M8 fixtures). Each PORT carries a water-access
+ * institution (so geography ∧ institution ⇒ a port); the inland settlements carry a
+ * dock TOO (proving geography is NECESSARY — an inland dock is a beach, not a port).
+ * Deterministic: seats are collected in codepoint (index) order and taken by stride,
+ * ids zero-padded so codepoint sort == placement order.
+ * @param {ReturnType<typeof makeGridPack>} pack
+ * @param {{ nCoastal?: number, nRiver?: number, nInland?: number,
+ *   coastalInstitution?: string, riverInstitution?: string }} [opts]
+ */
+export function placePortSettlements(pack, {
+  nCoastal = 3, nRiver = 2, nInland = 3,
+  coastalInstitution = 'Docks/port facilities', riverInstitution = 'River ferry',
+} = {}) {
+  const { cells } = pack;
+  const cellCount = cells.h.length;
+  const H = cells.h;
+  const R = cells.r;
+  const seat = (c) => H[c] >= 20 && H[c] <= 60;
+  const isOcean = (c) => c == null || c < 0 || c >= cellCount || !(H[c] >= 20);
+  const isCoast = (c) => seat(c) && (cells.c[c] || []).some(isOcean);
+  const isRiver = (c) => seat(c) && Number(R[c]) !== 0;
+  const coastalSeats = [];
+  const riverSeats = [];
+  const inlandSeats = [];
+  for (let i = 0; i < cellCount; i++) {
+    if (isCoast(i)) coastalSeats.push(i);
+    else if (isRiver(i)) riverSeats.push(i);
+    else if (seat(i)) inlandSeats.push(i);
+  }
+  const take = (seats, n) => {
+    const out = [];
+    if (!seats.length || n <= 0) return out;
+    const stride = Math.max(1, Math.floor(seats.length / n));
+    for (let k = 0; k < n; k++) out.push(seats[Math.min(seats.length - 1, k * stride)]);
+    return [...new Set(out)];
+  };
+  const placements = [];
+  let idx = 0;
+  const push = (cellId, institutions) => {
+    placements.push({ id: `p${String(idx).padStart(3, '0')}`, cellId, institutions });
+    idx += 1;
+  };
+  for (const c of take(coastalSeats, nCoastal)) push(c, [{ name: coastalInstitution }]);
+  for (const c of take(riverSeats, nRiver)) push(c, [{ name: riverInstitution }]);
+  // Inland settlements ALSO carry a dock — geography must still deny them a port.
+  for (const c of take(inlandSeats, nInland)) push(c, [{ name: coastalInstitution }]);
+  return placements;
+}
+
+/**
+ * A tiny hand-built ISLAND pack (Phase 5.5 M8): a mainland block and a separate
+ * island block, separated by an impassable ocean channel so NO land route connects
+ * them — the frozen land digest gives the island its own disconnected territory
+ * (unreachable by land). Placing a port on each side lets the sea lane INVERT the
+ * isolation (the island becomes a hub). Returns { pack, placements } with a coastal
+ * port on the mainland ('main') and one on the island ('isle'), each with a dock.
+ */
+export function makeIslandPack() {
+  // 6 columns × 3 rows. Column 3 is all ocean (the channel): cols 0..2 = mainland,
+  // cols 4..5 = island. Land cells are uniform grassland seats.
+  const cols = 6;
+  const rows = 3;
+  const n = cols * rows;
+  const h = new Array(n);
+  const biome = new Array(n).fill(BIOME_GRASSLAND);
+  const r = new Array(n).fill(0);
+  const p = new Array(n);
+  const c = new Array(n);
+  const idx = (col, row) => row * cols + col;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      p[i] = [col * 50, row * 50];
+      h[i] = col === 3 ? 10 : 40; // column 3 is the ocean channel
+    }
+  }
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row));
+      if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1));
+      if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+  }
+  // Offset the two ports along the channel (different rows) so the water path between
+  // their embarkation cells is a real sail (a few cells), not zero — a meaningful sea
+  // cost that hopWeeks can distinguish across seasons.
+  const placements = [
+    { id: 'main', cellId: idx(2, 0), institutions: [{ name: 'Docks/port facilities' }] }, // mainland coast, top
+    { id: 'isle', cellId: idx(4, 2), institutions: [{ name: 'Docks/port facilities' }] }, // island coast, bottom
+  ];
+  return { pack: { cells: { h, biome, r, p, c } }, placements };
+}
+
+/**
+ * A DISCONNECTED-WATER pack (Phase 5.5 M8 soak): a coast on the LEFT (ocean col 0)
+ * and a separate river on the RIGHT (col 5), divided by land — two water bodies with
+ * NO connection. Two coastal ports share the sea; a river port sits on the separate
+ * river. The sparse edge set must connect the two COASTAL ports and produce NO lane
+ * to the river port (no phantom cross-land / cross-sea lane). Returns { pack, placements }.
+ */
+export function makeDisconnectedWaterPack() {
+  const cols = 6;
+  const rows = 3;
+  const n = cols * rows;
+  const h = new Array(n);
+  const biome = new Array(n).fill(BIOME_GRASSLAND);
+  const r = new Array(n).fill(0);
+  const p = new Array(n);
+  const c = new Array(n);
+  const idx = (col, row) => row * cols + col;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      p[i] = [col * 50, row * 50];
+      h[i] = col === 0 ? 10 : 40;         // col 0 = the SEA (ocean strip)
+      r[i] = col === 5 ? 1 : 0;           // col 5 = a separate RIVER (land, r=1)
+    }
+  }
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row));
+      if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1));
+      if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+  }
+  const DOCK = [{ name: 'Docks/port facilities' }];
+  const placements = [
+    { id: 'coastA', cellId: idx(1, 0), institutions: DOCK }, // borders the sea (col 0)
+    { id: 'coastB', cellId: idx(1, 2), institutions: DOCK }, // borders the sea (col 0)
+    { id: 'river', cellId: idx(5, 1), institutions: DOCK },  // on the separate river (col 5)
+  ];
+  return { pack: { cells: { h, biome, r, p, c } }, placements };
+}
+
+/**
+ * An ISTHMUS pack (Phase 5.5 M8 water-path pricing soak): two ISLAND ports close by
+ * straight-line CHORD but far by WATER — a long peninsula (a land wall) forces a ship
+ * to sail AROUND it. The correct sea cost is the long water-path, not the short chord
+ * (which the old Euclidean pricing under-charged, making distant ports behave adjacent).
+ * Because both ports are islands (no land route), the sea lane is always emitted (never
+ * land-dominated), so the pricing is directly observable. Returns { pack, placements }.
+ */
+export function makeIsthmusPack() {
+  const cols = 5;
+  const rows = 6;
+  const n = cols * rows;
+  const h = new Array(n).fill(10); // water everywhere by default
+  const biome = new Array(n).fill(BIOME_GRASSLAND);
+  const r = new Array(n).fill(0);
+  const p = new Array(n);
+  const c = new Array(n);
+  const idx = (col, row) => row * cols + col;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) p[idx(col, row)] = [col * 50, row * 50];
+  }
+  // Two island cells (isolated land, surrounded by water) — no land route between them.
+  h[idx(0, 1)] = 40;
+  h[idx(4, 1)] = 40;
+  // A peninsula: col 2 from row 0 down to row 4 — a wall a ship must sail around
+  // (the only open water crossing is along the bottom row 5).
+  for (let row = 0; row <= 4; row++) h[idx(2, row)] = 40;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row));
+      if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1));
+      if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+  }
+  const DOCK = [{ name: 'Docks/port facilities' }];
+  const placements = [
+    { id: 'westIsle', cellId: idx(0, 1), institutions: DOCK },
+    { id: 'eastIsle', cellId: idx(4, 1), institutions: DOCK },
+  ];
+  return { pack: { cells: { h, biome, r, p, c } }, placements };
+}
+
+/**
+ * A MANY-PORT pack (Phase 5.5 M8 soak): a long straight coastline — rows 0..2 ocean,
+ * the rest land — so every cell on the first land row is coastal on ONE shared sea.
+ * Placing `count` dock settlements along it yields `count` ports in a single water
+ * body — the stress case that BLEW the digest cap under the old O(P²) clique. Returns
+ * placements the digest builder consumes (with institutions), plus the pack.
+ * @param {number} count @param {{ cols?: number, rows?: number }} [opts]
+ */
+export function makePortCoastPack(count, { cols = 100, rows = 8 } = {}) {
+  const n = cols * rows;
+  const h = new Array(n);
+  const biome = new Array(n).fill(BIOME_GRASSLAND);
+  const r = new Array(n).fill(0);
+  const p = new Array(n);
+  const c = new Array(n);
+  const idx = (col, row) => row * cols + col;
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      p[i] = [col * 10, row * 10];
+      h[i] = row < 3 ? 10 : 40; // rows 0..2 ocean, rows 3+ land ⇒ row 3 is all coast
+    }
+  }
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const i = idx(col, row);
+      const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row));
+      if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1));
+      if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+  }
+  const DOCK = [{ name: 'Docks/port facilities' }];
+  const placements = [];
+  for (let k = 0; k < count; k++) {
+    placements.push({ id: `p${String(k).padStart(3, '0')}`, cellId: idx(k % cols, 3), institutions: DOCK });
+  }
+  return { pack: { cells: { h, biome, r, p, c } }, placements };
+}
+
+/**
  * A tiny hand-built pack with an EXACT equal-cost tie: a 1-row corridor of
  * uniform-cost cells with a settlement at each end. The exact-middle cell is
  * equidistant from both — the tie-break (equal tentative ⇒ lower predecessor

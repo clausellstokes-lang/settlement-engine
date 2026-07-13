@@ -63,6 +63,13 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     // overlay) and read with no seasonal modulation (dormant, byte-identical).
     overlayVersion: SEASONAL_OVERLAY_VERSION,
     seasonalRoads: true,
+    // SEA LANES (M8): a NEW canon lights the sea-lane edge set — port eligibility
+    // (geography ∧ a water-access institution from the placement roster) + the cheap
+    // water edges (§4j). The receipted re-canonize RE-DERIVES ports on founding
+    // events (a new harbour changes the settlement's destiny). A realm with <2
+    // eligible ports (no coastal/river settlement with a dock) leaves the slot null —
+    // dormant, byte-identical. Existing saved canons keep their frozen (null) slot.
+    seaLanes: true,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {
