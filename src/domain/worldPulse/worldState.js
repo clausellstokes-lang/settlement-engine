@@ -283,6 +283,15 @@ export function createDefaultWorldState(campaign = {}) {
 //                            REAL gate-crossings, a rent-bounded toll that joins the M1
 //                            re-score; present for settlements trade flows through under
 //                            the commodity-flow opt-in (sparse).
+//                          · tradeFlow        — per-settlement ARRIVALS TALLY (M6d,
+//                            spatial/tradeFlow.js): { settlementId →
+//                            { in, out, lastTick } } — a WINDOWED (decayed),
+//                            modality-weighted throughput count (goods in + out) written
+//                            from the arrivals the supply kernel used to discard;
+//                            DISPLAY SUBSTRATE ONLY (never writes economicState — the
+//                            generation baseline is sacred). The flow-derived economics
+//                            drift (display/tradeFlowEconomics.js) reads it; present
+//                            under the commodity-flow opt-in while goods move (sparse).
 const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',

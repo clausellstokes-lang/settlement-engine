@@ -44,7 +44,8 @@ import {
 import { riskToleranceFromAlignment } from '../spatial/embattlement.js';
 import { settlementAlignment } from './settlementAlignment.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
-import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
+import { advanceTradeFlowTally, settlementModalityWeight } from '../spatial/tradeFlow.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
 /** @typedef {ReturnType<typeof normalizeGood>} CatalogGood */
@@ -436,6 +437,12 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
   // appetite / willingness ledger materializes (both sparse, pruned to baseline / willing).
   const ev = buildDispatchEV({ worldState, graph, itemById, localSettlements });
 
+  // M6d FLOW-DERIVED ECONOMICS: capture the PRE-advance shipment ledger so an arrival
+  // this tick (its record consumed by advanceCommodityFlow) can still be traced to its
+  // SOURCE settlement for the outbound half of the throughput tally.
+  const priorShipmentsForFlow = /** @type {Record<string, { sourceId?: unknown }>} */ (
+    (worldState && typeof worldState === 'object' ? getSpatialLedger(worldState, 'supplyShipments') : null) || {});
+
   const out = advanceCommodityFlow({
     producers, links, worldState, digest, tick, tickWeeks, season, rng,
     sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor, ev,
@@ -454,11 +461,35 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
   const perSettlement = new Map();
   const starvations = [];
   const arrivals = [];
+  // M6d FLOW-DERIVED ECONOMICS: this tick's arrivals become throughput — inbound at the
+  // consumer, outbound at the source — each modality-weighted (a ROSTER read, memoized).
+  /** @type {Map<string, number>} */
+  const modalityMemo = new Map();
+  const modalityWeightOf = (/** @type {string} */ sid) => {
+    const cached = modalityMemo.get(sid);
+    if (cached != null) return cached;
+    const settlement = localSettlements.get(sid) || itemById.get(sid)?.settlement || null;
+    const w = settlementModalityWeight(settlement);
+    modalityMemo.set(sid, w);
+    return w;
+  };
+  /** @type {import('../spatial/tradeFlow.js').FlowArrival[]} */
+  const flowArrivals = [];
   for (const key of Object.keys(out.outcomes)) {
     const outcome = out.outcomes[key];
     const m = meta.get(key);
     if (!m) continue;
-    if (outcome.arrived) arrivals.push(key);
+    if (outcome.arrived) {
+      arrivals.push(key);
+      // The source of the just-landed caravan lives on the PRE-advance shipment record.
+      const sourceId = String(priorShipmentsForFlow[key]?.sourceId ?? '');
+      if (sourceId && sourceId !== m.settlementId) {
+        flowArrivals.push({
+          destId: m.settlementId, sourceId,
+          destWeight: modalityWeightOf(m.settlementId), sourceWeight: modalityWeightOf(sourceId),
+        });
+      }
+    }
     if (outcome.receipt) starvations.push(outcome.receipt);
     if (m.institutionName) {
       const bucket = perSettlement.get(m.settlementId) || { starve: [], feed: [] };
@@ -512,12 +543,28 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
       ? setSpatialLedger(nextWorldState, 'dispatchWillingness', out.nextWillingness)
       : dropSpatialLedger(nextWorldState, 'dispatchWillingness');
   }
+
+  // M6d FLOW-DERIVED ECONOMICS — the arrivals TALLY (the seam pulseKernel discards).
+  // Advance the sparse windowed per-settlement throughput tally: this tick's weighted
+  // arrivals ADD (inbound at consumer, outbound at source), every prior entry DECAYS,
+  // sub-EPS entries PRUNE. Nests under spatialLedgers (ZERO eager bytes); runs EVERY
+  // tick the commodity layer is live so a blockade's stopped arrivals fade the tally to
+  // absent (autarky) with no new mechanism. GENERATION IS SACRED: this is display
+  // substrate only — economicState is NEVER written. The display selector
+  // (display/tradeFlowEconomics.js) reads it for the LIVE trade-dependency drift.
+  const flow = advanceTradeFlowTally({ worldState: nextWorldState, tick, arrivals: flowArrivals });
+  if (flow.changed) {
+    nextWorldState = flow.next
+      ? setSpatialLedger(nextWorldState, 'tradeFlow', flow.next)
+      : dropSpatialLedger(nextWorldState, 'tradeFlow');
+  }
+
   // M6c: the "emboldened by the <dest> run" receipts for this tick's risky paid-off runs
   // (exposed for display/M6d; the pulse does not yet surface starvations/arrivals either).
   const emboldened = (out.emboldenEvents || []).map(
     (e) => emboldenedReceipt(itemById.get(String(e.destId))?.name || String(e.destId)),
   );
-  return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals, emboldened };
+  return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0 || flow.changed, starvations, arrivals, emboldened };
 }
 
 // ── M6c: the DISPATCH-EV context (the live reads the pure EV engine consumes) ──────

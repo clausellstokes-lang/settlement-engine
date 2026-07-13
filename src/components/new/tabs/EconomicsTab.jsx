@@ -1,15 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
+import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
 import Button from '../../primitives/Button.jsx';
+
+// M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
+// (the M6a commodityBand vocabulary); never a numeric price.
+const FLOW_BAND_COLOR = { shortage: '#8b1a1a', adequate: '#a0762a', surplus: '#1a5a28' };
+
+/**
+ * The LIVE TRADE FLOW section (M6d) — an ADDITIVE band rendered BESIDE the generation
+ * baseline, never replacing it. Measured physical throughput (the arrivals tally)
+ * surfaced as a qualitative dependency drift. Renders ONLY when `drift` is present
+ * (marker + commodity-flow on + measured flow); absent ⇒ nothing ⇒ byte-identical tab.
+ */
+function LiveTradeFlowSection({ drift }) {
+  const color = FLOW_BAND_COLOR[drift.band] || FLOW_BAND_COLOR.adequate;
+  return (
+    <Section title="Live Trade Flow" collapsible defaultOpen accent={color}>
+      <div style={{background:`${color}0c`,border:`1px solid ${color}30`,borderLeft:`4px solid ${color}`,borderRadius:6,padding:'10px 14px'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:6}}>
+          <span style={{fontSize:FS.md,fontWeight:800,color,textTransform:'none'}}>{drift.label}</span>
+          <span style={{fontSize:FS.micro,fontWeight:700,color:MUTED,textTransform:'uppercase',letterSpacing:'0.05em',marginLeft:'auto'}}>measured now</span>
+        </div>
+        <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 8px'}}>{drift.headline}</p>
+        <div style={{display:'flex',gap:14,flexWrap:'wrap',fontSize:FS.xs,color:swatch.inkMag3}}>
+          <span><span style={{color:MUTED,marginRight:4}}>Inbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.inbound}</strong></span>
+          <span><span style={{color:MUTED,marginRight:4}}>Outbound:</span><strong style={{textTransform:'capitalize',color:swatch.inkMag}}>{drift.outbound}</strong></span>
+        </div>
+        <p style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic',margin:'8px 0 0',lineHeight:1.4}}>
+          Live movement on the trade roads — a drift on top of the settlement's founding trade profile, not a replacement for it.
+        </p>
+      </div>
+    </Section>
+  );
+}
 
 // ── Status palette for chain cards ────────────────────────────────────────
 // Module-scope so the object identity is stable across renders (avoids
@@ -182,10 +216,22 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
   );
 }
 
-export function EconomicsTab({economicState, settlement, narrativeNote}) {
+export function EconomicsTab({economicState, settlement, narrativeNote, saveId = null}) {
   const s = settlement;
   const mobile = useIsMobile();
+  // M6d FLOW-DERIVED ECONOMICS — thread worldState the RumorsTab way: read the owning
+  // campaign's worldState from the store and project the arrivals tally through the
+  // marker-gated selector. Absent flow (marker off / opt-in off / isolated / decayed) ⇒
+  // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
+  const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
+  const flowDrift = useMemo(() => {
+    const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
+    if (!sid || !Array.isArray(campaigns)) return null;
+    const campaign = campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid));
+    if (!campaign) return null;
+    return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid });
+  }, [saveId, s, campaigns, eco]);
   const via = s?.economicViability;
   if (!eco) return <Empty message="No economic data available."/>;
 
@@ -359,8 +405,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote}) {
         </div>}
       </Section>}
 
+      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
+      {flowDrift && <LiveTradeFlowSection drift={flowDrift} />}
+
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
-      
+
 
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
       {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
