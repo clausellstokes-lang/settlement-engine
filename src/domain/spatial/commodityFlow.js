@@ -75,6 +75,7 @@
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
 import { chooseRoute, banditryLoss, embattlementLevel } from './embattlement.js';
 import { supplyActive, routeIntercepted, routeWeeks, pickSource, starvationReceipt } from './supplyShipments.js';
+import { dispatchDecision, appetiteOf, stepAppetite, needPremium, DISPATCH_TUNING } from './dispatchEV.js';
 
 /** @typedef {import('./distanceRead.js').SpatialDigest} SpatialDigest */
 /** @typedef {import('./supplyShipments.js').SupplyLink} SupplyLink */
@@ -140,6 +141,10 @@ function finiteNumber(v, fallback) {
 /** @param {unknown} v @param {number} fallback @returns {number} integer ≥ 0 */
 function intNonNeg(v, fallback) {
   return Math.max(0, Math.floor(finiteNumber(v, fallback)));
+}
+/** @param {number} v @returns {number} 4-dp round for byte-tidy persisted floats (M6c ranDanger) */
+function round4(v) {
+  return Math.round(finiteNumber(v, 0) * 10000) / 10000;
 }
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
@@ -288,6 +293,9 @@ export function assertGoodsConservation(acc) {
  * @property {number} arrivalTick
  * @property {number} carried     the QUANTITY on the caravan (drawn from the origin)
  * @property {boolean} starving   TEMPORARY supply-starvation latch (lifts on arrival)
+ * @property {number} [ranDanger] M6c: the believed danger this caravan set out into
+ *   (only stamped when ≥ RISKY_DANGER_FLOOR — a peaceful record is byte-identical to
+ *   M6a). Read at arrival/cut to move the origin's dynamic appetite.
  */
 
 /**
@@ -303,6 +311,11 @@ export function assertGoodsConservation(acc) {
  * @property {boolean} arrived              a caravan landed this tick
  * @property {string|null} receipt          the mandatory receipt when it starts starving
  * @property {boolean} fragile              the ≥2-source brake tripped (warning, not starve)
+ * @property {boolean} [evRefused]          M6c: the dispatch EV REFUSED this link (danger
+ *   beat the premium) — the caravan did not go and the shortage PERSISTS. The clean M7
+ *   unmet-demand-under-danger signal (undefined when M6c dormant ⇒ M6a outcome shape).
+ * @property {number} [believedDanger]      M6c: the belief-gated destination danger read
+ *   for the refusal (the M7 signal's magnitude).
  */
 
 /** The codepoint-stable ledger key for a link (uniqueness ⇒ cardinality = links). */
@@ -310,6 +323,22 @@ export function assertGoodsConservation(acc) {
 export function commodityLinkKey(settlementId, institutionId, input) {
   return `${String(settlementId)}:${String(institutionId)}:${String(input)}`;
 }
+
+/**
+ * M6c — the DISPATCH EV context the kernel threads (the live reads the pure EV
+ * engine needs). ABSENT ⇒ M6a dispatch verbatim. Every read is bound to a (origin,
+ * dest) pair or an origin; the pure engine (dispatchEV.js) owns the decision math.
+ * @typedef {Object} DispatchEVContext
+ * @property {(originId: string, destId: string) => number} believedDanger  belief-gated
+ *   destination danger (dispatchEV.believedDestinationDanger) — the deterrent.
+ * @property {(originId: string) => number} caution   the ONE W0 risk-tolerance read
+ *   (riskToleranceFromAlignment on the origin's settlementAlignment) — never a second
+ *   alignment derivation.
+ * @property {(originId: string) => number} baseline  the origin's appetite disposition
+ *   baseline (dispatchEV.merchantBaseline: merchant strength raises it, lawfulness lowers).
+ * @property {(link: CommodityLink, sourceId: string) => ('must-go'|'relief'|null)} [override]
+ *   the EV overrides (vassal tribute must-go / ally relief). Absent ⇒ no override.
+ */
 
 // ── Cut-check for an in-transit record (M2 parity: severed source / hostile gate) ──
 /**
@@ -350,13 +379,23 @@ function shipmentCut(rec, ctx) {
  * @param {(link: CommodityLink) => number} [args.riskToleranceFor]
  * @param {(settlementId: string, goodId: string) => boolean} [args.consumesGood]  en-route tap predicate
  * @param {(link: CommodityLink) => (string|undefined)} [args.severingCauseFor]
+ * @param {DispatchEVContext | null} [args.ev]  M6c THE DISPATCH EV. ABSENT (M6a/M2 callers,
+ *   dormant, opt-in off) ⇒ the dispatch runs UNCHANGED (dispatch whenever cur<target,
+ *   no EV gate) and no appetite/willingness ledger materializes — BYTE-IDENTICAL to
+ *   M6a. Present ⇒ the origin's greed-vs-danger EV gates each dispatch (belief-gated
+ *   deterrent, dynamic appetite, the M1 hysteresis), risky-run outcomes move the
+ *   per-origin appetite, and EV-refused links expose the M7 unmet-demand signal.
  * @returns {{ nextStocks: Record<string, Record<string, number>>|null,
  *   nextShipments: Record<string, CommodityShipment>|null,
+ *   nextAppetite: Record<string, import('./dispatchEV.js').AppetiteRecord>|null,
+ *   nextWillingness: Record<string, import('./dispatchEV.js').WillingnessRecord>|null,
+ *   emboldenEvents: Array<{ originId: string, destId: string }>,
  *   changed: boolean, outcomes: Record<string, CommodityLinkOutcome>, accounting: GoodsAccounting }}
  */
 export function advanceCommodityFlow({
   producers, links, worldState, digest, tick, tickWeeks, season = null, rng = null,
   sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor,
+  ev = null,
 }) {
   const T = COMMODITY_TUNING;
   const now = intNonNeg(tick, 0);
@@ -370,6 +409,25 @@ export function advanceCommodityFlow({
   const priorShipments = hasSpatialLedger(worldState, 'supplyShipments')
     ? asObject(getSpatialLedger(worldState, 'supplyShipments'))
     : {};
+  // M6c THE DISPATCH EV (only when the ev context is threaded). The two sub-ledgers
+  // ride the SAME spatialLedgers namespace (zero eager bytes); both stay ABSENT when
+  // ev is null (M6a/M2 callers) or when nothing deviates from baseline / stays willing.
+  const priorAppetite = ev && hasSpatialLedger(worldState, 'merchantAppetite')
+    ? asObject(getSpatialLedger(worldState, 'merchantAppetite')) : {};
+  const priorWillingness = ev && hasSpatialLedger(worldState, 'dispatchWillingness')
+    ? asObject(getSpatialLedger(worldState, 'dispatchWillingness')) : {};
+  // Risky-run outcome tallies per ORIGIN (a deterministic accumulator over outcomes
+  // already rolled this tick — no new rng): a risky delivery EMBOLDENS, a risky loss COWS.
+  /** @type {Map<string, { paid: number, lost: number }>} */
+  const appetiteEvents = new Map();
+  /** @type {Array<{ originId: string, destId: string }>} */
+  const emboldenEvents = [];
+  const bumpAppetite = (/** @type {string} */ originId, /** @type {'paid'|'lost'} */ kind) => {
+    const o = String(originId);
+    const e = appetiteEvents.get(o) || { paid: 0, lost: 0 };
+    e[kind] += 1;
+    appetiteEvents.set(o, e);
+  };
 
   // Mutable working stock map (deep-cloned from prior; cold-start fills below).
   /** @type {Record<string, Record<string, number>>} */
@@ -443,6 +501,9 @@ export function advanceCommodityFlow({
       arrivalTick: intNonNeg(raw.arrivalTick, now), carried: intNonNeg(raw.carried, 0),
       starving: !!raw.starving,
     });
+    // M6c: the believed danger this caravan set out into (0 when absent / peaceful).
+    const ranDanger = ev ? finiteNumber(raw.ranDanger, 0) : 0;
+    if (ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) rec.ranDanger = round4(ranDanger);
     // A ledger-only starvation latch (M2 wrote sourceId '' / arrivalTick -1) carries no
     // goods — drop it (this tick recomputes starvation fresh).
     if (!rec.sourceId || rec.carried <= 0) continue;
@@ -450,7 +511,12 @@ export function advanceCommodityFlow({
       digest, worldState, season: season ?? null, riskTolerance: 1,
       sourceSevered: () => false, isHostileToDestination: () => false,
     };
-    if (shipmentCut(rec, ctx)) { lost += rec.carried; continue; } // cut mid-transit ⇒ load lost
+    if (shipmentCut(rec, ctx)) {
+      lost += rec.carried; // cut mid-transit ⇒ load lost
+      // M6c: a RISKY caravan CUT COWS its origin's appetite (a loss it can feel).
+      if (ev && ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) bumpAppetite(rec.sourceId, 'lost');
+      continue;
+    }
 
     if (now >= rec.arrivalTick) {
       // EN-ROUTE DEPLETION — intermediaries that consume the good tap the caravan.
@@ -472,6 +538,12 @@ export function advanceCommodityFlow({
       lost += remaining - delivered;
       setStock(stocks, rec.settlementId, rec.input, stockOf(stocks, rec.settlementId, rec.input, 0) + delivered);
       arrivedKeys.add(key); // landed this tick — the consumer's stockpile refilled
+      // M6c: a RISKY delivery that ARRIVED (delivered > 0) EMBOLDENS its origin — the
+      // caravan that ran real danger and got through ("emboldened by the <dest> run").
+      if (ev && ranDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR && delivered > 0) {
+        bumpAppetite(rec.sourceId, 'paid');
+        emboldenEvents.push({ originId: rec.sourceId, destId: rec.settlementId });
+      }
     } else {
       carriedForward[key] = rec; // still in transit
     }
@@ -493,6 +565,11 @@ export function advanceCommodityFlow({
   const nextShipments = { ...carriedForward };
   /** @type {Record<string, CommodityLinkOutcome>} */
   const outcomes = {};
+  // M6c: the next willingness latch — starts EMPTY and keeps ONLY the links that are
+  // re-evaluated AND still REFUSING this tick (an adequate / dispatched / physically-cut
+  // link auto-prunes to willing). Codepoint-stable via the sorted key walk below.
+  /** @type {Record<string, import('./dispatchEV.js').WillingnessRecord>} */
+  const nextWillingness = {};
   for (const key of [...linkByKey.keys()].sort()) {
     const link = linkByKey.get(key);
     if (!link) continue;
@@ -506,6 +583,11 @@ export function advanceCommodityFlow({
 
     let record = nextShipments[key] || null; // a still-in-transit caravan blocks re-dispatch
     let dispatched = false;
+    // M6c dispatch-EV outcome fields (undefined when M6c dormant ⇒ M6a outcome shape).
+    /** @type {boolean|undefined} */
+    let evRefused;
+    /** @type {number|undefined} */
+    let evBelievedDanger;
     if (!record && cur < target) {
       // FAILOVER — the cheapest source that is clear AND holds ≥ ORIGIN_MIN_AVAILABLE.
       const stocked = (link.rankedSources || []).filter((s) => stockOf(stocks, String(s.sourceId), gid, 0) >= T.ORIGIN_MIN_AVAILABLE);
@@ -514,17 +596,48 @@ export function advanceCommodityFlow({
         sourceSevered: ctx.sourceSevered, isHostileToDestination: ctx.isHostileToDestination,
       });
       if (picked) {
-        const originAvail = stockOf(stocks, String(picked.sourceId), gid, 0);
-        const want = Math.min(target - cur, T.MAX_SHIP, originAvail);
-        if (want >= T.MIN_SHIP) {
-          setStock(stocks, String(picked.sourceId), gid, originAvail - want); // finite origin DEPLETES
-          record = {
-            institutionId: String(link.institutionId), settlementId: sid, input: gid,
-            sourceId: String(picked.sourceId), arrivalTick: now + routeWeeks(digest, picked.route.baseCost),
-            carried: want, starving: false,
-          };
-          nextShipments[key] = record;
-          dispatched = true;
+        const originId = String(picked.sourceId);
+        // ── THE GREED-vs-DANGER DISPATCH EV (M6c). Absent ev ⇒ dispatch UNCONDITIONALLY
+        //    (M6a verbatim). Present ⇒ the origin weighs the destination's need-premium ×
+        //    its dynamic appetite against the BELIEVED danger × its caution, with the M1
+        //    hysteresis; a refusal leaves the shortage to persist (the M7 signal).
+        let goDispatch = true;
+        if (ev) {
+          const baseline = finiteNumber(ev.baseline(originId), DISPATCH_TUNING.BASELINE_MID);
+          const appetite = appetiteOf(priorAppetite, originId, baseline);
+          const believedDanger = finiteNumber(ev.believedDanger(originId, sid), 0);
+          const caution = finiteNumber(ev.caution(originId), 1);
+          const priorW = /** @type {import('./dispatchEV.js').WillingnessRecord|null} */ (
+            asObject(priorWillingness[key]).phase === 'refusing' ? asObject(priorWillingness[key]) : null
+          );
+          const override = ev.override ? ev.override(link, originId) : null;
+          const decision = dispatchDecision({
+            short: true, needPremium: needPremium(cur, target), appetite, believedDanger, caution,
+            priorWillingness: priorW, now, override,
+          });
+          goDispatch = decision.dispatch;
+          evBelievedDanger = decision.believedDanger;
+          if (decision.willingness) nextWillingness[key] = decision.willingness; // still refusing ⇒ latch
+          if (decision.refuse) evRefused = true; // the caravan did not go ⇒ shortage persists (M7 seam)
+        }
+        if (goDispatch) {
+          const originAvail = stockOf(stocks, originId, gid, 0);
+          const want = Math.min(target - cur, T.MAX_SHIP, originAvail);
+          if (want >= T.MIN_SHIP) {
+            setStock(stocks, originId, gid, originAvail - want); // finite origin DEPLETES
+            record = {
+              institutionId: String(link.institutionId), settlementId: sid, input: gid,
+              sourceId: originId, arrivalTick: now + routeWeeks(digest, picked.route.baseCost),
+              carried: want, starving: false,
+            };
+            // M6c: stamp the danger it set out into (only when RISKY) so the arrival can
+            // embolden the origin — a peaceful record stays byte-identical to M6a.
+            if (ev && evBelievedDanger != null && evBelievedDanger >= DISPATCH_TUNING.RISKY_DANGER_FLOOR) {
+              record.ranDanger = round4(evBelievedDanger);
+            }
+            nextShipments[key] = record;
+            dispatched = true;
+          }
         }
       }
     }
@@ -546,6 +659,7 @@ export function advanceCommodityFlow({
       institutionName: link.institutionName, stock: cur, target,
       band: commodityBand(cur, target), starving,
       arrived: arrivedKeys.has(key), receipt, fragile,
+      ...(evRefused ? { evRefused, believedDanger: evBelievedDanger } : {}),
     };
     // A starving link with no caravan still leaves a ledger latch (M2 parity, for the
     // M2b interdiction read) — a sourceId-less, 0-carry record.
@@ -561,6 +675,28 @@ export function advanceCommodityFlow({
 
   const accounting = { before, produced, after, consumed, lost };
 
+  // ── M6c: STEP THE DYNAMIC APPETITE (per origin; a deterministic accumulator over the
+  //    outcomes already rolled). Every origin that holds a prior appetite (decay toward
+  //    baseline) OR saw a risky outcome this tick (embolden/cow) is stepped, codepoint-
+  //    sorted; a scalar settled within EPS of its baseline is pruned (sparse ledger).
+  let nextAppetiteOrNull = null;
+  let appetiteChanged = false;
+  if (ev) {
+    const originIds = new Set([...Object.keys(priorAppetite), ...appetiteEvents.keys()].map(String));
+    /** @type {Record<string, import('./dispatchEV.js').AppetiteRecord>} */
+    const nextAppetite = {};
+    for (const originId of [...originIds].sort()) {
+      const prior = asObject(priorAppetite[originId]);
+      const priorRec = typeof prior.level === 'number' ? /** @type {import('./dispatchEV.js').AppetiteRecord} */ (prior) : null;
+      const evt = appetiteEvents.get(originId) || { paid: 0, lost: 0 };
+      const rec = stepAppetite(priorRec, { baseline: finiteNumber(ev.baseline(originId), DISPATCH_TUNING.BASELINE_MID), paid: evt.paid, lost: evt.lost, now });
+      if (rec) nextAppetite[originId] = rec;
+    }
+    nextAppetiteOrNull = Object.keys(nextAppetite).length ? nextAppetite : null;
+    const priorAppetiteOrNull = Object.keys(priorAppetite).length ? sortedRecordMap(priorAppetite) : null;
+    appetiteChanged = JSON.stringify(priorAppetiteOrNull) !== JSON.stringify(nextAppetiteOrNull);
+  }
+
   // Codepoint-tidy + sort the persisted stock map (drop empty settlement rows; sorted
   // keys give a byte-stable, order-independent ledger).
   const tidied = tidyStocks(stocks);
@@ -571,10 +707,20 @@ export function advanceCommodityFlow({
   const stocksChanged = JSON.stringify(priorStocksOrNull && sortedStocks(priorStocksOrNull)) !== JSON.stringify(nextStocks);
   const shipmentsChanged = JSON.stringify(priorShipmentsOrNull && sortedShipments(priorShipmentsOrNull)) !== JSON.stringify(nextShipmentsOrNull);
 
+  // M6c willingness ledger (only refusing links; sorted for byte-stability).
+  const nextWillingnessOrNull = /** @type {Record<string, import('./dispatchEV.js').WillingnessRecord>|null} */ (
+    ev && Object.keys(nextWillingness).length ? sortedRecordMap(nextWillingness) : null
+  );
+  const priorWillingnessOrNull = ev && Object.keys(priorWillingness).length ? sortedRecordMap(priorWillingness) : null;
+  const willingnessChanged = !!ev && JSON.stringify(priorWillingnessOrNull) !== JSON.stringify(nextWillingnessOrNull);
+
   return {
     nextStocks,
     nextShipments: nextShipmentsOrNull,
-    changed: stocksChanged || shipmentsChanged,
+    nextAppetite: nextAppetiteOrNull,
+    nextWillingness: nextWillingnessOrNull,
+    emboldenEvents,
+    changed: stocksChanged || shipmentsChanged || appetiteChanged || willingnessChanged,
     outcomes,
     accounting,
   };
@@ -634,6 +780,16 @@ function sortedShipments(ships) {
   /** @type {Record<string, CommodityShipment>} */
   const out = {};
   for (const key of Object.keys(asObject(ships)).sort()) out[key] = /** @type {CommodityShipment} */ (asObject(ships)[key]);
+  return out;
+}
+
+/** A codepoint-sorted shallow copy of a flat id→record ledger (M6c appetite +
+ *  willingness — byte-stable, order-independent change-detection + persist). */
+/** @param {Record<string, unknown>} rows @returns {Record<string, unknown>} */
+function sortedRecordMap(rows) {
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const key of Object.keys(asObject(rows)).sort()) out[key] = asObject(rows)[key];
   return out;
 }
 

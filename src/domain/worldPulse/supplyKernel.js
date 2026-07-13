@@ -38,6 +38,12 @@ import {
   advanceCommodityFlow, commodityFlowActive, productionRateFor, originStockCap,
   assertGoodsConservation, COMMODITY_TUNING,
 } from '../spatial/commodityFlow.js';
+import {
+  believedDestinationDanger, merchantBaseline, emboldenedReceipt,
+} from '../spatial/dispatchEV.js';
+import { riskToleranceFromAlignment } from '../spatial/embattlement.js';
+import { settlementAlignment } from './settlementAlignment.js';
+import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
@@ -377,7 +383,7 @@ export function buildProducers(snapshot, localSettlements) {
  * @param {string|null} [args.season]
  * @param {{ fork?: (k: string) => { random: () => number } }|null} [args.rng]
  * @param {string|null} [args.now]
- * @returns {{ worldState: Record<string, unknown>, changed: boolean, starvations: string[], arrivals: string[] }}
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, starvations: string[], arrivals: string[], emboldened?: string[] }}
  */
 export function advanceCommodityContinuity({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
   const producerIndex = buildProducerIndex(snapshot);
@@ -421,9 +427,18 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
     return undefined;
   };
 
+  // Phase 5.5 mover M6c — THE GREED-vs-DANGER DISPATCH EV. The caravan GO/NO-GO becomes
+  // an expected-value decision under fog: the origin weighs a destination's need-premium
+  // × its DYNAMIC APPETITE against the BELIEVED destination danger × the ONE W0 caution
+  // read, with the M1 hysteresis. Runs under the SAME double gate (marker + commodity-flow
+  // opt-in) — commodityFlowActive was already asserted by advanceSettlementSupply. Peaceful
+  // (believedDanger 0 everywhere) ⇒ the EV never refuses ⇒ dispatch is M6a-verbatim, and no
+  // appetite / willingness ledger materializes (both sparse, pruned to baseline / willing).
+  const ev = buildDispatchEV({ worldState, graph, itemById, localSettlements });
+
   const out = advanceCommodityFlow({
     producers, links, worldState, digest, tick, tickWeeks, season, rng,
-    sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor,
+    sourceSeveredFor, hostileToDestinationFor, riskToleranceFor, consumesGood, severingCauseFor, ev,
   });
 
   // THE GOODS-CONSERVATION INVARIANT — assert every tick (exact integers). On a
@@ -479,7 +494,9 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
     localSettlements.set(sid, { ...settlement, institutions });
   }
 
-  // Write the two sub-ledgers (commodityStocks + supplyShipments) under spatialLedgers.
+  // Write the sub-ledgers under spatialLedgers (commodityStocks + supplyShipments, plus the
+  // M6c merchantAppetite + dispatchWillingness — all under the SAME namespace, zero eager
+  // bytes; each drops to absent when it drains, keeping a peaceful world byte-identical).
   let nextWorldState = worldState;
   if (out.changed) {
     nextWorldState = out.nextStocks
@@ -488,8 +505,110 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
     nextWorldState = out.nextShipments
       ? setSpatialLedger(nextWorldState, 'supplyShipments', out.nextShipments)
       : dropSpatialLedger(nextWorldState, 'supplyShipments');
+    nextWorldState = out.nextAppetite
+      ? setSpatialLedger(nextWorldState, 'merchantAppetite', out.nextAppetite)
+      : dropSpatialLedger(nextWorldState, 'merchantAppetite');
+    nextWorldState = out.nextWillingness
+      ? setSpatialLedger(nextWorldState, 'dispatchWillingness', out.nextWillingness)
+      : dropSpatialLedger(nextWorldState, 'dispatchWillingness');
   }
-  return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals };
+  // M6c: the "emboldened by the <dest> run" receipts for this tick's risky paid-off runs
+  // (exposed for display/M6d; the pulse does not yet surface starvations/arrivals either).
+  const emboldened = (out.emboldenEvents || []).map(
+    (e) => emboldenedReceipt(itemById.get(String(e.destId))?.name || String(e.destId)),
+  );
+  return { worldState: nextWorldState, changed: out.changed || perSettlement.size > 0, starvations, arrivals, emboldened };
+}
+
+// ── M6c: the DISPATCH-EV context (the live reads the pure EV engine consumes) ──────
+/**
+ * Build the greed-vs-danger EV context: the belief-gated deterrent, the ONE W0 caution
+ * read (riskToleranceFromAlignment — never a second alignment derivation), the merchant-
+ * disposition appetite baseline, and the vassal-tribute must-go override. All reads are
+ * per-origin/destination and memoized. Alignment/faction reads come from the live snapshot
+ * item; occupation/siege from the worldState ledgers + the pre-tick graph.
+ * @param {Object} args
+ * @param {Record<string, unknown>} args.worldState
+ * @param {unknown} args.graph
+ * @param {Map<string, SupplySnapItem>} args.itemById
+ * @param {Map<string, SupplySettlement>} args.localSettlements
+ * @returns {import('../spatial/commodityFlow.js').DispatchEVContext}
+ */
+function buildDispatchEV({ worldState, graph, itemById, localSettlements }) {
+  const occupations = /** @type {Record<string, { state?: string, occupierId?: string|number }>} */ (
+    (worldState && typeof worldState === 'object' && /** @type {Record<string, unknown>} */ (worldState).occupations) || {}
+  );
+  /** @type {Map<string, { lawfulness01: number, malice01: number, aggressiveness: number }>} */
+  const alignMemo = new Map();
+  const alignOf = (/** @type {string} */ id) => {
+    const cached = alignMemo.get(id);
+    if (cached) return cached;
+    const item = itemById.get(id) || (localSettlements.get(id) ? { id, settlement: localSettlements.get(id) } : null);
+    const a = settlementAlignment(
+      /** @type {import('./disposition.js').AlignmentItem} */ (/** @type {unknown} */ (item)),
+      /** @type {import('./disposition.js').AlignmentActsSource} */ (/** @type {unknown} */ (worldState)),
+    );
+    alignMemo.set(id, a);
+    return a;
+  };
+  /** @type {Map<string, number>} */
+  const cautionMemo = new Map();
+  const cautionOf = (/** @type {string} */ id) => {
+    const cached = cautionMemo.get(id);
+    if (cached != null) return cached;
+    const c = riskToleranceFromAlignment(alignOf(id));
+    cautionMemo.set(id, c);
+    return c;
+  };
+  /** @type {Map<string, number>} */
+  const baselineMemo = new Map();
+  const baselineOf = (/** @type {string} */ id) => {
+    const cached = baselineMemo.get(id);
+    if (cached != null) return cached;
+    const settlement = localSettlements.get(id) || itemById.get(id)?.settlement;
+    const b = merchantBaseline({ merchantStrength01: merchantStrength01Of(settlement), lawfulness01: alignOf(id).lawfulness01 });
+    baselineMemo.set(id, b);
+    return b;
+  };
+  const gtStressorFor = (/** @type {string} */ destId) => ({
+    occupationState: occupations[destId]?.state ?? null,
+    besieged: warFrontsInto(graph, destId).length > 0,
+  });
+  return {
+    believedDanger: (originId, destId) => believedDestinationDanger(originId, destId, worldState, gtStressorFor(destId)),
+    caution: (originId) => cautionOf(originId),
+    baseline: (originId) => baselineOf(originId),
+    // VASSAL TRIBUTE must-go: a vassal (occupied) source must ship to its OCCUPIER
+    // destination regardless of the EV — coerced tribute. (Ally relief = documented seam.)
+    override: (link, sourceId) => (String(occupations[String(sourceId)]?.occupierId ?? '') === String(link.settlementId) ? 'must-go' : null),
+  };
+}
+
+/**
+ * @typedef {{ name?: string, category?: string, power?: number, strength?: number,
+ *   influence?: number, legitimacy?: number }} FactionLike
+ * @typedef {SupplySettlement & { factions?: FactionLike[], powerStructure?: { factions?: FactionLike[] },
+ *   powerFactions?: FactionLike[], politics?: { factions?: FactionLike[] } }} FactionBearing
+ */
+
+/**
+ * The merchant-faction strength (0..1) of a settlement — the max power of any faction
+ * whose canonical archetype is MERCHANT, normalized (power/legitimacy are 0..100). A
+ * strong merchant guild raises the appetite baseline (bold trade); none ⇒ 0. Tolerant of
+ * the several faction-array locations the generator/sim layers use.
+ * @param {FactionBearing | null | undefined} settlement @returns {number}
+ */
+export function merchantStrength01Of(settlement) {
+  const s = settlement || {};
+  const factions = s.factions || s.powerStructure?.factions || s.powerFactions || s.politics?.factions || [];
+  let best = 0;
+  for (const f of Array.isArray(factions) ? factions : []) {
+    if (factionArchetype(f) !== FACTION_ARCHETYPES.MERCHANT) continue;
+    const raw = Number(f?.power ?? f?.strength ?? f?.influence ?? f?.legitimacy ?? 0);
+    const v = Number.isFinite(raw) ? Math.max(0, Math.min(1, raw > 1 ? raw / 100 : raw)) : 0;
+    if (v > best) best = v;
+  }
+  return best;
 }
 
 export { COMMODITY_TUNING };
