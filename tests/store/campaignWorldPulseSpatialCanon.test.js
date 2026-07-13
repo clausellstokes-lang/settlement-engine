@@ -42,7 +42,7 @@ vi.mock('../../src/lib/campaigns.js', () => {
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { makeGridPack, placeSettlements, placePortSettlements } from '../fixtures/spatialPackFixtures.js';
+import { makeGridPack, placeSettlements, placePortSettlements, placeTeleportSettlements } from '../fixtures/spatialPackFixtures.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -103,6 +103,15 @@ function fixtureCapture(count = 6) {
 function portCapture() {
   const pack = makeGridPack({ cols: 24, rows: 18 });
   const placements = placePortSettlements(pack, { nCoastal: 3, nRiver: 2, nInland: 3 });
+  return async () => ({ pack, placements });
+}
+
+// A capture whose placements carry a teleport-capable institution (a teleportation
+// circle) on ≥2 settlements (the M9c capability read) ⇒ the live canonize LIGHTS the
+// teleport bloc edge set.
+function teleportCapture() {
+  const pack = makeGridPack({ cols: 24, rows: 18 });
+  const placements = placeTeleportSettlements(pack, { nCircle: 3, nPlain: 4 });
   return async () => ({ pack, placements });
 }
 
@@ -194,6 +203,31 @@ describe('KEYSTONE — entitled spatial canonize at the store', () => {
     // The other reserved slots + geometry axes are unchanged by lighting sea lanes.
     expect(ws.spatialDigest.reserved.airField).toBeNull();
     expect(ws.spatialDigest.reserved.teleportEdges).toBeNull();
+    expect(ws.spatialDigest.spatialGeometryVersion).toBe(1);
+    expect(ws.spatialDigest.costLawVersion).toBe(1);
+  });
+
+  test('TELEPORT BLOCS (M9c): a circle-carrying capture LIGHTS the teleportEdges slot (the opt-in)', async () => {
+    const store = makeStore();
+    seedStore(store);
+    const result = await store.getState().canonizeCampaignWorldSpatial('camp-1', { captureSpatialPack: teleportCapture() });
+    expect(result.ok).toBe(true);
+    const ws = store.getState().campaigns[0].worldState;
+    const teleport = ws.spatialDigest.reserved.teleportEdges;
+    // ≥2 circle-holders (a teleport-capable institution) ⇒ the frozen bloc edge set
+    // materializes — the CLIQUE OF THE WILLING (every holder adjacent to every other).
+    expect(teleport).toBeTruthy();
+    expect(teleport.version).toBe(1);
+    expect(teleport.nodes.length).toBe(3);
+    // A full clique among 3 holders = 3 edges (rarity is the bound — no O(P²) concern).
+    expect(teleport.edges.length).toBe(3);
+    expect(teleport.edges.every(e => e.cost >= 1 && e.capacity >= 1)).toBe(true);
+    // Only the circle-holders (t000..t002) are bloc nodes; the plain settlements are not.
+    expect(teleport.nodes).toEqual(['t000', 't001', 't002']);
+    // The other reserved slots + geometry axes are unchanged by lighting teleport.
+    expect(ws.spatialDigest.reserved.airField).toBeNull();
+    // This capture's placements carry no water-access institution ⇒ seaLanes stays null.
+    expect(ws.spatialDigest.reserved.seaLanes).toBeNull();
     expect(ws.spatialDigest.spatialGeometryVersion).toBe(1);
     expect(ws.spatialDigest.costLawVersion).toBe(1);
   });

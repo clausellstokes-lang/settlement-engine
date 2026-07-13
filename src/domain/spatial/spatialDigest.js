@@ -49,6 +49,7 @@ import {
   SEASONAL_OVERLAY_VERSION,
 } from './spatialCost.js';
 import { buildSeaLanes } from './seaLanes.js';
+import { buildTeleportEdges } from './teleportEdges.js';
 
 // ── Input shapes (the captured pack + placements the builder consumes) ───────
 /**
@@ -102,11 +103,13 @@ export const OVERLAY_VERSION = 1;
 // LANES) lights `seaLanes` ON OPT-IN ONLY. Default (every pre-M3/M8 canon / golden)
 // keeps EVERY slot null ⇒ the seasonal + sea reads are dormant ⇒ byte-identical.
 // The KEY ORDER is fixed (airField, seaLanes, seasonalOverlay, teleportEdges) so a
-// materializing wave changes a slot's VALUE, never the serialized shape. The other
-// slots stay null (their own waves light them).
-/** @param {object|null} [seasonalOverlay] @param {object|null} [seaLanes] */
-function reservedSlots(seasonalOverlay = null, seaLanes = null) {
-  return { airField: null, seaLanes: seaLanes ?? null, seasonalOverlay: seasonalOverlay ?? null, teleportEdges: null };
+// materializing wave changes a slot's VALUE, never the serialized shape. M9c (TELEPORT
+// BLOCS) lights `teleportEdges` ON OPT-IN ONLY; default (every pre-M9c canon / golden)
+// keeps it null ⇒ the teleport read is dormant ⇒ byte-identical. The other null slots
+// stay null (their own waves light them).
+/** @param {object|null} [seasonalOverlay] @param {object|null} [seaLanes] @param {object|null} [teleportEdges] */
+function reservedSlots(seasonalOverlay = null, seaLanes = null, teleportEdges = null) {
+  return { airField: null, seaLanes: seaLanes ?? null, seasonalOverlay: seasonalOverlay ?? null, teleportEdges: teleportEdges ?? null };
 }
 
 // ── A deterministic integer binary min-heap (dist asc, then cell index asc) ──
@@ -229,9 +232,14 @@ const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `
  * capability read); with fewer than two ELIGIBLE ports the slot stays null (the
  * dormancy floor). Omitted, or opted-in but portless (every existing golden/canon)
  * ⇒ seaLanes null ⇒ dormant, byte-identical.
+ * TELEPORT BLOCS (M9c): `teleport:true` LIGHTS the reserved teleportEdges slot — the
+ * clique of teleport-capable settlements (a teleportation circle / planar gate on the
+ * placement roster), magic-gated + geography-independent (§4e). With fewer than two
+ * circle-holders the slot stays null (the dormancy floor). Omitted, or opted-in but
+ * <2 holders (every existing golden/canon) ⇒ teleportEdges null ⇒ dormant, byte-identical.
  * @param {{ pack: CapturedSpatialPack, placements?: SpatialPlacementRow[] | null,
  *           spatialGeometryVersion?:number, costLawVersion?:number,
- *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean }} input
+ *           overlayVersion?:number, seasonalRoads?:boolean, seaLanes?:boolean, teleport?:boolean }} input
  */
 export function buildSpatialDigest(input) {
   const pack = normalizeSpatialPack(input?.pack);
@@ -248,9 +256,18 @@ export function buildSpatialDigest(input) {
   // placement rows (`institutions`), so eligibility is a pure function of the frozen
   // geometry + the roster — re-derived on founding events by a re-canonize (§4j).
   const seaLanesOptIn = input?.seaLanes === true;
+  // M9c opt-in: teleport bloc edges (a teleport-capable institution at both ends),
+  // frozen INTO this canon under the reserved teleportEdges slot; dormant (null) by
+  // default and with <2 circle-holders. Magic-gated + geography-independent (no pack
+  // read). Re-derived on founding events by a re-canonize (a new circle changes destiny).
+  const teleportOptIn = input?.teleport === true;
   /** @type {Record<string, Array<string | { name?: unknown, catalogId?: unknown }>>} */
   const institutionsById = {};
-  if (seaLanesOptIn) {
+  // The institution roster is the shared CAPABILITY substrate for BOTH the sea-lane
+  // port derivation (geography ∧ institution) AND the teleport eligibility (a magic
+  // institution). Build it once when EITHER slot opts in — an internal derivation, so
+  // building it under teleport does not alter the seaLanes digest bytes.
+  if (seaLanesOptIn || teleportOptIn) {
     for (const pl of Array.isArray(input?.placements) ? input.placements : []) {
       const id = pl == null ? '' : String(pl.id ?? '');
       const insts = pl && /** @type {{ institutions?: unknown }} */ (pl).institutions;
@@ -262,6 +279,13 @@ export function buildSpatialDigest(input) {
   // is never traversed and would corrupt the storm-vs-terrain cost attribution).
   /** @type {ReturnType<typeof buildSeaLanes>} */
   let seaLanes = null;
+
+  // M9c: the teleport bloc edge set is geometry-INDEPENDENT (magic bypasses the cost
+  // field), so it is built here — a pure function of the seeds + the frozen roster,
+  // needing no distance matrix or domination pruning (unlike sea lanes). Null with <2
+  // circle-holders (dormant). The KEY ORDER (teleportEdges LAST in reservedSlots) is
+  // preserved regardless, so an unlit slot is byte-identical to a pre-M9c digest.
+  const teleportEdges = teleportOptIn ? buildTeleportEdges(seeds, institutionsById) : null;
 
   const spatialGeometryVersion = Number.isInteger(input?.spatialGeometryVersion) ? input.spatialGeometryVersion : SPATIAL_GEOMETRY_VERSION;
   const costLawVersion = Number.isInteger(input?.costLawVersion) ? input.costLawVersion : COST_LAW_VERSION;
@@ -483,6 +507,6 @@ export function buildSpatialDigest(input) {
     distanceMatrix: sortedObject(distanceEntries),
     gates,
     routeReceipts: sortedObject(receiptEntries),
-    reserved: reservedSlots(seasonalOverlay, seaLanes),
+    reserved: reservedSlots(seasonalOverlay, seaLanes, teleportEdges),
   };
 }

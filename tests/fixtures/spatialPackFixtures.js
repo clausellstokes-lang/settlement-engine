@@ -349,6 +349,39 @@ export function makePortCoastPack(count, { cols = 100, rows = 8 } = {}) {
 }
 
 /**
+ * Place `nCircle` teleport-CIRCLE settlements (each carrying a 'Teleportation circle',
+ * the magic capability M9c reads) + `nPlain` ordinary settlements (no circle — proving
+ * the bloc is the clique of HOLDERS, not every settlement) on the grid. Geography is
+ * IRRELEVANT to teleport (magic bypasses terrain), so seats are just dispersed land
+ * cells. Deterministic: seats collected column-major, taken by stride, ids zero-padded
+ * so codepoint sort == placement order. Circle-holders get the LOW ids (t000..) so the
+ * bloc nodes are legible in a golden.
+ * @param {ReturnType<typeof makeGridPack>} pack
+ * @param {{ nCircle?: number, nPlain?: number, institution?: string }} [opts]
+ */
+export function placeTeleportSettlements(pack, { nCircle = 3, nPlain = 4, institution = 'Teleportation circle' } = {}) {
+  const { cols, rows } = pack.meta;
+  const H = pack.cells.h;
+  const landCells = [];
+  for (let col = 0; col < cols; col++) {
+    for (let row = 0; row < rows; row++) {
+      const i = row * cols + col;
+      if (H[i] >= 20 && H[i] <= 60) landCells.push(i);
+    }
+  }
+  const total = nCircle + nPlain;
+  const placements = [];
+  if (!landCells.length || total <= 0) return placements;
+  const stride = Math.max(1, Math.floor(landCells.length / total));
+  for (let k = 0; k < total; k++) {
+    const cellId = landCells[Math.min(landCells.length - 1, k * stride)];
+    const institutions = k < nCircle ? [{ name: institution }] : [];
+    placements.push({ id: `t${String(k).padStart(3, '0')}`, cellId, institutions });
+  }
+  return placements;
+}
+
+/**
  * A tiny hand-built pack with an EXACT equal-cost tie: a 1-row corridor of
  * uniform-cost cells with a settlement at each end. The exact-middle cell is
  * equidistant from both — the tie-break (equal tentative ⇒ lower predecessor

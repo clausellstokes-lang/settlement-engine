@@ -60,7 +60,7 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger, seaLaneNeighbourMap } from './distanceRead.js';
+import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger, seaLaneNeighbourMap, teleportNeighbourMap } from './distanceRead.js';
 import { infoModeOf } from '../worldPulse/simulationRules.js';
 
 // ── The tuning constants (documented here; retuned in the checkpoint soak) ───
@@ -83,6 +83,14 @@ export const RUMOR_CARRIER_CRIMINAL = 'criminal';
  *  per-event record, at the SEA-AWARE hopWeeks (the cheap lane cost ⇒ few weeks). EMPTY
  *  when the seaLanes slot is dormant ⇒ the ship lane never fires ⇒ byte-identical. */
 export const RUMOR_CARRIER_SHIP = 'ship';
+/** M9c (round 9/11): the TELEPORT carrier lights WITH the teleport bloc — a circle-holder
+ *  shares its news with every bloc partner INSTANTLY and at FULL FIDELITY (zero hops = no
+ *  telephone decay: the magic channel does not weather). Distinct from every other carrier:
+ *  it NEVER degrades a telling even under 'unreliable' mode (hi-fi), so a lawful bloc's
+ *  belief maps converge toward truth. Same per-event record shape; an additive lane, at the
+ *  near-instant teleport hopWeeks (the cheapest edge ⇒ 1 week). EMPTY when the teleportEdges
+ *  slot is dormant ⇒ the teleport lane never fires ⇒ byte-identical (the other lanes untouched). */
+export const RUMOR_CARRIER_TELEPORT = 'teleport';
 
 /** The regional-graph channel types merchant traffic rides (the P0 economic
  *  set): a confirmed channel of any of these types carries news BOTH ways
@@ -617,6 +625,11 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
   // A ship crew relays news port-to-port over the cheap fast lane. EMPTY when the seaLanes
   // slot is dormant ⇒ the ship lane never fires ⇒ byte-identical (the other lanes untouched).
   const shipNeighbours = seaLaneNeighbourMap(digest);
+  // M9c teleport carrier: the FROZEN teleport bloc adjacencies (circle-holder → bloc
+  // partners). A circle relays news to its bloc instantly + at FULL fidelity (hi-fi —
+  // no telephone decay). EMPTY when the teleportEdges slot is dormant ⇒ the lane never
+  // fires ⇒ byte-identical (the other lanes untouched).
+  const teleportNeighbours = teleportNeighbourMap(digest);
   for (const sid of [...working.keys()].sort(compareCodepoint)) {
     const records = /** @type {Map<string, RumorArrivalRecord>} */ (working.get(sid));
     for (const key of [...records.keys()].sort(compareCodepoint)) {
@@ -632,8 +645,8 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       // pre-M5); then ARMY (round 9) — an army carries the news of where it has been
       // to the next stop. Same packet shape; only the carrier tag / framing / fork
       // carrier differ (per event+carrier+edge+hop — the §III.2-5 fork law).
-      /** @param {string} carrier @param {string} framingTag @param {Array<{ neighbourId: string, edgeId: string }>} neighbours */
-      const relayVia = (carrier, framingTag, neighbours) => {
+      /** @param {string} carrier @param {string} framingTag @param {Array<{ neighbourId: string, edgeId: string }>} neighbours @param {boolean} [hiFi] */
+      const relayVia = (carrier, framingTag, neighbours, hiFi = false) => {
         for (const { neighbourId, edgeId } of neighbours) {
           const weeks = hopWeeks(digest, sid, neighbourId, season);
           const travelTicks = Math.max(1, finiteNumber(weeks, 1));
@@ -642,7 +655,10 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
             accuracy01: record.accuracy01,
             content: record.content,
           };
-          if (mode === 'unreliable') {
+          // HI-FI carriers (M9c teleport: the zero-hop magic channel) NEVER weather — the
+          // telling crosses at preserved fidelity even in 'unreliable' mode (round 11: the
+          // fastest, most accurate channel where it exists), so they draw NO organic fork.
+          if (mode === 'unreliable' && !hiFi) {
             // THE fork law (§III.2-5): per event+carrier+edge+hop, NEVER per
             // settlement, off the pulse confluence. Perfect-but-Delayed forks
             // NOTHING (this branch is the only rng touch in the module).
@@ -683,6 +699,8 @@ export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, seas
       relayVia(RUMOR_CARRIER_ARMY, 'army', armyNeighbours.get(sid) || []);
       relayVia(RUMOR_CARRIER_CRIMINAL, 'criminal', criminalNeighbours.get(sid) || []);
       relayVia(RUMOR_CARRIER_SHIP, 'ship', shipNeighbours.get(sid) || []);
+      // M9c teleport carrier (hi-fi): the bloc's zero-hop, full-fidelity magic channel.
+      relayVia(RUMOR_CARRIER_TELEPORT, 'teleport', teleportNeighbours.get(sid) || [], true);
     }
   }
   for (const { targetId, key, packet } of deliveries) {

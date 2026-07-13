@@ -70,6 +70,13 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     // eligible ports (no coastal/river settlement with a dock) leaves the slot null —
     // dormant, byte-identical. Existing saved canons keep their frozen (null) slot.
     seaLanes: true,
+    // TELEPORT BLOCS (M9c): a NEW canon lights the teleport edge set — the clique of
+    // settlements holding a teleport-capable institution (a teleportation circle / planar
+    // gate on the placement roster), magic-gated + geography-independent (§4e). The
+    // receipted re-canonize RE-DERIVES the bloc on founding events (a new circle changes
+    // a settlement's destiny). A realm with <2 circle-holders leaves the slot null —
+    // dormant, byte-identical. Existing saved canons keep their frozen (null) slot.
+    teleport: true,
   });
   const digestBytes = JSON.stringify(digest).length;
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {

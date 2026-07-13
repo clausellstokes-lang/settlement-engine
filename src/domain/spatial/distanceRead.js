@@ -92,7 +92,7 @@ const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
  *   tiers?: Record<string, Record<string, number>>,
  *   gates?: Array<{ between?: [string, string], cost?: number }>,
  *   routeReceipts?: Record<string, { cost?: number, byTerrain?: Record<string, number> }>,
- *   reserved?: { seasonalOverlay?: SeasonalOverlay | null, seaLanes?: SeaLanes | null } }} SpatialDigest
+ *   reserved?: { seasonalOverlay?: SeasonalOverlay | null, seaLanes?: SeaLanes | null, teleportEdges?: TeleportEdges | null } }} SpatialDigest
  */
 
 /**
@@ -402,6 +402,116 @@ function stormSeasonFactor(lanes, season) {
   return typeof v === 'number' && Number.isFinite(v) && v >= 1 ? v : 1;
 }
 
+// ── TELEPORT BLOCS (M9c): the self-describing frozen slot read (mirror sea lanes) ────
+// Like the seaLanes slot, teleportEdges is SELF-DESCRIBING — it carries its own version
+// + node set + edge set — so this leaf reader honours the frozen slot straight off the
+// digest object WITHOUT importing the teleportEdges builder (which pulls the institution
+// catalog). A pre-M9c digest has `reserved.teleportEdges = null` ⇒ every read below is
+// inert ⇒ byte-identical. Teleport is geography-INDEPENDENT + SEASON-IMMUNE (magic
+// bypasses terrain AND weather), so — unlike sea lanes — it carries no storm law and its
+// hops weather no seasonal surcharge (a teleport hop is season-neutral in the blend).
+
+/**
+ * @typedef {{ version?: number, nodes?: string[],
+ *   edges?: Array<{ between?: [string, string], cost?: number, capacity?: number }>,
+ *   edgeCost?: number, edgeCapacity?: number }} TeleportEdges
+ */
+
+/**
+ * THE TELEPORT DORMANCY GATE (M9c). Returns the frozen teleportEdges set ONLY when the
+ * digest carries a populated, versioned slot (a NEW canon built by the entitled M9c
+ * re-canonize with ≥2 circle-holders). EVERY pre-M9c digest — every committed golden —
+ * has `reserved.teleportEdges = null`, so this returns null ⇒ the teleport-augmented
+ * routing + the zero-hop intel carrier are dormant ⇒ the pre-M9c land path EXACTLY
+ * (byte-identical).
+ * @param {SpatialDigest & { reserved?: { teleportEdges?: unknown } } | null | undefined} digest
+ * @returns {TeleportEdges | null}
+ */
+export function activeTeleportEdges(digest) {
+  const te = /** @type {{ reserved?: { teleportEdges?: unknown } } | null | undefined} */ (digest)?.reserved?.teleportEdges;
+  if (!te || typeof te !== 'object') return null;
+  const edges = /** @type {TeleportEdges} */ (te);
+  if (!(typeof edges.version === 'number' && Number.isInteger(edges.version) && edges.version >= 1)) return null;
+  if (!Array.isArray(edges.edges) || edges.edges.length === 0) return null;
+  return edges;
+}
+
+// Per-digest teleport-node-id set memo ⇒ isTeleportNode is O(1) (the pathCost gate reads it).
+/** @type {WeakMap<object, Set<string>>} */
+const TELEPORT_NODE_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Set<string>} */
+function teleportNodeSet(digest) {
+  const te = activeTeleportEdges(digest);
+  if (!te || !Array.isArray(te.nodes)) return EMPTY_STRING_SET;
+  const memo = TELEPORT_NODE_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  const set = new Set(te.nodes.map(String));
+  if (digest && typeof digest === 'object') TELEPORT_NODE_MEMO.set(/** @type {object} */ (digest), set);
+  return set;
+}
+
+/** Is `id` a teleport-bloc node (a circle-holder the frozen edge set connects)? O(1).
+ *  @param {SpatialDigest} digest @param {string|number} id */
+export function isTeleportNode(digest, id) {
+  return teleportNodeSet(digest).has(String(id));
+}
+
+// Per-digest teleport adjacency memo (id → Map(nodeId → integer edge cost)). Pure
+// derivation from the frozen edge set; memoized on the digest object (identity).
+/** @type {WeakMap<object, Map<string, Map<string, number>>>} */
+const TELEPORT_ADJ_MEMO = new WeakMap();
+/** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
+export function teleportAdjacency(digest) {
+  const te = activeTeleportEdges(digest);
+  if (!te) return new Map();
+  const memo = TELEPORT_ADJ_MEMO.get(/** @type {object} */ (digest));
+  if (memo) return memo;
+  /** @type {Map<string, Map<string, number>>} */
+  const adj = new Map();
+  for (const e of te.edges ?? []) {
+    const pair = Array.isArray(e?.between) ? e.between : [];
+    const a = pair[0] == null ? null : String(pair[0]);
+    const b = pair[1] == null ? null : String(pair[1]);
+    const cost = finiteNum(e?.cost);
+    if (a == null || b == null || a === b || cost == null || cost <= 0) continue;
+    linkMin(adj, a, b, cost); linkMin(adj, b, a, cost);
+  }
+  if (digest && typeof digest === 'object') TELEPORT_ADJ_MEMO.set(/** @type {object} */ (digest), adj);
+  return adj;
+}
+
+// Per-digest teleport-carrier neighbour-map memo (the derivation is digest-invariant).
+/** @type {WeakMap<object, Map<string, Array<{ neighbourId: string, edgeId: string }>>>} */
+const TELEPORT_NBR_MEMO = new WeakMap();
+
+/**
+ * The bloc neighbour map for the TELEPORT rumor carrier (round 9, the zero-hop HI-FI
+ * channel): each circle-holder → its bloc-connected holders, codepoint-sorted, edge-
+ * prefixed 'tele' so the carrier's edge ids never collide with the trade/army/criminal/
+ * ship lanes. EMPTY when the teleportEdges slot is dormant ⇒ the teleport lane never
+ * fires ⇒ byte-identical. Intel over these edges crosses at FULL fidelity (no telephone
+ * decay — the carrier is hi-fi) and near-instant (the cheapest edge cost ⇒ hopWeeks 1).
+ * @param {SpatialDigest} digest
+ * @returns {Map<string, Array<{ neighbourId: string, edgeId: string }>>}
+ */
+export function teleportNeighbourMap(digest) {
+  if (digest && typeof digest === 'object') {
+    const memo = TELEPORT_NBR_MEMO.get(/** @type {object} */ (digest));
+    if (memo) return memo;
+  }
+  const adj = teleportAdjacency(digest);
+  /** @type {Map<string, Array<{ neighbourId: string, edgeId: string }>>} */
+  const out = new Map();
+  for (const [node, nbrs] of adj) {
+    out.set(node, [...nbrs.keys()].sort().map((neighbourId) => ({
+      neighbourId,
+      edgeId: node < neighbourId ? `tele.${node}.${neighbourId}` : `tele.${neighbourId}.${node}`,
+    })));
+  }
+  if (digest && typeof digest === 'object') TELEPORT_NBR_MEMO.set(/** @type {object} */ (digest), out);
+  return out;
+}
+
 // Per-digest calibration memo. WeakMap ⇒ GC-friendly and keyed on identity; the
 // stored value is a pure function of the digest contents (see calibration()).
 /** @type {WeakMap<object, CalibrationReceipt>} */
@@ -533,21 +643,27 @@ export function pathCost(digest, fromId, toId, season = null) {
   const row = digest?.distanceMatrix?.[a];
   const landBase = row && typeof row === 'object' ? finiteNum(row[b]) : null;
   const seaLanes = activeSeaLanes(digest);
+  const teleport = activeTeleportEdges(digest);
   const overlay = activeSeasonalOverlay(digest);
 
   // ── FAST PATH — no read-time surcharge to apply (no season; or neither overlay nor
-  // sea lanes). Returns the sea-aware base with an O(1) gate. SEA LANES (M8): escalate
-  // to the sea-augmented route ONLY when the slot is lit AND at least one endpoint is a
-  // PORT (a sea lane can only shorten/reach a route that embarks at a port), so a
-  // landlocked↔landlocked pair keeps the O(1) frozen-matrix read — the
-  // distanceWeight/tradeSalience/religiousContest hot-loop guard. Dormant (pre-M8, or a
-  // non-port pair) ⇒ the branch is skipped ⇒ the land distance EXACTLY (byte-identical).
+  // sea lanes). Returns the modality-aware base with an O(1) gate. SEA LANES (M8) /
+  // TELEPORT (M9c): escalate to the augmented route ONLY when a slot is lit AND at least
+  // one endpoint is that modality's node — a PORT (a sea lane embarks at a port) or a
+  // circle-holder (a teleport edge collapses distance between holders) — so a
+  // landlocked↔landlocked non-teleport pair keeps the O(1) frozen-matrix read (the
+  // distanceWeight/tradeSalience/religiousContest hot-loop guard). Teleport is SEASON-
+  // IMMUNE (magic bypasses weather), so a teleport-only lit digest always takes THIS fast
+  // path — no seasonal surcharge ever applies to a teleport route. Dormant (pre-M8/M9c,
+  // or a non-modal pair) ⇒ the branch is skipped ⇒ the land distance EXACTLY (byte-identical).
   if (season == null || (!overlay && !seaLanes)) {
     let base = landBase != null && landBase > 0 ? landBase : null;
-    if (seaLanes && (isPort(digest, a) || isPort(digest, b))) {
+    const seaInvolved = seaLanes && (isPort(digest, a) || isPort(digest, b));
+    const teleInvolved = teleport && (isTeleportNode(digest, a) || isTeleportNode(digest, b));
+    if (seaInvolved || teleInvolved) {
       const routes = candidateRoutes(digest, a, b, 1);
-      const seaCost = routes.length ? finiteNum(routes[0].cost) : null;
-      if (seaCost != null && seaCost > 0 && (base == null || seaCost < base)) base = seaCost;
+      const augCost = routes.length ? finiteNum(routes[0].cost) : null;
+      if (augCost != null && augCost > 0 && (base == null || augCost < base)) base = augCost;
     }
     return base;
   }
@@ -720,20 +836,24 @@ function gateAdjacency(digest) {
   return adj;
 }
 
-// SEA LANES (M8): the AUGMENTED routing graph = the land gates PLUS the frozen water
-// edge set, memoized. Used ONLY for a trip INVOLVING a port (routingAdjacency gates on
-// isPort) — an island port becomes reachable (isolation inversion) and a cheap sea lane
-// wins over a long land haul, while a purely inland↔inland trip keeps the land-only
-// gateAdjacency (the v1 model + the hot-loop guard). Domination is pruned at BUILD time
-// (a dominated sea lane is never emitted), so a folded sea edge is only ever the CHEAPER
-// of land/sea for its pair — the storm-vs-terrain attribution in pathSeasonMultiplier is
-// therefore always correct. Dormant (no sea lanes) ⇒ returns the land adjacency itself.
+// SEA LANES (M8) + TELEPORT BLOCS (M9c): the AUGMENTED routing graph = the land gates
+// PLUS the frozen water edge set PLUS the frozen teleport edge set, memoized. Used ONLY
+// for a trip INVOLVING a port or a circle-holder (routingAdjacency gates on isPort /
+// isTeleportNode) — an island port becomes reachable (isolation inversion), a cheap sea
+// lane wins over a long land haul, and a teleport edge COLLAPSES distance between its two
+// circle-holders (the round-11 bloc); a purely inland↔inland-non-teleport trip keeps the
+// land-only gateAdjacency (the v1 model + the hot-loop guard). Sea domination is pruned at
+// BUILD time; teleport edges are the cheapest possible (so always the winner between two
+// holders) and season-neutral — the storm-vs-terrain attribution in pathSeasonMultiplier
+// stays correct (a teleport hop carries no receipt/storm entry, so it is skipped in the
+// blend). Dormant (no sea lanes AND no teleport) ⇒ returns the land adjacency itself.
 /** @type {WeakMap<object, Map<string, Map<string, number>>>} */
 const AUG_MEMO = new WeakMap();
 /** @param {SpatialDigest} digest @returns {Map<string, Map<string, number>>} */
 function augmentedAdjacency(digest) {
   const seaAdj = seaLaneAdjacency(digest);
-  if (seaAdj.size === 0) return gateAdjacency(digest);
+  const teleAdj = teleportAdjacency(digest);
+  if (seaAdj.size === 0 && teleAdj.size === 0) return gateAdjacency(digest);
   const memo = AUG_MEMO.get(/** @type {object} */ (digest));
   if (memo) return memo;
   /** @type {Map<string, Map<string, number>>} */
@@ -742,18 +862,25 @@ function augmentedAdjacency(digest) {
   for (const [a, nbrs] of seaAdj) {
     for (const [b, cost] of nbrs) linkMin(adj, a, b, cost);
   }
+  for (const [a, nbrs] of teleAdj) {
+    for (const [b, cost] of nbrs) linkMin(adj, a, b, cost);
+  }
   if (digest && typeof digest === 'object') AUG_MEMO.set(/** @type {object} */ (digest), adj);
   return adj;
 }
 
-/** The routing graph for a specific O-D pair: the sea-AUGMENTED graph when the slot is
- *  lit AND the trip INVOLVES a port (either endpoint is a port); otherwise the land-only
- *  graph. This is the ONE gate that makes "sea lanes shortcut trips involving a port; a
- *  purely inland-to-inland trip routes overland" consistent across candidateRoutes /
- *  chooseRoute / pathCost. @param {SpatialDigest} digest @param {string} a @param {string} b
- *  @returns {Map<string, Map<string, number>>} */
+/** The routing graph for a specific O-D pair: the AUGMENTED graph when a materialized
+ *  slot is lit AND the trip INVOLVES that modality's node — a PORT (sea lanes) or a
+ *  circle-holder (teleport, either endpoint) — otherwise the land-only graph. This is the
+ *  ONE gate that makes "sea lanes shortcut trips involving a port; a teleport edge
+ *  collapses distance between circle-holders; a purely inland trip routes overland"
+ *  consistent across candidateRoutes / chooseRoute / pathCost. Pre-M8/M9c ⇒ both slots
+ *  dormant ⇒ always the land graph (byte-identical). @param {SpatialDigest} digest
+ *  @param {string} a @param {string} b @returns {Map<string, Map<string, number>>} */
 function routingAdjacency(digest, a, b) {
-  if (activeSeaLanes(digest) && (isPort(digest, a) || isPort(digest, b))) return augmentedAdjacency(digest);
+  const seaInvolved = activeSeaLanes(digest) && (isPort(digest, a) || isPort(digest, b));
+  const teleInvolved = activeTeleportEdges(digest) && (isTeleportNode(digest, a) || isTeleportNode(digest, b));
+  if (seaInvolved || teleInvolved) return augmentedAdjacency(digest);
   return gateAdjacency(digest);
 }
 

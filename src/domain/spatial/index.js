@@ -57,3 +57,14 @@ export {
   buildSeaLaneSet,
   buildSeaLanes,
 } from './seaLanes.js';
+
+export {
+  TELEPORT_EDGE_VERSION,
+  TELEPORT_EDGE_COST,
+  TELEPORT_EDGE_CAPACITY,
+  teleportInstitutionNames,
+  hasTeleportInstitution,
+  deriveTeleportEligibility,
+  buildTeleportEdgeSet,
+  buildTeleportEdges,
+} from './teleportEdges.js';
