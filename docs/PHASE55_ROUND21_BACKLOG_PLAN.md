@@ -24,6 +24,63 @@
 >   autonomous, +86B eager) and **M11** (pestilence + calamity) still UNBUILT; first-paint closure
 >   **1,255,965 / ratchet 1,255,985 = 20B eager headroom**; any-cast held at 2252.
 
+## ▶ NEXT STEPS (handoff — START HERE)
+
+State at merge (2026-07-13): **Wave 1 (voice sidecars) SHIPPED + merged to review-fixes-2026-07-08.**
+**Wave 2 (feed retention) BUILT + VALIDATED but NOT merged** — it is +363B eager and busts the
+first-paint ratchet; preserved on branch `claude/round21-w2-feed-retention @ 2f4f7b58`. Everything below
+is dispatch-ready for a successor (or a later session), grouped by what unblocks it.
+
+### 1. ⚠️ THE ONE OWNER DECISION — the budget fork (unblocks the eager third of the backlog)
+Feed-retention (and the other eager waves) need first-paint headroom. Two paths:
+- **(a) enact the parked +1,000 raise** (CLOSURE_BUDGET_BYTES 1,255,985 → ~1,256,985, the W5 precedent):
+  then LAND Wave 2 — cherry-pick `2f4f7b58` onto the review-fixes tip, bump the ratchet + its
+  documented-reason comment in `tests/build/vendorPdfLazy.test.js`, run the FULL gate (`npm run check`),
+  confirm verify:dist green, commit. Unblocks warding + map-as-legibility too.
+- **(b) FP-2-first (owner's standing ruling):** wait for the parallel FP-2 (`claude/phase55-parking-lot`)
+  to reclaim headroom, THEN land Wave 2 (cherry-pick `2f4f7b58`, it will fit; re-run the full gate).
+- Recommendation: **(b)** — feed-retention only matters at scale (>240-entry feeds), which are the
+  long-run campaigns FP-2 targets. No blocker to the budget-free waves either way.
+
+### 2. BUDGET-FREE WAVES (do any time, no budget needed — LAZY DISPLAY or BYTE-NEUTRAL)
+- **Numeric prices (Wave 7) — HIGHEST remaining value.** A LAZY display read-model (voice-sidecar /
+  M6d pattern, `src/domain/display/`) deriving numeric prices from the M6a/M6d commodity BANDS + stocks,
+  rendered on the economics tab. GENERATION IS SACRED — read `economicState` read-only, never mutate.
+  Needs a price-derivation design (band→number mapping). Byte-safe (rides a lazy chunk).
+- **dramatic_campaign preset review (Wave 4).** Review the preset's depth vs the others
+  (`simulationRules.js` / `simulationProfile.js`); surface findings; apply small fixes. Preset content
+  edits are EAGER — keep fixes tiny or defer eager ones.
+- **Dead wallClockNow pre-stamp collapse (Wave 3, note 2).** Byte-neutral: `propagation.js:292,451`
+  pre-stamp `createdAt: wallClockNow()` then `:689` overwrites with pinned `now`. Collapse to
+  `createdAt: null` at mint + `:689 → item.createdAt = now || wallClockNow()` (preserves the now-less
+  boundary fallback). VERIFIED SAFE: no intermediate `createdAt` read exists (grep-confirmed), goldens
+  byte-identical on the pinned path. LOW value; confirm verify:dist doesn't move (20B headroom).
+
+### 3. FP-2-GATED WAVES (new engine code — EAGER, need §1 resolved first)
+- **Feed retention (Wave 2)** — built, `2f4f7b58`; see §1.
+- **Warding-vs-scrying (Wave 6)** — new engine mechanic on the belief/rumor layer (Wave-A `beliefMap` +
+  3.5 `rumorNetwork`); needs a design pass; will cost eager bytes.
+- **Map-as-legibility (Wave 10)** — heavy eager UI (fronts/embattlement/trade-flow on the realm map).
+  Data is built (M1/M5/M6d/M9); the render is the eager cost.
+
+### 4. OWNER-GATED (GOLDEN REGEN) — batch these together
+- **Population-attractor retune (Wave 5)** — retune the M4 attractor constants from a soak; SHIFTS
+  same-seed goldens → needs an owner-signed UPDATE_GOLDEN regen. **Piggyback the deferred `bornTick`
+  temporal note here** (adding a `bornTick` integer stamp to stressors in `mergeStressorUpsert`
+  [applyWorldPulse.js:425] also shifts stressor-shape goldens — do both in one regen). See
+  `docs/TEMPORAL_AUDIT.md:98,128`.
+
+### 5. BLOCKED / DESIGN-HEAVY (later)
+- **Ruins-as-artifacts** — BLOCKED on M11b calamity (the last mover, UNBUILT). Do M11b first.
+- **Peace treaties (Wave 8)** — new war-layer de-escalation (war + M9 factions + M10 approval); design pass.
+- **Miracles / lived-practice faith (Wave 9)** — big system; SCOPE-BOUNDARY care (deity = alignment not
+  domain; NEVER resolve a named character's fate — "named clergy" needs the aggregate treatment). Design pass.
+
+### 6. RECONCILE before any eager wave / master merge (parallel streams, all off 5ea117ec, UNMERGED)
+- `claude/phase55-parking-lot` (FP-2 + M10b CAP=26 + F24) — the headroom-reclaim path.
+- `usage-telemetry @ 6a8bfade` — the endgame analytics workstream.
+- The **master merge** (the big endgame item) is separate + owner-gated — NOT part of this program.
+
 ## Sources
 - `docs/PHASE55_EXECUTION_PLAYBOOK.md` — §0.0 state ledger, §7.2 the backlog list, PART 7 M11 spec
   (RUINS couples to M11b), §0.2 constitutional laws, §0.3 manager checklist.
