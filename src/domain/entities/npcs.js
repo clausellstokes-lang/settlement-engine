@@ -67,6 +67,8 @@
  * @property {string=} title   legacy field — some generator paths used title, not role
  */
 
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+
 const IMPORTANCE_WEIGHT = {
   minor:   0.0,  // suppresses propagation entirely
   notable: 0.4,
@@ -292,11 +294,7 @@ const QUALITY = {
  * @returns {string}
  */
 function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 32) || 'npc';
+  return kernelSlugify(s, { sep: '_', max: 32, fallback: 'npc' });
 }
 
 // Deterministic short hash (djb2). createNpc runs inside the pure, seeded event

@@ -24,8 +24,14 @@
  * threshold comparison.
  */
 
-/** @param {number} v @returns {number} */
-export const clamp01 = (v) => Math.max(0, Math.min(1, Number.isFinite(v) ? v : 0));
+// clamp01 is the kernel primitive (code-quality-4). The former local one-liner is
+// byte-identical to it over every input (parity-proven,
+// tests/kernel/clampPrimitive.parity.test.js). Imported for this module's own
+// callers + re-exported for the six worldPulse contest modules that import it here.
+// (kernel/math.js is the shared determinism-primitive layer — not src/generators,
+// so the region-must-not-import-prng law is preserved.)
+import { clamp01 } from '../../kernel/math.js';
+export { clamp01 };
 
 /**
  * Deterministic 0..1 hash keyed on identity text (FNV-1a + fmix32 avalanche).

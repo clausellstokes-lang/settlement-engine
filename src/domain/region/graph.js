@@ -7,6 +7,7 @@
  * - regionalGraph records campaign-canon causal channels between settlements
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.js';
 import {
   canonicalEdgeForLink,
@@ -244,10 +245,6 @@ export function normalizeChannel(channel, now = null) {
 }
 
 /** @param {unknown} value */
-function clamp01(value) {
-  const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /** @param {any[]} [items] */
 function dedupeById(items) {

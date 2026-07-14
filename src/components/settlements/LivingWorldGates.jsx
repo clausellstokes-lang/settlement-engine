@@ -36,7 +36,9 @@
  */
 import { useId, useMemo, useState } from 'react';
 import { useStore } from '../../store/index.js';
-import { normalizeSimulationRules } from '../../domain/worldPulse/index.js';
+// code-quality-6: import the leaf, not the 22-module worldPulse barrel — a static
+// barrel import would drag the whole pulse engine into this component's chunk.
+import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRules.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import Button from '../primitives/Button.jsx';
 import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, R, SP } from '../theme.js';

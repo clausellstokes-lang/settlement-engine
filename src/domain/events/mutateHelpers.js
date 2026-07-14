@@ -3,10 +3,14 @@
  * id/label utilities used across the event-mutation handlers
  * (mutateEntities.js, mutateWorld.js) and the mutate.js router.
  *
- * Pure leaf: imports nothing, so both handler groups can depend on it without
- * an import cycle. Extracted verbatim from mutate.js as part of the
- * god-module split — every function body is byte-identical to its pre-split form.
+ * Pure leaf: imports only the kernel slugify primitive, so both handler groups
+ * can depend on it without an import cycle. Extracted verbatim from mutate.js as
+ * part of the god-module split — every function body is byte-identical to its
+ * pre-split form (slugify now delegates to the shared kernel primitive, proven
+ * byte-identical in tests/kernel/slugify.parity.test.js).
  */
+
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
 
 // Schemaless open objects at this layer (see mutateEntities.js).
 /** @typedef {any} MutSettlement */
@@ -128,10 +132,7 @@ function labelFromTarget(targetId) {
  * @param {MutEntity} s
  */
 function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
+  return kernelSlugify(s, { sep: '_' });
 }
 
 export {

@@ -1,4 +1,5 @@
 import { factionIdFromName } from '../../lib/entities.js';
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
 
 /**
  * @typedef {{ id?: string, refId?: string, name?: string, label?: string, faction?: string, [key: string]: unknown }} EntityLike
@@ -28,12 +29,7 @@ const KIND_PREFIX = Object.freeze({
 
 /** @param {unknown} value @returns {string} */
 export function slugifyEntity(value) {
-  return String(value || 'unknown')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80) || 'unknown';
+  return kernelSlugify(value, { sep: '-', max: 80, fallback: 'unknown', empty: 'unknown' });
 }
 
 /** @param {string} kind @param {EntityLike | null | undefined} entity @param {string} [fallback] @returns {string} */

@@ -179,7 +179,8 @@ export function useRealmInspector({
     // braces guard for a click that lands mid-tick.
     if (rulesEditBlocked) { showToast('info', 'The realm is advancing. Give it a moment, then apply the preset.'); return; }
     try {
-      const { SIMULATION_RULE_PRESETS } = await import('../domain/worldPulse/index.js');
+      // code-quality-6: dynamic-import the leaf, not the 22-module worldPulse barrel.
+      const { SIMULATION_RULE_PRESETS } = await import('../domain/worldPulse/simulationRules.js');
       const preset = SIMULATION_RULE_PRESETS[presetId];
       if (!preset) return;
       await updateCampaignSimulationRules(activeCampaignId, preset.rules);

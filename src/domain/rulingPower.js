@@ -35,6 +35,7 @@
  * machines and would break replay).
  */
 
+import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 
 const A = FACTION_ARCHETYPES;
@@ -82,10 +83,6 @@ const A = FACTION_ARCHETYPES;
  */
 
 /** @param {number} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /**
  * @param {unknown} value

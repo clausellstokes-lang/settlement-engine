@@ -27,6 +27,7 @@
  * Deterministic: everything reads the world snapshot; no RNG, no Date.
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
@@ -34,10 +35,6 @@ import { coupContenders } from '../rulingPower.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
-function clamp01(/** @type {any} */ value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 // ── Institution classes ──────────────────────────────────────────────────
 // Same name-regex idiom the capacity model uses; counts are normalized at

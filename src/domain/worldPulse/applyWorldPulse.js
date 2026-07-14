@@ -1,3 +1,4 @@
+import { clamp01 } from '../../kernel/math.js';
 import { withActiveCondition } from '../activeConditions.js';
 import {
   advanceRegionalImpacts,
@@ -37,10 +38,6 @@ function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
 }
 
-function clamp01(/** @type {any} */ value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 // ── Feed curation ────────────────────────────────────────────────────────────
 // The feed is what the DM reads and what the paid chronicle grounds on; the

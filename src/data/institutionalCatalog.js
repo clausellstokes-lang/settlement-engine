@@ -1,5 +1,7 @@
 // institutionalCatalog.js — normalized: all constants expanded to plain strings
 
+import { slugify as kernelSlugify } from '../kernel/slugify.js';
+
 export const institutionalCatalog = {
   thorp: {
     Government: {
@@ -2360,10 +2362,7 @@ const INSTITUTION_CATALOG = institutionalCatalog;
 
 /** Deterministic slug of a canonical institution name. */
 export function slugifyInstitutionName(name) {
-  return String(name)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
+  return kernelSlugify(name, { sep: '_', raw: true });
 }
 
 // normalized name → id. Collision-checked at module load: two DIFFERENT

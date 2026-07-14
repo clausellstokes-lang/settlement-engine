@@ -22,6 +22,7 @@
  */
 
 import { institutionalCatalog } from '../data/institutionalCatalog.js';
+import { slugify as kernelSlugify } from '../kernel/slugify.js';
 import { INSTITUTION_SERVICES } from '../data/institutionServices.js';
 import { RESOURCE_DATA, SPECIAL_RESOURCES } from '../data/resourceData.js';
 import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGoodsData.js';
@@ -63,11 +64,7 @@ export const CUSTOM_SLICE_KEY_FOR = {
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 export function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
+  return kernelSlugify(s, { sep: '_' });
 }
 
 export function prebuiltRefId(category, name) {

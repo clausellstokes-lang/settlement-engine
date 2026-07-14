@@ -478,6 +478,46 @@ export default [
     },
   },
 
+  // ── code-quality-7 — domain size ratchet (max-lines) ─────────────────────────
+  // The domain layer is the highest-judgment code in the tree (the tick kernel,
+  // the war layer, the causal graph) and was the only major layer without a size
+  // ratchet — so a mis-read costs the most exactly where nothing guarded growth
+  // (M9–M11 all landed here). This mirrors the F31 generator ratchet. Every
+  // current offender is grandfathered by the explicit override below — a
+  // shrink-only burn-down worklist, not a licence: decompose one below 800 and
+  // DELETE its override (same doctrine as every baseline in this file). Ceiling
+  // matches generators (800) to exert real pressure. Independently tracked
+  // follow-up: warDeployment.evaluateWarLayer (~930-line function) decomposes
+  // along its own step comments — behaviour-preserving, goldens byte-identical
+  // (deferred; not part of this ratchet). A NEW domain file that grows past 800
+  // EFFECTIVE lines (skipBlankLines + skipComments) fails the gate.
+  // @enforced-by max-lines (this rule)
+  {
+    files: ['src/domain/**/*.js'],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  // Grandfathered domain offenders — the six files above the 800 EFFECTIVE-line
+  // ceiling TODAY (skipBlankLines + skipComments, measured by this very rule; raw
+  // wc -l runs much higher because these files are comment-dense). Shrink-only:
+  // decompose one below 800 and DELETE its entry. The list is derived from eslint
+  // itself, not raw line counts — several raw->800 files (settlement.schema,
+  // causalState, capacityModel) sit UNDER 800 effective and are deliberately absent.
+  {
+    files: [
+      'src/domain/display/causeConjunctionRoleContent.js', // 3890 eff
+      'src/domain/worldPulse/pulseKernel.js',              // 1092 eff
+      'src/domain/worldPulse/warDeployment.js',            // 1077 eff
+      'src/domain/worldPulse/stressors.js',                //  860 eff
+      'src/domain/explanation.js',                         //  827 eff
+      'src/domain/worldPulse/npcAgency.js',                //  824 eff
+    ],
+    rules: {
+      'max-lines': 'off', // grandfathered — shrink-only burn-down worklist
+    },
+  },
+
   // ── A+ P1.3 — forked design-token const guard (components) ──────────────────
   // no-raw-color only inspects JSX style props; this catches `const X = '#hex'`
   // re-declarations of token values. 43 files are grandfathered in

@@ -28,6 +28,8 @@
 
 import { EVENT_REGISTRY, RERUN_KEYS_FOR_EVENT } from './registry.js';
 import { mutateSettlement } from './mutate.js';
+import { slugify } from './mutateHelpers.js'; // code-quality-5: the byte-identical copy, now merged
+
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { clamp01, bandFor } from '../state/bands.js';
@@ -464,10 +466,3 @@ function labelFromTarget(targetId) {
   return /** @type {string} */ (tail).replace(/_/g, ' ');
 }
 
-/** @param {unknown} s @returns {string} */
-function slugify(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '');
-}

@@ -2,9 +2,11 @@
  * domain/pipelineRail.js — Structured payload for the rail's
  * step-expansion view.
  *
- * Tier 5.5 of the roadmap. The PipelineRail UI already exists; this
- * module produces the structured payload it consumes when the user
- * taps a step open. Composes Phase 7 traces + Phase 19 explainEntity.
+ * Tier 5.5 of the roadmap. STATUS (code-quality-3): a BUILT but UNCONSUMED
+ * read-model. components/PipelineRail.jsx exists, but it does NOT import this
+ * module (zero src consumers — see docs/DEAD_CODE_DISPOSITION.md). It was designed
+ * to produce the structured payload a "tap a step open" view WOULD consume.
+ * Composes Phase 7 traces + Phase 19 explainEntity.
  *
  *   expandPipelineStep(settlement, stepName) -> {
  *     step,

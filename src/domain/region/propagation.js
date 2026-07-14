@@ -7,6 +7,7 @@
  * unbounded simulation.
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { deriveLocalDelta } from './deriveRegionalState.js';
 import {
   activeChannelsFrom,
@@ -138,10 +139,6 @@ const REGIONAL_RULE_TYPES = new Set([
  * @param {unknown} value
  * @returns {number}
  */
-function clamp01(value) {
-  const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /**
  * @param {unknown} value

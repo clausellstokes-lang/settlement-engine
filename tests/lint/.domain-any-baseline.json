@@ -1,6 +1,6 @@
 {
-  "total": 2252,
-  "totalAny": 2213,
+  "total": 2248,
+  "totalAny": 2209,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -292,7 +292,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/applyWorldPulse.js": {
-      "any": 69,
+      "any": 68,
       "suppress": 0
     },
     "src/domain/worldPulse/attrition.js": {
@@ -360,11 +360,11 @@
       "suppress": 0
     },
     "src/domain/worldPulse/foodStockpile.js": {
-      "any": 16,
+      "any": 15,
       "suppress": 0
     },
     "src/domain/worldPulse/institutionLifecycle.js": {
-      "any": 81,
+      "any": 80,
       "suppress": 0
     },
     "src/domain/worldPulse/militaryStrength.js": {
@@ -500,7 +500,7 @@
       "suppress": 0
     },
     "src/domain/worldPulse/stressorDynamics.js": {
-      "any": 61,
+      "any": 60,
       "suppress": 0
     },
     "src/domain/worldPulse/stressorGates.js": {
