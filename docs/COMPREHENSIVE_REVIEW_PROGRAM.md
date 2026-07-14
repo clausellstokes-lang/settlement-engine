@@ -21,6 +21,14 @@ ledger — never from a session digest.
 >   assessment + full findings register committed as docs/COMPREHENSIVE_REVIEW_2026-07-13.md.
 >   Phase V DISPATCHED: Opus verifiers — 2 independent lenses per high finding, 1 per medium;
 >   79 lows deferred to implementation-time verification (recorded deferral, not dropped).
+> - 2026-07-13 late eve: SURVEY COMPLETE 28/28 (round-2: +71 findings → cumulative 271, 0C/57H/
+>   121M/101L; security A+; counterpart matrix confirms synthesis; new: entity-ref half-merge,
+>   dramatic_campaign zero-drama, display token leaks). Banked @ b4954688. Round-2 verification
+>   dispatched (21 new non-dup code findings; doc-drift findings manager-verified instead).
+>   **W-DOCS-1 SHIPPED @ f8e5f6e7** (succession-ledger repair: M11a/M11b rows, stale budget/NEXT/
+>   foreign-WIP notes, W5+W2 double-allocation flagged) — first fix wave of the program, closes
+>   register ids docs-knowledge-1/3/4/5, build-tooling-docs-1/2, spatial-engine-7,
+>   sim-logic-counterparts-11. Both Phase-V workflows in flight.
 
 ## The owner's directive (2026-07-13, verbatim intent)
 1. Fable 5 does the survey + dimensions survey: read/review/analyze the ENTIRE codebase; deliver
@@ -54,9 +62,94 @@ behavior, budget raises, golden regens.
       `docs/COMPREHENSIVE_REVIEW_2026-07-13.md` (holistic assessment + 208-finding register).
 - [ ] **Phase V — VERIFY** (Opus, `model:'opus'` on every agent): adversarial verification of every
       actionable finding (refuters; majority vote on majors). Verdicts appended to the review doc.
-- [ ] **Phase P — WAVE PLAN** (Fable architect): confirmed findings → fix waves (small, independently
-      committable, highest-value first — so a window cut loses at most the in-flight wave). Wave
-      table appended to the review doc with fences + gates.
+- [x] **Phase P — WAVE PLAN** (Fable architect, 2026-07-14). TWO TRACKS, forced by the verified
+      blast radii (50 confirmed fixes legitimately shift same-seed goldens):
+
+      **TRACK N — no golden shift; lands directly on review-fixes-2026-07-08; full gate + byte-identical
+      goldens per wave:**
+      - **F1 LIFECYCLE-TRUST** (first — the paying DM's state integrity): store-1/state-lifecycle-1
+        (persist the M10b cursor after advance), worldpulse-core-1 (pause-window mutation guards +
+        panel gating), store-2 (advance guards for queueSettlementEvent/regional), state-lifecycle-2
+        (revertToSnapshot re-derives systemState + persists campaignState), state-lifecycle-3 +
+        store-5 + components-dossier-5 (ONE resetSettlementIdentity chokepoint), state-lifecycle-4
+        (regenSection persists + respects locks), store-6 (persist version/migrate), store-3
+        (requestDailyLife sync-prefix), store-4 (gallery cultDeitySnapshots strip). Fence: store/**
+        + guard-reads. New pins: persisted-surface round-trips (the class the in-memory tests miss).
+      - **F2 CLIENT-SEAM INTENT** (user intent never silently drops; client-only): components-dossier-1
+        (MapOverlay prop contract), components-commerce-2 (shareMap sends all 12 params), lib-infra-1
+        (exportThumb — implement or fail-visible), components-commerce-5 (BuyThisDossier signed-in rung).
+      - **F3 SURFACES/LEGIBILITY** (lazy display, byte-inert — the engine reaches the eye):
+        content-immersion-1 (rumor what-token vocabulary + register-guard pin), content-immersion-2
+        (crier: pestilence/calamity/migration categories), content-immersion-5 (news-card diegetic
+        register), domain-readmodels-1/2/3 (chronicle id poisoning, publicSafe note fix, pillar
+        leadership), domain-readmodels-4 (pestilence read-model sibling), experience-product-fit-1
+        (catch-up trigger widened to every campaign-open path + while-you-were-away digest),
+        experience-product-fit-2 (belief UI: the divergence band on the war/status read, DM-gated),
+        experience-product-fit-3 (mount RegionWakeReplay), components-dossier-2 (World-Laws dialog
+        truth), components-dossier-4 (catch-up visibility + failure surface), components-dossier-7/8
+        (advancing indicator; causal-diff supplier), pdf-1-narrowed (rumors/beliefs/flow-drift into
+        campaign_state variant via the whitelist seam + parity-audit lane), pdf-2/3/4/5, lib-infra-7
+        (campaign PDF live-world), spatial legibility trio (calamity stamps, umbilical fog note,
+        temple pulse) via the newsVoice/inspector pattern.
+      - **F4 COMMERCE-TRUST**: derived tier-facts module + the OWNER-RULED $2.99 gate flip (free =
+        per-dossier entitlement via the existing single-dossier ladder; premium unlimited) + all six
+        surfaces aligned (components-commerce-1/3), backend-1 (anon checkout rate limiter, the
+        house fail-closed pattern), backend-3 (pg_temp pin restore + migration-lint walker),
+        code-quality-1 (entity-ref: port master's renderer trio 6d95adc7 + producer⇒consumer
+        contract test). OWNER-ASK: founder cap truth (30 vs 500) before the FounderTile fix.
+      - **F5 PERF YEAR-TWO** (pending straggler verdicts): freeze+share conditional ledgers (kill the
+        11×/tick digest deep-clone), queuedImpacts prune, digest identity stability (restore
+        distanceRead memos), catch-up through the interval orchestrator (one commit, not 26),
+        pulseRecord rollExplanations cap, applyWorldPulse serialization diet, tick-cost trend gate.
+      - **F6 GATE-HONESTY**: VERIFY_DIST hard-fail (port the master-lineage guard), self-minting
+        golden fix, pglite existence asserts, check-domain-strict sentinel, workers purity lint,
+        pipeline.property house timeout, M10b living-mode + WorldPulsePanel trigger tests,
+        cross-family mover-composition smoke, sf-bridge test harness, config-seam contract walker,
+        metronome-cooldown lint, stress-type registration manifest.
+      - **F7 CODE-HEALTH**: kernel clamp01 primitive + adoption (byte-proof per module), slugify
+        unification behind identity-preserving tests, curated barrels, domain size ratchet
+        (grandfathered), dead-code removal (OWNER-ASK: deletion list), orphan read-model
+        disposition (mount-or-delete list to owner).
+
+      **TRACK G — golden-shifting; implemented on child branch `claude/review-fix-golden-track` off
+      review-fixes; ONE batched owner-signed UPDATE_GOLDEN regen at the end, then merge:**
+      - **G1 THE WORLD OBEYS ITS OWN DECISIONS** (the substance crown): worldpulse-war-2 (faction
+        proposals apply for real), war-3 (sue-for-peace grips the physical war — one peace ends both
+        representations), war-4 (recall executes + de-dup), war-5 (M9a levers act), war-6 (pacific
+        reactions get payloads), war-8 (defenders bank wins), war-9 (occupation constrains the
+        occupied), war-1 (posture≠engagement rust fix), war-7 (deployment lifecycle on removed
+        settlements), spatial-engine-3 (retreat lives), spatial-engine-4 (umbilical read),
+        spatial-engine-2 (plague couplings per the M11a SPEC: army hazard/contraction/vector, route
+        hazard, trade refusal, temple pulse), spatial-engine-5/6, worldpulse-core-2 (remove_npc real
+        via the ouster path), worldpulse-core-3/4/6, religion-trade-1 (+peacelike key) /2/3/4/5/8,
+        domain-events-region-1 (DM relationship events reach the conflict layer via the existing
+        party-impact kinds), -2 (REMOVED_THREAT suppression record), -3 (PLAGUE mints its twin),
+        -4/-5/-6/-9, region recovery propagation (-7).
+      - **G2 GENERATION COHERENCE**: generators-pipeline-1/2/3/6/7 (byte-proof first — corpus may
+        not exercise the broken paths; any that prove byte-identical fold back to Track N),
+        generators-domain-1..7 (stress-type integration, placeholder NPC dedup, section-regen
+        enrichment, dual food model, magic-agri sentinel, timeline variety, faction category),
+        domain-top-1 (role-assign preserves the sheet), domain-top-3 (institution→faction links),
+        data-tables-1/2/3/5/6 (id-first joins for services/terrain/chains + naming decontamination
+        [content-immersion-4] + catalog batch-run corrections), pdf-6.
+      - **G3 SUBSTANCE COUNTERPARTS (spec-first, OWNER-ASK before build):** relationship-driven
+        material flows — relief caravans (M2 shipment + relationship-gated dispatch, no toll), ally
+        credit (bounded prosperity transfer on the conquestProsperity fold), trade-as-diplomacy;
+        upswing drama arcs (reconstruction boom after calamity clear). New capability, not repair —
+        needs the owner nod; peace-with-terms stays Wave-8 backlog with a design note.
+
+      **THE OWNER-ASK BATCH** (one message when Track G is implemented + evidenced): (1) UPDATE_GOLDEN
+      sign-off with the per-fix shift evidence; (2) preset lights — disastersEnabled (+20B, fits),
+      dramatic_campaign depth, commodityFlow posture, infoMode defaults; (3) founder cap truth 30 vs
+      500; (4) G3 new-capability nod; (5) political-autonomy ruling (post-apply movers under dm_only);
+      (6) dead-code deletion list; (7) lifecycle-email activation.
+
+      Sequencing: F1 → F2+F3 (disjoint fences, parallel implementers) → F4 → F6 → F5 → F7 on the main
+      branch, with G1/G2 building concurrently on the child branch once F-waves are underway. Every
+      wave: Opus implementers (model:'opus'), fenced, work left unstaged → Fable §0.3 review (independent
+      gate re-run, sensitive-diff reads, constitution check) → exact-stage commit → ledger row +
+      Progress line. Full gate per wave; goldens byte-identical on Track N; Track G proves its shifts
+      are exactly the intended semantic changes (before/after diff of the shifted fixture fields).
 - [ ] **Phase F — FIX WAVES** (Opus implement → Fable §0.3 manager check → exact-stage commit →
       ledger row in playbook §0.0 + Progress line here). One wave per commit. Full gate per wave
       (`npm run check`); constitutional spot-checks (goldens byte-identical, any-cast 2252,
