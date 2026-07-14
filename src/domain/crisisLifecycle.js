@@ -40,7 +40,10 @@
 import { deepClone } from './clone.js';
 import { withActiveCondition, withEventConditionsSynced } from './activeConditions.js';
 import { archetypeForStressor, promoteStressorsToConditions } from './conditionPromotion.js';
-import { STRESSOR_CATALOG, normalizeStressor } from './worldPulse/stressors.js';
+// First-paint leaf: crisisLifecycle rides the SYNC store event path (eager), so
+// it must import the light stressor surface, not the heavy stressors.js (which
+// drags stressorDynamics/stressorGates into first paint). See stressorsCore.js.
+import { STRESSOR_CATALOG, normalizeStressor } from './worldPulse/stressorsCore.js';
 import { GEN_TO_PULSE_TYPE, pulseTypeForStressorKey } from './stressorPicker.js';
 
 /** @typedef {import('./types.js').Event} Event */

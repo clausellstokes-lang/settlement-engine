@@ -43,7 +43,7 @@ import {
 import {
   normalizeStressor,
   resolveStressorById,
-} from '../domain/worldPulse/stressors.js';
+} from '../domain/worldPulse/stressorsCore.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { withoutActiveCondition } from '../domain/activeConditions.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';

@@ -20,7 +20,9 @@
  */
 
 import { STRESS_TYPE_MAP } from '../data/stressTypes.js';
-import { STRESSOR_CATALOG } from './worldPulse/stressors.js';
+// First-paint leaf: stressorPicker is eager (sync store event path) — import the
+// light stressor surface so the heavy stressors machinery stays lazy.
+import { STRESSOR_CATALOG } from './worldPulse/stressorsCore.js';
 import { canonStressors } from './canonicalAccessors.js';
 import { byNameCodepoint } from './deterministicSort.js';
 

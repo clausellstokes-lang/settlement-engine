@@ -26,7 +26,7 @@ import {
 import {
   normalizeStressor,
   resolveStressorById,
-} from '../domain/worldPulse/stressors.js';
+} from '../domain/worldPulse/stressorsCore.js';
 import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
 import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';

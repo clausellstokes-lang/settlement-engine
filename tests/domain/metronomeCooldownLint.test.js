@@ -69,11 +69,15 @@ const COMPLIANT_BASELINE = [
 // forces partySourced to ALWAYS emit BY DESIGN, never suppressed), transition-gated
 // (populationDynamics, settlementStrategy), or registry/helper/data (candidateEvents,
 // pulseHelpers, stressors, flows). Grandfathered pending audit; a NEW name here reds.
+// stressorsCore.js is NOT a new emitter: it is the first-paint leaf split out of
+// stressors.js (golden first-paint reclaim, 2026-07-14) and carries the RELOCATED
+// residualOutcome builder verbatim — the same grandfathered registry/helper code,
+// now in two files. Audit them together.
 const NONCOMPLIANT_BASELINE = [
   'candidateEvents.js', 'coup.js', 'deploymentReturn.js', 'flows.js',
   'mobilizationEffects.js', 'mobilizationReactions.js', 'occupation.js',
   'partyImpact.js', 'populationDynamics.js', 'pulseHelpers.js',
-  'settlementStrategy.js', 'stressors.js', 'warDeployment.js',
+  'settlementStrategy.js', 'stressors.js', 'stressorsCore.js', 'warDeployment.js',
 ];
 
 describe('metronome-cooldown lint — condition-bearing outcome sources self-limit', () => {
