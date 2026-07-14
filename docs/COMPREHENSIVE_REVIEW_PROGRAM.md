@@ -256,6 +256,18 @@ a FIXTURE wall-clock stamp — product path proven clean).
 > sign-off → regen → merge; preset lights; the catch-up fork; vetoes; dockets). After the merge:
 > regen the edge bundle (build:edge-shared), then the master sequence resumes (W5/W2/telemetry →
 > expansions).
+>
+> **OWNER BATCH EXECUTED (2026-07-14, owner-authorized in chat):** ✅ W5 reconciled cherry-pick ·
+> ✅ W2 re-dispatch (feed retention, injection-echo incident survived) · ✅ docket migrations 130+131
+> WRITTEN (deploy stays the owner's `db push`) · ✅ PRESETS LIT per ruling (28c9482a-family; two pins
+> updated) · ✅ THE ONE REGEN: all six surfaces, generator manifest 187/187 — exactly the shift map's
+> prediction · ✅ GOLDEN MERGED HOME @ 6d3e5ca2 · ✅ FP-G1 reclaim (the merge-gate red proven
+> pre-existing G-track dist debt; stressorsCore leaf split −51,655B → closure 1,216,273) ·
+> ✅ **UNIFIED FINAL GATE: 8,785/8,785 (792 files) + verify:dist 109/109, exit 0** ·
+> ✅ BUDGET RATCHET-DOWN 1,255,985 → 1,216,350 @ d33c8ff8 (§0.2-5 monotone; history in the const).
+> REMAINING FROM THE BATCH: catch-up collapse wave (Opus dispatched, in flight) · dead-code
+> deletion wave (per DEAD_CODE_DISPOSITION.md ruling) · then the master sequence (A-wave telemetry
+> merge → numeric prices → Track K → E0/E1 → Surveyor).
 QUEUED AFTER: Lane-2 store ripple (G1d stop-report) · F5 perf · F6 gate-honesty · F7 code-health ·
 then the G-track merge decision + owner batch. Deferral ledger grows in the wave rows (publicSafe
 note, bornTick, M11a autonomy, stance-half, belief truthOf divergence join).
