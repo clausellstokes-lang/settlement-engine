@@ -68,8 +68,8 @@ describe('CL-0 (f) — presetIdForRules back-derives all named presets + custom'
     });
   }
 
-  test('a legacy campaign with dramatic_campaign rules (no profile keys) keeps its id', () => {
-    // What a pre-CL0 save actually stored: legacy keys only, flag off.
+  test('a legacy dramatic_campaign light-shape save now re-infers as custom (accepted preset-lighting drift)', () => {
+    // What a pre-CL0 save actually stored: legacy keys only, war/faith/seasons flags off.
     const legacyDramatic = {
       presetId: 'dramatic_campaign',
       propagationMode: 'full',
@@ -77,7 +77,13 @@ describe('CL-0 (f) — presetIdForRules back-derives all named presets + custom'
       majorChangesRequireProposal: false,
       migrationMode: 'distributed',
     };
-    expect(normalizeSimulationRules(legacyDramatic).presetId).toBe('dramatic_campaign');
+    // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED) lit dramatic_campaign
+    // with the real drama set (war/faith/seasons/disasters). Its structural signature grew,
+    // so a legacy LIGHT-shaped save no longer matches it and re-infers as 'custom'. This is
+    // the ACCEPTED display-only rulesMatchPreset drift: the stored rules run identically; only
+    // the preset LABEL shown changes. The other untouched legacy presets still round-trip
+    // (see the '${id} round-trips to itself' loop above, incl. realistic_regional / quiet_local).
+    expect(normalizeSimulationRules(legacyDramatic).presetId).toBe('custom');
   });
 
   test('custom detection still fires across the grown catalog', () => {
