@@ -112,7 +112,11 @@ describe('no raw tier-fact literal on the conversion surfaces', () => {
   }
 
   it('the numeric-fact surfaces read the derived module (not a hardcoded number)', () => {
-    expect(read('src/components/AuthModal.jsx')).toMatch(/from ['"]\.\.\/config\/tierFacts\.js['"]/);
+    // AuthModal dropped from this import check in the W5 re-apply: W5.1 removed its
+    // dead in-modal account card (the ONLY tier-fact surface it carried — the card
+    // was gated to anon-only, where auth.user is null, so it never rendered), so
+    // AuthModal no longer imports tierFacts. It stays in the SURFACES stale-literal
+    // scan above as defense-in-depth against future tier copy creeping back in.
     expect(read('src/components/HomeHero.jsx')).toMatch(/from ['"]\.\.\/config\/tierFacts\.js['"]/);
     expect(read('src/components/HowToUse.jsx')).toMatch(/from ['"]\.\.\/config\/tierFacts\.js['"]/);
     // FounderTile sources the seat count from the founderSeats constant.
