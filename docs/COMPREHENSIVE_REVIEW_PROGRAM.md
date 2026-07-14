@@ -196,6 +196,17 @@ owner: golden sign-off (if Track G is evidenced by then), preset lights, autonom
 deletion list, emails, deploy, CSP flip. Session-window cuts are expected (~5-hour cadence);
 recovery = the resume protocol above; every wave banks before the next dispatches.
 
+## IN-FLIGHT (overnight 2026-07-14, ~01:50 — for a successor finding unstaged work)
+- MAIN TREE: F1 lifecycle-trust COMPLETE + manager-reviewed (9 fixes, 24 pins, suite 8,372 green,
+  goldens byte-identical) but HELD at the first-paint ratchet (+805B over budget — the persist
+  merge + guards are legitimately eager). F1-trim agent is applying the §0.8-1 M10b catch-up
+  lazification (~800B reclaim) on top; commit F1+trim together once verify:dist is green.
+  F1's unstaged files are the 21 listed in its report (store/** + WorldPulsePanel + tests).
+- GOLDEN WORKTREE (/Users/cstokes/Desktop/settlement-engine-golden @ claude/review-fix-golden-track):
+  G1a war-execution COMPLETE (5 fixes, 16 pins, 4,685-test sweep green, ZERO goldens shifted —
+  shift ledger documents why) but any-cast 2252→2283; typing-pass follow-up running to burn +31
+  to 0 (re-baseline is owner-gated, not taken). Commit G1a there once count = 2252.
+
 ## THE MASTER SEQUENCE (consolidated 2026-07-14 — fixes → owed work → expansions → endgame)
 RUNNING: F1 (main tree) + G1a (golden worktree). THEN: F2→F3→F4→F5 (delivers the §0.8-1 M10b
 trim)→F6→F7 on review-fixes; G1b→G1c→G2→shift-ledger→OWNER GOLDEN SIGN-OFF→regen→merge on the
