@@ -60,10 +60,11 @@ export function resolveExportAccess({ tier, canExportFreely, saveId, entitled })
  * @param {object} props.settlement                    — the in-memory or saved settlement.
  * @param {string|null} [props.saveId]                 — the SAVED settlement id, or null for a draft.
  * @param {() => void} [props.onSignIn]                — open the auth flow (ladder "create account").
+ * @param {() => void} [props.onSaveFirst]            — save the unsaved draft (the "save first" rung); falls back to the canonical save chokepoint when omitted.
  * @param {(view: string) => void} [props.onNavigate] — app navigation (ladder "Cartographer").
  * @param {string} [props.size]                        — Button size token.
  */
-export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onNavigate, size = 'sm' }) {
+export default function BuyThisDossier({ settlement, saveId = null, onSignIn, onSaveFirst, onNavigate, size = 'sm' }) {
   const tier = useStore(s => s.auth?.tier);
   const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
     || (typeof s.canExport === 'function' && s.canExport()));
@@ -114,6 +115,35 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
       setError(e.message || t('dossierExport.buySaved.error'));
       setBusy(false);
       setLadderOpen(false);
+    }
+  }
+
+  // ── The "save it first" action (signed-in, unsaved draft) ───────────────────
+  // The honest CTA is "save this settlement" — so it MUST trigger the save flow,
+  // never the sign-in route (which, for an already-signed-in user, bounces to
+  // /create and the save never happens: finding components-commerce-5). Prefer a
+  // caller-supplied save handler; otherwise persist through the same chokepoint
+  // SaveToLibraryButton uses (savesService.save + the F34 save moments), so the
+  // rung saves even when a caller doesn't wire onSaveFirst.
+  async function runSaveFirst() {
+    if (typeof onSaveFirst === 'function') { onSaveFirst(); return; }
+    setBusy(true); setError(null);
+    try {
+      const { saves: savesService } = await import('../lib/saves.js');
+      const newSaveId = await savesService.save({
+        name: settlement.name || 'Untitled Settlement',
+        tier: settlement.tier || 'unknown',
+        settlement,
+        config: settlement._config || null,
+      });
+      import('../store/saveMoments.js')
+        .then(({ recordSaveMomentForActiveSave }) =>
+          recordSaveMomentForActiveSave({ saveId: newSaveId, settlement, store: useStore }))
+        .catch(() => { /* never block the save */ });
+    } catch (e) {
+      setError(e.message || t('dossierExport.saveFirst.error'));
+    } finally {
+      setBusy(false);
     }
   }
 
@@ -171,7 +201,8 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           variant="secondary"
           size={size}
           icon={<Save size={12} />}
-          onClick={goSignIn}
+          busy={busy}
+          onClick={runSaveFirst}
           style={{ minHeight: 44 }}
           title={canSave
             ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
@@ -184,6 +215,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
             ? t('dossierExport.saveFirst.subline', { price: SINGLE_DOSSIER.priceLabel })
             : t('dossierExport.saveFirst.atCap')}
         </span>
+        {error && <span style={errStyle}>{error}</span>}
       </div>
     );
   }

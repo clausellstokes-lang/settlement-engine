@@ -141,18 +141,76 @@ export async function updateGalleryMetadata(settlementId, metadata = {}) {
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-/** Publish a campaign's map to the gallery. kind: 'map' (blank canvas) | 'map_with_campaign'. */
-export async function shareMap(campaignId, { kind = 'map', description = '', tags = null } = {}) {
+/**
+ * Build the publish_map RPC param bag (migration 089) from the MapShareEditor's
+ * buildShareOpts keys. First-publish (shareMap) MUST write the SAME sanitized
+ * values the edit-after-publish path (galleryMapMetadataPatch → updateMapGalleryMetadata)
+ * writes, or a freshly published map diverges from the same map re-saved: before
+ * this, shareMap forwarded only kind/description/tags, so the living-world reveal,
+ * cover image + alt, importable flag, realm-arc summary and facets all silently
+ * dropped on the FIRST publish (finding components-commerce-2). Every text field is
+ * sanitized/bounded here to match the edit path; the world snapshot + sections
+ * additionally pass the server-side forbidden-key scan (089), the real privacy
+ * boundary. Exported so the client↔RPC param-parity contract test can pin these
+ * keys against the migration's function signature.
+ *
+ * @param {{
+ *   kind?: string, description?: string, tags?: string[]|string,
+ *   importable?: boolean, imageUrl?: string, imageAlt?: string, shareWorld?: boolean,
+ *   worldSections?: string[], worldSnapshot?: object|null, realmArcSummary?: string,
+ *   facets?: object|null,
+ * }} [opts]
+ * @returns {Object} the publish_map RPC params (p_* keys; target_id is added by shareMap)
+ */
+export function publishMapParams({
+  kind = 'map', description = '', tags = null,
+  importable, imageUrl, imageAlt, shareWorld,
+  worldSections, worldSnapshot, realmArcSummary, facets,
+} = {}) {
+  const cleanDescription = sanitizeGalleryHtml(String(description || '').slice(0, 8000)).trim().slice(0, 4000);
+  const rawImageUrl = String(imageUrl || '').trim().slice(0, 1000);
+  const cleanAlt = String(imageAlt || '').trim().slice(0, 220);
+  const cleanSummary = realmArcSummary === undefined
+    ? null
+    : (sanitizeRealmArcSummary(String(realmArcSummary || '')) || null);
+  const cleanSections = worldSections === undefined
+    ? null
+    : [...new Set(
+        (Array.isArray(worldSections) ? worldSections : [])
+          .map(key => String(key || '').trim())
+          .filter(key => WORLD_SECTION_KEYS.includes(key)),
+      )];
+  const snapOk = worldSnapshot && typeof worldSnapshot === 'object' && !Array.isArray(worldSnapshot);
+  const facetsOk = facets && typeof facets === 'object' && !Array.isArray(facets);
+  return {
+    p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
+    p_description: cleanDescription || null,
+    p_tags: clampTags(tags),
+    // undefined ⇒ null so the RPC's coalesce(..., current) preserves a prior value.
+    p_importable: importable === undefined ? null : importable === true,
+    // Only forward a safe, non-empty cover; empty/unsafe ⇒ null (RPC preserves).
+    p_image_url: rawImageUrl && isSafePublicImageUrl(rawImageUrl) ? rawImageUrl : null,
+    p_image_alt: cleanAlt || null,
+    p_share_world: shareWorld === undefined ? null : shareWorld === true,
+    p_world_sections: cleanSections,
+    p_world_snapshot: worldSnapshot === undefined ? null : (snapOk ? worldSnapshot : null),
+    p_realm_arc_summary: cleanSummary,
+    p_facets: facetsOk ? facets : null,
+  };
+}
+
+/**
+ * Publish a campaign's map to the gallery. Accepts the full MapShareEditor
+ * buildShareOpts bag and forwards ALL of it to publish_map (see publishMapParams).
+ * kind: 'map' (blank canvas) | 'map_with_campaign'.
+ */
+export async function shareMap(campaignId, opts = {}) {
   if (!isConfigured) throw new Error('Supabase not configured');
   if (!UUID_RE.test(String(campaignId || ''))) throw new Error('Save this campaign to the cloud before sharing its map.');
-  const { data, error } = await supabase.rpc('publish_map', {
-    target_id: campaignId,
-    p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
-    p_description: description ? String(description).slice(0, 500) : null,
-    p_tags: Array.isArray(tags) && tags.length ? tags.slice(0, 12) : null,
-  });
+  const params = publishMapParams(opts);
+  const { data, error } = await supabase.rpc('publish_map', { target_id: campaignId, ...params });
   if (error) throw new Error(error.message || 'Map share failed');
-  try { track(EVENTS.GALLERY_PUBLISHED, { kind }); } catch { /* analytics never affects publish */ }
+  try { track(EVENTS.GALLERY_PUBLISHED, { kind: params.p_kind }); } catch { /* analytics never affects publish */ }
   return data; // slug
 }
 

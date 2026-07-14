@@ -279,6 +279,14 @@ export function createMapBridge(getIframe, opts = {}) {
     // full-map cell payload out of the iframe once.
     getSpatialPack: () => call('settlementEngine:getSpatialPack', {}, { timeout: 20000 }),
 
+    // ── Gallery thumbnail (map-share cover) ───────────────────────────────
+    // One-shot rasterize of the rendered terrain to a small JPEG data URL for a
+    // maps-gallery tile (lib/mapThumb.js). Best-effort by contract: the iframe
+    // handler replies { dataUrl: null } on any failure and the caller falls back
+    // to the terrain placeholder — this never throws across the bridge. Generous
+    // timeout: it serializes + rasterizes the full #map SVG once inside the iframe.
+    exportThumb: (size) => call('settlementEngine:exportThumb', { size }, { timeout: 20000 }),
+
     // ── Map snapshot (campaign save/load) ─────────────────────────────────
     saveSnapshot: () => call('settlementEngine:saveSnapshot', {}, { timeout: 15000 }),
     loadSnapshot: (snapshot) =>

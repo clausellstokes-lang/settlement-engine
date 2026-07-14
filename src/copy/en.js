@@ -1048,6 +1048,7 @@ export const en = Object.freeze({
       cta:      'Save this settlement to buy its PDF',
       subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
+      error:    'Could not save this settlement. Please try again.',
     },
     // Anonymous pre-checkout ladder popup.
     ladder: {

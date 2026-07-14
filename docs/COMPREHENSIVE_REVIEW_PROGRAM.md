@@ -203,7 +203,10 @@ recovery = the resume protocol above; every wave banks before the next dispatche
   burned +31→+0 (2252 exact, no re-baseline), independent battery 21 files/108 green. G1b (war
   mechanics: posture≠engagement rust fix, retreat lives, umbilical read, defenders bank wins,
   occupation constrains, removed-settlement deployment lifecycle) DISPATCHED on top.
-  MAIN TREE: F2 client-seams DISPATCHED (post-F1 @ 75cdf8b1).
+  MAIN TREE: ✅ **F2 SHIPPED** (4 seams, 4 negative-controlled pin files; the phantom exportThumb
+  is now a real fail-safe rasterizer + a bridge-surface walker retiring the bug class; first
+  publish keeps all 12 params). F3 surfaces/legibility DISPATCHING next. Discovered follow-up
+  chip: mapThumb overlay-svg attribute (campaign thumbs lack markers).
 > - 2026-07-14 ~02:00: **F1 LIFECYCLE-TRUST SHIPPED** (9 fixes, 24 pins) — with the ratchet story
 >   the constitution wrote itself: the wave was HELD at +805B over budget, the §0.8-1 trim landed
 >   in-wave (catch-up body lazified + pulseFingerprint off first paint), closure now **1,251,094**

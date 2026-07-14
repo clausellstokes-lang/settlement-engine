@@ -34,7 +34,7 @@ const MapLegend       = lazy(() => import('./MapLegend.jsx'));
 // Cachebuster bumped whenever public/map/* changes so browsers don't serve
 // a stale iframe bundle (e.g. old drop handler missing the settlementforge
 // path). Bump this when you edit anything under /public/map.
-const FMG_URL = '/map/index.html?v=sfdrop12';
+const FMG_URL = '/map/index.html?v=sfdrop13';
 
 function WorldMapStageImpl({
   showingWizardNews,
@@ -49,7 +49,7 @@ function WorldMapStageImpl({
   iframeRef,
   bridgeReady,
   bridgeRef,
-  onOverlayTransform,
+  overlayTransformRef,
   onNavigate,
   showLayersPanel,
   setShowLayersPanel,
@@ -171,7 +171,7 @@ function WorldMapStageImpl({
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
               {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} onTransform={onOverlayTransform} />
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
             </Suspense>
           )}
           <Suspense fallback={null}>
