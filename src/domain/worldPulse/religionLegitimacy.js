@@ -28,7 +28,7 @@ import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcC
 import { lawSign } from './deityStance.js';
 // Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
 // (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
-import { evil01, chaos01 } from './deityAxes.js';
+import { evil01, chaos01, deityTemper } from './deityAxes.js';
 // Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
 // STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
 // and its martial readiness (a maintained war machine is warlike conduct). Both close
@@ -38,7 +38,10 @@ import { settlementMoralConductLean } from './moralMartialLean.js';
 import { settlementMartialConductLean } from './martialReadiness.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
-const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
+// 'peacelike' is deriveTemper's spelling (deityAxes/deityPool); 'peaceful' is the
+// legacy stored-axis spelling. BOTH map to 0 so a derived temper reads correctly
+// through this lens. [worldpulse-religion-trade-1]
+const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0, peacelike: 0 });
 const ALIGN_POS = /** @type {Record<string, number>} */ ({ evil: 0, neutral: 0.5, good: 1 });
 
 // A governing faction's archetype implies a temperament + alignment lean (0..1),
@@ -242,7 +245,12 @@ export function rulerLens(settlement) {
 
 /** 0..1 fit between a deity and a ruling-power lens (alignment + temperament). @param {any} deity @param {{temper:number,align:number}} lens */
 function deityRulerFit(deity, lens) {
-  const dT = TEMPER_POS[deity?.temperamentAxis] ?? 0.5;
+  // Temper via the DERIVATION (deityTemper), NOT the retired stored
+  // temperamentAxis — otherwise this dominant ruler-fit lane splits temper
+  // semantics from the rest of the engine (a 4-axis evil+chaotic deity derives
+  // 'warlike' everywhere else but read 0.5/neutral here off a stale/absent
+  // stored field). [worldpulse-religion-trade-1]
+  const dT = TEMPER_POS[deityTemper(deity) ?? 'neutral'] ?? 0.5;
   const dA = ALIGN_POS[deity?.alignmentAxis] ?? 0.5;
   const temperFit = 1 - Math.abs(dT - lens.temper);
   const alignFit = 1 - Math.abs(dA - lens.align);
@@ -285,14 +293,17 @@ export function deityGrowthFavor(deity, lens) {
  * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef
  * @param {(snapshot:any, id:string)=>any} deitySnapshotFor @param {number} [targetMass]
  */
-function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass) {
+function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass, rankStrengthOf = deityRankStrength) {
   if (!neighbourIds.length) return 0;
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
     if (!snap || String(snap._deityRef || snap.name) !== String(deityRef)) continue;
     const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
-    acc += (0.5 + 0.5 * deityRankStrength(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
+    // [worldpulse-religion-trade-4] G1d — an endorsing neighbour's EARNED pantheon
+    // tier lends more standing (rankStrengthOf blends snapshot rank with pantheon tier;
+    // defaults to the base rank when no resolver is threaded ⇒ byte-identical).
+    acc += (0.5 + 0.5 * rankStrengthOf(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
   }
   return clamp01(Math.min(RELIGION_LEGITIMACY_TUNING.PREVALENCE_CAP, acc / Math.max(1, neighbourIds.length)));
 }
@@ -384,14 +395,17 @@ export function conductFitSignal(deity, lens, government) {
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
  *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any,
- *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null }} args
+ *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null,
+ *   rankStrengthOf?:(deity:unknown)=>number }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null, rankStrengthOf = deityRankStrength }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
-  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement));
+  // [worldpulse-religion-trade-4] G1d — thread the pantheon-tier-blended rank resolver
+  // into neighbour recognition so a neighbouring seat-won creed lends more standing.
+  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement), rankStrengthOf);
   const tenure = (Number(entry?.tenure) || 0) / ((Number(entry?.tenure) || 0) + T.TENURE_HALF);   // 0..~1, saturating
   const chronicle = chronicleMomentum(worldState, cid, deity, L);
   const stain = Math.max(0, Number(entry?.heresyStain) || 0);

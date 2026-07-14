@@ -816,6 +816,11 @@ export function evaluateOccupations({ snapshot, worldState, graph, deployments =
       // occupied settlement banks a (re)liberation; the occupier banks a disposition loss.
       delete occupations[occupiedId];
       dispositionDeltas.push({ id: String(rec.occupierId), outcome: 'loss', magnitude: 0.6 });
+      // worldpulse-war-8: the occupied town banks the WIN — throwing off an occupier
+      // through resistance is one of the strongest confidence signals in the fiction
+      // ('we reclaimed our own authority'). Bounded; folds through applyDispositionDeltas
+      // with the ±SCORE_MAX clamp. Behind warLayerEnabled (this whole pass).
+      dispositionDeltas.push({ id: String(occupiedId), outcome: 'win', magnitude: 0.5 });
       const occupiedName = nameFor(occupiedId);
       const occupierName = nameFor(rec.occupierId);
       outcomes.push(conditionOutcome({

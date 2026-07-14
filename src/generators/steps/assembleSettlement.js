@@ -35,7 +35,7 @@ import { promoteStressorsToConditions, reapplyEventConditions } from '../../doma
 // The canonical defense-readiness -> legitimacy table. This file used to carry a
 // stale local copy that LACKED 'Lightly Defended', so the real-label patch below
 // reverted that band's provisional contribution to 0 on every generated settlement.
-import { DEFENSE_CONTRIB, legitimacyDefScale } from '../factionDynamics.js';
+import { DEFENSE_CONTRIB, legitimacyDefScale, applyLegitimacyMultipliers } from '../factionDynamics.js';
 
 registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
@@ -176,6 +176,26 @@ registerStep('assembleSettlement', {
       provLeg.isContested         = newScore >= 30 && newScore < 45;
       provLeg.isLegitimacyCrisis  = newScore < 30;
       provLeg.governanceFractured = newScore < 30;
+
+      // pipeline-6: the faction powers were scaled by generatePowerStructure with
+      // the PROVISIONAL gov/crim multipliers. Now that the defense-readiness patch
+      // has moved the legitimacy band (and its multipliers), re-derive the faction
+      // powers from their preserved rawPower base so the displayed multipliers and
+      // the faction shares beside them agree instead of contradicting. Idempotent
+      // when the band didn't cross (same multipliers reproduce the same powers), so
+      // the shift is confined to band-crossing settlements. Contained alternative to
+      // reordering the whole defense derivation before generatePower — the residual
+      // (governance narrative/dominance line was baked from the provisional ranking)
+      // is the bold option's remaining domain, recorded in GOLDEN_SHIFT_LEDGER.
+      const factions = settlement.powerStructure?.factions;
+      if (Array.isArray(factions) && factions.length) {
+        for (const f of factions) {
+          if (typeof f.rawPower === 'number') f.power = f.rawPower;
+          delete f.legitimacyCrisis;
+          delete f.crisisNote;
+        }
+        applyLegitimacyMultipliers(factions, provLeg, tier);
+      }
     }
   }
 

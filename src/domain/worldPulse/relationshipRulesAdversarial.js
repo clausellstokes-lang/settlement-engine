@@ -150,10 +150,15 @@ function coldWarRules(/** @type {any} */ ctx) {
       ? String(settlements.from) <= String(settlements.to)
       : sourcePressure.legitimacy > targetPressure.legitimacy;
     const destabilizedId = String(fromDestabilized ? settlements.from : settlements.to);
+    // The exploiting rival drives the proxy opening — the NON-destabilized side.
+    // It isn't captured in metadata, so derive it for the disposition key.
+    // [worldpulse-religion-trade-5]
+    const exploiterId = String(fromDestabilized ? settlements.to : settlements.from);
     candidates.push(
       internalDrift(ctx, "cold_war_proxy_conflict", {
         ruleId: "cold_war_proxy_conflict",
         targetSaveId: destabilizedId,
+        actorSaveId: exploiterId,
         severity: 0.3 + Math.max(sourcePressure.legitimacy, targetPressure.legitimacy) * 0.38,
         probability: 0.08 + conflictStress * 0.16,
         reasons: ["Weak legitimacy gives cold-war rivals a proxy faction opening."],
@@ -186,6 +191,7 @@ function coldWarRules(/** @type {any} */ ctx) {
         ruleId: "cold_war_supply_sanctions",
         type: "condition",
         targetSaveId: sanctionedId,
+        actorSaveId: imposerId, // disposition scales by the imposer [worldpulse-religion-trade-5]
         severity: clamp01(0.3 + Math.max(exposure, tradeStress) * 0.42 + relState.leverage * 0.12),
         probability: clamp01(0.08 + Math.max(exposure, tradeStress) * 0.2 + relState.resentment * 0.08),
         reasons: [
@@ -286,6 +292,7 @@ function hostileRules(/** @type {any} */ ctx) {
       candidateType: "hostile_raid",
       ruleId: "hostile_raid",
       targetSaveId: victimId,
+      actorSaveId: aggressorId, // disposition scales by the raider, not the victim [worldpulse-religion-trade-5]
       severity: 0.28 + conflictStress * 0.36,
       probability: 0.1 + conflictStress * 0.18,
       reasons: ["Hostile neighbors create raid, blockade, or intimidation pressure."],
@@ -368,6 +375,7 @@ function hostileRules(/** @type {any} */ ctx) {
       internalDrift(ctx, "hostile_forced_tribute", {
         ruleId: "hostile_forced_tribute",
         targetSaveId: tributeVictimId,
+        actorSaveId: extractorId, // disposition scales by the extractor [worldpulse-religion-trade-5]
         severity: 0.32 + relState.leverage * 0.35,
         probability: 0.06 + relState.leverage * 0.16,
         reasons: ["The economically dominant hostile side may demand tribute before outright occupation."],
@@ -592,6 +600,7 @@ function tradeLeverageCandidate(/** @type {any} */ ctx) {
       ruleId: "trade_dependency_embargo",
       type: "condition",
       targetSaveId: dependentId,
+      actorSaveId: supplierId, // disposition scales by the supplier weaponizing the tie [worldpulse-religion-trade-5]
       severity: sev,
       probability: clamp01(0.05 + tensionDrive * 0.18 + info.salience * 0.08),
       reasons: [

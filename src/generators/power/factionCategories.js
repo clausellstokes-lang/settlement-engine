@@ -76,7 +76,6 @@ const FACTION_CATEGORY_KEYWORDS = {
     'Ledger',
     'Compact',
     'Consortium',
-    'Bloc',
     'Oligarch',
   ],
   government: [
@@ -110,6 +109,12 @@ const FACTION_CATEGORY_KEYWORDS = {
     'House',
     'Estate',
     'Heritage',
+    // domain-7: succession/political blocs the stress injector mints — 'Bloc' was
+    // dropped from economy (it shadowed 'Noble'), so the claimant/loyalist
+    // succession factions now classify as the aristocratic-political factions they
+    // are ('Claimant Bloc A/B', 'Loyalist Noble Bloc') instead of 'economy'.
+    'Claimant',
+    'Loyalist',
   ],
 };
 

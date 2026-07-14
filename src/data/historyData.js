@@ -1308,6 +1308,161 @@ export const HISTORICAL_EVENTS_DATA = [
     ],
     severity: ['major', 'catastrophic'],
   },
+  // ── generators-domain-6: additional timeline templates ─────────────────────
+  // Authored to give city/metropolis timelines enough distinct arcs to reach
+  // their event budget (the old category-keyed dedup capped every settlement at
+  // ~8 events) and to deepen the thin disaster/religious/magical categories.
+  // Same voice/shape as the arcs above: one-line setup, three factions, three
+  // present-tense hooks, a severity band. Tokens ({resource}, {location}, etc.)
+  // resolve in generateEventNarrative's defaultTokens.
+  {
+    type: 'market_crash',
+    description: 'A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation',
+    factions: ['Ruined speculators', 'Creditors calling in debts', 'Those who sold in time'],
+    plotHooks: [
+      'A ledger names who was warned to sell before the collapse — and who was not',
+      'A ruined family blames a rival for engineering the panic, and wants proof',
+      'The debts that survived the crash were quietly bought up by a single hidden buyer',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'trade_collapse',
+    description: 'The {route_type} trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years',
+    factions: ['Displaced traders', 'Workers left without wages', 'Rivals who profited from the diversion'],
+    plotHooks: [
+      'The route could be reopened — but someone with power prefers it stay closed',
+      'A caravan master swears the collapse was arranged, and kept the correspondence to prove it',
+      'An old contract still obliges a distant partner to trade here, if anyone can enforce it',
+    ],
+    severity: ['major'],
+  },
+  {
+    type: 'great_fire',
+    description: 'A fire that began in {location} consumed {building_type} across whole districts before it could be checked',
+    factions: ['Survivors seeking someone to blame', 'Rebuilders and profiteers', 'Those accused of setting it'],
+    plotHooks: [
+      'The fire spared exactly the properties one faction wanted cleared — coincidence is doubted',
+      'A confession was extracted from a scapegoat; the real arsonist still lives in town',
+      'Rebuilding uncovered something in the ashes that predates the settlement',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'plague_years',
+    description: 'A sickness moved through the settlement for {duration} seasons, thinning families and testing every institution to its limit',
+    factions: ['Quarantine hardliners', 'The bereaved and the blamed', 'Healers and charlatans alike'],
+    plotHooks: [
+      'A healer who profited enormously during the plague is being asked how they stayed untouched',
+      'A mass grave from the years holds a body that does not belong to any recorded victim',
+      'The quarantine was used to settle old scores, and the survivors remember exactly who',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'great_flood',
+    description: 'Waters rose with little warning and reshaped the {location}, drowning livelihoods and redrawing who owned what',
+    factions: ['Displaced families', 'Landowners pressing newly-convenient claims', 'Those who profited from the redrawing'],
+    plotHooks: [
+      'The old property boundaries washed away, and the new map favours whoever drew it',
+      'A structure meant to hold back the water had been quietly left to rot — and someone knew',
+      'The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'heresy_trial',
+    description: 'An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides',
+    factions: ['The accusers', 'The accused and their sympathizers', 'Authorities exploiting the rift'],
+    plotHooks: [
+      'The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so',
+      "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
+      'A relic seized during the trial never reached the temple vault it was bound for',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'pilgrimage_surge',
+    description: 'A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good',
+    factions: ['Temple beneficiaries', 'Overwhelmed old residents', 'Sceptics who doubt the miracle'],
+    plotHooks: [
+      'The miracle can be explained mundanely — and the person who can explain it is being kept quiet',
+      'The pilgrim trade made one family rich enough to buy the office that authenticates relics',
+      'A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'popular_uprising',
+    description: 'The common people rose against the ruling powers over {demands}, and the settlement has never entirely closed the account',
+    factions: ['Former rebels', 'The restored order', 'Those who changed sides at the right moment'],
+    plotHooks: [
+      'A list of everyone who informed on the rebels survived, and it names people still in office',
+      'The uprising was funded by an outside hand that has come back to collect on the favour',
+      'A concession won in the revolt is being quietly rolled back, and the old anger is stirring again',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'tyranny',
+    description: 'A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority',
+    factions: ['Old loyalists', 'Those who suffered under the regime', 'Beneficiaries who kept their gains'],
+    plotHooks: [
+      "The tyrant's private records survived, and they implicate respectable families in the worst of it",
+      'A fortune the regime confiscated was never returned, and the rightful heirs have surfaced',
+      'Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'wild_magic',
+    description: 'An uncontrolled surge of magic left its mark on {quarter} and on the people who were there, and the effects have never fully faded',
+    factions: ['The changed and their descendants', 'Those who fear them', 'Scholars studying the residue'],
+    plotHooks: [
+      'The surge was no accident — an experiment went wrong, and the notes were hidden, not destroyed',
+      'A bloodline touched by the surge is now manifesting something the family cannot conceal',
+      'The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise',
+    ],
+    severity: ['minor', 'major'],
+  },
+  // ── generators-domain-1: tension templates the STRESS_TO_TENSION map targets ──
+  // insurgency/religious_conversion/slave_revolt → legitimacy_crisis; mass_migration
+  // → demographic_pressure; a trade-partner neighbour → trade_dispute. These three
+  // types were referenced by name but had no template, so the find() silently
+  // dropped the tension — the settlement's active stress never reached its history.
+  {
+    type: 'legitimacy_crisis',
+    description: 'The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim',
+    factions: ['The sitting authority', 'Those who deny its mandate', 'Pragmatists who want any stable answer'],
+    plotHooks: [
+      'A document that would settle the question of legitimacy exists — and both sides would rather it stayed lost',
+      'The authority is quietly manufacturing the consent it can no longer command',
+      'A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with',
+    ],
+    severity: ['major', 'catastrophic'],
+  },
+  {
+    type: 'demographic_pressure',
+    description: 'The population changed faster than the settlement’s institutions could absorb — through arrivals, departures, or both — and the strain reshaped daily life',
+    factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
+    plotHooks: [
+      'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers',
+      'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them',
+      'The newcomers fled something, and that something has followed them here',
+    ],
+    severity: ['minor', 'major'],
+  },
+  {
+    type: 'trade_dispute',
+    description: 'A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in the market',
+    factions: ['Merchants tied to the old partner', 'Those who want new partners', 'Authorities caught between them'],
+    plotHooks: [
+      'The dispute is being kept alive by someone who profits from the uncertainty on both sides',
+      'A contract clause that could end the dispute has been deliberately misfiled',
+      'The partner settlement is applying pressure through a debt no one here wants to acknowledge',
+    ],
+    severity: ['minor', 'major'],
+  },
 ]
 
 export const EVENT_TYPE_NAMES = {
@@ -1332,4 +1487,19 @@ export const EVENT_TYPE_NAMES = {
   religious_tension:   'The Religious Conflict',
   magical_controversy: 'The Arcane Incident',
   exile_return:        'The Return',
+  // generators-domain-6 additional timeline arcs (titles kept unique + on-theme).
+  market_crash:        'The Crash',
+  trade_collapse:      'The Trade Collapse',
+  great_fire:          'The Great Fire',
+  plague_years:        'The Plague Years',
+  great_flood:         'The Flood',
+  heresy_trial:        'The Heresy Trials',
+  pilgrimage_surge:    'The Pilgrimage',
+  popular_uprising:    'The Uprising',
+  tyranny:             'The Tyranny',
+  wild_magic:          'The Wild Magic',
+  // generators-domain-1 tension arcs (STRESS_TO_TENSION targets).
+  legitimacy_crisis:   'The Mandate',
+  demographic_pressure: 'The Influx',
+  trade_dispute:       'The Trade Dispute',
 }

@@ -256,12 +256,12 @@ export const TERRAIN_DATA = {
         reason: "Ore processing"
       },
       {
-        name: "Stonemasons' guild",
+        name: "Stone quarry",
         modifier: 2,
         reason: "Stone abundance"
       },
       {
-        name: "Jewelers' guild",
+        name: "Jeweller",
         modifier: 1.8,
         reason: "Gemstone access"
       },
@@ -335,12 +335,12 @@ export const TERRAIN_DATA = {
         reason: "Timber processing"
       },
       {
-        name: "Carpenters' guild",
+        name: "Carpenter",
         modifier: 2,
         reason: "Abundant timber"
       },
       {
-        name: "Foresters' guild",
+        name: "Sawmill",
         modifier: 2.5,
         reason: "Forest management"
       },
@@ -355,7 +355,7 @@ export const TERRAIN_DATA = {
         reason: "Fur trade"
       },
       {
-        name: "Bowyer/Fletcher",
+        name: "Bowyer",
         modifier: 1.8,
         reason: "Wood and game access"
       },
@@ -365,7 +365,7 @@ export const TERRAIN_DATA = {
         reason: "Wood charcoal production"
       },
       {
-        name: "Herbalist",
+        name: "Apothecary",
         modifier: 1.5,
         reason: "Medicinal plants"
       },
@@ -451,22 +451,22 @@ export const TERRAIN_DATA = {
         reason: "Crop storage"
       },
       {
-        name: "Livestock market",
+        name: "Butcher",
         modifier: 2,
         reason: "Grazing land"
       },
       {
-        name: "Weavers' guild",
+        name: "Weavers",
         modifier: 1.5,
         reason: "Wool from sheep"
       },
       {
-        name: "Tanners' guild",
+        name: "Tanner",
         modifier: 1.5,
         reason: "Livestock hides"
       },
       {
-        name: "Cheesemaker",
+        name: "Dairy farmer",
         modifier: 1.5,
         reason: "Dairy production"
       },
@@ -545,17 +545,17 @@ export const TERRAIN_DATA = {
         reason: "Stone extraction"
       },
       {
-        name: "Stonemasons' guild",
+        name: "Stone quarry",
         modifier: 1.5,
         reason: "Local stone"
       },
       {
-        name: "Shepherds' guild",
+        name: "Shepherd",
         modifier: 2,
         reason: "Hill grazing"
       },
       {
-        name: "Weavers' guild",
+        name: "Weavers",
         modifier: 1.4,
         reason: "Wool from hillside sheep"
       },
@@ -637,12 +637,12 @@ export const TERRAIN_DATA = {
         reason: "High-quality sand"
       },
       {
-        name: "Salt merchant",
+        name: "Salt works",
         modifier: 2,
         reason: "Salt deposits"
       },
       {
-        name: "Jewelers' guild",
+        name: "Jeweller",
         modifier: 1.5,
         reason: "Gem deposits"
       },
@@ -652,7 +652,7 @@ export const TERRAIN_DATA = {
         reason: "Trade route junction"
       },
       {
-        name: "Water merchant",
+        name: "Aqueduct",
         modifier: 2,
         reason: "Scarce water"
       },

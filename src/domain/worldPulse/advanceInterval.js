@@ -314,6 +314,12 @@ export async function simulateCampaignWorldInterval({
     dismissMajorIds = dismissed.length ? new Set(dismissed) : null;
   }
 
+  // The world tick this advance BEGINS at. Threaded into every composed tick so an
+  // actor-major proposal minted DURING the advance is not expired-to-declined before
+  // the DM ever opens the panel (a one_year = 52 synchronous ticks would otherwise
+  // blow past the 6-week hold inside one advance). [worldpulse-core-3]
+  const intervalStartTick = ensureWorldState(runningCampaign?.worldState, runningCampaign).tick;
+
   for (let i = startTick; i < tickCount; i++) {
     // The tick under the resume cursor re-runs as a FULL single-pass apply (with the
     // DM's dismissals filtered out); every other tick under autoresolve OFF defers
@@ -327,6 +333,7 @@ export async function simulateCampaignWorldInterval({
       now,
       deferMajors: !autoResolve && !isResumeTick,
       dismissMajorIds: isResumeTick ? dismissMajorIds : null,
+      intervalStartTick,
     });
 
     for (const update of tickResult.settlementUpdates || []) {

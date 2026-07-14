@@ -104,21 +104,33 @@ export function pendingActorMajorFor(worldState, candidateType, actorId) {
  * worlds never hold such a proposal (routing is gated off), so nothing matches ⇒
  * the SAME worldState reference is returned ⇒ byte-identical. Never deadlocks: it
  * only ever retires records, it never waits on one.
+ * The hold counts DM-ATTENTION time, not raw world-ticks: a proposal minted
+ * DURING the current advance (its tick is at/after the advance's start) never
+ * expires within that same advance, so a 26-week catch-up or a one_year advance
+ * (52 synchronous ticks) cannot expire-to-decline a war declaration the DM never
+ * had a chance to see. Only proposals that PREDATE this advance's start can age
+ * out — the DM had a prior panel to act on them. [worldpulse-core-3]
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {number} tick    the current world tick (weeks are ticks on the one-week grid)
  * @param {string} [now]   ISO stamp for the retire (updatedAt/expiredAt)
+ * @param {number} [intervalStartTick]  the world tick this advance began at; a
+ *   proposal minted at/after it is protected until the DM's next panel. Defaults
+ *   to `tick` (a single-tick advance — byte-identical to the old behavior, since a
+ *   held-≥HOLD proposal already predates the current tick).
  * @returns {Record<string, unknown> | null | undefined} worldState, unchanged ref if nothing expired
  */
-export function expireStaleActorMajors(worldState, tick, now) {
+export function expireStaleActorMajors(worldState, tick, now, intervalStartTick) {
   const proposals = worldState && Array.isArray(worldState.proposals) ? worldState.proposals : null;
   if (!proposals || !proposals.length) return worldState;
   const nowTick = Math.max(0, Math.floor(Number.isFinite(tick) ? Number(tick) : 0));
+  const startTick = Number.isFinite(intervalStartTick) ? Number(intervalStartTick) : nowTick;
   let mutated = false;
   const next = proposals.map(p => {
     if (p
       && p.status === 'pending'
       && ACTOR_INITIATED_MAJOR_TYPES.has(p.outcome?.candidateType)
       && Number.isFinite(p.tick)
+      && Number(p.tick) < startTick
       && nowTick - Number(p.tick) >= ACTOR_MAJOR_HOLD_WEEKS) {
       mutated = true;
       return { ...p, status: 'expired', expiredAt: now || p.updatedAt, updatedAt: now || p.updatedAt };

@@ -153,6 +153,8 @@ const IMPACT_LABELS = Object.freeze({
   information_shock: 'Information shock',
   criminal_pressure: 'Criminal pressure',
   religious_pressure: 'Religious pressure',
+  // [domain-events-region-7] G1d — the relief lane's positive-sign beat.
+  relief: 'Regional relief',
 });
 
 /** @type {Readonly<Record<string, string>>} */
@@ -381,6 +383,12 @@ function headlineForImpact(impact, transition, names) {
 
   if ((impact.waveDepth || 0) > 0 && (transition === 'queued' || transition === 'ready')) {
     return `Regional cascade reaches ${target}`;
+  }
+  // [domain-events-region-7] G1d — relief reads as a POSITIVE beat (pressure eases),
+  // not "faces relief" / "relief takes hold".
+  if (impact.kind === 'relief') {
+    if (transition === 'applied' || transition === 'resolved') return `Pressure eases in ${target}`;
+    return `Relief reaches ${target}`;
   }
   if (transition === 'ready') return `${label} reaches ${target}`;
   if (transition === 'applied') return `${label} takes hold in ${target}`;

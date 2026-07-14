@@ -19,7 +19,12 @@ const ECONOMIC_CONSTANTS = {
 
 
 // deriveFoodBalanceAnalysis
-export const deriveFoodBalanceAnalysis = (population, terrain, institutions, config) => {
+// `foodSecurity` (economicState.foodSecurity from generateFoodSecurity) is the
+// CANONICAL food-economics model; when provided, its production/need/deficit become
+// the single source of truth here so the viability foodBalance can never contradict
+// the economics model on the deficit sign (generators-domain-4). Optional: a direct
+// caller without it gets the legacy local model, byte-identical.
+export const deriveFoodBalanceAnalysis = (population, terrain, institutions, config, foodSecurity = null) => {
   const issues = [];
   const warnings = [];
   const plotHooks = [];
@@ -60,7 +65,13 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // institutional base to sustain magical agriculture at scale).
   // Requires: magic priority > 75, magic-capable institution present.
   const magPriority = config?.priorityMagic ?? 0;
-  const isMagicHighTier = magPriority > 75 && ['town', 'city', 'metropolis'].includes(config?.settType || '');
+  // domain-5: read the RESOLVED tier, not the raw settType sentinel. settType is
+  // 'random' on the default path (DEFAULT_CONFIG), so keying off it left the magic-
+  // agriculture boost dead for every random-rolled town+ settlement — it only fired
+  // when the user explicitly picked 'town'/'city'/'metropolis'. config.tier is the
+  // resolved tier the sibling read at :154 already prefers.
+  const resolvedTier = config?.tier || config?.settType || '';
+  const isMagicHighTier = magPriority > 75 && ['town', 'city', 'metropolis'].includes(resolvedTier);
   if (isMagicHighTier) {
     const hasMagicFarm = hasInstitution([
       'druid',
@@ -172,7 +183,11 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     : Math.max(_magicTradeRate * _maintainerMult, _minorRouteRate);
   const canImportFood = importCoverageRate > 0 && rawDeficit > 0;
   const importCoverage = canImportFood ? Math.round(rawDeficit * importCoverageRate) : 0;
-  const importChannel = !canImportFood
+  // Channel LABEL is a pure function of route + magic infra (independent of the
+  // deficit); the actual display is gated on real import coverage at return time
+  // (importCoverageFinal > 0), which is byte-identical to the old `!canImportFood`
+  // gate on the fallback path and correct on the canonical path.
+  const importChannelLabel = importCoverageRate <= 0
     ? null
     : effectiveRoute !== 'isolated'
       ? `${effectiveRoute} trade`
@@ -181,42 +196,93 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         : 'minor routes and sanctioned caravans';
 
   // Magic food offset: druid/divine/arcane can supplement food production
-  // Only applies when magic is active and relevant institutions exist
+  // Only applies when magic is active and relevant institutions exist. The caster
+  // booleans are hoisted (they depend only on institutions + priorities, not on the
+  // deficit) so the canonical reconcile below can reuse them.
   const magicOn = config?.magicExists !== false;
+  const magPri = config?.priorityMagic ?? 0;
+  const relPri = config?.priorityReligion ?? 0;
+  const hasDruidFood =
+    magPri >= 30 &&
+    instNames.some((n) =>
+      ['druid circle', 'grove shrine', 'elder grove', "warden's lodge", 'sacred grove'].some((k) => n.includes(k))
+    );
+  const hasDivineFood =
+    relPri >= 55 &&
+    instNames.some((n) =>
+      ['cathedral', 'monastery', 'great cathedral', 'parish church', 'friary'].some((k) => n.includes(k))
+    );
+  const hasArcaneFood =
+    magPri >= 50 && instNames.some((n) => ['wizard', 'mages', 'arcane', 'spellcasting'].some((k) => n.includes(k)));
+  const magicFoodRate = hasDruidFood ? 0.65 : hasDivineFood ? 0.4 : hasArcaneFood ? 0.3 : 0;
+  const magicFoodNoteFor = () =>
+    hasDruidFood ? 'Druidic cultivation provides partial food supplement'
+      : hasDivineFood ? 'Divine provision supplements food shortfall'
+        : hasArcaneFood ? 'Arcane Plant Growth provides minor food supplement'
+          : '';
   let magicFoodOffset = 0;
   let magicFoodNote = '';
-  if (magicOn && rawDeficit > importCoverage) {
-    const magPri = config?.priorityMagic ?? 0;
-    const relPri = config?.priorityReligion ?? 0;
-    const hasDruid =
-      magPri >= 30 &&
-      instNames.some((n) =>
-        ['druid circle', 'grove shrine', 'elder grove', "warden's lodge", 'sacred grove'].some((k) => n.includes(k))
-      );
-    const hasDivine =
-      relPri >= 55 &&
-      instNames.some((n) =>
-        ['cathedral', 'monastery', 'great cathedral', 'parish church', 'friary'].some((k) => n.includes(k))
-      );
-    const hasArcane =
-      magPri >= 50 && instNames.some((n) => ['wizard', 'mages', 'arcane', 'spellcasting'].some((k) => n.includes(k)));
+  if (magicOn && rawDeficit > importCoverage && magicFoodRate > 0) {
     const remaining = rawDeficit - importCoverage;
-    if (hasDruid) {
-      magicFoodOffset = Math.max(magicFoodOffset, Math.round(remaining * 0.65));
-      magicFoodNote = 'Druidic cultivation provides partial food supplement';
-    } else if (hasDivine) {
-      magicFoodOffset = Math.max(magicFoodOffset, Math.round(remaining * 0.4));
-      magicFoodNote = 'Divine provision supplements food shortfall';
-    } else if (hasArcane) {
-      magicFoodOffset = Math.max(magicFoodOffset, Math.round(remaining * 0.3));
-      magicFoodNote = 'Arcane Plant Growth provides minor food supplement';
+    magicFoodOffset = Math.round(remaining * magicFoodRate);
+    magicFoodNote = magicFoodNoteFor();
+  }
+
+  let deficit = Math.max(0, rawDeficit - importCoverage - magicFoodOffset);
+  let deficitPercent = adjustedNeed > 0 ? (deficit / adjustedNeed) * 100 : 0;
+
+  // ── CANONICAL RECONCILE (generators-domain-4: single-writer food model) ────
+  // generateFoodSecurity (economicState.foodSecurity) is the SINGLE WRITER of the
+  // food economics — the one model that feeds prosperity AND the tick foodStockpile.
+  // The viability foodBalance is a VIEW of it and must never contradict it on the
+  // deficit SIGN or magnitude. The two independently recomputed production/need/
+  // deficit using a different terrain-agri source, a different magic model, and —
+  // in foodSecurity only — seeded crop-fortune variance, so they could disagree
+  // (one reporting surplus while the other reported deficit). When the canonical
+  // foodSecurity is threaded in, its dailyProduction/dailyNeed/deficit REPLACE the
+  // locally-recomputed numbers. Reads an already-computed object → draws NO rng
+  // (crop-fortune was already rolled once, at economicState time). The import/magic
+  // attribution is rebuilt to sum EXACTLY to the canonical gap so the dossier's
+  // channel breakdown stays internally consistent. Fallback (no foodSecurity — a
+  // direct unit caller) keeps the legacy local model byte-identical.
+  let dailyProductionFinal = Math.round(dailyProduction);
+  let dailyNeedFinal       = Math.round(adjustedNeed);
+  let surplusFinal         = surplus;
+  let importCoverageFinal  = importCoverage;
+  let rawDeficitFinal      = rawDeficit;
+  const canonical = foodSecurity
+    && Number.isFinite(foodSecurity.dailyProduction)
+    && Number.isFinite(foodSecurity.dailyNeed);
+  if (canonical) {
+    dailyProductionFinal = foodSecurity.dailyProduction;
+    dailyNeedFinal       = foodSecurity.dailyNeed;
+    surplusFinal         = dailyProductionFinal - dailyNeedFinal;
+    rawDeficitFinal      = Math.max(0, -surplusFinal);
+    // foodSecurity returns deficitPct (rounded) + dailyNeed, not a deficit-lbs
+    // field; reconstruct the lbs from them. deficitPct === 0 ⇔ deficit === 0, so
+    // the SIGN is preserved exactly. Clamp into [0, rawDeficit].
+    const cDeficitPct = Number.isFinite(foodSecurity.deficitPct) ? foodSecurity.deficitPct : 0;
+    deficit = Math.max(0, Math.min(rawDeficitFinal, Math.round((cDeficitPct / 100) * dailyNeedFinal)));
+    deficitPercent = cDeficitPct;
+    // Rebuild attribution so importCoverage + magicFoodOffset === rawDeficit − deficit.
+    const totalCoverage = Math.max(0, rawDeficitFinal - deficit);
+    const importPortion = canImportFood
+      ? Math.min(totalCoverage, Math.round(rawDeficitFinal * importCoverageRate))
+      : 0;
+    const magicResidual = Math.max(0, totalCoverage - importPortion);
+    if (magicResidual > 0 && magicOn && magicFoodRate > 0) {
+      importCoverageFinal  = importPortion;
+      magicFoodOffset      = magicResidual;
+      magicFoodNote        = magicFoodNoteFor();
+    } else {
+      // No magic caster to credit: the whole covered gap is import-carried.
+      importCoverageFinal  = totalCoverage;
+      magicFoodOffset      = 0;
+      magicFoodNote        = '';
     }
   }
 
-  const deficit = Math.max(0, rawDeficit - importCoverage - magicFoodOffset);
-  const deficitPercent = adjustedNeed > 0 ? (deficit / adjustedNeed) * 100 : 0;
-
-  if (surplus < 0) {
+  if (surplusFinal < 0) {
     if (deficitPercent > 50) {
       if (effectiveRoute === 'isolated') {
         // Food security deficit is already surfaced via prosperity level + situational description
@@ -249,7 +315,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         });
         plotHooks.push({
           category: 'Trade Disruption',
-          hook: ` PLOT HOOK: The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProduction / adjustedNeed) * 30)} days of food remaining. Famine threatens within weeks.`,
+          hook: ` PLOT HOOK: The ${effectiveRoute} trade route is cut off (bandits/war/natural disaster). Settlement has only ${Math.round((dailyProductionFinal / dailyNeedFinal) * 30)} days of food remaining. Famine threatens within weeks.`,
           severity: 'high',
         });
       }
@@ -268,12 +334,12 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
         severity: 'medium',
       });
     }
-  } else if (surplus > adjustedNeed * 0.5) {
+  } else if (surplusFinal > dailyNeedFinal * 0.5) {
     warnings.push({
       severity: SEVERITY.INEFFICIENCY,
       category: 'Food Production',
       title: 'Agricultural Surplus',
-      description: `Settlement produces ${Math.round((surplus / adjustedNeed) * 100)}% more food than needed.`,
+      description: `Settlement produces ${Math.round((surplusFinal / dailyNeedFinal) * 100)}% more food than needed.`,
       impact: 'Export opportunity — could generate significant trade income.',
       suggestedFixes: [
         'Add merchants to export surplus grain',
@@ -332,19 +398,19 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     warnings,
     plotHooks,
     foodBalance: {
-      dailyNeed: Math.round(adjustedNeed),
-      dailyProduction: Math.round(dailyProduction),
+      dailyNeed: Math.round(dailyNeedFinal),
+      dailyProduction: Math.round(dailyProductionFinal),
       deficit: Math.round(deficit),
       deficitPercent: Math.round(deficitPercent),
-      surplus: Math.round(Math.max(surplus, 0)),
+      surplus: Math.round(Math.max(surplusFinal, 0)),
       agricultureModifier: agriCap,
       stressModifier: productionMult < 1 ? productionMult : undefined,
-      importCoverage: importCoverage > 0 ? Math.round(importCoverage) : undefined,
-      rawDeficit: rawDeficit > deficit ? Math.round(rawDeficit) : undefined,
+      importCoverage: importCoverageFinal > 0 ? Math.round(importCoverageFinal) : undefined,
+      rawDeficit: rawDeficitFinal > deficit ? Math.round(rawDeficitFinal) : undefined,
       // Attribution: which channel carries the imports, and how much of the
       // gap magic closes. Without these the dossier shows a deficit smaller
       // than needed-minus-produced with no visible explanation.
-      importChannel: importChannel || undefined,
+      importChannel: (importCoverageFinal > 0 && importChannelLabel) ? importChannelLabel : undefined,
       magicFoodOffset: magicFoodOffset > 0 ? Math.round(magicFoodOffset) : undefined,
       // Surface the magic-source note alongside its offset so callers
       // can attribute the food contribution (Druidic / Divine / Arcane).

@@ -3,6 +3,7 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
+import { VIABILITY_EXCLUDED_TYPES, VIABILITY_EXCLUDED_SEV } from '../../../domain/display/viabilityFilter.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 
@@ -37,9 +38,8 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   const byDesignIssues = [...(v.issues||[]).filter(i => i.severity==='by_design')].sort((a,b)=>(a.institution||'').localeCompare(b.institution||''));
   const criticalIssues = [...(v.issues||[]).filter(i => i.severity==='critical' && i.type !== 'stress_consequence')].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
   // Strip dependency/resource chain issues — those are in Economics & Resources tabs
-  // Viability only shows logic violations, structural conflicts, and by-design contradictions
-  const VIABILITY_EXCLUDED_TYPES = ['dependency','resource_chain','opportunity','incomplete_chain','trade_dependency','food_security'];
-  const VIABILITY_EXCLUDED_SEV   = ['dependency','opportunity'];
+  // Viability only shows logic violations, structural conflicts, and by-design
+  // contradictions. Exclusion lists shared with the PDF viabilitySlice (pdf-6).
   const filteredWarnings = (v.warnings||[]).filter(w =>
     !VIABILITY_EXCLUDED_TYPES.includes(w.type) &&
     !VIABILITY_EXCLUDED_SEV.includes(w.severity) &&

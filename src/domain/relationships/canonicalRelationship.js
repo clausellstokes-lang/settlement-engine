@@ -102,6 +102,23 @@ export const RELATIONSHIP_SELECTIONS = [
   { value: 'vassal_of', label: 'Current settlement is vassal' },
 ];
 
+// The relationship families that militarize governance narrative — the
+// hostile-neighbour stability band and the "Ongoing tensions with {neighbour}"
+// recentConflict line. Canonical vocabulary ('rival'/'cold_war'/'hostile') plus
+// the legacy save spellings ('tense', 'hostile_rival'/'Hostile rival', which
+// lower+substring-match 'hostile'). Substring-tolerant so a single predicate
+// serves both generatePower's gate and priorityHelpers' military/economy reader.
+export const ADVERSARIAL_RELATIONSHIP_MATCHES = ['hostile', 'rival', 'cold_war', 'tense'];
+
+/**
+ * @param {string | null | undefined} relType
+ * @returns {boolean} true when the neighbour relationship is adversarial
+ */
+export function isAdversarialRelationship(relType) {
+  const t = String(relType || '').toLowerCase();
+  return t !== '' && ADVERSARIAL_RELATIONSHIP_MATCHES.some((k) => t.includes(k));
+}
+
 /**
  * A settlement save record (or the settlement itself) — only the fields this
  * module reads. Legacy saves store population as a bare number, canonical ones

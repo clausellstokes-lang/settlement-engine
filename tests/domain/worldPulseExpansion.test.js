@@ -11,6 +11,7 @@ import {
   evaluateTierResourceDynamics,
   normalizeSimulationRules,
   pressureIndex,
+  SIMULATION_RULE_PRESETS,
 } from '../../src/domain/worldPulse/index.js';
 import { addRegionalChannels } from '../../src/domain/region/index.js';
 
@@ -44,7 +45,10 @@ describe('World Pulse expansion systems', () => {
     const defaults = normalizeSimulationRules();
     expect(defaults).toMatchObject({ propagationMode: 'first_order', intensity: 'conservative' });
 
-    const preset = normalizeSimulationRules({ presetId: 'dramatic_campaign', propagationMode: 'full', intensity: 'dramatic', majorChangesRequireProposal: false, migrationMode: 'distributed' });
+    // Source from the CANONICAL dramatic_campaign rules — after the owner's preset
+    // lighting (war/faith/seasons/disasters), the round-trip identity is defined by
+    // the preset's full shape, not a hand-built light blob.
+    const preset = normalizeSimulationRules(SIMULATION_RULE_PRESETS.dramatic_campaign.rules);
     expect(preset.schemaVersion).toBe(1);
     expect(preset.presetId).toBe('dramatic_campaign');
 

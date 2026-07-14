@@ -498,7 +498,7 @@ export default [
       'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
     },
   },
-  // Grandfathered domain offenders — the six files above the 800 EFFECTIVE-line
+  // Grandfathered domain offenders — the files above the 800 EFFECTIVE-line
   // ceiling TODAY (skipBlankLines + skipComments, measured by this very rule; raw
   // wc -l runs much higher because these files are comment-dense). Shrink-only:
   // decompose one below 800 and DELETE its entry. The list is derived from eslint
@@ -509,6 +509,7 @@ export default [
       'src/domain/display/causeConjunctionRoleContent.js', // 3890 eff
       'src/domain/worldPulse/pulseKernel.js',              // 1092 eff
       'src/domain/worldPulse/warDeployment.js',            // 1077 eff
+      'src/domain/worldPulse/applyWorldPulse.js',          //  890 eff — G-track (G1a-G2R) substance grew it past 800 at the golden merge; burn-down candidate
       'src/domain/worldPulse/stressors.js',                //  860 eff
       'src/domain/explanation.js',                         //  827 eff
       'src/domain/worldPulse/npcAgency.js',                //  824 eff

@@ -215,6 +215,23 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
   dramatic_campaign: preset('dramatic_campaign', 'Dramatic Campaign', {
     ...OPEN,
     intensity: 'dramatic',
+    // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): dramatic_campaign
+    // now carries the real drama set — a running war layer, settlement war strategy,
+    // faith spread, seasons, and calamities. It stays LIGHTER than full_simulation
+    // (no deep war sub-flags / religionDynamics ceiling). commodityFlowEnabled stays
+    // OPT-IN (not lit here) per owner design; disastersEnabled is an opt-in key absent
+    // from DEFAULT_SIMULATION_RULES, so it rides the overrides spread.
+    warLayerEnabled: true,
+    settlementStrategyEnabled: true,
+    faithSpreadEnabled: true,
+    // The normalizer keeps faithSpreadEnabled in LOCKSTEP with the legacy mirror
+    // religionDynamicsEnabled (the legacy key is authoritative when explicitly set),
+    // so lighting spread REQUIRES both true — otherwise the inherited default-false
+    // legacy key drags faithSpreadEnabled back off and the preset no longer round-trips
+    // to its own id (matches full_simulation, which sets both).
+    religionDynamicsEnabled: true,
+    seasonsEnabled: true,
+    disastersEnabled: true,
   }),
   static_campaign: preset('static_campaign', 'Static Campaign', {
     propagationMode: 'off',
@@ -264,6 +281,12 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     warLevyEnabled: true,
     warDispositionEnabled: true,
     seasonsEnabled: true,
+    // Owner ruling (golden sign-off — LIGHT EVERYTHING RECOMMENDED): the ceiling
+    // runs the calamity mover. disastersEnabled is an opt-in key ABSENT from
+    // DEFAULT_SIMULATION_RULES (like commodityFlowEnabled), so it rides the
+    // ...overrides spread; off in every other preset ⇒ the calamity kernel stays a
+    // complete no-op there (aspatial + spatial goldens byte-identical).
+    disastersEnabled: true,
     // M10a (CL-3): the full sim completes the info ladder — the 'full' ceiling
     // (factional beliefs + reconciliation, carried at the unreliable distortion).
     infoMode: 'full',

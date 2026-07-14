@@ -1137,6 +1137,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // The pre-tick mobilization posture ledger: a settlement may only OPEN a new
   // siege from a war-ready posture (mobilized / deployed). Read-only here.
   const warPosture = worldState?.warPosture && typeof worldState.warPosture === 'object' ? worldState.warPosture : {};
+  // worldpulse-war-9: the pre-tick occupation ledger. An occupied settlement's own war
+  // machine is constrained by its occupier — the deploy gate (step 4) blocks it from
+  // besieging any THIRD party while garrisoned; only its occupier is a permissible target
+  // (the uprising/rebellion path stays open). Absent ⇒ every reader inert ⇒ byte-identical.
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : {};
   const outcomes = [];
   const graphChannels = [];
   // war_front channel IDs whose siege RESOLVED this tick (conquest or withdrawal). The
@@ -1167,6 +1172,59 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const item = snapshot?.byId?.get?.(String(id));
     return item?.name || item?.settlement?.name || String(id);
   };
+
+  // ── STRATEGIC WITHDRAWAL ORDERS (war-3 sue-for-peace, war-4 return-home). The
+  // strategy / relationship apply path stamps `deployment.recalled` on an army whose
+  // home DELIBERATELY breaks off its siege — a besieged home recalling its army to
+  // defend the walls (return_home), or a sued-for peace winding down the physical war
+  // the de-escalated label just ended. Execute the order HERE, before the siege
+  // resolver, through the SAME withdrawal machinery a feasibility-collapse uses:
+  // resolve the deployment as outcome:'withdrawal' (→ deploymentReturn's homecoming +
+  // contextual siege-relief / occupation-lift), delete the record, retire its
+  // war_front, and record the (attacker→target) pair so the siege loop below EXCLUDES
+  // it — the stale front must not re-conquer the settlement the army just marched away
+  // from. Unlike the siege_abandoned closer (which banks a disposition LOSS), a
+  // deliberate recall / negotiated peace is a CHOICE, not a defeat: NO disposition
+  // delta. An absent `recalled` stamp (every dormant / no-strategy world) ⇒ pure
+  // no-op ⇒ byte-identical. ──────────────────────────────────────────────────────
+  /** @type {Set<string>} */
+  const recalledPairs = new Set();
+  for (const attackerId of Object.keys(deployments).sort(codepoint)) {
+    const rec = deployments[attackerId];
+    if (!rec?.recalled || rec?.targetId == null) continue;
+    const targetId = String(rec.targetId);
+    resolvedDeployments.push({ attackerId, deployment: rec, targetId, outcome: 'withdrawal' });
+    for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
+    recalledPairs.add(`${attackerId}:${targetId}`);
+    delete deployments[attackerId];
+  }
+
+  // ── worldpulse-war-7: PRUNE deployments whose party LEFT the campaign (roster edit /
+  // canon change). Mirrors occupation.js's canon-membership prune — without it, a
+  // deployment whose target vanished is SKIPPED by the siege resolver yet still bleeds
+  // war_drain/exhaustion forever (step 5 iterates all deployments) and permanently locks
+  // its besieger under the one-army gate. Runs before step 0 so the immortal record never
+  // ages. Absent-canon is rare, so every ordinary tick is a pure no-op ⇒ byte-identical:
+  //   • target vanished → resolve as a WITHDRAWAL (survivors march home via the normal
+  //     deploymentReturn homecoming — banked deployedPopulation conserved) + retire fronts.
+  //   • attacker vanished → simply DROP the record (there is no home to return to).
+  for (const attackerId of Object.keys(deployments).sort(codepoint)) {
+    const rec = deployments[attackerId];
+    if (rec?.targetId == null) continue;
+    const targetId = String(rec.targetId);
+    const attackerGone = !snapshot?.byId?.has?.(String(attackerId));
+    const targetGone = !snapshot?.byId?.has?.(targetId);
+    if (!attackerGone && !targetGone) continue;
+    if (attackerGone) {
+      delete deployments[attackerId];       // no home to return to — drop the ghost record
+      continue;
+    }
+    // Attacker survives, target gone → bring the army home cleanly.
+    resolvedDeployments.push({ attackerId, deployment: rec, targetId, outcome: 'withdrawal' });
+    for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
+    recalledPairs.add(`${attackerId}:${targetId}`);
+    delete deployments[attackerId];
+  }
 
   // ── Step 0: AGE + ENRICH the stateful army ledger (read-last/write-next). For
   // every committed deployment, migrate a light record forward to a stateful
@@ -1253,7 +1311,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     for (const attackerId of Object.keys(deployments)) {
       if (String(deployments[attackerId]?.targetId) === targetId) besiegerSet.add(String(attackerId));
     }
-    const besiegers = [...besiegerSet].filter(id => snapshot?.byId?.has?.(id)).sort(codepoint);
+    const besiegers = [...besiegerSet]
+      .filter(id => snapshot?.byId?.has?.(id))
+      // Exclude besiegers whose deployment was strategically withdrawn (recalled /
+      // sued-for peace) THIS tick: their army has gone home and their front is being
+      // retired, so a stale confirmed front must not resolve a phantom siege here.
+      .filter(id => !recalledPairs.has(`${id}:${targetId}`))
+      .sort(codepoint);
     if (!besiegers.length) continue;
 
     const defenderItem = snapshot?.byId?.get?.(targetId);
@@ -1369,6 +1433,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         // ever withdraw (a stuck phantom army on a lifted siege).
         const withdrawn = besiegers.filter(id => String(deployments[id]?.targetId) === targetId);
         if (withdrawn.length) {
+          let guttednessSum = 0; // Σ(1 − returned/start) across the withdrawing coalition.
           for (const attackerId of withdrawn) {
             const withdrawnRec = deployments[attackerId];
             resolvedDeployments.push({ attackerId, deployment: withdrawnRec, targetId, outcome: 'withdrawal' });
@@ -1390,6 +1455,7 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
               const c = Number(withdrawnRec?.currentEffectiveStrength);
               return Number.isFinite(m) && m > 0 && Number.isFinite(c) ? Math.max(0, Math.min(1, c / m)) : 1;
             })();
+            guttednessSum += 1 - ratio;
             dispositionDeltas.push({ id: String(attackerId), outcome: 'loss', magnitude: clamp01(0.5 + (1 - ratio) * 0.5) });
             const name = settlementNameFor(attackerId);
             const targetName = settlementNameFor(targetId);
@@ -1406,6 +1472,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
               causes: [{ source: attackerId, effect: 'war_exhaustion', reason: `${name} abandoned the siege of ${targetName} (no longer feasible).` }],
             }));
           }
+          // worldpulse-war-8: the DEFENDER banks the win. Outlasting a siege until the
+          // besieger(s) break off is a successful defense — credit the target ONCE (a
+          // coalition break-off is ONE defense, not N, so this is OUTSIDE the per-attacker
+          // loop), magnitude scaled by how gutted the withdrawing force came home. Feeds
+          // computeAggressiveness so an emboldened survivor reads differently from an
+          // unattacked town. Behind warLayerEnabled; the ±SCORE_MAX clamp bounds it.
+          dispositionDeltas.push({ id: String(targetId), outcome: 'win', magnitude: clamp01(0.4 + (guttednessSum / withdrawn.length) * 0.4) });
           continue; // the siege is broken off — no harassment on top.
         }
         // No live deployment to withdraw, but a STALE confirmed war_front channel may
@@ -1590,6 +1663,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     const fromStrength = strengthFor(fromId);
     if (fromStrength < HOSTILE_CONFIDENCE) continue;   // not confident enough to wage war (relationship gate)
     const fromCap = capacityFor(fromId);
+    // worldpulse-war-9: is this settlement under an active occupation, and by whom? An
+    // occupied town may march ONLY against its occupier (a rising), never a third party.
+    const occupierOfFrom = occupations[fromId]?.occupierId != null ? String(occupations[fromId].occupierId) : null;
 
     // Pick the first hostile target (codepoint-sorted) this settlement can PLAUSIBLY
     // besiege ALONE — the hard feasibility gate runs on the CURRENT-capacity matchup
@@ -1598,6 +1674,9 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     // solo verdict mints a front; require_coalition / harassment / auto_fail do not.
     let chosenTarget = null;
     for (const targetId of hostileTargetsOf(snapshot, fromId)) {
+      // worldpulse-war-9: under occupation, the ONLY permissible target is the occupier
+      // (the uprising). Any third-party siege is blocked while garrisoned.
+      if (occupierOfFrom && String(targetId) !== occupierOfFrom) continue;
       if (isBesieged(graph, targetId)
           && warFrontsInto(graph, targetId).includes(fromId)) {
         // already besieging it (shouldn't happen without a deployment, but guard)

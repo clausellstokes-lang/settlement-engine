@@ -187,13 +187,75 @@ export const buildStressContext = (stressType, tier, config, institutions) => {
     if (hasTimber)   prob *= 1.3;
   }
 
+  // ── generators-domain-1: probability coupling for the 5 newer stress types ─
+  // Each new type is coupled to the settlement characteristics that actually
+  // invite it (register: "slave revolt needs the economy that invites it —
+  // seeded, bounded"). All deterministic multipliers (no rng), bounded by the
+  // Math.min(prob, 0.35) ceiling below.
+  const neighborRel = (config.neighborRelationship?.relationshipType || '').toLowerCase();
+  const neighborHostile = neighborRel.includes('hostile') || neighborRel.includes('rival') || neighborRel.includes('cold_war');
+
+  // Insurgency ↔ weak/illegitimate governance (a hollow garrison and a poor economy
+  // erode the mandate; a strong garrison or high religious authority shore it up). A
+  // criminal underworld tilts it only mildly — insurgency is a legitimacy failure,
+  // not primarily an organised-crime one.
+  if (stressType === 'insurgency') {
+    if (military < 35)  prob *= 1.4;
+    if (economy < 30)   prob *= 1.3;
+    if (criminal > 60)  prob *= 1.2;
+    if (military > 70)  prob *= 0.6;
+    if (religion > 65)  prob *= 0.8;
+  }
+
+  // Mass migration ↔ trade-route connectivity (people flow through hubs; an
+  // isolated settlement neither draws nor sheds population at scale).
+  if (stressType === 'mass_migration') {
+    if (route === 'crossroads')      prob *= 1.6;
+    if (route === 'port')            prob *= 1.5;
+    if (route === 'road')            prob *= 1.1;
+    if (route === 'isolated')        prob *= 0.4;
+    if (getTradeRouteFeatures(tier)) prob *= 1.3; // larger, more connected settlements
+  }
+
+  // Wartime ↔ a hostile neighbour and a frontier posture (a militarised heartland
+  // town far from any enemy is rarely at war).
+  if (stressType === 'wartime') {
+    if (neighborHostile)        prob *= 1.8;
+    if (threat === 'frontier')  prob *= 1.5;
+    if (threat === 'plagued')   prob *= 1.3;
+    if (threat === 'heartland') prob *= 0.4;
+    if (military > 60)          prob *= 1.2;
+  }
+
+  // Religious conversion ↔ a religious settlement with a faith worth contesting;
+  // a secular one has little to convert from or to.
+  if (stressType === 'religious_conversion') {
+    if (religion > 60)  prob *= 1.5;
+    if (hasChurch)      prob *= 1.3;
+    if (religion < 30)  prob *= 0.5;
+    if (!hasChurch)     prob *= 0.7;
+  }
+
+  // Slave revolt ↔ the extractive economy that makes it possible: wealth built on
+  // coerced labour (a strong economy served by a strong criminal/coercive apparatus).
+  // Absent that economy there is little to revolt against, so it is suppressed. A
+  // strong garrison contains it. (Base probability is already low, and it is
+  // town-gated in STRESS_TYPE_MAP.requiresTier.) Economy is read from priorities —
+  // not an institution-name match — to avoid a fuzzy label-join site.
+  if (stressType === 'slave_revolt') {
+    const extractive = economy > 55 && criminal > 50;
+    if (extractive)     prob *= 2.0;
+    else                prob *= 0.4;
+    if (military > 65)  prob *= 0.6;
+  }
+
   return Math.min(prob, 0.35);
 };
 
 // ─── Stress priority ordering ─────────────────────────────────────────────────
 
 // Higher weight = stress is more narratively severe and gets priority in multi-stress resolution.
-const STRESS_SEVERITY_WEIGHT = {
+export const STRESS_SEVERITY_WEIGHT = {
   under_siege:         10,
   famine:               9,
   plague_onset:         8,
@@ -204,6 +266,11 @@ const STRESS_SEVERITY_WEIGHT = {
   indebted:             5,
   infiltrated:          4,
   monster_pressure:     4,
+  wartime:              8,
+  slave_revolt:         7,
+  insurgency:           6,
+  religious_conversion: 5,
+  mass_migration:       4,
 };
 
 // ─── generateStress ──────────────────────────────────────────────────────────

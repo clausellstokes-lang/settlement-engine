@@ -179,8 +179,13 @@ function nextWorldStateForPulse(worldState, campaign, interval) {
  *   every other major auto-resolves to recommended. EMPTY/null ⇒ no exclusion, so a
  *   resume that dismissed nothing re-runs BYTE-IDENTICALLY to the autoresolve-ON
  *   tick (the equivalence invariant). Inert on the non-resume path.
+ * @param {number} [args.intervalStartTick] The world tick this (possibly composed)
+ *   advance began at. Threaded into expireStaleActorMajors so an actor-major
+ *   proposal minted DURING the advance is not expired-to-declined before the DM
+ *   opens the panel. Absent ⇒ defaults to the current tick (single-tick advance;
+ *   byte-identical). [worldpulse-core-3]
  */
-export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null } = {}) {
+export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'one_month', commit = false, now, deferMajors = false, dismissMajorIds = null, intervalStartTick } = {}) {
   // Structural pin-`now` guard: an unpinned call is reproducible-forfeiting, so in a
   // test run it throws (never silently divergent bytes); production pins `now` and
   // falls back to the wall clock only here, at the boundary.
@@ -254,7 +259,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // worlds (they never hold such a proposal: the routing is gated off) — the SAME
   // worldState reference is returned. Runs BEFORE the war/coup layers so an expired
   // hold no longer blocks a fresh attempt (the dedup reads pending only).
-  worldState = expireStaleActorMajors(worldState, worldState.tick, now);
+  // intervalStartTick (threaded by advanceInterval across a composed advance)
+  // protects proposals minted DURING this advance from expiring before the DM's
+  // next panel; a single-tick advance defaults it to the current tick (byte-identical).
+  worldState = expireStaleActorMajors(worldState, worldState.tick, now, intervalStartTick);
   let snapshot = buildWorldSnapshot({ campaign, saves, worldState });
 
   worldState = ensureAllRelationshipStates(worldState, snapshot);

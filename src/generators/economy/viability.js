@@ -484,8 +484,10 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   const cfg = { ...(config || {}), tier };
   const terrain = terrainType ? TERRAIN_DATA[terrainType] : null;
 
-  // Food/supply viability
-  const foodAnalysis = deriveFoodBalanceAnalysis(population, terrain, insts, cfg);
+  // Food/supply viability. Thread the canonical economicState.foodSecurity so the
+  // viability foodBalance is a VIEW of the single-writer food model, not a second
+  // independent derivation that can disagree on the deficit sign (generators-domain-4).
+  const foodAnalysis = deriveFoodBalanceAnalysis(population, terrain, insts, cfg, economicState?.foodSecurity || null);
   issues.push(...foodAnalysis.issues);
   warnings.push(...foodAnalysis.warnings);
   plotHooks.push(...foodAnalysis.plotHooks);

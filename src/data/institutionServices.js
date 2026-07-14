@@ -6,6 +6,45 @@
  */
 
 export const INSTITUTION_SERVICES = {
+  // data-tables-1: dedicated civic-register services for the anchor GOVERNMENT
+  // institutions at each tier. Without these they fuzzy-matched to absurd menus
+  // (Household elder → druidic consultation, Village elder → music lessons, City
+  // administration → grain storage) — register-breaking on the product's most
+  // common output. These are the highest-baseChance picks at their tiers.
+  "Household elder": {
+    "Dispute mediation": { on: true, p: 1.0, desc: "Settles quarrels between households by custom" },
+    "Communal decisions": { on: true, p: 0.9, desc: "Calls and chairs the gathering of families" },
+    "Record of custom": { on: true, p: 0.8, desc: "Keeps the memory of boundaries, debts, and old agreements" },
+    "Hospitality": { on: true, p: 0.6, desc: "Receives travellers and speaks for the settlement" }
+  },
+  "Village headman": {
+    "Dispute mediation": { on: true, p: 1.0, desc: "Judges disputes over land, livestock, and debt" },
+    "Communal labour": { on: true, p: 0.9, desc: "Organises shared work — harvest, repairs, the common fields" },
+    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the parish tithe" },
+    "Record of custom": { on: true, p: 0.7, desc: "Holds the customary law of the village" }
+  },
+  "Village elder": {
+    "Dispute mediation": { on: true, p: 1.0, desc: "Arbitrates quarrels before they reach the lord's court" },
+    "Communal decisions": { on: true, p: 0.9, desc: "Convenes the village moot on shared matters" },
+    "Marriage and inheritance": { on: true, p: 0.7, desc: "Witnesses betrothals and settles inheritance by custom" },
+    "Record of custom": { on: true, p: 0.8, desc: "Remembers precedent, boundaries, and communal rights" }
+  },
+  "Town council": {
+    "Bylaws and ordinances": { on: true, p: 1.0, desc: "Enacts and enforces the town's own rules" },
+    "Dispute adjudication": { on: true, p: 1.0, desc: "Hears civil pleas in the town court" },
+    "Market charter and tolls": { on: true, p: 0.9, desc: "Grants stalls, sets tolls, licenses the market" },
+    "Public works": { on: true, p: 0.7, desc: "Walls, wells, roads, and the watch" },
+    "Record of custom": { on: true, p: 0.8, desc: "Keeps the charter, rolls, and civic archive" }
+  },
+  "City administration": {
+    "Civic administration": { on: true, p: 1.0, desc: "Runs the offices, wards, and officers of the city" },
+    "Taxation and tolls": { on: true, p: 1.0, desc: "Assesses and collects taxes, tolls, and customs" },
+    "Licensing and charters": { on: true, p: 0.9, desc: "Grants guild, market, and trade privileges" },
+    "Courts and adjudication": { on: true, p: 0.9, desc: "Maintains the civil and mercantile courts" },
+    "Public works": { on: true, p: 0.8, desc: "Walls, aqueducts, sanitation, and the watch" },
+    "Public records": { on: true, p: 0.8, desc: "Registers deeds, wills, births, and freemen" }
+  },
+
   "Market": {
     "Price discovery": { on: true, p: 1.0, desc: "Fair pricing through competition" },
     "Trade facilitation": { on: true, p: 1.0, desc: "Connect buyers and sellers" },

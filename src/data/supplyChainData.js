@@ -52,20 +52,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         entrepot: false,
         minTier: 'hamlet',
       },
-      {
-        id: 'fish',
-        label: 'Fish & Seafood',
-        resource: 'Fishing grounds',
-        resourceIcon: '',
-        rawInputs: ['River fish', 'Freshwater catch'],
-        processingInstitutions: ["Fisher's landing", 'Fishmonger', 'Cooper', 'Salt works'],
-        intermediateGoods: ['River fish', 'Freshwater catch'],
-        outputs: ['Preserved foods'],
-        services: ['food'],
-        exportable: true,
-        entrepot: false,
-        minTier: 'hamlet',
-      },
+      // data-tables-5: the thin 'fish' chain was a duplicate authoring pass of the
+      // richer 'fishing' chain (both keyed resource 'Fishing grounds'), so a coastal
+      // town showed two near-identical fishing industries. Retired here; its unique
+      // 'Preserved foods' output was folded into 'fishing', its resource map redirected
+      // to 'fishing'/'river_fishing', and the 'Fish Trade' income link repointed.
       {
         id: 'salt',
         label: 'Salt & Preservation',
@@ -104,7 +95,11 @@ export const SUPPLY_CHAIN_NEEDS = {
         label: 'Fishing & Seafood',
         resource: 'Fishing grounds',
         resourceIcon: '',
-        rawInputs: ['Fish catch', 'Freshwater catch'],
+        // data-tables-5: 'River fish' folded in from the retired 'fish' chain so the
+        // resource→goods vocabulary (resourceEconomicRole / tierResourceDynamics)
+        // still associates fishing_grounds with the fish-family goods — the retirement
+        // is a DISPLAY dedup, not an economic-role reclassification.
+        rawInputs: ['Fish catch', 'River fish', 'Freshwater catch'],
         processingInstitutions: [
           "Fisher's landing",
           'Fishmonger',
@@ -116,7 +111,8 @@ export const SUPPLY_CHAIN_NEEDS = {
           'Fishmonger',
         ],
         intermediateGoods: ['Fresh fish', 'Gutted catch'],
-        outputs: ['Salted fish', 'Smoked seafood', 'Fish oil', 'Freshwater catch'],
+        // data-tables-5: 'Preserved foods' folded in from the retired thin 'fish' chain.
+        outputs: ['Salted fish', 'Smoked seafood', 'Fish oil', 'Freshwater catch', 'Preserved foods'],
         services: ['food'],
         exportable: true,
         minTier: 'hamlet',
@@ -134,7 +130,9 @@ export const SUPPLY_CHAIN_NEEDS = {
         services: ['food'],
         exportable: true,
         minTier: 'hamlet',
-        resourceSubstitutes: ['Fishing grounds'],
+        // data-tables-5: dropped 'Fishing grounds' — a coastal town (no river) must
+        // not surface a 'River Fishing' industry via this substitute.
+        resourceSubstitutes: [],
       },
       {
         id: 'hunting',
@@ -1506,8 +1504,12 @@ export const RESOURCE_TO_CHAINS = {
     'raw_extraction.petty_mining',
   ],
   shipbuilding_timber: ['raw_extraction.timber', 'raw_extraction.coastal_shipbuilding'],
-  fishing_grounds: ['food_security.fish', 'food_security.fishing'],
-  river_fish: ['food_security.fish', 'food_security.river_fishing'],
+  // data-tables-5: fishing_grounds/river_fish each mapped to BOTH the thin 'fish'
+  // chain AND the richer 'fishing'/'river_fishing' chain, so a coastal town showed
+  // two near-identical fishing industries. Map each resource to its ONE richer
+  // chain; the retired 'fish' chain id is kept (below) for persisted-save resolution.
+  fishing_grounds: ['food_security.fishing'],
+  river_fish: ['food_security.river_fishing'],
   river_mills: [
     'raw_extraction.river_milling',
     'manufacturing.food_processing',

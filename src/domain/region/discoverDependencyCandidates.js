@@ -10,6 +10,7 @@ import { deriveRegionalState, settlementFromSave } from './deriveRegionalState.j
 import { addRegionalChannels, deriveRegionalGraphFromSaves, normalizeChannel } from './graph.js';
 import { goodCriticality, goodsIntersect } from './goodsCatalog.js';
 import { canonicalEdgeForLink } from '../relationships/canonicalRelationship.js';
+import { NO_TRADE_RELATIONSHIPS } from './tradeLinks.js';
 import { healingLedger } from '../healingLedger.js';
 import { wallClockNow } from '../clock.js';
 import { TIER_ORDER } from '../../data/constants.js';
@@ -277,11 +278,17 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
 
   const rel = relationBetween(sourceSave, targetSave) || relationBetween(targetSave, sourceSave);
   const relConfidence = relationshipConfidence(rel);
+  // Hostile pairs don't openly trade goods — the same rule the generation-time
+  // trade layer enforces (tradeLinks NO_TRADE_RELATIONSHIPS). Without this the
+  // floored 0.62 confidence advertised a "likely trade dependency" between two
+  // settlements at open war, contradicting the sibling layer. A hostile pair
+  // still surfaces war_front/resource_competition texture below. [domain-events-region-6]
+  const tradeBlocked = NO_TRADE_RELATIONSHIPS.has(String(rel || '').toLowerCase());
   /** @type {Array<ChannelLike | null>} */
   const out = [];
 
   const sourceExportsTargetImports = goodsIntersect(source.exports, target.imports);
-  if (sourceExportsTargetImports.length) {
+  if (!tradeBlocked && sourceExportsTargetImports.length) {
     out.push(candidate({
       type: 'trade_dependency',
       from: source.id,
@@ -311,7 +318,7 @@ export function discoverDependencyCandidates(sourceSave, targetSave, options = {
   }
 
   const targetExportsSourceImports = goodsIntersect(target.exports, source.imports);
-  if (targetExportsSourceImports.length) {
+  if (!tradeBlocked && targetExportsSourceImports.length) {
     out.push(candidate({
       type: 'trade_dependency',
       from: target.id,

@@ -12,11 +12,12 @@
 import { withImpairment } from '../entities/status.js';
 import { propagateImpairment } from '../entities/propagate.js';
 import { withActiveCondition, withoutActiveCondition, conditionIdFromArchetype } from '../activeConditions.js';
-import { crisisOnset, crisisResolve } from '../crisisLifecycle.js';
+import { crisisOnset, crisisResolve, withStressorResolved } from '../crisisLifecycle.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
+import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';
 import {
   idOf, eventTime,
   findInstitution, replaceInstitution,
@@ -207,6 +208,16 @@ function removedThreat(/** @type {MutEntity} */ s, /** @type {MutEntity} */ even
       triggeredAt: { sourceEventType: 'REMOVED_THREAT', sourceEventTargetId: event.targetId || 'siege' },
       causes: [{ source: 'event', eventId: event.id, detail: 'The siege is broken; the settlement begins to recover.' }],
     });
+  }
+  // Record the neutralized threat in config.stressorEdits.resolved (dual-written
+  // to _config) so a party-removed threat cannot RESURRECT on regeneration — the
+  // live entry we just spliced is a derivation output the overlay re-rolls from
+  // config, so without the suppression record a config-forced stressor re-mints.
+  // This is the twin of RESOLVE_STRESSOR's suppression (crisisResolve), which
+  // REMOVED_THREAT lacked. Slug/name-tolerant: record the removed entry's type,
+  // its name, and the event label. [domain-events-region-2]
+  if (removed) {
+    next = withStressorResolved(next, [removed.type, removed.name, label]);
   }
   return next;
 }
@@ -424,8 +435,11 @@ function plague(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
     next._config = { ...s._config, _activePlague: annotation };
   }
   // Apply a capacity impairment to any healing-tagged institution so
-  // the simulation reflects the strain.
-  const healing = (next.institutions || []).filter((/** @type {MutEntity} */ i) => /hospital|temple|infirm|healer/i.test(i.name || ''));
+  // the simulation reflects the strain. Uses the canonical healing vocabulary
+  // (healingLedger's classifier — chapel/hospice/herbalist/apothecary/shrine/
+  // monastery/almshouse too) rather than a private 4-class regex, matching the
+  // roster M11a's care counterforce reads. [domain-events-region-9]
+  const healing = (next.institutions || []).filter((/** @type {MutEntity} */ i) => HEALING_INSTITUTION_PATTERN.test(String(i.name || '')));
   for (const inst of healing) {
     const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
       type: 'capacity',

@@ -7,7 +7,7 @@ import { random as _rng } from '../../kernel/rngContext.js';
 import { pickRandom2, random01 } from '../helpers.js';
 
 // STRESS_FLAVOR
-const STRESS_FLAVOR = {
+export const STRESS_FLAVOR = {
   under_siege: ['debtor_creditor', 'enemy', 'patron_client'],
   famine: ['debtor_creditor', 'patron_client', 'political'],
   occupied: ['ally', 'debtor_creditor', 'enemy'],
@@ -18,6 +18,11 @@ const STRESS_FLAVOR = {
   plague_onset: ['patron_client', 'debtor_creditor'],
   succession_void: ['rival', 'enemy', 'political'],
   monster_pressure: ['patron_client', 'debtor_creditor'],
+  insurgency: ['enemy', 'political', 'rival'],
+  mass_migration: ['patron_client', 'debtor_creditor', 'ally'],
+  wartime: ['enemy', 'ally', 'patron_client'],
+  religious_conversion: ['rival', 'political', 'patron_client'],
+  slave_revolt: ['enemy', 'rival', 'debtor_creditor'],
 };
 
 // STRESS_RUMORS — each renders a rumour phrasing from a relationship object

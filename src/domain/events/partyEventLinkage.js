@@ -30,8 +30,24 @@ import { PARTY_IMPACT_KINDS } from '../worldPulse/partyImpactKinds.js';
 // event's targetId. Only world-scale analogs belong here.
 const EVENT_TO_PARTY_KIND = Object.freeze({
   KILL_NPC:        { kind: 'remove_npc',        targetField: 'npcId' },
+  // KILL_LEADER is killNpcMutation forced to pillar importance — strictly more
+  // consequential than KILL_NPC, so it must fire the SAME party-impact ripple
+  // (the campaign-scale dominant_npc_removed leadership-void condition, the
+  // npcState.removed patch, party-attributed Wizard News). [domain-events-region-4]
+  KILL_LEADER:     { kind: 'remove_npc',        targetField: 'npcId' },
   IMPAIR_FACTION:  { kind: 'undermine_faction', targetField: 'factionId' },
   RESTORE_FACTION: { kind: 'bolster_faction',   targetField: 'factionId' },
+  // [domain-events-region-1] G1d — the DM's relationship levers reach the live
+  // conflict layer. A PARTY-CAUSED alliance/dispute rides the pulse-proven
+  // broker_relationship / inflame_relationship kinds (a gradual ladder nudge on
+  // the pulse relationshipState — the de-escalation counterpart to the war
+  // system). The event's targetId is the OTHER settlement in the pair, carried
+  // as `relationshipTargetId`; buildPartyImpactOutcomes resolves it to the
+  // pulse's edge key (relationshipKeyFromEdge) so the nudge lands on the SAME
+  // state the war layer reads. OPENED_TRADE_ROUTE + the NON-party canon lane are
+  // handled store-side (rippleEventThroughWorld) with a direct type-upsert.
+  BROKERED_ALLIANCE:  { kind: 'broker_relationship',  targetField: 'relationshipTargetId' },
+  SETTLEMENT_DISPUTE: { kind: 'inflame_relationship', targetField: 'relationshipTargetId' },
 });
 
 /**

@@ -268,6 +268,11 @@ const generateSafetyNarrative2 = (config = {}, institutions = []) => {
     plague_onset: { disaster: 2.5, religious: 1.5 },
     succession_void: { political: 3.0, exile_return: 2.0 },
     monster_pressure: { disaster: 2.0, political: 1.3 },
+    insurgency: { political: 2.5, occupation_infiltration: 1.5 },
+    mass_migration: { demographic: 3.0, economic: 1.5 },
+    wartime: { disaster: 2.0, political: 1.8 },
+    religious_conversion: { religious: 2.5, political: 1.5 },
+    slave_revolt: { political: 2.5, demographic: 1.5 },
   };
 
   stresses.forEach(stressType => {
@@ -596,24 +601,10 @@ const buildHistoricalEvent = (
     factions.find(f => f.faction?.toLowerCase().includes('religious') || f.faction?.toLowerCase().includes('church'))
       ?.faction || null;
 
-  // Stress → tension type mapping
-  const STRESS_TO_TENSION = {
-    under_siege: 'occupation_legacy',
-    famine: 'resource_scarcity',
-    occupied: 'occupation_legacy',
-    politically_fractured: 'leadership_vacuum',
-    indebted: 'outside_debt',
-    recently_betrayed: 'corruption_scandal',
-    infiltrated: 'infiltration_fear',
-    plague_onset: 'resource_scarcity',
-    succession_void: 'succession_crisis',
-    monster_pressure: 'external_threat',
-    insurgency: 'legitimacy_crisis',
-    mass_migration: 'demographic_pressure',
-    wartime: 'external_threat',
-    religious_conversion: 'legitimacy_crisis',
-    slave_revolt: 'legitimacy_crisis',
-  };
+  // Stress → tension type mapping (hoisted to module scope + exported so the
+  // stress-registration walker can assert every target resolves to a real
+  // HISTORICAL_EVENTS_DATA template — the class of bug where a stress mapped to
+  // a tension type that had no template, and the tension was silently dropped).
 
   // Neighbor relationship → tension
   const neighborRel = (config.neighborRelationship?.relationshipType || '').toLowerCase();
@@ -763,6 +754,55 @@ const buildHistoricalEvent = (
  * Produces a series of events spread across the settlement's age,
  * weighted by the current economic/political/social situation.
  */
+// Hoisted out of the per-event find() callback (generators-domain-6): the map
+// from a picked history CATEGORY to the pool of template types that satisfy it.
+// A seeded pick among the pool (rather than find()'s first-match) gives arcs
+// variety within a category and lets a re-picked category contribute a DIFFERENT
+// template toward the tier's event budget. The new market_crash/trade_collapse/
+// great_fire/plague_years/great_flood/heresy_trial/pilgrimage_surge/popular_uprising/
+// tyranny/wild_magic types deepen the pools so city/metropolis can reach 12/20.
+// Stress → tension-template mapping (hoisted from buildHistoricalEvent so the
+// registration walker can verify every target is a real HISTORICAL_EVENTS_DATA type).
+export const STRESS_TO_TENSION = {
+  under_siege: 'occupation_legacy',
+  famine: 'resource_scarcity',
+  occupied: 'occupation_legacy',
+  politically_fractured: 'leadership_vacuum',
+  indebted: 'outside_debt',
+  recently_betrayed: 'corruption_scandal',
+  infiltrated: 'infiltration_fear',
+  plague_onset: 'resource_scarcity',
+  succession_void: 'succession_crisis',
+  monster_pressure: 'external_threat',
+  insurgency: 'legitimacy_crisis',
+  mass_migration: 'demographic_pressure',
+  wartime: 'external_threat',
+  religious_conversion: 'legitimacy_crisis',
+  slave_revolt: 'legitimacy_crisis',
+};
+
+export const TIMELINE_CATEGORY_TYPES = {
+  economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict', 'market_crash', 'trade_collapse'],
+  political: [
+    'succession_crisis',
+    'corruption_scandal',
+    'infiltration_fear',
+    'leadership_vacuum',
+    'occupation_legacy',
+    'disputed_land',
+    'population_friction',
+    'generational_divide',
+    'popular_uprising',
+    'tyranny',
+  ],
+  disaster: ['external_threat', 'great_fire', 'plague_years', 'great_flood'],
+  religious: ['religious_tension', 'heresy_trial', 'pilgrimage_surge'],
+  magical: ['magical_controversy', 'wild_magic'],
+  occupation_infiltration: ['infiltration_fear'],
+  exile_return: ['occupation_legacy'],
+  demographic: ['population_friction'],
+};
+
 const generateRelationshipEvent = (age, tier, config, context = null) => {
   // Number of history events (scaled by age)
   const _ageFraction = age / 100;
@@ -815,33 +855,18 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     } while (usedCats.has(cat) && attempts < 5);
     usedCats.add(cat);
 
-    // Map category to an event type data object (simplified — use a generic template)
-    const tmpl = HISTORICAL_EVENTS_DATA.find(e => {
-      const typeMap = {
-        economic: ['economic_disparity', 'outside_debt', 'resource_scarcity', 'guild_conflict'],
-        political: [
-          'succession_crisis',
-          'corruption_scandal',
-          'infiltration_fear',
-          'leadership_vacuum',
-          'occupation_legacy',
-          'disputed_land',
-          'population_friction',
-          'generational_divide',
-        ],
-        disaster: ['external_threat'],
-        religious: ['religious_tension'],
-        magical: ['magical_controversy'],
-        occupation_infiltration: ['infiltration_fear'],
-        exile_return: ['occupation_legacy'],
-        demographic: ['population_friction'],
-      };
-      return (typeMap[cat] || []).includes(e.type);
-    });
-    if (!tmpl) continue;
-    // Skip if we've already used this exact event template name (prevents duplicates)
+    // Seeded pick among ALL still-unused templates matching this category (was a
+    // find() that always returned the first match → no variety, and a re-picked
+    // category could never add a distinct arc). Empty pool (category exhausted) →
+    // skip this slot.
+    const candidateTypes = TIMELINE_CATEGORY_TYPES[cat] || [];
+    const pool = HISTORICAL_EVENTS_DATA.filter(
+      e => candidateTypes.includes(e.type) && !usedNames.has(e.name || e.type || '')
+    );
+    if (!pool.length) continue;
+    const tmpl = pool[Math.floor(_rng() * pool.length)];
+    // Track the exact template so it is not emitted twice this timeline.
     const tmplName = tmpl.name || tmpl.type || '';
-    if (usedNames.has(tmplName)) continue;
     usedNames.add(tmplName);
 
     // Spread event across the age timeline. Clamp the bounds so a young (custom-age)
@@ -860,6 +885,10 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
 
     const event = generateEventNarrative(tmpl, yearsAgo, contextTokens);
     event.type = cat;
+    // Preserve the stable template id alongside the display category. The final
+    // dedup keys on templateType (not category), so two distinct arcs in the same
+    // category both survive — which is what lets city/metropolis fill their budget.
+    event.templateType = tmpl.type;
     events.push(event);
   }
 
@@ -901,6 +930,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
       const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
       if (replacement) {
         replacement.type = cat;
+        replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
         replacement.anchored = true;
         const realIdx = events.indexOf(event);
         if (realIdx !== -1) events[realIdx] = replacement;
@@ -1006,19 +1036,24 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     events.sort((a, b) => (b.yearsAgo || 0) - (a.yearsAgo || 0));
   }
 
-  // Final deduplication pass — the anchor pass can produce the same event
-  // across multiple slots when two events share a category type mapping.
-  // Keyed on the stable `type` id, NOT the rendered title: name-keying once
-  // silently destroyed a real arc whenever two types rendered the same title
-  // ('The Occupation' collision — infiltration_fear vs occupation_legacy),
-  // and it made every future title edit a potential content change. Titles
-  // are pinned unique (tests/generators/historyEventTitles.test.js), so this
-  // is behavior-identical today and rename-proof tomorrow.
-  const seenTypes = new Set();
+  // Final deduplication pass (generators-domain-6). Keyed on the stable
+  // TEMPLATE type — NOT the display category (which previously capped every
+  // settlement at ~one event per category, ~8 total, so city/metropolis could
+  // never reach their 12/20 budget) and NOT the rendered title alone
+  // (name-keying silently destroyed a real arc whenever two types rendered the
+  // same title). Two DIFFERENT arcs in the same category now both survive.
+  // A second guard drops any event whose rendered NAME already appeared — this
+  // preserves the cross-type title-collision guard for events that carry a name
+  // but no templateType (the resource events, e.g. 'The Arcane Incident', which
+  // shares a title with magical_controversy). Template titles are pinned unique
+  // (tests/generators/historyEventTitles.test.js).
+  const seenKeys = new Set();
   const deduped = events.filter(e => {
-    const key = e.type || e.name || '';
-    if (seenTypes.has(key)) return false;
-    seenTypes.add(key);
+    const typeKey = e.templateType ? `t:${e.templateType}` : null;
+    const nameKey = e.name ? `n:${e.name}` : null;
+    if ((typeKey && seenKeys.has(typeKey)) || (nameKey && seenKeys.has(nameKey))) return false;
+    if (typeKey) seenKeys.add(typeKey);
+    if (nameKey) seenKeys.add(nameKey);
     return true;
   });
 

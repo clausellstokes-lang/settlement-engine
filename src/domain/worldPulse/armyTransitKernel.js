@@ -32,9 +32,10 @@
 import {
   armyTransitActive, armyTransitLedger, armyRecordOf, stepArmyPosition, hasArrived,
   planMarch, detectCollisions, assertArmyBound, resolveFieldBattle,
-  stepBeliefStaleness, ARMY_ROLES,
+  stepBeliefStaleness, ARMY_ROLES, retreatRoute, currentRegion, armyMarchWeeks,
+  umbilicalFog, staleAssessment,
 } from '../spatial/armyTransit.js';
-import { setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { setSpatialLedger, dropSpatialLedger, hopWeeks } from '../spatial/distanceRead.js';
 import { beliefsActive } from './beliefMap.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { formatCount } from '../formatNumber.js';
@@ -42,12 +43,19 @@ import { formatCount } from '../formatNumber.js';
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
 /** @typedef {import('../spatial/armyTransit.js').ArmyTransitRecord} ArmyTransitRecord */
 /** @typedef {{ targetId?: string|number, sinceTick?: number, currentEffectiveStrength?: number,
- *   readiness?: number, supplyIntegrity?: number, deployedQuality?: number }} DeploymentRecord */
+ *   readiness?: number, supplyIntegrity?: number, deployedQuality?: number,
+ *   recalled?: { cause?: string, tick?: number } }} DeploymentRecord */
 /** @typedef {{ id?: string|number, name?: string, settlement?: { name?: string },
  *   causal?: { scores?: { economic_capacity?: number } } }} SnapItem */
 /** @typedef {{ settlements?: SnapItem[], byId?: { get?: (id: string) => SnapItem | undefined } }} Snapshot */
 /** @typedef {{ channels?: Array<{ type?: string, status?: string, from?: string|number, to?: string|number }> }} Graph */
 /** @typedef {{ fork?: (key: string) => { random: () => number } }} Rng */
+
+// spatial-engine-4: the umbilical-fog level at/above which a field battle is fought
+// "half-blind" — the losing/marching column's couriers are cut deep enough that it
+// mis-assessed the enemy. A DM-legible receipt is stamped; the PHYSICS stay TRUE
+// (the true strengths always resolve the battle). Bounded (fog ∈ [0, UMBILICAL_MAX_DRIFT]).
+const FOUGHT_BLIND_FOG = 0.3;
 
 /** @param {number} x @returns {number} */
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
@@ -85,6 +93,9 @@ function hostilePairFor(records) {
     const a = records[aId];
     const b = records[bId];
     if (!a || !b) return false;
+    // A RETREATING column is not seeking battle — it is routing home mauled. Exclude it
+    // (spatial-engine-3) so a beaten pair fights ONCE per encounter, never battle-per-tick.
+    if (a.role === ARMY_ROLES.RETREAT || b.role === ARMY_ROLES.RETREAT) return false;
     return a.destId === b.originId || b.destId === a.originId;
   };
 }
@@ -109,17 +120,25 @@ function battleInputs(rec) {
 
 /**
  * A field-battle wizard-news entry (house voice, AGGREGATE — no npc named as a
- * casualty). Deterministic id from the sorted pair + tick.
+ * casualty). Deterministic id from the sorted pair + tick. When `blind` is set (the
+ * courier umbilical fog crossed FOUGHT_BLIND_FOG for a combatant — spatial-engine-4), a
+ * "fought half-blind" receipt is stamped: the mis-assessment is the DM-legible CAUSE
+ * while the true strengths still resolved the outcome (the physics are real).
  * @param {{ winnerId: string, loserId: string, region: string }} battle
  * @param {Snapshot} snapshot @param {number} tick @param {string|null} now
  * @param {number} loserBefore @param {number} loserAfter
+ * @param {{ blind?: boolean, loserFog?: number, loserBelievedFoe?: number }} [fog]
  * @returns {Record<string, unknown>}
  */
-function fieldBattleNews(battle, snapshot, tick, now, loserBefore, loserAfter) {
+function fieldBattleNews(battle, snapshot, tick, now, loserBefore, loserAfter, fog = {}) {
   const winner = nameOf(snapshot, battle.winnerId);
   const loser = nameOf(snapshot, battle.loserId);
   const lost = Math.max(0, Math.round(loserBefore - loserAfter));
   const pair = [battle.winnerId, battle.loserId].sort();
+  const reasons = [`A crossing-path collision in ${nameOf(snapshot, battle.region)}'s approaches.`];
+  if (fog.blind) {
+    reasons.push(`${loser} fought half-blind — its couriers home were cut, so it mis-read the enemy's strength (believed ~${formatCount(Math.max(0, Math.round(Number(fog.loserBelievedFoe) || 0)))}).`);
+  }
   return {
     id: `wizard_news.${tick}.field_battle.${pair[0]}.${pair[1]}`,
     tick,
@@ -136,8 +155,8 @@ function fieldBattleNews(battle, snapshot, tick, now, loserBefore, loserAfter) {
     impactIds: [],
     channelIds: [],
     sourceEventId: `field_battle.${pair[0]}.${pair[1]}.${tick}`,
-    tags: ['world_pulse', 'war', 'field_battle'],
-    reasons: [`A crossing-path collision in ${nameOf(snapshot, battle.region)}'s approaches.`],
+    tags: fog.blind ? ['world_pulse', 'war', 'field_battle', 'fought_blind'] : ['world_pulse', 'war', 'field_battle'],
+    reasons,
     createdAt: now,
   };
 }
@@ -217,15 +236,27 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
   const collisions = assertArmyBound(armyCount) ? detectCollisions(records, hostilePairFor(records)) : [];
   /** @type {Record<string, number>} */
   const mauled = {}; // armyId → new strength (write-back to deployments)
+  /** @type {Set<string>} armies that RETREATED this tick → their deployment withdraws next tick. */
+  const retreated = new Set();
   for (const col of collisions) {
     const a = records[col.aId];
     const b = records[col.bId];
     if (!a || !b) continue;
-    // The umbilical fog degrades each army's READ of the OTHER's strength (an
-    // info-starved army mis-assesses), but the TRUE strengths resolve the battle —
-    // the mis-assessment is the DM-legible cause, the physics are real.
+    // spatial-engine-4: the umbilical fog degrades each army's READ of the OTHER's
+    // strength (an info-starved column mis-assesses). The TRUE strengths still resolve
+    // the battle (the physics are real, byte-exact); the fog is stamped as the DM-legible
+    // CAUSE on the news receipt below — no longer write-only dead state.
+    const aFog = umbilicalFog(a.beliefStaleness);
+    const bFog = umbilicalFog(b.beliefStaleness);
     const result = resolveFieldBattle({ a: battleInputs(a), b: battleInputs(b), rng, tick: nowTick });
-    const loserBefore = result.loserId === a.armyId ? a.strength : b.strength;
+    const loserRec = result.loserId === a.armyId ? a : b;
+    const foeRec = result.loserId === a.armyId ? b : a;
+    const loserFog = result.loserId === a.armyId ? aFog : bFog;
+    // The loser's fogged read of the enemy's strength (anchored on its own count when
+    // its couriers are cut) — consumes staleAssessment; informational only.
+    const loserBelievedFoe = staleAssessment(foeRec.strength, loserRec.strength, loserRec.beliefStaleness);
+    const blind = aFog >= FOUGHT_BLIND_FOG || bFog >= FOUGHT_BLIND_FOG;
+    const loserBefore = loserRec.strength;
     const loserAfter = result.strengthDelta[result.loserId];
     // Persist the mauled strengths onto the transit records AND queue the write-back.
     for (const id of [result.winnerId, result.loserId]) {
@@ -235,7 +266,42 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
         mauled[id] = ns;
       }
     }
-    newsEntries.push(fieldBattleNews({ winnerId: result.winnerId, loserId: result.loserId, region: col.region }, snapshot, nowTick, now, loserBefore, loserAfter));
+    // spatial-engine-3: the loser RETREATS home mauled (the M5 spec) instead of grinding
+    // on toward its objective and re-fighting the same pair every tick. Re-plan its
+    // transit record as a RETREAT routed HOME by the M1 danger re-score (retreatRoute),
+    // and flag its deployment for withdrawal — next tick the war layer executes the
+    // recall through the SAME resolvedDeployments → deploymentReturn homecoming a
+    // feasibility-collapse uses, so the beaten army leaves the field (no phantom siege).
+    const beaten = records[result.loserId];
+    if (beaten && deployments[result.loserId]) {
+      const from = currentRegion(beaten);
+      const homeId = beaten.originId;
+      const scored = (from && homeId) ? retreatRoute(digest, worldState, from, homeId, null, season) : null;
+      if (scored && Array.isArray(scored.path) && scored.path.length) {
+        const base = hopWeeks(digest, from, homeId, season);
+        const weeks = Number.isFinite(base) ? Math.max(1, armyMarchWeeks(Number(base), beaten.readiness)) : 1;
+        const retreatRec = armyRecordOf({
+          ...beaten,
+          role: ARMY_ROLES.RETREAT,
+          originId: homeId,
+          destId: homeId,
+          path: scored.path.map(String),
+          departTick: nowTick,
+          arrivalTick: nowTick + weeks,
+          position01: 0,
+          lastTick: nowTick,
+        });
+        if (retreatRec) {
+          records[result.loserId] = retreatRec;
+          retreated.add(result.loserId);
+        }
+      }
+    }
+    newsEntries.push(fieldBattleNews(
+      { winnerId: result.winnerId, loserId: result.loserId, region: col.region },
+      snapshot, nowTick, now, loserBefore, loserAfter,
+      { blind, loserFog, loserBelievedFoe },
+    ));
   }
 
   // ── PERSIST. Drop the whole ledger when no army is afield (sparse → byte-safe). ─
@@ -247,15 +313,21 @@ export function advanceArmyTransit({ snapshot, worldState, digest, graph, rng, s
       ? setSpatialLedger(worldState, 'armyTransit', nextOrNull)
       : dropSpatialLedger(worldState, 'armyTransit');
   }
-  // Write mauled strengths back onto the deployments (a battered army besieges weaker).
-  if (Object.keys(mauled).length) {
+  // Write mauled strengths back onto the deployments (a battered army besieges weaker),
+  // and flag every RETREATING loser's deployment for withdrawal (spatial-engine-3): the
+  // war layer's recall pass (warDeployment.js) resolves a `recalled` deployment as a
+  // homecoming next tick. An absent `recalled` stamp everywhere else ⇒ byte-identical.
+  if (Object.keys(mauled).length || retreated.size) {
     /** @type {Record<string, DeploymentRecord>} */
     const nextDeployments = { ...deployments };
     for (const id of Object.keys(mauled)) {
       if (nextDeployments[id]) nextDeployments[id] = { ...nextDeployments[id], currentEffectiveStrength: mauled[id] };
     }
+    for (const id of retreated) {
+      if (nextDeployments[id]) nextDeployments[id] = { ...nextDeployments[id], recalled: { cause: 'field_battle_retreat', tick: nowTick } };
+    }
     nextWorldState = { ...nextWorldState, deployments: nextDeployments };
   }
-  const changed = changedLedger || Object.keys(mauled).length > 0;
+  const changed = changedLedger || Object.keys(mauled).length > 0 || retreated.size > 0;
   return { worldState: nextWorldState, changed, newsEntries };
 }

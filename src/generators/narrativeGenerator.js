@@ -189,7 +189,7 @@ export const generateSiegeCapability = (historicalEvents, currentTensions, age) 
  * Each key maps to an array of template functions: (settlementName) => string.
  * Exported for use by UI components that want to preview stress descriptions.
  */
-const STRESS_DESCS = {
+export const STRESS_DESCS = {
   under_siege: [
     r =>
       `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day — these are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`,
@@ -289,6 +289,56 @@ const STRESS_DESCS = {
       `${r}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. The settlement is paying for help.`,
     r =>
       `${r} is going about its business, but the business includes people you wouldn't normally see on a market day: hunters checking arrows, a blacksmith working past dark, a group of militia running a drill in the square visible from the gate.`,
+  ],
+  insurgency: [
+    r =>
+      `The approach to ${r} is ordinary until you notice what is missing: no toll-keeper at the gate, no one collecting the road tax a settlement this size always collects. The guards are present, but they are watching the town, not the road.`,
+    r =>
+      `${r}'s gate stands open and unmanned. Further in, two different sets of notices are posted on the same wall — one in the formal hand of the authorities, one hand-lettered and torn at the corner. Someone tears down the second kind. Someone keeps putting them back.`,
+    r =>
+      `There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.`,
+    r =>
+      `${r} looks governed, and is not, quite. The market runs, the watch patrols, the council building is occupied. But the orders that leave that building are not always the orders that get followed, and everyone in the street knows which is which.`,
+  ],
+  mass_migration: [
+    r =>
+      `The road into ${r} is crowded — not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.`,
+    r =>
+      `${r} has grown a second settlement outside its walls — tents and lean-tos and cookfires on the ground that used to be common pasture. The people there watch you approach with the wariness of those who arrived too late to get inside.`,
+    r =>
+      `Half of ${r} seems to be leaving. You pass loaded wagons heading the other way on the road, and inside the walls there are shuttered houses and shops with their goods already gone. Those who remain have the look of people deciding whether to be next.`,
+    r =>
+      `${r}'s market speaks three languages you can pick out and more you cannot. The old families and the newcomers trade at the same stalls and do not quite look at each other. Everyone is doing business. No one is comfortable.`,
+  ],
+  wartime: [
+    r =>
+      `The road to ${r} has been rutted deep by heavy wagons moving in one direction — toward the settlement loaded, away from it loaded differently. At the gate a clerk in crown colours records what comes and goes. This is not a market town's traffic.`,
+    r =>
+      `${r}'s young men are not in ${r}. You notice it at the gate and it holds true inside: the people working the stalls and the fields are the old, the very young, and the women. A recruiting notice is nailed to the gatepost, its edges soft with weather.`,
+    r =>
+      `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square — grain, cloth, iron, and the settlement's own carts to carry it away.`,
+    r =>
+      `${r} is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving — and all of it points one direction, toward a war that is not fought here but is paid for here.`,
+  ],
+  religious_conversion: [
+    r =>
+      `Two temples face each other across ${r}'s central square, and only one has a queue. The other's doors are open but its steps are swept too clean, walked on too little. Something has moved from one building to the other, and it was not only worshippers.`,
+    r =>
+      `The shrine at ${r}'s gate has been recently altered — one symbol chiselled away, another set in its place, the old outline still faintly visible beneath the new. Someone did this carefully. Someone else has been scratching at the replacement.`,
+    r =>
+      `${r} is observing a holy day, and you cannot tell which one. Some shops are shut and draped; others are pointedly open. Two processions are forming in different quarters, and the people watching each are counting who watches the other.`,
+    r =>
+      `The bells of ${r} ring at competing times — one set of chimes answered a beat later by another, from a different quarter, slightly out of tune with the first. No one seems to find this strange, which is the strangest part.`,
+  ],
+  slave_revolt: [
+    r =>
+      `${r}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside — not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.`,
+    r =>
+      `The approach to ${r} is blocked by a hasty checkpoint — overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. Whatever is happening inside, they have decided strangers are a risk.`,
+    r =>
+      `${r} is quiet in the way a held breath is quiet. The slave market at its heart — you can see the empty auction platform from the gate — stands deserted, ringed by guards. The chains are still there. The people who wore them are not.`,
+    r =>
+      `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`,
   ],
 };
 
@@ -579,6 +629,16 @@ export const genArrivalDetail = (config, economicContext = null) => {
       'The founding generation is gone. What remains is contested — in ways the founders did not anticipate and did not plan for.',
     monster_pressure:
       'The founding required pushing into terrain that was not entirely safe. That calculation is being revisited.',
+    insurgency:
+      'The settlement was founded on an authority its people once accepted. That acceptance has been withdrawn, and no one has agreed on what should replace it.',
+    mass_migration:
+      'The founders built for a fixed number of people who knew each other. The population that now fills these walls is neither fixed nor familiar.',
+    wartime:
+      'The settlement was founded for trade and quiet increase. It now serves a war effort that its founders never imagined and would not recognise.',
+    religious_conversion:
+      'The founding was blessed under a faith that is no longer ascendant here. The oaths and endowments made in its name are now contested ground.',
+    slave_revolt:
+      'The settlement was built on a labour it did not count as its people. That reckoning, deferred since the founding, has arrived all at once.',
   };
 
   return {
@@ -1075,16 +1135,22 @@ export const generateArrivalScene = settlement => {
  *  - Coherence contradiction notes
  *  - Current tensions string
  */
-export const generateCoherence = settlement => {
-  if (!settlement) return settlement;
-
-  const summary = genSettSummary(settlement);
+/**
+ * The NPC coherence-enrichment sub-pass: faction/secret overlays
+ * (buildPoliticalNarrative) → faction-structure merge (mergeNPCLists) →
+ * structural positions/goals/constraints (enrichNPCsWithStructure). Extracted so
+ * BOTH full assembly (generateCoherence) and NPC section-regen (regenNPCsPipeline)
+ * run the identical tail — a rerolled roster must carry the same factionAffiliation,
+ * secrets overlay, and structuralPosition as a freshly generated one, not the
+ * poorer raw shape. [generators-domain-3]
+ * @param {*} settlement  a settlement-shaped object carrying the target npcs plus
+ *   powerStructure/institutions/tier/config and the live state enrichment reads.
+ * @returns {Array} the enriched npc list
+ */
+export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
-
-  // Enrich each NPC with faction/secret overlays
+  const summary = genSettSummary(settlement);
   const enrichedNpcs = npcs.map((npc, idx) => buildPoliticalNarrative(npc, idx, summary, npcs));
-
-  // Merge NPC list with faction structure for display
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
     settlement.powerStructure?.factions || [],
@@ -1092,10 +1158,14 @@ export const generateCoherence = settlement => {
     settlement.tier,
     settlement.config || {},
   );
+  return enrichNPCsWithStructure(rawMergedNpcs, settlement);
+};
 
-  // Enrich top NPCs with structural position, goal, and constraint
-  // derived from the live settlement state (legitimacy, capture state, food, prosperity)
-  const mergedNpcs = enrichNPCsWithStructure(rawMergedNpcs, settlement);
+export const generateCoherence = settlement => {
+  if (!settlement) return settlement;
+
+  // NPC coherence enrichment (shared with regenNPCsPipeline via enrichNpcCoherence).
+  const mergedNpcs = enrichNpcCoherence(settlement);
 
   const history = settlement.history || {};
 

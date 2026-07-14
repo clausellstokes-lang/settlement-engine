@@ -72,6 +72,13 @@ const SNAPSHOT_CONFIG_KEYS = Object.freeze({
   // it cleared.
   APPLY_STRESSOR:     Object.freeze(['stressorEdits']),
   RESOLVE_STRESSOR:   Object.freeze(['stressorEdits']),
+  // REMOVED_THREAT now ALSO writes a stressorEdits.resolved suppression record
+  // (mutateWorld.removedThreat) so a party-removed threat can't resurrect on
+  // regeneration — snapshot stressorEdits so undo restores the pre-event
+  // suppression exactly (it already snapshots the live stressor containers via
+  // SNAPSHOT_SETTLEMENT_KEYS; captureEventUndoSnapshot reads both maps).
+  // [domain-events-region-2]
+  REMOVED_THREAT:     Object.freeze(['stressorEdits']),
   // SET_PRIMARY_DEITY writes config.primaryDeityRef +
   // primaryDeitySnapshot (or deletes them on a clear). Snapshotting both keys
   // makes undo a true inverse — restoreKeys deletes a key that was absent
@@ -176,14 +183,17 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   ADD_FACTION:         ENTITY_GRAPH_KEYS,
   ADD_NPC:             ENTITY_GRAPH_KEYS,
   // REMOVED_THREAT strikes a live stressor entry from the stressors/stress/
-  // stresses containers with a plain array splice — no provenance stamp and no
-  // stressorEdits record, so without the pre-event copy the stressor is lost
-  // permanently on undo. (RESOLVE_STRESSOR deliberately does NOT snapshot these
-  // containers: it routes through the crisis lifecycle, which restores the
-  // stressorEdits record so the live entry returns on the next regeneration —
-  // a documented limitation pinned by tests/joins/crisisTripleSync.test.js.
-  // Resurrecting the live entry directly there would double-count against that
-  // regeneration path, so RESOLVE_STRESSOR's live-entry residue is expected.)
+  // stresses containers with a plain array splice — no provenance stamp — so the
+  // pre-event copy of the containers is the only way back for the live entry.
+  // It ALSO now writes a stressorEdits.resolved suppression record (so the threat
+  // stays gone across regeneration, not just this tick); that record is reverted
+  // on undo via SNAPSHOT_CONFIG_KEYS['stressorEdits'] above — the two snapshots
+  // coexist. (RESOLVE_STRESSOR deliberately does NOT snapshot these containers:
+  // it routes through the crisis lifecycle, which restores the stressorEdits
+  // record so the live entry returns on the next regeneration — a documented
+  // limitation pinned by tests/joins/crisisTripleSync.test.js. Resurrecting the
+  // live entry directly there would double-count against that regeneration path,
+  // so RESOLVE_STRESSOR's live-entry residue is expected.)
   REMOVED_THREAT:      STRESS_CONTAINER_KEYS,
   // SHIFT_TIER rewrites the top-level tier + population and performs institution roster
   // surgery (promotion adds/reactivates; demotion deactivates over-tier institutions into

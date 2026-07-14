@@ -92,7 +92,13 @@ describe('evaluateTierResourceDynamics — economic role feeds the drift logic',
     expect(depletions.some(candidate => candidate.targetSaveId === 'bystander')).toBe(false);
   });
 
-  it('a depleted primary-export resource does not quietly recover', () => {
+  it('a depleted primary-export resource recovers under SUSTAINED DEEP CALM (no longer a permanent ratchet)', () => {
+    // [worldpulse-religion-trade-8] — a depleted primary-export anchor was carved
+    // out of the quiet-recovery path entirely (a permanent one-way ratchet), even
+    // in the deepest calm. Now it recovers under the DEEPER quietRecovery gate
+    // (perceivedPressureScore ≤ 0.2), the same slow path exhaustibles use — export
+    // demand justifies slower recovery, not never. A local resource still recovers
+    // under the shallower ≤ 0.32 gate. Both settlements below sit at deep calm.
     const exporter = item('exporter', settlement('Timberfall', {
       config: { nearbyResources: ['managed_forest'], nearbyResourcesState: { managed_forest: 'depleted' } },
       economicState: { primaryExports: ['Milled timber'], primaryImports: [] },
@@ -105,7 +111,7 @@ describe('evaluateTierResourceDynamics — economic role feeds the drift logic',
     const result = evaluateTierResourceDynamics({}, { settlements: [exporter, bystander] }, undefined, { tick: 1 });
     const recoveries = result.candidates.filter(candidate => candidate.candidateType === 'resource_recovery');
 
-    expect(recoveries.some(candidate => candidate.targetSaveId === 'exporter')).toBe(false);
+    expect(recoveries.some(candidate => candidate.targetSaveId === 'exporter')).toBe(true);
     expect(recoveries.some(candidate => candidate.targetSaveId === 'bystander')).toBe(true);
   });
 });

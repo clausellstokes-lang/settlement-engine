@@ -65,6 +65,14 @@ import { hasSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
  *  M9a leaves this slot UNCHANGED and lights the per-faction slots ALONGSIDE it. */
 export const GOVERNING_SEAT_KEY = 'seat';
 
+/** Reserved one-key SEED SENTINEL (not a settlement id — save ids never start
+ *  with `__`). It records the spatialCanonVersion a belief map was cold-started
+ *  at, and materializes ONLY at the decayed-empty boundary, so a belief ledger
+ *  that decays fully below MIN_CONFIDENCE is not mistaken for "never seeded" and
+ *  re-cold-started to omniscient ground truth. Silence deepens fog; only a
+ *  genuine re-canonize (version bump) re-seeds. [spatial-engine-5] */
+export const BELIEF_SEED_KEY = '__seededAt';
+
 /** The populace's common-knowledge belief — fed by the AMBIENT stream (firsthand,
  *  un-carrier-tagged tellings) PLUS whatever a COMPROMISED faction leaks (M9a
  *  leakage). A political faction, always eligible (the populace needs no roster seat). */
@@ -940,10 +948,18 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   /** @type {GroundTruthCtx} */
   const ctx = { byId, pressureIdx, worldState };
   const neighbours = relationshipNeighbourhood(snapshot, worldState);
-  const priorPresent = !!prior && Object.keys(prior).length > 0;
+  const canonVersion = Number(worldState?.spatialCanonVersion) || 0;
+  const realObserverKeys = prior ? Object.keys(prior).filter(k => k !== BELIEF_SEED_KEY) : [];
+  const seededVersion = prior && prior[BELIEF_SEED_KEY] !== undefined ? Number(prior[BELIEF_SEED_KEY]) : null;
+  // Cold-start seeds ground truth ONCE per canonize. A ledger that merely DECAYED
+  // empty (only the seed sentinel survives, at the SAME canon version) must NOT
+  // re-seed — that would snap the most fog-starved world to omniscient present.
+  // Silence deepens fog, it doesn't reset it. A genuine re-canonize (version bump)
+  // does re-seed. [spatial-engine-5]
+  const needsColdStart = realObserverKeys.length === 0 && seededVersion !== canonVersion;
 
   // ── COLD-START: seed the declared neighbourhood to ground truth, once. ──────
-  if (!priorPresent) {
+  if (needsColdStart) {
     /** @type {Record<string, Record<string, Record<string, BeliefRecord>>>} */
     const seeded = {};
     for (const observerId of [...neighbours.keys()].sort(compareCodepoint)) {
@@ -962,8 +978,10 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
 
   // ── NORMAL PATH: reconcile / decay per (observer, subject). ─────────────────
   const rumorLedgers = asObject(getSpatialLedger(worldState, 'rumorLedgers'));
-  // Every observer that either holds a belief OR heard a rumor this window.
-  const observers = new Set([...Object.keys(prior), ...Object.keys(rumorLedgers), ...neighbours.keys()].map(String));
+  // Every observer that either holds a belief OR heard a rumor this window. The
+  // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
+  // it. [spatial-engine-5]
+  const observers = new Set([...realObserverKeys, ...Object.keys(rumorLedgers), ...neighbours.keys()].map(String));
   /** @type {Record<string, Record<string, Record<string, BeliefRecord>>>} */
   const next = {};
   let mutated = false;
@@ -1032,7 +1050,13 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   const shared = allyIntel?.enabled
     ? applyAllyIntelSharing({ maps: next, ctx, neighbours, alignmentOf: allyIntel.alignmentOf || (() => ({ lawfulness01: 0.5, malice01: 0.5 })), now })
     : next;
-  const nextOrNull = Object.keys(shared).length ? shared : null;
+  // Reached only when the world is SEEDED (cold-start handles never-seeded). If
+  // the ledger decayed fully empty, persist the one-key seed sentinel instead of
+  // dropping to null — so next tick reads "seeded-but-empty" (deep fog persists),
+  // not "never seeded" (which re-cold-starts to ground truth). The sentinel is
+  // CONDITIONAL: a non-empty belief-active ledger never carries it ⇒ byte-identical.
+  // [spatial-engine-5]
+  const nextOrNull = Object.keys(shared).length ? shared : { [BELIEF_SEED_KEY]: canonVersion };
   const changed = mutated || JSON.stringify(prior ?? null) !== JSON.stringify(nextOrNull);
   return { next: changed ? nextOrNull : prior, changed };
 }

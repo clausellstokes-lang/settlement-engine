@@ -28,7 +28,7 @@ import { deepClone } from '../clone.js';
 import { ensureWorldState, stablePart } from './worldState.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
 import { resolveStressorById, adjustStressorSeverityById, setStressorAttacker } from './stressors.js';
-import { ensureRelationshipState } from './relationshipEvolution.js';
+import { ensureRelationshipState, relationshipKeyFromEdge, getRelationshipSettlements } from './relationshipEvolution.js';
 import { applyWorldPulseOutcomes } from './applyWorldPulse.js';
 import { deriveAllActiveConditions, deriveActiveCondition, withEventConditionsSynced } from '../activeConditions.js';
 import { PARTY_IMPACT_KINDS } from './partyImpactKinds.js';
@@ -110,6 +110,37 @@ function resolveStateKey(states = {}, settlementId, rawId) {
 }
 
 /**
+ * [domain-events-region-1] G1d — find the live regional-graph edge for an
+ * unordered settlement pair (a, target), where `target` may be a save id OR a
+ * settlement name (settlement events name a neighbour either way). Returns the
+ * raw edge (so the caller derives its key via relationshipKeyFromEdge) or null.
+ * Orientation-agnostic: the edge's canonical from/to may be in either order.
+ * @param {{ regionalGraph?: { edges?: unknown[] }, settlements?: Array<{ id?: unknown, save?: { name?: unknown }, settlement?: { name?: unknown } }> }} snapshot
+ * @param {unknown} aId
+ * @param {unknown} targetRaw
+ * @returns {unknown}
+ */
+function findRelationshipEdgeForPair(snapshot, aId, targetRaw) {
+  const edges = snapshot?.regionalGraph?.edges;
+  if (!Array.isArray(edges) || !edges.length) return null;
+  const a = String(aId);
+  const target = String(targetRaw);
+  // The target id-or-name → the set of save ids it could denote.
+  const candidateIds = new Set([target]);
+  for (const item of snapshot?.settlements || []) {
+    const name = item?.save?.name ?? item?.settlement?.name;
+    if (name != null && String(name) === target) candidateIds.add(String(item.id));
+  }
+  for (const edge of edges) {
+    const { from, to } = getRelationshipSettlements(edge);
+    const f = String(from);
+    const t = String(to);
+    if ((f === a && candidateIds.has(t)) || (t === a && candidateIds.has(f))) return edge;
+  }
+  return null;
+}
+
+/**
  * Build the world-pulse outcomes for a single party action, plus any direct
  * worldState/settlement mutations that the outcome pipeline can't express
  * (stressor resolution, condition removal).
@@ -182,7 +213,20 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
 
     case 'broker_relationship':
     case 'inflame_relationship': {
-      const key = action.relationshipKey;
+      // [domain-events-region-1] G1d — resolve the relationship key. A direct
+      // caller (the DM UI relationship picker) supplies `relationshipKey`
+      // already keyed off the pulse edge; a PARTY-CAUSED settlement event
+      // (partyEventLinkage) instead carries the pair (settlementId +
+      // relationshipTargetId), so resolve the live edge from the snapshot and
+      // derive its key via relationshipKeyFromEdge — the SAME derivation the
+      // pulse uses — so the nudge lands on the state the war layer reads. The
+      // synthetic `rel.a.b` fallback matches relationshipKeyFromEdge's own
+      // fallback for a pair with no built edge yet.
+      let key = action.relationshipKey;
+      if (!key && action.settlementId != null && action.relationshipTargetId != null) {
+        const edge = findRelationshipEdgeForPair(snapshot, action.settlementId, action.relationshipTargetId);
+        key = edge ? relationshipKeyFromEdge(edge) : `rel.${action.settlementId}.${action.relationshipTargetId}`;
+      }
       if (!key) return { outcomes: [], worldState: state, settlementOverrides, ok: false };
       const current = ensureRelationshipState({}, /** @type {any} */ (state.relationshipStates?.[key]));
       const fromType = current.relationshipType;
@@ -309,6 +353,26 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
     case 'remove_npc': {
       const key = resolveStateKey(state.npcStates, action.settlementId, action.npcId);
       const cur = state.npcStates?.[key];
+      // Make removal REAL at the roster (CANON-by-construction): drop the named
+      // NPC from the settlement's roster so the dossier stops listing a corpse,
+      // faction seating re-derives without them next advance, and pruneNpcStates
+      // clears their npcState (it keys on roster presence). Previously only an
+      // unread `removed:true` state flag was written, so a party-declared-dead NPC
+      // kept its slot, seat, and NPC-agency eligibility. [worldpulse-core-2]
+      const target = snapshot?.byId?.get?.(String(action.settlementId));
+      const settlement = target?.settlement;
+      if (settlement && Array.isArray(settlement.npcs)) {
+        const want = stablePart(action.npcId);
+        const idx = settlement.npcs.findIndex((/** @type {{ id?: unknown, name?: unknown }} */ n) =>
+          stablePart(n?.id) === want || stablePart(n?.name) === want
+          || String(n?.id) === String(action.npcId) || String(n?.name) === String(action.npcId));
+        if (idx >= 0) {
+          settlementOverrides.set(String(action.settlementId), {
+            ...settlement,
+            npcs: settlement.npcs.filter((/** @type {unknown} */ _n, /** @type {number} */ i) => i !== idx),
+          });
+        }
+      }
       // The headline effect is a leadership void on the settlement.
       outcomes.push(baseOutcome(action, kind, {
         type: 'condition',

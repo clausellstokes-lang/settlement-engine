@@ -1063,6 +1063,11 @@ export function evaluateNpcRules(snapshot, pressureIdx, options = {}) {
   const out = [];
 
   for (const state of states) {
+    // A party-removed NPC (killed / exiled / captured) leaves no agency behind —
+    // skip its state so no 'X may protect/undermine…' headline fires for a corpse.
+    // The roster drop (partyImpact remove_npc) makes pruneNpcStates clear this
+    // state on a later advance; this guard covers the interim. [worldpulse-core-2]
+    if (state.removed) continue;
     const context = contextForNpc(snapshot, state);
     if (state.contextSignature && state.contextSignature !== context.signature) {
       const rebranch = npcGoalRebranch(state, context, tick);
