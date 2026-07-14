@@ -206,11 +206,16 @@ recovery = the resume protocol above; every wave banks before the next dispatche
   MAIN TREE: ✅ **F2 SHIPPED @ e99e69f9** (4 seams, negative-controlled pins, bridge-surface walker).
   **F3 surfaces/legibility RUNNING** (17 items, stop-and-report licensed). Follow-up chip spawned:
   mapThumb overlay-svg attribute.
-  GOLDEN: ✅ **G1b SHIPPED @ 0b499818** (rust fires — posture≠engagement via warFrontsInto; retreat
-  lives via G1a's recalled seam; umbilical read → fought_blind receipts; defenders bank wins;
-  occupation constrains — uprising open; immortal deployments pruned; ZERO goldens shifted again;
-  any-cast 2252 exact first try). **G1c politics/events/religion RUNNING** (20 items — the wave
-  expected to produce the FIRST legitimate golden shifts; its ledger is the owner sign-off evidence).
+  GOLDEN: ✅ G1b @ 0b499818 · ✅ **G1c @ 9bdfa8fa** (16 fixes, 27 pins — REMOVED_THREAT stays dead
+  through regen, PLAGUE mints its twin, remove_npc real, DM-visible expiry, temper read + peacelike
+  key + scan guard, aggressor-keyed disposition, depleted exports recover, belief-prune fog fix,
+  calamity dedup; golden FIXTURES still byte-identical — only 2 behavior pins updated+ledgered;
+  3 verdict-backed deferrals: bornTick→owner regen batch, M11a autonomy→owner note, stance-half→
+  formalized deferral). **G1d RUNNING** (the 4 new-lane couplings: DM relationship events→conflict
+  layer, relief propagation, re-emitter cooldowns, pantheon tier→conversion). MAIN: ✅ **F3a @
+  0e56baa5** (9 items: rumor/crier/newsBody fiction, settlementPestilence read-model, truthful
+  World-Laws axes; publicSafe note = coupled client+SQL, deferred-with-proof to owner batch).
+  **F3b RUNNING** (catch-up lift+digest, causal supplier, belief UI, RegionWakeReplay, PDF group).
 > - 2026-07-14 ~02:00: **F1 LIFECYCLE-TRUST SHIPPED** (9 fixes, 24 pins) — with the ratchet story
 >   the constitution wrote itself: the wave was HELD at +805B over budget, the §0.8-1 trim landed
 >   in-wave (catch-up body lazified + pulseFingerprint off first paint), closure now **1,251,094**
