@@ -101,11 +101,13 @@ const MOVE_SEVERITY = 0.72;
 const OVERRIDE_SEVERITY = 0.95;
 
 // M9a NON-WAR LEVERS — the house-voice copy for the merchant / church / warlord
-// moves. They emit as INERT posture markers (no condition, no proposal — like
-// defend/hold): a merchant-governed seat that picks `reroute` over `deploy` still
-// wins the strategy:<S> exclusive group (suppressing the reactive escalation) but
-// mutates no world state. The apply-side economic effects (an actual reroute /
-// embargo) are the M9b seam.
+// moves. war-5: they no longer emit as INERT posture markers — each carries a BOUNDED,
+// AUTO relationship nudge (LEVER_EFFECT below) applied through applyRelationshipPatch,
+// so a merchant/church/warlord seat that reaches for a lever both wins the strategy:<S>
+// exclusive group AND moves real diplomatic state (a bounded scalar + a recentIncidents
+// entry the drift reads) — differentiated by archetype: merchant/church levers build or
+// dampen ties, warlord levers menace. Bounded + gated behind the belief map + an
+// archetype seat (O.levers present) ⇒ a dormant / no-archetype world never emits one.
 const LEVER_COPY = Object.freeze({
   reroute: { headline: (/** @type {string} */ n) => `${n} reroutes its trade`, summary: (/** @type {string} */ n) => `${n}'s merchants steer their caravans around the danger rather than answer it with steel.` },
   embargo: { headline: (/** @type {string} */ n, /** @type {string} */ t) => `${n} closes its markets to ${t}`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} answers ${t} with an embargo — economic pressure in the place of a march.` },
@@ -114,6 +116,26 @@ const LEVER_COPY = Object.freeze({
   legitimacy: { headline: (/** @type {string} */ n) => `${n} shores up its legitimacy`, summary: (/** @type {string} */ n) => `${n}'s clergy consolidate the seat's authority at home.` },
   prestige: { headline: (/** @type {string} */ n) => `${n} seeks a stroke of prestige`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} eyes a glorious blow against ${t}.` },
   opportunity: { headline: (/** @type {string} */ n) => `${n} weighs an opportunity`, summary: (/** @type {string} */ n, /** @type {string} */ t) => `${n} marks ${t} as ripe — a chance more than a grievance.` },
+});
+
+// M9a LEVER APPLY EFFECTS (war-5). Each lever nudges ONE-or-two bounded diplomatic
+// scalars on the relevant edge (the hostile target for the war-adjacent levers; the
+// strongest NON-hostile neighbour for the outward/build levers) + stamps a typed
+// recentIncidents entry the relationship drift reads. The deltas are GENTLE
+// (mean-reversion pulls them back over time) so one lever is a pressure, not a shove.
+// `targetKind`: 'hostile' addresses ctx.hostileTargets[0]; 'partner' the strongest
+// non-hostile neighbour. Absent a valid edge, the lever falls back to its inert marker.
+const LEVER_NUDGE = 0.05;      // the standard bounded nudge magnitude
+const LEVER_NUDGE_SOFT = 0.04; // a gentler secondary nudge
+/** @type {Readonly<Record<string, { targetKind: string, incident: string, nudges: Readonly<Record<string, number>> }>>} */
+const LEVER_EFFECT = Object.freeze({
+  reroute:     { targetKind: 'hostile', incident: 'trade_reroute',            nudges: Object.freeze({ dependency: -LEVER_NUDGE }) },
+  embargo:     { targetKind: 'hostile', incident: 'embargo',                  nudges: Object.freeze({ resentment: +LEVER_NUDGE, tradeBalance: -LEVER_NUDGE }) },
+  credit:      { targetKind: 'partner', incident: 'credit_extended',          nudges: Object.freeze({ trust: +LEVER_NUDGE, dependency: +LEVER_NUDGE_SOFT }) },
+  missionize:  { targetKind: 'partner', incident: 'missionary_outreach',      nudges: Object.freeze({ trust: +LEVER_NUDGE }) },
+  legitimacy:  { targetKind: 'partner', incident: 'legitimacy_consolidation', nudges: Object.freeze({ trust: +LEVER_NUDGE_SOFT, dependency: +LEVER_NUDGE_SOFT }) },
+  prestige:    { targetKind: 'hostile', incident: 'prestige_display',         nudges: Object.freeze({ fear: +LEVER_NUDGE }) },
+  opportunity: { targetKind: 'hostile', incident: 'opportunity_marking',      nudges: Object.freeze({ resentment: +LEVER_NUDGE }) },
 });
 
 // warFrontsInto / warFrontsFrom are the PROVENANCE-GATED reads from ./warFrontReads.js
@@ -328,15 +350,85 @@ function hostileEdgeBetween(snapshot, a, b) {
   return null;
 }
 
+// Loose sim shapes for the war-5 lever helpers below (zero any-holes: the looseness
+// lives in pulseShapes.js's own baseline). StrategyContext mirrors contextFor's return.
+/** @typedef {import('./pulseShapes.js').PulseSnapshot} PulseSnapshot */
+/** @typedef {import('./pulseShapes.js').RelationshipNudge} RelationshipNudge */
+/** @typedef {{ hostileTargets: string[], vassalIds: string[], homeBesieged: boolean, vassalBesieged: boolean, besieging: string[] }} StrategyContext */
+
+/**
+ * The strongest NON-hostile neighbour of `sId` — the target for the outward/build M9a
+ * levers (credit / missionize / legitimacy). Codepoint-stable tie-break; null when the
+ * settlement has no non-hostile edge. Reads only the pre-tick snapshot (order-free).
+ * @param {PulseSnapshot} snapshot @param {string|number} sId @param {(id:string)=>number} strengthFor @returns {string|null}
+ */
+function strongestNonHostileNeighbour(snapshot, sId, strengthFor) {
+  const id = String(sId);
+  const states = snapshot?.worldState?.relationshipStates || {};
+  /** @type {string|null} */
+  let best = null;
+  let bestStrength = -Infinity;
+  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+    const edge = normalizeRelationshipEdge(rawEdge);
+    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+    if (HOSTILE_TYPES.has(relState.relationshipType)) continue;
+    const { from, to } = getRelationshipSettlements(edge);
+    const a = String(from);
+    const b = String(to);
+    if (a !== id && b !== id) continue;
+    const other = a === id ? b : a;
+    if (!snapshot?.byId?.has?.(other)) continue;
+    const s = strengthFor(other);
+    if (s > bestStrength || (s === bestStrength && (best == null || other < best))) {
+      bestStrength = s;
+      best = other;
+    }
+  }
+  return best;
+}
+
+/**
+ * Build a BOUNDED, AUTO relationship nudge for a chosen M9a lever (war-5): pick the edge
+ * (the hostile target, or the strongest non-hostile neighbour), read its CURRENT state,
+ * and apply the lever's gentle scalar deltas as clamped ABSOLUTE values
+ * (applyRelationshipPatch SETS, not deltas — so we read-then-clamp here). Returns null
+ * when there is no valid edge ⇒ the lever falls back to its inert marker (byte-safe).
+ * @param {string} move @param {PulseSnapshot} snapshot @param {string|number} sId @param {StrategyContext} ctx @param {(id:string)=>number} strengthFor
+ * @returns {(RelationshipNudge & { targetId: string })|null}
+ */
+function leverNudgeFor(move, snapshot, sId, ctx, strengthFor) {
+  const eff = LEVER_EFFECT[move];
+  if (!eff) return null;
+  const target = eff.targetKind === 'hostile'
+    ? ctx.hostileTargets[0]
+    : strongestNonHostileNeighbour(snapshot, sId, strengthFor);
+  if (!target) return null;
+  const edge = hostileEdgeBetween(snapshot, sId, target);
+  if (!edge) return null;
+  const key = relationshipKeyFromEdge(edge);
+  const relState = ensureRelationshipState(
+    normalizeRelationshipEdge(edge),
+    snapshot?.worldState?.relationshipStates?.[key],
+  );
+  /** @type {Record<string, number>} */
+  const patch = {};
+  const relRec = /** @type {Record<string, unknown>} */ (relState);
+  for (const [scalar, delta] of Object.entries(eff.nudges)) {
+    patch[scalar] = clamp01((Number(relRec[scalar]) || 0) + delta);
+  }
+  return { relationshipKey: key, relationshipPatch: patch, incidentType: eff.incident, targetId: String(target) };
+}
+
 /**
  * Build a probability-1 strategy candidate. The `strategy:<S>` exclusive tag is what
  * the reactive escalation for S contends with; severity is set ABOVE the reactive
  * war candidates so the strategy move wins the exclusive group.
  *
  * @param {{ move: string, sId: string, tick: number, severity: number, headline: string,
- *   summary: string, reasons: string[], proposal?: any, condition?: any, metadata?: any }} args
+ *   summary: string, reasons: string[], proposal?: any, condition?: any, metadata?: any,
+ *   relationshipNudge?: RelationshipNudge|null }} args
  */
-function strategyCandidate({ move, sId, tick, severity, headline, summary, reasons, proposal, condition, metadata }) {
+function strategyCandidate({ move, sId, tick, severity, headline, summary, reasons, proposal, condition, metadata, relationshipNudge = null }) {
   const base = {
     id: `candidate.strategy.${move}.${stablePart(sId)}.${tick}`,
     type: (proposal || condition) ? (proposal ? 'relationship' : 'condition') : 'condition',
@@ -364,6 +456,19 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
       relationshipPatch: proposal.relationshipPatch,
       proposalPayload: proposal.proposalPayload,
       conflictTags: [...base.conflictTags, `label:${proposal.relationshipKey}`],
+    };
+  }
+  // M9a LEVER APPLY (war-5): a bounded, AUTO relationship nudge (NOT a DM proposal —
+  // no label change, no wind-down). It rides applyRelationshipPatch (the same path
+  // sue_for_peace uses) so the lever mutates real state — a diplomatic scalar + a
+  // recentIncidents entry the relationship drift reads — instead of an inert marker.
+  if (relationshipNudge) {
+    return {
+      ...base,
+      type: 'relationship',
+      relationshipKey: relationshipNudge.relationshipKey,
+      relationshipPatch: relationshipNudge.relationshipPatch,
+      metadata: { ...base.metadata, incidentType: relationshipNudge.incidentType },
     };
   }
   // condition is OPT-IN (only the `deploy` move carries army_deployed). defend /
@@ -482,8 +587,13 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
   const name = item?.name || item?.settlement?.name || String(sId);
 
   if (move === 'sue_for_peace') {
-    // Target the strongest hostile edge to wind down. Codepoint-first for stability.
-    const target = ctx.hostileTargets[0] || ctx.besieging[0];
+    // Wind down the war we are ACTUALLY fighting: prefer the settlement we besiege that
+    // has a de-escalable edge (so the label change AND the physical siege withdrawal —
+    // war-3, executed on apply — address the SAME conflict), else the codepoint-first
+    // hostile edge. (Fixes the old comment/code mismatch: "strongest hostile edge" was
+    // really codepoint-first.)
+    const besiegingTarget = ctx.besieging.find((/** @type {string} */ t) => hostileEdgeBetween(snapshot, sId, t));
+    const target = besiegingTarget || ctx.hostileTargets[0] || ctx.besieging[0];
     const edge = target ? hostileEdgeBetween(snapshot, sId, target) : null;
     if (!edge) return null; // no edge to de-escalate — fall through to nothing
     // Read the edge's ACTUAL current label (the relationshipStates overlay wins over
@@ -571,14 +681,19 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     });
   }
 
-  // M9a NON-WAR LEVER (merchant/church/warlord) — an INERT posture marker (no
-  // condition, no proposal), same de-conflict role as defend/hold. The settlement
-  // reached for an economic / religious / opportunistic move instead of a war one;
-  // it still wins the strategy:<S> exclusive group. Apply-side effects are M9b.
+  // M9a NON-WAR LEVER (merchant/church/warlord) — war-5: no longer inert. It carries a
+  // BOUNDED, AUTO relationship nudge (leverNudgeFor) applied through
+  // applyRelationshipPatch, so the settlement's economic / religious / opportunistic
+  // move moves real diplomatic state instead of only the feed. It still wins the
+  // strategy:<S> exclusive group. When no valid edge exists, the nudge is null and the
+  // lever falls back to the inert marker (byte-safe).
   if (/** @type {Record<string, unknown>} */ (LEVER_COPY)[move]) {
     const copy = /** @type {{ headline: (n: string, t: string) => string, summary: (n: string, t: string) => string }} */ (
       /** @type {Record<string, unknown>} */ (LEVER_COPY)[move]);
-    const target = ctx.hostileTargets[0];
+    const nudge = leverNudgeFor(move, snapshot, sId, ctx, strengthFor);
+    // Name the edge the lever actually addresses (its nudge target); else the hostile
+    // rival for the house-voice copy.
+    const target = (nudge && nudge.targetId) || ctx.hostileTargets[0];
     const targetName = target ? (snapshot?.byId?.get?.(String(target))?.name || String(target)) : 'its rivals';
     return strategyCandidate({
       move,
@@ -587,7 +702,13 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
       severity: MOVE_SEVERITY,
       headline: copy.headline(name, targetName),
       summary: copy.summary(name, targetName),
-      reasons: [`${name}'s strategy chooser reached for the ${move} lever rather than a war move.`],
+      reasons: [
+        `${name}'s strategy chooser reached for the ${move} lever rather than a war move.`,
+        ...(nudge ? [`The ${move} lever presses ${targetName} — a bounded ${Object.keys(nudge.relationshipPatch).join('/')} nudge.`] : []),
+      ],
+      relationshipNudge: nudge
+        ? { relationshipKey: nudge.relationshipKey, relationshipPatch: nudge.relationshipPatch, incidentType: nudge.incidentType }
+        : null,
     });
   }
 
@@ -665,6 +786,12 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     // is wired, the order (correctly) re-fires each tick the predicament persists,
     // and its only world effect is suppressing S's reactive escalation. ───────────
     if (hasArmyAbroad && (ctx.homeBesieged || ctx.vassalBesieged)) {
+      // DEDUP (war-4): the recall order is now EXECUTED by the war layer (it stamps
+      // `deployment.recalled`, marches the army home next tick). If the order is already
+      // pending on this army, the recall is in flight — do NOT re-fire the headline every
+      // tick (the feed-spam the finding names). No `continue` past this leaves S's
+      // exclusive slot free; the committed army blocks any new front regardless.
+      if (deployment.recalled) continue;
       const name = item?.name || item?.settlement?.name || sId;
       out.push(strategyCandidate({
         move: 'return_home',

@@ -81,4 +81,12 @@
  * @typedef {{ random: () => number, fork: (label: string) => Rng }} Rng
  */
 
+/**
+ * A BOUNDED relationship nudge (war-5 strategy levers / war-6 pacific mobilization
+ * reactions): clamped ABSOLUTE scalar values applied through applyRelationshipPatch
+ * (which SETS, not deltas) plus the typed recentIncidents stamp the relationship
+ * drift reads. Shared by settlementStrategy.js and mobilizationReactions.js.
+ * @typedef {{ relationshipKey: string, relationshipPatch: Record<string, number>, incidentType: string }} RelationshipNudge
+ */
+
 export {};

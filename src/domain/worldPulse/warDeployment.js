@@ -1168,6 +1168,32 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     return item?.name || item?.settlement?.name || String(id);
   };
 
+  // ── STRATEGIC WITHDRAWAL ORDERS (war-3 sue-for-peace, war-4 return-home). The
+  // strategy / relationship apply path stamps `deployment.recalled` on an army whose
+  // home DELIBERATELY breaks off its siege — a besieged home recalling its army to
+  // defend the walls (return_home), or a sued-for peace winding down the physical war
+  // the de-escalated label just ended. Execute the order HERE, before the siege
+  // resolver, through the SAME withdrawal machinery a feasibility-collapse uses:
+  // resolve the deployment as outcome:'withdrawal' (→ deploymentReturn's homecoming +
+  // contextual siege-relief / occupation-lift), delete the record, retire its
+  // war_front, and record the (attacker→target) pair so the siege loop below EXCLUDES
+  // it — the stale front must not re-conquer the settlement the army just marched away
+  // from. Unlike the siege_abandoned closer (which banks a disposition LOSS), a
+  // deliberate recall / negotiated peace is a CHOICE, not a defeat: NO disposition
+  // delta. An absent `recalled` stamp (every dormant / no-strategy world) ⇒ pure
+  // no-op ⇒ byte-identical. ──────────────────────────────────────────────────────
+  /** @type {Set<string>} */
+  const recalledPairs = new Set();
+  for (const attackerId of Object.keys(deployments).sort(codepoint)) {
+    const rec = deployments[attackerId];
+    if (!rec?.recalled || rec?.targetId == null) continue;
+    const targetId = String(rec.targetId);
+    resolvedDeployments.push({ attackerId, deployment: rec, targetId, outcome: 'withdrawal' });
+    for (const channelId of warFrontChannelIds(graph, attackerId, targetId)) retiredChannels.push(channelId);
+    recalledPairs.add(`${attackerId}:${targetId}`);
+    delete deployments[attackerId];
+  }
+
   // ── Step 0: AGE + ENRICH the stateful army ledger (read-last/write-next). For
   // every committed deployment, migrate a light record forward to a stateful
   // one (seeded from the live capacity model) and increment its `deploymentAge`. This
@@ -1253,7 +1279,13 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
     for (const attackerId of Object.keys(deployments)) {
       if (String(deployments[attackerId]?.targetId) === targetId) besiegerSet.add(String(attackerId));
     }
-    const besiegers = [...besiegerSet].filter(id => snapshot?.byId?.has?.(id)).sort(codepoint);
+    const besiegers = [...besiegerSet]
+      .filter(id => snapshot?.byId?.has?.(id))
+      // Exclude besiegers whose deployment was strategically withdrawn (recalled /
+      // sued-for peace) THIS tick: their army has gone home and their front is being
+      // retired, so a stale confirmed front must not resolve a phantom siege here.
+      .filter(id => !recalledPairs.has(`${id}:${targetId}`))
+      .sort(codepoint);
     if (!besiegers.length) continue;
 
     const defenderItem = snapshot?.byId?.get?.(targetId);
