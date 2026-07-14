@@ -215,6 +215,14 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
   const sessionId = uuidOrNull(body.sessionId);
   const country = (req.headers.get('cf-ipcountry') || req.headers.get('x-vercel-ip-country') || '').slice(0, 2).toUpperCase() || null;
   const eventsRev = Number(body.eventsRev) || 1;
+
+  // Market-insights consent plane (§5) + provenance corpus (§1) — the envelope stamps
+  // built client-side by analyticsFlush.buildEnvelope, persisted here so the sellable
+  // rollups (migration 133) can filter on them. Fail-closed: an unrecognised corpus is
+  // NULL (excluded from the sellable corpus), and market opt-in is only a definite true.
+  const CORPUS_VALUES = new Set(['production', 'dogfood', 'synthetic']);
+  const corpus = typeof body.corpus === 'string' && CORPUS_VALUES.has(body.corpus) ? body.corpus : null;
+  const marketOptIn = body.market === true;
   const accepted = { events: 0, edits: 0, snapshots: 0, pulseEffects: 0 };
   const rejected: Array<{ seq: unknown; reason: string }> = [];
 
@@ -229,6 +237,9 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
       event: name, actor_id: actorId, session_id: sessionId, subject_id: uuidOrNull(e.subjectId),
       props: stripProps(e.props), consent_tier: tier, country, app_version: strShort(body.appVersion),
       events_rev: eventsRev, client_ts: tsOrNull(e.ts), batch_id: batchId, seq: Number(e.seq) || eventRows.length,
+      // Market plane + provenance (132): the sellable rollups read these; fail-closed
+      // defaults (false / null) keep legacy + non-opted-in rows out of the market corpus.
+      corpus, market_opt_in: marketOptIn,
     });
   }
   if (eventRows.length) {

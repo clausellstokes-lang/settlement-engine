@@ -13,6 +13,7 @@
     "validate:map": "node scripts/validate-map-fork.mjs",
     "fix:data": "node scripts/fix-duplicate-keys.js",
     "build:edge-shared": "node scripts/build-edge-shared.mjs",
+    "gen:analytics-dictionary": "node scripts/generate-analytics-dictionary.mjs",
     "optimize:backgrounds": "node scripts/optimize-backgrounds.mjs",
     "optimize:landing-backgrounds": "node scripts/optimize-landing-backgrounds.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.full.json",
