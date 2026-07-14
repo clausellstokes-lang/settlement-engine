@@ -49,6 +49,7 @@ import {
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
+import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries } from './narrativeTempo.js';
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
 import { computeDispositionFactorMap, computeLawfulness, computeMalice } from './disposition.js';
@@ -1132,10 +1133,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     rng: rng.fork('settlement-strategy'),
   });
   const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
-  const { selected, rollExplanations } = rollCandidates(
+  // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
+  // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
+  // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
+  const tempoContext = buildTempoContext(worldState, simulationRules);
+  const { selected, rollExplanations, deferred: tempoDeferred } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
-    { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility) },
+    { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext },
   );
   const deterministicExplanations = [...coupOutcomes, ...warOutcomes, ...structuralCandidates].map(candidate => ({
     candidateId: candidate.id,
@@ -1194,6 +1199,25 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // applyWorldPulseOutcomes refreshes ONCE after outcomes land (the same
   // inputs this duplicate call used to re-derive byte-identically).
   let memoryState = applied.worldState;
+  // E0 NARRATIVE TEMPO GOVERNOR — WRITE hook (design §7.2). Fold this tick's landed
+  // spontaneous major births + the seam's deferrals into the next narrativeTempo
+  // ledger, window-stamped on the PRE-TICK `worldState.calendar.elapsedWeeks`
+  // (interval-invariant; NEVER `tick`). Conditionally materialized: dormant/drained ⇒
+  // foldNarrativeTempo returns null ⇒ the key is dropped ⇒ byte-identical-dormant. A
+  // legacy campaign has no narrativeTempo key and none is added (byte-neutral).
+  const nextTempo = foldNarrativeTempo(
+    memoryState.narrativeTempo,
+    selectedForApply,
+    tempoDeferred,
+    worldState.calendar?.elapsedWeeks ?? 0,
+    simulationRules,
+  );
+  if (nextTempo) {
+    memoryState = { ...memoryState, narrativeTempo: nextTempo };
+  } else if (memoryState.narrativeTempo !== undefined) {
+    const { narrativeTempo: _dropTempo, ...restTempo } = memoryState;
+    memoryState = restTempo;
+  }
   // Disposition write-side, the READ-LAST/WRITE-NEXT seam: fold this tick's
   // resolved-contest win/loss deltas into NEXT-tick dispositionStats. The deltas
   // were READ from contests that resolved THIS tick; the ledger they produce is
@@ -1585,7 +1609,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         settlementIds: thawDigest?.settlementIds || [],
       })
     : [];
-  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries];
+  // E0 NARRATIVE TEMPO GOVERNOR — DM RECEIPT (design §2: "pressure builds in the
+  // west"). DM-visibility only; aggregate/regional. Gated STRICTLY behind an ACTIVE
+  // governor AND non-empty deferrals ⇒ zero deferrals / dormant ⇒ zero entries ⇒
+  // wizardNews byte-identical (load-bearing: wizardNews IS a golden surface).
+  const tempoReceiptNews = (tempoContext.active && tempoDeferred.length)
+    ? tempoReceiptEntries(tempoDeferred, worldState.tick)
+    : [];
+  const newsToAppend = [...aftermathEntries, ...captureNewsEntries, ...causeLifecycleNews, ...beliefMisjudgmentNews, ...realmEntries, ...pantheonArcEntries, ...seasonMarkerEntries, ...thawEntries, ...tempoReceiptNews];
   // Thread the pinned `now` (same as applyWorldPulse's regional-news append) so the
   // feed's `updatedAt` stamps the deterministic tick time, not the wall clock. Without
   // it, any tick that surfaces kernel-side news (realm arcs, aftermath, captures,
@@ -1930,6 +1961,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // recommended is byte-identical to the single-pass autoresolve-ON apply. Empty
     // on the legacy path.
     deferredMajors,
+    // E0 tempo governor: the spontaneous births this tick's seam DEFERRED (the held
+    // storms). Present ONLY when non-empty (governor active + something deferred) — so
+    // the dormant/OFF path never adds this key (byte-identical). Test-observable.
+    ...(tempoDeferred.length ? { tempoDeferred } : {}),
     pulseRecord,
   };
 }
