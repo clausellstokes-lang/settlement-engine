@@ -20,8 +20,14 @@
  *   • hoveredSettlementId is set
  *   • selectedSettlementId is NOT set (committed selection wins)
  *
- * The hover-emit lives in MapOverlay (placement marker handlers). This
- * component is purely presentational.
+ * The hover-emit is wired in two symmetric places, both writing
+ * hoveredSettlementId through mapSlice's setHoveredSettlementId /
+ * clearHoveredSettlementId:
+ *   • PlacementsLayer — onPointerEnter/onPointerLeave on each placement
+ *     icon (the realm map; touch pointers are ignored, and a drag-start
+ *     clears the peek)
+ *   • SettlementPalette — onMouseEnter/onFocus on each list card (sidebar)
+ * This component is purely presentational.
  */
 
 import { useMemo } from 'react';

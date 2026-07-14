@@ -35,6 +35,11 @@ export default function PlacementsLayer({ transformRef }) {
   const setSelectedBurg       = useStore(s => s.setSelectedBurgId);
   const setSelectedSettlement = useStore(s => s.setSelectedSettlementId);
   const updatePlacement       = useStore(s => s.updatePlacement);
+  // P136 / M-6 — hover-peek emitters. These mirror SettlementPalette's
+  // list-card hover so the QuickInspector peek fires from the realm-map
+  // icons themselves, not only the palette. mapSlice owns both actions.
+  const setHovered            = useStore(s => s.setHoveredSettlementId);
+  const clearHovered          = useStore(s => s.clearHoveredSettlementId);
   // Placement move-lock: once the active campaign's world is canonized, placed
   // settlements are frozen in place (adding is still allowed elsewhere). We
   // disable drag-to-move here; updatePlacement is the store-level backstop.
@@ -113,6 +118,10 @@ export default function PlacementsLayer({ transformRef }) {
     const pt = screenToMap(e);
     if (!pt) return;
     e.stopPropagation?.();
+    // A drag is starting — drop any hover-peek so it can't stick mid-drag.
+    // Pointer capture (below) suppresses the pointerleave that would otherwise
+    // clear it, so clear explicitly here.
+    clearHovered?.();
     try { e.currentTarget.setPointerCapture?.(e.pointerId); } catch (_) {}
     dragRef.current = {
       burgId: it.burgId,
@@ -157,7 +166,24 @@ export default function PlacementsLayer({ transformRef }) {
         const x = preview ? preview.x : it.x;
         const y = preview ? preview.y : it.y;
         return (
-          <g key={it.burgId} style={{ pointerEvents: 'auto' }}>
+          <g
+            key={it.burgId}
+            style={{ pointerEvents: 'auto' }}
+            data-hover-settlement-id={it.settlementId || undefined}
+            onPointerEnter={(e) => {
+              // Hover-peek is a fine-pointer affordance. On touch a tap fires
+              // pointerenter with no paired pointerleave, which would leave the
+              // QuickInspector peek stuck — so ignore touch. Enter/leave (not
+              // over/out) fire once for the whole icon, ignoring transitions
+              // between a glyph's sub-shapes (town/city/metropolis have several).
+              // QuickInspector's own selection gate suppresses the peek while a
+              // settlement is selected, so no selection check is needed here.
+              if (e.pointerType === 'touch') return;
+              if (!it.settlementId) return;
+              setHovered?.(it.settlementId);
+            }}
+            onPointerLeave={() => clearHovered?.()}
+          >
             <TierIcon
               x={x}
               y={y}
