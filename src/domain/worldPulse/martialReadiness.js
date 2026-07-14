@@ -47,7 +47,7 @@
 
 import { deityTemper } from './deityAxes.js';
 import { pietyMultOf } from './piety.js';
-import { isLiveWarFront } from './warFrontReads.js';
+import { isLiveWarFront, warFrontsInto } from './warFrontReads.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
 export const MARTIAL_READINESS_TUNING = Object.freeze({
@@ -464,6 +464,13 @@ export function advanceMartialReadiness({ snapshot, worldState, religionStates, 
   }
   // W-C1 item 2: the THREAT-ENVIRONMENT index (empty ⇒ every threat 0 ⇒ byte-identical).
   const threatByCid = buildThreatByCid(snapshot, worldState);
+  // worldpulse-war-1: ENGAGEMENT reads ACTUAL contact, never own posture. The
+  // provenance-gated war-front read (the SAME gate pulseKernel's embattlement pass uses)
+  // says whether a live siege is actually being ENDURED at this settlement's walls; a
+  // town merely `mobilized` (posturing, no siege) contributes 0 engagement (its posture
+  // still lifts FOOTING → readiness, the correct axis). Absent any war front ⇒ every
+  // read is false ⇒ byte-identical to a war-free world.
+  const graph = /** @type {{ regionalGraph?: unknown }} */ (snapshot || {}).regionalGraph || {};
   /** @type {Record<string, MartialRecord>} */
   const out = {};
   for (const cid of Object.keys(states).sort(codepoint)) {
@@ -482,7 +489,13 @@ export function advanceMartialReadiness({ snapshot, worldState, religionStates, 
     const exh = clamp01(Number(exhaustion[cid]) || 0);
     const threat = threatByCid.get(String(cid)) || 0;   // 0 when the world has no war record ⇒ byte-identical
     const footing = warFooting01({ mobilized, alert, deployed, occupied, occupying, exhaustion: exh, threat });
-    const engage = engagement01({ deployed, besieged: mobilized, occupied, winloss: 0 });
+    // besieged = a LIVE war-layer siege actually pressing this settlement's walls (NOT
+    // the town's own `mobilized` posture — posturing is not combat). deployed (its army
+    // committed in the field) and occupied (resisting an occupation) round out ACTUAL
+    // engagement. winloss stays 0 here — feeding this tick's win/loss magnitude is the
+    // separate worldpulse-war-10 tunable-wiring item (ENGAGE_WINLOSS_W), out of scope.
+    const besieged = warFrontsInto(graph, cid).length > 0;
+    const engage = engagement01({ deployed, besieged, occupied, winloss: 0 });
     const temperSign = patronTemperSign(patron);
     const composite = Number(piety[cid]?.composite);
     const megaphoneBleed = Number.isFinite(composite) ? clamp01(composite - 1) : 0;

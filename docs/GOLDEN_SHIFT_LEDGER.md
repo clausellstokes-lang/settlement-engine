@@ -87,3 +87,97 @@ runtime settlement objects belong to two structurally-incompatible typedef famil
 `SimInstitution.status: string|Object` vs entities/status.js's
 `StatusEntity.status?: string` (the withImpairment call). Reconciling those typedef
 families is a pre-existing repo-wide debt item, not a G1a artifact.
+
+---
+
+# GOLDEN SHIFT LEDGER — G1b "WAR MECHANICS"
+
+Wave: G1b (same golden-shifting branch `claude/review-fix-golden-track`, built on G1a @ 7e1886dd).
+Fixes: [worldpulse-war-1] posture≠engagement · [spatial-engine-3 / sim-logic-counterparts-3]
+field-battle RETREAT · [spatial-engine-4] courier-umbilical fog READ · [worldpulse-war-8]
+defender disposition wins · [worldpulse-war-9] occupation constrains the occupied · [worldpulse-war-7]
+vanished-party deployment prune. This ledger records the semantic shift of each fix, why the
+existing goldens stayed byte-identical, and the conditions under which a FUTURE golden will
+legitimately shift — per the golden-shifting-track constitution.
+
+## HEADLINE RESULT — no golden turned red (byte-identity held across the whole suite)
+
+The FULL domain + property suite after all six fixes:
+
+```
+$ npx vitest run tests/domain/          → Test Files 364 passed (364)   Tests 4614 passed (4614)
+$ npx vitest run tests/property/        → Test Files  19 passed  (19)   Tests   83 passed   (83)
+```
+
+Every existing golden manifest — including `tests/property/worldpulseSpatialGolden.test.js`
+(real pulses with `warLayerEnabled: true` + `spatialCanonVersion: 1`, a MEANINGFUL negative
+control) — is byte-identical. No fixture was regenerated; none needed to be.
+
+### Why each fix is byte-safe for the golden scenarios (the gate that keeps the goldens green)
+
+- **war-1 (posture ≠ engagement):** a martialReadiness record materializes ONLY in a faith
+  world with a patron + war experience. The wiring change (engagement reads a LIVE war-front-
+  into read, not own `mobilized` posture) alters `experience01` ONLY for a settlement where
+  `real-besieged XOR mobilized` holds AND a record materializes. The spatial golden's few-tick
+  scenarios surface no such faith settlement, so byte-identical. (An actually-besieged town that
+  was ALSO mobilized reads the SAME 0.9 as before.)
+- **spatial-engine-3 (RETREAT):** the RETREAT re-role + the `recalled:{cause:'field_battle_retreat'}`
+  deployment stamp fire ONLY when a FIELD BATTLE resolves — two hostile in-transit columns whose
+  remaining paths cross. The golden's few-tick scenarios never produce a crossing-column battle
+  (the same reason the existing `armyTransit` ledger is byte-identical there).
+- **spatial-engine-4 (fog READ):** the `fought_blind` news tag + reason fire ONLY on a field
+  battle where a combatant's umbilical fog ≥ FOUGHT_BLIND_FOG (0.3 ⇒ staleness ≥ ~4 ticks, route
+  home CUT, belief-active + non-omniscient). No golden field battle ⇒ no receipt. The physics
+  (winner, strengths, rng draws) are UNCHANGED — the fog only annotates the receipt.
+- **war-8 (defender win):** the mirror win delta fires ONLY on a siege break-off
+  (withdrawal/forcedLift) or an occupation collapse. dispositionDeltas fold into the NEXT-tick
+  `dispositionStats` ledger; the golden's short scenarios run no siege to withdrawal nor
+  occupation to collapse, so byte-identical.
+- **war-9 (occupation constrains):** the deploy gate diverges ONLY when an OCCUPIED town would
+  otherwise open a siege on a third party; the mobilization cooling ONLY at an extractive+
+  occupation. The golden has no occupied-would-deploy / firmly-occupied scenario.
+- **war-7 (prune):** fires ONLY when a deployment's target or attacker is ABSENT from the
+  snapshot (a roster/canon mutation) — a pure no-op on every ordinary tick. The golden never
+  removes a party mid-siege.
+
+## Behavior shift IS real — proven by the wave's own pins (not goldens)
+
+The fixes DO change same-seed behavior on the paths above; that shift is captured by 12 new pins
+in `tests/domain/warMechanicsG1b.test.js` (all green), e.g.:
+
+- war-1 — before: a `mobilized` (posturing) faith town seeded `experience01 = 0.9` (siege-grade,
+  rust ≈ 0); after: `experience01 ≈ 0` (near-maximal rust — the blundered first war can fire),
+  while an actually-besieged town reads `≈ 0.9`.
+- spatial-engine-3 — before: the loser kept its MARCH role and re-fought the same pair every tick;
+  after: `ledger.borin.role === 'retreat'`, `destId === home`, and `deployments.borin.recalled`
+  is stamped ⇒ the war layer resolves it as a `withdrawal` (no phantom conquest).
+- spatial-engine-4 — before: `beliefStaleness` was write-only; after: a deep-fog battle carries
+  `tags:['…','fought_blind']` + a "half-blind" reason, with the true 5:1 favourite still winning.
+- war-8 — before: `dispositionDeltas` credited only the attacker's loss; after: one
+  `{id:targetId, outcome:'win'}` on a survived siege, and `{id:occupiedId, outcome:'win'}` on a
+  thrown-off occupation.
+- war-9 — before: an occupied town opened a siege on a third party; after: `deployments.occTown`
+  is undefined against a third party BUT defined against its own occupier (the uprising path); an
+  extractive-occupied town's posture `cooled`.
+- war-7 — before: a vanished-target deployment ground `war_drain` forever; after: it resolves as
+  a `withdrawal` within one tick (a vanished attacker's ghost record is dropped).
+
+## Conditions under which a FUTURE golden will legitimately shift (for the next session)
+
+A new/extended golden fixture SHOULD shift — and the shift is the intended semantic change,
+re-captured with `UPDATE_GOLDEN=1` and recorded here — if it: (a) runs a faith world long enough
+to materialize a martial record for a settlement whose real-siege state differs from its
+mobilization posture; (b) crosses two hostile marching columns into a FIELD BATTLE (retreat +
+recall + possibly a fought-blind receipt); (c) runs a siege to break-off or an occupation to
+collapse (defender/occupied win deltas); (d) has an occupied settlement that would otherwise
+deploy, or holds an extractive+ occupation while a town ramps; or (e) removes a besieger/target
+from the roster mid-siege.
+
+## Non-golden reds carried by this wave: NONE (any-cast ratchet held at 2252 exact)
+
+All new engine logic is typed against the existing shared typedefs (the local `DeploymentRecord`
+gained a typed `recalled?: { cause?, tick? }` field; the martial graph read uses an `unknown`
+double-cast; `warFrontsInto`/`retreatRoute`/`currentRegion`/`armyMarchWeeks`/`umbilicalFog`/
+`staleAssessment`/`hopWeeks` are typed imports). `node scripts/count-domain-any.mjs` → **2252
+holes (2213 any + 39 suppress)** exact; `npm run typecheck:domain:strict` → **0 errors**;
+`npx eslint` on the five touched source files → clean.

@@ -67,6 +67,15 @@ const RAMP_INDEX = Object.freeze(
 // siege.
 const READY_STATES = new Set(['mobilized', 'deployed']);
 
+// worldpulse-war-9: the occupation-ladder rungs at which the OCCUPIER holds firm control
+// (occupation.js STATE_LADDER: contested < unstable < extractive < stabilized <
+// vassalized). At extractive+ the occupier permits no war footing, so an occupied town
+// COOLS its posture (it cannot ramp its own war machine while garrisoned). At the fragile
+// rungs (contested/unstable) the constraint relaxes — a desperate rising may still ramp
+// (the deploy gate independently limits it to the occupier). String-set only: no
+// occupation.js import (the rung strings are a stable contract), so no new module edge.
+const OCCUPIER_CONTROL_STATES = new Set(['extractive', 'stabilized', 'vassalized']);
+
 // ── Ramp / cool tunables (calibration is load-bearing). ──────────────────────────
 // `progress` is a 0..1 accumulator WITHIN the current rung; it crosses 1.0 to step
 // up a rung (and resets), or below 0 to step down. The per-tick delta is the base
@@ -257,9 +266,11 @@ export function mobilizationSeverity(state) {
  * @param {boolean} args.wantsWar            an upward pressure exists (a hostile target /
  *                                           a warlike disposition) — the reason to ramp at all.
  * @param {boolean} [args.forcePeace]        player intervention / explicit stand-down.
+ * @param {boolean} [args.occupierControl]   under a firm-control occupation (extractive+) →
+ *                                           the occupier permits no war footing (cool).
  * @returns {{ next: PostureRecord, transitioned: boolean, cooled: boolean, reasons: string[] }}
  */
-export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, warExhaustion, wantsWar, forcePeace = false }) {
+export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, warExhaustion, wantsWar, forcePeace = false, occupierControl = false }) {
   const reasons = [];
 
   // ── DEPLOYED override: an army in the field pins the posture. A deep war scar
@@ -275,7 +286,15 @@ export function stepPosture({ prev, item, worldState, tick, hasArmyDeployed, war
     };
   }
 
-  const cool = forcePeace ? { cool: true, reasons: ['player intervention: stand down'] } : shouldCool(item);
+  // worldpulse-war-9: a firmly-occupied town cannot ramp its own war machine — the
+  // occupier suppresses the war footing (a graded constraint: only at extractive+ rungs;
+  // a contested occupation still permits a desperate rising). Folded into the cool
+  // trigger, so it dominates a would-be ramp exactly as economic strain does.
+  const cool = forcePeace
+    ? { cool: true, reasons: ['player intervention: stand down'] }
+    : occupierControl
+      ? { cool: true, reasons: ['under occupation: the occupier permits no war footing'] }
+      : shouldCool(item);
   const idx = RAMP_INDEX[prev.state];
 
   // ── A non-ramp state ('deployed'/'war_exhaustion'/'demobilizing') with no army:
@@ -385,6 +404,8 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
   const prevLedger = worldState?.warPosture && typeof worldState.warPosture === 'object' ? worldState.warPosture : {};
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {};
   const exhaustion = worldState?.warExhaustion && typeof worldState.warExhaustion === 'object' ? worldState.warExhaustion : {};
+  // worldpulse-war-9: the pre-tick occupation ledger (absent ⇒ never occupied ⇒ byte-identical).
+  const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : {};
 
   /** @type {Record<string, PostureRecord>} */
   const nextLedger = {};
@@ -402,6 +423,9 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
     const hasArmyDeployed = !!deployments[id]?.targetId;
     const scar = clamp01(exhaustion[id] || 0);
     const wantsWar = !hasArmyDeployed && wantsWarFor(id) === true;
+    // worldpulse-war-9: firmly occupied (extractive+) ⇒ the occupier caps the war footing.
+    const occ = occupations[id];
+    const occupierControl = !!(occ && occ.occupierId != null && OCCUPIER_CONTROL_STATES.has(String(occ.state)));
 
     const { next, transitioned, cooled, reasons } = stepPosture({
       prev,
@@ -412,6 +436,7 @@ export function evaluateMobilization({ snapshot, worldState, tick, wantsWarFor, 
       warExhaustion: scar,
       wantsWar,
       forcePeace: forcePeaceBy[id] === true,
+      occupierControl,
     });
 
     // Only PERSIST a non-default posture. A settlement that lands back at
