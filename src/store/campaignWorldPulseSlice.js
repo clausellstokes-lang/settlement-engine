@@ -613,6 +613,71 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     return result;
   },
 
+  /**
+   * Lane 2 (domain-events-region-1): land a NON-party DM canon relationship event
+   * (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE / OPENED_TRADE_ROUTE, and an
+   * APPLY_STRESSOR carrying an instigator) on the live campaign's pulse
+   * relationship edge — the worldState.relationshipStates entry the war layer
+   * reads, plus the regionalGraph edge label + channel bundle. Called
+   * fire-and-forget by settlementSlice.rippleEventThroughWorld on a canon,
+   * non-party relationship event; the undo snapshot is captured synchronously in
+   * applyEvent (logEntry.undo.relationshipRipple) and reversed by
+   * reverseCanonRelationshipRipple, so this async ripple never has to be awaited
+   * for undo to be a clean inverse.
+   *
+   * ORPHAN GUARD: a sync undoLastEvent can pop the event BEFORE this async ripple
+   * (which awaits the lazy engine load) commits. If the triggering event is no
+   * longer in the acting save's eventLog by commit time, skip — the sync undo
+   * already restored the pre-ripple edge, so landing the ripple now would orphan
+   * it.
+   *
+   * @param {string} campaignId
+   * @param {{ event?: any, homeId?: string|number }} [args]
+   */
+  recordCanonRelationshipRipple: async (campaignId, { event, homeId } = {}) => {
+    if (!event || homeId == null || homeId === '') return null;
+    // Parked-pause guard (mirrors recordPartyImpact), kept as the SYNC PREFIX
+    // (FP-2a §0.7.3): a relationship ripple recorded while the interval is paused
+    // for DM verdicts would be clobbered by resume. The heavy body (the relationship
+    // applier + persist) rides the lazy campaignCanonRelationshipSession chunk so
+    // NONE of it — nor the relationshipState constructor it pulls — reaches first
+    // paint (dep-import pattern, mirroring canonizeCampaignWorldSpatial).
+    if (get().getPausedAdvance(campaignId) && !get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_paused' };
+    }
+    const { runRecordCanonRelationshipRipple } = await import('./campaignCanonRelationshipSession.js');
+    return runRecordCanonRelationshipRipple({ set, campaignId, event, homeId });
+  },
+
+  /**
+   * Lane 2 (domain-events-region-1) — the INVERSE of recordCanonRelationshipRipple,
+   * for undoLastEvent. Restores the campaign's pre-ripple pulse edge (the
+   * relationshipState entry + the regionalGraph edge label + channel bundle) from
+   * the snapshot applyEvent stamped on logEntry.undo.relationshipRipple. Called
+   * fire-and-forget by settlementSlice.undoLastEvent.
+   *
+   * Async + lazy on purpose: the channel-bundle re-sync it needs (region graph
+   * helpers) rides the SAME lazy chunk the first-paint budget keeps the forward
+   * applier out of the eager closure — the eager undo path touches only the light
+   * snapshot (logEntry.undo). RACE-SAFE with the forward ripple: the snapshot is
+   * the pre-apply value, so restoring it is idempotent when the forward hasn't
+   * landed, and the forward's orphan guard skips once the event is undone —
+   * whichever async op wins, the pulse edge ends at its pre-event value.
+   *
+   * @param {string} campaignId
+   * @param {{ key?: string, from?: unknown, to?: unknown, priorRelState?: unknown, priorEdgeType?: string|null }} [snapshot]
+   */
+  reverseCanonRelationshipRipple: async (campaignId, snapshot = {}) => {
+    if (!snapshot?.key) return null;
+    // Advance-in-flight guard (store-2), kept as the SYNC PREFIX: a running
+    // multi-tick advance replaces worldState/regionalGraph wholesale, so an undo
+    // reversal landing mid-advance would be silently reverted. The heavy body rides
+    // the SAME lazy sidecar as the forward ripple (dep-import pattern).
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
+    const { runReverseCanonRelationshipRipple } = await import('./campaignCanonRelationshipSession.js');
+    return runReverseCanonRelationshipRipple({ set, campaignId, snapshot });
+  },
+
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
     // Advance-concurrency guard — see the advanceInFlight contract above.
     if (get().isAdvanceInFlight(campaignId)) return null;

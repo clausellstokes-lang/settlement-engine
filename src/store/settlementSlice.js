@@ -58,6 +58,11 @@ import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
 import { makeReceipt } from '../domain/trace.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
+// Lane 2 (domain-events-region-1): LIGHT (eager-safe, zero heavy imports) helpers
+// for the NON-party canon relationship ripple — the undo-snapshot capture (in
+// applyEvent) + the mapping gate (in rippleEventThroughWorld). The heavy applier
+// rides the lazy world-engine chunk (recordCanonRelationshipRipple).
+import { captureCanonRelationshipUndo, canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { eligibleCustomContent } from '../domain/customContentSchema.js';
 import {
   CRISIS_EVENT_TYPES,
@@ -262,6 +267,25 @@ function rippleEventThroughWorld({ afterState, campaign, event, beforeEnvelope, 
       const record = afterState.recordPartyImpact;
       if (action && typeof record === 'function') {
         Promise.resolve(record(campaign.id, action)).catch(() => { /* world ripple is best-effort */ });
+      }
+    } catch { /* linkage is best-effort */ }
+  }
+
+  // Lane 2 (domain-events-region-1): a NON-party DM canon relationship event
+  // (BROKERED_ALLIANCE / SETTLEMENT_DISPUTE / OPENED_TRADE_ROUTE, or an
+  // APPLY_STRESSOR carrying an instigator) ALSO ripples to the campaign's pulse
+  // relationship edge — the worldState.relationshipStates the war layer reads +
+  // the regionalGraph edge label — mirroring the settlement-level neighbourNetwork
+  // mutation into the world engine. The light mapping gate avoids the lazy engine
+  // load for every non-relationship event; the undo snapshot was captured in
+  // applyEvent (logEntry.undo.relationshipRipple) and is reversed synchronously by
+  // reverseCanonRelationshipRipple, so this async ripple is never awaited for undo.
+  if (campaign && !event?.partyCaused) {
+    try {
+      const relRipple = afterState.recordCanonRelationshipRipple;
+      if (typeof relRipple === 'function' && canonRelationshipTargetFor(event, activeSaveId)) {
+        Promise.resolve(relRipple(campaign.id, { event, homeId: activeSaveId }))
+          .catch(() => { /* world ripple is best-effort */ });
       }
     } catch { /* linkage is best-effort */ }
   }
@@ -1583,6 +1607,21 @@ export const createSettlementSlice = (set, get) => ({
         },
       };
     }
+    // Undo seam for the Lane-2 relationship ripple (domain-events-region-1):
+    // snapshot the campaign's pre-ripple pulse relationshipState + edge label
+    // BEFORE rippleEventThroughWorld upserts them, so undoLastEvent can restore
+    // them (same campaignTwin pattern above). captureCanonRelationshipUndo is a
+    // pure LIGHT read that returns null for every non-relationship (or
+    // party-caused) event, so the common event stashes nothing.
+    if (campaign && !event?.partyCaused) {
+      const relRippleUndo = captureCanonRelationshipUndo(campaign, event, activeSaveId);
+      if (relRippleUndo) {
+        logEntry = {
+          ...logEntry,
+          undo: { ...(logEntry.undo || {}), relationshipRipple: relRippleUndo },
+        };
+      }
+    }
 
     // Successor detection (pure; see computePendingSuccession): a dead
     // pillar-tier NPC surfaces a ranked, dismissible successor prompt for the DM.
@@ -1847,6 +1886,23 @@ export const createSettlementSlice = (set, get) => ({
             ...withdrawDirective,
             settlementId: String(saveId),
           });
+        }
+      } catch { /* world reconciliation is best-effort */ }
+    }
+    // Lane 2 (domain-events-region-1) — reverse the NON-party relationship ripple
+    // the undone event landed on the campaign world engine. The pre-ripple pulse
+    // relationshipState + edge label were snapshotted into
+    // logEntry.undo.relationshipRipple at apply time (the campaignTwin pattern);
+    // reverseCanonRelationshipRipple restores them. Fire-and-forget + guarded
+    // (the channel-bundle re-sync rides the lazy engine chunk kept out of first
+    // paint); race-safe with the forward ripple via the forward's orphan guard.
+    const relRippleUndo = undoneEntry?.undo?.relationshipRipple;
+    if (relRippleUndo?.campaignId != null) {
+      try {
+        const reverse = afterState.reverseCanonRelationshipRipple;
+        if (typeof reverse === 'function') {
+          Promise.resolve(reverse(relRippleUndo.campaignId, relRippleUndo))
+            .catch(() => { /* world reconciliation is best-effort */ });
         }
       } catch { /* world reconciliation is best-effort */ }
     }
