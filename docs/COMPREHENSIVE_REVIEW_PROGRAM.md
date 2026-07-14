@@ -97,6 +97,12 @@ behavior, budget raises, golden regens.
   points; all under §G law — bounded modulators + receipts, never engine-resolved fates.
   Both docs write grounded on the corruption recon (wf_8c9fcc07-932); build home W-DOCTRINE.
 
+- **2026-07-14 — SCOPE FREEZE (owner: "for the first time in a minute... i think i am done adding
+  things"):** the design corpus is CLOSED as of this ruling. Final scope = everything above +
+  the frozen docs. From here the program is EXECUTION ONLY: pending designs write from the
+  corruption recon (corruption web + settlement politics w/ NPC dimension), then builds proceed
+  down the master sequence. New scope requires a fresh owner directive.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
