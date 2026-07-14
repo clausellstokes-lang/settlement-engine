@@ -35,7 +35,7 @@ import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const KERNEL_HOME = 'src/kernel/slugify.js'; // the sanctioned home — exempt
-const BASELINE_CEILING = 37; // committed max — lower it as copies migrate; never raise it
+const BASELINE_CEILING = 36; // committed max — lower it as copies migrate; never raise it
 
 // The slug BUILDER idiom: collapse non-alphanumerics to a single [-_] separator.
 // Deliberately excludes strip-to-'' normalization (`[^a-z0-9]/g, ''`), which is

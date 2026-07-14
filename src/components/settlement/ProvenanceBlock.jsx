@@ -1,7 +1,7 @@
 /**
  * ProvenanceBlock — Seed + timestamps + campaign link.
  *
- * Lives in the right rail beneath NextActionRail. Audit's framing:
+ * Lives in the right rail. Audit's framing:
  * "the right rail matters" — provenance is the bottom-of-rail context
  * that makes claims like "this is canon" feel concrete. DMs need to
  * know:

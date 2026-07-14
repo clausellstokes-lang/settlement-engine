@@ -9,7 +9,6 @@
   "src/domain/explanation.js",
   "src/domain/factionProfile.js",
   "src/domain/factionRelationshipUpdate.js",
-  "src/domain/genreProfile.js",
   "src/domain/hookEscalation.js",
   "src/domain/inferSupplyChains.js",
   "src/domain/npcProfile.js",

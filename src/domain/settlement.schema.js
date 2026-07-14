@@ -1425,15 +1425,15 @@ export const FIELD_ALIASES = Object.freeze({
  *          | 'frontier' | 'gothic' | 'political' | 'sword_and_sorcery'
  *          | 'mythic_high'} CanonicalGenre
  *
- * Tier 4.15 canonical genre vocabulary. domain/genreProfile.js maps
- * each to a structured template of modifiers.
+ * Tier 4.15 canonical genre vocabulary. (Its domain/genreProfile.js
+ * mapper was removed as dead code; see docs/DEAD_CODE_DISPOSITION.md.)
  */
 
 /**
  * @typedef {Object} GenreProfile
  *
- * Tier 4.15 structured genre shape produced by
- * domain/genreProfile.js#deriveGenreProfile.
+ * Tier 4.15 structured genre shape (formerly produced by the now-removed
+ * domain/genreProfile.js#deriveGenreProfile; see docs/DEAD_CODE_DISPOSITION.md).
  *
  * @property {CanonicalGenre | null} genre
  * @property {string[]} institutionEmphasis

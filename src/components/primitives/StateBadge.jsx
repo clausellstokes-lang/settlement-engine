@@ -1,9 +1,9 @@
 /**
  * primitives/StateBadge — One badge to rule the lifecycle states.
  *
- * Replaces ad-hoc badge styles scattered across PhaseBadge, the
- * Narrated/Raw chip in SettlementDetail, and the LockToggle's locked
- * indicator. The audit's vocabulary is normative: DRAFT, CANON,
+ * Replaces ad-hoc badge styles scattered across PhaseBadge and the
+ * Narrated/Raw chip in SettlementDetail. The audit's vocabulary is
+ * normative: DRAFT, CANON,
  * PREPLAY, EVENT_PENDING, NARRATED, RAW, LOCKED. Every status visible
  * to the user should reduce to one of these kinds.
  *

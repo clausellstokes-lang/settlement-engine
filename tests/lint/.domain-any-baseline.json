@@ -1,6 +1,6 @@
 {
-  "total": 2248,
-  "totalAny": 2209,
+  "total": 2230,
+  "totalAny": 2191,
   "totalSuppress": 39,
   "files": {
     "src/domain/activeConditions.js": {
@@ -69,10 +69,6 @@
     },
     "src/domain/defenseLedger.js": {
       "any": 2,
-      "suppress": 0
-    },
-    "src/domain/devAnomalies.js": {
-      "any": 17,
       "suppress": 0
     },
     "src/domain/display/chronicleTimeline.js": {
@@ -213,10 +209,6 @@
     },
     "src/domain/pendingEdits.js": {
       "any": 13,
-      "suppress": 0
-    },
-    "src/domain/provenance.js": {
-      "any": 1,
       "suppress": 0
     },
     "src/domain/region/contestOverThirdParty.js": {

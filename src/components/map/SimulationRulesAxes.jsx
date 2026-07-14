@@ -10,7 +10,7 @@ import Button from '../primitives/Button.jsx';
 /*
  * SimulationRulesAxes — the §11 world-law AXIS cards and the per-domain
  * tri-state rows for SimulationRulesDialog (Phase 5.5 CL-0). Split out as a
- * sibling leaf exactly like SimulationRulesDisclosure/SimulationRulesGateToggle
+ * sibling leaf exactly like SimulationRulesDisclosure
  * so the dialog stays under the max-lines budget.
  *
  * THE COPY LAW (binding, §11): every control describes a FICTIONAL ASSUMPTION —

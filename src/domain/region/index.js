@@ -14,11 +14,10 @@
  * wizardNews feed generator sits behind it. Import the specific leaf instead
  * (mirrors spatial/index.js's "never enter the entry static closure" law).
  *
- * (region/migrations.js is intentionally NOT re-exported here: its three exports
+ * (region/migrations.js was removed as dead code — its three exports
  * — migrateRegionalGraphToLatest, withMigratedCampaignRegionalGraph,
- * migrateCampaignsRegionalGraphs — are consumed by nothing (see
- * docs/DEAD_CODE_DISPOSITION.md). Import them from './migrations.js' directly if
- * they are ever wired.)
+ * migrateCampaignsRegionalGraphs — had no consumers; see
+ * docs/DEAD_CODE_DISPOSITION.md.)
  */
 
 export {
