@@ -11,6 +11,8 @@ import {SupplyChainsPanel} from '../SupplyChainsPanel';
 import { criminalOpEcon } from '../../../domain/display/defenseDisplay.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
+import { deriveMarketPrices } from '../../../domain/display/marketPrices.js';
+import MarketPricesSection from './MarketPricesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
@@ -232,6 +234,18 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     if (!campaign) return null;
     return flowDerivedDependency({ worldState: campaign.worldState, economicState: eco, settlementId: sid });
   }, [saveId, s, campaigns, eco]);
+  // MARKET PRICES (round-21 Wave 7) — the crier's coin, a pure display read over
+  // the SAME generation baseline + spatial ledgers, nudged by the M6d flow drift.
+  // Prices render even aspatially (no campaign / worldState ⇒ adequate bands from
+  // the generation trade profile — the dormancy shape); never mutates a thing.
+  const marketPrices = useMemo(() => {
+    const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
+    if (!sid) return null;
+    const campaign = Array.isArray(campaigns)
+      ? campaigns.find(c => (c?.settlementIds || []).map(String).includes(sid))
+      : null;
+    return deriveMarketPrices({ economicState: eco, worldState: campaign?.worldState || null, settlementId: sid, flowDrift });
+  }, [saveId, s, campaigns, eco, flowDrift]);
   const via = s?.economicViability;
   if (!eco) return <Empty message="No economic data available."/>;
 
@@ -407,6 +421,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
       {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
       {flowDrift && <LiveTradeFlowSection drift={flowDrift} />}
+
+      {/* ── MARKET PRICES (Wave 7 — the crier's coin, band-derived, additive) ── */}
+      {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
 
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
 
