@@ -9,14 +9,25 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 vi.mock('../../src/lib/supabase.js', () => ({ isConfigured: true }));
-vi.mock('../../src/lib/consent.js', () => ({ getConsent: () => ({ essential: true, research: true }) }));
+// Mutable consent so a test can revoke research mid-flight (lib-infra-2 purge pin).
+const _h = vi.hoisted(() => ({ consent: { essential: true, research: true, market: false } }));
+vi.mock('../../src/lib/consent.js', () => ({ getConsent: () => _h.consent }));
 
 import {
-  enqueueEvent, enqueueSnapshot, flush, debugSnapshot, setAnalyticsElevated, __resetQueueForTests,
+  enqueueEvent, enqueueSnapshot, flush, flushOnLeave, debugSnapshot, setAnalyticsElevated,
+  setAnalyticsSessionId, __resetQueueForTests, __loadFlushForTests, __unloadFlushForTests,
 } from '../../src/lib/analyticsQueue.js';
+// The flush-time half of the eager-leaf/lazy-applier split — the cap lives there.
+import { MAX_SNAPSHOTS_PER_ENVELOPE } from '../../src/lib/analyticsFlush.js';
 
-beforeEach(() => {
+beforeEach(async () => {
+  // Resolve the lazy flush module up front so flush() delegates synchronously in
+  // each test (production primes it on first enqueue; the not-yet-loaded path is
+  // pinned explicitly via __unloadFlushForTests below).
+  await __loadFlushForTests();
   __resetQueueForTests();
+  _h.consent = { essential: true, research: true, market: false }; // restore default consent
+  setAnalyticsSessionId(null); // clear any cross-test session-id getter
   vi.stubEnv('VITE_SUPABASE_URL', 'https://example.supabase.co');
   vi.unstubAllGlobals();
 });
@@ -188,5 +199,115 @@ describe('retry timer lifecycle (A+ lib.4b/lib.5)', () => {
     // flush() the new event here → call 2. Cleared by reset → stays 1.
     vi.advanceTimersByTime(2_000);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('consent purge — research snapshots (lib-infra-2)', () => {
+  test('a snapshot carrying a `structural` payload is purged on research revoke; a product one survives', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {})); // stay in-flight so purge runs but no drain
+    vi.stubGlobal('fetch', fetchMock);
+
+    // A research snapshot carries a `structural` payload (researchCapture only builds it
+    // under research consent, alongside research-tier hot columns) — the flush-time purge
+    // keys on that payload directly. A product snapshot has none and must legitimately
+    // survive a research revocation.
+    enqueueSnapshot({ settlementUuid: 'u-research', capturePoint: 'saved', structural: { power: {} }, fingerprintHash: 'h1' });
+    enqueueSnapshot({ settlementUuid: 'u-product', capturePoint: 'saved', fingerprintHash: 'h2' });
+
+    _h.consent = { essential: true, research: false, market: false }; // user revokes research
+    flush(); // purgeRevoked runs inside flush before the envelope is built
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    const uuids = sent.snapshots.map((s) => s.settlementUuid);
+    expect(uuids).toContain('u-product');     // product-tier snapshot survives revocation
+    expect(uuids).not.toContain('u-research'); // research-tier snapshot is purged
+  });
+});
+
+describe('snapshot cap per envelope (lib-infra-3)', () => {
+  test('buildEnvelope caps snapshots at MAX_SNAPSHOTS_PER_ENVELOPE; the overflow stays queued', async () => {
+    const fetchMock = vi.fn(() => Promise.resolve({ ok: true }));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const OVERFLOW = 5;
+    const N = MAX_SNAPSHOTS_PER_ENVELOPE + OVERFLOW;
+    for (let i = 0; i < N; i++) {
+      enqueueSnapshot({ settlementUuid: `u${i}`, capturePoint: 'exported', fingerprintHash: `h${i}` });
+    }
+    flush();
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent.snapshots.length).toBe(MAX_SNAPSHOTS_PER_ENVELOPE); // capped, never all N
+    await settle();
+    // The overflow beyond the cap is NOT dropped by drain — it survives for the next flush.
+    expect(debugSnapshot().depth).toBe(OVERFLOW);
+  });
+});
+
+describe('sessionId envelope stamp (lib-infra-5)', () => {
+  test('a registered getter overrides the built-in default', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    setAnalyticsSessionId(() => 'sess-123');
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body).sessionId).toBe('sess-123');
+  });
+
+  test('with no getter registered, the lazy flush half stamps the built-in lib/sessionId id', () => {
+    // The default is analyticsFlush's own import of lib/sessionId.js (zero eager
+    // bytes) — give it a sessionStorage to mint into and assert the stamp is real.
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+    const store = new Map();
+    vi.stubGlobal('sessionStorage', {
+      getItem: (k) => (store.has(k) ? store.get(k) : null),
+      setItem: (k, v) => store.set(k, String(v)),
+      removeItem: (k) => store.delete(k),
+    });
+
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();
+    const sid = JSON.parse(fetchMock.mock.calls[0][1].body).sessionId;
+    expect(typeof sid).toBe('string');
+    expect(sid.length).toBeGreaterThan(0);
+  });
+
+  test('a throwing session-id getter never breaks transport (envelope still sends)', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    setAnalyticsSessionId(() => { throw new Error('boom'); });
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body).sessionId).toBeUndefined();
+  });
+});
+
+describe('pagehide before the flush module resolves — synchronous spill, no loss', () => {
+  test('flushOnLeave falls back to an immediate spill write when the lazy half is not loaded', () => {
+    // Simulate the narrow first-enqueue-to-module-load window at pagehide: the
+    // enqueue primes the import (unresolved at this tick), the user leaves, and the
+    // backlog must be PERSISTED synchronously — not lost to an import that will
+    // never resolve on a dying page. It restores + delivers on the next boot.
+    __unloadFlushForTests();
+    const store = new Map();
+    vi.stubGlobal('localStorage', {
+      getItem: (k) => (store.has(k) ? store.get(k) : null),
+      setItem: (k, v) => store.set(k, String(v)),
+      removeItem: (k) => store.delete(k),
+    });
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flushOnLeave(); // module not loaded → must spill synchronously, not beacon/fetch
+
+    const spilled = JSON.parse(store.get('sf_evt_queue_v1'));
+    expect(spilled.events.length).toBe(1);
+    expect(spilled.events[0].event).toBe('homepage_view');
+    expect(fetchMock).not.toHaveBeenCalled(); // nothing raced onto the network
   });
 });

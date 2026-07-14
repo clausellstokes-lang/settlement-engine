@@ -245,6 +245,15 @@ async function supabaseList() {
  * a caller can paint cards from meta and hydrate the full blob per-save when a
  * settlement is actually opened. Callers that genuinely need blobs in memory
  * (cross-save link/rename/delete, campaign simulation) keep using list().
+ *
+ * DISPOSITION (lib-infra-6, Analytics-v2 A1): this projection is BUILT but has zero
+ * grid consumers today — deliberately. It is the F42 slice's second half: the
+ * targeted-neighbour-query half shipped; the SettlementsPanel grid → listMeta +
+ * per-open hydration was consciously deferred because per-save blob hydration on card
+ * open is a genuine feature the slice declined, not an oversight. This is deferred F42
+ * INFRA, not dead code to re-find. Do NOT wire the grid or delete this in a cleanup
+ * pass — resurrecting the grid adoption is an owner-scoped feature (needs the
+ * per-open hydration path). See the A1 wave report + memory for the standing deferral.
  */
 async function supabaseListMeta() {
   const { data, error } = await supabase

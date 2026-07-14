@@ -127,6 +127,13 @@ async function resolveUserActor(admin: any, userId: string, deviceKey: string | 
 // generate-chronicle fixed with regression tests).
 const MAX_BODY_BYTES = 64 * 1024;
 
+// Snapshot-cap contract (lib-infra-3): the number of snapshots this fn persists per
+// envelope. MUST equal the client's MAX_SNAPSHOTS_PER_ENVELOPE (src/lib/analyticsQueue.js)
+// — a cross-contract test pins client ≤ server so a multi-settlement export can never
+// silently lose member snapshots. Overflow beyond this is COUNTED in `rejected`
+// (reason 'snapshot_cap_exceeded'), never dropped silently the way the old slice(0, 2) did.
+const SERVER_SNAPSHOT_CAP = 20;
+
 export async function handleIngestEvents(req: Request): Promise<Response> {
   const headers = corsHeaders(req);
   if (req.method === 'OPTIONS') return new Response(null, { headers });
@@ -267,7 +274,13 @@ export async function handleIngestEvents(req: Request): Promise<Response> {
 
   // ── Snapshots (product = hot columns only; full structural needs research) ───
   const snapRows: Record<string, unknown>[] = [];
-  const snapshots = Array.isArray(body.snapshots) ? body.snapshots.slice(0, 2) : [];
+  const allSnapshots = Array.isArray(body.snapshots) ? body.snapshots : [];
+  const snapshots = allSnapshots.slice(0, SERVER_SNAPSHOT_CAP);
+  // Overflow past the cap is counted (never silently discarded) so a client that ever
+  // out-batches the contract is observable rather than losing member snapshots quietly.
+  for (let i = SERVER_SNAPSHOT_CAP; i < allSnapshots.length; i++) {
+    rejected.push({ seq: (allSnapshots[i] as { seq?: unknown })?.seq, reason: 'snapshot_cap_exceeded' });
+  }
   for (const s of snapshots) {
     const su = uuidOrNull(s.settlementUuid);
     const cp = strShort(s.capturePoint);

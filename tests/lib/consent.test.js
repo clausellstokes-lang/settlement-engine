@@ -15,7 +15,7 @@
  */
 import { describe, it, expect, beforeEach } from 'vitest';
 import {
-  CONSENT_KEY, CONSENT_MODEL_VERSION,
+  CONSENT_KEY, CONSENT_MODEL_VERSION, MARKET_INSIGHTS_DEFAULT, CONSENT_TIERS,
   getConsent, setConsent, isClassAllowed,
 } from '../../src/lib/consent.js';
 
@@ -79,5 +79,41 @@ describe('consent model v2 — research opt-out default', () => {
 
   it('exposes CONSENT_MODEL_VERSION = 2', () => {
     expect(CONSENT_MODEL_VERSION).toBe(2);
+  });
+});
+
+describe('market-insights consent plane (design §5, plane 3)', () => {
+  it('is OFF by default (the trust-first ruling), via the single MARKET_INSIGHTS_DEFAULT constant', () => {
+    expect(MARKET_INSIGHTS_DEFAULT).toBe(false);
+    expect(getConsent().market).toBe(false);
+  });
+
+  it('is exposed as a tier and is opt-IN (only an explicit true grants it)', () => {
+    expect(CONSENT_TIERS).toContain('market');
+    setConsent({ market: true });
+    expect(getConsent().market).toBe(true);
+    setConsent({ market: false });
+    expect(getConsent().market).toBe(false);
+  });
+
+  it('is a distinct plane — enabling market does not change research/essential and vice-versa', () => {
+    setConsent({ market: true, research: false });
+    const c = getConsent();
+    expect(c.market).toBe(true);
+    expect(c.research).toBe(false);
+    expect(c.essential).toBe(true);
+  });
+
+  it('DNT hard-overrides market to false regardless of a stored grant', () => {
+    setConsent({ market: true });
+    setDNT(true);
+    expect(getConsent().market).toBe(false);
+  });
+
+  it('does not gate a client event class (market is a corpus-inclusion flag, not an event class)', () => {
+    // isClassAllowed only knows essential/research/ai_prose; an unknown class falls to
+    // the essential gate. market never silences or admits an event class.
+    setConsent({ market: false });
+    expect(isClassAllowed('essential', getConsent())).toBe(true);
   });
 });

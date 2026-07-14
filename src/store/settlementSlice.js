@@ -991,7 +991,8 @@ export const createSettlementSlice = (set, get) => ({
       import('../lib/analytics.js'),
       import('../lib/structuralFingerprint.js'),
       import('../lib/regionalFingerprint.js'),
-    ]).then(async ([{ track, EVENTS }, fp, { extractNeighbourGenerated }]) => {
+      import('../lib/constructionUsage.js'),
+    ]).then(async ([{ track, EVENTS }, fp, { extractNeighbourGenerated }, { configArchetype }]) => {
       const { extractReducedFingerprint, computeFingerprintHash, computeConfigSignature, usedRandomSentinels, extractStressorGenesis, band5 } = fp;
       const reduced = extractReducedFingerprint(reconciled) || {};
       const power = reconciled?.powerStructure || {};
@@ -1005,6 +1006,10 @@ export const createSettlementSlice = (set, get) => ({
         ...reduced,
         config_signature,
         content_hash,
+        // §1.2 settlement-construction grouping: the priority-profile cluster the user
+        // asked for, joined to the outcome fingerprint — the demand signal for what
+        // players build (never ids/names; a coarse enum off the config sliders).
+        config_archetype: configArchetype(fullConfig),
         used_random_sentinels: usedRandomSentinels(fullConfig),
         is_regeneration: hadSettlement,
         duration_ms: generationMs,

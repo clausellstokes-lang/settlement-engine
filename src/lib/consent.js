@@ -35,7 +35,20 @@
 export const CONSENT_KEY = 'sf_consent_v1';
 /** Consent-model revision. v2 = the research opt-out flip. Stamped on research captures. */
 export const CONSENT_MODEL_VERSION = 2;
-export const CONSENT_TIERS = Object.freeze(['essential', 'research', 'ai_prose']);
+
+// ── Market-insights consent plane (design §5, plane 3) ───────────────────────
+// The THIRD consent plane: whether a user's coarse usage may be included in the
+// anonymous, aggregate, k-anonymous market-research pack that may be licensed to
+// worldbuilder-market buyers (§4). It is its OWN plane because being a user does not
+// put you in the sellable aggregate.
+//
+// DEFAULT: OFF. The design leaves the default to an owner decision (RECOMMEND on —
+// the plane is aggregate-only + id-free so on-by-default is defensible — but the
+// trust-first posture argues off). We ship the trust-first default; the flip is this
+// ONE constant, so the owner's veto is a one-line change (JUDGMENT, vetoable).
+export const MARKET_INSIGHTS_DEFAULT = false;
+
+export const CONSENT_TIERS = Object.freeze(['essential', 'research', 'ai_prose', 'market']);
 
 /** DNT check — honored as a hard opt-out of ALL telemetry, including essential. */
 export function dntEnabled() {
@@ -49,9 +62,10 @@ export function dntEnabled() {
 
 function defaults() {
   // Consent model v2: essential AND research default ON unless DNT (research is now
-  // an OPT-OUT). ai_prose stays opt-in (reserved). updatedAt 0 = "no user choice yet".
+  // an OPT-OUT). ai_prose stays opt-in (reserved). market (§5 plane 3) is opt-IN,
+  // defaulting to MARKET_INSIGHTS_DEFAULT. updatedAt 0 = "no user choice yet".
   const on = !dntEnabled();
-  return { essential: on, research: on, ai_prose: false, updatedAt: 0 };
+  return { essential: on, research: on, ai_prose: false, market: MARKET_INSIGHTS_DEFAULT, updatedAt: 0 };
 }
 
 function readRaw() {
@@ -65,7 +79,7 @@ function readRaw() {
 /**
  * Current consent. DNT always forces essential off (it cannot be overridden by
  * a stored grant — DNT is a user-agent-level signal we honor unconditionally).
- * @returns {{essential:boolean, research:boolean, ai_prose:boolean, updatedAt:number}}
+ * @returns {{essential:boolean, research:boolean, ai_prose:boolean, market:boolean, updatedAt:number}}
  */
 export function getConsent() {
   const base = defaults();
@@ -80,10 +94,12 @@ export function getConsent() {
       essential: stored.essential !== false,
       research: stored.research === true,
       ai_prose: stored.ai_prose === true,
+      // market is opt-IN: a stored value counts only when explicitly true.
+      market: stored.market === true,
       updatedAt: Number(stored.updatedAt) || 0,
     }
     : base;
-  if (dntEnabled()) { merged.essential = false; merged.research = false; } // DNT is a hard override of ALL telemetry
+  if (dntEnabled()) { merged.essential = false; merged.research = false; merged.market = false; } // DNT is a hard override of ALL telemetry
   return merged;
 }
 
@@ -98,6 +114,7 @@ export function setConsent(patch = {}, stampMs) {
     essential: 'essential' in patch ? patch.essential !== false : cur.essential,
     research: 'research' in patch ? patch.research === true : cur.research,
     ai_prose: 'ai_prose' in patch ? patch.ai_prose === true : cur.ai_prose,
+    market: 'market' in patch ? patch.market === true : cur.market,
     updatedAt: typeof stampMs === 'number' ? stampMs : (cur.updatedAt + 1),
   };
   try {

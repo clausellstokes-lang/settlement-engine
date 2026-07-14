@@ -7,7 +7,7 @@ import './styles/a11y.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
-import { installAnalyticsQueue } from './lib/analyticsQueue.js';
+import { installAnalyticsQueue, setAnalyticsElevated } from './lib/analyticsQueue.js';
 import { track, EVENTS } from './lib/analytics.js';
 import { returnVisitBand, stampVisit } from './lib/session.js';
 import { reportError, installGlobalErrorHandlers } from './lib/errorReporter.js';
@@ -30,6 +30,16 @@ installAnalyticsProvider();
 // handlers, then open the session. Fire-and-forget; no-op if Supabase is
 // unconfigured (the queue self-disables) or DNT/opt-out silences telemetry.
 installAnalyticsQueue();
+// Wire the elevated predicate so the owner's / admins' own usage stamps 'dogfood'
+// (structurally excluded from the production corpus) instead of contaminating it as
+// 'production' (lib-infra-5). A stored callback read at flush time, so the store is
+// hydrated by then. The envelope's sessionId needs no wiring here: the lazy flush
+// module (analyticsFlush.js) imports lib/sessionId.js itself, keeping the id
+// machinery out of the first-paint closure (the A1-FP reclaim).
+setAnalyticsElevated(() => {
+  try { const s = useStore.getState(); return typeof s.isElevated === 'function' && s.isElevated() === true; }
+  catch { return false; }
+});
 {
   const rv = returnVisitBand();
   let entry = 'other';

@@ -242,22 +242,33 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // mutation during a running multi-tick advance would be reverted by its
     // Phase-2 commit (which replaces worldState wholesale).
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // §1.3 realm-shape telemetry loads lazily (kept out of the first-paint closure) —
+    // resolved BEFORE set() so it can flatten the draft regionalGraph to plain enums/
+    // bands inside the Immer producer. Best-effort: a chunk-load failure never breaks
+    // the canonize (telemetry is optional).
+    let realmShape = null;
+    try { ({ realmShape } = await import('../lib/constructionUsage.js')); } catch { /* telemetry optional */ }
     let campaignPersist = /** @type {any} */ (null);
     let settlementCount = 0;
     let regionalSnapshot = /** @type {any} */ (null);
+    let realmShapeSummary = /** @type {any} */ (null);
     const now = new Date().toISOString();
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      settlementCount = campaignSettlements(state, campaignId).length;
+      const saves = campaignSettlements(state, campaignId);
+      settlementCount = saves.length;
       c.worldState = canonizeWorldState(c.worldState, now, c);
       // Compute the regional-topology snapshot while the graph draft is live.
       regionalSnapshot = extractRegionalGraphSnapshot(c.regionalGraph);
+      if (realmShape) realmShapeSummary = realmShape(c.regionalGraph, saves);
       c.updatedAt = now;
       campaignPersist = cacheCampaignState(state);
     });
     if (campaignPersist) {
-      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount });
+      // §1.3 realm-construction grouping: realm shape (count band, tier mix, topology
+      // class) enriches the previously count-only world_canonized fire.
+      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount, ...(realmShapeSummary || {}) });
       if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }

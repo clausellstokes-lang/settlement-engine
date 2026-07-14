@@ -24,6 +24,7 @@ import { canonizeWorldState, deepFreeze } from '../domain/worldPulse/worldState.
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { extractCanonizeUsage } from '../lib/spatialCanonizeUsage.js';
+import { realmShape } from '../lib/constructionUsage.js';
 import { captureSpatialPack as liveCaptureSpatialPack } from '../lib/spatialPackCapture.js';
 
 // Hard ceiling on the frozen digest so a spatial canonize can never bloat a save
@@ -92,6 +93,7 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
   deepFreeze(digest);
   let campaignPersist = /** @type {any} */ (null);
   let nextVersion = 0;
+  let realmShapeSummary = /** @type {any} */ (null);
   const now = new Date().toISOString();
   set((/** @type {any} */ stateDraft) => {
     const c = findActiveCampaign(stateDraft.campaigns, campaignId);
@@ -102,6 +104,9 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     const priorVersion = Number.isInteger(ws.spatialCanonVersion) ? ws.spatialCanonVersion : 0;
     nextVersion = priorVersion + 1;
     c.worldState = { ...ws, spatialCanonVersion: nextVersion, spatialDigest: digest };
+    // §1.3 realm shape (topology/count/tier) off the live graph draft — flattened to
+    // plain enums/bands here so it survives the producer.
+    realmShapeSummary = realmShape(c.regionalGraph);
     c.updatedAt = now;
     campaignPersist = cacheCampaignState(stateDraft);
   });
@@ -112,6 +117,7 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
   track(EVENTS.WORLD_CANONIZED, {
     settlement_count: digest.settlementIds.length,
     ...extractCanonizeUsage(digest, nextVersion, digestBytes),
+    ...(realmShapeSummary || {}),
   });
   await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
   return { ok: true, spatialCanonVersion: nextVersion, digestBytes };
