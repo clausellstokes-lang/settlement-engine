@@ -118,7 +118,10 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     settlement_count: digest.settlementIds.length,
     ...extractCanonizeUsage(digest, nextVersion, digestBytes),
     ...(realmShapeSummary || {}),
-  });
+  // Campaign-grain subject stamp (A2 deferral / §4 market floor): the campaign uuid
+  // keys the k=200-campaigns floor for the sellable topology cells. uuid-validated
+  // server-side (ingest uuidOrNull → subject_id); a non-uuid campaignId is dropped.
+  }, { subjectId: campaignId });
   await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
   return { ok: true, spatialCanonVersion: nextVersion, digestBytes };
 }

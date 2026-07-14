@@ -311,3 +311,36 @@ describe('pagehide before the flush module resolves — synchronous spill, no lo
     expect(fetchMock).not.toHaveBeenCalled(); // nothing raced onto the network
   });
 });
+
+describe('subjectId envelope stamp (A2 deferral — the k=200-campaigns floor)', () => {
+  // The campaign-grain v2 events (world_pulse_advanced / world_canonized) now pass a
+  // { subjectId: campaignId } opts to track(); track forwards it to enqueueEvent, which
+  // stashes it on the record, and buildEnvelope surfaces it as events[i].subjectId. The
+  // ingest fn then uuid-validates it into the subject_id column so the sellable market
+  // reports' distinct-campaign floor can form cells. This pins the client half of that
+  // seam end to end (enqueue → envelope).
+  test('enqueueEvent(opts.subjectId) surfaces on the POSTed envelope event', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    const CAMPAIGN_UUID = '11111111-1111-4111-8111-111111111111';
+    enqueueEvent('world_pulse_advanced', { events_applied_count: 0 }, { _class: 'essential', subjectId: CAMPAIGN_UUID });
+    flush();
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent.events).toHaveLength(1);
+    expect(sent.events[0].event).toBe('world_pulse_advanced');
+    expect(sent.events[0].subjectId).toBe(CAMPAIGN_UUID);
+  });
+
+  test('an event enqueued without a subjectId omits it (undefined, not null) — legacy shape preserved', () => {
+    const fetchMock = vi.fn(() => new Promise(() => {}));
+    vi.stubGlobal('fetch', fetchMock);
+
+    enqueueEvent('homepage_view', {}, { _class: 'essential' });
+    flush();
+
+    const sent = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(sent.events[0].subjectId).toBeUndefined();
+  });
+});

@@ -22,11 +22,16 @@
 --     enums/bands/counts in props, never content).
 --
 -- ⚠️ CAMPAIGN-FLOOR PREREQUISITE: the k=200-CAMPAIGNS floor counts distinct subject_id
---    (the settlement/map/campaign uuid). The current v2 campaign events (world_pulse_
---    advanced / world_canonized / generation_completed) do NOT yet stamp subject_id, so
---    those market cells suppress (fail-closed) until capture stamps it — a documented
---    capture-side follow-up. The floor logic is correct and tested regardless (the
---    pglite test inserts subject-bearing rows to prove suppress-below / emit-at-floor).
+--    (the settlement/map/campaign uuid). CLOSED (mostly) by WAVE A3: world_pulse_advanced
+--    and world_canonized now stamp the campaign uuid as subject_id (src/store/
+--    campaignAdvanceSession.js / campaignSpatialCanonize.js / campaignWorldPulseSlice.js),
+--    so report_market_preset_adoption + the topology cells can form. generation_completed
+--    is INTENTIONALLY still unstamped — its sole emit is the pre-save, pre-campaign working-
+--    buffer generation with no campaign uuid in scope (documented at src/store/
+--    settlementSlice.js), so report_market_archetype_popularity's campaign floor stays fail-
+--    closed until a campaign-scoped generation path exists. The floor logic is correct and
+--    tested regardless (the pglite test inserts subject-bearing rows to prove suppress-below
+--    / emit-at-floor for BOTH reports).
 --
 -- House security: all functions SECURITY DEFINER, search_path pinned, service-role
 -- execute only (mirrors 038). Re-runnable (CREATE OR REPLACE). WRITTEN, NOT DEPLOYED —

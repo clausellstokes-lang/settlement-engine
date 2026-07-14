@@ -307,7 +307,11 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
         // Spatial-engine usage: which movers fired + which preset/flags this tick ran
         // under (read-only off the post-tick worldState; empty when aspatial).
         ...extractSpatialUsage(result.worldState),
-      });
+      // Campaign-grain subject stamp (A2 deferral / §4 market floor): the campaign
+      // uuid keys the k=200-campaigns floor so the sellable preset-adoption cells can
+      // form. uuid-validated server-side (ingest uuidOrNull → subject_id); a non-uuid
+      // legacy campaignId is simply dropped, never leaked.
+      }, { subjectId: campaignId });
       // Per-type stressor transitions (research-class; gated inside track()).
       track(EVENTS.WORLD_STRESSOR_TRANSITIONS, extractStressorTransitions(result));
       // Exhaustive per-effect mutation ledger → world_pulse_effects (research only).
@@ -467,7 +471,8 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
       ...extractPulseSummary(result, result.interval),
       events_applied_count: Array.isArray(result.autoApplied) ? result.autoApplied.length : 0,
       ...extractSpatialUsage(result.worldState),
-    });
+    // Campaign-grain subject stamp (A2 deferral / §4 market floor) — see the advance path.
+    }, { subjectId: campaignId });
   }
 
   await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });

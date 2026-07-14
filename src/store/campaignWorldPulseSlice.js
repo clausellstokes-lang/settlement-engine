@@ -268,7 +268,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     if (campaignPersist) {
       // §1.3 realm-construction grouping: realm shape (count band, tier mix, topology
       // class) enriches the previously count-only world_canonized fire.
-      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount, ...(realmShapeSummary || {}) });
+      // Campaign-grain subject stamp (A2 deferral / §4 market floor): the campaign uuid
+      // keys the k=200-campaigns floor. uuid-validated server-side (ingest → subject_id).
+      track(EVENTS.WORLD_CANONIZED, { settlement_count: settlementCount, ...(realmShapeSummary || {}) }, { subjectId: campaignId });
       if (regionalSnapshot) track(EVENTS.REGIONAL_GRAPH_SNAPSHOT, regionalSnapshot);
       await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
     }

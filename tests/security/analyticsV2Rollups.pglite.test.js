@@ -199,4 +199,37 @@ describe.runIf(!!MIG_133_SQL)('Analytics v2 rollups (pglite execution)', () => {
     expect(byArchetype.not_opted).toBeUndefined();
     expect(byArchetype.dogfood).toBeUndefined();
   });
+
+  it('report_market_preset_adoption forms cells once world_pulse_advanced carries subject_id (A3 capture stamp)', async () => {
+    // The A2 deferral is closed by A3: world_pulse_advanced now stamps the campaign uuid as
+    // subject_id (src/store/campaignAdvanceSession.js), so the preset-adoption report's
+    // k=campaigns floor can finally form cells. Floors are already 5 users / 8 campaigns from
+    // the previous test (shared db). This proves the "cells populate once stamped" seam on the
+    // SQL side; the client half (capture → envelope.subjectId) is pinned in
+    // tests/lib/analyticsQueue.test.js.
+    const from = '2026-08-01', to = '2026-08-31';
+    const seedPulse = async (preset, users, campaigns) => {
+      const n = Math.max(users, campaigns);
+      await db.exec(`
+        insert into public.analytics_events (event, actor_id, subject_id, props, market_opt_in, corpus, created_at)
+        select 'world_pulse_advanced',
+               ('00000000-0000-4000-8000-' || lpad(((i % ${users}) + 1)::text, 12, '0'))::uuid,
+               ('00000000-0000-4000-9000-' || lpad(((i % ${campaigns}) + 1)::text, 12, '0'))::uuid,
+               '{"sim_config":{"preset_id":"${preset}"}}'::jsonb,
+               true, 'production', '2026-08-10T10:00:00Z'
+        from generate_series(0, ${n - 1}) as g(i);
+      `);
+    };
+    await seedPulse('siege', 6, 10);   // clears BOTH floors (6 users ≥ 5, 10 campaigns ≥ 8) → EMITTED
+    await seedPulse('bucolic', 9, 4);  // enough users but too few campaigns (4 < 8) → suppressed
+
+    const rows = (await db.query(
+      `select preset_id, distinct_users, distinct_campaigns from public.report_market_preset_adoption($1::date, $2::date)`,
+      [from, to],
+    )).rows;
+    const byPreset = Object.fromEntries(rows.map(r => [r.preset_id, r]));
+    expect(Object.keys(byPreset)).toEqual(['siege']);            // only the cell clearing the campaign floor
+    expect(Number(byPreset.siege.distinct_campaigns)).toBeGreaterThanOrEqual(8);
+    expect(byPreset.bucolic).toBeUndefined();                    // suppressed on the campaign floor
+  });
 });

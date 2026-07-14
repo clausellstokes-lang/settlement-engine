@@ -1002,6 +1002,14 @@ export const createSettlementSlice = (set, get) => ({
       let config_signature; let content_hash;
       try { config_signature = await computeConfigSignature(fullConfig); } catch { /* omit */ }
       try { content_hash = await computeFingerprintHash(reduced); } catch { /* omit */ }
+      // A2-deferral note (DESIGN_ANALYTICS_V2 §4 market floor): world_pulse_advanced +
+      // world_canonized now stamp the campaign uuid as subject_id so the k=200-campaigns
+      // floor can form cells. generation_completed is INTENTIONALLY left unstamped here:
+      // this is the working-buffer generation (pre-save, pre-campaign) — no campaign uuid
+      // exists in scope, and the settlement carries no persistent save uuid yet (the
+      // generation-id spine below uses a pseudonymous, non-uuid id). "Stamp where
+      // campaign-scoped" is thus a no-op at this emit; report_market_archetype_popularity's
+      // campaign floor stays fail-closed until a campaign-scoped generation path exists.
       track(EVENTS.GENERATION_COMPLETED, {
         ...reduced,
         config_signature,
