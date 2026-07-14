@@ -296,11 +296,13 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // the ratchet: 1,216,273 (unified post-merge tip); ~77 B working margin keeps the
 // house anti-brittleness posture (a Rollup chunk-graph artifact once cost +49 B).
 // History: 1,441,000 → 1,256,000 (FP-1) → 1,255,985 (FP-R) → 1,216,350 (FP-G1)
+// → 1,214,050 (FP-G2, 2026-07-14: the coup-contest leaf split — the contest model's
+// only consumers were lazy tick modules; −2,180 B; measured 1,213,967, ~83 B margin)
 // → 1,215,520 (A1-FP, 2026-07-14: the analytics transport eager-leaf/lazy-flush split
 // reclaimed 2,281 B — MORE than the A1 v2-core's +1,451 B — so the wave landed net
 // −830 B; measured closure 1,215,443, ~77 B working margin per house posture).
 // Monotone-down only; raises are owner-signed, never incidental.
-const CLOSURE_BUDGET_BYTES = 1_215_520;
+const CLOSURE_BUDGET_BYTES = 1_214_050;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
