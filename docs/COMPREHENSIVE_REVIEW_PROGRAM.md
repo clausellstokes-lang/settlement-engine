@@ -50,6 +50,26 @@ migrations, schema/persistence shape changes, data deletion, security posture, p
 behavior, budget raises, golden regens.
 
 ## Owner rulings landed during this program (binding on wave plans)
+- **2026-07-14 — G3 APPROVED TO ARCHITECT (owner: "I like your thoughts about the upswings and
+  building on the relationships, and I want you to architect that with Fable"):** Fable authors the
+  upswing-drama + relationship-driven-material-flows design (relief caravans, ally credit,
+  trade-as-diplomacy, reconstruction/boom arcs). BUILD comes after the fix program.
+- **2026-07-14 — THE AI SECOND CONTROL SURFACE ("Surveyor") — owner delivered a full 41-section
+  vision to consider + architect:** AI as interface/interpreter/planner/analyst/editorial layer
+  over the deterministic engine, never the world engine itself. Trust model: AI proposes →
+  simulator validates+resolves → DM authorizes. One operation layer for manual AND AI. Surveyor
+  $19.99 tier + managed credits + BYOK; provider-neutral adapters; consented intent→operation
+  training corpus separate from analytics; dev sequence: read-only analyst → briefs → post-session
+  interpretation → custom content → settlement construction → realm construction → advanced
+  autonomy. Fable architecture doc required; BUILD after the fix program.
+- **2026-07-14 — SEQUENCING (owner, verbatim intent): "All of this of course, after fixing
+  everything and adding all the uncompleted work."** The Track N/G fix program + unplugged-work
+  completion runs FIRST; the two architecture docs are authored now (design is not build); their
+  implementation queues behind program completion.
+- **2026-07-14 — FOUNDER CAP RESOLVED BY THE OWNER'S OWN SPEC (§25: "The Founder tier is limited
+  to 30 lifetime seats")** — answers owner-ask #3: 30 is truth; FounderTile's 500 and the email
+  template's "first 500" are the bugs (F4 fixes both). Founder×AI posture per §25: lifetime
+  Premium + Surveyor core interface + BYOK, no unlimited funded inference.
 - **2026-07-13 — PDF export monetization:** free tier pays $2.99 per dossier PDF; only premium
   gets unlimited export. The shipped free-unlimited-export gate is wrong; flip it to the existing
   single-dossier entitlement ladder. Pricing-page copy was already correct; align the other five
