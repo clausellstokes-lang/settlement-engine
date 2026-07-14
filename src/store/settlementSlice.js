@@ -294,6 +294,50 @@ function activateFaithIfEntitled(settlement, get) {
   }
 }
 
+/**
+ * resetSettlementIdentity — THE single chokepoint for clearing a settlement's
+ * session-only identity residue on ANY active-settlement swap: generateSettlement,
+ * hydrateFromSave (open a save), setSettlement, clearSettlement. Every field reset
+ * here is session-scoped (never persisted) and must NOT survive an identity change,
+ * or the new settlement inherits the previous one's in-flight state — the exact
+ * cross-identity leak class the slice documents (F17/F19):
+ *   • a queued rename commits against the wrong town (pending edits address NPCs by
+ *     INDEX, so save B's index-N is a different NPC than A's);
+ *   • a stale successor prompt fires on the wrong lineage;
+ *   • B renders A's draft version timeline;
+ *   • the pipeline rail renders A's "how this was simulated" receipts against B's
+ *     dossier (components-dossier-5);
+ *   • a stale regen-delta card describes the prior settlement.
+ * Structural prevention (state-lifecycle-3 / store-5): the ONE writer for this
+ * class, so a NEW load path cannot re-open the leak by hand-maintaining its own
+ * partial reset list — every entry point routes through here.
+ *
+ * NOTE: the LIFECYCLE slots that DIFFER by path (settlement / activeSaveId / phase /
+ * eventLog / locks / canonizedAt / systemState / generatedAt / editedAt /
+ * lastExportAt / aiSettlement) are deliberately NOT reset here — each caller sets
+ * them itself: hydrateFromSave from the save's persisted campaignState; generate /
+ * set / clear to their own DRAFT defaults.
+ *
+ * @param {*} state the Immer store draft
+ */
+function resetSettlementIdentity(state) {
+  state.pendingEditsQueue     = [];
+  state.pendingEditsClock     = 0;
+  state.pendingSuccession     = null;
+  state.draftVersionHistory   = [];
+  // The generation-id spine is per-generation identity: a loaded/new settlement
+  // must never inherit the prior generation's id (a save re-derives its own from
+  // seed + generatedAt; a fresh generate mints one after the pipeline).
+  state.generationId          = null;
+  // The pipeline rail + reveal overlay are per-run receipts (components-dossier-5).
+  state.pipelineHistory       = [];
+  state.pipelineRevealActive  = false;
+  // A stale regenerate-delta card must not describe an unrelated settlement.
+  state.lastRegenerationDelta = null;
+  // Any pending single/batch event preview belongs to the prior identity.
+  state.pendingPreview        = null;
+}
+
 export const createSettlementSlice = (set, get) => ({
   // ── State ──────────────────────────────────────────────────────────────────
   settlement:    null,   // current generated settlement object
@@ -635,6 +679,7 @@ export const createSettlementSlice = (set, get) => ({
       }
     } catch (_e) { /* silent */ }
     // Apply.
+    const activeTarget = Boolean(targetSaveId && String(targetSaveId) === String(state.activeSaveId));
     let persistedSettlement = null;
     let persistedHistory = null;
     set(s => {
@@ -654,12 +699,37 @@ export const createSettlementSlice = (set, get) => ({
       // fix: the draft revert used to overwrite the whole object (timeline and
       // all) with the target's stale embedded history.
       s.settlement = snapshotSettlement(target.settlement);
+      // state-lifecycle-2: re-derive systemState from the RESTORED settlement and
+      // stamp editedAt. Without this the live state rail / timeline deltas / event
+      // previews (which take state.systemState as input) reflected the reverted-AWAY
+      // settlement, and the persisted campaign_state.systemState stayed stale too —
+      // a ghost that survived reload (hydrateFromSave prefers cs.systemState). Every
+      // sibling mutator (applyEvent / undoLastEvent / destroySavedSettlement) already
+      // re-derives + persists campaignState; revert was the one path that didn't.
+      try { s.systemState = deriveSystemState(s.settlement); }
+      catch (e) {
+        console.warn('[settlementSlice] revert deriveSystemState failed:', e);
+        s.systemState = null;
+      }
+      s.editedAt = new Date().toISOString();
     });
     const persisted = Boolean(targetSaveId && persistedSettlement);
     if (persisted) {
+      // For the ACTIVE save, fold the re-derived systemState (and the rest of the
+      // live lifecycle) into the persisted campaignState so the stored row + a reload
+      // agree with the reverted settlement. A non-active-save revert (unreachable via
+      // current UI) keeps the prior behavior — settlement + versionHistory only.
+      let afterCampaignState = null;
+      if (activeTarget) {
+        afterCampaignState = pickleCampaignState(get());
+        if (typeof get().updateSavedSettlement === 'function') {
+          get().updateSavedSettlement(targetSaveId, { campaignState: afterCampaignState });
+        }
+      }
       persistSaveUpdate(targetSaveId, {
         settlement: persistedSettlement,
         versionHistory: cappedVersionHistory(persistedHistory),
+        ...(afterCampaignState ? { campaignState: afterCampaignState } : {}),
       });
     }
     // Track K §C1 — ActionResult envelope on the SUCCESS path. The failure
@@ -674,7 +744,7 @@ export const createSettlementSlice = (set, get) => ({
       before: { targetSaveId: targetSaveId ?? null, snapshotId, timeline },
       after:  { restoredSnapshotId: snapshotId, restoredLabel: target.label ?? null, timeline },
       persistenceOps: persisted
-        ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: ['settlement', 'versionHistory'] }]
+        ? [{ saveId: String(targetSaveId), kind: 'save-update', fields: activeTarget ? ['settlement', 'versionHistory', 'campaignState'] : ['settlement', 'versionHistory'] }]
         : [],
     });
   },
@@ -839,6 +909,12 @@ export const createSettlementSlice = (set, get) => ({
     }
     const now = new Date().toISOString();
     set(state => {
+        // state-lifecycle-3: a fresh generation is a new identity — clear ALL
+        // session-only residue through the single chokepoint FIRST (pendingEditsQueue,
+        // pendingSuccession, draftVersionHistory, generationId, …), then set this
+        // run's own lifecycle fields below. Without this, the prior settlement's
+        // queued edits / successor prompt / draft timeline survived onto the new town.
+        resetSettlementIdentity(state);
         state.settlement = withFaith;
         state.activeSaveId = null;
         state.lastSeed = seed;
@@ -856,7 +932,7 @@ export const createSettlementSlice = (set, get) => ({
         state.aiSourceFingerprint = null;
         state.aiPartialFailure = null;
         state.showNarrative = false;
-        state.pendingPreview = null;
+        // pendingPreview cleared by resetSettlementIdentity above.
         state.pipelineHistory = pipelineHistory;
         // P100 — arm the reveal overlay. PipelineReveal mounts when this
         // flips true, plays back through pipelineHistory, then calls
@@ -950,6 +1026,27 @@ export const createSettlementSlice = (set, get) => ({
     set(state => {
       state.settlement = settlement;
       state.activeSaveId = null;
+      // store-5 identity hygiene: setSettlement is a NON-save load path (the
+      // "Apply Saved Configuration & Regenerate" flow + a couple of reload paths).
+      // Route the session residue through the single chokepoint, and reset the
+      // lifecycle slots to a fresh DRAFT so the new settlement can't inherit the
+      // previous view's canon phase / event log / locks / stamps — after viewing a
+      // canon town, loading another here used to leave phase 'canon' (renames no-op,
+      // a stale eventLog/successor ride an unrelated town).
+      resetSettlementIdentity(state);
+      state.phase        = 'draft';
+      state.eventLog     = [];
+      state.locks        = {};
+      state.canonizedAt  = null;
+      state.lastExportAt = null;
+      // Re-derive systemState from the NEW settlement so the state rail / previews
+      // never reflect the prior identity; tolerate a partial/absent settlement.
+      if (settlement) {
+        try { state.systemState = deriveSystemState(settlement); }
+        catch (e) { state.systemState = null; }
+      } else {
+        state.systemState = null;
+      }
     }),
 
   clearSettlement: () =>
@@ -958,6 +1055,15 @@ export const createSettlementSlice = (set, get) => ({
       state.activeSaveId = null;
       state.lastSeed = null;
       state.lastCtx = null;
+      // Same identity chokepoint + lifecycle reset as setSettlement (store-5): clear
+      // the view entirely, leaving no residue of the prior settlement's identity.
+      resetSettlementIdentity(state);
+      state.phase        = 'draft';
+      state.eventLog     = [];
+      state.locks        = {};
+      state.canonizedAt  = null;
+      state.lastExportAt = null;
+      state.systemState  = null;
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
@@ -970,6 +1076,12 @@ export const createSettlementSlice = (set, get) => ({
     const state = get();
     const { settlement, config } = state;
     if (!settlement) return;
+    // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
+    // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
+    // or history on a canon settlement would silently invalidate campaign canon with
+    // no event-log entry, so block it here (matching the rename locks); canon changes
+    // must route through the event system. Draft rerolls proceed.
+    if (get().phase === 'canon') return;
 
     // P103 / X-2 — Track session regen-burst. When the user crosses 5
     // regens in a single session, fire regen_burst (worldbuilder hint
@@ -1014,6 +1126,31 @@ export const createSettlementSlice = (set, get) => ({
       // Delta is a defensive surface — never block the regenerate
       // on a delta-derivation failure.
       console.warn('[settlementSlice] regenerationDelta failed', e);
+    }
+
+    // state-lifecycle-4: when a SAVE is hydrated into the live editor (activeSaveId
+    // set — SettlementDetail hydrates on open, then the Create page offers reroll),
+    // a section reroll mutated only memory and GHOSTED on reload. Persist it via the
+    // applyEvent pattern: stamp editedAt, update the in-memory save entry, and durably
+    // write the settlement + a re-derived campaignState. (Draft-only: the canon guard
+    // above already returned, so this never persists a canon reroll.)
+    const activeSaveId = get().activeSaveId;
+    if (activeSaveId) {
+      const now = new Date().toISOString();
+      set(s => { s.editedAt = now; });
+      const afterState = get();
+      const savePartial = {
+        settlement: cloneJson(afterState.settlement),
+        campaignState: pickleCampaignState(afterState),
+        timestamp: now,
+      };
+      if (typeof afterState.updateSavedSettlement === 'function') {
+        afterState.updateSavedSettlement(activeSaveId, savePartial);
+      }
+      persistSaveUpdate(activeSaveId, {
+        settlement: savePartial.settlement,
+        campaignState: savePartial.campaignState,
+      });
     }
   },
 
@@ -1782,22 +1919,16 @@ export const createSettlementSlice = (set, get) => ({
     state.editedAt       = cs.editedAt || null;
     state.canonizedAt    = cs.canonizedAt || null;
     state.lastExportAt   = cs.lastExportAt || null;
-    state.pendingPreview = null;
-    // Identity-leak audit (same class as the phase/eventLog hydration fix
-    // above): reset ALL session-only, non-persisted UI state so opening save B
-    // never inherits save A's in-flight state. Without this, a rename queued
-    // against save A could commit against save B (cross-identity mutation), a
-    // stale successor prompt could fire on the wrong town, and B would inherit
-    // A's draft timeline. draftVersionHistory is a sibling to the draft
-    // settlement only — a loaded save uses its own entry.versionHistory.
-    state.pendingEditsQueue    = [];
-    state.pendingEditsClock    = 0;
-    state.pendingSuccession    = null;
-    state.draftVersionHistory  = [];
-    // The generation-id spine is per-generation identity: clear it so a loaded
-    // save never inherits the prior generation's id. Milestones on a reloaded
-    // save re-derive a stable id from the save's seed + generatedAt.
-    state.generationId         = null;
+    // Identity-leak audit (same class as the phase/eventLog hydration fix above):
+    // reset ALL session-only, non-persisted UI residue through the single chokepoint
+    // so opening save B never inherits save A's in-flight state — a rename queued
+    // against A committing against B (cross-identity mutation), a stale successor
+    // prompt firing on the wrong town, B inheriting A's draft timeline, and (the
+    // components-dossier-5 add) the pipeline rail showing A's receipts against B.
+    // draftVersionHistory is a sibling to the DRAFT settlement only — a loaded save
+    // uses its own entry.versionHistory. Milestones on a reloaded save re-derive a
+    // stable generation id from the save's seed + generatedAt.
+    resetSettlementIdentity(state);
     // The refined narrative lives at save.aiData.aiSettlement, not a flat
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),

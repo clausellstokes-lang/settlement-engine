@@ -52,6 +52,13 @@ export default function WorldPulsePanel({ campaign }) {
   if (!campaign) return null;
 
   const worldState = campaign.worldState || {};
+  // worldpulse-core-1: a campaign PAUSED mid-interval for DM verdicts is not idle —
+  // resolveIntervalMajors re-derives the paused segment from the cursor's pre-tick
+  // snapshot and wholesale-commits it, so any Apply/Dismiss/party-impact made during
+  // the parked window is silently discarded on resume. The store mutators now no-op
+  // while paused; gate the affordances here too so the buttons don't invite a write
+  // that vanishes. The DM resolves/undoes the pause (elsewhere) before acting.
+  const paused = !!worldState.pausedAdvance;
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
   const pulseHistory = worldState.pulseHistory || [];
   const latestPulse = pulseHistory[pulseHistory.length - 1] || null;
@@ -80,7 +87,7 @@ export default function WorldPulsePanel({ campaign }) {
   const echoes = liveStressors.filter(s => s.status === 'residual');
 
   const runProposalAction = async (proposalId, action) => {
-    if (busyProposalId) return;
+    if (busyProposalId || paused) return;
     setBusyProposalId(`${action}:${proposalId}`);
     setActionError(null);
     try {
@@ -235,6 +242,11 @@ export default function WorldPulsePanel({ campaign }) {
               {actionError}
             </div>
           )}
+          {paused && (
+            <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
+              The realm is mid-advance, paused for your decisions. Resume or undo the advance before applying, dismissing, or naming — changes made now would be undone when it resumes.
+            </div>
+          )}
           {pending.length > 0 && proposalNote && (
             <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
               {proposalNote}
@@ -261,16 +273,16 @@ export default function WorldPulsePanel({ campaign }) {
                       <SmallButton
                         tone="good"
                         onClick={() => runProposalAction(proposal.id, 'apply')}
-                        title="Apply proposal"
-                        disabled={!!busyProposalId}
+                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Apply proposal'}
+                        disabled={!!busyProposalId || paused}
                       >
                         <CheckCircle2 size={13} /> {busyProposalId === `apply:${proposal.id}` ? 'Applying' : 'Apply'}
                       </SmallButton>
                       <SmallButton
                         tone="danger"
                         onClick={() => runProposalAction(proposal.id, 'dismiss')}
-                        title="Dismiss proposal"
-                        disabled={!!busyProposalId}
+                        title={paused ? 'The realm is mid-advance — resume or undo first' : 'Dismiss proposal'}
+                        disabled={!!busyProposalId || paused}
                       >
                         <XCircle size={13} /> {busyProposalId === `dismiss:${proposal.id}` ? 'Dismissing' : 'Dismiss'}
                       </SmallButton>
@@ -295,7 +307,7 @@ export default function WorldPulsePanel({ campaign }) {
                   && !stressor.originContext?.attackerLabel
                   && !stressor.originContext?.attackerSettlementId;
                 const nameThisAttacker = async (label) => {
-                  if (!recordPartyImpact || namingStressorId) return;
+                  if (!recordPartyImpact || namingStressorId || paused) return;
                   setNamingStressorId(stressor.id);
                   setActionError(null);
                   try {
@@ -326,7 +338,7 @@ export default function WorldPulsePanel({ campaign }) {
                     actions={unnamed && recordPartyImpact ? (
                       <NameAttackerControl
                         stressor={stressor}
-                        busy={!!namingStressorId}
+                        busy={!!namingStressorId || paused}
                         onName={nameThisAttacker}
                       />
                     ) : null}

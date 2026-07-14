@@ -724,7 +724,13 @@ export const createAiSlice = (set, get) => ({
     const dossierNotes = saveEntry?.aiData?.dossierNotes || {};
     const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
     const modelPreference = get().auth?.modelPreference;
-    const relationshipMemoryContext = await buildDailyLifeRelationshipMemory(get(), saveId);
+    // store-3 / FP-2a: the buildDailyLifeRelationshipMemory await (two dynamic imports
+    // + a world-snapshot build, hundreds of ms on the first click) is deferred to
+    // AFTER the sync prefix — the credit check, F18/F19 token/abort stamp, and
+    // set(aiLoading:true) below all run SYNCHRONOUSLY now, so a second click hits the
+    // `if (!settlement || aiLoading) return` guard and cannot double-charge. The build
+    // moves into the try, alongside loadAiLib (the pattern requestNarrative already
+    // follows).
     const isRegenerate = !!aiDailyLife;
     const cost = getAiCostForModel('dailyLife', modelPreference);
     const elevated = get().isElevated();
@@ -779,6 +785,9 @@ export const createAiSlice = (set, get) => ({
 
     try {
       const { generateNarrative } = await loadAiLib();
+      // Built HERE (post-lock) — see the sync-prefix note above. The loading lock is
+      // already held, so this awaited build cannot admit a second concurrent request.
+      const relationshipMemoryContext = await buildDailyLifeRelationshipMemory(get(), saveId);
       const { result, creditsRemaining } = await generateNarrative('dailyLife', settlement, saveId, {
         aiGuidance,
         modelPreference,

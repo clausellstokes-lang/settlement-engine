@@ -31,7 +31,7 @@ import {
   ensureWorldState,
   updateProposalStatus as domainUpdateWorldPulseProposalStatus,
 } from '../domain/worldPulse/worldState.js';
-import { normalizeSimulationRules, worldProgressionOf, advancesOnOpen, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
+import { normalizeSimulationRules, worldProgressionOf, advancesOnOpen } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, syncCampaignSnapshot,
   flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
@@ -42,9 +42,10 @@ import { track, EVENTS } from '../lib/analytics.js';
 // imports) lives in the lazily-loaded ./campaignAdvanceSession.js so it stays out
 // of the first-paint entry closure; this slice keeps only the light mutators +
 // getters + thin guarded wrappers.
-import {
-  extractProposalDecision, extractPartyImpact, extractSimulationRules,
-} from '../lib/pulseFingerprint.js';
+// The proposal/party/rules telemetry EXTRACTORS (pulseFingerprint.js) are reached
+// ONLY from the async pulse-mutator actions below, so they load lazily via
+// loadPulseFingerprint() (FP-2 reclaim) instead of riding the first-paint entry
+// closure — this slice was pulseFingerprint's SOLE eager importer.
 import { extractRegionalGraphSnapshot } from '../lib/regionalFingerprint.js';
 
 // ── Lazy world-simulation engine ──────────────────────────────────────────
@@ -87,6 +88,9 @@ function loadWorldEngine() {
       runAdvanceInterval: workerClient.runAdvanceInterval,
       runAdvanceCampaignWorld: session.runAdvanceCampaignWorld,
       runResolveIntervalMajors: session.runResolveIntervalMajors,
+      // M10b catch-up body — lazified out of this eager slice (FP-2 reclaim); rides
+      // the SAME lazy session chunk as the advance/resume bodies.
+      runCatchUpCampaignWorld: session.runCatchUpCampaignWorld,
       applyWorldPulseProposal: apply.applyWorldPulseProposal,
       applyPartyImpact: party.applyPartyImpact,
     }));
@@ -105,6 +109,21 @@ function loadProfileTools() {
     _profileToolsPromise = import('../domain/worldPulse/simulationProfile.js');
   }
   return _profileToolsPromise;
+}
+
+// ── Lazy analytics fingerprint extractors ─────────────────────────────────
+// The proposal/party/rules telemetry extractors are pure analytics helpers reached
+// only from the async pulse-mutator actions, so they ride a memoized dynamic import
+// rather than the eager entry closure (FP-2 reclaim). Each consumer is already async;
+// it awaits this loader BEFORE the set()/track() that uses the extractor — for the
+// inside-set() uses that means the function is resolved before the producer runs, so
+// it stays available synchronously inside it, exactly as the static import was.
+let _pulseFingerprintPromise = null;
+function loadPulseFingerprint() {
+  if (!_pulseFingerprintPromise) {
+    _pulseFingerprintPromise = import('../lib/pulseFingerprint.js');
+  }
+  return _pulseFingerprintPromise;
 }
 
 // FROZEN progression guard (CL-0 item 4): worldProgression 'frozen' parks time
@@ -287,6 +306,9 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // CL-0: the merge/canonicalize/diff/receipt work is pure and rides the lazy
     // profile-tools chunk (loaded BEFORE set(), used synchronously inside it).
     const { prepareRulesUpdate } = await loadProfileTools();
+    // The rules-values telemetry extractor also loads lazily (pulseFingerprint);
+    // used after set(), so any order before the track() below is fine.
+    const { extractSimulationRules } = await loadPulseFingerprint();
     let campaignPersist = /** @type {any} */ (null);
     let normalizedRules = /** @type {any} */ (null);
     const now = new Date().toISOString();
@@ -360,7 +382,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
         runAdvanceCampaignWorld, advanceCampaignWorld: domainAdvanceCampaignWorld,
         simulateCampaignWorldInterval: domainSimulateCampaignWorldInterval, runAdvanceInterval,
       } = await loadWorldEngine();
-      const preTick = findActiveCampaign(get().campaigns, campaignId)?.worldState?.tick;
+      // M10b: the living/autonomous catch-up cursor re-stamp lives INSIDE
+      // runAdvanceCampaignWorld's Phase-2 commit (campaignAdvanceSession.js), so the
+      // moved cursor rides the same atomic persist as the advance — a reload can no
+      // longer re-simulate already-advanced weeks (state-lifecycle-1 / store-1). It
+      // is gated there on advancesOnOpen + tick-moved, so dm_advanced/frozen stay
+      // byte-identical.
       const result = await runAdvanceCampaignWorld({
         set, get, campaignId, interval, options,
         // Pass the sim functions resolved through loadWorldEngine's dynamic import
@@ -371,24 +398,6 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
           runAdvanceInterval,
         },
       });
-      // M10b: re-stamp the living/autonomous catch-up cursor whenever an advance
-      // actually moved the world clock (manual OR catch-up), so the NEXT open
-      // computes weeks-elapsed from the last time the world truly advanced —
-      // never double-counting a manual advance. dm_advanced/frozen ⇒ advancesOnOpen
-      // is false ⇒ inert (the store advance's output stays byte-identical, and the
-      // goldens test the domain directly, never this action). The stamp is a
-      // SEPARATE post-advance set — it lands AFTER the undo snapshot was captured
-      // inside runAdvanceCampaignWorld, so undoLastPulse restores the prior cursor
-      // with the reverted worldState.
-      const advanced = findActiveCampaign(get().campaigns, campaignId);
-      if (advanced?.worldState && advancesOnOpen(advanced.worldState.simulationRules)
-          && advanced.worldState.tick !== preTick) {
-        const nowStamp = options.now || new Date().toISOString();
-        set(state => {
-          const c = findActiveCampaign(state.campaigns, campaignId);
-          if (c && c.worldState) c.worldState.lastLivingAdvanceAt = nowStamp;
-        });
-      }
       return result;
     } finally {
       // Clear the in-flight mark for this campaign — runs on every exit path
@@ -402,68 +411,31 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
 
   /**
    * M10b — the capped, deterministic advance-on-open catch-up for a LIVING/
-   * AUTONOMOUS world. Computes how many whole weeks of REAL time have elapsed since
-   * the world last advanced (worldState.lastLivingAdvanceAt), caps at
-   * CATCH_UP_CAP_WEEKS, and runs that many ONE-WEEK advanceCampaignWorld calls —
-   * so a catch-up of N weeks is BYTE-IDENTICAL to N manual one-week ticks
-   * (determinism inherited from the kernel; the loop stops early if an advance
-   * pauses for DM verdicts or otherwise returns not-ok). Each advance re-stamps the
-   * cursor to `now` (the M10b block in advanceCampaignWorld), so:
-   *   • past the cap, the calendar reaches `now` but the sim stopped at the cap
-   *     (owner ruling 2026-07-13: calendar-advances-past-cap — no perpetual re-catch-up);
-   *   • a paused/short catch-up leaves the cursor at the last week it reached.
-   * DORMANT unless advancesOnOpen. A first open / legacy save (no cursor) SEEDS the
-   * cursor and advances nothing — never a 1970-epoch delta. `now` is INJECTED for
-   * determinism (the UI open-hook passes Date.now-derived time; tests pass a fixed
-   * value). JUDGMENT (vetoable): cursor jumps to `now` on any catch-up (whole-week
-   * sim; sub-week remainder + past-cap overflow + paused tail are dropped — the DM
-   * resumes a paused interval via the normal advance).
+   * AUTONOMOUS world. THIN eager wrapper: the SYNCHRONOUS not_living guard stays here
+   * (FP-2a §0.7.3 sync-prefix rule) so the DEFAULT dm_advanced campaign — every
+   * non-living open — returns WITHOUT loading the heavy sim chunk. Only a living/
+   * autonomous world falls through to the lazily-loaded body (runCatchUpCampaignWorld
+   * in campaignAdvanceSession.js), whose bytes therefore stay OUT of the first-paint
+   * entry closure. The full mechanism (seed / up-to-date / capped loop, determinism,
+   * cursor lifecycle) is documented on that body.
    *
    * @param {string} campaignId
    * @param {{ now?: string|number }} [options]
    * @returns {Promise<{ ok:boolean, weeksCaughtUp:number, capped:boolean, reason?:string }>}
    */
   catchUpCampaignWorld: async (campaignId, options = {}) => {
+    // Sync prefix (kept eager): a dm_advanced/frozen world is not_living — return the
+    // typed no-op HERE, before any lazy load, so the common open path never fetches
+    // the sim. advancesOnOpen is a virtual read (absent key ⇒ dm_advanced ⇒ false).
     const campaign = findActiveCampaign(get().campaigns, campaignId);
-    const rules = campaign?.worldState?.simulationRules;
-    if (!campaign || !advancesOnOpen(rules)) {
+    if (!campaign || !advancesOnOpen(campaign.worldState?.simulationRules)) {
       return { ok: false, weeksCaughtUp: 0, capped: false, reason: 'not_living' };
     }
-    const nowMs = options.now != null ? new Date(options.now).getTime() : Date.now();
-    const nowStamp = new Date(nowMs).toISOString();
-    const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-    const cursor = campaign.worldState.lastLivingAdvanceAt;
-    // First open (or a save switched to living/autonomous after canonize): no
-    // cursor yet ⇒ nothing is OWED. Seed the cursor to now, persist it (so a reload
-    // doesn't re-seed and mis-count), advance nothing.
-    if (cursor == null) {
-      set(state => {
-        const c = findActiveCampaign(state.campaigns, campaignId);
-        if (c && c.worldState) c.worldState.lastLivingAdvanceAt = nowStamp;
-      });
-      await flushWorldPulsePersist({ result: true, campaignPersist: cacheCampaignState(get()), persistUpdates: [], campaignId });
-      return { ok: true, weeksCaughtUp: 0, capped: false, reason: 'seeded' };
-    }
-    const elapsedWeeks = Math.floor((nowMs - new Date(cursor).getTime()) / WEEK_MS);
-    if (!(elapsedWeeks > 0)) {
-      return { ok: true, weeksCaughtUp: 0, capped: false, reason: 'up_to_date' };
-    }
-    const capped = elapsedWeeks > CATCH_UP_CAP_WEEKS;
-    const n = capped ? CATCH_UP_CAP_WEEKS : elapsedWeeks;
-    // AUTONOMOUS resolves the realm's own majors during catch-up (the story carries
-    // itself forward); LIVING advances routine but a surfacing major PAUSES the
-    // catch-up for the DM (they resolve it and the world resumes on the next advance).
-    const autoResolve = worldProgressionOf(rules) === 'autonomous';
-    let done = 0;
-    for (let i = 0; i < n; i++) {
-      // One real week per tick. Each advance re-stamps the cursor to `now` and
-      // persists; a not-ok result (paused for DM verdicts, frozen, in-flight) stops
-      // the catch-up here — the DM resolves/resumes via the normal advance path.
-      const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve });
-      if (!result || result.ok === false) break;
-      done += 1;
-    }
-    return { ok: true, weeksCaughtUp: done, capped };
+    // Living/autonomous only: delegate the catch-up body to the lazily-loaded session
+    // helper (FP-2a dep-import pattern). It re-reads the campaign through get() after
+    // the load — the same seam loadWorldEngine's tests mock.
+    const { runCatchUpCampaignWorld } = await loadWorldEngine();
+    return runCatchUpCampaignWorld({ set, get, campaignId, options });
   },
 
   /**
@@ -538,7 +510,17 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // Advance-concurrency guard — see the advanceInFlight contract above. A mutation
     // during a running multi-tick advance would be reverted by its Phase-2 commit.
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // Parked-pause guard (worldpulse-core-1): a campaign PAUSED mid-interval for DM
+    // verdicts is not idle — resolveIntervalMajors re-derives the paused segment from
+    // the cursor's PRE-tick snapshot and wholesale-commits it, so any proposal applied
+    // during the parked window would be silently overwritten on resume. No-op with the
+    // action's existing null shape; the DM resumes or undoes the pause first.
+    if (get().getPausedAdvance(campaignId)) return null;
     const { applyWorldPulseProposal: domainApplyWorldPulseProposal } = await loadWorldEngine();
+    // The applied-decision extractor loads lazily (pulseFingerprint) — resolved here,
+    // before set(), so it's available synchronously inside the producer where it
+    // flattens the draft proposal to plain telemetry.
+    const { extractProposalDecision } = await loadPulseFingerprint();
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -575,7 +557,20 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   // condition, move a faction/NPC) as an authoritative, party-tagged pulse
   // input. Persists like advanceCampaignWorld.
   recordPartyImpact: async (campaignId, action) => {
+    // Parked-pause guard (worldpulse-core-1): a party impact recorded while the
+    // interval is paused for DM verdicts would be clobbered by resume (which replays
+    // the segment from the cursor's pre-tick snapshot). Block a USER-initiated impact
+    // during the parked window — but NOT the advance's own internal party-replay,
+    // which runs while the campaign is still marked in flight (the drained impacts
+    // must land). isAdvanceInFlight distinguishes the two: the parked window is
+    // NOT-in-flight (the advance has returned); the internal replay IS in-flight.
+    if (get().getPausedAdvance(campaignId) && !get().isAdvanceInFlight(campaignId)) {
+      return { ok: false, reason: 'advance_paused' };
+    }
     const { applyPartyImpact: domainApplyPartyImpact } = await loadWorldEngine();
+    // The party-impact telemetry extractor also loads lazily (pulseFingerprint);
+    // used after set(), in the track() call below.
+    const { extractPartyImpact } = await loadPulseFingerprint();
     let result = /** @type {any} */ (null);
     let persistUpdates = [];
     let campaignPersist = /** @type {any} */ (null);
@@ -607,6 +602,13 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
     // Advance-concurrency guard — see the advanceInFlight contract above.
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // Parked-pause guard (worldpulse-core-1): dismissing a proposal during a parked
+    // pause would be reverted by resume; no-op with the action's existing null shape.
+    if (get().getPausedAdvance(campaignId)) return null;
+    // The dismissal-decision extractor loads lazily (pulseFingerprint) — awaited HERE,
+    // after the synchronous guards, so it's resolved before the set() that flattens
+    // the draft proposal to plain telemetry inside the Immer producer.
+    const { extractProposalDecision } = await loadPulseFingerprint();
     let proposal = /** @type {any} */ (null);
     let dismissDecision = /** @type {any} */ (null);
     let campaignPersist = /** @type {any} */ (null);

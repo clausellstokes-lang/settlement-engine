@@ -23,6 +23,7 @@
  * the sim (keeping the lazy chunking + the mockability of the kernel intact).
  */
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
 import {
   cloneJson, cacheCampaignState, flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
@@ -180,6 +181,12 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
         : drained.authoredEventBySave;
     });
 
+    // M10b (state-lifecycle-1 / store-1): the world clock BEFORE this advance,
+    // lifted off the pre-tick sim clone so Phase-2 can tell whether the advance
+    // actually moved time. Drain never touches tick, so simCampaign.worldState.tick
+    // is the pre-advance value.
+    const preTick = simCampaign?.worldState?.tick;
+
     // Pure, heavy compute OUTSIDE the producer. The multi-tick path is awaited: the
     // orchestrator yields to the event loop between tick batches so a long advance
     // (up to 48 one-week kernel passes) does not freeze the UI. The compute is a pure
@@ -242,6 +249,21 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
           // A COMPLETE advance clears any stale cursor back to byte-neutral (absent).
           const { pausedAdvance: _drop, ...rest } = c.worldState;
           c.worldState = rest;
+        }
+        // M10b re-stamp (state-lifecycle-1 / store-1): whenever this advance moved
+        // the world clock in a LIVING/AUTONOMOUS world, stamp the catch-up cursor
+        // HERE — inside the Phase-2 commit, BEFORE cacheCampaignState — so the moved
+        // cursor rides the SAME atomic persist (both the localStorage cache written
+        // by cacheCampaignState and the cloud snapshot synced from campaignPersist).
+        // Previously the stamp lived in a SEPARATE post-advance set() in the slice,
+        // AFTER this persist ran, so both persisted surfaces carried the PRE-advance
+        // cursor and a reload re-simulated the already-advanced weeks (phantom time).
+        // Placed AFTER the undo-snapshot push above, so undoLastPulse still restores
+        // the prior cursor with the reverted worldState. dm_advanced/frozen ⇒
+        // advancesOnOpen false ⇒ inert (byte-identical; goldens test the domain).
+        if (c.worldState && advancesOnOpen(c.worldState.simulationRules)
+            && c.worldState.tick !== preTick) {
+          c.worldState = { ...c.worldState, lastLivingAdvanceAt: now };
         }
         campaignPersist = cacheCampaignState(state);
         // Collect the affected saves (post-apply) for the research fingerprint,
@@ -412,4 +434,75 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
 
   await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
   return result;
+}
+
+/**
+ * M10b — the capped, deterministic advance-on-open catch-up BODY for a LIVING/
+ * AUTONOMOUS world. Split out of campaignWorldPulseSlice's EAGER slice (FP-2 reclaim)
+ * so its bytes stay OUT of the first-paint entry closure. The slice's thin wrapper
+ * owns the SYNCHRONOUS not_living guard (so a dm_advanced open — the default — returns
+ * WITHOUT loading the sim chunk); this body runs only for a world that opted into
+ * autonomy, and re-reads the campaign through get() after the lazy load (the FP-2a
+ * dep-import pattern, mirroring canonizeCampaignWorldSpatial → runSpatialCanonize).
+ *
+ * Computes how many whole weeks of REAL time have elapsed since the world last
+ * advanced (worldState.lastLivingAdvanceAt), caps at CATCH_UP_CAP_WEEKS, and runs that
+ * many ONE-WEEK advanceCampaignWorld calls — so a catch-up of N weeks is
+ * BYTE-IDENTICAL to N manual one-week ticks (determinism inherited from the kernel;
+ * the loop stops early if an advance pauses for DM verdicts or otherwise returns
+ * not-ok). Each advance re-stamps the cursor to `now` (the M10b block in
+ * runAdvanceCampaignWorld), so:
+ *   • past the cap, the calendar reaches `now` but the sim stopped at the cap
+ *     (owner ruling 2026-07-13: calendar-advances-past-cap — no perpetual re-catch-up);
+ *   • a paused/short catch-up leaves the cursor at the last week it reached.
+ * A first open / legacy save (no cursor) SEEDS the cursor and advances nothing — never
+ * a 1970-epoch delta. `now` is INJECTED for determinism (the UI open-hook passes
+ * Date.now-derived time; tests pass a fixed value). JUDGMENT (vetoable): cursor jumps
+ * to `now` on any catch-up (whole-week sim; sub-week remainder + past-cap overflow +
+ * paused tail are dropped — the DM resumes a paused interval via the normal advance).
+ *
+ * @param {{ set: Function, get: Function, campaignId: string,
+ *   options?: { now?: string|number } }} args
+ * @returns {Promise<{ ok:boolean, weeksCaughtUp:number, capped:boolean, reason?:string }>}
+ */
+export async function runCatchUpCampaignWorld({ set, get, campaignId, options = {} }) {
+  const campaign = findActiveCampaign(get().campaigns, campaignId);
+  // The wrapper already applied the not_living guard; re-read the living campaign's
+  // values here (the campaign is guaranteed living/autonomous with a worldState).
+  const rules = campaign?.worldState?.simulationRules;
+  const nowMs = options.now != null ? new Date(options.now).getTime() : Date.now();
+  const nowStamp = new Date(nowMs).toISOString();
+  const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+  const cursor = campaign.worldState.lastLivingAdvanceAt;
+  // First open (or a save switched to living/autonomous after canonize): no
+  // cursor yet ⇒ nothing is OWED. Seed the cursor to now, persist it (so a reload
+  // doesn't re-seed and mis-count), advance nothing.
+  if (cursor == null) {
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (c && c.worldState) c.worldState.lastLivingAdvanceAt = nowStamp;
+    });
+    await flushWorldPulsePersist({ result: true, campaignPersist: cacheCampaignState(get()), persistUpdates: [], campaignId });
+    return { ok: true, weeksCaughtUp: 0, capped: false, reason: 'seeded' };
+  }
+  const elapsedWeeks = Math.floor((nowMs - new Date(cursor).getTime()) / WEEK_MS);
+  if (!(elapsedWeeks > 0)) {
+    return { ok: true, weeksCaughtUp: 0, capped: false, reason: 'up_to_date' };
+  }
+  const capped = elapsedWeeks > CATCH_UP_CAP_WEEKS;
+  const n = capped ? CATCH_UP_CAP_WEEKS : elapsedWeeks;
+  // AUTONOMOUS resolves the realm's own majors during catch-up (the story carries
+  // itself forward); LIVING advances routine but a surfacing major PAUSES the
+  // catch-up for the DM (they resolve it and the world resumes on the next advance).
+  const autoResolve = worldProgressionOf(rules) === 'autonomous';
+  let done = 0;
+  for (let i = 0; i < n; i++) {
+    // One real week per tick. Each advance re-stamps the cursor to `now` and
+    // persists; a not-ok result (paused for DM verdicts, frozen, in-flight) stops
+    // the catch-up here — the DM resolves/resumes via the normal advance path.
+    const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve });
+    if (!result || result.ok === false) break;
+    done += 1;
+  }
+  return { ok: true, weeksCaughtUp: done, capped };
 }

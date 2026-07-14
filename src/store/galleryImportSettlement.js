@@ -20,6 +20,7 @@ import { fetchDossierForImport } from '../lib/gallery.js';
 import { normalizeSettlement } from '../domain/normalizeSettlement.js';
 import { saves as savesService } from '../lib/saves.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { scrubImportedConfig } from '../lib/importScrub.js';
 
 export async function importGallerySettlementImpl(get, set, slug) {
   const st = get();
@@ -60,17 +61,12 @@ export async function importGallerySettlementImpl(get, set, slug) {
       neighborRelationship: null,
       interSettlementRelationships: [],
       _seed: undefined,
-      // Strip the seed AND the religion embed bridge: an imported settlement must
-      // arrive DORMANT — no foreign pantheon. Without this, the preserved config
-      // would carry the source's primaryDeityRef + primaryDeitySnapshot and the
-      // copy would be non-dormant, resurrecting a deity the importer never authored.
-      config: src.config
-        ? (() => {
-            // eslint-disable-next-line no-unused-vars
-            const { _seed, primaryDeityRef, primaryDeitySnapshot, ...rest } = src.config;
-            return rest;
-          })()
-        : src.config,
+      // Strip the seed AND the religion/faith embed bridge: an imported settlement
+      // must arrive DORMANT — no foreign pantheon. The single-writer scrub drops the
+      // seed, primaryDeityRef, primaryDeitySnapshot, cultDeitySnapshots, and the
+      // faithProfile projection (store-4 — cultDeitySnapshots was previously missed
+      // here, so DM-imposed cults imported live and activated the religion subsystem).
+      config: scrubImportedConfig(src.config),
       importedFrom: { slug, sourceName: dossier.name || src.name || null, importedAt },
     }),
     config: null,

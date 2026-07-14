@@ -315,4 +315,38 @@ describe('advance pause/resume store path (Stage 3)', () => {
     do { if (g2++ > 60) throw new Error('loop'); dr = await direct.getState().resolveIntervalMajors('camp-1', {}, { now: NOW }); } while (dr && dr.status === 'paused');
     expect(store.getState().campaigns[0].worldState.worldState).toEqual(direct.getState().campaigns[0].worldState.worldState);
   });
+
+  test('mid-pause mutation guard: proposal apply/dismiss + party impact no-op while paused, leaving the segment intact (worldpulse-core-1)', async () => {
+    const store = makeStore();
+    seedStore(store);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_year', { now: NOW, autoResolve: false });
+    const ws = store.getState().campaigns[0].worldState;
+    expect(ws.pausedAdvance).toBeTruthy();
+    // The advance has RETURNED — only the parked cursor remains (NOT in flight). This
+    // is exactly the window the DM interacts with the parked panel; a write here would
+    // be discarded when resolveIntervalMajors replays the segment from the pre-tick snap.
+    expect(store.getState().isAdvanceInFlight('camp-1')).toBe(false);
+    const before = JSON.stringify(store.getState().campaigns[0].worldState);
+
+    const pendingId = (ws.proposals || []).find(p => p.status === 'pending')?.id || 'no-such-proposal';
+    // apply/dismiss return their existing null no-op shape; a party impact returns the
+    // typed reason (recordPartyImpact had no prior guard, so it gets an explicit shape).
+    expect(await store.getState().applyWorldPulseProposal('camp-1', pendingId)).toBeNull();
+    expect(await store.getState().dismissWorldPulseProposal('camp-1', pendingId)).toBeNull();
+    expect(await store.getState().recordPartyImpact('camp-1', {
+      kind: 'name_attacker', stressorId: 's', attackerLabel: 'Raiders',
+    })).toEqual({ ok: false, reason: 'advance_paused' });
+
+    // Nothing mutated — the parked segment + cursor are byte-identical, so resume is
+    // unaffected by the DM's (blocked) mid-pause actions.
+    expect(JSON.stringify(store.getState().campaigns[0].worldState)).toBe(before);
+
+    // The pause still resumes cleanly to the interval's end.
+    let guard = 0; let r;
+    do {
+      if (guard++ > 60) throw new Error('did not converge');
+      r = await store.getState().resolveIntervalMajors('camp-1', {}, { now: NOW });
+    } while (r && r.status === 'paused');
+    expect(store.getState().campaigns[0].worldState.tick).toBe(52);
+  });
 });

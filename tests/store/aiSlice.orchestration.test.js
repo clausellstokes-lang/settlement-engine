@@ -335,3 +335,31 @@ describe('hydrateAiFromSave — resets every ai-identity field', () => {
     expect(s.showNarrative).toBe(false);
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────
+// store-3 — requestDailyLife double-click cannot double-charge
+// ─────────────────────────────────────────────────────────────────────
+describe('store-3 — requestDailyLife double-click cannot double-charge', () => {
+  it('two SYNCHRONOUS clicks fire the paid transport exactly once (the second is blocked by the sync lock)', async () => {
+    const store = makeStore();
+    const { resolve } = deferredGen();
+
+    // Fire two clicks back-to-back with NO await between them. The fix makes the whole
+    // prefix — credit check, F18/F19 token/abort stamp, set(aiLoading:true) — run
+    // SYNCHRONOUSLY: the buildDailyLifeRelationshipMemory await moved PAST the lock, so
+    // the second click hits `if (aiLoading) return` and never reaches the transport.
+    // (Pre-fix, the memory-build await ran BEFORE the lock, so the second click slipped
+    // through and both fired paid generateNarrative requests — the double-charge.)
+    const p1 = store.getState().requestDailyLife(SAVE_ID);
+    const p2 = store.getState().requestDailyLife(SAVE_ID);
+
+    // Let p1 progress through its awaits (loadAiLib + the null relationship-memory build)
+    // to the deferred transport; p2 already returned at the aiLoading guard.
+    await new Promise(r => setTimeout(r, 30));
+    expect(generateNarrative).toHaveBeenCalledTimes(1);
+
+    resolve({ result: { dawn: 'x' }, creditsRemaining: 4 });
+    await Promise.all([p1, p2]);
+    expect(generateNarrative).toHaveBeenCalledTimes(1);
+  });
+});

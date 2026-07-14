@@ -47,6 +47,7 @@ import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { CATCH_UP_CAP_WEEKS } from '../../src/domain/worldPulse/simulationRules.js';
+import { campaigns as campaignService } from '../../src/lib/campaigns.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -186,6 +187,33 @@ describe('M10b catchUpCampaignWorld', () => {
     expect(undone).toBe(true);
     expect(ws(store).tick).toBe(0);
     expect(ws(store).lastLivingAdvanceAt).toBe(cursor);
+  });
+
+  test('PERSIST ROUND-TRIP: a living advance persists the moved cursor — no phantom re-catch-up on reload (state-lifecycle-1)', async () => {
+    const store = makeStore();
+    const cursor = '2026-01-01T00:00:00.000Z';
+    seedStore(store, { progression: 'autonomous', cursor });
+    const now = nowAfter(3);
+    await store.getState().advanceCampaignWorld('camp-1', 'one_week', { now, autoResolve: true });
+    // In-memory cursor moved (this already held pre-fix).
+    expect(ws(store).lastLivingAdvanceAt).toBe(now);
+
+    // The PERSISTED mirror (the localStorage cache written by cacheCampaignState)
+    // ALSO carries the moved cursor. Pre-fix the stamp landed in a SEPARATE post-
+    // advance set() AFTER cacheCampaignState ran, so the mirror kept the PRE-advance
+    // cursor — the ghost this pin guards.
+    const cached = campaignService.loadCached('anon');
+    const persistedWs = cached.find(c => c.id === 'camp-1')?.worldState;
+    expect(persistedWs?.lastLivingAdvanceAt).toBe(now);
+
+    // Reload from the persisted mirror into a fresh store ⇒ a catch-up at the SAME
+    // `now` is a no-op. Pre-fix, the stale persisted cursor re-advanced the week the
+    // world already lived (a phantom week per reload).
+    const reloaded = makeStore();
+    reloaded.setState(state => { state.campaigns = JSON.parse(JSON.stringify(cached)); });
+    const res = await reloaded.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(res).toMatchObject({ ok: true, weeksCaughtUp: 0 });
+    expect(reloaded.getState().campaigns[0].worldState.tick).toBe(ws(store).tick);
   });
 
   test('DORMANCY: a dm_advanced world is not_living and its advance never stamps a cursor', async () => {

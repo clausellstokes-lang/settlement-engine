@@ -284,6 +284,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
    * @returns {boolean} whether the world state changed
    */
   undoCampaignStressorBridge: (campaignId, { action, eventType, type, settlementId, twin = null } = {}) => {
+    // Advance-in-flight guard (store-2): this mutates c.worldState.stressors/proposals,
+    // which a running multi-tick advance replaces wholesale in Phase-2 — the undo would
+    // be silently reverted. No-op with the action's existing boolean shape.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return false;
+    }
     let changed = false;
     const act = action
       || (eventType === 'APPLY_STRESSOR' ? 'withdraw'
@@ -387,6 +393,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   setRegionalImpactStatus: (campaignId, impactId, status, patch = {}, opts = {}) => {
+    // Advance-in-flight guard (store-2): a status flip on the regional graph during a
+    // running advance is clobbered by the Phase-2 wholesale regionalGraph replace. No-op
+    // with the action's existing null-graph shape (callers read the returned graph).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return null;
+    }
     let graph = null;
     let impactEvent = null;
     set(state => {
@@ -437,6 +449,13 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   applyQueuedRegionalImpact: async (campaignId, impactId) => {
+    // Advance-in-flight guard (store-2): applying an impact mutates both the member
+    // settlement AND the campaign regional graph, both of which a running multi-tick
+    // advance replaces wholesale in Phase-2 — the applied condition would ghost. No-op
+    // with the action's existing null shape (its no-op / save-failure paths return null).
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return null;
+    }
     // ORDERED writes to prevent split truth (F2): the settlement is the source
     // of truth for the condition, so the campaign graph must NOT advertise the
     // impact 'applied' until that settlement is durably saved. Previously both

@@ -25,6 +25,7 @@
  */
 
 import { describe, test, expect, beforeEach } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -328,6 +329,144 @@ describe('settlementSlice — hydrateFromSave restores the lifecycle', () => {
     expect(s.pendingEditsClock).toBe(0);
     expect(s.pendingSuccession).toBeNull();
     expect(s.draftVersionHistory).toEqual([]);
+  });
+});
+
+describe('settlementSlice — resetSettlementIdentity chokepoint (state-lifecycle-3 / store-5 / components-dossier-5)', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); });
+
+  // Seed the slice as if the user had been working on a CANON save A carrying the full
+  // session residue + a live pipeline rail.
+  const seedResidueAsCanonA = () => {
+    store.setState(s => {
+      s.settlement = fixture({ name: 'Town A' });
+      s.activeSaveId = 'save-A';
+      s.phase = 'canon';
+      s.canonizedAt = '2026-02-01T00:00:00.000Z';
+      s.eventLog = [{ event: { id: 'evt-A' } }];
+      s.locks = { name: true };
+      s.systemState = { resilience: { value: 11 } };
+      s.pendingEditsQueue = [{ id: 'e', kind: 'rename-npc', payload: { npcIndex: 0, newName: 'X' } }];
+      s.pendingEditsClock = 5;
+      s.pendingSuccession = { outgoingNpcId: 'npc-1' };
+      s.draftVersionHistory = [{ id: 'snap-A', kind: 'manual', label: 'A', settlement: { name: 'A' } }];
+      s.pipelineHistory = [{ id: 'assembleInstitutions', ts: 1, summary: 'A run' }];
+      s.pipelineRevealActive = true;
+      s.lastRegenerationDelta = { changed: ['npcs'] };
+      s.generationId = 'gen-A';
+    });
+  };
+
+  const expectNoResidue = (s) => {
+    expect(s.pendingEditsQueue).toEqual([]);
+    expect(s.pendingEditsClock).toBe(0);
+    expect(s.pendingSuccession).toBeNull();
+    expect(s.draftVersionHistory).toEqual([]);
+    // components-dossier-5: the rail must not render A's receipts against the new town.
+    expect(s.pipelineHistory).toEqual([]);
+    expect(s.pipelineRevealActive).toBe(false);
+    expect(s.lastRegenerationDelta).toBeNull();
+    expect(s.generationId).toBeNull();
+  };
+
+  test('setSettlement clears residue AND resets the lifecycle to a fresh draft (store-5)', () => {
+    seedResidueAsCanonA();
+    store.getState().setSettlement(fixture({ name: 'Town B' }));
+    const s = store.getState();
+    expect(s.settlement.name).toBe('Town B');
+    expect(s.activeSaveId).toBeNull();
+    // Lifecycle reset — no canon-A residue (else renames silently no-op under canon).
+    expect(s.phase).toBe('draft');
+    expect(s.eventLog).toEqual([]);
+    expect(s.locks).toEqual({});
+    expect(s.canonizedAt).toBeNull();
+    // systemState re-derived from the NEW settlement, not the stale 11.
+    expect(s.systemState).toBeTruthy();
+    expect(s.systemState).not.toEqual({ resilience: { value: 11 } });
+    expectNoResidue(s);
+  });
+
+  test('clearSettlement wipes the view + all residue', () => {
+    seedResidueAsCanonA();
+    store.getState().clearSettlement();
+    const s = store.getState();
+    expect(s.settlement).toBeNull();
+    expect(s.activeSaveId).toBeNull();
+    expect(s.phase).toBe('draft');
+    expect(s.eventLog).toEqual([]);
+    expect(s.canonizedAt).toBeNull();
+    expect(s.systemState).toBeNull();
+    expectNoResidue(s);
+  });
+
+  test('hydrateFromSave also clears the pipeline rail + regen delta (components-dossier-5)', () => {
+    seedResidueAsCanonA();
+    store.getState().hydrateFromSave({ id: 'save-B', settlement: fixture({ name: 'Town B' }), seed: 'b' });
+    expectNoResidue(store.getState());
+  });
+});
+
+describe('settlementSlice — resetSettlementIdentity is the single writer (structural prevention)', () => {
+  const src = readFileSync(new URL('../../src/store/settlementSlice.js', import.meta.url), 'utf8');
+
+  test('the chokepoint resets the FULL residue field list', () => {
+    const body = src.slice(
+      src.indexOf('function resetSettlementIdentity'),
+      src.indexOf('export const createSettlementSlice'),
+    );
+    for (const field of [
+      'pendingEditsQueue', 'pendingEditsClock', 'pendingSuccession', 'draftVersionHistory',
+      'generationId', 'pipelineHistory', 'pipelineRevealActive', 'lastRegenerationDelta', 'pendingPreview',
+    ]) {
+      expect(body).toMatch(new RegExp(`state\\.${field}\\s*=`));
+    }
+  });
+
+  test('exactly ONE definition and FOUR call sites — every identity swap routes through it', () => {
+    // A new load path that hand-maintains its own inline reset list (the leak habitat)
+    // would NOT bump this count; a new path that correctly routes through the chokepoint
+    // makes it 5 and trips this pin, forcing a deliberate update.
+    expect((src.match(/function resetSettlementIdentity/g) || []).length).toBe(1);
+    expect((src.match(/resetSettlementIdentity\(state\);/g) || []).length).toBe(4);
+  });
+});
+
+describe('settlementSlice — regenSection lifecycle (state-lifecycle-4)', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); });
+
+  test('is a NO-OP on a CANON settlement (identity lock — matches renameNPC/renameFaction)', async () => {
+    store.setState(s => {
+      s.settlement = fixture({ name: 'Canon Town' });
+      s.phase = 'canon';
+    });
+    const before = JSON.stringify(store.getState().settlement);
+    await store.getState().regenSection('npcs');
+    // Canon freezes the roster identity — the reroll never ran (a canon reroll would
+    // silently invalidate campaign canon with no event-log entry).
+    expect(JSON.stringify(store.getState().settlement)).toBe(before);
+    expect(store.getState().lastRegenerationDelta).toBeNull();
+  });
+
+  test('a DRAFT reroll with an active save PERSISTS to that save (no ghost on reload)', async () => {
+    // A real generation so regenNPCsPipeline has a valid roster to reroll.
+    const gen = await store.getState().generateSettlement('fixed-seed');
+    expect(gen).toBeTruthy();
+    // Simulate a save hydrated into the live editor: draft phase + activeSaveId + entry.
+    store.setState(s => {
+      s.activeSaveId = 'save-D';
+      s.phase = 'draft';
+      s.savedSettlements = [{ id: 'save-D', settlement: s.settlement, campaignState: { phase: 'draft', eventLog: [] } }];
+    });
+    await store.getState().regenSection('npcs');
+    const s = store.getState();
+    // The reroll was written to the SAVE entry (settlement + campaignState) — previously
+    // it lived only in memory and ghosted on reload.
+    expect(s.savedSettlements[0].settlement).toEqual(s.settlement);
+    expect(s.savedSettlements[0].campaignState).toBeTruthy();
+    expect(s.savedSettlements[0].campaignState.systemState).toBeTruthy();
+    expect(typeof s.editedAt).toBe('string');
   });
 });
 
