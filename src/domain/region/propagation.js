@@ -15,7 +15,7 @@ import {
   queueRegionalImpacts,
 } from './graph.js';
 import { goodCriticality } from './goodsCatalog.js';
-import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
+import { withActiveCondition, withoutActiveCondition, deriveAllActiveConditions } from '../activeConditions.js';
 import { wallClockNow } from '../clock.js';
 
 /**
@@ -72,6 +72,7 @@ import { wallClockNow } from '../clock.js';
  * @property {string|null} [sourceImpactId]
  * @property {string[]} [pathSettlementIds]
  * @property {string} [explanation]
+ * @property {string} [relievesArchetype]
  */
 
 /**
@@ -133,6 +134,31 @@ const REGIONAL_RULE_TYPES = new Set([
   'information_flow',
   'resource_competition',
 ]);
+
+// [domain-events-region-7] G1d — THE RELIEF LANE (the positive-sign mirror of the
+// shock rules). A recovery at the source — a route reopened, an export or local
+// production regained, a depletion ended — propagates BOUNDED positive relief
+// downstream through the trade/service channels, EARLY-EXPIRING the matching
+// negative regional condition at the target (grain flows again). Previously these
+// change-kinds propagated nothing, so the regional engine only ever transmitted
+// doom. Additive: these kinds were unconsumed by every existing rule.
+const RELIEF_CHANGE_KINDS = new Set([
+  'route_restored', 'export_gained', 'import_gained', 'local_production_gained', 'depleted_good_lost',
+]);
+// The negative regional-condition archetype a relief through each trade/service
+// channel early-expires at the target — the mirror of the shock that channel
+// transmits (ruleTradeDependency→import_shortage, ruleExportMarket→export_market_loss,
+// ruleTradeRoute→route_disruption, ruleServiceDependency→service_disruption,
+// ruleTaxObligation→tax_revenue_disruption). Channels with no trade-relief mapping
+// carry no relief (undefined ⇒ ruleRelief returns null).
+/** @type {Readonly<Record<string, string>>} */
+const RELIEF_TARGET_ARCHETYPE = Object.freeze({
+  trade_dependency: 'regional_import_shortage',
+  export_market: 'regional_export_market_loss',
+  trade_route: 'regional_route_disruption',
+  service_dependency: 'regional_service_disruption',
+  tax_obligation: 'regional_tax_revenue_disruption',
+});
 
 /**
  * @param {unknown} value
@@ -288,6 +314,9 @@ function impact(channel, localDelta, change, kind, goods, detail = {}) {
       variable: change.variable || null,
       chainId: change.chain?.id || null,
     },
+    // [domain-events-region-7] G1d — a relief impact carries the negative archetype
+    // its apply step early-expires at the target (see applyRegionalImpact).
+    ...(detail.relievesArchetype ? { relievesArchetype: detail.relievesArchetype } : {}),
     explanation: detail.explanation || explainImpact(kind, channel, localDelta, goods),
     createdAt: wallClockNow(),
   };
@@ -337,6 +366,9 @@ function explainImpact(kind, channel, localDelta, goods) {
   }
   if (kind === 'religious_pressure') {
     return `Religious authority around ${localDelta.sourceSettlementName || channel.from} is under regional strain.`;
+  }
+  if (kind === 'relief') {
+    return `Recovery at ${localDelta.sourceSettlementName || channel.from} eases the pressure on connected trade — ${goodText} flows again.`;
   }
   return `Regional impact through ${channel.type}.`;
 }
@@ -583,9 +615,31 @@ function ruleResourceCompetition(channel, localDelta, change) {
   return null;
 }
 
+/**
+ * [domain-events-region-7] G1d — THE RELIEF RULE. A recovery change-kind flowing
+ * through a trade/service channel mints a bounded, positive-polarity `relief`
+ * impact carrying the negative archetype it early-expires at the target. Mirrors
+ * the shock rules with positive sign; returns null for a channel type with no
+ * trade-relief mapping (so relief never flows through political/military/etc.).
+ * @type {RegionalRule}
+ */
+function ruleRelief(channel, localDelta, change) {
+  const relieves = RELIEF_TARGET_ARCHETYPE[channel.type];
+  if (!relieves) return null;
+  // route_restored is not goods-scoped (it is a route event); the goods-scoped
+  // kinds (export/import/production/depletion) address the channel's own goods.
+  const scoped = change.kind === 'route_restored' ? [] : matchingGoods(channel, change);
+  const goods = scoped.length ? scoped : (channel.goods || []);
+  return impact(channel, localDelta, change, 'relief', goods, { relievesArchetype: relieves });
+}
+
 /** @type {RegionalRule} */
 function impactForChannel(channel, localDelta, change) {
   if (!REGIONAL_RULE_TYPES.has(channel.type)) return null;
+  // Relief change-kinds (the positive-sign lane) are handled uniformly BEFORE the
+  // per-type shock rules — those rules only consume negative kinds, so this adds a
+  // lane rather than diverting one.
+  if (RELIEF_CHANGE_KINDS.has(change.kind)) return ruleRelief(channel, localDelta, change);
   if (channel.type === 'trade_dependency') return ruleTradeDependency(channel, localDelta, change);
   if (channel.type === 'export_market') return ruleExportMarket(channel, localDelta, change);
   if (channel.type === 'trade_route') return ruleTradeRoute(channel, localDelta, change);
@@ -661,6 +715,11 @@ export function deriveRegionalImpacts(localDelta, graph, options = {}) {
     /** @type {RegionalImpact[]} */
     const nextFrontier = [];
     for (const sourceImpact of frontier) {
+      // [domain-events-region-7] G1d — relief is BOUNDED to a single hop: it never
+      // wave-propagates (waveKindForChannel maps to SHOCK kinds, so a waved relief
+      // would invert into a phantom downstream shock). Relief eases the direct
+      // trade partners of the recovered source, and stops there.
+      if (sourceImpact.kind === 'relief') continue;
       const waveChannels = activeChannelsFrom(current, sourceImpact.targetSettlementId, {
         includeSuggested: !!options.includeSuggested,
         types: options.types || [...REGIONAL_RULE_TYPES],
@@ -850,6 +909,7 @@ function archetypeForImpact(impactItem) {
   if (impactItem.kind === 'information_shock') return 'regional_information_shock';
   if (impactItem.kind === 'criminal_pressure') return 'regional_criminal_pressure';
   if (impactItem.kind === 'religious_pressure') return 'regional_religious_pressure';
+  if (impactItem.kind === 'relief') return 'regional_relief';
   return 'regional_pressure';
 }
 
@@ -897,6 +957,11 @@ function affectedSystemsForImpact(impactItem) {
   }
   if (impactItem.kind === 'religious_pressure') {
     return ['public_legitimacy', 'social_trust', 'healing_capacity'];
+  }
+  if (impactItem.kind === 'relief') {
+    // Relief eases the same systems a trade shock strains; it removes the negative
+    // condition rather than materializing one, so this feeds only the news read.
+    return ['trade_connectivity', 'public_legitimacy'];
   }
   return ['trade_connectivity'];
 }
@@ -946,6 +1011,7 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
     impactItem.kind === 'information_shock' ? 'Regional information shock' :
     impactItem.kind === 'criminal_pressure' ? 'Regional criminal pressure' :
     impactItem.kind === 'religious_pressure' ? 'Regional religious pressure' :
+    impactItem.kind === 'relief' ? `Regional relief${goods ? `: ${goods}` : ''}` :
     'Regional pressure';
   return {
     id: impactItem.conditionId || legacyRegionalConditionId(impactItem),
@@ -973,6 +1039,24 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
 }
 
 /**
+ * [domain-events-region-7] G1d — apply a RELIEF impact: early-expire every active
+ * regional condition at the target whose archetype matches the relief's
+ * `relievesArchetype` (the negative condition the recovered channel had inflicted).
+ * Bounded to that ONE archetype — relief never touches unrelated conditions. Pure.
+ * @param {Object} settlement
+ * @param {RegionalImpact & { relievesArchetype?: string }} impactItem
+ * @returns {Object}
+ */
+function applyRegionalRelief(settlement, impactItem) {
+  const archetype = impactItem.relievesArchetype;
+  if (!archetype) return settlement;
+  const matching = deriveAllActiveConditions(settlement).filter(c => c.archetype === archetype);
+  let next = settlement;
+  for (const c of matching) next = withoutActiveCondition(next, c.id);
+  return next;
+}
+
+/**
  * @param {Object} settlement
  * @param {RegionalImpact} impactItem
  * @param {{ tick?: number }} [options]
@@ -980,6 +1064,13 @@ export function conditionFromRegionalImpact(impactItem, options = {}) {
  */
 export function applyRegionalImpact(settlement, impactItem, options = {}) {
   if (!settlement || !impactItem) return settlement;
+  // [domain-events-region-7] G1d — a RELIEF impact does not materialize a condition;
+  // it EARLY-EXPIRES the matching negative regional condition(s) at the target (the
+  // ghost-reconcile pattern: grain flows again, so the import-shortage condition
+  // lifts NOW rather than bleeding out over its 6-10 tick timeout). A no-op when the
+  // target carries no such condition (the relief still surfaced its "pressure eases"
+  // news when it queued).
+  if (impactItem.kind === 'relief') return applyRegionalRelief(settlement, impactItem);
   const condition = conditionFromRegionalImpact(impactItem, options);
   // Re-applying an impact whose condition was materialized under the legacy
   // truncated id must migrate it, not leave a duplicate beside the hashed id.

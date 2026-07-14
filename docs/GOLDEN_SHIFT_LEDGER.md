@@ -353,3 +353,121 @@ battery cycle. They are handed off as a coherent next sub-wave (G1d):
   (cultImpositionApply.js:55 + religiousContest.js:246, ~7 call sites) — not a one-liner; each caller
   must resolve the deity→pantheon entry. `DEITY_RANK_STRENGTH` is already keyed identically for the
   tier vocabulary (`major`/`minor`/`cult`), so the max() is well-defined.
+
+---
+
+# GOLDEN SHIFT LEDGER — G1d "NEW-LANE COUPLINGS"
+
+Wave: G1d (same golden-shifting branch `claude/review-fix-golden-track`, built on G1c @ 9bdfa8fa).
+Fixes IMPLEMENTED (3 full + 1 half): [domain-events-region-1] **Lane 1 only** (party-caused),
+[domain-events-region-7] (relief propagation), [worldpulse-religion-trade-2] (three re-emitter
+cooldowns), [worldpulse-religion-trade-4] (pantheon tier → conversion strength).
+STOP-AND-REPORTED: [domain-events-region-1] **Lane 2** (the STORE-layer non-party / OPENED_TRADE_ROUTE
+type-upsert + APPLY_STRESSOR souring ripple) — see the remainder note below.
+
+## HEADLINE RESULT — exactly ONE golden fixture legitimately RED; all other goldens byte-identical
+
+The FULL domain + property suite after all G1d fixes:
+
+```
+$ npx vitest run tests/domain/            → Test Files 366 passed (366)   Tests 4656 passed (4656)
+$ npx vitest run tests/property/          → Test Files  18 passed | 1 failed (19)   (1 legitimate red)
+```
+
+The one red is `tests/property/worldpulseSpatialGolden.test.js` case **`sp-a|4|one_week`** — the
+pact-cooldown metronome (religion-trade-2) suppresses re-announced faith pacts, which the golden
+exercises. Every OTHER golden fixture — including the rest of the spatial-golden corpus — is
+BYTE-IDENTICAL. The fixture is left byte-identical (NOT regenerated); this ledger records the shift
+for the owner's batched `UPDATE_GOLDEN` regen.
+
+## THE ONE LEGITIMATELY-RED GOLDEN FIXTURE (reverted / not regenerated)
+
+**`tests/property/worldpulseSpatialGolden.test.js` — `sp-a|4|one_week`.** SEMANTIC CAUSE:
+[worldpulse-religion-trade-2] — the faith-pact metronome. In the sp-a scenario two good-aligned
+patron settlements (Ashford + Crownhold, both Dawnfather) form a faith pact that RE-ANNOUNCED every
+~half-tick; the new `pactCooldownPairs` cooldown suppresses the re-announcements.
+- Before: the projection's `candidateTypes` histogram carried `faith_pact_formed: 8` over 4 ticks.
+- After:  `faith_pact_formed: 2` (the fresh announcements; re-prints within the 6-tick window are
+  suppressed) — so the manifest hash for `sp-a|4|one_week` no longer matches.
+- Isolation CONFIRMED: neutralising ONLY the pact cooldown makes the golden pass again; the foothold
+  cooldown, the coercion metronome, the relief lane, and the pantheon-tier blend each leave every
+  golden byte-identical. Fixture NOT regenerated (owner-signed batched regen pending).
+
+## Behavior shift IS real — proven by 15 new pins in `tests/domain/newLaneCouplingsG1d.test.js` + 1 updated assertion pin
+
+- **region-1 Lane 1** — before: a DM-brokered/disputed relationship event only wrote the home
+  settlement's neighbourNetwork (cosmetic); after: a PARTY-CAUSED `BROKERED_ALLIANCE` /
+  `SETTLEMENT_DISPUTE` maps through `broker_relationship`/`inflame_relationship`, resolves the live
+  edge via `relationshipKeyFromEdge`, and measurably moves the pulse `relationshipState` + relabels
+  the graph edge the war layer reads (hostile→cold_war on broker; neutral sours on dispute).
+- **region-7** — before: `route_restored`/`export_gained`/`import_gained`/`local_production_gained`/
+  `depleted_good_lost` propagated NOTHING; after: they mint a bounded, single-hop `relief` impact
+  through trade/service channels whose apply step early-expires the matching negative regional
+  condition at the target (import-shortage lifts NOW; unrelated conditions survive; relief never
+  waves into a phantom downstream shock).
+- **religion-trade-2** — before: footholds re-print every tick, pacts every ~2 ticks, vassal coercion
+  every tick a prize is held; after: each re-announces at most once per 6-tick window
+  (`pactCooldownPairs`/`footholdCooldownKeys` ride pulseHistory; coercion rides a new
+  `lastCoercionTick` on the EXISTING `tradeWarState` entry — no new top-level worldState key). First
+  emission is never on cooldown ⇒ byte-identical for a fresh event.
+- **religion-trade-4** — before: a cult-rank deity that won 6 seats still converted at cult strength
+  0.35; after: `rankStrengthOf = max(snapshot rank, DEITY_RANK_STRENGTH[pantheon tier])` lifts the
+  projected authority + prevalence + legitimacy of a seat-won creed (pin: a cult-rank patron promoted
+  to a `major` pantheon tier mints religious_authority at 0.7675 vs the 0.6175 baseline — exactly
+  `(0.95−0.35)×0.25`). Gated on a present pantheon ⇒ base-only when religion is dormant.
+
+## The ONE updated assertion pin (updated in place — behavior-assertion, NOT a golden fixture)
+
+**`tests/domain/tradeWar.test.js` — "sustained forced coercion raises vassal strain past the rebellion
+gate".** SEMANTIC CAUSE: [worldpulse-religion-trade-2] — the vassal_trade_coercion metronome. Over 16
+ticks the coercion now re-stamps its strain condition ~3× (once per 6-tick window) instead of every
+tick.
+- Before: `expect(on.maxStrain).toBeGreaterThan(off.maxStrain)` — the coercion, re-stamping every
+  tick, pushed the peak strain strictly above the no-coercion baseline.
+- After: the peak strain is now driven by the DURABLE `vassal_extraction` + resentment ratchet (which
+  reaches the same peak in both arms), so `on.maxStrain === off.maxStrain`. The assertion is updated
+  to encode the fix's actual guarantee: the escape valve STILL crosses the rebellion gate
+  (`on.maxStrain > VASSAL_REBELLION_STRAIN_GATE`, not a silent trap) AND the coercion is METRONOMED
+  (`0 < on.coercionCount < 16`, no longer a per-tick flood). The escape valve is preserved; the flood
+  is gone.
+
+## Constitutional checks (this wave)
+
+- `node scripts/count-domain-any.mjs` → **2252 holes (2213 any + 39 suppress)** — EXACT, ratchet held.
+  (New engine logic typed against real/`unknown` types — no new `any`; the +11 introduced during
+  implementation were retyped to `unknown`/concrete before landing.)
+- `npm run typecheck:domain:strict` → **0 errors** (ceiling 0). Two new typedef properties were added
+  (`ImpactDetail.relievesArchetype?`, `deityLocalStrength`/`deityLegitimacyTarget` `rankStrengthOf?`).
+- `npx eslint` on all 8 touched source files + 2 test files → clean.
+- any-cast baseline lint test (`tests/lint/domainAnyCastBaseline.test.js`) → green.
+
+## Conditions under which a FUTURE golden will legitimately shift (for the next session)
+
+A new/extended golden fixture SHOULD shift — and the shift is intended, re-captured with
+`UPDATE_GOLDEN=1` and recorded — if it: (a) records a PARTY-CAUSED `BROKERED_ALLIANCE`/
+`SETTLEMENT_DISPUTE` on a live edge (region-1 Lane 1); (b) runs a settlement to a recovery
+(route reopened / export or production regained / depletion ended) that flows relief through a trade/
+service channel while a matching regional condition is live (region-7); (c) RE-announces a faith pact
+on a pair, a targeted foothold on a (cid,rival,minister) triple, or a held vassal coercion across
+successive ticks within the 6-tick window (religion-trade-2 — this is the `sp-a` red's class); or
+(d) carries a deity whose EARNED pantheon tier strictly exceeds its snapshot rankAxis through a
+conversion / prevalence / legitimacy read (religion-trade-4).
+
+## STOP-AND-REPORT remainder — [domain-events-region-1] Lane 2 (store-layer)
+
+Lane 1 (party-caused) is BUILT and satisfies the acceptance test (a DM-brokered alliance measurably
+moves pulse `relationshipState`; a dispute sours it). Lane 2 — the NON-party CANON ripple — is NOT
+built: it is store-layer (`rippleEventThroughWorld`, settlementSlice.js) and needs a store-test
+battery outside this wave's domain-only golden-track batteries. Precise remaining scope:
+- For a NON-party `BROKERED_ALLIANCE`/`SETTLEMENT_DISPUTE`/`OPENED_TRADE_ROUTE`, and for
+  `APPLY_STRESSOR` carrying an instigator, `rippleEventThroughWorld` must upsert the pulse
+  `relationshipState` to the event's SPECIFIC type (not a ladder nudge — the verdict's "type upsert"),
+  relabel the edge, and call `syncRelationshipChannelBundle` (region/graph.js:649).
+- Recommended shape: a new domain applier (sibling to `applyPartyImpact`) that builds a
+  `relationship_label_change` outcome carrying the event's `toType` + a signed relationshipPatch and
+  routes it through the EXISTING `applyWorldPulseOutcomes` (which already does applyRelationshipPatch +
+  applyRelationshipLabelToGraph + syncRelationshipChannelBundle + neighbourNetwork writeback + siege
+  wind-down), invoked from a new store method the store's `rippleEventThroughWorld` calls for the
+  non-party branch. `findRelationshipEdgeForPair` (now in partyImpact.js) can be lifted/shared for the
+  edge resolution. This won't shift DOMAIN goldens (store-triggered, not auto-tick) but needs store
+  tests.

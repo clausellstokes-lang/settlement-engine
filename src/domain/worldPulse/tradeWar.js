@@ -78,6 +78,12 @@ const MIN_CHAIN = 0.2;
 // Anti-thrash: after a flip, suppress re-flips for this many ticks (this caller-side
 // cooldown — the primitive's hysteresis is the other half).
 const FLIP_COOLDOWN_TICKS = 6;
+// [worldpulse-religion-trade-2] G1d — a STANDING vassal_trade_coercion re-stamps its
+// strain condition every tick the overlord holds the prize. Metronome it: re-emit only
+// on a real change of the compelled winner, or once per this renewal window (aligned to
+// FLIP_COOLDOWN_TICKS). Rides the EXISTING tradeWarState ledger (a new lastCoercionTick
+// field on the per-prize entry — no new top-level worldState key).
+const COERCION_RENEWAL_TICKS = 6;
 // Escalation gate: only a CONFIDENT defeated incumbent can open a war
 // (conquest stays reachable but not automatic — most losers wind down).
 const ESCALATION_CONFIDENCE = 0.5;
@@ -402,12 +408,14 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       }
 
       let result;
+      let coercionEmitted = false;
       if (forcedOverlord) {
         // Deterministic: no rng when forced (probability-1 bypass).
         for (const c of contenders) {
           if (c.id === forcedOverlord.supplierId) c.scoreFor = 1;
         }
-        const priorWinner = tradeWarState[prizeId]?.winnerId ?? incumbentId;
+        const priorEntryForced = tradeWarState[prizeId];
+        const priorWinner = priorEntryForced?.winnerId ?? incumbentId;
         result = {
           prizeId,
           channelType: CHANNEL_TYPE,
@@ -420,9 +428,16 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
           roll: 0,
           weights: {},
         };
+        // [worldpulse-religion-trade-2] G1d — metronome the standing compulsion:
+        // re-stamp the strain condition only on a real change of the compelled
+        // winner, or once per renewal window. (A newly-compelled prize has no prior
+        // coercion stamp ⇒ lastCoercionTick −∞ ⇒ it fires ⇒ byte-identical for a
+        // fresh coercion; a HELD compulsion stops re-printing every tick.)
+        const lastCoercionTick = Number.isFinite(priorEntryForced?.lastCoercionTick) ? priorEntryForced.lastCoercionTick : -Infinity;
+        coercionEmitted = result.changed || (tick - lastCoercionTick >= COERCION_RENEWAL_TICKS);
         // Route the forced commitment through the vassal's ECONOMY PRESSURE so
         // `vassal_rebellion` stays reachable — a coerced ruinous trade strains C.
-        outcomes.push(conditionOutcome({
+        if (coercionEmitted) outcomes.push(conditionOutcome({
           id: `world_outcome.vassal_trade_coercion.${prizeId}.${tick}`,
           archetype: 'vassal_trade_coercion',
           targetSaveId: buyerId,
@@ -464,6 +479,11 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
       // buyerId + commodityId are the REAL ids (not the slugged prizeId key) so a
       // public reader can resolve display names without un-slugging the key.
       const priorEntry = tradeWarState[prizeId] || {};
+      // [worldpulse-religion-trade-2] G1d — stamp the coercion metronome only when
+      // the strain condition actually re-emitted this tick; otherwise carry the
+      // prior stamp. CONDITIONALLY MATERIALIZED: a prize that was never coerced
+      // carries no lastCoercionTick key ⇒ its tradeWarState entry stays byte-identical.
+      const nextCoercionTick = coercionEmitted ? tick : (Number.isFinite(priorEntry.lastCoercionTick) ? priorEntry.lastCoercionTick : null);
       tradeWarState[prizeId] = {
         winnerId: result.winnerId,
         incumbentId: result.incumbentId,
@@ -471,6 +491,7 @@ export function evaluateTradeWar({ snapshot, worldState, rng, tick = 0, now = nu
         commodityId: String(commodityId),
         lastFlipTick: result.changed ? tick : (Number.isFinite(priorEntry.lastFlipTick) ? priorEntry.lastFlipTick : null),
         updatedTick: tick,
+        ...(nextCoercionTick != null ? { lastCoercionTick: nextCoercionTick } : {}),
       };
 
       if (!result.changed) continue; // held — no realignment, no escalation.

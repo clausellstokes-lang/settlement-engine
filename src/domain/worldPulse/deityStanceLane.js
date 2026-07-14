@@ -49,6 +49,13 @@ import { stablePart } from '../region/graph.js';
 
 export const STANCE_LANE_TUNING = Object.freeze({
   BETRAYAL_COOLDOWN_TICKS: 8,   // no re-betrayal on a pair within this window (pulseHistory-read)
+  // [worldpulse-religion-trade-2] G1d — metronome discipline for the standing-state
+  // re-emitters. A pact / foothold that already fired on a pair (or on a
+  // cid×rival×minister) re-announces at most once per this window instead of
+  // every tick. Aligned to the realm-wide re-emit cadence (DRIFT_REEMIT_COOLDOWN_TICKS
+  // / FLIP_COOLDOWN_TICKS = 6). Both rides pulseHistory — no new worldState key.
+  PACT_COOLDOWN_TICKS: 6,       // no re-announced faith pact on a pair within this window
+  FOOTHOLD_COOLDOWN_TICKS: 6,   // no re-announced foothold on a (cid,rival,minister) within this window
   MAX_BETRAYALS_PER_TICK: 2,    // realm cap (containment-cap idiom, pantheon.js:70)
   MAX_PACTS_PER_TICK: 3,        // realm cap on positive events too (bounded emission)
   COHESION_LAW_W: 0.6,          // evil-pact cohesion: MIN-lawfulness ⇒ this much betrayal-hazard damp
@@ -100,6 +107,68 @@ export function betrayalCooldownPairs(worldState, tick) {
       if (!key) continue;
       const at = Number.isFinite(o?.tick) ? Number(o.tick) : (Number.isFinite(rec?.tick) ? Number(rec.tick) : null);
       if (at == null || tick - at < T.BETRAYAL_COOLDOWN_TICKS) out.add(String(key));
+    }
+  }
+  return out;
+}
+
+/**
+ * [worldpulse-religion-trade-2] G1d — the pairs whose FAITH PACT was announced
+ * within the cooldown window, read from pulseHistory. A pact re-announces at most
+ * once per PACT_COOLDOWN_TICKS instead of ~every tick the two consolidated creeds
+ * qualify. Mirrors betrayalCooldownPairs exactly (same ledger family, same window
+ * semantics). Pure read.
+ * @param {{ pulseHistory?: Array<{ tick?: number, selectedOutcomes?: Array<{ ruleId?: string, tick?: number, metadata?: { pairKey?: string } }> }> }|null|undefined} worldState
+ * @param {number} tick
+ * @returns {Set<string>}
+ */
+export function pactCooldownPairs(worldState, tick) {
+  const T = STANCE_LANE_TUNING;
+  const out = new Set();
+  const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
+  for (const rec of history) {
+    for (const o of (rec?.selectedOutcomes || [])) {
+      if (o?.ruleId !== 'religious_pact_formation') continue;
+      const key = o?.metadata?.pairKey;
+      if (!key) continue;
+      const at = Number.isFinite(o?.tick) ? Number(o.tick) : (Number.isFinite(rec?.tick) ? Number(rec.tick) : null);
+      if (at == null || tick - at < T.PACT_COOLDOWN_TICKS) out.add(String(key));
+    }
+  }
+  return out;
+}
+
+/**
+ * [worldpulse-religion-trade-2] G1d — the stable cooldown key for a TARGETED
+ * FOOTHOLD: the (settlement, rival creed, recruited minister) triple. Used
+ * identically by the emission gate (religiousContest) and the pulseHistory reader
+ * below, so the two never disagree.
+ * @param {unknown} settlementId @param {unknown} rivalRef @param {unknown} npcId @returns {string}
+ */
+export const footholdCooldownKey = (settlementId, rivalRef, npcId) =>
+  `${String(settlementId)}::${String(rivalRef)}::${String(npcId || 'x')}`;
+
+/**
+ * [worldpulse-religion-trade-2] G1d — the (cid,rival,minister) triples whose
+ * TARGETED FOOTHOLD was announced within the cooldown window, read from
+ * pulseHistory. A foothold is deterministic over static NPC traits, so absent a
+ * cooldown it re-prints "X finds an ear in Y" EVERY tick; this suppresses the
+ * repeat to once per FOOTHOLD_COOLDOWN_TICKS. Pure read.
+ * @param {{ pulseHistory?: Array<{ tick?: number, selectedOutcomes?: Array<{ ruleId?: string, tick?: number, metadata?: { settlementId?: string, rivalRef?: string, npcId?: string } }> }> }|null|undefined} worldState
+ * @param {number} tick
+ * @returns {Set<string>}
+ */
+export function footholdCooldownKeys(worldState, tick) {
+  const T = STANCE_LANE_TUNING;
+  const out = new Set();
+  const history = Array.isArray(worldState?.pulseHistory) ? worldState.pulseHistory : [];
+  for (const rec of history) {
+    for (const o of (rec?.selectedOutcomes || [])) {
+      if (o?.ruleId !== 'religious_targeted_foothold') continue;
+      const m = o?.metadata;
+      if (!m || m.settlementId == null || m.rivalRef == null) continue;
+      const at = Number.isFinite(o?.tick) ? Number(o.tick) : (Number.isFinite(rec?.tick) ? Number(rec.tick) : null);
+      if (at == null || tick - at < T.FOOTHOLD_COOLDOWN_TICKS) out.add(footholdCooldownKey(m.settlementId, m.rivalRef, m.npcId));
     }
   }
   return out;
@@ -252,9 +321,10 @@ export function footholdOutcome({ cid, cityName, npcId, npcName, rivalRef, rival
  * @param {number} args.tick
  * @param {{ fork: (key: string) => { random: () => number } }|null} args.rng  the pulse PRNG (DI'd)
  * @param {Set<string>} [args.cooldownPairs]         pairs on betrayal cooldown (betrayalCooldownPairs)
+ * @param {Set<string>} [args.pactCooldown]          pairs on pact-reannounce cooldown (pactCooldownPairs)
  * @returns {{ outcomes: StanceOutcome[], betrayed: Array<{ pairKey: string, source: string, target: string }>, pacts: Array<{ pairKey: string, a: string, b: string }> }}
  */
-export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, tick, rng, cooldownPairs = new Set() }) {
+export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, tick, rng, cooldownPairs = new Set(), pactCooldown = new Set() }) {
   const T = STANCE_LANE_TUNING;
   /** @type {StanceOutcome[]} */
   const outcomes = [];
@@ -307,6 +377,10 @@ export function evaluateDeityStanceLane({ pairs, deityOf, pietyMultOf, nameFor, 
       // PACT branch — consolidated cooperation draws related-but-unallied faiths together.
       const coop = Math.max(stanceOf(dA, dB).cooperation, stanceOf(dB, dA).cooperation);
       if (coop < T.PACT_MIN_COOP) continue;
+      // [worldpulse-religion-trade-2] G1d — metronome: a pact already announced on
+      // this pair within PACT_COOLDOWN_TICKS does not re-print. (First announcement
+      // is never on cooldown ⇒ byte-identical for a fresh pact.)
+      if (pactCooldown.has(pairKey)) continue;
       // The initiator (a, codepoint-first) sets the piety composition — deterministic.
       const effCoop = clamp01(coop * Math.min(T.PIETY_CAP, pietyMultOf(a)));
       if (pactsThisTick >= T.MAX_PACTS_PER_TICK) continue;

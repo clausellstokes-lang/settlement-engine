@@ -49,7 +49,7 @@ import { isSubsystemActive } from './subsystemActivation.js';
 import { isFaithSpreadEnabled } from './simulationRules.js';
 import { activeSpatialDigest, mappedDistanceWeight } from '../spatial/distanceRead.js';
 import { normalizeStressor } from './stressors.js';
-import { PANTHEON_TUNING } from './pantheon.js';
+import { PANTHEON_TUNING, deityIdOf } from './pantheon.js';
 import { militaryCapacityScalar } from './militaryStrength.js';
 import { ensureReligionState, attemptEntry, advanceShares, applyUnaffiliatedSink, selectPatron, resolvePatronContest, patronSnapshot, RELIGION_TUNING, faithMass, neighbourFaithInfluence } from './religionState.js';
 import { rulerLens, deityLegitimacyTarget, stepDeityLegitimacy, deityGrowthFavor, chronicleMomentum, institutionBackingOf, governmentLawAffinity, conductFitSignal, RELIGION_LEGITIMACY_TUNING } from './religionLegitimacy.js';
@@ -58,7 +58,7 @@ import { methodClash, STANCE_TUNING } from './deityStance.js';
 // Phase 4 W-F4b — the SPREAD-lane inter-deity stance CONSUMER (betrayal/pact events,
 // pair-forked rolls, cooldowns, realm cap). Spread-gated ⇒ inert when off; all-neutral
 // realms read zero stance ⇒ no event ⇒ byte-identical.
-import { evaluateDeityStanceLane, betrayalCooldownPairs, footholdOutcome } from './deityStanceLane.js';
+import { evaluateDeityStanceLane, betrayalCooldownPairs, pactCooldownPairs, footholdCooldownKeys, footholdCooldownKey, footholdOutcome } from './deityStanceLane.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { prosperityRank } from '../../data/constants.js';
 // Phase 4 W-F3 — the piety amplifier (§2.3 sites #1/#4/#5) + the clergy lens. All
@@ -472,7 +472,7 @@ function neighbourIdsOf(snapshot, id) {
  * adherent's prevalence presses less. spatialDigest null ⇒ dw 1.0 ⇒ byte-identical.
  * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef @param {number} [targetMass] @param {string} [cid] @param {import('../spatial/distanceRead.js').SpatialDigest|null} [spatialDigest]
  */
-function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest = null) {
+function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest = null, rankStrengthOf = deityRankStrength) {
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
@@ -480,7 +480,9 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spat
     const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
     const influence = neighbourFaithInfluence(faithMass(nItem), targetMass);   // bigger neighbour ⇒ stronger pull
     const dw = spatialDigest && cid ? mappedDistanceWeight(spatialDigest, cid, nid) : 1;
-    acc += PREVALENCE_PER_NEIGHBOUR * (0.5 + 0.5 * deityRankStrength(snap)) * influence * dw;
+    // [worldpulse-religion-trade-4] G1d — a neighbour's EARNED pantheon tier lends more
+    // prevalence pull (rankStrengthOf blends snapshot rank with the pantheon tier).
+    acc += PREVALENCE_PER_NEIGHBOUR * (0.5 + 0.5 * rankStrengthOf(snap)) * influence * dw;
   }
   return Math.min(PREVALENCE_MAX, acc);
 }
@@ -492,10 +494,12 @@ function prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spat
  * + corruption climate), AND by the CHRONICLE — recent settlement events that match the
  * faith's character spike its conversion (action-alignment, temporal + fading).
  * Occupation force-pull is layered on by the caller.
- * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number, crisisDisorder?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest|null }} args
+ * @param {{ snapshot: any, deity: any, deityRef: string, neighbourIds: string[], carrier: number, moodDeity: any, lens?: any, worldState?: any, cid?: string, targetMass?: number, crisisDisorder?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest|null, rankStrengthOf?: (deity: unknown) => number }} args
  */
-function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder = 0, spatialDigest = null }) {
-  const base = clamp01(0.45 * deityRankStrength(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest));
+function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder = 0, spatialDigest = null, rankStrengthOf = deityRankStrength }) {
+  // [worldpulse-religion-trade-4] G1d — the converting deity's EARNED pantheon tier
+  // (rankStrengthOf) drives its local growth strength AND the neighbour-prevalence pull.
+  const base = clamp01(0.45 * rankStrengthOf(deity) + 0.3 * clamp01(carrier) + prevalenceBonus(snapshot, neighbourIds, deityRef, targetMass, cid, spatialDigest, rankStrengthOf));
   // Receptivity: the settlement's mood resists alien creeds — but a COMPROMISED populace
   // resists LESS (frayed moral fabric), so deeper corruption opens the door wider.
   const counter = moodDeity ? incumbentCounterForce(deity, moodDeity) * (1 - RELIGION_LEGITIMACY_TUNING.COMPROMISE_MOOD_EROSION * clamp01(Number(lens?.compromise) || 0)) : 0;
@@ -549,6 +553,23 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
   const nameFor = (id) => { const it = snapshot?.byId?.get?.(String(id)); return it?.name || it?.settlement?.name || String(id); };
   const occupations = worldState?.occupations && typeof worldState.occupations === 'object' ? worldState.occupations : null;
   const prior = worldState?.religionStates && typeof worldState.religionStates === 'object' ? worldState.religionStates : {};
+  // [worldpulse-religion-trade-4] G1d — the earned pantheon tier feeds conversion
+  // strength. A deity's effective rank is the MAX of its static snapshot rank and its
+  // EARNED pantheon tier (a cult that won 6 seats converts as the 'major' it became;
+  // a fallen major keeps its snapshot rank). Bounded by the same DEITY_RANK_STRENGTH
+  // table (keyed identically for rankAxis and tier), so a seat-won major matters
+  // without steamrolling. CONDITIONALLY GATED: absent a pantheon (religion dormant /
+  // deity-free) the tier term is 0 ⇒ rankStrengthOf === the base rank ⇒ byte-identical.
+  const pantheon = worldState?.pantheon && typeof worldState.pantheon === 'object' ? worldState.pantheon : null;
+  /** @param {unknown} deity @returns {number} */
+  const pantheonTierStrength = (deity) => {
+    if (!deity || !pantheon) return 0;
+    const pid = deityIdOf(deity);
+    const tier = pid ? pantheon[pid]?.tier : null;
+    return tier ? (/** @type {Record<string, number>} */ (DEITY_RANK_STRENGTH)[tier] ?? 0) : 0;
+  };
+  /** @param {unknown} deity @returns {number} */
+  const rankStrengthOf = (deity) => Math.max(deityRankStrength(deity), pantheonTierStrength(deity));
   const outcomes = [];
   const graphChannels = [];
   /** @type {Record<string, any>} */
@@ -569,7 +590,9 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // 1. Mint religious_authority channels along faith carriers (deity-gated, directed).
     for (const fromId of bearers) {
       const deity = deitySnapshotFor(snapshot, fromId);
-      const rankStrength = deityRankStrength(deity);
+      // [worldpulse-religion-trade-4] G1d — a higher EARNED pantheon tier projects
+      // religious authority harder (the mint strength reads the blended rank).
+      const rankStrength = rankStrengthOf(deity);
       for (const { to, strength } of faithCarriersOut(snapshot, fromId)) {
         if (strength < MIN_CARRIER) continue;
         // W-F3 site #5: the realm-piety multiplier amplifies the mint strength (a very
@@ -636,10 +659,17 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         tick,
         rng,
         cooldownPairs: betrayalCooldownPairs(worldState, tick),
+        pactCooldown: pactCooldownPairs(worldState, tick),
       });
       for (const o of stance.outcomes) outcomes.push(o);
     }
   }
+
+  // [worldpulse-religion-trade-2] G1d — the (cid,rival,minister) triples on
+  // foothold-reannounce cooldown, read once from pulseHistory (spread-gated; null
+  // when spread is off ⇒ the block below never consults it). First detection of a
+  // foothold is never on cooldown ⇒ byte-identical for a fresh recruitment.
+  const footholdCooldownSet = spread ? footholdCooldownKeys(worldState, tick) : null;
 
   // 3. Evolve each settlement's pantheon (codepoint-sorted ⇒ deterministic).
   const ids = (snapshot?.settlements || []).map((/** @type {any} */ it) => String(it.id)).sort(codepoint);
@@ -703,7 +733,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         // Site #1 (conversion pressure): amplify the target-side local strength — a
         // devout town is a fiercer battleground both to hold and to take. The
         // occupation lift (#2) inherits via this amplified strength (not double-counted).
-        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest }));
+        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest, rankStrengthOf }));
         if (occupied) {
           const pull = occupationFaithPull(snapshot, occupations, String(occupations[cid].occupierId), cid);
           if (pull) {
@@ -723,7 +753,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       const carrier = reaching?.get(dref)?.carrier ?? (dref === state.patronRef ? 0.5 : 0.25);   // home faith keeps innate footing
       // Site #1 (share targets): the SAME target-side piety amplification on every
       // present faith's growth toward its strength (hold AND take, symmetric).
-      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest }));
+      strengthByRef[dref] = clamp01(pietyMult * deityLocalStrength({ snapshot, deity: state.deities[dref].snapshot, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest, rankStrengthOf }));
     }
     advanceShares(state, strengthByRef);
     // Legitimacy: each active faith drifts (slowly) toward its rightful-claim target —
@@ -732,7 +762,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     for (const dref of Object.keys(state.deities)) {
       const entry = state.deities[dref];
       if (entry.suppressed) continue;
-      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor, government: settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName, pietyMult: pietySynergy, clergy: clergyPlane });
+      const target = deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity: entry.snapshot, deityRef: dref, neighbourIds, entry, lens, institutionBacking, deitySnapshotFor, government: settlement?.powerStructure?.government ?? settlement?.powerStructure?.governingName, pietyMult: pietySynergy, clergy: clergyPlane, rankStrengthOf });
       stepDeityLegitimacy(entry, target);
     }
     // Patron seat: a CONTESTED niche (a rival in the patron's own niche — e.g. an
@@ -747,7 +777,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     const causalAuthority = snapshot?.byId?.get?.(cid)?.causal?.scores?.religious_authority;
     const authority01 = Number.isFinite(causalAuthority)
       ? clamp01(Number(causalAuthority) / 100)
-      : clamp01(0.3 + 0.4 * deityRankStrength(patronSnapshot(state)));
+      : clamp01(0.3 + 0.4 * rankStrengthOf(patronSnapshot(state)));
 
     // W-F5.5 THE UNAFFILIATED SINK: comfort empties the pews, crisis calls them home. Runs
     // AFTER the pantheon machinery (entries/shares/legitimacy/patron all decided on the full
@@ -798,6 +828,9 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
         .filter((k) => k !== state.patronRef && !state.deities[k].suppressed && state.deities[k].snapshot)
         .map((k) => ({ ref: k, snapshot: state.deities[k].snapshot }));
       for (const f of targetedFootholds(settlement, patronForFoothold, rivals)) {
+        // [worldpulse-religion-trade-2] G1d — metronome: this foothold already
+        // announced within FOOTHOLD_COOLDOWN_TICKS does not re-print every tick.
+        if (footholdCooldownSet && footholdCooldownSet.has(footholdCooldownKey(cid, f.rivalRef, f.npcId))) continue;
         const reasons = [
           `${f.npcName}, a minister of ${nameFor(cid)}, leans toward ${f.rivalName} and away from ${patronForFoothold?.name || 'the patron'}, opening a foothold for the rival creed.`,
         ];

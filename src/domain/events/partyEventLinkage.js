@@ -37,6 +37,17 @@ const EVENT_TO_PARTY_KIND = Object.freeze({
   KILL_LEADER:     { kind: 'remove_npc',        targetField: 'npcId' },
   IMPAIR_FACTION:  { kind: 'undermine_faction', targetField: 'factionId' },
   RESTORE_FACTION: { kind: 'bolster_faction',   targetField: 'factionId' },
+  // [domain-events-region-1] G1d — the DM's relationship levers reach the live
+  // conflict layer. A PARTY-CAUSED alliance/dispute rides the pulse-proven
+  // broker_relationship / inflame_relationship kinds (a gradual ladder nudge on
+  // the pulse relationshipState — the de-escalation counterpart to the war
+  // system). The event's targetId is the OTHER settlement in the pair, carried
+  // as `relationshipTargetId`; buildPartyImpactOutcomes resolves it to the
+  // pulse's edge key (relationshipKeyFromEdge) so the nudge lands on the SAME
+  // state the war layer reads. OPENED_TRADE_ROUTE + the NON-party canon lane are
+  // handled store-side (rippleEventThroughWorld) with a direct type-upsert.
+  BROKERED_ALLIANCE:  { kind: 'broker_relationship',  targetField: 'relationshipTargetId' },
+  SETTLEMENT_DISPUTE: { kind: 'inflame_relationship', targetField: 'relationshipTargetId' },
 });
 
 /**

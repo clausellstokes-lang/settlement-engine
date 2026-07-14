@@ -293,14 +293,17 @@ export function deityGrowthFavor(deity, lens) {
  * @param {any} snapshot @param {string[]} neighbourIds @param {string} deityRef
  * @param {(snapshot:any, id:string)=>any} deitySnapshotFor @param {number} [targetMass]
  */
-function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass) {
+function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass, rankStrengthOf = deityRankStrength) {
   if (!neighbourIds.length) return 0;
   let acc = 0;
   for (const nid of neighbourIds) {
     const snap = deitySnapshotFor(snapshot, nid);
     if (!snap || String(snap._deityRef || snap.name) !== String(deityRef)) continue;
     const nItem = snapshot?.byId?.get?.(String(nid))?.settlement;
-    acc += (0.5 + 0.5 * deityRankStrength(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
+    // [worldpulse-religion-trade-4] G1d — an endorsing neighbour's EARNED pantheon
+    // tier lends more standing (rankStrengthOf blends snapshot rank with pantheon tier;
+    // defaults to the base rank when no resolver is threaded ⇒ byte-identical).
+    acc += (0.5 + 0.5 * rankStrengthOf(snap)) * neighbourFaithInfluence(faithMass(nItem), targetMass);
   }
   return clamp01(Math.min(RELIGION_LEGITIMACY_TUNING.PREVALENCE_CAP, acc / Math.max(1, neighbourIds.length)));
 }
@@ -392,14 +395,17 @@ export function conductFitSignal(deity, lens, government) {
  * minus the heresy stain and corruption drag. Deterministic.
  * @param {{ settlement:any, snapshot:any, worldState:any, cid:string, deity:any, deityRef:string,
  *   neighbourIds:string[], entry:any, lens?:any, institutionBacking?:number, deitySnapshotFor:(s:any,id:string)=>any,
- *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null }} args
+ *   government?:string|null, pietyMult?:number|null, clergy?:import('./clergyTraitPlane.js').ClergyPlaneReading|null,
+ *   rankStrengthOf?:(deity:unknown)=>number }} args
  * @returns {number}
  */
-export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null }) {
+export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null, rankStrengthOf = deityRankStrength }) {
   const T = RELIGION_LEGITIMACY_TUNING;
   const L = lens || rulerLens(settlement);
   const ruler = rulerEndorsement(deity, L);
-  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement));
+  // [worldpulse-religion-trade-4] G1d — thread the pantheon-tier-blended rank resolver
+  // into neighbour recognition so a neighbouring seat-won creed lends more standing.
+  const neighbour = neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, faithMass(settlement), rankStrengthOf);
   const tenure = (Number(entry?.tenure) || 0) / ((Number(entry?.tenure) || 0) + T.TENURE_HALF);   // 0..~1, saturating
   const chronicle = chronicleMomentum(worldState, cid, deity, L);
   const stain = Math.max(0, Number(entry?.heresyStain) || 0);
