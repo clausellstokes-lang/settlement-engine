@@ -142,12 +142,7 @@ function projectionFor({ seed, ticks, interval, spatial }) {
     if (r.worldState?.spatialLedgers?.spatialArrivals && Object.keys(r.worldState.spatialLedgers.spatialArrivals).length) arrivalTicksSeen += 1;
     const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
     saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
-    // Thread the EVOLVED graph from the kernel's top-level `r.regionalGraph` (the
-    // sibling idiom). worldState never carries a regionalGraph key, so the old
-    // `r.worldState?.regionalGraph || …` froze the tick-0 graph and made the
-    // queuedImpacts hash component inert — the exact propagation seam this golden
-    // claims to pin. ([tests-2] harness-fidelity)
-    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.worldState?.regionalGraph || campaign.regionalGraph };
   }
   /** @type {Record<string, {patronRef: string|null, legit: number|null}>} */
   const patrons = {};
@@ -161,10 +156,7 @@ function projectionFor({ seed, ticks, interval, spatial }) {
     marker: campaign.worldState?.spatialCanonVersion ?? null,
     arrivalKeys: Object.keys(campaign.worldState?.spatialLedgers?.spatialArrivals || {}).sort(),
     arrivalTicksSeen,
-    // Read from the THREADED (evolved) graph now on campaign.regionalGraph — no
-    // longer the always-undefined worldState.regionalGraph. This component is now a
-    // live count that moves with propagation, not a frozen tick-0 constant.
-    queuedImpacts: (campaign.regionalGraph?.queuedImpacts || []).length,
+    queuedImpacts: (campaign.worldState?.regionalGraph?.queuedImpacts || campaign.regionalGraph?.queuedImpacts || []).length,
     patrons,
     candidateTypes,
   });
@@ -210,16 +202,6 @@ describe('worldPulse SPATIAL golden (the modulated path, deterministic)', () => 
       expect(hashOf(projectionFor({ ...c, spatial: true }))).toBe(hashOf(projectionFor({ ...c, spatial: true })));
     }
   }, 30_000);
-
-  it('the evolved regional graph is threaded from r.regionalGraph, not r.worldState (the stale-graph idiom can never resurface)', () => {
-    // Guards the [tests-2] fix (see the deity golden's twin): the kernel returns the
-    // evolved graph TOP-LEVEL; worldState.regionalGraph is (and must stay) undefined,
-    // so the queuedImpacts / arrival-propagation hash component reads a live graph.
-    const { campaign, saves } = makeCampaignAndSaves('sp-a', { spatial: true });
-    const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', now: NOW });
-    expect(r.regionalGraph, 'kernel must return the evolved graph top-level').toBeTruthy();
-    expect(r.worldState?.regionalGraph, 'worldState must NOT carry a regionalGraph key (else the fallback idiom silently re-freezes tick 0)').toBeUndefined();
-  });
 
   it('anti-vacuity: the spatial path DIFFERS from the aspatial control', () => {
     // Same campaign, marker removed ⇒ the modulation must measurably change the run

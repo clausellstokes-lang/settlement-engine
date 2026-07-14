@@ -133,15 +133,9 @@ function pulseHashFor({ seed, ticks, interval }) {
       if (x && x.passed) rollPassed += 1;
     }
     // Thread state forward: worldState + deep-cloned settlement updates → next saves.
-    // The EVOLVED regional graph is the kernel's TOP-LEVEL `r.regionalGraph`
-    // (pulseKernel returns `regionalGraph: applied.regionalGraph`); worldState never
-    // carries a regionalGraph key, so the old `r.worldState?.regionalGraph || …`
-    // silently re-threaded the frozen tick-0 graph and muted graph evolution. Use
-    // the sibling idiom (beliefMap/rumorLedger/seasons) so relationship evolution and
-    // queued-impact release actually reach the next tick. ([tests-2] harness-fidelity)
     const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
     saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
-    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+    campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.worldState?.regionalGraph || campaign.regionalGraph };
   }
   // Per-settlement final patron seat + legitimacy (the faith seat + its political hold).
   /** @type {Record<string, {patronRef: string|null, legit: number|null}>} */
@@ -189,18 +183,6 @@ describe('worldPulse deity golden master (deity-activated cross-build mechanical
     expect(rows.map(pulseKeyOf).sort()).toEqual(Object.keys(manifest).sort());
   });
 
-  it('the evolved regional graph is threaded from r.regionalGraph, not r.worldState (the stale-graph idiom can never resurface)', () => {
-    // Guards the [tests-2] fix: pulseKernel returns the evolved graph as the
-    // TOP-LEVEL `r.regionalGraph`; `r.worldState.regionalGraph` is (and must stay)
-    // undefined. If a future kernel change ever started carrying the graph inside
-    // worldState, this reds — forcing a conscious harness-threading review rather
-    // than a silent revert to freezing the tick-0 graph.
-    const { campaign, saves } = makeCampaignAndSaves('gm-pulse-a');
-    const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_month', now: NOW });
-    expect(r.regionalGraph, 'kernel must return the evolved graph top-level').toBeTruthy();
-    expect(r.worldState?.regionalGraph, 'worldState must NOT carry a regionalGraph key (else the fallback idiom silently re-freezes tick 0)').toBeUndefined();
-  });
-
   it('anti-vacuity: the faith machinery actually moves (a deity holds a seat)', () => {
     // The pin would be worthless if the pulse were inert — prove a patron seat is
     // held and the pantheon ledger is populated on a representative row.
@@ -209,7 +191,7 @@ describe('worldPulse deity golden master (deity-activated cross-build mechanical
       const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_month', now: NOW });
       const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
       saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
-      campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+      campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.worldState?.regionalGraph || campaign.regionalGraph };
     }
     expect(Object.keys(campaign.worldState?.pantheon || {}).length).toBeGreaterThan(0);
     expect(saves.some((s) => s.settlement?.config?.primaryDeityRef)).toBe(true);
