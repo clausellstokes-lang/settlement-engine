@@ -89,8 +89,8 @@ behavior, budget raises, golden regens.
       re-dispatched via resume of `wf_c21bb055-cb9`; their reports append to the register on landing.
 - [x] **Phase A — ASSESSMENT** (Fable main loop): committed as
       `docs/COMPREHENSIVE_REVIEW_2026-07-13.md` (holistic assessment + 208-finding register).
-- [ ] **Phase V — VERIFY** (Opus, `model:'opus'` on every agent): adversarial verification of every
-      actionable finding (refuters; majority vote on majors). Verdicts appended to the review doc.
+- [x] **Phase V — VERIFY**: 150 findings verified (~14.4M Opus tokens): 112 CONFIRMED, 18 PARTIAL,
+      5 REFUTED, 4 adjudicated, 11 manager-verified, 2 dispositioned. Verdicts in the review doc.
 - [x] **Phase P — WAVE PLAN** (Fable architect, 2026-07-14). TWO TRACKS, forced by the verified
       blast radii (50 confirmed fixes legitimately shift same-seed goldens):
 
@@ -179,11 +179,12 @@ behavior, budget raises, golden regens.
       gate re-run, sensitive-diff reads, constitution check) → exact-stage commit → ledger row +
       Progress line. Full gate per wave; goldens byte-identical on Track N; Track G proves its shifts
       are exactly the intended semantic changes (before/after diff of the shifted fixture fields).
-- [ ] **Phase F — FIX WAVES** (Opus implement → Fable §0.3 manager check → exact-stage commit →
-      ledger row in playbook §0.0 + Progress line here). One wave per commit. Full gate per wave
-      (`npm run check`); constitutional spot-checks (goldens byte-identical, any-cast 2252,
-      verify:dist at budget 1,255,985).
-- [ ] **Phase E — END**: final full gate, playbook §0.0.3 refresh, memory update, final report.
+- [x] **Phase F — FIX WAVES**: COMPLETE 2026-07-14. Main: W-DOCS-1, F1+trim, F2, F3a/b, F4, F5,
+      F5b, F6+amendment, F7, Lane-2, GATE-FIX (final gate 8,572/8,572 green). Golden: G1a-d, G2,
+      G2R + harness + census (implementation complete; regen awaits the owner). ~110 verified
+      findings closed; ~390 new pins across both branches; every wave §0.3-reviewed and ledgered.
+- [x] **Phase E — END**: final full gate GREEN @ 4de2f8db; ledger rows current; memory updated;
+      the final report delivered 2026-07-14. REMAINING = the owner batch, then the golden merge.
 
 ## OVERNIGHT DELEGATION (2026-07-14, owner: "continue with all of this work independently making
 ## your own judgement calls. I'll return in the morning.")
@@ -243,8 +244,18 @@ ratchet, DEAD_CODE_DISPOSITION.md — no deletions, autonomy ruling doc; any-cas
 2252→2248) · F5b @ fcdc319e (deepFreeze isDraft guard — the Immer regression F7 caught, dead) ·
 G2R @ daa0988d + harness adoption @ 868eb560 (**GOLDEN TRACK IMPLEMENTATION COMPLETE**: resolver
 on real seats, food models cannot disagree, timelines deepen, 5 stress types whole + registration
-walker; cumulative shift 187/187 mapped). RUNNING: Lane-2 (the FINAL implementation wave — DM
-event store ripple). THEN: final full gates both branches → consolidated report → the owner batch.
+walker; cumulative shift 187/187 mapped). ✅ Lane-2 @ 9dd8d0cb (DM non-party
+verbs land + survive the tick + undo honestly; refuter round closed 1 CONFIRMED pre-commit) ·
+✅ GATE-FIX @ 4de2f8db (the final gate's 2 reds: house deepClone; the LIVING flake root-caused to
+a FIXTURE wall-clock stamp — product path proven clean).
+> **THE FINAL FULL GATE IS GREEN: 8,572/8,572 (763 files) + verify:dist 109/109, exit 0, clean
+> tree @ 4de2f8db (2026-07-14).** Baseline was 8,348 → +224 net pins on main; the golden branch
+> (9 commits, its own 8,511/8,517 with the six enumerated regen surfaces) awaits the owner batch.
+> Closure 1,254,716 ≤ 1,255,985; any-cast 2248 (ratcheted DOWN from 2252).
+> **IMPLEMENTATION PHASE COMPLETE — the program now waits ONLY on the owner batch** (golden
+> sign-off → regen → merge; preset lights; the catch-up fork; vetoes; dockets). After the merge:
+> regen the edge bundle (build:edge-shared), then the master sequence resumes (W5/W2/telemetry →
+> expansions).
 QUEUED AFTER: Lane-2 store ripple (G1d stop-report) · F5 perf · F6 gate-honesty · F7 code-health ·
 then the G-track merge decision + owner batch. Deferral ledger grows in the wave rows (publicSafe
 note, bornTick, M11a autonomy, stance-half, belief truthOf divergence join).
