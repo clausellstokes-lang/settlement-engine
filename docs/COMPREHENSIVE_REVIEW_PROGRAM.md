@@ -233,8 +233,18 @@ manifest reverted; ⚠️ owner-veto flag on the data-tables-6 governance edit) 
 ~62 fixes, ~145 pins. Constitution: golden fixtures byte-identical everywhere EXCEPT the one
 ledgered, isolation-confirmed G1d red (faith-pact metronome, sp-a|4|one_week, faith_pact_formed
 8→2) — the owner sign-off evidence; any-cast 2252 exact throughout; closure 1,251,487 (margin
-4,498). RUNNING: F5 perf year-two (main) · G2R coherence remainders (golden — structural-NPC resolver,
-dual food model, timeline variety, the 5-stress-type content wave + registration walker).
+4,498). ALSO SHIPPED (late night): F5 @ da5a1dee (perf: 20x route cost, freeze+share, growth bounded,
+tick-cost gate; #4 catch-up-orchestrator STOP — owner fork; stash INCIDENT recovered+ledgered) ·
+F6 @ 1977f27f (gate honesty: VERIFY_DIST hard-fail, blind-harness fix, fail-not-skip suites,
+self-mint ends, workers purity, living-mode pins, mover-composition smoke, sf-bridge harness,
+2 structural walkers) + F6-amendment @ 65e79547 (harness fix moved to golden — Track N always-
+green) · F7 @ 9b9f7a28 (kernel clamp/slugify + parity proofs, curated barrels, domain size
+ratchet, DEAD_CODE_DISPOSITION.md — no deletions, autonomy ruling doc; any-cast RATCHETED DOWN
+2252→2248) · F5b @ fcdc319e (deepFreeze isDraft guard — the Immer regression F7 caught, dead) ·
+G2R @ daa0988d + harness adoption @ 868eb560 (**GOLDEN TRACK IMPLEMENTATION COMPLETE**: resolver
+on real seats, food models cannot disagree, timelines deepen, 5 stress types whole + registration
+walker; cumulative shift 187/187 mapped). RUNNING: Lane-2 (the FINAL implementation wave — DM
+event store ripple). THEN: final full gates both branches → consolidated report → the owner batch.
 QUEUED AFTER: Lane-2 store ripple (G1d stop-report) · F5 perf · F6 gate-honesty · F7 code-health ·
 then the G-track merge decision + owner batch. Deferral ledger grows in the wave rows (publicSafe
 note, bornTick, M11a autonomy, stance-half, belief truthOf divergence join).
