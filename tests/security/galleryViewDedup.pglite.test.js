@@ -29,6 +29,16 @@ const migExists = existsSync(MIGRATION);
 /** @type {any} */
 let db;
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if migration 029 is renamed/renumbered
+// (the master-merge reconciliation risk), the execution suite below would silently
+// skip and vitest would stay green. This UNCONDITIONAL assert fails loudly instead.
+describe('gallery-view-dedup migration fixture exists (guards against silent vacuous skip)', () => {
+  it('029_gallery_view_dedup.sql is present (a renamed/renumbered file must fail loudly)', () => {
+    expect(existsSync(MIGRATION), `migration 029 missing: ${MIGRATION}`).toBe(true);
+    expect(migExists).toBe(true);
+  });
+});
+
 describe.runIf(migExists)('bump_public_view — dedup + bot-skip (pglite, migration 029)', () => {
   beforeAll(async () => {
     db = new PGlite();

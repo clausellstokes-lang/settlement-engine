@@ -37,7 +37,14 @@ vi.mock('../../src/lib/campaigns.js', () => {
     },
   };
 });
-vi.mock('../../src/lib/flags.js', () => ({ flag: vi.fn(() => false) }));
+// F6/[test-quality-4]: the living pause-on-major tests need the MULTI-TICK advance
+// path (only it PAUSES on a surfacing major; the legacy single-tick path never
+// pauses). Every other test keeps that path OFF — multiTickValue defaults false and
+// is reset in each beforeEach, so the existing single-tick pins are byte-unaffected.
+let multiTickValue = false;
+vi.mock('../../src/lib/flags.js', () => ({
+  flag: vi.fn(name => (name === 'advanceMultiTick' ? multiTickValue : false)),
+}));
 vi.mock('../../src/lib/analytics.js', async (importOriginal) => {
   const actual = await importOriginal();
   return { ...actual, track: vi.fn() };
@@ -118,7 +125,7 @@ async function waitFor(pred, { tries = 200, gapMs = 5 } = {}) {
 }
 
 describe('M10b catchUpCampaignWorld', () => {
-  beforeEach(() => { installLocalStorage(); });
+  beforeEach(() => { installLocalStorage(); multiTickValue = false; });
 
   test('DETERMINISM: a catch-up of N weeks == N manual one-week advances, byte-identical', async () => {
     const N = 5;
@@ -270,7 +277,7 @@ describe('M10b catchUpCampaignWorld', () => {
 // (setActiveCampaign), so the world advances on every open path. The prod call site
 // previously had no test; these pin it.
 describe('setActiveCampaign catch-up trigger', () => {
-  beforeEach(() => { installLocalStorage(); });
+  beforeEach(() => { installLocalStorage(); multiTickValue = false; });
 
   test('fires the M10b catch-up for an advancesOnOpen campaign on activation', async () => {
     const store = makeStore();
@@ -295,5 +302,143 @@ describe('setActiveCampaign catch-up trigger', () => {
     expect(ws(store).lastLivingAdvanceAt).toBeUndefined();
     expect(ws(store).tick).toBe(0);
     expect(store.getState().livingCatchUp).toBeNull();
+  });
+});
+
+// test-quality-4 — the M10b LIVING half. Every test above drives 'autonomous' or
+// 'dm_advanced'; this block pins the untested 'living' contract (§0.6.1 decision 2):
+// during catch-up, LIVING advances routine weeks but a surfacing MAJOR PAUSES the
+// catch-up for the DM (it does NOT auto-resolve, the way autonomous does), and after
+// the DM resolves, a later open resumes without double-running the weeks already
+// lived. The rival/hostile two-edge fixture + seed 'pause-store-seed' surfaces the
+// live faction_government_challenge major (mirrors advancePauseResume); the pause
+// path is the MULTI-TICK orchestrator, so these tests flip multiTickValue on.
+function seedLivingPauseFixture(store, { progression = 'living' } = {}) {
+  const settlementRHF = (name) => ({
+    name, tier: 'town', population: 1800,
+    config: { tradeRouteAccess: 'road', priorityEconomy: 25, priorityMilitary: 30 },
+    institutions: [],
+    economicState: { primaryImports: ['Bulk grain and foodstuffs'], primaryExports: [] },
+    powerStructure: {
+      publicLegitimacy: { score: 40, label: 'Contested' },
+      factions: [
+        { faction: 'Merchant League', category: 'economy', power: 60 },
+        { faction: 'Temple Wardens', category: 'religious', power: 48 },
+      ],
+      conflicts: [],
+    },
+    npcs: [{ id: `${name}-reeve`, name: `Reeve of ${name}`, importance: 'key' }],
+    activeConditions: [{ archetype: 'regional_import_shortage', severity: 0.5 }],
+  });
+  store.setState(state => {
+    state.savedSettlements = ['a', 'b', 'c'].map(id => ({
+      id, name: id, phase: 'canon', settlement: settlementRHF(id),
+      campaignState: { phase: 'canon', eventLog: [], locks: {} },
+    }));
+    state.campaigns = [{
+      id: 'camp-1', name: 'Realm', settlementIds: ['a', 'b', 'c'],
+      regionalGraph: ensureRegionalGraph({ edges: [
+        { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'rival' },
+        { id: 'edge.b.c', from: 'b', to: 'c', relationshipType: 'hostile' },
+      ] }),
+      wizardNews: { currentTick: 0, entries: [] },
+      worldState: {
+        rngSeed: 'pause-store-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z',
+        simulationRules: { worldProgression: progression },
+        lastLivingAdvanceAt: '2026-01-01T00:00:00.000Z',
+      },
+    }];
+  });
+}
+
+describe('M10b LIVING pause-on-major during catch-up', () => {
+  beforeEach(() => { installLocalStorage(); multiTickValue = true; });
+
+  test('LIVING catch-up PAUSES on a surfacing major — partial catch-up, proposals queued NOT resolved', async () => {
+    const store = makeStore();
+    seedLivingPauseFixture(store, { progression: 'living' });
+    const ELAPSED = 12;
+    const now = nowAfter(ELAPSED); // 12 < CATCH_UP_CAP_WEEKS, so no cap involved
+
+    const res = await store.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(res.ok).toBe(true);
+    expect(res.capped).toBe(false);
+    // PARTIAL: the catch-up ran SOME weeks then stopped at the first major — strictly
+    // fewer than the elapsed window (the pause, not a full auto-resolved catch-up).
+    expect(res.weeksCaughtUp).toBeGreaterThan(0);
+    expect(res.weeksCaughtUp).toBeLessThan(ELAPSED);
+
+    const w = ws(store);
+    // The pause is PARKED for the DM: majors are queued, NOT auto-resolved (the whole
+    // point of 'living'). pausedAdvance carries the pending majors + the resume cursor.
+    expect(w.pausedAdvance, 'living must PAUSE (park a cursor), not auto-resolve the major').toBeTruthy();
+    expect(w.pausedAdvance.pendingMajors.length).toBeGreaterThan(0);
+    expect(w.tick).toBe(res.weeksCaughtUp); // world clock at the pause tick
+    // calendar-advances-past-the-pause: the cursor reaches `now`, so a returning
+    // player does NOT re-catch-up the paused overflow (the double-count the review names).
+    expect(w.lastLivingAdvanceAt).toBe(now);
+
+    // The "while you were away" digest reflects the partial run (banner copy).
+    const digest = store.getState().livingCatchUp;
+    expect(digest).toMatchObject({ campaignId: 'camp-1', weeksCaughtUp: res.weeksCaughtUp, capped: false, error: null });
+    expect(Array.isArray(digest.majors)).toBe(true);
+  });
+
+  test('LIVING is DETERMINISTIC: two identical living catch-ups pause at the same week', async () => {
+    const a = makeStore(); seedLivingPauseFixture(a, { progression: 'living' });
+    const b = makeStore(); seedLivingPauseFixture(b, { progression: 'living' });
+    const now = nowAfter(12);
+    const ra = await a.getState().catchUpCampaignWorld('camp-1', { now });
+    const rb = await b.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(ra.weeksCaughtUp).toBe(rb.weeksCaughtUp);
+    expect(JSON.stringify(ws(a))).toBe(JSON.stringify(ws(b)));
+  });
+
+  test('LIVING resumes without double-running after the DM resolves the paused major', async () => {
+    const store = makeStore();
+    seedLivingPauseFixture(store, { progression: 'living' });
+    const now = nowAfter(12);
+    const first = await store.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(store.getState().campaigns[0].worldState.pausedAdvance).toBeTruthy();
+    const pauseTick = ws(store).tick;
+
+    // The DM resolves every parked major (recommended) until the interval finishes.
+    let guard = 0; let r;
+    do {
+      if (guard++ > 60) throw new Error('did not converge');
+      r = await store.getState().resolveIntervalMajors('camp-1', {}, { now });
+    } while (r && r.status === 'paused');
+    // The paused 1-week interval completes at the SAME tick (its minors already
+    // committed at the pause); the cursor is cleared. No extra week was invented.
+    expect('pausedAdvance' in ws(store)).toBe(false);
+    expect(ws(store).tick).toBe(pauseTick);
+
+    // Re-open at the SAME `now`: the cursor already reached it, so this is a no-op —
+    // the paused tail is NOT re-run (the double-count the review names).
+    const again = await store.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(again).toMatchObject({ ok: true, weeksCaughtUp: 0, reason: 'up_to_date' });
+    expect(ws(store).tick).toBe(pauseTick);
+
+    // Re-open LATER (real time advanced +2 weeks): the world RESUMES advancing the NEW
+    // time only — exactly 2 more weeks, never re-simulating the weeks already lived.
+    const later = nowAfter(14);
+    const resume = await store.getState().catchUpCampaignWorld('camp-1', { now: later });
+    expect(resume.ok).toBe(true);
+    expect(resume.weeksCaughtUp).toBe(2);
+    expect(ws(store).tick).toBe(pauseTick + 2);
+    // The first pause established the partial contract; this confirms the tail is
+    // neither lost-forever nor double-counted — it advances by exactly the new delta.
+    expect(first.weeksCaughtUp).toBeGreaterThan(0);
+  });
+
+  test('CONTRAST — AUTONOMOUS auto-resolves the SAME majors: full catch-up, no pause', async () => {
+    // Same fixture, same seed, same elapsed window — only the progression axis differs.
+    // Proves the pause above is the LIVING semantics, not fixture noise.
+    const store = makeStore();
+    seedLivingPauseFixture(store, { progression: 'autonomous' });
+    const res = await store.getState().catchUpCampaignWorld('camp-1', { now: nowAfter(12) });
+    expect(res).toMatchObject({ ok: true, weeksCaughtUp: 12, capped: false });
+    expect('pausedAdvance' in ws(store)).toBe(false);
+    expect(ws(store).tick).toBe(12);
   });
 });

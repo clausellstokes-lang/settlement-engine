@@ -95,6 +95,19 @@ const grant = (uid, amount, { source = 'purchase', expiresAt = null } = {}) =>
     [uid, amount, source, expiresAt],
   );
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if any pinned migration is renamed or
+// renumbered — precisely what the third-lineage master-merge reconciliation risks —
+// the execution suite below would silently describe.runIf-skip and vitest would stay
+// green. This UNCONDITIONAL assert turns that skip into a loud failure.
+describe('credit RPC migration fixtures exist (guards against silent vacuous skip)', () => {
+  it('every pinned migration is present (a renamed/renumbered file must fail loudly)', () => {
+    for (const [k, p] of Object.entries(MIG)) {
+      expect(existsSync(p), `migration ${k} missing: ${p}`).toBe(true);
+    }
+    expect(allExist).toBe(true);
+  });
+});
+
 describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

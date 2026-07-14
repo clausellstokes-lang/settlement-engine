@@ -21,7 +21,8 @@ import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const TREES = ['src/generators', 'src/domain'];
+// F6/[determinism-constitution-3] extended the ban to the remaining sim-path dirs.
+const TREES = ['src/generators', 'src/domain', 'src/workers', 'src/kernel'];
 
 // Locale-formatting CALLS (not the words in comments/messages — a call has an
 // opening paren) plus any member access on the Intl namespace.
@@ -41,7 +42,7 @@ function walkJs(dir, acc) {
 const codeOf = (src) => src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
 
 describe('locale-formatting determinism guard', () => {
-  test('src/generators/** + src/domain/** contain ZERO locale-formatting calls', () => {
+  test('src/generators/** + src/domain/** + src/workers/** + src/kernel/** contain ZERO locale-formatting calls', () => {
     const offenders = [];
     for (const tree of TREES) {
       for (const file of walkJs(join(ROOT, tree), [])) {
@@ -65,16 +66,17 @@ describe('locale-formatting determinism guard', () => {
     expect(CALL_RE.test(codeOf(src))).toBe(false);
   });
 
-  test('eslint.config.js bans locale formatting in BOTH the generators and domain determinism blocks', () => {
+  test('eslint.config.js bans locale formatting in the generators, domain, workers, and kernel determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
-    // Each ban selector appears once per producer tree (generators + domain).
+    // Each ban selector appears once per determinism block: generators + domain +
+    // workers + kernel(non-prng) + kernel/prng.js = 5.
     for (const method of ['toLocaleString', 'toLocaleDateString', 'toLocaleTimeString']) {
       const hits = cfg.match(new RegExp(`callee\\.property\\.name='${method}'`, 'g')) || [];
-      expect(hits.length, `${method} ban selector count`).toBe(2);
+      expect(hits.length, `${method} ban selector count`).toBe(5);
     }
-    // Intl is banned as both `new Intl.X(...)` and `Intl.X(...)` per tree.
+    // Intl is banned as both `new Intl.X(...)` and `Intl.X(...)` per block: 2 × 5 = 10.
     const intlHits = cfg.match(/callee\.object\.name='Intl'/g) || [];
-    expect(intlHits.length).toBe(4);
+    expect(intlHits.length).toBe(10);
     // The ban message routes authors to the sanctioned formatter.
     expect(cfg).toMatch(/formatNumber\.js/);
   });

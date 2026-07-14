@@ -28,9 +28,11 @@ const UPDATE = process.argv.includes('--update');
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
 // we parse stdout regardless, so don't let execSync throw on that.
 let out;
+let tscExitedNonZero = false;
 try {
   out = execSync('npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 } catch (e) {
+  tscExitedNonZero = true;
   out = `${e.stdout || ''}${e.stderr || ''}`;
 }
 
@@ -44,6 +46,34 @@ for (const line of out.split('\n')) {
   counts[m[1]] = (counts[m[1]] || 0) + 1;
 }
 const total = Object.values(counts).reduce((a, b) => a + b, 0);
+
+// ── Anti-vacuity sentinel ([build-tooling-docs-3]) — "tsc actually ran" ──────
+// tsc exits non-zero for BOTH "found type errors" and "could not run at all"
+// (a renamed/deleted tsconfig.domain-strict.json, a broken typescript install, an
+// OOM-killed run). The per-file RE above only matches `src/domain/…: error TS`
+// diagnostics, so a run that never typechecked the domain parses to total=0 and
+// would read as "✓ no strict-type regressions" → exit 0 — the exact green-on-
+// nothing this ratchet exists to prevent. Distinguish "ran clean" from "did not
+// run": if tsc exited non-zero yet produced ZERO domain diagnostics, and its
+// output is either empty (binary/tsc missing) or carries a GLOBAL diagnostic —
+// an `error TS…` with no `file(line,col):` prefix (TS5058 path-not-found, TS6053
+// file-not-found, TS18003 no-inputs, module-resolution config failures) — the
+// typecheck did not happen. Fail loudly. Guards both the check and the --update
+// re-baseline (never write a 0-error baseline from a broken run).
+const globalDiagnostics = out
+  .split('\n')
+  .map((l) => l.trim())
+  .filter((l) => /^error TS\d+:/.test(l));
+if (tscExitedNonZero && total === 0 && (globalDiagnostics.length > 0 || out.trim() === '')) {
+  console.error('[domain-strict] tsc DID NOT RUN against the domain (non-zero exit, zero domain diagnostics parsed) — this ratchet verified NOTHING, not "0 errors":');
+  console.error(
+    globalDiagnostics.length
+      ? globalDiagnostics.map((l) => `  ${l}`).join('\n')
+      : '  (no tsc output at all — is typescript installed? is tsconfig.domain-strict.json present?)',
+  );
+  console.error('\nA broken-toolchain vacuous pass is not a clean typecheck. Fix the config/install; do not ignore.');
+  process.exit(1);
+}
 
 if (UPDATE) {
   const sorted = Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));

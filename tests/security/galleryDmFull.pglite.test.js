@@ -77,6 +77,17 @@ const SETTLEMENT = {
 
 let db;
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if `_gallery_dm_full_json` is renamed
+// or dropped across a migration merge, the extraction returns null and the execution
+// suite below silently describe.runIf-skips while vitest stays green. This
+// UNCONDITIONAL assert fails loudly — the net-current server projection must exist.
+describe('_gallery_dm_full_json exists in the migration corpus (guards against silent vacuous skip)', () => {
+  it('a net-current _gallery_dm_full_json definition is present (renamed/dropped must fail loudly)', () => {
+    expect(existsSync(MIGRATIONS_DIR), `migrations dir missing: ${MIGRATIONS_DIR}`).toBe(true);
+    expect(DM_FULL_SQL, '_gallery_dm_full_json not found in any migration — renamed?').toBeTruthy();
+  });
+});
+
 describe.runIf(!!DM_FULL_SQL)('_gallery_dm_full_json — DM-full latent-pantheon strip (pglite)', () => {
   let serverOut;
 

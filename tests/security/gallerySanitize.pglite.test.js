@@ -72,6 +72,17 @@ const SETTLEMENT = {
 
 let db;
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if `_gallery_sanitize_public_json` is
+// renamed or dropped across a migration merge, the extraction returns null and the
+// execution suite below silently describe.runIf-skips while vitest stays green. This
+// UNCONDITIONAL assert fails loudly — the net-current server sanitizer must exist.
+describe('_gallery_sanitize_public_json exists in the migration corpus (guards against silent vacuous skip)', () => {
+  it('a net-current _gallery_sanitize_public_json definition is present (renamed/dropped must fail loudly)', () => {
+    expect(existsSync(MIGRATIONS_DIR), `migrations dir missing: ${MIGRATIONS_DIR}`).toBe(true);
+    expect(SANITIZER_SQL, '_gallery_sanitize_public_json not found in any migration — renamed?').toBeTruthy();
+  });
+});
+
 describe.runIf(!!SANITIZER_SQL)('_gallery_sanitize_public_json — execution + client parity (pglite)', () => {
   let serverOut;
 

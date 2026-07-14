@@ -83,7 +83,7 @@ function trendOf(phase) {
  */
 function carePosture(institutions) {
   if (!Array.isArray(institutions)) return null;
-  const roster = classifyCareRoster(institutions);
+  const roster = classifyCareRoster(/** @type {{ name?: unknown }[]} */ (institutions));
   const total = roster.church + roster.healingHouse + roster.druid + roster.alchemist;
   const ratio = careCapacity(roster) / EPIDEMIC_TUNING.CARE_MAX_RELIEF; // 0..~1
   const band = ratio >= 0.55 ? 2 : ratio >= 0.2 ? 1 : 0;

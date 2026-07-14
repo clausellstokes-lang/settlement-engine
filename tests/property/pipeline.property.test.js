@@ -118,7 +118,10 @@ describe('pipeline (property-based)', () => {
       const b = gen(config, { seed: SEED });
       expect(JSON.stringify(a)).toBe(JSON.stringify(b));
     }), { numRuns: 100 });
-  });
+    // 200 full-pipeline generations + full-JSON compares overrun the root 20s
+    // testTimeout under machine load — a wall-clock false positive, not drift.
+    // Same house allowance as the seed-sensitivity test below. ([tests-4]/[test-quality-7])
+  }, 120_000);
 
   test('different seeds usually produce different fingerprints (seed sensitivity)', () => {
     // Catches the failure mode where someone accidentally bypasses the
@@ -140,7 +143,11 @@ describe('pipeline (property-based)', () => {
       // seed is being ignored.
       expect(differingPairs).toBeGreaterThanOrEqual(3);
     }), { numRuns: 25 });
-  });
+    // 8 pairs × 25 runs = 400 full-pipeline generations overrun the root 20s
+    // testTimeout under machine load — a wall-clock false positive, not drift
+    // (documented pre-existing env red in the ROUND21 plan). Same house allowance
+    // as generatorGoldenMaster/distributionEnvelopes. ([tests-4]/[test-quality-7])
+  }, 120_000);
 
   // Bonus: thorps are tiny — population should fit in the tier band.
   test('thorps stay under 60 population', () => {
