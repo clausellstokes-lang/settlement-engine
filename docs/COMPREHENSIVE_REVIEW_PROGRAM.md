@@ -185,6 +185,17 @@ behavior, budget raises, golden regens.
       verify:dist at budget 1,255,985).
 - [ ] **Phase E — END**: final full gate, playbook §0.0.3 refresh, memory update, final report.
 
+## OVERNIGHT DELEGATION (2026-07-14, owner: "continue with all of this work independently making
+## your own judgement calls. I'll return in the morning.")
+Autonomous execution of the master sequence under the standing constitution. Judgment calls are
+made and recorded vetoably (JUDGMENT entries in commit messages + Progress lines). REMAINS
+OWNER-GATED OVERNIGHT regardless of delegation: the UPDATE_GOLDEN regen (Track G implements and
+evidences, does NOT regen), preset lights, any push/deploy, migrations/schema shape, data
+deletion, paid-surface changes beyond the already-ruled $2.99 flip. THE MORNING QUEUE for the
+owner: golden sign-off (if Track G is evidenced by then), preset lights, autonomy ruling,
+deletion list, emails, deploy, CSP flip. Session-window cuts are expected (~5-hour cadence);
+recovery = the resume protocol above; every wave banks before the next dispatches.
+
 ## THE MASTER SEQUENCE (consolidated 2026-07-14 — fixes → owed work → expansions → endgame)
 RUNNING: F1 (main tree) + G1a (golden worktree). THEN: F2→F3→F4→F5 (delivers the §0.8-1 M10b
 trim)→F6→F7 on review-fixes; G1b→G1c→G2→shift-ledger→OWNER GOLDEN SIGN-OFF→regen→merge on the
