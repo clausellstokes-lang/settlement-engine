@@ -245,3 +245,35 @@ it freezes BEFORE E1 builds: E1's bond-gating math is its first consumer (G.1's 
 hook), W-PEACE's mediator scoring its second, W-DOCTRINE's channels/leaks its third. Each host
 wave's brief points here; no separate build wave exists — §G ships piecewise inside its hosts,
 which is exactly how a modulation layer should land.
+
+## H. THE LOADED-DICE LAW (owner directive, 2026-07-14 — binding on every E-family/W-wave build)
+
+Owner, verbatim intent: "make sure that wherever possible and appropriate, that it remains to
+have PRNG forks that are weighted to the situation."
+
+The law, stated for implementers: **every stochastic draw runs on a seeded PRNG fork keyed to a
+stable composite (the house idiom — createPRNG(`${seed}::${label}` with content-derived,
+order-independent keys), and its DISTRIBUTION is weighted by the situation, never flat where the
+fiction has an opinion.** Randomness in this engine is the residue left AFTER the situation has
+spoken — the dice are loaded by the fiction and the fork only picks within what the world has
+already made probable. Concretely:
+
+- The weight vector comes FIRST, from state: EV scores, pressures, character/alignment/quadrant
+  modulation, credibility, tie density, posture, season — the §A-§G machinery IS the loading.
+  The fork then samples that weighted distribution deterministically.
+- FLAT draws are legal only where the world is genuinely indifferent (cosmetic variety, naming
+  salt, tie-breaks among true equals) — and a flat draw among options the situation
+  differentiates is a DESIGN BUG, reviewable as such.
+- The weights must be RECEIPTED: the same factors that loaded the dice are the typed reasons
+  the outcome cites ("the granary was thin and the pass was cut — the raid found willing men").
+  Loaded dice are what make outcomes feel inevitable in hindsight; receipts are what prove it.
+- This preserves both constitutional pillars at once: same-seed byte-identity (the fork) and
+  explainability (the weights). An unweighted roll is unexplainable by construction — "why did
+  the war start?" must never bottom out at "the dice said so."
+- Tuning touches WEIGHTS, never forks: the auto-tune rails and the soak adjust loading
+  (within owner-signed envelopes); fork keys and draw order are structural and frozen — moving
+  them is a golden-shift event.
+
+Existing practice already conforms (candidate-event rolls against modulated baseChance, the EV
+kernels, fidelity noise keyed to site/tick/decision, severity bands) — this section elevates it
+from practice to LAW so no future wave regresses to flat rolls where the situation has a voice.

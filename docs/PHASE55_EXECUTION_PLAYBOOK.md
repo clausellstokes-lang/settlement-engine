@@ -93,6 +93,13 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | A3 — THE A-WAVE CLOSES (analytics v2 COMPLETE on this lineage) | 7f74ccf7 | §9 pre-Surveyor slice (migration 134 written-not-deployed: manual-op atlas + revert-rate rollups over existing research-plane edit_events; correctionTypology v1 with Surveyor classes declared-deferred) + §10 auto-tune rails INERT (empty lane-A registry — ratification is the owner's setup act; golden boundary STRUCTURAL via surface allowlist + seeded-module denylist + mandatory envelopes, 27-pin walker; weekly job written-not-enabled, proposals-only) + campaign subjectId stamped on all four campaign-scoped emits (k=200 floor cells now form; generation_completed deliberately unstamped — no uuid exists at its emit). GROUNDING: §10's full loop is design-gated on E0 envelopes + cacophony soak (E0 building in a parallel chip). Battery: 794 files / 8,801 solo-green; closure 1,215,457 ≤ 1,215,520 (63 B headroom); head=134 contiguous. THE OWNER'S DEPLOY BATCH now carries: db push through 134 + ingest-events redeploy + cron enablement + the standing vetoables (market default OFF, archetype margin 12, cap 20, dictionary-beside-taxonomy, columns-over-props, registry ratification menu). NEXT on main: numeric prices → drain-path parity + wallClockNow → Track K. |
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
+
+**SITUATION-WEIGHTED PRNG (owner ruling, 2026-07-14, binding on all future waves):** every
+stochastic draw = a seeded fork on a stable composite key AND a situation-weighted distribution
+(EV/pressure/character loading first, the fork samples within it). Flat draws only where the
+fiction is indifferent; weights receipted as the outcome's typed reasons; tuning moves weights
+never forks. Full statement: DESIGN_COHESION_WEAVE §H. Existing engine practice conforms; the
+ruling prevents regression.
 - BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
   FP-R consolidation down-ratchet →1,255,985; never raise without owner). CURRENT closure 1,254,886 =
   1,099B margin (post-M11b @ 62c81a0c; MEASURED 2026-07-13 — the earlier "1,255,965/20B" figure

@@ -75,6 +75,11 @@ behavior, budget raises, golden regens.
   single-dossier entitlement ladder. Pricing-page copy was already correct; align the other five
   tier-fact surfaces to it via one derived tier-facts module. (Review doc §6.2 updated in place.)
 
+- **2026-07-14 — THE LOADED-DICE LAW:** wherever possible and appropriate, PRNG forks remain
+  situation-weighted — seeded forks on stable keys sampling distributions the situation loads
+  (EV/pressure/character), flat only where the fiction is indifferent, weights receipted.
+  Binding on E1/W-PEACE/W-DOCTRINE/SM briefs. Canonical text: DESIGN_COHESION_WEAVE §H.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
