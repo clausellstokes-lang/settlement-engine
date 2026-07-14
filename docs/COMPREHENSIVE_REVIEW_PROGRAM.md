@@ -185,6 +185,20 @@ behavior, budget raises, golden regens.
       verify:dist at budget 1,255,985).
 - [ ] **Phase E — END**: final full gate, playbook §0.0.3 refresh, memory update, final report.
 
+## THE MASTER SEQUENCE (consolidated 2026-07-14 — fixes → owed work → expansions → endgame)
+RUNNING: F1 (main tree) + G1a (golden worktree). THEN: F2→F3→F4→F5 (delivers the §0.8-1 M10b
+trim)→F6→F7 on review-fixes; G1b→G1c→G2→shift-ledger→OWNER GOLDEN SIGN-OFF→regen→merge on the
+golden branch. OWED WORK: W5 cherry-pick + ratchet-down (post-F5 headroom) → W2 feed retention →
+usage-telemetry merge (owner) → numeric prices + wallClockNow cleanup → TRACK K COMPLETION (the
+bridge: owed work AND Surveyor's foundation). EXPANSIONS (owner-sequenced after fixes):
+E1 generosity engine (relief→credit→reconstruction→boom/bust→purchase→overture→flourishing; peace-
+with-terms + ruins interleave) → E2 Surveyor (Track-K→analyst→briefs→session-interpretation→custom
+content→settlement→realm→autonomy; tier/credits/BYOK alongside stages 1-2). PARKED LAST (owner):
+the living settlement map. ENDGAME: final gate + PART-9 re-grade → master merge (entity-ref +
+migration-renumbering hazards pre-mapped) → owner push/deploy + migration chain → checkpoint
+soaks/tuning (next AI) → launch. Owner-ask batch: golden sign-off, preset lights, autonomy ruling,
+deletion list, emails, deploy, CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing.
+
 ## Resume protocol (for a successor session — START HERE)
 1. `git status` + `git log --oneline -15` — trust the tree, not any digest. Foreign WIP is preserved,
    never touched.
