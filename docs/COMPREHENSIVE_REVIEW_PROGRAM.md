@@ -95,7 +95,13 @@ behavior, budget raises, golden regens.
   personal-loyalty glue = strong-but-succession-fragile (people-held) vs concession glue =
   transactional-but-durable (seat-held); secondaryAffiliation NPCs are the natural bridge/defection
   points; all under §G law — bounded modulators + receipts, never engine-resolved fates.
-  Both docs write grounded on the corruption recon (wf_8c9fcc07-932); build home W-DOCTRINE.
+  Both docs FROZEN 2026-07-14: DESIGN_CORRUPTION_WEB.md +
+  DESIGN_SETTLEMENT_POLITICS.md (grounded on the 3-slice corruption recon — key findings:
+  foreignPatron ships write-only awaiting its reads; the leash seam is name-string resolution in
+  ≥4 sites → resolver chokepoint; the exposure fallback mis-attributes foreign conspirators to
+  the innocent local guild → deliberate attribution; one PLAUSIBLE covert-impairment-text leak
+  through toPublicSafe flagged for the build wave's visibilityAudit pin). Build home W-DOCTRINE.
+  THE DESIGN CORPUS IS NOW CLOSED — the scope freeze is fully executed.
 
 - **2026-07-14 — SCOPE FREEZE (owner: "for the first time in a minute... i think i am done adding
   things"):** the design corpus is CLOSED as of this ruling. Final scope = everything above +
