@@ -108,9 +108,14 @@ lines; the dramatic-irony brief shows reasons ACCUMULATING ("three of five peace
 present; this war is dying") and beliefs diverging ("both courts think they are winning").
 Briefs compress scale: the weekly digest, the session-prep sheet, faction dossiers, the
 player-safe brief composed only from the public projection so it cannot leak. The PDFs are
-shelf-worthy artifacts — the dossier, the campaign war room with its treaty table. And at the
-road's end, the parked last thing: THE LIVING SETTLEMENT MAP — the town drawn from its dossier
-and evolving with it, the burned quarter scarred, the boom district rising, the temple grown two
+shelf-worthy artifacts — the dossier, the campaign war room with its treaty table. THE
+SETTLEMENT MAP (owner-commissioned 2026-07-14, design frozen: DESIGN_SETTLEMENT_MAP.md) joins
+the library: a [Dossier|Map] toggle above every saved settlement, the town drawn
+deterministically from its own dossier — hover any building and the institution explains
+itself, districts carry their wealth and their dangers, and because the map is a pure
+projection of the dossier, whatever impacts one impacts the other, always. And at the road's
+end, the parked last thing: the map's DEEP LIVING form — persistent scarring history, the
+burned quarter still scarred years later, the boom district visibly risen, the temple grown two
 sizes since the plague made it beloved.
 
 ## LAYER 5 — THE INTERPRETER (Surveyor)

@@ -277,14 +277,20 @@ RUNNING: F1 (main tree) + G1a (golden worktree). THEN: F2→F3→F4→F5 (delive
 trim)→F6→F7 on review-fixes; G1b→G1c→G2→shift-ledger→OWNER GOLDEN SIGN-OFF→regen→merge on the
 golden branch. OWED WORK: W5 cherry-pick + ratchet-down (post-F5 headroom) → W2 feed retention →
 usage-telemetry merge (owner) → numeric prices + wallClockNow cleanup → TRACK K COMPLETION (the
-bridge: owed work AND Surveyor's foundation). EXPANSIONS (owner-sequenced after fixes):
-E1 generosity engine (relief→credit→reconstruction→boom/bust→purchase→overture→flourishing; peace-
-with-terms + ruins interleave) → E2 Surveyor (Track-K→analyst→briefs→session-interpretation→custom
-content→settlement→realm→autonomy; tier/credits/BYOK alongside stages 1-2). PARKED LAST (owner):
-the living settlement map. ENDGAME: final gate + PART-9 re-grade → master merge (entity-ref +
-migration-renumbering hazards pre-mapped) → owner push/deploy + migration chain → checkpoint
-soaks/tuning (next AI) → launch. Owner-ask batch: golden sign-off, preset lights, autonomy ruling,
-deletion list, emails, deploy, CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing.
+bridge: owed work AND Surveyor's foundation). EXPANSIONS (owner-sequenced after fixes), TWO
+PARALLEL LANES after the owed work: ENGINE LANE — E0 pacing governor → E1 generosity engine
+(relief→credit→reconstruction→boom/bust→purchase→overture→flourishing) → W-PEACE (~3 waves) →
+W-DOCTRINE ∥ DISPLAY LANE — SM-1→SM-3 THE SETTLEMENT MAP (owner-commissioned 2026-07-14, design
+frozen: DESIGN_SETTLEMENT_MAP.md — library-only [Dossier|Map] toggle, deterministic dossier
+projection, hover=institution, cosmetic edits in settlement.mapEdits; pre-build gates: world-pulse
+blob-preservation trace + chunk-mint budget measurement). Both lanes before E2 Surveyor
+(Track-K→analyst→briefs→session-interpretation→custom content→settlement→realm→autonomy;
+tier/credits/BYOK alongside stages 1-2). SM-4 (PDF plate, card thumb, gallery opt-in) with endgame
+polish. PARKED LAST (owner, standing): the DEEP living map — persistent scarring history.
+ENDGAME: final gate + PART-9 re-grade → master merge (entity-ref + migration-renumbering hazards
+pre-mapped) → owner push/deploy + migration chain → checkpoint soaks/tuning (next AI) → launch.
+Owner-ask batch: golden sign-off, preset lights, autonomy ruling, deletion list, emails, deploy,
+CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing, settlement-map V1 un-parked.
 
 ## Resume protocol (for a successor session — START HERE)
 1. `git status` + `git log --oneline -15` — trust the tree, not any digest. Foreign WIP is preserved,
