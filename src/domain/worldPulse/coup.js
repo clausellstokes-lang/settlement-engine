@@ -29,7 +29,7 @@
  */
 
 import { stablePart } from './worldState.js';
-import { resolveCoupVerdict } from '../rulingPower.js';
+import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import { computeWarSentiment } from './disposition.js';
 // M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
 // through the shared authority policy so the seat-change joins the approval queue

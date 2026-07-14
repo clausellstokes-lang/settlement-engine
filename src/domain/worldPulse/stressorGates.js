@@ -31,7 +31,7 @@ import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { magicLedger, ARCANE_INSTITUTION_PATTERN } from '../magicLedger.js';
-import { coupContenders } from '../rulingPower.js';
+import { coupContenders } from '../rulingPowerCoup.js';
 import { resolveBlockadeBypassChannel } from './foodStockpile.js';
 import {
   institutionClassValue,

@@ -32,7 +32,7 @@
  * the stateful deployment record carried on each resolved deployment.
  */
 
-import { resolveCoupVerdict } from '../rulingPower.js';
+import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import {
   relationshipKeyFromEdge,
   normalizeRelationshipEdge,

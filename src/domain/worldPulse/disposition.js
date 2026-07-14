@@ -38,7 +38,8 @@
  */
 
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
-import { governingFactionOf, COUP_COERCION } from '../rulingPower.js';
+import { governingFactionOf } from '../rulingPower.js';
+import { COUP_COERCION } from '../rulingPowerCoup.js';
 import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcData.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';

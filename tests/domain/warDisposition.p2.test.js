@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { computeWarSentiment } from '../../src/domain/worldPulse/disposition.js';
-import { resolveCoupVerdict } from '../../src/domain/rulingPower.js';
+import { resolveCoupVerdict } from '../../src/domain/rulingPowerCoup.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 
 /**

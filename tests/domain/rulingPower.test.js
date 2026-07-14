@@ -2,12 +2,14 @@ import { describe, expect, test } from 'vitest';
 
 import {
   RULING_POWER_CAUSES,
-  coupContenders,
   governingFactionOf,
   governmentLabelFor,
-  resolveCoupVerdict,
   transferRulingPower,
 } from '../../src/domain/rulingPower.js';
+import {
+  coupContenders,
+  resolveCoupVerdict,
+} from '../../src/domain/rulingPowerCoup.js';
 import { coupVerdictOutcomes } from '../../src/domain/worldPulse/coup.js';
 import { STRESSOR_CATALOG, evaluateStressorRules } from '../../src/domain/worldPulse/stressors.js';
 import { STRESSOR_COUNTERFORCES, STRESSOR_SYNERGIES } from '../../src/domain/worldPulse/stressorDynamics.js';

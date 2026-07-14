@@ -31,7 +31,7 @@ import { clamp01 } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { healingLedger } from '../healingLedger.js';
 import { governanceLedger } from '../governanceLedger.js';
-import { coupContenders } from '../rulingPower.js';
+import { coupContenders } from '../rulingPowerCoup.js';
 import { canonicalRelationshipLabel } from '../region/graph.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 
