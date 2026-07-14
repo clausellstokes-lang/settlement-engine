@@ -214,12 +214,13 @@ math. The boundaries the owner drew are boundaries the code actually has.
 
 ## 6. ⚠️ OWNER-URGENT (not code fixes — decisions/actions only you can take)
 
-1. **Production is 12 migrations behind the repo (applied-head 117 vs 129)** — the unapplied set
-   includes the latent-pantheon/_regenSeed deity-and-seed leak strips (121/128/129), the
-   double-charge fix (119), and the gallery allowlist projection (123). Until a deploy runs,
-   constitution law 3 (free/anon never see live deity names) is **unenforced in prod** for the
-   latent pantheon. `validate:migration-head` only warns. Recommend: deploy the migration chain
-   (owner-gated) and make the gate fail-on-pending-privacy-migration.
+1. **Deploy the migration chain before launch** (12 pending, applied-head 117 vs 129, including
+   the latent-pantheon/_regenSeed leak strips — those protections are not live in prod until
+   deployed). ⚠️ PHASE-V CORRECTION: the original framing ("gate only warns" as a defect) was
+   REFUTED — warn-not-fail on pending is deliberate, documented, and *test-enforced*
+   (migrationAppliedHead.test.js rejects hard-failing the normal commit→deploy window as "the
+   exact lie the ledger exists to prevent"); the fail-closed gate is the deploy-time probe. The
+   action item is simply: run the owner-gated deploy; no gate change needed.
 2. **The free-tier PDF monetization fork — ✅ OWNER-RULED 2026-07-13 (in-session):** free tier
    pays $2.99 per dossier PDF; ONLY premium gets unlimited export. The shipped gate (free =
    unlimited export) is the WRONG side; the pricing-page copy was right. Fix program mandate:
@@ -2415,4 +2416,496 @@ ROUND-2 FINDINGS: 71
 - Blast: goldens_shift=False eager_bytes=False persistence=False owner_gated=False — Test/CI-config only; byte-neutral to the shipped bundle. Raising a coverage floor is a tightening (safe). Scheduling the live-Stripe-test-mode lane adds a manual/weekly job using existing test-mode secrets — not deploy/migration/schema/security-posture, so not owner-gated; but it should be a non-blo
 - Corrected: Facts are airtight, but this is a doc-precision + thin-edges nit, not a coverage hole: both underlying gaps are documented sound deferrals (ratchet-baseline floors; a deliberately-skipped, secrets-gated live-lane skeleton; the edge-fn live-smoke gap logged in RISK_REGISTER at security A−). The one genuine defect is the ci.yml comment overselling uniformity — it holds for the 4 real floors but not 
 - Fix: Bold-but-safe, all within the constitution and byte-neutral: (1) annotate the ci.yml:172-179 comment to name the near-zero-floored exempt files (stripe = redirect-only/UI-smoke; creditLedger = async-supabase; creditsSlice) so the "exactly the regression this catches" claim stops implying uniform per-file protection; (2) creditLedger already has tests/security/creditLedger.pglite.test.js — measure 
+
+
+
+---
+
+# PHASE V VERDICTS — ROUND 1 (Opus adversarial verification; 118/129 verified, 11 stragglers re-running)
+Tally: 93 CONFIRMED / 16 PARTIAL / 5 REFUTED / 4 split (adjudicated below by the Fable architect).
+Notable refutations: backend-2 (warn-not-fail is deliberate+test-enforced; deploy stays on the endgame checklist), backend-4 (CSP report-only = sound tracked rollout, low), worldpulse-core-5 (guard benign), worldpulse-religion-trade-7 (recorded wave-scope deferral), domain-events-region-8 (cosmetic).
+
+**[backend-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Add a per-IP fixed-window limiter to the anon single_dossier branch, invoked via the service-role client BEFORE the dossier_purchases upsert (258) and BEFORE the Stripe session create (465), mirroring verify-single-dossier: call an existing consume_*_rate_limit RPC (reuse migration 035's dossier bucket to avoid a new migration) with an in-memory fa
+
+**[components-commerce-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Correct all four wrong surfaces to the shipped TIER_GATE: AuthModal free bullet → "3 saves" (drop "custom content", which is premium; move it under Premium) and stop framing PDF/JSON export as premium-only; HomeHero at-cap card → "save up to 3 drafts" not "unlimited"; HowToUse → anon reaches Town not Village; AccountSubscriptionSection → drop "ever
+
+**[components-commerce-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Forward the missing 8 opts from shareMap to publish_map, which already accepts them (migration 088). Widen shareMap's destructure to include importable, imageUrl, imageAlt, shareWorld, worldSections, worldSnapshot, realmArcSummary, facets and pass them as p_importable, p_image_url, p_image_alt, p_share_world, p_world_sections (jsonb), p_world_snaps
+
+**[components-dossier-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Align the contract end-to-end. Simplest: in WorldMapStage.jsx:174 pass the prop MapOverlay reads, and make WorldMap pass a ref rather than a callback — i.e. thread `overlayTransformRef` (the ref object) down as `transformOut`, drop the `handleOverlayTransform` callback. Alternatively keep the callback semantics: rename MapOverlay's prop to `onTrans
+
+**[components-dossier-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Convert Distance/Travel from broken locked input-stubs into engine-derived read-only status. In axisValue(), derive spatialMode from spatialCanonVersion (present ⇒ 'mapped') and travelMode from live hopWeeks (⇒ 'standard'); render the row as a non-interactive derived fact ("The realm reckons real distance — frozen at canonization") instead of selec
+
+**[components-dossier-3] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=True persist=False owner=True
+- Fix: Light the opt-in on living_realm: set routineMajorApproval:true in the preset (simulationRules.js:240), so the M10a queue the preset copy already promises actually fires. Re-run CL-0 pins + 6 siege pins + war-certification to confirm no pinned golden exercises a living_realm major (M10a asserts none do); if any shifts, record the one-time same-seed
+
+**[components-dossier-4] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: In WorldPulsePanel, capture the catchUpCampaignWorld promise into local state: a busy flag while awaiting, and on settle store weeksCaughtUp/capped or an error. Render a "While you were away — N weeks passed" banner fed by the existing buildChronicleGrounding lookback over the caught-up window (majorHeadlines), a slim in-flight indicator, and an er
+
+**[data-tables-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Author dedicated INSTITUTION_SERVICES entries with civic-register services (dispute mediation, communal decisions, record of custom) for each catalog government institution — Household elder, Village headman, Village elder, Town council, City administration — or add LOCALE_SERVICE_OVERRIDES rows pointing them at an appropriate civic key (Village re
+
+**[domain-events-region-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Reuse the pulse-proven machinery, don't re-architect. Two lanes are needed because mapEventToPartyImpact gates on event.partyCaused (partyEventLinkage.js:46): (1) party-caused path — add BROKERED_ALLIANCE→broker_relationship and SETTLEMENT_DISPUTE→inflame_relationship to EVENT_TO_PARTY_KIND with relationshipKey derived from saveId+targetId; (2) DM-
+
+**[domain-events-region-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Mirror crisisResolve in removedThreat: on a successful strike, dual-write the removed entry's type into config/_config stressorEdits.resolved (slug/name-tolerant, using the same withStressorEdits discipline from crisisLifecycle), and clear any matching stressorEdits.added entry so an authored-then-removed threat also stays gone. Add REMOVED_THREAT 
+
+**[domain-top-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=True owner=False
+- Fix: Preserve unknown fields on the assign path. Cleanest targeted fix: in assignNpcToRole, keep using createNpc to compute the defaulted structural fields, but return `{ ...npc, ...updated }` so the successor's personality/secret/goal/plotHooks/corruption/_userEdits/_authored/createdByEventId survive and only the fields the assignment legitimately chan
+
+**[domain-top-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Two-part, minimal half first. (a) Immediately correct the false claims: fix userEdits.js:31-34 to scope "respected by" to AI grounding/overlay verifier only (NOT section-regens), and gate/fix provenance.js user_canon copy so no false trust badge can ship. (b) Repair the asymmetry: have regenSection consult buildRegenerationPlan (default 'rebalance'
+
+**[generators-domain-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: One integration wave per table, plus a walker guard. Author 4 STRESS_DESCS vignettes per new type (existing patterns transfer). Add the 5 keys to the seven NPC/history/severity/flavor/institution weight tables and buildStressContext (slave_revolt gated on slave-economy/institutions, wartime on hostile neighbour, insurgency on low legitimacy, mass_m
+
+**[generators-domain-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Make the structural pass a RESOLVER, not a blind generator. Add a role-synonym table (Watch Captain≈Guard Captain/Garrison Commander/City Watch Chief; High Priestess≈High Priest/Head of the Faithful; Guildmaster≈Guild Master/Market Overseer; Kingpin≈Crime Lord/Thieves' Guild Master/Gang Leader; Lord Mayor≈Mayor/Governor; Archmagister≈Guild Archmage
+
+**[generators-domain-3] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Have regenNPCsPipeline run the same NPC-enrichment tail as assembly. Either extract generateCoherence's NPC sub-pass (buildPoliticalNarrative map → mergeNPCLists → enrichNPCsWithStructure against the live settlement) into a shared helper called from both assembleSettlement and regen, or apply those three (all pure, all already importable) inside re
+
+**[generators-pipeline-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: In resolveResources.js manual branch, treat list membership as 'allow': set `nearbyResources = allCompatible.filter(k => config.nearbyResources?.includes(k) || ['allow','abundant','depleted'].includes(resourceState[k]))` (or union the two sources), so list-only selections survive alongside map overrides. Add a pin test: a config with nearbyResource
+
+**[generators-pipeline-2] → PARTIAL/PARTIAL / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The terrain-specific (desert/mountain) half is real and severe: in manual mode with an explicit terrain override and any abundant/depleted marking, all terrain-specific resources the UI offered are dropped, and marking only terrain resources produces an empty roster. The water-terrain half is incorrect — water resources (river_fish, fishing_grounds
+- Fix: Pass the terrain the random branch derives: `getCompatibleResources(tradeRoute, resolvedTerrain || (config.terrainOverride && config.terrainOverride !== 'auto' ? config.terrainOverride : null))` at line 116. This restores desert/mountain resources marked in manual mode. Add a manual-mode + terrain-override pin test asserting the roster keeps the te
+
+**[generators-pipeline-3] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Replace the Set with the canonical values ['hostile','rival','cold_war'] (keep the legacy 'hostile_rival'/'Hostile rival'/'Cold war'/'tense' spellings for old saves); best to extract one shared adversarial-relationship predicate reused by both generatePower's gate and priorityHelpers getInstFlags substring reader (single-writer/single-reader). Add 
+
+**[pdf-1] → CONFIRMED / final high** — ADJUDICATED: narrowed per lens B — FaithWar already carries war-side spatial reads; missing = rumors/beliefs/M6d flow-drift chapters + parity-audit update.
+
+**[spatial-engine-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Execute the ledger-named W-PLUG wave in three golden-gated sub-steps, each recording its one-time same-seed shift: (1) add pestilenceLevel as a new max() argument in dispatchEV.stressorDanger plus a plague-specific believed-refusal via the existing belief gate (the seam is pre-built) — this alone gives caravan re-route/refusal and the quarantine di
+
+**[spatial-engine-3] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: On a battle resolution, re-plan the loser's transit record in the collision loop: role=ARMY_ROLES.RETREAT, destId=originId, path=retreatRoute(digest, worldState, currentRegion(loser), loser.originId, alignment, season).path, fresh depart/arrival ticks (armyMarchWeeks from currentRegion→home), position01 reset. Then exclude retreat-role armies from 
+
+**[store-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Move the M10b re-stamp OUT of the slice's separate post-advance set() and INTO runAdvanceCampaignWorld's Phase-2 commit set() (campaignAdvanceSession.js), right after `campaign.worldState = ensureWorldState(...)` and BEFORE `campaignPersist = cacheCampaignState(state)` at line 246, guarded by the same conditions (advancesOnOpen(rules) && tick moved
+
+**[store-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Extend the advanceInFlight gate (option a) to queueSettlementEvent, cancelQueuedEvent, applyQueuedRegionalImpact, setRegionalImpactStatus, and undoCampaignStressorBridge — each returning a typed no-op ({reason:'advance_in_flight'}) so applyEvent can fall through / toast instead of silently returning {queued:true}. This matches the existing contract
+
+**[worldpulse-core-1] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Extend the parked-pause guard to the mutators: applyWorldPulseProposal, dismissWorldPulseProposal, and recordPartyImpact should early-return a typed {ok:false, reason:'advance_paused'} (or null, matching each action's existing no-op shape) when get().getPausedAdvance(campaignId) is set — mirroring advanceCampaignWorld L339. Also disable/hide the Ap
+
+**[worldpulse-core-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Make removal real at all three read sites, honoring the module's CANON-by-construction contract. Minimal-correct: in the remove_npc case, write a settlementOverride that drops (or marks ousted) the NPC's roster entry so pruneNpcStates + dossier stop listing them; and add a `state.removed` hard-exclusion guard at the top of evaluateNpcRules' per-sta
+
+**[worldpulse-religion-trade-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=True owner=True
+- Fix: Add per-arc anti-repeat guards mirroring the existing idioms, not a one-off. For vassal_trade_coercion, gate emission on `result.changed || (tick - lastCoercionTick >= RENEWAL_TICKS)` using tradeWarState (reuses the lastFlipTick persistence idiom — no new shape). For footholds and pacts, prefer a curation-side structural fix: stamp these condition-
+
+**[worldpulse-war-2] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Add real apply arms in applyWorldPulseOutcomes for the four faction payload kinds, flag-gated additively behind existing faction/warLayer gates so dormant and faction-free worlds stay byte-identical: government_change -> transferRulingPower(next, archetype-mapped faction, {cause:'political', preserveInstitutions}) as coups do; institution_suppressi
+
+**[worldpulse-war-3] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: On an approved relationship_label_change whose actor (or counterparty) holds a live deployment against the other party, resolve that deployment as outcome:'withdrawal' through the existing resolvedDeployments → deploymentReturnOutcomes path and retire its war_front channels (warFrontChannelIds already exists), so the physical siege actually ends wh
+
+**[worldpulse-war-4] → CONFIRMED/CONFIRMED / final high**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Wire the consumer in evaluateWarLayer: before the resolution step, read this tick's approved/auto `return_home` outcomes (or a worldState recall flag the strategy-apply sets carrying recallTargetId) and resolve the named deployment as outcome:'withdrawal' through the existing resolvedDeployments path, retiring its war_fronts so deploymentReturnOutc
+
+**[backend-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Add a config-only 094/111-style migration re-pinning the 8 regressed fns via `alter function ... set search_path = public, pg_temp` (byte-neutral — appending pg_temp LAST cannot change public resolution, per 094/111's own proof), and add the structural-prevention ratchet the finding names: a test scanning pg_proc (or the migration sources) assertin
+
+**[components-commerce-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Per the owner ruling, flip TIER_GATE.free.export from true to false in authSlice.js:37 (premium.export stays true). This activates the dormant single-dossier $2.99 ladder and the BuyThisDossier 'unpurchased'/'unsaved' rungs, so it MUST be sequenced with commerce-5 (the 'unsaved' CTA bounce bug) — those rungs need to be exercised/fixed before the ga
+
+**[components-commerce-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Import FOUNDER_SEAT_CAP from founderSeats.js at the top of FounderTile.jsx (the module is already dynamically imported at line 49; adding a static named import is fine). Replace the two hardcoded 500s: `claimSeat = seatsRemaining ? FOUNDER_SEAT_CAP - seatsRemaining + 1 : null` (line 78) and `{seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining` (
+
+**[components-commerce-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Route the 'unsaved' rung to the save affordance, not auth: add a props.onSaveFirst callback that OutputContainer wires to the existing SaveToLibraryButton/save flow (byte-neutral), and reserve goSignIn strictly for the anon ladder's create-account rung. Add a unit pin that renders reason 'unsaved' and asserts its onClick triggers save (not navigati
+
+**[components-dossier-10] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Adopt useDialogFocusTrap + role="dialog"/aria-modal="true" on all three: StaleNarrativeModal and TableView already carry the ARIA attrs (add the ref + trap); ChroniclePanel's FullEntryModal needs role="dialog"/aria-modal added to its panel and the backdrop demoted to a plain onClick div. Delete the role="button" tabIndex=0 backdrop hacks (backdrop-
+
+**[components-dossier-5] → PARTIAL / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Reset state.pipelineHistory = [] and state.pipelineRevealActive = false on every active-settlement identity swap — primarily setSettlement (settlementSlice.js:949, the onLoad path that actually reaches the rail), plus hydrateFromSave and clearSettlement for hygiene; ideally a shared reset helper so no future load path drifts. The finding's hydrateF
+
+**[components-dossier-7] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Bold-over-safe within the constitution: wire it display-side. Capture compareCausalState before/after causal snapshots per tick in the live advance session (in-memory, session-scoped — NOT persisted to worldState/pulseHistory, preserving same-seed byte-identity and avoiding a schema change) and thread the Map<tick,{before,after}> from RealmInspecto
+
+**[components-dossier-9] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Keep only the label row inside the button (aria-expanded + aria-controls pointing at an id). Render the summary/description/trace region as a sibling element (e.g., role="region" or plain div) referenced by that id, matching the in-house DossierTabStrip tab/tabpanel pattern. This makes the receipt text selectable/copyable, gives the button a stable
+
+**[data-tables-2] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Rename the 12 dead patterns with a live catalog target to a live substring (Bowyer/Fletcher->'Bowyer', Herbalist->'Apothecary', Weavers' guild->'Weavers', Tanners' guild->'Tanner', Cheesemaker->'Dairy farmer', Salt merchant->'Salt works', Shepherds' guild->'Shepherd', Jewelers' guild->'Jeweller', Carpenters' guild->'Carpenter', hills/mountain Stone
+
+**[data-tables-3] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Author 5-8 secret/stakes rows for each of insurgency, religious_conversion, slave_revolt, wartime, mass_migration, following the existing style template and matching owner voice (these are the most dramatic stressors, so this is the highest-value content to fill). Add a coverage-ratchet test in tests/data/ asserting every STRESS_TYPE_MAP key has >=
+
+**[data-tables-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Delete NPC_ROLES outright (behavior-inert, zero importers). Mechanically rename the three misnomers in both declaration and their sole consumer (npcGenerator.js), byte-neutral: NPC_SECRETS→NPC_CATEGORY_GOALS, NPC_WANTS→NPC_ATTIRE, NPC_FACTION_LOYALTY→NPC_SITUATION_HOOKS. Optionally add the repo's inventory-ratchet idiom — a test that fails when a s
+
+**[data-tables-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Merge 'fish' into 'fishing' (keep the richer 'fishing' chain, union its outputs/processors; add an alias so any persisted 'fish' chainId still resolves rather than hard-deleting the id). Separately make 'river_fishing' substitute-activation display-aware: drop 'Fishing grounds' from its resourceSubstitutes (a coastal town should not surface "River 
+
+**[domain-events-region-3] → CONFIRMED/CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Take the inject route (aligns with the ONE-PLAGUE-TRUTH law): extend twinDirectiveForEvent to map PLAGUE → {action:'inject', stressor:{type:'disease_outbreak', label, severity}} with crisisWithdraw symmetry for undo, so the DM's obvious button drives the same roaming stressor the plague_onset path drives and feeds M11a/stressorDynamics/religiousCon
+
+**[domain-events-region-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Add `case 'IMPOSE_CORRUPTION': if (targetId) refs.push({ kind: 'npc', ref: targetId }); break;` to eventConsumes, mirroring the EXPOSE_CORRUPTION precedent. This closes the primary (mistyped/nonexistent NPC) case the headline names. For the criminal-org no-op (mutateEntities.js:705), optionally add a namespace check that the settlement has a crimin
+
+**[domain-events-region-6] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Gate the goods-driven trade_dependency/export_market candidates on relationship, matching the sibling generation layer: reuse tradeLinks.js's NO_TRADE_RELATIONSHIPS (lift to a shared constant) and skip these two candidate pairs when rel is hostile — a hostile pair then surfaces only war_front/resource_competition, restoring cross-layer coherence. O
+
+**[domain-events-region-7] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Add a relief lane to the same rule table with positive polarity: map route_restored/export_gained/local_production_gained/depleted_good_lost through trade_dependency/export_market/service channels to a new 'relief' impact whose apply step early-expires the matching negative condition at the target (reuse applyWorldPulse ghost-reconcile) and emits a
+
+**[domain-events-region-9] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Import HEALING_INSTITUTION_PATTERN from ../healingLedger.js and replace the inline regex at mutateWorld.js:428 (one-token swap). healingLedger is a domain leaf already bundled via capacityModel/causalState, so no layering or eager-bytes cost. Record the one-time behavior shift: DM PLAGUE events now also strain monastic/apothecary/shrine/almshouse h
+
+**[domain-readmodels-1] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Delete the losers fold at chronicleTimeline.js:107-109 so collectSettlementIds returns targetSaveId + populationDeltas keys only, matching worldSnapshotPublic.collectAffectedIds; mirror the sibling's explanatory comment. Add the missing regression pin: the main tree has NO chronicleTimeline test (only a parallel worktree has one), so add tests/doma
+
+**[domain-readmodels-2] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Narrow the bare `note` token in PRIVATE_KEY_RE to the genuinely-private keys (e.g. dossierNotes|dmNotes|narrativeNotes|tabNotes|\bnotes?\b) on BOTH the client regex (publicSafe.js:78) and a NEW CREATE OR REPLACE migration for _gallery_sanitize_public_json (Postgres \y/\m\M boundaries) — the denylist-only-grows rule stays satisfied since the private
+
+**[domain-readmodels-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Order the filter pillar>key>notable before slice(0,3) so the seat-holder ranks first (include 'pillar' in the accepted set). Add a fallback for settlements whose npcs carry no importance stamp: rank by power/influence (the tonightAtTheTable pattern) so plain-generated-only settlements still surface figures rather than an empty list. Keeps the read 
+
+**[domain-top-3] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Implement the documented fallback inside factionInstitutionStrength/findLinkedEntities: when no explicit link list matches, return a low default strength (~0.4) when the faction's archetype (canonical factionArchetypes detector) matches the institution's classification, gated so explicit lists always win. Prefer this over stamping controlsInstituti
+
+**[domain-top-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Take the repair fork now (in-scope, byte-neutral): delete src/domain/customContent.js and tests/domain/customContent.test.js, and rewrite the settlement.schema.js CustomEntityClassification typedef to reference the live §14 customContentSchema path (or drop it) so the canonical schema stops documenting non-existent wiring. Surface the capability fo
+
+**[domain-top-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Sequence AFTER domain-top-2. Minimum, do now (zero byte risk): correct or hard-gate the user_canon label + line 79 so the module can never ship a false 'preserved across rerolls' badge. Once domain-top-2's preservation is actually enforced, either mount deriveProvenanceSummary in the dossier trust surface (it is pure and cheap) to ship the authored
+
+**[experience-product-fit-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Mount RegionWakeReplay below HomeSampleDossier in WizardEmptyState.jsx as a lazy Suspense chunk with the CTA routing to PricingPage — exactly as the component header documents and as parallel worktree awesome-ritchie-063978 already implements (WizardEmptyState:39 lazy import + :66 mount, plus tests/ui/wizardEmptyState.proofPair.test.jsx and howToUs
+
+**[experience-product-fit-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: One-line copy fix at GenerateWizard.jsx:413 to state the actual ceiling and match the six other surfaces, e.g. "Free mode: generating up to Town size. Sign in (free) for every size." Preferably lift the literal into src/copy/en.js per the single-copy-registry convention rather than leaving it inline. Direction is unambiguous — every other anon-ceil
+
+**[experience-product-fit-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Split Wave 10 in the backlog plan: (a) budget-free lazy tranche shippable now — a Realm-Inspector/dossier read-model surface for embattlement, supply links/fragility, migration, and beliefs, following the RumorsTab store-selector + lazy-import pattern; the belief read-model (settlementBeliefs.js) already exists and only needs a lazy component wire-
+
+**[generators-domain-4] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Single-writer: make generateFoodSecurity the one food engine and have deriveFoodBalanceAnalysis consume its dailyProduction/dailyNeed/deficit instead of recomputing. Unify the terrain-capacity source (pick TERRAIN_AGRI or geographyData.agricultureCapacity — they must not both exist), the agriMod keyword rules, cropFortune jitter, customDeps tally, 
+
+**[generators-domain-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Read the resolved tier like the sibling checks: change line 63 to ['town','city','metropolis'].includes(config?.tier || config?.settType || ''). Then extend the existing tier-sentinel walker (tests/generators/servicesGeneratorTierSentinel.test.js pattern) to also cover foodBalance's tier read so this dead-path class cannot recur. Because the change
+
+**[generators-domain-6] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Replace the per-category find() with a seeded weighted pick among ALL catalog templates whose type is in that category's typeMap list (lists already enumerate them), keeping usedNames dedup. CRITICAL: the binding cap is the final type-keyed dedup at historyGenerator.js:1017 (key=e.type=category) — fixing find() alone still collapses to 8. For city/
+
+**[generators-domain-7] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Reordering alone is insufficient: 'Claimant Bloc A/B' and 'Third Bloc (Neutrals)' carry no 'Noble' token so noble-before-economy still leaves them 'economy'. Drop bare 'Bloc' from the economy list (keep the concrete 'Merchant'/'Trade'/'Consortium' names covered) and add the political tokens the stress injector actually mints — 'Claimant', 'Loyalist
+
+**[generators-pipeline-6] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Prefer the bold orchestration fix: compute defenseProfile before generatePowerStructure (it only needs institutions/config/economicState, all available pre-power per the audits) and drop the provisional label + the assembly patch entirely, so legitimacy AND faction powers derive once from real readiness. If that refactor is too broad, re-run applyL
+
+**[lib-infra-1] → CONFIRMED/CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Add exportThumb to the mapBridge typed surface as `exportThumb: (size) => call('settlementEngine:exportThumb', { size }, { timeout: 20000 })` returning `{ dataUrl, w, h }`, and implement the matching iframe-side handler in public/map's sf-bridge using FMG's native raster exporter. Add a structural-prevention walker test asserting every bridge metho
+
+**[lib-infra-2] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Stamp consentTier:'research' on the snapshot record ONLY when the research payload was built (full !== null in researchCapture, or unconditionally in enqueueSnapshot keyed on rec.structural presence) — a product-tier snapshot carries no research columns and should legitimately survive revocation, so blanket-purging all snapshots would over-delete. 
+
+**[lib-infra-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=True persist=False owner=True
+- Fix: Owner-gated fork first: launch the retention emails vs. retire the helpers (a product-launch call, and it touches the paid founder surface). If wiring: use the same lazy dynamic-import pattern as notifyWelcome (authSlice.js:240) to avoid eager bytes; gate each send on the persisted email-preference categories (profiles.email_notifications); fire no
+
+**[lib-infra-5] → PARTIAL / final medium**
+- Blast: goldens=False eager=True persist=True owner=True
+- Corrected: The sessionId gap is fully real and the higher-value half: the ingest edge function already reads body.sessionId and persists it, but the client never supplies one and getSessionId() is unwired, so all first-party telemetry carries NULL session_id and session/funnel/path analysis is impossible — fixable with one boot-time wiring, no schema change. 
+- Fix: Ship the sessionId wiring now (byte-cheap, high value, no schema change): add a setSessionIdGetter seam to analyticsQueue and stamp buildEnvelope.sessionId=getSessionId() registered at boot from main.jsx — a parked worktree already implements exactly this. Treat corpus separately as a larger, owner-gated item: the reviewer's one-liner only populate
+
+**[lib-infra-7] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Add a live-world chapter set to generateCampaignPDF — a realm chronicle digest, a war/siege standings table, and pantheon standing — sourced from campaign.worldState/regionalGraph already passed in at CampaignFolder.jsx:51, reusing the SAME pure display read-models the settlement PDF's liveWorld.js/FaithWar consume (never recomputing, to avoid scre
+
+**[pdf-2] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Make the itemRenders shape-aware via a shared noteText() helper consumed by both Overview.jsx (coherenceNotes, structuralSuggestions) and ViabilityAssessment.jsx (violations, warnings): coerce {note}→note; {reason,suggested[]}→`${reason}. Consider: ${suggested.join(', ')}`; {institution||group, reason}→`${institution||group}: ${reason}`; fall back 
+
+**[pdf-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Adopt the review's shape: in viabilitySlice (viewModel.js) derive `byDesignContradictions` from `s.structuralViolations.filter(x=>x?.severity==='by_design')` and exclude those same items from the `structuralViolations` list handed to the PDF; render institution + reason + the 'intentional' framing in ViabilityAssessment's BY-DESIGN CONTRADICTIONS b
+
+**[pdf-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Extract the STRESS_STATUS key set into a shared domain/display constant imported by both DefenseTab.jsx and defenseSlice (viewModel.js:671). Drop wartime/insurgency; add famine/plague_onset/politically_fractured/recently_betrayed — i.e. the top-6 STRESS_PRIORITY set the web already uses. This is exactly what the June fix-note prescribed. Bold-over-
+
+**[pdf-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Two-part fix. (1) Product: in ExportSheet.jsx generalize the disable to canon-only-flagship variants — disable campaign_state on phase!=='canon' with the same disabledReason as timeline_packet (its timeline+faithWar are both if-canon), and add campaign_state to VARIANT_ICON (e.g. a Swords/Flame icon) so it stops falling back to the generic FileText
+
+**[pdf-6] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Mint a shared display constant (VIABILITY_EXCLUDED_SEV/TYPES/categories) co-owned by ViabilityTab and viabilitySlice, and apply it in viewModel.js viabilitySlice.issues (the operative exclusion is severity 'dependency'/'opportunity'; include type/category for completeness) so the PDF Viability chapter matches the curated web view. Give economicsSli
+
+**[performance-scale-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Cap the persisted rollExplanations in pulseRecord: keep all passed + all deterministic explanations plus the first K missed (or sort passed-first and slice to a cap comfortably above current golden record counts), while the full set can still ride the RETURN value for the session UI (which renders only 18). Pick the cap above max golden-fixture exp
+
+**[spatial-engine-4] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Wire the built+tested primitive rather than delete it (higher value; primitives already pass unit tests). Minimal: apply staleAssessment to each army's read of the OPPOSING strength behind an engage/withdraw gate before resolveFieldBattle, keeping true strengths for attrition physics; at minimum stamp a "fought blind" receipt on battles where umbil
+
+**[spatial-engine-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=True owner=True
+- Fix: Distinguish "never seeded" from "decayed-empty." Keep the marker as a CONDITIONAL key (present only in belief-active worlds, mirroring the existing beliefMaps materialization discipline) so the dormant/omniscient path stays byte-identical and eager-free: either a persisted beliefsSeededAtVersion compared against spatialCanonVersion, or a one-key se
+
+**[spatial-engine-6] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Two arms in applyStrikeToRoster/planInstitutionFate. (1) De-dup guard: have the demote consider ANY same-name row regardless of status — if a same-name institution already exists (active OR ruined/remnant), do not rename-and-mint; instead reactivate the ruined lesser in place (the tierOutcomeApply.js:158-182 precedent) or fall through to collapse/d
+
+**[spatial-engine-7] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: One docs-only commit: append the M11b row to §0.0.1 (hash 62c81a0c, gates, the 0-eager disastersEnabled gate), flip §0.0.3/§0.8 "WIP/UNCOMMITTED" lines to landed, add the parked disastersEnabled item to the owner-decision queue, and update round-21 plan L24/74/153/195-197 (M11 built, ruins-as-artifacts now UNBLOCKED). Stage only the two doc files e
+
+**[state-lifecycle-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Extract resetSessionIdentity(state) from the hydrateFromSave 1793-1800 block (pendingEditsQueue=[], pendingEditsClock=0, pendingSuccession=null, draftVersionHistory=[], generationId=null) and call it from generateSettlement's set(), setSettlement, and clearSettlement — single source for the identity-leak class rather than a third hand-maintained co
+
+**[state-lifecycle-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Guard regenSection on canon: add `if (get().phase === 'canon') return;` at the top (matching renameNPC/renameFaction) — or route canon rerolls through the event system so they log — and surface that block-vs-route choice to the owner. Separately, when activeSaveId is set, after the delta compute persist via the applyEvent pattern: updateSavedSettle
+
+**[state-lifecycle-5] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=True owner=True
+- Fix: Sequence WITH the master merge, not before. Minimum now (in-scope, zero-byte): record in the deferral/master-merge map that this branch uses the client-upsert protocol while the RPC (and likely master's client) uses the atomic protocol, so the merge reconciles one canonical path. Full close (owner-gated, architecture call): route flushWorldPulsePer
+
+**[store-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Move the buildDailyLifeRelationshipMemory await OUT of the synchronous prefix to AFTER the token/loading set(756-765), inside the try alongside loadAiLib, and thread relationshipMemoryContext into generateNarrative's options — matching the pattern requestNarrative/requestProgression already follow (aiLoading stamped synchronously so a second click 
+
+**[store-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Add cultDeitySnapshots to the destructure strip at galleryImportSettlement.js:70 AND the identical scrub at accountImport.js:165. Structural-prevention: extract one shared scrubImportedConfig(config) helper (single writer for the dormancy strip) so a future embed key can't re-open the gap in one path only. Also audit/strip faithProfile (a live proj
+
+**[store-6] → CONFIRMED / final medium**
+- Blast: goldens=False eager=True persist=True owner=False
+- Fix: Add a custom persist `merge` that deep-merges persisted config over defaults — `config: { ...DEFAULT_CONFIG, ...(persisted?.config) }`, same for the four toggle maps — layered on the default top-level spread for other slices, so a returning user's missing keys backfill to the same defaults a fresh user gets. Add an explicit `version` and a no-op `m
+
+**[tests-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Adopt the finding's structural-prevention shape over 8 hand-fixes: a shared helper `requireMigrations(MIG)` that registers ONE unconditional `it('fixture migrations exist')` per suite (hard-failing when any path is stale) and returns allExist, wired into all 8 suites — mirroring creditBalanceIdorGuard:33-38 / migrationSequenceAll:54. Batch as a sin
+
+**[tests-4] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Add an explicit per-test timeout to the seed-sensitivity test (third arg to test(), e.g. 60_000) with the repo-standard "wall-clock false positive, not drift" comment, mirroring generatorGoldenMaster.test.js:117,140. One-line change in one test file; no engine, golden, or config touch. Optionally also record it as a proper one-line deferral entry i
+
+**[worldpulse-core-3] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Expire on DM-visible time, not raw world-ticks. Thread the advance's start tick (intervalStartTick, already known in advanceInterval) into expireStaleActorMajors and only expire proposals whose p.tick predates the current advance's start — so an actor-major surfaced during an advance survives to the panel the DM opens afterward, and the 6-week hold
+
+**[worldpulse-core-6] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Prefer DOCUMENTING the ruling: nature (pestilence front, calamity) acts autonomously and is exempt from the political-autonomy axis — a one-line addition to the §11/infoMode notes and the M11a reconcile comment (whose current ONE-PLAGUE-TRUTH/equivalence framing overstates: it is byte-identical for goldens but changes DM-gating under dm_only). This
+
+**[worldpulse-religion-trade-1] → CONFIRMED / final medium** — ADJUDICATED: real single-projection violation, manifests only on absent/divergent stored temperamentAxis (legacy/custom/edited deities). Fold in the shared peacelike->peaceful TEMPER_POS key miss both lenses found; add the source-scan guard.
+
+**[worldpulse-religion-trade-4] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Bold-but-bounded: blend the earned tier into conversion rank strength on the LAZY contest path only — effective strength = max(DEITY_RANK_STRENGTH[rankAxis], DEITY_RANK_STRENGTH[pantheonTier]) (or a small ±0.1 seat-tier additive), threading the deity's pantheon entry into deityLocalStrength/prevalence/patron-contest and religionLegitimacy. Gate on 
+
+**[worldpulse-religion-trade-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Thread an explicit actorSaveId through candidateBase (default `targetSaveId || settlements.from` for back-compat) and key signedDispositionFactor on it. At the five sites set it to the driving party already in metadata (aggressorSaveId / extractorSaveId / imposerSaveId / supplierSaveId); for cold_war_proxy_conflict the exploiting rival isn't captur
+
+**[worldpulse-religion-trade-6] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=True
+- Fix: Add a relief lane reusing computeSackFoodTransfer with voluntary fractions: on famine/blockade of a settlement holding an allied/patron/vassal tie to a surplus neighbor, emit a bounded relief outcome (donor loses capped months, victim's storageMonths credited via the existing foodStockpileDeltas apply path, capped at granary capacity), stamping the
+
+**[worldpulse-religion-trade-8] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Adopt the finding's preferred shape: let primary_export exhaustibles use the SLOW manual path under a deeper calm gate (reuse the perceivedPressureScore<=0.2 quietRecovery threshold at the 0.02 slow probability) instead of the hard `economicRole!=='primary_export'` exclusion — export demand justifies slower, not never. Update the pin at tierResourc
+
+**[worldpulse-war-1] → PARTIAL / final medium** — ADJUDICATED: besieged:mobilized is a real semantic bug (posture grants siege-grade experience) but rust CAN fire (alert-tick record, read-last/write-next — executed repro). Fix posture!=engagement; expect war-pin shifts, assess.
+
+**[worldpulse-war-5] → CONFIRMED / final medium**
+- Blast: goldens=True eager=True persist=False owner=True
+- Fix: Two-part. (1) Bookkeeping (do now): add a ledger row (§0.6 parking lot or round-21 backlog) capturing the missing non-war lever apply-effects, and correct the stale "the M9b seam" pointer (LEVER_COPY comment + playbook row 59) plus the "✅ M9 COMPLETE" claim so a successor can find the thread. (2) Mechanics (owner-gated wave): wire apply-effects thr
+
+**[worldpulse-war-6] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=True
+- Fix: Implement the de-escalation half with existing levers, gated behind warLayerEnabled: negotiate → a bounded relationship nudge one peace-step toward the mobilizer (a relationship_label_change proposal, or a recentIncidents 'talks' entry relationshipEvolution's drift reads); seek_allies → an information_flow overture + small compatibility nudge towar
+
+**[worldpulse-war-7] → CONFIRMED / final medium**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Mirror occupation.js's prune. In evaluateWarLayer add a pass (before step 0, or a pruneDeployments sibling of pruneFactionStates in the kernel): for each deployment whose TARGET is absent from snapshot.byId, resolve outcome:'withdrawal' through resolvedDeployments (banked deployedPopulation returns via deploymentReturn, conserving population) and r
+
+**[worldpulse-war-8] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Push mirror win deltas, all inside the existing warLayerEnabled gates. Withdrawal/forcedLift: push ONE defender win keyed on targetId OUTSIDE the per-attacker `withdrawn` loop (a coalition break-off is one successful defense, not N — pushing inside the loop over-credits), magnitude ~0.5 scaled by how gutted the withdrawing army came home. Occupatio
+
+**[worldpulse-war-9] → CONFIRMED / final medium**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Smallest coherent fix: at the deploy gate (warDeployment.js:1581) also block when an active occupations[fromId] entry exists, UNLESS the chosen target IS the occupier — keeping the uprising/rebellion path open (and optionally coupling a liberation to the resistance scalar). Add a matching occupied shouldCool trigger in mobilization so an occupied t
+
+**[backend-4] → REFUTED / final low**
+- Blast: goldens=False eager=False persist=False owner=True
+- Corrected: CSP report-only is the deliberate first stage of a documented, best-practice rollout that is already tracked as owner-gated post-merge debt (#3), gated on a production/deploy decision — a sound deferral, not a MEDIUM security defect. "Zero active XSS mitigation" is false: the primary defense (React escaping) plus nosniff and frame-options are activ
+- Fix: Keep the report-only rollout as-is (correct). The only improvement is governance: promote the enforce-flip from post-merge debt #3 to a hard launch-gate checklist item so it can't be forgotten. When the report stream is quiet under real traffic, the mechanical fix is the two-key rename in vercel.json (Content-Security-Policy-Report-Only → Content-S
+
+**[components-dossier-6] → CONFIRMED / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Consume the prop in WorldPulsePanel: `function WorldPulsePanel({ campaign, advancing = false })` and render a slim "Advancing the realm…" banner near the header (the "Pulse skeleton" the hook docstring provisions) when `advancing` is true; the prop is already `phase === 'running'`-only, so it correctly suppresses while paused. Optionally disable th
+
+**[components-dossier-8] → CONFIRMED / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Fix: Wrap the chronicle build in useMemo. Tighten the reviewer's deps: buildChronicleFeed reads only campaignState (eventLog/worldPulse/worldState + canonization reference) and settlement.recentEvents, so key on [liveSaveEntry?.campaignState, rawSettlement?.recentEvents, publicChronicle] rather than the whole rawSettlement. Hoist tabToGroup to module sc
+
+**[data-tables-6] → PARTIAL / final low**
+- Blast: goldens=True eager=False persist=False owner=True
+- Corrected: The priorityCategory drift is real and gate-invisible (an assassins' guild internally classed 'entertainment', a midwife 'magic' — clearly copy-paste runs, not per-entry intent), but its behavioral reach is near-nil, not MEDIUM. The three cited "live consumers" are effectively immune: hasCriminal is saved by the metropolis→city merge (city criminal
+- Fix: Owner-reviewed spot-fix of the implausible runs only: metropolis Criminal→'criminal'; Midwife→'crafts', Village scribe→'government', Wildfowler→'economy'. Batch into a data-hygiene/regen wave (it shifts same-seed goldens; record the one-time shift). To close the gate gap, add a semantic-plausibility pin — at minimum assert that Criminal-grouped ent
+
+**[domain-events-region-4] → PARTIAL / final low**
+- Blast: goldens=True eager=False persist=False owner=False
+- Corrected: The coded gap is real — KILL_LEADER is absent from EVENT_TO_PARTY_KIND (partyEventLinkage.js:31-35), so mapEventToPartyImpact returns null and a party-caused leader-kill never fires recordPartyImpact's remove_npc outcomes (the campaign dominant_npc_removed leadership-void condition, the worldState npcState.removed patch, and immediate party-attribu
+- Fix: Add `KILL_LEADER: { kind: 'remove_npc', targetField: 'npcId' }` to EVENT_TO_PARTY_KIND (remove_npc's defaultMagnitude is already 1.0, fitting a pillar kill) so a party-caused leader-kill also registers the campaign-scale dominant_npc_removed leadership-void condition + party-attributed Wizard News, matching KILL_NPC. One line + a pin asserting mapE
+
+**[domain-events-region-8] → REFUTED / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: Line 274 does hardcode 'trade_partner', but this is cosmetic, not a correctness bug. relationshipDefinition maps the composer's raw 'patron'/'client' to neutral with from=source,to=target — the SAME orientation the hardcode produces. Since the link carries relationshipType=relType (not def.relationshipType) and relationshipChannelBundle derives pat
+- Fix: Optional readability only, not a correctness wave item: replace the def call with literal relationshipFrom: s.id||s.name||'home', relationshipTo: targetId, and add a one-line comment that OPENED_TRADE_ROUTE's composer only emits symmetric or home-role types so source-first is the correct orientation. Do NOT pass relType to relationshipDefinition (i
+
+**[domain-readmodels-4] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: Pestilence has no DEDICATED display read-model selector — but neither do ~10 other spatial movers, including calamity (M11b), embattlement, seaLanes, armyTransit, and the trade movers; only 3 movers have one. The plague front is NOT invisible: it is narrated settlement-by-settlement in the DM wizard-news feed via a dedicated spatially-framed plague
+- Fix: Do not treat as a MEDIUM bug fix. Downgrade to a LOW optional-polish item. If pursued in a legibility wave: add a lazy settlementPestilence.js in the established pattern (getSpatialLedger(worldState,'epidemic'), banded fiction — "plague burns in X, three weeks upriver", care-counterforce phrasing, hasPestilence panel gate, dormant=>[]), reading the
+
+**[generators-pipeline-4] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The read/write key-vocabulary mismatch is real: assembleInstitutions keys off the raw settType sentinel while writers and factionCorrelation use display-tier/all:: keys, so for random/custom the main-assembly category gate disagrees with factionCorrelation (which honors the disable). But the finding misstates the writer and scope: the current Insti
+- Fix: Extract one shared isCategoryEnabled(categoryToggles, settType, resolvedTier, cat) predicate that checks the `${settType}::`, `${resolvedTier}::`, and `all::` prefixes, and use it in both assembleInstitutions.js:208 and factionCorrelation.js:146-149 (single-reader discipline). Reader-side only — byte-safe on default-empty-toggle goldens. Separately
+
+**[generators-pipeline-5] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The lookups.js gap and the unreachable out-of-tier metropolis FORCE path are real: no pre-generation require/force-exclude toggle can target the 24 metropolis-only institutions, and they never appear in InstitutionalGrid or the compendium catalog tab. But the finding materially overstates impact by claiming "no user can view/control" them at any ti
+- Fix: Add 'metropolis' to both tier-list literals in lookups.js (getInstitutionalCatalog 'all' merge and getFullCatalogWithTierMeta), and make getInstitutionalCatalog('metropolis') return mergeCatalogs(city, metropolis), mirroring assembleInstitutions.js:216. Add an inventory-ratchet walker test asserting every institutionalCatalog tier key is reachable 
+
+**[generators-pipeline-7] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The technical behavior is real (explicit route + auto terrain deterministically derives one terrain per route; terrain is not rolled), but it is intended, disclosed design — not a silent medium-severity gap. The dropdown option is named "Auto (from route)," the shipped default (random_trade) already delivers full terrain variety, and all seven terr
+- Fix: Treat as intended, disclosed behavior. If anything: emit a lightweight "terrain derived from route" trace on the explicit-route path so a receipt exists (aligns the trace layer), and optionally sharpen the dropdown copy. Do NOT switch to rolling terrain for explicit routes — that alters disclosed, intended design, shifts same-seed goldens, and is o
+
+**[lib-infra-6] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The "zero consumers / optimization never fires" fact is correct, but the framing (MEDIUM "abandoned before the last mile," pure "dead code that misleads readers") materially overstates it. This is the deliberately-scoped, documented deferral of the last mile of a two-part F42 slice: the sibling targeted-neighbour-query half (supabaseListActiveByNam
+- Fix: Do not wire the grid in this program — per-save hydration for SettlementsPanel's cross-save blob reads is a genuine feature the F42 slice deliberately declined. Record the deferral in a standing ledger (playbook §0.6 / backlog Deferred) as "listMeta = F42 infra, grid adoption deferred, needs hydration — not dead code to re-find," and add the findin
+
+**[lib-infra-8] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=True
+- Corrected: The founder email actually DELIVERED to buyers says "one of the first 30 supporters" — it is rendered by supabase/functions/send-email/index.ts (its own inlined 30-copy, lines 64/131), not by emailTemplates.js. emailTemplates.js's renderTemplate has zero non-test callers, so its "500" text never reaches a user. The stale "500" survives only in that
+- Fix: Retire both stale "500" literals to the canonical 30: emailTemplates.js:50/125 and FounderTile.jsx:78/126, sourcing the number from FOUNDER_SEAT_CAP rather than hardcoding. Extend the parity block in emailTemplates.test.js to also scan client+edge body text for seat-count literals (it only checks keys today — the reason this drifted). Low-risk and 
+
+**[performance-scale-6] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: A committed whole-engine timed soak DOES exist (scripts/audit/whole-world-soak.mjs — 30 years, full_simulation preset, 4 settlements, reports ms), and a committed 9-settlement/30-year in-battery soak exists (entrepots.soak.test.js). What is genuinely missing is narrower than stated: (a) any ASSERTED tick-cost ceiling/trend, (b) any serialized-byte/
+- Fix: Extend the existing scripts/audit/whole-world-soak.mjs rather than build anew: parameterize the fixture up to the 30-settlement max, add a per-year serialized-byte measurement (JSON.stringify(worldState+regionalGraph).length) asserting sublinear growth / a documented ceiling after warm-up, and a wall-time trend assertion. Optionally wire a loose va
+
+**[performance-scale-7] → CONFIRMED / final low**
+- Blast: goldens=True eager=False persist=False owner=False
+- Fix: Split the fix. Byte-safe now: pass the already-ensured beforeGraph/graph into deriveWizardNewsEntriesFromGraphChange (skip the internal double ensureRegionalGraph — confirmed idempotent by execution → byte-neutral), and skip the redundant re-ensure inside createWizardNewsEntryFromImpact when graph is pre-ensured. For settlementChanged: do NOT just 
+
+**[store-5] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The reset gap in setSettlement/clearSettlement is real, but no reachable path today produces the cross-identity leak the finding describes. Two of three setSettlement callers run after a page reload where the store is fresh (these slots aren't persisted); the only mid-session caller ("Apply Saved Configuration & Regenerate") loads the very save Set
+- Fix: Extract hydrateFromSave's session-reset block into one resetSettlementIdentity(state) helper and call it from setSettlement, clearSettlement, and hydrateFromSave (single-writer for identity resets). setSettlement/clearSettlement should reset phase='draft', eventLog=[], canonizedAt=null, locks={}, systemState=null (re-derive on setSettlement), pendi
+
+**[tests-5] → PARTIAL / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The golden's single-seed value snapshot and Overview-only render-leaf are real but narrow gaps. Two material misstatements: (1) the pinned field count is 11, not 19 (SHARED_FIELDS.length=11; the grep-19 conflates the JSDoc `fact:` line + 7 PARITY_EXEMPT waived entries); (2) the "Why" claims the parity contract runs "on one town" and leaves wrong-fi
+- Fix: Frame it honestly as closing the non-Overview render-leaf gap, NOT as covering the wrong-field class (already defended). Add 2-3 tier-diverse seeds (thorp/city/metropolis) to the golden snapshot — net-new snapshot entries, no existing-byte shift — and extend the render-leaf "value reaches the text leaf" assertions to Defense/Resources/Viability/Ser
+
+**[worldpulse-core-4] → PARTIAL / final low**
+- Blast: goldens=True eager=False persist=True owner=True
+- Corrected: The merge-semantics divergence is real and executed-confirmed, but the finding overstates it. (1) It is a sound, documented, owner-gated deferral — TEMPORAL_AUDIT §3c flags the exact line as a semantic tick-identity proxy and parks the bornTick fix in backlog Wave-5 pending an owner-signed golden regen. (2) No constitutional/documented invariant is
+- Fix: Keep the already-planned owner-gated fix: when the bornTick integer stamp lands (backlog Wave-5 piggyback, owner-signed UPDATE_GOLDEN), switch the collision test from createdAt===now to bornTick===tick. Any interim (thread the already-available `tick` param as the collision key, stamp bornTick on fresh in-pass records) equally shifts same-seed gold
+
+**[worldpulse-core-5] → REFUTED / final low**
+- Blast: goldens=False eager=False persist=False owner=False
+- Corrected: The asymmetric guard is benign, not a medium correctness defect. A blocked deployment re-seed always implies the besieger already holds an army (the guard triggers only when `deployments[besieger]` exists), so the front is never "phantom." The front re-mint is idempotent by channel id, so same-target cases create no duplicate; a mismatched/deployme
+- Fix: Optional low-priority tidy, not a bug fix. If touched during other war-layer work, move the `if (pay.warFront)` mint inside the deployment guard so the two-part re-mint is syntactically atomic, and drop a receipt on the blocked branch ("declaration lapsed — the army was already committed"). This is byte-neutral on the golden/happy path (guard passe
+
+**[worldpulse-religion-trade-3] → PARTIAL / final low**
+- Blast: goldens=True eager=False persist=False owner=True
+- Corrected: The two fields are genuinely unconsumed, but this is a deliberate, in-code-documented build-ahead — not abandoned dead code. The pure stance model was built whole and tuned in W-F2; deityStanceLane.js (W-F4b) explicitly defers "the relationship-WEIGHT coupling" (aggression → hostility/escalation tilt; treatyDurability → pactStrength decay) as the u
+- Fix: Do NOT silently wire (owner-gated new-capability + deferred-wave resurrection) or silently excise owner-tuned model fields. Formalize the deferral: add an explicit entry to the current Phase 5.5 ledger (playbook §0.6/§0.8 or round-21 owner-queue) — "Phase-4 W-F4 relationship-WEIGHT coupling deferred: aggression → inter-deity hostility/escalation ti
+
+**[worldpulse-religion-trade-7] → REFUTED / final low**
+- Blast: goldens=True eager=False persist=False owner=True
+- Corrected: The betrayal genuinely does not touch the relationship edge, but this is a deliberate, soundly-reasoned, explicitly-recorded deferral, not an undocumented gap. The whole W-F4b stance lane "stops at legible events, never relationship weights" (module header) and the omitted coupling is parked as "alliance weight-coupling (future)" in commit 8bbb1688
+- Fix: No fix required now — sound, recorded deferral. If ever pursued, it is the owner-gated "alliance weight-coupling" wave: attach a bounded relationshipPatch (trust−, pactStrength−, resentment+) keyed on the edge's relationshipKey to betrayalOutcome via existing applyRelationshipPatch, and/or a labelProposal (allied→cold_war) gated on repeated betraya
+
+**[backend-2] → REFUTED / final none**
+- Blast: goldens=False eager=False persist=True owner=True
+- Corrected: The facts are correct (12 pending migrations; gate warns), but this is the intended, documented, test-enforced pre-deploy state, not a defect. `pending` (repo ahead of prod) is the DOCUMENTED-NORMAL commit→deploy window; the gate script, the applied-head.json note, and migrationAppliedHead.test.js all deliberately surface it as a non-fatal warning,
+- Fix: No code change. At the owner-gated launch/deploy: run `supabase db push` (applies all 118-129 atomically), confirm currency via the SUPABASE_MIGRATION_HEAD deploy probe (already fail-closed, exit 1 on drift), then bump appliedHead to 129 in the same PR — exactly the procedure applied-head.json and DEPLOY.md already document. Do NOT adopt the findin
+
+**[spatial-engine-1] → REFUTED-AS-DEFECT / final none** — ADJUDICATED: deliberate constitutional dormancy + recorded owner-gated STOP-AND-REPORT. Moves to the OWNER QUEUE (preset flip, +20B, golden-shift on that preset) — not an implementer fix. Doc staleness already fixed by W-DOCS-1.
 
