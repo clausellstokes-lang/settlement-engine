@@ -12,7 +12,7 @@
  * (3) the simultaneous drain at advanceCampaignWorld, including the crisis-twin
  * injection that relocates from author time to tick time.
  */
-import { beforeEach, describe, test, expect, vi } from 'vitest';
+import { beforeAll, beforeEach, describe, test, expect, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -48,6 +48,7 @@ import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { createCampaignRegionalSlice } from '../../src/store/campaignRegionalSlice.js';
 import { createCampaignWorldPulseSlice } from '../../src/store/campaignWorldPulseSlice.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { edgeIdFor } from '../../src/domain/region/graph.js';
 import { drainQueuedEvents } from '../../src/domain/events/drainQueuedEvents.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
@@ -395,5 +396,118 @@ describe('campaign-clock: Phase C review-fix regressions', () => {
     const active = store.getState().savedSettlements.find(s => s.id === 'ashford');
     const bare = deriveSystemState(active.settlement);
     expect(active.campaignState.systemState.externalThreat.value).toBe(bare.externalThreat.value);
+  });
+});
+
+// ── Lane-2 drain-path parity (domain-events-region-1 twin) ───────────────────
+// The immediate path (settlementSlice.rippleEventThroughWorld) ripples a NON-party
+// DM relationship verb onto the campaign's pulse edge the instant it applies. A
+// clock-bound member's identical verb QUEUES and must ripple at the tick, through
+// the SAME applier — same canonical edge minting (edgeIdFor), same lastCanonEventId
+// supersession stamp, same orientation. These pin the drained twin.
+describe('campaign-clock: drain-path parity for canon relationship verbs (Lane-2 twin)', () => {
+  // The forward ripple awaits the lazy world-engine chunk; warm it once so the
+  // immediate-path comparison's fire-and-forget lands fast + deterministically.
+  beforeAll(async () => {
+    installLocalStorage();
+    const warm = makeStore();
+    await warm.getState().recordCanonRelationshipRipple('no-such-campaign', {
+      event: { id: 'warm', type: 'OPENED_TRADE_ROUTE', targetId: 'x' }, homeId: 'y',
+    });
+  });
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  const brokeredAlliance = (id, targetId) => ({ id, type: 'BROKERED_ALLIANCE', targetId, payload: {}, cause: 'player_action' });
+  const ALLY_KEY = edgeIdFor('ashford', 'brookmere'); // the canonical derivation id
+
+  async function flushUntil(pred, timeoutMs = 5000) {
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      if (pred()) return;
+      await new Promise(r => setTimeout(r, 10));
+    }
+  }
+
+  test('a queued BROKERED_ALLIANCE drains into the canonical pulse edge, stamped for supersession', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    store.getState().applyEvent(brokeredAlliance('ev-ally', 'brookmere'));
+    // Queued — the ripple has NOT fired yet (the immediate path would have by now).
+    expect(pendingOf(store)).toHaveLength(1);
+    expect(worldOf(store).relationshipStates || {}).toEqual({});
+
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+
+    const rel = worldOf(store).relationshipStates?.[ALLY_KEY];
+    expect(rel).toBeTruthy();
+    expect(rel.relationshipType).toBe('allied');
+    expect(rel.lastCanonEventId).toBe('ev-ally'); // the supersession stamp landed
+    // The canonical graph edge was minted (survives the tick, keyed by edgeIdFor).
+    expect((store.getState().campaigns[0].regionalGraph.edges || []).some(e => e.id === ALLY_KEY)).toBe(true);
+  });
+
+  test('PARITY: a drained verb yields the same relationship content as the immediate path', async () => {
+    const stripVolatile = (rel) => {
+      // The WHEN fields legitimately differ (immediate fires at author-time/tick 0,
+      // the drain at the tick) — compare the WHAT (type + affect + supersession).
+      const { updatedAt, lastTransitionTick, recentIncidents, ...stable } = rel;
+      return stable;
+    };
+
+    // IMMEDIATE: world NOT canonized ⇒ ashford non-clock-bound ⇒ ripples at author
+    // time (fire-and-forget — flush it).
+    const immediate = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: false });
+    immediate.getState().applyEvent(brokeredAlliance('ev-par', 'brookmere'));
+    await flushUntil(() => immediate.getState().campaigns[0].worldState.relationshipStates?.[ALLY_KEY]);
+    const immRel = immediate.getState().campaigns[0].worldState.relationshipStates[ALLY_KEY];
+
+    // DRAIN: world canonized ⇒ ashford clock-bound ⇒ queues, ripples at the tick
+    // through the SAME applier (awaited inside advanceCampaignWorld).
+    const drain = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    drain.getState().applyEvent(brokeredAlliance('ev-par', 'brookmere'));
+    await drain.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    const drainRel = drain.getState().campaigns[0].worldState.relationshipStates[ALLY_KEY];
+
+    expect(drainRel).toBeTruthy();
+    expect(immRel).toBeTruthy();
+    expect(stripVolatile(drainRel)).toEqual(stripVolatile(immRel));
+    expect(drainRel.lastCanonEventId).toBe('ev-par');
+    expect(immRel.lastCanonEventId).toBe('ev-par');
+  });
+
+  test('DETERMINISM (pinNow seam): two drains with the same pinned now are byte-identical, updatedAt included', async () => {
+    const runOnce = async () => {
+      const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+      store.getState().applyEvent(brokeredAlliance('ev-det', 'brookmere'));
+      await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+      return store.getState().campaigns[0].worldState.relationshipStates?.[ALLY_KEY];
+    };
+    const a = await runOnce();
+    const b = await runOnce();
+    expect(a).toBeTruthy();
+    // The advance's pinned `now` threaded through the seam IS the edge's updatedAt —
+    // NOT a wall-clock read. Absent the seam this would be a per-run wall stamp.
+    expect(a.updatedAt).toBe('2026-02-01T00:00:00.000Z');
+    // Byte-identical INCLUDING updatedAt (the pinNow collapse makes the drained
+    // ripple fully deterministic — no field needs stripping).
+    expect(a).toEqual(b);
+  });
+
+  test('NEGATIVE CONTROL: a drained non-relationship event mints no pulse relationship edge', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    // DEPLETE_RESOURCE carries no relationship semantics ⇒ the gate surfaces nothing.
+    store.getState().applyEvent({ id: 'ev-neg', type: 'DEPLETE_RESOURCE', targetId: 'iron ore', payload: {}, cause: 'player_action' });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    expect(worldOf(store).relationshipStates || {}).toEqual({});
+  });
+
+  test('NEGATIVE CONTROL: a party-caused relationship verb does NOT drain through the non-party path', async () => {
+    const store = seed(makeStore(), { ids: ['ashford', 'brookmere'], worldCanon: true });
+    // partyCaused ⇒ excluded from the non-party canon gate (it is Lane-1's territory).
+    store.getState().queueSettlementEvent('ashford', { id: 'ev-party', type: 'BROKERED_ALLIANCE', targetId: 'brookmere', payload: {}, partyCaused: true, cause: 'player_action' });
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+    expect(worldOf(store).relationshipStates?.[ALLY_KEY]).toBeUndefined();
   });
 });

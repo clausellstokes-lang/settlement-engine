@@ -23,6 +23,12 @@
  * the sim (keeping the lazy chunking + the mockability of the kernel intact).
  */
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+// Lane-2 drain-path parity (domain-events-region-1 twin): the LIGHT eager-safe gate
+// deciding whether a queued event is a NON-party canon relationship verb — the SAME
+// gate the immediate path (settlementSlice.rippleEventThroughWorld) uses, so the two
+// paths surface identical events (single source, no drift). Imported into this LAZY
+// body only, so it adds nothing to the first-paint closure.
+import { canonRelationshipTargetFor } from '../domain/events/canonRelationshipLinkage.js';
 import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
 import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import {
@@ -134,6 +140,10 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
      *  replayed through recordPartyImpact AFTER the pulse (mirroring the
      *  immediate path's rippleEventThroughWorld party branch). */
     let drainedPartyImpacts = [];
+    /** NON-party canon relationship verbs surfaced from the pre-drain queue —
+     *  replayed through recordCanonRelationshipRipple AFTER the pulse (the Lane-2
+     *  drain twin, mirroring the immediate path's relationship-ripple branch). */
+    let drainedCanonRel = /** @type {Array<{ event: any, homeId: string }>} */ ([]);
     const now = options.now || new Date().toISOString();
 
     // ── Phase 1: snapshot + drain, then lift the (plain, already-drained)
@@ -172,6 +182,15 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
       // this tick and the pulse simulates the post-intervention world. The
       // augmented worldState is written onto the draft campaign so the pulse's
       // input clone carries the injected stressors + the cleared queue.
+      // Lane-2 drain twin: capture the NON-party canon relationship verbs from the
+      // queue BEFORE the drain clears it, lifted to plain objects (the queue items
+      // are draft proxies Immer revokes when this producer returns). The immediate
+      // path ripples these the instant they apply; a clock-bound member's identical
+      // verb must ripple at the tick, through the SAME applier (replayed below).
+      drainedCanonRel = (worldState.pendingEvents || [])
+        .filter((/** @type {any} */ item) => item && item.event && !item.event.partyCaused
+          && canonRelationshipTargetFor(item.event, item.saveId))
+        .map((/** @type {any} */ item) => ({ event: cloneJson(item.event), homeId: String(item.saveId) }));
       const drained = drainCampaignQueueIntoState(state, c, worldState, now);
       c.worldState = drained.worldState;
       drainedPartyImpacts = drained.partyImpacts || [];
@@ -350,6 +369,24 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
         && typeof get().recordPartyImpact === 'function') {
       for (const pi of drainedPartyImpacts) {
         try { await get().recordPartyImpact(campaignId, pi.action); } catch { /* best-effort */ }
+      }
+    }
+    // Lane-2 drain-path parity (domain-events-region-1 twin): replay the queued
+    // NON-party canon relationship verbs through the SAME applier the immediate path
+    // uses (recordCanonRelationshipRipple → applyCanonRelationshipEvent), so a DM
+    // relationship verb authored on a clock-bound member lands the campaign's pulse
+    // edge at the tick EXACTLY as an immediate one does — same canonical edge minting
+    // (edgeIdFor), same lastCanonEventId supersession stamp, same orientation
+    // normalization. The advance's pinned `now` is threaded (the pinNow seam) so the
+    // drained ripple is deterministic + tick-simultaneous. Undo honesty comes from
+    // the pre-pulse snapshot (undoLastPulse restores worldState + regionalGraph
+    // wholesale), which predates this replay — identical to how the party-impact
+    // replay above is reverted. Best-effort + orphan-guarded (a queued verb undone
+    // before its replay is skipped by recordCanonRelationshipRipple's log check).
+    if (result && result.ok !== false && drainedCanonRel.length
+        && typeof get().recordCanonRelationshipRipple === 'function') {
+      for (const cr of drainedCanonRel) {
+        try { await get().recordCanonRelationshipRipple(campaignId, { ...cr, now }); } catch { /* best-effort */ }
       }
     }
     return result;

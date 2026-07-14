@@ -645,9 +645,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    * it.
    *
    * @param {string} campaignId
-   * @param {{ event?: any, homeId?: string|number }} [args]
+   * @param {{ event?: any, homeId?: string|number, now?: string|null }} [args]
+   *   `now` is the pinNow seam: the drain-path parity replay threads the advance's
+   *   pinned tick clock so a drained relationship verb lands deterministically;
+   *   the immediate path omits it (boundary self-mint).
    */
-  recordCanonRelationshipRipple: async (campaignId, { event, homeId } = {}) => {
+  recordCanonRelationshipRipple: async (campaignId, { event, homeId, now } = {}) => {
     if (!event || homeId == null || homeId === '') return null;
     // Parked-pause guard (mirrors recordPartyImpact), kept as the SYNC PREFIX
     // (FP-2a §0.7.3): a relationship ripple recorded while the interval is paused
@@ -659,7 +662,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       return { ok: false, reason: 'advance_paused' };
     }
     const { runRecordCanonRelationshipRipple } = await import('./campaignCanonRelationshipSession.js');
-    return runRecordCanonRelationshipRipple({ set, campaignId, event, homeId });
+    return runRecordCanonRelationshipRipple({ set, campaignId, event, homeId, now });
   },
 
   /**
@@ -679,8 +682,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
    *
    * @param {string} campaignId
    * @param {{ key?: string, from?: unknown, to?: unknown, priorRelState?: unknown, priorEdgeType?: string|null }} [snapshot]
+   * @param {{ now?: string|null }} [options]  pinNow seam (mirrors the forward);
+   *   the undo caller omits it (boundary self-mint).
    */
-  reverseCanonRelationshipRipple: async (campaignId, snapshot = {}) => {
+  reverseCanonRelationshipRipple: async (campaignId, snapshot = {}, { now } = {}) => {
     if (!snapshot?.key) return null;
     // Advance-in-flight guard (store-2), kept as the SYNC PREFIX: a running
     // multi-tick advance replaces worldState/regionalGraph wholesale, so an undo
@@ -688,7 +693,7 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // the SAME lazy sidecar as the forward ripple (dep-import pattern).
     if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
     const { runReverseCanonRelationshipRipple } = await import('./campaignCanonRelationshipSession.js');
-    return runReverseCanonRelationshipRipple({ set, campaignId, snapshot });
+    return runReverseCanonRelationshipRipple({ set, campaignId, snapshot, now });
   },
 
   dismissWorldPulseProposal: async (campaignId, proposalId) => {
