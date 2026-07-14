@@ -38,6 +38,12 @@ import {
 // mint for the same pair (edge.<slug>.<slug>), so a ripple-created pulse edge
 // survives graph re-derivation instead of orphaning under a bespoke key.
 import { edgeIdFor } from '../region/graph.js';
+// The house deep-clone seam. clone.js is a ZERO-IMPORT leaf (structuredClone +
+// a DataCloneError-only JSON fallback, no deps), and it is ALREADY in the first-
+// paint closure (store/index.js → mapSlice.js → domain/clone.js), so importing it
+// into this eager-safe leaf adds NO new module to the entry static closure — the
+// zero-heavy-import invariant holds.
+import { deepClone } from '../clone.js';
 
 // Loose shapes at this seam — the regional graph, event, and campaign objects are
 // schemaless open records elsewhere. Typed structurally with `unknown` for the
@@ -176,7 +182,7 @@ export function captureCanonRelationshipUndo(campaign, event, homeId) {
     to: target.targetId,
     eventId: event?.id != null ? String(event.id) : null,
     edgeCreated: !edge,
-    priorRelState: priorRel != null ? JSON.parse(JSON.stringify(priorRel)) : null,
+    priorRelState: priorRel != null ? deepClone(priorRel) : null,
     priorEdgeType,
   };
 }

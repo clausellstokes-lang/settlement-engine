@@ -25,6 +25,7 @@
  */
 
 import { ensureWorldState } from './worldState.js';
+import { deepClone } from '../clone.js';
 import {
   ensureRelationshipState, normalizeRelationshipEdge, relationshipKeyFromEdge, clamp01,
 } from './relationshipState.js';
@@ -291,7 +292,7 @@ export function reverseCanonRelationshipEvent({ campaign, snapshot, now = null }
   // Restore the pre-ripple relationshipState VERBATIM (delete when created).
   const relationshipStates = { ...(worldState.relationshipStates || {}) };
   if (priorRelState == null) delete relationshipStates[key];
-  else relationshipStates[key] = JSON.parse(JSON.stringify(priorRelState));
+  else relationshipStates[key] = deepClone(priorRelState);
 
   let graph = ensureRegionalGraph(campaign?.regionalGraph, { now: nowArg });
   if (snapshot?.edgeCreated) {

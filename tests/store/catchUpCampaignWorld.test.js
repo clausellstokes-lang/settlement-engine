@@ -15,7 +15,7 @@
  *   • DORMANCY: a dm_advanced campaign is not_living (no catch-up) and its advance
  *     never stamps the cursor (byte-identical to pre-M10b).
  */
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 
@@ -337,10 +337,17 @@ function seedLivingPauseFixture(store, { progression = 'living' } = {}) {
     }));
     state.campaigns = [{
       id: 'camp-1', name: 'Realm', settlementIds: ['a', 'b', 'c'],
+      // Thread a PINNED `now` into the seed (the documented ensureRegionalGraph
+      // determinism-input discipline: graph.js:182 stamps edge.updatedAt with
+      // `edge.updatedAt || now || nowIso()`, so an un-pinned seed mints wall-clock
+      // edge stamps). Without this, two stores seeded milliseconds apart get
+      // DIFFERENT edge.updatedAt values that survive verbatim into the live graph
+      // AND worldState.pausedAdvance.preSnapshot.regionalGraph — flaking the
+      // byte-identity determinism assertion below under gate load.
       regionalGraph: ensureRegionalGraph({ edges: [
         { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'rival' },
         { id: 'edge.b.c', from: 'b', to: 'c', relationshipType: 'hostile' },
-      ] }),
+      ] }, { now: '2026-01-01T00:00:00.000Z' }),
       wizardNews: { currentTick: 0, entries: [] },
       worldState: {
         rngSeed: 'pause-store-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z',
@@ -352,7 +359,19 @@ function seedLivingPauseFixture(store, { progression = 'living' } = {}) {
 }
 
 describe('M10b LIVING pause-on-major during catch-up', () => {
-  beforeEach(() => { installLocalStorage(); multiTickValue = true; });
+  beforeEach(() => {
+    installLocalStorage();
+    multiTickValue = true;
+    // Determinism harden (GATE-FIX): time is a DECLARED input of the byte-identity
+    // determinism claim below. Freeze ONLY `Date` (toFake:['Date'] leaves
+    // setTimeout/microtasks REAL, so the awaited multi-tick advance chain is
+    // unaffected) so no incidental wall-clock stamp can differ between two runs
+    // milliseconds apart under gate load. The seed already pins its graph `now`;
+    // this belt-and-suspenders guarantees NO other stray `new Date()` can flake it.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-01-01T00:00:00.000Z'));
+  });
+  afterEach(() => { vi.useRealTimers(); });
 
   test('LIVING catch-up PAUSES on a surfacing major — partial catch-up, proposals queued NOT resolved', async () => {
     const store = makeStore();
