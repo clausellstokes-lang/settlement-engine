@@ -124,3 +124,59 @@ Engine-coupled events (treaty rates, governor deferrals) ship WITH their engines
 their rows at birth — the registration-walker idiom extends: a new drama engine must declare its
 telemetry rows or document exemption). The sellable pack's first quarterly cut: after 90 days of
 v2 data post-launch.
+
+## 9. THE INTENT-ALIGNMENT CORPUS (owner directive: match conversational meaning to what users
+## want, and train the compiler on how to use OUR engineering)
+The corpus's unit is not the prompt — it is the ALIGNMENT TRIPLE: what the human MEANT, what the
+compiler DID, and what the engine COULD HAVE DONE. Captured per Surveyor interaction (plane-2
+consent, off-by-default, sanitized slices):
+- UTTERANCE (sanitized) → the compiler's LABELED INTERPRETATION (required/inferred/optional/
+  uncertain/protected) → the OP PLAN → the human's CORRECTIONS → the accepted plan → 7/30/90-day
+  retention of the result.
+- **CORRECTION TYPOLOGY** (the interpretability key — every correction is classified): misread
+  requirement (heard the words wrong) / wrong mechanism (right goal, wrong engine primitive) /
+  right mechanism, wrong magnitude (dial error) / over-inference (did more than asked) /
+  under-inference (missed a necessary implication) / protected-constraint graze. The typology
+  distribution IS the compiler's report card per stage, and each class trains a different fix.
+- **THE ENGINEERING MAP** (the "how to use our engineering" half): every accepted plan records
+  intent-class → engine-primitive(s) used (which ops, flags, constants realized it). Aggregated,
+  this becomes the INTENT→PRIMITIVE ATLAS — the empirical dictionary of how human worldbuilding
+  language maps onto THIS engine's capabilities. It serves three masters: compiler training
+  (few-shot/fine-tune substrate), documentation (the atlas IS the Surveyor cookbook), and
+  ENGINE ROADMAPPING — intents that repeatedly map to NO primitive (the compiler's honest
+  "unsupported" confessions, §AI-4) are a ranked backlog of missing mechanics, straight from
+  the market's mouth. Manual users feed the same atlas: when many users respond to the same
+  situation with the same hand-built op cluster, that cluster is a candidate macro/primitive.
+- Eval discipline per DESIGN_AI_CONTROL_SURFACE §34: splits by campaign/user, never by prompt.
+
+## 10. THE AUTONOMOUS TUNING LOOP (owner directive: AI auto-tunes weekly, without the owner)
+YES — inside the trust model, with a hard two-lane split. The loop (a scheduled weekly agent):
+1. INGEST: the week's rollups — live distributions vs design envelopes, governor deferral rates,
+   approval-friction rates, envelope-violation sentinels.
+2. DIAGNOSE: rank divergences (a constant whose live distribution sits outside its design
+   envelope across many campaigns is a tuning candidate; receipts cite the rollup rows).
+3. EXPERIMENT: candidate constant nudges run against the DETERMINISTIC SOAK BATTERY in sandbox
+   (never a live world — the data-endogeneity law §7 is absolute): full gate + envelope suites +
+   the cacophony soak on the candidate values.
+4. SHIP, two lanes:
+   - **LANE A — AUTO-APPLY (pre-ratified)**: constants the owner has marked `autoTunable` with
+     a RANGE, a MAX-STEP-PER-WEEK, and REQUIRED-GREEN envelopes. Within those rails the agent
+     commits the nudge itself (branch + full gate + auto-merge on green), with a receipt
+     ("famine incidence ran 8% over envelope across 214 campaigns; FAMINE_PRESSURE_K 0.42→0.40,
+     max step 0.02, soak green"). Bounded, monotone-stepped, reversible, receipted — the ratchet
+     philosophy applied to tuning.
+   - **LANE B — PROPOSAL-ONLY (everything else)**: any golden-shifting constant, any structural
+     change, anything outside rails, or any change to the rails themselves → a tuning-proposal
+     branch + a one-page report queued for one-click owner review. GOLDEN LAW UNCHANGED: no
+     golden regenerates without the owner's signature, ever — the agent may PREPARE the regen
+     evidence, never apply it.
+5. REPORT: the weekly WORLD HEALTH REPORT regardless of action — distributions vs envelopes,
+   what auto-applied, what awaits, what's drifting slowly. Silence is never ambiguous.
+MECHANISM: a scheduled cloud routine (the existing scheduled-agent machinery — one command to
+create when the layer ships) running the Fable/Opus split: the routine diagnoses + proposes;
+implementer agents execute lane-A commits under the full gate. GUARDS: the autoTunable registry
+is itself walker-tested (a constant cannot become auto-tunable without range+step+envelope
+declared); lane-A total weekly drift is capped realm-wide; three consecutive weeks of same-
+direction lane-A steps on one constant force-escalates it to lane B (a trend that persistent is
+a design question, not a nudge). SEQUENCING: needs Analytics v2 + E0's envelopes live; the
+routine is created at launch+2 weeks (first meaningful data), owner rails ratified once at setup.
