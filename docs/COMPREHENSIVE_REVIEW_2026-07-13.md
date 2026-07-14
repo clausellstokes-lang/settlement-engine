@@ -3,13 +3,45 @@
 ### Fable 5 (surveyor/architect) synthesizing 20 Fable survey agents · 9.4M survey tokens · 1,837 tool uses
 ### Baseline: branch review-fixes-2026-07-08 @ 62c81a0c (M1–M11 ladder complete), full gate GREEN (8,348/8,348; verify:dist 108/108)
 
-**Coverage:** 17 of 18 subsystem slices + 3 of 10 dimension reviews landed before the session-limit
-window cut the remaining 8 (build-tooling-docs + 7 dimensions: sim-logic-counterparts,
-determinism-constitution, security-privacy, code-quality, test-quality, docs-knowledge,
-content-immersion — queued for re-dispatch after the 7:40pm ET reset; see §8). 208 findings:
-**0 critical / 44 high / 85 medium / 79 low**, 190 tagged confirmed-with-evidence by the surveyors.
-All verdicts below are surveyor-evidenced but PRE-VERIFICATION — Phase V (Opus adversarial
-verification) rules on each before any fix ships.
+**Coverage: COMPLETE — 28/28 agents** (round 1: 20 before the session-limit cut; round 2: the 8
+re-dispatched slices landed same evening — registers for both rounds below). **271 findings:
+0 critical / 57 high / 121 medium / 101 low.** All verdicts are surveyor-evidenced but
+PRE-VERIFICATION — Phase V (Opus adversarial verification) rules on each before any fix ships.
+
+**§1.1 ROUND-2 DELTA (the 8 late slices; the synthesis below already anticipated most of it):**
+- **security-privacy: A+ — the strongest slice.** 50-table RLS census complete; zero missing
+  search_path pins net-current; DM-truth seam defended in depth with client+server twins and
+  drift tests; money paths model-grade. Raises the security posture above §2's implicit read.
+  (The §6.1 deploy-lag alarm stands — enforcement is only as live as the applied migrations.)
+- **sim-logic-counterparts: B+ — the mechanic matrix confirms §3 wholesale.** PRESENT-and-two-way:
+  war↔withdrawal/exhaustion/ceiling, siege↔relief, occupation↔resistance/liberation,
+  plague↔care/recovery-floor, corruption↔exposure, conversion↔revival, boom↔bust,
+  embattlement↔pacification. ABSENT/dead: calamity gate (no writer), all four plague couplings,
+  retreat, umbilical, lever effects, benevolent famine relief, regional recovery. NEW sharp fact:
+  **dramatic_campaign lights ZERO drama systems** (OPEN + intensity only). Stasis is preset-honesty
+  + dead seams, not engine architecture.
+- **code-quality: A− with one new HIGH:** the **entity-ref half-merge** — generate-narrative
+  (server) injects ⟦entity:id|name⟧ tokens into thesis/notes/NPC goals while the client renderers
+  (ProseParagraph/ProseText) exist only on the master lineage → paid-surface token leak on a
+  deploy-order accident, and a master-merge landmine beyond the mapped worldPulse 3-way. Plus:
+  ~30 divergent clamp copies, 8 slugify variants, ~12-file orphan census, no size ratchet on the
+  domain layer.
+- **content-immersion: B+:** player-facing rumor fiction renders raw engine tokens ("word of
+  strategy deploy"); the crier proclaims plague arrivals as trade news; namingData contamination
+  ("Kayla", "Gemini" as Mesoamerican women); plague can never rank MAJOR news while grain cascades
+  always do. The connective tissue speaks engine between diegetic headline and crier quote.
+- **determinism-constitution: A−:** ZERO purity violations across the entire M1–M11 ladder
+  (systematic greps + enclosing-scope reads); independently re-confirmed the M10b cursor bug; the
+  verify:dist anti-vacuity guard **exists on the master lineage and was lost in reconciliation**;
+  src/workers sits outside the purity lint walls.
+- **test-quality / build-tooling-docs / docs-knowledge (A−/A−/B+):** VERIFY_DIST vacuity now
+  triple-confirmed; four spatial goldens self-mint on missing fixtures; M10b 'living' mode and the
+  on-open trigger untested; no two-mover composition test anywhere; check-domain-strict passes
+  green when tsc fails to run (executed control); sf-bridge.js (1,205 lines incl. the spatial
+  capture seam) outside every gate; the STATE LEDGER contradicts git truth (M11a/M11b unrowed,
+  "foreign WIP" note on committed code); ARCHITECTURE.md has zero mentions of the spatial engine;
+  **playbook §0.8 and the round-21 plan double-allocate the same 1,092B headroom** (W5 ~890B +
+  W2 +363B both promised out of it).
 
 ---
 
@@ -223,14 +255,14 @@ math. The boundaries the owner drew are boundaries the code actually has.
   goldens (owner-signed regen); pglite existence asserts; metronome-class lint; config-seam
   contract test; stress-type registration manifest.
 
-## 8. RE-DISPATCH QUEUE (the 8 limit-killed slices)
+## 8. RE-DISPATCH QUEUE — ✅ COMPLETE (2026-07-13 evening)
 
-build-tooling-docs (subsystem; StructuredOutput cap) + dimensions: sim-logic-counterparts,
-determinism-constitution, security-privacy, code-quality, test-quality, docs-knowledge,
-content-immersion. Re-dispatch after the 7:40pm ET session-limit reset; their findings append to
-the register below and feed Phase V like the rest. The synthesis above already covers their
-territory partially via subsystem overlap (e.g., backend RLS census, per-slice counterpart
-audits) — expect refinement, not reversal.
+All 8 landed (see §1.1 delta + the Round-2 register at the bottom). As predicted: refinement, not
+reversal — grades and themes held; the new material is the entity-ref half-merge, the
+dramatic_campaign zero-drama fact, the display-register token leaks, and the doc-drift census.
+Doc-truth findings (ledger rows, stale budget lines, ARCHITECTURE/CONTRIBUTING staleness,
+double-allocated headroom) are manager-verified directly rather than sent to Opus; code findings
+from round 2 get the same two-lens/one-lens Opus verification as round 1.
 
 ---
 
@@ -1753,3 +1785,531 @@ audits) — expect refinement, not reversal.
 
 
 TOTAL FINDINGS: 208
+
+
+---
+
+# THE FINDINGS REGISTER — ROUND 2 (the 8 re-dispatched slices; 71 findings)
+
+### Slice: sim-logic-counterparts (grade B+)
+
+**[sim-logic-counterparts-1] HIGH / confirmed / KNOWN-DEFERRED — M11b calamity can never fire: disastersEnabled has no writer — no preset, no UI, no default**
+- Where: `src/domain/spatial/calamity.js:125` | Category: sim-logic-gap
+- Evidence: calamityEnabled: `return !!(rules && typeof rules === 'object' && rules.disastersEnabled === true);` — repo-wide grep finds `disastersEnabled` only in calamity.js, a calamityKernel.js comment, and a pulseKernel.js comment. simulationRules.js full_simulation preset sets worldProgression/commodityFlowEnabled/allyIntelSharingEnabled but not disastersEnabled; grep of src/**/*.jsx finds no UI writer.
+- Why: The final mover of the M1-M11 ladder — a complete, well-braked disaster system with a 30/30 test suite — is unreachable in the shipped product. No campaign, including Full Simulation ('everything, honestly' per the preset comment), can ever see a calamity. The M11b spec (playbook PART 7) required 'ON in dramatic/full-sim presets'. Ruins-as-artifacts (backlog) also depends on strikes actually occurring.
+- Fix shape: Owner one-liner per the M11b commit's own stop-and-report: disastersEnabled:true in the full_simulation (and arguably dramatic_campaign) preset shape — measured +20B eager, fits the budget. Queue it in §0.6/owner-decision queue where it can actually be found (today it lives only in commit 62c81a0c's message).
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-2] HIGH / confirmed / KNOWN-DEFERRED — M11a plague couplings entirely unwired: armyPlagueHazard/armyContraction/pestilenceLevel/pestilenceTemplePulse have zero consumers and stressorDanger has no plague term — the quarantine dilemma cannot emerge**
+- Where: `src/domain/spatial/dispatchEV.js:169` | Category: dead-seam
+- Evidence: stressorDanger: `const siege = stressor.besieged ? T.DANGER_SIEGE : 0; const occ = occupationDangerTerm(...); return clamp01(Math.max(siege, occ));` — no plague term. dispatchEV.js:41: '⚠️ M11a plugs PLAGUE into stressorDanger… This module does NOT depend on M11a (unbuilt).' Grep: armyPlagueHazard/armyContraction/pestilenceLevel/pestilenceTemplePulse have no callers outside pestilence.js.
+- Why: The plague travels (fronts, onset, care, recovery all work) but nothing in the world reacts to it spatially: caravans read a plagued destination as danger 0, armies neither avoid nor contract nor carry it, routes don't re-score around it, and the round-22.1 trade refusal is unbuilt. The M11a spec's headline emergences — 'movers re-route around plagued hubs → isolation → M2 supply risk', 'quarantines CREATE their blockade-runners', 'armies avoid + contract + carry' (its own soak criterion) — are all structurally impossible. Commit 82ad676b defers the army mutation + trade refusal 'logged in the parking-lot / deferral ledger', but no such row exists in §0.6/§0.0.2/round-21 plan (grep-verified), and the dispatchEV plague-deterrent term is not covered by even that commit-message deferral — a dropped thread, not a recorded one.
+- Fix shape: Three small passes using the already-built, already-tested primitives: (1) add a pestilenceLevel term to stressorDanger (the seam is explicitly 'a new max() argument'); (2) fold armyPlagueHazard into march/engagement scoring in armyTransitKernel and wire armyContraction + vector-carry as the fenced byte-gated pass the commit promised (re-verify the 6 siege pins); (3) write the deferral rows into §0.6 NOW regardless.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-3] HIGH / confirmed — Field-battle RETREAT is dead code: the loser never retreats, so hostile armies with overlapping paths re-fight every tick**
+- Where: `src/domain/worldPulse/armyTransitKernel.js:220` | Category: sim-logic-gap
+- Evidence: advanceArmyTransit assigns only ARMY_ROLES.MARCH/REINFORCEMENT (lines 188, 200) and after a battle merely writes mauled strengths back; ARMY_ROLES.RETREAT (armyTransit.js:103) and retreatRoute (armyTransit.js:413, 'A retreating/defeated army routes HOME by the M1 danger re-score') are exported but never called. detectCollisions has no fought-pair memory — any hostile pair whose remaining paths share a region collides again next tick.
+- Why: The M5 spec says 'retreat = per-mover embattlement (§6)' and the module header says 'a loser retreats mauled, never annihilated'. In fact the loser keeps marching on its original objective and the same pair grinds a fresh battle each tick (new fork `battle:…:${tick}`) until someone arrives — attrition is bounded so it never explodes, but the war story a DM reads is 'the two armies fought seven identical battles in seven weeks and nobody withdrew', and a defeated army still arrives at its siege as if the defeat changed nothing but a number.
+- Fix shape: On a decisive/costly loss, re-role the loser to RETREAT with retreatRoute(digest,…,homeId) and resolve its deployment as a withdrawal on arrival home (rides the existing deploymentReturn machinery); optionally add a per-pair refractory (the M1 dwell idiom) so a narrow_fail pair doesn't re-engage the same week. Byte-gated: dormant off the spatial marker.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-4] HIGH / confirmed — M9a non-war levers (reroute/embargo/credit/missionize/legitimacy/prestige/opportunity) are inert posture markers whose apply effects were never built — and they actively pacify their actor**
+- Where: `src/domain/worldPulse/settlementStrategy.js:574` | Category: sim-logic-gap
+- Evidence: 'M9a NON-WAR LEVER … an INERT posture marker (no condition, no proposal) … it still wins the strategy:<S> exclusive group. Apply-side effects are M9b.' M9b shipped components 3+4 (moral drift, ally intel), M9c/M9d shipped 5+6, and M9 was declared COMPLETE — no wave ever built the lever effects.
+- Why: A merchant-governed seat that 'closes its markets to X' produces zero trade effect; a church that 'sends out missionaries' moves no faith number. Because the lever WINS the exclusive strategy:<S> group, choosing it also SUPPRESSES the reactive war escalation — so the archetype differentiation M9a promised ('a merchant polity de-emphasizes deploy and reaches for reroute/embargo/credit') manifests as merchant/church polities being structurally pacified while emitting headlines that promise consequences that never land. This is the narrated-but-not-executed class at the exact seam the political-depth wave was supposed to close, and it deepens autoresolve stasis for non-warlord polities.
+- Fix shape: A focused M9e: embargo → sever/dampen the trade channel + tradeSalience edge (machinery exists); reroute → an M1 route-preference nudge or trade-channel repoint; credit → a bounded relationship/prosperity pulse; missionize → a faith-spread pressure pulse via the existing religiousContest lanes; legitimacy → a small governance condition. Each is a value change through existing apply paths, gated like the rest of M9. Until then, soften the copy so headlines don't promise market closures that never happen.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-5] HIGH / confirmed — sue_for_peace de-escalates the label and winds down stressor twins but never recalls the suitor's own army — peace reaches one war representation, not the other**
+- Where: `src/domain/worldPulse/settlementStrategy.js:484` | Category: sim-logic-gap
+- Evidence: The sue_for_peace branch emits only a relationship_label_change proposal (PEACE_STEP one rung down); nothing in the path touches worldState.deployments. warDeployment's withdrawal fires only on feasibility collapse or SIEGE_MAX_AGE, and cold_war/rival remain in HOSTILE_TYPES.
+- Why: A war-bankrupt settlement can sue for peace — the edge steps hostile→cold_war, windDownSponsoredStressors deflates the siege/wartime stressor twins, the chronicle prints 'seeks to wind the conflict down' — while its own deployment ledger keeps the army at the walls, still able to conquer the party it just made peace with. The stressor-twin and physical-army representations of the same war are individually coherent but the de-escalation seam couples only the first. A DM watching both surfaces sees the sim contradict itself at the exact moment the product thesis ('this one simulates') is tested.
+- Fix shape: When a sue_for_peace label change APPLIES, resolve the suitor's deployment against the de-escalated party as a withdrawal through the existing resolvedDeployments/deploymentReturn machinery (the wind-down path for warLayer-off already proves the shape). Bounded, byte-gated on the apply. Alternatively fold into the Wave-8 peace-treaty design — but then record that coupling gap in the deferral ledger, which today does not mention it.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-6] MEDIUM / confirmed — Courier umbilical accrues staleness nothing reads — and the kernel comment claims the fog degrades battle reads when it does not**
+- Where: `src/domain/worldPulse/armyTransitKernel.js:224` | Category: dead-seam
+- Evidence: Comment: 'The umbilical fog degrades each army's READ of the OTHER's strength… but the TRUE strengths resolve the battle'. battleInputs (line 98) returns only {size, readiness, supplyQuality, funding, ground, fatigue} — beliefStaleness is never passed anywhere; umbilicalFog (armyTransit.js:441) has zero consumers repo-wide.
+- Why: The round-12 mechanic ('an info-starved army mis-assesses; blinding the enemy's couriers becomes a real tactic') is bookkeeping with no consequence: staleness increments each tick the home is besieged and affects nothing — no mis-assessment, no receipt, no news. Worse, the comment asserts a coupling that doesn't exist, which is exactly the receipts-honesty failure mode the project's own SIMULATION_LOGIC_AUDIT names as most corrosive.
+- Fix shape: Either wire umbilicalFog into a fogged pre-battle read (e.g., an engagement-decision or a mis-assessment receipt on the battle news — the physics can stay true while the CAUSE is legible), or delete the accrual + fix the comment. Wire-it-or-delete-it.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-7] MEDIUM / confirmed — Famine has no relief counterpart: food moves between settlements only by conquest sack and war levy — never purchase, charity, or ally relief**
+- Where: `src/domain/worldPulse/supplyKernel.js:641` | Category: sim-logic-gap
+- Evidence: '(Ally relief = documented seam.)' — the dispatchEV override hook feeds only 'must-go' (vassal tribute). M2 deliberately excludes food (pulseKernel:549 'Food stays with foodStockpile (no double-count)'); the only inter-settlement food transfers are computeSackFoodTransfer at conquest (warDeployment:1466) and the war levy (warDeployment:1821) — both coercive.
+- Why: Every stressor has a counterforce, but famine's counterforces (granary, resilience, trade_connectivity score) are all LOCAL abstractions — no grain ever physically travels to a starving neighbour, even from an ally with a full granary, even when M6a commodity flow is lit. The war machine can move food two ways (loot it, levy it) while peace cannot move it at all — a pointed asymmetry for a sim whose food year, granary rhythm, and hungry gap are its most polished subsystems. The M6c 'ally relief (trade-as-peace)' override was specced and left as a comment.
+- Fix shape: Wire the documented relief override: an allied origin with storageMonths above a comfort floor dispatches a food shipment to a famine-stressed ally via the existing M2/M6a shipment ledger (food as a good on this one lane, or a bounded storageMonths transfer riding the levy arithmetic in reverse with a receipt). The severance/arrival machinery, conservation transfer math, and the override hook all already exist.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-8] MEDIUM / confirmed — Regional impact propagation is shock-only: no recovery, relief, or boon ever propagates**
+- Where: `src/domain/region/propagation.js:305` | Category: sim-logic-gap
+- Evidence: The full change-kind census (lines 305-580): import_shortage, export_market_loss, route_disruption, authority_instability, protection_gap, conflict_pressure, …_shock, route_cut, population_loss, tier_demotion — every propagated kind is negative; no route_restored/export_regained/siege_lifted/recovery kind exists.
+- Why: A neighbour's collapse ripples outward through decayed waves, but its recovery reaches nobody: the importing town that gained an import_shortage condition when the route was cut sees relief only via that condition's expiry timer, never as an affirmative signal when the route reopens or the granary refills. The regional layer is a one-way ratchet softened only by expiry — recovery is the absence of new shocks rather than a propagating event, so the inter-settlement texture skews permanently grim and the upswing half of every arc is invisible at the regional lens.
+- Fix shape: Add 2-3 positive change kinds (route_restored, export_regained, crisis_lifted) emitted at the natural sources (stressor resolution, channel status flips) that propagate as easing/removal waves — withoutActiveCondition is already imported here, so the removal machinery exists; this is a rules-table extension, not new architecture.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-9] MEDIUM / confirmed — Defenders never bank a disposition win: every siege outcome credits or debits the aggressor's ledger only**
+- Where: `src/domain/worldPulse/warDeployment.js:1393` | Category: sim-logic-gap
+- Evidence: Complete census of dispositionDeltas.push sites: withdrawal → attacker loss (1393); conquest → occupier win + target loss (1535-1536); occupation advance/regress/collapse → occupier win/loss only (occupation.js:818,863,865); tradeWar winner/loser (483-485). No site ever credits a defender that repelled a siege.
+- Why: A town that holds its walls until the besieger withdraws in exhaustion gets nothing — no confidence, no deterrent reputation — while the failed attacker's loss makes it slower to re-mobilize. Successful defense is one of the most narratively-charged outcomes in the sim and it is invisible to the disposition memory that shapes future aggression; a repeatedly-victorious defender reads identically to one that was never attacked. One-way ratchet where the design intent (disposition = 'ratcheted history' of contests) implies symmetry.
+- Fix shape: At the withdrawal/forcedLift site, push {id: targetId, outcome: 'win', magnitude ∝ siege length} alongside the attacker's loss; same at occupation collapse for the liberated settlement. Purely additive deltas through the existing applyDispositionDeltas fold.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-10] MEDIUM / confirmed / KNOWN-DEFERRED — dramatic_campaign lights zero drama systems: OPEN + intensity only — no war layer, no strategy, no faith contest, no seasons, no commodity flow, no disasters**
+- Where: `src/domain/worldPulse/simulationRules.js:215` | Category: ux
+- Evidence: dramatic_campaign: preset('dramatic_campaign', …, { ...OPEN, intensity: 'dramatic' }) where OPEN = { propagationMode:'full', majorChangesRequireProposal:false, politicalAutonomy:'full', migrationMode:'distributed' }. warLayerEnabled defaults false (line 58).
+- Why: The preset a DM picks when they explicitly ask for drama gets only a probability multiplier and wider propagation of the same baseline events; every endogenous-drama system built since (war stack, settlement strategy, religion contest, seasons, commodity flow, living progression, disasters) stays dark. Given the known autoresolve-stasis finding, this makes the stasis experience the labeled-dramatic experience. Already queued as round-21 Wave 4 'dramatic_campaign preset depth review' — the deferral is sound, but this slice's evidence (it is the compounding factor behind 'tuning that makes drama impossible') raises its priority: it is preset data, not engine work.
+- Fix shape: Wave-4 review with a concrete proposal: dramatic_campaign gains warLayerEnabled + settlementStrategyEnabled + seasonsEnabled (and disastersEnabled when the owner flips it) at dramatic intensity — a mid-rung between realistic_regional and full_simulation. Preset-shape change ⇒ owner-gated, accepted-drift class for preset re-inference.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-11] MEDIUM / confirmed — The M11a/M11b deferrals and ledger rows exist only in commit messages — the playbook's own succession law (§0.3-7) is broken exactly where the ladder's tail was cut**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:68` | Category: docs-drift
+- Evidence: §0.0.1 ends at the M10b row — no M11a or M11b row. Commit 82ad676b: 'Both logged in the parking-lot / deferral ledger' — grep of docs/*.md finds no army-vector/trade-refusal/disastersEnabled row in §0.6, §0.0.2, or the round-21 plan (whose Progress note still says 'M11 … UNBUILT').
+- Why: The playbook is 'the successor's memory' by its own law; the next AI runs the checkpoint soaks against soak criteria ('armies avoid + contract + carry') that the unrecorded deferrals make unmeetable, and the parked disastersEnabled owner decision is findable only by reading git log. Three deferred threads (army-vector coupling, trade refusal, the preset flip) are one session-loss away from being permanently dropped.
+- Fix shape: Append the M11a + M11b rows to §0.0.1; add three §0.6 entries (army-vector mutation pass, round-22.1 trade refusal + plague stressorDanger term, disastersEnabled preset flip ⚠️OWNER); correct the round-21 plan's stale 'M11b UNBUILT' lines and unblock ruins-as-artifacts.
+- Verdict: _pending Opus verification_
+
+**[sim-logic-counterparts-12] LOW / confirmed — Nit batch: three small dead/asymmetric seams**
+- Where: `src/domain/spatial/pestilence.js:313` | Category: dead-seam
+- Evidence: (1) pestilenceTemplePulse exported, zero consumers — the 'temple's hour' legibility read renders nowhere. (2) warDeployment step 4 gates new deploys on isBesieged(graph) only — worldState.occupations is never consulted, so an occupied settlement can open its own siege while occupied (softened by economy drag but never gated). (3) migration has no literal return flow — refugees never go home when the origin recovers; organic regrowth (populationDynamics +0.002/mo recovery bonus) is the implicit counterpart, defensible under simplicity-over-fidelity but worth an explicit design note.
+- Why: Each is a small honesty/coherence gap: an unused read-model invites drift; an occupied town raising a siege abroad reads incoherent at the table; the missing return flow is a deliberate-looking absence that is nowhere recorded as deliberate.
+- Fix shape: (1) render templePulse in the settlement faith read-model or delete it; (2) add an occupations-ledger check (state rank ≤ extractive blocks deploy) to step 4; (3) one line in the design doc recording regrowth-as-return as the accepted model.
+- Verdict: _pending Opus verification_
+
+
+### Slice: determinism-constitution (grade A-)
+
+**[determinism-constitution-1] HIGH / confirmed — M10b lastLivingAdvanceAt cursor is stamped after the advance's persist and never flushed — reload re-runs already-lived weeks (phantom catch-up)**
+- Where: `src/store/campaignWorldPulseSlice.js:387` | Category: lifecycle
+- Evidence: advanceCampaignWorld stamps AFTER runAdvanceCampaignWorld returns: `set(state => { const c = findActiveCampaign(...); if (c && c.worldState) c.worldState.lastLivingAdvanceAt = nowStamp; });` — but campaignAdvanceSession.js:246 ran `campaignPersist = cacheCampaignState(state)` (which snapshots + localWrites state.campaigns at CALL time) and flushWorldPulsePersist before the stamp existed; no persist follows the stamp. catchUpCampaignWorld's seed path (line 444) flushes explicitly; the stamp path does not. tests/store/catchUpCampaignWorld.test.js asserts only in-memory `ws(store).lastLivingAdvanceAt` — no persist/reload round-trip pin.
+- Why: The cursor is M10b's only defense against double-counting real time. Both persisted surfaces (localStorage cache + cloud snapshot) carry the pre-advance cursor, so after any session whose last pulse action was an advance (including a 1-week catch-up — where the loop's next-iteration persist never happens), reopening the campaign recomputes elapsed weeks from the stale cursor and re-advances weeks the world already lived. A living campaign reloaded hourly gains a phantom week per reload until a >1-week real gap occurs. This violates the M10b design's own mandate (§0.6.1-3: trace + pin the stamp across 'persist round-trip'), and undo is session-scoped so the phantom time is unrecoverable. Independently corroborates the parallel survey's [store-1].
+- Fix shape: Move the stamp INSIDE the Phase-2 commit (campaignAdvanceSession, before cacheCampaignState) keyed on advancesOnOpen + tick-moved — the stamp then rides the same atomic persist as the advance; the undo snapshot (captured Phase 1) still restores the prior cursor. Add a persist-round-trip pin: advance → serialize campaigns via cacheCampaignState's snapshot → rehydrate → catchUp with the same now ⇒ weeksCaughtUp 0.
+- Verdict: _pending Opus verification_
+
+**[determinism-constitution-2] MEDIUM / confirmed — verify:dist is vacuous when dist/ is absent — the VERIFY_DIST hard-failure guard exists in the master lineage but is missing from this branch**
+- Where: `tests/build/vendorPdfLazy.test.js:336` | Category: budget-ratchet-health
+- Evidence: package.json:32 sets `VERIFY_DIST=1 vitest run tests/build/` and ci.yml:106 claims it 'turns a missing dist/ into a HARD failure' — but repo-wide grep finds NOTHING in this branch reading process.env.VERIFY_DIST; the budget suite is `describe.runIf(distExists)` (line 336) and silently skips. The guard exists only in the master-lineage worktree copy (.claude/worktrees/awesome-ritchie-063978/tests/build/vendorPdfLazy.test.js:39-43: `const requireDist = process.env.VERIFY_DIST === '1'` + a hard 'dist must exist' assertion).
+- Why: The first-paint budget ratchet is constitutional law 5, and this exact vacuous-gate class already bit once (the documented W-F7 incident: +293B rode a green gate that measured nothing). Today the gate is protected only by CI/step ordering (build immediately before verify:dist); any reconciliation that reorders steps — and the master merge is precisely such a reconciliation, on a lineage whose ci.yml has diverged before — silently re-opens green-on-nothing. The CI comment asserting protection that does not exist is itself the operator hazard.
+- Fix shape: Port the master-lineage guard: a top-level test `it('dist/ + dist/assets exist when VERIFY_DIST=1', ...)` asserting distExists when process.env.VERIFY_DIST==='1'. Three lines, zero product bytes; also reconcile the ci.yml comment.
+- Verdict: _pending Opus verification_
+
+**[determinism-constitution-3] MEDIUM / confirmed — Purity bans and source scans do not cover src/workers (the sim path's worker) for Math.random/localeCompare/toLocale*/Intl**
+- Where: `eslint.config.js:292` | Category: determinism-guard-gap
+- Evidence: The workers+kernel block (files: ['src/workers/**/*.js','src/kernel/**/*.js']) bans ONLY `new Date()` and `Date.now()`; the Math.random/locale/Intl bans live in the generators (line 161) and domain (line 223) blocks. The scan tests pin only TREES = ['src/generators','src/domain'] (localeCompareGuard.test.js:21, localeFormatGuard.test.js:24). src/workers/advanceInterval.worker.js is documented as 'the advance worker — same code as the main thread, so an ambient wall-clock read there would silently fork worker vs main-thread bytes' — the same argument applies verbatim to an ambient Math.random or locale call.
+- Why: Currently clean (grep-verified zero hits), so this is prevention, not a live bug — but the worker is the one sim-path directory where a new ambient draw or locale sort would pass lint, pass the source scans, and fork worker-vs-main bytes only under the simAdvanceWorker flag, the exact silent-divergence class the whole guard suite exists to make impossible. Kernel is legitimately exempt for Math.random (the sanctioned seam) but not for locale calls.
+- Fix shape: Add the Math.random + locale/Intl selectors to the workers block (workers have no legitimate ambient draw), extend the two scan tests' TREES with 'src/workers', and add the locale selectors to the kernel block (prng.js needs no locale exemption).
+- Verdict: _pending Opus verification_
+
+**[determinism-constitution-4] LOW / confirmed — Stale constitutional comments in normalizeSimulationRules contradict shipped M10a/M10b behavior (living/autonomous 'coerce until built'; infoMode 'full' 'fails closed')**
+- Where: `src/domain/worldPulse/simulationRules.js:467` | Category: docs-drift
+- Evidence: Comment lines 467-468: "worldProgression: only 'frozen' is meaningful; 'living'/'autonomous' are ACCEPTED but coerce to 'dm_advanced' until built" and lines 474-476: "'full' + garbage fail closed to omniscient (infoModeOf)" — but worldProgressionOf (line 329) returns living/autonomous verbatim and infoModeOf (line 371) returns 'full' verbatim.
+- Why: This normalizer is the constitutional choke point every profile write flows through; a successor implementer trusting its header would conclude the M10a/M10b axes are still coerced and could 're-fix' them, breaking the shipped catch-up/full-info gates. The parallel survey's worldpulse-core-9 caught the living/autonomous half; the infoMode-'full' half is additional.
+- Fix shape: Two-line comment correction in the profile-materialize block; no code change.
+- Verdict: _pending Opus verification_
+
+**[determinism-constitution-5] LOW / confirmed — Nit batch: small determinism-adjacent one-liners**
+- Where: `src/store/campaignSpatialCanonize.js:81` | Category: nit-batch
+- Evidence: (a) campaignSpatialCanonize.js:81 `digestBytes = JSON.stringify(digest).length` counts UTF-16 code units, not bytes — the 400KB cap under-measures any non-ASCII content (deterministic, mislabeled). (b) kernel/prng.js:65 fork seed `${seed}::${label}` is concatenation-collision-prone in principle (createPRNG('a::b').fork('c') === createPRNG('a').fork('b::c')); ids in labels are UUIDs/slugs today so unreachable, but nothing asserts it. (c) CLOSURE_BUDGET_BYTES (vendorPdfLazy.test.js:296) and the any-cast CEILING (domainAnyCastBaseline.test.js:63) are 'monotone-down' by comment/convention only — no machine check prevents a silent raise in a commit. (d) campaignWorldPulseSlice.js:459 comment 'Each advance re-stamps the cursor to `now` and persists' overstates — the stamp is not persisted (see finding 1). (e) rumorNetwork.js:247 rumorEventKey hardcodes 'trade:' for all five carriers while the header claims per-(event,carrier) recording — deliberate consolidation, stale doc (also flagged in the parallel survey's spatial-engine-9).
+- Why: Individually cosmetic; collectively they are the comment-vs-code drift and convention-only-ratchet residue a successor AI will trip over during the master merge.
+- Fix shape: One hygiene commit: TextEncoder byte length or a rename to digestChars; a comment on fork() documenting the label alphabet assumption; correct the two overstating comments; optionally a scripts/ check that budget consts only decrease vs the merge-base.
+- Verdict: _pending Opus verification_
+
+
+### Slice: security-privacy (grade A+)
+
+**[security-privacy-1] LOW / confirmed / KNOWN-DEFERRED — CSP ships Report-Only, so DOMPurify is the sole XSS boundary on the public gallery**
+- Where: `vercel.json:18` | Category: security
+- Evidence: "key": "Content-Security-Policy-Report-Only" ... script-src 'self' 'wasm-unsafe-eval' https://plausible.io; ... and cspHeaderShape.test.js pins that the enforcing key is ABSENT.
+- Why: The app renders user-authored HTML on public, anon-readable gallery pages (GalleryDetail/GalleryCard/MapGalleryDetail via dangerouslySetInnerHTML). Report-Only reports but does not block, so if DOMPurify 3.4.8 ever has a bypass there is no CSP backstop to contain a stored-XSS payload served to every gallery viewer. The deferral is deliberate, documented (csp-report.js rollout note) and test-pinned, so it is sound — but it is the highest-value residual to close.
+- Fix shape: Follow the documented rollout: watch the csp-report sink under real traffic, widen any legitimately-reported directive, then rename both header keys from Content-Security-Policy-Report-Only to Content-Security-Policy (keeping the looser /map/ block). No new architecture required.
+- Verdict: _pending Opus verification_
+
+**[security-privacy-2] LOW / confirmed — Client import-path defense-in-depth omits the config.latentPantheon strip**
+- Where: `src/lib/gallery.js:103` | Category: security
+- Evidence: stripImportConfidential deletes out.seed/_seed/_config and out.config._seed but never deletes out.config.latentPantheon; the toPublicSafe display path DOES drop it via PRIVATE_KEY_RE /latentPantheon/.
+- Why: import_gallery_dossier's server projection already strips latentPantheon (128/129), so this is inert today. But every other gallery read re-clamps client-side precisely because the row 'can't be fully trusted'; the import twin's asymmetry means that if the server projection ever regressed, the import path (unlike the display path) would not catch the unrevealed starting pantheon — a premium-gated secret.
+- Fix shape: Add `delete out.config.latentPantheon` alongside the existing `delete out.config._seed` in stripImportConfidential so the import twin matches the display twin's PRIVATE_KEY_RE coverage.
+- Verdict: _pending Opus verification_
+
+**[security-privacy-3] LOW / confirmed — Nit-batch: minor privacy/robustness observations (all low or informational)**
+- Where: `supabase/functions/send-email/index.ts:466` | Category: nit-batch
+- Evidence: Authenticated templates use `safePayload = payload` (raw caller payload) into interpolate(); ANALYTICS_HASH_PEPPER falls back to '' (ingest-events.ts:20) and deviceKey is null when PEPPER is unset (ingest-events.ts:176).
+- Why: (1) send-email authenticated templates interpolate caller-supplied placeholders freely, but the recipient is always the authenticated user's own email (auth.uid()), so the blast radius is self-directed spam only — not a cross-user defect. (2) An unset ANALYTICS_HASH_PEPPER degrades device linking to null (gracefully disables it) rather than producing unpeppered hashes, so it fails safe — worth an env-presence assertion at deploy but not a hole. (3) CSP style-src allows 'unsafe-inline' (standard for the React/inline-style setup) — acceptable given script-src stays strict.
+- Fix shape: No code change required; optionally assert ANALYTICS_HASH_PEPPER presence in a deploy check and note the send-email self-only recipient invariant in abuse-model.md.
+- Verdict: _pending Opus verification_
+
+
+### Slice: code-quality (grade A-)
+
+**[code-quality-1] HIGH / confirmed — Entity-ref token pipeline is half-merged on this lineage: server injects ⟦entity:id|name⟧ tokens into narrative prose but the client renderers exist only on master — this tree ships the producer with no consumer**
+- Where: `supabase/functions/generate-narrative/index.ts:1737` | Category: correctness
+- Evidence: index.ts:1737+1908 call wrapEntityRefsInProse(aiClone) unconditionally before streaming; the renderers from commit 6d95adc7 ('new ProseParagraph (web) + ProseText (PDF) render ref segments') are NOT ancestors of HEAD (git merge-base confirms; find src -iname '*ProseParagraph*' → nothing); src/lib/entityRefTokenizer.js has zero src importers and DossierNarrativeBanner.jsx:46 renders nsrc.thesis.split(/\n\n+/) raw; npcComponents.jsx:244 renders npc.goal.short raw.
+- Why: If this branch's edge source is deployed (it is in-tree) — or master's already-deployed generate-narrative serves this client — every AI-narrated dossier (a paid, credit-charged surface) displays literal ⟦entity:npc_x|Name⟧ tokens in the thesis, per-tab notes, and NPC goals, on web and PDF. It is also an unmapped master-merge collision seam: the mapped worldPulse 3-way does not cover this supabase+components cross-cut.
+- Fix shape: Either port master's renderer trio (ProseParagraph.jsx, pdf/primitives/ProseText.jsx, the OutputContainer provider hoist + npcComponents/NotableNPCs/Overview wiring — commit 6d95adc7, small and self-contained) onto this branch and wire tokenizeProse at the four prose sites, or gate wrapEntityRefsInProse off until the merge. Add a contract test asserting: if the edge source calls the wrapper, some src component imports the tokenizer (producer⇒consumer pin). Record the seam in the master-merge map (memory/third-lineage).
+- Verdict: _pending Opus verification_
+
+**[code-quality-2] MEDIUM / confirmed — Orphaned-module census: ~12 dead files (~1,100 lines) beyond the register's six — including two Realm-suite gallery components whose 'dedicated mounting pass' exists only in a commit message**
+- Where: `src/components/gallery/MapGalleryDetail.jsx:1` | Category: dead-code
+- Evidence: Import-graph scan over all 871 src files (static + dynamic import(), plus tests/scripts/api/tools): zero importers for gallery/GalleryMapsSidebar.jsx(245L), gallery/MapGalleryDetail.jsx(236L), lib/mapSaves.js(123L, untouched since 2026-06-04), settlement/NextActionRail.jsx(123L), map/SimulationRulesGateToggle.jsx(69L), primitives/Disclosure.jsx(69L), hooks/usePricingMoment.js(57L), settlement/LockToggle.jsx(57L), lib/debounce.js(33L), pdf/primitives/StatTile.jsx(32L), utils/helpers.js(12L), data/categoryVocabulary.js(80L).
+- Why: Register finding components-commerce-7 names only six dead components — the class is ~2× larger and spans lib/hooks/pdf/data, so its proposed inventory test would under-scope. MapGalleryDetail/GalleryMapsSidebar were 'Landed-but-unrendered by design' (commit 9b092d55: 'mounting the Realm suite requires the WorldMap body-swap → inspector-overlay composition, a dedicated pass') but that pass is tracked in no ledger — a classic dropped thread. Dead files also carry stale doc anchors: ProvenanceBlock.jsx:4 still says it 'Lives in the right rail beneath NextActionRail'.
+- Fix shape: Fold into the register's planned only-shrinks unused-module inventory test, but scope it to ALL of src via the same import-graph walker layerBoundaries.test.js already contains (JSDoc-typedef-only modules like domain/types.js and worker-URL entries need a small allowlist). Owner decides per file: mount (the gallery pair — add the mounting pass to the round-21 backlog), delete, or baseline-with-reason.
+- Verdict: _pending Opus verification_
+
+**[code-quality-3] MEDIUM / confirmed — Eight roadmap-era domain read-models (~1,780 lines) are tested-but-unconsumed, one with a header that falsely claims a live UI consumer**
+- Where: `src/domain/pipelineRail.js:5` | Category: dead-code
+- Evidence: pipelineRail.js:5-7: 'The PipelineRail UI already exists; this module produces the structured payload it consumes when the user taps a step open' — but components/PipelineRail.jsx imports nothing from it (grep: zero src importers). Same zero-src-importer status for counterfactual.js(355L), mapProfile.js(355L), genreProfile.js(274L), devAnomalies.js(204L), distributionDashboard.js(203L), devDebug.js(163L), provenance.js(112L); none are edge-bundled (build-edge-shared.mjs ENTRIES = aiGrounding + analyticsEvents only) and none are imported by scripts/ or tools/.
+- Why: These are whole features (counterfactual 'what if removed?' projection, genre profile, dev dashboards) that generation-side code never calls and no component renders — their unit tests keep them permanently green and permanently misleading ('tested' reads as 'alive'). provenance.js additionally ships the 'User canon preserved across rerolls' copy that register finding generators-domain-…:622 shows is an unkept promise.
+- Fix shape: Triage in the same inventory-test wave as the component orphans: wire the ones with product intent (counterfactual and provenance have obvious dossier/DM surfaces; dev* belong behind the existing dev-panel pattern), delete the rest with their tests. At minimum fix the pipelineRail/provenance headers so they stop asserting consumers that do not exist.
+- Verdict: _pending Opus verification_
+
+**[code-quality-4] MEDIUM / confirmed — clamp/clamp01 re-implemented ~30 times across the engine with divergent NaN/non-finite semantics**
+- Where: `src/domain/worldPulse/foodStockpile.js:47` | Category: duplication
+- Evidence: foodStockpile.js:47 maps non-finite→lo ('Number.isFinite(v) ? v : lo'); relationshipState.js:16 coerces 'Number(value) || 0'; migrationKernel.js:57 / armyTransitKernel.js:53 / beliefMap.js:154 pass NaN through ((x<0?0:x>1?1:x) yields NaN for NaN); generators/helpers.js:42 exports a default-0..100 clamp. ~30 definitions total across domain/worldPulse, domain, components, lib.
+- Why: In a byte-identity, determinism-first engine the NaN edge is exactly where same-shaped helpers diverge: a kernel that inherits the coercing clamp behaves differently from one that inherits the passthrough clamp when a malformed ledger value leaks in — a silent inconsistency class, and every new mover copies whichever neighbour it was written next to (armyTransitKernel/migrationKernel/beliefMap are all 2026 additions).
+- Fix shape: One kernel primitive (src/kernel/math.js: clamp, clamp01, with explicit documented NaN policy — kernel is already the sanctioned shared-substrate home per layerBoundaries). Adopt per-module ONLY where the local variant's NaN behaviour provably matches (goldens byte-identical gate makes each adoption cheap to verify); minimum bar: stop new copies via a lint nudge like the deepCloneHotPath pattern.
+- Verdict: _pending Opus verification_
+
+**[code-quality-5] MEDIUM / confirmed — slugify exists in 8 variants, several identity-bearing; cross-module id join-compatibility is maintained only by copy-discipline (two byte-identical copies sit in the same directory)**
+- Where: `src/domain/events/mutateHelpers.js:130` | Category: duplication
+- Evidence: domain/events/batch.js:468 and domain/events/mutateHelpers.js:130 are byte-identical private copies; institutionalCatalog.js slugifyInstitutionName, entityLinks.js slugifyEntity (dash, 80-cap), goodsCatalog.js slugifyGood (underscore, 64-cap), entities/npcs.js (underscore, 32-cap, 'npc' fallback), foundry/moduleBuilder.js (dash, 40-cap), lib/customRegistry.js (underscore, trim) all differ in separator/cap/fallback.
+- Why: Several of these mint or match PERSISTED ids (institution id-joins, npc ids inside the seeded event pipeline, custom-content prebuilt refIds, dossier anchors). Today the underscore family happens to agree; nothing but convention prevents a future edit to one copy from silently breaking an id join — the exact aliasing class institutionalCatalog's own collision-check comment warns about ('two DIFFERENT canonical names must never slug to the same id').
+- Fix shape: A kernel/leaf slugify(value, {sep, max, fallback}) with the id-minting call sites importing it (byte-identical output per site — pure refactor, goldens prove it); at minimum merge the two identical domain/events copies and add a comment cross-linking the id-join family.
+- Verdict: _pending Opus verification_
+
+**[code-quality-6] MEDIUM / confirmed — Barrel hygiene is inconsistent: region/index.js wildcard-exports the feed engine alongside graph internals into both engine and UI consumers, and worldPulse/index.js is a 22-module export* barrel with exactly one consumer**
+- Where: `src/domain/region/index.js:1` | Category: barrel-hygiene
+- Evidence: region/index.js: 'export * from' ×7 including wizardNews.js; imported by pulseKernel.js:74, applyWorldPulse.js:13, candidateEvents.js:10 AND components (LayersPanel.jsx:20 for one const, WizardNewsPanel.jsx:5). worldPulse/index.js re-exports 22 engine modules; sole importer is LivingWorldGates.jsx:39 (one function). Contrast spatial/index.js:11-15: curated exports + 'this module must NEVER enter the entry static closure' law.
+- Why: The Wave-2 feed-retention bust (+363 B eager, blocked on FP-2) was precisely 'wizardNews.js is EAGERLY store-imported' — wildcard barrels make that class easy to recreate: any eager import of one region/worldPulse symbol drags the whole engine (feed generator included) into that chunk, and the budget test catches it only after the fact. The single-consumer worldPulse barrel also couples LivingWorldGates' chunk to the entire pulse engine for one accessor.
+- Fix shape: Convert region/index.js to the spatial/index.js curated style with the same first-paint law comment (or split a display-safe leaf for REGIONAL_CHANNEL_TYPES/summarizeWizardNews); point LivingWorldGates at simulationRules.js directly and either delete worldPulse/index.js or shrink it to the intended public surface. Byte-neutral by construction; verify:dist confirms.
+- Verdict: _pending Opus verification_
+
+**[code-quality-7] MEDIUM / confirmed — The domain layer — the highest-judgment code — is the only major layer without a size ratchet; warDeployment.js is 2,024 lines with a single ~930-line function**
+- Where: `src/domain/worldPulse/warDeployment.js:1092` | Category: maintainability
+- Evidence: evaluateWarLayer opens at warDeployment.js:1092 and its closing brace is line 2024 (the file's last line) — one exported function spanning ~932 lines. pulseKernel.js is 1,924 lines. eslint.config.js ratchets components at 600 (line 340) and generators at 800 (line 360) with named grandfathers; no max-lines block covers src/domain.
+- Why: The house doctrine is 'ratchet the shape' — and it demonstrably worked for the ten god-components and three generator monoliths — but the files where a mis-read costs most (the war layer, the tick kernel) sit in the unratcheted layer and are still growing (M9–M11 all landed here). A 930-line orchestrator is where the next lifecycle ghost hides. (RISK_REGISTER R4 covers settlementSlice as deliberately deferred; the domain layer is not covered by any deferral.)
+- Fix shape: Extend the max-lines ratchet to src/domain/**/*.js at a ceiling just above today's worst offenders with the standard grandfathered-list-shrink-only pattern (warDeployment, pulseKernel, settlement.schema, causalState, explanation, capacityModel get named overrides). Independently, evaluateWarLayer decomposes along its own existing step comments (behavior-preserving extraction, goldens byte-identical — same recipe as F31).
+- Verdict: _pending Opus verification_
+
+**[code-quality-8] LOW / confirmed — FNV-1a hashing hand-rolled 10 times with divergent variants; the newest copy landed 2026-07-13, so the pattern is still propagating**
+- Where: `src/domain/display/newsVoice.js:33` | Category: duplication
+- Evidence: Ten 0x811c9dc5 implementations (generationTelemetry, structuralFingerprint, campaignSync, normalizeSettlement [dual-round h1], pendingEdits, relationshipRuleHelpers, contestMath [+avalanche h^=h>>>16], newsVoice [2026-07-13], causeConjunctionContent, campaignSliceShared [length-prefixed base36]).
+- Why: Each use is self-contained today, but the variants differ (post-mix, width, encoding) while all LOOK like 'the FNV hash' — a future cross-module 'same hash' assumption would silently disagree. src/kernel is the designated determinism-primitive home (prng/rngContext) and has no string-hash primitive, which is why every author re-rolls one.
+- Fix shape: Add fnv1a32(str) (and the length-prefixed digest helper) to src/kernel; adopt in NEW code by convention; migrate existing sites opportunistically only where output is provably identical (most sites feed persisted/golden-covered variant selection, so adoption is per-site gated by the golden battery).
+- Verdict: _pending Opus verification_
+
+**[code-quality-9] LOW / confirmed — neighbor/neighbour naming drift persists across the live schema, including a fallback read of a key nothing ever writes (neighbourRelationship)**
+- Where: `src/components/OutputContainer.jsx:423` | Category: naming-drift
+- Evidence: OutputContainer.jsx:423: 'rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length' — repo-wide grep finds no writer of `neighbourRelationship` (only this read). Generator mints US-spelled neighborRelationship; the canonical persisted array is UK-spelled neighbourNetwork (saves.js:150-162 migration); spatial uses neighbourTiers; the store slice is neighbourSlice.
+- Why: The mixed-spelling seam is exactly where the codebase already got burned once (the saves-migration gap in the June review); the dead middle key in the fallback chain is fossil evidence — it reads as load-bearing but can never fire, and the next author has three spellings to guess between. Directory naming compounds it: components/settlement/, settlements/, settlementDetail/, and the opaque new/ (which holds the dossier tabs) are four adjacent homes for the same surface.
+- Fix shape: Delete the dead `neighbourRelationship` term from the fallback; add a one-line vocabulary note at the settlement.schema neighbour fields declaring the canonical spellings (generator-legacy US key vs persisted UK key) so the pair stops looking accidental. Directory consolidation is optional/churn-heavy — at minimum rename new/ to dossierTabs/ when it next churns.
+- Verdict: _pending Opus verification_
+
+**[code-quality-10] LOW / confirmed — Nit batch: store/index.js header says 14 slices but composes 15; one-shot codemod scripts linger unmarked in scripts/; WorldMap bridge ops swallow errors with bare empty catches**
+- Where: `src/store/index.js:2` | Category: docs-drift
+- Evidence: store/index.js:2 'Unified Zustand store with 14 slices' — the create() spreads 15 creators (createAccountImportSlice at line ~66 is absent from the header list). scripts/fix-backspace-regexes.js self-describes as 'One-shot script' yet sits beside live gate scripts. WorldMap.jsx:441/453/664 'try { await bridge.clearAllPlacements(); } catch (e) {}' — bridge failures vanish with no debug trace (22 empty catches in src; the map pointer-capture ones are idiomatic).
+- Why: Each is minor alone; together they are the small-drift class the repo's own doctrine (docs updated same commit as code) is designed to prevent. The header miscount is the kind of stale map a successor AI trusts; the unmarked codemods invite an accidental rerun; the silent bridge catches make FMG-bridge regressions undebuggable in the field.
+- Fix shape: One-line header fix (+accountImportSlice entry); move one-shot codemods to scripts/retired/ or add a RETIRED header line; give the WorldMap bridge catches a console.debug tag (components layer — no purity constraint).
+- Verdict: _pending Opus verification_
+
+
+### Slice: test-quality (grade A-)
+
+**[test-quality-1] HIGH / confirmed — verify:dist anti-vacuity is claimed in CI but not implemented — a missing/renamed dist silently vacates the constitutional first-paint ratchet**
+- Where: `package.json:32` | Category: gate-vacuity
+- Evidence: package.json: `"verify:dist": "VERIFY_DIST=1 vitest run tests/build/"`; ci.yml:106-111 claims VERIFY_DIST "turns a missing dist/ into a HARD failure so a chunk contract can never count green having verified nothing" — but a repo-wide grep shows NO test reads process.env.VERIFY_DIST; vendorPdfLazy.test.js:336 is `describe.runIf(distExists)` and iconChunkSplit.test.js:67 is `if (!existsSync(assets)) return;`.
+- Why: Constitutional law 5 (the first-paint budget ratchet) is enforced solely by this suite. If dist/assets is absent or its path changes (vite outDir restructure, partial build), every chunk contract + the CLOSURE_BUDGET_BYTES ratchet skips and vitest exits 0 — the exact green-on-nothing class this repo already shipped (+293B overage documented at vendorPdfLazy.test.js:179-200). The correct guard EXISTS in the parallel lineage (.claude/worktrees/awesome-ritchie-063978/tests/build/vendorPdfLazy.test.js:39-43 — `const requireDist = process.env.VERIFY_DIST === '1'` + a hard-fail test) and was never ported.
+- Fix shape: Port the reference lineage's guard: a `describe.runIf(requireDist)` block in tests/build/vendorPdfLazy.test.js asserting `expect(distExists).toBe(true)` when VERIFY_DIST=1, so the post-build re-run hard-fails on a missing dist. Three lines, no product code, matches the ci.yml comment already written.
+- Verdict: _pending Opus verification_
+
+**[test-quality-2] MEDIUM / confirmed — Money-path pglite execution suites silently skip when a pinned migration filename disappears — no executed-count guard, and the master merge is expected to renumber migrations**
+- Where: `tests/security/creditLedger.pglite.test.js:98` | Category: gate-vacuity
+- Evidence: `const MIG = { '009': resolve(dir,'009_profile_security.sql'), … '123': … }; const allExist = Object.values(MIG).every(existsSync);` … `describe.runIf(allExist)('credit RPCs — execution against the real SQL (pglite)')` — same pattern in feeSchedule/profileEscalation/creditBalanceIdorGuard/gallery* pglite suites.
+- Why: If any pinned migration is renamed/renumbered — precisely what the third-lineage master-merge reconciliation risks (the repo's own top-listed hazard) — the credit/refund/IDOR/gallery-privacy EXECUTION tests all skip and vitest stays green. Unlike the e2e job, there is no runtime not-vacuous guard for vitest suites, so the security spine can vacate exactly when the risk event happens.
+- Fix shape: Replace runIf with a hard assertion (`it('migration fixtures exist', () => expect(allExist).toBe(true))`) or resolve migrations by pattern (glob `*_profile_security.sql`) + a manifest test asserting the pglite suite count executed > 0 (the check-e2e-not-vacuous idiom applied to vitest).
+- Verdict: _pending Opus verification_
+
+**[test-quality-3] MEDIUM / confirmed — Four spatial goldens self-mint on a missing manifest — deleting the fixture re-pins silently green**
+- Where: `tests/property/spatialDigestGolden.test.js:52` | Category: tamper-evidence
+- Evidence: `if (UPDATE || !existsSync(MANIFEST)) { … writeFileSync(MANIFEST, …) } const pinned = JSON.parse(readFileSync(MANIFEST…)); expect(hash).toBe(pinned.hash);` — same `UPDATE || !existsSync(MANIFEST)` in seaLanesGolden.test.js:55, seasonalOverlayGolden.test.js:50, teleportEdgesGolden.test.js:55.
+- Why: A golden that recreates its own pin when absent is not tamper-evident: a merge/checkout that drops the fixture (this tree runs parallel worktrees and a 200-commit lineage merge is ahead) launders any digest/cost-law drift into a fresh green pin. Every other golden in the tree (generator, worldpulse×3, belief, rumor) uses the safe pattern — an explicit 'manifest exists (run UPDATE_GOLDEN=1)' failing test.
+- Fix shape: Align the four keystone-family goldens to the manifest-exists pattern: fail when the fixture is absent unless UPDATE_GOLDEN=1 is explicitly set.
+- Verdict: _pending Opus verification_
+
+**[test-quality-4] MEDIUM / confirmed — M10b 'living' progression is untested — only 'autonomous' and 'dm_advanced' are driven; pause-on-major during catch-up has zero coverage**
+- Where: `tests/store/catchUpCampaignWorld.test.js:109` | Category: test-coverage
+- Evidence: All six tests seed `progression: 'autonomous'` or `'dm_advanced'`; the implementation branches `const autoResolve = worldProgressionOf(rules) === 'autonomous'` (campaignWorldPulseSlice.js:456) and on a paused advance `if (!result || result.ok === false) break; … return { ok: true, weeksCaughtUp: done, capped }` — the living early-break/partial-weeks contract is never asserted.
+- Why: 'Living pauses on a major' is one of the two owner-ruled M10b semantics (§0.6.1 decision 2) and a user-visible product mode. A regression that auto-resolves majors under 'living' (or double-counts the paused tail on the next open) would ship green — and this is new persisted-cursor lifecycle code, the owner's most-bitten bug class.
+- Fix shape: Add two pins: (a) a living catch-up where a mid-loop tick surfaces a major → catch-up stops early, weeksCaughtUp < elapsed, proposals queued not resolved; (b) after the DM resolves, the next catch-up resumes without double-running (cursor semantics across the pause).
+- Verdict: _pending Opus verification_
+
+**[test-quality-5] MEDIUM / confirmed — The WorldPulsePanel on-open catch-up trigger — the only production call site — has no component test**
+- Where: `src/components/map/WorldPulsePanel.jsx:1` | Category: test-coverage
+- Evidence: grep: `catchUpCampaignWorld` appears in exactly one component (WorldPulsePanel.jsx) and in zero files under tests/components or tests/ui; the store action is tested headlessly only.
+- Why: The living-world feature's actual user behavior IS the once-per-open useEffect (Date.now-derived, cursor makes remount a no-op). A broken dep array, a removed advancesOnOpen guard, or firing against the wrong campaign would ship with the store suite fully green — the classic seam gap between a tested action and untested wiring.
+- Fix shape: One jsdom smoke test mounting WorldPulsePanel with a living campaign and a mocked store: asserts catchUpCampaignWorld fires exactly once on open, not on re-render, and never for dm_advanced.
+- Verdict: _pending Opus verification_
+
+**[test-quality-6] MEDIUM / confirmed / KNOWN-DEFERRED — No test exercises two movers together — the mover-interaction matrix is entirely deferred to the checkpoint, and M10b weakened that deferral**
+- Where: `tests/domain/simulationRulesPreset.stability.test.js:142` | Category: sim-logic-gap
+- Evidence: grep: no test file sets both `seasonsEnabled: true` and `commodityFlowEnabled: true`; full_simulation appears only in flag-shape pins ('full_simulation lights ALL EIGHT war sub-flags') — no test runs a single pulse tick under the full_simulation preset.
+- Why: The product's moat is mover COMPOSITION (winter slows caravans → stockpiles drain → EV refuses → smugglers run), yet every mover is soaked solo. This is the documented PART-5 Living-Realm-checkpoint deferral — but M10b just made full_simulation 'autonomous' (auto-advances on open), so real users will run the never-executed everything-on path automatically before the checkpoint soak exists. The deferral was ruled when full_sim was manual.
+- Fix shape: A cheap interim pin, not the full checkpoint: one 26-week kernel test under the literal SIMULATION_RULE_PRESETS.full_simulation.rules asserting no-throw + conservation invariants (goods, migration) + bounded ledgers. Keeps the checkpoint as the real validation while removing the 'most feature-dense shipped preset has zero executed ticks' hole.
+- Verdict: _pending Opus verification_
+
+**[test-quality-7] MEDIUM / confirmed / KNOWN-DEFERRED — Known flake left unmitigated: pipeline.property seed-sensitivity has no per-test timeout while sibling suites carry the house override**
+- Where: `tests/property/pipeline.property.test.js:123` | Category: flake
+- Evidence: The seed-sensitivity test runs 8 pairs × 25 numRuns = 400 full generations with no timeout argument (root default 20s); ROUND21 plan records: 'ONE PRE-EXISTING env red: pipeline.property seed-sensitivity times out at 20s under machine load ~273 — CONFIRMED identical on untouched base'. generatorGoldenMaster.test.js:117 sets 120_000 for the same class with an explicit precedent comment.
+- Why: A gate test that reds under load trains re-run habits and erodes trust in the full battery — the deferral (documented as 'pre-existing env red') is unsound because the repo's own precedent fix (a per-test wall-clock allowance, explicitly labeled 'not drift') is a one-line change already applied to three sibling suites.
+- Fix shape: Add the 120_000 timeout to the seed-sensitivity (and same-seed deep-identity) tests with the standing precedent comment, mirroring generatorGoldenMaster/distributionEnvelopes.
+- Verdict: _pending Opus verification_
+
+**[test-quality-8] MEDIUM / confirmed — Paid-flow verification is honest but thin at the edges: the live purchase lane is a permanent skeleton and 3 of 7 money-module coverage floors are ≈0**
+- Where: `vite.config.js:601` | Category: test-coverage
+- Evidence: Floors: `'src/lib/stripe.js': { statements: 0, branches: 0, functions: 9, lines: 0 }`, creditLedger 10/21/23/12, creditsSlice 11/0/7/11 — while ci.yml:172-179 sells the job as 'a deleted money-path test is exactly the regression this catches'. e2e/flow-b-auth-credits-ai.spec.js:257-283: the live Stripe suite is `test.skip(!LIVE_AUTH)` wrapping a single `test.fail()` placeholder; no CI lane sets E2E_LIVE_AUTH.
+- Why: The reconciliation e2e (flow-e/f) and Deno webhook execution tests are genuinely strong, but a deleted creditLedger/creditsSlice test cannot trip a floor of 0-11%, and no automated path has ever completed a real checkout → webhook → entitlement loop. Pre-launch on a paid product, that residual is worth stating precisely rather than absorbing into the job's confident naming.
+- Fix shape: Either raise the three floors after a targeted pglite-backed unit pass (creditLedger has execution tests — measure and floor them), or annotate the ci.yml job comment to name the exempt files; separately schedule the E2E_LIVE_AUTH lane (secrets exist per the file's own contract note) as a weekly/manual job like mutation-sweep.
+- Verdict: _pending Opus verification_
+
+**[test-quality-9] LOW / confirmed — The active-path worldpulse 'goldens' pin narrow oracle-normalized projections, not bytes — active-path prose/ledger drift escapes golden coverage**
+- Where: `tests/property/worldpulseSpatialGolden.test.js:154` | Category: golden-scope
+- Evidence: The spatial golden hashes only `{tick, marker, arrivalKeys, arrivalTicksSeen, queuedImpacts, patrons, candidateTypes}` through normalizeForDormancy (absent === {} === []); the deity golden similarly pins pantheon/patrons/candidateTypes/rollSummary 'NEVER prose'. Ledger rows then say 'goldens byte-identical'.
+- Why: Deliberate and documented per header (narrative-copy edits must not false-positive), and the generator golden IS full-JSON — but a drift in active-spatial stressor bookkeeping, news content, or ledger internals that keeps the candidate histogram and patron seats stable passes every 'golden'. Worth knowing at the master merge, where 'byte-identical' claims will be load-bearing and the oracle's absent==={} semantics differ from raw bytes (the F24 NUL class was caught only by raw byte checks).
+- Fix shape: No change to the goldens; add one full-worldState-hash pin on a SINGLE active-spatial config (accepting it trips on prose — that is its job, refresh via UPDATE_GOLDEN), or document in §0.2 that law-1 'byte-identity' means raw bytes for generator/digest and normalized projection for pulse.
+- Verdict: _pending Opus verification_
+
+**[test-quality-10] LOW / confirmed — Nit batch: stale counts, vacuous test bodies, and advertised-but-missing cases**
+- Where: `tests/property/beliefMapGolden.test.js:156` | Category: nit-batch
+- Evidence: (1) beliefMapGolden 'anti-vacuity: …the two modes differ' asserts only non-emptiness, never pd≠un hash. (2) flow-b 'modal closes' test (flow-b:172-188) asserts nothing — comment admits 'strict close-on-escape is left to the unit tests'. (3) flow-f header advertises the terminal-mismatch → support-card state but the spec has only success + 503-retry. (4) ci.yml:217 says '155-config manifest'; generator-golden-master.json has 187 keys. (5) saveCompatibility's fixture museum holds one real save (april-2026-v1.json) — by design, but the museum will matter at the master merge.
+- Why: Each is small; together they are the residue a final pre-launch sweep should clear so test names and CI comments keep meaning exactly what they say.
+- Fix shape: One hygiene commit: strengthen the two weak assertions, add the flow-f terminal case, fix the ci.yml count, note the fixture-museum policy inline.
+- Verdict: _pending Opus verification_
+
+
+### Slice: docs-knowledge (grade B+)
+
+**[docs-knowledge-1] HIGH / confirmed — State ledger contradicts git truth at the parallel-stream merge: M11b is committed but both live handoff docs say WIP/unbuilt/'do not touch', and M11a+M11b have no ledger rows**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:414` | Category: docs-drift
+- Evidence: §0.8: "⚠️ src/domain/spatial/calamity.js is that session's UNCOMMITTED WIP (M11b) in the main worktree — FOREIGN, do not touch." Git: `git merge-base --is-ancestor 62c81a0c HEAD` → true (commit "Phase 5.5, M11b — CALAMITY", 5 files, no docs). §0.0.1's last row is M10b; grep shows M11a (82ad676b, also in HEAD) appears only in merge notes (lines 159/410/441), never as a row. Round-21 plan line 74: "BLOCKED on M11b calamity (the last mover, UNBUILT)."
+- Why: Violates the playbook's own law (§0.3-7: "A wave is not 'done' until its ledger row exists — this document is the successor's memory") at the exact point two parallel streams merged. A successor starting at §0.0 per the succession protocol would re-dispatch or mis-sequence M11b, treat committed code as untouchable foreign WIP, and miss that ruins-as-artifacts is now unblocked. The two newest docs directly contradict: COMPREHENSIVE_REVIEW_2026-07-13.md line 4 correctly says "M1–M11 ladder complete". Corroborates and extends register finding spatial-engine-7 (there graded medium; within this dimension the succession-mechanism breakage is the top defect).
+- Fix shape: One doc commit: append M11a (82ad676b + fix 10f22f39) and M11b (62c81a0c) rows to §0.0.1 with gates and the parked disastersEnabled +20B preset decision; rewrite §0.8's calamity WIP warning and item 7; fix round-21 plan lines 24/74. Structural prevention (bold, in-repo precedent): a tests/docs pin that greps `git log` subjects matching /^Phase 5\.5, (M\d+\w*|[A-Z0-9-]+ )/ on HEAD's history and asserts each has a matching §0.0.1 row token — the ledger law becomes gate-checked like the meta-pin.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-2] HIGH / confirmed — ARCHITECTURE.md omits the entire spatial engine — zero 'spatial' mentions while src/domain/spatial/ holds 21 modules of the product's moat**
+- Where: `ARCHITECTURE.md:44` | Category: docs-drift
+- Evidence: `grep -c "spatial" ARCHITECTURE.md` → 0. `ls src/domain/spatial/ | wc -l` → 21 (embattlement, migration, armyTransit, seaLanes, smuggle, pestilence, calamity, spatialDigest, rumorNetwork…). The domain/ paragraph enumerates worldPulse subsystems ("war & siege… trade war… religion… coups") as "~74 modules" — actual worldPulse count is 104.
+- Why: The doc's stated purpose is "the *current* shape of the code… to lower the cost of a second contributor" (bus-factor-one is its own named risk). A newcomer onboards to a pre-Phase-5.5 architecture with the living-world engine — the thesis differentiator, M1–M11, the frozen digest, the belief/rumor layer, and its constitutional laws (byte-identity, dormancy, budget ratchet) — invisible.
+- Fix shape: Add a spatial-engine paragraph to the layer map (digest-at-canonize, conditionally-materialized spatialLedgers, dormancy law, the M1–M11 mover set) plus a pointer to docs/PHASE55_EXECUTION_PLAYBOOK.md §0.2 as the constitution. Extend architectureFreshness.test.js with a derived pin (doc must mention src/domain/spatial and state its module count ±tolerance) so this layer can never silently vanish from the map again.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-3] MEDIUM / confirmed — Playbook §0.0.2 standing-amendments budget line is stale: says 'CURRENT closure 1,255,965 = 20B margin' while its own M10b row and §0.8 record 1,254,893 / 1,092B**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:73` | Category: docs-drift
+- Evidence: §0.0.2: "CURRENT closure 1,255,965 = 20B margin (post-M10a; MEASURED 2026-07-13)". M10b row (§0.0.1:68): "closure 1,254,893 ≤ 1,255,985 (margin 1,092)"; §0.8: "Net budget: closure 1,254,893 ≤ 1,255,985 (margin 1,092 B)".
+- Why: §0.0.2 is the "things a successor must not re-litigate" section; byte-headroom is the scarce resource every wave decision keys on. A successor doing budget math from the standing section is off by 55× (20B vs 1,092B) and would wrongly STOP budget-costing waves — the same failure mode the round-21 stream hit when it discovered the 20B wall.
+- Fix shape: Update the §0.0.2 line to the post-M10b measured closure and add "(see the newest §0.0.1 row for the live number)" so the standing section defers to the ledger instead of duplicating a volatile number; the doc-refresh commit from the M11 finding should carry it.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-4] MEDIUM / confirmed — Playbook §0.0.3 'IN-FLIGHT / ON THE DESK' is an unpruned append-log: the NEXT pointer routes a successor to Wave A → M1..M10 (all long landed) and the model/queue notes are an era stale**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:171` | Category: docs-drift
+- Evidence: "NEXT: W5 merge review → Wave A (PART 4) → merges (PART 6) → M1..M10 movers (PART 7) → the Living Realm checkpoint" — while §0.0.1 records Wave A and M1–M10 complete. Section also still lists 3.5/Wave-A/M1–M6a/FP-R as on-desk items, and "MODEL: main loop switched to OPUS 4.8… Fable-reserved items… queue for a Fable session" — the Fable comprehensive grade-check is now RUNNING (COMPREHENSIVE_REVIEW_PROGRAM.md).
+- Why: §0.0.3's charter is "update on every dispatch + landing" — it is the successor's desk. As an append-log with a dead NEXT pointer it forces the reader to diff eras themselves, and the stale model note tells a Fable session not to do what the owner has since directed it to do (self-rule review sequencing).
+- Fix shape: Prune §0.0.3 to genuinely-open items only (M10b eager-trim, W5/W2 re-apply, budget ratchet-down, 5.5-K empirical check, supplyCompleteness NUL, endgame), collapse landed entries into a one-line pointer at §0.0.1, and rewrite NEXT to the §0.8 sequence. Consider making §0.8 the single NEXT surface and §0.0.3 a pointer to it — two competing 'what next' sections is the root cause.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-5] MEDIUM / confirmed — Two live handoff docs allocate the same 1,092B headroom without cross-reference: playbook §0.8 promises it to W5 (~890B) while the round-21 plan promises Wave 2 (+363B) 'will fit' — combined they exceed the margin**
+- Where: `docs/PHASE55_ROUND21_BACKLOG_PLAN.md:41` | Category: docs-drift
+- Evidence: Round-21 plan: "wait for the parallel FP-2… THEN land Wave 2 (cherry-pick 2f4f7b58, it will fit…)". Playbook §0.8 step 2: "W5… ~+890 B eager. ⚠️ CHECK FIT: margin is now 1,092 B, so W5 fits (→ ~200 B) ONLY if M10b is trimmed first". 363+890=1,253 > 1,092. The round-21 plan also still says (§6) claude/phase55-parking-lot is "UNMERGED" (merged at 4d93cba) and presents the budget fork as awaiting the owner though FP-2a's landing resolved it.
+- Why: Both docs are START-HERE handoffs for potentially different sessions; each independently believes it owns the post-FP-2 headroom. A session executing either doc alone can consume the margin the other doc's wave was promised, producing a budget STOP mid-wave — the exact serialization tax the concurrency law (§0.4) exists to prevent, recreated at the docs layer.
+- Fix shape: Single-writer for headroom: make playbook §0.8 the one budget queue (order: M10b trim → W5 → W2 feed-retention → ratchet-down), and change the round-21 plan's §1/§3 to defer to it ("headroom sequencing lives in playbook §0.8"). Update the plan's §6 merged-status lines in the same pass.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-6] MEDIUM / confirmed — CONTRIBUTING.md understates the gate by half and never mentions the constitution — the second-contributor path bypasses goldens, byte-identity, and the budget ratchet**
+- Where: `CONTRIBUTING.md:10` | Category: docs-drift
+- Evidence: "Everything runs through `npm run check` (validate data/edge/map → typecheck → lint → ~4,500 tests → build)" — actual check (package.json:33) adds validate:migration-head, typecheck:domain:strict, and verify:dist, and the suite is 8,348 tests/726 files (review baseline). The 'what every change must carry' table has no row for engine-behavior changes (goldens byte-identical / owner-signed UPDATE_GOLDEN), no budget, no any-cast ceiling, no playbook §0.2 pointer.
+- Why: generatorGoldenMaster.test.js's own header teaches `UPDATE_GOLDEN=1` regeneration; a well-meaning second contributor following CONTRIBUTING.md would regenerate goldens to green a failing gate without knowing regens are owner-gated (constitution law 1). The operating doctrine that actually governs every change is unreachable from the documented contributor entry point.
+- Fix shape: Add a 'the constitution' subsection (same-seed byte-identity + owner-gated regen, dormancy, first-paint ratchet/verify:dist, any-cast 2252) linking playbook §0.2; add an engine-behavior row to the proof table; derive the gate description from package.json in prose or pin it in architectureFreshness-style (assert CONTRIBUTING names every check sub-step).
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-7] MEDIUM / confirmed — ARCHITECTURE.md 'The gate' section describes a 5-step check; the real gate is 10 steps including verify:dist — the constitutional first-paint ratchet is absent from the architecture doc**
+- Where: `ARCHITECTURE.md:202` | Category: docs-drift
+- Evidence: "`npm run check` = `validate:data && typecheck && lint && test && build`." package.json:33: check = validate:data && validate:migration-head && validate:edge && validate:map && typecheck && typecheck:domain:strict && lint && test && build && verify:dist. Related number drift in the same doc: "155-config golden-master hash manifest" (manifest has 187 entries) and "~7,000 tests / ~589 files" (8,348/726 — still inside the freshness test's 25% tolerance but approaching the wall).
+- Why: The gate IS the product per CONTRIBUTING; a reader planning CI or local verification from ARCHITECTURE.md misses the migration-head ledger check, the domain-strict ratchet, and verify:dist — three of the enforcement mechanisms the constitution depends on. The freshness test pins other numbers but not the gate description, so this rot class is currently invisible to the gate.
+- Fix shape: Rewrite 'The gate' from package.json's actual chain with one line per step, and extend architectureFreshness.test.js to assert the doc names every `npm run check` sub-script (derive from package.json exactly as the test already derives step order from steps/index.js). Refresh 155→187 and the suite numbers in the same commit.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-8] MEDIUM / confirmed — RISK_REGISTER.md claims 'Living document' but was last reviewed 2026-06-16, pre-dating the entire spatial engine — and CONTRIBUTING/REVIEW_FINDINGS still route readers to it as the current risk view**
+- Where: `docs/RISK_REGISTER.md:3` | Category: docs-drift
+- Evidence: "> **Living document. Last reviewed: 2026-06-16** (branch `analytics-intelligence-layer`)"; grep for spatial/Phase 5.5/master-merge → no risk rows (only June-era fixed items). CONTRIBUTING.md:5 points here "for current risks"; REVIEW_FINDINGS.md:3 calls it "the live, maintained risk view."
+- Why: The actual current top risks — prod 12 migrations behind incl. privacy strips (review §6.1: constitution law 3 unenforced in prod), the master-merge third-lineage collision, un-soaked deploy, CSP report-only — live in the playbook and the comprehensive review, not in the doc the supersession chain designates. A reader following the documented pointer chain lands one full era behind; a 'living' banner on a stale doc is worse than an honest historical banner.
+- Fix shape: Either refresh the register as part of the review program's Phase E (fold in review §6 owner-urgent items + the master-merge lineage risk, stamp the review date) or demote its banner to historical with a pointer to the playbook §0.0.2 + the newest comprehensive review — and fix CONTRIBUTING's pointer accordingly. A freshness pin (last-reviewed date within N days of the newest review doc) would keep the 'living' claim honest.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-9] LOW / confirmed — Round-21 plan internally contradicts itself on numeric prices: the START-HERE handoff lists it budget-free/lazy while the older triage section below still parks it as 'UI-eager, need owner ratification'**
+- Where: `docs/PHASE55_ROUND21_BACKLOG_PLAN.md:46` | Category: docs-drift
+- Evidence: §2 BUDGET-FREE WAVES: "Numeric prices (Wave 7) — HIGHEST remaining value. A LAZY display read-model… Byte-safe (rides a lazy chunk)." vs line 147 PARKED section: "Numeric prices (surfaces the economic model's numbers — UI-eager, 'generation is sacred')" under "need owner ratification before building."
+- Why: The two triage tables give opposite dispatch permissions for the same wave; a successor reading the wave table (not the NEXT-STEPS handoff) would park the item the handoff calls the highest-value do-now work.
+- Fix shape: Delete or update the stale PARKED row (and the pre-merge §6 'UNMERGED' lines) when the plan is next touched; the doc's own Progress-blockquote convention argues for pruning superseded triage rows rather than stacking eras.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-10] LOW / confirmed — @enforced-by mis-tag: ARCHITECTURE.md names the analytics-bundle freshness test as the enforcer for the aiGroundingBundle claim**
+- Where: `ARCHITECTURE.md:179` | Category: docs-drift
+- Evidence: "`aiGroundingBundle.js` is **built** from app code… a freshness test fails the gate on drift. <!-- @enforced-by tests/edgeFunctions/analyticsEventsBundle.freshness.test.js -->" — that test covers analyticsEventsBundle.js (its header: "Mirrors the aiGrounding bundle" test); the actual enforcer tests/edgeFunctions/aiGroundingBundle.freshness.test.js exists separately.
+- Why: The claim is true and enforced, but the tag points at the sibling — the meta-pin only checks the target exists and is gate-reachable, not that it enforces THIS claim, so the mis-tag passes silently. Someone deleting the real aiGrounding test would see no doc-claim failure.
+- Fix shape: Point the tag at tests/edgeFunctions/aiGroundingBundle.freshness.test.js (optionally list both since _shared/ covers both bundles).
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-11] LOW / confirmed — No README.md at the repo root — a cold clone has no entry pointer to ARCHITECTURE/CONTRIBUTING/the playbook**
+- Where: `?:?` | Category: docs-drift
+- Evidence: `ls README*` → no matches. Root docs are ARCHITECTURE.md, ASSESSMENT.md, CONTRIBUTING.md, DESIGN_STRESSOR_DYNAMICS.md, PDF_PARITY_AUDIT.md; nothing designates the reading order (ARCHITECTURE.md self-describes as the map but nothing points to it first).
+- Why: Every onboarding surface (GitHub landing, editor tree) opens on nothing; for a bus-factor-one repo whose docs explicitly exist to lower the second-contributor cost, the conventional first file is absent. Cheap to fix, disproportionate onboarding value.
+- Fix shape: A 10-line README: what SettlementForge is (the simulates-not-rolls thesis), then the reading order — ARCHITECTURE.md (map) → CONTRIBUTING.md (gate + constitution pointer) → docs/PHASE55_EXECUTION_PLAYBOOK.md §0.0 (live program state). Add README.md to the enforcement-claims corpus if it makes claims.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-12] LOW / confirmed — State-ledger rows M4 through M10a carry '(this commit)' placeholders instead of the hashes the ledger's own header promises**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:51` | Category: docs-drift
+- Evidence: §0.0.1 header: "(chronological, with commit hashes — verify any claim via `git show <hash>`)"; rows M1–M10a (lines 48–63) all read "| (this commit) |". M1–M3 hashes are recoverable from §0.0.3; M4–M10a only from git-log subject search (e.g. M4 = 2825b132, M9a = d3536e8e).
+- Why: The ledger's verification affordance (git show <hash>) is broken for 13 consecutive rows because the row is written before the commit exists and never backfilled — the same never-backfilled pattern that produced the M11 gap. Low because subjects make recovery easy, but the self-declared contract is unmet.
+- Fix shape: Backfill the 13 hashes in the M11 doc-refresh commit; amend §0.3-7 to say the NEXT commit must backfill the hash (or write the row in a follow-up commit that can name it), so '(this commit)' is never a terminal state.
+- Verdict: _pending Opus verification_
+
+**[docs-knowledge-13] LOW / confirmed — Nit batch: small staleness items across the corpus**
+- Where: `ASSESSMENT.md:5` | Category: docs-drift
+- Evidence: (1) ASSESSMENT.md supersession banner itself stale: "engine now has ~2,400 tests" (actual 8,348). (2) playbook:11 still lists the four shipped briefs as "BINDING COMPANIONS (do not duplicate, reference)" with no shipped-status note; briefs themselves carry no status stamps. (3) docs/PHASE6_DATA_LIFECYCLE.md:33 uses a prose @enforced-by target ("the provenance pin, §5") that resolves to nothing and sits outside the meta-pin corpus. (4) §0.0.2:76 keeps the historical "⚠️ HEADROOM CRITICAL as of 3.5: only 63 BYTES" directly under the (also stale) CURRENT line — two dead budget numbers stacked. (5) playbook:388 references "a new tests/store/lazySliceManifest.test.js" that never existed — inside the clearly-labeled SUPERSEDED §0.7.3-OLD, so acceptable, but a stray match for anyone grepping test names.
+- Why: Individually harmless; collectively they add friction to the exact grep-and-verify workflow the succession docs are designed for.
+- Fix shape: Fold all five one-liners into the same doc-refresh commit as the ledger fixes: refresh the ASSESSMENT banner number, stamp the four briefs SHIPPED with hashes, fix or drop the PHASE6 prose tag, delete the dead 63-byte line, no action on the superseded §0.7.3-OLD reference.
+- Verdict: _pending Opus verification_
+
+
+### Slice: content-immersion (grade B+)
+
+**[content-immersion-1] HIGH / confirmed — Player-facing rumor fiction renders raw engine tokens as the rumor's subject**
+- Where: `src/domain/display/settlementRumors.js:127` | Category: immersion
+- Evidence: settlementRumors.js:127 `const what = human(record.content?.what) || 'unrest'` feeds "Merchants bring word of ${what} in ${where}"; rumorNetwork.js:374 `what: String(entry.impactKind || entry.kind || 'stirring')`; applyWorldPulse.js:130 `impactKind: outcome.candidateType || outcome.type`.
+- Why: The 3.5 rumor surface is the flagship DM-vs-player asymmetry feature and its own banner says 'fiction-not-internals' — yet the what-token is a raw candidateType, so a war declaration rumor reads "Merchants bring word of strategy deploy in Thornwall" and a stressor birth reads "...of stressor birth religious pact betrayal..."; entries whose impactKind is absent fall to the transition kind, yielding "Travellers speak of applied somewhere near X". human() only replaces underscores — 'npc', 'strategy deploy', engine compounds all reach player prose verbatim.
+- Fix shape: Add a what-token → in-world phrase vocabulary in the display layer (the IMPACT_LABELS pattern, extended over the candidateType families: war/coup/faith/flow/institution/npc), with a humanized fallback that at minimum strips 'npc_'/'stressor_birth_' prefixes and never renders bare transition kinds ('queued'/'applied' → 'trouble'). Pure lazy-display change, byte-inert to the engine; pin with a register guard test like institutionVocabulary's (no engine token may appear in a rendered headline).
+- Verdict: _pending Opus verification_
+
+**[content-immersion-2] HIGH / confirmed — The crier voice sidecar proclaims plague arrivals as market-shortage trade news**
+- Where: `src/domain/display/newsVoice.js:194` | Category: immersion
+- Evidence: newsVoice.js:61 TRADE_CHANNEL_TYPES includes 'trade_route'; :193-195 falls back to channelType when impactKind ('plague_arrival') classifies nothing; pestilenceKernel.js:287 `channelType: 'trade_route'` with kind 'applied'.
+- Why: M11a landed after Wave 1's war/faith/trade vocabulary froze. A plague-arrival entry's impactKind 'plague_arrival' matches no impact set, so the channelType fallback fires and categorizes it TRADE with bucket 'impact' — the WizardNewsPanel renders, directly beneath the headline "Plague reaches Millbrook" and a summary about sickness, an italic crier quote like "The shortage has bitten — the stalls stand half-empty and every coin buys less than it did." The card contradicts itself on the most dramatic beat the sim now produces.
+- Fix shape: Guard the fallback: exclude entries whose impactKind is set-but-unclassified from the channelType fallback (return null), or better, author a fourth 'pestilence' category (and a 'calamity' one — the Great Flood/Fire currently gets no crier line at all while a routine grain shortage gets poetry). Lazy display only; extend the newsVoice determinism/coverage tests.
+- Verdict: _pending Opus verification_
+
+**[content-immersion-3] MEDIUM / confirmed — Five of fifteen stressor types have no arrival vignette and no founding stress-note — the dossier opens on a 'normal day' during open revolt**
+- Where: `src/generators/narrativeGenerator.js:192` | Category: sim-logic-gap
+- Evidence: STRESS_DESCS (narrativeGenerator.js:192-293) and STRESS_NOTES (:561-582) both key exactly 10 types; STRESS_PRIORITY (stressPriority.js:10-26) lists 15 — insurgency, mass_migration, wartime, religious_conversion, slave_revolt are absent from both.
+- Why: generateArrivalScene falls through to the generic route scene for the missing five, so a slave-revolt or wartime settlement's dossier opens with e.g. "${r}'s market day has the comfortable chaos of something that has worked out most of its problems" — while the pressure sentence immediately below announces conscription, revolt, or mass exodus. PRESSURE_SENTENCES and stressNarrative cover all 15, so the gap is only the arrival layer; but the arrival scene is the dossier's first paragraph, and the contradiction is exactly the kind genCoherence exists to prevent.
+- Fix shape: Author 3-4 arrival vignettes + one STRESS_NOTES founding line for each of the five missing types (same register as the existing ten — sensory, gate-level observation). Generation-side content additions change same-seed prose for affected settlements, so land under the owner golden-regen batch (Wave 5 piggyback) or verify the templates only fire for stress states absent from goldens.
+- Verdict: _pending Opus verification_
+
+**[content-immersion-4] MEDIUM / confirmed — namingData pools are contaminated: modern, cross-culture, and wrong-category names reach generated NPCs and settlements**
+- Where: `src/data/namingData.js:2521` | Category: immersion
+- Evidence: east_asian settlementSuffixes includes 'burg' (:2348) and femaleNames includes 'Kayla' (:2521); maleNames :2462-2469 list Japanese SURNAMES (Sato, Tanaka, Nakamura…) as given names; mesoamerican femaleNames include 'Gemini' (:2878), 'Pleiades' (:2887), 'Zero' (:2896), 'Venus' (:2867); surnames include Spanish colonial 'Valladolid' (:2962), 'Quijada' (:2957), 'Yucatan' (:2964); the goddess 'Ixchel' sits in maleNames (:2762).
+- Why: Names are the most-read content in any dossier and the tables are consumed raw (npcGenerator pickFirst: `${firstName} ${surname}`; generateSettlementName concatenates prefix+suffix), so the engine can mint 'Zero Valladolid', 'Gemini Yucatan', 'Tanaka Watanabe', and the town 'Jinburg' in an East Asian region — visible register breaks that undercut the 'coherent because it has to be' thesis. The file header says 'extracted from bundle / de-minified', i.e. legacy data that never got the register pass the display sidecars got.
+- Fix shape: A data-hygiene sweep of NAMING_DATA: remove/replace the ~20 contaminated entries (modern names, surname-in-givenname, Greek/Latin constellation words, colonial-era surnames, cross-gender deities, the 'burg' suffix). Pure data edit but generation-facing: same-seed NPC names shift for affected cultures ⇒ batch with the owner-gated golden regen (round-21 Wave 5 already collects such shifts).
+- Verdict: _pending Opus verification_
+
+**[content-immersion-5] MEDIUM / confirmed — wizardNews card body is system-log register: 'Queued via trade dependency around Grain: …' plus scoring-receipt reason pills**
+- Where: `src/domain/region/wizardNews.js:409` | Category: immersion
+- Evidence: wizardNews.js:409 `const prefix = \`${transitionLabel(transition)} via ${channelType}\``; TRANSITION_LABELS (:159-166) maps engine states verbatim ('Queued', 'Ready', 'Applied'); scoreImpact reasons (:288-334) are 'high severity', 'critical impact type', 'chain propagation' — rendered by WizardNewsPanel.jsx:182.
+- Why: The same card now carries three registers at war: a diegetic headline ('Import shortage takes hold in Thornwall'), a system-log summary ('Applied via trade dependency around Grain after guild collapse: …'), analytic reason pills ('critical regional channel'), and a fully in-world crier quote. The seam is visible on every feed entry and reads as debug output where the product thesis promises chronicle. The engine-state words 'Queued'/'Ready' are the worst offenders — pure internal lifecycle vocabulary.
+- Fix shape: Keep the summary's structure but swap the vocabulary at the display seam: transition → in-world phrasing ('Word arrives of…', 'Now felt in…', 'Has run its course'), reasons → the fiction-not-internals treatment simulationProfile.js:259 already established for receipt headlines. Note entries persist their summary strings, so either regenerate at display time (a lazy read-model over the stored structured fields — the settlementRumors renderFiction pattern) or accept old entries keeping the old prose.
+- Verdict: _pending Opus verification_
+
+**[content-immersion-6] MEDIUM / confirmed — A plague taking hold can never be MAJOR news (and mints a nonexistent 'minor' tier) while routine trade cascades rank MAJOR**
+- Where: `src/domain/worldPulse/pestilenceKernel.js:281` | Category: sim-logic-gap
+- Evidence: pestilenceKernel.js:281 `significance: severity >= 0.55 ? 'notable' : 'minor'` — WIZARD_NEWS_SIGNIFICANCE has only major/notable and normalizeEntry coerces anything ≠'major' to notable (wizardNews.js:441-443); meanwhile scoreImpact promotes any waveDepth>0 trade impact with severity ≥0.4 to major (wizardNews.js:351).
+- Why: Threads sort significance-first (deriveNewsThreads :731-735), so a pestilence front ripping through the realm always sorts beneath every major trade-cascade thread and never enters summarizeWizardNews's `major` list. Dramatic weight is inverted: the sim's scariest emergent event is filed under routine notices. The 'minor' literal is also dead vocabulary — it silently becomes 'notable', so the intended three-tier distinction never existed.
+- Fix shape: Score plague arrivals with the same significance grammar the rest of the feed uses (severity ≥0.55 or a multi-settlement front ⇒ 'major'; drop the dead 'minor'). Display/feed-layer only — entry generation is marker-gated so aspatial goldens are untouched; re-check the feedDistribution baseline.
+- Verdict: _pending Opus verification_
+
+**[content-immersion-7] LOW / confirmed — Calamity strike news withholds its best facts: fallen institutions unnamed, 'about 0 dead' possible, internal design vocabulary in the reasons line**
+- Where: `src/domain/worldPulse/calamityKernel.js:566` | Category: immersion
+- Evidence: calamityKernel.js:566 `${k} institutions lie in ruin, about ${loss.deaths} dead` (targets[] with the actual names is in scope at the call site :474 but unused); :575 `reasons: ['The ${typeLabel} was the land's own — a legible destiny come due.']` — 'legible destiny' is the design doc's term (calamity.js:80).
+- Why: The stamp headline ('The Great Flood of Thornwood, year 12') is exactly the chronicle voice the owner wants, but the body flattens to a count — 'The Great Fire… the granary and the Gilded Stag lie in ruin' is the difference between chronicle and telemetry, and the names are already computed. For a thorp (pop 20-80) floor(pop×deathFrac) is frequently 0 ⇒ 'about 0 dead, and many more take to the roads'. The reasons pill leaks designer jargon into the DM-visible card.
+- Fix shape: Interpolate up to ~3 target names into the summary (they are codepoint-sorted already); special-case deaths===0 ('the town counts its losses in walls, not graves'); rewrite the reasons line without the internal term. News-string only; the strike entry is calamity-flag-gated so goldens are unaffected.
+- Verdict: _pending Opus verification_
+
+**[content-immersion-8] LOW / confirmed — Nit batch: register slips and inconsistencies across otherwise-strong content**
+- Where: `src/data/npcData.js:681` | Category: immersion
+- Evidence: npcData.js:681 'left a local merchant hospitalised'; :946 'quietly shorting investments they publicly recommend'; :954 'paying a health official'; :1003 'a development site'; historyData.js:1253 'Civil libertarians'; institutionVocabulary.js mixes 'labour'/'fibre' (:65,:72,:106) with 'organized'/'specializing' (:61,:62,:86) in adjacent card copy; en.js:120 tier label 'Thorpe' vs 'thorp… metropolis' elsewhere (hero.capUnlock, anonCap).
+- Why: Each is small, but they sit in the most-read DM surfaces (NPC secrets, institution cards, the size picker) and cut against the otherwise carefully test-guarded house register (institutionVocabulary's own test bans em-dashes and enforces terminal periods but not spelling dialect; 'shorting investments'/'health official' are modern-finance/civil-service anachronisms in a medieval-register table).
+- Fix shape: One copy-pass commit: medievalize the four npcData/historyData phrases ('left a merchant half-dead', 'betting against the ventures they praise', 'paying a guild inspector', 'a district not yet announced'); pick one spelling dialect for institutionVocabulary and extend its register test; unify Thorp/Thorpe. npcData edits are generation-facing (same-seed secrets shift) ⇒ ride the owner golden-regen batch; the display/copy edits are byte-inert.
+- Verdict: _pending Opus verification_
+
+
+### Slice: build-tooling-docs (grade A-)
+
+**[build-tooling-docs-1] HIGH / confirmed — STATE LEDGER contradicts git truth: M11b is committed at 62c81a0c but the playbook still says it is uncommitted foreign WIP; M11a/M11b have no §0.0.1 ledger rows**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:414` | Category: docs-drift
+- Evidence: "⚠️ src/domain/spatial/calamity.js is that session's UNCOMMITTED WIP (M11b) in the main worktree — FOREIGN, do not touch." — but `git show 62c81a0c` commits calamity.js + calamityKernel.js + pulseKernel.js + 2 test files (1,477 insertions), and 62c81a0c touched ZERO docs. §0.0.1's last row is M10b.
+- Why: The playbook §0.0 is BY LAW the successor AI's memory (§0.3-7: "A wave is not 'done' until its ledger row exists"). A successor following §0.8 verbatim would treat committed, gate-relevant M11b code as foreign/unreviewed — skipping it in review programs, avoiding its files, or re-dispatching M11b. The same drift lives in docs/PHASE55_ROUND21_BACKLOG_PLAN.md:74 ("BLOCKED on M11b calamity (the last mover, UNBUILT)") and :196 ("M11 (last mover) and M10b remain unbuilt"), and the round-21 Progress blockquote — which claims it "alone must reconstruct program state" — never records M11a (82ad676b) or M11a-FIX (10f22f39) shipping.
+- Fix shape: One ledger-repair commit: append §0.0.1 rows for M11a (82ad676b + 10f22f39) and M11b (62c81a0c) with gate numbers; rewrite §0.8 item 7 and the §0.0.3 merge note to 'M11 COMPLETE'; update the round-21 plan's Progress blockquote and BLOCKED list (ruins-as-artifacts is now unblocked). Consider a freshness test in tests/docs/ that greps the ledger for the HEAD commit's wave marker — the same structural-prevention pattern the repo already uses for ARCHITECTURE.md pipeline order.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-2] MEDIUM / confirmed — Playbook §0.0.2 BUDGETS bullet states a stale 'CURRENT closure' that its own later rows contradict**
+- Where: `docs/PHASE55_EXECUTION_PLAYBOOK.md:73` | Category: docs-drift
+- Evidence: "CURRENT closure 1,255,965 = 20B margin (post-M10a; MEASURED 2026-07-13)" — while the M10b row (line 68) and §0.8 (line 409) state closure 1,254,893 / margin 1,092 after FP-2a (−2,448) + M10b (+1,376). Line 76 also still shouts "⚠️ HEADROOM CRITICAL as of 3.5: only **63 BYTES** free" with no superseded marker.
+- Why: §0.0.2 is the first budget surface a successor reads; three different 'current' numbers coexist in one document. Budget decisions in this program are made at ±20-byte granularity, so a stale headroom figure directly mis-sizes the next wave's go/no-go (e.g. wrongly blocking a +300B lazy-display wave, or re-triggering an FP-2 escalation that is already funded).
+- Fix shape: Make §0.0.2 BUDGETS state only the invariant (budget const location + 'never raise') plus a pointer to the newest ledger row for the measured closure; mark the 3.5-era HEADROOM CRITICAL note as historical. Ride the same ledger-repair commit as the M11 rows.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-3] MEDIUM / confirmed — check-domain-strict.mjs passes green when tsc fails to run at all (vacuous-pass hole in an otherwise anti-vacuity-hardened gate)**
+- Where: `scripts/check-domain-strict.mjs:31` | Category: gate-vacuity
+- Evidence: try { out = execSync('npx tsc --noEmit -p tsconfig.domain-strict.json', ...) } catch (e) { out = `${e.stdout||''}${e.stderr||''}`; } — then counts only lines matching /^(src\/domain\/...): error TS/. Executed control: `npx tsc -p tsconfig.nonexistent.json` emits only "error TS5058: The specified path does not exist" — zero matches → total 0 → '✓ no strict-type regressions' → exit 0.
+- Why: A renamed/deleted tsconfig.domain-strict.json, a broken typescript install, or an OOM-killed tsc all read as 'zero strict errors' and keep `npm run check` and CI green — the exact green-on-nothing failure class this repo's own doctrine (VERIFY_DIST hard-fail, e2e anti-vacuity guards, the weekly mutation sweep) exists to kill. The mutation sweep plants source regressions but never exercises a broken-toolchain run, so nothing would ever catch this.
+- Fix shape: Distinguish 'ran clean' from 'did not run': capture the exec error, and fail loudly when tsc exited non-zero AND zero `src/domain/...: error TS` lines were parsed AND the output contains any `error TS` diagnostic without a domain-file prefix (config/module-resolution failures). One sentinel assertion, ~6 lines; add a mutation-sweep case that renames the tsconfig to prove it.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-4] MEDIUM / confirmed — sf-bridge.js — 1,205 lines of first-party bridge logic including the Phase 5.5 spatial-capture seam — is outside every gate except an acorn parse**
+- Where: `public/map/sf-bridge.js:863` | Category: test-coverage
+- Evidence: eslint.config.js:40 ignores 'public/**'; scripts/validate-map-fork.mjs only `parse(source, ...)` (syntax); the getSpatialPack handler ('settlementEngine:getSpatialPack', sf-bridge.js:863) hand-copies pack arrays (`plain(cells.h)`, `cells.p.map(...)`) that the parent freezes into the constitutional spatial digest.
+- Why: The parent side (src/lib/mapBridge.js) has contract/smoke tests, but the iframe side that actually produces the capture bytes has zero behavioral coverage and zero lint. A silent regression here (aliasing live pack state, dropping a field, TypedArray leaking through) corrupts digests at canonize time — freeze-first makes the corruption PERMANENT in the campaign. fmg-fork.md's upgrade runbook rests entirely on 'reapply sf-bridge.js as-is', so nothing re-verifies it after an FMG bump either.
+- Fix shape: Extract the pure helpers (burgToMsg, parseTransformAttr, the getSpatialPack copy logic, resolveParentOrigin) into a module both sf-bridge.js and a vitest file can load (or eval the IIFE in jsdom with stubbed FMG globals) and pin: copy-not-alias, field set {h,biome,r,p,c}, TypedArray→plain conversion, origin fail-closed. Add an eslint override block for public/map/sf-bridge.js (it is first-party code, not vendored FMG).
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-5] MEDIUM / confirmed — fmg-fork.md upgrade runbook omits the third (and largest) script the map page loads — /map/index-Bp79q281.js**
+- Where: `docs/fmg-fork.md:61` | Category: docs-drift
+- Evidence: Quick-reference: "index.html ← Loads main.js then sf-bridge.js (both defer)" — but public/map/index.html:169 loads `<script type="module" crossorigin src="/map/index-Bp79q281.js">` (672 KB built FMG bundle) before both, and the runbook's cachebuster step 6 lists only main.js/sf-bridge.js `?v=` suffixes.
+- Why: The runbook exists precisely so an FMG upgrade can be executed cold without losing integration. Following it literally leaves the hash-named 672 KB bundle stale or orphaned (a new FMG release emits a different hash), which is the highest-risk artifact in the fork — and the doc's '4 scattered patches' inventory is silent about how that bundle is produced or refreshed.
+- Fix shape: Add the built bundle to the architecture section and upgrade steps (where it comes from, how the hash-named file + the index.html:169 reference are replaced together), and note versioning.js/sw.js. Update the '~1,136 lines' sf-bridge figure (now 1,205).
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-6] MEDIUM / confirmed — ARCHITECTURE.md's 'The gate' section describes half the actual gate**
+- Where: `ARCHITECTURE.md:202` | Category: docs-drift
+- Evidence: "`npm run check` = `validate:data && typecheck && lint && test && build`." — package.json:33 actually chains validate:data && validate:migration-head && validate:edge && validate:map && typecheck && typecheck:domain:strict && lint && test && build && verify:dist.
+- Why: This file self-describes as the map 'for anyone picking this up cold' and exists to lower the bus-factor-one cost. It omits the constitutional first-paint ratchet (verify:dist), the domain-strict ratchet, and three validators — a second contributor would under-trust the gate and might hand-run redundant checks or, worse, assume verify:dist is CI-only. Same stale step list in .husky/pre-push's comment; ARCHITECTURE.md:237 also still says main.js is "outside all gates" (validate:map now parses it), and tsconfig.json's header claims the full gate covers "components" while tsconfig.full.json deliberately excludes JSX.
+- Fix shape: Regenerate the gate paragraph from package.json (or derive it, the architectureFreshness.test.js pattern already used for the pipeline order two sections up); fix the pre-push comment and the tsconfig.json header in the same pass.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-7] LOW / confirmed — Chunk-graph derivations in vite.config.js parse imports with regexes that see commented-out and trailing-comment 'imports'**
+- Where: `vite.config.js:119` | Category: build-robustness
+- Evidence: importsOf strips only whole-line comments — .replace(/^\s*\/\/.*$/gm, '') — so `const x = 1; // import { Y } from './heavy.js'` still matches the edge regex; computeLucideIconSplit's iconsOf (line 197) strips no comments at all, so a commented-out lucide import still classifies the icon.
+- Why: The failure direction is the documented-safe one (phantom edges over-classify modules/icons/tables as EAGER), but that direction is only 'harmless' for correctness — a phantom eager edge silently pins bytes into first paint that the split machinery exists to move out, consuming ratchet headroom invisibly in a program that adjudicates 20-byte margins. Nobody notices bytes that should have left.
+- Fix shape: Reuse one comment-stripper across all three derivations and extend it to trailing `//` comments outside string literals (or switch importsOf to es-module-lexer, already cheap at config-eval time). Keep the documented misclassify-eager bias as the failure direction.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-8] LOW / probable — Deploy-gate check-run dedup lets a stale green mask a newer red when the same-named check reports from two check suites on one SHA**
+- Where: `scripts/vercel-ignore-build.mjs:205` | Category: gate-nit
+- Evidence: else if (existing.conclusion !== 'success' && r.conclusion === 'success') byName.set(r.name, r); — any success wins over any failure regardless of recency. `filter=latest` (line 283) dedupes within a check suite only; a push-event suite and a pull_request-event suite on the same head commit each report a 'Validate, test, build' run.
+- Why: If one suite is green (e.g. cached/earlier) and the sibling suite red on the identical SHA, the gate proceeds. Both suites run identical steps so a split verdict almost always means flake, and the CI-native deploy job's needs: edge is the second lock — but the rule as written is one-directional ('success wins') where the comment only promises the green-after-rerun case.
+- Fix shape: Prefer the newest run per name (list is newest-first, so first-seen wins) and drop the success-override, relying on filter=latest for the rerun case; or keep success-preference but only among runs from the same check suite id.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-9] LOW / confirmed — main.js drop handler ships verbose debug console.log of placement payloads in production**
+- Where: `public/map/main.js:605` | Category: polish
+- Evidence: console.log('[sfBridge] drop types:', _types); ... console.log('[sfBridge] sf drop payload:', sfPayload); ... console.log('[sfBridge] posting to parent:', msg);
+- Why: Five debug logs fire on every settlement drag-drop in prod, printing settlement id/name/coords to the console — noise that also undermines the otherwise careful F6 hygiene story around this exact handler, and it is one of the four documented inline patches an upgrade re-applies verbatim.
+- Fix shape: Gate them behind the fork's existing DEBUG flag (main.js:7) or delete; update the fmg-fork.md patch table if the patch shape changes.
+- Verdict: _pending Opus verification_
+
+**[build-tooling-docs-10] LOW / confirmed — Nit batch: small stale headers, bypassable lint precision, and coverage gaps at the edges of the gate**
+- Where: `scripts/eslint-plugin-visual-budget.js:4` | Category: nit-batch
+- Evidence: Header: "Three rules, all warnings (not errors ...)" — eslint.config.js:122-124 sets all three to 'error'. (Representative quote; each nit cites its own file below.)
+- Why: Individually trivial; batched per instructions: (1) visual-budget plugin header says rules are warnings — they are errors. (2) scripts/fix-duplicate-keys.js:9 header says casing collisions are "NOT auto-fixed" but line 82 pushes them into removals — a re-run would drop later-cased keys on the exact-lookup path. (3) scripts/generate-sitemap.mjs:148 uses the naive `import.meta.url === \`file://${argv[1]}\`` CLI check that check-e2e-not-vacuous.mjs:139 explicitly fixed (silent no-op under symlink/spaces). (4) analytics lint rules are bypassable via `import * as A from '.../analytics'` → A.track('raw') and via string concat — runtime whitelist mitigates. (5) deno.json disables deno lint/fmt entirely and test:edge runs --no-check, so edge functions have no linter/typechecker (transpile-parse + Deno execution tests only). (6) api/ (3 Vercel functions) is outside both `eslint src/ tests/ scripts/` and tsconfig.full.json includes — covered only by dedicated vitest tests. (7) sf-bridge.js:1184 readyPoll setInterval never clears if FMG generation permanently fails (500ms poll forever). (8) .npmrc legacy-peer-deps=true hides peer conflicts. (9) scripts/verify-email-setup.sh:39 hardcodes the prod Supabase project ref as a fallback.
+- Fix shape: One hygiene pass: fix the two stale headers, unify the CLI-detection idiom, add api/ to the lint glob, and either lint public/map/sf-bridge.js via override (see the dedicated sf-bridge finding) or document the exemption. Items 4/5/6 are acceptable as documented residuals if noted in ARCHITECTURE.md's gotchas.
+- Verdict: _pending Opus verification_
+
+
+ROUND-2 FINDINGS: 71
