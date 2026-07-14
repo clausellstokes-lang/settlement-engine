@@ -823,3 +823,17 @@ office-holder (domain-2 — nearly all with a powerStructure); (i) ANY settlemen
 viability foodBalance now mirrors the cropFortune-bearing foodSecurity); (j) any settlement with age > 0
 (domain-6 — the seeded timeline pick + new templates); (k) any settlement whose probabilistic roll fires
 one of the 5 newer stress types, now that they carry full generation content + coupling (domain-1/dt3).
+
+## THE COMPLETE REGEN SET (pre-merge full-suite census, 2026-07-14 morning)
+The owner's ONE batched sign-off covers exactly SIX regen surfaces — all artifacts of the same
+sanctioned G-track shift, confirmed by the full 8,517-test run (6 failed, all enumerated here;
+everything else green):
+1. tests/fixtures/generator-golden-master.json — the 187/187 mapped config shift (§G2+§G2R).
+2. worldpulseSpatialGolden manifest — the pact-metronome case (G1d) + the evolved-graph harness fix.
+3. worldpulseDeityGolden manifest — the evolved-graph harness fix (F6, adopted here).
+4. tests/generation.test.js structure snapshots (2) — the same generator shift, snapshot form.
+5. tests/pdf/goldenViewModel.test.js — the fixed-seed PDF golden, same shift reaching the view-model.
+6. supabase/functions/_shared/aiGroundingBundle(.meta.json) — regen via `npm run build:edge-shared`
+   AFTER the merge (the bundle derives from app code; its freshness test prescribes the command).
+REGEN PROCEDURE at sign-off: UPDATE_GOLDEN=1 for 1-3, vitest -u for 4, UPDATE_GOLDEN for 5 per its
+header, build:edge-shared for 6 — one commit, owner-co-signed, then merge to review-fixes.
