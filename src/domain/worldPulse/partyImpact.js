@@ -309,6 +309,26 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
     case 'remove_npc': {
       const key = resolveStateKey(state.npcStates, action.settlementId, action.npcId);
       const cur = state.npcStates?.[key];
+      // Make removal REAL at the roster (CANON-by-construction): drop the named
+      // NPC from the settlement's roster so the dossier stops listing a corpse,
+      // faction seating re-derives without them next advance, and pruneNpcStates
+      // clears their npcState (it keys on roster presence). Previously only an
+      // unread `removed:true` state flag was written, so a party-declared-dead NPC
+      // kept its slot, seat, and NPC-agency eligibility. [worldpulse-core-2]
+      const target = snapshot?.byId?.get?.(String(action.settlementId));
+      const settlement = target?.settlement;
+      if (settlement && Array.isArray(settlement.npcs)) {
+        const want = stablePart(action.npcId);
+        const idx = settlement.npcs.findIndex((/** @type {{ id?: unknown, name?: unknown }} */ n) =>
+          stablePart(n?.id) === want || stablePart(n?.name) === want
+          || String(n?.id) === String(action.npcId) || String(n?.name) === String(action.npcId));
+        if (idx >= 0) {
+          settlementOverrides.set(String(action.settlementId), {
+            ...settlement,
+            npcs: settlement.npcs.filter((/** @type {unknown} */ _n, /** @type {number} */ i) => i !== idx),
+          });
+        }
+      }
       // The headline effect is a leadership void on the settlement.
       outcomes.push(baseOutcome(action, kind, {
         type: 'condition',

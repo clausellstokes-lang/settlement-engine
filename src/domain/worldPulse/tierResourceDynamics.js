@@ -390,7 +390,17 @@ function resourceCandidatesFor(item, pressureIdx, rules, tick, previousDrift, rn
         metadata: { resource, fromState: state, toState: 'depleted', economicRole, resourceTaxonomy: taxonomy },
         conflictTags: [`resource:${item.id}:${resource}`],
       });
-    } else if (state === 'depleted' && ((perceivedPressureScore <= 0.32 && economicRole !== 'primary_export') || previousDrift?.direction === 'demotion')) {
+    } else if (state === 'depleted' && (
+      (perceivedPressureScore <= 0.32 && economicRole !== 'primary_export')
+      // A depleted PRIMARY-EXPORT anchor was a permanent one-way ratchet — carved
+      // out of the very quiet-recovery path built to END permanent ratchets, and
+      // because canonExports is generation-frozen the carve-out never lifts. Export
+      // demand justifies SLOWER recovery, not NEVER: allow it under a DEEPER
+      // sustained calm (the quietRecovery threshold ≤0.2) so it rides the slow 0.02
+      // manual path. [worldpulse-religion-trade-8]
+      || (perceivedPressureScore <= 0.2 && economicRole === 'primary_export')
+      || previousDrift?.direction === 'demotion'
+    )) {
       // CADENCE DAMPING (E4-2b): exhaustibles (iron/stone/gem/salt/clay and
       // strategic resources) return canRecover:false from the taxonomy — once
       // depleted they could never come back, so a calm settlement's resources

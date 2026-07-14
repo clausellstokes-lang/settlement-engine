@@ -108,6 +108,13 @@ export function eventConsumes(event) {
       // phantom one blocks instead of silently no-opping.
       if (targetId) refs.push({ kind: 'npcOrFactionOrInstitution', ref: targetId });
       break;
+    case 'IMPOSE_CORRUPTION':
+      // imposeCorruption hard-requires the NPC (findNpc → `if (!npc || npc.corrupt)
+      // return s`), so a mistyped/nonexistent (or already-corrupt) NPC silently
+      // no-ops while the authored systemState deltas + narration still land — the
+      // same phantom-event hole EXPOSE_CORRUPTION's ref closes. [domain-events-region-5]
+      if (targetId) refs.push({ kind: 'npc', ref: targetId });
+      break;
     case 'KILL_NPC':
     case 'KILL_LEADER':
       // KILL_LEADER routes through killNpcMutation, which hard-requires the NPC.

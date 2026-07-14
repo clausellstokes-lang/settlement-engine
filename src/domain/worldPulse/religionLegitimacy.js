@@ -28,7 +28,7 @@ import { npcAlignmentScore, readCorruptionClimate, deityAlignmentDirection, npcC
 import { lawSign } from './deityStance.js';
 // Phase 4 W-F4 — the reciprocal patron loop reads the deity's two-axis plane position
 // (evil01 / chaos01) to score its fit with the settlement's ENDOGENOUS conduct.
-import { evil01, chaos01 } from './deityAxes.js';
+import { evil01, chaos01, deityTemper } from './deityAxes.js';
 // Phase 4 W-F8 — the ENDOGENOUS CONDUCT plane also reads the settlement's own domestic
 // STRUCTURE: its morally-loaded institutions (a standing slave market is cruel conduct)
 // and its martial readiness (a maintained war machine is warlike conduct). Both close
@@ -38,7 +38,10 @@ import { settlementMoralConductLean } from './moralMartialLean.js';
 import { settlementMartialConductLean } from './martialReadiness.js';
 
 // Deity character axes as 0..1 positions (mirrors religiousContest's TEMPER/ALIGN).
-const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0 });
+// 'peacelike' is deriveTemper's spelling (deityAxes/deityPool); 'peaceful' is the
+// legacy stored-axis spelling. BOTH map to 0 so a derived temper reads correctly
+// through this lens. [worldpulse-religion-trade-1]
+const TEMPER_POS = /** @type {Record<string, number>} */ ({ warlike: 1, neutral: 0.5, peaceful: 0, peacelike: 0 });
 const ALIGN_POS = /** @type {Record<string, number>} */ ({ evil: 0, neutral: 0.5, good: 1 });
 
 // A governing faction's archetype implies a temperament + alignment lean (0..1),
@@ -242,7 +245,12 @@ export function rulerLens(settlement) {
 
 /** 0..1 fit between a deity and a ruling-power lens (alignment + temperament). @param {any} deity @param {{temper:number,align:number}} lens */
 function deityRulerFit(deity, lens) {
-  const dT = TEMPER_POS[deity?.temperamentAxis] ?? 0.5;
+  // Temper via the DERIVATION (deityTemper), NOT the retired stored
+  // temperamentAxis — otherwise this dominant ruler-fit lane splits temper
+  // semantics from the rest of the engine (a 4-axis evil+chaotic deity derives
+  // 'warlike' everywhere else but read 0.5/neutral here off a stale/absent
+  // stored field). [worldpulse-religion-trade-1]
+  const dT = TEMPER_POS[deityTemper(deity) ?? 'neutral'] ?? 0.5;
   const dA = ALIGN_POS[deity?.alignmentAxis] ?? 0.5;
   const temperFit = 1 - Math.abs(dT - lens.temper);
   const alignFit = 1 - Math.abs(dA - lens.align);

@@ -267,6 +267,17 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     // BYTE-IDENTICAL. Reconciled at THIS lazy call site (candidateEvents rides the engine chunk),
     // NOT inside evaluateStressorRules, so it costs ZERO first-paint bytes (evaluateStressorRules is
     // bundled into the first-paint closure via its catalog exports — a suppression there would ship).
+    // POLITICAL-AUTONOMY RULING (owner-delegated, [worldpulse-core-6]): NATURE acts
+    // autonomously and is EXEMPT from the §11 political-autonomy axis. Under
+    // dm_only/recommendations the dropped aspatial spread candidate WOULD have routed
+    // to a proposal, while the pestilence front materializes the disease_outbreak
+    // stressor directly post-apply — so canonizing a map upgrades plague travel from
+    // DM-gated to autonomous. This is INTENDED: a plague is not a political actor
+    // awaiting the DM's word. (It is byte-identical for goldens; it changes only the
+    // DM-gating of the spread under the forcing modes.) The alternative — gating the
+    // front's stressor MATERIALIZATION through the proposal queue under dm_only,
+    // mirroring the M9d withhold-then-re-mint pattern — is an OWNER-NOTE item queued
+    // in the shift ledger, a product-policy call left to the owner, not decided here.
     const marker = snapshot?.worldState?.spatialCanonVersion;
     const epidemicTravelActive = Number.isInteger(marker) && Number(marker) > 0;
     candidates.push(...(epidemicTravelActive

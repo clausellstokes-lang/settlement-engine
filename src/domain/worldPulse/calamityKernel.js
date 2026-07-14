@@ -175,8 +175,13 @@ function lastStampYear(s) {
  */
 function applyStrikeToRoster(institutions, targets) {
   const list = institutions.map((i) => ({ ...i }));
-  const activeNames = () => list.filter((i) => String(i.status || 'active') === 'active').map((i) => String(i.name));
-  const alreadyStanding = (/** @type {string} */ n) => activeNames().some((nm) => nm.toLowerCase() === n.toLowerCase());
+  // De-dup guard: a demote must not rename-and-mint a second institution with the
+  // same NAME/ID as an existing row of ANY status (e.g. a ruined/remnant lesser
+  // from a prior strike) — downstream name/id-indexed passes (institutionLifecycle,
+  // calamity's own findIndex-by-name) would become ambiguous. Considering ALL rows,
+  // not just active, means a same-name lesser blocks the demote and the greater
+  // falls through to collapse/destroy instead. [spatial-engine-6]
+  const alreadyStanding = (/** @type {string} */ n) => list.some((i) => String(i.name).toLowerCase() === n.toLowerCase());
   /** @param {string} name @returns {string[]} the OTHER active non-required names sharing this name's category */
   const categoryMembers = (name) => {
     const self = list.find((i) => String(i.name) === name);
@@ -202,10 +207,20 @@ function applyStrikeToRoster(institutions, targets) {
     const plan = planInstitutionFate({ name, demotesTo, alreadyStanding, categoryMembers });
     fates.push(plan);
     if (plan.fate === 'demote' && plan.demotedTo) {
-      // The greater falls a rung: rename in place, keeping the slot standing.
+      // The greater falls a rung: rename in place, keeping the slot standing. Drop
+      // the GREATER's identity prose + tags — a 'Wizard's tower' must not carry the
+      // Mages' guild's description/tags (a dossier-visible incoherence). Description
+      // clears to '' (downstream re-infers from the lesser's name); tags clear to [].
+      // Category is retained: the lesser shares the greater's domain (arcane→arcane)
+      // and it is load-bearing for a later strike's category-collapse read. Re-deriving
+      // the lesser's catalog category/tags would require importing the institution
+      // catalog the kernel deliberately keeps OUT of the pulse chunk (see the
+      // UPGRADE_CHAIN_PAIRS provenance note). [spatial-engine-6]
       list[idx] = {
         ...list[idx], name: plan.demotedTo,
         id: `institution.${stablePart(plan.demotedTo)}`,
+        description: '',
+        tags: [],
         worldPulseFate: 'demoted_by_disaster',
         demotedFrom: name,
       };

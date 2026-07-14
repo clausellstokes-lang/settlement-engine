@@ -181,3 +181,175 @@ double-cast; `warFrontsInto`/`retreatRoute`/`currentRegion`/`armyMarchWeeks`/`um
 `staleAssessment`/`hopWeeks` are typed imports). `node scripts/count-domain-any.mjs` → **2252
 holes (2213 any + 39 suppress)** exact; `npm run typecheck:domain:strict` → **0 errors**;
 `npx eslint` on the five touched source files → clean.
+
+---
+
+# GOLDEN SHIFT LEDGER — G1c "POLITICS, EVENTS, RELIGION"
+
+Wave: G1c (same golden-shifting branch `claude/review-fix-golden-track`, built on G1b @ 0b499818).
+Fixes IMPLEMENTED (16): [domain-events-region-2/3/4/5/6/9], [worldpulse-core-2/3],
+[worldpulse-religion-trade-1/5/8], [spatial-engine-5/6]. Fixes DOCUMENTED/DEFERRED (3 — no
+behavior change, per the Phase-V verdicts): [worldpulse-core-4], [worldpulse-core-6],
+[worldpulse-religion-trade-3]. Fixes NOT YET BUILT (STOP-AND-REPORT remainder, 4): region-1,
+region-7, religion-trade-2, religion-trade-4 (see the wave report).
+
+## HEADLINE RESULT — every GOLDEN FIXTURE stayed byte-identical; only 2 behavior-ASSERTION pins shifted
+
+The FULL domain + property suite after all G1c fixes:
+
+```
+$ npx vitest run tests/domain/ tests/property/
+ Test Files  384 passed (384)
+      Tests  4724 passed (4724)
+```
+
+Every committed golden MANIFEST — including `tests/property/worldpulseSpatialGolden.test.js`
+(real pulses with `warLayerEnabled: true` + `spatialCanonVersion: 1`, beliefs active) — is
+BYTE-IDENTICAL. No fixture was regenerated; none needed to be. The conditional-materialization /
+dormancy discipline held: the changed engine paths never fire in the golden scenarios.
+
+## The two LEGITIMATELY-RED pins (updated in place — assertion pins, NOT golden fixtures)
+
+Two direct-assertion pins encoded the exact OLD behaviors two fixes intentionally change. Neither
+is a `.golden`/serialized fixture — they are `expect()` assertions on the OLD semantics, so per the
+constitution they are UPDATED to the new correct behavior (the shift is the point), and recorded here:
+
+1. **`tests/domain/tierResourceDynamics.test.js` — "a depleted primary-export resource does not
+   quietly recover"** → renamed to "…recovers under SUSTAINED DEEP CALM (no longer a permanent
+   ratchet)". SEMANTIC CAUSE: [worldpulse-religion-trade-8] — a depleted `primary_export` anchor was
+   carved out of the quiet-recovery path entirely (a permanent one-way ratchet). It now recovers
+   under the deeper `perceivedPressureScore ≤ 0.2` gate at the slow 0.02 probability.
+   - Before: `recoveries.some(c => c.targetSaveId === 'exporter')` === **false**.
+   - After:  `recoveries.some(c => c.targetSaveId === 'exporter')` === **true** (bystander local
+     resource unchanged: recovers under the shallower ≤ 0.32 gate).
+
+2. **`tests/domain/clergyLegitimacyDrag.test.js` — "a HOSTILE court amplifies the scandal; a
+   synergistic court shields it"**. SEMANTIC CAUSE: [worldpulse-religion-trade-1] — `deityRulerFit`
+   now reads DERIVED temper (`deityTemper`) instead of the retired stored `temperamentAxis`. The
+   test's `fitting`/`clashing` deities differed ONLY by their stored `temperamentAxis` (both
+   `align='neutral', law='neutral'`), so derived temper (from evil+chaos vs good+law) reads them
+   IDENTICAL — the assertion `dragClashing > dragFitting` became `0.112 > 0.112` (false).
+   - Fixture change (no golden regen): the deities now differ by ALIGNMENT/LAW that DRIVE the
+     derivation — `fitting` = `{align:'evil', law:'chaotic'}` (derives warlike), `clashing` =
+     `{align:'good', law:'lawful'}` (derives peacelike). The test's INTENT (ruler-temper
+     misalignment amplifies clergy scandal drag) is preserved and green.
+
+## Behavior shift IS real — proven by 27 new pins in `tests/domain/politicsEventsReligionG1c.test.js`
+
+The fixes DO change same-seed behavior on their conditional paths; that shift is captured by the new
+pins (all green). Why each stayed byte-safe on the goldens:
+
+- **region-2 (REMOVED_THREAT suppression):** writes `stressorEdits.resolved` only on a SUCCESSFUL
+  strike (removed ≠ null); a no-match strike is an identity no-op. Goldens run no REMOVED_THREAT
+  events (party/DM events aren't in the auto-tick pulse). Undo restores it (SNAPSHOT_CONFIG_KEYS).
+- **region-3 (PLAGUE twin):** `twinDirectiveForEvent`/`crisisWithdraw`/`crisisTwinFor` gain a PLAGUE
+  branch → `disease_outbreak`. Fires only on a PLAGUE event; goldens run none.
+- **region-4/5/9 (KILL_LEADER map / IMPOSE_CORRUPTION ref / plague healing vocab):** event-layer
+  wiring the auto-tick goldens never exercise.
+- **region-6 (hostile no-trade):** the goods-driven candidates are gated `!tradeBlocked`; byte-safe
+  unless a discovery runs on a `hostile` pair with matching goods (the golden discovery corpus
+  carries no such pair).
+- **religion-1 (derived temper + peacelike key):** the ruler-fit lens shifts ONLY for deities whose
+  DERIVED temper diverges from the old stored-axis read — concentrated on peacelike deities (pool
+  ones stored `'peacelike'` previously MISSED the `TEMPER_POS` key → 0.5; now → 0). No golden
+  scenario carries a peacelike patron through a ruler-fit or occupation-tGap read.
+- **religion-5 (disposition on aggressor):** byte-identical whenever the disposition ledger is empty
+  (factor 1.0) — which every legacy golden is (war layer off / no disposition stats).
+- **religion-8 (export recovery):** a new recovery candidate only for a depleted `primary_export`
+  under deep calm; no golden reaches that state.
+- **core-2 (remove_npc roster drop):** only on a party remove_npc action; goldens run none. The
+  `evaluateNpcRules` `state.removed` guard skips only states carrying `removed:true` (written only
+  by remove_npc) — absent in every golden.
+- **core-3 (actor-major DM-time expiry):** byte-identical for single-tick advances (the ≥HOLD check
+  already implies `p.tick < startTick`); the guard only bites a COMPOSED/catch-up advance, and only
+  for `strategy_deploy`/`coup_succeeded` proposals — none pending in any golden.
+- **spatial-5 (belief seed sentinel):** the sentinel materializes ONLY at the decayed-empty boundary
+  (a belief ledger that decays fully below MIN_CONFIDENCE). The golden's few-tick scenarios never
+  fully decay, so no sentinel key ever appears ⇒ byte-identical. Consumers read by settlement id,
+  so the reserved `__seededAt` key is inert to them.
+- **spatial-6 (calamity demote dedup):** `alreadyStanding` now considers any-status rows and the
+  demote resets description/tags. Fires only on a calamity STRIKE with a same-name collision; the
+  disaster mover is preset-gated OFF and runs in no golden.
+
+## DEFERRAL LEDGER (deliberately NOT fixed this wave — documented, NOT bugs to re-find)
+
+- **[worldpulse-core-4] — mergeStressorUpsert birth proxy — OWNER-GATED, parked (Wave-5 bornTick
+  piggyback).** The `createdAt === now` same-tick collision test conflates every tick of a composed
+  advance (advanceInterval threads ONE pinned `now`). The clean fix — a per-record `bornTick === tick`
+  stamp — is a PERSISTENCE-SHAPE change (a new field on every persisted stressor) that shifts
+  same-seed stressor goldens, so it awaits the owner-signed `UPDATE_GOLDEN` regen (TEMPORAL_AUDIT
+  §3c / backlog Wave-5). Per the Phase-V verdict, NO non-shifting interim exists (threading `tick`
+  as the collision key shifts the same goldens). Documented at `applyWorldPulse.js` mergeStressorUpsert.
+- **[worldpulse-religion-trade-3] — dead inter-deity stance half — FORMALIZED (not wired).** Per the
+  verdict, `stanceOf`'s `aggression` + `treatyDurability` are a DELIBERATE W-F2 build-ahead; the
+  relationship-WEIGHT coupling (aggression → inter-deity hostility/escalation tilt; treatyDurability
+  → pactStrength decay) is the Phase-4 W-F4 half. Wiring it is an OWNER-GATED new-capability /
+  deferred-wave resurrection; excising the fields would delete owner-tuned model state. So it is
+  documented in-code (deityStance.js) as a deferral, neither wired nor excised.
+- **[worldpulse-core-6] — M11a plague spread under political autonomy — RULING DOCUMENTED + OWNER-NOTE.**
+  Per the verdict, NATURE acts autonomously and is EXEMPT from the §11 political-autonomy axis:
+  canonizing a map upgrades plague travel from DM-gated to autonomous, which is intended (a plague
+  is not a political actor). Documented at `candidateEvents.js` (the M11a reconcile). **OWNER-NOTE
+  (product policy — for the owner):** the alternative — gating the front's stressor MATERIALIZATION
+  through the proposal queue under `dm_only`/`recommendations` (front still advances; only the mint
+  waits), mirroring the M9d withhold-then-re-mint pattern — is a product-policy call left to the
+  owner, not decided here.
+
+## Constitutional checks (this wave)
+
+- `node scripts/count-domain-any.mjs` → **2252 holes (2213 any + 39 suppress)** — EXACT, ratchet held.
+- `npm run typecheck:domain:strict` → **0 errors** (ceiling 0).
+- `npx eslint` on all 22 touched source files + 3 test files → clean.
+- New shared exports were typed against real/`unknown` types (no new `any`): `withStressorResolved`
+  (crisisLifecycle), `NO_TRADE_RELATIONSHIPS` (tradeLinks), `BELIEF_SEED_KEY` (beliefMap),
+  `actorSaveId` param (candidateBase), `intervalStartTick` (kernel).
+
+## Conditions under which a FUTURE golden will legitimately shift (for the next session)
+
+A new/extended golden fixture SHOULD shift — and the shift is the intended semantic change,
+re-captured with `UPDATE_GOLDEN=1` and recorded here — if it: (a) runs a PLAGUE / REMOVED_THREAT /
+party KILL_LEADER / IMPOSE_CORRUPTION event; (b) runs a discovery on a HOSTILE pair with matching
+export/import goods; (c) carries a PEACELIKE patron deity through the ruler-fit / occupation-tGap
+lanes, or a deity whose stored temperamentAxis diverges from its derived temper; (d) populates the
+disposition ledger and runs a victim-attributed adversarial candidate (raid/tribute/proxy/sanction/
+embargo); (e) drives a depleted `primary_export` resource under sustained deep calm; (f) runs a
+party `remove_npc`; (g) holds a `strategy_deploy`/`coup_succeeded` proposal across a COMPOSED advance;
+(h) decays a belief ledger fully empty then advances again (the seed sentinel appears); or (i) fires
+a calamity STRIKE (disastersEnabled) with a same-name institution collision.
+
+## STOP-AND-REPORT remainder (4 fixes NOT built — a coherent "new-lane couplings" sub-group)
+
+G1c completed 16 code fixes + 3 documented/deferred. The remaining 4 each ADD a mechanical lane
+(not a surgical wiring), are individually golden-shifting, and each warrants its own read-edit-pin-
+battery cycle. They are handed off as a coherent next sub-wave (G1d):
+
+- **[domain-events-region-1] — DM relationship events reach the live conflict layer (HEADLINE,
+  owner=True).** TWO lanes: (1) PARTY-caused — extend `EVENT_TO_PARTY_KIND` (partyEventLinkage.js)
+  with `BROKERED_ALLIANCE→broker_relationship` / `SETTLEMENT_DISPUTE→inflame_relationship`, deriving
+  a `relationshipKey` that MATCHES the pulse's `relationshipKeyFromEdge` (edge.id else `rel.from.to`)
+  — the current `mapEventToPartyImpact` only supports a single `targetField`, so this needs a
+  key-derivation path. (2) NON-party CANON lane — `rippleEventThroughWorld` (STORE layer,
+  settlementSlice.js:202) must call `syncRelationshipChannelBundle` (region/graph.js:649) + a pulse
+  `relationshipState` type-upsert for the three relationship events, plus `applyStressor`'s instigator
+  souring. Store-layer (won't shift domain goldens; needs store tests). Heaviest fix in the wave.
+- **[domain-events-region-7] — recovery/relief propagation.** Add a RELIEF lane to propagation.js's
+  rule table (positive polarity): map `route_restored`/`export_gained`/`local_production_gained`/
+  `depleted_good_lost` through trade/service channels to a new `relief` impact whose apply step
+  early-expires the matching NEGATIVE condition at the target (reuse applyWorldPulse ghost-reconcile
+  ~L1032-1055) + a "pressure eases" wizard-news transition. Bounded, additive, mirrors the shock
+  machinery with positive sign.
+- **[worldpulse-religion-trade-2] — three per-tick re-emitters get cooldown discipline (HIGH,
+  persist=True, owner=True).** targeted footholds (religiousContest.js ~791), faith pacts
+  (deityStanceLane.js pact branch ~306), vassal_trade_coercion (tradeWar.js ~425). Add per-arc
+  cooldowns/latches mirroring `BETRAYAL_COOLDOWN_TICKS` (gate vassal coercion on `result.changed ||
+  tick - lastCoercionTick >= RENEWAL` via tradeWarState; foothold/pact once per (cid,rival,npc)/pair
+  until broken). Consider extending `isDriftOnlyOutcome` / a standing-state marker so recurring
+  condition refreshes become metronome-eligible (structural prevention). Persist=True (a lastTick
+  ledger).
+- **[worldpulse-religion-trade-4] — earned pantheon tier feeds conversion strength (owner=True).**
+  Blend the earned tier into rank strength: `effective = max(DEITY_RANK_STRENGTH[rankAxis],
+  DEITY_RANK_STRENGTH[pantheonTier])`, gated on religion-active. NOTE: this threads the pantheon
+  ledger (`worldState.pantheon[deityId].tier`) into BOTH `deityRankStrength` implementations
+  (cultImpositionApply.js:55 + religiousContest.js:246, ~7 call sites) — not a one-liner; each caller
+  must resolve the deity→pantheon entry. `DEITY_RANK_STRENGTH` is already keyed identically for the
+  tier vocabulary (`major`/`minor`/`cult`), so the max() is well-defined.

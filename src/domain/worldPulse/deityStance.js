@@ -161,5 +161,14 @@ export function stanceOf(source, target) {
     T.DURABILITY_LAW * signedMinLawfulness - T.EVIL_BRITTLE * (pos(mA) + pos(mB)),
   ) + 0;                                                            // `+ 0` normalizes a −0 (TN center) to +0 for exact toBe(0)
 
+  // DEFERRED CONSUMPTION ([worldpulse-religion-trade-3], formalized not wired):
+  // `aggression` and `treatyDurability` are a DELIBERATE build-ahead — the pure
+  // stance model was built + tuned whole in W-F2; the relationship-WEIGHT coupling
+  // (aggression → inter-deity hostility/escalation tilt; treatyDurability →
+  // pactStrength decay) is the Phase-4 W-F4 half explicitly deferred. Only
+  // betrayalHazard + cooperation are consumed today (deityStanceLane). Wiring the
+  // other two is an OWNER-GATED new-capability / deferred-wave resurrection — NOT
+  // done silently here, and the fields are NOT excised (they are owner-tuned model
+  // state). See docs/GOLDEN_SHIFT_LEDGER.md G1c deferral ledger.
   return { aggression, cooperation, betrayalHazard, treatyDurability };
 }

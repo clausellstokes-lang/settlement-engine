@@ -19,8 +19,11 @@ import { finishedGoodsCategoryOf } from '../../data/economicData.js';
 // Relationships under which the settlements don't openly trade goods.
 // (Typed to accept `string | undefined` so a profile with no relationshipType
 // can be probed directly — `.has(undefined)` is simply false.)
+// Exported as the single source of the hostile-no-trade rule so the discovery
+// layer honors the same predicate generation-time trade uses, rather than a
+// divergent floor. [domain-events-region-6]
 /** @type {Set<string | undefined>} */
-const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
+export const NO_TRADE_RELATIONSHIPS = new Set(['hostile']);
 
 /** @typedef {{good: string, goodId: string, direction: string, partner: string, viaNeighbour: boolean, viaCategory?: boolean}} TradeLink */
 

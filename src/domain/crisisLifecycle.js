@@ -90,6 +90,15 @@ function authoredCrisisType(event) {
   return String(event?.payload?.stressorType || event?.targetId || '').trim();
 }
 
+// PLAGUE is the DM's dedicated outbreak button. It mints the SAME roaming
+// 'disease_outbreak' stressor the APPLY_STRESSOR('plague_onset') path drives, so
+// the DM's obvious 'Plague' choice feeds M11a's traveling pestilence,
+// stressorDynamics, and the religious-contest crisis seam — not an inert local
+// condition. The twin machinery (inject directive, undo withdraw, pre-event
+// snapshot) must all resolve PLAGUE to this one roaming type. ONE-PLAGUE-TRUTH:
+// one fiction, one stressor. [domain-events-region-3]
+const PLAGUE_ROAMING_TYPE = 'disease_outbreak';
+
 // Display label for a slug-ish target id ('under_siege' -> 'under siege') —
 // mutate.js's labelFromTarget, duplicated tiny + local to keep this module
 // import-cycle-free (mutate.js imports THIS module).
@@ -166,6 +175,33 @@ function withStressorEdits(s, stressorEdits) {
     next._config = { ...s._config, stressorEdits };
   }
   return next;
+}
+
+/**
+ * SINGLE WRITER for the stressorEdits.resolved suppression record: record a set
+ * of stressor types as RESOLVED (dual-written to _config) so a config-forced
+ * stressor (selectedStresses / stressType) stays resolved across regenerations —
+ * strike each type's authored `added` entry so the overlay stops re-applying it,
+ * and add the type to the `resolved` suppression list. windDownCrisis
+ * (RESOLVE_STRESSOR) and mutateWorld.removedThreat (REMOVED_THREAT) both route
+ * here so a player-neutralized threat cannot resurrect on regeneration through
+ * ONE path while ghosting the other. Slug/name-tolerant via stressTypeEq;
+ * identity no-op when nothing changes. [domain-events-region-2]
+ * @param {{ config?: { stressorEdits?: { added?: StressEntry[], resolved?: string[] } }, _config?: object }} s
+ * @param {Array<unknown>} resolvedTypesRaw
+ */
+export function withStressorResolved(s, resolvedTypesRaw) {
+  const resolvedTypes = (Array.isArray(resolvedTypesRaw) ? resolvedTypesRaw : [])
+    .map(t => String(t || '').trim()).filter(Boolean)
+    .filter((t, i, arr) => arr.findIndex(o => stressTypeEq(o, t)) === i);
+  if (!resolvedTypes.length) return s;
+  const edits = stressorEditsOf(s.config);
+  const added = edits.added.filter(e => !resolvedTypes.some(t => stressTypeEq(e?.type, t)));
+  const missing = resolvedTypes.filter(t => !edits.resolved.some(r => stressTypeEq(r, t)));
+  if (added.length !== edits.added.length || missing.length) {
+    return withStressorEdits(s, { added, resolved: [...edits.resolved, ...missing] });
+  }
+  return s;
 }
 
 // ── Transitions ────────────────────────────────────────────────────────────
@@ -445,18 +481,7 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
   // crisis free to re-mint. A no-match resolve records nothing — the
   // settlement no-op posture above.
   if (removed || wound) {
-    const resolvedTypes = [removed?.type, ...candidates]
-      .map(t => String(t || '').trim()).filter(Boolean)
-      .filter((t, i, arr) => arr.findIndex(o => stressTypeEq(o, t)) === i);
-    const edits = stressorEditsOf(next.config);
-    const added = edits.added.filter(e => !resolvedTypes.some(t => stressTypeEq(e?.type, t)));
-    const missing = resolvedTypes.filter(t => !edits.resolved.some(r => stressTypeEq(r, t)));
-    if (added.length !== edits.added.length || missing.length) {
-      next = withStressorEdits(next, {
-        added,
-        resolved: [...edits.resolved, ...missing],
-      });
-    }
+    next = withStressorResolved(next, [removed?.type, ...candidates]);
   }
   return { settlement: next, removed, wound };
 }
@@ -535,6 +560,18 @@ export function resolveCrisisLocally(settlement, twin) {
  */
 /** @param {Event} event @returns {Object|null} */
 export function twinDirectiveForEvent(event) {
+  if (event?.type === 'PLAGUE') {
+    return {
+      action: 'inject',
+      stressor: {
+        type: PLAGUE_ROAMING_TYPE,
+        label: /** @type {CrisisEventPayload} */ (event.payload)?.label
+          || (event.targetId ? labelFromTarget(event.targetId) : undefined)
+          || 'Plague',
+        severity: Number(/** @type {CrisisEventPayload} */ (event.payload)?.severity ?? 0.6),
+      },
+    };
+  }
   const type = authoredCrisisType(event);
   if (!type) return null;
   if (event.type === 'APPLY_STRESSOR') {
@@ -571,9 +608,13 @@ export function twinDirectiveForEvent(event) {
  */
 export function crisisWithdraw(logEntry) {
   const event = logEntry?.event;
+  const twin = /** @type {{ campaignTwin?: (Object | null) } | undefined} */ (logEntry?.undo)?.campaignTwin ?? null;
+  // PLAGUE injected a disease_outbreak twin — undo must withdraw it (restoring
+  // the snapshotted copy an upsert overwrote), mirroring APPLY_STRESSOR.
+  // [domain-events-region-3]
+  if (event?.type === 'PLAGUE') return { action: 'withdraw', type: PLAGUE_ROAMING_TYPE, twin };
   const type = authoredCrisisType(event);
   if (!type) return null;
-  const twin = /** @type {{ campaignTwin?: (Object | null) } | undefined} */ (logEntry?.undo)?.campaignTwin ?? null;
   if (event.type === 'APPLY_STRESSOR') return { action: 'withdraw', type, twin };
   if (event.type === 'RESOLVE_STRESSOR') return { action: 'restore', type, twin };
   return null;
@@ -594,7 +635,11 @@ export function crisisWithdraw(logEntry) {
  */
 export function crisisTwinFor(worldStressors, event, settlementId) {
   const authoredType = authoredCrisisType(event);
-  const roamingType = pulseTypeForStressorKey(authoredType) || authoredType;
+  // PLAGUE roams as disease_outbreak (see twinDirectiveForEvent) — snapshot the
+  // pre-event twin under that type so undo's withdraw restores it. [domain-events-region-3]
+  const roamingType = event?.type === 'PLAGUE'
+    ? PLAGUE_ROAMING_TYPE
+    : pulseTypeForStressorKey(authoredType) || authoredType;
   if (!roamingType) return null;
   const sid = String(settlementId || '');
   const raw = (worldStressors || []).find(st => {

@@ -119,7 +119,11 @@ const OCC_CONVERSION_GAIN = 0.5;        // max claim-lift fraction at full contr
 const WARBOUND_CONVERSION_MULT = 1.35;  // warlike occupier deity lifts the pull "a little further"
 const OCC_CARRIER_FLOOR = 0.5;          // an occupation is itself a strong faith carrier (the garrison path)
 // Temperament / alignment axes mapped onto a line so opposition = distance.
-const TEMPER_POS = /** @type {Record<string, number>} */ (Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0 }));
+// 'peacelike' is deriveTemper's spelling (the tGap read at :226 keys on
+// deityTemper); 'peaceful' is the legacy stored spelling — BOTH map to 0 so a
+// derived-peacelike deity contrasts correctly with a warlike one instead of
+// silently reading neutral (0.5). [worldpulse-religion-trade-1]
+const TEMPER_POS = /** @type {Record<string, number>} */ (Object.freeze({ warlike: 1, neutral: 0.5, peaceful: 0, peacelike: 0 }));
 const ALIGN_POS = /** @type {Record<string, number>} */ (Object.freeze({ evil: 0, neutral: 0.5, good: 1 }));
 
 // ── CRISIS CONVERSION — "chaos converts in the cracks" (owner, 2026-07-10) ─────

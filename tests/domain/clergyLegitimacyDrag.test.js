@@ -48,8 +48,11 @@ describe('clergy legitimacy drag — a scandalous priesthood erodes the seat', (
 
   it('a HOSTILE court amplifies the scandal; a synergistic court shields it', () => {
     const warlikeRuler = lensOf({ temper: 0.9 });
-    const fitting = deity('War', { temper: 'warlike' });   // synergistic with the warlike ruler
-    const clashing = deity('Peace', { temper: 'peaceful' }); // hostile to the warlike ruler
+    // Temper is DERIVED from the alignment/law axes now ([worldpulse-religion-trade-1] —
+    // the stored temperamentAxis is retired), so the fitting/clashing pair differs on
+    // evil+chaos vs good+law (which drive deriveTemper), not on the inert stored field.
+    const fitting = deity('War', { align: 'evil', law: 'chaotic' });  // derives warlike ⇒ synergistic with the warlike ruler
+    const clashing = deity('Peace', { align: 'good', law: 'lawful' }); // derives peacelike ⇒ hostile to the warlike ruler
     const scandal = clergy({ taint: 0.8, revealedTaint: 0.4 });
     const dragFitting = target({ d: fitting, lens: warlikeRuler, clergy: clergy({ weight: 0 }) }) - target({ d: fitting, lens: warlikeRuler, clergy: scandal });
     const dragClashing = target({ d: clashing, lens: warlikeRuler, clergy: clergy({ weight: 0 }) }) - target({ d: clashing, lens: warlikeRuler, clergy: scandal });
