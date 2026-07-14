@@ -219,6 +219,32 @@ the UI. Tier NEVER touches derivation (law 3): identical layout for every tier a
 2. **Chunk-mint cost:** empirical build measuring the lazy map chunk's entry-preload leak
    against the 77 B margin; decides own-chunk vs settlements-chunk placement.
 
+### VERDICTS (recorded at SM-1, 2026-07-14 — both gates RUN before the SM-1 code landed)
+
+1. **World-pulse blob preservation → PRESERVES (blocksSM3: NO).** The canon-member rewrite chain
+   was traced end-to-end (`simulateCampaignWorldPulse` → `advanceTime`/`applyFactionDeltasToSettlement`
+   → the food/blockade/corruption passes → `applyWorldPulseOutcomes` → `applyOutcomeToSettlement`
+   → faction/religion projection → a final `deepClone`) — every hop is an identity pass-through, a
+   `{ ...settlement, <changed field> }` spread, or a deep clone. There is **no allowlist
+   reconstruction** anywhere, and `advanceCampaignWorld` adds no normalize/serialize re-narrow, so an
+   unknown top-level key survives byte-for-byte across single and repeated ticks. `settlement.mapEdits`
+   is therefore a SAFE storage home for the world-pulse tick — SM-3 does not need to move it or add a
+   preserve guarantee. (`normalizeSettlement` also spreads `{ ...settlement }`, preserving unknown keys
+   at the save/load boundary; the PUBLIC/gallery projection deliberately DROPS top-level `mapEdits` via
+   the `PUBLIC_TOPLEVEL_KEYS` allowlist — correct for a library-only surface.) **Pinned by**
+   `tests/domain/worldPulseBlobPreservation.test.js` (4 tests, incl. an anti-vacuity guard proving the
+   member is really rewritten into a different blob while the unknown keys still survive — preservation
+   is not an identity-pass artifact). Independently re-traced by the manager; the pin's verdict and the
+   trace agree.
+2. **Chunk-mint cost → ZERO EAGER DELTA at SM-1.** SM-1 mints no chunk and is imported by NOTHING
+   eager — `src/domain/townMap/**` is reached only by the three test files and (later) the lazy SM-2
+   viewer pane. Empirical (real `npm run build`): the pre-SM-1 first-paint static closure was
+   **1,216,273 B** (7 chunks, 77 B under the 1,216,350 budget); the post-SM-1 closure is **1,216,273 B**
+   — **byte-identical, delta 0** — and `townMap` appears in NO dist chunk at all (fully tree-shaken).
+   The ~37 B entry-preload leak the FP-R precedent warns about is a property of MINTING a lazy chunk;
+   that measurement is owed at **SM-2** when the viewer chunk is actually created (own-chunk vs
+   settlements-chunk decision resolves there). `verify:dist` green.
+
 ## 9. WAVES + PLACEMENT
 
 - **SM-1 — the model:** townMapModel + total assigner + anchors + version axes; golden manifest
