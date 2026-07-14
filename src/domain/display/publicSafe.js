@@ -76,18 +76,25 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // read-only to all viewers, the latent seed never does. Mirrored server-side by
 // migration 128 (both _gallery_sanitize_public_json + _gallery_world_snapshot_is_safe).
 //
-// DEFERRED — OWNER BATCH (domain-readmodels-2): the bare `note` token over-matches
-// public economics-attribution keys (magicFoodNote, magicNote, upstreamNote,
-// storageNote), stripping the food-deficit/chain explanation from every
-// public/gallery/anon dossier. The fix narrows `note` here to the genuinely private
-// keys (dossierNotes|tabNotes|\bnotes?\b — dmNotes/narrativeNotes already covered)
-// AND lands the SAME narrowing in a CREATE OR REPLACE migration for
-// _gallery_sanitize_public_json (Postgres \y boundaries). It CANNOT ship client-only:
-// this regex is pinned token-⊆-SQL by snapshotDenylistDrift.test.js, and toPublicSafe
-// is pinned field-for-field EQUAL to the server sanitizer by gallerySanitize.pglite.
-// A client-only change breaks one gate or silently diverges the security twin, so it
-// is owner-gated (coordinated migration). Land both halves together in the owner batch.
-export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
+// NOTE NARROWING (domain-readmodels-2, RESOLVED — migration 130): the bare `note`
+// token used to over-match public economics-attribution keys (magicFoodNote,
+// magicNote, upstreamNote, storageNote), stripping the food-deficit/supply-chain
+// explanation from every public/gallery/anon dossier. It is now narrowed to the
+// genuinely PRIVATE note keys: `dossierNotes|tabNotes|\bnotes?\b` (the DM scratch
+// spaces + a bare `note`/`notes` field). dmNotes/narrativeNotes remain covered by
+// their own tokens (\bdm and the explicit narrativeNotes alternation). The camelCase
+// analytical notes carry no word boundary before "Note" (magicFood‸Note), so
+// `\bnotes?\b` leaves them intact while a standalone `notes` field still strips.
+// COUPLED SQL TWIN — this narrowing CANNOT ship client-only: the regex is pinned
+// token-⊆-SQL by snapshotDenylistDrift.test.js and toPublicSafe is pinned
+// field-for-field EQUAL to the server sanitizer by gallerySanitize.pglite. Migration
+// 130 lands the IDENTICAL narrowing (Postgres \y boundaries) in BOTH
+// _gallery_sanitize_public_json (the dossier sanitizer) and
+// _gallery_world_snapshot_is_safe (the world-snapshot scanner the drift test pins).
+// The denylist still only GROWS in the private-key direction — this narrows a token
+// that was over-broad, tightening it TO the genuinely-private keys, never removing a
+// private key from coverage.
+export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|dossierNotes|tabNotes|\bnotes?\b|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
 
 /**
  * Recursively strip denied keys from a subtree; preserves history.currentTensions.

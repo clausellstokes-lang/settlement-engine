@@ -20,18 +20,22 @@
  *   - a baseline entry that has been re-pinned FAILS with a remove-it message, so
  *     the baseline can only shrink, never go stale.
  *
- * ┌─ MIGRATION-TODO (OWNER-GATED — the re-pin migration is NOT written here) ─────┐
- * │ Re-pin these 8 post-111 money/gallery SECURITY DEFINER functions to           │
- * │ `set search_path = public, pg_temp` in a config-only 094/111-style migration  │
- * │ (byte-neutral: appending pg_temp LAST cannot change public resolution). Then   │
- * │ delete their rows from the baseline (this test enforces that removal):         │
+ * ┌─ RE-PIN LANDED (backend-3 resolved — migration 131) ─────────────────────────┐
+ * │ The 8 post-111 money/gallery SECURITY DEFINER functions that had regressed to │
+ * │ a bare `set search_path = public` were re-pinned to `public, pg_temp` (pg_temp │
+ * │ LAST) by 131_repin_definer_search_path_pg_temp.sql and REMOVED from the        │
+ * │ baseline in lockstep (the shrink-only direction). 131 re-CREATEs each verbatim │
+ * │ from its net-current body with only the header line changed — NOT an ALTER,    │
+ * │ because this walker reads search_path from the `create or replace` HEADER and  │
+ * │ is blind to ALTER (which is why the 103 service_* funcs, ALTERed by 111, stay  │
+ * │ in the baseline). Appending pg_temp LAST is byte-neutral to behaviour.         │
  * │   114_ai_pricing_config.sql      — spend_credits, get_ai_pricing,             │
  * │                                    aggregate_ai_usage_stats                    │
  * │   115_pricing_resync_cron.sql    — run_pricing_resync_nightly                 │
  * │   120_gallery_import_premium_gate.sql — import_gallery_dossier                │
  * │   123_money_and_public_projection_hardening.sql — refund_credits             │
  * │   125_action_velocity_guards.sql — toggle_gallery_vote, add_gallery_comment   │
- * │ The 76 pre-094 entries are a larger, lower-stakes cleanup for the same batch.  │
+ * │ The 76 remaining (pre-094) entries are a larger, lower-stakes cleanup batch.   │
  * └──────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -42,9 +46,12 @@ import { resolve, join } from 'node:path';
 const MIG_DIR = resolve(process.cwd(), 'supabase/migrations');
 const BASELINE_PATH = resolve(process.cwd(), 'tests/lint/.migration-searchpath-baseline.json');
 
-// The post-111 money/gallery regressions the finding names — these MUST be in the
-// baseline until the owner's re-pin migration lands (see MIGRATION-TODO above).
-const KNOWN_POST_111 = [
+// The 8 post-111 money/gallery functions that regressed to a bare search_path and were
+// RE-PINNED to `public, pg_temp` by migration 131 (backend-3 resolved). They were
+// removed from the baseline in lockstep; the guard below enforces that the re-pin stays
+// landed — the walker must now SEE them pinned (absent from `current` violators) and
+// they must stay OUT of the baseline.
+const REPINNED_POST_111 = [
   'public.spend_credits',
   'public.get_ai_pricing',
   'public.aggregate_ai_usage_stats',
@@ -124,11 +131,23 @@ describe('SECURITY DEFINER search_path pin — structural ratchet (backend-3)', 
     ).toEqual([]);
   });
 
-  it('still tracks the post-111 money/gallery regressions until the owner re-pin lands', () => {
-    // Guard the MIGRATION-TODO: if one of these gets re-pinned, the shrink-only
-    // test above fires and this list should be trimmed in lockstep.
-    const missing = KNOWN_POST_111.filter(name => !(name in baseline));
-    expect(missing, `Post-111 regression re-pinned — update KNOWN_POST_111 + the baseline: ${missing.join(', ')}`).toEqual([]);
+  it('keeps the 131 re-pin landed: the post-111 money/gallery functions are pinned, not baselined', () => {
+    // migration 131 re-pinned all 8 to `public, pg_temp`. The walker must now see the
+    // pin (each is ABSENT from the current violator set) AND they must be gone from the
+    // baseline. A regression on either side — a future recreate dropping the pin, or a
+    // stray re-baseline — fails here.
+    const stillBare = REPINNED_POST_111.filter(name => name in current);
+    expect(
+      stillBare,
+      `Re-pin regressed — these are bare SECURITY DEFINER again; migration 131 must pin them `
+        + `\`set search_path = public, pg_temp\`:\n  ${stillBare.map(n => `${n} (${current[n]})`).join('\n  ')}`,
+    ).toEqual([]);
+    const stillBaselined = REPINNED_POST_111.filter(name => name in baseline);
+    expect(
+      stillBaselined,
+      `Re-pinned by 131 but still in the baseline — remove them from `
+        + `tests/lint/.migration-searchpath-baseline.json:\n  ${stillBaselined.join('\n  ')}`,
+    ).toEqual([]);
   });
 
   it('parses a plausible number of migration functions (sanity — the walker is not silently empty)', () => {

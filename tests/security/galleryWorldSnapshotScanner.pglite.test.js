@@ -121,6 +121,24 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
     expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { primaryDeitySnapshot: { name: 'Sun' } } } } })).toBe(true);
   });
 
+  it('(130) accepts public economics-attribution notes but still rejects the private note keys', () => {
+    // The `note` channel is narrowed to the genuinely-private note keys (mirroring the
+    // client PRIVATE_KEY_RE): a published world snapshot embedding a settlement config
+    // with a public economics note (upstreamNote / magicFoodNote / storageNote) is no
+    // longer false-REJECTED, while a dmNotes-class / bare notes key still is.
+    return Promise.all([
+      // ACCEPTED — public economics annotations (no \y before "Note").
+      expect(isSafe({ schemaVersion: 1, settlements: { Brack: { economicState: { activeChains: [{ upstreamNote: 'imported grain' }] } } } })).resolves.toBe(true),
+      expect(isSafe({ schemaVersion: 1, x: { magicFoodNote: 'divine provision', storageNote: '8mo' } })).resolves.toBe(true),
+      // REJECTED — the genuinely-private note keys.
+      expect(isSafe({ schemaVersion: 1, notes: 'scratch' })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, deep: { note: 'x' } })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, dossierNotes: 'prep' })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, tabNotes: { a: 1 } })).resolves.toBe(false),
+      expect(isSafe({ schemaVersion: 1, deep: { dmNote: 'secret' } })).resolves.toBe(false),
+    ]);
+  });
+
   it('passes a clean schemaVersion = 1 snapshot', async () => {
     const clean = {
       schemaVersion: 1,
