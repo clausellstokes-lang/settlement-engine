@@ -61,8 +61,8 @@ export default function AccountSubscriptionSection({
               borderTop: '1px solid rgba(124,58,237,0.20)',
               fontSize: FS.xs, color: swatch['#3A2F18'], lineHeight: 1.5,
             }}>
-              <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> every size,
-              unlimited saves, neighbours, AI prose pass.
+              <b style={{ color: swatch['#7C3AED'] }}>Cartographer unlocks:</b> unlimited saves,
+              neighbours, custom content, and unlimited PDF/JSON export.
             </div>
           )}
         </div>

@@ -18,7 +18,8 @@ import { dirname, join, relative } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const TREES = ['src/generators', 'src/domain'];
+// F6/[determinism-constitution-3] extended the ban to the remaining sim-path dirs.
+const TREES = ['src/generators', 'src/domain', 'src/workers', 'src/kernel'];
 
 // A .localeCompare( CALL (not the word in a comment/message). The bare-word
 // mentions in doc comments have no '(' after them, so this matches only calls.
@@ -35,7 +36,7 @@ function walkJs(dir, acc) {
 }
 
 describe('localeCompare determinism guard (F13)', () => {
-  test('src/generators/** + src/domain/** contain ZERO localeCompare calls', () => {
+  test('src/generators/** + src/domain/** + src/workers/** + src/kernel/** contain ZERO localeCompare calls', () => {
     const offenders = [];
     for (const tree of TREES) {
       for (const file of walkJs(join(ROOT, tree), [])) {
@@ -56,14 +57,18 @@ describe('localeCompare determinism guard (F13)', () => {
     expect(CALL_RE.test(src)).toBe(false);
   });
 
-  test('eslint.config.js bans localeCompare in BOTH the generators and domain determinism blocks', () => {
+  test('eslint.config.js bans localeCompare in the generators, domain, workers, and kernel determinism blocks', () => {
     const cfg = readFileSync(join(ROOT, 'eslint.config.js'), 'utf8');
-    // The ban selector appears once per producer tree (generators + domain).
+    // The ban selector appears once per determinism block: generators + domain +
+    // workers + kernel(non-prng) + kernel/prng.js = 5.
     const hits = cfg.match(/callee\.property\.name='localeCompare'/g) || [];
-    expect(hits.length).toBe(2);
-    // Both blocks are scoped to their tree.
+    expect(hits.length).toBe(5);
+    // Every block is scoped to its tree/file.
     expect(cfg).toContain("files: ['src/generators/**/*.js']");
     expect(cfg).toContain("files: ['src/domain/**/*.js']");
+    expect(cfg).toContain("files: ['src/workers/**/*.js']");
+    expect(cfg).toContain("files: ['src/kernel/**/*.js']");
+    expect(cfg).toContain("files: ['src/kernel/prng.js']");
     // The ban message routes authors to the sanctioned comparator.
     expect(cfg).toMatch(/deterministicSort\.js/);
   });

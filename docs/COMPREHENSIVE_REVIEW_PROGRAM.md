@@ -50,18 +50,47 @@ migrations, schema/persistence shape changes, data deletion, security posture, p
 behavior, budget raises, golden regens.
 
 ## Owner rulings landed during this program (binding on wave plans)
+- **2026-07-14 — G3 APPROVED TO ARCHITECT (owner: "I like your thoughts about the upswings and
+  building on the relationships, and I want you to architect that with Fable"):** Fable authors the
+  upswing-drama + relationship-driven-material-flows design (relief caravans, ally credit,
+  trade-as-diplomacy, reconstruction/boom arcs). BUILD comes after the fix program.
+- **2026-07-14 — THE AI SECOND CONTROL SURFACE ("Surveyor") — owner delivered a full 41-section
+  vision to consider + architect:** AI as interface/interpreter/planner/analyst/editorial layer
+  over the deterministic engine, never the world engine itself. Trust model: AI proposes →
+  simulator validates+resolves → DM authorizes. One operation layer for manual AND AI. Surveyor
+  $19.99 tier + managed credits + BYOK; provider-neutral adapters; consented intent→operation
+  training corpus separate from analytics; dev sequence: read-only analyst → briefs → post-session
+  interpretation → custom content → settlement construction → realm construction → advanced
+  autonomy. Fable architecture doc required; BUILD after the fix program.
+- **2026-07-14 — SEQUENCING (owner, verbatim intent): "All of this of course, after fixing
+  everything and adding all the uncompleted work."** The Track N/G fix program + unplugged-work
+  completion runs FIRST; the two architecture docs are authored now (design is not build); their
+  implementation queues behind program completion.
+- **2026-07-14 — FOUNDER CAP RESOLVED BY THE OWNER'S OWN SPEC (§25: "The Founder tier is limited
+  to 30 lifetime seats")** — answers owner-ask #3: 30 is truth; FounderTile's 500 and the email
+  template's "first 500" are the bugs (F4 fixes both). Founder×AI posture per §25: lifetime
+  Premium + Surveyor core interface + BYOK, no unlimited funded inference.
 - **2026-07-13 — PDF export monetization:** free tier pays $2.99 per dossier PDF; only premium
   gets unlimited export. The shipped free-unlimited-export gate is wrong; flip it to the existing
   single-dossier entitlement ladder. Pricing-page copy was already correct; align the other five
   tier-fact surfaces to it via one derived tier-facts module. (Review doc §6.2 updated in place.)
+
+## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
+- **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
+  EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
+  map (a calamity's ruined quarter, a boom's new district, reconstruction visibly raising beams).
+  Owner: "the last thing that I would want to build (but I'm telling you not to for right now)…
+  that would be the last thing if usage of Fable is enough." Sequenced BEHIND: the fix program →
+  upswing/relationship flows → Surveyor stages. The end-goal framing, verbatim intent: "be good at
+  everything, excel at the most important, and take over from all my other competitors."
 
 ## Phase plan (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
       re-dispatched via resume of `wf_c21bb055-cb9`; their reports append to the register on landing.
 - [x] **Phase A — ASSESSMENT** (Fable main loop): committed as
       `docs/COMPREHENSIVE_REVIEW_2026-07-13.md` (holistic assessment + 208-finding register).
-- [ ] **Phase V — VERIFY** (Opus, `model:'opus'` on every agent): adversarial verification of every
-      actionable finding (refuters; majority vote on majors). Verdicts appended to the review doc.
+- [x] **Phase V — VERIFY**: 150 findings verified (~14.4M Opus tokens): 112 CONFIRMED, 18 PARTIAL,
+      5 REFUTED, 4 adjudicated, 11 manager-verified, 2 dispositioned. Verdicts in the review doc.
 - [x] **Phase P — WAVE PLAN** (Fable architect, 2026-07-14). TWO TRACKS, forced by the verified
       blast radii (50 confirmed fixes legitimately shift same-seed goldens):
 
@@ -150,11 +179,100 @@ behavior, budget raises, golden regens.
       gate re-run, sensitive-diff reads, constitution check) → exact-stage commit → ledger row +
       Progress line. Full gate per wave; goldens byte-identical on Track N; Track G proves its shifts
       are exactly the intended semantic changes (before/after diff of the shifted fixture fields).
-- [ ] **Phase F — FIX WAVES** (Opus implement → Fable §0.3 manager check → exact-stage commit →
-      ledger row in playbook §0.0 + Progress line here). One wave per commit. Full gate per wave
-      (`npm run check`); constitutional spot-checks (goldens byte-identical, any-cast 2252,
-      verify:dist at budget 1,255,985).
-- [ ] **Phase E — END**: final full gate, playbook §0.0.3 refresh, memory update, final report.
+- [x] **Phase F — FIX WAVES**: COMPLETE 2026-07-14. Main: W-DOCS-1, F1+trim, F2, F3a/b, F4, F5,
+      F5b, F6+amendment, F7, Lane-2, GATE-FIX (final gate 8,572/8,572 green). Golden: G1a-d, G2,
+      G2R + harness + census (implementation complete; regen awaits the owner). ~110 verified
+      findings closed; ~390 new pins across both branches; every wave §0.3-reviewed and ledgered.
+- [x] **Phase E — END**: final full gate GREEN @ 4de2f8db; ledger rows current; memory updated;
+      the final report delivered 2026-07-14. REMAINING = the owner batch, then the golden merge.
+
+## OVERNIGHT DELEGATION (2026-07-14, owner: "continue with all of this work independently making
+## your own judgement calls. I'll return in the morning.")
+Autonomous execution of the master sequence under the standing constitution. Judgment calls are
+made and recorded vetoably (JUDGMENT entries in commit messages + Progress lines). REMAINS
+OWNER-GATED OVERNIGHT regardless of delegation: the UPDATE_GOLDEN regen (Track G implements and
+evidences, does NOT regen), preset lights, any push/deploy, migrations/schema shape, data
+deletion, paid-surface changes beyond the already-ruled $2.99 flip. THE MORNING QUEUE for the
+owner: golden sign-off (if Track G is evidenced by then), preset lights, autonomy ruling,
+deletion list, emails, deploy, CSP flip. Session-window cuts are expected (~5-hour cadence);
+recovery = the resume protocol above; every wave banks before the next dispatches.
+
+## IN-FLIGHT (overnight 2026-07-14 — for a successor finding unstaged work)
+- MAIN TREE: ✅ **F1+trim COMMITTED** (see Progress). F2 dispatching next.
+- GOLDEN WORKTREE (/Users/cstokes/Desktop/settlement-engine-golden @ claude/review-fix-golden-track):
+  ✅ **G1a COMMITTED @ 7e1886dd** — 5 fixes, 16 pins, ZERO goldens shifted (ledgered why), any-cast
+  burned +31→+0 (2252 exact, no re-baseline), independent battery 21 files/108 green. G1b (war
+  mechanics: posture≠engagement rust fix, retreat lives, umbilical read, defenders bank wins,
+  occupation constrains, removed-settlement deployment lifecycle) DISPATCHED on top.
+  MAIN TREE: ✅ **F2 SHIPPED @ e99e69f9** (4 seams, negative-controlled pins, bridge-surface walker).
+  **F3 surfaces/legibility RUNNING** (17 items, stop-and-report licensed). Follow-up chip spawned:
+  mapThumb overlay-svg attribute.
+  GOLDEN: ✅ G1b @ 0b499818 · ✅ **G1c @ 9bdfa8fa** (16 fixes, 27 pins — REMOVED_THREAT stays dead
+  through regen, PLAGUE mints its twin, remove_npc real, DM-visible expiry, temper read + peacelike
+  key + scan guard, aggressor-keyed disposition, depleted exports recover, belief-prune fog fix,
+  calamity dedup; golden FIXTURES still byte-identical — only 2 behavior pins updated+ledgered;
+  3 verdict-backed deferrals: bornTick→owner regen batch, M11a autonomy→owner note, stance-half→
+  formalized deferral). **G1d RUNNING** (the 4 new-lane couplings: DM relationship events→conflict
+  layer, relief propagation, re-emitter cooldowns, pantheon tier→conversion). MAIN: ✅ **F3a @
+  0e56baa5** (9 items: rumor/crier/newsBody fiction, settlementPestilence read-model, truthful
+  World-Laws axes; publicSafe note = coupled client+SQL, deferred-with-proof to owner batch).
+  **F3b RUNNING** (catch-up lift+digest, causal supplier, belief UI, RegionWakeReplay, PDF group).
+> - 2026-07-14 ~02:00: **F1 LIFECYCLE-TRUST SHIPPED** (9 fixes, 24 pins) — with the ratchet story
+>   the constitution wrote itself: the wave was HELD at +805B over budget, the §0.8-1 trim landed
+>   in-wave (catch-up body lazified + pulseFingerprint off first paint), closure now **1,251,094**
+>   (4,891B margin — funds W5+W2 comfortably; ratchet-down queued for the owner batch). JUDGMENT:
+>   trim folded into F1 rather than reverting eager fixes — veto to flip. Gates: suite 8,372/8,372;
+>   independent re-run 361/361 + verify:dist 108/108; goldens byte-identical; any-cast 2252.
+
+## OVERNIGHT SCOREBOARD (2026-07-14, rolling)
+SHIPPED: F1 @ 75cdf8b1 · F2 @ e99e69f9 · F3a @ 0e56baa5 · F3b @ b25d3c1a (F3 COMPLETE) ·
+F4 @ 433641f8 (commerce-trust: $2.99 flip w/ the ungated-path catch, tierFacts, founder=30,
+entity-token leak dead via §6 degrade path — full link-layer port re-scoped to master merge) on
+main; G1a @ 7e1886dd · G1b @ 0b499818 · G1c @ 9bdfa8fa · G1d @ f5fbc41f (G1 COMPLETE) ·
+**G2 @ ec69513e** (18 coherence fixes; THE SHIFT MAP complete: 134/~190 configs attributed per-fix,
+manifest reverted; ⚠️ owner-veto flag on the data-tables-6 governance edit) on golden.
+~62 fixes, ~145 pins. Constitution: golden fixtures byte-identical everywhere EXCEPT the one
+ledgered, isolation-confirmed G1d red (faith-pact metronome, sp-a|4|one_week, faith_pact_formed
+8→2) — the owner sign-off evidence; any-cast 2252 exact throughout; closure 1,251,487 (margin
+4,498). ALSO SHIPPED (late night): F5 @ da5a1dee (perf: 20x route cost, freeze+share, growth bounded,
+tick-cost gate; #4 catch-up-orchestrator STOP — owner fork; stash INCIDENT recovered+ledgered) ·
+F6 @ 1977f27f (gate honesty: VERIFY_DIST hard-fail, blind-harness fix, fail-not-skip suites,
+self-mint ends, workers purity, living-mode pins, mover-composition smoke, sf-bridge harness,
+2 structural walkers) + F6-amendment @ 65e79547 (harness fix moved to golden — Track N always-
+green) · F7 @ 9b9f7a28 (kernel clamp/slugify + parity proofs, curated barrels, domain size
+ratchet, DEAD_CODE_DISPOSITION.md — no deletions, autonomy ruling doc; any-cast RATCHETED DOWN
+2252→2248) · F5b @ fcdc319e (deepFreeze isDraft guard — the Immer regression F7 caught, dead) ·
+G2R @ daa0988d + harness adoption @ 868eb560 (**GOLDEN TRACK IMPLEMENTATION COMPLETE**: resolver
+on real seats, food models cannot disagree, timelines deepen, 5 stress types whole + registration
+walker; cumulative shift 187/187 mapped). ✅ Lane-2 @ 9dd8d0cb (DM non-party
+verbs land + survive the tick + undo honestly; refuter round closed 1 CONFIRMED pre-commit) ·
+✅ GATE-FIX @ 4de2f8db (the final gate's 2 reds: house deepClone; the LIVING flake root-caused to
+a FIXTURE wall-clock stamp — product path proven clean).
+> **THE FINAL FULL GATE IS GREEN: 8,572/8,572 (763 files) + verify:dist 109/109, exit 0, clean
+> tree @ 4de2f8db (2026-07-14).** Baseline was 8,348 → +224 net pins on main; the golden branch
+> (9 commits, its own 8,511/8,517 with the six enumerated regen surfaces) awaits the owner batch.
+> Closure 1,254,716 ≤ 1,255,985; any-cast 2248 (ratcheted DOWN from 2252).
+> **IMPLEMENTATION PHASE COMPLETE — the program now waits ONLY on the owner batch** (golden
+> sign-off → regen → merge; preset lights; the catch-up fork; vetoes; dockets). After the merge:
+> regen the edge bundle (build:edge-shared), then the master sequence resumes (W5/W2/telemetry →
+> expansions).
+QUEUED AFTER: Lane-2 store ripple (G1d stop-report) · F5 perf · F6 gate-honesty · F7 code-health ·
+then the G-track merge decision + owner batch. Deferral ledger grows in the wave rows (publicSafe
+note, bornTick, M11a autonomy, stance-half, belief truthOf divergence join).
+
+## THE MASTER SEQUENCE (consolidated 2026-07-14 — fixes → owed work → expansions → endgame)
+RUNNING: F1 (main tree) + G1a (golden worktree). THEN: F2→F3→F4→F5 (delivers the §0.8-1 M10b
+trim)→F6→F7 on review-fixes; G1b→G1c→G2→shift-ledger→OWNER GOLDEN SIGN-OFF→regen→merge on the
+golden branch. OWED WORK: W5 cherry-pick + ratchet-down (post-F5 headroom) → W2 feed retention →
+usage-telemetry merge (owner) → numeric prices + wallClockNow cleanup → TRACK K COMPLETION (the
+bridge: owed work AND Surveyor's foundation). EXPANSIONS (owner-sequenced after fixes):
+E1 generosity engine (relief→credit→reconstruction→boom/bust→purchase→overture→flourishing; peace-
+with-terms + ruins interleave) → E2 Surveyor (Track-K→analyst→briefs→session-interpretation→custom
+content→settlement→realm→autonomy; tier/credits/BYOK alongside stages 1-2). PARKED LAST (owner):
+the living settlement map. ENDGAME: final gate + PART-9 re-grade → master merge (entity-ref +
+migration-renumbering hazards pre-mapped) → owner push/deploy + migration chain → checkpoint
+soaks/tuning (next AI) → launch. Owner-ask batch: golden sign-off, preset lights, autonomy ruling,
+deletion list, emails, deploy, CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing.
 
 ## Resume protocol (for a successor session — START HERE)
 1. `git status` + `git log --oneline -15` — trust the tree, not any digest. Foreign WIP is preserved,

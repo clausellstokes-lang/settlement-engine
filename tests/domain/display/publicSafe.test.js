@@ -44,6 +44,46 @@ describe('toPublicSafe (§1k)', () => {
     }
   });
 
+  it('(130) narrows `note`: keeps public economics-attribution notes, still strips the private note keys', () => {
+    // domain-readmodels-2: the bare `note` token over-matched public economics
+    // annotations (the food-deficit / supply-chain explanation the dossier's
+    // economics tab renders). The narrowing keeps them while the genuinely-private
+    // note keys — dossierNotes / tabNotes / a bare notes|note / dmNote — still strip.
+    // Public economics-attribution notes survive the token (camelCase — no \b before "Note").
+    for (const k of ['magicFoodNote', 'magicNote', 'upstreamNote', 'storageNote', 'viabilityNote', 'priorityNote', 'coherenceNotes']) {
+      expect(PRIVATE_KEY_RE.test(k), `public analytical note "${k}" must NOT trip the denylist`).toBe(false);
+    }
+    // …while the genuinely-private note keys still strip.
+    for (const k of ['dossierNotes', 'tabNotes', 'notes', 'note', 'dmNote', 'narrativeNotes']) {
+      expect(PRIVATE_KEY_RE.test(k), `private note key "${k}" must still trip the denylist`).toBe(true);
+    }
+
+    // End-to-end at the NESTED level (the deeper denylist): economics notes nested in
+    // an allowlisted subtree survive the projection; a dmNotes-class / bare notes key
+    // beside them still strips. (economicState is allowlisted; its children go through
+    // the recursive denylist.)
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      economicState: {
+        magicFoodNote: 'Divine provision supplements food shortfall',
+        storageNote: '8 months strategic reserve',
+        activeChains: [{ id: 'grain', upstreamNote: 'Imported inputs: grain', dmNote: 'the miller skims the granary' }],
+        dossierNotes: 'DM prep for the famine arc',
+        notes: 'scratch pad',
+      },
+      // top-level DM-private note — dropped by the fail-closed allowlist regardless.
+      dmNotes: 'the BBEG is the mayor',
+    });
+    expect(out.economicState.magicFoodNote).toBe('Divine provision supplements food shortfall');
+    expect(out.economicState.storageNote).toBe('8 months strategic reserve');
+    expect(out.economicState.activeChains[0].upstreamNote).toBe('Imported inputs: grain');
+    // …the dmNotes-class + bare notes fields beside them still strip.
+    expect(out.economicState.activeChains[0].dmNote).toBeUndefined();
+    expect(out.economicState.dossierNotes).toBeUndefined();
+    expect(out.economicState.notes).toBeUndefined();
+    expect(out.dmNotes).toBeUndefined();
+  });
+
   it('strips config.latentPantheon (unrevealed seed) but keeps the activated live embeds', () => {
     // Phase 4 premium gate: config is allowlisted at the top level, so a nested
     // latentPantheon would ride through without the denylist token. The ACTIVATED

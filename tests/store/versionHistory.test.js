@@ -18,6 +18,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 }));
 
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 
 function makeStore() {
   return create(immer((set, get, store) => createSettlementSlice(set, get, store)));
@@ -158,6 +159,39 @@ describe('version history mutations', () => {
     const ok2 = useStore.getState().revertToSnapshot({ snapshotId: preRevert.id });
     expect(ok2.ok).toBe(true);
     expect(useStore.getState().settlement.name).toBe('Mutated State');
+  });
+
+  it('revertToSnapshot re-derives systemState + persists campaignState — coherent in memory AND across reload (state-lifecycle-2)', () => {
+    useStore.setState(s => {
+      s.activeSaveId = 'save-1';
+      // A STALE systemState reflecting the reverted-AWAY settlement, mirrored into the
+      // persisted campaignState (hydrateFromSave prefers cs.systemState on reload).
+      s.systemState = { resilience: { value: 99 }, volatility: { value: 99 } };
+      s.savedSettlements[0].campaignState = {
+        phase: 'draft', eventLog: [], systemState: { resilience: { value: 99 } },
+      };
+      s.savedSettlements[0].versionHistory = [{
+        id: 'snap-x', kind: 'manual', label: 'target',
+        settlement: { name: 'Restored', population: 900, tier: 'thorp' },
+      }];
+    });
+
+    const ok = useStore.getState().revertToSnapshot({ snapshotId: 'snap-x' });
+    expect(ok.ok).toBe(true);
+
+    const st = useStore.getState();
+    // Live systemState was re-derived from the RESTORED settlement — the stale 99 is gone.
+    const expected = deriveSystemState(st.settlement);
+    expect(st.systemState).toEqual(expected);
+    expect(st.systemState).not.toEqual({ resilience: { value: 99 }, volatility: { value: 99 } });
+    // editedAt stamped by the revert.
+    expect(typeof st.editedAt).toBe('string');
+    // The active save's persisted campaignState.systemState now AGREES with the live
+    // view (previously it stayed stale, so the incoherence survived a restart).
+    expect(st.savedSettlements[0].campaignState.systemState).toEqual(expected);
+    // Reload round-trip: hydrating from the save entry reproduces the coherent state.
+    useStore.getState().hydrateFromSave(st.savedSettlements[0]);
+    expect(useStore.getState().systemState).toEqual(expected);
   });
 
   it('draft snapshots grow LINEARLY, never exponentially (anti-2^N regression pin)', () => {

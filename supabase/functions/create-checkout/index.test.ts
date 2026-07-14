@@ -167,6 +167,44 @@ Deno.test('single_dossier without a valid checkout token is rejected (400)', asy
   assertEquals(stripe.created.length, 0);
 });
 
+// ── Anonymous single_dossier rate limiter (backend-1) ────────────────────────
+// The amplifiable path (mint Stripe sessions + write dossier_purchases with the
+// public anon key) must be throttled BEFORE Stripe is reached, like every other
+// anon edge fn. The `rateLimit` dep is the injection seam; production passes the
+// migration-035-backed limiter with an in-memory backstop.
+
+Deno.test('anonymous single_dossier over the rate limit is rejected (429) before Stripe', async () => {
+  const stripe = makeStripe();
+  const token = 'x'.repeat(40);
+  const res = await handleCreateCheckout(
+    req({ product: 'single_dossier', checkoutToken: token }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient(null),
+      adminClient: makeAdminClient(),
+      rateLimit: () => Promise.resolve(false),   // over the limit
+    },
+  );
+  assertEquals(res.status, 429);
+  assertEquals(stripe.created.length, 0);         // never reached Stripe
+});
+
+Deno.test('the rate limiter gates ONLY the single_dossier path (a credits checkout is not throttled)', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    {
+      stripeClient: stripe.stripeClient,
+      userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }),
+      adminClient: makeAdminClient(),
+      rateLimit: () => Promise.resolve(false),   // would block if consulted
+    },
+  );
+  // A non-anonymous product never consults the single_dossier limiter.
+  assertEquals(res.status, 200);
+  assertEquals(stripe.created.length, 1);
+});
+
 // ── Founder Lifetime seat cap (advertised 30 seats, enforced server-side) ────
 // founder_seats_taken() feeds both the pricing-page counter AND this gate; a
 // sold-out founder tier must never reach Stripe.

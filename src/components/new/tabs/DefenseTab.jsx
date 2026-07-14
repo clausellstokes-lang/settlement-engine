@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities } from '../../../domain/display/defenseDisplay.js';
+import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { truncateAtWord } from '../../../lib/text.js';
 
 export function DefenseTab({ settlement:r, narrativeNote}) {
@@ -72,15 +72,9 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
   const orderColor = isDangerous?'#8b1a1a':isUnsafe?'#8a4010':isControlled?'#5a2a6b':isModerate?'#1a5a28':'#a0762a';
   const orderBg    = isDangerous?'#fdf4f4':isUnsafe?'#fdf0e8':isControlled?'#f8f0fc':isModerate?'#f0faf4':'#faf8ec';
 
-  // Stress military status
-  const STRESS_STATUS = {
-    under_siege:          {posture:'ACTIVE SIEGE',          colour:'#8b1a1a'},
-    famine:               {posture:'INTERNAL PRESSURE',     colour:'#8b5a1a'},
-    occupied:             {posture:'UNDER OCCUPATION',      colour:'#4a3a6b'},
-    politically_fractured:{posture:'COMMAND SPLIT',         colour:'#5a4a1a'},
-    recently_betrayed:    {posture:'SECURITY COMPROMISED',  colour:'#6b1a2a'},
-    plague_onset:         {posture:'QUARANTINE ACTIVE',     colour:'#2a5a2a'},
-  };
+  // Stress military status — the shared DEFENSE_STRESS_STATUS set (pdf-4), so the
+  // screen and the PDF defenseSlice raise the SAME active-military-status callouts.
+  const STRESS_STATUS = DEFENSE_STRESS_STATUS;
   const activeStress = stressTypes.find(t=>STRESS_STATUS[t]);
   const stressStatus = activeStress ? STRESS_STATUS[activeStress] : null;
   const stressObj    = stresses.find(s=>s?.type===activeStress);

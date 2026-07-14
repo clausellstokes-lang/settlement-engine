@@ -1,14 +1,18 @@
-import React, { useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { FS, swatch } from './theme.js';
+import React, { useState, useRef, useEffect, useCallback, lazy, Suspense } from 'react';
+import { FS, SP, swatch } from './theme.js';
 import { runTemplateNarrative } from '../generators/aiLayer';
 import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
-import PipelineRail from './PipelineRail.jsx';
-import ShareToGallery from './ShareToGallery.jsx';
-import BuyThisDossier from './BuyThisDossier.jsx';
-import { AiOverlayViolations } from './primitives/AiOverlayViolations.jsx';
-import { RegenerationDeltaCard } from './primitives/RegenerationDeltaCard.jsx';
+import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
+import LifecycleSpine from './primitives/LifecycleSpine.jsx';
+import Button from './primitives/Button.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { navigate } from '../hooks/useRoute.js';
+import { triggerPricingMoment } from '../lib/pricingMoments.js';
+import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
+import DossierActionBand from './dossier/DossierActionBand.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
@@ -25,9 +29,6 @@ const PendingChangesBar = lazy(() => import('./dossier/PendingChangesBar.jsx'));
 // P130 / O-2 — First-dossier teaching callouts. Self-gates on
 // flag + signed-in + savedCount===0; renders nothing otherwise.
 const FirstDossierCallouts = lazy(() => import('./dossier/FirstDossierCallouts.jsx'));
-// P135 / D-5 — Simulation drawer. Replaces the Simulation tab when
-// `simulationDrawer` flag is on. Self-mounted via a trigger button.
-const SimulationDrawer = lazy(() => import('./dossier/SimulationDrawer.jsx'));
 // P142 / D-6 — Phone-optimized "at the table" view. Mounted only when
 // flag('tableView') && userPrefs.tableViewOpen, so the chunk loads the
 // moment the user opens it and never before.
@@ -102,11 +103,6 @@ const TABS = [
   { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
   { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
-  // Simulation tab — meta surface. The pipeline rail used to render as
-  // an always-on banner above the dossier, but that pushed the actual
-  // DM-facing content below the fold. Now it lives as the last tab so
-  // the dossier itself is the default landing surface.
-  { id: 'simulation', label: 'Simulation', Icon: Cog },
 ];
 const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
@@ -183,6 +179,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // P131 / E-1 — inline-edit pipe. queueEdit goes into the
   // PendingChangesBar's drawer where the cascade preview lives.
   const queueEdit = useStore(s => s.queueEdit);
+  // Pricing-moment opener — the recovery CTA on the insufficient-credits AI
+  // error surfaces the pricing moment through DossierSessionNotices. (B1.)
+  const setActivePricingMoment = useStore(s => s.setActivePricingMoment);
   // Phase 5 W4e — War & Faith tab presence inputs. Viewer tier + campaign
   // membership decide whether the tab (war half + the GATED faith half) has
   // anything to show. These gate PRESENCE, not content — they never read the live
@@ -196,6 +195,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // byte-identical. Boolean-only selector; the ledger itself is read lazily
   // inside RumorsTab.
   const hasRumorLedger = useStore(s => campaignHasRumorLedger(s.campaigns, saveId));
+  // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
+  const phase = useStore(s => s.phase);
 
   const rawSettlement = propSettlement || storeSettlement;
   // AI narrative is now gated behind a saveId (AI-1): the ai_data has a
@@ -232,6 +233,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     if (!readOnly && trackTabExplored) trackTabExplored();
   };
   const [pendingAiAction, setPendingAiAction] = useState(null);
+  // Whether the first-save WelcomeCreditCard is currently showing. When it is, it
+  // owns the single violet Narrate pitch in this region, so DossierActionBand
+  // collapses its redundant narrative eyebrow/copy/buttons to the plain
+  // owner-actions utility row — only one Narrate pitch competes for the focal
+  // point at a time. (Reported up from the card via onVisibilityChange.)
+  const [welcomeCardVisible, setWelcomeCardVisible] = useState(false);
+  const handleWelcomeCardVisibility = useCallback((v) => setWelcomeCardVisible(!!v), []);
   // Regenerating the narrative discards the current prose (and spends credits
   // when configured). When prose already exists we gate the destructive run
   // behind a discard-confirm; first generation has nothing to lose, so the
@@ -241,6 +249,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const [localAiError, setLocalAiError]     = useState(null);
   const [aiProgress, setAiProgress] = useState('');
   const scrollRef = useRef(null);
+  // Mobile swaps the desktop scroll-arrow sub-tab strip for MobileTabStrip. Read
+  // here (before the deferred early-return) so hook order is stable. (A3.)
+  const mobile = useIsMobile();
   // NOTE: do not early-return here. React Hooks must always be called
   // in the same order on every render; an early return before subsequent
   // useMemo/useCallback hooks (line 124 etc.) would create a hooks-order
@@ -371,10 +382,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     [rawSettlement]
   );
 
-  // P135 / D-5 — The simulation drawer trigger (below the header) is the
-  // entry point, so drop the Simulation entry from the tab strip.
+  // The simulation pipeline lives behind the SimulationDrawer trigger in the
+  // action band, not as a reading tab, so the strip carries no meta entry.
   const baseTabs = TABS.filter(t => {
-    if (t.id === 'simulation') return false;
     // Notes (DM/AI) are owner-private prep: hidden from the public player
     // view, but shown on saved settlements even though the dossier prose is
     // readOnly (editability is keyed on saveId inside NotesTab, not readOnly).
@@ -438,11 +448,11 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const visibleGroupEntries = Object.entries(TAB_GROUPS)
     .filter(([, group]) => group.tabs.some(tid => allTabs.some(t => t.id === tid)));
 
-  // P102 / D-1 — Five thematic group tabs. When the flag is on, render
-  // a group selector ABOVE the existing tab strip; clicking a group
-  // filters the strip to its sub-tabs and selects the group's primary.
-  // When the flag is off, the strip behaves as before (legacy 14 tabs).
-  const fiveTabsEnabled = flag('dossierFiveTabs');
+  // P102 / D-1 — Thematic group tabs (Summary / Systems / World / Notes). A group
+  // selector renders ABOVE the sub-tab strip; clicking a group filters the strip
+  // to its sub-tabs and selects the group's primary. The dossierFiveTabs fork and
+  // the flat-tab fallback it gated are removed (flag was long-since default-on);
+  // the facade is now the only path.
   const tabToGroup = (() => {
     const m = {};
     Object.entries(TAB_GROUPS).forEach(([gid, g]) => {
@@ -453,8 +463,21 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // Initial group derives from the active tab so deep links land correctly.
   const initialGroup = tabToGroup[selectedTab] || 'summary';
   const [activeGroup, setActiveGroup] = useState(initialGroup);
-  const selectedGroup = visibleGroupEntries.some(([gid]) => gid === activeGroup)
-    ? activeGroup
+  // The displayed group is DERIVED from the active sub-tab, not just the last
+  // group click. The active tab is the source of truth for which surface is
+  // shown, so the master strip must reflect the group that OWNS it — otherwise a
+  // programmatic tab change into another group (e.g. a post-narrative auto-land)
+  // would leave the group strip highlighting the old group while the sub-tab
+  // strip shows a tab from elsewhere — a nav that contradicts itself. Deriving
+  // here (rather than syncing via an effect) keeps the strip honest in one
+  // render. `activeGroup` is consulted only as the fallback when the active tab
+  // maps to no group.
+  const groupFromTab = tabToGroup[selectedTab];
+  const desiredGroup = (groupFromTab && visibleGroupEntries.some(([gid]) => gid === groupFromTab))
+    ? groupFromTab
+    : activeGroup;
+  const selectedGroup = visibleGroupEntries.some(([gid]) => gid === desiredGroup)
+    ? desiredGroup
     : (visibleGroupEntries[0]?.[0] || 'summary');
   const handleGroupClick = (gid) => {
     setActiveGroup(gid);
@@ -466,16 +489,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     Funnel.track(EVENTS.DOSSIER_GROUP_TAB_CLICKED, { group: gid });
   };
 
-  const tabs = fiveTabsEnabled
-    // Sub-tab order follows the group's DECLARED order in TAB_GROUPS (e.g.
-    // World shows NPCs before History; Systems leads with Services), not the
-    // flat TABS array. Resolve each declared id to its live tab object and
-    // drop any the current settlement doesn't render (plus the meta sim tab).
-    ? (TAB_GROUPS[selectedGroup]?.tabs || [])
-        .filter(tid => tid !== 'simulation')
-        .map(tid => allTabs.find(t => t.id === tid))
-        .filter(Boolean)
-    : allTabs;
+  // Sub-tab order follows the group's DECLARED order in TAB_GROUPS (e.g. World
+  // shows NPCs before History; Systems leads with Services), not the flat TABS
+  // array. Resolve each declared id to its live tab object and drop any the
+  // current settlement doesn't render.
+  const tabs = (TAB_GROUPS[selectedGroup]?.tabs || [])
+    .map(tid => allTabs.find(t => t.id === tid))
+    .filter(Boolean);
 
   const scroll = (dir) => scrollRef.current?.scrollBy({ left: dir * 120, behavior: 'smooth' });
 
@@ -606,14 +626,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
       case 'neighbours':    return <RelationshipsTab settlement={s} narrativeNote={null} neighboursOnly={true} />;
       case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} />;
-      // Simulation = full PipelineRail (non-compact). Since the rail now
-      // lives inside the dossier card, we surface the full pipeline view
-      // here — step labels + traces + the eventual causal expand-on-tap.
-      case 'simulation': return (
-        <div style={{ padding: '16px 18px' }}>
-          <PipelineRail compact={false} />
-        </div>
-      );
       default:           return <div />;
     }
   };
@@ -626,6 +638,26 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const stressObj = settlement?.stress
     ? (Array.isArray(settlement.stress) ? settlement.stress[0] : settlement.stress) : null;
 
+  // Lifecycle spine stage — pure derivation from selectors already in scope, no
+  // new store fields. saveId present ⇒ saved; phase 'canon' ⇒ canonized; a
+  // clock-bound realm (inCampaign) ⇒ simulation ran; is_public ⇒ shared. Surface
+  // the FURTHEST-reached stage. (A2.)
+  const lifecycleStage = liveSaveEntry?.is_public
+    ? 'shared'
+    : inCampaign ? 'simulated'
+    : phase === 'canon' ? 'canon'
+    : saveId ? 'saved'
+    : 'draft';
+
+  // The insufficient-credits AI error gets a recovery CTA that surfaces the
+  // pricing moment (reusing the existing welcome_credit moment copy through OUR
+  // pricing-moment seam); other AI errors carry their own in-copy action.
+  // DossierSessionNotices owns the empty-band gating. (B1.)
+  const aiErrorIsCredits = !!aiError && /credit/i.test(String(aiError));
+  const openCreditsMoment = () => {
+    triggerPricingMoment('welcome_credit', setActivePricingMoment, { force: true });
+  };
+
   // ── Button group state ─────────────────────────────────────────────────────
   // Three distinct buttons replace the old single action so view-toggling
   // can't accidentally spend credits.
@@ -637,7 +669,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       aiSettlement={aiSettlement}
       aiLoading={aiLoading}
       aiRegenerating={aiRegenerating}
-      aiError={aiError}
       displayProgress={displayProgress}
       storeShowNarrative={storeShowNarrative}
       setShowNarrative={setShowNarrative}
@@ -651,12 +682,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
 
   return (
     <>
-      {/* Note: the "How this was simulated" rail used to render here as an
-          always-on banner above the dossier card. User feedback was that
-          it pushed the actual DM-facing dossier below the fold. Now it
-          lives as the last tab inside the dossier ("Simulation"), so the
-          dossier itself is the default landing surface and the simulation
-          metadata is one tap away rather than top-of-page chrome. */}
+      {/* The "How this was simulated" metadata lives behind the SimulationDrawer
+          trigger in the action band below, not as a top-of-page rail — so the
+          dossier card itself is the default landing surface and the simulation
+          detail is one tap away rather than always-on chrome above the fold. */}
       <div style={{ background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' }}>
         {/* Header — suppressed via hideHeader in the embedded generate-flow view,
             where the wizard's own sticky toolbar already shows name/tier/pop, so
@@ -674,76 +703,45 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
           />
         )}
-        {/* P121 — Labeled narrative-layer strip. Below the header, above
-            the tab strip. Lives in its own card with title + cost pill +
-            single primary action. The renderNarrativeButtons() output
-            sits inside the strip; the buttons themselves are unchanged. */}
-        {flag('narrativeLayerStrip') && !readOnly && (
-          <div
-            style={{
-              margin: '8px 18px',
-              padding: '10px 12px',
-              background: 'linear-gradient(135deg, rgba(123,79,207,0.05), rgba(123,79,207,0.02))',
-              border: '1px solid rgba(123,79,207,0.30)',
-              borderLeft: '3px solid rgba(123,79,207,0.70)',
-              borderRadius: 5,
-              display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap',
-            }}
-          >
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div
-                style={{ fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#7B4FCF'] }}
-              >Narrative Layer · AI prose pass</div>
-              <div
-                style={{ fontSize: FS.xs, color: swatch['#4A3B22'], marginTop: 2, lineHeight: 1.4 }}
-              >{narrativeEnabled
-                ? 'Refines the simulated dossier into prose your players can hear.'
-                : 'Save this settlement to your library to refine it into prose your players can hear.'}</div>
-            </div>
-            {renderNarrativeButtons()}
+        {/* Lifecycle secondary bar — a thin parchment band under the identity
+            header: a Library back-link plus the lifecycle breadcrumb showing how
+            far this dossier has travelled (draft → shared). The spine is
+            read-only (no onStep): the in-card steps don't map cleanly across the
+            Realm/Gallery routes, so only the explicit Library link navigates. It
+            shares one continuous parchment field with the action band below (no
+            bottom divider). Gated to owner surfaces where the header renders; the
+            extra !publicDossier keeps it off an anonymous gallery visitor's view —
+            they have no Library to return to and no saveId (a false 'Draft'). */}
+        {!playerView && !hideHeader && !publicDossier && (
+          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
+            <Button variant="ghost" size="sm" onClick={() => navigate('settlements')} style={{ flexShrink: 0, padding: 0, color: swatch.inkMag3, whiteSpace: 'nowrap' }}>{'‹ Library'}</Button>
+            <LifecycleSpine stage={lifecycleStage} />
           </div>
         )}
-        {/* Owner / visitor actions strip — share-to-gallery (owners) and
-            buy-this-dossier (anonymous visitors). Each child decides
-            whether to render based on auth/save state. Skipped entirely
-            in readOnly mode (public dossier viewer). */}
+        {/* P121 — Single chrome band below the header — collapses the old violet
+            narrative-layer strip + owner/visitor actions strip into one calm row
+            (see DossierActionBand). Skipped in readOnly (public viewer), where
+            the narrative toggle lives in the header instead. Folding OUR
+            narrativeLayerStrip killswitch into suppressNarrativePitch keeps the
+            flag as the soak switch (off ⇒ plain utility row; the header keeps the
+            narrative buttons via the untouched DossierHeaderRow prop). */}
         {!readOnly && (
-          <div
-            style={{
-              padding: '8px 18px',
-              background: 'rgba(255,251,245,0.6)',
-              borderBottom: '1px solid #e0d0b0',
-              display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
-            }}
-          >
-            <BuyThisDossier settlement={settlement} saveId={saveId} />
-            <ShareToGallery
-              saveId={saveId}
-              isPublic={liveSaveEntry?.is_public}
-              publicSlug={liveSaveEntry?.public_slug}
-              settlement={settlement}
-              galleryDescription={liveSaveEntry?.gallery_description}
-              galleryImageUrl={liveSaveEntry?.gallery_image_url}
-              galleryImageAlt={liveSaveEntry?.gallery_image_alt}
-              galleryTags={liveSaveEntry?.gallery_tags}
-              campaignState={liveSaveEntry?.campaignState}
-              galleryShareNarrated={liveSaveEntry?.gallery_share_narrated}
-              galleryShareDm={liveSaveEntry?.gallery_share_dm}
-            />
-            {/* P135 / D-5 — "How this was simulated" trigger. Lives next to
-                BuyThisDossier so the user finds it as a "more info" affordance,
-                not a chrome surface. */}
-            <Suspense fallback={null}>
-              <SimulationDrawer />
-            </Suspense>
-          </div>
+          <DossierActionBand
+            narrativeEnabled={narrativeEnabled}
+            suppressNarrativePitch={welcomeCardVisible || !flag('narrativeLayerStrip')}
+            narrativeButtons={renderNarrativeButtons()}
+            settlement={settlement}
+            saveId={saveId}
+            liveSaveEntry={liveSaveEntry}
+            embedded={hideHeader}
+          />
         )}
         {/* P104 — Welcome credit gift card. Self-gates inside; shown to
             signed-in users on their first saved dossier when their ledger
             still has an available welcome grant. */}
         {!readOnly && (
           <Suspense fallback={null}>
-            <WelcomeCreditCard saveId={saveId} />
+            <WelcomeCreditCard saveId={saveId} onVisibilityChange={handleWelcomeCardVisibility} />
           </Suspense>
         )}
         {/* P106 / E-2 — Pending changes bar + cascade preview. Self-gates
@@ -759,23 +757,27 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         {/* P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
             Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
             group selects its first sub-tab and filters the strip below. */}
-        {fiveTabsEnabled && (
-          <DossierGroupTabStrip
-            visibleGroupEntries={visibleGroupEntries}
-            selectedGroup={selectedGroup}
-            handleGroupClick={handleGroupClick}
+        <DossierGroupTabStrip
+          visibleGroupEntries={visibleGroupEntries}
+          selectedGroup={selectedGroup}
+          handleGroupClick={handleGroupClick}
+        />
+        {/* Sub-tab strip. Desktop = scroll-arrow strip (unchanged); mobile =
+            MobileTabStrip. idPrefix="sf" keeps the sf-tab-/sf-panel- id namespace
+            the content panel's aria-labelledby needs in both modes. */}
+        {mobile ? (
+          <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" />
+        ) : (
+          <DossierTabStrip
+            onboardingActive={onboardingActive}
+            onboardingStep={onboardingStep}
+            scroll={scroll}
+            scrollRef={scrollRef}
+            tabs={tabs}
+            selectedTab={selectedTab}
+            setActiveTab={setActiveTab}
           />
         )}
-        {/* Tab strip */}
-        <DossierTabStrip
-          onboardingActive={onboardingActive}
-          onboardingStep={onboardingStep}
-          scroll={scroll}
-          scrollRef={scrollRef}
-          tabs={tabs}
-          selectedTab={selectedTab}
-          setActiveTab={setActiveTab}
-        />
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
         <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
           {/* ── Banners above tab content ────────────────────────────────────────
@@ -798,34 +800,21 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             selectedTab={selectedTab}
             aiRegenerating={aiRegenerating}
           />
-          {/* Partial-refinement notice — independent of which tab is active. */}
-          {showNarrative && storeAiPartialFailure && storeAiPartialFailure.failedFields?.length > 0 && (
-            <div
-              style={{
-                margin: '8px 18px 0', padding: '6px 10px',
-                background: 'rgba(196,128,60,0.08)',
-                border: '1px solid rgba(196,128,60,0.2)',
-                borderRadius: 4, fontSize: FS.xs, color: swatch['#8A5A20'],
-                fontFamily: 'Nunito, sans-serif',
-              }}
-            >{`Partial refinement: ${storeAiPartialFailure.failedFields.join(', ')} kept raw data.`}</div>
-          )}
-          {/* Tier 6.7 — runtime verifier findings. Surfaces hard
-              violations (invented entity, renamed proper noun,
-              overwritten user edit) so the DM sees the AI output isn't
-              safe to ship without inspection. */}
-          {showNarrative && (
-            <AiOverlayViolations
-              violations={storeAiViolations}
-              onDismiss={clearAiViolations}
-            />
-          )}
-          {/* Tier 5.1 — what changed in the most recent regenerate.
-              Visible regardless of narrative mode so the DM can audit
-              engine-side decisions independently of AI prose. */}
-          <RegenerationDeltaCard
-            delta={storeLastRegenerationDelta}
-            onDismiss={clearLastRegenerationDelta}
+          {/* Session-level notices cluster — AI error (with a credits-recovery
+              CTA), partial-refinement, verifier findings, and the regenerate
+              delta — grouped as ONE spacing-grouped column. Self-gates to nothing
+              when no notice is present so it never paints an empty band above the
+              hero content. (B1.) */}
+          <DossierSessionNotices
+            showNarrative={showNarrative}
+            aiError={aiError}
+            aiErrorIsCredits={aiErrorIsCredits}
+            openCreditsMoment={openCreditsMoment}
+            partialFailure={storeAiPartialFailure}
+            violations={storeAiViolations}
+            onDismissViolations={clearAiViolations}
+            regenDelta={storeLastRegenerationDelta}
+            onDismissRegenDelta={clearLastRegenerationDelta}
           />
           {/* Regenerate overlay — floats progress above the dimmed existing content */}
           {aiRegenerating && (
@@ -845,13 +834,40 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           )}
           <Suspense
             fallback={
-              <div style={{ padding: 32, textAlign: 'center', color: swatch.mutedBrown,
-                fontFamily: 'Nunito,sans-serif', fontSize: FS.md }}>Loading\u2026</div>
+              // Lightweight skeleton matching a tab's rough shape (a heading bar
+              // + a few content bars) so a slow first-paint of a heavy lazy tab
+              // reads as structured content arriving, not a stall. (B2.)
+              <div aria-busy="true" aria-label="Loading section" style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+                <div style={{ height: 18, width: '40%', borderRadius: 4, background: swatch['#E8DCC8'] }} />
+                <div style={{ height: 10, width: '90%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '75%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '82%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+              </div>
             }
           >
-            <div ref={dossierContentRef} style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}>
-              {renderTab()}
-            </div>
+            {/* Resilience: the active tab renders live, malformed-by-construction
+                simulation data (forks, imports, regen drift). A throw in any one
+                tab must degrade to a recoverable fallback INSIDE the dossier card,
+                not propagate to the root boundary and blank the whole app. The
+                resetKeys are the selected tab + settlement so switching either
+                auto-recovers. (B2.) */}
+            <FeatureErrorBoundary label="OutputContainer.tab" kind="react.render.dossier" fallbackTitle="This section of the dossier could not be displayed." resetKeys={[selectedTab, readSessionSubject]}>
+              {/* Completes the WAI-ARIA tabs relationship the strip begins: each
+                  tab carries aria-controls={'sf-panel-' + id}; this panel answers
+                  with the matching id + aria-labelledby, and tabIndex={0} lets a
+                  keyboard user enter and scroll the panel content. (A3.) */}
+              <div
+                ref={dossierContentRef}
+                role="tabpanel"
+                id={'sf-panel-' + selectedTab}
+                aria-labelledby={'sf-tab-' + selectedTab}
+                // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- WAI-ARIA tabs pattern: a tabpanel is an intentional focus stop so keyboard users can reach and scroll the panel after the tablist; tabIndex=0 is the spec-mandated affordance here
+                tabIndex={0}
+                style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
+              >
+                {renderTab()}
+              </div>
+            </FeatureErrorBoundary>
           </Suspense>
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>

@@ -1,3 +1,4 @@
+import { clamp01 } from '../../kernel/math.js';
 import { stablePart } from './worldState.js';
 import { factionArchetype, FACTION_ARCHETYPES as FA } from '../factionArchetypes.js';
 
@@ -69,10 +70,6 @@ const LAW_PREFS_BY_ARCHETYPE = Object.freeze({
 });
 
 /** @param {any} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /** @param {any} rng @param {any} arr */
 function pick(rng, arr) {

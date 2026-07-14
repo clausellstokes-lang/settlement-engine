@@ -30,6 +30,7 @@
  * the single roll happens in rollCandidates (the tierResourceDynamics path).
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
 import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
@@ -54,7 +55,6 @@ import { conquestProsperityFor } from './conquestFeeds.js';
 import { mercProsperityCostOf } from './mercenaryMarket.js';
 import { tollProsperityFor } from '../spatial/entrepots.js';
 
-const clamp01 = (/** @type {any} */ x) => (Number.isFinite(x) ? Math.max(0, Math.min(1, x)) : 0);
 const clamp = (/** @type {any} */ x, /** @type {any} */ lo, /** @type {any} */ hi) => Math.max(lo, Math.min(hi, x));
 
 // Codepoint tiebreak, NOT localeCompare: these sorts decide WHICH institution

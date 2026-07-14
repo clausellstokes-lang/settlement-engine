@@ -90,6 +90,17 @@ const readOwn = async (col) => {
   return rows[0]?.[col];
 };
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if the migrations directory is absent,
+// the RLS execution suite below would silently describe.runIf-skip and vitest would
+// stay green. This UNCONDITIONAL assert fails loudly — and also proves the
+// net-current self-update policy is still derivable (the thing under test exists).
+describe('profiles RLS migration corpus exists (guards against silent vacuous skip)', () => {
+  it('the migrations dir is present and a net-current self-update policy is derivable', () => {
+    expect(present, `migrations dir missing: ${MIG_DIR}`).toBe(true);
+    expect(POLICY, 'no net-current profiles self-update policy derivable — renamed/dropped?').not.toBeNull();
+  });
+});
+
 describe.runIf(present)('profiles RLS column-lock — executed against the NET-CURRENT policy (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

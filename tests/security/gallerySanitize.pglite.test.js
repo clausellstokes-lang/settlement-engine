@@ -49,6 +49,16 @@ const SANITIZER_SQL = netCurrentSanitizerSql();
 const SETTLEMENT = {
   name: 'Brackwater', tier: 'town', population: 1200,
   coherenceNotes: 'a public contradiction note',
+  // (130) economics-attribution notes nested in an allowlisted subtree: PUBLIC
+  // annotations that must SURVIVE the narrowed `note` token, beside a dmNotes-class /
+  // bare notes key that must still strip. The economics tab renders these publicly.
+  economicState: {
+    magicFoodNote: 'Divine provision supplements food shortfall',
+    storageNote: '8 months strategic reserve',
+    activeChains: [{ id: 'grain', upstreamNote: 'Imported inputs: grain', dmNote: 'the miller skims the granary' }],
+    dossierNotes: 'DM prep for the famine arc',
+    notes: 'scratch pad',
+  },
   history: { founding: 'salt', dmNote: 'the mayor lies', currentTensions: ['visible'] },
   npcs: [{ id: 'n1', name: 'Aldric', role: 'Mayor', influence: 80, goal: 'seize power', secret: 'bastard heir', plotHooks: ['x'], relationships: [{}] }],
   thesis: 'A salt town that forgot its founding.',
@@ -71,6 +81,17 @@ const SETTLEMENT = {
 };
 
 let db;
+
+// Anti-vacuity ([tests-3]/[test-quality-2]): if `_gallery_sanitize_public_json` is
+// renamed or dropped across a migration merge, the extraction returns null and the
+// execution suite below silently describe.runIf-skips while vitest stays green. This
+// UNCONDITIONAL assert fails loudly — the net-current server sanitizer must exist.
+describe('_gallery_sanitize_public_json exists in the migration corpus (guards against silent vacuous skip)', () => {
+  it('a net-current _gallery_sanitize_public_json definition is present (renamed/dropped must fail loudly)', () => {
+    expect(existsSync(MIGRATIONS_DIR), `migrations dir missing: ${MIGRATIONS_DIR}`).toBe(true);
+    expect(SANITIZER_SQL, '_gallery_sanitize_public_json not found in any migration — renamed?').toBeTruthy();
+  });
+});
 
 describe.runIf(!!SANITIZER_SQL)('_gallery_sanitize_public_json — execution + client parity (pglite)', () => {
   let serverOut;
@@ -115,6 +136,21 @@ describe.runIf(!!SANITIZER_SQL)('_gallery_sanitize_public_json — execution + c
     expect(serverOut.config.primaryDeitySnapshot).toEqual({ name: 'Sun', alignmentAxis: 'good', rankAxis: 'major' });
     expect(serverOut.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
     expect(serverOut.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
+  });
+
+  it('(130) keeps nested economics-attribution notes but strips the private note keys beside them', () => {
+    // The narrowed `note` token: public economics annotations survive server-side
+    // (the SETTLEMENT fixture nests them under the allowlisted economicState), while
+    // dmNote (via \m(dm|gm)) / dossierNotes / a bare notes key still strip. This is the
+    // SQL half of the coupled client+SQL narrowing (migration 130).
+    expect(serverOut.economicState).toBeTruthy();
+    expect(serverOut.economicState.magicFoodNote).toBe('Divine provision supplements food shortfall');
+    expect(serverOut.economicState.storageNote).toBe('8 months strategic reserve');
+    expect(serverOut.economicState.activeChains[0].upstreamNote).toBe('Imported inputs: grain');
+    // …the DM-private / bare notes keys beside them are gone.
+    expect(serverOut.economicState.activeChains[0].dmNote).toBeUndefined();
+    expect(serverOut.economicState.dossierNotes).toBeUndefined();
+    expect(serverOut.economicState.notes).toBeUndefined();
   });
 
   it('reduces NPCs to the public field allowlist (033, intact)', () => {

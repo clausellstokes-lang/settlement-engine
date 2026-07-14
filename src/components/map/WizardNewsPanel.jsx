@@ -1,6 +1,7 @@
 import { AlertTriangle, BookOpen, CheckCircle2, Clock3, Megaphone, Newspaper, RadioTower, ShieldAlert, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
+import { newsBodyText, newsReasonPhrases } from '../../domain/display/newsBody.js';
 import { newsVoiceLine } from '../../domain/display/newsVoice.js';
 import { summarizeWizardNews, WIZARD_NEWS_SIGNIFICANCE } from '../../domain/region/index.js';
 import { requestCampaignChronicle } from '../../lib/campaignChronicle.js';
@@ -85,6 +86,12 @@ function NewsEntry({ entry, compact = false, nameById }) {
   // null for out-of-scope news, so the quote only shows when it has something
   // to say.
   const voiceLine = newsVoiceLine(entry);
+  // The card body, re-composed in the house voice from the entry's structured
+  // fields (transition/scope/severity) rather than its engine-composed summary
+  // ("Applied via trade dependency…"). The raw summary rides a hover tooltip so
+  // a curious DM can still read the mechanical detail. (content-immersion-5)
+  const bodyText = newsBodyText(entry);
+  const reasonPhrases = newsReasonPhrases(entry);
 
   return (
     <article style={{
@@ -132,8 +139,8 @@ function NewsEntry({ entry, compact = false, nameById }) {
           <MetaPill tone={major ? 'major' : 'neutral'}>{scopeLabel(entry.scope)}</MetaPill>
         </div>
 
-        {entry.summary && (
-          <p style={{
+        {bodyText && (
+          <p title={entry.summary || undefined} style={{
             margin: '5px 0 0',
             color: BODY,
             fontFamily: sans,
@@ -141,7 +148,7 @@ function NewsEntry({ entry, compact = false, nameById }) {
             lineHeight: 1.45,
             overflowWrap: 'anywhere',
           }}>
-            {entry.summary}
+            {bodyText}
           </p>
         )}
 
@@ -179,7 +186,7 @@ function NewsEntry({ entry, compact = false, nameById }) {
           <MetaPill>Tick {entry.tick}</MetaPill>
           <MetaPill>{human(entry.kind)}</MetaPill>
           <MetaPill>Severity {percent(entry.severity)}</MetaPill>
-          {entry.reasons.slice(0, 3).map(reason => (
+          {reasonPhrases.slice(0, 3).map(reason => (
             <MetaPill key={reason} tone={major ? 'major' : 'neutral'}>{reason}</MetaPill>
           ))}
         </div>

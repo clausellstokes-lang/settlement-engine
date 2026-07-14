@@ -26,6 +26,7 @@
  */
 
 import { ACCOUNT_EXPORT_VERSION } from './accountData.js';
+import { scrubImportedConfig } from './importScrub.js';
 
 /**
  * normalizeSettlement wraps the ~30 kB settlement-migration closure — only ever
@@ -154,19 +155,13 @@ export function prepareSettlementEntry(rawEntry, meta = {}) {
     || (typeof rawSettlement.name === 'string' && rawSettlement.name.trim())
     || 'Imported settlement';
 
-  // Strip cross-settlement refs + EVERY generation seed + the religion embed
-  // bridge — the exact scrub from importGallerySettlement (campaignSlice.js
-  // L470–489). An imported copy must arrive DORMANT: it can't re-wire neighbour
-  // back-links into the importer's saves, and can't regenerate the unsanitized
-  // original via the deterministic engine.
-  const config = normalized.config
-    ? (() => {
-        // eslint-disable-next-line no-unused-vars -- intentional drop of seed + deity bridge
-        const { _seed, primaryDeityRef, primaryDeitySnapshot, ...rest } =
-          /** @type {Record<string, any>} */ (normalized.config);
-        return rest;
-      })()
-    : normalized.config;
+  // Strip cross-settlement refs + EVERY generation seed + the religion/faith embed
+  // bridge — the SAME single-writer scrub the gallery importer applies. An imported
+  // copy must arrive DORMANT: it can't re-wire neighbour back-links into the
+  // importer's saves, can't regenerate the unsanitized original via the deterministic
+  // engine, and (store-4) carries no cultDeitySnapshots / faithProfile that would
+  // activate the religion subsystem with a foreign pantheon.
+  const config = scrubImportedConfig(normalized.config);
 
   const settlement = {
     ...normalized,

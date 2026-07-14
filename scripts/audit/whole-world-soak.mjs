@@ -53,17 +53,29 @@ const SEED = String(arg('seed', 'w0-soak'));
 const DIVERGENCE_YEARS = Math.max(1, Math.min(YEARS, Number(arg('divergence-years', 5))));
 const AS_JSON = process.argv.includes('--json');
 const SEASONS = String(arg('seasons', 'preset')); // 'on' | 'off' | preset default
+// performance-scale-6: parameterize the fixture up to the 30-settlement envelope so
+// the soak can exercise the cost axis at the product's headline scale. Default stays
+// 4 (the historical fixture — byte-identical archetypes for the first four ids).
+const SETTLEMENTS = Math.max(1, Math.min(30, Number(arg('settlements', 4))));
 const NOW = '2026-07-12T00:00:00.000Z'; // pinned — one instant for the whole soak
 
 const sha = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 
-// ── Fixture: a generated 4-settlement region (mixed tiers, real economies) ───
-const REGION = [
-  { id: 'soak-a', settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'crossroads' },
-  { id: 'soak-b', settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
-  { id: 'soak-c', settType: 'town', culture: 'celtic', terrain: 'coastal', tradeRouteAccess: 'port' },
-  { id: 'soak-d', settType: 'village', culture: 'norse', terrain: 'mountains', tradeRouteAccess: 'road' },
+// ── Fixture: a generated region (mixed tiers, real economies). The first four ids
+//    are the historical archetypes (byte-stable for the default 4-settlement soak);
+//    beyond that the archetypes cycle with fresh ids so --settlements up to 30 builds
+//    a larger realm without changing the small-N output. ─────────────────────────
+const REGION_ARCHETYPES = [
+  { settType: 'city', culture: 'germanic', terrain: 'river', tradeRouteAccess: 'crossroads' },
+  { settType: 'town', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road' },
+  { settType: 'town', culture: 'celtic', terrain: 'coastal', tradeRouteAccess: 'port' },
+  { settType: 'village', culture: 'norse', terrain: 'mountains', tradeRouteAccess: 'road' },
 ];
+const SEQ_IDS = ['soak-a', 'soak-b', 'soak-c', 'soak-d'];
+const REGION = Array.from({ length: SETTLEMENTS }, (_, i) => ({
+  id: i < SEQ_IDS.length ? SEQ_IDS[i] : `soak-${i}`,
+  ...REGION_ARCHETYPES[i % REGION_ARCHETYPES.length],
+}));
 
 function buildFixture(seed) {
   const saves = REGION.map(({ id, ...config }, i) => {
@@ -93,23 +105,31 @@ function buildFixture(seed) {
     goods: firstExport(from),
   });
 
+  // The historical 4-settlement edges/channels (byte-stable for the default soak),
+  // guarded to endpoints that exist, plus a trade chain wiring any settlements beyond
+  // the fourth into the realm so a larger --settlements fixture is fully connected.
+  const has = new Set(REGION.slice(0, saves.length).map((r) => r.id));
+  const baseEdges = [
+    { id: 'edge.soak-a.soak-b', from: 'soak-a', to: 'soak-b', relationshipType: 'trade_partner' },
+    { id: 'edge.soak-b.soak-c', from: 'soak-b', to: 'soak-c', relationshipType: 'rival' },
+    { id: 'edge.soak-a.soak-c', from: 'soak-a', to: 'soak-c', relationshipType: 'neutral' },
+    { id: 'edge.soak-c.soak-d', from: 'soak-c', to: 'soak-d', relationshipType: 'trade_partner' },
+  ].filter((e) => has.has(e.from) && has.has(e.to));
+  const baseChannels = [];
+  if (saves[0] && saves[1]) baseChannels.push(channel(saves[0], saves[1]));
+  if (saves[2] && saves[1]) baseChannels.push(channel(saves[2], saves[1]));
+  if (saves[1] && saves[3]) baseChannels.push(channel(saves[1], saves[3]));
+  for (let i = 4; i < saves.length; i++) {
+    baseEdges.push({ id: `edge.${saves[i - 1].id}.${saves[i].id}`, from: saves[i - 1].id, to: saves[i].id, relationshipType: i % 2 ? 'trade_partner' : 'rival' });
+    baseChannels.push(channel(saves[i - 1], saves[i]));
+    if (i % 3 === 0) baseChannels.push(channel(saves[i], saves[i - 3]));
+  }
+
   const campaign = {
     id: 'whole-world-soak',
     name: 'Whole-World Soak Realm',
     settlementIds: REGION.map((r) => r.id),
-    regionalGraph: ensureRegionalGraph({
-      edges: [
-        { id: 'edge.soak-a.soak-b', from: 'soak-a', to: 'soak-b', relationshipType: 'trade_partner' },
-        { id: 'edge.soak-b.soak-c', from: 'soak-b', to: 'soak-c', relationshipType: 'rival' },
-        { id: 'edge.soak-a.soak-c', from: 'soak-a', to: 'soak-c', relationshipType: 'neutral' },
-        { id: 'edge.soak-c.soak-d', from: 'soak-c', to: 'soak-d', relationshipType: 'trade_partner' },
-      ],
-      channels: [
-        channel(saves[0], saves[1]),
-        channel(saves[2], saves[1]),
-        channel(saves[1], saves[3]),
-      ],
-    }, { now: NOW }),
+    regionalGraph: ensureRegionalGraph({ edges: baseEdges, channels: baseChannels }, { now: NOW }),
     wizardNews: { currentTick: 0, entries: [] },
     worldState: {
       rngSeed: seed,
@@ -154,9 +174,14 @@ async function runYears(seed, years, label) {
   const yearlyHashes = [];
   const yearlyStressorCounts = [];
   const yearlyPopulations = [];
+  // performance-scale-6: the cost axis — serialized worldState+regionalGraph bytes and
+  // per-year wall-time, so a size/cost regression trends visibly and can be asserted.
+  const yearlyBytes = [];
+  const yearlyMs = [];
   const t0 = Date.now();
 
   for (let year = 1; year <= years; year++) {
+    const y0 = Date.now();
     const result = await simulateCampaignWorldInterval({
       campaign: runningCampaign,
       saves: runningSaves,
@@ -165,6 +190,7 @@ async function runYears(seed, years, label) {
       now: NOW,
       autoResolve: true,
     });
+    yearlyMs.push(Date.now() - y0);
     if (result.status === 'paused') {
       throw new Error(`[soak:${label}] year ${year} PAUSED under autoResolve:true — orchestrator contract broken`);
     }
@@ -198,6 +224,7 @@ async function runYears(seed, years, label) {
     const stressors = Array.isArray(result.worldState?.stressors) ? result.worldState.stressors : [];
     yearlyStressorCounts.push(stressors.length);
     yearlyPopulations.push(runningSaves.map((s) => Number(s.settlement?.population) || 0));
+    yearlyBytes.push(JSON.stringify(result.worldState).length + JSON.stringify(result.regionalGraph).length);
   }
 
   return {
@@ -209,6 +236,8 @@ async function runYears(seed, years, label) {
     yearlyHashes,
     yearlyStressorCounts,
     yearlyPopulations,
+    yearlyBytes,
+    yearlyMs,
     startPopulations: buildFixture(seed).saves.map((s) => Number(s.settlement?.population) || 0),
   };
 }
@@ -251,6 +280,38 @@ check(everyAlive, 'every settlement population finite and > 0, every year');
 check(ratio > 0.05 && ratio < 20, 'realm population bounded',
   `${startTotal} → ${finalTotal} (×${ratio.toFixed(2)}; envelope 0.05–20)`);
 
+// 4b. performance-scale-6 — the COST ENVELOPE. Serialized worldState+regionalGraph
+// bytes are REPORTED per year and asserted under a documented per-settlement ceiling
+// (the deterministic gate: a regression that reintroduces age-linear growth — an
+// uncapped ledger, the queuedImpacts retention removed — blows through it). Wall-time
+// is machine-tolerant: a generous per-year trend only, guarding against a cost
+// explosion. NOTE: this whole-world soak advances by the ONE-YEAR interval, whose
+// orchestrator collapses each year to a single pulseHistory record, so the history
+// ring never saturates here and per-year growth stays broadly linear — the plateau /
+// deceleration signature is asserted at WEEKLY granularity by the committed test
+// tests/simulation/worldTickCostEnvelope.test.js, where the bounded ledgers engage.
+const bytes = runA.yearlyBytes;
+if (bytes.length >= 2) {
+  const maxBytes = Math.max(...bytes);
+  // Generous ceiling: the composed worldState is dominated by the per-year records +
+  // the accumulating (retention-capped) impact/relationship ledgers; ~900KB/settlement
+  // is a wide envelope over the measured ~150KB/settlement at 6y (≈385KB/settlement
+  // extrapolated to 30y).
+  const ceiling = 900_000 * SETTLEMENTS;
+  check(maxBytes < ceiling, 'serialized state under the house envelope',
+    `max ${(maxBytes / 1e6).toFixed(2)}MB < ${(ceiling / 1e6).toFixed(2)}MB (${SETTLEMENTS} settlements)`);
+  // Wall-time trend (machine-tolerant — reported, generously bounded).
+  const ms = runA.yearlyMs;
+  const meanOf = (a, x, y) => { const s = a.slice(Math.floor(a.length * x), Math.floor(a.length * y)); return s.reduce((p, q) => p + q, 0) / Math.max(1, s.length); };
+  const q1 = meanOf(ms, 0, 0.25);
+  const q4 = meanOf(ms, 0.75, 1);
+  check(q4 <= q1 * 8 + 50, 'per-year wall-time trend not age-linear',
+    `Q1 ${q1.toFixed(1)}ms → Q4 ${q4.toFixed(1)}ms/year`);
+  console.log(`\n## cost envelope (serialized worldState+regionalGraph bytes per year)`);
+  console.log(`  ${bytes.map((b) => (b / 1e3).toFixed(0) + 'KB').join(' ')}`);
+  console.log(`  max ${(maxBytes / 1e6).toFixed(2)}MB · final ${(bytes[bytes.length - 1] / 1e6).toFixed(2)}MB · ${(maxBytes / SETTLEMENTS / 1e3).toFixed(0)}KB/settlement`);
+}
+
 // 5. Stressor rhythm — REPORTED; the equilibrium tendency is a documented
 // finding (the 2026-07-11 assessment), never a failure.
 const counts = runA.yearlyStressorCounts;
@@ -280,11 +341,14 @@ REGION.forEach((r, i) => {
 
 if (AS_JSON) {
   console.log(`\n${JSON.stringify({
-    seed: SEED, years: YEARS, now: NOW,
+    seed: SEED, years: YEARS, settlements: SETTLEMENTS, now: NOW,
     finalHash: runA.yearlyHashes[runA.yearlyHashes.length - 1],
     stressorCounts: counts,
     startPopulations: runA.startPopulations,
     finalPopulations: finalPops,
+    // performance-scale-6 cost series (the sim-report artifact for the tick axis).
+    yearlyBytes: runA.yearlyBytes,
+    yearlyMs: runA.yearlyMs,
     frozenTail,
     failures,
   }, null, 2)}`);

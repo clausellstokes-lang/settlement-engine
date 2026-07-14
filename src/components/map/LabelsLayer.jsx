@@ -53,7 +53,7 @@ function Label({ label, onEditLabel }) {
   function handlePointerDown(e) {
     if (!isEditable) return;
     e.stopPropagation();
-    setSelected(label.id);
+    setSelected(label.id, 'label');
     const pt = eventToMap(e);
     if (!pt) return;
     dragRef.current = {

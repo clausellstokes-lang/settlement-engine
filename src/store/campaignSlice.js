@@ -611,11 +611,27 @@ export const createCampaignSlice = (set, get) => {
   },
 
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
-  setActiveCampaign: (id) =>
+  setActiveCampaign: (id) => {
     set(state => {
       const campaign = findActiveCampaign(state.campaigns, id);
       state.activeCampaignId = id && campaign ? id : null;
-    }),
+    });
+    // experience-product-fit-1 — the world moves ON campaign activation (the §0.6.1-
+    // named site), not only when the Realm Inspector's Pulse tab happens to mount.
+    // Fire the capped M10b catch-up for the newly-active campaign. The eager wrapper
+    // (catchUpCampaignWorld) applies a SYNCHRONOUS not_living guard, so the default
+    // dm_advanced campaign — every non-living activation, incl. every existing one —
+    // returns WITHOUT loading the sim chunk (first-paint budget untouched). The
+    // persisted week-cursor makes a re-activation within the same week a no-op, so
+    // re-selecting a campaign (auto-resume, Advance-Time nav, gallery import) is safe.
+    // Fire-and-forget: a failed catch-up must never block activation — the failure is
+    // surfaced through the livingCatchUp digest, not swallowed. Date.now stays inside
+    // the lazy store body (runCatchUpCampaignWorld), off this eager seam.
+    const activeId = get().activeCampaignId;
+    if (activeId) {
+      Promise.resolve(get().catchUpCampaignWorld(activeId)).catch(() => {});
+    }
+  },
 
   /**
    * Resolve the campaign's map state to a v2 object (migrating v1 on the fly).
@@ -667,6 +683,16 @@ export const createCampaignSlice = (set, get) => {
       x => isCampaignActive(x) && (x.settlementIds || []).map(String).includes(sid),
     );
     if (!campaign || !campaign.worldState?.canonizedAt) return null;
+    // Advance-in-flight guard (store-2): a multi-tick advance drains pendingEvents in
+    // its Phase-1 clone and REPLACES c.worldState wholesale in Phase-2, so a pending
+    // event queued during the awaited advance window is silently destroyed. Return a
+    // TRUTHY typed no-op so applyEvent's clock-bound branch short-circuits on it (it
+    // returns `queued` when truthy) — the immediate-apply fall-through would ALSO be
+    // clobbered by the advance, so blocking is the safe path; the UI can toast the
+    // reason instead of applyEvent silently reporting {queued:true}.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaign.id)) {
+      return { queued: false, reason: 'advance_in_flight', campaignId: campaign.id };
+    }
     const now = new Date().toISOString();
     let added = null;
     set(state => {
@@ -687,6 +713,13 @@ export const createCampaignSlice = (set, get) => {
 
   /** Cancel a queued intention before the next tick resolves it. */
   cancelQueuedEvent: (campaignId, queueId) => {
+    // Advance-in-flight guard (store-2): a cancel that filters pendingEvents during a
+    // running advance is either racing the Phase-1 drain or clobbered by the Phase-2
+    // wholesale worldState replace. No-op with the action's existing boolean shape so
+    // callers reading `removed` are unaffected.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return false;
+    }
     let removed = false;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);

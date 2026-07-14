@@ -24,6 +24,8 @@
  * is loud, not silent (same convention as copy/index.js).
  */
 
+import { FOUNDER_SEAT_CAP } from './founderSeats.js';
+
 // ── Substitution helper ────────────────────────────────────────────────────
 function interpolate(str, vars) {
   if (!vars || typeof str !== 'string') return str;
@@ -47,7 +49,7 @@ export const TEMPLATES = Object.freeze({
       '',
       '  • Your first three saves are free. After that, sign up for a',
       '    Cartographer subscription or claim a Founder Lifetime seat',
-      '    (limited to the first 500 supporters).',
+      `    (limited to the first ${FOUNDER_SEAT_CAP} supporters).`,
       '',
       '  • Narrative refinement (the optional prose layer) costs credits',
       '    per pass. Cartographer subscriptions include a monthly',
@@ -122,7 +124,7 @@ export const TEMPLATES = Object.freeze({
     text: [
       'Hello {displayName},',
       '',
-      'You are one of the first 500 supporters. Thank you.',
+      `You are one of the first ${FOUNDER_SEAT_CAP} supporters. Thank you.`,
       '',
       'Your Founder Lifetime seat is permanent — Cartographer-tier',
       'access, unlimited saves, all current and future expansion packs.',

@@ -13,14 +13,11 @@
  */
 
 import { buildJournalPages } from './journalPages.js';
+import { slugify as kernelSlugify } from '../kernel/slugify.js';
 
 /** Foundry module ids must be lowercase [a-z0-9-]. */
 function slugify(name) {
-  return String(name || 'settlement')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 40) || 'settlement';
+  return kernelSlugify(name, { sep: '-', max: 40, fallback: 'settlement', empty: 'settlement' });
 }
 
 // Stable per-settlement id tail so two exported settlements install side by

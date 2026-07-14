@@ -22,20 +22,25 @@ import ServicesTogglePanel from './ServicesTogglePanel';
 import TradeDynamicsPanel from './TradeDynamicsPanel';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
+import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { ModeSelector } from './generate/ModeSelector.jsx';
 import { StepIndicator } from './generate/StepIndicator.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
+import BuyThisDossier from './BuyThisDossier.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
 import { WizardChipRow } from './generate/WizardChipRow.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
+import { WizardCommitBand } from './generate/WizardCommitBand.jsx';
 import ExportDraftButton from './generate/ExportDraftButton.jsx';
 import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 
@@ -117,6 +122,10 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // dossier appears.
   const pipelineRevealActive = useStore(s => s.pipelineRevealActive);
   const dismissPipelineReveal = useStore(s => s.dismissPipelineReveal);
+
+  // Live viewport check (not the isMobile prop): the Advanced hard-constraint
+  // panels gate to desktop below, and the gate must react to rotation/resize.
+  const mobileViewport = useIsMobile();
 
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
@@ -304,6 +313,25 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   /** New — start fresh from the Create landing. */
   const handleNewSettlement = useCallback(() => requestExit('new'), [requestExit]);
 
+  // ── Scroll-padding so the pinned chrome never hides a dossier control ──
+  // While the dossier is on screen, two stacked sticky bars pin to the top of
+  // the window scroller: the app header and the WizardOutputToolbar (pinned at
+  // the header's height on mobile so the two STACK). A focus move or anchored
+  // scroll into a dossier section would otherwise land the target flush under
+  // that chrome, hiding the very control the user jumped to. scroll-padding-top
+  // on the document element (the real scroller) reserves the chrome's height so
+  // those scrolls stop just below it. Scoped to the visible-dossier window and
+  // fully reverted on teardown so other views keep the default behaviour. (B4b.)
+  const dossierVisible = !!settlement && showOutput && !pipelineRevealActive;
+  useEffect(() => {
+    if (!dossierVisible || typeof document === 'undefined') return undefined;
+    const root = document.documentElement;
+    const prev = root.style.scrollPaddingTop;
+    const mobilePad = CHROME.headerMobile + CHROME.toolbarHeight;
+    root.style.scrollPaddingTop = isMobile ? `${mobilePad}px` : `${CHROME.scrollPadDesktop}px`;
+    return () => { root.style.scrollPaddingTop = prev; };
+  }, [dossierVisible, isMobile]);
+
   // Restore the recovered dossier into the store. The draft is kept (not cleared)
   // until a save actually lands, so a second stall/reload can recover again.
   const handleRestoreDraft = useCallback(() => {
@@ -408,22 +436,15 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
-        {authTier === 'anon' && (
-          <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'], border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
-            Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
-          </div>
-        )}
-
-        {/* Helper banner — explains Basic is one-screen */}
-        <div style={{
-          padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
-          border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
-          borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
-        }}>
-          <strong style={{ fontFamily: serif_ }}>Basic Generate</strong>
-          {' — '}Set the foundations and hit Generate. Everything else is randomized.
-          Switch to <strong>Advanced Generate</strong> for institution toggles, services, and trade dynamics.
-        </div>
+        {/* Canonical config-stage header (replaces the gold helper banner).
+            as="h2": the app chrome already renders the wordmark as the page h1. */}
+        <PageHeader
+          as="h2"
+          size="sm"
+          eyebrow={t('generate.introEyebrow')}
+          title={t('generate.introTitle')}
+          subtitle={t('generate.introSubtitleBasic')}
+        />
 
         <div
           data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}
@@ -517,6 +538,16 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           "Step N+1" banner with empty content and duplicate nav. */}
       {isAdvanced && !settlement && wizardStep < STEPS.length && (
         <>
+          {/* Canonical config-stage header, mounted once above the step
+              indicator. as="h2": the app chrome owns the page h1. */}
+          <PageHeader
+            as="h2"
+            size="sm"
+            eyebrow={t('generate.introEyebrow')}
+            title={t('generate.introTitle')}
+            subtitle={t('generate.introSubtitleAdvanced')}
+          />
+
           <StepIndicator currentStep={wizardStep} totalSteps={STEPS.length} />
 
           {/* Contextual hint for current step */}
@@ -550,9 +581,28 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             </div>
             <div style={{ padding: 0 }}>
               {wizardStep === 0 && <ConfigurationPanel />}
-              {wizardStep === 1 && <InstitutionalGrid />}
-              {wizardStep === 2 && <ServicesTogglePanel />}
-              {wizardStep === 3 && <TradeDynamicsPanel />}
+              {/* Mobile + Advanced: the hard-constraint editors (Institutions,
+                  Services, Trade) are raw authoring tools with no readable
+                  preview to teaser, so on a phone they get the plain "best on
+                  desktop" gate. Step 0 stays fully usable; the nav buttons
+                  below keep the gated steps walkable. The constraints roll
+                  from working defaults until refined on a larger screen. */}
+              {wizardStep >= 1 && wizardStep <= 3 && (
+                mobileViewport ? (
+                  <div style={{ padding: SP.lg }} data-testid="deep-constraints-mobile-gate">
+                    <DesktopOnlyGate
+                      title="Hard constraints are best set on desktop"
+                      message="Forcing or forbidding specific institutions, services, and trade goods needs the full constraint console, which has room to work on a larger screen. On your phone you can pick a character, set the foundations, and generate a draft. The simulator rolls these constraints from working defaults until you refine them on desktop."
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {wizardStep === 1 && <InstitutionalGrid />}
+                    {wizardStep === 2 && <ServicesTogglePanel />}
+                    {wizardStep === 3 && <TradeDynamicsPanel />}
+                  </>
+                )
+              )}
             </div>
           </div>
 
@@ -598,56 +648,33 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         <WizardCloseout />
       )}
 
-      {/* Generate button — visible for quick mode with settlement (Regenerate),
-          advanced mode after final step, or any mode with existing settlement. */}
-      {(settlement || (isAdvanced && wizardStep >= STEPS.length)) && (
-        <div>
-          <Button
-            variant="primary"
-            fullWidth
-            onClick={handleGenerate}
-            style={{
-              padding: isMobile ? `${SP.lg}px 0` : `${SP.lg - 2}px 0`,
-              background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-              color: swatch.white, border: 'none', borderRadius: R.lg + 2,
-              fontFamily: serif_,
-              fontSize: isMobile ? FS.xxl : FS.xxl - 1, fontWeight: 600, letterSpacing: '0.02em',
-              boxShadow: '0 3px 14px rgba(160,118,42,0.45)',
-              transition: 'opacity 0.15s, transform 0.1s',
-            }}
-            onMouseOver={e => e.currentTarget.style.opacity = '0.92'}
-            onFocus={e => e.currentTarget.style.opacity = '0.92'}
-            onMouseOut={e => e.currentTarget.style.opacity = '1'}
-            onBlur={e => e.currentTarget.style.opacity = '1'}
-          >
-            {settlement ? 'Regenerate Draft' : 'Generate Draft'}
-          </Button>
-          {!settlement && (
-            <p className="sf-readable-strip" style={{
-              display: 'block',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-              marginTop: SP.sm, marginBottom: 0, textAlign: 'center',
-              fontSize: FS.sm, color: SECOND, fontFamily: serif_, fontStyle: 'italic',
-              lineHeight: 1.5,
-            }}>
-              {t('generate.subline')}
-            </p>
-          )}
-          {generateError && (
-            <div style={{
-              marginTop: SP.sm,
-              padding: `${SP.sm}px ${SP.md}px`,
-              background: swatch.dangerBg,
-              border: '1px solid #e8b0b0',
-              borderRadius: R.md,
-              color: swatch.danger,
-              fontFamily: sans,
-              fontSize: FS.sm,
-            }}>
-              {generateError}
-            </div>
-          )}
+      {/* Generate commit band — the pre-generate close-out commit only. Once a
+          settlement exists, re-rolling lives in the sticky toolbar's quiet
+          Regenerate (beside New), so the just-earned dossier below is never
+          out-shouted by a second full-width gold band. */}
+      {!settlement && isAdvanced && wizardStep >= STEPS.length && (
+        <WizardCommitBand
+          isMobile={isMobile}
+          handleGenerate={handleGenerate}
+          generateError={generateError}
+        />
+      )}
+
+      {/* Regenerate moved into the sticky toolbar (beside New). The re-roll
+          error alert stays here so a failed regenerate surfaces above the
+          dossier. */}
+      {settlement && generateError && (
+        <div role="alert" style={{
+          marginTop: SP.sm,
+          padding: `${SP.sm}px ${SP.md}px`,
+          background: swatch.dangerBg,
+          border: '1px solid #e8b0b0',
+          borderRadius: R.md,
+          color: swatch.danger,
+          fontFamily: sans,
+          fontSize: FS.sm,
+        }}>
+          {generateError}
         </div>
       )}
 
@@ -671,7 +698,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             settlement={settlement}
             isMobile={isMobile}
             handleBack={handleBack}
+            handleGenerate={handleGenerate}
             handleNewSettlement={handleNewSettlement}
+            maxWidth={PAGE_MAX}
           />
 
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
@@ -694,6 +723,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
               isMobile={isMobile}
               onSignIn={onSignIn}
             />
+            {/* Buy this dossier — the anonymous/free one-time purchase CTA,
+                mirrored from master's Save row (B4a). Self-gates by tier/config
+                (hidden for export-capable tiers), so it never competes with the
+                Save/Export primaries when they apply. */}
+            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
           </div>
 

@@ -20,7 +20,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, label, smart, humanize, upper, safe } from '../lib/format.js';
+import { cap, label, noteText, smart, humanize, upper, safe } from '../lib/format.js';
 
 const SEVERITY_TONE = {
   critical: 'bad', severe: 'bad', high: 'bad',
@@ -97,6 +97,9 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             BY-DESIGN CONTRADICTIONS
           </Text>
+          <Text style={{ ...type.body, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
+            Intentional tensions — plot seeds, not defects.
+          </Text>
           {contradictions.map((c, i) => (
             <View
               key={`bdc-${i}`}
@@ -107,7 +110,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
               <View style={{ flex: 1 }}>
                 <EditableText
                   name={`viability.contradiction.${i}`}
-                  defaultValue={typeof c === 'string' ? c : (c?.text || c?.description || c?.label || '')}
+                  defaultValue={noteText(c)}
                   style={{ ...type.body, fontSize: pt['9'] }}
                 />
               </View>
@@ -141,7 +144,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
                 items={warnings}
                 tone="warn"
                 bullet="!"
-                itemRender={(w) => label(w) || (typeof w === 'string' ? w : '')}
+                itemRender={(w) => noteText(w)}
               />
             </View>
           )}
@@ -154,7 +157,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm }) {
                 items={violations}
                 tone="bad"
                 bullet="×"
-                itemRender={(s) => label(s) || (typeof s === 'string' ? s : '')}
+                itemRender={(s) => noteText(s)}
               />
             </View>
           )}

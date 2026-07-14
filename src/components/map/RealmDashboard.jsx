@@ -39,6 +39,7 @@ import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { WAR_SHAPED_TYPES } from './WorldPulseData.js';
 import { hasPantheon } from './PantheonPanel.jsx';
 import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
+import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
 import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, R, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
@@ -361,6 +362,11 @@ export default function RealmDashboard({
           State of the Realm
         </h3>
       </div>
+
+      {/* components-dossier-4: the "while you were away" digest — what the
+          living/autonomous world did on campaign activation. Self-gates to nothing
+          when this campaign has no pending catch-up digest. */}
+      <WhileYouWereAway campaignId={campaign.id} />
 
       {/* Living-world gates: Relationship drift / War layer / Faith spread.
           Campaign-scoped controls surfaced ON the realm (the DM's world view),

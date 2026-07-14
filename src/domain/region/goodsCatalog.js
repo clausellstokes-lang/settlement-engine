@@ -11,6 +11,8 @@
  * known staples.
  */
 
+import { slugify as kernelSlugify } from '../../kernel/slugify.js';
+
 export const REGIONAL_GOOD_CATEGORIES = Object.freeze([
   'food',
   'raw_material',
@@ -286,11 +288,7 @@ function stripAnnotations(value) {
  * @returns {string}
  */
 export function slugifyGood(value) {
-  return String(value || 'unknown')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '_')
-    .replace(/^_+|_+$/g, '')
-    .slice(0, 64) || 'unknown';
+  return kernelSlugify(value, { sep: '_', max: 64, fallback: 'unknown', empty: 'unknown' });
 }
 
 /**

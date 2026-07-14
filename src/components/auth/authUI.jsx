@@ -85,7 +85,7 @@ export function FooterLink({ href, onClick, children }) {
   );
 }
 
-export function OrDivider() {
+export function OrDivider({ label = 'or with email' }) {
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm,
@@ -93,7 +93,7 @@ export function OrDivider() {
       textTransform: 'uppercase', letterSpacing: '0.08em',
     }} aria-hidden="true">
       <span style={{ flex: 1, height: 1, background: BORDER }} />
-      <span>or with email</span>
+      <span>{label}</span>
       <span style={{ flex: 1, height: 1, background: BORDER }} />
     </div>
   );

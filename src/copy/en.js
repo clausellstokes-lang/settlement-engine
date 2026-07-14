@@ -187,19 +187,12 @@ export const en = Object.freeze({
     },
     button: {
       working:        'Working...',
-      sendLink:       'Send sign-in link',
       emailLink:      'Email me a sign-in link',
       createAcct:     'Create account',
       signIn:         'Sign in',
       resend:         'Resend link',
       differentEmail: 'Use a different email',
       backToSignIn:   'Back to sign in',
-      // ── Retained from OUR AuthPanel (surviving until 4d adopts their auth
-      //    surfaces): the "more sign-in options" disclosure + method toggle.
-      moreOpen:    'More sign-in options',
-      moreClose:   'Hide more options',
-      usePassword: 'Use a password instead',
-      useMagic:    'Use a magic link instead (recommended)',
     },
     // Password-reset request: the prose intro and the post-send confirmation.
     // Formal register, no contractions (auth/security copy).
@@ -642,6 +635,8 @@ export const en = Object.freeze({
     untitled:     'Untitled settlement',
     emptyTitle:   'No public dossiers yet.',
     emptyBody:    'Be the first to publish one. Every shared dossier becomes a permanent page anyone can find.',
+    emptyFilteredBody: 'No settlements match your filters.',
+    clearFilters: 'Clear filters',
     loadError:    'The gallery could not be loaded. Try again in a moment.',
     backToList:   'Back to gallery',
   },
@@ -1048,6 +1043,7 @@ export const en = Object.freeze({
       cta:      'Save this settlement to buy its PDF',
       subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
+      error:    'Could not save this settlement. Please try again.',
     },
     // Anonymous pre-checkout ladder popup.
     ladder: {

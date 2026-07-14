@@ -26,7 +26,8 @@ import { Pill } from '../primitives/Pill.jsx';
 import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, smart, label, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
+import { cap, smart, label, noteText, hookText, finite, safePct, humanize, safe } from '../lib/format.js';
+import { proseToPlainText } from '../primitives/ProseText.jsx';
 
 export function Overview({ settlement, narrativeMode, vm }) {
   const o = vm.overview;
@@ -51,7 +52,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
       {o.thesis && (
         <Callout tone="ai" kicker="THESIS">
           <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'] }}>
-            {o.thesis}
+            {proseToPlainText(o.thesis)}
           </Text>
         </Callout>
       )}
@@ -396,7 +397,7 @@ export function Overview({ settlement, narrativeMode, vm }) {
             ]}
             tone="warn"
             emptyText="None"
-            itemRender={(it) => label(it) || (typeof it === 'string' ? it : '')}
+            itemRender={(it) => noteText(it)}
           />
         </View>
       )}

@@ -13,13 +13,16 @@
  *   - omitted (modal)  → switch the internal mode state in place
  *   - provided (pages) → the parent navigates to the sibling route
  *
- * Magic-link is the default method (WCAG 2.2 SC 3.3.8 + better conversion);
- * the legacy password path lives behind the "More options" disclosure.
+ * Password is the primary inline path (W5.1 design inversion): email +
+ * password render directly, sign-up adds confirm-password. The email
+ * sign-in link and the OAuth providers are explicit alternatives BELOW the
+ * form — never above it — and sign-up is password-only (mirrors OAuth being
+ * withheld from sign-up so account creation stays short).
  */
 import { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, GOLD_BG, MUTED, SECOND, BORDER, sans, SP, R, FS } from '../theme.js';
+import { GOLD, SECOND, MUTED, BORDER, sans, SP, R, FS, GOLD_BG } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
@@ -58,13 +61,12 @@ export default function AuthPanel({
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'reset' | 'verify'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); // sign-up + password path only
+  const [confirmPassword, setConfirmPassword] = useState(''); // sign-up only
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [authMethod, setAuthMethod] = useState('magic'); // 'magic' | 'password'
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [magicSent, setMagicSent] = useState(false); // email sign-in link dispatched
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
@@ -72,7 +74,7 @@ export default function AuthPanel({
   const requestMode = (next) => {
     setError(null);
     setMessage(null);
-    setMoreOpen(false);
+    setMagicSent(false);
     setConfirmPassword('');
     if (onModeChange) onModeChange(next);
     else setMode(next);
@@ -150,7 +152,7 @@ export default function AuthPanel({
     setLoading(true);
     try {
       await authMagicLink(email.trim());
-      setMessage(`Check ${email.trim()} for a sign-in link. The link works for 1 hour.`);
+      setMagicSent(true);
     } catch (e) {
       setError(e.message || 'Could not send sign-in link');
     } finally {
@@ -158,10 +160,32 @@ export default function AuthPanel({
     }
   };
 
-  const submit = authMethod === 'magic'
-    ? handleMagicLink
-    : mode === 'signup' ? handleSignUp : handleSignIn;
+  // Password is the primary inline path: sign-up creates an account, anything
+  // else signs in. The email sign-in link is an explicit alternative below.
+  const submit = mode === 'signup' ? handleSignUp : handleSignIn;
   const onEnter = (e) => { if (e.key === 'Enter') submit(); };
+
+  // ── Magic-link sent ("check your inbox") ──────────────────────────────────
+  // The email sign-in link's close. An actionable note instead of a flat green
+  // strip: resend for a lost/expired link, or step back to fix a typo'd email.
+  if (magicSent) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, textAlign: 'center' }}>
+        <Mail size={40} color={GOLD} style={{ margin: '0 auto' }} />
+        <Alert type="success">
+          {t('auth.magic.sent', { email: email.trim() })}
+        </Alert>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
+          <Button variant="ghost" size="sm" onClick={handleMagicLink} disabled={loading}>
+            {loading ? t('auth.button.working') : t('auth.button.resend')}
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => { setMagicSent(false); setError(null); }}>
+            {t('auth.button.differentEmail')}
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // ── Email verification (post sign-up "check your inbox") ──────────────────
   if (mode === 'verify') {
@@ -223,8 +247,40 @@ export default function AuthPanel({
       {error && <Alert type="error">{error}</Alert>}
       {message && <Alert type="success">{message}</Alert>}
 
+      {/* Primary path: email then password, always inline. Sign-up adds a
+          confirm-password field directly below. */}
+      <Input type="email" label={t('auth.placeholder.email')} placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
+      <Input type="password" label={t('auth.placeholder.password')} placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
+      {mode === 'signup' && (
+        <Input type="password" label={t('auth.placeholder.confirmPassword')} placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
+      )}
+
+      {mode === 'signin' && (
+        <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
+      )}
+
+      <AuthCTAButton onClick={submit} disabled={loading}>
+        {loading
+          ? t('auth.button.working')
+          : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
+      </AuthCTAButton>
+
+      {/* Forgot-password, surfaced directly for sign-in (no longer buried in a
+          disclosure). Routes to the security-question reset mode. */}
+      {mode === 'signin' && (
+        <Button variant="ghost" size="sm" onClick={() => requestMode('reset')}>
+          {t('auth.password.forgot')}
+        </Button>
+      )}
+
+      {/* ── Alternatives ──────────────────────────────────────────────────────
+          Placed BELOW the email/password form, never above it: password stays
+          the primary path. Order: Discord, Google, then the email sign-in link.
+          Sign-up does NOT offer the link — account creation is password-only
+          (mirrors OAuth being withheld from sign-up). */}
       {(showDiscord || showGoogle) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
+          <OrDivider label={t('auth.oauth.divider')} />
           {showDiscord && (
             <OAuthButton
               glyph={<DiscordGlyph />}
@@ -241,66 +297,20 @@ export default function AuthPanel({
               disabled={loading || !isConfigured}
             />
           )}
-          <OrDivider />
+          <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
+            {t('auth.button.emailLink')}
+          </AuthCTAButton>
         </div>
       )}
-
-      <Input type="email" label={t('auth.placeholder.email')} placeholder={t('auth.placeholder.email')} value={email} onChange={setEmail} onKeyDown={onEnter} />
-      {authMethod === 'password' && (
-        <Input type="password" label={t('auth.placeholder.password')} placeholder={t('auth.placeholder.password')} value={password} onChange={setPassword} onKeyDown={onEnter} />
-      )}
-      {authMethod === 'password' && mode === 'signup' && (
-        <Input type="password" label={t('auth.placeholder.confirmPassword')} placeholder={t('auth.placeholder.confirmPassword')} value={confirmPassword} onChange={setConfirmPassword} onKeyDown={onEnter} />
-      )}
-
-      {authMethod === 'password' && mode === 'signin' && (
-        <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
-      )}
-
-      <AuthCTAButton onClick={submit} disabled={loading}>
-        {loading
-          ? t('auth.button.working')
-          : authMethod === 'magic'
-            ? t('auth.button.sendLink')
-            : (mode === 'signup' ? t('auth.button.createAcct') : t('auth.button.signIn'))}
-      </AuthCTAButton>
-
-      <Button
-        variant="ghost"
-        size="sm"
-        onClick={() => setMoreOpen(o => !o)}
-        aria-expanded={moreOpen}
-      >
-        {moreOpen ? t('auth.button.moreClose') : t('auth.button.moreOpen')}
-      </Button>
-
-      {moreOpen && (
-        <div style={{
-          display: 'flex', flexDirection: 'column', gap: SP.sm,
-          padding: `${SP.md}px ${SP.md}px`,
-          background: 'rgba(248, 240, 220, 0.35)',
-          border: `1px solid ${BORDER}`,
-          borderRadius: R.md,
-          fontSize: FS.xs, color: SECOND,
-        }}>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => { setAuthMethod(m => m === 'magic' ? 'password' : 'magic'); setError(null); setMessage(null); setConfirmPassword(''); }}
-            style={{ justifyContent: 'flex-start' }}
-          >
-            {authMethod === 'magic' ? t('auth.button.usePassword') : t('auth.button.useMagic')}
-          </Button>
-          {authMethod === 'password' && mode === 'signin' && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => requestMode('reset')}
-              style={{ justifyContent: 'flex-start' }}
-            >
-              {t('auth.password.forgot')}
-            </Button>
-          )}
+      {mode === 'signin' && !showDiscord && !showGoogle && (
+        // Sign-in only, no OAuth providers enabled: the email sign-in link still
+        // needs a home, so it gets its own full-width alternative under the
+        // primary CTA.
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
+          <OrDivider label={t('auth.oauth.divider')} />
+          <AuthCTAButton variant="ghost" onClick={handleMagicLink} disabled={loading}>
+            {t('auth.button.emailLink')}
+          </AuthCTAButton>
         </div>
       )}
 

@@ -63,13 +63,13 @@ export default function WorldMap({ onNavigate } = {}) {
   // ── Refs & local state ────────────────────────────────────────────────
   const iframeRef = useRef(null);
   const mapContainerRef = useRef(null);
-  // Live overlay transform {tx,ty,scale,width,height} — emitted by MapOverlay in
+  // Live overlay transform {tx,ty,scale,width,height} — written by MapOverlay in
   // image mode so the drop handler can inverse-project screen→image coords
-  // without waiting on the debounced viewport persist. MapOverlay reports it via
-  // the stable onTransform callback below; WorldMap owns this ref and the write.
+  // without waiting on the debounced viewport persist. WorldMap owns this ref and
+  // threads it straight into MapOverlay (via WorldMapStage) as `transformOut`; the
+  // overlay assigns its live transform to `.current` on every pan/zoom tick. The
+  // ref object is stable, so passing it never re-runs MapOverlay's pan/zoom effect.
   const overlayTransformRef = useRef(null);
-  // Stable (empty-deps) so MapOverlay's pan/zoom effect never re-runs on render.
-  const handleOverlayTransform = useCallback((t) => { overlayTransformRef.current = t; }, []);
   const bridgeRef = useRef(null);
   const [bridgeReady, setBridgeReady] = useState(false);
   const [toast, setToast] = useState(null);
@@ -853,7 +853,7 @@ export default function WorldMap({ onNavigate } = {}) {
             activeCampaign={activeCampaign} activeSaves={activeSaves}
             mapContainerRef={mapContainerRef} handleDragOver={handleDragOver}
             handleDragLeave={handleDragLeave} handleDrop={handleDrop} iframeRef={iframeRef}
-            bridgeReady={bridgeReady} bridgeRef={bridgeRef} onOverlayTransform={handleOverlayTransform}
+            bridgeReady={bridgeReady} bridgeRef={bridgeRef} overlayTransformRef={overlayTransformRef}
             onNavigate={onNavigate} showLayersPanel={showLayersPanel} setShowLayersPanel={setShowLayersPanel}
             mapReloadKey={mapReloadKey} onReloadMap={handleReloadMap}
             {...campaignActivation}

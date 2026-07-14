@@ -873,7 +873,7 @@ export default function App() {
         <Suspense fallback={null}>
           <AuthModal
             onClose={() => setAuthModalOpen(false)}
-            onNavigateAccount={() => { setAuthModalOpen(false); setView('account'); }}
+            isMobile={isMobile}
           />
         </Suspense>
       )}

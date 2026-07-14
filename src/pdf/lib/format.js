@@ -54,6 +54,32 @@ export function label(item) {
 }
 
 /**
+ * noteText — extract the PROSE from an object-shaped coherence note, structural
+ * suggestion, or structural violation, instead of collapsing it to its bare
+ * category key (pdf-2). The engine emits these shapes:
+ *   - coherence note:        { type, severity, note }
+ *   - structural suggestion: { type:'suggestion', reason, suggested[] }
+ *   - structural violation:  { type, institution|group, reason }
+ * Falls back to a description/text field, then to label() for label-shaped items,
+ * so a plain string or a `{label}` item still reads exactly as before.
+ */
+export function noteText(item) {
+  if (!item) return '';
+  if (typeof item === 'string') return humanize(item);
+  if (item.note) return String(item.note);
+  if (item.reason) {
+    const who = item.institution || item.group;
+    const suggested = Array.isArray(item.suggested) && item.suggested.length
+      ? ` Consider: ${item.suggested.map(label).filter(Boolean).join(', ')}.`
+      : '';
+    return who ? `${label(who)}: ${item.reason}${suggested}` : `${item.reason}${suggested}`;
+  }
+  if (item.description) return String(item.description);
+  if (item.text) return String(item.text);
+  return label(item);
+}
+
+/**
  * humanize — turn `snake_case`, `kebab-case`, or `camelCase` keys into Title Case.
  * Strings already containing spaces are returned as-is (with light casing).
  *

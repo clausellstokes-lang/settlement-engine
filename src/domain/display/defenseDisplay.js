@@ -14,6 +14,25 @@
 import { buildThreatAssessment } from './threatAssessment.js';
 
 /**
+ * The ACTIVE-MILITARY-STATUS stress set (pdf-4) — the single source of truth for
+ * which stressor types raise a military-status callout, and the posture + colour
+ * shown for each. Consumed by BOTH the web DefenseTab and the PDF defenseSlice so
+ * the printed dossier and the screen can never drift (they used to disagree in
+ * BOTH directions: the PDF showed wartime/insurgency the screen never did, and
+ * missed famine/politically_fractured/recently_betrayed/plague_onset the screen
+ * shows — the last most visible now that M11a pestilence lands `plague_onset`).
+ * Keyed by the stressor TYPE the engine emits (not an icon/key sentinel).
+ */
+export const DEFENSE_STRESS_STATUS = Object.freeze({
+  under_siege:           { posture: 'ACTIVE SIEGE',         colour: '#8b1a1a' },
+  famine:                { posture: 'INTERNAL PRESSURE',    colour: '#8b5a1a' },
+  occupied:              { posture: 'UNDER OCCUPATION',     colour: '#4a3a6b' },
+  politically_fractured: { posture: 'COMMAND SPLIT',        colour: '#5a4a1a' },
+  recently_betrayed:     { posture: 'SECURITY COMPROMISED', colour: '#6b1a2a' },
+  plague_onset:          { posture: 'QUARANTINE ACTIVE',    colour: '#2a5a2a' },
+});
+
+/**
  * One named force entry from defenseProfile.institutions.
  * @typedef {{ name?: string, desc?: string, source?: string }} ForceEntry
  */

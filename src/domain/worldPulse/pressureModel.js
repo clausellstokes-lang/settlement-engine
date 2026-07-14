@@ -1,10 +1,7 @@
+import { clamp01 } from '../../kernel/math.js';
 import { SEASONS_TUNING } from './seasons.js';
 
 /** @param {any} value @returns {number} */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /** @param {any} score @param {boolean} [invert] @returns {number} */
 function pressureFromScore(score, invert = true) {

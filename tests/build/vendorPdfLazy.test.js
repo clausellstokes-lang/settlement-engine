@@ -333,6 +333,29 @@ function entryStaticClosure() {
   return { entry, files: [...seen] };
 }
 
+// ── VERIFY_DIST post-build anti-vacuity guard ([tests-1]/[test-quality-1]) ──
+// Every dist-reading contract in this file is `describe.runIf(distExists)` and
+// silently NO-OPs when dist/ is absent. That is correct in the plain `npm run
+// test` run (a fresh checkout has no dist/ yet), but a GREEN-ON-NOTHING bug in
+// the CI + `npm run check` POST-BUILD re-run (`npm run verify:dist` →
+// VERIFY_DIST=1 vitest run tests/build/) — the run whose whole job is to verify
+// the constitutional first-paint closure ratchet (law 5). That ratchet once went
+// vacuous and let +293 B ride green (documented in the header above). So when
+// VERIFY_DIST=1, a missing dist/ MUST hard-fail rather than skip. This `it` is
+// UNCONDITIONAL — never itself gated by a runIf — so it cannot be vacated the same
+// way the contracts it guards were; it reads process.env.VERIFY_DIST directly and
+// only bites the post-build re-run. (This makes the ci.yml:106 comment finally
+// true.)
+describe('Tier 9.7 — VERIFY_DIST post-build anti-vacuity', () => {
+  const requireDist = process.env.VERIFY_DIST === '1';
+  it('when VERIFY_DIST=1, dist/ + dist/assets exist (post-build must verify, not skip)', () => {
+    expect(
+      !requireDist || distExists,
+      'VERIFY_DIST=1 but dist/assets is absent — a skipped post-build chunk contract is green-on-nothing; run `npm run build` first',
+    ).toBe(true);
+  });
+});
+
 describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   // ── Chunk isolation ─────────────────────────────────────────────────────
   it('vendor-pdf is its own chunk in dist/assets/', () => {

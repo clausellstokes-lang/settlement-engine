@@ -1,50 +1,20 @@
-import { useState, useMemo } from 'react';
-import {ChevronDown, ChevronUp} from 'lucide-react';
+import { useMemo } from 'react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
 import {getCompatibleResources} from '../generators/terrainHelpers';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
+import Disclosure from './primitives/Disclosure.jsx';
+import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
 
-const ARCHETYPES=[
-  {key:'balanced',name:'Balanced',desc:'No dominant characteristic',threat:'frontier',e:50,m:50,mg:50,r:50,c:50},
-  {key:'merchant_republic',name:'Merchant Republic',desc:'Trade hub; guild security',threat:'heartland',e:82,m:38,mg:42,r:32,c:62},
-  {key:'trade_crossroads',name:'Trade Crossroads',desc:'Major overland hub; active guilds',threat:'heartland',e:85,m:55,mg:45,r:40,c:55},
-  {key:'mining_colony',name:'Mining Colony',desc:'Resource extraction; high military',threat:'frontier',e:68,m:72,mg:22,r:35,c:52},
-  {key:'military_fortress',name:'Military Fortress',desc:'Heavily garrisoned; spartan',threat:'frontier',e:28,m:92,mg:18,r:42,c:28},
-  {key:'frontier_outpost',name:'Frontier Outpost',desc:'Small post on edge of civilisation',threat:'frontier',e:35,m:80,mg:25,r:38,c:40},
-  {key:'besieged_holdout',name:'Besieged Holdout',desc:'Under constant threat; fortified by necessity',threat:'plagued',e:25,m:88,mg:32,r:65,c:35},
-  {key:'plague_of_beasts',name:'Embattled: Creature Threat',desc:'Hostile incursion; survival economy',threat:'plagued',e:22,m:75,mg:38,r:78,c:48},
-  {key:'theocracy',name:'Theocracy',desc:'Church controls civic life',threat:'heartland',e:38,m:52,mg:35,r:92,c:18},
-  {key:'holy_sanctuary',name:'Holy Sanctuary',desc:'Peaceful pilgrimage centre',threat:'heartland',e:35,m:22,mg:38,r:95,c:15},
-  {key:'crusader_chapter',name:'Crusader Chapter',desc:'Faith and force unified',threat:'frontier',e:32,m:82,mg:28,r:82,c:18},
-  {key:'mage_city',name:'Mage City',desc:'Arcane research centre',threat:'heartland',e:62,m:28,mg:92,r:22,c:38},
-  {key:'arcane_academy',name:'Arcane Academy',desc:'Magical education above all',threat:'heartland',e:52,m:32,mg:96,r:28,c:35},
-  {key:'monster_hunters',name:"Monster Hunters' Lodge",desc:'Magic and military vs creatures',threat:'plagued',e:42,m:72,mg:68,r:38,c:30},
-  {key:'lawless_frontier',name:'Lawless Frontier',desc:'Criminal networks fill the vacuum',threat:'frontier',e:42,m:58,mg:30,r:28,c:82},
-  {key:'criminal_haven',name:'Criminal Haven',desc:'The guild IS the government',threat:'heartland',e:72,m:25,mg:35,r:20,c:90},
-  {key:'safe_province_capital',name:'Safe Province Capital',desc:'Peaceful administrative centre',threat:'heartland',e:68,m:42,mg:48,r:55,c:38},
-];
-const ARCHETYPE_GROUPS=[
-  {label:'Neutral',keys:['balanced']},
-  {label:'Economic',keys:['merchant_republic','trade_crossroads','mining_colony']},
-  {label:'Military',keys:['military_fortress','frontier_outpost','besieged_holdout','plague_of_beasts']},
-  {label:'Religious',keys:['theocracy','holy_sanctuary','crusader_chapter']},
-  {label:'Arcane',keys:['mage_city','arcane_academy','monster_hunters']},
-  {label:'Criminal',keys:['lawless_frontier','criminal_haven']},
-  {label:'Civic',keys:['safe_province_capital']},
-];
-const PRIORITIES=[
-  {key:'priorityEconomy',label:'Economy',accent:'#a0762a'},
-  {key:'priorityMilitary',label:'Military',accent:'#8b1a1a'},
-  {key:'priorityMagic',label:'Magic',accent:'#5a2a8a'},
-  {key:'priorityReligion',label:'Religion',accent:'#1a5a28'},
-  {key:'priorityCriminal',label:'Criminal',accent:'#4a1a4a'},
-];
+// The 17 archetypes + priority sliders moved to the Character preset card
+// (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
+// Applying a preset writes the SAME config values the old SliderPanel
+// dropdown wrote, so generation stays byte-identical.
 
 function Lbl({children,topic}){
   const base={fontSize:FS.xs,fontWeight:700,color:SECOND,letterSpacing:'0.05em',textTransform:'uppercase',marginBottom:4};
@@ -54,63 +24,7 @@ function Lbl({children,topic}){
   if(topic)return<div style={{...base,display:'flex',alignItems:'center',gap:5}}><span>{children}</span><HelpPopover topic={topic}/></div>;
   return<div style={base}>{children}</div>;
 }
-function Sel({value,onChange,children}){return<select value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
-function Collapsible({title,status,children}){
-  const[open,setOpen]=useState(false);
-  return<div><Button variant="ghost" size="sm" fullWidth onClick={()=>setOpen(o=>!o)} aria-expanded={open} icon={open?<ChevronUp size={14}/>:<ChevronDown size={14}/>} style={{justifyContent:'flex-start',textAlign:'left',padding:'4px 0',whiteSpace:'normal'}}><span style={{flex:1}}>{title}</span>{status&&!open&&<span style={{fontSize:FS.xxs,fontWeight:600,color:MUTED,background:swatch['#F0EAD8'],borderRadius:3,padding:'1px 6px',flexShrink:0}}>{status}</span>}</Button>{open&&children}</div>;
-}
-
-function SliderPanel({config,updateConfig,randomSliderMode,setRandomSliderMode}){
-  const[applied,setApplied]=useState(null);
-  const apply=e=>{
-    const key=e.target.value;if(!key)return;
-    const arc=ARCHETYPES.find(a=>a.key===key);if(!arc)return;
-    updateConfig({priorityEconomy:arc.e,priorityMilitary:arc.m,priorityMagic:arc.mg,priorityReligion:arc.r,priorityCriminal:arc.c,monsterThreat:arc.threat});
-    setApplied(key);e.target.value='';
-  };
-  return<div style={{background:PARCHMENT,border:`1px solid ${BORDER}`,borderRadius:7,padding:'12px 14px',marginTop:4}}>
-    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:randomSliderMode?0:10}}>
-      <Lbl>Priority Sliders</Lbl>
-      <Button variant={randomSliderMode?'primary':'secondary'} size="sm" aria-pressed={randomSliderMode} onClick={()=>setRandomSliderMode(!randomSliderMode)}>{randomSliderMode?'Random':'Set manually'}</Button>
-    </div>
-    {randomSliderMode
-      ? <p style={{fontSize:FS.xs,color:MUTED,margin:'6px 0 0',lineHeight:1.4}}>Each generation randomises all priority sliders. Toggle off to set values manually or choose an archetype.</p>
-      : <>
-        <div style={{marginBottom:10}}>
-          <Lbl>Archetype preset</Lbl>
-          <div style={{display:'flex',gap:6}}>
-            <select defaultValue="" onChange={apply} style={{flex:1,padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>
-              <option value="">— Choose an archetype —</option>
-              {ARCHETYPE_GROUPS.filter(g=>config.magicExists!==false||g.label!=='Arcane').map(({label,keys})=><optgroup key={label} label={label}>{keys.map(key=>{const a=ARCHETYPES.find(x=>x.key===key);return a?<option key={key} value={key}>{a.name} - {a.desc}</option>:null;})}</optgroup>)}
-            </select>
-            {applied&&<span style={{fontSize:FS.xs,color:swatch['#4A8A60'],fontWeight:600,display:'flex',alignItems:'center'}}>✓</span>}
-          </div>
-        </div>
-        <div style={{display:'flex',flexDirection:'column',gap:8}}>
-          {PRIORITIES.map(({key,label,accent})=>{
-            // Hide magic slider entirely when magic doesn't exist in this world
-            if (key === 'priorityMagic' && config.magicExists === false) return null;
-            const val = config[key] ?? 50;
-            return <div key={key} style={{display:'flex',alignItems:'center',gap:8}}>
-              <span style={{fontSize:FS.sm,fontWeight:600,color:INK,width:62,flexShrink:0}}>
-                {label}
-              </span>
-              <input type="range"
-                aria-label={label}
-                min={5} max={95}
-                value={Math.max(5,val)}
-                onChange={e=>updateConfig({[key]:Number(e.target.value)})}
-                style={{flex:1,accentColor:accent,height:4}}/>
-              <span style={{fontSize:FS.xs,fontWeight:700,color:accent,width:46,textAlign:'right',whiteSpace:'nowrap'}}>
-                {val}
-              </span>
-            </div>;
-          })}
-        </div>
-      </>
-    }
-  </div>;
-}
+function Sel({value,onChange,children,ariaLabel}){return<select aria-label={ariaLabel} value={value} onChange={onChange} style={{width:'100%',padding:'5px 10px',border:`1px solid ${BORDER2}`,borderRadius:5,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK,cursor:'pointer'}}>{children}</select>;}
 
 function StressPanel({config,updateConfig}){
   const isRandom=config.selectedStressesRandom!==false;
@@ -296,11 +210,14 @@ function NearbyResourcesPanel({config,updateConfig}){
   </div>;
 }
 
-export default function ConfigurationPanel(){
+/**
+ * @param {{ showFineTune?: boolean }} [props]
+ *   showFineTune — render the "Fine-tune" disclosure (nearby resources +
+ *     settlement stress). Default on, so existing mounts are unchanged.
+ */
+export default function ConfigurationPanel({ showFineTune = true } = {}){
   const config = useStore(s => s.config);
   const updateConfig = useStore(s => s.updateConfig);
-  const randomSliderMode = useStore(s => s.randomSliderMode);
-  const setRandomSliderMode = useStore(s => s.setRandomSliderMode);
   // §14b — "Use custom content" toggle: only meaningful for users who can author
   // custom content and actually have some. Default ON (undefined === on).
   const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
@@ -445,16 +362,17 @@ export default function ConfigurationPanel(){
         </div>
         <div>
           <Lbl topic="monster-threat">Regional Threat</Lbl>
-          <Sel value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
+          <Sel ariaLabel="Regional Threat" value={config.monsterThreat||'random_threat'} onChange={e=>updateConfig({monsterThreat:e.target.value})}>
             <option value="random_threat">Random</option>
             <option value="heartland">Safe Heartland</option>
             <option value="frontier">Active Frontier</option>
             <option value="plagued">Embattled Region</option>
           </Sel>
+          <p style={{fontSize:FS.xs,color:BODY,margin:'6px 0 0',lineHeight:1.4}}>Heartland is quiet. Frontier sees raids and patrols. Embattled means active war or monster pressure.</p>
         </div>
         <div>
           <Lbl topic="magic-level">Magic in the World?</Lbl>
-          <Sel value={config.magicExists===false?'no':'yes'}
+          <Sel ariaLabel="Magic in the World" value={config.magicExists===false?'no':'yes'}
             onChange={e=>{
               const noMagicNow = e.target.value==='no';
               const isTownPlusNow = ['town','city','metropolis'].includes(config.settType);
@@ -469,11 +387,33 @@ export default function ConfigurationPanel(){
             <option value="yes">✦ Yes. Magic exists</option>
             <option value="no">○ No. Historical mode</option>
           </Sel>
+          {/* Make the cross-field consequence VISIBLE (P2): turning magic off at
+              town+ forces a physical trade route — an isolated town+ is reset to
+              Road (the magic toggle's onChange does this silently otherwise). */}
+          {noMagic && isTownPlus && (
+            <div style={{fontSize:FS.xs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
+              Without magic, a town or larger needs a physical trade route, so Isolated is set to Road.
+            </div>
+          )}
         </div>
       </div>
-      <SliderPanel config={config} updateConfig={updateConfig} randomSliderMode={randomSliderMode} setRandomSliderMode={setRandomSliderMode}/>
-      <div style={{marginTop:10}}><Collapsible title="Nearby Resources" status={config.nearbyResourcesRandom!==false?'Random':(config.nearbyResources?.length??0)+' selected'}><NearbyResourcesPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
-      <div style={{marginTop:6}}><Collapsible title="Settlement Stress" status={config.selectedStressesRandom!==false?'Random':(config.selectedStresses?.length??0)+' selected'}><StressPanel config={config} updateConfig={updateConfig}/></Collapsible></div>
+      <CharacterPresetCard advanced={true}/>
+      {/* ── Fine-tune ───────────────────────────────────────────────────────
+            Nearby resources + settlement stress behind ONE "Fine-tune"
+            disclosure. Priority sliders moved up to the Character card, where
+            the archetype chips and sliders are reconciled into one control.
+            Flattened to a single level (the resource + stress panels were
+            collapsibles side by side); each shows its own compact "Random"
+            default until tuned. Callers can hide the whole block with
+            showFineTune=false. */}
+      {showFineTune && (
+        <div style={{marginTop:10}}>
+          <Disclosure title="Fine-tune: resources and stress" hint="Optional">
+            <NearbyResourcesPanel config={config} updateConfig={updateConfig}/>
+            <div style={{marginTop:6}}><StressPanel config={config} updateConfig={updateConfig}/></div>
+          </Disclosure>
+        </div>
+      )}
       {/* Place in Region — birth-time campaign + patron-deity intent (premium;
           free sees a teaser). Mounted pre-generation so the choice bakes into
           settlement._config and persists on save. */}

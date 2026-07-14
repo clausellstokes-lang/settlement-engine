@@ -1,3 +1,4 @@
+import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, popToTier } from '../../data/constants.js';
 import { canonExports, canonImports } from '../canonicalAccessors.js';
 import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
@@ -31,10 +32,6 @@ import { isWarSupplyResource } from './moralMartialLean.js';
 const RESOURCE_CITY_FLOOR_PRESSURE = 0.45;
 
 /** @param {any} value */
-function clamp01(value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /** @param {any} tier */
 function tierRank(tier) {

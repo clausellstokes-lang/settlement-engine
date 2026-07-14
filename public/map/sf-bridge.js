@@ -21,6 +21,7 @@
 //   settlementEngine:removePlacement     { burgId }
 //   settlementEngine:restorePlacements   { placements }
 //   settlementEngine:clearAllPlacements
+//   settlementEngine:exportThumb         { size }
 //   settlementEngine:getViewport
 //   settlementEngine:setViewport         { cx, cy, scale, duration }
 //   settlementEngine:fitMap
@@ -885,6 +886,66 @@
       } catch (err) {
         console.warn('[sfBridge] getSpatialPack failed', err);
         replyError(rid, 'fmg:spatialPackReply', err);
+      }
+    },
+
+    // Rasterize the rendered terrain to a small JPEG data URL for a maps-gallery
+    // cover (parent: src/lib/mapThumb.js). Best-effort by contract: any failure
+    // (no SVG, tainted canvas from an external <image>, unsupported toDataURL)
+    // replies { dataUrl: null } and the caller falls back to the terrain
+    // placeholder. This must NEVER throw across the bridge or block a share.
+    async 'settlementEngine:exportThumb'(data, rid) {
+      try {
+        const svgEl = document.getElementById('map');
+        const srcW = window.graphWidth || (svgEl ? svgEl.clientWidth : 0) || 0;
+        const srcH = window.graphHeight || (svgEl ? svgEl.clientHeight : 0) || 0;
+        if (!svgEl || srcW < 1 || srcH < 1) {
+          return reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
+        }
+        const size = Math.max(64, Math.min(1024, Number(data && data.size) || 480));
+        const fit = Math.min(size / srcW, size / srcH, 1);
+        const outW = Math.max(1, Math.round(srcW * fit));
+        const outH = Math.max(1, Math.round(srcH * fit));
+
+        // Clone the live SVG, pin explicit dimensions + a full-map viewBox so the
+        // export captures the WHOLE map (not the current pan/zoom crop), and
+        // neutralize the camera transform FMG applies to the #viewbox group.
+        const clone = svgEl.cloneNode(true);
+        clone.setAttribute('width', String(srcW));
+        clone.setAttribute('height', String(srcH));
+        clone.setAttribute('viewBox', '0 0 ' + srcW + ' ' + srcH);
+        clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+        const vb = clone.querySelector('#viewbox');
+        if (vb) vb.removeAttribute('transform');
+        const xml = new XMLSerializer().serializeToString(clone);
+        const svgUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+
+        const dataUrl = await new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => {
+            try {
+              const canvas = document.createElement('canvas');
+              canvas.width = outW;
+              canvas.height = outH;
+              const ctx = canvas.getContext('2d');
+              if (!ctx) return resolve(null);
+              // White matte: JPEG has no alpha, so transparency would render black.
+              ctx.fillStyle = '#ffffff';
+              ctx.fillRect(0, 0, outW, outH);
+              ctx.drawImage(img, 0, 0, outW, outH);
+              resolve(canvas.toDataURL('image/jpeg', 0.82));
+            } catch (_) {
+              resolve(null); // tainted canvas / unsupported — placeholder fallback
+            }
+          };
+          img.onerror = () => resolve(null);
+          img.src = svgUrl;
+        });
+
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: dataUrl, w: outW, h: outH });
+      } catch (err) {
+        console.warn('[sfBridge] exportThumb failed', err);
+        reply(rid, { type: 'fmg:exportThumbReply', dataUrl: null });
       }
     },
 

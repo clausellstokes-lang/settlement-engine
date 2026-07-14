@@ -19,6 +19,13 @@ import { getAllModifiers, EFFECT_CATEGORIES, REL_LABELS } from '../lib/relations
 import { truncateAtWord } from '../lib/text.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureFingerprint } from '../lib/researchCapture.js';
+// lib-infra-7: the living-world read-models the settlement PDF already consumes,
+// reused (never recomputed) so the campaign artifact stops printing a frozen
+// pre-pulse network. All pure display selectors — dormant ⇒ empty ⇒ no chapter.
+import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
+import { liveSieges, warExhaustionStandings, dispositionStandings } from '../domain/display/warStatus.js';
+import { pantheonStandings, deityDisplayName } from '../domain/display/pantheonDepth.js';
+import { realmArcLines } from '../domain/display/realmArcSummary.js';
 
 /** duration_band vocabulary (taxonomy §Banding): lt_5s · 5_15s · 15_60s · 1_5m · 5_30m · gt_30m */
 function durationBand(ms) {
@@ -725,6 +732,115 @@ function buildNetworkAppendix(d, campaignName, settlements, pageN) {
 // ─────────────────────────────────────────────────────────────────────────────
 // Main entry point
 // ─────────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// State of the Realm — the living-world chapter (lib-infra-7). The realm's ACTUAL
+// history (chronicle beats, sieges, war-weariness, pantheon standing, named arcs)
+// from the SAME pure read-models the settlement PDF's Faith & War chapter consumes
+// — never recomputed. Gated on a canonized worldState with living content, so a
+// legacy / pre-pulse campaign skips the chapter and renders exactly as before.
+// ─────────────────────────────────────────────────────────────────────────────
+/**
+ * The living-world SUMMARY DATA — the pure read layer of the State of the Realm
+ * chapter, split from rendering so it is unit-testable (lib-infra-7). Reuses the
+ * SAME display selectors the settlement PDF consumes; never recomputes. Gated on a
+ * canonized worldState; a legacy / draft-world campaign returns `{ present:false }`
+ * so the chapter is skipped and the export is byte-identical to before.
+ * @returns {{ present:false } | { present:true, nameFor:(id:any)=>string, majors:string[],
+ *   sieges:any[], weary:any[], standings:any[], pantheon:any[], arcs:string[] }}
+ */
+export function collectRealmSummary(campaign, settlements = []) {
+  const worldState = campaign?.worldState || null;
+  if (!worldState?.canonizedAt) return { present: false };
+  const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+
+  const nameById = new Map();
+  for (const save of settlements) {
+    const id = String(save?.id ?? save?.settlement?.id ?? '');
+    if (id) nameById.set(id, save?.settlement?.name || save?.name || id);
+  }
+  const nameFor = (id) => nameById.get(String(id)) || String(id);
+
+  const grounding = buildChronicleGrounding({
+    wizardNews: campaign.wizardNews,
+    worldState,
+    snapshot: { settlements: (campaign.settlementIds || []).map(id => ({ id, name: nameFor(id) })) },
+    regionalGraph,
+    lookback: 12,
+  });
+  const majors = Array.isArray(grounding?.majorHeadlines) ? grounding.majorHeadlines.slice(0, 10) : [];
+  // Only public sieges reach this shareable artifact (a GM-concealed front stays hidden).
+  const sieges = liveSieges({ worldState, regionalGraph }).filter(sg => sg.visibility !== 'concealed');
+  const weary = warExhaustionStandings(worldState);
+  const standings = dispositionStandings(worldState);
+  const pantheon = pantheonStandings(worldState);
+  const arcs = realmArcLines({ worldState, regionalGraph, settlements });
+
+  const present = !!(majors.length || sieges.length || weary.length || standings.length || pantheon.length || arcs.length);
+  return { present, nameFor, majors, sieges, weary, standings, pantheon, arcs };
+}
+
+function buildLivingWorld(d, campaignName, campaign, settlements, pageN) {
+  const rs = collectRealmSummary(campaign, settlements);
+  if (!rs.present) return { pageN }; // legacy / draft / quiet world ⇒ chapter skipped
+  const { nameFor, majors, sieges, weary, standings, pantheon, arcs } = rs;
+
+  d.addPage();
+  pageN++;
+  let y = MT;
+  y = secBar(d, y, 'State of the Realm', INK);
+
+  const newTop = (dd) => secBar(dd, MT, 'State of the Realm (continued)', INK);
+  const ensure = (h) => { const r = _ensureSpace(d, y, h, campaignName, pageN, newTop); y = r.y; pageN = r.pageN; };
+
+  const subHead = (labelText) => {
+    ensure(10);
+    d.setFont('helvetica', 'bold'); d.setFontSize(8); st(d, BROWN);
+    d.text(s(labelText).toUpperCase(), ML, y);
+    hline(d, ML, y + 1.2, PW - MR, TAN, 0.2);
+    y += 5;
+  };
+  const bullet = (text) => {
+    const lines = wrap(d, text, CW - 6, 8);
+    for (let i = 0; i < lines.length; i++) {
+      ensure(4);
+      d.setFont('helvetica', 'normal'); d.setFontSize(8); st(d, INK);
+      d.text((i === 0 ? '- ' : '  ') + lines[i], ML, y);
+      y += 3.6;
+    }
+    y += 0.6;
+  };
+
+  if (majors.length) {
+    subHead('Chronicle');
+    for (const h of majors) bullet(h);
+    y += 2;
+  }
+  if (sieges.length || weary.length || standings.length) {
+    subHead('War & Sieges');
+    for (const sg of sieges.slice(0, 8)) {
+      const besiegers = (sg.coalition || []).map(nameFor).filter(Boolean).join(', ') || 'A besieging force';
+      bullet(`${besiegers} ${sg.coalition && sg.coalition.length > 1 ? 'besiege' : 'besieges'} ${nameFor(sg.targetId)}.`);
+    }
+    for (const w of weary.slice(0, 6)) bullet(`${nameFor(w.id)} - ${w.band}.`);
+    const topAgg = standings.slice().sort((a, b) => b.score - a.score)[0];
+    if (topAgg) bullet(`Aggressor of record: ${nameFor(topAgg.id)} (${topAgg.wins}W / ${topAgg.losses}L).`);
+    y += 2;
+  }
+  if (pantheon.length) {
+    subHead('Pantheon');
+    for (const p of pantheon.slice(0, 8)) {
+      bullet(`${deityDisplayName(p.id)} - ${p.tier}, ${p.seats} seat${p.seats === 1 ? '' : 's'}.`);
+    }
+    y += 2;
+  }
+  if (arcs.length) {
+    subHead('Realm Arcs');
+    for (const arc of arcs.slice(0, 8)) bullet(arc);
+  }
+
+  return { pageN };
+}
+
 export function generateCampaignPDF(campaign, allSaves) {
   if (!campaign) throw new Error('generateCampaignPDF: missing campaign');
 
@@ -770,6 +886,13 @@ export function generateCampaignPDF(campaign, allSaves) {
     const r4 = buildDigest(doc, campaign.name, settlements, pageN);
     pageN = r4.pageN;
     footer(doc, campaign.name, pageN);
+  }
+
+  // State of the Realm — the living-world chapter (lib-infra-7). Self-gates on a
+  // canonized worldState with living content; a legacy campaign skips it entirely.
+  {
+    const rlw = buildLivingWorld(doc, campaign.name, campaign, settlements, pageN);
+    if (rlw.pageN !== pageN) { pageN = rlw.pageN; footer(doc, campaign.name, pageN); }
   }
 
   // Network effects appendix

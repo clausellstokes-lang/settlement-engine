@@ -20,7 +20,7 @@ import {
   COST_LAW_VERSION,
   SEASONAL_OVERLAY_VERSION,
 } from '../domain/spatial/index.js';
-import { canonizeWorldState } from '../domain/worldPulse/worldState.js';
+import { canonizeWorldState, deepFreeze } from '../domain/worldPulse/worldState.js';
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { captureSpatialPack as liveCaptureSpatialPack } from '../lib/spatialPackCapture.js';
@@ -82,6 +82,13 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
   if (digestBytes > SPATIAL_DIGEST_MAX_BYTES) {
     return { ok: false, reason: 'spatial_digest_too_large', digestBytes };
   }
+  // Freeze the digest at its authoring seam (performance-scale-2/3): it is authored
+  // ONCE here and never recomputed, so ensureWorldState may share it BY REFERENCE
+  // instead of deep-cloning it ~11×/tick — the deep freeze enforces the never-written
+  // contract and gives every distanceRead route memo a stable digest identity. Byte-
+  // neutral (freeze changes no enumerable value); the size guard above already ran on
+  // the same object.
+  deepFreeze(digest);
   let campaignPersist = /** @type {any} */ (null);
   let nextVersion = 0;
   const now = new Date().toISOString();

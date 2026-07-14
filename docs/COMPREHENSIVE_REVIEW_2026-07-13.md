@@ -2909,3 +2909,40 @@ Notable refutations: backend-2 (warn-not-fail is deliberate+test-enforced; deplo
 
 **[spatial-engine-1] → REFUTED-AS-DEFECT / final none** — ADJUDICATED: deliberate constitutional dormancy + recorded owner-gated STOP-AND-REPORT. Moves to the OWNER QUEUE (preset flip, +20B, golden-shift on that preset) — not an implementer fix. Doc staleness already fixed by W-DOCS-1.
 
+
+
+---
+
+# PHASE V VERDICTS — STRAGGLERS (the 10 re-verified; PHASE V COMPLETE)
+All CONFIRMED. tests-1 downgraded medium (the ordering half is real; residual = a narrow green-on-nothing window + a false CI comment). lib-infra-3 verifier died twice on output formatting — MANAGER-DISPOSITION: goes to its F-wave with implementation-time verification. tq-6 manager verdict PARTIAL (intra-family mover composition tested; cross-family everything-on untested).
+
+**[experience-product-fit-1] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=False owner=False
+- Fix: Move the capped-catch-up trigger from the WorldPulsePanel mount to campaign activation — a useEffect on setActiveCampaign of an advancesOnOpen campaign (or useCampaignAutoResume), keeping the caughtUpIds/lastLivingAdvanceAt cursor dedup so a later Pulse-tab remount stays a no-op. This is the owner-v
+
+**[experience-product-fit-2] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=False owner=True
+- Fix: Bold-but-safe: mount the existing read-model behind a lazy DM-gated surface following the proven RumorsTab store-selector pattern — a 'Beliefs' disclosure/column in RumorsTab or a Realm Inspector section, using includeGroundTruth:true so the player projection stays empty (fail-closed). It is a lazy 
+
+**[performance-scale-1] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=True owner=True
+- Fix: Add a single retention pass in ensureRegionalGraph (the one choke point every write funnels through), mirroring the eventLog cap: keep all non-terminal (queued) rows plus terminal (applied/expired/resolved) rows younger than K ticks, or a hard MAX_QUEUED_IMPACTS ring. Pick K/cap above the largest go
+
+**[performance-scale-2] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=False owner=False
+- Fix: Two constitution-safe parts, both byte-output identical: (a) Object.freeze the digest at canonize and have deepCloneConditionalLedger pass 'spatialDigest' (and other frozen sub-ledgers) through by reference — the no-alias invariant holds because nothing may write it; enforce with a freeze + mutation
+
+**[performance-scale-3] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=False owner=False
+- Fix: Falls out of performance-scale-2(a): Object.freeze the spatialDigest at the canonize seam and have deepCloneConditionalLedger pass 'spatialDigest' through by reference. A single reference-stable frozen digest restores every WeakMap memo (CANDIDATE/ADJ/AUG/SEA/TELEPORT/PORT/CALIBRATION) to true once-
+
+**[performance-scale-4] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=True owner=True
+- Fix: Route catchUpCampaignWorld through the existing simulateCampaignWorldInterval / runAdvanceInterval orchestrator with ticksTotal=n and autoResolve per living/autonomous, so one snapshot/commit/persist/sync covers the whole catch-up (the paused-advance machinery already handles living's "pause on a ma
+
+**[state-lifecycle-1] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=True owner=True
+- Fix: Move the stamp into runAdvanceCampaignWorld's Phase-2 set() (campaignAdvanceSession.js), immediately before cacheCampaignState at :246, gated on advancesOnOpen(worldState.simulationRules) && tick moved (compare a pre-tick captured before applyWorldPulseResultToState). This makes both cacheCampaignSt
+
+**[state-lifecycle-2] → CONFIRMED/CONFIRMED / final high** — goldens=False eager=False persist=True owner=False
+- Fix: In the revert set(): after s.settlement = snapshotSettlement(target.settlement), re-derive s.systemState = deriveSystemState(<restored>) inside the hydrateFromSave-style try/catch, and stamp s.editedAt. Extend the persist (line 660) with campaignState: pickleCampaignState(afterState) for the active-
+
+**[tests-1] → CONFIRMED/CONFIRMED / final medium** — goldens=False eager=False persist=False owner=False
+- Fix: Add to tests/build/vendorPdfLazy.test.js an unconditional `it('dist/ + dist/assets exist when VERIFY_DIST=1')` that reads `process.env.VERIFY_DIST === '1'` and asserts `expect(distExists).toBe(true)` — turns a missing dist under the post-build re-run into a hard red, matching the ci.yml comment. Thr
+
+**[tests-2] → CONFIRMED/CONFIRMED / final high** — goldens=True eager=False persist=False owner=True
+- Fix: Change both harnesses to the sibling idiom `regionalGraph: r.regionalGraph || campaign.regionalGraph` so the evolved graph threads forward, and have the spatial golden's queuedImpacts component read the threaded graph. Regenerate both manifests once under UPDATE_GOLDEN=1, owner-signed, and record th
+

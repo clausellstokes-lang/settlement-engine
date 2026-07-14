@@ -1,0 +1,131 @@
+/**
+ * WhileYouWereAway.jsx — the M10b "while you were away" catch-up digest banner
+ * (components-dossier-4).
+ *
+ * The living/autonomous world now advances ON campaign activation
+ * (setActiveCampaign — experience-product-fit-1), so the realm can move on a path
+ * where no one is watching the Pulse tab. This banner makes that legible: it reads
+ * the TRANSIENT `livingCatchUp` store field the catch-up body stashes and reports
+ * what happened — a busy indicator while the (up to CATCH_UP_CAP_WEEKS) kernel ticks
+ * run, then "N weeks passed" with the major beats over the caught-up window, a
+ * capped note, and — surfaced, never swallowed — a failure note if the advance threw.
+ *
+ * Pure read + one store write (dismiss). Self-gates to nothing when the active
+ * campaign has no digest (a dm_advanced / up-to-date / quiet open) so it costs a
+ * quiet realm nothing. Mounted at the head of RealmDashboard (the default inspector
+ * section + the mobile gate) and WorldPulsePanel (the Pulse tab), so a returning DM
+ * sees it wherever they land.
+ */
+
+import { History, Sparkles, AlertTriangle, X } from 'lucide-react';
+
+import { useStore } from '../../store/index.js';
+import { IconButton } from './IconButton.jsx';
+import { BODY, BORDER2, FS, GOLD, GOLD_BG, INK, MUTED, RED, R, SECOND, sans } from '../theme.js';
+
+/**
+ * @param {Object} props
+ * @param {string|number|null} [props.campaignId]  scope the banner to this campaign;
+ *   defaults to the active campaign so a stale digest from another campaign never shows.
+ */
+export default function WhileYouWereAway({ campaignId = null }) {
+  const digest = useStore(s => s.livingCatchUp);
+  const activeCampaignId = useStore(s => s.activeCampaignId);
+  const dismiss = useStore(s => s.dismissLivingCatchUp);
+
+  const scopeId = campaignId != null ? String(campaignId)
+    : (activeCampaignId != null ? String(activeCampaignId) : null);
+  if (!digest) return null;
+  if (scopeId != null && String(digest.campaignId) !== scopeId) return null;
+
+  const running = digest.status === 'running';
+  const error = digest.error || null;
+  const weeks = Number(digest.weeksCaughtUp) || 0;
+  const capped = !!digest.capped;
+  const majors = Array.isArray(digest.majors) ? digest.majors : [];
+  // Defensive: nothing ran and nothing failed ⇒ render nothing (the store only
+  // stashes on real work, but keep the banner honest if that ever changes).
+  if (!running && !error && weeks <= 0) return null;
+
+  // ── Busy: the catch-up is mid-flight (up to CATCH_UP_CAP_WEEKS ticks). ──
+  if (running) {
+    return (
+      <div
+        data-testid="while-you-were-away"
+        role="status"
+        style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          border: `1px solid ${BORDER2}`, borderRadius: R.md,
+          background: GOLD_BG, padding: '9px 12px',
+          color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        }}
+      >
+        <History size={14} color={GOLD} />
+        Catching the realm up on the time that passed…
+      </div>
+    );
+  }
+
+  const weekWord = weeks === 1 ? 'week' : 'weeks';
+  return (
+    <div
+      data-testid="while-you-were-away"
+      style={{
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
+        background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 8,
+      }}
+    >
+      <header style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <History size={15} color={GOLD} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 950, lineHeight: 1.2 }}>
+            While you were away
+          </div>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, marginTop: 2 }}>
+            The realm advanced {weeks} {weekWord} on its own.
+          </div>
+        </div>
+        <IconButton
+          onClick={() => dismiss?.()}
+          aria-label="Dismiss the catch-up summary"
+          title="Dismiss"
+        >
+          <X size={13} />
+        </IconButton>
+      </header>
+
+      {error ? (
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 6,
+          border: '1px solid rgba(197,74,74,0.45)', borderRadius: R.sm,
+          background: 'rgba(197,74,74,0.08)', padding: '7px 9px',
+          color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.45,
+        }}>
+          <AlertTriangle size={13} style={{ marginTop: 1, flexShrink: 0 }} />
+          <span>The catch-up hit a snag and stopped early: {error}. Advance the realm to resume.</span>
+        </div>
+      ) : majors.length > 0 ? (
+        <div style={{ display: 'grid', gap: 5 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+            <Sparkles size={12} /> What happened
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 16, color: BODY, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.5 }}>
+            {majors.slice(0, 6).map((headline, i) => (
+              <li key={i} style={{ marginBottom: 3 }}>{headline}</li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.45 }}>
+          The realm advanced quietly — no major turns while you were gone.
+        </div>
+      )}
+
+      {capped && !error && (
+        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+          More time had passed than a single catch-up covers — the most recent {weeks} {weekWord} are shown. Advance the realm to run the rest.
+        </div>
+      )}
+    </div>
+  );
+}

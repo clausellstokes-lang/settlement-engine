@@ -1,3 +1,4 @@
+import { clamp01 } from '../../kernel/math.js';
 import { withActiveCondition } from '../activeConditions.js';
 import {
   advanceRegionalImpacts,
@@ -38,10 +39,6 @@ function clone(/** @type {any} */ value) {
   return value == null ? value : deepClone(value);
 }
 
-function clamp01(/** @type {any} */ value) {
-  const n = Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 // Shared loose sim-shape typedefs for the war-2/war-3/war-4 apply arms below. Zero
 // any-holes here: the deliberate looseness lives inside the referenced typedefs'

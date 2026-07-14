@@ -67,6 +67,16 @@ const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
 const setActive = (v) => db.exec(`set test.active = '${v}';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if migration 125 is renamed/renumbered
+// (the master-merge reconciliation risk), both describe.runIf blocks below would
+// silently skip and vitest would stay green. This UNCONDITIONAL assert fails loudly.
+describe('action-velocity migration fixture exists (guards against silent vacuous skip)', () => {
+  it('125_action_velocity_guards.sql is present (a renamed/renumbered file must fail loudly)', () => {
+    expect(existsSync(MIG_125), `migration 125 missing: ${MIG_125}`).toBe(true);
+    expect(allExist).toBe(true);
+  });
+});
+
 describe.runIf(allExist)('action velocity guards — execution against the real SQL (pglite)', () => {
   beforeAll(async () => {
     const src = readFileSync(MIG_125, 'utf-8');

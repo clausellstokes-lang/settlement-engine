@@ -53,6 +53,11 @@ function baseState(overrides = {}) {
     dismissBatchPreview: vi.fn(),
     customContent: {},
     activeSaveId: 'save-1',
+    // W5.7 EventComposer field modules read these selectors.
+    canUseCustomContent: () => false,
+    setPurchaseModalOpen: vi.fn(),
+    savedSettlements: [],
+    campaigns: [],
     requestNarrative: vi.fn(),
     aiSettlement: null,
     aiDailyLife: null,

@@ -31,7 +31,7 @@ async function waitForDossier(page) {
   // the supported skip affordance, then the dossier chrome gives us a stable
   // signal that generation has completed and the lazy view has mounted.
   await page.keyboard.press('Escape').catch(() => {});
-  await expect(page.getByRole('button', { name: /^\s*New\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first()).toBeVisible({ timeout: 30_000 });
   await expect(dossierMeta(page)).toBeVisible({ timeout: 30_000 });
   await expect(page.getByText('Loading settlement view...')).toHaveCount(0, { timeout: 30_000 });
 }
@@ -175,9 +175,9 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await primaryHeroCta(page.getByLabel('Anonymous settlement generator')).click();
     await waitForDossier(page);
 
-    // The wizard's "New" button (with Zap icon + " New" text). Be
-    // tolerant of leading/trailing whitespace from the icon spacing.
-    const newBtn = page.getByRole('button', { name: /^\s*New\s*$/ }).first();
+    // The wizard's "New Draft" button (the toolbar utility control). Be
+    // tolerant of leading/trailing whitespace.
+    const newBtn = page.getByRole('button', { name: /^\s*New Draft\s*$/ }).first();
     // If the wizard variant doesn't render the inline New button (rare —
     // it should always render post-generation for the anon path), fall
     // back to the wizard's chrome "New" entry. Either way, we just want

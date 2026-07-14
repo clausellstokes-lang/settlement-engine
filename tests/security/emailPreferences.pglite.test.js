@@ -35,6 +35,16 @@ const asUser = (uid) => db.exec(`set test.uid = '${uid}';`);
 const asAnon = () => db.exec(`set test.uid = '';`);
 const scalar = async (q) => (await db.query(q)).rows[0];
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): if migration 126 is renamed/renumbered
+// (the master-merge reconciliation risk), the execution suite below would silently
+// skip and vitest would stay green. This UNCONDITIONAL assert fails loudly instead.
+describe('email-preferences migration fixture exists (guards against silent vacuous skip)', () => {
+  it('126_email_preferences.sql is present (a renamed/renumbered file must fail loudly)', () => {
+    expect(existsSync(MIG_126), `migration 126 missing: ${MIG_126}`).toBe(true);
+    expect(exists).toBe(true);
+  });
+});
+
 describe.runIf(exists)('email preferences + token unsubscribe — real SQL (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

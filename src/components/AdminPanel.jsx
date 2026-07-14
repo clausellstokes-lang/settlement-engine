@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { supabase } from '../lib/supabase.js';
+import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
@@ -24,6 +25,7 @@ import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
 import AiPricingResyncPanel from './admin/AiPricingResyncPanel.jsx';
 import AdminSimTuningPanel from './admin/AdminSimTuningPanel.jsx';
 import Button from './primitives/Button.jsx';
+import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import { GOLD, INK, MUTED, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, PAGE_MAX } from './theme.js';
 
 function Section({ title, icon: Icon, children, actions }) {
@@ -52,6 +54,12 @@ function Section({ title, icon: Icon, children, actions }) {
 
 export default function AdminPanel({ onBack }) {
   const isElevated = useStore(s => s.isElevated());
+  // Admin is a dense, multi-column operator console whose every action is a
+  // consequential server-audited mutation; it cannot meaningfully reflow to a
+  // phone. On mobile we keep the read-only KPI orientation strip and gate the
+  // whole toolset behind an honest "best on desktop" panel. Reactive so a
+  // rotate/resize from a tablet width settles to the right surface.
+  const isMobile = useIsMobile();
 
   const [stats, setStats] = useState(null);
 
@@ -118,9 +126,11 @@ export default function AdminPanel({ onBack }) {
         </Button>
       </div>
 
-      {/* Stats cards */}
+      {/* Stats cards — the read-only KPI orientation strip. Kept visible on
+          mobile; the grid (auto-fit, 140px min) lets the three cards stack at
+          phone width instead of cramming into a 3-across flex row. */}
       {stats && (
-        <div style={{ display: 'flex', gap: SP.md }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: SP.md }}>
           {[
             { label: 'Total Users', value: stats.total, icon: Users, color: GOLD },
             { label: 'Premium', value: stats.premiumCount, icon: Crown, color: '#2a7a2a' },
@@ -139,6 +149,18 @@ export default function AdminPanel({ onBack }) {
         </div>
       )}
 
+      {/* Mobile: the KPI strip above is the whole admin read surface; the
+          management toolset is gated to desktop. The plain "gate" variant (no
+          teaser) is correct here: the deferred content is raw operator editors
+          and dashboards, not readable prose. Copy is literal props (house
+          voice, no em dashes) per the RealmMobileGate precedent. */}
+      {isMobile ? (
+        <DesktopOnlyGate
+          title="Admin works best on desktop"
+          message="The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
+        />
+      ) : (
+        <>
       {/* User management — audited, redacted search / inspect / act console.
           No raw profiles read: the only user source is the audited list_users /
           get_user_* edge actions. Reveal-full requires a reason and is audited. */}
@@ -184,6 +206,8 @@ export default function AdminPanel({ onBack }) {
       <Section title="Simulation Tuning" icon={Zap}>
         <AdminSimTuningPanel />
       </Section>
+        </>
+      )}
     </div>
   );
 }

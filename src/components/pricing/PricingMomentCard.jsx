@@ -23,7 +23,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED } from '../theme.js';
+import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED, CHROME, bottomClearance } from '../theme.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
 const VIOLET = swatch['#7B4FCF'];
@@ -43,6 +44,7 @@ const VIOLET_REASONS = new Set([
 ]);
 
 export default function PricingMomentCard() {
+  const isMobile = useIsMobile();
   const activeMoment = useStore(s => s.activePricingMoment);
   const clearMoment = useStore(s => s.clearActivePricingMoment);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -86,11 +88,17 @@ export default function PricingMomentCard() {
 
   return (
     <div
-      role="alert"
+      // P11 — role='status' (implicitly polite) matches aria-live='polite' for a
+      // non-urgent, auto-dismissing promo. role='alert' is assertive and
+      // contradicted the polite live region, interrupting the SR user.
+      role="status"
       aria-live="polite"
       style={{
         position: 'fixed',
-        bottom: SP.lg,
+        // Mobile lifts the card above the fixed bottom nav (+ safe-area inset)
+        // so the fixed nudge never tucks under the nav row; desktop keeps the
+        // plain SP.lg gap (no bottom nav there).
+        bottom: isMobile ? bottomClearance(CHROME.fabLift) : SP.lg,
         right: SP.lg,
         maxWidth: 360,
         width: 'calc(100% - 32px)',

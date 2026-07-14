@@ -18,13 +18,17 @@ import { describe, it, expect } from 'vitest';
 
 import { newsVoiceLine, newsVoiceCategory, VOICE_LINES, VOICE_FLOOR } from '../../src/domain/display/newsVoice.js';
 
-const CATEGORIES = ['war', 'faith', 'trade'];
+const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority'];
 const BUCKETS = ['onset', 'impact', 'relief', 'fade'];
 
 // Representative entry fields that hit each category (via impactKind) and each
 // bucket (via kind / the transition). Enumerating these two axes reaches every
 // (category × bucket) cell.
-const CATEGORY_IMPACT_KIND = { war: 'conflict_pressure', faith: 'religious_pressure', trade: 'import_shortage' };
+const CATEGORY_IMPACT_KIND = {
+  war: 'conflict_pressure', faith: 'religious_pressure', trade: 'import_shortage',
+  pestilence: 'plague_arrival', calamity: 'calamity',
+  migration: 'migration_pressure', authority: 'authority_instability',
+};
 const BUCKET_KIND = { onset: 'queued', impact: 'applied', relief: 'resolved', fade: 'ignored' };
 
 /** Build a synthetic wizardNews-shaped entry that resolves to (cat, bucket). */
@@ -75,12 +79,13 @@ describe('newsVoice — coverage', () => {
 
 describe('newsVoice — totality / scope', () => {
   it('out-of-scope news returns null (no voice line rendered)', () => {
-    expect(newsVoiceLine({ id: 'a', impactKind: 'migration_pressure', channelType: null, kind: 'applied' })).toBeNull();
-    expect(newsVoiceLine({ id: 'b', impactKind: 'authority_instability', channelType: 'political_authority', kind: 'queued' })).toBeNull();
+    // Genuinely uncovered beats (crime, information, seasonal) still get no crier.
+    expect(newsVoiceLine({ id: 'a', impactKind: 'information_shock', channelType: null, kind: 'applied' })).toBeNull();
+    expect(newsVoiceLine({ id: 'b', impactKind: 'criminal_pressure', channelType: 'criminal_corridor', kind: 'queued' })).toBeNull();
     expect(newsVoiceLine({ id: 'c', impactKind: null, channelType: null, kind: 'applied' })).toBeNull();
     expect(newsVoiceLine(null)).toBeNull();
     expect(newsVoiceLine(undefined)).toBeNull();
-    expect(newsVoiceCategory({ impactKind: 'migration_pressure', channelType: null })).toBeNull();
+    expect(newsVoiceCategory({ impactKind: 'information_shock', channelType: null })).toBeNull();
     expect(newsVoiceCategory(null)).toBeNull();
   });
 });
@@ -177,11 +182,12 @@ describe('newsVoice — herald register guard', () => {
     expect(new Set(all).size, 'a line appears in more than one cell').toBe(all.length);
   });
 
-  it('the 12 bucket arrays are 12 distinct object references (no array aliasing)', () => {
+  it('every bucket array is a distinct object reference (no array aliasing)', () => {
     const arrays = [];
     for (const cat of CATEGORIES) for (const bucket of BUCKETS) arrays.push(VOICE_LINES[cat][bucket]);
-    expect(arrays.length).toBe(12);
-    expect(new Set(arrays).size, 'two cells share the same array reference').toBe(12);
+    const expected = CATEGORIES.length * BUCKETS.length;
+    expect(arrays.length).toBe(expected);
+    expect(new Set(arrays).size, 'two cells share the same array reference').toBe(expected);
   });
 
   it('no authored line references a digit, a URL, or a party-facing / settlement-named token', () => {
@@ -211,7 +217,34 @@ describe('newsVoice — impactKind-primary precedence + channel fallback pins', 
     expect(newsVoiceCategory({ channelType: 'war_front' })).toBe('war');
     expect(newsVoiceCategory({ channelType: 'trade_route' })).toBe('trade');
     expect(newsVoiceCategory({ channelType: 'trade_dependency' })).toBe('trade');
-    expect(newsVoiceCategory({ channelType: 'political_authority' })).toBeNull();
+    expect(newsVoiceCategory({ channelType: 'political_authority' })).toBe('authority');
+    expect(newsVoiceCategory({ channelType: 'disaster' })).toBe('calamity');
+    expect(newsVoiceCategory({ channelType: 'migration_pressure' })).toBe('migration');
+  });
+});
+
+describe('newsVoice — the newest movers get their own voice (content-immersion-2)', () => {
+  it('a plague arrival is PESTILENCE, not trade — even though it rides a trade_route channel', () => {
+    // pestilenceKernel mints impactKind 'plague_arrival' with channelType 'trade_route';
+    // the impactKind MUST win so the crier speaks sickness, not market-shortage.
+    expect(newsVoiceCategory({ impactKind: 'plague_arrival', channelType: 'trade_route' })).toBe('pestilence');
+    const line = newsVoiceLine({ id: 'p', impactKind: 'plague_arrival', channelType: 'trade_route', kind: 'applied' });
+    expect(VOICE_LINES.pestilence.impact).toContain(line);
+  });
+
+  it('a calamity strike is CALAMITY, not trade — its disaster channel never falls through', () => {
+    expect(newsVoiceCategory({ impactKind: 'calamity', channelType: 'disaster' })).toBe('calamity');
+    const line = newsVoiceLine({ id: 'c', impactKind: 'calamity', channelType: 'disaster', kind: 'applied' });
+    expect(VOICE_LINES.calamity.impact).toContain(line);
+  });
+
+  it('authority and migration impact-kinds classify ahead of any channel fallback', () => {
+    expect(newsVoiceCategory({ impactKind: 'authority_instability', channelType: 'political_authority' })).toBe('authority');
+    expect(newsVoiceCategory({ impactKind: 'migration_pressure', channelType: 'trade_route' })).toBe('migration');
+    expect(VOICE_LINES.authority.impact).toContain(
+      newsVoiceLine({ id: 'a', impactKind: 'authority_instability', kind: 'applied' }));
+    expect(VOICE_LINES.migration.impact).toContain(
+      newsVoiceLine({ id: 'm', impactKind: 'migration_pressure', kind: 'applied' }));
   });
 });
 

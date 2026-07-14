@@ -47,10 +47,17 @@ describe('SEASONS-B — seasonal overlay digest golden', () => {
       seasonalOverlayVersion: digest.reserved.seasonalOverlay.version,
       bytes: JSON.stringify(digest).length,
     };
-    if (UPDATE || !existsSync(MANIFEST)) {
+    if (UPDATE) {
       mkdirSync(dirname(MANIFEST), { recursive: true });
       writeFileSync(MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
     }
+    // Fail-closed ([test-quality-3]): a missing manifest must NOT self-mint a fresh
+    // green pin. A merge/checkout that drops the fixture reds here — with regen
+    // instructions — instead of laundering drift into a new pin.
+    expect(
+      existsSync(MANIFEST),
+      'seasonal-overlay-golden.json missing — for an APPROVED change run: UPDATE_GOLDEN=1 npx vitest run tests/property/seasonalOverlayGolden.test.js',
+    ).toBe(true);
     const pinned = JSON.parse(readFileSync(MANIFEST, 'utf-8'));
     expect(hash).toBe(pinned.hash);
     expect(record.settlements).toBe(pinned.settlements);

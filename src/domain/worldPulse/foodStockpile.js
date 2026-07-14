@@ -40,11 +40,11 @@
  * Pure + deterministic; no rng, no Date.
  */
 
+import { clamp } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 
-const clamp = (/** @type {any} */ v, /** @type {number} */ lo, /** @type {number} */ hi) => Math.max(lo, Math.min(hi, Number.isFinite(v) ? v : lo));
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
 // one-decimal rounding would silently erase them.

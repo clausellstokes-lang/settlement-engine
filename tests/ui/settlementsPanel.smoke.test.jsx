@@ -104,8 +104,9 @@ describe('SettlementsPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // savesService.list() is async: the panel first shows "Loading saves..."
-    // then, once it resolves to [], swaps to the SampleDashboard empty-state.
+    // savesService.list() is async: the panel first shows the loading
+    // skeleton (role=status), then, once it resolves to [] (and the mocked
+    // store has no campaigns), swaps to the SampleDashboard empty-state.
     // findByText polls so we assert on the settled UI. Pinning the dashboard's
     // stable heading means a broken extraction (e.g. SampleDashboard →
     // SampleCard import) would surface here.

@@ -274,22 +274,74 @@ export default [
     },
   },
 
-  // ── Phase 5.5 W0 — the wall-clock ban extended to the REMAINING sim-path dirs ─
+  // ── Phase 5.5 W0 / F6 — sim-path purity across workers + kernel ──────────────
   // The temporal audit (docs/TEMPORAL_AUDIT.md) found the no-Date gates covered
-  // src/generators + src/domain but NOT the other two directories on the
-  // simulation path: src/workers (the advance worker — same code as the main
-  // thread, so an ambient wall-clock read there would silently fork worker vs
-  // main-thread bytes) and src/kernel (rngContext/prng — the sanctioned
-  // NON-determinism seams, which must stay the ONLY ones). Both were verified
-  // CLEAN at extension time, so this lands as a hard error with no debt.
-  // src/kernel/prng.js is the one exemption: generateSeed() mints fresh seeds
-  // from Date.now()+Math.random() BY DESIGN (the documented sole seed-minting
-  // entry — mirroring src/domain/clock.js for the domain block above).
-  // The store/lib/components layers are deliberately NOT covered: they are the
-  // boundary where wall-clock legitimately enters (the pinned-`now` mints,
-  // user-action timestamps, analytics) — see the audit's boundary table.
+  // src/generators + src/domain but NOT the other two sim-path dirs: src/workers
+  // (the advance worker — same code as the main thread) and src/kernel
+  // (rngContext/prng — the sanctioned NON-determinism seams). F6/[determinism-
+  // constitution-3] widened this from Date-only to the FULL determinism-guard set
+  // (Math.random + host-locale collation/format), because an ambient Math.random or
+  // a localeCompare/toLocale*/Intl call in the worker would ALSO silently fork
+  // worker-vs-main-thread bytes only under the simAdvanceWorker flag — the exact
+  // silent-divergence class the whole guard suite exists to make impossible. All
+  // three files verified CLEAN at extension time, so this lands as a hard error with
+  // no debt. The scan tests (tests/lint/locale*Guard.test.js) pin the selector counts.
+  // The store/lib/components layers are deliberately NOT covered — the boundary where
+  // wall-clock/locale legitimately enter (pinned-`now` mints, user timestamps,
+  // display formatting) — see the audit's boundary table.
+  //
+  // Three scopes, because the exemptions differ (flat config is last-wins per rule,
+  // so each file must be covered by exactly ONE no-restricted-syntax block):
+  //   • workers/** — the FULL ban incl. Math.random (no legitimate ambient entropy).
+  //   • kernel/** except prng.js — Date + locale, but NOT Math.random (rngContext's
+  //     unseededRandom() is the sanctioned fail-closed ambient draw).
+  //   • kernel/prng.js — locale only; generateSeed() mints from Date.now()+Math.random()
+  //     BY DESIGN (the sole seed-minting entry), but prng needs no LOCALE exemption.
   {
-    files: ['src/workers/**/*.js', 'src/kernel/**/*.js'],
+    files: ['src/workers/**/*.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: 'Determinism: the advance worker must be pure — no Math.random(). Use the seeded rngContext draws or thread a value in; a raw draw forks worker-vs-main-thread bytes.',
+        },
+        {
+          selector: "NewExpression[callee.name='Date'][arguments.length=0]",
+          message: 'Determinism: new Date() reads wall-clock on the sim path — thread `now` from the caller (the store boundary mints it; wallClockNow() in domain/clock.js is the domain seam).',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
+          message: 'Determinism: Date.now() reads wall-clock on the sim path — thread a value in (only src/kernel/prng.js generateSeed may mint ambient entropy).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/kernel/**/*.js'],
     ignores: ['src/kernel/prng.js'],
     rules: {
       'no-restricted-syntax': ['error',
@@ -300,6 +352,61 @@ export default [
         {
           selector: "CallExpression[callee.object.name='Date'][callee.property.name='now']",
           message: 'Determinism: Date.now() reads wall-clock on the sim path — thread a value in (only src/kernel/prng.js generateSeed may mint ambient entropy).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+      ],
+    },
+  },
+  {
+    files: ['src/kernel/prng.js'],
+    rules: {
+      'no-restricted-syntax': ['error',
+        {
+          selector: "CallExpression[callee.property.name='localeCompare']",
+          message: 'Determinism: String.prototype.localeCompare collates through the host ICU/locale tables — same seed can order strings differently across devices/locales. Use compareCodepoint / byNameCodepoint from domain/deterministicSort.js (the cross-device-stable string order).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleString']",
+          message: 'Determinism: toLocaleString() formats through the host ICU/locale tables — the same number persists as "8,000" on a US host and "8.000" on a German one, so same seed no longer replays byte-exact. Use formatCount from domain/formatNumber.js (the cross-device-stable number format).',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleDateString']",
+          message: 'Determinism: toLocaleDateString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit date fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "CallExpression[callee.property.name='toLocaleTimeString']",
+          message: 'Determinism: toLocaleTimeString() formats through the host ICU/locale tables and host timezone — same seed renders differently across devices/locales. Build the string from explicit time fields, or thread a preformatted label in from the caller.',
+        },
+        {
+          selector: "NewExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
+        },
+        {
+          selector: "CallExpression[callee.object.name='Intl']",
+          message: 'Determinism: Intl formatters/collators read host ICU/CLDR data — and with no explicit locale, the host locale too. Output varies across devices and Node ICU builds even for the "same" locale tag. Use formatCount from domain/formatNumber.js / compareCodepoint from domain/deterministicSort.js.',
         },
       ],
     },
@@ -368,6 +475,47 @@ export default [
     ],
     rules: {
       'max-lines': 'off', // grandfathered — see ratchet note above; shrink-only
+    },
+  },
+
+  // ── code-quality-7 — domain size ratchet (max-lines) ─────────────────────────
+  // The domain layer is the highest-judgment code in the tree (the tick kernel,
+  // the war layer, the causal graph) and was the only major layer without a size
+  // ratchet — so a mis-read costs the most exactly where nothing guarded growth
+  // (M9–M11 all landed here). This mirrors the F31 generator ratchet. Every
+  // current offender is grandfathered by the explicit override below — a
+  // shrink-only burn-down worklist, not a licence: decompose one below 800 and
+  // DELETE its override (same doctrine as every baseline in this file). Ceiling
+  // matches generators (800) to exert real pressure. Independently tracked
+  // follow-up: warDeployment.evaluateWarLayer (~930-line function) decomposes
+  // along its own step comments — behaviour-preserving, goldens byte-identical
+  // (deferred; not part of this ratchet). A NEW domain file that grows past 800
+  // EFFECTIVE lines (skipBlankLines + skipComments) fails the gate.
+  // @enforced-by max-lines (this rule)
+  {
+    files: ['src/domain/**/*.js'],
+    rules: {
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  // Grandfathered domain offenders — the files above the 800 EFFECTIVE-line
+  // ceiling TODAY (skipBlankLines + skipComments, measured by this very rule; raw
+  // wc -l runs much higher because these files are comment-dense). Shrink-only:
+  // decompose one below 800 and DELETE its entry. The list is derived from eslint
+  // itself, not raw line counts — several raw->800 files (settlement.schema,
+  // causalState, capacityModel) sit UNDER 800 effective and are deliberately absent.
+  {
+    files: [
+      'src/domain/display/causeConjunctionRoleContent.js', // 3890 eff
+      'src/domain/worldPulse/pulseKernel.js',              // 1092 eff
+      'src/domain/worldPulse/warDeployment.js',            // 1077 eff
+      'src/domain/worldPulse/applyWorldPulse.js',          //  890 eff — G-track (G1a-G2R) substance grew it past 800 at the golden merge; burn-down candidate
+      'src/domain/worldPulse/stressors.js',                //  860 eff
+      'src/domain/explanation.js',                         //  827 eff
+      'src/domain/worldPulse/npcAgency.js',                //  824 eff
+    ],
+    rules: {
+      'max-lines': 'off', // grandfathered — shrink-only burn-down worklist
     },
   },
 

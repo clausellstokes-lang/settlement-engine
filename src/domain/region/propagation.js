@@ -7,6 +7,7 @@
  * unbounded simulation.
  */
 
+import { clamp01 } from '../../kernel/math.js';
 import { deriveLocalDelta } from './deriveRegionalState.js';
 import {
   activeChannelsFrom,
@@ -164,10 +165,6 @@ const RELIEF_TARGET_ARCHETYPE = Object.freeze({
  * @param {unknown} value
  * @returns {number}
  */
-function clamp01(value) {
-  const n = typeof value === 'number' && Number.isFinite(value) ? value : 0;
-  return Math.max(0, Math.min(1, n));
-}
 
 /**
  * @param {unknown} value

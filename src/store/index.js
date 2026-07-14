@@ -42,6 +42,7 @@ import { createCustomContentSlice } from './customContentSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
+import { mergePersistedState }     from './persistMerge.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
 
@@ -68,6 +69,23 @@ export const useStore = create(
         })),
         {
           name: 'settlementforge',
+          // store-6: an explicit persist version + a migrate hook, so a future
+          // persisted-shape change has a real upgrade seam instead of silently
+          // forking returning users. v1 is the first stamped version; migrate is a
+          // no-op passthrough for the pre-version blob (there is no shape change to
+          // apply — the config-key backfill is handled structurally by `merge` below,
+          // which runs on every rehydrate regardless of version).
+          version: 1,
+          migrate: (persistedState /* , fromVersion */) => persistedState,
+          // store-6: zustand's DEFAULT merge is a SHALLOW top-level spread
+          // ({ ...current, ...persisted }), so a returning user's persisted `config`
+          // object REPLACES DEFAULT_CONFIG wholesale — any key added to DEFAULT_CONFIG
+          // after they last saved reads `undefined` for them (a silent config-shape
+          // fork between cohorts that reaches the generator as input). mergePersistedState
+          // deep-merges config (and the four toggle maps) OVER their defaults so a
+          // returning user's missing keys backfill to what a fresh user gets, while the
+          // top-level spread still restores every other slice's methods + state.
+          merge: mergePersistedState,
           partialize: (state) => ({
             // Persist only lightweight, user-owned data.
             // Never persist the massive generated settlement object.

@@ -1,5 +1,5 @@
 import { goodCriticality } from './goodsCatalog.js';
-import { ensureRegionalGraph } from './graph.js';
+import { ensureRegionalGraphOnce } from './graph.js';
 import { wallClockNow } from '../clock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
@@ -486,6 +486,54 @@ function sortEntries(entries) {
 }
 
 /**
+ * Cap the feed to `max`. At or below the cap this is the byte-identical recency
+ * slice (`sortedEntries.slice(0, max)`). Above it: keep the most-recent `max`
+ * (RECENCY — so recent low-volume notables, e.g. a season marker, always
+ * survive), then RESCUE the heads of major arcs that recency would flush — one
+ * slot per story, so a high-volume major arc (e.g. a 100-entry crime churn)
+ * contributes at most its single newest entry and can never dominate the feed.
+ * Each rescue displaces the OLDEST recency entry; rescues are bounded to
+ * floor(max/2) so recency always keeps the majority of the window. Pure +
+ * deterministic: operates on the pre-sorted array and filters by reference, so
+ * the global newest-first order is preserved and the total is always <= max.
+ * @param {WizardNewsEntry[]} sortedEntries  already sorted newest-first
+ * @param {number} [max]
+ * @returns {WizardNewsEntry[]}
+ */
+function capEntries(sortedEntries, max = MAX_ENTRIES) {
+  if (sortedEntries.length <= max) return sortedEntries.slice(0, max);
+  const recent = sortedEntries.slice(0, max);
+  /** @type {Set<WizardNewsEntry>} */
+  const recentSet = new Set(recent);
+  /** @type {Set<string>} */
+  const majorArcs = new Set();
+  for (const e of sortedEntries) {
+    if (e.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR) majorArcs.add(arcIdForEntry(e));
+  }
+  // One HEAD (newest entry) per major arc, kept only when recency would flush it
+  // (an orphan: its whole arc fell outside the most-recent-`max` window).
+  /** @type {Set<string>} */
+  const seenArc = new Set();
+  /** @type {WizardNewsEntry[]} */
+  const orphanHeads = [];
+  for (const e of sortedEntries) {            // newest-first
+    const a = arcIdForEntry(e);
+    if (seenArc.has(a)) continue;
+    seenArc.add(a);
+    if (majorArcs.has(a) && !recentSet.has(e)) orphanHeads.push(e);
+  }
+  if (orphanHeads.length === 0) return recent;              // identical to pure recency
+  const rescue = orphanHeads.slice(0, Math.floor(max / 2)); // never displace more than half the window
+  // Each rescue displaces the OLDEST recency entry. Rescues are orphans (chosen
+  // only when NOT in `recent`), so `recent ∩ rescue = ∅` and dropping the oldest
+  // `rescue.length` recency entries reduces to a head slice: keep the newest
+  // (max − rescue.length) recency entries, then add the rescued heads.
+  /** @type {Set<WizardNewsEntry>} */
+  const keep = new Set([...recent.slice(0, max - rescue.length), ...rescue]);
+  return sortedEntries.filter(e => keep.has(e));            // preserve global order, total === max
+}
+
+/**
  * @param {WizardNewsFeed | null | undefined} [feed]
  * @param {WizardNewsOptions} [options]
  * @returns {{schemaVersion: number, currentTick: number, entries: WizardNewsEntry[], updatedAt: string}}
@@ -497,7 +545,7 @@ export function ensureWizardNewsFeed(feed = {}, options = {}) {
   return {
     schemaVersion: WIZARD_NEWS_SCHEMA_VERSION,
     currentTick: Math.max(0, Math.floor(finiteNumber(feed?.currentTick, 0))),
-    entries: sortEntries(entries).slice(0, MAX_ENTRIES),
+    entries: capEntries(sortEntries(entries), MAX_ENTRIES),
     updatedAt: feed?.updatedAt || options.now || nowIso(),
   };
 }
@@ -525,7 +573,9 @@ export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
  */
 export function createWizardNewsEntryFromImpact(impact, options = {}) {
   if (!impact?.id) return null;
-  const graph = ensureRegionalGraph(options.graph || {});
+  // performance-scale-7: the diff below passes its already-ensured `after` graph per
+  // changed impact — ensureRegionalGraphOnce skips the redundant re-normalization.
+  const graph = ensureRegionalGraphOnce(options.graph || {});
   const transition = options.transition || impact.status || 'queued';
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
   const names = nodeNameMap(graph);
@@ -563,8 +613,12 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
  * @returns {WizardNewsEntry[]}
  */
 export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGraph = {}, options = {}) {
-  const before = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
-  const after = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
+  // performance-scale-7: this diff runs per changed outcome application, so re-
+  // normalizing the whole graph ×2 here multiplied by the outcome count. The call
+  // sites already hold ensureRegionalGraph outputs (branded), so the Once form skips
+  // the redundant normalization; an unbranded/rehydrated graph still gets a full ensure.
+  const before = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
+  const after = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
   const beforeById = new Map(before.queuedImpacts.map(impact => [impact.id, impact]));
   const entries = [];
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
@@ -615,7 +669,7 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   }
   return {
     ...current,
-    entries: sortEntries([...byId.values()]).slice(0, options.maxEntries || MAX_ENTRIES),
+    entries: capEntries(sortEntries([...byId.values()]), options.maxEntries || MAX_ENTRIES),
     updatedAt: entries?.length ? (options.now || nowIso()) : current.updatedAt,
   };
 }

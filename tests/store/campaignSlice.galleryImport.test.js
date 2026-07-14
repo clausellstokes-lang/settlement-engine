@@ -23,6 +23,7 @@ vi.mock('../../src/lib/gallery.js', () => ({
 
 import { createCampaignSlice } from '../../src/store/campaignSlice.js';
 import { fetchDossierForImport } from '../../src/lib/gallery.js';
+import { isSubsystemActive } from '../../src/domain/worldPulse/subsystemActivation.js';
 
 function installLocalStorage() {
   const data = new Map();
@@ -78,6 +79,36 @@ describe('importGallerySettlement — premium gate', () => {
     // Provenance stamped; the imported clone arrives as a fresh draft.
     expect(saves[0].settlement.importedFrom.slug).toBe('slug-abc');
     expect(saves[0].campaignState.phase).toBe('draft');
+  });
+
+  test('strips cultDeitySnapshots + every deity/faith embed so the import arrives DORMANT (store-4)', async () => {
+    fetchDossierForImport.mockResolvedValueOnce({
+      id: 'src', name: 'Culthaven', tier: 'town',
+      settlement: {
+        name: 'Culthaven', tier: 'town',
+        config: {
+          culture: 'norse',
+          // A source with DM-imposed cults + an active patron + its faith projection.
+          cultDeitySnapshots: [{ name: 'Foreign Cult', deityRef: 'deity:acct-9:x' }],
+          primaryDeitySnapshot: { name: 'Foreign Patron' },
+          primaryDeityRef: 'deity:acct-9:sol',
+          faithProfile: { piety: 0.9 },
+        },
+      },
+    });
+    const store = makeStore({ user: { id: 'u1' }, tier: 'premium' });
+    await store.getState().importGallerySettlement('slug-cult');
+
+    const imported = store.getState().savedSettlements[0].settlement;
+    const cfg = imported.config || {};
+    // Every deity/faith embed is gone (previously cultDeitySnapshots survived here —
+    // the religion subsystem activated with a foreign pantheon the importer never authored).
+    expect(cfg.cultDeitySnapshots).toBeUndefined();
+    expect(cfg.primaryDeitySnapshot).toBeUndefined();
+    expect(cfg.primaryDeityRef).toBeUndefined();
+    expect(cfg.faithProfile).toBeUndefined();
+    // The religion subsystem gate stays CLOSED for the imported settlement.
+    expect(isSubsystemActive({ settlements: [{ settlement: imported }] }, 'religion')).toBe(false);
   });
 
   test('a developer role passes the gate for testing', async () => {

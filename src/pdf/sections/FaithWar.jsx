@@ -79,6 +79,13 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
   const occupationLive = lw.occupationLive || null;
   const holdings = lw.holdings || null;
   const tradePressure = Array.isArray(lw.tradePressure) ? lw.tradePressure : [];
+  // pdf-1: the living-world reads the on-screen dossier shows — rumors (player
+  // projection), belief-divergence (DM projection, gated by this premium chapter),
+  // M6d trade-flow drift, and pestilence.
+  const rumors = Array.isArray(lw.rumors) ? lw.rumors : [];
+  const beliefs = Array.isArray(lw.beliefs) ? lw.beliefs : [];
+  const flowDrift = lw.flowDrift || null;
+  const pestilence = lw.pestilence || null;
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
   const headline = lw.atWar
@@ -202,6 +209,25 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         </View>
       )}
 
+      {/* ── Pestilence (pdf-1) ────────────────────────────────────────── */}
+      {pestilence && (
+        <View style={{ marginBottom: space.sm }}>
+          <Line label="Pestilence." tone="bad">
+            {pestilence.presence} {pestilence.originFiction}
+            {pestilence.care?.fiction ? ` ${pestilence.care.fiction}` : ''}
+          </Line>
+        </View>
+      )}
+
+      {/* ── Live trade-flow drift (M6d, pdf-1) ────────────────────────── */}
+      {flowDrift && (
+        <View style={{ marginBottom: space.sm }}>
+          <Line label="Trade flow." tone="warn">
+            {flowDrift.label}: {flowDrift.headline} (inbound {flowDrift.inbound}, outbound {flowDrift.outbound}).
+          </Line>
+        </View>
+      )}
+
       {/* ── Patron deity + faith effects ──────────────────────────────── */}
       {deity && (
         <View style={{ marginBottom: space.sm }}>
@@ -300,6 +326,40 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
               <Text style={{ color: palette.gold, marginRight: 5, fontSize: pt['9.5'] }}>•</Text>
               <Text style={{ ...type.italic, flex: 1, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>{arc}</Text>
             </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── Word from the roads (rumors, pdf-1) ───────────────────────── */}
+      {rumors.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>WORD FROM THE ROADS</Text>
+          {rumors.map(r => (
+            <View key={r.id} style={{ marginBottom: 3 }} wrap={false}>
+              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>
+                {r.headline}
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}> · {r.freshness}, {r.distance}</Text>
+              </Text>
+              {r.detail && (
+                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>{r.detail}</Text>
+              )}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* ── What they believe (belief-divergence, pdf-1) ──────────────── */}
+      {beliefs.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>WHAT THEY BELIEVE</Text>
+          {beliefs.map((b, i) => (
+            <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 2 }}>
+              <Text style={{ ...type.body_em, color: palette.ink }}>{b.subject}: </Text>
+              believed {b.strength}, {b.readiness} ({b.confidence}, {b.staleness})
+              {b.divergence.length > 0 ? ` — ${b.divergence.join('; ')}` : ''}
+            </Text>
           ))}
         </View>
       )}

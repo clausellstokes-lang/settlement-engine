@@ -22,6 +22,7 @@ import { resolve } from 'node:path';
 import {
   TEMPLATES, renderTemplate, listTemplateKeys, missingVariables,
 } from '../../src/lib/emailTemplates.js';
+import { FOUNDER_SEAT_CAP } from '../../src/lib/founderSeats.js';
 
 const ALL_KEYS = [
   'welcome',
@@ -166,5 +167,22 @@ describe('Tier 8.5 — Edge function parity (client templates ↔ server templat
     if (!edgeSource) return;
     expect(edgeSource).toMatch(/ANON_OK_TEMPLATES.*=.*new Set\(\[/s);
     expect(edgeSource).toMatch(/["']cap_warning["']/);
+  });
+
+  // Founder seat-count parity (finding lib-infra-8): the "first N supporters"
+  // scarcity claim drifted to 500 while the real cap is 30. Body text — not just
+  // keys — must match the canonical FOUNDER_SEAT_CAP on BOTH sides, so the number a
+  // buyer reads can never diverge from what create-checkout enforces.
+  it('client Founder templates cite the canonical seat count, never a stale 500', () => {
+    const founderBodies = `${TEMPLATES.welcome.text}\n${TEMPLATES.founder_thank_you.text}`;
+    expect(founderBodies).toContain(`first ${FOUNDER_SEAT_CAP} supporters`);
+    expect(founderBodies).not.toMatch(/\b500\b/);
+  });
+
+  it('the edge Founder copy matches the client seat count (no stale 500)', () => {
+    if (!edgeSource) return;
+    // The inlined send-email founder strings must use the same count and drop 500.
+    expect(edgeSource).toMatch(new RegExp(`first ${FOUNDER_SEAT_CAP} supporters`));
+    expect(edgeSource).not.toMatch(/500 supporters/);
   });
 });

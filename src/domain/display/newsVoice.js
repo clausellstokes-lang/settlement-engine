@@ -38,7 +38,7 @@ function fnv1a32(str) {
   return h >>> 0;
 }
 
-/** @typedef {'war'|'faith'|'trade'} VoiceCategory */
+/** @typedef {'war'|'faith'|'trade'|'pestilence'|'calamity'|'migration'|'authority'} VoiceCategory */
 /** @typedef {'onset'|'impact'|'relief'|'fade'} VoiceBucket */
 
 // ── Category vocabularies (the categorization precedence) ────────────────────
@@ -147,6 +147,104 @@ export const VOICE_LINES = Object.freeze({
       'Whatever threatened the trade roads came to naught; the ledgers close as black as before.',
     ]),
   }),
+  // M11a pestilence — a traveling plague, the sim's most dramatic emergent beat.
+  pestilence: Object.freeze({
+    onset: Object.freeze([
+      'A sickness walks the upriver roads, and the wise are already barring their doors against it.',
+      'Word comes of plague in the near country; the healers ready their stores and the gates grow watchful.',
+      'A pestilence is abroad and drawing nearer, and the market thins as folk shut themselves away.',
+      'They speak of fever on the trade roads, and every stranger is met now with a wary eye.',
+    ]),
+    impact: Object.freeze([
+      'The plague has come; the sick lie in their homes and the bells toll for the dead.',
+      'Fever burns through the streets in earnest, and the healers labor day and night against it.',
+      'The sickness has taken hold, and quarantine falls over the quarter like a shroud.',
+      'Pestilence walks openly now; the pyres are lit and the living tend the dying as best they can.',
+    ]),
+    relief: Object.freeze([
+      'The fever has broken at last; the sick begin to mend and the bells ring for the living.',
+      'The plague has spent itself, and the healers who held the line are counted among the saved.',
+      'The sickness recedes; the quarantine lifts, and the survivors step blinking into the open air.',
+      'The worst has passed, the dying has stopped, and the town begins to bury its grief.',
+    ]),
+    fade: Object.freeze([
+      'The dreaded sickness never reached the walls; the healers stand down and the doors are unbarred.',
+      'The plague turned aside on the roads, and the fever that was feared never came.',
+      'The pestilence passed the town by; the watchful gates ease open and the market fills again.',
+    ]),
+  }),
+  // M11b calamity — a great flood or fire, the land's own reckoning come due.
+  calamity: Object.freeze({
+    onset: Object.freeze([
+      'The old signs are read and the elders mutter; some reckoning of flood or fire feels close at hand.',
+      'An ill omen sits over the country, and those who remember the last one lay in what they can.',
+      'The land itself seems to hold its breath, as though some great misfortune waits just over the horizon.',
+    ]),
+    impact: Object.freeze([
+      'Ruin has come to the country; what stood at dawn lies broken by dusk, and the survivors dig through the wreck.',
+      'A great disaster has struck, with halls thrown down, families scattered, and the roads choked with those who fled it.',
+      'The calamity is upon them in full; the bells are drowned out, and the count of the lost has scarcely begun.',
+      'What the elders feared has come to pass, and the land is remade in an hour with nothing quite where it stood.',
+    ]),
+    relief: Object.freeze([
+      'The waters have gone down and the smoke has cleared; the rebuilding begins, stone laid on weary stone.',
+      'The disaster has run its course, and the survivors turn from mourning to the long work of raising it all again.',
+      'The worst is behind them now; the ruin is cleared by degrees, and green things push up through the ash.',
+    ]),
+    fade: Object.freeze([
+      'The dread signs came to nothing; the flood held to its banks and the country was spared its reckoning.',
+      'The omen passed without its disaster, and the stores laid by against it are quietly put away.',
+      'The calamity that was feared never fell; the land kept its shape, and the watchers stand down at last.',
+    ]),
+  }),
+  // Migration — a great moving of peoples, drawn in and out of the country.
+  migration: Object.freeze({
+    onset: Object.freeze([
+      'The roads to the country are thick with strangers, and word runs that many more are coming behind them.',
+      'A great moving of people is underway somewhere near, and the country readies for the flood of them.',
+      'Folk are on the march from the troubled lands, and the country wonders whether to open its gates or bar them.',
+    ]),
+    impact: Object.freeze([
+      'The newcomers have arrived in their hundreds; the markets swell, the rents climb, and the old families grumble.',
+      'The migration has broken over the country, with every barn full, every well pressed, and the peace strained thin.',
+      'The strangers are putting down roots now, and the country must reckon with mouths it did not plan to feed.',
+      'The tide of people is upon them; some are welcomed, some resented, and none of it is quiet.',
+    ]),
+    relief: Object.freeze([
+      'The great moving has slowed; the roads empty, and those who stayed are folded, warily, into the country.',
+      'The flood of strangers has ebbed at last, and the country eases into the shape it must now keep.',
+      'The migration has run its course; the newcomers are neighbours now, for better and for worse.',
+    ]),
+    fade: Object.freeze([
+      'The looked-for flood of people never came; the roads stayed quiet and the barns kept their room.',
+      'The great moving turned elsewhere; the country readied for a tide that broke on some other shore.',
+      'The expected strangers never arrived, and the gates that were watched so closely swing idle.',
+    ]),
+  }),
+  // Authority — the seat of rule loosening, breaking, and settling anew.
+  authority: Object.freeze({
+    onset: Object.freeze([
+      'The grip of those in power is loosening, and the bolder tongues are heard where once they whispered.',
+      'A restlessness moves through the halls of rule; the loyal grow uneasy and the ambitious grow bold.',
+      'Word runs that the ones who govern are not as sure of their seat as they were, and the country takes note.',
+    ]),
+    impact: Object.freeze([
+      'The rule has cracked open, with factions in the streets, rival banners at the gates, and no clear hand on the reins.',
+      'Authority has broken in earnest; the old order is thrown down and the country waits to see who will stand atop the wreck.',
+      'The struggle for power is out in the open now, and honest folk keep to their homes until it is decided.',
+      'The seat of rule is contested by force; the writs go unheeded and every quarter answers to a different master.',
+    ]),
+    relief: Object.freeze([
+      'A firm hand has closed over the country again; the factions are quieted and the writs once more run true.',
+      'Order is restored to the halls of rule; whoever holds the seat now holds it plainly, and the streets grow calm.',
+      'The contest for power has settled, and the country breathes easier under a rule that no longer trembles.',
+    ]),
+    fade: Object.freeze([
+      'The threatened upheaval came to nothing; the ones in power kept their seat and the restless tongues fell quiet.',
+      'The challenge to the rule dissolved before it struck, and the halls of power stand as they stood.',
+      'The feared reckoning in the halls of rule passed off in muttering alone, and nothing was overturned.',
+    ]),
+  }),
 });
 
 /**
@@ -170,15 +268,38 @@ export const VOICE_FLOOR = Object.freeze({
     'The matter of goods and coin stirs the merchants, and the caravan-masters listen close.',
     'News of the markets passes stall to stall, and the town reckons its stores.',
   ]),
+  pestilence: Object.freeze([
+    'Word of the sickness moves along the roads, and the healers keep their anxious watch.',
+    'The matter of the plague hangs over the country, and every household marks it well.',
+  ]),
+  calamity: Object.freeze([
+    'Word of the disaster passes from mouth to mouth, and the country reckons what it has lost.',
+    'The matter of the calamity weighs on every hearth, and the elders are asked what it means.',
+  ]),
+  migration: Object.freeze([
+    'Word of the moving of peoples runs along the roads, and the country counts the strangers at its gates.',
+    'The matter of the newcomers stirs every quarter, and the elders weigh what welcome to give.',
+  ]),
+  authority: Object.freeze([
+    'Word of the struggle for power moves through the country, and every faction listens for its moment.',
+    'The matter of who rules unsettles the halls, and the country watches the seat of power closely.',
+  ]),
 });
 
 /**
  * Categorize a wizardNews entry into the crier's beat. impactKind-PRIMARY;
  * channelType is the fallback. impactKind (the impact's nature) classifies
- * first across all three beats (faith → war → trade); only when impactKind did
- * not classify does channelType decide (bare/persisted entries). Deterministic
- * and total. Out-of-scope entries (authority, migration, crime, information,
- * service, …) return null and the panel renders no voice line.
+ * first across all seven beats (faith → pestilence → calamity → authority →
+ * migration → war → trade); only when impactKind did not classify does
+ * channelType decide (bare/persisted entries). Deterministic and total.
+ *
+ * CRITICAL (content-immersion-2): plague_arrival and calamity entries carry a
+ * TRADE channelType ('trade_route'/'disaster') for their regional plumbing — so
+ * their impactKind MUST classify ahead of the channel fallback, or a plague
+ * arrival gets a market-shortage crier line beneath a "Plague reaches X" headline.
+ *
+ * Out-of-scope entries (crime, information, service, seasonal, …) return null
+ * and the panel renders no voice line.
  * @param {{ impactKind?: string|null, channelType?: string|null }|null|undefined} entry
  * @returns {VoiceCategory|null}
  */
@@ -186,13 +307,20 @@ export function newsVoiceCategory(entry) {
   if (!entry) return null;
   const impactKind = entry.impactKind || '';
   const channelType = entry.channelType || '';
-  // impactKind is the impact's NATURE — it classifies first, across all three beats.
+  // impactKind is the impact's NATURE — it classifies first, across all beats.
   if (impactKind === 'religious_pressure') return 'faith';
+  if (impactKind === 'plague_arrival') return 'pestilence';
+  if (impactKind === 'calamity') return 'calamity';
+  if (impactKind === 'authority_instability') return 'authority';
+  if (impactKind === 'migration_pressure') return 'migration';
   if (WAR_IMPACT_KINDS.has(impactKind)) return 'war';
   if (TRADE_IMPACT_KINDS.has(impactKind)) return 'trade';
   // channelType is only a fallback when impactKind did not classify (bare/persisted entries).
   if (WAR_CHANNEL_TYPES.has(channelType)) return 'war';
   if (TRADE_CHANNEL_TYPES.has(channelType)) return 'trade';
+  if (channelType === 'political_authority') return 'authority';
+  if (channelType === 'disaster') return 'calamity';
+  if (channelType === 'migration_pressure') return 'migration';
   return null;
 }
 

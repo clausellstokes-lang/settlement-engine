@@ -1,4 +1,4 @@
-import { FS, swatch } from '../theme.js';
+import { FS } from '../theme.js';
 import { Eye, EyeOff, RefreshCw } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 
@@ -15,7 +15,6 @@ export default function DossierNarrativeButtons({
   aiSettlement,
   aiLoading,
   aiRegenerating,
-  aiError,
   displayProgress,
   storeShowNarrative,
   setShowNarrative,
@@ -50,11 +49,6 @@ export default function DossierNarrativeButtons({
           >
             {`Generate Narrative${costLabel}`}
           </Button>
-          {aiError && (
-            <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-              {' '}{aiError}
-            </div>
-          )}
         </div>
       );
     }
@@ -112,11 +106,6 @@ export default function DossierNarrativeButtons({
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>
-        {aiError && (
-          <div style={{ position: 'absolute', top: '110%', right: 0, background: swatch.errorBgDeep, border: '1px solid #8b1a1a', borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, color: swatch.errorText, whiteSpace: 'nowrap', zIndex: 50, maxWidth: 300, wordBreak: 'break-word' }}>
-            {' '}{aiError}
-          </div>
-        )}
       </div>
     );
 }

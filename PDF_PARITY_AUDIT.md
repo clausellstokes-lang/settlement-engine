@@ -12,6 +12,22 @@
 > (`servicesDisplay.js`). A full slice-by-slice re-audit (all ~16 slices) confirms
 > no remaining "reads-empty" gaps. Keep this doc as the section reference; the gap
 > language below is historical.
+>
+> **LIVE LAYER — F3b (2026-07-14, pdf-1 / lib-infra-7).** The spatial engine's
+> living-world reads had re-opened a parity gap: the on-screen dossier showed rumors,
+> belief divergence, M6d trade-flow drift, and pestilence, but the PDF's Faith & War
+> chapter printed a pre-spatial world. `buildPdfLiveWorld` (`src/pdf/lib/liveWorld.js`)
+> now threads all four — via the SAME pure `domain/display/*` selectors — and
+> `FaithWar.jsx` renders them (rumors as the player projection, `includeGroundTruth:
+> false`; belief divergence as the DM projection, gated behind the chapter's premium/
+> canon/live three-fold seam; flow-drift + pestilence qualitative/player-safe). The
+> campaign-level export (`generateCampaignPDF.js`) gains a **State of the Realm**
+> chapter — chronicle digest, war/siege standings, pantheon, realm arcs — from the
+> same read-models, gated on a canonized `worldState` (legacy campaigns unchanged).
+> A **live-layer parity lane** (`tests/pdf/pdfLiveWorldParity.test.js`,
+> `LIVE_LAYER_FIELDS`) now walks `vm.liveWorld` so a future mover that surfaces a
+> living-world read on the screen but forgets the PDF fails the test instead of
+> silently re-opening this gap.
 
 Research-only inventory comparing every on-screen tab to its PDF section. Goal: identify what each tab renders, what the PDF currently renders, and the explicit gap to drive a rewrite. Field paths are taken from the actual `settlement.*` shape used in tab code, with conditionals noted.
 

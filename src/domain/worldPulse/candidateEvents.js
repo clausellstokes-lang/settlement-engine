@@ -264,7 +264,13 @@ export function evaluateWorldPulseRules(/** @type {any} */ snapshot, /** @type {
     // the front does NOT travel is PRESERVED (the refugee/service epidemic vectors must not vanish
     // when the marker is on — on-marker reach ≥ aspatial reach). Absent the marker (aspatial /
     // peaceful-spatial goldens carry no active disease_outbreak) the filter removes nothing ⇒
-    // BYTE-IDENTICAL. Reconciled at THIS lazy call site (candidateEvents rides the engine chunk),
+    // BYTE-IDENTICAL for goldens. NOTE (worldpulse-core-6): the equivalence is byte-identical for the
+    // golden battery but NOT for DM-gating — the dropped aspatial spread would have routed to
+    // 'proposal' under dm_only via the authorityFor choke point below, whereas the front materializes
+    // this stressor POST-APPLY, autonomously. That upgrade of plague TRAVEL from DM-gated to autonomous
+    // is BY DESIGN: nature is exempt from the political-autonomy axis. See
+    // docs/design-notes/political-autonomy-boundary.md — do not "fix" it in either direction.
+    // Reconciled at THIS lazy call site (candidateEvents rides the engine chunk),
     // NOT inside evaluateStressorRules, so it costs ZERO first-paint bytes (evaluateStressorRules is
     // bundled into the first-paint closure via its catalog exports — a suppression there would ship).
     // POLITICAL-AUTONOMY RULING (owner-delegated, [worldpulse-core-6]): NATURE acts

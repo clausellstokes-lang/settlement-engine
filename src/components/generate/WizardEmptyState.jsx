@@ -9,16 +9,35 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { INK, MUTED, SECOND, sans, serif_, SP, FS } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import Button from '../primitives/Button.jsx';
+
+// Below-hero proof cards lazy-load; reserve their space with a height-matched
+// skeleton so the acquisition surface reads as "loading", not a blank gap that
+// pops in and shifts layout on cold connections (P9: skeletons over null).
+function ProofSkeleton({ height }) {
+  return (
+    <div aria-hidden="true" style={{
+      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      opacity: 0.6,
+    }} />
+  );
+}
 
 // P128 / H-2 — Sample dossier proof card. Self-gates on flag +
 // anonymous + no settlement yet; renders nothing once any of those
 // flip. Mounted directly below HomeHero so anon visitors see proof of
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
+
+// "Watch a region wake up" read-only replay. Self-gates inside on
+// anon + no-settlement (same as the sample dossier), so it renders nothing
+// once the visitor has the real thing. Mounted beside the sample dossier so
+// the teaser ladder reads: proof of the static dossier → proof of the LIVING
+// world.
+const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
 export function WizardEmptyState({
   showHomeHero,
@@ -35,9 +54,19 @@ export function WizardEmptyState({
       {showHomeHero && (
         <>
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
-          <Suspense fallback={null}>
-            <HomeSampleDossier />
-          </Suspense>
+          {/* The two anon proof cards sit side by side on wider screens and
+              stack on narrow ones (see .sf-proof-pair), so they stop doubling
+              the landing's vertical length: proof of the static dossier beside
+              proof of the living world. Both self-gate anon-only, so signed-in
+              users see nothing here. */}
+          <div className="sf-proof-pair">
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <HomeSampleDossier />
+            </Suspense>
+            <Suspense fallback={<ProofSkeleton height={360} />}>
+              <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
+            </Suspense>
+          </div>
         </>
       )}
       {!showHomeHero && (

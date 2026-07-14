@@ -46,7 +46,7 @@
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
-import { botGuard } from '../_shared/requestMeta.ts';
+import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 // Structured error logging for the money path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
@@ -129,6 +129,97 @@ function defaultAdminClient() {
   );
 }
 
+// ── Anonymous single_dossier rate limiter (backend-1) ────────────────────────
+// The anon single_dossier path was the ONE anonymous edge function with no
+// throttle: with the public anon key an attacker could mint unbounded real Stripe
+// checkout sessions (exhausting the account's Stripe budget, blocking real buyers)
+// and write up-to-512KB dossier_purchases rows per call. Every sibling anon fn
+// (verify-single-dossier, send-email, ingest-events, auth-recovery) already carries
+// a fail-closed limiter; this mirrors verify-single-dossier's exactly.
+//
+// PRIMARY: the migration-035 per-IP dossier bucket RPC — REUSED (no new migration,
+// per the F4 verdict). NOTE FOR THE OWNER (migration batch): create-checkout and
+// verify-single-dossier now SHARE this per-IP window (30/IP/hour); a real purchase
+// spends ~2 (one checkout + one verify), so the shared budget is ample, but a
+// dedicated create-checkout bucket could be minted later if the endpoints ever need
+// independent budgets.
+//
+// FAIL-OPEN to a two-dimension in-memory backstop (per-IP AND a global per-instance
+// ceiling — the dimension x-forwarded-for rotation cannot defeat) so a limiter-DB
+// blip can neither remove all throttling nor block a paying customer. Same rationale
+// verify-single-dossier documents.
+const BACKSTOP_WINDOW_MS = 60_000;
+const BACKSTOP_MAX_PER_IP = 30;      // ~1 attempt/2s per IP per instance
+const BACKSTOP_MAX_GLOBAL = 120;     // ~2 attempts/s per instance across ALL IPs
+const backstopHits = new Map<string, { count: number; resetAt: number }>();
+let globalBackstop = { count: 0, resetAt: 0 };
+
+function withinPerIpBackstop(ip: string): boolean {
+  const now = Date.now();
+  const entry = backstopHits.get(ip);
+  if (!entry || now >= entry.resetAt) {
+    backstopHits.set(ip, { count: 1, resetAt: now + BACKSTOP_WINDOW_MS });
+    if (backstopHits.size > 10_000) {
+      for (const [k, v] of backstopHits) if (now >= v.resetAt) backstopHits.delete(k);
+    }
+    return true;
+  }
+  entry.count += 1;
+  return entry.count <= BACKSTOP_MAX_PER_IP;
+}
+
+function withinGlobalBackstop(): boolean {
+  const now = Date.now();
+  if (now >= globalBackstop.resetAt) {
+    globalBackstop = { count: 1, resetAt: now + BACKSTOP_WINDOW_MS };
+    return true;
+  }
+  globalBackstop.count += 1;
+  return globalBackstop.count <= BACKSTOP_MAX_GLOBAL;
+}
+
+/** Fail-open backstop: BOTH per-IP and the global ceiling must pass. Per-IP first
+ *  so an over-limit single IP does not consume global budget. Exported (with a
+ *  reset) so the trust boundary can be execution-tested. */
+export function withinBackstop(ip: string): boolean {
+  if (!withinPerIpBackstop(ip)) return false;
+  return withinGlobalBackstop();
+}
+
+/** Test-only: reset the in-memory backstop windows between cases. */
+export function _resetBackstopsForTest(): void {
+  backstopHits.clear();
+  globalBackstop = { count: 0, resetAt: 0 };
+}
+
+/**
+ * Per-IP fixed-window rate check for the anon single_dossier path. The DB limiter
+ * (consume_dossier_verify_rate_limit, migration 035) is PRIMARY; when it cannot
+ * give a verdict (missing env, RPC error, throw) we fall back to the in-memory
+ * backstop rather than fail fully open. Returns false when over the limit.
+ */
+async function withinDossierRateLimit(req: Request): Promise<boolean> {
+  const ip = readRequestMeta(req).ip;
+  try {
+    const url = Deno.env.get('SUPABASE_URL');
+    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+    if (!url || !serviceKey) {
+      console.warn('[create-checkout] rate limiter unavailable (SUPABASE_URL/SERVICE_ROLE_KEY unset); falling back to in-memory backstop');
+      return withinBackstop(ip);
+    }
+    const admin = createClient(url, serviceKey);
+    const { data, error } = await admin.rpc('consume_dossier_verify_rate_limit', { p_ip: ip });
+    if (error || !data) {
+      console.warn('[create-checkout] rate limiter error; falling back to in-memory backstop:', error?.message ?? 'no data');
+      return withinBackstop(ip);
+    }
+    return data.allowed !== false;
+  } catch (e) {
+    console.warn('[create-checkout] rate limiter threw; falling back to in-memory backstop:', e);
+    return withinBackstop(ip);
+  }
+}
+
 // ── Redeem codes (migration 107) ─────────────────────────────────────────────
 //
 // The applies_to/mode gate now lives INSIDE reserve_redemption (migration 112): it
@@ -189,11 +280,13 @@ export async function handleCreateCheckout(
     stripeClient?: typeof stripe;
     userClient?: (authHeader: string) => ReturnType<typeof createClient>;
     adminClient?: () => ReturnType<typeof createClient>;
+    rateLimit?: (req: Request) => Promise<boolean>;
   } = {},
 ): Promise<Response> {
   const stripeApi = deps.stripeClient ?? stripe;
   const userClient = deps.userClient ?? defaultUserClient;
   const adminClient = deps.adminClient ?? defaultAdminClient;
+  const rateLimit = deps.rateLimit ?? withinDossierRateLimit;
   const corsHeaders = getCorsHeaders(req);
 
   if (req.method === 'OPTIONS') {
@@ -231,6 +324,18 @@ export async function handleCreateCheckout(
       && (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128)
     ) {
       throw new Error('A valid dossier checkout token is required');
+    }
+
+    // Throttle the anonymous-allowed single_dossier path BEFORE the amplifiable
+    // work below (the dossier_purchases upsert and the Stripe session create). The
+    // input validation above is free; the persist + Stripe call are the abuse cost.
+    // Fail-open to the two-dimension in-memory backstop (see withinDossierRateLimit)
+    // so a limiter-DB blip never blocks a real buyer.
+    if (isAnonymousProduct && !(await rateLimit(req))) {
+      return new Response(
+        JSON.stringify({ error: 'Too many checkout attempts. Please wait a moment and try again.' }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
     }
 
     // ── Delivery stash (migration 122): persist the settlement server-side, keyed

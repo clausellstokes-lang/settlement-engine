@@ -1,9 +1,11 @@
 /**
  * domain/provenance.js — Generated-vs-authored transparency summary.
  *
- * Tier 5.6 of the roadmap. Reads the canon-tag breakdown from
- * Phase 33 plus the settlement's aiOverlays state, and produces the
- * structured payload the transparency UI consumes:
+ * Tier 5.6 of the roadmap. STATUS (code-quality-3): a BUILT but UNCONSUMED
+ * read-model — no transparency UI imports it (zero src consumers — see
+ * docs/DEAD_CODE_DISPOSITION.md). Reads the canon-tag breakdown from Phase 33
+ * plus the settlement's aiOverlays state, and produces the structured payload a
+ * transparency UI WOULD consume:
  *
  *   deriveProvenanceSummary(settlement) -> {
  *     procedurallyGenerated,     count of generated entities

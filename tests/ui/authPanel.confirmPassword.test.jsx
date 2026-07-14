@@ -35,13 +35,10 @@ vi.mock('../../src/lib/flags.js', () => ({ flag: () => false }));
 
 import AuthPanel from '../../src/components/auth/AuthPanel.jsx';
 
-// The sign-up password path lives behind the "more options" disclosure in OUR
-// magic-link-first floor: open it, switch to the password method, then the
-// email/password/confirm fields render.
+// Password is the primary inline path (W5.1): the email/password/confirm
+// fields render directly on the sign-up tab, no disclosure to open.
 function openPasswordSignup() {
   render(<AuthPanel initialMode="signup" />);
-  fireEvent.click(screen.getByRole('button', { name: t('auth.button.moreOpen') }));
-  fireEvent.click(screen.getByRole('button', { name: t('auth.button.usePassword') }));
 }
 
 function fill(labelKey, value) {

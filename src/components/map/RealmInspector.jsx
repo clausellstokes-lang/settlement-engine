@@ -25,7 +25,9 @@ import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, X, M
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
+import { causalByTickFromSnapshots } from '../../domain/display/chronicleTimeline.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
+import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { hasPantheon } from './PantheonPanel.jsx';
 import { BODY, BORDER, CARD, CARD_ALT, FS, R, SECOND, SP, sans } from '../theme.js';
@@ -346,20 +348,38 @@ function PantheonSection({ campaign }) {
 // + per-tick diff + click-to-highlight) above the existing Wizard News feed.
 function ChronicleSection({ campaign, nameById }) {
   const nameFor = (id) => nameById?.get(String(id)) || String(id);
+  const saves = useStore(s => s.savedSettlements);
+  const pulseUndoStack = useStore(s => s.pulseUndoStack);
+  // components-dossier-7: supply the per-tick causal diff from the SESSION undo stack
+  // (pre-pulse member snapshots) + the current live saves — the only surface with
+  // before/after causal state, and one that never persists or touches the kernel.
+  const causalByTick = useMemo(() => {
+    if (!campaign) return undefined;
+    const memberIds = new Set((campaign.settlementIds || []).map(String));
+    const liveSaves = (saves || [])
+      .filter(s => memberIds.has(String(s?.id ?? s?.settlement?.id)))
+      .map(s => ({ id: s?.id ?? s?.settlement?.id, settlement: s?.settlement }));
+    const snapshots = (pulseUndoStack || []).filter(s => String(s?.campaignId) === String(campaign.id));
+    return causalByTickFromSnapshots({ snapshots, liveSaves, currentTick: campaign.worldState?.tick });
+  }, [campaign, saves, pulseUndoStack]);
   return (
     <div style={{ display: 'grid', gap: SP.md }}>
-      <ChronicleScrollback campaign={campaign} nameFor={nameFor} />
+      <ChronicleScrollback campaign={campaign} nameFor={nameFor} causalByTick={causalByTick} />
       <WizardNewsPanel campaign={campaign} />
     </div>
   );
 }
 
 // War & Diplomacy section — LiveWarStatus is the live block; when nothing is live
-// it returns null, so we show a calm peacetime note rather than a blank panel.
+// it returns null, so we show a calm peacetime note rather than a blank panel. The
+// belief-divergence band (experience-product-fit-2) sits beneath: the DM-gated "what
+// they believe vs what is true" read, self-gating to nothing off a belief-active
+// premium world.
 function WarSection({ campaign, nameById }) {
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
       <LiveWarStatus campaign={campaign} nameById={nameById} />
+      <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
       <PeacetimeNote campaign={campaign} />
     </div>
   );

@@ -46,25 +46,32 @@ export const AXES = [
     ],
   },
   {
+    // components-dossier-2: Distance is ENGINE-DERIVED, not a stored choice. On a
+    // canonized realm the map routes trade/armies/news over the frozen distance
+    // matrix (spatialCanonVersion is set), so this reads 'mapped' as a read-only
+    // fact; before canonize it is 'ignore'. axisValue derives it — the chips are
+    // non-interactive on both axes (you shape distance by canonizing a map).
     key: 'spatialMode',
     title: 'Distance',
     question: 'Does geography constrain the world?',
+    derived: true,
     options: [
-      ['ignore', 'Ignore distance', 'Every settlement is a neighbour.', true],
-      ['abstract', 'Near and far', 'Nearby, regional, and distant matter. Arrives with the map engine.', false],
-      ['mapped', 'Mapped geography', 'Real distances and routes. Arrives with the map engine.', false],
-      ['full', 'Full terrain', 'Mountains, chokepoints, and blockades. Arrives with the map engine.', false],
+      ['ignore', 'Ignore distance', 'Every settlement is a neighbour — until you canonize a map for this realm.', true],
+      ['abstract', 'Near and far', 'Nearby, regional, and distant matter.', false],
+      ['mapped', 'Mapped geography', 'Real distances and routes over your canonized map — frozen at canonization.', false],
+      ['full', 'Full terrain', 'Mountains, chokepoints, and blockades. Arrives in a later chapter.', false],
     ],
   },
   {
     key: 'travelMode',
     title: 'Travel',
     question: 'Does movement consume time?',
+    derived: true,
     options: [
-      ['instant', 'Instant', 'Word and armies arrive the moment they depart.', true],
-      ['compressed', 'Swift', 'A continent crosses in a week. Arrives with geography.', false],
-      ['standard', 'Standard', 'A continent crosses in a month. Arrives with geography.', false],
-      ['slow', 'Slow', 'A continent crosses in a season. Arrives with geography.', false],
+      ['instant', 'Instant', 'Word and armies arrive the moment they depart — until a map gives the realm real roads.', true],
+      ['compressed', 'Swift', 'A continent crosses in a week.', false],
+      ['standard', 'Standard', 'Word and armies travel the real road network — news and caravans arrive late over distance.', false],
+      ['slow', 'Slow', 'A continent crosses in a season. Arrives in a later chapter.', false],
     ],
   },
   {
@@ -85,11 +92,17 @@ export const AXES = [
 
 // Effective axis read over a draft whose profile may still be VIRTUAL (an
 // untouched campaign carries no profile keys until an axis is touched).
-export function axisValue(draft, key) {
+//
+// Distance/Travel are ENGINE-DERIVED read-only facts (components-dossier-2), not
+// stored rule values: `spatialMapped` is true once the realm has been canonized
+// (worldState.spatialCanonVersion set), at which point the map routes trade/
+// armies/news over the frozen distance matrix with hop-week latency — so Distance
+// reads 'mapped' and Travel 'standard'. Before canonize they are 'ignore'/'instant'.
+export function axisValue(draft, key, spatialMapped = false) {
   if (key === 'worldProgression') return worldProgressionOf(draft);
   if (key === 'politicalAutonomy') return politicalAutonomyOf(draft);
-  if (key === 'spatialMode') return 'ignore';
-  if (key === 'travelMode') return 'instant';
+  if (key === 'spatialMode') return spatialMapped ? 'mapped' : 'ignore';
+  if (key === 'travelMode') return spatialMapped ? 'standard' : 'instant';
   return infoModeOf(draft);
 }
 
@@ -145,7 +158,7 @@ export function OptionChip({ label, selected, disabled, reason, onSelect, testId
  * While frozen, the autonomy card is presentation-gated by the
  * frozen_world_pauses_autonomy law (settings preserved; wakes on unfreeze).
  */
-export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetField }) {
+export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetField, spatialMapped = false }) {
   const frozen = worldProgressionOf(draft) === 'frozen';
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
@@ -153,8 +166,14 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
         World laws
       </div>
       {AXES.map(axis => {
-        const value = axisValue(draft, axis.key);
+        const value = axisValue(draft, axis.key, spatialMapped);
         const axisLocked = axis.key === 'politicalAutonomy' && frozen;
+        // Distance/Travel are engine-derived facts, never a click: the map sets them.
+        const derivedNote = axis.derived
+          ? (spatialMapped
+            ? 'Set by your canonized realm map — the world reckons real distance.'
+            : 'Set once you canonize a map for this realm. Until then, distance is ignored.')
+          : null;
         const selectedOption = axis.options.find(([optionValue]) => optionValue === value);
         return (
           <div
@@ -184,14 +203,14 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
                   testId={`axis-${axis.key}-${optionValue}`}
                   label={label}
                   selected={optionValue === value}
-                  disabled={!available || axisLocked || advanceBlocked}
+                  disabled={axis.derived || !available || axisLocked || advanceBlocked}
                   reason={!available
                     ? description
                     : axisLocked
                       ? frozenAutonomyLaw?.message
                       : description}
                   onSelect={() => {
-                    if (!available || axisLocked || advanceBlocked) return;
+                    if (axis.derived || !available || axisLocked || advanceBlocked) return;
                     onSetField(axis.key, optionValue);
                   }}
                 />
@@ -202,6 +221,11 @@ export function WorldLawAxes({ draft, advanceBlocked, frozenAutonomyLaw, onSetFi
                 ? frozenAutonomyLaw.message
                 : selectedOption?.[2]}
             </div>
+            {derivedNote && (
+              <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4, fontStyle: 'italic' }}>
+                {derivedNote}
+              </div>
+            )}
           </div>
         );
       })}

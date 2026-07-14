@@ -5,9 +5,11 @@
  * the options for each tool (font size, color, marker icon, forest style).
  */
 
-import { MousePointer2, Type, Pin, Trash2, Undo2, Redo2 } from 'lucide-react';
+// `Trees` (not TreePine) deliberately: TerrainToolbar already bundles it in
+// this same lazy map chunk, so the Forest tool adds zero new icon modules.
+import { MousePointer2, Type, Pin, Trees, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
-import { ANNOTATE_TOOLS } from '../../store/mapSlice.js';
+import { ANNOTATE_TOOLS, FOREST_STYLES } from '../../store/mapSlice.js';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -18,16 +20,30 @@ export default function AnnotateToolbar() {
   const opts            = useStore(s => s.annotateOptions);
   const setOpt          = useStore(s => s.setAnnotateOption);
   const selectedId      = useStore(s => s.selectedAnnotationId);
+  const selectedKind    = useStore(s => s.selectedAnnotationKind);
   const deleteLabel     = useStore(s => s.deleteLabel);
   const deleteMarker    = useStore(s => s.deleteMarker);
+  const deleteForest    = useStore(s => s.deleteForest);
   const mapUndo         = useStore(s => s.mapUndo);
   const mapRedo         = useStore(s => s.mapRedo);
+  const canUndo         = useStore(s => s.mapUndoStack.length > 0);
+  const canRedo         = useStore(s => s.mapRedoStack.length > 0);
 
   function handleDelete() {
     if (!selectedId) return;
-    // We don't know which layer the id is in — try both.
-    deleteLabel(selectedId);
-    deleteMarker(selectedId);
+    // The selecting layer records which kind the id belongs to, so fire the
+    // SINGLE correct deletion. Fallback to all-three only if the kind is
+    // somehow absent (legacy selection) — deletes are id-scoped filters, so a
+    // miss on the wrong layer is a harmless no-op.
+    switch (selectedKind) {
+      case 'label':  deleteLabel(selectedId); return;
+      case 'marker': deleteMarker(selectedId); return;
+      case 'forest': deleteForest(selectedId); return;
+      default:
+        deleteLabel(selectedId);
+        deleteMarker(selectedId);
+        deleteForest(selectedId);
+    }
   }
 
   return (
@@ -58,6 +74,12 @@ export default function AnnotateToolbar() {
           onClick={() => setAnnotateTool(ANNOTATE_TOOLS.MARKER)}
           Icon={Pin}
           label="Marker"
+        />
+        <ToolButton
+          active={annotateTool === ANNOTATE_TOOLS.FOREST}
+          onClick={() => setAnnotateTool(ANNOTATE_TOOLS.FOREST)}
+          Icon={Trees}
+          label="Forest"
         />
       </div>
 
@@ -123,6 +145,42 @@ export default function AnnotateToolbar() {
         </>
       )}
 
+      {annotateTool === ANNOTATE_TOOLS.FOREST && (
+        <>
+          <OptionLabel>Style</OptionLabel>
+          <select
+            value={opts.forestStyle}
+            onChange={e => setOpt('forestStyle', e.target.value)}
+            aria-label="Forest style"
+            style={selectStyle}
+          >
+            {FOREST_STYLES.map(style => (
+              <option key={style} value={style}>
+                {style.charAt(0).toUpperCase() + style.slice(1)}
+              </option>
+            ))}
+          </select>
+          <OptionLabel>Radius</OptionLabel>
+          <input
+            type="range" min={20} max={160} step={5}
+            value={opts.forestRadius}
+            onChange={e => setOpt('forestRadius', Number(e.target.value))}
+            aria-label="Radius"
+            style={{ width: 90, accentColor: GOLD }}
+          />
+          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestRadius}</span>
+          <OptionLabel>Density</OptionLabel>
+          <input
+            type="range" min={0.1} max={1} step={0.05}
+            value={opts.forestDensity}
+            onChange={e => setOpt('forestDensity', Number(e.target.value))}
+            aria-label="Density"
+            style={{ width: 90, accentColor: GOLD }}
+          />
+          <span style={{ fontSize: FS.xxs, color: SECOND, minWidth: 24 }}>{opts.forestDensity.toFixed(2)}</span>
+        </>
+      )}
+
       <div style={{ flex: 1 }} />
 
       {/* Selection actions */}
@@ -138,9 +196,10 @@ export default function AnnotateToolbar() {
         </Button>
       )}
 
-      {/* Undo / Redo */}
-      <IconButton Icon={Undo2} label="Undo" onClick={mapUndo} size="md" />
-      <IconButton Icon={Redo2} label="Redo" onClick={mapRedo} size="md" />
+      {/* Undo / Redo — disabled when their stack is empty so the available-action
+          state is honest (P10). */}
+      <IconButton Icon={Undo2} label="Undo" onClick={mapUndo} size="md" disabled={!canUndo} />
+      <IconButton Icon={Redo2} label="Redo" onClick={mapRedo} size="md" disabled={!canRedo} />
     </div>
   );
 }

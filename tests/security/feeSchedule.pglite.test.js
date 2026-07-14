@@ -96,6 +96,18 @@ const grant = (uid, amount) =>
     [uid, amount],
   );
 
+// Anti-vacuity ([tests-3]/[test-quality-2]): a renamed/renumbered pinned migration
+// (the master-merge reconciliation risk) would silently skip the execution suite
+// below and vitest would stay green. This UNCONDITIONAL assert fails loudly instead.
+describe('fee-schedule migration fixtures exist (guards against silent vacuous skip)', () => {
+  it('every pinned migration is present (a renamed/renumbered file must fail loudly)', () => {
+    for (const [k, p] of Object.entries(MIG)) {
+      expect(existsSync(p), `migration ${k} missing: ${p}`).toBe(true);
+    }
+    expect(allExist).toBe(true);
+  });
+});
+
 describe.runIf(allExist)('fee-schedule parity — pricing.js quote == spend_credits RPC charge (pglite)', () => {
   beforeAll(async () => {
     db = new PGlite();

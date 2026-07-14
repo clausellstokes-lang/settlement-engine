@@ -215,15 +215,18 @@ describe('Tier 7.14 migration coverage', () => {
   });
 
   it('exposes auth modal button + placeholder + subtitle keys', () => {
-    // Buttons:
+    // Buttons (password-primary floor, W5.1 — the disclosure/method-toggle
+    // keys are retired; the email link + magic-close actions replace them):
     expect(t('auth.button.working')).toBe('Working...');
-    expect(t('auth.button.sendLink')).toBe('Send sign-in link');
     expect(t('auth.button.createAcct')).toBe('Create account');
     expect(t('auth.button.signIn')).toBe('Sign in');
-    expect(t('auth.button.moreOpen')).toBe('More sign-in options');
-    expect(t('auth.button.moreClose')).toBe('Hide more options');
-    expect(t('auth.button.usePassword')).toBe('Use a password instead');
-    expect(t('auth.button.useMagic')).toContain('magic link');
+    expect(t('auth.button.emailLink')).toBe('Email me a sign-in link');
+    expect(t('auth.button.resend')).toBe('Resend link');
+    expect(t('auth.button.differentEmail')).toBe('Use a different email');
+    // Magic-link close + alternatives divider + modal title:
+    expect(t('auth.magic.sent', { email: 'gm@example.com' })).toContain('gm@example.com');
+    expect(t('auth.oauth.divider')).toBe('or continue with');
+    expect(t('auth.modalTitle')).toBe('Welcome back');
     // Placeholders:
     expect(t('auth.placeholder.email')).toBe('Email address');
     expect(t('auth.placeholder.password')).toBe('Password');
