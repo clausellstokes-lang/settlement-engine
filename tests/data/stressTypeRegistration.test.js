@@ -40,8 +40,10 @@ const EXEMPTIONS = {
   // legitimately have no entry. (src/generators/steps/stressConfirmPass.js)
   SUPPRESSOR_KEYWORDS: 'institution-suppressed types only',
   // UI display posture table with a graceful fallback; partial by design and outside
-  // the generation surface. (src/components/new/tabs/DefenseTab.jsx)
-  STRESS_STATUS: 'UI display, partial by design',
+  // the generation surface. pdf-4 (main) extracted it from DefenseTab into the shared
+  // display module as DEFENSE_STRESS_STATUS (DefenseTab now aliases it), so print and
+  // screen can't drift. (src/domain/display/defenseDisplay.js)
+  DEFENSE_STRESS_STATUS: 'UI display, partial by design',
   // Deliberately the 5 newer types only (an override layer). (npcGenerator.js)
   STRESS_GOAL_OVERRIDES: 'new-types override layer by design',
 };
@@ -78,9 +80,13 @@ describe('stress-type registration manifest (structural prevention)', () => {
     const srcAll =
       read('src/generators/steps/stressConfirmPass.js') +
       read('src/components/new/tabs/DefenseTab.jsx') +
+      read('src/domain/display/defenseDisplay.js') +
       read('src/generators/npcGenerator.js');
     for (const name of Object.keys(EXEMPTIONS)) {
-      expect(srcAll.includes(`${name} = {`), `exemption '${name}' names a table that no longer exists`).toBe(true);
+      // Accept both a plain object literal and an Object.freeze()-wrapped table
+      // (DEFENSE_STRESS_STATUS is frozen in the shared display module).
+      const exists = srcAll.includes(`${name} = {`) || srcAll.includes(`${name} = Object.freeze({`);
+      expect(exists, `exemption '${name}' names a table that no longer exists`).toBe(true);
     }
   });
 
