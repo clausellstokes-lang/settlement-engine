@@ -476,6 +476,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             advanceBlocked={advanceBlocked}
             frozenAutonomyLaw={frozenAutonomyLaw}
             onSetField={setField}
+            spatialMapped={!!campaign?.worldState?.spatialCanonVersion}
           />
           <DomainRows
             draft={draft}

@@ -52,10 +52,117 @@ function clamp01(v) {
   return Math.max(0, Math.min(1, n));
 }
 
-/** 'import_shortage' → 'import shortage' (token → plain words; no registry).
- *  @param {unknown} value */
-function human(value) {
-  return String(value || '').replace(/_/g, ' ').trim();
+// ── The what-token → in-world PHRASE vocabulary (content-immersion-1) ─────────
+// The rumor's SUBJECT is captured from a wizardNews entry's impactKind (which is
+// itself an engine candidateType/kind token — 'strategy_deploy', 'plague_arrival',
+// 'stressor_birth_religious_pact_betrayal', …). Rendering that token raw into a
+// player headline ("Merchants bring word of strategy deploy in Thornwall") leaks
+// engine vocabulary onto the flagship fiction surface. This map turns every
+// known token into a noun phrase a townsperson would actually say — usable both
+// capitalized-first ("Soldiers marching to war in X") and after "word of …".
+// Any UNKNOWN token falls to whatPhrase()'s neutral fallback, never the raw token.
+// Pure display; byte-inert to the engine (goldens never import this).
+/** @type {Readonly<Record<string, string>>} */
+const WHAT_PHRASES = Object.freeze({
+  // war / conflict candidate types
+  strategy_deploy: 'soldiers marching to war',
+  war_mobilization: 'a call to arms',
+  war_conscription: 'a levy of men called up',
+  war_levy: 'a war-levy',
+  war_spoils: 'the spoils of war',
+  army_homecoming: 'soldiers returning home',
+  siege_lifted: 'a siege lifted',
+  conquest: 'a conquest',
+  field_battle: 'a battle in the field',
+  conflict_pressure: 'the drums of war',
+  protection_gap: 'defences grown thin',
+  // power / faction / coup
+  coup_succeeded: 'a seizure of power',
+  coup_suppressed: 'an uprising put down',
+  faction_exhaustion: 'a faction spent and failing',
+  faction_government_challenge: 'a challenge to those in power',
+  faction_rival_power_contest: 'a contest between rival powers',
+  faction_capture: 'a faction seizing control',
+  hierarchy_cascade: 'an upheaval in the ranks',
+  authority_instability: 'a shaken authority',
+  occupation_lifted: 'an occupation ended',
+  occupation_vassalized: 'a town brought to heel',
+  // faith
+  faith_foothold_recruited: 'a new faith taking root',
+  faith_pact_formed: 'a pact sworn between faiths',
+  religious_pressure: 'a stir among the faithful',
+  pantheon_ascendancy: 'a faith ascendant',
+  pantheon_twilight: 'a faith in twilight',
+  moral_reckoning: 'a reckoning',
+  belief_misjudgment: 'a dangerous misjudgement',
+  stressor_birth_religious_conversion_fracture: 'a schism among the faithful',
+  stressor_birth_religious_pact_betrayal: 'a holy pact broken',
+  // trade / economy / resources / flow
+  flow_trade_scarcity: 'goods grown scarce',
+  import_shortage: 'a shortage of goods',
+  export_market_loss: 'lost markets',
+  route_disruption: 'the roads gone bad',
+  tax_revenue_disruption: 'coffers running short',
+  service_disruption: 'services faltering',
+  resource_depletion: 'a source run dry',
+  resource_recovery: 'a source restored',
+  harvest: 'the harvest',
+  hungry_gap: 'the lean season',
+  spring_thaw: 'the spring thaw',
+  // people / migration
+  flow_migration: 'people on the move',
+  migration_pressure: 'people on the move',
+  population_emigration: 'families leaving',
+  // institutions
+  institution_build: 'a great work underway',
+  institution_closure: 'a hall shuttered',
+  institution_founding: 'something new founded',
+  // npc arcs
+  npc_goal_culmination: 'a long design come to a head',
+  npc_goal_rebranch: 'a change of ambitions',
+  // sickness / disaster
+  plague_arrival: 'a sickness spreading',
+  calamity: 'a great disaster',
+  // information / crime / residuals / lifecycle
+  information_shock: 'unsettling news',
+  criminal_pressure: 'a rise in lawlessness',
+  stressor_residual: 'lingering troubles',
+  party_stressor_residual: 'lingering troubles',
+  stressor_aftermath: 'the aftermath of troubles',
+  stressor_graduated: 'a trouble deepening',
+  stressor_wind_down: 'troubles easing',
+  cause_lifecycle: 'shifting fortunes',
+});
+
+// Bare LIFECYCLE/transition kinds — when a rumor's subject falls back to the
+// entry's `kind` (impactKind absent) it would otherwise read as internal
+// vocabulary ("Travellers speak of applied near X"). These map to a neutral,
+// in-world word instead of ever rendering the lifecycle token.
+/** @type {ReadonlySet<string>} */
+const TRANSITION_KINDS = new Set([
+  'queued', 'ready', 'applied', 'resolved', 'ignored', 'expired',
+  'proposal', 'condition', 'stirring', 'update', 'world_pulse',
+]);
+
+// Engine prefixes the neutral fallback strips before de-underscoring an unknown
+// token, so a future candidateType degrades to readable words, never a raw slug.
+const WHAT_STRIP_PREFIX = /^(npc_|stressor_birth_|stressor_|party_|flow_|faction_|faith_|war_|institution_|occupation_|coup_|resource_|pantheon_)/;
+
+/**
+ * A what-token → the in-world phrase a settlement would use for the rumor's
+ * subject. Known tokens map explicitly; bare lifecycle kinds neutralize to
+ * 'unrest'; any other unknown token strips its engine prefix and de-underscores
+ * (readable, never a raw slug), falling to 'unrest' if nothing usable remains.
+ * @param {unknown} value
+ * @returns {string}
+ */
+export function whatPhrase(value) {
+  const key = String(value || '').trim().toLowerCase();
+  if (!key) return 'unrest';
+  if (WHAT_PHRASES[key]) return WHAT_PHRASES[key];
+  if (TRANSITION_KINDS.has(key)) return 'unrest';
+  const stripped = key.replace(WHAT_STRIP_PREFIX, '').replace(/_/g, ' ').trim();
+  return stripped || 'unrest';
 }
 
 // ── The in-world vocabulary (fiction-not-internals) ─────────────────────────
@@ -124,7 +231,7 @@ function nameOf(id, nameFor) {
  */
 function renderFiction(record, { nameFor, deityName }) {
   const completeness = clamp01(record.completeness01);
-  const what = human(record.content?.what) || 'unrest';
+  const what = whatPhrase(record.content?.what);
   const where = nameOf(record.content?.whereId, nameFor);
   const firsthand = finiteNumber(record.hopCount, 0) === 0;
   let headline;

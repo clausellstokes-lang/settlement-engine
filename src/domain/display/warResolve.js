@@ -182,6 +182,16 @@ function isOpposite(x, y, a, b) {
 
 // ── Leadership — who holds the seat, and the figures whose temperament colours the resolve.
 
+/** Importance rank: the seat-holder (pillar — Lord Mayor/High Priestess/Kingpin/
+ *  Archmagister) ranks above senior staff (key) above notable. (domain-readmodels-3) */
+const IMPORTANCE_RANK = /** @type {Readonly<Record<string, number>>} */ ({ pillar: 3, key: 2, notable: 1 });
+const INFLUENCE_RANK = /** @type {Readonly<Record<string, number>>} */ ({ high: 3, moderate: 2, low: 1 });
+
+/** @param {{ influence?: unknown } | null | undefined} n @returns {number} */
+function npcInfluenceRank(n) {
+  return INFLUENCE_RANK[String(n?.influence || '').toLowerCase()] || 0;
+}
+
 /** @param {Settlement} [settlement] @returns {LeadershipRead} */
 function readLeadership(settlement) {
   const ps = settlement?.powerStructure;
@@ -189,8 +199,19 @@ function readLeadership(settlement) {
   const factions = Array.isArray(ps?.factions) ? ps.factions : [];
   const gov = factions.find((f) => f?.isGoverning) || null;
   const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-  const figures = npcs
-    .filter((n) => n?.importance === 'key' || n?.importance === 'notable')
+  // The figures whose temperament colours the resolve. Prefer importance-stamped
+  // NPCs ordered pillar > key > notable so the RULER (a 'pillar' seat-holder —
+  // previously excluded entirely) leads; when NO npc carries an importance stamp
+  // (a plain npcGenerator settlement), fall back to power/influence ranking so
+  // such settlements still surface figures rather than an empty list. Stable sort
+  // preserves generation order within a rank tier — deterministic, no rng.
+  const stamped = npcs.filter((n) => IMPORTANCE_RANK[n?.importance]);
+  const pool = stamped.length ? stamped : npcs;
+  const figures = pool
+    .slice()
+    .sort((a, b) => (IMPORTANCE_RANK[b?.importance] || 0) - (IMPORTANCE_RANK[a?.importance] || 0)
+      || (num(b?.power, 0) - num(a?.power, 0))
+      || (npcInfluenceRank(b) - npcInfluenceRank(a)))
     .slice(0, 3)
     .map((n) => ({ name: n?.name || null, role: n?.role || n?.title || null, temperament: n?.temperament || null }));
   return {

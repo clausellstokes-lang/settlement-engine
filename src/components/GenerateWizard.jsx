@@ -410,7 +410,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
         {authTier === 'anon' && (
           <div style={{ padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'], border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`, borderRadius: R.lg - 1, fontSize: FS.sm, color: SECOND }}>
-            Free mode: generating Thorp, Hamlet, or Village. Sign in for all settlement tiers.
+            Free mode: generating up to Town size. Sign in (free) for every size.
           </div>
         )}
 

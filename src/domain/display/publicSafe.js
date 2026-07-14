@@ -75,6 +75,18 @@ export const PUBLIC_TOPLEVEL_KEYS = Object.freeze([
 // none of these tokens and stay visible — a shared premium pantheon displays
 // read-only to all viewers, the latent seed never does. Mirrored server-side by
 // migration 128 (both _gallery_sanitize_public_json + _gallery_world_snapshot_is_safe).
+//
+// DEFERRED — OWNER BATCH (domain-readmodels-2): the bare `note` token over-matches
+// public economics-attribution keys (magicFoodNote, magicNote, upstreamNote,
+// storageNote), stripping the food-deficit/chain explanation from every
+// public/gallery/anon dossier. The fix narrows `note` here to the genuinely private
+// keys (dossierNotes|tabNotes|\bnotes?\b — dmNotes/narrativeNotes already covered)
+// AND lands the SAME narrowing in a CREATE OR REPLACE migration for
+// _gallery_sanitize_public_json (Postgres \y boundaries). It CANNOT ship client-only:
+// this regex is pinned token-⊆-SQL by snapshotDenylistDrift.test.js, and toPublicSafe
+// is pinned field-for-field EQUAL to the server sanitizer by gallerySanitize.pglite.
+// A client-only change breaks one gate or silently diverges the security twin, so it
+// is owner-gated (coordinated migration). Land both halves together in the owner batch.
 export const PRIVATE_KEY_RE = /(secret|private|\bdm|\bgm|guidance|note|plotHook|plot_hooks|hook|compass|chronicle|pinnedNpc|aiData|aiSettlement|aiDailyLife|narrativeNotes|identityMarkers|frictionPoints|connectionsMap|latentPantheon|seed|_config)/i;
 
 /**

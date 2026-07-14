@@ -15,6 +15,7 @@ import {
   freshnessBand,
   hasRumorLedgers,
   settlementRumors,
+  whatPhrase,
 } from '../../src/domain/display/settlementRumors.js';
 import { advanceRumorLedgers, rumorEventKey } from '../../src/domain/spatial/rumorNetwork.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
@@ -231,6 +232,75 @@ describe('read-model mechanics', () => {
     expect(confidenceBand({ hopCount: 3, corroborationRoots: ['x', 'y'] })).toBe('corroborated');
     expect(confidenceBand({ hopCount: 1, corroborationRoots: ['x'] })).toBe('credible');
     expect(confidenceBand({ hopCount: 3, corroborationRoots: ['x'] })).toBe('unverified');
+  });
+
+  it('renders an in-world PHRASE for the subject, never a raw engine token (content-immersion-1)', () => {
+    // A hand-built ledger record lets us drive an arbitrary `what` token straight
+    // into the player projection and assert the headline speaks fiction, not engine.
+    const NAMES = new Map([['s2', 'Thornwall']]);
+    const nameFor = (id) => NAMES.get(id) || id;
+    function headlineFor(what, { hopCount = 2, completeness01 = 0.9 } = {}) {
+      const worldState = {
+        tick: 10,
+        spatialLedgers: { rumorLedgers: { s1: { k1: {
+          arrivalTick: 8, hopCount, completeness01, eventTick: 5, score: 40,
+          content: { what, whereId: 's2', magnitude: 2, partyIds: ['s2'] },
+        } } } },
+      };
+      const rumors = settlementRumors({ worldState, settlementId: 's1', nameFor });
+      expect(rumors.length).toBe(1);
+      return `${rumors[0].headline} ${rumors[0].detail}`;
+    }
+
+    // The marquee leaks the finding named — now spoken as fiction.
+    const deploy = headlineFor('strategy_deploy');
+    expect(deploy).toContain('soldiers marching to war');
+    expect(deploy.toLowerCase()).not.toContain('strategy deploy');
+    const schism = headlineFor('stressor_birth_religious_pact_betrayal');
+    expect(schism.toLowerCase()).not.toContain('stressor');
+
+    // No KNOWN engine token — candidate types, regional impact kinds, spatial /
+    // seasonal kinds — reaches a rendered headline as a raw slug or engine word.
+    const KNOWN_WHAT = [
+      'strategy_deploy', 'war_mobilization', 'war_conscription', 'war_levy', 'war_spoils',
+      'army_homecoming', 'siege_lifted', 'conquest', 'field_battle', 'conflict_pressure',
+      'protection_gap', 'coup_succeeded', 'coup_suppressed', 'faction_exhaustion',
+      'faction_government_challenge', 'faction_rival_power_contest', 'faction_capture',
+      'hierarchy_cascade', 'authority_instability', 'occupation_lifted', 'occupation_vassalized',
+      'faith_foothold_recruited', 'faith_pact_formed', 'religious_pressure', 'pantheon_ascendancy',
+      'pantheon_twilight', 'moral_reckoning', 'belief_misjudgment',
+      'stressor_birth_religious_conversion_fracture', 'stressor_birth_religious_pact_betrayal',
+      'flow_trade_scarcity', 'import_shortage', 'export_market_loss', 'route_disruption',
+      'tax_revenue_disruption', 'service_disruption', 'resource_depletion', 'resource_recovery',
+      'harvest', 'hungry_gap', 'spring_thaw', 'flow_migration', 'migration_pressure',
+      'population_emigration', 'institution_build', 'institution_closure', 'institution_founding',
+      'npc_goal_culmination', 'npc_goal_rebranch', 'plague_arrival', 'calamity',
+      'information_shock', 'criminal_pressure', 'stressor_residual', 'party_stressor_residual',
+      'stressor_aftermath', 'stressor_graduated', 'stressor_wind_down', 'cause_lifecycle',
+    ];
+    // Engine-jargon markers that must never reach the player surface. (Single
+    // real-English tokens like "conquest"/"harvest"/"siege" are fine words and
+    // are deliberately not denied — the finding is about system slugs.)
+    const DENY = ['_', 'deploy', 'stressor', 'npc', 'impactkind', 'candidatetype', 'queued', 'applied'];
+    for (const what of KNOWN_WHAT) {
+      for (const hopCount of [0, 2]) {
+        const text = headlineFor(what, { hopCount }).toLowerCase();
+        for (const bad of DENY) {
+          expect(text.includes(bad), `engine token "${bad}" leaks for ${what}`).toBe(false);
+        }
+      }
+    }
+
+    // Bare lifecycle kinds (impactKind absent ⇒ `what` falls to the transition)
+    // neutralize to an in-world word, never "applied"/"queued".
+    for (const kind of ['applied', 'queued', 'ready', 'resolved', 'expired', 'ignored']) {
+      expect(whatPhrase(kind)).toBe('unrest');
+    }
+    expect(whatPhrase('')).toBe('unrest');
+    expect(whatPhrase(null)).toBe('unrest');
+    // An unknown future token degrades to readable words, never a raw slug.
+    expect(whatPhrase('npc_some_future_arc')).toBe('some future arc');
+    expect(whatPhrase('utterly_new_beat')).toBe('utterly new beat');
   });
 
   it('activatedDeityNamesFrom reads ONLY the public embedded snapshots', () => {

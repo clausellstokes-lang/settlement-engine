@@ -93,8 +93,12 @@ export function chronicleTimeline({ chronicles, pulseHistory } = /** @type {any}
 }
 
 /**
- * The settlement ids one pulse outcome touched — its direct target plus any ids on
- * its population deltas / power transfer losers. Deduped, string-typed.
+ * The settlement ids one pulse outcome touched — its direct target plus its
+ * population-delta keys. Deduped, string-typed. Deliberately does NOT source ids
+ * from `powerTransfer.losers`: those entries are display NAMES (warDeployment.js
+ * mints them via settlementNameFor), not save ids, so folding them in poisoned
+ * affectedSettlementIds — the click-to-highlight received names as ids and no-oped.
+ * Mirrors worldSnapshotPublic.collectAffectedIds, its public sibling. (domain-readmodels-1)
  * @param {any} outcome
  * @returns {string[]}
  */
@@ -105,8 +109,6 @@ function collectSettlementIds(outcome) {
   if (popDeltas && typeof popDeltas === 'object') {
     for (const key of Object.keys(popDeltas)) ids.add(String(key));
   }
-  const losers = outcome?.powerTransfer?.losers;
-  if (Array.isArray(losers)) for (const l of losers) if (l != null) ids.add(String(l));
   return [...ids];
 }
 

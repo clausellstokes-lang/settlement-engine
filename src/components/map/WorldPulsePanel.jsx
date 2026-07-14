@@ -22,7 +22,7 @@ import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './
 import { advancesOnOpen, politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
 
-export default function WorldPulsePanel({ campaign }) {
+export default function WorldPulsePanel({ campaign, advancing = false }) {
   const applyProposal = useStore(s => s.applyWorldPulseProposal);
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
@@ -225,6 +225,17 @@ export default function WorldPulsePanel({ campaign }) {
           </div>
         </div>
       </header>
+
+      {advancing && (
+        <div role="status" style={{
+          display: 'flex', alignItems: 'center', gap: 8,
+          padding: '9px 16px', borderBottom: `1px solid ${BORDER}`,
+          background: GOLD_BG, color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
+        }}>
+          <Activity size={14} color={GOLD} />
+          Advancing the realm… the pulse below updates when it settles.
+        </div>
+      )}
 
       <div style={{
         flex: 1,
