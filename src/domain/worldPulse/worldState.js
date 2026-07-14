@@ -1,3 +1,4 @@
+import { isDraft } from 'immer';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { wallClockNow } from '../clock.js';
 import { deepClone } from '../clone.js';
@@ -131,6 +132,13 @@ function deepCloneConditionalLedger(value) {
 /** @param {unknown} value @returns {unknown} */
 export function deepFreeze(value) {
   if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+  // NEVER freeze an Immer draft: Object.freeze on a draft proxy violates the proxy's
+  // ownKeys invariant ('type_' trap error) and would poison the produce in progress.
+  // ensureWorldState runs inside store producers, so a digest reached THROUGH a draft
+  // is shared un-frozen for that pass; the finished plain object freezes on its next
+  // ensure (load/read paths), so the immutability guarantee and the reference-sharing
+  // win (performance-scale-2/3) both hold on every non-draft state.
+  if (isDraft(value)) return value;
   Object.freeze(value);
   // Object.values covers arrays (elements) AND objects (own enumerable values) alike.
   for (const item of Object.values(/** @type {Record<string, unknown>} */ (value))) deepFreeze(item);
