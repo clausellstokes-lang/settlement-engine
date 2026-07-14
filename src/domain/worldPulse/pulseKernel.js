@@ -81,7 +81,7 @@ import { advanceCauseLifecycle, projectCauseLifecycleOntoSettlement, causeLifecy
 import { normalizeSimulationRules, isFaithSpreadEnabled } from './simulationRules.js';
 import { deriveDecisionTier } from './decisionTier.js';
 import { wallClockNow, assertNowPinnedInTest } from '../clock.js';
-import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval } from './pulseHelpers.js';
+import { clone, saveId, compactOutcomeForHistory, compactImpactDigest, usableTickInterval, capPersistedRollExplanations } from './pulseHelpers.js';
 import { assertNoResidueLeak } from './residueStripGuard.js';
 
 /**
@@ -1455,7 +1455,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       type: stressor.type,
       label: stressor.label,
     })),
-    rollExplanations: [...deterministicExplanations, ...rollExplanations],
+    // performance-scale-5: cap the PERSISTED explanations (this record rides every
+    // upsert / cache write / undo snapshot). The RETURN value below keeps the full set
+    // for the session UI. Byte-identical on any record within the missed-roll cap.
+    rollExplanations: capPersistedRollExplanations(deterministicExplanations, rollExplanations),
     timeTicks: timeTicks.map(t => ({ saveId: t.saveId, summary: t.tick.summary })),
     corruptionEvents: [...(corruption.exposures || []), ...reformEvents].slice(0, 24).map((/** @type {any} */ e) => ({
       settlementId: e.settlementId, name: e.name, kind: e.kind,

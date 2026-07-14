@@ -114,6 +114,48 @@ function deepCloneConditionalLedger(value) {
   return deepClone(value);
 }
 
+// DEEP-FREEZE (idempotent): recursively Object.freeze an object/array graph. Used
+// for the spatialDigest — an immutable-by-contract ledger (worldState.js catalog:
+// "authored ONCE … never recomputed") that ensureWorldState now shares BY REFERENCE
+// instead of deep-cloning ~11×/tick (performance-scale-2). Object.isFrozen
+// short-circuits at the top: the FIRST ensure of a fresh (canonize- or reload-
+// hydrated) digest freezes its whole graph once, every subsequent ensure returns
+// immediately AND hands back the SAME object identity — which restores the
+// distanceRead WeakMap route memos to true once-per-canonize semantics
+// (performance-scale-3). WE are the sole freezer and no writer in src mutates the
+// digest (verified across the tree), so top-frozen ⟺ deep-frozen holds and the
+// freeze turns the never-written contract into an enforced guarantee (a stray write
+// throws in strict mode / test). Byte-output is unchanged: freeze alters no
+// enumerable value or key order, so a shared-frozen digest serializes identically to
+// the deep clone it replaces (the goldens prove it by running).
+/** @param {unknown} value @returns {unknown} */
+export function deepFreeze(value) {
+  if (!value || typeof value !== 'object' || Object.isFrozen(value)) return value;
+  Object.freeze(value);
+  // Object.values covers arrays (elements) AND objects (own enumerable values) alike.
+  for (const item of Object.values(/** @type {Record<string, unknown>} */ (value))) deepFreeze(item);
+  return value;
+}
+
+// FROZEN conditional ledger (the spatial digest). Mirrors deepCloneConditionalLedger's
+// dormancy semantics (absent / non-object / empty ⇒ key omitted), but SHARES the raw
+// value BY REFERENCE after deep-freezing it, rather than deep-cloning. Safe precisely
+// because the value is immutable by contract (see deepFreeze) — the no-alias invariant
+// the deep clone protected is instead guaranteed by immutability.
+/** @param {unknown} value */
+function freezeConditionalLedger(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
+  if (Object.keys(value).length === 0) return undefined;
+  return deepFreeze(value);
+}
+
+// The conditional ledgers that are IMMUTABLE by contract — materialized by reference
+// (deep-frozen) instead of deep-cloned. Only the spatialDigest qualifies: it is
+// authored once at the canonize seam and never recomputed or mutated. Every other
+// conditional ledger (pantheon, religionStates, spatialLedgers, the mover ledgers, …)
+// is written across ticks and MUST keep deep-cloning to avoid pre-tick-snapshot aliasing.
+const FROZEN_CONDITIONAL_LEDGER_KEYS = new Set(['spatialDigest']);
+
 // Forward-compatible worldState migration chain. Empty today (schemaVersion stays
 // 1; the new ledgers are ADDITIVE and need no migration — an absent key normalizes
 // to its empty default). Modelled on settlementMigrations: each entry bumps a
@@ -334,8 +376,13 @@ export function ensureWorldState(rawInput = {}, campaign = {}) {
   const conditionalLedgers = {};
   for (const key of CONDITIONAL_LEDGER_KEYS) {
     if (key in shallowRaw) delete shallowRaw[key];
-    const cloned = deepCloneConditionalLedger(raw?.[key]);
-    if (cloned !== undefined) conditionalLedgers[key] = cloned;
+    // The FROZEN keys (spatialDigest) are shared by reference (deep-frozen) so the
+    // ~11 ensures per tick stop cloning the 47-400KB digest and hand back a stable
+    // identity; every other conditional ledger deep-clones (mutable across ticks).
+    const materialized = FROZEN_CONDITIONAL_LEDGER_KEYS.has(key)
+      ? freezeConditionalLedger(raw?.[key])
+      : deepCloneConditionalLedger(raw?.[key]);
+    if (materialized !== undefined) conditionalLedgers[key] = materialized;
   }
   return {
     ...base,

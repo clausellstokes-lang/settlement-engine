@@ -224,13 +224,17 @@ recovery = the resume protocol above; every wave banks before the next dispatche
 >   independent re-run 361/361 + verify:dist 108/108; goldens byte-identical; any-cast 2252.
 
 ## OVERNIGHT SCOREBOARD (2026-07-14, rolling)
-SHIPPED: F1 @ 75cdf8b1 · F2 @ e99e69f9 · F3a @ 0e56baa5 · F3b @ b25d3c1a (F3 COMPLETE) on main;
-G1a @ 7e1886dd · G1b @ 0b499818 · G1c @ 9bdfa8fa · G1d @ f5fbc41f (**G1 COMPLETE**) on golden.
+SHIPPED: F1 @ 75cdf8b1 · F2 @ e99e69f9 · F3a @ 0e56baa5 · F3b @ b25d3c1a (F3 COMPLETE) ·
+F4 @ 433641f8 (commerce-trust: $2.99 flip w/ the ungated-path catch, tierFacts, founder=30,
+entity-token leak dead via §6 degrade path — full link-layer port re-scoped to master merge) on
+main; G1a @ 7e1886dd · G1b @ 0b499818 · G1c @ 9bdfa8fa · G1d @ f5fbc41f (G1 COMPLETE) ·
+**G2 @ ec69513e** (18 coherence fixes; THE SHIFT MAP complete: 134/~190 configs attributed per-fix,
+manifest reverted; ⚠️ owner-veto flag on the data-tables-6 governance edit) on golden.
 ~62 fixes, ~145 pins. Constitution: golden fixtures byte-identical everywhere EXCEPT the one
 ledgered, isolation-confirmed G1d red (faith-pact metronome, sp-a|4|one_week, faith_pact_formed
 8→2) — the owner sign-off evidence; any-cast 2252 exact throughout; closure 1,251,487 (margin
-4,498). RUNNING: F4 commerce-trust (main — $2.99 flip, tier-facts, founder 30, entity-ref port,
-rate limiter, pg_temp walker) · G2 generation coherence (golden — the last big golden wave).
+4,498). RUNNING: F5 perf year-two (main) · G2R coherence remainders (golden — structural-NPC resolver,
+dual food model, timeline variety, the 5-stress-type content wave + registration walker).
 QUEUED AFTER: Lane-2 store ripple (G1d stop-report) · F5 perf · F6 gate-honesty · F7 code-health ·
 then the G-track merge decision + owner batch. Deferral ledger grows in the wave rows (publicSafe
 note, bornTick, M11a autonomy, stance-half, belief truthOf divergence join).

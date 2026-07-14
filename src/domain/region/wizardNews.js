@@ -1,5 +1,5 @@
 import { goodCriticality } from './goodsCatalog.js';
-import { ensureRegionalGraph } from './graph.js';
+import { ensureRegionalGraphOnce } from './graph.js';
 import { wallClockNow } from '../clock.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
@@ -517,7 +517,9 @@ export function advanceWizardNewsFeed(feed = {}, ticks = 1, options = {}) {
  */
 export function createWizardNewsEntryFromImpact(impact, options = {}) {
   if (!impact?.id) return null;
-  const graph = ensureRegionalGraph(options.graph || {});
+  // performance-scale-7: the diff below passes its already-ensured `after` graph per
+  // changed impact — ensureRegionalGraphOnce skips the redundant re-normalization.
+  const graph = ensureRegionalGraphOnce(options.graph || {});
   const transition = options.transition || impact.status || 'queued';
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));
   const names = nodeNameMap(graph);
@@ -555,8 +557,12 @@ export function createWizardNewsEntryFromImpact(impact, options = {}) {
  * @returns {WizardNewsEntry[]}
  */
 export function deriveWizardNewsEntriesFromGraphChange(beforeGraph = {}, afterGraph = {}, options = {}) {
-  const before = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
-  const after = ensureRegionalGraph(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
+  // performance-scale-7: this diff runs per changed outcome application, so re-
+  // normalizing the whole graph ×2 here multiplied by the outcome count. The call
+  // sites already hold ensureRegionalGraph outputs (branded), so the Once form skips
+  // the redundant normalization; an unbranded/rehydrated graph still gets a full ensure.
+  const before = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (beforeGraph || {}));
+  const after = ensureRegionalGraphOnce(/** @type {import('./graph.js').RegionGraph} */ (afterGraph || {}));
   const beforeById = new Map(before.queuedImpacts.map(impact => [impact.id, impact]));
   const entries = [];
   const tick = Math.max(0, Math.floor(finiteNumber(options.tick, 0)));

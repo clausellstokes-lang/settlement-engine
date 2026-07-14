@@ -28,6 +28,21 @@ export const REGIONAL_GRAPH_SCHEMA_VERSION = 2;
 // so campaign JSON stops growing without bound in localStorage/cloud sync.
 export const REGIONAL_EVENT_LOG_LIMIT = 50;
 
+// performance-scale-1: queuedImpacts only ever STATUS-FLIP (queued → applied/
+// ignored/expired/resolved), never removed — so terminal rows accumulate forever,
+// growing per-tick normalization cost and persisted size with campaign age (the
+// exact harm "year two must feel like day one" targets). The eventLog got a cap
+// (H18) but impacts never did. RETENTION POLICY (the sibling of the eventLog cap):
+// keep EVERY non-terminal (queued) row — they are pending disposition and must
+// survive — plus the most-recent REGIONAL_TERMINAL_IMPACT_LIMIT terminal rows, in
+// array order. Terminal rows already emitted their Wizard News at transition time,
+// so dropping the oldest is DISPLAY-SAFE. The cap is chosen far above any golden or
+// realistic multi-year run (measured: ~13 terminal @ 40 ticks/5 settlements, ~49 @
+// 60 ticks/12 settlements, ~109 @ 200 ticks/8 settlements), so short-horizon
+// fixtures are byte-identical (nothing is dropped) and only a decade-scale living
+// realm hits the bound.
+export const REGIONAL_TERMINAL_IMPACT_LIMIT = 250;
+
 export const REGIONAL_CHANNEL_TYPES = Object.freeze([
   // P0: logistics/economic
   'trade_dependency',
@@ -244,6 +259,17 @@ function dedupeById(items) {
   return [...map.values()];
 }
 
+// performance-scale-7: a NON-ENUMERABLE brand stamped on every ensureRegionalGraph
+// output so a redundant re-ensure of an already-normalized graph can be short-
+// circuited (ensureRegionalGraphOnce). The wizard-news graph-change diff re-ensured
+// the WHOLE graph twice per changed outcome, plus once more per changed impact —
+// multiplying the per-normalization cost by the tick's outcome count. Non-enumerable
+// ⇒ never serialized (byte-identity holds) and dropped by any spread `{...graph}` or
+// structuredClone, so a structurally-modified or rehydrated graph loses the brand and
+// safely falls back to a FULL re-ensure. Sound because no writer in src mutates an
+// ensured graph in place (verified across the tree): branded ⟺ normalized-and-unmodified.
+const ENSURED_BRAND = Symbol('regionalGraphEnsured');
+
 /**
  * @param {RegionGraph} [graph]
  * @param {RegionOptions} [options]
@@ -262,7 +288,22 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
   const eventLog = Array.isArray(graph.eventLog)
     ? graph.eventLog.slice(-REGIONAL_EVENT_LOG_LIMIT)
     : [];
-  const queuedImpacts = dedupeById((graph.queuedImpacts || []).map(impact => normalizeImpact(impact, now)).filter(Boolean));
+  // performance-scale-1 retention pass (inlined so queuedImpacts keeps the loose
+  // dedupeById flow — see REGIONAL_TERMINAL_IMPACT_LIMIT). Never drops a QUEUED
+  // (pending) row; caps the TERMINAL (applied/ignored/expired/resolved) backlog at the
+  // limit, dropping OLDEST terminal first (front = earliest minted) while preserving
+  // every survivor's relative order — so a graph within the cap is byte-identical
+  // (no reorder, no drop).
+  let queuedImpacts = dedupeById((graph.queuedImpacts || []).map(impact => normalizeImpact(impact, now)).filter(Boolean));
+  let terminalCount = 0;
+  for (const im of queuedImpacts) if (im.status !== 'queued') terminalCount += 1;
+  if (terminalCount > REGIONAL_TERMINAL_IMPACT_LIMIT) {
+    let toDrop = terminalCount - REGIONAL_TERMINAL_IMPACT_LIMIT;
+    queuedImpacts = queuedImpacts.filter(im => {
+      if (im.status !== 'queued' && toDrop > 0) { toDrop -= 1; return false; }
+      return true;
+    });
+  }
 
   const edgeByPair = new Map(edges.map(e => [`${e.from}->${e.to}`, e]));
   for (const channel of channels) {
@@ -276,7 +317,7 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
     if (!edge.channelIds.includes(channel.id)) edge.channelIds.push(channel.id);
   }
 
-  return {
+  const result = {
     schemaVersion: REGIONAL_GRAPH_SCHEMA_VERSION,
     nodes,
     edges,
@@ -285,6 +326,27 @@ export function ensureRegionalGraph(graph = {}, options = {}) {
     eventLog,
     updatedAt: graph.updatedAt || now || nowIso(),
   };
+  // Brand as normalized (non-enumerable ⇒ invisible to JSON / spread / clone).
+  Object.defineProperty(result, ENSURED_BRAND, { value: true, enumerable: false, writable: false, configurable: false });
+  return result;
+}
+
+/**
+ * Return `graph` unchanged when it is already an ensureRegionalGraph output (carries
+ * the non-enumerable brand), else normalize it. A byte-neutral idempotency short-
+ * circuit for hot re-ensure sites (performance-scale-7): the brand guarantees the
+ * graph is normalized-and-unmodified, and any spread / clone / rehydration strips the
+ * brand so an unbranded graph always gets a full ensure. Safe fallback: worst case is
+ * a redundant normalize, never a stale one.
+ * @param {RegionGraph} [graph]
+ * @param {RegionOptions} [options]
+ * @returns {ReturnType<typeof ensureRegionalGraph>}
+ */
+export function ensureRegionalGraphOnce(graph = {}, options = {}) {
+  if (graph && typeof graph === 'object' && /** @type {Record<symbol, unknown>} */ (graph)[ENSURED_BRAND]) {
+    return /** @type {ReturnType<typeof ensureRegionalGraph>} */ (/** @type {unknown} */ (graph));
+  }
+  return ensureRegionalGraph(graph, options);
 }
 
 /**

@@ -104,6 +104,45 @@ function usableTickInterval(interval) {
   return VALID_INTERVALS.has(interval) ? interval : 'one_month';
 }
 
+// performance-scale-5: the PERSISTED pulseRecord.rollExplanations was the only
+// uncapped field in worldState (its siblings — selectedOutcomes / corruptionEvents /
+// factionCaptureEvents — all slice(0, 24)). candidateEvents pushes an explanation for
+// EVERY rolled candidate (passed AND missed) plus every deterministic outcome; at 30
+// settlements with the war/faction lanes on, a tick rolls 100+ candidates (~300B each),
+// so one record reaches 30-50KB and the MAX_HISTORY=80 ring holds 2-4MB — riding every
+// Supabase upsert, localStorage cache write, and undo snapshot. RETENTION: keep every
+// deterministic + every PASSED roll (the meaningful, low-count set an event fired from)
+// and only the FIRST MAX_PERSISTED_MISSED_ROLL_EXPLANATIONS *missed* rolls (the bulk on
+// a busy tick), preserving original order. The cap is far above any golden / realistic
+// per-record count (measured max ~65 missed at 12 settlements × 60 ticks; the cl0 pin
+// captures the RETURN value, not this persisted field), so short-horizon records are
+// byte-identical (nothing dropped). The FULL uncapped set still rides the RETURN value
+// (the tick result → session UI, which renders only 18) — only the PERSISTED copy is
+// bounded.
+const MAX_PERSISTED_MISSED_ROLL_EXPLANATIONS = 48;
+
+/**
+ * Cap the persisted rollExplanations: all deterministic + all passed + the first K
+ * missed, in original order. Byte-identical when the record holds ≤ K missed rolls
+ * (nothing is dropped or reordered).
+ * @param {Array<{ passed?: boolean }>} deterministicExplanations
+ * @param {Array<{ passed?: boolean }>} rollExplanations
+ * @returns {Array<{ passed?: boolean }>}
+ */
+function capPersistedRollExplanations(deterministicExplanations = [], rollExplanations = []) {
+  const combined = [...deterministicExplanations, ...rollExplanations];
+  let missedBudget = MAX_PERSISTED_MISSED_ROLL_EXPLANATIONS;
+  const kept = [];
+  for (const e of combined) {
+    if (e && e.passed === false) {
+      if (missedBudget <= 0) continue;
+      missedBudget -= 1;
+    }
+    kept.push(e);
+  }
+  return kept;
+}
+
 export {
   clone,
   compactNpcPatch,
@@ -112,4 +151,6 @@ export {
   saveId,
   VALID_INTERVALS,
   usableTickInterval,
+  MAX_PERSISTED_MISSED_ROLL_EXPLANATIONS,
+  capPersistedRollExplanations,
 };
