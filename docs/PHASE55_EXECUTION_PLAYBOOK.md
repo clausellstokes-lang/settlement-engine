@@ -67,10 +67,17 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 | FP-2a aiSlice reclaim (first store-slice split) | 715fe7b2 | −2,448 B closure (1,255,965→1,253,517) via the loadEngine pattern: lib/ai.js + narrativeMutations.js (both SOLE-imported by aiSlice, reached only from async actions after the sync prefix) dynamic-imported at their call sites, memoized. NOT the §0.7 eager-stub/body-extraction — that defers each action's sync prefix (set(aiLoading)+abort stamp) and broke F18. Budget UNCHANGED 1,255,985 (headroom now funds M10b+W5). Recorded shift: generateNarrative invoked one microtask later (loadEngine ordering); F18 abort contract intact; 2 F18 tests yield one tick. Goldens store-free ⇒ byte-identical. Gate: full suite 8,259/8,259; verify:dist 18/18 |
 | M10b LIVING/AUTONOMOUS + CAPPED CATCH-UP (mover ladder #10, part b — M10 COMPLETE) | (this commit) | worldProgressionOf/advancesOnOpen accept living/autonomous (validator coercion progression_not_yet_built→progression_unrecognized); CATCH_UP_CAP_WEEKS=26 (owner default). catchUpCampaignWorld: capped whole-week catch-up = N one-week advanceCampaignWorld calls ⇒ DETERMINISM byte-identical to N manual (JSON-equal pin); autonomous auto-resolves / living pauses on a major. NEW PERSISTED STATE worldState.lastLivingAdvanceAt (wall-clock cursor) stamped at store level post-advance, UNDO-restored (pin), legacy/first-open SEEDS (never a 1970 delta), calendar-advances-past-cap. Trigger: WorldPulsePanel useEffect (once/open, Date.now). full_simulation preset lights worldProgression:'autonomous'+commodityFlowEnabled+allyIntelSharingEnabled; UI toggles enabled. +1,376 B eager (NOT +86 — trim available §0.8) → closure 1,254,893 ≤ 1,255,985 (margin 1,092). ⚠️ ACCEPTED preset-reinference drift (autonomous full-sim). Gate: catchUp 6/6; goldens byte-identical; profile pins updated; full suite green; verify:dist 18/18 |
 
+| M11a PESTILENCE (mover ladder #11a; landed via the parallel round-21 stream) | 82ad676b | [LEDGER ROW ADDED RETROACTIVELY 2026-07-13 by the review program — §0.3-7 repair; full contract in `git show 82ad676b`] The traveling plague: epidemic ledger under spatialLedgers (marker-gated, zero eager), materializes the EXISTING plague stressor at each reached settlement; hop-by-hop spread on active trade channels + M2 arrivals; care counterforce reads the institution ROSTER (capped, diminishing); recovery floor (no perma-plague). ⚠️ RECORDED DEFERRAL (was commit-message-only): the four graded plague READ primitives (army hazard/contraction, route hazard, temple pulse) shipped with tests but ZERO consumers — the couplings (quarantine dilemma, army vector, trade refusal) were deferred, not wired. The review program's W-PLUG wave closes this. |
+| M11b CALAMITY (mover ladder #11b — M11 + THE M1–M11 LADDER COMPLETE) | 62c81a0c | [LEDGER ROW ADDED RETROACTIVELY 2026-07-13 — §0.3-7 repair; full contract in `git show 62c81a0c`] Very-rare terrain-keyed instantaneous shock with fully EMERGENT tail (zero new persistent mechanism): seeded annual draw `disaster:${id}:${year}`, subsumption-first strike on K non-required institutions, exodus rides the M4 realized-debit conservation path, cooldown = the permanent calamityHistory stamp. Gates: M11b 30/30; goldens byte-identical; full suite 8,348/8,348; closure 1,254,886 ≤ 1,255,985. ⚠️ STOP-AND-REPORT (owner-gated, standing): `disastersEnabled` is set by NO preset/UI/default — the mover is unreachable until the owner flips one preset line (+20B measured, fits). |
+| Comprehensive review+fix program OPENED (PART 9 grade-check) | 3b80c9ee, 104b1536, eb74cf8c, b4954688 | Fable 5 survey 28/28 agents → docs/COMPREHENSIVE_REVIEW_2026-07-13.md (271 findings, 0 critical); owner ruling: free = $2.99/PDF, premium-only unlimited export; Opus verification + fix waves follow. Live state: docs/COMPREHENSIVE_REVIEW_PROGRAM.md. |
+
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
 - BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
-  FP-R consolidation down-ratchet →1,255,985; never raise without owner). CURRENT closure 1,255,965 =
-  20B margin (post-M10a; MEASURED 2026-07-13). Owner ruling 2026-07-13: FP-2 (store-slice split)
+  FP-R consolidation down-ratchet →1,255,985; never raise without owner). CURRENT closure 1,254,886 =
+  1,099B margin (post-M11b @ 62c81a0c; MEASURED 2026-07-13 — the earlier "1,255,965/20B" figure
+  here was post-M10a and had gone stale against this ledger's own M10b/M11b rows). ⚠️ HEADROOM IS
+  SINGLE-ALLOCATION: §0.8 promises it to W5 (~890B) and the round-21 plan to W2 (+363B) — both do
+  NOT fit (1,253B combined) until the §0.8-1 M10b eager-trim (~800B reclaim) lands first. Owner ruling 2026-07-13: FP-2 (store-slice split)
   RECLAIMS headroom for M10b+W5 rather than a budget raise — see §0.6.0. any-cast ceiling 2252 EXACT
   (fix types, never widen); domain-strict 0/0.
   ⚠️ HEADROOM CRITICAL as of 3.5: only **63 BYTES** free (closure 1,255,937). Wave A MUST stay fully
@@ -158,18 +165,21 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 - ⚠️ MERGE (2026-07-13): claude/phase55-parking-lot MERGED to review-fixes-2026-07-08, which had advanced
   (parallel Round-21 stream: W1 voice sidecars 25003430 + M11a PESTILENCE + their handoff
   docs/PHASE55_ROUND21_BACKLOG_PLAN.md @ 9298b6c4). Clean merge (zero file overlap). The ladder is now at
-  M10 COMPLETE + M11a; M11b (calamity) is that stream's WIP. See §0.8 for the post-merge next steps.
+  M10 COMPLETE + M11a. [UPDATED 2026-07-13: M11b CALAMITY subsequently LANDED at 62c81a0c — the
+  M1–M11 ladder is COMPLETE; ledger rows above.] See §0.8 for the post-merge next steps.
 - FP-2 STORE-SLICE SPLIT (spec): SPECCED + READY (2026-07-13, Opus). Full implementation-ready
   spec at §0.7 (design + byte-identity de-risking + sequence). The ratified shared unblock; lands BEFORE
   M10b/W5 as its own focused wave (FP-2a aiSlice first). No FP-2 code written this session.
 - W5 RE-MERGE: ✅ RULED FP-2-first (§0.6.1) — re-apply after FP-2, no raise; MUST cherry-pick (a direct
   merge reverts the M-ladder, -25,330). Branch 312a5025 reachable via claude/adoring-wescoff-6a25a8
   (NOT amazing-thompson — that worktree was repurposed to claude/elastic-leavitt-50d90e @ d024286e).
-- MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1;
-  Fable-reserved items (checkpoint + final grade-checks, round-21+ design, batched parking-lot
-  adjudication) queue for a Fable session; do NOT self-rule on §0.6 items.
-- NEXT: W5 merge review → Wave A (PART 4) → merges (PART 6) → M1..M10 movers (PART 7) → the Living
-  Realm checkpoint (PART 5, the final everything-on validation) → Phase 6 launch-readiness (PART 8) → launch.
+- MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1.
+  [2026-07-13: FABLE 5 RETURNED — running the PART-9 comprehensive grade-check + review/fix
+  program (the standing Fable-reserved mandate); Opus staffs verification + implementation.]
+- NEXT [REWRITTEN 2026-07-13 — the old pointer routed a successor to waves long landed]: the
+  COMPREHENSIVE REVIEW+FIX PROGRAM is the active desk (docs/COMPREHENSIVE_REVIEW_PROGRAM.md —
+  survey done, Opus verification + fix waves in flight) → then §0.8 (M10b trim → W5 → ratchet-down)
+  → the Living Realm checkpoint (PART 5) → Phase 6 (PART 8) → launch.
 - OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
   catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
 - FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check
@@ -410,8 +420,8 @@ ADJUDICATION (§0.6.0) + F24 AccountPage NUL fix + 5.5-K freeze-first guard + FP
 the merge folded in the PARALLEL session's Round-21 W1 (voice sidecars 25003430) + M11a PESTILENCE + docs
 (their handoff = docs/PHASE55_ROUND21_BACKLOG_PLAN.md @ 9298b6c4 — READ IT; that stream owns the round-21
 backlog + M11). Their work is budget-free/lazy, so the merged closure ≈ this branch's; RE-MEASURE
-verify:dist on the merged tree before trusting any number. ⚠️ src/domain/spatial/calamity.js is that
-session's UNCOMMITTED WIP (M11b) in the main worktree — FOREIGN, do not touch.
+verify:dist on the merged tree before trusting any number. [RESOLVED 2026-07-13: the calamity.js
+"uncommitted foreign WIP" note below is OBSOLETE — M11b LANDED at 62c81a0c; the ladder is complete.]
 
 1. **M10b EAGER-COST TRIM (byte-discipline, ~800 B reclaim)** — M10b landed at +1,376 B, not the +86 B
    estimate, because catchUpCampaignWorld's body sits eager in campaignWorldPulseSlice.js (the hot slice).
@@ -438,8 +448,8 @@ session's UNCOMMITTED WIP (M11b) in the main worktree — FOREIGN, do not touch.
 6. **FP-2b / FP-2c** (§0.7, OPTIONAL) — settlementSlice + campaign-trio dep-import reclaim (same loadEngine
    pattern). Not needed for the endgame; pure further ratchet-down. settlementSlice already uses loadEngine
    for the generator, so its unique reclaim is smaller.
-7. **THE ENDGAME** — per memory/handoff-plan-post-ladder: the mover ladder is now at M10 COMPLETE + M11a
-   (pestilence); M11b (calamity, WIP) + the round-21 backlog continue on the parallel stream, then the
+7. **THE ENDGAME** — per memory/handoff-plan-post-ladder: the mover ladder is COMPLETE (M11b landed
+   62c81a0c); the comprehensive review+fix program + the round-21 backlog continue, then the
    Living-Realm checkpoint SOAKS + everything-on TUNING (next-AI), then the MASTER MERGE (the high-risk item
    — memory/third-lineage-mystifying-ride) + push/deploy.
 

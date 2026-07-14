@@ -1,6 +1,12 @@
 # THE ROUND-21+ BACKLOG PROGRAM — PLAN
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - 2026-07-13 (review program, ledger repair): **M11b CALAMITY LANDED @ 62c81a0c — the M1–M11
+>   ladder is COMPLETE**; every "M11b unbuilt/WIP/blocked" line below is historical. Ruins-as-
+>   artifacts is UNBLOCKED. ⚠️ HEADROOM CROSS-REF: current margin is 1,099B (post-M11b); W2 (+363B)
+>   and W5 (~890B) do NOT both fit until the playbook §0.8-1 M10b eager-trim (~800B) lands — the
+>   two docs previously double-allocated the same margin. The comprehensive review program
+>   (docs/COMPREHENSIVE_REVIEW_PROGRAM.md) now owns sequencing.
 > - Wave 2 (IMPLEMENTED + VALIDATED, ⚠️ BLOCKED on FP-2, pending branch 2f4f7b58) — FEED RETENTION:
 >   arc-aware 240-cap that rescues orphaned major-arc HEADS while preserving the recency window.
 >   seasonsMiniSoak FIXED, goldens byte-identical, feedDistribution re-baselined, sim suite 47/47.
