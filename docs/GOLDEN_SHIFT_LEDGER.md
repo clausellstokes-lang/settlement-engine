@@ -648,3 +648,178 @@ disable on a random/custom settType (pipeline-4); (d) drives `priorityMagic > 75
 town+ (domain-5); (e) mints a politically_fractured/succession bloc faction (domain-7); (f) generates
 in an east_asian/mesoamerican culture (content-immersion-4); or (g) once STOP-AND-REPORT domains
 2/4/6 and 1+dt3 land, per their own shift conditions.
+
+---
+
+# GOLDEN SHIFT LEDGER — G2R "GENERATION-COHERENCE REMAINDERS"
+
+Wave: G2R (same golden-shifting branch `claude/review-fix-golden-track`, built on G2 @ ec69513e).
+The four coherent remainders G2 stop-and-reported, each built in its own read-edit-pin cycle:
+[generators-domain-2] structural-NPC resolver · [generators-domain-4] dual food model ·
+[generators-domain-6] timeline variety · [generators-domain-1 + data-tables-3] stress-type content wave.
+
+MEASUREMENT METHOD (isolation baseline): before ANY G2R edit, the generator-golden manifest was
+regenerated at HEAD ec69513e and saved as an off-tree baseline (the "HEAD baseline" — it already
+bakes in the full G1a–G2 cumulative shift). Each fix's MARGINAL drift below is a diff of a fresh
+`UPDATE_GOLDEN=1` regen against that HEAD baseline, so the per-fix config counts are additive on top
+of G2's 134, not re-counts of it. The on-disk manifest is left BYTE-IDENTICAL (reverted after every
+measurement) for the owner's single batched regen.
+
+## THE SHIFT MAP (marginal, vs the HEAD baseline)
+
+- **[generators-domain-2] structural-NPC resolver (GOLDEN-SHIFTING, 102 of 187 configs).** Buckets:
+  tier {town 42, hamlet 28, city 12, village 12, metropolis 8}; terrainOverride {coastal 20, plains 18,
+  mountain 16, riverside 16, forest 12, desert 8, hills 8, auto 4}. `thorp` = 0 drift (thorps carry no
+  `powerStructure.factions`, so synthesis falls back to the misclassifying grouping list and stays inert
+  — unchanged from before). SEMANTIC CAUSE: the resolver was mostly-broken. `ensureFactionStructuralNpcs`
+  walked `settlement.factions` — the NPC-GROUPING list ("The Commercial Circle") whose names classify as
+  `other` — and deduped on exact role string + faction id, neither of which lines up with a realized
+  seat-holder (role names differ: 'Watch Captain' vs 'Guard Captain'; the grouping id is not the
+  seat-holder's factionAffiliation). Net: it synthesized DUPLICATES beside realized leaders AND missed
+  genuinely-unled offices (e.g. thorp/plains seed 23760 minted "The High Priestess" beside a realized
+  Deacon/Curate; seed 95031 minted a duplicate Guildmaster and MISSED the unled Religious Authorities
+  seat). The fix reads the authoritative `powerStructure.factions` seats (which carry a classifying
+  `category`), dedups by OFFICE-EQUIVALENCE on the role-KEY (temple/watch/merchant/thieves/noble/arcane)
+  via each realized NPC's affiliation-archetype + a `ROLE_KEY_SYNONYMS` leadership-title fallback, and
+  synthesizes a placeholder only for an uncovered office (one per role-key, so a 2nd economy seat does
+  not re-synthesize). Synthesized NPCs now carry `factionAffiliation = seat.faction` (belongs to its
+  seat + makes re-runs idempotent). Empirical after the fix: 294/504 settlements synthesize (462 NPCs),
+  ZERO watch placeholders beside a realized Guard Captain, ZERO duplicate offices. Pins:
+  `factionStructuralOfficeCoverage.test.js` (6). JUDGMENT: chose to walk `powerStructure.factions`
+  rather than the ledger's suggested "keep grouping-walk" — the groupings provably misclassify (town
+  groupings → `other`), so a grouping-walk resolver never resolves; the seats are the only reliable
+  office source. Say "veto" to flip it. The `ROLE_KEY_SYNONYMS` table is coverage-only (can suppress a
+  duplicate, never force a synthesis) and lists only UNAMBIGUOUS leadership titles (Miller/Blacksmith/
+  Healer/Lieutenant deliberately omitted).
+
+- **[generators-domain-4] dual food model — single-writer reconcile (GOLDEN-SHIFTING, DOMINANT driver:
+  all 187 configs).** The cumulative Fix-1+Fix-2 drift is 187/187 (every tier, every terrain incl.
+  thorp which Fix-1 left inert); Fix-2 is the dominant driver and SUBSUMES Fix-1's 102-config set.
+  SEMANTIC CAUSE: there were TWO food models. `generateFoodSecurity` (economicState.foodSecurity —
+  feeds prosperity + the tick foodStockpile) and `deriveFoodBalanceAnalysis` (the viability foodBalance,
+  baked into every settlement via generateNarratives, read by the paid Viability tab + PDF)
+  independently recomputed production/need/deficit with a DIFFERENT terrain-agri source
+  (`terrain.agricultureCapacity` from TERRAIN_DATA vs foodGenerator's own `TERRAIN_AGRI` map), a
+  DIFFERENT magic model (isMagicHighTier +0.3 agriMod boost vs magicSupplement fraction), and — in
+  foodSecurity ONLY — seeded ±8% crop-fortune variance. So for the same settlement they could disagree
+  on the deficit SIGN (one surplus, one deficit). THE FIX (Alt C, CONTRADICTION KILLER done as a view):
+  `deriveFoodBalanceAnalysis` now takes the canonical foodSecurity (threaded from viability.js:488 via
+  `economicState.foodSecurity`); when present, its dailyProduction/dailyNeed/deficit REPLACE the local
+  recompute, the issue/warning branches key off the canonical numbers, and the import/magic attribution
+  is rebuilt so `importCoverage + magicFoodOffset === rawDeficit − deficit` EXACTLY. It reads an
+  already-computed object → draws NO rng (crop-fortune was rolled once at economicState time), so the
+  fix is rng-neutral; the shift is because every settlement's baked foodBalance now carries the
+  canonical cropFortune-bearing numbers the old independent model lacked. Empirical after the fix
+  (756-settlement sweep): 0 deficit-sign disagreements, 0 production/need magnitude disagreements, 0
+  attribution-sum inconsistencies. The no-foodSecurity FALLBACK path is byte-identical to the legacy
+  local model (hoisted caster booleans reproduce the same local offset; `importChannelLabel` gated on
+  `importCoverageFinal > 0` reproduces the old `!canImportFood` gate). Files: foodBalance.js (signature
+  + reconcile), viability.js (threads foodSecurity). Pins: `foodModelSingleWriter.test.js` (5).
+  JUDGMENT: chose foodSecurity as canonical (it is the model that already feeds prosperity + tick
+  foodStockpile, and is already in the golden) and threaded it in rather than (Alt A) a full rewrite
+  moving custom-food + magic-high-tier INTO foodSecurity, or (Alt B) adding a deficit-lbs field to
+  foodSecurity's persisted shape — both higher blast radius. Say "veto" to flip it. DEFERRED (ledgered,
+  not a bug to re-find): the import/magic attribution SPLIT is a local estimate reconciled to sum to
+  the canonical gap; the deeper unification (foodSecurity emitting its own importCoverage/magicOffset
+  lbs so the split is canonical too) is left for the owner-gated full rewrite. The viability-only
+  concepts foodBalance still computes locally (custom food producers/consumers, isMagicHighTier boost)
+  no longer affect the deficit — they are dead-ish inputs pending that rewrite; NOT excised (removing
+  owner-tuned constants is owner-gated).
+
+- **[generators-domain-6] timeline variety (GOLDEN-SHIFTING, independently broad — every config with
+  age > 0; subsumed by Fix-2's 187/187 cumulative).** SEMANTIC CAUSE: two variety defects. (1) The
+  main loop mapped a picked history CATEGORY to a template via `HISTORICAL_EVENTS_DATA.find()` — the
+  FIRST match — so a category ALWAYS emitted the same arc (e.g. every economic slot → 'The Economic
+  Divide'); no within-category variety. (2) Each event carried the CATEGORY as its `.type` and the
+  final dedup keyed on `.type`, capping every settlement at ~one event per category (~8 total), so
+  city/metropolis could NEVER reach their 12/20 event budget however old they were. THE FIX: the
+  typeMap is hoisted to a module-scope `TIMELINE_CATEGORY_TYPES` (exported); the find() is replaced
+  by a SEEDED pick among all still-unused matching templates (variety + a re-picked category adds a
+  DISTINCT arc); every event now carries a stable `templateType`; the final dedup keys on
+  `templateType` (two different arcs in one category both survive) with a second guard that also drops
+  any event whose rendered NAME already appeared (preserving the cross-type title-collision guard for
+  the resource events, e.g. 'The Arcane Incident' shared with magical_controversy). CONTENT: 10 new
+  templates authored in historyData.js in the house voice — market_crash/trade_collapse (economic),
+  great_fire/plague_years/great_flood (disaster), heresy_trial/pilgrimage_surge (religious),
+  popular_uprising/tyranny (political), wild_magic (magical) — with unique EVENT_TYPE_NAMES titles;
+  they deepen the thin disaster/religious/magical pools (1→4/3/2) so the reachable distinct pool is
+  ~25 (was 15). Empirical after the fix: economic arcs 1→9 distinct titles; metropolis max events
+  ~8 → 18 over 400 seeds; 0 duplicate-title-within-timeline violations; same-seed determinism holds.
+  The seeded pick DRAWS `_rng()` where find() drew none — this is the broad shift (rng-order change +
+  new content). REMAINING LIMITER (ledgered, not a bug): the exact 20 cap is now gated by the
+  AGE-driven `rawEventCount = floor(age/60 × randInt(1,3))`, not the template pool — reaching 20
+  needs age ≳ 400; the pool no longer caps it (the register's "reachable" concern — the ~8 dedup cap
+  — is removed). Files: historyGenerator.js, historyData.js. Pins: `timelineVariety.test.js` (5,
+  incl. a structural walker asserting every category type is a real template with a title). JUDGMENT:
+  uniform seeded pick among a category's templates (templates carry no per-arc weights) — the
+  "weighted-pick" of the plan is satisfied by the existing category weighting upstream; a per-template
+  weight would be invented tuning. Say "veto" to flip it. NOTE: `templateType` now appears on
+  `history.historicalEvents[]` (internal-ish arc id, part of the intended shift); the mapped
+  `eventsTimeline[]` still carries only year/yearsAgo/name/type/anchored.
+
+- **[generators-domain-1 + data-tables-3] the stress-type content wave (GOLDEN-SHIFTING; subsumed by
+  the 187/187 cumulative — the 5 newer types fire in the probabilistic golden roll).** SEMANTIC CAUSE:
+  the 5 newer stress types (insurgency, mass_migration, wartime, religious_conversion, slave_revolt)
+  were registered in STRESS_TYPE_MAP/STRESS_TYPE_META and wired into the display/pulse layers, but
+  HALF-INTEGRATED in generation: no arrival vignette, no institutional secrets, no probability
+  coupling, no NPC/history/severity/flavor weighting, and their tension targets (legitimacy_crisis/
+  demographic_pressure/trade_dispute) had NO template so `HISTORICAL_EVENTS_DATA.find()` returned
+  undefined and the tension was silently dropped. THE FIX authored, for all 5 types:
+  - STRESS_DESCS: 4 arrival vignettes each, opening ON the stress (a slave-revolt town opens on shut
+    gates, an auction platform ringed by guards, and bodies carried through the streets — not market
+    day). (narrativeGenerator.js)
+  - STRESS_INSTITUTION_EFFECTS: 6 authored {secret, stakes} rows each (30 rows) at the existing 10
+    types' register bar, using the {npc}/{faction}/{commodity} token vocabulary. (stressTypes.js)
+  - probability coupling in buildStressContext: insurgency↔weak governance (hollow garrison + poor
+    economy), mass_migration↔trade-route connectivity, wartime↔hostile neighbour + frontier posture,
+    religious_conversion↔a faith worth contesting (religion priority + a church), slave_revolt↔the
+    extractive economy that invites it (economy+criminal priorities; suppressed absent it). All
+    deterministic multipliers (no rng), bounded by the existing Math.min(prob, 0.35) ceiling.
+    (stressGenerator.js)
+  - the SEVEN weight tables: npcGenerator STRESS_BOOSTS / STRESS_SECRET_BOOSTS / STRESS_MANDATORY_ROLES
+    / STRESS_TO_CATEGORY, historyGenerator STRESS_BOOSTS, stressGenerator STRESS_SEVERITY_WEIGHT
+    (wartime 8, slave_revolt 7, insurgency 6, religious_conversion 5, mass_migration 4), settlementNarrative
+    STRESS_FLAVOR — plus census-surfaced STRESS_GOALS (npcGenerator) and STRESS_NOTES (narrativeGenerator).
+  - 3 tension templates authored (legitimacy_crisis 'The Mandate', demographic_pressure 'The Influx',
+    trade_dispute 'The Trade Dispute') in HISTORICAL_EVENTS_DATA + EVENT_TYPE_NAMES, so STRESS_TO_TENSION
+    now resolves for every type. (historyData.js)
+  STRUCTURAL PREVENTION: `tests/data/stressTypeRegistration.test.js` — the STRESS-TYPE REGISTRATION
+  MANIFEST WALKER. It asserts every STRESS_TYPE_MAP key is present in each consuming table (exported
+  tables by import; function-local tables by a brace-matched source-scan), that buildStressContext
+  references every type, and that every STRESS_TO_TENSION target resolves to a real template with a
+  title — with an explicit, source-verified EXEMPTIONS map (SUPPRESSOR_KEYWORDS = institution-suppressed
+  types only; STRESS_STATUS = UI display partial-by-design; STRESS_GOAL_OVERRIDES = new-types-only layer).
+  The walker CAUGHT a PRE-EXISTING gap on its first run — STRESS_GOALS never had `politically_fractured`
+  or `infiltrated` — now filled. 3 module-scope tables were exported (STRESS_DESCS, STRESS_FLAVOR,
+  STRESS_SEVERITY_WEIGHT) and STRESS_TO_TENSION hoisted to module scope + exported to make them walkable
+  (behavior-identical; pure data). Pins: `stressTypeContentWave.test.js` (7 — every type generates
+  coherently, arrival opens on-theme, coupling responds + stays ≤0.35, slave-revolt needs its economy,
+  determinism). JUDGMENT: slave_revolt reads its "extractive economy" from PRIORITIES, not an institution
+  name-match — an institution `instNames.some(...includes('slave'))` would have added a fuzzy label-join
+  site the `labelJoins` shrink-only ratchet forbids, and slave-market institutions are rare in generation
+  anyway; the priority signal is the reliable one. Say "veto" to flip it. TUNING NOTE (one-time
+  distribution shift): insurgency's criminal coupling was moderated (criminal>60 ×1.2 rather than
+  criminal>55 ×1.5) so the new probability coupling does not push `captureBirthScale`'s criminal-extreme
+  full-capture rate past its 10% guardrail via the rng cascade — the pin holds at its existing bound.
+
+## Constitutional checks (this wave)
+
+- `node scripts/count-domain-any.mjs` → **2252 holes (2213 any + 39 suppress)** — EXACT, ratchet held.
+  (G2R touched only generators/data + tests — no domain type surface changed.)
+- `npm run typecheck:domain:strict` → **0 errors** (ceiling 0).
+- `npx eslint` on all touched source + new test files → clean.
+- `npx vitest run tests/generators/ tests/joins/` → **95 files, 829 tests passed**.
+- `npx vitest run tests/domain/` → **369 files, 4664 tests passed**.
+- 4 new G2R pin files + 1 walker → 33 tests passed; existing stress/history/food tests green.
+- Property reds: exactly TWO — `generatorGoldenMaster` (the intended 187-config cumulative shift, this
+  ledger; manifest left byte-identical for the owner's batched regen) and `worldpulseSpatialGolden
+  sp-a|4|one_week` (the PRE-EXISTING G1d pact-cooldown red, NOT a G2R artifact).
+
+## Conditions under which a FUTURE golden will legitimately shift (for the next session)
+
+Beyond the cumulative 187 (which is now ALL corpus configs), a new/extended golden fixture continues to
+shift per G2's conditions (a–g), plus the G2R additions: (h) any settlement that synthesizes a structural
+office-holder (domain-2 — nearly all with a powerStructure); (i) ANY settlement at all (domain-4 — the
+viability foodBalance now mirrors the cropFortune-bearing foodSecurity); (j) any settlement with age > 0
+(domain-6 — the seeded timeline pick + new templates); (k) any settlement whose probabilistic roll fires
+one of the 5 newer stress types, now that they carry full generation content + coupling (domain-1/dt3).

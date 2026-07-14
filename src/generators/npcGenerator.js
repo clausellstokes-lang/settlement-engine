@@ -138,6 +138,11 @@ const computeNPCWeights = (config = {}, institutions = []) => {
       plague_onset: { religious: 2.5, other: 1.8, military: 0.7 },
       succession_void: { government: 2.5, military: 1.5, criminal: 1.3 },
       monster_pressure: { military: 2, other: 1.3, economy: 0.8 },
+      insurgency: { government: 2, military: 1.4, criminal: 1.6 },
+      mass_migration: { economy: 1.6, other: 1.8, criminal: 1.3 },
+      wartime: { military: 2.5, government: 1.5, economy: 1.2 },
+      religious_conversion: { religious: 2.5, government: 1.3, other: 1.3 },
+      slave_revolt: { military: 2, criminal: 1.5, government: 1.4 },
     };
     const boosts = STRESS_BOOSTS[primaryStress] || {};
     Object.entries(boosts).forEach(([cat, mult]) => {
@@ -401,6 +406,125 @@ const generateNPCRelType = (role, category = 'other', config = {}) => {
         driven_by: 'military',
       },
     ],
+    politically_fractured: [
+      {
+        short: 'Keep the settlement functioning while the factions fight over who controls it',
+        long: 'Be the one still standing when the fracture finally resolves',
+        driven_by: 'political',
+      },
+      {
+        short: 'Position their own faction to win the split outright',
+        long: 'Turn the paralysis into a permanent advantage for their side',
+        driven_by: 'political',
+      },
+      {
+        short: 'Broker between the factions without being seen to take a side',
+        long: 'Become indispensable to whichever side finally prevails',
+        driven_by: 'personal',
+      },
+    ],
+    infiltrated: [
+      {
+        short: 'Identify the infiltrator before the damage becomes irreversible',
+        long: 'Restore the settlement to a state where trust is possible again',
+        driven_by: 'protection',
+      },
+      {
+        short: 'Exploit the climate of suspicion to remove a rival under cover of the hunt',
+        long: 'Come out of the paranoia with more power than they went into it with',
+        driven_by: 'political',
+      },
+      {
+        short: 'Protect someone already suspected before the accusation hardens into a verdict',
+        long: 'Keep the search for real infiltrators from curdling into a purge',
+        driven_by: 'justice',
+      },
+    ],
+    insurgency: [
+      {
+        short: 'Restore the authority to collect and govern without provoking open revolt',
+        long: 'Hold the settlement together long enough to be seen as the one who held it',
+        driven_by: 'political',
+      },
+      {
+        short: 'Identify who inside the institutions is feeding the insurgency',
+        long: 'End the rising in a way that leaves the current order standing',
+        driven_by: 'military',
+      },
+      {
+        short: 'Position themselves to survive whichever side prevails',
+        long: 'Come out of this with their office — or a better one — intact',
+        driven_by: 'personal',
+      },
+    ],
+    mass_migration: [
+      {
+        short: 'Absorb the new arrivals into the labour market before resentment turns to violence',
+        long: 'Make the changed settlement work rather than merely survive the change',
+        driven_by: 'protection',
+      },
+      {
+        short: `Corner the ${commodity || 'grain'} and housing the newcomers cannot do without`,
+        long: 'Turn the churn of people into a lasting private advantage',
+        driven_by: 'wealth',
+      },
+      {
+        short: 'Decide who is admitted and who is turned away, and be owed for each choice',
+        long: 'Become the person every arrival and every old family must go through',
+        driven_by: 'political',
+      },
+    ],
+    wartime: [
+      {
+        short: `Meet the requisition for ${commodity || 'supplies'} without stripping the settlement bare`,
+        long: 'Keep the settlement standing until the war that is draining it ends',
+        driven_by: 'protection',
+      },
+      {
+        short: 'Secure the war contracts before a rival does',
+        long: 'Come out of the war richer than the peace could ever have made them',
+        driven_by: 'wealth',
+      },
+      {
+        short: 'Fill the conscription quota while keeping the people who matter to them out of it',
+        long: 'Protect their own through a war that spares no one else',
+        driven_by: 'personal',
+      },
+    ],
+    religious_conversion: [
+      {
+        short: 'Settle the contest between the faiths before it splits every institution in two',
+        long: 'Be remembered as the one who chose right when the faith itself was in question',
+        driven_by: 'political',
+      },
+      {
+        short: 'Secure the endowments and properties of the old faith before they are lost in the confusion',
+        long: 'Turn a crisis of belief into a permanent hold on what the belief once owned',
+        driven_by: 'wealth',
+      },
+      {
+        short: 'Protect the adherents of the losing faith from the reprisals now beginning',
+        long: 'Keep their conscience and their position, and refuse to choose between them',
+        driven_by: 'justice',
+      },
+    ],
+    slave_revolt: [
+      {
+        short: 'End the revolt without a suppression the settlement cannot recover from',
+        long: 'Preserve the settlement — and, if possible, their own soul along with it',
+        driven_by: 'protection',
+      },
+      {
+        short: `Restore the labour the ${topFaction || 'ruling faction'} depends on, by force or by terms`,
+        long: 'Put the old order back together before anyone questions whether it should be',
+        driven_by: 'political',
+      },
+      {
+        short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer',
+        long: 'Stop the killing on both sides, whatever it costs them personally',
+        driven_by: 'justice',
+      },
+    ],
   };
 
   // 40% chance to use a stress-specific goal
@@ -469,6 +593,11 @@ const generateFactionLeader = (_category = 'other', config = {}, institutions = 
       plague_onset: { personal: 2.5, religious: 2, criminal: 2, economic_betrayal: 1.5 },
       succession_void: { political: 3, family: 2.5, criminal: 1.8, historical: 1.5 },
       monster_pressure: { military: 2.5, personal: 2, historical: 1.5, magical: 1.3 },
+      insurgency: { political: 3, military: 2, criminal: 2, identity: 1.8 },
+      mass_migration: { identity: 2.5, personal: 2, criminal: 1.8, historical: 1.5 },
+      wartime: { military: 3, political: 2, economic_betrayal: 1.8, personal: 1.5 },
+      religious_conversion: { religious: 3, political: 2, historical: 1.8, family: 1.5 },
+      slave_revolt: { political: 2.5, military: 2.5, criminal: 2, identity: 2 },
     };
     stresses.forEach(stress => {
       const boosts = STRESS_SECRET_BOOSTS[stress] || {};
@@ -524,6 +653,11 @@ const generateCharacterTitle = (category = 'other', config = {}, usedTitles) => 
       plague_onset: 'religious',
       succession_void: 'government',
       monster_pressure: 'military',
+      insurgency: 'government',
+      mass_migration: 'economy',
+      wartime: 'military',
+      religious_conversion: 'religious',
+      slave_revolt: 'military',
     };
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
@@ -1530,6 +1664,11 @@ export const generateNPCs = (settlement, culture = 'germanic', config = {}) => {
     plague_onset: ['Healer', 'Parish Priest'],
     succession_void: ['Council Member', 'Chief Magistrate'],
     monster_pressure: ['Garrison Commander', 'Retired Adventurer'],
+    insurgency: ['Chief Magistrate', 'Corrupt Official'],
+    mass_migration: ['Guild Master', 'Healer'],
+    wartime: ['Garrison Commander', 'Guild Master'],
+    religious_conversion: ['Parish Priest', 'Council Member'],
+    slave_revolt: ['Garrison Commander', 'Guard Captain'],
   };
 
   const tierRoles = TIER_MANDATORY_ROLES[tier] || [];
