@@ -280,7 +280,7 @@ usage-telemetry merge (owner) → numeric prices + wallClockNow cleanup → TRAC
 bridge: owed work AND Surveyor's foundation). EXPANSIONS (owner-sequenced after fixes), TWO
 PARALLEL LANES after the owed work: ENGINE LANE — E0 pacing governor → E1 generosity engine
 (relief→credit→reconstruction→boom/bust→purchase→overture→flourishing) → W-PEACE (~3 waves) →
-W-DOCTRINE ∥ DISPLAY LANE — SM-1→SM-3 THE SETTLEMENT MAP (owner-commissioned 2026-07-14, design
+W-DOCTRINE (+DESIGN_INFORMATION_STATECRAFT verbs/credibility — frozen 2026-07-14; named-tie hooks per DESIGN_COHESION_WEAVE §G ship piecewise inside E1/W-PEACE/W-DOCTRINE) ∥ DISPLAY LANE — SM-1→SM-3 THE SETTLEMENT MAP (owner-commissioned 2026-07-14, design
 frozen: DESIGN_SETTLEMENT_MAP.md — library-only [Dossier|Map] toggle, deterministic dossier
 projection, hover=institution, cosmetic edits in settlement.mapEdits; pre-build gates: world-pulse
 blob-preservation trace + chunk-mint budget measurement). Both lanes before E2 Surveyor

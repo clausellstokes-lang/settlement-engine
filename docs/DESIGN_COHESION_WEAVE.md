@@ -174,3 +174,74 @@ chronicle narrates rise and fray in plain fiction — descriptive always ("Thorn
 tributaries"), christened only by the DM. Pins: the pattern-read derives with zero persisted
 state; a center succession opens measurable defection; the encirclement coalition forms against
 a ≥K center under the same seed; term expiry without renewal shrinks the cluster.
+
+## G. NAMED TIES AS PRIVILEGED EDGES (owner-commissioned 2026-07-14 — cross-settlement NPC relationships in the five-domain weave)
+
+### G.0 The one law
+The sim already carries cross-settlement NPC relationships (the inter-settlement relationship
+links maintained by the library's rename/persist cascade, plus the Lane-2 canon-relationship
+verbs the DM declares). Their treatment in the weave is a single sentence: **named ties are
+privileged edges and bounded modulators — never actors.** The constitutional line (no named
+character's fate is ever resolved by the machine) does the design work: ties cannot DRIVE the
+five domains, but they are the perfect instrument for TEXTURING them — they carry information,
+dampen wars, select mediators, deepen gratitude, and route trade, all as small clamped weights
+with the tie cited as the receipt.
+
+### G.1 Per-domain hooks (each lands with its host wave)
+- **INFORMATION (→ W-DOCTRINE, with DESIGN_INFORMATION_STATECRAFT):** a tie is a private
+  channel — a low-latency, high-fidelity edge in the rumor network for that settlement pair
+  ("word came through the miller's cousin at Thornwall"), bypassing road-hop staleness for what
+  that household would plausibly know. Symmetrically it is the LEAK SURFACE: a settlement's
+  secrecy posture (§2.2 of the statecraft doc) is degraded in proportion to its outbound tie
+  density — kin talk across borders, and HIDE must price that honestly. Tie channels carry the
+  NAMED party's credibility, not the court's.
+- **WAR (→ W-PEACE/W-DOCTRINE):** cross-border ties generate war reluctance — a bounded,
+  people-held term in the casus/appetite math (kin across the lines = desertion pressure,
+  cold feet at the muster, merchants who won't provision the column). War STRAINS ties (a
+  relationship-state transition on the tie's own ledger — strain, not death; the engine never
+  kills the brother). Atrocities against a tied settlement multiply the grievance through the
+  tie (it happened to THEIR kin — personal, people-held, slow to decay).
+- **PEACE (→ W-PEACE):** the peace engine's cross-pressured mediator is GROUNDED here — the
+  natural broker is the settlement whose named people bridge both courts, and mediator scoring
+  reads bridging-tie density + the tied parties' credibility. Peace pressure accumulates through
+  ties ("the courts' kin pressed for it" — a typed peace reason with named receipts). Marriage/
+  hostage terms remain house-level prose per the standing ruling: the tie RECORDS the
+  relationship the treaty created; the persons stay the storyteller's.
+- **TRADE (→ NUMERIC PRICES + the §A trade parity lane):** routes preferentially FORM and
+  PERSIST along kinship/partnership lines (diaspora economics — the cousin's warehouse is the
+  beachhead), a small prior in route-formation EV and a stickiness term against route decay.
+  Tie-linked pairs get a haggling-friction discount the price voice can cite ("old partners;
+  the rate is kind").
+- **GENEROSITY (→ E1, THE FIRST CONSUMER):** the engine's first law gates on relationship AND
+  history — ties add MICRO-HISTORY: a people-held gratitude/grievance ledger at tie grain
+  (your caravan master owes their harbormaster) that feeds the settlement-level bond as a
+  bounded contribution. Generosity acts THROUGH a tie bind faster (the widow's-mite math knows
+  the gift traveled a named road); refusals THROUGH a tie wound deeper (it was kin who was
+  turned away).
+
+### G.2 The guardrails (what keeps this constitutional and sane)
+1. **Clamped aggregate:** total named-tie influence on any single decision is capped (house
+   clamp idiom) — a dense web should visibly matter; a single friendship must never overturn
+   strategy. The cap is a tuning rail candidate (display-band class), never auto-shifting sim
+   math.
+2. **State, never fate:** the engine mutates tie STATE only (warm/strained/dormant, each with
+   decay clocks) — never existence, residence, life, or love. Creation and destruction of ties
+   belong to generation, the DM's canon verbs, and prose-that-never-mints-canon.
+3. **People-held by default:** tie effects tag people-held (succession does not launder a
+   kin-grievance); the seat-held component exists only where the tie itself is institutional
+   (guild charter partnerships).
+4. **Receipts:** every tie contribution is a typed reason with the tie named — legibility is
+   the point ("why did the war stall? — three houses straddle that border, and the levies
+   dragged their feet").
+5. **Endogeneity + party law:** DM-declared ties are inputs like any canon op; party-member
+   relationships NEVER feed the math (the party observes; endogeneity law 4 applies to ties
+   exactly as to everything else).
+6. **Dormancy:** tie-modulation state nests under the existing ledger namespaces, absent ⇒
+   byte-identical; lights per-domain with each host wave's gate.
+
+### G.3 Sequencing (why this froze today)
+This is the highest-density coherence idea left on the board — it touches all five domains — so
+it freezes BEFORE E1 builds: E1's bond-gating math is its first consumer (G.1's generosity
+hook), W-PEACE's mediator scoring its second, W-DOCTRINE's channels/leaks its third. Each host
+wave's brief points here; no separate build wave exists — §G ships piecewise inside its hosts,
+which is exactly how a modulation layer should land.

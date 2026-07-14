@@ -114,3 +114,7 @@ as wave W-DOCTRINE, or interleaves with E1c. Its coherence-matrix rows (per the 
 completeness rule): information ✓ (web read + pattern legibility), trade ✓ (the web IS trade),
 factions ✓ (archetype instrument choice), alignment ✓ (atrocity drift), deity ✓ (via stance-
 colored alliances), relations ✓ (collateral diplomacy, reputation), generosity ✓ (the counter).
+2026-07-14 addendum: the information row's ACTION half (SEE/HIDE/LIE/SHARE verbs, credibility
+stock, postures) is now fully designed in DESIGN_INFORMATION_STATECRAFT.md and BUILDS IN THIS
+SAME WAVE (W-DOCTRINE) — the two docs share the covert machinery and the gate. Named-tie
+channels/leaks ride DESIGN_COHESION_WEAVE §G.
