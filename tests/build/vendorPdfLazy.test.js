@@ -289,11 +289,15 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // distanceRead home recovers the full reclaim.
 // MEASURED 1,255,921 (same 7 chunks), a 62 B reclaim from the pre-wave 1,255,983.
 // Budget lowered 1,256,000 → 1,255,985 — locking in the reclaim while RESERVING a
-// ~64 B working margin (1,255,985 − 1,255,921) for the incidental (non-ledger)
-// eager costs of the remaining movers M4-M10, deliberately NOT ratcheting to the
-// bone (M3 once hit a +49 B Rollup chunk-graph artifact; this margin absorbs one).
-// Monotone-down thereafter.
-const CLOSURE_BUDGET_BYTES = 1_255_985;
+// RATCHETED DOWN 2026-07-14 (1,255,985 → 1,216,350) after FP-G1: the stressors
+// leaf split took the heavy evaluation machinery (stressors/stressorDynamics/
+// stressorGates/foodStockpile, −51,655 B minified) out of first paint — the four
+// eager consumers only ever used the light catalog surface. Measured closure at
+// the ratchet: 1,216,273 (unified post-merge tip); ~77 B working margin keeps the
+// house anti-brittleness posture (a Rollup chunk-graph artifact once cost +49 B).
+// History: 1,441,000 → 1,256,000 (FP-1) → 1,255,985 (FP-R) → 1,216,350 (FP-G1).
+// Monotone-down only; raises are owner-signed, never incidental.
+const CLOSURE_BUDGET_BYTES = 1_216_350;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
