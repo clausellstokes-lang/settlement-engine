@@ -227,7 +227,15 @@ export function killNpc(npc, eventId) {
  * @returns {{ npc: NpcStructural, restorations: Array<{instId: string, impairment: Impairment}>, recoveryQuality: number }}
  */
 export function assignNpcToRole({ npc, institutionId, role, quality, factionAlignment, importance, influence, eventId }) {
-  const updated = createNpc({
+  // createNpc computes the DEFAULTED structural fields (id, status, role,
+  // importance, linked ids, contributions), but its return carries ONLY those 13
+  // fields — so building the appointee from it alone lobotomized a rich pipeline
+  // NPC (personality/physical/secret/goal/plotHooks/category/factionAffiliation/
+  // structuralPosition/corruption) and destroyed any DM _userEdits/_authored.
+  // domain-top-1: overlay the structural fields onto the ORIGINAL npc so the
+  // successor's full character sheet + user edits survive; only the fields the
+  // assignment legitimately changes are updated.
+  const structural = createNpc({
     ...npc,
     status: 'active',
     role: role || npc?.role,
@@ -240,6 +248,7 @@ export function assignNpcToRole({ npc, institutionId, role, quality, factionAlig
       ? dedupeIds([...(npc?.linkedFactionIds || []), factionAlignment])
       : (npc?.linkedFactionIds || []),
   });
+  const updated = { ...npc, ...structural };
 
   /** @type {Array<{instId: string, impairment: Impairment}>} */
   const restorations = [];

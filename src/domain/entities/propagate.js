@@ -22,6 +22,32 @@
  */
 
 import { withImpairment } from './status.js';
+import { factionArchetype } from '../factionArchetypes.js';
+
+// domain-top-3: institution catalog category → canonical faction archetype. Used
+// only as the DOCUMENTED FALLBACK when a faction carries no explicit
+// controls/funds/staffs/protects link to an institution — a faction whose
+// archetype matches the institution's category then takes a low default
+// impairment ('the granary burned → the controlling merchant faction suffers').
+// Categories with no clean faction counterpart (Infrastructure/Adventuring/
+// Entertainment/Exotic) are intentionally omitted so the fallback never fires
+// spuriously. Explicit link lists always win.
+/** @type {Record<string, string>} */
+const INSTITUTION_CATEGORY_ARCHETYPE = Object.freeze({
+  religious: 'religious',
+  defense: 'military',
+  criminal: 'criminal',
+  government: 'government',
+  magic: 'arcane',
+  crafts: 'craft',
+  economy: 'merchant',
+});
+
+/** @param {{ category?: string } | null | undefined} inst @returns {string|null} canonical archetype for an institution's category */
+function institutionCategoryArchetype(inst) {
+  const cat = String((inst && inst.category) || '').trim().toLowerCase();
+  return INSTITUTION_CATEGORY_ARCHETYPE[cat] || null;
+}
 
 /** @typedef {import('./status.js').Impairment} Impairment */
 /** @typedef {import('./status.js').ImpairmentType} ImpairmentType */
@@ -38,6 +64,7 @@ import { withImpairment } from './status.js';
  * @property {string=} id
  * @property {string=} name
  * @property {string=} status
+ * @property {string=} category
  * @property {Impairment[]=} impairments
  */
 
@@ -293,14 +320,18 @@ function findLinkedEntities(settlement, node) {
   // used everywhere a faction lookup happens.
   const factions = factionsList(settlement);
   if (node.entityType === 'institution') {
+    // Look up the institution so the archetype-match fallback (domain-top-3) can
+    // compare the faction's archetype against this institution's category.
+    const inst = (settlement.institutions || []).find(i => instId(i) === node.entityId);
+    const instArchetype = institutionCategoryArchetype(inst);
     for (const f of factions) {
-      const strength = factionInstitutionStrength(f, node.entityId);
+      const strength = factionInstitutionStrength(f, node.entityId, instArchetype);
       if (strength > 0) out.push({ targetType: 'faction', targetId: factionId(f), strength });
     }
   } else if (node.entityType === 'faction') {
+    const fac = factions.find(f => factionId(f) === node.entityId);
     for (const i of settlement.institutions || []) {
-      const fac = factions.find(f => factionId(f) === node.entityId);
-      const strength = fac ? factionInstitutionStrength(fac, instId(i)) : 0;
+      const strength = fac ? factionInstitutionStrength(fac, instId(i), institutionCategoryArchetype(i)) : 0;
       if (strength > 0) out.push({ targetType: 'institution', targetId: instId(i), strength });
     }
   } else if (node.entityType === 'npc') {
@@ -348,9 +379,10 @@ function mapDimension(fromType, toType, dim, sourceNpc) {
  *
  * @param {PropagationFaction | null | undefined} faction
  * @param {string} instId
+ * @param {string | null} [instArchetype] institution's canonical archetype for the fallback
  * @returns {number}
  */
-function factionInstitutionStrength(faction, instId) {
+function factionInstitutionStrength(faction, instId, instArchetype = null) {
   if (!faction || !instId) return 0;
   /** @type {Array<{key: 'controlsInstitutionIds'|'fundsInstitutionIds'|'staffsInstitutionIds'|'protectsInstitutionIds', weight: number}>} */
   const lists = [
@@ -362,6 +394,12 @@ function factionInstitutionStrength(faction, instId) {
   for (const { key, weight } of lists) {
     if (Array.isArray(faction[key]) && faction[key].includes(instId)) return weight;
   }
+  // domain-top-3 fallback: no explicit link list matched. A faction whose canonical
+  // archetype matches the institution's category takes a low default strength (~0.4)
+  // so institution→faction impairment propagation actually fires on generated
+  // settlements (which never write the explicit link lists). Explicit links above
+  // always win — this only runs when none matched.
+  if (instArchetype && factionArchetype(faction) === instArchetype) return 0.4;
   return 0;
 }
 

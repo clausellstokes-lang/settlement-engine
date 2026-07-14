@@ -16,6 +16,7 @@ import { registerStep } from '../pipeline.js';
 import { generatePowerStructure } from '../powerGenerator.js';
 import { recordTrace } from '../../domain/trace.js';
 import { deriveFactionProfile } from '../../domain/factionProfile.js';
+import { isAdversarialRelationship } from '../../domain/relationships/canonicalRelationship.js';
 
 registerStep('generatePower', {
   deps: ['generateEconomy', 'resolveNeighbour'],
@@ -38,8 +39,12 @@ registerStep('generatePower', {
   // branch fires for ANY truthy value, so an allied/trade_partner neighbour must be
   // passed as null to avoid a false "ongoing tensions" claim.
   const neighbourRel = effectiveConfig.neighborRelationship;
-  const ADVERSARIAL_REL = new Set(['hostile_rival', 'Hostile rival', 'cold_war', 'Cold war', 'tense']);
-  const tradeRouteArg = neighbourRel && ADVERSARIAL_REL.has(neighbourRel.relationshipType)
+  // pipeline-3: gate on the REAL relationship vocabulary. The old Set keyed on
+  // spellings the UI never emits ('hostile_rival'/'Hostile rival'/'tense'), so
+  // .has('hostile')/.has('rival') were always false and the two most adversarial
+  // relationships never militarized governance. isAdversarialRelationship is the
+  // shared predicate (canonicalRelationship) the priorityHelpers reader also uses.
+  const tradeRouteArg = neighbourRel && isAdversarialRelationship(neighbourRel.relationshipType)
     ? neighbourRel
     : null;
   const powerStructure = generatePowerStructure(

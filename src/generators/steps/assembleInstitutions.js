@@ -19,6 +19,7 @@ import { recordTrace } from '../../domain/trace.js';
 import { customDeps } from '../../lib/dependencyEngine.js';
 import { passesTierGate } from '../../domain/customContentSchema.js';
 import { byNameCodepoint } from '../../domain/deterministicSort.js';
+import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleReader.js';
 
 // ── Trace helpers (Tier 2.1) ────────────────────────────────────────────────
 // Each successful institution selection emits a structured trace so the
@@ -205,11 +206,11 @@ registerStep('assembleInstitutions', {
   const config = ctx.config || {};
   const importedNeighbor = ctx.importedNeighbour || null;
 
-  const isCategoryEnabled = (cat) => {
-    const t = config.settType || 'all';
-    return categoryToggles[`${t}::${cat}`] !== false
-        && categoryToggles[`${t}_${cat}`]  !== false;
-  };
+  // pipeline-4: read the SAME keys the wizard writes. The old reader keyed off the
+  // raw settType sentinel ('random::cat'/'custom::cat'), which no writer produces,
+  // so category disables were dead for random/custom. Share one predicate with the
+  // faction-weighted pass (factionCorrelation) so they can never disagree.
+  const isCategoryEnabled = (cat) => sharedIsCategoryEnabled(categoryToggles, config.settType, tier, cat);
 
   // Build catalog for tier
   const catalogForTier = tier === 'metropolis'

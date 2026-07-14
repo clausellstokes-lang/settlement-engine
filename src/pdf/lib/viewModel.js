@@ -28,6 +28,7 @@ import {
   deriveDefenseReadiness, deriveArmedForces,
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
+import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
 
@@ -605,7 +606,10 @@ function economicsSlice(active) {
     necessityImports:   !!ec.necessityImports,
     isEntrepot:         !!ec.isEntrepot,
     safetyHooks:        sp?.plotHooks || [],
-    viabilityIssues:    (v?.issues || []).map(iss => ({
+    // pdf-6: the COMPLEMENT of the Viability filter — only the dependency/
+    // resource-chain/opportunity/food issues belong on the Economics chapter, so
+    // a single engine issue prints in exactly one chapter (never twice).
+    viabilityIssues:    (v?.issues || []).filter(iss => !isViabilityItem(iss) && iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence').map(iss => ({
       severity: iss?.severity,
       title: iss?.title,
       description: iss?.description,
@@ -876,8 +880,11 @@ function viabilitySlice(active) {
     verdictTone:           VIABILITY_TONE[(v?.verdict || '').toLowerCase()] || (v?.viable === true ? 'good' : v?.viable === false ? 'bad' : 'muted'),
     summary:               viabilitySummaryFor(s),
     metrics:               v.metrics || {},
+    // pdf-6: honour the web's curated routing — dependency/resource-chain/
+    // opportunity/food items live in Economics & Resources, not Viability, and
+    // must not double-print here. Shared predicate with ViabilityTab.
     issues:                (v.issues || [])
-      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence')
+      .filter(iss => iss?.severity !== 'by_design' && iss?.type !== 'stress_consequence' && isViabilityItem(iss))
       .map(iss => ({
         severity: iss?.severity,
         title: iss?.title,
@@ -887,7 +894,7 @@ function viabilitySlice(active) {
         suggestedFixes: iss?.suggestedFixes || [],
       })),
     criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
-    warnings:              [...(v?.warnings || []), ...(s?.warnings || [])],
+    warnings:              [...(v?.warnings || []), ...(s?.warnings || [])].filter(isViabilityItem),
     structuralViolations:  s?.structuralViolations || [],
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: x?.crisisHook })),
     stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,

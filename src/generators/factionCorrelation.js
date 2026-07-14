@@ -7,6 +7,7 @@ import { institutionalCatalog } from '../data/institutionalCatalog.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
+import { isCategoryEnabled } from './categoryToggleReader.js';
 
 // Faction category → catalog category keys
 const FACTION_TO_CATALOG = {
@@ -142,11 +143,9 @@ export function applyFactionInstitutionBoosts(
       if (additions.length >= cap) break;
 
       const catInsts = tierCatalog[catalogCat] || {};
-      // Check category toggle (both keying vocabularies in circulation)
-      if (categoryToggles[`${tier}_${catalogCat}`]  === false) continue;
-      if (categoryToggles[`${tier}::${catalogCat}`] === false) continue;
-      if (categoryToggles[`all_${catalogCat}`]      === false) continue;
-      if (categoryToggles[`all::${catalogCat}`]     === false) continue;
+      // Check category toggle via the shared reader (pipeline-4: single predicate
+      // co-owned with assembleInstitutions so the two passes never disagree).
+      if (!isCategoryEnabled(categoryToggles, config?.settType, tier, catalogCat)) continue;
 
       // When magic doesn't exist in the world, skip the entire Magic catalog category
       if (config?.magicExists === false && catalogCat === 'Magic') continue;

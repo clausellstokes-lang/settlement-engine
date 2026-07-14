@@ -15,6 +15,7 @@ import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
+import { enrichNpcCoherence } from './narrativeGenerator.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 
 // Side-effect: registers all pipeline steps
@@ -136,7 +137,15 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     });
 
     const conflicts = generateConflicts(factions, relationships, config, settlement.institutions || []);
-    return { npcs, relationships, factions, conflicts, _regenSeed: seed };
+
+    // domain-3: run the SAME NPC coherence-enrichment tail assembly runs, so a
+    // rerolled roster carries factionAffiliation, the secrets overlay, and
+    // structuralPosition — not the poorer raw generateNPCs shape. The enrichment
+    // reads the live settlement state (legitimacy/capture/food/prosperity) plus the
+    // freshly generated npcs; give it a settlement-shaped view with the new roster.
+    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
+
+    return { npcs: enrichedNpcs, relationships, factions, conflicts, _regenSeed: seed };
   } finally {
     clearActiveRng(prevRng);
   }

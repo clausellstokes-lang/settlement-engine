@@ -471,3 +471,180 @@ battery outside this wave's domain-only golden-track batteries. Precise remainin
   non-party branch. `findRelationshipEdgeForPair` (now in partyImpact.js) can be lifted/shared for the
   edge resolution. This won't shift DOMAIN goldens (store-triggered, not auto-tick) but needs store
   tests.
+
+---
+
+# GOLDEN SHIFT LEDGER — G2 "GENERATION COHERENCE"
+
+Wave: G2 (same golden-shifting branch `claude/review-fix-golden-track`, built on G1d @ f5fbc41f).
+The constraint-driven moat stops dropping user intent and half-integrating content. Fixes span
+GROUP A (config-seam intent), GROUP B (NPC/content coherence), GROUP C (data joins).
+
+IMPLEMENTED (18 fixes): [generators-pipeline-1..7], [generators-domain-3/5/7], [domain-top-1/3],
+[data-tables-1/2/5/6], [content-immersion-4], [pdf-6].
+STOP-AND-REPORTED (4 coherent remainders): [generators-domain-2], [generators-domain-4],
+[generators-domain-6], [generators-domain-1 + data-tables-3]. See the remainder notes below.
+
+## HEADLINE RESULT — cumulative EXACT generator-golden drift = 134 of ~190 configs
+
+Measured with the authoritative method the task prescribes: `UPDATE_GOLDEN=1` to regenerate the
+manifest, `git diff tests/fixtures/generator-golden-master.json` to read the changed config keys,
+then `git checkout` to REVERT. The manifest is left BYTE-IDENTICAL (never regenerated here) for the
+owner's batched `UPDATE_GOLDEN` regen. (The vitest-failure `drift[]` array TRUNCATES for long lists —
+it is unreliable for exact per-fix counts; the manifest diff is authoritative.)
+
+```
+Non-golden verification (all GREEN):
+$ node scripts/count-domain-any.mjs        → 2252 holes (2213 any + 39 suppress) — EXACT, ratchet held
+$ npm run typecheck:domain:strict          → 0 errors (ceiling 0)
+$ npx eslint <24 touched src + 17 test files> → clean
+$ npx vitest run tests/generators/ tests/joins/  → 91 files, 807 tests passed
+$ npx vitest run tests/domain/                   → 369 files, 4664 tests passed
+$ 17 new G2 pin files                            → 59 tests passed
+```
+
+The two RED property goldens are: `generatorGoldenMaster` (the intended 134-config shift, this
+ledger) and `worldpulseSpatialGolden sp-a|4|one_week` — a PRE-EXISTING G1d red (the religion-trade-2
+pact-cooldown metronome), CONFIRMED still red on a clean worktree at the base commit f5fbc41f, i.e.
+NOT a G2 artifact.
+
+## THE SHIFT MAP — which fix shifts which configs, and why
+
+The 134-config drift spans every tier (metropolis 28, town 42, village 28, hamlet 20, city 16) and
+every terrain (plains 27, mountain 23, coastal 20, desert 20, forest 20, hills 12, riverside 8,
+auto 4). Attribution by fix (semantics — `computeActiveChains`/services draw NO rng, so their blast
+is bounded to the configs that actually exercise the changed path):
+
+- **[generators-pipeline-6] legitimacy-defense reconcile (GOLDEN-SHIFTING, ~23 configs).** The
+  assembly defense-readiness patch already rewrote publicLegitimacy's label + gov/crim multipliers on
+  a band cross; the fix now RE-DERIVES the faction powers from their preserved `rawPower` base with the
+  patched multipliers (idempotent when the band did NOT cross, so the shift is confined to
+  band-crossing settlements: hamlet/town forest|isolated, village coastal/desert, metropolis plains,
+  town none/mountain). Residual (bold-option domain, deferred): the governance narrative/dominance
+  line is still baked from the provisional ranking. Pins: `legitimacyDefenseReconcile.test.js`.
+- **[data-tables-2] terrain institution-boost renames (GOLDEN-SHIFTING, broadest — plains/forest/
+  hills/mountain/desert across all tiers).** 13 dead modifier `name` patterns renamed/re-pointed to
+  live catalog substrings (Bowyer/Fletcher→Bowyer, Herbalist→Apothecary, Weavers' guild→Weavers,
+  Tanners'→Tanner, Cheesemaker→Dairy farmer, Carpenters'→Carpenter, Foresters'→Sawmill,
+  Shepherds'→Shepherd, Stonemasons'→Stone quarry, Jewelers'→Jeweller, Salt merchant→Salt works,
+  Water merchant→Aqueduct, Livestock market→Butcher). The boosts now actually multiply institution
+  selection odds for those terrains → institution rolls shift. Pin +ratchet:
+  `terrainInstitutionModifiersReachable.test.js`.
+- **[data-tables-5] fish/fishing chain dedup (GOLDEN-SHIFTING — coastal + riverside only).** The thin
+  `fish` chain (duplicate of `fishing`) is retired; `fishing_grounds`/`river_fish` resource→chain maps
+  redirected to the richer chains; `river_fishing` no longer substitute-activates on `Fishing grounds`
+  (the riverless "River Fishing" bug). `computeActiveChains` draws NO rng, so ONLY configs with an
+  active fishing chain shift. CROSS-CONSUMER: `resourceEconomicRole`/tierResourceDynamics builds its
+  resource→goods vocabulary from the chain's rawInputs/intermediateGoods/outputs — 'River fish' was
+  folded into the surviving `fishing` chain's rawInputs so the fishing_grounds economic-role
+  classification is PRESERVED (the retirement is a display dedup, not a reclassification; without this,
+  5 tierResourceDynamics pins regressed). Pins: `fishingChainDedup.test.js`.
+- **[data-tables-6] priorityCategory spot-fix (GOLDEN-SHIFTING, ~16 configs — metropolis + village
+  hills/riverside).** 4 metropolis Criminal entries 'entertainment'→'criminal'; Midwife 'magic'→
+  'crafts', Village scribe→'government', Wildfowler→'economy'. Feeds `hasCriminal` (historyGenerator)
+  + the moralMartialLean/mercenaryMarket haystacks → history-tension shifts. ⚠️ OWNER-GATE FLAG: the
+  verdict Blast marks this owner_gated=True (it touches categoryVocabulary.js's "divergence is data"
+  governance area) but adjudicated THESE specific runs as copy-paste drift, not intent; implemented as
+  task-directed drift-correction — owner may veto. Pin+ratchet: `priorityCategoryPlausibility.test.js`.
+
+## BYTE-SAFE on the generator-golden corpus (0 drift) — why each holds
+
+- **[generators-pipeline-1/2] manual resource mode** (allow-list survival + terrain override): the
+  golden corpus uses RANDOM resource mode (no `nearbyResourcesState`/`nearbyResourcesRandom:false`),
+  so the manual branch never runs. Pins exercise it directly. `manualResourceSeam.test.js`.
+- **[generators-pipeline-3] adversarial-relationship gate** (canonical vocab + shared
+  `isAdversarialRelationship`): the corpus binds NO neighbour, so `effectiveConfig.neighborRelationship`
+  is absent and `tradeRouteArg` is null in both old and new code. Pin binds a hostile neighbour
+  directly. `adversarialNeighbourGovernance.test.js`.
+- **[generators-pipeline-4] category toggles** (shared `categoryToggleReader.isCategoryEnabled` in
+  assembleInstitutions + factionCorrelation): the corpus carries empty `_categoryToggles`, so every
+  category is enabled in both. Pin uses a disabled category on random/custom settTypes.
+  `categoryToggleRandomCustom.test.js`.
+- **[generators-pipeline-5] metropolis catalog reachable** (lookups.js merges city+metropolis): the
+  lookups are imported ONLY by store/UI (InstitutionalGrid, CatalogTabs, selectors), NEVER by a
+  generation step, so generation output is unchanged. Pin+ratchet: `metropolisCatalogReachable.test.js`.
+- **[generators-pipeline-7] terrain-derived-from-route trace**: the new receipt fires only on
+  auto-terrain + EXPLICIT route, which no corpus config uses (grid rows pin a terrain; random_trade
+  rows roll it). Trace-only; generation output unchanged. `terrainRouteTrace.test.js`.
+- **[generators-domain-3] regen NPC enrichment** (regenNPCsPipeline runs the shared enrichNpcCoherence
+  tail extracted from generateCoherence): the full-assembly extraction is BYTE-IDENTICAL (same calls,
+  same order); regen is a separate live-reroll path not in the generator golden. `regenNpcEnrichment.test.js`
+  + regenRngRestore/randomConfigReroll green.
+- **[generators-domain-5] magic-agriculture tier sentinel** (foodBalance reads `config.tier||settType`):
+  the corpus never sets `priorityMagic > 75`, so `isMagicHighTier` is false in both. Pin drives a
+  high-magic random-tier town. `foodBalanceTierSentinel.test.js`.
+- **[generators-domain-7] inferFactionCategory** (drop 'Bloc' from economy; add Claimant/Loyalist to
+  noble): the succession blocs are minted only by politically_fractured/succession_void stress, which
+  the corpus does not trigger (0 new drift). Table pin: `inferFactionCategoryBloc.test.js`.
+- **[domain-top-1] ASSIGN_NPC_TO_ROLE preserves the sheet** (`{...npc,...structural}`): an event-path
+  mutation, not called during generation. `assignNpcPreservesSheet.test.js`.
+- **[domain-top-3] institution→faction impairment fallback** (archetype-match default in
+  factionInstitutionStrength): propagate.js is imported only by event/worldPulse paths (corruptionImpair,
+  mutateWorld, mutateEntities), never generation. `institutionFactionFallback.test.js`.
+- **[data-tables-1] government civic services** (5 dedicated INSTITUTION_SERVICES entries): services are
+  a DISPLAY read-model, NOT baked into the generated settlement object → 0 generator-golden drift (the
+  verdict's goldens=True was conservative). Pins: `governmentServicesCivic.test.js`.
+- **[content-immersion-4] naming decontamination**: the corpus cultures are germanic/celtic/norse/
+  mediterranean; the edited pools are east_asian + mesoamerican → 0 manifest drift. The shift (NOT in
+  corpus) is the 1-for-1 replacements — 8 JP surnames→JP given names, Kayla→Seoyeon, burg→cheng,
+  Ixchel→Tepeu, Venus/Gemini/Pleiades/Zero→Citlali/Metztli/Yaretzi/Itzel, Quijada/Valladolid/Yucatan→
+  Quej/Vukub/Yaxche. Pool sizes preserved. `namingDecontamination.test.js`.
+- **[pdf-6] viability filter parity**: PDF + web display only (shared `viabilityFilter.isViabilityItem`).
+  `viabilityFilter.test.js`.
+
+## STOP-AND-REPORT remainders (4 — coherent, each warrants its own read-edit-pin cycle)
+
+- **[generators-domain-2] structural-NPC resolver.** factionRoles.js REVERTED to clean. DISCOVERY: the
+  verdict's "synonym dedup" framing is insufficient. `ensureFactionStructuralNpcs` walks
+  `settlement.factions` (NPC GROUPINGS — 2 entries, category=undefined) which SHADOWS
+  `powerStructure.factions`; grouping factionIds do NOT match the seat-holders' factionAffiliation (a
+  powerStructure name like 'Military/Guard'), so a name-keyed role-synonym resolver never resolves
+  (stamped-real = 0). Flipping to walk powerStructure.factions makes resolution work but
+  over-synthesizes 5–7 empty 'The <Role>' placeholders/settlement (worse than the original few
+  duplicates). FAITHFUL FIX (own cycle): keep grouping-walk, add a CATEGORY-based match layer — resolve
+  a proposed seat (grouping archetype A) to an existing NPC whose role is a seat-synonym AND whose REAL
+  powerStructure faction (looked up by factionAffiliation) has archetype A; stamp importance/linkage;
+  synthesize only when no archetype-matching NPC holds the seat. ROLE_SYNONYMS table validated against
+  the real role vocabulary during this session.
+- **[generators-domain-4] dual food model reconcile.** A single-writer rewrite of the 340-line
+  `deriveFoodBalanceAnalysis` (paid Viability tab + PDF) to consume generateFoodSecurity's
+  dailyProduction/dailyNeed/deficit; reconciles TWO different magic-food models (magicSupplement
+  fraction vs +0.3 agriMod boost + separate magicFoodOffset) — choosing canonical = owner-tunable
+  economics + tick foodStockpile input; broad golden shift. PLAN in-notes. (generators-domain-5's
+  tier-sentinel fix is independent and SHIPPED.)
+- **[generators-domain-6] timeline variety.** Needs: hoist the typeMap out of the find() callback +
+  seeded weighted-pick among matching templates (variety); re-key the FINAL dedup (~L1017) off the
+  CATEGORY onto the template type to let city+ reach the 20-event budget while PRESERVING the
+  documented 'The Occupation' title-collision guard; verify the anchor pass (~L878-1007) preserves/
+  threads the template-type tag. Broad golden shift + intricate dedup redesign + anchor interaction.
+- **[generators-domain-1 + data-tables-3] 5 newer stress types integration.** A register-sensitive
+  content wave of its own: 4 STRESS_DESCS arrival vignettes × 5 types; add the 5 keys to SEVEN weight
+  tables (npcGenerator STRESS_BOOSTS/STRESS_SECRET_BOOSTS/STRESS_MANDATORY_ROLES/STRESS_TO_CATEGORY,
+  historyGenerator STRESS_BOOSTS, stressGenerator STRESS_SEVERITY_WEIGHT, settlementNarrative
+  STRESS_FLAVOR) + buildStressContext coupling blocks (slave_revolt↔slave-economy, wartime↔hostile
+  neighbour, insurgency↔low legitimacy, mass_migration↔route); real tension templates for
+  legitimacy_crisis/demographic_pressure/trade_dispute; dt3: 5–8 STRESS_INSTITUTION_EFFECTS secret/
+  stakes rows × 5. Plus a structural-prevention walker (every STRESS_TYPE_MAP key present in each
+  consuming table). Golden-shifting; owner-sensitive register → deserves focused authoring.
+
+## Constitutional checks (this wave)
+
+- `node scripts/count-domain-any.mjs` → **2252 holes (2213 any + 39 suppress)** — EXACT, ratchet held.
+  (New domain code — canonicalRelationship.isAdversarialRelationship, propagate.js archetype fallback,
+  display/viabilityFilter.js — typed against real types; the one `{*}` introduced during work was
+  retyped before landing.)
+- `npm run typecheck:domain:strict` → **0 errors** (ceiling 0). New typedef props: PropagationInstitution
+  `.category`; INSTITUTION_CATEGORY_ARCHETYPE `Record<string,string>`; the VIABILITY_EXCLUDED_* arrays
+  typed `readonly string[]`.
+- `npx eslint` on all 24 touched source files + 17 new test files → clean.
+- any-cast baseline test (`tests/lint/domainAnyCastBaseline.test.js`) → green.
+
+## Conditions under which a FUTURE golden will legitimately shift (for the next session)
+
+Beyond the 134 already shifted here, a new/extended golden fixture SHOULD shift — intended, re-captured
+with `UPDATE_GOLDEN=1` and recorded — if it: (a) runs MANUAL resource mode with an abundant/depleted
+marking or a terrain-override; (b) binds an adversarial neighbour (pipeline-3); (c) sets a category
+disable on a random/custom settType (pipeline-4); (d) drives `priorityMagic > 75` on a random/custom
+town+ (domain-5); (e) mints a politically_fractured/succession bloc faction (domain-7); (f) generates
+in an east_asian/mesoamerican culture (content-immersion-4); or (g) once STOP-AND-REPORT domains
+2/4/6 and 1+dt3 land, per their own shift conditions.

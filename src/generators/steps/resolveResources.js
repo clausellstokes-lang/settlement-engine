@@ -113,13 +113,25 @@ registerStep('resolveResources', {
   } else {
     // Manual mode
     const resourceState = config.nearbyResourcesState || {};
-    const allCompatible = getCompatibleResources(tradeRoute).filter(r => r.compatible).map(r => r.key);
+    // pipeline-2: compute compatibility WITH the terrain override, exactly as the
+    // random branch does (terrainOverride derivation above) — otherwise every
+    // terrain-specific resource the UI offered (desert/mountain, water unlocks) is
+    // incompatible when terrain is null and silently dropped at generation.
+    const manualTerrain = resolvedTerrain
+      || (config.terrainOverride && config.terrainOverride !== 'auto' ? config.terrainOverride : null);
+    const allCompatible = getCompatibleResources(tradeRoute, manualTerrain).filter(r => r.compatible).map(r => r.key);
     const legacyList = config.nearbyResources ?? getDefaultResources(tradeRoute);
 
     if (Object.keys(resourceState).length > 0) {
       nearbyResources = allCompatible.filter(k => {
         const st = resourceState[k];
-        return st === 'allow' || st === 'abundant' || st === 'depleted';
+        // pipeline-1: the UI writes list membership as the 'allow' selection
+        // (config.nearbyResources) and only abundant/depleted overrides into the
+        // state map. Treat a list member as 'allow' so plain selections survive
+        // instead of being dropped the moment any resource is marked
+        // abundant/depleted.
+        return config.nearbyResources?.includes(k)
+          || st === 'allow' || st === 'abundant' || st === 'depleted';
       });
       const forceAbundant = new Set(allCompatible.filter(k => resourceState[k] === 'abundant'));
       const forceDepleted = new Set(allCompatible.filter(k => resourceState[k] === 'depleted'));

@@ -695,21 +695,21 @@ export const institutionalCatalog = {
         baseChance: 0.5,
         desc: 'Assists with births, manages difficult labours, and provides basic gynecological care. The most-used medical service in any settlement.',
         tags: ['healing'],
-        priorityCategory: 'magic',
+        priorityCategory: 'crafts',
       },
       'Village scribe': {
         required: false,
         baseChance: 0.15,
         desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.",
         tags: ['guild'],
-        priorityCategory: 'magic',
+        priorityCategory: 'government',
       },
       Wildfowler: {
         required: false,
         baseChance: 0.15,
         desc: 'Catches waterfowl and game birds using nets, traps, and trained birds. Supplies the market with ducks, geese, and pigeons.',
         tags: ['trade'],
-        priorityCategory: 'magic',
+        priorityCategory: 'economy',
       },
       "Hunter's lodge": {
         required: false,
@@ -2247,7 +2247,7 @@ export const institutionalCatalog = {
         baseChance: 0.55,
         desc: 'Dominant criminal syndicate — tolerated because the alternative (gang war) is worse.',
         tags: ['criminal'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       'Black market bazaar': {
         required: false,
@@ -2255,7 +2255,7 @@ export const institutionalCatalog = {
         baseChance: 0.45,
         desc: 'Permanent underground market — contraband, forged documents, illegal services.',
         tags: ['criminal', 'underground'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       'Underground city': {
         required: false,
@@ -2263,7 +2263,7 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Extensive tunnels and catacombs repurposed as criminal and refugee sanctuary.',
         tags: ['criminal', 'underground'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
       "Assassins' guild": {
         required: false,
@@ -2271,7 +2271,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Professional contract killing — operates through cutouts, never acknowledged officially.',
         tags: ['criminal'],
-        priorityCategory: 'entertainment',
+        priorityCategory: 'criminal',
       },
     },
     Economy: {

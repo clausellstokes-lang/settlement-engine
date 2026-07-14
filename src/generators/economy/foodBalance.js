@@ -60,7 +60,13 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   // institutional base to sustain magical agriculture at scale).
   // Requires: magic priority > 75, magic-capable institution present.
   const magPriority = config?.priorityMagic ?? 0;
-  const isMagicHighTier = magPriority > 75 && ['town', 'city', 'metropolis'].includes(config?.settType || '');
+  // domain-5: read the RESOLVED tier, not the raw settType sentinel. settType is
+  // 'random' on the default path (DEFAULT_CONFIG), so keying off it left the magic-
+  // agriculture boost dead for every random-rolled town+ settlement — it only fired
+  // when the user explicitly picked 'town'/'city'/'metropolis'. config.tier is the
+  // resolved tier the sibling read at :154 already prefers.
+  const resolvedTier = config?.tier || config?.settType || '';
+  const isMagicHighTier = magPriority > 75 && ['town', 'city', 'metropolis'].includes(resolvedTier);
   if (isMagicHighTier) {
     const hasMagicFarm = hasInstitution([
       'druid',

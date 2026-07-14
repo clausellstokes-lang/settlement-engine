@@ -203,6 +203,25 @@ registerStep('resolveConfig', {
         { target: 'resourcePool',   effect: 'terrain-biased' },
       ],
     });
+  } else if (randomTerrain) {
+    // pipeline-7: terrain left on 'auto' with an EXPLICIT trade route is derived
+    // deterministically from that route (getTerrainType's route→terrain mapping),
+    // not rolled. This is disclosed, intended design ("Auto (from route)"), but the
+    // decision previously left no receipt — emit one so the lock is legible instead
+    // of invisible. Trace-only; generation output is unchanged.
+    recordTrace(ctx, {
+      targetType: 'condition',
+      targetId: `terrain.${terrainType}`,
+      step: 'resolveConfig',
+      result: 'derived',
+      causes: [{
+        source: `config.tradeRouteAccess=${config.tradeRouteAccess || 'road'}`,
+        reason: `Terrain left on 'auto' with an explicit trade route — derived from the route (${config.tradeRouteAccess || 'road'} → ${terrainType}). Pick a terrain override or 'random_trade' for a weighted terrain roll.`,
+      }],
+      downstreamEffects: [
+        { target: 'resourcePool', effect: 'terrain-biased' },
+      ],
+    });
   }
 
   if (routePool) {

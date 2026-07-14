@@ -163,7 +163,7 @@ const _INCOME_TO_CHAINS = {
   'Wool & Textile Trade': ['manufacturing.textiles'],
   'Iron & Metalwork':     ['manufacturing.weapons_armor', 'raw_extraction.iron'],
   'Timber Trade':         ['raw_extraction.timber'],
-  'Fish Trade':           ['food_security.fish'],
+  'Fish Trade':           ['food_security.fishing', 'food_security.river_fishing'],
   'Entrepôt Trade':       ['trade_entrepot.spices_dyes', 'trade_entrepot.silk_luxury_textiles', 'trade_entrepot.furs_north', 'trade_entrepot.wine_spirits'],
   'Banking Fees':         ['trade_entrepot.transit_finance'],
   'Toll Revenue':         ['trade_entrepot.warehouse_logistics'],

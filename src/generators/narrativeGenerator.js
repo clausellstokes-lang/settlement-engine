@@ -1075,16 +1075,22 @@ export const generateArrivalScene = settlement => {
  *  - Coherence contradiction notes
  *  - Current tensions string
  */
-export const generateCoherence = settlement => {
-  if (!settlement) return settlement;
-
-  const summary = genSettSummary(settlement);
+/**
+ * The NPC coherence-enrichment sub-pass: faction/secret overlays
+ * (buildPoliticalNarrative) → faction-structure merge (mergeNPCLists) →
+ * structural positions/goals/constraints (enrichNPCsWithStructure). Extracted so
+ * BOTH full assembly (generateCoherence) and NPC section-regen (regenNPCsPipeline)
+ * run the identical tail — a rerolled roster must carry the same factionAffiliation,
+ * secrets overlay, and structuralPosition as a freshly generated one, not the
+ * poorer raw shape. [generators-domain-3]
+ * @param {*} settlement  a settlement-shaped object carrying the target npcs plus
+ *   powerStructure/institutions/tier/config and the live state enrichment reads.
+ * @returns {Array} the enriched npc list
+ */
+export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
-
-  // Enrich each NPC with faction/secret overlays
+  const summary = genSettSummary(settlement);
   const enrichedNpcs = npcs.map((npc, idx) => buildPoliticalNarrative(npc, idx, summary, npcs));
-
-  // Merge NPC list with faction structure for display
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
     settlement.powerStructure?.factions || [],
@@ -1092,10 +1098,14 @@ export const generateCoherence = settlement => {
     settlement.tier,
     settlement.config || {},
   );
+  return enrichNPCsWithStructure(rawMergedNpcs, settlement);
+};
 
-  // Enrich top NPCs with structural position, goal, and constraint
-  // derived from the live settlement state (legitimacy, capture state, food, prosperity)
-  const mergedNpcs = enrichNPCsWithStructure(rawMergedNpcs, settlement);
+export const generateCoherence = settlement => {
+  if (!settlement) return settlement;
+
+  // NPC coherence enrichment (shared with regenNPCsPipeline via enrichNpcCoherence).
+  const mergedNpcs = enrichNpcCoherence(settlement);
 
   const history = settlement.history || {};
 
