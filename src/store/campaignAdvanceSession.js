@@ -90,7 +90,7 @@ export function buildPausedAdvanceCursor(result, now) {
  * a verbatim code-location move — the flag-OFF single-tick path stays byte-identical.
  *
  * @param {{ set: Function, get: Function, campaignId: string, interval?: string,
- *   options?: { now?: string, autoResolve?: boolean },
+ *   options?: { now?: string, autoResolve?: boolean, weeks?: number },
  *   deps: { advanceCampaignWorld: Function, simulateCampaignWorldInterval: Function,
  *           runAdvanceInterval: Function } }} args
  */
@@ -102,7 +102,15 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
     // runs N real one-week ticks and composes ONE result of the same shape, so the
     // snapshot/drain/commit/persist/analytics scaffolding below runs ONCE per Advance
     // regardless of tick count.
-    const useMultiTick = flag('advanceMultiTick');
+    // M10b catch-up (performance-scale-4): a living/autonomous catch-up passes an
+    // explicit whole-week span via options.weeks. A catch-up is INHERENTLY multi-week,
+    // so it ALWAYS routes through the interval orchestrator — one composed interval =
+    // one snapshot+drain, one Phase-2 commit, one persist, one cloud sync — regardless
+    // of the advanceMultiTick killswitch (the single-tick legacy path can only run ONE
+    // week, so it cannot serve a catch-up). A normal DM advance passes no weeks, so
+    // useMultiTick still follows the flag and the flag-OFF path stays byte-identical.
+    const catchUpWeeks = typeof options.weeks === 'number' && Number.isFinite(options.weeks) && options.weeks > 0 ? Math.floor(options.weeks) : null;
+    const useMultiTick = catchUpWeeks != null || flag('advanceMultiTick');
     // Advance-scaling Stage 3: auto-resolve rides ONLY the multi-tick path. OFF ⇒ the
     // orchestrator PAUSES at the first tick that surfaces majors. options.autoResolve
     // overrides per-advance; otherwise the store toggle governs. The single-tick path
@@ -201,6 +209,11 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
         commit: true,
         now,
         autoResolve,
+        // M10b catch-up: an explicit whole-week span drives the orchestrator's tick
+        // count (overriding the interval→week table); inert for a normal DM advance
+        // (no weeks ⇒ the named-interval table). Threads through runAdvanceInterval's
+        // payload spread into the worker AND the in-thread fallback alike.
+        ...(catchUpWeeks != null ? { weeks: catchUpWeeks } : {}),
       };
       result = useMultiTick
         // The worker runs the SAME simulate function off the main thread; the
@@ -422,6 +435,24 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
         const { pausedAdvance: _drop, ...rest } = c.worldState;
         c.worldState = rest;
       }
+      // M10b re-stamp on RESUME (state-lifecycle-1 / performance-scale-4): the resume
+      // RE-DERIVES worldState wholesale from the cursor's PRE-interval snapshot, which
+      // predates the pause's lastLivingAdvanceAt stamp (that stamp was applied by
+      // runAdvanceCampaignWorld's Phase-2 to the COMMITTED worldState, never threaded
+      // into the cursor's pre-tick inputs). So applyWorldPulseResultToState above just
+      // OVERWROTE the cursor back to its pre-catch-up value — without this re-stamp a
+      // resolved living catch-up would re-run the WHOLE span on the next open (phantom
+      // re-catch-up, the exact double-count M10b exists to prevent). Under the
+      // performance-scale-4 collapse the whole catch-up is ONE interval, so this resume
+      // is the ONLY place the completing/continuing span re-commits worldState — it must
+      // carry the stamp. Gated on advancesOnOpen only (NOT tick-moved: a last-tick pause
+      // resumes to the same tick yet still must retain the stamp). `now` is the original
+      // advance clock (cursor.now), so the world stays caught up to it. dm_advanced /
+      // frozen ⇒ advancesOnOpen false ⇒ inert (byte-identical; goldens carry no living
+      // paused-resume fixture).
+      if (c.worldState && advancesOnOpen(c.worldState.simulationRules)) {
+        c.worldState = { ...c.worldState, lastLivingAdvanceAt: now };
+      }
       campaignPersist = cacheCampaignState(state);
     });
   }
@@ -448,19 +479,28 @@ export async function runResolveIntervalMajors({ set, get, campaignId, decisions
  *
  * Computes how many whole weeks of REAL time have elapsed since the world last
  * advanced (worldState.lastLivingAdvanceAt), caps at CATCH_UP_CAP_WEEKS, and runs that
- * many ONE-WEEK advanceCampaignWorld calls — so a catch-up of N weeks is
- * BYTE-IDENTICAL to N manual one-week ticks (determinism inherited from the kernel;
- * the loop stops early if an advance pauses for DM verdicts or otherwise returns
- * not-ok). Each advance re-stamps the cursor to `now` (the M10b block in
- * runAdvanceCampaignWorld), so:
+ * many one-week kernel ticks through ONE orchestrated interval (performance-scale-4
+ * COLLAPSE, owner ruling 2026-07-14): `advanceCampaignWorld(..., { weeks: n })` forces
+ * the interval orchestrator to run n real one-week ticks and compose ONE result — so a
+ * catch-up is a SINGLE snapshot+drain, a single Phase-2 commit, a single localStorage
+ * persist, and a single cloud sync (replacing the prior n SEQUENTIAL full store
+ * advances that deep-cloned + persisted + awaited a sync n times on campaign open).
+ * The kernel runs the SAME n one-week ticks in the same order, so the world CONTENT is
+ * byte-identical to n manual advances; only the persist SHAPE differs — the interval
+ * collapses pulseHistory to ONE composed record (Stage 5 policy) and the session undo
+ * stack gets ONE snapshot (one catch-up = one undo step). Each advance re-stamps the
+ * cursor to `now` (the M10b block in runAdvanceCampaignWorld), so:
  *   • past the cap, the calendar reaches `now` but the sim stopped at the cap
  *     (owner ruling 2026-07-13: calendar-advances-past-cap — no perpetual re-catch-up);
- *   • a paused/short catch-up leaves the cursor at the last week it reached.
+ *   • a LIVING catch-up that pauses on a major leaves the cursor at `now`; the DM
+ *     resolves via resolveIntervalMajors, which resumes the remaining weeks of the
+ *     SAME interval (autonomous auto-resolves and runs straight to the end).
  * A first open / legacy save (no cursor) SEEDS the cursor and advances nothing — never
  * a 1970-epoch delta. `now` is INJECTED for determinism (the UI open-hook passes
  * Date.now-derived time; tests pass a fixed value). JUDGMENT (vetoable): cursor jumps
- * to `now` on any catch-up (whole-week sim; sub-week remainder + past-cap overflow +
- * paused tail are dropped — the DM resumes a paused interval via the normal advance).
+ * to `now` on any catch-up (whole-week sim; sub-week remainder + past-cap overflow are
+ * dropped). weeksCaughtUp = the interval's committed weeks (n complete; ticksDone at a
+ * living pause; 0 if blocked/thrown before the atomic commit).
  *
  * @param {{ set: Function, get: Function, campaignId: string,
  *   options?: { now?: string|number } }} args
@@ -504,17 +544,40 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
   let done = 0;
   /** @type {string | null} */ let error = null;
   try {
-    for (let i = 0; i < n; i++) {
-      // One real week per tick. Each advance re-stamps the cursor to `now` and
-      // persists; a not-ok result (paused for DM verdicts, frozen, in-flight) stops
-      // the catch-up here — the DM resolves/resumes via the normal advance path.
-      const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve });
-      if (!result || result.ok === false) break;
-      done += 1;
+    // performance-scale-4 COLLAPSE (owner ruling 2026-07-14 "collapse to one record"):
+    // route the WHOLE catch-up through ONE orchestrated interval instead of n
+    // sequential full store advances. `weeks: n` forces the interval orchestrator
+    // (runAdvanceCampaignWorld → simulateCampaignWorldInterval / runAdvanceInterval)
+    // to run n real one-week kernel ticks and compose ONE result — so the catch-up is
+    // a SINGLE snapshot+drain, a single Phase-2 commit (which re-stamps the M10b
+    // cursor to `now`), a single localStorage persist, and a single cloud sync. The
+    // kernel runs the SAME n one-week ticks in the same order, so the world CONTENT is
+    // byte-identical to n manual advances; only the persist SHAPE differs — the
+    // interval collapses pulseHistory to ONE composed record (Stage 5 policy), and the
+    // undo stack gets ONE snapshot (one catch-up = one undo step). autoResolve carries
+    // the living/autonomous split: autonomous resolves the realm's majors and runs to
+    // the end; living defers, so the FIRST tick that surfaces a major PAUSES the
+    // interval for the DM (parked on worldState.pausedAdvance) — they resolve via
+    // resolveIntervalMajors, which resumes the remaining weeks of the SAME interval.
+    const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve, weeks: n });
+    if (!result || result.ok === false) {
+      // Blocked before any commit (frozen / already in flight / a parked pause from a
+      // prior unresolved catch-up): nothing advanced. The whole interval is atomic, so
+      // a not-ok result committed zero weeks.
+      done = 0;
+    } else if (result.status === 'paused') {
+      // LIVING paused on a surfacing major: the weeks committed at the pause boundary
+      // (ticksDone) are the caught-up span; the remainder awaits the DM's verdict.
+      done = Math.max(0, Number(result.ticksDone) || 0);
+    } else {
+      // Ran to the end (autonomous, or living with no major) — the full span caught up.
+      done = n;
     }
   } catch (err) {
     // components-dossier-4: a THROWN advance is a real failure — surface it in the
-    // digest rather than letting setActiveCampaign's fire-and-forget swallow it.
+    // digest rather than letting setActiveCampaign's fire-and-forget swallow it. The
+    // interval is one atomic Phase-2 commit, so a throw mid-interval committed zero
+    // weeks (done stays 0) — the catch-up rolls back whole rather than part-persisted.
     error = err && /** @type {any} */ (err).message ? String(/** @type {any} */ (err).message) : String(err);
   }
   // Settle the digest: the major chronicle beats over the caught-up window (built

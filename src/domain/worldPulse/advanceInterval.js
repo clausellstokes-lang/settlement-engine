@@ -209,6 +209,11 @@ function foldUpdatesOntoSaves(saves, updates) {
  * @param {string} [args.now]
  * @param {boolean} [args.autoResolve] Stage 3: default true (auto-resolve majors,
  *   run to the end). false ⇒ pause on the first tick that surfaces majors.
+ * @param {number|null} [args.weeks] M10b catch-up (performance-scale-4): an EXPLICIT
+ *   whole-week tick count (≥1) that overrides the interval→week table for a FRESH
+ *   run — a living/autonomous catch-up spans an arbitrary week count (not a DM-named
+ *   interval). Absent/invalid ⇒ the named-interval table (byte-identical to every
+ *   existing caller). Ignored on resume (the parked cursor's ticksTotal is authoritative).
  * @param {{
  *   interval?: string,
  *   ticksTotal?: number,
@@ -241,7 +246,7 @@ function foldUpdatesOntoSaves(saves, updates) {
  */
 export async function simulateCampaignWorldInterval({
   campaign, saves = [], interval = 'one_month', commit = false, now,
-  autoResolve = true, resume = null, onProgress = null,
+  autoResolve = true, resume = null, onProgress = null, weeks = null,
 } = {}) {
   // Structural pin-`now` guard (same contract as the kernel): the multi-tick path
   // threads ONE pinned `now` across every synchronous tick, so an unpinned interval
@@ -251,7 +256,16 @@ export async function simulateCampaignWorldInterval({
   // one_week granularity; the composed metadata folds the DM's chosen label back.
   const resuming = !!resume;
   const chosenInterval = usableTickInterval(resuming ? resume.interval : interval);
-  const tickCount = resuming ? (Number(resume.ticksTotal) || ticksForInterval(chosenInterval)) : ticksForInterval(chosenInterval);
+  // M10b catch-up (performance-scale-4): a FRESH run may carry an explicit whole-week
+  // span (`weeks`) that overrides the interval→week table — a living/autonomous
+  // catch-up is an arbitrary week count (1..CATCH_UP_CAP_WEEKS), not a DM-named
+  // interval. A resume ignores it: the parked cursor's ticksTotal is authoritative
+  // (so a paused catch-up resumes its FULL remaining span). Absent/invalid ⇒ the
+  // named-interval table, byte-identical to every existing (DM-advance) caller.
+  const explicitWeeks = typeof weeks === 'number' && Number.isFinite(weeks) && weeks > 0 ? Math.floor(weeks) : null;
+  const tickCount = resuming
+    ? (Number(resume.ticksTotal) || ticksForInterval(chosenInterval))
+    : (explicitWeeks != null ? explicitWeeks : ticksForInterval(chosenInterval));
 
   let runningCampaign = campaign;
   let runningSaves = saves;

@@ -3,15 +3,20 @@
  *
  * The living/autonomous advance-on-open catch-up: computes whole weeks elapsed
  * since worldState.lastLivingAdvanceAt, caps at CATCH_UP_CAP_WEEKS, and runs that
- * many one-week advances. The load-bearing guarantees, pinned here:
- *   • DETERMINISM: a catch-up of N weeks is BYTE-IDENTICAL to N manual one-week
- *     advances (the whole point — determinism inherited from advanceCampaignWorld).
+ * many one-week ticks. The load-bearing guarantees, pinned here:
+ *   • COLLAPSE (performance-scale-4, owner ruling 2026-07-14): a catch-up of N weeks
+ *     runs as ONE orchestrated interval (one commit / persist / sync / undo step), not
+ *     N sequential advances. Its world CONTENT is byte-identical to N manual one-week
+ *     advances EXCEPT pulseHistory, which the interval collapses to ONE composed record
+ *     (the intended Stage-5 persist shape); it is byte-identical to a single weeks=N
+ *     orchestrated advance.
  *   • LIFECYCLE (the owner's most-bitten class — the new persisted cursor):
  *       - first open / legacy save (no cursor) SEEDS the cursor, advances nothing;
  *       - up-to-date cursor advances nothing;
  *       - past the cap advances EXACTLY the cap, and the cursor reaches `now`
  *         (calendar-advances-past-cap — no perpetual re-catch-up);
- *       - UNDO of a living advance RESTORES the prior cursor (no double-run);
+ *       - UNDO of a living advance RESTORES the prior cursor (no double-run), and a
+ *         whole caught-up span is ONE undo step;
  *   • DORMANCY: a dm_advanced campaign is not_living (no catch-up) and its advance
  *     never stamps the cursor (byte-identical to pre-M10b).
  */
@@ -127,12 +132,20 @@ async function waitFor(pred, { tries = 200, gapMs = 5 } = {}) {
 describe('M10b catchUpCampaignWorld', () => {
   beforeEach(() => { installLocalStorage(); multiTickValue = false; });
 
-  test('DETERMINISM: a catch-up of N weeks == N manual one-week advances, byte-identical', async () => {
+  test('COLLAPSE (performance-scale-4): a catch-up of N weeks == ONE orchestrated interval; content matches N manual advances modulo the collapsed history', async () => {
+    // performance-scale-4 COLLAPSE (owner ruling 2026-07-14 "collapse to one record"):
+    // the catch-up now routes through ONE orchestrated interval of N one-week ticks
+    // instead of N sequential store advances. The kernel runs the SAME N ticks in the
+    // same order, so the world CONTENT is byte-identical to N manual advances — EXCEPT
+    // the interval collapses pulseHistory to ONE composed record (Stage 5 policy), the
+    // intended persist-shape change. This pins BOTH: content-equivalence modulo the
+    // history collapse, and the collapsed-history shape itself.
     const N = 5;
     const cursor = '2026-01-01T00:00:00.000Z';
     const now = nowAfter(N); // exactly N weeks after the cursor
 
-    // Manual: N explicit one-week advances at the same injected `now`.
+    // Manual: N explicit one-week advances at the same injected `now` (flag OFF ⇒ the
+    // single-tick path; each appends its own pulseHistory record → N records).
     const manual = makeStore();
     seedStore(manual, { progression: 'autonomous', cursor });
     for (let i = 0; i < N; i++) {
@@ -140,7 +153,7 @@ describe('M10b catchUpCampaignWorld', () => {
       expect(r.ok !== false).toBe(true);
     }
 
-    // Catch-up: one call that must run exactly N one-week advances.
+    // Catch-up: one call that runs exactly N one-week ticks as ONE orchestrated interval.
     const caught = makeStore();
     seedStore(caught, { progression: 'autonomous', cursor });
     const res = await caught.getState().catchUpCampaignWorld('camp-1', { now });
@@ -151,8 +164,27 @@ describe('M10b catchUpCampaignWorld', () => {
     // The cursor reached `now` in both paths.
     expect(ws(caught).lastLivingAdvanceAt).toBe(now);
     expect(ws(manual).lastLivingAdvanceAt).toBe(now);
-    // The whole world state is byte-identical between the two paths.
-    expect(JSON.stringify(ws(caught))).toBe(JSON.stringify(ws(manual)));
+
+    // PIN 1 — CONTENT-EQUIVALENCE MODULO HISTORY COLLAPSE: every worldState field
+    // except pulseHistory (and every member save) is byte-identical to N manual advances.
+    const stripHistory = (w) => { const { pulseHistory, ...rest } = w; return rest; };
+    expect(JSON.stringify(stripHistory(ws(caught)))).toBe(JSON.stringify(stripHistory(ws(manual))));
+    expect(JSON.stringify(caught.getState().savedSettlements))
+      .toBe(JSON.stringify(manual.getState().savedSettlements));
+
+    // PIN 2 — THE COLLAPSED-HISTORY SHAPE: the catch-up interval writes EXACTLY ONE
+    // composed pulseHistory record for the whole span; N manual advances wrote N.
+    expect(ws(caught).pulseHistory.length).toBe(1);
+    expect(ws(manual).pulseHistory.length).toBe(N);
+
+    // PIN 3 — catch-up IS one orchestrated interval: byte-identical (INCLUDING the
+    // collapsed history) to a single weeks=N advance through the interval orchestrator.
+    const interval = makeStore();
+    seedStore(interval, { progression: 'autonomous', cursor });
+    await interval.getState().advanceCampaignWorld('camp-1', 'one_week', { now, autoResolve: true, weeks: N });
+    expect(JSON.stringify(ws(caught))).toBe(JSON.stringify(ws(interval)));
+    expect(JSON.stringify(caught.getState().savedSettlements))
+      .toBe(JSON.stringify(interval.getState().savedSettlements));
   });
 
   test('SEED: a first open (no cursor) seeds the cursor and advances nothing', async () => {
@@ -204,6 +236,47 @@ describe('M10b catchUpCampaignWorld', () => {
     expect(undone).toBe(true);
     expect(ws(store).tick).toBe(0);
     expect(ws(store).lastLivingAdvanceAt).toBe(cursor);
+  });
+
+  test('UNDO over a caught-up span is ONE step (performance-scale-4): a single undo restores the pre-catch-up world', async () => {
+    // performance-scale-4 COLLAPSE consequence (owner understood and chose this): a
+    // catch-up is now ONE orchestrated interval → ONE pre-pulse undo snapshot → ONE
+    // undo step reverses the WHOLE caught-up span (pre-collapse it was N snapshots /
+    // N undo steps). Pin it: after an N-week catch-up, exactly one undo restores tick,
+    // cursor, world, and every member save to their pre-catch-up values.
+    const N = 6;
+    const store = makeStore();
+    const cursor = '2026-01-01T00:00:00.000Z';
+    seedStore(store, { progression: 'autonomous', cursor });
+    // Capture the pre-catch-up world + saves for a full round-trip check. Read the
+    // worldState through the ENSURING getter so it is compared apples-to-apples with the
+    // post-undo state (undoLastPulse re-ensures the restored snapshot — existing
+    // behavior, orthogonal to this change).
+    const preWorld = JSON.stringify(store.getState().getCampaignWorldState('camp-1'));
+    // Strip the per-save `timestamp` — undoLastPulse stamps a fresh restore time on the
+    // saves it revives (existing behavior), so only the settlement + campaignState
+    // CONTENT is the meaningful round-trip target.
+    const stripTs = (saves) => JSON.stringify(saves.map(({ timestamp, ...s }) => s));
+    const preSaves = stripTs(store.getState().savedSettlements);
+
+    const now = nowAfter(N);
+    const res = await store.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(res).toMatchObject({ ok: true, weeksCaughtUp: N, capped: false });
+    expect(ws(store).tick).toBe(N);
+
+    // Exactly ONE undo step exists for the whole span (one snapshot, not N).
+    expect(store.getState().pulseUndoStack.filter(s => s.campaignId === 'camp-1').length).toBe(1);
+    expect(store.getState().canUndoLastPulse('camp-1')).toBe(true);
+
+    // A single undo reverses the entire catch-up back to the pre-catch-up world.
+    const undone = await store.getState().undoLastPulse('camp-1');
+    expect(undone).toBe(true);
+    expect(ws(store).tick).toBe(0);
+    expect(ws(store).lastLivingAdvanceAt).toBe(cursor);
+    expect(JSON.stringify(store.getState().getCampaignWorldState('camp-1'))).toBe(preWorld);
+    expect(stripTs(store.getState().savedSettlements)).toBe(preSaves);
+    // The one snapshot is consumed — no second step to walk back.
+    expect(store.getState().canUndoLastPulse('camp-1')).toBe(false);
   });
 
   test('PERSIST ROUND-TRIP: a living advance persists the moved cursor — no phantom re-catch-up on reload (state-lifecycle-1)', async () => {
@@ -413,13 +486,22 @@ describe('M10b LIVING pause-on-major during catch-up', () => {
     expect(JSON.stringify(ws(a))).toBe(JSON.stringify(ws(b)));
   });
 
-  test('LIVING resumes without double-running after the DM resolves the paused major', async () => {
+  test('LIVING resume CONTINUES the caught-up interval to completion (performance-scale-4), never double-running', async () => {
+    // performance-scale-4 COLLAPSE behavior change: the catch-up is now ONE orchestrated
+    // interval of the full elapsed span. A living pause parks the WHOLE-interval cursor
+    // (ticksTotal = span), so the DM's resolveIntervalMajors RESUMES the remaining weeks
+    // of that SAME interval — the catch-up finishes on resolve, rather than (pre-collapse)
+    // completing only the paused week and deferring the rest to the next open. This is
+    // the DM-Advance-button semantics, now shared by the catch-up. The load-bearing
+    // guarantee that survives verbatim: NO WEEK IS EVER DOUBLE-RUN.
+    const ELAPSED = 12;
     const store = makeStore();
     seedLivingPauseFixture(store, { progression: 'living' });
-    const now = nowAfter(12);
+    const now = nowAfter(ELAPSED);
     const first = await store.getState().catchUpCampaignWorld('camp-1', { now });
     expect(store.getState().campaigns[0].worldState.pausedAdvance).toBeTruthy();
-    const pauseTick = ws(store).tick;
+    expect(first.weeksCaughtUp).toBeGreaterThan(0);
+    expect(first.weeksCaughtUp).toBeLessThan(ELAPSED); // partial — paused mid-span
 
     // The DM resolves every parked major (recommended) until the interval finishes.
     let guard = 0; let r;
@@ -427,27 +509,27 @@ describe('M10b LIVING pause-on-major during catch-up', () => {
       if (guard++ > 60) throw new Error('did not converge');
       r = await store.getState().resolveIntervalMajors('camp-1', {}, { now });
     } while (r && r.status === 'paused');
-    // The paused 1-week interval completes at the SAME tick (its minors already
-    // committed at the pause); the cursor is cleared. No extra week was invented.
+    // The FULL elapsed span has now run: the interval completed at tick ELAPSED (not the
+    // partial pause tick), and the cursor is cleared. Every week ran exactly once.
     expect('pausedAdvance' in ws(store)).toBe(false);
-    expect(ws(store).tick).toBe(pauseTick);
+    expect(ws(store).tick).toBe(ELAPSED);
 
-    // Re-open at the SAME `now`: the cursor already reached it, so this is a no-op —
-    // the paused tail is NOT re-run (the double-count the review names).
+    // Re-open at the SAME `now`: the cursor already reached it (stamped at the pause), so
+    // this is a no-op — no week is re-simulated (the double-count the review names).
     const again = await store.getState().catchUpCampaignWorld('camp-1', { now });
     expect(again).toMatchObject({ ok: true, weeksCaughtUp: 0, reason: 'up_to_date' });
-    expect(ws(store).tick).toBe(pauseTick);
+    expect(ws(store).tick).toBe(ELAPSED);
 
-    // Re-open LATER (real time advanced +2 weeks): the world RESUMES advancing the NEW
-    // time only — exactly 2 more weeks, never re-simulating the weeks already lived.
-    const later = nowAfter(14);
+    // Re-open LATER (real time advanced +2 weeks): the world advances ONLY the new time,
+    // never re-simulating the weeks already lived. It may pause again on a fresh major,
+    // so assert the no-double-count invariant (tick = ELAPSED + weeks committed) rather
+    // than a fixed count.
+    const later = nowAfter(ELAPSED + 2);
     const resume = await store.getState().catchUpCampaignWorld('camp-1', { now: later });
     expect(resume.ok).toBe(true);
-    expect(resume.weeksCaughtUp).toBe(2);
-    expect(ws(store).tick).toBe(pauseTick + 2);
-    // The first pause established the partial contract; this confirms the tail is
-    // neither lost-forever nor double-counted — it advances by exactly the new delta.
-    expect(first.weeksCaughtUp).toBeGreaterThan(0);
+    expect(resume.weeksCaughtUp).toBeGreaterThan(0);
+    expect(resume.weeksCaughtUp).toBeLessThanOrEqual(2);
+    expect(ws(store).tick).toBe(ELAPSED + resume.weeksCaughtUp);
   });
 
   test('CONTRAST — AUTONOMOUS auto-resolves the SAME majors: full catch-up, no pause', async () => {
