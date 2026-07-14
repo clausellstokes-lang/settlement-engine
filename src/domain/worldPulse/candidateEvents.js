@@ -6,6 +6,7 @@ import { evaluateMobilizationReactions } from './mobilizationReactions.js';
 import { evaluateStressorRules, stressorCandidateForPressure } from './stressors.js';
 import { deriveFlowCandidates } from './flows.js';
 import { normalizeSimulationRules, politicalAutonomyOf } from './simulationRules.js';
+import { governBirth, computeLowestPendingClass } from './narrativeTempo.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { activeChannelsFrom } from '../region/index.js';
 import { RUMOR_TRADE_CHANNEL_TYPES } from '../spatial/rumorNetwork.js';
@@ -384,6 +385,16 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
   const volatility = Number.isFinite(options.volatility) ? options.volatility : 1;
   const selected = [];
   const rollExplanations = [];
+  // E0 NARRATIVE TEMPO GOVERNOR seam (design §2 — the ONE seam). `options.tempo` is
+  // the pre-tick tempo context (buildTempoContext). ABSENT / `active:false` ⇒ DORMANT
+  // ⇒ every governor branch below is skipped ⇒ this roll is BYTE-IDENTICAL to today.
+  const tempo = options.tempo;
+  /** @type {import('./narrativeTempo.js').TempoDeferral[]} */
+  const deferred = [];
+  // The lowest-priority pending spontaneous class (for the simultaneity tiebreak) —
+  // a pure, codepoint-deterministic function of THIS roll's candidate list, computed
+  // once. Only needed when the governor is active.
+  const lowestPendingClass = tempo?.active ? computeLowestPendingClass(candidates) : null;
   let autoCount = 0;
   let proposalCount = 0;
 
@@ -396,6 +407,26 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
     const guaranteed = (candidate.probability ?? 0) >= 1;
     if (candidate.applyMode === 'auto' && autoCount >= maxAuto && !guaranteed) continue;
     if (candidate.applyMode === 'proposal' && proposalCount >= maxProposals) continue;
+    // TEMPO GOVERNOR (spontaneity throttle). A pure ledger + codepoint decision (ZERO
+    // rng), taken BEFORE the roll — a deferral `continue`s here, consuming NO rng and
+    // NO auto budget, and emits NO rollExplanation row. Only SPONTANEOUS class births
+    // are eligible; receipted consequences (isChainedConsequence) always pass. Dormant
+    // ⇒ tempo?.active is false ⇒ this whole block is skipped ⇒ byte-identical.
+    if (tempo?.active) {
+      const gov = governBirth({
+        candidate,
+        snapshot: tempo.snapshot,
+        config: { active: true, budgets: tempo.budgets, lowestPendingClass },
+      });
+      if (gov.defer) {
+        deferred.push({
+          class: gov.class,
+          settlementId: candidate.targetSaveId != null ? String(candidate.targetSaveId) : null,
+          reason: gov.reason,
+        });
+        continue;
+      }
+    }
     const roll = candidateRoll(rng, candidate);
     const probability = guaranteed
       ? 1
@@ -426,5 +457,6 @@ export function rollCandidates(/** @type {any[]} */ candidates = [], /** @type {
     else if (!guaranteed) autoCount += 1;
   }
 
-  return { selected, rollExplanations };
+  // `deferred` defaults to [] — byte-neutral when the governor is dormant.
+  return { selected, rollExplanations, deferred };
 }

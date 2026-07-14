@@ -346,6 +346,11 @@ const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
   'spatialDigest', 'spatialLedgers',
+  // E0 NARRATIVE TEMPO GOVERNOR — APPENDED AT THE END ONLY (the array order IS the
+  // serialized key order, pinned by the dormancy/golden oracle). Mutates each tick,
+  // so it takes the mutable deepCloneConditionalLedger branch (NOT the FROZEN set).
+  // Absent/empty ⇒ key omitted ⇒ byte-identical-dormant.
+  'narrativeTempo',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR
