@@ -23,6 +23,7 @@ import {
 import { canonizeWorldState, deepFreeze } from '../domain/worldPulse/worldState.js';
 import { cacheCampaignState, syncCampaignSnapshot, findActiveCampaign } from './campaignSliceShared.js';
 import { track, EVENTS } from '../lib/analytics.js';
+import { extractCanonizeUsage } from '../lib/spatialCanonizeUsage.js';
 import { captureSpatialPack as liveCaptureSpatialPack } from '../lib/spatialPackCapture.js';
 
 // Hard ceiling on the frozen digest so a spatial canonize can never bloat a save
@@ -105,7 +106,13 @@ export async function runSpatialCanonize({ set, get, campaignId, options = {} })
     campaignPersist = cacheCampaignState(stateDraft);
   });
   if (!campaignPersist) return { ok: false, reason: 'not_found' };
-  track(EVENTS.WORLD_CANONIZED, { settlement_count: digest.settlementIds.length });
+  // Spatial-canonize usage: distinguishes the entitled spatial canon from a plain
+  // world canonize (which carries no `spatial` prop) + records the lit map features
+  // and digest size band. Coarse/id-free; this body is lazy so it costs no eager bytes.
+  track(EVENTS.WORLD_CANONIZED, {
+    settlement_count: digest.settlementIds.length,
+    ...extractCanonizeUsage(digest, nextVersion, digestBytes),
+  });
   await syncCampaignSnapshot(campaignPersist.snapshot, campaignId);
   return { ok: true, spatialCanonVersion: nextVersion, digestBytes };
 }

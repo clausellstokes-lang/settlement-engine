@@ -33,8 +33,14 @@ export { EDIT_KINDS };
  *  rev 6: the generation-id SPINE — generation_milestone (one event, five waypoints:
  *  generate/save/canonize/export/narrate, each carrying a pseudonymous generation_id
  *  + a coarse structural fingerprint) and event_edit_applied (the revealed-preference
- *  signal for which in-world event types DMs actually apply). */
-export const EVENTS_REV = 6;
+ *  signal for which in-world event types DMs actually apply).
+ *  rev 7: Phase-5.5 SPATIAL-ENGINE usage — ADDITIVE props only (no new event names):
+ *  world_pulse_advanced gains a sim_config block (preset_id / info_mode / CL-0 axes /
+ *  flags_on) + spatial_active + a per-mover activity block (movers_active + coarse
+ *  id-free mover_counts + migration_pop_band) read from the post-tick spatialLedgers;
+ *  world_canonized (spatial path) gains spatial/version/lit-feature/digest-size props.
+ *  Derivation is src/lib/spatialUsage.js (lazy side-channel). */
+export const EVENTS_REV = 7;
 
 export const EVENTS = Object.freeze({
   // ── Tier 8.8 — minimum 4-event funnel ─────────────────────────────────

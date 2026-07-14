@@ -243,6 +243,33 @@ statuses: `queued | applied | ignored | expired | resolved`.
 | `src/lib/session.js` | session mint | `session_started` |
 | `src/lib/consent.js` | `setConsent` | `consent_updated` |
 
+---
+
+## 11. Phase-5.5 spatial-engine usage (rev 7 — ADDITIVE props, NO new events)
+
+The Phase-5.5 spatial engine (preset selection, the mover ladder, the spatial canonize) post-dates
+the taxonomy above and was previously **unmeasured** — worse, preset/flag changes were *filtered
+out* (`extractSimulationRules`'s `changed_keys` clamp excludes every 5.5 key). Rev 7 closes that gap
+by **enriching two existing essential events with coarse, id-free props** — no new event names (so no
+first-paint eager bytes, no edge-bundle event surface change), no DB migration (props are JSONB). All
+derivation is a read-only side-channel off the **already-final post-tick worldState** and lives in
+lazy modules, so same-seed goldens stay byte-identical and the first-paint closure is unchanged.
+
+**Determinism + budget proof (2026-07-13):** goldens byte-identical; `verify:dist` 108/108; entry
+closure `1,255,965` = byte-identical to the pre-change baseline (margin 20 under
+`CLOSURE_BUDGET_BYTES`). The two derivation modules are deliberately SEPARATE files, each imported by
+exactly one lazy body — a single shared module leaks a ~44-byte chunk-manifest string into the entry
+(the FP-R hazard); see the header notes in `spatialUsage.js` / `spatialCanonizeUsage.js`.
+
+| Event (existing) | Fire site (lazy) | New props (all coarse: enums/bands/counts/booleans, no ids) | Question answered |
+|---|---|---|---|
+| `world_pulse_advanced` | `campaignAdvanceSession.js` (`extractSpatialUsage`, `src/lib/spatialUsage.js`) | `sim_config { preset_id, info_mode, world_progression, political_autonomy, spatial_mode, travel_mode, migration_mode, intensity, flags_on:[enabled 5.5 flag names] }` + `spatial_active` + `spatial_canon_version`; and when spatial/movers are live: `movers_active:[embattlement, caravans, smuggle, migration, field_combat, entrepots, trade_flow, rumor, belief, moral_drift, dispatch_refusal, propagation, approval_queue]`, `mover_counts {embattled, caravans(+starving), smuggle, migration_columns, armies_afield(+cut_off), entrepots, trade_flow_nodes, rumor_holders, belief_observers, moral_drift, dispatch_refusing, arrivals_in_transit, approvals_pending}`, `migration_pop_band` | which **presets** real play runs under; which **feature-flags** are adopted; which **mover layers** actually fire, at what intensity; **approval-queue** depth; **tick** cadence |
+| `world_canonized` (SPATIAL path only) | `campaignSpatialCanonize.js` (`extractCanonizeUsage`, `src/lib/spatialCanonizeUsage.js`) | `spatial:true, spatial_canon_version, is_recanonize, geometry_version, cost_law_version, overlay_version, has_sea_lanes, has_teleport, has_seasonal, digest_bytes_band` | spatial-engine **opt-in** rate; re-canonize behavior; which map features (sea/teleport/seasonal) get lit; digest weight |
+
+The plain (non-spatial) `world_canonized` carries no `spatial` prop, so absence distinguishes it from
+the spatial path (zero eager touch to that fire). Gallery interactions and tick/advance cadence are
+already covered by the existing `gallery_*` events and `world_pulse_advanced` fire itself.
+
 ## Totals
 
 - **58 new events** (+ 6 existing with extended props, + typed `edit_events` rows on the research plane).
