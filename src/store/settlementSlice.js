@@ -498,9 +498,20 @@ export const createSettlementSlice = (set, get) => ({
               state.renameNPC(edit.payload.npcIndex, edit.payload.newName);
             }
             break;
-          case 'rename-settlement':
-            set(s => { if (s.settlement) s.settlement.name = edit.payload?.newName; });
+          case 'rename-settlement': {
+            // §10.4: the inline mutation touched only the live store, so a
+            // queued town rename GHOSTED on reload — and renameSettlement (the
+            // persisting helper) has no direct caller, so this queue path is the
+            // only town-rename surface. Mirror the rename-npc dispatch above:
+            // mutate live, then persist through the shared edit-persist (no-ops
+            // on an unsaved draft, which correctly needs no cloud write). Without
+            // this, committing a queued town rename ghosts while a queued NPC
+            // rename (same commit) survives.
+            let renamed = false;
+            set(s => { if (s.settlement) { s.settlement.name = edit.payload?.newName; renamed = true; } });
+            if (renamed) get().persistActiveSaveEdit?.();
             break;
+          }
           // Future kinds (add-institution etc.) dispatch to existing
           // mutations or — for not-yet-built ones — log a TODO. The
           // queue still clears so the UI isn't stuck on a missing
@@ -1295,16 +1306,23 @@ export const createSettlementSlice = (set, get) => ({
   },
 
   // ── NPC / Faction renaming ─────────────────────────────────────────────────
-  renameNPC: (npcIndex, newName) =>
+  renameNPC: (npcIndex, newName) => {
+    let changed = false;
     set(state => {
       // Campaign-clock identity lock: NPC names freeze at canonization. Renames
       // are a draft-only affordance (the UI hides them post-canon; guard here too).
       if (state.phase === 'canon') return;
       if (!state.settlement?.npcs?.[npcIndex]) return;
       state.settlement.npcs[npcIndex].name = newName;
-    }),
+      changed = true;
+    });
+    // Persist so the rename survives reload instead of ghosting until some later
+    // action happens to write the blob (§10.4). No-op without a hydrated save.
+    if (changed) get().persistActiveSaveEdit?.();
+  },
 
-  renameFaction: (factionIndex, newName) =>
+  renameFaction: (factionIndex, newName) => {
+    let changed = false;
     set(state => {
       // Campaign-clock identity lock: faction names freeze at canonization.
       if (state.phase === 'canon') return;
@@ -1322,7 +1340,10 @@ export const createSettlementSlice = (set, get) => ({
       // sees the new name.
       fac.name = newName;
       if ('faction' in fac) fac.faction = newName;
-    }),
+      changed = true;
+    });
+    if (changed) get().persistActiveSaveEdit?.();
+  },
 
   // ── User-edited prose (Tier 5.4) ─────────────────────────────────────────
   //
@@ -1355,22 +1376,35 @@ export const createSettlementSlice = (set, get) => ({
   // grounding sees it via `forbiddenChanges`, and the verifier
   // protects it via `changed_user_field`.
 
-  applyUserEditAction: (kind, entityIndex, path, value) =>
+  applyUserEditAction: (kind, entityIndex, path, value) => {
+    let changed = false;
     set(state => {
       if (!state.settlement) return;
       if (!isEditablePath(kind, path)) return;  // strict registry gate
       const entity = _resolveEntity(state.settlement, kind, entityIndex);
       if (!entity) return;
       domainApplyUserEdit(entity, path, value);
-    }),
+      changed = true;
+    });
+    // Persist the authored value so it survives reload (§10.4). No-op without a
+    // hydrated save (the edit lives in memory only, which is correct).
+    if (changed) get().persistActiveSaveEdit?.();
+  },
 
-  revertUserEditAction: (kind, entityIndex, path) =>
+  revertUserEditAction: (kind, entityIndex, path) => {
+    let changed = false;
     set(state => {
       if (!state.settlement) return;
       const entity = _resolveEntity(state.settlement, kind, entityIndex);
       if (!entity) return;
+      // Only a real revert is a blob mutation worth persisting — a revert of an
+      // unedited path is a no-op, so don't bump editedAt / write for it.
+      const wasEdited = !!(entity._userEdits && path in entity._userEdits);
       domainRevertUserEdit(entity, path);
-    }),
+      changed = wasEdited;
+    });
+    if (changed) get().persistActiveSaveEdit?.();
+  },
 
   /** Count user edits across the live settlement. Reactive selector. */
   countSettlementEdits: () => {
@@ -1464,6 +1498,50 @@ export const createSettlementSlice = (set, get) => ({
     };
     if (typeof s.updateSavedSettlement === 'function') {
       s.updateSavedSettlement(activeSaveId, savePartial);
+    }
+    persistSaveUpdate(activeSaveId, {
+      settlement: savePartial.settlement,
+      campaignState: savePartial.campaignState,
+    });
+  },
+
+  /**
+   * Persist an in-place CONTENT edit (an authored prose value, or an NPC /
+   * faction rename) on the active save. This is the persist half every
+   * settlement-blob edit needs and that the four edit actions historically
+   * LACKED: without it the edit mutated only the live store and GHOSTED on
+   * reload until some LATER persisting action (applyEvent / regenerateSection /
+   * canonize / revert) happened to write the blob — the owner's most-bitten
+   * "survives one path, ghosts another" class (docs/DESIGN_SETTLEMENT_MAP.md
+   * §10.4). Mirrors applyEvent's / the section-reroll persist exactly: stamp
+   * editedAt on the live slice (rail + provenance parity), sync the in-memory
+   * save entry, and durably write the settlement + a re-derived campaignState.
+   *
+   * No-ops when no save is hydrated (an unsaved draft has nowhere to persist —
+   * the edit lives in memory only, which is correct), and defers to an
+   * in-progress change-queue flush (flushSuppressPersist), which owns the single
+   * atomic commit — the same invariant renameSettlement honours. Content edits
+   * are not in-world events, so this never touches the eventLog: campaignState
+   * is re-pickled from the (unchanged) live phase/eventLog/systemState, only
+   * bumping editedAt.
+   */
+  persistActiveSaveEdit: () => {
+    const s = get();
+    const activeSaveId = s.activeSaveId;
+    if (!activeSaveId || !s.settlement) return;
+    // A change-queue flush replays these edits and owns the single atomic
+    // commit, so defer this row's write while suppressed (renameSettlement R2).
+    if (s.flushSuppressPersist) return;
+    const now = new Date().toISOString();
+    set(st => { st.editedAt = now; });
+    const afterState = get();
+    const savePartial = {
+      settlement: cloneJson(afterState.settlement),
+      campaignState: pickleCampaignState(afterState),
+      timestamp: now,
+    };
+    if (typeof afterState.updateSavedSettlement === 'function') {
+      afterState.updateSavedSettlement(activeSaveId, savePartial);
     }
     persistSaveUpdate(activeSaveId, {
       settlement: savePartial.settlement,
