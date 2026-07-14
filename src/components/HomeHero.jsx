@@ -34,6 +34,7 @@ import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
+import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -290,8 +291,9 @@ export default function HomeHero({ onSignIn, onNavigate }) {
                 You’ve explored <em style={{ color: GOLD_DEEP }}>hamlet, village, town.</em>
               </div>
               <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
-                <b>Sign in (free)</b> to unlock thorp through metropolis,
-                save unlimited drafts, and export the PDF.
+                <b>Sign in (free)</b> to unlock thorp through metropolis and
+                save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
+                PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
               </div>
               <Button
                 variant="primary"

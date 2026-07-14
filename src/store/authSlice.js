@@ -32,9 +32,19 @@ import { DEFAULT_MODEL_PREFERENCE } from '../config/pricing.js';
 // Anonymous ALONE is capped at town: the no-account funnel previews up to Town,
 // and signing up for a free account unlocks the full size ladder (the landing's
 // locked City/Metropolis pills are the sign-in conversion hook).
-const TIER_GATE = {
+// Exported so the derived tier-facts DISPLAY module (src/config/tierFacts.js)
+// can pin its per-tier claims to this ENFORCEMENT map — one source, one contract
+// test, no drift across the conversion surfaces.
+//
+// PDF export (owner ruling 2026-07-13): only premium gets UNLIMITED free export
+// (`export: true`). The free tier's `export` is false — it does NOT export freely;
+// it buys a durable per-dossier PDF right ($2.99, the single-dossier ladder). The
+// export surfaces read `canExport()` and route a non-exporting tier to the
+// entitlement/purchase rung (BuyThisDossier). Anon has always been false (the anon
+// one-shot buy path). This flip activates the built-but-dormant $2.99 ladder.
+export const TIER_GATE = {
   anon:    { maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false },
-  free:    { maxTier: 'capital', maxSaves: 3,        neighbour: false, export: true,  mapChains: false, customContent: false },
+  free:    { maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false },
   premium: { maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true  },
 };
 

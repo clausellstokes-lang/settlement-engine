@@ -42,6 +42,11 @@ import CoherencePanel   from './settlement/CoherencePanel.jsx';
 import ProvenanceBlock  from './settlement/ProvenanceBlock.jsx';
 import AIInlineCard     from './settlement/AIInlineCard.jsx';
 import ExportSheet      from './settlement/ExportSheet.jsx';
+// PDF-export access seam (owner ruling 2026-07-13: free = per-dossier $2.99,
+// premium = unlimited). resolveExportAccess is the same decision BuyThisDossier
+// uses; the saved-view Export button gates on it and hands non-entitled tiers the
+// purchase rung instead of a free export.
+import BuyThisDossier, { resolveExportAccess } from './BuyThisDossier.jsx';
 // Modal that fires after pillar-tier KILL_NPC commits. Reads
 // pendingSuccession off the slice, shows ranked successors, and
 // pre-fills the EventComposer with ASSIGN_NPC_TO_ROLE on selection.
@@ -237,6 +242,22 @@ export default function SettlementDetail({
   const canEdit              = authTier === 'premium' || authTier === 'founder' || isElevated;
   const editedCount          = isSettlementEdited && isSettlementEdited() ? countSettlementEdits() : 0;
 
+  // ── PDF-export access seam ─────────────────────────────────────────────────
+  // Owner ruling (2026-07-13): only premium exports freely; free pays $2.99 per
+  // dossier via the durable single-dossier ladder. The saved-view "Export
+  // Dossier" button was UNGATED (any signed-in tier exported free) — so flipping
+  // TIER_GATE.free.export alone would not have gated it. Route through the same
+  // resolveExportAccess decision BuyThisDossier uses: an export-capable tier
+  // (elevated / premium / founder) or a held durable right → export; a free tier
+  // without a right → the purchase rung. Anon never reaches this saved view.
+  const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
+    || (typeof s.canExport === 'function' && s.canExport()));
+  const cachedEntitlement = useStore(s => (saveId ? s.dossierEntitlements?.[saveId] : undefined));
+  const refreshDossierEntitlement = useStore(s => s.refreshDossierEntitlement);
+  const exportAccess = resolveExportAccess({
+    tier: authTier, canExportFreely, saveId, entitled: cachedEntitlement === true,
+  });
+
   // Chronicle (AI-3b) — pulled from the live savedSettlements entry so the
   // list updates after each generate / revert without remounting the view.
   const liveSaveEntry = useStore(s => saveId ? s.savedSettlements.find(x => x.id === saveId) : null);
@@ -264,6 +285,16 @@ export default function SettlementDetail({
     return () => { clearAiSettlement(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveId]);
+
+  // Fetch the durable-right flag once when the saved dossier is not export-capable
+  // and nothing is cached yet — mirrors BuyThisDossier so a held right lights the
+  // Export button without a purchase prompt.
+  useEffect(() => {
+    if (exportAccess.reason === 'unpurchased' && cachedEntitlement === undefined && saveId
+        && typeof refreshDossierEntitlement === 'function') {
+      refreshDossierEntitlement(saveId);
+    }
+  }, [exportAccess.reason, cachedEntitlement, saveId, refreshDossierEntitlement]);
 
   const handleRevertToRaw = async () => {
     if (!saveId) return;
@@ -309,6 +340,10 @@ export default function SettlementDetail({
   // campaign assembly and the faith premium seam can never drift between them.
   const runExport = async (kind, variant, useAi = narrated) => {
     if (exporting) return;
+    // Defense-in-depth: the button is replaced by the purchase rung when access
+    // is denied, but never run a PDF for a tier that must buy first even if the
+    // sheet is somehow opened.
+    if (!exportAccess.allowed) return;
     setPdfError(null);
     setExporting(true);
     // Trust gate (feature doc §1b): log cross-surface contradictions for
@@ -466,16 +501,24 @@ export default function SettlementDetail({
               Session Mode
             </Button>
           )}
-          <Button
-            variant="danger"
-            size="sm"
-            busy={exporting}
-            icon={<FileText size={12}/>}
-            onClick={() => setExportSheetOpen(true)}
-            title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-          >
-            {exporting ? 'Building PDF…' : 'Export Dossier'}
-          </Button>
+          {exportAccess.allowed ? (
+            <Button
+              variant="danger"
+              size="sm"
+              busy={exporting}
+              icon={<FileText size={12}/>}
+              onClick={() => setExportSheetOpen(true)}
+              title="Choose Draft Brief / Canon Dossier / Timeline Packet."
+            >
+              {exporting ? 'Building PDF…' : 'Export Dossier'}
+            </Button>
+          ) : (
+            /* Owner ruling: a free tier without a durable right buys the PDF
+               ($2.99) rather than exporting freely. BuyThisDossier renders the
+               matching rung ('unpurchased' → $2.99 durable buy; 'unsaved' → save
+               first). Anon never reaches this saved view. */
+            <BuyThisDossier settlement={detail.settlement} saveId={saveId} />
+          )}
           <Button
             variant="secondary"
             size="sm"

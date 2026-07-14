@@ -23,6 +23,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { useReaderAudience } from '../../hooks/useReaderAudience.js';
 import { flag } from '../../lib/flags.js';
+import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { startCheckout } from '../../lib/stripe.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { sans, serif_, FS, SP, R, swatch } from '../theme.js';
@@ -75,7 +76,7 @@ export default function FounderTile() {
 
   if (!eligible) return null;
 
-  const claimSeat = seatsRemaining ? 500 - seatsRemaining + 1 : null;
+  const claimSeat = seatsRemaining ? FOUNDER_SEAT_CAP - seatsRemaining + 1 : null;
 
   async function handleClick() {
     setLoading(true);
@@ -123,7 +124,7 @@ export default function FounderTile() {
             marginTop: 6, fontSize: FS.xs, color: swatch['#C8B098'],
             fontStyle: 'italic',
           }}>
-            {seatsRemaining} of 500 seats remaining
+            {seatsRemaining} of {FOUNDER_SEAT_CAP} seats remaining
           </div>
         )}
       </div>

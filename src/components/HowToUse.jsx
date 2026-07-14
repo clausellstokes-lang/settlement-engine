@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle, Globe } from 'lucide-react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
+import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
 
@@ -123,7 +124,7 @@ function QuickTab() {
         First settlement in 60 seconds
       </div>
       <Step n={1}>On the Create tab, pick a <strong>mode</strong> - <strong>Basic Generate</strong> for minimal config (tier, route, threat, terrain) or <strong>Advanced Generate</strong> for the full step-by-step wizard with priority sliders, institution toggles, services, and trade dynamics.</Step>
-      <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode can generate Thorp through Village; sign in for Town, City, and Metropolis.</Step>
+      <Step n={2}>Pick a <strong>tier</strong>. Hamlet or Village for a small roadside settlement, Town for a proper community. Free mode (no account) reaches up to {ANON_MAX_SIZE_LABEL}; sign in to unlock City and Metropolis.</Step>
       <Step n={3}>Pick a <strong>trade route</strong>. Road is the safe default. Port and Crossroads produce richer economies. Pick a <strong>nearby terrain</strong>. Forests, mountains, and coastlines affect what resources appear and which supply chains are viable.</Step>
       <div style={{ display:'flex', gap:10, marginBottom:8, alignItems:'flex-start', paddingLeft:32 }}>
         <div style={{ width:6, height:6, borderRadius:'50%', background:swatch['#B8860B'], flexShrink:0, marginTop:7 }}/>

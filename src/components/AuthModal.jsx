@@ -18,6 +18,7 @@ import { X, User, ExternalLink, Headphones } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_HDR, serif_, SP, R, FS, swatch } from './theme.js';
 import { getTierDisplayName } from '../config/pricing.js';
+import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 import { t } from '../copy/index.js';
 import { supportMailto } from '../copy/support.js';
 import FounderBadge from './primitives/FounderBadge.jsx';
@@ -157,9 +158,9 @@ export default function AuthModal({ onClose, onNavigateAccount }) {
                   </>
                 ) : (
                   <>
-                    <strong>Free Account:</strong> All tiers, 10 saves, custom content
+                    <strong>Free Account:</strong> All sizes, {TIER_FACTS.free.saveLimit} saves, per-dossier PDF ({SINGLE_DOSSIER_PRICE})
                     <br />
-                    <strong>Premium:</strong> Unlimited saves, Neighbourhood System, PDF/JSON export, Map supply chains
+                    <strong>Premium:</strong> Unlimited saves, Neighbourhood System, unlimited PDF/JSON export, custom content, Map supply chains
                   </>
                 )}
               </div>

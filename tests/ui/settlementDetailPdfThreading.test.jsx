@@ -77,6 +77,13 @@ const baseState = () => ({
   countSettlementEdits: () => 0,
   auth: { tier: 'anon', user: null },
   isElevated: () => false,
+  // Export-access seam (owner ruling: only premium exports freely; free buys per
+  // dossier). SettlementDetail's Export button now gates on canExport()/entitlement,
+  // so the mock must answer them: premium is export-capable; a durable right lights
+  // the button for a free tier. Read the tier live so per-test overrides apply.
+  canExport: () => storeState.auth?.tier === 'premium',
+  dossierEntitlements: {},
+  refreshDossierEntitlement: vi.fn(),
   setPurchaseModalOpen: vi.fn(),
   setEditMode: vi.fn(),
   systemState: {},
@@ -198,8 +205,13 @@ describe('SettlementDetail handlePdfExport — W4f campaign/faith threading', ()
     expect(() => structuredClone(options)).not.toThrow();
   });
 
-  test('free / anon export threads faithUnlocked:false — the chapter gate stays shut', async () => {
-    storeState.auth = { tier: 'anon', user: null };
+  test('free-with-entitlement export threads faithUnlocked:false — the chapter gate stays shut', async () => {
+    // Post-ruling: anon/free cannot export freely (they buy per dossier). A free
+    // tier that HAS paid the $2.99 durable right can export — and must still NOT
+    // receive the premium Faith & War chapter (faithUnlocked stays false since the
+    // buyer is not premium). That is exactly what this pins.
+    storeState.auth = { tier: 'free', user: { id: 'u2' } };
+    storeState.dossierEntitlements = { 'save-1': true };
     const [, options] = await mountAndExport();
 
     expect(options.faithUnlocked).toBe(false);
