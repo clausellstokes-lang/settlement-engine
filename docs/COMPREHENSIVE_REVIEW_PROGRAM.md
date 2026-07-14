@@ -80,6 +80,23 @@ behavior, budget raises, golden regens.
   (EV/pressure/character), flat only where the fiction is indifferent, weights receipted.
   Binding on E1/W-PEACE/W-DOCTRINE/SM briefs. Canonical text: DESIGN_COHESION_WEAVE §H.
 
+- **2026-07-14 — CORRUPTION WEB + SETTLEMENT POLITICS (owner-ratified, designs pending recon):**
+  (1) Corruption generalizes the LEASH (foreign court/faction/criminal-org + the cutout) while
+  local influence-and-effect mechanics stay byte-identical; weight-tampering under the loaded-dice
+  law; blowback triple incl. casus-belli-class exposure; SCARCITY AS LAW (rare/expensive/slow,
+  E0-classed, capped concurrent assets). (2) Intra-settlement COALITIONS: scale-free reuse of the
+  peace engine's coalition machinery (blocs, concessions, differential strain, defection windows,
+  fracture on succession); ruling bloc loads the settlement's decision dice (same kernel as
+  corruption, opposite legitimacy); conspiracies = covert coalitions; depth cap + hysteresis as
+  law; VOCABULARY SPLIT: "concessions" = overt glue, "compromise" stays corruption-only.
+  (3) NPC DIMENSION (owner addendum, verbatim intent: "take into account the NPCs within
+  coalitions for the fragmentation, formation, direction, movement of said coalitions, how strong
+  or how fragile, to what end"): leader ties ease/block formation; NPC goals color the bloc's END;
+  personal-loyalty glue = strong-but-succession-fragile (people-held) vs concession glue =
+  transactional-but-durable (seat-held); secondaryAffiliation NPCs are the natural bridge/defection
+  points; all under §G law — bounded modulators + receipts, never engine-resolved fates.
+  Both docs write grounded on the corruption recon (wf_8c9fcc07-932); build home W-DOCTRINE.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
