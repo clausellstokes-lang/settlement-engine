@@ -199,9 +199,11 @@ recovery = the resume protocol above; every wave banks before the next dispatche
 ## IN-FLIGHT (overnight 2026-07-14 — for a successor finding unstaged work)
 - MAIN TREE: ✅ **F1+trim COMMITTED** (see Progress). F2 dispatching next.
 - GOLDEN WORKTREE (/Users/cstokes/Desktop/settlement-engine-golden @ claude/review-fix-golden-track):
-  G1a war-execution COMPLETE (5 fixes, 16 pins, 4,685-test sweep green, ZERO goldens shifted —
-  shift ledger documents why) but any-cast 2252→2283; typing-pass follow-up running to burn +31
-  to 0 (re-baseline is owner-gated, not taken). Commit G1a there once count = 2252.
+  ✅ **G1a COMMITTED @ 7e1886dd** — 5 fixes, 16 pins, ZERO goldens shifted (ledgered why), any-cast
+  burned +31→+0 (2252 exact, no re-baseline), independent battery 21 files/108 green. G1b (war
+  mechanics: posture≠engagement rust fix, retreat lives, umbilical read, defenders bank wins,
+  occupation constrains, removed-settlement deployment lifecycle) DISPATCHED on top.
+  MAIN TREE: F2 client-seams DISPATCHED (post-F1 @ 75cdf8b1).
 > - 2026-07-14 ~02:00: **F1 LIFECYCLE-TRUST SHIPPED** (9 fixes, 24 pins) — with the ratchet story
 >   the constitution wrote itself: the wave was HELD at +805B over budget, the §0.8-1 trim landed
 >   in-wave (catch-up body lazified + pulseFingerprint off first paint), closure now **1,251,094**
