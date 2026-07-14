@@ -306,3 +306,42 @@ reasons now present; this war is dying") and reason DIVERGENCE (one side fights 
 the other has forgotten); the chronicle can render a war's full causal arc — born of iron-hunger
 and an old insult, sustained by mutual illusion, died of harvest and a horde. Motive is state,
 state is receipted, receipts are fiction the DM can read aloud.
+
+## 15. THE PRIZE RANKING + TERM LIMITS (owner refinements)
+### 15.1 The victor asks for what IT values most of what the LOSER has (top-three rule)
+Term selection is never generic. At the table, the victor APPRAISES the loser's portfolio through
+its own lens and drafts terms from the TOP THREE of that ranking (budget permitting):
+- ASSET CLASSES APPRAISED: resource/export flows (weighted by the VICTOR'S OWN scarcity — its
+  bands, depletions, and supply-web gaps: the iron-starved victor ranks the mines first);
+  routes/gates (weighted by the victor's trade arteries — entrepôt centrality, toll positions:
+  the merchant victor beside the strait ranks the tolls first); military geography (the pass,
+  the fortress satellite — weighted by the victor's threat environment); the loser's ALLIANCE
+  NETWORK (compelled alliance ranks high precisely when the loser has strong friends — the
+  relational asset); faith space (contested conversion ground — weighted by the victor's
+  contest positions); treasury/prosperity (the default when nothing structural stands out);
+  intel position (compelled intel ranks high for the fog-blind victor who just learned the cost
+  of blindness).
+- THE RANKING IS THE VICTOR'S OWN NEEDS, mechanically: its scarcity reads, archetype objectives
+  (M9a), strategic reads (W-DOCTRINE's web view), contest positions — all existing. Alignment
+  then weights HOW HARD the top items are pressed (§4's magnanimity law unchanged).
+- BELIEF-APPRAISED: the victor ranks the portfolio it BELIEVES the loser has. A concealed asset
+  escapes the ask — fog protects wealth, appraisal is intelligence work, and the loser's
+  incentive to hide its best mine from enemy eyes now has mechanical teeth (ties to §11
+  compelled-intel and §12 inspection events).
+- LEGIBILITY: the treaty receipt names the ranking's logic — "Thornwall took the river tolls;
+  it was always the river they wanted." The dramatic-irony brief can show the appraisal gap
+  ("the victor never learned of the silver vein").
+
+### 15.2 TERM LIMITS (durations capped, priced, never perpetual)
+Every stream/status term carries a DURATION CAP, scaling with the ratio inside a hard ceiling
+(named constants, owner-retunable): tribute + resource-share ≤ TRIBUTE_MAX_YEARS (guide: 3-5y
+modest victory, 10-15y crushing); compelled alliance ≤ ALLY_TERM_MAX (5-8y — compelled loyalty
+rots faster than that anyway, §11's defection window); demilitarization/army caps ≤ 10y;
+garrison rights reviewed on an occupation-window cycle; missionary access ≤ one contest cycle;
+NAPs 5-20y by mutual weight. DURATION ENTERS THE PRICE: a longer term spends more of the same
+budget (victors trade breadth against length — three short takings or one long one).
+PERPETUAL TERMS ARE FORBIDDEN except one-time state changes (recognition, cession — events, not
+streams): the sub-century horizon, the engine's anti-permanent-ratchet doctrine, and history
+itself all say open-ended extraction is a fiction — every stream ends, renegotiates (§12.5's
+window, at the CURRENT ratio), converts (the E1 bridge), or breaks (§12.4). A treaty is a
+season of history, never a law of physics.
