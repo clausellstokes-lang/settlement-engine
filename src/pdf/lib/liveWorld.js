@@ -70,6 +70,13 @@ import { realmArcLines } from '../../domain/display/realmArcSummary.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import { computeAggressiveness, AGGRESSION_TUNING } from '../../domain/worldPulse/disposition.js';
 import { divineMandateStatus, patronContestOdds } from '../../domain/worldPulse/religionState.js';
+// pdf-1: the living-world reads the on-screen dossier already shows — rumors,
+// belief-divergence, M6d trade-flow drift, and pestilence — via the SAME pure
+// display selectors, so the premium PDF stops printing a pre-spatial world.
+import { settlementRumors } from '../../domain/display/settlementRumors.js';
+import { settlementBeliefs } from '../../domain/display/settlementBeliefs.js';
+import { settlementPestilence } from '../../domain/display/settlementPestilence.js';
+import { flowDerivedDependency } from '../../domain/display/tradeFlowEconomics.js';
 
 /** Human posture band for a centered-on-1.0 aggressiveness multiplier. Mirrors
  * WarFaithSection.aggressionPosture so the printed posture matches the screen. */
@@ -151,6 +158,41 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     ? settlementTradePressure({ settlementId: id, regionalGraph, settlements: occItems, worldState, includeCovert: false, nameFor })
     : [];
 
+  // ── pdf-1: the living-world reads the screen dossier already shows ────────
+  // Rumors — the PLAYER projection (includeGroundTruth:false ⇒ the shareable-safe
+  // ledger: no DM truth block, deity names scrubbed to activated-only). Capped for
+  // the print surface. Belief-divergence — the DM projection (includeGroundTruth:
+  // true), which surfaces ONLY through this chapter's premium/canon/live three-fold
+  // gate (a free/anon export never renders FaithWar, so DM belief truth never reaches
+  // a non-premium artifact). Flow-drift + pestilence are qualitative, player-safe.
+  const rumors = id
+    ? settlementRumors({ worldState, settlementId: id, includeGroundTruth: false, nameFor })
+        .slice(0, 8)
+        .map(r => ({ id: r.id, headline: r.headline, detail: r.detail, distance: r.distance, freshness: r.freshness, significance: r.significance }))
+    : [];
+  const beliefs = id
+    ? settlementBeliefs({ worldState, observerId: id, includeGroundTruth: true, nameFor })
+        .map(b => {
+          const believed = /** @type {{ strengthWord?: string, readinessWord?: string }} */ (b.believed || {});
+          return {
+            subject: b.subjectName,
+            strength: believed.strengthWord,
+            readiness: believed.readinessWord,
+            confidence: b.confidence,
+            staleness: b.staleness,
+            divergence: Array.isArray(b.divergence) ? b.divergence : [],
+          };
+        })
+    : [];
+  const flowDriftRaw = id ? flowDerivedDependency({ worldState, economicState: s?.economicState, settlementId: id }) : null;
+  const flowDrift = flowDriftRaw
+    ? { band: flowDriftRaw.band, label: flowDriftRaw.label, headline: flowDriftRaw.headline, inbound: flowDriftRaw.inbound, outbound: flowDriftRaw.outbound }
+    : null;
+  const pestilenceRaw = id ? settlementPestilence({ worldState, settlementId: id, settlement: s, includeGroundTruth: false, nameFor }) : null;
+  const pestilence = pestilenceRaw
+    ? { phase: pestilenceRaw.phase, presence: pestilenceRaw.presence, severity: pestilenceRaw.severity, originFiction: pestilenceRaw.originFiction, care: pestilenceRaw.care }
+    : null;
+
   // ── Settlement-local aggressiveness (meaningful even without a campaign) ──
   const aggrItem = { id: id || s?.id, settlement: s };
   const aggressiveness = computeAggressiveness(aggrItem, worldState || {});
@@ -205,7 +247,11 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // This is the byte-identity seam: identical result with/without an empty
   // worldState, and identical result for campaign === null.
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow
-    || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0;
+    || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0
+    // pdf-1: the new living-world reads also count as "live" — a settlement with only
+    // rumors / beliefs / trade-drift / pestilence (no war, no deity) still earns the
+    // chapter. Dormant worlds return [] / null from every selector ⇒ byte-identical.
+    || rumors.length > 0 || beliefs.length > 0 || !!flowDrift || !!pestilence;
   if (!hasLive && !deity && !cults.length && !livePantheon.length) return null;
 
   const tradeWars = tradeWarsRaw.map(t => {
@@ -264,6 +310,11 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     contestOdds,
     mandate,
     cults,
+    // ── pdf-1: the new living-world reads (parity with the on-screen dossier) ──
+    rumors,
+    beliefs,
+    flowDrift,
+    pestilence,
   };
 }
 

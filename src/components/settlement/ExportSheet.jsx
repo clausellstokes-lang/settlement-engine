@@ -18,7 +18,7 @@
 
 import { useState } from 'react';
 import { FS, swatch } from '../theme.js';
-import { FileText, X, BookMarked, Clock, Edit3 } from 'lucide-react';
+import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { t } from '../../copy/index.js';
@@ -29,7 +29,13 @@ const VARIANT_ICON = {
   draft_brief:     Edit3,
   canon_dossier:   BookMarked,
   timeline_packet: Clock,
+  campaign_state:  Swords,
 };
+
+// pdf-5: canon-only flagship variants. Their headline chapters (timeline / live
+// Faith & War) are `if-canon`, so a DRAFT-phase export of one silently drops them.
+// Disable them off-canon with a reason, exactly as timeline_packet always did.
+const CANON_ONLY_VARIANTS = new Set(['timeline_packet', 'campaign_state']);
 
 /**
  * @param {Object} props
@@ -66,8 +72,8 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
     Icon: VARIANT_ICON[id] || FileText,
-    disabled: id === 'timeline_packet' && phase !== 'canon',
-    disabledReason: id === 'timeline_packet' && phase !== 'canon'
+    disabled: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon',
+    disabledReason: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon'
       ? 'Available once the settlement is canonized.'
       : null,
   }));

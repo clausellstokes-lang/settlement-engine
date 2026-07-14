@@ -19,7 +19,7 @@
  * off-state. Pure, rng-free, no mutation. Newest-tick-first ordering is stable.
  */
 
-import { compareCausalState } from '../causalState.js';
+import { compareCausalState, deriveCausalState } from '../causalState.js';
 
 /** @param {any} v @returns {number} */
 const tickOf = (v) => (Number.isFinite(v?.tick) ? Number(v.tick) : 0);
@@ -124,6 +124,70 @@ function collectSettlementIds(outcome) {
  */
 export function tickCausalDiff(beforeCausal, afterCausal) {
   return compareCausalState(beforeCausal, afterCausal);
+}
+
+/**
+ * components-dossier-7: build the ChronicleScrollback's per-tick causal-diff supplier
+ * (`Map<tick, { before, after }>`) from EXISTING SESSION data — the pulse undo stack —
+ * with ZERO engine, persist, or schema change. Each undo snapshot is the PRE-pulse
+ * member-settlement state at its tick; the current live saves are the "after" of the
+ * latest advance. Consecutive frames (each snapshot's saves, then the live saves)
+ * bracket each advance, and we derive the causal state of the member whose state moved
+ * the MOST that advance — the shift worth showing — keyed by the pulse's RESULTING
+ * tick so it aligns with the timeline.
+ *
+ * Because the undo stack is capped and one snapshot covers a whole multi-tick advance,
+ * coverage is the recent, bracketable ticks only; every other tick's diff self-hides
+ * (compareCausalState over an absent frame ⇒ []), exactly as before. Pure — deriving
+ * causal state is memoized on settlement identity, so cloned snapshot settlements
+ * simply miss the memo and re-derive (byte-identical to a fresh derive).
+ *
+ * @param {{ snapshots?: Array<{ tick?: number, saves?: CausalSave[] }>,
+ *   liveSaves?: CausalSave[], currentTick?: number }} [args]
+ * @returns {Map<number, CausalFramePair>}
+ */
+export function causalByTickFromSnapshots(args = {}) {
+  const { snapshots, liveSaves, currentTick } = args || {};
+  /** @type {Map<number, CausalFramePair>} */
+  const map = new Map();
+  const snaps = Array.isArray(snapshots) ? snapshots : [];
+  const frames = snaps.map(sn => ({ tick: tickOf(sn), saves: Array.isArray(sn?.saves) ? sn.saves : [] }));
+  frames.push({ tick: Number.isFinite(currentTick) ? Number(currentTick) : 0, saves: Array.isArray(liveSaves) ? liveSaves : [] });
+  for (let i = 0; i < frames.length - 1; i++) {
+    const entry = pickMaxCausalChange(frames[i].saves, frames[i + 1].saves);
+    // The advance from frame i lands ON frame i+1's tick — key the diff there.
+    if (entry) map.set(frames[i + 1].tick, entry);
+  }
+  return map;
+}
+
+/**
+ * @typedef {{ id?: string|number, settlement?: object }} CausalSave  one member save frame.
+ * @typedef {{ before: object, after: object }} CausalFramePair  before/after causal states.
+ */
+
+/**
+ * The member whose causal state moved the MOST between two frames, as
+ * `{ before, after }` causal states (or null when nothing moved / no member matched
+ * by id across both frames). Deterministic — ties resolve to the first max by id order.
+ * @param {CausalSave[]} beforeSaves
+ * @param {CausalSave[]} afterSaves
+ * @returns {CausalFramePair | null}
+ */
+function pickMaxCausalChange(beforeSaves, afterSaves) {
+  const beforeById = new Map((beforeSaves || []).map(sv => [String(sv?.id), sv?.settlement]));
+  /** @type {CausalFramePair | null} */
+  let best = null;
+  let bestScore = 0;
+  for (const a of afterSaves || []) {
+    const beforeSettlement = beforeById.get(String(a?.id));
+    if (!beforeSettlement || !a?.settlement) continue;
+    const before = deriveCausalState(beforeSettlement);
+    const after = deriveCausalState(a.settlement);
+    const score = compareCausalState(before, after).reduce((n, dlt) => n + Math.abs(Number(dlt?.change) || 0), 0);
+    if (score > bestScore) { bestScore = score; best = { before, after }; }
+  }
+  return best;
 }
 
 /**

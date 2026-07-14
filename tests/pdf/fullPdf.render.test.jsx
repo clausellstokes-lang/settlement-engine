@@ -50,6 +50,9 @@ import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 import { Timeline } from '../../src/pdf/sections/Timeline.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
 import { SupplyChainFlow } from '../../src/pdf/sections/SupplyChainFlow.jsx';
+// pdf-5: the premium Faith & War chapter had ZERO layout-execution coverage.
+import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
+import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 
 // ── Font re-registration (node) ──────────────────────────────────────────────
 // theme.js (pulled in transitively by SettlementPDF) registers Lora/Nunito with
@@ -82,14 +85,14 @@ Font.register({
   ],
 });
 
-const VARIANTS = ['canon_dossier', 'draft_brief', 'timeline_packet'];
+const VARIANTS = ['canon_dossier', 'draft_brief', 'timeline_packet', 'campaign_state'];
 
 // Minimum page count expected per variant. Observed at authoring time (town +
 // metropolis, canon phase, one event): canon_dossier ~32-33p, draft_brief ~31-32p,
 // timeline_packet ~4p. Floors sit well below observed so ordinary content drift
 // doesn't flake, but a variant that renders far too few pages (a chapter or the
 // whole body silently dropping out) trips.
-const PAGE_FLOOR = { canon_dossier: 12, draft_brief: 12, timeline_packet: 2 };
+const PAGE_FLOOR = { canon_dossier: 12, draft_brief: 12, timeline_packet: 2, campaign_state: 3 };
 
 // Synthetic canon history so the Timeline + SystemStateSnapshot chapters render
 // their real bodies (not the "unavailable" shells) in the full-document lane.
@@ -141,6 +144,10 @@ async function renderVariant(settlement, systemState, variant) {
 let townSettlement, townState, townVm;
 let metroSettlement, metroState;
 let sparseSettlement;
+// pdf-5: a live-world settlement + campaign that make vm.liveWorld non-null (a patron
+// deity + a belief map), so FaithWar renders its REAL body — deity block, belief
+// divergence (pdf-1) — instead of the null off-state.
+let faithWarSettlement, faithWarVm, faithWarCampaign;
 
 beforeAll(() => {
   // Stressed river town — mid-tier, chain-bearing, most-restructured chapters.
@@ -167,6 +174,29 @@ beforeAll(() => {
   // Threadbare pre-canonical save — the shape a legacy load produces. Must still
   // render a full-document dossier without crashing.
   sparseSettlement = normalizeSettlement({ name: 'Sparse Thorp', tier: 'thorp', population: 40 });
+
+  // Live-world fixture for the Faith & War chapter (pdf-5 / pdf-1).
+  faithWarSettlement = normalizeSettlement({
+    name: 'Faithhold', tier: 'town', population: 1200,
+    config: {
+      tradeRouteAccess: 'road',
+      primaryDeitySnapshot: { name: 'The Iron Lord', rankAxis: 'major', alignmentAxis: 'neutral', temperamentAxis: 'warlike', domain: 'war' },
+    },
+    powerStructure: { publicLegitimacy: { score: 40 }, factions: [], conflicts: [] },
+    economicState: { primaryImports: [], primaryExports: [] },
+    institutions: [], npcs: [],
+  });
+  faithWarCampaign = {
+    settlementId: 'faithhold',
+    worldState: {
+      tick: 20,
+      spatialLedgers: { beliefMaps: { faithhold: { [GOVERNING_SEAT_KEY]: {
+        rivertown: { readiness: 0.75, strengthBand: 3, allianceLabel: 'trade_partner', faithLabel: null, confidence01: 0.9, lastUpdateTick: 19 },
+      } } } },
+    },
+    nameById: { rivertown: 'Rivertown', faithhold: 'Faithhold' },
+  };
+  faithWarVm = buildViewModel({ settlement: faithWarSettlement, campaign: faithWarCampaign, phase: 'canon' });
 });
 
 // ── Lane A: full-document render, every variant × real settlements ───────────
@@ -211,6 +241,19 @@ describe('SettlementPDF full-document render lane', () => {
     expect(head).toBe(PDF_MAGIC);
     expect(bytes).toBeGreaterThan(3000);
   });
+
+  test('campaign_state renders the premium Faith & War chapter when unlocked (pdf-1 / pdf-5)', async () => {
+    const base = {
+      settlement: faithWarSettlement, systemState: deriveSystemState(faithWarSettlement),
+      eventLog: EVENT_LOG, phase: 'canon', variant: 'campaign_state',
+      isFounder: true, isAnonymous: false, campaign: faithWarCampaign,
+    };
+    const withFaith = pdfInfo(await renderToBuffer(React.createElement(SettlementPDF, { ...base, faithUnlocked: true })));
+    const without = pdfInfo(await renderToBuffer(React.createElement(SettlementPDF, { ...base, faithUnlocked: false })));
+    expect(withFaith.head).toBe(PDF_MAGIC);
+    // The FaithWar chapter is its own page ⇒ the unlocked export carries more pages.
+    expect(countPages(withFaith.body)).toBeGreaterThan(countPages(without.body));
+  });
 });
 
 // ── Lane B: every previously-unexecuted section renders individually ─────────
@@ -240,6 +283,7 @@ const SECTIONS = [
   ['Timeline', Timeline, 'page'],
   ['SystemStateSnapshot', SystemStateSnapshot, 'page'],
   ['SupplyChainFlow', SupplyChainFlow, 'view'],
+  ['FaithWar', FaithWar, 'page'],
 ];
 
 function sectionProps(name) {
@@ -256,6 +300,11 @@ function sectionProps(name) {
       primaryExports: src?.economicState?.primaryExports || [],
       tier: src?.tier,
     };
+  }
+  if (name === 'FaithWar') {
+    // The live-world vm (patron deity + belief divergence) exercises FaithWar's
+    // real body, not the null off-state.
+    return { settlement: faithWarSettlement, narrativeMode: false, vm: faithWarVm };
   }
   // Timeline + SystemStateSnapshot read vm.eventLog / vm.systemState; townVm
   // carries both (built with the canon systemState + EVENT_LOG in beforeAll).
@@ -275,10 +324,10 @@ describe('every listed section renders individually to a valid PDF', () => {
     expect(bytes, `${name} produced a suspiciously small buffer`).toBeGreaterThan(800);
   });
 
-  test('the section list covers all twelve chapters the smoke test never executed', () => {
+  test('the section list covers the chapters the smoke test never executed (incl. FaithWar)', () => {
     const listed = SECTIONS.map(([n]) => n).sort();
     const expected = [
-      'HistoryFounding', 'Institutions', 'NPCQuickRef', 'NotableNPCs', 'PlotHooks',
+      'FaithWar', 'HistoryFounding', 'Institutions', 'NPCQuickRef', 'NotableNPCs', 'PlotHooks',
       'Relationships', 'Services', 'SupplyChainFlow', 'SystemStateSnapshot',
       'TableOfContents', 'Timeline', 'TonightAtTheTable',
     ].sort();

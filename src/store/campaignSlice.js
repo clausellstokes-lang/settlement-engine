@@ -611,11 +611,27 @@ export const createCampaignSlice = (set, get) => {
   },
 
   /** Mark a campaign as the active one (WorldMap uses this to drive reloads) */
-  setActiveCampaign: (id) =>
+  setActiveCampaign: (id) => {
     set(state => {
       const campaign = findActiveCampaign(state.campaigns, id);
       state.activeCampaignId = id && campaign ? id : null;
-    }),
+    });
+    // experience-product-fit-1 — the world moves ON campaign activation (the §0.6.1-
+    // named site), not only when the Realm Inspector's Pulse tab happens to mount.
+    // Fire the capped M10b catch-up for the newly-active campaign. The eager wrapper
+    // (catchUpCampaignWorld) applies a SYNCHRONOUS not_living guard, so the default
+    // dm_advanced campaign — every non-living activation, incl. every existing one —
+    // returns WITHOUT loading the sim chunk (first-paint budget untouched). The
+    // persisted week-cursor makes a re-activation within the same week a no-op, so
+    // re-selecting a campaign (auto-resume, Advance-Time nav, gallery import) is safe.
+    // Fire-and-forget: a failed catch-up must never block activation — the failure is
+    // surfaced through the livingCatchUp digest, not swallowed. Date.now stays inside
+    // the lazy store body (runCatchUpCampaignWorld), off this eager seam.
+    const activeId = get().activeCampaignId;
+    if (activeId) {
+      Promise.resolve(get().catchUpCampaignWorld(activeId)).catch(() => {});
+    }
+  },
 
   /**
    * Resolve the campaign's map state to a v2 object (migrating v1 on the fly).

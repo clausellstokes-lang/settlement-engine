@@ -41,9 +41,9 @@ function clamp01(v) {
   return Math.max(0, Math.min(1, finiteNumber(v, 0)));
 }
 
-/** @param {unknown} v @returns {Record<string, EpidemicRecord>|null} */
+/** @param {unknown} worldState @returns {Record<string, EpidemicRecord>|null} */
 function epidemicLedger(worldState) {
-  const led = getSpatialLedger(worldState, 'epidemic');
+  const led = getSpatialLedger(/** @type {Record<string, unknown>} */ (worldState), 'epidemic');
   return led && typeof led === 'object' && !Array.isArray(led)
     ? /** @type {Record<string, EpidemicRecord>} */ (led) : null;
 }

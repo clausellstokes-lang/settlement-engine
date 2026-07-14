@@ -189,6 +189,20 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
   advanceAutoResolve: false,
   setAdvanceAutoResolve: (value) => set(state => { state.advanceAutoResolve = !!value; }),
 
+  // components-dossier-4 / experience-product-fit-1 — the "while you were away"
+  // digest. The M10b catch-up now fires from campaign activation (setActiveCampaign),
+  // so the world can move on a path where no one is watching the Pulse tab. This
+  // TRANSIENT field carries the just-ran catch-up's legibility payload for the
+  // banner (RealmDashboard / WorldPulsePanel): `{ campaignId, status:'running' }`
+  // while the capped loop runs, then `{ campaignId, weeksCaughtUp, capped, majors[],
+  // error }` when it settles. NOT persisted (partialize omits it; a top-level field,
+  // never inside worldState) — a reload clears it, exactly like pulseUndoStack.
+  // Written by runCatchUpCampaignWorld (the lazy body); the digest text is built
+  // there so no chronicle-grounding bytes reach the first-paint closure.
+  livingCatchUp: null,
+  /** Dismiss the "while you were away" digest banner. */
+  dismissLivingCatchUp: () => set(state => { state.livingCatchUp = null; }),
+
   previewCampaignWorldPulse: async (campaignId, interval = 'one_month', options = {}) => {
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);

@@ -20,6 +20,13 @@ import Button from '../primitives/Button.jsx';
 // the moat without scrolling.
 const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 
+// experience-product-fit-3 — the anon "watch a region wake up" living-world teaser.
+// Built, copy-registered, and domain-tested but never mounted. Rendered below the
+// sample dossier for anon visitors so the /create audience SEES the premium
+// simulation in motion (deterministic pre-baked frames through the real
+// projections). Self-gates on anon + no settlement; a lazy chunk ⇒ zero first-paint.
+const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
+
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
@@ -37,6 +44,13 @@ export function WizardEmptyState({
           <HomeHero onSignIn={onSignIn} onNavigate={onNavigate} />
           <Suspense fallback={null}>
             <HomeSampleDossier />
+          </Suspense>
+          {/* experience-product-fit-3: the living-world replay teaser below the
+              sample dossier (anon only, self-gating). The CTA routes to the
+              canonical premium-value surface (PricingPage), mirroring the
+              component's registered copy. */}
+          <Suspense fallback={null}>
+            <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
           </Suspense>
         </>
       )}

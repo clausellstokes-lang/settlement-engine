@@ -25,7 +25,7 @@ import { flag } from '../../lib/flags.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import {
   criminalOpNote, criminalOpEcon, deriveCriminalStructure, deriveSupportingCapabilities,
-  deriveDefenseReadiness, deriveArmedForces,
+  deriveDefenseReadiness, deriveArmedForces, DEFENSE_STRESS_STATUS,
 } from '../../domain/display/defenseDisplay.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { humanize } from './format.js';
@@ -667,8 +667,9 @@ function defenseSlice(active) {
   const armedForces = deriveArmedForces(s);
 
   // Active military status override (from stress). Match on the stressor TYPE the
-  // engine emits, not icon/key sentinels that never held these values.
-  const militaryStress = stress.find(x => ['under_siege', 'occupied', 'wartime', 'insurgency'].includes(x?.type));
+  // engine emits, via the SHARED DEFENSE_STRESS_STATUS set the web DefenseTab uses,
+  // so print and screen can never drift (pdf-4).
+  const militaryStress = stress.find(x => DEFENSE_STRESS_STATUS[x?.type]);
 
   // Criminal architecture. Operations come from the safety profile's criminal
   // institutions (the source the web Defense tab uses), each carrying an
@@ -867,7 +868,13 @@ function viabilitySlice(active) {
   // does, and exclude the special-typed issues from the main list so they don't
   // render twice (they get their own PDF sections).
   const stressConsequences = [...(v.issues || []), ...(v.warnings || [])].filter(i => i?.type === 'stress_consequence');
-  const byDesignContradictions = (v.issues || []).filter(i => i?.severity === 'by_design');
+  // pdf-3: by_design items are pushed to the settlement-root structuralViolations
+  // (structuralValidator), NOT economicViability.issues — so the old issues-only
+  // filter was permanently empty and those authored plot seeds printed as garbled
+  // STRUCTURAL VIOLATIONS. Derive from the real home (union v.issues for any path
+  // that routes them there), and exclude them from the violations list below.
+  const byDesignContradictions = [...(v.issues || []), ...(s?.structuralViolations || [])]
+    .filter(i => i?.severity === 'by_design');
   const activeMagicChains = (s?.economicState?.activeChains || []).filter(isArcaneChain);
 
   return {
@@ -888,7 +895,9 @@ function viabilitySlice(active) {
       })),
     criticalIssues:        v?.criticalIssues || (v?.issues || []).filter(i => (i?.severity || '').toLowerCase() === 'critical' && i?.type !== 'stress_consequence'),
     warnings:              [...(v?.warnings || []), ...(s?.warnings || [])],
-    structuralViolations:  s?.structuralViolations || [],
+    // pdf-3: by_design tensions are surfaced as plot seeds (byDesignContradictions),
+    // so exclude them here — they must not double-print as apparent defects.
+    structuralViolations:  (s?.structuralViolations || []).filter(x => x?.severity !== 'by_design'),
     stress:                stress.map(x => ({ label: x?.label || x?.icon, summary: x?.summary, hook: x?.crisisHook })),
     stressConsequences:    v?.stressConsequences?.length ? v.stressConsequences : stressConsequences,
     magicDependency:       !!dp?.magicDependency,

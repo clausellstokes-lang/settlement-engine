@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -19,7 +19,8 @@ import {
   stressorSummary,
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
-import { advancesOnOpen, politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
+import WhileYouWereAway from './WhileYouWereAway.jsx';
+import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
 
 export default function WorldPulsePanel({ campaign, advancing = false }) {
@@ -32,22 +33,13 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const [canonBusy, setCanonBusy] = useState(false);
   const [actionError, setActionError] = useState(null);
   const saves = useStore(s => s.savedSettlements);
-  const catchUpCampaignWorld = useStore(s => s.catchUpCampaignWorld);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
 
-  // M10b: a LIVING/AUTONOMOUS world advances ON OPEN. When the pulse view first
-  // sees such a campaign, fire the capped catch-up once (Date.now-derived time;
-  // the cursor makes a second fire within the same week a no-op, so a remount is
-  // safe). Fire-and-forget: a failed catch-up must never block the panel. Dormant
-  // for frozen/dm_advanced worlds (every existing campaign) — advancesOnOpen false.
-  const caughtUpIds = useRef(new Set());
-  const campaignId = campaign?.id;
-  const progressionRules = campaign?.worldState?.simulationRules;
-  useEffect(() => {
-    if (!campaignId || !advancesOnOpen(progressionRules) || caughtUpIds.current.has(campaignId)) return;
-    caughtUpIds.current.add(campaignId);
-    Promise.resolve(catchUpCampaignWorld(campaignId)).catch(() => {});
-  }, [campaignId, progressionRules, catchUpCampaignWorld]);
+  // M10b catch-up now fires from campaign ACTIVATION (setActiveCampaign — the
+  // §0.6.1-named site), not from this panel's mount, so the world moves on every
+  // open path rather than only when the Pulse tab happens to render
+  // (experience-product-fit-1). The result is surfaced by the "while you were away"
+  // digest (WhileYouWereAway, fed by the transient livingCatchUp store field).
 
   if (!campaign) return null;
 
@@ -247,6 +239,11 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         gap: 16,
         alignItems: 'start',
       }}>
+        {/* components-dossier-4: the "while you were away" catch-up digest, spanning
+            the full width above the pulse sections. Self-gates to nothing. */}
+        <div style={{ gridColumn: '1 / -1' }}>
+          <WhileYouWereAway campaignId={campaign.id} />
+        </div>
         <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
             <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>

@@ -106,6 +106,16 @@ const ws = store => store.getState().campaigns[0].worldState;
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 // An ISO `now` that is exactly `weeks` after 2026-01-01T00:00:00Z.
 const nowAfter = weeks => new Date(Date.parse('2026-01-01T00:00:00.000Z') + weeks * WEEK_MS).toISOString();
+// Poll until a predicate holds (or the tries run out) — the setActiveCampaign
+// trigger fires the catch-up FIRE-AND-FORGET, so its effect settles across a few
+// microtasks (the loadWorldEngine dynamic import + the advance chain).
+async function waitFor(pred, { tries = 200, gapMs = 5 } = {}) {
+  for (let i = 0; i < tries; i++) {
+    if (pred()) return true;
+    await new Promise(r => setTimeout(r, gapMs));
+  }
+  return pred();
+}
 
 describe('M10b catchUpCampaignWorld', () => {
   beforeEach(() => { installLocalStorage(); });
@@ -216,6 +226,31 @@ describe('M10b catchUpCampaignWorld', () => {
     expect(reloaded.getState().campaigns[0].worldState.tick).toBe(ws(store).tick);
   });
 
+  test('DIGEST: a multi-week catch-up stashes the "while you were away" payload (components-dossier-4)', async () => {
+    const store = makeStore();
+    const cursor = '2026-01-01T00:00:00.000Z';
+    seedStore(store, { progression: 'autonomous', cursor });
+    const now = nowAfter(3);
+    const res = await store.getState().catchUpCampaignWorld('camp-1', { now });
+    expect(res).toMatchObject({ ok: true, weeksCaughtUp: 3, capped: false });
+    // The transient digest field the banner reads is populated for the caught-up
+    // campaign; majors is always an array (empty on a quiet advance). error null.
+    const digest = store.getState().livingCatchUp;
+    expect(digest).toMatchObject({ campaignId: 'camp-1', weeksCaughtUp: 3, capped: false, error: null });
+    expect(Array.isArray(digest.majors)).toBe(true);
+    // The digest lives at the STORE ROOT, never inside worldState — so it can never
+    // reach a persisted surface (partialize omits it; goldens test worldState only).
+    expect('livingCatchUp' in ws(store)).toBe(false);
+  });
+
+  test('DIGEST: a seeded / up-to-date open stashes NO digest (nothing happened)', async () => {
+    const store = makeStore();
+    seedStore(store, { progression: 'autonomous', cursor: undefined });
+    const now = nowAfter(3);
+    await store.getState().catchUpCampaignWorld('camp-1', { now }); // seeds, advances nothing
+    expect(store.getState().livingCatchUp).toBeNull();
+  });
+
   test('DORMANCY: a dm_advanced world is not_living and its advance never stamps a cursor', async () => {
     const store = makeStore();
     seedStore(store, { progression: 'dm_advanced', cursor: undefined });
@@ -227,5 +262,38 @@ describe('M10b catchUpCampaignWorld', () => {
     await store.getState().advanceCampaignWorld('camp-1', 'one_week', { now, autoResolve: true });
     expect(ws(store).tick).toBe(1);
     expect(ws(store).lastLivingAdvanceAt).toBeUndefined();
+  });
+});
+
+// experience-product-fit-1 / test-quality-5 — the PRODUCTION call site. The catch-up
+// trigger moved off the WorldPulsePanel mount onto campaign activation
+// (setActiveCampaign), so the world advances on every open path. The prod call site
+// previously had no test; these pin it.
+describe('setActiveCampaign catch-up trigger', () => {
+  beforeEach(() => { installLocalStorage(); });
+
+  test('fires the M10b catch-up for an advancesOnOpen campaign on activation', async () => {
+    const store = makeStore();
+    seedStore(store, { progression: 'autonomous', cursor: undefined });
+    expect(ws(store).lastLivingAdvanceAt).toBeUndefined();
+    // Activation fires the catch-up fire-and-forget; for a first open (no cursor) it
+    // SEEDS the cursor — the observable proof that the living world was activated.
+    store.getState().setActiveCampaign('camp-1');
+    expect(store.getState().activeCampaignId).toBe('camp-1');
+    await waitFor(() => ws(store).lastLivingAdvanceAt != null);
+    expect(ws(store).lastLivingAdvanceAt).toBeTruthy();
+  });
+
+  test('does NOT fire for a dm_advanced (legacy) campaign — the common activation path', async () => {
+    const store = makeStore();
+    seedStore(store, { progression: 'dm_advanced', cursor: undefined });
+    store.getState().setActiveCampaign('camp-1');
+    expect(store.getState().activeCampaignId).toBe('camp-1');
+    // not_living ⇒ the sync guard returns before the sim loads; the M10b cursor never
+    // appears and nothing advances. Give the fire-and-forget room to (not) run.
+    await new Promise(r => setTimeout(r, 40));
+    expect(ws(store).lastLivingAdvanceAt).toBeUndefined();
+    expect(ws(store).tick).toBe(0);
+    expect(store.getState().livingCatchUp).toBeNull();
   });
 });

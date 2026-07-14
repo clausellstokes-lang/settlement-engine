@@ -24,6 +24,7 @@
  */
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
 import { advancesOnOpen, worldProgressionOf, CATCH_UP_CAP_WEEKS } from '../domain/worldPulse/simulationRules.js';
+import { buildChronicleGrounding } from '../domain/worldPulse/chronicle.js';
 import {
   cloneJson, cacheCampaignState, flushWorldPulsePersist, findActiveCampaign, campaignSettlements,
 } from './campaignSliceShared.js';
@@ -495,14 +496,61 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
   // itself forward); LIVING advances routine but a surfacing major PAUSES the
   // catch-up for the DM (they resolve it and the world resumes on the next advance).
   const autoResolve = worldProgressionOf(rules) === 'autonomous';
+  // components-dossier-4: mint the "while you were away" digest in a RUNNING state so
+  // the banner (RealmDashboard / WorldPulsePanel) shows a busy indicator during the
+  // up-to-CATCH_UP_CAP_WEEKS kernel ticks. Only now that n > 0 is there real work to
+  // narrate — a seeded / up-to-date / not_living open above stashed nothing.
+  set(state => { state.livingCatchUp = { campaignId, status: 'running', weeksCaughtUp: 0, capped }; });
   let done = 0;
-  for (let i = 0; i < n; i++) {
-    // One real week per tick. Each advance re-stamps the cursor to `now` and
-    // persists; a not-ok result (paused for DM verdicts, frozen, in-flight) stops
-    // the catch-up here — the DM resolves/resumes via the normal advance path.
-    const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve });
-    if (!result || result.ok === false) break;
-    done += 1;
+  /** @type {string | null} */ let error = null;
+  try {
+    for (let i = 0; i < n; i++) {
+      // One real week per tick. Each advance re-stamps the cursor to `now` and
+      // persists; a not-ok result (paused for DM verdicts, frozen, in-flight) stops
+      // the catch-up here — the DM resolves/resumes via the normal advance path.
+      const result = await get().advanceCampaignWorld(campaignId, 'one_week', { now: nowStamp, autoResolve });
+      if (!result || result.ok === false) break;
+      done += 1;
+    }
+  } catch (err) {
+    // components-dossier-4: a THROWN advance is a real failure — surface it in the
+    // digest rather than letting setActiveCampaign's fire-and-forget swallow it.
+    error = err && /** @type {any} */ (err).message ? String(/** @type {any} */ (err).message) : String(err);
   }
+  // Settle the digest: the major chronicle beats over the caught-up window (built
+  // from the SAME deterministic grounding the interval summary uses), plus the
+  // capped flag and any failure. The banner self-gates to nothing when the active
+  // campaign has no digest, so a quiet advance still confirms "N weeks passed".
+  const majors = done > 0 ? catchUpMajorHeadlines({ get, campaignId, lookback: done }) : [];
+  set(state => { state.livingCatchUp = { campaignId, weeksCaughtUp: done, capped, majors, error }; });
   return { ok: true, weeksCaughtUp: done, capped };
+}
+
+/**
+ * components-dossier-4: the major chronicle beats over the just-caught-up window,
+ * built from the SAME deterministic grounding the ChronicleScrollback interval
+ * summary uses (buildChronicleGrounding over `lookback` recent ticks). Pure read
+ * over the post-catch-up campaign; lazy-loaded with this body so no chronicle-
+ * grounding bytes reach the first-paint entry closure.
+ * @param {{ get: Function, campaignId: string, lookback: number }} args
+ * @returns {string[]}
+ */
+function catchUpMajorHeadlines({ get, campaignId, lookback }) {
+  const after = findActiveCampaign(get().campaigns, campaignId);
+  if (!after) return [];
+  const saves = get().savedSettlements || [];
+  const nameMap = new Map();
+  for (const s of saves) {
+    const i = String(s?.id ?? s?.settlement?.id ?? '');
+    if (i) nameMap.set(i, s?.settlement?.name || s?.name || i);
+  }
+  const nameFor = (/** @type {any} */ id) => nameMap.get(String(id)) || String(id);
+  const grounding = buildChronicleGrounding({
+    wizardNews: after.wizardNews,
+    worldState: after.worldState,
+    snapshot: { settlements: (after.settlementIds || []).map((/** @type {any} */ id) => ({ id, name: nameFor(id) })) },
+    regionalGraph: after.regionalGraph || after.worldState?.regionalGraph || null,
+    lookback: Math.max(1, lookback),
+  });
+  return Array.isArray(grounding?.majorHeadlines) ? grounding.majorHeadlines.slice(0, 6) : [];
 }
