@@ -75,6 +75,15 @@ behavior, budget raises, golden regens.
   single-dossier entitlement ladder. Pricing-page copy was already correct; align the other five
   tier-fact surfaces to it via one derived tier-facts module. (Review doc §6.2 updated in place.)
 
+## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
+- **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
+  EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
+  map (a calamity's ruined quarter, a boom's new district, reconstruction visibly raising beams).
+  Owner: "the last thing that I would want to build (but I'm telling you not to for right now)…
+  that would be the last thing if usage of Fable is enough." Sequenced BEHIND: the fix program →
+  upswing/relationship flows → Surveyor stages. The end-goal framing, verbatim intent: "be good at
+  everything, excel at the most important, and take over from all my other competitors."
+
 ## Phase plan (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
       re-dispatched via resume of `wf_c21bb055-cb9`; their reports append to the register on landing.
