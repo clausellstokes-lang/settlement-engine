@@ -296,8 +296,13 @@ behavior, budget raises, golden regens.
   that would be the last thing if usage of Fable is enough." Sequenced BEHIND: the fix program →
   upswing/relationship flows → Surveyor stages. The end-goal framing, verbatim intent: "be good at
   everything, excel at the most important, and take over from all my other competitors."
-- **SETTLEMENT BIRTH & DEATH — THE SATELLITE-THORP DESIGN (owner-ruled PAUSED, post-soak;
-  design captured 2026-07-15, owner's thoughts verbatim-intent):** birth and death both happen
+- **SETTLEMENT BIRTH & DEATH — THE SATELLITE-THORP DESIGN — ⚡ UN-PARKED SAME DAY (owner,
+  verbatim: "design it and place it where appropriate to be built!") → DESIGN_SETTLEMENT_LIFECYCLE.md
+  FROZEN; builds as W-LIFECYCLE, last in the engine lane (after W-DISCOVERY, before
+  W-COMPOSER-2), inside the soak's certification scope. Resettlement commissioned with it.
+  Only the V2 graduation seam (satellite → first-class digest member) remains parked.
+  (Original park record kept below for provenance; design captured 2026-07-15, owner's
+  thoughts verbatim-intent):** birth and death both happen
   at the tier ladder's bottom rung — "Birth and death (aligning with our promotion and demotion
   of settlements) start and end at the same level, thorp/thorpes." Any significant settlement
   (town or higher — threshold delegated to the architect, recommendation: town+) "will naturally
