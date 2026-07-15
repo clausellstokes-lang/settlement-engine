@@ -576,7 +576,7 @@ export function temperamentMomentumOf(settlement) {
   for (const npc of npcs) {
     const score = npcMomentumScore(npc);
     if (score === 0) continue; // no authored temperament signal — contributes nothing
-    const w = importanceWeight(/** @type {any} */ (npc));
+    const w = importanceWeight(/** @type {import('../entities/npcs.js').NpcLike} */ (/** @type {unknown} */ (npc)));
     if (!(w > 0)) continue;
     weighted += score * w;
     totalWeight += w;
@@ -691,10 +691,12 @@ export function counterEvidenceEffectiveness({ malice01 = 0.5, evidenceClass = '
  */
 export function entityThreshold(item, worldState, courtStructure = {}) {
   const settlement = asObject(asObject(item).settlement || item);
-  const temperament = temperamentMomentumOf(/** @type {any} */ (settlement));
-  const lawfulness01 = clamp01(finiteNumber(computeLawfulness(/** @type {any} */ (item), /** @type {any} */ (worldState)), 0.5));
-  const malice01 = clamp01(finiteNumber(computeMalice(/** @type {any} */ (item), /** @type {any} */ (worldState)), 0.5));
-  const gl = governanceLedger(/** @type {any} */ (settlement));
+  const alignItem = /** @type {import('./disposition.js').AlignmentItem} */ (/** @type {unknown} */ (item));
+  const alignSrc = /** @type {import('./disposition.js').AlignmentActsSource} */ (/** @type {unknown} */ (worldState));
+  const temperament = temperamentMomentumOf(settlement);
+  const lawfulness01 = clamp01(finiteNumber(computeLawfulness(alignItem, alignSrc), 0.5));
+  const malice01 = clamp01(finiteNumber(computeMalice(alignItem, alignSrc), 0.5));
+  const gl = governanceLedger(/** @type {import('../governanceLedger.js').GovernanceLedgerSource} */ (/** @type {unknown} */ (settlement)));
   // Fragility: a LOW legitimacyScore is a fragile seat. present:false ⇒ neutral 50 ⇒ 0 fragility.
   const legitimacyFragility01 = gl && gl.present
     ? clamp01((50 - finiteNumber(gl.legitimacyScore, 50)) / 50)
@@ -975,7 +977,10 @@ function applyLegitimacyHits(updates, hits) {
 }
 
 /** The climb-down receipt (§G — the chronicle names the seat, the depth held, and the
- * face-saving off-ramp if any). @returns {Record<string, unknown>} */
+ * face-saving off-ramp if any).
+ * @param {string} actorId @param {string} targetId @param {(id: string) => string} name
+ * @param {number} stock @param {number} cliff @param {{ price01: number }} crack
+ * @param {string} exitKind @param {number} tick @returns {Record<string, unknown>} */
 function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
   const A = name(actorId);
   const Tn = name(targetId);
