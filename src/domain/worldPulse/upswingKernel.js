@@ -39,6 +39,7 @@ import { famineFor } from './foodStockpile.js';
 import { foldObligations } from '../spatial/generosityReactions.js';
 import { withCampaignHistoryEvent } from './stressorAftermath.js';
 import { promotesTo } from './calamityKernel.js';
+import { embattlementLevel } from '../spatial/embattlement.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
@@ -60,6 +61,9 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 /** @typedef {{ progress: number, startedTick: number, startedYear: number,
  *   srcInternal: number, srcAlly: number, srcPeace: number, srcBuilder: number,
  *   lastTick: number }} ReconRecord */
+/** @typedef {{ phase: 'building'|'boom'|'bust', dwell: number, enteredTick: number,
+ *   arteries: string[], fragile: boolean, throughput: number, prosperityAccrued: number,
+ *   lastTick: number }} BoomRecord */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -99,6 +103,19 @@ export const UPSWING_TUNING = Object.freeze({
   RECON_COMPLETE_AT: 1.0,
   RECON_LEGITIMACY_DIVIDEND: 4,      // the completion legitimacy nudge (bounded, integer)
   RECON_SKIM_MALICE_FLOOR: 0.55,     // malice above this (low conscience) ⇒ the skim fires
+  // BOOM → BUST (B2). Hysteresis: enter after sustained surplus throughput + centrality;
+  // exit/bust on a severance. Boom NAMES a composition the movers already produce.
+  BOOM_ENTER_THROUGHPUT: 3.0,        // in+out at/above the M6d surplus ceiling
+  BOOM_EXIT_THROUGHPUT: 1.5,         // hysteresis: below this a boom cools (not yet bust)
+  BOOM_CENTRALITY_FLOOR: 0.3,        // an entrepôt, not a backwater (earned centrality)
+  BOOM_MIN_DWELL: 3,                 // ticks of sustained surplus before the boom mints
+  BOOM_DWELL_MAX: 24,                // cap the dwell counter (bounded state)
+  BOOM_PROSPERITY_DRIFT: 0.14,       // per-tick prosperity band-step drift UP (receipted)
+  BUST_THROUGHPUT: 1.0,              // a boom BUSTS when throughput collapses below this
+  BUST_PROSPERITY_RETREAT: -0.9,     // the prosperity band-step retreat on the bust
+  BUST_LEGITIMACY_HIT: -3,           // the bust legitimacy knock (emigration is EMERGENT:
+                                     // M4 reads the fallen prosperity — no population write)
+  BUST_HOLD: 3,                      // ticks the bust condition holds before the record drops
 });
 
 // ── Reads (all pure over the settlement) ──────────────────────────────────────
@@ -219,6 +236,39 @@ function readObligations(obligationLedger) {
   return out;
 }
 
+// ── B2 boom/bust reads (throughput, centrality, arteries) ──────────────────────
+/** The settlement's windowed trade throughput (in + out) from the M6d tradeFlow tally.
+ *  @param {Record<string, unknown>|null|undefined} tradeFlowLedger @param {string} id */
+function flowThroughput(tradeFlowLedger, id) {
+  const rec = asObject(asObject(tradeFlowLedger)[id]);
+  return Math.max(0, num(rec.in, 0)) + Math.max(0, num(rec.out, 0));
+}
+
+/** The settlement's earned entrepôt centrality 0..1 (M6b ledger), or 0.
+ *  @param {Record<string, unknown>|null|undefined} entrepotLedger @param {string} id */
+function entrepotCentrality(entrepotLedger, id) {
+  const rec = asObject(asObject(entrepotLedger)[id]);
+  return clamp01(num(rec.centrality, 0));
+}
+
+/** The settlement's trade ARTERIES — the codepoint-sorted ids of its trade-partner
+ *  neighbours (the source set + fragile-edge read: <2 ⇒ single-sourced/fragile).
+ *  @param {UpGraph|null|undefined} graph @param {string} id @returns {string[]} */
+function tradeArteries(graph, id) {
+  const edges = Array.isArray(graph?.edges) ? graph.edges : [];
+  const out = new Set();
+  for (const e of edges) {
+    const edge = asObject(e);
+    const kind = String(edge.relationshipType || '');
+    if (!/trade|allied|vassal|patron/.test(kind)) continue;
+    const a = String(edge.from ?? '');
+    const b = String(edge.to ?? '');
+    if (a === id && b) out.add(b);
+    else if (b === id && a) out.add(a);
+  }
+  return [...out].sort();
+}
+
 // ── The advance ───────────────────────────────────────────────────────────────
 /**
  * @typedef {Object} UpswingAdvanceResult
@@ -269,6 +319,9 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
 
   const upswingLedger = asObject(getSpatialLedger(worldState, 'upswing'));
   const reconLedger = asObject(upswingLedger.reconstruction);
+  const boomLedger = asObject(upswingLedger.boom);
+  const tradeFlowLedger = /** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'tradeFlow'));
+  const entrepotLedger = /** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'entrepots'));
   const obligations = readObligations(/** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'obligations')));
 
   let nextUpdates = updates;
@@ -276,6 +329,10 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   const ensureCloned = () => { if (!cloned) { nextUpdates = updates.slice(); cloned = true; } };
   /** @type {Record<string, ReconRecord>} */
   const nextRecon = {};
+  /** @type {Record<string, BoomRecord>} */
+  const nextBoom = {};
+  /** @type {Map<string, number>} the prosperity BAND-STEP delta per settlement (boom drift / bust retreat) */
+  const prosperityDeltas = new Map();
   /** @type {Array<{ from: string, to: string, kind: string, amount: number }>} */
   const obligationRepayments = [];
   /** @type {Map<string, number>} */
@@ -455,18 +512,114 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
     });
   }
 
+  // ── B2 BOOM → BUST — NAME a composition the movers already produce (hysteresis). ──
+  // Sustained M6d surplus throughput + earned entrepôt centrality mints a `boom`
+  // (prosperity DRIFTS up — receipted, sourced from real trade arteries; migration pull
+  // is EMERGENT, M4 already reads prosperity). The boom records its OWN FRAGILE EDGES
+  // (<2 independent arteries). A severance (throughput collapse OR embattlement — or a
+  // future W-DISCOVERY resource removal, SEAM below) flips boom → bust: a prosperity
+  // retreat + a legitimacy knock + a receipt naming the severed artery.
+  for (const id of ordered) {
+    const s = freshSettlement(id);
+    if (!s) continue;
+    const item = itemById.get(id);
+    const prior = /** @type {BoomRecord|null} */ (boomLedger[id] ? /** @type {BoomRecord} */ (boomLedger[id]) : null);
+    const throughput = flowThroughput(tradeFlowLedger, id);
+    const centrality = entrepotCentrality(entrepotLedger, id);
+    const embattled = embattlementLevel(worldState, id) > 0;
+    const arteries = tradeArteries(graph, id);
+    const fragile = arteries.length < 2;
+    // W-DISCOVERY SEAM: a resource-removal event will feed the SAME bust flip here —
+    // `resourceRemoved(worldState, id)` lands with W-DISCOVERY's design (its removal
+    // events join the bust trigger + its discoveries join the boom source taxonomy).
+    const severed = embattled || throughput < T.BUST_THROUGHPUT;
+    const ui = updateIndex.get(id);
+
+    if (prior?.phase === 'boom') {
+      if (severed) {
+        // ── THE BUST — a prosperity retreat + legitimacy knock + a receipt naming the
+        // artery. Emigration is EMERGENT (M4 reads the fallen prosperity). ──
+        if (ui !== undefined) {
+          ensureCloned();
+          const settlement = /** @type {UpSettlement} */ (withActiveCondition(
+            /** @type {import('../activeConditions.js').CondSettlement} */ (/** @type {unknown} */ (freshSettlement(id))),
+            {
+              id: `condition.bust.${tick}`, archetype: 'custom_crisis', label: 'Trade Bust',
+              severity: 0.55, affectedSystems: ['trade_connectivity', 'public_legitimacy', 'labor_capacity'],
+              description: 'The trade that fed the boom has failed; markets retreat and the town empties toward richer roads.',
+            },
+          ));
+          // Clear any lingering boom condition.
+          const boomCond = (Array.isArray(settlement.activeConditions) ? settlement.activeConditions : []).find((c) => c?.archetype === 'boom');
+          nextUpdates[ui] = { ...nextUpdates[ui], settlement: boomCond?.id ? /** @type {UpSettlement} */ (withoutActiveCondition(settlement, boomCond.id)) : settlement };
+        }
+        prosperityDeltas.set(id, (prosperityDeltas.get(id) || 0) + T.BUST_PROSPERITY_RETREAT);
+        legitimacyDeltas.set(id, (legitimacyDeltas.get(id) || 0) + T.BUST_LEGITIMACY_HIT);
+        nextBoom[id] = { phase: 'bust', dwell: 0, enteredTick: tick, arteries: prior.arteries, fragile: prior.fragile, throughput, prosperityAccrued: 0, lastTick: tick };
+        newsEntries.push(bustNews(id, String(item?.name || s.name || id), prior.arteries, embattled, tick, now));
+        receipts.push({ id, kind: 'bust', severedArtery: prior.arteries[0] || null, arteries: prior.arteries, cause: embattled ? 'embattlement' : 'artery_collapse', throughput: round4(throughput), fragile: prior.fragile });
+      } else {
+        // ── SUSTAIN — prosperity DRIFTS up (accrued fractionally; a BAND step emits only
+        // when the accrual crosses 1.0 — a boom grows rich on VOLUME, receipted + sourced). ──
+        const acc = num(prior.prosperityAccrued, 0) + T.BOOM_PROSPERITY_DRIFT;
+        const bandStep = Math.floor(acc);
+        if (bandStep > 0) prosperityDeltas.set(id, (prosperityDeltas.get(id) || 0) + bandStep);
+        nextBoom[id] = { phase: 'boom', dwell: Math.min(T.BOOM_DWELL_MAX, prior.dwell + 1), enteredTick: prior.enteredTick, arteries, fragile, throughput, prosperityAccrued: acc - bandStep, lastTick: tick };
+        receipts.push({ id, kind: 'boom_sustain', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false }, fragile, prosperityBandStep: bandStep });
+      }
+    } else if (prior?.phase === 'bust') {
+      // The bust holds a few ticks (the retreat plays out via the condition), then drops.
+      if (prior.dwell + 1 >= T.BUST_HOLD) {
+        // drop (not written to nextBoom).
+      } else {
+        nextBoom[id] = { ...prior, phase: 'bust', dwell: prior.dwell + 1, lastTick: tick };
+      }
+    } else if (prior?.phase === 'building' || (throughput >= T.BOOM_ENTER_THROUGHPUT && centrality >= T.BOOM_CENTRALITY_FLOOR)) {
+      // ── APPROACHING BOOM — accumulate the hysteresis dwell; mint at MIN_DWELL. ──
+      const sustained = throughput >= T.BOOM_EXIT_THROUGHPUT && centrality >= T.BOOM_CENTRALITY_FLOOR;
+      if (!sustained) {
+        // Fell back below the exit band before minting — drop the building record.
+      } else {
+        const dwell = (prior?.dwell || 0) + 1;
+        if (dwell >= T.BOOM_MIN_DWELL) {
+          // MINT THE BOOM: the condition + the first prosperity drift, records fragile edges.
+          if (ui !== undefined) {
+            ensureCloned();
+            const settlement = /** @type {UpSettlement} */ (withActiveCondition(
+              /** @type {import('../activeConditions.js').CondSettlement} */ (/** @type {unknown} */ (freshSettlement(id))),
+              {
+                id: `condition.boom.${tick}`, archetype: 'boom', label: 'Boom',
+                severity: 0.4, affectedSystems: ['public_legitimacy', 'trade_connectivity'],
+                description: `A trade boom — prosperous, and quietly dependent on ${arteries.length} artery${arteries.length === 1 ? '' : 's'}${fragile ? ' (fragile: a single failure could bust it)' : ''}.`,
+              },
+            ));
+            nextUpdates[ui] = { ...nextUpdates[ui], settlement };
+          }
+          nextBoom[id] = { phase: 'boom', dwell: 0, enteredTick: tick, arteries, fragile, throughput, prosperityAccrued: T.BOOM_PROSPERITY_DRIFT, lastTick: tick };
+          newsEntries.push(boomNews(id, String(item?.name || s.name || id), arteries, fragile, tick, now));
+          receipts.push({ id, kind: 'boom_enter', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false }, fragile });
+        } else {
+          nextBoom[id] = { phase: 'building', dwell, enteredTick: tick, arteries, fragile, throughput, prosperityAccrued: 0, lastTick: tick };
+        }
+      }
+    }
+  }
+
   // ── PERSIST (drop-when-empty). Nothing arced ⇒ byte-identical. ──
   let nextWorldState = worldState;
   let changed = cloned;
 
-  // The upswing ledger (reconstruction sub-map). Drop the whole 'upswing' key when empty.
+  // The upswing ledger (reconstruction + boom sub-maps). Rebuild from the surviving
+  // sub-maps; drop the whole 'upswing' key when ALL are empty (drop-when-empty).
   const reconChanged = JSON.stringify(sortedRecord(nextRecon)) !== JSON.stringify(sortedRecord(reconLedger));
-  if (reconChanged) {
-    const hasRecon = Object.keys(nextRecon).length > 0;
-    // Preserve any OTHER upswing sub-ledgers (boom/flourishing land in later stages).
-    const others = { ...upswingLedger };
-    delete others.reconstruction;
-    const nextUpswing = hasRecon ? { ...others, reconstruction: sortedRecord(nextRecon) } : others;
+  const boomChanged = JSON.stringify(sortedRecord(nextBoom)) !== JSON.stringify(sortedRecord(boomLedger));
+  if (reconChanged || boomChanged) {
+    // Preserve any OTHER upswing sub-ledgers (flourishing lands in a later stage).
+    const nextUpswing = { ...upswingLedger };
+    delete nextUpswing.reconstruction;
+    delete nextUpswing.boom;
+    if (Object.keys(nextRecon).length > 0) nextUpswing.reconstruction = sortedRecord(nextRecon);
+    if (Object.keys(nextBoom).length > 0) nextUpswing.boom = sortedRecord(nextBoom);
     if (Object.keys(nextUpswing).length > 0) {
       nextWorldState = setSpatialLedger(nextWorldState, 'upswing', nextUpswing);
     } else {
@@ -487,7 +640,12 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
     }
   }
 
-  // Apply the legitimacy dividends via the bounded delta path.
+  // Apply the boom/bust prosperity band-step deltas + the legitimacy deltas.
+  if (prosperityDeltas.size) {
+    ensureCloned();
+    nextUpdates = applyProsperityDeltasToUpdates(nextUpdates, updateIndex, prosperityDeltas);
+    changed = true;
+  }
   if (legitimacyDeltas.size) {
     ensureCloned();
     nextUpdates = applyLegitimacyDeltasToUpdates(nextUpdates, updateIndex, legitimacyDeltas);
@@ -558,4 +716,73 @@ function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) 
     });
   }
   return next;
+}
+
+/**
+ * Apply prosperity BAND-STEP deltas on the canonical PROSPERITY_TIERS ladder (the
+ * generosityKernel A2 idiom): clamp [0,6], write back IN KIND (string label / {tier}
+ * object). Skips a settlement with no readable band. Pure.
+ * @param {UpUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} prosperityDeltas
+ * @returns {UpUpdate[]}
+ */
+function applyProsperityDeltasToUpdates(updates, updateIndex, prosperityDeltas) {
+  let next = updates;
+  let cloned = false;
+  const maxRank = Math.max(1, PROSPERITY_TIERS.length - 1);
+  for (const [id, delta] of prosperityDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    const ec = asObject(settlement?.economicState);
+    const cur = ec.prosperity;
+    const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (cur));
+    if (rank < 0) continue;
+    const nextRank = Math.round(Math.max(0, Math.min(maxRank, rank + delta)));
+    if (nextRank === rank) continue;
+    const nextLabel = PROSPERITY_TIERS[nextRank];
+    const nextProsperity = cur && typeof cur === 'object' && !Array.isArray(cur)
+      ? { .../** @type {Record<string, unknown>} */ (cur), tier: nextLabel } : nextLabel;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = /** @type {UpUpdate} */ ({
+      ...entry,
+      settlement: /** @type {UpSettlement} */ ({ ...settlement, economicState: { ...ec, prosperity: nextProsperity } }),
+    });
+  }
+  return next;
+}
+
+/** The boom-enter news (house voice, AGGREGATE). @param {string} id @param {string} name
+ *  @param {string[]} arteries @param {boolean} fragile @param {number} tick @param {string|null} now */
+function boomNews(id, name, arteries, fragile, tick, now) {
+  const dep = fragile ? ' Its wealth rides on a single artery — a fragile prosperity.' : '';
+  return {
+    id: `wizard_news.${tick}.boom.${id}`,
+    tick, createdAt: now, scope: 'regional', significance: 'moderate', severity: 0.4, score: 60,
+    headline: `${name} is booming`,
+    summary: `Brisk and sustained trade has tipped ${name} into a boom — markets swell and coin flows.${dep}`,
+    kind: 'applied', impactKind: 'boom', channelType: 'trade_route',
+    settlementIds: [id], impactIds: [], channelIds: [],
+    sourceEventId: `boom.${id}.${tick}`,
+    tags: ['world_pulse', 'upswing', 'boom'],
+    reasons: [`The boom is fed by ${arteries.length} trade artery${arteries.length === 1 ? '' : 's'} — a composition the trade movers already built.`],
+  };
+}
+
+/** The bust news (house voice, AGGREGATE) — NAMES the severed artery. @param {string} id
+ *  @param {string} name @param {string[]} arteries @param {boolean} embattled @param {number} tick @param {string|null} now */
+function bustNews(id, name, arteries, embattled, tick, now) {
+  const cause = embattled ? 'the roads to it have turned dangerous' : `the ${arteries[0] || 'trade'} artery has failed`;
+  return {
+    id: `wizard_news.${tick}.bust.${id}`,
+    tick, createdAt: now, scope: 'regional', significance: 'major', severity: 0.6, score: 70,
+    headline: `${name}'s boom has busted`,
+    summary: `The trade that made ${name} rich has collapsed — ${cause}, and the boom curdles into flight and empty stalls.`,
+    kind: 'applied', impactKind: 'bust', channelType: 'trade_route',
+    settlementIds: [id], impactIds: [], channelIds: [],
+    sourceEventId: `bust.${id}.${tick}`,
+    tags: ['world_pulse', 'upswing', 'bust'],
+    reasons: [`The boom's own dependency concentration was its undoing${arteries[0] ? ` — the ${arteries[0]} artery` : ''}.`],
+  };
 }

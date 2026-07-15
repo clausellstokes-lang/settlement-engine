@@ -9,6 +9,7 @@
 import { describe, expect, it } from 'vitest';
 import { advanceUpswing, upswingArcsActive, UPSWING_TUNING } from '../../src/domain/worldPulse/upswingKernel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { prosperityRank } from '../../src/data/constants.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 
@@ -198,5 +199,104 @@ describe('upswing — B1 completion: history beat + legitimacy dividend + upgrad
       const s = corrupt.settlementUpdates.find((u) => u.saveId === 'a').settlement;
       expect((s.activeConditions || []).some((c) => c.id?.startsWith('condition.reconstruction_skim'))).toBe(true);
     }
+  });
+});
+
+// ── W-UPSWING stage 2 — B2 BOOM → BUST ─────────────────────────────────────────
+function boomFixture({ throughput = 4, centrality = 0.5, embattled = false, arteries = ['x', 'y'], lit = true, boomLedger = null, prosperity = 'Comfortable' }) {
+  const settlement = {
+    name: 'Port', tier: 'city', population: 5000, config: {},
+    institutions: [{ name: 'Market', category: 'trade' }],
+    economicState: { prosperity }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [], conflicts: [] },
+    activeConditions: [], calamityHistory: [],
+  };
+  const spatialLedgers = {
+    tradeFlow: { p: { in: throughput / 2, out: throughput / 2, lastTick: 0 } },
+    entrepots: { p: { centrality } },
+    ...(embattled ? { embattlement: { p: { level: 0.5, phase: 'embattled' } } } : {}),
+    ...(boomLedger ? { upswing: { boom: boomLedger } } : {}),
+  };
+  const worldState = { tick: 100, calendar: { year: 10 }, simulationRules: lit ? { upswingArcsEnabled: true } : {}, stressors: [], spatialLedgers };
+  const graph = { edges: arteries.map((a, i) => ({ id: `e${i}`, from: 'p', to: a, relationshipType: 'trade_partner' })), channels: [] };
+  const settlementUpdates = [{ saveId: 'p', settlement }];
+  return { snapshot: { settlements: [{ id: 'p', name: 'Port', settlement }] }, worldState, settlementUpdates, graph };
+}
+
+/** Drive N boom ticks, threading worldState (keeps tradeFlow/entrepot ledgers). */
+function driveBoom(cfg, ticks, mutate = null) {
+  let f = boomFixture(cfg);
+  let worldState = f.worldState;
+  let settlementUpdates = f.settlementUpdates;
+  const receipts = []; const news = [];
+  for (let t = 0; t < ticks; t++) {
+    if (mutate) worldState = mutate(worldState, t);
+    const snapshot = { settlements: settlementUpdates.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+    const r = advanceUpswing({ snapshot, worldState, settlementUpdates, graph: f.graph, rng: null, tick: 100 + t, now: NOW });
+    worldState = r.worldState; settlementUpdates = r.settlementUpdates;
+    receipts.push(...r.receipts); news.push(...r.newsEntries);
+  }
+  return { worldState, settlementUpdates, receipts, news };
+}
+
+describe('upswing — B2 boom: hysteresis enter + fragile edges + source set', () => {
+  it('BOOM mints only after sustained surplus throughput + centrality (the hysteresis dwell)', () => {
+    // 2 ticks < MIN_DWELL(3) ⇒ still building, no boom condition yet.
+    const early = driveBoom({ throughput: 4, centrality: 0.5 }, 2);
+    expect(early.receipts.some((r) => r.kind === 'boom_enter')).toBe(false);
+    expect(early.worldState.spatialLedgers.upswing.boom.p.phase).toBe('building');
+    // 3 ticks ⇒ the boom mints.
+    const boomed = driveBoom({ throughput: 4, centrality: 0.5 }, 3);
+    expect(boomed.receipts.some((r) => r.kind === 'boom_enter')).toBe(true);
+    const s = boomed.settlementUpdates.find((u) => u.saveId === 'p').settlement;
+    expect((s.activeConditions || []).some((c) => c.archetype === 'boom')).toBe(true);
+  });
+
+  it('a backwater (high throughput, NO centrality) never booms — centrality gates it', () => {
+    const r = driveBoom({ throughput: 5, centrality: 0.1 }, 5);
+    expect(r.receipts.some((x) => x.kind === 'boom_enter')).toBe(false);
+    expect(r.worldState.spatialLedgers?.upswing).toBeUndefined();
+  });
+
+  it('the boom RECORDS ITS OWN FRAGILE EDGES + typed source set (the artery ids)', () => {
+    const single = driveBoom({ throughput: 4, centrality: 0.5, arteries: ['x'] }, 3);
+    const enter = single.receipts.find((r) => r.kind === 'boom_enter');
+    expect(enter.fragile, 'a single-artery boom is fragile').toBe(true);
+    expect(enter.sources.arteries).toEqual(['x']);
+    const two = driveBoom({ throughput: 4, centrality: 0.5, arteries: ['x', 'y'] }, 3);
+    expect(two.receipts.find((r) => r.kind === 'boom_enter').fragile, 'two independent arteries ⇒ not fragile').toBe(false);
+  });
+
+  it('a sustained boom DRIFTS prosperity UP (band step accrues over volume; receipted)', () => {
+    // ~10 ticks ⇒ accrual 0.14×~8 in-boom ≥ 1 ⇒ one band step up.
+    const r = driveBoom({ throughput: 4, centrality: 0.5, prosperity: 'Moderate' }, 12);
+    const s = r.settlementUpdates.find((u) => u.saveId === 'p').settlement;
+    expect(prosperityRank(s.economicState.prosperity), 'prosperity drifted up a band').toBeGreaterThan(prosperityRank('Moderate'));
+    // NO receipt-less rise: a boom_sustain receipt names the source arteries.
+    expect(r.receipts.some((x) => x.kind === 'boom_sustain' && Array.isArray(x.sources.arteries))).toBe(true);
+  });
+});
+
+describe('upswing — B2 bust: severance names the artery (constitution)', () => {
+  it('embattlement during boom FLIPS to bust: prosperity retreat + a receipt naming the artery', () => {
+    // Enter boom (3 ticks), then embattlement appears at tick 3.
+    const r = driveBoom({ throughput: 4, centrality: 0.5, arteries: ['Rivermouth', 'Hillfort'] }, 5,
+      (ws, t) => (t >= 3 ? { ...ws, spatialLedgers: { ...ws.spatialLedgers, embattlement: { p: { level: 0.6, phase: 'embattled' } } } } : ws));
+    const bust = r.receipts.find((x) => x.kind === 'bust');
+    expect(bust, 'the boom busted under embattlement').toBeTruthy();
+    expect(bust.cause).toBe('embattlement');
+    expect(bust.severedArtery, 'the bust NAMES the severed artery').toBe('Hillfort'); // codepoint-first of the sorted arteries
+    expect(r.news.some((n) => n.impactKind === 'bust' && /artery|dangerous/.test(String(n.summary)))).toBe(true);
+  });
+
+  it('a THROUGHPUT COLLAPSE busts the boom (the W-DISCOVERY resource-removal seam rides this same flip)', () => {
+    // Enter boom, then throughput collapses below BUST_THROUGHPUT.
+    const r = driveBoom({ throughput: 4, centrality: 0.5 }, 5,
+      (ws, t) => (t >= 3 ? { ...ws, spatialLedgers: { ...ws.spatialLedgers, tradeFlow: { p: { in: 0.2, out: 0.2, lastTick: 0 } } } } : ws));
+    const bust = r.receipts.find((x) => x.kind === 'bust');
+    expect(bust, 'the boom busted on artery collapse').toBeTruthy();
+    expect(bust.cause).toBe('artery_collapse');
+    // Prosperity retreated (a bust condition minted).
+    const s = r.settlementUpdates.find((u) => u.saveId === 'p').settlement;
+    expect((s.activeConditions || []).some((c) => c.archetype === 'custom_crisis' && c.id?.startsWith('condition.bust'))).toBe(true);
   });
 });
