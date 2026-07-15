@@ -9,11 +9,16 @@ const RENEWABLE_PATTERNS = [
 ];
 
 const NONRENEWABLE_PATTERNS = [
-  /iron|ore|deposit|vein|metal|coal|peat|quarry|stone|gem|crystal|salt|sand|clay|glass/,
+  // ore/coal carry a leading \b so they match the standalone minerals ("iron ore",
+  // "coal") and not the renewable words that contain them as a substring: "forest"
+  // and "shore" (ore), "charcoal" (coal). Unanchored, those flag woodland as exhaustible.
+  /iron|\bore|deposit|vein|metal|\bcoal|peat|quarry|stone|gem|crystal|salt|sand|clay|glass/,
   /ruin|artefact|artifact|relic/,
 ];
 
-const MAGICAL_PATTERNS = [/magic|arcane|ley|planar/];
+// \bley\b matches the standalone "ley" of a ley line, never the "ley" inside
+// "barley" — the substring that used to mis-flag grain fields as magical.
+const MAGICAL_PATTERNS = [/magic|arcane|\bley\b|planar/];
 
 /** @param {any} resource */
 function textFor(resource) {
@@ -46,7 +51,12 @@ export function classifyResource(resource) {
   const text = textFor(resource);
   const magical = MAGICAL_PATTERNS.some(pattern => pattern.test(text));
   const nonrenewable = NONRENEWABLE_PATTERNS.some(pattern => pattern.test(text));
-  const renewable = RENEWABLE_PATTERNS.some(pattern => pattern.test(text));
+  // Subterranean bodies are mined mineral seams — inherently exhaustible. An
+  // incidental renewable token in their trade goods (coal_deposits ships 'timber')
+  // must not flip them to natural recovery, or a finite seam would regrow. For the
+  // underground class, category wins over keyword.
+  const renewable = spec.category !== 'subterranean'
+    && RENEWABLE_PATTERNS.some(pattern => pattern.test(text));
 
   if (magical) {
     return {
