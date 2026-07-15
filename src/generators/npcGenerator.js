@@ -15,7 +15,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 
 import { computeRelTension } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
-import { STRESS_INSTITUTION_EFFECTS } from './helpers.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
