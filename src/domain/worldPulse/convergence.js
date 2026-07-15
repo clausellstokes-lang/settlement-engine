@@ -73,6 +73,8 @@ import { resolveFieldBattle, fieldBattleWinProbability } from '../spatial/armyTr
 import { coupContenders } from '../rulingPowerCoup.js';
 import { foreignGripOf, obligationDebt01, directionBias } from './corruptionWeb.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+import { pendingActorMajorFor } from './actorMajorApproval.js';
+import { proposalIdFor, upsertProposal } from './worldState.js';
 // THE MERCENARY CLAUSE (owner ruling, design §4): a mercenary-related institution reinforces
 // a force deployed FROM its settlement. Detection rides the ONE facet chokepoint (declared
 // facet) OR the established hireable-force name/tag pattern.
@@ -803,8 +805,10 @@ const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']
 const FRIENDLY_REL = new Set(['ally', 'trade_partner', 'vassal', 'tributary', 'protectorate']);
 
 /** The 0..1 prosperity/strength proxy for a patron (the fundingOf idiom — economic
- *  capacity as the projectable-strength stand-in in wave 1). @param {Snapshot} snapshot @param {string} id */
-function patronStrength01Of(snapshot, id) {
+ *  capacity as the projectable-strength stand-in in wave 1). EXPORTED (W-COMPOSER-2):
+ *  the DM mint derives intervention strength through THIS read (same-function law).
+ *  @param {Snapshot} snapshot @param {string} id */
+export function patronStrength01Of(snapshot, id) {
   const item = snapshot?.byId?.get?.(String(id));
   const score = item?.causal?.scores?.economic_capacity;
   return Number.isFinite(score) ? clamp01(Number(score) / 100) : 0.5;
@@ -969,6 +973,9 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
   const newsEntries = [];
   /** @type {Array<Record<string, unknown>>} */
   const deferrals = [];
+  /** The W-COMPOSER-2 re-mint: pending proposals born from DM-mode deferrals. */
+  /** @type {Array<Record<string, unknown>>} */
+  const mintedProposals = [];
   let mutated = false;
 
   const contests = liveCoupContests(worldState, snapshot);
@@ -1035,6 +1042,40 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     if (!best) continue;
 
     if (deferForApproval) {
+      // THE PROPOSAL RE-MINT (W-COMPOSER-2 — the documented deferral CLOSED):
+      // under a DM-driven authority mode the withheld intervention now mints a
+      // PENDING proposal (dedup: one per patron via pendingActorMajorFor — the
+      // M10a hold guard; expiry via expireStaleActorMajors, already routed for
+      // intervention_ordered). Approval applies through the SAME realm-verb arm
+      // the DM's own ORDER_INTERVENTION uses — force ≡ organic at the applier.
+      // The DM's approval REPLACES the loaded dice (the M9d held-mint law: no
+      // fresh RNG draw at apply).
+      const alreadyMintedThisTick = mintedProposals.some(
+        (p) => /** @type {Record<string, unknown>} */ (p.outcome)?.targetSaveId === best.patronId);
+      if (!alreadyMintedThisTick && !pendingActorMajorFor(worldState, 'intervention_ordered', best.patronId)) {
+        const invited = best.side === INTERVENTION_SIDES.INCUMBENT && FRIENDLY_REL.has(best.relType);
+        const merc = mercenaryReinforcementOf(snapshot, best.patronId);
+        const strength = round4(Math.max(1, best.patronStrength01 * 100) * (1 + merc.factor));
+        const outcome = {
+          id: `realm_verb.ORDER_INTERVENTION.${best.patronId}.${nowTick}`,
+          candidateType: 'intervention_ordered', type: 'realm_verb',
+          targetSaveId: best.patronId,
+          headline: `${nameOf(snapshot, best.patronId)} seeks your word: commit an army to the contest at ${nameOf(snapshot, targetId)}`,
+          summary: best.receipt,
+          severity: 0.7,
+          reasons: [best.receipt],
+          applyMode: 'proposal',
+          proposalPayload: {
+            kind: 'realm_verb_order', verb: 'ORDER_INTERVENTION',
+            args: { patronId: best.patronId, targetId, side: best.side, invited, strength, motive: best.motive },
+          },
+        };
+        mintedProposals.push({
+          id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
+          tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
+          severity: outcome.severity, reasons: outcome.reasons,
+        });
+      }
       deferrals.push({ patronId: best.patronId, targetId, motive: best.motive, side: best.side, reason: 'dm_approval' });
       continue;
     }
@@ -1113,7 +1154,7 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     newsEntries.push(sideBattleNews({ winnerId: winSide.members[0], loserId: loseSide.members[0], targetId, snapshot, tick: nowTick, now }));
   }
 
-  if (!mutated && !obligationMints.length) {
+  if (!mutated && !obligationMints.length && !mintedProposals.length) {
     return { worldState, changed: false, newsEntries: [], deferrals };
   }
   const hasRecords = Object.keys(next).length > 0;
@@ -1127,6 +1168,10 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     nextWorldState = folded
       ? setSpatialLedger(nextWorldState, 'obligations', folded)
       : dropSpatialLedger(nextWorldState, 'obligations');
+  }
+  // The W-COMPOSER-2 re-mint fold: the DM-mode deferrals' pending proposals.
+  for (const proposal of mintedProposals) {
+    nextWorldState = /** @type {Record<string, unknown>} */ (upsertProposal(nextWorldState, proposal));
   }
   return { worldState: nextWorldState, changed: true, newsEntries, deferrals };
 }
@@ -1189,7 +1234,7 @@ function nameOf(snapshot, id) {
 /** A regional wizard-news entry for a committed intervention (house voice, AGGREGATE —
  *  no npc named). Carries the typed motive (design §5 legibility) + the mercenary receipt.
  *  @param {{ patronId: string, targetId: string, chosen: ReturnType<typeof scoreMotives>, legit: ReturnType<typeof interventionLegitimacy>, merc?: { factor: number, count: number, settlementName: string }, snapshot: Snapshot, tick: number, now: string|null }} args */
-function interventionNews({ patronId, targetId, chosen, legit, merc = { factor: 0, count: 0, settlementName: '' }, snapshot, tick, now }) {
+export function interventionNews({ patronId, targetId, chosen, legit, merc = { factor: 0, count: 0, settlementName: '' }, snapshot, tick, now }) {
   const patron = nameOf(snapshot, patronId);
   const target = nameOf(snapshot, targetId);
   const sideWord = chosen.side === INTERVENTION_SIDES.INCUMBENT ? 'to prop the seat' : 'to raise the challengers';

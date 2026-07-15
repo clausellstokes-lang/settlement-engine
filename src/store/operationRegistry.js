@@ -55,7 +55,7 @@ export const OPERATIONS = Object.freeze({
   recordSnapshot: { opType:'recordSnapshot', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'versionHistory-snapshot', undoToken:'revertToSnapshot' },
   revertToSnapshot: { opType:'revertToSnapshot', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   destroySavedSettlement: { opType:'destroySavedSettlement', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'eventLog-entry(DESTROY_SETTLEMENT)', undoToken:null },
-  // ── K-C MACRO (38) — orchestrators; existing receipts become receiptRef ──
+  // ── K-C MACRO (39) — orchestrators; existing receipts become receiptRef ──
   generateSettlement: { opType:'generateSettlement', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'pipelineHistory', undoToken:null },
   regenSection: { opType:'regenSection', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'regenerationDelta', undoToken:null },
   canonize: { opType:'canonize', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'uncanonize' },
@@ -93,6 +93,8 @@ export const OPERATIONS = Object.freeze({
   recordCanonRelationshipRipple: { opType:'recordCanonRelationshipRipple', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:'reverseCanonRelationshipRipple' },
   reverseCanonRelationshipRipple: { opType:'reverseCanonRelationshipRipple', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   dismissWorldPulseProposal: { opType:'dismissWorldPulseProposal', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'proposal-status', undoToken:null },
+  // W-COMPOSER-2: the realm-verb force-as-proposal mint (cancel = dismissWorldPulseProposal; apply = applyWorldPulseProposal).
+  stageRealmVerb: { opType:'stageRealmVerb', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:'realm-proposal', undoToken:null },
   undoLastPulse: { opType:'undoLastPulse', klass:'macro', slice:'campaignWorldPulseSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   // ── K-B MECHANICAL (114) — simple setters/updaters of durable/domain state ──
   queueEdit: { opType:'queueEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'revertSingleEdit' },

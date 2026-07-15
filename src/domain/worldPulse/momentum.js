@@ -971,11 +971,13 @@ export function forceReconsiderationVerbFactory() {
  * Apply a signed publicLegitimacy.score delta to a settlement's snapshot update (the
  * applyLegitimacyDeltasToUpdates idiom, reimplemented so the crack stays self-contained):
  * integer, clamped [0,100], skipping a legacy bare-number / absent legitimacy. Pure.
+ * EXPORTED (W-COMPOSER-2): the FORCE_RECONSIDERATION apply arm lands its hit
+ * through THIS writer (the same-function law).
  * @param {Array<{ saveId?: unknown, settlement?: unknown }>} updates
  * @param {Map<string, number>} hits actorId → signed delta (a climb-down hit is negative)
  * @returns {Array<{ saveId?: unknown, settlement?: unknown }>}
  */
-function applyLegitimacyHits(updates, hits) {
+export function applyLegitimacyHits(updates, hits) {
   if (!hits.size) return updates;
   const index = new Map();
   updates.forEach((u, i) => index.set(String(u && u.saveId), i));
@@ -1004,7 +1006,7 @@ function applyLegitimacyHits(updates, hits) {
  * @param {string} actorId @param {string} targetId @param {(id: string) => string} name
  * @param {number} stock @param {number} cliff @param {{ price01: number }} crack
  * @param {string} exitKind @param {number} tick @returns {Record<string, unknown>} */
-function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
+export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
   const A = name(actorId);
   const Tn = name(targetId);
   const faced = exitKind ? String(exitKind).replace(/_/g, ' ') : '';

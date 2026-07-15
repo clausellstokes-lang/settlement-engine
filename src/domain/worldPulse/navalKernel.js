@@ -39,6 +39,7 @@ import { setSpatialLedger, dropSpatialLedger, isPort } from '../spatial/distance
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
+import { proposalIdFor, upsertProposal } from './worldState.js';
 import { clamp01 } from '../../kernel/math.js';
 import { formatCount } from '../formatNumber.js';
 
@@ -138,7 +139,7 @@ function pickBlockadeTarget(digest, graph, navyId, ports) {
 
 /** A blockade-declared wizard-news entry (AGGREGATE). @param {{ ownerId: string, targetId: string }} b
  *  @param {Snapshot} snapshot @param {number} tick @param {string|null} now @returns {Record<string, unknown>} */
-function blockadeNews(b, snapshot, tick, now) {
+export function blockadeNews(b, snapshot, tick, now) {
   const navy = nameOf(snapshot, b.ownerId);
   const port = nameOf(snapshot, b.targetId);
   return {
@@ -227,6 +228,9 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
   const deferrals = [];
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  /** The W-COMPOSER-2 re-mint: pending proposals born from DM-mode deferrals. */
+  /** @type {Array<Record<string, unknown>>} */
+  const mintedProposals = [];
 
   // ── ADVANCE existing naval records (position step; naval fields survive the spread). ──
   for (const key of Object.keys(prior).sort()) {
@@ -274,7 +278,31 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
     if (!target) continue;
     if (priorBlockades.get(target)?.has(navyId)) continue; // already blockading it
     if (blockadeDeferred) {
+      // THE PROPOSAL RE-MINT (W-COMPOSER-2 — the documented deferral CLOSED):
+      // the withheld blockade now mints a PENDING proposal (dedup via the M10a
+      // pendingActorMajorFor hold guard; expiry already routed). Approval rides
+      // the SAME realm-verb arm the DM's own DECLARE_BLOCKADE uses — the DM's
+      // word replaces the loaded dice (the M9d held-mint law).
       if (!pendingActorMajorFor(worldState, 'blockade_declared', navyId)) {
+        const outcome = {
+          id: `realm_verb.DECLARE_BLOCKADE.${navyId}.${nowTick}`,
+          candidateType: 'blockade_declared', type: 'realm_verb',
+          targetSaveId: navyId,
+          headline: `${nameOf(snapshot, navyId)} seeks your word: blockade ${nameOf(snapshot, target)}`,
+          summary: `${nameOf(snapshot, navyId)}'s war fleet stands ready to throw a blockade across ${nameOf(snapshot, target)}'s sea approaches — a siege from the water.`,
+          severity: 0.7,
+          reasons: [`${nameOf(snapshot, navyId)} holds the stronger fleet and a hostile port within reach.`],
+          applyMode: 'proposal',
+          proposalPayload: {
+            kind: 'realm_verb_order', verb: 'DECLARE_BLOCKADE',
+            args: { ownerId: navyId, targetId: target, ownerStrength: navStrength },
+          },
+        };
+        mintedProposals.push({
+          id: proposalIdFor(outcome, nowTick), status: 'pending', createdAt: now, updatedAt: now,
+          tick: nowTick, outcome, headline: outcome.headline, summary: outcome.summary,
+          severity: outcome.severity, reasons: outcome.reasons,
+        });
         deferrals.push({ ownerId: navyId, targetId: target, reason: 'dm_approval' });
       }
       continue;
@@ -379,12 +407,17 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
     }
     nextWorldState = { ...nextWorldState, deployments: nextDeployments };
   }
-  const changed = changedLedger || Object.keys(sharedFateWriteback).length > 0 || debarkRecall.size > 0;
+  // The W-COMPOSER-2 re-mint fold: the DM-mode deferrals' pending proposals.
+  for (const proposal of mintedProposals) {
+    nextWorldState = /** @type {Record<string, unknown>} */ (upsertProposal(nextWorldState, proposal));
+  }
+  const changed = changedLedger || Object.keys(sharedFateWriteback).length > 0 || debarkRecall.size > 0
+    || mintedProposals.length > 0;
   return { worldState: nextWorldState, changed, newsEntries, deferrals };
 }
 
-// ── VERBS (registrable shape — NOT manifest-registered; the W-COMPOSER-2 lift) ─────────
-// Ship as standalone frozen factories (registered:false) exactly like the convergence verbs.
+// ── VERBS (REGISTERED in realmManifest.js — the W-COMPOSER-2 lift) ─────────────────────
+// Standalone frozen factories exactly like the convergence verbs.
 /** @returns {{ verb: string, scope: string, candidateType: string, dials: Record<string, unknown>, registered: boolean, note: string }} */
 export function orderConvoyVerbFactory() {
   return Object.freeze({
