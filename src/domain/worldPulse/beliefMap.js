@@ -362,20 +362,29 @@ function groundTruthBelief(subjectId, allianceLabel, ctx, now) {
  * @property {number} accuracy01
  * @property {number} score
  * @property {string} sortKey            the ledger event key (codepoint tie-break)
+ * @property {string} [sourceId]         the origin telling's settlement (W-DOCTRINE-2 credibility weighting; optional — synthetic reports omit it)
  */
 
 /** The aggregate weight + accuracy of a report set (provenance × recency ×
  *  independence × completeness). Reports are pre-sorted by the caller.
- *  @param {BeliefReport[]} reports @returns {{ weight: number, accuracy: number }} */
-function aggregateReports(reports) {
+ *  W-DOCTRINE-2 CREDIBILITY: when a `credibilityOf` weight closure is injected (the
+ *  info-statecraft layer lit), each report's weight is ALSO scaled by the credibility
+ *  of its SOURCE — a proven liar's tellings count for less, a proven-true court's for
+ *  more (the existing corroboration math, credibility-weighted, design §4). ABSENT
+ *  ⇒ no multiply ⇒ byte-identical (every campaign that never lit the flag).
+ *  @param {BeliefReport[]} reports
+ *  @param {((sourceId: string) => number) | null} [credibilityOf]
+ *  @returns {{ weight: number, accuracy: number }} */
+function aggregateReports(reports, credibilityOf = null) {
   const T = BELIEF_TUNING;
   let weight = 0;
   let accWeighted = 0;
   for (const r of reports) {
-    const w = Math.pow(T.HOP_DECAY, Math.max(0, r.hopCount))
+    let w = Math.pow(T.HOP_DECAY, Math.max(0, r.hopCount))
       * Math.pow(T.RECENCY_DECAY, Math.max(0, r.ageTicks))
       * (T.INDEP_BASE + T.INDEP_PER * Math.max(1, r.independentSources))
       * clamp01(r.completeness01);
+    if (credibilityOf) w *= credibilityOf(r.sourceId || '');
     weight += w;
     accWeighted += w * clamp01(r.accuracy01);
   }
@@ -394,9 +403,10 @@ function aggregateReports(reports) {
  * @param {BeliefRecord} args.groundTruth        the current true belief (re-anchor target)
  * @param {BeliefReport[]} args.reports          this window's fresh reports (pre-sorted)
  * @param {number} args.now
+ * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2: source-credibility weight (absent ⇒ byte-identical)
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -406,7 +416,7 @@ export function reconcileBelief({ prior, groundTruth, reports, now }) {
       ? { ...prior, confidence01: round4(priorConf) }
       : { ...groundTruth, confidence01: 0, lastUpdateTick: now };
   }
-  const { weight, accuracy } = aggregateReports(reports);
+  const { weight, accuracy } = aggregateReports(reports, credibilityOf);
   // Numeric attributes re-anchor toward the fidelity-degraded truth (a garbled
   // telling pulls the observation toward the neutral midpoint).
   const obsStrengthBand = accuracy * groundTruth.strengthBand + (1 - accuracy) * T.NEUTRAL_STRENGTH_BAND;
@@ -497,7 +507,7 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null) 
   const out = new Map();
   const ledger = asObject(observerLedger);
   for (const key of Object.keys(ledger)) {
-    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown } | null } */ (ledger[key]);
+    const rec = /** @type {{ arrivalTick?: unknown, content?: unknown, hopCount?: unknown, corroborationRoots?: unknown, completeness01?: unknown, accuracy01?: unknown, score?: unknown, framing?: unknown, provenance?: unknown } | null } */ (ledger[key]);
     if (!rec || typeof rec !== 'object') continue;
     const arrivalTick = Math.floor(finiteNumber(rec.arrivalTick, Infinity));
     if (arrivalTick > now) continue; // in transit — not yet heard
@@ -506,6 +516,11 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null) 
       if (!matchFraming(framing)) continue; // not this faction's carrier — skip
     }
     const content = asObject(rec.content);
+    // W-DOCTRINE-2: the origin telling's settlement (credibility weighting source). The
+    // field is set unconditionally but consumed ONLY when a credibilityOf closure is
+    // injected — byte-identical otherwise.
+    const prov = asObject(rec.provenance);
+    const sourceId = prov.originId != null ? String(prov.originId) : '';
     const parties = new Set(
       [content.whereId, ...(Array.isArray(content.partyIds) ? content.partyIds : [])]
         .filter((v) => v != null && v !== '')
@@ -520,6 +535,7 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null) 
       accuracy01: clamp01(finiteNumber(rec.accuracy01, 1)),
       score: Math.max(0, finiteNumber(rec.score, 0)),
       sortKey: String(key),
+      sourceId,
     };
     for (const subjectId of parties) {
       if (subjectId === String(observerId)) continue; // self is never a rumor subject
@@ -868,9 +884,10 @@ export function applyAllyIntelSharing({ maps, ctx, neighbours, alignmentOf, now 
  * @param {GroundTruthCtx} args.ctx
  * @param {Map<string, Map<string, string>>} args.neighbours
  * @param {string} args.observerId @param {number} args.now
+ * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2 source-credibility weight
  * @returns {{ bySubject: Record<string, BeliefRecord>, pruned: boolean }}
  */
-function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now }) {
+function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, credibilityOf = null }) {
   const T = BELIEF_TUNING;
   const subjectIds = new Set([...Object.keys(priorSlot), ...reports.keys()].map(String));
   /** @type {Record<string, BeliefRecord>} */
@@ -898,7 +915,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now })
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now });
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
@@ -932,9 +949,12 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now })
  *   M9b component (4): the deliberate ally-intel sharing channel. ABSENT / disabled
  *   ⇒ the sharing pass never runs ⇒ the M9a advance is BYTE-IDENTICAL (the opt-in
  *   gate — allyIntelSharingEnabled, off by default even on a belief-active campaign).
+ * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2:
+ *   the source-credibility weight closure (info-statecraft layer lit). ABSENT ⇒ the
+ *   reconciliation is byte-identical (every campaign that never lit infoStatecraftEnabled).
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -996,7 +1016,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const seat = reconcileSlot({
       priorSlot: priorSeat,
       reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
-      ctx, neighbours, observerId, now,
+      ctx, neighbours, observerId, now, credibilityOf,
     });
     if (seat.pruned) mutated = true;
 
@@ -1013,7 +1033,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
           reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
-          ctx, neighbours, observerId, now,
+          ctx, neighbours, observerId, now, credibilityOf,
         });
         if (built.pruned) mutated = true;
         if (Object.keys(built.bySubject).length) factionSlots[archetype] = built.bySubject;
@@ -1023,7 +1043,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
           (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
-        ctx, neighbours, observerId, now,
+        ctx, neighbours, observerId, now, credibilityOf,
       });
       if (publicBuilt.pruned) mutated = true;
       if (Object.keys(publicBuilt.bySubject).length) factionSlots[PUBLIC_FACTION_KEY] = publicBuilt.bySubject;

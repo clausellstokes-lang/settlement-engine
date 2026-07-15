@@ -75,6 +75,7 @@ import { advanceTreaties } from './peaceTerms.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
+import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn } from './informationStatecraft.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
@@ -1701,6 +1702,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
           return { lawfulness01: computeLawfulness(it, memoryState), malice01: computeMalice(it, memoryState) };
         },
       } : null,
+      // W-DOCTRINE-2: source-credibility weight for the corroboration math (info-statecraft
+      // layer lit). null when dormant / no credibility ledger ⇒ byte-identical.
+      credibilityOf: makeCredibilityWeightFn(memoryState, worldState.tick),
     });
     if (beliefs.changed) {
       if (beliefs.next) {
@@ -1709,6 +1713,35 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         // Everything decayed below the floor: the conditional sub-ledger drops to absent.
         memoryState = dropSpatialLedger(memoryState, 'beliefMaps');
       }
+    }
+  }
+  // W-DOCTRINE-2 — INFORMATION STATECRAFT (DESIGN_INFORMATION_STATECRAFT.md). AFTER the
+  // belief advance (the LIE writes onto/against the just-formed beliefs): runs the LIE
+  // lifecycle (seed a garrison bluff into believed-hostile neighbours → contradict →
+  // expose → blowback) over the belief maps, then folds this tick's credibility deltas
+  // (coalition-fracture betrayals — the recorded-not-enforced peaceTerms seam — + exposed
+  // lies) into the credibility stock. DORMANT behind infoStatecraftActive (beliefsActive +
+  // the virtual infoStatecraftEnabled) ⇒ a complete no-op (zero forks, zero keys) —
+  // byte-identical, including for every belief/rumor/peace golden (which never lit the flag).
+  if (infoStatecraftActive(memoryState)) {
+    const infowar = advanceInformationStatecraft({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      rng,
+      tick: worldState.tick,
+      strengthOf: (/** @type {string} */ id) => {
+        const it = postTimeSnapshot?.byId?.get?.(String(id));
+        return it ? settlementStrength(it, buildPressureSummary(pIndex, id)) : 0;
+      },
+      alignmentOf: (/** @type {string} */ id) => {
+        const it = postTimeSnapshot?.byId?.get?.(String(id));
+        return { lawfulness01: computeLawfulness(it, memoryState), malice01: computeMalice(it, memoryState) };
+      },
+      nameFor: settlementNameFor,
+    });
+    if (infowar.changed) memoryState = /** @type {typeof memoryState} */ (infowar.worldState);
+    if (infowar.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, infowar.newsEntries, { now });
     }
   }
   // W-DOCTRINE-1 — SUPPLY-WEB WARFARE (DESIGN_SUPPLY_WEB_WARFARE.md). The indirect-war
@@ -2061,6 +2094,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       graph: applied.regionalGraph,
       pIndex,
       tick: worldState.tick,
+      // W-DOCTRINE-2: discount a proven liar's believed strength in the Blainey margins
+      // (info-statecraft layer lit) — wars against proven liars converge slower. null
+      // when dormant / no credibility ledger ⇒ byte-identical.
+      blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
   }

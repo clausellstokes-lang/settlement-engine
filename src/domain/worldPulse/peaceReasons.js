@@ -302,10 +302,13 @@ export function warCausalBrief(worldState, partyId, foeId) {
  *           worldState: Record<string, unknown>,
  *           graph?: { edges?: Array<Record<string, unknown>> } | null,
  *           pIndex?: Record<string, unknown> | null,
- *           tick: number }} args
+ *           tick: number,
+ *           blaineyCredibility?: ((subjectId: string, believedStrength: number) => number) | null }} args
+ *   W-DOCTRINE-2: the credibility-discount closure for the Blainey subject-side reads
+ *   (info-statecraft layer lit). ABSENT ⇒ byte-identical.
  * @returns {PeaceReasonsAdvanceResult}
  */
-export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null, tick }) {
+export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null, tick, blaineyCredibility = null }) {
   // ── DORMANCY GATE (§8): absent ⇒ an immediate no-op. No key, no read. ──
   if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
     return { worldState, changed: false, newsEntries: [] };
@@ -351,10 +354,16 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
     const { partyId, foeId } = /** @type {{ partyId: string, foeId: string }} */ (pairs.get(key));
 
     // THE BLAINEY MARGINS — self reads truth, the foe reads BELIEF (never truth).
+    // W-DOCTRINE-2: the SUBJECT-side believed strength (the second term of each margin)
+    // is credibility-discounted when the info-statecraft layer is lit — a proven liar's
+    // claimed strength is trusted less, so the courts' reckonings fail to reconcile and
+    // the war runs longer. ABSENT ⇒ the raw read passes through ⇒ byte-identical.
+    const discBelief = (/** @type {string} */ subjectId, /** @type {number} */ raw) =>
+      blaineyCredibility ? blaineyCredibility(subjectId, raw) : raw;
     const marginA = readBeliefStrength(partyId, partyId, worldState, strengthFor(partyId))
-      - readBeliefStrength(partyId, foeId, worldState, strengthFor(foeId));
+      - discBelief(foeId, readBeliefStrength(partyId, foeId, worldState, strengthFor(foeId)));
     const marginB = readBeliefStrength(foeId, foeId, worldState, strengthFor(foeId))
-      - readBeliefStrength(foeId, partyId, worldState, strengthFor(partyId));
+      - discBelief(partyId, readBeliefStrength(foeId, partyId, worldState, strengthFor(partyId)));
 
     const pressures = buildPressureSummary(pIndex, partyId);
 
