@@ -188,3 +188,65 @@ it); target-first completeness (every entity kind reaches every legal verb); fol
 (each NON_AUTHORABLE type's card names its carrying verb); realm force-≡-organic byte-parity
 (a forced mobilization equals the sim's own, modulo provenance); preview≡apply preserved at
 every new seam (the existing pin extends to dials and batches).
+
+## 10. THE FORECAST — the realm's pending future (owner-commissioned addendum, 2026-07-14)
+
+The owner's operational frame, verbatim intent: committed changes on canonized campaign members
+QUEUE until the next tick (confirmed: queueSettlementEvent → worldState.pendingEvents;
+drainQueuedEvents replays IN ORDER, before the pulse) — so with multiple settlements staging
+changes, the preview problem is multi-settlement, bidirectional, and loop-bearing.
+
+**THE REFRAME: there is no forecasting an event — only forecasting the realm's pending future,
+and every composer is a window onto the same one.**
+
+- **QUEUE-INCLUSIVE LAW.** A forecast is never smaller than everything: two clone-runs —
+  BASELINE (world + the ENTIRE pending queue in real drain order + the interval) and CANDIDATE
+  (same + the staged change) — rendering the joint outcome and the candidate's marginal
+  contribution. Interactions between queued events are never analyzed, only RUN (the loop
+  answer: the clone drains the real queue through the real engine; feedback handles itself).
+  Two runs ≈ 2×~100ms at year horizon (the catch-up benchmark) — click-driven, never dial-live.
+- **THE DOCKET.** The realm's staged future as a first-class surface: every queued event across
+  every member, in drain order, per-settlement chips, the forecast button attached to IT.
+  Grows from the existing PendingIntentions card into the campaign-scope view.
+- **THE MUTABLE DOCKET LAW (owner directive: "each queued commit is editable or cancelable
+  because of unforeseen changes").** Until the drain consumes it, every docket entry is:
+  (a) CANCELABLE — the existing cancelQueuedEvent op (already registered in the Track-K
+  manifest), surfaced per entry; (b) EDITABLE — reopens in the composer with its dials
+  populated, SAME compose-session id (identity persists across edits; the event has not
+  applied, so no undo/PRNG lineage exists yet), full re-validation against the CURRENT state
+  on re-stage; (c) guarded — every docket mutation honors the advanceInFlight + pausedAdvance
+  sync-prefix (never race the drain). And the world changing underneath a queued entry is
+  handled honestly: entries whose affordance predicates no longer hold surface as **LAPSED —
+  needs your attention** (edit or cancel), and the drain itself routes through §2's veto
+  channel, so a lapsed entry that reaches the drain is REFUSED VISIBLY in the advance digest —
+  never phantom-committed, never silently dropped. (Today's drain mirrors applyEvent's core and
+  inherits the phantom hole; this closes it at the queue's mouth too.)
+- **REALM-WIDE STALENESS.** The forecast fingerprint = world-state × FULL queue hash ×
+  interval. Any queue mutation from ANY member's composer, any advance, any proposal decision
+  voids every open forecast in the campaign — the bidirectional invalidation, by key design.
+- **THE DIGEST RENDERING.** A horizon of downstream causality renders as the story of the
+  unattended interval (the While-You-Were-Away/chronicle vocabulary), grouped per settlement,
+  readable in both directions — your change's ripple outward, their queued changes' ripple in.
+  Time-resolved (the plague reaches the ford in week three). Interval picker: week / month /
+  season / year — the same intervals the orchestrator composes.
+- **THE HONEST LABEL.** The forecast is the CETERIS PARIBUS future: exact if nothing else
+  changes — no party actions, no further ops, and "assuming defaults where the world would
+  await your word" (the clone runs auto-resolve; pause points render as markers). Determinism
+  makes it replayable: same world + queue + interval = the identical forecast, forever. Barring
+  further edits, the forecast IS the next tick.
+- **NO-COMMIT DISCIPLINE.** Clone-and-discard: no cursor stamps, no persistence, no analytics
+  emission from forecast runs.
+- **CONVERGENCE.** This is the authority covenant's "reproducible counterfactuals," delivered —
+  and the Surveyor's what-if engine (its planner calls the same clone-run seam when asked
+  "what happens if the king dies this winter?").
+
+**Pins added to §9:** queue-inclusive baseline (a forecast with a non-empty queue differs from
+the naked-world forecast exactly by the queue's effects); marginal attribution (candidate diff
+= with-vs-without, both queue-inclusive); docket edit preserves id + forces re-validation;
+lapsed entries refuse visibly at drain (the phantom-hole regression pin, queue edition);
+realm-wide staleness (a queue add from member B voids member A's open forecast); forecast
+replay determinism; zero persistence deltas from any forecast run.
+
+**Sequencing note:** the Docket's cancel surface exists today; edit + lapse-handling + the
+forecast land in W-COMPOSER-2 as one coherent tier (the force-as-proposal lane, the feasibility
+predicates, and the clone-run forecast share the campaign-scope plumbing).
