@@ -85,6 +85,7 @@ import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js'
 import { appendWizardNewsEntries } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
+import { evaluateResourceDynamics } from './resourceDynamicsKernel.js';
 import { evaluateInstitutionLifecycle } from './institutionLifecycle.js';
 import { evaluateMoralInstitutionPressure, evaluateMoralInstitutionFounding } from './moralInstitutionPressure.js';
 import { advanceInstitutionTolerance } from './institutionTolerance.js';
@@ -1130,6 +1131,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     rng,   // W-F4b item 2b: enables the development-fidelity term (inert without a chaotic-devout patron)
   });
   worldState = tierResource.worldState;
+  // W-DISCOVERY — ORGANIC RESOURCE DYNAMICS (DESIGN_RESOURCE_DYNAMICS.md §1). Rides
+  // the SAME candidate lane as tierResourceDynamics: prospecting strikes new nodes
+  // from the terrain's latent pool (discovery) and a nonrenewable that has dwelled
+  // depleted long enough gives out (removal). DORMANT behind the virtual
+  // resourceDynamicsEnabled flag ⇒ early return, zero candidates, zero settlementTickStates
+  // keys, zero forks — byte-identical (the fenced dormancy golden proves it). Runs
+  // AFTER tierResourceDynamics so it reads this tick's freshest depletion dwell.
+  const resourceDyn = evaluateResourceDynamics(worldState, postTimeSnapshot, pIndex, {
+    tick: worldState.tick,
+    simulationRules,
+    rng,   // §H-loaded discovery draw (keyed fork; no draw when dormant)
+  });
+  worldState = resourceDyn.worldState;
   // Institution lifecycle — economic growth/decline of supply-chain
   // institutions, gated on the economyDrift streaks tracked alongside
   // tierDrift. Candidates flow through rollCandidates like tier/resource drift.
@@ -1210,7 +1224,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
   // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
   // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
   // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
@@ -1547,7 +1561,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     committed: commit,
     createdAt: now,
     calendar: memoryState.calendar,
-    candidateCount: candidates.length + tierResource.candidates.length + instLifecycle.candidates.length + moralInst.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
+    candidateCount: candidates.length + tierResource.candidates.length + resourceDyn.candidates.length + instLifecycle.candidates.length + moralInst.candidates.length + structuralCandidates.length + coupOutcomes.length + warOutcomes.length,
     selectedCount: selectedForApply.length,
     autoAppliedCount: applied.autoApplied.length,
     proposalCount: applied.proposals.length,
@@ -2252,7 +2266,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
+    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,
