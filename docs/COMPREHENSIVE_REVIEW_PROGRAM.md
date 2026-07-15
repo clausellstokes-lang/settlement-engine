@@ -169,8 +169,12 @@ behavior, budget raises, golden regens.
   rest-point timing (never mid-action), the two-register voice law, zero-new-chrome delivery
   preferred (teach through existing organs: empty states, veto prose, receipts, digest,
   compendium), and THE DISSOCIATION TEST as per-hint acceptance: "could this be screenshotted
-  and mistaken for the world's own furniture?" Design doc DESIGN_GUIDANCE_LAYER.md freezes on
-  recon return; builds as W-GUIDE in the display lane; voice-alignment pass at Surveyor S1.
+  and mistaken for the world's own furniture?" DESIGN_GUIDANCE_LAYER.md FROZEN 2026-07-15 (recon-grounded:
+  ~40-fragment census + ~340 title= layer + the dormant firsts substrate discovered; five
+  violator dispositions decided vetoably under the delegation incl. PipelineReveal
+  theater-once; ActionRail deleted — zero consumers). THE CORPUS IS CLOSED — FINALLY AND
+  COMPLETELY. Builds as W-GUIDE-1/2 in the display lane; S1 voice-alignment pass; the
+  criterion gains its final clause (every mechanism ships its registered whisper).
 
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
