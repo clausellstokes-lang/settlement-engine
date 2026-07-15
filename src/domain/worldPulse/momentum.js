@@ -699,3 +699,164 @@ export function entityThreshold(item, worldState, courtStructure = {}) {
   const cliff = cliffStockFor({ temperament, legitimacyFragility01, consolidation01, oppositionBlocs });
   return { temperament, lawfulness01, malice01, legitimacyFragility01, cliff, depositScale: depositScaleFor(lawfulness01) };
 }
+
+// ════════════════════════════════════════════════════════════════════════════════
+// STAGE 3 — CONSUMPTION FACTORS (design §3: each a bounded centered-on-1.0 factor;
+// dormant ⇒ EXACTLY ×1). Built here PURE + DORMANT, matching the existing consumption
+// idioms (warReasonFactor / blocDecisionFactor.factorFor / makeBlaineyCredibilityFn) so
+// the injection into settlementStrategy, reconcileBelief, and the pulse kernel is
+// MECHANICAL. Nothing here is wired yet ⇒ byte-identical by construction.
+// ════════════════════════════════════════════════════════════════════════════════
+
+export const CONSUMPTION_TUNING = Object.freeze({
+  // The strategy chooser (design §3.1): a course-CONSISTENT move is weighted UP; a
+  // course-REVERSING move DOWN, and past the cliff the reversal weight divides by the
+  // LIMIT CLAUSE multiplier (up to ÷CLIFF_MULT). Bounded; ×1 at stock 0.
+  CONSISTENT_W: 0.4,
+  REVERSAL_W: 0.5,
+  // The belief discount (design §3.2): a bounded, course-scoped motivated-reasoning
+  // discount on reports contradicting the observer's own committed course. FLOOR > 0 so it
+  // can only SLOW convergence, never invert it (the recon's limit-clause guarantee). Scaled
+  // by how far past the cliff the observer is committed.
+  DISCOUNT_FLOOR: 0.4,
+  DISCOUNT_W: 0.6,
+  // The plan/doctrine abandon floor (design §3.3): supplyWebWarfare's ABANDON floor scales
+  // UP with commitment (a committed strangler holds a marginal campaign longer).
+  ABANDON_FLOOR_W: 0.5,
+});
+
+/** The relation a candidate move bears to a committed course (design §3.1). */
+export const COURSE_RELATIONS = Object.freeze(['consistent', 'reversal', 'neutral']);
+
+/**
+ * The course-consistency FACTOR (design §3.1) — a centered-on-1.0 multiplier on a move's
+ * weight given the actor's commitment stock, the entity cliff, and the move's relation to
+ * the committed course. EXACTLY 1.0 at stock 0 (byte-identity: an uncommitted actor behaves
+ * as today). A CONSISTENT move is weighted up (bounded); a REVERSAL down, DIVIDED by the
+ * LIMIT CLAUSE multiplier past the cliff (up to ÷CLIFF_MULT — the order-of-magnitude wall,
+ * finite). NEUTRAL ⇒ 1. @param {{ stock?: number, cliff?: number, relation?: string }} args
+ * @returns {number}
+ */
+export function courseConsistencyFactor({ stock = 0, cliff = MOMENTUM_TUNING.BASE_CLIFF_STOCK, relation = 'neutral' } = {}) {
+  const s = Math.max(0, finiteNumber(stock, 0));
+  if (s <= 0) return 1; // uncommitted ⇒ EXACTLY 1.0 (byte-identity anchor)
+  const c = Math.max(1e-6, finiteNumber(cliff, MOMENTUM_TUNING.BASE_CLIFF_STOCK));
+  const depth = clamp01(s / c); // 0..1 approach to the cliff
+  const C = CONSUMPTION_TUNING;
+  if (relation === 'consistent') return 1 + C.CONSISTENT_W * depth;
+  if (relation === 'reversal') {
+    const base = 1 - C.REVERSAL_W * depth;      // harder to reverse the deeper the commitment
+    return base / reconsiderationMultiplier(s, c); // past the cliff ⇒ ÷ up to CLIFF_MULT
+  }
+  return 1;
+}
+
+/** The bounded move→course-relation map (design §3.1). A move consistent with pursuing a
+ * committed WAR/CAMPAIGN course vs the same target vs a move that reverses it. Anything not
+ * listed is NEUTRAL (×1) ⇒ byte-identity for the untouched moves. @param {string} move
+ * @returns {'consistent'|'reversal'|'neutral'} */
+export function moveCourseRelation(move) {
+  const m = String(move || '');
+  if (m === 'deploy' || m === 'reinforce' || m === 'intercept' || m === 'blockade') return 'consistent';
+  if (m === 'sue_for_peace' || m === 'recall' || m === 'withdraw' || m === 'demobilize') return 'reversal';
+  return 'neutral';
+}
+
+/**
+ * Build the strategy-chooser COMMITMENT-LOAD closure (design §3.1) — the coalitionLoad
+ * idiom. Returns null when momentum is dormant OR the actor holds no committed course (so
+ * settlementStrategy is passed nothing ⇒ byte-identical). When present, factorFor(move,
+ * targetId) is centered on 1.0: a move consistent with the actor's committed war/campaign
+ * course against targetId is weighted up; a reversing move down (÷ the LIMIT CLAUSE past the
+ * cliff). @param {{ spatialLedgers?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} worldState
+ * @param {{ settlement?: unknown } | Record<string, unknown> | null | undefined} item the actor's snapshot item
+ * @param {string} actorId @param {number} tick
+ * @returns {{ factorFor: (move: string, targetId?: string|null) => number } | null}
+ */
+export function makeCommitmentLoad(worldState, item, actorId, tick) {
+  if (!momentumActive(worldState)) return null;
+  const ledger = asObject(getSpatialLedger(worldState, 'commitments'));
+  const actor = String(actorId);
+  // The actor's committed WAR/CAMPAIGN courses, keyed by target ⇒ decayed stock.
+  /** @type {Map<string, number>} */
+  const byTarget = new Map();
+  for (const key of Object.keys(ledger)) {
+    const split = splitCommitmentKey(key);
+    if (!split || split.actorId !== actor) continue;
+    const parsed = parseCourseKey(split.courseKey);
+    if (!parsed || (parsed.kind !== 'war' && parsed.kind !== 'campaign')) continue;
+    const stock = decayedCommitmentStock(normalizeCommitmentEntry(ledger[key]), Math.floor(finiteNumber(tick, 0)));
+    if (stock <= 0) continue;
+    byTarget.set(parsed.target, Math.max(byTarget.get(parsed.target) || 0, stock));
+  }
+  if (byTarget.size === 0) return null; // uncommitted ⇒ byte-identical
+  const cliff = entityThreshold(item, worldState).cliff;
+  return {
+    factorFor: (/** @type {string} */ move, /** @type {string|null} */ targetId = null) => {
+      const relation = moveCourseRelation(move);
+      if (relation === 'neutral') return 1;
+      // A reversal (sue_for_peace) is checked against the STRONGEST committed course when no
+      // target is named; a consistent move (deploy toward T) against T's own stock.
+      let stock = 0;
+      if (targetId != null && byTarget.has(String(targetId))) stock = /** @type {number} */ (byTarget.get(String(targetId)));
+      else if (relation === 'reversal') { for (const v of byTarget.values()) stock = Math.max(stock, v); }
+      if (stock <= 0) return 1;
+      return courseConsistencyFactor({ stock, cliff, relation });
+    },
+  };
+}
+
+/**
+ * Build the BELIEF-DISCOUNT closure the belief layer consumes at reconcileBelief (design
+ * §3.2 — the makeBlaineyCredibilityFn precedent EXACTLY). Returns null when momentum is
+ * dormant OR no commitments ledger has materialized ⇒ reconcileBelief is passed nothing ⇒
+ * byte-identical. When present, discountFor(observerId, subjectId) is a bounded 0..1 weight
+ * on a report about `subject` that CONTRADICTS the observer's committed course against that
+ * subject: EXACTLY 1.0 when the observer holds no such committed course (byte-identity), and
+ * regressing toward DISCOUNT_FLOOR (never 0 — it can only SLOW convergence, never invert it)
+ * as the observer's commitment climbs past its cliff. The re-anchoring + contradiction-
+ * widens-uncertainty terms in reconcileBelief run REGARDLESS — reality always eventually
+ * wins (the limit clause held structurally). @param {{ spatialLedgers?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} worldState
+ * @param {number} tick @param {((observerId: string, subjectId: string) => number) | null} [cliffOf] the observer's cliff read (defaults to BASE)
+ * @returns {((observerId: string, subjectId: string) => number) | null}
+ */
+export function makeCommitmentDiscountFn(worldState, tick, cliffOf = null) {
+  if (!momentumActive(worldState)) return null;
+  const ledger = asObject(getSpatialLedger(worldState, 'commitments'));
+  if (Object.keys(ledger).length === 0) return null; // no materialized commitments ⇒ byte-identical
+  const now = Math.floor(finiteNumber(tick, 0));
+  const C = CONSUMPTION_TUNING;
+  return (/** @type {string} */ observerId, /** @type {string} */ subjectId) => {
+    // The observer's committed WAR/CAMPAIGN stock against THIS subject (max across kinds).
+    let stock = 0;
+    for (const kind of ['war', 'campaign']) {
+      const key = commitmentLedgerKey(String(observerId), `${kind}:${String(subjectId)}`);
+      if (!key || !(key in ledger)) continue;
+      stock = Math.max(stock, decayedCommitmentStock(normalizeCommitmentEntry(ledger[key]), now));
+    }
+    if (stock <= 0) return 1; // uncommitted about this subject ⇒ EXACTLY 1.0 (byte-identity)
+    const cliff = typeof cliffOf === 'function'
+      ? Math.max(1e-6, finiteNumber(cliffOf(String(observerId), String(subjectId)), MOMENTUM_TUNING.BASE_CLIFF_STOCK))
+      : MOMENTUM_TUNING.BASE_CLIFF_STOCK;
+    const depth = clamp01(stock / cliff);
+    // Weight regresses toward DISCOUNT_FLOOR as commitment deepens — bounded below by the
+    // floor so it only SLOWS convergence (never inverts it).
+    return clamp(1 - C.DISCOUNT_W * depth, C.DISCOUNT_FLOOR, 1);
+  };
+}
+
+/**
+ * The plan/doctrine ABANDON-FLOOR scale (design §3.3): supplyWebWarfare's abandon floor
+ * scales UP with the aggressor's commitment on the campaign course (a committed strangler
+ * holds a marginal campaign longer). Centered so an uncommitted / dormant read is EXACTLY
+ * 1.0 (byte-identity). @param {{ spatialLedgers?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} worldState
+ * @param {string} aggressorId @param {string} targetId @param {number} tick @param {number} [cliff]
+ * @returns {number} ≥ 1.0
+ */
+export function abandonFloorScale(worldState, aggressorId, targetId, tick, cliff = MOMENTUM_TUNING.BASE_CLIFF_STOCK) {
+  if (!momentumActive(worldState)) return 1;
+  const stock = commitmentStockOf(worldState, aggressorId, courseKeyOf({ kind: 'campaign', target: targetId }) || '', tick);
+  if (stock <= 0) return 1;
+  const depth = clamp01(stock / Math.max(1e-6, finiteNumber(cliff, MOMENTUM_TUNING.BASE_CLIFF_STOCK)));
+  return 1 + CONSUMPTION_TUNING.ABANDON_FLOOR_W * depth;
+}
