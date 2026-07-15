@@ -71,6 +71,8 @@ import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
+import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
+import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
@@ -1145,6 +1147,21 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     rng,   // §H-loaded discovery draw (keyed fork; no draw when dormant)
   });
   worldState = resourceDyn.worldState;
+  // W-LIFECYCLE — THE FIRST-CLASS LANE (DESIGN_SETTLEMENT_LIFECYCLE.md §2). Rides
+  // the SAME candidate lane: terminal death for a settlement demoted to thorp that
+  // has DWELLED in terminal decline (extended dwell — never sudden; CAMPAIGN-
+  // ALTERING, proposal-gated via authorityFor), and resettlement of a remnant (a
+  // privileged birth site; settlers conserved from receipted neighbour debits).
+  // DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ early return,
+  // worldState UNCHANGED (same reference), zero candidates, zero forks —
+  // byte-identical (the fenced dormancy golden proves it).
+  const lifecycleCand = evaluateSettlementLifecycle(worldState, postTimeSnapshot, pIndex, {
+    tick: worldState.tick,
+    simulationRules,
+    spatialActive: migrationActive(worldState),
+    rng,   // the resettle-name keyed fork only (no draw unless a candidate forms)
+  });
+  worldState = lifecycleCand.worldState;
   // Institution lifecycle — economic growth/decline of supply-chain
   // institutions, gated on the economyDrift streaks tracked alongside
   // tierDrift. Candidates flow through rollCandidates like tier/resource drift.
@@ -1225,7 +1242,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     // is order-free. The chooser short-circuits before touching it when OFF.
     rng: rng.fork('settlement-strategy'),
   });
-  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
+  const stochasticCandidates = [...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates, ...moralFounding.candidates];
   // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
   // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
   // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
@@ -2210,6 +2227,36 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
+  // W-LIFECYCLE — THE SATELLITE LANE + peakTier (DESIGN_SETTLEMENT_LIFECYCLE.md).
+  // Runs AFTER upswing so a boom minted THIS tick feeds the seeding drive, and
+  // AFTER the apply pass so a W-DISCOVERY resource_strike condition planted this
+  // tick reads as the mining-camp birth trigger. Town+ parents seed satellite
+  // thorps (§H-loaded, integrator + cooldown + tier caps, deferral-visible);
+  // steadings grow (parent→steading transfers — conserved), starve back into the
+  // parent, or converge into a hamlet; the parent reads ONE bounded, receipted
+  // steading_tributary lift. Satellites live in spatialLedgers.satellites (NOT
+  // digest members; NOT in the per-settlement mover loops) — geometry survives
+  // everything. DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ a
+  // complete no-op (zero forks, zero keys) — the fenced pre-wire dormancy golden
+  // (aspatial + spatial) proves wired-but-dormant is byte-identical. AGGREGATE-only.
+  {
+    const lifecycle = advanceSettlementLifecycle({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      pIndex,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (lifecycle.changed) {
+      memoryState = lifecycle.worldState;
+      settlementUpdates = lifecycle.settlementUpdates;
+      if (lifecycle.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, lifecycle.newsEntries, { now });
+      }
+    }
+  }
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
   // winds down through the existing sue-for-peace path (a fresh recalled.cause =
   // sue_for_peace* stamp, not yet consumed by the war layer), the believed-stronger
@@ -2292,7 +2339,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       ...update,
       settlement: clone(update.settlement),
     })),
-    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
+    candidates: [...coupOutcomes, ...warOutcomes, ...structuralCandidates, ...candidates, ...tierResource.candidates, ...resourceDyn.candidates, ...lifecycleCand.candidates, ...instLifecycle.candidates, ...moralInst.candidates],
     selected: selectedForApply,
     rollExplanations: [...deterministicExplanations, ...rollExplanations],
     autoApplied: applied.autoApplied,

@@ -7,6 +7,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
+import SteadingsSection from './SteadingsSection.jsx';
 
 // ── Module-scope helper components ─────────────────────────────────────
 // React Hooks plugin v7 flags components defined inside render functions
@@ -80,6 +81,10 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
     <div>
       <TabIntro tabKey="overview" />
       <NarrativeNote note={narrativeNote} />
+
+      {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit
+            (renders NOTHING for a world without lifecycle state). ─────────── */}
+      <SteadingsSection settlement={r} />
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',borderRadius:8,padding:'12px 16px',marginBottom:14}}>

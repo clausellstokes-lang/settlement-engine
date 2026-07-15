@@ -310,7 +310,12 @@ export function collectRealizedEmigrationEvents(outcomes) {
     // Queued (proposal) ⇒ origin NOT debited this tick ⇒ never dispatch (would mint).
     if (outcome?.applyMode === 'proposal') continue;
     const shed = outcome?.metadata?.spatialEmigration;
-    if (outcome?.candidateType === 'population_emigration' && shed && Number(shed.loss) > 0) {
+    // W-LIFECYCLE: a settlement_terminal_death carries the SAME spatialEmigration
+    // shed marker (its last residents disperse through this ledger — conserved).
+    // Byte-identical for every existing world: the candidateType only exists when
+    // the lifecycle layer is lit.
+    if ((outcome?.candidateType === 'population_emigration' || outcome?.candidateType === 'settlement_terminal_death')
+        && shed && Number(shed.loss) > 0) {
       events.push({ originId: String(outcome.targetSaveId), loss: Math.max(0, Math.floor(Number(shed.loss))) });
     }
   }

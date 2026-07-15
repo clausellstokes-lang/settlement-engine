@@ -47,6 +47,13 @@ export default function PlacementsLayer({ transformRef }) {
     const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
     return !!camp?.worldState?.canonizedAt;
   });
+  // W-LIFECYCLE: the active campaign's satellite-steading ledger (keyed by
+  // parent settlement id). null for every world without the lifecycle layer —
+  // the orbit render below is then a no-op (zero footprint).
+  const satellitesLedger = useStore(s => {
+    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    return camp?.worldState?.spatialLedgers?.satellites || null;
+  });
 
   // Drag-to-move state for the currently-selected placement.
   // Holds { burgId, pointerId, origin:{sx,sy}, startPt:{x,y} } during drag.
@@ -77,6 +84,22 @@ export default function PlacementsLayer({ transformRef }) {
       if (typeof p?.x !== 'number' || typeof p?.y !== 'number') continue;
       const settlement = saveById.get(p.settlementId) || null;
       const tier = tierFor(settlement || { population: p.population });
+      // W-LIFECYCLE: a dead settlement KEEPS its cell — drawn as ruins, never
+      // removed (geometry survives death). Tolerant read across save shapes.
+      const lifecycleStatus = settlement?.lifecycleStatus
+        || settlement?.config?.lifecycleStatus
+        || settlement?.settlement?.lifecycleStatus
+        || settlement?.settlement?.config?.lifecycleStatus
+        || '';
+      // Generation-seeded ancient (opt-in flavor): a small ruin glyph nearby.
+      const ancientRuin = settlement?.history?.ancientRuin
+        || settlement?.settlement?.history?.ancientRuin
+        || null;
+      const sid = p.settlementId != null ? String(p.settlementId) : null;
+      const steadingsMap = (sid && satellitesLedger && satellitesLedger[sid]?.steadings) || null;
+      const steadings = steadingsMap
+        ? Object.keys(steadingsMap).sort().map(k => steadingsMap[k]).filter(Boolean)
+        : [];
       out.push({
         burgId,
         settlementId: p.settlementId || null,
@@ -85,10 +108,13 @@ export default function PlacementsLayer({ transformRef }) {
         name: settlement?.name || p.name || '',
         port:    !!(settlement?.tradeRouteAccess === 'port' || settlement?.port),
         capital: !!(settlement?.capital || settlement?.isCapital),
+        lifecycleStatus,
+        ancientRuin,
+        steadings,
       });
     }
     return out;
-  }, [placements, saveById]);
+  }, [placements, saveById, satellitesLedger]);
 
   if (!items.length) return null;
 
@@ -184,28 +210,72 @@ export default function PlacementsLayer({ transformRef }) {
             }}
             onPointerLeave={() => clearHovered?.()}
           >
-            <TierIcon
-              x={x}
-              y={y}
-              tier={it.tier}
-              port={it.port}
-              capital={it.capital}
-              selected={isSelected}
-              scale={scale}
-              label={it.name}
-              cursor={isSelected && !mapCanonized ? 'grab' : 'pointer'}
-              onClick={(e) => {
-                // Suppress the click that fires at pointerup after a drag.
-                if (dragRef.current && dragRef.current.moved) return;
-                e.stopPropagation?.();
-                setSelectedBurg(it.burgId);
-                setSelectedSettlement(it.settlementId);
-              }}
-              onPointerDown={(e) => handleDragPointerDown(e, it)}
-              onPointerMove={handleDragPointerMove}
-              onPointerUp={handleDragPointerUp}
-              onPointerCancel={handleDragPointerUp}
-            />
+            {/* W-LIFECYCLE: satellite steadings as small ORBIT markers (cosmetic
+                placement around the parent — design §0: routing is via-parent;
+                the dots are display only, never hit targets). */}
+            {it.steadings.length > 0 && (
+              <g style={{ pointerEvents: 'none' }} opacity={0.85}>
+                {it.steadings.map((rec) => {
+                  const angle = ((rec.orbit ?? 0) / 6) * Math.PI * 2 - Math.PI / 2;
+                  const rad = 11 / scale;
+                  const cx = x + Math.cos(angle) * rad;
+                  const cy = y + Math.sin(angle) * rad;
+                  const r = (rec.tier === 'hamlet' ? 2.4 : 1.7) / scale;
+                  return (
+                    <g key={rec.id}>
+                      <circle cx={cx} cy={cy} r={r} fill="#6b5340" stroke="#f5efe4" strokeWidth={0.6 / scale}>
+                        <title>{`${rec.name} — ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
+                      </circle>
+                      {rec.charterPending && (
+                        <circle cx={cx} cy={cy} r={r + 1.4 / scale} fill="none" stroke="#a0762a" strokeWidth={0.6 / scale} />
+                      )}
+                    </g>
+                  );
+                })}
+              </g>
+            )}
+            {/* W-LIFECYCLE: a generation-seeded ancient relic ruin nearby (opt-in
+                flavor) — a small broken-column glyph offset from the marker. */}
+            {it.ancientRuin && (
+              <g style={{ pointerEvents: 'none' }} opacity={0.7} transform={`translate(${x + 9 / scale}, ${y - 9 / scale}) scale(${1 / scale})`}>
+                <title>{`The relic ruin of ${it.ancientRuin.name}`}</title>
+                <path d="M -2.6 2 L -1.8 -2.4 L -0.9 2 Z M 0.2 2 L 1 -1.2 L 1.8 2 Z" fill="#7a6a52" stroke="#4a3a28" strokeWidth={0.4} />
+                <line x1={-3.4} y1={2} x2={3} y2={2} stroke="#4a3a28" strokeWidth={0.5} />
+              </g>
+            )}
+            {(() => {
+              const icon = (
+                <TierIcon
+                  x={x}
+                  y={y}
+                  tier={it.tier}
+                  port={it.port}
+                  capital={it.capital}
+                  selected={isSelected}
+                  scale={scale}
+                  label={it.lifecycleStatus
+                    ? `${it.name} — ${it.lifecycleStatus === 'relic_ruin' ? 'ruins' : 'abandoned'}`
+                    : it.name}
+                  cursor={isSelected && !mapCanonized ? 'grab' : 'pointer'}
+                  onClick={(e) => {
+                    // Suppress the click that fires at pointerup after a drag.
+                    if (dragRef.current && dragRef.current.moved) return;
+                    e.stopPropagation?.();
+                    setSelectedBurg(it.burgId);
+                    setSelectedSettlement(it.settlementId);
+                  }}
+                  onPointerDown={(e) => handleDragPointerDown(e, it)}
+                  onPointerMove={handleDragPointerMove}
+                  onPointerUp={handleDragPointerUp}
+                  onPointerCancel={handleDragPointerUp}
+                />
+              );
+              // W-LIFECYCLE: a remnant draws dimmed (ruins). The wrapper is
+              // CONDITIONAL so a living settlement keeps TierIcon's group as the
+              // wrapper's first descendant <g> (the drag-handler contract the
+              // hover-peek test pins).
+              return it.lifecycleStatus ? <g opacity={0.45}>{icon}</g> : icon;
+            })()}
           </g>
         );
       })}

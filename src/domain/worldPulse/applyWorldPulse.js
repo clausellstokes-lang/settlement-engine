@@ -27,6 +27,7 @@ import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldStat
 import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
 import { applyResourceMembershipOutcomeToSettlement } from './resourceDynamicsKernel.js';
+import { applySettlementLifecycleOutcomeToSettlement } from './settlementLifecycleFirstClass.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { resolveProposalToOutcome } from './decisionTier.js';
@@ -331,7 +332,7 @@ function isDriftOnlyOutcome(/** @type {any} */ outcome) {
   if (outcome.tierChange || outcome.powerTransfer || outcome.resourcePatch
       || outcome.institutionPatch || outcome.condition || outcome.stressor
       || outcome.relationshipKey || outcome.relationshipPatch
-      || outcome.proposalPayload) {
+      || outcome.proposalPayload || outcome.lifecyclePatch) {
     return false;
   }
   return (outcome.populationDeltas || []).length <= 1;
@@ -371,7 +372,7 @@ function affectedSaveIdsForOutcome(/** @type {any} */ outcome) {
   for (const delta of outcome.foodStockpileDeltas || []) {
     if (delta?.saveId) ids.add(String(delta.saveId));
   }
-  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer || outcome.deityReembed)) {
+  if (outcome.targetSaveId && (outcome.condition || outcome.tierChange || outcome.resourcePatch || outcome.institutionPatch || outcome.powerTransfer || outcome.deityReembed || outcome.lifecyclePatch)) {
     ids.add(String(outcome.targetSaveId));
   }
   return [...ids];
@@ -492,6 +493,14 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
   // production reconcile + the typed resource_strike/vein_exhausted condition.
   if (outcome.resourceMembership && String(outcome.targetSaveId) === String(saveId)) {
     next = applyResourceMembershipOutcomeToSettlement(next, outcome);
+  }
+  // W-LIFECYCLE: terminal death (remnant grade from the LIVE peakTier — the
+  // scarcity law at the writer; institutions clear; NPCs gain dispersal stamps
+  // only — fates unresolved) / resettlement (first-class rebirth on the old cell;
+  // peakTier restarts). Runs AFTER populationDeltas so the writer's zero is the
+  // exactness backstop over the receipted debit.
+  if (outcome.lifecyclePatch && String(outcome.targetSaveId) === String(saveId)) {
+    next = applySettlementLifecycleOutcomeToSettlement(next, outcome);
   }
   if (outcome.institutionPatch && String(outcome.targetSaveId) === String(saveId)) {
     next = applyInstitutionLifecycleOutcome(next, outcome);

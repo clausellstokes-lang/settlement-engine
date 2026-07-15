@@ -48,6 +48,10 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   // W-NAVY: a navy throwing a blockade across a hostile port's sea approaches (a siege
   // from the water — the siege-initiation twin).
   'blockade_declared',
+  // W-LIFECYCLE: a settlement's TERMINAL DEATH — the map itself changes (the entity
+  // keeps its digest cell as a remnant, but the living roster shrinks). The DM sees
+  // it coming (the extended terminal dwell) and can force or veto.
+  'settlement_terminal_death',
 ]);
 
 /**
@@ -211,6 +215,15 @@ export const DRAMA_CLASS_REGISTRY = Object.freeze({
   war_mobilization_open: { class: 'war', birthKind: 'spontaneous', wired: false, module: 'warDeployment.js', rationale: 'Mobilization / siege-open is an out-of-band deployment seed (siege-hysteresis accumulator); governor wiring deferred.' },
   // W-UPSWING B3: the golden-age producer fills the PRE-DECLARED boom_flourishing slot.
   upswing_flourishing: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'upswingKernel.js', rationale: 'Flourishing births at the pulse seam (a peace-dwell hysteresis accumulator, like the calamity annual draw), not rollCandidates; a bounded cultural attractor with NO martial/economic multiplier, so governor wiring is deferred (bypass producer).' },
+  // W-LIFECYCLE (settlement birth & death). The satellite founding is a bypass
+  // producer (it births at the pulse mover seam, never rollCandidates); the two
+  // first-class candidates ride the seam but are REGISTERED-UNGOVERNED (wired:false
+  // ⇒ dramaClassOf null): a terminal death is the certified END of a years-long
+  // decline (deferring a certified death re-arms nothing useful), and a rebirth is
+  // its bounded twin — both already E0-paced by their own dwell/cooldown cadence.
+  satellite_founded: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'A steading founding is a growth-class birth at the pulse mover seam (integrator + cooldown + tier caps pace it); a bypass producer like upswing_flourishing.' },
+  settlement_terminal_death: { class: 'calamity', birthKind: 'consequence', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'Terminal death is the CONSEQUENCE of a years-dwelled decline arc, not a spontaneous birth — governing it would defer a certified death. Registered so the taxonomy names it; never governed.' },
+  settlement_resettled: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'settlementLifecycleKernel.js', rationale: 'A rebirth on the old stones is a growth-class arc; already VERY-RARE by its own fallow dwell + emit probability, so governor wiring is deliberately withheld (registered-ungoverned).' },
 });
 
 /**

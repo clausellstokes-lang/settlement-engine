@@ -230,7 +230,9 @@ function cachedFactionProfiles(s) {
 // polarity clone occupation_lifted (a liberation) both RAISE the systems they
 // declare. Sourced from the war-layer archetype catalog so a new recovery
 // archetype lands here without re-typing the strings.
-const LIFT_ARCHETYPES = new Set([...WAR_RECOVERY_CONDITIONS, ...UPSWING_LIFT_CONDITIONS]);
+// W-LIFECYCLE: steading_tributary is the parent's bounded satellite read — a lift
+// (severity-capped at the lazy kernel; planted fully-specified, no catalog template).
+const LIFT_ARCHETYPES = new Set([...WAR_RECOVERY_CONDITIONS, ...UPSWING_LIFT_CONDITIONS, 'steading_tributary']);
 
 /** +1 for a recovery/lift condition, -1 for a pressure. @param {ActiveCondition} cond */
 function conditionDirection(cond) {
