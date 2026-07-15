@@ -73,7 +73,12 @@ describe.runIf(distExists)('SM-2 — town-map viewer stays off first paint', () 
     ).toHaveLength(0);
   });
 
-  it('anti-vacuity — the fingerprint DOES exist somewhere in dist (a lazy chunk)', () => {
+  it.skipIf(!process.env.VERIFY_DIST)('anti-vacuity — the fingerprint DOES exist somewhere in dist (a lazy chunk)', () => {
+    // VERIFY_DIST-gated (merge-integration lesson, 2026-07-15): under plain `npm run test`
+    // the dist on disk may PREDATE the current tree (the triple-merge gate asserted this
+    // test against a dist built before SM-2 merged — false red). The absence half stays
+    // ungated (a stale dist can only under-report absence); the PRESENCE half needs a
+    // fresh build, which verify:dist guarantees.
     const all = readdirSync(assetsDir).filter((f) => f.endsWith('.js'));
     const present = all.some((f) => readFileSync(join(assetsDir, f), 'utf-8').includes(TOWN_MAP_FINGERPRINT));
     expect(present, 'town-map model fingerprint not found in ANY dist chunk — did the model change or the build skip it?').toBe(true);
