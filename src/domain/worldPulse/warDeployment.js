@@ -72,6 +72,12 @@ import { readinessOf, effectiveStatMult, rustOf } from './martialReadiness.js';
 // chaosPull+rust under fidelityNoise's TOTAL_MAX cap, never forking the geometry). Both 0
 // when no active market ⇒ byte-identical.
 import { mercSupplementOf, mercFidelityPenaltyOf } from './mercenaryMarket.js';
+// W-PEACE-1 (§14/§H): the causal reasons layer at the war-INITIATION seam. An
+// accumulated typed casus EMBOLDENS the march (a bounded, centered-on-1.0 lift
+// on the conquest-margin read — ×1 exactly when the peace-engine gate is dark
+// or no case stands ⇒ byte-identical), and the minted war record CARRIES its
+// casus list (the §14 artifact law: "the war record carries its casus list").
+import { peaceCausalActive, warReasonsFor, aggregateReasons01, topReasons, REASON_TUNING } from './warReasons.js';
 import { deployedQualityMult } from './supplyQuality.js';
 import { computeReinforcement, applyReinforcementToRecord } from './reinforcement.js';
 import { computeSackFoodTransfer, storageCapacityMonths } from './foodStockpile.js';
@@ -1682,7 +1688,14 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
         // already besieging it (shouldn't happen without a deployment, but guard)
         continue;
       }
-      if (fromStrength <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate
+      // W-PEACE-1 §H: an accumulated typed CASUS emboldens the march — the
+      // margin gate reads fromStrength lifted by the bounded case factor
+      // (≤ ×(1+WAR_FACTOR_W); exactly ×1 when the peace-engine gate is dark or
+      // no case stands, so the dormant comparison is byte-identical).
+      const casusEntry = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
+        ? warReasonsFor(worldState, String(fromId), String(targetId)) : null;
+      const casusMult = casusEntry ? 1 + REASON_TUNING.WAR_FACTOR_W * aggregateReasons01(casusEntry) : 1;
+      if (fromStrength * casusMult <= strengthFor(targetId) + CONQUEST_MARGIN) continue; // relationship-confidence gate
       const defenderCap = capacityFor(targetId);
       const { verdict } = classifyFeasibility({
         attackerCurrent: fromCap.offensive,
@@ -1720,6 +1733,17 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       // W-C1 item 3: supply-gap quality on the committed force (flag off ⇒ 1 ⇒ byte-identical).
       qualityMult: qualityMultFor(fromId),
     });
+    // W-PEACE-1 §14 (the artifact law): the war record CARRIES its casus list —
+    // the top typed reasons standing against the chosen target at the moment the
+    // army marched. Stamped ONLY when the peace-engine gate is lit and a case
+    // stands (the dormant record shape is byte-identical). Rides the record
+    // through attrition (applyAttritionToRecord spreads ...record) and through
+    // the DM-Driven proposalPayload (the seeded record is embedded verbatim).
+    const casusList = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */ (/** @type {unknown} */ (worldState)))
+      ? topReasons(warReasonsFor(worldState, String(fromId), String(chosenTarget)), 3)
+        .map((r) => ({ type: r.type, score: r.score, receipt: r.receipt }))
+      : [];
+    if (casusList.length) seededRecord.casusReasons = casusList;
     // The war_front channel PARAMS (the `now` stamp is applied at mint time). On the
     // legacy path they are minted immediately (below); under DM-Driven they ride the
     // proposalPayload verbatim and the apply re-mints an identical front on approval.
@@ -1769,6 +1793,11 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
       deployReasons.push(
         `Thin war-supply degraded the army's kit (deployed quality ×${seededRec.deployedQuality.toFixed(2)}).`,
       );
+    }
+    // W-PEACE-1 §14.4: the march's receipt NAMES its typed casus (empty when the
+    // peace-engine gate is dark ⇒ the dormant outcome is byte-identical).
+    for (const c of casusList) {
+      deployReasons.push(`Casus belli: ${c.type} (${c.score.toFixed(2)}) — ${c.receipt}`);
     }
     outcomes.push({
       id: `world_outcome.strategy_deploy.${stablePart(fromId)}.${stablePart(chosenTarget)}.${tick}`,
