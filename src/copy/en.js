@@ -607,6 +607,9 @@ export const en = Object.freeze({
     },
     // The post-generate what's-next guide (WizardNextSteps).
     wizardNextSteps: 'A short, state-aware list of what to do with a fresh settlement.',
+    // W-COMPOSER-2: the realm forcing surface + the docket (mechanism whispers).
+    realmOrders: 'Anything the world can do, you can order. Orders stage as proposals; the walls hold even under force.',
+    realmDocket: 'The realm’s staged future, in the order the tick will consume it — every entry editable or cancelable until then.',
     // The return-visit resume (WelcomeBackCard).
     welcomeBack: 'Pick up your last settlement, or forge a follow-up.',
     // The absorbed HelpPopover compendium hints (§5) — title + body per config

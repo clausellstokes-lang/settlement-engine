@@ -82,24 +82,26 @@ export default function RealmDocket({ campaign }) {
                 <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
                   {entryLabel(item.event)}
                   {lapsed && (
-                    <span
-                      title={`${lapsed} If it reaches the tick like this, it will be refused visibly in the advance digest. Edit it from ${name}'s dossier, or cancel it here.`}
-                      style={{
+                    <>
+                      <span style={{
                         marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
                         border: `1px solid ${BORDER}`, color: MUTED,
                         fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
-                      }}
-                    >
-                      LAPSED — needs your attention
-                    </span>
+                      }}>
+                        LAPSED — needs your attention
+                      </span>
+                      <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
+                        {lapsed} Left as-is, the tick will refuse it visibly — edit it from {name}&apos;s dossier, or cancel it here.
+                      </span>
+                    </>
                   )}
                 </span>
                 <Button
                   variant="danger"
                   size="sm"
                   icon={<X size={10} />}
+                  aria-label={`Cancel the queued order for ${name}`}
                   onClick={() => cancelQueuedEvent(campaign.id, item.queueId)}
-                  title="Cancel this queued order before the tick consumes it"
                 >
                   Cancel
                 </Button>

@@ -36,6 +36,11 @@ import { authorableVerbs, STRESSOR_SEVERITY_VALUES, RELIEF_MAGNITUDE_VALUES } fr
 import { BAND_HINT } from '../state/bands.js';
 import { CAPACITY_BANDS } from '../capacityModel.js';
 import { CAPTURE_LADDER } from '../corruption.js';
+// W-COMPOSER-2: the realm verbs join the reference. NOTE the import weight —
+// realmManifest rides the engine tree; the glossary is a lazy reference
+// surface, so the chunk cost is runtime-only (zero first-paint; the dist
+// guard's GLOSSARY_LAZY_SENTINEL still enforces the lazy boundary).
+import { realmVerbs } from '../events/realmManifest.js';
 import { slugify } from '../../kernel/slugify.js';
 
 export const GLOSSARY_LAZY_SENTINEL = 'GLOSSARY_LAZY_SENTINEL';
@@ -113,6 +118,19 @@ const LINK = Object.freeze({
  * @property {string} anchor      — the compendium #anchor.
  */
 
+/** A code-DERIVED (never invented) one-liner for a REALM order (W-COMPOSER-2:
+ * stages as a proposal; deferred lanes say so honestly).
+ * @param {Record<string, any>} verb */
+function realmVerbDefinition(verb) {
+  const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
+  const base = verb.lane === 'deferred'
+    ? `A ${verb.family} order registered but deferred with its wave's own seam`
+    : `A ${verb.family} order the DM stages as a proposal; approval applies through the world's own machinery`;
+  if (dials.length === 0) return `${base}.`;
+  const list = dials.length === 1 ? dials[0] : `${dials.slice(0, -1).join(', ')} and ${dials[dials.length - 1]}`;
+  return `${base}, with ${dials.length === 1 ? 'the option' : 'options'} ${list}.`;
+}
+
 /** A code-DERIVED (never invented) one-liner for an event verb (the manifest's
  * loose open-entry shape — the affordanceManifest Mut idiom).
  * @param {Record<string, any>} verb */
@@ -143,6 +161,20 @@ export function buildGlossaryEntries() {
       definition: verbDefinition(verb),
       family: verb.family,
       dials: (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean),
+      ...LINK.verb,
+    });
+  }
+
+  // Realm verbs (W-COMPOSER-2 — the realm affordance manifest, registry order;
+  // the loose open-entry read — the affordanceManifest Mut idiom).
+  for (const verb of /** @type {Array<Record<string, any>>} */ (/** @type {unknown} */ (realmVerbs()))) {
+    out.push({
+      id: `verb-${slug(verb.verb)}`,
+      term: verb.label,
+      category: 'realm-verb',
+      definition: realmVerbDefinition(verb),
+      family: verb.family,
+      dials: /** @type {string[]} */ ((verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean)),
       ...LINK.verb,
     });
   }

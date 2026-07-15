@@ -65,8 +65,7 @@ export default function RealmForecast({ campaign }) {
             </Button>
           ))}
         </span>
-        <Button size="sm" variant="primary" disabled={running} onClick={run}
-          title="Two facts make this honest: the whole docket drains through the real drain, and the real interval engine runs on a discarded clone.">
+        <Button size="sm" variant="primary" disabled={running} onClick={run}>
           {running ? 'Running the future…' : 'Run forecast'}
         </Button>
       </div>

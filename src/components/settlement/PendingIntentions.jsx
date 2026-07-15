@@ -105,16 +105,18 @@ export default function PendingIntentions() {
               <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
                 {labelFor(item.event)}
                 {lapsed && (
-                  <span
-                    title={`${lapsed} If it reaches the tick like this, it will be refused visibly.`}
-                    style={{
+                  <>
+                    <span style={{
                       marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
                       border: `1px solid ${BORDER}`, color: MUTED,
                       fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
-                    }}
-                  >
-                    LAPSED — needs your attention
-                  </span>
+                    }}>
+                      LAPSED — needs your attention
+                    </span>
+                    <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
+                      {lapsed} Left as-is, the tick will refuse it visibly.
+                    </span>
+                  </>
                 )}
               </span>
               <Button
@@ -126,7 +128,7 @@ export default function PendingIntentions() {
                   const anchor = document.querySelector('[data-anchor="event-composer"]');
                   if (anchor?.scrollIntoView) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }}
-                title="Reopen this queued order in the composer — applying replaces it in place"
+                aria-label="Reopen this queued order in the composer — applying replaces it in place"
               >
                 Edit
               </Button>
@@ -135,7 +137,7 @@ export default function PendingIntentions() {
                 size="sm"
                 icon={<X size={10} />}
                 onClick={() => cancelQueuedEvent(campaignId, item.queueId)}
-                title="Cancel this queued intention before the next World Pulse"
+                aria-label="Cancel this queued intention before the next World Pulse"
               >
                 Cancel
               </Button>

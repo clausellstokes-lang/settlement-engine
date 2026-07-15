@@ -190,14 +190,14 @@ export function applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, n
         createdAt: now,
         updatedAt: now,
       });
-      const byId = new Map((ws.stressors || []).map(s => [s.id, s]));
+      const byId = new Map((ws.stressors || []).map((/** @type {any} */ s) => [s.id, s]));
       byId.set(normalized.id, normalized);
       ws = { ...ws, stressors: [...byId.values()] };
     } else if (d.action === 'resolve' && d.type) {
       const roamingType = pulseTypeForStressorKey(d.type) || d.type;
       const match = (ws.stressors || [])
-        .map(raw => normalizeStressor(raw))
-        .find(st => st.status === 'active'
+        .map((/** @type {any} */ raw) => normalizeStressor(raw))
+        .find((/** @type {any} */ st) => st.status === 'active'
           && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
           && (String(st.originSettlementId || '') === d.originSettlementId
             || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));

@@ -74,9 +74,20 @@ describe('glossary coverage — every registry term produces exactly one entry',
     }
   });
 
-  it('the counts match the registries exactly (no orphan entry for a dropped term)', () => {
+  it('every REALM verb is documented (W-COMPOSER-2 — the walkers red otherwise)', async () => {
+    const { realmVerbs } = await import('../../src/domain/events/realmManifest.js');
+    for (const v of realmVerbs()) {
+      const entry = entries.find((x) => x.category === 'realm-verb' && x.term === v.label);
+      expect(entry, `realm verb ${v.verb} undocumented`).toBeTruthy();
+      expect(entry.family).toBe(v.family);
+    }
+  });
+
+  it('the counts match the registries exactly (no orphan entry for a dropped term)', async () => {
+    const { realmVerbs } = await import('../../src/domain/events/realmManifest.js');
     const byCat = (c) => entries.filter((e) => e.category === c).length;
     expect(byCat('verb')).toBe(authorableVerbs().length);
+    expect(byCat('realm-verb')).toBe(realmVerbs().length);
     expect(byCat('stability-band')).toBe(Object.keys(BAND_HINT).length);
     expect(byCat('strain-band')).toBe(CAPACITY_BANDS.length);
     expect(byCat('capture-rung')).toBe(CAPTURE_LADDER.length);

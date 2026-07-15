@@ -101,7 +101,9 @@ export async function simulatePendingFuture({ campaign, saves, interval = 'one_m
  * interval) and — when a candidate is staged — CANDIDATE (same + the staged
  * change), rendering the joint outcome and the marginal contribution as
  * with-vs-without, both queue-inclusive.
- * @param {Object} io  simulatePendingFuture's io (+ candidate)
+ * @param {{ campaign: Record<string, any>, saves: Array<Record<string, any>>,
+ *   interval?: string, weeks?: number|null, now: string,
+ *   candidate?: { saveId: string, event: Record<string, any> } | null }} io
  * @returns {Promise<{ baseline: any, withCandidate: any | null, fingerprint: string }>}
  */
 export async function runRealmForecast({ campaign, saves, interval = 'one_month', weeks = null, now, candidate = null }) {

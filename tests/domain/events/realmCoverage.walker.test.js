@@ -175,4 +175,22 @@ describe('realm coverage walker (parked shapes → realm manifest, fail-closed)'
   it('band words stay on the house table (words at the table, numbers in the engine)', () => {
     expect(REALM_SEVERITY_VALUES).toEqual({ minor: 0.35, moderate: 0.6, severe: 0.85 });
   });
+
+  it('THE VOICE: every realm verb is in the glossary; the mechanism whispers are registered', async () => {
+    const { buildGlossaryEntries } = await import('../../../src/domain/display/glossary.js');
+    const entries = buildGlossaryEntries();
+    for (const v of realmVerbs()) {
+      expect(
+        entries.some(e => e.category === 'realm-verb' && e.term === v.label),
+        `${v.verb} missing from the glossary`,
+      ).toBe(true);
+    }
+    // The criterion's final clause: every MECHANISM ships its registered whisper
+    // (per-verb teaching rides the existing organs: veto prose, LAPSED badges,
+    // grayed-with-reason predicates, the glossary above).
+    const { GUIDANCE_WHISPERS } = await import('../../../src/domain/display/guidanceRegistry.js');
+    const ids = new Set(GUIDANCE_WHISPERS.map(w => w.id));
+    expect(ids.has('realm_orders_teaching')).toBe(true);
+    expect(ids.has('realm_docket_teaching')).toBe(true);
+  });
 });
