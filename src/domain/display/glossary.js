@@ -36,13 +36,12 @@ import { authorableVerbs, STRESSOR_SEVERITY_VALUES, RELIEF_MAGNITUDE_VALUES } fr
 import { BAND_HINT } from '../state/bands.js';
 import { CAPACITY_BANDS } from '../capacityModel.js';
 import { CAPTURE_LADDER } from '../corruption.js';
+import { slugify } from '../../kernel/slugify.js';
 
 export const GLOSSARY_LAZY_SENTINEL = 'GLOSSARY_LAZY_SENTINEL';
 
-/** kebab-case a term into a stable anchor-safe slug. */
-function slug(s) {
-  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-}
+/** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive). */
+const slug = (s) => slugify(String(s));
 
 /** A concise title-cased term from an ENUM key or event type. */
 function titleize(key) {
@@ -202,6 +201,16 @@ export function buildGlossaryEntries() {
   return Object.freeze(out);
 }
 
+// The registries are frozen/static, so the derivation is invariant at runtime.
+// buildGlossaryEntries stays PURE (recomputes — the generator + freshness test
+// want the live derivation); runtime consumers read the memoized cache so a
+// per-render lookup (an instrument affordance) never rebuilds 52 entries.
+let _cache = null;
+/** The memoized glossary (runtime consumers). @returns {ReadonlyArray<GlossaryEntry>} */
+export function glossaryEntries() {
+  return (_cache ||= buildGlossaryEntries());
+}
+
 /**
  * The retained glossary object — the sentinel rides a LIVE property so it
  * survives DCE into the lazy chunk (the non-vacuity idiom; consumers read
@@ -209,11 +218,13 @@ export function buildGlossaryEntries() {
  */
 export const GLOSSARY = Object.freeze({
   sentinel: GLOSSARY_LAZY_SENTINEL,
-  get entries() { return buildGlossaryEntries(); },
+  get entries() { return glossaryEntries(); },
 });
 
 /** Look up a single glossary entry by its stable id. @param {string} id */
 export function glossaryEntryFor(id) {
+  // Read through the retained GLOSSARY object (not glossaryEntries() directly)
+  // so its sentinel survives DCE into the lazy chunk — the non-vacuity idiom.
   return GLOSSARY.entries.find((e) => e.id === id) || null;
 }
 
@@ -221,6 +232,6 @@ export function glossaryEntryFor(id) {
 export function glossaryByCategory() {
   /** @type {Record<string, GlossaryEntry[]>} */
   const groups = {};
-  for (const e of buildGlossaryEntries()) (groups[e.category] ||= []).push(e);
+  for (const e of GLOSSARY.entries) (groups[e.category] ||= []).push(e);
   return groups;
 }

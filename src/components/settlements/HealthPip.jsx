@@ -11,17 +11,22 @@
  */
 
 import { FS, sans } from '../theme.js';
+import SurveyorGlossary from '../guidance/SurveyorGlossary.jsx';
 
 /**
  * @param {{ pip: ReturnType<typeof import('./livingWorldSignals.js').healthPip> }} props
  */
 export default function HealthPip({ pip }) {
   if (!pip) return null;
+  // W-GUIDE-2 §6: the band word is a "what am I reading?" glossary affordance
+  // (stability-band term). This replaces the native title= teaching tooltip —
+  // one migration off the shrink-only title= census — with the uniform in-place
+  // glossary card. Honesty-gated: if the band has no glossary entry, the word
+  // renders as plain text.
   return (
     <span
       data-testid="health-pip"
       data-band={pip.band}
-      title={`Health: ${pip.band}. Worst of resilience, volatility, threat, and resource pressure, on a four-band scale from Critical up to Stable.`}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
         fontSize: FS.xs, fontWeight: 700, fontFamily: sans, color: pip.color,
@@ -31,7 +36,7 @@ export default function HealthPip({ pip }) {
         aria-hidden
         style={{ width: 8, height: 8, borderRadius: '50%', background: pip.color, flexShrink: 0, display: 'inline-block' }}
       />
-      {pip.band}
+      <SurveyorGlossary id={`stability-${String(pip.band).toLowerCase()}`}>{pip.band}</SurveyorGlossary>
     </span>
   );
 }
