@@ -77,6 +77,11 @@ const SOURCE_ANCHORS = Object.freeze({
   population_dynamics: "applyMode: major && rules.majorChangesRequireProposal ? 'proposal' : 'auto'",
   tier_drift_collapse: "applyMode: authorityFor(rules, 'resource_depletion', rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto')",
   institution_lifecycle: "applyMode: rules.majorChangesRequireProposal && severity >= 0.78 ? 'proposal' : 'auto'",
+  // W-LIFECYCLE (proposal-gated, the tier_change precedent): the flag gate is the
+  // LEGACY mode fed through authorityFor (verbatim under routine/full; forced to
+  // proposal under dm_only/recommendations).
+  settlement_terminal_death: "applyMode: authorityFor(rules, 'settlement_terminal_death', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto')",
+  settlement_resettled: "applyMode: authorityFor(rules, 'settlement_resettled', /** @type {{ majorChangesRequireProposal?: boolean }} */ (rules).majorChangesRequireProposal ? 'proposal' : 'auto')",
   // severity-gated: proposal on severity alone, no flag. Since CL-0 the legacy
   // severity gate is the legacyMode argument fed through authorityFor, which
   // passes it through VERBATIM under routine/full autonomy (byte-identical) and
@@ -234,6 +239,9 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     'faction_government_challenge',
     'intervention_ordered',
     'blockade_declared',
+    // W-LIFECYCLE: a settlement's terminal death removes a living roster member
+    // (the digest cell stays, as a remnant).
+    'settlement_terminal_death',
   ]);
 
   test('exactly the structural-major change-types carry campaignAltering: true', () => {
@@ -263,6 +271,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
     intervention_ordered: { candidateType: 'intervention_ordered', type: 'condition', severity: 0.6 },
     blockade_declared: { candidateType: 'blockade_declared', type: 'condition', severity: 0.6 },
+    settlement_terminal_death: { candidateType: 'settlement_terminal_death', type: 'lifecycle', lifecyclePatch: { kind: 'terminal_death', saveId: 'a' }, severity: 0.8 },
   });
 
   for (const changeType of CAMPAIGN_ALTERING) {

@@ -124,6 +124,21 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'An institution being founded or dissolved is a standing-order change to the settlement; gated above the magnitude threshold.',
   }),
+  settlement_terminal_death: Object.freeze({
+    authority: 'proposal-gated',
+    module: 'settlementLifecycleKernel.js',
+    consultsProposalFlag: true,
+    campaignAltering: true,
+    rationale:
+      'W-LIFECYCLE: a first-class settlement dying for good (its digest cell kept, its status a remnant) is the strongest premise the sim can introduce — the DM sees it coming across the extended terminal dwell and can force or veto. Honors majorChangesRequireProposal (the tier_change precedent), forced to proposal under dm_only/recommendations via authorityFor.',
+  }),
+  settlement_resettled: Object.freeze({
+    authority: 'proposal-gated',
+    module: 'settlementLifecycleKernel.js',
+    consultsProposalFlag: true,
+    rationale:
+      'W-LIFECYCLE: a remnant re-founded as a living thorp is a structural roster change (a new premise about the world), the death lane\'s twin — gated on the same flag, forced to proposal under dm_only/recommendations via authorityFor.',
+  }),
 
   // ── SEVERITY-GATED: proposal on severity alone, NOT on the flag. Predate the
   //    flag; recorded as-is, not migrated. ──────────────────────────────────
