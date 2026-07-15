@@ -373,10 +373,15 @@ behavior, budget raises, golden regens.
 - **2026-07-15 (afternoon) — THE MERGE MOVES UP (owner, verbatim: "I want you to merge
   everything after SM-4 then continue with 7 to the rest"):** the MASTER MERGE executes
   immediately after SM-4 completes — BEFORE the Surveyor build — then the sequence continues:
-  Surveyor S1–S7 → dimensions-only re-grade → lighting batch (owner-signed) → GIT PUSH
-  (architect's reading, vetoable: the push stays at its pre-soak slot per the standing
-  "master merge and deploy to git before the soak" authorization; say the word to couple it
-  to the merge instead) → the owner decision list → the successor's soak. CONSEQUENCE OF
+  Surveyor S1–S7 → dimensions-only re-grade → lighting batch (owner-signed) → the owner
+  decision list → the successor's soak. PUSH RULING (owner, same day, verbatim: "git push as
+  well and do it by pull request when the time comes"): the PUSH COUPLES TO THE MERGE — at
+  the post-SM-4 merge point, execute the master merge locally per MASTER_MERGE_PLAN.md,
+  PUSH the reconciliation branch, and OPEN A PULL REQUEST (gh CLI) carrying the full
+  step-by-step reconciliation summary, the gate receipts, and the deferral/decision ledger.
+  Architect's reading (vetoable): the PR's merge button is the owner's — the PR is the
+  review surface for the highest-risk step of the program; say the word to pre-authorize
+  merging it too. CONSEQUENCE OF
   RECORD: every post-merge wave (Surveyor, re-grade) builds on the UNIFIED lineage — the
   dual-lineage era ends at the merge, and the wrong-lineage worktree trap class dies with
   it. MASTER_MERGE_PLAN.md's fresh re-survey therefore covers the tree as of SM-4
