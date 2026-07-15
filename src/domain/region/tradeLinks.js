@@ -14,7 +14,7 @@
  * perturbs a settlement generated without a neighbour.
  */
 import { goodsIntersect } from './goodsCatalog.js';
-import { finishedGoodsCategoryOf } from '../../data/economicData.js';
+import { finishedGoodsCategoryOf } from '../../data/finishedGoodsCategory.js';
 
 // Relationships under which the settlements don't openly trade goods.
 // (Typed to accept `string | undefined` so a profile with no relationshipType
