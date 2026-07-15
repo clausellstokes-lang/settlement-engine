@@ -59,6 +59,7 @@ import { rustOf } from './martialReadiness.js';
 // corruption conversion leak (corruptionWeb foreignGrip). Both lazy worldPulse leaves.
 import { economicStrength01 } from './conquestFeeds.js';
 import { foreignGripOf, corruptionWebActive } from './corruptionWeb.js';
+import { upswingArcsActive } from './upswingKernel.js';
 // Phase 5.5 WAVE A — THE BELIEF MAP. The three cross-settlement reads below route
 // through the belief selector; the identity fallback (marker absent / omniscient /
 // self) returns ground truth verbatim, forking no rng ⇒ byte-exact today.
@@ -133,16 +134,21 @@ const EXTRACTION_EV_BOUND = 0.14;    // clamp the signed term to a small band
  * target's economic worth (conquestFeeds.economicStrength01) and the conqueror's OWN
  * corruption conversion leak (corruptionWeb.foreignGripOf, 0 when the corruption web is
  * dark). Bounded to ±EXTRACTION_EV_BOUND. Pure over the reads.
- * @param {{ worldState: any, snapshot: any, conquerorId: string, targetId: string }} args
+ * @param {{ worldState: Record<string, unknown>|null|undefined,
+ *   snapshot: { byId?: { get?: (id: string) => ({ settlement?: unknown }|undefined) },
+ *     settlements?: Array<{ id?: unknown, settlement?: unknown }> },
+ *   conquerorId: string, targetId: string }} args
  * @returns {number}
  */
 export function extractionUpswingAdj({ worldState, snapshot, conquerorId, targetId }) {
-  const byId = snapshot?.byId?.get ? snapshot.byId.get(String(targetId)) : (snapshot?.settlements || []).find((/** @type {any} */ it) => String(it?.id) === String(targetId));
+  const byId = snapshot?.byId?.get ? snapshot.byId.get(String(targetId)) : (snapshot?.settlements || []).find((it) => String(it?.id) === String(targetId));
   const target = byId?.settlement;
   if (!target) return 0;
-  const targetValue01 = clamp01(economicStrength01(target));
+  const targetValue01 = clamp01(economicStrength01(/** @type {import('./conquestFeeds.js').SettlementLike} */ (target)));
   // The conqueror's own corruption leak (0 when the corruption web is dark).
-  const leak01 = corruptionWebActive(worldState) ? clamp01(foreignGripOf(worldState, snapshot, String(conquerorId))) : 0;
+  const leak01 = corruptionWebActive(worldState)
+    ? clamp01(foreignGripOf(worldState, /** @type {import('./corruptionWeb.js').WebSnapshot} */ (/** @type {unknown} */ (snapshot)), String(conquerorId)))
+    : 0;
   const raw = EXTRACTION_EV_WEIGHT * targetValue01 * (1 - leak01) - EXTRACTION_OCCUPATION_BURDEN;
   return Math.max(-EXTRACTION_EV_BOUND, Math.min(EXTRACTION_EV_BOUND, raw));
 }
@@ -954,13 +960,9 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
       ? { factorFor: (/** @type {string} */ move) => blocDecisionFactor(worldState, String(sId), item, move) }
       : null;
     // W-UPSWING §0.5: the extraction-upswing EV term loads the deploy score. NULL when
-    // upswingArcsEnabled is dark (the gate is inlined here — mirrors upswingKernel's
-    // upswingArcsActive — to avoid coupling the strategy chooser to the upswing mover)
-    // ⇒ the deploy score is byte-identical dormant.
-    const upswingLit = !!(worldState && typeof worldState === 'object'
-      && /** @type {any} */ (worldState).simulationRules
-      && /** @type {any} */ (worldState).simulationRules.upswingArcsEnabled === true);
-    const extractionEV = upswingLit
+    // the upswing gate is dark (upswingArcsActive reads the SAME worldState) ⇒ the
+    // deploy score is byte-identical dormant.
+    const extractionEV = upswingArcsActive(worldState)
       ? { adjFor: (/** @type {string} */ targetId) => extractionUpswingAdj({ worldState, snapshot, conquerorId: String(sId), targetId }) }
       : null;
     const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, extractionEV });
