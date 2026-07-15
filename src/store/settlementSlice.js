@@ -50,6 +50,7 @@ import {
   appendEdit as _pe_appendEdit,
   revertEdit as _pe_revertEdit,
   activeEdits as _pe_activeEdits,
+  COMMITTABLE_EDIT_KINDS as _pe_COMMITTABLE,
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
 import { eventStalenessKey } from '../domain/events/stalenessKey.js';
@@ -433,9 +434,16 @@ export const createSettlementSlice = (set, get) => ({
   /** Add an edit to the queue. Returns the edit so the caller can
    *  reference its id (e.g. for an undo-this-edit affordance). */
   queueEdit: (kind, payload) => {
-    // Campaign-clock identity lock: reject (rather than queue) NPC/faction
-    // renames once the settlement is canonized — names are frozen post-canon.
-    if (get().phase === 'canon' && (kind === 'rename-npc' || kind === 'rename-faction')) {
+    // No-silent-drop contract: only kinds with a live commit dispatcher may enter
+    // the queue. Anything else would fall through commitPendingEdits' default
+    // branch and be discarded when the queue clears all-or-nothing — so refuse it
+    // here, where the caller gets an immediate null, instead of losing it at
+    // commit. No UI enqueues an un-dispatched kind today; this makes the drop
+    // structurally impossible if one is ever wired up before its dispatcher lands.
+    if (!_pe_COMMITTABLE.includes(kind)) return null;
+    // Campaign-clock identity lock: NPC names freeze once the settlement is
+    // canonized (settlement renames stay allowed post-canon).
+    if (get().phase === 'canon' && kind === 'rename-npc') {
       return null;
     }
     const clock = (get().pendingEditsClock || 0) + 1;
@@ -482,10 +490,11 @@ export const createSettlementSlice = (set, get) => ({
     }).catch(() => {});
   },
 
-  /** Apply the queue against the live settlement. Each edit dispatches
-   *  to an existing mutation (renameNPC, etc.) by `kind`. Edits that
-   *  don't map to a known mutation are skipped with a warning — the
-   *  queue clears either way on a successful commit. */
+  /** Apply the queue against the live settlement. Each edit dispatches to an
+   *  existing mutation (renameNPC, etc.) by `kind`. Only committable kinds ever
+   *  reach here — queueEdit refuses the rest at the enqueue seam
+   *  (COMMITTABLE_EDIT_KINDS), so nothing is silently dropped when the queue
+   *  clears all-or-nothing on commit. */
   commitPendingEdits: () => {
     const state = get();
     const queue = state.pendingEditsQueue || [];
@@ -515,12 +524,12 @@ export const createSettlementSlice = (set, get) => ({
             if (renamed) get().persistActiveSaveEdit?.();
             break;
           }
-          // Future kinds (add-institution etc.) dispatch to existing
-          // mutations or — for not-yet-built ones — log a TODO. The
-          // queue still clears so the UI isn't stuck on a missing
-          // dispatcher.
+          // Unreachable by contract: queueEdit admits only COMMITTABLE_EDIT_KINDS,
+          // so every active edit here has a case above. Any committable-set /
+          // dispatcher drift that could reach this default is caught by the pins in
+          // editActionPersist.test.js + pendingEdits.test.js, not a runtime log
+          // (this branch is first-paint eager — the byte-minimal guard is no code).
           default:
-            console.info(`[commitPendingEdits] no dispatcher for ${edit.kind} yet`);
             break;
         }
       } catch (e) {

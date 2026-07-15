@@ -29,6 +29,7 @@ vi.mock('../../src/lib/saves.js', () => ({
 
 import { saves } from '../../src/lib/saves.js';
 import { createSettlementSlice } from '../../src/store/settlementSlice.js';
+import { EDIT_KINDS, COMMITTABLE_EDIT_KINDS } from '../../src/domain/pendingEdits.js';
 
 const stubSlice = () => ({
   auth: { user: null, tier: 'free', loading: false },
@@ -183,6 +184,42 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
     draft.getState().commitPendingEdits();
 
     expect(draft.getState().settlement.name).toBe('Newhaven'); // live rename preserved
+    await new Promise(r => setTimeout(r, 0));
+    expect(saves.update).not.toHaveBeenCalled();
+  });
+});
+
+describe('queueEdit no-silent-drop contract: only committable kinds enter the queue', () => {
+  let store;
+  beforeEach(() => { store = makeStore(); withActiveSave(store); });
+
+  test('every EDIT_KIND without a commit dispatcher is refused at enqueue (null, queue stays empty)', () => {
+    const uncommittable = EDIT_KINDS.filter(k => !COMMITTABLE_EDIT_KINDS.includes(k));
+    expect(uncommittable.length).toBeGreaterThan(0); // the scaffolding kinds still exist
+
+    for (const kind of uncommittable) {
+      // Pass a fat payload so refusal is by kind, not by a missing field.
+      const result = store.getState().queueEdit(kind, { label: 'x', newName: 'x', npcIndex: 0 });
+      expect(result).toBeNull();
+    }
+    expect(store.getState().pendingEditsQueue).toEqual([]); // nothing was queued-then-droppable
+  });
+
+  test('committable kinds are admitted (non-null) and enqueued in order', () => {
+    const npc = store.getState().queueEdit('rename-npc', { npcIndex: 0, newName: 'Aldric' });
+    const town = store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
+
+    expect(npc).not.toBeNull();
+    expect(town).not.toBeNull();
+    expect(store.getState().pendingEditsQueue.map(e => e.kind)).toEqual(['rename-npc', 'rename-settlement']);
+  });
+
+  test('commit after refused enqueues has nothing to drop and triggers no phantom persist', async () => {
+    store.getState().queueEdit('add-institution', { label: 'Tavern' });
+    store.getState().queueEdit('edit-prose', { text: 'x' });
+    expect(store.getState().pendingEditsQueue).toEqual([]); // both refused
+
+    store.getState().commitPendingEdits(); // no active edits → no-op
     await new Promise(r => setTimeout(r, 0));
     expect(saves.update).not.toHaveBeenCalled();
   });
