@@ -1,0 +1,202 @@
+/**
+ * upswingKernel.test.js — W-UPSWING stage 1 (B1 RECONSTRUCTION) pins.
+ * Drives advanceUpswing directly (a controlled fixture) to prove the constitution:
+ * conservation (every progress receipt names its source; ally acceleration MATURES the
+ * obligation), the ABSORPTION cap binds + is deferral-visible, regress-on-shock, the
+ * reconstruction SKIM fires ONLY under low conscience, the institution UPGRADE up the
+ * lattice, and dormancy byte-identity.
+ */
+import { describe, expect, it } from 'vitest';
+import { advanceUpswing, upswingArcsActive, UPSWING_TUNING } from '../../src/domain/worldPulse/upswingKernel.js';
+import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+
+const NOW = '2026-01-01T00:00:00.000Z';
+
+function struck(name, over = {}) {
+  return {
+    name, tier: 'town', population: 1500,
+    config: { economicBase: 'agrarian' },
+    institutions: [
+      { name: 'Town hall', required: true, category: 'civic' },
+      { name: 'Carpenter', category: 'crafts' },
+      { name: "Wizard's tower", category: 'magic' },
+    ],
+    economicState: { prosperity: 'Comfortable' },
+    powerStructure: { publicLegitimacy: { score: 45 }, factions: [], conflicts: [] },
+    calamityHistory: [{ type: 'fire', name: 'The Great Calamity of X, year 4', year: 4, tick: 208, deaths: 90, exodus: 200, k: 1, targets: ['Tannery'] }],
+    npcs: [], activeConditions: [],
+    ...over,
+  };
+}
+
+function fixture({ settlement, lit = true, year = 5, obligations = null, stressors = [] }) {
+  const items = [{ id: 'a', name: 'Ashford', settlement }];
+  const snapshot = { settlements: items };
+  const worldState = {
+    tick: 260,
+    calendar: { elapsedWeeks: 260, year },
+    simulationRules: lit ? { upswingArcsEnabled: true } : {},
+    stressors,
+    ...(obligations ? { spatialLedgers: { obligations } } : {}),
+  };
+  const settlementUpdates = items.map((it) => ({ saveId: it.id, settlement: it.settlement }));
+  return { snapshot, worldState, settlementUpdates, graph: ensureRegionalGraph({ edges: [] }) };
+}
+
+/** Drive N ticks, threading worldState + updates + carried ledger. */
+function drive(cfg, ticks) {
+  let f = fixture(cfg);
+  let worldState = f.worldState;
+  let settlementUpdates = f.settlementUpdates;
+  const receipts = [];
+  const news = [];
+  for (let t = 0; t < ticks; t++) {
+    // Refresh the snapshot to the freshest settlement (conditions/institutions carry).
+    const snapshot = { settlements: settlementUpdates.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+    const r = advanceUpswing({ snapshot, worldState, settlementUpdates, graph: f.graph, rng: null, tick: worldState.tick + t, now: NOW });
+    worldState = r.worldState;
+    settlementUpdates = r.settlementUpdates;
+    receipts.push(...r.receipts);
+    news.push(...r.newsEntries);
+  }
+  return { worldState, settlementUpdates, receipts, news };
+}
+
+describe('upswing — the dormancy gate', () => {
+  it('flag absent ⇒ a complete no-op (same references, no ledger, no condition)', () => {
+    const f = fixture({ settlement: struck('Ashford'), lit: false });
+    const r = advanceUpswing({ snapshot: f.snapshot, worldState: f.worldState, settlementUpdates: f.settlementUpdates, graph: f.graph, rng: null, tick: 260, now: NOW });
+    expect(r.changed).toBe(false);
+    expect(r.settlementUpdates).toBe(f.settlementUpdates);
+    expect(r.worldState).toBe(f.worldState);
+    expect(r.receipts).toHaveLength(0);
+    expect(upswingArcsActive(f.worldState)).toBe(false);
+  });
+});
+
+describe('upswing — B1 reconstruction: trigger + conservation receipts', () => {
+  it('a recent calamity stamp ARMS reconstruction: the condition mints + a source-named receipt', () => {
+    const { settlementUpdates, receipts } = drive({ settlement: struck('Ashford') }, 1);
+    const s = settlementUpdates.find((u) => u.saveId === 'a').settlement;
+    expect((s.activeConditions || []).some((c) => c.archetype === 'reconstruction')).toBe(true);
+    const prog = receipts.find((r) => r.kind === 'reconstruction_progress');
+    expect(prog).toBeTruthy();
+    // CONSERVATION: the receipt names EVERY source of the step (no receipt-less rise).
+    expect(prog.sources).toMatchObject({ prosperity: expect.any(Number), builder: expect.any(Number), ally: expect.any(Number), peace: expect.any(Number) });
+  });
+
+  it('a siege/occupation clearing condition also arms reconstruction (no calamity needed)', () => {
+    const s0 = struck('Ashford', { calamityHistory: [], activeConditions: [{ id: 'condition.siege_lifted.1', archetype: 'siege_lifted' }] });
+    const { settlementUpdates } = drive({ settlement: s0 }, 1);
+    const s = settlementUpdates.find((u) => u.saveId === 'a').settlement;
+    expect((s.activeConditions || []).some((c) => c.archetype === 'reconstruction')).toBe(true);
+  });
+
+  it('NO trigger (old calamity, no clearing) ⇒ no arc, no ledger (sparse)', () => {
+    const s0 = struck('Ashford', { calamityHistory: [{ type: 'fire', name: 'x', year: -20, tick: 1, deaths: 1, exodus: 1, k: 0, targets: [] }] });
+    const { worldState, receipts } = drive({ settlement: s0, year: 40 }, 1);
+    expect(worldState.spatialLedgers?.upswing).toBeUndefined();
+    expect(receipts).toHaveLength(0);
+  });
+});
+
+describe('upswing — B1 conservation: ally acceleration MATURES the obligation (the debit)', () => {
+  it('an inbound ally credit accelerates the rebuild AND matures (debits) the obligation ledger', () => {
+    const obligations = { 'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 0.6, mintTick: 100, lastTick: 100 } };
+    const f = fixture({ settlement: struck('Ashford'), obligations });
+    const snapshot = { settlements: [{ id: 'a', name: 'Ashford', settlement: f.settlementUpdates[0].settlement }] };
+    const r = advanceUpswing({ snapshot, worldState: f.worldState, settlementUpdates: f.settlementUpdates, graph: f.graph, rng: null, tick: 260, now: NOW });
+    const prog = r.receipts.find((x) => x.kind === 'reconstruction_progress');
+    expect(prog.allyMatured, 'the ally acceleration matured part of the debt').toBeGreaterThan(0);
+    // The obligation LEDGER shrank (aid consumed is aid spent — the conservation debit).
+    const nextMag = r.worldState.spatialLedgers.obligations['a:ally:credit'].magnitude;
+    expect(nextMag, 'the obligation magnitude fell after maturation').toBeLessThan(0.6);
+  });
+
+  it('NO ally obligation ⇒ ally term is 0, nothing matured (no phantom debit)', () => {
+    const { receipts } = drive({ settlement: struck('Ashford') }, 1);
+    const prog = receipts.find((r) => r.kind === 'reconstruction_progress');
+    expect(prog.sources.ally).toBe(0);
+    expect(prog.allyMatured).toBe(0);
+  });
+});
+
+describe('upswing — B1 limits: absorption cap + regress-on-shock', () => {
+  it('THE ABSORPTION CAP binds and is DEFERRAL-VISIBLE (the receipt says the step was capped)', () => {
+    // A rich, full-builder, ally-funded, peaceful town would exceed the cap.
+    const rich = struck('Ashford', {
+      economicState: { prosperity: 'Wealthy' },
+      institutions: [
+        { name: 'Town hall', required: true }, { name: 'Carpenter', category: 'crafts' },
+        { name: 'Mason', category: 'crafts' }, { name: "Builders' lodge", category: 'crafts' },
+      ],
+    });
+    const obligations = { 'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 1, mintTick: 1, lastTick: 1 } };
+    const f = fixture({ settlement: rich, obligations });
+    const snapshot = { settlements: [{ id: 'a', name: 'Ashford', settlement: f.settlementUpdates[0].settlement }] };
+    const r = advanceUpswing({ snapshot, worldState: f.worldState, settlementUpdates: f.settlementUpdates, graph: f.graph, rng: null, tick: 260, now: NOW });
+    const prog = r.receipts.find((x) => x.kind === 'reconstruction_progress');
+    expect(prog.absorptionCapped, 'the cap bound').toBe(true);
+    expect(prog.rawStep, 'the raw step exceeded the cap').toBeGreaterThan(UPSWING_TUNING.RECON_ABSORPTION_CAP);
+    expect(prog.step, 'the applied step is clamped to the cap').toBeCloseTo(UPSWING_TUNING.RECON_ABSORPTION_CAP, 6);
+  });
+
+  it('a NEW shock during the rebuild REGRESSES progress (a second blow sets it back)', () => {
+    // Same seed twice: once calm, once with a live famine stressor.
+    const calm = drive({ settlement: struck('Ashford') }, 1);
+    const shocked = drive({ settlement: struck('Ashford'), stressors: [{ id: 'world_stressor.famine.a', type: 'famine', severity: 0.8, affectedSettlementIds: ['a'], age: 2 }] }, 1);
+    const calmProg = calm.receipts.find((r) => r.kind === 'reconstruction_progress').progress;
+    const shockedRec = shocked.receipts.find((r) => r.kind === 'reconstruction_progress');
+    expect(shockedRec.regressed, 'the shock was recorded').toBe(true);
+    expect(shockedRec.progress, 'a shocked tick advances less than a calm one').toBeLessThan(calmProg);
+  });
+});
+
+describe('upswing — B1 completion: history beat + legitimacy dividend + upgrade + skim', () => {
+  it('COMPLETION upgrades an institution UP the lattice, pays a legitimacy dividend, drops the arc', () => {
+    // Drive to completion (absorption cap 0.18 ⇒ ~6+ ticks).
+    const { worldState, settlementUpdates, receipts, news } = drive({ settlement: struck('Ashford') }, 12);
+    const done = receipts.find((r) => r.kind === 'reconstruction_complete');
+    expect(done, 'the arc completed').toBeTruthy();
+    // Institution UPGRADE up the lattice (the CODEPOINT-FIRST eligible — 'Carpenter'
+    // < "Wizard's tower" — promotes to its greater; the demote lattice read in reverse).
+    expect(done.upgraded).toBe('Carpenter → Carpenters (5-15)');
+    const s = settlementUpdates.find((u) => u.saveId === 'a').settlement;
+    expect((s.institutions || []).some((i) => i.name === 'Carpenters (5-15)')).toBe(true);
+    expect((s.institutions || []).some((i) => i.name === 'Carpenter')).toBe(false);
+    // Legitimacy dividend landed (rose above the 45 baseline).
+    expect(Number(s.powerStructure.publicLegitimacy.score)).toBeGreaterThan(45);
+    // The arc dropped its ledger record; the reconstruction condition cleared.
+    expect(worldState.spatialLedgers?.upswing?.reconstruction?.a).toBeFalsy();
+    expect((s.activeConditions || []).some((c) => c.archetype === 'reconstruction')).toBe(false);
+    // A permanent history beat + a completion receipt naming the conserved source mix.
+    expect((s.history?.historicalEvents || []).some((e) => /reconstruction/i.test(String(e.campaignEventId || '')))).toBe(true);
+    expect(done.sources).toMatchObject({ internal: expect.any(Number), ally: expect.any(Number), peace: expect.any(Number), builder: expect.any(Number) });
+    expect(news.some((n) => n.impactKind === 'reconstruction')).toBe(true);
+  });
+
+  it('THE SKIM fires ONLY under LOW conscience (funds flowing × malice)', () => {
+    // Honest town (no evil signal) ⇒ NO skim even with ally funds.
+    const honestObl = { 'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 1, mintTick: 1, lastTick: 1 } };
+    const honest = drive({ settlement: struck('Ashford'), obligations: honestObl }, 12);
+    const honestDone = honest.receipts.find((r) => r.kind === 'reconstruction_complete');
+    expect(honestDone.skimmed, 'an honest town does not skim').toBe(false);
+
+    // Corrupt town (evil patron deity ⇒ high malice) WITH ally funds ⇒ the skim fires.
+    const evil = struck('Ashford', {
+      config: { economicBase: 'agrarian', primaryDeitySnapshot: { _deityRef: 'custom:evil', name: 'The Devourer', alignmentAxis: 'evil', lawAxis: 'chaotic', rankAxis: 'major' } },
+      npcs: [{ id: 'tyrant', name: 'Tyrant', importance: 'key', role: 'ruler', personality: { traits: ['cruel', 'greedy', 'ruthless'] } }],
+      powerStructure: { publicLegitimacy: { score: 45 }, factions: [{ faction: 'The Syndicate', category: 'criminal', power: 70 }], conflicts: [] },
+    });
+    const corruptObl = { 'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 1, mintTick: 1, lastTick: 1 } };
+    const corrupt = drive({ settlement: evil, obligations: corruptObl }, 12);
+    const corruptDone = corrupt.receipts.find((r) => r.kind === 'reconstruction_complete');
+    expect(corruptDone, 'the corrupt arc completed').toBeTruthy();
+    // If the ally funds flowed and malice is high, the skim planted the next corruption arc.
+    if (corruptDone.sources.ally > 0) {
+      expect(corruptDone.skimmed, 'a low-conscience town skims the rebuild funds').toBe(true);
+      const s = corrupt.settlementUpdates.find((u) => u.saveId === 'a').settlement;
+      expect((s.activeConditions || []).some((c) => c.id?.startsWith('condition.reconstruction_skim'))).toBe(true);
+    }
+  });
+});

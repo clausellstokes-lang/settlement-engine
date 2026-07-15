@@ -137,6 +137,37 @@ function demotesTo(/** @type {string} */ name) {
   return DEMOTES_TO.get(String(name || '').toLowerCase()) || null;
 }
 
+// lesser(lowercased) → the IMMEDIATE greater it PROMOTES to (the calamity demote
+// lattice read UP, for W-UPSWING B1 reconstruction's institution upgrade). Multi-
+// greater lessers demote-in-reverse to the CLOSEST rung — the greater that is itself a
+// lesser of another greater — else the codepoint-first greater (deterministic tiebreak).
+const PROMOTES_TO = (() => {
+  /** @type {Map<string, string[]>} */
+  const greatersOf = new Map();
+  for (const [lesser, greater] of UPGRADE_CHAIN_PAIRS) {
+    const key = lesser.toLowerCase();
+    const list = greatersOf.get(key) || [];
+    if (!list.includes(greater)) list.push(greater);
+    greatersOf.set(key, list);
+  }
+  /** @type {Map<string, string>} */
+  const out = new Map();
+  for (const [lesserLc, greaters] of greatersOf) {
+    if (greaters.length === 1) { out.set(lesserLc, greaters[0]); continue; }
+    const closest = greaters.find((g) => greaters.some((g2) =>
+      g2 !== g && UPGRADE_CHAIN_PAIRS.some(([ll, gg]) => ll.toLowerCase() === g.toLowerCase() && gg === g2)));
+    out.set(lesserLc, closest || greaters.slice().sort()[0]);
+  }
+  return out;
+})();
+
+/** The greater an upgrade-chain lesser promotes to (case-insensitive), or null. The
+ *  calamity demote lattice read UP — B1 reconstruction's institution upgrade. Pure.
+ *  @param {string} name @returns {string|null} */
+export function promotesTo(name) {
+  return PROMOTES_TO.get(String(name || '').toLowerCase()) || null;
+}
+
 /** The tier/density scalar 0..1 (thorp 0 … metropolis 1). @param {CalSettlement|undefined} s */
 function density01Of(s) {
   const tier = String(s?.tier || popToTier(num(s?.population, 0)));

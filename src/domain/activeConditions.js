@@ -452,6 +452,35 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'easing',
     defaultSeverity: 0.3,
   },
+  // ── W-UPSWING positive-polarity ARC conditions (registered as LIFTS in
+  // archetypeCatalog.UPSWING_LIFT_CONDITIONS — they RAISE the systems they declare).
+  // Minted by the lazy upswingKernel mover, gated behind virtual upswingArcsEnabled;
+  // a dark world never carries them (byte-identical). The templates give the arcs
+  // defaults + keep the archetype-registry consistency test green.
+  reconstruction: {
+    label: 'Reconstruction',
+    description: 'The settlement is rebuilding after a calamity or the lifting of a siege — the rebuild race is on.',
+    affectedSystems: ['public_legitimacy', 'labor_capacity', 'social_trust'],
+    defaultExpiresAtTicks: 12,
+    defaultStatus: 'easing',
+    defaultSeverity: 0.4,
+  },
+  boom: {
+    label: 'Boom',
+    description: 'Sustained trade and surplus have tipped the settlement into a boom — prosperous, and quietly dependent on the arteries feeding it.',
+    affectedSystems: ['public_legitimacy', 'trade_connectivity'],
+    defaultExpiresAtTicks: 14,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.4,
+  },
+  flourishing: {
+    label: 'Flourishing',
+    description: 'A long peace and steady legitimacy have made the settlement culturally fertile — a golden age, modest and bounded.',
+    affectedSystems: ['public_legitimacy', 'social_trust'],
+    defaultExpiresAtTicks: 16,
+    defaultStatus: 'stable',
+    defaultSeverity: 0.35,
+  },
 });
 
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);
