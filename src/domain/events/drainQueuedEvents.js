@@ -30,6 +30,7 @@
  * @returns {{ updates: Array<{ saveId:string, settlement:object, systemState:object, eventLog:Array, authoredEvent:object|null }>,
  *             twinDirectives: Array<{ action:string, stressor?:object, type?:string, originSettlementId:string }>,
  *             partyImpacts: Array<{ action:object, originSettlementId:string }>,
+ *             refusals: Array<{ queueId:string, saveId:string, eventType:string, code:string, detail:string }>,
  *             drainedCount: number }}
  */
 import { deepClone } from '../clone.js';
@@ -40,6 +41,9 @@ import { deriveSystemState } from '../state/deriveSystemState.js';
 import { reconcileSettlementChange } from '../settlementReconciliation.js';
 import { twinDirectiveForEvent } from '../crisisLifecycle.js';
 import { wallClockNow } from '../clock.js';
+import { normalizeStressor, resolveStressorById } from '../worldPulse/stressorsCore.js';
+import { proposalIdFor, upsertProposal } from '../worldPulse/worldState.js';
+import { pulseTypeForStressorKey } from '../stressorPicker.js';
 
 /** @param {*} value */
 function clone(value) {
@@ -56,9 +60,12 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
   const twinDirectives = [];
   /** @type {any[]} */
   const partyImpacts = [];
+  /** Refused-at-the-tick entries (W-COMPOSER-2 §10: refused VISIBLY, never
+   * silently dropped). @type {Array<{ queueId:string, saveId:string, eventType:string, code:string, detail:string }>} */
+  const refusals = [];
   let drainedCount = 0;
   if (!Array.isArray(queue) || queue.length === 0) {
-    return { updates, twinDirectives, partyImpacts, drainedCount };
+    return { updates, twinDirectives, partyImpacts, refusals, drainedCount };
   }
 
   // Group queued intentions by save, preserving the global queue order within
@@ -68,12 +75,12 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
     if (!item || !item.event || item.saveId == null) continue;
     const key = String(item.saveId);
     if (!bySave.has(key)) bySave.set(key, []);
-    bySave.get(key).push(item.event);
+    bySave.get(key).push(item);
   }
 
   const saveById = new Map((saves || []).map(s => [String(s.id), s]));
 
-  for (const [saveId, events] of bySave) {
+  for (const [saveId, items] of bySave) {
     const save = saveById.get(saveId);
     if (!save || !save.settlement) continue;
 
@@ -91,19 +98,28 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
     // dossier's SystemState matches the eventLog entry recorded at this tick.
     let authoredEvent = null;
 
-    for (const event of events) {
+    for (const item of items) {
+      const event = item.event;
       let out;
       try {
         out = domainApplyEvent({ settlement, systemState, event });
       } catch {
-        // A single malformed queued event must not abort the whole tick.
+        // A single malformed queued event must not abort the whole tick —
+        // but it is REFUSED VISIBLY, never silently dropped (§10).
+        refusals.push({ queueId: String(item.queueId || ''), saveId, eventType: String(event?.type || ''), code: 'malformed', detail: '' });
         continue;
       }
       // Handler-veto channel (Composer V2 §2): the world changed since this
-      // intention queued and its gate now fails. Skip it — no phantom entry,
-      // no deltas. (W-COMPOSER-2's docket surfaces the refusal in the advance
-      // digest + LAPSED handling; the skip here is the W1 no-phantom floor.)
-      if (out.veto) continue;
+      // intention queued and its gate now fails. No phantom entry, no deltas —
+      // and the refusal surfaces in the advance digest (§10, the queue mouth).
+      if (out.veto) {
+        refusals.push({
+          queueId: String(item.queueId || ''), saveId,
+          eventType: String(event?.type || ''),
+          code: String(out.veto.code || 'veto'), detail: String(out.veto.detail || ''),
+        });
+        continue;
+      }
       const nextSettlement = reconcileSettlementChange(/** @type {any} */ (out.nextSettlement), settlement, {
         source: 'canon_event',
         changeType: event?.type,
@@ -148,5 +164,89 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
     });
   }
 
-  return { updates, twinDirectives, partyImpacts, drainedCount };
+  return { updates, twinDirectives, partyImpacts, refusals, drainedCount };
+}
+
+/**
+ * Apply the drain's crisis-twin directives to the WORLD — the same forward
+ * path settlementSlice.rippleEventThroughWorld uses for immediate events, so
+ * the pulse ages/propagates roaming crises a queued event spawned this tick.
+ * Extracted from the store's drainCampaignQueueIntoState (W-COMPOSER-2) so the
+ * FORECAST's clone-run replays the EXACT same world fold — one source, two
+ * callers, zero drift. Pure; does NOT clear pendingEvents (the caller does).
+ * @param {any} worldState @param {any[]} twinDirectives @param {{ tick: number, now: string }} ctx
+ */
+export function applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, now }) {
+  let ws = {
+    ...worldState,
+    stressors: Array.isArray(worldState.stressors) ? [...worldState.stressors] : [],
+  };
+  for (const d of twinDirectives || []) {
+    if (d.action === 'inject' && d.stressor) {
+      const normalized = normalizeStressor({
+        ...d.stressor,
+        originSettlementId: d.originSettlementId,
+        affectedSettlementIds: [d.originSettlementId],
+        createdAt: now,
+        updatedAt: now,
+      });
+      const byId = new Map((ws.stressors || []).map(s => [s.id, s]));
+      byId.set(normalized.id, normalized);
+      ws = { ...ws, stressors: [...byId.values()] };
+    } else if (d.action === 'resolve' && d.type) {
+      const roamingType = pulseTypeForStressorKey(d.type) || d.type;
+      const match = (ws.stressors || [])
+        .map(raw => normalizeStressor(raw))
+        .find(st => st.status === 'active'
+          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
+          && (String(st.originSettlementId || '') === d.originSettlementId
+            || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));
+      if (match) {
+        const r = resolveStressorById(ws.stressors, match.id, {
+          tick, now, reason: 'Resolved by DM authoring (queued)', emitResidual: true,
+        });
+        if (r.found) {
+          ws = { ...ws, stressors: r.stressors };
+          for (const outcome of (r.residualOutcomes || [])) {
+            ws = upsertProposal(ws, {
+              id: proposalIdFor(outcome, tick),
+              status: 'pending',
+              createdAt: now,
+              updatedAt: now,
+              tick,
+              outcome: deepClone(outcome),
+              headline: outcome.headline,
+              summary: outcome.summary,
+              severity: outcome.severity,
+              reasons: outcome.reasons || [],
+            });
+          }
+        }
+      }
+    }
+  }
+  return ws;
+}
+
+/**
+ * A wizard-news entry for a queue-mouth refusal (W-COMPOSER-2 §10: "a lapsed
+ * entry that reaches the drain is REFUSED VISIBLY in the advance digest").
+ * Terse eager text; the docket's lazy surface renders the rich veto prose.
+ * @param {{ queueId:string, saveId:string, eventType:string, code:string, detail:string }} r
+ * @param {string} name  the settlement's display name
+ * @param {number|null} tick @param {string} now
+ */
+export function queueRefusalNews(r, name, tick, now) {
+  return {
+    id: `wizard_news.${tick}.queue_refused.${r.queueId}`,
+    tick, scope: 'settlement', significance: 'notable', score: 55,
+    headline: `${name}'s queued order was refused at the tick`,
+    summary: `The queued ${String(r.eventType || 'order').replace(/_/g, ' ').toLowerCase()} no longer holds against the world as it now stands (${r.code}${r.detail ? `: ${r.detail}` : ''}). Edit or cancel it from the docket.`,
+    kind: 'refused', impactKind: 'queue_refused', channelType: null, severity: 0.3,
+    settlementIds: [r.saveId], impactIds: [], channelIds: [],
+    sourceEventId: `queue_refused.${r.queueId}`,
+    tags: ['world_pulse', 'docket', 'refused'],
+    reasons: [`Refused with code ${r.code}.`],
+    createdAt: now,
+  };
 }

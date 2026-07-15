@@ -511,3 +511,82 @@ describe('campaign-clock: drain-path parity for canon relationship verbs (Lane-2
     expect(worldOf(store).relationshipStates?.[ALLY_KEY]).toBeUndefined();
   });
 });
+
+describe('campaign-clock: THE MUTABLE DOCKET (W-COMPOSER-2 §10)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('EDIT round-trip: updateQueuedEvent replaces IN PLACE — same queueId, same drain position, id preserved', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.getState().applyEvent(stressorEvent('ev-first', 'under_siege'));
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-edit-me', 'plague_outbreak'));
+    store.getState().applyEvent(stressorEvent('ev-last', 'famine'));
+    expect(pendingOf(store)).toHaveLength(3);
+    expect(pendingOf(store)[1].queueId).toBe(queueId);
+
+    // The edit: same event id (identity persists across edits), new dials.
+    const edited = { ...stressorEvent('ev-edit-me', 'plague_outbreak'), payload: { stressorType: 'plague_outbreak', label: 'Under Plague', severity: 0.35 } };
+    const ok = store.getState().updateQueuedEvent('camp-1', queueId, edited);
+    expect(ok).toBe(true);
+
+    const queue = pendingOf(store);
+    expect(queue).toHaveLength(3);
+    // POSITION preserved (drain order is part of the docket's meaning).
+    expect(queue[1].queueId).toBe(queueId);
+    expect(queue[1].event.id).toBe('ev-edit-me');
+    expect(queue[1].event.payload.severity).toBe(0.35);
+    // Neighbours untouched.
+    expect(queue[0].event.id).toBe('ev-first');
+    expect(queue[2].event.id).toBe('ev-last');
+  });
+
+  test('CANCEL is byte-identical to never-queued (worldState round-trip)', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // Warm-up queue+cancel so the baseline is the ENSURED worldState shape
+    // (queueSettlementEvent normalizes via ensureWorldState on first touch).
+    const warm = store.getState().applyEvent(stressorEvent('ev-warm'));
+    store.getState().cancelQueuedEvent('camp-1', warm.queueId);
+    const before = JSON.parse(JSON.stringify(worldOf(store)));
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-gone'));
+    expect(pendingOf(store)).toHaveLength(1);
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(true);
+    expect(JSON.parse(JSON.stringify(worldOf(store)))).toEqual(before);
+    expect(store.getState().eventLog).toHaveLength(0);
+  });
+
+  test('unknown queueId edits refuse; docket mutations refuse while an advance is in flight', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    expect(store.getState().updateQueuedEvent('camp-1', 'pe_missing', stressorEvent('x'))).toBe(false);
+    const { queueId } = store.getState().applyEvent(stressorEvent('ev-guard'));
+    // Simulate an in-flight advance (the sync-prefix guard's read).
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    expect(store.getState().updateQueuedEvent('camp-1', queueId, stressorEvent('ev-guard'))).toBe(false);
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(false);
+    store.setState(state => { state.advanceInFlight = []; });
+    expect(store.getState().cancelQueuedEvent('camp-1', queueId)).toBe(true);
+  });
+
+  test('a LAPSED entry that reaches the drain is REFUSED VISIBLY in the advance digest — never phantom-committed, never silent', async () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // A doomed intention: removing a trade good the settlement never had —
+    // the handler's own gate (trade_good_not_found) refuses at the tick.
+    store.getState().queueSettlementEvent('ashford', {
+      id: 'ev-doomed', type: 'REMOVE_TRADE_GOOD', targetId: 'moon-sugar', payload: {}, cause: 'player_action',
+    });
+    expect(pendingOf(store)).toHaveLength(1);
+
+    await store.getState().advanceCampaignWorld('camp-1', 'one_month', { now: '2026-02-01T00:00:00.000Z' });
+
+    // Consumed (never re-refuses forever), NOT applied, and VISIBLY refused.
+    expect(pendingOf(store)).toHaveLength(0);
+    const byId = Object.fromEntries(store.getState().savedSettlements.map(s => [s.id, s]));
+    expect((byId.ashford.campaignState.eventLog || []).some(e => e.event?.id === 'ev-doomed')).toBe(false);
+    const feed = store.getState().campaigns[0].wizardNews;
+    const refusal = (feed.entries || []).find(n => n.impactKind === 'queue_refused');
+    expect(refusal).toBeTruthy();
+    expect(refusal.summary).toMatch(/trade_good_not_found/);
+    expect(refusal.headline).toMatch(/ashford/i);
+  });
+});

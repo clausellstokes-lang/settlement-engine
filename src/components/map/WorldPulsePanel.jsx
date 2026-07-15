@@ -20,6 +20,7 @@ import {
 } from './WorldPulseData.js';
 import { NameAttackerControl, OutcomeCard, Pill, Section, SmallButton } from './WorldPulsePrimitives.jsx';
 import WhileYouWereAway from './WhileYouWereAway.jsx';
+import RealmDocket from './RealmDocket.jsx';
 import { politicalAutonomyOf } from '../../domain/worldPulse/simulationRules.js';
 import { t } from '../../copy/index.js';
 
@@ -243,6 +244,11 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             the full width above the pulse sections. Self-gates to nothing. */}
         <div style={{ gridColumn: '1 / -1' }}>
           <WhileYouWereAway campaignId={campaign.id} />
+        </div>
+        {/* W-COMPOSER-2 §10: THE DOCKET — the realm's staged future (queued
+            member orders in drain order) + THE FORECAST attached to it. */}
+        <div style={{ gridColumn: '1 / -1' }}>
+          <RealmDocket campaign={campaign} />
         </div>
         <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
