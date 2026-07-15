@@ -17,7 +17,7 @@
  *     a FULL-PULSE run with the flag off carries no calamity artifact + re-runs identically.
  */
 import { describe, it, expect } from 'vitest';
-import { advanceCalamity } from '../../src/domain/worldPulse/calamityKernel.js';
+import { advanceCalamity, forceCalamityStrike, forceCalamityEntry } from '../../src/domain/worldPulse/calamityKernel.js';
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
@@ -149,10 +149,12 @@ describe('M11b calamity kernel — the strike + subsumption', () => {
     expect(strike.removed.sort()).toEqual(['Blacksmith', 'Tavern']);
   });
 
-  it('mints the NAMED permanent stamp (the cooldown record)', () => {
+  it('mints the BUCKET-NEUTRAL permanent stamp (the cooldown record); flavor hint kept under `type`', () => {
     const s = struckOf(runStrike({ spatial: true }));
     const stamp = s.calamityHistory[s.calamityHistory.length - 1];
-    expect(stamp.name).toBe('The Great Fire of Thornwood, year 2');
+    // ONE-TIME SHIFT (owner-ruled): the engine title speaks the BUCKET, not the kind.
+    expect(stamp.name).toBe('The Great Calamity of Thornwood, year 2');
+    // The persisted key `type` is UNCHANGED (save-shape stable) — the cosmetic flavor hint.
     expect(stamp.type).toBe('fire');
     expect(stamp.year).toBe(2);
   });
@@ -277,5 +279,140 @@ describe('M11b calamity — FULL-PULSE dormancy (flag off ⇒ byte-neutral + det
     const struck = (a.settlementUpdates || []).find((u) => String(u.saveId) === 'thornwood')?.settlement;
     expect(struck?.calamityHistory).toBeUndefined();
     expect((a.wizardNews?.entries || []).some((e) => e.impactKind === 'calamity')).toBe(false);
+  });
+});
+
+// ── W-UPSWING stage 0 — THE CALAMITY BUCKET (kernel pins) ──────────────────────
+describe('stage 0 — TYPE-BLIND STAYS TYPE-BLIND (no mechanical branch on the flavor hint)', () => {
+  // Two struck settlements identical in EVERYTHING except terrain (fire vs flood hint).
+  // The mechanism must be byte-identical — only the cosmetic `type` field differs.
+  function struckAt(terrain) {
+    const s = struckSettlement();
+    s.config = { terrainType: terrain };
+    const settlements = [
+      { id: 'thornwood', name: 'Thornwood', settlement: s },
+      { id: 'midvale', name: 'Midvale', settlement: plainSettlement('Midvale') },
+      { id: 'faredge', name: 'Faredge', settlement: plainSettlement('Faredge') },
+    ];
+    const res = advanceCalamity({
+      settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })),
+      worldState: { tick: 52, simulationRules: { disastersEnabled: true } },
+      snapshot: { settlements, regionalGraph: ensureRegionalGraph({ edges: [], channels: [] }) },
+      digest: null, pIndex: { get: () => ({ score: 0.4 }) },
+      rules: { disastersEnabled: true }, rng: stubRng(), season: 'spring', ...YEAR_CROSS, tick: 52, now: NOW,
+    });
+    return res;
+  }
+
+  it('changing ONLY the terrain changes the flavor hint but NOT one mechanical outcome', () => {
+    const fire = struckAt('forest');   // hint: fire
+    const flood = struckAt('riverside'); // hint: flood
+    const fS = fire.settlementUpdates.find((u) => u.saveId === 'thornwood').settlement;
+    const flS = flood.settlementUpdates.find((u) => u.saveId === 'thornwood').settlement;
+    const fStrike = fire.receipts.find((r) => r.kind === 'strike');
+    const flStrike = flood.receipts.find((r) => r.kind === 'strike');
+    // The cosmetic hint DIFFERS (the only difference the terrain makes).
+    expect(fStrike.type).toBe('fire');
+    expect(flStrike.type).toBe('flood');
+    // EVERY mechanical field is identical — the bucket is constitutional.
+    expect(fStrike.deaths).toBe(flStrike.deaths);
+    expect(fStrike.exodus).toBe(flStrike.exodus);
+    expect(fStrike.k).toBe(flStrike.k);
+    expect(fStrike.targets).toEqual(flStrike.targets);
+    expect(fStrike.removed).toEqual(flStrike.removed);
+    expect(fStrike.severedExports).toEqual(flStrike.severedExports);
+    expect(fStrike.demotedTier).toBe(flStrike.demotedTier);
+    // The post-strike rosters + populations match (institutions, tier, population).
+    expect(fS.institutions).toEqual(flS.institutions);
+    expect(fS.population).toBe(flS.population);
+    expect(fS.tier).toBe(flS.tier);
+    // Only the stamp NAME is bucket-neutral (identical) and the `type` hint differs.
+    const fStamp = fS.calamityHistory[fS.calamityHistory.length - 1];
+    const flStamp = flS.calamityHistory[flS.calamityHistory.length - 1];
+    expect(fStamp.name).toBe(flStamp.name); // both "The Great Calamity of Thornwood, year 2"
+    expect(fStamp.name).toContain('Great Calamity');
+    expect(fStamp.type).not.toBe(flStamp.type); // fire vs flood — cosmetic only
+  });
+});
+
+describe('stage 0 — FORCE ≡ ORGANIC (FORCE_CALAMITY resolves through the SAME kernel path)', () => {
+  it('a forced strike at the natural "moderate" band is byte-identical to the organic strike', () => {
+    // The organic strike (thornwood, year 2, the stub firing it).
+    const organic = runStrike({ spatial: true });
+    const organicS = struckOf(organic);
+    const organicStamp = organicS.calamityHistory[organicS.calamityHistory.length - 1];
+    const organicStrike = organic.receipts.find((r) => r.kind === 'strike');
+
+    // The SAME strike, resolved through FORCE_CALAMITY at 'moderate' (natural band).
+    const item = { id: 'thornwood', name: 'Thornwood', settlement: struckSettlement() };
+    const forkFn = (k) => stubRng().fork(k);
+    const forced = forceCalamityStrike({
+      settlement: struckSettlement(), item, id: 'thornwood', year: 2, tick: 52, forkFn, severity: 'moderate',
+    });
+
+    // The strike RESOLUTION is identical (force ≡ organic by construction).
+    expect(forced.stamp.name).toBe(organicStamp.name);
+    expect(forced.stamp.type).toBe(organicStamp.type);
+    expect(forced.stamp.deaths).toBe(organicStamp.deaths);
+    expect(forced.stamp.exodus).toBe(organicStamp.exodus);
+    expect(forced.stamp.targets).toEqual(organicStamp.targets);
+    expect(forced.loss.deaths).toBe(organicStrike.deaths);
+    expect(forced.loss.exodus).toBe(organicStrike.exodus);
+    expect(forced.receipt.removed).toEqual(organicStrike.removed);
+    // The post-strike institution roster is identical (the exodus debit is a downstream
+    // apply that does not touch institutions).
+    expect(forced.settlement.institutions).toEqual(organicS.institutions);
+  });
+
+  it('the severity dial scales the strike WITHIN the frozen walls (severe ≥ moderate ≥ minor)', () => {
+    const item = { id: 'thornwood', name: 'Thornwood', settlement: struckSettlement() };
+    const forkFn = (k) => stubRng().fork(k);
+    const at = (severity) => forceCalamityStrike({
+      settlement: struckSettlement(), item, id: 'thornwood', year: 2, tick: 52, forkFn, severity,
+    }).loss;
+    const minor = at('minor');
+    const moderate = at('moderate');
+    const severe = at('severe');
+    // Monotone by band; never past the population (bounded by construction).
+    expect(minor.deaths).toBeLessThanOrEqual(moderate.deaths);
+    expect(moderate.deaths).toBeLessThanOrEqual(severe.deaths);
+    expect(severe.deaths + severe.exodus).toBeLessThan(5000);
+  });
+
+  it('the FORCE_CALAMITY entry is a registrable-shape verb (NOT registered — W-COMPOSER-2 lift)', () => {
+    const entry = forceCalamityEntry();
+    expect(entry.type).toBe('FORCE_CALAMITY');
+    expect(entry.scope).toBe('settlement');
+    expect(typeof entry.predicate).toBe('function');
+    expect(entry.predicate({}).available).toBe(true);
+    // A severity BAND dial + a cosmetic flavor freetext dial (≤4 dials, banded).
+    const dials = entry.dials || [];
+    expect(dials.find((d) => d.key === 'severity')?.kind).toBe('band');
+    expect(dials.find((d) => d.key === 'flavor')?.kind).toBe('text');
+  });
+});
+
+describe('stage 0 — EXPOSURE receipts name the geography, never a disaster kind', () => {
+  it('the strike receipt carries an exposure factor + an "exposed geography" note', () => {
+    const res = runStrike({ spatial: true });
+    const strike = res.receipts.find((r) => r.kind === 'strike');
+    expect(typeof strike.exposure).toBe('number');
+    expect(String(strike.exposureNote).toLowerCase()).toContain('exposed');
+  });
+
+  it('no strike PROSE (news / condition / population reason) asserts a disaster kind', () => {
+    const res = runStrike({ spatial: true });
+    const s = struckOf(res);
+    const news = res.newsEntries[0];
+    const prose = [
+      String(news.summary), ...(news.reasons || []).map(String),
+      String((s.activeConditions || []).find((c) => c.id?.startsWith('condition.disaster_response'))?.description || ''),
+      ...(s.populationHistory || []).map((h) => String(h.reason || '')),
+    ].join(' ').toLowerCase();
+    for (const kind of ['flood', 'fire', 'quake', 'earthquake', 'storm']) {
+      expect(prose, `prose must not assert "${kind}"`).not.toContain(kind);
+    }
+    // It DOES speak the bucket.
+    expect(prose).toContain('calamity');
   });
 });

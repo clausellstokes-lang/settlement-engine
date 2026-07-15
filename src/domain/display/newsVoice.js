@@ -173,10 +173,13 @@ export const VOICE_LINES = Object.freeze({
       'The pestilence passed the town by; the watchful gates ease open and the market fills again.',
     ]),
   }),
-  // M11b calamity — a great flood or fire, the land's own reckoning come due.
+  // M11b calamity — a great disaster, the land's own reckoning come due. BUCKET-
+  // NEUTRAL (W-UPSWING stage 0): the mechanism is type-blind, so the voice never
+  // asserts a disaster KIND — a quake must never draw "the waters have gone down".
+  // The flavor (flood/fire/quake) is the DM's slot, surfaced only as a suggestion.
   calamity: Object.freeze({
     onset: Object.freeze([
-      'The old signs are read and the elders mutter; some reckoning of flood or fire feels close at hand.',
+      'The old signs are read and the elders mutter; some great reckoning feels close at hand.',
       'An ill omen sits over the country, and those who remember the last one lay in what they can.',
       'The land itself seems to hold its breath, as though some great misfortune waits just over the horizon.',
     ]),
@@ -187,12 +190,12 @@ export const VOICE_LINES = Object.freeze({
       'What the elders feared has come to pass, and the land is remade in an hour with nothing quite where it stood.',
     ]),
     relief: Object.freeze([
-      'The waters have gone down and the smoke has cleared; the rebuilding begins, stone laid on weary stone.',
+      'The worst has passed and the wreck is cleared; the rebuilding begins, stone laid on weary stone.',
       'The disaster has run its course, and the survivors turn from mourning to the long work of raising it all again.',
-      'The worst is behind them now; the ruin is cleared by degrees, and green things push up through the ash.',
+      'The worst is behind them now; the ruin is cleared by degrees, and green things push up through the rubble.',
     ]),
     fade: Object.freeze([
-      'The dread signs came to nothing; the flood held to its banks and the country was spared its reckoning.',
+      'The dread signs came to nothing; the reckoning held off and the country was spared.',
       'The omen passed without its disaster, and the stores laid by against it are quietly put away.',
       'The calamity that was feared never fell; the land kept its shape, and the watchers stand down at last.',
     ]),

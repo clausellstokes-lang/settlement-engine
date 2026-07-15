@@ -44,6 +44,8 @@ import { distributeMigrants, applyPopulationOutcomeToSettlement } from './popula
 import {
   calamityEnabled, annualHazard, rollStrike, withinCooldown, disasterTypeFor, stampTitle,
   selectStrikeTargets, planInstitutionFate, resolvePopulationLoss, CALAMITY_TUNING,
+  exposureMultiplier, normalizeExposure, severityScaleFor, severityKFactorFor,
+  DEFAULT_CALAMITY_SEVERITY, CALAMITY_SEVERITY_BANDS,
 } from '../spatial/calamity.js';
 
 // ── Kernel-local read shapes (0-hole discipline — no `any` holes) ─────────────
@@ -60,7 +62,7 @@ import {
 /** @typedef {{ id?: (string|number), name?: string, settlement?: CalSettlement }} CalSnapItem */
 /** @typedef {{ settlements?: CalSnapItem[], regionalGraph?: unknown }} CalSnapshot */
 /** @typedef {{ type: string, name: string, year: number, tick: number, deaths: number,
- *   exodus: number, k: number, targets: string[] }} CalStamp */
+ *   exodus: number, k: number, targets: string[], flavorText?: string }} CalStamp */
 /** @typedef {{ get?: (id: string, kind: string) => { score?: number } | undefined } | null | undefined} CalPIndex */
 /** @typedef {{ saveId: (string|number), delta: number, reason: string }} CalPopDelta */
 /** @typedef {{ id: string, type: string, candidateType: string, ruleId: string, ruleFamily: string,
@@ -295,18 +297,152 @@ function reconcileProductionAfterStrike(economicState, removedNames) {
  * public_legitimacy + ruling_authority + social_trust), so the ruler comes under
  * the ordinary coup-readable pressure. No new coup mechanism — the disaster simply
  * feeds the standing legitimacy pressure. Pure.
- * @param {CalSettlement} settlement @param {string} typeLabel @param {number} tick
+ * BUCKET-NEUTRAL prose (stage 0): the description names "the calamity", never a
+ * disaster kind — the mechanism is type-blind and so is its voice.
+ * @param {CalSettlement} settlement @param {number} tick
  * @returns {CalSettlement}
  */
-function withDisasterResponseCondition(settlement, typeLabel, tick) {
+function withDisasterResponseCondition(settlement, tick) {
   return /** @type {CalSettlement} */ (withActiveCondition(settlement, {
     id: `condition.disaster_response.${tick}`,
     archetype: 'custom_crisis',
     label: 'Disaster Response Crisis',
     severity: 0.6,
     affectedSystems: ['public_legitimacy', 'ruling_authority', 'social_trust'],
-    description: `The ${typeLabel} has overwhelmed the seat of power; the response is contested and legitimacy bleeds.`,
+    description: 'The calamity has overwhelmed the seat of power; the response is contested and legitimacy bleeds.',
   }));
+}
+
+// ── The SHARED strike resolution (organic ≡ force at natural severity) ─────────
+/**
+ * Resolve ONE strike deterministically from the settlement-year seed — the single
+ * path the organic annual draw AND FORCE_CALAMITY both run (force ≡ organic by
+ * construction at the natural 'moderate' band: severity scale + K factor are both 1).
+ * Pure over forkFn; returns the mutated settlement, the bucket-neutral stamp (with the
+ * cosmetic flavor hint under `type` + optional DM freetext), the bounded loss, and the
+ * roster/production reconcile. The exodus dispatch + persistence stay with the caller
+ * (they touch the update array + migration ledger). No prose asserts a disaster kind.
+ * @param {{ settlement: CalSettlement, item: CalSnapItem|undefined, id: string,
+ *   year: number, tick: number, forkFn: (k: string) => { random: () => number },
+ *   severity?: string|null, flavorText?: string|null }} args
+ * @returns {{ settlement: CalSettlement, stamp: CalStamp, loss: { deaths: number, exodus: number },
+ *   roster: { removedNames: string[] }, prod: { severedExports: string[] },
+ *   flavorHint: string, settlementName: string }}
+ */
+function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, severity, flavorText }) {
+  const terrain = resolveSettlementTerrain(item);
+  const flavorHint = disasterTypeFor(terrain); // COSMETIC — no mechanic branches on it.
+  const density01 = density01Of(settlement);
+  const tier = String(settlement.tier || popToTier(num(settlement.population, 0)));
+  // K cap, severity-banded WITHIN the tier walls (natural factor 1 ⇒ the organic cap).
+  const cap = Math.max(1, Math.min(4, Math.round(strikeCapForTier(tier) * severityKFactorFor(severity))));
+  const kRng = forkFn(`disaster:k:${id}:${year}`);
+  const k = 1 + Math.floor((typeof kRng.random === 'function' ? kRng.random() : 0) * cap);
+  const targets = selectStrikeTargets({
+    institutions: /** @type {import('../spatial/calamity.js').StrikeInstitution[]} */ (settlement.institutions || []),
+    k: Math.min(k, cap),
+    rng: forkFn(`disaster:targets:${id}:${year}`),
+  });
+  // HARD BOUND: selectStrikeTargets filters `required` out BEFORE any draw.
+
+  // Institution fates + production reconcile (the M2 sever seam).
+  const roster = applyStrikeToRoster(/** @type {CalInstitution[]} */ (settlement.institutions || []), targets);
+  const prod = reconcileProductionAfterStrike(settlement.economicState, roster.removedNames);
+  let s = /** @type {CalSettlement} */ ({ ...settlement, institutions: roster.institutions, economicState: prod.economicState });
+
+  // Aggregate population loss (bounded, severity-scaled within the walls).
+  const popBefore = Math.max(0, Math.floor(num(s.population, 0)));
+  const loss = resolvePopulationLoss({
+    population: popBefore, density01, rng: forkFn(`disaster:pop:${id}:${year}`), severityScale: severityScaleFor(severity),
+  });
+  const afterDeaths = popBefore - loss.deaths;
+  s = {
+    ...s,
+    population: afterDeaths,
+    populationHistory: [
+      ...(Array.isArray(s.populationHistory) ? s.populationHistory.slice(-11) : []),
+      { tick, population: afterDeaths, delta: -loss.deaths, reason: 'Killed in the calamity.' },
+    ].slice(-12),
+  };
+  // EMERGENT tier demotion via popToTier (never forced): the tier follows the pop.
+  const demotedTier = popToTier(afterDeaths - loss.exodus);
+  if (TIER_ORDER.indexOf(demotedTier) >= 0 && TIER_ORDER.indexOf(demotedTier) < TIER_ORDER.indexOf(tier)) {
+    s = { ...s, tier: demotedTier };
+  }
+
+  // The BUCKET-NEUTRAL permanent stamp (also the cooldown record). `type` carries the
+  // cosmetic flavor hint (save-shape unchanged); optional DM `flavorText` is freetext.
+  const settlementName = String(item?.name || s.name || id);
+  const stamp = /** @type {CalStamp} */ ({
+    type: flavorHint, name: stampTitle(settlementName, year), year, tick,
+    deaths: loss.deaths, exodus: loss.exodus, k: targets.length, targets,
+    ...(flavorText ? { flavorText: String(flavorText) } : {}),
+  });
+  s = {
+    ...s,
+    calamityHistory: [
+      ...(Array.isArray(s.calamityHistory) ? s.calamityHistory.slice(-7) : []),
+      stamp,
+    ].slice(-8),
+  };
+  // The legitimacy hit → coup-readable pressure (existing mechanism).
+  s = withDisasterResponseCondition(s, tick);
+  return { settlement: /** @type {CalSettlement} */ (s), stamp, loss, roster, prod, flavorHint, settlementName };
+}
+
+// ── FORCE_CALAMITY — the registrable-shape DM verb (NOT registered; W-COMPOSER-2 lift) ─
+/**
+ * Resolve a FORCE_CALAMITY through the SAME kernel path as an organic strike (force ≡
+ * organic at the natural band). The severity band scales K + death/exodus WITHIN the
+ * existing walls; optional flavor freetext is cosmetic-only. Returns the strike result
+ * (settlement + stamp + loss + receipt fields); the caller (a future manifest-registered
+ * handler) threads the exodus dispatch + persistence through the same buildExodusOutcome
+ * path the organic loop uses. Deferred: the actual manifest registration + live handler
+ * wiring ride the W-COMPOSER-2 realm-verb lift (this is the registrable SHAPE only).
+ * @param {{ settlement: CalSettlement, item: CalSnapItem|undefined, id: string,
+ *   year: number, tick: number, forkFn: (k: string) => { random: () => number },
+ *   severity?: string|null, flavorText?: string|null }} args
+ */
+export function forceCalamityStrike({ settlement, item, id, year, tick, forkFn, severity, flavorText }) {
+  const band = String(severity || DEFAULT_CALAMITY_SEVERITY);
+  const result = resolveStrikeOnSettlement({
+    settlement, item, id, year, tick, forkFn,
+    severity: Object.prototype.hasOwnProperty.call(CALAMITY_SEVERITY_BANDS, band) ? band : DEFAULT_CALAMITY_SEVERITY,
+    flavorText,
+  });
+  return {
+    settlement: result.settlement,
+    stamp: result.stamp,
+    loss: result.loss,
+    receipt: {
+      id, kind: 'strike', forced: true, type: result.stamp.type, severity: band,
+      deaths: result.loss.deaths, exodus: result.loss.exodus,
+      k: result.stamp.targets.length, targets: result.stamp.targets,
+      removed: result.roster.removedNames, severedExports: result.prod.severedExports,
+      demotedTier: result.settlement.tier,
+    },
+  };
+}
+
+/**
+ * The FORCE_CALAMITY affordance-manifest ENTRY (registrable shape; NOT added to the
+ * AFFORDANCE_MANIFEST — that registration rides W-COMPOSER-2). Mirrors the manifest's
+ * entry-factory shape: type, family, scope, authority, dials (a severity BAND + a
+ * cosmetic flavor freetext), predicate, coversVetoCodes. The severity dial bands K/
+ * death/exodus within the existing walls; the flavor field is cosmetic-only. Pure.
+ * @returns {Record<string, unknown>}
+ */
+export function forceCalamityEntry() {
+  return Object.freeze({
+    type: 'FORCE_CALAMITY', family: 'War', scope: 'settlement', authority: 'dm_direct',
+    targetsFrom: null, entityKind: 'settlement', coversVetoCodes: [],
+    dials: [
+      { key: 'severity', kind: 'band', bandWords: { minor: 0.35, moderate: 0.6, severe: 0.85 }, default: DEFAULT_CALAMITY_SEVERITY, min: 0, max: 1, clampAtCommit: true, label: 'Severity' },
+      { key: 'flavor', kind: 'text', default: '', clampAtCommit: false, label: 'Flavor (optional, cosmetic)' },
+    ],
+    // A settlement can always suffer a calamity (the strike path is total over any roster).
+    predicate: () => ({ available: true, reasons: [], unlocks: [] }),
+  });
 }
 
 // ── The advance ───────────────────────────────────────────────────────────────
@@ -359,7 +495,7 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
 
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
   const n = items.length;
-  const hazard = annualHazard(n);
+  const base = annualHazard(n);
   const spatial = migrationActive(worldState);
 
   // Index the settlement updates by save id (the strike mutates THESE, the persisted set).
@@ -379,80 +515,51 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
     .map((it) => String(it.id))
     .sort();
 
+  // ── EXPOSURE LOADING (stage 0): redistribute the fixed realm hazard budget by a
+  // NORMALIZED terrain+dwell weight. The per-settlement hazard is base × factor where
+  // the factors mean to 1 across the realm ⇒ the realm-mean hazard equals annualHazard
+  // (the exposure-normalization pin). PURE, no rng: the `disaster:*` fork order is
+  // untouched — only the threshold each draw compares against moves. ──
+  const itemById = new Map(items.map((it) => [String(it.id), it]));
+  const rawExposure = ordered.map((id) => {
+    const it = itemById.get(id);
+    const priorStrikes = Array.isArray(it?.settlement?.calamityHistory) ? it.settlement.calamityHistory.length : 0;
+    return exposureMultiplier({ terrain: resolveSettlementTerrain(it), priorStrikes });
+  });
+  const normExposure = normalizeExposure(rawExposure);
+  /** @type {Map<string, { hazard: number, factor: number }>} */
+  const hazardById = new Map();
+  ordered.forEach((id, i) => hazardById.set(id, {
+    hazard: Math.min(1, base * (Number.isFinite(normExposure[i]) ? normExposure[i] : 1)),
+    factor: Number.isFinite(normExposure[i]) ? normExposure[i] : 1,
+  }));
+
   for (const id of ordered) {
-    const item = items.find((it) => String(it.id) === id);
+    const item = itemById.get(id);
     const snapSettlement = item?.settlement;
     if (!snapSettlement) continue;
     // Cooldown-via-stamp: the settlement's own history IS the record.
     if (withinCooldown(lastStampYear(snapSettlement), year)) continue;
-    // ONE seeded annual draw. Same year ⇒ same result (idempotent), so a re-run
-    // that re-crosses the boundary produces the identical strike.
+    // ONE seeded annual draw against this settlement's EXPOSURE-LOADED hazard. Same
+    // year ⇒ same result (idempotent), so a re-run that re-crosses the boundary
+    // produces the identical strike.
+    const exposure = hazardById.get(id) || { hazard: base, factor: 1 };
     const strikeRng = forkFn(`disaster:${id}:${year}`);
-    if (!rollStrike({ rng: strikeRng, hazard })) continue;
+    if (!rollStrike({ rng: strikeRng, hazard: exposure.hazard })) continue;
 
     const ui = updateIndex.get(id);
     if (ui === undefined) continue; // no persisted update for this settlement (skip safely)
-    let settlement = /** @type {CalSettlement} */ (nextUpdates[ui].settlement);
-    if (!settlement) continue;
+    const settlement0 = /** @type {CalSettlement} */ (nextUpdates[ui].settlement);
+    if (!settlement0) continue;
 
-    // ── Resolve the strike (all draws forked off the settlement-year seed). ──
-    const terrain = resolveSettlementTerrain(item);
-    const type = disasterTypeFor(terrain);
-    const typeLabel = type === 'flood' ? 'flood' : type === 'fire' ? 'fire' : type === 'quake' ? 'earthquake' : 'storm';
-    const density01 = density01Of(settlement);
-    const tier = String(settlement.tier || popToTier(num(settlement.population, 0)));
-    const cap = strikeCapForTier(tier);
-    const kRng = forkFn(`disaster:k:${id}:${year}`);
-    const k = 1 + Math.floor((typeof kRng.random === 'function' ? kRng.random() : 0) * cap);
-    const targets = selectStrikeTargets({
-      institutions: /** @type {import('../spatial/calamity.js').StrikeInstitution[]} */ (settlement.institutions || []),
-      k: Math.min(k, cap),
-      rng: forkFn(`disaster:targets:${id}:${year}`),
+    // ── Resolve the strike through the SHARED path (organic ≡ force at natural
+    // severity). All draws forked off the settlement-year seed; PROSE is bucket-
+    // neutral (the mechanism is type-blind, so is its voice). ──
+    const struck = resolveStrikeOnSettlement({
+      settlement: settlement0, item, id, year, tick, forkFn, severity: null,
     });
-    // HARD BOUND: no required institution can be a target — selectStrikeTargets
-    // filters `required` out BEFORE any draw, so it is structurally impossible to
-    // strike one (the required-never-selected invariant, test-asserted over a soak).
-
-    // ── Apply the institution fates + reconcile production (the M2 sever seam). ──
-    const roster = applyStrikeToRoster(
-      /** @type {CalInstitution[]} */ (settlement.institutions || []), targets);
-    const prod = reconcileProductionAfterStrike(settlement.economicState, roster.removedNames);
-    settlement = { ...settlement, institutions: roster.institutions, economicState: prod.economicState };
-
-    // ── Aggregate population loss (bounded): immediate deaths, then the exodus. ──
-    const popBefore = Math.max(0, Math.floor(num(settlement.population, 0)));
-    const loss = resolvePopulationLoss({ population: popBefore, density01, rng: forkFn(`disaster:pop:${id}:${year}`) });
-    const afterDeaths = popBefore - loss.deaths;
-    settlement = {
-      ...settlement,
-      population: afterDeaths,
-      populationHistory: [
-        ...(Array.isArray(settlement.populationHistory) ? settlement.populationHistory.slice(-11) : []),
-        { tick, population: afterDeaths, delta: -loss.deaths, reason: `Killed in the ${typeLabel}.` },
-      ].slice(-12),
-    };
-    // EMERGENT tier demotion via popToTier (never forced): the tier follows the pop.
-    const demotedTier = popToTier(afterDeaths - loss.exodus);
-    if (TIER_ORDER.indexOf(demotedTier) >= 0
-      && TIER_ORDER.indexOf(demotedTier) < TIER_ORDER.indexOf(tier)) {
-      settlement = { ...settlement, tier: demotedTier };
-    }
-
-    // ── The named permanent stamp (also the cooldown record). ──
-    const settlementName = String(item?.name || settlement.name || id);
-    const stamp = {
-      type, name: stampTitle(type, settlementName, year), year, tick,
-      deaths: loss.deaths, exodus: loss.exodus, k: targets.length, targets,
-    };
-    settlement = {
-      ...settlement,
-      calamityHistory: [
-        ...(Array.isArray(settlement.calamityHistory) ? settlement.calamityHistory.slice(-7) : []),
-        stamp,
-      ].slice(-8),
-    };
-    // ── The legitimacy hit → coup-readable pressure (existing mechanism). ──
-    settlement = withDisasterResponseCondition(settlement, typeLabel, tick);
+    const { stamp, loss, roster, prod, settlementName } = struck;
+    let settlement = struck.settlement;
 
     // Write the mutated settlement back into the update set.
     nextUpdates[ui] = { ...nextUpdates[ui], settlement };
@@ -461,7 +568,7 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
     // ── The mass exodus — route through M4's realized-debit path (conservation). ──
     if (loss.exodus > 0) {
       const exodusOutcome = buildExodusOutcome({
-        id, exodus: loss.exodus, spatial, snapshot, pIndex, tick, typeLabel,
+        id, exodus: loss.exodus, spatial, snapshot, pIndex, tick,
       });
       // Debit the origin (+ credit aspatial destinations) via the proven apply path,
       // source FIRST (the realized-fraction guard keys on the negative delta).
@@ -486,11 +593,16 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
     }
 
     receipts.push({
-      id, kind: 'strike', type, deaths: loss.deaths, exodus: loss.exodus,
-      k: targets.length, targets, removed: roster.removedNames, severedExports: prod.severedExports,
-      demotedTier: settlement.tier,
+      // `type` stays as the COSMETIC flavor hint (a structured display suggestion); the
+      // prose and title speak the bucket. `exposure` names the loaded geography, never
+      // a disaster kind (the exposure receipts pin).
+      id, kind: 'strike', type: stamp.type, exposure: Math.round(exposure.factor * 10000) / 10000,
+      deaths: loss.deaths, exodus: loss.exodus,
+      k: stamp.targets.length, targets: stamp.targets, removed: roster.removedNames,
+      severedExports: prod.severedExports, demotedTier: settlement.tier,
+      exposureNote: 'Struck where the geography is most exposed.',
     });
-    newsEntries.push(strikeNews(id, settlementName, stamp.name, typeLabel, loss, targets.length, tick, now));
+    newsEntries.push(strikeNews(id, settlementName, stamp.name, loss, stamp.targets.length, tick, now));
   }
 
   return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries, receipts };
@@ -503,12 +615,12 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
  * distributeMigrants credits (the existing population-flight term). applyMode 'auto'
  * so it passes the realized-debit (never-proposal) guard.
  * @param {{ id: string, exodus: number, spatial: boolean, snapshot: CalSnapshot,
- *   pIndex: CalPIndex, tick: number, typeLabel: string }} args
+ *   pIndex: CalPIndex, tick: number }} args
  * @returns {CalOutcome}
  */
-function buildExodusOutcome({ id, exodus, spatial, snapshot, pIndex, tick, typeLabel }) {
+function buildExodusOutcome({ id, exodus, spatial, snapshot, pIndex, tick }) {
   /** @type {CalPopDelta[]} */
-  const populationDeltas = [{ saveId: id, delta: -exodus, reason: `Fled the ${typeLabel}.` }];
+  const populationDeltas = [{ saveId: id, delta: -exodus, reason: 'Fled the calamity.' }];
   /** @type {CalOutcome['metadata']} */
   const metadata = { populationKind: 'emigration' };
   if (spatial) {
@@ -563,12 +675,14 @@ function applyExodusToUpdates(updates, updateIndex, outcome, originId) {
 
 /**
  * A calamity-strike wizard-news entry (house voice, AGGREGATE — no npc named).
+ * BUCKET-NEUTRAL: the prose names "a calamity" / "the exposed land", never a
+ * disaster kind (the mechanism is type-blind; the flavor is the DM's slot).
  * @param {string} id @param {string} settlementName @param {string} stampName
- * @param {string} typeLabel @param {{ deaths: number, exodus: number }} loss
+ * @param {{ deaths: number, exodus: number }} loss
  * @param {number} k @param {number} tick @param {string|null} now
  * @returns {Record<string, unknown>}
  */
-function strikeNews(id, settlementName, stampName, typeLabel, loss, k, tick, now) {
+function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
   return {
     id: `wizard_news.${tick}.calamity.${stablePart(id)}`,
     tick,
@@ -578,7 +692,7 @@ function strikeNews(id, settlementName, stampName, typeLabel, loss, k, tick, now
     severity: 0.8,
     score: 88,
     headline: stampName,
-    summary: `A ${typeLabel} has struck ${settlementName}: ${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin, about ${loss.deaths} dead, and many more take to the roads.`,
+    summary: `A calamity has struck ${settlementName}: ${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin, about ${loss.deaths} dead, and many more take to the roads.`,
     kind: 'applied',
     impactKind: 'calamity',
     channelType: 'disaster',
@@ -587,7 +701,7 @@ function strikeNews(id, settlementName, stampName, typeLabel, loss, k, tick, now
     channelIds: [],
     sourceEventId: `calamity.${id}.${tick}`,
     tags: ['world_pulse', 'calamity', 'disaster'],
-    reasons: [`The ${typeLabel} was the land's own — a legible destiny come due.`],
+    reasons: ['The calamity struck where the land lies most exposed — a reckoning of geography.'],
   };
 }
 
