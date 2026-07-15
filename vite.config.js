@@ -72,6 +72,22 @@ function computeEngineSharedDomain() {
   return new Set([...seen].map((p) => p.slice(ROOT.length)));
 }
 const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
+// OVER-INCLUSION TRIM (FP-G7, 2026-07-15): the derived closure above routes into
+// engine-core every domain module ANY generator imports — conservatively, even
+// modules NO first-paint code reaches. These leaves are generator-only /
+// lazy-only consumers (verified: no eager entry-closure edge reads them), so
+// they can ride the lazy `engine` chunk with the generators instead of sitting
+// eager in engine-core. Excised here so BOTH the chunk routing and the
+// eager-graph classifier (line ~143) agree. formatNumber is DELIBERATELY LEFT IN
+// (its ~27 lazy consumers risk shared-chunk churn — kept until measured worth it).
+// @guarded-by tests/build/vendorPdfLazy.test.js: engine-absent-from-closure +
+// the first-paint byte budget (re-entry of any of these reds one or the other).
+for (const frag of [
+  '/src/domain/customCategories.js',
+  '/src/domain/magicFilter.js',
+  '/src/domain/resolveTerrain.js',
+  '/src/domain/region/foldTradeCategories.js',
+]) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
   return false;
