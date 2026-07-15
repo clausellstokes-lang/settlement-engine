@@ -66,6 +66,13 @@ import {
 // per-archetype objective SETS + the non-war MOVE LEVERS, selected by the governing
 // seat's archetype when the political-depth marker (beliefsActive) is live.
 import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjective.js';
+// W-PEACE-1 (§14/§H): the CAUSAL REASONS layer's consumption seam. The typed
+// war/peace reason ledgers load the deploy / sue_for_peace weights (bounded,
+// centered-on-1.0 factors — ×1 exactly when the peace-engine gate is dark or no
+// case stands, so the dormant chooser is byte-identical), and the CHOSEN move's
+// receipt names the top reasons — the weights ARE the reasons.
+import { peaceCausalActive, warReasonFactor, warReasonsFor, topReasons } from './warReasons.js';
+import { peaceReasonFactor, peaceReasonsFor } from './peaceReasons.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -492,9 +499,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * the returned move set is IDENTICAL to Wave A's.
  * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number,
  *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number,
- *   objective?: import('./scoringObjective.js').ScoringObjective }} args
+ *   objective?: import('./scoringObjective.js').ScoringObjective,
+ *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -507,10 +515,13 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   // The best strength margin over any hostile target (−Infinity when none). Hoisted
   // so both `deploy` and the warlord levers read the SAME value; calling strengthFor
   // regardless of siege state is a pure cached lookup (no scored-output change).
+  // W-PEACE-1: the best-margin TARGET is tracked alongside (a pure record — no
+  // scored-output change) so the causal deploy factor reads the right pair.
   let bestMargin = -Infinity;
+  let bestTargetId = null;
   for (const targetId of ctx.hostileTargets) {
     const margin = sStrength - strengthFor(targetId);
-    if (margin > bestMargin) bestMargin = margin;
+    if (margin > bestMargin) { bestMargin = margin; bestTargetId = targetId; }
   }
 
   // defend — always legal. Strong when besieged or when the settlement is weak.
@@ -526,7 +537,16 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   // target (banded) when beliefs are live — so an over-confident misjudgment
   // marches, and a misinformed one holds.
   if (!ctx.homeBesieged && bestMargin > -Infinity && bestMargin > 0.05) {
-    scored.deploy = clamp01(O.deploy.base + bestMargin * O.deploy.marginGain + aggr * O.deploy.aggrGain - exhaustion * O.deploy.exhaustionDamp);
+    let deployScore = clamp01(O.deploy.base + bestMargin * O.deploy.marginGain + aggr * O.deploy.aggrGain - exhaustion * O.deploy.exhaustionDamp);
+    // W-PEACE-1 §H: the accumulated CASUS ledger loads the deploy weight against
+    // the best-margin target (bounded ≤ ×(1+WAR_FACTOR_W); ×1 exactly when the
+    // gate is dark or no case stands — the dormant expression above is untouched,
+    // so byte-identity holds).
+    if (causal && bestTargetId != null) {
+      const warMult = causal.warFor(String(bestTargetId));
+      if (warMult !== 1) deployScore = clamp01(deployScore * warMult);
+    }
+    scored.deploy = deployScore;
   }
 
   // sue_for_peace — GATED: S and ALL its vassals must be free (not besieged/
@@ -539,7 +559,19 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     // W-C1 item 1b: the peace-threshold reading is MISREAD toward chaos + rust (a delayed
     // or premature suit); read true (byte-identical) for a lawful, seasoned, deity-free realm.
     const perceived = perceivedPeaceExhaustion({ exhaustion, rng, tick, sId, chaosPull, rust });
-    scored.sue_for_peace = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
+    let peaceScore = clamp01(O.sueForPeace.base + perceived * O.sueForPeace.exhaustionGain - aggr * O.sueForPeace.aggrDamp);
+    // W-PEACE-1 §H: the accumulated CASUS PACIS ledger loads the peace weight —
+    // the strongest case across the conflicts S is actually in (codepoint-stable
+    // max; bounded ≤ ×(1+PEACE_FACTOR_W); ×1 exactly when dark ⇒ byte-identical).
+    if (causal) {
+      let peaceMult = 1;
+      for (const foeId of [...ctx.hostileTargets, ...ctx.besieging].map(String).sort()) {
+        const m = causal.peaceFor(foeId);
+        if (m > peaceMult) peaceMult = m;
+      }
+      if (peaceMult !== 1) peaceScore = clamp01(peaceScore * peaceMult);
+    }
+    scored.sue_for_peace = peaceScore;
   }
 
   // M9a NON-WAR LEVERS — enumerate the archetype's own moves (merchant reroute/
@@ -572,6 +604,19 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   return Object.keys(scored)
     .sort(codepoint)
     .map((move) => ({ move, score: scored[move] }));
+}
+
+/**
+ * W-PEACE-1 §14.4 (legibility of motive): the top typed reasons of a causal
+ * ledger entry, rendered as receipt lines for the decision that consumed them.
+ * Empty when the entry is null (gate dark / no case) ⇒ dormant receipts are
+ * byte-identical.
+ * @param {import('./warReasons.js').ReasonPairEntry | null} entry @param {string} label
+ * @returns {string[]}
+ */
+function causalReasonLines(entry, label) {
+  if (!entry) return [];
+  return topReasons(entry, 3).map((r) => `${label}: ${r.type} (${r.score.toFixed(2)}) — ${r.receipt}`);
 }
 
 /**
@@ -612,6 +657,11 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
     const reasons = [
       `Economic exhaustion ${exhaustion.toFixed(2)} drives ${name} to the table.`,
       'Sue-for-peace pulls the existing de-escalation levers (hostile_truce / wind-down).',
+      // W-PEACE-1 §14.4: name the typed peace reasons this suit consumed (empty when dark).
+      ...causalReasonLines(
+        peaceCausalActive(worldState) ? peaceReasonsFor(worldState, String(sId), String(target)) : null,
+        'Casus pacis',
+      ),
     ];
     if (perceived !== exhaustion) {
       const driver = chaosPull > 0 && rust > 0 ? "its patron's chaos and a rusty army"
@@ -667,6 +717,11 @@ function emitMove({ move, sId, item, ctx, tick, exhaustion, snapshot, strengthFo
       reasons: [
         `${name}'s strategy chooser selected an offensive deployment.`,
         ...(misjudgment ? [misjudgmentReason(misjudgment, name, targetName)] : []),
+        // W-PEACE-1 §14.4: name the typed war reasons this march consumed (empty when dark).
+        ...causalReasonLines(
+          peaceCausalActive(worldState) && target ? warReasonsFor(worldState, String(sId), String(target)) : null,
+          'Casus belli',
+        ),
       ],
       metadata: misjudgment ? { misjudgment } : undefined,
       condition: {
@@ -825,7 +880,16 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     // a seat archetype with no override ⇒ DEFAULT ⇒ byte-identical Wave-A scoring;
     // a merchant/church/warlord seat re-tunes the balance + adds its non-war levers.
     const objective = beliefActive ? objectiveForArchetype(governingCoalition(item).governing) : DEFAULT_SCORING_OBJECTIVE;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective });
+    // W-PEACE-1 §H: the causal reason ledgers load the deploy / sue_for_peace
+    // weights. NULL when the peace-engine gate is dark (peaceCausalActive reads
+    // the SAME worldState the ledgers live on) ⇒ the scorer is byte-identical.
+    const causal = peaceCausalActive(worldState)
+      ? {
+        warFor: (/** @type {string} */ targetId) => warReasonFactor(worldState, sId, targetId),
+        peaceFor: (/** @type {string} */ foeId) => peaceReasonFactor(worldState, sId, foeId),
+      }
+      : null;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);

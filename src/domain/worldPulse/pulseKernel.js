@@ -69,6 +69,8 @@ import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
+import { advanceWarReasons } from './warReasons.js';
+import { advancePeaceReasons } from './peaceReasons.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
@@ -1953,6 +1955,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
       }
     }
+  }
+  // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
+  // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,
+  // receipted REASONS FOR WAR accumulate per directed edge pair (grievance /
+  // revanchism / resource envy / encirclement / legitimacy hunger + the
+  // treaty-default and W-DOCTRINE corruption-exposure registration seams), and
+  // typed REASONS FOR PEACE accumulate per live war pair (exhaustion / the
+  // Blainey belief-convergence read / strangulation / coalition fracture /
+  // cross-pressured mediation / harvest / realignment). Both DORMANT behind
+  // peaceCausalActive (warLayerEnabled AND the virtual peaceEngineEnabled) ⇒
+  // complete no-ops (zero keys — the peace-causal dormancy golden proves the
+  // lit-war goldens never move). The §H loaded draw that CONSUMES the ledgers
+  // is the existing settlementStrategy softmax: the weights ARE the reasons.
+  {
+    const warCausal = advanceWarReasons({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      graph: applied.regionalGraph,
+      pIndex,
+      tick: worldState.tick,
+    });
+    if (warCausal.changed) memoryState = warCausal.worldState;
+  }
+  {
+    const peaceCausal = advancePeaceReasons({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      graph: applied.regionalGraph,
+      pIndex,
+      tick: worldState.tick,
+    });
+    if (peaceCausal.changed) memoryState = peaceCausal.worldState;
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
