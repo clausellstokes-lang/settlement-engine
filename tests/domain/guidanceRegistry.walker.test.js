@@ -158,11 +158,20 @@ describe('guidance census — every instructional component is registered or on 
 // ── (b) the title= ratchet baseline ─────────────────────────────────────────
 
 describe('title= ratchet — native OS tooltips are a shrink-only census', () => {
-  // Seeded at the measured count on 2026-07-15 (161 `title={` + 315 `title="`).
-  // The ~340 native title= tooltips are the largest uncounted instructional
-  // layer (§1); they migrate to the glossary affordance over waves. This baseline
-  // only ever moves DOWN — a NEW instructional title fails here.
-  const TITLE_BASELINE = 476;
+  // Seeded at 476 on 2026-07-15 (161 `title={` + 315 `title="`). The ~340 native
+  // title= tooltips are the largest uncounted instructional layer (§1); they
+  // migrate to the glossary affordance over waves. This baseline only ever moves
+  // DOWN — a NEW instructional title fails here.
+  //
+  // W-GUIDE-2 tranche 1 RATCHETED it 476 → 471: the HealthPip stability-band
+  // title migrated to the "what am I reading?" glossary affordance (SurveyorGlossary),
+  // and two WorldMapToolbar <select> titles that merely DUPLICATED their aria-label
+  // were dropped (redundant tooltip, no a11y loss). The remaining LivingWorldGates
+  // + WorldMapToolbar teaching titles are DEFERRED (documented): they sit on
+  // text-bearing controls where an aria-label swap would clobber the accessible
+  // name, so each needs per-title glossary-affordance wiring or inline-help — a
+  // larger careful pass, not a mechanical swap.
+  const TITLE_BASELINE = 471;
 
   function countTitles() {
     let n = 0;
@@ -278,17 +287,24 @@ describe('legacy-key migration pin — an old dismissal carries forward', () => 
   });
 });
 
-// ── (f) the register guard ──────────────────────────────────────────────────
+// ── (f) the register guard (the two-register voice law) ─────────────────────
 
-describe('register guard — the plain register never wears the notes costume', () => {
-  it('every W-GUIDE-1 whisper ships in the plain register (the notes register is W-GUIDE-2)', () => {
-    for (const w of GUIDANCE_WHISPERS) {
-      expect(w.register, `whisper ${w.id} register`).toBe('plain');
+describe('register guard — the two registers stay in their lanes', () => {
+  // W-GUIDE-2 lit the note register (the Surveyor's persona). Both registers are
+  // valid now (the surface/lane/register validity is pinned in the (a) test); the
+  // guard enforces that each stays in its lane: note whispers bind to the notes
+  // register; the plain register never borrows the persona.
+  it('every note-register whisper binds to the guidance.notes.* register', () => {
+    for (const w of GUIDANCE_WHISPERS.filter((x) => x.register === 'note')) {
+      expect(
+        w.body.startsWith('guidance.notes.'),
+        `note whisper ${w.id} body ${w.body} must be a guidance.notes.* key (the register binding)`,
+      ).toBe(true);
     }
   });
 
-  it('no plain-register body carries the Surveyor persona (the — S. signature or the notes eyebrow)', () => {
-    for (const w of GUIDANCE_WHISPERS) {
+  it('no PLAIN-register body carries the Surveyor persona (the — S. signature or the notes eyebrow)', () => {
+    for (const w of GUIDANCE_WHISPERS.filter((x) => x.register === 'plain')) {
       const copy = String(resolveCopy(w.body) || '');
       expect(copy, `plain whisper ${w.id} carries a persona sign-off`).not.toMatch(/—\s*S\.?$/);
       expect(copy.toUpperCase(), `plain whisper ${w.id} carries the notes eyebrow`).not.toContain('A NOTE FROM THE SURVEYOR');

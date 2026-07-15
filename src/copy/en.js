@@ -638,6 +638,96 @@ export const en = Object.freeze({
         body: 'Thorp through Metropolis. Each tier sets the institution count, NPC count, district count, and what kinds of stressors are likely. Bigger ≠ better; a thorp can carry one perfect hook better than a metropolis.',
       },
     },
+    // ── The Surveyor's-notes register (W-GUIDE-2, §4) ─────────────────────
+    // The in-world persona voice: scripted marginalia the map's keeper reads
+    // at rest-points. Second person REQUIRED (the register guard); UI-verbs
+    // (click/tap/button/menu) BANNED — those belong to the plain register.
+    // Selected by guidanceNotes.js (FNV-1a over a stable id); rendered by
+    // SurveyorNote.jsx (the ✦ eyebrow + serif prose + "— S." signature).
+    // Keys are addressed by guidanceNotes.NOTE_LINES; the walker binds both
+    // directions so prose and keys cannot drift.
+    notes: {
+      library: {
+        empty: {
+          a: 'Your shelves stand empty, and that is only the first morning of your survey — every realm here began exactly where yours does now.',
+          b: 'You have an empty study and a whole country to chart; start with one settlement and let the rest of your library grow around it.',
+        },
+        first: {
+          a: 'Your first settlement is on the shelf now — keep it, and it will still be here when you return to build the next.',
+          b: 'You have made your first mark; the settlements that follow will feel like neighbours to it, not strangers.',
+        },
+        onward: {
+          a: 'Your library has grown past a single page — try binding two of your settlements as neighbours, and watch their fortunes start to lean on one another.',
+          b: 'You have kept enough now to see the pattern in your own hand; the realm rewards a keeper who lets places touch.',
+        },
+      },
+      realm: {
+        empty: {
+          a: 'You are looking at an unmarked realm; set down your first holdings and the distances between them become something the simulation can read.',
+          b: 'Your map waits for its first settlement — once you place one, the roads, the borders, and the reach of each become yours to shape.',
+        },
+        first: {
+          a: 'You have set your first stone on the realm; freeze its geography when you are ready, and the world will remember where everything stands.',
+          b: 'Your realm has one fixed point now — the more you place, the more the country between them starts to matter.',
+        },
+        onward: {
+          a: 'You have a realm worth advancing; let a season pass and see which of your settlements thrives and which one you will need to tend.',
+          b: 'Your country has grown crowded enough to have its own weather — let time run, and read what the year does to the places you made.',
+        },
+      },
+      dossier: {
+        empty: {
+          a: 'You have not yet forged a place to read about; make one, and this page fills with a country of reasoning that is wholly yours.',
+          b: 'Your dossier stays unwritten until you generate; the moment you do, everything on it will have been decided for reasons you can inspect.',
+        },
+        first: {
+          a: 'You are reading the engine’s own reasoning here, not a tale told at you; every line was decided before you arrived.',
+          b: 'You will find no invented facts in your dossier — each figure was reasoned from the last, and you can trace any of them home.',
+        },
+        onward: {
+          a: 'You have read enough dossiers to argue with one; when a figure surprises you, follow it back and see what the engine weighed.',
+          b: 'Your eye has learned this page — look now for what the place is quietly straining under, and you will see its next year coming.',
+        },
+      },
+      simulation: {
+        empty: {
+          a: 'You hold a realm that has never yet been advanced; give it a season, and you will learn more of it than any single dossier can tell.',
+          b: 'Your country is holding its breath, unadvanced; let time pass through it and watch which of your choices the world decides to keep.',
+        },
+        first: {
+          a: 'You have let the world move for the first time — nothing here waits politely for you; a place you neglect will change on its own.',
+          b: 'Your realm has taken its first breath without you; return often, for the country keeps its own calendar whether you watch or not.',
+        },
+        onward: {
+          a: 'You have watched a few seasons turn; trust the pressures the engine raises, for they read the year better than a hunch of yours will.',
+          b: 'Your world has a memory now — what you let pass last season is quietly shaping the trouble you will meet in this one.',
+        },
+      },
+      floor: {
+        library: {
+          a: 'You are the keeper of this library, and it grows only as fast as your own hand fills it.',
+          b: 'Your shelves hold exactly the country you have chosen to make, and no more.',
+        },
+        realm: {
+          a: 'You hold the whole realm in your keeping; every place upon it stands where you set it.',
+          b: 'Your map is only as settled as you have made it, and it waits on your next mark.',
+        },
+        dossier: {
+          a: 'You can trust what your dossier tells you, because none of it was invented to please you.',
+          b: 'Your reading of a place goes only as deep as the questions you bring to it.',
+        },
+        simulation: {
+          a: 'You set the world in motion, and thereafter it keeps its own counsel between your visits.',
+          b: 'Your country lives on its own clock now, and it will not pause its year to wait for you.',
+        },
+      },
+    },
+    // ── Empty-state invitations, plain register (W-GUIDE-2 §8) ────────────
+    // House voice for the non-persona empty seams (realm dashboard). Software
+    // about software: no ✦, no "— S.", no second-person costume.
+    invitations: {
+      realm: 'A realm begins with a single holding. Place your first settlement, and the map starts reading the distances between them.',
+    },
   },
 
   // ── Account page ─────────────────────────────────────────────────────────
