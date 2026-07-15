@@ -238,3 +238,94 @@ export function structuralLens({ economicBase, governingArchetype, rulingPower }
     },
   };
 }
+
+// ── §I THE FACET LAW — the entity-classification CHOKEPOINT (owner-ratified 2026-07-14) ──
+// docs/DESIGN_COHESION_WEAVE.md §I: "DECLARED OVER INFERRED." Every coherence consumer that
+// must classify a CUSTOM entity resolves it HERE (declared ?? inferred ?? kind-default),
+// NEVER by grepping names directly — so a declared facet makes citizenship permanent and an
+// ABSENT facet degrades to today's keyword inference BYTE-IDENTICALLY (no golden shift; the
+// mint-time UX + the coverage walker land with W-COMPOSER-1). The generosity mover's
+// charity-roster read is this chokepoint's first consumer. Pure, total, zero-import.
+
+/** @typedef {{ name?: unknown, type?: unknown, category?: unknown, tags?: unknown, facets?: unknown }} FacetEntity */
+
+/**
+ * The bounded institution facet vocabularies (§I.1 — the engine's native content uses the
+ * SAME words). Each row: { value, rx } (the facet value + its keyword-inference pattern).
+ * Declaration always wins; these fire ONLY as the fallback for an entity that carries no
+ * declared facet. @type {Readonly<Record<string, ReadonlyArray<{ value: string, rx: RegExp }>>>}
+ */
+const FACET_INFERENCE = Object.freeze({
+  // nature: craft / faith / security / trade / vice / learning / civic (§I.1).
+  institutionNature: [
+    { value: 'faith', rx: /temple|shrine|church|monaster|chapel|cathedral|abbey|cloister|cult/i },
+    { value: 'security', rx: /barrack|garrison|watch|guard|militia|fort|citadel/i },
+    { value: 'trade', rx: /market|guild|exchange|bank|counting|merchant|bazaar/i },
+    { value: 'craft', rx: /forge|smith|workshop|foundry|mill|tannery|atelier/i },
+    { value: 'learning', rx: /librar|academy|college|school|scriptorium|university/i },
+    { value: 'vice', rx: /tavern|brothel|den|gambling|smuggl/i },
+    { value: 'civic', rx: /\bhall\b|court|assembly|council|magistrat/i },
+  ],
+  // functions: feeds / arms / moves-goods / hears-secrets / heals / judges (§I.1).
+  institutionFunction: [
+    { value: 'heals', rx: /almshouse|hospice|infirmary|hospital|healer|apothecar/i },
+    { value: 'feeds', rx: /granary|storehouse|kitchen|almon/i },
+    { value: 'arms', rx: /armor|arsenal|barrack|foundry|smith/i },
+    { value: 'judges', rx: /court|tribunal|magistrat|assize/i },
+  ],
+});
+
+/** Read a DECLARED facet off an additive-tolerant entity: a `facets{}` map or a
+ *  `facet:<kind>:<value>` tag (both absent on legacy customs ⇒ null ⇒ inference).
+ * @param {FacetEntity|null|undefined} entity @param {string} facetKind @returns {string|null} */
+function declaredFacet(entity, facetKind) {
+  if (!entity || typeof entity !== 'object') return null;
+  const facets = /** @type {{ [k: string]: unknown }} */ (
+    entity.facets && typeof entity.facets === 'object' && !Array.isArray(entity.facets) ? entity.facets : null);
+  if (facets && facetKind in facets) {
+    const v = facets[facetKind];
+    if (typeof v === 'string' && v !== '') return v;
+  }
+  const tags = Array.isArray(entity.tags) ? entity.tags : [];
+  const prefix = `facet:${facetKind}:`;
+  for (const t of tags) {
+    if (typeof t === 'string' && t.startsWith(prefix) && t.length > prefix.length) return t.slice(prefix.length);
+  }
+  return null;
+}
+
+/** The keyword-inference fallback (today's behavior). @param {FacetEntity|null|undefined} entity
+ *  @param {string} facetKind @returns {string|null} */
+function inferFacet(entity, facetKind) {
+  const table = /** @type {Record<string, ReadonlyArray<{ value: string, rx: RegExp }>>} */ (FACET_INFERENCE)[facetKind];
+  if (!table) return null;
+  const text = String(entity?.name ?? '') + ' ' + String(entity?.type ?? '') + ' ' + String(entity?.category ?? '');
+  if (!text.trim()) return null;
+  for (const row of table) { if (row.rx.test(text)) return row.value; }
+  return null;
+}
+
+/**
+ * THE ONE FACET CHOKEPOINT (§I.2): resolve an entity's coherence facet as
+ * DECLARED ?? INFERRED ?? kind-default(null). Absent declaration ⇒ byte-identical keyword
+ * inference; a declared facet makes a genre-blind custom entity a permanent citizen of the
+ * coherence. Pure, total. @param {FacetEntity|null|undefined} entity @param {string} facetKind
+ * @returns {string|null}
+ */
+export function facetOf(entity, facetKind) {
+  const declared = declaredFacet(entity, facetKind);
+  if (declared != null) return declared;
+  return inferFacet(entity, facetKind);
+}
+
+/**
+ * A settlement holds a CHARITY-CAPABLE roster (§2.1 conscience exception) when any institution
+ * resolves — through the facet chokepoint — to a faith NATURE or a healing FUNCTION (a temple /
+ * almshouse / hospice, declared or inferred). The generosity mover's §I-compliant read: a
+ * custom "Sanctuary of the Open Hand" declaring nature:faith counts, whatever its English.
+ * @param {ReadonlyArray<FacetEntity>|null|undefined} institutions @returns {boolean}
+ */
+export function hasCharityFacet(institutions) {
+  const insts = Array.isArray(institutions) ? institutions : [];
+  return insts.some((i) => facetOf(i, 'institutionNature') === 'faith' || facetOf(i, 'institutionFunction') === 'heals');
+}

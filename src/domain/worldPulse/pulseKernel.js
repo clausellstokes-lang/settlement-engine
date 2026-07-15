@@ -68,6 +68,7 @@ import { advanceCalamity } from './calamityKernel.js';
 import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
+import { advanceGenerosity } from './generosityKernel.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
@@ -1920,6 +1921,36 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       settlementUpdates = calamity.settlementUpdates;
       if (calamity.newsEntries.length) {
         wizardNews = appendWizardNewsEntries(wizardNews, calamity.newsEntries, { now });
+      }
+    }
+  }
+  // E1a-WIRE — THE GENEROSITY ENGINE (the constructive-flows mover). LAST of the movers,
+  // reading THIS tick's fully-settled distress landscape (famine, war, plague, calamity):
+  // for every qualifying pair (a needy allied/trade/vassal receiver + a giver that can
+  // spare, or a live obligation) the kernel weighs GIVE vs WITHHOLD (generosityEV — the
+  // mirror of greed, loaded dice §H), and on a gift moves grain CONSERVED (the giver's
+  // above-floor headroom only, so the hard reserve floor is never crossed), mints the
+  // obligation ("aid changes history", §7), banks the widow's-mite gratitude / fog-mediated
+  // refusal, and receipts every verdict. DORMANT behind the virtual constructiveFlowsEnabled
+  // flag ⇒ a complete no-op (zero forks, zero keys) — the aspatial AND spatial goldens stay
+  // byte-identical (the generosity dormancy golden proves it). AGGREGATE-only — grain, never
+  // named souls. Instruments beyond grain relief + the §9 write-couplings land with E1b.
+  {
+    const generosity = advanceGenerosity({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      pIndex,
+      graph: applied.regionalGraph,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (generosity.changed) {
+      memoryState = generosity.worldState;
+      settlementUpdates = generosity.settlementUpdates;
+      if (generosity.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
       }
     }
   }

@@ -9,6 +9,7 @@ import {
   QUADRANT_TUNING, ECONOMIC_BASES, RULING_POWERS,
   faithAlignmentQuadrant, crossPressureMediation,
   structuralLens, normalizeEconomicBase, rulingPowerFromArchetype,
+  facetOf, hasCharityFacet,
 } from '../../src/domain/spatial/cohesionWeave.js';
 
 describe('§B faith × alignment quadrants — the four named postures', () => {
@@ -91,5 +92,31 @@ describe('§C structural lenses — economic base × ruling power', () => {
     expect(normalizeEconomicBase('gibberish')).toBe('mixed');
     expect(RULING_POWERS).toContain(rulingPowerFromArchetype('criminal'));
     expect(rulingPowerFromArchetype('unknown')).toBe('mixed');
+  });
+});
+
+describe('§I THE FACET LAW — facetOf chokepoint (declared ?? inferred ?? default)', () => {
+  it('DECLARED wins over an inference that would say otherwise (facets map + facet tag)', () => {
+    // A "Grand Bazaar" would infer trade — a declared faith facet overrides it.
+    expect(facetOf({ name: 'Grand Bazaar', facets: { institutionNature: 'faith' } }, 'institutionNature')).toBe('faith');
+    expect(facetOf({ name: 'Grand Bazaar', tags: ['facet:institutionNature:faith'] }, 'institutionNature')).toBe('faith');
+  });
+  it('INFERENCE is the fallback only — a temple with no declared facet still reads faith (byte-identical to legacy)', () => {
+    expect(facetOf({ name: 'Temple of the Dawn' }, 'institutionNature')).toBe('faith');
+    expect(facetOf({ name: 'Almshouse' }, 'institutionFunction')).toBe('heals');
+  });
+  it('an unrecognized entity resolves to null (kind-default), never throws on garbage', () => {
+    expect(facetOf({ name: 'Nondescript Warehouse' }, 'institutionNature')).toBeNull();
+    expect(facetOf(null, 'institutionNature')).toBeNull();
+    expect(facetOf({}, 'unknownKind')).toBeNull();
+  });
+  it('hasCharityFacet: a custom-named sanctuary is charity-eligible by DECLARED facet, not English', () => {
+    // The §I dividend: genre-blind citizenship — a "Sanctuary of the Open Hand" that declares
+    // nature:faith counts even though its name matches no keyword pattern.
+    expect(hasCharityFacet([{ name: 'Sanctuary of the Open Hand', facets: { institutionNature: 'faith' } }])).toBe(true);
+    // Inference fallback still works for native content (a temple), and a plain market never counts.
+    expect(hasCharityFacet([{ name: 'Temple of the Dawn' }])).toBe(true);
+    expect(hasCharityFacet([{ name: 'Central Market' }])).toBe(false);
+    expect(hasCharityFacet([])).toBe(false);
   });
 });
