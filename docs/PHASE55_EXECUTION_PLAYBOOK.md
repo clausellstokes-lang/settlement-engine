@@ -103,6 +103,10 @@ simulation capability ships without its forceable dossier counterpart IN THE SAM
 verb, its same-function affordance predicate, its bounded dial schema, and its live preview
 (DESIGN_EVENT_COMPOSER_V2 §1 LAW 2; enforced fail-closed by the coverage walker once
 W-COMPOSER-1 lands). Freetext law: identity-minting + flavor only, never behavior selection.
+EXTENDED 2026-07-14 (owner): + THE FACET LAW (DESIGN_COHESION_WEAVE §I) — no coherence system
+ships without its custom-content on-ramp: declared-over-inferred facets, the facetOf chokepoint,
+the consumer walker, mint-time word-band questions. Custom entities are first-class citizens of
+every coherence, permanently.
 
 **SITUATION-WEIGHTED PRNG (owner ruling, 2026-07-14, binding on all future waves):** every
 stochastic draw = a seeded fork on a stable composite key AND a situation-weighted distribution

@@ -277,3 +277,60 @@ already made probable. Concretely:
 Existing practice already conforms (candidate-event rolls against modulated baseChance, the EV
 kernels, fidelity noise keyed to site/tick/decision, severity bands) — this section elevates it
 from practice to LAW so no future wave regresses to flat rolls where the situation has a voice.
+
+## I. THE FACET LAW (owner-ratified 2026-07-14 — custom content as a first-class citizen of every coherence)
+
+Owner directive, verbatim intent: "we should make sure that custom content is robust so that it
+can easily fit into or opt into all the various kinds of coherence."
+
+**The law: DECLARED OVER INFERRED.** Every custom entity carries explicit, BOUNDED coherence
+facets, chosen at mint time from the same vocabularies the engine's native content uses — and
+every coherence-consuming system reads declared facets FIRST, keyword inference as fallback
+only, and NEVER inference alone for custom entities. Inference-only citizenship degrades
+exactly as coherence deepens (every new E-wave reader is a place a custom entity silently
+vanishes from the world's attention); declaration makes citizenship permanent.
+
+### I.1 The facet vocabularies (data, beside the catalogs — genre-blind by construction)
+Per entity kind, a small bounded set, each with an inferred DEFAULT suggested at mint (the
+honest path is one click; the name stays free per the composer's identity-freetext law):
+- **Institutions:** nature (craft/faith/security/trade/vice/learning/civic/…), functions
+  (feeds/arms/moves-goods/hears-secrets/heals/judges/…), carrier? (does it move news — the
+  information engine's read), corruptibility class (the corruption climate's read), demandable-as
+  (tribute/access/nothing — the peace term catalog's prize read), district affinity (the map +
+  quarters read).
+- **Goods/resources:** class (the price/prize/supply-web read), criticality, carrier-lane
+  (does it move on smuggle routes).
+- **Factions:** archetype (the existing detector's vocabulary, declared), structural-lens row
+  (economic base × ruling power contribution), coalition-glue eligibility.
+- **Deities/creeds:** ALREADY COMPLIANT — alignment posture is a declared facet; the deity
+  system is this law's proof of concept. Extend nothing; imitate it everywhere.
+- **NPCs:** affiliation/secondary (exists), tie-type eligibility (§G's bounded vocabulary).
+- **Stressors/conditions (custom):** drama class (E0's registry read), severity band.
+
+### I.2 The consumer rule + the walker
+Every coherence consumer — quarters, defense buckets, corruption climate, carrier lanes,
+prize rankings, supply-web dependency, lenses, quadrants, coalition eligibility, tempo
+classes, the settlement map's renderer, Composer V2's target-first verb resolution and
+affordance predicates, analytics groupings — resolves customs via `facetOf(entity, facetKind)`
+(ONE chokepoint: declared ?? inferred ?? kind-default). A WALKER (shrink-only exemption
+ledger) pins that every registered coherence consumer routes through the chokepoint — a new
+E-wave reader that greps names directly fails the gate. Analytics reads FACETS, never custom
+names (id-free law extended: user inventions stay as private as user worlds).
+
+### I.3 The criterion extension (standing, playbook-mirrored)
+The COUNTERPART CRITERION gains one clause: **no coherence system ships without its
+custom-content on-ramp** — the wave that adds a reader adds its facet(s) to the vocabulary,
+its `facetOf` route, and its mint-time question (word-banded, defaulted). Surveyor S4 asks the
+same questions conversationally and PROPOSES facets, never silently invents them.
+
+### I.4 Dormancy + migration posture
+Facets are additive fields on shapes that already tolerate them (institutions carry tags[]
+and loose fields; SimFaction is additive-tolerant); ABSENT ⇒ today's inference behavior
+byte-identically (legacy customs lose nothing, gain on declaration). No migration; no golden
+shift; mint-time UX lands with W-COMPOSER-1's custom flows or the first E-wave that ships a
+custom-facing verb, whichever merges first.
+
+### I.5 The quiet dividend
+A declared facet is genre-blind: the "Security Directorate" joins the defense buckets no
+matter what English it's named in — this law is simultaneously the cheapest possible keeper of
+the genre-transfer door ([[owner aspiration, memory: genre packs]]).
