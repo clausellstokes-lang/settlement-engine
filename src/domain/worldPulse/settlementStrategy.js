@@ -83,6 +83,7 @@ import { peaceReasonFactor, peaceReasonsFor } from './peaceReasons.js';
 // settlement's decision weights toward its END (the SAME §H kernel, receipted in the
 // visible record). Dormant / no ruling bloc ⇒ factor 1.0 ⇒ byte-identical scoring.
 import { settlementPoliticsActive, blocDecisionFactor } from './settlementPolitics.js';
+import { makeCommitmentLoad, moveCourseRelation } from './momentum.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -548,9 +549,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   objective?: import('./scoringObjective.js').ScoringObjective,
  *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null,
  *   coalitionLoad?: { factorFor: (move: string) => number } | null,
+ *   commitmentLoad?: { factorFor: (move: string, targetId?: string|null) => number } | null,
  *   extractionEV?: { adjFor: (targetId: string) => number } | null }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, extractionEV = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, commitmentLoad = null, extractionEV = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -663,6 +665,24 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
   if (coalitionLoad) {
     for (const move of Object.keys(scored)) {
       const mult = coalitionLoad.factorFor(move);
+      if (mult !== 1) scored[move] = clamp01(scored[move] * mult);
+    }
+  }
+
+  // W-MOMENTUM §3.1: the COMMITMENT LOAD (the coalitionLoad idiom, one target in). A move
+  // consistent with a committed war/campaign course (deploy toward the best-margin target)
+  // is weighted UP; a course-REVERSING move (sue_for_peace) DOWN and, past the cliff, DIVIDED
+  // by the LIMIT CLAUSE (up to ÷CLIFF_MULT — the order-of-magnitude wall, finite). NULL when
+  // momentum is dormant OR the actor holds no committed course ⇒ every mult is 1 ⇒ the
+  // expression above is untouched ⇒ a below-cliff/uncommitted actor produces today's bytes.
+  if (commitmentLoad) {
+    for (const move of Object.keys(scored)) {
+      const relation = moveCourseRelation(move);
+      if (relation === 'neutral') continue;
+      // A consistent move binds to the best-margin target it is pursuing; a reversal reads
+      // the strongest committed course (targetId null ⇒ the deepest commitment resists).
+      const targetId = relation === 'consistent' ? bestTargetId : null;
+      const mult = commitmentLoad.factorFor(move, targetId);
       if (mult !== 1) scored[move] = clamp01(scored[move] * mult);
     }
   }
@@ -959,13 +979,17 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const coalitionLoad = settlementPoliticsActive(worldState)
       ? { factorFor: (/** @type {string} */ move) => blocDecisionFactor(worldState, String(sId), item, move) }
       : null;
+    // W-MOMENTUM §3.1: the commitment load (self-gating — NULL when momentum is dormant OR
+    // this actor holds no committed war/campaign course ⇒ the scorer is byte-identical).
+    // Its cliff folds the court's temperament (member TRAIT_MOMENTUM, importance-weighted).
+    const commitmentLoad = makeCommitmentLoad(worldState, item, String(sId), tick);
     // W-UPSWING §0.5: the extraction-upswing EV term loads the deploy score. NULL when
     // the upswing gate is dark (upswingArcsActive reads the SAME worldState) ⇒ the
     // deploy score is byte-identical dormant.
     const extractionEV = upswingArcsActive(worldState)
       ? { adjFor: (/** @type {string} */ targetId) => extractionUpswingAdj({ worldState, snapshot, conquerorId: String(sId), targetId }) }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, extractionEV });
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, commitmentLoad, extractionEV });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
