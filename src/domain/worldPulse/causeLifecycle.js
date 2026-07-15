@@ -50,6 +50,9 @@
 import { npcId } from './npcAgency.js';
 import { npcTraitPlane } from './clergyTraitPlane.js';
 import { hasRepressingDeity, npcHasTemperament } from '../corruption.js';
+// The resolver rides a LAZY leaf (see corruptionLeash.js); causeLifecycle is the
+// lazy engine chunk, so this import is free of first paint.
+import { resolveLeash } from '../corruptionLeash.js';
 import {
   readCauseContext, presentCauseClasses, causeIsClear,
   roleCauseAffinity, CAUSE_FAMILY_OF, CAUSE_LABEL_OF,
@@ -137,7 +140,11 @@ function institutionDestroyed(inst) {
  *  settlement's institution list (tolerant name match). null when the bearer names
  *  none or none matches. @param {SettlementLike} settlement @param {NpcLike} npc */
 function sustainingInstitution(settlement, npc) {
-  const name = npc?.corruptTies?.criminalInstitution || npc?.secondaryAffiliation || null;
+  // The LOCAL sustaining org resolved through the chokepoint (§1): a foreign
+  // leash has none locally (byte-identical — a betrayal traitor carries neither a
+  // criminalInstitution nor a secondaryAffiliation), a cutout resolves its front.
+  const leash = resolveLeash(/** @type {SimNpc} */ (npc));
+  const name = (leash.foreign ? null : leash.criminalInstitution) || npc?.secondaryAffiliation || null;
   if (!name) return null;
   const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const n = norm(name);

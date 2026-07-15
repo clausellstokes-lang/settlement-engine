@@ -7,6 +7,10 @@ import {
   patronageSecurityDrag, npcHomeInstitution, PATRONAGE_TUNING,
   hasCorruptingDeity, npcDeityDisfavor,
 } from '../corruption.js';
+// THE RESOLVER CHOKEPOINT (§1) rides a LAZY leaf, NOT eager corruption.js — see
+// corruptionLeash.js's first-paint note. npcAgency is the lazy engine chunk, so
+// this import adds nothing to first paint.
+import { resolveLeash } from '../corruptionLeash.js';
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the onset (flaw-expression)
 // pressure channel. Reads the settlement's TICK-START faithProfile.piety + patron plane
 // position; 1.0 (byte-identical) for a deity-free / legacy 3-axis / non-devout settlement.
@@ -777,7 +781,13 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       if (local.random() >= exposeP) return;
 
       const homeInstitution = npc.factionAffiliation || npc.factionLink || npc.institutionId || null;
-      const criminalInstitution = npc.corruptTies?.criminalInstitution || climate.criminalInstitutions[0] || null;
+      // Attribution is DELIBERATE through the resolver (§4). A LOCAL/cutout leash
+      // keeps today's read — the tied org, falling back to the climate's first
+      // criminal org — BYTE-IDENTICAL. A FOREIGN leash blames NO local org (the
+      // innocent-guild fix: a foreign conspirator's exposure never impairs the
+      // local guild); the foreign-consequence lane rides the leash instead.
+      const leash = resolveLeash(npc, item.settlement);
+      const criminalInstitution = leash.foreign ? null : (leash.criminalInstitution || climate.criminalInstitutions[0] || null);
       const atBottom = (s.dotRank || 1) <= 1;
 
       if (atBottom && local.random() < CORRUPTION_TUNING.outReplaceAtNotable) {
