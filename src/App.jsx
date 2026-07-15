@@ -52,11 +52,12 @@ const PurchaseModal = lazy(() => import('./components/PurchaseModal.jsx'));
 // static closure (first-paint byte budget).
 const CampaignSyncBanner = lazy(() => import('./components/CampaignSyncBanner.jsx'));
 
-// PostGenCoach + the two DEV panels are always-mounted but NOT first-paint
-// critical (the coach self-gates on first-settlement; the dev panels render null
-// in production). Lazy so their code + icon references stay off the entry's
-// static closure (first-paint byte budget — tests/build/vendorPdfLazy.test.js).
-const PostGenCoach   = lazy(() => import('./components/PostGenCoach.jsx'));
+// The two DEV panels are always-mounted but NOT first-paint critical (they
+// render null in production). Lazy so their code + icon references stay off the
+// entry's static closure (first-paint byte budget — tests/build/vendorPdfLazy.test.js).
+// (The post-generation coach was retired in W-GUIDE-1: a floating fixed dialog
+// violated the immersion law; its steps are now registered first_generate
+// whispers rendered in-flow at the dossier top — see guidanceRegistry.js §5.)
 const DevFlagPanel   = lazy(() => import('./components/dev/DevFlagPanel.jsx'));
 const DevEmailBanner = lazy(() => import('./components/dev/DevEmailBanner.jsx'));
 // Active pricing-moment card — inline, not a modal. Renders when a moment fires;
@@ -980,12 +981,6 @@ export default function App() {
           {onboardingNudge}
         </div>
       )}
-
-      {/* Post-generation onboarding coach — three-step "now what" walkthrough.
-          Self-gates on flag + first-settlement + not-dismissed state. */}
-      <Suspense fallback={null}>
-        <PostGenCoach />
-      </Suspense>
 
       {/* DEV-only panels: the feature-flag panel and the send-email
           "unconfigured" banner. DEV-gated so their modules never enter the

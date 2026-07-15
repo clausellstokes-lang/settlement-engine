@@ -96,10 +96,6 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'P117 / H-1: two-voice hero rewrite (anti-AI as H1 + italic deck translation).',
   },
-  onboardingDiet: {
-    default: true,
-    description: 'P118 / O-1: collapse the 4-system onboarding pile-up to Checklist + first-dossier callouts only. Suppresses OnboardingCoach + nudge toast when on.',
-  },
   wizardChromeDiet: {
     default: true,
     description: 'P119 / W-1: collapse 7 wizard chrome rows into one combined header.',
