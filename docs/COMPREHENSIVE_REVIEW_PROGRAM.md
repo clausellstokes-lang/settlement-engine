@@ -276,7 +276,17 @@ behavior, budget raises, golden regens.
   town the silver built hollows out when the vein dies). Implementer hazard named at capture:
   zero-resource edge cases — every consumer must tolerate a settlement whose resource list
   goes EMPTY (economy-tier derivation, supply-chain sources, display) — the census flags any
-  non-empty assumption.
+  non-empty assumption. OWNER LIFECYCLE RULINGS (same morning, verbatim): (1) "removal should
+  happen after extended periods of depleted state of a nonrenewable resource" — removal is
+  never sudden; it is the END STATE of a dwelled lifecycle, and ONLY for NONRENEWABLES. The
+  renewable/nonrenewable axis becomes a first-class resource fact: nonrenewables (ore veins,
+  quarries, gem seams) run productive → declining → DEPLETED (dwell) → REMOVED after extended
+  depletion; RENEWABLES (fisheries, timber, game) deplete under pressure but RECOVER when
+  pressure eases — they are never naturally removed (calamity/DM force may still strip them).
+  (2) "discovery has to organically be tied to the terrain or forced" — exactly two mint
+  paths: ORGANIC (the terrain-weighted latent pool; a draw inconsistent with local geography
+  is impossible, not merely rare) or FORCED (the DM verb). No third path; analytics/receipts
+  name which path minted every deposit.
 
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
