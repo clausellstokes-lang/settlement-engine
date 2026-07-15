@@ -17,6 +17,9 @@ const MIGRATION = join(ROOT, 'supabase', 'migrations', '020_gallery_public_priva
 const REPORTS_MIGRATION = join(ROOT, 'supabase', 'migrations', '021_gallery_reports.sql');
 const REPORT_MODERATION_MIGRATION = join(ROOT, 'supabase', 'migrations', '022_gallery_report_moderation.sql');
 const CHRONICLE_MIGRATION = join(ROOT, 'supabase', 'migrations', '032_gallery_public_chronicle.sql');
+const IMPORTABLE_MIGRATION = join(ROOT, 'supabase', 'migrations', '047_gallery_importable.sql');
+const IMPORT_RPC_MIGRATION = join(ROOT, 'supabase', 'migrations', '048_gallery_import_dossier.sql');
+const SAVES_JS = join(ROOT, 'src', 'lib', 'saves.js');
 const GALLERY_JS = join(ROOT, 'src', 'lib', 'gallery.js');
 const OUTPUT_CONTAINER_JSX = join(ROOT, 'src', 'components', 'OutputContainer.jsx');
 const SHARE_TO_GALLERY_JSX = join(ROOT, 'src', 'components', 'ShareToGallery.jsx');
@@ -168,6 +171,113 @@ describe('gallery client chronicle contract', () => {
   });
 });
 
+describe('gallery importable opt-in contract (migration 047)', () => {
+  const sql = () => readFileSync(IMPORTABLE_MIGRATION, 'utf8');
+
+  it('commits the importable flag migration', () => {
+    expect(existsSync(IMPORTABLE_MIGRATION)).toBe(true);
+  });
+
+  it('adds the column off by default (privacy-safe) and needs no new RLS for the write', () => {
+    const s = sql();
+    expect(s).toMatch(/add column if not exists gallery_importable boolean not null default false/);
+    // The owner-update RLS (001) authorizes the write; this migration adds no policy.
+    expect(s).not.toMatch(/create policy/i);
+  });
+
+  it('surfaces the flag on the detail read via drop-before-recreate (the 026/032 precedent)', () => {
+    const s = sql();
+    expect(s).toMatch(/drop function if exists public\.get_gallery_dossier\(text\)/);
+    // Positionally consistent: the new OUT column and its SELECT source sit in the
+    // same place (right after gallery_share_dm) in BOTH lists — a positional
+    // mismatch here would silently mis-map columns in a `language sql` RPC.
+    expect(s).toMatch(/gallery_share_dm boolean,\s*\n\s*gallery_importable boolean,/);
+    expect(s).toMatch(/s\.gallery_share_dm,\s*\n\s*s\.gallery_importable,/);
+    expect(s).toMatch(/grant execute on function public\.get_gallery_dossier\(text\) to authenticated, anon/);
+  });
+
+  it('does NOT weaken the data sanitizers — importable gates import, not what the viewer sees', () => {
+    const s = sql();
+    expect(s).toMatch(/public\._gallery_dm_full_json\(base\.j\)/);
+    expect(s).toMatch(/public\._gallery_sanitize_public_json\(base\.j\)/);
+    // Must not redefine the sanitizers (their denylists only grow, elsewhere).
+    expect(s).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
+  });
+});
+
+describe('gallery importable client contract', () => {
+  it('surfaces the flag from the read and writes it through the metadata patch', () => {
+    const js = readFileSync(GALLERY_JS, 'utf8');
+    const dossier = functionBody(js, 'sanitizeDossier');
+    expect(dossier).toMatch(/importable:\s*row\.gallery_importable === true/);
+    expect(js).toMatch(/patch\.gallery_importable = metadata\.importable === true/);
+  });
+
+  it('offers the import opt-in toggle in the share flow', () => {
+    const share = readFileSync(SHARE_TO_GALLERY_JSX, 'utf8');
+    expect(share).toMatch(/id="share-to-gallery-importable"/);
+    expect(share).toMatch(/Allow others to import this settlement/);
+  });
+
+  it('round-trips the column on save load (else the toggle reverts on reload)', () => {
+    const saves = readFileSync(SAVES_JS, 'utf8');
+    // Both the explicit select list AND the row mapping must carry it.
+    expect(saves).toMatch(/gallery_share_dm, gallery_importable,/);
+    expect(saves).toMatch(/gallery_importable:\s*row\.gallery_importable \|\| false/);
+  });
+});
+
+describe('gallery import RPC contract (migration 048)', () => {
+  const sql = () => readFileSync(IMPORT_RPC_MIGRATION, 'utf8');
+
+  it('commits the import RPC migration', () => {
+    expect(existsSync(IMPORT_RPC_MIGRATION)).toBe(true);
+  });
+
+  it('gates the import read on importable + public + auth, server-side', () => {
+    const body = sqlFunctionBody(sql(), 'public.import_gallery_dossier');
+    expect(body).toBeTruthy();
+    expect(body).toMatch(/s\.is_public = true/);
+    expect(body).toMatch(/s\.gallery_importable = true/);
+    expect(body).toMatch(/auth\.uid\(\) is not null/);
+  });
+
+  it('returns the SAME server-sanitized projection — never raw s.data, never the seed', () => {
+    const body = sqlFunctionBody(sql(), 'public.import_gallery_dossier');
+    // Same sanitizers as the viewer read.
+    expect(body).toMatch(/public\._gallery_dm_full_json\(base\.j\)/);
+    expect(body).toMatch(/public\._gallery_sanitize_public_json\(base\.j\)/);
+    // It must NOT return the generation seed (no regenerate-to-unsanitized path).
+    expect(body).not.toMatch(/\bseed\b/);
+    // SECURITY DEFINER + pinned search_path (the house pattern).
+    expect(sql()).toMatch(/security definer/);
+    expect(sql()).toMatch(/set search_path = public/);
+  });
+
+  it('is executable by authenticated users only, never anon', () => {
+    const s = sql();
+    expect(s).toMatch(/grant execute on function public\.import_gallery_dossier\(text\) to authenticated/);
+    expect(s).not.toMatch(/import_gallery_dossier\(text\) to authenticated, anon/);
+    expect(s).not.toMatch(/import_gallery_dossier\(text\) to anon/);
+  });
+});
+
+describe('gallery import client contract', () => {
+  it('reads the importer payload through the gated RPC', () => {
+    const js = readFileSync(GALLERY_JS, 'utf8');
+    expect(js).toMatch(/supabase\.rpc\('import_gallery_dossier'/);
+  });
+
+  it('the clone strips cross-settlement refs + the seed and stamps provenance', () => {
+    const slice = readFileSync(join(ROOT, 'src', 'store', 'campaignSlice.js'), 'utf8');
+    // The import action must neutralize the regeneration vector and back-link wiring.
+    expect(slice).toMatch(/importGallerySettlement/);
+    expect(slice).toMatch(/seed:\s*null/);
+    expect(slice).toMatch(/neighbourNetwork:\s*\[\]/);
+    expect(slice).toMatch(/importedFrom:\s*\{/);
+  });
+});
+
 describe('gallery report moderation contract', () => {
   it('commits the report moderation migration', () => {
     expect(existsSync(REPORTS_MIGRATION)).toBe(true);
@@ -199,5 +309,83 @@ describe('gallery report moderation contract', () => {
     expect(sql).toMatch(/grant execute on function public\.resolve_gallery_report\(uuid, text, text\) to authenticated/);
     expect(sql).not.toMatch(/grant execute on function public\.list_gallery_reports\(text, integer\) to authenticated, anon/);
     expect(sql).not.toMatch(/grant execute on function public\.resolve_gallery_report\(uuid, text, text\) to authenticated, anon/);
+  });
+});
+
+describe('per-member gallery overrides (migration 092)', () => {
+  const MEMBER_MIGRATION = join(ROOT, 'supabase', 'migrations', '092_gallery_member_overrides.sql');
+
+  it('migration 092 exists', () => {
+    expect(existsSync(MEMBER_MIGRATION)).toBe(true);
+  });
+
+  it('adds gallery_member_overrides as a default-{} json object column, no new RLS', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/add column if not exists gallery_member_overrides jsonb not null default '\{\}'::jsonb/);
+    expect(sql).toMatch(/check \(jsonb_typeof\(gallery_member_overrides\) = 'object'\)/);
+    // The owner-update RLS from 001 already authorizes the write — no new policy.
+    expect(sql).not.toMatch(/create policy/i);
+  });
+
+  it('does NOT redefine the base sanitizer / dm-full projection (denylists only grow elsewhere)', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
+    expect(sql).not.toMatch(/create or replace function public\._gallery_dm_full_json/);
+  });
+
+  it('defines the key + apply helpers and reuses the canonical sanitizer for the per-member strip', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/create or replace function public\._gallery_npc_key/);
+    expect(sql).toMatch(/create or replace function public\._gallery_apply_member_overrides/);
+    // The strip must reuse _gallery_sanitize_public_json (no hand-rolled allowlist that could drift).
+    expect(sql).toMatch(/_gallery_sanitize_public_json\(jsonb_build_object\('npcs'/);
+  });
+
+  it('forks BOTH net-current RPCs and routes their data through the override apply', () => {
+    const sql = readFileSync(MEMBER_MIGRATION, 'utf8');
+    expect(sql).toMatch(/create or replace function public\.get_gallery_dossier/);
+    expect(sql).toMatch(/create or replace function public\.import_gallery_dossier/);
+    // Both wrap their projection in the per-member apply; import passes for_import=true.
+    expect((sql.match(/_gallery_apply_member_overrides\(/g) || []).length).toBeGreaterThanOrEqual(2);
+    // The import gate (the settlement-importable wall) is preserved, not loosened.
+    expect(sql).toMatch(/and s\.gallery_importable = true\s*\n\s*and auth\.uid\(\) is not null/);
+  });
+
+  it('the client writes a shape-clamped column and round-trips it on load', () => {
+    const gallery = readFileSync(GALLERY_JS, 'utf8');
+    expect(gallery).toMatch(/patch\.gallery_member_overrides = clampMemberOverrides\(metadata\.memberOverrides\)/);
+    const saves = readFileSync(SAVES_JS, 'utf8');
+    expect(saves).toMatch(/gallery_member_overrides/);
+  });
+});
+
+describe('per-member override leak fix (migration 093)', () => {
+  const FIX_MIGRATION = join(ROOT, 'supabase', 'migrations', '093_gallery_member_overrides_fix.sql');
+
+  it('migration 093 exists', () => {
+    expect(existsSync(FIX_MIGRATION)).toBe(true);
+  });
+
+  it('the base projection follows the SETTLEMENT flag only (no promotion on a member reveal)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    // The fixed base CASE keys on gallery_share_dm alone, NOT "OR _gallery_member_reveals_any".
+    expect(sql).toMatch(/case when s\.gallery_share_dm then public\._gallery_dm_full_json\(base\.j\) else public\._gallery_sanitize_public_json\(base\.j\) end/);
+    // The buggy promotion pattern (base goes DM-full when ANY member reveals) is gone...
+    expect(sql).not.toMatch(/gallery_share_dm\s+or\s+public\._gallery_member_reveals_any/i);
+    // ...and the helper that drove it is dropped.
+    expect(sql).toMatch(/drop function if exists public\._gallery_member_reveals_any/);
+  });
+
+  it('the apply helper takes a dm_full splice source (reveals a member without widening the base)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    expect(sql).toMatch(/_gallery_apply_member_overrides\(\s*base jsonb,\s*dm_full jsonb/);
+    // A revealed member is spliced from dm_full's npcs by key, not by promoting the base.
+    expect(sql).toMatch(/from jsonb_array_elements\(dm_full -> 'npcs'\)/);
+  });
+
+  it('still does NOT redefine the base sanitizers (denylists only grow elsewhere)', () => {
+    const sql = readFileSync(FIX_MIGRATION, 'utf8');
+    expect(sql).not.toMatch(/create or replace function public\._gallery_sanitize_public_json/);
+    expect(sql).not.toMatch(/create or replace function public\._gallery_dm_full_json/);
   });
 });

@@ -8,28 +8,43 @@
  */
 
 import { useState } from 'react';
-import { ShieldCheck, AlertTriangle, Skull, Boxes, Info } from 'lucide-react';
 import { useStore } from '../../store/index.js';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import { BAND_COLOR, BAND_HINT } from '../../domain/state/bands.js';
 import { INK, MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 
 const DIM_META = {
-  resilience:       { label: 'Resilience',        Icon: ShieldCheck,    higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
-  volatility:       { label: 'Volatility',        Icon: AlertTriangle,  higherIsBetter: false, desc: 'How close is internal conflict?' },
-  externalThreat:   { label: 'External Threat',   Icon: Skull,          higherIsBetter: false, desc: 'Pressure from outside.' },
-  resourcePressure: { label: 'Resource Pressure', Icon: Boxes,          higherIsBetter: false, desc: 'Are key materials strained?' },
+  resilience:       { label: 'Resilience',        higherIsBetter: true,  desc: 'Can the place absorb shocks?' },
+  volatility:       { label: 'Volatility',        higherIsBetter: false, desc: 'How close is internal conflict?' },
+  externalThreat:   { label: 'External Threat',   higherIsBetter: false, desc: 'Pressure from outside.' },
+  resourcePressure: { label: 'Resource Pressure', higherIsBetter: false, desc: 'Are key materials strained?' },
 };
 
 const DIM_ORDER = ['resilience', 'volatility', 'externalThreat', 'resourcePressure'];
 
 export default function SystemStateBar() {
   const systemState = useStore(s => s.systemState);
-  const [openKey, setOpenKey] = useState(null);
-
   if (!systemState) return null;
+  return <SystemStateGrid systemState={systemState} />;
+}
 
+/**
+ * Presentational 4-dimension grid (UX overhaul Phase 2). The store-bound
+ * SystemStateBar above and the read-view ReadSystemStateBar below both render
+ * through this, so the promoted read-view strip and the edit-mode bar share ONE
+ * visual. Pure — takes the already-derived systemState; no store read.
+ * @param {{ systemState: any, title?: string }} props
+ */
+export function SystemStateGrid({ systemState, title = 'Settlement State' }) {
+  const [openKey, setOpenKey] = useState(null);
+  // The four dimension tiles sit two-up on desktop. At mobile width that pair of
+  // columns crushes each band label and number into an unreadable sliver, so the
+  // grid stacks to a single column below the breakpoint. Desktop is unchanged.
+  const isMobile = useIsMobile();
+  if (!systemState) return null;
   return (
     <div
+      data-testid="system-state-grid"
       style={{
         background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
         padding: SP.sm,
@@ -41,10 +56,9 @@ export default function SystemStateBar() {
         color: MUTED, letterSpacing: '0.06em', textTransform: 'uppercase',
         marginBottom: SP.xs,
       }}>
-        Settlement State
-        <Info size={11} style={{ opacity: 0.6 }} />
+        {title}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: SP.sm }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: SP.sm }}>
         {DIM_ORDER.map(key => {
           const dim = systemState[key];
           if (!dim) return null;
@@ -65,7 +79,6 @@ export default function SystemStateBar() {
 
 function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
   const meta = DIM_META[dimKey];
-  const Icon = meta.Icon;
   const color = BAND_COLOR[dim.band] || MUTED;
   // For "lower is better" dims (volatility, threat, pressure), render
   // the bar from the right so bigger values look heavier and a "good"
@@ -92,7 +105,6 @@ function DimensionRow({ dimKey, dim, isOpen, onToggle }) {
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-        <Icon size={12} color={color} />
         <span style={{ fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans }}>
           {meta.label}
         </span>

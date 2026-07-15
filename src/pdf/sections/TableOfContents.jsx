@@ -6,7 +6,7 @@
  * a simple two-column row per entry: zero-padded number, chapter title, and
  * optional muted note (e.g. "narrative + raw" hint).
  *
- * Page numbers are intentionally omitted in P0 — react-pdf can resolve them
+ * Page numbers are intentionally omitted for now — react-pdf can resolve them
  * via @react-pdf/renderer's bookmark / pageNumber API in a later polish pass.
  */
 import { View, Text } from '@react-pdf/renderer';

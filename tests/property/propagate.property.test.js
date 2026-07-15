@@ -10,6 +10,12 @@
  * event into an infinite loop or a flat earthquake. These properties
  * lock the two safety knobs (damping, maxHops) and the topology guard
  * (visited set against cycles) at the input-space level.
+ *
+ * Because this is the highest-risk module, every property runs at 300
+ * fast-check cases (not the earlier 20–30). The input space here is a
+ * scalar severity × short causeId, so 300 cases still complete in a few
+ * hundred ms while genuinely exercising the severity/damping arithmetic
+ * across the whole [0.1, 1] range rather than sampling a handful of points.
  */
 
 import { describe, test, expect } from 'vitest';
@@ -53,7 +59,7 @@ describe('propagateImpairment (property-based)', () => {
         },
       });
       expect(totalImpairments(next)).toBe(before);
-    }), { numRuns: 30 });
+    }), { numRuns: 300 });
   });
 
   test('lower damping produces equal-or-smaller propagated severity', () => {
@@ -90,7 +96,7 @@ describe('propagateImpairment (property-based)', () => {
       const sevLow  = low.factions[0].impairments?.[0]?.severity ?? 0;
       const sevHigh = high.factions[0].impairments?.[0]?.severity ?? 0;
       expect(sevLow).toBeLessThanOrEqual(sevHigh + 1e-9);
-    }), { numRuns: 30 });
+    }), { numRuns: 300 });
   });
 
   test('terminates with bounded impairment count under cycle-friendly topology', () => {
@@ -124,7 +130,7 @@ describe('propagateImpairment (property-based)', () => {
       // at most once by propagation (the visited set guarantees it).
       // So total propagated impairments ≤ 4.
       expect(totalImpairments(next)).toBeLessThanOrEqual(4);
-    }), { numRuns: 30 });
+    }), { numRuns: 300 });
   });
 
   // Bonus: maxHops=0 disables propagation entirely.
@@ -146,6 +152,6 @@ describe('propagateImpairment (property-based)', () => {
         opts: { maxHops: 0 },
       });
       expect(totalImpairments(next)).toBe(0);
-    }), { numRuns: 20 });
+    }), { numRuns: 300 });
   });
 });

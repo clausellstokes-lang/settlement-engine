@@ -1,5 +1,5 @@
 /**
- * CoverImageField.jsx — gallery cover picker (§3).
+ * CoverImageField.jsx — gallery cover picker.
  *
  * Replaces the old "paste an image URL" input with a proper file flow:
  *   choose a file (button) OR drag-and-drop → landscape pan/zoom crop
@@ -9,13 +9,21 @@
  *
  * The parent (ShareToGallery / gallery edit form) keeps owning the URL string;
  * this component only ever calls onChange(url) with a public URL or ''.
+ *
+ * Storage lifecycle: this component ONLY uploads — it never deletes. onChange
+ * updates the parent's DRAFT state; the published row keeps pointing at the
+ * previous URL until the parent persists, and a mid-session save can persist
+ * any draft. Deleting the superseded object here would strand a live public
+ * cover on a dead URL whenever the user cancels, navigates away, or the save
+ * fails. Cleanup of replaced objects belongs at persist time (the parent's
+ * save path); an orphaned object is harmless (see imageUpload.js).
  */
 import { useEffect, useRef, useState } from 'react';
-import { ImagePlus, UploadCloud, Trash2, AlertCircle } from 'lucide-react';
+import { ImagePlus, Trash2 } from 'lucide-react';
 
 import ImageCropper from './ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
-import { validateImageFile, uploadGalleryCover, removeGalleryCover } from '../../lib/imageUpload.js';
+import { validateImageFile, uploadGalleryCover } from '../../lib/imageUpload.js';
 import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, RED, sans, FS, R, SP } from '../theme.js';
 
 const COVER_ASPECT = 16 / 9;
@@ -64,12 +72,11 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
   const onCommit = async (blob) => {
     setBusy(true); setError(null);
     try {
-      const prev = value;
       const { url } = await uploadGalleryCover(blob, { ownerId, settlementId });
       onChange?.(url);
       closeCropper();
-      // Best-effort: drop the previous upload we just replaced.
-      if (prev && prev !== url) removeGalleryCover(prev);
+      // Deliberately NO delete of the replaced URL: the published row may
+      // still point at it until the parent persists this draft (see header).
     } catch (e) {
       setError(e.message || 'Upload failed.');
     } finally {
@@ -78,9 +85,9 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
   };
 
   const onRemove = () => {
-    const prev = value;
+    // Draft-only: clearing the field must not delete the storage object — the
+    // published row still references it until the parent saves (see header).
     onChange?.('');
-    if (prev) removeGalleryCover(prev);
   };
 
   // ── Cropping ──────────────────────────────────────────────────────────────
@@ -139,7 +146,6 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
           fontFamily: sans, fontSize: FS.xxs, transition: 'border-color 120ms, background 120ms',
         }}
       >
-        <UploadCloud size={20} style={{ color: dragOver ? GOLD : MUTED }} />
         <span style={{ color: INK, fontWeight: 800 }}>Drag an image here, or click to choose a file</span>
         <span style={{ color: MUTED }}>You’ll crop it to a landscape cover. JPEG, PNG, WebP, or GIF · up to 8&nbsp;MB.</span>
       </div>
@@ -152,7 +158,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
 function ErrorLine({ text }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: RED, fontFamily: sans, fontSize: FS.xxs }}>
-      <AlertCircle size={12} /> {text}
+      {text}
     </span>
   );
 }

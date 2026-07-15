@@ -1,7 +1,7 @@
 /**
  * useReturnVisit.js — Detect a return-visit and surface the prior settlement.
  *
- * The critique's X-9: when a free user comes back 24+ hours after their
+ * Per the critique: when a free user comes back 24+ hours after their
  * last visit, the hero today is identical to the first-visit hero. They
  * get no acknowledgment of what they last did, no welcome-back, no
  * follow-up. A free user who came back is a future paying user — treat

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Flag, X } from 'lucide-react';
 
 import {
@@ -8,7 +8,6 @@ import {
   CARD_ALT,
   ELEV,
   FS,
-  GOLD,
   INK,
   R,
   RED,
@@ -18,6 +17,7 @@ import {
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import { REPORT_REASON_OPTIONS } from './galleryUtils.js';
 
 export default function GalleryReportDialog({ dossier, auth, disabled, onReport }) {
@@ -26,6 +26,12 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
   const [body, setBody] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(null);
+
+  // Inherit the primitives' modal focus trap (focus-in, Tab cycling, Escape,
+  // focus restore) instead of hand-rolling it. Escape is ignored while a report
+  // is mid-flight so the user can't dismiss an in-progress submit.
+  const onCancel = useCallback(() => { if (!busy) setOpen(false); }, [busy]);
+  const dialogRef = useDialogFocusTrap(open, onCancel);
 
   const requestOpen = async () => {
     if (!auth?.user) {
@@ -73,7 +79,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
         <div
           role="presentation"
           onMouseDown={event => {
-            if (event.target === event.currentTarget && !busy) setOpen(false);
+            if (event.target === event.currentTarget) onCancel();
           }}
           style={{
             position: 'fixed',
@@ -87,6 +93,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
           }}
         >
           <form
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="Report settlement"
@@ -108,12 +115,12 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
               borderBottom: `1px solid ${BORDER}`,
               background: CARD_ALT,
             }}>
-              <Flag size={16} color={GOLD} />
               <h2 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.lg, fontWeight: 950 }}>
-                Report Settlement
+                Report settlement
               </h2>
               <IconButton
                 Icon={X}
+                glyph="×"
                 label="Close"
                 tone="ghost"
                 size="lg"
@@ -130,7 +137,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                   value={reason}
                   onChange={event => setReason(event.target.value)}
                   style={{
-                    minHeight: 38,
+                    minHeight: 44,
                     border: `1px solid ${BORDER}`,
                     borderRadius: R.md,
                     background: CARD_ALT,

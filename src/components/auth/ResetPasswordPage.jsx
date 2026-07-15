@@ -9,6 +9,7 @@
  */
 import { navigate } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
+import { t } from '../../copy/index.js';
 import AuthPanel, { AUTH_MODE_VIEW } from './AuthPanel.jsx';
 import { AuthPageShell, FooterLink } from './authUI.jsx';
 
@@ -18,7 +19,7 @@ export default function ResetPasswordPage() {
   return (
     <AuthPageShell
       title="Reset your password"
-      subtitle="We'll email you a secure link to set a new one."
+      subtitle={t('auth.resetPageSubtitle')}
       footer={
         <span>
           Remembered it?{' '}

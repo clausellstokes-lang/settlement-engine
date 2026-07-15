@@ -57,6 +57,35 @@ describe('compromisedSecurityInstitutions()', () => {
     expect(covert).toHaveLength(0);
   });
 
+  test('a COVERT corruption impairment (an institution-scope Impose) stays covert, never revealed', () => {
+    // The covert mark an individual_institution Impose stamps must NOT read as a
+    // public scandal — otherwise it would drag exposure-proximity scrutiny onto
+    // the very NPC it was meant to conceal. This pins the covert flag is honored.
+    const s = settlementWith({
+      institutions: [{ ...WATCH, impairments: [{ type: 'corruption', severity: 0.3, covert: true }] }, GUILD],
+    });
+    const { covert, revealed } = compromisedSecurityInstitutions(s);
+    expect(covert).toContain('City Watch');
+    expect(revealed).toHaveLength(0);
+    // And patronage drag must not surface it on the revealed channel.
+    expect(patronageSecurityDrag(s).revealed).toHaveLength(0);
+  });
+
+  test('a non-covert impairment still wins when stacked with a covert one (a later scandal is public)', () => {
+    const s = settlementWith({
+      institutions: [{
+        ...WATCH,
+        impairments: [
+          { type: 'corruption', severity: 0.3, covert: true },
+          { type: 'corruption', severity: 0.45 }, // a public scandal landed later
+        ],
+      }, GUILD],
+    });
+    const { covert, revealed } = compromisedSecurityInstitutions(s);
+    expect(revealed).toContain('City Watch');
+    expect(covert).toHaveLength(0);
+  });
+
   test('an ousted NPC no longer compromises anything covertly', () => {
     const s = settlementWith({
       institutions: [WATCH],

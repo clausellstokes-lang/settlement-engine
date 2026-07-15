@@ -21,6 +21,7 @@ import { FS, swatch } from './theme.js';
 import { BookOpen, History, RotateCcw, Sparkles, Zap, X } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
 // ── Visual tokens, aligned with SettlementDetail / Primitives ────────────────
 const BORDER = swatch['#E0D0B0'];
@@ -65,9 +66,9 @@ function absoluteTime(iso) {
 }
 
 // Chip with label + icon.
-function Chip({ color, Icon, children, filled = false }) {
+function Chip({ color, Icon, children, filled = false, title }) {
   return (
-    <span style={{
+    <span title={title} style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
       padding: '2px 8px', borderRadius: 11, fontSize: FS.xxs, fontWeight: 800,
       fontFamily: 'Nunito, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase',
@@ -85,6 +86,11 @@ function Chip({ color, Icon, children, filled = false }) {
 // ── Full-entry modal ─────────────────────────────────────────────────────────
 
 function FullEntryModal({ entry, onClose }) {
+  // Shared modal focus management: focus-in, Tab cycling, Escape-to-close, and
+  // focus restore on unmount — the same contract PurchaseModal/AuthModal use.
+  // Replaces the hand-rolled backdrop + card role=button (no focus trap, no
+  // Escape) that this component carried before.
+  const dialogRef = useDialogFocusTrap(!!entry, onClose);
   if (!entry) return null;
   const s = entry.aiSettlement || {};
   const dl = entry.aiDailyLife || {};
@@ -116,12 +122,9 @@ function FullEntryModal({ entry, onClose }) {
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click-to-close; keyboard dismissal (Escape) is handled by useDialogFocusTrap.
     <div
-      role="button"
-      tabIndex={0}
-      aria-label="Close chronicle entry"
       onClick={onClose}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.55)',
@@ -129,12 +132,14 @@ function FullEntryModal({ entry, onClose }) {
         padding: 20,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events -- handler only stops propagation to the backdrop, not real interactivity; keyboard dismissal (Escape) is handled by useDialogFocusTrap */}
       <div
-        role="button"
-        tabIndex={0}
+        ref={dialogRef}
+        tabIndex={-1}
+        role="dialog"
+        aria-modal="true"
         aria-label="Chronicle entry details"
         onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           width: '100%', maxWidth: 720, maxHeight: '85vh', display: 'flex', flexDirection: 'column',
@@ -244,7 +249,12 @@ function EntryCard({ entry, onOpen }) {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
         <Chip color={meta.color} Icon={meta.Icon}>{meta.label}</Chip>
-        <Chip color={isFull ? '#6a2a9a' : MUTED}>{isFull ? 'Full' : 'Summary'}</Chip>
+        <Chip
+          color={isFull ? '#6a2a9a' : MUTED}
+          title={isFull
+            ? 'Full snapshot retained. Open Read full to re-read the whole narrative.'
+            : 'Thesis kept, the full snapshot rotated out. Summaries hold the through-line, not the full prose.'}
+        >{isFull ? 'Full' : 'Summary'}</Chip>
         <span style={{ fontSize: FS['10.5'], color: MUTED, fontFamily: 'Nunito, sans-serif' }} title={absoluteTime(entry.createdAt)}>
           {relativeTime(entry.createdAt)}
         </span>
@@ -283,7 +293,11 @@ export default function ChroniclePanel({ entries }) {
   const summaryCount = list.length - fullCount;
 
   return (
-    <div style={{ marginBottom: 14, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
+    // No self-margin: this panel is placed in a gap'd flex column (the lifecycle
+    // cluster), so the parent's gap owns the spacing — a baked-in marginBottom
+    // double-counted it and broke the spacing rhythm (P5). The border stays: this
+    // is a genuinely-interactive collapsible (a click target earns it).
+    <div style={{ border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden' }}>
       <button
         type="button"
         aria-expanded={open}

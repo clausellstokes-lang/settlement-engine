@@ -13,6 +13,8 @@ import { navigate, navigatePath } from '../../hooks/useRoute.js';
 import { viewToPath } from '../../lib/routes.js';
 import AuthPanel, { AUTH_MODE_VIEW } from './AuthPanel.jsx';
 import { AuthPageShell, FooterLink } from './authUI.jsx';
+import { getTierDisplayName } from '../../config/pricing.js';
+import { t } from '../../copy/index.js';
 
 function readNext() {
   if (typeof window === 'undefined') return '/create';
@@ -35,7 +37,11 @@ export default function RegisterPage() {
   return (
     <AuthPageShell
       title="Create your account"
-      subtitle="Free to start. Save your work, push to larger sizes, and link settlements."
+      // Route through the shared signup subtitle token (P11): the page formerly
+      // hand-wrote a second, weaker register subtitle, drifting from the one the
+      // modal/panel already use. Wording itself stays owned by the copy/voice
+      // workstream — this is the structural cross-surface-consistency fix.
+      subtitle={t('auth.signupSubtitle', { tier: getTierDisplayName('free') })}
       footer={
         <span>
           Already have an account?{' '}

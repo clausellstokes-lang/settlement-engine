@@ -13,24 +13,35 @@
  */
 import { getVisibleTiers, getTierDisplayName } from '../config/pricing.js';
 import { t, tx } from '../copy/index.js';
-import { GOLD, GOLD_DEEP, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R } from './theme.js';
+import { GOLD_TXT, INK, BODY, BORDER, sans, serif_, FS, SP, PROSE_MAX } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 export default function AnonTierTeaser({ onSignIn }) {
   const tiers = getVisibleTiers();
 
+  // One quiet comparison strip subordinate to the unlock card's headline, not
+  // three bordered cards inside the hero's own bordered card. A single top
+  // hairline fences the whole teaser off as a group; the tiers below are
+  // borderless clusters separated by spacing. Width is routed through the shared
+  // prose cap so the columns reflow cleanly (auto-fit) to one legible column on
+  // narrow widths instead of stranding a 2+1 orphan.
   return (
-    <div style={{ marginTop: SP.lg, textAlign: 'center' }}>
+    <div style={{
+      maxWidth: PROSE_MAX, margin: `${SP.lg}px auto 0`,
+      paddingTop: SP.lg, borderTop: `1px solid ${BORDER}`,
+      textAlign: 'center',
+    }}>
       <div style={{
         fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.10em',
-        textTransform: 'uppercase', color: GOLD_DEEP, marginBottom: SP.md,
+        textTransform: 'uppercase', color: GOLD_TXT, marginBottom: SP.lg,
       }}>
         What a free account unlocks
       </div>
 
       <div style={{
-        display: 'flex', gap: SP.md, flexWrap: 'wrap', justifyContent: 'center',
-        textAlign: 'left',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(196px, 1fr))',
+        gap: SP.lg, textAlign: 'left',
       }}>
         {tiers.map(tier => {
           const name = getTierDisplayName(tier.legacyKey) || t(`pricing.tiers.${tier.key}.name`);
@@ -41,32 +52,34 @@ export default function AnonTierTeaser({ onSignIn }) {
           const emphasised = tier.key === 'cartographer';
 
           return (
+            // Borderless cluster: tight intra-tier spacing carries the grouping
+            // the card border used to. The recommended tier reads as recommended
+            // via its name in GOLD_TXT, not via a competing box or a second
+            // solid-gold primary.
             <article
               key={tier.key}
               style={{
-                flex: '1 1 200px', minWidth: 196, maxWidth: 232,
-                background: CARD,
-                border: emphasised ? `2px solid ${GOLD}` : `1px solid ${BORDER}`,
-                borderRadius: R.lg,
-                padding: SP.lg,
-                display: 'flex', flexDirection: 'column', gap: SP.sm,
+                display: 'flex', flexDirection: 'column', gap: SP.xs,
               }}
             >
-              <div style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>
+              <div style={{
+                fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
+                color: emphasised ? GOLD_TXT : INK,
+              }}>
                 {name}
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
                 <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK, lineHeight: 1 }}>
                   {priceLabel}
                 </span>
-                {priceSub && <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>{priceSub}</span>}
+                {priceSub && <span style={{ fontSize: FS.xs, color: BODY, fontFamily: sans }}>{priceSub}</span>}
               </div>
               {tagline && (
                 <p style={{ margin: 0, fontSize: FS.xs, color: BODY, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
                   {tagline}
                 </p>
               )}
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: `${SP.xs}px 0 0`, display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
                 {features.map((f, i) => (
                   <li key={i} style={{ fontSize: FS.xs, color: BODY, lineHeight: 1.4 }}>
                     {'·'} {f}
@@ -75,8 +88,8 @@ export default function AnonTierTeaser({ onSignIn }) {
               </ul>
               <Button
                 type="button"
-                onClick={onSignIn}
-                variant={emphasised ? 'primary' : 'gold'}
+                onClick={() => onSignIn?.()}
+                variant="gold"
                 size="md"
                 fullWidth
               >

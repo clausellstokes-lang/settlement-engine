@@ -8,8 +8,10 @@
 ## The gate
 
 Everything runs through `npm run check` (validate data/edge/map → typecheck → lint →
-~4,500 tests → build) plus the Playwright `e2e` job. Both run in CI
-(`.github/workflows/ci.yml`) on every PR to `master`/`main`.
+the full Vitest suite → build) plus the Playwright `e2e` job. Both run in CI
+(`.github/workflows/ci.yml`) on every PR to `master`/`main`. The test count grows
+every PR; the authoritative number is whatever the CI run reports, not a figure
+pinned here.
 
 **CI must be the only path to production.** To enforce that (a one-time maintainer
 action in the GitHub UI — it cannot be set from the repo):

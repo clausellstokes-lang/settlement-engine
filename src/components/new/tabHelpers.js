@@ -6,8 +6,14 @@ export function computeChainSets(settlement) {
   const impaired   = new Set();
   const degraded   = new Set();
   const vulnerable = new Set();
+  // Services whose supply gap is actively MET by magical trade infrastructure
+  // (a teleportation circle / airship dock bypassing the severed road). These are
+  // NOT impaired — the magic is supplying them — so they get their own set (and a
+  // blue "Magical Infrastructure" tag) instead of a red IMPAIRED one, and drop out
+  // of every impairment count.
+  const magicalInfra = new Set();
   const depReasons = new Map(); // service/inst name → {resource, impact, severity}
-  if (!settlement) return { tradeDeps, impaired, degraded, vulnerable, depReasons };
+  if (!settlement) return { tradeDeps, impaired, degraded, vulnerable, magicalInfra, depReasons };
 
   const deps = settlement.economicState?.tradeDependencies || [];
   const route = settlement.config?.tradeRouteAccess || 'road';
@@ -15,27 +21,39 @@ export function computeChainSets(settlement) {
   const hasSiege = stresses.some(s => s?.type === 'under_siege');
   const isIsolated = route === 'isolated';
 
+  // The generator marks a dependency met THROUGH magical trade infrastructure with a
+  // dedicated impact copy ("Supplied via magical trade infrastructure: …") and drops
+  // its severity to 'vulnerable'. Without this check the isolated-route trigger below
+  // (`|| isIsolated`) would mislabel every such service IMPAIRED even though the
+  // teleport/airship channel is actively covering it. The phrase is unique to the
+  // magical branch — the severed / no-access / plain-vulnerable copies never use it.
+  const isMagicallySupplied = (impact) => /magical trade infrastructure/i.test(impact || '');
+
   deps.forEach(dep => {
     const inst = dep.institution || '';
     tradeDeps.add(inst);
     const reason = { resource: dep.resource, impact: dep.impact, inst };
+    const magical = isMagicallySupplied(dep.impact);
     (dep.affectedServices || []).forEach(svc => {
-      if (dep.severity === 'critical' || hasSiege || isIsolated) {
+      if (magical) {
+        magicalInfra.add(svc); magicalInfra.add(inst);
+      } else if (dep.severity === 'critical' || hasSiege || isIsolated) {
         impaired.add(svc); impaired.add(inst);
-        if (!depReasons.has(svc)) depReasons.set(svc, reason);
-        if (!depReasons.has(inst)) depReasons.set(inst, reason);
       } else if (dep.severity === 'high') {
         degraded.add(svc); degraded.add(inst);
-        if (!depReasons.has(svc)) depReasons.set(svc, reason);
-        if (!depReasons.has(inst)) depReasons.set(inst, reason);
       } else {
         vulnerable.add(svc); vulnerable.add(inst);
-        if (!depReasons.has(svc)) depReasons.set(svc, reason);
-        if (!depReasons.has(inst)) depReasons.set(inst, reason);
       }
+      if (!depReasons.has(svc)) depReasons.set(svc, reason);
+      if (!depReasons.has(inst)) depReasons.set(inst, reason);
     });
   });
-  return { tradeDeps, impaired, degraded, vulnerable, depReasons };
+  // Magical-infrastructure supply takes precedence: a service actively covered by a
+  // teleport/airship channel is not impaired/degraded/vulnerable even if a second,
+  // non-magical dependency would otherwise flag it — so it drops out of those sets
+  // (and their counts).
+  for (const item of magicalInfra) { impaired.delete(item); degraded.delete(item); vulnerable.delete(item); }
+  return { tradeDeps, impaired, degraded, vulnerable, magicalInfra, depReasons };
 }
 
 // ── foodNarrative ─────────────────────────────────────────────────────────────
@@ -45,8 +63,8 @@ export function foodNarrative(fb, config) {
   const deficit = fb.deficit > 0;
   const pct = fb.deficitPercent || 0;
   if (!deficit) return null; // Let the surplus path use its inline fallback
-  if (route === 'isolated') return `Isolated with a ${pct}% food deficit — no trade routes to cover the gap. Any supply disruption becomes an immediate survival crisis.`;
-  if (route === 'port') return `Imports ${pct}% of food needs via port. Sea supply is reliable until it isn't — a blockade or naval threat converts this dependency into a famine countdown.`;
+  if (route === 'isolated') return `Isolated with a ${pct}% food deficit. No trade routes cover the gap, so any supply disruption becomes an immediate survival crisis.`;
+  if (route === 'port') return `Imports ${pct}% of food needs via port. Sea supply is reliable until it isn't. A blockade or naval threat converts this dependency into a famine countdown.`;
   if (route === 'river') return `River supply covers ${pct}% of food needs. Upstream disruption propagates downstream within weeks.`;
   return null; // Let inline fallback handle standard road/crossroads
 }

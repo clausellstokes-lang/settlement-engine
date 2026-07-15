@@ -172,6 +172,27 @@ describe('applyTierOutcomeToSettlement — apply-time tier re-verify', () => {
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('town', 'city', 'promotion')).tier).toBe('city');
     expect(applyTierOutcomeToSettlement(implicit, tierOutcome('village', 'town', 'promotion'))).toBe(implicit);
   });
+
+  it('the anti-churn promotion floor bump leaves a populationHistory breadcrumb', () => {
+    // Eligibility promotes at pop >= nextTier.min * 0.92, so a 4700-strong town is
+    // promoted BELOW the city floor (5001) and bumped up to it. That mint is
+    // deliberate, but it must be visible to the chronicle/audit surfaces.
+    const town = settlement('Ashford', { tier: 'town', population: 4700 });
+    const next = applyTierOutcomeToSettlement(town, tierOutcome('town', 'city', 'promotion'));
+
+    expect(next.population).toBe(5001);
+    expect(next.populationHistory.at(-1)).toMatchObject({
+      delta: 301,
+      population: 5001,
+      outcomeId: 'candidate.tier.promotion.a.4',
+    });
+
+    // A promotion already at/above the new floor mints nothing — no breadcrumb.
+    const big = settlement('Ashford', { tier: 'town', population: 6000 });
+    const bigNext = applyTierOutcomeToSettlement(big, tierOutcome('town', 'city', 'promotion'));
+    expect(bigNext.population).toBe(6000);
+    expect(bigNext.populationHistory).toBeUndefined();
+  });
 });
 
 describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => {
@@ -213,5 +234,47 @@ describe('evaluateTierResourceDynamics — pending tier proposal dedupe', () => 
     const result = evaluateTierResourceDynamics(promotionWorldState([pendingTierProposal('applied')]), promotionSnapshot(), undefined, { tick: 9 });
 
     expect(result.candidates.some(candidate => candidate.candidateType === 'tier_promotion')).toBe(true);
+  });
+});
+
+// Pin: the tier change honors majorChangesRequireProposal, consistent with
+// resource_depletion in the same module. Under the conservative default (flag
+// on) it stays a DM proposal; a campaign that opts out of proposal gating (flag
+// off, e.g. dramatic_campaign) gets it auto-applied. Deterministic — the
+// candidate's applyMode is fixed by the flag, no RNG involved.
+describe('evaluateTierResourceDynamics — tier change honors majorChangesRequireProposal', () => {
+  function promotionWorldState(majorChangesRequireProposal) {
+    return {
+      tick: 8,
+      simulationRules: { majorChangesRequireProposal },
+      settlementTickStates: { a: { tierDrift: { direction: 'promotion', toTier: 'city', streak: 4 } } },
+      proposals: [],
+    };
+  }
+
+  function promotionSnapshot() {
+    return { settlements: [item('a', settlement('Ashford', { tier: 'town', population: 4700 }), 0)] };
+  }
+
+  function tierCandidateFor(majorChangesRequireProposal) {
+    const result = evaluateTierResourceDynamics(
+      promotionWorldState(majorChangesRequireProposal),
+      promotionSnapshot(),
+      undefined,
+      { tick: 9 },
+    );
+    return result.candidates.find(candidate => candidate.candidateType === 'tier_promotion');
+  }
+
+  it('proposes the tier change when majorChangesRequireProposal is true (the default)', () => {
+    const candidate = tierCandidateFor(true);
+    expect(candidate).toBeTruthy();
+    expect(candidate.applyMode).toBe('proposal');
+  });
+
+  it('auto-applies the tier change when majorChangesRequireProposal is false', () => {
+    const candidate = tierCandidateFor(false);
+    expect(candidate).toBeTruthy();
+    expect(candidate.applyMode).toBe('auto');
   });
 });

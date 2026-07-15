@@ -28,8 +28,7 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch } from './theme.js';
-import { Cog, Feather, ChevronRight, ChevronDown } from 'lucide-react';
+import { FS, swatch, sans, serif_ } from './theme.js';
 import { useStore } from '../store/index.js';
 import { metaForStep } from '../generators/steps/stepMetadata.js';
 import { tracesByStep } from '../domain/trace.js';
@@ -49,9 +48,7 @@ function StepRow({ entry, isLast, traces }) {
   const [open, setOpen] = useState(false);
   const meta = metaForStep(entry.id);
   const isAi = entry.kind === 'ai';
-  const Icon = isAi ? Feather : Cog;
   const color = isAi ? QUILL_COLOR : COG_COLOR;
-  const Chevron = open ? ChevronDown : ChevronRight;
   const stepTraces = Array.isArray(traces) ? traces : [];
 
   return (
@@ -67,16 +64,16 @@ function StepRow({ entry, isLast, traces }) {
           width: 1, background: RAIL_BORDER,
         }} />
       )}
-      {/* Icon */}
-      <span style={{
-        position: 'absolute', left: 0, top: 2,
-        width: 22, height: 22, borderRadius: '50%',
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        background: swatch.white, border: `1px solid ${color}`,
-        color,
-      }}>
-        <Icon size={12} aria-hidden="true" />
-      </span>
+      {/* Timeline node — a dot on the thread whose FILL encodes the step kind in
+          a non-colour channel (P7): a solid violet dot for an AI refinement
+          step, a hollow amber ring for a procedural step. The legend above
+          mirrors the same fill-vs-outline grammar, so the mapping survives a
+          grayscale read. */}
+      <span aria-hidden="true" style={{
+        position: 'absolute', left: 5, top: 7,
+        width: 12, height: 12, borderRadius: '50%',
+        background: isAi ? color : swatch.white, border: `1px solid ${color}`,
+      }} />
       {/* Row content (clickable to expand) */}
       <button
         type="button"
@@ -85,15 +82,17 @@ function StepRow({ entry, isLast, traces }) {
         style={{
           display: 'block', width: '100%', textAlign: 'left',
           background: 'transparent', border: 'none', cursor: 'pointer',
-          padding: 0, color: INK,
-          fontFamily: 'Nunito, system-ui, sans-serif',
+          padding: '4px 0', minHeight: 44, color: INK,
+          fontFamily: sans,
         }}
       >
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <span style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>
             {meta.label}
           </span>
-          <Chevron size={11} color={MUTED} style={{ flexShrink: 0, transform: 'translateY(1px)' }} aria-hidden="true" />
+          <span aria-hidden="true" style={{ flexShrink: 0, color: MUTED, fontWeight: 700, fontSize: FS.sm, lineHeight: 1 }}>
+            {open ? '−' : '+'}
+          </span>
         </div>
         {entry.summary && (
           <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45 }}>
@@ -104,14 +103,14 @@ function StepRow({ entry, isLast, traces }) {
           <div style={{
             fontSize: FS.xs, fontStyle: 'italic',
             color: MUTED, marginTop: 6,
-            fontFamily: 'Crimson Text, Georgia, serif',
+            fontFamily: serif_,
             lineHeight: 1.55,
           }}>
             {meta.description}
           </div>
         )}
         {/* Trace decisions — only rendered when the step has emitted
-            structured traces (Tier 2.1). Today only assembleInstitutions
+            structured traces. Today only assembleInstitutions
             emits these; the rest of the pipeline will adopt incrementally.
             Each trace is rendered as a small block: "what was decided"
             on top, then the bullet causes, then downstream effects. */}
@@ -138,7 +137,7 @@ function StepRow({ entry, isLast, traces }) {
                           <div style={{
                             fontSize: FS['10.5'], fontStyle: 'italic',
                             color: MUTED, marginTop: 1,
-                            fontFamily: 'Crimson Text, Georgia, serif',
+                            fontFamily: serif_,
                           }}>
                             {c.reason}
                           </div>
@@ -174,7 +173,7 @@ function StepRow({ entry, isLast, traces }) {
 
 // ── Simulation spine card ──────────────────────────────────────────────────
 // Sits at the top of the rail, above the step list. Seven-line distillation
-// of the settlement's causal identity (Tier 2.5). Renders only when at
+// of the settlement's causal identity. Renders only when at
 // least one spine line is non-placeholder.
 
 function SimulationSpine({ settlement }) {
@@ -190,7 +189,7 @@ function SimulationSpine({ settlement }) {
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
         borderRadius: 4,
-        fontFamily: 'Nunito, system-ui, sans-serif',
+        fontFamily: sans,
       }}
     >
       <div style={{
@@ -211,7 +210,7 @@ function SimulationSpine({ settlement }) {
             </dt>
             <dd style={{
               margin: 0, fontSize: FS.sm, color: BODY, lineHeight: 1.5,
-              fontFamily: 'Crimson Text, Georgia, serif',
+              fontFamily: serif_,
             }}>
               {body}
             </dd>
@@ -239,13 +238,13 @@ export default function PipelineRail({ compact = false }) {
         border: `1px solid ${RAIL_BORDER}`,
         borderRadius: 8,
         padding: compact ? '12px 14px' : '16px 18px',
-        fontFamily: 'Nunito, system-ui, sans-serif',
+        fontFamily: sans,
       }}
     >
       <header style={{ marginBottom: 12 }}>
         <h3 style={{
           margin: 0,
-          fontFamily: 'Crimson Text, Georgia, serif',
+          fontFamily: serif_,
           fontSize: FS['18'], fontWeight: 600, color: INK,
         }}>
           {t('pipeline.title')}
@@ -253,7 +252,7 @@ export default function PipelineRail({ compact = false }) {
         <p style={{
           margin: '4px 0 0',
           fontSize: FS.sm, fontStyle: 'italic', color: BODY,
-          fontFamily: 'Crimson Text, Georgia, serif',
+          fontFamily: serif_,
           lineHeight: 1.5,
         }}>
           {t('pipeline.subtitle')}
@@ -267,11 +266,18 @@ export default function PipelineRail({ compact = false }) {
           textTransform: 'uppercase', letterSpacing: '0.04em',
         }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <Cog size={11} color={COG_COLOR} aria-hidden="true" />
+            {/* Hollow ring = procedural, mirroring the procedural step nodes. */}
+            <span aria-hidden="true" style={{
+              width: 9, height: 9, borderRadius: '50%',
+              background: swatch.white, border: `1px solid ${COG_COLOR}`,
+            }} />
             {t('pipeline.cogLabel')}
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
-            <Feather size={11} color={QUILL_COLOR} aria-hidden="true" />
+            {/* Solid dot = AI refinement, mirroring the AI step nodes. */}
+            <span aria-hidden="true" style={{
+              width: 9, height: 9, borderRadius: '50%', background: QUILL_COLOR,
+            }} />
             {t('pipeline.quillLabel')}
           </span>
         </div>

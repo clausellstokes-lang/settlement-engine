@@ -25,6 +25,7 @@ import {
   deriveDailyLife,
   summarizeDailyLife,
   supportedDailyLifeSlots,
+  __test__ as dailyLifeInternals,
 } from '../../src/domain/dailyLife.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
@@ -251,6 +252,55 @@ describe('outsider_impressions behavior', () => {
       config: { monsterThreat: 'plagued' },
     });
     expect(s.references.some(r => r.type === 'threat')).toBe(true);
+  });
+
+  // Five-lens policy: outsider-visible prose may only reflect the five
+  // DM-facing lenses (food/defense/governance/healing/magic). An internal
+  // labor/craft/transport shortage is real for the simulation but must not
+  // surface as visible prose — matching the AI payload's CANONICAL lenses
+  // in aiGrounding.js. Drive the deriver directly so we control the bands.
+  describe('five-lens visible-capacity boundary', () => {
+    const ctxBase = {
+      threats: [],
+      profiles: [],
+    };
+    const SHORTAGE = 'civic services run short';
+
+    function bandsCtx(bands) {
+      return { ...ctxBase, capacities: { bands } };
+    }
+
+    it('does NOT surface an internal labor/craft/transport shortage', () => {
+      const s = dailyLifeInternals.deriveOutsiderImpressions({}, bandsCtx({
+        labor: 'collapsed',
+        craft: 'critical',
+        transport: 'strained',
+        // every visible lens healthy
+        food_production: 'adequate',
+        defense: 'adequate',
+        administrative: 'adequate',
+        healing: 'adequate',
+        magical: 'adequate',
+        religious_welfare: 'collapsed',
+      }));
+      expect(s.text).not.toContain(SHORTAGE);
+    });
+
+    it('DOES surface a shortage across three visible lenses', () => {
+      const s = dailyLifeInternals.deriveOutsiderImpressions({}, bandsCtx({
+        food_production: 'strained',
+        defense: 'critical',
+        administrative: 'collapsed',
+        healing: 'adequate',
+        magical: 'adequate',
+        // internal lenses healthy
+        labor: 'adequate',
+        craft: 'adequate',
+        transport: 'adequate',
+        religious_welfare: 'adequate',
+      }));
+      expect(s.text).toContain(SHORTAGE);
+    });
   });
 });
 

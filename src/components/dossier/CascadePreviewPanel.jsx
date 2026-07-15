@@ -1,12 +1,12 @@
 /**
- * CascadePreviewPanel.jsx — P105 / E-2 side-panel cascade preview.
+ * CascadePreviewPanel.jsx — side-panel cascade preview.
  *
  * Opens when the user clicks "Preview cascade" in PendingChangesBar.
  * Reads the live settlement + pending queue, calls
  * `domain/pendingEdits.previewCascade()`, and renders the structured
  * delta: counts, narrative impact, warnings.
  *
- * The point is "no mystery edits" (E-2's headline). Before commit:
+ * The point is "no mystery edits". Before commit:
  *   - what counts change (institutions, resources, stressors)
  *   - what gets renamed
  *   - what the narrative layer's status becomes
@@ -16,13 +16,13 @@
  * sheet on mobile. Backdrop click closes.
  */
 
-import { useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
+import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
 const VIOLET = swatch['#7B4FCF'];
 const VIOLET_BG = swatch['#EBE2FA'];
@@ -70,39 +70,47 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
   // count here from the store-side data.
   const linkedSaves = useMemo(() => {
     if (!settlement || !Array.isArray(savedSettlements)) return 0;
+    // The neighbour list lives at settlement.neighbourNetwork (mirrored to the
+    // Supabase row's neighbour_links); the old top-level save.neighbourLinks
+    // field never exists, so the previous read always returned 0. A neighbour
+    // entry carries the linked save's id as `id` (see useChangeQueueCascade),
+    // with `targetId` as the alternate key (see map/RelationshipEdges).
     return savedSettlements.filter(s =>
-      s.neighbourLinks?.some(link => link.targetId === settlement.id)
+      (s.settlement?.neighbourNetwork || s.neighbour_links || [])
+        .some(link => (link?.id ?? link?.targetId) === settlement.id)
     ).length;
   }, [settlement, savedSettlements]);
 
-  // Esc closes
-  useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose?.(); };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  // Shared modal focus management: trap Tab inside the panel, restore focus to the
+  // trigger on close, and dismiss on Escape (topmost dialog only). Backs the
+  // aria-modal promise below with real focus behavior.
+  const dialogRef = useDialogFocusTrap(true, onClose);
 
   const summaryText = preview.summaryLines.length
     ? preview.summaryLines.join(' · ')
     : 'No structural changes.';
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- overlay backdrop: click/key here is dismiss-only; Escape also closes (see useEffect above)
-    <div
-      role="dialog"
-      aria-label="Cascade preview"
-      onClick={onClose}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClose?.(); }}
-      style={{
-        position: 'fixed', inset: 0, zIndex: 9100,
-        background: 'rgba(24,20,16,0.5)',
-        backdropFilter: 'blur(4px)',
-      }}
-    >
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- panel container: handlers only stop backdrop click/key from bubbling, not an interactive control */}
+    <div style={{ position: 'fixed', inset: 0, zIndex: 9100 }}>
+      {/* Presentational backdrop — click dismisses; the KEYBOARD dismiss is Escape,
+          handled by the shared focus trap (useDialogFocusTrap) on the dialog, so the
+          backdrop needs no key handler of its own. A sibling (not a parent) of the
+          dialog, so a click on the panel never reaches it and no stopPropagation is
+          needed. */}
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events -- dismiss-only backdrop; Escape (focus trap) is the keyboard path */}
+      <div
+        onClick={onClose}
+        style={{
+          position: 'absolute', inset: 0,
+          background: 'rgba(24,20,16,0.5)',
+          backdropFilter: 'blur(4px)',
+        }}
+      />
       <aside
-        onClick={(e) => e.stopPropagation()}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Cascade preview"
         style={{
           position: 'absolute', right: 0, top: 0, bottom: 0,
           width: 'min(400px, 100vw)',
@@ -115,6 +123,9 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
       >
         <header style={{
           padding: SP.lg,
+          // Top-pinned fixed panel: fold in the device safe-area inset so the
+          // header clears a notch on mobile. Resolves to 0 on desktop.
+          paddingTop: `calc(${SP.lg}px + env(safe-area-inset-top, 0px))`,
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'baseline', gap: SP.sm,
         }}>
@@ -125,7 +136,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            Icon={X}
+            glyph={'✕'}
             label="Close"
             onClick={onClose}
             tone="ghost"
@@ -166,7 +177,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             body={
               `${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
               `${preview.downstreamCounts.factions ?? 0} factions, ` +
-              `${preview.downstreamCounts.hooks ?? 0} hooks reference this town.`
+              `${preview.downstreamCounts.hooks ?? 0} hooks tie to this town.`
             }
           />
 
@@ -180,8 +191,8 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 title="Narrative"
                 body={
                   preview.narrativeImpact === 'regenerate-needed'
-                    ? 'The narrative layer will need regeneration to stay coherent with these changes.'
-                    : 'A narrative progression pass is suggested to evolve the prose against the renames.'
+                    ? 'The Narrative Layer will need a fresh pass to stay true to these changes.'
+                    : 'A narrative pass will carry the prose forward over the renames.'
                 }
               />
               <div style={{ height: SP.sm }} />
@@ -194,7 +205,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
                 accent={BLUE}
                 accentBg={BLUE_BG}
                 title="Linked saves"
-                body={`${linkedSaves} ${linkedSaves === 1 ? 'save' : 'saves'} reference this settlement. They may see a flag.`}
+                body={`${linkedSaves} ${linkedSaves === 1 ? 'save links' : 'saves link'} to this settlement and may be flagged for review.`}
               />
               <div style={{ height: SP.sm }} />
             </>

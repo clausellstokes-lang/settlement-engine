@@ -1,5 +1,5 @@
 /**
- * editFingerprint.js — privacy-safe extraction of structural EDITS (Wave 3).
+ * editFingerprint.js — privacy-safe extraction of structural EDITS.
  *
  * The edit research plane (edit_events table + research.edits view + the edit
  * heatmap/frequency reports) was built end-to-end but had ZERO producers. This

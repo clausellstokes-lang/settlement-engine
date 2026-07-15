@@ -14,7 +14,7 @@
  * alreadyAdded? }.
  */
 import { useState, useMemo } from 'react';
-import { Plus, X, Search } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { GOLD, INK, MUTED, SECOND, BORDER, sans, FS, swatch, CARD_ALT } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -65,7 +65,6 @@ export default function CatalogPicker({
     <div style={{ marginTop:6, border:`1px solid ${BORDER}`, borderRadius:6, background:CARD_ALT, overflow:'hidden' }}>
       {/* Search bar */}
       <div style={{ display:'flex', alignItems:'center', gap:6, padding:'6px 8px', borderBottom:`1px solid ${BORDER}` }}>
-        <Search size={11} color={MUTED}/>
         {/* eslint-disable-next-line jsx-a11y/no-autofocus -- focus the search field when the picker panel expands */}
         <input value={query} onChange={e => setQuery(e.target.value)} placeholder={placeholder || 'Search catalog...'} aria-label={placeholder || 'Search catalog'} autoFocus style={{ flex:1, border:'none', background:'transparent', fontSize:FS.xs, fontFamily:sans, color:INK, outline:'none' }}/>
         <IconButton Icon={X} label="Close catalog" tone="ghost" size="md" onClick={collapse}/>

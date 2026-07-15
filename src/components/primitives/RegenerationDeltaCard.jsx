@@ -1,8 +1,8 @@
 /**
- * primitives/RegenerationDeltaCard — Tier 5.1 UI surface.
+ * primitives/RegenerationDeltaCard
  *
- * The roadmap's "trust problem with stochastic reruns" is solved
- * here: after a user change + regenerate, surface what changed so
+ * Solves the trust problem with stochastic reruns: after a user
+ * change + regenerate, surface what changed so
  * the DM can see the engine kept canon, propagated their change,
  * and made plausible procedural decisions everywhere else.
  *

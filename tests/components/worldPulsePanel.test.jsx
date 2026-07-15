@@ -173,7 +173,7 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText(/entangled with famine/)).toBeTruthy();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
     // The echo card: living-memory framing with fading strength.
-    expect(screen.getByText('Market shock — in living memory')).toBeTruthy();
+    expect(screen.getByText('Market shock, in living memory')).toBeTruthy();
     expect(screen.getByText(/memory 34%/)).toBeTruthy();
   });
 

@@ -198,3 +198,28 @@ describe('removed dead fields stay removed', () => {
     expect('hasRegionalSignal' in delta).toBe(false);
   });
 });
+
+// ── A+ #6 — register the screen↔PDF parity axis ──────────────────────────────
+// The field manifest governs two axes of field rot: frozen-vs-live (a generated
+// field a long campaign contradicts) and dead-writes (a field no surface reads).
+// A THIRD axis is "a field the on-screen dossier shows but the PDF silently
+// drops" (or the reverse) — a parity gap. That axis is NOT modelled in the
+// manifest tables above because it already has a stronger, dedicated home: the
+// SHARED_FIELDS contract (src/domain/display/parityContract.js) walked value-by-
+// value in tests/pdf/viewModelParity.test.js + snapshotted in goldenViewModel.
+// This block registers that governance HERE so the manifest's reader finds the
+// parity axis and it can't be quietly forgotten when fields move.
+describe('screen↔PDF parity axis (A+ #6 — governed by SHARED_FIELDS)', () => {
+  test('the parity contract is registered, non-trivial, and well-formed', async () => {
+    const { SHARED_FIELDS } = await import('../../src/domain/display/parityContract.js');
+    expect(Array.isArray(SHARED_FIELDS)).toBe(true);
+    // Same floor the parity suite's self-guard uses — so emptying the contract
+    // (the failure mode that would silently drop PDF parity) trips here too.
+    expect(SHARED_FIELDS.length).toBeGreaterThanOrEqual(8);
+    for (const row of SHARED_FIELDS) {
+      expect(typeof row.fact).toBe('string');
+      expect(typeof row.canonPath).toBe('string');
+      expect(Array.isArray(row.vmPaths) && row.vmPaths.length > 0).toBe(true);
+    }
+  });
+});

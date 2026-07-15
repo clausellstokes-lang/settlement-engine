@@ -30,6 +30,42 @@ describe('AI chronicle grounding', () => {
     expect(g.settlements[0].name).toBe('Ashford');
     expect(g.stressors[0].type).toBe('famine');
     expect(typeof g.intent).toBe('string');
+    // No war/trade graph ⇒ no coalition / tradeWars keys (a no-war chronicle is
+    // unchanged).
+    expect(g.stressors[0].coalition).toBeUndefined();
+    expect(g.tradeWars).toBeUndefined();
+  });
+
+  // §S3 — a coalition siege names its coalition; a trade war names its commodity.
+  test('threads the coalition + commodity story when a war/trade graph is present', () => {
+    const worldState = {
+      tick: 6,
+      deployments: { a: { targetId: 'c' }, b: { targetId: 'c' } },
+      tradeWarState: { 'c:iron': { winnerId: 'a', incumbentId: 'd', lastFlipTick: 6, updatedTick: 6 } },
+      stressors: [
+        { type: 'siege', label: 'Siege', severity: 0.8, lifecycleStage: 'active', affectedSettlementIds: ['c'] },
+      ],
+    };
+    const regionalGraph = {
+      channels: [
+        { type: 'war_front', status: 'confirmed', from: 'a', to: 'c' },
+        { type: 'war_front', status: 'confirmed', from: 'b', to: 'c' },
+        { type: 'trade_dependency', from: 'a', to: 'c', goods: [{ id: 'iron', label: 'Iron' }] },
+      ],
+    };
+    const snapshot = {
+      settlements: [
+        { id: 'a', name: 'Ashford' }, { id: 'b', name: 'Brackwater' },
+        { id: 'c', name: 'Caldmere' }, { id: 'd', name: 'Dunmoor' },
+      ],
+    };
+    const g = buildChronicleGrounding({ wizardNews: { entries: [] }, worldState, snapshot, regionalGraph, tick: 6 });
+    const siege = g.stressors.find(s => s.type === 'siege');
+    expect(siege.coalition).toEqual(['Ashford', 'Brackwater']);
+    expect(g.tradeWars).toHaveLength(1);
+    expect(g.tradeWars[0].commodity).toBe('Iron');
+    expect(g.tradeWars[0].buyer).toBe('Caldmere');
+    expect(g.tradeWars[0].supplier).toBe('Ashford');
   });
 });
 

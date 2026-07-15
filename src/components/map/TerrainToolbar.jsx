@@ -22,11 +22,11 @@
 import { Mountain, Trees as TreesIcon, Undo2, Redo2, Info, Pencil } from 'lucide-react';
 import { useStore } from '../../store';
 import { TERRAIN_TOOLS } from '../../store/mapSlice.js';
-import { MUTED, BORDER, BORDER2, CARD, FS, SP, R } from '../theme.js';
+import { BODY, BORDER, ELEV, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
-export default function TerrainToolbar({ bridgeRef }) {
+export default function TerrainToolbar({ bridgeRef, bridgeReady = false }) {
   const terrainTool    = useStore(s => s.terrainTool);
   const setTerrainTool = useStore(s => s.setTerrainTool);
   const nativeBiomes   = useStore(s => s.mapState.layers.nativeBiomes);
@@ -78,17 +78,20 @@ export default function TerrainToolbar({ bridgeRef }) {
   }
 
   return (
+    // Second row of the shared toolbar card (WorldMap.jsx) — no border/fill of
+    // its own; a single top hairline divides it from the mode row (P5).
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+      borderTop: `1px solid ${BORDER}`,
     }}>
       <ToolButton
         active={terrainTool === TERRAIN_TOOLS.HEIGHTMAP}
         onClick={() => activate(TERRAIN_TOOLS.HEIGHTMAP)}
         Icon={Mountain}
         label="Heightmap"
-        title="Open FMG's heightmap editor. Paint terrain elevation."
+        title="Open the heightmap editor. Paint terrain elevation."
+        disabled={!bridgeReady}
       />
       <div style={{ display: 'flex', alignItems: 'stretch', gap: 0 }}>
         <ToolButton
@@ -98,53 +101,72 @@ export default function TerrainToolbar({ bridgeRef }) {
           label={nativeBiomes ? 'Hide Biomes' : 'Show Biomes'}
           title="Toggle the biomes overlay on or off. Click again to reverse."
           attached="right"
+          disabled={!bridgeReady}
         />
         <IconButton
           Icon={Pencil}
-          label="Open FMG's biomes editor. Repaint biome regions or change classification."
+          label="Open the biomes editor. Repaint biome regions or change classification."
           onClick={editBiomes}
           pressed={!!nativeBiomes}
           size="sm"
+          disabled={!bridgeReady}
         />
       </div>
 
-      <div style={{ width: 1, height: 24, background: BORDER2 }} />
+      {/* Differential spacing (P5) separates the edit-tools cluster from the
+          history cluster — no hairline divider. */}
+      <div style={{ width: SP.lg }} />
 
-      <IconButton Icon={Undo2} label="Undo" onClick={undo} size="md" />
-      <IconButton Icon={Redo2} label="Redo" onClick={redo} size="md" />
+      <IconButton Icon={Undo2} label="Undo" onClick={undo} size="lg" disabled={!bridgeReady} />
+      <IconButton Icon={Redo2} label="Redo" onClick={redo} size="lg" disabled={!bridgeReady} />
 
       <div style={{ flex: 1 }} />
 
+      {/* Visibility of status (P10): until the engine is up the tools above are
+          disabled, so the hint says WHY rather than leaving silent dead clicks. */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6,
-        fontSize: FS.xxs, color: MUTED, fontStyle: 'italic',
+        fontSize: FS.xs, color: BODY,
         maxWidth: 360, lineHeight: 1.35,
       }}>
         <Info size={12} style={{ flexShrink: 0 }} />
         <span>
-          To edit a river, lake, or coastline, double-click it directly on
-          the map: FMG's per-feature editor will open in place.
+          {bridgeReady
+            ? 'To edit a river, lake, or coastline, double-click it directly on the map. The per-feature editor opens in place.'
+            : 'The map engine is still loading… terrain tools will enable once it’s ready.'}
         </span>
       </div>
     </div>
   );
 }
 
-function ToolButton({ active, onClick, Icon, label, title, attached }) {
+function ToolButton({ active, onClick, Icon, label, title, attached, disabled }) {
   // `attached="right"` flattens the right side so the button can dock against
   // a sibling (the biomes-editor pencil) without a visible seam between them.
   // This is essential layout the Button variants can't express, so it's passed
   // through as style residue (Button merges `style` last).
-  const radiusStyle = attached === 'right'
-    ? { borderTopRightRadius: 0, borderBottomRightRadius: 0 }
-    : undefined;
+  // Active toggles carry a SECOND channel beyond their secondary fill — the
+  // same inset ELEV[1] shadow ModeSwitch and the map IconButton use — so
+  // "selected" reads identically across every map-chrome toggle (P11/P7).
+  const radiusStyle = {
+    ...(attached === 'right'
+      ? { borderTopRightRadius: 0, borderBottomRightRadius: 0 }
+      : {}),
+    ...(active ? { boxShadow: ELEV[1] } : {}),
+  };
   return (
     <Button
-      variant={active ? 'gold' : 'secondary'}
+      // Active state uses the subordinate `secondary` channel, not `gold`: an
+      // active-tool toggle is STATE, not a CTA, so the gold CTA channel stays
+      // reserved for the page's one real primary (Advance Realm). Mirrors the
+      // ModeSwitch secondary-active / ghost-inactive convention (P8/P4).
+      variant={active ? 'secondary' : 'ghost'}
       size="sm"
       icon={<Icon size={13} />}
       title={title || label}
       onClick={onClick}
+      aria-pressed={active}
+      disabled={disabled}
       style={radiusStyle}
     >
       {label}

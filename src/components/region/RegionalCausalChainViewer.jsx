@@ -1,4 +1,4 @@
-import { Check, ChevronDown, ChevronRight, CircleSlash, SlidersHorizontal, Undo2 } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, CircleSlash, Undo2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { conditionFromRegionalImpact, ensureRegionalGraph, isRegionalImpactAvailable } from '../../domain/region/index.js';
@@ -89,20 +89,19 @@ export default function RegionalCausalChainViewer({
         borderBottom: `1px solid ${BORDER}`,
         flexWrap: 'wrap',
       }}>
-        <SlidersHorizontal size={12} color={GOLD} />
         <span style={{ fontSize: FS.xxs, color: INK, fontWeight: 800, fontFamily: sans }}>
           Causal chains
         </span>
-        <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by status" value={statusFilter} onChange={e => setStatusFilter(e.target.value)} style={selectStyle}>
           {['all', 'queued', 'applied', 'resolved', 'ignored', 'expired'].map(value => (
             <option key={value} value={value}>{optionLabel(value)}</option>
           ))}
         </select>
-        <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by channel" value={typeFilter} onChange={e => setTypeFilter(e.target.value)} style={selectStyle}>
           <option value="all">All channels</option>
           {model.types.map(type => <option key={type} value={type}>{human(type)}</option>)}
         </select>
-        <select value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle}>
+        <select aria-label="Filter by source" value={sourceFilter} onChange={e => setSourceFilter(e.target.value)} style={selectStyle}>
           <option value="all">All sources</option>
           {model.sources.map(([id, name]) => <option key={id} value={id}>{name}</option>)}
         </select>

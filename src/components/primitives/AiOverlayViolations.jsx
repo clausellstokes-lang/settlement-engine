@@ -1,12 +1,11 @@
 /**
  * primitives/AiOverlayViolations — surface for the runtime verifier's findings.
  *
- * Tier 6.7 of the roadmap. The aiOverlayVerifier (Tier 6.4) catches
- * AI overlay drift at runtime — invented entities, renamed proper
- * nouns, contradicted facts, user-edited fields the AI overrode. The
- * verifier's report lives on `state.aiViolations` (Tier 6.5 wiring),
- * but until this component lands the findings are invisible to the
- * DM.
+ * The aiOverlayVerifier catches AI overlay drift at runtime — invented
+ * entities, renamed proper nouns, contradicted facts, user-edited
+ * fields the AI overrode. The verifier's report lives on
+ * `state.aiViolations`, but until this component lands the findings are
+ * invisible to the DM.
  *
  * Renders a single dismissible card grouped by kind. Hard violations
  * (invented / renamed / contradicted / canon-changed / user-field-

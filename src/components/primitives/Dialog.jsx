@@ -1,43 +1,21 @@
-import { useEffect, useId, useRef } from 'react';
+import { useId } from 'react';
 import { AlertTriangle, X } from 'lucide-react';
 import {
   BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, R, SP,
   RED, AMBER, sans,
 } from '../theme.js';
 import Button from './Button.jsx';
-
-const FOCUSABLE = 'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+import { useDialogFocusTrap } from './useDialogFocusTrap.js';
+import { useIconsOn } from './IconsContext.js';
 
 function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
-  const dialogRef = useRef(null);
-  const restoreRef = useRef(null);
+  // Shared focus trap: focus-in on open, Tab cycling, Escape-to-cancel, and
+  // focus restore on close. onCancel is read through a ref inside the hook so a
+  // new handler identity on a parent re-render does NOT re-run focus-in
+  // mid-typing.
+  const dialogRef = useDialogFocusTrap(open, onCancel);
 
-  useEffect(() => {
-    if (!open) return undefined;
-    // aria-modal promises the background is inert — back it with real focus
-    // management: remember the trigger, move focus in, trap Tab, and restore on close.
-    restoreRef.current = typeof document !== 'undefined' ? document.activeElement : null;
-    const node = dialogRef.current;
-    const focusables = () => node ? Array.from(node.querySelectorAll(FOCUSABLE)) : [];
-    (focusables()[0] || node)?.focus?.();
-
-    const onKey = event => {
-      if (event.key === 'Escape') { onCancel?.(); return; }
-      if (event.key !== 'Tab' || !node) return;
-      const items = focusables();
-      if (!items.length) { event.preventDefault(); node.focus?.(); return; }
-      const first = items[0];
-      const last = items[items.length - 1];
-      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      restoreRef.current?.focus?.();
-    };
-  }, [open, onCancel]);
-
+  const iconsOn = useIconsOn();
   if (!open) return null;
   const iconColor = tone === 'danger' ? RED : tone === 'warning' ? AMBER : GOLD;
 
@@ -82,6 +60,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           borderBottom: `1px solid ${BORDER}`,
           background: CARD_ALT,
         }}>
+          {iconsOn && (
           <div style={{
             width: 32,
             height: 32,
@@ -96,6 +75,7 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
           }}>
             <AlertTriangle size={16} />
           </div>
+          )}
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{
               margin: 0,
@@ -132,7 +112,9 @@ function Shell({ open, title, body, children, onCancel, tone = 'default' }) {
               display: 'inline-flex',
             }}
           >
-            <X size={16} />
+            {iconsOn
+              ? <X size={16} />
+              : <span aria-hidden="true" style={{ fontSize: FS.xl, lineHeight: 1, fontWeight: 700 }}>×</span>}
           </button>
         </header>
         <div style={{ padding: SP.lg }}>
@@ -147,17 +129,26 @@ export function ConfirmDialog({
   open,
   title,
   body,
+  // Optional extra content rendered ABOVE the action row — e.g. a toggle row or a
+  // short scope list. Kept null by default so every existing call site renders
+  // byte-identically (no extra DOM node when unused).
+  extra = null,
   confirmLabel = 'Confirm',
   cancelLabel = 'Cancel',
+  // Optional: disable the confirm action while a precondition is unmet (e.g. an
+  // Advance dialog whose realm must be canonized first). Default false keeps every
+  // existing call site unchanged.
+  confirmDisabled = false,
   tone = 'danger',
   onConfirm,
   onCancel,
 }) {
   return (
     <Shell open={open} title={title} body={body} tone={tone} onCancel={onCancel}>
+      {extra}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: SP.sm, flexWrap: 'wrap' }}>
         <Button variant="secondary" onClick={onCancel}>{cancelLabel}</Button>
-        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm}>{confirmLabel}</Button>
+        <Button variant={tone === 'danger' ? 'danger' : 'primary'} onClick={onConfirm} disabled={confirmDisabled}>{confirmLabel}</Button>
       </div>
     </Shell>
   );

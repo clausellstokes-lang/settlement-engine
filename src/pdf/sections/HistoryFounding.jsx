@@ -70,7 +70,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm }) {
         >
           <Text style={{ ...type.label, color: palette.muted, fontSize: pt['7'] }}>SETTLEMENT AGE</Text>
           <Text style={{ ...type.numeric_xl, color: palette.ink, marginTop: 2, fontSize: pt['22'] }}>
-            {h.age ?? '—'}
+            {h.age ?? '–'}
           </Text>
           <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
             {h.age === 1 ? 'year' : 'years'}
@@ -392,9 +392,9 @@ function Timeline({ events, age }) {
           />
         ))}
       </View>
-      {/* Year ticks (every ~quarter of the span) */}
+      {/* Year ticks at the axis extents + midpoint (space-between => 0/50/100%) */}
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 1 }}>
-        {[0.25, 0.5, 0.75].map(p => (
+        {[0, 0.5, 1].map(p => (
           <Text
             key={`tick-${p}`}
             style={{ ...type.caption, fontSize: pt['6.5'], color: palette.faint }}

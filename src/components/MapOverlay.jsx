@@ -207,6 +207,13 @@ export default function MapOverlay({ bridge, transformOut }) {
     }, 500);
   }
 
+  // Cancel any armed persist on unmount: without this, a 500ms timer that fires
+  // after the overlay tears down (e.g. a campaign switch replaces the map slice)
+  // would write campaign A's stale camera into the newly-restored viewport.
+  useEffect(() => () => {
+    if (persistTimerRef.current) clearTimeout(persistTimerRef.current);
+  }, []);
+
   // ── Pointer-events gating ────────────────────────────────────────────
   // View mode: overlay is entirely passive (clicks pass through to iframe).
   // Terrain mode: also passive (FMG handles its own editor clicks).
@@ -238,6 +245,7 @@ export default function MapOverlay({ bridge, transformOut }) {
   return (
     <div ref={wrapperRef} style={wrapperStyle}>
       <svg
+        data-map-overlay-svg=""
         style={svgStyle}
         viewBox={`0 0 ${vbW} ${vbH}`}
         preserveAspectRatio="none"

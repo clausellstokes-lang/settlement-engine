@@ -39,7 +39,9 @@ import {
   updateGalleryMetadata, toggleGalleryVote, fetchGalleryComments,
   addGalleryComment, deleteGalleryComment, reportGalleryDossier,
   fetchGalleryReports, resolveGalleryReport,
+  fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
+import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsUtils.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -120,6 +122,50 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
       search_query: 'bramble',
       filters: { tier: ['town'], hasImage: true },
       exclude_curated: true,
+    });
+  });
+
+  it('forwards the bounded-vocab + boolean facets (incl. the importable opt-in) to the RPC', async () => {
+    await fetchPublicGallery({
+      page: 0,
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        hasDeity: true,
+        // Owner import opt-in facet (gallery_importable; surfaced by migration 071).
+        importable: true,
+        // Retired facets must NOT be forwarded: governmentType / stability have no
+        // stable vocabulary to match, and atWar + the population range were dropped
+        // as redundant with tier/size and noisy.
+        atWar: true,
+        populationMin: 401,
+        populationMax: 5000,
+        governmentType: ['monarchy'],
+        stability: ['stable'],
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_dossiers', expect.objectContaining({
+      filters: {
+        culture: ['norse'],
+        prosperity: ['Wealthy'],
+        hasDeity: true,
+        importable: true,
+      },
+    }));
+  });
+
+  it('surfaces the new facet columns on the sanitized tile', async () => {
+    supabase.rpc.mockResolvedValueOnce({
+      data: [{
+        id: '9', public_slug: 's9', name: 'Frosthold', tier: 'city',
+        culture: 'norse', prosperity: 'Wealthy', primary_deity: 'Verra', at_war: true,
+        total_count: 1,
+      }],
+      error: null,
+    });
+    const { items } = await fetchPublicGallery({ page: 0 });
+    expect(items[0]).toMatchObject({
+      culture: 'norse', prosperity: 'Wealthy', primaryDeity: 'Verra', atWar: true,
     });
   });
 
@@ -322,6 +368,45 @@ describe('gallery.js - metadata, votes, comments', () => {
     }));
   });
 
+  it('sanitizes the description ON WRITE so no live HTML is persisted', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', {
+      description: '<script>alert(1)</script>Safe hook<img src=x onerror=alert(2)>',
+    });
+    const patch = update.mock.calls[0][0];
+    // Stored value carries no script/img/event-handler markup regardless of the
+    // render path — sanitize-on-write closes the stored-XSS gap at the source.
+    expect(patch.gallery_description).not.toMatch(/<script|<img|onerror/i);
+    expect(patch.gallery_description).toContain('Safe hook');
+  });
+
+  it('clamps gallery_tags ON WRITE to mirror the read-path bounds', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    // A raw owner write that the read normalizer would later trim: a per-tag
+    // over-long blob, mixed case, markup, and far more than the count cap. The
+    // write must store the same shape the read path enforces, not an unbounded
+    // value the column carries until something reads it.
+    const tags = [
+      'A'.repeat(200),                                   // → length-capped to 40
+      'CoastalPort',                                     // → lower-cased
+      '<img src=x>',                                     // → markup stripped
+      ...Array.from({ length: 30 }, (_, i) => `t${i}`),  // → count-capped to 12
+    ];
+    await updateGalleryMetadata('s1', { tags });
+    const patch = update.mock.calls[0][0];
+    expect(patch.gallery_tags.length).toBeLessThanOrEqual(12);
+    for (const tag of patch.gallery_tags) {
+      expect(tag.length).toBeLessThanOrEqual(40);
+      expect(tag).toBe(tag.toLowerCase());
+      expect(tag).not.toMatch(/[<>]/);
+    }
+    expect(patch.gallery_tags).toContain('coastalport');
+  });
+
   it('toggleGalleryVote calls the vote RPC and normalizes the result', async () => {
     supabase.rpc.mockResolvedValueOnce({ data: [{ net_votes: 5, voted: true }], error: null });
     await expect(toggleGalleryVote('s1')).resolves.toEqual({ netVotes: 5, voted: true });
@@ -396,5 +481,57 @@ describe('gallery.js - metadata, votes, comments', () => {
       next_status: 'resolved',
       resolution_note: 'Handled',
     });
+  });
+});
+
+describe('gallery.js — maps Importable facet (migration 072)', () => {
+  it('forwards the importable opt-in facet to list_gallery_maps, dropping empties', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: [], error: null });
+    await fetchGalleryMaps({
+      page: 0,
+      filters: {
+        kind: ['map_with_campaign'],
+        // Owner import opt-in facet (saved_maps.gallery_importable, migration 072).
+        importable: true,
+        // Empty facets + a falsy toggle must NOT be forwarded — an empty facet
+        // never narrows the server query.
+        backdrop: [],
+        tags: [],
+        hasSettlements: false,
+      },
+    });
+    expect(supabase.rpc).toHaveBeenCalledWith('list_gallery_maps', expect.objectContaining({
+      p_filters: { kind: ['map_with_campaign'], importable: true },
+    }));
+  });
+
+  it('normalizeMapFilters forwards importable only when truthy', () => {
+    expect(normalizeMapFilters({ importable: true })).toEqual({ importable: true });
+    // Unchecked toggle is omitted entirely (no `importable: false` key).
+    expect(normalizeMapFilters({ importable: false })).toEqual({});
+    expect(normalizeMapFilters({})).toEqual({});
+  });
+
+  it('the maps sidebar default carries the importable key (off), and it counts as a facet', () => {
+    const def = emptyMapFilters();
+    expect(def).toHaveProperty('importable', false);
+    expect(activeMapFilterCount(def)).toBe(0);
+    expect(activeMapFilterCount({ ...def, importable: true })).toBe(1);
+  });
+
+  it('shareMap forwards the owner import opt-in to publish_map', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map', importable: true });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: true,
+    }));
+  });
+
+  it('shareMap leaves the opt-in untouched (p_importable null) when omitted', async () => {
+    supabase.rpc.mockResolvedValueOnce({ data: 'map-slug', error: null });
+    await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map' });
+    expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
+      p_importable: null,
+    }));
   });
 });

@@ -13,10 +13,17 @@ export default function Toast({ toast, position = 'bottom' }) {
   if (!toast) return null;
   const tone = TONES[toast.kind] || TONES.info;
   const vertical = position === 'top' ? { top: 20 } : { bottom: 20 };
+  // Error toasts must interrupt the screen reader (a failed save/load/placement
+  // is consequential and a polite queue can be missed entirely). Mirror the
+  // Alert primitive's tone→liveness mapping: error → assertive alert, else
+  // polite status. (role="alert" implies aria-live="assertive"; both are set
+  // explicitly so the intent survives a future role change.)
+  const isError = toast.kind === 'error';
 
   return (
     <div
-      role="status"
+      role={isError ? 'alert' : 'status'}
+      aria-live={isError ? 'assertive' : 'polite'}
       style={{
         position: 'fixed',
         left: '50%',

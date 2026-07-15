@@ -30,11 +30,19 @@ function makeId(category) {
   return `${category.slice(0, 4)}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
 }
 
+// Must stay in lockstep with customContentSlice's EMPTY. `services`, `factions`
+// and `supplyChains` had drifted out of this list (they exist in the slice);
+// backfilled here alongside the new `deities` bucket so a cloud load never drops
+// a category into an undefined bucket.
 const EMPTY_CONTENT = {
   institutions: [],
+  services: [],
   resources: [],
   stressors: [],
   tradeGoods: [],
+  factions: [],
+  deities: [],
+  supplyChains: [],
   tradeRoutes: [],
   powerPresets: [],
   defensePresets: [],

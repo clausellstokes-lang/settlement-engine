@@ -1,5 +1,5 @@
 /**
- * analyticsProvider.js — Tier 8.8 / 8.9 provider bridge.
+ * analyticsProvider.js — provider bridge.
  *
  * The analytics module (src/lib/analytics.js) calls
  * `window.__sf_analytics_provider(event, props)` for every tracked

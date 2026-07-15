@@ -1,7 +1,29 @@
 # Pre-push: full check before code leaves the local machine.
-# Same gate CI runs (validate:data → typecheck → lint → tests → build).
-# Slow (~30s) but catches everything before pushing — saves CI round-trips.
+# Runs the SAME `check` gate CI's `check` job runs
+# (validate:data → validate:edge → validate:map → typecheck → typecheck:domain:strict
+#  → lint → vitest → build). Slow (~30s) but catches most failures locally.
 #
 # To skip in an emergency: git push --no-verify
 # (but only when you've already run `npm run check` locally and it passed).
 npm run check
+
+# CI also runs two jobs that `npm run check` does NOT:
+#   - deno-tests : the edge-function type-check + execution tests (money-path
+#                  signature verification, refund decisions). Run here via
+#                  check:edge-behavior (deno task check:edge + test:edge) when Deno
+#                  is installed, so a broken edge function is caught pre-push.
+#                  `npm run check` itself deliberately EXCLUDES this to stay in
+#                  lockstep with the CI `check` job (tests/build/ciCheckParity);
+#                  the edge behavioral coverage lives here + in CI's deno-tests job.
+#   - e2e        : Playwright Chromium + mobile-safari. Deliberately NOT run
+#                  on every push (needs `npx playwright install` browsers + a
+#                  dev server, ~minutes). Run it manually before risky UI
+#                  changes: `npm run test:e2e`. CI is the backstop.
+#
+# So `npm run check` is a SUBSET of CI. Production deploys are now GATED on CI:
+# vercel.json's ignoreCommand (scripts/vercel-ignore-build.mjs) fail-closed blocks
+# the Vercel build unless the check / e2e / deno-tests jobs are green on the commit
+# (see docs/DEPLOY.md "Gating production on CI"). So a red money-path test now DOES
+# stop a live deploy — but because local `check` omits deno + e2e, a green local run
+# is still not the whole story: let this hook finish and watch the Actions tab.
+npm run check:edge-behavior

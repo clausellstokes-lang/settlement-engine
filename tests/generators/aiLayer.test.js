@@ -50,6 +50,26 @@ describe('flattenServices (AI context normalizer)', () => {
   });
 });
 
+// ── Locale pinning (deterministic prompt across machines) ────────────────────
+// buildAiLayerPrompt rendered population with a bare toLocaleString() (no locale
+// arg), so the grouping separator floated with the host locale — '12,000' on
+// en-US but '12.000' / '12 000' elsewhere. Every other generator call site pins
+// 'en-US' (economicGenerator, dossierViewModel). Pin it here too so the LLM
+// prompt is host-independent.
+
+describe('population is locale-pinned in the prompt (en-US grouping)', () => {
+  test('renders the en-US thousands separator regardless of host locale', () => {
+    const prompt = buildAiLayerPrompt(extractFullContext(baseSettlement({ population: 12000 })));
+    expect(prompt).toContain('population ~12,000');
+  });
+
+  test('matches an explicit en-US format (proves the arg is passed)', () => {
+    const pop = 1234567;
+    const prompt = buildAiLayerPrompt(extractFullContext(baseSettlement({ population: pop })));
+    expect(prompt).toContain(`population ~${pop.toLocaleString('en-US')}`);
+  });
+});
+
 // ── Grounding-truth regressions ──────────────────────────────────────────────
 // powerStructure.stability is a LABEL ('Stable (theocratic governance)', …),
 // not a 0-100 number; foodBalance.surplus is an absolute lb/day quantity, not

@@ -16,7 +16,7 @@ import { DeltaRow } from './PreviewPanel.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 
-export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
+export function BatchCart({ staged, settlement, phase, advanceBusy, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
   const validation = validateBatch(settlement, staged);
   const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
   return (
@@ -51,6 +51,11 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
           {pendingBatchPreview.systemStateDeltas.map((d, i) => <DeltaRow key={i} d={d} />)}
         </div>
       )}
+      {advanceBusy && (
+        <p style={{ margin: `${SP.sm}px 0 0`, fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
+          The realm is advancing. Give it a moment, then apply these changes.
+        </p>
+      )}
       <div style={{ display: 'flex', gap: SP.xs, marginTop: SP.sm }}>
         <Button variant="primary" size="sm" onClick={onPreview}>Preview batch</Button>
         <Button
@@ -58,7 +63,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
           size="sm"
           icon={<Check size={11} />}
           onClick={onApply}
-          disabled={blocks.length > 0}
+          disabled={blocks.length > 0 || !!advanceBusy}
         >
           {phase === 'canon' ? `Apply ${staged.length} to timeline` : `Apply all (${staged.length})`}
         </Button>

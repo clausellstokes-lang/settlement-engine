@@ -21,11 +21,12 @@
  */
 
 import { useMemo, useState } from 'react';
-import { X, Search, AlertTriangle } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../store';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, swatch } from './theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, DANGER_BORDER, ELEV, sans, FS, swatch } from './theme.js';
 import { buildRegistry } from '../lib/customRegistry.js';
 import IconButton from './primitives/IconButton.jsx';
+import Button from './primitives/Button.jsx';
 
 const PURPLE = swatch['#7C3AED'];
 
@@ -119,7 +120,7 @@ export default function EntityPicker({
           {selectedEntries.map(({ refId, entry }) => {
             const missing = !entry;
             const isCustom = entry?.source === 'custom';
-            const accent = missing ? '#8b1a1a' : (isCustom ? PURPLE : GOLD);
+            const accent = missing ? RED : (isCustom ? PURPLE : GOLD);
             const label = entry?.name || (refId.startsWith('custom:')
               ? '(deleted custom)'
               : refId.startsWith('prebuilt:')
@@ -134,14 +135,13 @@ export default function EntityPicker({
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 4,
                   padding: '2px 6px 2px 8px',
-                  background: missing ? '#fdebec' : `${accent}14`,
+                  background: missing ? RED_BG : `${accent}14`,
                   border: `1px solid ${accent}55`,
                   borderRadius: 12,
                   fontSize: FS.xs, fontWeight: 600,
                   color: accent, fontFamily: sans,
                 }}
               >
-                {missing && <AlertTriangle size={9} />}
                 <span>{label}</span>
                 {isCustom && !missing && (
                   <span style={{
@@ -172,7 +172,6 @@ export default function EntityPicker({
           borderRadius: 4,
           background: swatch.white,
         }}>
-          <Search size={11} color={MUTED} />
           <input
             type="text"
             value={query}
@@ -196,21 +195,23 @@ export default function EntityPicker({
           border: `1px solid ${BORDER}`, borderRadius: 4,
           background: swatch.white,
           maxHeight: 220, overflowY: 'auto',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
+          boxShadow: ELEV[2],
         }}>
           {suggestions.map(s => (
-            <button
+            <Button
               key={s.refId}
-              type="button"
+              variant="ghost"
+              size="sm"
+              fullWidth
+              aria-label={`Add ${s.name}`}
               onMouseDown={e => { e.preventDefault(); addRef(s.refId); }}
               style={{
-                display: 'flex', alignItems: 'center', gap: 6, width: '100%',
-                padding: '5px 8px', border: 'none', background: 'transparent',
-                cursor: 'pointer', textAlign: 'left',
+                justifyContent: 'flex-start', gap: 6,
+                padding: '6px 8px', minHeight: 44,
+                borderRadius: 0,
                 borderBottom: `1px solid ${BORDER}33`,
+                whiteSpace: 'normal', textAlign: 'left', fontWeight: 600,
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
             >
               <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK, flex: 1 }}>
                 {s.name}
@@ -227,7 +228,7 @@ export default function EntityPicker({
                   borderRadius: 4, padding: '1px 4px',
                 }}>CUSTOM</span>
               )}
-            </button>
+            </Button>
           ))}
         </div>
       )}
@@ -247,12 +248,11 @@ export default function EntityPicker({
       {selectedEntries.some(s => !s.entry) && (
         <div style={{
           marginTop: 6, padding: '4px 8px',
-          background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
+          background: RED_BG, border: `1px solid ${DANGER_BORDER}`,
           borderRadius: 4,
-          fontSize: FS.xxs, color: swatch.danger,
+          fontSize: FS.xxs, color: RED,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
-          <AlertTriangle size={10} />
           <span>
             {selectedEntries.filter(s => !s.entry).length} reference(s) point
             to deleted or missing items. Remove or replace them.

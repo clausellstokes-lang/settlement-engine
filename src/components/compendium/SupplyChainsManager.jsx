@@ -1,5 +1,5 @@
 /**
- * SupplyChainsManager.jsx — the "Supply Chains" tab of My Custom Content (§14 P3).
+ * SupplyChainsManager.jsx — the "Supply Chains" tab of My Custom Content.
  *
  * Supply chains aren't hand-authored — they're DISCOVERED. inferSupplyChains
  * walks the inputs/outputs of the user's custom institutions, services,
@@ -10,21 +10,13 @@
  * Reject (dismiss). Confirmed chains (P3b) feed generation.
  */
 import { useMemo, useState } from 'react';
-import { Check, X, Trash2, Sparkles } from 'lucide-react';
+import { Check, X, Trash2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { inferSupplyChains } from '../../domain/inferSupplyChains.js';
 import { ChainRow } from '../new/SupplyChainsPanel.jsx';
 import Button from '../primitives/Button.jsx';
-import { FS, swatch } from '../theme.js';
-
-const INK = swatch['#1B1408'];
-const BODY = swatch['#3A2F18'];
-const MUTED = swatch['#9C8068'];
-const BORDER = swatch['#E8D9B0'];
-const GREEN = swatch['#1A5A28'];
-const AMBER = swatch['#8A5010'];
-const sans = '"Nunito", system-ui, sans-serif';
+import { FS, swatch, INK, BODY, MUTED, BORDER, GREEN, AMBER, sans } from '../theme.js';
 
 export default function SupplyChainsManager() {
   const customContent = useStore((s) => s.customContent);
@@ -66,11 +58,13 @@ export default function SupplyChainsManager() {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, border: `1px solid ${BORDER}`, borderRadius: 7, background: swatch['#F8F4FF'] }}>
-        <Sparkles size={14} style={{ color: swatch.magic, marginTop: 2, flexShrink: 0 }} />
+      {/* Intro callout: left-accent only (not a full box) so it matches the
+          chain cards' grammar and doesn't out-weight the content it introduces
+          — the heaviest container is reserved for the chains, not the explainer (P5). */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, borderLeft: `3px solid ${swatch.magic}`, borderRadius: 7, background: swatch['#F8F4FF'] }}>
         <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
           Supply chains are <strong>discovered automatically</strong> from your custom institutions,
-          services, resources, and trade goods — by connecting what each one produces to what
+          services, resources, and trade goods. The engine connects what each one produces to what
           another needs. Unmet inputs become <strong>imports</strong>; surplus outputs become
           <strong> exports</strong>. Name and <strong>confirm</strong> the ones that make sense; they
           then count toward your settlements.
@@ -98,9 +92,9 @@ export default function SupplyChainsManager() {
       )}
 
       {/* Discovered (pending verification) */}
-      <div style={sectionLabel}>Discovered — needs your review ({pending.length})</div>
+      <div style={sectionLabel}>Discovered, needs your review ({pending.length})</div>
       {pending.length === 0 ? (
-        <div style={{ padding: '18px 14px', textAlign: 'center', fontSize: FS.sm, color: MUTED, fontFamily: sans }}>
+        <div style={{ padding: '18px 14px', textAlign: 'center', fontSize: FS.sm, color: BODY, fontFamily: sans }}>
           {discovered.length === 0
             ? 'No supply chains discovered yet. Add custom institutions, resources, and trade goods with inputs/outputs that connect, and chains will appear here.'
             : 'All discovered chains have been reviewed.'}
@@ -121,7 +115,11 @@ export default function SupplyChainsManager() {
                 <Button variant="success" size="sm" icon={<Check size={12} />} onClick={() => confirm(chain)}>
                   Confirm
                 </Button>
-                <Button variant="danger" size="sm" icon={<X size={12} />} onClick={() => reject(chain.chainId)}>
+                {/* Reject is the quiet, secondary path — it dismisses a
+                    suggestion, it isn't the loud primary. Demoted off the danger
+                    fill to a ghost button and pushed apart from Confirm so the
+                    accept action stays the one obvious move. */}
+                <Button variant="ghost" size="sm" icon={<X size={12} />} onClick={() => reject(chain.chainId)} style={{ marginLeft: 'auto', color: swatch.danger }}>
                   Reject
                 </Button>
               </div>

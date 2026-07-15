@@ -18,12 +18,13 @@
  * and the human-readable label of what just changed.
  */
 
-import { Sparkles, X, Zap, ArrowRight } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
+import useDialogFocusTrap from './primitives/useDialogFocusTrap.js';
 
 const PURPLE = swatch['#6A2A9A'];
 const PURPLE_BG = 'rgba(90,42,138,0.08)';
@@ -35,6 +36,11 @@ export default function StaleNarrativeModal({
 }) {
   const activeSaveId     = useStore(s => s.activeSaveId);
   const requestNarrative = useStore(s => s.requestNarrative);
+  // Shared modal focus management: focus in on open, trap Tab, Escape dismisses
+  // via onClose, focus restored to the trigger on close. Matches the primitives
+  // contract behind aria-modal so this destructive-adjacent choice modal behaves
+  // like every other dialog. Called before the early return to honour rules-of-hooks.
+  const dialogRef = useDialogFocusTrap(open, onClose);
   if (!open) return null;
 
   const cost = CREDIT_COSTS.narrative;
@@ -45,24 +51,21 @@ export default function StaleNarrativeModal({
 
   return (
     <div
-      role="button"
-      tabIndex={0}
-      aria-label={t('staleNarrative.ariaClose')}
+      role="presentation"
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(12,8,4,0.58)', backdropFilter: 'blur(3px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: 18,
       }}
-      onClick={onClose}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
+      onMouseDown={e => { if (e.target === e.currentTarget) onClose(); }}
     >
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only stop propagation to the backdrop, not real interactivity */}
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        onClick={e => e.stopPropagation()}
-        onKeyDown={e => e.stopPropagation()}
+        aria-label={t('staleNarrative.heading')}
+        tabIndex={-1}
         style={{
           background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
           boxShadow: ELEV[3],
@@ -77,7 +80,6 @@ export default function StaleNarrativeModal({
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'center', gap: 10,
         }}>
-          <Sparkles size={16} color={PURPLE} />
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: FS.md, fontWeight: 800, color: INK, fontFamily: sans, letterSpacing: '0.02em' }}>
               {t('staleNarrative.heading')}
@@ -110,6 +112,7 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onRegenerate}
+            aria-label={t('staleNarrative.regenerateTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '10px 12px', borderRadius: 6,
@@ -119,7 +122,6 @@ export default function StaleNarrativeModal({
               cursor: 'pointer', textAlign: 'left',
             }}
           >
-            <Zap size={14} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 800, letterSpacing: '0.02em' }}>{t('staleNarrative.regenerateTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, opacity: 0.82 }}>
@@ -133,6 +135,7 @@ export default function StaleNarrativeModal({
           <button
             type="button"
             onClick={onClose}
+            aria-label={t('staleNarrative.continueTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
               padding: '10px 12px', borderRadius: 6,
@@ -142,7 +145,6 @@ export default function StaleNarrativeModal({
               cursor: 'pointer', textAlign: 'left',
             }}
           >
-            <ArrowRight size={14} color={PURPLE} />
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, letterSpacing: '0.02em' }}>{t('staleNarrative.continueTitle')}</div>
               <div style={{ fontSize: FS.xxs, marginTop: 2, color: MUTED }}>

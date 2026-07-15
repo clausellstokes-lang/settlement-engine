@@ -181,6 +181,21 @@ describe('deriveHistoryBeats()', () => {
     expect(b.recentDisruption.source).toBe('history.legacyAnnotations');
   });
 
+  it('recentDisruption legacyAnnotation fallback includes a yearsAgo-0 (campaign-era) annotation', () => {
+    // Regression: `(a.yearsAgo || Infinity) <= 50` excluded every yearsAgo-0
+    // annotation (0 is falsy) — the same truthiness bug already fixed on the
+    // historicalEvents path. A campaign-era annotation IS the recent disruption.
+    const b = deriveHistoryBeats({
+      history: {
+        historicalEvents: [{ name: 'Old', yearsAgo: 200, severity: 'catastrophic' }],
+        legacyAnnotations: [{ annotation: 'It is happening now.', eventName: 'The Rising', yearsAgo: 0 }],
+      },
+    });
+    expect(b.recentDisruption).toBeTruthy();
+    expect(b.recentDisruption.source).toBe('history.legacyAnnotations');
+    expect(b.recentDisruption.references.eventName).toBe('The Rising');
+  });
+
   it('recentDisruption is null when nothing recent and no fallback annotation', () => {
     const b = deriveHistoryBeats({
       history: { historicalEvents: [{ name: 'Ancient', yearsAgo: 500, severity: 'catastrophic' }] },

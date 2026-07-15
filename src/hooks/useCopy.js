@@ -2,8 +2,8 @@
  * useCopy.js — Audience-aware wrapper over t().
  *
  * The plain `t('key')` helper from src/copy/index.js looks up a single
- * string. Many critique findings (X-10 audience-led pricing copy, C-3
- * companion lines, X-9 return-visit copy) need to pick between several
+ * string. Many critique findings (audience-led pricing copy, companion
+ * lines, return-visit copy) need to pick between several
  * candidate strings based on the current user's reader archetype.
  *
  * Usage:

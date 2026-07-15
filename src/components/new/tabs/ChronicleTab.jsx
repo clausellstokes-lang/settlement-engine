@@ -12,6 +12,7 @@
  */
 import { Section, Empty } from '../Primitives';
 import { FS, swatch, MUTED } from '../../theme.js';
+import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
 
 const PARTY = swatch['#8A2F4A'];
 const PARTY_BG = swatch['#F7EBF0'];
@@ -20,13 +21,30 @@ const SRC_EDIT_BG = swatch['#F5ECD8'];
 const ROW_BORDER = swatch['#C8D0E8'];
 
 function chip(color, bg) {
-  return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800 };
+  return { fontSize: FS.micro, color, background: bg, border: `1px solid ${color}`, borderRadius: 3, padding: '0 5px', fontWeight: 800, textTransform: 'uppercase' };
+}
+
+/**
+ * The DOM anchor a chronicle row exposes as a link TARGET, matching the dossier
+ * entity index's event anchors (entityAnchor('event', { id })). Returns null
+ * when the entry has no id, so a row without a stable id simply isn't a target
+ * (no orphan/dead anchor) rather than minting an index-derived one.
+ *
+ * Event TITLES in the feed stay plain text — an event linking to itself is
+ * meaningless, and the chronicle's normalized rows carry no structured actor
+ * (npc/faction) references to render as link sources.
+ *
+ * @param {{ id?: string }} event  A chronicle feed entry.
+ * @returns {string|null}
+ */
+function chronicleAnchor(event) {
+  return event?.id ? entityAnchor('event', { id: event.id }) : undefined;
 }
 
 export default function ChronicleTab({ entries = [] }) {
   if (!entries.length) {
     return (
-      <Empty message="No chronicle yet — manual changes, party actions, and world-pulse events will appear here as the settlement's living history, timed from canonization." />
+      <Empty message="No chronicle yet. Your changes, the party's actions, and the world's own turns will gather here as the settlement's living history, timed from canonization." />
     );
   }
   return (
@@ -36,7 +54,7 @@ export default function ChronicleTab({ entries = [] }) {
           {entries.map((event, i) => {
             const accent = event.source === 'party' ? PARTY : event.source === 'manual' ? SRC_EDIT : swatch.info;
             return (
-              <div key={event.id || i} style={{ border: `1px solid ${ROW_BORDER}`, borderLeft: `3px solid ${accent}`, borderRadius: 7, background: swatch['#F4F6FD'], padding: '10px 12px' }}>
+              <div key={event.id || i} id={chronicleAnchor(event)} style={{ border: `1px solid ${ROW_BORDER}`, borderLeft: `3px solid ${accent}`, borderRadius: 7, background: swatch['#F4F6FD'], padding: '10px 12px' }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: event.summary ? 4 : 0 }}>
                   {event.relativeLabel && (
                     <span style={{ fontSize: FS.micro, fontWeight: 800, color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{event.relativeLabel}</span>
@@ -45,10 +63,10 @@ export default function ChronicleTab({ entries = [] }) {
                     {String(event.title || 'Event').replace(/_/g, ' ')}
                   </span>
                   {event.partyCaused
-                    ? <span title="Caused by the party" style={chip(PARTY, PARTY_BG)}>⚔ PARTY</span>
+                    ? <span title="Caused by the party" style={chip(PARTY, PARTY_BG)}>Party</span>
                     : event.source === 'manual'
-                      ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>EDIT</span>
-                      : <span title="The world engine produced this" style={chip(swatch.info, swatch['#F4F6FD'])}>WORLD</span>}
+                      ? <span title="A change you authored" style={chip(SRC_EDIT, SRC_EDIT_BG)}>Edit</span>
+                      : <span title="Driven by the wider world" style={chip(swatch.info, swatch['#F4F6FD'])}>World</span>}
                 </div>
                 {event.summary && <p style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, margin: 0 }}>{event.summary}</p>}
               </div>

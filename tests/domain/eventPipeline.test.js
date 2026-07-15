@@ -200,6 +200,59 @@ describe('preview/apply drift invariant (Tier 2.2)', () => {
   });
 });
 
+// ── EXPOSE_CORRUPTION: no phantom dial move on a no-op target ───────────
+// The mutation no-ops on anything but a corrupt NPC. The authored deltas +
+// narration must agree: a clean-NPC target moves nothing and writes no prose,
+// and preview must equal apply for it (the no-op runs through the same pipeline).
+describe('EXPOSE_CORRUPTION authored effects match the mutation', () => {
+  function corruptionSettlement() {
+    return {
+      name: 'Ashport',
+      tier: 'town',
+      population: 2000,
+      config: {},
+      economicState: { prosperity: 'Modest' },
+      institutions: [
+        { id: 'i.guild', name: "Thieves' Guild", category: 'criminal', status: 'active' },
+        { id: 'i.watch', name: 'City Watch', category: 'civic', status: 'active' },
+      ],
+      powerStructure: { factions: [{ id: 'f.watch', name: 'City Watch', controlsInstitutionIds: ['i.watch'] }] },
+      npcs: [
+        { id: 'npc_vex', name: 'Captain Vex', corrupt: true, corruptionVector: 'greed', corruptTies: { criminalInstitution: "Thieves' Guild" }, factionAffiliation: 'City Watch' },
+        { id: 'npc_mira', name: 'Honest Mira', corrupt: false },
+      ],
+      activeConditions: [],
+    };
+  }
+  const exposeOf = targetId => ({ id: 'x1', type: 'EXPOSE_CORRUPTION', targetId, payload: { severity: 0.7 }, cause: 'player_action' });
+
+  it('a clean-NPC target moves no dials and writes no prose', () => {
+    const result = runEventPipeline(corruptionSettlement(), exposeOf('Honest Mira'));
+    expect(result.systemStateDeltas).toEqual([]);
+    expect(result.afterSystemState).toEqual(result.beforeSystemState);
+    expect(result.narrativeSummary).toBe('');
+  });
+
+  it('a corrupt-NPC target does move the dials and narrates', () => {
+    const result = runEventPipeline(corruptionSettlement(), exposeOf('Captain Vex'));
+    expect(result.systemStateDeltas.length).toBeGreaterThan(0);
+    expect(result.narrativeSummary).toContain('publicly exposed');
+  });
+
+  it('preview equals apply for both the clean (no-op) and corrupt targets', () => {
+    const settlement = corruptionSettlement();
+    const systemState = deriveSystemState(settlement);
+    for (const targetId of ['Honest Mira', 'Captain Vex']) {
+      const event = exposeOf(targetId);
+      const preview = previewEvent({ settlement, systemState, event });
+      const { logEntry } = applyEvent({ settlement, systemState, event });
+      expect(preview.afterState, `${targetId} afterState`).toEqual(logEntry.afterState);
+      expect(preview.deltas, `${targetId} deltas`).toEqual(logEntry.deltas);
+      expect(preview.causalStateDeltas, `${targetId} causalDeltas`).toEqual(logEntry.causalStateDeltas);
+    }
+  });
+});
+
 // ── Store recomputation preserves authored deltas (P0.1) ───────────────
 // The store's applyEvent runs reconciliation BETWEEN the pipeline mutation and
 // persistence, then re-derives SystemState. It must re-layer the event's authored

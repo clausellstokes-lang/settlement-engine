@@ -3,8 +3,8 @@
  *
  * tests/ui/wizard.smoke.test.jsx — Wizard decomposition lock-in.
  *
- * GenerateWizard.jsx had four additional render chunks extracted into
- * src/components/generate/Wizard*.jsx (WizardEmptyState, WizardChipRow,
+ * GenerateWizard.jsx had additional render chunks extracted into
+ * src/components/generate/Wizard*.jsx (WizardEmptyState,
  * WizardLoadedBanners, WizardOutputToolbar). This is a behavior-preserving
  * move, so the regression net is simply: the default export is a function,
  * and the wizard still mounts and renders without throwing — wiring the

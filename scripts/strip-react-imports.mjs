@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * scripts/strip-react-imports.mjs — one-shot lint cleanup (Tier 9.4).
+ * scripts/strip-react-imports.mjs — one-shot lint cleanup.
  *
  * Vite + React 19's automatic JSX runtime means a bare
  *   import React from 'react';

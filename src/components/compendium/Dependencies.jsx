@@ -3,7 +3,7 @@ import { MUTED as MUT, SECOND as SEC, BORDER as BOR, FS, swatch } from '../theme
 import { useStore } from '../../store/index.js';
 import EntityPicker from '../EntityPicker.jsx';
 import { buildRegistry, customRefIdFromItem } from '../../lib/customRegistry.js';
-import { CUSTOM_CATEGORIES } from './CustomContent.jsx';
+import { CUSTOM_CATEGORIES } from './customCategories.js';
 
 // Maps a dependency field (as stored on ANOTHER custom item) to the relationship
 // verb from THIS item's perspective. Powers the derived reverse-links below:

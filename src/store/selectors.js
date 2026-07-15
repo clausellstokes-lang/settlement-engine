@@ -16,7 +16,6 @@ import {
   getPopulationRanges,
 } from '../generators/lookups.js';
 import { filterCatalogForMagic } from '../domain/magicFilter.js';
-import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
 
 const TIER_ORDER        = getTierOrder();
@@ -33,7 +32,9 @@ export function resolveDisplayTier(config) {
     }
     return 'thorp';
   }
-  if (!t || t === 'random' || t === 'custom') return 'all';
+  // NOTE: t === 'custom' is handled by the early return above, so it can never
+  // reach here — the branch only needs to catch the falsy/random cases.
+  if (!t || t === 'random') return 'all';
   return t;
 }
 
@@ -54,6 +55,20 @@ export const selectIsManualTier = (state) => {
  * Memoised: React 19's useSyncExternalStore requires getSnapshot to return
  * a stable reference on consecutive calls with the same inputs. Without
  * caching, every call creates a new object which triggers infinite re-renders.
+ *
+ * Module-global cache safety (why this single-entry cache is NOT a cross-store
+ * hazard, despite living at module scope): the result is a pure function of the
+ * cache key PLUS process-global inputs only. The key captures every per-store
+ * input (state.config's tier/manual/magic fields). The remaining inputs —
+ * getInstitutionalCatalog / getFullCatalogWithTierMeta and the custom-content
+ * source — are process-global (the custom-content getter reads the singleton
+ * store via setCustomContentSource, not a per-instance store). So two store
+ * instances that compute the same key necessarily resolve to the same catalog;
+ * a stale cross-store hit is not realizable. Same reasoning holds for
+ * selectTierInstitutionNames (keyed on tier, a pure function of it) and
+ * selectToggleSummary (keyed on the institutionToggles REFERENCE, which is
+ * inherently per-store). Do not "fix" these into per-store maps — the coarse key
+ * is deliberate for render stability and is already collision-safe.
  */
 let _catalogCache = { key: null, result: null };
 
@@ -113,9 +128,7 @@ export const selectToggleSummary = (state) => {
 /** Count of active saved settlements for save-limit display. */
 export const selectSaveCount = (state) => activeSaveCount(state.savedSettlements);
 
-/** Whether the settlement data has changed since the last AI narrative. */
-export const selectIsNarrativeStale = (state) => {
-  if (!state.aiSettlement || !state.settlement) return true;
-  if (!state.aiDataVersion || !state.aiSourceFingerprint) return true;
-  return state.aiSourceFingerprint !== settlementFingerprint(state.settlement);
-};
+// Narrative-staleness lives on aiSlice.isNarrativeStale() (called imperatively),
+// which memoizes the fingerprint. A selector form used to live here but was an
+// un-memoized full-settlement stableStringify on every store change with zero
+// consumers — removed to keep the expensive walk off the selector path.

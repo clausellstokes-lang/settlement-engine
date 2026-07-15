@@ -1,5 +1,5 @@
 /**
- * emailLifecycle.js — Tier 8.5 client-side lifecycle hooks.
+ * emailLifecycle.js — client-side lifecycle hooks.
  *
  * Thin wrapper over the `send-email` edge function. Each helper here
  * corresponds to one TEMPLATES key in emailTemplates.js and assembles

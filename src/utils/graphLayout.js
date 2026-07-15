@@ -87,8 +87,13 @@ export function forceLayout(nodes, edges, opts = {}) {
         let dy = b.y - a.y;
         let dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 0.001) {
-          dx = (Math.random() - 0.5) * 0.01;
-          dy = (Math.random() - 0.5) * 0.01;
+          // Coincident nodes need a nudge to separate, but the nudge must be
+          // DETERMINISTIC — Math.random() here would make the same graph lay out
+          // differently on every render, contradicting the seeded-from-ids
+          // contract above. Derive a stable offset from the two node ids so the
+          // perturbation is reproducible across runs.
+          dx = (seed(`${a.id}|${b.id}`) - 0.5) * 0.01;
+          dy = (seed(`${b.id}|${a.id}`) - 0.5) * 0.01;
           dist = 0.01;
         }
         const force = repulsion / (dist * dist);

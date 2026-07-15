@@ -11,6 +11,7 @@ import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
 import { type, palette, space, pt } from '../theme.js';
+import { safe } from '../lib/format.js';
 
 export function Timeline({ settlement, narrativeMode, vm }) {
   const log = vm?.eventLog || [];
@@ -58,22 +59,22 @@ function Entry({ entry }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
         <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10'], flex: 1 }}>
-          {entry.narrativeSummary || entry.event?.type || 'Event'}
+          {safe(entry.narrativeSummary || entry.event?.type || 'Event')}
         </Text>
         <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
-          {entry.event?.inWorldDate ? entry.event.inWorldDate : tsLabel}
+          {safe(entry.event?.inWorldDate ? entry.event.inWorldDate : tsLabel)}
         </Text>
       </View>
       {entry.event?.description && (
         <Text style={{ ...type.body, fontSize: pt['8.5'], color: palette.second, fontStyle: 'italic', marginBottom: 3 }}>
-          {entry.event.description}
+          {safe(entry.event.description)}
         </Text>
       )}
       {entry.deltas?.length > 0 && (
         <View style={{ marginBottom: 3 }}>
           {entry.deltas.slice(0, 4).map((d, i) => (
             <Text key={i} style={{ ...type.body, fontSize: pt['8'], color: palette.ink, lineHeight: 1.4 }}>
-              • {d.explanation} ({d.before} » {d.after})
+              • {safe(d.explanation)} ({safe(d.before)} » {safe(d.after)})
             </Text>
           ))}
         </View>
@@ -84,12 +85,12 @@ function Entry({ entry }) {
           {entry.factionResponses.map((r, i) => (
             <View key={i} style={{ marginTop: 2 }}>
               <Text style={{ ...type.body, fontSize: pt['8'], lineHeight: 1.4 }}>
-                <Text style={{ ...type.body_em, color: palette.gold }}>{r.factionName}: </Text>
-                {r.response}
+                <Text style={{ ...type.body_em, color: palette.gold }}>{safe(r.factionName)}: </Text>
+                {safe(r.response)}
               </Text>
               {r.hookSeed && (
                 <Text style={{ ...type.body, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginTop: 1 }}>
-                  Hook: {r.hookSeed}
+                  Hook: {safe(r.hookSeed)}
                 </Text>
               )}
             </View>

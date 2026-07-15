@@ -46,4 +46,33 @@ describe('§9 relationship events', () => {
     const next = mutateSettlement({ settlement: s, event: { id: 'e4', type: 'SETTLEMENT_DISPUTE', targetId: 'Nowhere', payload: { relationshipType: 'rival' } } });
     expect(next.neighbourNetwork).toEqual(s.neighbourNetwork);
   });
+
+  // #6 — OPENED_TRADE_ROUTE may target a campaign settlement that is NOT yet a
+  // linked neighbour. Instead of no-opping, it ADDS the neighbourNetwork link.
+  it('OPENED_TRADE_ROUTE adds a link for a non-linked campaign target', () => {
+    const s = base();
+    const next = mutateSettlement({ settlement: s, event: { id: 'e7', type: 'OPENED_TRADE_ROUTE', targetId: 'Greenhollow', payload: { relationshipType: 'trade_partners' } } });
+    expect(next.neighbourNetwork).toHaveLength(s.neighbourNetwork.length + 1);
+    const added = next.neighbourNetwork.find((n) => n.name === 'Greenhollow');
+    expect(added).toBeTruthy();
+    expect(added.relationshipType).toBe('trade_partner'); // normalized
+    expect(added._addedByEvent).toBe(true);
+    // Existing links are untouched.
+    expect(relOf(next, 'Stonehaven')).toBe('neutral');
+  });
+
+  it('OPENED_TRADE_ROUTE still updates (not duplicates) an existing neighbour', () => {
+    const s = base();
+    const next = mutateSettlement({ settlement: s, event: { id: 'e8', type: 'OPENED_TRADE_ROUTE', targetId: 'Stonehaven', payload: { relationshipType: 'allied' } } });
+    expect(next.neighbourNetwork).toHaveLength(s.neighbourNetwork.length); // no new link
+    expect(relOf(next, 'Stonehaven')).toBe('allied');
+  });
+
+  // Sister events keep the historic no-op: a dispute/alliance with an unknown
+  // name has no link to act on, and must NOT silently mint one.
+  it('SETTLEMENT_DISPUTE does NOT add a link for an unknown name', () => {
+    const s = base();
+    const next = mutateSettlement({ settlement: s, event: { id: 'e9', type: 'SETTLEMENT_DISPUTE', targetId: 'Greenhollow', payload: { relationshipType: 'rival' } } });
+    expect(next.neighbourNetwork).toHaveLength(s.neighbourNetwork.length);
+  });
 });

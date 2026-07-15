@@ -108,8 +108,9 @@ describe('generateFactionResponses (property-based)', () => {
     }), { numRuns: 60 });
   });
 
-  // Bonus invariant: unmatched archetypes produce no response.
-  test('a settlement of only unmatched factions yields zero responses', () => {
+  // Invariant: unmatched archetypes now each emit exactly one generic NEUTRAL
+  // response (no faction is silent), and no faction is doubled.
+  test('a settlement of only unmatched factions yields one neutral response each', () => {
     fc.assert(fc.property(eventArb, (event) => {
       const settlement = {
         powerStructure: {
@@ -120,7 +121,13 @@ describe('generateFactionResponses (property-based)', () => {
           ],
         },
       };
-      expect(generateFactionResponses(settlement, event)).toEqual([]);
+      const responses = generateFactionResponses(settlement, event);
+      expect(responses).toHaveLength(3);
+      expect(responses.map(r => r.factionId)).toEqual(['f1', 'f2', 'f3']);
+      for (const r of responses) {
+        expect(r.stance).toBe('neutral');
+        expect(r.response.length).toBeGreaterThan(0);
+      }
     }), { numRuns: 30 });
   });
 });

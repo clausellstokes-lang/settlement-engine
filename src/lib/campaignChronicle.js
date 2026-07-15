@@ -23,6 +23,10 @@ export async function requestCampaignChronicle({ campaign, snapshot, tick = null
     wizardNews: campaign?.wizardNews,
     worldState: campaign?.worldState,
     snapshot,
+    // §S3 — the live regional graph names the siege coalition + trade-war
+    // commodity in the grounding. Prefer the snapshot's graph (post-pulse), fall
+    // back to the campaign's stored one. Absent ⇒ the war story is simply omitted.
+    regionalGraph: snapshot?.regionalGraph || campaign?.regionalGraph,
     tick,
   });
 

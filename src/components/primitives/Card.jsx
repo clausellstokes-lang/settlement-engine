@@ -41,7 +41,7 @@ export default function Card({
         border: `1px solid ${v.border}`,
         borderRadius: 6,
         padding: pad,
-        // V-4: subtle ink-tinted lift so the shared card reads as a surface,
+        // Subtle ink-tinted lift so the shared card reads as a surface,
         // not a flat outline. ELEV[1] is the default-card tier.
         boxShadow: ELEV[1],
       }}

@@ -1,5 +1,7 @@
 # Simulation Logic Audit — comprehensive review
 
+> **⚠️ HISTORICAL (audit snapshot) — do NOT read as current state.** Many findings here have since been addressed on `master`. Code is the source of truth; see [docs/README.md](README.md) for the CANONICAL-vs-HISTORICAL index and the precedence rule (code > canonical > historical).
+
 _Produced by a 12-analyst + synthesis multi-agent pass over the whole simulation, judged against the DM/worldbuilder thesis. Findings verified against source._
 
 ## Cohesion verdict

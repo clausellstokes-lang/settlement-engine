@@ -49,7 +49,7 @@ function WorldMapStageImpl({
   iframeRef,
   bridgeReady,
   bridgeRef,
-  overlayTransformRef,
+  onOverlayTransform,
   onNavigate,
   showLayersPanel,
   setShowLayersPanel,
@@ -171,7 +171,7 @@ function WorldMapStageImpl({
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
               {/* eslint-disable-next-line react-hooks/refs */}
-              <MapOverlay bridge={imageMode ? null : bridgeRef.current} transformOut={overlayTransformRef} />
+              <MapOverlay bridge={imageMode ? null : bridgeRef.current} onTransform={onOverlayTransform} />
             </Suspense>
           )}
           <Suspense fallback={null}>
