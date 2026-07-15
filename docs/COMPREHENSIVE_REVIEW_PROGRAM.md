@@ -317,8 +317,19 @@ behavior, budget raises, golden regens.
   not a live entity); people conserved (migration out), only the entity dies. NPCs: none until
   hamlet (names begin where community begins). THE ONE V2 SEAM: graduation past
   village-in-orbit to first-class digest membership IS the version-axis event — V1 caps
-  satellites in-orbit; graduation is its own later commission. DO NOT BUILD until the soak
-  completes and the owner re-commissions.
+  satellites in-orbit; graduation is its own later commission. OWNER REFINEMENT (2026-07-15,
+  verbatim): "cities or higher that have declined to the point where they are a thorpe and
+  perished are the only things eligible to become relic ruins" — THE RELIC-RUIN SCARCITY LAW:
+  a dead satellite thorp leaves at most a minor trace (an abandoned-steading history note); a
+  RELIC RUIN is EARNED by a full civilizational arc (peak tier ≥ city → the long decline to
+  thorp → death). Mechanical note at capture: requires a monotone `peakTier` stamp (one cheap
+  field); under the sub-century horizon the endogenous path is near-impossible inside one
+  campaign (a full city→thorp→death arc outlasts 30 years) — so relic ruins are naturally
+  GENERATION-SEEDED ancient features first (matching the fiction: ruins are old), with the
+  engine lifecycle as the rare live path in long soaks. Architect's offered twin (undecided,
+  owner's call at re-commission): RESETTLEMENT — a relic ruin as a privileged birth site (a
+  new thorp on ancient foundations), giving ruins a future as well as a past. DO NOT BUILD
+  until the soak completes and the owner re-commissions.
 
 ## Phase plan (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
