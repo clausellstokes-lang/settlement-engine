@@ -357,6 +357,19 @@ behavior, budget raises, golden regens.
   true final engine wave, after W-LIFECYCLE, before the W-COMPOSER-2 lift. Design freezes on
   the momentum recon's return.
 
+- **2026-07-15 (afternoon) — THE FINAL SCOPE CLOSE (owner, verbatim: "I think this is my last
+  addition to the simulation (completing the underlying psychology of everything) before the
+  soak/tuning."):** W-MOMENTUM is the LAST simulation addition. The design corpus is closed
+  for the third and FINAL time — this close differs from the prior two in kind: every
+  residual has been individually adjudicated (built / building / queued / parked-with-
+  rationale / consciously-rejected), the psychology layer completes the belief→decision→
+  consequence chain, and the owner has named it terminal. From here: EXECUTION ONLY down the
+  fixed sequence (navy+discovery merges → lifecycle → momentum → guide-2 → composer-2 lift →
+  SM-4 → Surveyor S1-S7 → dimensions-only re-grade → master merge + git push (both
+  pre-authorized) → the owner decision list → the successor's soak). New simulation scope
+  after this line requires the owner to explicitly reopen — and the reopening should be
+  noted as post-soak material by default.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
