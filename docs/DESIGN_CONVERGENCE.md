@@ -125,6 +125,18 @@ Each is §H-loaded, authority-routed, and receipted with the believed fact it re
   fenced dormancy golden pre-captured; the recon's full tripwire list (statefulArmies,
   siegeTermination, warInitiateResolveSplit.m9d, actorMajorApproval, occupation, z2Homeostasis,
   the three walkers) runs after every substantive change.
+- **THE MERCENARY CLAUSE (owner amendment 2026-07-15, verbatim boundary: "Mercenary related
+  institutions can help strengthen or reinforce a deployed army or military unit, but that is
+  it in terms of the war system."):** a settlement whose roster carries a mercenary-related
+  institution (facet law: declared `mercenary` facet ?? inferred name/tag pattern — sellsword/
+  mercenary/free-company; the facetOf chokepoint) grants a BOUNDED reinforcement term to
+  forces deployed FROM it, applied at the aim-group strength-aggregation seam (§1),
+  affordability-scaled (sellswords cost coin — the prosperity read; a poor town's mercenary
+  hall reinforces little), 0-when-absent ⇒ byte-identical, and receipted ("the Free Company
+  marched under Thornwall's banner"). NEVER independent actors, NEVER a new entity class, no
+  contracts/loyalty/defection machinery — the owner's boundary is the whole clause. Pin: the
+  bonus is capped, absent ⇒ prior strength exactly, and custom mercenary institutions COUNT
+  via the declared facet.
 
 ## 5. LEGIBILITY
 Interventions carry their typed motive in every receipt; the chronicle narrates sides and the

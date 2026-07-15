@@ -13,8 +13,14 @@ The frozen spatial digest is GEOMETRY, and geometry survives death. Two lanes, b
   KEEPS its digest cell — death is a STATE, not a deletion. The entity becomes a remnant
   (relic ruin or abandoned site) at the same coordinates: movers skip it, roads still pass its
   stones, the map still draws it (as ruins). No membership change, no re-canonize, ever.
-The ONE version-axis seam stays deferred (V2, its own commission): satellite GRADUATION past
-village-in-orbit to first-class digest membership. V1 caps satellites in orbit.
+The ONE version-axis seam stays deferred (V2, its own commission): satellite GRADUATION to
+first-class digest membership. THE THRESHOLD IS OWNER-RULED (2026-07-15, verbatim: "takes
+effect when they get to the village level which more or less makes them seem self-sufficient"):
+VILLAGE attainment IS the graduation trigger. V1 therefore runs the in-orbit ladder thorp →
+hamlet; a satellite reaching village scale enters an explicit CHARTER-PENDING state — visible,
+chronicle-noted ("the steading has outgrown its parent's shadow; a charter awaits"),
+deferral-visible per house law — never a silent cap. The V2 machinery executes pending
+charters when commissioned.
 
 ## 1. BIRTH (the satellite lane)
 **SEEDING (owner: town or higher; JUDGMENT — threshold town+, vetoable):** each tick, a town+
@@ -31,8 +37,10 @@ typed: `growth | resource_strike | resettlement | forced`.
 **PRECARITY (the owner's physics):** a thorp record carries {population (small), backing
 (parent prosperity + route health read), inflow (migration tally), dwell}. Each tick it either
 GROWS (backing + inflow adequate → population rises; thresholds promote in-orbit thorp →
-hamlet → village, the popToTier idiom), STARVES (backing or inflow fails → decline dwell
-accrues → the death draw arms — quickly die, per the owner), or CONVERGES.
+hamlet, the popToTier idiom; village scale ⇒ CHARTER-PENDING per §0 — graduation is
+owner-ruled to fire at village, executed by the parked V2 machinery), STARVES (backing or
+inflow fails → decline dwell accrues → the death draw arms — quickly die, per the owner), or
+CONVERGES.
 **CONVERGENCE (owner):** satellites of the SAME parent in close orbit-proximity merge into one
 hamlet-satellite — populations SUM (conservation), histories concatenate, the receipt names
 both steadings ("Millbrook and the Weir folded into one palisade"). A second, distinct

@@ -288,6 +288,27 @@ behavior, budget raises, golden regens.
   is impossible, not merely rare) or FORCED (the DM verb). No third path; analytics/receipts
   name which path minted every deposit.
 
+- **2026-07-15 (midday) — THE RESIDUALS RULINGS (owner, closing the gap-audit list):**
+  (1) DYNAMIC INFRASTRUCTURE STAYS PARKED (owner: "infrastructure i think will only change with
+  map-level biome/heightmap changes. I think that is automatic. The other thing is that ports
+  and the likes are tied to settlements… I'm inclined to keep it where it is at.") — the
+  owner's model is correct: routes/cost fields derive from the heightmap/biome at canonize and
+  re-derive automatically on any re-canonize; ports derive from settlement geography +
+  institutions. One recorded caveat: BOTH re-derive only on the re-canonize axis (a maritime
+  institution founded mid-campaign does not mint sea edges until re-canonize) — accepted, not
+  a gap. (2) PILGRIMAGE stays deferred where it is (B4, faith review). (3) SATELLITE
+  GRADUATION THRESHOLD RULED (owner: "takes effect when they get to the village level which
+  more or less makes them seem self-sufficient") — VILLAGE attainment IS the graduation
+  trigger; V1 (no graduation machinery) holds a village-scale satellite in an explicit
+  CHARTER-PENDING state (visible, chronicle-noted, deferral-visible) rather than a silent cap;
+  the V2 machinery executes pending charters when commissioned. DESIGN_SETTLEMENT_LIFECYCLE
+  amended. (4) THE MERCENARY CLAUSE (owner, verbatim: "Mercenary related institutions can help
+  strengthen or reinforce a deployed army or military unit, but that is it in terms of the war
+  system.") — mercenary institutions are a BOUNDED reinforcement modifier on deployed forces,
+  never independent actors, never a new entity class; facet-law compliant (declared
+  'mercenary' facet ?? inferred); affordability-scaled; receipted. Lands in W-CONVERGENCE's
+  strength-aggregation seam (design amended; addendum threaded to the in-flight build).
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
