@@ -265,7 +265,18 @@ behavior, budget raises, golden regens.
   GENERALIZES (named for the future, scoped to discovery now): the overlay-chokepoint is the
   sanctioned way any frozen-digest fact becomes dynamic later (new roads, new ports) — each such
   extension is its own owner commission. Builds as W-DISCOVERY, sequenced with W-UPSWING
-  (discovery is a new upswing SOURCE type).
+  (discovery is a new upswing SOURCE type). OWNER ADDENDUM (same morning, verbatim: "as is the
+  complete removal of resources as well!"): the down-stroke is FIRST-CLASS AND UNRESTRICTED —
+  any resource, discovered OR canonize-time base endowment, may decline to COMPLETE REMOVAL
+  (negative overlay deltas; the chokepoint clamps effective endowment at 0; the frozen digest
+  still never mutates). Removal causes: natural exhaustion lifecycle, calamity coupling (the
+  bucket can strip a resource), and the DM verb — the counterpart ships BOTH directions
+  (FORCE_DISCOVERY + FORCE_DEPLETION with a to-zero magnitude rung). Unification in action:
+  removal is a BUST source exactly as discovery is a boom source (B2's severance reads it; the
+  town the silver built hollows out when the vein dies). Implementer hazard named at capture:
+  zero-resource edge cases — every consumer must tolerate a settlement whose resource list
+  goes EMPTY (economy-tier derivation, supply-chain sources, display) — the census flags any
+  non-empty assumption.
 
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
