@@ -83,16 +83,17 @@ describe('EventComposer — second decomposition smoke (TargetField + constants)
     const EventComposer = (await import('../../src/components/settlement/EventComposer.jsx')).default;
     render(<EventComposer />);
     // ADD_INSTITUTION is the initial type → the catalog-picker "Institution"
-    // Field from EventComposerTargetField is shown.
-    expect(screen.getByText('Institution')).toBeTruthy();
+    // Field from EventComposerTargetField is shown. (getAllByText: the W-COMPOSER-1
+    // navigator's entity-kind list also legitimately says "Institution".)
+    expect(screen.getAllByText('Institution').length).toBeGreaterThan(0);
   });
 
   test('switching event type re-renders the TargetField branch (KILL_NPC → dossier select)', async () => {
     const EventComposer = (await import('../../src/components/settlement/EventComposer.jsx')).default;
     render(<EventComposer />);
-    // The Event <select> is the first combobox; switch to KILL_NPC, which routes
-    // through the TargetField dossier-entity branch (a "Target" select of NPCs).
-    const eventSelect = screen.getAllByRole('combobox')[0];
+    // The Event <select> is found by its accessible name (the W-COMPOSER-1
+    // navigator renders its own selects before it in the DOM).
+    const eventSelect = screen.getByLabelText('Event type');
     fireEvent.change(eventSelect, { target: { value: 'KILL_NPC' } });
     // The NPC option from the stubbed dossier appears in the target dropdown.
     expect(screen.getByRole('option', { name: 'Mira' })).toBeTruthy();

@@ -52,6 +52,7 @@ import {
   activeEdits as _pe_activeEdits,
 } from '../domain/pendingEdits.js';
 import { previewEvent as domainPreviewEvent } from '../domain/events/previewEvent.js';
+import { eventStalenessKey } from '../domain/events/stalenessKey.js';
 import { applyEvent   as domainApplyEvent   } from '../domain/events/applyEvent.js';
 import { scrubUndoneEvent } from '../domain/events/undoEvent.js';
 import { receiptFromEventLogEntry } from '../domain/events/mutate.js';
@@ -358,8 +359,10 @@ function resetSettlementIdentity(state) {
   state.pipelineRevealActive  = false;
   // A stale regenerate-delta card must not describe an unrelated settlement.
   state.lastRegenerationDelta = null;
-  // Any pending single/batch event preview belongs to the prior identity.
+  // Any pending single/batch event preview — and any staged composer intent —
+  // belongs to the prior identity.
   state.pendingPreview        = null;
+  state.composerIntent        = null;
 }
 
 export const createSettlementSlice = (set, get) => ({
@@ -800,6 +803,7 @@ export const createSettlementSlice = (set, get) => ({
   eventLog:        [],       // EventLogEntry[] — populated only in canon mode
   pendingPreview:  null,     // EventPreview — set by previewEvent, cleared by apply/dismiss
   pendingBatchPreview: null, // BatchPreview — set by previewEventBatch, cleared by applyEventBatch/dismiss
+  composerIntent:  null,     // { type?, target?, fields? } — target-first / SuccessorPrompt injection (Composer V2 §4); consumed+cleared by EventComposer
 
   // Set by applyEvent when a pillar-tier NPC death just committed.
   // The SuccessorPrompt UI consumes this to ask the DM whether to
@@ -1612,6 +1616,12 @@ export const createSettlementSlice = (set, get) => ({
       systemState: state.systemState,
       event,
     });
+    // THE STALENESS LAW (Composer V2 §5): the preview is keyed to
+    // (payload hash × settlement reference). The composer voids the pane the
+    // moment either diverges — an edited form or a world-pulse advance under
+    // an open composer can never commit through a stale preview.
+    preview._previewKey = eventStalenessKey(event);
+    preview._forSettlement = state.settlement;
     set(s => { s.pendingPreview = preview; });
     return preview;
   },
@@ -1622,11 +1632,13 @@ export const createSettlementSlice = (set, get) => ({
    * settlement, and appends to eventLog (canon only). Updates the
    * editedAt provenance timestamp.
    *
-   * The audit's preview-vs-apply integrity rule: prefer
-   * `applyPendingPreview()` when there is one — that path commits
-   * exactly the event the user previewed. This direct `applyEvent`
-   * is for callers (like draft-mode rapid-fire edits) that don't go
-   * through the preview flow.
+   * Preview↔commit integrity (Composer V2 §5): the composer ALWAYS applies the
+   * freshly-built form event; when the form and settlement are unchanged since
+   * the last preview, that event equals the previewed one byte-for-byte (the
+   * staleness key + compose-session id guarantee it), so the old
+   * applyPendingPreview preference is retired. A handler VETO (§2) makes this
+   * a blocking refusal: nothing commits, nothing logs, the envelope carries
+   * ok:false + veto.
    */
   applyEvent: (event) => {
     const state = get();
@@ -1656,7 +1668,7 @@ export const createSettlementSlice = (set, get) => ({
       ? saveEnvelopeFor(activeSaveId, beforeSave, state.settlement, beforeSave?.campaignState)
       : null;
 
-    let { logEntry, nextSystemState, nextSettlement } = domainApplyEvent({
+    let { logEntry, nextSystemState, nextSettlement, veto } = domainApplyEvent({
       settlement: state.settlement,
       systemState: state.systemState,
       event,
@@ -1664,6 +1676,24 @@ export const createSettlementSlice = (set, get) => ({
       // stays a pure function of (settlement, event, now) (A+ domain.6).
       now: new Date().toISOString(),
     });
+    // Handler-veto channel (Composer V2 §2): the mutation REFUSED — a blocking
+    // refusal, not a commit. No timeline entry, no persistence, no ripple, no
+    // stale-narrative modal; the composer surfaces `veto.message` in the pane.
+    if (veto) {
+      set(s => { s.pendingPreview = null; });
+      return makeActionResult('applyEvent', {
+        ok: false,
+        veto: { code: veto.code || null, detail: veto.detail || '', message: veto.message },
+        userMessage: veto.message,
+        before: {
+          eventType: event?.type ?? null,
+          targetId: event?.targetId ?? null,
+          phase: state.phase,
+          activeSaveId: activeSaveId ?? null,
+        },
+        after: null,
+      });
+    }
     nextSettlement = reconcileSettlementChange(nextSettlement, state.settlement, {
       source: state.phase === 'canon' ? 'canon_event' : 'draft_event',
       changeType: event?.type,
@@ -1812,19 +1842,11 @@ export const createSettlementSlice = (set, get) => ({
   /** Dismiss the successor prompt without taking action. */
   dismissPendingSuccession: () => set(state => { state.pendingSuccession = null; }),
 
-  /**
-   * Commit the currently-pending preview event. This is the audit's
-   * "preview/apply must commit the exact same event" fix. The UI
-   * builds the event once, hands it to previewEvent, then calls this
-   * to apply — guaranteed to commit the previewed event byte-for-byte
-   * (same id, same payload, same severity), so the deltas in the
-   * applied log entry match what the preview panel showed.
-   */
-  applyPendingPreview: () => {
-    const state = get();
-    if (!state.settlement || !state.pendingPreview?.event) return null;
-    return state.applyEvent(state.pendingPreview.event);
-  },
+  // applyPendingPreview was RETIRED (Composer V2 §5, W-COMPOSER-1): apply
+  // always commits the freshly-built form event, and preview↔commit identity
+  // is guaranteed by the staleness key (same payload + same settlement ⇒ the
+  // built event ≡ the previewed event, id included via the compose-session id)
+  // instead of by preferring a possibly-stale stored preview.
 
   dismissPreview: () => set(state => { state.pendingPreview = null; }),
 
@@ -1850,7 +1872,6 @@ export const createSettlementSlice = (set, get) => ({
       systemStateDeltas: result.systemStateDeltas,
       afterSystemState:  result.afterSystemState,
       perEvent:          result.perEvent,
-      rerunKeys:         result.rerunKeys,
     };
     set(s => { s.pendingBatchPreview = preview; });
     return preview;
@@ -1875,8 +1896,13 @@ export const createSettlementSlice = (set, get) => ({
       return { ok: false, warnings: validation.warnings, logEntries: [] };
     }
     const logEntries = [];
+    const refusals = [];
     for (const event of events) {
       const entry = get().applyEvent(event);
+      // A vetoed event refused (Composer V2 §2) — collect the refusal, apply
+      // the rest (order-independent events keep landing, same as validation
+      // semantics for the events that DID pass).
+      if (entry && entry.ok === false && entry.veto) { refusals.push({ eventId: event?.id, ...entry.veto }); continue; }
       if (entry) logEntries.push(entry);
     }
     set(s => { s.pendingBatchPreview = null; });
@@ -1884,10 +1910,19 @@ export const createSettlementSlice = (set, get) => ({
     // markers carry `queued:true`); nothing mutated, so callers should not raise
     // the stale-narrative notice.
     const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
-    return { ok: true, warnings: [], logEntries, queuedOnly };
+    return { ok: true, warnings: refusals, logEntries, queuedOnly };
   },
 
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),
+
+  /**
+   * Stage a composition from anywhere (Composer V2 §4 — the SuccessorPrompt
+   * injection precedent, generalized). `intent` = { type?, target?, fields? }:
+   * the EventComposer consumes it into its form state (the ONE source of
+   * truth), auto-previews, and clears it via stageComposerIntent(null).
+   * Registered as a mechanical op (Track K) — transient staging state.
+   */
+  stageComposerIntent: (intent) => set(state => { state.composerIntent = intent || null; }),
 
   /**
    * Undo the most recent canon event. Restores the systemState and scrubs

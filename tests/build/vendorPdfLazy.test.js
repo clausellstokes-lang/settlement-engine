@@ -435,6 +435,22 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     expect(size).toBeLessThan(660_000);
   });
 
+  // ── The affordance manifest stays a LAZY LEAF (Composer V2 §2) ───────────
+  // The manifest (domain/events/affordanceManifest.js) rides the lazy composer
+  // chunk exactly like registryProse — never the eager closure. A NAMED guard
+  // (not just the byte ratchet): the module embeds a sentinel string constant;
+  // if any eager module ever imports the manifest, the sentinel lands in a
+  // closure chunk and this fails with the culprit visible in the breakdown.
+  it('the affordance manifest is ABSENT from the entry transitive static closure', () => {
+    const { files } = entryStaticClosure();
+    const carriers = files.filter(f =>
+      readFileSync(join(assetsDir, f), 'utf-8').includes('AFFORDANCE_MANIFEST_LAZY_SENTINEL'));
+    expect(
+      carriers,
+      `the affordance manifest reached first paint via ${carriers.join(', ')} — it must stay a lazy leaf (registryProse idiom)`,
+    ).toHaveLength(0);
+  });
+
   // ── First-paint byte budget (the monotone ratchet) ───────────────────────
   it(`entry static closure raw bytes stay under the first-paint budget (${CLOSURE_BUDGET_BYTES})`, () => {
     const { files } = entryStaticClosure();

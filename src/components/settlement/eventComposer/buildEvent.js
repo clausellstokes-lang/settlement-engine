@@ -27,9 +27,18 @@ import { buildTargetOptions, labelOfTarget } from './helpers.js';
 import { RELATIONSHIP_OPTIONS, CUSTOM_RESOURCE_OPTION, STRESSOR_SEVERITY_VALUES } from './EventComposerConstants.js';
 import { resolveDeityForEvent } from './EventComposerDeityField.jsx';
 
+/** Mint a compose-session event id — the EXISTING id shape (ev_ + wall clock +
+ *  random suffix; the timeline/undo key), minted ONCE per composition (Composer
+ *  V2 §5 IDENTITY): dial turns never re-mint, so preview → apply → undo key one
+ *  stable id. The host re-mints on apply / add-to-batch / verb change. */
+export function mintComposeEventId() {
+  return `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+}
+
 export function buildEvent(form) {
   const {
     type, target, effectiveTarget, settlement, phase,
+    sessionEventId, causeOverride,
     addCategory, severity, dimension,
     importance, role, institutionId,
     npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
@@ -179,13 +188,17 @@ export function buildEvent(form) {
         : effectiveTarget.trim();
 
   return {
-    id: `ev_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    // Compose-session-stable id (§5): the host mints once per composition and
+    // threads it here; the fallback mint keeps direct callers working.
+    id: sessionEventId || mintComposeEventId(),
     type,
     targetId,
     payload,
     // Party-caused events carry a distinct cause so the timeline/Chronicle and
     // (in canon campaigns) the world engine can treat them as the table's doing.
-    cause: partyCaused ? 'party_action' : (phase === 'canon' ? 'player_action' : 'authoring'),
+    // causeOverride carries an injected composition's provenance (SuccessorPrompt
+    // stages 'world_event' — the vacuum-filling is the world's doing, not the DM's).
+    cause: partyCaused ? 'party_action' : (causeOverride || (phase === 'canon' ? 'player_action' : 'authoring')),
     partyCaused: partyCaused || undefined,
     description: description.trim() || undefined,
   };

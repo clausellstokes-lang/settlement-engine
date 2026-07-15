@@ -31,7 +31,7 @@ import Button from '../primitives/Button.jsx';
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
-  const previewEvent = useStore(s => s.previewEvent);
+  const stageComposerIntent = useStore(s => s.stageComposerIntent);
   const dismiss      = useStore(s => s.dismissPendingSuccession);
 
   if (!pending || !settlement) return null;
@@ -52,22 +52,20 @@ export default function SuccessorPrompt() {
     : 'the role';
 
   function pickSuccessor(npc) {
-    previewEvent({
-      // Date.now() and Math.random() generate a unique event id. They
-      // only fire when the user clicks a successor (outside render);
-      // the rule sees the function defined during render and is being
-      // over-conservative.
-      // eslint-disable-next-line react-hooks/purity
-      id: `ev_succ_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    // Composer V2 §4/§5: stage a composer INTENT — the form is the one source
+    // of truth, so the composer populates, auto-previews, and Apply commits the
+    // (possibly adjusted) form event. The old pre-staged pendingPreview died
+    // with the apply-prefers-pendingPreview bypass.
+    stageComposerIntent({
       type: 'ASSIGN_NPC_TO_ROLE',
-      targetId: npc.id || npc.name,
-      payload: {
+      target: npc.id || npc.name,
+      fields: {
         institutionId,
         role: pending.outgoingRole || 'replacement',
         quality: 'competent',          // sensible default — user can adjust
+        causeOverride: 'world_event',  // the vacuum-filling is the world's doing
+        description: `${npc.name} succeeds ${pending.outgoingNpcName}.`,
       },
-      cause: 'world_event',
-      description: `${npc.name} succeeds ${pending.outgoingNpcName}.`,
     });
     dismiss();
     // Scroll to EventComposer so the DM lands on the preview panel
@@ -78,17 +76,16 @@ export default function SuccessorPrompt() {
   }
 
   function pickNew() {
-    previewEvent({
-      id: `ev_new_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+    stageComposerIntent({
       type: 'ADD_NPC',
-      targetId: pending.outgoingRole ? `New ${pending.outgoingRole}` : 'New Appointee',
-      payload: {
+      target: pending.outgoingRole ? `New ${pending.outgoingRole}` : 'New Appointee',
+      fields: {
         importance: 'key',
         role: pending.outgoingRole || '',
-        linkedInstitutionIds: institutionId ? [institutionId] : [],
+        institutionId,               // buildEvent maps this to linkedInstitutionIds
+        causeOverride: 'world_event',
+        description: `A new figure rises to fill the vacuum left by ${pending.outgoingNpcName}.`,
       },
-      cause: 'world_event',
-      description: `A new figure rises to fill the vacuum left by ${pending.outgoingNpcName}.`,
     });
     dismiss();
     // Pricing moment for the campaign-state moment: rebuilding after

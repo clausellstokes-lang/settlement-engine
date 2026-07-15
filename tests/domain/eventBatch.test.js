@@ -9,6 +9,7 @@ import {
   validateBatch, applyEventBatch, eventProduces, eventConsumes,
 } from '../../src/domain/events/batch.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 
 const base = {
   tier: 'town',
@@ -260,7 +261,12 @@ describe('applyEventBatch', () => {
     expect(miller.status).toBe('dead');
     const factions = result.nextSettlement.powerStructure?.factions || [];
     expect(factions.some(f => /dockhands/i.test(f.name))).toBe(true);
-    expect(result.rerunKeys).toEqual(expect.arrayContaining(['powerStructure', 'narrative']));
+    // rerunKeys left the batch envelope (W-COMPOSER-1: no UI consumer; the
+    // table moved to the lazy registryFull). The union property it asserted
+    // is pinned against the table itself.
+    const union = new Set(batch.flatMap(e => RERUN_KEYS_FOR_EVENT[e.type] || []));
+    expect([...union]).toEqual(expect.arrayContaining(['powerStructure', 'narrative']));
+    expect(result.rerunKeys).toBeUndefined();
   });
 
   test('derives a single combined SystemState delta for the batch', () => {

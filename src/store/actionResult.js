@@ -68,6 +68,8 @@
  * @property {PersistenceDescriptor[]} persistenceOps  what reached durable storage (links to outbox ops via opId)
  * @property {{event: string, props: Object}|null} analyticsEvent  the event the action fired (describes, does not route)
  * @property {string|null} userMessage             toast/banner copy, null = silent
+ * @property {{code: string|null, detail?: string, message: string}|null} [veto]  Composer V2 §2 — the handler-veto refusal
+ *                                                 (ok:false + veto = the world refused; nothing committed)
  */
 
 /**
@@ -126,5 +128,6 @@ export function makeActionResult(action, fields = {}) {
     persistenceOps: fields.persistenceOps ?? [],
     analyticsEvent: fields.analyticsEvent ?? null,
     userMessage: fields.userMessage ?? null,
+    ...(fields.veto !== undefined ? { veto: fields.veto } : {}),
   };
 }

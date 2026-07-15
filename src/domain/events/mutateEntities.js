@@ -36,6 +36,7 @@ import {
   findInstitution, findFaction, findNpc,
   replaceInstitution, replaceFaction, replaceNpc,
   labelFromTarget, slugify,
+  vetoMutation, sev01,
 } from './mutateHelpers.js';
 
 // A settlement / entity / event is a schemaless open object at this layer — every
@@ -149,8 +150,8 @@ function withoutFoodAnchorLostFor(next, inst) {
  */
 function damageInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
-  const severity = Number(event.payload?.severity ?? 0.7);
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
+  const severity = sev01(event.payload?.severity, 0.7);
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: 'capacity',
     severity,
@@ -172,7 +173,7 @@ function damageInstitution(s, event) {
  */
 function removeInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   const removed = { ...inst, status: STATUS_REMOVED, removedByEventId: event.id };
   let next = replaceInstitution(s, inst, removed);
   // Removal propagates the strongest possible impairment to linked
@@ -241,10 +242,10 @@ function addInstitution(s, event) {
  */
 function impairInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: event.payload?.dimension || 'capacity',
-    severity: Number(event.payload?.severity ?? 0.5),
+    severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
     description: event.description || `Impairment: ${event.payload?.dimension || 'capacity'}`,
   });
@@ -267,7 +268,7 @@ function impairInstitution(s, event) {
  */
 function restoreInstitution(s, event) {
   const inst = findInstitution(s, event.targetId);
-  if (!inst) return s;
+  if (!inst) return vetoMutation('institution_not_found', labelFromTarget(event.targetId));
   // Restore is scoped to ONE prior impairment. With an explicit causeEventId we
   // undo exactly that event; without one we undo the MOST RECENT impairment (the
   // last-applied cause) — never a blanket clear, which would wipe impairments
@@ -307,10 +308,10 @@ function latestImpairmentCause(entity) {
  */
 function impairFaction(s, event) {
   const faction = findFaction(s, event.targetId);
-  if (!faction) return s;
+  if (!faction) return vetoMutation('faction_not_found', labelFromTarget(event.targetId));
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: event.payload?.dimension || 'public_support',
-    severity: Number(event.payload?.severity ?? 0.5),
+    severity: sev01(event.payload?.severity, 0.5),
     causeEventId: event.id,
     description: event.description || `Faction setback: ${event.payload?.dimension || 'public_support'}`,
   });
@@ -328,7 +329,7 @@ function impairFaction(s, event) {
  */
 function restoreFaction(s, event) {
   const faction = findFaction(s, event.targetId);
-  if (!faction) return s;
+  if (!faction) return vetoMutation('faction_not_found', labelFromTarget(event.targetId));
   // Same single-impairment scope as restoreInstitution: explicit cause, else the
   // most recent one — never a blanket clear of unrelated in-timeline impairments.
   const causeId = event.payload?.causeEventId ?? latestImpairmentCause(faction);
@@ -350,7 +351,7 @@ function restoreFaction(s, event) {
  */
 function addFaction(s, event) {
   const name = labelFromTarget(event.targetId) || event.payload?.name;
-  if (!name) return s;
+  if (!name) return vetoMutation('empty_target');
   const psFactions = s.powerStructure?.factions;
   const flatFactions = s.factions;
   const list = psFactions || flatFactions || [];
@@ -423,7 +424,7 @@ function addNpc(s, event) {
  */
 function killNpcMutation(s, event) {
   const npc = findNpc(s, event.targetId);
-  if (!npc) return s;
+  if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
   const importance = event.payload?.importance || npc.importance || inferImportance(npc);
   const enriched = { ...npc, importance };
   const result = killNpc(/** @type {import('../entities/npcs.js').NpcStructural} */ (enriched), event.id);
@@ -591,11 +592,11 @@ function exposeCorruption(s, event) {
   const npc = findNpc(s, event.targetId);
   if (npc && npc.corrupt) return exposeCorruptNpc(s, npc, event);
 
-  const severity = Number(event.payload?.severity ?? 0.7);
+  const severity = sev01(event.payload?.severity, 0.7);
   const inst    = findInstitution(s, event.targetId);
   const faction = findFaction(s, event.targetId);
   const target  = inst || faction;
-  if (!target) return s;
+  if (!target) return vetoMutation('target_not_found', labelFromTarget(event.targetId));
 
   const impairment = /** @type {import('../entities/status.js').Impairment} */ ({
     type: 'legitimacy',
@@ -656,7 +657,7 @@ function exposeCorruptNpc(s, npc, event) {
   // The NPC scandal is also a durable corruption_exposed condition (see exposeCorruption).
   return withActiveCondition({ ...next, npcs: nextNpcs }, {
     archetype: 'corruption_exposed',
-    severity: Number(event.payload?.severity ?? 0.7),
+    severity: sev01(event.payload?.severity, 0.7),
     triggeredAt: { sourceEventType: 'EXPOSE_CORRUPTION', sourceEventTargetId: npc.id || npc.name },
     causes: [{ source: 'event', eventId: event.id, detail: `${npc.name} was publicly exposed as corrupt and ousted.` }],
   });
@@ -695,14 +696,16 @@ function severCorruptionTiesTo(s, institutionName) {
  */
 function imposeCorruption(s, event) {
   const npc = findNpc(s, event.targetId);
-  if (!npc || npc.corrupt) return s; // need a real, not-already-corrupt NPC
+  // need a real, not-already-corrupt NPC
+  if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
+  if (npc.corrupt) return vetoMutation('npc_already_corrupt', npc.name);
 
   // Resolve the criminal organization: an explicit pick, else the settlement's criminal
   // institution. With no criminal organization there is nothing to link to — no-op.
   const orgName = event.payload?.criminalInstitution
     || readCorruptionClimate(s).criminalInstitutions[0]
     || null;
-  if (!orgName) return s;
+  if (!orgName) return vetoMutation('no_criminal_org');
 
   // Vector derives from the NPC's own corruptible flaw (greed / fear / status / ...), mirroring
   // the organic onset path; defaults to greed when the NPC has no flagged flaw.
@@ -768,16 +771,16 @@ function swapNpcStanding(s, event) {
   // whose id is null (String(null || '') === ''), silently swapping with a
   // bystander instead of no-opping.
   const peerRef = event.payload?.swapWithNpcId || event.payload?.swapWithName;
-  if (!event.targetId || !peerRef) return s;
+  if (!event.targetId || !peerRef) return vetoMutation('swap_pair_incomplete');
   const a = findNpc(s, event.targetId);
   const b = findNpc(s, peerRef);
-  if (!a || !b || a === b) return s;
+  if (!a || !b || a === b) return vetoMutation('swap_pair_invalid');
   // Standing swaps stay inside ONE faction (the owner's design). If both
   // NPCs declare an affiliation and they differ, this is a mis-targeted
   // event — no-op rather than mis-stamp a foreign factionId onto the peer.
   if (a.factionAffiliation && b.factionAffiliation
     && String(a.factionAffiliation).toLowerCase() !== String(b.factionAffiliation).toLowerCase()) {
-    return s;
+    return vetoMutation('swap_cross_faction', `${a.name} / ${b.name}`);
   }
 
   // Swap presence AS WELL AS value: when `from` carries the field, copy it
@@ -900,6 +903,9 @@ function imposeCult(s, event) {
   });
   const tier = s.tier || config.tier || 'village';
   const result = reconcileCultImposition({ patron: config.primaryDeitySnapshot || null, cults, tier, deity: entry });
+  if (result.action === 'refused') {
+    return vetoMutation(`cult_${result.reason}`, entry.name);
+  }
   if (!result.cults.length) delete config.cultDeitySnapshots;
   else config.cultDeitySnapshots = Object.freeze(result.cults.map((/** @type {MutEntity} */ c) => Object.freeze({ ...c })));
   return { ...s, config };
@@ -920,9 +926,9 @@ function shiftTier(s, event) {
   const direction = event.payload?.direction === 'demotion' ? 'demotion' : 'promotion';
   const fromTier = s.tier || s.config?.tier || popToTier(Number(s.population) || 0);
   const idx = TIER_ORDER.indexOf(fromTier);
-  if (idx < 0) return s;
+  if (idx < 0) return vetoMutation('tier_unknown', String(fromTier));
   const toTier = TIER_ORDER[direction === 'promotion' ? idx + 1 : idx - 1];
-  if (!toTier) return s;                                  // already at the cap / floor
+  if (!toTier) return vetoMutation('tier_at_bound', direction);
   // Reband population into the target band — a forced shift needs it (the organic path
   // does not, since population already crossed the threshold). A plain clamp lands a
   // promotion at the band floor and a demotion at the band ceiling, leaving an already

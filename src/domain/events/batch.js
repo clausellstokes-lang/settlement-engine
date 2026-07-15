@@ -26,8 +26,8 @@
  * validator.
  */
 
-import { EVENT_REGISTRY, RERUN_KEYS_FOR_EVENT } from './registry.js';
-import { mutateSettlement } from './mutate.js';
+import { EVENT_REGISTRY } from './registry.js';
+import { mutateSettlementChecked } from './mutate.js';
 import { slugify } from './mutateHelpers.js'; // code-quality-5: the byte-identical copy, now merged
 
 import { deriveSystemState } from '../state/deriveSystemState.js';
@@ -244,12 +244,21 @@ export function validateBatch(settlement, events = []) {
  * @param {Object|null} [args.systemState] before-state (derived if omitted)
  * @param {Event[]} args.events
  * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
+ * Vetoed events (the handler-veto channel, Composer V2 §2) contribute NO
+ * mutation, NO summed deltas, and NO narration; their refusal lands in that
+ * event's perEvent warnings — so the batch preview shows exactly what the
+ * per-event applies will commit (preview ≡ apply at the batch seam).
+ *
+ * rerunKeys was REMOVED from this envelope (2026-07-14, W-COMPOSER-1): the
+ * per-type table (RERUN_KEYS_FOR_EVENT, now in registryFull.js — lazy) was
+ * descriptive metadata no UI consumer ever read, and it was the last thing
+ * holding ~1.7 KB of strings in the eager first-paint closure.
+ *
  * @returns {{
  *   beforeSettlement: Object, nextSettlement: Object,
  *   beforeSystemState: Object, afterSystemState: Object,
  *   systemStateDeltas: Array<Object>, summedStateDeltas: Object,
  *   perEvent: Array<{event:Event, narrativeSummary:string, warnings:Array<Object>}>,
- *   rerunKeys: string[],
  * }}
  */
 export function applyEventBatch({ settlement, systemState = null, events = [], now = null }) {
@@ -260,7 +269,6 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
   /** @type {Record<string, number>} */
   const summedStateDeltas = {};
   const perEvent = [];
-  const rerunKeys = new Set();
 
   for (const event of events) {
     const spec = event ? EVENT_REGISTRY[event.type] : null;
@@ -277,8 +285,24 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     // the already-mutated `working` drifted severity-derived deltas (e.g. a
     // RESOLVE_STRESSOR reading the stressor it just removed).
     const before = working;
-    // Entity mutation, threaded into the next event.
-    working = mutateSettlement({ settlement: working, event, now });
+    // Entity mutation, threaded into the next event. A veto refuses THIS
+    // event — its deltas and narration are skipped — while the rest of the
+    // batch continues against the unchanged state.
+    const mutated = mutateSettlementChecked({ settlement: working, event, now });
+    if (mutated.veto) {
+      perEvent.push({
+        event,
+        narrativeSummary: '',
+        warnings: [{
+          severity: 'veto',
+          code: mutated.veto.code,
+          detail: mutated.veto.detail,
+          message: `${spec.label || event.type} refused: ${mutated.veto.code}${mutated.veto.detail ? ` (${mutated.veto.detail})` : ''}`,
+        }],
+      });
+      continue;
+    }
+    working = mutated.settlement;
 
     // Sum the authored state deltas (additive across the batch).
     // Cast: spec.stateDeltas is typed 1-arg in the registry typedef but
@@ -294,8 +318,6 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
       ? /** @type {Function} */ (spec.narrate)(event, beforeSettlement)
       : '';
     perEvent.push({ event, narrativeSummary, warnings: [] });
-
-    for (const key of /** @type {Record<string, string[]>} */ (RERUN_KEYS_FOR_EVENT)[event.type] || []) rerunKeys.add(key);
   }
 
   const afterStructural = deriveSystemState(working);
@@ -310,7 +332,6 @@ export function applyEventBatch({ settlement, systemState = null, events = [], n
     systemStateDeltas,
     summedStateDeltas,
     perEvent,
-    rerunKeys: [...rerunKeys],
   };
 }
 

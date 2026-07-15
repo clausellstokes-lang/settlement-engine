@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { promoteStressorsToConditions } from '../../src/domain/conditionPromotion.js';
 import { buildStressorPickerItems, pulseTypeForStressorKey, GEN_TO_PULSE_TYPE } from '../../src/domain/stressorPicker.js';

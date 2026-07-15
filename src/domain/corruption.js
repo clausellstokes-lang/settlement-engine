@@ -498,8 +498,13 @@ function prosperityScore(value) {
   return 0.4; // unknown → middling
 }
 
-/** @param {import('./settlement.schema.js').SimInstitution} inst */
-function isCriminalInstitution(inst) {
+/**
+ * The ONE criminal-organization detector (tag/name backfill OR criminal
+ * category). Exported (W-COMPOSER-1) so the composer's affordance layer wraps
+ * THIS function instead of re-implementing the filter — the same-function law.
+ * @param {import('./settlement.schema.js').SimInstitution} inst
+ */
+export function isCriminalInstitution(inst) {
   if (!inst) return false;
   // Tag dispatch — declared 'criminal' tag OR a criminal name keyword, both
   // resolved by the centralized institutionTags map (lib/entities) — plus the

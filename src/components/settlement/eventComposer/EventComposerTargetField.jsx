@@ -15,6 +15,7 @@ import CatalogPicker from '../CatalogPicker.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 import { MUTED, FS } from '../../theme.js';
 import { buildTargetOptions } from './helpers.js';
+import { AFFORDANCE_MANIFEST } from '../../../domain/events/affordanceManifest.js';
 import { Field } from './Field.jsx';
 import {
   TARGET_ENTITY_BY_EVENT, CUSTOM_RESOURCE_OPTION,
@@ -204,7 +205,12 @@ export function EventComposerTargetField({
   // (new entities) and route-type events that aren't in the
   // dossier as discrete records.
   const collectionKey = TARGET_ENTITY_BY_EVENT[type];
-  const targetOpts = buildTargetOptions(settlement, collectionKey);
+  // §3: options are CURRENT-STATE-FILTERED through the manifest — a verb with a
+  // targetOptions override lists only what its handler will actually accept
+  // (compromised entities for Expose corruption, depleted resources for
+  // Recover, impaired entities for Restore, clean NPCs for Impose corruption).
+  const manifestOptions = AFFORDANCE_MANIFEST[type]?.targetOptions;
+  const targetOpts = manifestOptions ? manifestOptions(settlement) : buildTargetOptions(settlement, collectionKey);
   if (collectionKey && targetOpts.length > 0) {
     return (
       <Field label="Target" hint={spec?.targetPrompt}>

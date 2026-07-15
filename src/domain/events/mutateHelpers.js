@@ -135,9 +135,61 @@ function slugify(s) {
   return kernelSlugify(s, { sep: '_' });
 }
 
+// ── The handler-veto channel (Composer V2 §2 — closes the phantom-event hole) ──
+// A mutation handler whose in-handler gate fails RETURNS a veto marker instead
+// of the unchanged settlement. mutate.js unwraps it: the legacy mutateSettlement
+// keeps the silent-no-op contract byte-for-byte, while mutateSettlementChecked
+// (used by runEventPipeline) surfaces the refusal so deltas and narration never
+// commit on a vetoed mutation. Every `vetoMutation('code', …)` call site in
+// mutateEntities.js / mutateWorld.js is enumerated by the predicate-parity
+// walker (tests/domain/events/predicateParity.walker.test.js): a code without a
+// matching affordance-manifest predicate fails the build.
+
+/**
+ * @typedef {Object} MutationVeto
+ * @property {true} __mutationVeto
+ * @property {string} code    stable machine code (the walker's join key)
+ * @property {string} detail  short interpolation datum (a target label) — the
+ *   DM-facing PROSE lives in the LAZY manifest's vetoProse(code, detail), so
+ *   the eager handlers never carry sentence strings (first-paint budget).
+ */
+
+/**
+ * @param {string} code
+ * @param {string} [detail]
+ * @returns {MutationVeto}
+ */
+function vetoMutation(code, detail = '') {
+  return Object.freeze({ __mutationVeto: /** @type {true} */ (true), code, detail });
+}
+
+/**
+ * @param {MutEntity} x
+ * @returns {MutationVeto|null}
+ */
+function mutationVetoOf(x) {
+  return x && x.__mutationVeto === true ? x : null;
+}
+
+/**
+ * Clamped numeric severity read (Composer V2 §3 — clampAtCommit). Handlers and
+ * registry stateDeltas read dialed numeric fields through this instead of a bare
+ * `Number(v ?? def)`: an out-of-band value (severity 5, −1) clamps into [0,1]
+ * identically in preview and apply, retiring the silent forgiveness. In-band
+ * values are byte-identical to the old read.
+ * @param {MutEntity} v
+ * @param {number} def
+ * @returns {number}
+ */
+function sev01(v, def) {
+  const n = Number(v ?? def);
+  return Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : def;
+}
+
 export {
   idOf, factionIdOf, eventTime,
   findInstitution, findFaction, findNpc,
   replaceInstitution, replaceFaction, replaceNpc,
   labelFromTarget, slugify,
+  vetoMutation, mutationVetoOf, sev01,
 };

@@ -35,7 +35,7 @@
  */
 
 import { EVENT_REGISTRY } from './registry.js';
-import { mutateSettlement } from './mutate.js';
+import { mutateSettlementChecked } from './mutate.js';
 import { deriveSystemState } from '../state/deriveSystemState.js';
 import { compareSystemState } from '../state/compareSystemState.js';
 import { generateFactionResponses } from './factionResponses.js';
@@ -65,10 +65,15 @@ import { recalculateFactionRelationships } from '../factionRelationshipUpdate.js
 
 /**
  * Pipeline warning entry. `severity: 'mismatch'` aborts the pipeline;
- * `'soft'` records a non-fatal sub-system failure.
+ * `'veto'` is the handler-veto channel (Composer V2 §2) — a gated mutation
+ * REFUSED, the pipeline aborts the same way, and `code` carries the stable
+ * machine code the affordance-manifest predicates cover; `'soft'` records a
+ * non-fatal sub-system failure.
  * @typedef {Object} PipelineWarning
  * @property {string} severity
  * @property {string} message
+ * @property {string} [code]
+ * @property {string} [detail]
  */
 
 // ── Authored-delta application ───────────────────────────────────────────
@@ -182,31 +187,48 @@ export function runEventPipeline(settlement, event, options = {}) {
     warnings.push({ severity: 'mismatch', message: `${spec.label} requires a target` });
   }
 
+  // Shared abort envelope: validation mismatches and handler vetoes both
+  // return the before-state untouched with NO deltas and NO narration.
+  const abortResult = () => ({
+    event,
+    beforeSettlement,
+    nextSettlement: beforeSettlement,
+    beforeSystemState,
+    afterSystemState: beforeSystemState,
+    beforeCausalState,
+    afterCausalState: beforeCausalState,
+    systemStateDeltas: [],
+    causalStateDeltas: [],
+    factionRelationshipDeltas: [],
+    factionResponses: [],
+    narrativeSummary: '',
+    warnings,
+  });
+
   // Early-return if validation failed — no mutation, no deltas
-  if (warnings.some(w => w.severity === 'mismatch')) {
-    return {
-      event,
-      beforeSettlement,
-      nextSettlement: beforeSettlement,
-      beforeSystemState,
-      afterSystemState: beforeSystemState,
-      beforeCausalState,
-      afterCausalState: beforeCausalState,
-      systemStateDeltas: [],
-      causalStateDeltas: [],
-      factionRelationshipDeltas: [],
-      factionResponses: [],
-      narrativeSummary: '',
-      warnings,
-    };
-  }
+  if (warnings.some(w => w.severity === 'mismatch')) return abortResult();
 
   // 2. Mutate a cloned settlement — entity-level changes (status flips,
-  //    impairments, NPC patches, propagation). mutateSettlement never
-  //    mutates the input.
+  //    impairments, NPC patches, propagation). The checked router surfaces
+  //    the handler-veto channel (Composer V2 §2): a gated no-op is a blocking
+  //    refusal, and deltas + narration must NOT commit on it — the phantom-
+  //    event hole (timeline stories the world never did) closes here for
+  //    preview and apply alike. Never mutates the input.
   // @ts-ignore -- mutate.js declares args.now as string|undefined but its own
   // default is `now = null`; the declared type there should be string|null.
-  const nextSettlement = mutateSettlement({ settlement: beforeSettlement, event, now });
+  const mutated = mutateSettlementChecked({ settlement: beforeSettlement, event, now });
+  if (mutated.veto) {
+    // Terse eager message (code + detail); the LAZY composer surfaces the full
+    // DM-facing prose via the manifest's vetoProse(code, detail).
+    warnings.push({
+      severity: 'veto',
+      code: mutated.veto.code,
+      detail: mutated.veto.detail,
+      message: `${spec.label || event.type} refused: ${mutated.veto.code}${mutated.veto.detail ? ` (${mutated.veto.detail})` : ''}`,
+    });
+    return abortResult();
+  }
+  const nextSettlement = mutated.settlement;
 
   // 3. Re-derive structural SystemState from the mutated settlement
   const afterStructural = deriveSystemState(nextSettlement);
