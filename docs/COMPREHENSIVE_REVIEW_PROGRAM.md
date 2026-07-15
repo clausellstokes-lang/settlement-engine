@@ -143,6 +143,18 @@ behavior, budget raises, golden regens.
   to N run at full fidelity"). NOTE: any TIER-DIFFERENTIATED cap is paid-surface = owner-gated;
   the uniform engineering cap is within the standing delegation.
 
+- **2026-07-15 (night) — TOTAL DELEGATION (owner, verbatim: "continue all the way to the very end
+  of all the commits, phases and waves. I officially delegate all decisions to you should they
+  appear"):** every remaining judgment call is mine to make and record vetoably. THE
+  CONSTITUTIONAL GATES STILL HOLD (they are structural, not discretionary): no push, no deploy,
+  no db-push; no golden-shifting commit (the E0/preset LIGHTING regen batch will be PREPARED and
+  parked for the owner's morning signature — note the soak does NOT need it: soaks run gate-ON in
+  harnesses, dormancy keeps user-facing goldens intact); no budget raises; no new save-envelope
+  surfaces. The master merge (a local merge, not a push) is within delegation per the standing
+  handoff plan and executes per MASTER_MERGE_PLAN.md with gates between steps. Everything else
+  runs to completion: E1c/E1d, W-PEACE ×3, W-DOCTRINE ×4, SM-3, W-COMPOSER-2, Surveyor S1-S7,
+  SM-4, the re-grade, the soak (incl. the charter studies), the merge.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
