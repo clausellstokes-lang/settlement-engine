@@ -49,6 +49,7 @@ import { settlementAlignment } from './settlementAlignment.js';
 import { buildCultureVector } from './migrationKernel.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
+import { blockadeInterceptsSupply } from '../spatial/navalLayer.js';
 import { advanceTradeFlowTally, settlementModalityWeight } from '../spatial/tradeFlow.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
@@ -235,8 +236,16 @@ export function advanceSettlementSupply({ snapshot, localSettlements, worldState
   // Live predicates: a besieged producer's output is cut; a gate at war with the
   // destination intercepts the caravan; the caravan runs at the steady dispatcher risk
   // tolerance; the severing cause names the besieging settlement.
-  const sourceSeveredFor = (/** @type {string} */ _destId, /** @type {string} */ sourceId) => warFrontsInto(graph, sourceId).length > 0;
-  const hostileToDestinationFor = (/** @type {string} */ destId, /** @type {string} */ gateId) => atWar(graph, gateId, destId);
+  // W-NAVY (design §4 — "a blockade is the same as a siege"): a hostile navy holding a port's
+  // sea approaches cuts the port's SEA supply axis (combined with a land siege ⇒ the both-cut
+  // starvation law). A DIRECT sea source that is one of the blockaded port's approaches is
+  // severed here; a MULTI-HOP sea route through a held approach is intercepted below (the
+  // routeIntercepted hostile-intermediary predicate). Guarded: NO navalTransit ledger ⇒
+  // blockadeInterceptsSupply is false ⇒ byte-identical (the supply layer's exact prior path).
+  const sourceSeveredFor = (/** @type {string} */ destId, /** @type {string} */ sourceId) =>
+    warFrontsInto(graph, sourceId).length > 0 || blockadeInterceptsSupply(worldState, digest, destId, sourceId);
+  const hostileToDestinationFor = (/** @type {string} */ destId, /** @type {string} */ gateId) =>
+    atWar(graph, gateId, destId) || blockadeInterceptsSupply(worldState, digest, destId, gateId);
   const riskToleranceFor = () => SUPPLY_RISK_TOLERANCE;
   const severingCauseFor = (/** @type {SupplyLink} */ link) => {
     for (const src of link.rankedSources || []) {
@@ -420,8 +429,16 @@ export function advanceCommodityContinuity({ snapshot, localSettlements, worldSt
 
   // Live predicates (M2 parity): a besieged producer's output is cut; a gate at war
   // with the destination intercepts the caravan; the severing cause names the besieger.
-  const sourceSeveredFor = (/** @type {string} */ _destId, /** @type {string} */ sourceId) => warFrontsInto(graph, sourceId).length > 0;
-  const hostileToDestinationFor = (/** @type {string} */ destId, /** @type {string} */ gateId) => atWar(graph, gateId, destId);
+  // W-NAVY (design §4 — "a blockade is the same as a siege"): a hostile navy holding a port's
+  // sea approaches cuts the port's SEA supply axis (combined with a land siege ⇒ the both-cut
+  // starvation law). A DIRECT sea source that is one of the blockaded port's approaches is
+  // severed here; a MULTI-HOP sea route through a held approach is intercepted below (the
+  // routeIntercepted hostile-intermediary predicate). Guarded: NO navalTransit ledger ⇒
+  // blockadeInterceptsSupply is false ⇒ byte-identical (the supply layer's exact prior path).
+  const sourceSeveredFor = (/** @type {string} */ destId, /** @type {string} */ sourceId) =>
+    warFrontsInto(graph, sourceId).length > 0 || blockadeInterceptsSupply(worldState, digest, destId, sourceId);
+  const hostileToDestinationFor = (/** @type {string} */ destId, /** @type {string} */ gateId) =>
+    atWar(graph, gateId, destId) || blockadeInterceptsSupply(worldState, digest, destId, gateId);
   const riskToleranceFor = () => SUPPLY_RISK_TOLERANCE;
   const consumesGood = (/** @type {string} */ settlementId, /** @type {string} */ goodId) => !!consumeIndex.get(settlementId)?.has(goodId);
   const severingCauseFor = (/** @type {import('../spatial/commodityFlow.js').CommodityLink} */ link) => {

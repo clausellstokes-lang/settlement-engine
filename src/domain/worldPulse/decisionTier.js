@@ -45,6 +45,9 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   'faction_government_challenge',
   // W-CONVERGENCE: a foreign power committing an army to an internal contest.
   'intervention_ordered',
+  // W-NAVY: a navy throwing a blockade across a hostile port's sea approaches (a siege
+  // from the water — the siege-initiation twin).
+  'blockade_declared',
 ]);
 
 /**

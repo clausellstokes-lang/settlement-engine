@@ -43,8 +43,14 @@
  * the EXISTING danger/interdiction seams (piracy = M1 embattlement on the port
  * nodes a sea route traverses; naval blockade = the supply layer's sea routing +
  * hostile-gate interception — a port needs BOTH land AND sea cut to starve). The
- * ship-crew rumor carrier + refugee sea passage ride the sea-aware read. NO FLEET
- * COMBAT — a "sea interdiction" abstraction only; this module mints no battle.
+ * ship-crew rumor carrier + refugee sea passage ride the sea-aware read.
+ *
+ * SCOPE SUPERSESSION (W-NAVY, design §0 — the conscious amendment): the owner's three
+ * naval laws supersede M8's original "NO FLEET COMBAT" boundary. HOW honors the frozen
+ * slot: THIS MODULE STILL MINTS NO BATTLE — the seaLanes digest slot is battle-free and
+ * byte-frozen (its exact keys are pinned). Fleet combat, convoys, and blockades now live
+ * in the NAVAL LAYER (spatial/navalLayer.js + worldPulse/navalKernel.js), whose state
+ * rides a NEW `spatialLedgers.navalTransit` ledger — NEVER this frozen slot.
  *
  * PURE + seeded + lazy: no iframe, no tier/auth, no Date/Math.random. Imported ONLY
  * by spatialDigest.js (the lazy canonize chunk) ⇒ zero first-paint bytes. The slot

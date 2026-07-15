@@ -100,7 +100,19 @@ export const ARMY_TRANSIT_TUNING = Object.freeze({
 
 // The transit ROLE — a march to a siege, a reinforcement column riding the same
 // ledger, or a retreat home. Exported so a caller/test can assert the enum.
-export const ARMY_ROLES = Object.freeze({ MARCH: 'march', REINFORCEMENT: 'reinforcement', RETREAT: 'retreat' });
+// W-NAVY (design §2/§4): CONVOY (an army carried over water) + BLOCKADE (a navy holding
+// a port's sea approaches) extend the enum. They ride the SIBLING `navalTransit` ledger —
+// the armyTransit kernel never writes them — so the extension is byte-identical for the
+// land layer while the role-coercion fix below preserves them (extends, does not silently
+// coerce a convoy to 'march').
+export const ARMY_ROLES = Object.freeze({
+  MARCH: 'march', REINFORCEMENT: 'reinforcement', RETREAT: 'retreat',
+  CONVOY: 'convoy', BLOCKADE: 'blockade',
+});
+
+// The KNOWN role set (the role-coercion allow-list). An unrecognized role coerces to
+// MARCH; a recognized one (including the W-NAVY naval roles) passes through unchanged.
+const KNOWN_ROLES = new Set(/** @type {string[]} */ (Object.values(ARMY_ROLES)));
 
 // ── Small pure helpers ────────────────────────────────────────────────────────
 /** @param {number} x @returns {number} */
@@ -185,7 +197,10 @@ export function armyRecordOf(rec) {
   const role = String(r.role ?? ARMY_ROLES.MARCH);
   return {
     armyId: String(r.armyId ?? ''),
-    role: role === ARMY_ROLES.REINFORCEMENT || role === ARMY_ROLES.RETREAT ? role : ARMY_ROLES.MARCH,
+    // The role-coercion fix (W-NAVY §2): a KNOWN role passes through; anything unknown
+    // coerces to MARCH. Extended for CONVOY/BLOCKADE so a naval record's role survives
+    // instead of silently degrading to 'march' (the recon's named trap).
+    role: KNOWN_ROLES.has(role) ? role : ARMY_ROLES.MARCH,
     originId: String(r.originId ?? ''),
     destId: String(r.destId ?? ''),
     path,

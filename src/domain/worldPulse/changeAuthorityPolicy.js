@@ -273,6 +273,14 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     rationale:
       'W-CONVERGENCE: a foreign power committing an army to a settlement\'s internal (coup) contest is an ACTOR-INITIATED major. The autonomous mover mints directly under legacy routine/full (byte-identical — the feature is dark by default) and routes its legacy \'auto\' through authorityFor, which forces \'proposal\' under dm_only/recommendations and routine-with-major-approval (the coup_succeeded precedent, escalating on the autonomy mode not a lock).',
   }),
+  blockade_declared: Object.freeze({
+    authority: 'auto-with-approval-routing',
+    module: 'navalKernel.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'W-NAVY: a navy throwing a blockade across a hostile port\'s sea approaches is a siege from the water — the siege-initiation twin, an ACTOR-INITIATED major. The autonomous mover mints directly under legacy routine/full (byte-identical — the feature is dark by default) and routes its legacy \'auto\' through authorityFor, which forces \'proposal\' under dm_only/recommendations and routine-with-major-approval (the intervention_ordered precedent).',
+  }),
 });
 
 /**

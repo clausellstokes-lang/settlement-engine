@@ -361,8 +361,13 @@ describe('M8 — NAVAL BLOCKADE parity (a port needs BOTH land AND sea cut to st
   });
 });
 
-describe('M8 — NO fleet combat + DORMANT byte-identity', () => {
-  it('the seaLanes slot mints NO battle/combat structure (a sea-interdiction abstraction only)', () => {
+describe('M8 — the seaLanes SLOT mints no battle (W-NAVY fleet combat lives elsewhere) + DORMANT byte-identity', () => {
+  it('the seaLanes SLOT stays battle-free + byte-frozen — fleet combat rides navalTransit, NOT this slot', () => {
+    // SCOPE SUPERSESSION (W-NAVY, design §0): the owner's naval laws superseded M8's
+    // "NO FLEET COMBAT" boundary — but HOW honors this frozen slot. The seaLanes slot
+    // itself still mints NO battle/combat structure (its exact keys are byte-frozen below);
+    // convoys, sea battles, and blockades live in the NAVAL LAYER's separate
+    // spatialLedgers.navalTransit ledger, never here. This assertion is UNCHANGED.
     const { digest } = goldenPortDigest();
     const lanes = digest.reserved.seaLanes;
     expect(Object.keys(lanes).sort()).toEqual(['edges', 'ports', 'stormSeasonCost', 'version']);
