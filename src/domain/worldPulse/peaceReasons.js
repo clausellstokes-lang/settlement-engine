@@ -35,6 +35,7 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatia
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefStrength } from './beliefMap.js';
 import { findCrossPressuredMediator, fracturesAbandoning, treatyDocument } from './peaceTerms.js';
+import { strangulationFelt01 } from './supplyWebWarfare.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -96,16 +97,31 @@ export function scoreBeliefConvergence({ marginA, marginB }) {
  * ECONOMIC STRANGULATION FELT (§14.2 no-other-options): the belligerent's own
  * trade/economy pressure — the severed routes and drained treasury it can
  * feel, off the same pressure index every contest reads.
- * @param {{ trade01: number, economy01: number }} args
+ *
+ * W-DOCTRINE-1 (SUPPLY-WEB WARFARE) FEED: a LIVE indirect campaign strangling
+ * this town's supply web elevates the felt strangulation above the generic
+ * pressure baseline — a directed siege of the granary villages, not just a
+ * thin market. `strangulation01` (0 when the doctrine is dark — strangulationFelt01
+ * returns 0) is the strangulation intensity from every campaign plan targeting
+ * this belligerent. ABSENT ⇒ the reading is BYTE-IDENTICAL (Math.max(base, 0)
+ * === base; the receipt branch stays the baseline copy).
+ * @param {{ trade01: number, economy01: number, strangulation01?: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreEconomicStrangulation({ trade01, economy01 }) {
-  const score = clamp01(
+export function scoreEconomicStrangulation({ trade01, economy01, strangulation01 = 0 }) {
+  const base = clamp01(
     PEACE_REASON_TUNING.STRANGLE_TRADE_W * clamp01(Number(trade01) || 0)
     + PEACE_REASON_TUNING.STRANGLE_ECONOMY_W * clamp01(Number(economy01) || 0),
   );
-  if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'The routes are severed and the treasury bleeds — the war costs more than its aims.' };
+  const strangle = clamp01(Number(strangulation01) || 0);
+  const felt = strangle > 0 ? clamp01(Math.max(base, strangle)) : base;
+  if (felt <= 0) return { score: 0, receipt: '' };
+  return {
+    score: felt,
+    receipt: strangle > 0 && felt > base
+      ? 'A neighbour strangles the supply web by design — the granary villages burn and the routes are cut; the war cannot be borne.'
+      : 'The routes are severed and the treasury bleeds — the war costs more than its aims.',
+  };
 }
 
 /**
@@ -379,7 +395,13 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }) },
       {
         type: 'economic_strangulation',
-        ...scoreEconomicStrangulation({ trade01: Number(pressures?.trade) || 0, economy01: Number(pressures?.economy) || 0 }),
+        // W-DOCTRINE-1: elevate on a live supply-web strangulation of THIS belligerent
+        // (strangulationFelt01 = 0 when the doctrine is dark ⇒ byte-identical).
+        ...scoreEconomicStrangulation({
+          trade01: Number(pressures?.trade) || 0,
+          economy01: Number(pressures?.economy) || 0,
+          strangulation01: strangulationFelt01(worldState, partyId),
+        }),
       },
       { type: 'coalition_fracture', ...fracture },
       { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }) },

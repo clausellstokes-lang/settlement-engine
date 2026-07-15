@@ -72,6 +72,7 @@ import { advanceGenerosity } from './generosityKernel.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
+import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
@@ -1710,6 +1711,34 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
+  // W-DOCTRINE-1 — SUPPLY-WEB WARFARE (DESIGN_SUPPLY_WEB_WARFARE.md). The indirect-war
+  // doctrine: a weaker/informed aggressor STRANGLES a target's supply web (raid /
+  // embargo / interdiction / purchase-denial on the villages that feed it) before the
+  // direct confrontation, TIME fully priced. Reads the belief-gated web (fog-blind ⇒ a
+  // wrong-village strike), scores DIRECT vs INDIRECT EV, mints/re-scores/abandons the
+  // ONE new conditional ledger (spatialLedgers.campaignPlans), and feeds the target's
+  // economic_strangulation peace reason (an early suit). Runs BEFORE the moral-drift
+  // site so a raid's atrocity folds into THIS tick's SINGLE advanceMoralDrift call (no
+  // double-decay). DORMANT behind supplyWebWarfareActive (warLayerEnabled + the virtual
+  // supplyWebWarfareEnabled) ⇒ a complete no-op (zero forks, zero keys) — byte-identical.
+  /** @type {import('./supplyWebWarfare.js').SupplyWebAdvanceResult['atrocities']} */
+  let webwarAtrocities = [];
+  if (supplyWebWarfareActive(memoryState)) {
+    const webwar = advanceSupplyWebWarfare({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      pIndex,
+      digest: memoryState.spatialDigest,
+      rng,
+      tick: worldState.tick,
+      nameFor: settlementNameFor,
+    });
+    if (webwar.changed) memoryState = webwar.worldState;
+    if (webwar.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, webwar.newsEntries, { now });
+    }
+    webwarAtrocities = webwar.atrocities;
+  }
   // Phase 5.5 M9b component (3) — MORAL DRIFT (read-last/write-next). AFTER the belief
   // advance: a settlement that INSTIGATED an offensive THIS tick on a FALSE belief —
   // marching on a target the world no longer counts an enemy (M9a's relationship
@@ -1720,7 +1749,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // (the spiral). PURE, NO rng. DORMANT (beliefs off / no unjust act / no prior drift)
   // ⇒ changed:false ⇒ memoryState untouched, the ledger absent ⇒ the alignment reads
   // are byte-identical (they have no other live consumer this wave).
-  if (beliefsActive(memoryState)) {
+  if (beliefsActive(memoryState) || webwarAtrocities.length) {
     /** @type {import('../spatial/moralDrift.js').MoralDriftDeltaInput[]} */
     const instigations = [];
     for (const outcome of selectedForApply) {
@@ -1745,6 +1774,26 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         victimMalice01: computeMalice(victimItem, memoryState),
         victimStrength01: settlementStrength(victimItem, buildPressureSummary(pIndex, victimId)),
         trueRelationship: String(mis.trueRelationship),
+      });
+    }
+    // W-DOCTRINE-1 (§7 ATROCITY ECONOMICS): fold this tick's supply-web RAID atrocities
+    // into the SAME advanceMoralDrift call — raiding an innocent village is the textbook
+    // moralDrift case (the doctrine corrupts its user; a lawful-good aggressor drifts
+    // hardest). A raid is unjust regardless of fog, so it drifts even with beliefs off
+    // (hence the broadened outer guard). Empty when the doctrine is dark ⇒ the guard
+    // reduces to beliefsActive and this loop is a no-op ⇒ byte-identical.
+    for (const atr of webwarAtrocities) {
+      const actorItem = postTimeSnapshot?.byId?.get?.(atr.actorId);
+      const victimItem = postTimeSnapshot?.byId?.get?.(atr.victimId);
+      if (!actorItem || !victimItem) continue;
+      instigations.push({
+        actorId: atr.actorId,
+        victimId: atr.victimId,
+        actorLawfulness01: computeLawfulness(actorItem, memoryState),
+        actorMalice01: computeMalice(actorItem, memoryState),
+        victimMalice01: computeMalice(victimItem, memoryState),
+        victimStrength01: settlementStrength(victimItem, buildPressureSummary(pIndex, atr.victimId)),
+        trueRelationship: atr.trueRelationship,
       });
     }
     if (instigations.length || getSpatialLedger(memoryState, 'moralDrift')) {
