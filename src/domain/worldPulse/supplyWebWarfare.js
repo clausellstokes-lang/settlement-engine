@@ -959,11 +959,10 @@ function completeNews(aggressorId, targetId, name, plan, tick) {
 //
 // Two PURE, GATED worldState mutations — the DM-authored twins of the autonomous
 // mover, wrapping the SAME gate (supplyWebWarfareActive). Under the same posture as
-// warReasons.declareCasus / peaceReasons.sueForPeaceOrder: NOT registered in the
-// settlement-scoped affordance manifest this wave (the walker hard-asserts
-// scope==='settlement'; realm/worldState verbs are its documented W-COMPOSER-2
-// deferral). W-COMPOSER-2 lifts these into manifest entries verbatim (the veto codes
-// below are its coversVetoCodes; WEBWAR_VETO_PROSE its VETO_PROSE feed). Preview ≡
+// warReasons.declareCasus / peaceReasons.sueForPeaceOrder. REGISTERED
+// (W-COMPOSER-2): realmManifest.js ORDER_SUPPLY_RAID / DECLARE_TRADE_EMBARGO
+// wrap these fns verbatim (the veto codes are their coversVetoCodes;
+// WEBWAR_VETO_PROSE the prose feed); the realm arm applies them. Preview ≡
 // apply by construction — the functions are pure and deterministic.
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */

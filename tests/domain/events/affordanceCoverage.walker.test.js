@@ -9,10 +9,10 @@
  * silently absent. A new event type cannot ship uncovered: this walker is the
  * per-wave criterion made fail-closed.
  *
- * (Scope note, deliberate: W-COMPOSER-1 covers the event-type branch layer of
- * the two-level tree. The trunk layer — registered MACRO ops gaining manifest
- * entries — lands with W-COMPOSER-2's realm verbs, which is when non-applyEvent
- * ops first become composer-authorable. Documented deferral, not a gap.)
+ * (Scope note: W-COMPOSER-1 covers the event-type branch layer of the
+ * two-level tree. The trunk layer — the REALM verbs — LANDED with W-COMPOSER-2
+ * in realmManifest.js, walked by realmCoverage.walker.test.js; this walker
+ * stays the settlement-branch authority.)
  */
 
 import { describe, it, expect } from 'vitest';

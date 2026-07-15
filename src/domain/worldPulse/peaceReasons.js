@@ -508,9 +508,9 @@ function thirdThreatRead(deployments, graph, partyId, foeId) {
 // ── THE FORCEABLE VERB: SUE_FOR_PEACE (the counterpart criterion) ────────────
 //
 // The peace-side mirror of warReasons.declareCasus, under the same posture:
-// a PURE, GATED worldState mutation that a W-COMPOSER-2 manifest entry wraps
-// verbatim (same-function law); NOT registered in the settlement-scoped
-// affordance manifest this wave — see the declareCasus header for the proof
+// a PURE, GATED worldState mutation that the W-COMPOSER-2 realm manifest now
+// WRAPS verbatim (SUE_FOR_PEACE in realmManifest.js — same-function law);
+// never registered in the settlement-scoped manifest — see declareCasus's proof
 // (the applyEvent pipeline has no worldState channel; realm verbs are the
 // walker's documented W-COMPOSER-2 deferral). Preview≡apply by construction.
 //
