@@ -64,6 +64,8 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 /** @typedef {{ phase: 'building'|'boom'|'bust', dwell: number, enteredTick: number,
  *   arteries: string[], fragile: boolean, throughput: number, prosperityAccrued: number,
  *   lastTick: number }} BoomRecord */
+/** @typedef {{ phase: 'building'|'flourishing', dwell: number, enteredTick: number,
+ *   endsTick: number, cooldownUntil: number, lastTick: number }} FlourishRecord */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -116,6 +118,13 @@ export const UPSWING_TUNING = Object.freeze({
   BUST_LEGITIMACY_HIT: -3,           // the bust legitimacy knock (emigration is EMERGENT:
                                      // M4 reads the fallen prosperity — no population write)
   BUST_HOLD: 3,                      // ticks the bust condition holds before the record drops
+  // FLOURISHING (B3) — the golden-age homeostat, modest v1. war_exhaustion's mirror: a
+  // gentle cultural attractor, NEVER a power snowball (NO martial/economic multiplier).
+  FLOUR_PROSPERITY_FLOOR: 0.66,      // prosperity01 (≈ Prosperous+) — high, rare by construction
+  FLOUR_LEGITIMACY_FLOOR: 0.66,      // legitimacy01 (publicLegitimacy.score/100)
+  FLOUR_MIN_DWELL: 6,                // ticks of sustained prosperity+legitimacy+PEACE before it mints
+  FLOUR_DURATION: 16,                // the capped condition lifetime (ticks)
+  FLOUR_COOLDOWN: 12,                // ticks after it ends before a settlement may flourish again
 });
 
 // ── Reads (all pure over the settlement) ──────────────────────────────────────
@@ -124,6 +133,25 @@ function prosperity01Of(s) {
   const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (asObject(s?.economicState).prosperity));
   if (rank < 0) return 0.4;
   return clamp01(rank / Math.max(1, PROSPERITY_TIERS.length - 1));
+}
+
+/** publicLegitimacy 0..1 (score/100), or 0 when unreadable. @param {UpSettlement|undefined} s */
+function legitimacy01Of(s) {
+  const pl = asObject(asObject(s?.powerStructure).publicLegitimacy);
+  const sc = num(pl.score, NaN);
+  return Number.isFinite(sc) ? clamp01(sc / 100) : 0;
+}
+
+/** Does the settlement already carry a cultural institution (temple/academy/library)?
+ *  @param {UpSettlement|undefined} s */
+function hasCulturalInstitution(s) {
+  const insts = Array.isArray(s?.institutions) ? s.institutions : [];
+  return insts.some((i) => {
+    if (String(i?.status || 'active') !== 'active') return false;
+    const n = String(i?.name || '').toLowerCase();
+    const c = String(i?.category || '').toLowerCase();
+    return /temple|academy|library|university|college|shrine|cathedral/.test(n) || c === 'religious' || c === 'academic' || c === 'cultural';
+  });
 }
 
 /** The builder-roster strength 0..1: active mason/carpenter/lodge/quarry institutions.
@@ -320,6 +348,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   const upswingLedger = asObject(getSpatialLedger(worldState, 'upswing'));
   const reconLedger = asObject(upswingLedger.reconstruction);
   const boomLedger = asObject(upswingLedger.boom);
+  const flourishLedger = asObject(upswingLedger.flourishing);
   const tradeFlowLedger = /** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'tradeFlow'));
   const entrepotLedger = /** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'entrepots'));
   const obligations = readObligations(/** @type {Record<string,unknown>|null} */ (getSpatialLedger(worldState, 'obligations')));
@@ -331,6 +360,8 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   const nextRecon = {};
   /** @type {Record<string, BoomRecord>} */
   const nextBoom = {};
+  /** @type {Record<string, FlourishRecord>} */
+  const nextFlourish = {};
   /** @type {Map<string, number>} the prosperity BAND-STEP delta per settlement (boom drift / bust retreat) */
   const prosperityDeltas = new Map();
   /** @type {Array<{ from: string, to: string, kind: string, amount: number }>} */
@@ -605,21 +636,89 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
     }
   }
 
+  // ── B3 FLOURISHING — the golden-age homeostat (war_exhaustion's MIRROR). A settlement
+  // that holds high prosperity + high legitimacy + PEACE for FLOUR_MIN_DWELL ticks tips
+  // into a bounded `flourishing` condition: tolerance/piety warmth (the LIFT) + a cultural
+  // founding bias (ONE temple/academy if none stands) + a chronicle beat. NO martial or
+  // economic multiplier — it never touches prosperity, army, or economic_capacity (the
+  // never-snowballs pin). Capped duration + a cooldown. The PRE-DECLARED boom_flourishing
+  // drama-class producer (decisionTier.upswing_flourishing). ──
+  for (const id of ordered) {
+    const s = freshSettlement(id);
+    if (!s) continue;
+    const item = itemById.get(id);
+    const prior = /** @type {FlourishRecord|null} */ (flourishLedger[id] ? /** @type {FlourishRecord} */ (flourishLedger[id]) : null);
+    const peace = peace01Of(graph, id) === 1;
+    const qualifies = prosperity01Of(s) >= T.FLOUR_PROSPERITY_FLOOR && legitimacy01Of(s) >= T.FLOUR_LEGITIMACY_FLOOR && peace;
+    const ui = updateIndex.get(id);
+
+    if (prior?.phase === 'flourishing') {
+      if (tick >= num(prior.endsTick, 0) || !peace) {
+        // END — capped duration reached OR peace broke: clear the condition, start cooldown.
+        if (ui !== undefined) {
+          const fresh = freshSettlement(id);
+          const flourCond = (Array.isArray(fresh?.activeConditions) ? fresh.activeConditions : []).find((c) => c?.archetype === 'flourishing');
+          if (flourCond?.id) { ensureCloned(); nextUpdates[ui] = { ...nextUpdates[ui], settlement: /** @type {UpSettlement} */ (withoutActiveCondition(fresh, flourCond.id)) }; }
+        }
+        nextFlourish[id] = { phase: 'building', dwell: 0, enteredTick: tick, endsTick: 0, cooldownUntil: tick + T.FLOUR_COOLDOWN, lastTick: tick };
+        receipts.push({ id, kind: 'flourishing_end', reason: peace ? 'ran_its_course' : 'peace_broke' });
+      } else {
+        nextFlourish[id] = { ...prior, lastTick: tick }; // sustain (bounded — no drift, no multiplier)
+      }
+      continue;
+    }
+
+    // Not flourishing. Respect the cooldown, then accumulate the dwell.
+    const cooldownUntil = num(prior?.cooldownUntil, 0);
+    if (tick < cooldownUntil) { nextFlourish[id] = { phase: 'building', dwell: 0, enteredTick: tick, endsTick: 0, cooldownUntil, lastTick: tick }; continue; }
+    if (!qualifies) continue; // dwell resets (record drops — sparse)
+
+    const dwell = (prior?.phase === 'building' ? num(prior.dwell, 0) : 0) + 1;
+    if (dwell >= T.FLOUR_MIN_DWELL && ui !== undefined) {
+      // ── MINT FLOURISHING — the LIFT condition + the cultural founding bias + the beat. ──
+      ensureCloned();
+      let settlement = /** @type {UpSettlement} */ (withActiveCondition(
+        /** @type {import('../activeConditions.js').CondSettlement} */ (/** @type {unknown} */ (freshSettlement(id))),
+        {
+          id: `condition.flourishing.${tick}`, archetype: 'flourishing', label: 'Flourishing',
+          severity: 0.35, affectedSystems: ['public_legitimacy', 'social_trust'], // NO economic/martial system
+          description: 'A long peace and steady legitimacy have made the settlement culturally fertile — a golden age, modest and bounded.',
+        },
+      ));
+      // The founding BIAS made concrete + bounded: found ONE cultural institution if none.
+      let founded = null;
+      if (!hasCulturalInstitution(settlement)) {
+        founded = 'Academy';
+        const insts = Array.isArray(settlement.institutions) ? settlement.institutions.map((i) => ({ ...i })) : [];
+        insts.push({ name: 'Academy', category: 'academic', status: 'active', worldPulseFate: 'founded_by_flourishing' });
+        settlement = { ...settlement, institutions: insts };
+      }
+      nextUpdates[ui] = { ...nextUpdates[ui], settlement };
+      nextFlourish[id] = { phase: 'flourishing', dwell: 0, enteredTick: tick, endsTick: tick + T.FLOUR_DURATION, cooldownUntil: 0, lastTick: tick };
+      newsEntries.push(flourishingNews(id, String(item?.name || s.name || id), founded, tick, now));
+      receipts.push({ id, kind: 'flourishing_enter', founded, endsTick: tick + T.FLOUR_DURATION, noMultiplier: true });
+    } else {
+      nextFlourish[id] = { phase: 'building', dwell, enteredTick: tick, endsTick: 0, cooldownUntil: 0, lastTick: tick };
+    }
+  }
+
   // ── PERSIST (drop-when-empty). Nothing arced ⇒ byte-identical. ──
   let nextWorldState = worldState;
   let changed = cloned;
 
-  // The upswing ledger (reconstruction + boom sub-maps). Rebuild from the surviving
-  // sub-maps; drop the whole 'upswing' key when ALL are empty (drop-when-empty).
+  // The upswing ledger (reconstruction + boom + flourishing sub-maps). Rebuild from the
+  // surviving sub-maps; drop the whole 'upswing' key when ALL are empty (drop-when-empty).
   const reconChanged = JSON.stringify(sortedRecord(nextRecon)) !== JSON.stringify(sortedRecord(reconLedger));
   const boomChanged = JSON.stringify(sortedRecord(nextBoom)) !== JSON.stringify(sortedRecord(boomLedger));
-  if (reconChanged || boomChanged) {
-    // Preserve any OTHER upswing sub-ledgers (flourishing lands in a later stage).
+  const flourishChanged = JSON.stringify(sortedRecord(nextFlourish)) !== JSON.stringify(sortedRecord(flourishLedger));
+  if (reconChanged || boomChanged || flourishChanged) {
     const nextUpswing = { ...upswingLedger };
     delete nextUpswing.reconstruction;
     delete nextUpswing.boom;
+    delete nextUpswing.flourishing;
     if (Object.keys(nextRecon).length > 0) nextUpswing.reconstruction = sortedRecord(nextRecon);
     if (Object.keys(nextBoom).length > 0) nextUpswing.boom = sortedRecord(nextBoom);
+    if (Object.keys(nextFlourish).length > 0) nextUpswing.flourishing = sortedRecord(nextFlourish);
     if (Object.keys(nextUpswing).length > 0) {
       nextWorldState = setSpatialLedger(nextWorldState, 'upswing', nextUpswing);
     } else {
@@ -784,5 +883,22 @@ function bustNews(id, name, arteries, embattled, tick, now) {
     sourceEventId: `bust.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'bust'],
     reasons: [`The boom's own dependency concentration was its undoing${arteries[0] ? ` — the ${arteries[0]} artery` : ''}.`],
+  };
+}
+
+/** The flourishing (golden-age) chronicle beat. @param {string} id @param {string} name
+ *  @param {string|null} founded @param {number} tick @param {string|null} now */
+function flourishingNews(id, name, founded, tick, now) {
+  const built = founded ? ` A new ${founded} opens its doors — the founding bias of a fertile peace.` : '';
+  return {
+    id: `wizard_news.${tick}.flourishing.${id}`,
+    tick, createdAt: now, scope: 'regional', significance: 'moderate', severity: 0.3, score: 55,
+    headline: `${name} enters a golden age`,
+    summary: `A long peace and steady rule have made ${name} culturally fertile — tolerance broadens and the temples keep warm.${built}`,
+    kind: 'applied', impactKind: 'flourishing', channelType: 'settlement',
+    settlementIds: [id], impactIds: [], channelIds: [],
+    sourceEventId: `flourishing.${id}.${tick}`,
+    tags: ['world_pulse', 'upswing', 'flourishing', 'boom_flourishing'],
+    reasons: ['A bounded cultural attractor — no army, no treasury swell, only the fertility of a long peace.'],
   };
 }

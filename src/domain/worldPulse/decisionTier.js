@@ -204,6 +204,8 @@ export const DRAMA_CLASS_REGISTRY = Object.freeze({
   calamity_annual_strike: { class: 'calamity', birthKind: 'spontaneous', wired: false, module: 'calamityKernel.js', rationale: 'The annual calamity strike is a bypass producer (idempotent annual draw); governor wiring deferred.' },
   religious_contest_flip: { class: 'schism_contest', birthKind: 'spontaneous', wired: false, module: 'religiousContest.js', rationale: 'The religious conversion/betrayal flip births at probability 1 outside the seam; governor wiring deferred.' },
   war_mobilization_open: { class: 'war', birthKind: 'spontaneous', wired: false, module: 'warDeployment.js', rationale: 'Mobilization / siege-open is an out-of-band deployment seed (siege-hysteresis accumulator); governor wiring deferred.' },
+  // W-UPSWING B3: the golden-age producer fills the PRE-DECLARED boom_flourishing slot.
+  upswing_flourishing: { class: 'boom_flourishing', birthKind: 'spontaneous', wired: false, module: 'upswingKernel.js', rationale: 'Flourishing births at the pulse seam (a peace-dwell hysteresis accumulator, like the calamity annual draw), not rollCandidates; a bounded cultural attractor with NO martial/economic multiplier, so governor wiring is deferred (bypass producer).' },
 });
 
 /**

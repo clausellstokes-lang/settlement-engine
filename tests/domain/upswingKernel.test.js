@@ -300,3 +300,86 @@ describe('upswing — B2 bust: severance names the artery (constitution)', () =>
     expect((s.activeConditions || []).some((c) => c.archetype === 'custom_crisis' && c.id?.startsWith('condition.bust'))).toBe(true);
   });
 });
+
+// ── W-UPSWING stage 3 — B3 FLOURISHING (the golden-age homeostat) ──────────────
+function flourishFixture({ prosperity = 'Prosperous', legitimacy = 80, lit = true, warFront = false, flourishLedger = null }) {
+  const settlement = {
+    name: 'Highvale', tier: 'city', population: 6000, config: {},
+    institutions: [{ name: 'Market', category: 'trade' }, { name: 'Barracks', category: 'military' }],
+    economicState: { prosperity }, powerStructure: { publicLegitimacy: { score: legitimacy }, factions: [], conflicts: [] },
+    activeConditions: [], calamityHistory: [],
+  };
+  const worldState = {
+    tick: 500, calendar: { year: 20 },
+    simulationRules: lit ? { upswingArcsEnabled: true } : {}, stressors: [],
+    ...(flourishLedger ? { spatialLedgers: { upswing: { flourishing: flourishLedger } } } : {}),
+  };
+  // Peace = no war-front channels. A war front is a minted war channel between p and an enemy.
+  const graph = {
+    edges: [{ id: 'e0', from: 'h', to: 'ally', relationshipType: 'trade_partner' }],
+    channels: warFront ? [{ id: 'wf', type: 'war_front', from: 'enemy', to: 'h', status: 'confirmed' }] : [],
+  };
+  return { snapshot: { settlements: [{ id: 'h', name: 'Highvale', settlement }] }, worldState, settlementUpdates: [{ saveId: 'h', settlement }], graph };
+}
+
+function driveFlourish(cfg, ticks, mutate = null) {
+  let f = flourishFixture(cfg);
+  let worldState = f.worldState; let settlementUpdates = f.settlementUpdates; let graph = f.graph;
+  const receipts = []; const news = [];
+  for (let t = 0; t < ticks; t++) {
+    if (mutate) ({ worldState, graph } = mutate(worldState, graph, t));
+    const snapshot = { settlements: settlementUpdates.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+    const r = advanceUpswing({ snapshot, worldState, settlementUpdates, graph, rng: null, tick: 500 + t, now: NOW });
+    worldState = r.worldState; settlementUpdates = r.settlementUpdates;
+    receipts.push(...r.receipts); news.push(...r.newsEntries);
+  }
+  return { worldState, settlementUpdates, receipts, news };
+}
+
+describe('upswing — B3 flourishing: hysteresis + NEVER snowballs', () => {
+  it('mints only after sustained prosperity + legitimacy + PEACE (the peace-dwell counter)', () => {
+    const early = driveFlourish({}, 5); // < FLOUR_MIN_DWELL(6)
+    expect(early.receipts.some((r) => r.kind === 'flourishing_enter')).toBe(false);
+    const done = driveFlourish({}, 6);
+    expect(done.receipts.some((r) => r.kind === 'flourishing_enter')).toBe(true);
+    const s = done.settlementUpdates.find((u) => u.saveId === 'h').settlement;
+    expect((s.activeConditions || []).some((c) => c.archetype === 'flourishing')).toBe(true);
+  });
+
+  it('FLOURISHING NEVER SNOWBALLS — no prosperity/army/economic multiplier, only cultural warmth', () => {
+    const r = driveFlourish({ prosperity: 'Prosperous' }, 7);
+    const s = r.settlementUpdates.find((u) => u.saveId === 'h').settlement;
+    // Prosperity is UNCHANGED (flourishing never touches the economic axis).
+    expect(prosperityRank(s.economicState.prosperity)).toBe(prosperityRank('Prosperous'));
+    // The condition declares NO economic/martial system.
+    const cond = (s.activeConditions || []).find((c) => c.archetype === 'flourishing');
+    expect(cond.affectedSystems).not.toContain('economic_capacity');
+    expect(cond.affectedSystems).not.toContain('defense_readiness');
+    // The enter receipt asserts the no-multiplier contract.
+    expect(r.receipts.find((x) => x.kind === 'flourishing_enter').noMultiplier).toBe(true);
+    // No prosperity-delta receipts anywhere from flourishing (no boom sustain/enter here).
+    expect(r.receipts.some((x) => x.kind === 'boom_sustain' || x.kind === 'boom_enter')).toBe(false);
+  });
+
+  it('the cultural founding BIAS founds ONE academy (bounded) when none stands', () => {
+    const r = driveFlourish({}, 7);
+    const s = r.settlementUpdates.find((u) => u.saveId === 'h').settlement;
+    expect((s.institutions || []).filter((i) => i.worldPulseFate === 'founded_by_flourishing')).toHaveLength(1);
+    expect((s.institutions || []).some((i) => i.name === 'Academy')).toBe(true);
+    expect(r.news.some((n) => n.impactKind === 'flourishing')).toBe(true);
+  });
+
+  it('a war front RESETS the peace dwell — no flourishing while at war', () => {
+    const r = driveFlourish({ warFront: true }, 10);
+    expect(r.receipts.some((x) => x.kind === 'flourishing_enter')).toBe(false);
+  });
+
+  it('CAPPED DURATION + COOLDOWN: flourishing ends after FLOUR_DURATION and cannot immediately re-mint', () => {
+    const total = UPSWING_TUNING.FLOUR_MIN_DWELL + UPSWING_TUNING.FLOUR_DURATION + 2;
+    const r = driveFlourish({}, total);
+    expect(r.receipts.some((x) => x.kind === 'flourishing_end')).toBe(true);
+    // After the end, within cooldown, no immediate re-enter beyond the single first enter.
+    const enters = r.receipts.filter((x) => x.kind === 'flourishing_enter').length;
+    expect(enters).toBe(1);
+  });
+});
