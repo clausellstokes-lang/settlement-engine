@@ -74,6 +74,7 @@ import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruption
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
+import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold } from './momentum.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -2271,6 +2272,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
+  }
+  // W-MOMENTUM — THE COMMITMENT LEDGER (DESIGN_MOMENTUM.md §1). LAST of the read-movers,
+  // AFTER the causal-reason movers so the deposits read THIS tick's fully-settled public
+  // acts (a blockade thrown, a populace roused on a live war, a supply-web campaign pressed
+  // — deposits are READS, not rolls). Each actor's deposits are scaled by its court's
+  // LAWFULNESS (a lawful court's oaths bind harder — entityThreshold.depositScale, §2
+  // lawful×chaos), then folded into the commitment stock (decay-all-to-now, the credibility
+  // discipline). NO rng (the stream-position law). DORMANT behind momentumActive (beliefsActive
+  // AND the virtual momentumEnabled) ⇒ a complete no-op (zero commitments keys — the momentum
+  // dormancy golden proves the wired-but-dormant layer is byte-identical to pre-wire).
+  if (momentumActive(memoryState)) {
+    const rawDeposits = commitmentDepositsFor(memoryState);
+    // Lawful×chaos deposit scale, per actor (memoized — entityThreshold folds temperament +
+    // alignment + legitimacy reads). A missing snapshot item ⇒ neutral ×1. The internal
+    // clamp01 in advanceCommitments bounds a lawful court's up-scaled loudness back to ≤ 1.
+    /** @type {Map<string, number>} */
+    const depositScaleCache = new Map();
+    const scaleFor = (/** @type {string} */ actorId) => {
+      let sc = depositScaleCache.get(actorId);
+      if (sc === undefined) {
+        const it = postTimeSnapshot?.byId?.get?.(actorId);
+        sc = it ? entityThreshold(it, memoryState).depositScale : 1;
+        depositScaleCache.set(actorId, sc);
+      }
+      return sc;
+    };
+    const scaledDeposits = rawDeposits.map((d) => ({
+      ...d,
+      magnitude01: d.magnitude01 * scaleFor(String(d.actorId)),
+    }));
+    const commitments = advanceCommitments({ worldState: memoryState, tick: worldState.tick, deposits: scaledDeposits });
+    if (commitments.changed) memoryState = /** @type {typeof memoryState} */ (commitments.worldState);
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
