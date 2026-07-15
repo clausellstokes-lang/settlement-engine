@@ -74,7 +74,7 @@ import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruption
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
-import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold } from './momentum.js';
+import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, MOMENTUM_TUNING } from './momentum.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -1772,12 +1772,35 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // or decays confidence for silence — pure arithmetic, NO rng. NEXT tick's
   // chooser reads these beliefs. DORMANT (no spatial marker / infoMode omniscient)
   // ⇒ changed:false ⇒ memoryState untouched, zero new keys — byte-identical.
+  // W-MOMENTUM §3.2: the observer's entity-appropriate reconsideration cliff, memoized — a
+  // proud / fragile court resists course-contradicting reports harder (a higher cliff ⇒ a
+  // deeper "past the cliff" depth ⇒ a stronger discount). Only invoked when the discount
+  // closure is live (momentum lit + a materialized commitments ledger); a missing snapshot
+  // item ⇒ BASE cliff. Created every tick, but byte-neutral (never serialized).
+  /** @type {Map<string, number>} */
+  const momentumCliffCache = new Map();
+  const momentumCliffOf = (/** @type {string} */ observerId) => {
+    const k = String(observerId);
+    let c = momentumCliffCache.get(k);
+    if (c === undefined) {
+      const it = postTimeSnapshot?.byId?.get?.(k);
+      c = it ? entityThreshold(it, memoryState).cliff : MOMENTUM_TUNING.BASE_CLIFF_STOCK;
+      momentumCliffCache.set(k, c);
+    }
+    return c;
+  };
   {
     const beliefs = advanceBeliefMaps({
       snapshot: postTimeSnapshot,
       pressureIdx: pIndex,
       worldState: memoryState,
       tick: worldState.tick,
+      // W-MOMENTUM §3.2: the motivated-reasoning discount on reports contradicting the
+      // observer's OWN committed war/campaign course against the subject (keyed observer→
+      // subject, entity-cliff-scaled). Bounded below (DISCOUNT_FLOOR > 0) ⇒ it only SLOWS
+      // convergence, never inverts it; the re-anchoring + contradiction-widens-uncertainty
+      // terms run regardless. null when momentum is dormant / no commitments ⇒ byte-identical.
+      commitmentDiscountFor: makeCommitmentDiscountFn(memoryState, worldState.tick, momentumCliffOf),
       // M9b component (4): the deliberate ally-intel sharing channel — OPT-IN
       // (allyIntelSharingEnabled, absent from DEFAULT_SIMULATION_RULES ⇒ off by
       // default even on a belief-active campaign ⇒ byte-identical). Styling reads the
