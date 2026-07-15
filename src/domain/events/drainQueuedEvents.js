@@ -42,6 +42,9 @@ import { reconcileSettlementChange } from '../settlementReconciliation.js';
 import { twinDirectiveForEvent } from '../crisisLifecycle.js';
 import { wallClockNow } from '../clock.js';
 import { normalizeStressor, resolveStressorById } from '../worldPulse/stressorsCore.js';
+
+/** The schema-owned loose record alias (the affordanceManifest Mut idiom).
+ * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Loose */
 import { proposalIdFor, upsertProposal } from '../worldPulse/worldState.js';
 import { pulseTypeForStressorKey } from '../stressorPicker.js';
 
@@ -174,7 +177,7 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
  * Extracted from the store's drainCampaignQueueIntoState (W-COMPOSER-2) so the
  * FORECAST's clone-run replays the EXACT same world fold — one source, two
  * callers, zero drift. Pure; does NOT clear pendingEvents (the caller does).
- * @param {any} worldState @param {any[]} twinDirectives @param {{ tick: number, now: string }} ctx
+ * @param {Loose} worldState @param {Loose[]} twinDirectives @param {{ tick: number, now: string }} ctx
  */
 export function applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, now }) {
   let ws = {
@@ -190,14 +193,14 @@ export function applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, n
         createdAt: now,
         updatedAt: now,
       });
-      const byId = new Map((ws.stressors || []).map((/** @type {any} */ s) => [s.id, s]));
+      const byId = new Map((ws.stressors || []).map((/** @type {Loose} */ s) => [s.id, s]));
       byId.set(normalized.id, normalized);
       ws = { ...ws, stressors: [...byId.values()] };
     } else if (d.action === 'resolve' && d.type) {
       const roamingType = pulseTypeForStressorKey(d.type) || d.type;
       const match = (ws.stressors || [])
-        .map((/** @type {any} */ raw) => normalizeStressor(raw))
-        .find((/** @type {any} */ st) => st.status === 'active'
+        .map((/** @type {Loose} */ raw) => normalizeStressor(raw))
+        .find((/** @type {Loose} */ st) => st.status === 'active'
           && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
           && (String(st.originSettlementId || '') === d.originSettlementId
             || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));

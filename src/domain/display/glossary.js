@@ -43,6 +43,9 @@ import { CAPTURE_LADDER } from '../corruption.js';
 import { realmVerbs } from '../events/realmManifest.js';
 import { slugify } from '../../kernel/slugify.js';
 
+/** The schema-owned loose record alias (the affordanceManifest Mut idiom).
+ * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Loose */
+
 export const GLOSSARY_LAZY_SENTINEL = 'GLOSSARY_LAZY_SENTINEL';
 
 /** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive).
@@ -120,7 +123,7 @@ const LINK = Object.freeze({
 
 /** A code-DERIVED (never invented) one-liner for a REALM order (W-COMPOSER-2:
  * stages as a proposal; deferred lanes say so honestly).
- * @param {Record<string, any>} verb */
+ * @param {Loose} verb */
 function realmVerbDefinition(verb) {
   const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
   const base = verb.lane === 'deferred'
@@ -133,7 +136,7 @@ function realmVerbDefinition(verb) {
 
 /** A code-DERIVED (never invented) one-liner for an event verb (the manifest's
  * loose open-entry shape — the affordanceManifest Mut idiom).
- * @param {Record<string, any>} verb */
+ * @param {Loose} verb */
 function verbDefinition(verb) {
   const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
   const article = /^[aeiou]/i.test(verb.family) ? 'An' : 'A';
@@ -167,7 +170,7 @@ export function buildGlossaryEntries() {
 
   // Realm verbs (W-COMPOSER-2 — the realm affordance manifest, registry order;
   // the loose open-entry read — the affordanceManifest Mut idiom).
-  for (const verb of /** @type {Array<Record<string, any>>} */ (/** @type {unknown} */ (realmVerbs()))) {
+  for (const verb of /** @type {Loose[]} */ (/** @type {unknown} */ (realmVerbs()))) {
     out.push({
       id: `verb-${slug(verb.verb)}`,
       term: verb.label,

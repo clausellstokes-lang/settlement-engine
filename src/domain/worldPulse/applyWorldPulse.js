@@ -1376,7 +1376,7 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
   // is stamped 'refused' (visible in the queue's history), never 'applied' — the
   // §10 phantom-hole law at the proposal mouth. Organic outcomes are untouched.
   const wasRefused = Array.isArray(result.newsEntries)
-    && result.newsEntries.some((/** @type {any} */ n) => n && n.impactKind === 'realm_verb_refused');
+    && result.newsEntries.some((/** @type {NonNullable<SimSettlement['config']>} */ n) => n && n.impactKind === 'realm_verb_refused');
   result.worldState = updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now });
   return result;
 }
@@ -1390,10 +1390,10 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
  * pending order per (candidateType, acting settlement) — the M10a
  * pendingActorMajorFor guard.
  * @param {Object} [io]
- * @param {any} [io.campaign] @param {any[]} [io.saves]
- * @param {string} [io.verb] @param {Record<string, any>} [io.args]
+ * @param {SimSettlement['config']} [io.campaign] @param {NonNullable<SimSettlement['config']>[]} [io.saves]
+ * @param {string} [io.verb] @param {NonNullable<SimSettlement['config']>} [io.args]
  * @param {string} [io.now]
- * @returns {{ ok: true, result: any, proposalId: string|null }
+ * @returns {{ ok: true, result: NonNullable<SimSettlement['config']>, proposalId: string|null }
  *         | { ok: false, code: string, prose: string }}
  */
 export function mintRealmVerbProposal({ campaign, saves = [], verb = '', args = {}, now = wallClockNow() } = {}) {

@@ -22,6 +22,11 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
+
+/** The schema-owned loose record alias (the affordanceManifest Mut idiom):
+ * every any-hole here would otherwise re-count what settlement.schema.js
+ * already owns — the events layer's "schemaless open objects" read shape.
+ * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Mut */
 import { createPRNG } from '../../kernel/prng.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, isPort, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { planConvoy, planBlockade } from '../spatial/navalLayer.js';
@@ -55,23 +60,23 @@ export const REALM_VERB_PAYLOAD_KIND = 'realm_verb_order';
 function num(v, f) { return typeof v === 'number' && Number.isFinite(v) ? v : f; }
 /** @param {number} v */
 function round4(v) { return Math.round(v * 10000) / 10000; }
-/** @param {unknown} v @returns {Record<string, any>} */
-function asObject(v) { return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, any>} */ (v) : {}; }
+/** @param {unknown} v @returns {Mut} */
+function asObject(v) { return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Mut} */ (v) : {}; }
 /** @param {string} a @param {string} b */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
 
 /** Snapshot shim: guarantee a byId Map over the snapshot's settlements items
  * (the proposal-apply snapshot carries settlements[] but no byId).
- * @param {Record<string, any>} snapshot @returns {Record<string, any>} */
+ * @param {Mut} snapshot @returns {Mut} */
 export function withById(snapshot) {
   const snap = asObject(snapshot);
   if (snap.byId && typeof snap.byId.get === 'function') return snap;
   const byId = new Map((Array.isArray(snap.settlements) ? snap.settlements : []).map(
-    (/** @type {any} */ i) => [String(i?.id ?? ''), i]));
+    (/** @type {Mut} */ i) => [String(i?.id ?? ''), i]));
   return { ...snap, byId };
 }
 
-const nameOf = (/** @type {any} */ snapshot, /** @type {unknown} */ id) => {
+const nameOf = (/** @type {Mut} */ snapshot, /** @type {unknown} */ id) => {
   const item = withById(snapshot).byId.get(String(id));
   return String(item?.name || item?.settlement?.name || id);
 };
@@ -88,7 +93,7 @@ const ACTOR_ARG = Object.freeze({
 });
 
 /** One-line DM-facing headline per verb (the proposal panel's card).
- * @param {string} verb @param {Record<string, any>} args @param {Record<string, any>} snapshot */
+ * @param {string} verb @param {Mut} args @param {Mut} snapshot */
 function headlineFor(verb, args, snapshot) {
   const n = (/** @type {unknown} */ id) => nameOf(snapshot, id);
   switch (verb) {
@@ -112,9 +117,9 @@ function headlineFor(verb, args, snapshot) {
  * Build the proposal-mode outcome for a realm verb order (PURE). Derivable
  * mint-time facts (intervention strength via the mover's own reads) are folded
  * into args so apply is deterministic. Refuses unknown/deferred verbs.
- * @param {{ verb: string, args: Record<string, any>, worldState: Record<string, any>,
- *   snapshot: Record<string, any>, tick: number }} input
- * @returns {{ ok: true, predicate: { available: boolean, reasons: string[], unlocks: string[] }, outcome: Record<string, any> }
+ * @param {{ verb: string, args: Mut, worldState: Mut,
+ *   snapshot: Mut, tick: number }} input
+ * @returns {{ ok: true, predicate: { available: boolean, reasons: string[], unlocks: string[] }, outcome: Mut }
  *         | { ok: false, code: string, prose: string }}
  */
 export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }) {
@@ -129,8 +134,8 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
   if (verb === 'ORDER_INTERVENTION') {
     const shim = withById(snapshot);
     const patron = String(a.patronId ?? '');
-    const p01 = patronStrength01Of(/** @type {any} */ (shim), patron);
-    const merc = mercenaryReinforcementOf(/** @type {any} */ (shim), patron);
+    const p01 = patronStrength01Of(/** @type {Mut} */ (shim), patron);
+    const merc = mercenaryReinforcementOf(/** @type {Mut} */ (shim), patron);
     a.side = a.side === INTERVENTION_SIDES.CHALLENGER ? INTERVENTION_SIDES.CHALLENGER : INTERVENTION_SIDES.INCUMBENT;
     a.invited = a.invited === true;
     a.strength = round4(Math.max(1, num(a.strength, Math.max(1, p01 * 100) * (1 + merc.factor))));
@@ -209,13 +214,13 @@ function orderNews(verb, headline, summary, ids, tick, now) {
  * lifecycle pair — the organic outcome falls through the organic apply), and
  * optional per-save settlement patches (calamity/steading/reconsideration).
  * @param {Object} io
- * @param {Record<string, any>} io.state @param {Record<string, any>} io.snapshot
- * @param {Map<string, any>} io.settlementUpdates @param {Record<string, any>} io.outcome
+ * @param {Mut} io.state @param {Mut} io.snapshot
+ * @param {Map<string, Mut>} io.settlementUpdates @param {Mut} io.outcome
  * @param {number} io.tick @param {string|null} io.now
- * @returns {{ worldState: Record<string, any>, newsEntries: Array<Record<string, any>>,
+ * @returns {{ worldState: Mut, newsEntries: Mut[],
  *   refusal: { code: string, detail: string } | null,
- *   substituteOutcome?: Record<string, any> | null,
- *   settlementPatches?: Map<string, any> | null }}
+ *   substituteOutcome?: Mut | null,
+ *   settlementPatches?: Map<string, Mut> | null }}
  */
 export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcome, tick, now }) {
   const pay = asObject(outcome.proposalPayload);
@@ -223,9 +228,12 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
   const args = asObject(pay.args);
   const nowTick = Math.max(0, Math.floor(num(tick, 0)));
   const shim = withById(snapshot);
-  /** @type {(r: { code: string, detail: string }) => any} */
+  /** The arm result shape (the dispatcher's own contract).
+   * @typedef {{ worldState: Mut, newsEntries: Mut[], refusal: { code: string, detail: string } | null,
+   *   substituteOutcome?: Mut | null, settlementPatches?: Map<string, Mut> | null }} ArmResult */
+  /** @type {(r: { code: string, detail: string }) => ArmResult} */
   const refused = (r) => ({ worldState: state, newsEntries: [realmRefusalNews(verb, r, nowTick, now)], refusal: r });
-  /** @type {(ws: Record<string, any>, news: Array<Record<string, any>>, patches?: Map<string, any> | null, substitute?: Record<string, any> | null) => any} */
+  /** @type {(ws: Mut, news: Mut[], patches?: Map<string, Mut> | null, substitute?: Mut | null) => ArmResult} */
   const applied = (ws, news, patches = null, substitute = null) =>
     ({ worldState: ws, newsEntries: news, refusal: null, settlementPatches: patches, substituteOutcome: substitute });
 
@@ -258,7 +266,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const fn = verb === 'ORDER_SUPPLY_RAID' ? orderSupplyRaid : declareTradeEmbargo;
       const r = fn(state, {
         aggressorId: args.aggressorId, targetId: args.targetId,
-        snapshot: /** @type {any} */ (shim), digest: activeSpatialDigest(state), tick: nowTick,
+        snapshot: /** @type {Mut} */ (shim), digest: activeSpatialDigest(state), tick: nowTick,
       });
       if (r.ok !== true) return refused(refuse(r.code, r.detail));
       return applied(r.worldState, [orderNews(verb,
@@ -274,7 +282,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (!interventionActive(state)) return refused(refuse('intervention_gate_dark'));
       const patron = String(args.patronId ?? '');
       const target = String(args.targetId ?? '');
-      const contests = liveCoupContests(state, /** @type {any} */ (shim));
+      const contests = liveCoupContests(state, /** @type {Mut} */ (shim));
       if (!contests.some(c => c.targetId === target)) return refused(refuse('intervention_no_contest', nameOf(shim, target)));
       if (asObject(state.deployments)[patron]) return refused(refuse('intervention_busy', nameOf(shim, patron)));
       const ledger = asObject(getSpatialLedger(state, 'interventions'));
@@ -289,7 +297,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
         sinceTick: nowTick, lastTick: nowTick,
       };
       const next = { ...ledger, [key]: record };
-      /** @type {Record<string, any>} */
+      /** @type {Mut} */
       const ordered = {};
       for (const k of Object.keys(next).sort(codepoint)) ordered[k] = next[k];
       return applied(setSpatialLedger(state, 'interventions', ordered), [orderNews(verb,
@@ -312,7 +320,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (dep.targetId == null || dep.recalled) return refused(refuse('convoy_no_deployment', nameOf(shim, ownerId)));
       const records = asObject(getSpatialLedger(state, 'navalTransit'));
       if (records[ownerId]) return refused(refuse('convoy_refused', 'the fleet is already at sea'));
-      const navStrength = navalStrengthOf(digest, /** @type {any} */ (shim).byId.get(ownerId), ownerId);
+      const navStrength = navalStrengthOf(digest, /** @type {Mut} */ (shim).byId.get(ownerId), ownerId);
       if (navStrength <= 0) return refused(refuse('convoy_refused', 'no war navy to escort the crossing'));
       const plan = planConvoy(digest, state, {
         ownerId, cargoId: ownerId, destId,
@@ -338,13 +346,13 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       }
       const records = asObject(getSpatialLedger(state, 'navalTransit'));
       if (records[ownerId]) return refused(refuse('blockade_refused', 'the fleet is already at sea'));
-      const navStrength = num(args.ownerStrength, navalStrengthOf(digest, /** @type {any} */ (shim).byId.get(ownerId), ownerId));
+      const navStrength = num(args.ownerStrength, navalStrengthOf(digest, /** @type {Mut} */ (shim).byId.get(ownerId), ownerId));
       if (navStrength <= 0) return refused(refuse('blockade_no_navy', nameOf(shim, ownerId)));
       const plan = planBlockade(digest, state, { ownerId, targetId, ownerStrength: navStrength, departTick: nowTick, season: null });
       if (!plan || !('record' in plan)) return refused(refuse('blockade_refused', 'no reachable sea route'));
       const withRecord = setSpatialLedger(state, 'navalTransit', { ...records, [ownerId]: plan.record });
       // The mover's own news builder (force ≡ organic down to the entry shape).
-      return applied(withRecord, [blockadeNews({ ownerId, targetId }, /** @type {any} */ (shim), nowTick, now)]);
+      return applied(withRecord, [blockadeNews({ ownerId, targetId }, /** @type {Mut} */ (shim), nowTick, now)]);
     }
 
     // ── FORCE_RECONSIDERATION (the priced crack, delivered by the DM) ─────
@@ -355,12 +363,12 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const key = commitmentLedgerKey(actorId, courseKey);
       const stock = commitmentStockOf(state, actorId, courseKey, nowTick);
       if (!key || stock <= 0) return refused(refuse('reconsideration_no_course', nameOf(shim, actorId)));
-      const th = entityThreshold(/** @type {any} */ (shim).byId.get(actorId), /** @type {any} */ (state));
+      const th = entityThreshold(/** @type {Mut} */ (shim).byId.get(actorId), /** @type {Mut} */ (state));
       const pressure01 = clamp01(num(args.pressure01, 0.6));
       const withdrawal = pressure01 * Math.max(1e-6, th.cliff);
       const remaining = stock - withdrawal;
       const ledger = asObject(getSpatialLedger(state, 'commitments'));
-      /** @type {Array<Record<string, any>>} */
+      /** @type {Mut[]} */
       const news = [];
       if (remaining > 0) {
         // The voice of reason: a withdrawal against the stock (the same entry
@@ -377,7 +385,7 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
           [actorId], nowTick, now));
         return applied(withdrawn, news);
       }
-      /** @type {Record<string, any>} */
+      /** @type {Mut} */
       let ws;
       // THE FINAL PUSH: the course cracks NOW. Spend the stock, execute the
       // physical wind-down through the standing contracts, and — when the court
@@ -428,17 +436,17 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
             : dropSpatialLedger(ws, 'interventions');
         }
       }
-      /** @type {Map<string, any> | null} */
+      /** @type {Map<string, Mut> | null} */
       let patches = null;
       if (pastCliff(stock, th.cliff)) {
         const crack = climbDownConsequence({ actorId, lawfulness01: th.lawfulness01, exitKind: '' });
-        const cred = advanceCredibility({ worldState: /** @type {any} */ (ws), tick: nowTick, deltas: [crack.credibilityDelta] });
-        if (cred.changed) ws = /** @type {Record<string, any>} */ (cred.worldState);
+        const cred = advanceCredibility({ worldState: /** @type {Mut} */ (ws), tick: nowTick, deltas: [crack.credibilityDelta] });
+        if (cred.changed) ws = /** @type {Mut} */ (cred.worldState);
         const entry = settlementUpdates.get(actorId);
         if (entry && crack.legitimacyHit > 0) {
           const patched = applyLegitimacyHits(
             [{ saveId: actorId, settlement: entry.settlement }], new Map([[actorId, -crack.legitimacyHit]]));
-          patches = new Map([[actorId, patched[0].settlement]]);
+          patches = new Map([[actorId, /** @type {Mut} */ (patched[0].settlement)]]);
         }
         news.push(climbDownNews(actorId, target, (/** @type {string} */ id) => nameOf(shim, id), stock, th.cliff, crack, '', nowTick));
       } else {
@@ -460,27 +468,27 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const year = seasonForTick(nowTick).year;
       const result = forceCalamityStrike({
-        settlement: /** @type {any} */ (entry.settlement),
-        item: /** @type {any} */ (shim).byId.get(targetId),
+        settlement: /** @type {Mut} */ (entry.settlement),
+        item: /** @type {Mut} */ (shim).byId.get(targetId),
         id: targetId, year, tick: nowTick, forkFn,
         severity: args.severity != null ? String(args.severity) : null,
         flavorText: args.flavor != null && String(args.flavor).trim() ? String(args.flavor) : null,
       });
       let ws = state;
-      /** @type {Map<string, any>} */
+      /** @type {Map<string, Mut>} */
       const patches = new Map([[targetId, result.settlement]]);
       if (result.loss.exodus > 0) {
         const spatial = migrationActive(state);
         const exodusOutcome = buildExodusOutcome({
           id: targetId, exodus: result.loss.exodus, spatial,
-          snapshot: /** @type {any} */ (shim), pIndex: null, tick: nowTick,
+          snapshot: /** @type {Mut} */ (shim), pIndex: null, tick: nowTick,
         });
         // Fold source debit + (aspatial) destination credits through the SAME
         // population writer advanceCalamity uses — over a working updates array
         // seeded from the strike patch + the live update entries.
         const affectedIds = [...new Set([targetId,
-          ...(/** @type {any[]} */ (exodusOutcome.populationDeltas || [])).map((/** @type {any} */ d) => String(d.saveId))])];
-        /** @type {Array<{ saveId: string, settlement: any }>} */
+          ...(/** @type {Mut[]} */ (exodusOutcome.populationDeltas || [])).map((/** @type {Mut} */ d) => String(d.saveId))])];
+        /** @type {Array<{ saveId: string, settlement: Mut }>} */
         const working = [];
         /** @type {Map<string, number>} */
         const workingIndex = new Map();
@@ -490,17 +498,21 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
           workingIndex.set(sid, working.length);
           working.push({ saveId: sid, settlement: s });
         }
-        const foldedUpdates = applyExodusToUpdates(/** @type {any} */ (working), workingIndex, /** @type {any} */ (exodusOutcome), targetId);
-        for (const u of foldedUpdates) patches.set(String(u.saveId), u.settlement);
+        const foldedUpdates = applyExodusToUpdates(
+          /** @type {import('./calamityKernel.js').CalUpdate[]} */ (/** @type {unknown} */ (working)),
+          workingIndex,
+          /** @type {import('./calamityKernel.js').CalOutcome} */ (/** @type {unknown} */ (exodusOutcome)), targetId);
+        for (const u of foldedUpdates) patches.set(String(u.saveId), /** @type {Mut} */ (/** @type {unknown} */ (u.settlement)));
         if (spatial) {
           // The realized-debit dispatch (conservation asserted inside).
-          const events = collectRealizedEmigrationEvents([/** @type {any} */ (exodusOutcome)]);
+          const events = collectRealizedEmigrationEvents([/** @type {Mut} */ (/** @type {unknown} */ (exodusOutcome))]);
           const migration = dispatchMigrations({
-            events, snapshot: /** @type {any} */ (shim), pIndex: /** @type {any} */ (null),
+            events, snapshot: /** @type {Mut} */ (shim),
+            pIndex: /** @type {import('./migrationKernel.js').PressureIndex} */ (/** @type {unknown} */ (null)),
             digest: activeSpatialDigest(state), worldState: ws,
             rng: createPRNG(`${seed}:exodus`), season: null, tick: nowTick,
           });
-          if (migration.changed) ws = /** @type {Record<string, any>} */ (migration.worldState);
+          if (migration.changed) ws = /** @type {Mut} */ (migration.worldState);
         }
       }
       return applied(ws, [orderNews(verb,
@@ -517,11 +529,12 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
       if (!entry || !entry.settlement) return refused(refuse('steading_refused', 'no such parent settlement'));
       const satLedger = asObject(getSpatialLedger(state, 'satellites'));
       // The kernel's own sats read (satellitesOf — sorted record array).
-      const sats = satellitesOf(/** @type {any} */ (satLedger), parentId);
+      const sats = satellitesOf(/** @type {Mut} */ (satLedger), parentId);
       const seed = `${String(state.rngSeed ?? 'realm')}:realm_verb:${nowTick}`;
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const minted = forceFoundSteading({
-        parent: /** @type {any} */ (entry.settlement), parentId, sats: /** @type {any} */ (sats), tick: nowTick, forkFn,
+        parent: /** @type {Mut} */ (entry.settlement), parentId,
+        sats: /** @type {import('./settlementLifecycleKernel.js').SatelliteRecord[]} */ (/** @type {unknown} */ (sats)), tick: nowTick, forkFn,
         name: args.name != null && String(args.name).trim() ? String(args.name) : null,
         resourceKey: args.resource != null && String(args.resource).trim() ? String(args.resource) : null,
       });
@@ -559,30 +572,30 @@ export function applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcom
     case 'FORCE_ABANDON': {
       if (!settlementLifecycleActive(state)) return refused(refuse('lifecycle_gate_dark'));
       const targetId = String(args.targetId ?? '');
-      const item = /** @type {any} */ (shim).byId.get(targetId);
+      const item = /** @type {Mut} */ (shim).byId.get(targetId);
       if (!item) return refused(refuse('abandon_refused', 'no such settlement'));
       const built = forceAbandonSettlement({
-        item, snapshot: /** @type {any} */ (shim), pIndex: /** @type {any} */ (null), tick: nowTick,
+        item, snapshot: /** @type {Mut} */ (shim), pIndex: /** @type {Mut} */ (/** @type {unknown} */ (null)), tick: nowTick,
         spatialActive: migrationActive(state),
       });
-      if ('refusal' in built) return refused(refuse('abandon_refused', String(/** @type {any} */ (built).refusal)));
-      return applied(state, [], null, /** @type {Record<string, any>} */ (built));
+      if ('refusal' in built) return refused(refuse('abandon_refused', String(/** @type {Mut} */ (built).refusal)));
+      return applied(state, [], null, /** @type {Mut} */ (built));
     }
     case 'FORCE_RESETTLE': {
       if (!settlementLifecycleActive(state)) return refused(refuse('lifecycle_gate_dark'));
       const targetId = String(args.targetId ?? '');
-      const item = /** @type {any} */ (shim).byId.get(targetId);
+      const item = /** @type {Mut} */ (shim).byId.get(targetId);
       if (!item) return refused(refuse('resettle_refused', 'no such settlement'));
-      const donorPool = (Array.isArray(/** @type {any} */ (shim).settlements) ? /** @type {any} */ (shim).settlements : [])
-        .filter((/** @type {any} */ i) => String(i?.id ?? '') !== targetId);
+      const donorPool = (Array.isArray(/** @type {Mut} */ (shim).settlements) ? /** @type {Mut} */ (shim).settlements : [])
+        .filter((/** @type {Mut} */ i) => String(i?.id ?? '') !== targetId);
       const seed = `${String(state.rngSeed ?? 'realm')}:realm_verb`;
       const forkFn = (/** @type {string} */ k) => createPRNG(`${seed}:${k}`);
       const built = forceResettleSettlement({
-        item, donorPool: /** @type {any} */ (donorPool), tick: nowTick, forkFn,
+        item, donorPool: /** @type {import('./settlementLifecycleFirstClass.js').LcSnapItem[]} */ (/** @type {unknown} */ (donorPool)), tick: nowTick, forkFn,
         name: args.name != null && String(args.name).trim() ? String(args.name) : null,
       });
-      if ('refusal' in built) return refused(refuse('resettle_refused', String(/** @type {any} */ (built).refusal)));
-      return applied(state, [], null, /** @type {Record<string, any>} */ (built));
+      if ('refusal' in built) return refused(refuse('resettle_refused', String(/** @type {Mut} */ (built).refusal)));
+      return applied(state, [], null, /** @type {Mut} */ (built));
     }
 
     default:

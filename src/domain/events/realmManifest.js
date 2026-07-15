@@ -41,11 +41,15 @@ import { settlementLifecycleActive, forceFoundSteadingEntry } from '../worldPuls
 import { forceAbandonEntry, forceResettleEntry } from '../worldPulse/settlementLifecycleFirstClass.js';
 import { activeSpatialDigest } from '../spatial/distanceRead.js';
 
-/** The loose realm-context bag the realm composer passes every predicate /
+/** The schema-owned loose record alias (the affordanceManifest Mut idiom —
+ * the looseness is declared and any-census-counted where it is OWNED,
+ * settlement.schema.js; this projection layer reads world/context bags
+ * through it exactly as the applier layer it mirrors does).
+ * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Mut
+ */
+/** The realm-context bag the realm composer passes every predicate /
  * targetOptions call: `{ settlements: Array<{ id, name, settlement }>, tick }`.
- * Mirrors the settlement manifest's Mut idiom (the projection layer reads
- * through one bag exactly as the applier layer it mirrors does).
- * @typedef {Record<string, any>} RealmCtx
+ * @typedef {Mut} RealmCtx
  */
 
 export const REALM_MANIFEST_LAZY_SENTINEL = 'REALM_MANIFEST_LAZY_SENTINEL';
@@ -105,7 +109,7 @@ const nameFor = (/** @type {RealmCtx} */ ctx, /** @type {string} */ id) =>
 
 /** Owners of live, un-recalled deployments — the exact set sueForPeaceOrder can
  * act on (wraps worldState.deployments, the same read the verb runs).
- * @param {Record<string, any>} worldState @param {RealmCtx} ctx */
+ * @param {Mut} worldState @param {RealmCtx} ctx */
 export function belligerentOptions(worldState, ctx) {
   const deployments = worldState?.deployments && typeof worldState.deployments === 'object'
     ? worldState.deployments : {};
@@ -116,21 +120,21 @@ export function belligerentOptions(worldState, ctx) {
 
 /** The contested settlements of live coup contests — ORDER_INTERVENTION's legal
  * targets (wraps convergence.liveCoupContests, the mover's own contest read).
- * @param {Record<string, any>} worldState @param {RealmCtx} ctx */
+ * @param {Mut} worldState @param {RealmCtx} ctx */
 export function coupContestOptions(worldState, ctx) {
-  const byId = new Map((ctx?.settlements || []).map((/** @type {any} */ i) => [String(i.id), i]));
+  const byId = new Map((ctx?.settlements || []).map((/** @type {Mut} */ i) => [String(i.id), i]));
   return liveCoupContests(worldState, { byId }).map(c => ({ id: c.targetId, name: nameFor(ctx, c.targetId) }));
 }
 
 /** Sea-lane ports — the naval verbs' legal endpoints (wraps navalPortsOf over
- * the same digest read the kernel runs). @param {Record<string, any>} worldState @param {RealmCtx} ctx */
+ * the same digest read the kernel runs). @param {Mut} worldState @param {RealmCtx} ctx */
 export function portOptions(worldState, ctx) {
   const digest = activeSpatialDigest(worldState);
   return navalPortsOf(digest || {}).map(id => ({ id, name: nameFor(ctx, id) }));
 }
 
 /** Live committed courses per actor — FORCE_RECONSIDERATION's course dial
- * (wraps the momentum commitments ledger read). @param {Record<string, any>} worldState @param {number} [tick] */
+ * (wraps the momentum commitments ledger read). @param {Mut} worldState @param {number} [tick] */
 export function courseOptions(worldState, tick = 0) {
   return commitmentCoursesOf(worldState, Number.isFinite(tick) ? tick : Number(worldState?.tick) || 0);
 }
@@ -138,12 +142,12 @@ export function courseOptions(worldState, tick = 0) {
 /** Remnant / living splits for the lifecycle verbs. @param {RealmCtx} ctx @param {boolean} wantRemnant */
 function lifecycleTargets(ctx, wantRemnant) {
   return (ctx?.settlements || [])
-    .filter((/** @type {any} */ i) => {
+    .filter((/** @type {Mut} */ i) => {
       const s = i?.settlement || {};
       const isRemnant = !!(s.lifecycleStatus || s.config?.lifecycleStatus);
       return wantRemnant ? isRemnant : !isRemnant;
     })
-    .map((/** @type {any} */ i) => ({ id: String(i.id), name: String(i.name || i.settlement?.name || i.id) }));
+    .map((/** @type {Mut} */ i) => ({ id: String(i.id), name: String(i.name || i.settlement?.name || i.id) }));
 }
 
 // ── Dial shorthand (the §3 schema — same shape as the settlement manifest) ───
@@ -191,9 +195,9 @@ export const REALM_MANIFEST = Object.freeze({
       bandDial('severity01', 'Severity', REALM_SEVERITY_VALUES, 'moderate'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: Object.keys(CASUS_VETO_PROSE),
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !peaceCausalActive(ws) ? darkWar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
           'A grievance needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
@@ -204,9 +208,9 @@ export const REALM_MANIFEST = Object.freeze({
     candidateType: 'peace_sued', authority: 'peace_sued',
     dials: [settlementTargetDial('partyId', 'The court that seeks peace')],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => belligerentOptions(ws, ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => belligerentOptions(ws, ctx),
     coversVetoCodes: Object.keys(PEACE_VETO_PROSE),
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !peaceCausalActive(ws) ? darkWar()
         : gate(belligerentOptions(ws, ctx).length > 0,
           'No court has an army in the field — there is no war to wind down.'),
@@ -222,9 +226,9 @@ export const REALM_MANIFEST = Object.freeze({
       settlementTargetDial('targetId', 'The strangled target'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: Object.keys(WEBWAR_VETO_PROSE),
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !supplyWebWarfareActive(ws) ? darkWebwar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
           'An indirect campaign needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
@@ -238,9 +242,9 @@ export const REALM_MANIFEST = Object.freeze({
       settlementTargetDial('targetId', 'The embargoed target'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: Object.keys(WEBWAR_VETO_PROSE),
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !supplyWebWarfareActive(ws) ? darkWebwar()
         : gate(campaignSettlementOptions(ctx).length >= 2,
           'An embargo needs two courts — the campaign has fewer.', 'Canonize a second settlement.'),
@@ -257,9 +261,9 @@ export const REALM_MANIFEST = Object.freeze({
       enumDial('side', [INTERVENTION_SIDES.INCUMBENT, INTERVENTION_SIDES.CHALLENGER], INTERVENTION_SIDES.INCUMBENT, 'The backed side'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => coupContestOptions(ws, ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => coupContestOptions(ws, ctx),
     coversVetoCodes: ['intervention_gate_dark', 'intervention_no_contest', 'intervention_busy', 'intervention_already'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !interventionActive(ws) ? darkIntervention()
         : gate(coupContestOptions(ws, ctx).length > 0,
           'No coup contest is live anywhere in the realm.', 'An intervention needs a brewing coup to join.'),
@@ -270,7 +274,7 @@ export const REALM_MANIFEST = Object.freeze({
     module: 'convergence.js', authority: String(reinforceParked.candidateType),
     dials: [settlementTargetDial('allyId', 'The ally under siege')],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: ['reinforce_deferred'],
     // HONEST DEFERRAL (force ≡ organic): the reactive column-COMMITMENT seam is
     // itself a documented W-CONVERGENCE deferral ("intervention columns ride the
@@ -289,7 +293,7 @@ export const REALM_MANIFEST = Object.freeze({
     module: 'convergence.js', authority: String(interceptParked.candidateType),
     dials: [settlementTargetDial('believedColumn', 'The believed column\'s owner')],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: ['intercept_deferred'],
     // Same honest deferral as REINFORCE (the shared spatial-column seam).
     predicate: () => no(
@@ -308,9 +312,9 @@ export const REALM_MANIFEST = Object.freeze({
       settlementTargetDial('destId', 'The destination port'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => portOptions(ws, ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => portOptions(ws, ctx),
     coversVetoCodes: ['convoy_gate_dark', 'convoy_not_ports', 'convoy_no_deployment', 'convoy_refused'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !navalActive(ws) ? darkNaval()
         : gate(portOptions(ws, ctx).length >= 2,
           'Fewer than two sea-lane ports exist.', 'A convoy needs a port-to-port sea leg.'),
@@ -324,9 +328,9 @@ export const REALM_MANIFEST = Object.freeze({
       settlementTargetDial('targetId', 'The blockaded port'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => portOptions(ws, ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => portOptions(ws, ctx),
     coversVetoCodes: ['blockade_gate_dark', 'blockade_not_ports', 'blockade_no_navy', 'blockade_refused', 'blockade_already'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !navalActive(ws) ? darkNaval()
         : gate(portOptions(ws, ctx).length >= 2,
           'Fewer than two sea-lane ports exist.', 'A blockade needs a hostile port reachable by sea.'),
@@ -343,11 +347,11 @@ export const REALM_MANIFEST = Object.freeze({
       bandDial('pressure01', 'Pressure', REALM_SEVERITY_VALUES, 'moderate'),
     ],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       courseOptions(ws, Number(ws?.tick ?? ctx?.tick) || 0)
-        .map((/** @type {any} */ c) => ({ id: c.actorId, name: `${nameFor(ctx, c.actorId)} — ${c.courseKey}` })),
+        .map((/** @type {Mut} */ c) => ({ id: c.actorId, name: `${nameFor(ctx, c.actorId)} — ${c.courseKey}` })),
     coversVetoCodes: ['reconsideration_gate_dark', 'reconsideration_no_course'],
-    predicate: (/** @type {any} */ ws) =>
+    predicate: (/** @type {Mut} */ ws) =>
       !momentumActive(ws) ? darkMomentum()
         : gate(courseOptions(ws, Number(ws?.tick) || 0).length > 0,
           'No court holds a committed course to press.', 'Commitment stock accrues as courses persist.'),
@@ -358,14 +362,14 @@ export const REALM_MANIFEST = Object.freeze({
     ...calamityParked,
     verb: 'FORCE_CALAMITY', label: 'Force a calamity', lane: 'proposal',
     module: 'calamityKernel.js', candidateType: 'calamity_forced', authority: 'calamity_forced',
-    dials: [settlementTargetDial('targetId', 'The stricken settlement'), ...(/** @type {any[]} */ (calamityParked.dials))],
+    dials: [settlementTargetDial('targetId', 'The stricken settlement'), ...(/** @type {Mut[]} */ (calamityParked.dials))],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => campaignSettlementOptions(ctx),
     coversVetoCodes: ['calamity_gate_dark'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !calamityEnabled(ws?.simulationRules) ? darkCalamity()
         : /** @type {{ available: boolean, reasons: string[], unlocks: string[] }} */ (
-          /** @type {any} */ (calamityParked).predicate(ws, ctx)),
+          /** @type {Mut} */ (calamityParked).predicate(ws, ctx)),
   }),
 
   // ── The lifecycle verbs (W-LIFECYCLE) — parked entries consumed verbatim ─
@@ -373,11 +377,11 @@ export const REALM_MANIFEST = Object.freeze({
     ...steadingParked,
     verb: 'FORCE_FOUND_STEADING', label: 'Found a steading', lane: 'proposal',
     module: 'settlementLifecycleKernel.js', candidateType: 'steading_forced', authority: 'steading_forced',
-    dials: [settlementTargetDial('parentId', 'The founding parent'), ...(/** @type {any[]} */ (steadingParked.dials))],
+    dials: [settlementTargetDial('parentId', 'The founding parent'), ...(/** @type {Mut[]} */ (steadingParked.dials))],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, false),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, false),
     coversVetoCodes: ['lifecycle_gate_dark', 'steading_refused'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !settlementLifecycleActive(ws) ? darkLifecycle()
         : gate(lifecycleTargets(ctx, false).length > 0, 'No living settlement can found a steading.'),
   }),
@@ -387,9 +391,9 @@ export const REALM_MANIFEST = Object.freeze({
     module: 'settlementLifecycleFirstClass.js', candidateType: 'settlement_terminal_death', authority: 'settlement_terminal_death',
     dials: [settlementTargetDial('targetId', 'The dying thorp')],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, false),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, false),
     coversVetoCodes: ['lifecycle_gate_dark', 'abandon_refused'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !settlementLifecycleActive(ws) ? darkLifecycle()
         : gate(lifecycleTargets(ctx, false).length > 0,
           'No living settlement to abandon.', 'Only a thorp-tier settlement can die — demote it first.'),
@@ -398,11 +402,11 @@ export const REALM_MANIFEST = Object.freeze({
     ...resettleParked,
     verb: 'FORCE_RESETTLE', label: 'Force a resettlement', lane: 'proposal',
     module: 'settlementLifecycleFirstClass.js', candidateType: 'settlement_resettled', authority: 'settlement_resettled',
-    dials: [settlementTargetDial('targetId', 'The remnant site'), ...(/** @type {any[]} */ (resettleParked.dials))],
+    dials: [settlementTargetDial('targetId', 'The remnant site'), ...(/** @type {Mut[]} */ (resettleParked.dials))],
     targetsFrom: 'campaignSettlements',
-    targetOptions: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, true),
+    targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) => lifecycleTargets(ctx, true),
     coversVetoCodes: ['lifecycle_gate_dark', 'resettle_refused'],
-    predicate: (/** @type {any} */ ws, /** @type {RealmCtx} */ ctx) =>
+    predicate: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       !settlementLifecycleActive(ws) ? darkLifecycle()
         : gate(lifecycleTargets(ctx, true).length > 0,
           'No remnant site to resettle.', 'Only an abandoned site can live again.'),
@@ -456,7 +460,7 @@ export function realmVerbs() {
 
 /** The manifest entry for a verb name (null for unknown). @param {string} verb */
 export function realmVerbFor(verb) {
-  return /** @type {Record<string, any>} */ (REALM_MANIFEST)[String(verb || '')] || null;
+  return /** @type {Mut} */ (REALM_MANIFEST)[String(verb || '')] || null;
 }
 
 /** The realm verbs whose execution lane is LIVE (lane 'proposal'). */
