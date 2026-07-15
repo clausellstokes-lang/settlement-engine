@@ -132,12 +132,13 @@ export function coupContenders(settlement) {
  * @param {number} [args.severity]              coup severity at the verdict (0..1)
  * @param {number|null} [args.rulingAuthorityScore]  causal ruling_authority 0..100 when available
  * @param {number} [args.warSentimentAdj]  P2 flag: signed shift to the incumbent hold-chance from war sentiment (0 = off)
+ * @param {number} [args.interventionAdj]  W-CONVERGENCE flag: signed shift to the incumbent hold-chance from surviving foreign interveners — +raises for an incumbent-backer, −lowers for a challenger-backer (0 = off ⇒ byte-identical)
  * @returns {{ holds:boolean, pHold:number, roll:number,
  *            winner:{name:string,archetype:string}|null,
  *            challengers:Array<{name:string, archetype:string, power:number, weight:number}>,
  *            incumbent:Object, reason:string }}
  */
-export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0 }) {
+export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuthorityScore = null, warSentimentAdj = 0, interventionAdj = 0 }) {
   const { challengers, incumbent } = coupContenders(settlement);
   if (!challengers.length) {
     return {
@@ -160,7 +161,10 @@ export function resolveCoupVerdict({ settlement, rng, severity = 0.6, rulingAuth
     const authorityAdj = Number.isFinite(rulingAuthorityScore) ? (/** @type {number} */ (rulingAuthorityScore) - 50) / 400 : 0;
     // warSentimentAdj (P2): 0 when the flag is off ⇒ byte-identical. A war turning sour
     // (negative sentiment) lowers the seat's hold-chance; a sustainable one raises it.
-    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0)));
+    // interventionAdj (W-CONVERGENCE): 0 when the intervention layer is dark ⇒ byte-
+    // identical. A surviving foreign force backing the incumbent raises the seat's
+    // hold-chance; one backing the challengers lowers it. The clamp below bounds it.
+    pHold = Math.max(0.1, Math.min(0.9, share * severityDrag + authorityAdj + (Number(warSentimentAdj) || 0) + (Number(interventionAdj) || 0)));
   }
 
   const roll = rng.random();

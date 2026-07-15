@@ -17,7 +17,7 @@ import {
   advancePeaceReasons, peaceReasonFactor, peaceReasonsFor, warCausalBrief,
   scoreExhaustion, scoreBeliefConvergence, scoreEconomicStrangulation,
   scoreCoalitionFracture, scoreMediation, scoreHarvestPressure, scoreRealignment,
-  PEACE_REASON_TUNING,
+  scoreSpheresUnderstanding, PEACE_REASON_TUNING,
 } from '../../src/domain/worldPulse/peaceReasons.js';
 import { REASON_TUNING, PEACE_REASON_TYPES, reasonPairKey } from '../../src/domain/worldPulse/warReasons.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
@@ -121,6 +121,14 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     const distinct = scoreRealignment({ commonThird: null, bothBesetByThirds: true });
     expect(distinct.score).toBeCloseTo(PEACE_REASON_TUNING.REALIGNMENT_DISTINCT_THIRDS, 5);
     expect(scoreRealignment({ commonThird: null, bothBesetByThirds: false }).score).toBe(0);
+  });
+
+  it('W-CONVERGENCE spheres_understanding: clash pressure mints; no clash stays silent', () => {
+    expect(PEACE_REASON_TYPES).toContain('spheres_understanding');
+    expect(scoreSpheresUnderstanding({ clash01: 0.6 }).score).toBeGreaterThan(0);
+    expect(scoreSpheresUnderstanding({ clash01: 0.6 }).receipt).toBeTruthy();
+    expect(scoreSpheresUnderstanding({ clash01: 0 }).score).toBe(0);
+    expect(scoreSpheresUnderstanding({ clash01: 0 }).receipt).toBe('');
   });
 });
 
@@ -280,8 +288,9 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     const brief = warCausalBrief(r.worldState, 'a', 'b');
     expect(brief.peacePresent).toBeGreaterThanOrEqual(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
-    expect(brief.peace.length).toBe(7);
-    expect(brief.war.length).toBe(7);
+    // 8 = the wave-1 seven + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
+    expect(brief.peace.length).toBe(8);
+    expect(brief.war.length).toBe(8);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -289,7 +298,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(present.sinceTick).toBe(10);
   });
 
-  it('renders the calm form below the dying threshold and "0 of 7" on a dark world', () => {
+  it('renders the calm form below the dying threshold and "0 of 8" on a dark world', () => {
     const one = advancePeaceReasons({
       snapshot: snapshotFor([item('a'), item('b')]),
       worldState: warWorld({ simulationRules: { ...LIT_RULES, infoMode: 'full' }, calendar: { elapsedWeeks: 40 }, spatialCanonVersion: 1, spatialLedgers: { beliefMaps: {
@@ -302,7 +311,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 7 peace reasons now present');
+    expect(dark.line).toBe('0 of 8 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

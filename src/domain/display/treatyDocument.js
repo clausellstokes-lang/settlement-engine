@@ -63,6 +63,11 @@ export const TREATY_COMPLIANCE_VOICE = Object.freeze({
     strained: 'The openness of the court narrows; the observers see less than they are owed.',
     defaulted: 'The court has closed its doors, and the disclosure clause is dead.',
   }),
+  sovereignty: Object.freeze({
+    honored: 'No foreign banner marches on the other\'s succession; the pledge of non-intervention holds.',
+    strained: 'Foreign coin stirs beneath the other\'s contests again; the non-intervention pledge frays at its edges.',
+    defaulted: 'An army crosses into the other\'s internal quarrel; the pledge of non-intervention lies broken.',
+  }),
 });
 
 /** A generic register floor for any future family the table does not name (keeps

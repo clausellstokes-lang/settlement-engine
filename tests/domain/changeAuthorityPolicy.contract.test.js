@@ -110,6 +110,10 @@ const SOURCE_ANCHORS = Object.freeze({
   // is the LEGACY mode fed through — verbatim under routine/full, forced to
   // proposal under dm_only/recommendations and routine-with-major-approval.
   coup_succeeded: "applyMode: authorityFor(rules, 'coup_succeeded', locked ? 'proposal' : 'auto')",
+  // auto with approval routing (W-CONVERGENCE): the autonomous mover routes its legacy
+  // 'auto' through authorityFor, forcing proposal under dm_only/recommendations and
+  // routine-with-major-approval (byte-identical under legacy routine/full — dark by default).
+  intervention_ordered: "authorityFor(rules, 'intervention_ordered', 'auto')",
 });
 
 describe('change-authority contract — source anchors match the policy', () => {
@@ -227,6 +231,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     'occupation_vassalized',
     'coup_succeeded',
     'faction_government_challenge',
+    'intervention_ordered',
   ]);
 
   test('exactly the structural-major change-types carry campaignAltering: true', () => {
@@ -254,6 +259,7 @@ describe('change-authority contract — campaignAltering markers (Advance-scalin
     occupation_vassalized: { candidateType: 'occupation_vassalized', type: 'relationship', severity: 0.5 },
     coup_succeeded: { candidateType: 'coup_succeeded', type: 'power_transfer', powerTransfer: { cause: 'coup' }, severity: 0.7 },
     faction_government_challenge: { candidateType: 'faction_government_challenge', proposalPayload: { kind: 'government_change' }, severity: 0.55 },
+    intervention_ordered: { candidateType: 'intervention_ordered', type: 'condition', severity: 0.6 },
   });
 
   for (const changeType of CAMPAIGN_ALTERING) {

@@ -16,7 +16,7 @@ import {
   reasonPairKey, reasonRecord, foldPairReasons, aggregateReasons01, topReasons,
   peaceCausalActive, warReasonFactor, warReasonsFor, advanceWarReasons,
   scoreGrievance, scoreRevanchism, scoreResourcePressure, scoreTreatyDefault,
-  scoreEncirclement, scoreLegitimacyHunger, scoreCorruptionExposed,
+  scoreEncirclement, scoreLegitimacyHunger, scoreCorruptionExposed, scoreForeignClash,
 } from '../../src/domain/worldPulse/warReasons.js';
 
 // ── THE SYMMETRY LAW (§14.3) ─────────────────────────────────────────────────
@@ -24,7 +24,8 @@ import {
 describe('the symmetry law — war and peace reasons equally typed, equally receipted', () => {
   it('the reason-type counts match across war/peace', () => {
     expect(WAR_REASON_TYPES.length).toBe(PEACE_REASON_TYPES.length);
-    expect(WAR_REASON_TYPES.length).toBe(7);
+    // 7 wave-1 casus + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
+    expect(WAR_REASON_TYPES.length).toBe(8);
   });
 
   it('the receipt shapes match across war/peace (the shared record factory)', () => {
@@ -47,6 +48,15 @@ describe('the symmetry law — war and peace reasons equally typed, equally rece
     expect(Object.isFrozen(WAR_REASON_TYPES)).toBe(true);
     expect(Object.isFrozen(PEACE_REASON_TYPES)).toBe(true);
     expect(Object.isFrozen(REASON_MIRRORS)).toBe(true);
+  });
+
+  it('W-CONVERGENCE foreign_clash: positive control mints, negative control is silent', () => {
+    expect(WAR_REASON_TYPES).toContain('foreign_clash');
+    expect(REASON_MIRRORS.foreign_clash).toBe('spheres_understanding');
+    expect(scoreForeignClash({ clash01: 0.6 }).score).toBeGreaterThan(0);
+    expect(scoreForeignClash({ clash01: 0.6 }).receipt).toBeTruthy();
+    expect(scoreForeignClash({ clash01: 0 }).score).toBe(0);
+    expect(scoreForeignClash({ clash01: 0 }).receipt).toBe('');
   });
 });
 

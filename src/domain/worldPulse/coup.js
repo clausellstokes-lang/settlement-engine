@@ -31,6 +31,9 @@
 import { stablePart } from './worldState.js';
 import { resolveCoupVerdict } from '../rulingPowerCoup.js';
 import { computeWarSentiment } from './disposition.js';
+// W-CONVERGENCE — a surviving foreign intervener tilts the verdict (interventionAdj).
+// 0 when the intervention layer is dark ⇒ byte-identical (the warSentimentAdj precedent).
+import { interventionAdjFor } from './convergence.js';
 // M10a — a coup is an ACTOR-INITIATED campaign-altering major; its applyMode routes
 // through the shared authority policy so the seat-change joins the approval queue
 // under the forcing modes AND under routine-with-major-approval (byte-identical
@@ -89,9 +92,11 @@ function clamp(min, max, value) {
  * @param {Record<string, unknown>} [args.rules]  M10a: the simulation rules — the coup's applyMode
  *   routes through authorityFor (verbatim under legacy routine/full; proposal under the forcing
  *   modes and routine-with-major-approval).
+ * @param {Record<string, unknown>} [args.worldState]  W-CONVERGENCE: the world state — read for the
+ *   surviving-intervener tilt (interventionAdjFor; 0 when the intervention layer is dark).
  * @returns {any[]} outcomes for applyWorldPulseOutcomes (deterministic, probability 1)
  */
-export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false, rules = {} }) {
+export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false, rules = {}, worldState = {} }) {
   const outcomes = [];
   for (const stressor of resolved) {
     if (stressor?.type !== COUP_STRESSOR_TYPE) continue;
@@ -108,12 +113,15 @@ export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, wa
     const warSentimentAdj = warDispositionEnabled
       ? WAR_SENTIMENT_PHOLD_WEIGHT * computeWarSentiment(entry.settlement, warExhaustion[saveId])
       : 0;
+    // W-CONVERGENCE: the surviving foreign interveners' signed tilt (0 when dark).
+    const interventionAdj = interventionAdjFor(worldState, saveId);
     const verdict = /** @type {any} */ (resolveCoupVerdict({
       settlement: entry.settlement,
       rng,
       severity,
       rulingAuthorityScore: entry.causal?.scores?.ruling_authority ?? null,
       warSentimentAdj,
+      interventionAdj,
     }));
     const settlementName = entry.name || entry.settlement?.name || saveId;
     const incumbentName = verdict.incumbent?.name || 'the ruling power';

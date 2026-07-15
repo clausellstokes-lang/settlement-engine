@@ -113,6 +113,35 @@ describe('resolveCoupVerdict', () => {
   });
 });
 
+// ── W-CONVERGENCE §6 — the interventionAdj tilt (the warSentimentAdj precedent) ──
+describe('resolveCoupVerdict — W-CONVERGENCE interventionAdj pins', () => {
+  const gated = () => {
+    const s = settlementFixture();
+    // A Tolerated seat is re-admitted to the field ⇒ pHold via the share formula.
+    s.powerStructure.publicLegitimacy = { score: 50, label: 'Tolerated', govMultiplier: 1.0, crimMultiplier: 1.0 };
+    return s;
+  };
+  const V = (interventionAdj) => resolveCoupVerdict({
+    settlement: gated(), rng: rngOf(0.5), severity: 0.5, rulingAuthorityScore: 55,
+    ...(interventionAdj === undefined ? {} : { interventionAdj }),
+  });
+
+  test('interventionAdj=0 ⇒ byte-identical to omitting the term (the dormancy law)', () => {
+    expect(V(0)).toEqual(V(undefined));
+  });
+
+  test('an incumbent-backer RAISES pHold; a challenger-backer LOWERS it (directionality)', () => {
+    const base = V().pHold;
+    expect(V(0.22).pHold).toBeGreaterThan(base);   // survivor backs the seat
+    expect(V(-0.22).pHold).toBeLessThan(base);      // survivor backs the challengers
+  });
+
+  test('the tilt stays inside the [0.1, 0.9] verdict clamp no matter how large (both bounded)', () => {
+    expect(V(5).pHold).toBeLessThanOrEqual(0.9);
+    expect(V(-5).pHold).toBeGreaterThanOrEqual(0.1);
+  });
+});
+
 describe('transferRulingPower', () => {
   test('reshapes the governing seat to the winner-archetype government type', () => {
     const { settlement, transfer, error } = transferRulingPower(

@@ -84,10 +84,19 @@ function nameOf(snapshot, id) {
  * combatants when each is marching against the OTHER's home (A.dest === B.origin OR
  * B.dest === A.origin) — the two-power border war whose columns cross. (Richer
  * factional hostility is M9.) Co-besiegers of the SAME target are ALLIES (never a
- * self-battle). @param {Record<string, ArmyTransitRecord>} records
+ * self-battle).
+ *
+ * W-CONVERGENCE INTERCEPT (design §3/§4): the optional `contestSideOf` lookup extends
+ * the predicate with "opposing sides of the SAME internal contest" — an interceptor
+ * moves against a column bound for a coup it opposes. ABSENT the lookup (the aspatial /
+ * dormant caller — detectCollisions passes only `records`) the predicate is UNCHANGED
+ * ⇒ byte-identical (the intervener-vs-intervener aspatial case resolves directly via
+ * resolveFieldBattle in convergence.js; this seam is the spatial column-collision path).
+ * @param {Record<string, ArmyTransitRecord>} records
+ * @param {((armyId: string) => { contest: string, side: string } | null) | null} [contestSideOf]
  * @returns {(aId: string, bId: string) => boolean}
  */
-function hostilePairFor(records) {
+function hostilePairFor(records, contestSideOf = null) {
   return (/** @type {string} */ aId, /** @type {string} */ bId) => {
     if (aId === bId) return false;
     const a = records[aId];
@@ -96,9 +105,20 @@ function hostilePairFor(records) {
     // A RETREATING column is not seeking battle — it is routing home mauled. Exclude it
     // (spatial-engine-3) so a beaten pair fights ONCE per encounter, never battle-per-tick.
     if (a.role === ARMY_ROLES.RETREAT || b.role === ARMY_ROLES.RETREAT) return false;
-    return a.destId === b.originId || b.destId === a.originId;
+    if (a.destId === b.originId || b.destId === a.originId) return true;
+    // INTERCEPT: opposing sides of the same contest cross swords before the walls.
+    if (typeof contestSideOf === 'function') {
+      const ca = contestSideOf(aId);
+      const cb = contestSideOf(bId);
+      if (ca && cb && ca.contest === cb.contest && ca.side !== cb.side) return true;
+    }
+    return false;
   };
 }
+
+// Exported for the convergence INTERCEPT pin (the seam is byte-identical without the
+// contestSideOf lookup — the existing detectCollisions caller passes only `records`).
+export { hostilePairFor };
 
 /**
  * The effective-strength inputs for a transit record at a field battle: fatigue rises

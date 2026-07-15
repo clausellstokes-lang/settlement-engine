@@ -50,6 +50,10 @@ import { ensureRelationshipState, relationshipKeyFromEdge, normalizeRelationship
 // casus's fuel). One-directional: corruptionWeb never imports warReasons (its pair key is
 // inlined). Absent ledger ⇒ 0 ⇒ byte-identical (no corruption_exposed reason materializes).
 import { exposedCorruptionForPair } from './corruptionWeb.js';
+// W-CONVERGENCE — the foreign_clash intensity between two sponsors backing opposing
+// sides of one internal contest. 0 when the intervention layer is dark ⇒ byte-identical
+// (no foreign_clash reason materializes). One-directional: convergence never imports warReasons.
+import { foreignClashIntensityOf } from './convergence.js';
 import { buildPressureSummary } from './relationshipEvolution.js';
 import { buildThreatByCid } from './martialReadiness.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -84,7 +88,7 @@ export const REASON_TUNING = Object.freeze({
 
 // ── The typed catalogs + the §14.3 mirror table ─────────────────────────────
 
-/** The wave-1 casus belli taxonomy (design §14.1, the brief's seven). */
+/** The casus belli taxonomy (design §14.1, the brief's seven + W-CONVERGENCE's clash). */
 export const WAR_REASON_TYPES = Object.freeze([
   'grievance',
   'revanchism',
@@ -93,9 +97,13 @@ export const WAR_REASON_TYPES = Object.freeze([
   'encirclement',
   'legitimacy_hunger',
   'corruption_exposed',
+  // W-CONVERGENCE: two sponsors backing OPPOSING sides of one internal contest are
+  // minting their next war BETWEEN themselves (proxy-stays-proxy — the reasons layer
+  // decides escalation; 0 when the intervention layer is dark ⇒ byte-identical).
+  'foreign_clash',
 ]);
 
-/** The wave-1 casus pacis taxonomy (design §14.2, the brief's seven). */
+/** The casus pacis taxonomy (design §14.2, the brief's seven + W-CONVERGENCE's spheres). */
 export const PEACE_REASON_TYPES = Object.freeze([
   'exhaustion',
   'belief_convergence',
@@ -104,6 +112,9 @@ export const PEACE_REASON_TYPES = Object.freeze([
   'mediation',
   'harvest_pressure',
   'realignment',
+  // W-CONVERGENCE: the mirror of foreign_clash — two clashing sponsors settling zones
+  // of influence (the mutual-disengagement ground) instead of fighting.
+  'spheres_understanding',
 ]);
 
 /**
@@ -132,6 +143,8 @@ export const REASON_MIRRORS = Object.freeze({
   encirclement: 'realignment',
   legitimacy_hunger: 'exhaustion',
   corruption_exposed: 'belief_convergence',
+  // W-CONVERGENCE: the clash of sponsors and its mutual-disengagement mirror.
+  foreign_clash: 'spheres_understanding',
 });
 
 // ── The shared substrate (imported by peaceReasons.js — shape law) ──────────
@@ -383,6 +396,19 @@ export function scoreEncirclement({ threat01, hostile }) {
 }
 
 /**
+ * FOREIGN CLASH (W-CONVERGENCE §2/§4): two sponsors backing OPPOSING sides of the same
+ * internal (coup) contest are minting their next war BETWEEN themselves. PROXY STAYS
+ * PROXY — this is only a typed casus; the reasons machinery decides escalation, never an
+ * auto-declared war. 0 when the intervention layer is dark ⇒ byte-identical.
+ * @param {{ clash01: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreForeignClash({ clash01 }) {
+  const score = clamp01(Number(clash01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'Our banners and theirs bleed for opposite claimants on the same field — the proxy is becoming our own quarrel.' };
+}
+
+/**
  * LEGITIMACY HUNGER (§14.1 domestic — the diversionary war): a shaky seat
  * under pressure rallies against an external enemy. Reads the causal
  * public_legitimacy substrate score (0..100); hunger scales as it falls under
@@ -539,6 +565,8 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
         }),
       },
       { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(worldState, fromId, toId, tick) }) },
+      // W-CONVERGENCE: two sponsors on opposing sides of one internal contest (0 when dark).
+      { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(worldState, fromId, toId) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);
