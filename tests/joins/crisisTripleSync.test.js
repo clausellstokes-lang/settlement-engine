@@ -580,6 +580,7 @@ const STRESSOR_EDITS_FILES = Object.freeze([
 const TWIN_ACTION_FILES = Object.freeze([
   'store/campaignRegionalSlice.js', // the action definitions (WS4: extracted from campaignSlice)
   'store/settlementSlice.js',       // the ONE directive consumer (+ undo withdraw)
+  'store/operationRegistry.js',     // Track K manifest — NAMES them (inert opType/undoToken data), no wiring
 ]);
 
 describe('source scan — the trio is written only through the lifecycle', () => {
