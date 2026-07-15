@@ -323,6 +323,32 @@ behavior, budget raises, golden regens.
   scrub decision, preset-lighting signature, support-email confirmation) are still
   presented as the short decision list at that moment unless separately pre-authorized.
 
+- **2026-07-15 (afternoon) — W-MOMENTUM COMMISSIONED (belief/decision momentum; the owner's
+  war-despite-the-drawbacks scenario + two rulings):** beliefs and the decisions stemming from
+  them gain MOMENTUM: a COMMITMENT STOCK per actor-and-course, deposited by PUBLIC acts (the
+  rumor machinery already knows what is loud); a DYNAMIC RECONSIDERATION THRESHOLD — below it
+  reconsideration is safe and cheap, beyond it the actor DOUBLES DOWN (a bounded,
+  course-scoped counter-evidence discount — never global belief corruption); reinforcing
+  information deepens commitment, countering information accumulates pressure until the
+  threshold CRACKS — and the climb-down is a priced, receipted event (legitimacy +
+  credibility spent; face-saving off-ramps via the existing peace-term catalog). Thresholds
+  are ENTITY-APPROPRIATE (fragile legitimacy doubles down hardest; consolidated autocratic
+  courts lack the voices to force reconsideration; coalition blocs can crack it from inside).
+  THE UNIFICATION LAW APPLIES: momentum is course-stability physics, both signs — a
+  celebrated peace is as hard to abandon as a declared war. OWNER EXTENSION (verbatim): "and
+  not just for rulers but for all entities that use beliefs to make decisions. but at the NPC
+  level, this threshold has to correlate with temperment and flaws appropriately." — the
+  momentum law binds EVERY belief-consuming decision seam (settlement strategy, blocs/
+  coalitions, faction courses), and at the NPC grain the threshold DERIVES from the person's
+  generated temperament + flaws (proud/wrathful ⇒ high double-down threshold; humble/
+  pragmatic ⇒ cheap reconsideration), under §G law: NPCs modulate their bloc's/settlement's
+  momentum and their own modulator streams — never engine-resolved fates. Facet law: custom
+  NPCs declare temperament facets and COUNT. Emergent consequence noted at capture:
+  succession changes the crown's temperament ⇒ course momentum shifts on succession — the
+  new-ruler peace falls out for free. Counterpart: FORCE_RECONSIDERATION. PLACEMENT: the
+  true final engine wave, after W-LIFECYCLE, before the W-COMPOSER-2 lift. Design freezes on
+  the momentum recon's return.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
