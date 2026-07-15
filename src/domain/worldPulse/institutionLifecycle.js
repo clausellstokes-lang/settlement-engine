@@ -31,7 +31,8 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
-import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
+import { RESOURCE_TO_CHAINS } from '../../data/supplyChainResourceIndex.js';
 import { canonExports } from '../canonicalAccessors.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { TIER_ORDER, tierAtLeast } from '../../data/constants.js';

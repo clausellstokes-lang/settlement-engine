@@ -12,8 +12,8 @@
  * This is a class component because React error boundaries can only be class
  * components (getDerivedStateFromError / componentDidCatch have no hook form).
  * It mirrors the two existing patterns it consolidates:
- *   • DetailErrorBoundary (SettlementDetail.jsx) — small inline fallback + a
- *     console.error scoped log.
+ *   • DetailErrorBoundary (settlementDetail/DetailErrorBoundary.jsx) — small
+ *     fallback + a console.error scoped log.
  *   • the root ErrorBoundary (main.jsx) — reportError() telemetry.
  * Doing BOTH gives defense-in-depth: the panel recovers locally AND the failure
  * is still reported, so a swallowed throw never becomes an invisible bug.
