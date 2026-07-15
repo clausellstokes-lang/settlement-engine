@@ -125,6 +125,24 @@ behavior, budget raises, golden regens.
   vetoables (exercisable anytime). JUDGMENTs continue to be recorded vetoably; deferrals
   documented; every wave gated green before commit.
 
+- **THE SOAK CHARTER (owner-delegated study items, 2026-07-14/15 — decided IN the soak phase):**
+  (1) **CENTURY PROBES** (owner: "rethink sub-century, determined by the soak"): alongside the
+  30-year runs, 100- and 300-year soaks with certification criteria — mover-activity
+  distributions healthy across the span (no stasis onset, no cacophony), neighbor-seed
+  divergence still GROWING at year 200, state growth bounded, no attractor lock, succession
+  turnover clean at volume, chronicle-at-year-300 legibility. If certified: sub-century converts
+  from constitutional limit to conservative promise (advertised horizon = certified horizon).
+  If attractors found: report which loop flattened + weights-vs-missing-mover verdict (missing
+  movers = owner decision). (2) **THE SETTLEMENT CAP STUDY** (owner: "consider if we should put
+  a cap in the number of settlements in a campaign for the world pulse... I'll leave that up to
+  you"): measure tick-cost curves vs realm size (10/20/50/100 members) on the worker path;
+  define the minimum performance threshold (advance + catch-up latency budgets on mid-range
+  hardware); find the knee; JUDGMENT-set a uniform CANONIZE-TIME cap at the knee with headroom
+  (creation-time constraint, never runtime degradation — same-seed byte-identity requires N
+  settlements always fully simulated; no LOD). Surface the cap honestly at canonize ("realms up
+  to N run at full fidelity"). NOTE: any TIER-DIFFERENTIATED cap is paid-surface = owner-gated;
+  the uniform engineering cap is within the standing delegation.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
