@@ -11,10 +11,11 @@ import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { isPort } from '../../src/domain/spatial/distanceRead.js';
 import { ARMY_ROLES, armyRecordOf, armyMarchWeeks } from '../../src/domain/spatial/armyTransit.js';
 import {
-  navalStrengthOf, hasWarNavy, navalCapability01, isNavalInstitution, NAVAL_TUNING,
+  navalCapability01, isNavalInstitution, NAVAL_TUNING,
   navalRecordOf, planConvoy, convoyTransitWeeks, convoyEV, stormMultOf,
   convoyCapacityAvailable, seaEdgesOfPath, seaLaneCapacityOf,
 } from '../../src/domain/spatial/navalLayer.js';
+import { navalStrengthOf, hasWarNavy } from '../../src/domain/worldPulse/navalStrength.js';
 import { makeIslandPack } from '../fixtures/spatialPackFixtures.js';
 
 const DOCK = { name: 'Docks/port facilities', tags: ['port', 'trade'] };

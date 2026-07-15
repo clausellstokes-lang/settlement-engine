@@ -15,15 +15,16 @@
  * armyTransit pattern — drop-when-empty, zero eager, no digest version-axis event). The M8
  * slot stays byte-frozen; seaLanes.js itself still mints no battle — fleet combat lives HERE.
  *
- * THE NAVY (design §1 — this file's Stage 1): one navy per port settlement, capability
- * DERIVED, NEVER PERSISTED. Naval strength is a PARALLEL read (never a field on the land-
- * readiness scalar): port geography (the digest's isPort read) ∧ a maritime-military
- * institution via THE FACET LAW (the facetOf chokepoint — a custom "Drydock Guild" declaring
- * naval-capable COUNTS, a Shipyard's `shipbuilding` tag counts, the name pattern counts),
- * scaled by economy tier, and rented down by the prosperity-affordability idiom (a port that
- * cannot pay its fleet fields less of it). A port WITHOUT a war-capable maritime institution
- * (docks alone) can still be CONVOYED (isPort) but fields NO war navy (strength 0 — "Port
- * only," the display card's existing hasPort branch).
+ * THE NAVY (design §1): one navy per port settlement, capability DERIVED, NEVER PERSISTED.
+ * This TIER-BLIND leaf owns the two spatial halves: port geography (the digest's isPort read)
+ * ∧ a maritime-military institution via THE FACET LAW (the facetOf chokepoint — a custom
+ * "Drydock Guild" declaring naval-capable COUNTS, a Shipyard's `shipbuilding` tag counts, the
+ * name pattern counts) ⇒ navalCapability01. The STRENGTH scaling (× economy tier × prosperity
+ * affordability) is an ECONOMY read forbidden under src/domain/spatial (the tier-blind
+ * invariant), so it lives in the worldPulse twin `worldPulse/navalStrength.js`
+ * (navalStrengthOf), which imports the capability + tuning from here. A port WITHOUT a
+ * war-capable maritime institution (docks alone) is CONVOY-capable (isPort) but fields NO war
+ * navy (strength 0 — "Port only," the display card's existing hasPort branch).
  *
  * DORMANCY (constitutional): the naval layer is LIVE iff the spatial-canon marker is present
  * AND the VIRTUAL `navalEnabled` flag is set (design §6 + the brief's law 3 — navies are
@@ -38,13 +39,12 @@
  */
 
 import {
-  isPort, hopWeeks, candidateRoutes, seaLaneAdjacency, activeSeaLanes,
+  isPort, hopWeeks, pathCost, candidateRoutes, seaLaneAdjacency, activeSeaLanes,
   hasSpatialLedger, getSpatialLedger,
 } from './distanceRead.js';
 import { chooseRoute, riskToleranceFromAlignment } from './embattlement.js';
 import { ARMY_ROLES, armyRecordOf } from './armyTransit.js';
 import { facetOf } from './cohesionWeave.js';
-import { TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 
 // ── Tuning (documented here; retuned in the W-NAVY + checkpoint soaks) ──────────
 export const NAVAL_TUNING = Object.freeze({
@@ -81,6 +81,17 @@ export const NAVAL_TUNING = Object.freeze({
   // by construction (the EV rarely clears zero when a storm prices up the passage). The
   // storm law is READ off the frozen slot's self-describing stormSeasonCost.
   CONVOY_THREAT_WEIGHT: 1.0, // how heavily a believed sea threat discounts the convoy EV
+
+  // ── SEA BATTLE + SHARED FATE (design §3) ──────────────────────────────────────
+  // SHARED FATE (the owner's "an army at sea shares its convoy's fate", bounded by the
+  // constitution's never-annihilated law): a lost convoy inflicts the HEAVIEST bounded loss
+  // band IN THE ENGINE on the embarked army — losing at sea is worse than any land defeat
+  // (land's LOSER_MAX_LOSS is 0.45; drowning tops it) — then a forced debark at the nearest
+  // friendly port, whence the survivors retreat overland. NEVER annihilation: a survivor
+  // floor always reaches shore (rescuable, not wiped).
+  SHARED_FATE_MAX_LOSS: 0.7,       // the heaviest band in the engine (> land's 0.45)
+  SHARED_FATE_MIN_LOSS: 0.4,       // even a near-run sea defeat drowns more than a land rout
+  SHARED_FATE_SURVIVOR_FLOOR: 0.15, // survivors never fall below this fraction (never-annihilated)
 });
 
 /** @param {number} x @returns {number} */
@@ -94,10 +105,6 @@ function asObject(v) { return v && typeof v === 'object' && !Array.isArray(v) ? 
 
 /** @typedef {{ name?: unknown, category?: unknown, priorityCategory?: unknown, tags?: unknown,
  *   facets?: unknown, status?: unknown, _worldPulseInactive?: unknown }} InstLike */
-/** @typedef {{ id?: string|number, name?: string,
- *   settlement?: { name?: string, tier?: string, config?: { tier?: string },
- *     institutions?: Array<InstLike|string>, economicState?: { prosperity?: unknown } },
- *   causal?: { scores?: Record<string, number> } }} SnapItem */
 
 // ── THE MARITIME-MILITARY CAPABILITY (the Facet Law — mirror the mercenary clause) ─
 /**
@@ -132,7 +139,7 @@ function hasShipbuildingTag(inst) {
  * `naval` institutionFunction facet (a custom "Drydock Guild" declaring naval-capable
  * COUNTS, whatever its English), OR the catalog `shipbuilding` tag, OR the naval name/tag
  * pattern? Skips inactive institutions. Mirrors convergence's mercenary clause exactly.
- * @param {InstLike|string|null|undefined} raw @returns {boolean}
+ * @param {unknown} raw @returns {boolean}
  */
 export function isNavalInstitution(raw) {
   if (typeof raw === 'string') {
@@ -150,7 +157,7 @@ export function isNavalInstitution(raw) {
 /**
  * 0..1 local WAR-NAVY capability — how much war-capable maritime institution a settlement's
  * standing roster represents. 0 (⇒ no navy ⇒ strength 0) when it has none. Pure.
- * @param {Array<InstLike|string>|null|undefined} institutions @returns {number}
+ * @param {Array<unknown>|null|undefined} institutions @returns {number}
  */
 export function navalCapability01(institutions) {
   const insts = Array.isArray(institutions) ? institutions : [];
@@ -160,63 +167,12 @@ export function navalCapability01(institutions) {
   return Math.min(T.CAPABILITY_CAP, count * T.CAPABILITY_PER_INST);
 }
 
-// ── The snapshot-item reads (the armyTransitKernel/convergence item shape) ──────
-/** The 0..1 economy-tier fraction of a settlement (TIER_ORDER rank / max). Neutral
- *  'village' when absent. Mirrors militaryStrength.tierRankFraction. @param {SnapItem} item */
-function tierFractionOf(item) {
-  const s = item?.settlement;
-  const tier = String(s?.tier || s?.config?.tier || 'village');
-  const rank = TIER_ORDER.indexOf(tier);
-  const r = rank >= 0 ? rank : TIER_ORDER.indexOf('village');
-  return r / Math.max(1, TIER_ORDER.length - 1);
-}
-
-/** The 0..1 prosperity of a settlement (PROSPERITY_TIERS rank / max). Neutral 0.5 when
- *  unlabeled. Mirrors corruptionWeb.prosperity01Of. @param {SnapItem} item @returns {number} */
-export function prosperity01Of(item) {
-  const eco = asObject(item?.settlement?.economicState);
-  const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (eco.prosperity));
-  const maxRank = Math.max(1, PROSPERITY_TIERS.length - 1);
-  return rank < 0 ? 0.5 : clamp01(rank / maxRank);
-}
-
-/** The institution roster off a snapshot item (item.settlement.institutions). @param {SnapItem} item */
-function institutionsOf(item) {
-  const insts = item?.settlement?.institutions;
-  return Array.isArray(insts) ? insts : [];
-}
-
-/**
- * THE DERIVED NAVAL STRENGTH (design §1). A PARALLEL martial read — NEVER a persisted
- * field, NEVER a term on the land-readiness scalar. 0 unless the settlement is a PORT (the
- * digest isPort read) AND fields a war-capable maritime institution (the Facet Law). Scaled
- * by economy tier and rented down by prosperity affordability (the SEE/official-pay idiom —
- * a fleet the town cannot fund fields less of itself). Bounded, pure, deterministic.
- * @param {import('./distanceRead.js').SpatialDigest} digest
- * @param {SnapItem} item  the snapshot item (snapshot.byId.get(id))
- * @param {string|number} id
- * @returns {number} the aggregate war-navy strength (0 when no navy), on the land 0..~100 scale
- */
-export function navalStrengthOf(digest, item, id) {
-  if (!digest || !isPort(digest, id)) return 0;         // no port ⇒ no navy (the one-navy law)
-  const capability = navalCapability01(institutionsOf(item));
-  if (capability <= 0) return 0;                          // a port without a war-capable yard ⇒ Port only
-  const T = NAVAL_TUNING;
-  const tier01 = tierFractionOf(item);
-  const tierMult = T.TIER_FLOOR + (1 - T.TIER_FLOOR) * clamp01(tier01);
-  const afford = Math.max(T.AFFORD_MIN, clamp01(prosperity01Of(item) / Math.max(1e-6, T.AFFORD_FLOOR)));
-  return round4(T.STRENGTH_BASE * capability * tierMult * afford);
-}
-
-/**
- * Does a settlement field a war navy at all (naval strength > 0)? The legibility predicate
- * the display card's "Naval force" vs "Port only" split reads (a real number replacing the
- * dead hasNavy boolean). Pure. @param {import('./distanceRead.js').SpatialDigest} digest
- * @param {SnapItem} item @param {string|number} id @returns {boolean}
- */
-export function hasWarNavy(digest, item, id) {
-  return navalStrengthOf(digest, item, id) > 0;
-}
+// NOTE (constitutional — the TIER-BLIND spatial invariant): the STRENGTH derivation
+// (navalStrengthOf) scales the tier-blind capability above by ECONOMY TIER + prosperity
+// affordability — economy reads that must NOT live in src/domain/spatial. They live in the
+// worldPulse twin `worldPulse/navalStrength.js` (the armyTransitKernel/militaryStrength
+// precedent), which imports navalCapability01 + NAVAL_TUNING from here. This leaf stays the
+// pure, tier-blind geometry+capability layer.
 
 // ══ Stage 2 — CONVOY (design §2) ═══════════════════════════════════════════════
 // A navy convoys an own/allied army over water. The record rides the SIBLING
@@ -422,4 +378,80 @@ export function planConvoy(digest, worldState, {
     funding: clamp01(num(funding, 0.5)), beliefStaleness: 0, lastTick: depart,
   });
   return record ? { record } : null;
+}
+
+// ══ Stage 3 — SEA BATTLE + SHARED FATE (design §3) ═════════════════════════════
+// Two hostile navies whose paths share a SEA EDGE collide there (the recon's precise gap:
+// M5's collision is node-shared only). Resolution reuses resolveFieldBattle VERBATIM (land
+// parity by construction — the pure sigmoid, the same bounded attrition, the same fork). The
+// loser retreats to home port via the existing retreat flow; a lost convoy's embarked army
+// SHARES the convoy's fate (the heaviest band + forced debark). The kernel orchestrates the
+// battle; these are its pure inputs + the shared-fate/debark math.
+
+/**
+ * The SHARED-SEA-EDGE predicate (design §3): the codepoint-first sea-lane edge two
+ * settlement-id paths BOTH traverse (consecutive path pairs ∩ seaLaneAdjacency), or null.
+ * Two hostile columns sharing a sea edge meet ON the water — not merely at a shared node.
+ * @param {import('./distanceRead.js').SpatialDigest} digest
+ * @param {string[]|null|undefined} pathA @param {string[]|null|undefined} pathB @returns {string|null}
+ */
+export function sharesSeaEdge(digest, pathA, pathB) {
+  const ea = new Set(seaEdgesOfPath(digest, pathA));
+  if (!ea.size) return null;
+  const shared = seaEdgesOfPath(digest, pathB).filter((e) => ea.has(e));
+  if (!shared.length) return null;
+  return shared.sort()[0];
+}
+
+/**
+ * The effective-strength inputs for a naval record at a sea battle (mirror the field-battle
+ * battleInputs: fatigue rises with the crossing; home-waters advantage falls with it). The
+ * navy's aggregate NAVAL strength is the size — so resolveFieldBattle is commensurate with a
+ * land field battle by construction. @param {NavalTransitRecord} rec
+ * @returns {{ armyId: string, size: number, readiness: number, supplyQuality: number, funding: number, groundAdvantage01: number, fatigue01: number }}
+ */
+export function seaBattleInputs(rec) {
+  return {
+    armyId: rec.ownerId || rec.armyId,
+    size: rec.strength,
+    readiness: rec.readiness,
+    supplyQuality: rec.supplyQuality,
+    funding: rec.funding,
+    groundAdvantage01: clamp01(1 - rec.position01), // a navy near its home port fights home waters
+    fatigue01: rec.position01,
+  };
+}
+
+/**
+ * THE SHARED FATE (design §3). A lost convoy's embarked army takes the HEAVIEST bounded loss
+ * band in the engine — scaled by how decisive the sea battle was (margin ∈ [0,1]) — but a
+ * survivor floor ALWAYS reaches shore (never annihilation). Deterministic; pure.
+ * @param {number} cargoStrength @param {number} margin01  the battle's decisiveness (|pWin−0.5|·2)
+ * @returns {{ loss: number, survived: number, drowned: number }}
+ */
+export function sharedFateLoss(cargoStrength, margin01) {
+  const T = NAVAL_TUNING;
+  const s = Math.max(0, num(cargoStrength, 0));
+  const m = clamp01(num(margin01, 0));
+  const loss = T.SHARED_FATE_MIN_LOSS + (T.SHARED_FATE_MAX_LOSS - T.SHARED_FATE_MIN_LOSS) * m;
+  const survived = Math.max(s * T.SHARED_FATE_SURVIVOR_FLOOR, s * (1 - loss));
+  return { loss: round4(loss), survived: round4(survived), drowned: round4(Math.max(0, s - survived)) };
+}
+
+/**
+ * The nearest FRIENDLY port to debark at (design §3 — "forced debark at the nearest friendly
+ * port"). The codepoint-min-cost port among the candidates (the kernel supplies the ports NOT
+ * hostile to the cargo's owner). Null when none is reachable. Pure.
+ * @param {import('./distanceRead.js').SpatialDigest} digest @param {string} fromId
+ * @param {Array<string>|null|undefined} candidatePorts @param {string|null} [season] @returns {string|null}
+ */
+export function nearestFriendlyPort(digest, fromId, candidatePorts, season = null) {
+  let best = null;
+  let bestCost = Infinity;
+  for (const raw of [...new Set((Array.isArray(candidatePorts) ? candidatePorts : []).map(String))].sort()) {
+    if (!isPort(digest, raw) || raw === String(fromId)) continue;
+    const c = pathCost(digest, fromId, raw, season);
+    if (c != null && Number.isFinite(c) && c < bestCost) { bestCost = c; best = raw; }
+  }
+  return best;
 }

@@ -75,6 +75,7 @@ import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
+import { advanceNaval, navalActive } from './navalKernel.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
@@ -2018,6 +2019,31 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (armyTransit.changed) memoryState = armyTransit.worldState;
     if (armyTransit.newsEntries.length) {
       wizardNews = appendWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now });
+    }
+  }
+  // W-NAVY — THE SEA HALF (DESIGN_NAVY.md). The maritime twin of army-transit, immediately
+  // after it: navies convoy own/allied armies over water; two HOSTILE navies whose paths
+  // share a SEA EDGE fight a sea battle (resolveFieldBattle VERBATIM — land parity), the
+  // loser retreating to its home port; a lost convoy's embarked army SHARES the convoy's
+  // fate (the heaviest bounded loss band + a forced debark, never annihilation); and a
+  // blockade MINTS A SIEGE through the existing interdiction machinery. Runs BEFORE the
+  // causal-reason movers so a fresh sea outcome feeds warReasons/peaceReasons this tick.
+  // DORMANT behind navalActive (the spatial marker AND the virtual navalEnabled) ⇒ a
+  // complete no-op (zero navalTransit keys — the naval dormancy golden proves it).
+  if (navalActive(memoryState)) {
+    const naval = advanceNaval({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      digest: memoryState.spatialDigest,
+      graph: applied.regionalGraph,
+      rng: rng.fork('naval'),
+      season: roadSeason,
+      tick: worldState.tick,
+      now,
+    });
+    if (naval.changed) memoryState = /** @type {typeof memoryState} */ (naval.worldState);
+    if (naval.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, naval.newsEntries, { now });
     }
   }
   // Phase 5.5 mover M11a — PESTILENCE (the traveling plague). AFTER the war/army layer +
