@@ -84,11 +84,29 @@ export const REACTION_TUNING = Object.freeze({
   LEND_APPETITE_RECOVER: 0.05,    // slow recovery per tick without a default
   LEND_APPETITE_FLOOR: 0.2,       // bounded — a burned lender never fully stops lending
   LEND_APPETITE_EPS: 0.02,
+
+  // THE TRADE-OVERTURE GIVE-STREAM accumulator (§9 TRADE / design A4 — E1d, the
+  // bufferDiscipline/lendAppetite sibling idiom): a directed (giver→receiver) warmth
+  // scalar that RISES on every gift this pair exchanges (a sustained aid corridor) and
+  // slowly DECAYS on a silent tick — "the grain road of the famine year becomes the silk
+  // road of the peace". When it crosses the mover's open threshold (with dwell) the giver
+  // opens a TRADE OVERTURE: a byte-neutral trust-nudge into the existing
+  // neutral_to_trade_partner evolution rule (NEVER an autonomous edge). Drop-when-cold ⇒
+  // byte-identical-dormant. A gift gains more warmth than silence sheds (aid corridors
+  // warm faster than they cool).
+  TRADE_OVERTURE_GAIN: 0.2,       // warmth added per gift-bearing tick this pair exchanges
+  TRADE_OVERTURE_DECAY: 0.08,     // warmth shed per silent tick (slower than the gain)
+  TRADE_OVERTURE_EPS: 0.02,       // a warmth at/under this is cold ⇒ pruned (drop-when-empty)
 });
 
-/** The typed relief incident kinds (§2.1) — the existing incident machinery, extended. */
+/** The typed relief incident kinds (§2.1) — the existing incident machinery, extended.
+ *  'trade_warmth' (E1d) is the MARKET-twin row: a PURCHASE closed between the pair (the
+ *  post-REFUSE "you won't give? I'll pay" fall-through) OR a sustained aid-corridor
+ *  warming into a trade overture — a positive, low-severity relationship deposit that is
+ *  NOT a debt (a sale/trade clears; no obligation minted). */
 export const RELIEF_INCIDENT_KINDS = Object.freeze([
   'relief_given', 'relief_received', 'relief_refused', 'credit_repaid', 'credit_defaulted', 'refuge_granted',
+  'trade_warmth',
 ]);
 
 // ── Small pure helpers (clamp/clamp01 are the sanctioned kernel primitives) ─────
@@ -324,6 +342,7 @@ export function reliefIncident({ kind, tick, magnitude01, summary, holder = 'peo
     credit_repaid: 'A grain-debt was repaid.',
     credit_defaulted: 'A grain-debt fell into default.',
     refuge_granted: 'Refuge was opened to the displaced.',
+    trade_warmth: 'A trade was struck — the market warmed the relationship.',
   }[String(kind)] || 'A relief decision touched the relationship.';
   return {
     tick: Math.max(0, Math.floor(finiteNumber(tick, 0))),
@@ -459,4 +478,52 @@ export function lendAppetiteOf(ledger, lenderId) {
   const level = rec && typeof rec === 'object' && !Array.isArray(rec)
     ? finiteNumber(/** @type {Record<string, unknown>} */ (rec).appetite, NaN) : NaN;
   return Number.isFinite(level) ? clamp(level, REACTION_TUNING.LEND_APPETITE_FLOOR, 1) : 1;
+}
+
+// ── THE TRADE-OVERTURE GIVE-STREAM (§9 TRADE / design A4 — E1d) ─────────────────
+/**
+ * @typedef {Object} TradeOvertureRecord
+ * @property {number} warmth    the directed give-stream warmth in [0,1] (the corridor strength)
+ * @property {number} sinceTick the tick warmth first accumulated (the dwell clock — "sustained")
+ * @property {number} lastTick  the tick this record last advanced
+ */
+
+/**
+ * Step a directed (giver→receiver) TRADE-OVERTURE warmth accumulator (the merchantAppetite/
+ * bufferDiscipline sibling idiom, §9 TRADE): a gift this tick RAISES warmth (TRADE_OVERTURE_GAIN),
+ * a silent tick lets it slowly DECAY (TRADE_OVERTURE_DECAY, gentler than the gain — aid corridors
+ * warm faster than they cool). Returns the next record, or NULL when warmth has drained to cold
+ * (drop-when-empty prune ⇒ the ledger drains to absent — byte-identical-dormant). The dwell clock
+ * (sinceTick) is carried from the prior; a cold-then-reheated pair restarts it. Pure, total.
+ * @param {TradeOvertureRecord|null|undefined} prior
+ * @param {{ gaveThisTick?: boolean, now: number }} args
+ * @returns {TradeOvertureRecord|null}
+ */
+export function tradeOvertureStep(prior, { gaveThisTick = false, now }) {
+  const T = REACTION_TUNING;
+  const tick = Math.max(0, Math.floor(finiteNumber(now, 0)));
+  const had = prior && typeof prior === 'object';
+  const prev = had ? clamp01(finiteNumber(prior.warmth, 0)) : 0;
+  const next = gaveThisTick === true
+    ? clamp01(prev + T.TRADE_OVERTURE_GAIN)
+    : clamp01(prev - T.TRADE_OVERTURE_DECAY);
+  if (next <= T.TRADE_OVERTURE_EPS) return null; // cold ⇒ prune (drop-when-empty)
+  // Carry the dwell clock while warm; (re)start it when the record first (re)appears.
+  const sinceTick = had && prev > T.TRADE_OVERTURE_EPS ? Math.max(0, Math.floor(finiteNumber(prior.sinceTick, tick))) : tick;
+  return { warmth: round4(next), sinceTick, lastTick: tick };
+}
+
+/**
+ * Read a directed pair's trade-overture warmth from the (sparse) ledger, or 0 when absent
+ * (a pair with no give-stream history is cold). Pure, total.
+ * @param {Record<string, unknown>|null|undefined} ledger @param {string} key  the `giver:receiver` composite
+ * @returns {number}
+ */
+export function tradeOvertureWarmthOf(ledger, key) {
+  const ns = ledger && typeof ledger === 'object' && !Array.isArray(ledger)
+    ? /** @type {Record<string, unknown>} */ (ledger) : null;
+  const rec = ns ? ns[String(key)] : null;
+  const w = rec && typeof rec === 'object' && !Array.isArray(rec)
+    ? finiteNumber(/** @type {Record<string, unknown>} */ (rec).warmth, NaN) : NaN;
+  return Number.isFinite(w) ? clamp01(w) : 0;
 }

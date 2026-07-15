@@ -106,6 +106,21 @@ export const GENEROSITY_TUNING = Object.freeze({
   REFUGE_OPEN_ENTER: 0.2,   // give-attraction at/above which a host OPENS refuge (enter)
   REFUGE_OPEN_EXIT: 0.1,    // attraction below which an open posture CLOSES (exit) — the deadband
   REFUGE_DWELL: 6,          // min ticks an open posture holds before it may close (no flip-flop)
+
+  // ── PURCHASE (design §4 / A2 — E1d): the MARKET TWIN, wired as the post-REFUSE
+  // BONDED FALL-THROUGH only ("you won't give? I'll pay"). When a qualifying seller
+  // REFUSES the free gift (the domestic/leverage cost of GIVING outweighed the motive) but
+  // holds spareable grain, a needy-AND-SOLVENT buyer may instead BUY it: the grain conserves
+  // through the SAME pure sink (computeSackFoodTransfer), payment = a prosperity BAND-STEP
+  // debit on the buyer + a bounded, non-zero-sum seller income nudge (the sim's existing
+  // prosperity vocabulary — NO conserved-coin primitive; simplicity-over-fidelity). No
+  // obligation is minted (a sale clears; debt-free) and no legitimacy is spent (a sale is
+  // not charity — no political courage/cost). The broad shortage→surplus enumeration is NOT
+  // here (it belongs to the acquisition-ladder mover in W-DOCTRINE — deferred there).
+  PURCHASE_AFFORD_FLOOR: 0.25,  // a buyer below this prosperity band cannot pay (no purchase)
+  PURCHASE_NEED_FLOOR: 0.4,     // the buyer only pays when the need is real enough to warrant it
+  PURCHASE_MAX_BANDSTEP: 1.0,   // a full purchase debits the buyer AT MOST one prosperity band
+  PURCHASE_SELLER_INCOME_SHARE: 0.4, // the bounded seller income nudge (< the buyer's debit — non-zero-sum)
 });
 
 /** The four verdict tiers (design §2.3). */
@@ -636,6 +651,49 @@ export function refugeAcceptance({ bond, history, conscience, strategy, faith, q
   };
 }
 
+// ── PURCHASE FALL-THROUGH (design §4 / A2 — E1d) — the market twin of a refused gift ──
+/**
+ * The post-REFUSE bonded PURCHASE decision ("you won't give? I'll pay"). Assumes the pair
+ * ALREADY qualified (the §0.1 gate) and the free-gift verdict came back REFUSE. A needy,
+ * SOLVENT buyer may still BUY the grain the seller would not give: the grain conserves
+ * through the same sink; payment is a prosperity BAND-STEP debit on the buyer + a bounded,
+ * non-zero-sum seller income nudge (no conserved-coin primitive — the sim's prosperity
+ * vocabulary, design A2). No sale when the buyer is too poor to pay (below the afford floor),
+ * the need is too mild to warrant paying, or the seller has nothing above the reserve floor
+ * to sell (which is EXACTLY the §9 smuggle-premium case — no food moves, the shortage
+ * persists for M7). Deterministic (the situation loads it — no fork; the ask already fired).
+ * Pure, total.
+ * @param {{ buyerProsperity01?: number, need01?: number, sellerSpareable01?: number }} [args]
+ *   buyerProsperity01 = the buyer's prosperity rank normalised to [0,1] (0 = subsistence);
+ *   need01 = the buyer's food need/desperation [0,1]; sellerSpareable01 = the seller's
+ *   above-floor grain headroom as a fraction [0,1].
+ * @returns {{ buys: boolean, magnitudeFraction01: number, buyerDebitBands: number, sellerCreditBands: number, receipt: string }}
+ */
+export function purchaseFallThrough({ buyerProsperity01 = 0, need01 = 0, sellerSpareable01 = 0 } = {}) {
+  const T = GENEROSITY_TUNING;
+  const afford = clamp01(finiteNumber(buyerProsperity01, 0));
+  const need = clamp01(finiteNumber(need01, 0));
+  const spare = clamp01(finiteNumber(sellerSpareable01, 0));
+  const none = { buys: false, magnitudeFraction01: 0, buyerDebitBands: 0, sellerCreditBands: 0, receipt: '' };
+  if (afford < T.PURCHASE_AFFORD_FLOOR) return none;   // too poor to pay
+  if (need < T.PURCHASE_NEED_FLOOR) return none;        // not needy enough to bother buying
+  if (spare <= T.MAGNITUDE_EPS) return none;            // seller has nothing above the floor (smuggle-premium case)
+  // The purchased share: the buyer buys what the need demands, capped by purchasing power
+  // (a poor buyer buys a sliver; a prosperous one buys to the need). The grain sink then
+  // bounds it by the seller's actual spareable headroom.
+  const magnitudeFraction01 = round4(clamp01(Math.min(need, afford)));
+  if (magnitudeFraction01 <= T.MAGNITUDE_EPS) return none;
+  const buyerDebitBands = round4(magnitudeFraction01 * T.PURCHASE_MAX_BANDSTEP);
+  const sellerCreditBands = round4(buyerDebitBands * T.PURCHASE_SELLER_INCOME_SHARE);
+  return {
+    buys: true,
+    magnitudeFraction01,
+    buyerDebitBands,
+    sellerCreditBands,
+    receipt: 'Coin for bushels: the grain that was not given was bought instead, and the market kept the peace.',
+  };
+}
+
 // ── PRECEDENT / TRIAGE (§2.2 / scenario 4) — many claimants, one granary ────────
 /**
  * @typedef {Object} TriageClaimant
@@ -812,9 +870,9 @@ export function shouldInitiateAsk(rng, key, pressure01, baseChance = 0.15) {
 export const GENEROSITY_INSTRUMENTS = Object.freeze({
   grain_relief: { kind: 'grain_relief', conservationExact: true, live: true, note: 'The flagship: rides supplyShipments kind:relief; tolls apply; aspatial fallback = a bounded instant transfer.' },
   warning: { kind: 'warning', conservationExact: false, live: true, note: 'Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strategic advantage spent + eyes exposed), not the value received. The intel-posture coupling lands with W-DOCTRINE.' },
-  purchase: { kind: 'purchase', conservationExact: true, live: false, note: 'The market twin (A2) — grain leg conserves (computeSackFoodTransfer); the PAYMENT leg is unmodeled (no conserved coin/prosperity primitive). E1c OWNER-DECISION-QUEUE: (X) payment-conservation model, (Y) enumeration scope (post-REFUSE bonded fall-through vs A2 shortage→surplus non-ally), (Z) seller-credit write target. Not built pending the ruling.' },
+  purchase: { kind: 'purchase', conservationExact: true, live: true, note: 'LIVE (E1d, design A2): the MARKET TWIN, wired as the post-REFUSE BONDED FALL-THROUGH ("you won\'t give? I\'ll pay"). Grain conserves through the same sink (computeSackFoodTransfer); payment = a prosperity BAND-STEP debit on the buyer + a bounded non-zero-sum seller income nudge (the sim\'s prosperity vocabulary — NO conserved-coin primitive, per the f3cf639e ruling X/Z). Debt-free (no obligation), no legitimacy spent (a sale is not charity). The broad shortage→surplus enumeration is deferred to the acquisition-ladder mover (W-DOCTRINE, ruling Y).' },
   credit: { kind: 'credit', conservationExact: true, live: true, note: 'LIVE (E1b, §3.4): GIVE_AS_CREDIT mints a maturity-bearing kind:credit obligation; at maturity the debtor repays (trust, debt clears) or defaults (grievance ratchet = casus-belli seam + the lender\'s hardened heart via lendAppetite).' },
-  trade_overture: { kind: 'trade_overture', conservationExact: true, live: false, note: 'Subsidized channel (A4). The tradeFlow TALLY is per-node (cannot express a per-corridor warmth) — SUPERSEDED: the source is the per-pair give-stream. Write-side (a dwell-bounded tradeOverture sub-ledger, willingness idiom) is clean + byte-free. E1c OWNER-DECISION-QUEUE: (Y) route-opening target — Y-clean trust-nudge into the existing neutral_to_trade_partner rule (byte-neutral, recommended) vs owner-gated autonomous edge-mint; (Z) autonomous vs proposal-gated under conservative presets. Not built pending the ruling.' },
+  trade_overture: { kind: 'trade_overture', conservationExact: true, live: true, note: 'LIVE (E1d, design A4): the per-pair GIVE-STREAM warms a corridor — a dwell-bounded tradeOverture sub-ledger (the merchantAppetite idiom, drop-when-cold ⇒ byte-neutral) rises on each gift the pair exchanges. When warmth crosses the open threshold (with dwell) the giver opens an OVERTURE: a byte-neutral trust-nudge into the EXISTING neutral_to_trade_partner evolution rule (NEVER an autonomous edge — the f3cf639e ruling Y). Initiation routes through authorityFor (auto-applies under routine; withheld under dm_only/recommendations — ruling Z). The tradeFlow node-tally is superseded (per-node cannot express per-corridor warmth).' },
   refuge: { kind: 'refuge', conservationExact: true, live: true, note: 'LIVE (E1c): "people, not goods" — refugeAcceptance opens a host POSTURE (give-side motive only; cost priced downstream by M4 congestion), written to the drop-when-empty refugePostures sub-ledger, READ in migrationKernel.buildDestinationCandidate as the refugePosture01 axis on destinationScore. Conservation weight-independent for the SUM (departures + originDeaths invariant; no minting) — roadDeaths/arrivals redistribute across routes (per-column integer draw), never the total survivors vs deaths.' },
 });
 

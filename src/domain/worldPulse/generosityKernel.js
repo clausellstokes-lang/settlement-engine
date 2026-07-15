@@ -60,42 +60,68 @@
  * (b) posture PRESENT ⇒ departures + originDeaths unchanged + the conservation SUM exact (no
  * minting) — roadDeaths/arrivals REDISTRIBUTE across routes, never the total survivors vs deaths.
  *
- * DEFERRED — E1c+ / OWNER-DECISION-QUEUE (documented, not lost; recon-mapped for a clean handoff):
- *   • PURCHASE live-flip (design A2) — OWNER-GATED: the grain leg conserves
- *     (computeSackFoodTransfer), but there is NO conserved coin/prosperity primitive; A2 wants
- *     a prosperity BAND-STEP debit + non-zero-sum seller income. Owner must rule: (X) payment-
- *     conservation model, (Y) enumeration scope (post-REFUSE bonded fall-through vs A2
- *     shortage->surplus non-ally), (Z) seller-credit write target.
- *   • TRADE_OVERTURE live-flip (design A4) — the recipe's "tradeFlow-tally->pressure" is
- *     SUPERSEDED (the tally is per-node, cannot express per-corridor warmth; source = the
- *     per-pair give-stream). Write-side (a dwell-bounded 'tradeOverture' sub-ledger, willingness
- *     idiom) is clean + byte-free. Owner must rule: (Y) route-opening target — Y-clean trust-
- *     nudge into the existing neutral_to_trade_partner rule (byte-neutral, recommended) vs
- *     owner-gated edge-mint; (Z) autonomous vs proposal-gated under conservative presets.
- *   • RUMOR broadcast belief-nudge — the GIVE receipt ALREADY seeds a typed rumor carrying
- *     both settlements (succorNews score≥60); the missing edge is nudging believed
- *     wealth/character in beliefMap.reconcileBelief (a cross-module, infoMode-gated change).
- *   • FORCE_RELIEF / OFFER_CREDIT counterpart verbs — the 11-touchpoint event-registry
- *     threading (registry/mutateWorld/mutate/batch/buildEvent/composer/prose + preview≡apply
- *     + the W-COMPOSER-1 manifest TODO); affordance predicates reuse qualifiesForGenerosity
- *     / shouldInitiateAsk.
- *   • The traveling-relief refinement over commodityFlow (E1a JUDGMENT-2 reaffirmed:
- *     invasive — the M6a ledger is institution-keyed with a food-exclusion rule; a separate
- *     peer-shipment lane or the aspatial fallback is the contained path, not a schema change).
+ * E1d SHIPPED (this wave — THE GENEROSITY ENGINE COMPLETES; same dormancy gate ⇒ the goldens
+ * hold byte-identical; the f3cf639e rulings implemented exactly):
+ *   • PURCHASE goes live (design §4 / A2, ruling X/Y/Z) — the MARKET TWIN, wired as the
+ *     post-REFUSE BONDED FALL-THROUGH ONLY ("you won't give? I'll pay"). A needy-AND-SOLVENT
+ *     buyer BUYS the grain a bonded seller refused: grain conserves through the SAME sink
+ *     (computeSackFoodTransfer); payment = a prosperity BAND-STEP debit on the buyer + a
+ *     bounded non-zero-sum seller income nudge (the PROSPERITY_TIERS vocabulary — NO
+ *     conserved-coin primitive), a typed 'trade_warmth' incident on the pair, a purchase beat.
+ *     Debt-free (no obligation) + no legitimacy spent (a sale is not charity). A buyer too poor
+ *     / a seller at the floor moves NO food ⇒ the §9 smuggle premium is untouched. The broad
+ *     shortage→surplus enumeration is left to the acquisition-ladder mover (W-DOCTRINE, ruling Y).
+ *   • TRADE_OVERTURE goes live (design §4 / A4, ruling Y/Z) — the per-pair GIVE-STREAM warms a
+ *     corridor: a dwell-bounded drop-when-cold 'tradeOverture' sub-ledger (the merchantAppetite
+ *     idiom) rises on each gift the pair exchanges; when warmth crosses the open threshold WITH
+ *     dwell the giver opens an overture ONCE (the `initiated` latch): a byte-neutral trust-nudge
+ *     into the pair's relationship-state so the EXISTING neutral_to_trade_partner rule can
+ *     promote the label — NEVER an autonomous edge (ruling Y). Initiation routes through
+ *     authorityFor(rules,'relationship_evolution','auto'): auto-applies under routine/full,
+ *     WITHHELD under dm_only/recommendations (ruling Z — existing law, no new posture).
+ *   • RUMOR belief-nudge goes live (design §3.1 / §9 INFORMATION) — a NOTABLE gift BROADCASTS:
+ *     observers who ALREADY hold a belief about the giver read them richer (strengthBand ⇒
+ *     raiders' attention) + friendlier (allianceLabel one rung ⇒ allies' trust), through
+ *     beliefMap.reconcileBelief with a deed-inflated ground truth. GATED on beliefsActive
+ *     (spatial marker + non-omniscient infoMode) ⇒ an omniscient/unmarked world is byte-
+ *     identical (the belief/deity goldens prove it); only EXISTING slots move (no new keys).
+ *
+ * E1 IS COMPLETE with this wave: all six §4 instruments (grain_relief, warning, credit, refuge,
+ * purchase, trade_overture) ship live. What remains is NOT E1-instrument work:
+ *   • FORCE_RELIEF / OFFER_CREDIT counterpart DM-VERBS — DEFERRED, OWNER-GATED ON THE FIRST-
+ *     PAINT BUDGET (not a design gap). The ~13-touchpoint event-registry threading
+ *     (types/registry/registryFull/mutate/mutateWorld/undoEvent/registryProse/affordanceManifest/
+ *     batch + the walker counts 38/29/9→40/31/9 + undoRoundTrip fixtures) is EAGER — registry.js
+ *     and mutateWorld.js are in the first-paint static closure via mutate.js. With only ~232 B of
+ *     headroom (measured closure 1,213,818 vs budget 1,214,050) two new eager verbs (>1 KB
+ *     minified) blow the ratchet; the composer prose-lazy split reclaims only the prose/manifest
+ *     leaves, not the registry spec + handlers. A budget raise is owner-gated (owner ruled "no
+ *     raise" — FP-2-first). The affordance predicates reuse qualifiesForGenerosity/shouldInitiateAsk;
+ *     the handlers run the SAME kernel paths with synthetic-cause DM provenance + vetoMutation
+ *     codes when qualifiesForGenerosity refuses. Land after the budget is reclaimed/raised.
+ *   • The traveling-relief refinement over commodityFlow (E1a JUDGMENT-2 reaffirmed: invasive —
+ *     the M6a ledger is institution-keyed with a food-exclusion rule; a separate peer-shipment
+ *     lane or the aspatial fallback is the contained path, not a schema change). W-DOCTRINE.
+ *   • The upswing arcs (design Part B — reconstruction accelerant reads obligations; boom/
+ *     flourishing) are E1d's SIBLING lane, unchanged and composing with this.
  */
 
 import {
   constructiveFlowsActive, generosityEV, generosityForkKey, shouldInitiateAsk,
-  routeRiskTerm, refugeAcceptance, VERDICTS,
+  routeRiskTerm, refugeAcceptance, purchaseFallThrough, VERDICTS,
 } from '../spatial/generosityEV.js';
 import {
   foldObligations, hasLiveObligation, gratitudeDeposit, giverMarginSacrifice,
   obligationMintMagnitude, reliefIncident, refusalDamage, fogForgiveness,
   bufferDisciplineStep, creditMaturityResolution, lendAppetiteStep, lendAppetiteOf,
+  tradeOvertureStep,
   REACTION_TUNING,
 } from '../spatial/generosityReactions.js';
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { authorityFor } from './changeAuthorityPolicy.js';
+import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand } from './beliefMap.js';
+import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
 import { evil01, chaos01 } from './deityAxes.js';
 import { mobilizationSeverity } from './mobilization.js';
@@ -104,7 +130,9 @@ import { computeSackFoodTransfer, storageCapacityMonths, STOCKPILE_TUNING, famin
 import { seasonForTick } from './worldState.js';
 import { seasonalUnitSwing } from './seasons.js';
 import { ensureRelationshipState, relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
-import { stablePart } from './stablePart.js';
+import {
+  succorNews, refusalNews, defaultNews, refugeNews, purchaseNews, tradeOvertureNews,
+} from './generosityNews.js';
 import { clamp01 } from '../../kernel/math.js';
 
 // ── Kernel-local read-shapes (0-hole discipline: no `any`) ────────────────────
@@ -114,7 +142,7 @@ import { clamp01 } from '../../kernel/math.js';
 /** @typedef {{ name?: unknown, type?: unknown, category?: unknown }} GenInstitution */
 /** @typedef {{ faction?: unknown, category?: unknown, power?: unknown }} GenFaction */
 /** @typedef {{ population?: number, institutions?: GenInstitution[],
- *   economicState?: { foodSecurity?: { storageMonths?: unknown }, economicBase?: unknown, primaryIndustry?: unknown },
+ *   economicState?: { foodSecurity?: { storageMonths?: unknown }, economicBase?: unknown, primaryIndustry?: unknown, prosperity?: unknown },
  *   powerStructure?: { factions?: GenFaction[] },
  *   config?: { primaryDeitySnapshot?: GenDeity|null, economicBase?: unknown } }} GenSettlement */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: GenSettlement }} GenSnapItem */
@@ -126,6 +154,7 @@ import { clamp01 } from '../../kernel/math.js';
 /** @typedef {import('../spatial/generosityReactions.js').ObligationRecord} ObligationRecord */
 /** @typedef {import('../spatial/generosityEV.js').GenerosityWillingness} GenerosityWillingness */
 /** @typedef {import('../spatial/generosityEV.js').RefugePosture} RefugePosture */
+/** @typedef {import('./beliefMap.js').BeliefRecord} BeliefRecord */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -182,7 +211,41 @@ export const GENEROSITY_MOVER_TUNING = Object.freeze({
   // Byte-neutral when nothing is stale.
   REFUGE_CAP: 24,
   REFUGE_STALE_TICKS: 12,
+  // TRADE OVERTURE (§9 TRADE / design A4 — E1d): the give-stream warmth threshold at/above
+  // which a sustained aid corridor OPENS a trade overture, the DWELL (min ticks warm — the
+  // "sustained" requirement, no flip-flop), and the byte-neutral TRUST-NUDGE the overture
+  // writes into the pair's relationship-state so the EXISTING neutral_to_trade_partner
+  // evolution rule (trust > 0.48) can promote the label — NEVER an autonomous edge-mint.
+  // Initiation routes through authorityFor(rules, 'relationship_evolution', 'auto'): the nudge
+  // AUTO-applies under routine/full and is WITHHELD under dm_only/recommendations (the DM's
+  // proposal flow governs). Fires ONCE per warm episode (the record's `initiated` latch).
+  TRADE_OVERTURE_OPEN_AT: 0.6,
+  TRADE_OVERTURE_DWELL: 6,
+  TRADE_OVERTURE_TRUST_NUDGE: 0.04,
+  // THE RUMOR BELIEF-NUDGE (design §3.1 / §9 INFORMATION — E1d): a NOTABLE gift BROADCASTS —
+  // observers who already hold a belief about the giver update it: believed WEALTH rises
+  // (strengthBand up ⇒ raiders' attention) and believed CHARACTER warms (allianceLabel one
+  // rung friendlier ⇒ allies' trust). Gated on beliefsActive (spatial marker + non-omniscient
+  // infoMode) SO an omniscient/unmarked world is byte-identical; only EXISTING belief slots are
+  // nudged (no new keys minted ⇒ the belief-ledger shape is unperturbed). Routed through
+  // beliefMap.reconcileBelief with a deed-inflated ground truth (the deed is the evidence).
+  BELIEF_NUDGE_MIN_MAGNITUDE: 0.6, // only a notable gift broadcasts (matches the succor rumor floor)
+  BELIEF_NUDGE_STRENGTH: 0.2,      // the believed-wealth lift, in 0..1 strength (≈ one band)
+  BELIEF_NUDGE_ACCURACY: 0.7,      // the broadcast report's fidelity (≥ CAT_ADOPT ⇒ the friendlier label adopts)
 });
+
+// ── The rumor belief-nudge ladder (design §3.1): a generosity deed warms believed CHARACTER
+// by ONE rung toward friendlier — the same neutral→trade_partner arc the trade overture drives.
+// Already-friendly labels (trade_partner/allied/patron/client/vassal) are unchanged. ──
+/** @type {Record<string, string>} */
+const FRIENDLIER_LABEL_STEP = Object.freeze({
+  hostile: 'cold_war', cold_war: 'rival', rival: 'neutral', neutral: 'trade_partner',
+});
+/** @param {unknown} label @returns {string} the label one rung friendlier (or unchanged) */
+function friendlierLabel(label) {
+  const l = String(label ?? '');
+  return FRIENDLIER_LABEL_STEP[l] || l;
+}
 
 // ── The qualifying relationship kinds → the kernel's BondRead.kind vocabulary ──
 /** @type {Record<string, string>} */
@@ -194,6 +257,16 @@ const KIND_MAP = Object.freeze({
 /** @param {GenSettlement|undefined} s @returns {number} storageMonths (0 when absent) */
 function storageMonthsOf(s) {
   return Math.max(0, num(s?.economicState?.foodSecurity?.storageMonths, 0));
+}
+/**
+ * The settlement's prosperity band ranked to [0,1] (0 = subsistence … 1 = wealthy), or 0 when
+ * absent/unknown (a settlement with no readable prosperity band cannot pay ⇒ never buys). Routed
+ * through the canonical prosperityRank ladder (data/constants) — never a hand-typed band match.
+ * @param {GenSettlement|undefined} s @returns {number}
+ */
+function prosperity01Of(s) {
+  const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (s?.economicState?.prosperity));
+  return rank >= 0 ? rank / Math.max(1, PROSPERITY_TIERS.length - 1) : 0;
 }
 /**
  * Holds a charity-capable roster (§2.1 conscience exception). §I THE FACET LAW: routed
@@ -448,6 +521,8 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const receipts = [];
   /** @type {Map<string, number>} the net storageMonths delta to apply per settlement */
   const foodDeltas = new Map();
+  /** @type {Map<string, number>} the net prosperity BAND-STEP delta per settlement (PURCHASE payment, §4/A2) */
+  const prosperityDeltas = new Map();
   const willingnessLedger = asObject(getSpatialLedger(worldState, 'generosityWillingness'));
   const bufferLedger = asObject(getSpatialLedger(worldState, 'bufferDiscipline'));
   const lendAppetiteLedger = asObject(getSpatialLedger(worldState, 'lendAppetite'));
@@ -455,6 +530,14 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const refugeLedger = asObject(getSpatialLedger(worldState, 'refugePostures'));
   /** @type {Record<string, RefugePosture|null>} */
   const refugePostureWrites = {};
+  // TRADE OVERTURE (§9 TRADE / design A4 — E1d): the per-pair give-stream warmth ledger +
+  // the pairs that gave THIS tick (key → { relKey, trust } for the byte-neutral trust-nudge).
+  const tradeOvertureLedger = asObject(getSpatialLedger(worldState, 'tradeOverture'));
+  /** @type {Map<string, { giverId: string, receiverId: string, relKey: string, trust: number }>} */
+  const tradeOvertureGaveInfo = new Map();
+  // RUMOR belief-nudge (design §3.1 / §9): the givers whose NOTABLE gift broadcasts this tick.
+  /** @type {Set<string>} */
+  const beliefBroadcasters = new Set();
 
   // Directed-pair → relationship edge (for credit-maturity incident/scalar writes).
   /** @type {Map<string, GenEdge>} */
@@ -677,29 +760,94 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
         verdict: verdict.verdict, receipt: verdict.receipt, magnitude: verdict.magnitudeFraction, tick, now,
       }));
       receipts.push({ giverId, receiverId, verdict: verdict.verdict, magnitude: verdict.magnitudeFraction });
+      // ── TRADE-OVERTURE give-stream (§9 TRADE / A4): this pair exchanged a gift this tick,
+      // warming the giver→receiver corridor toward a trade route (the per-pair source that
+      // supersedes the per-node tradeFlow tally). The dwell-bounded warmth ledger + the
+      // byte-neutral trust-nudge are committed below. ──
+      tradeOvertureGaveInfo.set(`${giverId}:${receiverId}`, { giverId, receiverId, relKey, trust: clamp01(num(relState.trust, 0)) });
+      // RUMOR broadcast (design §3.1 / §9): a NOTABLE gift makes the giver read as richer +
+      // friendlier to those already watching (the belief-nudge is committed below, belief-gated).
+      if (verdict.magnitudeFraction >= T.BELIEF_NUDGE_MIN_MAGNITUDE) beliefBroadcasters.add(giverId);
     } else {
-      // ── REFUSE: the fog-mediated refusal memory (§3.2/§3.3). The belief-map wiring is
-      // E1c; here the forgiveness reads the giver's own scarcity/military as a proxy for
-      // what a well-informed receiver would believe. ──
-      const forgiveness = fogForgiveness({
-        believedGiverScarcity01: ownScarcity01,
-        believedGiverMilitaryLoad01: clamp01(0.6 * deployedArmies + 0.4 * mobilization01),
+      // ── THE PURCHASE FALL-THROUGH (design §4 / A2 — "you won't give? I'll pay"). The
+      // free gift was refused; a needy-AND-SOLVENT buyer may still BUY the grain the seller
+      // would not give. Grain conserves through the SAME sink; payment = a prosperity
+      // BAND-STEP debit on the buyer + a bounded seller income nudge (no conserved coin —
+      // the sim's prosperity vocabulary). Debt-free (no obligation) and no legitimacy spent
+      // (a sale is not charity). No sale ⇒ the shortage persists exactly (the §9 smuggle
+      // premium the M7 tail reads is untouched — a buyer too poor / a seller at the floor
+      // moves no food). ──
+      const purchase = purchaseFallThrough({
+        buyerProsperity01: prosperity01Of(receiverS),   // the buyer is the needy receiver
+        need01,
+        sellerSpareable01: reserveAboveFloor01,          // the seller is the refusing giver
       });
-      const vassalBreach = kind === 'vassal' || kind === 'client';
-      const damage = refusalDamage({ refusedDesperation01: need01, forgiveness01: forgiveness, vassalBreach });
-      if (damage > 0.02) {
-        const refusedInc = reliefIncident({ kind: 'relief_refused', tick, magnitude01: damage, summary: verdict.receipt });
-        if (refusedInc) incidentWrites.push({ key: relKey, incident: refusedInc });
-        // A significant, poorly-forgiven refusal reaches the Chronicle (the tragic grudge forming).
-        if (damage >= 0.35) {
-          newsEntries.push(refusalNews({
+      // A sale COMPLETES only if grain actually changes hands. The buy-decision keys on the
+      // NORMALISED above-floor headroom, but the conserved grain sink FLOORS to the tenth-month:
+      // a seller a sliver above the reserve floor can clear the buy gate yet move ZERO grain.
+      // That is a NO-SALE (no coin for nothing, no false "buys grain" beat) — it falls through
+      // to the refusal reaction, preserving the §9 smuggle premium AND the refused-ask grudge.
+      let sold = false;
+      if (purchase.buys) {
+        // The grain leg (seller giver → buyer receiver), conserved through the pure sink.
+        const giverPop = Math.max(0, num(giverS?.population, 0));
+        const receiverPop = Math.max(0, num(receiverS?.population, 0));
+        const receiverMonths = storageMonthsOf(receiverS);
+        const receiverCap = storageCapacityMonths(asSimSettlement(receiverS));
+        const transfer = computeSackFoodTransfer({
+          conqueredStorageMonths: spareableMonths,       // only the seller's above-floor headroom
+          conqueredPopulation: giverPop,
+          victorStorageMonths: receiverMonths,
+          victorPopulation: receiverPop,
+          victorCapMonths: receiverCap,
+          takeFraction: purchase.magnitudeFraction01,
+          captureFraction: T.RELIEF_CAPTURE,
+        });
+        const lostMonths = transfer ? transfer.lostMonths : 0;
+        const gainedMonths = transfer ? transfer.gainedMonths : 0;
+        if (lostMonths > 0) {
+          // Grain moved ⇒ the sale is REAL: move the food, take the payment, bank the warmth.
+          sold = true;
+          foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths);
+          if (gainedMonths > 0) foodDeltas.set(receiverId, (foodDeltas.get(receiverId) || 0) + gainedMonths);
+          // The PAYMENT: a prosperity band-step debit on the buyer + a bounded seller income nudge.
+          if (purchase.buyerDebitBands > 0) prosperityDeltas.set(receiverId, (prosperityDeltas.get(receiverId) || 0) - purchase.buyerDebitBands);
+          if (purchase.sellerCreditBands > 0) prosperityDeltas.set(giverId, (prosperityDeltas.get(giverId) || 0) + purchase.sellerCreditBands);
+          // A typed trade-warmth incident on the pair (a market deposit — NOT a debt) + a beat.
+          const tradeInc = reliefIncident({ kind: 'trade_warmth', tick, magnitude01: purchase.magnitudeFraction01, summary: purchase.receipt });
+          if (tradeInc) incidentWrites.push({ key: relKey, incident: tradeInc });
+          newsEntries.push(purchaseNews({
             giverName: String(giverItem?.name || giverId), receiverName: String(receiverItem?.name || receiverId),
-            receipt: verdict.receipt, damage, tick, now,
+            magnitude: purchase.magnitudeFraction01, receipt: purchase.receipt, tick, now,
           }));
+          receipts.push({ giverId, receiverId, verdict: 'purchase', magnitude: purchase.magnitudeFraction01 });
         }
       }
+      if (!sold) {
+        // ── REFUSE (no sale completed): the fog-mediated refusal memory (§3.2/§3.3). The
+        // belief-map wiring is E1c; here the forgiveness reads the giver's own scarcity/military
+        // as a proxy for what a well-informed receiver would believe. ──
+        const forgiveness = fogForgiveness({
+          believedGiverScarcity01: ownScarcity01,
+          believedGiverMilitaryLoad01: clamp01(0.6 * deployedArmies + 0.4 * mobilization01),
+        });
+        const vassalBreach = kind === 'vassal' || kind === 'client';
+        const damage = refusalDamage({ refusedDesperation01: need01, forgiveness01: forgiveness, vassalBreach });
+        if (damage > 0.02) {
+          const refusedInc = reliefIncident({ kind: 'relief_refused', tick, magnitude01: damage, summary: verdict.receipt });
+          if (refusedInc) incidentWrites.push({ key: relKey, incident: refusedInc });
+          // A significant, poorly-forgiven refusal reaches the Chronicle (the tragic grudge forming).
+          if (damage >= 0.35) {
+            newsEntries.push(refusalNews({
+              giverName: String(giverItem?.name || giverId), receiverName: String(receiverItem?.name || receiverId),
+              receipt: verdict.receipt, damage, tick, now,
+            }));
+          }
+        }
+        receipts.push({ giverId, receiverId, verdict: verdict.verdict, magnitude: 0 });
+      }
+      // A refused ask (bought or not) is NOT relief — no moral-hazard discipline decay.
       bufferSteps.push({ giverId, receiverId, reliefThisTick: false });
-      receipts.push({ giverId, receiverId, verdict: verdict.verdict, magnitude: 0 });
     }
   }
 
@@ -869,6 +1017,108 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
+  // Trade-overture sub-ledger (§9 TRADE / design A4 — E1d): step every pair's give-stream
+  // warmth (a gift this tick warms; a silent tick decays; cold ⇒ pruned ⇒ drop-when-empty ⇒
+  // byte-identical-dormant). When warmth crosses the open threshold AND has DWELLED, the giver
+  // OPENS a trade overture ONCE (the `initiated` latch): a byte-neutral trust-nudge into the
+  // pair's relationship-state so the EXISTING neutral_to_trade_partner rule (trust > 0.48) can
+  // promote the label — NEVER an autonomous edge-mint. The nudge routes through authorityFor:
+  // it AUTO-applies under routine/full and is WITHHELD under dm_only/recommendations (the DM's
+  // proposal flow governs the route opening; the label change is itself always-proposal).
+  if (tradeOvertureGaveInfo.size || Object.keys(tradeOvertureLedger).length) {
+    const rules = asObject(worldState?.simulationRules);
+    const overtureMode = authorityFor(rules, 'relationship_evolution', 'auto');
+    /** @type {Record<string, unknown>} */
+    const nextOverture = {};
+    const keys = new Set([...Object.keys(tradeOvertureLedger), ...tradeOvertureGaveInfo.keys()]);
+    for (const key of keys) {
+      const priorRec = asObject(tradeOvertureLedger[key]).warmth != null ? tradeOvertureLedger[key] : null;
+      const gave = tradeOvertureGaveInfo.has(key);
+      const stepped = tradeOvertureStep(
+        /** @type {Parameters<typeof tradeOvertureStep>[0]} */ (priorRec), { gaveThisTick: gave, now: tick });
+      if (!stepped) continue; // cold ⇒ prune
+      let initiated = asObject(priorRec).initiated === true;
+      if (!initiated && gave
+        && stepped.warmth >= T.TRADE_OVERTURE_OPEN_AT
+        && (tick - stepped.sinceTick) >= T.TRADE_OVERTURE_DWELL
+        && overtureMode === 'auto') {
+        const info = tradeOvertureGaveInfo.get(key);
+        if (info) {
+          // The byte-neutral trust-nudge (clamped) + a trade-warmth incident + a light beat.
+          const nudged = clamp01(info.trust + T.TRADE_OVERTURE_TRUST_NUDGE);
+          const inc = reliefIncident({ kind: 'trade_warmth', tick, magnitude01: stepped.warmth });
+          if (inc) incidentWrites.push({ key: info.relKey, incident: inc, patch: { trust: nudged } });
+          newsEntries.push(tradeOvertureNews({
+            giverName: String(itemById.get(info.giverId)?.name || info.giverId),
+            receiverName: String(itemById.get(info.receiverId)?.name || info.receiverId),
+            warmth: stepped.warmth, tick, now,
+          }));
+          initiated = true;
+        }
+      }
+      nextOverture[key] = initiated ? { ...stepped, initiated: true } : stepped;
+    }
+    const sortedNextOverture = sortedRecord(nextOverture);
+    if (JSON.stringify(sortedNextOverture) !== JSON.stringify(sortedRecord(tradeOvertureLedger))) {
+      nextWorldState = Object.keys(sortedNextOverture).length
+        ? setSpatialLedger(nextWorldState, 'tradeOverture', sortedNextOverture)
+        : dropSpatialLedger(nextWorldState, 'tradeOverture');
+      changed = true;
+    }
+  }
+
+  // RUMOR belief-nudge (design §3.1 / §9 INFORMATION — E1d): a NOTABLE gift BROADCASTS. For
+  // every observer that ALREADY holds a belief about a broadcasting giver, nudge believed
+  // WEALTH up (strengthBand ⇒ raiders' attention) and believed CHARACTER one rung friendlier
+  // (allianceLabel ⇒ allies' trust), routed through beliefMap.reconcileBelief with a
+  // deed-inflated ground truth (the deed is the evidence). GATED on beliefsActive (spatial
+  // marker + non-omniscient infoMode) so an omniscient/unmarked/dormant world is byte-identical.
+  // Only EXISTING slots are touched (no new keys minted ⇒ the belief-ledger shape/order is
+  // preserved — no re-sort) and only a MATERIAL wealth/character shift writes (byte-neutral for
+  // an already-maxed belief). Deed-broadcast rumor + the succor beat already carry the FACT of
+  // the gift; this is the perception BIAS the design §9 INFORMATION row calls the "missing edge".
+  if (beliefBroadcasters.size && beliefsActive(worldState)) {
+    const beliefMaps = asObject(getSpatialLedger(worldState, 'beliefMaps'));
+    // The deed's single broadcast report (firsthand, fresh, faithful — accuracy ≥ CAT_ADOPT).
+    const report = { hopCount: 0, ageTicks: 0, independentSources: 1, completeness01: 1, accuracy01: T.BELIEF_NUDGE_ACCURACY, score: 60, sortKey: 'generosity_broadcast' };
+    let nextMaps = beliefMaps;
+    let mapsTouched = false;
+    for (const [obs, byFactionRaw] of Object.entries(beliefMaps)) {
+      const byFaction = asObject(byFactionRaw);
+      /** @type {Record<string, unknown>|null} */
+      let nextByFaction = null;
+      for (const [fac, bySubjectRaw] of Object.entries(byFaction)) {
+        const bySubject = asObject(bySubjectRaw);
+        /** @type {Record<string, unknown>|null} */
+        let nextBySubject = null;
+        for (const giverId of beliefBroadcasters) {
+          const raw = bySubject[giverId];
+          if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
+          const prior = /** @type {BeliefRecord} */ (raw);
+          const inflatedBand = strengthBandOf(clamp01(strengthOfBand(num(prior.strengthBand, 2)) + T.BELIEF_NUDGE_STRENGTH));
+          const groundTruth = /** @type {BeliefRecord} */ ({ ...prior, strengthBand: inflatedBand, allianceLabel: friendlierLabel(prior.allianceLabel) });
+          const nextRec = reconcileBelief({ prior, groundTruth, reports: [report], now: tick });
+          // Only a MATERIAL wealth/character shift is worth a write (byte-neutral otherwise).
+          if (nextRec.strengthBand === prior.strengthBand && nextRec.allianceLabel === prior.allianceLabel) continue;
+          if (!nextBySubject) nextBySubject = { ...bySubject };
+          nextBySubject[giverId] = nextRec;
+        }
+        if (nextBySubject) {
+          if (!nextByFaction) nextByFaction = { ...byFaction };
+          nextByFaction[fac] = nextBySubject;
+        }
+      }
+      if (nextByFaction) {
+        if (!mapsTouched) { nextMaps = { ...beliefMaps }; mapsTouched = true; }
+        nextMaps[obs] = nextByFaction;
+      }
+    }
+    if (mapsTouched) {
+      nextWorldState = setSpatialLedger(nextWorldState, 'beliefMaps', nextMaps);
+      changed = true;
+    }
+  }
+
   // Buffer-discipline sub-ledger (moral hazard; drop-when-recovered).
   if (bufferSteps.length || Object.keys(bufferLedger).length) {
     /** @type {Record<string, unknown>} */
@@ -938,6 +1188,15 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   if (legitimacyDeltas.size) {
     const withLeg = applyLegitimacyDeltasToUpdates(nextUpdates, updateIndex, legitimacyDeltas);
     if (withLeg !== nextUpdates) { nextUpdates = withLeg; changed = true; }
+  }
+
+  // PURCHASE payment prosperity band-step deltas → settlementUpdates (§4/A2: a buyer's
+  // band-step debit + a bounded seller income nudge, ranked on the canonical PROSPERITY_TIERS
+  // ladder, clamped [0,6]; only where a readable prosperity band exists). Runs AFTER the food
+  // pass so the grain and its price compose on the same update entry.
+  if (prosperityDeltas.size) {
+    const withProsp = applyProsperityDeltasToUpdates(nextUpdates, updateIndex, prosperityDeltas);
+    if (withProsp !== nextUpdates) { nextUpdates = withProsp; changed = true; }
   }
 
   return { worldState: nextWorldState, settlementUpdates: nextUpdates, changed, newsEntries, receipts };
@@ -1021,122 +1280,47 @@ function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) 
   return next;
 }
 
-// ── House-voice news (AGGREGATE — no npc named; the receipt is the kernel's). ──
 /**
- * A relief-granted wizard-news entry. The kernel already narrated the deciding terms; this
- * frames it for the Chronicle. (The dedicated 'succor' newsVoice category is an E1b coupling.)
- * @param {{ giverId: string, receiverId: string, giverName: string, receiverName: string, verdict: string, receipt: string, magnitude: number, tick: number, now: string|null }} a
- * @returns {Record<string, unknown>}
+ * Apply the PURCHASE payment prosperity BAND-STEP deltas to settlementUpdates (§4/A2 — E1d):
+ * a buyer's band-step debit + a bounded seller income nudge, both ranked on the canonical
+ * PROSPERITY_TIERS ladder (data/constants — never a hand-typed band match), clamped [0,6], and
+ * written back IN KIND (a string label stays a string; a { tier } object keeps its shape). A
+ * settlement with no readable prosperity band (numeric/absent ⇒ rank −1) is SKIPPED. Because
+ * the ladder is coarse, a single sale's sub-band nudge often rounds to no change; a settlement
+ * that sells to several buyers in one tick accumulates its credits and CAN step up a band (the
+ * "granary city grows rich on volume" story). Pure.
+ * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} prosperityDeltas
+ * @returns {GenUpdate[]}
  */
-function succorNews({ giverId, receiverId, giverName, receiverName, verdict, receipt, magnitude, tick, now }) {
-  const credit = verdict === VERDICTS.GIVE_AS_CREDIT;
-  return {
-    id: `wizard_news.${tick}.relief.${stablePart(giverId)}.${stablePart(receiverId)}`,
-    tick,
-    createdAt: now,
-    scope: 'regional',
-    significance: magnitude >= 0.6 ? 'notable' : 'minor',
-    score: Math.round(45 + clamp01(magnitude) * 25),
-    headline: credit ? `${giverName} advances grain to ${receiverName}` : `${giverName} sends relief to ${receiverName}`,
-    summary: receipt,
-    kind: 'applied',
-    impactKind: 'generosity_relief',
-    channelType: 'trade_route',
-    severity: Math.round(clamp01(magnitude) * 100) / 100,
-    settlementIds: [giverId, receiverId],
-    impactIds: [],
-    channelIds: [],
-    sourceEventId: `relief.${giverId}.${receiverId}.${tick}`,
-    tags: ['world_pulse', 'generosity', 'relief'],
-    reasons: [receipt],
-  };
-}
-
-/**
- * A refusal-that-wounds wizard-news entry (the tragic grudge forming — the DM may intervene).
- * @param {{ giverName: string, receiverName: string, receipt: string, damage: number, tick: number, now: string|null }} a
- * @returns {Record<string, unknown>}
- */
-function refusalNews({ giverName, receiverName, receipt, damage, tick, now }) {
-  return {
-    id: `wizard_news.${tick}.relief_refused.${stablePart(giverName)}.${stablePart(receiverName)}`,
-    tick,
-    createdAt: now,
-    scope: 'regional',
-    significance: 'notable',
-    score: Math.round(50 + clamp01(damage) * 20),
-    headline: `${receiverName} is turned away by ${giverName}`,
-    summary: receipt,
-    kind: 'applied',
-    impactKind: 'generosity_refusal',
-    channelType: null,
-    severity: Math.round(clamp01(damage) * 100) / 100,
-    settlementIds: [],
-    impactIds: [],
-    channelIds: [],
-    tags: ['world_pulse', 'generosity', 'refusal'],
-    reasons: [receipt],
-  };
-}
-
-/**
- * A credit-DEFAULT wizard-news entry (§3.4): a grain-debt fell into default — a grievance
- * that ratchets toward war (the casus-belli seam). AGGREGATE — the two courts, no named soul.
- * @param {{ debtorName: string, creditorName: string, tick: number, now: string|null }} a
- * @returns {Record<string, unknown>}
- */
-function defaultNews({ debtorName, creditorName, tick, now }) {
-  const summary = `${debtorName} defaulted on the grain-debt owed to ${creditorName} — the ledger sours into a grievance.`;
-  return {
-    id: `wizard_news.${tick}.credit_default.${stablePart(debtorName)}.${stablePart(creditorName)}`,
-    tick,
-    createdAt: now,
-    scope: 'regional',
-    significance: 'notable',
-    score: 58,
-    headline: `${debtorName} defaults on its debt to ${creditorName}`,
-    summary,
-    kind: 'applied',
-    impactKind: 'generosity_credit_default',
-    channelType: null,
-    severity: 0.6,
-    settlementIds: [],
-    impactIds: [],
-    channelIds: [],
-    tags: ['world_pulse', 'generosity', 'credit', 'default'],
-    reasons: [summary],
-  };
-}
-
-/**
- * A refuge-posture OPENING wizard-news entry (design §4 / E1c): a host opens its gates to a
- * distressed ally's displaced — "generosity in people." AGGREGATE (population counts, no
- * named soul); the posture reshapes M4's destination choice only when the migration layer is
- * also lit. Emitted only on the OPEN transition (a held posture re-affirms silently).
- * @param {{ giverName: string, receiverName: string, weight: number, tick: number, now: string|null }} a
- * @returns {Record<string, unknown>}
- */
-function refugeNews({ giverName, receiverName, weight, tick, now }) {
-  const summary = `${giverName} opens its gates to the displaced of ${receiverName} — refuge in the ally's exodus.`;
-  return {
-    id: `wizard_news.${tick}.refuge.${stablePart(giverName)}.${stablePart(receiverName)}`,
-    tick,
-    createdAt: now,
-    scope: 'regional',
-    significance: weight >= 0.4 ? 'notable' : 'minor',
-    score: Math.round(45 + clamp01(weight) * 20),
-    headline: `${giverName} opens refuge to ${receiverName}`,
-    summary,
-    kind: 'applied',
-    impactKind: 'generosity_refuge',
-    channelType: null,
-    severity: Math.round(clamp01(weight) * 100) / 100,
-    settlementIds: [],
-    impactIds: [],
-    channelIds: [],
-    tags: ['world_pulse', 'generosity', 'refuge'],
-    reasons: [summary],
-  };
+function applyProsperityDeltasToUpdates(updates, updateIndex, prosperityDeltas) {
+  let next = updates;
+  let cloned = false;
+  const maxRank = Math.max(1, PROSPERITY_TIERS.length - 1);
+  for (const [id, delta] of prosperityDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    const ec = asObject(settlement?.economicState);
+    const cur = ec.prosperity;
+    const rank = prosperityRank(/** @type {Parameters<typeof prosperityRank>[0]} */ (cur));
+    if (rank < 0) continue; // no readable band (numeric/absent) — nothing to step
+    const nextRank = Math.round(Math.max(0, Math.min(maxRank, rank + delta)));
+    if (nextRank === rank) continue;
+    const nextLabel = PROSPERITY_TIERS[nextRank];
+    // Preserve the field shape (string label vs { tier } object).
+    const nextProsperity = cur && typeof cur === 'object' && !Array.isArray(cur)
+      ? { .../** @type {Record<string, unknown>} */ (cur), tier: nextLabel } : nextLabel;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = /** @type {GenUpdate} */ ({
+      ...entry,
+      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
+        ...settlement, economicState: { ...ec, prosperity: nextProsperity },
+      })),
+    });
+  }
+  return next;
 }
 
 export { REACTION_TUNING };

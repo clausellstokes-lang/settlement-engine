@@ -13,7 +13,7 @@ import {
   GENEROSITY_TUNING, VERDICTS, GENEROSITY_INSTRUMENTS,
   qualifiesForGenerosity, bondTerm, historyTerm, conscienceTerm, strategyTerm, faithTerm,
   ownMarginTerm, commitmentLoadTerm, routeRiskTerm, domesticReactionTerm, dependencyTerm,
-  generosityEV, generosityReceipt, triageAllocation, refugeAcceptance,
+  generosityEV, generosityReceipt, triageAllocation, refugeAcceptance, purchaseFallThrough,
   generosityForkKey, loadedDraw, shouldInitiateAsk, warningSacrifice, constructiveFlowsActive,
 } from '../../src/domain/spatial/generosityEV.js';
 
@@ -266,18 +266,49 @@ describe('the loaded-dice primitives (§H)', () => {
 });
 
 describe('the instrument catalog (§4) + the warning-gift sacrifice price (statecraft §2.4)', () => {
-  it('grain_relief + warning + credit + refuge are LIVE; purchase/trade_overture are deferred (owner-decision-queue)', () => {
+  it('ALL SIX instruments are LIVE (E1d — the generosity engine completes)', () => {
     expect(GENEROSITY_INSTRUMENTS.grain_relief.live).toBe(true);
     expect(GENEROSITY_INSTRUMENTS.warning.live).toBe(true);
-    expect(GENEROSITY_INSTRUMENTS.credit.live).toBe(true);       // E1b: maturity/default/appetite wired
-    expect(GENEROSITY_INSTRUMENTS.refuge.live).toBe(true);        // E1c: the refuge posture axis is wired into M4
-    expect(GENEROSITY_INSTRUMENTS.purchase.live).toBe(false);       // owner-gated: payment/conservation model
-    expect(GENEROSITY_INSTRUMENTS.trade_overture.live).toBe(false); // owner-gated: route-opening target
+    expect(GENEROSITY_INSTRUMENTS.credit.live).toBe(true);          // E1b: maturity/default/appetite wired
+    expect(GENEROSITY_INSTRUMENTS.refuge.live).toBe(true);          // E1c: the refuge posture axis is wired into M4
+    expect(GENEROSITY_INSTRUMENTS.purchase.live).toBe(true);        // E1d: the post-REFUSE bonded fall-through (A2)
+    expect(GENEROSITY_INSTRUMENTS.trade_overture.live).toBe(true);  // E1d: the per-pair give-stream trust-nudge (A4)
+    // Every catalog instrument now ships live (the E1 instrument set is complete).
+    expect(Object.values(GENEROSITY_INSTRUMENTS).every((i) => i.live === true)).toBe(true);
   });
   it("warningSacrifice prices the COST of the telling, not the value received", () => {
     expect(warningSacrifice({ strategicAdvantageSpent01: 0.9, eyesExposed01: 0.8 }))
       .toBeGreaterThan(warningSacrifice({ strategicAdvantageSpent01: 0.1, eyesExposed01: 0 }));
     expect(warningSacrifice({})).toBe(0);
+  });
+});
+
+describe('PURCHASE fall-through (design §4 / A2 — E1d) — the market twin of a refused gift', () => {
+  it('a needy, SOLVENT buyer buys when the seller has grain to spare', () => {
+    const p = purchaseFallThrough({ buyerProsperity01: 0.83, need01: 0.9, sellerSpareable01: 0.8 });
+    expect(p.buys).toBe(true);
+    expect(p.magnitudeFraction01).toBeGreaterThan(0);
+    expect(p.magnitudeFraction01).toBeLessThanOrEqual(1);
+    // Payment is NON-ZERO-SUM: the buyer's band-step debit exceeds the seller's bounded income.
+    expect(p.buyerDebitBands).toBeGreaterThan(p.sellerCreditBands);
+    expect(p.receipt).toMatch(/bought|coin|market/i);
+  });
+  it('magnitude is bounded by min(need, affordability) — a poor-but-needy buyer buys a sliver', () => {
+    const rich = purchaseFallThrough({ buyerProsperity01: 0.9, need01: 0.9, sellerSpareable01: 1 });
+    const poor = purchaseFallThrough({ buyerProsperity01: 0.3, need01: 0.9, sellerSpareable01: 1 });
+    expect(poor.buys).toBe(true);
+    expect(poor.magnitudeFraction01).toBeLessThan(rich.magnitudeFraction01);
+    expect(rich.magnitudeFraction01).toBeCloseTo(0.9, 5);  // capped by need
+    expect(poor.magnitudeFraction01).toBeCloseTo(0.3, 5);  // capped by affordability
+  });
+  it('a buyer below the afford floor CANNOT pay ⇒ no sale (the subsistence buyer)', () => {
+    expect(purchaseFallThrough({ buyerProsperity01: 0.1, need01: 0.9, sellerSpareable01: 1 }).buys).toBe(false);
+  });
+  it('a seller at the reserve floor (nothing spareable) makes NO sale ⇒ the §9 smuggle premium persists', () => {
+    expect(purchaseFallThrough({ buyerProsperity01: 0.9, need01: 0.9, sellerSpareable01: 0 }).buys).toBe(false);
+  });
+  it('a mild need does not warrant paying (below the need floor)', () => {
+    expect(purchaseFallThrough({ buyerProsperity01: 0.9, need01: 0.2, sellerSpareable01: 1 }).buys).toBe(false);
   });
 });
 
