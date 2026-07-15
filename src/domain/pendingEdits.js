@@ -49,9 +49,25 @@ export const EDIT_KINDS = Object.freeze([
 
 const _editKindSet = new Set(EDIT_KINDS);
 
+// The kinds commitPendingEdits (store/settlementSlice) actually has a live
+// dispatcher for. A kind NOT in this list has no committer, so the queueEdit seam
+// REFUSES it (returns null) rather than letting it enter the queue and be
+// SILENTLY DROPPED at commit — the queue clears all-or-nothing, so an
+// un-dispatched edit would evaporate while the commit reports success. The other
+// EDIT_KINDS remain declared as UI/preview scaffolding awaiting dispatchers; they
+// are not committable today. Keep this in lockstep with the commitPendingEdits
+// switch — the no-silent-drop contract is pinned in
+// tests/store/editActionPersist.test.js and tests/domain/pendingEdits.test.js.
+// (A plain frozen list + Array.includes, not a Set/helper: two entries, and this
+// module is first-paint eager, so the smaller shape is the byte-minimal one.)
+export const COMMITTABLE_EDIT_KINDS = Object.freeze(['rename-npc', 'rename-settlement']);
+
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the
-// same (kind, payload, clock) because the edit queue is PERSISTED — Math.random
-// here put non-determinism into persisted state and broke replay/idempotency.
+// same (kind, payload, clock) so revert-by-id and idempotent re-appends stay
+// deterministic within a session — Math.random here put non-determinism into the
+// queue and broke replay/idempotency. NOTE: the queue is SESSION-ONLY — it is
+// excluded from the store persist partialize (src/store/index.js), so it never
+// reaches localStorage; determinism is about in-session replay, not persistence.
 /** @param {any} str */
 function shortHash(str) {
   let h = 0x811c9dc5;

@@ -11,6 +11,7 @@ import { describe, it, expect } from 'vitest';
 import {
   buildEdit, appendEdit, revertEdit, dropEdit,
   activeEdits, hasPending, previewCascade, EDIT_KINDS,
+  COMMITTABLE_EDIT_KINDS,
 } from '../../src/domain/pendingEdits.js';
 
 describe('pendingEdits — construction', () => {
@@ -35,6 +36,30 @@ describe('pendingEdits — construction', () => {
     expect(EDIT_KINDS).toContain('add-institution');
     expect(EDIT_KINDS).toContain('edit-prose');
     expect(EDIT_KINDS.length).toBeGreaterThanOrEqual(10);
+  });
+});
+
+describe('pendingEdits — committable-kinds contract (no silent drop)', () => {
+  // The queueEdit seam (store/settlementSlice) admits only COMMITTABLE_EDIT_KINDS.
+  // Everything else is scaffolding without a commit dispatcher. These pins keep the
+  // set honest so an un-committable kind can never enter the queue and be silently
+  // dropped at commit.
+  it('COMMITTABLE_EDIT_KINDS is a subset of EDIT_KINDS', () => {
+    for (const k of COMMITTABLE_EDIT_KINDS) {
+      expect(EDIT_KINDS).toContain(k);
+    }
+  });
+
+  it('marks exactly the kinds commitPendingEdits dispatches (rename-npc, rename-settlement)', () => {
+    expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual(['rename-npc', 'rename-settlement']);
+  });
+
+  it('the un-dispatched scaffolding kinds are explicitly NOT committable', () => {
+    for (const k of ['rename-faction', 'add-institution', 'remove-institution',
+      'add-resource', 'remove-resource', 'add-stressor', 'remove-stressor', 'edit-prose']) {
+      expect(EDIT_KINDS).toContain(k);                    // still a declared kind…
+      expect(COMMITTABLE_EDIT_KINDS).not.toContain(k);    // …but has no committer
+    }
   });
 });
 
