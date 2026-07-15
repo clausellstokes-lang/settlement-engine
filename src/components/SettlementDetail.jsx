@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense, Component } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 // Drama (the theatre masks) is already in the first-paint icon set via the
 // Plot Hooks tab — reusing it for Session Mode adds no vendor-icons bytes.
 import {Link2, ChevronLeft, X, FileText, RotateCcw, Edit3, Lock, Share2, Image as ImageIcon, Drama} from 'lucide-react';
@@ -26,6 +26,17 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 // W-Session — the distraction-free run-of-play takeover. Lazy like TableView:
 // the chunk loads only when the DM actually opens it (zero first-paint bytes).
 const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
+// SM-2 — the town-map viewer. Own lazy chunk (design Option A): the map code
+// loads only when the user picks the Map segment, never on first paint (the
+// pane chunk + the town-map model are absent from the entry static closure —
+// tests/build/townMapLazy.test.js). NOTE: consuming buildTownMapModel from this
+// (settlements) route makes Rollup hoist two shared read-models
+// (districtProfile → threatProfile, pulled in by the model's own
+// deriveAllDistricts) into the entry __vite__mapDeps manifest — a +93 B
+// first-paint delta that is UNAVOIDABLE (a minimal pane importing only
+// buildTownMapModel measures the same). Same mechanism as the memory's
+// W4c/W4e/W4h shared-read-model hoists; resolution is owner-gated (budget raise).
+const SettlementMapPane = lazy(() => import('./townMap/SettlementMapPane.jsx'));
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
@@ -60,39 +71,19 @@ import { t } from '../copy/index.js';
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
+import Segmented         from './primitives/Segmented.jsx';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
 import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
+import DetailErrorBoundary from './settlementDetail/DetailErrorBoundary.jsx';
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
   client:'#6a3a1a', rival:'#8a5010', cold_war:'#8a3010',
   hostile:'#8b1a1a', neutral:'#6b5340',
 };
-
-class DetailErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
-
-  componentDidCatch(error, info) {
-    console.error('[SettlementDetail] detail render failed', error, info);
-  }
-
-  render() {
-    if (this.state.error) {
-      return <div style={{padding:12,color:swatch.danger,fontSize:FS.sm}}>Error loading settlement output.</div>;
-    }
-    return this.props.children;
-  }
-}
 
 // ── Save migration ─────────────────────────────────────────────────────────
 // Upgrades old save format to current schema. Safe to call on any save.
@@ -206,6 +197,7 @@ export default function SettlementDetail({
   const [exporting,   setExporting]   = useState(false); // PDF export spinner
   const [exportSheetOpen, setExportSheetOpen] = useState(false); // variant picker modal
   const [sessionOpen, setSessionOpen] = useState(false); // W-Session run-of-play takeover
+  const [detailView, setDetailView] = useState('dossier'); // SM-2 body lens: 'dossier' | 'map'
   const [shareOpen, setShareOpen] = useState(false); // Share to Gallery panel, toggled from the header button
   const [confirmRevertRaw, setConfirmRevertRaw] = useState(false);
   const [pdfError, setPdfError] = useState(null);
@@ -746,13 +738,29 @@ export default function SettlementDetail({
         </>
       )}
 
+      {/* SM-2 — [Dossier | Map] lens toggle. Sits ABOVE the body (both edit and
+          view modes); the map is a sibling of OutputContainer, never inside it
+          (OutputContainer renders 3 surfaces; the town map is library-only). */}
+      {detail.settlement && (
+        <div style={{ maxWidth: PAGE_MAX, margin: '0 auto 12px', width: '100%' }}>
+          <Segmented
+            ariaLabel="Settlement view"
+            options={[{ id: 'dossier', label: 'Dossier' }, { id: 'map', label: 'Map' }]}
+            value={detailView}
+            onChange={setDetailView}
+          />
+        </div>
+      )}
+
       {detail.settlement&&<div style={{marginBottom:12}}>
         <DetailErrorBoundary>
           <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
             {/* P139 — cap the dossier body to the shared page width (the
                 detail toolbar above stays full-width). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-              <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />
+              {detailView === 'map'
+                ? <SettlementMapPane settlement={detail.settlement} />
+                : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />}
             </div>
           </Suspense>
         </DetailErrorBoundary>

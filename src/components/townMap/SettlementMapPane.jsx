@@ -1,0 +1,566 @@
+/**
+ * components/townMap/SettlementMapPane — the SM-2 town-map VIEWER.
+ *
+ * Renders buildTownMapModel(settlement) — a deterministic, view-time 0..1000 ×
+ * 0..1000 vector model (SM-1, src/domain/townMap/) — as a pan/zoom SVG map. The
+ * model persists NOTHING onto the settlement, so this pane adds no state and no
+ * golden shift; it is pure derivation on top of the frozen model.
+ *
+ * Interaction (the two-tier QuickInspector precedent):
+ *   • desktop hover (non-touch) → a transient card/label;
+ *   • click / touch tap → a PINNED card that stays until dismissed or another
+ *     pin. The displayed card = pinned ?? hovered.
+ *   • building → the real InstitutionCard popover (parity by construction — it
+ *     re-derives deriveInstitutionProfile internally, reading no store/config).
+ *   • district → a map-native district card (deriveAllDistricts, joined by id).
+ *   • hazard / condition overlays → a small label.
+ *
+ * Camera clones MapOverlay's self-owned image-mode pan/zoom: a plain transform
+ * ref mutated by direct DOM writes (no per-frame re-render), a pixel-rect viewBox
+ * with a contain-fit of the 0..1000 space, wheel zoom-at-cursor, and two-pointer
+ * pinch. Pure vector only — NO <image>, NO lucide imports here; colors are theme
+ * tokens (the no-raw-color lint bans raw hex).
+ *
+ * SM-2 scope: view only. Edit affordances (mapEdits pins / layout reroll) are
+ * SM-3 and are deliberately ABSENT on every platform here.
+ */
+
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  AMBER, AMBER_BG, BLUE, BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS,
+  GOLD, GOLD_DEEP, GREEN, INK, MUTED, PARCH, R, RED, RED_BG, SECOND, SP, sans,
+} from '../theme.js';
+import InstitutionCard from '../primitives/InstitutionCard.jsx';
+import Button from '../primitives/Button.jsx';
+import { buildTownMapModel } from '../../domain/townMap/index.js';
+import { deriveAllDistricts } from '../../domain/districtProfile.js';
+import { buildingHoverModel } from './hoverModel.js';
+
+// ── Palette (theme tokens only; no VIOLET — AI-reserved; no raw hex) ──────────
+/** District category → base tint token (fill at low opacity; stroke on hover). */
+const DISTRICT_COLOR = {
+  civic: BLUE, noble: GOLD_DEEP, merchant: GOLD, religious: SECOND,
+  arcane: BODY, craft: AMBER, residential: GREEN, foreign: BLUE,
+  military: RED, criminal: INK, industrial: AMBER, other: MUTED,
+};
+const districtColor = (category) => DISTRICT_COLOR[category] || MUTED;
+
+const clampScale = (s) => Math.max(0.2, Math.min(8, s));
+const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
+
+/**
+ * @param {{ settlement: any }} props
+ */
+export default function SettlementMapPane({ settlement }) {
+  const model = useMemo(() => buildTownMapModel(settlement), [settlement]);
+  const districtsById = useMemo(() => {
+    const m = new Map();
+    for (const d of deriveAllDistricts(settlement)) m.set(d.id, d);
+    return m;
+  }, [settlement]);
+
+  const wrapperRef = useRef(null);
+  const gRef = useRef(null);
+  const transformRef = useRef({ tx: 0, ty: 0, scale: 1, width: 0, height: 0 });
+  const fittedRef = useRef(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+
+  // Interaction state machine: displayed card = pinned ?? hovered.
+  // Each entry: { kind:'building'|'district'|'hazard'|'condition', payload, anchor:{x,y} }.
+  const [hovered, setHovered] = useState(null);
+  const [pinned, setPinned] = useState(null);
+
+  const clearPin = useCallback(() => { setPinned(null); setHovered(null); }, []);
+
+  // Direct-DOM transform write (no re-render) — the MapOverlay idiom.
+  const writeTransform = useCallback((t) => {
+    transformRef.current = { ...transformRef.current, ...t };
+    const { tx, ty, scale } = transformRef.current;
+    if (gRef.current) gRef.current.setAttribute('transform', `translate(${tx}, ${ty}) scale(${scale})`);
+  }, []);
+
+  // ── Wrapper size (drives the pixel-rect viewBox) ────────────────────────────
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const measure = () => {
+      const rect = el.getBoundingClientRect();
+      const w = Math.round(rect.width);
+      const h = Math.round(rect.height);
+      setSize((prev) => (prev.width === w && prev.height === h ? prev : { width: w, height: h }));
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // ── Contain-fit the 0..1000 town space into the pixel viewBox (once per size) ─
+  useEffect(() => {
+    const W = size.width;
+    const H = size.height;
+    if (W > 1 && H > 1) {
+      const key = `${W}x${H}`;
+      if (fittedRef.current !== key) {
+        fittedRef.current = key;
+        const fit = Math.min(W, H) / 1000 || 1;
+        writeTransform({ scale: fit, tx: (W - 1000 * fit) / 2, ty: (H - 1000 * fit) / 2, width: W, height: H });
+      }
+    }
+  }, [size.width, size.height, writeTransform]);
+
+  // ── Self-owned pan / wheel-zoom / two-pointer pinch ─────────────────────────
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el) return undefined;
+    const pointers = new Map();
+    let panning = false; let lastX = 0; let lastY = 0;
+    /** @type {{ dist:number, cx:number, cy:number, scale:number, tx:number, ty:number }|null} */
+    let pinch = null;
+    // Pan starts only on the map background (svg / wrapper / the bg rect) —
+    // buildings and districts own their own hover/click. MapOverlay precedent.
+    const isBackground = (target) => target === el || target.tagName === 'svg'
+      || target.getAttribute?.('data-town-bg') != null;
+
+    const beginPinch = () => {
+      const pts = [...pointers.values()];
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+      const rect = el.getBoundingClientRect();
+      pinch = {
+        dist,
+        cx: (pts[0].x + pts[1].x) / 2 - rect.left,
+        cy: (pts[0].y + pts[1].y) / 2 - rect.top,
+        scale: transformRef.current.scale,
+        tx: transformRef.current.tx,
+        ty: transformRef.current.ty,
+      };
+    };
+
+    const onDown = (e) => {
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pointers.size === 2) { panning = false; beginPinch(); return; }
+      if (pointers.size !== 1) return;
+      if (e.button != null && e.button > 0) return; // primary / touch only
+      if (!isBackground(e.target)) return;
+      panning = true; lastX = e.clientX; lastY = e.clientY;
+      try { el.setPointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    };
+    const onMove = (e) => {
+      if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (pinch && pointers.size >= 2) {
+        const pts = [...pointers.values()];
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+        const next = clampScale(pinch.scale * (dist / pinch.dist));
+        const k = next / pinch.scale;
+        writeTransform({ scale: next, tx: pinch.cx - (pinch.cx - pinch.tx) * k, ty: pinch.cy - (pinch.cy - pinch.ty) * k });
+        return;
+      }
+      if (!panning) return;
+      writeTransform({ tx: transformRef.current.tx + (e.clientX - lastX), ty: transformRef.current.ty + (e.clientY - lastY) });
+      lastX = e.clientX; lastY = e.clientY;
+    };
+    const onUp = (e) => {
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinch = null;
+      if (pointers.size === 0) panning = false;
+      try { el.releasePointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    };
+    const onWheel = (e) => {
+      e.preventDefault();
+      const rect = el.getBoundingClientRect();
+      const cx = e.clientX - rect.left; const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
+      const next = clampScale(transformRef.current.scale * factor);
+      const k = next / transformRef.current.scale;
+      writeTransform({ scale: next, tx: cx - (cx - transformRef.current.tx) * k, ty: cy - (cy - transformRef.current.ty) * k });
+    };
+
+    el.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => {
+      el.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      el.removeEventListener('wheel', onWheel);
+    };
+  }, [writeTransform]);
+
+  // ── Hover / pin handlers (touch drops hover; tap pins) ──────────────────────
+  const anchorFrom = (e) => ({ x: e.clientX, y: e.clientY });
+
+  const onBuildingEnter = (building) => (e) => {
+    if (e.pointerType === 'touch') return;
+    const hm = buildingHoverModel(building, settlement);
+    setHovered({ kind: 'building', payload: { building, ...hm }, anchor: anchorFrom(e) });
+  };
+  const onBuildingClick = (building) => (e) => {
+    e.stopPropagation();
+    const hm = buildingHoverModel(building, settlement);
+    if (!hm.show) { clearPin(); return; } // honesty gate — nothing to pin
+    setPinned({ kind: 'building', payload: { building, ...hm }, anchor: anchorFrom(e) });
+  };
+
+  const districtCardFor = (mapDistrict) => districtsById.get(mapDistrict.id) || null;
+  const onDistrictEnter = (mapDistrict) => (e) => {
+    if (e.pointerType === 'touch') return;
+    setHovered({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
+  };
+  const onDistrictClick = (mapDistrict) => (e) => {
+    e.stopPropagation();
+    setPinned({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
+  };
+
+  const onOverlayEnter = (kind, payload) => (e) => {
+    if (e.pointerType === 'touch') return;
+    setHovered({ kind, payload, anchor: anchorFrom(e) });
+  };
+  const onOverlayClick = (kind, payload) => (e) => {
+    e.stopPropagation();
+    setPinned({ kind, payload, anchor: anchorFrom(e) });
+  };
+
+  const clearHover = () => setHovered((h) => (h && !pinned ? null : h));
+
+  const active = pinned ?? hovered;
+  const isPinned = !!pinned;
+
+  const { frame, skeleton, districts, buildings, fortifications, overlays } = model;
+  const hoverKey = active
+    ? (active.kind === 'building' ? active.payload.building.anchorKey
+      : active.kind === 'district' ? active.payload.mapDistrict.id
+        : active.payload.id)
+    : null;
+  const districtsWithFill = useMemo(() => {
+    const set = new Set();
+    for (const b of buildings) if (b.kind === 'fill') set.add(b.districtId);
+    return set;
+  }, [buildings]);
+
+  return (
+    <div
+      ref={wrapperRef}
+      data-town-map
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: 'min(72vh, 720px)',
+        minHeight: 360,
+        border: `1px solid ${BORDER}`,
+        borderRadius: R.lg,
+        background: PARCH,
+        overflow: 'hidden',
+        touchAction: 'none',
+        cursor: 'grab',
+      }}
+    >
+      <svg
+        style={{ display: 'block', width: '100%', height: '100%', overflow: 'hidden' }}
+        viewBox={`0 0 ${size.width || 1} ${size.height || 1}`}
+        preserveAspectRatio="none"
+        role="img"
+        aria-label={`Town map of ${settlement?.name || 'settlement'}`}
+      >
+        {/* Screen-space background: a click on empty map area clears the pin;
+            a press begins a pan (isBackground). Sibling to <g>, so building /
+            district clicks (which pin) never reach it. */}
+        <rect
+          data-town-bg
+          x={0} y={0} width={size.width || 1} height={size.height || 1}
+          fill="transparent"
+          onClick={clearPin}
+          style={{ pointerEvents: 'all' }}
+        />
+        <g ref={gRef}>
+          {/* ── water ─────────────────────────────────────────────────────── */}
+          {frame.water && (
+            frame.water.kind === 'coast'
+              ? (
+                <polygon
+                  data-town-water
+                  points={`${pointsOf(frame.water.path)} 1000,1000 0,1000`}
+                  fill={BLUE} fillOpacity={0.16} stroke={BLUE} strokeOpacity={0.5} strokeWidth={2}
+                />
+              )
+              : (
+                <polyline
+                  data-town-water
+                  points={pointsOf(frame.water.path)}
+                  fill="none" stroke={BLUE} strokeOpacity={0.55} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round"
+                />
+              )
+          )}
+
+          {/* ── approach roads ────────────────────────────────────────────── */}
+          {frame.roads.map((r) => (
+            <line
+              key={r.id}
+              x1={r.from[0]} y1={r.from[1]} x2={r.to[0]} y2={r.to[1]}
+              stroke={MUTED} strokeOpacity={0.5} strokeWidth={2 + r.weight} strokeLinecap="round"
+            />
+          ))}
+
+          {/* ── skeleton streets + anchor ─────────────────────────────────── */}
+          {skeleton.streets.map((st, i) => (
+            <line
+              key={`street.${i}`}
+              x1={st.from.x} y1={st.from.y} x2={st.to.x} y2={st.to.y}
+              stroke={BORDER_STRONG} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
+            />
+          ))}
+          <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={GOLD} stroke={INK} strokeWidth={1.5} />
+
+          {/* ── district polygons (drawn first → buildings win z-order) ────── */}
+          {districts.map((d) => {
+            const color = districtColor(d.category);
+            const on = hoverKey === d.id;
+            return (
+              <g key={d.id}>
+                <polygon
+                  data-town-district={d.id}
+                  points={pointsOf(d.polygon)}
+                  fill={color}
+                  fillOpacity={on ? 0.24 : 0.14}
+                  stroke={color}
+                  strokeOpacity={on ? 0.95 : 0.45}
+                  strokeWidth={on ? 3 : 1.5}
+                  style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                  onPointerEnter={onDistrictEnter(d)}
+                  onPointerLeave={clearHover}
+                  onClick={onDistrictClick(d)}
+                />
+                {/* aggregate lodging/mass-residential → a subtle district-fill accent */}
+                {districtsWithFill.has(d.id) && (
+                  <polygon
+                    points={pointsOf(d.polygon)}
+                    fill={color} fillOpacity={0.08}
+                    stroke="none"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
+              </g>
+            );
+          })}
+
+          {/* ── fortifications (walls + gates) ────────────────────────────── */}
+          {fortifications && (
+            <g style={{ pointerEvents: 'none' }}>
+              <polygon
+                data-town-walls
+                points={pointsOf(fortifications.walls)}
+                fill="none" stroke={INK} strokeOpacity={0.8}
+                strokeWidth={1.5 + fortifications.wallWeight} strokeLinejoin="round"
+              />
+              {fortifications.gates.map((g, i) => (
+                <circle key={`gate.${i}`} cx={g.x} cy={g.y} r={7} fill={PARCH} stroke={INK} strokeWidth={2} />
+              ))}
+            </g>
+          )}
+
+          {/* ── building landmarks (fill buildings render as the accent above) ─ */}
+          {buildings.filter((b) => b.kind === 'landmark').map((b) => {
+            const color = districtColor(districts.find((d) => d.id === b.districtId)?.category);
+            const on = hoverKey === b.anchorKey;
+            const s = on ? 11 : 8;
+            return (
+              <rect
+                key={b.anchorKey}
+                data-town-building={b.anchorKey}
+                x={b.position.x - s} y={b.position.y - s} width={s * 2} height={s * 2}
+                rx={3}
+                fill={on ? color : CARD}
+                fillOpacity={on ? 0.9 : 1}
+                stroke={color} strokeWidth={on ? 2.5 : 1.5}
+                style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                onPointerEnter={onBuildingEnter(b)}
+                onPointerLeave={clearHover}
+                onClick={onBuildingClick(b)}
+              />
+            );
+          })}
+
+          {/* ── overlays: condition badges (district-level, living layer) ──── */}
+          {overlays.conditions.map((c) => {
+            const d = districts.find((x) => x.id === c.districtId);
+            if (!d) return null;
+            const high = c.severityBand === 'severe' || c.severityBand === 'high' || c.severity >= 0.66;
+            const on = hoverKey === c.id;
+            return (
+              <g
+                key={`cond.${c.id}`}
+                data-town-condition={c.id}
+                transform={`translate(${d.centroid.x}, ${d.centroid.y})`}
+                style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                onPointerEnter={onOverlayEnter('condition', c)}
+                onPointerLeave={clearHover}
+                onClick={onOverlayClick('condition', c)}
+              >
+                <rect x={-9} y={-9} width={18} height={18} rx={4}
+                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
+                  strokeWidth={on ? 2.5 : 1.5} />
+                <circle cx={0} cy={0} r={2.5} fill={high ? RED : AMBER} />
+              </g>
+            );
+          })}
+
+          {/* ── overlays: hazard markers ──────────────────────────────────── */}
+          {overlays.hazards.map((h) => {
+            const high = h.severityBand === 'severe' || h.severityBand === 'high' || h.severity >= 0.66;
+            const on = hoverKey === h.id;
+            return (
+              <g
+                key={`haz.${h.id}`}
+                data-town-hazard={h.id}
+                transform={`translate(${h.position.x}, ${h.position.y})`}
+                style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                onPointerEnter={onOverlayEnter('hazard', h)}
+                onPointerLeave={clearHover}
+                onClick={onOverlayClick('hazard', h)}
+              >
+                <path d="M 0 -10 L 9 6 L -9 6 Z"
+                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
+                  strokeWidth={on ? 2.5 : 1.5} strokeLinejoin="round" />
+                <rect x={-1} y={-4} width={2} height={5} fill={high ? RED : AMBER} />
+                <rect x={-1} y={2} width={2} height={2} fill={high ? RED : AMBER} />
+              </g>
+            );
+          })}
+        </g>
+      </svg>
+
+      {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}
+      {active && active.kind === 'building' && isPinned && active.payload.show && (
+        <InstitutionCard
+          open
+          institution={active.payload.institution}
+          settlement={settlement}
+          onClose={clearPin}
+        />
+      )}
+      {active && active.kind === 'building' && !isPinned && active.payload.show && (
+        <FloatingLabel anchor={active.anchor}>
+          <strong style={{ color: INK, fontWeight: 800 }}>{active.payload.institution?.name}</strong>
+          <span style={{ color: MUTED }}> — click for profile</span>
+        </FloatingLabel>
+      )}
+      {active && active.kind === 'district' && (
+        <DistrictCard
+          anchor={active.anchor}
+          mapDistrict={active.payload.mapDistrict}
+          profile={active.payload.profile}
+          pinned={isPinned}
+          onClose={clearPin}
+        />
+      )}
+      {active && (active.kind === 'hazard' || active.kind === 'condition') && (
+        <FloatingLabel anchor={active.anchor}>
+          <strong style={{ color: INK, fontWeight: 800 }}>{active.payload.label || active.payload.archetype}</strong>
+          <span style={{ color: MUTED }}>{` · ${active.payload.severityBand || ''}`}</span>
+        </FloatingLabel>
+      )}
+    </div>
+  );
+}
+
+// ── Small floating popover shell, viewport-clamped ────────────────────────────
+function clampAnchor(anchor, w, h) {
+  if (typeof window === 'undefined') return { left: (anchor?.x || 0) + 14, top: (anchor?.y || 0) + 14 };
+  const vw = window.innerWidth || 1024;
+  const vh = window.innerHeight || 768;
+  const left = Math.min((anchor?.x || 0) + 14, vw - w - 12);
+  const top = Math.min((anchor?.y || 0) + 14, vh - h - 12);
+  return { left: Math.max(12, left), top: Math.max(12, top) };
+}
+
+/** @param {{ anchor:{x:number,y:number}, children: import('react').ReactNode }} props */
+function FloatingLabel({ anchor, children }) {
+  const { left, top } = clampAnchor(anchor, 240, 44);
+  return (
+    <div
+      role="tooltip"
+      style={{
+        position: 'fixed', left, top, zIndex: 260, pointerEvents: 'none',
+        maxWidth: 260, padding: `${SP.xs}px ${SP.md}px`,
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        boxShadow: ELEV[2], fontFamily: sans, fontSize: FS.sm, lineHeight: 1.4,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
+ * Map-native district card (deriveAllDistricts, joined by id). Kept at
+ * InstitutionCard's visual weight but non-modal (a hover/pin popover).
+ * @param {{ anchor:{x:number,y:number}, mapDistrict:any, profile:any, pinned:boolean, onClose:()=>void }} props
+ */
+function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose }) {
+  const { left, top } = clampAnchor(anchor, 320, 260);
+  const name = profile?.name || mapDistrict?.name || 'District';
+  const category = profile?.category || mapDistrict?.category || 'other';
+  const color = districtColor(category);
+  const insts = Array.isArray(profile?.institutions) ? profile.institutions : [];
+  return (
+    <div
+      role={pinned ? 'dialog' : 'tooltip'}
+      aria-label={`${name} — district`}
+      style={{
+        position: 'fixed', left, top, zIndex: 260,
+        width: 'min(92vw, 320px)', maxHeight: 'min(70vh, 420px)', overflow: 'auto',
+        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[3],
+        pointerEvents: pinned ? 'auto' : 'none',
+      }}
+    >
+      <div style={{
+        display: 'flex', alignItems: 'flex-start', gap: SP.md,
+        padding: `${SP.md}px ${SP.md}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT,
+      }}>
+        <span style={{ width: 12, height: 12, borderRadius: 3, background: color, marginTop: 4, flexShrink: 0 }} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 900, lineHeight: 1.25 }}>{name}</div>
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
+            {category}
+          </div>
+        </div>
+        {pinned && (
+          <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close district card" style={{ minHeight: 0, padding: '2px 8px' }}>
+            ×
+          </Button>
+        )}
+      </div>
+      <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
+        <Row label="Wealth" value={profile?.wealth || mapDistrict?.wealth} />
+        <Row label="Safety" value={profile?.safety || mapDistrict?.safety} />
+        {profile?.dominantFaction?.name && <Row label="Dominant faction" value={profile.dominantFaction.name} />}
+        {insts.length > 0 && (
+          <Row label="Institutions" value={insts.slice(0, 4).map((i) => i.label).join(', ') + (insts.length > 4 ? `, +${insts.length - 4} more` : '')} />
+        )}
+        {profile?.hook && (
+          <div style={{ marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>{profile.hook}</div>
+        )}
+        {!profile && (
+          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>
+            An outlying cluster with no distinct quarter.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/** @param {{ label:string, value:any }} props */
+function Row({ label, value }) {
+  if (value == null || value === '') return null;
+  return (
+    <div style={{ display: 'flex', gap: SP.sm, alignItems: 'baseline' }}>
+      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', minWidth: 96, flexShrink: 0 }}>
+        {label}
+      </span>
+      <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm }}>{value}</span>
+    </div>
+  );
+}
