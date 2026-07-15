@@ -16,7 +16,8 @@
  *    or a hospital city reads "no dedicated healing institutions".
  */
 import { describe, it, expect } from 'vitest';
-import { SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS } from '../../src/data/supplyChainData.js';
+import { SUPPLY_CHAIN_NEEDS } from '../../src/data/supplyChainData.js';
+import { RESOURCE_TO_CHAINS } from '../../src/data/supplyChainResourceIndex.js';
 import { RESOURCE_DATA } from '../../src/data/resourceData.js';
 import { institutionalCatalog, catalogIdForName } from '../../src/data/institutionalCatalog.js';
 import { computeActiveChains, processorPatternIdSet } from '../../src/generators/computeActiveChains.js';

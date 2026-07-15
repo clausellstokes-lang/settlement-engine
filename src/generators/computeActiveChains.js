@@ -3,7 +3,8 @@
 // actual institutions present and nearby resources selected.
 // Used by the economic generator to enrich the Economics tab output.
 
-import {SUPPLY_CHAIN_NEEDS, RESOURCE_TO_CHAINS} from '../data/supplyChainData.js';
+import {SUPPLY_CHAIN_NEEDS} from '../data/supplyChainData.js';
+import {RESOURCE_TO_CHAINS} from '../data/supplyChainResourceIndex.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
