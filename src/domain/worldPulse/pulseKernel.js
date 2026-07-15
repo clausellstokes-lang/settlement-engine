@@ -70,6 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
+import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
@@ -329,6 +330,23 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   {
     const web = advanceCorruptionWeb({ snapshot, worldState, rng: rng.fork('corruption-web'), tick: worldState.tick });
     if (web.changed) worldState = /** @type {typeof worldState} */ (web.worldState);
+  }
+  // W-DOCTRINE-4 — SETTLEMENT POLITICS (coalitions inside the walls,
+  // DESIGN_SETTLEMENT_POLITICS.md §2/§4). AFTER the corruption-web mint so a bloc can
+  // read this tick's fresh compromise leashes (the compromise-glue class); the corruption
+  // web reads the PRIOR tick's politics ledger for its divided-court-cheap cross-read (a
+  // one-tick stagger, deterministic — blocs are sticky). Runs at faction grain, reading
+  // the current seats (seatNpcsIntoFactions @ 313) + roster: it re-validates each
+  // settlement's blocs against the live roster (rename-safe), strains them under
+  // differential peace-term burden (the revanchism mechanism), fires the defection windows
+  // (succession dissolves people-held blocs, exposure detonates compromise glue), and
+  // considers ONE new formation under the cap via a §H loaded draw the PEOPLE gate (a
+  // leader rivalry blocks a coalition their interests demand). DORMANT behind
+  // settlementPoliticsActive (settlementPoliticsEnabled + factionCompetitionEnabled) ⇒ a
+  // complete no-op (zero forks, zero ledger) — byte-identical.
+  {
+    const politics = advanceSettlementPolitics({ snapshot, worldState, rng: rng.fork('settlement-politics'), tick: worldState.tick });
+    if (politics.changed) worldState = /** @type {typeof worldState} */ (politics.worldState);
   }
   // Recompute guild strength from the UPDATED capture states for this tick's
   // settlement mirror (power floor + legitimacy cap below).

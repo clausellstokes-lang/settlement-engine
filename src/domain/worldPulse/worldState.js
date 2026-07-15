@@ -351,6 +351,14 @@ const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   // so it takes the mutable deepCloneConditionalLedger branch (NOT the FROZEN set).
   // Absent/empty ⇒ key omitted ⇒ byte-identical-dormant.
   'narrativeTempo',
+  // W-DOCTRINE-4 SETTLEMENT POLITICS — the per-settlement bloc ledger
+  // (worldState.politicsLedgers, DESIGN_SETTLEMENT_POLITICS §1): { cid → { blocs: [
+  //   { id, members[], glue[], end, strain, sinceTick, covert? } ] } }, HARD CAP 3
+  // blocs/settlement. Mutable across ticks (blocs strain/realign/dissolve), so it
+  // rides the mutable deepCloneConditionalLedger branch. Materialized ONLY when the
+  // settlementPolitics mover forms ≥1 bloc under its virtual flag; absent/empty ⇒
+  // key omitted ⇒ byte-identical-dormant (the narrativeTempo precedent). APPEND-ONLY.
+  'politicsLedgers',
 ]);
 
 // The spatial-canon MARKER (Phase 5.5 KEYSTONE) is a conditionally-present SCALAR

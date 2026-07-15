@@ -67,6 +67,12 @@ import { clamp01 } from '../../kernel/math.js';
 import { applyRelationshipPatch } from './relationshipEvolution.js';
 import { relationshipKeyFromEdge } from './relationshipState.js';
 import { advanceCredibility } from './informationStatecraft.js';
+// W-DOCTRINE-4 CROSS-SEAM (§3): the overt-politics consolidation read the recruitment
+// weight degrades on ("a consolidated coalition raises the patron's price"). A lazy
+// engine leaf → lazy engine leaf import (settlementPolitics imports NEITHER corruptionWeb
+// nor npcAgency), so the graph stays acyclic + zero first-paint bytes. Dormant politics ⇒
+// 0 consolidation ⇒ the degrade term is ×1.0 ⇒ byte-identical corruption goldens.
+import { coalitionConsolidation01 } from './settlementPolitics.js';
 
 /** The DIRECTED war-reason pair key `${from}>${to}` — from's case against to. Inlined here
  *  (NOT imported from warReasons) so the dependency runs one way only: warReasons imports THIS
@@ -148,6 +154,14 @@ export const CORRUPTION_WEB_TUNING = Object.freeze({
    *  E1d prosperity vocabulary (a poor town cannot pay its way clean). Below it the posture's
    *  effective level is scaled down proportionally (the affordability read). */
   PAY_AFFORD_FLOOR: 0.3,
+
+  // ── W-DOCTRINE-4 CROSS-SEAM: a consolidated coalition raises the patron's price ─────
+  /** DESIGN_SETTLEMENT_POLITICS §3 (the two designs are one market): a DIVIDED court
+   *  (coalitionConsolidation01 → 0) resists nothing — cheap to corrupt; a CONSOLIDATED
+   *  coalition (→ 1) DEGRADES recruitment toward this floor fraction (the patron's price
+   *  rises). 0 consolidation ⇒ ×1.0 (byte-neutral: dormant politics reads 0). Couples to
+   *  settlementPolitics.coalitionConsolidation01, the payPostures counterplay idiom. */
+  COALITION_RESIST_MAX: 0.55,
 
   // ── §4 THE FOREIGN CONSEQUENCE LANE (exposure → the blowback triple) ─────────────
   /** The baseline exposed-corruption magnitude (0..1) a revealed foreign asset mints
@@ -356,9 +370,15 @@ export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targe
   const obligation01 = obligationDebt01(worldState, targetId, patronId);
   const secrecy01 = targetSecrecy01(worldState, targetId);
   const pay01 = officialPay01(worldState, snapshot, targetId);
+  // W-DOCTRINE-4 §3: a consolidated ruling coalition in the target raises the price (a
+  // divided court is cheap). 0 when politics is dormant ⇒ byte-neutral.
+  const coalition01 = coalitionConsolidation01(worldState, String(targetId), snapshot?.byId?.get?.(String(targetId)));
   const T = CORRUPTION_WEB_TUNING;
   const boosted = channel01 * (1 + T.OBLIGATION_BOOST_MAX * obligation01);
-  const degraded = boosted * (1 - (1 - T.HIDE_DEGRADE) * secrecy01) * (1 - T.PAY_RESIST_MAX * pay01);
+  const degraded = boosted
+    * (1 - (1 - T.HIDE_DEGRADE) * secrecy01)
+    * (1 - T.PAY_RESIST_MAX * pay01)
+    * (1 - T.COALITION_RESIST_MAX * coalition01);
   return { weight: clamp01(degraded), channel01, obligation01, secrecy01, pay01 };
 }
 

@@ -73,6 +73,10 @@ import { DEFAULT_SCORING_OBJECTIVE, objectiveForArchetype } from './scoringObjec
 // receipt names the top reasons — the weights ARE the reasons.
 import { peaceCausalActive, warReasonFactor, warReasonsFor, topReasons } from './warReasons.js';
 import { peaceReasonFactor, peaceReasonsFor } from './peaceReasons.js';
+// W-DOCTRINE-4 §3: the OVERT twin of the causal war-load — the ruling bloc loads the
+// settlement's decision weights toward its END (the SAME §H kernel, receipted in the
+// visible record). Dormant / no ruling bloc ⇒ factor 1.0 ⇒ byte-identical scoring.
+import { settlementPoliticsActive, blocDecisionFactor } from './settlementPolitics.js';
 
 /** @param {string} a @param {string} b @returns {number} */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -500,9 +504,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  * @param {{ sId: any, ctx: any, aggressiveness: number, strengthFor: (id: any) => number, exhaustion: number,
  *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number,
  *   objective?: import('./scoringObjective.js').ScoringObjective,
- *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null }} args
+ *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null,
+ *   coalitionLoad?: { factorFor: (move: string) => number } | null }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -598,6 +603,17 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
         default: continue;
       }
       scored[name] = clamp01(v);
+    }
+  }
+
+  // W-DOCTRINE-4 §3: the RULING-BLOC decision load — a bounded, clamped multiplier
+  // toward the governing coalition's END (the warReasonFactor idiom, one arena in). ×1
+  // exactly for every move when politics is dormant OR no ruling bloc commands the court
+  // ⇒ the expression above is untouched ⇒ byte-identity holds.
+  if (coalitionLoad) {
+    for (const move of Object.keys(scored)) {
+      const mult = coalitionLoad.factorFor(move);
+      if (mult !== 1) scored[move] = clamp01(scored[move] * mult);
     }
   }
 
@@ -889,7 +905,11 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
         peaceFor: (/** @type {string} */ foeId) => peaceReasonFactor(worldState, sId, foeId),
       }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal });
+    // W-DOCTRINE-4 §3: the ruling-bloc decision load (null ⇒ dormant ⇒ byte-identical).
+    const coalitionLoad = settlementPoliticsActive(worldState)
+      ? { factorFor: (/** @type {string} */ move) => blocDecisionFactor(worldState, String(sId), item, move) }
+      : null;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);
