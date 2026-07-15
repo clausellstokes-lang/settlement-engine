@@ -155,6 +155,23 @@ behavior, budget raises, golden regens.
   runs to completion: E1c/E1d, W-PEACE ×3, W-DOCTRINE ×4, SM-3, W-COMPOSER-2, Surveyor S1-S7,
   SM-4, the re-grade, the soak (incl. the charter studies), the merge.
 
+- **2026-07-15 — THE GUIDANCE LAYER commissioned (owner: onboarding/instruction UX as the final
+  scope item) + THE IMMERSION LAW (owner, verbatim intent: "make sure that it is coherent and
+  cohesive with the UX, it has to seamlessly integrate with it and provide immersion rather
+  than dissociation"):** the guidance system consolidates all instructional fragments (pills,
+  what's-next popups, about/HowToUse, empty states) into ONE registry + hard concurrency budget
+  + walker (no hint may exist outside the registry); triggers = FIRSTS not time; audience lanes
+  inferred never asked; the Surveyor's-notes persona (scripted, deterministic, zero-AI — the
+  free ghost of the paid voice); the generated glossary (registry-derived, drift-proofed);
+  empty-states-as-invitations; whisper effectiveness measured via the analytics seam. THE
+  IMMERSION LAW binds every hint: same theme tokens/typography as the study (never generic
+  tooltip chrome), margin-note placement (never floating over content, never dimming/coach-marks),
+  rest-point timing (never mid-action), the two-register voice law, zero-new-chrome delivery
+  preferred (teach through existing organs: empty states, veto prose, receipts, digest,
+  compendium), and THE DISSOCIATION TEST as per-hint acceptance: "could this be screenshotted
+  and mistaken for the world's own furniture?" Design doc DESIGN_GUIDANCE_LAYER.md freezes on
+  recon return; builds as W-GUIDE in the display lane; voice-alignment pass at Surveyor S1.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
