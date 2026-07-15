@@ -474,6 +474,34 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
+  // ── The guidance registry stays a LAZY LEAF (W-GUIDE-1 §2) ───────────────
+  // Same registryProse idiom as the affordance manifest above. NON-VACUOUS by
+  // construction: the AFFORDANCE sentinel is a dead standalone `export const`
+  // that Rollup tree-shakes out of the app bundle, so its absence guard proves
+  // nothing. The guidance sentinel instead rides a LIVE property of the retained
+  // GUIDANCE_REGISTRY object a lazy consumer (FirstDossierCallouts) reads, so it
+  // survives into the lazy chunk — and we assert BOTH absence from the entry AND
+  // presence in some chunk (the real non-vacuity check).
+  it('the guidance registry is ABSENT from the entry transitive static closure', () => {
+    const { files } = entryStaticClosure();
+    const carriers = files.filter(f =>
+      readFileSync(join(assetsDir, f), 'utf-8').includes('GUIDANCE_REGISTRY_LAZY_SENTINEL'));
+    expect(
+      carriers,
+      `the guidance registry reached first paint via ${carriers.join(', ')} — it must stay a lazy leaf (registryProse idiom)`,
+    ).toHaveLength(0);
+  });
+
+  it('the guidance registry sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
+    const carriers = readdirSync(assetsDir)
+      .filter(f => f.endsWith('.js'))
+      .filter(f => readFileSync(join(assetsDir, f), 'utf-8').includes('GUIDANCE_REGISTRY_LAZY_SENTINEL'));
+    expect(
+      carriers.length,
+      'the guidance registry sentinel was tree-shaken out of every chunk — the lazy-leaf guard above would be vacuous. Ensure a lazy consumer reads the retained GUIDANCE_REGISTRY object (FirstDossierCallouts does).',
+    ).toBeGreaterThan(0);
+  });
+
   // ── First-paint byte budget (the monotone ratchet) ───────────────────────
   it(`entry static closure raw bytes stay under the first-paint budget (${CLOSURE_BUDGET_BYTES})`, () => {
     const { files } = entryStaticClosure();

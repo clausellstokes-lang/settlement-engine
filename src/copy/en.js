@@ -591,6 +591,55 @@ export const en = Object.freeze({
     },
   },
 
+  // ── Guidance layer (W-GUIDE-1) — the plain register ──────────────────────
+  // The house voice for the guidance whispers registered in
+  // src/domain/display/guidanceRegistry.js. Software about software: no persona,
+  // no second person costume. W-GUIDE-2 adds the Surveyor's-notes register
+  // (guidanceNotes) alongside these; the registry SHAPE is ready for it.
+  guidance: {
+    // The first-dossier teaching band (FirstDossierCallouts — re-registered).
+    dossierFirstCallouts: 'Three quick reads on what the engine already decided here.',
+    // The retired PostGenCoach's three steps, preserved (§5).
+    postGenCoach: {
+      read:      'Every tab is a different angle on the same place. Start with Overview.',
+      simulated: 'The rail shows the steps the engine took. Open any to see what it decided.',
+      save:      'Sign in and your work survives the tab close. Your first three saves are free.',
+    },
+    // The post-generate what's-next guide (WizardNextSteps).
+    wizardNextSteps: 'A short, state-aware list of what to do with a fresh settlement.',
+    // The return-visit resume (WelcomeBackCard).
+    welcomeBack: 'Pick up your last settlement, or forge a follow-up.',
+    // The absorbed HelpPopover compendium hints (§5) — title + body per config
+    // topic, moved out of the component's inline COMPENDIUM_HINTS. The anchor
+    // (glossaryRef) lives in the registry so the lifeline link cannot drift.
+    compendium: {
+      tradeRoute: {
+        title: 'Trade Route',
+        body: 'How goods, news, and trouble move through the settlement. Crossroads = high diversity. River = food security. Isolated = thin services, high secrets.',
+      },
+      terrain: {
+        title: 'Terrain',
+        body: 'Constrains what the settlement can produce, defend, and rely on. Coastal towns import grain; mountain holds export stone. Frontier terrains bias toward militarized institutions.',
+      },
+      culture: {
+        title: 'Culture',
+        body: 'Names, naming patterns, institution flavor, faction archetypes. Drives the prose of the place more than the math. A "germanic" town and a "south-asian" town with identical configs read very differently.',
+      },
+      monsterThreat: {
+        title: 'Monster Threat',
+        body: 'Heartland = monsters are rumor. Frontier = active patrols. Plagued = the militia is the most important institution and people lock their doors at dusk.',
+      },
+      magicLevel: {
+        title: 'Magic Level',
+        body: 'Mundane = no magical economy. Common = magic shops in cities; everyday charms in villages. High = magic is the economy. Affects institution distribution + NPC archetypes.',
+      },
+      tier: {
+        title: 'Settlement Tier',
+        body: 'Thorp through Metropolis. Each tier sets the institution count, NPC count, district count, and what kinds of stressors are likely. Bigger ≠ better; a thorp can carry one perfect hook better than a metropolis.',
+      },
+    },
+  },
+
   // ── Account page ─────────────────────────────────────────────────────────
   account: {
     setDisplayName:        'Set display name',

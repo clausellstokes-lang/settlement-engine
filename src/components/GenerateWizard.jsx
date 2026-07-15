@@ -447,7 +447,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         />
 
         <div
-          data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}
           style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden' }}
         >
           <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
@@ -462,7 +461,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           variant="primary"
           fullWidth
           onClick={handleGenerate}
-          data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
           style={{
             padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
             background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,

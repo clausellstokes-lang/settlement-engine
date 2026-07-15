@@ -214,8 +214,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
   const trackTabExplored = useStore(s => s.trackTabExplored);
-  const onboardingActive = useStore(s => s.onboardingActive);
-  const onboardingStep = useStore(s => s.onboardingStep);
   // P142 / D-6 — Table View overlay state. The trigger lives in
   // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
@@ -769,8 +767,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" />
         ) : (
           <DossierTabStrip
-            onboardingActive={onboardingActive}
-            onboardingStep={onboardingStep}
             scroll={scroll}
             scrollRef={scrollRef}
             tabs={tabs}
