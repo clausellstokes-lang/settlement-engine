@@ -14,11 +14,12 @@
  *
  * Pinned two ways (the supplyWebWarfare / peaceCausal idiom):
  *   1. A FULL-ADVANCE dormancy golden: a belief-active hostile world (a weak, hostile
- *      neighbour that WOULD seed a garrison bluff if lit) driven N ticks with the gate
- *      ABSENT, projected to a mechanical summary (the credibility + disinfo ledgers, the
+ *      neighbour that WOULD seed a garrison bluff / raise a secrecy posture / buy sight if
+ *      lit) driven N ticks with the gate ABSENT, projected to a mechanical summary (the four
+ *      W-DOCTRINE ledgers — credibility + disinfo + sightPostures + secrecyPostures — the
  *      news histogram, the candidate/roll summary), oracle-normalized + hashed.
- *   2. A dormancy CONTRACT: the dormant final world carries NEITHER a credibility NOR a
- *      disinfo ledger.
+ *   2. A dormancy CONTRACT: the dormant final world carries NONE of the four ledgers
+ *      (credibility, disinfo, sightPostures, secrecyPostures).
  *
  * (The lit-path anti-vacuity — the mover DOES seed a bluff, inflate a belief, expose it,
  * and charge credibility when lit — lives at the mover-unit level in
@@ -145,9 +146,12 @@ function projectionHash({ campaign, candidateTypes, newsKinds, rollSummary }) {
   const ledgers = ws.spatialLedgers || {};
   const projection = {
     tick: ws.tick ?? null,
-    // The doctrine's new ledgers — dormant ⇒ {} ⇒ the manifest proves they add no keys.
+    // The doctrine's ledgers — dormant ⇒ {} ⇒ the manifest proves they add no keys. W-DOCTRINE-2a:
+    // credibility + disinfo. W-DOCTRINE-2b: sightPostures (SEE) + secrecyPostures (HIDE).
     credibility: ledgers.credibility || {},
     disinfo: ledgers.disinfo || {},
+    sightPostures: ledgers.sightPostures || {},
+    secrecyPostures: ledgers.secrecyPostures || {},
     candidateTypes,
     newsKinds,
     rollSummary,
@@ -196,10 +200,13 @@ describe('information statecraft — dormancy golden (wired-but-dormant is byte-
     expect(drift).toEqual([]);
   }, 120_000);
 
-  it('dormancy CONTRACT: the gate absent adds NEITHER a credibility NOR a disinfo ledger, even in a belief-active hostile world', () => {
+  it('dormancy CONTRACT: the gate absent adds NONE of the four info-statecraft ledgers, even in a belief-active hostile world', () => {
     const { campaign } = driveTicks('is-b', false, 8, 'one_month');
-    expect(campaign.worldState?.spatialLedgers?.credibility, 'credibility must be absent when dormant').toBeUndefined();
-    expect(campaign.worldState?.spatialLedgers?.disinfo, 'disinfo must be absent when dormant').toBeUndefined();
+    const ledgers = campaign.worldState?.spatialLedgers || {};
+    expect(ledgers.credibility, 'credibility must be absent when dormant').toBeUndefined();
+    expect(ledgers.disinfo, 'disinfo must be absent when dormant').toBeUndefined();
+    expect(ledgers.sightPostures, 'sightPostures (SEE) must be absent when dormant').toBeUndefined();
+    expect(ledgers.secrecyPostures, 'secrecyPostures (HIDE) must be absent when dormant').toBeUndefined();
   }, 60_000);
 });
 

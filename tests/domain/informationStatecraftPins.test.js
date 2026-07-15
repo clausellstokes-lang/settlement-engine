@@ -25,9 +25,19 @@ import {
   lieWillingness,
   processLies,
   advanceInformationStatecraft,
+  makeSightFn,
+  sightFidelityOf,
+  processSecrecy,
+  processSight,
+  secrecyPressure,
+  sightStakes,
+  intelSaleCredibilityDeltas,
   CREDIBILITY_TUNING,
   LIE_TUNING,
+  SIGHT_TUNING,
 } from '../../src/domain/worldPulse/informationStatecraft.js';
+import { intelSalePrice } from '../../src/domain/spatial/generosityEV.js';
+import { decayedConfidence, reconcileBelief } from '../../src/domain/worldPulse/beliefMap.js';
 import { scoreBeliefConvergence } from '../../src/domain/worldPulse/peaceReasons.js';
 
 // A live-info, statecraft-lit worldState skeleton (beliefsActive + the virtual flag).
@@ -234,5 +244,155 @@ describe('W-DOCTRINE-2 — the LIE lifecycle (engage / effect / counter / negati
     // A's belief about L is inflated in the persisted maps.
     const maps = /** @type {Record<string, { seat?: Record<string, { strengthBand?: number }> }>} */ (ns.beliefMaps);
     expect(maps.A.seat?.L?.strengthBand).toBeGreaterThan(1);
+  });
+});
+
+// ═══════════════════════ W-DOCTRINE-2b — SEE / HIDE / SHARE-SELL ═══════════════════════
+
+const always = { fork: () => ({ random: () => 0 }) };
+const never = { fork: () => ({ random: () => 0.999 }) };
+const merchantItem = (id) => ({ id, settlement: { economicState: { prosperity: 'Prosperous' }, powerStructure: { factions: [{ faction: 'Council', category: 'military', power: 50, isGoverning: true }] } } });
+
+describe('W-DOCTRINE-2b — SEE (sight postures): engage / effect / counter / negative', () => {
+  const snapshot = { byId: new Map([['W', merchantItem('W')], ['T', { id: 'T' }]]), settlements: [{ id: 'W' }, { id: 'T' }] };
+  // W believes T hostile AND strong ⇒ high stakes (you watch what you fear).
+  const beliefMaps = { W: { seat: { T: rec(4, { allianceLabel: 'hostile' }) } } };
+
+  it('ENGAGE: a watcher with stakes + channel + affordability opens a COVERT sight posture (rarity-gated)', () => {
+    const res = processSight({ snapshot, priorSight: {}, secrecy: {}, beliefMaps, rng: always, tick: 0, nameFor: (/** @type {string} */ id) => id });
+    const posture = /** @type {{ covert: boolean, fidelity01: number } | undefined} */ (res.sight?.W?.T);
+    expect(posture).toBeTruthy();
+    expect(posture?.covert).toBe(true);
+    expect(posture?.fidelity01).toBeGreaterThan(0);
+    // sightStakes is monotone: a hostile, believed-strong target out-stakes a calm one.
+    expect(sightStakes({ hostile: true, believedStrongerBand01: 1, tradeDependence01: 0 }))
+      .toBeGreaterThan(sightStakes({ hostile: false, believedStrongerBand01: 0.2, tradeDependence01: 0 }));
+  });
+
+  it('EFFECT: the sight closure SLOWS this pair\'s belief decay AND FLOORS its read accuracy', () => {
+    const ws = litWorld({ sightPostures: { W: { T: { fidelity01: 1, enteredTick: 0, upkeep: 0.5, covert: true } } } });
+    const fn = makeSightFn(ws);
+    expect(fn).not.toBeNull();
+    const mod = /** @type {(a: string, b: string) => { decayKeep01: number, accuracyFloor01: number }} */ (fn)('W', 'T');
+    expect(mod.decayKeep01).toBeGreaterThan(0);
+    expect(mod.accuracyFloor01).toBeGreaterThan(0);
+    // Slower silence-decay: paid eyes keep the picture fresh.
+    expect(decayedConfidence(1, 8, mod.decayKeep01)).toBeGreaterThan(decayedConfidence(1, 8, 0));
+    // Sharper read: the accuracy floor re-anchors a garbled report closer to the truth band.
+    const gt = { readiness: 0.5, strengthBand: 4, allianceLabel: 'hostile', faithLabel: null, confidence01: 1, lastUpdateTick: 0 };
+    const reports = [{ hopCount: 3, ageTicks: 2, independentSources: 1, completeness01: 1, accuracy01: 0.1, score: 1, sortKey: 'k' }];
+    const blind = reconcileBelief({ prior: null, groundTruth: gt, reports, now: 5 });
+    const eyed = reconcileBelief({ prior: null, groundTruth: gt, reports, now: 5, sightFloor01: mod.accuracyFloor01 });
+    expect(Math.abs(eyed.strengthBand - 4)).toBeLessThan(Math.abs(blind.strengthBand - 4));
+  });
+
+  it('NEGATIVE: no stakes (a neutral neighbour) ⇒ no posture; the never-roll never engages; dormant adds no key', () => {
+    const neutral = { W: { seat: { T: rec(1, { allianceLabel: 'neutral' }) } } };
+    expect(processSight({ snapshot, priorSight: {}, secrecy: {}, beliefMaps: neutral, rng: always, tick: 0, nameFor: (/** @type {string} */ id) => id }).sight).toBeNull();
+    expect(processSight({ snapshot, priorSight: {}, secrecy: {}, beliefMaps, rng: never, tick: 0, nameFor: (/** @type {string} */ id) => id }).sight).toBeNull();
+    // makeSightFn is null when dark OR no posture ledger (byte-identity).
+    expect(makeSightFn({ spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' } })).toBeNull();
+    expect(makeSightFn(litWorld())).toBeNull();
+    // The mover adds NO sightPostures key when dormant.
+    const dark = { spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable' } };
+    expect(advanceInformationStatecraft({ snapshot, worldState: dark, tick: 0, strengthOf: () => 0.5 }).changed).toBe(false);
+  });
+});
+
+describe('W-DOCTRINE-2b — HIDE (secrecy postures) + THE SYMMETRIC-ISOLATION PIN', () => {
+  const snapshot = { settlements: [{ id: 'H' }] };
+  // H is weak (self ~band 0) and believes a hostile neighbour F is band 4 ⇒ high weakness.
+  const beliefMaps = { H: { seat: { F: rec(4, { allianceLabel: 'hostile' }) } } };
+  const paranoid = () => ({ malice01: 0.8, lawfulness01: 0.3 });
+
+  it('per-verb: a paranoid, threatened settlement RAISES a secrecy posture (rarity-gated hysteresis)', () => {
+    const sec = processSecrecy({ snapshot, priorSecrecy: {}, beliefMaps, rng: always, tick: 0, strengthOf: () => 0.05, alignmentOf: paranoid });
+    const posture = /** @type {{ level01: number } | undefined} */ (sec?.H);
+    expect(posture).toBeTruthy();
+    expect(posture?.level01).toBeGreaterThan(0);
+    // secrecyPressure is monotone in both drivers.
+    expect(secrecyPressure({ malice01: 0.9, threatenedWeakness01: 0.9 }))
+      .toBeGreaterThan(secrecyPressure({ malice01: 0.1, threatenedWeakness01: 0.1 }));
+  });
+
+  it('a calm, secure settlement does NOT hide (low concealment pressure)', () => {
+    const calm = { H: { seat: { F: rec(0, { allianceLabel: 'allied' }) } } };
+    expect(processSecrecy({ snapshot, priorSecrecy: {}, beliefMaps: calm, rng: always, tick: 0, strengthOf: () => 0.9, alignmentOf: () => ({ malice01: 0.1, lawfulness01: 0.9 }) })).toBeNull();
+  });
+
+  it('THE SYMMETRIC-ISOLATION PIN: a high secrecy posture on X degrades BOTH directions', () => {
+    const fn = makeSightFn(litWorld({ secrecyPostures: { X: { level01: 1, enteredTick: 0 } } }));
+    const mod = /** @type {(a: string, b: string) => { decayKeep01: number }} */ (fn);
+    expect(mod('observer', 'X').decayKeep01).toBeLessThan(0); // rivals' belief ABOUT X decays faster
+    expect(mod('X', 'other').decayKeep01).toBeLessThan(0);    // X's OWN inbound sight dims
+    expect(mod('p', 'q').decayKeep01).toBe(0);                // a pair untouched by X is neutral
+  });
+});
+
+describe('W-DOCTRINE-2b — the SEE↔HIDE counterplay pin', () => {
+  it('a hiding target DEGRADES the watcher\'s SEE accuracy floor', () => {
+    const clean = /** @type {(a: string, b: string) => { accuracyFloor01: number }} */ (makeSightFn(litWorld({ sightPostures: { W: { T: { fidelity01: 1, enteredTick: 0, upkeep: 0.5, covert: true } } } })));
+    const hidden = /** @type {(a: string, b: string) => { accuracyFloor01: number }} */ (makeSightFn(litWorld({ sightPostures: { W: { T: { fidelity01: 1, enteredTick: 0, upkeep: 0.5, covert: true } } }, secrecyPostures: { T: { level01: 0.8, enteredTick: 0 } } })));
+    expect(hidden('W', 'T').accuracyFloor01).toBeLessThan(clean('W', 'T').accuracyFloor01);
+  });
+
+  it('a hiding target RAISES the covert posture\'s exposure odds (and burns the eyes → the blowback triple)', () => {
+    const snapshot = { byId: new Map([['W', merchantItem('W')], ['T', { id: 'T' }]]), settlements: [{ id: 'W' }, { id: 'T' }] };
+    const beliefMaps = { W: { seat: { T: rec(4, { allianceLabel: 'hostile' }) } } };
+    const priorSight = { W: { T: { fidelity01: 0.8, enteredTick: 0, upkeep: 0.5, covert: true } } };
+    // A roll that sits ABOVE the base exposure odds but BELOW the secrecy-raised odds.
+    const midRoll = { fork: () => ({ random: () => SIGHT_TUNING.EXPOSE_BASE + 0.001 }) };
+    const open = processSight({ snapshot, priorSight, secrecy: {}, beliefMaps, rng: midRoll, tick: 1, nameFor: (/** @type {string} */ id) => id });
+    const hiding = processSight({ snapshot, priorSight, secrecy: { T: { level01: 1, enteredTick: 0 } }, beliefMaps, rng: midRoll, tick: 1, nameFor: (/** @type {string} */ id) => id });
+    // Open target: roll above base ⇒ NOT exposed ⇒ the posture survives.
+    expect(open.sight?.W?.T).toBeTruthy();
+    expect(open.deltas.find((d) => d.id === 'W')).toBeUndefined();
+    // Hiding target: the raised odds catch the watchers ⇒ credibility charge + grievance + news; eyes burned.
+    expect(hiding.deltas).toContainEqual({ id: 'W', kind: 'deception', magnitude01: SIGHT_TUNING.EXPOSE_CHARGE01 });
+    expect(hiding.grievances.find((g) => g.a === 'T' && g.b === 'W')).toBeTruthy();
+    expect(/** @type {{ kind: string }} */ (hiding.newsEntries[0]).kind).toBe('infowar_spy_exposed');
+    expect(hiding.sight?.W?.T).toBeUndefined();
+  });
+});
+
+describe('W-DOCTRINE-2b — SHARE-SELL: the self-policing market pin', () => {
+  it('a FALSE sale charges the seller (deception); a TRUE sale rewards it (proven_true)', () => {
+    expect(intelSaleCredibilityDeltas([{ sellerId: 's', accurate: false }])).toEqual([{ id: 's', kind: 'deception', magnitude01: 1 }]);
+    expect(intelSaleCredibilityDeltas([{ sellerId: 's', accurate: true }])).toEqual([{ id: 's', kind: 'proven_true', magnitude01: 1 }]);
+  });
+
+  it('THE CLOSED LOOP: a bad sale lowers the seller\'s credibility → its FUTURE sales price lower', () => {
+    const priceHonest = intelSalePrice({ fidelity01: 0.9, stakes01: 0.5, sellerCredibility01: credibilityWeight(0) }); // neutral stock
+    // A proven-false sale feeds a deception charge against the seller.
+    const charged = advanceCredibility({ worldState: litWorld(), tick: 0, deltas: intelSaleCredibilityDeltas([{ sellerId: 's', accurate: false }]) });
+    const liarWeight = credibilityWeight(credibilityScoreOf(charged.worldState, 's', 0));
+    expect(liarWeight).toBeLessThan(1);
+    // The market self-polices: bad product ⇒ the seller's next intel prices lower.
+    expect(intelSalePrice({ fidelity01: 0.9, stakes01: 0.5, sellerCredibility01: liarWeight })).toBeLessThan(priceHonest);
+  });
+});
+
+describe('W-DOCTRINE-2b — the LIE edge-grievance pin', () => {
+  const exposedDisinfo = { 'lie:L:A': { liarId: 'L', subjectId: 'L', audienceId: 'A', assertedBand: 3, trueBand: 1, seededTick: 0, lineageId: 'x' } };
+  const contradicted = { A: { seat: { L: rec(1) } } }; // re-anchored to the truth ⇒ contradiction
+
+  it('an exposed lie RETURNS a (audience→liar) grievance write (beyond the news receipt)', () => {
+    const res = processLies({ snapshot: { byId: new Map([['A', { id: 'A' }]]), settlements: [{ id: 'A' }] }, worldState: litWorld({ disinfo: exposedDisinfo }), beliefMaps: contradicted, rng: never, tick: 1, strengthOf: () => 0.5, alignmentOf: () => ({ malice01: 0.9, lawfulness01: 0.2 }), nameFor: (/** @type {string} */ id) => id });
+    expect(res.grievances).toContainEqual({ a: 'A', b: 'L', magnitude01: LIE_TUNING.EXPOSE_GRIEVANCE_W, incidentType: 'deception_betrayal' });
+  });
+
+  it('the MOVER writes the grievance onto the real relationship edge (the E1 incident machinery)', () => {
+    const ws = {
+      spatialCanonVersion: 1, simulationRules: { infoMode: 'unreliable', infoStatecraftEnabled: true }, tick: 1,
+      relationshipStates: { 'edge.A.L': { relationshipType: 'hostile', resentment: 0.2, trust: 0.1 } },
+      spatialLedgers: { disinfo: exposedDisinfo, beliefMaps: contradicted },
+    };
+    const graph = { edges: [{ id: 'edge.A.L', from: 'A', to: 'L', relationshipType: 'hostile' }] };
+    const res = advanceInformationStatecraft({ snapshot: { byId: new Map([['A', { id: 'A' }]]), settlements: [{ id: 'A' }] }, worldState: ws, graph, rng: never, tick: 1, now: '2026-01-01T00:00:00.000Z', strengthOf: () => 0.5, alignmentOf: () => ({ malice01: 0.9, lawfulness01: 0.2 }), nameFor: (/** @type {string} */ id) => id });
+    const states = /** @type {Record<string, { resentment?: number }>} */ (/** @type {{ relationshipStates?: unknown }} */ (res.worldState).relationshipStates);
+    // The exposure banked resentment on the pair edge (fed to scoreGrievance the same tick).
+    expect(Object.values(states).some((s) => Number(s.resentment) > 0.2)).toBe(true);
+    // And the exposure news receipt rode along.
+    expect(res.newsEntries.some((e) => e.kind === 'infowar_lie_exposed')).toBe(true);
   });
 });

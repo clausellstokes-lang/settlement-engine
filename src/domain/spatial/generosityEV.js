@@ -848,6 +848,7 @@ export function shouldInitiateAsk(rng, key, pressure01, baseChance = 0.15) {
 export const GENEROSITY_INSTRUMENTS = Object.freeze({
   grain_relief: { kind: 'grain_relief', conservationExact: true, live: true, note: 'The flagship: rides supplyShipments kind:relief; tolls apply; aspatial fallback = a bounded instant transfer.' },
   warning: { kind: 'warning', conservationExact: false, live: true, note: 'Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strategic advantage spent + eyes exposed), not the value received. The intel-posture coupling lands with W-DOCTRINE.' },
+  intel_sale: { kind: 'intel_sale', conservationExact: false, live: true, note: 'Statecraft §2.4 SELL lane (W-DOCTRINE-2b): intelligence sold as a priced good between NON-INTIMATE parties (distinct from the warning GIVE lane), the SELLER\'S lineage attached. Price = intelSalePrice (fidelity-discounted, stakes-scaled, CREDIBILITY-priced — a proven liar\'s product sells cheap). THE SELF-POLICING MARKET: a sale later proven false feeds a deception CredibilityDelta against the seller (informationStatecraft.intelSaleCredibilityDeltas) → its stock falls → its future sales price lower. Expressed entirely with the live credibility stock; the autonomous per-tick seller mover is deferred (design §8: no whisper-war hum). The DEMAND lane (peace disclosure terms) lands with W-PEACE.' },
   purchase: { kind: 'purchase', conservationExact: true, live: true, note: 'LIVE (E1d, design A2): the MARKET TWIN, wired as the post-REFUSE BONDED FALL-THROUGH ("you won\'t give? I\'ll pay"). Grain conserves through the same sink (computeSackFoodTransfer); payment = a prosperity BAND-STEP debit on the buyer + a bounded non-zero-sum seller income nudge (the sim\'s prosperity vocabulary — NO conserved-coin primitive, per the f3cf639e ruling X/Z). Debt-free (no obligation), no legitimacy spent (a sale is not charity). The broad shortage→surplus enumeration is deferred to the acquisition-ladder mover (W-DOCTRINE, ruling Y).' },
   credit: { kind: 'credit', conservationExact: true, live: true, note: 'LIVE (E1b, §3.4): GIVE_AS_CREDIT mints a maturity-bearing kind:credit obligation; at maturity the debtor repays (trust, debt clears) or defaults (grievance ratchet = casus-belli seam + the lender\'s hardened heart via lendAppetite).' },
   trade_overture: { kind: 'trade_overture', conservationExact: true, live: true, note: 'LIVE (E1d, design A4): the per-pair GIVE-STREAM warms a corridor — a dwell-bounded tradeOverture sub-ledger (the merchantAppetite idiom, drop-when-cold ⇒ byte-neutral) rises on each gift the pair exchanges. When warmth crosses the open threshold (with dwell) the giver opens an OVERTURE: a byte-neutral trust-nudge into the EXISTING neutral_to_trade_partner evolution rule (NEVER an autonomous edge — the f3cf639e ruling Y). Initiation routes through authorityFor (auto-applies under routine; withheld under dm_only/recommendations — ruling Z). The tradeFlow node-tally is superseded (per-node cannot express per-corridor warmth).' },
@@ -867,6 +868,34 @@ export function warningSacrifice({ strategicAdvantageSpent01 = 0, eyesExposed01 
   const adv = clamp01(finiteNumber(strategicAdvantageSpent01, 0));
   const eyes = clamp01(finiteNumber(eyesExposed01, 0));
   return clamp01(0.7 * adv + 0.5 * eyes - 0.2 * adv * eyes); // both cost, with mild overlap
+}
+
+// ── SHARE-SELL (statecraft §2.4 SELL lane) — intelligence as a priced good ──────
+export const INTEL_SALE_TUNING = Object.freeze({
+  BASE_PRICE: 1.0,       // the notional full price of a perfect, high-stakes read
+  FIDELITY_FLOOR: 0.2,   // even a hazy read carries some value (never worthless)
+  STAKES_GAIN: 0.6,      // the buyer pays more when the intel bears on high stakes (war/treaty)
+});
+
+/**
+ * THE INTEL-SALE PRICE (statecraft §2.4 SELL lane — the NUMERIC-PRICES read-model idiom):
+ * intelligence sold between NON-INTIMATE parties (distinct from the `warning` GIVE lane) at a
+ * FIDELITY-DISCOUNTED price (a garbled read sells cheap), STAKES-SCALED (worth more where it
+ * bears on a war/treaty), and CREDIBILITY-PRICED by the SELLER's credibility weight — the
+ * self-policing market: a proven liar's product is discounted, so a bad sale (which feeds a
+ * deception charge, informationStatecraft.intelSaleCredibilityDeltas) lowers its future prices.
+ * `sellerCredibility01` is the seller's centered-on-1.0 credibility WEIGHT (1.0 = neutral;
+ * < 1 a proven liar; > 1 a trusted broker). Pure, deterministic.
+ * @param {{ fidelity01?: number, stakes01?: number, sellerCredibility01?: number }} [inputs]
+ * @returns {number} the price (0 when worthless)
+ */
+export function intelSalePrice({ fidelity01 = 0, stakes01 = 0, sellerCredibility01 = 1 } = {}) {
+  const T = INTEL_SALE_TUNING;
+  const f = clamp01(finiteNumber(fidelity01, 0));
+  const s = clamp01(finiteNumber(stakes01, 0));
+  const cred = clamp(finiteNumber(sellerCredibility01, 1), 0, 2);
+  const fidelityValue = clamp01(T.FIDELITY_FLOOR + (1 - T.FIDELITY_FLOOR) * f);
+  return round4(Math.max(0, T.BASE_PRICE * fidelityValue * (1 + T.STAKES_GAIN * s) * cred));
 }
 
 // ── THE DORMANCY GATE (§6) — a virtual, defensively-read flag (no serialized default) ──

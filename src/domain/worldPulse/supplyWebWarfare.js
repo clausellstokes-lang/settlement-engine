@@ -87,6 +87,7 @@ import { assessSourceRedundancy } from '../spatial/supplyShipments.js';
 import {
   belief, readBeliefStrength, readBeliefRelationship, governingCoalition,
 } from './beliefMap.js';
+import { sightFidelityOf } from './informationStatecraft.js';
 import { computeMalice, computeLawfulness } from './disposition.js';
 import {
   settlementStrength, buildPressureSummary, getRelationshipSettlements,
@@ -316,6 +317,11 @@ export function readSupplyWeb(aggressorId, targetId, snapshot, worldState, diges
   let truePathCount = 0;
   let confidenceSum = 0;
   let confidenceCount = 0;
+  // W-DOCTRINE-2b — SEE PRICES THE WEB READ (§2.1): an active SIGHT posture the aggressor
+  // holds on the TARGET sharpens EVERY satellite read (watching the court reveals its
+  // suppliers); a posture on a specific satellite sharpens that satellite. 0 when the
+  // info-statecraft layer is dormant / no posture ⇒ byte-identical (the web goldens never lit it).
+  const targetSight = sightFidelityOf(worldState, String(aggressorId), String(targetId));
 
   for (const link of links) {
     const redundancy = assessSourceRedundancy(link.rankedSources);
@@ -332,7 +338,11 @@ export function readSupplyWeb(aggressorId, targetId, snapshot, worldState, diges
       // confidence. No record ⇒ 'unknown' — the aggressor does not know this supplier.
       const b = belief(String(aggressorId), satelliteId, worldState);
       const source = b.source;
-      const confidence01 = b.source === 'truth' ? 1 : b.source === 'belief' ? clamp01(b.record.confidence01) : 0;
+      const rawConfidence = b.source === 'truth' ? 1 : b.source === 'belief' ? clamp01(b.record.confidence01) : 0;
+      // Paid eyes sharpen the read toward certainty (SEE prices the web read, §2.1). The
+      // sight on THIS satellite or on the target, whichever is stronger. 0 ⇒ byte-identical.
+      const sightF = Math.max(targetSight, sightFidelityOf(worldState, String(aggressorId), satelliteId));
+      const confidence01 = sightF > 0 ? clamp01(rawConfidence + (1 - rawConfidence) * sightF) : rawConfidence;
       confidenceSum += confidence01;
       confidenceCount += 1;
       satellites.push({

@@ -75,7 +75,7 @@ import { advanceTreaties } from './peaceTerms.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
-import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn } from './informationStatecraft.js';
+import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
 import { appendWizardNewsEntries } from '../region/index.js';
@@ -1705,6 +1705,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       // W-DOCTRINE-2: source-credibility weight for the corroboration math (info-statecraft
       // layer lit). null when dormant / no credibility ledger ⇒ byte-identical.
       credibilityOf: makeCredibilityWeightFn(memoryState, worldState.tick),
+      // W-DOCTRINE-2b: the SEE/HIDE per-pair sight modifier (an active sight/secrecy posture
+      // slows/speeds this pair's belief decay + floors its fidelity). Reads the postures
+      // written LAST tick (read-last/write-next). null when dormant / no posture ⇒ byte-identical.
+      sightOf: makeSightFn(memoryState),
     });
     if (beliefs.changed) {
       if (beliefs.next) {
@@ -1727,8 +1731,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     const infowar = advanceInformationStatecraft({
       snapshot: postTimeSnapshot,
       worldState: memoryState,
+      graph: applied.regionalGraph,
       rng,
       tick: worldState.tick,
+      now,
       strengthOf: (/** @type {string} */ id) => {
         const it = postTimeSnapshot?.byId?.get?.(String(id));
         return it ? settlementStrength(it, buildPressureSummary(pIndex, id)) : 0;

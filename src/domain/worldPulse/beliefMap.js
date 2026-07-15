@@ -404,9 +404,12 @@ function aggregateReports(reports, credibilityOf = null) {
  * @param {BeliefReport[]} args.reports          this window's fresh reports (pre-sorted)
  * @param {number} args.now
  * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2: source-credibility weight (absent ⇒ byte-identical)
+ * @param {number} [args.sightFloor01]  W-DOCTRINE-2b: an accuracy FLOOR the observer's active
+ *   SEE posture on this subject raises the aggregate fidelity to (paid eyes sharpen the read).
+ *   ABSENT (0) ⇒ byte-identical (max(accuracy, 0) === accuracy).
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0 }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -416,7 +419,11 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
       ? { ...prior, confidence01: round4(priorConf) }
       : { ...groundTruth, confidence01: 0, lastUpdateTick: now };
   }
-  const { weight, accuracy } = aggregateReports(reports, credibilityOf);
+  const agg = aggregateReports(reports, credibilityOf);
+  const weight = agg.weight;
+  // W-DOCTRINE-2b SEE: the observer's paid eyes floor the aggregate fidelity for this pair
+  // (a sharper read of what it hears). max(accuracy, 0) === accuracy ⇒ byte-identical absent.
+  const accuracy = Math.max(clamp01(agg.accuracy), clamp01(finiteNumber(sightFloor01, 0)));
   // Numeric attributes re-anchor toward the fidelity-degraded truth (a garbled
   // telling pulls the observation toward the neutral midpoint).
   const obsStrengthBand = accuracy * groundTruth.strengthBand + (1 - accuracy) * T.NEUTRAL_STRENGTH_BAND;
@@ -447,11 +454,29 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   };
 }
 
-/** Confidence after `silentTicks` ticks of silence (pure arithmetic, no rng).
- *  @param {number} confidence01 @param {number} silentTicks @returns {number} */
-export function decayedConfidence(confidence01, silentTicks) {
+/**
+ * The silence-decay base ADJUSTED by a signed sight modifier (W-DOCTRINE-2b SEE/HIDE).
+ * decayKeep01 ∈ [-1,1]: 0 ⇒ EXACTLY BELIEF_TUNING.SILENCE_DECAY (the byte-identity anchor).
+ * Positive (an active SEE posture on the pair) pulls the base toward 1.0 — belief decays
+ * SLOWER (paid eyes keep the picture fresh). Negative (a HIDE posture on the subject and/or
+ * the observer — symmetric isolation) pulls it toward 0 — belief decays FASTER (the sealed
+ * gates and the fog behind them). Pure.
+ * @param {number} decayKeep01 @returns {number}
+ */
+function adjustedDecayBase(decayKeep01) {
+  const k = clamp(finiteNumber(decayKeep01, 0), -1, 1);
+  const base = BELIEF_TUNING.SILENCE_DECAY;
+  if (k === 0) return base; // byte-identity anchor — the absent/neutral read
+  return k > 0 ? base + (1 - base) * k : base * (1 + k);
+}
+
+/** Confidence after `silentTicks` ticks of silence (pure arithmetic, no rng). The optional
+ *  `decayKeep01` is the W-DOCTRINE-2b SEE/HIDE decay modifier — ABSENT (0) ⇒ byte-identical.
+ *  @param {number} confidence01 @param {number} silentTicks @param {number} [decayKeep01]
+ *  @returns {number} */
+export function decayedConfidence(confidence01, silentTicks, decayKeep01 = 0) {
   const n = Math.max(0, Math.floor(finiteNumber(silentTicks, 0)));
-  return clamp01(finiteNumber(confidence01, 0) * Math.pow(BELIEF_TUNING.SILENCE_DECAY, n));
+  return clamp01(finiteNumber(confidence01, 0) * Math.pow(adjustedDecayBase(decayKeep01), n));
 }
 
 // ── The relationship neighbourhood (cold-start seed + true labels) ────────────
@@ -885,9 +910,12 @@ export function applyAllyIntelSharing({ maps, ctx, neighbours, alignmentOf, now 
  * @param {Map<string, Map<string, string>>} args.neighbours
  * @param {string} args.observerId @param {number} args.now
  * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2 source-credibility weight
+ * @param {((observerId: string, subjectId: string) => { decayKeep01: number, accuracyFloor01: number }) | null} [args.sightOf]
+ *   W-DOCTRINE-2b SEE/HIDE: the per-pair sight modifier (SEE slows decay + floors fidelity;
+ *   HIDE speeds decay both directions). ABSENT / neutral ⇒ byte-identical.
  * @returns {{ bySubject: Record<string, BeliefRecord>, pruned: boolean }}
  */
-function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, credibilityOf = null }) {
+function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, credibilityOf = null, sightOf = null }) {
   const T = BELIEF_TUNING;
   const subjectIds = new Set([...Object.keys(priorSlot), ...reports.keys()].map(String));
   /** @type {Record<string, BeliefRecord>} */
@@ -907,6 +935,11 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
 
     if (!priorRec && !freshReports.length) continue; // no belief, no fresh word
 
+    // W-DOCTRINE-2b: this pair's SEE/HIDE modifier (null / {0,0} ⇒ byte-identical).
+    const sight = sightOf ? sightOf(observerId, subjectId) : null;
+    const decayKeep01 = sight ? finiteNumber(sight.decayKeep01, 0) : 0;
+    const sightFloor01 = sight ? finiteNumber(sight.accuracyFloor01, 0) : 0;
+
     // The current true relationship label observer↔subject (for the re-anchor).
     const trueType = neighbours.get(observerId)?.get(subjectId) || priorRec?.allianceLabel || 'unknown';
     const groundTruth = groundTruthBelief(subjectId, trueType, ctx, now);
@@ -914,12 +947,12 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     let record;
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
-      const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf });
+      const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01 });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
-      const conf = decayedConfidence(/** @type {BeliefRecord} */ (priorRec).confidence01, silent);
+      const conf = decayedConfidence(/** @type {BeliefRecord} */ (priorRec).confidence01, silent, decayKeep01);
       record = { .../** @type {BeliefRecord} */ (priorRec), confidence01: round4(conf) };
     }
 
@@ -952,9 +985,12 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
  * @param {((sourceId: string) => number) | null} [args.credibilityOf]  W-DOCTRINE-2:
  *   the source-credibility weight closure (info-statecraft layer lit). ABSENT ⇒ the
  *   reconciliation is byte-identical (every campaign that never lit infoStatecraftEnabled).
+ * @param {((observerId: string, subjectId: string) => { decayKeep01: number, accuracyFloor01: number }) | null} [args.sightOf]
+ *   W-DOCTRINE-2b: the SEE/HIDE per-pair sight modifier closure (info-statecraft layer lit,
+ *   a sight/secrecy posture materialized). ABSENT / neutral ⇒ byte-identical.
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -1016,7 +1052,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const seat = reconcileSlot({
       priorSlot: priorSeat,
       reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
-      ctx, neighbours, observerId, now, credibilityOf,
+      ctx, neighbours, observerId, now, credibilityOf, sightOf,
     });
     if (seat.pruned) mutated = true;
 
@@ -1033,7 +1069,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
           reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
-          ctx, neighbours, observerId, now, credibilityOf,
+          ctx, neighbours, observerId, now, credibilityOf, sightOf,
         });
         if (built.pruned) mutated = true;
         if (Object.keys(built.bySubject).length) factionSlots[archetype] = built.bySubject;
@@ -1043,7 +1079,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
           (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
-        ctx, neighbours, observerId, now, credibilityOf,
+        ctx, neighbours, observerId, now, credibilityOf, sightOf,
       });
       if (publicBuilt.pruned) mutated = true;
       if (Object.keys(publicBuilt.bySubject).length) factionSlots[PUBLIC_FACTION_KEY] = publicBuilt.bySubject;

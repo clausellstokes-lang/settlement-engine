@@ -147,6 +147,23 @@ describe('W-DOCTRINE-1 §2 — the belief-gated web read', () => {
     expect(sat.confidence01).toBe(0);
     expect(web.confidence01, 'a fog-blind aggregate read').toBeLessThan(WEBWAR_TUNING.FOG_BLIND_CONFIDENCE);
   });
+
+  it('SEE PRICES THE WEB READ (W-DOCTRINE-2b): an active sight posture on the target SHARPENS the fog-blind read', () => {
+    const { snapshot, worldState } = makeWorld();
+    // Same foggy world, but the info-statecraft layer is LIT and the aggressor holds paid eyes
+    // on the target (a sight posture) — the covert watch reveals the target's suppliers.
+    const eyed = {
+      ...worldState,
+      spatialCanonVersion: 1,
+      simulationRules: { ...worldState.simulationRules, infoMode: 'unreliable', infoStatecraftEnabled: true },
+      spatialLedgers: { sightPostures: { aggressor: { crownhold: { fidelity01: 0.9, enteredTick: 0, upkeep: 0.5, covert: true } } } },
+    };
+    const web = readSupplyWeb('aggressor', 'crownhold', { ...snapshot, worldState: eyed }, eyed, eyed.spatialDigest, buildProducerIndex(snapshot));
+    const sat = web.satellites.find((s) => s.satelliteId === 'irondell');
+    // The otherwise-fog-blind (confidence 0) read is sharpened by the paid eyes.
+    expect(sat.confidence01, 'paid eyes sharpen the web read').toBeGreaterThan(0);
+    expect(web.confidence01).toBeGreaterThan(0);
+  });
 });
 
 // ── §3 THE STRATEGIC CHOICE (direct vs indirect, time-discounted) ────────────────
