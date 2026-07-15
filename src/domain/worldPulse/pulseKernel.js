@@ -71,6 +71,7 @@ import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
+import { advanceTreaties } from './peaceTerms.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
@@ -1953,6 +1954,32 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       settlementUpdates = generosity.settlementUpdates;
       if (generosity.newsEntries.length) {
         wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
+      }
+    }
+  }
+  // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
+  // winds down through the existing sue-for-peace path (a fresh recalled.cause =
+  // sue_for_peace* stamp, not yet consumed by the war layer), the believed-stronger
+  // party mints a DURATION-CAPPED treaty from its BELIEVED advantage, spends a term
+  // budget on the loser's belief-appraised holdings (§15 prize ranking), and the
+  // terms EXECUTE (conserved tribute, the compelled-alliance overlay nudge) + accrue
+  // COMPLIANCE under fog. Runs BEFORE the causal-reason movers so a detected default
+  // feeds warReasons.treaty_default and the strain feeds the loser's resentment THIS
+  // tick. DORMANT behind peaceCausalActive ⇒ a complete no-op (zero treaty keys — the
+  // peace-causal dormancy golden, extended to fence the treaties ledger, proves it).
+  {
+    const treaties = advanceTreaties({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      graph: applied.regionalGraph,
+      pIndex,
+      tick: worldState.tick,
+      now,
+    });
+    if (treaties.changed) {
+      memoryState = treaties.worldState;
+      if (treaties.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, treaties.newsEntries, { now });
       }
     }
   }

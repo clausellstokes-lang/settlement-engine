@@ -197,6 +197,10 @@ function projectionHash({ campaign, candidateTypes, newsKinds, rollSummary }) {
     tick: ws.tick ?? null,
     warReasons: ledgers.warReasons || {},
     peaceReasons: ledgers.peaceReasons || {},
+    // W-PEACE-2: the treaties ledger is FENCED here too — dormant ⇒ {} everywhere,
+    // so the manifest (re-captured with this key present) proves the treaty engine
+    // adds ZERO keys and ZERO decision drift when the peace-engine gate is dark.
+    treaties: ledgers.treaties || {},
     deployments,
     warExhaustion: exhaustion,
     candidateTypes,
@@ -253,11 +257,13 @@ describe('peace-causal movers — dormancy golden (wired-but-dormant is byte-ide
     expect(drift).toEqual([]);
   }, 120_000);
 
-  it('dormancy CONTRACT: the gate absent adds NEITHER reason sub-ledger, even in a lit-war world', () => {
+  it('dormancy CONTRACT: the gate absent adds NEITHER reason sub-ledger NOR the treaties ledger, even in a lit-war world', () => {
     const { campaign } = driveTicks('pc-b', false, true, 8, 'one_month');
     const ledgers = campaign.worldState?.spatialLedgers || {};
     expect(ledgers.warReasons, 'warReasons ledger must be absent when dormant').toBeUndefined();
     expect(ledgers.peaceReasons, 'peaceReasons ledger must be absent when dormant').toBeUndefined();
+    // W-PEACE-2: the treaty engine is DORMANT behind the same gate.
+    expect(ledgers.treaties, 'treaties ledger must be absent when dormant').toBeUndefined();
   }, 60_000);
 });
 
