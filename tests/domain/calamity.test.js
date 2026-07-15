@@ -21,6 +21,7 @@ import {
   rollStrike,
   withinCooldown,
   disasterTypeFor,
+  disasterFlavorLabel,
   stampTitle,
   isStrikeTarget,
   selectStrikeTargets,
@@ -28,6 +29,12 @@ import {
   deathFraction,
   exodusFraction,
   resolvePopulationLoss,
+  exposureMultiplier,
+  normalizeExposure,
+  EXPOSURE_TUNING,
+  severityScaleFor,
+  severityKFactorFor,
+  CALAMITY_SEVERITY_BANDS,
 } from '../../src/domain/spatial/calamity.js';
 import { strikeCapForTier } from '../../src/domain/worldPulse/calamityKernel.js';
 import { createPRNG } from '../../src/kernel/prng.js';
@@ -95,8 +102,8 @@ describe('M11b calamity — frequency + cooldown', () => {
   });
 });
 
-describe('M11b calamity — terrain-keyed type table + the named stamp', () => {
-  it('maps each named terrain to its legible disaster', () => {
+describe('M11b calamity — terrain FLAVOR-HINT table + the BUCKET-NEUTRAL stamp (stage 0)', () => {
+  it('maps each named terrain to its cosmetic flavor hint (a suggestion, not a mechanic)', () => {
     expect(disasterTypeFor('riverside')).toBe('flood');
     expect(disasterTypeFor('forest')).toBe('fire');
     expect(disasterTypeFor('mountain')).toBe('quake');
@@ -108,9 +115,110 @@ describe('M11b calamity — terrain-keyed type table + the named stamp', () => {
     expect(disasterTypeFor(null)).toBe('storm');
   });
 
-  it('mints the named permanent stamp', () => {
-    expect(stampTitle('fire', 'Thornwood', 12)).toBe('The Great Fire of Thornwood, year 12');
-    expect(stampTitle('flood', 'Rivermouth', 7)).toBe('The Great Flood of Rivermouth, year 7');
+  it('the ENGINE stamp title speaks the BUCKET, never a disaster kind (ONE-TIME SHIFT, owner-ruled)', () => {
+    expect(stampTitle('Thornwood', 12)).toBe('The Great Calamity of Thornwood, year 12');
+    expect(stampTitle('Rivermouth', 7)).toBe('The Great Calamity of Rivermouth, year 7');
+  });
+
+  it('the flavor label is a DM SUGGESTION only — offered separately from the engine title', () => {
+    expect(disasterFlavorLabel('fire')).toBe('Great Fire');
+    expect(disasterFlavorLabel('flood')).toBe('Great Flood');
+    expect(disasterFlavorLabel('quake')).toBe('Great Quake');
+    expect(disasterFlavorLabel('storm')).toBe('Great Storm');
+    expect(disasterFlavorLabel('nonsense')).toBe('Great Calamity'); // unknown ⇒ bucket
+    expect(disasterFlavorLabel(null)).toBe('Great Calamity');
+  });
+});
+
+describe('M11b calamity — EXPOSURE LOADING (stage 0: redistributes risk, never the total)', () => {
+  it('the raw exposure multiplier is bounded [MULT_MIN, MULT_MAX] over every terrain + dwell', () => {
+    const terrains = ['riverside', 'coastal', 'desert', 'mountain', 'forest', 'hills', 'plains', 'unknown', ''];
+    for (const terrain of terrains) {
+      for (const priorStrikes of [0, 1, 3, 8, 50]) {
+        const m = exposureMultiplier({ terrain, priorStrikes });
+        expect(m).toBeGreaterThanOrEqual(EXPOSURE_TUNING.MULT_MIN);
+        expect(m).toBeLessThanOrEqual(EXPOSURE_TUNING.MULT_MAX);
+      }
+    }
+  });
+
+  it('hazard-prone terrain (riverside) is more exposed than sheltered plains', () => {
+    expect(exposureMultiplier({ terrain: 'riverside', priorStrikes: 0 }))
+      .toBeGreaterThan(exposureMultiplier({ terrain: 'plains', priorStrikes: 0 }));
+  });
+
+  it('prior calamities nudge exposure up (recurring-hazard ground) — bounded by the dwell cap', () => {
+    const a = exposureMultiplier({ terrain: 'plains', priorStrikes: 0 });
+    const b = exposureMultiplier({ terrain: 'plains', priorStrikes: 5 });
+    expect(b).toBeGreaterThan(a);
+    // The dwell term is capped: 100 priors is no worse than the cap allows.
+    const capped = exposureMultiplier({ terrain: 'plains', priorStrikes: 100 });
+    expect(capped).toBeLessThanOrEqual(EXPOSURE_TUNING.MULT_MAX);
+  });
+
+  it('THE NORMALIZATION PIN: the realm-MEAN exposure-loaded hazard equals annualHazard exactly', () => {
+    // A realm of mixed terrains + dwell histories.
+    const realm = [
+      { terrain: 'riverside', priorStrikes: 2 }, { terrain: 'plains', priorStrikes: 0 },
+      { terrain: 'coastal', priorStrikes: 1 }, { terrain: 'mountain', priorStrikes: 0 },
+      { terrain: 'forest', priorStrikes: 3 }, { terrain: 'desert', priorStrikes: 0 },
+      { terrain: 'hills', priorStrikes: 0 }, { terrain: 'plains', priorStrikes: 5 },
+    ];
+    const N = realm.length;
+    const base = annualHazard(N);
+    const factors = normalizeExposure(realm.map(exposureMultiplier));
+    const hazards = factors.map((f) => base * f);
+    const meanHazard = hazards.reduce((a, b) => a + b, 0) / N;
+    // The realm-MEAN hazard is EXACTLY the uniform base (exposure only redistributes).
+    expect(meanHazard).toBeCloseTo(base, 12);
+    // And the realm-summed hazard is still ≈ 1/HAZARD_YEARS, size-free.
+    expect(hazards.reduce((a, b) => a + b, 0)).toBeCloseTo(1 / T.HAZARD_YEARS, 12);
+    // Redistribution is REAL: the riverside seat carries more risk than the sheltered one.
+    expect(hazards[0]).toBeGreaterThan(hazards[1]);
+  });
+
+  it('normalizeExposure is total on empties + all-equal sets (uniform fallback)', () => {
+    expect(normalizeExposure([])).toEqual([]);
+    expect(normalizeExposure([1, 1, 1])).toEqual([1, 1, 1]);
+    expect(normalizeExposure([0, 0])).toEqual([1, 1]); // degenerate ⇒ uniform
+    // A single-terrain realm normalizes every factor to 1 (mean == itself).
+    const one = normalizeExposure([1.2, 1.2, 1.2]);
+    for (const f of one) expect(f).toBeCloseTo(1, 12);
+  });
+});
+
+describe('M11b calamity — FORCE severity banding (stage 0: force ≡ organic at the natural band)', () => {
+  it('the natural "moderate" band is EXACTLY scale 1.0 + K-factor 1.0 (force ≡ organic)', () => {
+    expect(severityScaleFor('moderate')).toBe(1);
+    expect(severityKFactorFor('moderate')).toBe(1);
+    // An absent/unknown band also resolves to the natural 1.0 (the organic path).
+    expect(severityScaleFor(null)).toBe(1);
+    expect(severityKFactorFor(undefined)).toBe(1);
+    expect(severityScaleFor('nonsense')).toBe(1);
+  });
+
+  it('the bands scale death/exodus WITHIN the frozen walls over every seed', () => {
+    for (const band of Object.keys(CALAMITY_SEVERITY_BANDS)) {
+      const scale = severityScaleFor(band);
+      for (let s = 0; s < 200; s++) {
+        const rng = createPRNG(`sev-${band}-${s}`).fork('x');
+        const df = deathFraction({ density01: 1, rng, severityScale: scale });
+        const ef = exodusFraction({ density01: 1, rng, severityScale: scale });
+        expect(df).toBeGreaterThanOrEqual(T.DEATH_FLOOR);
+        expect(df).toBeLessThanOrEqual(T.DEATH_MAX);
+        expect(ef).toBeGreaterThanOrEqual(T.EXODUS_FLOOR);
+        expect(ef).toBeLessThanOrEqual(T.EXODUS_MAX);
+      }
+    }
+  });
+
+  it('a NO-severity (organic) draw is byte-identical to the moderate-band draw for the same seed', () => {
+    for (let s = 0; s < 100; s++) {
+      const seedKey = `org-eq-${s}`;
+      const organic = deathFraction({ density01: 0.7, rng: createPRNG(seedKey).fork('x') });
+      const moderate = deathFraction({ density01: 0.7, rng: createPRNG(seedKey).fork('x'), severityScale: severityScaleFor('moderate') });
+      expect(organic).toBe(moderate);
+    }
   });
 });
 

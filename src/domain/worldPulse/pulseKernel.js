@@ -69,6 +69,7 @@ import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
+import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
@@ -2138,6 +2139,35 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     if (intervention.changed) memoryState = /** @type {typeof memoryState} */ (intervention.worldState);
     if (intervention.newsEntries.length) {
       wizardNews = appendWizardNewsEntries(wizardNews, intervention.newsEntries, { now });
+    }
+  }
+  // W-UPSWING — THE UPSWING MOVER (DESIGN_UPSWING.md). Runs AFTER generosity so the
+  // reconstruction arc reads THIS tick's freshest obligations (the ally-credit ledger
+  // the generosity mover just matured) + the post-calamity distress landscape. The
+  // engine's variables running UP: booms, rebuilds, golden ages as emergent readouts
+  // over the same ledger — conserved (every upswing debits a typed source), limited
+  // (absorption cap; ally aid matures the obligation), regional-or-local. Order vs the
+  // intervention mover above is free (neither reads the other's tick output; both use
+  // keyed forks, so draw order is untouched) — merge keeps landed order. DORMANT
+  // behind the virtual upswingArcsEnabled flag ⇒ a complete no-op (zero forks, zero
+  // keys) — the upswing dormancy golden proves the wired-but-dormant mover is byte-
+  // identical to pre-wire. AGGREGATE-only.
+  {
+    const upswing = advanceUpswing({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      graph: applied.regionalGraph,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (upswing.changed) {
+      memoryState = upswing.worldState;
+      settlementUpdates = upswing.settlementUpdates;
+      if (upswing.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, upswing.newsEntries, { now });
+      }
     }
   }
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war

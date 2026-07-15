@@ -58,7 +58,7 @@ import { governanceLedger } from './governanceLedger.js';
 import { magicLedger } from './magicLedger.js';
 import { healingLedger } from './healingLedger.js';
 import { defenseLedger } from './defenseLedger.js';
-import { WAR_RECOVERY_CONDITIONS } from './worldPulse/archetypeCatalog.js';
+import { WAR_RECOVERY_CONDITIONS, UPSWING_LIFT_CONDITIONS } from './worldPulse/archetypeCatalog.js';
 // DEITY_RANK_AUTHORITY is single-sourced in the dependency-free leaf
 // domain/deityConstants.js (amended W2b contract): the engine imports the LEAF,
 // never display/deityEffects.js — routing through deityEffects would close the
@@ -230,7 +230,7 @@ function cachedFactionProfiles(s) {
 // polarity clone occupation_lifted (a liberation) both RAISE the systems they
 // declare. Sourced from the war-layer archetype catalog so a new recovery
 // archetype lands here without re-typing the strings.
-const LIFT_ARCHETYPES = new Set(WAR_RECOVERY_CONDITIONS);
+const LIFT_ARCHETYPES = new Set([...WAR_RECOVERY_CONDITIONS, ...UPSWING_LIFT_CONDITIONS]);
 
 /** +1 for a recovery/lift condition, -1 for a pressure. @param {ActiveCondition} cond */
 function conditionDirection(cond) {

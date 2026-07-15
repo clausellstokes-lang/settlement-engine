@@ -374,12 +374,13 @@ describe('faction-impact ↔ condition archetype coverage (closed set)', () => {
     expect(orphans, `faction templates with no condition archetype: ${orphans.join(', ')}`).toEqual([]);
   });
 
-  it('the non-war-layer vocabularies are exactly 1:1 (all 30 impact archetypes)', () => {
+  it('the non-war-layer vocabularies are exactly 1:1 (all 33 impact archetypes)', () => {
     const exempt = new Set(WAR_LAYER_CONDITIONS_NO_FACTION_IMPACT);
     const impacts = [...supportedArchetypes()].sort();
     const conditions = [...supportedConditionArchetypes()].filter(a => !exempt.has(a)).sort();
     expect(impacts).toEqual(conditions);
-    expect(impacts).toHaveLength(30);
+    // 30 + the 3 W-UPSWING positive-polarity arcs (reconstruction / boom / flourishing).
+    expect(impacts).toHaveLength(33);
   });
 
   it('each authored archetype produces at least one delta against a full roster', () => {

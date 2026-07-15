@@ -54,6 +54,12 @@ import { stablePart } from './worldState.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { chaosPullOf, fidelityFactor } from './fidelityNoise.js';
 import { rustOf } from './martialReadiness.js';
+// W-UPSWING stage 4 — MOTIVE INTEGRATION. The extraction-upswing EV term for the deploy
+// score reads the target's economic worth (conquestFeeds) + the conqueror's OWN
+// corruption conversion leak (corruptionWeb foreignGrip). Both lazy worldPulse leaves.
+import { economicStrength01 } from './conquestFeeds.js';
+import { foreignGripOf, corruptionWebActive } from './corruptionWeb.js';
+import { upswingArcsActive } from './upswingKernel.js';
 // Phase 5.5 WAVE A — THE BELIEF MAP. The three cross-settlement reads below route
 // through the belief selector; the identity fallback (marker absent / omniscient /
 // self) returns ground truth verbatim, forking no rng ⇒ byte-exact today.
@@ -110,6 +116,42 @@ const STRATEGY_K = 3.5;
 // recall always wins its group.
 const MOVE_SEVERITY = 0.72;
 const OVERRIDE_SEVERITY = 0.95;
+
+// ── W-UPSWING stage 4 — the extraction-upswing EV term (constitution §0.5) ────
+// "An empire seeks to conquer to improve their upswings." The deploy score gains a
+// bounded, signed term = what THIS conquest buys (the target's extractable worth),
+// AFTER a flat occupation burden and — the LEAK in the pipe (§0.3c) — scaled DOWN by
+// the conqueror's OWN corruption grip (foreignGripOf: a corruption-heavy empire skims
+// its own spoils, so fewer reach the citizens the upswing serves). 0-WHEN-DARK: the
+// term is built only when upswingArcsEnabled is lit (the caller passes null otherwise)
+// ⇒ the dormant deploy expression is untouched, byte-identity holds.
+const EXTRACTION_EV_WEIGHT = 0.14;   // the max benefit weight (bounded)
+const EXTRACTION_OCCUPATION_BURDEN = 0.05; // the flat occupation-cost subtrahend
+const EXTRACTION_EV_BOUND = 0.14;    // clamp the signed term to a small band
+
+/**
+ * The bounded, signed extraction-upswing adjustment for conquering `targetId`. Reads the
+ * target's economic worth (conquestFeeds.economicStrength01) and the conqueror's OWN
+ * corruption conversion leak (corruptionWeb.foreignGripOf, 0 when the corruption web is
+ * dark). Bounded to ±EXTRACTION_EV_BOUND. Pure over the reads.
+ * @param {{ worldState: Record<string, unknown>|null|undefined,
+ *   snapshot: { byId?: { get?: (id: string) => ({ settlement?: unknown }|undefined) },
+ *     settlements?: Array<{ id?: unknown, settlement?: unknown }> },
+ *   conquerorId: string, targetId: string }} args
+ * @returns {number}
+ */
+export function extractionUpswingAdj({ worldState, snapshot, conquerorId, targetId }) {
+  const byId = snapshot?.byId?.get ? snapshot.byId.get(String(targetId)) : (snapshot?.settlements || []).find((it) => String(it?.id) === String(targetId));
+  const target = byId?.settlement;
+  if (!target) return 0;
+  const targetValue01 = clamp01(economicStrength01(/** @type {import('./conquestFeeds.js').SettlementLike} */ (target)));
+  // The conqueror's own corruption leak (0 when the corruption web is dark).
+  const leak01 = corruptionWebActive(worldState)
+    ? clamp01(foreignGripOf(worldState, /** @type {import('./corruptionWeb.js').WebSnapshot} */ (/** @type {unknown} */ (snapshot)), String(conquerorId)))
+    : 0;
+  const raw = EXTRACTION_EV_WEIGHT * targetValue01 * (1 - leak01) - EXTRACTION_OCCUPATION_BURDEN;
+  return Math.max(-EXTRACTION_EV_BOUND, Math.min(EXTRACTION_EV_BOUND, raw));
+}
 
 // M9a NON-WAR LEVERS — the house-voice copy for the merchant / church / warlord
 // moves. war-5: they no longer emit as INERT posture markers — each carries a BOUNDED,
@@ -505,9 +547,10 @@ function strategyCandidate({ move, sId, tick, severity, headline, summary, reaso
  *   rng?: RngLike, tick?: number, chaosPull?: number, rust?: number,
  *   objective?: import('./scoringObjective.js').ScoringObjective,
  *   causal?: { warFor: (id: string) => number, peaceFor: (id: string) => number } | null,
- *   coalitionLoad?: { factorFor: (move: string) => number } | null }} args
+ *   coalitionLoad?: { factorFor: (move: string) => number } | null,
+ *   extractionEV?: { adjFor: (targetId: string) => number } | null }} args
  */
-function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null }) {
+function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng = null, tick = 0, chaosPull = 0, rust = 0, objective = DEFAULT_SCORING_OBJECTIVE, causal = null, coalitionLoad = null, extractionEV = null }) {
   const sStrength = strengthFor(sId);
   const aggr = aggressiveness - 1; // signed drive ∈ ~[-0.5, 0.5]
   // The scorer (VI.3 / M9a): the move coefficients live in the OBJECTIVE descriptor;
@@ -550,6 +593,13 @@ function enumerateMoves({ sId, ctx, aggressiveness, strengthFor, exhaustion, rng
     if (causal && bestTargetId != null) {
       const warMult = causal.warFor(String(bestTargetId));
       if (warMult !== 1) deployScore = clamp01(deployScore * warMult);
+    }
+    // W-UPSWING §0.5: the bounded, signed extraction-upswing EV term — what this
+    // conquest BUYS after burden + the conqueror's corruption leak. NULL (⇒ +0) when
+    // the upswing gate is dark, so the dormant expression above is untouched.
+    if (extractionEV && bestTargetId != null) {
+      const adj = extractionEV.adjFor(String(bestTargetId));
+      if (adj !== 0) deployScore = clamp01(deployScore + adj);
     }
     scored.deploy = deployScore;
   }
@@ -909,7 +959,13 @@ export function evaluateSettlementStrategyRules(snapshot, pressureIdx, context =
     const coalitionLoad = settlementPoliticsActive(worldState)
       ? { factorFor: (/** @type {string} */ move) => blocDecisionFactor(worldState, String(sId), item, move) }
       : null;
-    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad });
+    // W-UPSWING §0.5: the extraction-upswing EV term loads the deploy score. NULL when
+    // the upswing gate is dark (upswingArcsActive reads the SAME worldState) ⇒ the
+    // deploy score is byte-identical dormant.
+    const extractionEV = upswingArcsActive(worldState)
+      ? { adjFor: (/** @type {string} */ targetId) => extractionUpswingAdj({ worldState, snapshot, conquerorId: String(sId), targetId }) }
+      : null;
+    const moves = enumerateMoves({ sId, ctx, aggressiveness, strengthFor: strengthForObs, exhaustion, rng, tick, chaosPull, rust, objective, causal, coalitionLoad, extractionEV });
     if (!moves.length) continue;
 
     const weights = softmaxWeights(moves.map((m) => m.score), STRATEGY_K);

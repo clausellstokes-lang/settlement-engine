@@ -173,6 +173,37 @@ const ARCHETYPE_IMPACTS = Object.freeze({
     ],
   },
 
+  // ── W-UPSWING positive-polarity ARC conditions (the faction response to an
+  // upswing — same register as siege_lifted). Reconstruction restores order + spends
+  // on the rebuild; a boom enriches the merchants; a flourishing warms the temples.
+  reconstruction: {
+    government: [
+      { field: 'legitimacy', delta: +5, reason: 'Rebuilding what the disaster took is the surest sign of a government that works.' },
+    ],
+    merchant: [
+      { field: 'wealth', delta: +4, reason: 'Reconstruction contracts flow to the guilds that raise the new beams.' },
+    ],
+    military: [
+      { field: 'manpower', delta: +3, reason: 'The rebuilding effort draws hands back to the settlement.' },
+    ],
+  },
+  boom: {
+    merchant: [
+      { field: 'wealth', delta: +6, reason: 'The boom fills the counting-houses.' },
+    ],
+    government: [
+      { field: 'legitimacy', delta: +4, reason: 'Prosperity is the easiest legitimacy to claim.' },
+    ],
+  },
+  flourishing: {
+    religious: [
+      { field: 'publicTrust', delta: +4, reason: 'A long peace keeps the temples warm and the tithes flowing.' },
+    ],
+    government: [
+      { field: 'legitimacy', delta: +4, reason: 'A golden age is credited to whoever holds the seat during it.' },
+    ],
+  },
+
   // ═══════════════════════════════════════════════════════════════════════
   // COVERAGE COMPLETION (E4-1): the 24 archetypes below close the gap to the
   // documented 1:1 claim in activeConditions.js — every condition archetype in

@@ -76,8 +76,14 @@ export const CALAMITY_TUNING = Object.freeze({
 });
 
 // Canonical terrain vocabulary (resolveTerrain.js): plains | hills | forest |
-// riverside | coastal | mountain | desert. The disaster a place is heir to is
-// LEGIBLE DESTINY — a riverside town's flood-year, a timber town's fire.
+// riverside | coastal | mountain | desert. THE CALAMITY BUCKET (W-UPSWING stage 0,
+// owner ruling "the flavor is for the DM; the effects we bucket into one"): the
+// terrain→type map is now a COSMETIC flavor HINT — a SUGGESTION a DM display may
+// surface or override, never an engine mechanic. Every mechanical read (K, death/
+// exodus, subsumption, sever, exodus, tier, legitimacy) is already type-blind; the
+// ENGINE's own titles/news/receipts speak the bucket ("the Great Calamity of {year}").
+// The hint is still persisted under the SAME stamp key `type` (no save-shape change),
+// so old stamps read unchanged and a DM display can offer the flavor as a suggestion.
 export const DISASTER_TYPE_BY_TERRAIN = Object.freeze({
   riverside: 'flood',
   coastal: 'storm',
@@ -89,8 +95,11 @@ export const DISASTER_TYPE_BY_TERRAIN = Object.freeze({
 });
 export const DEFAULT_DISASTER_TYPE = 'storm';
 
-// The named-stamp title fragment per type ("The Great Fire of Thornwood, year 12").
-const DISASTER_TITLE = Object.freeze({
+// The flavor-hint's SUGGESTED title fragment ("Great Fire"), for OPTIONAL DM display
+// only — the engine's own stamp title is the bucket-neutral "Great Calamity" (see
+// stampTitle). A display surface may offer this as a suggestion the DM accepts or
+// overrides with composer/dossier freetext.
+export const DISASTER_FLAVOR_TITLE = Object.freeze({
   flood: 'Great Flood', fire: 'Great Fire', quake: 'Great Quake', storm: 'Great Storm',
 });
 
@@ -127,14 +136,74 @@ export function calamityEnabled(rules) {
 
 // ── Frequency + the seeded annual draw ────────────────────────────────────────
 /**
- * The per-settlement annual hazard 1/(HAZARD_YEARS × N) — so the realm-summed
- * hazard is ≈ 1/HAZARD_YEARS per year regardless of N. Bounded to a sane (0,1).
+ * The realm BASE (mean) per-settlement annual hazard 1/(HAZARD_YEARS × N) — so the
+ * realm-summed hazard is ≈ 1/HAZARD_YEARS per year regardless of N. Bounded to a sane
+ * (0,1). EXPOSURE LOADING (stage 0) redistributes this fixed budget across settlements
+ * by a NORMALIZED terrain+dwell multiplier (see exposureMultiplier / normalizeExposure):
+ * the per-settlement hazard = base × normalized-multiplier, and the realm MEAN stays
+ * exactly this base value — exposure moves WHERE risk lands, never the total cadence.
  * @param {number} settlementCount N
  * @returns {number}
  */
 export function annualHazard(settlementCount) {
   const n = Math.max(1, Math.floor(finiteNumber(settlementCount, 1)));
   return clamp01(1 / (CALAMITY_TUNING.HAZARD_YEARS * n));
+}
+
+// ── Exposure loading (stage 0 — §H conformance, JUDGMENT: vetoable) ────────────
+// Hazard was uniform regardless of situation; this loads a bounded terrain+dwell
+// weighting so a flood plain or a repeatedly-struck "cursed ground" is more exposed
+// than a sheltered inland town — WITHOUT changing the realm's fixed strike budget.
+// The raw multiplier is bounded [MULT_MIN, MULT_MAX]; normalization across the realm
+// rescales the set so its MEAN is 1 ⇒ the mean hazard equals annualHazard exactly.
+export const EXPOSURE_TUNING = Object.freeze({
+  MULT_MIN: 0.75,
+  MULT_MAX: 1.5,
+  RISK_WEIGHT: 0.6,        // how much terrain risk drives the raw multiplier
+  DWELL_PER_PRIOR: 0.15,   // each prior calamity nudges exposure up (recurring-hazard ground)
+  DWELL_CAP: 0.6,          // bounded — prior history never dominates terrain
+});
+
+// Terrain base risk 0..1 — the flavor-hint terrains that read as hazard-prone (river
+// flood plains, storm coasts, arid storm belts) sit higher; sheltered plains lowest.
+// A WEIGHT on the shared, fixed budget — never an independent strike source.
+export const EXPOSURE_TERRAIN_RISK = Object.freeze({
+  riverside: 1.0, coastal: 0.9, desert: 0.7, mountain: 0.6, forest: 0.55, hills: 0.5, plains: 0.35,
+});
+export const DEFAULT_EXPOSURE_RISK = 0.5;
+
+/**
+ * The RAW (un-normalized) exposure multiplier for one settlement, bounded
+ * [MULT_MIN, MULT_MAX]. Terrain risk + a bounded prior-calamity dwell term. Pure.
+ * @param {{ terrain?: string | null, priorStrikes?: number }} [args]
+ * @returns {number}
+ */
+export function exposureMultiplier({ terrain, priorStrikes } = {}) {
+  const T = EXPOSURE_TUNING;
+  const key = String(terrain || '').toLowerCase();
+  const risk = /** @type {Record<string, number>} */ (EXPOSURE_TERRAIN_RISK)[key];
+  const risk01 = clamp01(typeof risk === 'number' ? risk : DEFAULT_EXPOSURE_RISK);
+  const priors = Math.max(0, Math.floor(finiteNumber(priorStrikes, 0)));
+  const dwell = Math.min(T.DWELL_CAP, T.DWELL_PER_PRIOR * priors);
+  const combined = clamp01(T.RISK_WEIGHT * risk01 + dwell);
+  return round4(T.MULT_MIN + (T.MULT_MAX - T.MULT_MIN) * combined);
+}
+
+/**
+ * Normalize a set of raw exposure multipliers so their MEAN is 1 (preserving the realm
+ * budget): each returned factor is raw / mean. An empty or all-zero set ⇒ all-1
+ * (uniform fallback). The per-settlement hazard = annualHazard(N) × factor ⇒ the realm
+ * MEAN hazard is exactly annualHazard(N). Pure.
+ * @param {number[]} rawMultipliers
+ * @returns {number[]}
+ */
+export function normalizeExposure(rawMultipliers) {
+  const arr = (Array.isArray(rawMultipliers) ? rawMultipliers : []).map((m) => finiteNumber(m, 1));
+  if (arr.length === 0) return [];
+  const sum = arr.reduce((a, b) => a + b, 0);
+  const mean = sum / arr.length;
+  if (!(mean > 0)) return arr.map(() => 1);
+  return arr.map((m) => round4(m / mean));
 }
 
 /**
@@ -162,10 +231,12 @@ export function withinCooldown(lastStampYear, year) {
   return (Number(year) - Number(lastStampYear)) < CALAMITY_TUNING.COOLDOWN_YEARS;
 }
 
-// ── Terrain-keyed type table ──────────────────────────────────────────────────
+// ── Terrain-keyed FLAVOR-HINT table (cosmetic — the DM's slot, not a mechanic) ──
 /**
- * The disaster a terrain is heir to (legible destiny). Unknown/absent terrain ⇒
- * DEFAULT_DISASTER_TYPE (a storm — the terrain-agnostic shock). Pure.
+ * The terrain's suggested disaster FLAVOR (the cosmetic hint stamped under the `type`
+ * key). Unknown/absent terrain ⇒ DEFAULT_DISASTER_TYPE (a storm — the terrain-agnostic
+ * shock). NOTHING mechanical branches on this value: it is a display suggestion only
+ * (THE CALAMITY BUCKET, stage 0). Pure.
  * @param {string | null | undefined} terrain
  * @returns {'flood'|'fire'|'quake'|'storm'}
  */
@@ -176,15 +247,25 @@ export function disasterTypeFor(terrain) {
 }
 
 /**
- * The permanent named stamp title ("The Great Fire of Thornwood, year 12"). Pure.
- * @param {'flood'|'fire'|'quake'|'storm'} type
+ * The OPTIONAL DM-facing flavor label for a hint ("Great Fire"), for a display surface
+ * that chooses to surface the suggestion. Unknown hint ⇒ the bucket label. Pure.
+ * @param {string | null | undefined} type  the persisted flavor hint
+ * @returns {string}
+ */
+export function disasterFlavorLabel(type) {
+  return /** @type {Record<string, string>} */ (DISASTER_FLAVOR_TITLE)[String(type || '')] || 'Great Calamity';
+}
+
+/**
+ * The permanent stamp title — BUCKET-NEUTRAL by constitution ("The Great Calamity of
+ * Thornwood, year 12"). The engine never asserts a disaster kind; the flavor hint is a
+ * separate persisted field a DM display may surface. Pure.
  * @param {string} settlementName
  * @param {number} year
  * @returns {string}
  */
-export function stampTitle(type, settlementName, year) {
-  const great = /** @type {Record<string, string>} */ (DISASTER_TITLE)[type] || 'Great Calamity';
-  return `The ${great} of ${settlementName}, year ${year}`;
+export function stampTitle(settlementName, year) {
+  return `The Great Calamity of ${settlementName}, year ${year}`;
 }
 
 // ── The strike — bounded selection of non-required institutions ───────────────
@@ -290,35 +371,67 @@ export function planInstitutionFate({ name, demotesTo, alreadyStanding, category
   return { name: target, fate: 'destroy', demotedTo: null, collapsedAway: [] };
 }
 
+// ── FORCE severity banding (stage 0c — the DM dial; force ≡ organic at 'moderate') ─
+// A FORCE_CALAMITY severity dial scales the death/exodus draws and the K cap WITHIN
+// the existing walls (DEATH_MAX 0.14 / EXODUS_MAX 0.26 stay the ceiling; the FLOORs
+// the floor). At the DEFAULT 'moderate' band the scale is EXACTLY 1.0 and the K
+// factor 1.0 ⇒ a forced strike is byte-identical to an organic one for the same seed
+// (the force≡organic pin). Nothing on the organic path passes a severityScale, so the
+// annual draw is untouched.
+export const CALAMITY_SEVERITY_BANDS = Object.freeze({
+  minor: { scale: 0.7, kFactor: 0.5 },
+  moderate: { scale: 1.0, kFactor: 1.0 },
+  severe: { scale: 1.3, kFactor: 1.0 },
+});
+export const DEFAULT_CALAMITY_SEVERITY = 'moderate';
+
+/** The death/exodus scale for a severity band (unknown ⇒ the natural 1.0). Pure.
+ * @param {string | null | undefined} band @returns {number} */
+export function severityScaleFor(band) {
+  const b = /** @type {Record<string, {scale:number}>} */ (CALAMITY_SEVERITY_BANDS)[String(band || '')];
+  return b ? b.scale : 1;
+}
+
+/** The K-cap factor for a severity band (unknown ⇒ the natural 1.0). Pure.
+ * @param {string | null | undefined} band @returns {number} */
+export function severityKFactorFor(band) {
+  const b = /** @type {Record<string, {kFactor:number}>} */ (CALAMITY_SEVERITY_BANDS)[String(band || '')];
+  return b ? b.kFactor : 1;
+}
+
 // ── Aggregate population loss (bounded, tier-scaled, seeded) ───────────────────
 /**
  * The immediate DEATH fraction (0..DEATH_MAX): base + tier density scale + seeded
- * jitter, clamped to [DEATH_FLOOR, DEATH_MAX]. Aggregate-only (a fraction of a
- * count). Pure over the rng.
- * @param {{ density01?: number, rng?: { random: () => number } | null }} [args]
+ * jitter, scaled by an optional severity factor, clamped to [DEATH_FLOOR, DEATH_MAX].
+ * Aggregate-only (a fraction of a count). severityScale defaults to 1 (the organic
+ * path never passes it ⇒ byte-identical). Pure over the rng.
+ * @param {{ density01?: number, rng?: { random: () => number } | null, severityScale?: number }} [args]
  * @returns {number}
  */
-export function deathFraction({ density01, rng } = {}) {
+export function deathFraction({ density01, rng, severityScale } = {}) {
   const T = CALAMITY_TUNING;
   const d = clamp01(finiteNumber(density01, 0));
   const jitter = (draw(rng) * 2 - 1) * T.DEATH_JITTER;
-  const raw = T.DEATH_BASE + T.DEATH_TIER_SCALE * d + jitter;
+  const scale = finiteNumber(severityScale, 1);
+  const raw = (T.DEATH_BASE + T.DEATH_TIER_SCALE * d + jitter) * scale;
   return round4(Math.min(T.DEATH_MAX, Math.max(T.DEATH_FLOOR, raw)));
 }
 
 /**
  * The EXODUS fraction (0..EXODUS_MAX) of the SURVIVING population: base + tier
- * scale + seeded jitter, clamped to [EXODUS_FLOOR, EXODUS_MAX]. Larger than the
- * death toll (the exodus is the real depopulator) but bounded — the town empties,
- * it is never annihilated. Pure over the rng.
- * @param {{ density01?: number, rng?: { random: () => number } | null }} [args]
+ * scale + seeded jitter, scaled by an optional severity factor, clamped to
+ * [EXODUS_FLOOR, EXODUS_MAX]. Larger than the death toll (the exodus is the real
+ * depopulator) but bounded — the town empties, it is never annihilated. severityScale
+ * defaults to 1 (the organic path never passes it). Pure over the rng.
+ * @param {{ density01?: number, rng?: { random: () => number } | null, severityScale?: number }} [args]
  * @returns {number}
  */
-export function exodusFraction({ density01, rng } = {}) {
+export function exodusFraction({ density01, rng, severityScale } = {}) {
   const T = CALAMITY_TUNING;
   const d = clamp01(finiteNumber(density01, 0));
   const jitter = (draw(rng) * 2 - 1) * T.EXODUS_JITTER;
-  const raw = T.EXODUS_BASE + T.EXODUS_TIER_SCALE * d + jitter;
+  const scale = finiteNumber(severityScale, 1);
+  const raw = (T.EXODUS_BASE + T.EXODUS_TIER_SCALE * d + jitter) * scale;
   return round4(Math.min(T.EXODUS_MAX, Math.max(T.EXODUS_FLOOR, raw)));
 }
 
@@ -328,13 +441,13 @@ export function exodusFraction({ density01, rng } = {}) {
  * (a fraction of the SURVIVORS). Bounded by construction: deaths + exodus < the
  * population (both fractions < 1 and applied in sequence), so a settlement is
  * emptied toward its floor, never below zero. Pure over the rng.
- * @param {{ population?: number, density01?: number, rng?: { random: () => number } | null }} [args]
+ * @param {{ population?: number, density01?: number, rng?: { random: () => number } | null, severityScale?: number }} [args]
  * @returns {{ deaths: number, exodus: number, deathFrac: number, exodusFrac: number }}
  */
-export function resolvePopulationLoss({ population, density01, rng } = {}) {
+export function resolvePopulationLoss({ population, density01, rng, severityScale } = {}) {
   const pop = Math.max(0, Math.floor(finiteNumber(population, 0)));
-  const deathFrac = deathFraction({ density01, rng });
-  const exodusFrac = exodusFraction({ density01, rng });
+  const deathFrac = deathFraction({ density01, rng, severityScale });
+  const exodusFrac = exodusFraction({ density01, rng, severityScale });
   const deaths = Math.min(pop, Math.floor(pop * deathFrac));
   const survivors = pop - deaths;
   const exodus = Math.min(survivors, Math.floor(survivors * exodusFrac));
