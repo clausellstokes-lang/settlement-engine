@@ -176,6 +176,26 @@ behavior, budget raises, golden regens.
   COMPLETELY. Builds as W-GUIDE-1/2 in the display lane; S1 voice-alignment pass; the
   criterion gains its final clause (every mechanism ships its registered whisper).
 
+- **2026-07-15 — W-INTERVENTION commissioned (owner, two-message spec; the engine reopens by one
+  coupling wave):** foreign armies may join a settlement's INTERNAL contest (coup/rebellion/bloc
+  showdown) on either side — empire-retention (grip/vassal treaties → prop the incumbent),
+  regime-change (hostile edge + challenger affinity or a corruption leash on the challenger →
+  back the rebels), protect-investment (debtor/trade/compelled-alliance obligations), kinship
+  (§G ties), and DENIAL (counter-intervention). OWNER ADDENDUM (verbatim intent): "a different
+  army for an opposite purpose can join the scene to help or be a counterforce — the ending
+  results in the same as though a battle happened and the loser retreats." → Opposing
+  intervention forces resolve through the EXISTING collision/battle machinery VERBATIM (loser
+  RETREATS via the standing transit semantics), THEN the surviving side's bounded support term
+  tilts the coup/contest verdict. Design recommendations (vetoable at freeze): proxy stays proxy
+  — a sponsors' clash mints typed casus/grievance between the sponsors but never auto-declares
+  war (the reasons machinery decides escalation); invited-vs-uninvited legitimacy asymmetry;
+  collateral grievance from the contested town against whoever made its square a battlefield;
+  installed regimes OWE (E1 gratitude/obligation mint — the client-state drift the corruption
+  web reads); overstay transitions to the occupation machinery; non-intervention clauses join
+  the W-PEACE term catalog; E0-classed rarity; state-never-fate (powers installed, persons
+  never resolved). Builds as W-INTERVENTION before W-COMPOSER-2 (its verbs join the realm
+  manifest lift). Design doc DESIGN_INTERVENTION.md freezes on recon return.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
