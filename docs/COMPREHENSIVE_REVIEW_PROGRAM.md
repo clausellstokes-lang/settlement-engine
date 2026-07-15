@@ -194,7 +194,17 @@ behavior, budget raises, golden regens.
   web reads); overstay transitions to the occupation machinery; non-intervention clauses join
   the W-PEACE term catalog; E0-classed rarity; state-never-fate (powers installed, persons
   never resolved). Builds as W-INTERVENTION before W-COMPOSER-2 (its verbs join the realm
-  manifest lift). Design doc DESIGN_INTERVENTION.md freezes on recon return.
+  manifest lift). DESIGN_CONVERGENCE.md FROZEN @ c88e0129 (the multi-sided law, intervention,
+  reactive war). NAVAL ADDENDA (owner): navies convoy own/allied armies on water routes; two
+  hostile navies meeting = a sea battle with LAND-PARITY semantics (loser retreats to port; an
+  army at sea shares its convoy's fate); and **"A BLOCKADE IS THE SAME AS A SIEGE"** (owner law,
+  verbatim) — a naval blockade of a port MINTS A SIEGE through the existing machinery: the
+  interdiction term resolveSiegeVerdict already carries is the hook, water supply lines cut feed
+  the same starvation/capitulation reads, blockade-running rides the M7 smuggle machinery by
+  sea, a relief fleet lifts the blockade via the convergence law (sea battle, loser retreats),
+  land-siege + blockade = combined arms under one aim-group, and blockade feeds the
+  economic_strangulation peace reason. DESIGN_NAVY.md freezes on the naval recon's return with
+  this as its spine. Covert-leak chip session ENDED — harvest queued.
 
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
