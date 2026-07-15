@@ -24,7 +24,7 @@ import { captureEventUndoSnapshot } from './undoEvent.js';
  * @param {SystemState} args.systemState  before-state for the log entry
  * @param {Event}  args.event
  * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
- * @returns {{ logEntry: EventLogEntry, nextSystemState: SystemState, nextSettlement: Object }}
+ * @returns {{ logEntry: EventLogEntry, nextSystemState: SystemState, nextSettlement: Object, veto: import('./eventPipeline.js').PipelineWarning|null }}
  */
 export function applyEvent({ settlement, systemState, event, now = null }) {
   const beforeState = systemState || deriveSystemState(settlement);
@@ -34,6 +34,10 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
   // now record a deterministic null appliedAt.
   const appliedAt = timedEvent?.timestamp || timedEvent?.createdAt || now || null;
   const result = runEventPipeline(settlement, event, { now: appliedAt });
+  // Handler-veto channel (Composer V2 §2): the pipeline refused the mutation, so
+  // nothing may commit. Surface the refusal; callers (store applyEvent, the
+  // queued-event drain) bail before logging/persisting on a non-null veto.
+  const veto = (result.warnings || []).find(w => w.severity === 'veto') || null;
 
   // Pre-event snapshot of the authored records whose writes aren't exactly
   // reversible from provenance (resource / trade-good / stressor events —
@@ -62,5 +66,6 @@ export function applyEvent({ settlement, systemState, event, now = null }) {
     logEntry,
     nextSystemState: result.afterSystemState,
     nextSettlement: result.nextSettlement,
+    veto,
   };
 }

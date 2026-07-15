@@ -19,6 +19,8 @@
  * `classifyInstitution` without touching this registry.
  */
 
+import { sev01 } from './mutateHelpers.js';
+
 /** @typedef {import('../types.js').EventType} EventType */
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../types.js').SystemState} SystemState */
@@ -105,63 +107,6 @@ const INSTITUTION_KIND_DELTAS = {
 };
 
 /**
- * The subsystem keys an event of a given type touches. `batch.js` reads this to
- * tell the DM which subsystems a batch of events affects (the batch-preview
- * "affected subsystems" list). Descriptive metadata only — there is no
- * step-level partial-rerun engine (it was retired); edits do a full same-seed
- * regen and derived state is recomputed on demand. Keep the lists tight so the
- * preview reads honestly.
- */
-export const RERUN_KEYS_FOR_EVENT = {
-  ADD_INSTITUTION:    ['institutions', 'services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  REMOVE_INSTITUTION: ['institutions', 'services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  DAMAGE_INSTITUTION: ['services', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  DEPLETE_RESOURCE:   ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  CUT_TRADE_ROUTE:    ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  ADD_NPC:                ['npcs', 'powerStructure', 'narrative'],
-  KILL_NPC:               ['npcs', 'powerStructure', 'institutions', 'narrative'],
-  ASSIGN_NPC_TO_ROLE:     ['npcs', 'institutions', 'powerStructure', 'narrative'],
-  IMPAIR_INSTITUTION:     ['institutions', 'services', 'economicState', 'narrative'],
-  RESTORE_INSTITUTION:    ['institutions', 'services', 'economicState', 'narrative'],
-  IMPAIR_FACTION:         ['powerStructure', 'narrative'],
-  RESTORE_FACTION:        ['powerStructure', 'narrative'],
-  ADD_FACTION:            ['powerStructure', 'narrative'],
-  // Wave 1 extended events.
-  KILL_LEADER:            ['npcs', 'powerStructure', 'institutions', 'narrative'],
-  EXPOSE_CORRUPTION:      ['powerStructure', 'institutions', 'economicState', 'narrative'],
-  IMPOSE_CORRUPTION:      ['npcs', 'powerStructure', 'narrative'],
-  REFUGEE_WAVE:           ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-  PLAGUE:                 ['demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-  RAID_OR_MONSTER_ATTACK: ['institutions', 'economicState', 'narrative'],
-  // Phase 24 / Tier 4.11 — player intervention events
-  REMOVED_THREAT:         ['economicState', 'powerStructure', 'narrative'],
-  BROKERED_ALLIANCE:      ['powerStructure', 'narrative'],
-  SETTLEMENT_DISPUTE:     ['powerStructure', 'narrative'],
-  STARTED_RIOT:           ['powerStructure', 'economicState', 'narrative'],
-  OPENED_TRADE_ROUTE:     ['activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  RECOVERED_RESOURCE:     ['resources', 'activeChains', 'economicState', 'narrative'],
-  DESTROY_SETTLEMENT:     ['economicState', 'powerStructure', 'narrative'],
-  // Coup d'état wave — authored crises + transfers of the governing seat.
-  APPLY_STRESSOR:         ['powerStructure', 'economicState', 'narrative'],
-  CHANGE_RULING_POWER:    ['powerStructure', 'npcs', 'narrative'],
-  // Editor roster wave — the Roster's add/remove vocabulary as first-class canon events.
-  RESOLVE_STRESSOR:       ['powerStructure', 'economicState', 'narrative'],
-  ADD_TRADE_GOOD:         ['economicState', 'narrative'],
-  REMOVE_TRADE_GOOD:      ['economicState', 'narrative'],
-  ADD_RESOURCE:           ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  REMOVE_RESOURCE:        ['resources', 'activeChains', 'foodSecurity', 'economicState', 'narrative'],
-  PROMOTE_NPC:            ['npcs', 'powerStructure', 'narrative'],
-  DEMOTE_NPC:             ['npcs', 'powerStructure', 'narrative'],
-  // Assigning a patron deity (or imposing a cult beneath it) re-derives the
-  // religion substrate (the deity term in deriveReligiousAuthority) + narrative.
-  SET_PRIMARY_DEITY:      ['powerStructure', 'narrative'],
-  IMPOSE_CULT:            ['powerStructure', 'narrative'],
-  // A forced tier shift rebands population and performs institution roster surgery, so it
-  // re-derives the broad structural surface (institutions + demand/food + economy + power).
-  SHIFT_TIER:             ['institutions', 'demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
-};
-
-/**
  * The full event registry. Each entry produces:
  *   - stateDeltas(event, settlement) → partial SystemState additive numbers
  *   - narrate(event, settlement)     → one-line DM-facing summary
@@ -207,11 +152,11 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       // Damage scaled by severity (default 0.7) — burning the granary at
       // severity 1.0 hurts as much as removal; vandalizing it at 0.3
       // costs much less.
-      const sev = Number(event.payload?.severity ?? 0.7);
+      const sev = sev01(event.payload?.severity, 0.7);
       return scale(base, sev);
     },
     narrate(event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
+      const sev = sev01(event.payload?.severity, 0.7);
       const word = sev >= 0.85 ? 'gutted' : sev >= 0.5 ? 'damaged' : 'partly damaged';
       return `The ${labelOf(event.targetId)} was ${word}.`;
     },
@@ -349,7 +294,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Impair institution',
     requiresTarget: true,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.5);
+      const sev = sev01(event.payload?.severity, 0.5);
       return { resilience: -Math.round(sev * 12), volatility: +Math.round(sev * 6) };
     },
     narrate(event) {
@@ -369,7 +314,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Impair faction',
     requiresTarget: true,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.5);
+      const sev = sev01(event.payload?.severity, 0.5);
       return { volatility: +Math.round(sev * 10) };
     },
     narrate(event) {
@@ -420,7 +365,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Expose corruption',
     requiresTarget: true,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
+      const sev = sev01(event.payload?.severity, 0.7);
       return {
         resilience: -Math.round(sev * 8),
         volatility: +Math.round(sev * 14),
@@ -436,7 +381,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     requiresTarget: true,
     stateDeltas(event) {
       // Covert — a quieter destabiliser than the public collapse of EXPOSE_CORRUPTION.
-      const sev = Number(event.payload?.severity ?? 0.5);
+      const sev = sev01(event.payload?.severity, 0.5);
       return {
         resilience: -Math.round(sev * 5),
         volatility: +Math.round(sev * 8),
@@ -471,7 +416,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Plague',
     requiresTarget: false,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         resilience: -Math.round(sev * 18),
         volatility: +Math.round(sev * 12),
@@ -488,7 +433,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Raid or monster attack',
     requiresTarget: false,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         externalThreat: +Math.round(sev * 22),
         resilience: -Math.round(sev * 10),
@@ -507,7 +452,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Removed threat',
     requiresTarget: false,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         externalThreat: -Math.round(sev * 18),
         resilience:     +Math.round(sev * 8),
@@ -537,7 +482,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Started riot',
     requiresTarget: false,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+      const sev = sev01(event.payload?.severity, 0.6);
       return {
         volatility: +Math.round(sev * 16),
         resilience: -Math.round(sev * 10),
@@ -567,7 +512,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Recovered resource',
     requiresTarget: true,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.7);
+      const sev = sev01(event.payload?.severity, 0.7);
       return {
         resourcePressure: -Math.round(sev * 16),
         resilience:       +Math.round(sev * 8),
@@ -584,7 +529,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     label: 'Apply stressor',
     requiresTarget: true,
     stateDeltas(event) {
-      const sev = Number(event.payload?.severity ?? 0.6);
+      const sev = sev01(event.payload?.severity, 0.6);
       const type = String(event.payload?.stressorType || event.targetId || '').toLowerCase();
       const external = /siege|occup|wartime|war\b|monster|raider/.test(type);
       const scarcity = /famine|market|indebt|debt|migration/.test(type);

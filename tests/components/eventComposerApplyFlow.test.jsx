@@ -7,8 +7,10 @@
  *   1. Apply is always offered — preview is an optional look-ahead, not a
  *      gate. Applying without a preview commits the form as built (and the
  *      DESTROY_SETTLEMENT type-the-name confirm gate still applies).
- *   2. With a preview pending, Apply still commits exactly the previewed
- *      event (the audit's preview==apply invariant).
+ *   2. THE STALENESS LAW (Composer V2 §5, W-COMPOSER-1): the old
+ *      apply-prefers-pendingPreview bypass is RETIRED. Apply ALWAYS builds
+ *      from the current form — a stale stored preview can never commit, and
+ *      a pending preview no longer bypasses canSubmit.
  *   3. A successful apply on a NARRATED save raises StaleNarrativeModal
  *      (the prose was written against the previous state). Raw saves get
  *      no modal. "Continue with raw simulation" closes without any AI
@@ -28,9 +30,12 @@ import { EVENT_REGISTRY } from '../../src/domain/events/registryFull.js';
 // point; a selector-over-plain-object stub keeps the real store (persist,
 // supabase, analytics) out of the render. Reassigned per test via baseState.
 let state;
-vi.mock('../../src/store/index.js', () => ({
-  useStore: (selector) => selector(state),
-}));
+vi.mock('../../src/store/index.js', () => {
+  const useStore = (selector) => selector(state);
+  // The live-preview effect reads the freshest pendingPreview off the store.
+  useStore.getState = () => state;
+  return { useStore };
+});
 
 function baseState(overrides = {}) {
   return {
@@ -44,7 +49,6 @@ function baseState(overrides = {}) {
     },
     previewEvent: vi.fn(),
     applyEvent: vi.fn((event) => ({ event })),
-    applyPendingPreview: vi.fn(() => ({ event: {} })),
     dismissPreview: vi.fn(),
     pendingPreview: null,
     previewEventBatch: vi.fn(),
@@ -61,13 +65,18 @@ function baseState(overrides = {}) {
     requestNarrative: vi.fn(),
     aiSettlement: null,
     aiDailyLife: null,
+    // Composer V2 surfaces.
+    composerIntent: null,
+    stageComposerIntent: vi.fn(),
+    isSettlementClockBound: () => false,
     ...overrides,
   };
 }
 
-/** Pick an event type in the composer's Event dropdown (the first select). */
+/** Pick an event type in the composer's Event dropdown (by accessible name —
+ *  the ComposerNavigator renders its own selects before it). */
 function pickEventType(container, type) {
-  fireEvent.change(container.querySelector('select'), { target: { value: type } });
+  fireEvent.change(screen.getByLabelText('Event type'), { target: { value: type } });
 }
 
 afterEach(() => {
@@ -96,8 +105,6 @@ describe('EventComposer — Apply without a preview', () => {
     const applied = state.applyEvent.mock.calls[0][0];
     expect(applied.type).toBe('ADD_NPC');
     expect(applied.targetId).toBe('Mira the Bold');
-    // Direct apply, not the preview path.
-    expect(state.applyPendingPreview).not.toHaveBeenCalled();
     // No Cancel button without a preview to dismiss.
     expect(screen.queryByRole('button', { name: /Cancel/ })).toBeNull();
     // Raw save (no narrative): nothing can go stale, so no modal.
@@ -125,20 +132,71 @@ describe('EventComposer — Apply without a preview', () => {
     expect(state.applyEvent.mock.calls[0][0].type).toBe('DESTROY_SETTLEMENT');
   });
 
-  test('with a preview pending, Apply commits the previewed event (audit invariant) and Cancel is offered', () => {
+  test('STALENESS LAW: a pending preview no longer bypasses canSubmit — a stale preview cannot commit', () => {
+    // A stored preview for a DIFFERENT event than the (incomplete) form: under
+    // the retired bypass this enabled Apply and committed the stale event.
     state = baseState({
       pendingPreview: {
         event: { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' },
         deltas: [], factionResponses: [], warnings: [],
         narrativeSummary: 'Mira dies.',
+        _previewKey: 'stale-key', _forSettlement: null,
       },
     });
     render(<EventComposer />);
 
-    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
-    expect(state.applyPendingPreview).toHaveBeenCalledTimes(1);
+    // The form (ADD_INSTITUTION, no target) does not submit — and the stored
+    // preview must NOT re-enable Apply.
+    const apply = screen.getByRole('button', { name: /Apply to Timeline/ });
+    expect(apply.disabled).toBe(true);
+    fireEvent.click(apply);
     expect(state.applyEvent).not.toHaveBeenCalled();
+    // The pane renders the stored preview as visibly STALE.
+    expect(screen.getByText(/Preview is stale/)).toBeTruthy();
+    // Cancel (dismiss the stale pane) is still offered.
     expect(screen.getByRole('button', { name: /Cancel/ })).toBeTruthy();
+  });
+
+  test('STALENESS LAW: with a stale preview pending, Apply commits the EDITED form event, never the stored one', () => {
+    state = baseState({
+      pendingPreview: {
+        event: { id: 'ev_1', type: 'KILL_NPC', targetId: 'mira' },
+        deltas: [], factionResponses: [], warnings: [],
+        narrativeSummary: 'Mira dies.',
+        _previewKey: 'stale-key', _forSettlement: null,
+      },
+    });
+    const { container } = render(<EventComposer />);
+
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Fresh Person' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+    expect(state.applyEvent).toHaveBeenCalledTimes(1);
+    const applied = state.applyEvent.mock.calls[0][0];
+    expect(applied.type).toBe('ADD_NPC');           // the FORM event…
+    expect(applied.targetId).toBe('Fresh Person');
+    expect(applied.id).not.toBe('ev_1');            // …never the stale preview's
+  });
+
+  test('a veto refusal blocks: no reset, the refusal renders, nothing logs stale-modal', () => {
+    state = baseState({
+      aiSettlement: { thesis: 'old prose' }, // narrated — but a veto must NOT raise the modal
+      applyEvent: vi.fn(() => ({ ok: false, veto: { code: 'npc_not_found', message: 'No NPC "X" to remove.' } })),
+    });
+    const { container } = render(<EventComposer />);
+    pickEventType(container, 'ADD_NPC');
+    fireEvent.change(
+      screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt),
+      { target: { value: 'Mira the Bold' } },
+    );
+    fireEvent.click(screen.getByRole('button', { name: /Apply to Timeline/ }));
+    expect(screen.getByText(/The world refuses/)).toBeTruthy();
+    // The form was NOT reset (the DM retargets rather than retyping).
+    expect(screen.getByPlaceholderText(EVENT_REGISTRY.ADD_NPC.targetPrompt).value).toBe('Mira the Bold');
+    expect(screen.queryByRole('dialog')).toBeNull();
   });
 });
 

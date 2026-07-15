@@ -134,6 +134,10 @@ export const OPERATIONS = Object.freeze({
   setActiveCampaign: { opType:'setActiveCampaign', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   queueSettlementEvent: { opType:'queueSettlementEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   cancelQueuedEvent: { opType:'cancelQueuedEvent', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
+  // Composer V2 §4 — target-first / SuccessorPrompt injection staging. Writes
+  // only the transient composerIntent field (registered rather than exempt:
+  // the K-D exempt ledger sits at its shrink-only ceiling).
+  stageComposerIntent: { opType:'stageComposerIntent', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   reorderCampaignSettlements: { opType:'reorderCampaignSettlements', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   ensureCampaignRegionalGraph: { opType:'ensureCampaignRegionalGraph', klass:'mechanical', slice:'campaignRegionalSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
   setRegionalChannelStatus: { opType:'setRegionalChannelStatus', klass:'mechanical', slice:'campaignRegionalSlice', targetScope:'campaign', receiptRef:null, undoToken:null },

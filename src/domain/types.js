@@ -157,6 +157,8 @@
  *  @property {string} narrativeSummary
  *  @property {string[]} affectedSteps        which pipeline steps would re-run
  *  @property {CoherenceWarning[]} warnings   coherence issues introduced by the event
+ *  @property {string=} _previewKey           THE STALENESS LAW (Composer V2 §5): the payload key
+ *  @property {Object|null=} _forSettlement   …and the settlement reference the preview derived from
  *  @property {Array<Object>=} causalStateDeltas          Phase 18 substrate diff
  *  @property {Array<Object>=} factionRelationshipDeltas  Phase 14 structured faction deltas
  *

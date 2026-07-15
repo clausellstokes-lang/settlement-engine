@@ -6,17 +6,32 @@
  */
 
 import { SP, CARD, GOLD, R, FS, sans, INK, MUTED, SECOND, swatch } from '../../theme.js';
+import { vetoProse } from '../../../domain/events/affordanceManifest.js';
 import { PARTY, PARTY_BG } from './helpers.js';
 
-export function PreviewPanel({ preview }) {
+export function PreviewPanel({ preview, stale = false, queued = false }) {
   if (!preview) return null;
   const { deltas, factionResponses, narrativeSummary, warnings } = preview;
   const partyCaused = !!(preview.event?.partyCaused || preview.event?.cause === 'party_action');
+  const vetoed = (warnings || []).some(w => w.severity === 'veto');
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
-      background: CARD, border: `1px solid ${GOLD}`, borderRadius: R.sm,
+      background: CARD, border: `1px solid ${vetoed ? swatch.danger : GOLD}`, borderRadius: R.sm,
+      // THE STALENESS LAW (§5): a preview whose payload-key or settlement
+      // diverged is visibly voided — grayed while the live re-derivation lands.
+      opacity: stale ? 0.55 : 1,
     }}>
+      {stale && (
+        <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic', marginBottom: 4 }}>
+          Preview is stale — updating to the edited change…
+        </div>
+      )}
+      {vetoed && (
+        <div style={{ fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 800, marginBottom: 4 }}>
+          ✕ The world refuses this change — nothing will be committed.
+        </div>
+      )}
       {partyCaused && (
         <div style={{
           display: 'inline-flex', alignItems: 'center', gap: 4, marginBottom: 6,
@@ -32,12 +47,22 @@ export function PreviewPanel({ preview }) {
       </div>
       {warnings?.length > 0 && (
         <ul style={{ margin: '4px 0', paddingLeft: 18, color: swatch.danger, fontSize: FS.xs, fontFamily: sans }}>
-          {warnings.map((w, i) => <li key={i}>{w.message}</li>)}
+          {/* Veto warnings carry terse eager codes; the manifest's prose
+              (lazy side) renders the teaching refusal sentence. */}
+          {warnings.map((w, i) => (
+            <li key={i}>{w.severity === 'veto' ? vetoProse(w.code, w.detail) : w.message}</li>
+          ))}
         </ul>
       )}
       {deltas?.length > 0 && (
         <div style={{ marginTop: 6 }}>
           {deltas.map((d, i) => <DeltaRow key={i} d={d} />)}
+        </div>
+      )}
+      {/* Queued-vs-now (§5): the pane says it plainly. */}
+      {queued && !vetoed && (
+        <div style={{ marginTop: 6, fontSize: FS.xxs, fontFamily: sans, color: MUTED, fontStyle: 'italic' }}>
+          Applies at the next World Pulse advance (clock-bound campaign).
         </div>
       )}
       {factionResponses?.length > 0 && (

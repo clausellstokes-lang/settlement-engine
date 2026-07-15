@@ -17,7 +17,9 @@
 
 import { describe, test, expect } from 'vitest';
 
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { captureEventUndoSnapshot, scrubUndoneEvent } from '../../src/domain/events/undoEvent.js';
 import { NON_AUTHORABLE_EVENTS } from '../../src/components/settlement/eventComposer/EventComposerConstants.js';

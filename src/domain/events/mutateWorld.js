@@ -22,6 +22,7 @@ import {
   idOf, eventTime,
   findInstitution, replaceInstitution,
   labelFromTarget, slugify,
+  vetoMutation, sev01,
 } from './mutateHelpers.js';
 
 /** @typedef {import('../types.js').Event} Event */
@@ -120,7 +121,7 @@ function depleteResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
   // Write the key form the roster actually holds (resolveRosterKey) into the
   // nearbyResourcesDepleted array the economy/food generators read.
   const key = resolveRosterKey(config, raw);
-  if (!key) return s;
+  if (!key) return vetoMutation('empty_target');
   const state = config.nearbyResourcesState || {};
   const depleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
   const edits = resourceEditsOf(config);
@@ -140,7 +141,7 @@ function depleteResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
 function recoveredResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const config = s.config || {};
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   // Recorded under the roster-resolved form — the key a regenerated roster
   // holds. Recorded even when nothing was depleted LIVE: in random mode the
   // depletion may exist only in the re-roll, and the recovered record is
@@ -202,6 +203,11 @@ function removedThreat(/** @type {MutEntity} */ s, /** @type {MutEntity} */ even
     }
   }
   const threatText = `${removed?.name || ''} ${removed?.type || ''} ${label}`.toLowerCase();
+  // No stressor matched and the label names no siege to lift: nothing happened —
+  // refuse instead of letting the registry's threat-neutralized deltas land alone.
+  if (!removed && !/siege/.test(threatText)) {
+    return vetoMutation('threat_not_found', labelFromTarget(event.targetId));
+  }
   if (/siege/.test(threatText)) {
     next = withActiveCondition(next, {
       archetype: 'siege_lifted',
@@ -226,7 +232,7 @@ function removedThreat(/** @type {MutEntity} */ s, /** @type {MutEntity} */ even
 // explicit riot framing (no new archetype invented; the provided affectedSystems
 // override the residual template per deriveActiveCondition precedence).
 function startedRiot(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+  const severity = sev01(event.payload?.severity, 0.6);
   const where = event.targetId ? ` in ${labelFromTarget(event.targetId)}` : '';
   return withActiveCondition(s, {
     archetype: 'stressor_residual',
@@ -256,7 +262,7 @@ const LEGACY_REL_ALIASES = { trade_partners: 'trade_partner' };
 const canonicalRelType = (/** @type {MutEntity} */ rel) => LEGACY_REL_ALIASES[/** @type {keyof typeof LEGACY_REL_ALIASES} */ (String(rel || '').toLowerCase())] || rel;
 function setNeighbourRelationship(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const targetId = event.targetId;
-  if (!targetId) return s;
+  if (!targetId) return vetoMutation('empty_target');
   const relType = event.type === 'BROKERED_ALLIANCE'
     ? ALLIANCE_REL
     : canonicalRelType(event.payload?.relationshipType || (event.type === 'SETTLEMENT_DISPUTE' ? 'rival' : 'trade_partner'));
@@ -296,6 +302,13 @@ function setNeighbourRelationship(/** @type {MutEntity} */ s, /** @type {MutEnti
     };
     return { ...s, neighbourNetwork: [...network, newLink] };
   }
+  // DELIBERATELY NOT A VETO (W-COMPOSER-1 finding): a dispute/alliance naming a
+  // CAMPAIGN PEER that is not a settlement-local neighbour is REAL — the Lane-2
+  // canon-relationship ripple (store layer) mints the pulse edge; only this
+  // settlement-local view has nothing to write. Vetoing here killed the drained
+  // and immediate campaign-peer paths (pinned by campaignClockQueue drain-parity
+  // tests). The composer's predicate + batch eventConsumes still keep garbage
+  // targets out of the UI lanes.
   return s;
 }
 
@@ -417,7 +430,7 @@ function refugeeWave(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event)
  * propagates through faction links so the watch and temple respond.
  */
 function plague(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+  const severity = sev01(event.payload?.severity, 0.6);
   const config = s.config || {};
   const annotation = {
     name: event.targetId || 'unspecified',
@@ -472,7 +485,7 @@ function plague(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
  * on the settlement so the next pipeline rerun consumes it.
  */
 function raidOrMonsterAttack(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
-  const severity = Number(event.payload?.severity ?? 0.6);
+  const severity = sev01(event.payload?.severity, 0.6);
   const config = s.config || {};
   const raids = Array.isArray(config._raidHistory) ? [...config._raidHistory] : [];
   raids.push({
@@ -614,7 +627,7 @@ function changeRulingPower(/** @type {MutEntity} */ s, /** @type {MutEntity} */ 
   if (result.error === 'faction_not_found') {
     result = /** @type {MutEntity} */ (transferRulingPower(s, labelFromTarget(event.targetId), { cause }));
   }
-  if (result.error) return s;
+  if (result.error) return vetoMutation(`power_${result.error}`, labelFromTarget(event.targetId));
   const severityByCause = { coup: 0.55, conquest: 0.65, election: 0.25, succession: 0.3, appointment: 0.3 };
   return withActiveCondition(result.settlement, {
     archetype: 'government_overthrown',
@@ -645,7 +658,13 @@ function changeRulingPower(/** @type {MutEntity} */ s, /** @type {MutEntity} */ 
  * at the store layer through the lifecycle's 'resolve' twinDirective.
  */
 function resolveStressor(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
-  return crisisResolve({ settlement: s, event }).settlement;
+  const r = /** @type {MutEntity} */ (crisisResolve({ settlement: s, event }));
+  // Nothing matched — no live entry removed, no condition wound down: refuse
+  // instead of committing the registry's relief deltas over an unchanged town.
+  if (!r.removed && !r.wound) {
+    return vetoMutation('stressor_not_found', labelFromTarget(event.targetId));
+  }
+  return r.settlement;
 }
 
 /**
@@ -696,7 +715,7 @@ function withCustomTradeGoods(/** @type {MutEntity} */ s, /** @type {MutEntity} 
  */
 function addTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const label = String(event.payload?.label || event.targetId || '').trim();
-  if (!label) return s;
+  if (!label) return vetoMutation('empty_target');
   const direction = event.payload?.direction === 'import' ? 'import' : 'export';
   const entrepot = direction === 'export' && !!event.payload?.entrepot;
   const ec = s.economicState || {};
@@ -718,7 +737,7 @@ function addTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event
   const removed = ctg.removed.filter((/** @type {MutEntity} */ l) => String(l).toLowerCase() !== label.toLowerCase());
   const configChanged = !inBucket || removed.length !== ctg.removed.length;
 
-  if (nextEc === ec && !configChanged) return s;
+  if (nextEc === ec && !configChanged) return vetoMutation('trade_good_already_present', label);
   let next = nextEc === ec ? s : { ...s, economicState: nextEc };
   if (configChanged) {
     next = withCustomTradeGoods(next, {
@@ -744,7 +763,7 @@ function addTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event
  */
 function removeTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.payload?.label || event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const base = raw.replace(/\s*\(transit\)\s*$/i, '').trim();
   const targets = new Set([raw, base, `${base} (transit)`].map(l => l.toLowerCase()));
   const ec = s.economicState || {};
@@ -772,7 +791,7 @@ function removeTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
     struck.imports.length !== ctg.imports.length ||
     struck.transit.length !== ctg.transit.length;
 
-  if (!changed && !configChanged) return s;
+  if (!changed && !configChanged) return vetoMutation('trade_good_not_found', base);
   let next = changed ? { ...s, economicState: nextEc } : s;
   const alreadyRemoved = ctg.removed.some((/** @type {MutEntity} */ l) => String(l).toLowerCase() === base.toLowerCase());
   next = withCustomTradeGoods(next, {
@@ -794,7 +813,7 @@ function removeTradeGood(/** @type {MutEntity} */ s, /** @type {MutEntity} */ ev
  */
 function addResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const slug = slugify(raw);
   const catalogKey = /** @type {MutEntity} */ (RESOURCE_DATA)[raw] ? raw : (/** @type {MutEntity} */ (RESOURCE_DATA)[slug] ? slug : null);
   const key = catalogKey || raw;
@@ -834,11 +853,11 @@ function addResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event)
  */
 function removeResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
   const raw = String(event.targetId || '').trim();
-  if (!raw) return s;
+  if (!raw) return vetoMutation('empty_target');
   const keys = new Set([raw, slugify(raw), labelFromTarget(raw)].filter(Boolean));
   const config = s.config || {};
   const nearby = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
-  if (!nearby.some((/** @type {MutEntity} */ k) => keys.has(k))) return s;
+  if (!nearby.some((/** @type {MutEntity} */ k) => keys.has(k))) return vetoMutation('resource_not_found', labelFromTarget(raw));
   const state = { ...(config.nearbyResourcesState || {}) };
   for (const k of keys) delete state[k];
   // The roster forms actually struck — what the suppression list must name

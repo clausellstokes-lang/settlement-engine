@@ -99,6 +99,11 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
         // A single malformed queued event must not abort the whole tick.
         continue;
       }
+      // Handler-veto channel (Composer V2 §2): the world changed since this
+      // intention queued and its gate now fails. Skip it — no phantom entry,
+      // no deltas. (W-COMPOSER-2's docket surfaces the refusal in the advance
+      // digest + LAPSED handling; the skip here is the W1 no-phantom floor.)
+      if (out.veto) continue;
       const nextSettlement = reconcileSettlementChange(/** @type {any} */ (out.nextSettlement), settlement, {
         source: 'canon_event',
         changeType: event?.type,

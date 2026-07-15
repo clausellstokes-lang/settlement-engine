@@ -499,18 +499,23 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
  * target, the composer's picker offers the live stressors), and resolving an
  * unregistered roaming type is itself a campaign no-op.
  *
+ * The `removed` / `wound` flags pass through from windDownCrisis so the
+ * RESOLVE_STRESSOR handler can veto a no-match instead of silently no-opping
+ * (the Composer V2 §2 phantom-hole close); existing consumers that destructure
+ * only `settlement` / `twinDirective` are unchanged.
+ *
  * @param {{ settlement: Object, event: Event }} args
- * @returns {{ settlement: Object, twinDirective: Object|null }}
+ * @returns {{ settlement: Object, twinDirective: Object|null, removed: boolean, wound: boolean }}
  */
 export function crisisResolve({ settlement, event }) {
   const type = authoredCrisisType(event);
-  if (!type) return { settlement, twinDirective: null };
-  const { settlement: next } = windDownCrisis(settlement, {
+  if (!type) return { settlement, twinDirective: null, removed: false, wound: false };
+  const { settlement: next, removed, wound } = windDownCrisis(settlement, {
     types: [type],
     label: /** @type {CrisisEventPayload} */ (event.payload)?.label,
     origin: { kind: 'event', eventId: event.id },
   });
-  return { settlement: next, twinDirective: twinDirectiveForEvent(event) };
+  return { settlement: next, twinDirective: twinDirectiveForEvent(event), removed: !!removed, wound: !!wound };
 }
 
 /**
@@ -571,7 +576,7 @@ export function twinDirectiveForEvent(event) {
         label: /** @type {CrisisEventPayload} */ (event.payload)?.label
           || (event.targetId ? labelFromTarget(event.targetId) : undefined)
           || 'Plague',
-        severity: Number(/** @type {CrisisEventPayload} */ (event.payload)?.severity ?? 0.6),
+        severity: Math.max(0, Math.min(1, Number(/** @type {CrisisEventPayload} */ (event.payload)?.severity ?? 0.6))),
       },
     };
   }
@@ -584,7 +589,7 @@ export function twinDirectiveForEvent(event) {
       stressor: {
         type: roamingType,
         label: /** @type {CrisisEventPayload} */ (event.payload)?.label || undefined,
-        severity: Number(/** @type {CrisisEventPayload} */ (event.payload)?.severity ?? 0.6),
+        severity: Math.max(0, Math.min(1, Number(/** @type {CrisisEventPayload} */ (event.payload)?.severity ?? 0.6))),
       },
     };
   }

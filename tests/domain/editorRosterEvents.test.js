@@ -23,7 +23,9 @@
 
 import { describe, expect, test } from 'vitest';
 
-import { EVENT_REGISTRY, EVENT_TYPES, RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registry.js';
+import { EVENT_REGISTRY, EVENT_TYPES } from '../../src/domain/events/registry.js';
+// RERUN_KEYS_FOR_EVENT moved to the LAZY registryFull (W-COMPOSER-1 byte reclaim).
+import { RERUN_KEYS_FOR_EVENT } from '../../src/domain/events/registryFull.js';
 import { mutateSettlement } from '../../src/domain/events/mutate.js';
 import { ensureNpcStates, npcId } from '../../src/domain/worldPulse/npcAgency.js';
 import { createPRNG } from '../../src/kernel/prng.js';

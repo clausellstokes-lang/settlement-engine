@@ -187,7 +187,7 @@ describe('settlementSlice — applyEvent mutates entities', () => {
   });
 });
 
-describe('settlementSlice — applyPendingPreview integrity', () => {
+describe('settlementSlice — the staleness law + the veto refusal (Composer V2 §2/§5)', () => {
   let store;
   beforeEach(() => {
     store = makeStore();
@@ -196,26 +196,66 @@ describe('settlementSlice — applyPendingPreview integrity', () => {
     store.getState().canonize();
   });
 
-  test('preview then applyPendingPreview commits the SAME event id', () => {
+  // applyPendingPreview was RETIRED (the apply-prefers-pendingPreview bypass —
+  // W-COMPOSER-1): apply always commits the freshly-built form event; the
+  // preview↔commit identity holds via the staleness key + the compose-session
+  // id instead of via a stored-preview preference.
+  test('applyPendingPreview no longer exists on the store', () => {
+    expect(store.getState().applyPendingPreview).toBeUndefined();
+  });
+
+  test('previewEvent stamps the staleness key: payload hash × settlement reference', () => {
     const event = {
       id: 'preview-1', type: 'DAMAGE_INSTITUTION', targetId: 'institution.granary',
       payload: { severity: 0.8 }, cause: 'player_action',
     };
-    store.getState().previewEvent(event);
-    // applyPendingPreview passes through applyEvent's Track K ActionResult
-    // envelope; receipts[0] is the §C2 'event' Receipt derived from the eventLog
-    // entry (id `event:${event.id}:0`). The canonical entry still lands on the log.
-    const result = store.getState().applyPendingPreview();
-    expect(result.receipts[0].source).toBe('event');
-    expect(result.receipts[0].id).toBe('event:preview-1:0');
-    expect(store.getState().eventLog[0].event.id).toBe('preview-1');
-    expect(store.getState().pendingPreview).toBeNull();
+    const before = store.getState().settlement;
+    const preview = store.getState().previewEvent(event);
+    expect(typeof preview._previewKey).toBe('string');
+    expect(preview._forSettlement).toBe(before);
+    // Same payload, different id ⇒ SAME key (the compose-session id is free to
+    // re-mint without voiding the pane)…
+    const again = store.getState().previewEvent({ ...event, id: 'preview-2' });
+    expect(again._previewKey).toBe(preview._previewKey);
+    // …but any payload divergence keys differently.
+    const edited = store.getState().previewEvent({ ...event, payload: { severity: 0.3 } });
+    expect(edited._previewKey).not.toBe(preview._previewKey);
+    // And an apply replaces the settlement object — the reference half of the
+    // key voids every open preview.
+    store.getState().applyEvent(event);
+    expect(store.getState().settlement).not.toBe(before);
   });
 
-  test('applyPendingPreview is a no-op when nothing is pending', () => {
-    const result = store.getState().applyPendingPreview();
-    expect(result).toBeNull();
-    expect(store.getState().eventLog).toEqual([]);
+  test('a vetoed apply REFUSES: no eventLog entry, no settlement change, ok:false envelope', () => {
+    const before = store.getState().settlement;
+    const result = store.getState().applyEvent({
+      id: 'veto-1', type: 'CHANGE_RULING_POWER', targetId: 'The Invisible Cabal',
+      payload: { cause: 'coup' }, cause: 'player_action',
+    });
+    expect(result.ok).toBe(false);
+    // The fixture seats no governing faction, so transferRulingPower's FIRST
+    // gate fires; either power_* code is a refusal — the exact one is the
+    // domain's own error, passed through verbatim.
+    expect(result.veto.code).toBe('power_no_governing_faction');
+    expect(typeof result.veto.message).toBe('string');
+    expect(store.getState().eventLog).toEqual([]);          // NO phantom timeline entry
+    expect(store.getState().settlement).toBe(before);       // nothing committed
+    expect(store.getState().pendingPreview).toBeNull();     // the pane cleared
+  });
+
+  test('a DYNAMIC mid-batch veto (validateBatch cannot pre-catch it) surfaces as a refusal; the rest land', () => {
+    // Both events pass reference validation; the SECOND vetoes at apply time
+    // because the first already added the good (trade_good_already_present).
+    const result = store.getState().applyEventBatch([
+      { id: 'b-ok', type: 'ADD_TRADE_GOOD', targetId: 'Silk', payload: { direction: 'export', label: 'Silk' }, cause: 'player_action' },
+      { id: 'b-veto', type: 'ADD_TRADE_GOOD', targetId: 'Silk', payload: { direction: 'export', label: 'Silk' }, cause: 'player_action' },
+    ]);
+    expect(result.ok).toBe(true);
+    expect(result.logEntries).toHaveLength(1);
+    expect(result.warnings).toHaveLength(1);
+    expect(result.warnings[0].code).toBe('trade_good_already_present');
+    expect(store.getState().eventLog).toHaveLength(1);
+    expect(store.getState().eventLog[0].event.id).toBe('b-ok');
   });
 });
 

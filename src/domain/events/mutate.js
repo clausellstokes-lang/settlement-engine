@@ -39,6 +39,7 @@ import {
   addTradeGood, removeTradeGood, addResource, removeResource,
 } from './mutateWorld.js';
 import { makeReceipt } from '../trace.js';
+import { mutationVetoOf } from './mutateHelpers.js';
 
 /** @typedef {import('../types.js').Event} Event */
 /** @typedef {import('../trace.js').Receipt} Receipt */
@@ -109,19 +110,21 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: MutSettlement, event: Mu
 });
 
 /**
- * Apply an event's patches to the settlement. Returns a new settlement
- * (never mutates input). The function understands every event type
- * shipped in the registry; unknown types are no-ops on the settlement
- * (state-only events still land via applyEvent's state-delta path).
+ * Apply an event's patches to the settlement, surfacing handler vetoes
+ * (Composer V2 §2 — the handler-veto channel). Returns the mutated settlement
+ * PLUS the veto a gated handler raised: when `veto` is non-null the settlement
+ * is unchanged (beyond the condition re-sync of an untouched copy) and the
+ * pipeline must not commit deltas or narration. Unknown types remain no-ops
+ * with no veto (state-only events still land via applyEvent's delta path).
  *
  * @param {Object} args
  * @param {Object} args.settlement
  * @param {Event} args.event
  * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
- * @returns {Object} mutated settlement
+ * @returns {{ settlement: Object, veto: import('./mutateHelpers.js').MutationVeto|null }}
  */
-export function mutateSettlement({ settlement, event, now = null }) {
-  if (!settlement || !event) return settlement;
+export function mutateSettlementChecked({ settlement, event, now = null }) {
+  if (!settlement || !event) return { settlement, veto: null };
   const timedEvent = /** @type {MutateEvent} */ (event);
   // Deterministic by construction (A+ domain.6): the timestamp this stamps is a
   // pure function of (event, now) — there is NO internal wall-clock read here
@@ -144,14 +147,33 @@ export function mutateSettlement({ settlement, event, now = null }) {
   const base = { ...settlement };
 
   const handler = MUTATION_HANDLERS[stampedEvent.type];
-  const next = handler ? handler(base, stampedEvent) : base;
+  const result = handler ? handler(base, stampedEvent) : base;
+  const veto = mutationVetoOf(result);
+  const next = veto ? base : result;
 
   // One projection chokepoint for the whole dispatch: whatever event-sourced
   // conditions the handler promoted, wound down, or left alone, the authored
   // config.eventConditions record (dual-written to _config — the
   // customTradeGoods / resourceEdits discipline) follows. This is what lets
   // a full regeneration re-promote them instead of silently dropping them.
-  return withEventConditionsSynced(next);
+  return { settlement: withEventConditionsSynced(next), veto };
+}
+
+/**
+ * Legacy silent-no-op wrapper: byte-identical behavior to the pre-veto
+ * mutateSettlement (a gated handler returns the settlement unchanged). Direct
+ * callers that predate the veto channel (undo replay, tests) keep this
+ * contract; pipeline-facing callers use mutateSettlementChecked above so the
+ * refusal is visible.
+ *
+ * @param {Object} args
+ * @param {Object} args.settlement
+ * @param {Event} args.event
+ * @param {string|null} [args.now] deterministic ISO timestamp for replay/tests
+ * @returns {Object} mutated settlement
+ */
+export function mutateSettlement(args) {
+  return mutateSettlementChecked(args).settlement;
 }
 
 // ── Receipts (Track K §C2) ──────────────────────────────────────────────────
