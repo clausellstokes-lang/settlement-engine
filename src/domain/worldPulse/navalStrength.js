@@ -11,10 +11,9 @@
 
 import { isPort } from '../spatial/distanceRead.js';
 import { navalCapability01, NAVAL_TUNING } from '../spatial/navalLayer.js';
+import { clamp01 } from '../../kernel/math.js';
 import { TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 
-/** @param {number} x @returns {number} */
-const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** @param {number} v @returns {number} */
 function round4(v) { return Math.round(v * 10000) / 10000; }
 /** @param {unknown} v @returns {Record<string, unknown>} */

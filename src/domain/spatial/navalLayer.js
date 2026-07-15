@@ -45,6 +45,7 @@ import {
 import { chooseRoute, riskToleranceFromAlignment } from './embattlement.js';
 import { ARMY_ROLES, armyRecordOf } from './armyTransit.js';
 import { facetOf } from './cohesionWeave.js';
+import { clamp01 } from '../../kernel/math.js';
 
 // ── Tuning (documented here; retuned in the W-NAVY + checkpoint soaks) ──────────
 export const NAVAL_TUNING = Object.freeze({
@@ -102,8 +103,6 @@ export const NAVAL_TUNING = Object.freeze({
   BLOCKADE_RUN_BASE: 0.5,
 });
 
-/** @param {number} x @returns {number} */
-const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** @param {unknown} v @param {number} f @returns {number} */
 function num(v, f) { return typeof v === 'number' && Number.isFinite(v) ? v : f; }
 /** @param {number} v @returns {number} 4-dp round for byte-tidy persisted floats */

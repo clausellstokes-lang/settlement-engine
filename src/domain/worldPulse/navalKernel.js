@@ -39,6 +39,7 @@ import { setSpatialLedger, dropSpatialLedger, isPort } from '../spatial/distance
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { pendingActorMajorFor } from './actorMajorApproval.js';
+import { clamp01 } from '../../kernel/math.js';
 import { formatCount } from '../formatNumber.js';
 
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -56,8 +57,6 @@ import { formatCount } from '../formatNumber.js';
 // graph hostile labels, NOT the mutual-homeland test; navies blockade + escort in peacetime).
 const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']);
 
-/** @param {number} x @returns {number} */
-const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** @param {unknown} v @param {number} f @returns {number} */
 function num(v, f) { return typeof v === 'number' && Number.isFinite(v) ? v : f; }
 /** @param {unknown} v @returns {Record<string, unknown>} */
