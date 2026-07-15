@@ -92,6 +92,21 @@ describe('peace-reason scorers — each typed reason has a positive and a negati
     expect(scoreEconomicStrangulation({ trade01: 0, economy01: 0 }).score).toBe(0);
   });
 
+  it('W-MOMENTUM Stage 0(a): a naval blockade elevates strangulation with its own receipt; absent ⇒ byte-identical', () => {
+    // Byte-identity: blockade01 absent/0 reproduces the exact prior score AND receipt.
+    const dry = scoreEconomicStrangulation({ trade01: 0.3, economy01: 0.2 });
+    const dryExplicitZero = scoreEconomicStrangulation({ trade01: 0.3, economy01: 0.2, blockade01: 0 });
+    expect(dryExplicitZero).toEqual(dry);
+    // A blockade above the trade/economy baseline elevates the felt strangulation and names the harbour.
+    const blockaded = scoreEconomicStrangulation({ trade01: 0.1, economy01: 0.1, blockade01: 0.75 });
+    expect(blockaded.score).toBeGreaterThan(dry.score);
+    expect(blockaded.score).toBeCloseTo(0.75, 5);
+    expect(blockaded.receipt).toContain('blockaded');
+    // The supply-web receipt still wins when the supply-web pressure is the tighter of the two.
+    const web = scoreEconomicStrangulation({ trade01: 0.1, economy01: 0.1, strangulation01: 0.8, blockade01: 0.4 });
+    expect(web.receipt).toContain('supply web');
+  });
+
   it('coalition fracture: a peeled ally mints with evidence; an intact (or never-had) coalition stays silent', () => {
     const peeled = scoreCoalitionFracture({ peakAllies: 2, nowAllies: 1 });
     expect(peeled.score).toBeCloseTo(0.5, 5);

@@ -407,9 +407,16 @@ function aggregateReports(reports, credibilityOf = null) {
  * @param {number} [args.sightFloor01]  W-DOCTRINE-2b: an accuracy FLOOR the observer's active
  *   SEE posture on this subject raises the aggregate fidelity to (paid eyes sharpen the read).
  *   ABSENT (0) ⇒ byte-identical (max(accuracy, 0) === accuracy).
+ * @param {number} [args.commitmentDiscount01]  W-MOMENTUM §3.2: a motivated-reasoning discount
+ *   (∈ [DISCOUNT_FLOOR, 1], 1 when the observer holds no committed course against this subject)
+ *   applied to the report weight in the VALUE re-anchoring blend, SCALED BY how far the report
+ *   CONTRADICTS the prior (a corroborating report is heard in full; a contradicting one is
+ *   resisted). Bounded below (> 0) so it only SLOWS convergence, never inverts it; the
+ *   contradiction-widens-uncertainty (confidence) term below runs at FULL weight regardless —
+ *   reality always eventually wins. ABSENT (1) ⇒ byte-identical (weight * 1 === weight).
  * @returns {BeliefRecord}
  */
-export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0 }) {
+export function reconcileBelief({ prior, groundTruth, reports, now, credibilityOf = null, sightFloor01 = 0, commitmentDiscount01 = 1 }) {
   const T = BELIEF_TUNING;
   const priorConf = prior ? clamp01(prior.confidence01) : 0;
   if (!reports.length) {
@@ -430,9 +437,20 @@ export function reconcileBelief({ prior, groundTruth, reports, now, credibilityO
   const obsReadiness = accuracy * groundTruth.readiness + (1 - accuracy) * T.NEUTRAL_READINESS;
   const priorStrengthBand = prior ? prior.strengthBand : T.NEUTRAL_STRENGTH_BAND;
   const priorReadiness = prior ? prior.readiness : T.NEUTRAL_READINESS;
-  const denom = priorConf + weight;
-  const blendedStrength = (priorConf * priorStrengthBand + weight * obsStrengthBand) / denom;
-  const blendedReadiness = (priorConf * priorReadiness + weight * obsReadiness) / denom;
+  // W-MOMENTUM §3.2: the motivated-reasoning discount bites ONLY to the extent the report
+  // CONTRADICTS the committed prior (a corroborating report — obs ≈ prior — is heard in full).
+  // effDiscount ∈ [commitmentDiscount01, 1]; EXACTLY 1 when uncommitted (discount 1) or when
+  // there is no prior/contradiction ⇒ blendW === weight ⇒ byte-identical. It only scales the
+  // VALUE blend (re-anchoring is SLOWED, never switched off — the floor keeps it alive); the
+  // confidence/contradiction term below uses the FULL weight (reality's doubt always lands).
+  const contradiction01 = prior
+    ? clamp01(Math.abs(obsStrengthBand - priorStrengthBand) / (STRENGTH_BANDS - 1))
+    : 0;
+  const effDiscount = 1 - (1 - clamp(finiteNumber(commitmentDiscount01, 1), 0, 1)) * contradiction01;
+  const blendW = weight * effDiscount;
+  const denom = priorConf + blendW;
+  const blendedStrength = (priorConf * priorStrengthBand + blendW * obsStrengthBand) / denom;
+  const blendedReadiness = (priorConf * priorReadiness + blendW * obsReadiness) / denom;
   // Categorical attributes: ADOPT the current truth when the aggregate telling is
   // faithful enough; else the stale label survives.
   const adopt = accuracy >= T.CAT_ADOPT_ACCURACY;
@@ -913,9 +931,12 @@ export function applyAllyIntelSharing({ maps, ctx, neighbours, alignmentOf, now 
  * @param {((observerId: string, subjectId: string) => { decayKeep01: number, accuracyFloor01: number }) | null} [args.sightOf]
  *   W-DOCTRINE-2b SEE/HIDE: the per-pair sight modifier (SEE slows decay + floors fidelity;
  *   HIDE speeds decay both directions). ABSENT / neutral ⇒ byte-identical.
+ * @param {((observerId: string, subjectId: string) => number) | null} [args.commitmentDiscountFor]
+ *   W-MOMENTUM §3.2: the per-pair motivated-reasoning discount (∈ [DISCOUNT_FLOOR, 1], 1 when
+ *   the observer holds no committed course against the subject). ABSENT / 1 ⇒ byte-identical.
  * @returns {{ bySubject: Record<string, BeliefRecord>, pruned: boolean }}
  */
-function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, credibilityOf = null, sightOf = null }) {
+function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, credibilityOf = null, sightOf = null, commitmentDiscountFor = null }) {
   const T = BELIEF_TUNING;
   const subjectIds = new Set([...Object.keys(priorSlot), ...reports.keys()].map(String));
   /** @type {Record<string, BeliefRecord>} */
@@ -939,6 +960,9 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     const sight = sightOf ? sightOf(observerId, subjectId) : null;
     const decayKeep01 = sight ? finiteNumber(sight.decayKeep01, 0) : 0;
     const sightFloor01 = sight ? finiteNumber(sight.accuracyFloor01, 0) : 0;
+    // W-MOMENTUM §3.2: this observer's motivated-reasoning discount on reports contradicting
+    // its committed course against THIS subject (1 when uncommitted ⇒ byte-identical).
+    const commitmentDiscount01 = commitmentDiscountFor ? commitmentDiscountFor(observerId, subjectId) : 1;
 
     // The current true relationship label observer↔subject (for the re-anchor).
     const trueType = neighbours.get(observerId)?.get(subjectId) || priorRec?.allianceLabel || 'unknown';
@@ -948,7 +972,7 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
     if (freshReports.length) {
       const silent = priorRec ? Math.max(0, now - Math.floor(finiteNumber(priorRec.lastUpdateTick, now))) : 0;
       const decayedPrior = priorRec ? { ...priorRec, confidence01: decayedConfidence(priorRec.confidence01, silent, decayKeep01) } : null;
-      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01 });
+      record = reconcileBelief({ prior: decayedPrior, groundTruth, reports: freshReports, now, credibilityOf, sightFloor01, commitmentDiscount01 });
     } else {
       // Silence: decay confidence, keep the frozen value.
       const silent = Math.max(0, now - Math.floor(finiteNumber(/** @type {BeliefRecord} */ (priorRec).lastUpdateTick, now)));
@@ -988,9 +1012,12 @@ function reconcileSlot({ priorSlot, reports, ctx, neighbours, observerId, now, c
  * @param {((observerId: string, subjectId: string) => { decayKeep01: number, accuracyFloor01: number }) | null} [args.sightOf]
  *   W-DOCTRINE-2b: the SEE/HIDE per-pair sight modifier closure (info-statecraft layer lit,
  *   a sight/secrecy posture materialized). ABSENT / neutral ⇒ byte-identical.
+ * @param {((observerId: string, subjectId: string) => number) | null} [args.commitmentDiscountFor]
+ *   W-MOMENTUM §3.2: the per-pair motivated-reasoning discount closure (momentum layer lit).
+ *   ABSENT / 1 ⇒ byte-identical (the reconciliation only SLOWS convergence, never inverts it).
  * @returns {{ next: Record<string, unknown> | null, changed: boolean }}
  */
-export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf = null }) {
+export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, allyIntel = null, credibilityOf = null, sightOf = null, commitmentDiscountFor = null }) {
   const prior = hasSpatialLedger(worldState, 'beliefMaps')
     ? asObject(getSpatialLedger(worldState, 'beliefMaps'))
     : null;
@@ -1052,7 +1079,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const seat = reconcileSlot({
       priorSlot: priorSeat,
       reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
-      ctx, neighbours, observerId, now, credibilityOf, sightOf,
+      ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
     });
     if (seat.pruned) mutated = true;
 
@@ -1069,7 +1096,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
           reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
-          ctx, neighbours, observerId, now, credibilityOf, sightOf,
+          ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
         });
         if (built.pruned) mutated = true;
         if (Object.keys(built.bySubject).length) factionSlots[archetype] = built.bySubject;
@@ -1079,7 +1106,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
           (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
-        ctx, neighbours, observerId, now, credibilityOf, sightOf,
+        ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
       });
       if (publicBuilt.pruned) mutated = true;
       if (Object.keys(publicBuilt.bySubject).length) factionSlots[PUBLIC_FACTION_KEY] = publicBuilt.bySubject;

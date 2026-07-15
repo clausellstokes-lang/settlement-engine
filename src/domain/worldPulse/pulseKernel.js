@@ -75,7 +75,8 @@ import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
-import { advancePeaceReasons } from './peaceReasons.js';
+import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
+import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -1788,12 +1789,35 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // or decays confidence for silence — pure arithmetic, NO rng. NEXT tick's
   // chooser reads these beliefs. DORMANT (no spatial marker / infoMode omniscient)
   // ⇒ changed:false ⇒ memoryState untouched, zero new keys — byte-identical.
+  // W-MOMENTUM §3.2: the observer's entity-appropriate reconsideration cliff, memoized — a
+  // proud / fragile court resists course-contradicting reports harder (a higher cliff ⇒ a
+  // deeper "past the cliff" depth ⇒ a stronger discount). Only invoked when the discount
+  // closure is live (momentum lit + a materialized commitments ledger); a missing snapshot
+  // item ⇒ BASE cliff. Created every tick, but byte-neutral (never serialized).
+  /** @type {Map<string, number>} */
+  const momentumCliffCache = new Map();
+  const momentumCliffOf = (/** @type {string} */ observerId) => {
+    const k = String(observerId);
+    let c = momentumCliffCache.get(k);
+    if (c === undefined) {
+      const it = postTimeSnapshot?.byId?.get?.(k);
+      c = it ? entityThreshold(it, memoryState).cliff : MOMENTUM_TUNING.BASE_CLIFF_STOCK;
+      momentumCliffCache.set(k, c);
+    }
+    return c;
+  };
   {
     const beliefs = advanceBeliefMaps({
       snapshot: postTimeSnapshot,
       pressureIdx: pIndex,
       worldState: memoryState,
       tick: worldState.tick,
+      // W-MOMENTUM §3.2: the motivated-reasoning discount on reports contradicting the
+      // observer's OWN committed war/campaign course against the subject (keyed observer→
+      // subject, entity-cliff-scaled). Bounded below (DISCOUNT_FLOOR > 0) ⇒ it only SLOWS
+      // convergence, never inverts it; the re-anchoring + contradiction-widens-uncertainty
+      // terms run regardless. null when momentum is dormant / no commitments ⇒ byte-identical.
+      commitmentDiscountFor: makeCommitmentDiscountFn(memoryState, worldState.tick, momentumCliffOf),
       // M9b component (4): the deliberate ally-intel sharing channel — OPT-IN
       // (allyIntelSharingEnabled, absent from DEFAULT_SIMULATION_RULES ⇒ off by
       // default even on a belief-active campaign ⇒ byte-identical). Styling reads the
@@ -2318,6 +2342,70 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       blaineyCredibility: makeBlaineyCredibilityFn(memoryState, worldState.tick),
     });
     if (peaceCausal.changed) memoryState = peaceCausal.worldState;
+  }
+  // W-MOMENTUM — THE COMMITMENT LEDGER (DESIGN_MOMENTUM.md §1). LAST of the read-movers,
+  // AFTER the causal-reason movers so the deposits read THIS tick's fully-settled public
+  // acts (a blockade thrown, a populace roused on a live war, a supply-web campaign pressed
+  // — deposits are READS, not rolls). Each actor's deposits are scaled by its court's
+  // LAWFULNESS (a lawful court's oaths bind harder — entityThreshold.depositScale, §2
+  // lawful×chaos), then folded into the commitment stock (decay-all-to-now, the credibility
+  // discipline). NO rng (the stream-position law). DORMANT behind momentumActive (beliefsActive
+  // AND the virtual momentumEnabled) ⇒ a complete no-op (zero commitments keys — the momentum
+  // dormancy golden proves the wired-but-dormant layer is byte-identical to pre-wire).
+  if (momentumActive(memoryState)) {
+    const rawDeposits = commitmentDepositsFor(memoryState);
+    // Lawful×chaos deposit scale, per actor (memoized — entityThreshold folds temperament +
+    // alignment + legitimacy reads). A missing snapshot item ⇒ neutral ×1. The internal
+    // clamp01 in advanceCommitments bounds a lawful court's up-scaled loudness back to ≤ 1.
+    /** @type {Map<string, number>} */
+    const depositScaleCache = new Map();
+    const scaleFor = (/** @type {string} */ actorId) => {
+      let sc = depositScaleCache.get(actorId);
+      if (sc === undefined) {
+        const it = postTimeSnapshot?.byId?.get?.(actorId);
+        sc = it ? entityThreshold(it, memoryState).depositScale : 1;
+        depositScaleCache.set(actorId, sc);
+      }
+      return sc;
+    };
+    const scaledDeposits = rawDeposits.map((d) => ({
+      ...d,
+      magnitude01: d.magnitude01 * scaleFor(String(d.actorId)),
+    }));
+    const commitments = advanceCommitments({ worldState: memoryState, tick: worldState.tick, deposits: scaledDeposits });
+    if (commitments.changed) memoryState = /** @type {typeof memoryState} */ (commitments.worldState);
+    // W-MOMENTUM STAGE 4 — THE LIVE CRACK (design §4). Right after the commitment fold (it
+    // reads this tick's stock + the fresh sue_for_peace* recall stamps): a proud/committed
+    // seat that climbs down PAST its cliff pays the priced consequence ONCE — a 'climb_down'
+    // credibility charge (a no-op when info-statecraft is dark) + a legitimacy hit on the
+    // seat + a receipt naming the depth held. The lawful court's procedural crack + a
+    // face-saving off-ramp (mediation, resolved from the peace-reasons ledger) SOFTEN the
+    // price, never to zero. Succession-rerolls-the-cliff is emergent (entityThreshold reads
+    // the live roster). Consequences ride E0-exempt. DORMANT ⇒ no-op (byte-identical).
+    const cracks = advanceMomentumCracks({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      tick: worldState.tick,
+      nameFor: settlementNameFor,
+      // The face-saving exit resolver: a live 'mediation' peace reason on the pair softens
+      // the price (design §4 — mediation's 20% soften). peaceReasonsFor returns null when the
+      // peace-engine ledger is dark ⇒ '' ⇒ full price. non_aggression / white_peace /
+      // declared_resolution are supported by faceSavingReliefOf but await their own live
+      // exit signal (declared_resolution needs the new seam-executor term — deferred).
+      exitKindFor: (/** @type {string} */ a, /** @type {string} */ t) => {
+        const pr = peaceReasonsFor(memoryState, a, t);
+        const med = pr && pr.reasons ? /** @type {Record<string, { score?: number }>} */ (pr.reasons).mediation : null;
+        return med && Number(med.score) > 0 ? 'mediation' : '';
+      },
+    });
+    if (cracks.changed) {
+      memoryState = /** @type {typeof memoryState} */ (cracks.worldState);
+      settlementUpdates = cracks.settlementUpdates;
+      if (cracks.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, cracks.newsEntries, { now });
+      }
+    }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band

@@ -99,6 +99,7 @@ import {
 } from './relationshipEvolution.js';
 import { stableSampleByWeight } from '../region/contestMath.js';
 import { clamp01 } from '../../kernel/math.js';
+import { abandonFloorScale } from './momentum.js';
 
 /** @typedef {{ fork?: (key: string) => { random: () => number } } | null} RngLike */
 /** @typedef {import('./supplyKernel.js').SpatialDigest} SpatialDigest */
@@ -672,7 +673,14 @@ export function advanceSupplyWebWarfare({ snapshot, worldState, pIndex = null, d
       // be stopped"). Also abandon on a bare EV collapse.
       const adapted = prevPlan.mintFragility01 > 0
         && web.fragility01 <= prevPlan.mintFragility01 * WEBWAR_TUNING.ABANDON_ADAPTATION_RATIO;
-      const collapsed = ev.indirectEV < WEBWAR_TUNING.ABANDON_EV_FLOOR;
+      // W-MOMENTUM §3.3: a COMMITTED strangler holds a marginal campaign LONGER — the
+      // aggressor's commitment stock on this campaign course LOWERS the EV floor it abandons
+      // at (abandonFloorScale ≥ 1 ⇒ a lower effective floor ⇒ tolerates a weaker squeeze).
+      // EXACTLY 1 when momentum is dormant / uncommitted ⇒ the floor is unchanged ⇒
+      // byte-identical (the supplyWebWarfare dormancy golden holds). Adaptation (the web
+      // re-sourced) still abandons regardless — commitment cannot un-lose a lost squeeze.
+      const abandonScale = abandonFloorScale(worldState, aggressorId, targetId, now);
+      const collapsed = ev.indirectEV < WEBWAR_TUNING.ABANDON_EV_FLOOR / abandonScale;
       if (adapted || collapsed) {
         newsEntries.push(abandonNews(aggressorId, targetId, name, adapted, now));
         continue; // drop the plan (do not carry to nextLedger)
