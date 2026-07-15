@@ -330,7 +330,15 @@ behavior, budget raises, golden regens.
   reconsideration is safe and cheap, beyond it the actor DOUBLES DOWN (a bounded,
   course-scoped counter-evidence discount — never global belief corruption); reinforcing
   information deepens commitment, countering information accumulates pressure until the
-  threshold CRACKS — and the climb-down is a priced, receipted event (legitimacy +
+  threshold CRACKS. **THE LIMIT CLAUSE (owner refinement, same day, verbatim intent:
+  "momentum should have limits, not that they continue with certainty, but the cliff to
+  redirect decisions becomes an order of magnitude harder"):** past the threshold the course
+  is NEVER certain — the cliff is a MULTIPLIER on the evidence bar (~10×, soak-tunable),
+  never a wall: counter-pressure still accumulates past it (at heavily discounted
+  effectiveness), loud events (a lost battle, a cracked coalition, succession) still punch
+  through, and the crack remains reachable from every state. WEIGHTS, NEVER WALLS — no
+  absorbing states, no designed attractor lock (the anti-stasis constitution applies to
+  psychology exactly as to economics) — and the climb-down is a priced, receipted event (legitimacy +
   credibility spent; face-saving off-ramps via the existing peace-term catalog). Thresholds
   are ENTITY-APPROPRIATE (fragile legitimacy doubles down hardest; consolidated autocratic
   courts lack the voices to force reconsideration; coalition blocs can crack it from inside).
