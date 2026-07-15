@@ -66,14 +66,24 @@ blockading fleet is the gate); LIFTING the blockade is a relief fleet engaging u
 convergence law (sea battle, loser retreats); the supply-web `interdiction` instrument gains
 its physical naval mechanism (closing that documented deferral).
 
-## 5. PIRACY (the parity clause the gap-hunt named)
-Pirates are bandits on water: sea-edge danger rides the SAME embattlement/danger scoring that
-prices land banditry (the M8 pin already treats port-node embattlement as piracy), preying on
-convoys and fat shipments, weighted by criminal-facet density at adjacent ports (a pirate
-haven is a port whose underworld is strong — the thievesGuildStrength read at sea) and DAMPED
-by naval patrol presence (a navy at home suppresses local piracy — the counterplay). Raiders
-respond to broadcast wealth per the generosity coupling. Largely weights + one danger term —
-data-and-coherence, not new machinery.
+## 5. PIRACY (EXACT BANDIT PARITY — owner ruling 2026-07-15: "treat them the same as bandits
+## in embattled regions/roads"; amended same day on the parity recon)
+RECON FINDING (CONFIRMED): parity ALREADY HOLDS BY CONSTRUCTION. Every banditry seam is
+node-keyed and modality-blind — sea routes traverse the same settlement (port) nodes, so
+`scoreRoute` prices port-node embattlement into sea routes verbatim (pinned since M8,
+seaLanes.test.js:243-257) and `banditryLoss` fires on every arriving shipment sea or land
+alike (neither call site checks modality). The embattlement ramp's inputs are identical for
+a port and an inland town: siege, occupation, war exhaustion, HIGH CRIME (the only criminal
+input — the crime-pressure term land also has), entrepôt wealth-as-target premium, minus the
+capped security relief (the same garrison damper; there is NO separate naval-patrol damper).
+COUPLINGS THAT DO NOT EXIST ON LAND STAY NONEXISTENT AT SEA (this section's earlier draft
+wrongly added them): no thievesGuildStrength read (it feeds SMUGGLING, not banditry), no
+broadcast-wealth→danger path (belief-level only), no pirate havens, no mid-ocean edge-interior
+piracy (land has no mid-road equivalent), no pirate-specific tuning constants. The wave's
+whole piracy scope: (a) an executable SEA-ARRIVAL banditry-loss pin (the missing mirror of
+the land banditry tests), (b) a PARITY GUARD — any future banditry-input change lands in the
+shared seam so both modalities move together, (c) the word "piracy" appears ONLY in
+display/receipt naming (news framed by modality), never in the danger math.
 
 ## 6. CONSTITUTIONAL POSTURE
 Dormant: virtual `navalEnabled` sub-flag AND the spatial marker (navies are physical — the
@@ -97,9 +107,10 @@ attrition + debark-retreat, never annihilation); retreat-to-home-port reuse; the
 siege-mint (interdiction term fed, verdict machinery untouched); the both-cut-to-starve law
 (blockade alone strangles, combined arms starves — the M8 pin extended); blockade-running
 (a smuggle roll vs the fleet gate); lift-the-blockade (relief fleet, convergence law, loser
-retreats); phantom-fleet reactivity; piracy dampens under patrol (negative control: no navy ⇒
-prior danger); capacity deferral visible; the role-coercion fix pinned; storm-season pricing
-respected by convoy EV (winter crossings rare).
+retreats); phantom-fleet reactivity; PIRACY PARITY (a sea arrival from an embattled source
+port loses the banditry fraction — the land test's mirror — and banditry inputs change only
+in the shared seam); capacity deferral visible; the role-coercion fix pinned; storm-season
+pricing respected by convoy EV (winter crossings rare).
 
 ## 8. SEQUENCING
 W-NAVY builds immediately after W-CONVERGENCE (its battles join the engagement law; its
