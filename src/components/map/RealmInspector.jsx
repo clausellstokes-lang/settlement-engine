@@ -42,7 +42,11 @@ const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const ChronicleScrollback = lazy(() => import('./ChronicleScrollback.jsx'));
 const AssignDeityFromMap  = lazy(() => import('./AssignDeityFromMap.jsx'));
 const WarResolveSection = lazy(() => import('./WarResolveSection.jsx'));
-const TreatyPanel = lazy(() => import('./TreatyPanel.jsx'));
+// STATIC within this already-lazy chunk (FP-R class, 2026-07-15): a lazy() here minted a
+// NEW chunk whose preload-manifest entry cost ~44 eager bytes and tipped the fresh
+// 1,161,810 ratchet. RealmInspector itself rides a lazy chunk, so a static import keeps
+// TreatyPanel off first paint at zero manifest cost. @enforced-by tests/build/vendorPdfLazy.test.js
+import TreatyPanel from './TreatyPanel.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
