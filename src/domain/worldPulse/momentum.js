@@ -50,6 +50,11 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
 import { importanceWeight } from '../entities/npcs.js';
 import { governanceLedger } from '../governanceLedger.js';
+// Stage 4 crack — the climb-down folds its 'climb_down' charge through the credibility
+// stock (a no-op when info-statecraft is dark ⇒ no credibility ledger). A lazy worldPulse
+// leaf, imported only through this lazy leaf ⇒ zero first-paint. NO cycle (informationStatecraft
+// does not import momentum; the belief seam threads the discount as a closure, not an import).
+import { advanceCredibility } from './informationStatecraft.js';
 
 // ── Small pure helpers (the informationStatecraft idiom) ────────────────────────
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -934,4 +939,137 @@ export function forceReconsiderationVerbFactory() {
     registered: false,
     note: 'Registrable shape; realm-manifest registration is the W-COMPOSER-2 lift. Force ≡ organic — the same priced climbDownConsequence the counterforces reach.',
   });
+}
+
+// ── THE LIVE CRACK MOVER (design §4 — the priced climb-down as a pulse consequence) ──
+/**
+ * Apply a signed publicLegitimacy.score delta to a settlement's snapshot update (the
+ * applyLegitimacyDeltasToUpdates idiom, reimplemented so the crack stays self-contained):
+ * integer, clamped [0,100], skipping a legacy bare-number / absent legitimacy. Pure.
+ * @param {Array<{ saveId?: unknown, settlement?: unknown }>} updates
+ * @param {Map<string, number>} hits actorId → signed delta (a climb-down hit is negative)
+ * @returns {Array<{ saveId?: unknown, settlement?: unknown }>}
+ */
+function applyLegitimacyHits(updates, hits) {
+  if (!hits.size) return updates;
+  const index = new Map();
+  updates.forEach((u, i) => index.set(String(u && u.saveId), i));
+  let next = updates;
+  let cloned = false;
+  for (const [id, delta] of hits) {
+    if (!delta) continue;
+    const ui = index.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = asObject(entry && entry.settlement);
+    const ps = asObject(settlement.powerStructure);
+    const plRaw = ps.publicLegitimacy;
+    const pl = plRaw && typeof plRaw === 'object' && !Array.isArray(plRaw) ? /** @type {Record<string, unknown>} */ (plRaw) : null;
+    if (!pl || !Number.isFinite(Number(pl.score))) continue;
+    const nextScore = Math.round(clamp(Number(pl.score) + delta, 0, 100));
+    if (nextScore === Number(pl.score)) continue;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = { ...entry, settlement: { ...settlement, powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } } } };
+  }
+  return next;
+}
+
+/** The climb-down receipt (§G — the chronicle names the seat, the depth held, and the
+ * face-saving off-ramp if any). @returns {Record<string, unknown>} */
+function climbDownNews(actorId, targetId, name, stock, cliff, crack, exitKind, tick) {
+  const A = name(actorId);
+  const Tn = name(targetId);
+  const faced = exitKind ? String(exitKind).replace(/_/g, ' ') : '';
+  const depth = cliff > 0 ? Math.round((stock / cliff) * 100) / 100 : 0;
+  return {
+    kind: 'momentum_climb_down',
+    headline: faced ? `${A} climbs down from its war on ${Tn} — with honour intact` : `${A} climbs down from its war on ${Tn}`,
+    summary: faced
+      ? `${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff), but a ${faced} let the crown reverse course and still call it a victory — the reversal cost less.`
+      : `${A} had held its war on ${Tn} well past the point of easy return (commitment ${depth}× its cliff). Reversing it now spends real credibility and legitimacy — the price of the proud hold come due.`,
+    reasons: [
+      `The commitment stock (${depth}× the reconsideration cliff) put ${A} past the cliff — a genuine climb-down, not a free reversal.`,
+      faced
+        ? `The ${faced} off-ramp softened the price (relief ${Math.round((1 - crack.price01) * 100)}%); the reversal could be told as a win.`
+        : `No face-saving off-ramp — the full climb-down price fell on the seat.`,
+    ],
+    settlementIds: [String(actorId), String(targetId)],
+    significance: 'major',
+    score: 68,
+    tick,
+  };
+}
+
+/**
+ * STAGE 4 — THE LIVE CRACK (design §4). Detect this tick's fresh climb-downs — an actor PAST
+ * its cliff on a committed WAR course whose deployment just took a fresh `sue_for_peace*`
+ * recall stamp — and land the priced consequence ONCE per crack (the recall stamp's own tick
+ * makes it idempotent): the 'climb_down' credibility charge (folded through advanceCredibility,
+ * a no-op when info-statecraft is dark), the legitimacy hit on the seat, and a receipt that
+ * names the polity, the depth held past the cliff, and any face-saving off-ramp. The price is
+ * reduced by the lawful court's PROCEDURAL crack + the face-saving exit (mediation / …), never
+ * to zero (a reversal is always felt). SUCCESSION-REROLLS-THE-CLIFF is EMERGENT: the cliff is
+ * a live entityThreshold read of the CURRENT roster, so a new ruler meets a new cliff — no code
+ * here; the proud old king's war that could not crack cracks under a pragmatic heir. DORMANT
+ * ⇒ a complete no-op (no fresh reversal / momentum off) ⇒ byte-identical.
+ * @param {Object} args
+ * @param {{ byId?: Map<string, unknown> } | null | undefined} args.snapshot
+ * @param {{ deployments?: unknown, spatialLedgers?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} args.worldState
+ * @param {Array<{ saveId?: unknown, settlement?: unknown }>} args.settlementUpdates
+ * @param {number} args.tick
+ * @param {((id: string) => string) | null} [args.nameFor]
+ * @param {((actorId: string, targetId: string) => string) | null} [args.exitKindFor] the face-saving exit resolver (mediation / …); '' ⇒ full price
+ * @returns {{ worldState: unknown, settlementUpdates: Array<{ saveId?: unknown, settlement?: unknown }>, newsEntries: Array<Record<string, unknown>>, changed: boolean }}
+ */
+export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates, tick, nameFor = null, exitKindFor = null }) {
+  const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
+  if (!momentumActive(worldState)) {
+    return { worldState, settlementUpdates: updates, newsEntries: [], changed: false };
+  }
+  const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));
+  const deployments = asObject(asObject(worldState).deployments);
+  const byId = snapshot && snapshot.byId instanceof Map ? snapshot.byId : new Map();
+  const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
+
+  /** @type {Array<{ id: string, kind: 'climb_down', magnitude01: number }>} */
+  const deltas = [];
+  /** @type {Map<string, number>} */
+  const legitimacyHits = new Map();
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
+
+  for (const actorId of Object.keys(deployments).sort(compareCodepoint)) {
+    const dep = asObject(deployments[actorId]);
+    const recalled = asObject(dep.recalled);
+    // A FRESH sue_for_peace* recall THIS tick (the war winds down through the existing
+    // sue-for-peace path). The recall stamp is idempotent, so recalled.tick pins the crack
+    // to its ONE tick — charged exactly once.
+    if (!String(recalled.cause || '').startsWith('sue_for_peace')) continue;
+    if (Math.floor(finiteNumber(recalled.tick, -1)) !== now) continue;
+    const targetId = dep.targetId != null ? String(dep.targetId) : '';
+    if (!targetId) continue;
+    const courseKey = courseKeyOf({ kind: 'war', target: targetId });
+    if (!courseKey) continue;
+    // Was the actor PAST its cliff on this war course? A below-cliff reversal is free physics
+    // (today's behaviour) — a climb-down only bites a genuinely committed course.
+    const stock = commitmentStockOf(worldState, actorId, courseKey, now);
+    const th = entityThreshold(byId.get(actorId), worldState);
+    if (!pastCliff(stock, th.cliff)) continue;
+    // The face-saving exit (mediation / …) reduces the price; '' ⇒ full price.
+    const exitKind = typeof exitKindFor === 'function' ? String(exitKindFor(actorId, targetId) || '') : '';
+    const crack = climbDownConsequence({ actorId, lawfulness01: th.lawfulness01, exitKind });
+    deltas.push(crack.credibilityDelta);
+    if (crack.legitimacyHit > 0) legitimacyHits.set(actorId, -crack.legitimacyHit);
+    newsEntries.push(climbDownNews(actorId, targetId, name, stock, th.cliff, crack, exitKind, now));
+  }
+
+  if (!deltas.length) {
+    return { worldState, settlementUpdates: updates, newsEntries: [], changed: false };
+  }
+  // Fold the 'climb_down' charges into the credibility stock (a no-op — byte-identical — when
+  // info-statecraft is dark, so the crack still lands its legitimacy hit + receipt regardless).
+  const cred = advanceCredibility({ worldState, tick: now, deltas });
+  const nextWorldState = cred.changed ? cred.worldState : worldState;
+  const nextUpdates = applyLegitimacyHits(updates, legitimacyHits);
+  return { worldState: nextWorldState, settlementUpdates: nextUpdates, newsEntries, changed: true };
 }

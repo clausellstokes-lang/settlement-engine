@@ -73,8 +73,8 @@ import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
-import { advancePeaceReasons } from './peaceReasons.js';
-import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, MOMENTUM_TUNING } from './momentum.js';
+import { advancePeaceReasons, peaceReasonsFor } from './peaceReasons.js';
+import { momentumActive, commitmentDepositsFor, advanceCommitments, entityThreshold, makeCommitmentDiscountFn, advanceMomentumCracks, MOMENTUM_TUNING } from './momentum.js';
 import { advanceTreaties } from './peaceTerms.js';
 import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceNaval, navalActive } from './navalKernel.js';
@@ -2327,6 +2327,38 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     }));
     const commitments = advanceCommitments({ worldState: memoryState, tick: worldState.tick, deposits: scaledDeposits });
     if (commitments.changed) memoryState = /** @type {typeof memoryState} */ (commitments.worldState);
+    // W-MOMENTUM STAGE 4 — THE LIVE CRACK (design §4). Right after the commitment fold (it
+    // reads this tick's stock + the fresh sue_for_peace* recall stamps): a proud/committed
+    // seat that climbs down PAST its cliff pays the priced consequence ONCE — a 'climb_down'
+    // credibility charge (a no-op when info-statecraft is dark) + a legitimacy hit on the
+    // seat + a receipt naming the depth held. The lawful court's procedural crack + a
+    // face-saving off-ramp (mediation, resolved from the peace-reasons ledger) SOFTEN the
+    // price, never to zero. Succession-rerolls-the-cliff is emergent (entityThreshold reads
+    // the live roster). Consequences ride E0-exempt. DORMANT ⇒ no-op (byte-identical).
+    const cracks = advanceMomentumCracks({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      tick: worldState.tick,
+      nameFor: settlementNameFor,
+      // The face-saving exit resolver: a live 'mediation' peace reason on the pair softens
+      // the price (design §4 — mediation's 20% soften). peaceReasonsFor returns null when the
+      // peace-engine ledger is dark ⇒ '' ⇒ full price. non_aggression / white_peace /
+      // declared_resolution are supported by faceSavingReliefOf but await their own live
+      // exit signal (declared_resolution needs the new seam-executor term — deferred).
+      exitKindFor: (/** @type {string} */ a, /** @type {string} */ t) => {
+        const pr = peaceReasonsFor(memoryState, a, t);
+        const med = pr && pr.reasons ? /** @type {Record<string, { score?: number }>} */ (pr.reasons).mediation : null;
+        return med && Number(med.score) > 0 ? 'mediation' : '';
+      },
+    });
+    if (cracks.changed) {
+      memoryState = /** @type {typeof memoryState} */ (cracks.worldState);
+      settlementUpdates = cracks.settlementUpdates;
+      if (cracks.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, cracks.newsEntries, { now });
+      }
+    }
   }
   const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
