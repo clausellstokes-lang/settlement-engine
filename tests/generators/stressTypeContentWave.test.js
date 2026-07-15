@@ -10,7 +10,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressTypes.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { buildStressContext } from '../../src/generators/stressGenerator.js';
 
 const NEW = ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt'];

@@ -6,7 +6,6 @@
  *  - Institution classification  (getInstitutionNames)
  *  - Core influence scoring      (getInstFlags, getStressFlags)
  *  - Trade/water dependency      (evaluateWaterDependency)
- *  - NPC secret content          (STRESS_INSTITUTION_EFFECTS)
  *  - Shared utility functions    (pickRandom, clamp, replaceTokens, …)
  */
 
@@ -17,7 +16,6 @@ import {
 // chance/pick/randInt come from rngContext directly (not from constants.js)
 // since 2026-04 — eliminates the data→engine→data circular chunk warning.
 import { chance, pick, randInt } from '../kernel/rngContext.js';
-export { STRESS_INSTITUTION_EFFECTS } from '../data/stressTypes.js';
 
 
 // ─── Re-export primitives ────────────────────────────────────────────────────

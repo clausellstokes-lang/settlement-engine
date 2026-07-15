@@ -20,7 +20,8 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { STRESS_TYPE_MAP, STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressTypes.js';
+import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
+import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { STRESS_TYPE_META } from '../../src/data/stressTypesMeta.js';
 import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
 import { STRESS_SEVERITY_WEIGHT } from '../../src/generators/stressGenerator.js';
