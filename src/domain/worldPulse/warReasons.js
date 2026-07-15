@@ -46,6 +46,10 @@
 
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { ensureRelationshipState, relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
+// W-DOCTRINE-3b §4 — the exposed-foreign-corruption magnitude read (the corruption_exposed
+// casus's fuel). One-directional: corruptionWeb never imports warReasons (its pair key is
+// inlined). Absent ledger ⇒ 0 ⇒ byte-identical (no corruption_exposed reason materializes).
+import { exposedCorruptionForPair } from './corruptionWeb.js';
 import { buildPressureSummary } from './relationshipEvolution.js';
 import { buildThreatByCid } from './martialReadiness.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -534,7 +538,7 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
           hostile,
         }),
       },
-      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: undefined }) },
+      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(worldState, fromId, toId, tick) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);

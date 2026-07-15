@@ -27,6 +27,26 @@ describe('toPublicSafe (§1k)', () => {
     }
   });
 
+  it('W-DOCTRINE-3b §6 — the corruption BENEFICIARY identity never reaches the player projection', () => {
+    // The default (stripped) NPC allowlist carries none of the corruption fields — corrupt,
+    // corruptionVector, or corruptTies (incl. the leash's foreign patron). The beneficiary
+    // rides the DM-truth block only; publicNpc is auto-safe (no allowlist entry to leak it).
+    const out = toPublicSafe({
+      npcs: [{
+        name: 'Reeve Var', role: 'Reeve', influence: 40,
+        corrupt: true, corruptionVector: 'forbidden_patron',
+        corruptTies: { leash: { kind: 'foreign_settlement', settlementId: 'crown', covert: true } },
+      }],
+    });
+    expect(out.npcs).toHaveLength(1);
+    expect(out.npcs[0].name).toBe('Reeve Var');
+    for (const k of ['corrupt', 'corruptionVector', 'corruptTies']) {
+      expect(out.npcs[0][k]).toBeUndefined();
+    }
+    // Belt-and-braces: no serialized projection mentions the patron id anywhere.
+    expect(JSON.stringify(out)).not.toContain('crown');
+  });
+
   it('does not mutate the input', () => {
     const input = { name: 'Foo', aiData: { x: 1 } };
     toPublicSafe(input);

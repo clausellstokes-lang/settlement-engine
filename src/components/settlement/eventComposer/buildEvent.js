@@ -42,7 +42,7 @@ export function buildEvent(form) {
     addCategory, severity, dimension,
     importance, role, institutionId,
     npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
-    quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
+    quality, relationshipType, criminalOrg, criminalOrgs, corruptScope, corruptBeneficiary,
     stressorPick, stressorSeverity, powerCause, reliefMagnitude,
     tradeDirection, tradeEntrepot, swapWithNpcId, tierDirection,
     customContent, deityRef, deityMode, cultRemoveRef,
@@ -99,8 +99,21 @@ export function buildEvent(form) {
     payload.relationshipType = relationshipType || RELATIONSHIP_OPTIONS[type][0];
   }
   if (type === 'IMPOSE_CORRUPTION') {
-    const org = criminalOrg || criminalOrgs[0];
-    if (org) payload.criminalInstitution = org;
+    // W-DOCTRINE-3b §6 — THE BENEFICIARY PICKER. `corruptBeneficiary` names WHO holds the
+    // leash: absent/'local' ⇒ the local underworld (today's path, BYTE-IDENTICAL — no leash
+    // key, just criminalInstitution + scope); 'foreign:<settlementId>' ⇒ a foreign court, which
+    // stamps a normalized foreign_settlement leash and drops the local-org requirement (the
+    // channel requirement replaces it — imposeCorruption resolves the beneficiary, not a local
+    // org). The beneficiary identity rides the DM-truth leash only; publicNpc never projects it.
+    const foreignId = typeof corruptBeneficiary === 'string' && corruptBeneficiary.startsWith('foreign:')
+      ? corruptBeneficiary.slice('foreign:'.length)
+      : null;
+    if (foreignId) {
+      payload.leash = { kind: 'foreign_settlement', settlementId: foreignId, factionName: null, viaLocalOrg: null, covert: true };
+    } else {
+      const org = criminalOrg || criminalOrgs[0];
+      if (org) payload.criminalInstitution = org;
+    }
     // Scope: 'individual' turns only the NPC (byte-identical to the old scope-less
     // apply); 'individual_institution' also covertly compromises their home
     // institution in-chain (mutateEntities.js imposeCorruption reads payload.scope).

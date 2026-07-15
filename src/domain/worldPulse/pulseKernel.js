@@ -69,7 +69,7 @@ import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
-import { advanceCorruptionWeb } from './corruptionWeb.js';
+import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
@@ -549,6 +549,40 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
     localSettlements.set(sid, s);
+  }
+
+  // W-DOCTRINE-3b §4 — THE FOREIGN CONSEQUENCE LANE. A foreign asset's exposure this tick
+  // fires the blowback triple: the exposedCorruption ledger (the war-reason fuel, decaying),
+  // a people-held grievance on the (corrupted↔patron) edge (feeds scoreGrievance the same
+  // pulse — advanceWarReasons runs later), a deception-class credibility charge on the patron,
+  // and BOTH-court legitimacy hits returned as courtHits (npcAgency has no cross-settlement
+  // handle; the localSettlements Map lives here). DORMANT behind corruptionWebActive ⇒ an
+  // immediate no-op (no ledger, no edge/credibility write, no court hit) — byte-identical.
+  {
+    const blowback = applyForeignExposureBlowback({
+      worldState, snapshot, exposures: corruption.exposures || [],
+      graph: snapshot.regionalGraph, tick: worldState.tick, now,
+    });
+    if (blowback.changed) {
+      worldState = /** @type {typeof worldState} */ (blowback.worldState);
+      for (const hit of blowback.courtHits) {
+        const court = localSettlements.get(String(hit.settlementId));
+        if (!court) continue; // an off-map / unadvanced endpoint — no local court to tarnish
+        const rotten = hit.role === 'corrupted';
+        localSettlements.set(String(hit.settlementId), withActiveCondition(court, {
+          archetype: 'corruption_exposed',
+          severity: hit.severity,
+          triggeredAt: { tick: worldState.tick, sourceEventType: 'FOREIGN_CORRUPTION_EXPOSURE', sourceEventTargetId: String(hit.settlementId) },
+          causes: [{
+            source: `foreign_corruption:${hit.role}`,
+            effect: 'corruption_scandal',
+            reason: rotten
+              ? `${hit.npcName || 'A trusted official'} was revealed as a foreign asset — the court looks rotten.`
+              : `${hit.npcName || 'A foreign asset'}'s exposure named this court as the patron behind the rot — it looks villainous.`,
+          }],
+        }));
+      }
+    }
   }
 
   // A faction crossing into/out of full 'capture' is permanent settlement

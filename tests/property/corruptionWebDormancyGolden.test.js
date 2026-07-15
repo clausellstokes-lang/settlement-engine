@@ -225,6 +225,12 @@ describe('corruption web — dormancy golden (wired-but-dormant is byte-identica
     // Ferrywater's clerk stays clean (no criminal org ⇒ no local onset; the foreign mint is dark).
     const census = leashCensus(saves);
     expect(Object.keys(census).length, 'no corrupt NPCs at all when dormant').toBe(0);
+    // W-DOCTRINE-3b §4/§5 — the DOWNSTREAM lanes are dark too: no exposedCorruption ledger (the
+    // blowback triple never fires) and no pay-posture ledger (the counterplay reads collapse to
+    // neutral). Both are drop-when-empty ⇒ absent when dormant (byte-identical).
+    const sl = /** @type {Record<string, unknown>} */ (campaign.worldState?.spatialLedgers || {});
+    expect(sl.exposedCorruption, '§4 blowback ledger absent when dormant').toBeUndefined();
+    expect(sl.payPostures, '§5 pay-posture ledger absent when dormant').toBeUndefined();
   }, 60_000);
 });
 

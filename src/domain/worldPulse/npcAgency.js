@@ -800,6 +800,14 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const leash = resolveLeash(npc, item.settlement);
       const criminalInstitution = leash.foreign ? null : (leash.criminalInstitution || climate.criminalInstitutions[0] || null);
       const atBottom = (s.dotRank || 1) <= 1;
+      // W-DOCTRINE-3b §4 — annotate a FOREIGN exposure with its resolved patron endpoint +
+      // the asset's importance, captured HERE where the leash + NPC are in hand (an ousting
+      // replaces the NPC downstream, so re-resolving later would miss it). Byte-neutral: the
+      // persisted corruptionEvents projection picks only 5 named fields, never these; the
+      // BLOWBACK they feed is gated behind corruptionWebActive (applyForeignExposureBlowback).
+      const foreignFields = leash.foreign
+        ? { foreign: true, patronId: leash.settlementId, patronKind: leash.kind, patronFactionName: leash.factionName, importance: npc.importance }
+        : null;
 
       if (atBottom && local.random() < CORRUPTION_TUNING.outReplaceAtNotable) {
         npcStates[id] = {
@@ -810,7 +818,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
           ousted: true,
           timesExposed: priorExposures + 1,
         };
-        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution });
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'ousted', criminalInstitution, homeInstitution, ...foreignFields });
       } else {
         const nextRank = demoteDotRank(s.dotRank);
         npcStates[id] = {
@@ -820,7 +828,7 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
           corruptionHeat: clamp01((s.corruptionHeat || 0) * 0.7),
           timesExposed: priorExposures + 1,
         };
-        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution });
+        exposures.push({ npcId: id, settlementId: item.id, name: s.name, kind: 'demoted', criminalInstitution, homeInstitution, ...foreignFields });
       }
     });
   }

@@ -21,8 +21,14 @@ import { computeGuildStrengthBy } from '../../src/domain/worldPulse/thievesGuild
 import {
   corruptionWebActive, advanceCorruptionWeb, foreignGripOf, directionBias,
   assetSightFidelityOf, rawChannelQuality, obligationDebt01, foreignAssetsByPatron,
+  applyForeignExposureBlowback, foreignExposuresFrom, exposedCorruptionForPair, foreignEndpointLive,
+  recruitmentWeight, officialPay01,
   CORRUPTION_WEB_TUNING,
 } from '../../src/domain/worldPulse/corruptionWeb.js';
+import { advanceWarReasons, reasonPairKey, scoreCorruptionExposed } from '../../src/domain/worldPulse/warReasons.js';
+import { advanceCauseLifecycle } from '../../src/domain/worldPulse/causeLifecycle.js';
+import { getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
+import { credibilityScoreOf } from '../../src/domain/worldPulse/informationStatecraft.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 
 describe('W-DOCTRINE-3 §1 — resolveLeash chokepoint (normalize on read; no migration)', () => {
@@ -310,5 +316,248 @@ describe('W-DOCTRINE-3b §2 — channel + obligation + scarcity', () => {
     const { snapshot } = creationWorld({ preAssets });
     const byPatron = foreignAssetsByPatron(snapshot);
     expect((byPatron.get('p') || []).length).toBe(3);
+  });
+});
+
+// ── §4 THE FOREIGN CONSEQUENCE LANE (exposure → the blowback triple) ──────────────
+// The lit rules for §4 need the credibility charge's substrate too (infoStatecraft).
+const BLOWBACK_RULES = { infoMode: 'full', corruptionWebEnabled: true, infoStatecraftEnabled: true };
+
+/** A two-court world (corrupted `c` ↔ patron `p`), a hostile edge between them, lit for §4.
+ *  The exposure receipts are synthesized (the mover proves annotation separately below). */
+function blowbackWorld({ webOn = true } = {}) {
+  const cS = { tier: 'city', institutions: [{ name: 'Thieves Guild', category: 'criminal' }], economicState: { prosperity: 'Stable' }, powerStructure: { publicLegitimacy: { score: 55 } }, npcs: [] };
+  const pS = { tier: 'city', institutions: [], economicState: { prosperity: 'Wealthy' }, powerStructure: { publicLegitimacy: { score: 60 } }, npcs: [] };
+  const settlements = [{ id: 'c', settlement: cS }, { id: 'p', settlement: pS }];
+  const byId = new Map(settlements.map((s) => [String(s.id), s]));
+  const edges = [{ id: 'e_cp', from: 'c', to: 'p', relationshipType: 'hostile' }];
+  const worldState = {
+    spatialCanonVersion: 1,
+    simulationRules: webOn ? { ...BLOWBACK_RULES } : { infoMode: 'full' },
+    npcStates: {},
+    relationshipStates: {},
+  };
+  const snapshot = { settlements, byId, regionalGraph: { edges, channels: [] } };
+  return { worldState, snapshot };
+}
+
+/** A synthetic FOREIGN exposure receipt (as advanceNpcCorruption would annotate one). */
+const foreignExposure = (over = {}) => ({
+  npcId: 'c:reeve', settlementId: 'c', name: 'Reeve Var', kind: 'ousted',
+  criminalInstitution: null, homeInstitution: 'City Watch',
+  foreign: true, patronId: 'p', patronKind: 'foreign_settlement', patronFactionName: null, importance: 'key',
+  ...over,
+});
+
+describe('W-DOCTRINE-3b §4 — the blowback triple (foreign exposure fires; local org untouched)', () => {
+  it('THE TRIPLE: a foreign exposure mints the war-reason fuel + a grievance + a credibility charge + BOTH-court hits', () => {
+    const { worldState, snapshot } = blowbackWorld({ webOn: true });
+    const out = applyForeignExposureBlowback({
+      worldState, snapshot, exposures: [foreignExposure()], graph: snapshot.regionalGraph, tick: 10, now: '2026-01-01T00:00:00.000Z',
+    });
+    expect(out.changed).toBe(true);
+    // (1) the exposedCorruption ledger — the directed (corrupted→patron) magnitude.
+    const ledger = getSpatialLedger(out.worldState, 'exposedCorruption');
+    expect(ledger[reasonPairKey('c', 'p')].magnitude01).toBeGreaterThan(0);
+    // (2) the people-held grievance: resentment + a foreign_corruption_exposed incident on the edge.
+    const rel = out.worldState.relationshipStates.e_cp;
+    expect(rel.resentment).toBeGreaterThan(0);
+    expect((rel.recentIncidents || []).some((i) => i.type === 'foreign_corruption_exposed')).toBe(true);
+    // (3) the credibility charge against the PATRON (deception-class ⇒ a negative stock).
+    expect(credibilityScoreOf(out.worldState, 'p', 10)).toBeLessThan(0);
+    // (4) BOTH-court legitimacy hits, returned for the kernel to stamp.
+    expect(out.courtHits.map((h) => `${h.settlementId}:${h.role}`).sort()).toEqual(['c:corrupted', 'p:patron']);
+    // NO local-org impairment: the blowback never touches institutions (the innocent-guild law holds).
+    const guild = snapshot.byId.get('c').settlement.institutions.find((i) => i.name === 'Thieves Guild');
+    expect((guild.impairments || []).length).toBe(0);
+  });
+
+  it('NEGATIVE CONTROL (dormancy): the web dark ⇒ the blowback is a byte-neutral no-op', () => {
+    const { worldState, snapshot } = blowbackWorld({ webOn: false });
+    const out = applyForeignExposureBlowback({
+      worldState, snapshot, exposures: [foreignExposure()], graph: snapshot.regionalGraph, tick: 10, now: '2026-01-01T00:00:00.000Z',
+    });
+    expect(out.changed).toBe(false);
+    expect(out.courtHits).toHaveLength(0);
+    expect(getSpatialLedger(out.worldState, 'exposedCorruption')).toBeFalsy();
+    expect(out.worldState).toBe(worldState); // no allocation on the dark path
+  });
+
+  it('NEGATIVE CONTROL: no FOREIGN exposure ⇒ no blowback (a local/absent exposure never fires the lane)', () => {
+    const { worldState, snapshot } = blowbackWorld({ webOn: true });
+    const localExp = { npcId: 'c:sarge', settlementId: 'c', name: 'Bent Sergeant', kind: 'demoted', criminalInstitution: 'Thieves Guild', homeInstitution: 'City Watch' };
+    const out = applyForeignExposureBlowback({ worldState, snapshot, exposures: [localExp], graph: snapshot.regionalGraph, tick: 10, now: 'N' });
+    expect(out.changed).toBe(false);
+    expect(out.courtHits).toHaveLength(0);
+  });
+
+  it('foreignExposuresFrom drops non-foreign receipts and scales magnitude by importance + ousting', () => {
+    const only = foreignExposuresFrom([
+      foreignExposure({ importance: 'pillar', kind: 'ousted' }),
+      { npcId: 'x', settlementId: 'c', name: 'Local', kind: 'demoted', criminalInstitution: 'Guild' }, // not foreign ⇒ dropped
+    ]);
+    expect(only).toHaveLength(1);
+    const pillar = foreignExposuresFrom([foreignExposure({ importance: 'pillar', kind: 'ousted' })])[0].magnitude01;
+    const notable = foreignExposuresFrom([foreignExposure({ importance: 'notable', kind: 'demoted' })])[0].magnitude01;
+    expect(pillar).toBeGreaterThan(notable); // a pillar's public ousting is a bigger scandal
+  });
+});
+
+describe('W-DOCTRINE-3b §4 — the exposedCorruption ledger read (decay + pair-key parity)', () => {
+  it('exposedCorruptionForPair reads reasonPairKey-keyed entries and decays a scandal over years', () => {
+    const ws = { spatialLedgers: { exposedCorruption: { [reasonPairKey('c', 'p')]: { magnitude01: 0.6, tick: 100 } } } };
+    // Same tick: the full magnitude. PAIR-KEY PARITY: written with reasonPairKey, read back here.
+    expect(exposedCorruptionForPair(ws, 'c', 'p', 100)).toBeCloseTo(0.6, 5);
+    // Directionality: the reverse pair (patron→corrupted) holds nothing.
+    expect(exposedCorruptionForPair(ws, 'p', 'c', 100)).toBe(0);
+    // Decay: many ticks later the scandal has faded below the war-reason MIN_SCORE (0.05).
+    const faded = exposedCorruptionForPair(ws, 'c', 'p', 100 + 60);
+    expect(faded).toBeLessThan(0.6);
+    expect(faded).toBeLessThan(0.05);
+    // Absent ledger ⇒ 0 (byte-identical dormant).
+    expect(exposedCorruptionForPair({}, 'c', 'p', 100)).toBe(0);
+  });
+
+  it('INTEGRATION: the war-reason catalog materializes corruption_exposed for the directed pair', () => {
+    // A peace-engine-lit world with a fresh exposedCorruption entry (c holds it against p) + a
+    // hostile c↔p edge. advanceWarReasons must surface a corruption_exposed reason on c>p.
+    const cItem = { id: 'c', settlement: { name: 'c', institutions: [], powerStructure: {} }, causal: { scores: {} } };
+    const pItem = { id: 'p', settlement: { name: 'p', institutions: [], powerStructure: {} }, causal: { scores: {} } };
+    const edges = [{ id: 'e_cp', from: 'c', to: 'p', relationshipType: 'hostile' }];
+    const worldState = {
+      spatialCanonVersion: 1,
+      simulationRules: { infoMode: 'full', warLayerEnabled: true, peaceEngineEnabled: true },
+      relationshipStates: {},
+      spatialLedgers: { exposedCorruption: { [reasonPairKey('c', 'p')]: { magnitude01: 0.7, tick: 5 } } },
+    };
+    const snapshot = { byId: new Map([['c', cItem], ['p', pItem]]), regionalGraph: { edges } };
+    const out = advanceWarReasons({ snapshot, worldState, graph: { edges }, tick: 5 });
+    const entry = getSpatialLedger(out.worldState, 'warReasons')[reasonPairKey('c', 'p')];
+    expect(entry.reasons.corruption_exposed).toBeTruthy();
+    expect(entry.reasons.corruption_exposed.score).toBeGreaterThan(0);
+    // scoreCorruptionExposed is a pure clamp on the fed magnitude (the scorer contract).
+    expect(scoreCorruptionExposed({ exposedCorruption01: 0.7 }).score).toBeCloseTo(0.7, 5);
+  });
+});
+
+describe('W-DOCTRINE-3b §4 — DOUBLE-SURFACING (the cutout names the local org; the patron rides DM-truth only)', () => {
+  it('a cutout is NOT a foreign exposure ⇒ no blowback against the patron on first exposure', () => {
+    const { worldState, snapshot } = blowbackWorld({ webOn: true });
+    // A cutout exposure runs the LOCAL path: criminalInstitution names the local org, foreign is falsy.
+    const cutoutExp = { npcId: 'c:fence', settlementId: 'c', name: 'The Fence', kind: 'ousted', criminalInstitution: 'Thieves Guild', homeInstitution: 'Thieves Guild' };
+    const out = applyForeignExposureBlowback({ worldState, snapshot, exposures: [cutoutExp], graph: snapshot.regionalGraph, tick: 10, now: 'N' });
+    expect(out.changed).toBe(false);          // the patron takes NO blowback from a cutout's first surfacing
+    expect(out.courtHits).toHaveLength(0);
+  });
+
+  it('the mover ANNOTATES a foreign exposure (patron endpoint + importance) but a cutout stays local', () => {
+    // Foreign: the exposure receipt carries foreign:true + the patron endpoint.
+    const foreignSnap = cityWith({
+      name: 'Turned Envoy', personality: { flaw: 'deceitful' }, factionAffiliation: 'Envoys', importance: 'notable',
+      corrupt: true, corruptionVector: 'forbidden_patron',
+      corruptTies: { foreignPatron: 'crown', conspiracy: 'foreign_sponsored' },
+    });
+    const fExp = drive(foreignSnap, 'annot-foreign');
+    expect(fExp.length).toBeGreaterThan(0);
+    expect(fExp.every((e) => e.foreign === true && e.patronId === 'crown')).toBe(true);
+    expect(fExp.every((e) => e.criminalInstitution === null)).toBe(true); // DM-truth carries the patron; no local org named
+    // Cutout: the exposure names the local org and is NOT annotated foreign (the patron is second-hop only).
+    const cutoutSnap = cityWith({
+      name: 'Dock Boss', personality: { flaw: 'greedy' }, factionAffiliation: 'Dockers', importance: 'notable',
+      corrupt: true, corruptionVector: 'greed',
+      corruptTies: { criminalInstitution: 'Thieves Guild', leash: { kind: 'cutout', viaLocalOrg: 'Thieves Guild', settlementId: 'crown', covert: true } },
+    });
+    const cExp = drive(cutoutSnap, 'annot-cutout');
+    expect(cExp.length).toBeGreaterThan(0);
+    expect(cExp.every((e) => !e.foreign)).toBe(true);                              // never annotated foreign
+    expect(cExp.every((e) => e.criminalInstitution === 'Thieves Guild')).toBe(true); // the local org is named (first surfacing)
+    // The DM truth still carries the real patron (resolveLeash on the cutout NPC).
+    expect(resolveLeash(cutoutSnap.settlements[0].settlement.npcs[0]).settlementId).toBe('crown');
+  });
+});
+
+describe('W-DOCTRINE-3b §4 — leash re-pointing on patron death/retreat (causeLifecycle Terminal 2b)', () => {
+  const foreignBearer = () => ({ id: 'cap', name: 'cap', corrupt: true, personality: { dominant: 'principled', flaw: 'honest' }, corruptTies: { foreignPatron: 'p', conspiracy: 'foreign_sponsored' } });
+  const priorFor = (npc) => ({ a: { [npcId('a', npc, 0)]: { causeClass: 'captured', family: 'corruption', stage: 'attributed', role: 'criminal', situation: 'compromised-covert', originTick: 2, resolveHold: 0, priorCauses: [] } } });
+  const litWs = (npc, on) => ({ npcStates: { [npcId('a', npc, 0)]: { roleArchetype: 'criminal' } }, spatialCanonVersion: on ? 1 : undefined, simulationRules: on ? { infoMode: 'full', corruptionWebEnabled: true } : { infoMode: 'full' } });
+  const item = (npc) => ({ id: 'a', settlement: { name: 'a', npcs: [npc], institutions: [], powerStructure: {}, activeConditions: [] }, causal: { scores: {} }, activeConditions: [] });
+  const patronItem = { id: 'p', settlement: { name: 'p', status: 'thriving', npcs: [], institutions: [] }, causal: { scores: {} } };
+
+  it('RE-POINT: a foreign asset whose PATRON is gone from the realm loses its paymaster (web lit)', () => {
+    const npc = foreignBearer();
+    // The patron 'p' is ABSENT from the snapshot ⇒ foreignEndpointLive === false ⇒ re-adjudicate.
+    const out = advanceCauseLifecycle({ snapshot: { settlements: [item(npc)] }, worldState: litWs(npc, true), priorLedger: priorFor(npc), rng: createPRNG('rp').fork('x'), tick: 12 });
+    const evt = out.events.find((e) => e.stage === 're-adjudicated');
+    expect(evt).toBeTruthy();
+    expect(evt.reasons.join(' ')).toMatch(/Foreign patron/i);
+  });
+
+  it('NEGATIVE CONTROL: the patron ALIVE and present ⇒ no re-pointing (the asset holds)', () => {
+    const npc = foreignBearer();
+    const out = advanceCauseLifecycle({ snapshot: { settlements: [item(npc), patronItem] }, worldState: litWs(npc, true), priorLedger: priorFor(npc), rng: createPRNG('rp').fork('x'), tick: 12 });
+    expect(out.events.find((e) => e.stage === 're-adjudicated')).toBeFalsy();
+  });
+
+  it('NEGATIVE CONTROL (dormancy): the web DARK ⇒ a foreign traitor never re-points (byte-identical)', () => {
+    const npc = foreignBearer();
+    // Patron gone, but the gate is off ⇒ Terminal 2b is inert (sustainingInstitution already nulls foreign).
+    const out = advanceCauseLifecycle({ snapshot: { settlements: [item(npc)] }, worldState: litWs(npc, false), priorLedger: priorFor(npc), rng: createPRNG('rp').fork('x'), tick: 12 });
+    expect(out.events.find((e) => e.stage === 're-adjudicated')).toBeFalsy();
+  });
+
+  it('foreignEndpointLive: present+standing ⇒ live; absent/destroyed/occupied ⇒ dead; non-foreign/faction-only ⇒ live', () => {
+    const snap = { byId: new Map([['p', { id: 'p', settlement: { status: 'thriving' } }]]) };
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, snap)).toBe(true);
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'gone' }, snap)).toBe(false);
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, { byId: new Map([['p', { id: 'p', settlement: { status: 'destroyed' } }]]) })).toBe(false);
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, { byId: new Map([['p', { id: 'p', settlement: { occupiedBy: 'x' } }]]) })).toBe(false);
+    expect(foreignEndpointLive({ foreign: false, settlementId: 'p' }, snap)).toBe(true);   // not our concern
+    expect(foreignEndpointLive({ foreign: true, settlementId: null }, snap)).toBe(true);    // faction-only: never spuriously re-point
+  });
+});
+
+// ── §5 COUNTERPLAY (all costed; each with a negative control) ─────────────────────
+/** Inject a spatial ledger onto a creationWorld worldState (postures live beside the obligations). */
+function withLedger(world, name, ledger) {
+  const prevSL = world.worldState.spatialLedgers || {};
+  return { ...world, worldState: { ...world.worldState, spatialLedgers: { ...prevSL, [name]: ledger } } };
+}
+
+describe('W-DOCTRINE-3b §5 — OFFICIAL-PAY posture (raising pay hardens onset resistance)', () => {
+  it('PAY degrades foreign recruitment; NO pay leaves it un-degraded (the negative control)', () => {
+    const base = creationWorld({ criminalEdge: true, obligation: 0 });
+    const noPay = recruitmentWeight(base.snapshot, base.worldState, new Set(), 'p', 't').weight;
+    const paid = withLedger(base, 'payPostures', { t: { level01: 1 } });
+    const paidW = recruitmentWeight(paid.snapshot, paid.worldState, new Set(), 'p', 't').weight;
+    expect(paidW).toBeLessThan(noPay);              // a well-paid court resists the forbidden patron
+    expect(paidW).toBeGreaterThan(0);               // resistance, not immunity (bounded to PAY_RESIST_MAX)
+    expect(officialPay01(paid.worldState, paid.snapshot, 't')).toBeGreaterThan(0);
+    expect(officialPay01(base.worldState, base.snapshot, 't')).toBe(0); // absent ledger ⇒ 0 (byte-neutral)
+  });
+
+  it('AFFORDABILITY: a poorer court cannot fully fund the pay posture (the effective level scales down)', () => {
+    // Rich target (Wealthy, above the afford floor) funds the full posture; a Subsistence target
+    // (below PAY_AFFORD_FLOOR) can only half-fund it — the effective pay level scales down.
+    const richW = creationWorld({ criminalEdge: true });
+    richW.snapshot.byId.get('t').settlement.economicState.prosperity = 'Wealthy';
+    const rich = withLedger(richW, 'payPostures', { t: { level01: 1 } });
+    const poorW = creationWorld({ criminalEdge: true });
+    poorW.snapshot.byId.get('t').settlement.economicState.prosperity = 'Struggling';
+    const poor = withLedger(poorW, 'payPostures', { t: { level01: 1 } });
+    expect(officialPay01(rich.worldState, rich.snapshot, 't')).toBeCloseTo(1, 5);
+    expect(officialPay01(poor.worldState, poor.snapshot, 't')).toBeLessThan(officialPay01(rich.worldState, rich.snapshot, 't'));
+    expect(officialPay01(poor.worldState, poor.snapshot, 't')).toBeGreaterThan(0);
+  });
+});
+
+describe('W-DOCTRINE-3b §5 — HIDE posture (secrecy degrades the patron\'s channel quality)', () => {
+  it('HIDE degrades foreign recruitment; NO secrecy leaves it un-degraded (the negative control)', () => {
+    const base = creationWorld({ criminalEdge: true });
+    const open = recruitmentWeight(base.snapshot, base.worldState, new Set(), 'p', 't');
+    const hidden = withLedger(base, 'secrecyPostures', { t: { level01: 1 } });
+    const hiddenW = recruitmentWeight(hidden.snapshot, hidden.worldState, new Set(), 'p', 't');
+    expect(hiddenW.secrecy01).toBeCloseTo(1, 5);
+    expect(hiddenW.weight).toBeLessThan(open.weight);   // a secretive court is harder to penetrate
+    expect(open.secrecy01).toBe(0);                      // absent ⇒ no degrade (byte-neutral)
   });
 });

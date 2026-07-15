@@ -53,6 +53,10 @@ import { hasRepressingDeity, npcHasTemperament } from '../corruption.js';
 // The resolver rides a LAZY leaf (see corruptionLeash.js); causeLifecycle is the
 // lazy engine chunk, so this import is free of first paint.
 import { resolveLeash } from '../corruptionLeash.js';
+// W-DOCTRINE-3b §4 — the foreign-endpoint re-pointing terminal reads the web gate + the
+// endpoint-liveness predicate (both engine-lazy leaves; corruptionWeb never imports
+// causeLifecycle, so the graph stays acyclic). Gate absent ⇒ Terminal 2b is inert.
+import { corruptionWebActive, foreignEndpointLive } from './corruptionWeb.js';
 import {
   readCauseContext, presentCauseClasses, causeIsClear,
   roleCauseAffinity, CAUSE_FAMILY_OF, CAUSE_LABEL_OF,
@@ -357,9 +361,22 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
       // carries it — no quiet evolution. Keep the record as the public marker.
       if (rec.stage === 'exposed-public') { cidLedger[conditionId] = rec; return; }
 
-      // ── TERMINAL 2: INFRASTRUCTURE DEATH → RE-ADJUDICATE ─────────────────────
+      // ── TERMINAL 2: PAYMASTER DEATH → RE-ADJUDICATE ──────────────────────────
+      // The sustaining paymaster lost: a LOCAL institution DEMOLISHED, or — when the
+      // corruption web is lit (§4) — a FOREIGN endpoint destroyed / occupied / gone from
+      // the realm. Either loss triggers the SAME resolve-vs-re-catch fork (habit never
+      // survives a demolished paymaster). Terminal 2b (the foreign endpoint) is gated on
+      // corruptionWebActive: a betrayal-seeded foreignPatron traitor in a NON-lit world
+      // keeps today's behavior (sustainingInstitution already returns null for it) —
+      // byte-identical dormancy.
       const sustainer = sustainingInstitution(settlement, npc);
-      if (!rec.readjudicated && sustainer && institutionDestroyed(sustainer)) {
+      const localSustainerGone = !!(sustainer && institutionDestroyed(sustainer));
+      const webLit = corruptionWebActive(/** @type {Parameters<typeof corruptionWebActive>[0]} */ (worldState));
+      const foreignLeash = webLit ? resolveLeash(/** @type {SimNpc} */ (npc), /** @type {SimSettlement} */ (settlement)) : null;
+      const foreignEndpointGone = !!(foreignLeash && foreignLeash.foreign
+        && !foreignEndpointLive({ foreign: foreignLeash.foreign, settlementId: foreignLeash.settlementId },
+          /** @type {Parameters<typeof foreignEndpointLive>[1]} */ (snapshot)));
+      if (!rec.readjudicated && (localSustainerGone || foreignEndpointGone)) {
         const climate = reformClimate01(/** @type {CauseContext} */ (ctx), settlement);
         const alt = present.filter((cls) => cls !== rec.causeClass);
         const weights = causeLifecycleSelectionWeights({
@@ -368,6 +385,10 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
         // Re-adjudication is resolve-vs-recatch only: historicize folds into
         // resolve (habit never survives DEMOLISHED infrastructure — owner).
         const reachForNewPatron = alt.length > 0 && pickPath({ reform: weights.reform + weights.historicize, recause: weights.recause, historicize: 0 }, fork) === 'recause';
+        // The LOCAL-institution receipts are BYTE-IDENTICAL to today (existing tests pin the
+        // exact strings); the FOREIGN-endpoint sibling carries its own copy. localSustainerGone
+        // wins the copy when both fire (a local demolition is the concrete, named event).
+        const localName = sustainer?.name;
         if (reachForNewPatron) {
           const newCause = pickCoherentCause(alt, role, fork) || alt[0];
           rec.priorCauses = [...(rec.priorCauses || []), rec.causeClass];
@@ -382,8 +403,12 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
             causeClass: newCause, family: rec.family, stage: 're-adjudicated', priorCause: record.causeClass,
             originTick: rec.originTick, ageBand: ageBandForElapsed(tick - rec.originTick),
             headline: `${npc?.name || 'A compromised official'} finds a new patron`,
-            summary: `${sustainer.name || 'The syndicate'} is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)} — the arrangement re-forms around a live patron.`,
-            reasons: [`Sustaining institution "${sustainer.name}" destroyed; re-adjudicated to ${causeLabel(newCause)}.`],
+            summary: localSustainerGone
+              ? `${localName || 'The syndicate'} is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)} — the arrangement re-forms around a live patron.`
+              : `The foreign patron is gone, but ${npc?.name || 'the official'} reaches for ${causeLabel(newCause)} — the arrangement re-forms around a live patron.`,
+            reasons: [localSustainerGone
+              ? `Sustaining institution "${localName}" destroyed; re-adjudicated to ${causeLabel(newCause)}.`
+              : `Foreign patron withdrawn or fallen; re-adjudicated to ${causeLabel(newCause)}.`],
           }));
         } else {
           // Resolve: the arrangement died with its paymaster.
@@ -393,8 +418,12 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
             causeClass: rec.causeClass, family: rec.family, stage: 're-adjudicated',
             originTick: rec.originTick, resolvedTick: tick, ageBand: ageBandForElapsed(tick - rec.originTick),
             headline: `${npc?.name || 'A compromised official'} is cut loose`,
-            summary: `${sustainer.name || 'The syndicate'} is destroyed, and with it the arrangement that held ${npc?.name || 'the official'}. The compromise dies with its paymaster.`,
-            reasons: [`Sustaining institution "${sustainer.name}" destroyed; the compromise resolved (no live patron remained).`],
+            summary: localSustainerGone
+              ? `${localName || 'The syndicate'} is destroyed, and with it the arrangement that held ${npc?.name || 'the official'}. The compromise dies with its paymaster.`
+              : `The foreign patron is gone, and with it the arrangement that held ${npc?.name || 'the official'}. The compromise dies with its paymaster.`,
+            reasons: [localSustainerGone
+              ? `Sustaining institution "${localName}" destroyed; the compromise resolved (no live patron remained).`
+              : `Foreign patron withdrawn or fallen; the compromise resolved (no live patron remained).`],
           }));
           return;   // record dropped — bearer will read clean
         }

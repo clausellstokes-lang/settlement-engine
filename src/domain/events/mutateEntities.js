@@ -700,21 +700,21 @@ function imposeCorruption(s, event) {
   if (!npc) return vetoMutation('npc_not_found', labelFromTarget(event.targetId));
   if (npc.corrupt) return vetoMutation('npc_already_corrupt', npc.name);
 
-  // Resolve the criminal organization: an explicit pick, else the settlement's criminal
-  // institution. With no criminal organization there is nothing to link to — no-op.
-  const orgName = event.payload?.criminalInstitution
-    || readCorruptionClimate(s).criminalInstitutions[0]
-    || null;
-  if (!orgName) return vetoMutation('no_criminal_org');
-
-  // Vector derives from the NPC's own corruptible flaw (greed / fear / status / ...), mirroring
-  // the organic onset path; defaults to greed when the NPC has no flagged flaw.
-  const vector = corruptionVectorForFlaw(npcCorruptibleFlaw(npc));
+  // W-DOCTRINE-3b §6 — THE BENEFICIARY. A composer beneficiary leash (payload.leash, already
+  // normalized by buildEvent) names a FOREIGN patron court and REPLACES the local-org rule (the
+  // channel requirement): it must carry a resolvable settlement endpoint, else there is nothing
+  // to leash to (no_beneficiary). Stamping the leash names NO local criminalInstitution — a
+  // foreign conspirator's exposure blames no local guild (§4). Absent leash ⇒ today's local path
+  // (a criminal org — BYTE-IDENTICAL). The vector derives from the NPC's own corruptible flaw.
+  const leash = event.payload?.leash;
+  if (leash && !leash.settlementId) return vetoMutation('no_beneficiary');
+  const orgName = event.payload?.criminalInstitution || readCorruptionClimate(s).criminalInstitutions[0] || null;
+  if (!leash && !orgName) return vetoMutation('no_criminal_org');
   const corrupted = {
     ...npc,
     corrupt: true,
-    corruptionVector: vector,
-    corruptTies: { ...(npc.corruptTies || {}), criminalInstitution: orgName },
+    corruptionVector: corruptionVectorForFlaw(npcCorruptibleFlaw(npc)),
+    corruptTies: { ...(npc.corruptTies || {}), ...(leash ? { leash } : { criminalInstitution: orgName }) },
   };
   let next = replaceNpc(s, npc, corrupted);
 

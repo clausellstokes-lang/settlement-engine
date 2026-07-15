@@ -69,4 +69,37 @@ describe('IMPOSE_CORRUPTION', () => {
     const next = impose(s, 'Nobody In Particular');
     expect(next.npcs.every(n => !n.corrupt)).toBe(true);
   });
+
+  // ── W-DOCTRINE-3b §6 — THE BENEFICIARY PICKER (a foreign court, not the local underworld) ──
+  describe('foreign beneficiary leash', () => {
+    // buildEvent normalizes the leash before it reaches the handler; the handler stamps it verbatim.
+    const foreignLeash = { kind: 'foreign_settlement', settlementId: 'crown', factionName: null, viaLocalOrg: null, covert: true };
+
+    it('a FOREIGN-kind leash stamps corruptTies.leash and names NO local org (the channel replaces it)', () => {
+      const next = impose(settlement(), 'Honest Mira', { leash: foreignLeash });
+      const mira = next.npcs.find(n => n.name === 'Honest Mira');
+      expect(mira.corrupt).toBe(true);
+      expect(mira.corruptTies.leash).toEqual(foreignLeash);
+      expect(mira.corruptTies.criminalInstitution).toBeUndefined(); // no local org named
+    });
+
+    it('the channel requirement REPLACES the local-org rule: a foreign leash works with NO local org', () => {
+      const s = settlement();
+      s.institutions = [{ id: 'i2', name: 'City Watch' }]; // no criminal org at all
+      const next = impose(s, 'Honest Mira', { leash: foreignLeash });
+      expect(next.npcs.find(n => n.name === 'Honest Mira').corrupt).toBe(true); // foreign path needs no local underworld
+    });
+
+    it('a foreign leash with NO resolvable endpoint is a no-op (veto no_beneficiary)', () => {
+      const next = impose(settlement(), 'Honest Mira', { leash: { kind: 'foreign_settlement', settlementId: null, factionName: null, covert: true } });
+      expect(next.npcs.find(n => n.name === 'Honest Mira').corrupt).toBeFalsy();
+    });
+
+    it('the LOCAL path is byte-identical when no foreign leash is supplied (no leash key)', () => {
+      const next = impose(settlement(), 'Honest Mira');
+      const mira = next.npcs.find(n => n.name === 'Honest Mira');
+      expect(mira.corruptTies.criminalInstitution).toBe("Thieves' Guild");
+      expect(mira.corruptTies.leash).toBeUndefined();
+    });
+  });
 });

@@ -452,7 +452,10 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
   }),
   IMPOSE_CORRUPTION: entry({
     type: 'IMPOSE_CORRUPTION', family: 'Power',
-    coversVetoCodes: ['npc_not_found', 'npc_already_corrupt', 'no_criminal_org'],
+    // no_beneficiary — W-DOCTRINE-3b §6: a FOREIGN-kind composer leash whose endpoint (settlement
+    // id / faction) does not resolve. The channel requirement's veto, replacing no_criminal_org
+    // for the foreign path. (The verb stays settlement-scoped + walker-legal.)
+    coversVetoCodes: ['npc_not_found', 'npc_already_corrupt', 'no_criminal_org', 'no_beneficiary'],
     dials: [enumDial('scope', ['individual', 'individual_institution'], 'individual', 'How far the rot reaches')],
     targetOptions: (/** @type {Mut} */ s) => buildTargetOptions(s, 'npcs')
       .filter(o => !(s?.npcs || []).find((/** @type {Mut} */ n) => String(n.id || n.name) === o.id)?.corrupt),

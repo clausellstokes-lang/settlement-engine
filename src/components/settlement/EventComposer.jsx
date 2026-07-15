@@ -125,6 +125,7 @@ export default function EventComposer({ onLink = null }) {
   const [relationshipType, setRelationshipType] = useState(''); // §9b/g/h: neighbour relationship for dispute/alliance/trade
   const [criminalOrg, setCriminalOrg] = useState('');          // IMPOSE_CORRUPTION: the criminal organization to link the NPC to
   const [corruptScope, setCorruptScope] = useState('individual'); // IMPOSE_CORRUPTION: individual | individual_institution
+  const [corruptBeneficiary, setCorruptBeneficiary] = useState(''); // IMPOSE_CORRUPTION §6: '' = local underworld; 'foreign:<id>' = a foreign patron court
   const [stressorPick, setStressorPick] = useState(null);     // APPLY_STRESSOR: the picked catalog item
   const [stressorSeverity, setStressorSeverity] = useState('moderate'); // APPLY_STRESSOR: word-banded severity
   const [instigatorNeighbour, setInstigatorNeighbour] = useState('');   // APPLY_STRESSOR: war/infiltration instigator
@@ -334,7 +335,7 @@ export default function EventComposer({ onLink = null }) {
       addCategory, severity, dimension,
       importance, role, institutionId,
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
-      quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
+      quality, relationshipType, criminalOrg, criminalOrgs, corruptScope, corruptBeneficiary,
       stressorPick, stressorSeverity, powerCause, reliefMagnitude,
       tradeDirection, tradeEntrepot, swapWithNpcId,
       tierDirection: clampTierDirection(settlement, tierDirection),
@@ -483,14 +484,13 @@ export default function EventComposer({ onLink = null }) {
           />
         )}
 
-        {/* IMPOSE_CORRUPTION — which criminal organization + how far the rot reaches */}
+        {/* IMPOSE_CORRUPTION — WHO benefits (local underworld / foreign patron) + which criminal organization + how far the rot reaches */}
         {type === 'IMPOSE_CORRUPTION' && (
           <EventComposerCorruptionFields
-            criminalOrgs={criminalOrgs}
-            criminalOrg={criminalOrg}
-            setCriminalOrg={setCriminalOrg}
-            corruptScope={corruptScope}
-            setCorruptScope={setCorruptScope}
+            criminalOrgs={criminalOrgs} criminalOrg={criminalOrg} setCriminalOrg={setCriminalOrg}
+            corruptScope={corruptScope} setCorruptScope={setCorruptScope}
+            foreignSettlements={campaignSettlementOptions}
+            corruptBeneficiary={corruptBeneficiary} setCorruptBeneficiary={setCorruptBeneficiary}
           />
         )}
 
