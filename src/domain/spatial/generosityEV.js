@@ -139,36 +139,14 @@ function round4(v) {
 }
 
 // ── THE GATE (§0.1) — sparse by construction ──────────────────────────────────
-/**
- * @typedef {Object} BondRead
- * @property {string} kind         the live relationship kind ('allied'|'trade_partner'|'vassal'|'patron'|'client'|…)
- * @property {number} strength01   bond strength in [0,1] (trust/pact — the live edge, never a parallel derivation)
- * @property {number} [duty01]     patron/vassal duty weighting in [0,1] (a lord SHOULD relieve his vassal)
- */
-
-/** The relationship kinds whose bond can, above a floor, open the generosity gate. */
-const QUALIFYING_KINDS = new Set(['allied', 'trade_partner', 'vassal', 'patron', 'client']);
-
-/**
- * THE §0.1 GATE — is this pair even ASKED the generosity question? True when ANY holds:
- *  - a qualifying relationship kind above BOND_FLOOR (ally / trade-partner⁺ / vassal / patron);
- *  - a live obligation record between them (a standing debt keeps the channel open);
- *  - the conscience exception (a strongly-good, charity-capable giver evaluates even a
- *    non-bonded neighbour at small magnitude — §2.1).
- * A cold pair with none of these is NEVER evaluated (design law 1). Pure, total.
- * @param {Object} args
- * @param {BondRead|null} [args.bond]
- * @param {boolean} [args.hasObligation]           a live obligation record exists between the pair
- * @param {boolean} [args.conscienceException]     the good-aligned charity-roster exception applies
- * @param {number} [args.bondFloor]                the qualifying bond floor (default 0.2)
- * @returns {boolean}
- */
-export function qualifiesForGenerosity({ bond = null, hasObligation = false, conscienceException = false, bondFloor = 0.2 } = {}) {
-  if (hasObligation === true) return true;
-  if (conscienceException === true) return true;
-  if (bond && QUALIFYING_KINDS.has(String(bond.kind)) && finiteNumber(bond.strength01, 0) >= bondFloor) return true;
-  return false;
-}
+// qualifiesForGenerosity + QUALIFYING_KINDS moved VERBATIM to the zero-import leaf
+// spatial/generosityGate.js (FP-G3): the EAGER FORCE_RELIEF / OFFER_CREDIT DM-verb
+// handlers (mutateWorld.js) run the SAME gate the mover runs, and importing it from
+// THIS lazy kernel would have dragged the whole decision kernel into first paint.
+// Re-exported here so the kernel adapter, the tests, and every lazy consumer keep
+// their import path — single source, one law. @see spatial/generosityGate.js
+/** @typedef {import('./generosityGate.js').BondRead} BondRead */
+export { qualifiesForGenerosity, QUALIFYING_KINDS } from './generosityGate.js';
 
 // ── GIVE-side terms (§2.1) — each bounded, named, documented, retunable ────────
 /**

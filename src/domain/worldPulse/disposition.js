@@ -40,7 +40,9 @@
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { COUP_COERCION } from '../rulingPowerCoup.js';
-import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcData.js';
+// The trait-weight leaf (FP-G3): the single source both TRAIT maps live in; npcData.js
+// re-exports them. Imported from the leaf directly to keep npcData.js off any hot path.
+import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcTraitWeights.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';

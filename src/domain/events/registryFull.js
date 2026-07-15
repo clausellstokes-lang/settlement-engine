@@ -85,4 +85,8 @@ export const RERUN_KEYS_FOR_EVENT = {
   // A forced tier shift rebands population and performs institution roster surgery, so it
   // re-derives the broad structural surface (institutions + demand/food + economy + power).
   SHIFT_TIER:             ['institutions', 'demand', 'foodSecurity', 'economicState', 'powerStructure', 'narrative'],
+  // The generosity counterpart verbs (FP-G3): grain leaves the granary (food/economy)
+  // and FORCE_RELIEF also moves the ruler's legitimacy dial (powerStructure).
+  FORCE_RELIEF:           ['foodSecurity', 'economicState', 'powerStructure', 'narrative'],
+  OFFER_CREDIT:           ['foodSecurity', 'economicState', 'narrative'],
 };

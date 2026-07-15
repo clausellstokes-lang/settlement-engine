@@ -24,7 +24,7 @@
 import { inferImportance } from '../../../domain/entities/npcs.js';
 import { rolesForInstitution, importanceForRole, influenceForImportance } from '../../../domain/roles/roleCatalog.js';
 import { buildTargetOptions, labelOfTarget } from './helpers.js';
-import { RELATIONSHIP_OPTIONS, CUSTOM_RESOURCE_OPTION, STRESSOR_SEVERITY_VALUES } from './EventComposerConstants.js';
+import { RELATIONSHIP_OPTIONS, CUSTOM_RESOURCE_OPTION, STRESSOR_SEVERITY_VALUES, RELIEF_MAGNITUDE_VALUES } from './EventComposerConstants.js';
 import { resolveDeityForEvent } from './EventComposerDeityField.jsx';
 
 /** Mint a compose-session event id — the EXISTING id shape (ev_ + wall clock +
@@ -43,7 +43,7 @@ export function buildEvent(form) {
     importance, role, institutionId,
     npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
     quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-    stressorPick, stressorSeverity, powerCause,
+    stressorPick, stressorSeverity, powerCause, reliefMagnitude,
     tradeDirection, tradeEntrepot, swapWithNpcId, tierDirection,
     customContent, deityRef, deityMode, cultRemoveRef,
     isWarStressor, isInfiltrationStressor, instigatorNeighbour, instigatorRelationship, tradeTarget,
@@ -143,6 +143,12 @@ export function buildEvent(form) {
   }
   if (type === 'PROMOTE_NPC' || type === 'DEMOTE_NPC') {
     payload.swapWithNpcId = swapWithNpcId;
+  }
+  if (type === 'FORCE_RELIEF' || type === 'OFFER_CREDIT') {
+    // The word-banded magnitude (FP-G3): the share of the ABOVE-FLOOR surplus the
+    // decree sends — words at the table, numbers in the engine (the handler reads
+    // it through sev01, clampAtCommit).
+    payload.magnitude = RELIEF_MAGNITUDE_VALUES[reliefMagnitude] ?? 0.5;
   }
   // SHIFT_TIER — a one-step forced promotion/demotion. The host pre-clamps
   // tierDirection to a legal move, so the shown option and the staged event agree;

@@ -19,10 +19,11 @@
  */
 
 import { institutionHasTag, TAG } from '../lib/entities.js';
-// TRAIT_ALIGNMENT is single-sourced in data/npcData.js (beside TRAIT_AGGRESSION).
-// npcAlignmentScore below reads it; the W2b port dropped the local copy that once
-// lived here (byte-identical to this npcData home) so there is exactly one source.
-import { TRAIT_ALIGNMENT } from '../data/npcData.js';
+// TRAIT_ALIGNMENT lives in the zero-import leaf data/npcTraitWeights.js (npcData.js
+// re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
+// so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
+// module into the first-paint static closure (FP-G3 reclaim). @see data/npcTraitWeights.js
+import { TRAIT_ALIGNMENT } from '../data/npcTraitWeights.js';
 
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)

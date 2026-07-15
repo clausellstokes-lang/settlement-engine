@@ -175,4 +175,12 @@ export const EVENT_PROSE = {
     description: 'An NPC is pushed down the ranks of their faction, swapping standing (importance, influence, structural rank) with a chosen peer of the same faction who steps over them.',
     targetPrompt: 'NPC who falls',
   },
+  FORCE_RELIEF: {
+    description: 'Decree a gift of grain to a qualifying neighbour — an ally, trade partner, or vassal/patron. Only grain above the hard reserve floor can go (the DM overrides the willingness, never the law); shipping it out is charity with a political price at home.',
+    targetPrompt: 'Qualifying neighbour to relieve',
+  },
+  OFFER_CREDIT: {
+    description: 'Extend grain to a qualifying neighbour as a LOAN — the same wagons, a ledger behind them. Only grain above the hard reserve floor can go; a loan is not charity, so it spends no legitimacy. Maturity, repayment, and default play out with the living world.',
+    targetPrompt: 'Qualifying neighbour to lend to',
+  },
 };

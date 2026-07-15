@@ -88,17 +88,24 @@
  *
  * E1 IS COMPLETE with this wave: all six §4 instruments (grain_relief, warning, credit, refuge,
  * purchase, trade_overture) ship live. What remains is NOT E1-instrument work:
- *   • FORCE_RELIEF / OFFER_CREDIT counterpart DM-VERBS — DEFERRED, OWNER-GATED ON THE FIRST-
- *     PAINT BUDGET (not a design gap). The ~13-touchpoint event-registry threading
- *     (types/registry/registryFull/mutate/mutateWorld/undoEvent/registryProse/affordanceManifest/
- *     batch + the walker counts 38/29/9→40/31/9 + undoRoundTrip fixtures) is EAGER — registry.js
- *     and mutateWorld.js are in the first-paint static closure via mutate.js. With only ~232 B of
- *     headroom (measured closure 1,213,818 vs budget 1,214,050) two new eager verbs (>1 KB
- *     minified) blow the ratchet; the composer prose-lazy split reclaims only the prose/manifest
- *     leaves, not the registry spec + handlers. A budget raise is owner-gated (owner ruled "no
- *     raise" — FP-2-first). The affordance predicates reuse qualifiesForGenerosity/shouldInitiateAsk;
- *     the handlers run the SAME kernel paths with synthetic-cause DM provenance + vetoMutation
- *     codes when qualifiesForGenerosity refuses. Land after the budget is reclaimed/raised.
+ *   • FORCE_RELIEF / OFFER_CREDIT counterpart DM-VERBS — ✅ SHIPPED (FP-G3 wave, 2026-07-15):
+ *     the full 13-touchpoint threading landed (types / registry lean-spec / registryFull /
+ *     registryProse / mutate / mutateWorld handlers / undoEvent snapshots + annotation scrub /
+ *     affordanceManifest entries / batch consumes / buildEvent + composer dial /
+ *     TARGET_ENTITY_BY_EVENT; walker counts 38/29/9 → 40/31/9; undoRoundTrip fixtures;
+ *     preview≡apply + clamp pins — tests/domain/events/generosityVerbs.test.js). PAID FOR by
+ *     the FP-G3 npcData reclaim (−51,957 B: corruption.js was the sole EAGER importer of the
+ *     64 kB npcData.js for one small map → the data/npcTraitWeights.js leaf), so the wave lands
+ *     far UNDER the pre-wave budget with no raise. The handlers run the SAME structural gate
+ *     the mover runs (spatial/generosityGate.js — qualifiesForGenerosity extracted to a
+ *     zero-import leaf, re-exported by generosityEV), the same reserve-floor law (mirrored
+ *     const under a behavioral parity pin), and the same tenth-month grain flooring (a
+ *     zero-grain decree VETOES — the E1d class, closed on the mover's give path this same
+ *     wave). DM provenance: dual-written atEventId-stamped config._forcedRelief /
+ *     _offeredCredit annotation ledgers (undo scrubs by provenance). Deliberately MOVER-OWNED,
+ *     not in the settlement-scoped handlers (dossier scope reads no worldState): the obligation
+ *     mint, gratitude/incidents, credit maturity, and the receiver-side grain — the annotations
+ *     are the seam a future mover coupling can consume.
  *   • The traveling-relief refinement over commodityFlow (E1a JUDGMENT-2 reaffirmed: invasive —
  *     the M6a ledger is institution-keyed with a food-exclusion rule; a separate peer-shipment
  *     lane or the aspatial fallback is the contained path, not a schema change). W-DOCTRINE.
@@ -707,67 +714,75 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       });
       const lostMonths = transfer ? transfer.lostMonths : 0;
       const gainedMonths = transfer ? transfer.gainedMonths : 0;
+      // ── A gift REACTS only when it ACTUALLY MOVES GRAIN. A willing giver a sliver above
+      // the reserve floor DECIDES to give, but the conserved sink FLOORS the transfer to the
+      // tenth-month ⇒ ZERO grain moves (computeSackFoodTransfer returns null ⇒ lostMonths 0).
+      // That is the tenth-month floor class — E1d's zero-grain-SALE sibling on the GIVE path:
+      // no aid changed history, so NOTHING records it (no obligation, no widow's-mite gratitude,
+      // no legitimacy cost, no succor beat, no rumor broadcast, no trade-overture warming, no
+      // moral-hazard decay). Mirrors the purchase fall-through's `sold` gate exactly. ──
       if (lostMonths > 0) {
         foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths);
         if (gainedMonths > 0) foodDeltas.set(receiverId, (foodDeltas.get(receiverId) || 0) + gainedMonths);
-      }
 
-      // ── The obligation mint (the "aid changes history" ledger). A GIVE_AS_CREDIT verdict
-      // mints a distinct kind:'credit' obligation that MATURES (§3.4 — repayment/default,
-      // resolved below); a gift mints a slow-decaying kind:'grain_relief' debt. Predatory
-      // weight for a leverage-driven / credit gift. ──
-      const isCredit = verdict.verdict === VERDICTS.GIVE_AS_CREDIT;
-      const leverageIntent = isCredit ? Math.max(leverage01, 0.6) : leverage01;
-      const baseMag = clamp01(verdict.magnitudeFraction * (0.5 + 0.5 * need01));
-      const oblMag = obligationMintMagnitude({ baseMagnitude01: baseMag, leverageIntent01: leverageIntent });
-      if (oblMag >= T.OBLIGATION_MIN) {
-        obligationMints.push({
-          from: receiverId, to: giverId, kind: isCredit ? 'credit' : 'grain_relief',
-          magnitude: oblMag, mintTick: tick, lastTick: tick,
-          ...(leverageIntent >= 0.6 ? { predatory: true } : {}),
+        // ── The obligation mint (the "aid changes history" ledger). A GIVE_AS_CREDIT verdict
+        // mints a distinct kind:'credit' obligation that MATURES (§3.4 — repayment/default,
+        // resolved below); a gift mints a slow-decaying kind:'grain_relief' debt. Predatory
+        // weight for a leverage-driven / credit gift. ──
+        const isCredit = verdict.verdict === VERDICTS.GIVE_AS_CREDIT;
+        const leverageIntent = isCredit ? Math.max(leverage01, 0.6) : leverage01;
+        const baseMag = clamp01(verdict.magnitudeFraction * (0.5 + 0.5 * need01));
+        const oblMag = obligationMintMagnitude({ baseMagnitude01: baseMag, leverageIntent01: leverageIntent });
+        if (oblMag >= T.OBLIGATION_MIN) {
+          obligationMints.push({
+            from: receiverId, to: giverId, kind: isCredit ? 'credit' : 'grain_relief',
+            magnitude: oblMag, mintTick: tick, lastTick: tick,
+            ...(leverageIntent >= 0.6 ? { predatory: true } : {}),
+          });
+        }
+
+        // ── §9 LEGITIMACY→COUP write-back (design §2.2): a hungry giver's ruler pays a
+        // legitimacy price for shipping food out (courage with a political cost); a
+        // comfortable "granary city" earns a small reputation lift. Bounded, applied to the
+        // giver's publicLegitimacy.score below (only where a structured legitimacy exists). ──
+        const legDelta = ownScarcity01 > 0.5
+          ? -(T.LEGITIMACY_COST * verdict.magnitudeFraction * ownScarcity01)
+          : (T.LEGITIMACY_LIFT * verdict.magnitudeFraction * (1 - ownScarcity01));
+        if (legDelta !== 0) legitimacyDeltas.set(giverId, (legitimacyDeltas.get(giverId) || 0) + legDelta);
+
+        // ── The widow's-mite gratitude + the typed incidents (edge-backed pairs only — an
+        // obligation-only pair without a graph edge would be dropped by the relationship
+        // rebuild; its debt still records on the self-owned obligation ledger above). ──
+        const sacrifice = giverMarginSacrifice({
+          magnitudeFraction01: verdict.magnitudeFraction,
+          giverHeadroom01: reserveAboveFloor01,
+          seasonalScarcity01: clamp01(1 - seasonalOutlook01),
         });
+        const gratitude = gratitudeDeposit({ needRelieved01: need01, giverMarginSacrifice01: sacrifice, throughTie: false });
+        const givenInc = reliefIncident({ kind: 'relief_given', tick, magnitude01: gratitude, summary: verdict.receipt });
+        const recvInc = reliefIncident({ kind: 'relief_received', tick, magnitude01: gratitude });
+        if (givenInc) incidentWrites.push({ key: relKey, incident: givenInc });
+        if (recvInc) incidentWrites.push({ key: relKey, incident: recvInc });
+
+        newsEntries.push(succorNews({
+          giverId, receiverId,
+          giverName: String(giverItem?.name || giverId), receiverName: String(receiverItem?.name || receiverId),
+          verdict: verdict.verdict, receipt: verdict.receipt, magnitude: verdict.magnitudeFraction, tick, now,
+        }));
+        // ── TRADE-OVERTURE give-stream (§9 TRADE / A4): this pair exchanged a gift this tick,
+        // warming the giver→receiver corridor toward a trade route (the per-pair source that
+        // supersedes the per-node tradeFlow tally). The dwell-bounded warmth ledger + the
+        // byte-neutral trust-nudge are committed below. ──
+        tradeOvertureGaveInfo.set(`${giverId}:${receiverId}`, { giverId, receiverId, relKey, trust: clamp01(num(relState.trust, 0)) });
+        // RUMOR broadcast (design §3.1 / §9): a NOTABLE gift makes the giver read as richer +
+        // friendlier to those already watching (the belief-nudge is committed below, belief-gated).
+        if (verdict.magnitudeFraction >= T.BELIEF_NUDGE_MIN_MAGNITUDE) beliefBroadcasters.add(giverId);
       }
-
-      // ── §9 LEGITIMACY→COUP write-back (design §2.2): a hungry giver's ruler pays a
-      // legitimacy price for shipping food out (courage with a political cost); a
-      // comfortable "granary city" earns a small reputation lift. Bounded, applied to the
-      // giver's publicLegitimacy.score below (only where a structured legitimacy exists). ──
-      const legDelta = ownScarcity01 > 0.5
-        ? -(T.LEGITIMACY_COST * verdict.magnitudeFraction * ownScarcity01)
-        : (T.LEGITIMACY_LIFT * verdict.magnitudeFraction * (1 - ownScarcity01));
-      if (legDelta !== 0) legitimacyDeltas.set(giverId, (legitimacyDeltas.get(giverId) || 0) + legDelta);
-
-      // ── The widow's-mite gratitude + the typed incidents (edge-backed pairs only — an
-      // obligation-only pair without a graph edge would be dropped by the relationship
-      // rebuild; its debt still records on the self-owned obligation ledger above). ──
-      const sacrifice = giverMarginSacrifice({
-        magnitudeFraction01: verdict.magnitudeFraction,
-        giverHeadroom01: reserveAboveFloor01,
-        seasonalScarcity01: clamp01(1 - seasonalOutlook01),
-      });
-      const gratitude = gratitudeDeposit({ needRelieved01: need01, giverMarginSacrifice01: sacrifice, throughTie: false });
-      const givenInc = reliefIncident({ kind: 'relief_given', tick, magnitude01: gratitude, summary: verdict.receipt });
-      const recvInc = reliefIncident({ kind: 'relief_received', tick, magnitude01: gratitude });
-      if (givenInc) incidentWrites.push({ key: relKey, incident: givenInc });
-      if (recvInc) incidentWrites.push({ key: relKey, incident: recvInc });
-
-      // The moral-hazard buffer step (relief this tick decays the receiver's discipline).
-      bufferSteps.push({ giverId, receiverId, reliefThisTick: true });
-
-      newsEntries.push(succorNews({
-        giverId, receiverId,
-        giverName: String(giverItem?.name || giverId), receiverName: String(receiverItem?.name || receiverId),
-        verdict: verdict.verdict, receipt: verdict.receipt, magnitude: verdict.magnitudeFraction, tick, now,
-      }));
-      receipts.push({ giverId, receiverId, verdict: verdict.verdict, magnitude: verdict.magnitudeFraction });
-      // ── TRADE-OVERTURE give-stream (§9 TRADE / A4): this pair exchanged a gift this tick,
-      // warming the giver→receiver corridor toward a trade route (the per-pair source that
-      // supersedes the per-node tradeFlow tally). The dwell-bounded warmth ledger + the
-      // byte-neutral trust-nudge are committed below. ──
-      tradeOvertureGaveInfo.set(`${giverId}:${receiverId}`, { giverId, receiverId, relKey, trust: clamp01(num(relState.trust, 0)) });
-      // RUMOR broadcast (design §3.1 / §9): a NOTABLE gift makes the giver read as richer +
-      // friendlier to those already watching (the belief-nudge is committed below, belief-gated).
-      if (verdict.magnitudeFraction >= T.BELIEF_NUDGE_MIN_MAGNITUDE) beliefBroadcasters.add(giverId);
+      // The receipt + the moral-hazard buffer step fire ONCE per give, keyed on whether grain
+      // ACTUALLY moved: a zero-grain give banks a magnitude-0 receipt (the ask fired — NOT a
+      // refusal) and NO discipline decay (no relief was received). Mirrors the purchase `sold` gate.
+      receipts.push({ giverId, receiverId, verdict: verdict.verdict, magnitude: lostMonths > 0 ? verdict.magnitudeFraction : 0 });
+      bufferSteps.push({ giverId, receiverId, reliefThisTick: lostMonths > 0 });
     } else {
       // ── THE PURCHASE FALL-THROUGH (design §4 / A2 — "you won't give? I'll pay"). The
       // free gift was refused; a needy-AND-SOLVENT buyer may still BUY the grain the seller

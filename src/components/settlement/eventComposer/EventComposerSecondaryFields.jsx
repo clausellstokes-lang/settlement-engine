@@ -23,6 +23,7 @@ import { selectStyle } from './EventComposerConstants.js';
 export function EventComposerSecondaryFields({
   type, tradeDirection, setTradeDirection, tradeEntrepot, setTradeEntrepot,
   stressorSeverity, setStressorSeverity, powerCause, setPowerCause, settlement, target,
+  reliefMagnitude, setReliefMagnitude,
 }) {
   // KILL_NPC: importance is pulled from the chosen NPC and shown read-only, so the
   // DM sees the consequence tier before applying.
@@ -69,6 +70,22 @@ export function EventComposerSecondaryFields({
             <option value="minor">Minor</option>
             <option value="moderate">Moderate</option>
             <option value="severe">Severe</option>
+          </select>
+        </Field>
+      )}
+
+      {/* FORCE_RELIEF / OFFER_CREDIT — word-banded magnitude: the share of the
+          ABOVE-FLOOR surplus the decree sends (FP-G3; the reserve floor is law) */}
+      {(type === 'FORCE_RELIEF' || type === 'OFFER_CREDIT') && (
+        <Field label="Magnitude" hint={
+          reliefMagnitude === 'generous' ? 'Near everything above the reserve floor' :
+          reliefMagnitude === 'token'    ? 'A token — enough to be remembered'       :
+                                           'A measured share of the surplus'
+        }>
+          <select value={reliefMagnitude} onChange={e => setReliefMagnitude(e.target.value)} style={selectStyle}>
+            <option value="token">Token</option>
+            <option value="measured">Measured</option>
+            <option value="generous">Generous</option>
           </select>
         </Field>
       )}

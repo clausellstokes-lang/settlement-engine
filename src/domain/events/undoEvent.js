@@ -201,6 +201,13 @@ const SNAPSHOT_SETTLEMENT_KEYS = Object.freeze({
   // exactly reversible from provenance, so the pre-event copy of these subtrees is the
   // only true inverse. (config.tier/settType are restored via SNAPSHOT_CONFIG_KEYS.)
   SHIFT_TIER:          Object.freeze(['tier', 'population', 'institutions', 'tierHistory', 'institutionHistory']),
+  // The generosity verbs (FP-G3) debit foodSecurity.storageMonths in place (no
+  // provenance on a number) and FORCE_RELIEF nudges publicLegitimacy.score — the
+  // pre-event copies are the only exact way back. Their _forcedRelief/_offeredCredit
+  // annotation entries carry atEventId and are scrubbed by provenance instead
+  // (scrubConfigAnnotations below).
+  FORCE_RELIEF:        Object.freeze(['economicState', 'powerStructure']),
+  OFFER_CREDIT:        Object.freeze(['economicState']),
 });
 
 // The dual-written record keys mirrored into the raw _config. The handlers
@@ -392,7 +399,10 @@ function withoutEventStressEntries(/** @type {MutSettlement} */ s, /** @type {Mu
 function scrubConfigAnnotations(/** @type {MutEntity} */ config, /** @type {MutEntity} */ eventId) {
   if (!config || typeof config !== 'object') return config;
   let next = config;
-  for (const key of ['_cutRoutes', '_refugeeWaves', '_raidHistory']) {
+  // _forcedRelief/_offeredCredit (the FP-G3 generosity verbs) follow the _cutRoutes
+  // discipline exactly: append-only, atEventId-stamped, dual-written to _config
+  // (withoutEventAnnotations runs this scrub on both copies).
+  for (const key of ['_cutRoutes', '_refugeeWaves', '_raidHistory', '_forcedRelief', '_offeredCredit']) {
     const arr = next[key];
     if (!Array.isArray(arr)) continue;
     const filtered = arr.filter((/** @type {MutEntity} */ e) => e?.atEventId !== eventId);

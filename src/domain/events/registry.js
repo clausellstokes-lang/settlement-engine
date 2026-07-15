@@ -733,6 +733,43 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
     },
   },
 
+  // ── The generosity counterpart verbs (FP-G3 wave — the Counterpart Criterion) ──
+  // The DM-forceable twins of the generosity engine's grain instruments
+  // (docs/DESIGN_GENEROSITY_ENGINE.md §4): FORCE_RELIEF decrees a gift of grain to a
+  // qualifying neighbour; OFFER_CREDIT extends the same grain as a loan. The handlers
+  // (mutateWorld.js) run the SAME structural gate the organic mover runs
+  // (spatial/generosityGate.js qualifiesForGenerosity) and honour the same hard
+  // reserve-floor law — the DM overrides the WILLINGNESS, never the law.
+
+  FORCE_RELIEF: {
+    label: 'Force grain relief',
+    requiresTarget: true,
+    stateDeltas(event) {
+      // Shipping grain out by decree: stores drop (pressure up) and the town absorbs
+      // the outflow (a small resilience dent). Scaled by the word-banded magnitude
+      // dial; modest — a gift is a dial, not a shock.
+      const mag = sev01(event.payload?.magnitude, 0.5);
+      return { resourcePressure: +Math.round(mag * 8), resilience: -Math.round(mag * 4) };
+    },
+    narrate(event) {
+      return `Grain wagons rolled to ${labelOf(event.targetId)} — relief by decree.`;
+    },
+  },
+
+  OFFER_CREDIT: {
+    label: 'Offer grain credit',
+    requiresTarget: true,
+    stateDeltas(event) {
+      // A loan moves the same grain with a lighter political shudder — the ledger
+      // promises it back (design §3.4; maturity lives with the mover).
+      const mag = sev01(event.payload?.magnitude, 0.5);
+      return { resourcePressure: +Math.round(mag * 5), resilience: -Math.round(mag * 2) };
+    },
+    narrate(event) {
+      return `A measure of grain went to ${labelOf(event.targetId)} — as a loan, not a gift.`;
+    },
+  },
+
   PROMOTE_NPC: {
     label: 'Promote/Demote NPC',
     requiresTarget: true,

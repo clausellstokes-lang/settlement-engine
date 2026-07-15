@@ -179,6 +179,25 @@ const FIXTURES = {
   // undo restores tier, config.tier/settType, population, and the full institution roster
   // + history exactly from the pre-event snapshot (none of it provenance-reversible).
   SHIFT_TIER: (s) => ({ before: s, event: ev('SHIFT_TIER', { payload: { direction: 'demotion' } }) }),
+  // The generosity verbs (FP-G3): Irontown is a qualifying trade_partner link out of
+  // the base fixture; the granary is set well above the reserve floor so real grain
+  // moves (the teeth check). Undo restores economicState (+ powerStructure for
+  // FORCE_RELIEF's legitimacy nudge) from the snapshot and scrubs the atEventId-
+  // stamped _forcedRelief/_offeredCredit annotation entries by provenance.
+  FORCE_RELIEF: (s) => {
+    const before = {
+      ...s,
+      economicState: { ...(s.economicState || {}), foodSecurity: { ...((s.economicState || {}).foodSecurity || {}), storageMonths: 6 } },
+    };
+    return { before, event: ev('FORCE_RELIEF', { targetId: 'Irontown', payload: { magnitude: 0.5 } }) };
+  },
+  OFFER_CREDIT: (s) => {
+    const before = {
+      ...s,
+      economicState: { ...(s.economicState || {}), foodSecurity: { ...((s.economicState || {}).foodSecurity || {}), storageMonths: 6 } },
+    };
+    return { before, event: ev('OFFER_CREDIT', { targetId: 'Irontown', payload: { magnitude: 0.5 } }) };
+  },
 };
 
 // Documented residue: undoing a RESOLVE_STRESSOR does not resurrect the LIVE

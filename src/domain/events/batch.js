@@ -130,6 +130,15 @@ export function eventConsumes(event) {
       // relationship narration + deltas land with no graph change.
       if (targetId) refs.push({ kind: 'neighbour', ref: targetId });
       break;
+    case 'FORCE_RELIEF':
+    case 'OFFER_CREDIT':
+      // The generosity verbs (FP-G3) hard-require a LINKED neighbour — the handler
+      // vetoes 'neighbour_not_linked' otherwise (findNeighbourLink runs the same
+      // name/neighbourName/id/linkId match the relationship events run). The
+      // qualifying-BOND and reserve-floor gates stay in the handler/predicate
+      // (a kind or granary state is not a namespace ref).
+      if (targetId) refs.push({ kind: 'neighbour', ref: targetId });
+      break;
     case 'ASSIGN_NPC_TO_ROLE':
       // The NPC subject is created if missing, so it is NOT a hard ref. The
       // institution/faction it's assigned into MUST exist, though.

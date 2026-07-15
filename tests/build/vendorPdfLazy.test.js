@@ -301,8 +301,21 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 // → 1,215,520 (A1-FP, 2026-07-14: the analytics transport eager-leaf/lazy-flush split
 // reclaimed 2,281 B — MORE than the A1 v2-core's +1,451 B — so the wave landed net
 // −830 B; measured closure 1,215,443, ~77 B working margin per house posture).
+// → 1,161,810 (FP-G3 + THE GENEROSITY VERBS, 2026-07-15 — reclaim-then-thread):
+//   • the npcData split RECLAIMED −51,957 B: domain/corruption.js (EAGER, an
+//     ENGINE_SHARED_DOMAIN member) was the SOLE eager importer of the 64 kB (minified)
+//     data/npcData.js, reading ONLY the small TRAIT_ALIGNMENT map. TRAIT_ALIGNMENT +
+//     TRAIT_AGGRESSION moved to the zero-import leaf data/npcTraitWeights.js (npcData.js
+//     re-exports verbatim — byte-identical data), so npcData.js left first paint entirely
+//     (closure 1,210,333 → 1,158,376).
+//   • the FORCE_RELIEF / OFFER_CREDIT counterpart DM-verbs then THREADED +3,350 B eager
+//     (registry lean-specs + mutateWorld handlers + the generosityGate leaf + dispatch/
+//     batch/undo rows; prose + manifest ride the lazy side per the registryProse idiom;
+//     closure 1,158,376 → 1,161,726) — the reclaim paid for the verbs ~15× over, NET
+//     −48,607 B vs the pre-wave 1,210,333. Budget 1,214,050 → 1,161,810 (measured
+//     1,161,726 + ~84 B house margin). No behavior shift; goldens byte-identical.
 // Monotone-down only; raises are owner-signed, never incidental.
-const CLOSURE_BUDGET_BYTES = 1_214_050;
+const CLOSURE_BUDGET_BYTES = 1_161_810;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports

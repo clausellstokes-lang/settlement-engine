@@ -95,9 +95,11 @@ describe('affordance coverage walker (registry → manifest, fail-closed)', () =
     }
   });
 
-  it('the 29/9 split holds (29 authorable, 9 folded, 38 total)', () => {
-    expect(EVENT_TYPES).toHaveLength(38);
-    expect(authorableVerbs()).toHaveLength(29);
+  it('the 31/9 split holds (31 authorable, 9 folded, 40 total)', () => {
+    // 38/29/9 → 40/31/9 (FP-G3): the generosity counterpart verbs FORCE_RELIEF +
+    // OFFER_CREDIT ship authorable (the Counterpart Criterion paid).
+    expect(EVENT_TYPES).toHaveLength(40);
+    expect(authorableVerbs()).toHaveLength(31);
     expect(Object.values(AFFORDANCE_MANIFEST).filter(e => e.foldedInto)).toHaveLength(9);
   });
 });

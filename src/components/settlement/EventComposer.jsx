@@ -131,6 +131,7 @@ export default function EventComposer({ onLink = null }) {
   const [instigatorRelationship, setInstigatorRelationship] = useState('rival'); // APPLY_STRESSOR: infiltration souring level
   const [tradeTarget, setTradeTarget] = useState('');          // OPENED_TRADE_ROUTE: optional campaign-peer target
   const [powerCause, setPowerCause] = useState('coup');       // CHANGE_RULING_POWER: how power changes hands
+  const [reliefMagnitude, setReliefMagnitude] = useState('measured'); // FORCE_RELIEF / OFFER_CREDIT: word-banded share of the above-floor surplus
   const [tradeDirection, setTradeDirection] = useState('export'); // ADD_TRADE_GOOD: export | import
   const [tradeEntrepot, setTradeEntrepot] = useState(false);   // ADD_TRADE_GOOD: transit through the warehouses
   const [customResourceName, setCustomResourceName] = useState(''); // ADD_RESOURCE: free-text custom name
@@ -334,7 +335,7 @@ export default function EventComposer({ onLink = null }) {
       importance, role, institutionId,
       npcFlaw, npcTemperament, npcGoals, npcConstraint, npcSecret,
       quality, relationshipType, criminalOrg, criminalOrgs, corruptScope,
-      stressorPick, stressorSeverity, powerCause,
+      stressorPick, stressorSeverity, powerCause, reliefMagnitude,
       tradeDirection, tradeEntrepot, swapWithNpcId,
       tierDirection: clampTierDirection(settlement, tierDirection),
       customContent, deityRef, deityMode, cultRemoveRef,
@@ -544,6 +545,8 @@ export default function EventComposer({ onLink = null }) {
           setStressorSeverity={setStressorSeverity}
           powerCause={powerCause}
           setPowerCause={setPowerCause}
+          reliefMagnitude={reliefMagnitude}
+          setReliefMagnitude={setReliefMagnitude}
           settlement={settlement}
           target={target}
         />

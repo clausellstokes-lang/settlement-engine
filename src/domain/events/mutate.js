@@ -37,6 +37,7 @@ import {
   refugeeWave, plague, raidOrMonsterAttack,
   applyStressor, changeRulingPower, resolveStressor,
   addTradeGood, removeTradeGood, addResource, removeResource,
+  forceRelief, offerCredit,
 } from './mutateWorld.js';
 import { makeReceipt } from '../trace.js';
 import { mutationVetoOf } from './mutateHelpers.js';
@@ -107,6 +108,8 @@ const MUTATION_HANDLERS = /** @type {Record<string, (s: MutSettlement, event: Mu
   SET_PRIMARY_DEITY: setPrimaryDeity,
   IMPOSE_CULT: imposeCult,
   SHIFT_TIER: shiftTier,
+  FORCE_RELIEF: forceRelief,
+  OFFER_CREDIT: offerCredit,
 });
 
 /**

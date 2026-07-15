@@ -18,6 +18,11 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES, INFILTRATION_TARGET_RELATIONSHIPS } from '../worldPulse/warStressorTypes.js';
 import { relationshipDefinition } from '../relationships/canonicalRelationship.js';
 import { HEALING_INSTITUTION_PATTERN } from '../healingLedger.js';
+// The generosity STRUCTURAL GATE (a zero-import leaf — the SAME qualifiesForGenerosity
+// the organic mover runs; generosityEV.js re-exports it). Eager-safe by construction:
+// importing the gate from the lazy generosityEV kernel would drag the whole decision
+// kernel into the first-paint closure (FP-G3).
+import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
 import {
   idOf, eventTime,
   findInstitution, replaceInstitution,
@@ -879,6 +884,159 @@ function removeResource(/** @type {MutEntity} */ s, /** @type {MutEntity} */ eve
   });
 }
 
+// ── The generosity counterpart verbs (FP-G3 — the Counterpart Criterion) ────
+// FORCE_RELIEF / OFFER_CREDIT: the DM-forceable twins of the generosity engine's
+// grain instruments (docs/DESIGN_GENEROSITY_ENGINE.md §4). Settlement-scoped (the
+// composer's W1 scope law): the handler acts on the GIVER — the receiving neighbour
+// is a linked name, not a simulated object here, so the receiving-side reactions
+// (obligation mint, gratitude, maturity) belong to the world-pulse mover; the
+// annotation below is the synthetic-cause, DM-provenance record of the act.
+//
+// COUNTERPART FIDELITY (the kernel-header ledger): the handler runs the SAME
+// structural gate the organic mover runs (generosityGate.qualifiesForGenerosity —
+// the DM overrides the WILLINGNESS, never the law: no qualifying bond ⇒ veto), the
+// same hard reserve-floor law, and the same tenth-month grain flooring (a decree
+// that would move ZERO grain is a veto, not a phantom gift — the E1d zero-grain
+// class, closed on the mover's give path this same wave).
+
+// The hard reserve floor a DM-forced relief may never breach (months of stores).
+// MIRROR of STOCKPILE_TUNING.reserveTitheFloorMonths: that constant lives in the
+// LAZY worldPulse/foodStockpile.js (importing it here would drag the heavy food
+// machinery into first paint), so the value is mirrored with a PARITY PIN
+// (tests/domain/events/generosityVerbs.test.js) that fails if the source moves.
+const RELIEF_RESERVE_FLOOR_MONTHS = 1;
+
+// The DM-verb twins of GENEROSITY_MOVER_TUNING.LEGITIMACY_COST / LEGITIMACY_LIFT
+// (generosityKernel.js — lazy; mirrored under the same parity pin): shipping food
+// out of a town left lean costs the ruler legitimacy; a comfortable granary city
+// earns a small lift. Points on the 0..100 publicLegitimacy score.
+const RELIEF_LEGITIMACY_COST = 3;
+const RELIEF_LEGITIMACY_LIFT = 1;
+
+/** The same link match setNeighbourRelationship runs (name/neighbourName/id/linkId). */
+function findNeighbourLink(/** @type {MutEntity} */ s, /** @type {MutEntity} */ targetId) {
+  const network = Array.isArray(s.neighbourNetwork) ? s.neighbourNetwork : [];
+  return network.find((/** @type {MutEntity} */ link) =>
+    String(link?.name || '') === String(targetId)
+    || String(link?.neighbourName || '') === String(targetId)
+    || String(link?.id || '') === String(targetId)
+    || String(link?.linkId || '') === String(targetId)) || null;
+}
+
+/**
+ * The shared grain leg of both generosity verbs: gate, floor, and the conserved
+ * tenth-month debit. Returns a typed REFUSAL REASON ({ refuse, detail }) instead of
+ * the veto itself so each handler raises its own LITERAL vetoMutation('code') call —
+ * the predicate-parity walker source-scans for literal codes, and a code passed
+ * through a variable would be invisible to it (the walker's documented cannot-catch
+ * evasion; new gates MUST stay literal). On a clear gate: { mag, sent, nextMonths }.
+ * @param {MutEntity} s @param {MutEntity} event
+ * @returns {{ refuse: 'empty'|'not_linked'|'unqualified'|'nothing', detail?: string }
+ *         | { refuse?: undefined, detail?: undefined, mag: number, sent: number, nextMonths: number }}
+ */
+function grainLegOrRefusal(s, event) {
+  const targetId = event.targetId;
+  if (!targetId) return { refuse: 'empty' };
+  const link = findNeighbourLink(s, targetId);
+  if (!link) return { refuse: 'not_linked', detail: labelFromTarget(targetId) };
+  // THE §0.1 STRUCTURAL GATE, same function as the mover. The dossier layer reads
+  // the link's KIND (strength/trust live in campaign worldState, out of scope here):
+  // a decree can override reluctance, never the absence of a qualifying channel.
+  const kind = normalizeBondKind(link.relationshipType);
+  if (!qualifiesForGenerosity({ bond: { kind, strength01: 1 } })) {
+    return { refuse: 'unqualified', detail: labelFromTarget(targetId) };
+  }
+  const fs = s.economicState?.foodSecurity;
+  const months = Number(fs?.storageMonths);
+  const mag = sev01(event.payload?.magnitude, 0.5);
+  // Only grain ABOVE the reserve floor can move, floored to the tenth-month (the
+  // conserved-sink rounding discipline — computeSackFoodTransfer's Math.floor(x*10)/10).
+  const spareable = Number.isFinite(months) ? Math.max(0, months - RELIEF_RESERVE_FLOOR_MONTHS) : 0;
+  const sent = Math.floor(mag * spareable * 10) / 10;
+  if (sent <= 0) return { refuse: 'nothing', detail: labelFromTarget(targetId) };
+  const nextMonths = Math.round((months - sent) * 10) / 10;
+  return { mag, sent, nextMonths };
+}
+
+/** Write the granary debit + the dual-written annotation entry (the cutTradeRoute
+ *  discipline: config + _config in lockstep; every entry carries atEventId, so the
+ *  undo scrub reverts it by provenance). */
+function withGrainSent(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event, /** @type {string} */ ledgerKey, /** @type {MutEntity} */ leg) {
+  const fs = s.economicState.foodSecurity;
+  const next = {
+    ...s,
+    economicState: { ...s.economicState, foodSecurity: { ...fs, storageMonths: leg.nextMonths } },
+  };
+  const config = next.config || {};
+  const entries = Array.isArray(config[ledgerKey]) ? [...config[ledgerKey]] : [];
+  entries.push({
+    to: event.targetId,
+    monthsSent: leg.sent,
+    magnitude: leg.mag,
+    atEventId: event.id,
+    atTimestamp: eventTime(event),
+  });
+  next.config = { ...config, [ledgerKey]: entries };
+  if (s._config && typeof s._config === 'object') {
+    next._config = { ...s._config, [ledgerKey]: entries };
+  }
+  return next;
+}
+
+/**
+ * FORCE_RELIEF — decree a GIFT of grain to a qualifying neighbour. The grain leaves
+ * the granary (above-floor only, tenth-month floored); the ruler's legitimacy moves
+ * the way the mover's §9 coupling moves it (lean town ⇒ a cost — political courage;
+ * comfortable town ⇒ a small "granary city" lift); the act is recorded on the
+ * dual-written config._forcedRelief annotation ledger (DM provenance, undo-scrubbed
+ * by atEventId).
+ */
+function forceRelief(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const leg = grainLegOrRefusal(s, event);
+  if (leg.refuse !== undefined) {
+    if (leg.refuse === 'empty') return vetoMutation('empty_target');
+    if (leg.refuse === 'not_linked') return vetoMutation('neighbour_not_linked', leg.detail);
+    if (leg.refuse === 'unqualified') return vetoMutation('relief_unqualified', leg.detail);
+    return vetoMutation('relief_nothing_to_send', leg.detail); // 'nothing'
+  }
+  // The success arm (asserted: the non-strict full config does not narrow the
+  // optional discriminant the guard above eliminates; the strict config does).
+  const grain = /** @type {{ mag: number, sent: number, nextMonths: number }} */ (leg);
+  let next = withGrainSent(s, event, '_forcedRelief', grain);
+  // The §9 legitimacy coupling, DM-verb twin (structured {score} only — the
+  // applyDivineMandate idiom; integer, clamped [0,100]; skipped when unreadable).
+  const ps = next.powerStructure || {};
+  const pl = ps.publicLegitimacy;
+  if (pl && typeof pl === 'object' && !Array.isArray(pl) && Number.isFinite(Number(pl.score))) {
+    const lean = grain.nextMonths < RELIEF_RESERVE_FLOOR_MONTHS * 1.5;
+    const delta = lean
+      ? -Math.max(1, Math.round(RELIEF_LEGITIMACY_COST * grain.mag))
+      : Math.round(RELIEF_LEGITIMACY_LIFT * grain.mag);
+    const nextScore = Math.round(Math.max(0, Math.min(100, Number(pl.score) + delta)));
+    if (nextScore !== Number(pl.score)) {
+      next = { ...next, powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } } };
+    }
+  }
+  return next;
+}
+
+/**
+ * OFFER_CREDIT — the same grain as a LOAN (design §3.4). Identical structural gate
+ * and grain leg; no legitimacy move (a loan is not charity — the E1d purchase
+ * precedent); recorded on the dual-written config._offeredCredit annotation ledger
+ * (DM provenance; the mover owns maturity/repayment/default).
+ */
+function offerCredit(/** @type {MutEntity} */ s, /** @type {MutEntity} */ event) {
+  const leg = grainLegOrRefusal(s, event);
+  if (leg.refuse !== undefined) {
+    if (leg.refuse === 'empty') return vetoMutation('empty_target');
+    if (leg.refuse === 'not_linked') return vetoMutation('neighbour_not_linked', leg.detail);
+    if (leg.refuse === 'unqualified') return vetoMutation('credit_unqualified', leg.detail);
+    return vetoMutation('credit_nothing_to_lend', leg.detail); // 'nothing'
+  }
+  return withGrainSent(s, event, '_offeredCredit', leg);
+}
+
 export {
   depleteResource, recoveredResource,
   removedThreat, startedRiot,
@@ -886,4 +1044,5 @@ export {
   refugeeWave, plague, raidOrMonsterAttack,
   applyStressor, changeRulingPower, resolveStressor,
   addTradeGood, removeTradeGood, addResource, removeResource,
+  forceRelief, offerCredit,
 };

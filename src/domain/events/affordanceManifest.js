@@ -31,6 +31,12 @@ import { reconcileCultImposition } from '../worldPulse/cultImpositionApply.js';
 import { TIER_ORDER, popToTier } from '../../data/constants.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { canonExports, canonImports, canonStressors } from '../canonicalAccessors.js';
+// The generosity verbs' same-function gates (FP-G3): the structural gate the handler
+// AND the mover run (generosityGate — a zero-import leaf), and the mover's own hard
+// reserve floor (foodStockpile.STOCKPILE_TUNING — safe HERE because this manifest is a
+// LAZY leaf; the EAGER handler mirrors the constant under a parity pin instead).
+import { qualifiesForGenerosity, normalizeBondKind } from '../spatial/generosityGate.js';
+import { STOCKPILE_TUNING } from '../worldPulse/foodStockpile.js';
 
 // The loose open-object shape of the events layer ("schemaless open objects at
 // this layer" — mutateEntities.js's own words). Aliased to the schema's OWN
@@ -73,11 +79,17 @@ export const TARGET_ENTITY_BY_EVENT = Object.freeze({
   REMOVE_RESOURCE:      'resources',
   PROMOTE_NPC:          null,
   DEMOTE_NPC:           null,
+  FORCE_RELIEF:         'neighbours',
+  OFFER_CREDIT:         'neighbours',
 });
 
 // Word-banded severity — "words at the table, numbers in the engine" (moved
 // from EventComposerConstants.js, which re-exports it).
 export const STRESSOR_SEVERITY_VALUES = Object.freeze({ minor: 0.35, moderate: 0.6, severe: 0.85 });
+
+// The generosity verbs' word-banded MAGNITUDE (FP-G3): the share of the giver's
+// ABOVE-FLOOR surplus the decree sends. Same table-words-engine-numbers law.
+export const RELIEF_MAGNITUDE_VALUES = Object.freeze({ token: 0.25, measured: 0.5, generous: 0.85 });
 
 // §9b/§9g/§9h relationship vocabularies (moved from EventComposerConstants.js).
 export const RELATIONSHIP_OPTIONS = Object.freeze({
@@ -207,6 +219,42 @@ const rulingPowerTargets = (/** @type {Mut} */ s) => {
 /** Criminal organizations the corruption verbs can link to — the ONE wrap over
  *  readCorruptionClimate (replaces the composer's comment-mirror filter). */
 export const criminalOrgOptions = (/** @type {Mut} */ s) => readCorruptionClimate(s).criminalInstitutions;
+
+// ── The generosity verbs' gate readers (FP-G3 — same-function law) ──────────
+/** Linked neighbours whose relationship KIND passes the §0.1 structural gate —
+ *  the SAME qualifiesForGenerosity the forceRelief/offerCredit handlers (and the
+ *  organic mover) run, over the SAME link fields the handlers match. */
+const qualifyingNeighbourOptions = (/** @type {Mut} */ s) => {
+  const seen = new Set();
+  const out = [];
+  for (const link of s?.neighbourNetwork || []) {
+    const kind = normalizeBondKind(link?.relationshipType);
+    if (!qualifiesForGenerosity({ bond: { kind, strength01: 1 } })) continue;
+    const id = String(link?.name || link?.neighbourName || link?.id || '');
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    out.push({ id, name: id });
+  }
+  return out;
+};
+/** Months of grain above the mover's hard reserve floor — the spareable surplus a
+ *  decree may move (the SAME STOCKPILE_TUNING floor the mover honours). */
+const spareableMonthsOf = (/** @type {Mut} */ s) => {
+  const months = Number(s?.economicState?.foodSecurity?.storageMonths);
+  const floor = Number(STOCKPILE_TUNING.reserveTitheFloorMonths) || 1;
+  return Number.isFinite(months) ? Math.max(0, months - floor) : 0;
+};
+/** The shared FORCE_RELIEF / OFFER_CREDIT availability gate (§0.1 + the floor). */
+const generosityVerbPredicate = (/** @type {Mut} */ s) => {
+  if (!qualifyingNeighbourOptions(s).length) {
+    return no(['No allied, trade-partner, or vassal/patron neighbour to send grain to.'],
+      ['Broker an alliance or open a trade route first — generosity needs a qualifying bond (design law 1).']);
+  }
+  // The tenth-month flooring means anything under 0.1 spareable months moves ZERO grain.
+  return gate(spareableMonthsOf(s) >= 0.1,
+    'The granary holds nothing above the reserve floor.',
+    'Only grain above the hard reserve floor can be sent.');
+};
 
 /** Compromised entities EXPOSE_CORRUPTION can act on (§3 current-state filter):
  *  corrupt NPCs (the rich path) + institutions/factions carrying a
@@ -503,6 +551,33 @@ export const AFFORDANCE_MANIFEST = Object.freeze({
         'No linked neighbours or campaign peers.', 'Link a neighbour or add a campaign member.'),
   }),
 
+  // ── The generosity counterpart verbs (FP-G3 — the Counterpart Criterion) ──
+  // The DM-forceable twins of the generosity engine's grain instruments. SAME-
+  // FUNCTION predicates: qualifiesForGenerosity (the §0.1 structural gate the
+  // handler and the mover both run) + the mover's own STOCKPILE_TUNING reserve
+  // floor. The target dial lists only qualifying neighbours (§3 current-state
+  // filter); the magnitude dial is word-banded (≤4 dials, clampAtCommit).
+  FORCE_RELIEF: entry({
+    type: 'FORCE_RELIEF', family: 'Relations',
+    coversVetoCodes: ['empty_target', 'neighbour_not_linked', 'relief_unqualified', 'relief_nothing_to_send'],
+    dials: [{
+      key: 'magnitude', kind: 'band', bandWords: RELIEF_MAGNITUDE_VALUES, default: 'measured',
+      min: 0, max: 1, clampAtCommit: true, label: 'Magnitude',
+    }],
+    targetOptions: qualifyingNeighbourOptions,
+    predicate: generosityVerbPredicate,
+  }),
+  OFFER_CREDIT: entry({
+    type: 'OFFER_CREDIT', family: 'Relations',
+    coversVetoCodes: ['credit_unqualified', 'credit_nothing_to_lend'],
+    dials: [{
+      key: 'magnitude', kind: 'band', bandWords: RELIEF_MAGNITUDE_VALUES, default: 'measured',
+      min: 0, max: 1, clampAtCommit: true, label: 'Magnitude',
+    }],
+    targetOptions: qualifyingNeighbourOptions,
+    predicate: generosityVerbPredicate,
+  }),
+
   // ── Folded types (§2: the fold is legible — each names its carrying verb) ──
   KILL_LEADER: entry({
     type: 'KILL_LEADER', family: 'People',
@@ -583,6 +658,10 @@ const VETO_PROSE = {
   power_faction_not_found: d => `No faction "${d}" to hand power to.`,
   power_already_governing: d => `${d || 'That faction'} already holds power here.`,
   power_no_governing_faction: () => 'No faction currently holds the governing seat to transfer from.',
+  relief_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond — grain relief needs an ally, trade partner, or vassal/patron (a decree overrides the willingness, never the law).`,
+  relief_nothing_to_send: () => 'The granary holds nothing above the reserve floor — no grain can be decreed away.',
+  credit_unqualified: d => `${d || 'That neighbour'} holds no qualifying bond — grain credit needs an ally, trade partner, or vassal/patron.`,
+  credit_nothing_to_lend: () => 'The granary holds nothing above the reserve floor — there is nothing to lend.',
 };
 
 /** The DM-facing refusal sentence for a veto warning. Falls back to the terse

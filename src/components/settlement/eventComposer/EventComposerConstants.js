@@ -28,6 +28,7 @@ export {
   RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS,
   NON_AUTHORABLE_EVENTS,
   STRESSOR_SEVERITY_VALUES,
+  RELIEF_MAGNITUDE_VALUES,
 } from '../../../domain/events/affordanceManifest.js';
 
 // ADD_RESOURCE — sentinel select value for "name a custom resource"; the real

@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-15T02:09:00.892Z",
+  "generatedAt": "2026-07-15T05:56:13.818Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "156c918df4a0bc1a",
+  "sourceHash": "94f7d5f2da5a8502",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
     "src/data/institutionalCatalog.js",
-    "src/data/npcData.js",
+    "src/data/npcTraitWeights.js",
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
     "src/domain/canonStatus.js",
