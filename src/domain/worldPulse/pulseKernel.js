@@ -71,6 +71,7 @@ import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
+import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
@@ -2207,6 +2208,36 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       settlementUpdates = upswing.settlementUpdates;
       if (upswing.newsEntries.length) {
         wizardNews = appendWizardNewsEntries(wizardNews, upswing.newsEntries, { now });
+      }
+    }
+  }
+  // W-LIFECYCLE — THE SATELLITE LANE + peakTier (DESIGN_SETTLEMENT_LIFECYCLE.md).
+  // Runs AFTER upswing so a boom minted THIS tick feeds the seeding drive, and
+  // AFTER the apply pass so a W-DISCOVERY resource_strike condition planted this
+  // tick reads as the mining-camp birth trigger. Town+ parents seed satellite
+  // thorps (§H-loaded, integrator + cooldown + tier caps, deferral-visible);
+  // steadings grow (parent→steading transfers — conserved), starve back into the
+  // parent, or converge into a hamlet; the parent reads ONE bounded, receipted
+  // steading_tributary lift. Satellites live in spatialLedgers.satellites (NOT
+  // digest members; NOT in the per-settlement mover loops) — geometry survives
+  // everything. DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ a
+  // complete no-op (zero forks, zero keys) — the fenced pre-wire dormancy golden
+  // (aspatial + spatial) proves wired-but-dormant is byte-identical. AGGREGATE-only.
+  {
+    const lifecycle = advanceSettlementLifecycle({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      settlementUpdates,
+      pIndex,
+      rng,
+      tick: worldState.tick,
+      now,
+    });
+    if (lifecycle.changed) {
+      memoryState = lifecycle.worldState;
+      settlementUpdates = lifecycle.settlementUpdates;
+      if (lifecycle.newsEntries.length) {
+        wizardNews = appendWizardNewsEntries(wizardNews, lifecycle.newsEntries, { now });
       }
     }
   }
