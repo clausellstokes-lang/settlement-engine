@@ -25,6 +25,7 @@ import {
   INTERVENTION_STATES,
   reactiveResponse, REACTIVE_RELATIONS, contestSideLookup,
   reinforceVerbFactory, interceptVerbFactory,
+  mercenaryReinforcement, mercenaryReinforcementOf,
 } from '../../src/domain/worldPulse/convergence.js';
 import { hostilePairFor } from '../../src/domain/worldPulse/armyTransitKernel.js';
 
@@ -404,6 +405,55 @@ describe('W-CONVERGENCE §3/§4 — the INTERCEPT hostilePair extension (byte-id
       'y:ford': { interId: 'y', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 50 },
     };
     expect(hostilePairFor(records, contestSideLookup(alliedLedger))('x', 'y')).toBe(false);
+  });
+});
+
+// ════════════════ THE MERCENARY CLAUSE (owner ruling, §4) ════════════════
+
+describe('W-CONVERGENCE §4 — THE MERCENARY CLAUSE (a bounded reinforcement modifier only)', () => {
+  const snapWith = (institutions, econ = 100) => ({
+    byId: { get: (id) => (id === 'thornwall'
+      ? { name: 'Thornwall', settlement: { name: 'Thornwall', institutions }, causal: { scores: { economic_capacity: econ } } }
+      : undefined) },
+  });
+
+  it('absent ⇒ factor 0 (prior strength byte-identical: strength × (1+0) = strength)', () => {
+    expect(mercenaryReinforcement({ count: 0, prosperity01: 1 })).toBe(0);
+    expect(mercenaryReinforcementOf(snapWith([]), 'thornwall').factor).toBe(0);
+    // A settlement with only NON-mercenary institutions ⇒ still 0.
+    expect(mercenaryReinforcementOf(snapWith([{ name: 'Grand Temple' }, { name: 'Merchant Guild' }]), 'thornwall').factor).toBe(0);
+  });
+
+  it('the CAP binds (a bounded modifier, never a snowballing multiplier)', () => {
+    const many = mercenaryReinforcement({ count: 20, prosperity01: 1 });
+    expect(many).toBe(CONVERGENCE_TUNING.MERC_REINFORCE_CAP);
+    // A wealthy town with several halls is still capped.
+    const rich = mercenaryReinforcementOf(snapWith([
+      { name: 'Free Company Hall' }, { name: 'Sellsword Quarter' }, { name: 'Mercenary Lodge' },
+    ], 100), 'thornwall');
+    expect(rich.factor).toBeLessThanOrEqual(CONVERGENCE_TUNING.MERC_REINFORCE_CAP);
+  });
+
+  it('a DECLARED-facet custom institution counts (the facet law — name need not match)', () => {
+    // "The Iron Charter" matches no name pattern, but declares the mercenary facet.
+    const custom = mercenaryReinforcementOf(snapWith([
+      { name: 'The Iron Charter', facets: { institutionFunction: 'mercenary' } },
+    ], 80), 'thornwall');
+    expect(custom.count).toBe(1);
+    expect(custom.factor).toBeGreaterThan(0);
+  });
+
+  it('affordability-scaled: a poor town reinforces LESS than a wealthy one', () => {
+    const poor = mercenaryReinforcement({ count: 1, prosperity01: 0.2 });
+    const wealthy = mercenaryReinforcement({ count: 1, prosperity01: 1 });
+    expect(poor).toBeLessThan(wealthy);
+    expect(poor).toBeGreaterThan(0);
+  });
+
+  it('the read names the deploying settlement (for the house-voice receipt)', () => {
+    const r = mercenaryReinforcementOf(snapWith([{ name: 'Free Company Hall' }]), 'thornwall');
+    expect(r.settlementName).toBe('Thornwall');
+    expect(r.factor).toBeGreaterThan(0);
   });
 });
 

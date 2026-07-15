@@ -73,8 +73,16 @@ const COMPLIANT_BASELINE = [
 // stressors.js (golden first-paint reclaim, 2026-07-14) and carries the RELOCATED
 // residualOutcome builder verbatim — the same grandfathered registry/helper code,
 // now in two files. Audit them together.
+// convergence.js (W-CONVERGENCE) is EVENT/LOADED-DICE/ONE-SHOT, not a per-tick standing-
+// state re-stamper: an intervention COMMITS once per (patron, target) behind the E0 loaded
+// dice and PERSISTS in the interventions ledger (never re-emitted while it stands); the
+// `condition:` key the scanner sees is the PURE overstayOccupation descriptor (a once-per-
+// state-change occupation transition gated by OVERSTAY_TICKS, feeding freshConquestsFrom),
+// and the aftermath ATTRITED dwell (canReEngage / ATTRITED_DWELL_TICKS) is itself a
+// once-per-state-change latch. It floods nothing — same category as coup/occupation/
+// warDeployment (the war-layer one-shots). Grandfathered pending the composer audit.
 const NONCOMPLIANT_BASELINE = [
-  'candidateEvents.js', 'coup.js', 'deploymentReturn.js', 'flows.js',
+  'candidateEvents.js', 'convergence.js', 'coup.js', 'deploymentReturn.js', 'flows.js',
   'mobilizationEffects.js', 'mobilizationReactions.js', 'occupation.js',
   'partyImpact.js', 'populationDynamics.js', 'pulseHelpers.js',
   'settlementStrategy.js', 'stressors.js', 'stressorsCore.js', 'warDeployment.js',

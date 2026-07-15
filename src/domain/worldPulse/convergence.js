@@ -73,6 +73,24 @@ import { resolveFieldBattle, fieldBattleWinProbability } from '../spatial/armyTr
 import { coupContenders } from '../rulingPowerCoup.js';
 import { foreignGripOf, obligationDebt01, directionBias } from './corruptionWeb.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
+// THE MERCENARY CLAUSE (owner ruling, design §4): a mercenary-related institution reinforces
+// a force deployed FROM its settlement. Detection rides the ONE facet chokepoint (declared
+// facet) OR the established hireable-force name/tag pattern.
+import { facetOf } from '../spatial/cohesionWeave.js';
+import { MERCENARY_MARKET_PATTERN } from './mercenaryMarket.js';
+
+/** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
+/** A settlement item on the pre-tick snapshot (loose — the war-layer read shape). The
+ *  settlement carries the coup field (RulingPowerSettlement) plus name/activeConditions.
+ *  @typedef {{ id?: string|number, name?: string,
+ *    settlement?: RulingPowerSettlement & { name?: string, activeConditions?: Array<Record<string, unknown>>, institutions?: Array<Record<string, unknown>> },
+ *    causal?: { scores?: Record<string, number> } }} SnapItem */
+/** @typedef {{ byId?: { get?: (id: string) => SnapItem | undefined },
+ *   regionalGraph?: { edges?: Array<Record<string, unknown>> },
+ *   relationships?: Array<Record<string, unknown>> }} Snapshot */
+/** @typedef {{ simulationRules?: unknown, spatialLedgers?: unknown, deployments?: unknown, stressors?: unknown }} WorldStateLike */
+/** @typedef {{ fork?: (key: string) => { random: () => number } } | null | undefined} Rng */
+/** @typedef {{ edges?: Array<Record<string, unknown>> } | null | undefined} Graph */
 
 // ── Tuning (documented here; retuned in the checkpoint soaks) ──────────────────────
 export const CONVERGENCE_TUNING = Object.freeze({
@@ -127,6 +145,14 @@ export const CONVERGENCE_TUNING = Object.freeze({
   // OCCUPATION-ON-OVERSTAY: a victorious column that lingers past this many ticks after its
   // contest resolved transitions to occupying (the freshConquestsFrom extension seam).
   OVERSTAY_TICKS: 4,
+
+  // ── THE MERCENARY CLAUSE (owner ruling, design §4) ────────────────────────────────
+  // A mercenary-related institution in the DEPLOYING settlement grants a BOUNDED,
+  // prosperity-scaled reinforcement to the force deployed FROM it. REINFORCEMENT MODIFIER
+  // ONLY (the owner's whole clause): never an independent actor, never a new entity class,
+  // no contract/loyalty/defection machinery. 0 when absent ⇒ byte-identical.
+  MERC_REINFORCE_PER_INST: 0.15, // one standing mercenary hall ⇒ up to +15% (prosperity-scaled)
+  MERC_REINFORCE_CAP: 0.3,       // the HARD cap — a bounded modifier, never a snowballing multiplier
 });
 
 // The per-side AFTERMATH STATE across ticks (design §1). Persisted on each record.
@@ -597,7 +623,7 @@ export function engagementOptions({ myStrength, rivalStrengths = [], exhaustion0
  * survivor then tilts). Aspatial-callable (resolveFieldBattle is pure). Returns the
  * winner/loser side ids + their new aggregate strengths + the loser's retreat flag. The
  * loser routes home via the standing recalled:{cause:'field_battle_retreat'} homecoming.
- * @param {{ aId: string, aStrength: number, bId: string, bStrength: number, rng: any, tick: number }} args
+ * @param {{ aId: string, aStrength: number, bId: string, bStrength: number, rng: Rng, tick: number }} args
  * @returns {{ winnerId: string, loserId: string, strengthDelta: Record<string, number>, loserRetreats: true, recalled: { cause: string, tick: number } }}
  */
 export function resolveSideBattle({ aId, aStrength, bId, bStrength, rng, tick }) {
@@ -777,32 +803,89 @@ const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']
 const FRIENDLY_REL = new Set(['ally', 'trade_partner', 'vassal', 'tributary', 'protectorate']);
 
 /** The 0..1 prosperity/strength proxy for a patron (the fundingOf idiom — economic
- *  capacity as the projectable-strength stand-in in wave 1). @param {any} snapshot @param {string} id */
+ *  capacity as the projectable-strength stand-in in wave 1). @param {Snapshot} snapshot @param {string} id */
 function patronStrength01Of(snapshot, id) {
   const item = snapshot?.byId?.get?.(String(id));
   const score = item?.causal?.scores?.economic_capacity;
   return Number.isFinite(score) ? clamp01(Number(score) / 100) : 0.5;
 }
 
+// ═══════════════════════════════════════════════════════════════════════════════════
+// THE MERCENARY CLAUSE (owner ruling, design §4). A mercenary-related institution in the
+// DEPLOYING settlement's roster reinforces the force deployed FROM it — a BOUNDED,
+// prosperity-scaled modifier and NOTHING ELSE (never an actor, never an entity class, no
+// contract/loyalty/defection machinery). 0 when absent ⇒ byte-identical.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/** True iff an institution is currently STANDING (the mercenaryMarket lifecycle read).
+ *  @param {{ status?: unknown, _worldPulseInactive?: unknown }} inst @returns {boolean} */
+function isStandingInst(inst) {
+  if (!inst) return false;
+  if (inst._worldPulseInactive) return false;
+  const s = String(inst.status || 'active').toLowerCase();
+  return s !== 'removed' && s !== 'destroyed' && s !== 'remnant' && s !== 'ruined';
+}
+
+/**
+ * The bounded mercenary reinforcement FACTOR (design §4). count standing mercenary
+ * institutions × PER_INST, prosperity-scaled (sellswords cost coin), HARD-capped at
+ * MERC_REINFORCE_CAP. 0 when count is 0 ⇒ byte-identical (strength × (1+0) = strength).
+ * A bounded ADDITIVE modifier, never a snowballing multiplier. Pure.
+ * @param {{ count?: number, prosperity01?: number }} args @returns {number}
+ */
+export function mercenaryReinforcement({ count = 0, prosperity01 = 0.5 } = {}) {
+  const T = CONVERGENCE_TUNING;
+  const n = Math.max(0, Math.floor(num(count, 0)));
+  if (n <= 0) return 0;
+  const pros = clamp01(num(prosperity01, 0.5));
+  return round4(Math.min(T.MERC_REINFORCE_CAP, n * T.MERC_REINFORCE_PER_INST * pros));
+}
+
+/**
+ * Detect + score a settlement's mercenary reinforcement (design §4). A STANDING institution
+ * COUNTS iff it DECLARES/infers the mercenary facet (the ONE facet chokepoint, facetOf) OR
+ * matches the hireable-force name/tag pattern — custom facet-declaring institutions count
+ * whatever their English. Prosperity-scaled off the economic-capacity read. 0/absent ⇒
+ * byte-identical. @param {Snapshot} snapshot @param {string} settlementId
+ * @returns {{ factor: number, count: number, settlementName: string }}
+ */
+export function mercenaryReinforcementOf(snapshot, settlementId) {
+  const item = snapshot?.byId?.get?.(String(settlementId));
+  const insts = Array.isArray(item?.settlement?.institutions) ? item.settlement.institutions : [];
+  let count = 0;
+  for (const raw of insts) {
+    const inst = /** @type {{ name?: string, category?: string, priorityCategory?: string, tags?: string[], status?: unknown, _worldPulseInactive?: unknown }} */ (raw);
+    if (!isStandingInst(inst)) continue;
+    const declared = facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (inst), 'institutionFunction') === 'mercenary';
+    const tags = Array.isArray(inst.tags) ? inst.tags.join(' ') : '';
+    const hay = `${String(inst.name || '')} ${String(inst.category || '')} ${String(inst.priorityCategory || '')} ${tags}`;
+    if (declared || MERCENARY_MARKET_PATTERN.test(hay)) count += 1;
+  }
+  const prosperity01 = patronStrength01Of(snapshot, settlementId);
+  return { factor: mercenaryReinforcement({ count, prosperity01 }), count, settlementName: nameOf(snapshot, settlementId) };
+}
+
 /**
  * Gather the live motive inputs for a (patron, target) pair from the snapshot + world
  * state — the reads that feed the pure scorers. Belief-free (a physical operation).
- * @param {any} snapshot @param {any} worldState @param {string} patronId @param {string} targetId
+ * @param {Snapshot} snapshot @param {WorldStateLike} worldState @param {string} patronId @param {string} targetId
  * @param {string} relType @param {string|null} sponsorId @param {string|null} rivalSide @param {number} rivalStrength01
  * @returns {Record<string, unknown>}
  */
 function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, sponsorId, rivalSide, rivalStrength01) {
   const hostile01 = HOSTILE_REL.has(relType) ? 1 : 0;
   const friendly = FRIENDLY_REL.has(relType);
+  // The corruption-web reads take their own (structurally-loose) WebSnapshot shape.
+  const webSnap = /** @type {Parameters<typeof foreignGripOf>[1]} */ (snapshot);
   return {
     // preserve_order
-    foreignGrip01: foreignGripOf(worldState, snapshot, patronId),
+    foreignGrip01: foreignGripOf(worldState, webSnap, patronId),
     treatyWithIncumbent: friendly,
     // install_friendlier_regime — the birth-stamped sponsor is the challenger's backer;
     // a corruption lever toward the target is the puppet string (directionBias).
     hostile01,
     challengerAffinity01: String(patronId) === String(sponsorId) ? 0.6 : 0,
-    leashOnChallenger01: directionBias(worldState, snapshot, targetId, patronId),
+    leashOnChallenger01: directionBias(worldState, webSnap, targetId, patronId),
     // protect_investment — the target owes the patron (a debtor's regime is collateral).
     obligationDebt01: obligationDebt01(worldState, targetId, patronId),
     tradeDependence01: friendly ? 0.5 : 0,
@@ -816,7 +899,7 @@ function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, spon
 }
 
 /** The live coup contests this tick: brewing (unresolved) coup_detat stressors with a
- *  contested settlement that still has a live coup field. @param {any} worldState @param {any} snapshot
+ *  contested settlement that still has a live coup field. @param {WorldStateLike} worldState @param {Snapshot} snapshot
  *  @returns {Array<{ targetId: string, sponsorId: string|null }>} */
 function liveCoupContests(worldState, snapshot) {
   const stressors = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
@@ -849,9 +932,9 @@ function liveCoupContests(worldState, snapshot) {
  * COMMITMENT of columns to a live contest.
  *
  * @param {Object} args
- * @param {any} args.snapshot @param {any} args.worldState @param {any} [args.graph] @param {any} args.rng
+ * @param {Snapshot} args.snapshot @param {WorldStateLike} args.worldState @param {Graph} [args.graph] @param {Rng} args.rng
  * @param {number} args.tick @param {string|null} [args.now]
- * @returns {{ worldState: any, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>> }}
+ * @returns {{ worldState: Record<string, unknown>, changed: boolean, newsEntries: Array<Record<string, unknown>>, deferrals: Array<Record<string, unknown>> }}
  */
 export function advanceIntervention({ snapshot, worldState, graph = null, rng, tick, now = null }) {
   if (!interventionActive(worldState)) {
@@ -900,7 +983,7 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     delete next[k];
     mutated = true;
     if (rec.side === INTERVENTION_SIDES.CHALLENGER && coupFellAt(snapshot, rec.target, rec.sinceTick)) {
-      const leverage01 = foreignGripOf(worldState, snapshot, rec.interId);
+      const leverage01 = foreignGripOf(worldState, /** @type {Parameters<typeof foreignGripOf>[1]} */ (snapshot), rec.interId);
       // mintTick/lastTick are stamped by foldObligations from `now`; carry placeholders
       // so the descriptor satisfies the ObligationRecord mint type.
       obligationMints.push({ ...interventionObligationMint({ patronId: rec.interId, targetId: rec.target, leverage01 }), mintTick: nowTick, lastTick: nowTick });
@@ -964,13 +1047,16 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     // COMMIT: an incumbent-prop is invited iff a friendly treaty binds them.
     const invited = best.side === INTERVENTION_SIDES.INCUMBENT && FRIENDLY_REL.has(best.relType);
     const legit = interventionLegitimacy({ side: best.side, invited });
-    const strength = round4(Math.max(1, best.patronStrength01 * 100));
+    // THE MERCENARY CLAUSE (design §4): a hireable-force institution in the DEPLOYING
+    // settlement reinforces the column — a bounded, prosperity-scaled modifier, 0 when absent.
+    const merc = mercenaryReinforcementOf(snapshot, best.patronId);
+    const strength = round4(Math.max(1, best.patronStrength01 * 100) * (1 + merc.factor));
     next[`${best.patronId}:${targetId}`] = {
       interId: best.patronId, target: targetId, side: best.side, motive: best.motive,
       invited, strength, sinceTick: nowTick, lastTick: nowTick,
     };
     mutated = true;
-    newsEntries.push(interventionNews({ patronId: best.patronId, targetId, chosen: best.chosen, legit, snapshot, tick: nowTick, now }));
+    newsEntries.push(interventionNews({ patronId: best.patronId, targetId, chosen: best.chosen, legit, merc, snapshot, tick: nowTick, now }));
   }
 
   // ── THE MULTI-SIDED RESOLUTION (design §1, owner law 2). Where ADVERSARIAL columns meet
@@ -1044,11 +1130,12 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
 
 /** Did the coup at `targetId` FALL (challenger prevailed) at/after `sinceTick`? Read from
  *  the target's activeConditions (a fresh government_overthrown from the coup verdict).
- *  @param {any} snapshot @param {string} targetId @param {number} sinceTick @returns {boolean} */
+ *  @param {Snapshot} snapshot @param {string} targetId @param {number} sinceTick @returns {boolean} */
 function coupFellAt(snapshot, targetId, sinceTick) {
   const entry = snapshot?.byId?.get?.(String(targetId));
   const conditions = entry?.settlement?.activeConditions || [];
-  for (const c of conditions) {
+  for (const raw of conditions) {
+    const c = /** @type {{ archetype?: string, condition?: { archetype?: string }, triggeredAt?: { tick?: number }, tick?: number }} */ (raw);
     const arch = c?.archetype || c?.condition?.archetype;
     if (arch !== 'government_overthrown') continue;
     const at = num(c?.triggeredAt?.tick ?? c?.tick, -1);
@@ -1090,18 +1177,22 @@ export function foreignClashIntensityOf(worldState, aId, bId) {
   return round4(intensity);
 }
 
-/** The display name for an id. @param {any} snapshot @param {string} id @returns {string} */
+/** The display name for an id. @param {Snapshot} snapshot @param {string} id @returns {string} */
 function nameOf(snapshot, id) {
   const item = snapshot?.byId?.get?.(String(id));
   return item?.name || item?.settlement?.name || String(id);
 }
 
 /** A regional wizard-news entry for a committed intervention (house voice, AGGREGATE —
- *  no npc named). Carries the typed motive (design §5 legibility). @param {any} args */
-function interventionNews({ patronId, targetId, chosen, legit, snapshot, tick, now }) {
+ *  no npc named). Carries the typed motive (design §5 legibility) + the mercenary receipt.
+ *  @param {{ patronId: string, targetId: string, chosen: ReturnType<typeof scoreMotives>, legit: ReturnType<typeof interventionLegitimacy>, merc?: { factor: number, count: number, settlementName: string }, snapshot: Snapshot, tick: number, now: string|null }} args */
+function interventionNews({ patronId, targetId, chosen, legit, merc = { factor: 0, count: 0, settlementName: '' }, snapshot, tick, now }) {
   const patron = nameOf(snapshot, patronId);
   const target = nameOf(snapshot, targetId);
   const sideWord = chosen.side === INTERVENTION_SIDES.INCUMBENT ? 'to prop the seat' : 'to raise the challengers';
+  const mercReceipt = merc && merc.factor > 0
+    ? `Free companies marched under ${merc.settlementName || patron}'s banner, swelling the column.`
+    : '';
   return {
     id: `wizard_news.${tick}.intervention.${patronId}.${targetId}`,
     tick,
@@ -1121,13 +1212,14 @@ function interventionNews({ patronId, targetId, chosen, legit, snapshot, tick, n
     tags: legit.casusGenerative
       ? ['world_pulse', 'war', 'intervention', chosen.motive, 'casus_generative']
       : ['world_pulse', 'war', 'intervention', chosen.motive],
-    reasons: [chosen.receipt, legit.receipt].filter(Boolean),
+    reasons: [chosen.receipt, legit.receipt, mercReceipt].filter(Boolean),
     createdAt: now,
   };
 }
 
 /** A regional wizard-news entry for a multi-sided FIELD BATTLE between two interveners at a
- *  contested settlement (AGGREGATE — no npc). @param {any} args */
+ *  contested settlement (AGGREGATE — no npc).
+ *  @param {{ winnerId: string, loserId: string, targetId: string, snapshot: Snapshot, tick: number, now: string|null }} args */
 function sideBattleNews({ winnerId, loserId, targetId, snapshot, tick, now }) {
   const winner = nameOf(snapshot, winnerId);
   const loser = nameOf(snapshot, loserId);
