@@ -13,7 +13,7 @@ import {
   GENEROSITY_TUNING, VERDICTS, GENEROSITY_INSTRUMENTS,
   qualifiesForGenerosity, bondTerm, historyTerm, conscienceTerm, strategyTerm, faithTerm,
   ownMarginTerm, commitmentLoadTerm, routeRiskTerm, domesticReactionTerm, dependencyTerm,
-  generosityEV, generosityReceipt, triageAllocation,
+  generosityEV, generosityReceipt, triageAllocation, refugeAcceptance,
   generosityForkKey, loadedDraw, shouldInitiateAsk, warningSacrifice, constructiveFlowsActive,
 } from '../../src/domain/spatial/generosityEV.js';
 
@@ -266,18 +266,95 @@ describe('the loaded-dice primitives (§H)', () => {
 });
 
 describe('the instrument catalog (§4) + the warning-gift sacrifice price (statecraft §2.4)', () => {
-  it('grain_relief + warning + credit are LIVE; purchase/trade_overture/refuge are registered but deferred', () => {
+  it('grain_relief + warning + credit + refuge are LIVE; purchase/trade_overture are deferred (owner-decision-queue)', () => {
     expect(GENEROSITY_INSTRUMENTS.grain_relief.live).toBe(true);
     expect(GENEROSITY_INSTRUMENTS.warning.live).toBe(true);
     expect(GENEROSITY_INSTRUMENTS.credit.live).toBe(true);       // E1b: maturity/default/appetite wired
-    expect(GENEROSITY_INSTRUMENTS.purchase.live).toBe(false);
-    expect(GENEROSITY_INSTRUMENTS.trade_overture.live).toBe(false);
-    expect(GENEROSITY_INSTRUMENTS.refuge.live).toBe(false);
+    expect(GENEROSITY_INSTRUMENTS.refuge.live).toBe(true);        // E1c: the refuge posture axis is wired into M4
+    expect(GENEROSITY_INSTRUMENTS.purchase.live).toBe(false);       // owner-gated: payment/conservation model
+    expect(GENEROSITY_INSTRUMENTS.trade_overture.live).toBe(false); // owner-gated: route-opening target
   });
   it("warningSacrifice prices the COST of the telling, not the value received", () => {
     expect(warningSacrifice({ strategicAdvantageSpent01: 0.9, eyesExposed01: 0.8 }))
       .toBeGreaterThan(warningSacrifice({ strategicAdvantageSpent01: 0.1, eyesExposed01: 0 }));
     expect(warningSacrifice({})).toBe(0);
+  });
+});
+
+describe('REFUGE ACCEPTANCE (design §4 / E1c) — the host posture decision (give-side motive only)', () => {
+  // A strong-bond, good-aligned motive toward a desperate ally.
+  const strongMotive = {
+    bond: { kind: 'allied', strength01: 0.85, duty01: 0 },
+    history: { reliefReceived01: 0.6 },
+    conscience: { good01: 0.9, lawful01: 0.8, need01: 0.9 },
+    strategy: { warStrategic01: 0.3 },
+    faith: { sharedFaith01: 0.5 },
+    now: 5,
+  };
+
+  it('OPENS a posture for a strong, good-aligned motive (attraction ≥ ENTER); weight01 == attraction01', () => {
+    const d = refugeAcceptance(strongMotive);
+    expect(d.open).toBe(true);
+    expect(d.attraction01).toBeGreaterThanOrEqual(GENEROSITY_TUNING.REFUGE_OPEN_ENTER);
+    expect(d.posture).toMatchObject({ phase: 'open', sinceTick: 5, lastTick: 5 });
+    expect(d.weight01).toBe(d.attraction01);
+    expect(d.weight01).toBeGreaterThan(0);
+  });
+
+  it('does NOT open for a thin motive (a bare, weak trade tie to a mild need)', () => {
+    const d = refugeAcceptance({
+      bond: { kind: 'trade_partner', strength01: 0.25 },
+      conscience: { good01: 0.5, lawful01: 0.5, need01: 0.2 },
+      now: 1,
+    });
+    expect(d.open).toBe(false);
+    expect(d.posture).toBeNull();
+    expect(d.weight01).toBe(0);
+  });
+
+  it('BETRAYAL zeros the give-side ⇒ no posture even from a strong bond', () => {
+    const d = refugeAcceptance({ ...strongMotive, history: { betrayal: true } });
+    expect(d.attraction01).toBe(0);
+    expect(d.open).toBe(false);
+  });
+
+  it('the cost of hospitality is NOT read here (no margin/commitment input) — the motive alone decides', () => {
+    // refugeAcceptance takes no margin/commitment: a razor-thin giver with a strong motive
+    // still opens (the domestic bill is priced downstream by M4 congestion, design §4/§9).
+    const d = refugeAcceptance(strongMotive);
+    expect(d.open).toBe(true);
+  });
+
+  it('HYSTERESIS: an OPEN posture HOLDS through a brief dip (attraction between EXIT and ENTER)', () => {
+    const open = refugeAcceptance(strongMotive);
+    expect(open.open).toBe(true);
+    // A middling motive (below ENTER, above EXIT) does not re-open a closed pair…
+    const midMotive = {
+      bond: { kind: 'allied', strength01: 0.45 }, conscience: { good01: 0.5, lawful01: 0.5, need01: 0.3 },
+      now: 6,
+    };
+    const midFromClosed = refugeAcceptance({ ...midMotive, priorPosture: null });
+    expect(midFromClosed.open).toBe(false);
+    // …but HOLDS an already-open posture (the deadband), even though its attraction is mid.
+    const midFromOpen = refugeAcceptance({ ...midMotive, priorPosture: open.posture });
+    expect(midFromOpen.open).toBe(true);
+    expect(midFromOpen.posture.sinceTick).toBe(open.posture.sinceTick); // the dwell clock carries
+  });
+
+  it('CLOSES an open posture only when attraction drops below EXIT AND it has dwelled', () => {
+    const opened = refugeAcceptance({ ...strongMotive, now: 0 }).posture;
+    const collapse = { bond: { kind: 'allied', strength01: 0 }, conscience: { good01: 0.5, lawful01: 0.5, need01: 0 } };
+    // Before the dwell elapses, an open posture holds even at zero attraction.
+    const early = refugeAcceptance({ ...collapse, priorPosture: opened, now: GENEROSITY_TUNING.REFUGE_DWELL - 1 });
+    expect(early.open).toBe(true);
+    // After the dwell, a below-EXIT attraction closes it.
+    const late = refugeAcceptance({ ...collapse, priorPosture: opened, now: GENEROSITY_TUNING.REFUGE_DWELL + 1 });
+    expect(late.open).toBe(false);
+    expect(late.posture).toBeNull();
+  });
+
+  it('deterministic (no rng): identical inputs ⇒ identical decision', () => {
+    expect(refugeAcceptance(strongMotive)).toEqual(refugeAcceptance(strongMotive));
   });
 });
 

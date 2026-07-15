@@ -37,7 +37,7 @@ import {
   releaseArrivals, carryingCapacityTolerance, MIGRATION_TUNING,
 } from '../spatial/migration.js';
 import { cultureAffinity } from '../spatial/cultureDistance.js';
-import { pathCost, hopWeeks, distanceWeight, isMapped, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { pathCost, hopWeeks, distanceWeight, isMapped, setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { chooseRoute, riskToleranceFromAlignment } from '../spatial/embattlement.js';
 
 // ── Kernel-local read-shapes (0-hole discipline: no `any`) ────────────────────
@@ -152,9 +152,10 @@ const HOSTILITY = Object.freeze({ hostile: 1, cold_war: 0.6, rival: 0.4 });
  * @param {CultureVector} args.originVector @param {PressureIndex} args.pIndex
  * @param {MigEdge[]} args.edges @param {number} args.riskTolerance
  * @param {string|null} args.season @param {number} args.tick
+ * @param {Record<string, { weight01?: number }>|null} [args.refugeLedger] the refugePostures sub-ledger ('host:origin' → { weight01 }); absent/null ⇒ no refuge axis (0)
  * @returns {import('../spatial/migration.js').DestinationCandidate|null}
  */
-function buildDestinationCandidate({ digest, worldState, originId, destItem, originVector, pIndex, edges, riskTolerance, season, tick }) {
+function buildDestinationCandidate({ digest, worldState, originId, destItem, originVector, pIndex, edges, riskTolerance, season, tick, refugeLedger }) {
   const destId = String(destItem.id);
   if (destId === originId || !isMapped(digest, destId)) return null;
   const cost = pathCost(digest, originId, destId, season);
@@ -190,9 +191,17 @@ function buildDestinationCandidate({ digest, worldState, originId, destItem, ori
   // routeDanger: the M1 embattlement summed over the chosen route's hops (clamped).
   const routeDanger01 = clamp01(num(route?.danger, 0));
 
+  // REFUGE POSTURE (design §4 / E1c): if THIS destination (a host) has opened a refuge
+  // posture toward the origin, it pulls the origin's exodus toward it. Keyed 'host:origin'
+  // to match the generosity mover's write. Absent ⇒ 0 ⇒ the destinationScore axis adds
+  // nothing (byte-identical to a world with no postures — the golden invariant).
+  const refugePosture01 = refugeLedger
+    ? clamp01(num(refugeLedger[`${destId}:${originId}`]?.weight01, 0))
+    : 0;
+
   return {
     destId, closeness01, cultureAffinity01, safety01, richness01,
-    capacityPressure01, routeDanger01, arrivalTick: tick + weeks,
+    capacityPressure01, routeDanger01, refugePosture01, arrivalTick: tick + weeks,
   };
 }
 
@@ -332,6 +341,9 @@ export function dispatchMigrations({ events, snapshot, pIndex, digest, worldStat
   const itemById = new Map((snapshot?.settlements || []).map((it) => [String(it.id), it]));
   const edges = snapshot?.regionalGraph?.edges || [];
   const K = MIGRATION_KERNEL_TUNING;
+  // The refuge postures the generosity mover wrote ('host:origin' → { weight01 }). Absent
+  // (no constructive-flows mover, or none opened) ⇒ the refuge axis is a no-op (byte-exact).
+  const refugeLedger = /** @type {Record<string, { weight01?: number }>|null} */ (getSpatialLedger(worldState, 'refugePostures'));
   // Seed the working column ledger from the current namespace (the RELEASE pass may
   // have already run this tick + drained arrivals). enqueueColumns folds onto it.
   const priorNs = /** @type {{ migration?: Record<string, import('../spatial/migration.js').MigrationColumn> }} */ (
@@ -368,7 +380,7 @@ export function dispatchMigrations({ events, snapshot, pIndex, digest, worldStat
     const candidates = [];
     for (const { it } of reachable) {
       const cand = buildDestinationCandidate({
-        digest, worldState, originId, destItem: it, originVector, pIndex, edges, riskTolerance, season, tick,
+        digest, worldState, originId, destItem: it, originVector, pIndex, edges, riskTolerance, season, tick, refugeLedger,
       });
       if (cand) candidates.push(cand);
     }

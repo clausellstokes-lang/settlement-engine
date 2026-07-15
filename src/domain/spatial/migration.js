@@ -104,6 +104,14 @@ export const MIGRATION_TUNING = Object.freeze({
   W_CULTURE: 0.26,
   W_SAFETY: 0.24,
   W_RICH: 0.18,
+  // REFUGE POSTURE (design §4 / E1c — the generosity engine's 5th axis). A host that has
+  // OPENED a refuge posture toward THIS origin (the drop-when-empty refugePostures
+  // sub-ledger, written by the generosity mover) pulls that origin's exodus toward it —
+  // "generosity in people." Additive, comparable magnitude to richness; the split
+  // normalizes. A destination with NO posture reads refugePosture01 = 0 ⇒ ADDS EXACTLY 0
+  // ⇒ byte-identical to the pre-axis score (the dormancy/golden invariant). Conservation
+  // is unaffected: this only re-weights WHERE survivors go, never how many survive.
+  W_REFUGE: 0.18,
 
   // CONGESTION PUSHBACK (§II.3-3 brake). A destination's RICHNESS pull is scaled by
   // (1 - CONGEST_DECAY·capacityPressure01): a saturated hub (capacityPressure→1)
@@ -229,6 +237,7 @@ export function roadDeathRate(routeDanger01, season) {
  * @property {number} richness01       1 = the richest reachable hub; 0 = destitute.
  * @property {number} capacityPressure01 0 = empty/room to grow; 1 = saturated (congestion brake input).
  * @property {number} routeDanger01    the route's M1 embattlement level (road-death input).
+ * @property {number} [refugePosture01] the host's OPEN refuge-posture weight toward this origin (design §4 / E1c); 0/absent = no posture ⇒ adds nothing.
  * @property {number} arrivalTick      now + hopWeeks(origin, dest, season) (transport lag).
  */
 
@@ -249,7 +258,12 @@ export function destinationScore(candidate) {
   const pressure = clamp01(finiteNumber(candidate.capacityPressure01, 0));
   // Congestion pushback: the richness pull decays as the destination fills.
   const richEff = rawRich * (1 - T.CONGEST_DECAY * pressure);
-  const score = T.W_CLOSE * close + T.W_CULTURE * culture + T.W_SAFETY * safety + T.W_RICH * richEff;
+  // REFUGE POSTURE (design §4 / E1c): an open host-posture toward this origin adds a
+  // bounded pull. Absent/0 ⇒ ADDS EXACTLY 0 (identity — byte-identical to the pre-axis
+  // score; the migration golden + dormancy invariant hold).
+  const refuge = clamp01(finiteNumber(candidate.refugePosture01, 0));
+  const score = T.W_CLOSE * close + T.W_CULTURE * culture + T.W_SAFETY * safety
+    + T.W_RICH * richEff + T.W_REFUGE * refuge;
   return score > 0 ? score : 0;
 }
 

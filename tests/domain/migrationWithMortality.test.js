@@ -570,3 +570,127 @@ describe('M4 — mortality is AGGREGATE-ONLY: named NPCs are never touched', () 
     expect(worldState.npcStates.npc_captain_vale).toEqual(namedNpc);
   });
 });
+
+// ── REFUGE POSTURE axis (design §4 / E1c — the generosity engine's 5th destination axis) ──
+describe('REFUGE POSTURE axis — the generosity coupling on M4 destination choice', () => {
+  /** A minimal reachable destination candidate. */
+  const cand = (destId, over = {}) => ({
+    destId, closeness01: 0.5, cultureAffinity01: 0.5, safety01: 0.7, richness01: 0.6,
+    capacityPressure01: 0.2, routeDanger01: 0.1, arrivalTick: 10, ...over,
+  });
+
+  it('NO-OP when absent: a candidate with no posture (or refugePosture01: 0) scores IDENTICALLY to before the axis', () => {
+    const base = cand('x');                          // no refugePosture01 field at all (the pre-axis shape)
+    const withZero = cand('x', { refugePosture01: 0 });
+    // Adding the axis at weight 0 is the IDENTITY — this is what keeps every migration
+    // golden byte-identical in a world with no refuge postures.
+    expect(destinationScore(base)).toBe(destinationScore(withZero));
+    // And the axis contributes EXACTLY W_REFUGE·weight on top of the untouched 4-axis score.
+    const posture = cand('x', { refugePosture01: 0.8 });
+    expect(destinationScore(posture)).toBeCloseTo(
+      destinationScore(base) + MIGRATION_TUNING.W_REFUGE * 0.8, 10);
+  });
+
+  it('a posture RAISES a destination score monotonically (the host pulls the exodus toward it)', () => {
+    expect(destinationScore(cand('x', { refugePosture01: 0.6 })))
+      .toBeGreaterThan(destinationScore(cand('x', { refugePosture01: 0 })));
+  });
+
+  it('CONSERVATION weight-independence (the HONEST pin): a posture shifts WHERE survivors go, never the SUM', () => {
+    // Two otherwise-identical destinations; a refuge posture is opened toward B only. The
+    // recipe's literal "identical {originDeaths,roadDeaths,arrivals}" is PROVABLY wrong
+    // (roadDeaths is a per-column integer draw on each route's own danger), so we pin the
+    // TRUE invariants: departures + originDeaths unchanged, the conservation SUM exact (no
+    // minting), and the split shifts toward the posture host.
+    const A = cand('aaa', { routeDanger01: 0.1 });
+    const B = cand('bbb', { routeDanger01: 0.1 });
+    const common = { originId: 'o', departures: 400, tolerance: 0.7, season: 'summer' };
+    const noPosture = planMigration({ ...common, candidates: [A, B], rng: createPRNG('refuge') });
+    const withPosture = planMigration({
+      ...common,
+      candidates: [A, { ...B, refugePosture01: 0.9 }],
+      rng: createPRNG('refuge'),
+    });
+
+    // Both plans conserve EXACTLY (no minting), and the SUM identity holds.
+    expect(assertMigrationConservation(noPosture)).toBe(true);
+    expect(assertMigrationConservation(withPosture)).toBe(true);
+
+    // The weight-INDEPENDENT terms are byte-identical: departures + originDeaths.
+    expect(withPosture.departures).toBe(noPosture.departures);
+    expect(withPosture.originDeaths).toBe(noPosture.originDeaths);
+
+    // The SPLIT shifts toward the posture host B (the whole point of the axis).
+    const shareOf = (plan, id) => (plan.dispatches.find((d) => d.destId === id)?.travellers || 0);
+    expect(shareOf(withPosture, 'bbb')).toBeGreaterThan(shareOf(noPosture, 'bbb'));
+  });
+
+  it('the refuge axis alone never breaches conservation across a range of weights', () => {
+    for (const w of [0, 0.25, 0.5, 0.75, 1]) {
+      const plan = planMigration({
+        originId: 'o', departures: 300, tolerance: 0.6, season: 'autumn',
+        candidates: [cand('aaa'), cand('bbb', { refugePosture01: w })],
+        rng: createPRNG(`w-${w}`),
+      });
+      expect(assertMigrationConservation(plan)).toBe(true);
+    }
+  });
+});
+
+// ── REFUGE coupling: dispatchMigrations READS the refugePostures ledger (host:origin) ──
+describe('REFUGE coupling — dispatchMigrations reads the generosity-written posture ledger', () => {
+  const inboundArrivals = (worldState, destId) => {
+    const ledger = worldState?.spatialLedgers?.migration || {};
+    let sum = 0;
+    for (const col of Object.values(ledger)) {
+      if (String(col.destId) === String(destId)) sum += Math.max(0, Math.round(Number(col.arrivals) || 0));
+    }
+    return sum;
+  };
+
+  it('a posture keyed "host:origin" pulls the origin\'s exodus toward the host (conservation intact)', () => {
+    const digest = digest8();
+    const ids = digest.settlementIds;
+    const origin = ids[0];
+    const host = ids[5]; // a reachable but non-default destination the posture lifts into contention
+    const snapshot = { settlements: ids.map((id) => makeItem(id, { population: 1000 })), regionalGraph: { edges: [] } };
+    const events = [{ originId: origin, loss: 2000 }];
+    const run = (postures) => dispatchMigrations({
+      events, snapshot, pIndex: makePIndex(), digest,
+      worldState: { ...baseWorld(digest), ...(postures ? { spatialLedgers: { refugePostures: postures } } : {}) },
+      rng: createPRNG('refuge-couple'), season: 'summer', tick: 0,
+    });
+    const none = run(null);
+    // The kernel writes the posture keyed 'host:origin' (giver:receiver) — the exact key M4 reads.
+    const withP = run({ [`${host}:${origin}`]: { phase: 'open', sinceTick: 0, lastTick: 0, weight01: 0.95 } });
+
+    // The host gathers MORE of the exodus with an open refuge posture toward this origin.
+    expect(inboundArrivals(withP.worldState, host)).toBeGreaterThan(inboundArrivals(none.worldState, host));
+    // The weight-INDEPENDENT conservation terms hold: departures identical, and no minting.
+    const dep = (d) => d.receipts.reduce((s, r) => s + r.departures, 0);
+    const oDeaths = (d) => d.receipts.reduce((s, r) => s + r.originDeaths, 0);
+    expect(dep(withP)).toBe(dep(none));
+    expect(oDeaths(withP)).toBe(oDeaths(none));
+  });
+
+  it('a posture keyed the WRONG way (origin:host) does NOT pull (proves the key order is load-bearing)', () => {
+    const digest = digest8();
+    const ids = digest.settlementIds;
+    const origin = ids[0];
+    const host = ids[5];
+    const snapshot = { settlements: ids.map((id) => makeItem(id, { population: 1000 })), regionalGraph: { edges: [] } };
+    const events = [{ originId: origin, loss: 2000 }];
+    const run = (postures) => dispatchMigrations({
+      events, snapshot, pIndex: makePIndex(), digest,
+      worldState: { ...baseWorld(digest), spatialLedgers: { refugePostures: postures } },
+      rng: createPRNG('refuge-couple'), season: 'summer', tick: 0,
+    });
+    const wrongKey = run({ [`${origin}:${host}`]: { phase: 'open', sinceTick: 0, lastTick: 0, weight01: 0.95 } });
+    const none = dispatchMigrations({
+      events, snapshot, pIndex: makePIndex(), digest, worldState: baseWorld(digest),
+      rng: createPRNG('refuge-couple'), season: 'summer', tick: 0,
+    });
+    // A reversed key never matches destId:originId ⇒ the host's arrivals are unchanged.
+    expect(inboundArrivals(wrongKey.worldState, host)).toBe(inboundArrivals(none.worldState, host));
+  });
+});

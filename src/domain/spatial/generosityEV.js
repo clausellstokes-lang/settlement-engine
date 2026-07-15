@@ -91,6 +91,21 @@ export const GENEROSITY_TUNING = Object.freeze({
   // The conscience EXCEPTION magnitude cap (§2.1 / scenario 2): a strongly-good giver
   // with a charity roster gives to NON-bonded neighbours at small, capped magnitude.
   CONSCIENCE_EXCEPTION_CAP: 0.2,
+
+  // ── REFUGE (design §4 / E1c): "generosity in people, not goods" — an acceptance
+  // POSTURE a host opens toward a distressed ally, weighting M4's destination choice
+  // toward the host during that ally's exodus. The DECISION reuses only the GIVE-side
+  // motive (bond/history/conscience/strategy/faith — the same blend, same weights, same
+  // modulators as the grain giveScore); the DOMESTIC COST of hospitality is priced
+  // DOWNSTREAM by M4's congestion/crowding/crime brakes (design §4/§9 MIGRATION), so the
+  // withhold-side (granary margin, commitment) is NOT read here. A posture is a standing
+  // STANCE with an enter/exit hysteresis deadband + dwell (a host does not open and slam
+  // its gates week to week — the M1 discipline). The posture WEIGHT it carries is the
+  // give-attraction itself (the same [0,1] scale as giveScore), consumed by M4 as the
+  // refugePosture01 axis.
+  REFUGE_OPEN_ENTER: 0.2,   // give-attraction at/above which a host OPENS refuge (enter)
+  REFUGE_OPEN_EXIT: 0.1,    // attraction below which an open posture CLOSES (exit) — the deadband
+  REFUGE_DWELL: 6,          // min ticks an open posture holds before it may close (no flip-flop)
 });
 
 /** The four verdict tiers (design §2.3). */
@@ -537,6 +552,90 @@ export function generosityEV(inputs) {
   };
 }
 
+// ── REFUGE ACCEPTANCE (design §4 / E1c) — the posture decision (mirror of the give side) ──
+/**
+ * @typedef {Object} RefugePosture
+ * @property {'open'} phase       only the OPEN phase materializes (closed = absent/pruned)
+ * @property {number} sinceTick   the tick the posture opened (the dwell clock)
+ * @property {number} lastTick    the tick this record last re-affirmed
+ * @property {number} weight01     the posture strength [0,1] (the M4 refugePosture01 axis)
+ */
+
+/**
+ * Decide whether a host OPENS (or holds) a refuge posture toward a distressed ally, and
+ * at what weight (design §4: "generosity in people, not goods"). The give-attraction is the
+ * SAME blend the grain giveScore uses — bond/history/conscience/strategy/faith, the same
+ * weights and the same quadrant/lens modulators — betrayal-killed; the withhold side
+ * (granary margin/commitment) is DELIBERATELY absent because the domestic cost of
+ * hospitality is priced DOWNSTREAM by M4's congestion/crowding brakes (§9 MIGRATION). A
+ * posture is a STANDING STANCE with an enter/exit hysteresis deadband + dwell (mirror of
+ * the dispatch/generosity willingness latch) so a host does not open and slam its gates
+ * week to week. Pure, deterministic (no rng — the loading is the motive).
+ * @param {Object} args
+ * @param {BondRead|null} [args.bond]
+ * @param {HistoryRead|null} [args.history]
+ * @param {ConscienceRead|null} [args.conscience]
+ * @param {StrategyRead|null} [args.strategy]
+ * @param {FaithRead|null} [args.faith]
+ * @param {{ bond?: number, conscience?: number, gate?: number }} [args.quadrantMod]
+ * @param {{ conscience?: number, strategy?: number, hysteresisWiden?: number }} [args.lensMod]
+ * @param {RefugePosture|null} [args.priorPosture]
+ * @param {number} args.now
+ * @returns {{ open: boolean, weight01: number, posture: RefugePosture|null, attraction01: number }}
+ */
+export function refugeAcceptance({ bond, history, conscience, strategy, faith, quadrantMod, lensMod, priorPosture, now } = { now: 0 }) {
+  const T = GENEROSITY_TUNING;
+  const nowT = Math.max(0, Math.floor(finiteNumber(now, 0)));
+  const qMod = quadrantMod || {};
+  const lMod = lensMod || {};
+  const qBond = clamp(finiteNumber(qMod.bond, 1), 0.5, 2);
+  const qConscience = clamp(finiteNumber(qMod.conscience, 1), 0.5, 2);
+  const lConscience = clamp(finiteNumber(lMod.conscience, 1), 0.5, 2);
+  const lStrategy = clamp(finiteNumber(lMod.strategy, 1), 0.5, 2);
+  const hysteresisWiden = clamp(finiteNumber(lMod.hysteresisWiden, 1), 1, 3);
+
+  // The give-attraction — identical construction to generosityEV's giveScore, MINUS the
+  // withhold side (cost priced downstream by M4). Betrayal zeros it (§2.1).
+  const bondV = clamp01(bondTerm(bond) * qBond);
+  const hist = historyTerm(history);
+  const conscienceV = clamp01(conscienceTerm(conscience) * qConscience * lConscience);
+  const strat = strategyTerm(strategy);
+  const strategyV = clamp01(strat.value01 * lStrategy);
+  const faithV = faithTerm(faith);
+  const attraction = hist.betrayalKill ? 0 : clamp01(
+    T.W_BOND * bondV
+    + T.W_HISTORY * hist.value01
+    + T.W_CONSCIENCE * conscienceV
+    + T.W_STRATEGY * strategyV
+    + T.W_FAITH * faithV,
+  );
+
+  // The hysteresis latch (mirror of the willingness deadband): OPEN above ENTER; an open
+  // posture holds until attraction drops below EXIT AND it has dwelled. The structural-lens
+  // hysteresisWiden stiffens both the deadband and the dwell (a council's averaged stance is
+  // stickier — §C).
+  const enter = T.REFUGE_OPEN_ENTER;
+  const exit = T.REFUGE_OPEN_EXIT / hysteresisWiden;
+  const dwell = Math.ceil(T.REFUGE_DWELL * hysteresisWiden);
+  const priorOpen = !!(priorPosture && priorPosture.phase === 'open');
+  const priorSince = priorOpen && priorPosture ? Math.floor(finiteNumber(priorPosture.sinceTick, nowT)) : nowT;
+  let open = priorOpen;
+  let sinceTick = priorSince;
+  if (!priorOpen) {
+    if (attraction >= enter) { open = true; sinceTick = nowT; }
+  } else if (attraction < exit && (nowT - priorSince) >= dwell) {
+    open = false;
+  }
+
+  const weight01 = open ? round4(attraction) : 0;
+  return {
+    open,
+    weight01,
+    attraction01: round4(attraction),
+    posture: open ? { phase: 'open', sinceTick, lastTick: nowT, weight01 } : null,
+  };
+}
+
 // ── PRECEDENT / TRIAGE (§2.2 / scenario 4) — many claimants, one granary ────────
 /**
  * @typedef {Object} TriageClaimant
@@ -713,10 +812,10 @@ export function shouldInitiateAsk(rng, key, pressure01, baseChance = 0.15) {
 export const GENEROSITY_INSTRUMENTS = Object.freeze({
   grain_relief: { kind: 'grain_relief', conservationExact: true, live: true, note: 'The flagship: rides supplyShipments kind:relief; tolls apply; aspatial fallback = a bounded instant transfer.' },
   warning: { kind: 'warning', conservationExact: false, live: true, note: 'Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strategic advantage spent + eyes exposed), not the value received. The intel-posture coupling lands with W-DOCTRINE.' },
-  purchase: { kind: 'purchase', conservationExact: true, live: false, note: 'The market twin (E1b/A2) — shares the dispatch scorer; wiring deferred (recipe in the E1b handoff ledger).' },
+  purchase: { kind: 'purchase', conservationExact: true, live: false, note: 'The market twin (A2) — grain leg conserves (computeSackFoodTransfer); the PAYMENT leg is unmodeled (no conserved coin/prosperity primitive). E1c OWNER-DECISION-QUEUE: (X) payment-conservation model, (Y) enumeration scope (post-REFUSE bonded fall-through vs A2 shortage→surplus non-ally), (Z) seller-credit write target. Not built pending the ruling.' },
   credit: { kind: 'credit', conservationExact: true, live: true, note: 'LIVE (E1b, §3.4): GIVE_AS_CREDIT mints a maturity-bearing kind:credit obligation; at maturity the debtor repays (trust, debt clears) or defaults (grievance ratchet = casus-belli seam + the lender\'s hardened heart via lendAppetite).' },
-  trade_overture: { kind: 'trade_overture', conservationExact: true, live: false, note: 'Subsidized channel (E1b/A4) — needs a tradeFlow-tally→trade-pressure wire + a dwell-bounded overture ledger; deferred (recipe in the E1b handoff ledger).' },
-  refuge: { kind: 'refuge', conservationExact: true, live: false, note: 'People, not goods (E1c): an acceptance posture gating M4 destination choice.' },
+  trade_overture: { kind: 'trade_overture', conservationExact: true, live: false, note: 'Subsidized channel (A4). The tradeFlow TALLY is per-node (cannot express a per-corridor warmth) — SUPERSEDED: the source is the per-pair give-stream. Write-side (a dwell-bounded tradeOverture sub-ledger, willingness idiom) is clean + byte-free. E1c OWNER-DECISION-QUEUE: (Y) route-opening target — Y-clean trust-nudge into the existing neutral_to_trade_partner rule (byte-neutral, recommended) vs owner-gated autonomous edge-mint; (Z) autonomous vs proposal-gated under conservative presets. Not built pending the ruling.' },
+  refuge: { kind: 'refuge', conservationExact: true, live: true, note: 'LIVE (E1c): "people, not goods" — refugeAcceptance opens a host POSTURE (give-side motive only; cost priced downstream by M4 congestion), written to the drop-when-empty refugePostures sub-ledger, READ in migrationKernel.buildDestinationCandidate as the refugePosture01 axis on destinationScore. Conservation weight-independent for the SUM (departures + originDeaths invariant; no minting) — roadDeaths/arrivals redistribute across routes (per-column integer draw), never the total survivors vs deaths.' },
 });
 
 /**

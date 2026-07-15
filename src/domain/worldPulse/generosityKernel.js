@@ -44,16 +44,34 @@
  * lift), the smuggle-premium coupling pin (a refuse moves no food ⇒ the shortage persists
  * for M7), and the stale-willingness-latch prune.
  *
- * DEFERRED — E1c+ (documented, not lost; recon-mapped for a clean handoff — see the E1b
- * report + the coherence matrix note):
- *   • PURCHASE / TRADE_OVERTURE live-flips (design A2/A4) — purchase = a dispatchDecision
- *     fall-through off the relief decision (relief-if-qualified, purchase-else); overture
- *     needs a tradeFlow-tally→trade-pressure wire + a dwell-bounded overture ledger.
- *   • REFUGE posture (design E1c) — a drop-when-empty 'refugePostures' sub-ledger written
- *     here, READ in migrationKernel.buildDestinationCandidate as a new weighted axis on
- *     migration.destinationScore; conservation is weight-independent (survivors only
- *     redistribute, never mint) — pin identical {originDeaths,roadDeaths,arrivals} with vs
- *     without a posture.
+ * E1c SHIPPED (this wave — REFUGE goes live; same dormancy gate ⇒ the golden holds byte-
+ * identical): "generosity in people, not goods." A refuge PASS weighs each distressed
+ * qualifying pair by the GIVE-side motive ALONE (refugeAcceptance — bond/history/conscience/
+ * strategy/faith, enter/exit hysteresis + dwell; the domestic cost priced DOWNSTREAM by M4's
+ * congestion brakes, design §4/§9) and, on an OPEN, writes a drop-when-empty 'refugePostures'
+ * sub-ledger ('host:origin' -> { phase:'open', sinceTick, lastTick, weight01 }, stale-pruned).
+ * migrationKernel.buildDestinationCandidate READS it as the refugePosture01 axis on
+ * migration.destinationScore (W_REFUGE), weighting M4's destination choice toward the host
+ * during the ally's exodus. A refuge_granted incident + a light succor beat fire on the open
+ * transition. PIN CORRECTION (the handoff recipe's "pin identical {originDeaths,roadDeaths,
+ * arrivals}" was PROVABLY WRONG — roadDeaths is a PER-COLUMN integer draw on each route's own
+ * danger, so shifting shares moves roadDeaths AND total arrivals): the HONEST invariants are
+ * (a) posture ABSENT ⇒ the axis adds EXACTLY 0 ⇒ byte-identical split (the golden guard); and
+ * (b) posture PRESENT ⇒ departures + originDeaths unchanged + the conservation SUM exact (no
+ * minting) — roadDeaths/arrivals REDISTRIBUTE across routes, never the total survivors vs deaths.
+ *
+ * DEFERRED — E1c+ / OWNER-DECISION-QUEUE (documented, not lost; recon-mapped for a clean handoff):
+ *   • PURCHASE live-flip (design A2) — OWNER-GATED: the grain leg conserves
+ *     (computeSackFoodTransfer), but there is NO conserved coin/prosperity primitive; A2 wants
+ *     a prosperity BAND-STEP debit + non-zero-sum seller income. Owner must rule: (X) payment-
+ *     conservation model, (Y) enumeration scope (post-REFUSE bonded fall-through vs A2
+ *     shortage->surplus non-ally), (Z) seller-credit write target.
+ *   • TRADE_OVERTURE live-flip (design A4) — the recipe's "tradeFlow-tally->pressure" is
+ *     SUPERSEDED (the tally is per-node, cannot express per-corridor warmth; source = the
+ *     per-pair give-stream). Write-side (a dwell-bounded 'tradeOverture' sub-ledger, willingness
+ *     idiom) is clean + byte-free. Owner must rule: (Y) route-opening target — Y-clean trust-
+ *     nudge into the existing neutral_to_trade_partner rule (byte-neutral, recommended) vs
+ *     owner-gated edge-mint; (Z) autonomous vs proposal-gated under conservative presets.
  *   • RUMOR broadcast belief-nudge — the GIVE receipt ALREADY seeds a typed rumor carrying
  *     both settlements (succorNews score≥60); the missing edge is nudging believed
  *     wealth/character in beliefMap.reconcileBelief (a cross-module, infoMode-gated change).
@@ -68,7 +86,7 @@
 
 import {
   constructiveFlowsActive, generosityEV, generosityForkKey, shouldInitiateAsk,
-  routeRiskTerm, VERDICTS,
+  routeRiskTerm, refugeAcceptance, VERDICTS,
 } from '../spatial/generosityEV.js';
 import {
   foldObligations, hasLiveObligation, gratitudeDeposit, giverMarginSacrifice,
@@ -107,6 +125,7 @@ import { clamp01 } from '../../kernel/math.js';
 /** @typedef {{ id?: unknown, from?: unknown, to?: unknown, relationshipType?: unknown, status?: unknown }} GenEdge */
 /** @typedef {import('../spatial/generosityReactions.js').ObligationRecord} ObligationRecord */
 /** @typedef {import('../spatial/generosityEV.js').GenerosityWillingness} GenerosityWillingness */
+/** @typedef {import('../spatial/generosityEV.js').RefugePosture} RefugePosture */
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 function num(v, fallback) {
@@ -155,6 +174,14 @@ export const GENEROSITY_MOVER_TUNING = Object.freeze({
   // and is PRUNED so a future ask re-evaluates fresh rather than inheriting a fossil refusal.
   // Byte-neutral when nothing is stale (the surviving set is identical).
   WILLINGNESS_STALE_TICKS: 24,
+  // REFUGE (design §4 / E1c): a per-tick ceiling on refuge-posture evaluations (bounds the
+  // hot path; the highest-need distressed pairs are weighed first — the same codepoint/need
+  // order as the grain candidates) and the staleness horizon for an OPEN posture. A posture
+  // not re-affirmed within REFUGE_STALE_TICKS (its distressed ally recovered ⇒ it left the
+  // candidate set) is PRUNED — the host's gates quietly close once the crisis passes.
+  // Byte-neutral when nothing is stale.
+  REFUGE_CAP: 24,
+  REFUGE_STALE_TICKS: 12,
 });
 
 // ── The qualifying relationship kinds → the kernel's BondRead.kind vocabulary ──
@@ -239,6 +266,67 @@ function reciprocityFromMemory(relState, tick) {
     else if (type === 'credit_defaulted' || /betray/i.test(type)) betrayal = true;
   }
   return { reliefReceived01, reliefRefusedByThem01, betrayal, reliefGivenCountRecent };
+}
+
+/**
+ * Extract the GIVE-SIDE MOTIVE reads for one qualifying pair — bond, history, conscience,
+ * strategy, faith + the cohesion-weave quadrant/lens modulators — the same give-side blend
+ * the grain loop derives inline (§2.1). Used by the REFUGE pass, whose posture decision
+ * (refugeAcceptance) is the give-side motive ALONE (the domestic cost of hospitality is
+ * priced downstream by M4's congestion brakes, design §4/§9). Kept a SEPARATE derivation
+ * from the grain loop's inline reads so the golden-pinned grain decision path is never
+ * perturbed by the refuge wiring. Deterministic; no rng.
+ * @param {Object} a
+ * @param {GenSnapItem|undefined} a.giverItem @param {GenSettlement|undefined} a.giverS
+ * @param {GenSettlement|undefined} a.receiverS @param {{ trust?: unknown, pactStrength?: unknown, dependency?: unknown, recentIncidents?: unknown }} a.relState
+ * @param {string} a.kind @param {number} a.bondStrength @param {number} a.need01
+ * @param {GenGraph|null|undefined} a.graph @param {string} a.giverId @param {string} a.receiverId
+ * @param {Record<string, unknown>} a.worldState @param {Record<string, unknown>} a.lendAppetiteLedger @param {number} a.tick
+ */
+function deriveGiverMotive({ giverItem, giverS, receiverS, relState, kind, bondStrength, need01, graph, giverId, receiverId, worldState, lendAppetiteLedger, tick }) {
+  // BOND (kind × strength + the vassal/patron/client duty).
+  const duty01 = (kind === 'vassal' || kind === 'patron' || kind === 'client')
+    ? clamp01(num(relState.dependency, 0)) : 0;
+  const bond = { kind, strength01: bondStrength, duty01 };
+  // HISTORY (reciprocity memory).
+  const recip = reciprocityFromMemory(relState, tick);
+  const history = {
+    reliefReceived01: recip.reliefReceived01,
+    reliefRefusedByThem01: recip.reliefRefusedByThem01,
+    betrayal: recip.betrayal,
+  };
+  // CONSCIENCE (the ONE W-C2 read).
+  const alignItem = /** @type {Parameters<typeof computeMalice>[0]} */ (/** @type {unknown} */ (giverItem));
+  const giverGood01 = giverItem ? clamp01(1 - computeMalice(alignItem, worldState)) : 0.5;
+  const giverLawful01 = giverItem ? clamp01(computeLawfulness(alignItem, worldState)) : 0.5;
+  const charityRoster = hasCharityRoster(giverS);
+  const conscience = { good01: giverGood01, lawful01: giverLawful01, need01, charityRoster };
+  // STRATEGY (three explicit reads).
+  const giverEnemies = new Set([...warFrontsInto(graph, giverId), ...warFrontsFrom(graph, giverId)]);
+  const receiverEnemies = new Set([...warFrontsInto(graph, receiverId), ...warFrontsFrom(graph, receiverId)]);
+  const sharesEnemy = [...receiverEnemies].some((e) => giverEnemies.has(e));
+  const receiverBesieged = warFrontsInto(graph, receiverId).length > 0;
+  const warStrategic01 = clamp01((sharesEnemy ? 0.7 : 0) + (sharesEnemy && receiverBesieged ? 0.2 : 0));
+  const lendAppetite01 = lendAppetiteOf(lendAppetiteLedger, giverId);
+  const leverage01 = clamp01((giverGood01 < 0.5 ? (0.5 - giverGood01) * 2 : 0) * lendAppetite01);
+  const supplyDependency01 = kind === 'trade_partner' ? clamp01(num(relState.dependency, 0)) : 0;
+  const strategy = { warStrategic01, supplyDependency01, leverage01 };
+  // FAITH.
+  const dG = giverS?.config?.primaryDeitySnapshot || null;
+  const dR = receiverS?.config?.primaryDeitySnapshot || null;
+  const prox = faithProximity(dG, dR);
+  const faith = { templeMediated: charityRoster, sharedFaith01: prox.sharedFaith01 };
+  // The cohesion-weave modulators (quadrant × structural lens).
+  const quadrant = faithAlignmentQuadrant({ samePatron: prox.samePatron, alignmentKinship01: prox.alignmentKinship01 });
+  const lens = structuralLens({ economicBase: economicBaseOf(giverS), governingArchetype: governingArchetypeOf(giverS) });
+  const lensMod = {
+    conscience: lens.modulators.conscience,
+    strategy: lens.modulators.strategy,
+    leverage: lens.modulators.leverage,
+    domesticNerve: lens.modulators.domesticNerve,
+    hysteresisWiden: lens.hysteresisWiden,
+  };
+  return { bond, history, conscience, strategy, faith, quadrantMod: quadrant.modulators, lensMod };
 }
 
 // ── The advance ───────────────────────────────────────────────────────────────
@@ -363,6 +451,10 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const willingnessLedger = asObject(getSpatialLedger(worldState, 'generosityWillingness'));
   const bufferLedger = asObject(getSpatialLedger(worldState, 'bufferDiscipline'));
   const lendAppetiteLedger = asObject(getSpatialLedger(worldState, 'lendAppetite'));
+  // REFUGE postures (design §4 / E1c): the host-acceptance stances written this tick + carried.
+  const refugeLedger = asObject(getSpatialLedger(worldState, 'refugePostures'));
+  /** @type {Record<string, RefugePosture|null>} */
+  const refugePostureWrites = {};
 
   // Directed-pair → relationship edge (for credit-maturity incident/scalar writes).
   /** @type {Map<string, GenEdge>} */
@@ -663,6 +755,55 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
+  // ── REFUGE POSTURES (design §4 / E1c): "generosity in people, not goods." For each
+  // distressed qualifying pair (the SAME need-gated, codepoint/need-ordered candidates the
+  // grain loop weighs), the HOST decides — by the give-side motive ALONE (bond/history/
+  // conscience/strategy/faith; the domestic cost of hospitality is priced DOWNSTREAM by M4's
+  // congestion/crowding brakes) — whether to OPEN a refuge posture toward the distressed
+  // ally. An open posture is a standing STANCE (enter/exit hysteresis + dwell — it does not
+  // flip weekly) written to the drop-when-empty refugePostures sub-ledger and READ in
+  // migrationKernel.buildDestinationCandidate as the refugePosture01 axis, weighting M4's
+  // destination choice toward the host during that ally's exodus. Conservation is untouched:
+  // it only re-weights WHERE survivors go, never how many survive (design §9 MIGRATION). ──
+  {
+    let refugeAsks = 0;
+    for (const cand of candidates) {
+      if (refugeAsks >= T.REFUGE_CAP) break;
+      refugeAsks += 1;
+      const { giverId, receiverId, edge, need01, bondStrength } = cand;
+      const giverItem = itemById.get(giverId);
+      const receiverItem = itemById.get(receiverId);
+      const giverS = freshSettlement(giverId);
+      const receiverS = freshSettlement(receiverId);
+      const relKey = relationshipKeyFromEdge(edge);
+      const relState = ensureRelationshipState(edge, relStates[relKey]);
+      const kind = KIND_MAP[normalizeRelationshipType(String(edge?.relationshipType || 'neutral'))] || 'trade_partner';
+      const motive = deriveGiverMotive({
+        giverItem, giverS, receiverS, relState, kind, bondStrength, need01,
+        graph, giverId, receiverId, worldState, lendAppetiteLedger, tick,
+      });
+      const postureKey = `${giverId}:${receiverId}`;
+      const priorPosture = /** @type {RefugePosture|null} */ (refugeLedger[postureKey] || null);
+      const decision = refugeAcceptance({ ...motive, priorPosture, now: tick });
+      if (decision.open && decision.posture) {
+        refugePostureWrites[postureKey] = decision.posture;
+        // On the OPEN transition (a fresh posture), bank the refuge_granted incident (the
+        // "aid changes history" artifact) + a light succor beat. A held posture re-affirms
+        // silently (no news spam), a closed one drops.
+        if (!priorPosture) {
+          const inc = reliefIncident({ kind: 'refuge_granted', tick, magnitude01: decision.weight01 });
+          if (inc) incidentWrites.push({ key: relKey, incident: inc });
+          newsEntries.push(refugeNews({
+            giverName: String(giverItem?.name || giverId), receiverName: String(receiverItem?.name || receiverId),
+            weight: decision.weight01, tick, now,
+          }));
+        }
+      } else {
+        refugePostureWrites[postureKey] = null; // closed / not opened ⇒ drop
+      }
+    }
+  }
+
   // ── PERSIST. Nothing decided ⇒ byte-identical (no ledger touched). ──
   let changed = false;
 
@@ -699,6 +840,31 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       nextWorldState = Object.keys(sortedNextWill).length
         ? setSpatialLedger(nextWorldState, 'generosityWillingness', sortedNextWill)
         : dropSpatialLedger(nextWorldState, 'generosityWillingness');
+      changed = true;
+    }
+  }
+
+  // Refuge-postures sub-ledger (design §4 / E1c): upsert this tick's OPEN stances, drop the
+  // closed ones, and STALE-PRUNE a posture whose distressed ally left the candidate set (the
+  // crisis passed — the gates quietly close). Drop-when-empty ⇒ byte-identical-dormant.
+  {
+    /** @type {Record<string, RefugePosture>} */
+    const nextPostures = {};
+    for (const [k, v] of Object.entries(refugeLedger)) {
+      if (k in refugePostureWrites) continue; // updated (or closed) by this tick's writes below
+      const rec = asObject(v);
+      const last = num(rec.lastTick, num(rec.sinceTick, tick));
+      if (tick - last > T.REFUGE_STALE_TICKS) continue; // stale ⇒ the crisis passed, gates close
+      nextPostures[k] = /** @type {RefugePosture} */ (v);
+    }
+    for (const [k, v] of Object.entries(refugePostureWrites)) {
+      if (v) nextPostures[k] = v;
+    }
+    const sortedNextPostures = sortedRecord(nextPostures);
+    if (JSON.stringify(sortedNextPostures) !== JSON.stringify(sortedRecord(refugeLedger))) {
+      nextWorldState = Object.keys(sortedNextPostures).length
+        ? setSpatialLedger(nextWorldState, 'refugePostures', sortedNextPostures)
+        : dropSpatialLedger(nextWorldState, 'refugePostures');
       changed = true;
     }
   }
@@ -938,6 +1104,37 @@ function defaultNews({ debtorName, creditorName, tick, now }) {
     impactIds: [],
     channelIds: [],
     tags: ['world_pulse', 'generosity', 'credit', 'default'],
+    reasons: [summary],
+  };
+}
+
+/**
+ * A refuge-posture OPENING wizard-news entry (design §4 / E1c): a host opens its gates to a
+ * distressed ally's displaced — "generosity in people." AGGREGATE (population counts, no
+ * named soul); the posture reshapes M4's destination choice only when the migration layer is
+ * also lit. Emitted only on the OPEN transition (a held posture re-affirms silently).
+ * @param {{ giverName: string, receiverName: string, weight: number, tick: number, now: string|null }} a
+ * @returns {Record<string, unknown>}
+ */
+function refugeNews({ giverName, receiverName, weight, tick, now }) {
+  const summary = `${giverName} opens its gates to the displaced of ${receiverName} — refuge in the ally's exodus.`;
+  return {
+    id: `wizard_news.${tick}.refuge.${stablePart(giverName)}.${stablePart(receiverName)}`,
+    tick,
+    createdAt: now,
+    scope: 'regional',
+    significance: weight >= 0.4 ? 'notable' : 'minor',
+    score: Math.round(45 + clamp01(weight) * 20),
+    headline: `${giverName} opens refuge to ${receiverName}`,
+    summary,
+    kind: 'applied',
+    impactKind: 'generosity_refuge',
+    channelType: null,
+    severity: Math.round(clamp01(weight) * 100) / 100,
+    settlementIds: [],
+    impactIds: [],
+    channelIds: [],
+    tags: ['world_pulse', 'generosity', 'refuge'],
     reasons: [summary],
   };
 }
