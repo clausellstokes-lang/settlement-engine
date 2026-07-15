@@ -26,6 +26,7 @@ import { applyFactionPatch } from './factionCompetition.js';
 import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldState.js';
 import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
+import { applyResourceMembershipOutcomeToSettlement } from './resourceDynamicsKernel.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { resolveProposalToOutcome } from './decisionTier.js';
@@ -485,6 +486,12 @@ function applyOutcomeToSettlement(/** @type {any} */ settlement, /** @type {any}
   }
   if (outcome.resourcePatch && String(outcome.targetSaveId) === String(saveId)) {
     next = applyResourceOutcomeToSettlement(next, outcome);
+  }
+  // W-DISCOVERY: an organic discovery/removal writes roster MEMBERSHIP (append/remove
+  // config.nearbyResources) + the regen-surviving resourceEdits delta + the surgical
+  // production reconcile + the typed resource_strike/vein_exhausted condition.
+  if (outcome.resourceMembership && String(outcome.targetSaveId) === String(saveId)) {
+    next = applyResourceMembershipOutcomeToSettlement(next, outcome);
   }
   if (outcome.institutionPatch && String(outcome.targetSaveId) === String(saveId)) {
     next = applyInstitutionLifecycleOutcome(next, outcome);

@@ -47,6 +47,8 @@
 import { clamp01 } from '../../kernel/math.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getCompatibleResources, getTerrainType } from '../../generators/terrainHelpers.js';
+import { computeActiveChains } from '../../generators/computeActiveChains.js';
+import { withActiveCondition } from '../activeConditions.js';
 import { stablePart } from './worldState.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
@@ -84,7 +86,12 @@ export const RESOURCE_DYNAMICS_TUNING = Object.freeze({
   REMOVAL_DWELL: 156,                  // ~3 game-years depleted before the vein is done
   REMOVAL_COOLDOWN: 52,                // ticks between removals at one settlement
   REMOVAL_EMIT_P: 0.12,                // base emit probability once the dwell is met
+  // The bounded lifetime of the resource_strike / vein_exhausted conditions (the
+  // condition-boundedness pin — a one-time event that fades, never a snowball).
+  CONDITION_EXPIRES_TICKS: 10,
 });
+
+const RESOURCE_CONDITION_EXPIRES_TICKS = RESOURCE_DYNAMICS_TUNING.CONDITION_EXPIRES_TICKS;
 
 const T = RESOURCE_DYNAMICS_TUNING;
 
@@ -361,4 +368,212 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
   }
 
   return { worldState: { ...worldState, settlementTickStates }, candidates };
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// THE APPLICATION WRITE (design §2) — one writer, every lifecycle path.
+// ════════════════════════════════════════════════════════════════════════════
+
+/** Normalized resourceEdits view (mirrors mutateWorld.resourceEditsOf).
+ *  @param {any} config @returns {{ added: any[], removed: any[], depleted: any[], recovered: any[] }} */
+function editsOf(config) {
+  const re = config?.resourceEdits || {};
+  return {
+    added: Array.isArray(re.added) ? re.added : [],
+    removed: Array.isArray(re.removed) ? re.removed : [],
+    depleted: Array.isArray(re.depleted) ? re.depleted : [],
+    recovered: Array.isArray(re.recovered) ? re.recovered : [],
+  };
+}
+
+/**
+ * THE SURGICAL RECONCILE (design §2c) — the calamityKernel reconcileProductionAfterStrike
+ * precedent, run in BOTH directions. Recompute the active-chain SET over the old vs
+ * the new roster (identical institutions/tier/route/magic — only the resource roster
+ * differs, so the DELTA isolates exactly the resource change; reuses the canonical
+ * activation logic, no fork/drift), then surgically MERGE the delta into the stamped
+ * economicState.activeChains + primaryExports so commodity-flow production sees the
+ * change NEXT TICK. Discovery ⇒ a chain activates + its exportable outputs join
+ * primaryExports; removal ⇒ the chain deactivates + its now-unproduced outputs are
+ * pruned (the calamity export-prune logic). Pure over economicState.
+ *
+ * @param {any} economicState
+ * @param {{ settlement: any, oldResources: string[], newResources: string[], oldDepleted: string[], newDepleted: string[] }} ctx
+ * @returns {any}
+ */
+export function reconcileProductionAfterResourceChange(economicState, ctx) {
+  if (!economicState || typeof economicState !== 'object') return economicState || {};
+  const { settlement, oldResources, newResources, oldDepleted, newDepleted } = ctx;
+  const config = settlement?.config || {};
+  const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const tier = String(settlement?.tier || 'village');
+  const route = routeOf(settlement, config);
+  const magic = config.magicExists === false ? 0 : (Number.isFinite(config.priorityMagic) ? config.priorityMagic : 50);
+  // tradeDependencies=[] — it only ENRICHES chain status, never which chains are
+  // active, so the active-chain SET (and thus the delta) is independent of it.
+  const before = computeActiveChains(institutions, oldResources, tier, route, [], oldDepleted, magic);
+  const after = computeActiveChains(institutions, newResources, tier, route, [], newDepleted, magic);
+  const cidOf = (/** @type {any} */ c) => `${c.needKey}.${c.chainId}`;
+  const beforeIds = new Set(before.map(cidOf));
+  const afterIds = new Set(after.map(cidOf));
+  const addedChains = after.filter((/** @type {any} */ c) => !beforeIds.has(cidOf(c)));
+  const removedIds = new Set(before.filter((/** @type {any} */ c) => !afterIds.has(cidOf(c))).map(cidOf));
+  if (!addedChains.length && !removedIds.size) return economicState;
+
+  // Merge the DELTA into the STAMPED chains (surgical, never a wholesale replace).
+  const stamped = Array.isArray(economicState.activeChains) ? economicState.activeChains : [];
+  const survivingChains = stamped.filter((/** @type {any} */ c) => !removedIds.has(`${c.needKey}.${c.chainId}`));
+  const survivingIds = new Set(survivingChains.map((/** @type {any} */ c) => `${c.needKey}.${c.chainId}`));
+  const mergedChains = [...survivingChains, ...addedChains.filter((/** @type {any} */ c) => !survivingIds.has(cidOf(c)))];
+
+  // Exports: prune the outputs a removed chain no longer produces (the calamity
+  // precedent), then add the exportable outputs of newly-active chains.
+  const brokenOutputs = new Set();
+  for (const c of before) if (removedIds.has(cidOf(c))) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) brokenOutputs.add(String(o).toLowerCase());
+  const stillProduced = new Set();
+  for (const c of mergedChains) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) stillProduced.add(String(o).toLowerCase());
+  const exports = Array.isArray(economicState.primaryExports) ? economicState.primaryExports : [];
+  const nextExports = exports.filter((/** @type {any} */ exp) => {
+    const e = String(exp).toLowerCase();
+    const lost = [...brokenOutputs].some((o) => e.includes(o) || o.includes(e));
+    const kept = [...stillProduced].some((o) => e.includes(o) || o.includes(e));
+    return !(lost && !kept);
+  });
+  for (const c of addedChains) {
+    if (!c.exportable) continue;
+    for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) {
+      const label = String(o);
+      const lower = label.toLowerCase();
+      if (!nextExports.some((/** @type {any} */ e) => String(e).toLowerCase().includes(lower) || lower.includes(String(e).toLowerCase()))) {
+        nextExports.push(label);
+      }
+    }
+  }
+  return { ...economicState, activeChains: mergedChains, primaryExports: nextExports };
+}
+
+/**
+ * THE ONE WRITER (design §2) — applies a resource_discovery / resource_removal
+ * outcome atomically: (a) membership on config.nearbyResources* ; (b) durability
+ * via the config.resourceEdits delta, DUAL-WRITTEN config + _config (the mutateWorld
+ * withResourceEdits precedent — so an organic change survives full regeneration
+ * exactly as a DM ADD/REMOVE does); (c) the surgical production reconcile; (d)
+ * resourceHistory; (e) the typed condition (resource_strike / vein_exhausted). News
+ * rides the candidate's own headline/summary through the standard apply path.
+ * FORCE ≡ ORGANIC: a DM ADD/REMOVE verb leaves membership + resourceEdits + reconcile;
+ * this adds the condition + resourceHistory on the SAME downstream shape.
+ *
+ * @param {any} settlement @param {any} outcome @returns {any}
+ */
+export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) {
+  const mem = outcome?.resourceMembership;
+  if (!settlement || !mem || !mem.resource) return settlement;
+  const resource = String(mem.resource);
+  const op = mem.op === 'remove' ? 'remove' : 'add';
+  const nk = normKey(resource);
+  const config = settlement.config || {};
+
+  // ── (a) MEMBERSHIP ──
+  const oldResources = Array.isArray(config.nearbyResources) ? config.nearbyResources : [];
+  const oldDepleted = Array.isArray(config.nearbyResourcesDepleted) ? config.nearbyResourcesDepleted : [];
+  const oldCustom = Array.isArray(config.nearbyResourcesCustom) ? config.nearbyResourcesCustom : [];
+  const stateMap = { ...(config.nearbyResourcesState || {}) };
+  /** @type {string[]} */ let newResources;
+  /** @type {string[]} */ let newDepleted;
+  /** @type {string[]} */ let newCustom;
+  if (op === 'add') {
+    newResources = oldResources.some((/** @type {any} */ k) => normKey(k) === nk) ? oldResources : [...oldResources, resource];
+    stateMap[resource] = 'abundant';                                   // a fresh strike is abundant
+    newDepleted = oldDepleted.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    newCustom = oldCustom;                                             // organic draws are catalog keys, never custom
+  } else {
+    newResources = oldResources.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    for (const k of Object.keys(stateMap)) if (normKey(k) === nk) delete stateMap[k];
+    newDepleted = oldDepleted.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    newCustom = oldCustom.filter((/** @type {any} */ k) => normKey(k) !== nk);
+  }
+
+  // ── (b) DURABILITY — the resourceEdits delta (regen-surviving), dual-written ──
+  const edits = editsOf(config);
+  const nextEdits = op === 'add'
+    ? {
+        ...edits,
+        // { key, custom:false } — the mutateWorld addResource shape (organic ≡ forced;
+        // an organic draw is always a catalog key, never a custom mint).
+        added: edits.added.some((/** @type {any} */ e) => normKey(e?.key) === nk) ? edits.added : [...edits.added, { key: resource, custom: false }],
+        removed: edits.removed.filter((/** @type {any} */ k) => normKey(k) !== nk),
+        depleted: edits.depleted.filter((/** @type {any} */ k) => normKey(k) !== nk),
+      }
+    : {
+        ...edits,
+        removed: edits.removed.some((/** @type {any} */ k) => normKey(k) === nk) ? edits.removed : [...edits.removed, resource],
+        added: edits.added.filter((/** @type {any} */ e) => normKey(e?.key) !== nk),
+        depleted: edits.depleted.filter((/** @type {any} */ k) => normKey(k) !== nk),
+        recovered: edits.recovered.filter((/** @type {any} */ k) => normKey(k) !== nk),
+      };
+
+  const nextConfig = {
+    ...config,
+    nearbyResources: newResources,
+    nearbyResourcesState: stateMap,
+    nearbyResourcesDepleted: newDepleted,
+    nearbyResourcesCustom: newCustom,
+    resourceEdits: nextEdits,
+  };
+
+  // ── (c) SURGICAL RECONCILE (both directions) ──
+  const nextEconomicState = reconcileProductionAfterResourceChange(settlement.economicState, {
+    settlement: { ...settlement, config: nextConfig },
+    oldResources, newResources, oldDepleted, newDepleted,
+  });
+
+  /** @type {any} */
+  let next = { ...settlement, config: nextConfig, economicState: nextEconomicState };
+  // Dual-write the delta into the raw _config (withResourceEdits precedent —
+  // applyChange regenerates from _config first).
+  if (settlement._config && typeof settlement._config === 'object') {
+    next._config = { ...settlement._config, resourceEdits: nextEdits };
+  }
+
+  // ── (d) resourceHistory (capped, like applyResourceOutcomeToSettlement) ──
+  next.resourceHistory = [
+    ...(Array.isArray(settlement.resourceHistory) ? settlement.resourceHistory.slice(-11) : []),
+    { resource, state: op === 'add' ? 'discovered' : 'removed', outcomeId: outcome.id, reason: outcome.headline || outcome.candidateType },
+  ];
+
+  // ── (e) THE TYPED CONDITION (the W-UPSWING B2 + economic_capacity seam) ──
+  // Planted FULLY SPECIFIED (no catalog template — zero eager bytes; see the
+  // activeConditions.js note): explicit BOUNDED duration closes the :714 immortal
+  // hazard at the plant site (guard-pinned), explicit affectedSystems set the causal
+  // polarity. resource_strike is a bounded positive MARKER (affectedSystems [] — its
+  // upside flows through the boom seam + reconcile, not a free condition bonus);
+  // vein_exhausted DRAINS economic_capacity (a worked-out vein hurts the economy).
+  const condTick = Number.isFinite(outcome?.metadata?.tick) ? outcome.metadata.tick : null;
+  next = op === 'add'
+    ? withActiveCondition(next, {
+        id: `condition.resource_strike.${nk}`,
+        archetype: 'resource_strike',
+        label: 'Resource strike',
+        description: 'Prospecting has struck a new resource.',
+        severity: clamp01(0.3 + (Number(outcome.severity) || 0) * 0.3),
+        status: 'easing',
+        affectedSystems: [],
+        duration: { elapsedTicks: 0, expiresAtTicks: RESOURCE_CONDITION_EXPIRES_TICKS },
+        triggeredAt: { tick: condTick, sourceEventType: 'RESOURCE_DISCOVERY', sourceEventTargetId: resource },
+        causes: [{ source: 'world_pulse', detail: outcome.summary || 'A new resource has been struck.' }],
+      })
+    : withActiveCondition(next, {
+        id: `condition.vein_exhausted.${nk}`,
+        archetype: 'vein_exhausted',
+        label: 'Vein exhausted',
+        description: 'A resource has been worked out — the vein is done.',
+        severity: clamp01(0.35 + (Number(outcome.severity) || 0) * 0.3),
+        status: 'easing',
+        affectedSystems: ['economic_capacity', 'trade_connectivity'],
+        duration: { elapsedTicks: 0, expiresAtTicks: RESOURCE_CONDITION_EXPIRES_TICKS },
+        triggeredAt: { tick: condTick, sourceEventType: 'RESOURCE_REMOVAL', sourceEventTargetId: resource },
+        causes: [{ source: 'world_pulse', detail: outcome.summary || 'A resource has been worked out.' }],
+      });
+
+  return next;
 }
