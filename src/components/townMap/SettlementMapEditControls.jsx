@@ -45,22 +45,24 @@ export default function SettlementMapEditControls({
             borderRadius: R.md, boxShadow: ELEV[1],
           }}
         >
+          {/* Accessible names via aria-label, never native title= — the guidance
+              layer's title= census is shrink-only (guidanceRegistry.walker). */}
           <Button data-town-edit-reroll variant="secondary" size="sm" onClick={onReroll}
-            title="Reroll the layout — same settlement, a different deterministic arrangement.">
+            aria-label="Reroll the layout — same settlement, a different deterministic arrangement">
             Reroll layout
           </Button>
           <Button data-town-edit-labels variant={legendPrefs.showLabels ? 'primary' : 'secondary'} size="sm"
             aria-pressed={legendPrefs.showLabels} onClick={onToggleLabels}
-            title="Show or hide district name labels.">
+            aria-label="Show or hide district name labels">
             Labels
           </Button>
           <Button data-town-edit-legend variant={legendPrefs.showLegend ? 'primary' : 'secondary'} size="sm"
             aria-pressed={legendPrefs.showLegend} onClick={onToggleLegend}
-            title="Show or hide the district-category legend.">
+            aria-label="Show or hide the district-category legend">
             Legend
           </Button>
           <Button data-town-edit-reset variant="ghost" size="sm" disabled={!hasEdits} onClick={onReset}
-            title="Clear all cosmetic map edits — restores the generated layout.">
+            aria-label="Clear all cosmetic map edits — restores the generated layout">
             Reset
           </Button>
         </div>
