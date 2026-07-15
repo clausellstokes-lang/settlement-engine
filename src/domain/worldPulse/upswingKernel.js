@@ -265,6 +265,22 @@ function readObligations(obligationLedger) {
 }
 
 // ── B2 boom/bust reads (throughput, centrality, arteries) ──────────────────────
+// W-DISCOVERY SEAM (design §2e): a resource-removal event plants a `vein_exhausted`
+// condition; a discovery plants `resource_strike`. resourceRemoved feeds the SAME bust
+// flip as a severed artery (the boom over a worked-out nonrenewable busts, naming the
+// dead vein), and a live resource_strike joins the boom SOURCE taxonomy. Both are
+// dormancy-safe: with resourceDynamicsEnabled dark neither condition ever exists, so
+// these reads are always false and the upswing is byte-identical.
+/** @param {{ activeConditions?: Array<{ archetype?: string }> }|null|undefined} s */
+function resourceRemoved(s) {
+  const conds = Array.isArray(s?.activeConditions) ? s.activeConditions : [];
+  return conds.some((c) => c?.archetype === 'vein_exhausted');
+}
+/** @param {{ activeConditions?: Array<{ archetype?: string }> }|null|undefined} s */
+function resourceStruck(s) {
+  const conds = Array.isArray(s?.activeConditions) ? s.activeConditions : [];
+  return conds.some((c) => c?.archetype === 'resource_strike');
+}
 /** The settlement's windowed trade throughput (in + out) from the M6d tradeFlow tally.
  *  @param {Record<string, unknown>|null|undefined} tradeFlowLedger @param {string} id */
 function flowThroughput(tradeFlowLedger, id) {
@@ -560,10 +576,12 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
     const embattled = embattlementLevel(worldState, id) > 0;
     const arteries = tradeArteries(graph, id);
     const fragile = arteries.length < 2;
-    // W-DISCOVERY SEAM: a resource-removal event will feed the SAME bust flip here —
-    // `resourceRemoved(worldState, id)` lands with W-DISCOVERY's design (its removal
-    // events join the bust trigger + its discoveries join the boom source taxonomy).
-    const severed = embattled || throughput < T.BUST_THROUGHPUT;
+    // W-DISCOVERY SEAM (now LANDED): a resource-removal event plants `vein_exhausted`,
+    // which feeds the SAME bust flip as a severed artery (a boom over a worked-out
+    // nonrenewable busts). Dormancy-safe — no such condition exists when
+    // resourceDynamicsEnabled is dark.
+    const veinGone = resourceRemoved(s);
+    const severed = embattled || throughput < T.BUST_THROUGHPUT || veinGone;
     const ui = updateIndex.get(id);
 
     if (prior?.phase === 'boom') {
@@ -588,7 +606,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
         legitimacyDeltas.set(id, (legitimacyDeltas.get(id) || 0) + T.BUST_LEGITIMACY_HIT);
         nextBoom[id] = { phase: 'bust', dwell: 0, enteredTick: tick, arteries: prior.arteries, fragile: prior.fragile, throughput, prosperityAccrued: 0, lastTick: tick };
         newsEntries.push(bustNews(id, String(item?.name || s.name || id), prior.arteries, embattled, tick, now));
-        receipts.push({ id, kind: 'bust', severedArtery: prior.arteries[0] || null, arteries: prior.arteries, cause: embattled ? 'embattlement' : 'artery_collapse', throughput: round4(throughput), fragile: prior.fragile });
+        receipts.push({ id, kind: 'bust', severedArtery: prior.arteries[0] || null, arteries: prior.arteries, cause: embattled ? 'embattlement' : (veinGone ? 'resource_removal' : 'artery_collapse'), throughput: round4(throughput), fragile: prior.fragile });
       } else {
         // ── SUSTAIN — prosperity DRIFTS up (accrued fractionally; a BAND step emits only
         // when the accrual crosses 1.0 — a boom grows rich on VOLUME, receipted + sourced). ──
@@ -596,7 +614,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
         const bandStep = Math.floor(acc);
         if (bandStep > 0) prosperityDeltas.set(id, (prosperityDeltas.get(id) || 0) + bandStep);
         nextBoom[id] = { phase: 'boom', dwell: Math.min(T.BOOM_DWELL_MAX, prior.dwell + 1), enteredTick: prior.enteredTick, arteries, fragile, throughput, prosperityAccrued: acc - bandStep, lastTick: tick };
-        receipts.push({ id, kind: 'boom_sustain', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false }, fragile, prosperityBandStep: bandStep });
+        receipts.push({ id, kind: 'boom_sustain', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false, discovery: resourceStruck(s) }, fragile, prosperityBandStep: bandStep });
       }
     } else if (prior?.phase === 'bust') {
       // The bust holds a few ticks (the retreat plays out via the condition), then drops.
@@ -628,7 +646,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
           }
           nextBoom[id] = { phase: 'boom', dwell: 0, enteredTick: tick, arteries, fragile, throughput, prosperityAccrued: T.BOOM_PROSPERITY_DRIFT, lastTick: tick };
           newsEntries.push(boomNews(id, String(item?.name || s.name || id), arteries, fragile, tick, now));
-          receipts.push({ id, kind: 'boom_enter', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false }, fragile });
+          receipts.push({ id, kind: 'boom_enter', throughput: round4(throughput), centrality: round4(centrality), sources: { arteries, extraction: false, aid: false, discovery: resourceStruck(s) }, fragile });
         } else {
           nextBoom[id] = { phase: 'building', dwell, enteredTick: tick, arteries, fragile, throughput, prosperityAccrued: 0, lastTick: tick };
         }
