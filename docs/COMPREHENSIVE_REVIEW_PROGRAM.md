@@ -309,6 +309,20 @@ behavior, budget raises, golden regens.
   'mercenary' facet ?? inferred); affordability-scaled; receipted. Lands in W-CONVERGENCE's
   strength-aggregation seam (design amended; addendum threaded to the in-flight build).
 
+- **2026-07-15 (midday) — RE-GRADE SCOPE + THE MERGE/PUSH AUTHORIZATION (owner, verbatim):**
+  (1) "For [the PART-9 re-grade]: Limit it to just the dimensions for now. I'll do a full
+  review at another time." — the re-grade shrinks to a DIMENSIONS-ONLY scoring pass (the
+  dimension sweeps of the original methodology, scored against the finished product; NO
+  subsystem-by-subsystem review, NO new fix program minted from it — findings are recorded
+  for the owner's later full review). (2) "Then I want you to first master merge and deploy
+  to git before the soak." — STANDING AUTHORIZATION, in sequence: when the wave stack
+  completes, execute the MASTER MERGE per MASTER_MERGE_PLAN.md (fresh re-survey first,
+  gates between steps) and then PUSH TO GIT — both now pre-authorized to run BEFORE the
+  soak, which remains the successor's charter. Scope note at capture: this authorizes the
+  git push; the remaining owner-batch items (supabase db-push, the covert-leak gallery
+  scrub decision, preset-lighting signature, support-email confirmation) are still
+  presented as the short decision list at that moment unless separately pre-authorized.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
