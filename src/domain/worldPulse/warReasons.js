@@ -486,6 +486,16 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // The threat-environment index (existing martialReadiness read), built once.
   const threatByCid = buildThreatByCid(snapshot, worldState);
 
+  // W-PEACE-2: the TREATY_DEFAULT feed — CLOSING this module's registration seam.
+  // The treaties ledger (built by advanceTreaties, which runs THIS tick before the
+  // war-reason mover) carries {parties, complianceState, defaultedBy, defaultSeverity01}
+  // at each treaty's top level — exactly scoreTreatyDefault's shape. Read directly
+  // (no peaceTerms import ⇒ no cycle: peaceTerms imports this module's gate). Absent
+  // (dark / no treaty) ⇒ []  ⇒ scoreTreatyDefault returns 0 ⇒ byte-identical.
+  const treatiesLedger = /** @type {Record<string, Record<string, unknown>> | undefined} */ (getSpatialLedger(worldState, 'treaties'));
+  const treatiesList = /** @type {Array<{ parties?: unknown[], complianceState?: string, defaultedBy?: unknown, defaultSeverity01?: number }>} */ (
+    treatiesLedger && typeof treatiesLedger === 'object' ? Object.values(treatiesLedger) : []);
+
   // Directed candidate pairs from the edge list, both orientations, deduped,
   // codepoint-ordered for a deterministic serialization.
   /** @type {Map<string, { fromId: string, toId: string, edge: Record<string, unknown> }>} */
@@ -515,7 +525,7 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       { type: 'grievance', ...scoreGrievance(relState) },
       { type: 'revanchism', ...scoreRevanchism(relState, tick) },
       { type: 'resource_pressure', ...scoreResourcePressure({ own01: ownPressure, foe01: foePressure }) },
-      { type: 'treaty_default', ...scoreTreatyDefault({ treaties: undefined, fromId, toId }) },
+      { type: 'treaty_default', ...scoreTreatyDefault({ treaties: treatiesList, fromId, toId }) },
       { type: 'encirclement', ...scoreEncirclement({ threat01: threatByCid.get(fromId) || 0, hostile }) },
       {
         type: 'legitimacy_hunger',

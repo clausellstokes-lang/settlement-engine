@@ -34,8 +34,7 @@ import {
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefStrength } from './beliefMap.js';
-import { faithAlignmentQuadrant, crossPressureMediation } from '../spatial/cohesionWeave.js';
-import { evil01 } from './deityAxes.js';
+import { findCrossPressuredMediator, fracturesAbandoning, treatyDocument } from './peaceTerms.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -223,13 +222,16 @@ export function peaceReasonsFor(worldState, partyId, foeId) {
 
 /**
  * The dramatic-irony causal brief for a directed war pair: every typed reason
- * on both sides with presence flags, and the rendered WHY line — "N of M
- * peace reasons now present[; this war is dying]". Pure read; safe on any
- * worldState (dark ⇒ all-absent rows, "0 of 7").
+ * on both sides with presence flags, the rendered WHY line — "N of M peace
+ * reasons now present[; this war is dying]" — and, when a treaty stands between
+ * the pair, the §14.4 TREATY LINE ("the peace holds by two terms of five; the
+ * tribute frays"). Pure read; safe on any worldState (dark ⇒ all-absent rows,
+ * "0 of 7", treatyLine null).
  * @param {Record<string, unknown> | null | undefined} worldState
  * @param {unknown} partyId @param {unknown} foeId
  * @returns {{ war: CausalBriefRow[], peace: CausalBriefRow[],
- *            warPresent: number, peacePresent: number, line: string }}
+ *            warPresent: number, peacePresent: number, line: string,
+ *            treatyLine: string | null }}
  */
 export function warCausalBrief(worldState, partyId, foeId) {
   const warLedger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'warReasons'));
@@ -254,7 +256,11 @@ export function warCausalBrief(worldState, partyId, foeId) {
   const peacePresent = peace.filter((r) => r.present).length;
   const dying = peacePresent >= REASON_TUNING.IRONY_DYING_AT;
   const line = `${peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present${dying ? '; this war is dying' : ''}`;
-  return { war, peace, warPresent, peacePresent, line };
+  // §14.4 the treaty line — the fraying peace beneath the brewing war (a treaty
+  // between the pair renders "the peace holds by N terms of M; the X frays").
+  const treaty = treatyDocument(worldState, key);
+  const treatyLine = treaty?.summary ? treaty.summary.line : null;
+  return { war, peace, warPresent, peacePresent, line, treatyLine };
 }
 
 // ── The mover ────────────────────────────────────────────────────────────────
@@ -350,7 +356,13 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
         if (otherId === partyId) continue;
         if (String(deployments[otherId]?.targetId || '') === myTarget) nowAllies += 1;
       }
-      const peakAllies = Math.max(nowAllies, Number(prevLedger?.[key]?.memo?.peakAllies) || 0);
+      // Consume the typed FRACTURE RECORD (W-PEACE-3 §7): a co-besieger that took
+      // a SEPARATE EXIT signs a fracture naming this party among the ABANDONED.
+      // Each such record is a peer that peeled — fold its count into the PEAK so
+      // the fracture stays legible even after the deserter's deployment is
+      // recalled (the record rescues the peel the live-deployment count misses).
+      const recentDeserters = fracturesAbandoning(worldState, partyId, tick).length;
+      const peakAllies = Math.max(nowAllies + recentDeserters, nowAllies, Number(prevLedger?.[key]?.memo?.peakAllies) || 0);
       if (peakAllies > 0) memo = { peakAllies };
       fracture = scoreCoalitionFracture({ peakAllies, nowAllies });
     }
@@ -393,65 +405,9 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
 
 // ── Internal reads ───────────────────────────────────────────────────────────
 
-/**
- * The faith×alignment proximity inputs for a pair of snapshot items (the
- * generosityKernel faithProximity derivation, kept identical so the quadrant
- * reads agree across movers).
- * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemA
- * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemB
- * @returns {{ samePatron: boolean, alignmentKinship01: number }}
- */
-function faithProximityOf(itemA, itemB) {
-  const dA = itemA?.settlement?.config?.primaryDeitySnapshot || null;
-  const dB = itemB?.settlement?.config?.primaryDeitySnapshot || null;
-  const refA = dA && dA._deityRef != null ? String(dA._deityRef) : '';
-  const refB = dB && dB._deityRef != null ? String(dB._deityRef) : '';
-  const samePatron = !!(refA && refA === refB);
-  // The quadrant needs only samePatron + alignment kinship (the good/evil
-  // axis) — the same kinship read generosityKernel's faithProximity derives.
-  const alignmentKinship01 = clamp01(1 - Math.abs(evil01(dA) - evil01(dB)));
-  return { samePatron, alignmentKinship01 };
-}
-
-/**
- * Find the first (codepoint-ordered) third settlement adjacent to BOTH
- * belligerents whose quadrant reads are cross-pressured per cohesionWeave.
- * @param {{ byId?: Map<string, Record<string, unknown>> } | null | undefined} snapshot
- * @param {{ edges?: Array<Record<string, unknown>> } | null} graph
- * @param {string} partyId @param {string} foeId
- * @returns {{ id: string, name: string } | null}
- */
-function findCrossPressuredMediator(snapshot, graph, partyId, foeId) {
-  const edges = Array.isArray(graph?.edges) ? graph.edges : [];
-  /** @type {Map<string, Set<string>>} */
-  const adjacency = new Map();
-  for (const edge of edges) {
-    const a = edge?.from != null ? String(edge.from) : '';
-    const b = edge?.to != null ? String(edge.to) : '';
-    if (!a || !b) continue;
-    if (!adjacency.has(a)) adjacency.set(a, new Set());
-    if (!adjacency.has(b)) adjacency.set(b, new Set());
-    /** @type {Set<string>} */ (adjacency.get(a)).add(b);
-    /** @type {Set<string>} */ (adjacency.get(b)).add(a);
-  }
-  const partyItem = snapshot?.byId?.get?.(partyId);
-  const foeItem = snapshot?.byId?.get?.(foeId);
-  const candidates = [...adjacency.keys()].sort();
-  for (const mId of candidates) {
-    if (mId === partyId || mId === foeId) continue;
-    const near = /** @type {Set<string>} */ (adjacency.get(mId));
-    if (!near.has(partyId) || !near.has(foeId)) continue;
-    const mItem = snapshot?.byId?.get?.(mId);
-    if (!mItem) continue;
-    const toA = faithAlignmentQuadrant(faithProximityOf(mItem, partyItem));
-    const toB = faithAlignmentQuadrant(faithProximityOf(mItem, foeItem));
-    const read = crossPressureMediation({ toA, toB });
-    if (read.crossPressured) {
-      return { id: mId, name: String(/** @type {{ name?: unknown }} */ (mItem).name || mId) };
-    }
-  }
-  return null;
-}
+// (findCrossPressuredMediator + faithProximityOf now live in peaceTerms.js — the
+// single source both the mint and this mediation reason share, so the treaty's
+// named broker and the peace reason can never drift.)
 
 /**
  * The third-threat read for realignment: attackers (by deployment or live
