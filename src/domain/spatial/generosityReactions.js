@@ -61,6 +61,29 @@ export const REACTION_TUNING = Object.freeze({
   // per-tie weight sets how fast the web saturates (a few strong ties reach the cap).
   TIE_INFLUENCE_CAP: 0.2,
   TIE_PER_WEIGHT: 0.08,
+
+  // CREDIT MATURITY (§3.4 — E1b): a credit obligation (kind 'credit', minted when the
+  // giver's leverage prefers a LOAN over a gift) MATURES CREDIT_TERM ticks after mint and
+  // resolves to REPAYMENT (a solvent, non-malicious debtor clears the debt — gratitude +
+  // trust) or DEFAULT (an insolvent OR malicious debtor — a grievance, the casus-belli
+  // seam, and the lender's hardened heart). Deterministic: the debtor's solvency/malice
+  // LOAD the outcome (§H — no flat draw). A GIFT obligation (kind 'grain_relief') never
+  // matures; it only decays slowly.
+  CREDIT_TERM: 12,                // ticks to maturity ("a season or two")
+  CREDIT_REPAY_SOLVENCY_AT: 0.45, // debtor food/prosperity headroom at/above which repayment is affordable
+  CREDIT_DEFAULT_MALICE_AT: 0.6,  // a debtor this malicious DEFAULTS even when solvent (won't pay)
+  CREDIT_REPAY_TRUST: 0.5,        // the credit_repaid incident severity (gratitude + trust deposit)
+  CREDIT_DEFAULT_GRIEVANCE: 0.7,  // the credit_defaulted incident severity (betrayal-class grievance)
+
+  // THE LENDER'S APPETITE-TO-LEND accumulator (§3.4, the merchantAppetite pattern —
+  // "hardened hearts, mechanically"; the bufferDiscipline sibling idiom): a default
+  // suffered DECAYS the creditor's appetite (bounded by the floor — a burned lender never
+  // fully stops), recovering slowly toward full and pruning when recovered. Read to
+  // DAMPEN the credit-preference (a burned lender extends new credit more warily).
+  LEND_APPETITE_HIT: 0.35,        // appetite drop per default suffered
+  LEND_APPETITE_RECOVER: 0.05,    // slow recovery per tick without a default
+  LEND_APPETITE_FLOOR: 0.2,       // bounded — a burned lender never fully stops lending
+  LEND_APPETITE_EPS: 0.02,
 });
 
 /** The typed relief incident kinds (§2.1) — the existing incident machinery, extended. */
@@ -368,4 +391,72 @@ export function bufferDisciplineStep(prior, { reliefThisTick = false, now }) {
   }
   if (!reliefThisTick && next >= 1 - T.BUFFER_EPS) return null; // recovered ⇒ prune
   return { discipline: round4(next), lastTick: tick };
+}
+
+// ── CREDIT MATURITY + THE LENDER'S APPETITE (§3.4 — E1b) ───────────────────────
+/**
+ * Resolve a matured CREDIT obligation (§3.4). A 'credit'-kind obligation matures
+ * CREDIT_TERM ticks after mint, then resolves to 'repaid' (a solvent, non-malicious debtor
+ * clears the debt — gratitude + trust) or 'defaulted' (an insolvent OR malicious debtor —
+ * a grievance, the casus-belli seam, the lender's hardened heart). Before maturity it is
+ * 'pending'; a GIFT obligation (kind 'grain_relief') never matures (returns 'pending'
+ * forever — it only decays). DETERMINISTIC: the debtor's solvency/malice LOAD the outcome
+ * (§H — no flat draw; the caller supplies both as live reads). Pure, total.
+ * @param {{ obligation?: ObligationRecord|null, now?: number, debtorSolvency01?: number, debtorMalice01?: number, term?: number }} args
+ * @returns {'pending'|'repaid'|'defaulted'}
+ */
+export function creditMaturityResolution({ obligation = null, now = 0, debtorSolvency01 = 0, debtorMalice01 = 0, term } = {}) {
+  const rec = normalizeObligation(obligation);
+  if (!rec || rec.kind !== 'credit') return 'pending'; // only credit matures; gifts just decay
+  const tick = Math.max(0, Math.floor(finiteNumber(now, 0)));
+  const T = REACTION_TUNING;
+  const maturityTerm = Math.max(1, Math.floor(finiteNumber(term, T.CREDIT_TERM)));
+  if (tick - rec.mintTick < maturityTerm) return 'pending';
+  const solvency = clamp01(finiteNumber(debtorSolvency01, 0));
+  const malice = clamp01(finiteNumber(debtorMalice01, 0));
+  const canPay = solvency >= T.CREDIT_REPAY_SOLVENCY_AT;   // insolvent ⇒ can't pay
+  const willPay = malice < T.CREDIT_DEFAULT_MALICE_AT;     // malicious ⇒ won't pay
+  return (canPay && willPay) ? 'repaid' : 'defaulted';
+}
+
+/**
+ * @typedef {Object} LendAppetiteRecord
+ * @property {number} appetite  the lender's appetite-to-lend in [LEND_APPETITE_FLOOR, 1] (1 = unburned)
+ * @property {number} lastTick
+ */
+
+/**
+ * Step a LENDER's appetite-to-lend (§3.4, the merchantAppetite accumulator pattern —
+ * "hardened hearts, mechanically"; the bufferDiscipline sibling idiom): a default suffered
+ * this tick DECAYS it (bounded by LEND_APPETITE_FLOOR — a burned lender never fully stops),
+ * a tick without a default RECOVERS it toward full. Returns the next record, or NULL when
+ * recovered to full (drop-when-empty prune — the ledger drains to absent). Pure, total.
+ * @param {LendAppetiteRecord|null|undefined} prior
+ * @param {{ defaultedThisTick?: boolean, now: number }} args
+ * @returns {LendAppetiteRecord|null}
+ */
+export function lendAppetiteStep(prior, { defaultedThisTick = false, now }) {
+  const T = REACTION_TUNING;
+  const tick = Math.max(0, Math.floor(finiteNumber(now, 0)));
+  const prev = prior && typeof prior === 'object' ? clamp(finiteNumber(prior.appetite, 1), T.LEND_APPETITE_FLOOR, 1) : 1;
+  const next = defaultedThisTick === true
+    ? clamp(prev - T.LEND_APPETITE_HIT, T.LEND_APPETITE_FLOOR, 1)
+    : clamp(prev + T.LEND_APPETITE_RECOVER, T.LEND_APPETITE_FLOOR, 1);
+  if (!defaultedThisTick && next >= 1 - T.LEND_APPETITE_EPS) return null; // recovered ⇒ prune
+  return { appetite: round4(next), lastTick: tick };
+}
+
+/**
+ * Read a lender's appetite-to-lend from the (sparse) ledger, or 1 (unburned baseline) when
+ * absent — a lender with no default history lends at full appetite (mirrors appetiteOf). The
+ * kernel DAMPENS the credit-preference by this. Pure, total.
+ * @param {Record<string, unknown>|null|undefined} ledger @param {string} lenderId @returns {number}
+ */
+export function lendAppetiteOf(ledger, lenderId) {
+  const ns = ledger && typeof ledger === 'object' && !Array.isArray(ledger)
+    ? /** @type {Record<string, unknown>} */ (ledger) : null;
+  const rec = ns ? ns[String(lenderId)] : null;
+  const level = rec && typeof rec === 'object' && !Array.isArray(rec)
+    ? finiteNumber(/** @type {Record<string, unknown>} */ (rec).appetite, NaN) : NaN;
+  return Number.isFinite(level) ? clamp(level, REACTION_TUNING.LEND_APPETITE_FLOOR, 1) : 1;
 }

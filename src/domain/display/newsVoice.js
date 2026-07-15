@@ -38,7 +38,7 @@ function fnv1a32(str) {
   return h >>> 0;
 }
 
-/** @typedef {'war'|'faith'|'trade'|'pestilence'|'calamity'|'migration'|'authority'} VoiceCategory */
+/** @typedef {'war'|'faith'|'trade'|'pestilence'|'calamity'|'migration'|'authority'|'succor'} VoiceCategory */
 /** @typedef {'onset'|'impact'|'relief'|'fade'} VoiceBucket */
 
 // ── Category vocabularies (the categorization precedence) ────────────────────
@@ -245,6 +245,30 @@ export const VOICE_LINES = Object.freeze({
       'The feared reckoning in the halls of rule passed off in muttering alone, and nothing was overturned.',
     ]),
   }),
+  // Succor — mercy in grain, one town's granary opened for another's hunger.
+  succor: Object.freeze({
+    onset: Object.freeze([
+      'Word runs that the granaries of the fortunate are being asked to open — a neighbour goes hungry, and the plea has reached our gates.',
+      'A cry for relief comes up the road from a hungrier country, and the almoners are already counting what can be spared.',
+      'The council is put to a hard question: how much mercy can the town afford before its own larder runs thin?',
+    ]),
+    impact: Object.freeze([
+      'The grain-wagons are rolling to the stricken country — the mercy was weighed, and found affordable.',
+      'Relief goes out from our stores to a neighbour in want, and the debt of it is quietly written down.',
+      'The granaries have opened for the hungry beyond the walls; the wagons run heavy with charity and calculation both.',
+      'Aid is on the road to the famined country, sent with one hand while the other keeps its careful accounts.',
+    ]),
+    relief: Object.freeze([
+      'The sent grain has done its work — the hungry country steadies, and remembers well who fed it.',
+      'The relief held; a neighbour is pulled back from the brink, and a bond is deepened by the giving.',
+      'The wagons came in time, and a friend saved from famine is a friend for many a long season.',
+    ]),
+    fade: Object.freeze([
+      'The granaries stayed shut against the asking; the hungry country turns away, and the slight is not soon forgotten.',
+      'The plea for relief went unanswered, and a grudge takes root where grain did not.',
+      'No wagons rolled — the mercy was weighed and refused, and the road home is long for the empty-handed.',
+    ]),
+  }),
 });
 
 /**
@@ -284,6 +308,10 @@ export const VOICE_FLOOR = Object.freeze({
     'Word of the struggle for power moves through the country, and every faction listens for its moment.',
     'The matter of who rules unsettles the halls, and the country watches the seat of power closely.',
   ]),
+  succor: Object.freeze([
+    'Word of the grain sent to a hungry neighbour moves along the roads, and the town reckons the cost of its mercy.',
+    'The matter of relief given and relief refused passes hand to hand, and every larder is counted anew.',
+  ]),
 });
 
 /**
@@ -313,6 +341,12 @@ export function newsVoiceCategory(entry) {
   if (impactKind === 'calamity') return 'calamity';
   if (impactKind === 'authority_instability') return 'authority';
   if (impactKind === 'migration_pressure') return 'migration';
+  // Generosity's GIVE receipt (impactKind-primary, ahead of its 'trade_route' channelType
+  // fallback — otherwise a relief headline gets a market-shortage line, the F3a mis-route
+  // the doc comment above warns of). A REFUSAL (impactKind 'generosity_refusal', kind
+  // 'applied' ⇒ the 'impact' bucket) is left UNCLASSIFIED on purpose: routing it to succor
+  // would voice "aid flows" beneath a "turned away" headline; the grudge has its own surface.
+  if (impactKind === 'generosity_relief') return 'succor';
   if (WAR_IMPACT_KINDS.has(impactKind)) return 'war';
   if (TRADE_IMPACT_KINDS.has(impactKind)) return 'trade';
   // channelType is only a fallback when impactKind did not classify (bare/persisted entries).

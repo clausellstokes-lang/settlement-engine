@@ -266,10 +266,12 @@ describe('the loaded-dice primitives (§H)', () => {
 });
 
 describe('the instrument catalog (§4) + the warning-gift sacrifice price (statecraft §2.4)', () => {
-  it('grain_relief + warning are LIVE this wave; purchase/credit/refuge are registered but deferred', () => {
+  it('grain_relief + warning + credit are LIVE; purchase/trade_overture/refuge are registered but deferred', () => {
     expect(GENEROSITY_INSTRUMENTS.grain_relief.live).toBe(true);
     expect(GENEROSITY_INSTRUMENTS.warning.live).toBe(true);
+    expect(GENEROSITY_INSTRUMENTS.credit.live).toBe(true);       // E1b: maturity/default/appetite wired
     expect(GENEROSITY_INSTRUMENTS.purchase.live).toBe(false);
+    expect(GENEROSITY_INSTRUMENTS.trade_overture.live).toBe(false);
     expect(GENEROSITY_INSTRUMENTS.refuge.live).toBe(false);
   });
   it("warningSacrifice prices the COST of the telling, not the value received", () => {

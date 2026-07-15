@@ -713,9 +713,9 @@ export function shouldInitiateAsk(rng, key, pressure01, baseChance = 0.15) {
 export const GENEROSITY_INSTRUMENTS = Object.freeze({
   grain_relief: { kind: 'grain_relief', conservationExact: true, live: true, note: 'The flagship: rides supplyShipments kind:relief; tolls apply; aspatial fallback = a bounded instant transfer.' },
   warning: { kind: 'warning', conservationExact: false, live: true, note: 'Statecraft §2.4 GIVE lane: warning an ally, priced by the SACRIFICE of the telling (strategic advantage spent + eyes exposed), not the value received. The intel-posture coupling lands with W-DOCTRINE.' },
-  purchase: { kind: 'purchase', conservationExact: true, live: false, note: 'The market twin (E1b) — shares the dispatch scorer.' },
-  credit: { kind: 'credit', conservationExact: true, live: false, note: 'Credit/investment maturity + appetite (E1b, §3.4).' },
-  trade_overture: { kind: 'trade_overture', conservationExact: true, live: false, note: 'Subsidized channel (E1b).' },
+  purchase: { kind: 'purchase', conservationExact: true, live: false, note: 'The market twin (E1b/A2) — shares the dispatch scorer; wiring deferred (recipe in the E1b handoff ledger).' },
+  credit: { kind: 'credit', conservationExact: true, live: true, note: 'LIVE (E1b, §3.4): GIVE_AS_CREDIT mints a maturity-bearing kind:credit obligation; at maturity the debtor repays (trust, debt clears) or defaults (grievance ratchet = casus-belli seam + the lender\'s hardened heart via lendAppetite).' },
+  trade_overture: { kind: 'trade_overture', conservationExact: true, live: false, note: 'Subsidized channel (E1b/A4) — needs a tradeFlow-tally→trade-pressure wire + a dwell-bounded overture ledger; deferred (recipe in the E1b handoff ledger).' },
   refuge: { kind: 'refuge', conservationExact: true, live: false, note: 'People, not goods (E1c): an acceptance posture gating M4 destination choice.' },
 });
 

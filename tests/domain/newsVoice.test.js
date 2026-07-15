@@ -18,7 +18,7 @@ import { describe, it, expect } from 'vitest';
 
 import { newsVoiceLine, newsVoiceCategory, VOICE_LINES, VOICE_FLOOR } from '../../src/domain/display/newsVoice.js';
 
-const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority'];
+const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority', 'succor'];
 const BUCKETS = ['onset', 'impact', 'relief', 'fade'];
 
 // Representative entry fields that hit each category (via impactKind) and each
@@ -28,6 +28,7 @@ const CATEGORY_IMPACT_KIND = {
   war: 'conflict_pressure', faith: 'religious_pressure', trade: 'import_shortage',
   pestilence: 'plague_arrival', calamity: 'calamity',
   migration: 'migration_pressure', authority: 'authority_instability',
+  succor: 'generosity_relief',
 };
 const BUCKET_KIND = { onset: 'queued', impact: 'applied', relief: 'resolved', fade: 'ignored' };
 
@@ -47,6 +48,17 @@ describe('newsVoice — coverage', () => {
         expect(VOICE_LINES[cat][bucket], `${cat}/${bucket}`).toContain(line);
       }
     }
+  });
+
+  it("routes generosity's GIVE receipt to 'succor' by impactKind (ahead of its trade_route channel)", () => {
+    // The F3a fix: a relief entry carries channelType 'trade_route' (∈ TRADE_CHANNEL_TYPES),
+    // so impactKind MUST classify first or it gets a market-shortage crier line.
+    expect(newsVoiceCategory({ impactKind: 'generosity_relief', channelType: 'trade_route' })).toBe('succor');
+    // A relief beat (kind 'applied' ⇒ impact bucket) speaks a succor line.
+    const line = newsVoiceLine({ id: 'relief.1', impactKind: 'generosity_relief', channelType: 'trade_route', kind: 'applied' });
+    expect(VOICE_LINES.succor.impact).toContain(line);
+    // A refusal is left unclassified on purpose (the grudge has its own surface).
+    expect(newsVoiceCategory({ impactKind: 'generosity_refusal', channelType: null })).toBeNull();
   });
 
   it('categorization honours the faith → war → trade precedence and the channelType path', () => {

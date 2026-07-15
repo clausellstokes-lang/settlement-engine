@@ -34,12 +34,36 @@
  * Aggregate-only (grain, never named souls). Receipts mandatory. 0-hole discipline (no
  * `any`) — the read-shapes are declared local typedefs, mirroring pestilenceKernel.js.
  *
- * DEFERRED to E1b (documented, not lost — see the report + the coherence matrix note):
- * the instrument live-flips (purchase / credit maturity / trade_overture / refuge), the
- * §9 WRITE couplings the core parked (legitimacy→coup lane, rumor broadcast of notable
- * acts, the newsVoice 'succor' category, the smuggle-premium pin), and the forceable
- * FORCE_RELIEF / OFFER_CREDIT verbs. This wave ships grain relief LIVE + its full local
- * reaction ledger + the dormancy proof.
+ * E1b SHIPPED (this wave, all behind the same dormancy gate ⇒ the golden holds byte-
+ * identical): CREDIT goes live — GIVE_AS_CREDIT mints a distinct kind:'credit' obligation
+ * that MATURES (CREDIT_TERM ticks) into REPAYMENT (trust + the debt clears) or DEFAULT
+ * (the grievance ratchet on the edge = the casus-belli seam; the lender's hardened heart
+ * via the lendAppetite accumulator — the merchantAppetite pattern). Plus the §9 couplings
+ * the core parked: the newsVoice 'succor' category (display), the legitimacy→coup write-
+ * back (a hungry giver's ruler pays a legitimacy price; a comfortable one earns a small
+ * lift), the smuggle-premium coupling pin (a refuse moves no food ⇒ the shortage persists
+ * for M7), and the stale-willingness-latch prune.
+ *
+ * DEFERRED — E1c+ (documented, not lost; recon-mapped for a clean handoff — see the E1b
+ * report + the coherence matrix note):
+ *   • PURCHASE / TRADE_OVERTURE live-flips (design A2/A4) — purchase = a dispatchDecision
+ *     fall-through off the relief decision (relief-if-qualified, purchase-else); overture
+ *     needs a tradeFlow-tally→trade-pressure wire + a dwell-bounded overture ledger.
+ *   • REFUGE posture (design E1c) — a drop-when-empty 'refugePostures' sub-ledger written
+ *     here, READ in migrationKernel.buildDestinationCandidate as a new weighted axis on
+ *     migration.destinationScore; conservation is weight-independent (survivors only
+ *     redistribute, never mint) — pin identical {originDeaths,roadDeaths,arrivals} with vs
+ *     without a posture.
+ *   • RUMOR broadcast belief-nudge — the GIVE receipt ALREADY seeds a typed rumor carrying
+ *     both settlements (succorNews score≥60); the missing edge is nudging believed
+ *     wealth/character in beliefMap.reconcileBelief (a cross-module, infoMode-gated change).
+ *   • FORCE_RELIEF / OFFER_CREDIT counterpart verbs — the 11-touchpoint event-registry
+ *     threading (registry/mutateWorld/mutate/batch/buildEvent/composer/prose + preview≡apply
+ *     + the W-COMPOSER-1 manifest TODO); affordance predicates reuse qualifiesForGenerosity
+ *     / shouldInitiateAsk.
+ *   • The traveling-relief refinement over commodityFlow (E1a JUDGMENT-2 reaffirmed:
+ *     invasive — the M6a ledger is institution-keyed with a food-exclusion rule; a separate
+ *     peer-shipment lane or the aspatial fallback is the contained path, not a schema change).
  */
 
 import {
@@ -49,7 +73,8 @@ import {
 import {
   foldObligations, hasLiveObligation, gratitudeDeposit, giverMarginSacrifice,
   obligationMintMagnitude, reliefIncident, refusalDamage, fogForgiveness,
-  bufferDisciplineStep, REACTION_TUNING,
+  bufferDisciplineStep, creditMaturityResolution, lendAppetiteStep, lendAppetiteOf,
+  REACTION_TUNING,
 } from '../spatial/generosityReactions.js';
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
@@ -119,6 +144,17 @@ export const GENEROSITY_MOVER_TUNING = Object.freeze({
   // A minimum obligation magnitude to bother minting (below this a gift is a courtesy, not
   // a debt — keeps the ledger sparse).
   OBLIGATION_MIN: 0.03,
+  // §9 LEGITIMACY→COUP coupling (design §2.2): a GIVE writes back to the giver's ruler.
+  // Shipping food out of a HUNGRY town costs legitimacy (courage with a political price);
+  // a COMFORTABLE "granary city" earns a small reputation LIFT. Bounded, small (points on
+  // the 0..100 publicLegitimacy score), scaled by the gift magnitude and own scarcity.
+  LEGITIMACY_COST: 3,   // max score points a hungry giver's ruler loses per gift
+  LEGITIMACY_LIFT: 1,   // max score points a comfortable giver's ruler gains per gift
+  // Housekeeping: a refusing willingness latch that has not been re-advanced in this many
+  // ticks is STALE (its pair stopped being asked — the receiver recovered, the edge changed)
+  // and is PRUNED so a future ask re-evaluates fresh rather than inheriting a fossil refusal.
+  // Byte-neutral when nothing is stale (the surviving set is identical).
+  WILLINGNESS_STALE_TICKS: 24,
 });
 
 // ── The qualifying relationship kinds → the kernel's BondRead.kind vocabulary ──
@@ -237,6 +273,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   }
 
   const T = GENEROSITY_MOVER_TUNING;
+  const RT = REACTION_TUNING;
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
   const itemById = new Map(items.map((it) => [String(it.id), it]));
   const stressors = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
@@ -315,7 +352,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const bufferSteps = [];
   /** @type {Record<string, GenerosityWillingness|null>} */
   const willingnessWrites = {};
-  /** @type {Array<{ key: string, incident: Record<string, unknown> }>} */
+  /** @type {Array<{ key: string, incident?: Record<string, unknown>|null, patch?: Record<string, number> }>} */
   const incidentWrites = [];
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
@@ -325,6 +362,25 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const foodDeltas = new Map();
   const willingnessLedger = asObject(getSpatialLedger(worldState, 'generosityWillingness'));
   const bufferLedger = asObject(getSpatialLedger(worldState, 'bufferDiscipline'));
+  const lendAppetiteLedger = asObject(getSpatialLedger(worldState, 'lendAppetite'));
+
+  // Directed-pair → relationship edge (for credit-maturity incident/scalar writes).
+  /** @type {Map<string, GenEdge>} */
+  const pairToEdge = new Map();
+  for (const e of edges) {
+    const a = e?.from != null ? String(e.from) : '';
+    const b = e?.to != null ? String(e.to) : '';
+    if (!a || !b) continue;
+    pairToEdge.set(`${a}:${b}`, e);
+    pairToEdge.set(`${b}:${a}`, e);
+  }
+  // Credit-maturity collections (resolved this tick).
+  /** @type {Array<{ from: string, to: string, kind: string, amount: number }>} */
+  const obligationRepayments = [];   // zero out a resolved credit (repay OR default clears it)
+  /** @type {Set<string>} */
+  const defaultedLenders = new Set(); // creditor ids that suffered a default this tick
+  /** @type {Map<string, number>} the giver's bounded publicLegitimacy.score delta (§9) */
+  const legitimacyDeltas = new Map();
 
   let asks = 0;
   for (const cand of candidates) {
@@ -374,8 +430,11 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     const receiverBesieged = warFrontsInto(graph, receiverId).length > 0;
     const warStrategic01 = clamp01((sharesEnemy ? 0.7 : 0) + (sharesEnemy && receiverBesieged ? 0.2 : 0));
     // Leverage appetite: a malicious/ambitious giver gives to indebt (the merchant/criminal
-    // seat's leverage lens amplifies it downstream in the kernel).
-    const leverage01 = clamp01((giverGood01 < 0.5 ? (0.5 - giverGood01) * 2 : 0));
+    // seat's leverage lens amplifies it downstream in the kernel). §3.4: a lender whose past
+    // credit DEFAULTED has a hardened heart (lendAppetite < 1) and lends more warily — the
+    // appetite DAMPENS the credit-preference (baseline 1 for an unburned lender ⇒ no change).
+    const lendAppetite01 = lendAppetiteOf(lendAppetiteLedger, giverId);
+    const leverage01 = clamp01((giverGood01 < 0.5 ? (0.5 - giverGood01) * 2 : 0) * lendAppetite01);
     // Supply dependency: a trade-partner the giver leans on (their famine = my shortage).
     const supplyDependency01 = kind === 'trade_partner' ? clamp01(num(relState.dependency, 0)) : 0;
     const strategy = { warStrategic01, supplyDependency01, leverage01 };
@@ -478,18 +537,30 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
         if (gainedMonths > 0) foodDeltas.set(receiverId, (foodDeltas.get(receiverId) || 0) + gainedMonths);
       }
 
-      // ── The obligation mint (the "aid changes history" ledger). Predatory weight for a
-      // leverage-driven / credit gift. ──
-      const leverageIntent = verdict.verdict === VERDICTS.GIVE_AS_CREDIT ? Math.max(leverage01, 0.6) : leverage01;
+      // ── The obligation mint (the "aid changes history" ledger). A GIVE_AS_CREDIT verdict
+      // mints a distinct kind:'credit' obligation that MATURES (§3.4 — repayment/default,
+      // resolved below); a gift mints a slow-decaying kind:'grain_relief' debt. Predatory
+      // weight for a leverage-driven / credit gift. ──
+      const isCredit = verdict.verdict === VERDICTS.GIVE_AS_CREDIT;
+      const leverageIntent = isCredit ? Math.max(leverage01, 0.6) : leverage01;
       const baseMag = clamp01(verdict.magnitudeFraction * (0.5 + 0.5 * need01));
       const oblMag = obligationMintMagnitude({ baseMagnitude01: baseMag, leverageIntent01: leverageIntent });
       if (oblMag >= T.OBLIGATION_MIN) {
         obligationMints.push({
-          from: receiverId, to: giverId, kind: 'grain_relief',
+          from: receiverId, to: giverId, kind: isCredit ? 'credit' : 'grain_relief',
           magnitude: oblMag, mintTick: tick, lastTick: tick,
           ...(leverageIntent >= 0.6 ? { predatory: true } : {}),
         });
       }
+
+      // ── §9 LEGITIMACY→COUP write-back (design §2.2): a hungry giver's ruler pays a
+      // legitimacy price for shipping food out (courage with a political cost); a
+      // comfortable "granary city" earns a small reputation lift. Bounded, applied to the
+      // giver's publicLegitimacy.score below (only where a structured legitimacy exists). ──
+      const legDelta = ownScarcity01 > 0.5
+        ? -(T.LEGITIMACY_COST * verdict.magnitudeFraction * ownScarcity01)
+        : (T.LEGITIMACY_LIFT * verdict.magnitudeFraction * (1 - ownScarcity01));
+      if (legDelta !== 0) legitimacyDeltas.set(giverId, (legitimacyDeltas.get(giverId) || 0) + legDelta);
 
       // ── The widow's-mite gratitude + the typed incidents (edge-backed pairs only — an
       // obligation-only pair without a graph edge would be dropped by the relationship
@@ -540,12 +611,65 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
+  // ── CREDIT MATURITY (§3.4): scan the PRIOR obligation ledger for 'credit' obligations
+  // that have MATURED (CREDIT_TERM ticks past mint) and resolve each. REPAYMENT (a solvent,
+  // non-malicious debtor) deposits trust + clears the debt; DEFAULT (an insolvent OR
+  // malicious debtor) ratchets a grievance on the edge (the casus-belli seam that feeds the
+  // adversarial escalation reads) + hardens the lender's heart (lendAppetite decay). BOTH
+  // clear the obligation (a full repayment consumes it). Codepoint-ordered, deterministic. ──
+  if (obligationLedger) {
+    const floorMonthsD = num(STOCKPILE_TUNING.reserveTitheFloorMonths, 1);
+    for (const key of Object.keys(obligationLedger).sort()) {
+      const rec = /** @type {ObligationRecord} */ (obligationLedger[key]);
+      if (!rec || rec.kind !== 'credit') continue;
+      const debtorId = String(rec.from);
+      const creditorId = String(rec.to);
+      const debtorS = freshSettlement(debtorId);
+      const debtorItem = itemById.get(debtorId);
+      // Debtor solvency = food headroom above the reserve floor (can they repay?).
+      const dMonths = storageMonthsOf(debtorS);
+      const dCap = Math.max(0.1, storageCapacityMonths(asSimSettlement(debtorS)));
+      const debtorSolvency01 = clamp01(Math.max(0, dMonths - floorMonthsD) / Math.max(0.1, dCap - floorMonthsD));
+      const debtorMalice01 = debtorItem
+        ? clamp01(computeMalice(/** @type {Parameters<typeof computeMalice>[0]} */ (/** @type {unknown} */ (debtorItem)), worldState))
+        : 0.5;
+      const resolution = creditMaturityResolution({ obligation: rec, now: tick, debtorSolvency01, debtorMalice01 });
+      if (resolution === 'pending') continue;
+      // Zero out the resolved credit (both outcomes clear it).
+      obligationRepayments.push({ from: debtorId, to: creditorId, kind: 'credit', amount: 1 });
+      const edge = pairToEdge.get(`${debtorId}:${creditorId}`);
+      const relKey = edge ? relationshipKeyFromEdge(edge) : null;
+      const relState = edge && relKey ? ensureRelationshipState(edge, relStates[relKey]) : null;
+      if (resolution === 'repaid') {
+        // The debt clears cleanly — trust deposit + the typed credit_repaid incident.
+        if (relKey && relState) {
+          const inc = reliefIncident({ kind: 'credit_repaid', tick, magnitude01: RT.CREDIT_REPAY_TRUST });
+          if (inc) incidentWrites.push({ key: relKey, incident: inc, patch: { trust: clamp01(num(relState.trust, 0) + 0.05) } });
+        }
+      } else {
+        // DEFAULT — the grievance ratchet (casus-belli): raise resentment on the edge; the
+        // lender's appetite-to-lend decays; the grudge reaches the Chronicle.
+        defaultedLenders.add(creditorId);
+        if (relKey && relState) {
+          const inc = reliefIncident({ kind: 'credit_defaulted', tick, magnitude01: RT.CREDIT_DEFAULT_GRIEVANCE });
+          if (inc) incidentWrites.push({ key: relKey, incident: inc, patch: { resentment: clamp01(num(relState.resentment, 0) + 0.18) } });
+        }
+        newsEntries.push(defaultNews({
+          debtorName: String(debtorItem?.name || debtorId),
+          creditorName: String(itemById.get(creditorId)?.name || creditorId),
+          tick, now,
+        }));
+      }
+    }
+  }
+
   // ── PERSIST. Nothing decided ⇒ byte-identical (no ledger touched). ──
   let changed = false;
 
-  // Obligations sub-ledger (fold this tick's mints, decay+prune; drop-when-empty).
-  if (obligationMints.length || obligationLedger) {
-    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, now: tick });
+  // Obligations sub-ledger (fold this tick's mints + credit-maturity repayments, decay+prune;
+  // drop-when-empty).
+  if (obligationMints.length || obligationRepayments.length || obligationLedger) {
+    const nextObl = foldObligations(obligationLedger, { mints: obligationMints, repayments: obligationRepayments, now: tick });
     if (JSON.stringify(nextObl || null) !== JSON.stringify(obligationLedger || null)) {
       nextWorldState = nextObl
         ? setSpatialLedger(nextWorldState, 'obligations', nextObl)
@@ -559,7 +683,13 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     /** @type {Record<string, GenerosityWillingness>} */
     const nextWill = {};
     for (const [k, v] of Object.entries(willingnessLedger)) {
-      if (!(k in willingnessWrites)) nextWill[k] = /** @type {GenerosityWillingness} */ (v);
+      if (k in willingnessWrites) continue; // updated (or pruned) by this tick's writes below
+      // HOUSEKEEPING: drop a latch not re-advanced within WILLINGNESS_STALE_TICKS (its pair
+      // stopped being asked). Byte-neutral when nothing is stale.
+      const rec = asObject(v);
+      const last = num(rec.lastTick, num(rec.sinceTick, tick));
+      if (tick - last > T.WILLINGNESS_STALE_TICKS) continue;
+      nextWill[k] = /** @type {GenerosityWillingness} */ (v);
     }
     for (const [k, v] of Object.entries(willingnessWrites)) {
       if (v) nextWill[k] = v;
@@ -592,13 +722,39 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     }
   }
 
-  // relationshipMemory incidents (edge-backed pairs; append immutably, bounded to last 8).
+  // Lend-appetite sub-ledger (§3.4, the merchantAppetite pattern — hardened hearts on a
+  // default; recover-and-prune otherwise; drop-when-empty ⇒ byte-identical once drained).
+  if (defaultedLenders.size || Object.keys(lendAppetiteLedger).length) {
+    /** @type {Record<string, unknown>} */
+    const nextLend = {};
+    const lenders = new Set([...Object.keys(lendAppetiteLedger), ...defaultedLenders]);
+    for (const id of lenders) {
+      const prior = /** @type {Parameters<typeof lendAppetiteStep>[0]} */ (asObject(lendAppetiteLedger[id]).appetite != null ? lendAppetiteLedger[id] : null);
+      const nextRec = lendAppetiteStep(prior, { defaultedThisTick: defaultedLenders.has(id), now: tick });
+      if (nextRec) nextLend[id] = nextRec;
+    }
+    const sortedLend = sortedRecord(nextLend);
+    if (JSON.stringify(sortedLend) !== JSON.stringify(sortedRecord(lendAppetiteLedger))) {
+      nextWorldState = Object.keys(sortedLend).length
+        ? setSpatialLedger(nextWorldState, 'lendAppetite', sortedLend)
+        : dropSpatialLedger(nextWorldState, 'lendAppetite');
+      changed = true;
+    }
+  }
+
+  // relationshipMemory incidents (edge-backed pairs; append immutably, bounded to last 8) +
+  // the credit-maturity scalar patches (SET clamped-absolute trust/resentment — the
+  // applyRelationshipPatch idiom; the resentment ratchet IS the casus-belli seam).
   if (incidentWrites.length) {
     const nextStates = { ...relStates };
     for (const w of incidentWrites) {
       const cur = asObject(nextStates[w.key]);
       const prior = Array.isArray(cur.recentIncidents) ? cur.recentIncidents : [];
-      nextStates[w.key] = { ...cur, recentIncidents: [...prior.slice(-7), w.incident] };
+      /** @type {Record<string, unknown>} */
+      const nextRec = { ...cur };
+      if (w.incident) nextRec.recentIncidents = [...prior.slice(-7), w.incident];
+      if (w.patch) for (const [k, v] of Object.entries(w.patch)) nextRec[k] = v;
+      nextStates[w.key] = nextRec;
     }
     nextWorldState = { ...nextWorldState, relationshipStates: nextStates };
     changed = true;
@@ -608,6 +764,14 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   if (foodDeltas.size) {
     nextUpdates = applyFoodDeltasToUpdates(updates, updateIndex, foodDeltas);
     if (nextUpdates !== updates) changed = true;
+  }
+
+  // §9 legitimacy score deltas → settlementUpdates (bounded, integer, clamped [0,100]; only
+  // where a structured {score} legitimacy exists). Runs AFTER the food pass so a giver's
+  // granary drawdown and its ruler's legitimacy move compose on the same update entry.
+  if (legitimacyDeltas.size) {
+    const withLeg = applyLegitimacyDeltasToUpdates(nextUpdates, updateIndex, legitimacyDeltas);
+    if (withLeg !== nextUpdates) { nextUpdates = withLeg; changed = true; }
   }
 
   return { worldState: nextWorldState, settlementUpdates: nextUpdates, changed, newsEntries, receipts };
@@ -650,6 +814,43 @@ function applyFoodDeltasToUpdates(updates, updateIndex, foodDeltas) {
         economicState: { ...settlement.economicState, foodSecurity: { ...fs, storageMonths: nextMonths } },
       },
     };
+  }
+  return next;
+}
+
+/**
+ * Apply the bounded per-giver publicLegitimacy.score deltas to settlementUpdates (§9): a
+ * hungry giver's ruler loses legitimacy for shipping food out, a comfortable one gains a
+ * small "granary city" lift. Integer, clamped [0,100] (the applyDivineMandate idiom); SKIPS
+ * a legacy bare-number or absent legitimacy (only nudges a structured {score}). Pure.
+ * @param {GenUpdate[]} updates @param {Map<string, number>} updateIndex @param {Map<string, number>} legitimacyDeltas
+ * @returns {GenUpdate[]}
+ */
+function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) {
+  let next = updates;
+  let cloned = false;
+  for (const [id, delta] of legitimacyDeltas) {
+    if (!delta) continue;
+    const ui = updateIndex.get(String(id));
+    if (ui === undefined) continue;
+    const entry = next[ui];
+    const settlement = entry?.settlement;
+    if (!settlement) continue;
+    const ps = asObject(settlement.powerStructure);
+    const plRaw = ps.publicLegitimacy;
+    const pl = plRaw && typeof plRaw === 'object' && !Array.isArray(plRaw)
+      ? /** @type {Record<string, unknown>} */ (plRaw) : null;
+    if (!pl || !Number.isFinite(Number(pl.score))) continue;
+    const nextScore = Math.round(Math.max(0, Math.min(100, Number(pl.score) + delta)));
+    if (nextScore === Number(pl.score)) continue;
+    if (!cloned) { next = updates.slice(); cloned = true; }
+    next[ui] = /** @type {GenUpdate} */ ({
+      ...entry,
+      settlement: /** @type {GenSettlement} */ (/** @type {unknown} */ ({
+        ...settlement,
+        powerStructure: { ...ps, publicLegitimacy: { ...pl, score: nextScore } },
+      })),
+    });
   }
   return next;
 }
@@ -709,6 +910,35 @@ function refusalNews({ giverName, receiverName, receipt, damage, tick, now }) {
     channelIds: [],
     tags: ['world_pulse', 'generosity', 'refusal'],
     reasons: [receipt],
+  };
+}
+
+/**
+ * A credit-DEFAULT wizard-news entry (§3.4): a grain-debt fell into default — a grievance
+ * that ratchets toward war (the casus-belli seam). AGGREGATE — the two courts, no named soul.
+ * @param {{ debtorName: string, creditorName: string, tick: number, now: string|null }} a
+ * @returns {Record<string, unknown>}
+ */
+function defaultNews({ debtorName, creditorName, tick, now }) {
+  const summary = `${debtorName} defaulted on the grain-debt owed to ${creditorName} — the ledger sours into a grievance.`;
+  return {
+    id: `wizard_news.${tick}.credit_default.${stablePart(debtorName)}.${stablePart(creditorName)}`,
+    tick,
+    createdAt: now,
+    scope: 'regional',
+    significance: 'notable',
+    score: 58,
+    headline: `${debtorName} defaults on its debt to ${creditorName}`,
+    summary,
+    kind: 'applied',
+    impactKind: 'generosity_credit_default',
+    channelType: null,
+    severity: 0.6,
+    settlementIds: [],
+    impactIds: [],
+    channelIds: [],
+    tags: ['world_pulse', 'generosity', 'credit', 'default'],
+    reasons: [summary],
   };
 }
 

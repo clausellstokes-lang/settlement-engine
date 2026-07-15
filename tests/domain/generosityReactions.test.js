@@ -11,6 +11,7 @@ import {
   gratitudeDeposit, giverMarginSacrifice,
   obligationKey, obligationMintMagnitude, foldObligations, hasLiveObligation,
   fogForgiveness, refusalDamage, reliefIncident, tieContribution, bufferDisciplineStep,
+  creditMaturityResolution, lendAppetiteStep, lendAppetiteOf,
 } from '../../src/domain/spatial/generosityReactions.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../../src/domain/spatial/distanceRead.js';
 
@@ -152,5 +153,51 @@ describe('moral-hazard buffer discipline (§2.2 / scenario 10) — decay then re
     let t = 1;
     while (rec && t < 100) { rec = bufferDisciplineStep(rec, { reliefThisTick: false, now: t++ }); }
     expect(rec).toBeNull(); // fully recovered ⇒ prune ⇒ byte-identical-dormant
+  });
+});
+
+describe('credit maturity (§3.4) — repayment vs default, LOADED by solvency/malice (§H)', () => {
+  const credit = (mintTick, extra) => ({ from: 'b', to: 'a', kind: 'credit', magnitude: 0.5, mintTick, lastTick: mintTick, ...extra });
+  const T = REACTION_TUNING;
+
+  it('a GIFT obligation (grain_relief) never matures — only credit does', () => {
+    const gift = { from: 'b', to: 'a', kind: 'grain_relief', magnitude: 0.5, mintTick: 0, lastTick: 0 };
+    expect(creditMaturityResolution({ obligation: gift, now: 999, debtorSolvency01: 1, debtorMalice01: 0 })).toBe('pending');
+  });
+  it('a credit BEFORE its term is pending; AT/after the term it resolves', () => {
+    expect(creditMaturityResolution({ obligation: credit(0), now: T.CREDIT_TERM - 1, debtorSolvency01: 1, debtorMalice01: 0 })).toBe('pending');
+    expect(creditMaturityResolution({ obligation: credit(0), now: T.CREDIT_TERM, debtorSolvency01: 1, debtorMalice01: 0 })).toBe('repaid');
+  });
+  it('a solvent, non-malicious debtor REPAYS', () => {
+    expect(creditMaturityResolution({ obligation: credit(0), now: T.CREDIT_TERM + 2, debtorSolvency01: 0.9, debtorMalice01: 0.1 })).toBe('repaid');
+  });
+  it('an INSOLVENT debtor DEFAULTS (can\'t pay)', () => {
+    expect(creditMaturityResolution({ obligation: credit(0), now: T.CREDIT_TERM + 2, debtorSolvency01: 0.1, debtorMalice01: 0.1 })).toBe('defaulted');
+  });
+  it('a MALICIOUS debtor DEFAULTS even when solvent (won\'t pay)', () => {
+    expect(creditMaturityResolution({ obligation: credit(0), now: T.CREDIT_TERM + 2, debtorSolvency01: 1, debtorMalice01: 0.9 })).toBe('defaulted');
+  });
+});
+
+describe('the lender\'s appetite-to-lend (§3.4, merchantAppetite pattern) — hardened hearts', () => {
+  const T = REACTION_TUNING;
+  it('a default DECAYS appetite (bounded by the floor); it never fully stops', () => {
+    let rec = null;
+    const seen = [];
+    for (let t = 0; t < 8; t++) { rec = lendAppetiteStep(rec, { defaultedThisTick: true, now: t }); seen.push(rec.appetite); }
+    expect(seen[0]).toBeLessThan(1);                                    // first default already bit
+    expect(seen[seen.length - 1]).toBeGreaterThanOrEqual(T.LEND_APPETITE_FLOOR);
+  });
+  it('without a default appetite RECOVERS toward full and prunes to null (dormant)', () => {
+    let rec = { appetite: T.LEND_APPETITE_FLOOR, lastTick: 0 };
+    let t = 1;
+    while (rec && t < 100) { rec = lendAppetiteStep(rec, { defaultedThisTick: false, now: t++ }); }
+    expect(rec).toBeNull(); // fully recovered ⇒ prune ⇒ byte-identical-dormant
+  });
+  it('lendAppetiteOf reads the level, or 1 (unburned baseline) when absent', () => {
+    expect(lendAppetiteOf(null, 'a')).toBe(1);
+    expect(lendAppetiteOf({}, 'a')).toBe(1);
+    expect(lendAppetiteOf({ a: { appetite: 0.5, lastTick: 3 } }, 'a')).toBe(0.5);
+    expect(lendAppetiteOf({ a: { appetite: 0.5, lastTick: 3 } }, 'b')).toBe(1);
   });
 });
