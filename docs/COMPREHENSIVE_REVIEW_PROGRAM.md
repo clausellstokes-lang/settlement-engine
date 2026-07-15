@@ -241,7 +241,31 @@ behavior, budget raises, golden regens.
   bandits in embattled regions/roads."** Sea piracy inherits PRECISELY the land embattlement/
   danger inputs — same scoring, same counterplay shape; nothing pirate-specific added or omitted
   (DESIGN_NAVY §5's extra pirate-haven criminal-density coupling is TRIMMED to parity unless land
-  bandits already carry the same coupling).
+  bandits already carry the same coupling). RESOLVED same day by the parity recon: parity ALREADY
+  HOLDS BY CONSTRUCTION (node-keyed, modality-blind seams; pinned since M8) — behavior change set
+  EMPTY; scope = the missing sea-arrival banditry-loss pin + a shared-seam parity guard +
+  display-only naming. DESIGN_NAVY §5 amended @ a9f58844.
+- **2026-07-15 (morning) — RESOURCE DISCOVERY COMMISSIONED (owner, verbatim: "The following is
+  one of my intents to change things dynamically, so design and build!" — un-parking the
+  discovery-of-new-resources boundary the architect had flagged):** the world's resource
+  endowment becomes DYNAMIC. Design direction (Fable, at commission): the frozen digest is NOT
+  mutated and NO version-axis event is needed — discoveries live in a sparse spatialLedgers
+  overlay (the armyTransit/embattlement pattern) read through an effective-endowment CHOKEPOINT
+  (frozen base + overlay deltas, clamped ≥0); the digest stays byte-frozen and dormancy holds
+  (absent ledger ⇒ prior bytes). Conservation: discovery converts a bounded, terrain-weighted
+  LATENT pool into accessible endowment (no infinite mines; §H loaded dice — mountains hide ore,
+  prospecting effort + scarcity pressure load the draw). THE UNIFICATION LAW applies: the same
+  ledger carries both signs — discovery (up) and depletion/exhaustion (down, "the mine runs
+  dry"), one lifecycle. Physical manifestation rides the EXISTING institution founding lane (a
+  discovery can found the mine/quarry). Counterpart criterion: FORCE_DISCOVERY verb (bounded
+  resource-kind + magnitude dials, cosmetic flavor). CRUX RISK (the owner's most-bitten class):
+  the endowment CONSUMER CENSUS — every read site must go through the chokepoint or discoveries
+  ghost on unswept paths; census-with-denominator recon dispatched at commission. Generation-side
+  reads stay frozen-digest-only (law 3: generation never reads tick state). THE PATTERN
+  GENERALIZES (named for the future, scoped to discovery now): the overlay-chokepoint is the
+  sanctioned way any frozen-digest fact becomes dynamic later (new roads, new ports) — each such
+  extension is its own owner commission. Builds as W-DISCOVERY, sequenced with W-UPSWING
+  (discovery is a new upswing SOURCE type).
 
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
