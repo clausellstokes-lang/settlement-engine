@@ -23,8 +23,11 @@
  *      pre-wire. Any drift trips this — STOP.
  *   2. A dormancy CONTRACT: the dormant final world carries NO `commitments` sub-ledger.
  *
- * The LIT-PATH anti-vacuity lives in momentumWiring.test.js (it needs the wiring to move);
- * this file is the fence that the wiring must not break.
+ * THE LIT-PATH ANTI-VACUITY (§1: deposits are reads, commitment is state): the SAME fixture
+ * with the gate ON actually accumulates a commitment on the marching war and stays
+ * deterministic (same-seed byte-identity — the no-new-draws tripwire; the momentum layer
+ * takes no rng, so lighting it must not shift the stream). A dormancy pin that never had a
+ * live counterpart would be worthless.
  *
  * Capture/refresh: UPDATE_GOLDEN=1 npx vitest run tests/property/momentumDormancyGolden.test.js -t "captures"
  */
@@ -270,5 +273,34 @@ describe('momentum layer — dormancy golden (wired-but-dormant is byte-identica
     const { campaign } = driveMomentumTicks('mo-b', false, 8, 'one_month');
     const sl = /** @type {Record<string, unknown>} */ (campaign.worldState?.spatialLedgers || {});
     expect(sl.commitments, 'no commitments ledger when dormant').toBeUndefined();
+  }, 60_000);
+});
+
+describe('momentum layer — lit-path anti-vacuity (§1: deposits are reads, commitment is state) [soak seed]', () => {
+  it('gate ON: the marching war accumulates a bounded, past-cliff commitment through the real pulse', () => {
+    const { campaign } = driveMomentumTicks('mo-b', true, 8, 'one_month');
+    const commitments = campaign.worldState?.spatialLedgers?.commitments || {};
+    // The aggressor's siege + incitement deposited a war commitment on its target.
+    const war = commitments['iron>war:weak'];
+    expect(war, 'the marching war minted a commitment when lit').toBeTruthy();
+    expect(war.stock, 'the commitment accumulated real stock').toBeGreaterThan(0);
+    // Bounded (never runs away past STOCK_MAX) — a drama engine, not a runaway.
+    for (const rec of Object.values(commitments)) {
+      expect(rec.stock, 'commitment stock bounded [0, STOCK_MAX]').toBeGreaterThanOrEqual(0);
+      expect(rec.stock, 'commitment stock bounded [0, STOCK_MAX]').toBeLessThanOrEqual(12);
+      expect(Array.isArray(rec.deposits) && rec.deposits.length, 'the receipts are present').toBeTruthy();
+    }
+  }, 60_000);
+
+  it('NO NEW RNG DRAWS: the lit path is same-seed byte-identical (the M9d stream tripwire)', () => {
+    // The momentum layer takes NO rng (post-sum shifts + centered reads only). Lighting it must
+    // not perturb the deterministic stream: two runs on the same seed produce identical ledgers.
+    const a = driveMomentumTicks('mo-b', true, 8, 'one_month');
+    const b = driveMomentumTicks('mo-b', true, 8, 'one_month');
+    expect(JSON.stringify(a.campaign.worldState?.spatialLedgers?.commitments || {}))
+      .toEqual(JSON.stringify(b.campaign.worldState?.spatialLedgers?.commitments || {}));
+    // And the whole decision stream stays identical (the credibility + belief ledgers too).
+    expect(JSON.stringify(a.campaign.worldState?.spatialLedgers || {}))
+      .toEqual(JSON.stringify(b.campaign.worldState?.spatialLedgers || {}));
   }, 60_000);
 });
