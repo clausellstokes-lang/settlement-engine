@@ -23,7 +23,10 @@ import {
   deriveSides, engagementOptions, resolveSideBattle, reliefFlipsSiege,
   prizeRivalryCasus, overstayOccupation, canReEngage,
   INTERVENTION_STATES,
+  reactiveResponse, REACTIVE_RELATIONS, contestSideLookup,
+  reinforceVerbFactory, interceptVerbFactory,
 } from '../../src/domain/worldPulse/convergence.js';
+import { hostilePairFor } from '../../src/domain/worldPulse/armyTransitKernel.js';
 
 const litRules = { simulationRules: { warLayerEnabled: true, interventionEnabled: true } };
 const withLedger = (recs) => ({
@@ -340,12 +343,79 @@ describe('W-CONVERGENCE §6 PIN — aftermath dwell (attrited sides regroup befo
   });
 });
 
-describe('W-CONVERGENCE §7 — the verb ships registrable-shape, NOT registered', () => {
-  it('ORDER_INTERVENTION carries its realm scope + candidateType + dials, registered:false', () => {
-    const v = orderInterventionVerbFactory();
-    expect(v.verb).toBe('ORDER_INTERVENTION');
-    expect(v.scope).toBe('realm');
-    expect(v.candidateType).toBe('intervention_ordered');
-    expect(v.registered).toBe(false);
+// ════════════════ Stage 3 — THE REACTIVE ART OF WAR (§3) ════════════════
+
+describe('W-CONVERGENCE §6 PIN — phantom-column reactivity (a FALSE belief is priced)', () => {
+  it('a believed-but-FALSE enemy column still triggers a real, priced INTERCEPT muster', () => {
+    const phantom = reactiveResponse({
+      believed: { present: true, real: false, strength01: 0.5 },
+      relation: REACTIVE_RELATIONS.ENEMY_COLUMN, myStrength01: 0.7,
+    });
+    expect(phantom.move).toBe('intercept');
+    expect(phantom.priced).toBe(true);             // the reaction commits real force
+    expect(phantom.believedReal).toBe(false);       // ...to a column that isn't there
+    expect(phantom.receipt).toMatch(/rumor/i);
+  });
+
+  it('no believed column ⇒ the muster stands down (no priced reaction)', () => {
+    const quiet = reactiveResponse({ believed: { present: false }, relation: REACTIVE_RELATIONS.ENEMY_COLUMN });
+    expect(quiet.move).toBe('stand');
+    expect(quiet.priced).toBe(false);
+  });
+});
+
+describe('W-CONVERGENCE §3 — the three reactive moves (REINFORCE / INTERCEPT / COUNTER-INTERVENE)', () => {
+  it('an ally under siege ⇒ REINFORCE (the relief column, kinetic teeth for the treaty)', () => {
+    const r = reactiveResponse({ believed: { present: true, strength01: 0.6 }, relation: REACTIVE_RELATIONS.ALLY_UNDER_SIEGE, myStrength01: 0.8 });
+    expect(r.move).toBe('reinforce');
+    expect(r.ev).toBeGreaterThan(0);
+  });
+  it('a believed rival intervener ⇒ COUNTER-INTERVENE (the denial motive made reactive)', () => {
+    const r = reactiveResponse({ believed: { present: true, strength01: 0.6 }, relation: REACTIVE_RELATIONS.ENEMY_INTERVENER });
+    expect(r.move).toBe('counter_intervene');
+  });
+});
+
+describe('W-CONVERGENCE §3/§4 — the INTERCEPT hostilePair extension (byte-identical seam)', () => {
+  it('the transit predicate is UNCHANGED without the contestSideOf lookup (byte-identity)', () => {
+    // Two columns NOT marching against each other's home and with no contest data ⇒ not hostile.
+    const records = {
+      x: { armyId: 'x', role: 'march', originId: 'x', destId: 'z' },
+      y: { armyId: 'y', role: 'march', originId: 'y', destId: 'z' },
+    };
+    const bare = hostilePairFor(records);
+    expect(bare('x', 'y')).toBe(false); // co-marchers on the same target are allies (unchanged)
+  });
+
+  it('WITH the contestSideOf lookup, opposing sides of the SAME contest become hostile', () => {
+    const records = {
+      x: { armyId: 'x', role: 'march', originId: 'x', destId: 'z' },
+      y: { armyId: 'y', role: 'march', originId: 'y', destId: 'z' },
+    };
+    const ledger = {
+      'x:ford': { interId: 'x', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 50 },
+      'y:ford': { interId: 'y', target: 'ford', side: INTERVENTION_SIDES.CHALLENGER, strength: 50 },
+    };
+    const withContest = hostilePairFor(records, contestSideLookup(ledger));
+    expect(withContest('x', 'y')).toBe(true);   // opposing sides of ford's contest → intercept
+    // Same side of the same contest stays allied.
+    const alliedLedger = {
+      'x:ford': { interId: 'x', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 50 },
+      'y:ford': { interId: 'y', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 50 },
+    };
+    expect(hostilePairFor(records, contestSideLookup(alliedLedger))('x', 'y')).toBe(false);
+  });
+});
+
+describe('W-CONVERGENCE §7 — the verbs ship registrable-shape, NOT registered', () => {
+  it('ORDER_INTERVENTION / REINFORCE / INTERCEPT carry realm scope + candidateType, registered:false', () => {
+    for (const v of [orderInterventionVerbFactory(), reinforceVerbFactory(), interceptVerbFactory()]) {
+      expect(v.scope).toBe('realm');
+      expect(v.registered).toBe(false);
+      expect(typeof v.candidateType).toBe('string');
+    }
+    expect(orderInterventionVerbFactory().verb).toBe('ORDER_INTERVENTION');
+    expect(reinforceVerbFactory().verb).toBe('REINFORCE');
+    expect(interceptVerbFactory().verb).toBe('INTERCEPT');
   });
 });
