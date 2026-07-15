@@ -21,38 +21,95 @@
  * pinch. Pure vector only — NO <image>, NO lucide imports here; colors are theme
  * tokens (the no-raw-color lint bans raw hex).
  *
- * SM-2 scope: view only. Edit affordances (mapEdits pins / layout reroll) are
- * SM-3 and are deliberately ABSENT on every platform here.
+ * SM-3 — cosmetic editing (design §5, Class A). When `canEdit` (the same
+ * premium/founder gate SettlementDetail uses) AND a `saveId` exists AND the
+ * pointer is fine (desktop), the pane exposes cosmetic affordances: drag-to-nudge
+ * a building/district (the PlacementsLayer precedent — pointer capture, dead-zone,
+ * commit-on-up), a layout-variant REROLL, and label/legend prefs. Each commits
+ * through the store's `applyMapEdit` action (the applyEvent persist triple) into
+ * the blob-resident `settlement.mapEdits`, so the edit rides the dossier through
+ * every lifecycle path (save/load, snapshot/revert, undo, export/import). VIEWING
+ * stays free on every tier and platform; the mobile posture holds (view + hover
+ * only). Derivation is tier-NEUTRAL — the model takes no entitlement input, so the
+ * same seed+variant lays out identically for every tier.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AMBER, AMBER_BG, BLUE, BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS,
-  GOLD, GOLD_DEEP, GREEN, INK, MUTED, PARCH, R, RED, RED_BG, SECOND, SP, sans,
+  GOLD, INK, MUTED, PARCH, R, RED, RED_BG, SP, sans,
 } from '../theme.js';
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import Button from '../primitives/Button.jsx';
+import { useStore } from '../../store/index.js';
 import { buildTownMapModel } from '../../domain/townMap/index.js';
+import {
+  readMapEdits, readLegendPrefs, normalizeMapEdits,
+  withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref,
+} from '../../domain/townMap/mapEdits.js';
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
-
-// ── Palette (theme tokens only; no VIOLET — AI-reserved; no raw hex) ──────────
-/** District category → base tint token (fill at low opacity; stroke on hover). */
-const DISTRICT_COLOR = {
-  civic: BLUE, noble: GOLD_DEEP, merchant: GOLD, religious: SECOND,
-  arcane: BODY, craft: AMBER, residential: GREEN, foreign: BLUE,
-  military: RED, criminal: INK, industrial: AMBER, other: MUTED,
-};
-const districtColor = (category) => DISTRICT_COLOR[category] || MUTED;
+import { districtColor } from './palette.js';
+import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 
 const clampScale = (s) => Math.max(0.2, Math.min(8, s));
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
+// Apply a transient drag-preview offset (map units) to a polygon / point.
+const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
+const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
+
+/** True when the device has a fine pointer (desktop) — the edit posture. Absent
+ *  matchMedia (SSR / jsdom) ⇒ treat as desktop so the affordances are testable;
+ *  real mobile browsers report coarse and hide them. */
+function detectFinePointer() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return true;
+  try { return window.matchMedia('(pointer: fine)').matches; } catch { return true; }
+}
 
 /**
- * @param {{ settlement: any }} props
+ * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null }} props
  */
-export default function SettlementMapPane({ settlement }) {
-  const model = useMemo(() => buildTownMapModel(settlement), [settlement]);
+export default function SettlementMapPane({ settlement, canEdit = false, saveId = null }) {
+  const applyMapEdit = useStore(s => s.applyMapEdit);
+
+  // ── SM-3 cosmetic edit state ────────────────────────────────────────────────
+  // Local OPTIMISTIC working edits (the PlacementsLayer dragPreview precedent):
+  // the model re-derives instantly, while applyMapEdit persists the blob-resident
+  // truth. Seeded from the settlement's persisted mapEdits; re-seeded when a
+  // DIFFERENT settlement is opened (keyed on its stable id). Absent ⇒ null ⇒ the
+  // model is byte-identical to view-only (the dormancy law).
+  const settlementKey = settlement?.id ?? settlement?._seed ?? null;
+  const [mapEdits, setMapEdits] = useState(() => readMapEdits(settlement));
+  // Re-seed the optimistic edits when a DIFFERENT settlement is opened — the
+  // React "adjust state on prop change" pattern (a setState DURING render, not in
+  // an effect: it re-renders before commit, no cascading effect). Keyed on the
+  // stable settlement id so re-renders of the SAME settlement keep the working edits.
+  const [seededKey, setSeededKey] = useState(settlementKey);
+  if (seededKey !== settlementKey) {
+    setSeededKey(settlementKey);
+    setMapEdits(readMapEdits(settlement));
+  }
+
+  const [desktop, setDesktop] = useState(detectFinePointer);
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return undefined;
+    let mq; try { mq = window.matchMedia('(pointer: fine)'); } catch { return undefined; }
+    const onChange = () => setDesktop(!!mq.matches);
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
+  }, []);
+
+  const editing = !!canEdit && saveId != null && desktop;
+  const legendPrefs = readLegendPrefs(mapEdits);
+
+  // The single writer: update the optimistic view AND persist to the blob.
+  const commitEdits = useCallback((next) => {
+    const norm = normalizeMapEdits(next);
+    setMapEdits(norm);
+    if (saveId != null && typeof applyMapEdit === 'function') applyMapEdit(saveId, norm);
+  }, [saveId, applyMapEdit]);
+
+  const model = useMemo(() => buildTownMapModel(settlement, mapEdits), [settlement, mapEdits]);
   const districtsById = useMemo(() => {
     const m = new Map();
     for (const d of deriveAllDistricts(settlement)) m.set(d.id, d);
@@ -225,6 +282,56 @@ export default function SettlementMapPane({ settlement }) {
 
   const clearHover = () => setHovered((h) => (h && !pinned ? null : h));
 
+  // ── SM-3 drag-to-nudge (PlacementsLayer precedent: pointer capture, dead-zone,
+  //    transient preview, commit-on-up) ─────────────────────────────────────────
+  // dragRef holds the in-flight drag; dragPreview is the live incremental map-unit
+  // offset applied to the dragged element only (no per-move store write, no whole-
+  // model re-derive). movedRef gates click-to-pin suppression after a real drag.
+  const dragRef = useRef(null);
+  const movedRef = useRef(false);
+  const [dragPreview, setDragPreview] = useState(null);
+
+  const beginDrag = (anchor) => (e) => {
+    if (!editing) return;
+    if (e.pointerType === 'touch') return;          // mobile posture: no drag
+    if (e.button != null && e.button > 0) return;   // primary only
+    e.stopPropagation();
+    movedRef.current = false;
+    dragRef.current = { anchor, pointerId: e.pointerId, sx: e.clientX, sy: e.clientY };
+    try { e.currentTarget.setPointerCapture?.(e.pointerId); } catch { /* jsdom / unsupported */ }
+  };
+  const moveDrag = (e) => {
+    const d = dragRef.current;
+    if (!d || d.pointerId !== e.pointerId) return;
+    const sdx = e.clientX - d.sx;
+    const sdy = e.clientY - d.sy;
+    if (!movedRef.current && Math.abs(sdx) < 4 && Math.abs(sdy) < 4) return; // dead-zone
+    movedRef.current = true;
+    const scale = transformRef.current.scale || 1;
+    setDragPreview({ anchor: d.anchor, dx: Math.round(sdx / scale), dy: Math.round(sdy / scale) });
+  };
+  const endDrag = (e) => {
+    const d = dragRef.current;
+    if (!d || d.pointerId !== e.pointerId) return;
+    try { e.currentTarget.releasePointerCapture?.(e.pointerId); } catch { /* ignore */ }
+    const preview = dragPreview && dragPreview.anchor === d.anchor ? dragPreview : null;
+    dragRef.current = null;
+    setDragPreview(null);
+    if (movedRef.current && preview && (preview.dx !== 0 || preview.dy !== 0)) {
+      commitEdits(withPinNudge(mapEdits, d.anchor, preview.dx, preview.dy));
+    }
+  };
+  // A click fires at pointerup after a drag — swallow it so a nudge never also pins.
+  const consumedDragClick = () => { if (movedRef.current) { movedRef.current = false; return true; } return false; };
+  const previewFor = (anchor) => (dragPreview && dragPreview.anchor === anchor ? dragPreview : null);
+
+  // ── SM-3 edit-action callbacks (each commits the whole normalized container) ──
+  const doReroll = () => commitEdits(withLayoutVariant(mapEdits, nextLayoutVariant(mapEdits)));
+  const doToggleLabels = () => commitEdits(withLegendPref(mapEdits, 'showLabels', !legendPrefs.showLabels));
+  const doToggleLegend = () => commitEdits(withLegendPref(mapEdits, 'showLegend', !legendPrefs.showLegend));
+  const doReset = () => commitEdits(null);
+  const hasEdits = !!mapEdits;
+
   const active = pinned ?? hovered;
   const isPinned = !!pinned;
 
@@ -317,30 +424,50 @@ export default function SettlementMapPane({ settlement }) {
           {districts.map((d) => {
             const color = districtColor(d.category);
             const on = hoverKey === d.id;
+            const pv = previewFor(d.anchorKey);
+            const poly = offsetPoints(d.polygon, pv);
             return (
               <g key={d.id}>
                 <polygon
                   data-town-district={d.id}
-                  points={pointsOf(d.polygon)}
+                  points={pointsOf(poly)}
                   fill={color}
                   fillOpacity={on ? 0.24 : 0.14}
                   stroke={color}
                   strokeOpacity={on ? 0.95 : 0.45}
                   strokeWidth={on ? 3 : 1.5}
-                  style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                  style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                   onPointerEnter={onDistrictEnter(d)}
                   onPointerLeave={clearHover}
-                  onClick={onDistrictClick(d)}
+                  onPointerDown={editing ? beginDrag(d.anchorKey) : undefined}
+                  onPointerMove={editing ? moveDrag : undefined}
+                  onPointerUp={editing ? endDrag : undefined}
+                  onPointerCancel={editing ? endDrag : undefined}
+                  onClick={(e) => { if (consumedDragClick()) return; onDistrictClick(d)(e); }}
                 />
                 {/* aggregate lodging/mass-residential → a subtle district-fill accent */}
                 {districtsWithFill.has(d.id) && (
                   <polygon
-                    points={pointsOf(d.polygon)}
+                    points={pointsOf(poly)}
                     fill={color} fillOpacity={0.08}
                     stroke="none"
                     style={{ pointerEvents: 'none' }}
                   />
                 )}
+                {/* SM-3 label show/hide (legendPref) — district name at its centroid */}
+                {legendPrefs.showLabels && (() => {
+                  const c = offsetXY(d.centroid.x, d.centroid.y, pv);
+                  return (
+                    <text
+                      x={c.x} y={c.y} textAnchor="middle" dominantBaseline="central"
+                      fill={INK} fontFamily={sans} fontSize={13} fontWeight={700}
+                      stroke={PARCH} strokeWidth={3} paintOrder="stroke"
+                      style={{ pointerEvents: 'none', userSelect: 'none' }}
+                    >
+                      {d.name}
+                    </text>
+                  );
+                })()}
               </g>
             );
           })}
@@ -365,19 +492,25 @@ export default function SettlementMapPane({ settlement }) {
             const color = districtColor(districts.find((d) => d.id === b.districtId)?.category);
             const on = hoverKey === b.anchorKey;
             const s = on ? 11 : 8;
+            const pv = previewFor(b.anchorKey);
+            const pos = offsetXY(b.position.x, b.position.y, pv);
             return (
               <rect
                 key={b.anchorKey}
                 data-town-building={b.anchorKey}
-                x={b.position.x - s} y={b.position.y - s} width={s * 2} height={s * 2}
+                x={pos.x - s} y={pos.y - s} width={s * 2} height={s * 2}
                 rx={3}
                 fill={on ? color : CARD}
                 fillOpacity={on ? 0.9 : 1}
                 stroke={color} strokeWidth={on ? 2.5 : 1.5}
-                style={{ cursor: 'pointer', pointerEvents: 'auto' }}
+                style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                 onPointerEnter={onBuildingEnter(b)}
                 onPointerLeave={clearHover}
-                onClick={onBuildingClick(b)}
+                onPointerDown={editing ? beginDrag(b.anchorKey) : undefined}
+                onPointerMove={editing ? moveDrag : undefined}
+                onPointerUp={editing ? endDrag : undefined}
+                onPointerCancel={editing ? endDrag : undefined}
+                onClick={(e) => { if (consumedDragClick()) return; onBuildingClick(b)(e); }}
               />
             );
           })}
@@ -430,6 +563,20 @@ export default function SettlementMapPane({ settlement }) {
           })}
         </g>
       </svg>
+
+      {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
+          legend (a legendPref honored for every viewer once set) ──────────── */}
+      <SettlementMapEditControls
+        editing={editing}
+        showLegend={legendPrefs.showLegend}
+        legendPrefs={legendPrefs}
+        hasEdits={hasEdits}
+        districts={districts}
+        onReroll={doReroll}
+        onToggleLabels={doToggleLabels}
+        onToggleLegend={doToggleLegend}
+        onReset={doReset}
+      />
 
       {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}
       {active && active.kind === 'building' && isPinned && active.payload.show && (

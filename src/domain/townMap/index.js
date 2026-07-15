@@ -14,3 +14,16 @@ export {
   CATEGORY_AFFINITY,
   HAMLET_CLUSTER_ID,
 } from './institutionAssignment.js';
+// SM-3 — the cosmetic mapEdits container (pure read + merge ops). Imported ONLY by
+// the lazy viewer pane + tests, so this stays out of the first-paint static closure.
+export {
+  MAP_EDITS_SCHEMA_KEYS,
+  readMapEdits,
+  readLegendPrefs,
+  readLayoutVariant,
+  normalizeMapEdits,
+  withPinNudge,
+  withLayoutVariant,
+  nextLayoutVariant,
+  withLegendPref,
+} from './mapEdits.js';

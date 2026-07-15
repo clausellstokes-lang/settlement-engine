@@ -2157,6 +2157,58 @@ export const createSettlementSlice = (set, get) => ({
   canonizeSavedSettlement: (id) => canonizeSavedSettlementImpl(get, set, id),
 
   /**
+   * SM-3 — apply a COSMETIC map edit (design §5, Class A) to a saved settlement's
+   * blob-resident `settlement.mapEdits` (position nudges, layout-variant reroll,
+   * label/legend prefs). COSMETIC-ALWAYS: no canon guard (the renameSettlement lane
+   * — a cosmetic touches no canon fact), so this writes in draft AND canon; the
+   * gate that matters (premium/founder `canEdit`) is enforced in the viewer chrome,
+   * not here (viewing stays free at every tier). Follows the applyEvent persist
+   * triple exactly: stamp editedAt → updateSavedSettlement (the in-memory save
+   * entry) → persistSaveUpdate (the durable write) — so a map edit never GHOSTS on
+   * reload (the owner's most-bitten "survives one path, ghosts another" class,
+   * §10.4).
+   *
+   * `nextMapEdits` is the fully-resolved, pre-normalized container the LAZY viewer
+   * pane computes via domain/townMap/mapEdits.js. This eager action stays a dumb
+   * setter — it imports NO town-map domain, so the first-paint static closure is
+   * unmoved. A NULL / empty container DELETES the key, restoring absent ⇒
+   * byte-identical (the dormancy law). No random ids / wall-clock touch the blob:
+   * the only stamp (editedAt / timestamp) is a save-envelope field, never on the
+   * settlement, so same-seed generator byte-identity is untouched.
+   *
+   * No-ops when the id names no saved settlement (an unsaved draft has nowhere to
+   * persist). Defers its cloud write to an in-progress change-queue flush
+   * (flushSuppressPersist), which owns the single atomic commit (renameSettlement
+   * R2). Registered MECHANICAL in the operation manifest.
+   *
+   * @param {string|number} id
+   * @param {import('../domain/townMap/mapEdits.js').MapEdits | null | undefined} nextMapEdits
+   * @returns {void}
+   */
+  applyMapEdit: (id, nextMapEdits) => {
+    // `nextMapEdits` arrives PRE-NORMALIZED (the lazy pane's normalizeMapEdits →
+    // a non-empty container or null): a truthy value is set, a nullish value DROPS
+    // the key so the blob returns byte-identical to no-edits — never a hollow {}.
+    const now = new Date().toISOString();
+    /** @type {{ settlement: any, timestamp: string }|null} */
+    let persist = null;
+    set(state => {
+      const idx = state.savedSettlements.findIndex(s => String(s.id) === String(id));
+      if (idx === -1) return; // no persistence target — cosmetic edits home in a saved blob
+      const save = state.savedSettlements[idx];
+      const { mapEdits: _drop, ...rest } = save.settlement || {};
+      const nextSettlement = nextMapEdits ? { ...rest, mapEdits: cloneJson(nextMapEdits) } : rest;
+      state.savedSettlements[idx] = { ...save, settlement: nextSettlement, timestamp: now };
+      if (String(state.activeSaveId || '') === String(id) && state.settlement) {
+        state.settlement = nextSettlement;
+        state.editedAt = now;
+      }
+      persist = { settlement: cloneJson(nextSettlement), timestamp: now };
+    });
+    if (persist && !get().flushSuppressPersist) persistSaveUpdate(id, persist);
+  },
+
+  /**
    * Instrumentation hook for the REAL (cloud/localStorage) save path — the
    * Save-to-Library buttons + the SAVE_SETTLEMENT auth intent call
    * savesService.save() directly and rehydrate via setSavedSettlements, bypassing

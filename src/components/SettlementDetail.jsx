@@ -759,7 +759,7 @@ export default function SettlementDetail({
                 detail toolbar above stays full-width). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               {detailView === 'map'
-                ? <SettlementMapPane settlement={detail.settlement} />
+                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} />
                 : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />}
             </div>
           </Suspense>

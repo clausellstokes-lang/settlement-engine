@@ -115,6 +115,11 @@ export const OPERATIONS = Object.freeze({
   refreshSystemState: { opType:'refreshSystemState', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   hydrateFromSave: { opType:'hydrateFromSave', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   renameSettlement: { opType:'renameSettlement', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
+  // SM-3 — cosmetic town-map edit (mapEdits container: nudges / reroll / legend
+  // prefs). Mechanical: a durable blob write via the applyEvent persist triple.
+  // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (no
+  // dedicated map undo action ⇒ undoToken:null).
+  applyMapEdit: { opType:'applyMapEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   syncActiveNeighbourFields: { opType:'syncActiveNeighbourFields', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   recordCanonFlavorEntry: { opType:'recordCanonFlavorEntry', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'undoLastEvent' },
   retryOutbox: { opType:'retryOutbox', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },
