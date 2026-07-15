@@ -37,7 +37,12 @@
  * (sea-battle / convoy rolls) forks a stable composite key at the call site.
  */
 
-import { isPort } from './distanceRead.js';
+import {
+  isPort, hopWeeks, candidateRoutes, seaLaneAdjacency, activeSeaLanes,
+  hasSpatialLedger, getSpatialLedger,
+} from './distanceRead.js';
+import { chooseRoute, riskToleranceFromAlignment } from './embattlement.js';
+import { ARMY_ROLES, armyRecordOf } from './armyTransit.js';
 import { facetOf } from './cohesionWeave.js';
 import { TIER_ORDER, PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 
@@ -62,10 +67,26 @@ export const NAVAL_TUNING = Object.freeze({
   // not evaporate a yard that exists. Say "veto" to drop the floor (subsistence ⇒ no navy).]
   AFFORD_FLOOR: 0.5,
   AFFORD_MIN: 0.15,
+
+  // ── CONVOY (design §2) ────────────────────────────────────────────────────────
+  // The per-mode speed factor at the plan seam. Sea legs are ALREADY ~10× cheaper via
+  // the M8 cost calibration (a low sea-lane cost ⇒ few hopWeeks); the mode factor makes
+  // the advantage deliberate. A laden convoy is a little slower than an empty courier but
+  // still FASTER than the equivalent land march (ARMY_SPEED_FACTOR 1.5) — the sea's point.
+  CONVOY_SPEED_FACTOR: 1.2,
+  CONVOY_READINESS_SPEED_GAIN: 0.4, // a drilled navy sails steadier (mirrors army speed)
+  MAX_CONVOY_WEEKS: 52,
+  // THE STORM-SEASON EV PENALTY (design §2). A convoy's expected value is scaled DOWN by
+  // the season's own storm multiplier (winter 2.5 ⇒ EV ÷ 2.5) — winter crossings are rare
+  // by construction (the EV rarely clears zero when a storm prices up the passage). The
+  // storm law is READ off the frozen slot's self-describing stormSeasonCost.
+  CONVOY_THREAT_WEIGHT: 1.0, // how heavily a believed sea threat discounts the convoy EV
 });
 
 /** @param {number} x @returns {number} */
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+/** @param {unknown} v @param {number} f @returns {number} */
+function num(v, f) { return typeof v === 'number' && Number.isFinite(v) ? v : f; }
 /** @param {number} v @returns {number} 4-dp round for byte-tidy persisted floats */
 function round4(v) { return Math.round(v * 10000) / 10000; }
 /** @param {unknown} v @returns {Record<string, unknown>} */
@@ -195,4 +216,210 @@ export function navalStrengthOf(digest, item, id) {
  */
 export function hasWarNavy(digest, item, id) {
   return navalStrengthOf(digest, item, id) > 0;
+}
+
+// ══ Stage 2 — CONVOY (design §2) ═══════════════════════════════════════════════
+// A navy convoys an own/allied army over water. The record rides the SIBLING
+// `navalTransit` ledger (NOT the frozen slot, NOT the armyTransit ledger), carrying
+// BOTH ids: OWNER (the navy's home port) ≠ CARGO (the army's home — the allied case).
+
+/**
+ * @typedef {import('./armyTransit.js').ArmyTransitRecord & {
+ *   mode: 'sea', ownerId: string, cargoId: string|null, cargoStrength: number, targetId: string
+ * }} NavalTransitRecord
+ */
+
+/**
+ * Parse a raw record into a NavalTransitRecord, or null when it is not a naval record.
+ * Builds on armyRecordOf (so the role-coercion FIX is exercised — a 'convoy'/'blockade'
+ * role SURVIVES here instead of degrading to 'march') then folds the naval-specific fields
+ * (mode + the owner/cargo ids + the embarked army's strength + the blockade/convoy target).
+ * @param {unknown} rec @returns {NavalTransitRecord|null}
+ */
+export function navalRecordOf(rec) {
+  const base = armyRecordOf(rec);
+  if (!base) return null;
+  if (base.role !== ARMY_ROLES.CONVOY && base.role !== ARMY_ROLES.BLOCKADE) return null;
+  const r = asObject(rec);
+  return {
+    ...base,
+    mode: 'sea',
+    ownerId: r.ownerId != null ? String(r.ownerId) : base.armyId,
+    cargoId: r.cargoId != null ? String(r.cargoId) : null,
+    cargoStrength: Math.max(0, num(r.cargoStrength, 0)),
+    targetId: r.targetId != null ? String(r.targetId) : (base.destId || ''),
+  };
+}
+
+/**
+ * The live naval-transit ledger, or null when absent/dormant. The one read consumers use
+ * (mirror armyTransitLedger). @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @returns {Record<string, NavalTransitRecord> | null}
+ */
+export function navalTransitLedger(worldState) {
+  if (!hasSpatialLedger(worldState, 'navalTransit')) return null;
+  const raw = asObject(getSpatialLedger(worldState, 'navalTransit'));
+  /** @type {Record<string, NavalTransitRecord>} */
+  const out = {};
+  for (const id of Object.keys(raw)) {
+    const rec = navalRecordOf(raw[id]);
+    if (rec) out[id] = rec;
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+/**
+ * The transit time (integer weeks) for a laden convoy over a base courier hop-time. The
+ * per-mode factor (CONVOY_SPEED_FACTOR) is applied at the plan seam; a drilled navy sails
+ * a little steadier. Floored ≥ 1, capped. Pure. @param {number} baseHopWeeks @param {number} [readiness01]
+ * @returns {number}
+ */
+export function convoyTransitWeeks(baseHopWeeks, readiness01 = 0.5) {
+  const T = NAVAL_TUNING;
+  const base = Math.max(0, num(baseHopWeeks, 0));
+  if (base <= 0) return 0;
+  const rdy = clamp01(num(readiness01, 0.5));
+  const speedMult = 1 + T.CONVOY_READINESS_SPEED_GAIN * (rdy - 0.5) * 2;
+  const weeks = Math.ceil((base * T.CONVOY_SPEED_FACTOR) / Math.max(0.1, speedMult));
+  return Math.min(T.MAX_CONVOY_WEEKS, Math.max(1, weeks));
+}
+
+/** The self-describing STORM multiplier for a season, read off the frozen seaLanes slot's
+ *  own stormSeasonCost law. ≥ 1 (slow, not sever); 1 when absent/unknown. Pure.
+ *  @param {import('./distanceRead.js').SpatialDigest} digest @param {string|null|undefined} season @returns {number} */
+export function stormMultOf(digest, season) {
+  const lanes = activeSeaLanes(digest);
+  const table = lanes && lanes.stormSeasonCost;
+  const v = table && season != null ? table[String(season)] : undefined;
+  return typeof v === 'number' && Number.isFinite(v) && v >= 1 ? v : 1;
+}
+
+/**
+ * The CONVOY EXPECTED VALUE (design §2 — speed against ruin). Benefit ∝ the cargo delivered;
+ * risk = believed sea threat × the heaviest shared-fate loss band × cargo; and the whole EV
+ * is scaled DOWN by the season's storm multiplier — so a winter crossing (stormMult 2.5) is
+ * rarely worth it (the seasonal-campaigning texture at sea, for free). Pure, bounded.
+ * @param {{ cargoStrength?: number, threat01?: number, sharedFateLoss?: number, stormMult?: number }} [args]
+ * @returns {number}
+ */
+export function convoyEV({ cargoStrength = 0, threat01 = 0, sharedFateLoss = 0.6, stormMult = 1 } = {}) {
+  const cargo = Math.max(0, num(cargoStrength, 0));
+  const threat = clamp01(num(threat01, 0));
+  const loss = clamp01(num(sharedFateLoss, 0));
+  const storm = Math.max(1, num(stormMult, 1));
+  const benefit = cargo;
+  const risk = NAVAL_TUNING.CONVOY_THREAT_WEIGHT * threat * loss * cargo;
+  return round4((benefit - risk) / storm);
+}
+
+// ── CAPACITY (design §2 — the FIRST consumer of SEA_LANE_CAPACITY) ──────────────
+/** The codepoint-stable sea-edge keys a settlement-id path traverses (consecutive pairs
+ *  that are sea-lane-adjacent). @param {import('./distanceRead.js').SpatialDigest} digest
+ *  @param {string[]|null|undefined} path @returns {string[]} */
+export function seaEdgesOfPath(digest, path) {
+  const adj = seaLaneAdjacency(digest);
+  const nodes = Array.isArray(path) ? path.map(String) : [];
+  /** @type {string[]} */
+  const out = [];
+  for (let i = 0; i < nodes.length - 1; i++) {
+    const a = nodes[i];
+    const b = nodes[i + 1];
+    if (adj.get(a)?.has(b)) out.push(a < b ? `${a}|${b}` : `${b}|${a}`);
+  }
+  return out;
+}
+
+/** The recorded (M8) per-lane capacity bound, read off the frozen slot's edges (all uniform
+ *  SEA_LANE_CAPACITY). The convoy layer is its FIRST consumer. @param {import('./distanceRead.js').SpatialDigest} digest @returns {number} */
+export function seaLaneCapacityOf(digest) {
+  const lanes = activeSeaLanes(digest);
+  const edges = lanes && Array.isArray(lanes.edges) ? lanes.edges : [];
+  for (const e of edges) { const c = num(e?.capacity, 0); if (c > 0) return c; }
+  return 10; // the M8 default (SEA_LANE_CAPACITY) when no edge records one
+}
+
+/**
+ * Is there throughput headroom for a NEW convoy over `path`? The convoy is the FIRST
+ * consumer of the recorded-but-unenforced SEA_LANE_CAPACITY: a lane already carrying
+ * `capacity` active convoys is FULL (a new convoy over it DEFERS — deferral-visible). Pure.
+ * @param {import('./distanceRead.js').SpatialDigest} digest
+ * @param {Record<string, NavalTransitRecord>|null|undefined} activeRecords
+ * @param {string[]} path @returns {{ available: boolean, fullEdge: string|null, capacity: number }}
+ */
+export function convoyCapacityAvailable(digest, activeRecords, path) {
+  const capacity = seaLaneCapacityOf(digest);
+  /** @type {Map<string, number>} */
+  const load = new Map();
+  for (const rec of Object.values(asObject(activeRecords))) {
+    const nr = navalRecordOf(rec);
+    if (!nr || nr.role !== ARMY_ROLES.CONVOY) continue;
+    for (const e of seaEdgesOfPath(digest, nr.path)) load.set(e, (load.get(e) || 0) + 1);
+  }
+  for (const e of seaEdgesOfPath(digest, path)) {
+    if ((load.get(e) || 0) >= capacity) return { available: false, fullEdge: e, capacity };
+  }
+  return { available: true, fullEdge: null, capacity };
+}
+
+/**
+ * planConvoy (design §2): mint a NavalTransitRecord (mode:'sea', role CONVOY) carrying an
+ * army over water from the NAVY's home port (owner) to a destination. Carries BOTH ids —
+ * OWNER (the navy) ≠ CARGO (the army's home, the allied case). The route is the M1 danger
+ * re-score over the frozen sea-augmented digest (a convoy prefers the safe sea road); the
+ * transit time rides the per-mode convoy speed. Returns null when unreachable/unmapped OR
+ * when capacity DEFERS the crossing (deferral-visible). Pure + deterministic.
+ * @param {import('./distanceRead.js').SpatialDigest} digest
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {Object} args
+ * @param {string} args.ownerId       the navy's home port (embarkation)
+ * @param {string} args.cargoId       the embarked army's home settlement
+ * @param {string} args.destId        the landing port
+ * @param {number} args.ownerStrength the navy's aggregate naval strength (escort)
+ * @param {number} args.cargoStrength the embarked army's aggregate strength
+ * @param {number} [args.readiness01] the navy's 0..1 readiness
+ * @param {{ lawfulness01?: number }|null} [args.alignment]
+ * @param {number} args.departTick
+ * @param {string|null} [args.season]
+ * @param {Record<string, NavalTransitRecord>|null} [args.activeRecords] the live ledger (capacity check)
+ * @param {number} [args.supplyQuality] @param {number} [args.funding]
+ * @returns {{ record: NavalTransitRecord } | { deferred: 'capacity', fullEdge: string } | null}
+ */
+export function planConvoy(digest, worldState, {
+  ownerId, cargoId, destId, ownerStrength, cargoStrength, readiness01 = 0.5,
+  alignment = null, departTick, season = null, activeRecords = null,
+  supplyQuality = 1, funding = 0.5,
+}) {
+  if (!digest) return null;
+  const owner = String(ownerId);
+  const dest = String(destId);
+  if (owner === dest) return null;
+  const scored = chooseRoute(digest, worldState, owner, dest, riskToleranceFromAlignment(alignment), season);
+  /** @type {string[]} */
+  let path;
+  if (scored && Array.isArray(scored.path) && scored.path.length) {
+    path = scored.path.map(String);
+  } else {
+    const cands = candidateRoutes(digest, owner, dest, 1);
+    if (!cands.length) return null;
+    path = cands[0].path.map(String);
+  }
+  // A convoy must actually SAIL — the route has to traverse at least one sea edge (else it
+  // is a land march, not a convoy; the caller should plan an army march instead).
+  if (seaEdgesOfPath(digest, path).length === 0) return null;
+  // CAPACITY (deferral-visible): a full lane defers the crossing.
+  const cap = convoyCapacityAvailable(digest, activeRecords, path);
+  if (!cap.available) return { deferred: 'capacity', fullEdge: /** @type {string} */ (cap.fullEdge) };
+  const base = hopWeeks(digest, owner, dest, season);
+  if (base == null) return null;
+  const weeks = convoyTransitWeeks(base, readiness01);
+  const depart = Math.max(0, Math.floor(num(departTick, 0)));
+  const record = navalRecordOf({
+    armyId: owner, role: ARMY_ROLES.CONVOY, ownerId: owner, cargoId: String(cargoId),
+    originId: owner, destId: dest, targetId: dest, path,
+    departTick: depart, arrivalTick: depart + weeks, position01: 0,
+    strength: Math.max(0, num(ownerStrength, 0)), cargoStrength: Math.max(0, num(cargoStrength, 0)),
+    readiness: clamp01(num(readiness01, 0.5)), supplyQuality: clamp01(num(supplyQuality, 1)),
+    funding: clamp01(num(funding, 0.5)), beliefStaleness: 0, lastTick: depart,
+  });
+  return record ? { record } : null;
 }
