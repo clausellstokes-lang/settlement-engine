@@ -49,6 +49,7 @@ import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatia
 import { buildPressureSummary, settlementStrength, applyRelationshipPatch } from './relationshipEvolution.js';
 import { readBeliefStrength, readBeliefRelationship, governingCoalition } from './beliefMap.js';
 import { buildThreatByCid } from './martialReadiness.js';
+import { faithAlignmentQuadrant, crossPressureMediation } from '../spatial/cohesionWeave.js';
 import { evil01 } from './deityAxes.js';
 import { relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
 import { deepClone } from '../clone.js';
@@ -87,6 +88,34 @@ export const PEACE_TERMS_TUNING = Object.freeze({
   WEALTH_SCALE: 1.0,
   /** Loser ally-network saturation (edges) for the compelled-alliance appraisal. */
   ALLY_SATURATION: 3,
+
+  // ── WAVE-3: mediation at the table (§13 / §14.2) ─────────────────────────
+  /** §12 magnanimity nudge: a mediated peace softens the term budget by this
+   *  bounded fraction (a neighbour's envoys carry lighter terms both courts hear). */
+  MEDIATION_SOFTEN: 0.2,
+  /** The trust a named mediator earns on BOTH its edges (the E1 reactions bump). */
+  MEDIATION_TRUST_W: 0.12,
+
+  // ── WAVE-3: coalition negotiation + the separate exit (§7 / §13) ─────────
+  /** The §H-loaded peel read: exhaustion vs tie-strength weights. A war-weary
+   *  member with weak ties to its co-besiegers peels; a fresh, close one stays. */
+  PEEL_EXHAUSTION_W: 0.6,
+  PEEL_TIE_W: 0.5,
+  /** The peel-propensity above which a coalition member takes a SEPARATE EXIT
+   *  (buys its own smaller peace and abandons its co-besiegers). */
+  PEEL_THRESHOLD: 0.5,
+  /** The lighter terms a separate-exit member gets (it bargains alone, not with
+   *  the coalition's combined weight) — its own budget scales by this. */
+  SEPARATE_EXIT_BUDGET: 0.7,
+  /** §7 THE EXIT'S PRICE: the resentment a betrayed co-besieger holds toward the
+   *  deserter (bounded; typed 'coalition_betrayal' ⇒ the §5 revanchism clock reads it). */
+  BETRAYAL_RESENTMENT_W: 0.35,
+  /** §7 the reliability discount a deserter carries in FUTURE table-strength sums —
+   *  RECORDED on the fracture (the W-DOCTRINE-2 credibility seam), not yet enforced. */
+  CREDIBILITY_HIT: 0.3,
+  /** How many ticks a fracture record stays live for the coalition_fracture peace
+   *  reason to consume (the peel is legible for a window after it is signed). */
+  FRACTURE_WINDOW: 6,
 });
 
 // ── The typed term catalog (§11) ────────────────────────────────────────────
@@ -612,7 +641,7 @@ export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, ti
 
     const mint = mintTreaty({
       victorId, loserId, believedMargin, worldState: workingState, snapshot,
-      pIndex, threatByCid, adjacency, truthFor, tick,
+      pIndex, threatByCid, adjacency, truthFor, tick, edges,
     });
     if (!mint) continue; // white peace / no affordable term ⇒ no key (the clean exit)
     nextLedger[treatyPairKey(victorId, loserId)] = mint.treaty;
@@ -703,21 +732,53 @@ export function advanceTreaties({ snapshot, worldState, graph, pIndex = null, ti
  * Build a treaty from a resolved victor/loser + budget/ranking, plus a closure
  * that applies the mint-time executions. Returns null on white peace / no
  * affordable term (the clean exit — no key materializes).
+ *
+ * WAVE-3 composes the table (§7 / §13): a named MEDIATOR softens the budget +
+ * earns trust both ways; a co-besieger COALITION either negotiates JOINTLY (one
+ * treaty, burden split by strength shares) or lets the victor take a SEPARATE
+ * EXIT (a lighter solo peace that ABANDONS its co-besiegers — betrayal priced,
+ * a fracture record typed for the coalition_fracture peace reason to consume).
+ * The joint-vs-peel choice is a DETERMINISTIC §H-loaded read (the module's
+ * no-rng law): the loading is exhaustion + tie-strength, resolved by threshold.
+ *
  * @param {{ victorId: string, loserId: string, believedMargin: number,
  *           worldState: Record<string, unknown>, snapshot: { byId?: Map<string, Record<string, unknown>> },
  *           pIndex: Record<string, unknown> | null, threatByCid: Map<string, number>,
- *           adjacency: Map<string, Set<string>>, truthFor: (id: string) => number, tick: number }} args
+ *           adjacency: Map<string, Set<string>>, truthFor: (id: string) => number, tick: number,
+ *           edges: Array<Record<string, unknown>> }} args
  * @returns {{ treaty: TreatyRecord, signingBeat: Record<string, unknown>,
  *             applyMintEffects: (ws: Record<string, unknown>, edges: Array<Record<string, unknown>>, now: unknown) => Record<string, unknown> } | null}
  */
 function mintTreaty(args) {
-  const { victorId, loserId, believedMargin, worldState, snapshot, pIndex, threatByCid, adjacency, truthFor, tick } = args;
+  const { victorId, loserId, believedMargin, worldState, snapshot, pIndex, threatByCid, adjacency, truthFor, tick, edges } = args;
   const { margin01, budget, whitePeace } = termBudgetFor(believedMargin);
   if (whitePeace || budget <= 0) return null;
 
   const victorItem = snapshot?.byId?.get?.(victorId) || null;
   const loserItem = snapshot?.byId?.get?.(loserId) || null;
   const press = alignmentPress(victorItem);
+
+  // ── MEDIATION (§13): a cross-pressured neighbour brokering the table softens
+  // the terms (the §12 magnanimity nudge — bounded) and earns trust both ways.
+  const mediator = findCrossPressuredMediator(snapshot, { edges }, victorId, loserId);
+  let effectiveBudget = mediator ? budget * (1 - PEACE_TERMS_TUNING.MEDIATION_SOFTEN) : budget;
+
+  // ── COALITION (§7): the victor's co-besiegers of this loser. >1 member ⇒ the
+  // table is COMPOSED; the §H-loaded peel read decides joint vs separate exit.
+  const deployments = /** @type {Record<string, { targetId?: unknown }>} */ (
+    worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {});
+  const warExhaustion = /** @type {Record<string, unknown>} */ (
+    worldState.warExhaustion && typeof worldState.warExhaustion === 'object' ? worldState.warExhaustion : {});
+  const coBesiegers = coBesiegersOf(deployments, victorId, loserId);
+  const coalition = [victorId, ...coBesiegers].sort();
+  const { mode, peelPropensity } = chooseCoalitionMode({
+    victorExhaustion01: Number(warExhaustion[victorId]) || 0,
+    avgTie01: avgTieStrength(worldState, edges, victorId, coBesiegers),
+    coalitionSize: coalition.length,
+  });
+  const separateExit = coalition.length > 1 && mode === 'separate_exit';
+  if (separateExit) effectiveBudget *= PEACE_TERMS_TUNING.SEPARATE_EXIT_BUDGET; // a solo bargain is lighter
+
   const ranked = appraiseLoserPortfolio({
     victorId, loserId, worldState, victorItem, loserItem,
     victorPressure: buildPressureSummary(pIndex, victorId),
@@ -725,48 +786,86 @@ function mintTreaty(args) {
     loserTruthStrength: truthFor(loserId),
     loserAllyStrength01: loserAllyStrength(adjacency, loserId, victorId),
   });
-  const { terms, budgetSpent } = draftTerms({ ranked, budget, margin01, press, tick });
+  const { terms, budgetSpent } = draftTerms({ ranked, budget: effectiveBudget, margin01, press, tick });
   if (terms.length === 0) return null; // budget too thin for any term ⇒ clean exit
 
   const victorName = String(/** @type {{ name?: unknown }} */ (victorItem || {}).name || victorId);
   const loserName = String(/** @type {{ name?: unknown }} */ (loserItem || {}).name || loserId);
+
+  /** @type {string[]} */
+  const receipts = [`The Peace of ${loserName} — signed under ${victorName}'s terms (${terms.map((t) => t.type).join(', ')}).`];
+  if (mediator) receipts.push(`Brokered by ${mediator.name}, torn between the courts — the terms were the lighter for it.`);
 
   /** @type {TreatyRecord} */
   const treaty = {
     parties: [victorId, loserId],
     victorId,
     loserId,
+    victorName,
+    loserName,
     mintedTick: tick,
     believedMarginAtSignature: round4(believedMargin),
-    budgetGranted: round4(budget),
+    budgetGranted: round4(effectiveBudget),
     budgetSpent,
     terms,
     complianceState: 'honored',
-    receipts: [`The Peace of ${loserName} — signed under ${victorName}'s terms (${terms.map((t) => t.type).join(', ')}).`],
+    receipts,
   };
+  if (mediator) treaty.mediator = { id: mediator.id, name: mediator.name };
+
+  // JOINT coalition: the roster + committed-strength shares are legible on the
+  // treaty (§7 — reparations distribute pro-rata; the transfer physics credit the
+  // lead negotiator, per-member distribution is a later-wave transfer seam).
+  if (coalition.length > 1 && !separateExit) {
+    treaty.coalitionScope = coalition;
+    treaty.shares = coalitionShares(coalition, truthFor);
+    receipts.push(`A coalition peace — ${coalition.length} besiegers bind ${loserName} jointly, the spoils split by the strength each brought.`);
+  }
+  // SEPARATE EXIT: the typed fracture record (§7) — the deserter, its abandoned
+  // co-besiegers, the coalition size, and the recorded credibility hit (the
+  // W-DOCTRINE-2 reliability seam). The coalition_fracture peace reason reads it.
+  if (separateExit) {
+    const fractureReceipt = `${victorName} left the siege — its own peace bought, its co-besiegers abandoned at the walls.`;
+    treaty.separateExit = true;
+    treaty.fracture = {
+      deserter: victorId,
+      abandoned: coBesiegers,
+      coalitionSize: coalition.length,
+      credibilityHit: round4(PEACE_TERMS_TUNING.CREDIBILITY_HIT),
+      peelPropensity,
+      tick,
+      receipt: fractureReceipt,
+    };
+    receipts.push(fractureReceipt);
+  }
 
   const signingBeat = {
     kind: 'treaty_signed',
     impactKind: 'diplomacy',
     tick,
-    headline: `${victorName} dictates the peace with ${loserName}`,
-    summary: `A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(budget).toFixed(2)} budget.`,
+    headline: separateExit
+      ? `${victorName} peels from the siege and makes a separate peace with ${loserName}`
+      : `${victorName} dictates the peace with ${loserName}`,
+    summary: `A treaty is signed — ${terms.length} term${terms.length === 1 ? '' : 's'} at ${budgetSpent.toFixed(2)} of a ${round4(effectiveBudget).toFixed(2)} budget${mediator ? `, brokered by ${mediator.name}` : ''}.`,
     parties: [victorId, loserId],
   };
 
   /** Apply the mint-time executions (§11): the relational overlay nudge + the
-   *  seam registrations. Streams/readiness/war-block execute lazily via the reads
-   *  + the advance pass — nothing to write at mint. */
-  const applyMintEffects = (/** @type {Record<string, unknown>} */ ws, /** @type {Array<Record<string, unknown>>} */ edges, /** @type {unknown} */ now) => {
+   *  seam registrations, plus WAVE-3 the mediation trust (both mediator edges)
+   *  and the separate-exit betrayal (each abandoned co-besiegers' edge). Streams/
+   *  readiness/war-block execute lazily via the reads + the advance pass. */
+  const applyMintEffects = (/** @type {Record<string, unknown>} */ ws, /** @type {Array<Record<string, unknown>>} */ eff, /** @type {unknown} */ now) => {
     let state = ws;
     for (const term of terms) {
       if (term.type === 'compelled_alliance') {
         // The relationship-overlay nudge (the E1c overture lane): the loser is
         // pulled toward the victor's banner AND its resentment rises (compelled
         // loyalty is resented — §11's defection window is a wave-3 read).
-        state = nudgeCompelledAlliance(state, edges, loserId, victorId, term.magnitude, now);
+        state = nudgeCompelledAlliance(state, eff, loserId, victorId, term.magnitude, now);
       }
     }
+    if (mediator) state = accrueMediationTrust(state, eff, mediator.id, victorId, loserId, now);
+    if (separateExit) state = accrueBetrayal(state, eff, victorId, coBesiegers, now);
     return state;
   };
 
@@ -812,7 +911,7 @@ function nudgeCompelledAlliance(worldState, edges, loserId, victorId, magnitude,
   return applyRelationshipPatch(worldState, {
     relationshipKey: key,
     relationshipPatch: { trust, resentment },
-    incidentType: 'compelled_alliance',
+    metadata: { incidentType: 'compelled_alliance' },
     proposalPayload: null,
   }, overlayStamp(worldState, now));
 }
@@ -834,7 +933,7 @@ function accrueStrainResentment(worldState, edges, loserId, victorId, burden01, 
   return applyRelationshipPatch(worldState, {
     relationshipKey: key,
     relationshipPatch: { resentment },
-    incidentType: 'tribute_strain',
+    metadata: { incidentType: 'tribute_strain' },
     proposalPayload: null,
   }, overlayStamp(worldState, now));
 }
@@ -895,6 +994,429 @@ function victorMonitorReach(victorId, loserId, worldState, truthFor) {
   if (truth <= 0) return believed <= 0 ? 1 : 0.5;
   const err = Math.abs(believed - truth) / Math.max(1, truth);
   return clamp01(1 - err);
+}
+
+// ── Mediation at the table (§13 / §14.2 — the cross-pressured broker) ────────
+//
+// The single source of the cross-pressured-mediator read: the MINT names a
+// qualified mediator in the treaty (softening the terms, earning trust both
+// directions), and peaceReasons.advancePeaceReasons imports THIS finder for its
+// mediation peace-reason — one finder, so the reason and the treaty never drift.
+
+/**
+ * The faith×alignment proximity inputs for a pair of snapshot items (the
+ * generosityKernel faithProximity derivation, kept identical so the quadrant
+ * reads agree across movers).
+ * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemA
+ * @param {{ settlement?: { config?: { primaryDeitySnapshot?: Record<string, unknown> | null } } } | null | undefined} itemB
+ * @returns {{ samePatron: boolean, alignmentKinship01: number }}
+ */
+export function faithProximityOf(itemA, itemB) {
+  const dA = itemA?.settlement?.config?.primaryDeitySnapshot || null;
+  const dB = itemB?.settlement?.config?.primaryDeitySnapshot || null;
+  const refA = dA && dA._deityRef != null ? String(dA._deityRef) : '';
+  const refB = dB && dB._deityRef != null ? String(dB._deityRef) : '';
+  const samePatron = !!(refA && refA === refB);
+  const alignmentKinship01 = clamp01(1 - Math.abs(evil01(dA) - evil01(dB)));
+  return { samePatron, alignmentKinship01 };
+}
+
+/**
+ * Find the first (codepoint-ordered) third settlement adjacent to BOTH
+ * belligerents whose quadrant reads are cross-pressured per cohesionWeave — the
+ * neutral broker torn between the pair (a faith-brother of one, alignment-kin of
+ * the other). Null when none stands between them.
+ * @param {{ byId?: Map<string, Record<string, unknown>> } | null | undefined} snapshot
+ * @param {{ edges?: Array<Record<string, unknown>> } | null} graph
+ * @param {string} partyId @param {string} foeId
+ * @returns {{ id: string, name: string } | null}
+ */
+export function findCrossPressuredMediator(snapshot, graph, partyId, foeId) {
+  const edges = Array.isArray(graph?.edges) ? graph.edges : [];
+  const adjacency = buildAdjacency(edges);
+  const partyItem = snapshot?.byId?.get?.(partyId);
+  const foeItem = snapshot?.byId?.get?.(foeId);
+  for (const mId of [...adjacency.keys()].sort()) {
+    if (mId === partyId || mId === foeId) continue;
+    const near = /** @type {Set<string>} */ (adjacency.get(mId));
+    if (!near.has(partyId) || !near.has(foeId)) continue;
+    const mItem = snapshot?.byId?.get?.(mId);
+    if (!mItem) continue;
+    const toA = faithAlignmentQuadrant(faithProximityOf(mItem, partyItem));
+    const toB = faithAlignmentQuadrant(faithProximityOf(mItem, foeItem));
+    if (crossPressureMediation({ toA, toB }).crossPressured) {
+      return { id: mId, name: String(/** @type {{ name?: unknown }} */ (mItem).name || mId) };
+    }
+  }
+  return null;
+}
+
+/**
+ * Bump trust on BOTH the mediator's edges (mediator↔victor and mediator↔loser)
+ * — the broker earns standing in both courts (§13 / the E1 reactions machinery).
+ * Typed 'mediation' incidents; missing edges are byte-safe no-ops.
+ * @param {Record<string, unknown>} worldState @param {Array<Record<string, unknown>>} edges
+ * @param {string} mediatorId @param {string} victorId @param {string} loserId @param {unknown} now
+ * @returns {Record<string, unknown>}
+ */
+function accrueMediationTrust(worldState, edges, mediatorId, victorId, loserId, now) {
+  let state = worldState;
+  for (const otherId of [victorId, loserId]) {
+    const key = edgeKeyBetween(edges, mediatorId, otherId);
+    if (!key) continue;
+    const current = /** @type {{ relationshipStates?: Record<string, { trust?: number }> }} */ (state).relationshipStates?.[key];
+    const trust = clamp01((Number(current?.trust) || 0) + PEACE_TERMS_TUNING.MEDIATION_TRUST_W);
+    state = applyRelationshipPatch(state, {
+      relationshipKey: key,
+      relationshipPatch: { trust },
+      metadata: { incidentType: 'mediation' },
+      proposalPayload: null,
+    }, overlayStamp(state, now));
+  }
+  return state;
+}
+
+// ── Coalition negotiation + the separate exit (§7 / §13) ─────────────────────
+
+/**
+ * The victor's co-besieger coalition against this loser: OTHER attackers whose
+ * live deployment targets the same loser (the exact primitive the coalition_
+ * fracture peace reason reads — reused so the two features stay consistent).
+ * Codepoint-ordered; excludes the victor itself.
+ * @param {Record<string, { targetId?: unknown }> | null | undefined} deployments
+ * @param {string} victorId @param {string} loserId @returns {string[]}
+ */
+export function coBesiegersOf(deployments, victorId, loserId) {
+  if (!deployments || typeof deployments !== 'object') return [];
+  /** @type {string[]} */
+  const out = [];
+  for (const attackerId of Object.keys(deployments).sort()) {
+    if (attackerId === victorId) continue;
+    if (String(deployments[attackerId]?.targetId || '') === String(loserId)) out.push(attackerId);
+  }
+  return out;
+}
+
+/**
+ * The §H-LOADED coalition-mode read (DETERMINISTIC — the module's no-rng law):
+ * a member takes a SEPARATE EXIT when its peel-propensity clears the threshold.
+ * Propensity is loaded by the member's own war-exhaustion (a worn court buys the
+ * quick separate peace) and the WEAKNESS of its ties to the coalition (weak ties
+ * desert; strong ties hold the line). No coalition (no co-besiegers) ⇒ never a
+ * peel — the plain per-pair peace. Pure.
+ * @param {{ victorExhaustion01: number, avgTie01: number, coalitionSize: number }} args
+ * @returns {{ mode: 'joint' | 'separate_exit', peelPropensity: number }}
+ */
+export function chooseCoalitionMode({ victorExhaustion01, avgTie01, coalitionSize }) {
+  if (!(Number(coalitionSize) > 1)) return { mode: 'joint', peelPropensity: 0 };
+  const peelPropensity = round4(clamp01(
+    PEACE_TERMS_TUNING.PEEL_EXHAUSTION_W * clamp01(Number(victorExhaustion01) || 0)
+    + PEACE_TERMS_TUNING.PEEL_TIE_W * (1 - clamp01(Number(avgTie01) || 0)),
+  ));
+  return { mode: peelPropensity >= PEACE_TERMS_TUNING.PEEL_THRESHOLD ? 'separate_exit' : 'joint', peelPropensity };
+}
+
+/** Committed-strength shares for a coalition, pro-rata to each member's strength
+ *  (§7: reparations split by contribution). Codepoint-keyed, sums to ~1.
+ *  @param {string[]} members @param {(id: string) => number} truthFor @returns {Record<string, number>} */
+function coalitionShares(members, truthFor) {
+  const weights = members.map((id) => Math.max(0, Number(truthFor(id)) || 0));
+  const total = weights.reduce((s, w) => s + w, 0);
+  /** @type {Record<string, number>} */
+  const shares = {};
+  for (let i = 0; i < members.length; i++) {
+    shares[members[i]] = total > 0 ? round4(weights[i] / total) : round4(1 / members.length);
+  }
+  return shares;
+}
+
+/** The victor's average believed tie-strength (trust) to its co-besiegers — the
+ *  cohesion the peel read weighs against. No edges ⇒ 0 (isolated ⇒ peels easily).
+ *  @param {Record<string, unknown>} worldState @param {Array<Record<string, unknown>>} edges
+ *  @param {string} victorId @param {string[]} coBesiegers @returns {number} */
+function avgTieStrength(worldState, edges, victorId, coBesiegers) {
+  if (coBesiegers.length === 0) return 0;
+  let sum = 0; let n = 0;
+  for (const ally of coBesiegers) {
+    const key = edgeKeyBetween(edges, victorId, ally);
+    if (!key) continue;
+    const rel = /** @type {{ relationshipStates?: Record<string, { trust?: number }> }} */ (worldState).relationshipStates?.[key];
+    sum += clamp01(Number(rel?.trust) || 0); n += 1;
+  }
+  return n > 0 ? clamp01(sum / n) : 0;
+}
+
+/**
+ * §7 THE EXIT'S PRICE: mint betrayal on every abandoned co-besieger's edge to the
+ * deserter — resentment bump, typed 'coalition_betrayal' (the /betray/ revanchism
+ * clock reads it). The reliability discount is RECORDED on the fracture record
+ * (the W-DOCTRINE-2 credibility seam), not yet enforced. Missing edges are no-ops.
+ * @param {Record<string, unknown>} worldState @param {Array<Record<string, unknown>>} edges
+ * @param {string} deserterId @param {string[]} abandoned @param {unknown} now
+ * @returns {Record<string, unknown>}
+ */
+function accrueBetrayal(worldState, edges, deserterId, abandoned, now) {
+  let state = worldState;
+  for (const allyId of abandoned) {
+    const key = edgeKeyBetween(edges, allyId, deserterId);
+    if (!key) continue;
+    const current = /** @type {{ relationshipStates?: Record<string, { resentment?: number, trust?: number }> }} */ (state).relationshipStates?.[key];
+    const resentment = clamp01((Number(current?.resentment) || 0) + PEACE_TERMS_TUNING.BETRAYAL_RESENTMENT_W);
+    const trust = clamp01((Number(current?.trust) || 0) * (1 - PEACE_TERMS_TUNING.CREDIBILITY_HIT));
+    state = applyRelationshipPatch(state, {
+      relationshipKey: key,
+      relationshipPatch: { resentment, trust },
+      metadata: { incidentType: 'coalition_betrayal' },
+      proposalPayload: null,
+    }, overlayStamp(state, now));
+  }
+  return state;
+}
+
+/**
+ * Every live fracture record that names `partyId` among the ABANDONED within the
+ * fracture window — the durable, legible signal the coalition_fracture peace
+ * reason consumes (a peel is legible for a window even after the deserter's
+ * deployment is recalled). Returns the deserter + coalition size per fracture.
+ * @param {Record<string, unknown> | null | undefined} worldState
+ * @param {unknown} partyId @param {number} tick
+ * @returns {Array<{ deserter: string, coalitionSize: number, abandonedCount: number, tick: number }>}
+ */
+export function fracturesAbandoning(worldState, partyId, tick) {
+  const ledger = treatyLedgerOf(worldState);
+  if (!ledger) return [];
+  const id = String(partyId);
+  const now = Number(tick);
+  /** @type {Array<{ deserter: string, coalitionSize: number, abandonedCount: number, tick: number }>} */
+  const out = [];
+  for (const key of Object.keys(ledger).sort()) {
+    const fr = /** @type {{ deserter?: unknown, abandoned?: unknown[], coalitionSize?: unknown, tick?: unknown }} */ (
+      /** @type {Record<string, unknown>} */ (ledger[key]).fracture);
+    if (!fr || !Array.isArray(fr.abandoned)) continue;
+    if (!fr.abandoned.map(String).includes(id)) continue;
+    const at = Number(fr.tick);
+    if (Number.isFinite(now) && Number.isFinite(at) && now - at > PEACE_TERMS_TUNING.FRACTURE_WINDOW) continue;
+    out.push({
+      deserter: String(fr.deserter || ''),
+      coalitionSize: Math.max(0, Math.floor(Number(fr.coalitionSize) || 0)),
+      abandonedCount: fr.abandoned.length,
+      tick: Number.isFinite(at) ? at : now,
+    });
+  }
+  return out;
+}
+
+// ── THE TREATY DOCUMENT read-model (§13 legibility — the structured facts) ────
+//
+// PURE structured read: the treaty rendered as the vision's document — parties,
+// terms with years remaining + per-term compliance, the fraying seam named.
+// House-VOICE prose lives in the lazy display layer (domain/display/
+// treatyDocument.js); THIS returns only ledger facts (the InstitutionCard honesty
+// gate — never invent, render what the ledger holds). Dark/absent ⇒ null.
+
+/** @param {number} expiresTick @param {number} tick @returns {number} */
+function yearsRemainingOf(expiresTick, tick) {
+  const ticks = Number(expiresTick) - Number(tick);
+  if (!(ticks > 0)) return 0;
+  return Math.ceil(ticks / PEACE_TERMS_TUNING.TICKS_PER_YEAR);
+}
+
+/** Compliance rank for the fraying-seam pick (defaulted worst). @param {string} s @returns {number} */
+function complianceRank(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1 : 0; }
+
+/**
+ * The term nearest default — the seam that will tear first (§13 "the DM watches
+ * the seam that will tear"). Worst observed compliance wins; ties break to the
+ * term closest to expiry, then codepoint. Null when every term holds clean.
+ * @param {TermRecord[]} terms @param {number} tick @returns {TermRecord | null}
+ */
+export function frayingTermOf(terms, tick) {
+  /** @type {TermRecord | null} */
+  let worst = null;
+  for (const t of terms) {
+    if (complianceRank(String(t.complianceState)) <= 0) continue; // honored terms do not fray
+    if (!worst) { worst = t; continue; }
+    const dr = complianceRank(String(t.complianceState)) - complianceRank(String(worst.complianceState));
+    if (dr > 0) { worst = t; continue; }
+    if (dr < 0) continue;
+    const dy = yearsRemainingOf(t.expiresTick, tick) - yearsRemainingOf(worst.expiresTick, tick);
+    if (dy < 0 || (dy === 0 && String(t.type) < String(worst.type))) worst = t;
+  }
+  return worst;
+}
+
+/**
+ * A terse, dependency-free fraying summary the irony brief renders (§14.4 — "the
+ * peace holds by two terms of five; the tribute frays"). honoredCount / total +
+ * the fraying term's type. Pure; safe on any treaty record.
+ * @param {Record<string, unknown> | null | undefined} treaty @param {number} tick
+ * @returns {{ total: number, honored: number, frayingType: string | null, line: string } | null}
+ */
+export function treatyFrayingSummary(treaty, tick) {
+  const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty?.terms) ? treaty.terms : []);
+  if (terms.length === 0) return null;
+  const honored = terms.filter((t) => complianceRank(String(t.complianceState)) <= 0).length;
+  const fray = frayingTermOf(terms, tick);
+  const frayingType = fray ? String(fray.type) : null;
+  const line = frayingType
+    ? `The peace holds by ${honored} term${honored === 1 ? '' : 's'} of ${terms.length}; the ${termLabel(frayingType)} frays.`
+    : `The peace holds — all ${terms.length} term${terms.length === 1 ? '' : 's'} stand.`;
+  return { total: terms.length, honored, frayingType, line };
+}
+
+/** A short human label for a term type (the document/irony voice). @param {string} type @returns {string} */
+export function termLabel(type) {
+  switch (type) {
+    case 'tribute': return 'tribute';
+    case 'reparations': return 'reparations';
+    case 'resource_share': return 'resource share';
+    case 'compelled_alliance': return 'compelled alliance';
+    case 'demilitarization': return 'demilitarization';
+    case 'non_aggression': return 'non-aggression pact';
+    case 'occupation_continuation': return 'occupation';
+    case 'puppet_seat': return 'installed seat';
+    case 'disclosure': return 'disclosure clause';
+    default: return String(type).replace(/_/g, ' ');
+  }
+}
+
+/**
+ * @typedef {Object} TreatyTermView
+ * @property {string} type
+ * @property {string} label
+ * @property {string} family
+ * @property {number} magnitude
+ * @property {number} yearsRemaining
+ * @property {string} complianceState
+ * @property {number} burden01
+ * @property {boolean} fraying   whether this is the seam nearest default
+ * @property {string} [good]
+ */
+
+/**
+ * @typedef {Object} TreatyDocument
+ * @property {string} pairKey
+ * @property {string} victorId @property {string} loserId
+ * @property {string} victorName @property {string} loserName
+ * @property {number} signedTick
+ * @property {number} believedMarginAtSignature
+ * @property {number} budgetGranted @property {number} budgetSpent
+ * @property {string} complianceState
+ * @property {TreatyTermView[]} terms
+ * @property {string | null} frayingType
+ * @property {{ id: string, name: string } | null} mediator
+ * @property {string[] | null} coalitionScope
+ * @property {Record<string, number> | null} shares
+ * @property {boolean} separateExit
+ * @property {{ deserter: string, abandoned: string[], coalitionSize: number, credibilityHit: number, receipt: string } | null} fracture
+ * @property {string[]} receipts
+ * @property {{ total: number, honored: number, frayingType: string | null, line: string } | null} summary
+ */
+
+/** Locate a treaty by directed OR undirected pair key (`victor>loser`). Accepts
+ *  either direction. @param {TreatyLedger | null} ledger @param {string} pairKey @returns {TreatyRecord | null} */
+function findTreatyByKey(ledger, pairKey) {
+  if (!ledger) return null;
+  if (ledger[pairKey]) return ledger[pairKey];
+  // Try the reverse direction (the caller may hold either order).
+  const parts = String(pairKey).split('>');
+  if (parts.length === 2) {
+    const rev = treatyPairKey(parts[1], parts[0]);
+    if (ledger[rev]) return ledger[rev];
+  }
+  return null;
+}
+
+/**
+ * THE TREATY DOCUMENT read-model (§13): the treaty as a legible document —
+ * parties, terms with years remaining and per-term compliance, the fraying seam
+ * named. Pure; renders ONLY ledger facts. Null when the ledger is dark/absent or
+ * no treaty stands for the pair.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {string} pairKey
+ * @returns {TreatyDocument | null}
+ */
+export function treatyDocument(worldState, pairKey) {
+  const ledger = treatyLedgerOf(worldState);
+  const treaty = findTreatyByKey(ledger, String(pairKey));
+  if (!treaty) return null;
+  const tick = Number(/** @type {{ tick?: unknown }} */ (worldState || {}).tick) || 0;
+  const victorId = String(treaty.victorId);
+  const loserId = String(treaty.loserId);
+  const terms = /** @type {TermRecord[]} */ (Array.isArray(treaty.terms) ? treaty.terms : []);
+  const fray = frayingTermOf(terms, tick);
+  const frayingType = fray ? String(fray.type) : null;
+  /** @type {TreatyTermView[]} */
+  const termViews = terms.map((t) => {
+    /** @type {TreatyTermView} */
+    const v = {
+      type: String(t.type),
+      label: termLabel(String(t.type)),
+      family: String(t.family),
+      magnitude: round4(clamp01(Number(t.magnitude) || 0)),
+      yearsRemaining: yearsRemainingOf(t.expiresTick, tick),
+      complianceState: String(t.complianceState || 'honored'),
+      burden01: round4(clamp01(Number(t.burden01) || 0)),
+      fraying: !!fray && t === fray,
+    };
+    if (t.good) v.good = String(t.good);
+    return v;
+  });
+  const fr = /** @type {{ deserter?: unknown, abandoned?: unknown[], coalitionSize?: unknown, credibilityHit?: unknown, receipt?: unknown }} */ (
+    /** @type {Record<string, unknown>} */ (treaty).fracture);
+  return {
+    pairKey: treatyPairKey(victorId, loserId),
+    victorId,
+    loserId,
+    victorName: String(treaty.victorName || victorId),
+    loserName: String(treaty.loserName || loserId),
+    signedTick: Number(treaty.mintedTick) || 0,
+    believedMarginAtSignature: round4(Number(treaty.believedMarginAtSignature) || 0),
+    budgetGranted: round4(Number(treaty.budgetGranted) || 0),
+    budgetSpent: round4(Number(treaty.budgetSpent) || 0),
+    complianceState: String(treaty.complianceState || 'honored'),
+    terms: termViews,
+    frayingType,
+    mediator: treaty.mediator && typeof treaty.mediator === 'object'
+      ? { id: String(/** @type {{ id?: unknown }} */ (treaty.mediator).id || ''), name: String(/** @type {{ name?: unknown }} */ (treaty.mediator).name || '') }
+      : null,
+    coalitionScope: Array.isArray(treaty.coalitionScope) ? treaty.coalitionScope.map(String) : null,
+    shares: treaty.shares && typeof treaty.shares === 'object' ? /** @type {Record<string, number>} */ (treaty.shares) : null,
+    separateExit: !!treaty.separateExit,
+    fracture: fr && Array.isArray(fr.abandoned)
+      ? {
+        deserter: String(fr.deserter || ''),
+        abandoned: fr.abandoned.map(String),
+        coalitionSize: Math.max(0, Math.floor(Number(fr.coalitionSize) || 0)),
+        credibilityHit: round4(clamp01(Number(fr.credibilityHit) || 0)),
+        receipt: String(fr.receipt || ''),
+      }
+      : null,
+    receipts: Array.isArray(treaty.receipts) ? treaty.receipts.map(String) : [],
+    summary: treatyFrayingSummary(treaty, tick),
+  };
+}
+
+/**
+ * Every treaty document where `settlementId` is a party (victor or loser),
+ * codepoint-ordered by pair key — the dossier's "treaties where this settlement
+ * is a party" read. Empty when dark/absent.
+ * @param {Record<string, unknown> | null | undefined} worldState @param {unknown} settlementId
+ * @returns {TreatyDocument[]}
+ */
+export function treatyDocumentsForSettlement(worldState, settlementId) {
+  const ledger = treatyLedgerOf(worldState);
+  if (!ledger) return [];
+  const id = String(settlementId);
+  /** @type {TreatyDocument[]} */
+  const out = [];
+  for (const key of Object.keys(ledger).sort()) {
+    const t = ledger[key];
+    const parties = Array.isArray(t?.parties) ? t.parties.map(String) : [];
+    if (!parties.includes(id)) continue;
+    const doc = treatyDocument(worldState, key);
+    if (doc) out.push(doc);
+  }
+  return out;
 }
 
 // ── Small utilities ──────────────────────────────────────────────────────────

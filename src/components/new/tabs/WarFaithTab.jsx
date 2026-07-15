@@ -31,9 +31,10 @@ import { useStore } from '../../../store/index.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../../domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../../domain/display/occupationStatus.js';
+import { renderTreatiesForSettlement } from '../../../domain/display/treatyDocument.js';
 import FaithSection from '../../settlement/FaithSection.jsx';
 import {
-  FS, MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, sans, R,
+  FS, MUTED, BODY, BORDER, RED, RED_BG, GOLD, GREEN, SECOND, CARD, sans, R,
 } from '../../theme.js';
 
 function Line({ strong, tone = BODY, children }) {
@@ -105,6 +106,39 @@ function WarBlock({ war, nameFor }) {
   );
 }
 
+/** The treaty half — the settlement's treaties as documents (W-PEACE-3 §13), from
+ *  the light treatyDocument read-model. Shows the settlement's role, each term's
+ *  compliance in the house voice, and the fraying seam. */
+function TreatyBlock({ treaties, sid }) {
+  return (
+    <div data-testid="treaty-block" style={{ marginBottom: 14 }}>
+      <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SECOND, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 8 }}>
+        {treaties.length === 1 ? 'Treaty' : 'Treaties'}
+      </div>
+      {treaties.map((doc) => {
+        const role = doc.victorId === sid ? 'as victor' : doc.loserId === sid ? 'as the bound party' : 'as a party';
+        return (
+          <div key={doc.pairKey} style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: '10px 12px', marginBottom: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 6 }}>
+              <strong style={{ color: BODY, fontSize: FS.xs, fontWeight: 800 }}>{doc.title}</strong>
+              <span style={{ color: MUTED, fontSize: FS.pico, fontWeight: 700 }}>{role}</span>
+              <span style={{ marginLeft: 'auto', color: doc.complianceState === 'defaulted' ? RED : doc.complianceState === 'strained' ? GOLD : GREEN, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase' }}>{doc.complianceState}</span>
+            </div>
+            {doc.termLines.map((term) => (
+              <div key={term.type} style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.5, marginBottom: 3 }}>
+                <strong style={{ color: term.fraying ? RED : BODY, textTransform: 'capitalize' }}>{term.label}</strong>
+                <span style={{ color: MUTED }}>{term.yearsRemaining > 0 ? ` · ${term.yearsRemaining}y left` : ' · lapsing'}</span>
+                <span style={{ color: SECOND, fontStyle: 'italic' }}>{` — ${term.strainLine}`}</span>
+              </div>
+            ))}
+            {doc.frayingLine && <div style={{ color: RED, fontSize: FS.pico, fontWeight: 700, marginTop: 4 }}>{doc.frayingLine}</div>}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 /**
  * @param {{ settlement: any, saveId?: string|null, publicDossier?: boolean }} props
  */
@@ -146,6 +180,8 @@ export default function WarFaithTab({ settlement, saveId = null, publicDossier =
       mobilization: settlementMobilization({ settlementId: sid, worldState }), // covert excluded
       occupied: settlementOccupation({ settlementId: sid, worldState, nameFor }),
       holdings: occupierHoldings({ settlementId: sid, worldState, nameFor }),
+      // W-PEACE-3: the settlement's treaties as documents (light read-model; dark ⇒ []).
+      treaties: renderTreatiesForSettlement(worldState, sid),
     };
   }, [sid, campaigns, nameFor]);
 
@@ -160,6 +196,9 @@ export default function WarFaithTab({ settlement, saveId = null, publicDossier =
     || !!war.occupied
     || !!war.holdings
   );
+  // The treaty half self-gates independently: a settlement at peace UNDER a treaty
+  // still shows its treaty document even with no live war beat.
+  const hasTreaties = !!war && war.treaties?.length > 0;
 
   // Faith half renders SOMETHING unless the viewer is premium/elevated AND the
   // settlement carries no deity embed (FaithSection's HIDDEN mode). Mirror that so
@@ -171,9 +210,10 @@ export default function WarFaithTab({ settlement, saveId = null, publicDossier =
   return (
     <div data-testid="war-faith-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       {hasWar && <WarBlock war={war} nameFor={nameFor} />}
+      {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
       {/* The gated faith surface — the constitutional seam, unchanged. */}
       <FaithSection settlement={settlement} publicDossier={publicDossier} />
-      {!hasWar && !faithWillRender && (
+      {!hasWar && !hasTreaties && !faithWillRender && (
         <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.6 }}>
           This settlement is at peace and keeps no named faith.
         </div>

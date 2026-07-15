@@ -21,7 +21,7 @@
  */
 
 import { Suspense, lazy, useMemo, useEffect } from 'react';
-import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
+import { LayoutDashboard, Swords, Sparkles, Zap, Newspaper, HeartHandshake, ScrollText, X, Minus, Maximize2, Minimize2 } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
@@ -42,20 +42,31 @@ const WizardNewsPanel = lazy(() => import('./WizardNewsPanel.jsx'));
 const ChronicleScrollback = lazy(() => import('./ChronicleScrollback.jsx'));
 const AssignDeityFromMap  = lazy(() => import('./AssignDeityFromMap.jsx'));
 const WarResolveSection = lazy(() => import('./WarResolveSection.jsx'));
+const TreatyPanel = lazy(() => import('./TreatyPanel.jsx'));
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
- * `resolve` (the War & Resolve surfacing tab) appears only under the
- * warEconomySurfacing flag (default off ⇒ the rail is byte-identical).
+ * `treaty` self-hides while the treaties ledger is dark (byte-identical when the
+ * peace engine hasn't minted a treaty); `resolve` (the War & Resolve surfacing
+ * tab) appears only under the warEconomySurfacing flag (default off).
  */
 export const REALM_INSPECTOR_SECTIONS = Object.freeze([
   { id: 'dashboard', label: 'Dashboard', Icon: LayoutDashboard },
   { id: 'war',       label: 'War and Diplomacy', Icon: Swords },
+  { id: 'treaty',    label: 'Treaties', Icon: ScrollText },
   { id: 'resolve',   label: 'War & Resolve', Icon: HeartHandshake },
   { id: 'pantheon',  label: 'Pantheon', Icon: Sparkles },
   { id: 'pulse',     label: 'Pulse Results', Icon: Zap },
   { id: 'chronicle', label: 'Chronicle', Icon: Newspaper },
 ]);
+
+/** Whether the campaign carries any live treaty (the treaty tab self-hide gate —
+ *  dark ⇒ the rail is byte-identical to the pre-treaty inspector).
+ *  @param {any} campaign @returns {boolean} */
+export function hasTreaties(campaign) {
+  const ledger = campaign?.worldState?.spatialLedgers?.treaties;
+  return !!ledger && typeof ledger === 'object' && Object.keys(ledger).length > 0;
+}
 
 function SectionTab({ active, label, Icon, onClick }) {
   return (
@@ -101,12 +112,14 @@ export default function RealmInspector({
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
   const showPantheon = hasPantheon(campaign);
   const showResolve = flag('warEconomySurfacing');
+  const showTreaty = hasTreaties(campaign);
 
-  // The Pantheon tab self-hides while religion is dormant; the War & Resolve tab
-  // appears only under its flag. If the user is parked on a tab that disappears,
-  // the activeSection fallback below re-homes them to the dashboard.
+  // The Pantheon tab self-hides while religion is dormant; the Treaties tab
+  // self-hides while no treaty stands; the War & Resolve tab appears only under
+  // its flag. If the user is parked on a tab that disappears, the activeSection
+  // fallback below re-homes them to the dashboard.
   const sections = REALM_INSPECTOR_SECTIONS.filter(s =>
-    (s.id !== 'pantheon' || showPantheon) && (s.id !== 'resolve' || showResolve));
+    (s.id !== 'pantheon' || showPantheon) && (s.id !== 'resolve' || showResolve) && (s.id !== 'treaty' || showTreaty));
   const activeSection = sections.some(s => s.id === section) ? section : 'dashboard';
 
   // When the displayed section falls back (e.g. the Pantheon tab self-hid while
@@ -269,6 +282,11 @@ export default function RealmInspector({
             campaign
               ? <WarSection campaign={campaign} nameById={nameById} />
               : <CampaignEmptyState lead="War and diplomacy appears once a campaign is live." {...emptyHandlers} />
+          )}
+          {activeSection === 'treaty' && (
+            campaign
+              ? <TreatyPanel campaign={campaign} nameById={nameById} />
+              : <CampaignEmptyState lead="Treaties appear once a campaign's wars are settled by negotiated peace." {...emptyHandlers} />
           )}
           {activeSection === 'resolve' && (
             campaign
