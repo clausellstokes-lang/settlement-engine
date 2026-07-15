@@ -113,6 +113,18 @@ behavior, budget raises, golden regens.
   corruption recon (corruption web + settlement politics w/ NPC dimension), then builds proceed
   down the master sequence. New scope requires a fresh owner directive.
 
+- **2026-07-14 — FULL-PROGRAM DELEGATION (owner, verbatim: "i leave it to you to get every
+  remaining phase and wave done!"):** standing authority to execute every remaining wave and
+  phase autonomously — E1a-d, W-PEACE, W-DOCTRINE, SM-3, W-COMPOSER-1/2, Surveyor S1-S7, SM-4,
+  the final re-grade, soak+tuning, and the master merge per MASTER_MERGE_PLAN.md — using the
+  standing model split (Fable architect/manager/checker; Opus implementer/verifier) and
+  worktree-isolated parallel agents where lanes permit. OWNER-GATED ITEMS SURVIVE THE
+  DELEGATION (never self-ruled): any git push / deploy / supabase db push; E0 + preset LIGHTING
+  and any golden-shifting event (owner-signed regen only); budget raises; new schema/persistence
+  envelope surfaces; paid-surface behavior changes beyond frozen designs; the standing one-line
+  vetoables (exercisable anytime). JUDGMENTs continue to be recorded vetoably; deferrals
+  documented; every wave gated green before commit.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
