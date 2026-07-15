@@ -36,6 +36,9 @@ import { buildPressureSummary, settlementStrength } from './relationshipEvolutio
 import { readBeliefStrength } from './beliefMap.js';
 import { findCrossPressuredMediator, fracturesAbandoning, treatyDocument } from './peaceTerms.js';
 import { strangulationFelt01 } from './supplyWebWarfare.js';
+// W-CONVERGENCE — the foreign_clash intensity for the pair (the spheres_understanding
+// fuel). 0 when the intervention layer is dark ⇒ byte-identical. One-directional.
+import { foreignClashIntensityOf } from './convergence.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -190,6 +193,19 @@ export function scoreRealignment({ commonThird, bothBesetByThirds }) {
     };
   }
   return { score: 0, receipt: '' };
+}
+
+/**
+ * SPHERES UNDERSTANDING (W-CONVERGENCE §4 — the mirror of foreign_clash): two sponsors
+ * bleeding for opposite claimants on the same field have the mutual-disengagement ground
+ * to settle ZONES OF INFLUENCE instead of a wider war. The pressure to reach an
+ * understanding rises with the clash intensity. 0 when the intervention layer is dark ⇒
+ * byte-identical. @param {{ clash01: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreSpheresUnderstanding({ clash01 }) {
+  const score = clamp01(Number(clash01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'Better to draw a line between our claims than to make this proxy our own war — a sphere apiece, and the field left to them.' };
 }
 
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
@@ -416,6 +432,8 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }) },
       { type: 'harvest_pressure', ...scoreHarvestPressure({ season }) },
       { type: 'realignment', ...scoreRealignment(third) },
+      // W-CONVERGENCE: the mirror of foreign_clash — clashing sponsors settling spheres (0 when dark).
+      { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);

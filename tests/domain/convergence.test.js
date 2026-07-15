@@ -1,0 +1,238 @@
+/**
+ * convergence.test.js — W-CONVERGENCE Stage 1 pins (DESIGN_CONVERGENCE.md §6).
+ *
+ * The pure mechanics of foreign intervention in a live coup contest: the gate, the typed
+ * motive catalog (positive + negative controls), the loaded-dice initiation, the coup
+ * TILT (interventionAdj — directionality both bounded), the invited/uninvited legitimacy
+ * asymmetry, the installed-regime obligation mint (leverage-weighted), and proxy-stays-
+ * proxy foreign_clash detection. The dormancy byte-identity pin is the fenced golden
+ * (interventionDormancyGolden.test.js); the interventionAdj=0⇒byte-identical-verdict pin
+ * lives in rulingPowerCoup.intervention.test.js.
+ */
+
+import { describe, it, expect } from 'vitest';
+import {
+  interventionActive,
+  scorePreserveOrder, scoreInstallFriendlier, scoreProtectInvestment, scoreKinship, scoreDenial,
+  scoreMotives, MOTIVE_TYPES, INTERVENTION_SIDES,
+  interventionFeasibility, initiationPull, shouldInitiateIntervention,
+  interventionLegitimacy, interventionTilt, interventionObligationMint,
+  foreignClashes, foreignClashIntensityOf,
+  interventionLedger, recordsForTarget, interventionAdjFor,
+  orderInterventionVerbFactory, CONVERGENCE_TUNING,
+} from '../../src/domain/worldPulse/convergence.js';
+
+const litRules = { simulationRules: { warLayerEnabled: true, interventionEnabled: true } };
+const withLedger = (recs) => ({
+  simulationRules: { warLayerEnabled: true, interventionEnabled: true },
+  spatialLedgers: { interventions: recs },
+});
+
+describe('W-CONVERGENCE §6 — the gate (dormancy)', () => {
+  it('is dark absent the flags, and needs BOTH warLayerEnabled and interventionEnabled', () => {
+    expect(interventionActive(null)).toBe(false);
+    expect(interventionActive({})).toBe(false);
+    expect(interventionActive({ simulationRules: {} })).toBe(false);
+    expect(interventionActive({ simulationRules: { warLayerEnabled: true } })).toBe(false);
+    expect(interventionActive({ simulationRules: { interventionEnabled: true } })).toBe(false);
+    expect(interventionActive(litRules)).toBe(true);
+  });
+});
+
+describe('W-CONVERGENCE §2 — the typed motive catalog (positive + negative controls)', () => {
+  it('preserve_order fires on grip OR treaty, backs the INCUMBENT; silent otherwise', () => {
+    expect(scorePreserveOrder({ foreignGrip01: 0.5 }).score).toBeGreaterThan(0);
+    expect(scorePreserveOrder({ treatyWithIncumbent: true }).score).toBeGreaterThan(0);
+    // Below the grip threshold with no treaty ⇒ silent.
+    expect(scorePreserveOrder({ foreignGrip01: 0.1 }).score).toBe(0);
+    expect(scorePreserveOrder({}).score).toBe(0);
+  });
+
+  it('install_friendlier_regime fires on hostility+affinity OR a leash, backs the CHALLENGER', () => {
+    expect(scoreInstallFriendlier({ hostile01: 1, challengerAffinity01: 0.6 }).score).toBeGreaterThan(0);
+    expect(scoreInstallFriendlier({ leashOnChallenger01: 0.5 }).score).toBeGreaterThan(0);
+    // No hostility and no leash ⇒ silent even with affinity.
+    expect(scoreInstallFriendlier({ challengerAffinity01: 0.9 }).score).toBe(0);
+    expect(scoreInstallFriendlier({}).score).toBe(0);
+  });
+
+  it('protect_investment fires on debt OR trade dependence, backs the INCUMBENT', () => {
+    expect(scoreProtectInvestment({ obligationDebt01: 0.6 }).score).toBeGreaterThan(0);
+    expect(scoreProtectInvestment({ tradeDependence01: 0.8 }).score).toBeGreaterThan(0);
+    expect(scoreProtectInvestment({}).score).toBe(0);
+  });
+
+  it('kinship backs the stronger-tied side, and stays silent below the floor', () => {
+    expect(scoreKinship({ kinshipChallenger01: 0.8, kinshipIncumbent01: 0.1 }).side).toBe(INTERVENTION_SIDES.CHALLENGER);
+    expect(scoreKinship({ kinshipIncumbent01: 0.8, kinshipChallenger01: 0.1 }).side).toBe(INTERVENTION_SIDES.INCUMBENT);
+    expect(scoreKinship({ kinshipIncumbent01: 0.05 }).score).toBe(0);
+    expect(scoreKinship({}).side).toBe(null);
+  });
+
+  it('denial backs the OPPOSITE of a committed rival; silent with no rival', () => {
+    expect(scoreDenial({ rivalSide: INTERVENTION_SIDES.INCUMBENT, rivalStrength01: 0.5 }).side).toBe(INTERVENTION_SIDES.CHALLENGER);
+    expect(scoreDenial({ rivalSide: INTERVENTION_SIDES.CHALLENGER, rivalStrength01: 0.5 }).side).toBe(INTERVENTION_SIDES.INCUMBENT);
+    expect(scoreDenial({ rivalSide: null, rivalStrength01: 0.5 }).score).toBe(0);
+    expect(scoreDenial({ rivalSide: INTERVENTION_SIDES.INCUMBENT, rivalStrength01: 0 }).score).toBe(0);
+  });
+
+  it('scoreMotives picks the strongest motive with its side, and every motive is receipted', () => {
+    // A strong leash (install_friendlier) beats a weak treaty (preserve_order).
+    const chosen = scoreMotives({ leashOnChallenger01: 0.9, treatyWithIncumbent: true, hostile01: 1 });
+    expect(chosen.motive).toBe('install_friendlier_regime');
+    expect(chosen.side).toBe(INTERVENTION_SIDES.CHALLENGER);
+    expect(chosen.receipt).toBeTruthy();
+    // Every motive in the catalog appears in the breakdown.
+    expect(chosen.breakdown.map((b) => b.motive).sort()).toEqual([...MOTIVE_TYPES].sort());
+    // No motive at all ⇒ null.
+    expect(scoreMotives({}).motive).toBe(null);
+  });
+});
+
+describe('W-CONVERGENCE §H — feasibility + the loaded-dice initiation', () => {
+  it('feasibility falls with opposition and stays bounded [0,1]', () => {
+    const unopposed = interventionFeasibility({ patronStrength01: 0.9, opposingStrength01: 0 });
+    const opposed = interventionFeasibility({ patronStrength01: 0.9, opposingStrength01: 1 });
+    expect(unopposed).toBeGreaterThan(opposed);
+    expect(opposed).toBeGreaterThanOrEqual(0);
+    expect(unopposed).toBeLessThanOrEqual(1);
+  });
+
+  it('initiationPull = motive×feasibility, zeroed below the motive/feasibility floors', () => {
+    expect(initiationPull({ motiveScore01: 0.8, feasibility01: 0.5 })).toBeCloseTo(0.4, 5);
+    expect(initiationPull({ motiveScore01: 0.1, feasibility01: 1 })).toBe(0); // below MOTIVE_FLOOR
+    expect(initiationPull({ motiveScore01: 0.9, feasibility01: 0.05 })).toBe(0); // below FEASIBILITY_FLOOR
+  });
+
+  it('the loaded dice fire iff u < INITIATE_BASE × pull² — a rare, ramped event', () => {
+    const pull = 1;
+    const threshold = CONVERGENCE_TUNING.INITIATE_BASE * pull * pull;
+    expect(shouldInitiateIntervention(pull, threshold - 1e-6)).toBe(true);
+    expect(shouldInitiateIntervention(pull, threshold + 1e-6)).toBe(false);
+    // Ramped: half the pull ⇒ a quarter the chance (pull²).
+    expect(shouldInitiateIntervention(0.5, CONVERGENCE_TUNING.INITIATE_BASE * 0.25 - 1e-6)).toBe(true);
+    expect(shouldInitiateIntervention(0.5, CONVERGENCE_TUNING.INITIATE_BASE * 0.25 + 1e-6)).toBe(false);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — invited-vs-uninvited legitimacy asymmetry', () => {
+  it('an invited incumbent-prop is legitimacy-cheap and not casus-generative', () => {
+    const invited = interventionLegitimacy({ side: INTERVENTION_SIDES.INCUMBENT, invited: true });
+    expect(invited.casusGenerative).toBe(false);
+    expect(invited.legitimacyCost).toBe(CONVERGENCE_TUNING.LEGIT_COST_INVITED);
+  });
+
+  it('backing rebels (or an UNINVITED incumbent-prop) is dear and casus-generative', () => {
+    const rebels = interventionLegitimacy({ side: INTERVENTION_SIDES.CHALLENGER, invited: false });
+    expect(rebels.casusGenerative).toBe(true);
+    expect(rebels.legitimacyCost).toBe(CONVERGENCE_TUNING.LEGIT_COST_UNINVITED);
+    expect(rebels.legitimacyCost).toBeGreaterThan(interventionLegitimacy({ side: INTERVENTION_SIDES.INCUMBENT, invited: true }).legitimacyCost);
+    // A challenger-backer can never be "invited" (the seat did not call them).
+    const fakeInvited = interventionLegitimacy({ side: INTERVENTION_SIDES.CHALLENGER, invited: true });
+    expect(fakeInvited.casusGenerative).toBe(true);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — coup-tilt directionality both bounded', () => {
+  it('an incumbent-backer RAISES pHold; a challenger-backer LOWERS it; net zero cancels', () => {
+    const raise = interventionTilt([{ side: INTERVENTION_SIDES.INCUMBENT, strengthShare01: 1 }]);
+    const lower = interventionTilt([{ side: INTERVENTION_SIDES.CHALLENGER, strengthShare01: 1 }]);
+    expect(raise).toBeGreaterThan(0);
+    expect(lower).toBeLessThan(0);
+    expect(raise).toBe(-lower);
+    expect(interventionTilt([
+      { side: INTERVENTION_SIDES.INCUMBENT, strengthShare01: 0.5 },
+      { side: INTERVENTION_SIDES.CHALLENGER, strengthShare01: 0.5 },
+    ])).toBe(0);
+  });
+
+  it('the term is bounded to ±PHOLD_WEIGHT no matter how many token columns pile on', () => {
+    const swarm = Array.from({ length: 20 }, () => ({ side: INTERVENTION_SIDES.CHALLENGER, strengthShare01: 1 }));
+    const tilt = interventionTilt(swarm);
+    expect(tilt).toBe(-CONVERGENCE_TUNING.PHOLD_WEIGHT);
+    expect(Math.abs(tilt)).toBeLessThanOrEqual(CONVERGENCE_TUNING.PHOLD_WEIGHT);
+    expect(interventionTilt([])).toBe(0);
+    expect(interventionTilt(null)).toBe(0);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — installed-regime-owes (leverage-weighted mint)', () => {
+  it('mints an intervention obligation FROM the installed target TO the patron', () => {
+    const mint = interventionObligationMint({ patronId: 'crown', targetId: 'ford', leverage01: 0 });
+    expect(mint.from).toBe('ford');
+    expect(mint.to).toBe('crown');
+    expect(mint.kind).toBe('intervention');
+    expect(mint.magnitude).toBeGreaterThan(0);
+  });
+
+  it('leverage inflates the recorded debt (the predatory patron) and flags it', () => {
+    const plain = interventionObligationMint({ patronId: 'crown', targetId: 'ford', leverage01: 0 });
+    const predatory = interventionObligationMint({ patronId: 'crown', targetId: 'ford', leverage01: 1 });
+    expect(predatory.magnitude).toBeGreaterThan(plain.magnitude);
+    expect(predatory.predatory).toBe(true);
+    expect(plain.predatory).toBe(false);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — proxy-stays-proxy (foreign_clash, no auto-war)', () => {
+  it('two sponsors on OPPOSING sides of one target clash; same-side sponsors do NOT', () => {
+    const opposing = foreignClashes([
+      { interId: 'crown', side: INTERVENTION_SIDES.INCUMBENT },
+      { interId: 'delve', side: INTERVENTION_SIDES.CHALLENGER },
+    ]);
+    expect(opposing).toEqual([{ a: 'crown', b: 'delve' }]);
+    // Same side ⇒ allies, never a clash.
+    expect(foreignClashes([
+      { interId: 'crown', side: INTERVENTION_SIDES.INCUMBENT },
+      { interId: 'delve', side: INTERVENTION_SIDES.INCUMBENT },
+    ])).toEqual([]);
+    // foreignClashes returns DESCRIPTORS only — no war outcome, no mutation (proxy stays proxy).
+  });
+
+  it('foreignClashIntensityOf reads the live ledger; 0 when dormant', () => {
+    const ws = withLedger({
+      'crown:ford': { interId: 'crown', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 80 },
+      'delve:ford': { interId: 'delve', target: 'ford', side: INTERVENTION_SIDES.CHALLENGER, strength: 60 },
+    });
+    expect(foreignClashIntensityOf(ws, 'crown', 'delve')).toBeGreaterThan(0);
+    // Symmetric.
+    expect(foreignClashIntensityOf(ws, 'delve', 'crown')).toBe(foreignClashIntensityOf(ws, 'crown', 'delve'));
+    // Dark ⇒ 0 even with a ledger present.
+    const dark = { simulationRules: {}, spatialLedgers: ws.spatialLedgers };
+    expect(foreignClashIntensityOf(dark, 'crown', 'delve')).toBe(0);
+  });
+});
+
+describe('W-CONVERGENCE — the ledger read + interventionAdjFor', () => {
+  it('interventionLedger round-trips records; recordsForTarget filters by target', () => {
+    const ws = withLedger({
+      'crown:ford': { interId: 'crown', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, motive: 'preserve_order', strength: 80, sinceTick: 3, lastTick: 3 },
+      'delve:mire': { interId: 'delve', target: 'mire', side: INTERVENTION_SIDES.CHALLENGER, motive: 'kinship', strength: 40, sinceTick: 2, lastTick: 2 },
+    });
+    const ledger = interventionLedger(ws);
+    expect(Object.keys(ledger).sort()).toEqual(['crown:ford', 'delve:mire']);
+    expect(recordsForTarget(ledger, 'ford').map((r) => r.interId)).toEqual(['crown']);
+  });
+
+  it('interventionAdjFor is 0 when dark (byte-identical) and signed by side when lit', () => {
+    const recs = {
+      'crown:ford': { interId: 'crown', target: 'ford', side: INTERVENTION_SIDES.INCUMBENT, strength: 100 },
+    };
+    // Dark ⇒ 0 (the resolveCoupVerdict term vanishes).
+    expect(interventionAdjFor({ simulationRules: {}, spatialLedgers: { interventions: recs } }, 'ford')).toBe(0);
+    // Lit, a lone incumbent-backer ⇒ +PHOLD_WEIGHT (full share).
+    expect(interventionAdjFor(withLedger(recs), 'ford')).toBe(CONVERGENCE_TUNING.PHOLD_WEIGHT);
+    // A target with no records ⇒ 0.
+    expect(interventionAdjFor(withLedger(recs), 'elsewhere')).toBe(0);
+  });
+});
+
+describe('W-CONVERGENCE §7 — the verb ships registrable-shape, NOT registered', () => {
+  it('ORDER_INTERVENTION carries its realm scope + candidateType + dials, registered:false', () => {
+    const v = orderInterventionVerbFactory();
+    expect(v.verb).toBe('ORDER_INTERVENTION');
+    expect(v.scope).toBe('realm');
+    expect(v.candidateType).toBe('intervention_ordered');
+    expect(v.registered).toBe(false);
+  });
+});

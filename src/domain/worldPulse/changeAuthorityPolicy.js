@@ -47,7 +47,14 @@ import { isActorInitiatedMajorType, routineMajorApprovalEnabled } from './actorM
  *    label-change). The split is decided by the move/branch, not by the flag or a
  *    severity threshold.
  *
- * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'always-proposal'|'structural-proposal'} ChangeAuthority
+ *  • 'auto-with-approval-routing' — the candidate is auto by default (a bounded
+ *    consequence the DM saw coming), but as an ACTOR-INITIATED major it routes its
+ *    legacy 'auto' through authorityFor, so the new dm_only/recommendations modes and
+ *    routine-with-major-approval force it to 'proposal'. Like auto-with-lock-escalation
+ *    but the escalation axis is the autonomy mode, not a player lock (W-CONVERGENCE's
+ *    intervention_ordered).
+ *
+ * @typedef {'proposal-gated'|'severity-gated'|'auto'|'auto-with-lock-escalation'|'auto-with-approval-routing'|'always-proposal'|'structural-proposal'} ChangeAuthority
  *
  * @typedef {object} ChangeAuthorityEntry
  * @property {ChangeAuthority} authority   The authority class (see above).
@@ -255,6 +262,16 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
     campaignAltering: true,
     rationale:
       'A successful coup is the resolution of a coup stressor the DM already saw building; it auto-applies UNLESS the player has locked the governing faction, on which separate axis it escalates to proposal.',
+  }),
+
+  // ── AUTO WITH APPROVAL ROUTING: an actor-initiated foreign intervention. ──────
+  intervention_ordered: Object.freeze({
+    authority: 'auto-with-approval-routing',
+    module: 'convergence.js',
+    consultsProposalFlag: false,
+    campaignAltering: true,
+    rationale:
+      'W-CONVERGENCE: a foreign power committing an army to a settlement\'s internal (coup) contest is an ACTOR-INITIATED major. The autonomous mover mints directly under legacy routine/full (byte-identical — the feature is dark by default) and routes its legacy \'auto\' through authorityFor, which forces \'proposal\' under dm_only/recommendations and routine-with-major-approval (the coup_succeeded precedent, escalating on the autonomy mode not a lock).',
   }),
 });
 

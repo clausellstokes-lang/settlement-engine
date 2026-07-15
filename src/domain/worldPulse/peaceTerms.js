@@ -147,6 +147,13 @@ export const TERM_CATALOG = Object.freeze({
   occupation_continuation: Object.freeze({ family: 'territorial', weight: 1.1, baseYears: 3, maxYears: 6, baseMag: 1.0, stream: false, executor: 'occupation_hold' }),
   puppet_seat: Object.freeze({ family: 'political', weight: 1.5, baseYears: 4, maxYears: 8, baseMag: 1.0, stream: false, executor: 'seam' }),
   disclosure: Object.freeze({ family: 'informational', weight: 0.6, baseYears: 3, maxYears: 6, baseMag: 1.0, stream: false, executor: 'seam' }),
+  // W-CONVERGENCE: a pledge NOT to intervene in each other's internal contests — the
+  // spheres_understanding made a treaty term. Its OWN family 'sovereignty' (design §4
+  // JUDGMENT: a security family would make it mutually exclusive with non_aggression
+  // under one-per-family stacking; historically they are distinct demands — vetoable).
+  // executor:'seam' — recorded-not-enforced this wave (no non_intervention asset producer
+  // yet ⇒ never drafted ⇒ byte-identical; the demand-side wire lands with the composer).
+  non_intervention: Object.freeze({ family: 'sovereignty', weight: 0.5, baseYears: 6, maxYears: 15, baseMag: 1.0, stream: false, executor: 'seam' }),
 });
 
 /** The typed term-type taxonomy (catalog keys, codepoint-frozen for the walker). */

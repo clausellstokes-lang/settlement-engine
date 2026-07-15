@@ -54,7 +54,7 @@ export const ACTOR_MAJOR_HOLD_WEEKS = 6;
  * the O(1) routing check authorityFor makes on every candidate.
  * @type {ReadonlySet<string>}
  */
-export const ACTOR_INITIATED_MAJOR_TYPES = new Set(['strategy_deploy', 'coup_succeeded']);
+export const ACTOR_INITIATED_MAJOR_TYPES = new Set(['strategy_deploy', 'coup_succeeded', 'intervention_ordered']);
 
 /**
  * Is this changeType one of the actor-initiated majors M10a routes under routine?

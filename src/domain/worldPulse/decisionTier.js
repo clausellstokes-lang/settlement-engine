@@ -43,6 +43,8 @@ const CAMPAIGN_ALTERING_CANDIDATE_TYPES = new Set([
   'coup_succeeded',
   // A faction moving to change a settlement's government.
   'faction_government_challenge',
+  // W-CONVERGENCE: a foreign power committing an army to an internal contest.
+  'intervention_ordered',
 ]);
 
 /**

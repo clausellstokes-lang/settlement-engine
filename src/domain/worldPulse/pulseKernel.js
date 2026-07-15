@@ -74,6 +74,7 @@ import { advanceSettlementPolitics } from './settlementPolitics.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
+import { advanceIntervention, interventionActive } from './convergence.js';
 import { advanceSupplyWebWarfare, supplyWebWarfareActive } from './supplyWebWarfare.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectCouncilSchism, governingCoalition } from './beliefMap.js';
@@ -383,6 +384,9 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
         // M10a — route the coup's applyMode through the approval queue under the
         // forcing modes / routine-with-major-approval (verbatim under legacy).
         rules: simulationRules,
+        // W-CONVERGENCE — read the intervention ledger for the surviving-intervener
+        // tilt (interventionAdjFor; 0 when the intervention layer is dark).
+        worldState,
       })
     : [];
 
@@ -2110,6 +2114,30 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       if (generosity.newsEntries.length) {
         wizardNews = appendWizardNewsEntries(wizardNews, generosity.newsEntries, { now });
       }
+    }
+  }
+  // W-CONVERGENCE — FOREIGN INTERVENTION (DESIGN_CONVERGENCE.md §2). A foreign power with a
+  // typed motive + feasibility commits a column (the E0 loaded-dice initiation) to a LIVE
+  // coup contest, persisted to the ISOLATED `interventions` ledger (never the deployments
+  // one-army slot). Runs BEFORE the causal-reason movers so a fresh sponsors' clash feeds
+  // warReasons.foreign_clash / peaceReasons.spheres_understanding THIS tick, and the
+  // committed column is present for the NEXT tick's coup verdict (coup.js reads
+  // interventionAdjFor — the arriving army tilts the verdict it reaches in time; a column
+  // that arrives after the verdict marched to yesterday's coup). DORMANT behind
+  // interventionActive (warLayerEnabled AND the virtual interventionEnabled) ⇒ a complete
+  // no-op (zero interventions keys — the intervention dormancy golden proves it).
+  if (interventionActive(memoryState)) {
+    const intervention = advanceIntervention({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      graph: applied.regionalGraph,
+      rng: rng.fork('intervention'),
+      tick: worldState.tick,
+      now,
+    });
+    if (intervention.changed) memoryState = /** @type {typeof memoryState} */ (intervention.worldState);
+    if (intervention.newsEntries.length) {
+      wizardNews = appendWizardNewsEntries(wizardNews, intervention.newsEntries, { now });
     }
   }
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war

@@ -41,7 +41,7 @@ describe('M10a — authorityFor: the routine major-approval gate', () => {
   const ROUTINE_GATED = { politicalAutonomy: 'routine', routineMajorApproval: true };
 
   test('routine-DEFAULT (no opt-in) passes actor-majors through VERBATIM (byte-identical)', () => {
-    for (const changeType of ['strategy_deploy', 'coup_succeeded']) {
+    for (const changeType of ['strategy_deploy', 'coup_succeeded', 'intervention_ordered']) {
       expect(authorityFor(ROUTINE, changeType, 'auto')).toBe('auto');
       expect(authorityFor(ROUTINE, changeType, 'proposal')).toBe('proposal');
       // Absent rules / legacy flag reads route nowhere new either.
@@ -53,6 +53,7 @@ describe('M10a — authorityFor: the routine major-approval gate', () => {
   test('routine + opt-in routes the ACTOR-INITIATED majors to proposal', () => {
     expect(authorityFor(ROUTINE_GATED, 'strategy_deploy', 'auto')).toBe('proposal');
     expect(authorityFor(ROUTINE_GATED, 'coup_succeeded', 'auto')).toBe('proposal');
+    expect(authorityFor(ROUTINE_GATED, 'intervention_ordered', 'auto')).toBe('proposal');
   });
 
   test('routine + opt-in leaves NON-major changeTypes verbatim (the choke-point families)', () => {
@@ -78,7 +79,7 @@ describe('M10a — authorityFor: the routine major-approval gate', () => {
   });
 
   test('the helpers agree with the routing', () => {
-    expect([...ACTOR_INITIATED_MAJOR_TYPES].sort()).toEqual(['coup_succeeded', 'strategy_deploy']);
+    expect([...ACTOR_INITIATED_MAJOR_TYPES].sort()).toEqual(['coup_succeeded', 'intervention_ordered', 'strategy_deploy']);
     expect(isActorInitiatedMajorType('strategy_deploy')).toBe(true);
     expect(isActorInitiatedMajorType('conquest')).toBe(false);
     expect(routineMajorApprovalEnabled({ routineMajorApproval: true })).toBe(true);
