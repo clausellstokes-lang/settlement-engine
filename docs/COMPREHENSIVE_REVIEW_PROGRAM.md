@@ -296,6 +296,29 @@ behavior, budget raises, golden regens.
   that would be the last thing if usage of Fable is enough." Sequenced BEHIND: the fix program →
   upswing/relationship flows → Surveyor stages. The end-goal framing, verbatim intent: "be good at
   everything, excel at the most important, and take over from all my other competitors."
+- **SETTLEMENT BIRTH & DEATH — THE SATELLITE-THORP DESIGN (owner-ruled PAUSED, post-soak;
+  design captured 2026-07-15, owner's thoughts verbatim-intent):** birth and death both happen
+  at the tier ladder's bottom rung — "Birth and death (aligning with our promotion and demotion
+  of settlements) start and end at the same level, thorp/thorpes." Any significant settlement
+  (town or higher — threshold delegated to the architect, recommendation: town+) "will naturally
+  begin to produce satellite thorpes surrounding it. These come with potentially new resources
+  and dynamics!" Thorps are single-family dwellings, "extremely precarious without economic
+  backing and physical support and in-flow of people moving in (conservation!)" — they either
+  quickly grow (thorp → hamlet → village) or "quickly die and be destroyed forever";
+  alternatively "many in close proximity can converge into a hamlet." ARCHITECT'S ASSESSMENT AT
+  CAPTURE (Fable, agreed by owner to park): the design collapses the build's weight class —
+  satellites orbit a PARENT (position = within the parent's territory; routing = via-parent +
+  a fixed local hop), so V1 needs NO digest membership, NO re-canonize, NO version-axis event:
+  a `satellites` conditional ledger keyed by parent, lightweight sub-settlement tick (birth /
+  growth / death / convergence + resource contribution), NOT full pulse members (cap study
+  intact). Conservation native: seeded by parent population outflow (the migration ledger
+  conserves), starved without in-flow. The W-DISCOVERY coupling is the natural birth trigger
+  (a resource strike spawns the mining camp). Death leaves a RUIN (history beat + map marker,
+  not a live entity); people conserved (migration out), only the entity dies. NPCs: none until
+  hamlet (names begin where community begins). THE ONE V2 SEAM: graduation past
+  village-in-orbit to first-class digest membership IS the version-axis event — V1 caps
+  satellites in-orbit; graduation is its own later commission. DO NOT BUILD until the soak
+  completes and the owner re-commissions.
 
 ## Phase plan (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY** (Fable): 20/28 landed (208 findings); 8 limit-killed slices
