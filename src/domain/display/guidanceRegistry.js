@@ -57,6 +57,13 @@ export const GUIDANCE_SURFACES = Object.freeze([
   'wizard-postgen', // the post-generate what's-next guide (WizardNextSteps)
   'home',           // the signed-in home hero (WelcomeBackCard)
   'config',         // inline config-field help (HelpPopover)
+  // ── W-GUIDE-2: empty-states-as-invitations (§8). Each empty seam becomes a
+  //    themed invitation registered here. 'realm' is the realm-DASHBOARD empty
+  //    state (CampaignEmptyState), NOT the map canvas — the map-pane guidance
+  //    surfaces stay reserved for the map-coordinated pass. ──────────────────
+  'library',        // the empty library (SampleDashboard) — a Surveyor's-note invitation
+  'gallery',        // the empty public gallery (GalleryList) — plain, community voice
+  'realm',          // the empty realm dashboard (CampaignEmptyState) — plain, wayfinding
 ]);
 
 /**
@@ -237,6 +244,42 @@ export const GUIDANCE_WHISPERS = Object.freeze([
     body: 'guidance.compendium.tier.body', glossaryRef: 'tiers',
     budgetClass: 'wayfinding', component: 'HelpPopover',
   }),
+
+  // ── W-GUIDE-2 §8: empty-states-as-invitations ─────────────────────────────
+  // The empty library is the one non-commerce rest-point warm enough for the
+  // Surveyor's persona (the note register). Its body is a guidance.notes.* key
+  // (the register binding the walker checks); the actual variant is FNV-selected
+  // by SurveyorNote at render, so the same keeper sees a stable line.
+  whisper({
+    id: 'library_empty_invitation',
+    surface: 'library',
+    lane: 'reader',
+    register: 'note',
+    trigger: { condition: (ctx) => (ctx.data.savedCount || 0) === 0 },
+    priority: 40,
+    body: 'guidance.notes.library.empty.a',
+    budgetClass: 'teaching',
+    component: 'SampleDashboard',
+  }),
+  // The public gallery empty state: community voice, PLAIN (a publish/discovery
+  // surface — the persona precedence guard keeps it off the costume). Reuses the
+  // existing gallery.emptyBody copy.
+  whisper({
+    id: 'gallery_empty_invitation',
+    surface: 'gallery', lane: 'reader', register: 'plain',
+    trigger: {}, priority: 40, newbornOnly: false,
+    body: 'gallery.emptyBody', glossaryRef: null,
+    budgetClass: 'wayfinding', component: 'GalleryList',
+  }),
+  // The empty realm dashboard: wayfinding, PLAIN (campaigns are a paid surface —
+  // it speaks plain). The gold-callout recipe is already themed house voice.
+  whisper({
+    id: 'realm_empty_invitation',
+    surface: 'realm', lane: 'sovereign', register: 'plain',
+    trigger: {}, priority: 40, newbornOnly: false,
+    body: 'guidance.invitations.realm', glossaryRef: null,
+    budgetClass: 'wayfinding', component: 'CampaignEmptyState',
+  }),
 ]);
 
 /**
@@ -250,13 +293,15 @@ export const GUIDANCE_WHISPERS = Object.freeze([
  * (FirstDossierCallouts, WizardNextSteps, WelcomeBackCard, HelpPopover) and MINUS
  * the retired PostGenCoach (deleted, not legacy). Map-pane instructional
  * components stay here until the map-coordinated pass.
+ *
+ * W-GUIDE-2 §8 burned down two: SampleDashboard + CampaignEmptyState are now
+ * registered (the empty-states-as-invitations sweep), so they move OFF this
+ * ledger and the ceiling lowers with them (8 → 6).
  */
 export const LEGACY_GUIDANCE_COMPONENTS = Object.freeze([
   'PipelineReveal',
   'StaleNarrativeModal',
   'WorldMapTour',
-  'CampaignEmptyState',
-  'SampleDashboard',
   'HowToUse',
   'DesktopOnlyGate',
   'RealmMobileGate',

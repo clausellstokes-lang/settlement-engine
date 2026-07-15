@@ -1,6 +1,7 @@
-import { MUTED, SECOND, BORDER, sans, FS } from '../theme.js';
+import { MUTED, SECOND, BORDER, sans, FS, SP } from '../theme.js';
 import { SAMPLE_SETTLEMENTS } from '../../data/sampleSettlements.js';
 import { SampleCard } from './SampleCard.jsx';
+import SurveyorNote from '../guidance/SurveyorNote.jsx';
 
 export function SampleDashboard({ onFork, forkingId }) {
   return (
@@ -10,6 +11,12 @@ export function SampleDashboard({ onFork, forkingId }) {
       border: `1px solid ${BORDER}`,
       borderRadius: 8,
     }}>
+      {/* W-GUIDE-2 §8: the empty library greets the keeper in the Surveyor's
+          note register (registered whisper library_empty_invitation). A margin
+          rest-point invitation — it never blocks or floats. */}
+      <div style={{ marginBottom: SP.md }}>
+        <SurveyorNote topic="library" moment="empty" id="library-empty-invitation" compact />
+      </div>
       <div style={{
         fontSize: FS.xs, fontWeight: 800, color: MUTED,
         textTransform: 'uppercase', letterSpacing: '0.06em',

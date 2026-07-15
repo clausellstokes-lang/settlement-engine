@@ -722,6 +722,12 @@ export const en = Object.freeze({
         },
       },
     },
+    // ── Empty-state invitations, plain register (W-GUIDE-2 §8) ────────────
+    // House voice for the non-persona empty seams (realm dashboard). Software
+    // about software: no ✦, no "— S.", no second-person costume.
+    invitations: {
+      realm: 'A realm begins with a single holding. Place your first settlement, and the map starts reading the distances between them.',
+    },
   },
 
   // ── Account page ─────────────────────────────────────────────────────────
