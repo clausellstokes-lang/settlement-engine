@@ -69,6 +69,7 @@ import { advanceArmyTransit } from './armyTransitKernel.js';
 import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
+import { advanceCorruptionWeb } from './corruptionWeb.js';
 import { advanceWarReasons } from './warReasons.js';
 import { advancePeaceReasons } from './peaceReasons.js';
 import { advanceTreaties } from './peaceTerms.js';
@@ -315,6 +316,20 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // clean factions recede toward 'none'. Runs after seating so seats are current.
   const factionCapture = advanceFactionCapture(worldState, snapshot, rng.fork('faction-capture'), { tick: worldState.tick, guildStrengthBy, religionActive });
   worldState = factionCapture.worldState;
+  // W-DOCTRINE-3b — THE CORRUPTION WEB (foreign lanes, DESIGN_CORRUPTION_WEB.md §2). AFTER the
+  // local corruption onset + capture climb: a patron court mints ONE covert foreign asset in a
+  // CHANNELLED target (a hostile/rival edge, a criminal corridor, or an active smuggle path),
+  // under scarcity as law — one asset per (patron,target) pair, a small per-patron realm cap, an
+  // affordability (upkeep) gate, and an E0-tempo loaded draw weighted by channel quality × the E1
+  // obligation ledger (a generous patron recruits cheap) × the target's HIDE posture. It writes
+  // npcStates (corruption + the corruptionLeash sidecar); mirrorCorruptionOntoSettlement carries
+  // the leash onto settlement.npcs (the dual-write chokepoint). A patron at cap DEFERS (visible,
+  // not denied). DORMANT behind corruptionWebActive (beliefsActive + the virtual
+  // corruptionWebEnabled) ⇒ a complete no-op (zero forks, zero mints) — byte-identical.
+  {
+    const web = advanceCorruptionWeb({ snapshot, worldState, rng: rng.fork('corruption-web'), tick: worldState.tick });
+    if (web.changed) worldState = /** @type {typeof worldState} */ (web.worldState);
+  }
   // Recompute guild strength from the UPDATED capture states for this tick's
   // settlement mirror (power floor + legitimacy cap below).
   guildStrengthBy = computeGuildStrengthBy(worldState, snapshot);

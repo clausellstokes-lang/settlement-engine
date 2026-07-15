@@ -88,6 +88,10 @@ import {
   belief, readBeliefStrength, readBeliefRelationship, governingCoalition,
 } from './beliefMap.js';
 import { sightFidelityOf } from './informationStatecraft.js';
+// W-DOCTRINE-3b PAID EYES (§3): a live foreign-corruption asset grants its patron sight on the
+// target (the design's "sight + hand"). 0 when the corruption web is dormant / no asset ⇒
+// byte-identical (the web goldens never lit it).
+import { assetSightFidelityOf } from './corruptionWeb.js';
 import { computeMalice, computeLawfulness } from './disposition.js';
 import {
   settlementStrength, buildPressureSummary, getRelationshipSettlements,
@@ -321,7 +325,10 @@ export function readSupplyWeb(aggressorId, targetId, snapshot, worldState, diges
   // holds on the TARGET sharpens EVERY satellite read (watching the court reveals its
   // suppliers); a posture on a specific satellite sharpens that satellite. 0 when the
   // info-statecraft layer is dormant / no posture ⇒ byte-identical (the web goldens never lit it).
-  const targetSight = sightFidelityOf(worldState, String(aggressorId), String(targetId));
+  const targetSight = Math.max(
+    sightFidelityOf(worldState, String(aggressorId), String(targetId)),
+    assetSightFidelityOf(worldState, snapshot, String(aggressorId), String(targetId)),
+  );
 
   for (const link of links) {
     const redundancy = assessSourceRedundancy(link.rankedSources);

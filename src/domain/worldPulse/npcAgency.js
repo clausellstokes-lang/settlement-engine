@@ -214,9 +214,20 @@ export function mirrorCorruptionOntoSettlement(settlement, npcStates, settlement
     const vector = st.corruptionProfile?.vector || null;
     const ousted = !!st.ousted;
     const timesExposed = st.timesExposed || 0;
-    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted && (npc.timesExposed || 0) === timesExposed) return npc;
+    // W-DOCTRINE-3b — the foreign LEASH rides the SAME sync (the dual-write mirror
+    // discipline: the leash sits beside `corrupt` on BOTH sides of the settlement.npcs ↔
+    // npcStates seam). npcStates.corruptionLeash is written ONLY by the gated corruptionWeb
+    // mint — absent in every legacy world ⇒ this branch is inert ⇒ byte-identical. It carries
+    // onto corruptTies.leash so resolveLeash reads a minted asset exactly like a DM-composed one.
+    const leash = corrupt && st.corruptionLeash && typeof st.corruptionLeash === 'object' ? st.corruptionLeash : null;
+    const leashChanged = !!leash && JSON.stringify(npc.corruptTies?.leash ?? null) !== JSON.stringify(leash);
+    if (npc.corrupt === corrupt && npc.corruptionVector === vector && !!npc.ousted === ousted && (npc.timesExposed || 0) === timesExposed && !leashChanged) return npc;
     changed = true;
-    return { ...npc, corrupt, corruptionVector: vector, timesExposed, ...(ousted ? { ousted: true } : {}) };
+    return {
+      ...npc, corrupt, corruptionVector: vector, timesExposed,
+      ...(ousted ? { ousted: true } : {}),
+      ...(leashChanged ? { corruptTies: { ...(npc.corruptTies || {}), leash } } : {}),
+    };
   });
   return changed ? { ...settlement, npcs: nextNpcs } : settlement;
 }

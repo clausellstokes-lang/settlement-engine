@@ -23,6 +23,12 @@ import {
 // Phase 4 W-F3 site #7 — the corruption-plane amplifier over the INSTITUTION capture
 // rate (a pressure channel). 1.0 (byte-identical) for deity-free / legacy / non-devout.
 import { corruptionPlaneMultOf } from './piety.js';
+// W-DOCTRINE-3b THE CAPTURE FORK (§3): a FOREIGN-leashed corrupt seat feeds the patron's
+// derived foreign-grip read, NOT the LOCAL thieves-guild strength. Gated behind the
+// corruption-web flag ⇒ byte-identical when dark. Resolved through the leash chokepoint.
+import { npcId } from './npcAgency.js';
+import { corruptionWebActive } from './corruptionWeb.js';
+import { resolveLeash } from '../corruptionLeash.js';
 
 /**
  * The PARALLEL onset-style gate (a corrupt seat-holder climbs
@@ -57,17 +63,40 @@ export function advanceFactionCapture(worldState, snapshot, rng, { tick = 0, gui
     planeMultBy.set(String(item.id), religionActive ? corruptionPlaneMultOf(item.settlement) : 1);
   }
 
+  // W-DOCTRINE-3b THE CAPTURE FORK (§3): when the corruption web is LIT, a foreign-leashed
+  // corrupt seat is EXCLUDED from the LOCAL capture climb (it feeds foreignGripOf instead) —
+  // "a foreign court's asset strengthening the LOCAL thieves guild, today's accidental
+  // semantics, ends with the fork." Dark ⇒ the set is empty ⇒ every corrupt seat reads exactly
+  // as today (byte-identical). The foreign-ness is resolved once, through the leash chokepoint.
+  const webActive = corruptionWebActive(worldState);
+  /** @type {Set<string>} seat npcKeys whose leash is foreign (excluded from the LOCAL climb) */
+  const foreignSeatKeys = new Set();
+  if (webActive) {
+    for (const item of (snapshot?.settlements || [])) {
+      const sid = String(item.id);
+      const npcs = /** @type {import('../settlement.schema.js').SimNpc[]} */ (
+        Array.isArray(item.settlement?.npcs) ? item.settlement.npcs : []);
+      npcs.forEach((npc, index) => {
+        if (!npc || npc.corrupt !== true) return;
+        if (resolveLeash(npc, item.settlement).foreign) foreignSeatKeys.add(npcId(sid, npc, index));
+      });
+    }
+  }
+
   const transitions = [];
   for (const [fid, fs] of Object.entries(factionStates)) {
     const climate = climateBy.get(String(fs.settlementId)) || { security: 0.5, prosperity: 0.5, hasCriminalInst: false };
     // Relax the parallel gate with the same additive evil-deity term.
     const onsetEnabled = climate.hasCriminalInst || corruptingDeityBy.get(String(fs.settlementId)) === true;
 
-    // Highest-ranked corrupt seat-holder drives the climb.
+    // Highest-ranked corrupt seat-holder drives the climb. A foreign-leashed seat (the fork,
+    // above) is skipped: it grips its patron, not the local guild.
     let maxCorruptRank = 0;
     for (const seat of Object.values(fs.internalSeats || {})) {
       const st = seat && seat.npcId ? npcStates[seat.npcId] : null;
-      if (st && st.corruption) maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
+      if (st && st.corruption && !(webActive && foreignSeatKeys.has(seat.npcId))) {
+        maxCorruptRank = Math.max(maxCorruptRank, st.dotRank || seat.dotRank || 1);
+      }
     }
 
     // Guild strength drags effective security down here too.
