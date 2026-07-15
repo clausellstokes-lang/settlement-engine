@@ -23,13 +23,13 @@
 import { describe, expect, it } from 'vitest';
 
 import { createPRNG } from '../../src/kernel/prng.js';
+import { SETTLEMENT_LIFECYCLE_TUNING } from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
 import {
-  SETTLEMENT_LIFECYCLE_TUNING,
   evaluateSettlementLifecycle,
   applySettlementLifecycleOutcomeToSettlement,
   remnantGradeOf,
   lifecycleStatusOf,
-} from '../../src/domain/worldPulse/settlementLifecycleKernel.js';
+} from '../../src/domain/worldPulse/settlementLifecycleFirstClass.js';
 import { collectRealizedEmigrationEvents } from '../../src/domain/worldPulse/migrationKernel.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
 

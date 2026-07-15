@@ -27,7 +27,7 @@ import { proposalIdFor, updateProposalStatus, upsertProposal } from './worldStat
 import { applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import { applyResourceOutcomeToSettlement, applyTierOutcomeToSettlement } from './tierResourceDynamics.js';
 import { applyResourceMembershipOutcomeToSettlement } from './resourceDynamicsKernel.js';
-import { applySettlementLifecycleOutcomeToSettlement } from './settlementLifecycleKernel.js';
+import { applySettlementLifecycleOutcomeToSettlement } from './settlementLifecycleFirstClass.js';
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { resolveProposalToOutcome } from './decisionTier.js';

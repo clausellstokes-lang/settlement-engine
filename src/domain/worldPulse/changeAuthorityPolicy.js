@@ -126,7 +126,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
   }),
   settlement_terminal_death: Object.freeze({
     authority: 'proposal-gated',
-    module: 'settlementLifecycleKernel.js',
+    module: 'settlementLifecycleFirstClass.js',
     consultsProposalFlag: true,
     campaignAltering: true,
     rationale:
@@ -134,7 +134,7 @@ export const CHANGE_AUTHORITY_POLICY = Object.freeze({
   }),
   settlement_resettled: Object.freeze({
     authority: 'proposal-gated',
-    module: 'settlementLifecycleKernel.js',
+    module: 'settlementLifecycleFirstClass.js',
     consultsProposalFlag: true,
     rationale:
       'W-LIFECYCLE: a remnant re-founded as a living thorp is a structural roster change (a new premise about the world), the death lane\'s twin — gated on the same flag, forced to proposal under dm_only/recommendations via authorityFor.',

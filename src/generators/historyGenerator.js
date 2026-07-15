@@ -1061,6 +1061,13 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
 };
 
 // ─── generateHistory ──────────────────────────────────────────────────────────
+// ── W-LIFECYCLE stage 3 — the ancient-ruin flavor vocabulary (opt-in; see the
+// generateHistory block below). Kept local: a fallen-city name is a one-shot
+// flavor mint, not the settlement-naming machinery.
+const ANCIENT_RUIN_CHANCE = 0.15;
+const ANCIENT_RUIN_PREFIXES = ['Vael', 'Korrath', 'Ymber', 'Sarn', 'Thal', 'Ondrim', 'Ecser', 'Mor'];
+const ANCIENT_RUIN_SUFFIXES = ['akar', 'unde', 'eth', 'ovar', 'ys', 'antle', 'orim', 'ath'];
+
 /**
  * Main export. Assembles the complete history object for a settlement.
  *
@@ -1113,12 +1120,40 @@ export const generateHistory = (
   else if (timeline.some(e => e.severity === 'catastrophic'))
     historicalCharacter = 'defined by a single great catastrophe';
 
+  // ── W-LIFECYCLE stage 3 — GENERATION-SEEDED ANCIENTS (design §2 sub-century
+  // honesty: relic ruins arrive mostly as ancients, since a full city→thorp→death
+  // arc rarely completes inside 30 years). STRICTLY OPT-IN via config
+  // (`ancientRuinsEnabled: true`): the flag check precedes ANY draw, so a world
+  // without it consumes ZERO rng and generates byte-identically (the generator
+  // golden master never moves — the constitutional generation-side rule).
+  // Flavor + map feature only, no live state: an ancient "fallen city" event
+  // rides the EXISTING historicalEvents machinery (pre-founding yearsAgo), and
+  // `ancientRuin` is the display marker the realm map + dossier draw as ruins.
+  let ancientRuin = null;
+  if (config?.ancientRuinsEnabled === true && random01(ANCIENT_RUIN_CHANCE)) {
+    const ruinName = `${pick(ANCIENT_RUIN_PREFIXES)}${pick(ANCIENT_RUIN_SUFFIXES)}`;
+    const ancientYearsAgo = Math.max(age, 0) + randInt(120, 400);
+    ancientRuin = { name: ruinName, yearsAgo: ancientYearsAgo };
+    timeline.push({
+      name: `The Fall of ${ruinName}`,
+      type: 'disaster',
+      yearsAgo: ancientYearsAgo,
+      severity: 'catastrophic',
+      description: `Long before the first stone of this settlement was laid, the great city of ${ruinName} fell nearby; its relic ruin still stands — superstition-attracting, its interior the DM's.`,
+      lastingEffects: [`The relic ruin of ${ruinName} stands nearby.`],
+      plotHooks: [],
+      anchored: true,
+      ancientRuin: true,
+    });
+  }
+
   return {
     age,
     founding,
     historicalEvents: timeline,
     currentTensions: tensions,
     historicalCharacter,
+    ...(ancientRuin ? { ancientRuin } : {}),
     eventsTimeline: timeline.map(e => ({
       year: age - e.yearsAgo,
       yearsAgo: e.yearsAgo,
