@@ -101,7 +101,11 @@ behavior, budget raises, golden regens.
   ≥4 sites → resolver chokepoint; the exposure fallback mis-attributes foreign conspirators to
   the innocent local guild → deliberate attribution; one PLAUSIBLE covert-impairment-text leak
   through toPublicSafe flagged for the build wave's visibilityAudit pin). Build home W-DOCTRINE.
-  THE DESIGN CORPUS IS NOW CLOSED — the scope freeze is fully executed.
+  THE DESIGN CORPUS CLOSED at the scope freeze; REOPENED ONCE by owner directive (2026-07-14
+  late) for DESIGN_EVENT_COMPOSER_V2 (every capability forceable, bounded-by-construction, live
+  dial previews; recon found + design closes the PHANTOM-EVENT hole and retires the stale-preview
+  bypass; W-COMPOSER-1 parallel-safe with E1, W-COMPOSER-2 rides the proposal applier; the
+  COUNTERPART CRITERION is now a standing playbook law). Corpus closed again behind it.
 
 - **2026-07-14 — SCOPE FREEZE (owner: "for the first time in a minute... i think i am done adding
   things"):** the design corpus is CLOSED as of this ruling. Final scope = everything above +

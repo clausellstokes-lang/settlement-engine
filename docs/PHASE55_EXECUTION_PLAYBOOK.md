@@ -98,6 +98,12 @@ a new AI: the Claude memory dir + session task lists — everything needed is HE
 
 ### 0.0.2 STANDING AMENDMENTS + RULINGS (things a successor must not re-litigate)
 
+**THE COUNTERPART CRITERION (owner ruling 2026-07-14, binding on every capability wave):** no
+simulation capability ships without its forceable dossier counterpart IN THE SAME WAVE — the
+verb, its same-function affordance predicate, its bounded dial schema, and its live preview
+(DESIGN_EVENT_COMPOSER_V2 §1 LAW 2; enforced fail-closed by the coverage walker once
+W-COMPOSER-1 lands). Freetext law: identity-minting + flavor only, never behavior selection.
+
 **SITUATION-WEIGHTED PRNG (owner ruling, 2026-07-14, binding on all future waves):** every
 stochastic draw = a seeded fork on a stable composite key AND a situation-weighted distribution
 (EV/pressure/character loading first, the fork samples within it). Flat draws only where the
