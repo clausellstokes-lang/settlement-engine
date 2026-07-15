@@ -40,10 +40,12 @@ import { slugify } from '../../kernel/slugify.js';
 
 export const GLOSSARY_LAZY_SENTINEL = 'GLOSSARY_LAZY_SENTINEL';
 
-/** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive). */
+/** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive).
+ * @param {unknown} s */
 const slug = (s) => slugify(String(s));
 
-/** A concise title-cased term from an ENUM key or event type. */
+/** A concise title-cased term from an ENUM key or event type.
+ * @param {string} key */
 function titleize(key) {
   return String(key)
     .replace(/[_-]+/g, ' ')
@@ -111,9 +113,11 @@ const LINK = Object.freeze({
  * @property {string} anchor      — the compendium #anchor.
  */
 
-/** A code-DERIVED (never invented) one-liner for an event verb. */
+/** A code-DERIVED (never invented) one-liner for an event verb (the manifest's
+ * loose open-entry shape — the affordanceManifest Mut idiom).
+ * @param {Record<string, any>} verb */
 function verbDefinition(verb) {
-  const dials = (verb.dials || []).map((d) => d.label).filter(Boolean);
+  const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
   const article = /^[aeiou]/i.test(verb.family) ? 'An' : 'A';
   const base = `${article} ${verb.family} verb the DM can apply to the settlement`;
   if (dials.length === 0) return `${base}.`;
@@ -138,7 +142,7 @@ export function buildGlossaryEntries() {
       category: 'verb',
       definition: verbDefinition(verb),
       family: verb.family,
-      dials: (verb.dials || []).map((d) => d.label).filter(Boolean),
+      dials: (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean),
       ...LINK.verb,
     });
   }
@@ -160,7 +164,7 @@ export function buildGlossaryEntries() {
       id: `strain-${slug(band)}`,
       term: titleize(band),
       category: 'strain-band',
-      definition: STRAIN_DEFS[band],
+      definition: /** @type {Record<string, string>} */ (STRAIN_DEFS)[band],
       ...LINK['strain-band'],
     });
   }
@@ -171,7 +175,7 @@ export function buildGlossaryEntries() {
       id: `capture-${slug(rung)}`,
       term: titleize(rung),
       category: 'capture-rung',
-      definition: CAPTURE_DEFS[rung],
+      definition: /** @type {Record<string, string>} */ (CAPTURE_DEFS)[rung],
       ...LINK['capture-rung'],
     });
   }
@@ -182,7 +186,7 @@ export function buildGlossaryEntries() {
       id: `severity-${slug(level)}`,
       term: titleize(level),
       category: 'severity',
-      definition: SEVERITY_DEFS[level],
+      definition: /** @type {Record<string, string>} */ (SEVERITY_DEFS)[level],
       ...LINK.severity,
     });
   }
@@ -193,7 +197,7 @@ export function buildGlossaryEntries() {
       id: `magnitude-${slug(level)}`,
       term: titleize(level),
       category: 'magnitude',
-      definition: MAGNITUDE_DEFS[level],
+      definition: /** @type {Record<string, string>} */ (MAGNITUDE_DEFS)[level],
       ...LINK.magnitude,
     });
   }
