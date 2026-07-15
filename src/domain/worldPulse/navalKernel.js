@@ -113,8 +113,11 @@ function friendlyPortsFor(digest, graph, ownerId) {
   return navalPortsOf(digest).filter((p) => p !== ownerId && !hostileOwners(graph, ownerId, p));
 }
 
-/** Every port the frozen sea-lane set connects (codepoint-sorted). @param {SpatialDigest} digest @returns {string[]} */
-function navalPortsOf(digest) {
+/** Every port the frozen sea-lane set connects (codepoint-sorted). EXPORTED
+ *  (W-COMPOSER-2): the realm manifest's naval predicates/targetOptions and the DM
+ *  apply arms wrap THIS read (the same-function law).
+ *  @param {SpatialDigest} digest @returns {string[]} */
+export function navalPortsOf(digest) {
   const lanes = /** @type {{ reserved?: { seaLanes?: { ports?: string[] } } }} */ (digest)?.reserved?.seaLanes;
   return lanes && Array.isArray(lanes.ports) ? [...lanes.ports.map(String)].sort() : [];
 }
@@ -389,8 +392,8 @@ export function orderConvoyVerbFactory() {
     scope: 'realm',
     candidateType: 'convoy_ordered',
     dials: Object.freeze({ cargo: 'settlementId', destination: 'settlementId' }),
-    registered: false,
-    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+    registered: true,
+    note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }
 
@@ -401,7 +404,7 @@ export function declareBlockadeVerbFactory() {
     scope: 'realm',
     candidateType: 'blockade_declared',
     dials: Object.freeze({ target: 'settlementId' }),
-    registered: false,
-    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+    registered: true,
+    note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }

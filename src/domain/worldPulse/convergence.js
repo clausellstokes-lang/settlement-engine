@@ -899,9 +899,12 @@ function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, spon
 }
 
 /** The live coup contests this tick: brewing (unresolved) coup_detat stressors with a
- *  contested settlement that still has a live coup field. @param {WorldStateLike} worldState @param {Snapshot} snapshot
+ *  contested settlement that still has a live coup field. EXPORTED (W-COMPOSER-2): the
+ *  realm manifest's ORDER_INTERVENTION predicate/targetOptions and the DM apply arm wrap
+ *  THIS read (the same-function law) — never a re-implementation.
+ *  @param {WorldStateLike} worldState @param {Snapshot} snapshot
  *  @returns {Array<{ targetId: string, sponsorId: string|null }>} */
-function liveCoupContests(worldState, snapshot) {
+export function liveCoupContests(worldState, snapshot) {
   const stressors = Array.isArray(worldState?.stressors) ? worldState.stressors : [];
   /** @type {Array<{ targetId: string, sponsorId: string|null }>} */
   const out = [];
@@ -1260,8 +1263,8 @@ export function orderInterventionVerbFactory() {
     scope: 'realm',
     candidateType: 'intervention_ordered',
     dials: Object.freeze({ side: ['incumbent', 'challenger'], invited: [true, false] }),
-    registered: false,
-    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+    registered: true,
+    note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }
 
@@ -1273,8 +1276,8 @@ export function reinforceVerbFactory() {
     scope: 'realm',
     candidateType: 'reinforcement_ordered',
     dials: Object.freeze({ ally: 'settlementId', urgency: ['relieve', 'screen'] }),
-    registered: false,
-    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+    registered: true,
+    note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }
 
@@ -1286,8 +1289,8 @@ export function interceptVerbFactory() {
     scope: 'realm',
     candidateType: 'intercept_ordered',
     dials: Object.freeze({ believedColumn: 'settlementId' }),
-    registered: false,
-    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+    registered: true,
+    note: 'REGISTERED in realmManifest.js (the W-COMPOSER-2 lift).',
   });
 }
 

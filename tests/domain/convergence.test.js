@@ -457,15 +457,17 @@ describe('W-CONVERGENCE §4 — THE MERCENARY CLAUSE (a bounded reinforcement mo
   });
 });
 
-describe('W-CONVERGENCE §7 — the verbs ship registrable-shape, NOT registered', () => {
-  it('ORDER_INTERVENTION / REINFORCE / INTERCEPT carry realm scope + candidateType, registered:false', () => {
+describe('W-CONVERGENCE §7 — the verbs are REGISTERED (the W-COMPOSER-2 lift landed)', () => {
+  it('ORDER_INTERVENTION / REINFORCE / INTERCEPT carry realm scope + candidateType, registered:true', async () => {
     for (const v of [orderInterventionVerbFactory(), reinforceVerbFactory(), interceptVerbFactory()]) {
       expect(v.scope).toBe('realm');
-      expect(v.registered).toBe(false);
+      expect(v.registered).toBe(true);
       expect(typeof v.candidateType).toBe('string');
     }
-    expect(orderInterventionVerbFactory().verb).toBe('ORDER_INTERVENTION');
-    expect(reinforceVerbFactory().verb).toBe('REINFORCE');
-    expect(interceptVerbFactory().verb).toBe('INTERCEPT');
+    // The lift is real: each verb has a realm-manifest entry carrying its candidateType.
+    const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
+    expect(realmVerbFor('ORDER_INTERVENTION')?.candidateType).toBe(orderInterventionVerbFactory().candidateType);
+    expect(realmVerbFor('REINFORCE')?.candidateType).toBe(reinforceVerbFactory().candidateType);
+    expect(realmVerbFor('INTERCEPT')?.candidateType).toBe(interceptVerbFactory().candidateType);
   });
 });
