@@ -20,6 +20,9 @@ import {
   foreignClashes, foreignClashIntensityOf,
   interventionLedger, recordsForTarget, interventionAdjFor,
   orderInterventionVerbFactory, CONVERGENCE_TUNING,
+  deriveSides, engagementOptions, resolveSideBattle, reliefFlipsSiege,
+  prizeRivalryCasus, overstayOccupation, canReEngage,
+  INTERVENTION_STATES,
 } from '../../src/domain/worldPulse/convergence.js';
 
 const litRules = { simulationRules: { warLayerEnabled: true, interventionEnabled: true } };
@@ -224,6 +227,116 @@ describe('W-CONVERGENCE — the ledger read + interventionAdjFor', () => {
     expect(interventionAdjFor(withLedger(recs), 'ford')).toBe(CONVERGENCE_TUNING.PHOLD_WEIGHT);
     // A target with no records ⇒ 0.
     expect(interventionAdjFor(withLedger(recs), 'elsewhere')).toBe(0);
+  });
+});
+
+// ════════════════ Stage 2 — THE MULTI-SIDED LAW (§1) ════════════════
+
+describe('W-CONVERGENCE §6 PIN — rivals-never-merge (aim-group sides)', () => {
+  const hostilePair = (x, y) => [x, y].sort().join('|') === 'crown|delve';
+  it('two mutually-hostile same-pole besiegers stay SEPARATE sides', () => {
+    const sides = deriveSides([
+      { interId: 'crown', side: INTERVENTION_SIDES.CHALLENGER, strength: 60 },
+      { interId: 'delve', side: INTERVENTION_SIDES.CHALLENGER, strength: 60 },
+    ], hostilePair);
+    expect(sides.length).toBe(2);
+    expect(sides.every((s) => s.members.length === 1)).toBe(true);
+  });
+
+  it('two ALLIED same-pole backers MERGE into one aggregated side', () => {
+    const sides = deriveSides([
+      { interId: 'crown', side: INTERVENTION_SIDES.CHALLENGER, strength: 60 },
+      { interId: 'ashford', side: INTERVENTION_SIDES.CHALLENGER, strength: 40 },
+    ], () => false);
+    expect(sides.length).toBe(1);
+    expect(sides[0].members.sort()).toEqual(['ashford', 'crown']);
+    expect(sides[0].strength).toBe(100);
+  });
+
+  it('opposing poles are always distinct sides', () => {
+    const sides = deriveSides([
+      { interId: 'crown', side: INTERVENTION_SIDES.INCUMBENT, strength: 50 },
+      { interId: 'delve', side: INTERVENTION_SIDES.CHALLENGER, strength: 50 },
+    ], () => false);
+    expect(sides.length).toBe(2);
+    expect(sides.map((s) => s.pole).sort()).toEqual([INTERVENTION_SIDES.CHALLENGER, INTERVENTION_SIDES.INCUMBENT]);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — THE VULTURE (hold-EV beats engage-EV while rivals grind)', () => {
+  it('a strong THIRD side with two grinding rivals chooses HOLD, and it is receipted', () => {
+    const strong = engagementOptions({ myStrength: 100, rivalStrengths: [60, 60], exhaustion01: 0, patience01: 1 });
+    expect(strong.move).toBe('hold');
+    expect(strong.byMove.hold).toBeGreaterThan(strong.byMove.engage);
+    expect(strong.receipt).toMatch(/bleed|held/i);
+  });
+
+  it('with a SINGLE rival (no grinding to exploit) the vulture stands down and engages', () => {
+    const lone = engagementOptions({ myStrength: 100, rivalStrengths: [60], exhaustion01: 0, patience01: 1 });
+    expect(lone.byMove.hold).toBe(0); // no ≥2-rival grind to feast on
+    expect(lone.move).toBe('engage');
+  });
+
+  it('an exhausted, impatient side withdraws (cuts its losses)', () => {
+    const spent = engagementOptions({ myStrength: 40, rivalStrengths: [90], exhaustion01: 1, patience01: 0 });
+    expect(spent.move).toBe('withdraw');
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — counterforce resolves first + loser retreats', () => {
+  it('resolveSideBattle resolves through the field-battle machinery; the loser routes home recalled', () => {
+    const r = resolveSideBattle({ aId: 'crown', aStrength: 100, bId: 'delve', bStrength: 25, rng: null, tick: 5 });
+    // 100 vs 25 is past the CLAMP_RATIO edge ⇒ deterministic: crown wins.
+    expect(r.winnerId).toBe('crown');
+    expect(r.loserId).toBe('delve');
+    expect(r.loserRetreats).toBe(true);
+    expect(r.recalled).toEqual({ cause: 'field_battle_retreat', tick: 5 });
+    // Conserved: the loser is mauled, never annihilated (a floor survives to route home).
+    expect(r.strengthDelta.delve).toBeGreaterThan(0);
+    expect(r.strengthDelta.delve).toBeLessThan(25);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — relief-lifts-siege', () => {
+  it('a reinforced defense flips a marginal siege the bare defense would have lost', () => {
+    // Besieger edges the bare defender, but the relief column tips it back.
+    const flip = reliefFlipsSiege({ besiegerStrength: 62, defenderStrength: 50, reliefStrength: 40 });
+    expect(flip.tookWithoutRelief).toBe(true);
+    expect(flip.tookWithRelief).toBe(false);
+    expect(flip.lifted).toBe(true);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — prize-rivalry casus (between conquerors, no auto-war)', () => {
+  it('two conquerors racing for one prize mint a typed rivalry descriptor', () => {
+    const casus = prizeRivalryCasus('delve', 'crown', 0.7);
+    expect(casus).toEqual({ a: 'crown', b: 'delve', reason: expect.any(String), intensity: 0.7 });
+    expect(prizeRivalryCasus('crown', 'crown')).toBe(null);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — occupation-on-overstay', () => {
+  it('a prevailed column lingering past OVERSTAY_TICKS yields a conquest-shaped occupation outcome', () => {
+    const early = overstayOccupation({ interId: 'crown', target: 'ford', resolvedTick: 10, nowTick: 12, prevailed: true });
+    expect(early.occupies).toBe(false);
+    const over = overstayOccupation({ interId: 'crown', target: 'ford', resolvedTick: 10, nowTick: 10 + CONVERGENCE_TUNING.OVERSTAY_TICKS, prevailed: true });
+    expect(over.occupies).toBe(true);
+    // freshConquestsFrom keys on type/powerTransfer.cause + condition.causes[0].source (occupier).
+    expect(over.outcome.type).toBe('power_transfer');
+    expect(over.outcome.targetSaveId).toBe('ford');
+    expect(over.outcome.condition.causes[0].source).toBe('crown');
+    // A losing column never occupies.
+    expect(overstayOccupation({ interId: 'crown', target: 'ford', resolvedTick: 10, nowTick: 30, prevailed: false }).occupies).toBe(false);
+  });
+});
+
+describe('W-CONVERGENCE §6 PIN — aftermath dwell (attrited sides regroup before re-engaging)', () => {
+  it('an attrited side cannot re-engage until the dwell window elapses; others always can', () => {
+    const fresh = { state: INTERVENTION_STATES.BESIEGING, lastTick: 5 };
+    expect(canReEngage(fresh, 6)).toBe(true);
+    const bloodied = { state: INTERVENTION_STATES.ATTRITED, lastTick: 5 };
+    expect(canReEngage(bloodied, 5 + CONVERGENCE_TUNING.ATTRITED_DWELL_TICKS - 1)).toBe(false);
+    expect(canReEngage(bloodied, 5 + CONVERGENCE_TUNING.ATTRITED_DWELL_TICKS)).toBe(true);
   });
 });
 

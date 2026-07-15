@@ -67,6 +67,9 @@
 import { clamp01 } from '../../kernel/math.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { obligationMintMagnitude, foldObligations } from '../spatial/generosityReactions.js';
+// Stage 2 — the multi-sided law resolves pairwise through the EXISTING field-battle
+// machinery verbatim (owner law 2). Both are pure + aspatial-callable.
+import { resolveFieldBattle, fieldBattleWinProbability } from '../spatial/armyTransit.js';
 import { coupContenders } from '../rulingPowerCoup.js';
 import { foreignGripOf, obligationDebt01, directionBias } from './corruptionWeb.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
@@ -106,7 +109,37 @@ export const CONVERGENCE_TUNING = Object.freeze({
   // or opposed by strong counter-interveners aborts. Kept simple in wave 1 — the
   // strength-vs-opposition ratio, bounded.
   FEASIBILITY_FLOOR: 0.15,
+
+  // ── Stage 2 — THE MULTI-SIDED LAW (design §1) ─────────────────────────────────────
+  // The strategic engagement EV. Each present side chooses engage/hold/screen/withdraw.
+  PRIZE_VALUE: 1.0,           // the value of winning the contest outright
+  ENGAGE_ATTRITION_COST: 0.6, // the expected attrition a committed engagement costs
+  EXHAUSTION_PENALTY: 0.5,    // how much accumulated exhaustion sours an engagement
+  // THE VULTURE (the emergent incentive): while ≥2 rivals grind each other, the strongest
+  // third side's highest-EV move is HOLD — it grows relatively stronger for free.
+  VULTURE_VALUE: 1.4,
+  SIEGE_HOLD_BONUS: 0.3,      // holding while a siege matures (progress) is its own value
+  SCREEN_VALUE: 0.35,         // a cheap block — deny a rival's move without a pitched battle
+  WITHDRAW_VALUE: 0.9,        // the value of cutting losses (scales with exhaustion + impatience)
+  // AFTERMATH DWELL (the hysteresis): a bloodied (attrited) side does not re-collide for
+  // this many ticks — bloodied armies regroup before they re-engage.
+  ATTRITED_DWELL_TICKS: 3,
+  // OCCUPATION-ON-OVERSTAY: a victorious column that lingers past this many ticks after its
+  // contest resolved transitions to occupying (the freshConquestsFrom extension seam).
+  OVERSTAY_TICKS: 4,
 });
+
+// The per-side AFTERMATH STATE across ticks (design §1). Persisted on each record.
+export const INTERVENTION_STATES = Object.freeze({
+  BESIEGING: 'besieging',   // committed at the walls / pressing the contest
+  HOLDING: 'holding',       // the vulture — waiting while rivals bleed
+  SCREENING: 'screening',   // blocking a rival's move at low cost
+  ATTRITED: 'attrited',     // bloodied; in the re-engagement dwell window
+  RETREATED: 'retreated',   // beaten, routing home (recalled)
+});
+
+// The strategic MOVES a side's EV selects among each tick.
+export const ENGAGEMENT_MOVES = Object.freeze(['engage', 'hold', 'screen', 'withdraw']);
 
 // The intervention SIDE — which pole of the internal contest a foreign force backs.
 export const INTERVENTION_SIDES = Object.freeze({ INCUMBENT: 'incumbent', CHALLENGER: 'challenger' });
@@ -408,6 +441,7 @@ export function foreignClashes(records) {
  * @property {number} strength  aggregate effective strength (a number)
  * @property {number} sinceTick the tick the column committed
  * @property {number} lastTick  the tick this record last advanced
+ * @property {string} [state]   the Stage-2 aftermath state (INTERVENTION_STATES); absent until a resolution touches it
  */
 
 /** The live interventions ledger keyed `<interId>:<target>`, or null when absent/dormant.
@@ -431,6 +465,7 @@ export function interventionLedger(worldState) {
       strength: Math.max(0, num(r.strength, 0)),
       sinceTick: Math.max(0, Math.floor(num(r.sinceTick, 0))),
       lastTick: Math.max(0, Math.floor(num(r.lastTick, 0))),
+      ...(typeof r.state === 'string' ? { state: String(r.state) } : {}),
     };
   }
   return Object.keys(out).length ? out : null;
@@ -462,6 +497,188 @@ export function interventionAdjFor(worldState, saveId) {
   if (total <= 0) return 0;
   const shares = recs.map((r) => ({ side: r.side, strengthShare01: r.strength / total }));
   return interventionTilt(shares);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════════
+// Stage 2 — THE MULTI-SIDED LAW (design §1). Sides are AIM-GROUPS; rivals NEVER merge.
+// ═══════════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Derive the aim-group SIDES at a contested target (design §1). Interveners on the SAME
+ * pole (incumbent / challenger) are co-belligerents and MERGE into one side — UNLESS any
+ * pair among them is mutually HOSTILE, in which case they stay SEPARATE (rivals never
+ * merge: two empires each racing to install their OWN claimant are distinct sides even
+ * though both oppose the seat). The defender pole is always its own side. Pure,
+ * deterministic (codepoint-ordered). @param {Array<{ interId: string, side: string, strength: number }>} records
+ * @param {(a: string, b: string) => boolean} isHostile  mutual-hostility predicate over patron ids
+ * @returns {Array<{ pole: string, members: string[], strength: number }>}
+ */
+export function deriveSides(records, isHostile) {
+  const recs = Array.isArray(records) ? records : [];
+  /** @type {Array<{ pole: string, members: string[], strength: number }>} */
+  const sides = [];
+  for (const pole of [INTERVENTION_SIDES.INCUMBENT, INTERVENTION_SIDES.CHALLENGER]) {
+    const members = recs.filter((r) => r.side === pole).sort((a, b) => codepoint(String(a.interId), String(b.interId)));
+    if (!members.length) continue;
+    // Any mutually-hostile pair among the pole ⇒ they are RIVALS; each stands alone.
+    let anyHostile = false;
+    for (let i = 0; i < members.length && !anyHostile; i++) {
+      for (let j = i + 1; j < members.length; j++) {
+        if (typeof isHostile === 'function' && isHostile(String(members[i].interId), String(members[j].interId))) { anyHostile = true; break; }
+      }
+    }
+    if (anyHostile) {
+      for (const m of members) sides.push({ pole, members: [String(m.interId)], strength: Math.max(0, num(m.strength, 0)) });
+    } else {
+      sides.push({ pole, members: members.map((m) => String(m.interId)), strength: members.reduce((s, m) => s + Math.max(0, num(m.strength, 0)), 0) });
+    }
+  }
+  return sides;
+}
+
+/**
+ * The strategic engagement EV for ONE side against the other present sides (design §1,
+ * §H-loaded on believed strengths). Returns the EV of each move + the chosen move + a
+ * receipt. THE VULTURE DYNAMIC emerges free: while ≥2 rivals are present to grind each
+ * other, a strong side's HOLD-EV (grow relatively stronger for free) beats its ENGAGE-EV
+ * (pay attrition even on a win). Pure, deterministic.
+ * @param {{ myStrength: number, rivalStrengths?: number[], exhaustion01?: number,
+ *   patience01?: number, siegeProgress01?: number }} args
+ * @returns {{ move: string, byMove: Record<string, number>, receipt: string }}
+ */
+export function engagementOptions({ myStrength, rivalStrengths = [], exhaustion01 = 0, patience01 = 1, siegeProgress01 = 0 }) {
+  const T = CONVERGENCE_TUNING;
+  const mine = Math.max(0, num(myStrength, 0));
+  const rivals = (Array.isArray(rivalStrengths) ? rivalStrengths : []).map((x) => Math.max(0, num(x, 0)));
+  const exhaustion = clamp01(num(exhaustion01, 0));
+  const patience = clamp01(num(patience01, 1));
+  const siege = clamp01(num(siegeProgress01, 0));
+  const strongestRival = rivals.length ? Math.max(...rivals) : 0;
+  const totalRival = rivals.reduce((s, x) => s + x, 0);
+
+  // ENGAGE the strongest rival: P(win)×prize, minus the attrition it costs (paid even on a
+  // win) and the exhaustion drag. No rival ⇒ nothing to engage.
+  const pWin = strongestRival > 0 ? fieldBattleWinProbability(mine, strongestRival) : 0;
+  const engageEV = strongestRival > 0
+    ? round4(pWin * T.PRIZE_VALUE - (1 - pWin) * T.ENGAGE_ATTRITION_COST - exhaustion * T.EXHAUSTION_PENALTY)
+    : 0;
+  // HOLD (the vulture): with ≥2 rivals present, they will grind each other and I grow
+  // relatively stronger. Scales with the rivals' share of the field. Plus a maturing siege
+  // rewards patience.
+  const rivalsGrind = rivals.length >= 2 ? 1 : 0;
+  const rivalShare = clamp01(totalRival / Math.max(1e-6, mine + totalRival));
+  const holdEV = round4(rivalsGrind * T.VULTURE_VALUE * rivalShare + siege * T.SIEGE_HOLD_BONUS);
+  // SCREEN: a cheap block — deny a rival its move without a pitched battle. Valued when a
+  // rival is present but I'd rather not commit.
+  const screenEV = round4(strongestRival > 0 ? T.SCREEN_VALUE * (1 - exhaustion) : 0);
+  // WITHDRAW: cut losses. Rises with exhaustion + impatience.
+  const withdrawEV = round4(T.WITHDRAW_VALUE * clamp01(0.5 * exhaustion + 0.5 * (1 - patience)));
+
+  /** @type {Record<string, number>} */
+  const byMove = { engage: engageEV, hold: holdEV, screen: screenEV, withdraw: withdrawEV };
+  // Deterministic pick: highest EV, ENGAGEMENT_MOVES order as the tiebreak.
+  let move = 'hold';
+  let bestEV = -Infinity;
+  for (const m of ENGAGEMENT_MOVES) {
+    if (byMove[m] > bestEV) { bestEV = byMove[m]; move = m; }
+  }
+  let receipt;
+  if (move === 'hold' && rivalsGrind) receipt = 'Held its banners — better the rivals bleed each other while we grow the stronger for it.';
+  else if (move === 'engage') receipt = 'Committed to the field — the prize is worth the blood.';
+  else if (move === 'screen') receipt = 'Screened the rival\'s march — a block, not a battle.';
+  else if (move === 'withdraw') receipt = 'Broke off — the war costs more than the seat is worth to us now.';
+  else receipt = 'Held its ground.';
+  return { move, byMove, receipt };
+}
+
+/**
+ * Resolve the tick's chosen ENGAGEMENT between two sides PAIRWISE through the existing
+ * field-battle machinery VERBATIM (owner law 2 — counterforce resolves as battle, the
+ * survivor then tilts). Aspatial-callable (resolveFieldBattle is pure). Returns the
+ * winner/loser side ids + their new aggregate strengths + the loser's retreat flag. The
+ * loser routes home via the standing recalled:{cause:'field_battle_retreat'} homecoming.
+ * @param {{ aId: string, aStrength: number, bId: string, bStrength: number, rng: any, tick: number }} args
+ * @returns {{ winnerId: string, loserId: string, strengthDelta: Record<string, number>, loserRetreats: true, recalled: { cause: string, tick: number } }}
+ */
+export function resolveSideBattle({ aId, aStrength, bId, bStrength, rng, tick }) {
+  const result = resolveFieldBattle({
+    a: { armyId: String(aId), size: Math.max(0, num(aStrength, 0)) },
+    b: { armyId: String(bId), size: Math.max(0, num(bStrength, 0)) },
+    rng, tick: Math.max(0, Math.floor(num(tick, 0))),
+  });
+  return {
+    winnerId: result.winnerId,
+    loserId: result.loserId,
+    strengthDelta: result.strengthDelta,
+    loserRetreats: true,
+    // The loser reuses the standing retreat homecoming (the M5 field_battle_retreat surface).
+    recalled: { cause: 'field_battle_retreat', tick: Math.max(0, Math.floor(num(tick, 0))) },
+  };
+}
+
+/**
+ * Whether a marginal siege verdict FLIPS when a treaty-ally's relief reinforces the
+ * defense (design §1 relief-lifts-siege / §3 REINFORCE). Pure demonstration over the
+ * field-battle win-probability curve: the besieger beats the bare defender but NOT the
+ * relief-reinforced one. @param {{ besiegerStrength: number, defenderStrength: number, reliefStrength: number }} args
+ * @returns {{ tookWithoutRelief: boolean, tookWithRelief: boolean, lifted: boolean }}
+ */
+export function reliefFlipsSiege({ besiegerStrength, defenderStrength, reliefStrength }) {
+  const bes = Math.max(0, num(besiegerStrength, 0));
+  const def = Math.max(0, num(defenderStrength, 0));
+  const relief = Math.max(0, num(reliefStrength, 0));
+  // The besieger "takes" the town when its field-win probability vs the defense exceeds 0.5.
+  const tookWithoutRelief = fieldBattleWinProbability(bes, def) > 0.5;
+  const tookWithRelief = fieldBattleWinProbability(bes, def + relief) > 0.5;
+  return { tookWithoutRelief, tookWithRelief, lifted: tookWithoutRelief && !tookWithRelief };
+}
+
+/**
+ * The typed PRIZE-RIVALRY casus between two CONQUERORS racing for one city (design §1):
+ * two rivals both aiming to take the same prize are minting their next war. Returns the
+ * codepoint-ordered pair descriptor (a war reason between them — no auto-war; the reasons
+ * machinery decides escalation). @param {string} aId @param {string} bId @param {number} [intensity01]
+ * @returns {{ a: string, b: string, reason: string, intensity: number } | null}
+ */
+export function prizeRivalryCasus(aId, bId, intensity01 = 0.5) {
+  const a = String(aId); const b = String(bId);
+  if (!a || !b || a === b) return null;
+  const [x, y] = [a, b].sort(codepoint);
+  return { a: x, b: y, reason: 'Two banners raced for one crown — the prize itself is now the quarrel between them.', intensity: round4(clamp01(num(intensity01, 0.5))) };
+}
+
+/**
+ * Whether a victorious column that lingered past its resolved contest transitions to
+ * OCCUPATION (design §1 occupation-on-overstay). The dwell since the contest resolved
+ * crossing OVERSTAY_TICKS yields a typed conquest outcome the occupation layer's
+ * freshConquestsFrom can read. Pure. @param {{ interId: string, target: string, resolvedTick: number, nowTick: number, prevailed: boolean }} args
+ * @returns {{ occupies: boolean, outcome: Record<string, unknown> | null }}
+ */
+export function overstayOccupation({ interId, target, resolvedTick, nowTick, prevailed }) {
+  const dwell = Math.max(0, Math.floor(num(nowTick, 0)) - Math.floor(num(resolvedTick, 0)));
+  if (!prevailed || dwell < CONVERGENCE_TUNING.OVERSTAY_TICKS) return { occupies: false, outcome: null };
+  // A conquest-shaped power_transfer the occupation layer reads (freshConquestsFrom keys on
+  // type:'power_transfer' + powerTransfer.cause + condition.causes[0].source = the occupier).
+  const outcome = {
+    type: 'power_transfer',
+    candidateType: 'conquest',
+    targetSaveId: String(target),
+    powerTransfer: { cause: 'intervention', tick: Math.floor(num(nowTick, 0)), occupier: String(interId) },
+    condition: { archetype: 'occupation_seed', causes: [{ source: String(interId), effect: 'intervention_occupation' }] },
+  };
+  return { occupies: true, outcome };
+}
+
+/**
+ * Whether an ATTRITED side may re-engage yet (design §1 aftermath dwell): a bloodied side
+ * regroups for ATTRITED_DWELL_TICKS before it re-collides — bloodied armies don't
+ * immediately re-fight. Any non-attrited state may always engage. Pure.
+ * @param {{ state?: string, lastTick?: number } | null} record @param {number} nowTick @returns {boolean}
+ */
+export function canReEngage(record, nowTick) {
+  if (!record || record.state !== INTERVENTION_STATES.ATTRITED) return true;
+  const since = Math.floor(num(nowTick, 0)) - Math.floor(num(record.lastTick, 0));
+  return since >= CONVERGENCE_TUNING.ATTRITED_DWELL_TICKS;
 }
 
 // ── Live derivation (the snapshot reads that feed the pure scorers) ─────────────────
@@ -682,6 +899,57 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     newsEntries.push(interventionNews({ patronId: best.patronId, targetId, chosen: best.chosen, legit, snapshot, tick: nowTick, now }));
   }
 
+  // ── THE MULTI-SIDED RESOLUTION (design §1, owner law 2). Where ADVERSARIAL columns meet
+  // at one contest, counterforce resolves as a FIELD BATTLE (resolveSideBattle verbatim);
+  // the loser's side RETREATS home (records dropped — the field_battle_retreat homecoming)
+  // and the SURVIVOR tilts the verdict. §H engagement selection first: with ≥2 rivals a
+  // strong side may HOLD (the vulture) instead of engaging. Aftermath dwell honored. One
+  // engagement per target per tick (bounded). Only runs lit ⇒ byte-identical when dark.
+  const isHostilePatrons = (/** @type {string} */ x, /** @type {string} */ y) =>
+    neighborsOf(edges, x).some((n) => n.otherId === String(y) && HOSTILE_REL.has(n.relType));
+  for (const targetId of [...new Set(Object.keys(next).map((k) => next[k].target))].sort(codepoint)) {
+    const recs = Object.keys(next).filter((k) => next[k].target === targetId).map((k) => next[k]);
+    if (recs.length < 2) continue;
+    const sides = deriveSides(recs, isHostilePatrons)
+      .sort((a, b) => b.strength - a.strength || codepoint(a.members[0], b.members[0]));
+    if (sides.length < 2) continue;
+    const S = sides[0];
+    const adversarial = (/** @type {typeof S} */ X, /** @type {typeof S} */ Y) =>
+      X.pole !== Y.pole || isHostilePatrons(X.members[0], Y.members[0]);
+    const opp = sides.slice(1).find((x) => adversarial(S, x));
+    if (!opp) continue;
+    // Aftermath dwell: a bloodied side regroups before it re-collides.
+    const ready = (/** @type {typeof S} */ side) => side.members.every((m) => canReEngage(next[`${m}:${targetId}`], nowTick));
+    if (!ready(S) || !ready(opp)) continue;
+    // §H engagement selection: resolve only if at least one side chooses to ENGAGE.
+    const others = (/** @type {typeof S} */ self) => sides.filter((x) => x !== self).map((x) => x.strength);
+    const sMove = engagementOptions({ myStrength: S.strength, rivalStrengths: others(S) }).move;
+    const oMove = engagementOptions({ myStrength: opp.strength, rivalStrengths: others(opp) }).move;
+    if (sMove !== 'engage' && oMove !== 'engage') {
+      // The vulture / mutual hold — no battle this tick; mark the holders.
+      for (const m of [...S.members, ...opp.members]) {
+        const k = `${m}:${targetId}`;
+        if (next[k]) next[k] = { ...next[k], state: INTERVENTION_STATES.HOLDING, lastTick: nowTick };
+      }
+      continue;
+    }
+    // Counterforce resolves FIRST (owner law 2): the field battle.
+    const battle = resolveSideBattle({ aId: S.members[0], aStrength: S.strength, bId: opp.members[0], bStrength: opp.strength, rng, tick: nowTick });
+    const winSide = battle.winnerId === S.members[0] ? S : opp;
+    const loseSide = battle.winnerId === S.members[0] ? opp : S;
+    const winNew = num(battle.strengthDelta[winSide.members[0]], winSide.strength);
+    const winRatio = winSide.strength > 0 ? winNew / winSide.strength : 1;
+    // The winner besieges weaker (proportional attrition), marked ATTRITED (bloodied → dwell).
+    for (const m of winSide.members) {
+      const k = `${m}:${targetId}`;
+      if (next[k]) next[k] = { ...next[k], strength: round4(next[k].strength * winRatio), state: INTERVENTION_STATES.ATTRITED, lastTick: nowTick };
+    }
+    // The loser's side RETREATS home — its records leave the contest (the M5 homecoming).
+    for (const m of loseSide.members) delete next[`${m}:${targetId}`];
+    mutated = true;
+    newsEntries.push(sideBattleNews({ winnerId: winSide.members[0], loserId: loseSide.members[0], targetId, snapshot, tick: nowTick, now }));
+  }
+
   if (!mutated && !obligationMints.length) {
     return { worldState, changed: false, newsEntries: [], deferrals };
   }
@@ -780,6 +1048,35 @@ function interventionNews({ patronId, targetId, chosen, legit, snapshot, tick, n
       ? ['world_pulse', 'war', 'intervention', chosen.motive, 'casus_generative']
       : ['world_pulse', 'war', 'intervention', chosen.motive],
     reasons: [chosen.receipt, legit.receipt].filter(Boolean),
+    createdAt: now,
+  };
+}
+
+/** A regional wizard-news entry for a multi-sided FIELD BATTLE between two interveners at a
+ *  contested settlement (AGGREGATE — no npc). @param {any} args */
+function sideBattleNews({ winnerId, loserId, targetId, snapshot, tick, now }) {
+  const winner = nameOf(snapshot, winnerId);
+  const loser = nameOf(snapshot, loserId);
+  const target = nameOf(snapshot, targetId);
+  const pair = [String(winnerId), String(loserId)].sort();
+  return {
+    id: `wizard_news.${tick}.intervention_clash.${pair[0]}.${pair[1]}`,
+    tick,
+    scope: 'regional',
+    significance: 'notable',
+    score: 63,
+    headline: `${winner}'s and ${loser}'s columns collide over ${target}`,
+    summary: `Two foreign hosts converging on ${target}'s contest met in the field. ${winner} held the ground; ${loser}'s column falls back home mauled, leaving the seat to the survivor's hand.`,
+    kind: 'applied',
+    impactKind: 'intervention_clash',
+    channelType: null,
+    severity: 0.58,
+    settlementIds: [String(winnerId), String(loserId), String(targetId)],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `intervention_clash.${pair[0]}.${pair[1]}.${tick}`,
+    tags: ['world_pulse', 'war', 'intervention', 'field_battle'],
+    reasons: [`Converging interveners met in ${target}'s approaches; the loser retreats and the survivor tilts the verdict.`],
     createdAt: now,
   };
 }
