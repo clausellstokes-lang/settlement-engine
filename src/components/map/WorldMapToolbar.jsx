@@ -363,7 +363,6 @@ function WorldMapToolbarImpl({
               <select
                 value={worldPulseInterval}
                 onChange={e => setWorldPulseInterval(e.target.value)}
-                title="Realm advancement interval"
                 aria-label="Realm advancement interval"
                 style={{
                   minHeight: 40,
@@ -518,7 +517,6 @@ function WorldMapToolbarImpl({
                         <select
                           value={currentTemplate}
                           onChange={e => handleTemplateChange(e.target.value)}
-                          title="Island shape for next regeneration"
                           aria-label="Island shape for next regeneration"
                           style={{
                             flex: 1,

@@ -91,4 +91,23 @@ describe('glossary coverage — every registry term produces exactly one entry',
       expect(e.tab.length).toBeGreaterThan(0);
     }
   });
+
+  // THE whatPhrase NEVER-LEAK-A-SLUG LAW (§6): the glossary NAMES engine tokens
+  // (verb types, band enums), so its displayed TERM must always be the human
+  // reading — never the raw ENGINE_SNAKE / kebab-slug it derives from. (The raw
+  // token stays confined to the entry `id`, never the `term`.)
+  it('never leaks a raw engine slug as a displayed term', () => {
+    for (const e of entries) {
+      expect(/^[A-Z0-9]+(_[A-Z0-9]+)+$/.test(e.term), `${e.id} term "${e.term}" is a raw ENGINE_SNAKE token`).toBe(false);
+      expect(e.term.includes('_'), `${e.id} term "${e.term}" leaks an underscore slug`).toBe(false);
+      expect(/^[a-z0-9]+(-[a-z0-9]+)+$/.test(e.term), `${e.id} term "${e.term}" reads as a kebab slug`).toBe(false);
+      expect(/[A-Za-z]/.test(e.term), `${e.id} term "${e.term}" has no letters`).toBe(true);
+    }
+    // A verb's term is the human LABEL, never its raw event type.
+    for (const v of authorableVerbs()) {
+      const e = entries.find((x) => x.category === 'verb' && x.id === `verb-${v.type.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`);
+      expect(e, `verb ${v.type} missing`).toBeTruthy();
+      expect(e.term, `verb ${v.type} term leaked the raw type`).not.toBe(v.type);
+    }
+  });
 });
