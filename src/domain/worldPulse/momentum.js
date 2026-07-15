@@ -44,6 +44,12 @@ import { beliefsActive } from './beliefMap.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { ARMY_ROLES } from '../spatial/armyTransit.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+// Stage 2 threshold reads (all EXPORTED, already eager via disposition ⇒ zero first-paint
+// delta when pulled through this lazy leaf): the entity's alignment coordinates + the
+// authored-importance weight + the legitimacy ledger.
+import { computeLawfulness, computeMalice } from './disposition.js';
+import { importanceWeight } from '../entities/npcs.js';
+import { governanceLedger } from '../governanceLedger.js';
 
 // ── Small pure helpers (the informationStatecraft idiom) ────────────────────────
 /** @param {unknown} v @param {number} fallback @returns {number} */
@@ -401,4 +407,295 @@ export function advanceCommitments({ worldState, tick, deposits = null }) {
     ? setSpatialLedger(ws, 'commitments', next)
     : dropSpatialLedger(ws, 'commitments');
   return { worldState: nextWorldState, changed: true };
+}
+
+// ════════════════════════════════════════════════════════════════════════════════
+// STAGE 2 — THE THRESHOLD (design §2: entity-appropriate, alignment-shaped, NPC-rooted)
+// ════════════════════════════════════════════════════════════════════════════════
+// Below the cliff, reconsideration is FREE PHYSICS (today's behavior, unchanged bytes).
+// Past the cliff, THE LIMIT CLAUSE (owner-verbatim): redirecting is ~an ORDER OF MAGNITUDE
+// harder (CLIFF_MULT), NEVER certain — weights, never walls, no absorbing state. The cliff
+// HEIGHT derives from all-existing, all-bounded, all-receipted reads: the leader's
+// temperament, lawful×chaos, good×evil, legitimacy fragility, and court structure.
+//
+// PLACEMENT (JUDGMENT — say "veto" to move it): TRAIT_MOMENTUM lives in THIS lazy leaf, not
+// data/npcTraitWeights.js beside its TRAIT_ALIGNMENT/TRAIT_AGGRESSION siblings. Rationale:
+// momentum's ONLY consumer is the lazy pulse kernel, so the map here is ZERO first-paint;
+// adding it to the light npcTraitWeights leaf (an EAGER member via corruption.js) would add
+// ~1 kB to the entry closure for no eager consumer — the strongest form of the FP-G3
+// light-leaf principle the design §5 cites ("placement follows the light-leaf pattern
+// consciously").
+
+/**
+ * TRAIT_MOMENTUM — signed commitment-momentum weights over the AUTHORED personality
+ * descriptor vocabulary (the npcTraitWeights idiom EXACTLY: lowercase descriptor → signed
+ * |w| ≤ 1; a descriptor absent from this map contributes EXACTLY 0 — neutral, so adding
+ * vocabulary never silently churns a score). A POSITIVE weight RAISES the reconsideration
+ * cliff (holds a course past reason); a NEGATIVE weight LOWERS it (reconsiders cheap). Keys
+ * are lowercased; lookups normalize case + trim. Pure data — frozen so a typo'd key reads
+ * as `undefined` (→ 0). `cautious` is special: it lowers commitment ENTRY (Stage 1 deposits,
+ * a seam) but not exit, so it carries a NEGATIVE cliff weight but is flagged below.
+ * @type {Readonly<Record<string, number>>}
+ */
+export const TRAIT_MOMENTUM = Object.freeze({
+  // ── raise the cliff (the crown that will not bend) ─────────────────────────
+  proud: 0.7,
+  arrogant: 0.65,
+  stubborn: 0.8,
+  obstinate: 0.75,
+  tenacious: 0.7,
+  dogged: 0.6,
+  zealous: 0.65,
+  fanatical: 0.85,
+  wrathful: 0.55,
+  vengeful: 0.6,
+  vindictive: 0.55,
+  obsessive: 0.7,
+  domineering: 0.5,
+  imperious: 0.5,
+  ambitious: 0.4,
+  ruthless: 0.45,
+  defiant: 0.55,
+  // ── lower the cliff (the court that reconsiders) ───────────────────────────
+  humble: -0.6,
+  patient: -0.55,
+  pragmatic: -0.7,
+  'level-headed': -0.6,
+  'fair-minded': -0.4,
+  opportunistic: -0.5,
+  diplomatic: -0.55,
+  flexible: -0.55,
+  adaptable: -0.5,
+  'open-minded': -0.5,
+  reasonable: -0.45,
+  cynical: -0.3,
+  // ── cautious: lowers ENTRY not exit (Stage 1-facing; flagged in ENTRY_ONLY) ─
+  cautious: -0.4,
+  wary: -0.3,
+});
+
+/** Descriptors whose weight applies to commitment ENTRY (deposits) only, NOT the exit
+ * cliff (design §2: "cautious lowers commitment ENTRY but not exit"). */
+export const TRAIT_MOMENTUM_ENTRY_ONLY = Object.freeze(new Set(['cautious', 'wary']));
+
+export const THRESHOLD_TUNING = Object.freeze({
+  // How far temperament (signed −1..+1) swings the cliff off BASE_CLIFF_STOCK. Proud (+1) ⇒
+  // ×1.7; humble (−1) ⇒ ×0.3. Soak-tunable.
+  TEMPERAMENT_SPAN: 0.7,
+  // A fragile seat (legitimacyFragility01 → 1) doubles down hardest — it cannot look weak.
+  FRAGILITY_SPAN: 0.5,
+  // A consolidated autocratic court raises the cliff (no voices force the question).
+  CONSOLIDATION_SPAN: 0.4,
+  // Live opposition blocs lower it (the question keeps being asked); saturating.
+  OPPOSITION_SPAN: 0.5,
+  OPPOSITION_SAT: 3,
+  // The cliff never falls below this fraction of BASE (a finite, always-crackable floor —
+  // the anti-absorbing-state guard applies to the HEIGHT too, not only CLIFF_MULT).
+  CLIFF_FLOOR_FRAC: 0.2,
+  // Lawful×chaos: lawfulness (0..1, 0.5 neutral) scales DEPOSITS — a lawful court is bound
+  // hard by formal public acts (oaths mean things); a chaotic one loosely (reversal cheap).
+  DEPOSIT_LAW_SPAN: 0.6,
+  // The PROCEDURAL CRACK: a lawful court reconsidering through legitimate process pays a
+  // reduced climb-down price (Stage 4 consumes this); chaotic reversals are cheap but erratic.
+  PROCEDURAL_CRACK_SPAN: 0.5,
+  // Good×evil: the counter-evidence EFFECTIVENESS floor for humanitarian evidence heard by a
+  // fully-evil court (it hears only power). A saintly court hears humanitarian at ~full weight.
+  HUMANITARIAN_EVIL_FLOOR: 0.2,
+  // Power/strategic evidence penetrates every court at ~full weight (lost battles count).
+  POWER_PENETRATION: 1.0,
+});
+
+// ── TEMPERAMENT (the leader's character, aggregated) ────────────────────────────
+/** @param {unknown} v @returns {string[]} the authored personality descriptors of an NPC. */
+function authoredMomentumTraits(v) {
+  const npc = asObject(v);
+  const p = npc.personality;
+  if (!p) return [];
+  if (typeof p === 'string') return [p];
+  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
+  const o = asObject(p);
+  return [o.dominant, o.flaw, o.modifier].filter((x) => typeof x === 'string').map(String);
+}
+
+/** The DECLARED npcTemperament facet on a custom NPC, or null (the facet law: a declared
+ * facet COUNTS; inference falls back to the authored traits — byte-identical degradation).
+ * Read defensively off `npc.facets.npcTemperament` / `npc.temperament` (string | string[]).
+ * SEAM: formal registration of an `npcTemperament` kind through cohesionWeave.facetOf is the
+ * wiring-pass follow-up; the declared read here honors the design intent today.
+ * @param {unknown} v @returns {string[] | null} */
+function declaredTemperamentFacet(v) {
+  const npc = asObject(v);
+  const facets = asObject(npc.facets);
+  const raw = facets.npcTemperament != null ? facets.npcTemperament : npc.temperament;
+  if (raw == null) return null;
+  if (typeof raw === 'string') return raw.trim() ? [raw] : null;
+  if (Array.isArray(raw)) {
+    const list = raw.filter((x) => typeof x === 'string' && x.trim());
+    return list.length ? list.map(String) : null;
+  }
+  return null;
+}
+
+/**
+ * The signed commitment-momentum score for ONE NPC's temperament (Σ of TRAIT_MOMENTUM
+ * weights, clamped to −1..+1). FACET LAW: a declared npcTemperament facet wins; else the
+ * authored personality descriptors are read (byte-identical degradation). A trait-free NPC
+ * scores EXACTLY 0 (the neutral anchor). @param {unknown} npc @returns {number}
+ */
+export function npcMomentumScore(npc) {
+  const declared = declaredTemperamentFacet(npc);
+  const traits = declared && declared.length ? declared : authoredMomentumTraits(npc);
+  let score = 0;
+  for (const t of traits) {
+    const w = /** @type {Record<string, number>} */ (TRAIT_MOMENTUM)[String(t).trim().toLowerCase()];
+    if (Number.isFinite(w)) score += w;
+  }
+  return clamp(score, -1, 1);
+}
+
+/**
+ * The settlement's aggregate temperament momentum: the importance-weighted mean of its NPCs'
+ * npcMomentumScore (the personalityDrive shape — the governing-power factor is a single
+ * settlement-level scalar applied to every NPC, so it CANCELS in the weighted mean; the
+ * operative lens is authored importance, exactly as personalityDrive resolves in practice).
+ * A settlement with NO scoring NPCs — personality-less structural leaders, the trait-free
+ * anchor — returns EXACTLY 0 (the neutral anchor, the absent-⇒-0 law). Order-independent.
+ * @param {{ npcs?: unknown } | null | undefined} settlement @returns {number} signed −1..+1
+ */
+export function temperamentMomentumOf(settlement) {
+  const s = asObject(settlement);
+  const npcs = Array.isArray(s.npcs) ? s.npcs : [];
+  if (!npcs.length) return 0;
+  let weighted = 0;
+  let totalWeight = 0;
+  for (const npc of npcs) {
+    const score = npcMomentumScore(npc);
+    if (score === 0) continue; // no authored temperament signal — contributes nothing
+    const w = importanceWeight(/** @type {any} */ (npc));
+    if (!(w > 0)) continue;
+    weighted += score * w;
+    totalWeight += w;
+  }
+  return totalWeight > 0 ? clamp(weighted / totalWeight, -1, 1) : 0;
+}
+
+// ── THE CLIFF (the entity-appropriate reconsideration threshold) ────────────────
+/**
+ * Derive an entity's reconsideration cliff STOCK from the bounded reads (design §2). All
+ * inputs default to the NEUTRAL value, so an unmodulated entity's cliff is EXACTLY
+ * BASE_CLIFF_STOCK. The cliff is always ≥ CLIFF_FLOOR_FRAC×BASE (a finite, always-crackable
+ * height — the anti-absorbing-state guard). PURE.
+ * @param {{ temperament?: number, legitimacyFragility01?: number, consolidation01?: number, oppositionBlocs?: number }} [inputs]
+ * @returns {number}
+ */
+export function cliffStockFor(inputs = {}) {
+  const H = THRESHOLD_TUNING;
+  const base = MOMENTUM_TUNING.BASE_CLIFF_STOCK;
+  const temperament = clamp(finiteNumber(inputs.temperament, 0), -1, 1);
+  const fragility = clamp01(finiteNumber(inputs.legitimacyFragility01, 0));
+  const consolidation = clamp01(finiteNumber(inputs.consolidation01, 0));
+  const opposition = Math.max(0, finiteNumber(inputs.oppositionBlocs, 0));
+  let cliff = base * (1 + H.TEMPERAMENT_SPAN * temperament);   // proud raises, humble lowers
+  cliff *= (1 + H.FRAGILITY_SPAN * fragility);                  // fragile seat doubles down hardest
+  cliff *= (1 + H.CONSOLIDATION_SPAN * consolidation);         // consolidated court: no voices
+  cliff *= (1 - H.OPPOSITION_SPAN * clamp01(opposition / H.OPPOSITION_SAT)); // blocs keep asking
+  return Math.max(cliff, base * H.CLIFF_FLOOR_FRAC);
+}
+
+/**
+ * THE LIMIT CLAUSE (design §2, owner-verbatim). The reconsideration MULTIPLIER at a given
+ * commitment stock vs the entity's cliff: EXACTLY 1.0 below the cliff (free physics —
+ * today's bytes), ramping to CLIFF_MULT (the order-of-magnitude wall) as the stock climbs
+ * to 2× the cliff, then CAPPED at CLIFF_MULT — FINITE, never a wall. Weights, never walls:
+ * counter-pressure past the cliff still cracks the course; there is no absorbing state.
+ * @param {number} stock @param {number} cliff @returns {number} 1..CLIFF_MULT
+ */
+export function reconsiderationMultiplier(stock, cliff) {
+  const s = Math.max(0, finiteNumber(stock, 0));
+  const c = Math.max(1e-6, finiteNumber(cliff, MOMENTUM_TUNING.BASE_CLIFF_STOCK));
+  if (s < c) return 1; // below the cliff ⇒ EXACTLY 1.0 (byte-identity anchor)
+  const over = clamp01((s - c) / c); // 0 at the cliff, 1 at 2×cliff
+  return 1 + (MOMENTUM_TUNING.CLIFF_MULT - 1) * over;
+}
+
+/** True iff the stock is at or past the entity's cliff (the doubling-down regime).
+ * @param {number} stock @param {number} cliff @returns {boolean} */
+export function pastCliff(stock, cliff) {
+  return Math.max(0, finiteNumber(stock, 0)) >= Math.max(1e-6, finiteNumber(cliff, MOMENTUM_TUNING.BASE_CLIFF_STOCK));
+}
+
+// ── LAWFUL × CHAOS (deposits + the procedural crack) ────────────────────────────
+/**
+ * The deposit SCALE for a court's lawfulness (design §2): a lawful court (lawfulness01 → 1)
+ * is bound HARD by formal public acts (its oaths mean things); a chaotic one (→ 0) loosely
+ * (its public expects caprice — reversal is cheap because nothing was ever quite promised).
+ * NEUTRAL (0.5) ⇒ EXACTLY 1.0 (byte-neutral). @param {number} lawfulness01 @returns {number}
+ */
+export function depositScaleFor(lawfulness01) {
+  const l = clamp01(finiteNumber(lawfulness01, 0.5));
+  return 1 + THRESHOLD_TUNING.DEPOSIT_LAW_SPAN * (2 * l - 1);
+}
+
+/**
+ * The PROCEDURAL-CRACK relief (design §2): a lawful court reconsidering through legitimate
+ * process pays a REDUCED climb-down price (Stage 4 consumes this as a 0..1 discount on the
+ * priced consequence). A chaotic court gets no procedural relief (its reversals are cheap
+ * but erratic). NEUTRAL/chaotic ⇒ 0 (no relief). @param {number} lawfulness01 @returns {number}
+ */
+export function proceduralCrackRelief(lawfulness01) {
+  const l = clamp01(finiteNumber(lawfulness01, 0.5));
+  return THRESHOLD_TUNING.PROCEDURAL_CRACK_SPAN * clamp01(2 * l - 1); // 0 at/below neutral, up at lawful
+}
+
+// ── GOOD × EVIL (the evidence-class-aware conscience door) ───────────────────────
+/** The two evidence classes a counter-report can carry (design §2). */
+export const EVIDENCE_CLASSES = Object.freeze(['humanitarian', 'power']);
+
+/**
+ * The counter-evidence EFFECTIVENESS through a court's cliff, EVIDENCE-CLASS-AWARE (design
+ * §2 — "same cliff height, different doors through it"). Returns a 0..1 weight on
+ * contradicting evidence past the cliff (1 = penetrates at full weight; lower = discounted):
+ *  • POWER evidence (lost battles, broken supply, counter-coalitions) penetrates EVERY court
+ *    at ~full weight — even an evil court hears power.
+ *  • HUMANITARIAN evidence (atrocity receipts, civilian cost, a court's own suffering) cuts
+ *    through a GOOD court (malice → 0) at near-full weight (the conscience hears the dead),
+ *    but an EVIL court (malice → 1) discounts it toward HUMANITARIAN_EVIL_FLOOR (it hears
+ *    only power). A neutral court (malice 0.5) sits in between.
+ * @param {{ malice01?: number, evidenceClass?: string }} args @returns {number}
+ */
+export function counterEvidenceEffectiveness({ malice01 = 0.5, evidenceClass = 'power' } = {}) {
+  const H = THRESHOLD_TUNING;
+  if (evidenceClass !== 'humanitarian') return H.POWER_PENETRATION; // power (or unknown) — full
+  const malice = clamp01(finiteNumber(malice01, 0.5));
+  // Saintly (malice 0) ⇒ ~1; fully evil (malice 1) ⇒ HUMANITARIAN_EVIL_FLOOR.
+  return H.HUMANITARIAN_EVIL_FLOOR + (1 - H.HUMANITARIAN_EVIL_FLOOR) * (1 - malice);
+}
+
+// ── THE ENTITY WIRING (all-existing reads → the cliff) ──────────────────────────
+/**
+ * Gather an entity's cliff inputs from state: temperament (its NPCs' TRAIT_MOMENTUM), the
+ * legitimacy fragility (governanceLedger — a low legitimacyScore ⇒ fragile ⇒ doubles down),
+ * and the alignment coordinates (computeLawfulness/computeMalice) the deposit-scale and
+ * conscience-door read. Court structure (consolidation / opposition blocs) is passed through
+ * from `courtStructure` — the settlementPolitics bloc reader is a bounded wiring-pass seam
+ * (defaults to neutral 0 ⇒ byte-neutral until wired). PURE.
+ * @param {{ settlement?: unknown } | Record<string, unknown> | null | undefined} item a snapshot settlement item
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {{ consolidation01?: number, oppositionBlocs?: number }} [courtStructure]
+ * @returns {{ temperament: number, lawfulness01: number, malice01: number, legitimacyFragility01: number, cliff: number, depositScale: number }}
+ */
+export function entityThreshold(item, worldState, courtStructure = {}) {
+  const settlement = asObject(asObject(item).settlement || item);
+  const temperament = temperamentMomentumOf(/** @type {any} */ (settlement));
+  const lawfulness01 = clamp01(finiteNumber(computeLawfulness(/** @type {any} */ (item), /** @type {any} */ (worldState)), 0.5));
+  const malice01 = clamp01(finiteNumber(computeMalice(/** @type {any} */ (item), /** @type {any} */ (worldState)), 0.5));
+  const gl = governanceLedger(/** @type {any} */ (settlement));
+  // Fragility: a LOW legitimacyScore is a fragile seat. present:false ⇒ neutral 50 ⇒ 0 fragility.
+  const legitimacyFragility01 = gl && gl.present
+    ? clamp01((50 - finiteNumber(gl.legitimacyScore, 50)) / 50)
+    : 0;
+  const consolidation01 = clamp01(finiteNumber(courtStructure.consolidation01, 0));
+  const oppositionBlocs = Math.max(0, finiteNumber(courtStructure.oppositionBlocs, 0));
+  const cliff = cliffStockFor({ temperament, legitimacyFragility01, consolidation01, oppositionBlocs });
+  return { temperament, lawfulness01, malice01, legitimacyFragility01, cliff, depositScale: depositScaleFor(lawfulness01) };
 }
