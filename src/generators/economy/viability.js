@@ -5,7 +5,7 @@
 import { SEVERITY, TIER_ORDER } from '../../data/constants.js';
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { INDUSTRY_WATER_NEEDS } from '../../data/resourceData.js';
+import { INDUSTRY_WATER_NEEDS } from '../../data/resourceChains.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { getPriorities, getTradeRouteFeatures, hasTeleportationInfra, evaluateWaterDependency } from '../helpers.js';
 import { priorityToCategory } from './prosperity.js';

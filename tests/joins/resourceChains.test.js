@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { RESOURCE_CHAINS } from '../../src/data/resourceData.js';
+import { RESOURCE_CHAINS } from '../../src/data/resourceChains.js';
 import { TERRAIN_DATA } from '../../src/data/geographyData.js';
 import {
   terrainAllowsResource,

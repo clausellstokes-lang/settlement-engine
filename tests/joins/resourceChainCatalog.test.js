@@ -19,7 +19,7 @@
  *      runtime matcher (institutionSupportsChain) — no chain is orphaned.
  */
 import { describe, it, expect } from 'vitest';
-import { RESOURCE_CHAINS } from '../../src/data/resourceData.js';
+import { RESOURCE_CHAINS } from '../../src/data/resourceChains.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { institutionTags } from '../../src/lib/entities.js';
 import { institutionSupportsChain } from '../../src/generators/resourceGenerator.js';
