@@ -20,7 +20,7 @@
  */
 
 import { institutionHasAnyTag } from '../../lib/entities.js';
-import { RESOURCE_CHAINS } from '../../data/resourceData.js';
+import { RESOURCE_CHAINS } from '../../data/resourceChains.js';
 import { INSTITUTION_SERVICES } from '../../data/institutionServices.js';
 import { LOCALE_SERVICE_OVERRIDES } from '../../data/servicesData.js';
 import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';

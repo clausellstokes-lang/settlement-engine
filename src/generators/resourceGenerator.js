@@ -6,7 +6,8 @@
 import {getPriorities} from './helpers.js';
 import {priorityToCategory} from './economicGenerator.js';
 import {TERRAIN_DATA} from '../data/geographyData.js';
-import {RESOURCE_DATA, RESOURCE_CHAINS, SPECIAL_RESOURCES} from '../data/resourceData.js';
+import {RESOURCE_DATA, SPECIAL_RESOURCES} from '../data/resourceData.js';
+import {RESOURCE_CHAINS} from '../data/resourceChains.js';
 import {institutionHasAnyTag} from '../lib/entities.js';
 
 // ─── resolveNearbyCommodities ─────────────────────────────────────────────────
