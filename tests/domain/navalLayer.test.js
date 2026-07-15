@@ -15,7 +15,11 @@ import {
   navalRecordOf, planConvoy, convoyTransitWeeks, convoyEV, stormMultOf,
   convoyCapacityAvailable, seaEdgesOfPath, seaLaneCapacityOf,
 } from '../../src/domain/spatial/navalLayer.js';
+import {
+  blockadeInterceptsSupply, blockadeRunRoll, planBlockade, blockadeStrangulationOf, activeBlockadeTargets,
+} from '../../src/domain/spatial/navalLayer.js';
 import { navalStrengthOf, hasWarNavy } from '../../src/domain/worldPulse/navalStrength.js';
+import { advanceSupplyShipments, rankSupplySources, supplyInterdictionLevel } from '../../src/domain/spatial/supplyShipments.js';
 import { makeIslandPack } from '../fixtures/spatialPackFixtures.js';
 
 const DOCK = { name: 'Docks/port facilities', tags: ['port', 'trade'] };
@@ -223,5 +227,103 @@ describe('W-NAVY Stage 2 — capacity (the FIRST consumer of SEA_LANE_CAPACITY, 
   it('an empty lane has headroom (a convoy mints)', () => {
     const digest = portDigest();
     expect(convoyCapacityAvailable(digest, {}, ['main', 'isle']).available).toBe(true);
+  });
+});
+
+// ── Stage 4 — THE BLOCKADE ("a blockade is the same as a siege") ─────────────────
+/** A blockade record targeting `port`, owned by `owner`. */
+function blockade(owner, port) {
+  return {
+    armyId: owner, role: 'blockade', ownerId: owner, cargoId: null, originId: owner,
+    destId: port, targetId: port, path: [owner, port], departTick: 0, arrivalTick: 4,
+    position01: 1, strength: 60, cargoStrength: 0, readiness: 0.6, supplyQuality: 1, funding: 0.5, lastTick: 0,
+  };
+}
+
+describe('W-NAVY Stage 4 — blockadeInterceptsSupply (the sea-cut seam, byte-safe when dark)', () => {
+  it('NO navalTransit ledger ⇒ false (the supply layer stays byte-identical)', () => {
+    const digest = portDigest();
+    expect(blockadeInterceptsSupply({}, digest, 'isle', 'main')).toBe(false);
+    expect(activeBlockadeTargets({}).size).toBe(0);
+  });
+  it('a blockaded port reads its sea approaches as hostile-to-destination', () => {
+    const digest = portDigest();
+    const ws = { spatialCanonVersion: 1, spatialLedgers: { navalTransit: { main: blockade('main', 'isle') } } };
+    // main is a sea approach of isle ⇒ intercepts supply into isle.
+    expect(blockadeInterceptsSupply(ws, digest, 'isle', 'main')).toBe(true);
+    // A non-blockaded port is untouched.
+    expect(blockadeInterceptsSupply(ws, digest, 'main', 'isle')).toBe(false);
+    expect(activeBlockadeTargets(ws).get('isle')?.has('main')).toBe(true);
+  });
+});
+
+describe('W-NAVY Stage 4 — blockade-running (M7 smuggle vs the fleet gate)', () => {
+  it('a strong blockading fleet drives the run chance toward zero; no fleet ⇒ the base chance', () => {
+    expect(blockadeRunRoll({ fleetGate01: 1 }).probability).toBe(0);       // an ironclad blockade
+    expect(blockadeRunRoll({ fleetGate01: 0 }).probability).toBeGreaterThan(0); // no fleet ⇒ base
+    // A seeded runner: with a weak fleet a low draw slips through; a high draw is caught.
+    expect(blockadeRunRoll({ fleetGate01: 0, rng: { random: () => 0.1 } }).ran).toBe(true);
+    expect(blockadeRunRoll({ fleetGate01: 0, rng: { random: () => 0.9 } }).ran).toBe(false);
+  });
+});
+
+describe('W-NAVY Stage 4 — blockadeStrangulationOf + planBlockade', () => {
+  it('a blockade strangles commerce (a 0..1 economic-pressure read); planBlockade sails', () => {
+    const digest = portDigest();
+    const ws = { spatialCanonVersion: 1, spatialLedgers: { navalTransit: { main: blockade('main', 'isle') } } };
+    expect(blockadeStrangulationOf(ws, 'isle')).toBeGreaterThan(0);
+    expect(blockadeStrangulationOf(ws, 'main')).toBe(0);
+    const plan = planBlockade(digest, {}, { ownerId: 'main', targetId: 'isle', ownerStrength: 60, departTick: 1 });
+    expect(plan && 'record' in plan).toBe(true);
+    expect(plan.record.role).toBe('blockade');
+    expect(plan.record.targetId).toBe('isle');
+  });
+});
+
+describe('W-NAVY Stage 4 — the both-cut law (blockade alone strangles; land + sea starves)', () => {
+  // The M8 port-supply topology: a port fed by a LAND producer and a SEA producer.
+  function portSupplyDigest() {
+    const cols = 6, rows = 3, n = cols * rows;
+    const h = new Array(n), biome = new Array(n).fill(4), r = new Array(n).fill(0), p = new Array(n), c = new Array(n);
+    const idx = (col, row) => row * cols + col;
+    for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) { const i = idx(col, row); p[i] = [col * 50, row * 50]; h[i] = col === 3 ? 10 : 40; }
+    for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
+      const i = idx(col, row); const nb = [];
+      if (col > 0) nb.push(idx(col - 1, row)); if (col < cols - 1) nb.push(idx(col + 1, row));
+      if (row > 0) nb.push(idx(col, row - 1)); if (row < rows - 1) nb.push(idx(col, row + 1));
+      c[i] = nb;
+    }
+    const placements = [
+      { id: 'port', cellId: idx(2, 1), institutions: [DOCK] },
+      { id: 'seasrc', cellId: idx(4, 1), institutions: [DOCK] },
+      { id: 'landsrc', cellId: idx(0, 1), institutions: [] },
+    ];
+    return buildSpatialDigest({ pack: { cells: { h, biome, r, p, c } }, placements, seaLanes: true });
+  }
+  // Drive the supply layer with the SAME blockade-aware callbacks the supply kernel now uses.
+  function interdiction(digest, landSevered, blockadeWs) {
+    const rankedSources = rankSupplySources(digest, 'port', ['landsrc', 'seasrc']);
+    const links = [{ settlementId: 'port', institutionId: 'smithy', input: 'iron', rankedSources, bufferWeeks: 0, critical: true }];
+    const out = advanceSupplyShipments({
+      links, worldState: { spatialCanonVersion: 1, spatialDigest: digest }, digest, tick: 5,
+      sourceSeveredFor: (destId, srcId) => landSevered.has(srcId) || blockadeInterceptsSupply(blockadeWs, digest, destId, srcId),
+      hostileToDestinationFor: (destId, gateId) => blockadeInterceptsSupply(blockadeWs, digest, destId, gateId),
+      riskToleranceFor: () => 1,
+    });
+    return supplyInterdictionLevel(out.next ? { spatialCanonVersion: 1, spatialLedgers: { supplyShipments: out.next } } : { spatialCanonVersion: 1 }, 'port');
+  }
+
+  it('blockade ALONE ⇒ sea cut but land feeds (not starving); land siege + blockade ⇒ starves', () => {
+    const digest = portSupplyDigest();
+    const blockadeWs = { spatialCanonVersion: 1, spatialLedgers: { navalTransit: { enemy: blockade('enemy', 'port') } } };
+    const noBlockade = { spatialCanonVersion: 1 };
+    // Both fed, no cut.
+    expect(interdiction(digest, new Set(), noBlockade)).toBe(0);
+    // Blockade ALONE: the sea source is cut, but the LAND source keeps the port fed (strangled, not starved).
+    expect(interdiction(digest, new Set(), blockadeWs)).toBe(0);
+    // Combined arms: land siege (landsrc severed) + blockade (seasrc cut) ⇒ both axes gone ⇒ starves.
+    expect(interdiction(digest, new Set(['landsrc']), blockadeWs)).toBe(1);
+    // Land siege ALONE (no blockade): the SEA keeps it fed.
+    expect(interdiction(digest, new Set(['landsrc']), noBlockade)).toBe(0);
   });
 });

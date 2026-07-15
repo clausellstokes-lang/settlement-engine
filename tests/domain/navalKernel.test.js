@@ -9,8 +9,12 @@ import { describe, expect, it } from 'vitest';
 
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
-import { advanceNaval, navalActive, orderConvoyVerbFactory } from '../../src/domain/worldPulse/navalKernel.js';
+import { advanceNaval, navalActive, orderConvoyVerbFactory, declareBlockadeVerbFactory } from '../../src/domain/worldPulse/navalKernel.js';
 import { makeIslandPack } from '../fixtures/spatialPackFixtures.js';
+
+const SHIPYARD = { name: 'Shipyard', tags: ['transport', 'shipbuilding', 'port'] };
+/** A snapshot where every seat is a prosperous city with a shipyard (a real war navy). */
+const navySnapshot = { byId: { get: (id) => ({ id, name: String(id), settlement: { name: String(id), tier: 'city', institutions: [SHIPYARD], economicState: { prosperity: 'Prosperous' } } }) } };
 
 const NOW = '2026-07-15T00:00:00.000Z';
 
@@ -138,6 +142,71 @@ describe('W-NAVY Stage 3 — the ORDER_CONVOY verb (registrable shape, not regis
     expect(v.verb).toBe('ORDER_CONVOY');
     expect(v.scope).toBe('realm');
     expect(typeof v.candidateType).toBe('string');
+    expect(v.registered).toBe(false);
+  });
+});
+
+describe('W-NAVY Stage 4 — the blockade (mint, authority-routing, lift)', () => {
+  const hostileGraph = { edges: [{ from: 'main', to: 'isle', relationshipType: 'hostile' }] };
+
+  it('a navy at war with a hostile port BLOCKADES it (loaded dice, authority auto)', () => {
+    const d = digest();
+    let ws = { spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true }, deployments: {} };
+    let minted = false;
+    let blockadeNews = false;
+    for (let t = 0; t < 80 && !minted; t++) {
+      const out = advanceNaval({ snapshot: navySnapshot, worldState: ws, digest: d, graph: hostileGraph, rng: createPRNG('blk').fork('naval'), tick: t, now: NOW });
+      ws = out.worldState;
+      const led = ws.spatialLedgers?.navalTransit || {};
+      if (Object.values(led).some((r) => r.role === 'blockade')) minted = true;
+      if (out.newsEntries.some((n) => n.impactKind === 'blockade_declared')) blockadeNews = true;
+    }
+    expect(minted).toBe(true);       // the loaded dice fires within the window (liveness)
+    expect(blockadeNews).toBe(true); // a blockade_declared receipt was stamped
+  });
+
+  it('under dm_only authority the blockade DEFERS (no mint, deferral-visible)', () => {
+    const d = digest();
+    const ws = { spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true, politicalAutonomy: 'dm_only' }, deployments: {} };
+    let anyMint = false;
+    let anyDefer = false;
+    let state = ws;
+    for (let t = 0; t < 40; t++) {
+      const out = advanceNaval({ snapshot: navySnapshot, worldState: state, digest: d, graph: hostileGraph, rng: createPRNG('blk').fork('naval'), tick: t, now: NOW });
+      state = out.worldState;
+      const led = state.spatialLedgers?.navalTransit || {};
+      if (Object.values(led).some((r) => r.role === 'blockade')) anyMint = true;
+      if (out.deferrals.some((x) => x.reason === 'dm_approval')) anyDefer = true;
+    }
+    expect(anyMint).toBe(false); // never mints under DM authority
+    expect(anyDefer).toBe(true); // the deferral is visible (not a silent drop)
+  });
+
+  it('LIFT-THE-BLOCKADE: a relief fleet that beats the blockading fleet drops the blockade record', () => {
+    const d = digest();
+    const ws = {
+      spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true }, deployments: {},
+      spatialLedgers: {
+        navalTransit: {
+          // A WEAK blockade of isle, still afield (sailing to station).
+          main: { armyId: 'main', role: 'blockade', ownerId: 'main', cargoId: null, originId: 'main', destId: 'isle', targetId: 'isle', path: ['main', 'isle'], departTick: 0, arrivalTick: 10, position01: 0.5, strength: 20, cargoStrength: 0, readiness: 0.5, supplyQuality: 1, funding: 0.5, lastTick: 0 },
+          // A STRONG relief fleet from isle, meeting the blockade on the shared edge.
+          isle: { armyId: 'isle', role: 'convoy', ownerId: 'isle', cargoId: 'isle', originId: 'isle', destId: 'main', targetId: 'main', path: ['isle', 'main'], departTick: 0, arrivalTick: 10, position01: 0.5, strength: 95, cargoStrength: 10, readiness: 0.7, supplyQuality: 1, funding: 0.6, lastTick: 0 },
+        },
+      },
+    };
+    const out = advanceNaval({ snapshot: navySnapshot, worldState: ws, digest: d, graph: hostileGraph, rng: createPRNG('lift').fork('naval'), tick: 5, now: NOW });
+    const led = out.worldState.spatialLedgers.navalTransit;
+    expect(led.main).toBeUndefined(); // the blockade was broken (lifted) — record dropped
+    expect(led.isle).toBeTruthy();    // the relief fleet holds the water
+    expect(out.newsEntries.some((n) => n.impactKind === 'sea_battle')).toBe(true);
+  });
+
+  it('the DECLARE_BLOCKADE verb ships registrable shape (realm scope, registered:false)', () => {
+    const v = declareBlockadeVerbFactory();
+    expect(v.verb).toBe('DECLARE_BLOCKADE');
+    expect(v.scope).toBe('realm');
+    expect(v.candidateType).toBe('blockade_declared');
     expect(v.registered).toBe(false);
   });
 });

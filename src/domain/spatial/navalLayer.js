@@ -92,6 +92,14 @@ export const NAVAL_TUNING = Object.freeze({
   SHARED_FATE_MAX_LOSS: 0.7,       // the heaviest band in the engine (> land's 0.45)
   SHARED_FATE_MIN_LOSS: 0.4,       // even a near-run sea defeat drowns more than a land rout
   SHARED_FATE_SURVIVOR_FLOOR: 0.15, // survivors never fall below this fraction (never-annihilated)
+
+  // ── BLOCKADE (design §4 — "a blockade is the same as a siege") ────────────────
+  // THE LOADED-DICE INITIATION (§H — convoys routine, blockades DRAMA): p = INITIATE_BASE
+  // × pull², cap-held — a rare, authority-routed, deferral-visible event.
+  BLOCKADE_INITIATE_BASE: 0.1,
+  // BLOCKADE-RUNNING (design §4 — M7 smuggling over sea paths, the fleet is the gate): a
+  // lone runner's base chance vs NO fleet; a strong blockading fleet drives it toward 0.
+  BLOCKADE_RUN_BASE: 0.5,
 });
 
 /** @param {number} x @returns {number} */
@@ -454,4 +462,120 @@ export function nearestFriendlyPort(digest, fromId, candidatePorts, season = nul
     if (c != null && Number.isFinite(c) && c < bestCost) { bestCost = c; best = raw; }
   }
   return best;
+}
+
+// ══ Stage 4 — THE BLOCKADE (design §4: "a blockade is the same as a siege") ════
+// A navy blockading a port cuts its SEA supply axis through the EXISTING interception
+// seam (the hostile navy on the port's sea approaches IS routeIntercepted's hostile-
+// intermediary predicate). The M8 both-cut law then does the rest: a blockade ALONE
+// strangles commerce (the land axis still feeds), land + sea COMBINED starves.
+
+/**
+ * The set of ports under an ACTIVE blockade (a BLOCKADE record in the navalTransit ledger
+ * targeting them), each mapped to its blockading owner ids. Pure read; empty when dormant.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState @returns {Map<string, Set<string>>}
+ */
+export function activeBlockadeTargets(worldState) {
+  /** @type {Map<string, Set<string>>} */
+  const out = new Map();
+  const led = navalTransitLedger(worldState);
+  if (!led) return out;
+  for (const rec of Object.values(led)) {
+    if (!rec || rec.role !== ARMY_ROLES.BLOCKADE || !rec.targetId) continue;
+    if (!out.has(rec.targetId)) out.set(rec.targetId, new Set());
+    /** @type {Set<string>} */ (out.get(rec.targetId)).add(rec.ownerId);
+  }
+  return out;
+}
+
+/**
+ * Does a blockade cut a supply route into a port at a given gate node (design §4 — "supply-
+ * cutting rides routeIntercepted")? True iff the destination port is under an active blockade
+ * AND the gate node is one of its SEA APPROACHES (a sea-lane-adjacent port the blockading
+ * fleet holds) — OR the gate is a blockader itself. Guarded: NO navalTransit ledger ⇒ false ⇒
+ * byte-identical (the supply layer's exact prior behavior). Pure.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {import('./distanceRead.js').SpatialDigest} digest
+ * @param {string|number} destPort @param {string|number} gateNode @returns {boolean}
+ */
+export function blockadeInterceptsSupply(worldState, digest, destPort, gateNode) {
+  const targets = activeBlockadeTargets(worldState);
+  if (targets.size === 0) return false;
+  const dest = String(destPort);
+  const blockaders = targets.get(dest);
+  if (!blockaders || blockaders.size === 0) return false;
+  const gate = String(gateNode);
+  if (blockaders.has(gate)) return true;                 // the blockading fleet's own port
+  const adj = seaLaneAdjacency(digest);
+  return adj.get(dest)?.has(gate) === true;              // a sea approach the fleet holds
+}
+
+/**
+ * The 0..1 commerce STRANGULATION a blockade inflicts on a port (design §4 — "a blockade alone
+ * strangles commerce"): the number of blockaders, saturating. The economic-pressure read the
+ * peace layer's economic_strangulation reason can consume (the wire is a documented seam — the
+ * peace reason is fed today by the disjoint supply-web campaignPlans). Pure.
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState @param {string|number} portId @returns {number}
+ */
+export function blockadeStrangulationOf(worldState, portId) {
+  const blockaders = activeBlockadeTargets(worldState).get(String(portId));
+  if (!blockaders || blockaders.size === 0) return 0;
+  return clamp01(0.5 + 0.25 * (blockaders.size - 1)); // one blockader ⇒ 0.5; more tighten it
+}
+
+/**
+ * THE BLOCKADE-RUNNING roll (design §4 — M7 smuggling over sea paths, the fleet is the gate):
+ * a lone runner's chance to slip a blockade, driven DOWN by the blockading fleet's strength
+ * (the gate). A strong fleet ⇒ near-zero; no fleet ⇒ the base chance. Deterministic given the
+ * forked rng. Pure. @param {{ fleetGate01?: number, rng?: { random: () => number } | null }} [args]
+ * @returns {{ ran: boolean, probability: number }}
+ */
+export function blockadeRunRoll({ fleetGate01 = 0, rng = null } = {}) {
+  const p = clamp01(NAVAL_TUNING.BLOCKADE_RUN_BASE * (1 - clamp01(num(fleetGate01, 0))));
+  const draw = rng && typeof rng.random === 'function' ? clamp01(rng.random()) : 1;
+  return { ran: draw < p, probability: round4(p) };
+}
+
+/**
+ * planBlockade (design §4): mint a BLOCKADE naval record — a navy sails from its home port to
+ * hold a hostile port's sea approaches. Reuses the convoy record shape (mode:'sea', role
+ * BLOCKADE, no cargo). Returns null when the target is not sea-reachable. Pure + deterministic.
+ * @param {import('./distanceRead.js').SpatialDigest} digest
+ * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
+ * @param {Object} args
+ * @param {string} args.ownerId       the blockading navy's home port
+ * @param {string} args.targetId      the blockaded port
+ * @param {number} args.ownerStrength the navy's naval strength
+ * @param {number} [args.readiness01] @param {{ lawfulness01?: number }|null} [args.alignment]
+ * @param {number} args.departTick @param {string|null} [args.season]
+ * @returns {{ record: NavalTransitRecord } | null}
+ */
+export function planBlockade(digest, worldState, { ownerId, targetId, ownerStrength, readiness01 = 0.5, alignment = null, departTick, season = null }) {
+  if (!digest) return null;
+  const owner = String(ownerId);
+  const target = String(targetId);
+  if (owner === target || !isPort(digest, target)) return null;
+  const scored = chooseRoute(digest, worldState, owner, target, riskToleranceFromAlignment(alignment), season);
+  /** @type {string[]} */
+  let path;
+  if (scored && Array.isArray(scored.path) && scored.path.length) path = scored.path.map(String);
+  else {
+    const cands = candidateRoutes(digest, owner, target, 1);
+    if (!cands.length) return null;
+    path = cands[0].path.map(String);
+  }
+  if (seaEdgesOfPath(digest, path).length === 0) return null; // a blockade must reach by sea
+  const base = hopWeeks(digest, owner, target, season);
+  if (base == null) return null;
+  const weeks = convoyTransitWeeks(base, readiness01);
+  const depart = Math.max(0, Math.floor(num(departTick, 0)));
+  const record = navalRecordOf({
+    armyId: owner, role: ARMY_ROLES.BLOCKADE, ownerId: owner, cargoId: null,
+    originId: owner, destId: target, targetId: target, path,
+    departTick: depart, arrivalTick: depart + weeks, position01: 0,
+    strength: Math.max(0, num(ownerStrength, 0)), cargoStrength: 0,
+    readiness: clamp01(num(readiness01, 0.5)), supplyQuality: 1, funding: 0.5,
+    beliefStaleness: 0, lastTick: depart,
+  });
+  return record ? { record } : null;
 }

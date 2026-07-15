@@ -27,8 +27,9 @@
  */
 
 import {
-  navalTransitLedger, navalRecordOf, planConvoy,
+  navalTransitLedger, navalRecordOf, planConvoy, planBlockade,
   sharesSeaEdge, seaBattleInputs, sharedFateLoss, nearestFriendlyPort,
+  activeBlockadeTargets, NAVAL_TUNING,
 } from '../spatial/navalLayer.js';
 import { navalStrengthOf } from './navalStrength.js';
 import {
@@ -36,6 +37,8 @@ import {
 } from '../spatial/armyTransit.js';
 import { setSpatialLedger, dropSpatialLedger, isPort } from '../spatial/distanceRead.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
+import { authorityFor } from './changeAuthorityPolicy.js';
+import { pendingActorMajorFor } from './actorMajorApproval.js';
 import { formatCount } from '../formatNumber.js';
 
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -47,6 +50,7 @@ import { formatCount } from '../formatNumber.js';
 /** @typedef {{ byId?: { get?: (id: string) => SnapItem | undefined } }} Snapshot */
 /** @typedef {{ channels?: Array<Record<string, unknown>>, edges?: Array<Record<string, unknown>> }} Graph */
 /** @typedef {{ fork?: (key: string) => { random: () => number } }} Rng */
+/** A recursively-forkable seeded PRNG (createPRNG's real shape). @typedef {{ fork: (key: string) => ForkableRng, random: () => number }} ForkableRng */
 
 // The graph relationship labels that make two navies HOSTILE combatants at sea (design §3 —
 // graph hostile labels, NOT the mutual-homeland test; navies blockade + escort in peacetime).
@@ -56,6 +60,8 @@ const HOSTILE_REL = new Set(['hostile', 'cold_war', 'rival', 'criminal_network']
 const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
 /** @param {unknown} v @param {number} f @returns {number} */
 function num(v, f) { return typeof v === 'number' && Number.isFinite(v) ? v : f; }
+/** @param {unknown} v @returns {Record<string, unknown>} */
+function asObject(v) { return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {}; }
 
 // ── The activation gate (dormancy / byte-identity seam) ────────────────────────
 /**
@@ -105,9 +111,54 @@ function hostileOwners(graph, a, b) {
  *  digest connects, minus those the graph marks hostile to the owner. @param {SpatialDigest} digest
  *  @param {Graph} graph @param {string} ownerId @returns {string[]} */
 function friendlyPortsFor(digest, graph, ownerId) {
+  return navalPortsOf(digest).filter((p) => p !== ownerId && !hostileOwners(graph, ownerId, p));
+}
+
+/** Every port the frozen sea-lane set connects (codepoint-sorted). @param {SpatialDigest} digest @returns {string[]} */
+function navalPortsOf(digest) {
   const lanes = /** @type {{ reserved?: { seaLanes?: { ports?: string[] } } }} */ (digest)?.reserved?.seaLanes;
-  const ports = lanes && Array.isArray(lanes.ports) ? lanes.ports.map(String) : [];
-  return ports.filter((p) => p !== ownerId && !hostileOwners(graph, ownerId, p));
+  return lanes && Array.isArray(lanes.ports) ? [...lanes.ports.map(String)].sort() : [];
+}
+
+/** The hostile PORT a navy would blockade: the codepoint-first hostile, sea-reachable enemy
+ *  port among the sea-lane ports (bounded — ports are few). @param {SpatialDigest} digest
+ *  @param {Graph} graph @param {string} navyId @param {string[]} ports @returns {string|null} */
+function pickBlockadeTarget(digest, graph, navyId, ports) {
+  for (const p of ports) {
+    if (p === navyId) continue;
+    if (!hostileOwners(graph, navyId, p)) continue;
+    // sea-reachable: a convoy/blockade route exists (planBlockade enforces the sea leg).
+    const plan = planBlockade(digest, null, { ownerId: navyId, targetId: p, ownerStrength: 1, departTick: 0 });
+    if (plan && 'record' in plan) return p;
+  }
+  return null;
+}
+
+/** A blockade-declared wizard-news entry (AGGREGATE). @param {{ ownerId: string, targetId: string }} b
+ *  @param {Snapshot} snapshot @param {number} tick @param {string|null} now @returns {Record<string, unknown>} */
+function blockadeNews(b, snapshot, tick, now) {
+  const navy = nameOf(snapshot, b.ownerId);
+  const port = nameOf(snapshot, b.targetId);
+  return {
+    id: `wizard_news.${tick}.blockade.${b.ownerId}.${b.targetId}`,
+    tick,
+    scope: 'regional',
+    significance: 'notable',
+    score: 64,
+    headline: `${navy}'s fleet blockades ${port}`,
+    summary: `${navy} threw a blockade across ${port}'s sea approaches — a siege from the water. Its harbor trade is strangled; combined with a land siege, ${port} will starve.`,
+    kind: 'applied',
+    impactKind: 'blockade_declared',
+    channelType: null,
+    severity: 0.55,
+    settlementIds: [b.ownerId, b.targetId],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `blockade_declared.${b.ownerId}.${b.targetId}.${tick}`,
+    tags: ['world_pulse', 'war', 'blockade'],
+    reasons: [`${navy} holds the sea approaches to ${port}.`],
+    createdAt: now,
+  };
 }
 
 /**
@@ -172,6 +223,8 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
   const records = {};
   /** @type {Array<Record<string, unknown>>} */
   const deferrals = [];
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
 
   // ── ADVANCE existing naval records (position step; naval fields survive the spread). ──
   for (const key of Object.keys(prior).sort()) {
@@ -199,14 +252,52 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
     else if (plan && 'deferred' in plan) deferrals.push({ ownerId: armyId, targetId, reason: 'capacity', edge: plan.fullEdge });
   }
 
+  // ── DERIVE BLOCKADES (design §4 — "a blockade is the same as a siege"; authority-routed,
+  // loaded dice: convoys routine, blockades DRAMA). A navy at war with a hostile PORT it can
+  // reach by sea throws a blockade across its approaches — the interdiction is fed from the
+  // water side via the supply seam (blockadeInterceptsSupply), so combined with a land siege
+  // the port starves (the both-cut law). Under a DM-driven authority mode the mint DEFERS
+  // (deferral-visible; the full proposal-queue re-mint is a documented W-COMPOSER-2 seam). ──
+  const rules = /** @type {Record<string, unknown>} */ (asObject(worldState.simulationRules));
+  const blockadeMode = authorityFor(rules, 'blockade_declared', 'auto');
+  const blockadeDeferred = blockadeMode !== 'auto';
+  const blockadeRng = rng && typeof rng.fork === 'function' ? /** @type {ForkableRng} */ (rng.fork('blockade')) : null;
+  const priorBlockades = activeBlockadeTargets(worldState);
+  const ports = navalPortsOf(digest);
+  for (const navyId of ports) {
+    if (records[navyId]) continue; // this navy already has a live operation
+    const navStrength = navalStrengthOf(digest, snapshot?.byId?.get?.(navyId), navyId);
+    if (navStrength <= 0) continue; // no war navy to blockade with
+    const target = pickBlockadeTarget(digest, graph || {}, navyId, ports);
+    if (!target) continue;
+    if (priorBlockades.get(target)?.has(navyId)) continue; // already blockading it
+    if (blockadeDeferred) {
+      if (!pendingActorMajorFor(worldState, 'blockade_declared', navyId)) {
+        deferrals.push({ ownerId: navyId, targetId: target, reason: 'dm_approval' });
+      }
+      continue;
+    }
+    // THE LOADED DICE (§H): p = INITIATE_BASE × pull², where pull rises with the navy's
+    // dominance over the target's own war navy (a stronger fleet is likelier to commit).
+    const targetNavy = navalStrengthOf(digest, snapshot?.byId?.get?.(target), target);
+    const pull = clamp01(navStrength / (navStrength + targetNavy + 1));
+    const p = NAVAL_TUNING.BLOCKADE_INITIATE_BASE * pull * pull;
+    const fork = blockadeRng ? blockadeRng.fork(`blockade:${navyId}:${target}:${nowTick}`) : null;
+    const u = fork && typeof fork.random === 'function' ? clamp01(fork.random()) : 1;
+    if (u >= p) { deferrals.push({ ownerId: navyId, targetId: target, reason: 'loaded_dice' }); continue; }
+    const plan = planBlockade(digest, worldState, { ownerId: navyId, targetId: target, ownerStrength: navStrength, departTick: nowTick, season });
+    if (plan && 'record' in plan) {
+      records[navyId] = plan.record;
+      newsEntries.push(blockadeNews({ ownerId: navyId, targetId: target }, snapshot, nowTick, now));
+    }
+  }
+
   // ── SEA BATTLES: hostile navies sharing a sea edge collide (resolveFieldBattle verbatim). ─
-  /** @type {Array<Record<string, unknown>>} */
-  const newsEntries = [];
   /** @type {Record<string, number>} */
   const sharedFateWriteback = {};   // cargoArmyId → new strength (shared fate)
   /** @type {Set<string>} */
   const debarkRecall = new Set();    // cargoArmyId → stamp recalled (overland homecoming)
-  const battleRng = rng && typeof rng.fork === 'function' ? rng.fork('seabattle') : rng;
+  const battleRng = rng && typeof rng.fork === 'function' ? /** @type {ForkableRng} */ (rng.fork('seabattle')) : rng;
   const keys = Object.keys(records).sort();
   /** @type {Set<string>} records removed this tick (beaten — disengaged home). */
   const removed = new Set();
@@ -299,6 +390,18 @@ export function orderConvoyVerbFactory() {
     scope: 'realm',
     candidateType: 'convoy_ordered',
     dials: Object.freeze({ cargo: 'settlementId', destination: 'settlementId' }),
+    registered: false,
+    note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
+  });
+}
+
+/** @returns {{ verb: string, scope: string, candidateType: string, dials: Record<string, unknown>, registered: boolean, note: string }} */
+export function declareBlockadeVerbFactory() {
+  return Object.freeze({
+    verb: 'DECLARE_BLOCKADE',
+    scope: 'realm',
+    candidateType: 'blockade_declared',
+    dials: Object.freeze({ target: 'settlementId' }),
     registered: false,
     note: 'Registrable shape; realm-manifest registration is W-COMPOSER-2.',
   });
