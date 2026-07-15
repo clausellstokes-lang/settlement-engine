@@ -161,7 +161,7 @@ describe('FORCE_RESETTLE (fallow-bypassing; settlers stay conserved even under f
   });
 });
 
-describe('the affordance-manifest entry factories (registrable shape, NOT registered — W-COMPOSER-2)', () => {
+describe('the affordance-manifest entry factories (REGISTERED via realmManifest — W-COMPOSER-2)', () => {
   it('each entry mirrors the forceCalamityEntry factory shape', () => {
     for (const [entry, type] of [
       [forceFoundSteadingEntry(), 'FORCE_FOUND_STEADING'],
@@ -178,11 +178,13 @@ describe('the affordance-manifest entry factories (registrable shape, NOT regist
     }
   });
 
-  it('the verbs are NOT in the affordance manifest (the W-COMPOSER-2 park holds)', async () => {
+  it('the verbs live in the REALM manifest, not the settlement one (the lift landed)', async () => {
     const manifest = await import('../../src/domain/events/affordanceManifest.js');
     const json = JSON.stringify(Object.keys(manifest.AFFORDANCE_MANIFEST || manifest.default || {}));
+    const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
     for (const t of ['FORCE_FOUND_STEADING', 'FORCE_ABANDON', 'FORCE_RESETTLE']) {
-      expect(json.includes(t)).toBe(false);
+      expect(json.includes(t)).toBe(false);           // settlement manifest untouched
+      expect(realmVerbFor(t)).toBeTruthy();           // realm manifest carries it
     }
   });
 });

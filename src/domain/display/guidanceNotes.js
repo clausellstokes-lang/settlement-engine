@@ -57,9 +57,11 @@ export const NOTE_TOPICS = Object.freeze(['library', 'realm', 'dossier', 'simula
 /** The lifecycle beats of a topic: nothing-yet ⇒ just-did-it ⇒ return/deepen. */
 export const NOTE_MOMENTS = Object.freeze(['empty', 'first', 'onward']);
 
-/** Build a dotted copy key for a note cell variant. */
+/** Build a dotted copy key for a note cell variant.
+ * @param {string} topic @param {string} moment @param {string} variant */
 const K = (topic, moment, variant) => `guidance.notes.${topic}.${moment}.${variant}`;
-/** Build a dotted copy key for a floor variant. */
+/** Build a dotted copy key for a floor variant.
+ * @param {string} topic @param {string} variant */
 const F = (topic, variant) => `guidance.notes.floor.${topic}.${variant}`;
 
 /**
@@ -161,10 +163,10 @@ export function noteKeyFor(topic, moment, stableId) {
   const m = NOTE_MOMENTS.includes(/** @type {NoteMoment} */ (moment)) ? moment : 'onward';
   // Read through the retained GUIDANCE_NOTES object so its sentinel survives DCE
   // into the lazy chunk (the non-vacuity fix, mirrored from guidanceRegistry).
-  const cell = GUIDANCE_NOTES.lines[topic][m];
+  const cell = GUIDANCE_NOTES.lines[/** @type {NoteTopic} */ (topic)][/** @type {NoteMoment} */ (m)];
   // Fall through to the topic floor on a missing OR empty cell — an empty array
   // is truthy and would yield variants[NaN] === undefined.
-  const variants = (cell && cell.length) ? cell : GUIDANCE_NOTES.floor[topic];
+  const variants = (cell && cell.length) ? cell : GUIDANCE_NOTES.floor[/** @type {NoteTopic} */ (topic)];
   const seed = String(stableId ?? '');
   const h = fnv1a32(`${seed}::${topic}:${m}`);
   return variants[h % variants.length];
@@ -198,8 +200,8 @@ export const GUIDANCE_NOTES = Object.freeze({
 export function allNoteKeys() {
   const keys = [];
   for (const topic of NOTE_TOPICS) {
-    for (const moment of NOTE_MOMENTS) keys.push(...NOTE_LINES[topic][moment]);
-    keys.push(...NOTE_FLOOR[topic]);
+    for (const moment of NOTE_MOMENTS) keys.push(...NOTE_LINES[/** @type {NoteTopic} */ (topic)][/** @type {NoteMoment} */ (moment)]);
+    keys.push(...NOTE_FLOOR[/** @type {NoteTopic} */ (topic)]);
   }
   return keys;
 }

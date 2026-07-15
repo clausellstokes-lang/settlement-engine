@@ -388,6 +388,18 @@ behavior, budget raises, golden regens.
   completion (engine + surfaces + composer lift all in), and the Surveyor lands on prod
   truth rather than being ported through a later reconciliation.
 
+- **2026-07-15 (evening) — THE MERGE MOVES UP AGAIN (owner, verbatim: "okay, move merge and
+  deploy up up to after both of those land and before SM-2" — "both of those" = the in-flight
+  W-COMPOSER-2 + FP-G7; architect's reading, vetoable: "SM-2" = SM-4, the only remaining map
+  wave):** the MASTER MERGE + PUSH-BY-PR execute IMMEDIATELY after the composer-lift window
+  closes green — BEFORE SM-4/GUIDE-2b. Final sequence: W-COMPOSER-2 + FP-G7 merge + window
+  close → fresh re-survey → MASTER MERGE per MASTER_MERGE_PLAN.md (gates between steps) →
+  push the reconciliation branch → OPEN THE PULL REQUEST (full reconciliation dossier; the
+  merge button stays the owner's per the standing vetoable reading) → SM-4 + GUIDE-2b +
+  Surveyor S1–S7 + the dimensions-only re-grade ALL build post-merge on the UNIFIED lineage
+  → lighting batch (owner-signed) → the owner decision list → the successor's soak. The
+  dual-lineage era now ends one window sooner.
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm

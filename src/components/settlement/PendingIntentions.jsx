@@ -11,10 +11,21 @@
  */
 
 import { useMemo } from 'react';
-import { Hourglass, X } from 'lucide-react';
+import { Hourglass, X, Pencil } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import { AFFORDANCE_MANIFEST } from '../../domain/events/affordanceManifest.js';
+import { eventToComposerIntent } from './eventComposer/editSeed.js';
+
+/** §10 LAPSED derivation: the entry's verb predicate no longer holds against
+ * the CURRENT settlement (grayed-with-reason; the drain would refuse it). */
+function lapseOf(event, settlement) {
+  const v = AFFORDANCE_MANIFEST[event?.type];
+  if (!v || v.foldedInto || !settlement) return null;
+  const p = v.predicate(settlement, {});
+  return p.available ? null : p.reasons.join(' ');
+}
 
 const TYPE_LABELS = {
   APPLY_STRESSOR: 'Apply stressor',
@@ -43,6 +54,8 @@ export default function PendingIntentions() {
   const activeSaveId = useStore(s => s.activeSaveId);
   const campaigns = useStore(s => s.campaigns);
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
+  const stageComposerIntent = useStore(s => s.stageComposerIntent);
+  const settlement = useStore(s => s.settlement);
 
   // Resolve the clock-bound campaign + this settlement's queue from the raw
   // campaigns array (stable ref until it changes) to avoid selector churn.
@@ -81,26 +94,56 @@ export default function PendingIntentions() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-        {queued.map(item => (
-          <div key={item.queueId} style={{
-            display: 'flex', alignItems: 'center', gap: 8,
-            padding: SP.sm, background: CARD,
-            border: `1px solid ${BORDER}`, borderRadius: R.sm,
-          }}>
-            <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
-              {labelFor(item.event)}
-            </span>
-            <Button
-              variant="danger"
-              size="sm"
-              icon={<X size={10} />}
-              onClick={() => cancelQueuedEvent(campaignId, item.queueId)}
-              title="Cancel this queued intention before the next World Pulse"
-            >
-              Cancel
-            </Button>
-          </div>
-        ))}
+        {queued.map(item => {
+          const lapsed = lapseOf(item.event, settlement);
+          return (
+            <div key={item.queueId} style={{
+              display: 'flex', alignItems: 'center', gap: 8,
+              padding: SP.sm, background: CARD,
+              border: `1px solid ${BORDER}`, borderRadius: R.sm,
+            }}>
+              <span style={{ flex: 1, fontSize: FS.xs, color: INK, fontFamily: sans }}>
+                {labelFor(item.event)}
+                {lapsed && (
+                  <>
+                    <span style={{
+                      marginLeft: 8, padding: '1px 6px', borderRadius: R.sm,
+                      border: `1px solid ${BORDER}`, color: MUTED,
+                      fontSize: FS.xxs, fontWeight: 700, letterSpacing: '0.04em',
+                    }}>
+                      LAPSED — needs your attention
+                    </span>
+                    <span style={{ display: 'block', fontSize: FS.xxs, color: MUTED, marginTop: 2 }}>
+                      {lapsed} Left as-is, the tick will refuse it visibly.
+                    </span>
+                  </>
+                )}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                icon={<Pencil size={10} />}
+                onClick={() => {
+                  stageComposerIntent(eventToComposerIntent(item.event, { campaignId, queueId: item.queueId }));
+                  const anchor = document.querySelector('[data-anchor="event-composer"]');
+                  if (anchor?.scrollIntoView) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+                aria-label="Reopen this queued order in the composer — applying replaces it in place"
+              >
+                Edit
+              </Button>
+              <Button
+                variant="danger"
+                size="sm"
+                icon={<X size={10} />}
+                onClick={() => cancelQueuedEvent(campaignId, item.queueId)}
+                aria-label="Cancel this queued intention before the next World Pulse"
+              >
+                Cancel
+              </Button>
+            </div>
+          );
+        })}
       </div>
 
       <p style={{ fontSize: FS.xxs, color: MUTED, margin: '8px 0 0', fontStyle: 'italic', lineHeight: 1.5 }}>

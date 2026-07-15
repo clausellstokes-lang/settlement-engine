@@ -92,6 +92,8 @@ function loadWorldEngine() {
       // the SAME lazy session chunk as the advance/resume bodies.
       runCatchUpCampaignWorld: session.runCatchUpCampaignWorld,
       applyWorldPulseProposal: apply.applyWorldPulseProposal,
+      // W-COMPOSER-2: the realm-verb mint (force-as-proposal) — same lazy chunk.
+      mintRealmVerbProposal: apply.mintRealmVerbProposal,
       applyPartyImpact: party.applyPartyImpact,
     }));
   }
@@ -576,6 +578,40 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       track(EVENTS.WORLD_PULSE_PROPOSAL_APPLIED, appliedDecision);
     }
     await flushWorldPulsePersist({ result, campaignPersist, persistUpdates, campaignId });
+    return result;
+  },
+
+  /**
+   * W-COMPOSER-2 — stage a DM realm-verb order as a PENDING proposal (the
+   * force-as-proposal lane; realmManifest.js is the verb catalog). Cancel =
+   * dismissWorldPulseProposal; approval = applyWorldPulseProposal (the
+   * realm-verb arm applies it force ≡ organic). Same guards as every pulse
+   * mutator: no-op while an advance runs or a paused interval is parked.
+   */
+  stageRealmVerb: async (campaignId, verb, args) => {
+    if (get().isAdvanceInFlight(campaignId)) return { ok: false, code: 'advance_in_flight' };
+    if (get().getPausedAdvance(campaignId)) return { ok: false, code: 'advance_paused' };
+    const { mintRealmVerbProposal: domainMint } = await loadWorldEngine();
+    let result = /** @type {any} */ (null);
+    let persistUpdates = [];
+    let campaignPersist = /** @type {any} */ (null);
+    const now = new Date().toISOString();
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c) return;
+      result = domainMint({
+        campaign: cloneJson(c),
+        saves: cloneJson(campaignSettlements(state, campaignId)),
+        verb, args, now,
+      });
+      if (!result || !result.ok) return;
+      persistUpdates = applyWorldPulseResultToState(state, c, result.result, now);
+      campaignPersist = cacheCampaignState(state);
+    });
+    await flushWorldPulsePersist({
+      result: result && result.ok ? result.result : null,
+      campaignPersist, persistUpdates, campaignId,
+    });
     return result;
   },
 

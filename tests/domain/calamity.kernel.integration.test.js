@@ -379,7 +379,7 @@ describe('stage 0 — FORCE ≡ ORGANIC (FORCE_CALAMITY resolves through the SAM
     expect(severe.deaths + severe.exodus).toBeLessThan(5000);
   });
 
-  it('the FORCE_CALAMITY entry is a registrable-shape verb (NOT registered — W-COMPOSER-2 lift)', () => {
+  it('the FORCE_CALAMITY entry is a registrable-shape verb (REGISTERED via realmManifest — W-COMPOSER-2)', () => {
     const entry = forceCalamityEntry();
     expect(entry.type).toBe('FORCE_CALAMITY');
     expect(entry.scope).toBe('settlement');

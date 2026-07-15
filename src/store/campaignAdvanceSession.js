@@ -23,6 +23,7 @@
  * the sim (keeping the lazy chunking + the mockability of the kernel intact).
  */
 import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { appendWizardNewsEntries } from '../domain/region/index.js';
 // Lane-2 drain-path parity (domain-events-region-1 twin): the LIGHT eager-safe gate
 // deciding whether a queued event is a NON-party canon relationship verb — the SAME
 // gate the immediate path (settlementSlice.rippleEventThroughWorld) uses, so the two
@@ -158,6 +159,7 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
     /** @type {any} */ let simCampaign = null;
     /** @type {any} */ let simSaves = null;
     /** @type {any} */ let authoredEventBySave = null;
+    /** @type {any[]} */ let drainRefusalNews = [];
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
@@ -194,6 +196,9 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
       const drained = drainCampaignQueueIntoState(state, c, worldState, now);
       c.worldState = drained.worldState;
       drainedPartyImpacts = drained.partyImpacts || [];
+      // §10: lift the queue-refusal digest entries to plain objects (Immer drafts
+      // revoke); folded into the pulse result's feed after the compute below.
+      drainRefusalNews = cloneJson(drained.refusalNews || []);
       // Snapshot the pre-pulse queued-impact ids (primitive Set — safe to read
       // outside set) so we can isolate this pulse's NEW propagation impacts. Read
       // here; the pure compute takes clones and never mutates c.regionalGraph.
@@ -253,6 +258,12 @@ export async function runAdvanceCampaignWorld({ set, get, campaignId, interval =
             interval,
             now,
           });
+    }
+
+    // §10 (W-COMPOSER-2): the queue-mouth refusals ride the advance digest —
+    // append them to the result's feed through the house appender (dedupe/cap).
+    if (simCampaign && result && drainRefusalNews.length && result.wizardNews) {
+      result.wizardNews = appendWizardNewsEntries(result.wizardNews, drainRefusalNews);
     }
 
     // ── Phase 2: commit the pure result back onto the draft.

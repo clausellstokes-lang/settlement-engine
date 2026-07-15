@@ -31,6 +31,7 @@ import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
 import { MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
 import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
 import { BatchCart } from './eventComposer/BatchCart.jsx';
@@ -46,6 +47,7 @@ import { EventComposerLinkNeighbourField, linkableSiblings } from './eventCompos
 import { ComposerNavigator } from './eventComposer/ComposerNavigator.jsx';
 import { ApplyControls } from './eventComposer/ApplyControls.jsx';
 import { buildEvent, mintComposeEventId } from './eventComposer/buildEvent.js';
+import { applyComposerIntent, resetComposerForVerb } from './eventComposer/applyComposerIntent.js';
 import {
   RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS, CUSTOM_RESOURCE_OPTION,
   inputStyle, selectStyle,
@@ -145,6 +147,9 @@ export default function EventComposer({ onLink = null }) {
   const [linkRelType, setLinkRelType] = useState('neutral');  // LINK_NEIGHBOUR: the link relationship
   const [staleNotice, setStaleNotice] = useState(null);        // post-apply "narrative is now stale" modal: null | { label }
   const [addCategory, setAddCategory] = useState('');          // ADD_INSTITUTION: category of the picked catalog item
+  // §10 MUTABLE DOCKET: non-null while editing a QUEUED intention ({ campaignId,
+  // queueId, eventId }); re-staging replaces the entry in place, same identity.
+  const [editingQueue, setEditingQueue] = useState(null); const updateQueuedEvent = useStore(s => s.updateQueuedEvent);
 
   // Catalog sources for the catalog-backed "Add" events. Institutions come
   // from the full institutional catalog + the user's Compendium, minus what's
@@ -266,24 +271,15 @@ export default function EventComposer({ onLink = null }) {
   // Syncing an EXTERNAL staged intent into form state is the one legitimate
   // shape here: the intent arrives from outside the component (SuccessorPrompt,
   // entity cards) exactly once, and the effect immediately consumes+clears it.
-  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!composerIntent) return;
-    const { type: iType, target: iTarget, fields } = composerIntent;
-    if (iType && EVENT_REGISTRY[iType]) switchType(iType);
-    if (iTarget != null && iTarget !== '') setTarget(String(iTarget));
-    const f = fields || {};
-    if (f.role != null) setRole(String(f.role));
-    if (f.institutionId != null) setInstitutionId(String(f.institutionId));
-    if (f.quality != null) setQuality(String(f.quality));
-    if (f.importance != null) setImportance(String(f.importance));
-    if (f.description != null) setDesc(String(f.description));
-    if (f.causeOverride != null) setCauseOverride(String(f.causeOverride));
+    // The full consumption body (incl. the §10 edit seeding) lives in
+    // applyComposerIntent.js — 1:1 with editSeed.js's field twins.
+    applyComposerIntent(composerIntent, { ...composerSetters, switchType });
     stageComposerIntent(null);
     // switchType/setters are stable; the intent object is the real trigger.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [composerIntent]);
-  /* eslint-enable react-hooks/set-state-in-effect */
 
   // LIVE PREVIEW (§5): benchmarked 2026-07-14 — runEventPipeline is p50≈0.4ms,
   // p95<1.6ms on a metropolis WITH faction responses (two orders of magnitude
@@ -309,22 +305,23 @@ export default function EventComposer({ onLink = null }) {
     .map(i => ({ id: i.id || i.name, name: i.name || i.id }))
     .filter(o => o.id && o.name);
 
+  // The ONE setters bag (threaded to the verb-reset + intent-consumption
+  // helpers in ./eventComposer/applyComposerIntent.js — the max-lines split).
+  const composerSetters = {
+    registryHas: (/** @type {string} */ t) => !!EVENT_REGISTRY[t],
+    setType, setTarget, setDesc, setAddCategory, setDestroyConfirm, setRelationshipType,
+    setCriminalOrg, setCorruptScope, setCorruptBeneficiary, setStressorPick, setStressorSeverity,
+    setInstigatorNeighbour, setInstigatorRelationship, setTradeTarget, setPowerCause,
+    setTradeDirection, setTradeEntrepot, setCustomResourceName, setSwapWithNpcId, setTierDirection,
+    setDeityRef, setDeityMode, setCultRemoveRef, setNpcFlaw, setNpcTemperament, setNpcGoals,
+    setNpcConstraint, setNpcSecret, setPartnerSaveId, setLinkRelType, setCauseOverride,
+    setApplyRefusal, setEditingQueue, setSessionEventId, setRole, setInstitutionId, setQuality,
+    setImportance, setReliefMagnitude, setPartyCaused,
+  };
   // The ONE verb-change chokepoint (select dropdown, navigator chips, staged
-  // intents): resets every per-type field and re-mints the compose-session id
-  // (a different verb IS a different composition — §5 identity).
-  function switchType(v) {
-    setType(v); setTarget(''); setAddCategory(''); setDestroyConfirm('');
-    setRelationshipType((RELATIONSHIP_OPTIONS[v] || [])[0] || '');
-    setCriminalOrg(''); setCorruptScope('individual'); setStressorPick(null);
-    setStressorSeverity('moderate'); setInstigatorNeighbour(''); setInstigatorRelationship('rival');
-    setTradeTarget(''); setPowerCause('coup'); setTradeDirection('export'); setTradeEntrepot(false);
-    setCustomResourceName(''); setSwapWithNpcId(''); setTierDirection('promotion');
-    setDeityRef(''); setDeityMode('assign'); setCultRemoveRef('');
-    setNpcFlaw(''); setNpcTemperament(''); setNpcGoals(''); setNpcConstraint(''); setNpcSecret('');
-    setPartnerSaveId(''); setLinkRelType('neutral');
-    setCauseOverride(''); setApplyRefusal(null);
-    setSessionEventId(mintComposeEventId());
-  }
+  // intents): resets every per-type field, re-mints the compose-session id
+  // (a different verb IS a different composition — §5 identity), ends §10 edits.
+  function switchType(v) { resetComposerForVerb(v, composerSetters); }
 
   // Thin closure: thread the form state into the pure buildEvent assembler. The
   // tier direction is pre-clamped so the shown option and the staged event agree.
@@ -379,6 +376,14 @@ export default function EventComposer({ onLink = null }) {
     // previewed event byte-for-byte (same session id, same payload) — the
     // audit's preview↔commit identity now holds BY CONSTRUCTION of the key,
     // and an edited form can never commit a stale preview.
+    // §10: re-staging an EDITED queued intention replaces the entry IN PLACE
+    // (same queueId/position/id); the drain's veto channel re-validates at the tick.
+    if (editingQueue) {
+      const ok = updateQueuedEvent(editingQueue.campaignId, editingQueue.queueId, assembleEvent());
+      setEditingQueue(null);
+      if (ok) { setApplyRefusal(null); resetAfterApply(); }
+      return;
+    }
     const evType = type;
     const entry = applyEvent(assembleEvent());
     // Handler-veto channel (§2): the world refused — a blocking refusal, not
@@ -421,6 +426,8 @@ export default function EventComposer({ onLink = null }) {
           ? 'In-world events write to the campaign timeline.'
           : 'Draft: nothing is logged yet. Stage changes and preview their effect before you canonize.'}
       </div>
+
+      {editingQueue && <EditQueueBanner onStop={() => { setEditingQueue(null); setSessionEventId(mintComposeEventId()); }} />}
 
       {/* §4 — nobody ever meets the catalog: pressures rail + target-first +
           family browse + search, all projections of the affordance manifest. */}

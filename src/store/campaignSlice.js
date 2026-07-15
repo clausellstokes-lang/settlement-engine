@@ -693,6 +693,12 @@ export const createCampaignSlice = (set, get) => {
     if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaign.id)) {
       return { queued: false, reason: 'advance_in_flight', campaignId: campaign.id };
     }
+    // Parked-pause guard (W-COMPOSER-2 §10 — every docket mutation honors the
+    // sync-prefix): resume replays the segment from the cursor's PRE-tick
+    // snapshot and wholesale-replaces worldState, clobbering a queue write.
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaign.id)) {
+      return { queued: false, reason: 'advance_paused', campaignId: campaign.id };
+    }
     const now = new Date().toISOString();
     let added = null;
     set(state => {
@@ -720,6 +726,10 @@ export const createCampaignSlice = (set, get) => {
     if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
       return false;
     }
+    // Parked-pause guard (W-COMPOSER-2 §10 — the sync-prefix on every docket mutation).
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) {
+      return false;
+    }
     let removed = false;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -733,6 +743,40 @@ export const createCampaignSlice = (set, get) => {
       persistCampaignState(state, campaignId);
     });
     return removed;
+  },
+
+  /**
+   * THE MUTABLE DOCKET (W-COMPOSER-2 §10, owner law: "each queued commit is
+   * editable or cancelable because of unforeseen changes"): replace a queued
+   * intention IN PLACE — same queueId, same drain position, the event's
+   * compose-session id preserved by the caller (identity persists across
+   * edits; nothing has applied, so no undo/PRNG lineage exists yet). The
+   * edited event re-validates at the drain like any queued intention.
+   */
+  updateQueuedEvent: (campaignId, queueId, event) => {
+    if (!queueId || !event) return false;
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return false;
+    }
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) {
+      return false;
+    }
+    let replaced = false;
+    const now = new Date().toISOString();
+    set(state => {
+      const c = findActiveCampaign(state.campaigns, campaignId);
+      if (!c?.worldState) return;
+      const before = c.worldState.pendingEvents || [];
+      const idx = before.findIndex(e => e.queueId === queueId);
+      if (idx === -1) return;
+      const next = before.slice();
+      next[idx] = { ...next[idx], event: cloneJson(event), queuedAt: now };
+      c.worldState = { ...c.worldState, pendingEvents: next };
+      c.updatedAt = now;
+      replaced = true;
+      persistCampaignState(state, campaignId);
+    });
+    return replaced;
   },
 
   reorderCampaignSettlements: (campaignId, settlementIds) =>

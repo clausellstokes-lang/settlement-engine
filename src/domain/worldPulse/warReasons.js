@@ -599,7 +599,9 @@ function pressureBlend(pIndex, id) {
 //
 // W-PEACE-1 ships the verb as a PURE, GATED worldState mutation — the exact
 // function a composer manifest entry must wrap under the SAME-FUNCTION LAW.
-// It is NOT registered in src/domain/events/affordanceManifest.js this wave:
+// REGISTERED (W-COMPOSER-2): realmManifest.js DECLARE_CASUS wraps this fn
+// verbatim; the realm arm applies it (realmVerbExecution.js). Historical note:
+// it was NOT registered in affordanceManifest.js at the W-PEACE-1 wave:
 // the manifest walker's own scope note parks realm verbs ("the trunk layer —
 // registered MACRO ops gaining manifest entries — lands with W-COMPOSER-2's
 // realm verbs... Documented deferral, not a gap"), and the applyEvent pipeline

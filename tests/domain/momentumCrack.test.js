@@ -73,11 +73,13 @@ describe('W-MOMENTUM Stage 4 — the climb_down credibility delta kind (union ex
 });
 
 describe('W-MOMENTUM Stage 4 — FORCE_RECONSIDERATION (registrable shape, force ≡ organic)', () => {
-  it('ships in registrable shape, NOT manifest-registered (the W-COMPOSER-2 lift)', () => {
+  it('ships REGISTERED (the W-COMPOSER-2 lift landed), with its realm-manifest entry', async () => {
     const v = forceReconsiderationVerbFactory();
     expect(v.verb).toBe('FORCE_RECONSIDERATION');
-    expect(v.registered).toBe(false);
+    expect(v.registered).toBe(true);
     expect(v.dials).toHaveProperty('pressure'); // the dial is the pressure magnitude
     expect(Object.isFrozen(v)).toBe(true);
+    const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
+    expect(realmVerbFor('FORCE_RECONSIDERATION')?.candidateType).toBe(v.candidateType);
   });
 });

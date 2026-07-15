@@ -280,6 +280,23 @@ export const GUIDANCE_WHISPERS = Object.freeze([
     body: 'guidance.invitations.realm', glossaryRef: null,
     budgetClass: 'wayfinding', component: 'CampaignEmptyState',
   }),
+  // ── W-COMPOSER-2: the mechanism whispers (the criterion's final clause —
+  //    every mechanism ships its registered whisper; teaching rides existing
+  //    organs beyond these: veto prose, LAPSED badges, the honest labels). ──
+  whisper({
+    id: 'realm_orders_teaching',
+    surface: 'realm', lane: 'sovereign', register: 'plain',
+    trigger: {}, priority: 45,
+    body: 'guidance.realmOrders', glossaryRef: null,
+    budgetClass: 'teaching', component: 'RealmVerbComposer',
+  }),
+  whisper({
+    id: 'realm_docket_teaching',
+    surface: 'realm', lane: 'sovereign', register: 'plain',
+    trigger: {}, priority: 44,
+    body: 'guidance.realmDocket', glossaryRef: null,
+    budgetClass: 'teaching', component: 'RealmDocket',
+  }),
 ]);
 
 /**

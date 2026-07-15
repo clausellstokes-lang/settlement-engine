@@ -136,13 +136,15 @@ describe('W-NAVY Stage 3 — the sea battle (land parity, shared fate, retreat)'
   });
 });
 
-describe('W-NAVY Stage 3 — the ORDER_CONVOY verb (registrable shape, not registered)', () => {
-  it('ships realm scope + candidateType, registered:false', () => {
+describe('W-NAVY Stage 3 — the ORDER_CONVOY verb (REGISTERED — the W-COMPOSER-2 lift)', () => {
+  it('ships realm scope + candidateType, registered:true, with its realm-manifest entry', async () => {
     const v = orderConvoyVerbFactory();
     expect(v.verb).toBe('ORDER_CONVOY');
     expect(v.scope).toBe('realm');
     expect(typeof v.candidateType).toBe('string');
-    expect(v.registered).toBe(false);
+    expect(v.registered).toBe(true);
+    const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
+    expect(realmVerbFor('ORDER_CONVOY')?.candidateType).toBe(v.candidateType);
   });
 });
 
@@ -202,12 +204,14 @@ describe('W-NAVY Stage 4 — the blockade (mint, authority-routing, lift)', () =
     expect(out.newsEntries.some((n) => n.impactKind === 'sea_battle')).toBe(true);
   });
 
-  it('the DECLARE_BLOCKADE verb ships registrable shape (realm scope, registered:false)', () => {
+  it('the DECLARE_BLOCKADE verb is REGISTERED (realm scope — the W-COMPOSER-2 lift)', async () => {
     const v = declareBlockadeVerbFactory();
     expect(v.verb).toBe('DECLARE_BLOCKADE');
     expect(v.scope).toBe('realm');
     expect(v.candidateType).toBe('blockade_declared');
-    expect(v.registered).toBe(false);
+    expect(v.registered).toBe(true);
+    const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
+    expect(realmVerbFor('DECLARE_BLOCKADE')?.candidateType).toBe('blockade_declared');
   });
 });
 

@@ -36,14 +36,24 @@ import { authorableVerbs, STRESSOR_SEVERITY_VALUES, RELIEF_MAGNITUDE_VALUES } fr
 import { BAND_HINT } from '../state/bands.js';
 import { CAPACITY_BANDS } from '../capacityModel.js';
 import { CAPTURE_LADDER } from '../corruption.js';
+// W-COMPOSER-2: the realm verbs join the reference. NOTE the import weight —
+// realmManifest rides the engine tree; the glossary is a lazy reference
+// surface, so the chunk cost is runtime-only (zero first-paint; the dist
+// guard's GLOSSARY_LAZY_SENTINEL still enforces the lazy boundary).
+import { realmVerbs } from '../events/realmManifest.js';
 import { slugify } from '../../kernel/slugify.js';
+
+/** The schema-owned loose record alias (the affordanceManifest Mut idiom).
+ * @typedef {NonNullable<import('../settlement.schema.js').SimSettlement['config']>} Loose */
 
 export const GLOSSARY_LAZY_SENTINEL = 'GLOSSARY_LAZY_SENTINEL';
 
-/** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive). */
+/** kebab-case a term into a stable anchor-safe slug (the ONE slugify primitive).
+ * @param {unknown} s */
 const slug = (s) => slugify(String(s));
 
-/** A concise title-cased term from an ENUM key or event type. */
+/** A concise title-cased term from an ENUM key or event type.
+ * @param {string} key */
 function titleize(key) {
   return String(key)
     .replace(/[_-]+/g, ' ')
@@ -111,9 +121,24 @@ const LINK = Object.freeze({
  * @property {string} anchor      — the compendium #anchor.
  */
 
-/** A code-DERIVED (never invented) one-liner for an event verb. */
+/** A code-DERIVED (never invented) one-liner for a REALM order (W-COMPOSER-2:
+ * stages as a proposal; deferred lanes say so honestly).
+ * @param {Loose} verb */
+function realmVerbDefinition(verb) {
+  const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
+  const base = verb.lane === 'deferred'
+    ? `A ${verb.family} order registered but deferred with its wave's own seam`
+    : `A ${verb.family} order the DM stages as a proposal; approval applies through the world's own machinery`;
+  if (dials.length === 0) return `${base}.`;
+  const list = dials.length === 1 ? dials[0] : `${dials.slice(0, -1).join(', ')} and ${dials[dials.length - 1]}`;
+  return `${base}, with ${dials.length === 1 ? 'the option' : 'options'} ${list}.`;
+}
+
+/** A code-DERIVED (never invented) one-liner for an event verb (the manifest's
+ * loose open-entry shape — the affordanceManifest Mut idiom).
+ * @param {Loose} verb */
 function verbDefinition(verb) {
-  const dials = (verb.dials || []).map((d) => d.label).filter(Boolean);
+  const dials = (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean);
   const article = /^[aeiou]/i.test(verb.family) ? 'An' : 'A';
   const base = `${article} ${verb.family} verb the DM can apply to the settlement`;
   if (dials.length === 0) return `${base}.`;
@@ -138,7 +163,21 @@ export function buildGlossaryEntries() {
       category: 'verb',
       definition: verbDefinition(verb),
       family: verb.family,
-      dials: (verb.dials || []).map((d) => d.label).filter(Boolean),
+      dials: (verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean),
+      ...LINK.verb,
+    });
+  }
+
+  // Realm verbs (W-COMPOSER-2 — the realm affordance manifest, registry order;
+  // the loose open-entry read — the affordanceManifest Mut idiom).
+  for (const verb of /** @type {Loose[]} */ (/** @type {unknown} */ (realmVerbs()))) {
+    out.push({
+      id: `verb-${slug(verb.verb)}`,
+      term: verb.label,
+      category: 'realm-verb',
+      definition: realmVerbDefinition(verb),
+      family: verb.family,
+      dials: /** @type {string[]} */ ((verb.dials || []).map((/** @type {{ label?: string }} */ d) => d.label).filter(Boolean)),
       ...LINK.verb,
     });
   }
@@ -160,7 +199,7 @@ export function buildGlossaryEntries() {
       id: `strain-${slug(band)}`,
       term: titleize(band),
       category: 'strain-band',
-      definition: STRAIN_DEFS[band],
+      definition: /** @type {Record<string, string>} */ (STRAIN_DEFS)[band],
       ...LINK['strain-band'],
     });
   }
@@ -171,7 +210,7 @@ export function buildGlossaryEntries() {
       id: `capture-${slug(rung)}`,
       term: titleize(rung),
       category: 'capture-rung',
-      definition: CAPTURE_DEFS[rung],
+      definition: /** @type {Record<string, string>} */ (CAPTURE_DEFS)[rung],
       ...LINK['capture-rung'],
     });
   }
@@ -182,7 +221,7 @@ export function buildGlossaryEntries() {
       id: `severity-${slug(level)}`,
       term: titleize(level),
       category: 'severity',
-      definition: SEVERITY_DEFS[level],
+      definition: /** @type {Record<string, string>} */ (SEVERITY_DEFS)[level],
       ...LINK.severity,
     });
   }
@@ -193,7 +232,7 @@ export function buildGlossaryEntries() {
       id: `magnitude-${slug(level)}`,
       term: titleize(level),
       category: 'magnitude',
-      definition: MAGNITUDE_DEFS[level],
+      definition: /** @type {Record<string, string>} */ (MAGNITUDE_DEFS)[level],
       ...LINK.magnitude,
     });
   }

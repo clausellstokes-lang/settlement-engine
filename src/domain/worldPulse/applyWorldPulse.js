@@ -31,6 +31,8 @@ import { applySettlementLifecycleOutcomeToSettlement } from './settlementLifecyc
 import { applyInstitutionLifecycleOutcome } from './institutionLifecycle.js';
 import { normalizeSimulationRules, propagationDepthForRules } from './simulationRules.js';
 import { resolveProposalToOutcome } from './decisionTier.js';
+import { applyRealmVerbOrder, buildRealmVerbOutcome, REALM_VERB_PAYLOAD_KIND } from './realmVerbExecution.js';
+import { pendingActorMajorFor } from './actorMajorApproval.js';
 import { wallClockNow } from '../clock.js';
 import { transferRulingPower } from '../rulingPower.js';
 import { withImpairment } from '../entities/status.js';
@@ -991,7 +993,7 @@ export function applyWorldPulseOutcomes({
   // re-mapped inside the per-outcome / per-affected-save propagation loop below.
   const visibleSettlementIds = (snapshot.settlements || []).map((/** @type {any} */ item) => item.id);
 
-  for (const outcome of outcomes) {
+  for (let outcome of outcomes) {
     if (outcome.applyMode === 'proposal') {
       const proposal = {
         id: proposalIdFor(outcome, tick),
@@ -1033,6 +1035,27 @@ export function applyWorldPulseOutcomes({
       }
       // Falls through: the strategy_deploy itself is a settlement-state no-op (its home
       // conditions re-upsert on the NEXT war tick once the deployment is live).
+    }
+
+    // W-COMPOSER-2 — THE REALM VERB ARM. An APPROVED realm_verb_order resolves
+    // through its wave's own kernel function (force ≡ organic), re-gated against
+    // the CURRENT world: a lapsed order REFUSES VISIBLY (news pushed by the arm)
+    // and never enters the applied ledger (the sanctioned pre-mutation continue,
+    // like the proposal arm above). The lifecycle pair substitutes the ORGANIC
+    // outcome (settlement_terminal_death / settlement_resettled) and falls
+    // through the standard lane below — zero new apply paths for them.
+    if (outcome.proposalPayload?.kind === REALM_VERB_PAYLOAD_KIND) {
+      const armed = applyRealmVerbOrder({ state, snapshot, settlementUpdates, outcome, tick: tick ?? 0, now: now ?? null });
+      state = armed.worldState;
+      newsEntries.push(...armed.newsEntries);
+      if (armed.refusal) continue;
+      if (armed.settlementPatches) {
+        for (const [sid, patched] of armed.settlementPatches) {
+          const entry = settlementUpdates.get(String(sid));
+          if (entry) settlementUpdates.set(String(sid), { ...entry, settlement: patched });
+        }
+      }
+      if (armed.substituteOutcome) outcome = armed.substituteOutcome;
     }
 
     for (const saveId of affectedSaveIdsForOutcome(outcome)) {
@@ -1349,6 +1372,63 @@ export function applyWorldPulseProposal({ campaign, saves = [], proposalId, now 
     advanceRegionalImpacts: false,
     simulationRules: campaign.worldState?.simulationRules,
   });
-  result.worldState = updateProposalStatus(result.worldState, proposalId, 'applied', { appliedAt: now, updatedAt: now });
+  // W-COMPOSER-2 lapse honesty: a realm-verb order whose gates refused at apply
+  // is stamped 'refused' (visible in the queue's history), never 'applied' — the
+  // §10 phantom-hole law at the proposal mouth. Organic outcomes are untouched.
+  const wasRefused = Array.isArray(result.newsEntries)
+    && result.newsEntries.some((/** @type {NonNullable<SimSettlement['config']>} */ n) => n && n.impactKind === 'realm_verb_refused');
+  result.worldState = updateProposalStatus(result.worldState, proposalId, wasRefused ? 'refused' : 'applied', { appliedAt: now, updatedAt: now });
   return result;
+}
+
+/**
+ * W-COMPOSER-2 — mint a DM realm-verb order as a PENDING PROPOSAL through the
+ * EXACT sim mint lane (the applyMode:'proposal' arm of applyWorldPulseOutcomes:
+ * proposalIdFor + upsertProposal + the proposal news entry), so a DM-minted
+ * realm proposal is record-identical to a sim-minted one. Approval then rides
+ * the standing applyWorldPulseProposal → the realm verb arm. Dedup: one
+ * pending order per (candidateType, acting settlement) — the M10a
+ * pendingActorMajorFor guard.
+ * @param {Object} [io]
+ * @param {SimSettlement['config']} [io.campaign] @param {NonNullable<SimSettlement['config']>[]} [io.saves]
+ * @param {string} [io.verb] @param {NonNullable<SimSettlement['config']>} [io.args]
+ * @param {string} [io.now]
+ * @returns {{ ok: true, result: NonNullable<SimSettlement['config']>, proposalId: string|null }
+ *         | { ok: false, code: string, prose: string }}
+ */
+export function mintRealmVerbProposal({ campaign, saves = [], verb = '', args = {}, now = wallClockNow() } = {}) {
+  const worldState = campaign?.worldState || {};
+  const tick = worldState.tick || 0;
+  const settlementMap = new Map((saves || []).map(save => [String(save.id || save.settlement?.id), { saveId: String(save.id || save.settlement?.id), save, settlement: save.settlement || save }]));
+  const snapshot = {
+    campaign,
+    regionalGraph: ensureRegionalGraph(campaign?.regionalGraph, { now }),
+    settlements: [...settlementMap.values()].map(item => ({ id: item.saveId, settlement: item.settlement, name: item.settlement?.name || item.save?.name || item.saveId })),
+  };
+  const built = buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick });
+  if (built.ok !== true) return built;
+  // BOUNDED BY CONSTRUCTION (LAW 1): the DM mint refuses when the verb's own
+  // manifest predicate refuses — the composer never queues a knowably-doomed
+  // order. (The mover RE-MINTS bypass this — the mover's own gates already ran.)
+  const gate = built.predicate;
+  if (gate && !gate.available) {
+    return { ok: false, code: 'predicate_refused', prose: gate.reasons.join(' ') || 'The order is not available in the current world.' };
+  }
+  if (pendingActorMajorFor(worldState, built.outcome.candidateType, built.outcome.targetSaveId)) {
+    return { ok: false, code: 'order_already_pending', prose: 'An identical order already awaits your word in the proposals queue.' };
+  }
+  const result = applyWorldPulseOutcomes({
+    snapshot,
+    worldState,
+    regionalGraph: campaign?.regionalGraph,
+    wizardNews: campaign?.wizardNews,
+    settlementMap,
+    outcomes: [built.outcome],
+    tick,
+    now,
+    advanceNewsTick: false,
+    advanceRegionalImpacts: false,
+    simulationRules: worldState.simulationRules,
+  });
+  return { ok: true, result, proposalId: result.proposals[0]?.id || null };
 }

@@ -649,7 +649,7 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
  *   pIndex: CalPIndex, tick: number }} args
  * @returns {CalOutcome}
  */
-function buildExodusOutcome({ id, exodus, spatial, snapshot, pIndex, tick }) {
+export function buildExodusOutcome({ id, exodus, spatial, snapshot, pIndex, tick }) {
   /** @type {CalPopDelta[]} */
   const populationDeltas = [{ saveId: id, delta: -exodus, reason: 'Fled the calamity.' }];
   /** @type {CalOutcome['metadata']} */
@@ -684,7 +684,7 @@ function buildExodusOutcome({ id, exodus, spatial, snapshot, pIndex, tick }) {
  * @param {CalOutcome} outcome @param {string} originId
  * @returns {CalUpdate[]}
  */
-function applyExodusToUpdates(updates, updateIndex, outcome, originId) {
+export function applyExodusToUpdates(updates, updateIndex, outcome, originId) {
   const next = updates.slice();
   const affected = [originId, ...outcome.populationDeltas.map((d) => String(d.saveId))
     .filter((sid) => sid !== originId)];

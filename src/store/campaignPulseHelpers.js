@@ -18,17 +18,8 @@ import {
 // inside advanceCampaignWorld's set() callback — kept static (that cluster is
 // already anchored to first paint by campaignRegionalSlice's sync stressor
 // actions). The heavy advance/AI simulation graph stays out of the barrel path.
-import {
-  ensureWorldState,
-  proposalIdFor,
-  upsertProposal,
-} from '../domain/worldPulse/worldState.js';
-import {
-  normalizeStressor,
-  resolveStressorById,
-} from '../domain/worldPulse/stressorsCore.js';
-import { pulseTypeForStressorKey } from '../domain/stressorPicker.js';
-import { drainQueuedEvents } from '../domain/events/drainQueuedEvents.js';
+import { ensureWorldState } from '../domain/worldPulse/worldState.js';
+import { drainQueuedEvents, queueRefusalNews, applyTwinDirectivesToWorld } from '../domain/events/drainQueuedEvents.js';
 import { layerAuthoredDeltas } from '../domain/events/eventPipeline.js';
 import { withOrganicStressorResolution } from '../domain/worldPulse/stressorAftermath.js';
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
@@ -219,12 +210,17 @@ export function drainCampaignQueueIntoState(state, campaign, worldState, now) {
   if (!queue.length) return { worldState, touched: [] };
 
   const memberSaves = campaignSettlements(state, campaign.id);
-  const { updates, twinDirectives, partyImpacts } = drainQueuedEvents({
+  const { updates, twinDirectives, partyImpacts, refusals } = drainQueuedEvents({
     queue,
     saves: memberSaves,
     now,
     tick: worldState.tick ?? null,
   });
+  // §10 (W-COMPOSER-2): a refused queue entry surfaces VISIBLY in the advance
+  // digest — the session folds these into the result's news feed.
+  const nameById = new Map(memberSaves.map(s => [String(s.id), s.settlement?.name || s.name || String(s.id)]));
+  const refusalNews = (refusals || []).map(r =>
+    queueRefusalNews(r, nameById.get(String(r.saveId)) || String(r.saveId), worldState.tick ?? null, now));
 
   const touched = [];
   // saveId → the last drained event, so the pulse write can re-layer its
@@ -254,55 +250,10 @@ export function drainCampaignQueueIntoState(state, campaign, worldState, now) {
   // Thread the whole worldState (not just stressors) so a queued RESOLVE can
   // upsert its residual-aftermath proposals exactly as resolveCampaignStressor
   // does for the immediate path.
-  let ws = {
-    ...worldState,
-    stressors: Array.isArray(worldState.stressors) ? [...worldState.stressors] : [],
-  };
+  // The world-side twin fold lives in the DOMAIN (applyTwinDirectivesToWorld)
+  // so the forecast's clone-run replays the EXACT same path — one source.
   const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
-  for (const d of twinDirectives) {
-    if (d.action === 'inject' && d.stressor) {
-      const normalized = normalizeStressor({
-        ...d.stressor,
-        originSettlementId: d.originSettlementId,
-        affectedSettlementIds: [d.originSettlementId],
-        createdAt: now,
-        updatedAt: now,
-      });
-      const byId = new Map((ws.stressors || []).map(s => [s.id, s]));
-      byId.set(normalized.id, normalized);
-      ws = { ...ws, stressors: [...byId.values()] };
-    } else if (d.action === 'resolve' && d.type) {
-      const roamingType = pulseTypeForStressorKey(d.type) || d.type;
-      const match = (ws.stressors || [])
-        .map(raw => normalizeStressor(raw))
-        .find(st => st.status === 'active'
-          && String(st.type).toLowerCase() === String(roamingType).toLowerCase()
-          && (String(st.originSettlementId || '') === d.originSettlementId
-            || (st.affectedSettlementIds || []).map(String).includes(d.originSettlementId)));
-      if (match) {
-        const r = resolveStressorById(ws.stressors, match.id, {
-          tick, now, reason: 'Resolved by DM authoring (queued)', emitResidual: true,
-        });
-        if (r.found) {
-          ws = { ...ws, stressors: r.stressors };
-          for (const outcome of (r.residualOutcomes || [])) {
-            ws = upsertProposal(ws, {
-              id: proposalIdFor(outcome, tick),
-              status: 'pending',
-              createdAt: now,
-              updatedAt: now,
-              tick,
-              outcome: cloneJson(outcome),
-              headline: outcome.headline,
-              summary: outcome.summary,
-              severity: outcome.severity,
-              reasons: outcome.reasons || [],
-            });
-          }
-        }
-      }
-    }
-  }
+  const ws = applyTwinDirectivesToWorld(worldState, twinDirectives, { tick, now });
 
-  return { worldState: { ...ws, pendingEvents: [] }, touched, partyImpacts, authoredEventBySave };
+  return { worldState: { ...ws, pendingEvents: [] }, touched, partyImpacts, authoredEventBySave, refusalNews };
 }
