@@ -112,6 +112,11 @@ export const CREDIBILITY_TUNING = Object.freeze({
   // The FRACTURE (coalition-betrayal) credibility charge scale applied to the recorded
   // fracture.credibilityHit (peaceTerms §7 — the recorded-not-enforced seam this closes).
   FRACTURE_FALL_W: 8,
+  // W-MOMENTUM §4 — THE CLIMB-DOWN charge: a publicly-declared course reversed costs
+  // credibility (the priced, receipted crack), but LESS sharply than an exposed lie — an
+  // honest reversal is not a deception. Only ever folded when the momentum layer fires a
+  // 'climb_down' delta (never produced until momentum is wired ⇒ byte-identical here).
+  CLIMB_DOWN_FALL: 2,
   // Generational half-life (ticks): credibility regresses toward neutral. 52 ≈ a game
   // year at one-week ticks — a proven-liar mark fades over generations, never ratchets
   // forever. Past MAX_LOOKBACK the mark is spent (prune ⇒ byte-identical-dormant).
@@ -235,8 +240,10 @@ export function makeBlaineyCredibilityFn(worldState, tick) {
 }
 
 /**
- * One signed credibility delta to fold this tick.
- * @typedef {{ id: string, kind: 'proven_true' | 'deception' | 'fracture', magnitude01?: number }} CredibilityDelta
+ * One signed credibility delta to fold this tick. The CLOSED union; 'climb_down' is the
+ * W-MOMENTUM §4 crack charge (a publicly-reversed course spends credibility) — a producer
+ * only exists once momentum is wired, so it is byte-neutral here.
+ * @typedef {{ id: string, kind: 'proven_true' | 'deception' | 'fracture' | 'climb_down', magnitude01?: number }} CredibilityDelta
  */
 
 /**
@@ -275,10 +282,11 @@ export function advanceCredibility({ worldState, tick, deltas = [] }) {
     const mag = clamp01(finiteNumber(d.magnitude01, 1));
     if (d.kind === 'proven_true') return T.TRUE_RISE * mag;
     if (d.kind === 'fracture') return -T.FRACTURE_FALL_W * mag;
+    if (d.kind === 'climb_down') return -T.CLIMB_DOWN_FALL * mag; // W-MOMENTUM §4 crack charge
     return -T.LIE_FALL * mag; // deception
   };
   const ordered = (Array.isArray(deltas) ? deltas : [])
-    .filter((d) => d && d.id != null && (d.kind === 'proven_true' || d.kind === 'deception' || d.kind === 'fracture'))
+    .filter((d) => d && d.id != null && (d.kind === 'proven_true' || d.kind === 'deception' || d.kind === 'fracture' || d.kind === 'climb_down'))
     .sort((a, b) => (compareCodepoint(String(a.id), String(b.id))) || (signedOf(a) - signedOf(b)));
   for (const d of ordered) {
     const key = String(d.id);

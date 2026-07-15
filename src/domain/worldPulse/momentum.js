@@ -860,3 +860,78 @@ export function abandonFloorScale(worldState, aggressorId, targetId, tick, cliff
   const depth = clamp01(stock / Math.max(1e-6, finiteNumber(cliff, MOMENTUM_TUNING.BASE_CLIFF_STOCK)));
   return 1 + CONSUMPTION_TUNING.ABANDON_FLOOR_W * depth;
 }
+
+// ════════════════════════════════════════════════════════════════════════════════
+// STAGE 4 — THE CRACK (design §4). The climb-down as a PRICED CONSEQUENCE — E0-exempt
+// (consequences are never censored). Built here PURE + DORMANT: the priced-crack
+// primitives (the credibility 'climb_down' delta producer + the face-saving relief) + the
+// FORCE_RECONSIDERATION verb (registrable shape — the W-COMPOSER-2 lift). The live crack
+// event (legitimacyDeltas landing, succession-rerolls-the-cliff, wiring into the pulse) is
+// the wiring-pass follow-up; the union kind + tuning it needs are already in place
+// (informationStatecraft CredibilityDelta 'climb_down').
+// ════════════════════════════════════════════════════════════════════════════════
+
+export const CRACK_TUNING = Object.freeze({
+  // The base credibility charge magnitude for a climb-down (0..1, folded through the
+  // informationStatecraft CLIMB_DOWN_FALL scale). A full, un-face-saved public reversal.
+  CLIMB_DOWN_MAGNITUDE: 1.0,
+  // The base legitimacy hit for a climb-down (the upswingKernel legitimacyDeltas idiom —
+  // consumed at the wiring pass). A public reversal spends the seat's legitimacy.
+  CLIMB_DOWN_LEGITIMACY_HIT: 6,
+});
+
+/** The face-saving OFF-RAMPS (design §4 — recon-confirmed cheap exits). Each reduces the
+ * climb-down price because the exit can be TOLD as a victory. `declared_resolution` is the
+ * new symbolic seam-executor term ("declared victory and went home", receipted). */
+export const FACE_SAVING_EXITS = Object.freeze({
+  white_peace: 0.35,
+  non_aggression: 0.3,
+  mediation: 0.2,          // mediation's 20% soften
+  declared_resolution: 0.6, // the loudest face-save — the price drops sharply
+});
+
+/** The 0..1 face-saving relief for an exit kind (0 when the exit is not a face-save ⇒ full
+ * price). @param {string} exitKind @returns {number} */
+export function faceSavingReliefOf(exitKind) {
+  const r = /** @type {Record<string, number>} */ (FACE_SAVING_EXITS)[String(exitKind || '')];
+  return Number.isFinite(r) ? clamp01(r) : 0;
+}
+
+/**
+ * The PRICED climb-down (design §4). Returns the credibility delta + legitimacy hit for a
+ * publicly-reversed course, REDUCED by (1) the lawful court's procedural crack and (2) any
+ * face-saving off-ramp — but NEVER to zero (a reversal is always felt; the consequence is
+ * never censored). Deterministic + pure. The caller folds `credibilityDelta` through
+ * advanceCredibility and lands `legitimacyHit` via the upswingKernel legitimacyDeltas seam.
+ * @param {{ actorId: string, lawfulness01?: number, exitKind?: string }} args
+ * @returns {{ credibilityDelta: { id: string, kind: 'climb_down', magnitude01: number }, legitimacyHit: number, price01: number }}
+ */
+export function climbDownConsequence({ actorId, lawfulness01 = 0.5, exitKind = '' }) {
+  const relief = clamp01(proceduralCrackRelief(lawfulness01) + faceSavingReliefOf(exitKind));
+  // Price floor: even the most face-saved, most procedural climb-down still costs a fraction
+  // (a reversal is always felt — the anti-censorship guard on consequences).
+  const price01 = clamp(1 - relief, 0.15, 1);
+  return {
+    credibilityDelta: { id: String(actorId), kind: 'climb_down', magnitude01: round4(clamp01(CRACK_TUNING.CLIMB_DOWN_MAGNITUDE * price01)) },
+    legitimacyHit: round4(CRACK_TUNING.CLIMB_DOWN_LEGITIMACY_HIT * price01),
+    price01: round4(price01),
+  };
+}
+
+/**
+ * FORCE_RECONSIDERATION verb (design §4/§7) — the DM's voice of reason or the final push. In
+ * REGISTRABLE SHAPE, NOT manifest-registered (the W-COMPOSER-2 lift takes it with the rest,
+ * exactly like orderConvoyVerbFactory). The dial is the pressure MAGNITUDE (0..1) applied
+ * against the target course's commitment stock. Force ≡ organic: the same priced crack the
+ * counterforces reach, delivered by the DM. @returns {{ verb: string, scope: string, candidateType: string, dials: Record<string, unknown>, registered: boolean, note: string }}
+ */
+export function forceReconsiderationVerbFactory() {
+  return Object.freeze({
+    verb: 'FORCE_RECONSIDERATION',
+    scope: 'realm',
+    candidateType: 'reconsideration_forced',
+    dials: Object.freeze({ target: 'settlementId', course: 'courseKey', pressure: 'magnitude01' }),
+    registered: false,
+    note: 'Registrable shape; realm-manifest registration is the W-COMPOSER-2 lift. Force ≡ organic — the same priced climbDownConsequence the counterforces reach.',
+  });
+}
