@@ -481,18 +481,6 @@ export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
     defaultStatus: 'stable',
     defaultSeverity: 0.35,
   },
-  // ── W-DISCOVERY note: the resource-dynamics conditions resource_strike /
-  // vein_exhausted are DELIBERATELY NOT catalog archetypes. They carry zero eager
-  // first-paint bytes (the budget is untouchable + zero-headroom) AND adding templates
-  // here would break the faction-response 1:1 closed-set pin (factionRelationshipUpdate.js)
-  // — each new template must route a faction response, which is MORE eager cost, not less.
-  // Instead the lazy resourceDynamicsKernel writer plants them FULLY SPECIFIED (explicit
-  // bounded duration + affectedSystems + severity), so the :714 immortal-condition hazard
-  // is closed at the plant site (guarded by resourceDynamicsApply.test.js: every planted
-  // condition carries a bounded expiresAtTicks). vein_exhausted declares economic_capacity
-  // (the default drain — a worked-out vein hurts the economy); resource_strike is a bounded
-  // positive MARKER (affectedSystems [] — a discovery's upside flows through the W-UPSWING
-  // boom seam + the production reconcile, never a free condition bonus).
 });
 
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);

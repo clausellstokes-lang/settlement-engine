@@ -10,6 +10,11 @@ import {RESOURCE_DATA} from '../data/resourceData.js';
 
 // getTerrainType — map trade route to terrain category
 // terrainOverride allows explicit desert/mountain/hills selection
+/**
+ * @param {string} tradeRoute
+ * @param {string|null} [terrainOverride]
+ * @returns {string}
+ */
 export const getTerrainType = (tradeRoute, terrainOverride = null) => {
   if (terrainOverride && terrainOverride !== 'auto') return terrainOverride;
   return ({
@@ -33,6 +38,11 @@ const WATER_TERRAIN_RESOURCES = new Set([
 ]);
 const WATER_TERRAIN = new Set(['coastal', 'riverside']);
 
+/**
+ * @param {string} route
+ * @param {string|null} [terrain]
+ * @returns {Array<{ key: string, compatible: boolean, incompatibleReason: (string|null) } & Record<string, unknown>>}
+ */
 export const getCompatibleResources = (route, terrain = null) =>
   Object.entries(RESOURCE_DATA).map(([key, r]) => {
     const routeBlocked = (r.forbidden || []).includes(route);

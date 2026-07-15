@@ -34,10 +34,8 @@
  *     dormancy golden proves it). NOT spatial-gated: terrain is config.terrainType
  *     (generation-side, always present), so resource dynamics runs aspatially too.
  *   • FIRST-PAINT — a lazy worldPulse leaf: consumed only by pulseKernel (candidate
- *     lane) + applyWorldPulse (the writer), never the entry closure. The two eager
- *     costs are the condition catalog templates (activeConditions.js) and the
- *     resource_strike LIFT registration (archetypeCatalog.js) — the :714 hazard
- *     requires a catalog entry or a promoted condition is IMMORTAL.
+ *     lane) + applyWorldPulse (the writer), never the entry closure. ZERO eager (the
+ *     conditions are planted fully-specified, no eager catalog templates).
  *   • RNG — stable keyed forks (`resource_discovery:<id>:<tick>`), §H situation-
  *     loaded, order-free (keyed forks never advance the parent); no draw when dark.
  *   • THE FROZEN DIGEST IS UNTOUCHED — endowment lives in config.nearbyResources*,
@@ -45,6 +43,7 @@
  */
 
 import { clamp01 } from '../../kernel/math.js';
+import { slugify } from '../../kernel/slugify.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getCompatibleResources, getTerrainType } from '../../generators/terrainHelpers.js';
 import { computeActiveChains } from '../../generators/computeActiveChains.js';
@@ -53,6 +52,34 @@ import { stablePart } from './worldState.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { classifyResource } from './resourceTaxonomy.js';
+
+// ── The loose sim shapes this mover reads (concrete typedefs — no `any`) ────────
+/** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} PressureIdx */
+/** @typedef {{ key?: string, custom?: boolean }} ResourceEdit */
+/** @typedef {{ added?: ResourceEdit[], removed?: string[], depleted?: string[], recovered?: string[] }} ResourceEdits */
+/**
+ * @typedef {{ terrainType?: string, tradeRouteAccess?: string, terrainOverride?: (string|null),
+ *   magicExists?: boolean, priorityMagic?: number, nearbyResources?: string[],
+ *   nearbyResourcesCustom?: string[], nearbyResourcesDepleted?: string[],
+ *   nearbyResourcesState?: Record<string, string>, resourceEdits?: ResourceEdits }} RDConfig
+ */
+/** @typedef {{ archetype?: string }} RDCondition */
+/** @typedef {{ id?: unknown, name?: unknown }} RDInstitution */
+/** @typedef {{ needKey?: string, chainId?: string, outputs?: unknown[], exportable?: boolean }} RDChain */
+/** @typedef {{ activeChains?: RDChain[], primaryExports?: unknown[] }} RDEconomicState */
+/**
+ * @typedef {{ config?: RDConfig, institutions?: RDInstitution[], activeConditions?: RDCondition[],
+ *   tier?: string, tradeRoute?: string, name?: string, economicState?: RDEconomicState,
+ *   resourceHistory?: unknown[], _config?: Record<string, unknown> }} RDSettlement
+ */
+/** @typedef {{ saveId?: unknown, resource?: string, op?: string }} RDMembership */
+/** @typedef {{ id?: string, severity?: number, headline?: string, summary?: string, candidateType?: string, resourceMembership?: RDMembership, metadata?: { tick?: number } }} RDOutcome */
+/** @typedef {{ id?: unknown, name?: unknown, settlement?: RDSettlement }} RDSnapItem */
+/** @typedef {{ settlements?: RDSnapItem[] }} RDSnapshot */
+/** @typedef {{ tick?: number, settlementTickStates?: Record<string, Record<string, unknown>>, simulationRules?: Record<string, unknown> }} RDWorldState */
+/** @typedef {{ discoveryAcc?: number, lastDiscoveryTick?: number, depletedSince?: Record<string, number>, lastRemovalTick?: number }} RDMeta */
+/** @typedef {Record<string, unknown>} RDCandidate */
+/** @typedef {{ tick?: number, simulationRules?: Record<string, unknown>, rng?: { fork?: (k: string) => { random: () => number } } }} RDContext */
 
 /**
  * TUNING (owner-adjustable — the MORAL_PRESSURE_TUNING idiom; pins derive from
@@ -100,9 +127,17 @@ const T = RESOURCE_DYNAMICS_TUNING;
 // tolerant, lower-cased.
 const EXTRACTION_KEYWORDS = ['mine', 'quarry', 'pit', 'prospect', 'smelt', 'forge', 'dig', 'excavat'];
 
+/** RESOURCE_DATA is a fixed object; index it by an arbitrary key through one
+ *  `unknown` bridge (never `any`). @param {string} key
+ *  @returns {{ category?: string, label?: string } | undefined} */
+function resourceMeta(key) {
+  return /** @type {Record<string, { category?: string, label?: string }>} */ (
+    /** @type {unknown} */ (RESOURCE_DATA))[key];
+}
+
 /**
- * @param {any} pressureIdx
- * @param {any} settlementId
+ * @param {PressureIdx} pressureIdx
+ * @param {string} settlementId
  * @param {string} kind
  */
 function pressure(pressureIdx, settlementId, kind) {
@@ -112,24 +147,25 @@ function pressure(pressureIdx, settlementId, kind) {
 /** The resolved trade route for a tick-time settlement (before/after reconcile use
  *  the SAME value, so the exact route never changes the delta — only universal-
  *  resource legality keys off it, terrain-specific keys off config.terrainType).
- *  @param {any} settlement @param {any} config @returns {string} */
+ *  @param {RDSettlement} settlement @param {RDConfig} config @returns {string} */
 function routeOf(settlement, config) {
   return String(settlement?.tradeRoute || config?.tradeRouteAccess || 'road');
 }
 
 /** The settlement's terrain type — always present at generation (resolveConfig
  *  stamps config.terrainType); derived from the route as a total fallback.
- *  @param {any} config @returns {string} */
+ *  @param {RDConfig} config @returns {string} */
 function terrainOf(config) {
   return String(config?.terrainType
     || getTerrainType(config?.tradeRouteAccess || 'road', config?.terrainOverride || null));
 }
 
 /** Slug-equivalence for roster membership (mirrors mutateWorld's slugEq intent —
- *  catalog keys are underscore slugs; we compare lower/underscore-normalized).
- *  @param {any} value @returns {string} */
+ *  catalog keys are underscore slugs; we compare lower/underscore-normalized). Uses
+ *  the ONE kernel slugify primitive (underscore separator — the engine-id convention).
+ *  @param {unknown} value @returns {string} */
 function normKey(value) {
-  return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  return slugify(value, { sep: '_' });
 }
 
 /**
@@ -146,7 +182,7 @@ function normKey(value) {
  * set IS generation's own rollable vocabulary (resolveResources' random mode draws
  * from exactly this), so it is the faithful "one generation could have rolled."
  *
- * @param {any} config @param {any} settlement @returns {string[]}
+ * @param {RDConfig} config @param {RDSettlement} settlement @returns {string[]}
  */
 export function latentResourcePool(config, settlement) {
   const terrain = terrainOf(config);
@@ -162,13 +198,14 @@ export function latentResourcePool(config, settlement) {
     (config?.resourceEdits?.removed && Array.isArray(config.resourceEdits.removed) ? config.resourceEdits.removed : [])
       .map(normKey),
   );
+  /** @type {string[]} */
   const pool = [];
-  for (const entry of getCompatibleResources(route, /** @type {any} */ (terrain))) {
+  for (const entry of getCompatibleResources(route, terrain)) {
     if (!entry.compatible) continue;
     const key = entry.key;
-    if (!(/** @type {any} */ (RESOURCE_DATA)[key])) continue;     // known keys only (census hazard)
-    if (noMagic && (/** @type {any} */ (RESOURCE_DATA)[key])?.category === 'special'
-      && /magic|arcane|ley|planar/.test(key)) continue;          // suppress magical nodes in no-magic worlds
+    const meta = resourceMeta(key);
+    if (!meta) continue;                                            // known keys only (census hazard)
+    if (noMagic && meta.category === 'special' && /magic|arcane|ley|planar/.test(key)) continue; // suppress magical nodes in no-magic worlds
     const nk = normKey(key);
     if (held.has(nk) || removed.has(nk)) continue;
     pool.push(key);
@@ -179,13 +216,13 @@ export function latentResourcePool(config, settlement) {
 
 /** Is this resource organically REMOVABLE — a nonrenewable/strategic exhaustible
  *  (recoveryMode 'manual')? Renewables (natural) and magicals (requires_high_magic)
- *  never organically remove. @param {any} resource @returns {boolean} */
+ *  never organically remove. @param {string} resource @returns {boolean} */
 export function isOrganicallyRemovable(resource) {
   return classifyResource(resource).recoveryMode === 'manual';
 }
 
 /** The live depletion state of a roster key (mirrors tierResourceDynamics.resourceState).
- *  @param {any} config @param {any} resource @returns {boolean} */
+ *  @param {RDConfig} config @param {string} resource @returns {boolean} */
 function isDepleted(config, resource) {
   const explicit = config?.nearbyResourcesState?.[resource];
   if (explicit) return explicit === 'depleted';
@@ -193,14 +230,14 @@ function isDepleted(config, resource) {
   return set.has(resource);
 }
 
-/** The prospecting DRIVE (0..1) — the §H load on discovery. @param {any} settlement
- *  @param {any} config @param {any} pressureIdx @param {string} cid @returns {number} */
+/** The prospecting DRIVE (0..1) — the §H load on discovery. @param {RDSettlement} settlement
+ *  @param {RDConfig} config @param {PressureIdx} pressureIdx @param {string} cid @returns {number} */
 function prospectDrive(settlement, config, pressureIdx, cid) {
   const need = clamp01(pressure(pressureIdx, cid, 'food') * 0.5 + pressure(pressureIdx, cid, 'trade') * 0.5);
   const conds = Array.isArray(settlement?.activeConditions) ? settlement.activeConditions : [];
-  const boom = conds.some((/** @type {any} */ c) => c?.archetype === 'boom') ? T.DISCOVERY_BOOM_BONUS : 0;
+  const boom = conds.some((c) => c?.archetype === 'boom') ? T.DISCOVERY_BOOM_BONUS : 0;
   const insts = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
-  const hasExtraction = insts.some((/** @type {any} */ i) => {
+  const hasExtraction = insts.some((i) => {
     const hay = `${i?.id || ''} ${i?.name || ''}`.toLowerCase();
     return EXTRACTION_KEYWORDS.some(kw => hay.includes(kw));
   });
@@ -209,10 +246,10 @@ function prospectDrive(settlement, config, pressureIdx, cid) {
 }
 
 /** Relax the discovery integrator toward the drive (cap-held). Exported so pins
- *  derive expectations from the live tuning. @param {number} prev
+ *  derive expectations from the live tuning. @param {number|undefined} prev
  *  @param {number} drive @returns {number} */
 export function stepDiscovery(prev, drive) {
-  const acc = (Number.isFinite(prev) ? prev : 0) * T.DISCOVERY_DECAY + drive * T.DISCOVERY_GAIN;
+  const acc = (Number.isFinite(prev) ? Number(prev) : 0) * T.DISCOVERY_DECAY + drive * T.DISCOVERY_GAIN;
   return Math.min(T.DISCOVERY_CAP, Math.max(0, acc));
 }
 
@@ -225,11 +262,11 @@ export function stepDiscovery(prev, drive) {
  * DORMANCY: `resourceDynamicsEnabled` absent ⇒ early return, worldState UNCHANGED
  * (same reference), zero candidates, zero forks.
  *
- * @param {any} worldState
- * @param {any} snapshot
- * @param {any} pressureIdx
- * @param {{ tick?: number, simulationRules?: any, rng?: { fork?: (k: string) => { random: () => number } } }} [context]
- * @returns {{ worldState: any, candidates: any[] }}
+ * @param {RDWorldState} worldState
+ * @param {RDSnapshot} snapshot
+ * @param {PressureIdx} pressureIdx
+ * @param {RDContext} [context]
+ * @returns {{ worldState: RDWorldState, candidates: RDCandidate[] }}
  */
 export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, context = {}) {
   const rules = normalizeSimulationRules(context.simulationRules || worldState?.simulationRules);
@@ -239,7 +276,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
   const tick = Number.isFinite(context.tick) ? Number(context.tick) : Number(worldState?.tick) || 0;
   const rng = context.rng && typeof context.rng.fork === 'function' ? context.rng : null;
   const settlementTickStates = { ...(worldState?.settlementTickStates || {}) };
-  /** @type {any[]} */
+  /** @type {RDCandidate[]} */
   const candidates = [];
 
   for (const item of snapshot?.settlements || []) {
@@ -247,13 +284,13 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
     const config = settlement.config || {};
     const cid = String(item.id ?? '');
     const name = String(item.name || settlement.name || cid);
-    const prev = settlementTickStates[cid]?.resourceDynamics || null;
+    const prev = /** @type {RDMeta | null} */ (settlementTickStates[cid]?.resourceDynamics || null);
 
     // ── DISCOVERY integrator ──────────────────────────────────────────────────
     const pool = latentResourcePool(config, settlement);
     const drive = pool.length ? prospectDrive(settlement, config, pressureIdx, cid) : 0;
     const nextAcc = pool.length ? stepDiscovery(prev?.discoveryAcc, drive) : 0;
-    const lastDiscoveryTick = Number.isFinite(prev?.lastDiscoveryTick) ? Number(prev.lastDiscoveryTick) : null;
+    const lastDiscoveryTick = Number.isFinite(prev?.lastDiscoveryTick) ? Number(prev?.lastDiscoveryTick) : null;
     let nextLastDiscoveryTick = lastDiscoveryTick;
     const discoveryCooled = lastDiscoveryTick == null || (tick - lastDiscoveryTick) >= T.DISCOVERY_COOLDOWN;
     if (pool.length && nextAcc >= T.DISCOVERY_FLOOR && discoveryCooled) {
@@ -262,9 +299,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
       const r = typeof forked?.random === 'function' ? forked.random() : 0;
       const resource = pool[Math.min(pool.length - 1, Math.floor(r * pool.length))];
       const taxonomy = classifyResource(resource);
-      const severity = clamp01(0.3 + nextAcc * 0.35);
-      const label = String(RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (resource)]?.label
-        || resource.replace(/_/g, ' '));
+      const label = String(resourceMeta(resource)?.label || resource.replace(/_/g, ' '));
       nextLastDiscoveryTick = tick;
       candidates.push({
         id: `candidate.resource.discover.${stablePart(cid)}.${stablePart(resource)}.${tick}`,
@@ -273,7 +308,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         ruleId: 'resource_discovery',
         ruleFamily: 'resource',
         targetSaveId: item.id,
-        severity,
+        severity: clamp01(0.3 + nextAcc * 0.35),
         probability: clamp01(T.DISCOVERY_EMIT_P + nextAcc * 0.22),
         applyMode: authorityFor(rules, 'resource_discovery', 'auto'),
         headline: `${label} discovered near ${name}`,
@@ -295,7 +330,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
       ? prev.depletedSince : {};
     /** @type {Record<string, number>} */
     const nextDepletedSince = {};
-    const lastRemovalTick = Number.isFinite(prev?.lastRemovalTick) ? Number(prev.lastRemovalTick) : null;
+    const lastRemovalTick = Number.isFinite(prev?.lastRemovalTick) ? Number(prev?.lastRemovalTick) : null;
     let nextLastRemovalTick = lastRemovalTick;
     const removalCooled = lastRemovalTick == null || (tick - lastRemovalTick) >= T.REMOVAL_COOLDOWN;
     /** @type {{ resource: string, dwell: number }|null} */
@@ -316,8 +351,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
     if (removalTarget && removalCooled) {
       const { resource, dwell } = removalTarget;
       const taxonomy = classifyResource(resource);
-      const label = String(RESOURCE_DATA[/** @type {keyof typeof RESOURCE_DATA} */ (resource)]?.label
-        || resource.replace(/_/g, ' '));
+      const label = String(resourceMeta(resource)?.label || resource.replace(/_/g, ' '));
       // §H: longer dwell ⇒ heavier (a vein depleted for a decade is truly done).
       const severity = clamp01(0.45 + Math.min(1, (dwell - T.REMOVAL_DWELL) / (T.REMOVAL_DWELL * 2)) * 0.4);
       nextLastRemovalTick = tick;
@@ -353,7 +387,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
       || nextLastDiscoveryTick != null
       || nextLastRemovalTick != null;
     if (hasState) {
-      /** @type {any} */
+      /** @type {RDMeta} */
       const meta = {};
       if (nextAcc > 0.001) meta.discoveryAcc = nextAcc;
       if (nextLastDiscoveryTick != null) meta.lastDiscoveryTick = nextLastDiscoveryTick;
@@ -375,7 +409,8 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
 // ════════════════════════════════════════════════════════════════════════════
 
 /** Normalized resourceEdits view (mirrors mutateWorld.resourceEditsOf).
- *  @param {any} config @returns {{ added: any[], removed: any[], depleted: any[], recovered: any[] }} */
+ *  @param {RDConfig} config
+ *  @returns {{ added: ResourceEdit[], removed: string[], depleted: string[], recovered: string[] }} */
 function editsOf(config) {
   const re = config?.resourceEdits || {};
   return {
@@ -397,9 +432,9 @@ function editsOf(config) {
  * primaryExports; removal ⇒ the chain deactivates + its now-unproduced outputs are
  * pruned (the calamity export-prune logic). Pure over economicState.
  *
- * @param {any} economicState
- * @param {{ settlement: any, oldResources: string[], newResources: string[], oldDepleted: string[], newDepleted: string[] }} ctx
- * @returns {any}
+ * @param {RDEconomicState | null | undefined} economicState
+ * @param {{ settlement: RDSettlement, oldResources: string[], newResources: string[], oldDepleted: string[], newDepleted: string[] }} ctx
+ * @returns {RDEconomicState}
  */
 export function reconcileProductionAfterResourceChange(economicState, ctx) {
   if (!economicState || typeof economicState !== 'object') return economicState || {};
@@ -408,32 +443,35 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   const tier = String(settlement?.tier || 'village');
   const route = routeOf(settlement, config);
-  const magic = config.magicExists === false ? 0 : (Number.isFinite(config.priorityMagic) ? config.priorityMagic : 50);
+  const magic = config.magicExists === false ? 0 : (Number.isFinite(config.priorityMagic) ? Number(config.priorityMagic) : 50);
   // tradeDependencies=[] — it only ENRICHES chain status, never which chains are
   // active, so the active-chain SET (and thus the delta) is independent of it.
-  const before = computeActiveChains(institutions, oldResources, tier, route, [], oldDepleted, magic);
-  const after = computeActiveChains(institutions, newResources, tier, route, [], newDepleted, magic);
-  const cidOf = (/** @type {any} */ c) => `${c.needKey}.${c.chainId}`;
+  const before = /** @type {RDChain[]} */ (/** @type {unknown} */ (computeActiveChains(institutions, oldResources, tier, route, [], oldDepleted, magic)));
+  const after = /** @type {RDChain[]} */ (/** @type {unknown} */ (computeActiveChains(institutions, newResources, tier, route, [], newDepleted, magic)));
+  /** @param {RDChain} c */
+  const cidOf = (c) => `${c.needKey}.${c.chainId}`;
   const beforeIds = new Set(before.map(cidOf));
   const afterIds = new Set(after.map(cidOf));
-  const addedChains = after.filter((/** @type {any} */ c) => !beforeIds.has(cidOf(c)));
-  const removedIds = new Set(before.filter((/** @type {any} */ c) => !afterIds.has(cidOf(c))).map(cidOf));
+  const addedChains = after.filter((c) => !beforeIds.has(cidOf(c)));
+  const removedIds = new Set(before.filter((c) => !afterIds.has(cidOf(c))).map(cidOf));
   if (!addedChains.length && !removedIds.size) return economicState;
 
   // Merge the DELTA into the STAMPED chains (surgical, never a wholesale replace).
   const stamped = Array.isArray(economicState.activeChains) ? economicState.activeChains : [];
-  const survivingChains = stamped.filter((/** @type {any} */ c) => !removedIds.has(`${c.needKey}.${c.chainId}`));
-  const survivingIds = new Set(survivingChains.map((/** @type {any} */ c) => `${c.needKey}.${c.chainId}`));
-  const mergedChains = [...survivingChains, ...addedChains.filter((/** @type {any} */ c) => !survivingIds.has(cidOf(c)))];
+  const survivingChains = stamped.filter((c) => !removedIds.has(`${c.needKey}.${c.chainId}`));
+  const survivingIds = new Set(survivingChains.map((c) => `${c.needKey}.${c.chainId}`));
+  const mergedChains = [...survivingChains, ...addedChains.filter((c) => !survivingIds.has(cidOf(c)))];
 
   // Exports: prune the outputs a removed chain no longer produces (the calamity
   // precedent), then add the exportable outputs of newly-active chains.
+  /** @type {Set<string>} */
   const brokenOutputs = new Set();
   for (const c of before) if (removedIds.has(cidOf(c))) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) brokenOutputs.add(String(o).toLowerCase());
+  /** @type {Set<string>} */
   const stillProduced = new Set();
   for (const c of mergedChains) for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) stillProduced.add(String(o).toLowerCase());
   const exports = Array.isArray(economicState.primaryExports) ? economicState.primaryExports : [];
-  const nextExports = exports.filter((/** @type {any} */ exp) => {
+  const nextExports = exports.filter((exp) => {
     const e = String(exp).toLowerCase();
     const lost = [...brokenOutputs].some((o) => e.includes(o) || o.includes(e));
     const kept = [...stillProduced].some((o) => e.includes(o) || o.includes(e));
@@ -444,7 +482,7 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
     for (const o of (Array.isArray(c.outputs) ? c.outputs : [])) {
       const label = String(o);
       const lower = label.toLowerCase();
-      if (!nextExports.some((/** @type {any} */ e) => String(e).toLowerCase().includes(lower) || lower.includes(String(e).toLowerCase()))) {
+      if (!nextExports.some((e) => String(e).toLowerCase().includes(lower) || lower.includes(String(e).toLowerCase()))) {
         nextExports.push(label);
       }
     }
@@ -463,7 +501,7 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
  * FORCE ≡ ORGANIC: a DM ADD/REMOVE verb leaves membership + resourceEdits + reconcile;
  * this adds the condition + resourceHistory on the SAME downstream shape.
  *
- * @param {any} settlement @param {any} outcome @returns {any}
+ * @param {RDSettlement} settlement @param {RDOutcome} outcome @returns {RDSettlement}
  */
 export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) {
   const mem = outcome?.resourceMembership;
@@ -482,15 +520,15 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
   /** @type {string[]} */ let newDepleted;
   /** @type {string[]} */ let newCustom;
   if (op === 'add') {
-    newResources = oldResources.some((/** @type {any} */ k) => normKey(k) === nk) ? oldResources : [...oldResources, resource];
+    newResources = oldResources.some((k) => normKey(k) === nk) ? oldResources : [...oldResources, resource];
     stateMap[resource] = 'abundant';                                   // a fresh strike is abundant
-    newDepleted = oldDepleted.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    newDepleted = oldDepleted.filter((k) => normKey(k) !== nk);
     newCustom = oldCustom;                                             // organic draws are catalog keys, never custom
   } else {
-    newResources = oldResources.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    newResources = oldResources.filter((k) => normKey(k) !== nk);
     for (const k of Object.keys(stateMap)) if (normKey(k) === nk) delete stateMap[k];
-    newDepleted = oldDepleted.filter((/** @type {any} */ k) => normKey(k) !== nk);
-    newCustom = oldCustom.filter((/** @type {any} */ k) => normKey(k) !== nk);
+    newDepleted = oldDepleted.filter((k) => normKey(k) !== nk);
+    newCustom = oldCustom.filter((k) => normKey(k) !== nk);
   }
 
   // ── (b) DURABILITY — the resourceEdits delta (regen-surviving), dual-written ──
@@ -500,16 +538,16 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
         ...edits,
         // { key, custom:false } — the mutateWorld addResource shape (organic ≡ forced;
         // an organic draw is always a catalog key, never a custom mint).
-        added: edits.added.some((/** @type {any} */ e) => normKey(e?.key) === nk) ? edits.added : [...edits.added, { key: resource, custom: false }],
-        removed: edits.removed.filter((/** @type {any} */ k) => normKey(k) !== nk),
-        depleted: edits.depleted.filter((/** @type {any} */ k) => normKey(k) !== nk),
+        added: edits.added.some((e) => normKey(e?.key) === nk) ? edits.added : [...edits.added, { key: resource, custom: false }],
+        removed: edits.removed.filter((k) => normKey(k) !== nk),
+        depleted: edits.depleted.filter((k) => normKey(k) !== nk),
       }
     : {
         ...edits,
-        removed: edits.removed.some((/** @type {any} */ k) => normKey(k) === nk) ? edits.removed : [...edits.removed, resource],
-        added: edits.added.filter((/** @type {any} */ e) => normKey(e?.key) !== nk),
-        depleted: edits.depleted.filter((/** @type {any} */ k) => normKey(k) !== nk),
-        recovered: edits.recovered.filter((/** @type {any} */ k) => normKey(k) !== nk),
+        removed: edits.removed.some((k) => normKey(k) === nk) ? edits.removed : [...edits.removed, resource],
+        added: edits.added.filter((e) => normKey(e?.key) !== nk),
+        depleted: edits.depleted.filter((k) => normKey(k) !== nk),
+        recovered: edits.recovered.filter((k) => normKey(k) !== nk),
       };
 
   const nextConfig = {
@@ -527,7 +565,7 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
     oldResources, newResources, oldDepleted, newDepleted,
   });
 
-  /** @type {any} */
+  /** @type {RDSettlement} */
   let next = { ...settlement, config: nextConfig, economicState: nextEconomicState };
   // Dual-write the delta into the raw _config (withResourceEdits precedent —
   // applyChange regenerates from _config first).
@@ -548,7 +586,7 @@ export function applyResourceMembershipOutcomeToSettlement(settlement, outcome) 
   // polarity. resource_strike is a bounded positive MARKER (affectedSystems [] — its
   // upside flows through the boom seam + reconcile, not a free condition bonus);
   // vein_exhausted DRAINS economic_capacity (a worked-out vein hurts the economy).
-  const condTick = Number.isFinite(outcome?.metadata?.tick) ? outcome.metadata.tick : null;
+  const condTick = Number.isFinite(outcome?.metadata?.tick) ? Number(outcome?.metadata?.tick) : undefined;
   next = op === 'add'
     ? withActiveCondition(next, {
         id: `condition.resource_strike.${nk}`,

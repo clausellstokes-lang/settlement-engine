@@ -271,12 +271,12 @@ function readObligations(obligationLedger) {
 // dead vein), and a live resource_strike joins the boom SOURCE taxonomy. Both are
 // dormancy-safe: with resourceDynamicsEnabled dark neither condition ever exists, so
 // these reads are always false and the upswing is byte-identical.
-/** @param {{ activeConditions?: any[] }|null|undefined} s */
+/** @param {{ activeConditions?: Array<{ archetype?: string }> }|null|undefined} s */
 function resourceRemoved(s) {
   const conds = Array.isArray(s?.activeConditions) ? s.activeConditions : [];
   return conds.some((c) => c?.archetype === 'vein_exhausted');
 }
-/** @param {{ activeConditions?: any[] }|null|undefined} s */
+/** @param {{ activeConditions?: Array<{ archetype?: string }> }|null|undefined} s */
 function resourceStruck(s) {
   const conds = Array.isArray(s?.activeConditions) ? s.activeConditions : [];
   return conds.some((c) => c?.archetype === 'resource_strike');
