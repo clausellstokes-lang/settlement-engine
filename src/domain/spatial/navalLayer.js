@@ -579,3 +579,23 @@ export function planBlockade(digest, worldState, { ownerId, targetId, ownerStren
   });
   return record ? { record } : null;
 }
+
+// ══ Stage 5 — PIRACY PARITY (design §5 AS AMENDED — the behavior-change set is EMPTY) ══
+// RECON TRUTH (CONFIRMED): parity ALREADY HOLDS BY CONSTRUCTION. Every banditry seam is
+// node-keyed + modality-blind — a sea route traverses the same settlement (port) nodes, so
+// scoreRoute prices port-node embattlement into sea routes verbatim (pinned since M8) and
+// banditryLoss fires on EVERY arriving shipment sea or land alike (neither call site checks
+// modality). The couplings that do NOT exist on land stay nonexistent at sea (no
+// thievesGuildStrength, no pirate havens, no naval-patrol damper, no pirate-specific tuning).
+// This module adds NO danger math. The ONLY piracy scope is DISPLAY NAMING:
+
+/**
+ * The modality-aware NAME for a banditry loss — the ONLY place the word "piracy" appears
+ * (design §5.c: display/receipt strings, NEVER the danger math). A sea-route loss is framed
+ * "piracy"; a land-route loss "banditry". A pure naming primitive — takes only the modality
+ * flag, returns a string, does NO arithmetic (parity: the danger math is the SAME shared
+ * scoreRoute/banditryLoss seam for both modalities). @param {{ overSea?: boolean }} [args] @returns {string}
+ */
+export function banditryModalityLabel({ overSea = false } = {}) {
+  return overSea ? 'piracy' : 'banditry';
+}

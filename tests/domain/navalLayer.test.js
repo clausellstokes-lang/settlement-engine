@@ -15,12 +15,28 @@ import {
   navalRecordOf, planConvoy, convoyTransitWeeks, convoyEV, stormMultOf,
   convoyCapacityAvailable, seaEdgesOfPath, seaLaneCapacityOf,
 } from '../../src/domain/spatial/navalLayer.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
 import {
   blockadeInterceptsSupply, blockadeRunRoll, planBlockade, blockadeStrangulationOf, activeBlockadeTargets,
+  banditryModalityLabel,
 } from '../../src/domain/spatial/navalLayer.js';
 import { navalStrengthOf, hasWarNavy } from '../../src/domain/worldPulse/navalStrength.js';
-import { advanceSupplyShipments, rankSupplySources, supplyInterdictionLevel } from '../../src/domain/spatial/supplyShipments.js';
+import { advanceSupplyShipments, rankSupplySources, supplyInterdictionLevel, stepSupplyLink, SUPPLY_TUNING } from '../../src/domain/spatial/supplyShipments.js';
 import { makeIslandPack } from '../fixtures/spatialPackFixtures.js';
+
+/** The kernel PRNG surface (deterministic per key) — mirrors the supplyShipments test helper. */
+function forkRng() {
+  return {
+    fork(key) {
+      let s = 0;
+      for (let i = 0; i < key.length; i++) s = (Math.imul(s, 31) + key.charCodeAt(i)) >>> 0;
+      s = s || 1;
+      return { random() { s = (Math.imul(s, 1664525) + 1013904223) >>> 0; return s / 4294967296; } };
+    },
+  };
+}
 
 const DOCK = { name: 'Docks/port facilities', tags: ['port', 'trade'] };
 const SHIPYARD = { name: 'Shipyard', tags: ['transport', 'shipbuilding', 'port'] };
@@ -325,5 +341,60 @@ describe('W-NAVY Stage 4 — the both-cut law (blockade alone strangles; land + 
     expect(interdiction(digest, new Set(['landsrc']), blockadeWs)).toBe(1);
     // Land siege ALONE (no blockade): the SEA keeps it fed.
     expect(interdiction(digest, new Set(['landsrc']), noBlockade)).toBe(0);
+  });
+});
+
+// ── Stage 5 — PIRACY PARITY (the behavior-change set is EMPTY; parity by construction) ──
+describe('W-NAVY Stage 5 — piracy parity (the sea-arrival banditry-loss mirror)', () => {
+  it('a sea shipment arriving from an EMBATTLED port loses the banditry fraction (bounded, deterministic)', () => {
+    // The land banditry arrival test's MIRROR: banditryLoss is modality-blind — it fires on a
+    // SEA arrival (from an embattled PORT source) exactly as on a land one. Parity by construction.
+    const digest = portDigest();
+    const world = {
+      spatialCanonVersion: 1, spatialDigest: digest,
+      spatialLedgers: { embattlement: { isle: { level: 0.9, phase: 'embattled', sinceTick: 0, lastTick: 0 } } },
+    };
+    const link = {
+      institutionId: 'smithy', institutionName: 'the smithy', settlementId: 'main', input: 'iron',
+      rankedSources: rankSupplySources(digest, 'main', ['isle']), bufferWeeks: SUPPLY_TUNING.BUFFER_WEEKS, critical: true,
+    };
+    const arriving = { institutionId: 'smithy', settlementId: 'main', input: 'iron', sourceId: 'isle', arrivalTick: 2, starving: false };
+    const ctx = {
+      digest, worldState: world, tick: 2, tickWeeks: 1, riskTolerance: 1, rng: forkRng(),
+      sourceSevered: () => false, isHostileToDestination: () => false,
+    };
+    const run = () => stepSupplyLink(link, arriving, ctx).bufferWeeks;
+    expect(run()).toBe(run()); // deterministic (the seeded banditry fork)
+    // Non-catastrophic + bounded exactly as the land arrival — the SAME banditryLoss seam.
+    expect(run()).toBeGreaterThanOrEqual(SUPPLY_TUNING.BUFFER_WEEKS * 0.5);
+    expect(run()).toBeLessThanOrEqual(SUPPLY_TUNING.BUFFER_WEEKS);
+  });
+
+  it('modality NAMING is display-only: "piracy" at sea, "banditry" on land — no math', () => {
+    expect(banditryModalityLabel({ overSea: true })).toBe('piracy');
+    expect(banditryModalityLabel({ overSea: false })).toBe('banditry');
+    expect(banditryModalityLabel()).toBe('banditry');
+    // The naming primitive is a pure string map — it never returns a number (no danger math).
+    expect(typeof banditryModalityLabel({ overSea: true })).toBe('string');
+  });
+
+  it('PARITY GUARD: the naval modules add NO pirate-specific danger math (the shared seam only)', () => {
+    const here = dirname(fileURLToPath(import.meta.url));
+    const files = [
+      resolve(here, '../../src/domain/spatial/navalLayer.js'),
+      resolve(here, '../../src/domain/worldPulse/navalKernel.js'),
+    ];
+    // Couplings that DO NOT exist on land must stay nonexistent at sea (design §5): no
+    // thieves-guild read, no wealth-broadcast danger, no pirate havens, no naval-patrol
+    // damper, no pirate-specific banditry constants/ledger. Strip comments first (a doc
+    // mention must not false-positive), then assert the CODE holds no such term.
+    const forbidden = /\b(thievesGuild|thieves_guild|pirateHaven|pirate_haven|navalPatrol|patrolDamper|broadcastWealth|wealthBroadcast|PIRACY_[A-Z]|BANDITRY_[A-Z])\b/;
+    for (const f of files) {
+      const src = readFileSync(f, 'utf-8');
+      const code = src.split('\n').map((l) => l.replace(/\/\/.*$/, '')).join('\n').replace(/\/\*[\s\S]*?\*\//g, '');
+      expect(forbidden.test(code), `${f} must add no pirate-specific danger math`).toBe(false);
+      // And the naval layer must NOT reimplement banditryLoss (parity: ONE shared seam).
+      expect(/function\s+banditryLoss/.test(code)).toBe(false);
+    }
   });
 });
