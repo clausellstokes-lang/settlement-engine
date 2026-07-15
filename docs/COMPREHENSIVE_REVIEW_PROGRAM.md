@@ -206,6 +206,43 @@ behavior, budget raises, golden regens.
   economic_strangulation peace reason. DESIGN_NAVY.md freezes on the naval recon's return with
   this as its spine. Covert-leak chip session ENDED — harvest queued.
 
+- **2026-07-15 (morning) — W-UPSWING COMMISSIONED + THE UPSWING CONSTITUTION (owner, "do the
+  upswing" + a full design ruling, verbatim intent):** (1) **THE UNIFICATION LAW — "upswings and
+  downswings are not two different things, they operate on the same variables and dimensions."**
+  W-UPSWING is NOT a new system; it completes the SIGN of the existing one (the engine's write
+  traffic has been mostly downward — the stasis finding). No separate boom machinery: booms and
+  golden ages are emergent labels over the same variables running up. (2) **CONSERVATION — "it is
+  not new capital and growth from nothing":** every upswing has a typed SOURCE (new allies' aid,
+  a new population source, stronger trade + investment, conquest extraction) and the source is
+  DEBITED — receipts name source and limit. (3) **LIMITS ARE FIRST-CLASS:** an upswing is bounded
+  by (a) natural resources (the digest's endowment — the hard carrying capacity), (b) an ally's
+  aid = INTENT × CAPACITY ("the generosity or limitations of an allied partner's aid both in
+  intent and capacity" — generosityEV already computes both), (c) an empire's EXTRACTION ceiling
+  + its ability to convert extraction into citizen benefit ("the limits of that empire's ability
+  to extract and give its citizens benefits" — the corruption web is the leak in that pipeline),
+  (d) absorption (growth conditions must exist locally). (4) **SCOPE — regional or local:** an
+  upswing can be one settlement or an entire region; regional character emerges from SHARED
+  SOURCES (a trade artery, a peace dividend), not a new scope object. (5) **MOTIVE INTEGRATION:
+  "an empire seeks to conquer to improve their upswings; an ally invests and that grants an
+  upswing"** — conquest EV gains the extraction-upswing term; E1 generosity instruments are the
+  investment verbs whose upside loop this wave closes.
+- **2026-07-15 (morning) — CALAMITY IS A BUCKET (owner ruling, verbatim intent): "Calamity should
+  be a catch-all term... it could be a beast wave, it could be a literal hand of god, a fire,
+  drought, flood, earthquake, tarrasque — the flavor is for the DM; the effects we are going to
+  bucket into one."** The deity doctrine (alignment-not-domain) applied to disasters: the engine
+  models CONSEQUENCE (one severity-banded effect pipeline + the emergent tail), the DM owns CAUSE.
+  Geography/season keep loading the dice as generic EXPOSURE (§H stands) but receipts never name
+  a disaster type; flavor is cosmetic freetext under the composer law. Known one-time cost: if
+  M11b prose says "flood," neutralizing it shifts news goldens once (documented, owner-ruling-
+  caused). Counterpart criterion: FORCE_CALAMITY (severity dial + cosmetic flavor) required.
+  Unification rides INSIDE W-UPSWING as its first stage (calamity down-stroke / upswing up-stroke,
+  one cycle).
+- **2026-07-15 (morning) — PIRACY AT EXACT BANDIT PARITY (owner ruling): "treat them the same as
+  bandits in embattled regions/roads."** Sea piracy inherits PRECISELY the land embattlement/
+  danger inputs — same scoring, same counterplay shape; nothing pirate-specific added or omitted
+  (DESIGN_NAVY §5's extra pirate-haven criminal-density coupling is TRIMMED to parity unless land
+  bandits already carry the same coupling).
+
 ## Owner-parked aspiration (recorded 2026-07-14 — do NOT build without a fresh owner directive)
 - **THE LIVING SETTLEMENT MAP**: a settlement-layer map procedurally DETERMINED BY the dossier and
   EVOLVING WITH it — the "map as first-class engine surface" thesis one level down from the realm
