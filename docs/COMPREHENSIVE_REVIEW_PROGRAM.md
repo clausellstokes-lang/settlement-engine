@@ -854,6 +854,22 @@ push is PRE-AUTHORIZED per the 2026-07-15 rulings; the PR merge button stays the
 **BATCH 2a DISPATCHED ~05:35 as `wf_f55e896e-435`** (TRUST/GUARDS/DATA off d05ffad2, fences
 disjoint from the running SEAMS/INTENT — five implementers in flight). W-R2-SURFACE queues
 behind INTENT+GUARDS merges (composer-file + walker-allowlist overlaps).
+**✅ FOUR WAVES MERGED (2026-07-16 morning):** SEAMS @ 46c10028 (17/19 fixed + 2 honest
+design-level deferrals: boom-cooled state + conscience-door channel = new-capability
+owner-gated, recorded in-file; branch gate 9,945/0; all 5 dormancy goldens + both lit soaks
+green) · TRUST @ 23b41a6c (10 fixed incl. the structural privacy guard that surfaced a THIRD
+raw-id call site; migration 135 WRITTEN-not-applied; budget respected via the minimal
+saveId-stamp JUDGMENT — the instant library echo deferred vetoably) · GUARDS @ 5463c60d
+(15/16; zero eager; 7 whispers recorded UNWIRED pending SURFACE; ⚠️ MIGRATION COLLISION
+caught at merge: TRUST + GUARDS both minted 135_*.sql in parallel — GUARDS' renumbered to
+136_world_snapshot_deny_census_lift.sql, DEPLOY.md conflict resolved to head 136, chain
+validated contiguous, freshness pin green) · DATA @ merge after 5463c60d (4/4; generator
+golden BYTE-IDENTICAL; slave-trade export enable recorded owner-gated golden-shifting →
+G2 candidate). Combined-tree full gate RUNNING (merged-4wave-gate.log). **INTENT HELD at
+its branch (a06f2c56, 15/16 + 65 tests): the sole red = +2,711 B eager over the ratchet —
+implementer correctly did NOT raise (owner-gated); TRIM AGENT dispatched on
+claude/w-r2-intent-trim (the store lazy-body pattern, target ≤ +50 B; reclaim-first law) —
+merge follows the trim.**
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
 ## and fixing, i want you to continue where the merge was and the rest of the operations that follow")
