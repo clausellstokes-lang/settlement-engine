@@ -47,6 +47,12 @@ export const FLAGS = Object.freeze({
     description: 'Google OAuth sign-in button. Safe flag-on: an unconfigured provider degrades to a calm message.',
   },
 
+  // ── Content protection ─────────────────────────────────────────────────────
+  copyGuard: {
+    default: false,
+    description: 'Site-wide copy/cut/context-menu deterrent (lib/copyGuard.js). Default OFF per owner ruling (reconciliation #5); machinery + [data-allow-copy] exemptions retained. This is the one flag to flip to enable.',
+  },
+
   // ── Dark-shipped / not-yet-enabled critique work ───────────────────────────
   // Each flag below gates one critique-mandated change that is NOT yet
   // promoted to GA — defaults are false; flip to true (locally, via env, or

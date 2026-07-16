@@ -7,7 +7,7 @@
  * schema migration for every simulator feature.
  */
 
-import { supabase, isConfigured, withTimeout } from './supabase.js';
+import { supabase, isConfigured } from './supabase.js';
 
 const LOCAL_KEY = 'sf_campaigns';
 const LOCAL_KEY_PREFIX = 'sf_campaigns:';
@@ -106,20 +106,6 @@ function campaignFromRow(row) {
       inactiveReason: row.inactive_reason || null,
       inactiveSince: row.inactive_since || null,
       retentionExpiresAt: row.retention_expires_at || null,
-      // Server-owned publish state (migration 045). Read-only on the client:
-      // shareMap/unshareMap own these via SECURITY DEFINER RPCs; the campaign
-      // write path (rowForCampaign) never echoes them back. They let the gallery
-      // match an owned campaign to its anonymized public tile by slug.
-      publicSlug: row.public_slug || null,
-      isPublic: row.is_public === true,
-      shareKind: row.share_kind || 'map',
-      galleryDescription: row.gallery_description || '',
-      galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
-      // NOTE: the 088 gallery columns (image_url/alt/importable/world_sections) are
-      // intentionally NOT selected here — the campaign-load path runs for every user
-      // on every page and must not depend on 088 being applied. The share editor
-      // seeds those from defaults on edit (a minor pre-fill gap); revisit once 088 is
-      // universally live. See [[share-to-gallery-redesign]].
     };
   }
 
@@ -151,11 +137,6 @@ function campaignFromRow(row) {
     inactiveReason: row.inactive_reason || null,
     inactiveSince: row.inactive_since || null,
     retentionExpiresAt: row.retention_expires_at || null,
-    publicSlug: row.public_slug || null,
-    isPublic: row.is_public === true,
-    shareKind: row.share_kind || 'map',
-    galleryDescription: row.gallery_description || '',
-    galleryTags: Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
   };
 }
 
@@ -173,43 +154,24 @@ function rowForCampaign(campaign, userId) {
   return row;
 }
 
-// Every supabase network leg below is timeout-guarded (see withTimeout in
-// supabase.js — data calls and RPCs have NO built-in timeout). A stalled call
-// here otherwise hangs its caller forever: list() leaves the campaign screen
-// loading, upsert()/delete() wedge Save/Delete with their in-flight flags stuck
-// true, and a hung persist_world_pulse_advance permanently wedges
-// advanceInFlight/changeQueueFlushing — blocking every future advance until a
-// page refresh. On timeout the promise REJECTS, so the caller's existing
-// catch/finally clears the flag and surfaces the error.
-
 async function supabaseList() {
-  const { data, error } = await withTimeout(
-    supabase
-      .from('saved_maps')
-      .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at, public_slug, is_public, share_kind, gallery_description, gallery_tags')
-      .order('updated_at', { ascending: false }),
-    20000,
-    'Load campaigns',
-  );
+  const { data, error } = await supabase
+    .from('saved_maps')
+    .select('id, name, map_seed, map_data, burg_settlement_map, supply_chain_config, access_state, inactive_reason, inactive_since, retention_expires_at, created_at, updated_at')
+    .order('updated_at', { ascending: false });
   if (error) throw error;
   return (data || []).map(campaignFromRow);
 }
 
 async function supabaseUpsert(campaign) {
-  // getUser can implicitly trigger a token refresh that never settles — guard it
-  // like saves.js supabaseSave does, or a wedged refresh hangs every campaign save.
-  const { data: { user } } = await withTimeout(supabase.auth.getUser(), 15000, 'Authentication check');
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error('Not authenticated');
   const row = rowForCampaign(campaign, user.id);
-  const { data, error } = await withTimeout(
-    supabase
-      .from('saved_maps')
-      .upsert(row, { onConflict: 'id' })
-      .select('id')
-      .single(),
-    20000,
-    'Save campaign',
-  );
+  const { data, error } = await supabase
+    .from('saved_maps')
+    .upsert(row, { onConflict: 'id' })
+    .select('id')
+    .single();
   if (error) throw error;
   return data?.id || campaign.id;
 }
@@ -221,52 +183,8 @@ async function supabaseWriteAll(campaigns) {
 }
 
 async function supabaseDelete(id) {
-  const { error } = await withTimeout(
-    supabase.from('saved_maps').delete().eq('id', id),
-    20000,
-    'Delete campaign',
-  );
+  const { error } = await supabase.from('saved_maps').delete().eq('id', id);
   if (error) throw error;
-}
-
-/**
- * Atomic world-pulse advance write (migration 069). Persists the ENTIRE advance
- * write-set — every affected member settlement's post-pulse state AND the campaign
- * snapshot — through one SECURITY DEFINER RPC, so the cloud can never hold a
- * partial/hybrid advance (settlement A lands, B fails, campaign behind). The RPC
- * is ownership-checked and locks the campaign row; pass `expectedTick` to enable
- * the stale-apply guard (advance only if the stored tick is strictly behind).
- *
- * HARD DEPENDENCY: migration 069 must be applied. There is intentionally NO serial
- * fallback in cloud mode — a fallback would re-introduce the non-atomic path. On an
- * RPC-missing/error result this throws, and the caller degrades to the honest
- * cloud-pending state (the advance is real locally; a retry/reload reconciles).
- *
- * The `snapshot` is the full map_data envelope (mapDataForCampaign shape) so the
- * RPC writes saved_maps.map_data verbatim and re-derives the same columns
- * rowForCampaign would — keeping the atomic path byte-identical to the upsert path.
- *
- * @param {{ campaignId: string, campaign: any, settlementUpdates?: Array<{saveId:string, settlement?:any, campaignState?:any, versionHistory?:any}>, expectedTick?: number|null }} args
- * @returns {Promise<{ applied: boolean, settlementsWritten?: number, settlementsRequested?: number, reason?: string }>}
- */
-async function supabasePersistWorldPulseAdvance({ campaignId, campaign, settlementUpdates = [], expectedTick = null }) {
-  // 30s (vs the 20s default): this is the heaviest single write in the app — the
-  // full campaign snapshot plus every member settlement's post-pulse row in one
-  // RPC. A false abort on a slow-but-live call is recoverable (it rejects into the
-  // honest cloud-pending state below); an UNguarded hang is not — it permanently
-  // wedges advanceInFlight/changeQueueFlushing, blocking all future advances.
-  const { data, error } = await withTimeout(
-    supabase.rpc('persist_world_pulse_advance', {
-      p_campaign_id: campaignId,
-      p_campaign_snapshot: mapDataForCampaign(campaign),
-      p_settlement_updates: settlementUpdates,
-      p_expected_tick: expectedTick == null ? null : Number(expectedTick),
-    }),
-    30000,
-    'World pulse advance',
-  );
-  if (error) throw error;
-  return data || { applied: false };
 }
 
 async function localList(ownerId = 'anon') {
@@ -294,9 +212,6 @@ async function localDelete(id, ownerId = 'anon') {
 export const campaigns = {
   list: isConfigured ? supabaseList : localList,
   upsert: isConfigured ? supabaseUpsert : localUpsert,
-  /** Atomic world-pulse advance write (cloud only — null in local mode, where the
-   *  single localStorage write has no cross-row hybrid risk). See the helper. */
-  persistWorldPulseAdvance: isConfigured ? supabasePersistWorldPulseAdvance : null,
   writeAll: isConfigured ? supabaseWriteAll : localWriteAll,
   delete: isConfigured ? supabaseDelete : localDelete,
   cache: localWrite,
