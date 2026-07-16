@@ -68,16 +68,19 @@ function num(v, d = 0) { return Number.isFinite(Number(v)) ? Number(v) : d; }
 function rankCompliance(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1 : 0; }
 const COMPLIANCE_WORD = Object.freeze(['honored', 'strained', 'defaulted']);
 
-/** @param {unknown} worldState @returns {Record<string, any> | null} */
+/** @typedef {{ victorId?: unknown, loserId?: unknown, parties?: unknown, terms?: unknown }} TreatyShape */
+/** @typedef {{ id?: unknown, name?: unknown, settlement?: { name?: unknown } | null }} NameItem */
+
+/** @param {unknown} worldState @returns {Record<string, TreatyShape> | null} */
 function treatyLedger(worldState) {
-  const led = getSpatialLedger(/** @type {any} */ (worldState), 'treaties');
-  return led && typeof led === 'object' && !Array.isArray(led) ? /** @type {Record<string, any>} */ (led) : null;
+  const led = getSpatialLedger(/** @type {Record<string, unknown>} */ (worldState), 'treaties');
+  return led && typeof led === 'object' && !Array.isArray(led) ? /** @type {Record<string, TreatyShape>} */ (led) : null;
 }
 
 /**
  * A settlementId → display-name lookup from a settlement list (snapshot `{id,name}`
  * or save `{id, settlement:{name}}` shape). Mirrors realmArcSummary.buildNameById.
- * @param {Array<any>} settlements @returns {Map<string,string>}
+ * @param {NameItem[]} settlements @returns {Map<string,string>}
  */
 function buildNameById(settlements) {
   /** @type {Map<string,string>} */
@@ -117,7 +120,7 @@ function strainBand(frac) {
  *
  * @param {Object} args
  * @param {{ tick?: number, spatialLedgers?: unknown } | null | undefined} args.worldState
- * @param {Array<any>} [args.settlements]  name + realm-strength source (snapshot or save shape).
+ * @param {NameItem[]} [args.settlements]  name + realm-strength source (snapshot or save shape).
  * @param {number} [args.minTies]          override the §F.3b K threshold.
  * @param {(id: string) => number} [args.strengthOf]  id → land+naval strength (default 1 ⇒ headcount share).
  * @param {(id: string) => string} [args.nameFor]     id → display name (default: settlements list, then id).

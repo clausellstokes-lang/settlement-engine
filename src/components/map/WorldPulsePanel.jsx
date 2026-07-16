@@ -323,7 +323,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                         tone={dismissed ? 'danger' : 'good'}
                         onClick={() => toggleDismissMajor(id)}
                         disabled={resumeBusy}
-                        title={dismissed ? 'This turn will be skipped on resume — click to keep it' : 'This turn applies as recommended on resume — click to dismiss it'}
                       >
                         {dismissed ? <><XCircle size={13} /> Dismissed</> : <><CheckCircle2 size={13} /> Keep</>}
                       </SmallButton>
@@ -335,7 +334,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                 tone="good"
                 onClick={submitVerdicts}
                 disabled={resumeBusy}
-                title="Fold your verdicts in and continue the remaining ticks of the interval."
               >
                 <Clock3 size={13} /> {resumeBusy
                   ? 'Resuming'
