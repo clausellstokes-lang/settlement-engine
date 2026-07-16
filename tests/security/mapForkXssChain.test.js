@@ -125,7 +125,13 @@ describe('layers 4-6 — delivery surface: CSP, Dropbox SDK, service worker', ()
   test('the /map/ CSP script-src trusts no CDN and pins navigations', () => {
     const vercel = JSON.parse(read('vercel.json'));
     const mapHeaders = vercel.headers.find((h) => h.source.startsWith('/map/'));
-    const csp = mapHeaders.headers.find((h) => h.key === 'Content-Security-Policy').value;
+    // Accept the enforced key AND the Report-Only key: this lineage ships the
+    // policy as Content-Security-Policy-Report-Only (documented rollout posture,
+    // api/csp-report.js — flip-to-enforce is on the owner punch list). The
+    // no-CDN / pinned-navigation invariants are identical under either key.
+    const csp = mapHeaders.headers.find(
+      (h) => /^content-security-policy(-report-only)?$/.test(h.key.toLowerCase()),
+    ).value;
     const scriptSrc = csp.split(';').find((d) => d.trim().startsWith('script-src'));
     expect(scriptSrc).not.toMatch(/unpkg|cdn|googleapis|https:\/\//);
     expect(csp).toContain("navigate-to 'self' https://*.supabase.co");

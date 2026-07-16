@@ -181,22 +181,31 @@ describe.runIf(allExist)('101 — current_user_is_privileged is role-only (pglit
     );
   });
 
-  it('DIFFERENTIAL: under the 018 net-current body, the email ALONE elevates (the backdoor is real)', async () => {
+  it('018 net-current body is ALREADY role-only on this lineage (the backdoor never existed here)', async () => {
+    // LINEAGE NOTE (master merge): master's 018 carried an email-OR backdoor and
+    // this test was a differential (prove it real, then prove 101 removes it).
+    // This lineage's F4 scrub (e9db663d) removed the email clause from 018
+    // ITSELF, so the stronger invariant holds: even the historical function
+    // body never elevates by email. Pin THAT instead of the obsolete premise.
     await db.exec(extractFn(MIG_018, 'current_user_is_privileged'));
-    expect(await isPriv(IMPOSTOR), '018 body: matching email with role=user is privileged').toBe(true);
+    expect(await isPriv(IMPOSTOR), '018 body: matching email with role=user must NOT be privileged (scrubbed chain)').toBe(false);
   });
 
   it('AFTER 101 the email alone elevates NOTHING; role admin/developer still does', async () => {
     await db.exec(readFileSync(MIG_101, 'utf8'));
-    // The owner was promoted by the re-affirmed seed (case-insensitive match)…
+    // LINEAGE NOTE (master merge): master's 101 re-affirmed an owner seed by a
+    // committed email literal. This lineage's 101 deliberately DROPS that seed
+    // too (no committed PII; owner auto-admin moved to the OWNER_EMAIL env seam
+    // in the edge functions — see 101's header). So after 101 NOBODY is promoted
+    // by email: the owner row stays role=user until promoted via the operator
+    // seam, and privilege derives from ROLE alone.
     const owner = await db.query(`select role from public.profiles where id = '${OWNER}'`);
-    expect(owner.rows[0].role).toBe('admin');
-    // …and is privileged via ROLE, not email.
-    expect(await isPriv(OWNER)).toBe(true);
-    // The impostor was ALSO caught by the seed (same email), so flip them back to
-    // role=user to isolate the runtime clause: email alone must now grant nothing.
-    await db.query(`update public.profiles set role = 'user' where id = '${IMPOSTOR}'`);
+    expect(owner.rows[0].role, '101 must not promote anyone by committed email literal').toBe('user');
+    expect(await isPriv(OWNER), 'owner email alone grants nothing post-101').toBe(false);
     expect(await isPriv(IMPOSTOR), '101 body: matching email with role=user is NOT privileged').toBe(false);
+    // Role still elevates: promote the owner the way the operator seam would.
+    await db.query(`update public.profiles set role = 'admin' where id = '${OWNER}'`);
+    expect(await isPriv(OWNER), 'role=admin is privileged').toBe(true);
     // Plain users stay unprivileged; developer stays privileged (050's role list kept).
     expect(await isPriv(ALICE)).toBe(false);
     await db.query(`update public.profiles set role = 'developer' where id = '${ALICE}'`);

@@ -221,10 +221,36 @@ export async function unshareMap(campaignId) {
   try { track(EVENTS.GALLERY_UNPUBLISHED, { kind: 'map' }); } catch { /* never affects unshare */ }
 }
 
+/**
+ * Server-side facet normalizer for the map gallery (list_gallery_maps p_filters,
+ * migration 090). Forwards the array facets (kind / backdrop / tags) and the
+ * boolean toggles (has-settlements, importable). Mirrors normalizeGalleryFilters
+ * so an empty facet never narrows the server query. (Ported master fix, W6 —
+ * the RPC accepted p_filters all along; the client never forwarded it.)
+ */
+export function normalizeMapFilters(filters = {}) {
+  const out = {};
+  for (const key of ['kind', 'backdrop', 'tags']) {
+    const arr = Array.isArray(filters[key]) ? filters[key].filter(Boolean).map(String) : [];
+    if (arr.length) out[key] = arr;
+  }
+  if (filters.hasSettlements) out.hasSettlements = true;
+  // Owner import opt-in facet (saved_maps.gallery_importable, migration 072) —
+  // forwarded only when truthy so an unchecked toggle never narrows the query.
+  if (filters.importable) out.importable = true;
+  return out;
+}
+
 /** Browse public maps (anonymized tiles). */
-export async function fetchGalleryMaps({ page = 0, pageSize = 24 } = {}) {
+export async function fetchGalleryMaps({ page = 0, pageSize = 24, sort = 'newest', search = '', filters = {} } = {}) {
   if (!isConfigured) return { items: [] };
-  const { data, error } = await supabase.rpc('list_gallery_maps', { p_page: page, p_page_size: pageSize });
+  const { data, error } = await supabase.rpc('list_gallery_maps', {
+    p_page: page,
+    p_page_size: pageSize,
+    p_sort_key: sort,
+    p_search_query: search || '',
+    p_filters: normalizeMapFilters(filters),
+  });
   if (error) throw new Error(error.message || 'Could not load shared maps');
   return { items: Array.isArray(data) ? data : [] };
 }
@@ -515,6 +541,13 @@ function sanitizeTile(row) {
     stability:    row.stability || data?.viability?.stability || data?.systemState?.stability || data?.stability || '',
     primaryResource: row.primary_resource || data?.config?.nearbyResources?.[0] || data?.nearbyResources?.[0] || '',
     threatLevel:  row.threat_level || data?.threatProfile?.level || data?.defense?.threatLevel || data?.threatLevel || '',
+    // Facet snapshot columns (migration 063) — surfaced on the tile so the
+    // listing can filter/render culture, prosperity, patron deity and the live
+    // at-war flag without touching the payload (ported master fix, W6).
+    culture:      row.culture || data?.config?.culture || '',
+    prosperity:   row.prosperity || data?.economicState?.prosperity || '',
+    primaryDeity: row.primary_deity || data?.config?.primaryDeitySnapshot?.name || '',
+    atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
   };
@@ -669,24 +702,38 @@ function normalizeGalleryFilters(filters = {}) {
 }
 
 function galleryMetadataPatch(metadata = {}) {
-  // Descriptions are now sanitized rich-text HTML (§4c), so allow more room
-  // than the old plaintext cap; the server/render re-sanitize keeps it safe.
-  const description = String(metadata.description || '').trim().slice(0, 4000);
-  const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
-  const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
-  const tags = Array.isArray(metadata.tags)
-    ? metadata.tags
-    : String(metadata.tags || '').split(',');
+  // MERGE-PATCH semantics (ported master fix, master-merge W6): every field is
+  // written ONLY when the caller provided it (!== undefined), like the
+  // shareNarrated/shareDm/facet fields below have always been. The old shape
+  // wrote description/image/alt/tags unconditionally, so a partial bag (e.g. a
+  // caller updating just { importable: true }) silently wiped the published
+  // metadata. An explicitly provided empty value still clears its column —
+  // omission is what preserves.
   const patch = {
-    gallery_description: description || null,
-    gallery_image_url: isSafePublicImageUrl(imageUrl) ? imageUrl : null,
-    gallery_image_alt: imageAlt || null,
-    gallery_tags: tags
-      .map(tag => String(tag || '').trim().toLowerCase().replace(/[^a-z0-9 -]+/g, ''))
-      .filter(Boolean)
-      .slice(0, 12),
     gallery_updated_at: new Date().toISOString(),
   };
+  // Descriptions are sanitized rich-text HTML (§4c). Sanitize ON WRITE (the
+  // same idiom as galleryMapMetadataPatch below): there is no server/DB-side
+  // scrub of gallery_description, so sanitizing the stored value is what makes
+  // it XSS-safe regardless of which consumer renders it. Cap the raw input
+  // before sanitizing, then bound the sanitized result to the column budget.
+  if (metadata.description !== undefined) {
+    const description = sanitizeGalleryHtml(String(metadata.description || '').slice(0, 8000)).trim().slice(0, 4000);
+    patch.gallery_description = description || null;
+  }
+  if (metadata.imageUrl !== undefined) {
+    const imageUrl = String(metadata.imageUrl || '').trim().slice(0, 1000);
+    patch.gallery_image_url = isSafePublicImageUrl(imageUrl) ? imageUrl : null;
+  }
+  if (metadata.imageAlt !== undefined) {
+    const imageAlt = String(metadata.imageAlt || '').trim().slice(0, 220);
+    patch.gallery_image_alt = imageAlt || null;
+  }
+  if (metadata.tags !== undefined) {
+    // The shared clamp (see clampTags below): per-tag length bound + count cap,
+    // the same write-path clamp the map twin (galleryMapMetadataPatch) uses.
+    patch.gallery_tags = clampTags(metadata.tags);
+  }
   // Owners can opt to publish the AI-narrated dossier instead of the raw
   // simulation; the public RPC honors this flag (see migration 025).
   if (metadata.shareNarrated !== undefined) {

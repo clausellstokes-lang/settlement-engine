@@ -127,14 +127,34 @@ describe('gallery public-JSON sanitizer — net-current execution (pglite)', () 
     expect(npc.dmNotes).toBeUndefined();
   });
 
-  it('keeps benign nested data (does not over-strip public structure)', async () => {
+  it('keeps benign nested data (does not over-strip inside an allowlisted subtree)', async () => {
+    // LINEAGE NOTE (master merge): this lineage's sanitizer flipped the TOP level
+    // to a fail-closed allowlist (128) — an unknown top-level key drops even when
+    // it misses the denylist, so master's original top-level `districts`/`judgment`
+    // fixture keys are dropped BY DESIGN here. The substance this test pins — the
+    // deeper-level word-boundary denylist must not false-strip benign keys (e.g.
+    // "judgment" carries an embedded 'gm' but no \mgm word boundary) — moves
+    // inside an allowlisted subtree (`history`).
     const out = await sanitize({
-      districts: [{ name: 'Market Ward', landmarks: ['fountain'] }],
-      judgment: 'fair-handed',  // matches no denylist token (no \mdm / \mgm word boundary)
+      history: {
+        districts: [{ name: 'Market Ward', landmarks: ['fountain'] }],
+        judgment: 'fair-handed', // embedded 'gm', no word boundary — must survive
+      },
     });
-    expect(out.districts[0].name).toBe('Market Ward');
-    expect(out.districts[0].landmarks).toEqual(['fountain']);
-    expect(out.judgment).toBe('fair-handed');
+    expect(out.history.districts[0].name).toBe('Market Ward');
+    expect(out.history.districts[0].landmarks).toEqual(['fountain']);
+    expect(out.history.judgment).toBe('fair-handed');
+  });
+
+  it('drops unknown TOP-LEVEL keys even when they miss the denylist (fail-closed allowlist, 128)', async () => {
+    const out = await sanitize({
+      name: 'Ashford',
+      districts: [{ name: 'Market Ward' }], // benign but NOT allowlisted at top level
+      judgment: 'fair-handed',              // benign but NOT allowlisted at top level
+    });
+    expect(out.name).toBe('Ashford');
+    expect(out.districts).toBeUndefined();
+    expect(out.judgment).toBeUndefined();
   });
 
   it('SQL npc_allowed[] stays in sync with the JS mirror (publicSafe.js)', () => {

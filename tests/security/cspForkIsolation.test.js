@@ -22,6 +22,13 @@
  * NOTE: the live embedded map (unsafe-inline/eval actually loading FMG) needs
  * MANUAL browser verification — this test only pins the HEADER shape and the
  * bridge's origin logic, not the runtime rendering.
+ *
+ * LINEAGE NOTE (master merge): this lineage ships the policy as
+ * Content-Security-Policy-Report-Only — the documented rollout posture
+ * (api/csp-report.js: report-only first, flip to enforce on the OWNER punch
+ * list once the report stream is quiet). The isolation invariants pinned here
+ * are identical under either key, so the matcher accepts both spellings; when
+ * the owner flips to enforcement, this test keeps passing unchanged.
  */
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -35,11 +42,16 @@ const vercel = JSON.parse(readFileSync(join(ROOT, 'vercel.json'), 'utf8'));
 const matchingRules = (path) =>
   vercel.headers.filter((rule) => new RegExp('^' + rule.source + '$').test(path));
 
-/** Every CSP header value emitted for `path` (Vercel emits one per matching rule). */
+/**
+ * Every CSP header value emitted for `path` (Vercel emits one per matching rule).
+ * Accepts the enforced key AND the Report-Only key (this lineage's rollout
+ * posture — see the LINEAGE NOTE above); the isolation invariants are the same.
+ */
+const CSP_KEY = /^content-security-policy(-report-only)?$/;
 const cspHeadersFor = (path) =>
   matchingRules(path).flatMap((rule) =>
     rule.headers
-      .filter((h) => h.key.toLowerCase() === 'content-security-policy')
+      .filter((h) => CSP_KEY.test(h.key.toLowerCase()))
       .map((h) => h.value),
   );
 
@@ -98,7 +110,7 @@ describe('CSP fork isolation — app-strict vs /map/-relaxed, one header per pat
     // Structural guard: the negative lookahead is what makes the isolation hold.
     // A tidy-up back to "/(.*)" would re-introduce the double-CSP merge.
     const appRule = matchingRules('/index.html').find((r) =>
-      r.headers.some((h) => h.key.toLowerCase() === 'content-security-policy'),
+      r.headers.some((h) => CSP_KEY.test(h.key.toLowerCase())),
     );
     expect(appRule.source).toMatch(/\(\?!.*map/);
     // And that same rule must NOT match a /map/ path.
