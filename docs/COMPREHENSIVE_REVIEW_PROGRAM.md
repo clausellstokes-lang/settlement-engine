@@ -757,9 +757,11 @@ Per-phase resume (find the current phase from the checkboxes + fresh git log):
   `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/7115c211-9732-4751-8d73-170ba6bbcf31/subagents/workflows/wf_d69567dc-f0d/journal.jsonl`
   — salvage every completed slice from there (each journal record carries the agent's full
   structured return). The COMPLETE workflow script (all 22 subsystem scopes + 11 dimension
-  charges + the schema + the preamble) is COMMITTED at `docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.js`
-  — re-dispatch ONLY the missing slices by copying that script and pruning SUBSYSTEMS/DIMENSIONS
-  to the gap list (workflow resume-from-run-id is same-session-only; a new session re-dispatches).
+  charges + the schema + the preamble) is COMMITTED at
+  `docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.workflow.txt` (copy to .js at dispatch time — eslint
+  pre-commit rejects the workflow dialect as a module) — re-dispatch ONLY the missing slices by
+  pruning SUBSYSTEMS/DIMENSIONS to the gap list (workflow resume-from-run-id is
+  same-session-only; a new session re-dispatches).
 - **Died between S and A:** raw results are banked as `docs/review-r2/RAW_SURVEY_RESULTS.json`
   (the landing session commits this FIRST, before synthesis — if it exists, never re-survey).
 - **Died during A/V/P:** the partial assessment/verdicts live in
