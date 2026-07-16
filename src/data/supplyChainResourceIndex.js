@@ -49,7 +49,8 @@ export const RESOURCE_TO_CHAINS = {
   // data-tables-5: fishing_grounds/river_fish each mapped to BOTH the thin 'fish'
   // chain AND the richer 'fishing'/'river_fishing' chain, so a coastal town showed
   // two near-identical fishing industries. Map each resource to its ONE richer
-  // chain; the retired 'fish' chain id is kept (below) for persisted-save resolution.
+  // chain; the retired 'fish' chain id survives on pre-fix persisted saves and is
+  // resolved by RETIRED_CHAIN_ALIASES (below) — the reconcile drops the orphan.
   fishing_grounds: ['food_security.fishing'],
   river_fish: ['food_security.river_fishing'],
   river_mills: [
@@ -149,3 +150,20 @@ export const RESOURCE_TO_CHAINS = {
   ],
   hot_springs_mineral: ['arcane_magical.alchemy', 'healing_medicine.hospital'],
 };
+
+// ── RETIRED CHAIN ALIASES ─────────────────────────────────────────────────────
+// [data-tables-3] The keeper the data-tables-5 comment promised (and never wrote):
+// a retired chainId → its canonical successor. A pre-fix persisted save stamped the
+// thin 'food_security.fish' chain (and often its richer 'food_security.fishing'
+// twin) into economicState.activeChains; the current catalog no longer produces
+// 'fish', so the surgical reconcile — which diffs before/after over the CURRENT
+// vocabulary — never sees 'fish' in either set and would keep the orphan forever
+// (still exporting 'Preserved foods'). reconcileProductionAfterResourceChange
+// consults this map to drop a retired-alias chain when its successor is present
+// (dedup) or was just removed (co-remove the orphan), never losing a live industry.
+//
+// Keys/values are full `${needKey}.${chainId}` ids (the reconcile's cidOf form).
+/** @type {Readonly<Record<string, string>>} */
+export const RETIRED_CHAIN_ALIASES = Object.freeze({
+  'food_security.fish': 'food_security.fishing',
+});

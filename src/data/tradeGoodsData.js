@@ -65,10 +65,19 @@ export const IMPORT_GOODS_BY_TIER = {
   },
 
   town: {
-    "Enslaved persons": {
-      category: GOODS_CATEGORIES.TRADE,
-      desc: "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
-    },
+    // Restricted/illicit imports. Grouped like every other tier bucket
+    // (an array of {name,…}), NOT a bare good key: the registry ingest mints
+    // one good per element and never mints a bucket KEY, so a bare-key good
+    // beside array groups minted no real good and left the group key as a
+    // phantom. [data-tables-1]
+    restricted: [
+      {
+        name: "Enslaved persons",
+        category: GOODS_CATEGORIES.TRADE,
+        on: true,
+        desc: "Slaves imported from war fronts, pirate suppliers, and distant slave-holding regions.",
+      },
+    ],
     fromCityOrMetropolis: [
       { name: "Luxury textiles", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Fine cloth, silk" },
       { name: "Spices and exotic dyes", category: GOODS_CATEGORIES.LUXURY, on: true, desc: "Imported rarities" },
@@ -270,12 +279,19 @@ export const GOODS_MODIFIERS_BY_TIER = {
     },
   },
   town: {
+    // Restricted slave-trade export. Carried the standard { category, p, on, desc }
+    // shape as of [data-tables-4], replacing an authored institution/route BOOST
+    // schema whose fields (institutions/tradeRoutes/resourceBoost/institutionBoost/
+    // routeBoost) no reader ever consumed — a model for an engine that was never
+    // built. Kept DELIBERATELY DEFAULT-OFF (on:false): getGoodsModifiers gates on
+    // `spec.on` BEFORE the rng draw, so an inert row is byte-identical to the old
+    // shapeless one (skipped before any draw) — flipping it to on:true is a
+    // conscious, owner-gated change that draws rng and shifts the goods goldens.
     "Enslaved persons": {
-      institutions: ["Slave market", "Slave market district", "Human trafficking network"],
-      tradeRoutes: ["port", "crossroads", "river"],
-      resourceBoost: 0,
-      institutionBoost: 0.3,
-      routeBoost: 0.15,
+      category: GOODS_CATEGORIES.TRADE,
+      p: 0.15,
+      on: !1,
+      desc: "Captives trafficked on through slave markets and holding networks.",
     },
     "Guild-manufactured goods": {
       category: GOODS_CATEGORIES.MANUFACTURED,

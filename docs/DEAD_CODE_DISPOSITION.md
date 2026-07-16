@@ -163,6 +163,35 @@ baseline JSON; deleting `MemberSettlementsList.jsx` does NOT orphan its lazy `Pu
 No baseline/walker change: the two views are absent from `tests/lint/.domain-any-baseline.json` and
 `scripts/.slugify-idiom-baseline.json`, and no walker enumerates them.
 
+---
+
+## Round-2 additions (data-export deletions)
+
+The round-1 waves scoped themselves to orphaned *modules* and tested-but-unconsumed *read-models*;
+a byte-identical dead *export symbol* fell between them. This section owns those.
+
+### `src/data/npcData.js` — `NPC_ROLES` — **DELETED** (W-R2-DATA, `[data-tables-6]`)
+
+| Property | Value |
+|---|---|
+| Symbol | `export const NPC_ROLES` (was `npcData.js:1251`) |
+| Evidence | Its object literal is **byte-identical** to `NPC_FACTION_GOALS` (`npcData.js:392`) — verified by NUL-safe balanced-brace extraction; the two bodies compare exactly equal. |
+| Consumers | **Zero.** Repo-wide grep finds only the definition and two *comment* mentions in `src/generators/npcGenerator.js` (`:3`, `:40`). No `import` anywhere in `src/` or `tests/`. |
+| Behavior impact | **None.** No consumer ⇒ generation output unchanged ⇒ goldens byte-identical (`generatorGoldenMaster` green after deletion). No golden re-record. |
+| Ratchet | Added to `tests/joins/deadCode.test.js` `PURGED` (the zero-importer purge ratchet round-1 proposed) — the symbol name must stay absent from `npcData.js`. |
+| Round-1 lineage | This is round-1 `data-tables-4` (CONFIRMED, final medium in `COMPREHENSIVE_REVIEW_2026-07-13.md`), which the G2 fix list skipped and no ledger dispositioned — the dropped thread this entry closes. |
+
+**Deferred in the same finding (out of this wave's fence, recorded here so it is not re-lost):**
+the three *misnamed* sibling exports the finding also flagged — `NPC_SECRETS` (holds `{short,long}`
+goal pairs, not secrets), `NPC_WANTS` (holds attire strings, consumed as `clothes:`), and
+`NPC_FACTION_LOYALTY` (holds situation-hook prose) — are **not renamed here.** Their consumers live in
+`src/generators/npcGenerator.js`, outside the W-R2-DATA fence (`src/data` + `customRegistry` +
+reconcile + `tests/joins`/`tests/data`); a shim-only in-`npcData.js` rename would add new
+zero-importer exports that trip the very ratchet above while leaving the misnomer in the generator.
+The rename (canonical name + consumer migration + old-name re-export shim) belongs to a wave that owns
+`src/generators`. The two stale `NPC_ROLES` comment anchors in `npcGenerator.js:3,40` are likewise
+left for that wave.
+
 **Collateral edits (comment-only → stripped by minification, so byte-neutral in the dist and
 goldens byte-identical):** stale anchors fixed in `CampaignStatePanel.jsx`, `Card.jsx`,
 `ProvenanceBlock.jsx`, `SimulationRulesAxes.jsx`, `StateBadge.jsx`, `region/index.js`, and
