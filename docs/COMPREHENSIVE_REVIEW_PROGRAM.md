@@ -754,6 +754,20 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
 >   re-survey the 23 landed slices). Phase A synthesis begins on the landed 23; the register
 >   doc marks the 10 pending dimensions explicitly.
 
+## OWNER COMMISSION (2026-07-16, verbatim: "for the three abstractions, implement them" +
+## "regarding the hunt: I like number one" + the long-lived-races consideration on number two)
+THE CORPUS REOPENS (fourth reopening) for exactly five designs, FROZEN 2026-07-16 as
+**docs/DESIGN_SIM_DEPTH_R2.md**, closing again behind them: D1 distance-priced news (refines
+the perfect_delayed infoMode seam; virtual flag; hop-delay off the frozen digest), D2 tempo
+scaling (sublinear realm-size budget + quiet-time §H starvation weighting), D3 doctrine courses
+(momentum's missing religion binding; FORCE_RECONSIDERATION generalizes — no new verbs), D4 the
+hegemony read + fear_of_dominance reason (the balance-of-power gap — §F.3b's read built + the
+Blainey term; balances-never-bandwagons v1), D5 lifespan-scaled memory (the cohort clock made
+fantasy-true via the facet law: fleeting/generational/long/undying bands; default byte-identical;
+NPCs untouched — state-never-fate stands; JUDGMENT: built-with-the-wave, vetoable). Builds as
+**W-R2-DEPTH**, post-merge, after W-R2-SEAMS + W-R2-LIGHT. All five consume existing machinery;
+expected eager ≈ two key literals against the 85 B margin (measure-first law applies).
+
 ## Phase plan — ROUND 2 (checkboxes are the resume pointer)
 - [x] **Phase S — SURVEY: COMPLETE 33/33** (2026-07-16 ~00:45; 11.1M total survey tokens).
       Full-fleet census: **269 findings — 0C / 22H / 99M / 148L.** Full results re-banked
