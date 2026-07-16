@@ -137,6 +137,7 @@ export const INSTITUTION_IDENTITY = Object.freeze({
   "Thieves' guild chapter": 'A chartered chapter of organized theft that regulates its members, fences their takings, and enforces its own law.',
   'Multiple criminal factions': 'Rival gangs contesting the same streets, whose turf disputes spill into open violence.',
   'Black market': 'A hidden trade in contraband and forbidden goods, meeting where the watch does not look.',
+  'Underground network': 'A dug warren of tunnels and cellars beneath the settlement, used for discreet passage, untaxed storage, and no-questions transport. Everyone knows it exists; no one holds a map.',
   'Contract killer': 'A lone killer or small cell working below the notice of any guild, hired through criminal go-betweens. Deniable and never reliable.',
   'Kidnapping ring': 'A crew that seizes free people and sells them on with forged papers, feeding whatever market will take them.',
   'Human trafficking network': 'A clandestine operation moving people across borders outside all law, with its own safe houses and bought officials.',

@@ -853,8 +853,10 @@ function deriveLawOrder(s) {
   // Active conditions move law_order live (the war/religion-layer seam, mirroring
   // deriveEconomicCapacity). corruption_exposed / unrest / occupation-style
   // archetypes that declare law_order press here; signed by the condition's
-  // status. A condition that does NOT declare law_order is ignored, so no-op for
-  // every settlement today (none declare it yet) ⇒ byte-identical.
+  // status. [domain-top-state-2] succession_void residual conditions now DECLARE
+  // law_order (its stale →criminal_opportunity alias was dropped), so this scan is
+  // live for lawless-interregnum settlements; a condition that does NOT declare
+  // law_order is still ignored (byte-identical for every other settlement).
   score += applyConditions(s, contributors, 'law_order', {
     scale: 15, effect: ['restored', 'eroded'], tail: ['restores the rule of law.', 'erodes the rule of law.'],
   });

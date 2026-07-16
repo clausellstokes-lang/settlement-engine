@@ -254,14 +254,32 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
   },
 });
 
+// [domain-top-state-4] The generator (npcStructure.getRank) speaks its own rank
+// vocabulary — 'dominant' / 'subordinate' — while the profile surface and the
+// REMOVAL_CONSEQUENCES palette speak the NpcRank vocabulary 'dominant' / 'secondary'
+// / 'minor'. Nothing translated between them, so every non-dominant NPC fell through
+// to the 'minor' palette and the 'secondary' tier was dead; a legacy NUMERIC
+// structuralRank would also crash `.toLowerCase()`. Translate in ONE place: map
+// 'subordinate' → 'secondary', String()-coerce the input, and collapse anything
+// unrecognized (including numbers and absent ranks) to 'minor'.
+const NPC_RANK_ALIASES = Object.freeze({ subordinate: 'secondary' });
+/**
+ * @param {unknown} rank
+ * @returns {import('./settlement.schema.js').NpcRank}
+ */
+export function normalizeNpcRank(rank) {
+  const low = String(rank ?? '').toLowerCase();
+  const mapped = /** @type {Record<string,string>} */ (NPC_RANK_ALIASES)[low] || low;
+  return mapped === 'dominant' || mapped === 'secondary' ? mapped : 'minor';
+}
+
 /**
  * @param {any} archetype
  * @param {any} rank
  */
 function consequencesForRemoval(archetype, rank) {
   const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
-  const normalizedRank = (rank || 'minor').toLowerCase();
-  const consequences = archetypeMap[normalizedRank] || archetypeMap.minor || [];
+  const consequences = archetypeMap[normalizeNpcRank(rank)] || archetypeMap.minor || [];
   return [...consequences];
 }
 
@@ -512,7 +530,10 @@ export function deriveNpcProfile(npc, settlement) {
 
   const archetype = archetypeFromCategory(npc.category);
   const template = templateForArchetype(archetype);
-  const rank = npc.structuralRank || 'minor';
+  // [domain-top-state-4] Surface + score the NpcRank-vocabulary rank (maps the
+  // generator's 'subordinate' → 'secondary'), so profile.rank stays inside the
+  // NpcRank union and the removal forecast reads the real per-tier palette.
+  const rank = normalizeNpcRank(npc.structuralRank);
 
   return {
     id:   npc.id || `npc.${snakeCase(npc.name || 'unnamed')}`,

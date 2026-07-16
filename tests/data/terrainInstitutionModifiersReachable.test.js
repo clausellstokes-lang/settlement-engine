@@ -49,3 +49,35 @@ describe('[data-tables-2] every named terrain institution modifier is reachable'
     }
   });
 });
+
+/**
+ * [data-tables-2] UPPER-BOUND WALKER (the double-stack pin).
+ *
+ * getResourceMultiplier (assembleInstitutions.js:88-92) multiplies EVERY name-modifier
+ * row whose lowercased name is a substring of the institution's name. The G2 round-1
+ * revival renamed dead rows ("Foresters' guild"→"Sawmill", "Stonemasons' guild"→"Stone
+ * quarry") onto names that were substrings of siblings ("Sawmill"⊂both Sawmill rows;
+ * "Stone quarry" contains "quarry", matched by the "Quarry" row) — so one institution
+ * absorbed the product of two rows (forest Sawmill ×3×2.5, mountain Stone quarry ×2.5×2,
+ * hills ×1.8×1.5), a fixed-then-regressed defect.
+ *
+ * This ratchet is the mirror of the reachability one: no single catalog institution may
+ * match MORE THAN ONE named modifier row within a terrain. Together the two bound every
+ * row to exactly one live institution family, so neither a dead pattern nor a double-stack
+ * can slip back in.
+ */
+describe('[data-tables-2] no catalog institution double-matches a terrain’s modifier rows', () => {
+  test('RATCHET: each institution matches ≤1 named modifier row per terrain', () => {
+    const offenders = [];
+    for (const [terrain, data] of Object.entries(TERRAIN_DATA)) {
+      const namedRows = (data.institutionModifiers || []).filter((m) => m.name);
+      for (const instName of CATALOG_NAMES) {
+        const matched = namedRows.filter((m) => instName.includes(String(m.name).toLowerCase()));
+        if (matched.length > 1) {
+          offenders.push({ terrain, institution: instName, rows: matched.map((m) => `${m.name}×${m.modifier}`) });
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+});

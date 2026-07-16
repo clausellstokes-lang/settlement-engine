@@ -123,6 +123,22 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     consumptionMult *= 1.2;
     stressNotes.push('Occupation: occupying forces consume approximately 20% of food supply beyond normal needs.');
   }
+  // [generators-domain-1] second-wave stress types with a food-relevant viabilityNote.
+  // (Defense stays coupled via the priorityHelpers effective-score multipliers — no inline
+  // defense penalty, which would double-count.) Golden-shifting (G2). Kept byte-identical to
+  // foodGenerator.js's production block.
+  if (stresses.includes('wartime')) {
+    productionMult *= 0.85;
+    stressNotes.push('Wartime: conscription has thinned the agricultural workforce, cutting local output.');
+  }
+  if (stresses.includes('slave_revolt')) {
+    productionMult *= 0.8;
+    stressNotes.push('Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.');
+  }
+  if (stresses.includes('mass_migration')) {
+    consumptionMult *= 1.15;
+    stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
+  }
 
   const dailyProduction =
     (Math.floor(population * ECONOMIC_CONSTANTS.AGRICULTURAL_WORKFORCE) *

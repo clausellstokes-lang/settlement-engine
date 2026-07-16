@@ -862,6 +862,22 @@ export const institutionalCatalog = {
         tags: ['criminal', 'trade'],
         priorityCategory: 'criminal',
       },
+      // [D6 THE UNDERWAYS] Excavated tunnels beneath the settlement — the "underways" — for
+      // discreet passage, untaxed storage, and no-questions transport. Its EXISTENCE is public
+      // knowledge ("everyone knows the warren exists; no one maps it"); its OPERATIONS run
+      // through the covert seams. `facets` declare it clandestine + subterranean so the covert
+      // engine couplings resolve it through facetOf (custom clandestine institutions count the
+      // same). `forbiddenResources` makes it impossible atop marsh/floodplain (tunnels flood).
+      // id `underground_network` (kernel-slugified from the name). Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.08,
+        desc: 'Dug smuggling passages beneath the village.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
+      },
     },
   },
   town: {
@@ -1394,6 +1410,17 @@ export const institutionalCatalog = {
         tags: ['criminal'],
         priorityCategory: 'criminal',
       },
+      // [D6 THE UNDERWAYS] see the village-tier entry for the full note. At town scale the
+      // dug network is more extensive — the labour to excavate exists. Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.15,
+        desc: 'A dug network of smuggling tunnels and cellars.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
+      },
     },
     Entertainment: {
       'Traveling performers': {
@@ -1864,6 +1891,18 @@ export const institutionalCatalog = {
         desc: 'Illicit goods trade. Hidden locations.',
         tags: ['criminal', 'underground'],
         priorityCategory: 'criminal',
+      },
+      // [D6 THE UNDERWAYS] see the village-tier entry for the full note. City scale: an
+      // extensive dug network — the underways proper. Merged into the metropolis catalog via
+      // mergeCatalogs(city, metropolis), so it also appears at metropolis. Golden-shifting (G2).
+      'Underground network': {
+        required: false,
+        baseChance: 0.22,
+        desc: 'An extensive warren of smuggling tunnels beneath the city.',
+        tags: ['criminal', 'smuggling', 'underground'],
+        priorityCategory: 'criminal',
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' },
+        forbiddenResources: ['marshlands', 'fertile_floodplain'],
       },
       'Contract killer': {
         required: false,

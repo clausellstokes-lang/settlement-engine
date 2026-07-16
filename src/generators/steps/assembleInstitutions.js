@@ -287,6 +287,12 @@ registerStep('assembleInstitutions', {
         }
         if (inst.forbiddenTradeRoutes && inst.forbiddenTradeRoutes.includes(tradeRoute)) return;
         if (inst.terrainRequired && !inst.terrainRequired.includes(terrainType)) return;
+        // [D6 THE UNDERWAYS] geography-inconsistent-is-impossible: an institution may forbid
+        // itself where a named nearby resource makes it physically impossible — the underways
+        // cannot exist atop a marsh/floodplain (the tunnels flood). Absent the field ⇒ no-op,
+        // byte-identical for every existing institution.
+        if (inst.forbiddenResources && Array.isArray(nearbyResources)
+            && inst.forbiddenResources.some(r => nearbyResources.includes(r))) return;
 
         const baseChance = getBaseChance(
           inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles

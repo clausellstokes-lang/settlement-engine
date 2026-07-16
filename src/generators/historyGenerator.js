@@ -1004,6 +1004,14 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
       anchored: false,
     });
   }
+  // [D6 THE UNDERWAYS] DEFERRED-with-reason: an underways founding mention ("dug during the
+  // siege…") belongs in this resourceEvents pool, conditioned on the excavation-competence
+  // resources (coal/iron/stone/gemstone). It is NOT added here because historyGenerator.js sits
+  // exactly at its frozen size-ratchet ceiling (scripts/.size-baseline.json = 883 effective
+  // lines) — any code line trips sizeBaseline.test.js, and the wave protocol forbids raising the
+  // baseline while decomposing this file is outside the catalog-half fence. Every other D6
+  // parity element (catalog, facets, services, geography, stress content, NPC office) shipped;
+  // this cosmetic timeline beat lands when historyGenerator.js is decomposed. (docs/review-r2/G2_SHIFT_MAP.md)
   if (hasResource(['magical_node']) && _rng() < 0.45) {
     resourceEvents.push({
       name: 'The Arcane Incident',

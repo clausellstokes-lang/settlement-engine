@@ -368,6 +368,11 @@ export const STRESS_INSTITUTION_EFFECTS = {
       secret: "Knows the insurgency is being funded from outside the settlement — by a party the authority itself has been quietly dealing with",
       stakes: "Exposing the funding exposes the deal. They have been sitting on both halves for months",
     },
+    {
+      // [D6 THE UNDERWAYS] the insurgency uses the tunnels — content integration.
+      secret: "Has been moving insurgent fighters and sealed messages through the underways — the dug tunnels beneath the settlement — one cellar-mouth at a time",
+      stakes: "The warren has no map, but {npc} has walked it. If the authority ever forces one, this person's own route becomes the confession",
+    },
   ],
   mass_migration: [
     {
@@ -471,6 +476,11 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Is protecting one specific enslaved person for private reasons, at the cost of intelligence that would help contain the revolt",
       stakes: "The person they are protecting is close to the revolt's leadership. The connection would ruin them if it were traced",
+    },
+    {
+      // [D6 THE UNDERWAYS] the revolt uses the tunnels — content integration.
+      secret: "Has been running the enslaved out through the underways for weeks before the revolt broke, using smugglers' tunnels no census ever recorded",
+      stakes: "Those they moved are now among the revolt's fighters, and the tunnel-keepers know exactly who paid for the passage",
     },
   ],
 };

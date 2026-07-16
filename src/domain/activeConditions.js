@@ -884,7 +884,15 @@ export function withTickedConditionDurations(settlement, interval) {
       ...canonical,
       severity,
       severityBand: severityBand(severity),
-      status: windingDown ? 'easing' : canonical.status,
+      // [domain-top-state-1] Preserve the RAW status when the input had no valid
+      // directional status. Writing back canonical.status would canonicalize a
+      // missing/legacy/'active' status to the template default (e.g. plague's
+      // 'worsening'), and the next tick would read that written-back direction and
+      // invent motion (+0.04/tick) — defeating the drift's own no-invented-motion
+      // invariant. For a valid input status canonical.status === c.status, so this
+      // is byte-identical for every normally-generated condition; only legacy/raw-
+      // partial conditions (which the drift must leave flat) are affected.
+      status: windingDown ? 'easing' : (VALID_STATUSES.has(c.status) ? canonical.status : c.status),
       duration: {
         ...canonical.duration,
         elapsedTicks,

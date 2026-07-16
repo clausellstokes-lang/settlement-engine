@@ -255,15 +255,22 @@ export const TERRAIN_DATA = {
         modifier: 2,
         reason: "Ore processing"
       },
-      {
-        name: "Stone quarry",
-        modifier: 2,
-        reason: "Stone abundance"
-      },
+      // data-tables-2: dropped redundant "Stone quarry" row (renamed from dead
+      // "Stonemasons' guild" in ec69513e). It matched only the "Stone quarry" institution,
+      // which the "Quarry" row above already boosts via includes() — a pure double-stack with
+      // no distinct live target (no "Stonemason" institution exists). Merged to one row. (G2)
       {
         name: "Jeweller",
         modifier: 1.8,
         reason: "Gemstone access"
+      },
+      {
+        // [D6 THE UNDERWAYS] mountain rock is the easiest ground to tunnel and vault —
+        // excavation affinity. Single-match (no other mountain row is a substring of
+        // "Underground network"), per the terrain double-stack lesson. Golden-shifting (G2).
+        name: "Underground network",
+        modifier: 1.6,
+        reason: "Stone easily excavated for tunnels"
       },
       {
         tags: [INSTITUTION_TAGS.AGRICULTURE],
@@ -340,7 +347,11 @@ export const TERRAIN_DATA = {
         reason: "Abundant timber"
       },
       {
-        name: "Sawmill",
+        // data-tables-2: was a second "Sawmill" row (renamed from dead "Foresters' guild"
+        // in ec69513e) that double-matched the Sawmill row above via includes(). Re-pointed
+        // to the distinct live "Woodcutter's camp" institution — honors the forestry-management
+        // intent on a real, previously-unboosted institution. Golden-shifting (G2).
+        name: "Woodcutter's camp",
         modifier: 2.5,
         reason: "Forest management"
       },
@@ -544,11 +555,9 @@ export const TERRAIN_DATA = {
         modifier: 1.8,
         reason: "Stone extraction"
       },
-      {
-        name: "Stone quarry",
-        modifier: 1.5,
-        reason: "Local stone"
-      },
+      // data-tables-2: dropped redundant "Stone quarry" row (double-stacked the "Stone quarry"
+      // institution already caught by the "Quarry" row above via includes()). Merged to one
+      // row — no distinct live stone-craft institution to re-point to. Golden-shifting (G2).
       {
         name: "Shepherd",
         modifier: 2,
@@ -563,6 +572,13 @@ export const TERRAIN_DATA = {
         name: "Mine",
         modifier: 1.5,
         reason: "Moderate ore deposits"
+      },
+      {
+        // [D6 THE UNDERWAYS] hill slopes and stony ground take a tunnel readily —
+        // excavation affinity (milder than mountain). Single-match. Golden-shifting (G2).
+        name: "Underground network",
+        modifier: 1.3,
+        reason: "Firm ground easily excavated for tunnels"
       },
       {
         tags: [INSTITUTION_TAGS.AGRICULTURE],

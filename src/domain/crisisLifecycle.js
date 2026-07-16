@@ -113,10 +113,11 @@ function labelFromTarget(targetId) {
 
 // Loose catalog alias map mirrored from stressors.js canonicalAffectedSystems
 // (kept tiny + local: importing the private helper would mean exporting it
-// just for this fallback path).
+// just for this fallback path). Byte-identical to CAUSAL_SYSTEM_ALIASES.
+// [domain-top-state-2] law_order alias dropped in lockstep with the canonical table —
+// law_order is now a real SYSTEM_VARIABLE and must reach it un-aliased.
 const STRESSOR_SYSTEM_ALIASES = Object.freeze({
   faction_stability: 'faction_power',
-  law_order: 'criminal_opportunity',
   tax_revenue: 'trade_connectivity',
 });
 
