@@ -754,6 +754,25 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
 >   re-survey the 23 landed slices). Phase A synthesis begins on the landed 23; the register
 >   doc marks the 10 pending dimensions explicitly.
 
+## OWNER RE-SEQUENCING RULING (2026-07-16, verbatim: "okay. do that. hold off the push and
+## deploy to the very end.") — THE BINDING ORDER OF OPERATIONS:
+1. W6 → fold-in → **W7 full constitutional gate (LOCAL ONLY — no push)**.
+2. W-R2-LIGHT → W-R2-DEPTH back-to-back (the last engine-touching waves).
+3. **THE SOAK ENTERS THIS PROGRAM** (pulled forward from the successor's charter, per this
+   ruling): 30-yr certifications + the 100/300-yr century probes + the settlement-cap study
+   launch as background compute (gate-on harnesses; no regen or preset lighting needed)
+   the moment DEPTH merges — longest probes first.
+4. SM-4 ∥ GUIDE-2b → Surveyor S1–S7 build CONCURRENT with the running soak (display/AI
+   lanes cannot invalidate it).
+5. Soak verdicts → tuning (if needed) → **THE ONE REGEN** (owner-signed, batching: lighting
+   shifts + G2 shifts + the Underground Network catalog + any soak-driven tuning shifts —
+   a single golden event).
+6. Dimensions-only re-grade → Phase E close.
+7. **THE VERY END: push + PR + the owner deploy batch** — this MODIFIES the 2026-07-15
+   "push couples to the merge" ruling: the push/PR now HOLD until everything above is done.
+   Consequence: the deploy is SOAKED-BY-DEFAULT (the un-soaked posture retires unless the
+   soak is still running at deploy time). Nothing leaves this machine until step 7.
+
 ## OWNER COMMISSION (2026-07-16, verbatim: "for the three abstractions, implement them" +
 ## "regarding the hunt: I like number one" + the long-lived-races consideration on number two)
 THE CORPUS REOPENS (fourth reopening) for exactly five designs, FROZEN 2026-07-16 as
