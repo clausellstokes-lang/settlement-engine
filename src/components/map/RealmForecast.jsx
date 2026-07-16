@@ -30,6 +30,15 @@ export default function RealmForecast({ campaign }) {
   const memberIds = new Set((campaign?.settlementIds || []).map(String));
   const memberSaves = (saves || []).filter(s => memberIds.has(String(s.id)));
 
+  // composer-realm-verbs-3 — CANDIDATE LANE DEFERRAL (deliberate, recorded — not
+  // a gap to re-find): the marginal with-vs-without view (runRealmForecast's
+  // `candidate` arm + forecastDigest's marginal isolation) is DELIBERATELY not
+  // wired here. The domain lane (runRealmForecast candidate) is built + pinned
+  // (forecastRun.test.js), but its UI is owner-gated product scope, recorded in
+  // memory/w-composer-2-realm-lift.md ("candidate-run forecast UI (marginal view
+  // in the composer pane) not wired"). This pane renders the BASELINE pending
+  // future (§10's headline) + the realm-scope beats; a staged order already
+  // appears inside that baseline.
   async function run() {
     setRunning(true);
     try {
@@ -103,6 +112,25 @@ export default function RealmForecast({ campaign }) {
               </div>
             ))}
           </div>
+          {/* composer-realm-verbs-3: the realm-scope beats — the digest's
+              "readable in both directions" law (§10). These are the news beats
+              that belong to NO single member (realm-wide events: treaties,
+              coalitions, foreign intervention), rendered as a realm band. */}
+          {(view.digest.realm || []).length > 0 && (
+            <div style={{ marginTop: SP.sm, padding: SP.sm, border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD }}>
+              <div style={{
+                fontSize: FS.xxs, fontWeight: 800, fontFamily: sans, color: MUTED,
+                letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2,
+              }}>
+                Across the realm
+              </div>
+              {view.digest.realm.slice(0, 6).map((b, i) => (
+                <div key={i} style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: 2 }}>
+                  {Number.isFinite(b.tick) ? `Week ${b.tick} — ` : ''}{b.headline}
+                </div>
+              ))}
+            </div>
+          )}
           {view.digest.pauseMarkers.length > 0 && (
             <div style={{ fontSize: FS.xxs, fontFamily: sans, color: MUTED, marginTop: SP.xs }}>
               {view.digest.pauseMarkers.length} moment{view.digest.pauseMarkers.length === 1 ? '' : 's'} where the world would await your word (auto-resolved with defaults here).
@@ -120,10 +148,14 @@ export default function RealmForecast({ campaign }) {
 
 /** The same fingerprint derivation as the domain module, inlined so render
  * never imports the engine chunk. Drift-pinned by
- * tests/domain/forecastRun.test.js (string parity with forecastFingerprint). */
+ * tests/domain/forecastRun.test.js (string parity with forecastFingerprint).
+ * composer-realm-verbs-2: the `revision` fold (rulesetLog + decided-count +
+ * stressors) mirrors the domain twin verbatim on the drift-guarded substrings. */
 export function liveFingerprint(campaign, interval) {
   const ws = campaign?.worldState || {};
   const queue = (ws.pendingEvents || []).map(q => `${q.queueId}@${q.queuedAt}`).join('|');
   const proposals = (ws.proposals || []).filter(p => p && p.status === 'pending').map(p => p.id).join('|');
-  return `${ws.tick ?? 0}:${interval}:${queue}:${proposals}`;
+  const decided = (ws.proposals || []).filter(p => p && p.status !== 'pending').length;
+  const revision = `${Object.keys(ws.rulesetLog || {}).length}.${decided}.${(ws.stressors || []).length}`;
+  return `${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`;
 }

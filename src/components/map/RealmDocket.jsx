@@ -15,7 +15,7 @@ import { CalendarClock, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { AFFORDANCE_MANIFEST } from '../../domain/events/affordanceManifest.js';
+import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import RealmForecast from './RealmForecast.jsx';
 
 function entryLabel(event) {
@@ -27,6 +27,7 @@ function entryLabel(event) {
 export default function RealmDocket({ campaign }) {
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
   const saves = useStore(s => s.savedSettlements);
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
 
   const queue = campaign?.worldState?.pendingEvents || [];
   const settlementById = useMemo(
@@ -64,9 +65,12 @@ export default function RealmDocket({ campaign }) {
             const sid = String(item.saveId);
             const settlement = settlementById.get(sid);
             const name = settlement?.name || sid;
-            const v = AFFORDANCE_MANIFEST[item.event?.type];
-            const verdict = v && !v.foldedInto && settlement ? v.predicate(settlement, {}) : null;
-            const lapsed = verdict && !verdict.available ? verdict.reasons.join(' ') : null;
+            // experience-product-fit-3: the composer's real ctx (peer count
+            // EXCLUDES this entry's own save), never the empty {} that cried wolf.
+            const lapsed = lapseOf(item.event, settlement, {
+              canUseCustom,
+              campaignPeerCount: campaignPeerCountFor(campaign, sid),
+            });
             return (
               <div key={item.queueId} style={{
                 display: 'flex', alignItems: 'center', gap: 8,
