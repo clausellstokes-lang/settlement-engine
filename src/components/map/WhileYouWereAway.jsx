@@ -42,10 +42,12 @@ export default function WhileYouWereAway({ campaignId = null }) {
   const error = digest.error || null;
   const weeks = Number(digest.weeksCaughtUp) || 0;
   const capped = !!digest.capped;
+  // experience-product-fit-1: the living catch-up parked on a surfacing major.
+  const paused = !!digest.paused;
   const majors = Array.isArray(digest.majors) ? digest.majors : [];
-  // Defensive: nothing ran and nothing failed ⇒ render nothing (the store only
-  // stashes on real work, but keep the banner honest if that ever changes).
-  if (!running && !error && weeks <= 0) return null;
+  // Defensive: nothing ran, nothing failed, and it didn't park ⇒ render nothing (the
+  // store only stashes on real work, but keep the banner honest if that changes).
+  if (!running && !error && weeks <= 0 && !paused) return null;
 
   // ── Busy: the catch-up is mid-flight (up to CATCH_UP_CAP_WEEKS ticks). ──
   if (running) {
@@ -82,7 +84,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
             While you were away
           </div>
           <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, marginTop: 2 }}>
-            The realm advanced {weeks} {weekWord} on its own.
+            The realm advanced {weeks} {weekWord} on its own{paused ? ', then paused for your word' : ''}.
           </div>
         </div>
         <IconButton
@@ -118,6 +120,12 @@ export default function WhileYouWereAway({ campaignId = null }) {
       ) : (
         <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, lineHeight: 1.45 }}>
           The realm advanced quietly — no major turns while you were gone.
+        </div>
+      )}
+
+      {paused && !error && (
+        <div data-testid="catchup-paused-note" style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, lineHeight: 1.4 }}>
+          A major turn surfaced and the realm paused for your word. Set your verdicts on it in the World Pulse panel, then resume the interval.
         </div>
       )}
 
