@@ -49,7 +49,7 @@ import {
   projectFactionStatesOntoSettlement,
 } from './factionCompetition.js';
 import { evaluateWorldPulseRules, rollCandidates, volatilityMultiplier } from './candidateEvents.js';
-import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries } from './narrativeTempo.js';
+import { buildTempoContext, foldNarrativeTempo, tempoReceiptEntries, sublinearBudget, REALM_SCALING } from './narrativeTempo.js';
 import { applyDispositionDeltas, dispositionFactorMap } from './dispositionLedger.js';
 import { advancePantheon, collectFaithDeltas } from './pantheon.js';
 import { computeDispositionFactorMap, computeLawfulness, computeMalice } from './disposition.js';
@@ -1259,11 +1259,14 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // E0 NARRATIVE TEMPO GOVERNOR — READ hook (design §7.2). Build the pre-tick tempo
   // context from `worldState` (still the pre-tick state here; NOT yet memoryState).
   // Dormant (no `narrativeTempo` axis) ⇒ { active:false } ⇒ the seam is byte-identical.
-  const tempoContext = buildTempoContext(worldState, simulationRules);
+  // D2 THE SCALING LAW: realm-global decision budgets grow √-sublinearly in realm size N
+  // (saves.length; design §D2a/§D2c). At N ≤ BASE_REALM every bonus is 0 ⇒ classMax /
+  // maxAuto / maxProposals are byte-identical to today.
+  const tempoContext = buildTempoContext(worldState, simulationRules, saves.length);
   const { selected, rollExplanations, deferred: tempoDeferred } = rollCandidates(
     [...agedStressors.residualOutcomes.filter(o => !isCoupResidualOutcome(o)), ...stochasticCandidates],
     rng.fork('candidate-rolls'),
-    { maxAuto: 7, maxProposals: 5, volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext },
+    { maxAuto: sublinearBudget(7, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.AUTO_SCALE_PER_ROOT), maxProposals: sublinearBudget(5, saves.length, REALM_SCALING.BASE_REALM, REALM_SCALING.PROPOSAL_SCALE_PER_ROOT), volatility: volatilityMultiplier(worldState.volatility), tempo: tempoContext },
   );
   const deterministicExplanations = [...coupOutcomes, ...warOutcomes, ...structuralCandidates].map(candidate => ({
     candidateId: candidate.id,
