@@ -734,8 +734,12 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
       COMMITTED — verdict (0C/14H/68M/109L; defect mass migrated to cross-wave seams +
       built-but-unwired class), full 191-finding register with per-slice coverage, owner-urgent
       list (§6), fix-program shape (§7), dimension re-dispatch queue (§8).
-- [ ] **Phase V — VERIFY** (Opus, model:'opus'): 2 independent lenses per high/critical, 1 per
-      medium; lows defer to implementation-time verification.
+- [ ] **Phase V — VERIFY** (Opus, model:'opus'): DISPATCHED 2026-07-16 ~00:12 as workflow
+      `wf_475bdd2a-7b5` — 96 Opus agents (14 highs × 2 lenses refute+re-derive, 68 mediums × 1
+      refuter; agents self-extract finding details from the banked RAW_SURVEY_RESULTS.json);
+      lows defer to implementation-time verification (recorded, not dropped). The 10-dim
+      survey remainder re-dispatched simultaneously (resume of `wf_d69567dc-f0d`, 23 slices
+      cached). Both launched when capacity returned (owner: "do it now").
 - [ ] **Phase P — WAVE PLAN** (Fable architect): fenced waves, bold-over-safe, golden-shift
       track separation as in round 1; sequenced onto the POST-MERGE unified lineage.
 - [ ] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
