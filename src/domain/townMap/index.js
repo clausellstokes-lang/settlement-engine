@@ -27,3 +27,14 @@ export {
   nextLayoutVariant,
   withLegendPref,
 } from './mapEdits.js';
+// SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
+// shared by the PDF plate + the library-card thumbnail. Imported ONLY by those
+// lazy export surfaces + tests, so it stays out of the first-paint static closure.
+export {
+  EXPORT_PALETTE,
+  exportDistrictColor,
+  buildTownMapDrawList,
+  drawListToSvg,
+  buildTownMapSvg,
+  hasDrawableMap,
+} from './townMapDraw.js';

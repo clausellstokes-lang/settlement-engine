@@ -42,6 +42,9 @@ export const PDF_VARIANTS = {
       identityDailyLife: true,
       services: true,
       institutions: true,
+      // SM-4 — the deterministic town-map plate (self-gates to nothing for a
+      // map-less settlement). A prep/canon artifact benefits from the plan.
+      townMapPlate: true,
       economicsTrade: true,
       resourcesProduction: true,
       defenseSecurity: true,
@@ -74,6 +77,9 @@ export const PDF_VARIANTS = {
       identityDailyLife: true,
       services: true,
       institutions: true,
+      // SM-4 — the deterministic town-map plate (self-gates to nothing for a
+      // map-less settlement). A prep/canon artifact benefits from the plan.
+      townMapPlate: true,
       economicsTrade: true,
       resourcesProduction: true,
       defenseSecurity: true,
@@ -102,6 +108,10 @@ export const PDF_VARIANTS = {
       identityDailyLife: false,
       services: false,
       institutions: false,
+      // SM-4 — the town-map plate stays OUT of the lean/live variants (the lean
+      // timeline_packet keeps the page-count relation; campaign_state drops the
+      // static reference chapters a DM already has from the dossier).
+      townMapPlate: false,
       economicsTrade: false,
       resourcesProduction: false,
       defenseSecurity: false,
@@ -136,6 +146,10 @@ export const PDF_VARIANTS = {
       identityDailyLife: false,
       services: false,
       institutions: false,
+      // SM-4 — the town-map plate stays OUT of the lean/live variants (the lean
+      // timeline_packet keeps the page-count relation; campaign_state drops the
+      // static reference chapters a DM already has from the dossier).
+      townMapPlate: false,
       economicsTrade: false,
       resourcesProduction: false,
       defenseSecurity: true,
