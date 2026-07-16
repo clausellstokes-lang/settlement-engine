@@ -187,6 +187,68 @@ park D5 and ship the other four.
 
 ---
 
+## D6 — THE UNDERWAYS (the underground network institution — owner commission 2026-07-16:
+## "literal excavated caverns for smuggling, escape tunnels, and other clandestine use...
+## give it the full coherence work similar to all the other institutions")
+
+**What it is:** a first-class catalog institution — excavated tunnels and caverns beneath a
+settlement — with the FULL institution parity checklist AND engine couplings into the covert
+mechanics that already exist. Working name **"Underways"** (implementer verifies against the
+catalog's naming register and may substitute — e.g. "Smugglers' warren" — recording the
+JUDGMENT; id `underground_network` either way, kernel-slugified, collision-checked).
+
+**Catalog + generation half (⚠️ GOLDEN-SHIFTING — a catalog addition shifts same-seed worlds;
+this half rides the Track-G2 regen moment, never lands alone):**
+- Tiers village+ (excavation needs labor); probability loaded by (§H): criminal presence
+  (thieves' guild, dens), ports/border position, MINING presence (excavation competence — the
+  W-DISCOVERY mining-camp coupling, both directions), siege history; SUPPRESSED to impossible
+  on floodplain/marsh terrain (tunnels flood — the geography-inconsistent-is-impossible
+  precedent from the discovery wave, pinned).
+- Full parity checklist (what "the same as every other institution" means, derived from the
+  data-layer census): catalog entry with tags + category (the dual-axis vocabulary decides) +
+  declared facets `clandestine` + `subterranean`; institutionServices menu (discreet passage,
+  untaxed storage, no-questions transport — joins the crime menus); NPC layer (tunnel-warden
+  role via the office-equivalence resolver, goals/secrets, vignettes); geography modifier rows
+  (mountain/hills excavation affinity — single-match, per the terrain double-stack lesson);
+  stress-type integrations (insurgency + slave_revolt use the tunnels — content + the
+  registration walker); history/timeline founding mentions ("dug during the siege of...").
+  Every catalog pin extended: id collision, category vocabulary, tag ratchet, services keys,
+  the stressInstitutionEffects walker.
+
+**Engine couplings half (dark-kernel/bounded — rides W-R2-DEPTH; every coupling reads the
+FACET via the facetOf chokepoint, never the name string — custom clandestine institutions
+COUNT, per the facet law):**
+1. **M7 smuggling substrate:** a bounded multiplier on the existing smuggle machinery
+   (smuggleSuccessChance up, smuggleDetected down) at facet settlements — the tunnels are
+   WHERE smuggling happens; receipts name the institution.
+2. **Siege + blockade endurance (land–sea parity by construction):** the starvation/
+   capitulation reads gain a bounded supply-trickle floor at facet settlements — a tunneled
+   town starves slower under siege OR naval blockade (the underways don't care which side the
+   wall is on). Bounded modifier only; no new counterplay machinery (simplicity-over-fidelity).
+3. **Covert-operations affinity:** corruption-web exposure rolls discounted (bounded) at facet
+   settlements; covert bloc (conspiracy) formation eased (§G-clamped) — clandestine
+   infrastructure shelters clandestine politics. The resolveLeash chokepoint untouched.
+4. **The escape lane (state-never-fate):** ousted powers' existing dispersal stamps at facet
+   settlements gain "escaped through the underways" receipts — story, never fate resolution.
+5. **Organic founding:** detectInstitutionGaps gains the underways gap — sustained smuggling
+   activity + criminal density founds one organically (the mine-founds-itself pattern);
+   forced founding already exists via the custom/forced institution lane (counterpart ✓).
+
+**The visibility line (coherence with the premium/covert seam, decided):** the institution's
+EXISTENCE is public dossier truth ("everyone knows the warren exists; no one maps it"); its
+OPERATIONS are covert through the existing covert seams. A hidden-institution visibility class
+was considered and REJECTED — the ontology has no hidden-entity class and minting one for a
+single institution is scope the fiction doesn't need. (Recorded conscious rejection.)
+
+**D6 coherence matrix (condensed):** ×M7 smuggling (substrate — the coupling closes the "where
+does smuggling physically live" gap); ×navy (blockade-running by sea reads the same facet);
+×W-DISCOVERY (mining ↔ tunneling competence, bidirectional probability); ×lifecycle (a dead
+town's underways enrich its ruin flavor — relic ruins with intact tunnels are DM gold, free);
+×corruption/politics (exposure resistance + conspiracy ease, both bounded); ×stress content
+(insurgency/revolt); ×calamity (bucket-neutral — no tunnel-collapse type; flavor stays DM
+freetext); ×premium seam (existence public / operations covert, above); ×PDF/display (standard
+institution rendering; services + profile — zero new display machinery).
+
 ## THE COHERENCE MATRIX (owner directive 2026-07-16: "it has to be coherent with all aspects of
 ## the ontology... The number one thing I'm trying to sell is a coherent world.")
 
