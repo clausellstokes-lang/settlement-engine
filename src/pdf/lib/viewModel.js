@@ -1262,6 +1262,11 @@ function cleanHooks(arr) {
  */
 function normalizeIncomeSources(arr) {
   if (!Array.isArray(arr) || arr.length === 0) return [];
+  // Zero-amount sources are dropped HERE (PDF-side): a zero source has no bar to
+  // draw and would only add noise / risk a degenerate total where the bar fill
+  // and label MUST agree. The screen may still list such sources; this is a
+  // per-surface formatting choice, not a data disagreement. (See the
+  // PARITY_EXEMPT contract in domain/display/parityContract.js.)
   const items = arr.map(s => ({
     ...s,
     raw: s?.percentage ?? s?.value ?? s?.amount ?? 0,

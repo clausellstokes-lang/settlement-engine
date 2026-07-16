@@ -4,6 +4,13 @@
 -- ════════════════════════════════════════════════════════════════════════════
 -- backend-3 (the MIGRATION-TODO in tests/lint/migrationSearchPathPin.test.js).
 --
+-- @rollback: re-run each function's PRIOR net-current definition (get_ai_pricing +
+--   aggregate_ai_usage_stats + run_pricing_resync_nightly from 114/115,
+--   spend_credits from 120, import_gallery_dossier from 125, refund_credits from
+--   123, and the two gallery functions from their cited sources). The pin is pure
+--   hardening (search_path = public, pg_temp); there is no data change. Forward-fix
+--   first — rolling back re-opens the pg_temp shadowing surface.
+--
 -- THE INVARIANT (094/111): every public SECURITY DEFINER function pins
 -- `set search_path = public, pg_temp` with pg_temp LAST. A bare
 -- `set search_path = public` leaves pg_temp implicitly FIRST — the

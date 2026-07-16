@@ -14,7 +14,7 @@ through a multi-step pipeline that produces an internally-coherent settlement �
 economy, factions, institutions, NPCs, stressors, history — rendered as an
 on-screen dossier and an exportable PDF, with an optional AI prose layer.
 
-Stack: **React 19 + Zustand 5 + Vite 5 (oxc transform / Rollup build)**, JS with
+Stack: **React 19 + Zustand 5 + Vite 7 (oxc transform / Rollup build)**, JS with
 **JSDoc types** (no `.ts` in app code), **Supabase** (auth, Postgres + RLS, edge
 functions), **Stripe** (credits/subscription), **Anthropic** (AI narrative).
 
@@ -166,7 +166,8 @@ shows all visible items.
   atomic-persist RPCs (optimistic-lock advance), gated security-question recovery,
   consent + velocity guards, and gallery view-dedup — up to the current head. RLS
   is the security spine.
-- **functions/** (Deno edge):
+- **functions/** (16 Deno edge functions; auth posture per function is pinned
+  in `config.toml` and documented in docs/abuse-model.md):
   - `generate-narrative` — AI prose. JWT-auth → `spend_credits` RPC (RLS,
     atomic) → bot guard → Opus thesis + parallel Haiku refinement passes →
     `refund_credits` on failure. Anthropic key is server-only.
@@ -209,8 +210,9 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~8,800 tests / ~792 files (unit, property-based, domain/
-  store/lib integration, component/UI smoke, a11y, security, edge-function).
+- **test** — Vitest, ~11,800 tests / ~1190 files (unit, property-based, domain/
+  store/lib integration, component/UI smoke, a11y, security, edge-function; the
+  master merge folded ~340 master-lineage test files into the estate).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
 

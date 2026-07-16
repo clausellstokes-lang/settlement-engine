@@ -42,6 +42,12 @@
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- ── 1. email_preferences table ───────────────────────────────────────────────
+-- @rollback: `drop function if exists public.is_allowed_email_category(text);
+--   drop table if exists public.email_preferences;` DESTRUCTIVE: deletes every
+--   stored per-category preference AND the one-click unsubscribe tokens (users
+--   who unsubscribed via token would revert to the single legacy
+--   emailNotifications flag). Forward-fix first.
+--
 -- One row per user. The three flags are the only CATEGORIES a user can opt out
 -- of; transactional mail is never represented here (it is always sent). The
 -- unsubscribe_token is an opaque, unguessable per-user bearer credential — the

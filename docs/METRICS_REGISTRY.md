@@ -34,7 +34,7 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 ## M1 — Cap-hit → sign-in conversion
 
 - **Question:** When an anonymous user hits the generation cap, do they sign in?
-- **Source events:** `anon_cap_unlock_shown`, `signup_started`, `signup_completed`
+- **Source events:** `anon_cap_unlock_shown`, `anon_cap_unlock_clicked`, `signup_started`, `signup_completed`
 - **Denominator:** distinct anonymous actors who saw `anon_cap_unlock_shown`.
 - **Cell grid:** day-cohort × entry_route_kind × `is_return`.
 - **Suppression floor:** 25 actors per cell.

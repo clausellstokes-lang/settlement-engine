@@ -2124,7 +2124,23 @@ export const createSettlementSlice = (set, get) => ({
     // save.aiSettlement. Reading the wrong path nulled the narrative on every
     // reload (it ran right after hydrateAiFromSave had loaded it correctly),
     // while daily life — untouched here — survived. Read aiData first.
+    //
+    // FULL AI-session load (ported master fix, mirrors aiSlice.hydrateAiFromSave):
+    // some callers (e.g. the deity-from-map picker) call hydrateFromSave ALONE,
+    // without hydrateAiFromSave — loading only aiSettlement here carried the
+    // PRIOR save's aiDailyLife / showNarrative / fingerprint / in-flight flags
+    // into the new identity. Load the whole AI block from THIS save's blob, and
+    // clear the in-flight flags so a stale spinner/error can't bleed across.
+    // Idempotent with SettlementDetail's own hydrateAiFromSave call (same blob).
     state.aiSettlement   = save.aiData?.aiSettlement || save.aiSettlement || null;
+    state.aiDailyLife    = save.aiData?.aiDailyLife || null;
+    state.aiDataVersion  = save.aiData?.narrativeGeneratedAt
+      ? new Date(save.aiData.narrativeGeneratedAt).getTime() : null;
+    state.aiSourceFingerprint = save.aiData?.narrativeSourceFingerprint || null;
+    state.showNarrative  = save.aiData?.narrativeMode === 'narrated' && !!save.aiData?.aiSettlement;
+    state.aiLoading      = false;
+    state.aiRegenerating = false;
+    state.aiError        = null;
 
     // SystemState: prefer the persisted snapshot; if absent or stale,
     // re-derive from the settlement so the rail/timeline never crashes.

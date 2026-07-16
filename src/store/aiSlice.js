@@ -462,6 +462,10 @@ export const createAiSlice = (set, get) => ({
     const aiGuidance = typeof dossierNotes.aiGuidance === 'string' ? dossierNotes.aiGuidance.trim() : '';
     const modelPreference = get().auth?.modelPreference;
     const isRegenerate = !!aiSettlement;
+    // Captured at run entry, when the live view still belongs to THIS save: the
+    // run's own daily-life bundle for the chronicle snapshot below. A mid-run
+    // settlement switch must not let the chronicle read another save's live view.
+    const runDailyLife = get().aiDailyLife;
     const cost = getAiCostForModel('narrative', modelPreference);
     const elevated = get().isElevated();
     if (!elevated && creditBalance < cost) {
@@ -525,6 +529,9 @@ export const createAiSlice = (set, get) => ({
     // Write dotted paths ("powerStructure.factions") into nested objects.
     const setNestedPath = (root, path, value) => {
       const keys = path.split('.');
+      // Prototype-pollution guard (ported master fix): a streamed beat key like
+      // "__proto__.polluted" must never write through Object.prototype.
+      if (keys.some(k => k === '__proto__' || k === 'constructor' || k === 'prototype')) return;
       let ref = root;
       for (let i = 0; i < keys.length - 1; i++) {
         if (typeof ref[keys[i]] !== 'object' || ref[keys[i]] === null) ref[keys[i]] = {};
@@ -669,6 +676,10 @@ export const createAiSlice = (set, get) => ({
       try {
         await get()._appendChronicleEntry(saveId, {
           reason: isRegenerate ? 'regenerate' : 'initial',
+          // Thread THIS run's prose so a mid-generation settlement switch can't
+          // snapshot the now-active settlement's narrative under this save.
+          aiSettlement: result,
+          aiDailyLife:  runDailyLife ?? null,
         });
       } catch (chronErr) {
         console.error('Chronicle append failed:', chronErr);
@@ -1094,6 +1105,11 @@ export const createAiSlice = (set, get) => ({
         await get()._appendChronicleEntry(saveId, {
           reason: 'progression',
           triggeredBy: typeof changeLabel === 'string' && changeLabel ? changeLabel : null,
+          // Thread THIS run's prose; progression carries the daily life captured
+          // at run entry, never the live view, which a mid-call settlement
+          // switch may have replaced.
+          aiSettlement: result,
+          aiDailyLife:  aiDailyLife ?? null,
         });
       } catch (chronErr) {
         console.error('Chronicle append (progression) failed:', chronErr);
@@ -1150,7 +1166,10 @@ export const createAiSlice = (set, get) => ({
    * @param {string|null} [opts.triggeredBy]
    * @param {'full'|'summary'} [opts.mode='full']
    */
-  _appendChronicleEntry: async (saveId, { reason, triggeredBy = null, mode = 'full' }) => {
+  _appendChronicleEntry: async (
+    saveId,
+    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife } = {},
+  ) => {
     if (!saveId) return;
     const state = get();
     const entry = state.savedSettlements.find(s => s.id === saveId);
@@ -1165,10 +1184,23 @@ export const createAiSlice = (set, get) => ({
                 : state.isPremium?.()  ? CHRONICLE_LIMITS.premium
                 : CHRONICLE_LIMITS.free;
 
+    // Prefer the run's OWN prose (threaded by the caller). Only fall back to the
+    // live store view when this save is the one on screen — otherwise a
+    // mid-generation switch would snapshot another settlement's prose under this
+    // save's chronicle. (Ported master fix.)
+    const sourceProvided = aiSettlement !== undefined || aiDailyLife !== undefined;
+    const liveIsThisSave = state.activeSaveId == null || state.activeSaveId === saveId;
+    const snapshotSettlement = sourceProvided
+      ? (aiSettlement ?? null)
+      : (liveIsThisSave ? state.aiSettlement : null);
+    const snapshotDailyLife = sourceProvided
+      ? (aiDailyLife ?? null)
+      : (liveIsThisSave ? state.aiDailyLife : null);
+
     const newEntry = createChronicleEntry({
       reason,
-      aiSettlement: state.aiSettlement,
-      aiDailyLife:  state.aiDailyLife,
+      aiSettlement: snapshotSettlement,
+      aiDailyLife:  snapshotDailyLife,
       triggeredBy,
       mode,
     });
@@ -1316,8 +1348,10 @@ export const createAiSlice = (set, get) => ({
     if (nextAiData === entry.aiData) return;
 
     // Update the session view first if this is the active save — keeps the
-    // UI responsive even if the persist round-trip takes a moment.
-    if (state.aiSettlement || state.aiDailyLife) {
+    // UI responsive even if the persist round-trip takes a moment. The guard
+    // must check the save IS active (ported master fix): renaming a non-active
+    // save must never overwrite the on-screen save's prose.
+    if (state.activeSaveId === saveId && (state.aiSettlement || state.aiDailyLife)) {
       set(s => {
         if (nextAiData.aiSettlement) s.aiSettlement = nextAiData.aiSettlement;
         if (nextAiData.aiDailyLife)  s.aiDailyLife  = nextAiData.aiDailyLife;
@@ -1347,6 +1381,10 @@ export const createAiSlice = (set, get) => ({
       set(state => { state.aiError = 'No save to revert.'; });
       return;
     }
+    // Captured at entry (ported master fix): the on-screen session view is only
+    // nulled below when the reverted save IS the active one — reverting a
+    // non-active save must not blank the save the user is currently reading.
+    const stillActive = get().activeSaveId === saveId;
 
     // Chronicle FIRST: snapshot the narrative we're about to discard as a
     // summary-mode entry. We call this BEFORE nulling state so the snapshot
@@ -1372,15 +1410,19 @@ export const createAiSlice = (set, get) => ({
       narrativeGeneratedAt: null,
       narrativeSourceFingerprint: null,
     });
-    set(state => {
-      state.aiSettlement     = null;
-      state.aiDailyLife      = null;
-      state.aiDataVersion    = null;
-      state.aiSourceFingerprint = null;
-      state.showNarrative    = false;
-      state.aiPartialFailure = null;
-      state.aiError          = null;
-    });
+    // Session-view null only when the reverted save is the one on screen; the
+    // persisted raw write below happens for the TARGET save regardless.
+    if (stillActive) {
+      set(state => {
+        state.aiSettlement     = null;
+        state.aiDailyLife      = null;
+        state.aiDataVersion    = null;
+        state.aiSourceFingerprint = null;
+        state.showNarrative    = false;
+        state.aiPartialFailure = null;
+        state.aiError          = null;
+      });
+    }
     try {
       await savesService.update(saveId, { aiData });
       get().updateSavedSettlement(saveId, { aiData });

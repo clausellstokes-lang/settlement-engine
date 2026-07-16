@@ -290,7 +290,7 @@ function stripAnnotations(value) {
  * field instead of blindly `String()`-ing an object to the useless
  * '[object Object]' — and, critically, never lets a caller call `.toLowerCase()`
  * on an object and crash. Bare strings and nullish pass straight through.
- * @param {any} value
+ * @param {string | { good?: string, name?: string, label?: string } | null | undefined} value
  * @returns {string}
  */
 export function goodText(value) {

@@ -9,7 +9,6 @@
   "src/components/PricingPage.jsx",
   "src/components/PrivacySettings.jsx",
   "src/components/PurchaseModal.jsx",
-  "src/components/ServicesTogglePanel.jsx",
   "src/components/SettlementDetail.jsx",
   "src/components/StaleNarrativeModal.jsx",
   "src/components/TradeDynamicsPanel.jsx",

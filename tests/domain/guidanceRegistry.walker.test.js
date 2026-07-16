@@ -171,7 +171,14 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // text-bearing controls where an aria-label swap would clobber the accessible
   // name, so each needs per-title glossary-affordance wiring or inline-help — a
   // larger careful pass, not a mechanical swap.
-  const TITLE_BASELINE = 471;
+  // MASTER MERGE W6 RE-BASELINE 471 → 502 (the one sanctioned non-shrink move):
+  // the merge imported master-lineage surface carrying its own native titles —
+  // per-file delta verified against the RF tip (8c430c5b): UnderTheHoodTab +14,
+  // CampaignStatePanel +7, GalleryMapsSidebar +6, EngineSections +4, plus seven
+  // merge-resolved +1/+2 files, and −9 from the deleted CausalViewTabs. Every
+  // added title is CARRIED master surface, none newly authored. Shrink-only
+  // resumes from 502 — glossary-affordance migration continues over waves.
+  const TITLE_BASELINE = 502;
 
   function countTitles() {
     let n = 0;

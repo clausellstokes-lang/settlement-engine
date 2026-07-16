@@ -41,6 +41,12 @@
 -- do NOT create our old `idx_…` name (it was never applied in prod). Every refund
 -- grant carries both source='refund' and metadata->>'refund_of', so the two
 -- predicates cover the same rows — one index is enough.
+--
+-- @rollback: `drop index if exists public.ux_credit_ledger_one_refund_per_spend;`
+--   then re-create the PRIOR refund_credits from 103_service_adjust_credits.sql
+--   (net-current pre-123 definition). NOTE: that reinstates the double-refund
+--   window and re-opens execute grants this migration revoked — forward-fix
+--   first; roll back only to unblock a broken deploy, then re-apply.
 create unique index if not exists ux_credit_ledger_one_refund_per_spend
   on public.credit_ledger ((metadata->>'refund_of'))
   where source = 'refund';

@@ -95,15 +95,28 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**The current tree runs through `046_gallery_map_with_campaign.sql`.** A production
-DB that predates the analytics / map / gallery work needs the whole **036 → 046**
-set applied, in order:
+A production DB that predates the analytics / map / gallery work needs the
+later migration set applied, in lexical order — highlights of what it adds:
 
 - `036`–`040` — analytics core, settlement snapshots, rollups, cron, trends
 - `041` — system-mutation capture
 - `042`–`043` — regional NPC reports + regional propagation report
 - `044` — map-backdrop storage (bucket + RLS)
 - `045`–`046` — gallery maps + map-with-campaign share
+
+**Apply every file in `supabase/migrations/` in lexical order — do not stop at a
+remembered number.** Migration numbers grow every release, so this guide
+deliberately does NOT pin a "latest" number that would rot and cause an operator
+to under-apply.
+
+**SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
+writes and RLS (a disabled/banned account must not be able to write), **058**
+scopes `system_config` public reads, **061** locks profile moderation columns,
+and **062** closes three authz gaps (RLS on the analytics tables, drops the
+un-audited privileged `profiles`-UPDATE bypass, column-locks owner
+support-ticket edits). Migration **066** (Auth Phase 2) adds the
+server-write-only `security_answers` bcrypt table. A by-the-book operator must
+never under-apply this trust-boundary set.
 
 `db push` applies every pending migration on top of the current schema; they must
 ALL land before deploying the corresponding functions and client. Confirm what is
@@ -115,6 +128,29 @@ npx supabase db diff          # an empty diff means remote schema matches the tr
 ```
 
 ## Edge function — manual
+
+**Edge functions are the one UNGATED path to production — deploy them by hand,
+deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
+and the DB has the `applied-head.json` currency gate, but edge functions ship via a
+bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from whatever
+your **local working tree** contains. Nothing checks that CI is green, nothing checks
+the tree is clean, and — unlike the migration ledger — nothing records which commit's
+functions are live. This matters because the edge layer IS the money + auth trust
+boundary (`stripe-webhook`, `create-checkout`, `auth-recovery`). Two consequences to
+guard against by discipline:
+
+- **Deploy only from a clean tree at a pushed, CI-green commit.** Before deploying any
+  function, confirm `git status` is clean and the commit you're on is the one CI passed.
+  Deploying with local edits present ships bytes that were never tested and that no
+  reviewer saw. Note the deploying commit SHA in your deploy record (there is no
+  automated ledger to consult later).
+- **`npm run check:edge-behavior` is FAIL-OPEN on a missing toolchain.** It runs the
+  edge behavioral suite when `deno` is on `PATH`, but **exits 0 (skips) when deno is
+  absent** — so a green local run does NOT prove the edge functions were exercised.
+  Install deno so the pre-push hook actually gates them, and never treat a "skipped"
+  edge check as a pass. CI's separate `deno-tests` job is the real gate, which is
+  exactly why you must only deploy from a commit that job passed.
+  (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
 The `generate-narrative` edge function depends on the bundled
 aiGrounding contract at `supabase/functions/_shared/aiGroundingBundle.js`.
@@ -137,14 +173,22 @@ npx supabase functions deploy verify-single-dossier --no-verify-jwt
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
 npx supabase functions deploy admin-actions
+npx supabase functions deploy account-actions     # self-service account mutations (JWT-gated)
+npx supabase functions deploy verify-checkout-session  # post-checkout entitlement verification (JWT-gated)
 npx supabase functions deploy send-email
-npx supabase functions deploy ingest-events       # analytics event sink (verify_jwt default — client sends anon JWT)
-npx supabase functions deploy analytics-export    # admin analytics/trends read API
+npx supabase functions deploy ingest-events       # analytics event sink (anon by design; rate-limited)
+npx supabase functions deploy analytics-export    # cron export API (x-export-secret)
+npx supabase functions deploy log-client-error    # anonymous crash sink (sendBeacon; rate-limited)
+npx supabase functions deploy auth-recovery       # logged-out password recovery (rate-limited)
+npx supabase functions deploy og-image            # anonymous unfurl-card renderer (public projection only)
+npx supabase functions deploy pricing-resync-cron # nightly pricing resync (x-cron-secret, pg_cron)
 ```
 
-(Only `stripe-webhook` and `verify-single-dossier` set `verify_jwt = false` in
-`config.toml`; everything else keeps JWT verification on, so they deploy with no
-flag. There are 10 functions total — deploy all of them on a first cutover.)
+(`verify_jwt` is pinned EXPLICITLY per function in `config.toml` — the
+self-authenticating/anonymous set is documented in docs/abuse-model.md, and
+`scripts/deploy.sh` derives each function's `--no-verify-jwt` posture by parsing
+`config.toml`, so config and deploy can never drift.
+There are 16 functions total — deploy all of them on a first cutover.)
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:

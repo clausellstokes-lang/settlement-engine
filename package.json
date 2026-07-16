@@ -35,6 +35,8 @@
     "verify:dist": "VERIFY_DIST=1 vitest run tests/build/",
     "check": "npm run validate:data && npm run validate:migration-head && npm run validate:edge && npm run validate:map && npm run typecheck && npm run typecheck:domain:strict && npm run lint && npm run test && npm run build && npm run verify:dist",
     "check:quick": "npm run lint && npm run test",
+    "check:edge-behavior": "node scripts/check-edge-behavior.mjs",
+    "check:full": "npm run check && npm run check:edge-behavior",
     "prepare": "husky"
   },
   "dependencies": {

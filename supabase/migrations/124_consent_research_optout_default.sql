@@ -36,3 +36,9 @@ alter table public.profiles
 -- NO UPDATE statement, by design. Existing rows are not mass-flipped — see the
 -- scope note above. Explicit user choices and the client-side updatedAt
 -- provenance are the source of truth for anyone who already has a profile.
+--
+-- @rollback: restore 036's column default —
+--   `alter table public.profiles alter column telemetry_consent set default
+--    '{"essential": true, "research": false, "ai_prose": false}'::jsonb;`
+--   Default-only either way (no row rewrites), so the reversal is data-safe.
+--   The opt-out default is OWNER-RATIFIED — roll back only on owner direction.

@@ -115,27 +115,21 @@ describe('aiSlice — prototype pollution / dead code / stale banner', () => {
     delete Object.prototype.polluted; // belt-and-suspenders cleanup
   });
 
-  test('a forwarded __proto__ daily-life beat never reaches Object.prototype through the slice', async () => {
-    const store = makeStore();
-    await store.getState().requestNarrative('save.a');
-
-    // The slice refused to act on the dangerous beat — no prototype pollution,
-    // and the dangerous key never landed as an own property of aiDailyLife.
-    expect(({}).polluted).toBeUndefined();
-    expect(Object.prototype.polluted).toBeUndefined();
-    const dl = store.getState().aiDailyLife;
-    expect(Object.getPrototypeOf(dl)).toBe(Object.prototype);
-    expect(Object.prototype.hasOwnProperty.call(dl, '__proto__')).toBe(false);
-    // The clean beat still landed.
-    expect(dl).toMatchObject({ dawn: 'Dawn breaks clean.' });
-
-    delete Object.prototype.polluted; // belt-and-suspenders cleanup
-  });
-
-  test('requestDailyLife is removed from the slice (dead paid-spend action)', () => {
-    const store = makeStore();
-    expect(store.getState().requestDailyLife).toBeUndefined();
-  });
+  // LINEAGE NOTE (master merge W6): two master-only assertions removed here.
+  //
+  // (1) "a forwarded __proto__ daily-life beat never reaches Object.prototype
+  //     through the slice" asserted master's DAILY-LIFE FOLDING (requestNarrative
+  //     routing dailyLife.<beat> streams into aiDailyLife under ONE spend). This
+  //     lineage deliberately keeps TWO separate paid actions (requestNarrative +
+  //     requestDailyLife); adopting the folding changes credit economics, the
+  //     persisted ai_data shape, and the edge-function contract — OWNER-GATED
+  //     (see the master-merge owner decision queue). The proto-pollution GUARD
+  //     itself is ported and pinned by the streamed-field-path test above, which
+  //     covers the shared setNestedPath chokepoint both paths use.
+  // (2) "requestDailyLife is removed from the slice" pinned master's deletion of
+  //     the separate daily-life action. On this lineage requestDailyLife is LIVE
+  //     and wired (OutputContainer, DailyLifeTab, operationRegistry) — the
+  //     assertion contradicts the kept architecture. Dropped with this reason.
 
   test('requestProgression clears a stale aiPartialFailure banner at start', async () => {
     const store = makeStore();

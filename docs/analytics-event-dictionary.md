@@ -16,11 +16,11 @@ Props are coarse by construction — enums, bands, counts, booleans, hashes; nev
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
 - **EVENTS_REV:** 7
-- **Events:** 117 total — 113 essential, 4 research
+- **Events:** 118 total — 114 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
-## Tier 8.8 — minimum 4-event funnel
+## Minimum 4-event funnel
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -29,7 +29,7 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `SIGNUP_AFTER_ANON` | `signup_after_anon` | essential | — |
 | `PAID_AFTER_ANON` | `paid_after_anon` | essential | — |
 
-## Tier 8.9 — full schema
+## Full schema
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -52,7 +52,7 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `NEIGHBOR_PREVIEW_CLICKED` | `neighbor_preview_clicked` | essential | — |
 | `UPGRADE_AFTER_NEIGHBOR_CLICKED` | `upgrade_after_neighbor_clicked` | essential | — |
 
-## P100 / Pillar C — critique-implementation expansion
+## Critique-implementation expansion
 
 | Constant | Event | Class | Enriched props (code-derived) |
 |---|---|---|---|
@@ -67,6 +67,7 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `WELCOME_CREDIT_GRANTED` | `welcome_credit_granted` | essential | — |
 | `WELCOME_CREDIT_SPENT` | `welcome_credit_spent` | essential | — |
 | `ANON_CAP_UNLOCK_SHOWN` | `anon_cap_unlock_shown` | essential | — |
+| `ANON_CAP_UNLOCK_CLICKED` | `anon_cap_unlock_clicked` | essential | — |
 | `LOCKED_DESTINATION_SHOWN` | `locked_destination_shown` | essential | — |
 | `DOSSIER_GROUP_TAB_CLICKED` | `dossier_group_tab_clicked` | essential | — |
 | `SIMULATION_DRAWER_OPENED` | `simulation_drawer_opened` | essential | — |
