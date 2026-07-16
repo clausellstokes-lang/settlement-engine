@@ -972,6 +972,31 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ SM-4 RATIFIED + MERGED (2026-07-16 ~19:45; true merge 335d7856, zero conflicts).** The
+settlement-map endgame: the deterministic DRAW projection substrate (townMapDraw pure
+draw-ops + fixed export palette in src/design) → the PDF town-map PLATE (chapter 08C, first
+vector Svg in the PDF tree, in draft/canon variants, FaithWar-shaped self-gate) → the
+library-card THUMBNAIL (lazy IntersectionObserver + FNV-keyed in-memory cache, cap 200) →
+GALLERY OPT-IN (rides gallery_share_dm, fail-closed, renders the sanitized PUBLIC projection
+— mapEdits-stripped base layout). All four required pins present (plate render-leaf, thumb
+contract, opt-in default-off, same-seed→identical-plate-bytes). ZERO eager (closure 1,063,603,
+margin 2,797); branch gate 11,633/1 (sole red EXEMPT_CEILING); cross-ratchet interaction with
+GUIDE-2b verified on the merged tree (guidance walker 23/23; raw-color + SM-4 pins 47/47);
+FULL gate deferred to the post-DEPTH unified tip. JUDGMENTs ratified ×4 (existing-flag reuse
+over a new migration; base-layout plate; in-memory cache; palette homed in src/design).
+DEFERRALS recorded in-file: the design-§6 coupled step (cosmetic mapEdits in gallery +
+dedicated share flag + SQL-twin) and persisted thumbnail storage — both owner-gated. DURABLE
+FACTS: viewModel.js sits AT its 1043 max-lines ceiling (new PDF derivations go in
+SettlementPDF.jsx or another home); the title= census regex counts component props AND
+comment text (never write the literal token); pure export palettes belong in src/design (the
+raw-color sanctioned zone).
+**QUICKINSPECTOR MAP-HOVER: ALREADY LANDED (verified 2026-07-16).** The owner-commissioned
+wiring (4d669b32, 2026-07-14) is an ancestor of the unified lineage; PlacementsLayer pointer
+handlers + touch guard live; guard test 4/4 green. The commission is CLOSED — nothing to
+build. The map-coordinated pass therefore shrinks to ONE item: the WorldMapToolbar
+teaching-title tranche (GUIDE-2b's writer-boundary deferral) — dispatching off 335d7856.
+**A+ GAP REGISTER: STOPPED per owner ("wait stop. do that after the final review")** — the
+five-reader sweep runs AFTER the dimensions-only re-grade (task #24; script preserved).
 **TUNING-WINDOW SCOPE ADDITION (owner-confirmed intent, 2026-07-16 evening):** when the
 post-soak tuning window opens, the tunable-constants enumeration is MINTED IN THE
 KNOB-REGISTRY SHAPE (DESIGN_CONTENT_PLANE §6's build-early artifact — "one enumeration
