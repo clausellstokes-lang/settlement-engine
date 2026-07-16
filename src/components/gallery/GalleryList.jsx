@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Image as ImageIcon, Sparkles, X } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 import {
   BLUE,
   BLUE_BG,
@@ -71,6 +73,10 @@ export default function GalleryList({
   // A filtered-empty result (active facets or a search term) is a recoverable
   // dead-end; a never-published gallery is not. Drives the empty-state branch.
   const isFiltered = activeFilterCount(filters) > 0 || !!search.trim();
+  // content-immersion-r2-3: the registered gallery_empty_invitation whisper —
+  // the empty-gallery community-voice sentence is dismissible through the unified
+  // sf:guidance store (the forge CTA below always stays).
+  const [invited, setInvited] = useState(() => !isGuidanceDismissed('gallery_empty_invitation'));
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
@@ -148,9 +154,18 @@ export default function GalleryList({
                   offers the forge next-step. Branch both copy and action on the
                   filter state. */}
               <ImageIcon size={26} color={GOLD} style={{ justifySelf: 'center' }} />
-              <p style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic' }}>
-                {isFiltered ? t('gallery.emptyFilteredBody') : t('gallery.emptyBody')}
-              </p>
+              {(isFiltered || invited) && (
+                <p style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, fontStyle: 'italic', display: 'flex', alignItems: 'flex-start', gap: 6, justifyContent: 'center' }}>
+                  <span>{isFiltered ? t('gallery.emptyFilteredBody') : t('gallery.emptyBody')}</span>
+                  {!isFiltered && (
+                    <Button
+                      variant="ghost" size="sm" icon={<X size={11} />}
+                      aria-label="Dismiss the gallery invitation"
+                      onClick={() => { markGuidanceDismissed('gallery_empty_invitation'); setInvited(false); }}
+                    />
+                  )}
+                </p>
+              )}
               {isFiltered ? (
                 <Button
                   variant="secondary"

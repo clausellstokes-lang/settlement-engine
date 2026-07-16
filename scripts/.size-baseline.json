@@ -1,0 +1,16 @@
+{
+  "_comment": "Frozen per-file max-lines ceilings \u2014 the size-ratchet baseline (code-quality-architecture-1 + -3). SINGLE SOURCE OF TRUTH: eslint.config.js generates a per-file `max-lines` override from each entry (replacing the old `max-lines: off` grandfathers, which allowed UNBOUNDED growth \u2014 pulseKernel grew +28% before this froze it), and tests/lint/sizeBaseline.test.js keeps this map HONEST. Every value is the file's CURRENT effective line count (eslint max-lines, skipBlankLines+skipComments) frozen 2026-07-16. SHRINK-ONLY: to shrink a file, LOWER its number here (the win is then locked); a file that grows past its number REDS eslint; a file that falls under its LAYER ceiling (600 components/src-root-jsx, 800 everywhere else) must have its entry DELETED (the house test demands it). Never RAISE a number and never ADD a file without a decomposition-is-infeasible reason \u2014 these are burn-down candidates, not a licence to grow. Keys are repo-relative paths. This _comment key is ignored by both consumers.",
+  "src/App.jsx": 732,
+  "src/domain/display/causeConjunctionRoleContent.js": 3890,
+  "src/domain/explanation.js": 827,
+  "src/domain/worldPulse/applyWorldPulse.js": 948,
+  "src/domain/worldPulse/npcAgency.js": 833,
+  "src/domain/worldPulse/pulseKernel.js": 1410,
+  "src/domain/worldPulse/warDeployment.js": 1134,
+  "src/generators/historyGenerator.js": 883,
+  "src/generators/narrativeGenerator.js": 905,
+  "src/generators/npcGenerator.js": 1498,
+  "src/pdf/lib/viewModel.js": 1041,
+  "src/store/aiSlice.js": 941,
+  "src/store/settlementSlice.js": 1345
+}

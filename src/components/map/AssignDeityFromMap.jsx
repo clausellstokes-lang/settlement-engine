@@ -21,15 +21,16 @@
  */
 
 import { useMemo } from 'react';
-import { Sun, Swords, Lock } from 'lucide-react';
+import { Sun, Swords, ArrowRight } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import DeityAssignmentPanel from '../settlement/DeityAssignmentPanel.jsx';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SP, SECOND, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, R, SP, SECOND, sans } from '../theme.js';
 
-// The documented FOLLOW-UP steering interventions — surfaced as disabled chips so
-// the DM knows they're coming, never as half-wired controls (plan decision 7).
-const COMING_SOON = ['Declare War', 'Force Siege', 'Trigger Trade War', 'Sue for Peace'];
+// components-map-4: the war/diplomacy steering verbs SHIPPED with W-COMPOSER-2 —
+// they now live in Realm Orders (the World Pulse composer). This surface points
+// the DM there instead of the stale "coming soon" that outlived the wave.
+const NOW_IN_ORDERS = ['Declare War', 'Force Siege', 'Trigger Trade War', 'Sue for Peace'];
 
 /**
  * @param {Object} props
@@ -102,26 +103,24 @@ export default function AssignDeityFromMap({ campaign }) {
         </>
       )}
 
-      {/* ── Documented follow-up: the other steering interventions ────────── */}
+      {/* ── War & diplomacy steering: SHIPPED — now in Realm Orders ────────── */}
       <div style={{
-        border: `1px dashed ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: SP.sm,
+        border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: SP.sm,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, color: SECOND, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850 }}>
           <Swords size={12} /> War &amp; diplomacy steering
-          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 3, color: MUTED }}>
-            <Lock size={10} /> Coming soon
+          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 3, color: GOLD }}>
+            Now in Realm Orders <ArrowRight size={11} />
           </span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
-          {COMING_SOON.map(label => (
+          {NOW_IN_ORDERS.map(label => (
             <span
               key={label}
-              aria-disabled="true"
-              title="Read-only Realm. War and diplomacy steering is a documented follow-up"
+              title="Available in Realm Orders (the World Pulse composer) — staged, previewed, and undoable."
               style={{
                 padding: '3px 8px', border: `1px solid ${BORDER2}`, borderRadius: R.sm,
-                background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
-                opacity: 0.65, cursor: 'not-allowed',
+                background: CARD, color: INK, fontFamily: sans, fontSize: FS.micro, fontWeight: 800,
               }}
             >
               {label}
@@ -129,8 +128,8 @@ export default function AssignDeityFromMap({ campaign }) {
           ))}
         </div>
         <p style={{ margin: '6px 0 0', color: BODY, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.4 }}>
-          The Realm is read-only first. War and diplomacy steering arrives in a
-          later pass, fully undoable.
+          These orders now live in <strong>Realm Orders</strong>, in the World Pulse panel —
+          each one staged, previewed against the forecast, and fully undoable before it lands.
         </p>
       </div>
     </div>

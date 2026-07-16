@@ -32,6 +32,8 @@ import {
   GUIDANCE_REGISTRY_LAZY_SENTINEL,
   LEGACY_GUIDANCE_COMPONENTS,
   LEGACY_GUIDANCE_CEILING,
+  UNWIRED_WHISPERS,
+  UNWIRED_WHISPERS_CEILING,
   whispersForSurface,
   isWhisperEligible,
   selectWhisper,
@@ -82,18 +84,65 @@ describe('guidance walker — every whisper resolves to copy + a mounted surface
     }
   });
 
-  it('every whisper host component file exists on disk (the surface is really mounted)', () => {
-    const componentFiles = new Set();
+  // ── the MOUNTED check (domain-region-dossier-guidance-2) ──────────────────
+  // file-exists ≠ RENDERS. The old check only proved the host .jsx exists. This
+  // content-scans each whisper's host for real guidance integration: the host must
+  // IMPORT the guidance registry (or lib/guidance) AND reference a selection call
+  // (selectWhisper / whisperById / whispersForSurface / GUIDANCE_REGISTRY / …) OR the
+  // whisper's own id / body key / surface literal. A whisper whose host does neither
+  // is UNWIRED — it must be on the UNWIRED_WHISPERS allowlist (which W-R2-SURFACE
+  // empties as it wires each host), never silently green.
+  const hostPathByName = (() => {
+    const map = new Map();
     (function walk(dir) {
       for (const ent of readdirSync(dir, { withFileTypes: true })) {
         const p = join(dir, ent.name);
         if (ent.isDirectory()) walk(p);
-        else if (ent.name.endsWith('.jsx')) componentFiles.add(ent.name.replace(/\.jsx$/, ''));
+        else if (ent.name.endsWith('.jsx')) map.set(ent.name.replace(/\.jsx$/, ''), p);
       }
     })(join(SRC, 'components'));
+    return map;
+  })();
+  const stripComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+  const IMPORTS_GUIDANCE = /from ['"][^'"]*guidance(Registry)?(\.js)?['"]/;
+  const SELECTION = /selectWhisper|whisperById|whispersForSurface|deriveGuidance|GUIDANCE_REGISTRY|isWhisperEligible/;
+  function hostIsWired(w) {
+    const host = hostPathByName.get(w.component);
+    if (!host) return false;
+    const src = stripComments(readFileSync(host, 'utf8'));
+    if (!IMPORTS_GUIDANCE.test(src)) return false;
+    return SELECTION.test(src) || src.includes(w.id) || src.includes(w.body) || src.includes(`'${w.surface}'`);
+  }
+
+  it('every whisper host component file exists on disk', () => {
     for (const comp of registeredComponents()) {
-      expect(componentFiles.has(comp), `host component ${comp} must exist as a .jsx file`).toBe(true);
+      expect(hostPathByName.has(comp), `host component ${comp} must exist as a .jsx file`).toBe(true);
     }
+  });
+
+  it('every whisper actually RENDERS via its host (guidance-integrated), or is on the UNWIRED allowlist', () => {
+    const unwired = new Set(UNWIRED_WHISPERS);
+    const silentlyDead = GUIDANCE_WHISPERS.filter((w) => !unwired.has(w.id) && !hostIsWired(w));
+    expect(
+      silentlyDead.map((w) => `${w.id} (host ${w.component})`),
+      'whisper(s) whose host does not consume the guidance registry — wire the host (import + a selection call) ' +
+        'or add the id to UNWIRED_WHISPERS (W-R2-SURFACE burns it down):',
+    ).toEqual([]);
+  });
+
+  it('the UNWIRED allowlist carries no stale entry — every listed id is a real whisper AND genuinely unwired', () => {
+    const byId = new Map(GUIDANCE_WHISPERS.map((w) => [w.id, w]));
+    const stale = [];
+    for (const id of UNWIRED_WHISPERS) {
+      const w = byId.get(id);
+      if (!w) { stale.push(`${id}: not a registered whisper (remove it)`); continue; }
+      if (hostIsWired(w)) stale.push(`${id}: host ${w.component} IS now guidance-wired — remove it from UNWIRED_WHISPERS (SURFACE burn-down)`);
+    }
+    expect(stale).toEqual([]);
+  });
+
+  it('UNWIRED_WHISPERS never grows past its committed ceiling (shrink-only, SURFACE empties it)', () => {
+    expect(UNWIRED_WHISPERS.length).toBeLessThanOrEqual(UNWIRED_WHISPERS_CEILING);
   });
 
   it('a whisper with a glossaryRef names a string anchor', () => {
@@ -106,15 +155,26 @@ describe('guidance walker — every whisper resolves to copy + a mounted surface
 // ── (a′) the source census both directions ──────────────────────────────────
 
 describe('guidance census — every instructional component is registered or on the shrink-only legacy ledger', () => {
-  /** Scan src/components for instructional-UI component files by name pattern. */
+  /**
+   * Census of instructional-UI components (domain-region-dossier-guidance-2): WIDENED
+   * from a filename-only regex (which missed most instructional components — an
+   * instructional file need not be named *Coach/*Hint/*Popover) to a CONTENT scan.
+   * A component is instructional if its NAME matches the teaching-suffix pattern OR
+   * its SOURCE imports the guidance registry / lib guidance (i.e. it consumes the
+   * guidance system). Both classes must be a registered host or on the legacy ledger.
+   */
   function instructionalComponents() {
     const found = new Set();
-    const rx = /(Coach|Tour|Callout|Hint|Popover)\.jsx$/;
+    const nameRx = /(Coach|Tour|Callout|Hint|Popover)\.jsx$/;
+    const importsGuidance = /from ['"][^'"]*(guidance(Registry)?|lib\/guidance)(\.js)?['"]/;
     (function walk(dir) {
       for (const ent of readdirSync(dir, { withFileTypes: true })) {
         const p = join(dir, ent.name);
-        if (ent.isDirectory()) walk(p);
-        else if (rx.test(ent.name)) found.add(ent.name.replace(/\.jsx$/, ''));
+        if (ent.isDirectory()) { walk(p); continue; }
+        if (!ent.name.endsWith('.jsx')) continue;
+        const base = ent.name.replace(/\.jsx$/, '');
+        if (nameRx.test(ent.name)) { found.add(base); continue; }
+        if (importsGuidance.test(readFileSync(p, 'utf8'))) found.add(base);
       }
     })(join(SRC, 'components'));
     return [...found];

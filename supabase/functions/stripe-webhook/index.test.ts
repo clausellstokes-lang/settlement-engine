@@ -1525,7 +1525,12 @@ Deno.test('a refund of a single_dossier charge claws back the entitlement AND po
 // is_founder seat (founder_seats_taken counts it), downgrade premium, and claw the
 // 30-credit bonus — none of which happened before. The refunded charge's checkout
 // SESSION id is matched against the buyer via its founder_grant ledger row.
-function makeFounderStub(founderSessionId = 'cs_founder') {
+function makeFounderStub(
+  founderSessionId = 'cs_founder',
+  // W-R2-TRUST backend-functions-1: inject a transient failure into a POST-CLAIM
+  // step. Defaults are null (all steps succeed) so existing callers are unchanged.
+  inject: { downgrade?: { message: string } | null; auth?: { message: string } | null; adjust?: { message: string } | null } = {},
+) {
   const state = { isFounder: true };
   const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
   const authUpdates: Array<{ id: string; attrs: Record<string, unknown> }> = [];
@@ -1570,14 +1575,14 @@ function makeFounderStub(founderSessionId = 'cs_founder') {
     return q;
   };
   const client = {
-    auth: { admin: { updateUserById: (id: string, attrs: Record<string, unknown>) => { authUpdates.push({ id, attrs }); return Promise.resolve({ error: null }); } } },
+    auth: { admin: { updateUserById: (id: string, attrs: Record<string, unknown>) => { authUpdates.push({ id, attrs }); return Promise.resolve({ error: inject.auth ?? null }); } } },
     from,
     rpc: (fn: string, args: Record<string, unknown>) => {
       rpc.push({ fn, args });
       if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false, reason: 'no_granted_referral' }, error: null });
       if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
-      if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: { ok: true }, error: null });
-      if (fn === 'service_adjust_credits') return Promise.resolve({ data: { prev: 30, next: 0, delta: -30 }, error: null });
+      if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: inject.downgrade ? null : { ok: true }, error: inject.downgrade ?? null });
+      if (fn === 'service_adjust_credits') return Promise.resolve({ data: inject.adjust ? null : { prev: 30, next: 0, delta: -30 }, error: inject.adjust ?? null });
       return Promise.resolve({ data: null, error: null });
     },
   };
@@ -1609,6 +1614,50 @@ Deno.test('a refunded founder_lifetime charge reverses is_founder, premium, and 
   assertEquals(adj!.args.reason, 'founder_clawback:cs_founder');
   assertEquals(stub.authUpdates.length, 1);
   assertEquals(stub.authUpdates[0].attrs, { user_metadata: { tier: 'free', is_founder: false } });
+});
+
+// W-R2-TRUST (backend-functions-1): POST-CLAIM failure posture. Once is_founder
+// is claimed (flipped true→false), a thrown error would release the Stripe event
+// claim, but the redelivery finds is_founder already false and no-ops — so a
+// throwing downgrade/auth/credit step would permanently strand a refunded founder
+// at tier=premium with the bonus intact. Each post-claim step must therefore LOG,
+// not throw, and must not abort the steps after it.
+Deno.test('founder clawback: a transient DOWNGRADE failure is logged, not thrown — the auth + credit steps still run', async () => {
+  const stub = makeFounderStub('cs_founder', { downgrade: { message: 'transient downgrade boom' } });
+  const body = founderRefund('evt_founder_refund_downgrade_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  // The webhook COMPLETES (200) — the claim is not released into a futile redelivery.
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                                     // seat still freed (the claim)
+  assertEquals(stub.rpc.filter((c) => c.fn === 'handle_premium_downgrade').length, 1); // attempted (failed transiently)
+  assertEquals(stub.authUpdates.length, 1);                                      // auth STILL ran after the downgrade failure
+  assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal STILL ran
+});
+
+Deno.test('founder clawback: a transient AUTH failure is logged, not thrown — the credit reversal still runs', async () => {
+  const stub = makeFounderStub('cs_founder', { auth: { message: 'transient auth boom' } });
+  const body = founderRefund('evt_founder_refund_auth_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.authUpdates.length, 1);
+  assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), true);   // credit reversal ran after the auth failure
+});
+
+Deno.test('founder clawback: a transient CREDIT-reversal failure is logged, not thrown — the webhook completes', async () => {
+  const stub = makeFounderStub('cs_founder', { adjust: { message: 'transient adjust boom' } });
+  const body = founderRefund('evt_founder_refund_adjust_fail');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);                                                 // resolves despite the adjust error
+  assertEquals(stub.rpc.filter((c) => c.fn === 'service_adjust_credits').length, 1);
 });
 
 Deno.test('a redelivered founder refund is idempotent: no second downgrade or credit clawback', async () => {

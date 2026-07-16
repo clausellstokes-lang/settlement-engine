@@ -19,7 +19,7 @@ import { describe, expect, test } from 'vitest';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { normalizeForDormancy } from './religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 // Structural scan: collect every object key appearing anywhere in a value tree
 // (local twin of the religionDormancy helper, which is not exported).

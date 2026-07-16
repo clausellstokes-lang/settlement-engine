@@ -9,8 +9,9 @@ commands run with your Supabase + Stripe credentials.
 
 After pushing to `origin/master`:
 
-1. **CI**: `.github/workflows/ci.yml` runs the check gate (validate data/edge/map
-   → typecheck → lint → ~4,480 tests → build). Watch:
+1. **CI**: `.github/workflows/ci.yml` runs the same `npm run check` gate you run
+   locally (validate data/migration-head/edge/map → typecheck [full + domain-strict]
+   → lint → the full test suite → build → verify:dist). Watch:
    <https://github.com/clausellstokes-lang/settlement-engine/actions>
 
 2. **Vercel auto-deploy**: triggers on push to master. `vercel.json`
@@ -95,14 +96,16 @@ npx supabase db push
 npx supabase db diff
 ```
 
-A production DB that predates the analytics / map / gallery work needs the
-later migration set applied, in lexical order — highlights of what it adds:
-
-- `036`–`040` — analytics core, settlement snapshots, rollups, cron, trends
-- `041` — system-mutation capture
-- `042`–`043` — regional NPC reports + regional propagation report
-- `044` — map-backdrop storage (bucket + RLS)
-- `045`–`046` — gallery maps + map-with-campaign share
+**SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
+writes and RLS (a disabled/banned account must not be able to write), **058**
+scopes `system_config` public reads, **061** locks profile moderation columns,
+and **062** closes three authz gaps (RLS on the analytics tables, drops the
+un-audited privileged `profiles`-UPDATE bypass, column-locks owner
+support-ticket edits). Migration **066** (Auth Phase 2) adds the
+server-write-only `security_answers` bcrypt table. **128–130** strip the latent
+pantheon from every public projection, **135** revokes the PUBLIC grant on the
+role/tier RPC, and **136** lifts the world-snapshot deny census. A by-the-book
+operator must never under-apply this trust-boundary set.
 
 **Apply every file in `supabase/migrations/` in lexical order — do not stop at a
 remembered number.** Migration numbers grow every release, so this guide
@@ -112,22 +115,36 @@ to under-apply.
 **SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
 writes and RLS (a disabled/banned account must not be able to write), **058**
 scopes `system_config` public reads, **061** locks profile moderation columns,
-and **062** closes three authz gaps (RLS on the analytics tables, drops the
-un-audited privileged `profiles`-UPDATE bypass, column-locks owner
-support-ticket edits). Migration **066** (Auth Phase 2) adds the
-server-write-only `security_answers` bcrypt table. A by-the-book operator must
-never under-apply this trust-boundary set.
+and **062** closes three authz gaps. Migration **066** adds the server-write-only
+`security_answers` bcrypt table. **128–130** strip the latent pantheon from every
+public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
+**136** lifts the world-snapshot deny census. A by-the-book operator must never
+under-apply this trust-boundary set.
 
-`db push` applies every pending migration on top of the current schema; they must
-ALL land before deploying the corresponding functions and client. Confirm what is
-applied vs pending (don't assume):
+**Current migration head: `136_world_snapshot_deny_census_lift.sql`** (this filename is kept
+current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
+head from `supabase/migrations/` and fails the gate if this line drifts).
+
+Do **not** hand-count from a fixed starting migration — `db push` applies EVERY
+pending migration on top of the current schema, in order, and self-corrects
+regardless of how far behind prod is. They must ALL land before deploying the
+corresponding functions and client. Confirm applied vs pending (don't trust any
+number written here — ask the tooling):
 
 ```bash
-npx supabase migration list   # applied (local + remote) vs pending
+npx supabase migration list   # applied (local + remote) vs pending — the authority
 npx supabase db diff          # an empty diff means remote schema matches the tree
 ```
 
-## Edge function — manual
+**Is prod actually at head?** Two in-repo checks answer this:
+
+- `npm run validate:migration-head` reads the checked-in applied-head ledger
+  (`supabase/applied-head.json`) and warns when prod is behind the repo head — the
+  documented-normal commit→deploy window. Bump `appliedHead` only *after* a
+  successful `db push`.
+- The live probe: `SUPABASE_MIGRATION_HEAD=<live head number> npm run
+  validate:migration-head` compares the live DB head against the repo head and
+  fails hard on a mismatch (use it in the deploy pipeline, where a live DB exists).
 
 **Edge functions are the one UNGATED path to production — deploy them by hand,
 deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
@@ -152,6 +169,10 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
+There are 16 functions total — deploy all of them on a first cutover.
+
+## Edge function — manual
+
 The `generate-narrative` edge function depends on the bundled
 aiGrounding contract at `supabase/functions/_shared/aiGroundingBundle.js`.
 **Rebuild it BEFORE deploying** if anything under `src/domain/` has
@@ -163,32 +184,41 @@ npm run build:edge-shared
 npm test -- tests/edgeFunctions/aiGroundingBundle.freshness.test.js
 ```
 
-Deploy each function:
+Deploy them. **The canonical path is `bash scripts/deploy.sh` (Step 5)** — it
+auto-discovers every `supabase/functions/*` directory (skipping `_shared`) and
+derives each one's `--no-verify-jwt` flag from `config.toml`, so a newly-added
+function can never be silently left undeployed and the platform JWT gate can never
+drift from config. To deploy by hand, mirror what the script derives — the nine
+self-authenticating functions get `--no-verify-jwt`, the seven authenticated ones
+get no flag:
 
 ```bash
-npx supabase functions deploy stripe-webhook --no-verify-jwt   # Stripe posts a signature, NOT a JWT (also pinned in config.toml)
+# verify_jwt = false (self-authenticating — signature, shared secret, or anon path):
+npx supabase functions deploy stripe-webhook --no-verify-jwt          # Stripe posts a signature, not a JWT
+npx supabase functions deploy verify-single-dossier --no-verify-jwt   # Stripe session id, not auth
+npx supabase functions deploy ingest-events --no-verify-jwt           # anonymous analytics sink
+npx supabase functions deploy log-client-error --no-verify-jwt        # anonymous crash-report sink
+npx supabase functions deploy analytics-export --no-verify-jwt        # x-export-secret shared secret (cron)
+npx supabase functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-secret shared secret (nightly)
+npx supabase functions deploy send-email --no-verify-jwt              # per-template self-auth + anon cap-warning
+npx supabase functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
+npx supabase functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
+# verify_jwt = true (require an authenticated user — no flag):
 npx supabase functions deploy create-checkout
-npx supabase functions deploy create-customer-portal           # "Manage subscription" billing portal
-npx supabase functions deploy verify-single-dossier --no-verify-jwt
+npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
+npx supabase functions deploy create-customer-portal                  # "Manage subscription" billing portal
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
+npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
-npx supabase functions deploy account-actions     # self-service account mutations (JWT-gated)
-npx supabase functions deploy verify-checkout-session  # post-checkout entitlement verification (JWT-gated)
-npx supabase functions deploy send-email
-npx supabase functions deploy ingest-events       # analytics event sink (anon by design; rate-limited)
-npx supabase functions deploy analytics-export    # cron export API (x-export-secret)
-npx supabase functions deploy log-client-error    # anonymous crash sink (sendBeacon; rate-limited)
-npx supabase functions deploy auth-recovery       # logged-out password recovery (rate-limited)
-npx supabase functions deploy og-image            # anonymous unfurl-card renderer (public projection only)
-npx supabase functions deploy pricing-resync-cron # nightly pricing resync (x-cron-secret, pg_cron)
 ```
 
-(`verify_jwt` is pinned EXPLICITLY per function in `config.toml` — the
-self-authenticating/anonymous set is documented in docs/abuse-model.md, and
-`scripts/deploy.sh` derives each function's `--no-verify-jwt` posture by parsing
-`config.toml`, so config and deploy can never drift.
-There are 16 functions total — deploy all of them on a first cutover.)
+There are **16 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
+and seven `verify_jwt = true` postures above are pinned in `config.toml`, the
+single source of truth `deploy.sh` parses. The freshness pin
+(`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
+stops being named here.
 
 Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:
@@ -233,7 +263,7 @@ Copy the signing secret into `STRIPE_WEBHOOK_SECRET` (above).
 Run locally before pushing:
 
 ```bash
-npm run check        # validate-data + typecheck + lint + tests + build
+npm run check        # the full 10-step gate (validate → typecheck → lint → test → build → verify:dist)
 npm run build:edge-shared   # regenerate bundle if src/domain/ changed
 ```
 

@@ -244,6 +244,11 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // mutation during a running multi-tick advance would be reverted by its
     // Phase-2 commit (which replaces worldState wholesale).
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // Parked-pause guard (store-hooks-state-3): a PAUSED-mid-interval campaign is
+    // not idle — resolveIntervalMajors re-commits worldState wholesale from the
+    // paused cursor's PRE-tick snapshot on resume, so a canonize written now is
+    // silently reverted. Same defense the pulse mutators + advance take.
+    if (get().getPausedAdvance(campaignId)) return null;
     // §1.3 realm-shape telemetry loads lazily (kept out of the first-paint closure) —
     // resolved BEFORE set() so it can flatten the draft regionalGraph to plain enums/
     // bands inside the Immer producer. Best-effort: a chunk-load failure never breaks
@@ -310,6 +315,10 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // Advance-concurrency guard — a spatial canonize is a worldState mutation, so
     // it is blocked mid-advance for the same reason the other pulse mutators are.
     if (get().isAdvanceInFlight(campaignId)) return { ok: false, reason: 'advance_in_flight' };
+    // Parked-pause guard (store-hooks-state-3): a paused-mid-interval campaign
+    // re-commits worldState wholesale on resume, so a spatial canonize (and its
+    // spatialCanonVersion bump) written into the parked window is silently lost.
+    if (get().getPausedAdvance(campaignId)) return { ok: false, reason: 'advance_paused' };
     const state = get();
     const campaign = findActiveCampaign(state.campaigns, campaignId);
     if (!campaign) return { ok: false, reason: 'not_found' };
@@ -332,6 +341,12 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // edited mid-advance would be silently reverted by the Phase-2 commit (the
     // running interval computed from the OLD rules), so block the write instead.
     if (get().isAdvanceInFlight(campaignId)) return null;
+    // Parked-pause guard (store-hooks-state-3): a paused-mid-interval campaign is
+    // NOT idle — resume re-commits worldState (incl. its simulationRules +
+    // rulesetLog) wholesale from the paused cursor, so a rules edit written now,
+    // its rulesetLog receipt, and its wizard-news line all vanish on resume. The
+    // rulesEditBlocked UI gate mirrors this; this is the store backstop.
+    if (get().getPausedAdvance(campaignId)) return null;
     // CL-0: the merge/canonicalize/diff/receipt work is pure and rides the lazy
     // profile-tools chunk (loaded BEFORE set(), used synchronously inside it).
     const { prepareRulesUpdate } = await loadProfileTools();

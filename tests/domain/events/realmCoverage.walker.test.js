@@ -126,7 +126,15 @@ describe('realm coverage walker (parked shapes → realm manifest, fail-closed)'
             expect(n).toBeLessThanOrEqual(d.max ?? 1);
           }
         }
-        if (d.kind === 'enum') expect(d.options.length).toBeGreaterThanOrEqual(1);
+        if (d.kind === 'enum') {
+          expect(d.options.length).toBeGreaterThanOrEqual(1);
+          // composer-realm-verbs-1: NO placeholder-only dial. Every enum option must
+          // be a real, apply-resolvable value — never a '__live__'-style sentinel that
+          // stages a value the apply arm cannot resolve (the FORCE_RECONSIDERATION bug).
+          for (const opt of d.options) {
+            expect(String(opt).startsWith('__'), `${v.verb}.${d.key} carries a placeholder option '${opt}'`).toBe(false);
+          }
+        }
       }
       // The predicate SHAPE is feasibilityGate's: verdict + WHY + unlocks —
       // total over an empty world (never throws on a dark campaign).

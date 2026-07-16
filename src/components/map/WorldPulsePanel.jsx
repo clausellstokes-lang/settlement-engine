@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -30,10 +30,44 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   const dismissProposal = useStore(s => s.dismissWorldPulseProposal);
   const canonizeCampaignWorld = useStore(s => s.canonizeCampaignWorld);
   const recordPartyImpact = useStore(s => s.recordPartyImpact);
+  // experience-product-fit-1: the resume-with-verdicts action. The store action
+  // already accepts a per-major `decisions` map (dismissed ⇒ excluded; unset ⇒
+  // recommended); the pause surface below is what finally collects it.
+  const resolveIntervalMajors = useStore(s => s.resolveIntervalMajors);
   const [namingStressorId, setNamingStressorId] = useState(null);
   const [busyProposalId, setBusyProposalId] = useState(null);
   const [canonBusy, setCanonBusy] = useState(false);
   const [actionError, setActionError] = useState(null);
+  // The majors the DM has toggled to DISMISS on the paused fork (Set of ids).
+  const [dismissedMajorIds, setDismissedMajorIds] = useState(() => new Set());
+  const [resumeBusy, setResumeBusy] = useState(false);
+  const campaignId = campaign?.id;
+  const toggleDismissMajor = useCallback((id) => {
+    setDismissedMajorIds(prev => {
+      const next = new Set(prev);
+      if (next.has(String(id))) next.delete(String(id)); else next.add(String(id));
+      return next;
+    });
+  }, []);
+  const submitVerdicts = useCallback(async () => {
+    if (resumeBusy || !campaignId) return;
+    setResumeBusy(true);
+    setActionError(null);
+    try {
+      const decisions = {};
+      for (const id of dismissedMajorIds) decisions[String(id)] = { decision: 'dismissed' };
+      const result = await resolveIntervalMajors(campaignId, decisions);
+      if (result && result.ok === false) {
+        setActionError('The realm could not continue. Try again in a moment.');
+      } else {
+        setDismissedMajorIds(new Set());
+      }
+    } catch (err) {
+      setActionError(`Resume failed: ${err?.message || err}`);
+    } finally {
+      setResumeBusy(false);
+    }
+  }, [resumeBusy, campaignId, dismissedMajorIds, resolveIntervalMajors]);
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
 
@@ -53,6 +87,8 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   // while paused; gate the affordances here too so the buttons don't invite a write
   // that vanishes. The DM resolves/undoes the pause (elsewhere) before acting.
   const paused = !!worldState.pausedAdvance;
+  // experience-product-fit-1: the batched majors the paused advance is waiting on.
+  const pendingMajors = paused ? (worldState.pausedAdvance?.pendingMajors || []) : [];
   const pending = (worldState.proposals || []).filter(proposal => proposal.status === 'pending');
   const pulseHistory = worldState.pulseHistory || [];
   const latestPulse = pulseHistory[pulseHistory.length - 1] || null;
@@ -263,8 +299,48 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           )}
           {paused && (
-            <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
-              The realm is mid-advance, paused for your decisions. Resume or undo the advance before applying, dismissing, or naming — changes made now would be undone when it resumes.
+            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, borderRadius: 8, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
+                The advance paused for your word. {pendingMajors.length > 0
+                  ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict — keep each (it applies as recommended) or dismiss it — then resume the interval.`
+                  : 'Resume or undo the advance to continue. Applying, dismissing, or naming here would be undone on resume.'}
+              </div>
+              {pendingMajors.map((major) => {
+                const id = String(major?.id ?? '');
+                const dismissed = dismissedMajorIds.has(id);
+                return (
+                  <OutcomeCard
+                    key={id}
+                    title={major.headline || major.outcome?.headline || 'A major turn awaits your word'}
+                    summary={major.summary || major.outcome?.summary || ''}
+                    severity={typeof major.severity === 'number' ? major.severity : 0.8}
+                    reasons={major.reasons || major.outcome?.reasons || []}
+                    details={proposalDetails(major.outcome || major)}
+                    involved={involvedEntities(major, nameById)}
+                    tone={dismissed ? 'normal' : 'major'}
+                    actions={(
+                      <SmallButton
+                        tone={dismissed ? 'danger' : 'good'}
+                        onClick={() => toggleDismissMajor(id)}
+                        disabled={resumeBusy}
+                      >
+                        {dismissed ? <><XCircle size={13} /> Dismissed</> : <><CheckCircle2 size={13} /> Keep</>}
+                      </SmallButton>
+                    )}
+                  />
+                );
+              })}
+              <SmallButton
+                tone="good"
+                onClick={submitVerdicts}
+                disabled={resumeBusy}
+              >
+                <Clock3 size={13} /> {resumeBusy
+                  ? 'Resuming'
+                  : dismissedMajorIds.size > 0
+                    ? `Resume with your verdicts (${dismissedMajorIds.size} dismissed)`
+                    : 'Resume with recommendations'}
+              </SmallButton>
             </div>
           )}
           {pending.length > 0 && proposalNote && (

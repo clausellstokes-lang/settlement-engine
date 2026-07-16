@@ -17,20 +17,18 @@ import { GOLD, INK, INK_DEEP, BORDER, CARD, serif_, SP, R, FS } from './theme.js
 import { t } from '../copy/index.js';
 import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
-import useIsMobile from '../hooks/useIsMobile.js';
+import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 
-export default function AuthModal({ onClose }) {
-  // Read the shared reactive viewport flag (updates on resize + rotate) so the
-  // mobile scroll-bound applies wherever the modal is mounted, not only when a
-  // caller happens to thread an isMobile prop.
-  const isMobile = useIsMobile();
+export default function AuthModal({ onClose, isMobile = false }) {
+  // Real focus management (trap Tab, dismiss on Escape, restore focus) —
+  // replaces the hand-rolled backdrop role=button/onKeyDown idiom, whose
+  // Enter/Space-closes handler bubbled up from the form and silently dismissed
+  // the modal mid-sign-in (hiding auth errors) and blocked space in passphrases.
+  const dialogRef = useDialogFocusTrap(true, onClose);
   return (
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click-to-close; keyboard dismissal (Escape) is handled by useDialogFocusTrap.
     <div
       onClick={onClose}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClose(); }}
-      role="button"
-      tabIndex={0}
-      aria-label={t('common.close')}
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
         background: 'rgba(0,0,0,0.6)',
@@ -38,10 +36,13 @@ export default function AuthModal({ onClose }) {
         backdropFilter: 'blur(4px)',
       }}
     >
-      {/* Propagation guard only: stops a click inside the card from bubbling to the backdrop's close handler — not a real interaction, so no keyboard handler is warranted. */}
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */}
+      {/* Propagation guard only: stops clicks/keys inside the card from bubbling to the backdrop's close handler — not real interactivity. */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <div
+        ref={dialogRef}
+        tabIndex={-1}
         onClick={e => e.stopPropagation()}
+        onKeyDown={e => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
         aria-labelledby="auth-modal-title"

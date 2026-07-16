@@ -29,27 +29,18 @@ import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import Stripe from 'https://esm.sh/stripe@14.14.0?target=deno';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.108.2';
 import { botGuard } from '../_shared/requestMeta.ts';
+import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 
 const defaultStripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
+// CORS: fail-closed via the shared allowlist (_shared/cors.ts). This replaces the
+// legacy inline allowlist whose missing-Origin fallback emitted a wildcard ACAO —
+// the exact leak the shared module exists to kill, and the last per-function copy
+// still carrying it (round-1 backend-5 / backend-functions-2). The shared module
+// never emits a wildcard: it pins a disallowed/missing origin to the first allowed
+// host and adds Allow-Credentials, matching every sibling.
 function corsHeaders(req: Request) {
-  const configured = Deno.env.get('CLIENT_URL') || '';
-  const allowed = [
-    configured,
-    'https://settlementforge.com',
-    'https://www.settlementforge.com',
-    'https://settlementwork.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:3000',
-  ].filter(Boolean);
-  const origin = req.headers.get('Origin') || '';
-  const accepted = !origin || allowed.includes(origin);
-  return {
-    'Access-Control-Allow-Origin': accepted ? (origin || '*') : allowed[0],
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    ...(accepted ? { Vary: 'Origin' } : {}),
-  };
+  return sharedCorsHeaders(req, { methods: 'POST, OPTIONS' });
 }
 
 /** Resolve the caller's user id from the Authorization header (server-verified). */

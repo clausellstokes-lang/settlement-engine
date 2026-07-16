@@ -34,7 +34,7 @@ import { dirname, resolve } from 'node:path';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { normalizeForDormancy } from '../domain/religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'generosity-dormancy-golden.json');
 const NOW = '2026-01-01T00:00:00.000Z';

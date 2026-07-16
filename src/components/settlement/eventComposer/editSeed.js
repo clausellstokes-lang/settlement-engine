@@ -73,6 +73,10 @@ export function eventToComposerIntent(event, { campaignId, queueId }) {
   }
   if (type === 'APPLY_STRESSOR') {
     fields.stressorSeverity = wordFor(STRESSOR_SEVERITY_VALUES, p.severity, 'moderate');
+    // Seed the stressorPick twin so a re-staged edit keeps the AUTHORED label
+    // (buildEvent re-derives labelOfTarget(key) otherwise, de-casing a catalog
+    // stressor's name) and its isCustom marker (components-dossier-library-7).
+    fields.stressorPick = { key: String(p.stressorType || event?.targetId || ''), name: p.label, isCustom: !!p.isCustom };
     if (p.instigatorNeighbour) fields.instigatorNeighbour = String(p.instigatorNeighbour);
     if (p.instigatorRelationship) fields.instigatorRelationship = String(p.instigatorRelationship);
   }
@@ -88,9 +92,22 @@ export function eventToComposerIntent(event, { campaignId, queueId }) {
     fields.reliefMagnitude = wordFor(RELIEF_MAGNITUDE_VALUES, p.magnitude, 'measured');
   }
   if (type === 'SHIFT_TIER' && p.direction != null) fields.tierDirection = String(p.direction);
-  if (type === 'SET_PRIMARY_DEITY' || type === 'IMPOSE_CULT') {
+  // The two deity verbs invert DIFFERENTLY (buildEvent asymmetry —
+  // components-dossier-library-2). SET_PRIMARY_DEITY removal clears the ref
+  // (deityRef == null); IMPOSE_CULT removal KEEPS the cult ref and marks the
+  // snapshot null ({ deityRef: cultRef, snapshot: null }). Keying IMPOSE_CULT's
+  // remove on `deityRef == null` (as SET_PRIMARY_DEITY does) mis-seeded a queued
+  // cult REMOVAL as an imposition — a silent intent inversion on re-stage.
+  if (type === 'SET_PRIMARY_DEITY') {
     if (p.deityRef != null) fields.deityRef = String(p.deityRef);
     if (p.deityRef == null) fields.deityMode = 'remove';
+  } else if (type === 'IMPOSE_CULT') {
+    if (p.snapshot == null) {
+      fields.deityMode = 'remove';
+      if (p.deityRef != null) fields.cultRemoveRef = String(p.deityRef);
+    } else if (p.deityRef != null) {
+      fields.deityRef = String(p.deityRef);
+    }
   }
 
   // Target: APPLY/RESOLVE_STRESSOR compose against the stressor key; everything

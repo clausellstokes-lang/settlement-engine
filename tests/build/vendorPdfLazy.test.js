@@ -39,6 +39,26 @@ const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
 const distExists = existsSync(distDir) && existsSync(assetsDir);
 
+// ── STALE-DIST POLICY (scripts-build-ci-2 / test-gate-honesty-1) ─────────────
+// `npm run check` runs `test` BEFORE `build`, so during the plain test phase the
+// dist/ on disk PREDATES the current tree (or is absent). A dist-READING contract
+// that runs then measures the PREVIOUS build — a stale-dist false red (or, worse,
+// a false GREEN that lets a regression ride, exactly how W-F0..F6 first-paint
+// growth rode +293 B under a vacuous ratchet, documented below). The cure, first
+// applied to townMapLazy's presence half and now the house idiom across tests/build/:
+//   • PRESENCE / SIZE / BUDGET assertions (the chunk exists, is large enough, the
+//     first-paint closure is under budget) READ the fresh build's bytes and are
+//     gated on VERIFY_DIST — they run ONLY in the post-build `npm run verify:dist`
+//     re-run (VERIFY_DIST=1, after `npm run build`), never in the pre-build phase.
+//   • ABSENCE assertions (X is NOT in the entry closure / not preloaded) stay
+//     UNGATED (runIf(distExists) only): a stale dist can only UNDER-report absence
+//     (a newly-added eager edge is missing from the old dist ⇒ at worst a false
+//     PASS pre-build), which the post-build VERIFY_DIST re-run then catches — an
+//     absence check never false-REDS on a stale dist, so gating it would only lose
+//     coverage. The anti-vacuity `it` below makes VERIFY_DIST=1 + missing dist a
+//     HARD failure, so the gated halves can never count green having measured nothing.
+const requireDistRead = process.env.VERIFY_DIST === '1';
+
 // ── First-paint static-closure byte budget ──────────────────────────────────
 // The entry's transitive static import closure is everything the browser is
 // forced to download before it can paint. Measured after the KERNEL + ENGINE-
@@ -350,8 +370,23 @@ const distExists = existsSync(distDir) && existsSync(assetsDir);
 //     closure 1,158,376 → 1,161,726) — the reclaim paid for the verbs ~15× over, NET
 //     −48,607 B vs the pre-wave 1,210,333. Budget 1,214,050 → 1,161,810 (measured
 //     1,161,726 + ~84 B house margin). No behavior shift; goldens byte-identical.
+// → 1,066,400 (RATCHET #10 — FP-G8 + the W-R2-INTENT thread, 2026-07-16,
+//   reclaim-then-thread at program scale):
+//   • FP-G8 RECLAIMED −60,906 B via two engine-core over-inclusion trims (the
+//     stale generator-spine eager pin — checkDraftEdit, its sole first-paint
+//     consumer, went lazy waves ago — plus the settlement.schema.js leaf excise;
+//     vite.config.js only, goldens byte-identical; closure 1,121,942 → 1,061,036).
+//   • W-R2-INTENT then THREADED +2,796 B eager (eight intent-trust store fixes:
+//     typed refusal surfacing, outbox column-set ordering, pause-window guards,
+//     the placement gate, delete/rename persistence — all synchronous test-pinned
+//     control flow, proven irreducible by the trim census; closure → 1,063,832).
+//   • Budget 1,121,903 → 1,066,400 = measured 1,063,832 + ~2,568 B DELIBERATE
+//     funded headroom for the recorded budget-blocked queue: the persist-gap
+//     satellite (+596 B, §10.4, blocked since 2026-07-14), W2 feed-retention
+//     (+363 B, round-21), W-R2-DEPTH (~100 B), and slack. The reclaim paid for
+//     the whole queue ~15× over; NET −55,503 B vs the pre-G8 1,121,942.
 // Monotone-down only; raises are owner-signed, never incidental.
-const CLOSURE_BUDGET_BYTES = 1_121_903;
+const CLOSURE_BUDGET_BYTES = 1_066_400;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -416,13 +451,14 @@ describe('Tier 9.7 — VERIFY_DIST post-build anti-vacuity', () => {
 
 describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   // ── Chunk isolation ─────────────────────────────────────────────────────
-  it('vendor-pdf is its own chunk in dist/assets/', () => {
+  // PRESENCE/SIZE reads: VERIFY_DIST-gated (see STALE-DIST POLICY at top).
+  it.skipIf(!requireDistRead)('vendor-pdf is its own chunk in dist/assets/', () => {
     const files = readdirSync(assetsDir);
     const vendorPdfFiles = files.filter(f => /^vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(f));
     expect(vendorPdfFiles.length).toBeGreaterThan(0);
   });
 
-  it('vendor-pdf chunk is large (would dominate initial bundle if eagerly loaded)', () => {
+  it.skipIf(!requireDistRead)('vendor-pdf chunk is large (would dominate initial bundle if eagerly loaded)', () => {
     const files = readdirSync(assetsDir);
     const vendorPdf = files.find(f => /^vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(f));
     expect(vendorPdf).toBeDefined();
@@ -472,7 +508,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
-  it('the engine chunk still exists (lazy) and remains large', () => {
+  it.skipIf(!requireDistRead)('the engine chunk still exists (lazy) and remains large', () => {
     const files = readdirSync(assetsDir);
     const engine = files.find(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f) && !/^engine-core-/.test(f));
     expect(engine, 'expected a lazy engine-<hash>.js chunk to still be emitted').toBeDefined();
@@ -518,7 +554,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
-  it('the guidance registry sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
+  it.skipIf(!requireDistRead)('the guidance registry sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
     const carriers = readdirSync(assetsDir)
       .filter(f => f.endsWith('.js'))
       .filter(f => readFileSync(join(assetsDir, f), 'utf-8').includes('GUIDANCE_REGISTRY_LAZY_SENTINEL'));
@@ -545,7 +581,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
-  it('the guidance notes sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
+  it.skipIf(!requireDistRead)('the guidance notes sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
     const carriers = readdirSync(assetsDir)
       .filter(f => f.endsWith('.js'))
       .filter(f => readFileSync(join(assetsDir, f), 'utf-8').includes('GUIDANCE_NOTES_LAZY_SENTINEL'));
@@ -572,7 +608,7 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
     ).toHaveLength(0);
   });
 
-  it('the glossary sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
+  it.skipIf(!requireDistRead)('the glossary sentinel is PRESENT in some lazy chunk (non-vacuity)', () => {
     const carriers = readdirSync(assetsDir)
       .filter(f => f.endsWith('.js'))
       .filter(f => readFileSync(join(assetsDir, f), 'utf-8').includes('GLOSSARY_LAZY_SENTINEL'));
@@ -583,7 +619,10 @@ describe.runIf(distExists)('Tier 9.7 — vendor-pdf lazy load contract', () => {
   });
 
   // ── First-paint byte budget (the monotone ratchet) ───────────────────────
-  it(`entry static closure raw bytes stay under the first-paint budget (${CLOSURE_BUDGET_BYTES})`, () => {
+  // The constitutional first-paint law (law 5). VERIFY_DIST-gated: measuring a
+  // stale pre-build dist is exactly how it once went vacuous and let +293 B ride
+  // green (header above). It runs ONLY post-build (`npm run verify:dist`).
+  it.skipIf(!requireDistRead)(`entry static closure raw bytes stay under the first-paint budget (${CLOSURE_BUDGET_BYTES})`, () => {
     const { files } = entryStaticClosure();
     let total = 0;
     const lines = [];
@@ -694,7 +733,7 @@ describe('F41 — PDF worker source contracts', () => {
 
 // ── F41 — built worker asset (needs dist/) ───────────────────────────────────
 describe.runIf(distExists)('F41 — PDF worker chunk contract', () => {
-  it('the worker is emitted as its own asset and carries the PDF stack', () => {
+  it.skipIf(!requireDistRead)('the worker is emitted as its own asset and carries the PDF stack', () => {
     const files = readdirSync(assetsDir);
     const worker = files.find(f => /^pdfRender\.worker-[A-Za-z0-9_-]+\.js$/.test(f));
     expect(worker, 'expected a pdfRender.worker-<hash>.js asset').toBeDefined();

@@ -95,7 +95,11 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
         if (error) return;
         if (!cancelled && data === true) {
           setWelcomeUnspent(true);
-          Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, { userId });
+          // userId rides the hashed opts lane (the signupCompleted pattern) so
+          // the raw Supabase id never lands in analytics props (never mirrored
+          // raw to a provider, never stored beside the pseudonymous actor_id) —
+          // finding components-dossier-library-1.
+          Funnel.track(EVENTS.WELCOME_CREDIT_GRANTED, {}, { userId });
         }
       } catch { /* network failure — just don't show the card */ }
     })();
@@ -110,7 +114,8 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
   const onNarrate = async () => {
     try {
       await requestNarrative?.(saveId);
-      Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, { userId });
+      // Hashed opts lane, not props (see WELCOME_CREDIT_GRANTED above).
+      Funnel.track(EVENTS.WELCOME_CREDIT_SPENT, {}, { userId });
     } catch (e) {
       console.warn('[WelcomeCreditCard] requestNarrative failed:', e);
     }

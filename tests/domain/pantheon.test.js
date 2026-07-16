@@ -17,7 +17,7 @@ import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js'
 import { ensureWorldState } from '../../src/domain/worldPulse/worldState.js';
 import { buildWorldSnapshot } from '../../src/domain/worldPulse/worldSnapshot.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { normalizeForDormancy } from './religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Feature D / R4 — pantheon ledger + lazy tiering. The determinism danger zone.

@@ -328,6 +328,34 @@ export const LEGACY_GUIDANCE_COMPONENTS = Object.freeze([
 export const LEGACY_GUIDANCE_CEILING = LEGACY_GUIDANCE_COMPONENTS.length;
 
 /**
+ * UNWIRED WHISPERS (domain-region-dossier-guidance-2): whisper ids that are REGISTERED
+ * here but whose host component does NOT yet consume the guidance registry — a file
+ * exists, but the whisper does not actually RENDER through the selection/eligibility
+ * machinery. The old walker's "mounted surface" check only proved the host .jsx exists
+ * (file-exists ≠ renders); the strengthened check content-scans each host for guidance
+ * integration (imports the registry AND references a selection call / the whisper id /
+ * body / surface), which reds on these.
+ *
+ * ⚠️ SHRINK-ONLY, and W-R2-SURFACE OWNS THE BURN-DOWN: SURFACE wires each of these hosts
+ * through the registry (or removes the whisper) and DELETES its id here as it lands. This
+ * list is a DOCUMENTED, EMPTYING allowlist — not a licence. The census walker asserts (a)
+ * every listed id is a real whisper, and (b) every listed id is genuinely unwired (no
+ * stale entry once SURFACE wires it), so a wired whisper cannot hide here.
+ */
+// W-R2-SURFACE-2 (content-immersion-r2-3) BURNED THIS DOWN TO EMPTY: every host is
+// now wired through the unified sf:guidance dismissal (lib/guidance) with its body
+// rendered or its dismissal unified — RealmVerbComposer + RealmDocket mount the
+// once-dead mechanism whispers; WizardNextSteps migrated off its legacy key; the
+// four empty-invitation hosts (WelcomeBackCard, SampleDashboard, GalleryList,
+// CampaignEmptyState) reference + dismiss their whispers. The walker is now FULLY
+// STRICT: every whisper must render via its host — nothing hides here.
+/** @type {readonly string[]} */
+export const UNWIRED_WHISPERS = Object.freeze([]);
+
+/** The shrink-only ceiling for UNWIRED_WHISPERS — now 0 (the walker is fully strict). */
+export const UNWIRED_WHISPERS_CEILING = UNWIRED_WHISPERS.length;
+
+/**
  * The retained registry object. The sentinel rides HERE (a live property of a
  * runtime-read frozen object) so it survives tree-shaking into the lazy chunk —
  * the non-vacuity fix. Consumers read `.whispers` / `.surfaces`, retaining the

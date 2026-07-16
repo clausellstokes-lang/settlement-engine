@@ -6,6 +6,8 @@
  * reconstruction SKIM fires ONLY under low conscience, the institution UPGRADE up the
  * lattice, and dormancy byte-identity.
  */
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { advanceUpswing, upswingArcsActive, UPSWING_TUNING } from '../../src/domain/worldPulse/upswingKernel.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
@@ -381,5 +383,130 @@ describe('upswing — B3 flourishing: hysteresis + NEVER snowballs', () => {
     // After the end, within cooldown, no immediate re-enter beyond the single first enter.
     const enters = r.receipts.filter((x) => x.kind === 'flourishing_enter').length;
     expect(enters).toBe(1);
+  });
+});
+
+// ── W-R2-SEAMS pins ────────────────────────────────────────────────────────────
+describe('upswing r2 — MOVERS SKIP REMNANTS (economy-upswing-1)', () => {
+  it('a terminal-dead REMNANT never arms reconstruction (B1), never booms (B2), never flourishes (B3)', () => {
+    // A struck town that WOULD arm reconstruction, but is a remnant ⇒ movers skip it.
+    for (const remnantMark of [{ lifecycleStatus: 'remnant' }, { config: { economicBase: 'agrarian', lifecycleStatus: 'remnant' } }]) {
+      const { worldState, receipts, settlementUpdates } = drive({ settlement: struck('Ashford', remnantMark) }, 3);
+      const s = settlementUpdates.find((u) => u.saveId === 'a').settlement;
+      expect((s.activeConditions || []).some((c) => c.archetype === 'reconstruction'), 'no rebuild on a corpse').toBe(false);
+      expect(receipts, 'no mover activity on the remnant').toHaveLength(0);
+      expect(worldState.spatialLedgers?.upswing, 'no ledger seeded on a corpse').toBeUndefined();
+    }
+    // A booming remnant does not boom.
+    const boomRemnant = driveBoom({ throughput: 4, centrality: 0.5 }, 3);
+    // (control: a live boom fixture mints — sanity that the fixture itself booms.)
+    expect(boomRemnant.receipts.some((r) => r.kind === 'boom_enter')).toBe(true);
+  });
+
+  it('a remnant with high throughput/centrality does NOT boom (B2 skip)', () => {
+    // Reuse the boom fixture but mark the settlement a remnant via settlementUpdates.
+    let f = boomFixture({ throughput: 4, centrality: 0.5 });
+    const remnant = { ...f.settlementUpdates[0].settlement, lifecycleStatus: 'remnant' };
+    f = { ...f, settlementUpdates: [{ saveId: 'p', settlement: remnant }], snapshot: { settlements: [{ id: 'p', name: 'Port', settlement: remnant }] } };
+    let ws = f.worldState; let su = f.settlementUpdates;
+    for (let t = 0; t < 5; t++) {
+      const snapshot = { settlements: su.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+      const r = advanceUpswing({ snapshot, worldState: ws, settlementUpdates: su, graph: f.graph, rng: null, tick: 100 + t, now: NOW });
+      ws = r.worldState; su = r.settlementUpdates;
+      expect(r.receipts.some((x) => x.kind === 'boom_enter'), 'a remnant never booms').toBe(false);
+    }
+  });
+});
+
+describe('upswing r2 — SAME-TICK COMPOSITION (determinism-constitution-1)', () => {
+  it('a boom minted in B2 is not clobbered by a flourishing minted in B3 the same tick (freshSettlement reads nextUpdates)', () => {
+    const settlement = {
+      name: 'Port', tier: 'city', population: 6000, config: {},
+      institutions: [{ name: 'Market', category: 'trade' }],
+      economicState: { prosperity: 'Prosperous' },
+      powerStructure: { publicLegitimacy: { score: 80 }, factions: [], conflicts: [] },
+      activeConditions: [], calamityHistory: [],
+    };
+    const worldState = {
+      tick: 100, calendar: { year: 10 }, simulationRules: { upswingArcsEnabled: true }, stressors: [],
+      spatialLedgers: {
+        tradeFlow: { p: { in: 2, out: 2, lastTick: 0 } }, // throughput 4 ≥ BOOM_ENTER
+        entrepots: { p: { centrality: 0.5 } },
+        upswing: {
+          // Both arcs one dwell short of minting ⇒ both mint THIS tick, B2 then B3.
+          boom: { p: { phase: 'building', dwell: UPSWING_TUNING.BOOM_MIN_DWELL - 1, enteredTick: 97, arteries: ['x', 'y'], fragile: false, throughput: 4, prosperityAccrued: 0, lastTick: 99 } },
+          flourishing: { p: { phase: 'building', dwell: UPSWING_TUNING.FLOUR_MIN_DWELL - 1, enteredTick: 94, endsTick: 0, cooldownUntil: 0, lastTick: 99 } },
+        },
+      },
+    };
+    const graph = { edges: [{ id: 'e0', from: 'p', to: 'x', relationshipType: 'trade_partner' }, { id: 'e1', from: 'p', to: 'y', relationshipType: 'trade_partner' }], channels: [] };
+    const r = advanceUpswing({ snapshot: { settlements: [{ id: 'p', name: 'Port', settlement }] }, worldState, settlementUpdates: [{ saveId: 'p', settlement }], graph, rng: null, tick: 100, now: NOW });
+    const s = r.settlementUpdates.find((u) => u.saveId === 'p').settlement;
+    const arch = (s.activeConditions || []).map((c) => c.archetype);
+    expect(r.receipts.some((x) => x.kind === 'boom_enter'), 'B2 minted a boom').toBe(true);
+    expect(r.receipts.some((x) => x.kind === 'flourishing_enter'), 'B3 minted flourishing').toBe(true);
+    expect(arch, 'the B2 boom condition SURVIVED the same-tick B3 write').toContain('boom');
+    expect(arch, 'the B3 flourishing condition is present').toContain('flourishing');
+  });
+
+  it('STRUCTURAL: both same-tick composing kernels read nextUpdates (they cannot re-diverge)', () => {
+    // The upswing + lifecycle kernels both re-fetch a settlement mid-tick via a freshSettlement
+    // closure; each MUST read the written-this-tick array (nextUpdates), never the stale pre-clone
+    // `updates`, or a later pass clobbers an earlier one (r2 determinism-constitution-1).
+    for (const rel of ['upswingKernel.js', 'settlementLifecycleKernel.js']) {
+      const src = readFileSync(fileURLToPath(new URL(`../../src/domain/worldPulse/${rel}`, import.meta.url)), 'utf8');
+      const m = src.match(/const freshSettlement = \(id\) => \{[\s\S]*?\n {2}\};/);
+      expect(m, `${rel} has a freshSettlement closure`).toBeTruthy();
+      expect(m[0], `${rel} freshSettlement reads nextUpdates`).toContain('nextUpdates[ui]');
+      expect(m[0], `${rel} freshSettlement does NOT read the stale updates[ui]`).not.toMatch(/return updates\[ui\]/);
+    }
+  });
+});
+
+describe('upswing r2 — SINGLE-DECAY obligations (economy-upswing-4)', () => {
+  it('the repayment fold does NOT re-decay a bystander obligation (generosity already decayed it this tick)', () => {
+    const obligations = {
+      'a:ally:credit': { from: 'a', to: 'ally', kind: 'credit', magnitude: 0.6, mintTick: 100, lastTick: 100 },
+      'z:bystander:credit': { from: 'z', to: 'bystander', kind: 'credit', magnitude: 0.5, mintTick: 100, lastTick: 100 },
+    };
+    const f = fixture({ settlement: struck('Ashford'), obligations });
+    const snapshot = { settlements: [{ id: 'a', name: 'Ashford', settlement: f.settlementUpdates[0].settlement }] };
+    const r = advanceUpswing({ snapshot, worldState: f.worldState, settlementUpdates: f.settlementUpdates, graph: f.graph, rng: null, tick: 260, now: NOW });
+    const obl = r.worldState.spatialLedgers.obligations;
+    expect(obl['a:ally:credit'].magnitude, 'the matured debt shrank').toBeLessThan(0.6);
+    expect(obl['z:bystander:credit'].magnitude, 'a bystander obligation is NOT double-decayed').toBe(0.5);
+  });
+});
+
+describe('upswing r2 — BLOCKADE IS A SIEGE (sim-cohesion-counterparts-3)', () => {
+  function blockadedFlourish(navalLedgerOn, campaignOn) {
+    const settlement = {
+      name: 'Harbor', tier: 'city', population: 6000, config: {},
+      institutions: [{ name: 'Market', category: 'trade' }, { name: 'Barracks', category: 'military' }],
+      economicState: { prosperity: 'Prosperous' }, powerStructure: { publicLegitimacy: { score: 80 }, factions: [], conflicts: [] },
+      activeConditions: [], calamityHistory: [],
+    };
+    const spatialLedgers = {};
+    if (navalLedgerOn) spatialLedgers.navalTransit = { enemy: { role: 'blockade', ownerId: 'enemy', targetId: 'h', armyId: 'enemy', cargoId: null, originId: 'enemy', destId: 'h', path: ['enemy', 'h'], departTick: 0, arrivalTick: 10, position01: 1, strength: 60, cargoStrength: 0, readiness: 0.6, supplyQuality: 1, funding: 0.5, lastTick: 0 } };
+    if (campaignOn) spatialLedgers.campaignPlans = { agg: { targetId: 'h', aggressorId: 'agg' } };
+    const worldState = { tick: 500, calendar: { year: 20 }, simulationRules: { upswingArcsEnabled: true }, stressors: [], ...(Object.keys(spatialLedgers).length ? { spatialLedgers } : {}) };
+    const graph = { edges: [{ id: 'e0', from: 'h', to: 'ally', relationshipType: 'trade_partner' }], channels: [] };
+    let su = [{ saveId: 'h', settlement }]; let ws = worldState;
+    const receipts = [];
+    for (let t = 0; t < 8; t++) {
+      const snapshot = { settlements: su.map((u) => ({ id: u.saveId, name: u.settlement?.name, settlement: u.settlement })) };
+      const r = advanceUpswing({ snapshot, worldState: ws, settlementUpdates: su, graph, rng: null, tick: 500 + t, now: NOW });
+      ws = r.worldState; su = r.settlementUpdates; receipts.push(...r.receipts);
+    }
+    return receipts;
+  }
+  it('a blockaded harbor does NOT flourish (peace gate closes under blockade)', () => {
+    expect(blockadedFlourish(true, false).some((r) => r.kind === 'flourishing_enter'), 'blockade ⇒ no golden age').toBe(false);
+  });
+  it('a harbor under a live supply-web campaign does NOT flourish', () => {
+    expect(blockadedFlourish(false, true).some((r) => r.kind === 'flourishing_enter'), 'strangulation ⇒ no golden age').toBe(false);
+  });
+  it('CONTROL: with no blockade/campaign the same harbor DOES flourish', () => {
+    expect(blockadedFlourish(false, false).some((r) => r.kind === 'flourishing_enter'), 'true peace ⇒ flourishing mints').toBe(true);
   });
 });

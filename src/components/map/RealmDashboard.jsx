@@ -36,6 +36,7 @@ import {
 } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
+import { hegemonyRead } from '../../domain/display/hegemonyRead.js';
 import { WAR_SHAPED_TYPES } from './WorldPulseData.js';
 import { hasPantheon } from './PantheonPanel.jsx';
 import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
@@ -330,6 +331,16 @@ export default function RealmDashboard({
   const standings = dispositionStandings(worldState);
   const topAggressor = standings.slice().sort((a, b) => b.score - a.score)[0] || null;
 
+  // ambition-fit-2 — THE UNNAMED EMPIRE (hegemonyRead / §F.3b). A pure derived read
+  // over the treaty topology: any center with ≥3 subordinate ties forms a sphere.
+  // Dormant-safe: a realm with no such center returns { spheres: [] } ⇒ the Stat
+  // renders "–" and the descriptive detail block below does not mount. Strength is
+  // headcount-share here (no per-settlement strength on the dashboard); the DEPTH
+  // reason half passes real land+naval strength. Descriptive-always; DM baptism (a
+  // persisted canon label) is a separate store lane — omitted here by design.
+  const hegemony = hegemonyRead({ worldState, nameFor: (id) => nameById?.get(String(id)) || String(id) });
+  const topSphere = hegemony.spheres[0] || null;
+
   // One focal Conflict digest: the tension band is the headline, and the four
   // former war stats survive as a one-line component breakdown beneath it. The
   // four facts the GM scans for ("is the realm at war, and how?") now win the
@@ -443,7 +454,33 @@ export default function RealmDashboard({
             ? `${topAggressor.wins}W / ${topAggressor.losses}L`
             : 'No win record yet'}
         />
+        {/* ambition-fit-2: the unnamed-empire count. Dormant ⇒ "–", same null idiom
+            as the cluster's other reads. */}
+        <Stat
+          Icon={Users}
+          label="Spheres of influence"
+          value={hegemony.spheres.length ? hegemony.spheres.length : '–'}
+          sub={topSphere ? topSphere.brief : 'No hegemony has formed'}
+          subTitle="A center holding three or more tributary, compelled, or puppet ties forms a sphere — an unnamed empire the topology exhibits. Its name is the DM's to give."
+        />
       </div>
+
+      {/* ambition-fit-2: the descriptive sphere read. Self-gates to nothing when no
+          hegemony has formed. Descriptive ALWAYS ("X and its tributaries"); a
+          DM-christened canon label (when the persistence lane lands) replaces it. */}
+      {hegemony.spheres.length > 0 && (
+        <div data-testid="realm-hegemony" style={{ display: 'grid', gap: SP.xs }}>
+          <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Spheres of influence
+          </div>
+          {hegemony.spheres.map((s) => (
+            <div key={String(s.centerId)} style={{ color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.5 }}>
+              <span style={{ fontWeight: 700, color: INK }}>{s.label}</span>
+              {' — '}{s.brief} <span style={{ color: SECOND }}>{s.strain.phrase}.</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

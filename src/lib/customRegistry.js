@@ -265,28 +265,40 @@ function enumeratePrebuiltStressors() {
 
 function enumeratePrebuiltTradeGoods() {
   const out = new Map();  // dedupe by name across tiers + export/import
+  const mint = (name, props, tier, direction) => {
+    if (!name || !props || typeof props !== 'object') return;
+    if (out.has(name)) {
+      // remember it appears in both directions if so
+      out.get(name).directions.add(direction);
+      return;
+    }
+    out.set(name, {
+      refId: prebuiltRefId('tradeGoods', name),
+      name,
+      category: 'tradeGoods',
+      subcategory: props?.category || 'other',
+      source: 'prebuilt',
+      tags: [],
+      desc: props?.desc || '',
+      tierMin: tier,
+      directions: new Set([direction]),
+      raw: props || {},
+    });
+  };
   const ingest = (byTier, direction) => {
     for (const [tier, byName] of Object.entries(byTier || {})) {
       if (!byName || typeof byName !== 'object') continue;
-      for (const [name, props] of Object.entries(byName)) {
-        if (!name) continue;
-        if (out.has(name)) {
-          // remember it appears in both directions if so
-          out.get(name).directions.add(direction);
-          continue;
+      for (const [key, val] of Object.entries(byName)) {
+        // Two shapes coexist: GOODS_MODIFIERS_BY_TIER is { name: props } (mint by
+        // key); IMPORT_GOODS_BY_TIER is { group: [{ name, … }] } (mint each element
+        // by its OWN .name — the group key is a bucket label, never a good). Reading
+        // the group shape flat once minted the bucket keys (basic/fromHigher/…) as
+        // phantom goods and skipped every real import good. [data-tables-1]
+        if (Array.isArray(val)) {
+          for (const item of val) mint(item?.name, item, tier, direction);
+        } else {
+          mint(key, val, tier, direction);
         }
-        out.set(name, {
-          refId: prebuiltRefId('tradeGoods', name),
-          name,
-          category: 'tradeGoods',
-          subcategory: props?.category || 'other',
-          source: 'prebuilt',
-          tags: [],
-          desc: props?.desc || '',
-          tierMin: tier,
-          directions: new Set([direction]),
-          raw: props || {},
-        });
       }
     }
   };

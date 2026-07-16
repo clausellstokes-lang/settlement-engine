@@ -130,6 +130,21 @@ describe('discovery integrator — cap-held, floor-gated, golden-safe', () => {
     expect(discovery.resourceMembership.op).toBe('add');
     expect(pool.has(discovery.resourceMembership.resource), 'the struck node is in the latent pool').toBe(true);
   });
+
+  it('MOVERS SKIP REMNANTS (r2 economy-upswing-1): a terminal-dead settlement never discovers', () => {
+    const config = { terrainType: 'plains', tradeRouteAccess: 'road', nearbyResources: [] };
+    // Same drive that struck a node above, but the settlement is a remnant ⇒ the mover skips it.
+    const remnant = town({ config, institutions: [{ name: 'Iron mine' }], lifecycleStatus: 'remnant' });
+    let ws = { tick: 0, simulationRules: { resourceDynamicsEnabled: true }, settlementTickStates: {} };
+    const pIdx = pIndexWith({ s1: { food: 1, trade: 1 } });
+    let anyCandidate = false;
+    for (let t = 0; t < 40; t++) {
+      const out = evaluateResourceDynamics({ ...ws, tick: t }, snapshotWith(remnant), pIdx, { tick: t, rng: rngStub });
+      if (out.candidates.length) anyCandidate = true;
+      ws = out.worldState;
+    }
+    expect(anyCandidate, 'zero mover activity on the remnant').toBe(false);
+  });
 });
 
 // ── 4. NONRENEWABLE-ONLY REMOVAL + the dwell wall ──────────────────────────────

@@ -30,7 +30,7 @@ import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { MUTED, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
 import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
@@ -50,8 +50,11 @@ import { buildEvent, mintComposeEventId } from './eventComposer/buildEvent.js';
 import { applyComposerIntent, resetComposerForVerb } from './eventComposer/applyComposerIntent.js';
 import {
   RELATIONSHIP_OPTIONS, RELATIONSHIP_LABELS, CUSTOM_RESOURCE_OPTION,
-  inputStyle, selectStyle,
+  inputStyle, selectStyle, refusalBoxStyle,
 } from './eventComposer/EventComposerConstants.js';
+// Clock-bound queue-refusal + batch-outcome helpers (store-hooks-state-1) — the
+// DM's-order-is-sacred surfacing, kept out of this file for the max-lines split.
+import { applyRefusalPayload, applyRefusalMessage, batchApplyOutcome, batchRefusalText } from './eventComposer/applyOutcome.js';
 
 // onLink (= SettlementDetail's handleLink) is threaded in only so the folded
 // LINK_NEIGHBOUR pseudo-event can delegate to the neighbour-link cascade. With no
@@ -99,6 +102,10 @@ export default function EventComposer({ onLink = null }) {
   const [causeOverride, setCauseOverride] = useState('');
   // A veto refusal from the last Apply — the blocking-refusal surface (§2).
   const [applyRefusal, setApplyRefusal] = useState(null);
+  // A clock-bound queue-refusal reason from the last batch Apply — keeps the
+  // staged cart and surfaces the reason instead of silently dropping the batch
+  // (store-hooks-state-1). Cleared on cart edit / clear / a successful apply.
+  const [batchRefusal, setBatchRefusal] = useState(null);
   // §8 M3b — "Caused by the party" attribution. Off by default; when set, the
   // event is tagged party-caused (cause: 'party_action' + partyCaused: true) so
   // the timeline/Chronicle can distinguish "the table did this" from "the world
@@ -388,10 +395,13 @@ export default function EventComposer({ onLink = null }) {
     const entry = applyEvent(assembleEvent());
     // Handler-veto channel (§2): the world refused — a blocking refusal, not
     // a commit. Keep the form (the DM will retarget), surface the reason.
-    if (entry && entry.ok === false && entry.veto) {
-      // Keyed to THIS composition: the box hides by derivation the moment the
-      // form (and so the key) moves — no state-clearing effect needed.
-      setApplyRefusal({ ...entry.veto, forKey: currentKey });
+    // Blocking refusal — a handler veto (§2) OR a clock-bound queue refusal
+    // (store-hooks-state-1: advance in flight / parked, nothing queued). Either
+    // way KEEP the form and surface the reason (keyed to THIS composition, so the
+    // box hides by derivation once the form moves) — never silently reset the
+    // form + raise the stale-narrative modal as if the order committed.
+    if (entry && entry.ok === false && (entry.veto || entry.queued === false)) {
+      setApplyRefusal(applyRefusalPayload(entry, currentKey));
       return;
     }
     setApplyRefusal(null);
@@ -722,14 +732,11 @@ export default function EventComposer({ onLink = null }) {
         onAddToBatch={() => { setStaged(prev => [...prev, assembleEvent()]); setTarget(''); setDesc(''); setPartyCaused(false); setSwapWithNpcId(''); setCustomResourceName(''); setSessionEventId(mintComposeEventId()); }}
       />
 
-      {/* Handler-veto refusal (§2): the world refused the last Apply — blocking. */}
+      {/* Apply refusal: a handler veto (§2) OR a clock-bound queue refusal
+          (store-hooks-state-1) — both blocking, both keep the form. */}
       {applyRefusal && applyRefusal.forKey === currentKey && (
-        <div style={{
-          marginTop: SP.sm, padding: '8px 10px', border: `1px solid ${swatch.danger}`,
-          borderRadius: R.sm, background: swatch.dangerBg,
-          fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
-        }}>
-          ✕ The world refuses: {vetoProse(applyRefusal.code, applyRefusal.detail)}
+        <div style={refusalBoxStyle}>
+          {applyRefusalMessage(applyRefusal, vetoProse)}
         </div>
       )}
 
@@ -748,18 +755,20 @@ export default function EventComposer({ onLink = null }) {
           settlement={settlement}
           phase={phase}
           pendingBatchPreview={pendingBatchPreview}
-          onRemove={(i) => setStaged(prev => prev.filter((_, idx) => idx !== i))}
-          onClear={() => { setStaged([]); dismissBatchPreview(); }}
+          refusalNotice={batchRefusalText(batchRefusal)}
+          onRemove={(i) => { setBatchRefusal(null); setStaged(prev => prev.filter((_, idx) => idx !== i)); }}
+          onClear={() => { setBatchRefusal(null); setStaged([]); dismissBatchPreview(); }}
           onPreview={() => previewBatch(staged)}
           onApply={() => {
-            const r = applyBatch(staged);
-            if (r?.ok) {
-              // One staleness notice for the whole batch — the modal fires
-              // once per apply click, never once per staged event. Skip it when
-              // the batch only queued (clock-bound): nothing changed yet.
-              if (narrated && !r.queuedOnly) setStaleNotice({ label: `${staged.length} changes` });
-              setStaged([]);
-            }
+            // A clock-bound queue refusal with nothing landed KEEPS the staged
+            // batch and surfaces the reason (store-hooks-state-1); a commit fires
+            // one staleness notice (skipped when the batch only queued).
+            const o = batchApplyOutcome(applyBatch(staged));
+            if (o.noop) return;
+            if (!o.committed) return setBatchRefusal(o.refusalReason);
+            setBatchRefusal(null);
+            if (o.fireStale && narrated) setStaleNotice({ label: `${staged.length} changes` });
+            setStaged([]);
           }}
         />
       )}

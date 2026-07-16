@@ -1182,6 +1182,24 @@ describe('Tier 3.3 — create-checkout CORS handling', () => {
   });
 });
 
+describe('Tier 3.3 — verify-checkout-session CORS handling (round-1 backend-5)', () => {
+  let src;
+  beforeAll(() => { src = readFunction('verify-checkout-session'); });
+
+  it('handles OPTIONS preflight', () => {
+    expect(src).toMatch(/req\.method\s*===\s*['"]OPTIONS['"]/);
+  });
+
+  it('sources the origin allowlist from the shared module and never emits "*"', () => {
+    // W-R2-TRUST: the last per-function inline allowlist (with an `origin || '*'`
+    // fallback) was migrated to _shared/cors.ts, matching every sibling.
+    expect(src).toMatch(/from\s+['"]\.\.\/_shared\/cors\.ts['"]/);
+    // No wildcard ACAO literal, and no `origin || '*'` fallback survives.
+    expect(src).not.toMatch(/Access-Control-Allow-Origin['"]\s*:\s*['"]\*['"]/);
+    expect(src).not.toMatch(/origin\s*\|\|\s*['"]\*['"]/);
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────
 // Cross-function security
 // ─────────────────────────────────────────────────────────────────────────

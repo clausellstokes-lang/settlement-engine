@@ -26,7 +26,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { SIMULATION_RULE_PRESETS } from '../../src/domain/worldPulse/simulationRules.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
-import { normalizeForDormancy } from '../domain/religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const TICKS = 24;

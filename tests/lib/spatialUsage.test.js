@@ -122,6 +122,41 @@ describe('spatialUsage — coarse signal', () => {
     ]));
   });
 
+  it('counts the post-A1 merged-wave movers (lib-infra-copy-1)', () => {
+    const ws = {
+      spatialCanonVersion: 3,
+      simulationRules: { presetId: 'full_simulation', navalEnabled: true, upswingArcsEnabled: true, momentumEnabled: true },
+      spatialLedgers: {
+        navalTransit: { 'convoy-1': { role: 'convoy' }, 'blockade-2': { role: 'blockade' } },
+        epidemic: { 'Sable': { infected: 40 } },
+        disinfo: { 'a>b': { potency: 0.5 } },
+        credibility: { 'Envoy': { stock: 0.7 } },
+        upswing: { 'Sable': { arc: 'reconstruction' } },
+        commitments: { 'k1': { kind: 'levy' } },
+        interventions: { 'i1': { patron: 'x' } },
+        exposedCorruption: { 'guild-1': { severity: 0.6 } },
+        satellites: { 's1': { host: 'Sable' } },
+        campaignPlans: { 'plan-1': { target: 'Duskport' } },
+      },
+    };
+    const out = extractSpatialUsage(ws);
+    expect(out.mover_counts.naval).toBe(2);
+    expect(out.mover_counts.epidemic_sites).toBe(1);
+    expect(out.mover_counts.disinfo_active).toBe(1);
+    expect(out.mover_counts.credibility_tracked).toBe(1);
+    expect(out.mover_counts.upswing_arcs).toBe(1);
+    expect(out.mover_counts.momentum_committed).toBe(1);
+    expect(out.mover_counts.interventions).toBe(1);
+    expect(out.mover_counts.corruption_exposed).toBe(1);
+    expect(out.mover_counts.satellites).toBe(1);
+    expect(out.mover_counts.war_campaigns).toBe(1);
+    expect(out.movers_active).toEqual(expect.arrayContaining([
+      'naval', 'epidemic', 'disinfo', 'credibility', 'upswing', 'momentum',
+      'intervention', 'corruption_exposed', 'satellites', 'war_campaign',
+    ]));
+    expect(out.sim_config.flags_on).toEqual(expect.arrayContaining(['naval', 'upswingArcs', 'momentum']));
+  });
+
   it('captures preset + info mode + only the ENABLED flags (adoption signal)', () => {
     const cfg = extractSpatialUsage(loadedWorldState()).sim_config;
     expect(cfg.preset_id).toBe('full_simulation');

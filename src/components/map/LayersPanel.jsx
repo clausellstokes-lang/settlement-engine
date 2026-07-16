@@ -1,38 +1,27 @@
 /**
  * LayersPanel — right-side sidebar listing every overlay layer with a
- * checkbox toggle and, where applicable, a filter sub-list. The panel is the
- * single place to control every live map layer, so each layer MapOverlay gates
- * has a toggle here (the prior gap: forests, war/faith, and biomes rendered but
- * were unreachable from this panel).
+ * checkbox toggle and, where applicable, a filter sub-list.
  *
- * Map layers (the campaign-facing overlays):
- *   - Settlements
- *   - Relationships (with per-type filter)
- *   - Roads
- *   - Supply chains
- *   - Regional channels (with per-channel filter)
- *   - Regional impacts (with status filter + severity floor)
- *   - War & faith (deployment, siege, and occupation glyphs)
- *   - GM regional channels (reveal gm-only channels)
- *
- * Map features (decorative / native-map reference):
- *   - Labels, Markers, Forests
- *   - State borders, Culture regions, Biomes
- *
- * Biomes also has a contextual toggle in the Terrain toolbar (same layer key);
- * both stay in sync because they flip the one mapState.layers.nativeBiomes flag.
+ * Layers:
+ *   - Relationships (with per-type filter: trade_partner, allied, …)
+ *   - Supply chains (with per-good filter — optional)
+ *   - Labels
+ *   - Markers
+ *   - Forests
+ *   - Native state borders
+ *   - Native culture regions
  */
 
 import { X, Check } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
-import { GOLD, INK, BODY, SECOND, BORDER2, CARD_HDR, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
-// The relationship-type list (id + label + color) is shared with RoutesToolbar
-// and MapLegend so the chips here, the Routes-mode chips, and the legend rows
-// never disagree on a name or a hue (P11). One list, one source.
+// components-map-3: the relationship palette is single-sourced from
+// relationshipEdgeStyle (the drawn edge + the key can never disagree, P11). This
+// panel used to re-declare a byte-identical-but-drift-armed copy.
 import { REL_TYPES } from './relationshipEdgeStyle.js';
 
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
@@ -68,16 +57,6 @@ export default function LayersPanel({ onClose }) {
     setLayerFilter('relationshipFilter', Array.from(next));
   }
 
-  // An empty relationshipFilter [] means "draw NONE" to RelationshipEdges, so
-  // deselecting the last chip silently blanks the layer while its toggle still
-  // reads on (P8). An explicit All/None reset — the same affordance RoutesToolbar
-  // carries — gives the GM a one-click way back, so the state always has a clear
-  // meaning and the dead "everything off but on" trap is escapable.
-  const allRelsOn = relFilter.size === REL_TYPES.length;
-  function resetRelTypes() {
-    setLayerFilter('relationshipFilter', allRelsOn ? [] : REL_TYPES.map(t => t.id));
-  }
-
   function toggleRegionalChannelType(type) {
     const next = new Set(regionalChannelFilter);
     if (next.has(type)) next.delete(type); else next.add(type);
@@ -94,19 +73,17 @@ export default function LayersPanel({ onClose }) {
   }
 
   return (
-    // Pure content: the framed-column shell (width/border/radius/overflow) is
-    // owned by the Stage's shared SidebarShell — the SAME owner as the left
-    // palette — so the two flanking sidebars are framed by one systematic recipe
-    // instead of each self-framing with a duplicated literal (P5).
     <div style={{
-      minHeight: 0, height: '100%',
+      width: 240, minHeight: 0,
       display: 'flex', flexDirection: 'column',
+      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+      overflow: 'hidden',
     }}>
-      {/* Header — a tint carries the chrome grouping; no drawn rule (P5). */}
+      {/* Header */}
       <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         padding: `${SP.sm}px ${SP.md}px`,
-        background: CARD_HDR,
+        background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
       }}>
         <div style={{
           fontSize: FS.xs, fontWeight: 800, color: SECOND,
@@ -123,12 +100,8 @@ export default function LayersPanel({ onClose }) {
         />
       </div>
 
-      {/* Layer list. Two spacing-led clusters (P5/P6): the content layers a GM
-          actually runs lead under "Map layers"; the decorative/reference toggles
-          fall to a quieter "Map features" cluster below. Whitespace (a large
-          marginTop on the second subhead), not a drawn hairline, separates them. */}
+      {/* Layer list */}
       <div style={{ flex: 1, overflowY: 'auto', padding: SP.sm }}>
-        <Subhead>Map layers</Subhead>
         <LayerToggle
           label="Settlements"
           checked={layers.placements !== false}
@@ -140,7 +113,7 @@ export default function LayersPanel({ onClose }) {
           onChange={() => toggleLayer('relationships')}
         />
         {layers.relationships && (
-          <ChipGroup>
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
             {REL_TYPES.map(t => (
               <FilterChip
                 key={t.id}
@@ -150,21 +123,9 @@ export default function LayersPanel({ onClose }) {
                 onClick={() => toggleRelType(t.id)}
               />
             ))}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={resetRelTypes}
-              style={{ margin: '2px 3px 2px 0', padding: '3px 8px', minHeight: undefined, fontSize: FS.xs }}
-            >
-              {allRelsOn ? 'None' : 'All'}
-            </Button>
-          </ChipGroup>
+          </div>
         )}
-        <LayerToggle
-          label="Roads"
-          checked={!!layers.roads}
-          onChange={() => toggleLayer('roads')}
-        />
+
         <LayerToggle
           label="Supply chains"
           checked={!!layers.chains}
@@ -176,7 +137,7 @@ export default function LayersPanel({ onClose }) {
           onChange={() => toggleLayer('regionalChannels')}
         />
         {layers.regionalChannels && (
-          <ChipGroup>
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
             {REGIONAL_CHANNEL_TYPES.map(type => (
               <FilterChip
                 key={type}
@@ -186,7 +147,7 @@ export default function LayersPanel({ onClose }) {
                 onClick={() => toggleRegionalChannelType(type)}
               />
             ))}
-          </ChipGroup>
+          </div>
         )}
         <LayerToggle
           label="Regional impacts"
@@ -194,7 +155,7 @@ export default function LayersPanel({ onClose }) {
           onChange={() => toggleLayer('regionalImpacts')}
         />
         {layers.regionalImpacts && (
-          <ChipGroup>
+          <div style={{ marginLeft: SP.md, marginBottom: SP.sm }}>
             {REGIONAL_IMPACT_STATUS_FILTERS.map(status => (
               <FilterChip
                 key={status}
@@ -211,8 +172,8 @@ export default function LayersPanel({ onClose }) {
               alignItems: 'center',
               gap: SP.xs,
               marginTop: 4,
-              fontSize: FS.xs,
-              color: BODY,
+              fontSize: FS.xxs,
+              color: MUTED,
               fontFamily: sans,
               fontWeight: 700,
             }}>
@@ -221,7 +182,6 @@ export default function LayersPanel({ onClose }) {
                 id="regional-min-severity"
                 type="range"
                 aria-label="Minimum severity"
-                aria-valuetext={`${Math.round(regionalMinSeverity * 100)} percent`}
                 min="0"
                 max="0.8"
                 step="0.1"
@@ -231,7 +191,7 @@ export default function LayersPanel({ onClose }) {
               />
               {Math.round(regionalMinSeverity * 100)}%
             </label>
-          </ChipGroup>
+          </div>
         )}
         <LayerToggle
           label="War & faith"
@@ -243,12 +203,11 @@ export default function LayersPanel({ onClose }) {
           checked={layers.regionalShowGm !== false}
           onChange={() => toggleLayer('regionalShowGm')}
         />
-
-        {/* Between-cluster gap is a one-off 32 (~2x the within-cluster rhythm of
-            the SP.xs/SP.sm toggle rows) so the "looser between / tight within"
-            P5 contrast actually survives the squint test; SP.xxl(24) read as
-            barely larger than the row rhythm and the two clusters fused. */}
-        <Subhead style={{ marginTop: 32 }}>Map features</Subhead>
+        <LayerToggle
+          label="Roads"
+          checked={!!layers.roads}
+          onChange={() => toggleLayer('roads')}
+        />
         <LayerToggle
           label="Labels"
           checked={!!layers.labels}
@@ -259,11 +218,14 @@ export default function LayersPanel({ onClose }) {
           checked={!!layers.markers}
           onChange={() => toggleLayer('markers')}
         />
-        <LayerToggle
-          label="Forests"
-          checked={!!layers.forests}
-          onChange={() => toggleLayer('forests')}
-        />
+        <div style={{ height: 1, background: BORDER2, margin: `${SP.sm}px 0` }} />
+        <div style={{
+          fontSize: FS.xxs, fontWeight: 700, color: MUTED,
+          textTransform: 'uppercase', letterSpacing: '0.05em',
+          padding: `0 ${SP.xs}px ${SP.xs}px`,
+        }}>
+          Map features
+        </div>
         <LayerToggle
           label="State borders"
           checked={!!layers.nativeStateBorders}
@@ -284,31 +246,6 @@ export default function LayersPanel({ onClose }) {
   );
 }
 
-// A quiet uppercase cluster label. Carries group meaning via FS.xs BODY (clears
-// the contrast/size floors for a structural label) instead of a drawn divider.
-function Subhead({ children, style }) {
-  return (
-    <div style={{
-      fontSize: FS.xs, fontWeight: 800, color: BODY,
-      textTransform: 'uppercase', letterSpacing: '0.05em',
-      padding: `0 ${SP.xs}px ${SP.xs}px`,
-      ...style,
-    }}>
-      {children}
-    </div>
-  );
-}
-
-// Binds a filter sub-list to its parent toggle by proximity (P5): tight to the
-// toggle above, indented, with a clear gap before the next peer toggle below.
-function ChipGroup({ children }) {
-  return (
-    <div style={{ marginLeft: SP.md, marginTop: 0, marginBottom: SP.sm }}>
-      {children}
-    </div>
-  );
-}
-
 function LayerToggle({ label, checked, onChange }) {
   const inputId = `layer-toggle-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
@@ -322,7 +259,7 @@ function LayerToggle({ label, checked, onChange }) {
       borderRadius: R.sm,
       fontSize: FS.sm, color: INK,
     }}
-      onMouseEnter={e => (e.currentTarget.style.background = swatch['#FAF6EF'])}
+      onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
     >
       <input
@@ -338,37 +275,28 @@ function LayerToggle({ label, checked, onChange }) {
   );
 }
 
-// Filter chips are SELECTION state, not the panel's primary action, so they never
-// occupy the high-emphasis primary slot (P8) — they stay ghost. Type identity
-// reads in >=2 channels in BOTH states (P7): a persistent leading colored dot
-// (shape, not hue-on-border alone) plus the label, with the active state adding a
-// color fill + Check glyph + aria-pressed on top.
 function FilterChip({ label, color, active, onClick }) {
   return (
     <Button
-      variant="ghost"
+      variant={active ? 'primary' : 'secondary'}
       size="sm"
       onClick={onClick}
       aria-pressed={active}
       style={{
-        gap: 5,
+        gap: 4,
         padding: '3px 8px',
         margin: '2px 3px 2px 0',
         minHeight: undefined,
-        background: active ? `${color}22` : 'transparent',
-        color: INK,
-        border: `1px solid ${active ? color : BORDER2}`,
+        background: active ? color : 'transparent',
+        color: active ? '#fff' : INK,
+        border: `1px solid ${color}`,
         borderRadius: 12,
-        fontSize: FS.xs, fontWeight: active ? 800 : 600, fontFamily: sans,
+        fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
         boxShadow: 'none',
       }}
     >
-      <span aria-hidden style={{
-        width: 8, height: 8, borderRadius: 4, flexShrink: 0,
-        background: color, opacity: active ? 1 : 0.5,
-      }} />
+      {active && <Check size={9} />}
       {label}
-      {active && <Check size={10} />}
     </Button>
   );
 }

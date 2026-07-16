@@ -507,12 +507,24 @@ export const createCampaignSlice = (set, get) => {
       if (!target) return;
       const now = new Date().toISOString();
       const changedIds = new Set();
+      const sid = String(settlementId);
       for (const c of state.campaigns) {
         if (!isCampaignActive(c)) continue;
         const before = c.settlementIds || [];
         const next = before.filter(id => id !== settlementId);
         if (next.length !== before.length) {
           c.settlementIds = next;
+          // store-hooks-state-6: re-homing a settlement must also drop its queued
+          // intentions from every campaign it LEAVES — the same deliberate-moment
+          // prune removeFromCampaign does. Otherwise the old campaign's next
+          // advance silently destroys them (drainQueuedEvents skips a non-member
+          // save), violating the §10 "refused VISIBLY, never silently dropped" law.
+          if (c.worldState?.pendingEvents?.length) {
+            const kept = c.worldState.pendingEvents.filter(e => String(e.saveId) !== sid);
+            if (kept.length !== c.worldState.pendingEvents.length) {
+              c.worldState = { ...c.worldState, pendingEvents: kept };
+            }
+          }
           c.updatedAt = now;
           changedIds.add(c.id);
         }

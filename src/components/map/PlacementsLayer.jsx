@@ -14,6 +14,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from '../../store';
 import TierIcon, { tierFor } from './TierIcon.jsx';
+import { LIFECYCLE_GLYPH_STYLE } from './lifecycleGlyphStyle.js';
 
 /** Subscribe only to viewport.scale changes for counter-scaling. */
 function useViewportScale() {
@@ -223,11 +224,11 @@ export default function PlacementsLayer({ transformRef }) {
                   const r = (rec.tier === 'hamlet' ? 2.4 : 1.7) / scale;
                   return (
                     <g key={rec.id}>
-                      <circle cx={cx} cy={cy} r={r} fill="#6b5340" stroke="#f5efe4" strokeWidth={0.6 / scale}>
+                      <circle cx={cx} cy={cy} r={r} fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth={0.6 / scale}>
                         <title>{`${rec.name} — ${rec.tier}, ${rec.population} folk${rec.charterPending ? ' (a charter awaits)' : ''}`}</title>
                       </circle>
                       {rec.charterPending && (
-                        <circle cx={cx} cy={cy} r={r + 1.4 / scale} fill="none" stroke="#a0762a" strokeWidth={0.6 / scale} />
+                        <circle cx={cx} cy={cy} r={r + 1.4 / scale} fill="none" stroke={LIFECYCLE_GLYPH_STYLE.charterRing.stroke} strokeWidth={0.6 / scale} />
                       )}
                     </g>
                   );
@@ -239,8 +240,8 @@ export default function PlacementsLayer({ transformRef }) {
             {it.ancientRuin && (
               <g style={{ pointerEvents: 'none' }} opacity={0.7} transform={`translate(${x + 9 / scale}, ${y - 9 / scale}) scale(${1 / scale})`}>
                 <title>{`The relic ruin of ${it.ancientRuin.name}`}</title>
-                <path d="M -2.6 2 L -1.8 -2.4 L -0.9 2 Z M 0.2 2 L 1 -1.2 L 1.8 2 Z" fill="#7a6a52" stroke="#4a3a28" strokeWidth={0.4} />
-                <line x1={-3.4} y1={2} x2={3} y2={2} stroke="#4a3a28" strokeWidth={0.5} />
+                <path d="M -2.6 2 L -1.8 -2.4 L -0.9 2 Z M 0.2 2 L 1 -1.2 L 1.8 2 Z" fill={LIFECYCLE_GLYPH_STYLE.ruin.fill} stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth={0.4} />
+                <line x1={-3.4} y1={2} x2={3} y2={2} stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth={0.5} />
               </g>
             )}
             {(() => {

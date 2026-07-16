@@ -425,6 +425,13 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   advanceCampaignRegionalImpacts: (campaignId, ticks = 1, options = {}) => {
+    // Advance-concurrency guard (store-hooks-state-4): advancing regional impacts
+    // mutates c.regionalGraph, which a running interval — and a resume from a
+    // PARKED pause — restores WHOLESALE from its pre-interval snapshot
+    // (advanceInterval.js resume.preRegionalGraph), so a manual advance written
+    // into either window is silently reverted. Same null no-op as its siblings.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     let graph = null;
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
@@ -454,6 +461,12 @@ export const createCampaignRegionalSlice = (set, get) => ({
     // advance replaces wholesale in Phase-2 — the applied condition would ghost. No-op
     // with the action's existing null shape (its no-op / save-failure paths return null).
     if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) {
+      return null;
+    }
+    // Parked-pause window is the same clobber class (store-hooks-state-4): a
+    // resume restores regionalGraph from resume.preRegionalGraph, so an apply
+    // written while an advance is PARKED is reverted just like a mid-advance one.
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) {
       return null;
     }
     // ORDERED writes to prevent split truth (F2): the settlement is the source
@@ -562,6 +575,15 @@ export const createCampaignRegionalSlice = (set, get) => ({
   },
 
   resolveRegionalImpact: async (campaignId, impactId) => {
+    // Advance-concurrency guard (store-hooks-state-4): resolving mutates BOTH the
+    // member settlement and the campaign regional graph — both restored wholesale
+    // by a running advance's Phase-2 commit AND by a resume from a PARKED pause
+    // (advanceInterval.js resume.preRegionalGraph). Without it the graph marks
+    // 'resolved' but the advance recommits the pre-resolve settlement, so the
+    // condition resurrects while 'resolved' blocks re-resolve — permanently. No-op
+    // with the action's existing null shape, matching applyQueuedRegionalImpact.
+    if (typeof get().isAdvanceInFlight === 'function' && get().isAdvanceInFlight(campaignId)) return null;
+    if (typeof get().getPausedAdvance === 'function' && get().getPausedAdvance(campaignId)) return null;
     // ORDERED writes to prevent split truth (F2, mirroring applyQueuedRegionalImpact):
     // the settlement is the source of truth for the condition. Resolving REMOVES the
     // active condition, so the campaign graph must NOT advertise the impact 'resolved'

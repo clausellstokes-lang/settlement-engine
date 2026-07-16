@@ -21,7 +21,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  declareCasus, CASUS_VETO_PROSE, warReasonsFor, warReasonFactor, REASON_TUNING, WAR_REASON_TYPES,
+  declareCasus, CASUS_VETO_PROSE, warReasonsFor, warReasonFactor, REASON_TUNING, WAR_REASON_TYPES, advanceWarReasons,
 } from '../../src/domain/worldPulse/warReasons.js';
 import { sueForPeaceOrder, PEACE_VETO_PROSE } from '../../src/domain/worldPulse/peaceReasons.js';
 import { evaluateWarLayer } from '../../src/domain/worldPulse/warDeployment.js';
@@ -97,6 +97,63 @@ describe('DECLARE_CASUS — the war-side forceable verb', () => {
       const r = declareCasus(litWorld(), { fromId: 'a', toId: 'b', type, severity01: 0.5, tick: 1 });
       expect(r.ok, `${type} is decree-able`).toBe(true);
     }
+  });
+});
+
+describe('DECLARE_CASUS r2 worldpulse-war-military-5 — the decree survives the state-derived fold, decays, and expires', () => {
+  // Decree FOREIGN_CLASH: its organic scorer (scoreForeignClash) reads the convergence ledger,
+  // which is dark here ⇒ organic 0. So the decreed reason is the SOLE contributor for that type
+  // and its ramp is directly observable (a neutral pair still mints a small ORGANIC grievance,
+  // hence the separate reason type). Before the fix, advanceWarReasons rebuilt the ledger from
+  // state each tick and the decree vanished after exactly one tick.
+  const snapshot = () => ({ byId: new Map([['a', { id: 'a' }], ['b', { id: 'b' }]]) });
+  const graph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'neutral' }], channels: [] };
+  const world = () => litWorld({ relationshipStates: { 'edge.a.b': { relationshipType: 'neutral' } } });
+  const fold = (ws, tick) => advanceWarReasons({ snapshot: snapshot(), worldState: ws, graph, pIndex: null, tick }).worldState;
+  const clashScore = (ws) => warReasonsFor(ws, 'a', 'b')?.reasons?.foreign_clash?.score ?? null;
+
+  it('a decree LASTS across the fold, DECAYS visibly, and is never immortal', () => {
+    const declared = declareCasus(world(), { fromId: 'a', toId: 'b', type: 'foreign_clash', severity01: 0.8, tick: 5 }).worldState;
+    expect(clashScore(declared)).toBeCloseTo(0.8, 5); // stands at full the declare tick
+
+    // Tick 6: the fold used to ERASE it — now it survives, decayed below its decreed severity.
+    const t6 = fold(declared, 6);
+    const s6 = clashScore(t6);
+    expect(s6, 'the decree survived the state-derived rebuild (the bug: it vanished at tick 2)').toBeTruthy();
+    expect(s6).toBeGreaterThan(REASON_TUNING.MIN_SCORE);
+    expect(s6).toBeLessThan(0.8); // decayed
+
+    // Tick 7 (chained): still present, still lower — a visible ramp.
+    const t7 = fold(t6, 7);
+    const s7 = clashScore(t7);
+    expect(s7).toBeGreaterThan(REASON_TUNING.MIN_SCORE);
+    expect(s7).toBeLessThan(s6);
+
+    // At/after decreedUntilTick (5 + DECREE_RAMP_TICKS = 13) the decree EXPIRES — never immortal.
+    let ws = t7;
+    for (let t = 8; t <= 5 + REASON_TUNING.DECREE_RAMP_TICKS; t++) ws = fold(ws, t);
+    expect(clashScore(ws), 'the decree expired at its decreedUntilTick — not immortal').toBeNull();
+    expect(warReasonsFor(ws, 'a', 'b')?.decreedReasons, 'the decree sub-ledger is pruned at expiry').toBeUndefined();
+  });
+
+  it('ORGANIC SUBSUMES: a live organic grievance ≥ the decayed decree keeps its own record (force ≡ organic)', () => {
+    // A hostile pair with real resentment produces an organic grievance; a small decree cannot
+    // lower it (max-merge), and the organic reason persists after the decree would have expired.
+    const hostile = litWorld({ relationshipStates: { 'edge.a.b': { relationshipType: 'hostile', resentment: 0.9, memoryScore: 0.9 } } });
+    const hostileGraph = { edges: [{ id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'hostile' }], channels: [] };
+    const declared = declareCasus(hostile, { fromId: 'a', toId: 'b', type: 'grievance', severity01: REASON_TUNING.MIN_SCORE, tick: 1 }).worldState;
+    const folded = advanceWarReasons({ snapshot: snapshot(), worldState: declared, graph: hostileGraph, pIndex: null, tick: 2 }).worldState;
+    const rec = warReasonsFor(folded, 'a', 'b')?.reasons?.grievance;
+    expect(rec, 'the organic grievance stands').toBeTruthy();
+    expect(rec.score).toBeGreaterThan(REASON_TUNING.MIN_SCORE); // organic, not the tiny decree
+  });
+
+  it('DORMANCY: with no decree ever issued, the fold mints no decree sub-ledger (the carry is inert)', () => {
+    const ws = world();
+    const a = advanceWarReasons({ snapshot: snapshot(), worldState: ws, graph, pIndex: null, tick: 3 });
+    const b = advanceWarReasons({ snapshot: snapshot(), worldState: ws, graph, pIndex: null, tick: 3 });
+    expect(JSON.stringify(a.worldState)).toBe(JSON.stringify(b.worldState)); // deterministic
+    expect(warReasonsFor(a.worldState, 'a', 'b')?.decreedReasons, 'no decree ⇒ no decreedReasons key added').toBeUndefined();
   });
 });
 

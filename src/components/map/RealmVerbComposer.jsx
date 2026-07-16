@@ -11,11 +11,18 @@
  * through the same arms the world's own movers use.
  */
 import { useMemo, useState } from 'react';
-import { Crown } from 'lucide-react';
+import { Crown, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { realmVerbs, realmVetoProse } from '../../domain/events/realmManifest.js';
+import { t } from '../../copy/index.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+
+// content-immersion-r2-3: the registered realm_orders_teaching whisper — its body
+// (guidance.realmOrders) was dead copy that rendered NOWHERE. It now mounts here,
+// dismissible through the unified sf:guidance store.
+const ORDERS_WHISPER_ID = 'realm_orders_teaching';
 
 const selectStyle = {
   fontSize: 12, fontFamily: 'inherit', padding: '4px 6px',
@@ -35,6 +42,7 @@ export default function RealmVerbComposer({ campaign }) {
   const [verbKey, setVerbKey] = useState('');
   const [dialState, setDialState] = useState({});
   const [notice, setNotice] = useState(null);
+  const [taught, setTaught] = useState(() => !isGuidanceDismissed(ORDERS_WHISPER_ID));
 
   const worldState = useMemo(() => campaign?.worldState || {}, [campaign?.worldState]);
   const ctx = useMemo(() => {
@@ -73,7 +81,11 @@ export default function RealmVerbComposer({ campaign }) {
       else if (d.kind === 'toggle') args[d.key] = !!raw;
       else if (raw != null && String(raw) !== '') args[d.key] = String(raw);
     }
-    const r = await stageRealmVerb(campaign.id, active.entry.verb, args);
+    // composer-realm-verbs-1: a dial may stage a COMPOSITE value (e.g. the
+    // FORCE_RECONSIDERATION course = actorId + courseKey) that the entry resolves
+    // into the real apply args before minting.
+    const staged = typeof active.entry.stageArgs === 'function' ? active.entry.stageArgs(args) : args;
+    const r = await stageRealmVerb(campaign.id, active.entry.verb, staged);
     if (r && r.ok) {
       setNotice({ ok: true, text: 'Queued as a pending proposal — approve or dismiss it in the proposals list.' });
     } else {
@@ -92,6 +104,20 @@ export default function RealmVerbComposer({ campaign }) {
       }}>
         <Crown size={12} /> Realm Orders
       </div>
+      {taught && (
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
+          padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+          fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
+        }}>
+          <span style={{ flex: 1 }}>{t('guidance.realmOrders')}</span>
+          <Button
+            variant="ghost" size="sm" icon={<X size={10} />}
+            aria-label="Dismiss this tip"
+            onClick={() => { markGuidanceDismissed(ORDERS_WHISPER_ID); setTaught(false); }}
+          />
+        </div>
+      )}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: SP.sm }}>
         {verbs.map(v => (
           <Button

@@ -88,6 +88,7 @@ import { supplyInterdictionLevel } from '../spatial/supplyShipments.js';
 // M5: the spatial marker gate for SIEGE-AS-STARVATION. false off the marker (every
 // aspatial world) ⇒ resolveSiegeVerdict runs the capacity-roll VERBATIM ⇒ byte-identical.
 import { armyTransitActive } from '../spatial/armyTransit.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
 
 /**
  * Shared war/trade/occupation sim-shape typedefs (see ./pulseShapes.js) — named,
@@ -1647,8 +1648,26 @@ export function evaluateWarLayer({ snapshot, worldState, rng, tick = 0, now = nu
   // untouched — only initiation splits.
   const warInitMode = authorityFor(rules, 'strategy_deploy', 'auto');
 
+  // r2 worldpulse-war-military-2 — THE REVERSE ONE-ARMY LEG. convergence enforces "a settlement
+  // cannot besiege AND intervene" only forward (a besieger cannot intervene). The reverse — an
+  // active intervener opening a siege — was open: this gate consults the ISOLATED interventions
+  // ledger (the accessor convergence uses; NOT importing convergence, keeping the lazy-leaf import
+  // one-way) and blocks any settlement already committed as an intervention column from fielding a
+  // second army. Drop-when-empty ⇒ the set is empty when the intervention system is dark ⇒
+  // byte-identical. DESIGN_CONVERGENCE states the one-army law as bidirectional physics.
+  const interventionsLedger = getSpatialLedger(worldState, 'interventions');
+  /** @type {Set<string>} the ids currently committed as an intervention column. */
+  const activeIntervenerIds = new Set();
+  if (interventionsLedger && typeof interventionsLedger === 'object') {
+    for (const rec of Object.values(/** @type {Record<string, { interId?: unknown }>} */ (interventionsLedger))) {
+      const interId = rec && rec.interId != null ? String(rec.interId) : '';
+      if (interId) activeIntervenerIds.add(interId);
+    }
+  }
+
   for (const fromId of candidateIds) {
     if (deployments[fromId]) continue;                 // one-army constraint
+    if (activeIntervenerIds.has(fromId)) continue;     // r2 war-military-2: already committed as an intervention column
     // M10a — HOLD (dedup): a HELD war-init (warInitMode 'proposal') withholds the
     // deployment, so the mobilized besieger would otherwise re-propose the SAME
     // siege every tick, spamming the approval queue. While a pending strategy_deploy

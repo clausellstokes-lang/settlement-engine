@@ -21,22 +21,17 @@
  * the dossier but doesn't prevent the user from doing other work.
  */
 
-import { UserPlus, X } from 'lucide-react';
+import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 export default function SuccessorPrompt() {
   const pending  = useStore(s => s.pendingSuccession);
   const settlement = useStore(s => s.settlement);
   const stageComposerIntent = useStore(s => s.stageComposerIntent);
   const dismiss      = useStore(s => s.dismissPendingSuccession);
-  // Back aria-modal="true" with focus-in/Tab-trap/Escape/restore. Hook runs
-  // unconditionally (before the early return); "open" = the prompt is rendered.
-  const dialogRef = useDialogFocusTrap(Boolean(pending && settlement), dismiss);
 
   if (!pending || !settlement) return null;
 
@@ -92,13 +87,14 @@ export default function SuccessorPrompt() {
       },
     });
     dismiss();
-    // Pricing moment for the campaign-state moment: rebuilding after
-    // a pillar death is the kind of high-engagement action that
-    // earns the upgrade pitch.
-    const live = useStore.getState();
-    triggerPricingMoment('first_canon_export', () => {
-      live.setPurchaseModalOpen?.(true);
-    }, { tier: live.auth?.tier });
+    // No pricing moment here (W-R2-TRUST, components-dossier-library-5): the
+    // composer the DM is about to land on IS the value moment, and pricingMoments'
+    // own doctrine is "don't ask before they understand the value". This handler
+    // previously fired the 'first_canon_export' moment — the WRONG copy (export,
+    // not succession) AND it consumed the 24h cooldown for the REAL first-canon-
+    // export moment (SettlementDetail). No succession-themed moment exists;
+    // registering one would add eager copy to interrupt the very flow the doctrine
+    // says to leave uninterrupted, so the honest fix is to fire nothing.
     setTimeout(() => {
       const target = document.querySelector('[data-anchor="event-composer"]');
       if (target?.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -110,7 +106,6 @@ export default function SuccessorPrompt() {
     // keyboard users dismiss via the labelled IconButton or footer button.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
-      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="succession-title"
@@ -121,7 +116,7 @@ export default function SuccessorPrompt() {
       <div style={sheetStyle}>
         <header style={headerStyle}>
           <h2 id="succession-title" style={titleStyle}>
-            A leader is gone.
+            <Crown size={16} aria-hidden="true" color={GOLD} /> A leader is gone.
           </h2>
           <IconButton Icon={X} label="Dismiss" tone="ghost" size="sm" onClick={dismiss} />
         </header>
@@ -147,7 +142,6 @@ export default function SuccessorPrompt() {
                   <button
                     key={npc.id || npc.name}
                     type="button"
-                    aria-label={`Appoint ${npc.name} as successor`}
                     onClick={() => pickSuccessor(npc)}
                     style={successorBtnStyle}
                   >
@@ -160,6 +154,7 @@ export default function SuccessorPrompt() {
                         {npc.importance ? ` · ${npc.importance}` : ''}
                       </div>
                     </div>
+                    <ArrowRight size={14} aria-hidden="true" color={GOLD} />
                   </button>
                 ))}
               </div>

@@ -1,9 +1,19 @@
+import { useState } from 'react';
+import { X } from 'lucide-react';
 import { MUTED, SECOND, BORDER, sans, FS, SP } from '../theme.js';
 import { SAMPLE_SETTLEMENTS } from '../../data/sampleSettlements.js';
 import { SampleCard } from './SampleCard.jsx';
 import SurveyorNote from '../guidance/SurveyorNote.jsx';
+import Button from '../primitives/Button.jsx';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
+
+// content-immersion-r2-3: the registered library_empty_invitation whisper — its
+// dismissal now rides the unified sf:guidance store (a mount-site concern per
+// SurveyorNote's contract), so a keeper who hides it stays un-nagged.
+const WHISPER_ID = 'library_empty_invitation';
 
 export function SampleDashboard({ onFork, forkingId }) {
+  const [invited, setInvited] = useState(() => !isGuidanceDismissed(WHISPER_ID));
   return (
     <div style={{
       padding: '20px 16px',
@@ -14,9 +24,18 @@ export function SampleDashboard({ onFork, forkingId }) {
       {/* W-GUIDE-2 §8: the empty library greets the keeper in the Surveyor's
           note register (registered whisper library_empty_invitation). A margin
           rest-point invitation — it never blocks or floats. */}
-      <div style={{ marginBottom: SP.md }}>
-        <SurveyorNote topic="library" moment="empty" id="library-empty-invitation" compact />
-      </div>
+      {invited && (
+        <div style={{ marginBottom: SP.md, display: 'flex', alignItems: 'flex-start', gap: 4 }}>
+          <div style={{ flex: 1 }}>
+            <SurveyorNote topic="library" moment="empty" id="library-empty-invitation" compact />
+          </div>
+          <Button
+            variant="ghost" size="sm" icon={<X size={11} />}
+            aria-label="Dismiss the library note"
+            onClick={() => { markGuidanceDismissed(WHISPER_ID); setInvited(false); }}
+          />
+        </div>
+      )}
       <div style={{
         fontSize: FS.xs, fontWeight: 800, color: MUTED,
         textTransform: 'uppercase', letterSpacing: '0.06em',

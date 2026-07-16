@@ -6,12 +6,26 @@
  * enqueue+drain: a local commit lands in one frame, the cloud catches up
  * visibly, and pending writes survive a tab close.
  *
- * ORDERING GUARANTEE (enforced, not merely hoped): writes to the SAME
- * (saveId, kind) — i.e. the same columns — are serialized, so a newer write
- * lands AFTER any in-flight older one and last-write-wins holds in enqueue
- * order (see attemptOps' per-key gate). Writes to DIFFERENT keys never contend
- * and drain fully concurrently, up to DRAIN_CAP. (It is deliberately NOT a
- * single global FIFO — cross-save concurrency is the whole point of the pool.)
+ * ORDERING GUARANTEE (enforced, not merely hoped): the `kind` is a save row's
+ * COLUMN set (campaignSliceShared.kindForPartial), so writes to the SAME columns
+ * are serialized (attemptOps' per-key gate) AND a newer op supersedes an older
+ * non-inflight op whose columns it fully COVERS (enqueue's subset-supersede) — so
+ * a backed-off stale retry can neither race nor revert a fresher write to the same
+ * columns (store-hooks-state-2: the destroy-resurrection + map-edit-revert class).
+ * Writes to DIFFERENT (disjoint) columns never contend and drain concurrently up
+ * to DRAIN_CAP. (Deliberately NOT a single global FIFO — cross-save concurrency is
+ * the whole point of the pool.)
+ *
+ * KNOWN RESIDUAL (store-hooks-state-2, deliberately deferred — documented, not a
+ * bug to re-find): a backed-off older op whose columns are NOT fully covered by a
+ * newer PARTIALLY-overlapping op (e.g. an older {campaign_state,data} applyEvent
+ * vs a newer {data}-only edit) is neither superseded nor gated once it has left the
+ * in-flight window, so its late retry could still revert the shared column. Closing
+ * that needs STRICT per-saveId FIFO through the backoff lifecycle (a parked op then
+ * blocks later same-save writes) — an ordering-vs-availability tradeoff that is
+ * owner-gated. Also deferred: routing aiSlice's 9 direct ai_data writes through
+ * persistSaveUpdate (changes their local-catch error handling to the outbox failure
+ * reporter across a large tested surface) so ONE lane owns the ai_data column.
  *
  * WHAT THIS MODULE OWNS (and what it does NOT):
  *   • The op list (intent) and the payload cache (data), each mirrored to a
@@ -244,6 +258,17 @@ function payloadKeyFor(saveId, kind) {
   return `${saveId}:${kind}`;
 }
 
+// A kind is a '+'-joined sorted COLUMN set (campaignSliceShared.kindForPartial).
+// `newKind` COVERS `oldKind` when every column oldKind writes is also written by
+// newKind (oldKind ⊆ newKind) — so a newer op with newKind fully overwrites the
+// older op's columns with fresher data, making the older op redundant.
+function kindCovers(newKind, oldKind) {
+  if (newKind === oldKind) return true;
+  const cols = new Set(newKind ? String(newKind).split('+') : []);
+  const old = oldKind ? String(oldKind).split('+') : [];
+  return old.length > 0 && old.every(c => cols.has(c));
+}
+
 /**
  * Enqueue (or supersede) a persistence op. A newer op for the same (saveId,
  * kind) REPLACES a still-pending or parked older op — the stale intent and its
@@ -253,12 +278,28 @@ function payloadKeyFor(saveId, kind) {
  */
 export function enqueue({ saveId, kind, payload, fingerprint, differential = false }) {
   const key = payloadKeyFor(saveId, kind);
-  // Supersede: drop any non-inflight op with the same key (its payload is about
-  // to be overwritten by the newer one, so no prune needed). An in-flight op is
-  // mid-attempt and can't be recalled — but attemptOps' per-key gate makes this
-  // newer op WAIT for it, so the newer write lands after and last-write-wins
-  // holds in enqueue order (the ORDERING GUARANTEE in the module header).
-  _ops = _ops.filter(op => !(op.payloadKey === key && op.status !== 'inflight'));
+  // Supersede (store-hooks-state-2): drop any non-inflight op for the SAME saveId
+  // whose COLUMNS are a subset of this newer op's columns (kindCovers) — the newer
+  // write fully overwrites those columns with fresher data, so the older op is
+  // redundant, and if it had backed off its stale retry would REVERT this write
+  // (the un-delete / map-edit-revert ghost class). The same-key case is the equal-
+  // set special case. An op touching a column this one does NOT write (version_history
+  // vs data) is NOT covered, so it correctly COEXISTS. An in-flight op can't be
+  // recalled — attemptOps' per-key gate makes a same-key newer op WAIT for it, so
+  // last-write-wins holds in enqueue order (the module-header ORDERING GUARANTEE).
+  const superseded = _ops.filter(op =>
+    op.kind !== OP_KIND_BARRIER && op.saveId === saveId && op.status !== 'inflight' && kindCovers(kind, op.kind));
+  if (superseded.length) {
+    const drop = new Set(superseded);
+    _ops = _ops.filter(op => !drop.has(op));
+    // GC each dropped op's payload if no surviving op still references its key
+    // (the new op's own key is re-populated below).
+    for (const op of superseded) {
+      if (op.payloadKey && op.payloadKey !== key && !_ops.some(o => o.payloadKey === op.payloadKey)) {
+        delete _payloads[op.payloadKey];
+      }
+    }
+  }
 
   _payloads[key] = payload;
   const op = /** @type {PersistenceOp} */ ({

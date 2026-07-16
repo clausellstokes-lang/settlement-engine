@@ -335,6 +335,48 @@ describe('precarity (§1: grow, starve → quickly die, converge — all conserv
     expect(satellitesOf(worldState.spatialLedgers.satellites, 'a').length).toBe(2);
   });
 
+  // ── r2 economy-upswing-5: TERMINAL-DEATH ORBIT DISPOSAL ──────────────────────
+  it('a DEAD parent holding steadings disperses its whole orbit (records dropped, receipted) — no ledger strand, no inherited orbit', () => {
+    // A parent that died (relic_ruin) still carrying two live steadings. Before the fix these
+    // stayed frozen in spatialLedgers.satellites forever (skip-lane `continue` ran no disposal),
+    // and a later resettlement of the same id inherited the dead town's orbit.
+    const settlements = { a: town('a', { lifecycleStatus: 'relic_ruin', population: 0 }) };
+    const ledger = { a: { steadings: {
+      's1': steadingOf('s1', { population: 30 }),
+      's2': steadingOf('s2', { population: 20, orbit: 1 }),
+    } } };
+    const { worldState, receipts, news } = drive({ settlements, ticks: 1, ledger });
+
+    // The orbit is gone AND the parent's ledger entry is fully removed (no strand to inherit).
+    expect(satellitesOf(worldState.spatialLedgers?.satellites || null, 'a').length, 'no steading survives the parent').toBe(0);
+    expect(worldState.spatialLedgers?.satellites?.a, 'the dead parent has no ledger entry left').toBeUndefined();
+
+    // Receipted + chronicled, with the dispersed population summed (origin-loss; see the
+    // conservation JUDGMENT in the kernel — not credited through migration).
+    const rec = receipts.find((r) => r.kind === 'satellite_orbit_dispersed');
+    expect(rec, 'the disposal is receipted').toBeTruthy();
+    expect(rec.count).toBe(2);
+    expect(rec.dispersedPopulation).toBe(50);
+    expect(rec.satIds.sort()).toEqual(['s1', 's2']);
+    expect(news.some((n) => n.impactKind === 'steading_orbit_dispersed' || String(n.headline || '').includes('empty out')),
+      'a chronicle beat lands').toBe(true);
+  });
+
+  it('CONTROL: a LIVE parent with steadings does NOT trigger orbit disposal (only a dead parent does)', () => {
+    const settlements = { a: town('a') }; // alive
+    const ledger = { a: { steadings: { 's1': steadingOf('s1', { population: 30 }) } } };
+    const { worldState, receipts } = drive({ settlements, ticks: 1, ledger });
+    expect(receipts.some((r) => r.kind === 'satellite_orbit_dispersed'), 'a live parent never disperses its orbit wholesale').toBe(false);
+    expect(satellitesOf(worldState.spatialLedgers.satellites, 'a').length, 'the live orbit persists').toBe(1);
+  });
+
+  it('runs ONCE: the tick after disposal the dead parent carries no ledger entry to re-dispose', () => {
+    const settlements = { a: town('a', { lifecycleStatus: 'relic_ruin', population: 0 }) };
+    const ledger = { a: { steadings: { 's1': steadingOf('s1', { population: 30 }) } } };
+    const { receipts } = drive({ settlements, ticks: 3, ledger });
+    expect(receipts.filter((r) => r.kind === 'satellite_orbit_dispersed').length, 'disposed exactly once').toBe(1);
+  });
+
   it('DETERMINISM: identical inputs produce byte-identical outcomes (ledger + updates)', () => {
     const run = () => {
       const settlements = { a: town('a', { conditions: [boomCond] }) };

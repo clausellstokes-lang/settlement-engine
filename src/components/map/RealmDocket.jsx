@@ -10,13 +10,20 @@
  * The FORECAST (the pending future's clone-run) attaches to THIS surface —
  * "the forecast button attached to IT" (§10 THE DOCKET).
  */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { CalendarClock, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { AFFORDANCE_MANIFEST } from '../../domain/events/affordanceManifest.js';
+import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
+import { t } from '../../copy/index.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 import RealmForecast from './RealmForecast.jsx';
+
+// content-immersion-r2-3: the registered realm_docket_teaching whisper — its body
+// (guidance.realmDocket) was dead copy that rendered NOWHERE. It now mounts here,
+// dismissible through the unified sf:guidance store.
+const DOCKET_WHISPER_ID = 'realm_docket_teaching';
 
 function entryLabel(event) {
   const base = event?.type ? String(event.type).replace(/_/g, ' ').toLowerCase() : 'change';
@@ -27,6 +34,8 @@ function entryLabel(event) {
 export default function RealmDocket({ campaign }) {
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
   const saves = useStore(s => s.savedSettlements);
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
+  const [taught, setTaught] = useState(() => !isGuidanceDismissed(DOCKET_WHISPER_ID));
 
   const queue = campaign?.worldState?.pendingEvents || [];
   const settlementById = useMemo(
@@ -54,6 +63,21 @@ export default function RealmDocket({ campaign }) {
         </span>
       </div>
 
+      {taught && (
+        <div style={{
+          display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
+          padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+          fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
+        }}>
+          <span style={{ flex: 1 }}>{t('guidance.realmDocket')}</span>
+          <Button
+            variant="ghost" size="sm" icon={<X size={10} />}
+            aria-label="Dismiss this tip"
+            onClick={() => { markGuidanceDismissed(DOCKET_WHISPER_ID); setTaught(false); }}
+          />
+        </div>
+      )}
+
       {queue.length === 0 ? (
         <p style={{ fontSize: FS.xxs, color: MUTED, margin: 0, fontStyle: 'italic' }}>
           Nothing is staged. Orders queued on member settlements appear here in the order the tick will consume them.
@@ -64,9 +88,12 @@ export default function RealmDocket({ campaign }) {
             const sid = String(item.saveId);
             const settlement = settlementById.get(sid);
             const name = settlement?.name || sid;
-            const v = AFFORDANCE_MANIFEST[item.event?.type];
-            const verdict = v && !v.foldedInto && settlement ? v.predicate(settlement, {}) : null;
-            const lapsed = verdict && !verdict.available ? verdict.reasons.join(' ') : null;
+            // experience-product-fit-3: the composer's real ctx (peer count
+            // EXCLUDES this entry's own save), never the empty {} that cried wolf.
+            const lapsed = lapseOf(item.event, settlement, {
+              canUseCustom,
+              campaignPeerCount: campaignPeerCountFor(campaign, sid),
+            });
             return (
               <div key={item.queueId} style={{
                 display: 'flex', alignItems: 'center', gap: 8,

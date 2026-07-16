@@ -45,15 +45,31 @@ const STATIC_ORIGINS = [
 const CLOUDFLARE_PAGES_SUFFIX = '.settlement-engine.pages.dev';
 
 /**
- * Vercel deployment-URL suffix for this project's TEAM scope. Vercel assigns a
- * fresh `<project>-<hash>-<scope>.vercel.app` per deploy/preview, so an exact
- * list can't keep up (same reason as the Cloudflare rule). The team scope is the
- * trailing segment and is owned by us — an attacker cannot deploy under it — so
- * requiring the hostname to END with `-<scope>.vercel.app` (https, leading char
- * before the hyphen guaranteed by the suffix) is a safe branch/preview match.
- * The apex production access stays via the settlementforge.com custom domain.
+ * Vercel deploy/preview URL shape for this project under our team scope. Vercel
+ * assigns a fresh URL per deploy/preview, so an exact list can't keep up (same
+ * reason as the Cloudflare rule).
+ *
+ * A bare `endsWith('-settlement-forge.vercel.app')` suffix match was SPOOFABLE
+ * (finding backend-functions-3): `.vercel.app` project names are a global,
+ * first-come namespace, so an attacker's project named `evil-settlement-forge`
+ * gets the production alias `evil-settlement-forge.vercel.app`, which ends with
+ * the suffix and passed the check. The team slug `settlement-forge` only appears
+ * as a Vercel-APPENDED trailing segment in PREVIEW URLs (which always carry a
+ * generated middle — a deploy hash, or `git-<branch>`); the attacker can only
+ * forge the suffix via a bare production alias, which has NO generated middle.
+ *
+ * So we match the full preview-URL shape: our project prefix, then a generated
+ * middle (a 9-char deploy hash OR `git-<branch>`), then the team suffix. This
+ * rejects the bare-alias spoof while still matching every real preview/branch
+ * build. The apex production access stays via the settlementforge.com custom
+ * domain (+ settlementwork.vercel.app in STATIC_ORIGINS).
+ *
+ * Residual (accepted, bounded — auth is bearer-token, not cookie): an attacker
+ * who grabs the exact global project name `settlementforge-<9alnum>-settlement-
+ * forge` would still match. For hard enumeration, add explicit hosts via
+ * ALLOWED_ORIGINS instead of relying on this rule.
  */
-const VERCEL_DEPLOY_SUFFIX = '-settlement-forge.vercel.app';
+const VERCEL_DEPLOY_RE = /^settlementforge-(?:git-[a-z0-9-]+|[a-z0-9]{9})-settlement-forge\.vercel\.app$/;
 
 /**
  * Read an env var without assuming the Deno global exists. The helper is
@@ -127,11 +143,11 @@ export function isAllowedOrigin(origin: string): boolean {
     ) {
       return true;
     }
-    // Vercel deploy/preview: https + team-scoped suffix (the leading hyphen in
-    // the suffix guarantees a project/hash prefix, and the scope is ours), so
-    // every `<project>-<hash>-settlement-forge.vercel.app` build can call the
-    // edge functions — matching the Cloudflare branch/preview treatment.
-    if (url.protocol === 'https:' && url.hostname.endsWith(VERCEL_DEPLOY_SUFFIX)) {
+    // Vercel deploy/preview: https + the full deploy-URL shape (project prefix +
+    // generated hash/git-branch middle + team suffix). The generated middle is
+    // what a bare production-alias spoof (evil-settlement-forge.vercel.app) can't
+    // forge — see VERCEL_DEPLOY_RE.
+    if (url.protocol === 'https:' && VERCEL_DEPLOY_RE.test(url.hostname)) {
       return true;
     }
   } catch {

@@ -2,7 +2,7 @@ import { afterEach, describe, expect, test } from 'vitest';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { TRADE_DEPENDENCY_NEEDS } from '../../src/data/economicData.js';
-import { GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
+import { GOODS_CATEGORIES, GOODS_MODIFIERS_BY_TIER } from '../../src/data/tradeGoodsData.js';
 import { customDeps } from '../../src/lib/dependencyEngine.js';
 import { generateEconomicState } from '../../src/generators/economicGenerator.js';
 import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
@@ -79,18 +79,24 @@ describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export 
   // numeric probability p in (0,1] and a boolean default-on flag. getGoodsModifiers
   // gates on `spec.on && _rng() < spec.p`, so a good with a non-numeric p or a
   // non-boolean on silently never rolls (or always rolls) — the exact drift
-  // class this file guards. The one deliberate exception is the resource/route
-  // BOOST schema (town/Enslaved persons): institution/route boosts instead of a
-  // p/on export shape, left inert by getGoodsModifiers (spec.on is undefined).
+  // class this file guards.
+  //
+  // [data-tables-4] The table is now UNIFORMLY p/on-shaped. The former lone
+  // exception — the town/Enslaved persons institution/route BOOST schema — was
+  // rewritten into a standard { category, p, on, desc } row, and its reader-less
+  // boost fields dropped. It is kept DELIBERATELY DEFAULT-OFF (on:false): because
+  // getGoodsModifiers short-circuits on `spec.on` BEFORE drawing rng, a default-off
+  // row is byte-identical to the old shapeless one (never reached the draw), so the
+  // reshape shifts no golden. Enabling it (on:true) is an owner-gated change that
+  // draws rng and shifts the goods goldens — pinned off here so the flip is conscious.
 
   const isBoostSpec = (def) =>
     'institutionBoost' in def || 'routeBoost' in def || 'resourceBoost' in def;
 
-  test('every standard good has numeric p in (0,1] and boolean on', () => {
+  test('every good has numeric p in (0,1] and boolean on', () => {
     const offenders = [];
     for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
       for (const [good, def] of Object.entries(goods)) {
-        if (isBoostSpec(def)) continue; // pinned separately below
         const pOk = typeof def.p === 'number' && def.p > 0 && def.p <= 1;
         const onOk = typeof def.on === 'boolean';
         if (!pOk || !onOk) {
@@ -101,8 +107,8 @@ describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export 
     expect(offenders, `goods with an invalid p/on export shape: ${offenders.join('; ')}`).toEqual([]);
   });
 
-  test('the only non-p/on entries are the known boost specs', () => {
-    // A new boost-schema (or otherwise shapeless) entry surfaces here for review
+  test('no boost-schema (shapeless) entries remain — the table is uniform', () => {
+    // A future boost-schema (or otherwise shapeless) entry surfaces here for review
     // rather than silently joining the table as an inert good.
     const boostEntries = [];
     for (const [tier, goods] of Object.entries(GOODS_MODIFIERS_BY_TIER)) {
@@ -110,7 +116,19 @@ describe('vocabulary: GOODS_MODIFIERS_BY_TIER entries carry a valid p/on export 
         if (isBoostSpec(def)) boostEntries.push(`${tier}/${good}`);
       }
     }
-    expect(boostEntries).toEqual(['town/Enslaved persons']);
+    expect(boostEntries).toEqual([]);
+  });
+
+  test('town/Enslaved persons is the deliberately default-OFF restricted export', () => {
+    // Reshaped by [data-tables-4] from a boost schema into a standard row, kept
+    // inert-by-default so the reshape stays byte-identical. If this flips to on:true
+    // the goods goldens WILL move — that is an owner-gated, consciously-recorded change.
+    const def = GOODS_MODIFIERS_BY_TIER.town['Enslaved persons'];
+    expect(def, 'town/Enslaved persons export row must exist').toBeTruthy();
+    expect(def.category).toBe(GOODS_CATEGORIES.TRADE);
+    expect(typeof def.p).toBe('number');
+    expect(def.on, 'must stay default-off (on:true is a golden-shifting owner gate)').toBe(false);
+    expect(isBoostSpec(def), 'reader-less boost fields must stay dropped').toBe(false);
   });
 
   test('pin is not vacuous (standard goods are actually walked)', () => {

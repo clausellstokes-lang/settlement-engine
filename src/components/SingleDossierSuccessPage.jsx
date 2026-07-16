@@ -30,6 +30,7 @@ import {
 } from '../lib/pendingDossier.js';
 import { verifySingleDossierPurchase } from '../lib/stripe.js';
 import { SINGLE_DOSSIER } from '../config/pricing.js';
+import { FREE_SAVE_LIMIT } from '../config/tierFacts.js';
 import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
@@ -342,8 +343,8 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           margin: `${SP.sm}px auto 0`, maxWidth: 440,
           fontSize: FS.sm, color: BODY, lineHeight: 1.5,
         }}>
-          A free Wanderer account saves three dossiers, unlocks full-screen edit,
-          and remembers your settings across devices. No card required.
+          A free Wanderer account saves {FREE_SAVE_LIMIT} dossiers and remembers
+          your settings across devices. No card required.
         </p>
         <div style={{
           marginTop: SP.md, display: 'flex', gap: SP.sm, justifyContent: 'center', flexWrap: 'wrap',

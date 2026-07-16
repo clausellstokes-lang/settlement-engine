@@ -77,6 +77,10 @@ import { settlementRumors } from '../../domain/display/settlementRumors.js';
 import { settlementBeliefs } from '../../domain/display/settlementBeliefs.js';
 import { settlementPestilence } from '../../domain/display/settlementPestilence.js';
 import { flowDerivedDependency } from '../../domain/display/tradeFlowEconomics.js';
+// ambition-fit-3: the peace engine's crown deliverable — the treaty table — for
+// the campaign_state war-room PDF. renderAllTreaties is pure + self-resolving
+// (names live in the doc) and returns null-degrading data when the ledger is dark.
+import { renderAllTreaties } from '../../domain/display/treatyDocument.js';
 
 /** Human posture band for a centered-on-1.0 aggressiveness multiplier. Mirrors
  * WarFaithSection.aggressionPosture so the printed posture matches the screen. */
@@ -246,23 +250,45 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
   // ── Self-gating: nothing live AND no faith of any kind ⇒ dormant ⇒ null. ───
   // This is the byte-identity seam: identical result with/without an empty
   // worldState, and identical result for campaign === null.
+  // ambition-fit-3: the realm's treaties (war-room table). Realm-wide like the
+  // on-screen TreatyPanel; empty when no negotiated peace stands ⇒ byte-inert.
+  const treaties = renderAllTreaties(worldState).map(doc => ({
+    pairKey: doc.pairKey,
+    title: doc.title,
+    victorName: doc.victorName,
+    loserName: doc.loserName,
+    complianceState: doc.complianceState,
+    frayingLine: doc.frayingLine,
+    summary: doc.summary && typeof doc.summary === 'object' ? doc.summary.line : null,
+    terms: (doc.termLines || []).map(t => ({
+      label: t.label, yearsRemaining: t.yearsRemaining, complianceState: t.complianceState, strainLine: t.strainLine,
+    })),
+  }));
+
   const hasLive = !!status || exhaustionRaw > 0 || !!standing || tradeWarsRaw.length > 0 || !!occupiedRow
     || !!mobilization || !!army || !!occupationLive || !!holdings || tradeTies.length > 0
     // pdf-1: the new living-world reads also count as "live" — a settlement with only
     // rumors / beliefs / trade-drift / pestilence (no war, no deity) still earns the
     // chapter. Dormant worlds return [] / null from every selector ⇒ byte-identical.
-    || rumors.length > 0 || beliefs.length > 0 || !!flowDrift || !!pestilence;
+    || rumors.length > 0 || beliefs.length > 0 || !!flowDrift || !!pestilence
+    // ambition-fit-3: a standing treaty earns the war-room chapter too.
+    || treaties.length > 0;
   if (!hasLive && !deity && !cults.length && !livePantheon.length) return null;
 
   const tradeWars = tradeWarsRaw.map(t => {
-    const role = t.winnerId === id ? 'supplier'
-      : t.incumbentId === id ? 'displaced'
-        : 'contesting';
+    // pdf-export-1: when THIS settlement is the buyer, it is the contested MARKET
+    // (the prize), not a combatant — self-referential 'Contesting X (OwnName)' was
+    // the bug. Name the winner who now supplies the prize.
+    const role = t.buyerId === id ? 'market'
+      : t.winnerId === id ? 'supplier'
+        : t.incumbentId === id ? 'displaced'
+          : 'contesting';
     return {
       prizeId: t.prizeId,
-      role: /** @type {'supplier'|'displaced'|'contesting'} */ (role),
+      role: /** @type {'market'|'supplier'|'displaced'|'contesting'} */ (role),
       commodityLabel: t.commodityLabel,
       buyer: nameFor(t.buyerId),
+      winner: nameFor(t.winnerId),
     };
   });
 
@@ -315,6 +341,8 @@ export function buildPdfLiveWorld({ settlement, campaign } = /** @type {any} */ 
     beliefs,
     flowDrift,
     pestilence,
+    // ── ambition-fit-3: the realm's treaty table (the war-room's crown page) ──
+    treaties,
   };
 }
 

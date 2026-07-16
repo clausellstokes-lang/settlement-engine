@@ -68,25 +68,32 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   const tier = useStore(s => s.auth?.tier);
   const canExportFreely = useStore(s => (typeof s.isElevated === 'function' && s.isElevated())
     || (typeof s.canExport === 'function' && s.canExport()));
+  // When THIS component owns the fallback save (no caller-supplied saveId or
+  // onSaveFirst), the returned id is held locally so the rung advances from
+  // 'unsaved' → 'unpurchased' on the very next render even before the parent
+  // re-threads activeSaveId (finding components-shell-commerce-2).
+  const [localSaveId, setLocalSaveId] = useState(null);
+  const effectiveSaveId = saveId ?? localSaveId;
   // `undefined` = never fetched. Guard the map so a partial store reads undefined.
-  const cached = useStore(s => (saveId ? s.dossierEntitlements?.[saveId] : undefined));
+  const cached = useStore(s => (effectiveSaveId ? s.dossierEntitlements?.[effectiveSaveId] : undefined));
   const canSave = useStore(s => (typeof s.canSave === 'function' ? s.canSave() : false));
   const refreshDossierEntitlement = useStore(s => s.refreshDossierEntitlement);
+  const setActiveSaveId = useStore(s => s.setActiveSaveId);
 
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
   const [ladderOpen, setLadderOpen] = useState(false);
 
-  const access = resolveExportAccess({ tier, canExportFreely, saveId, entitled: cached === true });
+  const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
   // Only the signed-in unpurchased path needs a durable-right lookup; fetch once
   // when the save id is known and nothing is cached yet.
   useEffect(() => {
-    if (access.reason === 'unpurchased' && cached === undefined && saveId
+    if (access.reason === 'unpurchased' && cached === undefined && effectiveSaveId
         && typeof refreshDossierEntitlement === 'function') {
-      refreshDossierEntitlement(saveId);
+      refreshDossierEntitlement(effectiveSaveId);
     }
-  }, [access.reason, cached, saveId, refreshDossierEntitlement]);
+  }, [access.reason, cached, effectiveSaveId, refreshDossierEntitlement]);
 
   if (!settlement) return null;
   if (access.allowed) return null;    // export-capable tier or a durable right already held.
@@ -127,15 +134,22 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   // rung saves even when a caller doesn't wire onSaveFirst.
   async function runSaveFirst() {
     if (typeof onSaveFirst === 'function') { onSaveFirst(); return; }
+    if (busy) return; // re-entrancy guard: a second click must not re-insert a row
     setBusy(true); setError(null);
     try {
       const { saves: savesService } = await import('../lib/saves.js');
+      const config = settlement._config || null;
       const newSaveId = await savesService.save({
         name: settlement.name || 'Untitled Settlement',
         tier: settlement.tier || 'unknown',
         settlement,
-        config: settlement._config || null,
+        config,
       });
+      // Stamp the active save id AND hold it locally so the rung advances to
+      // 'unpurchased' immediately — the save-first button is gone on re-render, so
+      // there is no button left to double-insert with.
+      if (typeof setActiveSaveId === 'function') setActiveSaveId(newSaveId);
+      setLocalSaveId(newSaveId);
       import('../store/saveMoments.js')
         .then(({ recordSaveMomentForActiveSave }) =>
           recordSaveMomentForActiveSave({ saveId: newSaveId, settlement, store: useStore }))
