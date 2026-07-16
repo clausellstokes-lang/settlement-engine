@@ -523,7 +523,7 @@ function thirdThreatRead(deployments, graph, partyId, foeId) {
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */
 export const PEACE_VETO_PROSE = Object.freeze({
-  peace_gate_dark: 'The causal reasons layer is not active in this campaign (warLayerEnabled + peaceEngineEnabled).',
+  peace_gate_dark: 'The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under Simulation rules → Engine waves.',
   peace_no_deployment: 'That court has no army in the field against that foe — there is no war of theirs to wind down.',
   peace_already_ordered: 'The recall order is already given; the army marches home.',
 });

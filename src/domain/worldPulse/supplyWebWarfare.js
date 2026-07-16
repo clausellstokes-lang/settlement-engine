@@ -967,7 +967,7 @@ function completeNews(aggressorId, targetId, name, plan, tick) {
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */
 export const WEBWAR_VETO_PROSE = Object.freeze({
-  webwar_gate_dark: 'Supply-web warfare is not active in this campaign (warLayerEnabled + supplyWebWarfareEnabled).',
+  webwar_gate_dark: 'Supply-web warfare is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Supply-line war” under Simulation rules → Engine waves.',
   webwar_self: 'A court cannot open a supply-war campaign against itself.',
   webwar_no_web: 'That target has no readable supply web to strangle (no reachable outside suppliers).',
   webwar_plan_exists: 'That court already runs a live indirect campaign; one plan per aggressor.',

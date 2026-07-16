@@ -692,7 +692,7 @@ function pressureBlend(pIndex, id) {
 
 /** The DM-facing refusal prose per veto code (W-COMPOSER-2's VETO_PROSE feed). */
 export const CASUS_VETO_PROSE = Object.freeze({
-  casus_gate_dark: 'The causal reasons layer is not active in this campaign (warLayerEnabled + peaceEngineEnabled).',
+  casus_gate_dark: 'The causal reasons layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under Simulation rules → Engine waves.',
   casus_unknown_type: 'That is not a typed reason for war this engine tracks.',
   casus_self: 'A court cannot hold a casus belli against itself.',
 });

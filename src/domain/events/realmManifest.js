@@ -61,34 +61,40 @@ const no = (reasons, unlocks = []) => ({ available: false, reasons, unlocks });
 /** @param {boolean} cond @param {string} reason @param {string} [unlock] */
 const gate = (cond, reason, unlock) => (cond ? ok() : no([reason], unlock ? [unlock] : []));
 
-// The wave-gate refusals (each names the exact flags that light it — teaching).
+// The wave-gate refusals TEACH the way out. W-R2-LIGHT (closes sim-cohesion-
+// counterparts-4): the unlock names a REAL path — a world-alive PRESET, or the
+// exact Simulation rules → Engine waves toggle the dialog now renders — instead of
+// a raw flag no surface exposed. `WAVES_PATH` is that dialog path; the war-coupled
+// waves name Dramatic Campaign / Full Simulation (the presets that also light War),
+// since a "living realm" without War keeps them dormant.
+const WAVES_PATH = 'Simulation rules → Engine waves';
 const darkWar = () => no(
   ['The causal reasons layer is not active in this campaign.'],
-  ['Light warLayerEnabled + peaceEngineEnabled in the simulation rules.'],
+  [`Pick the Dramatic Campaign or Full Simulation preset, or light War and “Causes of war and peace” under ${WAVES_PATH}.`],
 );
 const darkWebwar = () => no(
   ['Supply-web warfare is not active in this campaign.'],
-  ['Light warLayerEnabled + supplyWebWarfareEnabled in the simulation rules.'],
+  [`Pick the Dramatic Campaign or Full Simulation preset, or light War and “Supply-line war” under ${WAVES_PATH}.`],
 );
 const darkNaval = () => no(
   ['The naval layer is not active (it needs a spatially-canonized realm).'],
-  ['Canonize the realm map, then light navalEnabled in the simulation rules.'],
+  [`Canonize the realm map, then pick a world-alive preset or light “Sea lanes” under ${WAVES_PATH}.`],
 );
 const darkIntervention = () => no(
   ['The intervention layer is not active in this campaign.'],
-  ['Light warLayerEnabled + interventionEnabled in the simulation rules.'],
+  [`Pick the Dramatic Campaign or Full Simulation preset, or light War and “Intervention” under ${WAVES_PATH}.`],
 );
 const darkMomentum = () => no(
   ['The momentum layer is not active in this campaign.'],
-  ['Light momentumEnabled in the simulation rules.'],
+  [`Pick a world-alive preset, or light “Momentum” under ${WAVES_PATH}.`],
 );
 const darkLifecycle = () => no(
   ['The settlement lifecycle layer is not active in this campaign.'],
-  ['Light settlementLifecycleEnabled in the simulation rules.'],
+  [`Pick a world-alive preset, or light “New & lost steadings” under ${WAVES_PATH}.`],
 );
 const darkCalamity = () => no(
   ['The calamity layer is not active in this campaign.'],
-  ['Light calamityEnabled in the simulation rules.'],
+  ['Pick the Dramatic Campaign or Full Simulation preset — the calamity mover rides those presets.'],
 );
 
 // ── Shared target readers (each wraps ONE sim read — never re-derives) ───────
@@ -436,25 +442,25 @@ export const REALM_MANIFEST = Object.freeze({
 // ── Veto prose (the refusal TEACHES — the module feeds, merged) ──────────────
 /** @type {Record<string, (d: string) => string>} */
 const REALM_VETO_PROSE_LOCAL = {
-  intervention_gate_dark: () => 'The intervention layer is not active in this campaign (warLayerEnabled + interventionEnabled).',
+  intervention_gate_dark: () => `The intervention layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset, or light War and “Intervention” under ${WAVES_PATH}.`,
   intervention_no_contest: d => `No coup contest is live at ${d || 'that settlement'} — an intervention needs a brewing coup to join.`,
   intervention_busy: d => `${d || 'That court'} already has an army committed elsewhere (the one-army law).`,
   intervention_already: d => `${d || 'That court'} is already intervening in this contest.`,
   reinforce_deferred: () => 'The relief-column commitment seam is a documented W-CONVERGENCE deferral — this verb is registered but not yet executable.',
   intercept_deferred: () => 'The intercept-column commitment seam is a documented W-CONVERGENCE deferral — this verb is registered but not yet executable.',
-  convoy_gate_dark: () => 'The naval layer is not active (spatial canon + navalEnabled).',
+  convoy_gate_dark: () => `The naval layer is not active. Canonize the realm map, then pick a world-alive preset or light “Sea lanes” under ${WAVES_PATH}.`,
   convoy_not_ports: d => `${d || 'Those settlements'} are not both sea-lane ports.`,
   convoy_no_deployment: d => `${d || 'That port'} has no deployed army to escort.`,
   convoy_refused: d => d || 'The sea leg refused the convoy (no route, no navy, or no capacity).',
-  blockade_gate_dark: () => 'The naval layer is not active (spatial canon + navalEnabled).',
+  blockade_gate_dark: () => `The naval layer is not active. Canonize the realm map, then pick a world-alive preset or light “Sea lanes” under ${WAVES_PATH}.`,
   blockade_not_ports: d => `${d || 'Those settlements'} are not both sea-lane ports.`,
   blockade_no_navy: d => `${d || 'That port'} has no war navy to blockade with.`,
   blockade_refused: d => d || 'The sea leg refused the blockade (no reachable route).',
   blockade_already: d => `${d || 'That navy'} already blockades that port.`,
-  reconsideration_gate_dark: () => 'The momentum layer is not active in this campaign (momentumEnabled).',
+  reconsideration_gate_dark: () => `The momentum layer is not active in this campaign. Pick a world-alive preset, or light “Momentum” under ${WAVES_PATH}.`,
   reconsideration_no_course: d => `${d || 'That court'} holds no committed course to press.`,
-  calamity_gate_dark: () => 'The calamity layer is not active in this campaign (calamityEnabled).',
-  lifecycle_gate_dark: () => 'The settlement lifecycle layer is not active in this campaign (settlementLifecycleEnabled).',
+  calamity_gate_dark: () => 'The calamity layer is not active in this campaign. Pick the Dramatic Campaign or Full Simulation preset — the calamity mover rides those presets.',
+  lifecycle_gate_dark: () => `The settlement lifecycle layer is not active in this campaign. Pick a world-alive preset, or light “New & lost steadings” under ${WAVES_PATH}.`,
   steading_refused: d => d || 'The founding was refused (the tier cap and headroom walls hold, even under force).',
   abandon_refused: d => d || 'The abandonment was refused (only a thorp-tier, living settlement can die).',
   resettle_refused: d => d || 'The resettlement was refused (no remnant here, or no neighbour can spare willing settlers).',
