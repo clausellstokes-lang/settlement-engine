@@ -91,7 +91,8 @@ describe('layer boundaries (F29)', () => {
     // moved to the dependency-free leaf domain/deityConstants.js, causalState
     // imports the leaf, deityEffects re-exports it, and the baseline stays at 2.)
     const ALLOWED = [
-      'components/compendium/CustomContent.jsx > components/compendium/Dependencies.jsx',
+      // RATCHET-DOWN (master merge W6): the CustomContent <> Dependencies cycle
+      // no longer exists on this lineage — entry removed, shrink-only resumes.
       'generators/helpers.js > generators/priorityHelpers.js',
     ];
 

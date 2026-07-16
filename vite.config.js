@@ -332,7 +332,11 @@ export default defineConfig({
     // has no static edge to engine to hint in the first place.
     modulePreload: {
       resolveDependencies(_filename, deps) {
-        return deps.filter(d => !/\/vendor-pdf-[A-Za-z0-9_-]+\.js$/.test(d));
+        // vendor-pdf AND the engine chunk (ported master fix): the heavy
+        // generators should download on first GENERATE, not first paint — the
+        // hint strip is graph-neutral (no closure-budget effect), it only stops
+        // the browser pre-fetching the chunk alongside the entry.
+        return deps.filter(d => !/\/(vendor-pdf|engine)-[A-Za-z0-9_-]+\.js$/.test(d));
       },
     },
     rollupOptions: {

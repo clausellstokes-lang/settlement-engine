@@ -26,23 +26,53 @@ import { render, cleanup, renderHook, act } from '@testing-library/react';
 import useIsMobile from '../../src/hooks/useIsMobile.js';
 
 // jsdom defaults to 1024px. Save the original so we can restore between tests.
-const ORIGINAL_INNER_WIDTH = window.innerWidth;
-
+// LINEAGE ADAPT (master merge W6): useIsMobile is now a shared matchMedia store
+// (single listener for the whole app), not per-consumer innerWidth+resize.
+// Drive it via a controllable matchMedia mock keyed on the (max-width: bp-1)
+// query, and reset the hook's module-level store between widths.
+const mqls = new Map(); // query -> { matches, listeners:Set }
+let curWidth = 360;
+function evaluate(query) {
+  const m = /max-width:\s*(\d+)px/.exec(query);
+  return m ? curWidth <= Number(m[1]) : false;
+}
 function setViewportWidth(width) {
-  // jsdom's window is a writable object; mutating innerWidth changes what
-  // code reading window.innerWidth sees. useIsMobile reads it at mount and
-  // then on every 'resize' event — tests that need the live update dispatch
-  // a synthetic resize (see the reactivity test below).
-  Object.defineProperty(window, 'innerWidth', {
-    configurable: true,
-    writable: true,
-    value: width,
-  });
+  curWidth = width;
+  for (const [query, mql] of mqls) {
+    const next = evaluate(query);
+    if (next !== mql.matches) {
+      mql.matches = next;
+      for (const fn of mql.listeners) fn({ matches: next });
+    }
+  }
+}
+async function freshHook() {
+  // The store caches one MediaQueryList per breakpoint at module scope; reset
+  // modules so each width starts from a clean subscribe.
+  vi.resetModules();
+  const mod = await import('../../src/hooks/useIsMobile.js');
+  return mod.default;
 }
 
-beforeAll(() => setViewportWidth(360));     // narrow mobile (iPhone SE)
-afterAll(() => setViewportWidth(ORIGINAL_INNER_WIDTH));
-afterEach(cleanup);
+beforeAll(() => {
+  window.matchMedia = vi.fn((query) => {
+    const mql = {
+      matches: evaluate(query),
+      media: query,
+      listeners: new Set(),
+      addEventListener: (_e, fn) => mql.listeners.add(fn),
+      removeEventListener: (_e, fn) => mql.listeners.delete(fn),
+      addListener: (fn) => mql.listeners.add(fn),
+      removeListener: (fn) => mql.listeners.delete(fn),
+      dispatchEvent: () => true,
+    };
+    mqls.set(query, mql);
+    return mql;
+  });
+  setViewportWidth(360);
+});
+afterAll(() => { delete window.matchMedia; });
+afterEach(() => { cleanup(); mqls.clear(); });
 
 // Mock service-layer modules that ApexHomeHero / Pricing pull in.
 vi.mock('../../src/lib/stripe.js', () => ({
@@ -62,39 +92,36 @@ vi.mock('../../src/lib/founderSeats.js', () => ({
 }));
 
 describe('Tier 7.18 — Mobile viewport baseline (useIsMobile)', () => {
-  test('useIsMobile() is true at 360px (iPhone SE width)', () => {
-    const { result } = renderHook(() => useIsMobile());
-    expect(result.current).toBe(true);
+  test('useIsMobile() is true at 360px (iPhone SE width)', async () => {
+    setViewportWidth(360);
+    const useIsMobile = await freshHook();
+    expect(renderHook(() => useIsMobile()).result.current).toBe(true);
   });
 
-  test('useIsMobile() is false at 1024px (desktop)', () => {
+  test('useIsMobile() is false at 1024px (desktop)', async () => {
     setViewportWidth(1024);
-    const { result } = renderHook(() => useIsMobile());
-    expect(result.current).toBe(false);
-    setViewportWidth(360);  // restore for downstream tests
+    const useIsMobile = await freshHook();
+    expect(renderHook(() => useIsMobile()).result.current).toBe(false);
   });
 
-  test('useIsMobile() threshold is at 640px', () => {
+  test('useIsMobile() threshold is at 640px', async () => {
     setViewportWidth(639);
+    let useIsMobile = await freshHook();
     expect(renderHook(() => useIsMobile()).result.current).toBe(true);
     setViewportWidth(640);
+    useIsMobile = await freshHook();
     expect(renderHook(() => useIsMobile()).result.current).toBe(false);
-    setViewportWidth(360);
   });
 
-  // F28 — the reason the non-reactive isMobile() helper was retired: the hook
-  // must update when the viewport changes (resize / device rotation), not only
-  // at first mount.
-  test('useIsMobile() reacts to a resize event', () => {
+  // The hook must update when the viewport changes (resize / rotation), not only
+  // at first mount — now via a matchMedia change event.
+  test('useIsMobile() reacts to a viewport change event', async () => {
     setViewportWidth(1024);
+    const useIsMobile = await freshHook();
     const { result } = renderHook(() => useIsMobile());
     expect(result.current).toBe(false);
-    act(() => {
-      setViewportWidth(500);
-      window.dispatchEvent(new Event('resize'));
-    });
+    act(() => { setViewportWidth(500); });
     expect(result.current).toBe(true);
-    setViewportWidth(360);  // restore for downstream tests
   });
 });
 

@@ -22,7 +22,10 @@ import path from 'node:path';
 import url from 'node:url';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
-const BASELINE = path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
+// DOMAIN_STRICT_BASELINE / DOMAIN_STRICT_TSC_CMD are TESTABILITY seams (ported
+// master fix): the fail-closed meta-test injects a fake tsc + temp baseline so
+// the failure paths are exercisable without breaking the real toolchain.
+const BASELINE = process.env.DOMAIN_STRICT_BASELINE || path.join(ROOT, 'scripts', '.domain-strict-baseline.json');
 const UPDATE = process.argv.includes('--update');
 
 // Run the strict domain typecheck. tsc exits non-zero when there are errors;
@@ -30,7 +33,7 @@ const UPDATE = process.argv.includes('--update');
 let out;
 let tscExitedNonZero = false;
 try {
-  out = execSync('npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  out = execSync(process.env.DOMAIN_STRICT_TSC_CMD || 'npx tsc --noEmit -p tsconfig.domain-strict.json', { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 } catch (e) {
   tscExitedNonZero = true;
   out = `${e.stdout || ''}${e.stderr || ''}`;
@@ -64,12 +67,27 @@ const globalDiagnostics = out
   .split('\n')
   .map((l) => l.trim())
   .filter((l) => /^error TS\d+:/.test(l));
-if (tscExitedNonZero && total === 0 && (globalDiagnostics.length > 0 || out.trim() === '')) {
-  console.error('[domain-strict] tsc DID NOT RUN against the domain (non-zero exit, zero domain diagnostics parsed) — this ratchet verified NOTHING, not "0 errors":');
+// HOLE CLOSED (master merge W6): the old condition let a failed-to-run tsc with
+// NON-empty, non-TS-diagnostic output ("Cannot find module typescript") slip
+// through to exit 0. The discriminator is a FILE-LOCATED diagnostic
+// (`file(line,col): error TS`) anywhere in the output: its presence proves tsc
+// actually typechecked source (even outside the domain scope — the normal
+// ratchet path handles those). Zero located diagnostics on a non-zero exit is
+// either a global/config-load failure (TS18003 etc., the globalDiagnostics
+// below) or a failed-to-run — both fail closed.
+// A diagnostic LOCATED IN a .json config (TS5083 / tsconfig syntax errors) is
+// still a config-load failure, not a typecheck — only source-file locations
+// prove the domain was checked.
+const locatedDiagnostics = out
+  .split('\n')
+  .filter((l) => /^[^\s(][^(]*\(\d+,\d+\): error TS\d+:/.test(l.trim()))
+  .filter((l) => !/\.json\(\d+,\d+\):/.test(l.trim()));
+if (tscExitedNonZero && locatedDiagnostics.length === 0) {
+  console.error('[domain-strict] tsc failed to run against the domain (non-zero exit, zero domain diagnostics parsed) — failing closed; this ratchet verified NOTHING, not "0 errors":');
   console.error(
     globalDiagnostics.length
       ? globalDiagnostics.map((l) => `  ${l}`).join('\n')
-      : '  (no tsc output at all — is typescript installed? is tsconfig.domain-strict.json present?)',
+      : `  ${(out.trim().slice(0, 2000)) || '(no tsc output at all — is typescript installed? is tsconfig.domain-strict.json present?)'}`,
   );
   console.error('\nA broken-toolchain vacuous pass is not a clean typecheck. Fix the config/install; do not ignore.');
   process.exit(1);

@@ -21,6 +21,7 @@
 import { Text } from '@react-pdf/renderer';
 import { EntityRef } from './EntityRef.jsx';
 import { tokenizeProse } from '../../lib/entityRefTokenizer.js';
+import { safe } from '../lib/format.js';
 
 /**
  * De-tokenize prose to plain text: entity-ref tokens collapse to their display
@@ -52,7 +53,7 @@ export function ProseText({ text, index, style, linkStyle }) {
   // styled <Text> via proseToPlainText), so PDF byte-identity holds. Only
   // token-bearing live narratives branch into inline refs.
   if (segments.length <= 1 && (!segments[0] || segments[0].type === 'text')) {
-    return <Text style={style}>{proseToPlainText(text)}</Text>;
+    return <Text style={style}>{safe(proseToPlainText(text))}</Text>;
   }
   return (
     <>
@@ -66,7 +67,7 @@ export function ProseText({ text, index, style, linkStyle }) {
             style={linkStyle}
           />
         ) : (
-          <Text key={i} style={style}>{seg.value}</Text>
+          <Text key={i} style={style}>{safe(seg.value)}</Text>
         ),
       )}
     </>
