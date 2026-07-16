@@ -146,19 +146,19 @@ stochastic draw = a seeded fork on a stable composite key AND a situation-weight
 fiction is indifferent; weights receipted as the outcome's typed reasons; tuning moves weights
 never forks. Full statement: DESIGN_COHESION_WEAVE §H. Existing engine practice conforms; the
 ruling prevents regression.
-- BUDGETS: first-paint CLOSURE_BUDGET_BYTES = 1,255,985 (FP-1 ratchet 1,441,000→1,256,000, then the
-  FP-R consolidation down-ratchet →1,255,985; never raise without owner). CURRENT closure 1,254,886 =
-  1,099B margin (post-M11b @ 62c81a0c; MEASURED 2026-07-13 — the earlier "1,255,965/20B" figure
-  here was post-M10a and had gone stale against this ledger's own M10b/M11b rows). ⚠️ HEADROOM IS
-  SINGLE-ALLOCATION: §0.8 promises it to W5 (~890B) and the round-21 plan to W2 (+363B) — both do
-  NOT fit (1,253B combined) until the §0.8-1 M10b eager-trim (~800B reclaim) lands first. Owner ruling 2026-07-13: FP-2 (store-slice split)
-  RECLAIMS headroom for M10b+W5 rather than a budget raise — see §0.6.0. any-cast ceiling 2252 EXACT
-  (fix types, never widen); domain-strict 0/0.
-  ⚠️ HEADROOM CRITICAL as of 3.5: only **63 BYTES** free (closure 1,255,937). Wave A MUST stay fully
-  lazy (its belief-ledger key ≈ one CONDITIONAL_LEDGER_KEYS literal ~17-25B fits; the selector +
-  reconciliation + DM read-model are all LAZY worldPulse/display — no eager cost). Any wave that
-  needs eager bytes beyond ~40B STOPs → triggers FP-2 (the parked store-slice split, ⚠️ owner-gated)
-  OR a design tweak to keep it lazy. The store-slice reclaim (§0.6) is the release valve if pressed.
+- BUDGETS: the first-paint ceiling is the `CLOSURE_BUDGET_BYTES` const in
+  `tests/build/vendorPdfLazy.test.js` — read the const and its inline ratchet-ledger
+  comment for the LIVE value and margin, and the newest §0.0.1 row for the latest
+  ratchet. Do NOT trust a number transcribed here: this bullet used to re-quote the
+  budget and re-rotted on every ratchet, so a walker now fails the gate if any
+  present-tense `CLOSURE_BUDGET_BYTES = N` claim in this file drifts from the const
+  (`tests/docs/playbookBudgetFreshness.test.js`). The STANDING rulings that do NOT
+  move: the budget only ratchets **DOWN**, and is **never raised without the owner**
+  (§0.2-5); headroom is single-allocation, so every wave stays lazy/dormant or
+  **STOPs** — a wave that needs eager bytes beyond the live margin triggers a reclaim
+  (the store-slice split, §0.6/§0.7, ⚠️ owner-gated) or a design tweak to stay lazy,
+  never a silent raise. any-cast ceiling **2252 EXACT** (fix types, never widen);
+  domain-strict 0/0.
 - OWNER RE-SCOPE (2026-07-12): the M1-M10 mover ladder is LAUNCH content; Phase 6 after M10;
   checkpoint = validation milestone only.
 - SETTLED DESIGN DECISIONS: design doc §II.5 (cost→weeks 1wk/primary-hop; culture = derived
@@ -250,10 +250,12 @@ ruling prevents regression.
 - MODEL: main loop switched to OPUS 4.8 (2026-07-12) — running the playbook as manager per §0.1.
   [2026-07-13: FABLE 5 RETURNED — running the PART-9 comprehensive grade-check + review/fix
   program (the standing Fable-reserved mandate); Opus staffs verification + implementation.]
-- NEXT [REWRITTEN 2026-07-13 — the old pointer routed a successor to waves long landed]: the
-  COMPREHENSIVE REVIEW+FIX PROGRAM is the active desk (docs/COMPREHENSIVE_REVIEW_PROGRAM.md —
-  survey done, Opus verification + fix waves in flight) → then §0.8 (M10b trim → W5 → ratchet-down)
-  → the Living Realm checkpoint (PART 5) → Phase 6 (PART 8) → launch.
+- NEXT: the live desk and wave sequencing are owned by
+  `docs/COMPREHENSIVE_REVIEW_PROGRAM.md` (its Progress blockquote + the newest
+  `docs/COMPREHENSIVE_REVIEW_<date>.md`) — start THERE, not from a sequence
+  transcribed here (the in-flight entries above are landing records and go stale).
+  The standing arc after the review program: the §0.8 post-merge steps → the Living
+  Realm checkpoint (PART 5) → Phase 6 (PART 8) → launch.
 - OWNER DECISION QUEUE: population-attractor review (gates M4); M10 expiry policy + Living-World
   catch-up; Phase-6 backlog triage; golden-regen sign-off if ever needed.
 - FABLE-ON-RETURN QUEUE: checkpoint grade-check (PART 5.5); the final comprehensive grade-check
@@ -301,8 +303,10 @@ ruling prevents regression.
    is not "done" until its ledger row exists — this document is the successor's memory.
 
 ## 0.4 THE DISPATCH ORDER (the ladder — sequential chain, ONE optional chip ahead)
-CURRENT (as of this writing): FP-1 in flight (budget-exclusive) · W5 chip in its worktree ·
-Session/Foundry branch awaiting merge review (§6.2).
+CURRENT: the live dispatch order is owned by `docs/COMPREHENSIVE_REVIEW_PROGRAM.md`
+(its Progress blockquote + §0.0.3 NEXT). The M1–M11 mover ladder is COMPLETE, so the
+numbered steps 1–7 below are a HISTORICAL record of that era's chain — kept for the
+CONCURRENCY LAW at the end. Do NOT dispatch from this list.
 1. FP-1 lands → commit → note the NEW budget number.
 2. Dispatch SEASONS-A (brief: SEASONS_A_BRIEF.md) in the main session.
    SIMULTANEOUSLY (optional, if lanes allow): chip 5.5-K (KEYSTONE_BRIEF.md) in a worktree —
@@ -488,12 +492,19 @@ THEN unblocked: M10b (§0.6.1, CAP=26, re-measure the +86B at build) and W5 (§0
 reclaimed budget — NEVER merge 312a5025 directly).
 
 ## 0.8 IMMEDIATE NEXT STEPS (post-merge handoff — Opus, 2026-07-13, in priority order)
+⚠️ SEQUENCING SUPERSEDED: the live desk is owned by `docs/COMPREHENSIVE_REVIEW_PROGRAM.md`.
+The byte figures in the steps below are as-MEASURED 2026-07-13; the budget has ratcheted
+DOWN several times since — read the `CLOSURE_BUDGET_BYTES` const in
+`tests/build/vendorPdfLazy.test.js` (and the newest §0.0.1 row) for the live value, never a
+number transcribed here. Steps 1–3 (M10b-trim → W5 → ratchet-down) are that era's budget
+desk; steps 4–7 remain live reference.
+
 This session (branch claude/phase55-parking-lot, MERGED to review-fixes-2026-07-08) shipped: the parking-lot
-ADJUDICATION (§0.6.0) + F24 AccountPage NUL fix + 5.5-K freeze-first guard + FP-2a (−2,448 B) + M10b
-(living/autonomous catch-up, +1,376 B). Net budget: closure 1,254,893 ≤ 1,255,985 (margin 1,092 B). NOTE:
+ADJUDICATION (§0.6.0) + F24 AccountPage NUL fix + 5.5-K freeze-first guard + FP-2a + M10b
+(living/autonomous catch-up). NOTE:
 the merge folded in the PARALLEL session's Round-21 W1 (voice sidecars 25003430) + M11a PESTILENCE + docs
 (their handoff = docs/PHASE55_ROUND21_BACKLOG_PLAN.md @ 9298b6c4 — READ IT; that stream owns the round-21
-backlog + M11). Their work is budget-free/lazy, so the merged closure ≈ this branch's; RE-MEASURE
+backlog + M11). Their work is budget-free/lazy; RE-MEASURE
 verify:dist on the merged tree before trusting any number. [RESOLVED 2026-07-13: the calamity.js
 "uncommitted foreign WIP" note below is OBSOLETE — M11b LANDED at 62c81a0c; the ladder is complete.]
 

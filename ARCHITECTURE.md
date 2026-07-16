@@ -41,16 +41,18 @@ generators/  The engine. Pure, store-agnostic, deterministic (seeded PRNG).
              `engine-core` chunk. <!-- @enforced-by tests/build/vendorPdfLazy.test.js -->
 domain/      Pure business logic that ISN'T generation: causal state, events,
              entities, contradictions, provenance, migrations, schema, summary,
-             the **campaign world-pulse simulation** (`worldPulse/` — ~74 modules
+             the **campaign world-pulse simulation** (`worldPulse/` — ~126 modules
              that age a canonized region tick-by-tick: proposals, party impacts,
              the multi-tick interval orchestrator, PLUS the geopolitical
              subsystems — war & siege (`warDeployment`/`occupation`/`attrition`/
              `mobilization`), trade war & blockade (`tradeWar`/`blockadeTransport`/
              `tradeSalience`), religion (`religionState`/`pantheon`/`religiousContest`/
              divine mandate), coups & faction competition, and NPC agency; the
-             shared sim-shape typedefs live in `pulseShapes.js`), regional causality
-             (`region/`), and the fail-closed public-safe display projection
-             (`display/`). Every roll forks a seeded, injected RNG (determinism is
+             shared sim-shape typedefs live in `pulseShapes.js`), the **spatial-canon
+             engine** (`spatial/` — the Phase 5.5 KEYSTONE, ~26 modules that make the
+             realm map a first-class engine input; see "The spatial engine" below),
+             regional causality (`region/`), and the fail-closed public-safe display
+             projection (`display/`). Every roll forks a seeded, injected RNG (determinism is
              sacred — no Date.now/Math.random). Was the only gate-typechecked layer;
              the gate now covers the full tree, and `worldPulse/` also carries a
              strict-typecheck ratchet + an any-cast burn-down ratchet
@@ -117,6 +119,29 @@ big domain generators (economic/power/services) are thin barrels over
 `structuralValidator.js` validates engine output shape; `settlement.schema.js`
 (domain) is the canonical schema and `settlementMigrations.js` upgrades old
 saves when the shape changes.
+
+---
+
+## The spatial engine + the engine-wave stack
+
+Phase 5.5 added a **spatial-canon engine** (`src/domain/spatial/`, ~26 modules)
+that promotes the realm map to a first-class engine input: settlements carry
+positions, neighbours, and travel costs, and an M1–M11 "mover ladder" ages the
+realm tick-by-tick (migration, trade lanes, war fronts, discovery, calamity,
+upswing). On top of the physical movers sits a stack of **engine waves** — tempo
+governance (E0), the generosity instruments (E1), war/peace reasoning + treaties
+(W-PEACE), and the four doctrine layers (supply-web warfare, information
+statecraft, the corruption web, settlement politics). Every one ships **dormant
+and gated**: with its feature absent or its flag off, generation is byte-identical
+to before it existed.
+
+The constitution these obey — **same-seed byte-identity, dormancy, and the
+first-paint ratchet** — is deliberately NOT restated here (a second copy would
+drift). It lives in `docs/PHASE55_EXECUTION_PLAYBOOK.md` §0.2 (constitutional
+laws), with the mover ladder and wave stack recorded in §0.0. That playbook is the
+authority for anything that changes engine behaviour or first-paint cost; this
+section is only the entry pointer to it.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (must mention src/domain/spatial) -->
 
 ---
 
@@ -199,20 +224,35 @@ Drift is enforced by custom ESLint rules (`scripts/eslint-plugin-visual-budget`)
 
 ## The gate
 
-`npm run check` = `validate:data && typecheck && lint && test && build`.
+`npm run check` = `validate:data && validate:migration-head && validate:edge &&
+validate:map && typecheck && typecheck:domain:strict && lint && test && build &&
+verify:dist`.
+<!-- @enforced-by tests/docs/architectureFreshness.test.js (each sub-step derived from package.json) -->
 
 - **validate:data** — duplicate-key scan (dupe keys silently corrupt sim output).
+- **validate:migration-head** — migration numbering is contiguous and the
+  checked-in applied-head ledger is well-formed (see `docs/DEPLOY.md`).
+- **validate:edge** — the edge-function contracts (config + `verify_jwt` posture,
+  the built `_shared` bundle wiring).
+- **validate:map** — the vendored Azgaar FMG map fork stays within its pinned
+  contract.
 - **typecheck** — `tsc --noEmit -p tsconfig.full.json` over the **full src logic
   tree** (domain/store/lib/hooks/generators/components/pdf). The old domain-only
   punch-list reached zero, so the gate was switched to full coverage;
   `typecheck:domain` keeps the fast domain-only check.
+- **typecheck:domain:strict** — the `src/domain/` strict ratchet
+  (`scripts/check-domain-strict.mjs`): the any-cast burn-down that may only shrink.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~8,800 tests / ~792 files (unit, property-based, domain/
+- **test** — Vitest, ~9,800 tests / ~880 files (unit, property-based, domain/
   store/lib integration, component/UI smoke, a11y, security, edge-function).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
+- **verify:dist** — the constitutional **first-paint ratchet**: the built entry
+  chunk's static closure must stay under `CLOSURE_BUDGET_BYTES`, a monotone,
+  owner-gated ceiling (see the playbook §0.2). Lazy/dormant additions cost zero
+  first-paint bytes; a new eager import must fit the margin or reclaim it.
 
 Runs in CI (`.github/workflows/ci.yml`) on push/PR and via husky `pre-push`;
 `pre-commit` runs lint-staged `eslint --fix`. E2E (Playwright, `e2e/`) is
