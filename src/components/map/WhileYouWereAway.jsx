@@ -32,6 +32,15 @@ export default function WhileYouWereAway({ campaignId = null }) {
   const digest = useStore(s => s.livingCatchUp);
   const activeCampaignId = useStore(s => s.activeCampaignId);
   const dismiss = useStore(s => s.dismissLivingCatchUp);
+  // experience-product-fit-1: did the living catch-up PARK on a surfacing major? The
+  // world's pausedAdvance cursor is the ground truth — read it here (a lazy component)
+  // so the eager catch-up store path stays byte-inert.
+  const pausedAdvance = useStore(s => {
+    const cid = campaignId != null ? String(campaignId)
+      : (s.activeCampaignId != null ? String(s.activeCampaignId) : null);
+    if (cid == null) return null;
+    return (s.campaigns || []).find(c => String(c.id) === cid)?.worldState?.pausedAdvance || null;
+  });
 
   const scopeId = campaignId != null ? String(campaignId)
     : (activeCampaignId != null ? String(activeCampaignId) : null);
@@ -43,7 +52,7 @@ export default function WhileYouWereAway({ campaignId = null }) {
   const weeks = Number(digest.weeksCaughtUp) || 0;
   const capped = !!digest.capped;
   // experience-product-fit-1: the living catch-up parked on a surfacing major.
-  const paused = !!digest.paused;
+  const paused = !!pausedAdvance;
   const majors = Array.isArray(digest.majors) ? digest.majors : [];
   // Defensive: nothing ran, nothing failed, and it didn't park ⇒ render nothing (the
   // store only stashes on real work, but keep the banner honest if that changes).

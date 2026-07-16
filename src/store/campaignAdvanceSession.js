@@ -601,10 +601,6 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
   // narrate — a seeded / up-to-date / not_living open above stashed nothing.
   set(state => { state.livingCatchUp = { campaignId, status: 'running', weeksCaughtUp: 0, capped }; });
   let done = 0;
-  // experience-product-fit-1: LIVING catch-up can PAUSE on a surfacing major (the
-  // world parks on worldState.pausedAdvance). The digest carries this so the banner
-  // says "paused for your word" instead of a plain "N weeks passed".
-  let paused = false;
   /** @type {string | null} */ let error = null;
   try {
     // performance-scale-4 COLLAPSE (owner ruling 2026-07-14 "collapse to one record"):
@@ -631,8 +627,9 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
     } else if (result.status === 'paused') {
       // LIVING paused on a surfacing major: the weeks committed at the pause boundary
       // (ticksDone) are the caught-up span; the remainder awaits the DM's verdict.
+      // The digest banner reads the park off worldState.pausedAdvance directly (a lazy
+      // read, so this eager store path stays byte-inert — experience-product-fit-1).
       done = Math.max(0, Number(result.ticksDone) || 0);
-      paused = true;
     } else {
       // Ran to the end (autonomous, or living with no major) — the full span caught up.
       done = n;
@@ -649,7 +646,7 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
   // capped flag and any failure. The banner self-gates to nothing when the active
   // campaign has no digest, so a quiet advance still confirms "N weeks passed".
   const majors = done > 0 ? catchUpMajorHeadlines({ get, campaignId, lookback: done }) : [];
-  set(state => { state.livingCatchUp = { campaignId, weeksCaughtUp: done, capped, majors, error, paused }; });
+  set(state => { state.livingCatchUp = { campaignId, weeksCaughtUp: done, capped, majors, error }; });
   return { ok: true, weeksCaughtUp: done, capped };
 }
 
