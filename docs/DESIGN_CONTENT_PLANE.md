@@ -132,6 +132,44 @@ posture as re-canonize).
 - Shared/gallery packs (the marketplace door) are FUTURE scope: they inherit the moderation
   lane + the same validation; noted, not designed here.
 
+## 4b. THE ANALYTICAL COUPLING (owner amendment 2026-07-16: "with all of these potential
+## expansions through custom content, as it regards both intent, and tuning/soak for their
+## experience, there needs to be stronger coupling and relationships between that and the
+## analytical layer")
+
+The content plane changes what the analytical layer is FOR. Today analytics observes one
+certified configuration; the plane mints a NEW configuration per authoring user — a
+distribution nobody batch-certified. Three couplings close that gap:
+
+**COUPLING 1 — INTENT, END TO END.** The intent atlas (mig-134) extends from intent→outcome
+to intent→content: authoring sessions emit consented events for the stated intent, the
+compiled result, the user's corrections, and — most valuable — the REFUSALS (what users
+asked for that the plane could not compile). Three consumers: the training corpus
+(intent→pack is the richest label shape yet, per the matrix), compiler evals (correction
+rate per rung = the compiler's real acceptance metric), and the roadmap radar (clustered
+refusals are the next knob/pack tier, demand-proven before it is designed).
+
+**COUPLING 2 — THE WORLD-HEALTH METRIC SUITE.** The SOAK_PLAN's 10 PASS criteria are
+refactored as a reusable EVALUATOR LIBRARY with two clients: (a) master batch certification —
+the soak as scheduled — and (b) per-account STREAMING health telemetry. A user's knob/pack
+configuration is a world nobody soaked; their world gets a continuous soak-lite. Surfaces:
+a "world pulse" health read-model (the DM sees their world's vital signs) and grounding for
+the Surveyor's tuning advice (stage-S6 counsel cites health metrics the way S1 cites
+receipts — never vibes).
+
+**COUPLING 3 — THE CLOSED TUNING LOOP.** This is where the inert §10 rails' design premises
+finally arrive in code: knobs exist → worlds run under them → health telemetry streams →
+the Surveyor PROPOSES knob deltas through the ops/approval lane (never silently, never
+auto-applied) → consented k-anon aggregates map which knob-REGIONS produce healthy worlds →
+the knob registry's recommended ranges improve for everyone. Tuning stops being an event
+and becomes an organ. Master-side range changes remain owner-signed.
+
+**GUARDS (constitutional, restated as law):** ENDOGENEITY EXTENDS TO TELEMETRY — the world
+never reads its own analytics; health metrics inform the Surveyor and the human, never the
+tick (the rails' golden-law lane classifier stays load-bearing as the enforcement point).
+Proposals always cross DM approval — the loop is closed through a human, not around one.
+The consent architecture is inherited whole (research plane, k-floors, id-free events).
+
 ## 5. COHERENCE MATRIX (standing practice)
 
 ×FACET LAW (the plane's citizenship mechanism — rung 1 rides it wholesale) · ×§10 RAILS (the
@@ -145,7 +183,10 @@ metrics; the compiler's schema-fencing means worst case = refused drafts, never 
 worlds) · ×D7/EPISTEMICS (pack-authored actors get beliefs/reframes identically — the
 epistemic engine is content-blind) · ×GALLERY LOOP (a shared world in a user's own genre is
 the strongest artifact the share loop can carry) · ×TRAINING CORPUS (intent→pack is the
-richest label shape yet; consent-gated per the standing corpus rules).
+richest label shape yet; consent-gated per the standing corpus rules) · ×ANALYTICS SEAM
+(§4b couplings 1–3 ride the existing track→EVENTS→consent→ingest spine — enrich-first,
+zero eager; endogeneity-extends-to-telemetry enters the law set) · ×SOAK PLAN (one evaluator
+library, two clients — the soak's criteria become the plane's per-account health floor).
 
 ## 6. SEQUENCING
 
