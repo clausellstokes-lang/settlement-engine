@@ -17,6 +17,7 @@ import {
   proceduralCrackRelief,
   counterEvidenceEffectiveness,
   entityThreshold,
+  entryDepositDampenOf,
   MOMENTUM_TUNING,
   THRESHOLD_TUNING,
 } from '../../src/domain/worldPulse/momentum.js';
@@ -63,6 +64,39 @@ describe('W-MOMENTUM Stage 2 — TRAIT_MOMENTUM directionality + neutral anchors
     // No declared facet ⇒ falls back to the authored 'humble' ⇒ negative (byte-identical degradation).
     const fallback = npcMomentumScore({ importance: 'pillar', personality: { dominant: 'humble' } });
     expect(fallback).toBeLessThan(0);
+  });
+});
+
+describe('W-MOMENTUM r2 politics-psychology-4 — cautious/wary lower ENTRY, not the EXIT cliff', () => {
+  it('the EXIT cliff excludes cautious/wary: a cautious court reads temperament 0 (no cliff bend)', () => {
+    // The weight still EXISTS ('all' mode sums it — the historic default kept for direct callers)…
+    expect(npcMomentumScore(npc('cautious'), 'all')).toBeLessThan(0);
+    expect(npcMomentumScore(npc('wary'), 'all')).toBeLessThan(0);
+    // …but the CLIFF path ('exit' mode, the temperamentMomentumOf default) drops them entirely,
+    // so a purely cautious/wary court exerts ZERO pull on the exit cliff (the bug: they lowered it).
+    expect(npcMomentumScore(npc('cautious'), 'exit')).toBe(0);
+    expect(temperamentMomentumOf(settlement([npc('cautious'), npc('wary')]))).toBe(0);
+    expect(cliffStockFor({ temperament: temperamentMomentumOf(settlement([npc('cautious')])) }))
+      .toBe(MOMENTUM_TUNING.BASE_CLIFF_STOCK); // exactly BASE — no wrongful lowering
+    // A proud court still bends the cliff up (non-vacuity — the exclusion is descriptor-scoped).
+    expect(temperamentMomentumOf(settlement([npc('proud')]))).toBeGreaterThan(0);
+  });
+
+  it('the ENTRY side is now LIVE: cautious/wary DAMPEN deposits (commit slowly); neutral ⇒ ×1', () => {
+    const neutralCourt = entryDepositDampenOf(settlement([npc('freckled'), npc('tall')]));
+    expect(neutralCourt, 'a court with no entry-only descriptors deposits at ×1 (byte-neutral)').toBe(1);
+    const cautiousCourt = entryDepositDampenOf(settlement([npc('cautious'), npc('wary')]));
+    expect(cautiousCourt, 'a cautious/wary court deposits LESS than a neutral one').toBeLessThan(1);
+    expect(cautiousCourt, 'the dampen is floored — deposits shrink but never vanish').toBeGreaterThanOrEqual(THRESHOLD_TUNING.ENTRY_DEPOSIT_FLOOR);
+    // The 'entry' mode reads ONLY the entry-only descriptors (a proud court has no entry signal ⇒ ×1).
+    expect(entryDepositDampenOf(settlement([npc('proud'), npc('stubborn')]))).toBe(1);
+  });
+
+  it('entityThreshold exposes both: an unmodulated court is byte-neutral on entry and exit', () => {
+    const plainCourt = { settlement: { npcs: [npc('freckled')] } };
+    const t = entityThreshold(plainCourt, {});
+    expect(t.entryDepositDampen).toBe(1);   // neutral entry ⇒ ×1
+    expect(t.cliff).toBe(MOMENTUM_TUNING.BASE_CLIFF_STOCK); // neutral exit ⇒ BASE
   });
 });
 

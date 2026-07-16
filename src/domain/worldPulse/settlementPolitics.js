@@ -43,6 +43,8 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { stablePart } from './stablePart.js';
 import { faithAlignmentQuadrant, rulingPowerFromArchetype } from '../spatial/cohesionWeave.js';
+import { warFrontsInto } from './warFrontReads.js';
+import { mobilizationSeverity } from './mobilization.js';
 
 /** @typedef {import('../settlement.schema.js').SimSettlement} SimSettlement */
 /** A settlement item as it appears on the pre-tick snapshot.
@@ -477,10 +479,28 @@ function deriveEnd(members, npcStates, underThreat) {
 }
 
 // ── EXTERNAL-THREAT read (the rally — a war footing/siege compresses formation) ─────
-/** @param {PolItem} item @returns {boolean} */
-function settlementUnderThreat(item) {
+/**
+ * True when banners are cresting the ridge. Reads the REAL engine sources the rest of the war
+ * layer uses (r2 politics-psychology-2): a besieging war_front INTO the settlement, or a war
+ * footing on worldState.warPosture[cid]. The prior code probed six fields (underSiege / besieged
+ * / mobilizationState / warPosture / threatLevel / embattlement) that NO engine path writes onto
+ * a settlement object — siege truth is a war_front edge and warPosture is a worldState ledger —
+ * so the rally, survival blocs, and threat glue never fired in a real campaign. The old
+ * settlement-field probes are kept as a tolerant FALLBACK (a snapshot that happens to carry them).
+ * @param {PolItem} item @param {Record<string, unknown>} [worldState] @param {unknown} [graph]
+ * @param {string} [cid] @returns {boolean}
+ */
+function settlementUnderThreat(item, worldState, graph, cid) {
+  const id = cid != null ? String(cid) : String(item?.id ?? '');
+  // PRIMARY — a live besieging war_front INTO this settlement (the provenance-gated read).
+  if (id && graph && warFrontsInto(graph, id).length > 0) return true;
+  // PRIMARY — a war footing on the worldState.warPosture ledger (war_preparation/mobilized/deployed).
+  if (id && worldState) {
+    const posture = asObject(asObject(worldState.warPosture)[id]);
+    if (mobilizationSeverity(String(posture.state || '')) > 0) return true;
+  }
+  // FALLBACK — the tolerant settlement-field markers (kept; a snapshot may still carry them).
   const s = asObject(item ? item.settlement : null);
-  // Defensive, tolerant reads across the war/siege markers the snapshot may carry.
   if (s.underSiege === true || s.besieged === true) return true;
   const mob = String(s.mobilizationState || s.warPosture || '').toLowerCase();
   if (mob && mob !== 'peace' && mob !== 'none' && mob !== 'idle') return true;
@@ -693,7 +713,7 @@ export function advanceSettlementPolitics({ snapshot, worldState, rng = null, ti
     const viewByKey = new Map(views.map((v) => [v.key, v]));
     const relRaw = asObject(item ? item.settlement : null).relationships;
     const relationships = Array.isArray(relRaw) ? /** @type {Array<Record<string, unknown>>} */ (relRaw) : [];
-    const underThreat = settlementUnderThreat(item);
+    const underThreat = settlementUnderThreat(item, worldState, /** @type {{ regionalGraph?: unknown }} */ (snapshot)?.regionalGraph, cid);
     const burden = treatyBurdenFor(worldState, cid);
     // §4 fragmentation-propensity as a CHARACTER STATE: the governing power's kind sets
     // the texture. An AUTARCHY suppresses overt opposition — an opposition bloc there is
@@ -963,10 +983,11 @@ function sortLedgers(ledgers) {
 /**
  * The alignment kinship (0 opposite … 1 kindred) between two faction leaders, from their
  * npcState alignment coords when present. null ⇒ unknown (the quadrant defaults neutral).
+ * Exported for the r2 politics-psychology-1 pin (the categorical-string resolution).
  * @param {Record<string, unknown>} npcStates
  * @param {string|null} aId @param {string|null} bId @returns {number|null}
  */
-function leaderAlignmentKinship(npcStates, aId, bId) {
+export function leaderAlignmentKinship(npcStates, aId, bId) {
   if (!aId || !bId) return null;
   const a = alignmentAxes(asObject(npcStates[aId]));
   const b = alignmentAxes(asObject(npcStates[bId]));
@@ -976,12 +997,31 @@ function leaderAlignmentKinship(npcStates, aId, bId) {
   return clamp01(1 - dist);
 }
 
-/** Extract 0..1 law/good axes from an npcState alignment, tolerant of shapes. */
+/** Extract 0..1 law/good axes from an npcState alignment, tolerant of shapes.
+ *  npcStates carries a CATEGORICAL STRING ('lawful_good', 'true_neutral',
+ *  'corrupted_chaotic_evil', …) written by ensureNpcStates (npcAgency.js) — parse THAT first
+ *  (r2 politics-psychology-1): the prior code ran asObject('lawful_good') → {} → law/good NaN →
+ *  null, so §B leader-alignment kinship never resolved and the quadrant gate collapsed to a
+ *  constant. Law: lawful→1, chaotic→0, else (neutral/true)→0.5. Good: good→1, evil→0, else→0.5.
+ *  The 'corrupted_' prefix rides along harmlessly (substring match on the base axis words).
+ *  A numeric {law,good}/{lawfulness,morality} object or malice01/lawfulness01 scalar is still
+ *  honoured for forward-compat, with the ternary now correctly parenthesised. */
 /** @param {Record<string, unknown>} st @returns {{ law: number, good: number }|null} */
 function alignmentAxes(st) {
-  const al = asObject(st.alignment);
+  const alRaw = st.alignment;
+  if (typeof alRaw === 'string' && alRaw) {
+    const s = alRaw.toLowerCase();
+    const law = s.includes('lawful') ? 1 : s.includes('chaotic') ? 0 : 0.5;
+    const good = s.includes('good') ? 1 : s.includes('evil') ? 0 : 0.5;
+    return { law, good };
+  }
+  const al = asObject(alRaw);
   const law = Number(al.law ?? al.lawfulness ?? al.order ?? st.lawfulness01);
-  const good = Number(al.good ?? al.morality ?? st.malice01 != null ? (1 - Number(st.malice01)) : NaN);
+  // Parenthesised (the prior `a ?? b ?? c != null ? … : …` misparsed as `(a ?? b ?? (c!=null)) ? …`):
+  const goodSource = (al.good ?? al.morality) != null
+    ? (al.good ?? al.morality)
+    : (st.malice01 != null ? 1 - Number(st.malice01) : NaN);
+  const good = Number(goodSource);
   if (Number.isFinite(law) && Number.isFinite(good)) return { law: clamp01(law), good: clamp01(good) };
   return null;
 }

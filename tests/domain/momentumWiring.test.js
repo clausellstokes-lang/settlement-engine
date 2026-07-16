@@ -98,6 +98,56 @@ describe('W-MOMENTUM wiring — the LIVE CRACK mover (advanceMomentumCracks)', (
   });
 });
 
+describe('W-MOMENTUM r2 politics-psychology-5 — the DM-accept (proposal-lane) climb-down is priced exactly once', () => {
+  const item = () => crackItem({ dominant: 'pragmatic' });
+  // The proposal lane: the recall was stamped LAST tick (now-1) when the DM accepted the label
+  // between pulses, and the war layer has ALREADY deleted the deployment by the time the crack
+  // detector runs — so it survives only in the pre-war snapshot (priorDeployments).
+  const proposalPrior = (recallTick = TICK - 1, extra = {}) => ({
+    iron: { targetId: 'weak', recalled: { cause: 'sue_for_peace', tick: recallTick, ...extra } },
+  });
+  const world = () => ({
+    spatialCanonVersion: 1,
+    simulationRules: { infoMode: 'full', momentumEnabled: true },
+    deployments: {}, // the war layer already deleted the recalled deployment
+    spatialLedgers: { commitments: { 'iron>war:weak': { stock: MOMENTUM_TUNING.STOCK_MAX, sinceTick: 0, lastDepositTick: TICK, deposits: [{ tick: TICK, kind: 'siege', mag: 0.8 }] } } },
+  });
+  const run = (w, prior) => advanceMomentumCracks({
+    snapshot: { byId: new Map([['iron', item()]]) }, worldState: w,
+    settlementUpdates: [{ saveId: 'iron', settlement: item().settlement }],
+    tick: TICK, nameFor: (id) => String(id).toUpperCase(), exitKindFor: () => '', priorDeployments: prior,
+  });
+
+  it('CONTROL: without the pre-war snapshot, a deleted deployment is INVISIBLE (the bug) — no crack', () => {
+    const r = run(world(), null);
+    expect(r.changed, 'the deleted proposal-lane deployment cannot be seen without the snapshot').toBe(false);
+  });
+
+  it('WITH the pre-war snapshot, the now-1 proposal-lane climb-down IS priced (past cliff)', () => {
+    const r = run(world(), proposalPrior(TICK - 1));
+    expect(r.changed, 'the proposal-lane climb-down is now detected + charged').toBe(true);
+    expect(r.newsEntries[0].kind).toBe('momentum_climb_down');
+  });
+
+  it('IDEMPOTENT: a recall already carrying chargedTick is never re-priced (no double-fire with the auto lane)', () => {
+    const r = run(world(), proposalPrior(TICK - 1, { chargedTick: TICK - 1 }));
+    expect(r.changed, 'an already-charged recall does not fire a second time').toBe(false);
+  });
+
+  it('a genuinely STALE snapshot recall (older than now-1) still does not fire', () => {
+    const r = run(world(), proposalPrior(TICK - 3));
+    expect(r.changed).toBe(false);
+  });
+
+  it('the AUTO lane is unchanged: a live same-tick recall still fires WITHOUT any snapshot', () => {
+    const auto = crackWorld({ stock: MOMENTUM_TUNING.STOCK_MAX, recallTick: TICK });
+    const r = runCrack(auto, item());
+    expect(r.changed).toBe(true);
+    // And the fix stamps chargedTick on the surviving live deployment so next tick can't re-charge.
+    expect(/** @type {any} */ (r.worldState).deployments.iron.recalled.chargedTick).toBe(TICK);
+  });
+});
+
 // ── The belief discount through reconcileBelief ──────────────────────────────────
 /** A fresh, faithful report (high accuracy, independent, complete). */
 const faithfulReport = (sortKey = 'r') => ({ hopCount: 0, ageTicks: 0, independentSources: 3, completeness01: 1, accuracy01: 1, score: 1, sortKey, sourceId: 's' });

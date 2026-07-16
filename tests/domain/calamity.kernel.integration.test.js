@@ -185,6 +185,23 @@ describe('M11b calamity kernel — the strike + subsumption', () => {
     expect((s.npcs || []).find((n) => n.id === 'npc1')).toBeDefined();
     expect(s.population).toBeLessThan(5000); // but the aggregate count fell
   });
+
+  it('MOVERS SKIP REMNANTS (r2 economy-upswing-1): a terminal-dead settlement is NOT re-struck', () => {
+    const f = fixture({ spatial: true });
+    // Mark thornwood a remnant on both the snapshot and the update, then run the same
+    // guaranteed-strike draw. The annual loop must skip it — no strike, no stamp.
+    const remnant = { ...struckSettlement(), lifecycleStatus: 'remnant' };
+    f.snapshot.settlements[0].settlement = remnant;
+    f.settlementUpdates[0] = { saveId: 'thornwood', settlement: remnant };
+    const res = advanceCalamity({
+      settlementUpdates: f.settlementUpdates, worldState: f.worldState, snapshot: f.snapshot,
+      digest: f.digest, pIndex: { get: () => ({ score: 0.4 }) }, rules: f.worldState.simulationRules,
+      rng: stubRng(), season: 'spring', ...YEAR_CROSS, tick: 52, now: NOW,
+    });
+    const s = res.settlementUpdates.find((u) => u.saveId === 'thornwood').settlement;
+    expect(s.calamityHistory, 'no strike stamp on the corpse').toBeFalsy();
+    expect((s.institutions || []).length, 'institutions untouched — no demote/destroy').toBe(6);
+  });
 });
 
 describe('M11b calamity kernel — the exodus + M4 conservation', () => {

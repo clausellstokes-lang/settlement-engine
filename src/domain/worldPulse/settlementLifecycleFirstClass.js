@@ -23,6 +23,7 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { distributeMigrants } from './populationDynamics.js';
 import { SETTLEMENT_LIFECYCLE_TUNING, drawSteadingName } from './settlementLifecycleKernel.js';
+import { withEventConditionsSynced } from '../activeConditions.js';
 
 /** @typedef {import('./settlementLifecycleKernel.js').LcSettlement} LcSettlement */
 /** @typedef {import('./settlementLifecycleKernel.js').LcSnapItem} LcSnapItem */
@@ -76,10 +77,14 @@ export function remnantGradeOf(settlement) {
   return tierRank(peak) >= tierRank('city') ? 'relic_ruin' : 'abandoned_site';
 }
 
-/** Is this settlement a remnant (dead — a status, never a deletion)?
- *  @param {LcSettlement|undefined} s @returns {string} the grade, or '' when alive */
+/** Is this settlement a remnant (dead — a status, never a deletion)? A loose duck-typed read of
+ *  the two status fields — accepts any settlement-shaped object (the r2 economy-upswing-1 movers
+ *  call it on their own domain settlement types: Up/Gen/Cal/RD), typed `unknown` and narrowed
+ *  in-body so every caller passes without a weak-type clash.
+ *  @param {unknown} s @returns {string} the grade, or '' when alive */
 export function lifecycleStatusOf(s) {
-  return String(s?.lifecycleStatus || s?.config?.lifecycleStatus || '');
+  const o = /** @type {{ lifecycleStatus?: unknown, config?: { lifecycleStatus?: unknown } }} */ (s);
+  return String(o?.lifecycleStatus || o?.config?.lifecycleStatus || '');
 }
 
 /** The support read the terminal-decline dwell keys on (mirrors the tier lane's
@@ -509,6 +514,11 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         : `${name} dwindled and was abandoned; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.`,
       severity: 'major',
     }, tick);
+    // Sync the config.eventConditions projection (+ the _config twin) to the now-empty
+    // activeConditions (r2 economy-upswing-6): else a full regeneration re-promotes an
+    // event-sourced crisis (plague / trade_route_cut) onto the dead remnant. No-op when the
+    // settlement carried no event-condition record (byte-identical for the common case).
+    next = /** @type {LcSettlement} */ (withEventConditionsSynced(next));
     return next;
   }
 

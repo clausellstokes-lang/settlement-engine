@@ -544,7 +544,42 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
   for (const parentId of parentIds) {
     const parent0 = freshSettlement(parentId);
     if (!parent0) continue;
-    if (parent0.lifecycleStatus || parent0.config?.lifecycleStatus) continue; // remnants seed nothing
+    if (parent0.lifecycleStatus || parent0.config?.lifecycleStatus) {
+      // TERMINAL-DEATH ORBIT DISPOSAL (r2 economy-upswing-5): a parent that died holding live
+      // steadings must not strand them frozen in the ledger outside Σ (and a later resettlement
+      // must not inherit the dead town's orbit). The death is ONE event — the outlying folk left
+      // with the last wagons too. No return-to-parent: the parent is a corpse; drop the records,
+      // receipt it. Runs once — next tick the ledger carries no entry for this parent.
+      //   CONSERVATION NOTE / JUDGMENT (vetoable): the orphaned steading population is treated as
+      //   ORIGIN-LOSS (uncredited exit from Σ), NOT threaded through distributeMigrants the way
+      //   the parent's own aspatial death credits 45% (buildTerminalDeathOutcome / ASPATIAL_
+      //   MIGRANT_FRACTION). Reasons: (a) crediting would consume RNG (distributeMigrants mode
+      //   'roll') inside this disposal branch, perturbing the same-seed stream for every LIT
+      //   lifecycle world; (b) it is a cross-layer dependency this pure aspatial kernel does not
+      //   otherwise carry; (c) the whole lane is dormant by default and the stranded pool is
+      //   bounded-small (≤ a few thorp/hamlet records). Origin-loss is conservation-CONSISTENT
+      //   with the death model (the parent's other 55% is origin-loss, "fates unresolved"); it
+      //   simply forgoes the 45% neighbour credit. If full parent-parity is wanted, thread the
+      //   dispersed pool through distributeMigrants here — a clean follow-up.
+      const orphanSats = satellitesOf(nextLedger, parentId);
+      if (orphanSats.length) {
+        const dispersed = orphanSats.reduce((sum, r) => sum + Math.max(0, Math.round(num(r.population, 0))), 0);
+        delete nextLedger[parentId];
+        ledgerChanged = true;
+        receipts.push({
+          id: parentId, kind: 'satellite_orbit_dispersed', count: orphanSats.length,
+          dispersedPopulation: dispersed, satIds: orphanSats.map((r) => r.id),
+          reason: 'parent terminal death — the orbit dispersed with the settlement',
+        });
+        newsEntries.push(steadingNews('steading_orbit_dispersed', parentId, tick, now, {
+          headline: `The steadings around ${String(parent0.name || parentId)} empty out`,
+          summary: `With ${String(parent0.name || parentId)} dead, its ${orphanSats.length} outlying steading${orphanSats.length === 1 ? '' : 's'} emptied — ${dispersed} folk scattered to the wider world with the town's own.`,
+          severity: 0.35,
+          reasons: ['A dead parent cannot hold its orbit; the frontier folk dispersed with the last wagons.'],
+        }));
+      }
+      continue; // remnants seed nothing
+    }
     const parentTier = String(parent0.tier || 'village');
     const cap = num(/** @type {Record<string, unknown>} */ (T.SATELLITE_CAPS)[parentTier], 0);
     const prior = nextLedger[parentId] || null;

@@ -18,6 +18,7 @@ import {
   coalitionConsolidation01,
   blocDecisionFactor,
   factionRevanchism01,
+  leaderAlignmentKinship,
   SETTLEMENT_POLITICS_TUNING,
 } from '../../src/domain/worldPulse/settlementPolitics.js';
 import { recruitmentWeight } from '../../src/domain/worldPulse/corruptionWeb.js';
@@ -363,6 +364,72 @@ describe('settlement politics — the divided-court → corruption-cheap CROSS-P
     const wConsolidated = recruitmentWeight(consolidated.snapshot, consolidated.worldState, new Set(), 'S2', 'S1').weight;
     expect(wDivided).toBeGreaterThan(0);
     expect(wConsolidated).toBeLessThan(wDivided); // the coalition raised the patron's price.
+  });
+});
+
+describe('settlement politics — r2 politics-psychology-1: leader alignment kinship resolves from the categorical string', () => {
+  // npcStates carry a categorical alignment STRING (npcAgency writes pick(ALIGNMENTS) /
+  // `corrupted_${…}`). The prior alignmentAxes ran asObject('lawful_good') → {} → NaN → null, so
+  // the §B quadrant gate collapsed to a constant. These pin the two poles the finding names.
+  it('two lawful_good leaders → kinship 1 (kindred); lawful_good vs chaotic_evil → 0 (opposite)', () => {
+    const kindred = leaderAlignmentKinship({ x: { alignment: 'lawful_good' }, y: { alignment: 'lawful_good' } }, 'x', 'y');
+    expect(kindred).toBe(1);
+    const opposite = leaderAlignmentKinship({ x: { alignment: 'lawful_good' }, y: { alignment: 'chaotic_evil' } }, 'x', 'y');
+    expect(opposite).toBe(0);
+  });
+
+  it('the axes decompose independently (law vs good) and the corrupted_ prefix rides along', () => {
+    // lawful_good vs lawful_evil: same law (1), opposite good (1 vs 0) ⇒ manhattan 1/2 ⇒ 0.5.
+    expect(leaderAlignmentKinship({ x: { alignment: 'lawful_good' }, y: { alignment: 'lawful_evil' } }, 'x', 'y')).toBe(0.5);
+    // true_neutral is the midpoint on both axes.
+    expect(leaderAlignmentKinship({ x: { alignment: 'true_neutral' }, y: { alignment: 'true_neutral' } }, 'x', 'y')).toBe(1);
+    // corrupted_lawful_good still reads as lawful_good on the base axes ⇒ kindred with a plain one.
+    expect(leaderAlignmentKinship({ x: { alignment: 'corrupted_lawful_good' }, y: { alignment: 'lawful_good' } }, 'x', 'y')).toBe(1);
+  });
+
+  it('missing leaders / absent alignment ⇒ null (the quadrant defaults neutral, no crash)', () => {
+    expect(leaderAlignmentKinship({ x: { alignment: 'lawful_good' } }, 'x', null)).toBe(null);
+    expect(leaderAlignmentKinship({ x: {}, y: { alignment: 'lawful_good' } }, 'x', 'y')).toBe(null);
+  });
+});
+
+describe('settlement politics — r2 politics-psychology-2: the external-threat rally reads real war sources', () => {
+  // settlementUnderThreat now reads a live war_front INTO the settlement (and worldState.warPosture),
+  // not six settlement fields no engine path writes. A besieged court closes ranks: the bloc that
+  // forms binds on THREAT glue with a SURVIVAL end, instead of the peacetime concession/commerce.
+  it('a live war_front pointing at the settlement ⇒ a threat-glue / survival bloc forms', () => {
+    const { worldState, snapshot } = world(MERCHANT_CRAFT());
+    // A bare confirmed war_front S2 → S1 (a live siege; not a hostile-relationship mint).
+    snapshot.regionalGraph = { channels: [{ type: 'war_front', status: 'confirmed', from: 'S2', to: 'S1' }] };
+    const { worldState: ws } = drive(worldState, snapshot, 1, 0.01);
+    const blocs = settlementBlocs(ws, 'S1');
+    expect(blocs.length).toBe(1);
+    expect(blocs[0].glue[0].type, 'a common danger at the walls binds a threat bloc').toBe('threat');
+    expect(blocs[0].end, 'the external threat overrides the end to survival').toBe('survival');
+  });
+
+  it('CONTROL: no war_front ⇒ the ordinary peacetime bloc (concession / commerce), proving non-vacuity', () => {
+    const { worldState, snapshot } = world(MERCHANT_CRAFT());
+    snapshot.regionalGraph = { channels: [] };
+    const { worldState: ws } = drive(worldState, snapshot, 1, 0.01);
+    const blocs = settlementBlocs(ws, 'S1');
+    expect(blocs.length).toBe(1);
+    expect(blocs[0].glue[0].type).toBe('concession');
+    expect(blocs[0].end).toBe('commerce');
+  });
+
+  it('a hostile-RELATIONSHIP-minted front is NOT a siege (provenance gate) ⇒ no rally', () => {
+    const { worldState, snapshot } = world(MERCHANT_CRAFT());
+    // A relationship-minted front (evidence source 'relationship_label', no war-layer tag) is a
+    // pure hostility bundle, not a mobilized siege ⇒ isLiveWarFront/warFrontsInto reject it.
+    snapshot.regionalGraph = { channels: [{
+      type: 'war_front', status: 'confirmed', from: 'S2', to: 'S1',
+      evidence: [{ source: 'relationship_label' }],
+    }] };
+    const { worldState: ws } = drive(worldState, snapshot, 1, 0.01);
+    const blocs = settlementBlocs(ws, 'S1');
+    expect(blocs.length).toBe(1);
+    expect(blocs[0].glue[0].type, 'a mere hostile relationship is not banners at the walls').toBe('concession');
   });
 });
 

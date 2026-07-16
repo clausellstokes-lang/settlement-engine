@@ -47,6 +47,7 @@ import {
   exposureMultiplier, normalizeExposure, severityScaleFor, severityKFactorFor,
   DEFAULT_CALAMITY_SEVERITY, CALAMITY_SEVERITY_BANDS,
 } from '../spatial/calamity.js';
+import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 
 // ── Kernel-local read shapes (0-hole discipline — no `any` holes) ─────────────
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -569,6 +570,7 @@ export function advanceCalamity({ settlementUpdates, worldState, snapshot, diges
     const item = itemById.get(id);
     const snapSettlement = item?.settlement;
     if (!snapSettlement) continue;
+    if (lifecycleStatusOf(snapSettlement)) continue; // MOVERS SKIP REMNANTS (r2 economy-upswing-1): a corpse cannot be re-struck
     // Cooldown-via-stamp: the settlement's own history IS the record.
     if (withinCooldown(lastStampYear(snapSettlement), year)) continue;
     // ONE seeded annual draw against this settlement's EXPOSURE-LOADED hazard. Same

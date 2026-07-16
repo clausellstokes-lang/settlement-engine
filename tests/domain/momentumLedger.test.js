@@ -117,11 +117,33 @@ describe('W-MOMENTUM Stage 1 — deposits are READS, loudness the measure', () =
     expect(/** @type {{magnitude01:number}} */ (overt).magnitude01).toBeGreaterThanOrEqual(MOMENTUM_TUNING.LOUD_SIEGE);
   });
 
-  it('an intervention deposits quieter than a full siege (deniable vs banners in the field)', () => {
-    const intv = commitmentDepositsFor(litWorld({ deployments: { A: { targetId: 'B', role: 'intervene' } } }))
-      .find((d) => d.kind === 'siege');
+  it('r2 cohesion-counterparts-1: a foreign INTERVENTION deposits into contest:<target>|<side> at LOUD_INTERVENTION', () => {
+    // Drive the REAL isolated interventions ledger (not a synthetic role:'intervene' deployment —
+    // convergence never writes one, and that fixture masked the entry-dead contest course).
+    const deposits = commitmentDepositsFor(litWorld({
+      spatialLedgers: { interventions: { 'A|B': { interId: 'A', target: 'B', side: 'incumbent' } } },
+    }));
+    const intv = deposits.find((d) => d.kind === 'intervention');
+    expect(intv, 'the intervention deposits (the contest course is no longer entry-dead)').toBeTruthy();
+    expect(/** @type {{actorId:string}} */ (intv).actorId).toBe('A');
+    expect(/** @type {{courseKey:string}} */ (intv).courseKey).toBe('contest:B|incumbent'); // target|side, side load-bearing
     expect(/** @type {{magnitude01:number}} */ (intv).magnitude01).toBe(MOMENTUM_TUNING.LOUD_INTERVENTION);
     expect(MOMENTUM_TUNING.LOUD_INTERVENTION).toBeLessThan(MOMENTUM_TUNING.LOUD_SIEGE);
+    // A deployment (even one mislabeled role:'intervene') now deposits a plain SIEGE into war:<…>,
+    // never an intervention (the unreachable ternary is deleted).
+    const depDeposits = commitmentDepositsFor(litWorld({ deployments: { A: { targetId: 'B', role: 'intervene' } } }));
+    const siege = depDeposits.find((d) => d.kind === 'siege');
+    expect(/** @type {{magnitude01:number}} */ (siege).magnitude01).toBe(MOMENTUM_TUNING.LOUD_SIEGE);
+    expect(depDeposits.some((d) => d.kind === 'intervention')).toBe(false);
+  });
+
+  it('r2 cohesion-counterparts-1: a live intervention ACCRUES commitment stock on the contest course (the exit arm can now press it)', () => {
+    let ws = litWorld({ spatialLedgers: { interventions: { 'A|B': { interId: 'A', target: 'B', side: 'incumbent' } } } });
+    for (let t = 0; t < 3; t++) ws = /** @type {any} */ (advanceCommitments({ worldState: ws, tick: t }).worldState);
+    const ledger = /** @type {Record<string, any>} */ (getSpatialLedger(ws, 'commitments'));
+    const entry = ledger['A>contest:B|incumbent'];
+    expect(entry, 'a contest commitment now exists (was entry-dead before the fix)').toBeTruthy();
+    expect(entry.stock).toBeGreaterThan(0);
   });
 });
 

@@ -182,6 +182,35 @@ describe('B2 — stateful deployment record', () => {
   });
 });
 
+describe('r2 worldpulse-war-military-2 — the REVERSE one-army leg (an intervener cannot ALSO open a siege)', () => {
+  const openSiege = (extraState) => {
+    const saves = [attacker('strong', 'Ironhold'), victim('weak', 'Thornmere')];
+    const edges = HOSTILE_EDGES('strong', 'weak');
+    const snap = snapshotFor(warCampaign({ edges, extraState: { warPosture: { strong: { state: 'mobilized', progress: 1, sinceTick: 0 } }, ...extraState } }), saves);
+    return evaluateWarLayer({ snapshot: snap, worldState: snap.worldState, rng: createPRNG('seed'), tick: 5, now: NOW, rules: { warLayerEnabled: true } });
+  };
+
+  test('CONTROL: with no interventions ledger, the mobilized attacker opens its siege', () => {
+    expect(openSiege().deployments.strong, 'a free settlement fields its army').toBeTruthy();
+  });
+
+  test('an active intervention column (interId === the attacker) BLOCKS opening a second siege', () => {
+    const war = openSiege({
+      spatialCanonVersion: 1,
+      spatialLedgers: { interventions: { 'strong|elsewhere': { interId: 'strong', target: 'elsewhere', side: 'incumbent' } } },
+    });
+    expect(war.deployments.strong, 'a settlement already committed as an intervener cannot field a second army').toBeUndefined();
+  });
+
+  test('NON-VACUITY: an intervention by a DIFFERENT settlement does not block this attacker', () => {
+    const war = openSiege({
+      spatialCanonVersion: 1,
+      spatialLedgers: { interventions: { 'other|elsewhere': { interId: 'other', target: 'elsewhere', side: 'incumbent' } } },
+    });
+    expect(war.deployments.strong, 'an unrelated intervention leaves this attacker free to march').toBeTruthy();
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 describe('B2 — attrition (pure)', () => {
   test('a long campaign degrades more than a short one; loss is bounded', () => {

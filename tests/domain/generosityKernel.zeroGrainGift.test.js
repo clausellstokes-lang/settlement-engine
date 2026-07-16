@@ -45,9 +45,9 @@ const EDGE = { id: 'edge.a.b', from: 'a', to: 'b', relationshipType: 'allied' };
  * a thin-margin refuse into a GIVE_PARTIAL — the reliable "give despite a razor margin" lever.
  * @param {{ lit: boolean, giverStorageMonths?: number, tick?: number, seed?: string }} o
  */
-function drive({ lit, giverStorageMonths = 1.05, tick = 5, seed = 'gift' }) {
-  const giver = town({ storageMonths: giverStorageMonths });  // a = giver (sliver above the floor by default)
-  const receiver = town({ storageMonths: 0.3 });              // b = needy receiver
+function drive({ lit, giverStorageMonths = 1.05, tick = 5, seed = 'gift', giverRemnant = false, receiverRemnant = false }) {
+  const giver = { ...town({ storageMonths: giverStorageMonths }), ...(giverRemnant ? { lifecycleStatus: 'remnant' } : {}) };  // a = giver
+  const receiver = { ...town({ storageMonths: 0.3 }), ...(receiverRemnant ? { lifecycleStatus: 'remnant' } : {}) };          // b = needy receiver
   const snapshot = {
     settlements: [{ id: 'a', name: 'Ashford', settlement: giver }, { id: 'b', name: 'Briarwatch', settlement: receiver }],
   };
@@ -136,5 +136,25 @@ describe('ZERO-GRAIN GIFT — a willing give that moves no grain reacts to NOTHI
     const b = r.settlementUpdates.find((u) => u.saveId === 'b');
     expect(a.settlement.economicState.foodSecurity.storageMonths).toBe(1.05);
     expect(b.settlement.economicState.foodSecurity.storageMonths).toBe(0.3);
+  });
+});
+
+describe('generosity r2 — MOVERS SKIP REMNANTS, both directions (economy-upswing-1)', () => {
+  /** Iterate seeds looking for ANY a↔b give receipt. */
+  function anyGiveIn(opts) {
+    for (let s = 0; s < 80; s++) {
+      const r = drive({ ...opts, seed: `${opts.seed || 'g'}-${s}` });
+      if (r.receipts.some((x) => String(x.verdict).startsWith('give'))) return true;
+    }
+    return false;
+  }
+  it('CONTROL: a live comfortable giver DOES relieve the needy neighbour', () => {
+    expect(anyGiveIn({ lit: true, giverStorageMonths: 8, seed: 'ctrl' }), 'a live pair gives (non-vacuous)').toBe(true);
+  });
+  it('a REMNANT receiver is never aided (receiver-side skip)', () => {
+    expect(anyGiveIn({ lit: true, giverStorageMonths: 8, seed: 'rxr', receiverRemnant: true }), 'no aid flows to a corpse').toBe(false);
+  });
+  it('a REMNANT giver never orients to give (giver-side skip)', () => {
+    expect(anyGiveIn({ lit: true, giverStorageMonths: 8, seed: 'gvr', giverRemnant: true }), 'a corpse gives nothing').toBe(false);
   });
 });

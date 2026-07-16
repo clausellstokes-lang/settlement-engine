@@ -771,6 +771,15 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       postTimeSnapshot = buildWorldSnapshot({ campaign: postureCampaign, saves: postTimeSaves, worldState });
     }
   }
+  // r2 politics-psychology-5: snapshot the deployments BEFORE the war layer runs. The war layer
+  // deletes a recalled deployment (warDeployment step: `delete deployments[attackerId]`), so a
+  // DM-accepted (proposal-lane) sue_for_peace recall — stamped between pulses, present now but
+  // gone after the war layer — would never reach advanceMomentumCracks at the bottom of the pulse.
+  // A shallow read-only snapshot is byte-neutral (only threaded into the DORMANT momentum crack
+  // detector, which no-ops when the layer is dark). Null when momentum is off ⇒ nothing captured.
+  const preWarDeployments = momentumActive(worldState)
+    ? { ...(/** @type {Record<string, unknown>} */ (worldState?.deployments) || {}) }
+    : null;
   // The war/deployment layer — GATED behind simulationRules.warLayerEnabled
   // (default false ⇒ pure no-op ⇒ byte-identical legacy). Reads the SINGLE pre-tick
   // postTimeSnapshot: resolves coalition sieges (a fallen target → a conquest
@@ -1291,6 +1300,17 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
     : (activeDismissals
         ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
         : selectedForApply);
+  // r2 worldpulse-tick-core-1: the post-apply CONSEQUENCE readers (moral drift, misjudgment
+  // news, the tempo birth fold) must see the same dismissal discipline the apply pass does — a
+  // DM-VETOED major never happened, so it must not drift alignment, emit a "marches on a
+  // misjudgment" receipt, or count as a landed birth. We subtract ONLY the DISMISSED majors
+  // (activeDismissals), NOT the merely-DEFERRED ones: on the pause path a deferred major is still
+  // pending-apply and legitimately counts (activeDismissals is null there ⇒ the full set, so the
+  // tempo birth ledger is unchanged). On an ordinary tick activeDismissals is null ⇒ this is the
+  // SAME reference as selectedForApply ⇒ byte-identical. pulseRecord below keeps the FULL set.
+  const selectedForConsequences = activeDismissals
+    ? selectedForApply.filter(o => !(deriveDecisionTier(o) === 'major' && activeDismissals.has(String(o.id))))
+    : selectedForApply;
 
   const settlementMap = buildSettlementMap(postTimeSnapshot, localSettlements);
   const applied = applyWorldPulseOutcomes({
@@ -1318,7 +1338,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // legacy campaign has no narrativeTempo key and none is added (byte-neutral).
   const nextTempo = foldNarrativeTempo(
     memoryState.narrativeTempo,
-    selectedForApply,
+    selectedForConsequences, // r2 tick-core-1: a DM-dismissed major is not a landed birth
     tempoDeferred,
     worldState.calendar?.elapsedWeeks ?? 0,
     simulationRules,
@@ -1688,7 +1708,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // what was believed, what was true, and how stale the read was. Empty (byte-
   // neutral) when beliefs are dormant or every acting belief was sound.
   const beliefMisjudgmentNews = beliefMisjudgmentNewsEntries(
-    selectedForApply, settlementNameFor, worldState.tick, now,
+    selectedForConsequences, settlementNameFor, worldState.tick, now, // r2 tick-core-1: no receipt for a vetoed march
   );
   // SEASONS-A: the season boundary markers — the ONE new news kind
   // ('season_marker': harvest at the autumn boundary, hungry_gap at month 12).
@@ -1919,7 +1939,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   if (beliefsActive(memoryState) || webwarAtrocities.length) {
     /** @type {import('../spatial/moralDrift.js').MoralDriftDeltaInput[]} */
     const instigations = [];
-    for (const outcome of selectedForApply) {
+    for (const outcome of selectedForConsequences) { // r2 tick-core-1: a vetoed march drifts no alignment
       const mis = outcome?.metadata?.misjudgment;
       // UNJUST = the relationship misjudgment (believed hostile, truly not — a march on
       // a non-threat). A pure strength misjudgment is a blunder against a REAL enemy,
@@ -2363,7 +2383,11 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       let sc = depositScaleCache.get(actorId);
       if (sc === undefined) {
         const it = postTimeSnapshot?.byId?.get?.(actorId);
-        sc = it ? entityThreshold(it, memoryState).depositScale : 1;
+        // Lawful×chaos deposit scale × the entry-temperament dampen (r2 politics-psychology-4:
+        // a cautious/wary court commits more slowly). Both are ×1 for a neutral court ⇒ dormant
+        // byte-identity holds.
+        const t = it ? entityThreshold(it, memoryState) : null;
+        sc = t ? t.depositScale * t.entryDepositDampen : 1;
         depositScaleCache.set(actorId, sc);
       }
       return sc;
@@ -2387,6 +2411,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       worldState: memoryState,
       settlementUpdates,
       tick: worldState.tick,
+      // r2 politics-psychology-5: the pre-war-layer deployment snapshot lets a DM-accepted
+      // (proposal-lane) sue_for_peace climb-down be priced even though the war layer already
+      // deleted its deployment. chargedTick idempotence prevents any double-fire with the auto lane.
+      priorDeployments: preWarDeployments,
       nameFor: settlementNameFor,
       // The face-saving exit resolver: a live 'mediation' peace reason on the pair softens
       // the price (design §4 — mediation's 20% soften). peaceReasonsFor returns null when the

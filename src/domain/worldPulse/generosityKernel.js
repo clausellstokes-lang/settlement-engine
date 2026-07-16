@@ -133,6 +133,7 @@ import { computeLawfulness, computeMalice } from './disposition.js';
 import { evil01, chaos01 } from './deityAxes.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
+import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 import { computeSackFoodTransfer, storageCapacityMonths, STOCKPILE_TUNING, famineFor } from './foodStockpile.js';
 import { seasonForTick } from './worldState.js';
 import { seasonalUnitSwing } from './seasons.js';
@@ -485,6 +486,9 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     const pairKey = `${giverId} ${receiverId}`;
     if (seenPair.has(pairKey)) return;
     if (!itemById.has(giverId) || !itemById.has(receiverId)) return;
+    // MOVERS SKIP REMNANTS (r2 economy-upswing-1), BOTH directions: a terminal-dead corpse
+    // neither orients to give nor is a valid receiver of aid.
+    if (lifecycleStatusOf(freshSettlement(giverId)) || lifecycleStatusOf(freshSettlement(receiverId))) return;
     const need01 = needOf(receiverId);
     const kindRaw = normalizeRelationshipType(String(edge?.relationshipType || 'neutral'));
     const kind = KIND_MAP[kindRaw];
@@ -526,7 +530,15 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   const newsEntries = [];
   /** @type {Array<{ giverId: string, receiverId: string, verdict: string, magnitude: number }>} */
   const receipts = [];
-  /** @type {Map<string, number>} the net storageMonths delta to apply per settlement */
+  /** @type {Map<string, number>} the net storageMonths delta to apply per settlement. Also the
+   * r2 economy-upswing-2 headroom accountant: a giver can appear in ≥2 candidate asks in one tick,
+   * and freshSettlement reads the PRE-tick settlement (deltas apply only after the loop), so
+   * without netting the debits already booked here each ask would re-price the SAME full headroom
+   * and the summed debits could overdraw the giver past the hard reserve floor (and, once the sum
+   * exceeds total stock, MINT food at the clamp). spareableMonths below subtracts the debit share
+   * of this map (max(0, −delta)) so cumulative same-giver gifts+sales never exceed real above-floor
+   * stock. Only the DEBIT part nets (a giver that also RECEIVED keeps its full spare) ⇒ a first ask
+   * and any receiver-then-giver ordering stay byte-identical; only the multi-give bug case shifts. */
   const foodDeltas = new Map();
   /** @type {Map<string, number>} the net prosperity BAND-STEP delta per settlement (PURCHASE payment, §4/A2) */
   const prosperityDeltas = new Map();
@@ -631,7 +643,10 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     const giverMonths = storageMonthsOf(giverS);
     const giverCap = Math.max(0.1, storageCapacityMonths(asSimSettlement(giverS)));
     const floorMonths = num(STOCKPILE_TUNING.reserveTitheFloorMonths, 1);
-    const spareableMonths = Math.max(0, giverMonths - floorMonths);
+    // r2 economy-upswing-2: net the headroom already committed by this giver's earlier asks THIS
+    // tick, so the second same-giver ask prices only what truly remains above the floor (0 for a
+    // giver that hasn't given yet ⇒ byte-identical to the single-ask case).
+    const spareableMonths = Math.max(0, giverMonths - floorMonths - Math.max(0, -(foodDeltas.get(giverId) || 0)));
     const reserveAboveFloor01 = clamp01(spareableMonths / Math.max(0.1, giverCap - floorMonths));
     const aheadWeeks = (num(/** @type {{ calendar?: { elapsedWeeks?: unknown } }} */ (worldState)?.calendar?.elapsedWeeks, 0)) + 13;
     const ahead = seasonForTick(aheadWeeks);
@@ -722,7 +737,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
       // no legitimacy cost, no succor beat, no rumor broadcast, no trade-overture warming, no
       // moral-hazard decay). Mirrors the purchase fall-through's `sold` gate exactly. ──
       if (lostMonths > 0) {
-        foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths);
+        foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths); // r2 economy-upswing-2: this debit reserves the headroom against later same-tick asks
         if (gainedMonths > 0) foodDeltas.set(receiverId, (foodDeltas.get(receiverId) || 0) + gainedMonths);
 
         // ── The obligation mint (the "aid changes history" ledger). A GIVE_AS_CREDIT verdict
@@ -823,7 +838,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
         if (lostMonths > 0) {
           // Grain moved ⇒ the sale is REAL: move the food, take the payment, bank the warmth.
           sold = true;
-          foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths);
+          foodDeltas.set(giverId, (foodDeltas.get(giverId) || 0) - lostMonths); // r2 economy-upswing-2: this debit reserves the headroom against later same-tick asks
           if (gainedMonths > 0) foodDeltas.set(receiverId, (foodDeltas.get(receiverId) || 0) + gainedMonths);
           // The PAYMENT: a prosperity band-step debit on the buyer + a bounded seller income nudge.
           if (purchase.buyerDebitBands > 0) prosperityDeltas.set(receiverId, (prosperityDeltas.get(receiverId) || 0) - purchase.buyerDebitBands);
