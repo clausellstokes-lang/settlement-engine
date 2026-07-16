@@ -688,6 +688,35 @@ CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing, settlement-m
 
 # ROUND 2 (opened 2026-07-15 late eve — the owner's second full-review commission)
 
+## OWNER RULING (2026-07-16, verbatim: "feel free to preset lighting.") — THE WAVE-LIGHTING
+## RULING, delegated to the architect. The decided lighting (JUDGMENT, each line vetoable):
+- **ALL NINE dark wave gates light in the three world-alive presets** — `dramatic_campaign`,
+  `living_realm`, `full_simulation` each gain: momentumEnabled, navalEnabled,
+  interventionEnabled, settlementLifecycleEnabled, peaceEngineEnabled, supplyWebWarfareEnabled,
+  upswingArcsEnabled, resourceDynamicsEnabled, constructiveFlowsEnabled. Rationale:
+  full_simulation is everything-on by name (the composition smoke + checkpoint soak then cover
+  the full stack automatically); dramatic_campaign follows the 2026-07-14 "gains real depth"
+  precedent and the owner's registered boom_flourishing drama class; living_realm's distinction
+  is approval posture, not engine depth — a "living realm" without the living-engine waves
+  would lie. JUDGMENT: full parity across the three rather than a graduated ladder — say
+  "veto" per preset/flag to prune.
+- **quiet_local / static_campaign / narrative_campaign: UNCHANGED.** commodityFlowEnabled
+  stays opt-in everywhere (standing owner ruling, untouched). Existing campaigns unchanged
+  (stored rules; virtual flags absent ⇒ prior bytes); re-applying a preset mid-campaign rides
+  the existing receipted rules-change flow.
+- **UI**: SimulationRulesDialog gains an Engine Waves section exposing the nine toggles
+  individually; realmManifest refusal prose updated to name the preset + the dialog path
+  (closing sim-cohesion-4's misleading-prose half).
+- **SEQUENCING (architect, vetoable)**: implemented POST-MERGE as wave **W-R2-LIGHT**, strictly
+  AFTER W-R2-SEAMS — the newly-lit engine must not expose the known composition bugs (upswing
+  same-tick clobber, naval never-retire, remnant non-skip, blockade-blind peace) as the DM's
+  first experience. NOT implemented on RF mid-merge: MASTER_MERGE_PLAN §4.3 uses byte-identical
+  goldens as its Stage-1 resolution arbiter — moving goldens under the in-flight merge would
+  sabotage the merge session's verification instrument.
+- **Golden protocol**: predict-the-shift-first, then the regen with the full shift map;
+  preset-stability/identity pins updated in the same commit; shifts documented as
+  owner-ruling-caused (this ruling). §6 owner-urgent item (4) is RESOLVED by this ruling.
+
 The owner re-issued the comprehensive-review directive verbatim (review the ENTIRE code, holistic
 thoughts, then Opus-4.8-ultracode fixes for every finding, Fable architect/manager/checker,
 bold-over-safe escalation). Round 1's "I'll do a full review at another time" ruling — this is
