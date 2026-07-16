@@ -931,7 +931,14 @@ domain hand-merges DISCARDED as owner-gated golden-shifters (correct). **Agent R
 the 151 remaining dispositions (security-first), the 8 hand-merges, honest rebaselines.**
 OWNER-GATED QUEUE GROWS: (a) the merge branch's +4,723 budget bust = the recorded
 golden-lineage overage — EXPECTED CURED at fold-in by RATCHET #10 + FP-G8's config (verify
-then); (b) EXEMPT_CEILING 66→69 (3 legitimate transient actions).
+then); (b) EXEMPT_CEILING 66→69 (3 legitimate transient actions); (c) **THE DAILY-LIFE
+FOLDING FORK (W6 aiSlice verdict, 2026-07-16):** master folds daily-life prose into ONE
+narrative credit spend + persists switched-away runs' ai_data; RF keeps TWO separate paid
+actions + discard-on-switch. Credit economics + persisted-shape + edge-contract = owner's
+call: ADOPT master's one-spend model (rewires requestDailyLife's 4 live call sites + the
+server contract) or KEEP RF's two-spend semantics (tests adapt/drop accordingly). The four
+NON-gated aiSlice fixes (cross-identity chronicle/rename/revert/hydrate bleeds + the
+setNestedPath proto-pollution guard) port regardless — ratified to W6.
 **INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
 proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
 alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
