@@ -370,8 +370,23 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //     closure 1,158,376 → 1,161,726) — the reclaim paid for the verbs ~15× over, NET
 //     −48,607 B vs the pre-wave 1,210,333. Budget 1,214,050 → 1,161,810 (measured
 //     1,161,726 + ~84 B house margin). No behavior shift; goldens byte-identical.
+// → 1,066,400 (RATCHET #10 — FP-G8 + the W-R2-INTENT thread, 2026-07-16,
+//   reclaim-then-thread at program scale):
+//   • FP-G8 RECLAIMED −60,906 B via two engine-core over-inclusion trims (the
+//     stale generator-spine eager pin — checkDraftEdit, its sole first-paint
+//     consumer, went lazy waves ago — plus the settlement.schema.js leaf excise;
+//     vite.config.js only, goldens byte-identical; closure 1,121,942 → 1,061,036).
+//   • W-R2-INTENT then THREADED +2,796 B eager (eight intent-trust store fixes:
+//     typed refusal surfacing, outbox column-set ordering, pause-window guards,
+//     the placement gate, delete/rename persistence — all synchronous test-pinned
+//     control flow, proven irreducible by the trim census; closure → 1,063,832).
+//   • Budget 1,121,903 → 1,066,400 = measured 1,063,832 + ~2,568 B DELIBERATE
+//     funded headroom for the recorded budget-blocked queue: the persist-gap
+//     satellite (+596 B, §10.4, blocked since 2026-07-14), W2 feed-retention
+//     (+363 B, round-21), W-R2-DEPTH (~100 B), and slack. The reclaim paid for
+//     the whole queue ~15× over; NET −55,503 B vs the pre-G8 1,121,942.
 // Monotone-down only; raises are owner-signed, never incidental.
-const CLOSURE_BUDGET_BYTES = 1_121_903;
+const CLOSURE_BUDGET_BYTES = 1_066_400;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
