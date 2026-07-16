@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { previewCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 // F0 byte-identity oracle (dormant-until-deity religion layer): a campaign with
 // NO assigned deity must stay BYTE-IDENTICAL after later phases bolt on additive
@@ -10,41 +11,16 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 // conditionally. A raw JSON.stringify gate would flag those empty additions as
 // churn even though they carry no signal.
 //
-// This file defines the load-bearing oracle `normalizeForDormancy` — a
-// STRUCTURAL normalized deep-equal that treats an ABSENT key as its default
-// (an empty object/array). It drops empty-{}/[] keys, recurses, and sorts object
-// keys, so absent === {} === []. Every later "byte-identical" gate references
-// this normalizer. The test proves (a) adding empty ledgers is byte-neutral
-// UNDER the oracle, (b) the oracle is doing real work (raw deep-equal WOULD
-// differ on those keys), and (c) a deity-free pulse carries no pantheon/deity
-// structure anywhere — the dormancy guarantee.
-
-// --- THE ORACLE ----------------------------------------------------------
-// Recursive structural normalizer. Drops keys whose value normalizes to an
-// empty object or empty array (absent === {} === []), recurses into nested
-// containers, and is order-stable for object keys (keys sorted). Returns a
-// canonical form suitable for deep-equal comparison.
-export function normalizeForDormancy(value) {
-  if (Array.isArray(value)) {
-    return value.map(normalizeForDormancy);
-  }
-  if (value && typeof value === 'object') {
-    const out = {};
-    for (const key of Object.keys(value).sort()) {
-      const normalized = normalizeForDormancy(value[key]);
-      // Absent === empty-object === empty-array: skip empty containers.
-      const isEmptyObject = normalized
-        && typeof normalized === 'object'
-        && !Array.isArray(normalized)
-        && Object.keys(normalized).length === 0;
-      const isEmptyArray = Array.isArray(normalized) && normalized.length === 0;
-      if (isEmptyObject || isEmptyArray) continue;
-      out[key] = normalized;
-    }
-    return out;
-  }
-  return value;
-}
+// The load-bearing oracle `normalizeForDormancy` — a STRUCTURAL normalized
+// deep-equal that treats an ABSENT key as its default (an empty object/array) —
+// now lives in tests/helpers/dormancyOracle.js (tests-estate-2: it was extracted
+// out of this .test.js file so importing it no longer re-registers the two proofs
+// below, and the golden estate no longer couples to this filename). Every later
+// "byte-identical" gate imports the oracle from that helper. The two proofs stay
+// HERE: they prove (a) adding empty ledgers is byte-neutral UNDER the oracle and
+// the oracle is doing real work (raw deep-equal WOULD differ on those keys), and
+// (b) a deity-free pulse carries no pantheon/deity structure anywhere — the
+// dormancy guarantee.
 
 // --- Fixture (modelled on worldPulseOrderIndependence.test.js) ----------
 // Deity-free on purpose: no deity/pantheon anywhere in any save or worldState.

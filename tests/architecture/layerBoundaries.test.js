@@ -29,7 +29,7 @@
  * @enforced-by this file (referenced from ARCHITECTURE.md's layer map)
  */
 
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
@@ -90,15 +90,17 @@ describe('layer boundaries (F29)', () => {
     // DEITY_RANK_AUTHORITY via display/deityEffects.js; refused — the constant
     // moved to the dependency-free leaf domain/deityConstants.js, causalState
     // imports the leaf, deityEffects re-exports it, and the baseline stays at 2.)
-    const ALLOWED = [
-      'components/compendium/CustomContent.jsx > components/compendium/Dependencies.jsx',
-      'generators/helpers.js > generators/priorityHelpers.js',
+    // Each allowed cycle as its MEMBER SET (order-invariant — an SCC is a set,
+    // not an ordered walk). Killing a cycle → REMOVE its entry here (locks the
+    // win). Adding one → this fails, and the answer is to break the cycle, not
+    // extend the list.
+    const ALLOWED_CYCLES = [
+      ['components/compendium/CustomContent.jsx', 'components/compendium/Dependencies.jsx'],
+      ['generators/helpers.js', 'generators/priorityHelpers.js'],
     ];
 
-    // Self-contained deterministic cycle detector (no dependency on madge):
-    // resolve relative imports within src/, DFS in sorted order, collect the
-    // recursion-stack slice at each back edge, canonicalize by rotating the
-    // smallest member first, dedup.
+    // Self-contained deterministic import graph (no dependency on madge):
+    // resolve relative imports within src/.
     const files = walk(SRC).sort();
     const rel = (p) => relative(SRC, p).replace(/\\/g, '/');
     const fileSet = new Set(files.map(rel));
@@ -109,7 +111,7 @@ describe('layer boundaries (F29)', () => {
         const r = relative(SRC, cand).replace(/\\/g, '/');
         if (fileSet.has(r)) return r;
       }
-      return existsSync(base) ? null : null;
+      return null; // unresolved (a package, or a path we don't map) — no edge
     };
     // Strip comments before scanning — JSDoc headers quote import examples
     // ("import { random } from './prng.js'") that a raw regex would read as
@@ -130,26 +132,59 @@ describe('layer boundaries (F29)', () => {
         .sort();
       graph.set(self, edges);
     }
-    const canonical = (cycle) => {
-      const i = cycle.indexOf([...cycle].sort()[0]);
-      return [...cycle.slice(i), ...cycle.slice(0, i)].join(' > ');
-    };
-    const cycles = new Set();
-    const state = new Map(); // 0 = unvisited, 1 = on stack, 2 = done
-    const stack = [];
-    const dfs = (node) => {
-      state.set(node, 1);
-      stack.push(node);
-      for (const next of graph.get(node) || []) {
-        const s = state.get(next) || 0;
-        if (s === 1) cycles.add(canonical(stack.slice(stack.indexOf(next))));
-        else if (s === 0) dfs(next);
-      }
-      stack.pop();
-      state.set(node, 2);
-    };
-    for (const node of [...graph.keys()].sort()) if (!state.get(node)) dfs(node);
 
-    expect([...cycles].sort()).toEqual([...ALLOWED].sort());
+    // Tarjan's strongly-connected-components. This REPLACES a back-edge DFS that
+    // recorded a cycle only at the first back edge it happened to walk, and could
+    // MISS a new cycle threading through an already-FINISHED (state===2) node —
+    // so enforcement silently depended on the lexicographic DFS visitation order
+    // (tests-estate-1). SCCs are order-invariant: a directed cycle is EXACTLY a
+    // strongly-connected component of size > 1 (self-edges are already filtered
+    // out above, so a singleton SCC is always acyclic). Every SCC is therefore
+    // either a singleton (fine) or must equal one of the allowed cycles' member
+    // sets. Recursive, in sorted node order for a deterministic component listing
+    // (the graph is a few hundred files — well within the call stack).
+    const index = new Map();
+    const low = new Map();
+    const onStack = new Set();
+    const sccStack = [];
+    const sccs = [];
+    let counter = 0;
+    const strongconnect = (v) => {
+      index.set(v, counter);
+      low.set(v, counter);
+      counter += 1;
+      sccStack.push(v);
+      onStack.add(v);
+      for (const w of graph.get(v) || []) {
+        if (!index.has(w)) {
+          strongconnect(w);
+          low.set(v, Math.min(low.get(v), low.get(w)));
+        } else if (onStack.has(w)) {
+          low.set(v, Math.min(low.get(v), index.get(w)));
+        }
+      }
+      if (low.get(v) === index.get(v)) {
+        const comp = [];
+        let w;
+        do { w = sccStack.pop(); onStack.delete(w); comp.push(w); } while (w !== v);
+        sccs.push(comp);
+      }
+    };
+    for (const node of [...graph.keys()].sort()) if (!index.has(node)) strongconnect(node);
+
+    // Canonicalize a member collection to an order-invariant key.
+    const canonicalSet = (members) => [...members].sort().join(' | ');
+    const cyclicSccs = sccs.filter((c) => c.length > 1).map(canonicalSet).sort();
+    const allowedSets = ALLOWED_CYCLES.map(canonicalSet).sort();
+
+    // Exact-set equality (shrink-only, both directions): a NEW cyclic SCC fails
+    // (break the cycle, don't extend the list); a KILLED cycle also fails until
+    // its allowlist entry is removed (the win must be locked).
+    expect(
+      cyclicSccs,
+      'the set of import cycles (strongly-connected components of size > 1) drifted from the allowlist. ' +
+        'A new cycle → break it (route the offending import through a dependency-free leaf, the deityConstants.js ' +
+        'pattern). A killed cycle → delete its row from ALLOWED_CYCLES to lock the win. Never extend the list to pass.',
+    ).toEqual(allowedSets);
   }, 60_000);
 });

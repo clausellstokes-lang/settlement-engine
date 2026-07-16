@@ -633,11 +633,15 @@ export default [
       // store, or lib layers (which would re-introduce RNG capture / IO leaks
       // into the data tables). Executable closures live in the generators layer
       // (stressNarrative.js, narrativeText.js); the data files hold only fields.
-      // @enforced-by this rule + tests/domain/dataPurity.test.js
+      // The kernel layer is NOT banned wholesale — data legitimately imports the
+      // pure, deterministic kernel/slugify.js — but the prng seam IS: kernel/prng.js
+      // carries generateSeed() (Date.now()+Math.random()), the one ambient-entropy
+      // vector in the kernel (scripts-build-ci-1 residual). rngContext.js is likewise
+      // banned (seeded-draw capture). @enforced-by this rule + tests/domain/dataPurity.test.js
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['**/generators/**', '**/store/**', '**/lib/**'],
-          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib. Move executable logic into the generators layer and import data, not behavior.',
+          group: ['**/generators/**', '**/store/**', '**/lib/**', '**/kernel/prng*', '**/kernel/rngContext*'],
+          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib, or the kernel prng/rngContext seams (generateSeed/ambient RNG re-introduces non-determinism). Move executable logic into the generators layer and import data, not behavior.',
         }],
       }],
     },

@@ -37,7 +37,7 @@ import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
-import { normalizeForDormancy } from '../domain/religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 import { resolveLeash } from '../../src/domain/corruptionLeash.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'corruption-web-dormancy-golden.json');

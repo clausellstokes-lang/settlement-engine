@@ -16,7 +16,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
-import { normalizeForDormancy } from './religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
 const IDS = ['a', 'b', 'c', 'd'];

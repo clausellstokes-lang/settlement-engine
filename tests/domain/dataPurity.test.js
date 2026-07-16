@@ -83,4 +83,32 @@ describe('src/data purity (no runtime imports of generators/store/lib)', () => {
     }
     expect(offenders).toEqual([]);
   });
+
+  // ── scripts-build-ci-1 residual: the prng ambient-entropy seam ───────────────
+  // The RNG seam moved generators→kernel (prng.js/rngContext.js, commit 4dc2a0ac).
+  // The FORBIDDEN-layer scan above bans generators/store/lib but deliberately NOT
+  // kernel — src/data legitimately imports kernel/slugify.js (a pure, deterministic
+  // helper), so a blanket kernel ban would be wrong. The rngContext guard above
+  // fences the seeded-draw carrier; this fences its sibling, prng.js, whose
+  // generateSeed() (Date.now() + Math.random(), prng.js) is the ONE ambient-entropy
+  // vector in the kernel. createPRNG is deterministic (seed passed in), but a data
+  // file has no legitimate use for prng.js at all — it holds behavior, and
+  // generateSeed() reintroduces non-determinism. The original finding claimed the
+  // rngContext hole itself was unfenced (REFUTED — the guard above is path-agnostic
+  // and catches it); this narrow, currently-offender-free prng gap is the surviving
+  // half, fenced preventively so a future data file cannot import the seam quietly.
+  // @enforced-by this test + eslint.config.js (src/data/** kernel/prng no-restricted-imports)
+  test('no src/data file imports the prng ambient-entropy seam (kernel/prng.js)', () => {
+    const offenders = [];
+    for (const file of files) {
+      const src = readFileSync(file, 'utf-8');
+      // Match an import specifier ending in prng (…/kernel/prng.js) — the ambient
+      // generateSeed() carrier. A bare mention in a data string/comment is not an
+      // import, so anchoring to the import form keeps this specific.
+      if (/(?:import\b[^;]*?from|import\s*\(\s*|require\s*\(\s*)\s*['"][^'"]*\/prng(?:\.js)?['"]/.test(src)) {
+        offenders.push(file.replace(process.cwd() + '/', ''));
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
 });
