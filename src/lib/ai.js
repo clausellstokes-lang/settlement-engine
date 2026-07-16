@@ -107,6 +107,7 @@ async function getAccessTokenSafe() {
  * @param {(notice: {status: string, spendId: string|null, reason: string|null, supportNote: string|null}) => void} [opts.onRefundFailure] - called when the server reports that an automatic refund for a failed generation also failed
  * @param {AbortSignal} [opts.signal] - abort signal; when it fires the fetch + stream are torn down and the call rejects with an AbortError
  * @param {number} [opts.idleTimeoutMs] - watchdog: abort if no bytes arrive within this window (default 60000; resets on every chunk to cover slow first-token)
+ * @param {number} [opts.overallTimeoutMs] - hard ceiling on the whole run: abort if the stream hasn't finished within this window (default 180000; unlike the idle watchdog, does not reset on chunks)
  * @param {Array<string|number>} [opts.pinnedNpcIds] - NPC ids the DM pinned; the server drops them from the `npcs` pass so they round-trip unchanged.
  * @param {string} [opts.aiGuidance] - DM-approved guidance sent to the model. Private DM Notes are never sent.
  * @param {string} [opts.modelPreference] - User model preference key.

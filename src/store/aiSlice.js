@@ -1165,10 +1165,12 @@ export const createAiSlice = (set, get) => ({
    * @param {'initial'|'regenerate'|'progression'|'revert'} opts.reason
    * @param {string|null} [opts.triggeredBy]
    * @param {'full'|'summary'} [opts.mode='full']
+   * @param {object|null} [opts.aiSettlement] - this run's own aiSettlement prose; preferred over the live store view so a mid-generation settlement switch can't bleed another save's prose into this entry
+   * @param {object|null} [opts.aiDailyLife] - this run's own aiDailyLife prose; same mid-switch guard as aiSettlement
    */
   _appendChronicleEntry: async (
     saveId,
-    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife } = {},
+    { reason, triggeredBy = null, mode = 'full', aiSettlement, aiDailyLife },
   ) => {
     if (!saveId) return;
     const state = get();

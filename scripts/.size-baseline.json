@@ -10,7 +10,7 @@
   "src/generators/historyGenerator.js": 883,
   "src/generators/narrativeGenerator.js": 905,
   "src/generators/npcGenerator.js": 1498,
-  "src/pdf/lib/viewModel.js": 1041,
-  "src/store/aiSlice.js": 941,
+  "src/pdf/lib/viewModel.js": 1043,
+  "src/store/aiSlice.js": 961,
   "src/store/settlementSlice.js": 1345
 }
