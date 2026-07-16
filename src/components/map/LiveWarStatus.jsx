@@ -23,6 +23,7 @@ import {
   liveTradeWars,
 } from '../../domain/display/warStatus.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
+import WarCausalBrief from './WarCausalBrief.jsx';
 
 function nameFor(nameById, id) {
   return nameById.get(String(id)) || String(id);
@@ -82,9 +83,14 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                   title={isCoalition
                     ? `The War of ${targetName}, a coalition besieging the walls`
                     : `${attackers[0] || 'An army'} lays siege to ${targetName}`}
-                  detail={isCoalition
-                    ? `Coalition: ${attackers.join(', ')} (${siege.frontCount} fronts).`
-                    : `${siege.frontCount} active war front${siege.frontCount === 1 ? '' : 's'}.`}
+                  detail={<>
+                    {isCoalition
+                      ? `Coalition: ${attackers.join(', ')} (${siege.frontCount} fronts).`
+                      : `${siege.frontCount} active war front${siege.frontCount === 1 ? '' : 's'}.`}
+                    {/* ambition-fit-1: the dramatic-irony line — is this siege's war
+                        already dying under the peace reasons? Self-gates to nothing. */}
+                    <WarCausalBrief worldState={worldState} partyId={siege.coalition[0]} foeId={siege.targetId} compact />
+                  </>}
                 />
               );
             })}

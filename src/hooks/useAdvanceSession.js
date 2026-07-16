@@ -99,8 +99,11 @@ export function useAdvanceSession({ activeCampaignId, worldPulseInterval, openIn
       const result = await advanceCampaignWorld(activeCampaignId, worldPulseInterval);
       // A multi-tick advance that PAUSED at a fork: hold the session in 'paused' so
       // the toolbar resume chip + progress reflect the partial run. The WorldPulse
-      // panel renders the amber banner with the batched majors (it reads the cursor
-      // off worldState). A completed/legacy advance falls through to idle below.
+      // panel's paused-verdict surface (experience-product-fit-1) reads the cursor's
+      // pendingMajors off worldState and renders each as a keep/dismiss card, then
+      // resumes with the collected verdicts via resolveIntervalMajors — the toolbar
+      // chip is the quick "resume with recommendations" (all majors applied). A
+      // completed/legacy advance falls through to idle below.
       if (result && result.status === 'paused') {
         paused = true;
         setAdvanceSession({ phase: 'paused', ticksDone: result.ticksDone || 0, ticksTotal: result.ticksTotal || 0 });

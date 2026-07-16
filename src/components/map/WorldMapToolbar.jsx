@@ -201,8 +201,8 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
       size="sm"
       onClick={onResume}
       disabled={disabled}
-      aria-label={`Advance paused. Resume advancing, ${remaining} of ${total} steps remaining.`}
-      title="The advance paused at a major fork. Resume to apply the recommended outcomes and continue the interval."
+      aria-label={`Advance paused. Resume with recommendations, ${remaining} of ${total} steps remaining. Set per-major verdicts in the World Pulse panel.`}
+      title="The advance paused at a major fork. This resumes with every major applied as recommended — to keep or dismiss each one, use the paused-verdict surface in the World Pulse panel."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         minHeight: 40, padding: '5px 11px',
@@ -219,7 +219,7 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
           vendor-icons chunk for a surface that cannot appear. Re-point to
           PauseCircle/PlayCircle when the multi-tick advance session lands. */}
       <Zap size={14} /> Advance paused
-      <Zap size={13} /> Resume{remaining > 0 ? ` (${remaining} of ${total})` : ''}
+      <Zap size={13} /> Resume with recommendations{remaining > 0 ? ` (${remaining} of ${total})` : ''}
     </Button>
   );
 }

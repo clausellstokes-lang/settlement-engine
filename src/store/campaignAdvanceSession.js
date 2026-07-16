@@ -627,6 +627,8 @@ export async function runCatchUpCampaignWorld({ set, get, campaignId, options = 
     } else if (result.status === 'paused') {
       // LIVING paused on a surfacing major: the weeks committed at the pause boundary
       // (ticksDone) are the caught-up span; the remainder awaits the DM's verdict.
+      // The digest banner reads the park off worldState.pausedAdvance directly (a lazy
+      // read, so this eager store path stays byte-inert — experience-product-fit-1).
       done = Math.max(0, Number(result.ticksDone) || 0);
     } else {
       // Ran to the end (autonomous, or living with no major) — the full span caught up.

@@ -20,6 +20,28 @@
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { deriveAllSupplyChainStates } from '../supplyChainState.js';
 
+/**
+ * The TOLERANT prosperity read (components-dossier-library-3). Both Summary
+ * surfaces (SummaryTabV2, TableView) already import THIS module, so the helper
+ * lives here to stay byte-inert (no new first-paint module node).
+ *
+ * `economicState.prosperity` is a STRING label from the generator
+ * (deriveProsperityLabel → 'Struggling'..'Wealthy'). The two surfaces read it as an
+ * OBJECT — `prosperity?.tier` — which is ALWAYS undefined for a string, so the
+ * prosperity + stressors block never rendered. This reads the label whatever shape
+ * it arrives in: a plain string, or a defensive `{ tier }` object.
+ * @param {unknown} prosperity @returns {string}
+ */
+export function prosperityLabel(prosperity) {
+  if (typeof prosperity === 'string') return prosperity.trim();
+  if (prosperity && typeof prosperity === 'object') {
+    const tier = /** @type {{ tier?: unknown }} */ (prosperity).tier;
+    if (typeof tier === 'string') return tier.trim();
+    if (typeof tier === 'number' && Number.isFinite(tier)) return String(tier);
+  }
+  return '';
+}
+
 const MAX_ENTRIES = 6;
 
 // Supply-chain statuses that represent a genuine, table-visible disruption
