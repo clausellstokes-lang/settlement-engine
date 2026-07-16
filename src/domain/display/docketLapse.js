@@ -20,6 +20,11 @@
 import { AFFORDANCE_MANIFEST } from '../events/affordanceManifest.js';
 
 /**
+ * @typedef {{ foldedInto?: unknown,
+ *   predicate: (s: unknown, c: unknown) => { available?: boolean, reasons?: string[] } }} AffordanceEntry
+ */
+
+/**
  * The composer's verb-context, rebuilt for a docket/queue surface.
  * @param {{ canUseCustom?: boolean, campaignPeerCount?: number }} [signals]
  * @returns {{ canUseCustom: boolean, campaignPeerCount: number }}
@@ -58,8 +63,11 @@ export function campaignPeerCountFor(campaign, saveId) {
  * @returns {string | null}
  */
 export function lapseOf(event, settlement, ctx = {}) {
-  const v = AFFORDANCE_MANIFEST[event?.type];
+  const type = event?.type;
+  if (type == null) return null;
+  const manifest = /** @type {Record<string, AffordanceEntry>} */ (/** @type {unknown} */ (AFFORDANCE_MANIFEST));
+  const v = manifest[type];
   if (!v || v.foldedInto || !settlement) return null;
   const p = v.predicate(settlement, lapseCtx(ctx));
-  return p.available ? null : p.reasons.join(' ');
+  return p.available ? null : (p.reasons || []).join(' ');
 }
