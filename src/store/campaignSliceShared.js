@@ -154,19 +154,35 @@ export function initPersistFailureReporter(fn) {
   _reportPersistFailure = fn;
 }
 
+// The persist-partial key -> DB COLUMN map (saves.js supabaseUpdate). `timestamp`
+// is deliberately ABSENT — supabaseUpdate has NO timestamp column, so it must not
+// perturb the op kind (store-hooks-state-2). Any unmapped key falls back to itself
+// so it still gates against same-named keys and is never merged with a real column.
+const COLUMN_FOR_PARTIAL_KEY = Object.freeze({
+  settlement: 'data', campaignState: 'campaign_state', versionHistory: 'version_history',
+  aiData: 'ai_data', name: 'name', tier: 'tier', config: 'config', seed: 'seed',
+});
+
 /**
- * The op "kind" is the sorted set of top-level partial keys it writes
- * ('campaignState+settlement+versionHistory', 'versionHistory', …). Supersede-
- * dedup collapses ops of the SAME (saveId, kind) — i.e. writes to the same
- * columns — so a newer full-blob write replaces a stale one, while a version-
- * history-only write and a settlement write for the same save coexist (they
- * touch different columns; superseding one by the other would drop a write).
+ * The op "kind" is the sorted set of DB COLUMNS the partial writes — NOT its raw
+ * keys. Keying on columns (a) collapses ops that touch the SAME columns even when a
+ * NON-persisted key like `timestamp` perturbs the raw-key set (destroy
+ * {campaignState,settlement,timestamp} and applyEvent {campaignState,settlement}
+ * both write {campaign_state,data}, so the newer destroy now supersedes a
+ * backed-off applyEvent instead of racing it → no un-delete resurrection), and
+ * (b) lets outbox.enqueue's subset-supersede drop an older op whose columns a
+ * newer op fully overwrites (e.g. a map-edit {data} superseded by a later
+ * applyEvent {campaign_state,data}). A write to a column this op does NOT touch
+ * (version_history vs data) is still a distinct kind, so it correctly COEXISTS.
  */
 function kindForPartial(partial) {
-  return Object.keys(partial)
-    .filter(k => partial[k] !== undefined)
-    .sort()
-    .join('+') || 'empty';
+  const columns = new Set();
+  for (const k of Object.keys(partial)) {
+    if (partial[k] === undefined) continue;
+    if (k === 'timestamp') continue; // not a DB column — must never perturb the kind
+    columns.add(COLUMN_FOR_PARTIAL_KEY[k] || k);
+  }
+  return [...columns].sort().join('+') || 'empty';
 }
 
 /**

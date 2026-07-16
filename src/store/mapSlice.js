@@ -16,6 +16,7 @@
 import { deepClone } from '../domain/clone.js';
 import { track, EVENTS } from '../lib/analytics.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
+import { isCanonSave } from '../domain/campaign/canon.js';
 
 export const MAP_MODES = {
   VIEW: 'view',
@@ -282,6 +283,24 @@ export const createMapSlice = (set, get) => ({
 
   // ── Placements (settlement drops) ─────────────────────────────────────────
   addPlacement: ({ burgId, settlementId, x, y, cellId, via }) => {
+    // THE AUTHORITATIVE PLACEMENT GATE (store-hooks-state-7). useMapBridge documents
+    // addPlacement as "the authoritative gate (campaign / canon / no-duplicate)" and
+    // branches on { ok:false, reason }, but the store placed UNCONDITIONALLY and
+    // returned undefined — so a settlementPlaced bridge event that bypasses
+    // handleDrop's pre-checks (a direct FMG placement, a re-entrant echo) mutated with
+    // no gate, and the documented refusal toast (PLACEMENT_REJECT_COPY) was dead code.
+    // Mirror WorldMap.handleDrop's checks HERE so both entry points share ONE gate:
+    // a settlement only lands on a campaign map, only if it is canon, at most once.
+    const gate = get();
+    if (!gate.activeCampaignId) return { ok: false, reason: 'no-campaign' };
+    if (settlementId != null) {
+      const saveRec = (gate.savedSettlements || []).find(sv => String(sv.id) === String(settlementId));
+      if (saveRec && !isCanonSave(saveRec)) return { ok: false, reason: 'not-canon' };
+      if (Object.values(gate.mapState?.placements || {}).some(p => String(p.settlementId) === String(settlementId))) {
+        return { ok: false, reason: 'duplicate' };
+      }
+    }
+
     // Route count BEFORE the add — used only to detect whether this placement
     // brought a new derived road edge into being (the MAP_ROUTE_DRAWN proxy).
     let routeCountBefore = 0;
@@ -332,6 +351,7 @@ export const createMapSlice = (set, get) => ({
         });
       }
     } catch { /* analytics is best-effort; never affect placement behavior */ }
+    return { ok: true };
   },
 
   removePlacementLocal: (burgId) => {
