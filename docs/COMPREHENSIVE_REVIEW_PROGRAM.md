@@ -816,7 +816,13 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       REFUTED findings (6) are EXCLUDED from all briefs; PARTIAL corrections BIND the fix
       shapes (verdict records in docs/review-r2/VERIFY_*.json are part of each brief).
 - [ ] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
-      wave): batch 1 dispatching on the fresh RF baseline gate.
+      wave): **OPEN. Baseline gate GREEN @ 853bc923-era tree: 9,896/9,897 (882 files) +
+      verify:dist 119/119, exit 0** (log: scratchpad/baseline-gate-r2.log; any later red is
+      wave-caused). BATCH 1 DISPATCHED 2026-07-16 ~01:40 as workflow `wf_40d34edf-230` —
+      3 Opus implementers in isolated worktrees off base 853bc923: W-R2-SEAMS
+      (claude/w-r2-seams) ∥ W-R2-INTENT (claude/w-r2-intent) ∥ W-R2-DOCS (claude/w-r2-docs).
+      Briefs committed in docs/briefs/ (W_R2_COMMON_PROTOCOL + per-wave). On return: Fable
+      §0.3 review per wave → exact-stage merge to RF → batch 2 (TRUST/GUARDS/DATA/SURFACE).
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
