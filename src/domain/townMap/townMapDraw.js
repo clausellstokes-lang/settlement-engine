@@ -79,9 +79,11 @@ export const EXPORT_PALETTE = Object.freeze({
   }),
 });
 
-/** District category → export tint (fallback: `other`). @param {string} [category] */
+/** District category → export tint (fallback: `other`). @param {string|null} [category] */
 export function exportDistrictColor(category) {
-  return EXPORT_PALETTE.district[category] || EXPORT_PALETTE.district.other;
+  const key = typeof category === 'string' ? category : 'other';
+  const dist = /** @type {Record<string, string>} */ (EXPORT_PALETTE.district);
+  return dist[key] || dist.other;
 }
 
 /**
@@ -108,7 +110,8 @@ export function buildTownMapDrawList(model) {
   if (frame.water && Array.isArray(frame.water.path)) {
     if (frame.water.kind === 'coast') {
       // The viewer closes the coast band down to the bottom corners.
-      const pts = frame.water.path.map((p) => [p[0], p[1]]);
+      /** @type {Array<[number, number]>} */
+      const pts = frame.water.path.map((p) => /** @type {[number, number]} */ ([p[0], p[1]]));
       pts.push([VIEW, VIEW]);
       pts.push([0, VIEW]);
       ops.push({ t: 'poly', pts, closed: true, fill: EXPORT_PALETTE.water, fillOpacity: 0.16, stroke: EXPORT_PALETTE.water, strokeOpacity: 0.5, strokeWidth: 2 });
@@ -165,6 +168,7 @@ export function buildTownMapDrawList(model) {
   // ── (7) condition badges (district-level, the living layer) ───────────────────
   const districtCentroidById = new Map(districts.map((d) => [d.id, d.centroid]));
   for (const c of (Array.isArray(overlays.conditions) ? overlays.conditions : [])) {
+    if (c.districtId == null) continue;
     const centroid = districtCentroidById.get(c.districtId);
     if (!centroid) continue;
     const high = c.severityBand === 'severe' || c.severityBand === 'high' || c.severity >= 0.66;
@@ -198,20 +202,24 @@ function ptsAttr(pts) {
   return pts.map(([x, y]) => `${num(x)},${num(y)}`).join(' ');
 }
 
+/** Optional numeric SVG attribute (` name="v"`), omitted when null/undefined.
+ * @param {string} name @param {number|undefined} v */
+function optAttr(name, v) {
+  return v != null ? ` ${name}="${num(v)}"` : '';
+}
+
 /** One draw op → an SVG element string. @param {DrawOp} op */
 function opToSvg(op) {
-  const so = op.strokeOpacity != null ? ` stroke-opacity="${num(op.strokeOpacity)}"` : '';
-  const fo = op.fillOpacity != null ? ` fill-opacity="${num(op.fillOpacity)}"` : '';
   switch (op.t) {
     case 'poly': {
-      const stroke = op.stroke ? ` stroke="${op.stroke}" stroke-width="${num(op.strokeWidth ?? 1)}"${so}` : ' stroke="none"';
-      const fill = op.fill ? ` fill="${op.fill}"${fo}` : ' fill="none"';
+      const stroke = op.stroke ? ` stroke="${op.stroke}" stroke-width="${num(op.strokeWidth ?? 1)}"${optAttr('stroke-opacity', op.strokeOpacity)}` : ' stroke="none"';
+      const fill = op.fill ? ` fill="${op.fill}"${optAttr('fill-opacity', op.fillOpacity)}` : ' fill="none"';
       const tag = op.closed ? 'polygon' : 'polyline';
       const extra = op.closed ? '' : ' stroke-linecap="round" stroke-linejoin="round"';
       return `<${tag} points="${ptsAttr(op.pts)}"${fill}${stroke}${extra}/>`;
     }
     case 'line':
-      return `<line x1="${num(op.x1)}" y1="${num(op.y1)}" x2="${num(op.x2)}" y2="${num(op.y2)}" stroke="${op.stroke}" stroke-width="${num(op.strokeWidth)}"${so} stroke-linecap="round"/>`;
+      return `<line x1="${num(op.x1)}" y1="${num(op.y1)}" x2="${num(op.x2)}" y2="${num(op.y2)}" stroke="${op.stroke}" stroke-width="${num(op.strokeWidth)}"${optAttr('stroke-opacity', op.strokeOpacity)} stroke-linecap="round"/>`;
     case 'circle': {
       const stroke = op.stroke ? ` stroke="${op.stroke}" stroke-width="${num(op.strokeWidth ?? 1)}"` : '';
       const fill = op.fill ? ` fill="${op.fill}"` : ' fill="none"';
@@ -219,7 +227,7 @@ function opToSvg(op) {
     }
     case 'rect': {
       const stroke = op.stroke ? ` stroke="${op.stroke}" stroke-width="${num(op.strokeWidth ?? 1)}"` : '';
-      const fill = op.fill ? ` fill="${op.fill}"${fo}` : ' fill="none"';
+      const fill = op.fill ? ` fill="${op.fill}"${optAttr('fill-opacity', op.fillOpacity)}` : ' fill="none"';
       const rx = op.rx ? ` rx="${num(op.rx)}"` : '';
       return `<rect x="${num(op.x)}" y="${num(op.y)}" width="${num(op.w)}" height="${num(op.h)}"${rx}${fill}${stroke}/>`;
     }
