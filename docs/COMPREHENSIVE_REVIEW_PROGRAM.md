@@ -972,6 +972,14 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**INCIDENT (2026-07-16 ~17:05, manager-caused, contained):** while the W7-prep agent worked
+in the merge worktree, the manager committed docs there and SWEPT the agent's staged deletion
+(tests/ui/batchCartAdvanceGuard.test.jsx) into 18949a38 under an unrelated docs message — the
+FP-G3 concurrent-writer class, this time the manager's own violation of the one-writer rule.
+Contained: agent notified with both disposition paths; manager writes to the worktree FROZEN
+until the agent's final report; the analytical-coupling design amendment QUEUED (scratchpad)
+for post-agent application. Ledger truth: 18949a38's content = the AGENT's disposition, not
+docs. RULE REAFFIRMED: one writer per worktree — the manager queues, never co-writes.
 **⬛ THE FOLD-IN IS COMMITTED @ 22bec368 (2026-07-16 ~16:20) — THE DUAL-LINEAGE ERA IS OVER.**
 One tree: master's two years + the spatial engine + 15 waves + the full round-2 fix program.
 Conflicts: 11 total, all reconciled (layerBoundaries = RF's SCC machinery + W6's ratchet-down,
