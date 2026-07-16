@@ -273,3 +273,69 @@ describe('pulse mutators are gated while an advance is in flight', () => {
     expect(worldOf(store).tick).toBe(tickAfterFirst);
   });
 });
+
+// store-hooks-state-3: the parked-pause window is the SAME clobber class. A
+// campaign paused mid-interval for verdicts (pausedAdvance set, but NOT in the
+// advanceInFlight list — e.g. rehydrated from a reload-into-paused) re-commits
+// worldState WHOLESALE from the paused cursor on resume, so canonize / spatial
+// canonize / rules edits written into the window are silently reverted. The
+// worldpulse-core-1 fix guarded proposals/party/docket here; these three
+// siblings were left behind. No kernel gate needed — the pause is a persisted
+// worldState flag, so seeding it reproduces the reload-into-paused state.
+describe('pulse mutators are gated while an advance is PARKED (paused for verdicts) — store-hooks-state-3', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+    kernelGate.active = false;
+  });
+
+  function seedPaused(store) {
+    seedCanonized(store);
+    store.setState(state => {
+      state.campaigns[0].worldState.pausedAdvance = {
+        cursor: { tick: 0 }, remaining: 2, interval: 'one_month',
+      };
+    });
+  }
+
+  test('the parked campaign reads as paused, NOT in-flight', () => {
+    const store = makeStore();
+    seedPaused(store);
+    expect(store.getState().isAdvanceInFlight('camp-1')).toBe(false);
+    expect(store.getState().getPausedAdvance('camp-1')).toBeTruthy();
+  });
+
+  test('updateCampaignSimulationRules no-ops in the parked window (rules + rulesetLog never written)', async () => {
+    const store = makeStore();
+    seedPaused(store);
+    const rules = await store.getState().updateCampaignSimulationRules('camp-1', { warLayerEnabled: true });
+    expect(rules).toBeNull();
+    expect(worldOf(store).simulationRules?.warLayerEnabled).not.toBe(true);
+    expect(worldOf(store).rulesetLog).toBeFalsy();
+  });
+
+  test('canonizeCampaignWorld no-ops in the parked window (same "nothing changed" contract)', async () => {
+    const store = makeStore();
+    seedPaused(store);
+    await expect(store.getState().canonizeCampaignWorld('camp-1')).resolves.toBeNull();
+  });
+
+  test('canonizeCampaignWorldSpatial refuses with the typed advance_paused reason (before entitlement/map/load)', async () => {
+    const store = makeStore();
+    seedPaused(store);
+    // Premium so the refusal can ONLY be the pause guard (which precedes the
+    // entitlement + generated-map gates and the heavy lazy import).
+    store.setState(state => { state.auth = { user: {}, tier: 'premium', loading: false }; });
+    const r = await store.getState().canonizeCampaignWorldSpatial('camp-1');
+    expect(r).toEqual({ ok: false, reason: 'advance_paused' });
+  });
+
+  test('once the pause clears, the SAME rules write lands (the gate is the pause, not a wedge)', async () => {
+    const store = makeStore();
+    seedPaused(store);
+    store.setState(state => { delete state.campaigns[0].worldState.pausedAdvance; });
+    const after = await store.getState().updateCampaignSimulationRules('camp-1', { warLayerEnabled: true });
+    expect(after?.warLayerEnabled).toBe(true);
+    expect(worldOf(store).simulationRules?.warLayerEnabled).toBe(true);
+  });
+});

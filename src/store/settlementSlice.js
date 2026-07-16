@@ -511,17 +511,23 @@ export const createSettlementSlice = (set, get) => ({
             }
             break;
           case 'rename-settlement': {
-            // §10.4: the inline mutation touched only the live store, so a
-            // queued town rename GHOSTED on reload — and renameSettlement (the
-            // persisting helper) has no direct caller, so this queue path is the
-            // only town-rename surface. Mirror the rename-npc dispatch above:
-            // mutate live, then persist through the shared edit-persist (no-ops
-            // on an unsaved draft, which correctly needs no cloud write). Without
-            // this, committing a queued town rename ghosts while a queued NPC
-            // rename (same commit) survives.
-            let renamed = false;
-            set(s => { if (s.settlement) { s.settlement.name = edit.payload?.newName; renamed = true; } });
-            if (renamed) get().persistActiveSaveEdit?.();
+            // §10.4 + state-lifecycle-1 / store-hooks-state-5: route through the
+            // ONE town-rename writer (renameSettlementImpl). The old inline path
+            // mutated only the live blob and persisted {settlement, campaignState}
+            // via persistActiveSaveEdit — it never wrote the row `name` COLUMN, so
+            // the renamed name ghosted on the library list, campaign folders, and
+            // the blob-less meta list (settlement:null — no fallback) after reload,
+            // and broke supabaseListActiveByName partner resolution. renameSettlement
+            // now persists {settlement, name, ...}, so one writer keeps the blob AND
+            // the envelope in lockstep. (On a SAVED active settlement only — an
+            // unsaved draft has no cloud row, so it just renames the live blob.)
+            const activeId = get().activeSaveId;
+            const newName = edit.payload?.newName;
+            if (activeId != null) {
+              state.renameSettlement(activeId, newName);
+            } else if (newName) {
+              set(s => { if (s.settlement) s.settlement.name = String(newName); });
+            }
             break;
           }
           // Unreachable by contract: queueEdit admits only COMMITTABLE_EDIT_KINDS,
@@ -1243,10 +1249,27 @@ export const createSettlementSlice = (set, get) => ({
       state.activeSaveId = null;
     }),
 
-  removeSavedSettlement: (id) =>
+  removeSavedSettlement: (id) => {
+    // state-lifecycle-2: a deleted member must also LEAVE every campaign that
+    // held it — otherwise its id lingers in campaign.settlementIds (+ mapState
+    // placements) forever (every reader is defensively filtered, so it is an
+    // invisible leak), and its queued world-clock intentions survive until the
+    // next tick silently destroys them. removeFromCampaign owns that prune
+    // (membership + queued intentions + persist); run it for every holding
+    // campaign BEFORE dropping the save. (This is the store delete chokepoint —
+    // AccountPage's bulk delete routes through here.)
+    const remove = get().removeFromCampaign;
+    if (typeof remove === 'function') {
+      for (const c of get().campaigns || []) {
+        const holdsMember = (c.settlementIds || []).some(sid => String(sid) === String(id));
+        const holdsQueued = (c.worldState?.pendingEvents || []).some(e => String(e.saveId) === String(id));
+        if (holdsMember || holdsQueued) remove(c.id, id);
+      }
+    }
     set(state => {
       state.savedSettlements = state.savedSettlements.filter(s => s.id !== id);
-    }),
+    });
+  },
 
   updateSavedSettlement: (id, partial) =>
     set(state => {

@@ -78,10 +78,21 @@ export function useRealmInspector({
   // gates handleApplyPreset (below) and is surfaced to the toolbar/dialog so a preset
   // chip or Save can't fire a write that will be silently dropped.
   const advanceInFlightList = useStore(s => s.advanceInFlight);
+  // A PARKED pause is the same clobber window (store-hooks-state-3): a campaign
+  // paused mid-interval for verdicts re-commits worldState wholesale on resume, so
+  // a rules edit written into the parked window — and its rulesetLog receipt — is
+  // silently reverted just like a mid-advance one. Subscribe to the active
+  // campaign's pausedAdvance so the gate flips the instant a pause parks/clears
+  // (the store mutators enforce the same block; this is the UI mirror).
+  const advancePaused = useStore(s => !!(
+    activeCampaignId
+    && (s.campaigns || []).find(c => String(c.id) === String(activeCampaignId))?.worldState?.pausedAdvance
+  ));
   const rulesEditBlocked = !!(
     activeCampaignId
-    && Array.isArray(advanceInFlightList)
-    && advanceInFlightList.some(id => String(id) === String(activeCampaignId))
+    && (advancePaused
+      || (Array.isArray(advanceInFlightList)
+        && advanceInFlightList.some(id => String(id) === String(activeCampaignId))))
   );
 
   const [inspectorOpen, setInspectorOpen] = useState(false);

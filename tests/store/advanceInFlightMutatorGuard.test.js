@@ -89,6 +89,12 @@ function seedStore(store) {
   });
 }
 const markInFlight = store => store.setState(state => { state.advanceInFlight = ['camp-1']; });
+// A PARKED pause (paused mid-interval for verdicts, NOT in the advanceInFlight
+// list) — the same clobber window, since resume restores worldState AND
+// regionalGraph wholesale from the pre-interval snapshot (store-hooks-state-4).
+const markPaused = store => store.setState(state => {
+  state.campaigns[0].worldState.pausedAdvance = { cursor: { tick: 0 }, remaining: 1, interval: 'one_month' };
+});
 const snap = store => JSON.stringify(store.getState().campaigns[0]);
 const EVENT = { id: 'e1', type: 'APPLY_STRESSOR', targetId: 'famine' };
 
@@ -149,6 +155,54 @@ describe('store-2 — mutators are gated by advanceInFlight', () => {
     markInFlight(store);
     const before = snap(store);
     expect(store.getState().undoCampaignStressorBridge('camp-1', { eventType: 'APPLY_STRESSOR', type: 'famine', settlementId: 'ash' })).toBe(false);
+    expect(snap(store)).toBe(before);
+  });
+
+  // store-hooks-state-4 — resolveRegionalImpact + advanceCampaignRegionalImpacts
+  // were the two regional mutators that MISSED the store-2 guard their siblings
+  // received; applyQueuedRegionalImpact additionally lacked the parked-pause leg.
+  test('advanceCampaignRegionalImpacts no-ops (null) while advancing', () => {
+    const store = makeStore();
+    seedStore(store);
+    markInFlight(store);
+    const before = snap(store);
+    expect(store.getState().advanceCampaignRegionalImpacts('camp-1', 1)).toBe(null);
+    expect(snap(store)).toBe(before);
+  });
+
+  test('advanceCampaignRegionalImpacts no-ops (null) while PARKED (paused)', () => {
+    const store = makeStore();
+    seedStore(store);
+    markPaused(store);
+    const before = snap(store);
+    expect(store.getState().advanceCampaignRegionalImpacts('camp-1', 1)).toBe(null);
+    expect(snap(store)).toBe(before);
+  });
+
+  test('resolveRegionalImpact no-ops (null) while advancing', async () => {
+    const store = makeStore();
+    seedStore(store);
+    markInFlight(store);
+    const before = snap(store);
+    await expect(store.getState().resolveRegionalImpact('camp-1', 'any-id')).resolves.toBe(null);
+    expect(snap(store)).toBe(before);
+  });
+
+  test('resolveRegionalImpact no-ops (null) while PARKED (paused)', async () => {
+    const store = makeStore();
+    seedStore(store);
+    markPaused(store);
+    const before = snap(store);
+    await expect(store.getState().resolveRegionalImpact('camp-1', 'any-id')).resolves.toBe(null);
+    expect(snap(store)).toBe(before);
+  });
+
+  test('applyQueuedRegionalImpact ALSO no-ops (null) while PARKED (paused) — the completed class', async () => {
+    const store = makeStore();
+    seedStore(store);
+    markPaused(store);
+    const before = snap(store);
+    await expect(store.getState().applyQueuedRegionalImpact('camp-1', 'any-id')).resolves.toBe(null);
     expect(snap(store)).toBe(before);
   });
 });
