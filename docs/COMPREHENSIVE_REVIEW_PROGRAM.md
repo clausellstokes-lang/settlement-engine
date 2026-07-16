@@ -835,6 +835,16 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       to delegate anything to you should a decision need to be made as long as it is set with
       the standard that I set at the beginning! Continue all the way until everything is
       done!")** — standing constitution + owner-gated classes survive as always.
+- [x] **Phase F — COMPLETE (2026-07-16): ✅ SURFACE-2 MERGED @ f6986be3** — all 14 remaining
+      items (whispers wired + walker fully strict at ceiling 0; palette single-source + hex
+      scan; deity names from snapshots via one shared resolver; naval legibility — sea
+      blockades standing in LiveWarStatus; politics + credibility read-models in RealmIntrigue;
+      the PDF quartet incl. the war-room treaty table; forecast fingerprint world-revision
+      fold; lapseOf real-ctx). Agent gate CHECK EXIT 0: 919 files / 10,122 tests; zero eager;
+      wrong-lineage trap self-corrected (5th recurrence — the protocol holds). Closing gate
+      running. **PHASE F TOTALS: 8 waves + FP-G8 merged (~90 findings closed incl. all
+      verified highs), suite 9,896 → 10,122+ (+226 pins), first paint −55.5 KB, RATCHET #10,
+      3 owner-gated deferrals recorded, G2 parked red-by-design awaiting the regen moment.**
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
 **PHASE M TAKEOVER DOSSIER (read-only prep, 2026-07-16 ~05:30):** merge branch at c89a5372
