@@ -38,16 +38,16 @@ export const UNDERWAYS_TUNING = Object.freeze({
  * resolves — through the facet chokepoint — to the CLANDESTINE function (declared or,
  * once G2's catalog lands, catalog-declared). Genre-blind: a custom institution
  * declaring the facet counts whatever its English name.
- * @param {ReadonlyArray<any>|null|undefined} institutions
+ * @param {ReadonlyArray<unknown>|null|undefined} institutions
  * @returns {boolean}
  */
 export function hasClandestineFacet(institutions) {
   const insts = Array.isArray(institutions) ? institutions : [];
-  return insts.some((i) => facetOf(i, 'institutionFunction') === 'clandestine');
+  return insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
 }
 
 /** Convenience: read the clandestine facet off a settlement object (its institutions).
- * @param {any} settlement @returns {boolean} */
+ * @param {{ institutions?: unknown }|null|undefined} settlement @returns {boolean} */
 export function settlementHasUnderways(settlement) {
-  return hasClandestineFacet(settlement && settlement.institutions);
+  return hasClandestineFacet(settlement && Array.isArray(settlement.institutions) ? settlement.institutions : undefined);
 }

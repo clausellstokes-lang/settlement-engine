@@ -426,9 +426,9 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
   // automatically once the catalog entry merges. Facet-read (never a name string): a
   // 'vice'-nature institution is the criminal-underground signal; skip if tunnels exist.
   if (tierRankOf(tier) >= tierRankOf('village')) {
-    const insts = Array.isArray(settlement.institutions) ? settlement.institutions : [];
-    const hasVice = insts.some((/** @type {any} */ i) => facetOf(i, 'institutionNature') === 'vice');
-    const hasUnderways = insts.some((/** @type {any} */ i) => facetOf(i, 'institutionFunction') === 'clandestine');
+    const insts = /** @type {ReadonlyArray<unknown>} */ (Array.isArray(settlement.institutions) ? settlement.institutions : []);
+    const hasVice = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionNature') === 'vice');
+    const hasUnderways = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
     if (hasVice && !hasUnderways) {
       addGap(
         buildableCatalogEntry('underground_network', settlement, existingNames),

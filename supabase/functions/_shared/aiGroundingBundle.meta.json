@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-07-16T21:33:28.437Z",
+  "generatedAt": "2026-07-16T23:49:50.547Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "36ec7ec5c190bf47",
+  "sourceHash": "b5a040a33ba16922",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -33,6 +33,7 @@
     "src/domain/npcProfile.js",
     "src/domain/regionalGraph.js",
     "src/domain/simulationSpine.js",
+    "src/domain/spatial/cohesionWeave.js",
     "src/domain/supplyChainState.js",
     "src/domain/threatProfile.js",
     "src/domain/tradeRouteSemantics.js",

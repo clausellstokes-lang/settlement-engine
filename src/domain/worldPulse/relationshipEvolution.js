@@ -136,7 +136,7 @@ export const DEFAULT_MEMORY_HORIZON_BAND = 'generational';
 
 /** The declared/inferred/default memory band for a settlement (facet-law compliant,
  *  clamped to the band table — an unrecognized declaration falls back to the default).
- * @param {any} settlement @returns {string} */
+ * @param {Parameters<typeof facetOf>[0]} settlement @returns {string} */
 export function memoryHorizonBandOf(settlement) {
   const band = facetOf(settlement, 'memoryHorizon');
   return typeof band === 'string' && Object.prototype.hasOwnProperty.call(MEMORY_HORIZON_BANDS, band)
@@ -145,7 +145,7 @@ export function memoryHorizonBandOf(settlement) {
 }
 
 /** The horizon (memory-length) multiplier for a settlement. Default band ⇒ 1 (byte-identical).
- * @param {any} settlement @returns {number} */
+ * @param {Parameters<typeof facetOf>[0]} settlement @returns {number} */
 export function memoryHorizonMultiplierOf(settlement) {
   return MEMORY_HORIZON_BANDS[/** @type {keyof typeof MEMORY_HORIZON_BANDS} */ (memoryHorizonBandOf(settlement))];
 }
@@ -163,18 +163,20 @@ export function combineMemoryHorizon(a, b) {
  * ledger open). Every settlement defaults to 'generational' (multiplier 1), so an
  * undeclared world resolves every key to 1 ⇒ relaxRelationshipStates is byte-identical to
  * its pre-D5 fixed 12%/tick reversion. Pure; zero writes.
- * @param {any} snapshot @returns {(key: string) => number}
+ * @param {{ regionalGraph?: { edges?: ReadonlyArray<{ id?: unknown, from?: unknown, to?: unknown }> }, byId?: { get?: (k: string) => ({ settlement?: unknown }|null|undefined) } }|null|undefined} snapshot
+ * @returns {(key: string) => number}
  */
 export function buildMemoryHorizonResolver(snapshot) {
+  /** @type {Map<string, { from: unknown, to: unknown }>} */
   const endpointsByKey = new Map();
   for (const edge of snapshot?.regionalGraph?.edges || []) {
     const key = edge?.id;
     if (key != null) endpointsByKey.set(String(key), { from: edge.from, to: edge.to });
   }
   const byId = snapshot?.byId;
-  const multOf = (/** @type {any} */ id) => {
+  const multOf = (/** @type {unknown} */ id) => {
     const item = byId?.get?.(String(id));
-    return memoryHorizonMultiplierOf(item?.settlement || item);
+    return memoryHorizonMultiplierOf(/** @type {Parameters<typeof facetOf>[0]} */ (item?.settlement ?? item));
   };
   return (/** @type {string} */ key) => {
     const ep = endpointsByKey.get(String(key));
@@ -184,7 +186,6 @@ export function buildMemoryHorizonResolver(snapshot) {
 }
 
 /**
- * @param {any} worldState
  * @param {((key: string) => number)|null} [horizonForKey] optional per-edge memory-horizon
  *   multiplier resolver (D5). Absent (or a resolver returning 1) ⇒ generational ⇒
  *   byte-identical to the pre-D5 fixed 12%/tick reversion.
