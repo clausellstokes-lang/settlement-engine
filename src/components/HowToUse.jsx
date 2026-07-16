@@ -422,13 +422,44 @@ function RefSection({ title, rows }) {
   );
 }
 
+// GUIDE-2b — the Keeper's Handbook DELEGATES its reference lookups to the
+// Compendium (design §6c: "Reference delegating to the Compendium"). Rather
+// than re-describing the catalog in prose that drifts from the live registries,
+// the Reference tab now DEEP-LINKS into the Compendium — the reference spine
+// that renders each catalog from code (its ?tab= deep-links already exist,
+// CompendiumPanel honours them on mount). These stay the plain, findable rescue
+// lifeline (§0 precedence guard: the lifeline stays boring and findable — plain
+// links, never the Surveyor persona costume).
+const COMPENDIUM_TABS = [
+  ['tiers', 'Tiers & Routes', 'Size tiers, trade routes, and what each unlocks.'],
+  ['economy', 'Economy', 'Exports, imports, prosperity, and supply chains.'],
+  ['power', 'Power & Factions', 'Government types, faction blocs, and legitimacy.'],
+  ['arcane', 'Magic & Religion', 'Arcane institutions, deities, and faith systems.'],
+  ['living', 'Living World', 'The simulation verbs, dials, and how a region moves.'],
+  ['stress', 'Stress', 'Stressors, severity, and how compound conditions read.'],
+  ['neighbour', 'Neighbour System', 'Relationship types and their mechanical effects.'],
+  ['institutions', 'Institutions', 'The full institution catalog and what each provides.'],
+];
+
+function CompendiumLink({ tab, label, desc }) {
+  return (
+    <a
+      href={`/compendium?tab=${tab}`}
+      style={{ display:'block', padding:'6px 0', borderBottom:`1px solid ${BOR}`, textDecoration:'none' }}
+    >
+      <span style={{ fontSize:FS.sm, fontWeight:700, color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>{label}</span>
+      <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5, marginLeft:8 }}>{desc}</span>
+    </a>
+  );
+}
+
 function RefTab() {
   const sections = [
     { title: 'Navigation', rows: [
       ['Create','The generation wizard. Two modes: Basic (minimal config) and Advanced (step-by-step with full control).'],
       ['Settlements','Your saved settlement library. Group into campaigns, link as neighbours, edit, rename, and export.'],
       ['World Map','Embedded fantasy map. Drag saved settlements onto it to place them geographically. Toggle relationship and supply-chain overlays.'],
-      ['Compendium','Browse the built-in catalog of institutions, archetypes, stresses, and relationship systems. Switch to My Custom Content to create your own custom items.'],
+      ['Compendium','The reference spine — every catalog rendered live from the engine. See the deep-links below.'],
       ['How to Use','This guide.'],
     ]},
     { title: 'Settlement Detail Tabs', rows: [
@@ -458,13 +489,24 @@ function RefTab() {
       ['Relationship Overlay','Toggle "Relations" to draw colored lines between linked settlements. Line color indicates relationship type.'],
       ['Supply Chain Overlay','Toggle "Chains" to draw supply-chain routes between exporters and importers across your saved settlements.'],
     ]},
-    { title: 'Compendium', rows: [
-      ['Built-in Catalog','Searchable reference for tiers, archetypes, stress types, relationship effects, and the full institution catalog.'],
-      ['My Custom Content','Create custom institutions, resources, stressors, trade goods, trade routes, power presets, and defense presets. Custom items appear in the Settlement Editor catalog with a purple badge. All custom content persists to your browser.'],
-    ]},
   ];
   return (
     <div style={COLS(360)}>
+      {/* Reference lookups delegate to the Compendium — the live catalog spine. */}
+      <section style={{ ...NO_BREAK, marginBottom:16 }}>
+        <div style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, margin:'0 0 4px' }}>Look it up in the Compendium</div>
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'0 0 8px' }}>
+          Every catalog — tiers, institutions, stresses, factions, the living-world verbs — is rendered
+          live from the engine in the <a href="/compendium" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>Compendium</a>,
+          so the reference can never drift from what the simulator actually does. Jump straight to a section:
+        </p>
+        {COMPENDIUM_TABS.map(([tab, label, desc]) => <CompendiumLink key={tab} tab={tab} label={label} desc={desc} />)}
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.55, margin:'8px 0 0' }}>
+          Build your own institutions, resources, stressors, and presets under{' '}
+          <a href="/compendium?mode=custom" style={{ color:GOLD, textDecoration:'underline', textUnderlineOffset:3 }}>My Custom Content</a> —
+          custom items appear in the Settlement Editor catalog and persist to your browser.
+        </p>
+      </section>
       {sections.map(s => <RefSection key={s.title} title={s.title} rows={s.rows} />)}
     </div>
   );
