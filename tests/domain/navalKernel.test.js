@@ -10,6 +10,7 @@ import { describe, expect, it } from 'vitest';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { advanceNaval, navalActive, orderConvoyVerbFactory, declareBlockadeVerbFactory } from '../../src/domain/worldPulse/navalKernel.js';
+import { activeBlockadeTargets } from '../../src/domain/spatial/navalLayer.js';
 import { makeIslandPack } from '../fixtures/spatialPackFixtures.js';
 
 const SHIPYARD = { name: 'Shipyard', tags: ['transport', 'shipbuilding', 'port'] };
@@ -212,6 +213,74 @@ describe('W-NAVY Stage 4 — the blockade (mint, authority-routing, lift)', () =
     expect(v.registered).toBe(true);
     const { realmVerbFor } = await import('../../src/domain/events/realmManifest.js');
     expect(realmVerbFor('DECLARE_BLOCKADE')?.candidateType).toBe('blockade_declared');
+  });
+});
+
+describe('W-NAVY r2 — RECORD RETIREMENT (worldpulse-war-military-1: convoys/orphans; -4: blockade lift)', () => {
+  const plain = { byId: { get: (id) => ({ id, name: String(id), settlement: { name: String(id) } }) } };
+
+  it('CONVOY STAND-DOWN: an arrived convoy retires, marks its deployment delivered, and does NOT re-shuttle (navy re-operates)', () => {
+    const d = digest();
+    const ws = {
+      spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true },
+      deployments: { main: { targetId: 'isle', currentEffectiveStrength: 50, readiness: 0.6 } },
+      spatialLedgers: { navalTransit: { main: convoy('main', 'isle', { strength: 70, cargo: 50, path: ['main', 'isle'] }) } },
+    };
+    // Advance PAST arrivalTick (10) with a real war navy (navySnapshot) so the derive loop
+    // actually runs — proving the delivered-guard, not merely a zero-strength short-circuit.
+    const out = advanceNaval({ snapshot: navySnapshot, worldState: ws, digest: d, graph: { edges: [] }, rng: createPRNG('c').fork('naval'), tick: 12, now: NOW });
+    expect(out.worldState.spatialLedgers?.navalTransit).toBeUndefined(); // arrived convoy retired, ledger emptied
+    expect(out.worldState.deployments.main.seaLiftDelivered).toBe('isle'); // deployment stamped delivered
+    // Re-operate: a second tick does NOT re-mint a shuttle for the already-delivered army.
+    const out2 = advanceNaval({ snapshot: navySnapshot, worldState: out.worldState, digest: d, graph: { edges: [] }, rng: createPRNG('c').fork('naval'), tick: 13, now: NOW });
+    expect(out2.worldState.spatialLedgers?.navalTransit).toBeUndefined();
+  });
+
+  it('ORPHAN RETIREMENT: a convoy whose target left the snapshot retires', () => {
+    const d = digest();
+    const gone = { byId: { get: (id) => (id === 'isle' ? undefined : { id, name: String(id), settlement: { name: String(id) } }) } };
+    const ws = {
+      spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true }, deployments: {},
+      spatialLedgers: { navalTransit: { main: { ...convoy('main', 'isle', { strength: 70, cargo: 50, path: ['main', 'isle'] }), position01: 0.5 } } },
+    };
+    const out = advanceNaval({ snapshot: gone, worldState: ws, digest: d, graph: { edges: [] }, rng: createPRNG('o').fork('naval'), tick: 3, now: NOW });
+    expect(out.worldState.spatialLedgers?.navalTransit).toBeUndefined(); // orphaned convoy dropped
+  });
+
+  it('RECALL RETIREMENT: a mid-crossing convoy whose escorted deployment was recalled retires', () => {
+    const d = digest();
+    const ws = {
+      spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true },
+      deployments: { main: { targetId: 'isle', recalled: { cause: 'peace', tick: 2 } } },
+      spatialLedgers: { navalTransit: { main: { ...convoy('main', 'isle', { strength: 70, cargo: 50, path: ['main', 'isle'] }), position01: 0.5 } } },
+    };
+    const out = advanceNaval({ snapshot: plain, worldState: ws, digest: d, graph: { edges: [] }, rng: createPRNG('e').fork('naval'), tick: 3, now: NOW });
+    expect(out.worldState.spatialLedgers?.navalTransit).toBeUndefined(); // escort recalled ⇒ convoy dropped
+  });
+
+  it('a mid-crossing convoy with NO deployment slot (DM-ordered / relief fleet) is NOT dropped', () => {
+    const d = digest();
+    const ws = {
+      spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true }, deployments: {}, // no slot
+      spatialLedgers: { navalTransit: { main: { ...convoy('main', 'isle', { strength: 70, cargo: 50, path: ['main', 'isle'] }), position01: 0.5 } } },
+    };
+    const out = advanceNaval({ snapshot: plain, worldState: ws, digest: d, graph: { edges: [] }, rng: createPRNG('r').fork('naval'), tick: 3, now: NOW });
+    expect(out.worldState.spatialLedgers.navalTransit.main).toBeTruthy(); // still afield (absence ≠ retirement)
+  });
+
+  it('BLOCKADE ORGANIC LIFT: peace (owner–target no longer hostile) drops the blockade + a lift news beat; strangulation ends', () => {
+    const d = digest();
+    const blockadeRec = { armyId: 'main', role: 'blockade', ownerId: 'main', cargoId: null, originId: 'main', destId: 'isle', targetId: 'isle', path: ['main', 'isle'], departTick: 0, arrivalTick: 10, position01: 1, strength: 60, cargoStrength: 0, readiness: 0.6, supplyQuality: 1, funding: 0.5, lastTick: 0 };
+    const mk = (rel) => ({ spatialCanonVersion: 1, spatialDigest: d, simulationRules: { navalEnabled: true }, deployments: {}, spatialLedgers: { navalTransit: { main: { ...blockadeRec } } } });
+    // PEACE: no hostile edge ⇒ the blockade lifts.
+    const peace = advanceNaval({ snapshot: plain, worldState: mk('peace'), digest: d, graph: { edges: [] }, rng: createPRNG('p').fork('naval'), tick: 12, now: NOW });
+    expect(peace.worldState.spatialLedgers?.navalTransit).toBeUndefined();       // blockade record gone
+    expect(peace.newsEntries.some((n) => n.impactKind === 'blockade_lifted')).toBe(true);
+    expect(activeBlockadeTargets(peace.worldState).size).toBe(0);                 // blockadeStrangulationOf ⇒ 0
+    // CONTROL: still hostile ⇒ the blockade PERSISTS (no lift, no news).
+    const war = advanceNaval({ snapshot: plain, worldState: mk('war'), digest: d, graph: { edges: [{ from: 'main', to: 'isle', relationshipType: 'hostile' }] }, rng: createPRNG('w').fork('naval'), tick: 12, now: NOW });
+    expect(war.worldState.spatialLedgers.navalTransit.main).toBeTruthy();         // held under war
+    expect(war.newsEntries.some((n) => n.impactKind === 'blockade_lifted')).toBe(false);
   });
 });
 

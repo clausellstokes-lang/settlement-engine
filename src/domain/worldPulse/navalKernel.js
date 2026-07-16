@@ -46,7 +46,7 @@ import { formatCount } from '../formatNumber.js';
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
 /** @typedef {import('../spatial/navalLayer.js').NavalTransitRecord} NavalTransitRecord */
 /** @typedef {{ targetId?: string|number, sinceTick?: number, currentEffectiveStrength?: number,
- *   readiness?: number, recalled?: { cause?: string, tick?: number } }} DeploymentRecord */
+ *   readiness?: number, recalled?: { cause?: string, tick?: number }, seaLiftDelivered?: string }} DeploymentRecord */
 /** @typedef {{ id?: string|number, name?: string, settlement?: { name?: string },
  *   causal?: { scores?: { economic_capacity?: number } } }} SnapItem */
 /** @typedef {{ byId?: { get?: (id: string) => SnapItem | undefined } }} Snapshot */
@@ -81,6 +81,17 @@ export function navalActive(worldState) {
 function nameOf(snapshot, id) {
   const item = snapshot?.byId?.get?.(String(id));
   return item?.name || item?.settlement?.name || String(id);
+}
+
+/** Is `id` still a live member of the snapshot (orphan-retirement gate)? A record whose owner
+ *  or target left snapshot.byId has no anchor and must retire. @param {Snapshot} snapshot
+ *  @param {string} id @returns {boolean} */
+function snapshotHas(snapshot, id) {
+  const by = snapshot?.byId;
+  if (by && typeof (/** @type {{ has?: (k: string) => boolean }} */ (by)).has === 'function') {
+    return /** @type {{ has: (k: string) => boolean }} */ (by).has(String(id));
+  }
+  return !!snapshot?.byId?.get?.(String(id));
 }
 
 /** The relationship type between two settlements on the graph edge list (codepoint-agnostic).
@@ -164,6 +175,34 @@ export function blockadeNews(b, snapshot, tick, now) {
   };
 }
 
+/** A blockade-LIFTED wizard-news entry (AGGREGATE) — the organic end when the settled war no
+ *  longer holds the sea approaches hostile (r2 worldpulse-war-military-4). @param {{ ownerId: string, targetId: string }} b
+ *  @param {Snapshot} snapshot @param {number} tick @param {string|null} now @returns {Record<string, unknown>} */
+export function blockadeLiftNews(b, snapshot, tick, now) {
+  const navy = nameOf(snapshot, b.ownerId);
+  const port = nameOf(snapshot, b.targetId);
+  return {
+    id: `wizard_news.${tick}.blockade_lifted.${b.ownerId}.${b.targetId}`,
+    tick,
+    scope: 'regional',
+    significance: 'notable',
+    score: 62,
+    headline: `${navy}'s fleet lifts the blockade of ${port}`,
+    summary: `With the war between ${navy} and ${port} settled, ${navy}'s fleet stood down from ${port}'s sea approaches — the harbor breathes again, its trade unstrangled.`,
+    kind: 'applied',
+    impactKind: 'blockade_lifted',
+    channelType: null,
+    severity: 0.4,
+    settlementIds: [b.ownerId, b.targetId],
+    impactIds: [],
+    channelIds: [],
+    sourceEventId: `blockade_lifted.${b.ownerId}.${b.targetId}.${tick}`,
+    tags: ['world_pulse', 'war', 'blockade'],
+    reasons: [`${navy} no longer holds ${port} hostile — the blockade has no war to serve.`],
+    createdAt: now,
+  };
+}
+
 /**
  * A sea-battle wizard-news entry (house voice, AGGREGATE — no npc named). Deterministic id
  * from the sorted pair + tick. @param {{ winnerId: string, loserId: string, region: string, lostConvoy: boolean, debarkPort: string|null, drowned: number }} b
@@ -232,11 +271,46 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
   /** @type {Array<Record<string, unknown>>} */
   const mintedProposals = [];
 
-  // ── ADVANCE existing naval records (position step; naval fields survive the spread). ──
+  // ── ADVANCE existing naval records (position step; naval fields survive the spread) —
+  // with ROLE-AWARE RETIREMENT (r2 worldpulse-war-military-1/-4). The land kernel self-prunes
+  // by rebuilding records from live deployments each tick; the naval ledger carries records
+  // forward, so it must retire them explicitly or a stuck record locks the navy out forever
+  // (both convoy- and blockade-derive `continue` when records[navyId] exists). Blockades are
+  // PORT-keyed (not 1:1 with deployments) ⇒ NOT a blanket deployments-rebuild. ────────────
+  /** @type {Record<string, DeploymentRecord>} deployment writebacks (sea-lift delivery stamp). */
+  const deliveryStamps = {};
   for (const key of Object.keys(prior).sort()) {
     const rec = navalRecordOf(prior[key]);
     if (!rec) continue;
-    records[key] = /** @type {NavalTransitRecord} */ (stepArmyPosition(rec, nowTick));
+    // ORPHAN RETIREMENT (both roles): the owner or the target left the snapshot (a removed
+    // settlement) ⇒ the operation has no anchor. Drop it (mirrors the land kernel's self-prune).
+    if (!snapshotHas(snapshot, rec.ownerId) || (rec.targetId && !snapshotHas(snapshot, rec.targetId))) continue;
+    const stepped = /** @type {NavalTransitRecord} */ (stepArmyPosition(rec, nowTick));
+    if (rec.role === ARMY_ROLES.CONVOY) {
+      // CONVOY STAND-DOWN (design §2 — a convoy is a ONE-TIME crossing): on arrival the escort's
+      // work is done ⇒ retire the record and (if it escorts a live deployment) stamp that
+      // deployment DELIVERED, so the derive loop does not re-mint a shuttle for an army already
+      // at its target. Also retire when the escorted deployment is RECALLED (the host is sailing
+      // home). NB: absence of a deployment is NOT retirement — DM-ordered convoys and relief
+      // fleets legitimately ride the ledger with no deployment slot; only an explicit recall or
+      // arrival stands a convoy down.
+      const cargo = rec.cargoId || rec.ownerId;
+      const dep = deployments[cargo];
+      if (dep && dep.recalled) continue;                              // escorted deployment recalled ⇒ stand down
+      if (stepped.position01 >= 1) {                                  // arrived ⇒ stand down + mark delivered
+        if (dep) deliveryStamps[cargo] = { ...dep, ...deliveryStamps[cargo], seaLiftDelivered: rec.targetId };
+        continue;
+      }
+    } else if (rec.role === ARMY_ROLES.BLOCKADE) {
+      // BLOCKADE ORGANIC LIFT (design §4 — parity with the siege's organic closers): a blockade
+      // whose owner→target pair is no longer hostile is a strangulation the settled war no longer
+      // justifies. Lift it (record dropped, a lift news beat), matching the land recall on peace.
+      if (!hostileOwners(graph || {}, rec.ownerId, rec.targetId)) {
+        newsEntries.push(blockadeLiftNews({ ownerId: rec.ownerId, targetId: rec.targetId }, snapshot, nowTick, now));
+        continue;
+      }
+    }
+    records[key] = stepped;
   }
 
   // ── DERIVE CONVOYS: a deployment whose target is a sea-reachable PORT, from a port that
@@ -246,6 +320,12 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
     const dep = deployments[armyId];
     const targetId = dep && dep.targetId != null ? String(dep.targetId) : '';
     if (!targetId || dep.recalled) continue;
+    // ALREADY DELIVERED: this deployment's army already made the crossing to THIS target (its
+    // convoy stood down on arrival) ⇒ do not re-mint a shuttle. A redirect to a new target
+    // (different id) is derivable again. The stamp may be from a prior tick (persisted on the
+    // deployment) or this tick (deliveryStamps, written in the ADVANCE loop above).
+    const delivered = dep.seaLiftDelivered ?? deliveryStamps[armyId]?.seaLiftDelivered;
+    if (delivered != null && String(delivered) === targetId) continue;
     if (!isPort(digest, armyId) || !isPort(digest, targetId)) continue;
     const navStrength = navalStrengthOf(digest, snapshot?.byId?.get?.(String(armyId)), armyId);
     if (navStrength <= 0) continue; // no war navy to escort the crossing
@@ -395,10 +475,14 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
       : dropSpatialLedger(worldState, 'navalTransit');
   }
   // Write shared-fate strengths back onto the embarked armies + stamp the debark recall (the
-  // survivors retreat OVERLAND via the standing withdrawal→homecoming — the retreat reuse).
-  if (Object.keys(sharedFateWriteback).length || debarkRecall.size) {
+  // survivors retreat OVERLAND via the standing withdrawal→homecoming — the retreat reuse) +
+  // stamp the sea-lift DELIVERY (arrived convoys, so the derive loop skips a delivered army).
+  if (Object.keys(sharedFateWriteback).length || debarkRecall.size || Object.keys(deliveryStamps).length) {
     /** @type {Record<string, DeploymentRecord>} */
     const nextDeployments = { ...deployments };
+    for (const id of Object.keys(deliveryStamps)) {
+      if (nextDeployments[id]) nextDeployments[id] = { ...nextDeployments[id], seaLiftDelivered: deliveryStamps[id].seaLiftDelivered };
+    }
     for (const id of Object.keys(sharedFateWriteback)) {
       if (nextDeployments[id]) nextDeployments[id] = { ...nextDeployments[id], currentEffectiveStrength: sharedFateWriteback[id] };
     }
@@ -412,7 +496,7 @@ export function advanceNaval({ snapshot, worldState, digest, graph, rng, season 
     nextWorldState = /** @type {Record<string, unknown>} */ (upsertProposal(nextWorldState, proposal));
   }
   const changed = changedLedger || Object.keys(sharedFateWriteback).length > 0 || debarkRecall.size > 0
-    || mintedProposals.length > 0;
+    || Object.keys(deliveryStamps).length > 0 || mintedProposals.length > 0;
   return { worldState: nextWorldState, changed, newsEntries, deferrals };
 }
 
