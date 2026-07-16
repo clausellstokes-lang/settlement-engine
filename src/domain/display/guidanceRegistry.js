@@ -349,6 +349,7 @@ export const LEGACY_GUIDANCE_CEILING = LEGACY_GUIDANCE_COMPONENTS.length;
 // four empty-invitation hosts (WelcomeBackCard, SampleDashboard, GalleryList,
 // CampaignEmptyState) reference + dismiss their whispers. The walker is now FULLY
 // STRICT: every whisper must render via its host — nothing hides here.
+/** @type {readonly string[]} */
 export const UNWIRED_WHISPERS = Object.freeze([]);
 
 /** The shrink-only ceiling for UNWIRED_WHISPERS — now 0 (the walker is fully strict). */
