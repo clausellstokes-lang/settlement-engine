@@ -879,6 +879,19 @@ GUARDS' walker caught it, working as designed; ARCHITECTURE count → 136. (3) G
 +39 B (four waves' individually-green margins summed over). Per the reclaim-first law:
 **FP-G8 micro-reclaim agent dispatched** (target ≥250 B off 81fbf3e9) — the budget is never
 raised. INTENT-trim agent still in flight. SURFACE + G2 + DEPTH dispatch after INTENT merges.
+**✅ THE RECLAIM GUSHER + INTENT HOME + RATCHET #10 (2026-07-16):** FP-G8 reclaimed
+**−60,906 B** (two engine-core over-inclusion trims: the stale generator-spine eager pin —
+its sole first-paint consumer went lazy waves ago — + the settlement.schema leaf;
+vite.config.js only, goldens byte-identical) → merged @ 2e72ede5; **INTENT merged @ c7715f3a**
+(its irreducible +2,796 B funded ~22× over); settlementSlice ceiling reconciled 1300→1333
+(reconciliation #3, same class). **FULL GATE GREEN exit 0: 906 files / 10,038 passed +
+verify:dist 119/119.** RATCHET #10 @ 5a560d4b: 1,121,903 → **1,066,400** (measured 1,063,832
++ ~2,568 funded headroom; NET −55,503 vs pre-G8). SATELLITE QUEUE SETTLED with zero landings:
+persist-gap 151a8ee3 + W2 4cf84a40 both ALREADY ancestors (stale blocked-notes corrected);
+round-21 W5 312a5025 OBSOLETE (raw-color half absorbed at 1427 in-file; budget-raise half dead
+under #10) — the standing W5-cherry-pick rule is CLOSED. Six of seven waves + reclaim merged;
+~65 findings closed; suite 9,896 → 10,038 (+142). REMAINING IN PHASE F: SURFACE + G2
+(batch 2b in flight).
 **INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
 proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
 alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
