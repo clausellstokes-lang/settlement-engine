@@ -823,6 +823,18 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       (claude/w-r2-seams) ∥ W-R2-INTENT (claude/w-r2-intent) ∥ W-R2-DOCS (claude/w-r2-docs).
       Briefs committed in docs/briefs/ (W_R2_COMMON_PROTOCOL + per-wave). On return: Fable
       §0.3 review per wave → exact-stage merge to RF → batch 2 (TRUST/GUARDS/DATA/SURFACE).
+      **✅ W-R2-DOCS MERGED @ bbb1cadc** (2026-07-16 ~05:17): 6/6 findings fixed, 14 freshness
+      pins (§0.3 review: zero product source ✓, zero ledger rows touched ✓, all 11 tests/docs
+      files 63/63 green independently re-run on the merged tree ✓; agent's full gate green
+      modulo the 2 documented load-flakes, 15/15 isolated; wrong-lineage worktree trap
+      self-corrected per protocol — 4th recurrence, brief guard worked). 3 vetoable JUDGMENTs
+      recorded in the wave report (head-naming pin strictness; deploy.sh mirroring; the 2252
+      ceiling kept — the finding misread it, verdict-corrected). SEAMS + INTENT limit-killed at
+      dispatch 1; RE-DISPATCHED post-reset ~05:17 (same run resumed, DOCS cached).
+      **OWNER FULL DELEGATION (2026-07-16 ~02:00, verbatim: "I formally give full permission
+      to delegate anything to you should a decision need to be made as long as it is set with
+      the standard that I set at the beginning! Continue all the way until everything is
+      done!")** — standing constitution + owner-gated classes survive as always.
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
