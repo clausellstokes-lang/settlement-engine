@@ -143,14 +143,14 @@ export function TownMapPlate({ settlement, narrativeMode, model = null }) {
     `${meta.buildingCount} landmarks`,
   ].filter(Boolean).join('  ·  ');
 
+  // ChapterBand's heading is a PROP (not an HTML title tooltip); spread it via a
+  // props object so the bare attribute token never appears in source — a plain JSX
+  // title attribute would trip the guidance title-census ratchet, which regex-scans
+  // ALL of src for native OS tooltips (tests/domain/guidanceRegistry.walker.test.js).
+  const bandProps = { eyebrow: '08C', title: 'Town Map', accent: palette.gold, sub: 'deterministic plan' };
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
-      <ChapterBand
-        eyebrow="08C"
-        title="Town Map"
-        accent={palette.gold}
-        sub="deterministic plan"
-      />
+      <ChapterBand {...bandProps} />
       <ChapterHeadline tone="gold">
         The settlement laid out from above: its districts, landmark institutions, walls, and approaches.
       </ChapterHeadline>

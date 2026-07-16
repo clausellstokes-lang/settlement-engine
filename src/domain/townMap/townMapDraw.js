@@ -26,6 +26,14 @@
  * Any-cast baseline 0 for this new file.
  */
 
+// The fixed, theme-independent export color tokens live in the design-token layer
+// (src/design/) — a canvas raster / react-pdf render needs concrete color and a
+// deterministic plate needs machine-stable bytes, and literal color tokens belong
+// in the sanctioned token zone (raw-color budget), not inline in this domain file.
+import { EXPORT_PALETTE } from '../../design/townMapExportPalette.js';
+
+export { EXPORT_PALETTE };
+
 /**
  * @typedef {{ t:'poly', pts:Array<[number,number]>, closed:boolean, fill?:string,
  *   fillOpacity?:number, stroke?:string, strokeWidth?:number, strokeOpacity?:number }} PolyOp
@@ -40,44 +48,6 @@
  */
 
 const VIEW = 1000;
-
-/**
- * The fixed, theme-INDEPENDENT export palette. Print-tuned hex, chosen to hold on
- * parchment and stay legible in a tiny thumbnail. Category tints mirror the
- * viewer's DISTRICT_COLOR intent (civic→blue, military→red, criminal→ink, …) with
- * concrete values (no VIOLET — AI-reserved). Frozen so the plate/thumb bytes are
- * stable.
- */
-export const EXPORT_PALETTE = Object.freeze({
-  parchment: '#fbf5e6',
-  ink: '#2c2210',
-  muted: '#6b5340',
-  water: '#3d6b8a',
-  road: '#6b5340',
-  street: '#8a7250',
-  wall: '#2c2210',
-  gate: '#fbf5e6',
-  anchor: '#c9a24c',
-  buildingFill: '#fffbf5',
-  hazardHigh: '#8b1a1a',
-  hazardHighBg: '#fde8e8',
-  hazardMid: '#a0762a',
-  hazardMidBg: '#f5ede0',
-  district: Object.freeze({
-    civic: '#2a3a7a',
-    noble: '#8c6f32',
-    merchant: '#a0762a',
-    religious: '#7a5a2a',
-    arcane: '#3d2b1a',
-    craft: '#b07a1a',
-    residential: '#1a5a28',
-    foreign: '#3d6b8a',
-    military: '#8b1a1a',
-    criminal: '#2c2210',
-    industrial: '#a0672a',
-    other: '#6b5340',
-  }),
-});
 
 /** District category → export tint (fallback: `other`). @param {string|null} [category] */
 export function exportDistrictColor(category) {
