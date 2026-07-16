@@ -82,11 +82,23 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // (its ~27 lazy consumers risk shared-chunk churn — kept until measured worth it).
 // @guarded-by tests/build/vendorPdfLazy.test.js: engine-absent-from-closure +
 // the first-paint byte budget (re-entry of any of these reds one or the other).
+// FP-G8 (2026-07-16): settlement.schema.js — a pure schema/constant LEAF (zero
+// static imports) reached at runtime ONLY by normalizeSettlement.js +
+// settlementMigrations.js, BOTH of which are pinned to the LAZY
+// `settlement-normalize` chunk (manualChunks below). NO first-paint module
+// statically imports it — every other mention across src is a JSDoc
+// `@param {import('./settlement.schema.js').T}` type-only annotation (stripped
+// by the eager-graph parser) or the `settlement.schemaVersion` property access.
+// ESD force-routed its ~68 kB into eager engine-core for zero benefit (the FP-1
+// normalize-pin note below even documented it "stays in engine-core"). Excised
+// here AND pinned to settlement-normalize below, so it rides the lazy chunk with
+// its two importers and both the routing and the eager-graph classifier agree.
 for (const frag of [
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
   '/src/domain/resolveTerrain.js',
   '/src/domain/region/foldTradeCategories.js',
+  '/src/domain/settlement.schema.js',
 ]) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
@@ -141,12 +153,15 @@ function computeEagerModuleGraph() {
   };
   const seeds = [
     join(SRC, 'main.jsx'),
-    // engine-core generator spine (the explicit pins in manualChunks below)
-    join(SRC, 'generators/structuralValidator.js'),
-    join(SRC, 'generators/helpers.js'),
-    join(SRC, 'generators/priorityHelpers.js'),
-    join(SRC, 'generators/institutionProbability.js'),
-    join(SRC, 'generators/neighbourGenerator.js'),
+    // engine-core generator spine (the explicit pins in manualChunks below).
+    // FP-G8 (2026-07-16): only these TWO are genuinely eager-reached now — the
+    // neighbour backlink (via eager neighbourBackLink.js) and the pipeline-rail
+    // labels (via eager settlementSlice.js). The former five (structuralValidator/
+    // helpers/priorityHelpers/institutionProbability/neighbourGenerator) lost their
+    // last eager consumer when the coherence draft-check went lazy, so they are no
+    // longer seeded here — they ride the lazy `engine` chunk (and spatialData, only
+    // structuralValidator reaches it, drops to data-lazy). Both routing and this
+    // classifier agree, per the FP-G7 excision convention.
     join(SRC, 'generators/crossSettlementConflicts.js'),
     join(SRC, 'generators/steps/stepMetadata.js'),
     // libs routed into the eager 'data' chunk below
@@ -434,52 +449,67 @@ export default defineConfig({
           //     chunk statically edges into this one.
           //   • assembleSettlement reaches it from the lazy `engine` chunk
           //     (engine → settlement-normalize is lazy → lazy).
-          //   • Its only OUTWARD static edge is settlement.schema.js, which stays
-          //     in engine-core — the safe lazy → eager direction, never the
-          //     reverse (nothing in engine-core imports normalize/migrations).
-          // Removing them from engine-core is what actually reclaims the ~30 kB
+          //   • Its only OUTWARD static edge is settlement.schema.js — a pure
+          //     schema/constant leaf whose ONLY runtime importers are these two
+          //     modules (verified FP-G8: every other mention is a JSDoc type
+          //     annotation). It used to STAY in engine-core (ESD force-routed it
+          //     eager for zero benefit); FP-G8 (2026-07-16) excised it from
+          //     ENGINE_SHARED_DOMAIN and joins it to this pin, so the ~68 kB
+          //     schema leaf rides the lazy chunk with its importers instead of
+          //     paying first-paint bytes no anon-landing path ever needs.
+          // Removing them from engine-core is what actually reclaims the closure
           // AND makes the measurement deterministic. Must match BEFORE the
           // isEngineSharedDomain rule below.
           // @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte
           //   budget + engine-absent-from-closure).
           if (id.includes('/src/domain/normalizeSettlement.js') ||
-              id.includes('/src/domain/settlementMigrations.js'))
+              id.includes('/src/domain/settlementMigrations.js') ||
+              id.includes('/src/domain/settlement.schema.js'))
             return 'settlement-normalize';
 
           // ── Engine-core (the first-paint slice of the {generators,domain} ──
           // engine layers). Two kinds of module live here:
           //
-          //  (a) The GENERATOR SPINE the entry reaches eagerly — the coherence
-          //      draft-check (checkStructuralValidity), the neighbour backlink
-          //      (crossSettlementConflicts, deterministic wrapper), the
-          //      pipeline-rail labels (stepMetadata), and the influence-scoring
-          //      modules those pull in (helpers, priorityHelpers,
-          //      institutionProbability, neighbourGenerator). Small, pure, and
-          //      needed on first paint.
+          //  (a) The GENERATOR SPINE the entry ACTUALLY reaches eagerly — just
+          //      two tiny modules: the neighbour backlink (crossSettlementConflicts,
+          //      the deterministic wrapper — imported by the eager
+          //      domain/relationships/neighbourBackLink.js; it pulls only kernel/
+          //      prng), and the pipeline-rail labels (stepMetadata, metaForStep —
+          //      imported by the eager store/settlementSlice.js; zero imports).
           //  (b) The DOMAIN VOCABULARY the engine leans on (ENGINE_SHARED_DOMAIN,
           //      computed above) — the src/domain modules generators import,
           //      which first-paint store/domain code needs too.
           //
+          // FP-G8 OVER-PIN TRIM (2026-07-16): this pin USED to also force
+          // structuralValidator + helpers + priorityHelpers + institutionProbability
+          // + neighbourGenerator into engine-core, on the premise the entry reached
+          // the coherence draft-check (checkStructuralValidity) eagerly. That premise
+          // went STALE — checkDraftEdit (its sole first-paint consumer) is now lazy
+          // (rides the SettlementsPanel chunk), so NO eager module reaches those five
+          // anymore (verified: every real importer is the lazy `engine` chunk or a
+          // lazy component chunk; crossSettlementConflicts + stepMetadata reach none
+          // of them — the former imports only kernel/prng, the latter nothing). They
+          // are pure over-inclusions paying ~first-paint bytes for a coherence check
+          // that no longer runs on first paint. Un-pinned here (and dropped from the
+          // eager-graph seeds above) so they ride the lazy `engine` chunk with the
+          // generators. spatialData.js (structuralValidator's exclusive data table)
+          // follows them out of the eager `data` chunk.
+          //
           // Under the blanket /src/generators/ → 'engine' rule below (and
           // Rollup's default co-location of the shared domain into that chunk),
-          // each of those edges dragged the WHOLE 656 kB engine chunk into the
+          // the retained edges would drag the WHOLE 656 kB engine chunk into the
           // first-paint static closure. Splitting them into this small chunk
           // keeps their transitive imports within {engine-core, kernel, data} —
           // never a heavy generator (economy/power/npc/history/narrative/
           // faction/services/steps) — so 'engine-core' never pulls 'engine'.
-          // The big engine chunk imports engine-core (it uses helpers et al.),
-          // but that edge points the safe way: engine (lazy) → engine-core
-          // (first-paint), never the reverse. This is what keeps the 656 kB
-          // engine chunk OUT of first paint. Must match BEFORE /src/generators/
-          // and BEFORE the /src/data/ rule (some domain here re-exports data).
+          // The big engine chunk imports engine-core, but that edge points the
+          // safe way: engine (lazy) → engine-core (first-paint), never the
+          // reverse. This is what keeps the 656 kB engine chunk OUT of first
+          // paint. Must match BEFORE /src/generators/ and BEFORE the /src/data/
+          // rule (some domain here re-exports data).
           // @enforced-by tests/build/vendorPdfLazy.test.js (engine-absent-from-
           // closure contract + first-paint byte budget).
           if (
-            id.includes('/src/generators/structuralValidator.js') ||
-            id.includes('/src/generators/helpers.js') ||
-            id.includes('/src/generators/priorityHelpers.js') ||
-            id.includes('/src/generators/institutionProbability.js') ||
-            id.includes('/src/generators/neighbourGenerator.js') ||
             id.includes('/src/generators/crossSettlementConflicts.js') ||
             id.includes('/src/generators/steps/stepMetadata.js') ||
             isEngineSharedDomain(id)
