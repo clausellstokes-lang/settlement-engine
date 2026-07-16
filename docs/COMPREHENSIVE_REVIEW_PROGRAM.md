@@ -908,6 +908,20 @@ rescue snapshot b89e2f56 (claude/master-merge-wip-rescue — the dead session's 
 preserved; merge branch restored clean @ c89a5372); **W4–W6 continuation agent DISPATCHED**
 (byte-integrity → guard-port/entity-link → test-estate; stops before the fold-in, which waits
 for SURFACE-2's RF merge).
+**PHASE M W4+W5 COMPLETE, W6 PARTIAL→RESUMED (2026-07-16):** W4 @ 76c28e45 (F24 whole-tree:
+NotesTab both-sides-together + a FRESH generosityKernel:485 NUL golden-proven + the
+controlBytes pin landed w/ the supplyCompleteness owner-call allowlist; W1-resolution
+correction restored RF's lost NotesTab disclosure copy). W5 @ 30ff6b6a (ab1c30ba pin green,
+data-map-overlay-svg auto-returned as predicted; ccd0d670 docstring DROPPED-superseded — the
+hover IS wired on this tree; **the entity-link consumer layer wired end-to-end** incl.
+porting master's transient focusedEntity architecture the plan under-scoped — JUDGMENT).
+W6 @ f79d5cf1 PARTIAL: build blocker fixed (7 north-star components → RF-wins, matching the
+rescue), 28 test-resolution errors reverted (374 tests green), 18 fenced drops; rescue
+domain hand-merges DISCARDED as owner-gated golden-shifters (correct). **Agent RESUMED for
+the 151 remaining dispositions (security-first), the 8 hand-merges, honest rebaselines.**
+OWNER-GATED QUEUE GROWS: (a) the merge branch's +4,723 budget bust = the recorded
+golden-lineage overage — EXPECTED CURED at fold-in by RATCHET #10 + FP-G8's config (verify
+then); (b) EXEMPT_CEILING 66→69 (3 legitimate transient actions).
 **INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
 proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
 alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
