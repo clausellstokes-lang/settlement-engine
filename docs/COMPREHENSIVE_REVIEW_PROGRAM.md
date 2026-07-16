@@ -726,9 +726,32 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
       wave): BLOCKED until the master merge lands (or the owner re-rules the landing branch).
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
+## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
+## and fixing, i want you to continue where the merge was and the rest of the operations that follow")
+THIS session's full charter, in order: (1) Phase S/A/V/P/F — the round-2 review + fix program.
+(2) THEN take over the MASTER MERGE wherever it stands and carry it to completion per
+MASTER_MERGE_PLAN.md (at charter time a parallel session held W1+W2+W3a @ c89a5372 with live
+WIP — TAKEOVER PROTOCOL: never touch the merge worktree/branch while the other session is
+actively writing; verify inactivity via fresh WIP mtimes + `git log` before assuming control;
+re-survey per the plan's §0 rule — if topology facts moved, re-pin dispositions first; foreign
+WIP is preserved, never reset). (3) THEN the operations that follow per the standing sequence:
+push the reconciliation branch + OPEN THE PR (both pre-authorized by the 2026-07-15 rulings;
+the PR merge button stays the owner's per the standing vetoable reading) → SM-4 → GUIDE-2b →
+Surveyor S1–S7 → the dimensions-only re-grade → lighting batch PREPARED for owner signature →
+the owner decision list (db-push sequencing, covert-leak scrub, support email, applied-head
+vs prod) → the successor's soak.
+SEQUENCING CONSEQUENCE (recorded, vetoable): the owner's order puts fixing BEFORE merge
+continuation. If the parallel session finishes the merge before Phase F opens, fixes land on
+the unified lineage (no tension). If not, Phase F lands on RF post-cut and the merge
+continuation gains an explicit FOLD-IN step (merge the advanced RF tip into master-merge-r1
+before its W7 full gate) so no fix is stranded behind the merge cut. Decided fresh at Phase P
+from live git state.
+
 ## Round-2 resume protocol (successor session)
 Same as round 1 (above), plus: (1) check `git log claude/master-merge-r1` — if the merge landed,
 Phase F targets that lineage's successor branch; if it stalled, surface to the owner before
 landing fixes anywhere. (2) The survey journal for `wf_d69567dc-f0d` lives under this session's
 transcript dir (`7115c211-…/subagents/workflows/wf_d69567dc-f0d/journal.jsonl`); salvage partial
-agent outputs from there rather than re-running completed slices blind.
+agent outputs from there rather than re-running completed slices blind. (3) The charter
+extension above binds the successor too: review+fix → merge continuation → the post-merge
+operations, with the takeover protocol honored at every entry.
