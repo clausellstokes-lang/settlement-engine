@@ -45,7 +45,12 @@ function newSaveId() {
 // ── Local storage helpers ───────────────────────────────────────────────────
 
 function localLoad() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]'); } catch { return []; }
+  // Non-array stored value (drifted/corrupt row) yields [] rather than letting
+  // a later .map/.filter crash (ported master fix).
+  try {
+    const v = JSON.parse(localStorage.getItem(LOCAL_KEY) || '[]');
+    return Array.isArray(v) ? v : [];
+  } catch { return []; }
 }
 
 function localWrite(saves) {
@@ -478,7 +483,9 @@ async function localSaveEntry(entry) {
 
 async function localUpdate(id, partial) {
   const saves = localLoad();
-  const idx = saves.findIndex(s => s.id === id);
+  // String() both sides (ported master fix): a numeric id passed as a string
+  // must still match — the module's other id compares already coerce.
+  const idx = saves.findIndex(s => String(s.id) === String(id));
   if (idx !== -1) {
     Object.assign(saves[idx], partial);
     localWrite(saves);
@@ -486,7 +493,7 @@ async function localUpdate(id, partial) {
 }
 
 async function localDelete(id) {
-  localWrite(localLoad().filter(s => s.id !== id));
+  localWrite(localLoad().filter(s => String(s.id) !== String(id)));
 }
 
 async function localCount() {

@@ -920,6 +920,15 @@ export const createSettlementSlice = (set, get) => ({
       throw genErr;
     }
     const generationMs = Math.round((typeof performance !== 'undefined' ? performance.now() : Date.now()) - genStart);
+    // Post-resolution tier RE-GATE (ported master fix): 'random'/'custom' pass
+    // the pre-gate as sentinels, so the RESOLVED tier must be re-checked here —
+    // otherwise an over-cap resolution commits a settlement the account tier
+    // could never select directly. Generators/goldens untouched: this only
+    // blocks the COMMIT of an over-cap result.
+    if ((settType === 'random' || settType === 'custom') && !get().isTierAllowed(result?.tier)) {
+      console.warn(`Resolved tier "${result?.tier}" exceeds this account's cap — generation discarded.`);
+      return null;
+    }
       // Regeneration policy (domain/worldPulse/reconcile.js): world/party-
       // authored conditions survive a local regeneration — a reroll replaces
       // the town, not the campaign layer's crises. No-op on a first

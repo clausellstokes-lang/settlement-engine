@@ -173,14 +173,23 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     else externalSignal.addEventListener('abort', onExternalAbort, { once: true });
   }
 
-  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 60000;
+  // Two independent deadlines (ported master fix): IDLE resets on every chunk
+  // and catches a half-open stall; OVERALL is a hard ceiling on the whole run —
+  // without it a stream that sends bytes steadily but never finishes hangs the
+  // AI action forever (the idle timer keeps resetting).
+  const IDLE_TIMEOUT_MS = Number.isFinite(opts.idleTimeoutMs) ? opts.idleTimeoutMs : 45000;
+  const OVERALL_TIMEOUT_MS = Number.isFinite(opts.overallTimeoutMs) ? opts.overallTimeoutMs : 180000;
   let idleTimedOut = false;
   let watchdog = null;
+  const overallTimer = setTimeout(() => { idleTimedOut = true; controller.abort(); }, OVERALL_TIMEOUT_MS);
   const armWatchdog = () => {
     if (watchdog) clearTimeout(watchdog);
     watchdog = setTimeout(() => { idleTimedOut = true; controller.abort(); }, IDLE_TIMEOUT_MS);
   };
-  const disarmWatchdog = () => { if (watchdog) { clearTimeout(watchdog); watchdog = null; } };
+  const disarmWatchdog = () => {
+    if (watchdog) { clearTimeout(watchdog); watchdog = null; }
+    clearTimeout(overallTimer);
+  };
 
   // A meaningful, user-facing error for the two abort flavors. Both carry
   // name === 'AbortError' so the slice's errorKindFromError classifies them as
@@ -204,9 +213,12 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
   let succeededFields = [];
   let sawDone = false;
 
-  // Support nested field paths like "powerStructure.factions"
+  // Support nested field paths like "powerStructure.factions". Refuse any
+  // prototype-chain segment (ported master fix): a crafted streamed field name
+  // like "__proto__.polluted" must never pollute Object.prototype.
   const setPath = (target, path, value) => {
     const keys = path.split('.');
+    if (keys.some(k => k === '__proto__' || k === 'constructor' || k === 'prototype')) return;
     let ref = target;
     for (let i = 0; i < keys.length - 1; i++) {
       if (typeof ref[keys[i]] !== 'object' || ref[keys[i]] === null) ref[keys[i]] = {};
@@ -263,8 +275,14 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
     // Final success line — the server's `result` is authoritative
     if (msg.done) {
       sawDone = true;
+      // A `done` with a missing or non-object `result` is a malformed completion
+      // (ported master fix): treating it as success would silently persist an
+      // empty {} over what should have been a real narrative (and charge a
+      // credit for nothing). Flag it fatal so the caller retries.
       if (msg.result && typeof msg.result === 'object') {
         result = msg.result;
+      } else {
+        fatalError = new Error('AI generation completed without a result (malformed response). Please retry.');
       }
       if (typeof msg.creditsRemaining === 'number') creditsRemaining = msg.creditsRemaining;
       if (msg.type) finalType = msg.type;
@@ -302,6 +320,14 @@ export async function generateNarrative(type, settlement, settlementId, opts = {
       throw new Error(msg);
     }
 
+    // A 2xx with no body (e.g. a proxy stripped it) would otherwise throw an
+    // unmapped TypeError off `res.body.getReader()` and leak the watchdog
+    // timers (ported master fix): clear them and surface the same retryable
+    // error a truncated stream gets.
+    if (!res.body) {
+      disarmWatchdog();
+      throw new Error('AI generation returned an empty response (no stream). Please retry.');
+    }
     const reader = res.body.getReader();
     const decoder = new TextDecoder();
 

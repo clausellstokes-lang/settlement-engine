@@ -185,7 +185,9 @@ export function publishMapParams({
   return {
     p_kind: kind === 'map_with_campaign' ? 'map_with_campaign' : 'map',
     p_description: cleanDescription || null,
-    p_tags: clampTags(tags),
+    // Empty clamp result publishes as null (not []) so the row's tag facet reads
+    // "unset" rather than "zero tags" (ported master fix).
+    p_tags: (() => { const c = clampTags(tags); return c.length ? c : null; })(),
     // undefined ⇒ null so the RPC's coalesce(..., current) preserves a prior value.
     p_importable: importable === undefined ? null : importable === true,
     // Only forward a safe, non-empty cover; empty/unsafe ⇒ null (RPC preserves).
@@ -530,10 +532,10 @@ function sanitizeTile(row) {
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
     curated:      row.is_curated ?? false,
-    description:  row.gallery_description || '',
+    description:  sanitizeGalleryHtml(row.gallery_description || ''), // read-path scrub (ported master fix)
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags), // read-path clamp (ported master fix)
     population:   Number(row.population ?? data.population) || null,
     terrain:      row.terrain || data?.config?.terrain || data?.geography?.terrain || data?.terrain || '',
     governmentType: row.government_type || readGovernmentType(data),
@@ -631,12 +633,15 @@ function sanitizeDossier(row) {
     publishedAt:  row.published_at,
     updatedAt:    row.updated_at || row.gallery_updated_at || row.published_at,
     viewCount:    row.view_count ?? 0,
-    description:  row.gallery_description || '',
+    description:  sanitizeGalleryHtml(row.gallery_description || ''), // read-path scrub (ported master fix)
     imageUrl:     row.gallery_image_url || '',
     imageAlt:     row.gallery_image_alt || '',
-    tags:         Array.isArray(row.gallery_tags) ? row.gallery_tags : [],
+    tags:         sanitizeGalleryTags(row.gallery_tags), // read-path clamp (ported master fix)
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // §S4 realm-arc digest — written at publish (gallery_realm_arc_summary) but
+    // previously never READ back; sanitized+bounded on read (ported master fix).
+    realmArcSummary: sanitizeRealmArcSummary(row.gallery_realm_arc_summary),
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
   };
 }

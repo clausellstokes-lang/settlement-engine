@@ -11,12 +11,17 @@
  *     field — ownership is remapped by the server on write.
  *   • A throwing record is dropped (ok:false), never aborts.
  */
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import {
   validateAccountImport,
   prepareSettlementEntry,
+  ensureNormalizeLoaded,
   MAX_IMPORT_SETTLEMENTS,
 } from '../../src/lib/accountImport.js';
+
+// LINEAGE ADAPT (master merge W6): this lineage lazily loads the normalizer;
+// prepareSettlementEntry needs it primed (mirrors the saves.js call pattern).
+beforeAll(async () => { await ensureNormalizeLoaded(); });
 import { ACCOUNT_EXPORT_VERSION } from '../../src/lib/accountData.js';
 
 const envelope = (over = {}) => JSON.stringify({

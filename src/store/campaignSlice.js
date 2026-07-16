@@ -67,6 +67,23 @@ const SCHEMA_VERSION = 2;
  * track() itself never throws.
  */
 
+/**
+ * Scheme guard for an imported backdrop image URL (ported master fix). Gallery
+ * rows are untrusted shared input and the URL is later rendered as an SVG
+ * <image href> (see MapOverlay.jsx), so only http(s) URLs may be stored — never
+ * javascript:/data: or other schemes. Mirrors gallery.js's isSafePublicImageUrl
+ * (kept local to avoid widening that module's surface for one consumer).
+ */
+function isSafeBackdropUrl(value) {
+  if (!value) return false;
+  try {
+    const { protocol } = new URL(value);
+    return protocol === 'http:' || protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function localLoad(ownerId = 'anon') {
   return campaignService.loadCached(ownerId).map(migrateCampaign);
 }
@@ -215,7 +232,11 @@ export const createCampaignSlice = (set, get) => {
         // that ran while list() was in flight has by now written its tombstone,
         // and that is exactly the same-device race we must not lose to.
         const tombstones = campaignService.loadTombstones(ownerId);
-        const merged = mergeCampaignLists(cached, migratedRemote, { tombstones });
+        // Merge against the LIVE list, not the load-start `cached` snapshot
+        // (ported master fix): a campaign created while the remote load was in
+        // flight exists only in the live list — merging against the stale
+        // snapshot silently dropped it.
+        const merged = mergeCampaignLists(get().campaigns, migratedRemote, { tombstones });
         const prunedTombstones = reconcileTombstones(tombstones, migratedRemote);
         if (prunedTombstones.length !== tombstones.length) {
           campaignService.writeTombstones(prunedTombstones, ownerId);
@@ -294,6 +315,11 @@ export const createCampaignSlice = (set, get) => {
     const mapState = { schemaVersion: 2, placements: {}, labels: [], markers: [], forests: [] };
     if (backdrop.customBackdrop?.imageUrl) {
       let imageUrl = backdrop.customBackdrop.imageUrl;
+      // SECURITY (ported master fix): the shared row's URL is untrusted input —
+      // refuse non-http(s) schemes BEFORE any fetch/persist, so a javascript:/
+      // data: backdrop can never be stored (the fetch-failure fallback below
+      // would otherwise keep the original string verbatim).
+      if (!isSafeBackdropUrl(imageUrl)) throw new Error('That shared map has no importable backdrop.');
       const ownerId = st.auth?.user?.id;
       try {
         const { uploadMapBackdrop } = await import('../lib/imageUpload.js');
@@ -400,7 +426,12 @@ export const createCampaignSlice = (set, get) => {
           imageUrl = up.url;
         }
       } catch { /* fall back to the shared public URL */ }
-      mapState.customBackdrop = { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 };
+      // SECURITY (ported master fix): only http(s) backdrops persist; a refused
+      // scheme stores an explicit null so the campaign imports WITHOUT the
+      // backdrop rather than carrying a javascript:/data: payload.
+      mapState.customBackdrop = isSafeBackdropUrl(imageUrl)
+        ? { imageUrl, w: Number(sb.w) || 0, h: Number(sb.h) || 0 }
+        : null;
     } else if (sharedMap.fmgSnapshot) {
       // SECURITY (finding F6): do NOT import another user's raw FMG snapshot.
       // It is a serialized SVG blob that the map iframe loads via
@@ -644,7 +675,12 @@ export const createCampaignSlice = (set, get) => {
   },
 
   getCampaignForSettlement: (settlementId) => {
-    return get().campaigns.find(c => isCampaignActive(c) && c.settlementIds.includes(settlementId)) || null;
+    // Crash-guard (ported master fix, safe half): a campaign row without a
+    // settlementIds array must not throw. NOTE: the String()-normalization of
+    // the id compare (master's other half) is OWNER-GATED — it changes sim
+    // membership (previously-dropped number/string-mismatched members would
+    // join world-pulse advances). See the master-merge owner decision queue.
+    return get().campaigns.find(c => isCampaignActive(c) && (c.settlementIds || []).includes(settlementId)) || null;
   },
 
   // ── Campaign clock (Phase C) ────────────────────────────────────────────

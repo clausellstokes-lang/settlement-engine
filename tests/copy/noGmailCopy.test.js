@@ -51,7 +51,11 @@ describe('copy — no user-facing "Gmail"', () => {
   });
 
   it('copy strings never use "Gmail" as a provider label', () => {
-    const files = [join(SRC, 'copy', 'en.js'), join(SRC, 'copy', 'strings.js')];
+    // LINEAGE ADAPT (master merge W6): master kept copy in strings.js; this
+    // lineage splits it across src/copy/*.js — scan them all.
+    const files = readdirSync(join(SRC, 'copy'))
+      .filter((f) => f.endsWith('.js'))
+      .map((f) => join(SRC, 'copy', f));
     for (const f of files) {
       const text = readFileSync(f, 'utf8');
       expect(usesGmailAsProvider(text), `${f} must not use "Gmail" as a provider label`).toBe(false);

@@ -55,6 +55,12 @@ export const TIER_GATE = {
 // output internally for elevated roles.
 const TIER_RANK = { thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, capital: 5, metropolis: 5 };
 
+// Sentinel settType values that are not concrete tiers: they resolve to a real
+// tier during generation, and the post-resolution re-gate (settlementSlice)
+// checks the RESOLVED tier. Allowing them here keeps Random/Custom selectable
+// for every account tier (ported master fix).
+const ALLOWED_UNRANKED_TIERS = new Set(['random', 'custom']);
+
 /** Roles that bypass all tier restrictions */
 const ELEVATED_ROLES = ['developer', 'admin'];
 
@@ -523,8 +529,14 @@ export const createAuthSlice = (set, get) => ({
 
   isTierAllowed: (settlementTier) => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
-    const maxTier = get().maxAllowedTier();
-    return TIER_RANK[settlementTier] <= TIER_RANK[maxTier];
+    // Sentinels resolve to a concrete tier at generation; the post-resolution
+    // re-gate checks that. Unknown non-sentinel tiers FAIL CLOSED.
+    if (ALLOWED_UNRANKED_TIERS.has(settlementTier)) return true;
+    const rank = TIER_RANK[settlementTier];
+    if (rank === undefined) return false;
+    const maxRank = TIER_RANK[get().maxAllowedTier()];
+    if (maxRank === undefined) return false;
+    return rank <= maxRank;
   },
 
   /** Whether the user can afford AI features (developers get unlimited) */
