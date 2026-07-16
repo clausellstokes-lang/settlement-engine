@@ -42,27 +42,50 @@ threading (expected in beliefMap's reconcile); verify rumor capture stamps origi
 
 ---
 
-## D2 — TEMPO SCALING (attention economics survive realm growth)
+## D2 — THE SCALING LAW (attention, trade, and military interaction density survive realm growth)
+### (Owner extension 2026-07-16: "make sure realm size scaling is also included in trade and military movement")
 
-**Gap:** the E0 governor's TEMPO_BUDGETS are per-tier triples but realm-global — a 50-settlement
-realm gives each settlement drama rarely; the world feels quieter per settlement as it grows.
+**The unified principle:** the world scales by LOCALITY. Per-settlement interaction density is
+realm-size-invariant; realm-global budgets scale SUBLINEARLY (√N — big realms sample highlights,
+never N-linear cacophony); selection is always distance-localized through the frozen digest; and
+scaling caps DEFER physical quantities, never delete them (conservation survives every cap).
 
-**Shape:** two coupled refinements to the existing governor (narrativeTempo.js):
-1. **Sublinear budget scaling:** effective classMax = classMax + floor(sqrt(max(0, N −
-   TEMPO_BASE_REALM)) × TEMPO_SCALE_PER_ROOT) where N = live member count. Named frozen
-   constants (start: BASE 8, SCALE 1). Sublinear by design — big realms sample highlights,
-   never N-linear cacophony.
-2. **Starvation weighting (§H loaded dice, not a wall):** per-settlement `lastBeatTick` (extend
-   the existing tempo ledger; drop-when-empty) feeds candidate selection as a quiet-time weight —
-   the longest-quiet settlements' dice load toward selection. A weight, never a guarantee; no
-   new draws (it shapes existing distributions).
+**D2a — Attention (tempo):** as originally designed — effective classMax = classMax +
+floor(sqrt(max(0, N − TEMPO_BASE_REALM)) × TEMPO_SCALE_PER_ROOT); per-settlement `lastBeatTick`
+starvation weighting (§H loaded dice, a weight never a wall).
 
-**Gating:** the governor is already tier-gated and dormant-∞; both refinements live inside its
-active branch — dormant worlds byte-identical. Constants owner-retunable; the SOAK's
-settlement-cap study gains a drama-per-settlement distribution panel (measure, then tune).
+**D2b — Trade (recon-verified state + the two gaps):** trade is ALREADY mostly scale-correct by
+construction — route choice is distance/danger-scored (chooseRoute), commodity physics caps are
+per-origin and rate-scaled (ORIGIN_CAP_WEEKS × local rate, MAX_SHIP, TAP_CAP — all local, all
+scale-free), and matching walks are codepoint-sorted. The gaps: (1) supplyShipments'
+`ranked.slice(0, kk)` top-k partner selection — the implementer VERIFIES k's semantics: if k is
+per-destination (local), it is scale-free and stands; if k is realm-global, it gains the √N
+form. (2) Any realm-global trade-event budget (boom minting rides tempo — covered by D2a).
+Emergent property preserved: entrepôts still emerge from geography, not from caps.
 
-**Pins:** (1) dormant ⇒ byte-identical; (2) N ≤ BASE ⇒ current budgets exactly;
-(3) quiet-time weight monotone; (4) determinism under permuted member order (codepoint sort).
+**D2c — Military movement + decision throughput:** movement itself is already distance-priced
+(transit ticks ride the digest) and engagement is front-local (feasibility gates) — armies do
+not need scaling. What DOES: the DECISION pipeline's fixed realm-global caps. `rollCandidates`
+runs at `maxAuto: 7, maxProposals: 5` per tick regardless of N (pulseKernel.js:1254) — at 50
+settlements the realm's entire agency shares 12 slots; and the proposals ring (MAX_PROPOSALS=80,
+worldState.js) silently evicts under forcing modes (the confirmed tick-core-2 finding — this
+design ABSORBS that fix). Shape: maxAuto/maxProposals gain the same √N sublinear form
+(named constants, current values exact at N ≤ BASE); the proposal ring scales with N AND prunes
+resolved-first with visible expire-to-decline stamps for pending overflow (the finding's fix,
+now a law: **eviction is always receipted**). Retention caps that feed the DM's memory of the
+world (wizardNews 240, terminal impacts 250) gain sublinear scaling + per-settlement rescue
+(wizardNews's bounded major-arc rescue generalizes) so a quiet member's history survives a loud
+realm.
+
+**Gating:** every scaled constant reduces to today's exact value at N ≤ BASE (byte-identity for
+every existing campaign and golden); scaling activates only above the base — no flag needed,
+dormancy by arithmetic. Constants named, frozen, owner-retunable; the SOAK's settlement-cap
+study gains drama-per-settlement AND proposals-per-settlement distribution panels.
+
+**Pins:** (1) N ≤ BASE ⇒ current constants exactly (the load-bearing golden); (2) monotone
+sublinearity (N=100 budget < 2× N=25 budget); (3) eviction-is-receipted (no proposal vanishes
+without a stamp); (4) conservation under caps (a deferred shipment/beat is deferred, never
+destroyed); (5) determinism under permuted member order.
 
 ---
 
@@ -163,6 +186,98 @@ but consider" resolved by making lifespan the mechanism instead of the objection
 park D5 and ship the other four.
 
 ---
+
+## THE COHERENCE MATRIX (owner directive 2026-07-16: "it has to be coherent with all aspects of
+## the ontology... The number one thing I'm trying to sell is a coherent world.")
+
+Every design above, traced against every ontology system it touches. Entries marked **COUPLING**
+are new wires this matrix DISCOVERED and adds to the build scope; entries marked *emergent* are
+referencable cumulative causalities the composition produces for free — the product the owner is
+selling. This matrix is the design-time version of the seam audit round 2 ran retrospectively.
+
+**D1 distance-priced news ×**
+- *Blainey/misjudgment*: distant powers act on staler beliefs ⇒ far wars start from deeper
+  misjudgment — *emergent, historically true, referencable* ("they declared war on a fleet that
+  had already sailed home").
+- *Momentum*: counter-evidence from distant theaters arrives late ⇒ far commitments crack
+  slower — *emergent* (the distant war is easier to stay committed to).
+- *D4 fear_of_dominance*: observers fear the empire they BELIEVE exists; distance-stale beliefs
+  mean the frontier fears yesterday's empire — *emergent, both directions*.
+- *Credibility/unreliable mode*: AGE and QUALITY are separate axes — distance delays arrival,
+  credibility discounts sources, unreliable degrades fidelity. The implementer must NOT
+  double-count (one delay application, at the recency fold only).
+- *Generosity* — **COUPLING (discovered)**: relief decisions currently read ground-truth need;
+  once D1 lights, the giver must learn of the famine through beliefs — considerOrientation's
+  need read gains the belief-side variant where beliefsActive. Otherwise aid arrives faster
+  than news, an incoherence. The story it buys: "word of the famine reached the ally three
+  weeks late" — aid lag becomes referencable causality.
+- *Physical ledgers*: shipments, armies, convoys are TRUTH and are never delayed — only
+  information ABOUT them. The DM's feed stays omniscient; player-view rumors gain distance
+  texture. (The line: D1 delays actor epistemics, never physics, never the DM.)
+
+**D2 scaling law ×**
+- *Conservation*: caps defer, never delete (stated as law above) — Σ invariants survive scale.
+- *E0 drama classes*: boom/war minting already tempo-classed ⇒ D2a covers their frequency
+  coherently; no second governor.
+- *Proposals/DM authority*: eviction-is-receipted closes tick-core-2 INSIDE this design — the
+  forcing modes' authority contract survives realm growth.
+- *Emergent preserved*: entrepôts, hegemonies, and trade arteries remain GEOGRAPHIC phenomena —
+  scaling never injects randomness, only widens budgets sublinearly.
+
+**D3 doctrine courses ×**
+- *Settlement politics* — the glue typology already has a 'doctrine' glue kind: a crown pressing
+  doctrine past its cliff is exactly what doctrine-glued blocs form around/against —
+  **COUPLING (light)**: the bloc-formation interest read gains the crown's doctrine-course
+  commitment as one bounded input (±, §G-clamped). *Emergent*: the zealot king's court splits.
+- *Conversion crisis machinery*: a forced doctrinal reversal can mint the existing conversion
+  crisis — reuse, no new event kind.
+- *Premium seam*: doctrine courses reference ACTIVATED deities only; latent pantheon never
+  named in any course key or receipt (law 3 holds by construction — course keys use deityRef
+  of activated cults only).
+- *Custom content*: custom deities carry course keys exactly like catalog ones (facet law ✓).
+- *Succession*: re-rolls the doctrine cliff — the new-ruler conversion falls out free
+  (*emergent*, pinned).
+
+**D4 hegemony + fear_of_dominance ×**
+- *Extraction/upswing*: empire extracts ⇒ upswings ⇒ believed strength rises ⇒ fear rises ⇒
+  balancing coalitions form ⇒ expansion prices in resistance — **the missing brake loop closes**;
+  every link receipted, the whole chain referencable.
+- *Corruption*: a corrupt empire's extraction leaks (existing) while its FACADE of strength
+  still frightens neighbors — *emergent*: hollow empires are over-feared until exposure.
+- *Navy* — **COUPLING (discovered)**: the aggregate-strength share MUST include navalStrength
+  (a maritime hegemon frightens ports it can blockade) — the read sums land + naval capability.
+- *Lifecycle satellites*: steadings are PROPERTY, not vassals — excluded from subordinate-tie
+  counting (no double-counting a parent's own orbit).
+- *Convergence/intervention*: fear_of_dominance joins the counter-intervention (DENIAL) motive
+  weighting as one bounded input — *the coalition that intervenes against the conqueror*.
+- *Treaties/defection*: sphere strain reads existing term-burden machinery; a cracking sphere
+  is visible through the same treaty document the DM already reads.
+- *Peace reasons*: feeds spheres_understanding (existing type) — fear can END wars too
+  (détente between rival spheres), honoring the unification law: the same input, both signs.
+
+**D5 lifespan-scaled memory ×**
+- *The contracts/memories distinction* — treaties, obligations, and maturity schedules are
+  SEAT-HELD CONTRACTS and never scale with lifespan; grievances and relationship warmth are
+  PEOPLE-HELD MEMORIES and do. This is the SAME distinction the politics glue typology already
+  draws (seat-held concession vs people-held loyalty) — the ontology rhymes with itself.
+- *Both signs scale* (unification law): elves remember kindness as long as grievance —
+  relationship warmth decay scales by the same band. Never grievance-only.
+- *Momentum*: memory ≠ stubbornness — reconsideration cliffs stay temperament-derived,
+  NOT lifespan-scaled in v1 (an undying court can still be pragmatic). Recorded refinement
+  door: lifespan-informed thresholds, soak-era, owner-nod.
+- *Anti-stasis*: even `undying` erodes via reconciliation events (weights never walls — no
+  absorbing grudge). The climb-down/mediation lane is the immortal court's only forgetting —
+  *emergent*: peace with elves must be EARNED, never waited out. Referencable.
+- *Generation law*: the facet is minted at generation/canonize from config-side data; the tick
+  reads the facet — generation never reads tick state (law intact).
+- *D1 composition*: a long-memory settlement with distance-stale news holds OLD grievances
+  refreshed by LATE news — coherent (memory holds what arrived; arrival is D1's business).
+
+**STANDING PRACTICE (adopted for this program; recommended for the constitution):** every
+future design freezes WITH its coherence matrix — the design-time census of every ontology
+system it touches, couplings named, emergents predicted. Round 2's entire seam-defect class is
+what this practice prevents. (Constitutionalizing it as §0.2-7 is the owner's call — this doc
+adopts it as precedent.)
 
 ## SEQUENCING + BUDGET
 W-R2-DEPTH lands post-merge, after W-R2-SEAMS (D3/D4 touch momentum/upswing kernels being
