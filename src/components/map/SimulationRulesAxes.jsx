@@ -4,7 +4,7 @@ import {
   worldProgressionOf,
 } from '../../domain/worldPulse/simulationRules.js';
 import { domainState } from '../../domain/worldPulse/simulationProfile.js';
-import { BODY, BORDER2, CARD, FS, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, BORDER2, CARD, FS, GOLD_BG, INK, MUTED, R, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 /*
@@ -305,6 +305,101 @@ export function DomainRows({ draft, advanceBlocked, onSetDomain }) {
                 />
               </div>
             </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── The nine engine-wave gates (§11 / W-R2-LIGHT owner ruling) ───────────────
+// The post-close anti-stasis systems, exposed individually. Each line is a
+// FICTIONAL ASSUMPTION about what the world does on its own (THE COPY LAW) — the
+// compendium glossary carries the deep definition, so this NAMES the assumption
+// and never re-teaches the mechanism. Each entry: [flag, label, assumption, dep?].
+// `dep` gates the toggle honestly (the axes-lock idiom): 'war' waves need War lit
+// (they are AND-gated on warLayerEnabled in the engine), so they render disabled
+// with when-it-wakes copy until War is on; 'map' (Sea lanes) stays togglable but
+// carries an honest "needs a canonized map" note (the flag waits, like the
+// perfect_delayed news rung). A custom config carries none of these keys ⇒ every
+// toggle reads off by default (absent ⇒ the gate's `=== true` is false).
+const ENGINE_WAVES = [
+  ['momentumEnabled', 'Momentum', 'Great undertakings gather their own momentum, and resist being lightly undone.'],
+  ['navalEnabled', 'Sea lanes', 'Fleets carry war and trade across open water.', 'map'],
+  ['interventionEnabled', 'Intervention', 'Foreign powers take sides in other realms’ succession fights.', 'war'],
+  ['settlementLifecycleEnabled', 'New & lost steadings', 'Fresh settlements are founded, and broken ones are abandoned or resettled.'],
+  ['peaceEngineEnabled', 'Causes of war and peace', 'Wars begin and end for stated reasons — and can be talked back down.', 'war'],
+  ['supplyWebWarfareEnabled', 'Supply-line war', 'Armies strangle each other’s supply lines, not only their walls.', 'war'],
+  ['upswingArcsEnabled', 'Recovery and boom', 'Ruined places rebuild, and fortunate ones flower into boom years.'],
+  ['resourceDynamicsEnabled', 'Resource discovery', 'New veins are struck, and worked-out ones run dry.'],
+  ['constructiveFlowsEnabled', 'Aid and generosity', 'Neighbours send aid, credit, and refuge when crisis strikes.'],
+];
+
+const WAVE_WAR_LOCK = 'A wartime dynamic: light War first, and this wakes with it.';
+const WAVE_MAP_NOTE = 'Sea routes wake once you canonize a map for this realm.';
+
+/**
+ * The engine-wave gates section — nine individual toggles over the virtual wave
+ * flags (W-R2-LIGHT). Off holds a system still (the world simply stops doing it on
+ * its own); nothing is ever deleted. War-coupled waves lock until War is lit.
+ */
+export function EngineWaves({ draft, advanceBlocked, spatialMapped = false, onSetField }) {
+  const warLit = draft.warLayerEnabled === true;
+  return (
+    <div style={{ display: 'grid', gap: SP.sm }}>
+      <div style={{ display: 'grid', gap: 2 }}>
+        <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
+          Engine waves
+        </div>
+        <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.4 }}>
+          The deep systems that make a realm feel alive. Turning one off never deletes anything — the world just stops doing it on its own.
+        </div>
+      </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
+        gap: SP.sm,
+      }}>
+        {ENGINE_WAVES.map(([key, label, assumption, dep]) => {
+          const warLocked = dep === 'war' && !warLit;
+          const disabled = advanceBlocked || warLocked;
+          const checked = draft[key] === true;
+          const note = warLocked
+            ? WAVE_WAR_LOCK
+            : (dep === 'map' && !spatialMapped ? WAVE_MAP_NOTE : assumption);
+          return (
+            // eslint-disable-next-line jsx-a11y/label-has-for
+            <label
+              key={key}
+              data-testid={`wave-${key}`}
+              title={note}
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 8,
+                padding: '8px 10px',
+                border: `1px solid ${BORDER2}`,
+                borderRadius: R.md,
+                background: checked ? GOLD_BG : CARD,
+                cursor: disabled ? 'default' : 'pointer',
+                opacity: disabled ? 0.7 : 1,
+              }}
+            >
+              <input
+                type="checkbox"
+                aria-label={label}
+                checked={checked}
+                disabled={disabled}
+                onChange={event => { if (!disabled) onSetField(key, event.target.checked); }}
+                style={{ marginTop: 2 }}
+              />
+              <div style={{ minWidth: 0, display: 'grid', gap: 2 }}>
+                <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>{label}</span>
+                <span style={{ color: warLocked ? MUTED : BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 750, lineHeight: 1.35 }}>
+                  {note}
+                </span>
+              </div>
+            </label>
           );
         })}
       </div>

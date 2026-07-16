@@ -8,7 +8,7 @@ import {
   worldProgressionOf,
 } from '../../domain/worldPulse/simulationRules.js';
 import { validateSimulationProfile } from '../../domain/worldPulse/simulationProfile.js';
-import { DomainRows, WorldLawAxes } from './SimulationRulesAxes.jsx';
+import { DomainRows, EngineWaves, WorldLawAxes } from './SimulationRulesAxes.jsx';
 import {
   BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
 } from '../theme.js';
@@ -482,6 +482,15 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             draft={draft}
             advanceBlocked={advanceBlocked}
             onSetDomain={setDomainEnabled}
+          />
+          {/* ── The nine engine-wave gates (W-R2-LIGHT): the deep anti-stasis
+              systems the world-alive presets light, exposed individually so a DM
+              can compose their own world. War-coupled waves lock until War is lit. */}
+          <EngineWaves
+            draft={draft}
+            advanceBlocked={advanceBlocked}
+            spatialMapped={!!campaign?.worldState?.spatialCanonVersion}
+            onSetField={setField}
           />
 
           {/* ── DETAIL altitude: the propagation/intensity/migration selects and

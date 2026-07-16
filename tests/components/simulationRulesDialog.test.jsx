@@ -113,6 +113,48 @@ describe('SimulationRulesDialog', () => {
     expect(onClose).not.toHaveBeenCalled();
   });
 
+  // W-R2-LIGHT: the Engine Waves section exposes the nine engine-wave gates
+  // individually. Picking a world-alive preset lights them; a custom/default config
+  // reads them all off; and the war-coupled waves lock until War is lit (the
+  // axes-lock idiom — closing sim-cohesion-counterparts-4's "switch that no surface
+  // renders" half, so the realmManifest refusal prose now points at a real control).
+  const WAVE_LABELS = [
+    'Momentum', 'Sea lanes', 'Intervention', 'New & lost steadings',
+    'Causes of war and peace', 'Supply-line war', 'Recovery and boom',
+    'Resource discovery', 'Aid and generosity',
+  ];
+
+  test('the Engine Waves section lights all nine when Full Simulation is picked', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={vi.fn()}
+    />);
+    // A default (realistic_regional) config carries no wave flags ⇒ every toggle off.
+    expect(screen.getByRole('checkbox', { name: 'Momentum' }).checked).toBe(false);
+    // Full Simulation lights all nine (warLayer is lit too, so the war-coupled ones unlock).
+    fireEvent.click(screen.getByText('Full Simulation'));
+    for (const label of WAVE_LABELS) {
+      const box = screen.getByRole('checkbox', { name: label });
+      expect(box.checked, `${label} lit`).toBe(true);
+      expect(box.disabled, `${label} enabled`).toBe(false);
+    }
+  });
+
+  test('war-coupled waves lock until War is lit (honest axes-lock)', () => {
+    render(<SimulationRulesDialog
+      open
+      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
+      onClose={vi.fn()}
+    />);
+    // warLayer is off in the default config ⇒ the three AND-gated waves are locked…
+    for (const label of ['Intervention', 'Causes of war and peace', 'Supply-line war']) {
+      expect(screen.getByRole('checkbox', { name: label }).disabled, `${label} locked`).toBe(true);
+    }
+    // …while a non-coupled wave stays freely togglable.
+    expect(screen.getByRole('checkbox', { name: 'Momentum' }).disabled).toBe(false);
+  });
+
   test('does not block the rules edit for a DIFFERENT campaign advancing', async () => {
     actions.updateCampaignSimulationRules.mockResolvedValue({});
     actions.advanceInFlight = ['camp-other'];
