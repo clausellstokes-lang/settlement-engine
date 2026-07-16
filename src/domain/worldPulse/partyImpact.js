@@ -361,12 +361,18 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
       // kept its slot, seat, and NPC-agency eligibility. [worldpulse-core-2]
       const target = snapshot?.byId?.get?.(String(action.settlementId));
       const settlement = target?.settlement;
+      // content-immersion-r2-5: resolve the removed NPC's display NAME for the
+      // visible reason pill — a raw `npc_7` id in the fiction register reads as
+      // debug output. Falls back to the id when the NPC can't be matched.
+      let removedName = String(action.npcId);
       if (settlement && Array.isArray(settlement.npcs)) {
         const want = stablePart(action.npcId);
         const idx = settlement.npcs.findIndex((/** @type {{ id?: unknown, name?: unknown }} */ n) =>
           stablePart(n?.id) === want || stablePart(n?.name) === want
           || String(n?.id) === String(action.npcId) || String(n?.name) === String(action.npcId));
         if (idx >= 0) {
+          const nm = settlement.npcs[idx]?.name;
+          if (nm) removedName = String(nm);
           settlementOverrides.set(String(action.settlementId), {
             ...settlement,
             npcs: settlement.npcs.filter((/** @type {unknown} */ _n, /** @type {number} */ i) => i !== idx),
@@ -384,7 +390,7 @@ export function buildPartyImpactOutcomes(action, { worldState, snapshot, tick = 
           status: 'stable',
           triggeredAt: { tick, sourceEventType: 'PARTY_ACTION', sourceEventTargetId: action.npcId },
         }),
-        reasons: [`${action.npcId} is removed from play; succession is unresolved.`],
+        reasons: [`${removedName} is removed from play; succession is unresolved.`],
       }));
       if (cur) {
         outcomes.push(baseOutcome(action, 'remove_npc_state', {
