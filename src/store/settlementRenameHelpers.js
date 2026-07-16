@@ -112,6 +112,12 @@ export function renameSettlementImpl(get, set, id, newName) {
         ...(isCanon ? { campaignState, timestamp: now } : {}),
       };
       persist = {
+        // The row `name` COLUMN — the in-memory entry sets name:trimmed above, but
+        // the persist partial omitted it, so the cloud row kept the OLD name forever
+        // and the library list / campaign folders / blob-less meta list all showed
+        // the pre-rename name after reload (store-hooks-state-5 / state-lifecycle-1).
+        // supabaseUpdate maps partial.name -> updates.name only when present.
+        name: trimmed,
         settlement: cloneJson(nextSettlement),
         ...(isCanon ? { campaignState: cloneJson(campaignState), timestamp: now } : {}),
       };

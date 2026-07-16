@@ -28,6 +28,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { FS, swatch } from '../theme.js';
 import { useStore } from '../../store';
+import { mapDirtyFingerprint } from './mapDirtyFingerprint.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
@@ -49,28 +50,10 @@ function formatRelative(savedAt) {
   return `${d}d ago`;
 }
 
-/** Content-aware fingerprint of the parts of mapState the user can edit. Folds
- *  in placement coordinates/ids AND annotation content (label/marker/forest
- *  geometry + text), so a drag-move or a rename flips it — a count-only key
- *  caught neither and left the chip stuck on "Saved" over a dirty map. Cheap
- *  enough to run on each render without a deep equality. */
-function fingerprint(m) {
-  const s = m || {};
-  const placements = Object.entries(s.placements || {})
-    .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
-    .map(([k, p]) => `${k}:${p?.x},${p?.y},${p?.cellId ?? ''},${p?.settlementId ?? ''}`)
-    .join(',');
-  const labels = (s.labels || [])
-    .map(l => `${l?.id}:${l?.x},${l?.y},${l?.rotation ?? 0},${l?.fontSize ?? ''},${l?.color ?? ''},${l?.fontFamily ?? ''},${l?.text ?? ''}`)
-    .join(';');
-  const markers = (s.markers || [])
-    .map(mk => `${mk?.id}:${mk?.x},${mk?.y},${mk?.icon ?? ''},${mk?.color ?? ''},${mk?.title ?? ''},${mk?.note ?? ''}`)
-    .join(';');
-  const forests = (s.forests || [])
-    .map(f => `${f?.id}:${f?.x},${f?.y},${f?.radius ?? ''},${f?.density ?? ''},${f?.treeStyle ?? ''}`)
-    .join(';');
-  return `${placements}|${labels}|${markers}|${forests}|${s.customBackdrop?.imageUrl || ''}`;
-}
+// The content-aware dirty fingerprint now lives in the shared mapDirtyFingerprint
+// module (components-map-1) so this chip and the autosave hook read the SAME
+// source of truth and can never disagree again.
+const fingerprint = mapDirtyFingerprint;
 
 export default function AutoSaveChip({ saving = false }) {
   const activeCampaignId = useStore(s => s.activeCampaignId);

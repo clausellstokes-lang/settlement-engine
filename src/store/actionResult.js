@@ -70,6 +70,9 @@
  * @property {string|null} userMessage             toast/banner copy, null = silent
  * @property {{code: string|null, detail?: string, message: string}|null} [veto]  Composer V2 §2 — the handler-veto refusal
  *                                                 (ok:false + veto = the world refused; nothing committed)
+ * @property {boolean} [queued]                    store-hooks-state-1 — a clock-bound queue outcome: `false` on a typed
+ *                                                 queue refusal (advance in flight / parked) so the composer branches
+ *                                                 on it instead of reading the refusal as a silent success
  */
 
 /**
@@ -129,5 +132,11 @@ export function makeActionResult(action, fields = {}) {
     analyticsEvent: fields.analyticsEvent ?? null,
     userMessage: fields.userMessage ?? null,
     ...(fields.veto !== undefined ? { veto: fields.veto } : {}),
+    // Clock-bound queue outcome (store-hooks-state-1): a typed queue refusal
+    // (advance_in_flight / advance_paused) rides through applyEvent as an
+    // ok:false ActionResult carrying `queued:false`, so the composer can branch
+    // on it (keep the form, surface the reason) instead of treating the refusal
+    // as a silent success.
+    ...(fields.queued !== undefined ? { queued: fields.queued } : {}),
   };
 }

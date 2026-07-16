@@ -156,14 +156,49 @@ describe('commitPendingEdits persists a queued town rename (§10.4 fifth gap)', 
   let store;
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
-  test('queued rename-settlement commits, persists, and survives reload', async () => {
+  test('queued rename-settlement commits, persists, and survives reload — incl. the row `name` COLUMN', async () => {
     store.getState().queueEdit('rename-settlement', { newName: 'Newhaven' });
     store.getState().commitPendingEdits();
 
     expect(store.getState().settlement.name).toBe('Newhaven');       // live
-    expect(persistedEntry(store).settlement.name).toBe('Newhaven');  // in-memory entry synced
+    expect(persistedEntry(store).settlement.name).toBe('Newhaven');  // in-memory entry blob synced
+    // state-lifecycle-1 / store-hooks-state-5: the ENTRY-LEVEL name (what the
+    // library list, campaign folders, and the blob-less meta list read via
+    // match?.name / row.name) — the exact surface that ghosted before the fix.
+    expect(persistedEntry(store).name).toBe('Newhaven');
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());  // cloud write requested
-    expect(reloadInto(persistedEntry(store)).name).toBe('Newhaven');  // survives reload
+    // The DURABLE proof: the cloud partial carries the `name` column, so a real
+    // reload-from-cloud (which reads row.name, NOT the blob) shows the new name.
+    const nameWrite = saves.update.mock.calls.find(c => c[0] === SAVE_ID && c[1]?.name !== undefined);
+    expect(nameWrite?.[1].name).toBe('Newhaven');
+    expect(reloadInto(persistedEntry(store)).name).toBe('Newhaven');  // survives blob reload
+  });
+
+  test('canon town rename persists the `name` column AND appends a RENAME_SETTLEMENT flavor entry', async () => {
+    // Route-through-renameSettlementImpl also gives the queue path the designed
+    // canon behavior: a canon rename is recorded as a flavor timeline line. Mark
+    // BOTH the live phase and the saved entry canon so it takes its canon arm.
+    store.setState(s => {
+      s.phase = 'canon';
+      s.eventLog = [];
+      const idx = s.savedSettlements.findIndex(x => x.id === SAVE_ID);
+      s.savedSettlements[idx] = {
+        ...s.savedSettlements[idx],
+        campaignState: { phase: 'canon', eventLog: [], systemState: {}, editedAt: null },
+      };
+    });
+
+    store.getState().queueEdit('rename-settlement', { newName: 'Kingsford' });
+    store.getState().commitPendingEdits();
+
+    expect(persistedEntry(store).name).toBe('Kingsford');
+    expect(persistedEntry(store).settlement.name).toBe('Kingsford');
+    await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
+    const nameWrite = saves.update.mock.calls.find(c => c[0] === SAVE_ID && c[1]?.name === 'Kingsford');
+    expect(nameWrite).toBeTruthy();
+    // The canon flavor entry rides the persisted campaignState eventLog.
+    const log = persistedEntry(store).campaignState.eventLog;
+    expect(log.some(e => e.type === 'RENAME_SETTLEMENT')).toBe(true);
   });
 
   test('parity: a queued NPC rename AND town rename in one commit both survive', async () => {

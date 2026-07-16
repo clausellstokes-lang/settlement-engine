@@ -17,6 +17,7 @@ import {
 import {
   mintRealmVerbProposal, applyWorldPulseProposal, applyWorldPulseOutcomes,
 } from '../../src/domain/worldPulse/applyWorldPulse.js';
+import { updateProposalStatus } from '../../src/domain/worldPulse/worldState.js';
 import { declareCasus, warReasonsFor } from '../../src/domain/worldPulse/warReasons.js';
 import { sueForPeaceOrder } from '../../src/domain/worldPulse/peaceReasons.js';
 import { advanceIntervention } from '../../src/domain/worldPulse/convergence.js';
@@ -344,5 +345,56 @@ describe('THE RE-MINT CLOSED: intervention_ordered mints a pending proposal unde
     expect(rec.strength).toBeGreaterThan(0);
     expect(['incumbent', 'challenger']).toContain(rec.side);
     expect(typeof rec.sinceTick).toBe('number');
+  });
+});
+
+describe('outcome-id args fold — a decided proposal survives a same-verb re-stage (composer-realm-verbs-4)', () => {
+  const snapshot = { settlements: [{ id: 'a', settlement: SAVES[0].settlement }, { id: 'b', settlement: SAVES[1].settlement }] };
+  const mk = (/** @type {any} */ args) => buildRealmVerbOutcome({ verb: 'DECLARE_CASUS', args, worldState: {}, snapshot, tick: 4 });
+
+  it('different args for the SAME verb/actor/tick mint DISTINCT outcome ids', () => {
+    const o1 = mk({ fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8 });
+    const o2 = mk({ fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.4 }); // an edited severity
+    expect(o1.ok && o2.ok).toBe(true);
+    expect(o1.outcome.id).not.toBe(o2.outcome.id);
+    // The id keeps its (verb, actor, tick) prefix + a 6-char stable arg hash.
+    expect(o1.outcome.id).toMatch(/^realm_verb\.DECLARE_CASUS\.a\.4\.[0-9a-z]{6}$/);
+  });
+
+  it('identical args re-mint the SAME id (an unedited re-stage coalesces — no ledger bloat)', () => {
+    const args = { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8 };
+    expect(mk(args).outcome.id).toBe(mk({ ...args }).outcome.id);
+  });
+
+  it('arg key order does not change the id (stable sort)', () => {
+    const a1 = mk({ fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8 });
+    const a2 = mk({ severity01: 0.8, type: 'grievance', toId: 'b', fromId: 'a' });
+    expect(a1.outcome.id).toBe(a2.outcome.id);
+  });
+
+  it('a DECIDED proposal is NOT overwritten when an EDITED order is re-staged in the same tick', () => {
+    const campaign = campaignFixture();
+    const r1 = mintRealmVerbProposal({
+      campaign, saves: SAVES, verb: 'DECLARE_CASUS',
+      args: { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.8 },
+      now: '2026-01-01T00:00:00.000Z',
+    });
+    expect(r1.ok).toBe(true);
+    const p1 = r1.result.worldState.proposals[0];
+    // Decide it (dismiss) so it is no longer pending — the actor-dedup guard
+    // (pendingActorMajorFor) only blocks PENDING orders, so a re-stage is allowed.
+    const ws2 = updateProposalStatus(r1.result.worldState, p1.id, 'dismissed');
+    const r2 = mintRealmVerbProposal({
+      campaign: { ...campaign, worldState: ws2 }, saves: SAVES, verb: 'DECLARE_CASUS',
+      args: { fromId: 'a', toId: 'b', type: 'grievance', severity01: 0.4 }, // the DM edited the severity
+      now: '2026-01-02T00:00:00.000Z',
+    });
+    expect(r2.ok).toBe(true);
+    const props = r2.result.worldState.proposals;
+    expect(props).toHaveLength(2); // both survive — the edited re-stage did NOT upsert over the decided record
+    const decided = props.find((/** @type {any} */ p) => p.id === p1.id);
+    expect(decided.status).toBe('dismissed'); // the decided record's history is intact
+    const fresh = props.find((/** @type {any} */ p) => p.id !== p1.id);
+    expect(fresh.status).toBe('pending');
   });
 });

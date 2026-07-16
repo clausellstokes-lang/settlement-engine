@@ -511,17 +511,23 @@ export const createSettlementSlice = (set, get) => ({
             }
             break;
           case 'rename-settlement': {
-            // §10.4: the inline mutation touched only the live store, so a
-            // queued town rename GHOSTED on reload — and renameSettlement (the
-            // persisting helper) has no direct caller, so this queue path is the
-            // only town-rename surface. Mirror the rename-npc dispatch above:
-            // mutate live, then persist through the shared edit-persist (no-ops
-            // on an unsaved draft, which correctly needs no cloud write). Without
-            // this, committing a queued town rename ghosts while a queued NPC
-            // rename (same commit) survives.
-            let renamed = false;
-            set(s => { if (s.settlement) { s.settlement.name = edit.payload?.newName; renamed = true; } });
-            if (renamed) get().persistActiveSaveEdit?.();
+            // §10.4 + state-lifecycle-1 / store-hooks-state-5: route through the
+            // ONE town-rename writer (renameSettlementImpl). The old inline path
+            // mutated only the live blob and persisted {settlement, campaignState}
+            // via persistActiveSaveEdit — it never wrote the row `name` COLUMN, so
+            // the renamed name ghosted on the library list, campaign folders, and
+            // the blob-less meta list (settlement:null — no fallback) after reload,
+            // and broke supabaseListActiveByName partner resolution. renameSettlement
+            // now persists {settlement, name, ...}, so one writer keeps the blob AND
+            // the envelope in lockstep. (On a SAVED active settlement only — an
+            // unsaved draft has no cloud row, so it just renames the live blob.)
+            const activeId = get().activeSaveId;
+            const newName = edit.payload?.newName;
+            if (activeId != null) {
+              state.renameSettlement(activeId, newName);
+            } else if (newName) {
+              set(s => { if (s.settlement) s.settlement.name = String(newName); });
+            }
             break;
           }
           // Unreachable by contract: queueEdit admits only COMMITTABLE_EDIT_KINDS,
@@ -1243,10 +1249,27 @@ export const createSettlementSlice = (set, get) => ({
       state.activeSaveId = null;
     }),
 
-  removeSavedSettlement: (id) =>
+  removeSavedSettlement: (id) => {
+    // state-lifecycle-2: a deleted member must also LEAVE every campaign that
+    // held it — otherwise its id lingers in campaign.settlementIds (+ mapState
+    // placements) forever (every reader is defensively filtered, so it is an
+    // invisible leak), and its queued world-clock intentions survive until the
+    // next tick silently destroys them. removeFromCampaign owns that prune
+    // (membership + queued intentions + persist); run it for every holding
+    // campaign BEFORE dropping the save. (This is the store delete chokepoint —
+    // AccountPage's bulk delete routes through here.)
+    const remove = get().removeFromCampaign;
+    if (typeof remove === 'function') {
+      for (const c of get().campaigns || []) {
+        const holdsMember = (c.settlementIds || []).some(sid => String(sid) === String(id));
+        const holdsQueued = (c.worldState?.pendingEvents || []).some(e => String(e.saveId) === String(id));
+        if (holdsMember || holdsQueued) remove(c.id, id);
+      }
+    }
     set(state => {
       state.savedSettlements = state.savedSettlements.filter(s => s.id !== id);
-    }),
+    });
+  },
 
   updateSavedSettlement: (id, partial) =>
     set(state => {
@@ -1689,6 +1712,27 @@ export const createSettlementSlice = (set, get) => ({
         && state.isSettlementClockBound(activeSaveId)) {
       const queued = state.queueSettlementEvent(activeSaveId, event);
       if (queued) {
+        // A typed refusal (advance_in_flight / advance_paused) rides through as
+        // `{ queued:false, reason }`. Surface it as an ok:false ActionResult so
+        // the composer keeps the form and shows the reason (store-hooks-state-1)
+        // — the old success-shaped return reset the form (dropping the DM's
+        // order) and even raised the stale-narrative modal. The typed `reason`
+        // travels on `before` so the lazy composer maps it to ADVANCE_ERROR_TEXT
+        // prose (the store stays free of first-paint UI strings).
+        if (queued.queued === false) {
+          return makeActionResult('applyEvent', {
+            ok: false,
+            queued: false,
+            before: {
+              eventType: event?.type ?? null,
+              targetId: event?.targetId ?? null,
+              phase: state.phase,
+              activeSaveId: activeSaveId ?? null,
+              reason: queued.reason ?? null,
+            },
+            after: null,
+          });
+        }
         set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
         return queued;
       }
@@ -1932,12 +1976,22 @@ export const createSettlementSlice = (set, get) => ({
     }
     const logEntries = [];
     const refusals = [];
+    let queueRefused = false;
     for (const event of events) {
       const entry = get().applyEvent(event);
       // A vetoed event refused (Composer V2 §2) — collect the refusal, apply
       // the rest (order-independent events keep landing, same as validation
       // semantics for the events that DID pass).
       if (entry && entry.ok === false && entry.veto) { refusals.push({ eventId: event?.id, ...entry.veto }); continue; }
+      // A clock-bound queue refusal (store-hooks-state-1): advance in flight or
+      // parked, so nothing queued. Classify as a refusal — never a phantom
+      // logEntry that would make `queuedOnly` false and mislead the batch cart —
+      // and flag it so the cart KEEPS the staged batch instead of clearing it.
+      if (entry && entry.ok === false && entry.queued === false) {
+        refusals.push({ eventId: event?.id, reason: entry.before?.reason || 'refused' });
+        queueRefused = true;
+        continue;
+      }
       if (entry) logEntries.push(entry);
     }
     set(s => { s.pendingBatchPreview = null; });
@@ -1945,7 +1999,10 @@ export const createSettlementSlice = (set, get) => ({
     // markers carry `queued:true`); nothing mutated, so callers should not raise
     // the stale-narrative notice.
     const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
-    return { ok: true, warnings: refusals, logEntries, queuedOnly };
+    // `queueRefused` tells the batch cart that a clock-bound refusal blocked at
+    // least one event (advance in flight / parked); when NOTHING landed the cart
+    // must keep the staged batch and surface the reason (store-hooks-state-1).
+    return { ok: true, warnings: refusals, logEntries, queuedOnly, queueRefused };
   },
 
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),

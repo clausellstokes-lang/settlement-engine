@@ -51,6 +51,7 @@ export function applyComposerIntent(intent, s) {
     powerCause: s.setPowerCause, tradeDirection: s.setTradeDirection,
     swapWithNpcId: s.setSwapWithNpcId, reliefMagnitude: s.setReliefMagnitude,
     tierDirection: s.setTierDirection, deityRef: s.setDeityRef, deityMode: s.setDeityMode,
+    cultRemoveRef: s.setCultRemoveRef,
     npcFlaw: s.setNpcFlaw, npcTemperament: s.setNpcTemperament, npcGoals: s.setNpcGoals,
     npcConstraint: s.setNpcConstraint, npcSecret: s.setNpcSecret,
   };
@@ -59,6 +60,9 @@ export function applyComposerIntent(intent, s) {
   }
   if (f.tradeEntrepot != null) s.setTradeEntrepot(!!f.tradeEntrepot);
   if (f.partyCaused != null) s.setPartyCaused(!!f.partyCaused);
+  // The stressorPick twin (components-dossier-library-7) is an OBJECT, not a
+  // string — seeded whole so the re-staged event keeps its authored label + key.
+  if (f.stressorPick != null) s.setStressorPick(f.stressorPick);
   // §10 IDENTITY: editing a queued intention keeps its compose-session id;
   // re-staging replaces the queue entry in place (never re-queues at the end).
   if (intent.editQueue?.queueId) {

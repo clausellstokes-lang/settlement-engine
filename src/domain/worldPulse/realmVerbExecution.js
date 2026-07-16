@@ -64,6 +64,28 @@ function round4(v) { return Math.round(v * 10000) / 10000; }
 function asObject(v) { return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Mut} */ (v) : {}; }
 /** @param {string} a @param {string} b */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+/**
+ * A stable short discriminator over an order's ARGS (composer-realm-verbs-4).
+ * The outcome id keyed only (verb, actor, tick), so two DIFFERENT orders of the
+ * same verb by the same actor in one tick — or a dismiss→edit→re-stage — reused
+ * the id and upserted OVER the already-decided proposal, erasing its history.
+ * Folding a hash of the sorted args in gives each distinct order a distinct id
+ * so decided records survive a re-stage; identical re-stages still coalesce.
+ * Deterministic (FNV-1a, the pendingEdits.js shape) — no wall clock, no rng.
+ * @param {Mut} args
+ */
+function stableArgHash(args) {
+  const obj = asObject(args);
+  const parts = [];
+  for (const k of Object.keys(obj).sort(codepoint)) {
+    if (obj[k] === undefined) continue;
+    parts.push(`${k}=${JSON.stringify(obj[k])}`);
+  }
+  const str = parts.join('&');
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+  return h.toString(36).padStart(7, '0').slice(0, 6);
+}
 
 /** Snapshot shim: guarantee a byId Map over the snapshot's settlements items
  * (the proposal-apply snapshot carries settlements[] but no byId).
@@ -149,7 +171,7 @@ export function buildRealmVerbOutcome({ verb, args, worldState, snapshot, tick }
     ok: true,
     predicate,
     outcome: {
-      id: `realm_verb.${verb}.${actorId}.${nowTick}`,
+      id: `realm_verb.${verb}.${actorId}.${nowTick}.${stableArgHash(a)}`,
       candidateType: String(entry.candidateType),
       type: 'realm_verb',
       targetSaveId: actorId,

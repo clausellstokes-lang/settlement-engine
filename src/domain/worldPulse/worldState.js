@@ -595,10 +595,46 @@ export function upsertProposal(worldState, proposal) {
   const current = ensureWorldState(worldState);
   const byId = new Map(current.proposals.map((/** @type {any} */ item) => [item.id, item]));
   byId.set(proposal.id, { ...(byId.get(proposal.id) || {}), ...proposal });
-  return {
-    ...current,
-    proposals: [...byId.values()].slice(-MAX_PROPOSALS),
-  };
+  const all = [...byId.values()];
+  // Under the ring cap: unchanged — byte-identical to the historical
+  // `.slice(-MAX_PROPOSALS)` (a no-op when there are ≤ MAX_PROPOSALS records).
+  if (all.length <= MAX_PROPOSALS) {
+    return { ...current, proposals: all };
+  }
+  // Over the cap. The historical blind `.slice(-MAX_PROPOSALS)` dropped the
+  // OLDEST records regardless of status — so under a forcing mode (dm_only /
+  // recommendations), a long advance minting hundreds of proposals could evict
+  // a PENDING decision the DM never saw, with no trace (worldpulse-tick-core-2).
+  // Evict in a status-aware, always-receipted order instead.
+  const stamp = proposal?.updatedAt || proposal?.createdAt || wallClockNow();
+  let overflow = all.length - MAX_PROPOSALS;
+  // Pass 1 — prune RESOLVED records first (any non-pending status: applied /
+  // dismissed / expired / refused). They were already surfaced when they
+  // resolved, so their eviction is lossless.
+  const afterResolved = [];
+  for (const p of all) {
+    if (overflow > 0 && p && p.status && p.status !== 'pending') { overflow -= 1; continue; }
+    afterResolved.push(p);
+  }
+  if (overflow <= 0) {
+    return { ...current, proposals: afterResolved };
+  }
+  // Pass 2 — a forcing-mode PENDING flood still exceeds the ring. The OLDEST
+  // pending overflow is EXPIRE-TO-DECLINED: a visible status transition
+  // (mirroring expireStaleActorMajors) so the DM sees a declined record instead
+  // of a silently-vanished pending one. The stamp IS the receipt; the record is
+  // retained as a terminal 'expired' entry, so it becomes the first pruned by
+  // Pass 1 on the next upsert — the ring stays bounded (≈ MAX_PROPOSALS, plus
+  // the recycling tombstone). Cap-raising / √N scaling for forcing modes is
+  // W-R2-DEPTH's D2c — out of scope here; this is only the receipted eviction.
+  const declined = afterResolved.map((p) => {
+    if (overflow > 0 && p && p.status === 'pending') {
+      overflow -= 1;
+      return { ...p, status: 'expired', expiredAt: stamp, updatedAt: stamp, evictionReason: 'ring_overflow' };
+    }
+    return p;
+  });
+  return { ...current, proposals: declined };
 }
 
 /**
