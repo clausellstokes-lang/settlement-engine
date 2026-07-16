@@ -167,6 +167,23 @@ verbatim user creations are the user's IP and never do. k-floors per the A2 prec
 (50/200). BYOK §3 (never logged) governs keys and raw provider traffic; consented seam
 events remain opt-in for BYOK users like everyone else.
 
+OWNER CLARIFICATION (2026-07-16 evening: theme-level extrapolation — "themes related to
+Sci-fi or something more specific within… not too concerned about interpretability at
+this stage… more so the organized data collection… fine with simply putting the data into
+an artificial intelligence to extrapolate"): three binding consequences. (1) **THE THEME
+DICTIONARY** — a generated, VERSIONED, HIERARCHICAL genre→subtheme taxonomy (the A2
+dictionary pattern), multi-tagged onto every authoring event AT COMPILE TIME by the intent
+compiler (retroactive theming is impossible where raw text is not retained — mint the tag
+when the text is in hand). (2) **COLLECT FINE, AGGREGATE LATE** (the storage law):
+consented planes retain EVENT-GRAIN records with stable schemas — never rollups-only;
+today's questions must not be baked into storage, because the owner's stated analysis mode
+is AI-over-organized-data at a later date; interpretability is deliberately deferred to
+analysis time. (3) **ACCESS TIERS**: the owner queries/exports both consented planes
+internally (named purposes); other worldbuilders receive only the Aggregate Interest
+Atlas exports; deep slices publish externally only where the population clears the
+k-floor (early suppression of narrow slices is the architecture working, not data loss —
+the grain is still collected).
+
 **COUPLING 2 — THE WORLD-HEALTH METRIC SUITE.** The SOAK_PLAN's 10 PASS criteria are
 refactored as a reusable EVALUATOR LIBRARY with two clients: (a) master batch certification —
 the soak as scheduled — and (b) per-account STREAMING health telemetry. A user's knob/pack
