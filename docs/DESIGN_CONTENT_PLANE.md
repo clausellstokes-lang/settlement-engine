@@ -49,6 +49,44 @@ they NEVER add entity classes, movers, or physics.** New physics is master-syste
 (owner-only, forever). This boundary is what makes a user's sci-fi world COHERENT — it runs on
 the same audited laws — and what makes it buildable at all.
 
+## 1b. ONTOLOGY EXTENSION TIERS (owner amendment 2026-07-16: "can we have custom content
+## ontology additions or amendments as well?" — yes, through three mechanisms, one wall)
+
+**MECHANISM 1 — COMPOSITION (the default):** most requested "new ontology" is existing classes
+wearing new facets — a megacorporation = faction-network + institution holdings + hegemony
+sphere + a 'corporate' facet. The compiler's mapping duty (S4's honesty rule) reports exactly
+what mapped mechanically, what is flavor, and what is unsupported. The class algebra covers
+~90% of genre requests; the receipt names the remainder.
+
+**MECHANISM 2 — AMENDMENT POINTS (the middle tier this amendment opens):** wherever consuming
+machinery is TABLE-DRIVEN (the stressor registry + its walker is the proof pattern), users may
+add SUBTYPES: new condition archetypes, treaty-term kinds, facet kinds, relationship flavors,
+drama classes, stressor types. THE PALETTE LAW governs: a subtype's behavior is COMPOSED from
+registered behavioral primitives with bounded parameters — never user-authored logic. Each
+amendment point ships: its registration walker generalized over account registries, its
+primitive palette enumerated, its bounds validated. AMENDMENTS RUN SUBTRACTIVE TOO: packs may
+SUPPRESS master vocabulary per-account (no-gunpowder worlds, no-church worlds) — dormancy-
+shaped, free by construction.
+
+**MECHANISM 3 — STANDING OPERATION PROGRAMS (custom dynamics without custom code):** the
+deepest requests ("a mana tide that waxes and stresses the coast") are served not by user
+movers but by user-authored SCORES the op layer performs: recurring, predicate-triggered
+programs of typed operations (the S7 standing-instruction + StopCondition machinery,
+generalized) — periodic FORCE ops with oscillating dials, deterministic predicates over
+read-models, E0 tempo-governed, receipted with program provenance, replayable because ops are
+data. The world experiences a new process; the engine runs zero new code. Dynamics become
+content.
+
+**THE WALL (never user-space):** new entity classes with novel state shapes; new kernel/mover
+code; amendments to the laws (conservation, state-never-fate, the epistemic layers,
+determinism, the premium seam). Master evolution only. REFUSALS ARE HARVESTED: unsupported-
+ontology requests log (consented) as the owner's roadmap signal — users vote for the next
+master expansion with their rejected dreams.
+
+**Revised pack boundary (supersedes §1's blunt form):** packs may COMPOSE, AMEND AT REGISTERED
+TABLE-DRIVEN POINTS under the palette law, SUPPRESS, and SCORE dynamics through the covenant —
+and may never author state shapes, kernel logic, or law changes.
+
 ## 2. DETERMINISM SURVIVES (the constitutional extension)
 
 The content plane is CONFIG — it lives on the frozen-intent side of the ontology, never the
