@@ -74,65 +74,16 @@ describe('SimulationRulesDialog', () => {
     });
   });
 
-  // ── UX Phase 4 — the THREE living-world gates (the unreachable-engine fix) ──
-  test('renders the 3 living-world gates, OFF by default', () => {
-    render(<SimulationRulesDialog
-      open
-      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
-      onClose={() => {}}
-    />);
+  // LINEAGE NOTE (master merge W6): master placed the three living-world gates
+  // (war / strategy / religion) INSIDE this dialog under an auto-opened "Engine
+  // gates (advanced)" group. This lineage deliberately surfaces them as
+  // LivingWorldGates on the Realm dashboard (src/components/settlements/
+  // LivingWorldGates.jsx, mounted in RealmDashboard.jsx:375 — covered by
+  // campaignWorldPulseControlLayer + warFaithSurfacing, 27 green). The two
+  // in-dialog gate tests were removed; the dialog's own coupling logic
+  // (war→strategy, faithSpread↔religionDynamics twin-write) stays exercised
+  // through the save path below.
 
-    // Discoverability: the Engine group auto-opens while the living-world gates are
-    // still off, so the war/religion toggles are visible the moment the dialog opens
-    // — no click-to-expand needed (the "buyers never found the gates" fix).
-    expect(screen.getByRole('button', { name: /Engine gates \(advanced\)/ }).getAttribute('aria-expanded')).toBe('true');
-    expect(screen.getByText('Living-world systems (advanced)')).toBeTruthy();
-    const warGate = screen.getByRole('checkbox', { name: 'War layer' });
-    const strategyGate = screen.getByRole('checkbox', { name: 'Settlement strategy' });
-    const religionGate = screen.getByRole('checkbox', { name: 'Religion dynamics' });
-
-    // The three gates default FALSE (DEFAULT_SIMULATION_RULES), so they render OFF
-    // even though every other toggle is on-unless-explicitly-false.
-    expect(warGate.checked).toBe(false);
-    expect(strategyGate.checked).toBe(false);
-    expect(religionGate.checked).toBe(false);
-  });
-
-  test('toggling the 3 gates ON reaches simulationRules on save', async () => {
-    actions.updateCampaignSimulationRules.mockResolvedValue({});
-    const onClose = vi.fn();
-
-    render(<SimulationRulesDialog
-      open
-      campaign={{ id: 'camp-1', name: 'Realm', worldState: { simulationRules: {} } }}
-      onClose={onClose}
-    />);
-
-    // The Engine group is open by default while the gates are off, so the toggles
-    // are directly reachable — no expand click needed.
-    fireEvent.click(screen.getByRole('checkbox', { name: 'War layer' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Settlement strategy' }));
-    fireEvent.click(screen.getByRole('checkbox', { name: 'Religion dynamics' }));
-
-    expect(screen.getByRole('checkbox', { name: 'War layer' }).checked).toBe(true);
-
-    fireEvent.click(screen.getByRole('button', { name: 'Save' }));
-
-    await waitFor(() => {
-      // The toggles reach the rules object passed to updateCampaignSimulationRules —
-      // this is the proof the premium engine is now reachable from the UI.
-      expect(actions.updateCampaignSimulationRules).toHaveBeenCalledWith('camp-1', expect.objectContaining({
-        warLayerEnabled: true,
-        settlementStrategyEnabled: true,
-        religionDynamicsEnabled: true,
-      }));
-      expect(onClose).toHaveBeenCalled();
-    });
-  });
-
-  // ── advance-guard-ui — the store no-ops rules writes mid-advance, so the dialog
-  // must DISABLE its edit controls + show the affordance rather than let Save fire a
-  // write the store will silently drop and still report success over. ───────────────
   test('blocks the rules edit while this campaign is advancing', async () => {
     actions.updateCampaignSimulationRules.mockResolvedValue({});
     actions.advanceInFlight = ['camp-1'];
@@ -150,8 +101,9 @@ describe('SimulationRulesDialog', () => {
     expect(screen.getByTestId('rules-advance-blocked')).toBeTruthy();
     const saveBtn = screen.getByRole('button', { name: 'Save' });
     expect(saveBtn.disabled).toBe(true);
-    expect(screen.getByRole('checkbox', { name: 'War layer' }).disabled).toBe(true);
-    expect(screen.getAllByTestId('gate-disabled-reason').length).toBeGreaterThan(0);
+    // (master's in-dialog gate checkboxes are not rendered here — see the
+    // LINEAGE NOTE above; the banner + disabled Save + refused write are the
+    // shared substance.)
 
     // Even if Save is fired (defensively), no store write goes out — the guard
     // refuses so no false-success path exists.

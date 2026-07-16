@@ -173,7 +173,9 @@ describe('WorldPulsePanel', () => {
     expect(screen.getByText(/entangled with famine/)).toBeTruthy();
     expect(screen.getByText('The Red Fang warband')).toBeTruthy();
     // The echo card: living-memory framing with fading strength.
-    expect(screen.getByText('Market shock, in living memory')).toBeTruthy();
+    // LINEAGE NOTE (master merge W6): RF's echo row joins with the em-dash house
+    // style ('Market shock — in living memory'); master used a comma.
+    expect(screen.getByText('Market shock — in living memory')).toBeTruthy();
     expect(screen.getByText(/memory 34%/)).toBeTruthy();
   });
 

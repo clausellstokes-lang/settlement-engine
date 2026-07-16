@@ -122,8 +122,11 @@ function templateForArchetype(archetype) {
 // ── Consequence-if-removed templates ─────────────────────────────────────
 // The headline Tier 4.5 feature: each NPC carries a structured forecast
 // for what happens if they're killed, exiled, retired, or co-opted.
-// Severity scales with `structuralRank` ('dominant' / 'secondary' /
-// 'minor'); the consequence palette comes from the archetype.
+// Severity scales with `structuralRank`; the consequence palette comes from
+// the archetype. The generator's getRank (npcStructure.js) emits
+// 'dominant' | 'subordinate', so the mid tier is keyed 'subordinate' to match
+// (ported master fix — keying it 'secondary' left every non-dominant NPC
+// falling through to 'minor'). 'minor' is retained for legacy/explicit-minor.
 
 /** @type {Record<string, Record<string, string[]>>} */
 const REMOVAL_CONSEQUENCES = Object.freeze({
@@ -134,7 +137,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public order strains within weeks; criminal activity rises.',
       'A succession dispute opens among the surviving captains.',
     ],
-    secondary: [
+    subordinate: [
       'A unit captain loses their reporting line briefly.',
       'A subordinate moves up; the new face takes time to settle.',
     ],
@@ -149,7 +152,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
-    secondary: [
+    subordinate: [
       'A clerk or under-official scrambles to backfill paperwork.',
       'The governing body absorbs the role temporarily.',
     ],
@@ -164,7 +167,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
-    secondary: [
+    subordinate: [
       'A novice or under-priest steps up unprepared.',
       'Donations dip until a new face earns trust.',
     ],
@@ -179,7 +182,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A rival guildmaster consolidates the routes.',
       'Tax revenue drops as the books reshuffle.',
     ],
-    secondary: [
+    subordinate: [
       'A specific contract goes unfulfilled; clients seek alternatives.',
       'Guild succession becomes the dinner-table topic.',
     ],
@@ -193,7 +196,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Cheap imports flow in unchecked; quality drops.',
       'Apprentices scatter to other masters.',
     ],
-    secondary: [
+    subordinate: [
       'A workshop closes or transfers ownership.',
     ],
     minor: [
@@ -207,7 +210,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A corruption network collapses; protected favors become vulnerable.',
       'The watch claims a public victory whether or not it caused this.',
     ],
-    secondary: [
+    subordinate: [
       'A lieutenant takes over; old favors get reaccounted.',
     ],
     minor: [
@@ -221,7 +224,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Arcane research projects stall or move elsewhere.',
       'Public superstition resurges without the moderating expert.',
     ],
-    secondary: [
+    subordinate: [
       'A research line is paused; reagents get reassigned.',
     ],
     minor: [
@@ -234,7 +237,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
-    secondary: [
+    subordinate: [
       'A junior officer takes a temporary command.',
     ],
     minor: [
@@ -245,7 +248,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
     dominant: [
       'A noticeable absence in civic life that the settlement adapts around.',
     ],
-    secondary: [
+    subordinate: [
       'A small role goes unfilled briefly.',
     ],
     minor: [
@@ -260,7 +263,10 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
  */
 function consequencesForRemoval(archetype, rank) {
   const archetypeMap = REMOVAL_CONSEQUENCES[archetype] || REMOVAL_CONSEQUENCES.other;
-  const normalizedRank = (rank || 'minor').toLowerCase();
+  // Coerce to string first (ported master fix): the schema unions structuralRank
+  // as string|number, so a legacy NPC with a numeric rank must not crash
+  // `.toLowerCase()` (it took down the whole causal-substrate derivation).
+  const normalizedRank = String(rank ?? 'minor').toLowerCase();
   const consequences = archetypeMap[normalizedRank] || archetypeMap.minor || [];
   return [...consequences];
 }
