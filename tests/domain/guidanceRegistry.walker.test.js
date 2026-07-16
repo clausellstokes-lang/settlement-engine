@@ -238,7 +238,14 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // merge-resolved +1/+2 files, and −9 from the deleted CausalViewTabs. Every
   // added title is CARRIED master surface, none newly authored. Shrink-only
   // resumes from 502 — glossary-affordance migration continues over waves.
-  const TITLE_BASELINE = 502;
+  // GUIDE-2b DEEP TITLE TRANCHE 502 → 500: LivingWorldGates' two native title=
+  // OS tooltips (the SpatialCanonGate button teaching + the per-gate description
+  // on the toggle label) migrated onto the study's own cloth — an in-theme "?"
+  // help panel (LivingWorldGates.jsx, comprehension-first + mobile-reachable,
+  // where a hover title was neither). The button keeps a clean aria-label (no
+  // title=); the deferred WorldMapToolbar tranche stays on the map-coordinated
+  // pass (SM-4's display lane). Shrink-only resumes from 500.
+  const TITLE_BASELINE = 500;
 
   function countTitles() {
     let n = 0;
