@@ -145,6 +145,7 @@ export const WHAT_PHRASES = Object.freeze({
   flourishing: 'a golden age',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
+  blockade_lifted: 'a harbour opened again',
   sea_battle: 'a battle at sea',
   // W-CONVERGENCE foreign intervention
   intervention: 'a foreign hand at work',

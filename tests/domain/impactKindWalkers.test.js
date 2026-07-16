@@ -59,7 +59,7 @@ const EXPECTED_VOICE = {
   boom: 'prosperity', flourishing: 'prosperity', reconstruction: 'prosperity',
   bust: 'trade', calamity: 'calamity', plague_arrival: 'pestilence', generosity_relief: 'succor',
   // deliberately unvoiced (no crier beat for these impacts)
-  belief_misjudgment: null, blockade_declared: null, cause_lifecycle: null, diplomacy: null,
+  belief_misjudgment: null, blockade_declared: null, blockade_lifted: null, cause_lifecycle: null, diplomacy: null,
   faction_capture: null, field_battle: null, generosity_credit_default: null,
   generosity_purchase: null, generosity_refuge: null, generosity_refusal: null,
   generosity_trade_overture: null, harvest: null, hierarchy_cascade: null, hungry_gap: null,
