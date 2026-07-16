@@ -12,6 +12,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import LifecycleSpine from '../primitives/LifecycleSpine.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
+import SettlementCardMapThumb from '../townMap/SettlementCardMapThumb.jsx';
 import { useStore } from '../../store/index.js';
 
 // Relationship-type swatch for the neighbour chips (kept inline on OUR floor —
@@ -129,6 +130,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
             />
           </label>
         )}
+        {/* SM-4 — the lazy, cached town-map thumbnail (leading identity cue). Self-
+            collapses to nothing for a map-less settlement / a canvas-less env, so
+            a card without map data keeps its exact prior layout. */}
+        {s.settlement && <SettlementCardMapThumb settlement={s.settlement} />}
         {/* minWidth floor (not 0): the flexShrink:0 action cluster is the only
             other item on this row, so without a floor this column collapses
             toward 0 and the name ellipsis-clips to a single character. */}
