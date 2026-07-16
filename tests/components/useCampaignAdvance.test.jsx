@@ -10,7 +10,7 @@
 import { describe, test, expect, vi, afterEach } from 'vitest';
 import { renderHook, act, cleanup } from '@testing-library/react';
 
-import { useCampaignAdvance } from '../../src/components/settlements/useCampaignAdvance.js';
+import { useCampaignAdvance, ADVANCE_REFUSAL_TEXT } from '../../src/components/settlements/useCampaignAdvance.js';
 import { ADVANCE_TIME_NAV_TARGET } from '../../src/components/settlements/advanceTimeTarget.js';
 import { ADVANCE_ERROR_TEXT } from '../../src/hooks/useRealmInspector.js';
 
@@ -33,10 +33,16 @@ describe('useCampaignAdvance — typed refusals speak', () => {
     expect(hook.result.current.advanceError).toBe('');
   });
 
+  test('the Library twin ADVANCE_REFUSAL_TEXT stays identical to the map source ADVANCE_ERROR_TEXT', () => {
+    // Deliberately duplicated to keep the Library route off the map's useRealmInspector
+    // chunk (zero eager bytes) — this pin catches drift between the twins.
+    expect(ADVANCE_REFUSAL_TEXT).toEqual(ADVANCE_ERROR_TEXT);
+  });
+
   test('a world_frozen refusal shows its plain-language message and does NOT navigate', async () => {
     const { hook, setActiveCampaign, onNavigate } = setup({ ok: false, reason: 'world_frozen' });
     await act(async () => { await hook.result.current.handleAdvanceCampaignTime('c1'); });
-    expect(hook.result.current.advanceError).toBe(ADVANCE_ERROR_TEXT.world_frozen);
+    expect(hook.result.current.advanceError).toBe(ADVANCE_REFUSAL_TEXT.world_frozen);
     expect(setActiveCampaign).not.toHaveBeenCalled();
     expect(onNavigate).not.toHaveBeenCalled();
   });

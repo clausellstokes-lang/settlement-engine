@@ -25,8 +25,7 @@ import { useEffect, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
-import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
-import { prosperityLabel } from '../domain/display/prosperityLabel.js';
+import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
 import IconButton from './primitives/IconButton.jsx';
 
 const GOLD = swatch['#8C6F32'];

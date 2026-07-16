@@ -28,8 +28,7 @@
 import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
-import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
-import { prosperityLabel } from '../../domain/display/prosperityLabel.js';
+import { tonightAtTheTable, prosperityLabel } from '../../domain/summary/tonightAtTheTable.js';
 import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];

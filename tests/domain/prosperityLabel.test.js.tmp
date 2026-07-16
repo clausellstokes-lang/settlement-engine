@@ -6,7 +6,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { prosperityLabel } from '../../src/domain/summary/tonightAtTheTable.js';
+import { prosperityLabel } from '../../src/domain/display/prosperityLabel.js';
 import { PROSPERITY_OPTIONS } from '../../src/components/gallery/galleryUtils.js';
 
 describe('prosperityLabel — tolerant read', () => {
