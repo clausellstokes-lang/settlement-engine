@@ -62,8 +62,10 @@ function clamp01(v) {
 // capitalized-first ("Soldiers marching to war in X") and after "word of …".
 // Any UNKNOWN token falls to whatPhrase()'s neutral fallback, never the raw token.
 // Pure display; byte-inert to the engine (goldens never import this).
+// Exported for the impactKind walker (tests/domain/settlementRumors.walker.test.js),
+// which source-scans every minted impactKind and reds until it is phrased here.
 /** @type {Readonly<Record<string, string>>} */
-const WHAT_PHRASES = Object.freeze({
+export const WHAT_PHRASES = Object.freeze({
   // war / conflict candidate types
   strategy_deploy: 'soldiers marching to war',
   war_mobilization: 'a call to arms',
@@ -132,6 +134,32 @@ const WHAT_PHRASES = Object.freeze({
   stressor_graduated: 'a trouble deepening',
   stressor_wind_down: 'troubles easing',
   cause_lifecycle: 'shifting fortunes',
+  // ── post-A1 merged-wave impactKinds (content-immersion-r2-1/-2) ────────────
+  // Every minted impactKind must be phrased here or the impactKind walker
+  // (settlementRumors.walker.test.js) reds — no more raw de-underscored slugs
+  // ('generosity relief', 'intervention clash') reaching player headlines.
+  // W-UPSWING abundance / downturn
+  boom: 'flush times',
+  bust: 'hard times',
+  reconstruction: 'a town rebuilding',
+  flourishing: 'a golden age',
+  // W-NAVY sea war
+  blockade_declared: 'a harbour sealed off',
+  sea_battle: 'a battle at sea',
+  // W-CONVERGENCE foreign intervention
+  intervention: 'a foreign hand at work',
+  intervention_clash: 'rival patrons come to blows',
+  // E1 generosity instruments
+  generosity_relief: 'aid sent to the stricken',
+  generosity_refusal: 'aid turned away',
+  generosity_credit_default: 'a debt gone unpaid',
+  generosity_purchase: 'a great purchase made',
+  generosity_refuge: 'refuge given to the displaced',
+  generosity_trade_overture: 'an offer of trade',
+  // peace / realm-composer beats
+  diplomacy: 'envoys at parley',
+  queue_refused: 'a petition denied',
+  realm_verb_refused: 'a decree set aside',
 });
 
 // Bare LIFECYCLE/transition kinds — when a rumor's subject falls back to the

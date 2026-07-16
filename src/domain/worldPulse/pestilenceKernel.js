@@ -255,7 +255,7 @@ export function advanceSettlementPestilence({ snapshot, worldState, digest, grap
       if (existing && isLivePlague(existing)) { continue; } // ONE PLAGUE TRUTH: never double-mint
       byId.set(canonicalId, /** @type {PestStressor} */ (minted));
       receipts.push({ id: mat.id, kind: 'materialized', severity: mat.severity, sourceId: mat.sourceId });
-      newsEntries.push(materializationNews(mat.id, sourceName, mat.severity, itemById.get(mat.id)?.name, tick, now));
+      newsEntries.push(materializationNews(mat.id, sourceName, mat.severity, itemById.get(mat.id)?.name, tick, now, result.materializations.length > 1));
     }
     nextWorldState = { ...nextWorldState, stressors: [...byId.values()] };
   }
@@ -270,15 +270,21 @@ export function advanceSettlementPestilence({ snapshot, worldState, digest, grap
  * A plague-materialization wizard-news entry (house voice, AGGREGATE — no npc named).
  * @param {string} id @param {string} sourceName @param {number} severity
  * @param {string|undefined} name @param {number} tick @param {string|null} now
+ * @param {boolean} multiSettlement true when the plague materialized in >1 settlement this tick
  * @returns {Record<string, unknown>}
  */
-function materializationNews(id, sourceName, severity, name, tick, now) {
+function materializationNews(id, sourceName, severity, name, tick, now, multiSettlement) {
   const where = String(name || id);
   return {
     id: `wizard_news.${tick}.plague_arrival.${id}`,
     tick,
     scope: 'regional',
-    significance: severity >= 0.55 ? 'notable' : 'minor',
+    // content-immersion-r2-6 (CI-6): a bad plague is MAJOR — a severe front (≥0.55) or
+    // a multi-settlement outbreak deserves the headline tier, not the second string; a
+    // mild single-town front is 'notable'. 'minor' was a DEAD tier (only major/notable
+    // are real — significanceRank treats every non-major value identically, and the seed
+    // gate keys on 'major'), so a bad plague could never actually be prominent.
+    significance: (severity >= 0.55 || multiSettlement) ? 'major' : 'notable',
     score: Math.round(40 + severity * 30),
     headline: `Plague reaches ${where}`,
     summary: `Sickness carried along the trade roads from ${sourceName} has taken hold in ${where}. The healers and temples brace for what comes.`,
