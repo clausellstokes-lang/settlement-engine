@@ -249,6 +249,94 @@ town's underways enrich its ruin flavor — relic ruins with intact tunnels are 
 freetext); ×premium seam (existence public / operations covert, above); ×PDF/display (standard
 institution rendering; services + profile — zero new display machinery).
 
+## D7 — THE REFRAME LAYER (the ledger of gifts and debts; motive attribution as belief)
+### Owner commission 2026-07-16 (verbatim intent: the inverse of emotions/intentions as
+### relationships change — "shouldn't that generosity... turn more into a sort of debtor
+### mentality after a betrayal... do not simply stop at generosity vs greed"). BUILDS IN THE
+### TUNING WINDOW (post-soak-verdicts, pre-regen) so its shifts batch into THE ONE REGEN.
+
+**THE LAW: FACTS FROZEN, MEANING DERIVED.** Receipts and transfer ledgers are immutable
+(constitutional). What changes when relationships change is the INTERPRETATION — a per-observer
+derived read: `interpretationOf(act, observer, now)`. History is never rewritten; it is
+re-READ. And because interpretation is belief-side, IT CAN BE WRONG — this layer extends the
+epistemics engine from misjudged facts to misjudged MOTIVES (the mint-time generosityEV
+receipts already record TRUE intent weights — the ground truth for the irony read exists).
+
+**THE ACT CLASSES + their existing fact sources (nothing new is recorded):**
+| Act class | Frozen source | Reframe vocabulary (bounded) |
+|---|---|---|
+| Aid/relief/credit transfers | obligations ledger + generosity receipts (intent weights AT MINT) | gift → investment → debt_unpaid → tribute_extracted |
+| Military aid / garrisons / interventions | deployments history, interventions ledger, relationshipMemory | protection → occupation_that_never_left (racket) |
+| Intelligence shares | info-statecraft marks | candor → espionage_all_along |
+| Mediation / peace brokering | treaty provenance records | goodwill → manipulation |
+| Religious patronage | imposition/patronage records | piety → infiltration |
+| Kinship/§G ties | tie records | bond → leverage |
+| Trade-dependence formation | M6 dependence metrics + route history | commerce → dependency_by_design |
+| Tribute/terms payments | treaty terms + compliance records | honored_terms → extortion_endured |
+
+**THE REFRAME FUNCTION (inputs, all existing state):** current relationship status + warmth,
+grievance stock (D5-scaled — you can only reframe what you REMEMBER; elves reframe
+centuries-old gifts, humans forget them: the memory law composes), observer alignment axes,
+deity conduct profile (the contract-god invoices, the mercy-god mourns — alignment-not-domain
+extended to interpretation), actor/bloc temperament (§G-clamped), live momentum courses (a
+committed hostile course darkens readings — coherent sunk-cost psychology), hegemony fear
+(D4 — tribute/gift tilt), and credibility (a proven liar's past acts reframe darker). This IS
+the owner's "generosity vs greed competition" — implemented as INTERPRETATION WEIGHTS on §H
+loaded dice, never as new resource flows. The simple ally/enemy mode-switch is REJECTED: it
+severs the referencable chain (the product law).
+
+**TRANSITIONS ARE EVENTS (the mover half):** a small kernel pass (fold into relationship
+rules or a lazy reframeKernel) behind virtual flag `reframeEnabled` — absent ⇒ no transitions
+⇒ prior bytes. A reframe TRANSITION ("Thornwall now speaks of the grain years as a debt
+unpaid") is: E0-classed (rare, story-grade — capped concurrent reframed-pairs per the
+scarcity-as-law precedent), hysteresis-guarded (warmth deadband; no flapping), STICKY
+(reversal only through reconciliation events — the same forgiveness lane D5's undying band
+uses; BOTH SIGNS exist: debt can be forgiven back into gift, per the unification law),
+loud (deposits momentum; the rumor machinery carries it), and receipted with the chain
+("after the border seizure, the old aid reads differently in Thornwall's court").
+
+**CONSUMERS (all existing machinery, additive):**
+1. WAR REASONS: new typed kinds `ingratitude_debt` + `dependency_by_design` joining the
+   scorers — reasons load choices; they NEVER auto-declare (standing law).
+2. PEACE TERMS: a restitution/repayment term kind at the peace table — the reframed claim
+   priced and settleable through the existing terms catalog (real goods move ONLY here,
+   through existing machinery — conservation untouched).
+3. CORRUPTION WEB: a darkly-reframed obligation is leash-eligible material (one bounded input
+   to the existing resolver).
+4. COUNTERPART (criterion): DECLARE_CASUS gains the reframe casus types as dial options — the
+   DM decrees the reinterpretation; force ≡ organic at the casus mint (no new verb needed).
+5. DISPLAY — THE LEDGER OF GIFTS AND DEBTS read-model: per-pair, each remembered act with
+   BOTH readings — the frozen fact, the observer's current reading, and (DM-truth lane) the
+   TRUE mint intent. The dramatic-irony surface gains motive-divergence beside
+   fact-divergence: the DM sees the war brewing over a kindness misremembered.
+6. Whisper + glossary entries per the criterion's final clause.
+
+**PINS:** dormancy golden (flag absent ⇒ byte-identical) · frozen-facts pin (no interpretation
+path writes any transfer/receipt ledger) · both-signs pin (a reconciliation event reverses
+debt_unpaid → gift_forgiven) · false-reframe irony pin (true intent ≠ believed intent renders
+in the DM irony read; the player-safe view shows only the observer's own reading — premium
+seam) · hysteresis pin (oscillating warmth mints ZERO transitions inside the deadband) ·
+scarcity pin (concurrent reframed-pairs ≤ cap) · counterpart pin (decreed ≡ organic) ·
+determinism (stable fork keys on transition draws).
+
+**REJECTED (recorded):** a per-NPC emotion system (blocs/settlements/factions reframe; NPCs
+modulate via §G and never have engine-resolved feelings — state-never-fate extended to
+sentiment); continuous emotion scalars (bounded vocabulary only); mutable intent on receipts
+(unconstitutional).
+
+**D7 COHERENCE MATRIX:** ×D5 memory (reframe horizon = memory horizon; forgetting forecloses
+re-litigation — *emergent*: making peace with elves before the grudge hardens matters) ·
+×D4 hegemony (fear tilts tribute/gift readings; a sphere's collapse triggers mass re-reads —
+*emergent*: the empire falls and every "gift" it gave becomes an extraction overnight) ·
+×credibility/Blainey (liars' acts darken; false reframes ARE misjudgments — war from motive-
+attribution error, the layer's crown emergent) · ×momentum (courses bias readings; transitions
+deposit; pressing a debt claim is a course with a cliff) · ×corruption (leash material) ·
+×peace terms (restitution) · ×religion (conduct-profile tilts; patronage→infiltration after
+schism) · ×E1 (mint-intent receipts = ground truth) · ×lifecycle (a dead benefactor's gifts
+reframe in its successor's court) · ×tempo (E0-classed transitions) · ×premium seam (readings
+are per-audience) · ×D6 (aid smuggled through the underways reframes darkest — "they bought
+us in the dark").
+
 ## THE COHERENCE MATRIX (owner directive 2026-07-16: "it has to be coherent with all aspects of
 ## the ontology... The number one thing I'm trying to sell is a coherent world.")
 

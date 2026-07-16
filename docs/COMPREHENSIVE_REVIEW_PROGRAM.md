@@ -764,9 +764,13 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
    the moment DEPTH merges — longest probes first.
 4. SM-4 ∥ GUIDE-2b → Surveyor S1–S7 build CONCURRENT with the running soak (display/AI
    lanes cannot invalidate it).
-5. Soak verdicts → tuning (if needed) → **THE ONE REGEN** (owner-signed, batching: lighting
-   shifts + G2 shifts + the Underground Network catalog + any soak-driven tuning shifts —
-   a single golden event).
+5. Soak verdicts → **THE TUNING WINDOW: weight tuning + W-R2-D7 THE REFRAME LAYER build**
+   (owner-commissioned 2026-07-16, designed + frozen in DESIGN_SIM_DEPTH_R2 D7 — motive
+   attribution as belief; builds HERE so soak verdicts calibrate its dice and its lit-path
+   shifts batch) → targeted re-certs → **THE ONE REGEN** (owner-signed, batching: lighting
+   shifts + G2 shifts + the Underground Network catalog + soak-driven tuning shifts + D7
+   shifts — a single golden event; JUDGMENT: D7-in-the-tuning-window over post-deploy,
+   preserving one-regen — say veto to move D7 post-deploy instead).
 6. Dimensions-only re-grade → Phase E close.
 7. **THE VERY END: push + PR + the owner deploy batch** — this MODIFIES the 2026-07-15
    "push couples to the merge" ruling: the push/PR now HOLD until everything above is done.
