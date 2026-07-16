@@ -747,11 +747,31 @@ continuation gains an explicit FOLD-IN step (merge the advanced RF tip into mast
 before its W7 full gate) so no fix is stranded behind the merge cut. Decided fresh at Phase P
 from live git state.
 
-## Round-2 resume protocol (successor session)
-Same as round 1 (above), plus: (1) check `git log claude/master-merge-r1` — if the merge landed,
-Phase F targets that lineage's successor branch; if it stalled, surface to the owner before
-landing fixes anywhere. (2) The survey journal for `wf_d69567dc-f0d` lives under this session's
-transcript dir (`7115c211-…/subagents/workflows/wf_d69567dc-f0d/journal.jsonl`); salvage partial
-agent outputs from there rather than re-running completed slices blind. (3) The charter
-extension above binds the successor too: review+fix → merge continuation → the post-merge
-operations, with the takeover protocol honored at every entry.
+## Round-2 resume protocol (successor session) — HARDENED FOR WINDOW CUTS
+The owner expects the usage window may cut before the charter completes (stated 2026-07-15 late
+night: "a very real chance that I will run out of window space... prepare accordingly"). Standing
+rule: **EVERY phase banks its artifact to the repo the moment it lands — commit before continuing.**
+
+Per-phase resume (find the current phase from the checkboxes + fresh git log):
+- **Died during Phase S (survey):** the fleet's structured outputs stream into
+  `~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/7115c211-9732-4751-8d73-170ba6bbcf31/subagents/workflows/wf_d69567dc-f0d/journal.jsonl`
+  — salvage every completed slice from there (each journal record carries the agent's full
+  structured return). The COMPLETE workflow script (all 22 subsystem scopes + 11 dimension
+  charges + the schema + the preamble) is COMMITTED at `docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.js`
+  — re-dispatch ONLY the missing slices by copying that script and pruning SUBSYSTEMS/DIMENSIONS
+  to the gap list (workflow resume-from-run-id is same-session-only; a new session re-dispatches).
+- **Died between S and A:** raw results are banked as `docs/review-r2/RAW_SURVEY_RESULTS.json`
+  (the landing session commits this FIRST, before synthesis — if it exists, never re-survey).
+- **Died during A/V/P:** the partial assessment/verdicts live in
+  `docs/COMPREHENSIVE_REVIEW_2026-07-15.md` (committed incrementally); Phase V re-dispatches
+  only findings without verdict columns.
+- **Died during F:** wave rows in the ledger + Progress lines say what shipped; unstaged
+  worktree WIP belongs to the wave named in the last Progress line — finish or re-dispatch
+  that ONE wave, never re-plan from scratch.
+- **Died during M (merge takeover) / O (post-merge ops):** MASTER_MERGE_PLAN.md §7 wave list +
+  `git log claude/master-merge-r1` say exactly where it stopped; the takeover protocol in the
+  charter extension above applies to the successor identically.
+Also: (1) check `git log claude/master-merge-r1` before landing fixes anywhere (if the merge
+landed, Phase F targets the unified lineage). (2) The charter extension binds the successor:
+review+fix → merge continuation → post-merge operations. (3) Memory mirror:
+`memory/comprehensive-review-fix-program.md` (this doc is authoritative).
