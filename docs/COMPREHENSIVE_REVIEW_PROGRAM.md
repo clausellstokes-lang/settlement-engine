@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**THE FINAL W6 LEDGER (2026-07-16 ~15:30, agent-delivered, ratified):** 220 failed files /
+485 failed tests at W6 open → **11 files / 21 tests**, classified: 2 owner-gated (budget
+fold-in-cured + EXEMPT_CEILING), 2 W7-scoped (edge-bundle freshness — the build-edge-shared
+regen), 1 confirmed load-flake (5/5 isolated ×2), 6 hand-merge remainders (the agent's honest
+tracking-miss surfacing — CLOSING NOW under the established patterns). DISPOSITION TOTALS:
+107 dropped-with-reason (resurrectable from d024286e) · 60 adapted · 50 fixed-file ports ·
+13 blocked-on-owner. Security haul: gallery sanitize-on-write, the LIVE money-journey e2e
+restored, backdrop-URL guard, avatar-XSS, 3 proto-pollution guards, domain-strict false-green
+hole, tier fail-closed pair, §5.1 transform-threading. Goldens byte-identical throughout
+(27/27 at f9fa72f8). **THE OWNER-QUEUE DELTA: 18 new items** (full list in the agent ledger,
+tasks/a659911124265fa66.output + per-commit bodies) — presented at the batch moment.
 (d) **MEMBERSHIP ID NORMALIZATION (W6 misc verdict):** RF's campaignSettlements /
 getCampaignForSettlement do exact-match id compares — string/number-mismatched members are
 silently DROPPED from advances today; normalizing (master's String() model, matching RF's own
