@@ -35,6 +35,8 @@ import { withActiveCondition, withoutActiveCondition } from '../activeConditions
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeMalice } from './disposition.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
+import { activeBlockadeTargets } from '../spatial/navalLayer.js';
+import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 import { famineFor } from './foodStockpile.js';
 import { foldObligations } from '../spatial/generosityReactions.js';
 import { withCampaignHistoryEvent } from './stressorAftermath.js';
@@ -170,20 +172,40 @@ function builderRoster01(s) {
   return clamp01(builders / 3);
 }
 
-/** Is the settlement currently at PEACE (no live war front into/from it)? 1 peace, 0 war.
- *  @param {UpGraph|null|undefined} graph @param {string} id */
-function peace01Of(graph, id) {
-  const into = warFrontsInto(graph, id) || [];
-  const from = warFrontsFrom(graph, id) || [];
-  return into.length === 0 && from.length === 0 ? 1 : 0;
+/** Is `id` under a naval blockade OR a live supply-web campaign — a STRANGULATION the owner's
+ *  "a blockade is the same as a siege" law (DESIGN_NAVY §4) says is NOT peace, even absent a
+ *  war-layer front (r2 sim-cohesion-counterparts-3). Dormancy-safe: with naval/supply-web dark
+ *  both reads are empty ⇒ false ⇒ peace01Of is unchanged. @param {Record<string, unknown>|null|undefined} worldState
+ *  @param {string} id @returns {boolean} */
+function underStrangulation(worldState, id) {
+  if (!worldState) return false;
+  if (activeBlockadeTargets(worldState).has(String(id))) return true;
+  const campaigns = asObject(getSpatialLedger(/** @type {Record<string,unknown>} */ (worldState), 'campaignPlans'));
+  for (const k of Object.keys(campaigns)) {
+    if (String(asObject(campaigns[k]).targetId) === String(id)) return true;
+  }
+  return false;
 }
 
-/** A NEW shock this tick (a fresh calamity within the arc, a live famine, or a war
- *  front) — the reconstruction regressor. @param {UpSettlement|undefined} s
- *  @param {UpGraph|null|undefined} graph @param {string} id @param {unknown[]} stressors
+/** Is the settlement currently at PEACE? 1 peace, 0 war. NOT peace when a war front points
+ *  into/from it OR when it is under a naval blockade / supply-web strangulation (blockade-is-a-
+ *  siege). @param {UpGraph|null|undefined} graph @param {string} id
+ *  @param {Record<string, unknown>|null|undefined} [worldState] */
+function peace01Of(graph, id, worldState) {
+  const into = warFrontsInto(graph, id) || [];
+  const from = warFrontsFrom(graph, id) || [];
+  if (into.length !== 0 || from.length !== 0) return 0;
+  if (underStrangulation(worldState, id)) return 0;
+  return 1;
+}
+
+/** A NEW shock this tick (a fresh calamity within the arc, a live famine, a war front, or a
+ *  blockade/strangulation) — the reconstruction regressor. @param {UpSettlement|undefined} s
+ *  @param {UpGraph|null|undefined} graph @param {string} id
+ *  @param {Record<string, unknown>|null|undefined} worldState @param {unknown[]} stressors
  *  @param {number} startedYear @param {number} year */
-function hasNewShock(s, graph, id, stressors, startedYear, year) {
-  if (peace01Of(graph, id) === 0) return true; // a war front reopened
+function hasNewShock(s, graph, id, worldState, stressors, startedYear, year) {
+  if (peace01Of(graph, id, worldState) === 0) return true; // a war front reopened OR a blockade/strangulation
   if (famineFor(/** @type {[]} */ (stressors), id)) return true;
   // A fresh calamity stamp minted AFTER the rebuild began (a second blow).
   const hist = Array.isArray(s?.calamityHistory) ? s.calamityHistory : [];
@@ -354,10 +376,15 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   /** @type {Map<string, number>} */
   const updateIndex = new Map();
   updates.forEach((u, i) => updateIndex.set(String(u.saveId), i));
-  /** @param {string} id @returns {UpSettlement|undefined} freshest (update ▸ snapshot) */
+  /** @param {string} id @returns {UpSettlement|undefined} freshest (update ▸ snapshot). Reads
+   *  nextUpdates (NOT the stale pre-clone `updates`) so a later same-tick arc pass composes onto
+   *  an earlier pass's write instead of clobbering it — the settlementLifecycleKernel.js:471
+   *  idiom, byte-identical to it (r2 determinism-constitution-1). Before any clone
+   *  nextUpdates === updates, so the read is always at-least-as-fresh. Invoked only after the
+   *  `let nextUpdates` declaration below (TDZ resolved by call time). */
   const freshSettlement = (id) => {
     const ui = updateIndex.get(String(id));
-    if (ui !== undefined) return updates[ui]?.settlement;
+    if (ui !== undefined) return nextUpdates[ui]?.settlement;
     return itemById.get(String(id))?.settlement;
   };
 
@@ -395,6 +422,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   for (const id of ordered) {
     const s = freshSettlement(id);
     if (!s) continue;
+    if (lifecycleStatusOf(s)) continue; // MOVERS SKIP REMNANTS (r2 economy-upswing-1): a terminal-dead corpse never rebuilds
     const item = itemById.get(id);
     const prior = /** @type {ReconRecord|null} */ (asObject(reconLedger)[id] ? /** @type {ReconRecord} */ (reconLedger[id]) : null);
     const clearing = !prior ? clearingCondition(s) : null;
@@ -408,13 +436,13 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
     // ── Compose the progress step (each term a NAMED source). ──
     const prosperity01 = prosperity01Of(s);
     const builder01 = builderRoster01(s);
-    const peace01 = peace01Of(graph, id);
+    const peace01 = peace01Of(graph, id, worldState);
     const allyDebt = strongestAllyDebt(obligations, id);
     const ally01 = allyDebt ? allyDebt.magnitude : 0;
 
     const startedTick = prior ? prior.startedTick : tick;
     const startedYear = prior ? prior.startedYear : year;
-    const shock = hasNewShock(s, graph, id, stressors, startedYear, year);
+    const shock = hasNewShock(s, graph, id, worldState, stressors, startedYear, year);
 
     let step = T.RECON_BASE_STEP
       + T.RECON_PROSPERITY_GAIN * prosperity01
@@ -569,6 +597,7 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   for (const id of ordered) {
     const s = freshSettlement(id);
     if (!s) continue;
+    if (lifecycleStatusOf(s)) continue; // MOVERS SKIP REMNANTS (r2 economy-upswing-1): a corpse cannot boom
     const item = itemById.get(id);
     const prior = /** @type {BoomRecord|null} */ (boomLedger[id] ? /** @type {BoomRecord} */ (boomLedger[id]) : null);
     const throughput = flowThroughput(tradeFlowLedger, id);
@@ -664,9 +693,10 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   for (const id of ordered) {
     const s = freshSettlement(id);
     if (!s) continue;
+    if (lifecycleStatusOf(s)) continue; // MOVERS SKIP REMNANTS (r2 economy-upswing-1): a corpse never flourishes
     const item = itemById.get(id);
     const prior = /** @type {FlourishRecord|null} */ (flourishLedger[id] ? /** @type {FlourishRecord} */ (flourishLedger[id]) : null);
-    const peace = peace01Of(graph, id) === 1;
+    const peace = peace01Of(graph, id, worldState) === 1;
     const qualifies = prosperity01Of(s) >= T.FLOUR_PROSPERITY_FLOOR && legitimacy01Of(s) >= T.FLOUR_LEGITIMACY_FLOOR && peace;
     const ui = updateIndex.get(id);
 
@@ -746,9 +776,13 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
   }
 
   // Mature consumed ally obligations (the conservation debit) into the obligations ledger.
+  // SINGLE-DECAY LAW (r2 economy-upswing-4): decayPerTick:0 — advanceGenerosity (and, when
+  // intervening, convergence) already folded+decayed this same ledger earlier THIS tick; a
+  // second whole-ledger decay here would erode every debt faster than the tuned rate. This
+  // pass is repayment-only.
   if (obligationRepayments.length) {
     const prevObl = /** @type {Record<string, unknown>|null} */ (getSpatialLedger(worldState, 'obligations'));
-    const nextObl = foldObligations(prevObl, { mints: [], repayments: obligationRepayments, now: tick });
+    const nextObl = foldObligations(prevObl, { mints: [], repayments: obligationRepayments, now: tick, decayPerTick: 0 });
     if (JSON.stringify(nextObl || null) !== JSON.stringify(prevObl || null)) {
       nextWorldState = nextObl
         ? setSpatialLedger(nextWorldState, 'obligations', nextObl)

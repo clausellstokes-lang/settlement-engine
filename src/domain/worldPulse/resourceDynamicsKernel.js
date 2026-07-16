@@ -52,6 +52,7 @@ import { stablePart } from './worldState.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { classifyResource } from './resourceTaxonomy.js';
+import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 
 // ── The loose sim shapes this mover reads (concrete typedefs — no `any`) ────────
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} PressureIdx */
@@ -281,6 +282,7 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
 
   for (const item of snapshot?.settlements || []) {
     const settlement = item.settlement || {};
+    if (lifecycleStatusOf(settlement)) continue; // MOVERS SKIP REMNANTS (r2 economy-upswing-1): no discovery/depletion on a corpse
     const config = settlement.config || {};
     const cid = String(item.id ?? '');
     const name = String(item.name || settlement.name || cid);

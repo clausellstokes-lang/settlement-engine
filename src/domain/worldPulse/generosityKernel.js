@@ -133,6 +133,7 @@ import { computeLawfulness, computeMalice } from './disposition.js';
 import { evil01, chaos01 } from './deityAxes.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
+import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
 import { computeSackFoodTransfer, storageCapacityMonths, STOCKPILE_TUNING, famineFor } from './foodStockpile.js';
 import { seasonForTick } from './worldState.js';
 import { seasonalUnitSwing } from './seasons.js';
@@ -485,6 +486,9 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     const pairKey = `${giverId} ${receiverId}`;
     if (seenPair.has(pairKey)) return;
     if (!itemById.has(giverId) || !itemById.has(receiverId)) return;
+    // MOVERS SKIP REMNANTS (r2 economy-upswing-1), BOTH directions: a terminal-dead corpse
+    // neither orients to give nor is a valid receiver of aid.
+    if (lifecycleStatusOf(freshSettlement(giverId)) || lifecycleStatusOf(freshSettlement(receiverId))) return;
     const need01 = needOf(receiverId);
     const kindRaw = normalizeRelationshipType(String(edge?.relationshipType || 'neutral'));
     const kind = KIND_MAP[kindRaw];
