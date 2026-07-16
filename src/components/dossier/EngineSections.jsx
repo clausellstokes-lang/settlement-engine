@@ -256,7 +256,7 @@ export function PowerSuccessionSection({ settlement }) {
           {previous.slice(-4).map((g, i) => (
             <div key={i} style={{ fontSize: FS.xs, color: BODY }}>
               {g.label || g.government || 'Prior government'}
-              {g.cause ? <span style={{ color: MUTED }}>, {g.cause}</span> : null}
+              {g.cause ? <span style={{ color: MUTED }}> — {g.cause}</span> : null}
             </div>
           ))}
         </div>

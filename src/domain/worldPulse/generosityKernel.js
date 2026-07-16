@@ -482,7 +482,7 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
   /** @param {string} giverId @param {string} receiverId @param {GenEdge} edge */
   const considerOrientation = (giverId, receiverId, edge) => {
     if (giverId === receiverId) return;
-    const pairKey = `${giverId} ${receiverId}`;
+    const pairKey = `${giverId}|${receiverId}`;
     if (seenPair.has(pairKey)) return;
     if (!itemById.has(giverId) || !itemById.has(receiverId)) return;
     const need01 = needOf(receiverId);
