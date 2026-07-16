@@ -870,6 +870,15 @@ its branch (a06f2c56, 15/16 + 65 tests): the sole red = +2,711 B eager over the 
 implementer correctly did NOT raise (owner-gated); TRIM AGENT dispatched on
 claude/w-r2-intent-trim (the store lazy-body pattern, target ≤ +50 B; reclaim-first law) —
 merge follows the trim.**
+**MERGE RECONCILIATION LOG (2026-07-16 morning):** the 4-wave merged gate surfaced three
+cross-wave artifacts, all reconciled: (1) size-ratchet baselines re-minted at merged-tree
+truth @ 84eee881 (3 files sibling waves grew; type-honestly-at-merge precedent, JUDGMENT
+vetoable); (2) SEAMS' new blockade_lifted impactKind phrased + classified @ 81fbf3e9 —
+GUARDS' walker caught it, working as designed; ARCHITECTURE count → 136. (3) Gate now:
+**main suite FULLY GREEN 900/900 files, 9,966/9,976** — sole red = first-paint budget
++39 B (four waves' individually-green margins summed over). Per the reclaim-first law:
+**FP-G8 micro-reclaim agent dispatched** (target ≥250 B off 81fbf3e9) — the budget is never
+raised. INTENT-trim agent still in flight. SURFACE + G2 + DEPTH dispatch after INTENT merges.
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
 ## and fixing, i want you to continue where the merge was and the rest of the operations that follow")
