@@ -972,6 +972,23 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ W-R2-LIGHT RATIFIED + FOLDED (2026-07-16 ~19:00) — the engine is reachable.** The lighting
+wave landed in 4 commits (0b28f032 presets via the shared frozen WAVES object + stability/
+coverage pins · 84af8c3a the dialog Engine Waves section · f3169cab dark-gate refusal prose
+names the preset + dialog path, closing sim-cohesion-counterparts-4 · db07979b the shift map)
+and was FAST-FORWARDED into claude/w7-prep @ db07979b — MERGE JUDGMENT (vetoable): the brief's
+park-red-like-G2 disposition existed only for predicted golden shifts, and **the tree refuted
+the prediction: THE GOLDEN-SHIFT SET IS EMPTY** (every committed golden driver hand-writes its
+simulationRules object; none reads SIMULATION_RULE_PRESETS.*.rules), so the branch gated green
+(11,604 passed / sole red EXEMPT_CEILING; verify:dist 143/143) and parking served nothing.
+CONSEQUENCE FOR THE REGEN MOMENT: **THE ONE REGEN batch is now G2 + Underways + tuning + D7
+only — LIGHT contributes zero shifts.** Eager truth: +252 B measured (the preset catalog rides
+the eager closure via campaignWorldPulseSlice→presetIdForRules — the brief's "zero eager" was
+wrong); closure 1,063,596 ≤ 1,066,400, margin 2,804 B. Implementer JUDGMENTs ratified ×4, chief
+among them: **living_realm lights the nine but keeps warLayerEnabled inherited-false** (the
+three war-AND-gated waves stay dormant there — a living realm moves but does not start wars;
+veto = also light War on living_realm). **W-R2-DEPTH DISPATCHED** off db07979b (D1–D5 + D6
+engine-couplings half, dormancy-gated by construction, zero-shift law binding).
 **⬛ W7 GREEN LOCAL — push held per owner ruling (2026-07-16 ~17:40).** The full constitutional
 gate on the reconciled tree, branch `claude/w7-prep` tip b1e6aa24: validate:data /
 migration-head / edge / map ALL green · typecheck (full + domain:strict) exit 0 · lint 0 errors
