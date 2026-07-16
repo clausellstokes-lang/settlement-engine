@@ -263,6 +263,60 @@ per-file frozen ceilings in the same commit.
 
 ---
 
+## 9. THE COVERAGE MAP — findings already answered by queued work (owner-directed cross-reference, 2026-07-16)
+
+The owner asked: before minting new fixes, check whether findings are answered by (a) the
+leftover master-sequence work and (b) the master-merge plan. Cross-referenced against
+MASTER_MERGE_PLAN §4–§8, the playbook §0.0.2/§0.6 ledgers, and every recent wave row's
+deferral record. Dispositions (routing is binding on Phase P):
+
+**FULLY COVERED — the answer already exists as scheduled work; do NOT mint a duplicate fix:**
+| Finding / class | Covered by |
+|---|---|
+| Entity-ref degrade path (ProseParagraph/ProseText render plain spans; header documents the missing consumer layer) | **MERGE W5** — the entity-link consumer wiring wave (§4.4 BOM: 6 C2 files + ~20 re-points + the producer↔consumer contract test) |
+| `data-map-overlay-svg` lineage gap (campaign thumbs composite bare terrain) | **MERGE W1 auto-return** from master's side + **W5 cherry-pick ab1c30ba** (the thumb contract guard) |
+| NUL/control-byte class (no new instances found this round) | **MERGE W4** — c0600f8c intent re-applied + the 263e53e0 controlBytes pin cherry-picked; supplyCompleteness.js:158 stays the recorded **§8 owner call** |
+| QuickInspector hover never wired | **Owner-commissioned build, pending relaunch** (recorded; not a bug to re-fix) |
+| mapChains gate unenforced | **Ruled as-shipped free** (reconciliation #4); flag comment arrives via W5's ccd0d670 cherry-pick |
+| Thin @rollback coverage on newest migrations (backend-migrations low) | **MERGE W2** adopts master's `supabase/rollback/` C2 add — extend the pattern to 113+ in that same wave |
+| Round-1 lows never scheduled (store-7/8, state-lifecycle-8, pdf lows, commerce lows) | Recorded round-1 register rows — Phase P routes them into the matching W-R2 wave rather than re-verifying |
+| The unlit switchboard (sim-cohesion-4) | **RESOLVED by the 2026-07-16 lighting ruling** → W-R2-LIGHT |
+
+**PARTIALLY COVERED — a recorded deferral names the class; the finding extends it (route into the recorded home):**
+| Finding | Recorded home + the extension |
+|---|---|
+| Five ledgers with no read-model (display-readmodels-4) + calamity/upswing receipts dying at the pulse seam | **The W-UPSWING row records the calamityLedger live-surface deferral** — the finding adds 4 new members (politics, interventions, credibility, momentum, resourceDynamics) to that same recorded class → one W-R2-SURFACE wave absorbs the deferral |
+| navalStrength invisible (product-fit-5) | **W-NAVY seam-notes** record "naval movements into the rumor carrier (phantom fleets)" as a micro-wave — the standing-state display (defenseDisplay band + warStatus blockade line) is the new half |
+| Whispers registered-not-rendered (immersion-r2-3, guidance-1/2) | **W-GUIDE-2b is the recorded continuation task** (Keeper's Handbook + deep titles) — whisper render-wiring + the walker's source-census check JOIN its charge |
+| One-army law unidirectional (war-military-2) | **The W-CONVERGENCE row records the isolated-`interventions`-ledger JUDGMENT** — the unidirectional gate is a consequence of that recorded isolation; the fix honors the judgment (lazy read, 0-when-dark) rather than reversing it |
+| Momentum micro-seams (intervention deposits entry-dead, conscience door unconsumed — sim-cohesion-1/2) | **The W-MOMENTUM row records naval seams (b)(c)(d) + face-save signals + court-structure reader as micro-waves** — the two findings are new members of that recorded micro-wave batch → one W-R2-SEAMS sub-batch |
+| War-room PDF missing its treaty table (ambition-fit-3) | **SM-4 (pending) owns the PDF plate work** — the treaty section joins SM-4's charge |
+| settlement.schema doc-drift trio (JSDoc, 14-vs-16 union, band boundaries) | **MERGE §8-3b** already queues the schema field-level delta adjudication for the owner — fold the doc-truth fixes into that same moment (schema shape is owner-gated) |
+| Mechanical-register receipts + faction headlines (immersion-r2-5/7) | **Surveyor S1 records a voice-alignment pass** — cheap fixes land in W-R2 now; S1 re-sweeps the register after |
+| settlementSlice size (2,254 raw, no ceiling) | **FP-2 store-slice split is parked owner-gated** (§0.6 ruling: reclaim vehicle) — the ceiling guard is new; the split itself stays FP-2's |
+| W2 feed-retention trap instruction (docs-knowledge-6) | **Round-21 W2 re-apply is itself queued work** — the finding corrects its instruction, not its existence |
+| Zero-grain-gift sibling (E1a) | **Recorded as flagged for the FP-G3+verbs wave** — VERIFY at Phase P whether 41c4447d closed it before minting anything |
+
+**GENUINELY NEW (no recorded home — these are the fix program's real net-new load):**
+the cross-wave seam highs (naval never-retire, movers-ignore-remnants, upswing same-tick clobber,
+generosity triage, occupation-on-overstay — the convergence surveyor explicitly verified these are
+NOT recorded deferrals), the intent-trust cluster (queue-refusal-as-success, editSeed inversions,
+autosave key, saveId stamp, rename name-column, outbox column keying, pause-window rules/canonize
+guards), the commerce/auth highs (AuthModal, post-purchase copy), the two analytics privacy
+violations, the pause-verdict surface (product-fit-1), the regressed fiction classes + their
+missing walkers, the guard-lag class (kernel fence, dist-read gating, SCC, size ceilings,
+spatialUsage), the perf residue (ensured-brand part (b) — prescribed by a round-1 verdict,
+shipped half, never recorded as deferred), data-tables' registry ingest + goods shapes, DEPLOY/
+ARCHITECTURE/CONTRIBUTING doc rot, and the ambition surfacing pair (warCausalBrief mount,
+hegemony read — designed in the weave doc, never assigned a wave).
+
+**Net effect on Phase P:** roughly a fifth of the high/medium register resolves into work that
+was already scheduled — the merge waves, GUIDE-2b, SM-4, FP-2, the micro-wave batch, and the
+owner queue — and the wave plan routes those there instead of duplicating them. The genuinely
+new load concentrates exactly where the synthesis said: seams, intent-trust, and guards.
+
+---
+
 # THE FINDINGS REGISTER — ROUND 2 (191 findings from the landed 23 slices; verdict column filled by Phase V)
 
 *(Generated from `docs/review-r2/RAW_SURVEY_RESULTS.json`; the JSON is authoritative for
