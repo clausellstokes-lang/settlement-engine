@@ -726,9 +726,14 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
 >   doc marks the 10 pending dimensions explicitly.
 
 ## Phase plan — ROUND 2 (checkboxes are the resume pointer)
-- [ ] **Phase S — SURVEY** (Fable, 33 agents): in flight as `wf_d69567dc-f0d`.
-- [ ] **Phase A — ASSESSMENT** (Fable main loop): synthesize → owner-facing holistic thoughts +
-      the round-2 register, committed as `docs/COMPREHENSIVE_REVIEW_2026-07-15.md`.
+- [x] **Phase S — SURVEY** (Fable, 33 agents): 23/33 landed (ALL 22 subsystems + determinism
+      dim; full tree read). REMAINDER: 10 dimension reviewers re-dispatch after the 3:30am ET
+      reset (script: docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.workflow.txt pruned to
+      .result.missingSlices). Raw results banked @ 3cc2dfbe.
+- [x] **Phase A — ASSESSMENT** (Fable main loop): `docs/COMPREHENSIVE_REVIEW_2026-07-15.md`
+      COMMITTED — verdict (0C/14H/68M/109L; defect mass migrated to cross-wave seams +
+      built-but-unwired class), full 191-finding register with per-slice coverage, owner-urgent
+      list (§6), fix-program shape (§7), dimension re-dispatch queue (§8).
 - [ ] **Phase V — VERIFY** (Opus, model:'opus'): 2 independent lenses per high/critical, 1 per
       medium; lows defer to implementation-time verification.
 - [ ] **Phase P — WAVE PLAN** (Fable architect): fenced waves, bold-over-safe, golden-shift
