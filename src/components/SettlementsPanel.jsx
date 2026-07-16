@@ -390,18 +390,26 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         was_published: !!deletedSave.is_public,
       });
     }
-    const deletedNet = deletedSave?.settlement?.neighbourNetwork || [];
-    let updated = saves.filter(s => s.id !== id).map(s => {
-      const wasLinked = deletedNet.some(n => n.id === s.id || n.linkId);
-      if (!wasLinked) return s;
-      const cleanNet = (s.settlement?.neighbourNetwork||[]).filter(n => n.id !== id && n.name !== deletedSave?.name);
-      const cleanISR = (s.settlement?.interSettlementRelationships||[]).filter(r => r.partnerSettlement !== deletedSave?.settlement?.name && r.partnerSettlement !== deletedSave?.name);
-      if (cleanNet.length === (s.settlement?.neighbourNetwork||[]).length && cleanISR.length === (s.settlement?.interSettlementRelationships||[]).length) return s;
+    // Survivors computed ONCE (was recomputed per-row inside the map and again
+    // in the modifiedIds filter — O(n²)). `updated` is index-aligned to it, so
+    // the changed-row diff below is a cheap per-index identity compare.
+    // Clean only a survivor whose OWN network genuinely references the deleted
+    // save — by neighbour id OR matching name (top-level or settlement name).
+    // The previous `|| n.linkId` predicate matched ANY entry carrying a linkId,
+    // flagging (and re-scanning) every unrelated survivor.
+    const survivors = saves.filter(s => s.id !== id);
+    const names = new Set([deletedSave?.name, deletedSave?.settlement?.name].filter(Boolean));
+    const refsDeleted = n => n.id === id || names.has(n.name);
+    const updated = survivors.map(s => {
+      const net = s.settlement?.neighbourNetwork || [], isr = s.settlement?.interSettlementRelationships || [];
+      if (!net.some(refsDeleted)) return s;
+      const cleanNet = net.filter(n => !refsDeleted(n)), cleanISR = isr.filter(r => !names.has(r.partnerSettlement));
+      if (cleanNet.length === net.length && cleanISR.length === isr.length) return s;
       return { ...s, settlement: { ...s.settlement, neighbourNetwork: cleanNet, interSettlementRelationships: cleanISR } };
     });
     setSaves(updated); setDeleteId(null);
     if (detail?.saveData?.id === id) setDetail(null);
-    const modifiedIds = updated.filter((s, i) => s !== saves.filter(x => x.id !== id)[i]).map(s => s.id);
+    const modifiedIds = updated.filter((s, i) => s !== survivors[i]).map(s => s.id);
     persistBatch(updated, modifiedIds, { deletes: [id] });
   };
 

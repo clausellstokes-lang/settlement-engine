@@ -26,6 +26,7 @@ import { X } from 'lucide-react';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 const PipelineRail = lazy(() => import('../PipelineRail.jsx'));
 
@@ -58,16 +59,10 @@ export default function SimulationDrawer({ variant = 'inline' }) {
     }
   }, [open]);
 
-  // Esc-to-close keyboard handling — lives in an effect so the
-  // listener is bound only while the drawer is open.
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open]);
+  // Back the aria-modal="true" promise with real focus management: move focus
+  // into the panel on open, trap Tab, restore focus on close, and dismiss on
+  // Escape (stack-aware — subsumes the old bespoke window keydown listener).
+  const dialogRef = useDialogFocusTrap(open, () => setOpen(false));
 
   return (
     <>
@@ -105,6 +100,7 @@ export default function SimulationDrawer({ variant = 'inline' }) {
           />
           {/* Panel */}
           <aside
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-label="How this was simulated"

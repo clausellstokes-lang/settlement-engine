@@ -33,7 +33,13 @@ const REROLLABLE = {};
 afterEach(cleanup);
 
 describe('Rename consolidation — single inline header edit', () => {
-  it('routes a header rename to onRenameSettlement when allowRename is on (saved editor)', () => {
+  it('ignores allowRename in the read-only viewer — the saved-editor inline rename is master-only', () => {
+    // LINEAGE NOTE (master merge W6): RF's DossierHeaderRow has NO allowRename /
+    // onRenameSettlement path (its signature is readOnly/queueEdit/settlement/…).
+    // Inline settlement rename is gated purely on `!readOnly && queueEdit` — the
+    // LIVE generation editor; the readOnly SAVED-dossier header stays plain text.
+    // Master's "saved editor allowRename → onRenameSettlement" affordance is not on
+    // this lineage, so passing allowRename must NOT make a readOnly header editable.
     const onRenameSettlement = vi.fn();
     render(
       <DossierHeaderRow
@@ -46,13 +52,10 @@ describe('Rename consolidation — single inline header edit', () => {
         onRenameSettlement={onRenameSettlement}
       />,
     );
-    // The header name is now an editable trigger.
-    const trigger = screen.getByRole('button', { name: /Edit settlement name/i });
-    fireEvent.click(trigger);
-    const input = screen.getByLabelText('Edit settlement name');
-    fireEvent.change(input, { target: { value: 'New Stoneford' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    expect(onRenameSettlement).toHaveBeenCalledWith('New Stoneford');
+    // No editable trigger — readOnly wins; allowRename is inert on RF.
+    expect(screen.queryByRole('button', { name: /Edit settlement name/i })).toBeNull();
+    expect(screen.getByText('Stoneford')).toBeTruthy();
+    expect(onRenameSettlement).not.toHaveBeenCalled();
   });
 
   it('keeps the header name plain text in the read-only viewer (no allowRename)', () => {
@@ -160,22 +163,22 @@ async function renderHeaderDetail() {
 }
 
 describe('Rename relocation — persistent header card <h1> (read/edit split)', () => {
-  it('the header name is inline-editable in edit mode and routes a commit through the rename', async () => {
+  it('the persistent header name is plain text in edit mode — no inline-header settlement rename on RF', async () => {
+    // LINEAGE NOTE (master merge W6): RF's SettlementDetail persistent header
+    // renders the settlement name as a plain <span> (SettlementDetail.jsx:422), not
+    // an inline-editable EditableInline. The master read/edit-split relocation
+    // (header <h1> inline rename → handleApplyRename('settlement', …) → queueChange)
+    // is not on this lineage: RF's Edit-Names panel renames only NPCs/factions, and
+    // settlement rename lives in the LIVE editor's DossierHeaderRow queueEdit path.
+    // So there is no "Edit settlement name" trigger in the persistent header,
+    // edit mode or not, and no queueChange fires from just opening it.
     storeState.editMode = true;
     storeState.auth = { tier: 'premium', user: { id: 'u1' } };
     await renderHeaderDetail();
-    // The persistent header <h1> name is now an editable trigger.
-    const trigger = screen.getByRole('button', { name: /Edit settlement name/i });
-    fireEvent.click(trigger);
-    const input = screen.getByLabelText('Edit settlement name');
-    fireEvent.change(input, { target: { value: 'Stonefordshire' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
-    // handleApplyRename('settlement', …) stages on the change-queue for a
-    // standalone (non-simulated) save.
-    expect(queueChange).toHaveBeenCalledWith('save-1', expect.objectContaining({
-      type: 'rename',
-      payload: expect.objectContaining({ renameType: 'settlement', newName: 'Stonefordshire' }),
-    }));
+    expect(screen.queryByRole('button', { name: /Edit settlement name/i })).toBeNull();
+    // The name still renders as static header text.
+    expect(screen.getAllByText('Stoneford').length).toBeGreaterThan(0);
+    expect(queueChange).not.toHaveBeenCalled();
   });
 
   it('the header name stays plain text for a free user (cannot edit) in read mode', async () => {

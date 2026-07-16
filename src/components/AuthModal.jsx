@@ -17,8 +17,13 @@ import { GOLD, INK, INK_DEEP, BORDER, CARD, serif_, SP, R, FS } from './theme.js
 import { t } from '../copy/index.js';
 import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
 
-export default function AuthModal({ onClose, isMobile = false }) {
+export default function AuthModal({ onClose }) {
+  // Read the shared reactive viewport flag (updates on resize + rotate) so the
+  // mobile scroll-bound applies wherever the modal is mounted, not only when a
+  // caller happens to thread an isMobile prop.
+  const isMobile = useIsMobile();
   return (
     <div
       onClick={onClose}

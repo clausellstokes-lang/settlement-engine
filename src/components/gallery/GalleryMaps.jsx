@@ -139,8 +139,12 @@ export default function GalleryMaps({ onNavigate }) {
         {items.map((m) => (
           <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
-              {m.backdrop_kind === 'image' && m.thumb_url ? (
-                <img src={m.thumb_url} alt={m.name || 'Shared map'} loading="lazy"
+              {/* Show a picture whenever one exists — an auto-generated thumb
+                  (thumb_url) OR the owner cover (image_url, the terrain snapshot
+                  the share editor auto-seeds). The prior gate required
+                  backdrop_kind==='image', so every FMG map fell to the placeholder. */}
+              {(m.thumb_url || m.image_url) ? (
+                <img src={m.thumb_url || m.image_url} alt={m.name || 'Shared map'} loading="lazy"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
               ) : (
                 <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: MUTED, fontSize: FS.xs, background: PARCH }}>

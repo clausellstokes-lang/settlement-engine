@@ -162,12 +162,14 @@ describe('(2) bare root is owned by the front door, order-independent', () => {
     expect(targets).not.toContain('/create');
   });
 
-  test("a returning signed-in visitor at '/' also lands on /home, not /create", () => {
-    // The stale comments (routes.js home entry, App's home-render note) claimed
-    // returning visitors land on /create via a localStorage gate. There is no
-    // such gate: the front door rewrites '/' to /home for EVERYONE, signed-in
-    // members included. With a restored session (token present, auth resolved),
-    // the effect still fires once authLoading clears.
+  test("a returning signed-in member at '/' lands on /create, not /home", () => {
+    // LINEAGE NOTE (master merge W6): RF's bare-root front door (App.jsx:154-177)
+    // is member-aware BY DESIGN (decision 7's member-redirect): anon visitors go
+    // to /home (the marketing Welcome), signed-in members go straight to /create
+    // (their workspace) so a returning member never lands on marketing. Master's
+    // variant rewrote '/' to /home for everyone; this assertion is re-pointed to
+    // RF's deliberate member-redirect. With a restored session (token present,
+    // auth resolved), the effect fires once authLoading clears.
     window.history.replaceState(null, '', '/');
     H.route = { view: 'generate', params: {}, legacy: false, notFound: false };
     H.hasToken = true;
@@ -176,8 +178,8 @@ describe('(2) bare root is owned by the front door, order-independent', () => {
     render(<App />);
 
     const targets = replacePath.mock.calls.map((c) => c[0]);
-    expect(targets).toContain('/home');
-    expect(targets).not.toContain('/create');
+    expect(targets).toContain('/create');
+    expect(targets).not.toContain('/home');
   });
 
   test('legacy / notFound paths still upgrade to their canonical path', () => {

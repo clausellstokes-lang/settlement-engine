@@ -547,11 +547,12 @@ export default function HowToUse({ standalone=false }) {
       <div style={{ background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl,
         boxShadow:ELEV[1], overflow:'hidden' }}>
         {/* Tab bar */}
-        <div className="tab-strip" style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
+        <div className="tab-strip" role="tablist" aria-label="Guide sections"
+          style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`,
           overflowX:'auto' }}>
           {TABS.map(({ id, label, Icon }) => (
-            <button key={id} type="button" onClick={() => setActiveTab(id)}
-              aria-pressed={activeTab===id}
+            <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
+              aria-selected={activeTab===id}
               style={{ display:'flex', alignItems:'center', gap:5, padding:'12px 18px',
                 background: activeTab===id ? CARD : 'transparent',
                 border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',
@@ -582,10 +583,11 @@ export default function HowToUse({ standalone=false }) {
     <div style={{ borderRadius:8, overflow:'hidden' }}>
       <>
         {/* Tab bar */}
-        <div style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`, overflowX:'auto' }}>
+        <div role="tablist" aria-label="Guide sections"
+          style={{ display:'flex', background:PARCH, borderBottom:`1px solid ${BOR}`, overflowX:'auto' }}>
           {TABS.map(({ id, label, Icon }) => (
-            <button key={id} type="button" onClick={() => setActiveTab(id)}
-              aria-pressed={activeTab===id}
+            <button key={id} type="button" role="tab" onClick={() => setActiveTab(id)}
+              aria-selected={activeTab===id}
               style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 14px',
                 background: activeTab===id ? CARD : 'transparent',
                 border:'none', borderBottom: activeTab===id ? `2px solid ${GOLD}` : '2px solid transparent',

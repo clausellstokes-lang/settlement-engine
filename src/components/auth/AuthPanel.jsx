@@ -28,6 +28,7 @@ import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
@@ -67,6 +68,10 @@ export default function AuthPanel({
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [magicSent, setMagicSent] = useState(false); // email sign-in link dispatched
+  // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
+  // the Button primitive without breaking the seamless borderless segments), so
+  // it misses the primitive's mobile 44px tap floor — apply it inline on mobile.
+  const isMobile = useIsMobile();
 
   // User-initiated mode switch. Pages hand this to the router (changes the
   // URL); the modal switches in place. The signup → verify transition is
@@ -230,6 +235,9 @@ export default function AuthPanel({
                 border: 'none', cursor: 'pointer',
                 fontSize: FS.sm, fontWeight: mode === id ? 700 : 500,
                 color: mode === id ? GOLD : MUTED, fontFamily: sans,
+                // Mobile 44px tap floor (the primitive's floor doesn't reach this
+                // raw segment, so it is applied inline). Desktop unchanged.
+                ...(isMobile ? { minHeight: 44 } : null),
               }}
             >
               {label}
@@ -279,7 +287,7 @@ export default function AuthPanel({
           Sign-up does NOT offer the link — account creation is password-only
           (mirrors OAuth being withheld from sign-up). */}
       {(showDiscord || showGoogle) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
+        <div data-testid="oauth-section" style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm }}>
           <OrDivider label={t('auth.oauth.divider')} />
           {showDiscord && (
             <OAuthButton

@@ -24,6 +24,7 @@ import { PDF_VARIANTS } from '../../pdf/variants.js';
 import { t } from '../../copy/index.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
+import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 
 const VARIANT_ICON = {
   draft_brief:     Edit3,
@@ -66,6 +67,10 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
   const hasFoundry = typeof onExportFoundry === 'function';
   const [format, setFormat] = useState('pdf');
   const effectiveFormat = hasFoundry ? format : 'pdf';
+  // Back the aria-modal="true" promise with real focus management (trap Tab,
+  // move focus in on open, Escape dismisses, restore focus on close). Called
+  // before the `!open` early return so hook order stays stable.
+  const dialogRef = useDialogFocusTrap(open, onClose);
 
   if (!open) return null;
 
@@ -83,6 +88,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
     // (vs button) is the correct a11y semantics, so this rule can't be satisfied.
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="true"
       aria-labelledby="export-sheet-title"

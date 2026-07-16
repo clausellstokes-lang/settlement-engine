@@ -46,6 +46,10 @@ export function useGalleryPageState(routeSlug = null) {
   const [listError, setListError] = useState(null);
   const [sort, setSort] = useState('relevant');
   const [search, setSearch] = useState('');
+  // `search` mirrors the input for immediate display; `debouncedSearch` is what
+  // the fetch query keys on, so typing a word fires one request rather than one
+  // per character. Clearing to empty propagates immediately (see effect below).
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [filters, setFilters] = useState(() => ({ ...EMPTY_GALLERY_FILTERS }));
   const [activeSlug, setActiveSlug] = useState(routeSlug || null);
   const [dossier, setDossier] = useState(null);
@@ -58,7 +62,20 @@ export function useGalleryPageState(routeSlug = null) {
   const [actionError, setActionError] = useState(null);
   const [actionNotice, setActionNotice] = useState(null);
 
-  const galleryQuery = useMemo(() => ({ sort, search, filters }), [sort, search, filters]);
+  // Debounce search → query propagation so a fetch fires once typing settles,
+  // not on every keystroke. An empty search (clear / backspace-to-empty) skips
+  // the delay so resetting the feed feels instant.
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- debounce: empty search resets instantly
+    if (search === '') { setDebouncedSearch(''); return undefined; }
+    const id = setTimeout(() => setDebouncedSearch(search), 250);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  const galleryQuery = useMemo(
+    () => ({ sort, search: debouncedSearch, filters }),
+    [sort, debouncedSearch, filters],
+  );
 
   // Generation token: bumped on every query change so an in-flight loadMore
   // (which isn't bound to this effect's lifecycle) can detect a stale query and
@@ -68,6 +85,7 @@ export function useGalleryPageState(routeSlug = null) {
   useEffect(() => {
     let cancelled = false;
     const gen = ++queryGenRef.current;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- spinner on query change
     setListLoading(true); // show the spinner immediately on a query change
     const mine = !!galleryQuery.filters?.mine;
     const run = mine
@@ -107,8 +125,17 @@ export function useGalleryPageState(routeSlug = null) {
     return () => { cancelled = true; };
   }, [savedSettlementsLoaded, setSavedSettlements]);
 
+  // The slug whose dossier is currently open or in-flight. The route-sync
+  // effect reads this to avoid re-fetching a dossier openDossier just opened:
+  // a card click calls openDossier (one fetch) AND navigate(), and that navigate
+  // bumps routeSlug → re-runs the effect, which would otherwise fire a second
+  // identical fetch. Kept in a ref so it's current synchronously, without
+  // re-triggering the effect.
+  const openSlugRef = useRef(routeSlug || null);
+
   const openDossier = useCallback(async (slug, options = {}) => {
     if (!slug) return;
+    openSlugRef.current = slug;
     setActiveSlug(slug);
     setDossierLoading(true);
     setDossierError(null);
@@ -129,6 +156,9 @@ export function useGalleryPageState(routeSlug = null) {
 
   useEffect(() => {
     if (routeSlug) {
+      // Already open (or loading) for this slug — e.g. openDossier just
+      // navigate()'d here. Don't fire a duplicate fetch for what's on screen.
+      if (openSlugRef.current === routeSlug) return;
       void Promise.resolve().then(() => openDossier(routeSlug, { replace: true }));
       return;
     }
@@ -136,11 +166,14 @@ export function useGalleryPageState(routeSlug = null) {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('slug');
     if (slug) {
+      if (openSlugRef.current === slug) return;
       void Promise.resolve().then(() => openDossier(slug, { replace: true }));
       return;
     }
     // No slug in the route (e.g. browser Back from /gallery/:slug → /gallery):
     // close the open dossier so the view matches the URL.
+    openSlugRef.current = null;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- route-sync: close dossier to match URL
     setActiveSlug(null);
     setDossier(null);
     setDossierError(null);

@@ -70,16 +70,20 @@ describe('HowToUse — Living World tab + split Under-the-Hood', () => {
     expect(container.textContent).toContain('Advance Time');
   });
 
-  it('Under the Hood renders BOTH the Generation and Simulation sections', async () => {
+  it('Under the Hood renders the derivation mechanics insights', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { container } = render(<HowToUse standalone />);
     clickTab(container, 'Under the Hood');
     const text = container.textContent.toLowerCase();
-    expect(text).toContain('generation: how one town is derived');
-    expect(text).toContain('simulation: how the region moves');
-    // The simulation section names the substrate + the why-trace.
-    expect(text).toContain('sixteen causal variables');
-    expect(text).toContain('why-trace');
+    // LINEAGE NOTE (master merge W6): the original assertions pinned master's
+    // SPLIT Under-the-Hood ("Generation: how one town is derived" / "Simulation:
+    // how the region moves" / "sixteen causal variables" / "why-trace"). RF's
+    // LogicTab is the single non-split "Under the Hood" mechanics tab; the
+    // assertions are re-pointed to its actual constraint-derivation insights.
+    expect(text).toContain('the outputs aren\'t random. they\'re derived');
+    expect(text).toContain('constraint-driven, not random');
+    expect(text).toContain('sliders as probability weights');
+    expect(text).toContain('magic as an economic buffer');
   });
 });
 

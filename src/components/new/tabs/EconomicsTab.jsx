@@ -76,6 +76,11 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  */
 function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
+  // Guard: a single malformed income entry (no string `source`) must not throw
+  // and white-screen the whole tab — in the live generate flow this section is
+  // rendered without an error boundary around it. Filter to entries we can
+  // safely .toLowerCase() before the .some/.find matching below.
+  const safeIncome = incomeSources.filter(inc => typeof inc?.source === 'string');
   const impairedCount   = chains.filter(c => c.status === 'impaired').length;
   const vulnerableCount = chains.filter(c => c.status === 'vulnerable').length;
   const entrepotCount   = chains.filter(c => c.entrepot).length;
@@ -113,14 +118,15 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
       <div style={{display:'flex',flexDirection:'column',gap:6}}>
         {filtered.map((chain, i) => {
           const st = FLOW_STATUS[chain.status] || FLOW_STATUS.operational;
-          const hasIncome = incomeSources.some(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          );
-          const incomeEntry = hasIncome ? incomeSources.find(inc =>
-            inc.source.toLowerCase().includes(chain.label.split(' ')[0].toLowerCase()) ||
-            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'))
-          ) : null;
+          // A chain may lack a label; default to '' so .split(' ')[0] is always
+          // a defined string before .toLowerCase() (matches a malformed entry).
+          const chainKeyword = String(chain.label || '').split(' ')[0].toLowerCase();
+          const matchesIncome = (inc) =>
+            inc.source.toLowerCase().includes(chainKeyword) ||
+            (chain.needKey === 'trade_entrepot' && inc.source.toLowerCase().includes('entrepôt'));
+          const incomeEntry = chainKeyword
+            ? (safeIncome.find(matchesIncome) || null)
+            : (chain.needKey === 'trade_entrepot' ? (safeIncome.find(matchesIncome) || null) : null);
 
           return (
             <div key={i} style={{

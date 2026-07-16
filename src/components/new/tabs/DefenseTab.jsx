@@ -7,10 +7,14 @@ import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js
 import {NarrativeNote} from '../NarrativeNote';
 import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { truncateAtWord } from '../../../lib/text.js';
+import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function DefenseTab({ settlement:r, narrativeNote}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
+  // Mobile: let the threat row wrap and the label flex, so a long threat name
+  // ("Siege & Assault") no longer clips against the fixed 130px slot at 375px.
+  const isMobile = useIsMobile();
   if (!r) return null;
 
   const d = r.defenseProfile || {};
@@ -149,9 +153,11 @@ export function DefenseTab({ settlement:r, narrativeNote}) {
               <div key={i} role="button" tabIndex={0} style={{border:`1px solid ${isExp?color+'60':'#e0d0b0'}`,borderLeft:`3px solid ${color}`,borderRadius:6,overflow:'hidden',background:isExp?`${color}06`:'#faf8f4',cursor:'pointer'}}
                 onClick={()=>setExpandedThreat(isExp?null:i)}
                 onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedThreat(isExp?null:i);}}}>
-                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px'}}>
+                <div style={{display:'flex',alignItems:'center',gap:8,padding:'8px 12px',flexWrap:isMobile?'wrap':undefined}}>
                   <span style={{fontSize: FS['14'],flexShrink:0,lineHeight:1}}>{icon}</span>
-                  <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
+                  <span style={isMobile
+                    ? {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,flex:'1 1 auto',minWidth:0,lineHeight:1.3}
+                    : {fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,width:130,flexShrink:0,lineHeight:1.3}}>{label}</span>
                   <div style={{width:72,height:6,background:swatch['#E8DCC8'],borderRadius:3,overflow:'hidden',flexShrink:0}}>
                     <div style={{height:'100%',width:`${sc}%`,background:color,borderRadius:3}}/>
                   </div>

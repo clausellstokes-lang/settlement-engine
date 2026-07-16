@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Check, Eye, MessageCircle, Share2, Sparkles, ThumbsUp } from 'lucide-react';
 
 import { t } from '../../copy/index.js';
@@ -27,6 +27,12 @@ import VoteButton from './VoteButton.jsx';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
   const [shared, setShared] = useState(false);
+  // DOMPurify isn't cheap and a gallery is a long list where each card
+  // re-renders on vote/scroll; sanitize only when the description string changes.
+  const descriptionHtml = useMemo(
+    () => (item.description ? sanitizeGalleryHtml(item.description) : ''),
+    [item.description],
+  );
   const onShare = async () => {
     const r = await shareGalleryDossier({ slug: item.slug, name: item.name });
     if (r.ok) { setShared(true); setTimeout(() => setShared(false), 1600); }
@@ -151,7 +157,7 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               WebkitBoxOrient: 'vertical',
               overflow: 'hidden',
             }}
-            dangerouslySetInnerHTML={{ __html: sanitizeGalleryHtml(item.description) }}
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
           />
         )}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
