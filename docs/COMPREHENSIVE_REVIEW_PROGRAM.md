@@ -972,6 +972,35 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ W7 GREEN LOCAL — push held per owner ruling (2026-07-16 ~17:40).** The full constitutional
+gate on the reconciled tree, branch `claude/w7-prep` tip b1e6aa24: validate:data /
+migration-head / edge / map ALL green · typecheck (full + domain:strict) exit 0 · lint 0 errors
+(15 pre-existing warnings in untouched files) · suite **11,599 passed / 11 skipped / 1 failed —
+the SOLE red is EXEMPT_CEILING 69>66 (owner-gated, exactly the runbook's enumerated set)** ·
+verify:dist 143/143 on a fresh build (closure ≤ 1,066,400 — RATCHET #10 holds) · goldens
+byte-identical in-suite. THE +3 EXEMPT ENUMERATED for the owner: focusEntity /
+clearFocusedEntity / hydrateServicesToggles (master-lineage ephemeral view-state, same class as
+the 66) — sign the ceiling at 69 OR commission adopting the three into the operation surface.
+**W7-PREP BURN-DOWN RATIFIED (agent-delivered, checker-verified diffs-match-scope):**
+41f6eaca (typecheck exit 2→0; viewModel 1041→1043 + aiSlice 941→961 re-mints, 5th
+type-honestly-at-merge instance) · fc6cb5cd (useMapAutosave = the TRUE union: RF's shared
+fingerprint + master's flush-on-leave data-loss guard PORTED — an edit inside the 3.5s debounce
+window no longer dies on unmount/pagehide; lazy chunk, zero eager) · df2ba8f1 (4 UI tails:
+dead accountDataPrivacy shell removed · authMobileReflow isMobile prop threaded ·
+advanceMultiTickToolbar aria copy adapted to RF's fix-wave truth · SuccessorPrompt focus trap
+WIRED — a real aria-modal defect fixed) · batchCartAdvanceGuard test REMOVED (advanceBusy was
+dead-unwired even in master; RF's refusalNotice supersedes; content sits in 18949a38 per the
+incident row below). All four agent JUDGMENTs ratified incl. the branch identity: the brief's
+`claude/master-merge-r1` name was STALE (still @ 22bec368); the agent verified-first and cut
+`claude/w7-prep` off the true expected content b1bf0346 (fold-in + FP-G9 + Surveyor docs) —
+**claude/w7-prep is now the program's working lineage; LIGHT cuts from b1e6aa24.**
+**THE ANALYTICAL-COUPLING AMENDMENT TRULY LANDS @ ca6c4ec7** (§4b in DESIGN_CONTENT_PLANE.md:
+intent end-to-end · the world-health metric suite — one evaluator library, two clients ·
+the closed tuning loop that wakes the inert §10 rails; endogeneity-extends-to-telemetry enters
+the law set; matrix rows ×ANALYTICS SEAM + ×SOAK PLAN). Edge bundles regenerated @ b1e6aa24
+(aiGrounding freshness restored; analyticsEvents picks up ANON_CAP_UNLOCK_CLICKED). Housekeeping:
+the abandoned 100-line draft docs/AI_AND_CUSTOM_CONTENT.md (truncated mid-write, superseded by
+THE_CONTENT_PLANE.md @ 023da30b) relocated to the session scratchpad, not deleted.
 **INCIDENT (2026-07-16 ~17:05, manager-caused, contained):** while the W7-prep agent worked
 in the merge worktree, the manager committed docs there and SWEPT the agent's staged deletion
 (tests/ui/batchCartAdvanceGuard.test.jsx) into 18949a38 under an unrelated docs message — the
