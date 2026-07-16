@@ -64,15 +64,25 @@ describe('WizardNextSteps — W-4 post-generate guide', () => {
     expect(screen.getByText(/Save it to your library/i)).toBeTruthy();
   });
 
-  it('"Got it" dismisses the guide and persists the dismissal', () => {
+  it('"Got it" dismisses the guide and persists the dismissal (unified sf:guidance key)', () => {
     const first = render(<WizardNextSteps />);
     fireEvent.click(screen.getByRole('button', { name: /dismiss what's next/i }));
     // Gone immediately…
     expect(first.container.firstChild).toBeNull();
-    expect(localStorage.getItem('sf:dismissed_whats_next')).toBe('1');
+    // content-immersion-r2-3: dismissal now rides the unified sf:guidance store,
+    // not the bespoke sf:dismissed_whats_next legacy key.
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
     // …and stays gone on a fresh mount (persisted).
     cleanup();
     const second = render(<WizardNextSteps />);
     expect(second.container.firstChild).toBeNull();
+  });
+
+  it('a legacy sf:dismissed_whats_next dismissal read-once-migrates to the unified key', () => {
+    localStorage.setItem('sf:dismissed_whats_next', '1');
+    const view = render(<WizardNextSteps />);
+    // The pre-consolidation dismissal carries forward — the veteran is not re-taught.
+    expect(view.container.firstChild).toBeNull();
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
   });
 });
