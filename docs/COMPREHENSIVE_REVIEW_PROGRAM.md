@@ -726,10 +726,12 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
 >   doc marks the 10 pending dimensions explicitly.
 
 ## Phase plan — ROUND 2 (checkboxes are the resume pointer)
-- [x] **Phase S — SURVEY** (Fable, 33 agents): 23/33 landed (ALL 22 subsystems + determinism
-      dim; full tree read). REMAINDER: 10 dimension reviewers re-dispatch after the 3:30am ET
-      reset (script: docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.workflow.txt pruned to
-      .result.missingSlices). Raw results banked @ 3cc2dfbe.
+- [x] **Phase S — SURVEY: COMPLETE 33/33** (2026-07-16 ~00:45; 11.1M total survey tokens).
+      Full-fleet census: **269 findings — 0C / 22H / 99M / 148L.** Full results re-banked
+      @ 84a093d8 (supersedes 3cc2dfbe). Dimensions addendum committed @ a3acb3bc — headline
+      adds: THE UNLIT SWITCHBOARD (all 15 waves dark, no preset/UI lights the 9 gates — owner
+      ruling required), the hollow pause-verdict gate (product-fit high), regressed fiction
+      classes (hand-list guards vs walkers), DEPLOY.md rot on the pre-authorized deploy path.
 - [x] **Phase A — ASSESSMENT** (Fable main loop): `docs/COMPREHENSIVE_REVIEW_2026-07-15.md`
       COMMITTED — verdict (0C/14H/68M/109L; defect mass migrated to cross-wave seams +
       built-but-unwired class), full 191-finding register with per-slice coverage, owner-urgent
