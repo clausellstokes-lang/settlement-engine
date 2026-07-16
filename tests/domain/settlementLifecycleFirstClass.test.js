@@ -32,6 +32,7 @@ import {
 } from '../../src/domain/worldPulse/settlementLifecycleFirstClass.js';
 import { collectRealizedEmigrationEvents } from '../../src/domain/worldPulse/migrationKernel.js';
 import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
+import { reapplyEventConditions } from '../../src/domain/conditionPromotion.js';
 
 const T = SETTLEMENT_LIFECYCLE_TUNING;
 
@@ -295,6 +296,47 @@ describe('the death writer (scarcity + fates + geometry status)', () => {
     expect(dead.config.lifecycleDiedAtTick).toBe(700);
     expect(dead.config.peakTier).toBe('city');                 // the peak is frozen history
     expect(dead.lifecycleHistory.at(-1)).toMatchObject({ event: 'terminal_death', grade: 'relic_ruin' });
+  });
+
+  it('r2 economy-upswing-6: terminal death clears the config.eventConditions projection (+ _config twin) so regen re-promotes NOTHING', () => {
+    // A dying thorp still carrying an EVENT-sourced crisis (plague) whose projection lives in
+    // config.eventConditions / _config.eventConditions — the record a full regeneration replays.
+    const plague = {
+      id: 'condition.plague.event', archetype: 'plague', label: 'Plague', severity: 0.7,
+      affectedSystems: ['population'], causes: [{ source: 'event', eventType: 'APPLY_STRESSOR' }],
+    };
+    const s = thorp('a', { peakTier: 'city', population: 14 });
+    s.activeConditions = [plague];
+    s.config = { ...s.config, eventConditions: [plague] };
+    s._config = { ...s._config, eventConditions: [plague] };
+
+    // NEGATIVE CONTROL (non-vacuity): the regen replay WOULD resurrect the crisis on a bare
+    // remnant if the projection were left standing — clearing activeConditions alone is not enough.
+    const remnantWithStaleRecord = { ...s, activeConditions: [], lifecycleStatus: 'relic_ruin' };
+    const resurrected = reapplyEventConditions(remnantWithStaleRecord);
+    expect(resurrected.activeConditions.some((c) => c.archetype === 'plague'),
+      'CONTROL: a stale eventConditions record re-promotes the plague on regen').toBe(true);
+
+    // THE FIX: the death writer syncs the projection to the now-empty activeConditions.
+    const dead = applySettlementLifecycleOutcomeToSettlement(s, deathOutcome(800));
+    expect(dead.activeConditions).toEqual([]);
+    expect(dead.config.eventConditions, 'config.eventConditions cleared').toEqual([]);
+    expect(dead._config.eventConditions, 'the _config twin cleared (regen reads _config first)').toEqual([]);
+
+    // DIE → REGEN → ZERO: replaying the projection on the dead remnant re-promotes nothing.
+    const regenerated = reapplyEventConditions(dead);
+    expect(regenerated.activeConditions, 'a dead remnant carries zero conditions after regen').toEqual([]);
+  });
+
+  it('r2 economy-upswing-6: a death with NO event-condition record stays byte-identical (no eventConditions key minted)', () => {
+    // The common case: the sync is a strict no-op — it must not add an eventConditions key where
+    // none existed, or it would perturb every ordinary death.
+    const s = thorp('a', { peakTier: 'city', population: 12 });
+    s.activeConditions = [{ id: 'c1', archetype: 'famine', label: 'Famine', severity: 0.5, affectedSystems: [] }];
+    const dead = applySettlementLifecycleOutcomeToSettlement(s, deathOutcome(810));
+    expect(dead.activeConditions).toEqual([]);
+    expect('eventConditions' in dead.config, 'no eventConditions key minted on a plain death').toBe(false);
+    expect('eventConditions' in dead._config).toBe(false);
   });
 
   it('self-contained re-verify: a stale death no-ops (recovered settlement / already-remnant)', () => {

@@ -84,6 +84,11 @@ export const REASON_TUNING = Object.freeze({
   LEGITIMACY_HUNGER_CEILING: 45,
   /** How many peace reasons present reads as "this war is dying" on the irony surface. */
   IRONY_DYING_AT: 3,
+  /** DECLARE_CASUS decree decay (r2 worldpulse-war-military-5): a decreed reason is carried
+   *  through the state-derived fold as a source-of-truth override, linearly RAMPING DOWN to zero
+   *  over this many ticks (max-merged with the organic score each tick), so `force ≡ organic`
+   *  holds by construction — the decree lasts, decays visibly, and is never immortal. */
+  DECREE_RAMP_TICKS: 8,
 });
 
 // ── The typed catalogs + the §14.3 mirror table ─────────────────────────────
@@ -170,6 +175,10 @@ export const REASON_MIRRORS = Object.freeze({
  *   that must survive score-0 folds (e.g. the coalition peak-ally count — a
  *   reason RECORD only exists while its score clears MIN_SCORE, so memory that
  *   precedes presence lives here; dropped with the entry when the pair dies)
+ * @property {Record<string, { score: number, decreedAtTick: number, decreedUntilTick: number, sinceTick: number, receipt: string }>} [decreedReasons]
+ *   r2 worldpulse-war-military-5: DECLARE_CASUS decrees, carried verbatim through the
+ *   state-derived fold (max-merged, ramping down over DECREE_RAMP_TICKS) so `force ≡ organic`
+ *   holds; pruned when a decree passes its decreedUntilTick.
  */
 
 /** @typedef {Record<string, ReasonPairEntry>} ReasonLedger keyed by pairKey */
@@ -240,6 +249,12 @@ export function foldPairReasons(prevEntry, computed, tick, memo = null) {
       evidence: c.evidence,
     });
   }
+  // r2 worldpulse-war-military-5 — carry DECREED reasons through the fold. A DECLARE_CASUS decree
+  // is a source-of-truth override that RAMPS DOWN over DECREE_RAMP_TICKS and is MAX-merged with
+  // the organic (state-derived) score for its type each tick: the decree lasts (survives the
+  // rebuild that used to drop it), decays visibly, and expires — never immortal. When the pair
+  // holds no decree (the common case) this whole block is inert ⇒ byte-identical.
+  const nextDecreed = carryDecreedReasons(prevEntry?.decreedReasons, reasons, tick);
   /** @type {Record<string, number> | null} */
   let memoOut = null;
   if (memo && typeof memo === 'object') {
@@ -251,8 +266,60 @@ export function foldPairReasons(prevEntry, computed, tick, memo = null) {
     }
     if (Object.keys(m).length) memoOut = m;
   }
-  if (Object.keys(reasons).length === 0 && !memoOut) return null;
-  return { reasons, updatedTick: tick, ...(memoOut ? { memo: memoOut } : {}) };
+  if (Object.keys(reasons).length === 0 && !memoOut && !nextDecreed) return null;
+  return {
+    reasons,
+    updatedTick: tick,
+    ...(memoOut ? { memo: memoOut } : {}),
+    ...(nextDecreed ? { decreedReasons: nextDecreed } : {}),
+  };
+}
+
+/**
+ * Fold the surviving DECREED reasons into `reasons` (MUTATING it, max-merge) and return the
+ * carried-forward decree sub-ledger (or null when none survive). A decree ramps linearly from
+ * its `score` at `decreedAtTick` to 0 at `decreedUntilTick`; while its decayed value is ≥
+ * MIN_SCORE and ≥ the organic score it OVERRIDES the reason record (force ≡ organic — the
+ * decreed grievance stands on the ledger as the world's own would). Expired decrees are pruned.
+ * @param {Record<string, { score?: number, decreedAtTick?: number, decreedUntilTick?: number, sinceTick?: number, receipt?: string }> | null | undefined} decreed
+ * @param {Record<string, ReasonRecord>} reasons  MUTATED in place
+ * @param {number} tick
+ * @returns {Record<string, { score: number, decreedAtTick: number, decreedUntilTick: number, sinceTick: number, receipt: string }> | null}
+ */
+function carryDecreedReasons(decreed, reasons, tick) {
+  if (!decreed || typeof decreed !== 'object') return null;
+  /** @type {Record<string, { score: number, decreedAtTick: number, decreedUntilTick: number, sinceTick: number, receipt: string }>} */
+  const nextDecreed = {};
+  for (const type of Object.keys(decreed).sort()) {
+    const d = decreed[type];
+    const until = Number(d?.decreedUntilTick);
+    const at = Number(d?.decreedAtTick);
+    const base = clamp01(Number(d?.score));
+    if (!Number.isFinite(until) || !Number.isFinite(at) || tick >= until) continue; // expired ⇒ pruned
+    // Carry the decree forward verbatim while it is still live.
+    nextDecreed[type] = {
+      score: base,
+      decreedAtTick: at,
+      decreedUntilTick: until,
+      sinceTick: Number.isFinite(d?.sinceTick) ? Number(d.sinceTick) : at,
+      receipt: String(d?.receipt || ''),
+    };
+    const ramp = Math.max(1, until - at);
+    const decayed = clamp01(base * clamp01((until - tick) / ramp));
+    if (decayed < REASON_TUNING.MIN_SCORE) continue; // still live but no longer above the floor
+    const organic = reasons[type] ? Number(reasons[type].score) : 0;
+    if (decayed >= organic) {
+      reasons[type] = reasonRecord({
+        type,
+        score: decayed,
+        tick,
+        sinceTick: reasons[type]?.sinceTick ?? nextDecreed[type].sinceTick,
+        receipt: nextDecreed[type].receipt || reasons[type]?.receipt,
+        evidence: reasons[type]?.evidence,
+      });
+    }
+  }
+  return Object.keys(nextDecreed).length ? nextDecreed : null;
 }
 
 /**
@@ -573,6 +640,17 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
     if (entry) nextLedger[key] = entry;
   }
 
+  // r2 worldpulse-war-military-5: carry forward any pair that holds a LIVE decree but has NO edge
+  // this tick (the state loop above never visits it, so the rebuild would erase the decree). Fold
+  // it with an EMPTY organic set — the decayed decree carries itself; an expired one drops. Inert
+  // (no such pair) when nothing was decreed ⇒ byte-identical.
+  for (const key of Object.keys(prevLedger || {}).sort()) {
+    if (nextLedger[key]) continue; // already produced via an edge
+    if (!prevLedger?.[key]?.decreedReasons) continue;
+    const entry = foldPairReasons(prevLedger[key], [], tick);
+    if (entry) nextLedger[key] = entry;
+  }
+
   const hasNext = Object.keys(nextLedger).length > 0;
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
@@ -653,10 +731,22 @@ export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6,
     sinceTick: prevEntry?.reasons?.[String(type)]?.sinceTick,
     receipt: String(receipt || '').trim() || `Declared by decree: ${String(type)} against ${to}.`,
   });
+  // r2 worldpulse-war-military-5: write the decree into a DECREED sub-ledger so the next tick's
+  // state-derived fold carries it (max-merged, ramping down) instead of dropping it — `force ≡
+  // organic` by construction. The immediate `reasons` write below stands this tick; the decree
+  // sub-record keeps it alive (decaying) for DECREE_RAMP_TICKS thereafter.
+  const decreedUntilTick = record.tick + REASON_TUNING.DECREE_RAMP_TICKS;
   /** @type {ReasonPairEntry} */
   const nextEntry = {
     ...(prevEntry || {}),
     reasons: { ...(prevEntry?.reasons || {}), [record.type]: record },
+    decreedReasons: {
+      ...(prevEntry?.decreedReasons || {}),
+      [record.type]: {
+        score, decreedAtTick: record.tick, decreedUntilTick,
+        sinceTick: record.sinceTick, receipt: record.receipt,
+      },
+    },
     updatedTick: record.tick,
   };
   // Codepoint-stable reason ordering inside the entry (the fold discipline).

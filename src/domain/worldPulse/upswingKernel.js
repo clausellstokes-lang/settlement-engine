@@ -637,6 +637,16 @@ export function advanceUpswing({ snapshot, worldState, settlementUpdates, graph,
         newsEntries.push(bustNews(id, String(item?.name || s.name || id), prior.arteries, embattled, tick, now));
         receipts.push({ id, kind: 'bust', severedArtery: prior.arteries[0] || null, arteries: prior.arteries, cause: embattled ? 'embattlement' : (veinGone ? 'resource_removal' : 'artery_collapse'), throughput: round4(throughput), fragile: prior.fragile });
       } else {
+        // DELIBERATELY DEFERRED (r2 economy-upswing-3, verdict PARTIAL→low): a `boom_cooled`
+        // graceful-exit branch (throughput in [BUST_THROUGHPUT, BOOM_EXIT_THROUGHPUT) ⇒ drop the
+        // boom with no bust penalty) was proposed but is NOT a repair — it is a NEW exit STATE
+        // absent from DESIGN_UPSWING §2 B2 / §4 PINS (which spec boom exit EXCLUSIVELY via
+        // bust-on-severance) and from the shipping memory. Adding it is an owner-gated design
+        // change (new capability vs repair), so it is not shipped here. BOOM_EXIT_THROUGHPUT is
+        // the BUILDING-phase hysteresis-continuation threshold (see :657), not a boom-exit gate;
+        // prosperity band-steps are ladder-cap-clamped (applyProsperityDeltasToUpdates), so the
+        // sustain drift is bounded, not "forever." Owner question if revisited: should booms be
+        // able to cool gracefully rather than only bust?
         // ── SUSTAIN — prosperity DRIFTS up (accrued fractionally; a BAND step emits only
         // when the accrual crosses 1.0 — a boom grows rich on VOLUME, receipted + sourced). ──
         const acc = num(prior.prosperityAccrued, 0) + T.BOOM_PROSPERITY_DRIFT;

@@ -327,7 +327,13 @@ export function commitmentDepositsFor(worldState) {
     const target = String(dep.targetId);
     const role = String(dep.role || 'siege');
     const warCourse = courseKeyOf({ kind: 'war', target });
-    push(actorId, warCourse, 'siege', role === 'intervene' ? T.LOUD_INTERVENTION : T.LOUD_SIEGE);
+    // A deployment is always a SIEGE deposit (r2 cohesion-counterparts-1): convergence never
+    // writes a role:'intervene' deployment — interventions ride their OWN isolated ledger, read
+    // in block 4 below — so the old `role==='intervene'` ternary was production-unreachable and
+    // even if it fired it wrongly deposited into war:<target>, not the contest:<…> course that
+    // owns the FORCE_RECONSIDERATION exit arm.
+    void role;
+    push(actorId, warCourse, 'siege', T.LOUD_SIEGE);
     // INCITEMENT: an OVERT mobilization on this war = rousing the populace (the loudest
     // deposit — the owner's scenario). mobilizationSeverity peaks at 0.5 (mobilized) —
     // normalize to 0..1 so a full war-footing is the maximum. A COVERT preparation barely
@@ -346,6 +352,23 @@ export function commitmentDepositsFor(worldState) {
     const plan = asObject(campaigns[actorId]);
     if (plan.targetId == null) continue;
     push(actorId, courseKeyOf({ kind: 'campaign', target: String(plan.targetId) }), 'campaign', T.LOUD_CAMPAIGN);
+  }
+
+  // 4. FOREIGN INTERVENTIONS (convergence.js — r2 cohesion-counterparts-1). A patron that has
+  //    committed a column to a settlement's INTERNAL contest deposits into course
+  //    contest:<target>|<side> at LOUD_INTERVENTION, mirroring the campaignPlans block. This is
+  //    the ENTRY side the FORCE_RECONSIDERATION contest arm's exit machinery was already built
+  //    for; without it, the whole contest course kind was entry-dead. The `side` (the pole the
+  //    force backs) is load-bearing — courseKeyOf(contest) requires target|side. Reads the
+  //    ISOLATED interventions ledger (0 records when interventions are dark ⇒ byte-identical).
+  const interventions = asObject(getSpatialLedger(worldState, 'interventions'));
+  for (const k of Object.keys(interventions).sort(compareCodepoint)) {
+    const rec = asObject(interventions[k]);
+    const interId = rec.interId != null ? String(rec.interId) : '';
+    const target = rec.target != null ? String(rec.target) : '';
+    const side = rec.side != null ? String(rec.side) : '';
+    if (!interId || !target || !side) continue;
+    push(interId, courseKeyOf({ kind: 'contest', target, side }), 'intervention', T.LOUD_INTERVENTION);
   }
 
   // SEAM NOTES — the remaining legible-act deposit sources (design §1), deferred to the
@@ -523,6 +546,11 @@ export const THRESHOLD_TUNING = Object.freeze({
   // Lawful×chaos: lawfulness (0..1, 0.5 neutral) scales DEPOSITS — a lawful court is bound
   // hard by formal public acts (oaths mean things); a chaotic one loosely (reversal cheap).
   DEPOSIT_LAW_SPAN: 0.6,
+  // ENTRY temperament (cautious/wary): how far a fully-cautious court's DEPOSITS are damped
+  // (r2 politics-psychology-4 — the entry side of "cautious lowers ENTRY not exit"). Floored so
+  // deposits shrink but never vanish. Neutral (no cautious/wary) ⇒ factor 1.0 (byte-neutral).
+  ENTRY_DEPOSIT_SPAN: 0.5,
+  ENTRY_DEPOSIT_FLOOR: 0.4,
   // The PROCEDURAL CRACK: a lawful court reconsidering through legitimate process pays a
   // reduced climb-down price (Stage 4 consumes this); chaotic reversals are cheap but erratic.
   PROCEDURAL_CRACK_SPAN: 0.5,
@@ -568,14 +596,23 @@ function declaredTemperamentFacet(v) {
  * The signed commitment-momentum score for ONE NPC's temperament (Σ of TRAIT_MOMENTUM
  * weights, clamped to −1..+1). FACET LAW: a declared npcTemperament facet wins; else the
  * authored personality descriptors are read (byte-identical degradation). A trait-free NPC
- * scores EXACTLY 0 (the neutral anchor). @param {unknown} npc @returns {number}
+ * scores EXACTLY 0 (the neutral anchor).
+ *   MODE (r2 politics-psychology-4 — "cautious lowers ENTRY not exit"): 'all' sums every
+ *   descriptor (the historic behaviour; default, so direct callers stay byte-identical);
+ *   'exit' EXCLUDES the ENTRY_ONLY descriptors (cautious/wary) so they no longer wrongly bend
+ *   the exit CLIFF; 'entry' keeps ONLY them (feeds the deposit-side entry dampen).
+ * @param {unknown} npc @param {'all'|'exit'|'entry'} [mode] @returns {number}
  */
-export function npcMomentumScore(npc) {
+export function npcMomentumScore(npc, mode = 'all') {
   const declared = declaredTemperamentFacet(npc);
   const traits = declared && declared.length ? declared : authoredMomentumTraits(npc);
   let score = 0;
   for (const t of traits) {
-    const w = /** @type {Record<string, number>} */ (TRAIT_MOMENTUM)[String(t).trim().toLowerCase()];
+    const key = String(t).trim().toLowerCase();
+    const entryOnly = TRAIT_MOMENTUM_ENTRY_ONLY.has(key);
+    if (mode === 'exit' && entryOnly) continue;
+    if (mode === 'entry' && !entryOnly) continue;
+    const w = /** @type {Record<string, number>} */ (TRAIT_MOMENTUM)[key];
     if (Number.isFinite(w)) score += w;
   }
   return clamp(score, -1, 1);
@@ -588,16 +625,19 @@ export function npcMomentumScore(npc) {
  * operative lens is authored importance, exactly as personalityDrive resolves in practice).
  * A settlement with NO scoring NPCs — personality-less structural leaders, the trait-free
  * anchor — returns EXACTLY 0 (the neutral anchor, the absent-⇒-0 law). Order-independent.
- * @param {{ npcs?: unknown } | null | undefined} settlement @returns {number} signed −1..+1
+ * @param {{ npcs?: unknown } | null | undefined} settlement
+ * @param {'all'|'exit'|'entry'} [mode]  'exit' (default) feeds the CLIFF (excludes cautious/wary);
+ *   'entry' feeds the deposit dampen (only cautious/wary); 'all' sums every descriptor.
+ * @returns {number} signed −1..+1
  */
-export function temperamentMomentumOf(settlement) {
+export function temperamentMomentumOf(settlement, mode = 'exit') {
   const s = asObject(settlement);
   const npcs = Array.isArray(s.npcs) ? s.npcs : [];
   if (!npcs.length) return 0;
   let weighted = 0;
   let totalWeight = 0;
   for (const npc of npcs) {
-    const score = npcMomentumScore(npc);
+    const score = npcMomentumScore(npc, mode);
     if (score === 0) continue; // no authored temperament signal — contributes nothing
     const w = importanceWeight(/** @type {import('../entities/npcs.js').NpcLike} */ (/** @type {unknown} */ (npc)));
     if (!(w > 0)) continue;
@@ -605,6 +645,21 @@ export function temperamentMomentumOf(settlement) {
     totalWeight += w;
   }
   return totalWeight > 0 ? clamp(weighted / totalWeight, -1, 1) : 0;
+}
+
+/**
+ * The ENTRY-side temperament dampen factor for a court's DEPOSITS (r2 politics-psychology-4:
+ * "cautious lowers commitment ENTRY but not exit"). A cautious/wary court commits more SLOWLY —
+ * its public acts deposit less commitment stock per tick. Centered on 1.0: a court with no
+ * entry-only descriptors returns EXACTLY 1.0 (byte-neutral); cautious/wary (negative entry
+ * momentum) pulls the factor below 1 toward a floor, never to zero (deposits still land, just
+ * smaller). PURE. @param {{ npcs?: unknown } | null | undefined} settlement @returns {number}
+ */
+export function entryDepositDampenOf(settlement) {
+  const entry = temperamentMomentumOf(settlement, 'entry'); // ≤ 0 for cautious/wary courts
+  const H = THRESHOLD_TUNING;
+  // entry ∈ [−1, 0] ⇒ factor ∈ [1 − ENTRY_DEPOSIT_SPAN, 1], floored so deposits never vanish.
+  return Math.max(H.ENTRY_DEPOSIT_FLOOR, 1 + H.ENTRY_DEPOSIT_SPAN * entry);
 }
 
 // ── THE CLIFF (the entity-appropriate reconsideration threshold) ────────────────
@@ -698,6 +753,25 @@ export function counterEvidenceEffectiveness({ malice01 = 0.5, evidenceClass = '
   // Saintly (malice 0) ⇒ ~1; fully evil (malice 1) ⇒ HUMANITARIAN_EVIL_FLOOR.
   return H.HUMANITARIAN_EVIL_FLOOR + (1 - H.HUMANITARIAN_EVIL_FLOOR) * (1 - malice);
 }
+// DELIBERATELY DEFERRED — OWNER-GATED (r2 cohesion-counterparts-2). counterEvidenceEffectiveness
+// (the good×evil conscience door) is built + unit-tested but has NO live consumer, and wiring it
+// into reconcileBelief's commitment discount (the finding's proposed site) is NOT a mechanical
+// repair — it is blocked on two things that do not exist and are not mine to create:
+//   1. NO humanitarian-evidence CHANNEL. The belief map is entirely POWER-domain: every report is
+//      a military strength/readiness assessment (see BeliefReport / reconcileBelief — strengthBand,
+//      readiness). Report `framing` distinguishes the CARRIER (merchant/army/criminal/faith), not
+//      an evidence CLASS (humanitarian vs power). There is no atrocity-receipt / civilian-cost
+//      channel for the humanitarian branch to read, so a wired door would ALWAYS resolve to
+//      evidenceClass 'power' ⇒ effectiveness 1.0 ⇒ it never discriminates good from evil in
+//      production (an inert wire, not a fix).
+//   2. A DESIGN CONFLICT with the shipped discount. DESIGN_MOMENTUM §2 says power evidence
+//      "penetrates every court at ~full weight" — i.e. the motivated-reasoning discount should
+//      NOT resist power evidence. But the belief map's power-domain commitment discount DOES
+//      resist strength-report contradictions, and momentumWiring.test.js:122 PINS that resistance
+//      as a shipped (dormant) mechanic. Making power penetrate (per the design) would nullify that
+//      pinned discount; leaving it changes the discount's meaning. Reconciling the two is a design
+//      decision, and adding a humanitarian-evidence channel is a genuinely NEW capability — both
+//      owner-gated (judgment-ledger §3). Recorded here, not silently wired or no-op-wired.
 
 // ── THE ENTITY WIRING (all-existing reads → the cliff) ──────────────────────────
 /**
@@ -710,13 +784,13 @@ export function counterEvidenceEffectiveness({ malice01 = 0.5, evidenceClass = '
  * @param {{ settlement?: unknown } | Record<string, unknown> | null | undefined} item a snapshot settlement item
  * @param {{ spatialLedgers?: unknown } | null | undefined} worldState
  * @param {{ consolidation01?: number, oppositionBlocs?: number }} [courtStructure]
- * @returns {{ temperament: number, lawfulness01: number, malice01: number, legitimacyFragility01: number, cliff: number, depositScale: number }}
+ * @returns {{ temperament: number, lawfulness01: number, malice01: number, legitimacyFragility01: number, cliff: number, depositScale: number, entryDepositDampen: number }}
  */
 export function entityThreshold(item, worldState, courtStructure = {}) {
   const settlement = asObject(asObject(item).settlement || item);
   const alignItem = /** @type {import('./disposition.js').AlignmentItem} */ (/** @type {unknown} */ (item));
   const alignSrc = /** @type {import('./disposition.js').AlignmentActsSource} */ (/** @type {unknown} */ (worldState));
-  const temperament = temperamentMomentumOf(settlement);
+  const temperament = temperamentMomentumOf(settlement); // 'exit' mode — the CLIFF excludes cautious/wary
   const lawfulness01 = clamp01(finiteNumber(computeLawfulness(alignItem, alignSrc), 0.5));
   const malice01 = clamp01(finiteNumber(computeMalice(alignItem, alignSrc), 0.5));
   const gl = governanceLedger(/** @type {import('../governanceLedger.js').GovernanceLedgerSource} */ (/** @type {unknown} */ (settlement)));
@@ -727,7 +801,9 @@ export function entityThreshold(item, worldState, courtStructure = {}) {
   const consolidation01 = clamp01(finiteNumber(courtStructure.consolidation01, 0));
   const oppositionBlocs = Math.max(0, finiteNumber(courtStructure.oppositionBlocs, 0));
   const cliff = cliffStockFor({ temperament, legitimacyFragility01, consolidation01, oppositionBlocs });
-  return { temperament, lawfulness01, malice01, legitimacyFragility01, cliff, depositScale: depositScaleFor(lawfulness01) };
+  // The ENTRY side of temperament (r2 politics-psychology-4): cautious/wary dampen DEPOSITS
+  // (commit slowly) — the mirror of their now-removed wrongful bite on the exit cliff.
+  return { temperament, lawfulness01, malice01, legitimacyFragility01, cliff, depositScale: depositScaleFor(lawfulness01), entryDepositDampen: entryDepositDampenOf(settlement) };
 }
 
 // ════════════════════════════════════════════════════════════════════════════════
@@ -1049,15 +1125,23 @@ export function climbDownNews(actorId, targetId, name, stock, cliff, crack, exit
  * @param {number} args.tick
  * @param {((id: string) => string) | null} [args.nameFor]
  * @param {((actorId: string, targetId: string) => string) | null} [args.exitKindFor] the face-saving exit resolver (mediation / …); '' ⇒ full price
+ * @param {Record<string, unknown> | null} [args.priorDeployments] a PRE-war-layer snapshot of
+ *   deployments (r2 politics-psychology-5). The war layer deletes a recalled deployment before
+ *   this late pass runs, so a DM-accept (proposal-lane) sue_for_peace recall — stamped last tick,
+ *   present at pre-war time — would vanish unseen. Merged UNDER the live deployments (live wins
+ *   on collision) so the auto lane (recall stamped THIS tick, still live) and the proposal lane
+ *   (recall in the snapshot, deleted from live) are each detected exactly once.
  * @returns {{ worldState: unknown, settlementUpdates: Array<{ saveId?: unknown, settlement?: unknown }>, newsEntries: Array<Record<string, unknown>>, changed: boolean }}
  */
-export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates, tick, nameFor = null, exitKindFor = null }) {
+export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates, tick, nameFor = null, exitKindFor = null, priorDeployments = null }) {
   const updates = Array.isArray(settlementUpdates) ? settlementUpdates : [];
   if (!momentumActive(worldState)) {
     return { worldState, settlementUpdates: updates, newsEntries: [], changed: false };
   }
   const now = Math.max(0, Math.floor(finiteNumber(tick, 0)));
-  const deployments = asObject(asObject(worldState).deployments);
+  // Merge the pre-war snapshot UNDER the live deployments: a proposal-lane recall the war layer
+  // already deleted survives in the snapshot; a live (auto-lane) deployment overrides it.
+  const deployments = { ...asObject(priorDeployments), ...asObject(asObject(worldState).deployments) };
   const byId = snapshot && snapshot.byId instanceof Map ? snapshot.byId : new Map();
   const name = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => String(id);
 
@@ -1068,14 +1152,22 @@ export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates,
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
 
+  /** @type {string[]} the actor ids whose recall was charged this pass (stamp chargedTick). */
+  const chargedActorIds = [];
+
   for (const actorId of Object.keys(deployments).sort(compareCodepoint)) {
     const dep = asObject(deployments[actorId]);
     const recalled = asObject(dep.recalled);
-    // A FRESH sue_for_peace* recall THIS tick (the war winds down through the existing
-    // sue-for-peace path). The recall stamp is idempotent, so recalled.tick pins the crack
-    // to its ONE tick — charged exactly once.
+    // A FRESH sue_for_peace* recall (the war winds down through the existing sue-for-peace path).
     if (!String(recalled.cause || '').startsWith('sue_for_peace')) continue;
-    if (Math.floor(finiteNumber(recalled.tick, -1)) !== now) continue;
+    // r2 politics-psychology-5: accept a recall stamped THIS tick (the same-pulse AUTO lane) OR
+    // LAST tick (the DM-accept PROPOSAL lane, stamped between pulses at T then read at T+1 — the
+    // early pre-war-layer pass catches it before warDeployment deletes the deployment). The
+    // chargedTick stamp (persisted below) makes it idempotent across the two passes AND across
+    // ticks, so a recall lingering into the next tick is never charged twice.
+    const rt = Math.floor(finiteNumber(recalled.tick, -1));
+    if (rt !== now && rt !== now - 1) continue;
+    if (finiteNumber(recalled.chargedTick, -1) >= 0) continue; // already priced — idempotent
     const targetId = dep.targetId != null ? String(dep.targetId) : '';
     if (!targetId) continue;
     const courseKey = courseKeyOf({ kind: 'war', target: targetId });
@@ -1091,6 +1183,7 @@ export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates,
     deltas.push(crack.credibilityDelta);
     if (crack.legitimacyHit > 0) legitimacyHits.set(actorId, -crack.legitimacyHit);
     newsEntries.push(climbDownNews(actorId, targetId, name, stock, th.cliff, crack, exitKind, now));
+    chargedActorIds.push(actorId);
   }
 
   if (!deltas.length) {
@@ -1099,7 +1192,23 @@ export function advanceMomentumCracks({ snapshot, worldState, settlementUpdates,
   // Fold the 'climb_down' charges into the credibility stock (a no-op — byte-identical — when
   // info-statecraft is dark, so the crack still lands its legitimacy hit + receipt regardless).
   const cred = advanceCredibility({ worldState, tick: now, deltas });
-  const nextWorldState = cred.changed ? cred.worldState : worldState;
+  let nextWorldState = cred.changed ? cred.worldState : worldState;
+  // Persist the chargedTick idempotence stamp on each charged recall that is STILL LIVE (the
+  // auto lane, which lingers a tick before the war layer deletes it) so the following tick does
+  // not re-price it. A proposal-lane recall is already deleted from worldState.deployments (it
+  // survived here only via the pre-war snapshot) — do NOT stamp it, or we would resurrect a
+  // phantom deployment; it cannot recur (it is gone from state), so it needs no stamp.
+  const wsObj = asObject(nextWorldState);
+  const liveDeployments = asObject(wsObj.deployments);
+  const toStamp = chargedActorIds.filter((id) => liveDeployments[id] != null);
+  if (toStamp.length) {
+    const nextDeployments = { ...liveDeployments };
+    for (const actorId of toStamp) {
+      const dep = asObject(nextDeployments[actorId]);
+      nextDeployments[actorId] = { ...dep, recalled: { ...asObject(dep.recalled), chargedTick: now } };
+    }
+    nextWorldState = /** @type {typeof nextWorldState} */ ({ ...wsObj, deployments: nextDeployments });
+  }
   const nextUpdates = applyLegitimacyHits(updates, legitimacyHits);
   return { worldState: nextWorldState, settlementUpdates: nextUpdates, newsEntries, changed: true };
 }
