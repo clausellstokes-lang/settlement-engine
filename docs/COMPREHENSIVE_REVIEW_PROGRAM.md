@@ -785,10 +785,38 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       lows defer to implementation-time verification (recorded, not dropped). The 10-dim
       survey remainder re-dispatched simultaneously (resume of `wf_d69567dc-f0d`, 23 slices
       cached). Both launched when capacity returned (owner: "do it now").
-- [ ] **Phase P — WAVE PLAN** (Fable architect): fenced waves, bold-over-safe, golden-shift
-      track separation as in round 1; sequenced onto the POST-MERGE unified lineage.
+- [x] **Phase P — WAVE PLAN (final, 2026-07-16 ~01:30).** LANDING BASE RE-RULED: the merge
+      session STALLED at W3a (no commits since 22:12; WIP idle 3+ hrs — session dead). Per the
+      owner's charter order (fix THEN merge), Phase F lands on **review-fixes** now; the merge
+      fold-in (Phase M, mine) carries the fixes — nothing strands. Golden-shifting work stays
+      off RF until the regen moment (the merge plan's Stage-1 golden-arbiter survives).
+      **THE WAVES** (fenced; every wave: Opus implementer in an isolated worktree off a verified
+      base hash, full gate, Fable §0.3 review, exact-stage merge):
+      - **BATCH 1 (parallel, disjoint fences):** W-R2-DOCS (docs + freshness pins — must
+        precede Phase O) · W-R2-INTENT (store/hooks/composer intent-trust: refusal surfacing,
+        editSeed round-trip, autosave key, rename column, outbox keying, pause guards, docket
+        ids, eviction receipts) · W-R2-SEAMS (dark-kernel engine seams, byte-neutral by
+        dormancy: naval retire [role-aware per verdict], upswing freshSettlement, movers-skip-
+        remnants, generosity triage + double-decay, boom cooling, satellite stranding,
+        convergence one-army, casus decay, settlementPolitics inputs, momentum ENTRY_ONLY +
+        crack window, terminal-death eventConditions).
+      - **BATCH 2 (after batch 1):** W-R2-TRUST (AuthModal, saveId stamp, purchase copy +
+        tierFacts walk, pricing moment, analytics privacy ×2 + source scan, clawback posture,
+        CORS tightening, grant revoke) · W-R2-GUARDS (kernel fence, dist-read gating, SCC,
+        dormancy oracle, spatialUsage walker, impactKind walkers, size ceilings, transitive
+        spine, seeded properties, soak-to-CI, compendium pin, hard-deny walker) · W-R2-DATA
+        (registry ingest, goods shapes, fish keeper, NPC_ROLES disposition) · W-R2-SURFACE
+        (pause-verdict cards, 5 read-models, navalStrength, warCausalBrief, hegemony display
+        half, forecast candidate UI, FORCE_RECONSIDERATION dial, whisper wiring, palettes,
+        snapshot naming, boom voice + rumor phrases, significance sweep, PDF trio).
+      - **RF-side also:** TRACK-G2 IMPLEMENTED + evidenced, regen PARKED for the owner-signed
+        moment (folds with the lighting shifts).
+      - **POST-MERGE (recorded sequencing):** Phase M fold-in → W-R2-LIGHT → W-R2-DEPTH →
+        the G2+lighting regen moment.
+      REFUTED findings (6) are EXCLUDED from all briefs; PARTIAL corrections BIND the fix
+      shapes (verdict records in docs/review-r2/VERIFY_*.json are part of each brief).
 - [ ] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
-      wave): BLOCKED until the master merge lands (or the owner re-rules the landing branch).
+      wave): batch 1 dispatching on the fresh RF baseline gate.
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
