@@ -623,7 +623,7 @@ export function upsertProposal(worldState, proposal) {
   // Pass 1 on the next upsert — the ring stays bounded (≈ MAX_PROPOSALS, plus
   // the recycling tombstone). Cap-raising / √N scaling for forcing modes is
   // W-R2-DEPTH's D2c — out of scope here; this is only the receipted eviction.
-  const declined = afterResolved.map((/** @type {any} */ p) => {
+  const declined = afterResolved.map((p) => {
     if (overflow > 0 && p && p.status === 'pending') {
       overflow -= 1;
       return { ...p, status: 'expired', expiredAt: stamp, updatedAt: stamp, evictionReason: 'ring_overflow' };

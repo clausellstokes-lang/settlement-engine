@@ -70,6 +70,9 @@
  * @property {string|null} userMessage             toast/banner copy, null = silent
  * @property {{code: string|null, detail?: string, message: string}|null} [veto]  Composer V2 §2 — the handler-veto refusal
  *                                                 (ok:false + veto = the world refused; nothing committed)
+ * @property {boolean} [queued]                    store-hooks-state-1 — a clock-bound queue outcome: `false` on a typed
+ *                                                 queue refusal (advance in flight / parked) so the composer branches
+ *                                                 on it instead of reading the refusal as a silent success
  */
 
 /**
