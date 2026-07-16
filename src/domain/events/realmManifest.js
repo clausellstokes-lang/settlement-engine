@@ -139,6 +139,22 @@ export function courseOptions(worldState, tick = 0) {
   return commitmentCoursesOf(worldState, Number.isFinite(tick) ? tick : Number(worldState?.tick) || 0);
 }
 
+/** The composite target-dial separator for FORCE_RECONSIDERATION: a live course is
+ * an (actorId, courseKey) PAIR, so the single target dial stages both as one value
+ * (`actorId␟courseKey`). ␟ (unit separator) never appears in a settlement
+ * id or a courseKey, so the split is unambiguous. composer-realm-verbs-1. */
+export const COURSE_TARGET_SEP = '␟';
+
+/** Split a composite course-target back into { targetId, courseKey } (the inverse
+ * of the targetOptions composite). Non-composite input passes through unchanged
+ * (courseKey stays whatever the caller supplied). @param {Mut} args */
+export function splitCourseTarget(args) {
+  const raw = String(args?.targetId ?? '');
+  const i = raw.indexOf(COURSE_TARGET_SEP);
+  if (i < 0) return args;
+  return { ...args, targetId: raw.slice(0, i), courseKey: raw.slice(i + COURSE_TARGET_SEP.length) };
+}
+
 /** Remnant / living splits for the lifecycle verbs. @param {RealmCtx} ctx @param {boolean} wantRemnant */
 function lifecycleTargets(ctx, wantRemnant) {
   return (ctx?.settlements || [])
@@ -341,15 +357,19 @@ export const REALM_MANIFEST = Object.freeze({
     ...reconsiderationParked,
     label: 'Force a reconsideration', family: 'War', lane: 'proposal',
     module: 'momentum.js', authority: String(reconsiderationParked.candidateType),
+    // composer-realm-verbs-1: the target dial stages a LIVE (actorId, courseKey)
+    // course as one composite value; stageArgs splits it back into the { targetId,
+    // courseKey } the momentum apply arm reads — no dead '__live__' placeholder that
+    // refused at apply. The pressure band is the only free dial.
     dials: [
-      settlementTargetDial('targetId', 'The committed court'),
-      enumDial('courseKey', ['__live__'], '__live__', 'The course pressed'),
+      settlementTargetDial('targetId', 'The committed course'),
       bandDial('pressure01', 'Pressure', REALM_SEVERITY_VALUES, 'moderate'),
     ],
     targetsFrom: 'campaignSettlements',
     targetOptions: (/** @type {Mut} */ ws, /** @type {RealmCtx} */ ctx) =>
       courseOptions(ws, Number(ws?.tick ?? ctx?.tick) || 0)
-        .map((/** @type {Mut} */ c) => ({ id: c.actorId, name: `${nameFor(ctx, c.actorId)} — ${c.courseKey}` })),
+        .map((/** @type {Mut} */ c) => ({ id: `${c.actorId}${COURSE_TARGET_SEP}${c.courseKey}`, name: `${nameFor(ctx, c.actorId)} — ${c.courseKey}` })),
+    stageArgs: splitCourseTarget,
     coversVetoCodes: ['reconsideration_gate_dark', 'reconsideration_no_course'],
     predicate: (/** @type {Mut} */ ws) =>
       !momentumActive(ws) ? darkMomentum()

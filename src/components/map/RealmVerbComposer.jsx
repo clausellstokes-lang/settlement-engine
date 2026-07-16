@@ -73,7 +73,11 @@ export default function RealmVerbComposer({ campaign }) {
       else if (d.kind === 'toggle') args[d.key] = !!raw;
       else if (raw != null && String(raw) !== '') args[d.key] = String(raw);
     }
-    const r = await stageRealmVerb(campaign.id, active.entry.verb, args);
+    // composer-realm-verbs-1: a dial may stage a COMPOSITE value (e.g. the
+    // FORCE_RECONSIDERATION course = actorId + courseKey) that the entry resolves
+    // into the real apply args before minting.
+    const staged = typeof active.entry.stageArgs === 'function' ? active.entry.stageArgs(args) : args;
+    const r = await stageRealmVerb(campaign.id, active.entry.verb, staged);
     if (r && r.ok) {
       setNotice({ ok: true, text: 'Queued as a pending proposal — approve or dismiss it in the proposals list.' });
     } else {
