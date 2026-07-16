@@ -52,6 +52,8 @@ import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.
 import { SupplyChainFlow } from '../../src/pdf/sections/SupplyChainFlow.jsx';
 // pdf-5: the premium Faith & War chapter had ZERO layout-execution coverage.
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
+// SM-4: the deterministic town-map plate (the first vector Svg in the PDF tree).
+import { TownMapPlate } from '../../src/pdf/sections/TownMapPlate.jsx';
 import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 
 // ── Font re-registration (node) ──────────────────────────────────────────────
@@ -284,6 +286,7 @@ const SECTIONS = [
   ['SystemStateSnapshot', SystemStateSnapshot, 'page'],
   ['SupplyChainFlow', SupplyChainFlow, 'view'],
   ['FaithWar', FaithWar, 'page'],
+  ['TownMapPlate', TownMapPlate, 'page'],
 ];
 
 function sectionProps(name) {
@@ -329,8 +332,31 @@ describe('every listed section renders individually to a valid PDF', () => {
     const expected = [
       'FaithWar', 'HistoryFounding', 'Institutions', 'NPCQuickRef', 'NotableNPCs', 'PlotHooks',
       'Relationships', 'Services', 'SupplyChainFlow', 'SystemStateSnapshot',
-      'TableOfContents', 'Timeline', 'TonightAtTheTable',
+      'TableOfContents', 'Timeline', 'TonightAtTheTable', 'TownMapPlate',
     ].sort();
     expect(listed).toEqual(expected);
+  });
+});
+
+// ── SM-4: the town-map plate render-leaf + self-gate ─────────────────────────
+describe('SM-4 town-map plate', () => {
+  test('renders exactly one page for a settlement with real map content', async () => {
+    const buf = await renderToBuffer(
+      React.createElement(Document, null,
+        React.createElement(TownMapPlate, { settlement: townSettlement, narrativeMode: false })),
+    );
+    const { head, body, bytes } = pdfInfo(buf);
+    expect(head).toBe(PDF_MAGIC);
+    expect(bytes).toBeGreaterThan(2000);
+    expect(countPages(body)).toBe(1);
+  });
+
+  test('self-gates to nothing (returns null) when there is no map content', () => {
+    // The FaithWar off-state law: a map-less settlement builds nothing drawable, so
+    // the chapter returns null and contributes no page — a pre-plate export stays
+    // byte-identical. TownMapPlate is a plain function — call it directly.
+    expect(TownMapPlate({ settlement: {}, narrativeMode: false })).toBe(null);
+    expect(TownMapPlate({ settlement: { institutions: [], spatialLayout: { quarters: [] } }, narrativeMode: false })).toBe(null);
+    expect(TownMapPlate({ settlement: {}, narrativeMode: false, model: null })).toBe(null);
   });
 });

@@ -39,8 +39,10 @@ import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
 import { FaithWar } from './sections/FaithWar.jsx';
+import { TownMapPlate } from './sections/TownMapPlate.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
+import { buildTownMapModel, hasDrawableMap } from '../domain/townMap/index.js';
 import { PDF_VARIANTS, shouldInclude, faithChapterVisible } from './variants.js';
 
 export function SettlementPDF({
@@ -89,6 +91,15 @@ export function SettlementPDF({
   const inc = (key) => shouldInclude(variantSpec.chapters[key], ctx);
   const showState    = inc('systemState') && !!systemState;
   const showTimeline = inc('timeline');
+  // SM-4 — the town-map plate: variant-gated AND self-gating on real map content
+  // (a map-less settlement ⇒ no plate ⇒ byte-identical to a pre-plate export). No
+  // premium seam: the plate rides the base export ladder like the other static
+  // reference chapters. The model is a pure view-time projection (base layout;
+  // cosmetic mapEdits stay library-only) — built here once so the ToC gate and
+  // the rendered chapter agree, then handed to the plate to avoid a rebuild. Kept
+  // off viewModel.js (that module is at its max-lines ceiling).
+  const townMapModel = buildTownMapModel(settlement);
+  const showTownMap  = inc('townMapPlate') && hasDrawableMap(townMapModel);
   // The live "Faith & War" chapter — variant + canon gated, self-gating on the
   // dormant liveWorld slice, AND premium-gated (faithUnlocked). All three must
   // pass; a free/anon export (faithUnlocked=false) or a dormant slice ⇒ no
@@ -117,6 +128,7 @@ export function SettlementPDF({
     inc('identityDailyLife')   && { no: '07',  title: 'Identity & Daily Life' },
     inc('services')            && { no: '08A', title: 'Services', note: 'what players can buy' },
     inc('institutions')        && { no: '08B', title: 'Institutions', note: 'who runs what' },
+    showTownMap                && { no: '08C', title: 'Town Map', note: 'deterministic plan' },
     inc('economicsTrade')      && { no: '09',  title: 'Economics & Trade' },
     inc('resourcesProduction') && { no: '10',  title: 'Resources & Production' },
     inc('defenseSecurity')     && { no: '11',  title: 'Defense & Security' },
@@ -147,6 +159,7 @@ export function SettlementPDF({
       {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showTownMap                && <TownMapPlate          settlement={safe} narrativeMode={useAi} model={townMapModel} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} />}
