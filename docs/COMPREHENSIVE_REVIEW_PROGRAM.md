@@ -879,6 +879,18 @@ GUARDS' walker caught it, working as designed; ARCHITECTURE count → 136. (3) G
 +39 B (four waves' individually-green margins summed over). Per the reclaim-first law:
 **FP-G8 micro-reclaim agent dispatched** (target ≥250 B off 81fbf3e9) — the budget is never
 raised. INTENT-trim agent still in flight. SURFACE + G2 + DEPTH dispatch after INTENT merges.
+**INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
+proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
+alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
+at a06f2c56. FP-G8's target RAISED to ≥2,750 B (comfort 3,100) via SendMessage — the store
+chunk is the well to drill (canon-via-aiSlice light-consumer candidate + a fresh
+ENGINE_SHARED_DOMAIN over-inclusion census). If G8 lands ≥2,750: merge reclaim + INTENT,
+gate green. If dry: INTENT parks for the owner's reclaim-or-raise decision (its 8 fixes are
+safe on the branch) and the program continues past it. **BATCH 2b DISPATCHED
+(wf_e3517745-b86) off 163601a4:** W-R2-SURFACE (amendments: builds hegemonyRead + display;
+surgical EventComposer diffs for the later INTENT merge; empties GUARDS' whisper allowlist)
+∥ TRACK-G2 (red-by-design branch + THE SHIFT MAP + the Underways catalog half). W-R2-DEPTH
+holds for its recorded post-merge post-LIGHT slot.
 
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
 ## and fixing, i want you to continue where the merge was and the rest of the operations that follow")
