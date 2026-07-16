@@ -64,7 +64,7 @@ const TIE_VERB = Object.freeze({
 /** @param {unknown} v @param {number} [d] @returns {number} */
 function num(v, d = 0) { return Number.isFinite(Number(v)) ? Number(v) : d; }
 
-/** worst compliance over a term set: honored < strained < defaulted. */
+/** worst compliance over a term set: honored < strained < defaulted. @param {string} s */
 function rankCompliance(s) { return s === 'defaulted' ? 2 : s === 'strained' ? 1 : 0; }
 const COMPLIANCE_WORD = Object.freeze(['honored', 'strained', 'defaulted']);
 
@@ -138,8 +138,8 @@ export function hegemonyRead({
   if (!ledger) return { spheres: [], hasHegemony: false };
 
   const nameById = buildNameById(settlements);
-  const resolveName = typeof nameFor === 'function' ? nameFor : (id) => nameById.get(String(id)) || String(id);
-  const resolveStrength = typeof strengthOf === 'function' ? (id) => Math.max(0, num(strengthOf(String(id)))) : () => 1;
+  const resolveName = typeof nameFor === 'function' ? nameFor : (/** @type {string} */ id) => nameById.get(String(id)) || String(id);
+  const resolveStrength = typeof strengthOf === 'function' ? (/** @type {string} */ id) => Math.max(0, num(strengthOf(String(id)))) : () => 1;
   const resolveCanon = typeof canonLabelFor === 'function' ? canonLabelFor : () => null;
   const K = Math.max(1, Math.floor(num(minTies, HEGEMONY_TUNING.MIN_TIES)));
 
@@ -171,8 +171,8 @@ export function hegemonyRead({
       else if (rank === worst && SUBORDINATING_TERM_TYPES.indexOf(type) < SUBORDINATING_TERM_TYPES.indexOf(tieType)) { tieType = type; }
     }
     if (worst < 0) continue; // no subordinating term ⇒ not a subordinate tie
-    if (!byCenter.has(centerId)) byCenter.set(centerId, new Map());
-    const subs = byCenter.get(centerId);
+    let subs = byCenter.get(centerId);
+    if (!subs) { subs = new Map(); byCenter.set(centerId, subs); }
     const prior = subs.get(subId);
     if (!prior || worst > prior.rank) subs.set(subId, { rank: worst, type: tieType || SUBORDINATING_TERM_TYPES[0] });
   }
@@ -189,7 +189,7 @@ export function hegemonyRead({
     if (!subs || subs.size < K) continue;
     const memberIds = [...subs.keys()].sort(compareCodepoint);
     const members = memberIds.map((id) => {
-      const info = subs.get(id);
+      const info = /** @type {{ rank: number, type: string }} */ (subs.get(id));
       return {
         id, name: resolveName(id), tieType: info.type,
         strain: COMPLIANCE_WORD[Math.max(0, Math.min(2, info.rank))],
@@ -210,7 +210,7 @@ export function hegemonyRead({
     const dominantType = Object.keys(typeCounts).sort((a, b) => (typeCounts[b] - typeCounts[a]) || compareCodepoint(a, b))[0] || 'tribute';
     const centerName = resolveName(centerId);
     const canon = resolveCanon(centerId);
-    const verb = TIE_VERB[dominantType] || 'answer to';
+    const verb = /** @type {Record<string, string>} */ (TIE_VERB)[dominantType] || 'answer to';
     const brief = `${members.length} ${members.length === 1 ? 'settlement' : 'settlements'} ${verb} ${centerName}.`;
     /** @type {Record<string, unknown>} */
     const sphere = {
@@ -247,7 +247,7 @@ export function hegemonyRead({
  * Panel-presence gate: does the current topology exhibit ANY hegemony sphere?
  * Boolean-only, cheap enough for a per-render store selector; dormant ⇒ false ⇒
  * no surface renders ⇒ byte-identical UI.
- * @param {Object} [args] same shape as hegemonyRead (worldState + optional resolvers).
+ * @param {Parameters<typeof hegemonyRead>[0]} [args] same shape as hegemonyRead.
  * @returns {boolean}
  */
 export function hasHegemony(args = /** @type {never} */ ({})) {
