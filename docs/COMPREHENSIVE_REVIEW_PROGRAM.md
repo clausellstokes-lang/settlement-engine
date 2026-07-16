@@ -972,6 +972,15 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**TUNING-WINDOW SCOPE ADDITION (owner-confirmed intent, 2026-07-16 evening):** when the
+post-soak tuning window opens, the tunable-constants enumeration is MINTED IN THE
+KNOB-REGISTRY SHAPE (DESIGN_CONTENT_PLANE §6's build-early artifact — "one enumeration
+serves both"): the tuning pass and Surveyor S4+ rung 2 share one registry, so the Content
+Plane inherits the enumeration instead of re-deriving it. Owner also confirmed the full
+updated AI/custom-content design (core + §1b extension tiers + §4b analytical coupling) is
+IN the shipping corpus; pre-launch builds = S1+S2, the soak evaluators (Coupling 2's raw
+material), the knob-registry enumeration; S3+/knobs/packs/streaming-health/closed-loop stay
+gated on the trust ladder's LIVE acceptance metrics (post-launch by construction).
 **✅ GUIDE-2b RATIFIED + FOLDED (2026-07-16 ~20:10; FF @ 457f2caa).** Two commits: 3a6f82f9
 (the Keeper's Handbook Reference tab stops re-describing the catalog and DELEGATES — eight
 /compendium deep-links + the custom-mode link, drift-prone duplicate prose deleted) ·
