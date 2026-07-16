@@ -50,6 +50,7 @@ import { buildCultureVector } from './migrationKernel.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { setSpatialLedger, dropSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
 import { blockadeInterceptsSupply } from '../spatial/navalLayer.js';
+import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
 import { advanceTradeFlowTally, settlementModalityWeight } from '../spatial/tradeFlow.js';
 
 // ── Local read-shapes (0-hole discipline: no `any`) ───────────────────────────
@@ -719,8 +720,24 @@ function buildSmuggleContext({ worldState, itemById, localSettlements }) {
     contrabandCatMemo.set(goodId, c);
     return c;
   };
+  // D6 THE UNDERWAYS (coupling 1 — M7 substrate): a clandestine endpoint is WHERE
+  // smuggling physically lives, so it lends bounded network reach. Absent the facet
+  // the bonus is +0 ⇒ networkStrength is the byte-identical criminalNetworkStrength.
+  /** @type {Map<string, boolean>} */
+  const clandestineMemo = new Map();
+  const clandestineOf = (/** @type {string} */ id) => {
+    const cached = clandestineMemo.get(id);
+    if (cached != null) return cached;
+    const c = settlementHasUnderways(settlementOf(id));
+    clandestineMemo.set(id, c);
+    return c;
+  };
   return {
-    networkStrength: (originId, destId) => criminalNetworkStrength(guildOf(String(originId)), guildOf(String(destId))),
+    networkStrength: (originId, destId) => {
+      const base = criminalNetworkStrength(guildOf(String(originId)), guildOf(String(destId)));
+      const bonus = (clandestineOf(String(originId)) || clandestineOf(String(destId))) ? UNDERWAYS_TUNING.SMUGGLE_NETWORK_BONUS : 0;
+      return bonus > 0 ? clampUnit(base + bonus) : base;
+    },
     corruptionOf: (gateId) => guildOf(String(gateId)),
     // Conscience: a GOOD + LAWFUL gate rejects looting (loots little); an evil/chaotic one takes near-all.
     conscienceOf: (gateId) => { const a = alignOf(String(gateId)); return clampUnit(0.6 * (1 - a.malice01) + 0.4 * a.lawfulness01); },

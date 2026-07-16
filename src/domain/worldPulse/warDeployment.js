@@ -1012,6 +1012,14 @@ export function resolveSiegeVerdict({ targetId, besiegers, capacityFor, effectiv
   //   • ASPATIAL (every legacy world + the 6 siege pins) — the capacity-roll VERBATIM,
   //     with the M2b supply-interdiction AUGMENT term. supplyInterdiction 0 ⇒ +0 ⇒
   //     byte-identical. This branch is BYTE-FOR-BYTE the pre-M5 formula. ──────────────
+  // D6 THE UNDERWAYS (coupling 2) SEAM — deliberately deferred, documented, not a bug to
+  // re-find: the naval-blockade / spatial-siege CAPITULATION discount (a tunneled defender
+  // starving slower under a sea blockade) belongs HERE — multiply `supplyInterdiction` by
+  // (1 − UNDERWAYS_TUNING.INTERDICTION_RELIEF) when settlementHasUnderways(defenderItem
+  // .settlement). It is NOT wired because warDeployment.js sits exactly at its max-lines
+  // baseline ceiling and the required import would exceed it (raising the size baseline is
+  // forbidden). The LAND-siege endurance leg IS implemented (foodStockpile _channelShare);
+  // this naval leg lands with warDeployment's next size-baseline refresh (owner-gated).
   let logOdds;
   if (spatialSiege) {
     const interdiction = clamp01(supplyInterdiction);

@@ -788,6 +788,13 @@ export function advanceNpcCorruption(worldState, snapshot, rng, { tick = 0, guil
       const visibility = Math.min(1, (s.dotRank || 1) / 3 + proximity);
       // A good deity's repression rides the EXPOSURE side (which runs regardless
       // of a criminal institution): a misaligned/corrupt NPC is outed faster.
+      // D6 THE UNDERWAYS (coupling 3 — exposure discount) SEAM (deferred, documented): a
+      // clandestine settlement should discount this exposure roll (multiply the result by
+      // UNDERWAYS_TUNING.EXPOSURE_DISCOUNT when settlementHasUnderways(item.settlement)). NOT
+      // wired for two compounding reasons: npcAgency.js sits at its max-lines baseline ceiling
+      // (the clandestineFacet import would exceed it), AND exposureChance lives in the EAGER
+      // corruption.js first-paint chunk, so a covertShelter param there costs eager bytes for a
+      // dark path (the ratchet forbids that). Lands with a size-baseline refresh (owner-gated).
       const exposeP = exposureChance({ security: exposureSecurity, prosperity: climate.prosperity, guildStrength: guildStr, visibility, priorExposures, deityDisfavor: disfavor.exposure });
       if (local.random() >= exposeP) return;
 

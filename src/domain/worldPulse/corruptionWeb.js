@@ -60,6 +60,7 @@ import { npcId } from './npcAgency.js';
 import { compareCodepoint } from '../deterministicSort.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
+import { hasClandestineFacet, UNDERWAYS_TUNING } from './clandestineFacet.js';
 // §4 FOREIGN CONSEQUENCE LANE — the blowback triple's downstream seams. All three
 // are engine-lazy leaves (relationship memory, the credibility stock, the war-reason
 // pair key), imported ONLY by this already-lazy module ⇒ ZERO first-paint bytes. None
@@ -372,9 +373,15 @@ export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targe
   const pay01 = officialPay01(worldState, snapshot, targetId);
   // W-DOCTRINE-4 §3: a consolidated ruling coalition in the target raises the price (a
   // divided court is cheap). 0 when politics is dormant ⇒ byte-neutral.
-  const coalition01 = coalitionConsolidation01(worldState, String(targetId), snapshot?.byId?.get?.(String(targetId)));
+  const targetItem = snapshot?.byId?.get?.(String(targetId));
+  const coalition01 = coalitionConsolidation01(worldState, String(targetId), targetItem);
+  // D6 THE UNDERWAYS (coupling 3 — covert-operations affinity): clandestine infrastructure
+  // in the target eases conspiracy formation. ×(1+0) without the facet ⇒ byte-identical.
+  const clandestine01 = hasClandestineFacet(targetItem && targetItem.settlement && targetItem.settlement.institutions) ? 1 : 0;
   const T = CORRUPTION_WEB_TUNING;
-  const boosted = channel01 * (1 + T.OBLIGATION_BOOST_MAX * obligation01);
+  const boosted = channel01
+    * (1 + T.OBLIGATION_BOOST_MAX * obligation01)
+    * (1 + UNDERWAYS_TUNING.CONSPIRACY_EASE * clandestine01);
   const degraded = boosted
     * (1 - (1 - T.HIDE_DEGRADE) * secrecy01)
     * (1 - T.PAY_RESIST_MAX * pay01)
