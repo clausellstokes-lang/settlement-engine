@@ -27,17 +27,10 @@ import { useStore } from '../../store';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
 import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
-
-const REL_TYPES = [
-  { id: 'trade_partner', label: 'Trade',   color: '#4A7A3A' },
-  { id: 'allied',        label: 'Allied',  color: '#2C7DCE' },
-  { id: 'patron',        label: 'Patron',  color: '#7B4FCF' },
-  { id: 'client',        label: 'Client',  color: '#C9A24C' },
-  { id: 'vassal',        label: 'Vassal',  color: '#6D28D9' },
-  { id: 'rival',         label: 'Rival',   color: '#D08020' },
-  { id: 'cold_war',      label: 'Cold',    color: '#9C8068' },
-  { id: 'hostile',       label: 'Hostile', color: '#A23434' },
-];
+// components-map-3: the filter chips draw from the canonical relationship palette
+// (relationshipEdgeStyle) — this toolbar used to show a gold "Client" dot beside a
+// purple drawn edge, a live cross-surface contradiction (P11).
+import { REL_TYPES } from './relationshipEdgeStyle.js';
 
 export default function RoutesToolbar() {
   const layers       = useStore(s => s.mapState?.layers);

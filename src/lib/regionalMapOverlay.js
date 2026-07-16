@@ -9,7 +9,10 @@ const CHANNEL_COLORS = Object.freeze({
   military_protection: '#1d4ed8',
   war_front: '#b91c1c',
   service_dependency: '#047857',
-  religious_authority: '#9333ea',
+  // components-map-2: aligned to WAR_FAITH_STYLE.religious_authority (#6a2a9a) so
+  // the LayersPanel channel-filter swatch matches the purple RelationshipEdges
+  // actually draws — the channel was rendering in two different purples.
+  religious_authority: '#6a2a9a',
   criminal_corridor: '#4c1d95',
   migration_pressure: '#c2410c',
   information_flow: '#0369a1',
