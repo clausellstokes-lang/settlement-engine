@@ -683,3 +683,52 @@ CSP flip. Resolved: $2.99/PDF, founder=30, G3 approved, sequencing, settlement-m
   `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/049d4c82-58c0-4be1-956a-d47c628ee704/scratchpad/baseline-gate.log`
 - Memory pointer: `memory/comprehensive-review-fix-program.md` in the Claude memory dir mirrors this
   doc's state at each milestone (in-repo doc is authoritative).
+
+---
+
+# ROUND 2 (opened 2026-07-15 late eve — the owner's second full-review commission)
+
+The owner re-issued the comprehensive-review directive verbatim (review the ENTIRE code, holistic
+thoughts, then Opus-4.8-ultracode fixes for every finding, Fable architect/manager/checker,
+bold-over-safe escalation). Round 1's "I'll do a full review at another time" ruling — this is
+that time. The codebase under review has grown by the full post-close wave stack since round 1:
+E1a–d generosity, W-PEACE ×3, W-DOCTRINE ×4, W-CONVERGENCE, W-UPSWING, W-DISCOVERY, W-LIFECYCLE,
+W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE IS COMPLETE"
+@ 52cc0240.
+
+> **Progress — ROUND 2** (append after every phase/wave)
+> - 2026-07-15 ~22:50: Round 2 OPENED on `review-fixes-2026-07-08` @ 91a0c409 (clean main tree).
+>   ⚠️ CONTEXT: the MASTER MERGE is IN FLIGHT in a parallel session — `claude/master-merge-r1`
+>   worktree already carries W1 (merge commit, 568 conflicts resolved) + W2 (fence sweep) +
+>   W3a (behavior ports) @ c89a5372 with live uncommitted WIP (file mtimes minutes old).
+>   SEQUENCING JUDGMENT (vetoable): Phase S/A/V run READ-ONLY against the RF tip NOW (no
+>   collision; RF-wins is the merge default so ~all substance survives); Phase F fix waves land
+>   AFTER the master merge completes, on the unified lineage — landing them on RF mid-merge would
+>   strand them behind the merge cut. NO baseline gate run at open (deliberate deviation from
+>   round-1 protocol: the merge session owns the machine's gate capacity; survey is read-only and
+>   needs no gate truth; Phase F re-baselines on its actual landing lineage).
+>   Phase S DISPATCHED: workflow `wf_d69567dc-f0d` — 33 Fable agents (22 subsystem readers +
+>   11 dimension reviewers incl. two new dimensions round 1 lacked: sim-cohesion-counterparts
+>   across the 15-wave stack, and ambition-fit vs the vision docs). Briefs carry: constitution
+>   §0.2, product boundaries, deferral-ledger awareness (playbook §0.0.2/§0.6/§0.8, round-1
+>   register, DEAD_CODE_DISPOSITION, in-file seams), read-only discipline (no test/build runs —
+>   the merge session shares the machine), NUL-grep hazard, injection-refusal preamble.
+
+## Phase plan — ROUND 2 (checkboxes are the resume pointer)
+- [ ] **Phase S — SURVEY** (Fable, 33 agents): in flight as `wf_d69567dc-f0d`.
+- [ ] **Phase A — ASSESSMENT** (Fable main loop): synthesize → owner-facing holistic thoughts +
+      the round-2 register, committed as `docs/COMPREHENSIVE_REVIEW_2026-07-15.md`.
+- [ ] **Phase V — VERIFY** (Opus, model:'opus'): 2 independent lenses per high/critical, 1 per
+      medium; lows defer to implementation-time verification.
+- [ ] **Phase P — WAVE PLAN** (Fable architect): fenced waves, bold-over-safe, golden-shift
+      track separation as in round 1; sequenced onto the POST-MERGE unified lineage.
+- [ ] **Phase F — FIX WAVES** (Opus implementers, Fable §0.3 review per wave, full gate per
+      wave): BLOCKED until the master merge lands (or the owner re-rules the landing branch).
+- [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
+
+## Round-2 resume protocol (successor session)
+Same as round 1 (above), plus: (1) check `git log claude/master-merge-r1` — if the merge landed,
+Phase F targets that lineage's successor branch; if it stalled, surface to the owner before
+landing fixes anywhere. (2) The survey journal for `wf_d69567dc-f0d` lives under this session's
+transcript dir (`7115c211-…/subagents/workflows/wf_d69567dc-f0d/journal.jsonl`); salvage partial
+agent outputs from there rather than re-running completed slices blind.
