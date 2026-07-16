@@ -939,6 +939,15 @@ call: ADOPT master's one-spend model (rewires requestDailyLife's 4 live call sit
 server contract) or KEEP RF's two-spend semantics (tests adapt/drop accordingly). The four
 NON-gated aiSlice fixes (cross-identity chronicle/rename/revert/hydrate bleeds + the
 setNestedPath proto-pollution guard) port regardless — ratified to W6.
+(d) **MEMBERSHIP ID NORMALIZATION (W6 misc verdict):** RF's campaignSettlements /
+getCampaignForSettlement do exact-match id compares — string/number-mismatched members are
+silently DROPPED from advances today; normalizing (master's String() model, matching RF's own
+isSettlementClockBound) would ADD those members back = sim-membership change on existing
+campaigns. Repair-shaped but engine-input-touching → owner's call. The crash-guard sub-part
+lands now. Also ratified to W6: the tier-gate sentinel pair (allowlist + re-gate, 'capital'
+vocabulary kept), the **isSafeBackdropUrl security fix** (javascript:/data: backdrops persist
+today), the live-list merge salvage; DROPs recorded for master's warFront-seed bridge + the
+atomic-RPC hybrid model (RF's lanes supersede).
 **INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
 proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
 alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
