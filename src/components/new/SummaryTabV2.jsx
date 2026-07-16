@@ -29,6 +29,7 @@ import { useMemo } from 'react';
 import { FS, swatch } from '../theme.js';
 import { formatCount } from '../../domain/formatNumber.js';
 import { tonightAtTheTable } from '../../domain/summary/tonightAtTheTable.js';
+import { prosperityLabel } from '../../domain/display/prosperityLabel.js';
 import Button from '../primitives/Button.jsx';
 
 const GOLD = swatch['#8C6F32'];
@@ -94,6 +95,9 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
 
   const pressure = settlement?.pressureSentence || '';
   const arrival = settlement?.arrivalScene || '';
+  // components-dossier-library-3: prosperity is a STRING label, not a { tier }
+  // object — the tolerant read finally lets the prosperity + stressors block render.
+  const prosperityText = prosperityLabel(settlement?.economicState?.prosperity);
   const accent = useMemo(() => pickAccentLine(pressure), [pressure]);
   const pressureTail = useMemo(() => {
     if (!accent || !pressure) return pressure;
@@ -188,13 +192,13 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             )}
           </p>
 
-          {settlement.economicState?.prosperity?.tier && (
+          {prosperityText && (
             <div style={{
               marginTop: 14,
               fontSize: FS.xs, color: BODY, lineHeight: 1.6,
             }}>
               <strong style={{ color: GOLD, letterSpacing: '0.04em' }}>
-                {String(settlement.economicState.prosperity.tier).toUpperCase()}
+                {prosperityText.toUpperCase()}
               </strong>{' '}
               prosperity tier.{' '}
               {settlement.stressors?.length > 0 && (

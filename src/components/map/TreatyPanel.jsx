@@ -17,6 +17,7 @@ import { ScrollText, HeartHandshake, AlertTriangle } from 'lucide-react';
 
 import { renderAllTreaties } from '../../domain/display/treatyDocument.js';
 import { Section } from './WorldPulsePrimitives.jsx';
+import WarCausalBrief from './WarCausalBrief.jsx';
 import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, sans, FS, SP, R } from '../theme.js';
 
 /** Compliance → semantic tone (routed through design tokens — no raw color). */
@@ -70,7 +71,7 @@ function TermRow({ term }) {
   );
 }
 
-function TreatyCard({ doc, nameById }) {
+function TreatyCard({ doc, nameById, worldState }) {
   const victor = nameOf(nameById, doc.victorId, doc.victorName);
   const loser = nameOf(nameById, doc.loserId, doc.loserName);
   return (
@@ -106,6 +107,10 @@ function TreatyCard({ doc, nameById }) {
       {doc.summary && (
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.pico, fontStyle: 'italic' }}>{doc.summary.line}</div>
       )}
+      {/* ambition-fit-1: the dramatic-irony Reasons lane — the war reasons pressing
+          this pair apart and the peace reasons pulling them back, receipt by receipt.
+          Self-gates to nothing when neither ledger carries a present reason. */}
+      <WarCausalBrief worldState={worldState} partyId={doc.victorId} foeId={doc.loserId} />
     </article>
   );
 }
@@ -132,7 +137,7 @@ export default function TreatyPanel({ campaign, nameById }) {
     <div data-testid="treaty-panel" style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       <Section title="Treaties" count={`${treaties.length}`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-          {treaties.map((doc) => <TreatyCard key={doc.pairKey} doc={doc} nameById={nameById} />)}
+          {treaties.map((doc) => <TreatyCard key={doc.pairKey} doc={doc} nameById={nameById} worldState={worldState} />)}
         </div>
       </Section>
     </div>

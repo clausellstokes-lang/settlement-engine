@@ -26,6 +26,7 @@ import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable } from '../domain/summary/tonightAtTheTable.js';
+import { prosperityLabel } from '../domain/display/prosperityLabel.js';
 import IconButton from './primitives/IconButton.jsx';
 
 const GOLD = swatch['#8C6F32'];
@@ -60,7 +61,9 @@ export default function TableView({ settlement, onClose }) {
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const stressors = Array.isArray(settlement?.stressors) ? settlement.stressors : [];
   const pressure = settlement?.pressureSentence || '';
-  const prosperity = settlement?.economicState?.prosperity?.tier || '';
+  // components-dossier-library-3: prosperity is a STRING label, not a { tier }
+  // object — the tolerant read is the SummaryTabV2 sibling.
+  const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
 
   return (
     // Backdrop click/Enter/Space closes the modal; role="dialog" is required for modal semantics so it can't become a native button.

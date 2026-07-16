@@ -29,7 +29,7 @@ import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
 import BulkActionBar from './settlements/BulkActionBar.jsx';
-import { ADVANCE_TIME_NAV_TARGET } from './settlements/advanceTimeTarget.js';
+import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
@@ -516,19 +516,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   }, [canonizeSavedSettlement]);
 
   // ── Advance Time (per campaign, from the list) ────────────────────────────
-  // PREMIUM GATE: advancing is Cartographer. The CampaignFolder only renders its
-  // Advance controls for canManageCampaigns (premium/elevated); free/anon reach
-  // an upgrade preview on the card kebab, never a working advance. This handler
-  // advances the campaign world one interval, sets it active, then deep-links to
-  // the Realm (ADVANCE_TIME_NAV_TARGET.view). The store's advanceCampaignWorld
-  // returns {ok:false} for a non-canonized / in-flight campaign — a defensive
-  // guard since the button is already disabled when the world isn't canonized.
-  const handleAdvanceCampaignTime = useCallback(async (campaignId, interval = 'one_month') => {
-    const result = await advanceCampaignWorld(campaignId, interval);
-    if (result && result.ok === false) return; // not canonized / in-flight / nothing to do
-    setActiveCampaign(campaignId);
-    onNavigate?.(ADVANCE_TIME_NAV_TARGET.view);
-  }, [advanceCampaignWorld, setActiveCampaign, onNavigate]);
+  // Premium (Cartographer) gate lives on the card. The handler + its typed-refusal
+  // surface live in useCampaignAdvance (experience-product-fit-2).
+  const { advanceError, handleAdvanceCampaignTime } = useCampaignAdvance({
+    advanceCampaignWorld, setActiveCampaign, onNavigate,
+  });
 
   const handleApplyRegionalImpact = useCallback((campaignId, impactId) => {
     applyQueuedRegionalImpact(campaignId, impactId);
@@ -642,6 +634,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
      <div style={{ display:'flex', flexDirection:'column', gap:SP.sm }}>
       {persistenceError && <div role="alert" style={alertStyle}>{persistenceError}</div>}
       {reactivationError && <div role="alert" style={alertStyle}>{reactivationError}</div>}
+      {advanceError && <div role="alert" style={alertStyle}>{advanceError}</div>}
 
       {/* Page header — the GM's own content owns the top of their own page; the
           SaveQuotaMeter is demoted to a slim strip below so the funnel frames
