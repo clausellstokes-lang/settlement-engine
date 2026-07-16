@@ -319,6 +319,26 @@ seam) · hysteresis pin (oscillating warmth mints ZERO transitions inside the de
 scarcity pin (concurrent reframed-pairs ≤ cap) · counterpart pin (decreed ≡ organic) ·
 determinism (stable fork keys on transition draws).
 
+**THE BRIGHT MISREADING LANE (owner confirmation 2026-07-16 — the unification law applied to
+misattribution; misunderstandings run BOTH directions):** false-POSITIVE attribution is
+first-class: an enemy's self-interested or accidental act read as deliberate kindness.
+Vocabulary additions: `unintended_kindness` (their navy sank the pirates for their own trade;
+the beleaguered port credits protection), `misattributed_aid` (relief arrives via a paid
+smuggler; the starving town credits its old rival — the irony ledger shows the truth),
+`noble_enemy_myth` (an honored parley or spared column mythologizes into character),
+`common_threat_misread` (a phantom column attributed to a third party unites two rivals — a
+false flag with no flagger). Consumers, all existing: warmth deposits + relationship memory
+(D5-scaled — bright memories fade or endure by the same lifespan law), the E1
+gratitude/overture instruments (a bright misreading can seed a real overture), the peace-reason
+taxonomy (détente from misread magnanimity), and coalition formation (the misread common
+threat). RARITY: the same E0-classing, caps, and hysteresis — plus a NEGATIVITY-BIAS default
+(dark reframes more probable than bright, per human realism; owner-retunable), tilted by
+temperament (trusting/pious courts misread generously; paranoid courts are nearly immune to
+good news — coherent with the momentum conscience machinery). PINS: an enemies-to-allies-via-
+misreading fixture (rare-path, seeded); the irony read shows the TRUE cause beside the believed
+one; both-signs symmetry (the bright lane uses the same transition machinery, never a parallel
+system).
+
 **REJECTED (recorded):** a per-NPC emotion system (blocs/settlements/factions reframe; NPCs
 modulate via §G and never have engine-resolved feelings — state-never-fate extended to
 sentiment); continuous emotion scalars (bounded vocabulary only); mutable intent on receipts
