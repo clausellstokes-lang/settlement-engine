@@ -55,8 +55,12 @@ export default function CompendiumGlobalSearch({ onSelect }) {
 
   const choose = (entry) => {
     if (!entry) return;
+    // No raw `query`: free-typed search text is user content, not a coarse
+    // enum/band/count, and COMPENDIUM_SEARCH is essential-class (mirrored to the
+    // third-party provider). term+tab — the chosen catalog entry — already carry
+    // the intent-atlas value as controlled vocabulary (finding
+    // components-dossier-library-6).
     Funnel.track(EVENTS.COMPENDIUM_SEARCH, {
-      query: q.slice(0, 64),
       term: entry.term,
       tab: entry.tab,
     });

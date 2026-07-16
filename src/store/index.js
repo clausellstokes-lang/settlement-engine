@@ -143,10 +143,12 @@ function registerAuthIntentHandlers({ registerHandler, INTENTS }) {
         .catch(() => { /* never block the save */ });
       // Fire analytics + a toast via the store so the user sees the result.
       const { Funnel, EVENTS } = await import('../lib/analytics.js');
+      // userId rides the hashed opts lane, never props — this essential-class
+      // event mirrors props raw to the third-party provider (W-R2-TRUST: same
+      // class as components-dossier-library-1, surfaced by the props privacy scan).
       Funnel.track(EVENTS.SAVE_SIGNUP_INTENT_FULFILLED, {
         tier: payload.tier,
-        userId: ctx?.user?.id,
-      });
+      }, { userId: ctx?.user?.id });
       // Surface a toast through the existing onboardingNudge channel so we
       // don't add another notification mechanism. The user sees this on
       // their first signed-in dashboard load.

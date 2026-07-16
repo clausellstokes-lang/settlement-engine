@@ -23,7 +23,6 @@
 
 import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
@@ -88,13 +87,14 @@ export default function SuccessorPrompt() {
       },
     });
     dismiss();
-    // Pricing moment for the campaign-state moment: rebuilding after
-    // a pillar death is the kind of high-engagement action that
-    // earns the upgrade pitch.
-    const live = useStore.getState();
-    triggerPricingMoment('first_canon_export', () => {
-      live.setPurchaseModalOpen?.(true);
-    }, { tier: live.auth?.tier });
+    // No pricing moment here (W-R2-TRUST, components-dossier-library-5): the
+    // composer the DM is about to land on IS the value moment, and pricingMoments'
+    // own doctrine is "don't ask before they understand the value". This handler
+    // previously fired the 'first_canon_export' moment — the WRONG copy (export,
+    // not succession) AND it consumed the 24h cooldown for the REAL first-canon-
+    // export moment (SettlementDetail). No succession-themed moment exists;
+    // registering one would add eager copy to interrupt the very flow the doctrine
+    // says to leave uninterrupted, so the honest fix is to fire nothing.
     setTimeout(() => {
       const target = document.querySelector('[data-anchor="event-composer"]');
       if (target?.scrollIntoView) target.scrollIntoView({ behavior: 'smooth', block: 'start' });

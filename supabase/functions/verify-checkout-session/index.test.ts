@@ -87,3 +87,34 @@ Deno.test('malformed session id is a terminal 400', async () => {
   const res = await handleVerifyCheckoutSession(post({ sessionId: 'nope' }), deps);
   assertEquals(res.status, 400);
 });
+
+// ── CORS: migrated to the shared fail-closed module (round-1 backend-5 /
+// backend-functions-2, W-R2-TRUST). The legacy inline allowlist emitted
+// `origin || '*'` — a wildcard on a MISSING Origin, the exact leak the shared
+// module forbids. These pin that no code path (preflight, disallowed origin,
+// missing origin) ever returns '*'.
+const optionsReq = (origin?: string) =>
+  new Request('https://edge/verify-checkout-session', {
+    method: 'OPTIONS',
+    headers: origin ? { origin } : {},
+  });
+
+Deno.test('CORS: OPTIONS preflight with a MISSING Origin never returns "*" (the old leak)', async () => {
+  const res = await handleVerifyCheckoutSession(optionsReq(), {});
+  const acao = res.headers.get('Access-Control-Allow-Origin');
+  assertEquals(acao === '*', false);
+  assertEquals(acao, 'https://settlementforge.com'); // pinned to the first allowed host
+});
+
+Deno.test('CORS: a DISALLOWED origin is pinned to the first host, never "*"', async () => {
+  const res = await handleVerifyCheckoutSession(optionsReq('https://evil.example.com'), {});
+  const acao = res.headers.get('Access-Control-Allow-Origin');
+  assertEquals(acao === '*', false);
+  assertEquals(acao, 'https://settlementforge.com');
+});
+
+Deno.test('CORS: an ALLOWED origin is echoed with Allow-Credentials from the shared module', async () => {
+  const res = await handleVerifyCheckoutSession(optionsReq('https://settlementforge.com'), {});
+  assertEquals(res.headers.get('Access-Control-Allow-Origin'), 'https://settlementforge.com');
+  assertEquals(res.headers.get('Access-Control-Allow-Credentials'), 'true');
+});

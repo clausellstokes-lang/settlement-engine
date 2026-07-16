@@ -22,6 +22,11 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveError, setSaveError] = useState(null);
+  // Stamp the active save id after a successful save so the exit dialog stops
+  // calling a saved draft unsaved and the durable-purchase rung advances (finding
+  // components-shell-commerce-2). The freshly-saved row itself surfaces on the
+  // next library hydration (savesService.list → setSavedSettlements).
+  const setActiveSaveId = useStore(s => s.setActiveSaveId);
 
   const handleSave = async () => {
     if (!settlement || saving) return;
@@ -40,6 +45,9 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
     writeDraft(payload);
     try {
       const saveId = await savesService.save(payload);
+      // Bind the returned id into the store BEFORE the success chrome so a
+      // re-render sees the draft as saved (activeSaveId set).
+      if (typeof setActiveSaveId === 'function') setActiveSaveId(saveId);
       setSaved(true);
       clearDraft();
       setTimeout(() => setSaved(false), 3000);
