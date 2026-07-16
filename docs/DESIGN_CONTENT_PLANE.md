@@ -1,0 +1,119 @@
+# DESIGN — THE CONTENT PLANE (Surveyor S4+: AI-authored custom content at full depth)
+## Owner commission 2026-07-16 (verbatim intent: "not limiting the unlimited degrees of freedom
+## and generative potential of AI, but bounding what concludes into our system (per user) for
+## maximum coherency... AI should have access to all the knobs — not to edit the system, but to
+## create all manners of custom content that edit the system FOR THAT USER upon their approval...
+## at the extreme end, a fully coherent sci-fi setting. Bounded purely to their own account.")
+### Fable 5 architecture draft — enters the Surveyor lane; BUILDS after S4 earns its metrics
+### (the staged-trust ladder holds). Design-frozen on the owner's nod; coherence matrix included.
+
+---
+
+## 0. THE LAW: TWO FREEDOMS, ONE BOUNDARY
+
+The AI's imagination is UNBOUNDED — it may propose any content, any vocabulary, any world.
+What CONCLUDES into the system is TYPED — only content that compiles into a registered,
+validated, bounded content type lands, and only in the requesting user's account. The boundary
+object is the schema. This is the operation-registry philosophy (no op type = no effect)
+extended from ACTIONS to CONTENT: **no content type = no landing.** The master system — the
+catalogs, the kernels, the laws, the goldens — is architecturally unreachable from this plane.
+
+## 1. THE THREE RUNGS OF THE CONTENT PLANE (what "all the knobs" means, typed)
+
+**Rung 1 — ENTITIES (exists today, S4 automates it):** custom institutions, deities, goods,
+NPCs, stressor definitions through customContentSchema — first-class by the facet law. The AI
+compiler targets the schema; walkers validate; the facet chokepoint gives them full mechanical
+citizenship.
+
+**Rung 2 — TUNABLES (new: THE KNOB REGISTRY):** the engine is saturated with named, frozen,
+owner-retunable constants (news speed, transit cost/week, tempo budgets, memory horizons,
+stressor spawn weights, trait→threshold weights...). The knob registry PROMOTES a curated
+subset to per-account overrides: each entry = {name, type, BOUNDED range, default,
+coherence-couplings note}. Absent override ⇒ master default ⇒ byte-identical (dormancy).
+CRITICAL SUBSTRATE ALREADY BUILT: the §10 auto-tuning rails shipped INERT with exactly the
+needed machinery — the AUTO_TUNABLE whitelist, the structural validator making sim/generation
+surfaces unrepresentable unless whitelisted, the golden-law lane classifier. The knob registry
+is that machinery's first real tenant: user-tunables ride the same whitelist + validator + lane
+discipline. NPC architecture (trait vocabularies, temperament tables), travel speed,
+relationship-type weights — all rung-2 entries with declared bounds.
+
+**Rung 3 — SETTING PACKS (the extreme end: the genre door):** a pack = a coherent BUNDLE of
+rungs 1+2 plus vocabulary tables — naming corpora, institution catalog skin, resource/goods/
+chain vocabulary, terrain/biome skin, faith-or-ideology reskin, stressor flavor, units/currency.
+THE LOAD-BEARING FACT: the engine is already genre-agnostic — conservation, beliefs, momentum,
+war physics, and trade do not care whether the caravan is a freighter. Vocabulary-in-data
+discipline + the facet law were kept precisely as this door (recorded owner aspiration). The
+modalities map: sea lanes → shipping lanes; teleport circles → jump gates; harbors → ports of
+any kind. **THE PACK BOUNDARY (the coherence guarantee): packs RECOLOR and RETUNE the ontology;
+they NEVER add entity classes, movers, or physics.** New physics is master-system evolution
+(owner-only, forever). This boundary is what makes a user's sci-fi world COHERENT — it runs on
+the same audited laws — and what makes it buildable at all.
+
+## 2. DETERMINISM SURVIVES (the constitutional extension)
+
+The content plane is CONFIG — it lives on the frozen-intent side of the ontology, never the
+engine side. The world function extends: world = f(seed, config, **content-plane**, op-log).
+Same seed + same pack ⇒ same world, byte for byte — the replay promise holds INSIDE every
+account. Master goldens never move because master defaults never move; a pack absent is
+vanilla, byte-identical. Campaigns bind packs AT CREATION (pack choice is config); mid-campaign
+pack edits ride the existing receipted rules-change lane and are mostly locked (the same
+posture as re-canonize).
+
+## 3. THE AUTHORING PIPELINE (how a user builds a world with the AI)
+
+1. **ELICITATION** — the AI interviews (tone, tech level, factions, what matters), unbounded
+   conversation.
+2. **THE DRAFT** — the compiler emits a staged pack: schema-typed entries, knob settings with
+   bounds respected, coherence DECLARATIONS per entry (facets, chain memberships, terrain
+   legality, classification rows — the coherence matrix as an authoring OBLIGATION).
+3. **VALIDATION** — the SAME walkers that police the master catalog run against the user
+   registry: id collisions, tag vocabulary, classification coverage, geography legality,
+   reachability. Structure is machine-guaranteed.
+4. **THE TASTE GATE (the killer preview):** generation is cheap and deterministic — so the
+   system FORGES A SAMPLE SETTLEMENT from the draft pack before anything commits. The user
+   reads a town from their own sci-fi world, with receipts. The S5 intent-vs-result comparator
+   generalizes: "you asked for hard-scarcity spacer grit; here is where the draft deviates."
+5. **ITERATION** — "grimmer", "less religion" → the compiler emits deltas, re-forge, re-read.
+6. **APPROVAL → LANDING** — the pack enters the account registry; the aiOperationLog records
+   the full provenance (prompt hash, model, entries landed); every receipt in play later NAMES
+   pack provenance ("stressor: Void Corsairs pack").
+7. **THE ESCAPE HATCH (mandatory):** one action returns any campaign to vanilla — packs are
+   dormancy-lawful, so reset is byte-clean. No user can strand themselves.
+
+## 4. HONEST BOUNDARIES (V1/V2 split, stated now)
+
+- **V1:** entities + knobs + vocabulary tables + naming + calibration. The DIEGETIC REGISTER
+  (crier voice, whatPhrase corpora — thousands of authored fantasy lines) stays fantasy-toned
+  or neutral in V1; **V2 = AI-generated voice tables validated by the existing register guards**
+  (second-person rules, no-UI-verbs, totality floors — the guards are register-agnostic; the
+  corpus is the work).
+- Tiers (thorp→capital), week-ticks, and the digest's modality set are engine-shaped, not
+  vocabulary-shaped — packs rename their DISPLAY, never their mechanics, in any version.
+- A full pack is a LARGE generation job — task-priced honestly (credits/BYOK per the Surveyor
+  commercial model); partial packs (naming-only, knobs-only) are cheap first rungs.
+- Shared/gallery packs (the marketplace door) are FUTURE scope: they inherit the moderation
+  lane + the same validation; noted, not designed here.
+
+## 5. COHERENCE MATRIX (standing practice)
+
+×FACET LAW (the plane's citizenship mechanism — rung 1 rides it wholesale) · ×§10 RAILS (the
+inert substrate becomes load-bearing; its golden-law lane classifier is the safety floor) ·
+×COUNTERPART CRITERION (pack content is forceable exactly as catalog content — force≡organic
+holds because facets, not names, drive mechanics) · ×PREMIUM SEAM (packs are user content;
+players see them through normal projections; latent-pantheon-class secrets keep their walls
+inside packs) · ×DETERMINISM/GOLDENS (§2 — the constitutional extension; master goldens
+untouchable by construction) · ×SURVEYOR TRUST LADDER (S4+ builds after S4's acceptance
+metrics; the compiler's schema-fencing means worst case = refused drafts, never corrupted
+worlds) · ×D7/EPISTEMICS (pack-authored actors get beliefs/reframes identically — the
+epistemic engine is content-blind) · ×GALLERY LOOP (a shared world in a user's own genre is
+the strongest artifact the share loop can carry) · ×TRAINING CORPUS (intent→pack is the
+richest label shape yet; consent-gated per the standing corpus rules).
+
+## 6. SEQUENCING
+
+Design enters the Surveyor lane NOW (this doc); the KNOB REGISTRY (rung 2's enumeration —
+which constants, what bounds) is the one substrate artifact worth building EARLY because the
+soak's tuning pass touches the same constants (one enumeration serves both). Build order:
+S4 (entities, per the existing ladder) → S4+ rung 2 (knobs) → rung 3 V1 (packs, vocabulary) →
+V2 (register skins). Every stage gated on the prior's acceptance metrics, per the Surveyor
+doctrine. Nothing here disturbs the current endgame sequence.
