@@ -20,19 +20,10 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
+import { clamp01 } from '../../kernel/math.js';
 
 /** @typedef {{ id: string, members: string[], glue: Array<{ type: string, detail: string }>,
  *   end: string, strain: number, sinceTick: number, covert?: boolean }} Bloc */
-
-/** @param {unknown} v @param {number} f @returns {number} */
-function finiteNumber(v, f) {
-  return typeof v === 'number' && Number.isFinite(v) ? v : f;
-}
-
-/** @param {unknown} v @returns {number} */
-function clamp01(v) {
-  return Math.max(0, Math.min(1, finiteNumber(v, 0)));
-}
 
 /** @param {unknown} worldState @returns {Record<string, { blocs?: unknown }> | null} */
 function politicsLedgers(worldState) {
