@@ -10,6 +10,16 @@ import {
 
 export const RELATIONSHIP_MEMORY_HALF_LIFE_TICKS = 4;
 export const RELATIONSHIP_MEMORY_MAX_LOOKBACK_TICKS = 24;
+// D5 SEAM (deliberately deferred — documented, not a bug to re-find): the lifespan
+// memory band (relationshipEvolution.memoryHorizonMultiplierOf) scales the load-bearing
+// grievance/warmth mean-reversion in relaxRelationshipStates (both signs, all four D5
+// pins). This incident-memory HALF-LIFE — a secondary read feeding posture classification
+// and revanchism — is NOT yet band-scaled: threading a per-edge horizon through
+// collectMemories → memoryEntry → relationshipMemoryWeight's {halfLifeTicks,
+// maxLookbackTicks} options is the follow-up. Consequence today: an `undying` town's
+// resentment persists (relax suppressed) but its derived memoryScore still decays on the
+// 4-tick human half-life. relationshipMemoryWeight already accepts the scaled options, so
+// the wiring point is ready.
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_RELATIONSHIPS = 6;
 export const RELATIONSHIP_MEMORY_MAX_CONTEXT_MEMORIES = 3;
 

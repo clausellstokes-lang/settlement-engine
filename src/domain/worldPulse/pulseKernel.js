@@ -35,7 +35,7 @@ import { advanceFoodStockpile, blockadeFor, famineFor } from './foodStockpile.js
 import { seasonalContextFor, seasonalBoundaryEntries, seasonalThawEntries } from './seasons.js';
 import { applyBlockadeTransportImpairment } from './blockadeTransport.js';
 import { deriveSettlementPressures, pressureIndex } from './pressureModel.js';
-import { ensureAllRelationshipStates, relaxRelationshipStates, settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
+import { ensureAllRelationshipStates, relaxRelationshipStates, settlementStrength, buildPressureSummary, buildMemoryHorizonResolver } from './relationshipEvolution.js';
 import { ensureNpcStates, pruneNpcStates, relaxNpcStates, advanceNpcCorruption, mirrorCorruptionOntoSettlement } from './npcAgency.js';
 import { applyCorruptionImpairments, advanceInstitutionReform } from './corruptionImpair.js';
 import {
@@ -297,7 +297,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // Mean-reversion: relax momentum / heat / resentment toward baseline each
   // tick so quiet periods cool the world down instead of ratcheting it up.
   worldState = relaxNpcStates(worldState);
-  worldState = relaxRelationshipStates(worldState);
+  // D5 lifespan-scaled memory: resolve each relationship edge's memory horizon from
+  // its endpoints' declared/inferred bands (facet law). Absent any declaration every
+  // settlement is 'generational' ⇒ multiplier 1 ⇒ byte-identical 12%/tick reversion.
+  worldState = relaxRelationshipStates(worldState, buildMemoryHorizonResolver(snapshot));
   worldState = relaxFactionStates(worldState);
   // Per-tick corruption onset + organic exposure over npcStates.
   // Clean eligible NPCs turn under crime pressure; corrupt NPCs are exposed

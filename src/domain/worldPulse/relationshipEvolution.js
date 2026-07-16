@@ -15,6 +15,7 @@
 import { clamp01, RELATIONSHIP_DEFAULTS, relationshipKeyFromEdge, getRelationshipSettlements, normalizeRelationshipEdge, ensureRelationshipState } from './relationshipState.js';
 import { pressureFor, strongestPressure, EMPTY_DISPOSITION, EMPTY_TRADE_SALIENCE, buildRelationshipIndex, sharedEnemyAllianceCandidate } from './relationshipRuleHelpers.js';
 import { RULE_EVALUATORS, tradeLeverageCandidate } from './relationshipRulesAdversarial.js';
+import { facetOf } from '../spatial/cohesionWeave.js';
 
 export {
   RELATIONSHIP_TYPE_ALIASES, normalizeRelationshipType,
@@ -114,11 +115,89 @@ export function ensureAllRelationshipStates(/** @type {any} */ worldState, /** @
 // of the gap to baseline closed each tick.
 const RELATIONSHIP_RELAX = 0.12;
 
-export function relaxRelationshipStates(/** @type {any} */ worldState) {
+// ── D5 LIFESPAN-SCALED MEMORY (DESIGN_SIM_DEPTH_R2 §D5) ──────────────────────
+// The memory horizon derives from the settlement's demographic character via THE
+// FACET LAW (facetOf), never a hardcoded human clock. Each band is a bounded
+// multiplier on the memory LENGTH; the mean-reversion RATE scales INVERSELY
+// (a long-memoried pair reverts toward baseline slower; an undying court never
+// forgets via time). BOTH SIGNS scale — trust/warmth AND resentment/grievance
+// relax by the same band (the unification law). generational === 1.0 ⇒ relax
+// is byte-identical to today (0.12/1 === 0.12), so an undeclared world is
+// unchanged (dormancy by construction — no flag needed). undying ⇒ Infinity ⇒
+// relax 0: no generational decay, only event-driven erosion through the
+// reconciliation/climb-down lane (applyRelationshipPatch, which D5 never scales).
+export const MEMORY_HORIZON_BANDS = Object.freeze({
+  fleeting: 0.5,
+  generational: 1,
+  long: 3,
+  undying: Infinity,
+});
+export const DEFAULT_MEMORY_HORIZON_BAND = 'generational';
+
+/** The declared/inferred/default memory band for a settlement (facet-law compliant,
+ *  clamped to the band table — an unrecognized declaration falls back to the default).
+ * @param {any} settlement @returns {string} */
+export function memoryHorizonBandOf(settlement) {
+  const band = facetOf(settlement, 'memoryHorizon');
+  return typeof band === 'string' && Object.prototype.hasOwnProperty.call(MEMORY_HORIZON_BANDS, band)
+    ? band
+    : DEFAULT_MEMORY_HORIZON_BAND;
+}
+
+/** The horizon (memory-length) multiplier for a settlement. Default band ⇒ 1 (byte-identical).
+ * @param {any} settlement @returns {number} */
+export function memoryHorizonMultiplierOf(settlement) {
+  return MEMORY_HORIZON_BANDS[/** @type {keyof typeof MEMORY_HORIZON_BANDS} */ (memoryHorizonBandOf(settlement))];
+}
+
+/** Combine the two endpoints' horizons into the shared edge's horizon: the LONGER
+ *  memory keeps the ledger open (the elves remember the broken treaty long after the
+ *  men who broke it are dust — DESIGN_SIM_DEPTH_R2 §D5). @param {number} a @param {number} b */
+export function combineMemoryHorizon(a, b) {
+  return Math.max(a, b);
+}
+
+/**
+ * Build a per-relationship-edge memory-horizon multiplier resolver over a world snapshot
+ * (D5). The edge's horizon combines its two endpoints' bands (the longer memory keeps the
+ * ledger open). Every settlement defaults to 'generational' (multiplier 1), so an
+ * undeclared world resolves every key to 1 ⇒ relaxRelationshipStates is byte-identical to
+ * its pre-D5 fixed 12%/tick reversion. Pure; zero writes.
+ * @param {any} snapshot @returns {(key: string) => number}
+ */
+export function buildMemoryHorizonResolver(snapshot) {
+  const endpointsByKey = new Map();
+  for (const edge of snapshot?.regionalGraph?.edges || []) {
+    const key = edge?.id;
+    if (key != null) endpointsByKey.set(String(key), { from: edge.from, to: edge.to });
+  }
+  const byId = snapshot?.byId;
+  const multOf = (/** @type {any} */ id) => {
+    const item = byId?.get?.(String(id));
+    return memoryHorizonMultiplierOf(item?.settlement || item);
+  };
+  return (/** @type {string} */ key) => {
+    const ep = endpointsByKey.get(String(key));
+    if (!ep) return 1;
+    return combineMemoryHorizon(multOf(ep.from), multOf(ep.to));
+  };
+}
+
+/**
+ * @param {any} worldState
+ * @param {((key: string) => number)|null} [horizonForKey] optional per-edge memory-horizon
+ *   multiplier resolver (D5). Absent (or a resolver returning 1) ⇒ generational ⇒
+ *   byte-identical to the pre-D5 fixed 12%/tick reversion.
+ */
+export function relaxRelationshipStates(/** @type {any} */ worldState, horizonForKey = null) {
   const relationshipStates = { ...(worldState?.relationshipStates || {}) };
   for (const [key, s] of Object.entries(/** @type {any} */ (relationshipStates))) {
     const base = RELATIONSHIP_DEFAULTS[s.relationshipType] || RELATIONSHIP_DEFAULTS.neutral;
-    const toward = (/** @type {any} */ cur, /** @type {any} */ target) => clamp01((cur ?? target) + (target - (cur ?? target)) * RELATIONSHIP_RELAX);
+    // D5: rate = RELAX / horizon. horizon 1 ⇒ 0.12 exactly (byte-identical);
+    // Infinity (undying) ⇒ 0 (no time reversion); >1 (long) slower; <1 (fleeting) faster.
+    const horizon = horizonForKey ? horizonForKey(String(key)) : 1;
+    const relax = horizon > 0 ? RELATIONSHIP_RELAX / horizon : RELATIONSHIP_RELAX;
+    const toward = (/** @type {any} */ cur, /** @type {any} */ target) => clamp01((cur ?? target) + (target - (cur ?? target)) * relax);
     relationshipStates[key] = {
       ...s,
       trust: toward(s.trust, base.trust),
