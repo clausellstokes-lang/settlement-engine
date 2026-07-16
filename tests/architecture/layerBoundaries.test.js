@@ -77,6 +77,83 @@ describe('layer boundaries (F29)', () => {
     expect(offenders, 'engine layers must stay headless (no React/Zustand/store imports)').toEqual([]);
   });
 
+  test('headless-engine spine is TRANSITIVELY clean (no domain→lib→React/store chain)', () => {
+    // The direct scan above only proves a spine file does not import React/Zustand/
+    // store ITSELF. It is NOT transitive: a domain file may import a lib leaf that
+    // (now or later) imports the store, and the whole engine silently loses its
+    // headless guarantee through that back door (code-quality-architecture-4 found
+    // six such domain→lib edges — customRegistry/entities/text — scanned by no
+    // walker). This walks the FULL src import graph and asserts nothing REACHABLE
+    // from a spine root (kernel/data/generators/domain), directly or transitively,
+    // pulls in React/Zustand/store. Reuses the same resolver as the cycle test.
+    const files = walk(SRC);
+    const rel = (p) => relative(SRC, p).replace(/\\/g, '/');
+    const fileSet = new Set(files.map(rel));
+    const stripComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    const resolveImport = (fromFile, spec) => {
+      if (!spec.startsWith('.')) return null; // package specifiers checked directly below
+      const base = resolve(dirname(fromFile), spec);
+      for (const cand of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
+        const r = relative(SRC, cand).replace(/\\/g, '/');
+        if (fileSet.has(r)) return r;
+      }
+      return null;
+    };
+    // Per file: resolved intra-src edges + whether it DIRECTLY imports a forbidden
+    // specifier (package like 'react' or a relative store path).
+    const edgesOf = new Map();
+    const dirty = new Set();
+    for (const f of files) {
+      const self = rel(f);
+      const src = stripComments(readFileSync(f, 'utf8'));
+      const specs = [
+        ...src.matchAll(/from\s+['"]([^'"]+)['"]/g),
+        ...src.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+        ...src.matchAll(/^\s*import\s+['"]([^'"]+)['"]/gm),
+      ].map((m) => m[1]);
+      if (specs.some((s) => FORBIDDEN.some((re) => re.test(s)))) dirty.add(self);
+      edgesOf.set(self, [...new Set(specs.map((s) => resolveImport(f, s)).filter(Boolean))]);
+    }
+    // Reverse reachability from the dirty set: every ancestor of a forbidden importer
+    // is "taint-reaching" (cycle-safe — a plain BFS over reversed edges).
+    const reverse = new Map();
+    for (const [from, tos] of edgesOf) for (const to of tos) {
+      if (!reverse.has(to)) reverse.set(to, []);
+      reverse.get(to).push(from);
+    }
+    const taintReaching = new Set(dirty);
+    const queue = [...dirty];
+    while (queue.length) {
+      const n = queue.shift();
+      for (const importer of reverse.get(n) || []) {
+        if (!taintReaching.has(importer)) { taintReaching.add(importer); queue.push(importer); }
+      }
+    }
+    // Find a witness chain root→…→forbidden for a readable failure (only on red).
+    const witnessChain = (root) => {
+      const path = [];
+      const seen = new Set();
+      const dfs = (node) => {
+        if (seen.has(node)) return false;
+        seen.add(node);
+        path.push(node);
+        if (dirty.has(node)) return true;
+        for (const next of edgesOf.get(node) || []) if (taintReaching.has(next) && dfs(next)) return true;
+        path.pop();
+        return false;
+      };
+      return dfs(root) ? path.join(' → ') : root;
+    };
+    const spineRoots = [...fileSet].filter((r) => /^(kernel|data|generators|domain)\//.test(r));
+    const offenders = spineRoots.filter((r) => taintReaching.has(r)).sort().map(witnessChain);
+    expect(
+      offenders,
+      'a headless-engine spine file transitively reaches React/Zustand/store. Route the offending edge ' +
+        'through a headless leaf: either relocate the pulled-in helper to src/kernel, or split the store/React ' +
+        'part out of the lib leaf so the spine imports only the pure half.',
+    ).toEqual([]);
+  }, 60_000);
+
   test('dependency-cycle set equals the checked-in baseline (shrink-only)', () => {
     // The known, tolerated cycles (canonical form: members rotated so the
     // lexicographically-smallest file leads, edge order preserved). Killing one
