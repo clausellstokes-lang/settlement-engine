@@ -1663,6 +1663,27 @@ export const createSettlementSlice = (set, get) => ({
         && state.isSettlementClockBound(activeSaveId)) {
       const queued = state.queueSettlementEvent(activeSaveId, event);
       if (queued) {
+        // A typed refusal (advance_in_flight / advance_paused) rides through as
+        // `{ queued:false, reason }`. Surface it as an ok:false ActionResult so
+        // the composer keeps the form and shows the reason (store-hooks-state-1)
+        // — the old success-shaped return reset the form (dropping the DM's
+        // order) and even raised the stale-narrative modal. The typed `reason`
+        // travels on `before` so the lazy composer maps it to ADVANCE_ERROR_TEXT
+        // prose (the store stays free of first-paint UI strings).
+        if (queued.queued === false) {
+          return makeActionResult('applyEvent', {
+            ok: false,
+            queued: false,
+            before: {
+              eventType: event?.type ?? null,
+              targetId: event?.targetId ?? null,
+              phase: state.phase,
+              activeSaveId: activeSaveId ?? null,
+              reason: queued.reason ?? null,
+            },
+            after: null,
+          });
+        }
         set(s => { s.pendingPreview = null; s.pendingBatchPreview = null; });
         return queued;
       }
@@ -1906,12 +1927,22 @@ export const createSettlementSlice = (set, get) => ({
     }
     const logEntries = [];
     const refusals = [];
+    let queueRefused = false;
     for (const event of events) {
       const entry = get().applyEvent(event);
       // A vetoed event refused (Composer V2 §2) — collect the refusal, apply
       // the rest (order-independent events keep landing, same as validation
       // semantics for the events that DID pass).
       if (entry && entry.ok === false && entry.veto) { refusals.push({ eventId: event?.id, ...entry.veto }); continue; }
+      // A clock-bound queue refusal (store-hooks-state-1): advance in flight or
+      // parked, so nothing queued. Classify as a refusal — never a phantom
+      // logEntry that would make `queuedOnly` false and mislead the batch cart —
+      // and flag it so the cart KEEPS the staged batch instead of clearing it.
+      if (entry && entry.ok === false && entry.queued === false) {
+        refusals.push({ eventId: event?.id, reason: entry.before?.reason || 'refused' });
+        queueRefused = true;
+        continue;
+      }
       if (entry) logEntries.push(entry);
     }
     set(s => { s.pendingBatchPreview = null; });
@@ -1919,7 +1950,10 @@ export const createSettlementSlice = (set, get) => ({
     // markers carry `queued:true`); nothing mutated, so callers should not raise
     // the stale-narrative notice.
     const queuedOnly = logEntries.length > 0 && logEntries.every(e => e?.queued);
-    return { ok: true, warnings: refusals, logEntries, queuedOnly };
+    // `queueRefused` tells the batch cart that a clock-bound refusal blocked at
+    // least one event (advance in flight / parked); when NOTHING landed the cart
+    // must keep the staged batch and surface the reason (store-hooks-state-1).
+    return { ok: true, warnings: refusals, logEntries, queuedOnly, queueRefused };
   },
 
   dismissBatchPreview: () => set(state => { state.pendingBatchPreview = null; }),

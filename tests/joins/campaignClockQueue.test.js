@@ -590,3 +590,101 @@ describe('campaign-clock: THE MUTABLE DOCKET (W-COMPOSER-2 §10)', () => {
     expect(refusal.headline).toMatch(/ashford/i);
   });
 });
+
+// ── W-R2-INTENT: no DM order is silently dropped ─────────────────────────────
+describe('campaign-clock: clock-bound queue refusals ride VISIBLY (store-hooks-state-1)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('applyEvent during an IN-FLIGHT advance returns ok:false/queued:false (not a silent success-shaped drop)', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    const ret = store.getState().applyEvent(stressorEvent('ev-inflight'));
+    expect(ret).toMatchObject({ ok: false, queued: false });
+    expect(ret.before.reason).toBe('advance_in_flight');
+    // Nothing queued, nothing logged — but the refusal is TYPED, not a phantom.
+    expect(pendingOf(store)).toHaveLength(0);
+    expect(store.getState().eventLog).toHaveLength(0);
+    // After the advance clears, the same event queues normally (queued:true).
+    store.setState(state => { state.advanceInFlight = []; });
+    const ok = store.getState().applyEvent(stressorEvent('ev-after'));
+    expect(ok).toMatchObject({ queued: true });
+    expect(pendingOf(store)).toHaveLength(1);
+  });
+
+  test('applyEvent during a PARKED pause refuses with the advance_paused reason', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    // Park a paused advance (getPausedAdvance reads worldState.pausedAdvance).
+    store.setState(state => { state.campaigns[0].worldState.pausedAdvance = { cursor: 1, preWorldState: {} }; });
+    const ret = store.getState().applyEvent(stressorEvent('ev-paused'));
+    expect(ret).toMatchObject({ ok: false, queued: false });
+    expect(ret.before.reason).toBe('advance_paused');
+    expect(pendingOf(store)).toHaveLength(0);
+  });
+
+  test('applyEventBatch classifies clock-bound refusals: nothing lands, queueRefused set, queuedOnly false', () => {
+    const store = seed(makeStore(), { worldCanon: true });
+    store.setState(state => { state.advanceInFlight = ['camp-1']; });
+    const r = store.getState().applyEventBatch([
+      stressorEvent('b1', 'under_siege'),
+      stressorEvent('b2', 'famine'),
+    ]);
+    expect(r.ok).toBe(true);
+    expect(r.logEntries).toHaveLength(0);   // nothing committed
+    expect(r.queueRefused).toBe(true);       // the cart must keep the staged batch
+    expect(r.queuedOnly).toBe(false);        // never mislabel as a clean queue
+    expect(r.warnings.length).toBeGreaterThan(0);
+    expect(r.warnings[0].reason).toBe('advance_in_flight');
+  });
+});
+
+describe('campaign-clock: the drain refuses a missing/inactive target VISIBLY (state-lifecycle-3)', () => {
+  test('an INACTIVE member (settlement:null) — its queued intentions are refused, never silently dropped', () => {
+    // A member save that lapsed to inactive under free-tier retention loads with
+    // settlement:null yet stays queued.
+    const saves = [{ id: 'ashford', name: 'Ashford', settlement: null, campaignState: { eventLog: [] } }];
+    const queue = [{ queueId: 'q-inactive', saveId: 'ashford', event: { id: 'e1', type: 'APPLY_STRESSOR', targetId: 'famine' } }];
+    const out = drainQueuedEvents({ queue, saves, now: '2026-02-01T00:00:00.000Z', tick: 3 });
+    expect(out.updates).toHaveLength(0);
+    expect(out.refusals).toHaveLength(1);
+    expect(out.refusals[0]).toMatchObject({ queueId: 'q-inactive', saveId: 'ashford', code: 'target_inactive', eventType: 'APPLY_STRESSOR' });
+  });
+
+  test('a NON-MEMBER save (absent entirely) — refused with missing_target', () => {
+    const out = drainQueuedEvents({
+      queue: [{ queueId: 'q-gone', saveId: 'ashford', event: { id: 'e1', type: 'APPLY_STRESSOR', targetId: 'famine' } }],
+      saves: [], now: '2026-02-01T00:00:00.000Z', tick: 3,
+    });
+    expect(out.refusals).toHaveLength(1);
+    expect(out.refusals[0].code).toBe('missing_target');
+  });
+});
+
+describe('campaign-clock: re-homing a settlement drops its queued intentions from the campaign it LEAVES (store-hooks-state-6)', () => {
+  beforeEach(() => {
+    installLocalStorage();
+    localStorage.removeItem('sf_campaigns');
+  });
+
+  test('addToCampaign prunes the moved settlement\'s pendingEvents from the old campaign', () => {
+    const store = seed(makeStore(), { ids: ['ashford'], worldCanon: true });
+    store.setState(state => {
+      state.campaigns.push({
+        id: 'camp-2', name: 'Other', settlementIds: [], regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 's2', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      });
+    });
+    store.getState().applyEvent(stressorEvent('ev-move'));
+    expect(pendingOf(store)).toHaveLength(1); // queued on camp-1
+
+    store.getState().addToCampaign('camp-2', 'ashford');
+
+    const camp1 = store.getState().campaigns.find(c => c.id === 'camp-1');
+    expect(camp1.settlementIds).not.toContain('ashford');
+    // The queued intentions did NOT strand in camp-1 to be silently vaporized.
+    expect(camp1.worldState.pendingEvents || []).toHaveLength(0);
+  });
+});

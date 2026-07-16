@@ -85,7 +85,21 @@ export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow()
 
   for (const [saveId, items] of bySave) {
     const save = saveById.get(saveId);
-    if (!save || !save.settlement) continue;
+    if (!save || !save.settlement) {
+      // Missing or inactive target (state-lifecycle-3): the member save is
+      // absent (re-homed / deleted) or lapsed to inactive under free-tier
+      // retention (loads with settlement:null). Its queued intentions must be
+      // REFUSED VISIBLY like the malformed and veto classes (§10), never
+      // silently dropped when the caller wipes pendingEvents wholesale.
+      for (const item of items) {
+        refusals.push({
+          queueId: String(item?.queueId || ''), saveId,
+          eventType: String(item?.event?.type || ''),
+          code: save ? 'target_inactive' : 'missing_target', detail: '',
+        });
+      }
+      continue;
+    }
 
     let settlement = clone(save.settlement);
     let systemState = save.campaignState?.systemState ? clone(save.campaignState.systemState) : null;

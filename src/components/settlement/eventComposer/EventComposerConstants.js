@@ -8,7 +8,7 @@
  */
 
 import { Plus, Trash2, Flame, AlertOctagon, MapPinOff } from 'lucide-react';
-import { GOLD, INK, MUTED, BORDER, sans, FS, R, swatch } from '../../theme.js';
+import { GOLD, INK, MUTED, BORDER, sans, FS, SP, R, swatch } from '../../theme.js';
 
 export const _TYPE_ICONS = {
   ADD_INSTITUTION:    Plus,
@@ -40,6 +40,13 @@ export const inputStyle = {
   fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180, background: '#fff',
 };
 export const selectStyle = { ...inputStyle, minWidth: 180 };
+// The inline Apply-refusal box (a handler veto §2 OR a clock-bound queue refusal
+// store-hooks-state-1) — blocking, danger-toned, keeps the form.
+export const refusalBoxStyle = {
+  marginTop: SP.sm, padding: '8px 10px', border: `1px solid ${swatch.danger}`,
+  borderRadius: R.sm, background: swatch.dangerBg,
+  fontSize: FS.xs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
+};
 export const pickedChipStyle = {
   display: 'inline-flex', alignItems: 'center', gap: 6, marginBottom: 4,
   padding: '3px 8px', border: `1px solid ${GOLD}`, borderRadius: R.sm,

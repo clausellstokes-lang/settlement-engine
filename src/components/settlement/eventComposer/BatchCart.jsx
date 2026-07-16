@@ -16,7 +16,7 @@ import { DeltaRow } from './PreviewPanel.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 
-export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRemove, onClear, onPreview, onApply }) {
+export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refusalNotice = null, onRemove, onClear, onPreview, onApply }) {
   const validation = validateBatch(settlement, staged);
   const blocks = (validation.warnings || []).filter(w => w.severity === 'block');
   return (
@@ -45,6 +45,15 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, onRe
         <ul style={{ margin: '6px 0 0', paddingLeft: 16, color: swatch.danger, fontSize: FS.xxs, fontFamily: sans }}>
           {blocks.map((w, i) => <li key={i}>{w.message}</li>)}
         </ul>
+      )}
+      {refusalNotice && (
+        <div style={{
+          marginTop: 6, padding: '6px 8px', border: `1px solid ${swatch.danger}`,
+          borderRadius: R.sm, background: swatch.dangerBg,
+          fontSize: FS.xxs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
+        }}>
+          ✕ {refusalNotice}
+        </div>
       )}
       {pendingBatchPreview?.systemStateDeltas?.length > 0 && (
         <div style={{ marginTop: 6 }}>

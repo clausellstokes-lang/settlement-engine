@@ -129,5 +129,11 @@ export function makeActionResult(action, fields = {}) {
     analyticsEvent: fields.analyticsEvent ?? null,
     userMessage: fields.userMessage ?? null,
     ...(fields.veto !== undefined ? { veto: fields.veto } : {}),
+    // Clock-bound queue outcome (store-hooks-state-1): a typed queue refusal
+    // (advance_in_flight / advance_paused) rides through applyEvent as an
+    // ok:false ActionResult carrying `queued:false`, so the composer can branch
+    // on it (keep the form, surface the reason) instead of treating the refusal
+    // as a silent success.
+    ...(fields.queued !== undefined ? { queued: fields.queued } : {}),
   };
 }
