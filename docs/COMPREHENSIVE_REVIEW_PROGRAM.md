@@ -972,6 +972,23 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ GUIDE-2b RATIFIED + FOLDED (2026-07-16 ~20:10; FF @ 457f2caa).** Two commits: 3a6f82f9
+(the Keeper's Handbook Reference tab stops re-describing the catalog and DELEGATES — eight
+/compendium deep-links + the custom-mode link, drift-prone duplicate prose deleted) ·
+457f2caa (deep title tranche: LivingWorldGates' two native title= tooltips → an in-theme "?"
+help panel; **title census RATCHET-DOWN 502→500**). Whisper-host item CONFIRMED
+already-satisfied (UNWIRED_WHISPERS ceiling 0; every post-SURFACE-2 host renders via the
+strict walker). Zero eager delta (closure byte-identical 1,063,596); gate green (11,598
+passed; 3 load-flakes 18/18 isolated; sole red EXEMPT_CEILING). JUDGMENT ratified: the FULL
+Handbook narrative rewrite + /how-to route rename stays DEFERRED as owner-voice/SEO-surface
+work (the W-GUIDE-2 deferral's own "rather than rushed" caution) — landed the enforceable
+delegation subset; HowToUse stays on the guidance legacy ledger as a partial disposition.
+DEFERRAL RECORDED: the WorldMapToolbar teaching-title tranche waits for a MAP-COORDINATED
+pass (SM-4 owns that lane concurrently — writer boundary respected). CENSUS MECHANISM FACT
+(for future tranche waves): the title-census regex counts React component props
+(<Insight title=> etc.) as native tooltips — the baseline is inflated with false positives
+(HowToUse alone contributes 22); the design's "~340 native tooltips" ≠ the census number,
+and removing component props also ratchets it down.
 **✅ W-R2-LIGHT RATIFIED + FOLDED (2026-07-16 ~19:00) — the engine is reachable.** The lighting
 wave landed in 4 commits (0b28f032 presets via the shared frozen WAVES object + stability/
 coverage pins · 84af8c3a the dialog Engine Waves section · f3169cab dark-gate refusal prose
