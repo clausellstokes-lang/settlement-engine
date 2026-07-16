@@ -14,12 +14,14 @@
  * the four raw prose sites to their renderer so a future edit can't silently drop
  * the wiring back to raw {prose}.
  *
- * NOTE (recorded divergence): the renderers here degrade entity tokens to their
- * plain display NAME rather than clickable links — the EntityLink/EntityRef
- * consumer architecture from master commit 6d95adc7 never landed on this lineage.
- * See src/components/ProseParagraph.jsx for the full rationale. This guard cares
- * only that the tokens are CONSUMED (not leaked); upgrading the degrade path to
- * real links is a separate, later port.
+ * LINK PATH (wired at master-merge W5): the consumer architecture from master
+ * commit 6d95adc7 (EntityLink / EntityRef / DossierEntityContext provider /
+ * useDossierEntityNav / focusEntity) is now connected — a `ref` segment renders
+ * a clickable in-dossier link that resolves against the live entity index and
+ * degrades to plain text when the id is gone or no provider is mounted. The
+ * degrade path is retained AS the fallback, so both guarantees hold: tokens are
+ * never leaked (the original invariant) AND resolved refs become links (the
+ * link-path invariant, asserted in the second describe block below).
  */
 
 import { describe, it, expect } from 'vitest';
@@ -67,5 +69,41 @@ describe('entity-ref producer ⇒ consumer', () => {
     expect(read('src/components/new/npcComponents.jsx')).toMatch(/ProseParagraph/);
     // PDF Overview thesis
     expect(read('src/pdf/sections/Overview.jsx')).toMatch(/proseToPlainText|ProseText/);
+  });
+});
+
+describe('entity-ref link path (wired W5) — ref segments render clickable links', () => {
+  it('the web renderer upgrades ref segments to <EntityLink>', () => {
+    const src = read('src/components/ProseParagraph.jsx');
+    expect(src, 'ProseParagraph must import EntityLink').toMatch(/import\s+EntityLink\s+from\s+['"].*primitives\/EntityLink\.jsx['"]/);
+    // A ref segment renders EntityLink; a text segment stays a <span>.
+    expect(src).toMatch(/type === 'ref'/);
+    expect(src).toMatch(/<EntityLink/);
+  });
+
+  it('the PDF renderer upgrades ref segments to <EntityRef>', () => {
+    const src = read('src/pdf/primitives/ProseText.jsx');
+    expect(src, 'ProseText must import EntityRef').toMatch(/import\s+\{\s*EntityRef\s*\}\s+from\s+['"]\.\/EntityRef\.jsx['"]/);
+    expect(src).toMatch(/<EntityRef/);
+    // The plain-string helper is retained for the byte-identical golden path.
+    expect(src).toMatch(/export function proseToPlainText/);
+  });
+
+  it('OutputContainer hoists the DossierEntityContext provider once', () => {
+    const src = read('src/components/OutputContainer.jsx');
+    expect(src).toMatch(/import\s+\{\s*DossierEntityContext\s*\}/);
+    expect(src).toMatch(/useDossierEntityNav\(/);
+    expect(src).toMatch(/<DossierEntityContext\.Provider\b/);
+  });
+
+  it('the store defines the navigator focus action (focusEntity)', () => {
+    const src = read('src/store/uiSlice.js');
+    expect(src).toMatch(/focusEntity:/);
+    expect(src).toMatch(/focusedEntity:/);
+  });
+
+  it('the PDF view-model builds the entity index the EntityRef sections resolve against', () => {
+    const src = read('src/pdf/lib/viewModel.js');
+    expect(src).toMatch(/entityIndex:\s*buildDossierEntityIndex\(/);
   });
 });

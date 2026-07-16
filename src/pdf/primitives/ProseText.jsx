@@ -3,21 +3,23 @@
  * narrative prose that may carry ⟦entity:<id>|<name>⟧ tokens (see
  * src/lib/entityRefTokenizer.js).
  *
- * Same DIVERGENCE as ProseParagraph (see that file): the PDF EntityRef primitive
- * and the vm.entityIndex it resolves against never landed on this lineage, so a ref
- * degrades to its plain display name rather than a react-pdf <Link>. This still
- * fixes the real bug — the raw ⟦entity:…⟧ tokens leaking as literal text in a
- * narrated PDF export.
+ * ENTITY-LINK CONSUMER (master 6d95adc7, wired on this lineage at master-merge
+ * W5): a `ref` segment renders through the PDF EntityRef primitive — the
+ * react-pdf <Link> resolved against vm.entityIndex, rename-safe, degrading to
+ * plain <Text> when the id is gone. Text segments stay <Text>. react-pdf flows
+ * inline <Text>/<Link> children inside a parent <Text>, so the component returns
+ * inline nodes the caller wraps in its own styled <Text>.
  *
- * BYTE-IDENTITY (this is on the no-golden-shift track): proseToPlainText returns
- * the input UNCHANGED for token-free prose — every same-seed golden fixture has no
- * tokens (tokens exist only in live AI narratives, never in deterministic sim
- * output) — so wiring it at a golden-covered site (Overview thesis, NotableNPCs)
- * changes zero bytes. Use the plain-string helper at those sites (drop it inside
- * the caller's existing <Text> — no structural change); the <ProseText> component
- * wrapper is offered for standalone use.
+ * BYTE-IDENTITY (this is on the no-golden-shift track): tokens exist only in live
+ * AI narratives, never in deterministic sim output — so EVERY same-seed golden
+ * fixture is token-free. Token-free prose tokenizes to a single text segment and
+ * renders exactly as before (one styled <Text> via proseToPlainText), so wiring
+ * it at a golden-covered site (Overview thesis, NotableNPCs) changes zero bytes.
+ * Use the plain-string proseToPlainText() helper inside a caller's existing
+ * <Text>; use the <ProseText> component when you want inline entity links.
  */
 import { Text } from '@react-pdf/renderer';
+import { EntityRef } from './EntityRef.jsx';
 import { tokenizeProse } from '../../lib/entityRefTokenizer.js';
 
 /**
@@ -34,15 +36,41 @@ export function proseToPlainText(text) {
 }
 
 /**
- * Standalone component form. Wraps the de-tokenized text in its own <Text>; when a
- * caller already owns a <Text>, prefer proseToPlainText() inline to avoid nesting.
+ * Component form: renders inline entity links for token-bearing prose, plain text
+ * otherwise. Token-free prose takes the byte-identical single-<Text> path.
  *
  * @param {object} props
- * @param {string} props.text
- * @param {object} [props.style]
+ * @param {string} props.text        The (possibly token-bearing) prose string.
+ * @param {object} [props.index]     The dossier entity index (vm.entityIndex).
+ * @param {object} [props.style]     Style for the plain-text path / text segments.
+ * @param {object} [props.linkStyle] Extra style merged onto each EntityRef.
  */
-export function ProseText({ text, style }) {
-  return <Text style={style}>{proseToPlainText(text)}</Text>;
+export function ProseText({ text, index, style, linkStyle }) {
+  const segments = tokenizeProse(text);
+  // Token-free prose (every same-seed golden, every pre-token narrative) is a
+  // single text segment → render exactly as the pre-wiring version did (one
+  // styled <Text> via proseToPlainText), so PDF byte-identity holds. Only
+  // token-bearing live narratives branch into inline refs.
+  if (segments.length <= 1 && (!segments[0] || segments[0].type === 'text')) {
+    return <Text style={style}>{proseToPlainText(text)}</Text>;
+  }
+  return (
+    <>
+      {segments.map((seg, i) =>
+        seg.type === 'ref' ? (
+          <EntityRef
+            key={i}
+            id={seg.id}
+            index={index}
+            fallback={seg.displayText}
+            style={linkStyle}
+          />
+        ) : (
+          <Text key={i} style={style}>{seg.value}</Text>
+        ),
+      )}
+    </>
+  );
 }
 
 export default ProseText;

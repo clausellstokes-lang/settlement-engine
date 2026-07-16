@@ -33,11 +33,35 @@ export const createUiSlice = (set, get) => ({
   // nothing to show. Transient (deliberately left out of the persist partialize).
   dossierClaimToast: null,
 
+  // The dossier entity a hyperlink last navigated to ({ id, ts } | null). Lives
+  // on the store (not a card-local prop) because the target must survive the
+  // cross-tab remount: clicking an NPC's faction switches to the Power tab, which
+  // mounts fresh and reads this to know which faction to open. The `ts` stamp
+  // makes a repeat click of the same link re-fire the open-the-card effect.
+  // Transient (out of the persist partialize) so a reload lands unfocused.
+  focusedEntity: null,
+
   // ── Actions ──────────────────────────────────────────────────────────────
 
   /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
   setDossierClaimToast: (message) =>
     set(state => { state.dossierClaimToast = message || null; }),
+
+  /**
+   * Mark a dossier entity as the navigation target (a hyperlink click). Stamps a
+   * fresh `ts` so the per-tab open-the-card effects re-fire on a repeat click of
+   * the same link.
+   * @param {string} id  Stable entity id (e.g. 'faction.iron_guild', 'npc_3').
+   */
+  focusEntity: (id) =>
+    set(state => {
+      if (!id) return;
+      state.focusedEntity = { id, ts: Date.now() };
+    }),
+
+  /** Clear the focused entity (e.g. on dossier teardown). */
+  clearFocusedEntity: () =>
+    set(state => { state.focusedEntity = null; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>

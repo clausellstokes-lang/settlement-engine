@@ -1,5 +1,5 @@
 /** @vitest-environment jsdom */
-import { afterEach, beforeEach, describe, expect, test } from 'vitest';
+import { afterEach, describe, expect, test } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
 
 import {
@@ -8,13 +8,12 @@ import {
   PowerSuccessionSection,
   NpcAgencySection,
 } from '../../src/components/dossier/EngineSections.jsx';
-import { useStore } from '../../src/store/index.js';
 
+// This lineage has no altitude/detail-level store (master's useAltitude was
+// dropped in the master merge), so EngineSections renders at full detail
+// unconditionally — the band detail / contributors these tests assert on are
+// always present, no setDetailLevel setup needed.
 afterEach(cleanup);
-beforeEach(() => {
-  // Detail altitude so the band detail / contributors render for assertions.
-  useStore.getState().setDetailLevel('standard');
-});
 
 describe('EconomicsGranarySection — economic_capacity + granary gauge', () => {
   test('self-gates to nothing without a band or stockpile record', () => {

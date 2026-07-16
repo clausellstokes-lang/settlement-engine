@@ -20,6 +20,8 @@ import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
+import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
+import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
 // P104 / X-4 — Welcome-credit gift card. Self-gates on signed-in +
 // first-saved + ledger-unspent state; renders nothing otherwise.
 const WelcomeCreditCard = lazy(() => import('./dossier/WelcomeCreditCard.jsx'));
@@ -674,12 +676,19 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     />
   );
 
+  // Entity-link context for the whole dossier: the id->entity index + the
+  // navigator a link click drives (tab switch + focus + scroll). Hoisted here
+  // because this component owns the active settlement and the tab state. All
+  // renderable tabs are passed (not the group-filtered `tabs`) so a link can
+  // reach any tab across group boundaries; setActiveTab re-derives the group.
+  const entityNav = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
+
   // Deferred null check (see comment near the top of this component).
   // All hooks are now committed; safe to early-exit.
   if (earlyExitOnNoSettlement) return null;
 
   return (
-    <>
+    <DossierEntityContext.Provider value={entityNav}>
       {/* The "How this was simulated" metadata lives behind the SimulationDrawer
           trigger in the action band below, not as a top-of-page rail — so the
           dossier card itself is the default landing surface and the simulation
@@ -884,6 +893,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         pendingRegenerate={pendingRegenerate} onConfirmRegenerate={confirmRegenerate} onCancelRegenerate={() => setPendingRegenerate(false)}
         regenerateBody={`This discards the current narrative prose and generates a new one${isConfigured ? `, spending ${getCost('narrative')} credits` : ''}. The raw simulation is unchanged.`}
       />
-    </>
+    </DossierEntityContext.Provider>
   );
 }

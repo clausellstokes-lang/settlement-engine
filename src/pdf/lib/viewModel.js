@@ -31,6 +31,7 @@ import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { humanize } from './format.js';
 import { buildPdfLiveWorld } from './liveWorld.js';
+import { buildDossierEntityIndex } from '../../domain/dossier/entityLinks.js';
 
 // Human labels for the publicLegitimacy breakdown factors
 // (factionDynamics.computePublicLegitimacy emits { prosperity, safety, defense,
@@ -194,6 +195,14 @@ export function buildViewModel({
     // Live campaign slice for the Faith & War chapter. `null` off-campaign /
     // dormant ⇒ chapter renders nothing.
     liveWorld: buildPdfLiveWorld({ settlement: raw, campaign }),
+
+    // Entity index the PDF EntityRef primitive resolves ⟦entity:…⟧ tokens
+    // against (NotableNPCs / Institutions / NPCQuickRef read vm.entityIndex).
+    // Built from the canonical `raw` save so ids are stable across the raw/ai
+    // pair; additive (derived from existing fields), so a non-narrative export
+    // is byte-identical except for the additive in-PDF <Link> anchors. When a
+    // token's id does not resolve, EntityRef degrades to plain <Text>.
+    entityIndex:   buildDossierEntityIndex(raw),
 
     summary:       summarySlice(active, ai, useAi, aiDailyLife),
     identity:      identitySlice(active),
