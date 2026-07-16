@@ -10,25 +10,16 @@
  * credit management now lives behind this menu for signed-in users (and,
  * for anonymous visitors, inline on the Create page once they hit the cap).
  *
- * The menu closes on outside-click, Escape, or item selection, and is fully
- * keyboard-operable: opening moves focus to the first row, ArrowUp/ArrowDown
- * roves between rows, and Escape returns focus to the account chip (the single
- * focal control). Colors come from theme tokens (the gold identity pair through
- * GOLD/GOLD_BG, the elevated purple through swatch one-offs, the popover shadow
- * through ELEV) so the visual-budget lint stays clean — no raw hex or rgba literals.
+ * The menu closes on outside-click, Escape, or item selection. Colors come
+ * from theme tokens / rgba (no raw hex) so the visual-budget lint stays clean.
  */
 import { useState, useRef, useEffect } from 'react';
-import { User, ChevronDown, Settings, CreditCard, LogOut } from 'lucide-react';
-import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, R, ELEV, PARCH_100, VIOLET, TINT_VIOLET, swatch } from './theme.js';
+import { User, ChevronDown, Settings, CreditCard } from 'lucide-react';
+import { GOLD, GOLD_BG, INK, BORDER, FS, SP, R, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
-function MenuRow({ icon, label, onClick, tone = 'default' }) {
+function MenuRow({ icon, label, onClick }) {
   const [hover, setHover] = useState(false);
-  // `danger` tones the icon + label red (sign-out): a destructive-ish action
-  // gets a visual cue without leaving the same ghost-row affordance.
-  const isDanger = tone === 'danger';
-  const accent = isDanger ? swatch.danger : GOLD;
-  const labelColor = isDanger ? swatch.danger : INK;
   return (
     <Button
       variant="ghost"
@@ -37,16 +28,13 @@ function MenuRow({ icon, label, onClick, tone = 'default' }) {
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      icon={<span style={{ display: 'flex', color: accent, flexShrink: 0 }}>{icon}</span>}
+      icon={<span style={{ display: 'flex', color: GOLD, flexShrink: 0 }}>{icon}</span>}
       style={{
         justifyContent: 'flex-start', gap: SP.sm, textAlign: 'left',
-        // 44px minimum keeps every row a comfortable touch target (the ghost
-        // size-md floor is 40, just under the at-the-table usability line).
-        minHeight: 44,
         padding: `${SP.sm}px ${SP.md}px`,
-        background: hover ? (isDanger ? swatch.dangerBg : GOLD_BG) : 'transparent',
+        background: hover ? GOLD_BG : 'transparent',
         border: 'none', borderRadius: R.sm,
-        color: labelColor, fontSize: FS.sm, fontWeight: 600,
+        color: INK, fontSize: FS.sm, fontWeight: 600,
       }}
     >
       {label}
@@ -54,22 +42,6 @@ function MenuRow({ icon, label, onClick, tone = 'default' }) {
   );
 }
 
-/**
- * AccountMenu — header identity chip + dropdown (account / subscription / sign out).
- *
- * @param {object} props
- * @param {boolean} props.isAnon - true for signed-out visitors (renders the Sign In button).
- * @param {string} [props.displayName] - the signed-in member's display name.
- * @param {boolean} [props.isElevated] - developer/admin role (purple identity tint).
- * @param {() => void} props.onSignIn - open the auth modal.
- * @param {() => void} props.onAccount - navigate to the account page.
- * @param {() => void} props.onManageSubscription - navigate to subscription/credits.
- * @param {() => void} [props.onSignOut] - sign out (omitted hides the row).
- * @param {boolean} [props.compact=false] - mobile/header-bar compact sizing.
- * @param {number|null} [props.creditBalance=null] - remaining credits. Surfaced
- *   inside the compact (mobile) dropdown, where the header's desktop-only credit
- *   badge is absent — without this the balance was unreadable on mobile.
- */
 export default function AccountMenu({
   isAnon,
   displayName,
@@ -77,30 +49,17 @@ export default function AccountMenu({
   onSignIn,
   onAccount,
   onManageSubscription,
-  onSignOut,
   compact = false,
-  creditBalance = null,
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const menuRef = useRef(null);
-
-  // The chip is the single focal control; the rows are reached via roving focus
-  // once the menu opens. This reads the live DOM nodes (Button is not a
-  // forwardRef component, so we query rather than thread refs through it).
-  const rowEls = () => Array.from(menuRef.current?.querySelectorAll('[role="menuitem"]') ?? []);
 
   useEffect(() => {
     if (!open) return undefined;
     const onDocMouseDown = (e) => {
       if (ref.current && !ref.current.contains(e.target)) setOpen(false);
     };
-    const onKey = (e) => {
-      if (e.key !== 'Escape') return;
-      setOpen(false);
-      // Restore focus to the chip so keyboard users land back on the trigger.
-      ref.current?.querySelector('button[aria-haspopup="menu"]')?.focus();
-    };
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
     document.addEventListener('mousedown', onDocMouseDown);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -108,33 +67,6 @@ export default function AccountMenu({
       document.removeEventListener('keydown', onKey);
     };
   }, [open]);
-
-  // On open, move focus into the menu (first row); roving focus takes over there.
-  useEffect(() => {
-    if (!open) return;
-    rowEls()[0]?.focus();
-  }, [open]);
-
-  // ArrowDown/ArrowUp rove between rows; Home/End jump to the ends. Escape is
-  // handled by the document listener above so it works from anywhere in the menu.
-  const onMenuKeyDown = (e) => {
-    const rows = rowEls();
-    if (rows.length === 0) return;
-    const current = rows.indexOf(document.activeElement);
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      rows[current < 0 ? 0 : (current + 1) % rows.length]?.focus();
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      rows[current <= 0 ? rows.length - 1 : current - 1]?.focus();
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      rows[0]?.focus();
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      rows[rows.length - 1]?.focus();
-    }
-  };
 
   const iconSize = compact ? 12 : 13;
   const chipPad = compact ? `${SP.xs + 1}px ${SP.md}px` : `${SP.sm}px ${SP.lg}px`;
@@ -160,16 +92,9 @@ export default function AccountMenu({
   }
 
   const name = displayName || (isElevated ? 'Developer' : 'Account');
-  // Standard identity rides the GOLD token pair — the header's own accent
-  // (wordmark + active nav), so the chip reads as on-brand instead of the
-  // off-palette green tint it used to carry (which looked discoloured against the
-  // gold/parchment/violet header). The elevated (developer) chip tints purple
-  // through swatch one-offs so the two roles still read apart at a glance.
-  const chipBg = isElevated ? swatch['#F0E0F0'] : GOLD_BG;
-  const chipBorder = isElevated ? swatch['#7C3AED'] : GOLD;
-  // The label uses the light parchment text tone so it clears AA on the dark
-  // header gradient (a gold label on the gold wash would be the weakest pairing).
-  const chipColor = isElevated ? swatch['#C8A0F0'] : PARCH_100;
+  const chipBg = isElevated ? 'rgba(124,58,237,0.15)' : 'rgba(42,122,42,0.2)';
+  const chipBorder = isElevated ? 'rgba(124,58,237,0.3)' : 'rgba(42,122,42,0.4)';
+  const chipColor = isElevated ? swatch['#C8A0F0'] : 'rgba(74,138,74,1)';
 
   return (
     <div ref={ref} style={{ position: 'relative', marginLeft: compact ? 0 : SP.xs }}>
@@ -183,8 +108,7 @@ export default function AccountMenu({
         style={{
           gap: SP.xs,
           padding: chipPad,
-          // 44px floor in both modes — the secondary size-md default is 40.
-          minHeight: 44,
+          minHeight: compact ? 44 : undefined,
           maxWidth: compact ? 168 : 220,
           background: chipBg,
           border: `1px solid ${chipBorder}`,
@@ -202,52 +126,16 @@ export default function AccountMenu({
       {open && (
         <div
           role="menu"
-          ref={menuRef}
-          tabIndex={-1}
-          onKeyDown={onMenuKeyDown}
           style={{
             position: 'absolute', top: 'calc(100% + 6px)', right: 0,
             minWidth: 236,
-            // Clamp to the viewport so a right-anchored dropdown near the screen
-            // edge can't overflow off-screen on a narrow phone (236px minWidth
-            // would have pushed past 375 if the chip sat far enough right). The
-            // SP.md*2 pad keeps a small gutter on both sides.
-            maxWidth: `calc(100vw - ${SP.md * 2}px)`,
             background: swatch.white,
             border: `1px solid ${BORDER}`,
             borderRadius: R.md,
-            boxShadow: ELEV[3],
+            boxShadow: '0 8px 24px rgba(27,20,8,0.16)',
             padding: 6, zIndex: 1200,
           }}
         >
-          {/* Mobile-only credit read-out. The desktop header carries a
-              persistent credit badge, but the compact mobile chrome has no room
-              for it — so the balance was unreadable on phones (a read
-              regression). Surfaced here as a non-interactive header row inside
-              the dropdown: two channels (the violet count + the word "credits")
-              so it never leans on colour alone, matching the desktop badge. */}
-          {compact && creditBalance != null && (
-            <div
-              style={{
-                display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-                gap: SP.sm,
-                margin: `2px ${SP.xs}px 4px`,
-                padding: `${SP.sm}px ${SP.md}px`,
-                background: TINT_VIOLET,
-                border: `1px solid ${VIOLET}`,
-                borderRadius: R.sm,
-                fontFamily: 'inherit',
-              }}
-            >
-              <span style={{ fontSize: FS.xs, color: MUTED, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                Credits
-              </span>
-              <span style={{ fontSize: FS.md, color: VIOLET }}>
-                <span style={{ fontWeight: 700 }}>{creditBalance}</span>
-                <span style={{ fontWeight: 500, opacity: 0.85 }}> credits</span>
-              </span>
-            </div>
-          )}
           <MenuRow
             icon={<Settings size={15} />}
             label="Account"
@@ -255,20 +143,9 @@ export default function AccountMenu({
           />
           <MenuRow
             icon={<CreditCard size={15} />}
-            label="Manage subscription and credits"
+            label="Manage subscription & credits"
             onClick={() => { setOpen(false); onManageSubscription?.(); }}
           />
-          {onSignOut && (
-            <>
-              <div style={{ height: 1, background: BORDER, margin: `4px ${SP.xs}px` }} aria-hidden="true" />
-              <MenuRow
-                icon={<LogOut size={15} />}
-                label="Sign out"
-                tone="danger"
-                onClick={() => { setOpen(false); onSignOut(); }}
-              />
-            </>
-          )}
         </div>
       )}
     </div>

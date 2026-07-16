@@ -292,6 +292,12 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   clearLoadedFromSave: { slice: 'configSlice', reason: 'clears loaded-from-save indicator; transient' },
   setAdvanceAutoResolve: { slice: 'campaignWorldPulseSlice', reason: 'auto-resolve UI toggle; not persisted' },
   dismissLivingCatchUp: { slice: 'campaignWorldPulseSlice', reason: 'dismisses the while-you-were-away digest banner; transient' },
+  // Entity-link hyperlink focus (master-merge W5): transient dossier-navigation
+  // target, deliberately excluded from the persist partialize (uiSlice).
+  focusEntity: { slice: 'uiSlice', reason: 'transient dossier hyperlink focus target; excluded from persist partialize' },
+  clearFocusedEntity: { slice: 'uiSlice', reason: 'clears the transient dossier hyperlink focus; excluded from persist' },
+  // Merge-introduced services-toggle hydration (transient session hydration).
+  hydrateServicesToggles: { slice: 'configSlice', reason: 'hydrates transient services toggles from a loaded save; session-only, not re-persisted' },
 });
 
 /** The committed exempt ceiling (shrink-only; lower it as actions are adopted). */

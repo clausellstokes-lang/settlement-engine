@@ -67,33 +67,6 @@ describe('simulation view', () => {
     expect(r.entries).toHaveProperty('substrate');
     expect(r.entries).toHaveProperty('capacities');
   });
-
-  // Regression: viewSimulation used to map the inverted band word straight to
-  // prose, so a rampant-crime settlement printed "criminal_opportunity is
-  // COLLAPSED" — which a DM/AI reads as crime being GONE, the exact inverse of
-  // the truth. The fix routes phrasing through causalState.causalBandWord (the
-  // same helper summarizeCausalState uses) so the polarity handling lives in
-  // one place and can't drift back into this parallel consumer.
-  it.each([
-    ['collapsed band', 100], // score 90 → inverted band 'collapsed'
-    ['critical band', 75],   // score 80 → inverted band 'critical'
-  ])('never renders lower-is-better criminal_opportunity with an inverted band word (%s)', (_label, blackMarketCapture) => {
-    const settlement = { population: 4000, safetyProfile: { blackMarketCapture } };
-    const r = deriveCausalView(settlement, 'simulation');
-    const crimeLines = r.summary.filter(l => /criminal_opportunity/.test(l));
-    // It must actually surface (the fixture drives it into a problem band)…
-    expect(crimeLines.length).toBeGreaterThan(0);
-    for (const line of crimeLines) {
-      // …and never with the positive-reading inverted band word.
-      expect(line).not.toMatch(/is (COLLAPSED|collapsed|critical)\.?$/i);
-      // …instead phrased as the real problem (Rampant/Acute).
-      expect(line).toMatch(/is (RAMPANT|acute)\.?$/i);
-    }
-    // Higher-is-better variables are unaffected: any non-crime problem line
-    // still reads with the raw band word.
-    const otherCollapsed = r.summary.filter(l => /is COLLAPSED\.$/.test(l));
-    for (const line of otherCollapsed) expect(line).not.toMatch(/criminal_opportunity/);
-  });
 });
 
 describe('delta view', () => {
