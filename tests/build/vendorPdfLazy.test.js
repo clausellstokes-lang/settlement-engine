@@ -386,6 +386,24 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 //     (+363 B, round-21), W-R2-DEPTH (~100 B), and slack. The reclaim paid for
 //     the whole queue ~15× over; NET −55,503 B vs the pre-G8 1,121,942.
 // Monotone-down only; raises are owner-signed, never incidental.
+// ── (2026-07-16, FP-G9) MASTER-MERGE RECLAIM — budget HOLDS at 1,066,400 ──
+// The master-merge fold-in (claude/master-merge-r1) adopted master's entity-link
+// consumer layer (EntityLink/DossierEntityContext/useNavigateToEntity + the
+// focusedEntity uiSlice) and W6's ported store fixes — legitimate features RATCHET
+// #10's budget never funded. The folded tree measured 1,069,872 (+3,472 OVER). FP-G9
+// RECLAIMED 6,456 B with ONE behavior-neutral move: the eager store (mapSlice) pulled
+// computeRoadEdges (+ its supplyChains dep, ~19 KB source) into first paint via a
+// static import, used there ONLY for the fire-and-forget MAP_ROUTE_DRAWN analytics —
+// never for state. Dynamic-imported at the call site (the settlementSlice loadEngine
+// idiom); roadNetwork + supplyChains now ride the lazy map chunk (the lazy WorldMap/
+// RoadsLayer surfaces already import computeRoadEdges directly). The sole observable
+// shift is analytics timing (MAP_ROUTE_DRAWN fires one microtask later; the placement,
+// its gate return, and MAP_PLACEMENT_ADDED all stay synchronous). Measured closure
+// 1,063,416 (7 files, index 519,514 → 513,058) — GREEN with 2,984 B margin, which
+// restores RATCHET #10's reserved budget-blocked-queue headroom (persist-gap +596,
+// W2 feed-retention +363, W-R2-DEPTH ~100, slack). The budget is DELIBERATELY NOT
+// lowered: dropping it would consume that reserved, owner-funded headroom. Goldens
+// byte-identical (no lit-path change). Monotone-down only; raises owner-signed.
 const CLOSURE_BUDGET_BYTES = 1_066_400;
 
 // Parse the top-level *static* module edges out of a built chunk. Static

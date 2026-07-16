@@ -15,8 +15,23 @@
 
 import { deepClone } from '../domain/clone.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
+
+// FP-G9 first-paint reclaim: computeRoadEdges (+ its supplyChains dep, ~19 KB
+// source) is reached from the eager store ONLY here, and ONLY for the
+// fire-and-forget MAP_ROUTE_DRAWN analytics below — never for state. A static
+// import dragged the whole roadNetwork chunk into the first-paint closure. The
+// lazy map surfaces (WorldMap/RoadsLayer) import computeRoadEdges directly, so
+// dynamic-importing it here (memoized, the settlementSlice loadEngine idiom)
+// lets roadNetwork + supplyChains ride the lazy map chunk instead. The one
+// observable shift is analytics timing: MAP_ROUTE_DRAWN fires one microtask
+// later (the placement, its gate return, and MAP_PLACEMENT_ADDED all stay
+// synchronous). @enforced-by tests/build/vendorPdfLazy.test.js (byte budget).
+let _roadNetworkPromise;
+const loadRoadNetwork = () => {
+  if (!_roadNetworkPromise) _roadNetworkPromise = import('../lib/roadNetwork.js');
+  return _roadNetworkPromise;
+};
 
 export const MAP_MODES = {
   VIEW: 'view',
@@ -301,13 +316,12 @@ export const createMapSlice = (set, get) => ({
       }
     }
 
-    // Route count BEFORE the add — used only to detect whether this placement
-    // brought a new derived road edge into being (the MAP_ROUTE_DRAWN proxy).
-    let routeCountBefore = 0;
-    try {
-      const prev = get();
-      routeCountBefore = computeRoadEdges(prev.savedSettlements, prev.mapState.placements).length;
-    } catch { /* analytics-only; never block the placement */ }
+    // Snapshot the PRE-placement map inputs for the MAP_ROUTE_DRAWN proxy below.
+    // computeRoadEdges runs LAZILY (dynamic import), so capture the immutable
+    // pre-set state now — immer freezes it, so it stays a valid before-image.
+    const prevForRoutes = get();
+    const prevSaves = prevForRoutes.savedSettlements;
+    const prevPlacements = prevForRoutes.mapState.placements;
 
     set(state => {
       snapshotForUndo(state, 'place settlement');
@@ -319,13 +333,20 @@ export const createMapSlice = (set, get) => ({
       };
     });
 
+    // Snapshot the POST-placement map inputs SYNCHRONOUSLY (immer froze them), so
+    // the deferred MAP_ROUTE_DRAWN block below computes on the exact same before/
+    // after images the old synchronous code did — the lazy load defers only the
+    // analytics TIMING, never which state it reads.
+    const nextForRoutes = get();
+    const nextSaves = nextForRoutes.savedSettlements;
+    const nextPlacements = nextForRoutes.mapState.placements;
+
     // Fire-and-forget analytics — coarse counts only, NEVER coordinates.
     try {
-      const next = get();
-      const placementCountAfter = Object.keys(next.mapState.placements || {}).length;
+      const placementCountAfter = Object.keys(nextPlacements || {}).length;
       // Tier of the just-placed settlement, derived inline as a coarse enum.
       const save = settlementId
-        ? (next.savedSettlements || []).find(s => String(s?.id) === String(settlementId))
+        ? (nextSaves || []).find(s => String(s?.id) === String(settlementId))
         : null;
       const tier = save?.settlement?.tier || save?.tier || 'unknown';
       track(EVENTS.MAP_PLACEMENT_ADDED, {
@@ -333,24 +354,32 @@ export const createMapSlice = (set, get) => ({
         tier,
         via: via === 'picker' ? 'picker' : 'drop',
       });
-
-      // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn;
-      // a placement that grows the road graph is the natural "a route appeared"
-      // moment. Only fire when the edge count strictly increases.
-      const edges = computeRoadEdges(next.savedSettlements, next.mapState.placements);
-      if (edges.length > routeCountBefore) {
-        // Did this add link two settlement-backed placements (vs an empty burg)?
-        const linksTwoPlaced = edges.some(e => {
-          const a = next.mapState.placements[e.fromBurgId];
-          const b = next.mapState.placements[e.toBurgId];
-          return !!(a?.settlementId && b?.settlementId);
-        });
-        track(EVENTS.MAP_ROUTE_DRAWN, {
-          route_count_after: edges.length,
-          links_two_placed_settlements: linksTwoPlaced,
-        });
-      }
     } catch { /* analytics is best-effort; never affect placement behavior */ }
+
+    // MAP_ROUTE_DRAWN — routes are derived (computeRoadEdges), not hand-drawn; a
+    // placement that grows the road graph is the natural "a route appeared"
+    // moment. Only fire when the edge count strictly increases. computeRoadEdges
+    // rides the LAZY roadNetwork chunk (see loadRoadNetwork above) — deferred here
+    // so the eager store never pulls it into first paint. Fully fire-and-forget:
+    // the placement + its gate return already resolved synchronously.
+    loadRoadNetwork().then(({ computeRoadEdges }) => {
+      try {
+        const routeCountBefore = computeRoadEdges(prevSaves, prevPlacements).length;
+        const edges = computeRoadEdges(nextSaves, nextPlacements);
+        if (edges.length > routeCountBefore) {
+          // Did this add link two settlement-backed placements (vs an empty burg)?
+          const linksTwoPlaced = edges.some(e => {
+            const a = nextPlacements[e.fromBurgId];
+            const b = nextPlacements[e.toBurgId];
+            return !!(a?.settlementId && b?.settlementId);
+          });
+          track(EVENTS.MAP_ROUTE_DRAWN, {
+            route_count_after: edges.length,
+            links_two_placed_settlements: linksTwoPlaced,
+          });
+        }
+      } catch { /* analytics is best-effort; never affect placement behavior */ }
+    }).catch(() => { /* chunk load failed — analytics only, ignore */ });
     return { ok: true };
   },
 
