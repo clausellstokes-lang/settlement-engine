@@ -3,7 +3,7 @@ import { FS, swatch, MUTED } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/supplyChainData.js';
-import { exactGoodId } from '../../domain/region/goodsCatalog.js';
+import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
 
 // ── Build a lookup: chainId → full chain definition ──────────────────────────
 const CHAIN_DEFS = {};
@@ -110,10 +110,13 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
       label: o,
       isExport: isExportable && (
         (oid != null && exportIds.has(oid)) ||
-        (primaryExports || []).some(ex =>
-          ex.toLowerCase().includes(o.toLowerCase().split(' ')[0]) ||
-          o.toLowerCase().includes(ex.toLowerCase().split(' ')[0])
-        )
+        (primaryExports || []).some(ex => {
+          // ex may be a bare string OR the {good/name/label} object shape —
+          // goodText() keeps `.toLowerCase()` from throwing on an object export.
+          const e = goodText(ex).toLowerCase();
+          return e.includes(o.toLowerCase().split(' ')[0]) ||
+            o.toLowerCase().includes(e.split(' ')[0]);
+        })
       ),
     };
   });

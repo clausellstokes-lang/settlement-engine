@@ -296,8 +296,14 @@ export const customDeps = {
     for (const e of (reg.listCustom('tradeGoods') || [])) {
       if (e.raw?.satisfies !== category) continue;
       const reqRef = e.raw?.requiredInstitution;
-      const reqName = reqRef ? resolveNameFromRef(Array.isArray(reqRef) ? reqRef[0] : reqRef) : null;
-      if (reqName && !present(reqName)) continue; // gated good can't be produced
+      if (reqRef) {
+        // A DECLARED requirement gates the good. A dangling/dropped ref resolves to ''
+        // (deleted institution, or prepareImport nulling a rejected target) — treat that
+        // as gated-and-absent, NOT ungated: an unproducible good must not count as supply
+        // or be named a local export. Only an UNDECLARED requirement is freely supplied.
+        const reqName = resolveNameFromRef(Array.isArray(reqRef) ? reqRef[0] : reqRef);
+        if (!reqName || !present(reqName)) continue;
+      }
       supply += WEIGHT[e.raw?.economicWeight] || 2;
       if (e.name) goods.push(e.name);
     }

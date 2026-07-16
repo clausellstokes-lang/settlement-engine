@@ -96,6 +96,10 @@ registerStep('generatePopulation', {
       cumulative += pf.power || 0;
       if (roll <= cumulative) { scattered = pf; break; }
     }
+    // No power factions at all (empty powerStructure.factions ⇒ governingPF
+    // undefined and the loop never runs): nothing to attribute this group to, so
+    // leave it unassigned rather than dereferencing undefined and crashing the step.
+    if (!scattered) return;
     fg.powerFactionName     = scattered.faction;
     fg.powerFactionPower    = scattered.power;
     fg.powerFactionCat      = scattered.category;
