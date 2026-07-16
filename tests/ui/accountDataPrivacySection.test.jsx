@@ -132,7 +132,3 @@ describe('AccountDataPrivacySection — bulk content deletion', () => {
     expect(screen.getByText('Yes, delete all')).toBeTruthy();
   });
 });
-
-describe('AccountDataPrivacySection — visibility prefs', () => {
-
-});
