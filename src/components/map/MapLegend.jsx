@@ -19,6 +19,7 @@ import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, GOLD, INK, MUTED, SECOND, R, SP, sans, swatch } from '../theme.js';
 import { REL_EDGE_STYLE, REL_TYPES, relChannelColor } from './relationshipEdgeStyle.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
+import { LIFECYCLE_GLYPH_STYLE } from './lifecycleGlyphStyle.js';
 
 // War/faith glyph hues pulled from the SAME regionalMapOverlay source the map
 // layer (WarFaithMapOverlay) draws, so the legend can never claim a color the
@@ -172,6 +173,34 @@ export default function MapLegend() {
             {REL_KEYS.map(k => (
               <Row key={k.label}><Swatch color={k.color} dash={k.dash} /><Label>{k.label}</Label></Row>
             ))}
+          </div>
+
+          {/* components-map-2: the W-LIFECYCLE settlement glyphs (steadings,
+              charter rings, relic ruins) draw on the map with no key until now.
+              Colors come from the SAME lifecycleGlyphStyle source PlacementsLayer
+              draws, so the key and the glyph can never disagree (P11). */}
+          <div style={{ display: 'grid', gap: 3 }}>
+            <GroupTitle>Lifecycle</GroupTitle>
+            <Row>
+              <svg width="22" height="12" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="11" cy="6" r="3" fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth="0.8" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.steading.label}</Label>
+            </Row>
+            <Row>
+              <svg width="22" height="14" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <circle cx="11" cy="7" r="2.5" fill={LIFECYCLE_GLYPH_STYLE.steading.fill} stroke={LIFECYCLE_GLYPH_STYLE.steading.stroke} strokeWidth="0.7" />
+                <circle cx="11" cy="7" r="5" fill="none" stroke={LIFECYCLE_GLYPH_STYLE.charterRing.stroke} strokeWidth="1" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.charterRing.label}</Label>
+            </Row>
+            <Row>
+              <svg width="22" height="14" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <path d="M6,11 L8,4 L10,11 Z M12,11 L14,6 L16,11 Z" fill={LIFECYCLE_GLYPH_STYLE.ruin.fill} stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth="0.6" />
+                <line x1="4" y1="11" x2="18" y2="11" stroke={LIFECYCLE_GLYPH_STYLE.ruin.stroke} strokeWidth="0.8" />
+              </svg>
+              <Label>{LIFECYCLE_GLYPH_STYLE.ruin.label}</Label>
+            </Row>
           </div>
 
           <div style={{ display: 'grid', gap: 4 }}>

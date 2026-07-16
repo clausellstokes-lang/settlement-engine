@@ -14,23 +14,32 @@
  * Renders nothing otherwise.
  */
 
+import { useState } from 'react';
+import { X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { useReturnVisit } from '../../hooks/useReturnVisit.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { t } from '../../copy/index.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 import { INK, BODY, BORDER, sans, serif_, FS, SP, R, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+
+// content-immersion-r2-3: the registered home_welcome_back whisper — the return-
+// visit card now honors (and offers) the unified sf:guidance dismissal.
+const WHISPER_ID = 'home_welcome_back';
 
 export default function WelcomeBackCard({ onOpen, onForge }) {
   const tier = useStore(s => s.auth.tier);
   const displayName = useStore(s => s.auth.displayName);
   const { isReturn, daysSinceLastVisit, lastSettlement } = useReturnVisit();
+  const [dismissed, setDismissed] = useState(() => isGuidanceDismissed(WHISPER_ID));
 
   if (!flag('welcomeBack')) return null;
   if (tier === 'anon') return null;
   if (!isReturn) return null;
   if (!lastSettlement) return null;
+  if (dismissed) return null;
 
   const handleOpen = () => {
     Funnel.track(EVENTS.WELCOME_BACK_OPEN_CLICKED, {
@@ -57,7 +66,13 @@ export default function WelcomeBackCard({ onOpen, onForge }) {
       boxShadow: '0 4px 16px rgba(27,20,8,0.08)',
       fontFamily: sans,
     }}>
-      <div style={{ padding: SP.lg }}>
+      <div style={{ padding: SP.lg, position: 'relative' }}>
+        <Button
+          variant="ghost" size="sm" icon={<X size={12} />}
+          aria-label="Dismiss the welcome-back card"
+          onClick={() => { markGuidanceDismissed(WHISPER_ID); setDismissed(true); }}
+          style={{ position: 'absolute', top: SP.sm, right: SP.sm }}
+        />
         <div style={{
           fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
           textTransform: 'uppercase', color: GOLD_DEEP,

@@ -123,23 +123,49 @@ describe('THE FORECAST — the realm\'s pending future (§10)', () => {
     const withProposal = campaignOf([]);
     withProposal.worldState.proposals = [{ id: 'p1', status: 'pending' }];
     expect(forecastFingerprint(withProposal, 'one_month')).not.toBe(fp0);               // proposal minted
+    // composer-realm-verbs-2: a DECIDED proposal now folds into the revision
+    // (the mint-and-decide-between-frames case the pending set alone misses), so
+    // a decided proposal no longer collides with the no-proposal baseline.
     const decided = campaignOf([]);
     decided.worldState.proposals = [{ id: 'p1', status: 'applied' }];
-    expect(forecastFingerprint(decided, 'one_month')).toBe(fp0);                        // decided = no longer pending
+    expect(forecastFingerprint(decided, 'one_month')).not.toBe(fp0);                    // decided-count fold
+  });
+
+  it('REALM-WIDE STALENESS (composer-realm-verbs-2): tick-neutral world mutations void the forecast', () => {
+    const base = campaignOf([]);
+    const fp0 = forecastFingerprint(base, 'one_month');
+    // A rules edit (updateCampaignSimulationRules folds an rc_<tick>_<seq> receipt
+    // into worldState.rulesetLog) — invisible before this fold.
+    const rulesEdited = campaignOf([]);
+    rulesEdited.worldState.rulesetLog = { rc_0_1: { key: 'calamityEnabled', to: true } };
+    expect(forecastFingerprint(rulesEdited, 'one_month')).not.toBe(fp0);                // rules edit
+    // A party impact (recordPartyImpact rewrites worldState.stressors) — invisible
+    // before this fold.
+    const partyImpacted = campaignOf([]);
+    partyImpacted.worldState.stressors = [{ id: 's1', type: 'under_siege', severity: 0.5 }];
+    expect(forecastFingerprint(partyImpacted, 'one_month')).not.toBe(fp0);              // party impact (stressor add)
   });
 
   it('DRIFT GUARD: the component\'s inlined fingerprint twin is byte-identical source to the domain\'s', () => {
     const domainSrc = readFileSync(join(process.cwd(), 'src/domain/worldPulse/forecastRun.js'), 'utf-8');
     const uiSrc = readFileSync(join(process.cwd(), 'src/components/map/RealmForecast.jsx'), 'utf-8');
-    // The three derivation expressions must appear verbatim in BOTH files.
+    // The UI-form derivation expressions must appear verbatim in the UI twin.
     for (const line of [
       '`${q.queueId}@${q.queuedAt}`',
       ".filter(p => p && p.status === 'pending').map(p => p.id).join('|')",
-      '`${ws.tick ?? 0}:${interval}:${queue}:${proposals}`',
+      '`${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`',
     ]) {
       expect(uiSrc.includes(line), `UI twin missing: ${line}`).toBe(true);
     }
-    expect(domainSrc.includes('`${ws.tick ?? 0}:${interval}:${queue}:${proposals}`')).toBe(true);
+    // The world-revision fold (composer-realm-verbs-2) + the return template must
+    // appear VERBATIM in BOTH files — the twin cannot drift on the new fold.
+    for (const line of [
+      'Object.keys(ws.rulesetLog || {}).length',
+      '(ws.stressors || []).length',
+      '`${ws.tick ?? 0}:${interval}:${queue}:${proposals}:${revision}`',
+    ]) {
+      expect(uiSrc.includes(line) && domainSrc.includes(line), `fingerprint twin drift on: ${line}`).toBe(true);
+    }
   });
 
   it('THE DIGEST renders per-member, time-resolved, with pause markers', async () => {

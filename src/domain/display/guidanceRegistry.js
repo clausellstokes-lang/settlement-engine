@@ -342,17 +342,17 @@ export const LEGACY_GUIDANCE_CEILING = LEGACY_GUIDANCE_COMPONENTS.length;
  * every listed id is a real whisper, and (b) every listed id is genuinely unwired (no
  * stale entry once SURFACE wires it), so a wired whisper cannot hide here.
  */
-export const UNWIRED_WHISPERS = Object.freeze([
-  'wizard_next_steps',        // WizardNextSteps — no registry import
-  'home_welcome_back',        // WelcomeBackCard — no registry import
-  'library_empty_invitation', // SampleDashboard — no registry import
-  'gallery_empty_invitation', // GalleryList — renders the copy directly, not via the registry
-  'realm_empty_invitation',   // CampaignEmptyState — no registry import
-  'realm_orders_teaching',    // RealmVerbComposer — no registry import
-  'realm_docket_teaching',    // RealmDocket — no registry import
-]);
+// W-R2-SURFACE-2 (content-immersion-r2-3) BURNED THIS DOWN TO EMPTY: every host is
+// now wired through the unified sf:guidance dismissal (lib/guidance) with its body
+// rendered or its dismissal unified — RealmVerbComposer + RealmDocket mount the
+// once-dead mechanism whispers; WizardNextSteps migrated off its legacy key; the
+// four empty-invitation hosts (WelcomeBackCard, SampleDashboard, GalleryList,
+// CampaignEmptyState) reference + dismiss their whispers. The walker is now FULLY
+// STRICT: every whisper must render via its host — nothing hides here.
+/** @type {readonly string[]} */
+export const UNWIRED_WHISPERS = Object.freeze([]);
 
-/** The shrink-only ceiling for UNWIRED_WHISPERS (only ever moves DOWN as SURFACE wires). */
+/** The shrink-only ceiling for UNWIRED_WHISPERS — now 0 (the walker is fully strict). */
 export const UNWIRED_WHISPERS_CEILING = UNWIRED_WHISPERS.length;
 
 /**

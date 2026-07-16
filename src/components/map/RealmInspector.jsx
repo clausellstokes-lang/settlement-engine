@@ -28,6 +28,7 @@ import { flag } from '../../lib/flags.js';
 import { causalByTickFromSnapshots } from '../../domain/display/chronicleTimeline.js';
 import { nameMapFromSaves } from './WorldPulseData.js';
 import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
+import RealmIntrigue from './RealmIntrigue.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { hasPantheon } from './PantheonPanel.jsx';
 import { BODY, BORDER, CARD, CARD_ALT, FS, R, SECOND, SP, sans } from '../theme.js';
@@ -401,6 +402,10 @@ function WarSection({ campaign, nameById }) {
   return (
     <div style={{ display: 'grid', gap: SP.sm }}>
       <LiveWarStatus campaign={campaign} nameById={nameById} />
+      {/* domain-display-readmodels-4 residue: the DM's court-and-standing block —
+          politics blocs/conspiracies + the Blainey credibility stock, each self-
+          gating to nothing when its ledger is dormant. */}
+      <RealmIntrigue campaign={campaign} nameById={nameById} />
       <BeliefDivergenceBand campaign={campaign} nameById={nameById} />
       <PeacetimeNote campaign={campaign} />
     </div>

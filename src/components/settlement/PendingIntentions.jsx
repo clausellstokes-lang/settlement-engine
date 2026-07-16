@@ -15,17 +15,8 @@ import { Hourglass, X, Pencil } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import { AFFORDANCE_MANIFEST } from '../../domain/events/affordanceManifest.js';
+import { lapseOf, campaignPeerCountFor } from '../../domain/display/docketLapse.js';
 import { eventToComposerIntent } from './eventComposer/editSeed.js';
-
-/** §10 LAPSED derivation: the entry's verb predicate no longer holds against
- * the CURRENT settlement (grayed-with-reason; the drain would refuse it). */
-function lapseOf(event, settlement) {
-  const v = AFFORDANCE_MANIFEST[event?.type];
-  if (!v || v.foldedInto || !settlement) return null;
-  const p = v.predicate(settlement, {});
-  return p.available ? null : p.reasons.join(' ');
-}
 
 const TYPE_LABELS = {
   APPLY_STRESSOR: 'Apply stressor',
@@ -56,22 +47,29 @@ export default function PendingIntentions() {
   const cancelQueuedEvent = useStore(s => s.cancelQueuedEvent);
   const stageComposerIntent = useStore(s => s.stageComposerIntent);
   const settlement = useStore(s => s.settlement);
+  const canUseCustom = useStore(s => (typeof s.canUseCustomContent === 'function' ? s.canUseCustomContent() : false));
 
   // Resolve the clock-bound campaign + this settlement's queue from the raw
   // campaigns array (stable ref until it changes) to avoid selector churn.
-  const { campaignId, queued } = useMemo(() => {
-    if (activeSaveId == null) return { campaignId: null, queued: [] };
+  const { campaignId, campaign, queued } = useMemo(() => {
+    if (activeSaveId == null) return { campaignId: null, campaign: null, queued: [] };
     const sid = String(activeSaveId);
     const c = (campaigns || []).find(x =>
       (x?.accessState || 'active') === 'active'
       && (x.settlementIds || []).map(String).includes(sid)
       && x.worldState?.canonizedAt);
-    if (!c) return { campaignId: null, queued: [] };
+    if (!c) return { campaignId: null, campaign: null, queued: [] };
     return {
       campaignId: c.id,
+      campaign: c,
       queued: (c.worldState.pendingEvents || []).filter(e => String(e.saveId) === sid),
     };
   }, [campaigns, activeSaveId]);
+
+  // experience-product-fit-3: the composer's real ctx. campaignPeerCount excludes
+  // this settlement's OWN save (activeSaveId), so a lone-member campaign reports
+  // zero peers and a legitimate LAPSED is never suppressed.
+  const peerCount = campaignPeerCountFor(campaign, activeSaveId);
 
   if (!campaignId || queued.length === 0) return null;
 
@@ -95,7 +93,7 @@ export default function PendingIntentions() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
         {queued.map(item => {
-          const lapsed = lapseOf(item.event, settlement);
+          const lapsed = lapseOf(item.event, settlement, { canUseCustom, campaignPeerCount: peerCount });
           return (
             <div key={item.queueId} style={{
               display: 'flex', alignItems: 'center', gap: 8,

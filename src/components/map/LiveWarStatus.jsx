@@ -22,6 +22,7 @@ import {
   liveSieges,
   liveTradeWars,
 } from '../../domain/display/warStatus.js';
+import { liveBlockades, hasLiveBlockades } from '../../domain/display/navalDisplay.js';
 import { BLUE, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, RED, sans, swatch } from '../theme.js';
 import WarCausalBrief from './WarCausalBrief.jsx';
 
@@ -34,7 +35,9 @@ function nameFor(nameById, id) {
 // trade→exchange arrows, default→deployment flag.
 const TONE_ICON = { danger: Swords, trade: ArrowLeftRight, neutral: Flag };
 
-function StatusRow({ tone = 'neutral', title, detail }) {
+// `heading` (not `title`) — a rendered heading div, never a native OS tooltip
+// (keeps these rows off the title= census the guidance walker ratchets).
+function StatusRow({ tone = 'neutral', heading, detail }) {
   const accent = tone === 'danger' ? RED : tone === 'trade' ? BLUE : GOLD;
   const KindIcon = TONE_ICON[tone] || Flag;
   return (
@@ -48,7 +51,7 @@ function StatusRow({ tone = 'neutral', title, detail }) {
       background: CARD,
     }}>
       <KindIcon size={14} color={accent} aria-hidden style={{ gridRow: '1 / span 2', marginTop: 2, flexShrink: 0 }} />
-      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{title}</div>
+      <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}
     </div>
   );
@@ -58,13 +61,16 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
   const worldState = campaign?.worldState || {};
   const regionalGraph = campaign?.regionalGraph || worldState.regionalGraph || null;
 
-  if (!hasLiveWarState({ worldState, regionalGraph })) return null;
+  // experience-product-fit-5: a standing blockade lights the panel even when no
+  // land war does ("a blockade is the same as a siege").
+  if (!hasLiveWarState({ worldState, regionalGraph }) && !hasLiveBlockades(worldState)) return null;
 
   const sieges = liveSieges({ worldState, regionalGraph });
   const deployments = activeDeployments(worldState);
   const tradeWars = liveTradeWars({ worldState, regionalGraph });
   const standings = dispositionStandings(worldState);
-  const count = sieges.length + deployments.length + tradeWars.length + standings.length;
+  const blockades = liveBlockades(worldState);
+  const count = sieges.length + blockades.length + deployments.length + tradeWars.length + standings.length;
 
   return (
     <Section title="War, Trade and Faith" count={count}>
@@ -80,7 +86,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
                 <StatusRow
                   key={`siege-${siege.targetId}`}
                   tone="danger"
-                  title={isCoalition
+                  heading={isCoalition
                     ? `The War of ${targetName}, a coalition besieging the walls`
                     : `${attackers[0] || 'An army'} lays siege to ${targetName}`}
                   detail={<>
@@ -97,13 +103,37 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
           </div>
         )}
 
+        {blockades.length > 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+            <Subhead label="Sea blockades" />
+            {blockades.map(b => {
+              const portName = nameFor(nameById, b.portId);
+              const fleets = b.blockaders.map(id => nameFor(nameById, id));
+              const isCoalition = b.blockaders.length >= 2;
+              const phrase = `${b.phrase.charAt(0).toUpperCase()}${b.phrase.slice(1)}`;
+              return (
+                <StatusRow
+                  key={`blockade-${b.portId}`}
+                  tone="danger"
+                  heading={isCoalition
+                    ? `${portName} is blockaded by a coalition fleet`
+                    : `${fleets[0] || 'A hostile fleet'} blockades ${portName}`}
+                  detail={isCoalition
+                    ? `${phrase} — ${fleets.join(', ')} command the sea approaches.`
+                    : `${phrase} — the sea approaches are held.`}
+                />
+              );
+            })}
+          </div>
+        )}
+
         {deployments.length > 0 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
             <Subhead label="Armies abroad" />
             {deployments.map(dep => (
               <StatusRow
                 key={`deploy-${dep.homeId}`}
-                title={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
+                heading={`${nameFor(nameById, dep.homeId)}'s army is committed against ${nameFor(nameById, dep.targetId)}`}
                 detail={`Deployed since tick ${dep.sinceTick}; home garrison thinned, war chest bleeding.`}
               />
             ))}
@@ -117,7 +147,7 @@ export default function LiveWarStatus({ campaign, nameById = new Map() }) {
               <StatusRow
                 key={`trade-${war.prizeId}`}
                 tone="trade"
-                title={`The ${war.commodityLabel} Trade War`}
+                heading={`The ${war.commodityLabel} Trade War`}
                 detail={`${nameFor(nameById, war.winnerId)} now supplies ${nameFor(nameById, war.buyerId)}${war.incumbentId ? `, displacing ${nameFor(nameById, war.incumbentId)}` : ''}.`}
               />
             ))}

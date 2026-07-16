@@ -34,6 +34,7 @@
  */
 
 import { sanitizePublicValue } from './publicSafe.js';
+import { deityNameFromSnapshots } from './deityNames.js';
 
 /** The snapshot schema version — bumped on any breaking shape change so a stored
  *  public snapshot can be migrated/rejected by version, independent of the
@@ -191,9 +192,10 @@ function publicSimulationRules(worldState) {
  * but we still allowlist per-entry so a future private field can't leak. Empty when
  * the realm is deity-free (no pantheon key).
  * @param {any} worldState
+ * @param {Array<unknown>} [memberSettlements] member settlements for authored-name resolution
  * @returns {Array<{ deityId: string, name: string, tier: string, seats: number, wins: number, losses: number }>}
  */
-function publicPantheon(worldState) {
+function publicPantheon(worldState, memberSettlements = []) {
   const pantheon = worldState?.pantheon && typeof worldState.pantheon === 'object' && !Array.isArray(worldState.pantheon)
     ? worldState.pantheon
     : {};
@@ -201,10 +203,13 @@ function publicPantheon(worldState) {
   const out = [];
   for (const deityId of Object.keys(pantheon).sort(codepoint)) {
     const entry = pantheon[deityId] && typeof pantheon[deityId] === 'object' ? pantheon[deityId] : {};
-    const tail = String(deityId).split(/[:_]/).filter(Boolean).pop() || String(deityId);
     out.push({
       deityId: String(deityId),
-      name: tail.charAt(0).toUpperCase() + tail.slice(1),
+      // domain-display-readmodels-1: resolve the AUTHORED name from the embedded
+      // snapshots (the SAME shared resolver realmArcSummary uses, floor-fallback)
+      // — the old lossy tail-pop baked "The Ascendancy of Father" for a
+      // "War Father" deity into the serialized public snapshot.
+      name: deityNameFromSnapshots(memberSettlements, deityId),
       tier: typeof entry.tier === 'string' ? entry.tier : 'cult',
       seats: Math.max(0, Math.floor(finiteNum(entry.seats, 0))),
       wins: Math.max(0, Math.floor(finiteNum(entry.wins, 0))),
@@ -597,7 +602,7 @@ export function serializeWorldSnapshotPublic(worldState, regionalGraph, memberSe
   // Pantheon + war network are computed up front when EITHER they or the dashboard
   // (which derives the realm-arc summary from them) is enabled — never serialized
   // unless their own section asks for them.
-  const pantheon = publicPantheon(ws);
+  const pantheon = publicPantheon(ws, memberSettlements);
   const war = publicWarNetwork(ws, graph, nameById);
 
   // Each SECTION VALUE is run through the final defense-in-depth scrub before it is

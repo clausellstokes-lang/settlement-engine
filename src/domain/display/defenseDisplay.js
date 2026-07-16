@@ -44,7 +44,7 @@ export const DEFENSE_STRESS_STATUS = Object.freeze({
  * @typedef {Object} DefenseDisplaySettlement
  * @property {Array<{ name?: string }>} [institutions]
  * @property {{ scores?: Record<string, number>, economicGates?: Record<string, number>, institutions?: Record<string, ForceEntry[]> }} [defenseProfile]
- * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number } }} [economicState]
+ * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null } }} [economicState]
  * @property {{ tradeRouteAccess?: string }} [config]
  */
 
@@ -188,11 +188,27 @@ export function deriveSupportingCapabilities(settlement) {
     },
   ];
   if (f.hasNavy || f.hasPort) {
+    // experience-product-fit-5: the STANDING naval reality, not just the static
+    // institution boolean — when a hostile fleet blockades the port RIGHT NOW,
+    // the note reflects it (the live `blockaded` flag is written each pulse and
+    // is only set while the naval layer is lit, so this is dormant-off-safe). This
+    // reuses the food-stockpile blockade-relief plumbing (deriveBlockadeRelief).
+    const sp = r.economicState?.foodSecurity?.stockpile || null;
+    const blockaded = !!(sp && sp.blockaded);
+    const bypass = (sp && sp.blockadeBypass) || null;
     caps.push({
       label: 'Naval Defense',
-      status: f.hasNavy ? 'Naval force' : 'Port only',
-      color: f.hasNavy ? '#1a3a6a' : '#3a5a7a', score: null,
-      note: f.hasNavy ? 'Naval force controls sea approaches. Amphibious assault requires fleet superiority.' : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
+      status: blockaded ? 'Under blockade' : f.hasNavy ? 'Naval force' : 'Port only',
+      color: blockaded ? '#8b1a1a' : f.hasNavy ? '#1a3a6a' : '#3a5a7a', score: null,
+      note: blockaded
+        ? (bypass === 'teleport'
+            ? 'A hostile fleet blockades the sea approaches — only a teleportation circle still runs supply past it.'
+            : bypass === 'airship'
+              ? 'A hostile fleet blockades the sea approaches — airships run the blockade, impaired by siege countermeasures.'
+              : 'A hostile fleet blockades the sea approaches — the port is choked, and no magical channel runs the line.')
+        : f.hasNavy
+          ? 'Naval force controls sea approaches. Amphibious assault requires fleet superiority.'
+          : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
     });
   }
   return caps;

@@ -220,15 +220,11 @@ function applyFactionPayloadEffect(settlement, outcome, state, { now, tick }) {
 
 // Facts, not hypotheticals: candidate headlines hedge ('X may grow') because
 // the candidate hasn't happened yet. Once an outcome APPLIES, its entry must
-// state what happened. Generators may hand an explicit outcome.appliedHeadline;
-// otherwise the KNOWN hedge patterns below are de-hedged conservatively.
-// Unknown phrasings pass through untouched — better an honest hedge than an
-// invented fact. (Known untransformed stragglers, left as-is on purpose: a
-// whole CLASS comes from factionCompetition's generic headline builder
-// — `${name} may ${candidateType.replace(/^faction_/,'')...}` — which yields
-// 'X may exhaustion', 'X may rival power contest', 'X may government
-// challenge', and whatever future faction_* candidateTypes are added; they
-// are already ungrammatical at the source and keep their candidate phrasing.)
+// state what happened. Generators may hand an explicit outcome.appliedHeadline
+// (factionCompetition now does — content-immersion-r2-7 killed its generic
+// straggler class at the source); otherwise the KNOWN hedge patterns below are
+// de-hedged conservatively. Unknown phrasings pass through untouched — better an
+// honest hedge than an invented fact.
 /** @type {Array<[RegExp, string]>} */
 const APPLIED_HEADLINE_REWRITES = [
   // population / tier / resource / institution drift

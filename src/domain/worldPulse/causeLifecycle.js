@@ -457,7 +457,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               originTick: rec.originTick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'}'s need becomes appetite`,
               summary: `${causeLabel(oldCause)} eased, but ${npc?.name || 'the official'} has quietly found a new reason: ${causeLabel(newCause)}. The habit outlives its first cause.`,
-              reasons: [`Cause ${oldCause} resolved; re-caused to the live ${newCause} (character reached for it).`],
+              reasons: [`${causeLabel(oldCause)} resolved; re-caused to ${causeLabel(newCause)} — the character reached for it.`],
             }));
           } else if (path === 'reform') {
             reforms.push({ cid, conditionId, npcId: conditionId, name: npc?.name || conditionId, causeClass: rec.causeClass });
@@ -467,7 +467,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               originTick: rec.originTick, resolvedTick: tick, ageBand: band,
               headline: `${npc?.name || 'A compromised official'} comes clean`,
               summary: `The pressure lifted — ${causeLabel(rec.causeClass)} resolved — and ${npc?.name || 'the official'}, whose corruption was purely situational, reforms.`,
-              reasons: [`Cause ${rec.causeClass} resolved and held ${rec.resolveHold} ticks; the sole-support corruption ended (reform).`],
+              reasons: [`${causeLabel(rec.causeClass)} resolved; the sole-support corruption ended (reform).`],
             }));
             return;   // record dropped — reform clears the tag (undo-clean)
           } else {
@@ -486,7 +486,7 @@ export function advanceCauseLifecycle({ snapshot, worldState, priorLedger, rng, 
               summary: yearsPast
                 ? `${causeLabel(rec.causeClass)} passed into the lean years, but ${npc?.name || 'the official'}'s habit endures — the ledger never closed.`
                 : `${causeLabel(rec.causeClass)} eased, yet ${npc?.name || 'the official'} carries the compromise forward out of habit. Its origin is now past-tense.`,
-              reasons: [`Cause ${rec.causeClass} resolved; the compromise persists with a historicized origin.`],
+              reasons: [`${causeLabel(rec.causeClass)} resolved; the compromise persists with a historicized origin.`],
             }));
           }
         } else {

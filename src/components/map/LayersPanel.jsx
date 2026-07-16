@@ -19,17 +19,10 @@ import { useStore } from '../../store';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
-
-const REL_TYPES = [
-  { id: 'trade_partner', label: 'Trade partner', color: '#0f766e' },
-  { id: 'allied',        label: 'Allied',        color: '#2563eb' },
-  { id: 'patron',        label: 'Patron',        color: '#7c3aed' },
-  { id: 'client',        label: 'Client',        color: '#7c3aed' },
-  { id: 'vassal',        label: 'Vassal',        color: '#6d28d9' },
-  { id: 'rival',         label: 'Rival',         color: '#ea580c' },
-  { id: 'cold_war',      label: 'Cold war',      color: '#b91c1c' },
-  { id: 'hostile',       label: 'Hostile',       color: '#991b1b' },
-];
+// components-map-3: the relationship palette is single-sourced from
+// relationshipEdgeStyle (the drawn edge + the key can never disagree, P11). This
+// panel used to re-declare a byte-identical-but-drift-armed copy.
+import { REL_TYPES } from './relationshipEdgeStyle.js';
 
 const REGIONAL_IMPACT_STATUS_FILTERS = ['queued', 'applied', 'resolved', 'ignored', 'expired'];
 const DEFAULT_REGIONAL_IMPACT_FILTER = ['queued', 'applied', 'resolved'];

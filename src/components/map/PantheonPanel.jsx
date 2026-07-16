@@ -16,7 +16,8 @@ import { Sparkles, Swords } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { realmArcLines } from '../../domain/display/realmArcSummary.js';
-import { pantheonDepthModel, seatsFromMajor, deityDisplayName, deityTierStrength, deityStatusWord } from '../../domain/display/pantheonDepth.js';
+import { pantheonDepthModel, seatsFromMajor, deityTierStrength, deityStatusWord } from '../../domain/display/pantheonDepth.js';
+import { deityNameFromSnapshots } from '../../domain/display/deityNames.js';
 import { describeDeityEffects } from '../../domain/display/deityEffects.js';
 import Button from '../primitives/Button.jsx';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, SECOND, VIOLET, VIOLET_DEEP, sans, swatch } from '../theme.js';
@@ -36,14 +37,11 @@ export function hasPantheon(campaign) {
   return !!pantheon && typeof pantheon === 'object' && Object.keys(pantheon).length > 0;
 }
 
+// content-immersion-r2-4: the shared resolver (primary AND cult snapshots, then
+// the title-cased floor) — this was a primary-only copy that fell to the lossy
+// tail-pop for a cult-only or zero-seat deity.
 function deityName(settlements, deityId) {
-  for (const item of settlements) {
-    const deity = item?.settlement?.config?.primaryDeitySnapshot;
-    if (!deity) continue;
-    const ref = deity._deityRef || deity.primaryDeityRef || (deity.name ? `deity:${deity.name}` : null);
-    if (String(ref) === String(deityId) && deity.name) return String(deity.name);
-  }
-  return deityDisplayName(deityId);
+  return deityNameFromSnapshots(settlements, deityId);
 }
 
 /** The embedded primary-deity snapshot for a deity id, from any carrying settlement. */

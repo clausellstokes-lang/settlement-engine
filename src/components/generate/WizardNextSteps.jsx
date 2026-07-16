@@ -26,18 +26,15 @@ import Button from '../primitives/Button.jsx';
 import {
   GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
 } from '../theme.js';
+import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
 
-// Persistent "Got it" dismiss — once the user closes the What's-next guide it
-// stays closed for them (mirrors the first-dossier callout popup pattern).
-const DISMISS_KEY = 'sf:dismissed_whats_next';
-function isWhatsNextDismissed() {
-  try { return typeof localStorage !== 'undefined' && localStorage.getItem(DISMISS_KEY) === '1'; }
-  catch { return false; }
-}
-function markWhatsNextDismissed() {
-  try { if (typeof localStorage !== 'undefined') localStorage.setItem(DISMISS_KEY, '1'); }
-  catch { /* storage unavailable — accept ephemeral dismiss */ }
-}
+// content-immersion-r2-3: the "Got it" dismiss now rides the UNIFIED
+// sf:guidance:wizard_next_steps convention (was the bespoke sf:dismissed_whats_next
+// key, which lib/guidance read-once-migrates). One dismissal store for every
+// teaching organ.
+const WHISPER_ID = 'wizard_next_steps';
+const isWhatsNextDismissed = () => isGuidanceDismissed(WHISPER_ID);
+const markWhatsNextDismissed = () => markGuidanceDismissed(WHISPER_ID);
 
 /** The save step's framing depends on whether the user can save yet. */
 function saveStep({ canSave, signedIn }) {
