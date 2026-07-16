@@ -892,6 +892,22 @@ round-21 W5 312a5025 OBSOLETE (raw-color half absorbed at 1427 in-file; budget-r
 under #10) — the standing W5-cherry-pick rule is CLOSED. Six of seven waves + reclaim merged;
 ~65 findings closed; suite 9,896 → 10,038 (+142). REMAINING IN PHASE F: SURFACE + G2
 (batch 2b in flight).
+**✅ SURFACE MERGED @ 090b952e + G2 PARKED + PHASE M OPENS (2026-07-16):** SURFACE landed its
+8 headline items — THE PAUSE-VERDICT SURFACE (keep/dismiss cards per major; Resume submits
+verdicts; the authority gate closes), the FORCE_RECONSIDERATION composite course dial (the
+last dead verb lives), hegemonyRead + dashboard mount, warCausalBrief mounted (the vision's
+flagship line reaches the eye), library advance refusal honesty, prosperity tolerant read —
+at net −3 eager B; 17 lower items honestly deferred at session budget → **SURFACE-2
+dispatched** (whisper wiring + allowlist emptying, read-model residue per verdicts, palettes,
+snapshot naming, PDF trio, forecast fingerprint). **TRACK-G2 PARKED red-by-design @ aec57981**
+(claude/w-r2-g2): 3 byte-neutral fixes + 5 golden-shifting stops incl. THE UNDERGROUND NETWORK
+(catalog name per the register JUDGMENT; +1,312 B eager fits the funded headroom at its merge);
+THE SHIFT MAP on the branch; slave-trade enable recorded owner-gated; generators-domain-1
+verdict correction honored (defense already coupled — food scoping only). **PHASE M OPEN:**
+rescue snapshot b89e2f56 (claude/master-merge-wip-rescue — the dead session's 17 files
+preserved; merge branch restored clean @ c89a5372); **W4–W6 continuation agent DISPATCHED**
+(byte-integrity → guard-port/entity-link → test-estate; stops before the fold-in, which waits
+for SURFACE-2's RF merge).
 **INTENT-TRIM VERDICT (STOP, honest):** the +2,711 B is IRREDUCIBLE — per-chunk closure diff
 proves the entire delta is synchronous test-pinned store control flow (sync-prefix guards
 alone ≈ 700 B; async-hiding would break the wave's own pins). No code changed; branch parked
