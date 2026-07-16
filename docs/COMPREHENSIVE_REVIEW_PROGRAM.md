@@ -713,6 +713,17 @@ W-MOMENTUM, W-NAVY, W-GUIDE-1/2, W-COMPOSER-1/2 (the realm lift) — "THE ENGINE
 >   §0.2, product boundaries, deferral-ledger awareness (playbook §0.0.2/§0.6/§0.8, round-1
 >   register, DEAD_CODE_DISPOSITION, in-file seams), read-only discipline (no test/build runs —
 >   the merge session shares the machine), NUL-grep hazard, injection-refusal preamble.
+> - 2026-07-16 ~00:10: **Phase S LANDED 23/33** (8.7M survey tokens, 1,915 tool uses, ~64 min):
+>   ALL 22 subsystem readers + dim:determinism-constitution returned — the full tree is READ.
+>   **191 findings: 0 critical / 14 high / 68 medium / 109 low; 169 confirmed / 22 plausible.**
+>   Grades: A (spatial-engine, lib-infra-copy, backend-functions, scripts-build-ci,
+>   tests-estate), A- (most), B+ (components-shell-commerce, data-tables). The 10 OTHER
+>   dimension reviewers died on the session limit (resets 3:30am ET) — re-dispatch them
+>   post-reset from docs/briefs/REVIEW_R2_SURVEY_WORKFLOW.workflow.txt pruned to the missing
+>   list (recorded in RAW_SURVEY_RESULTS.json .result.missingSlices). RAW RESULTS BANKED
+>   @ 3cc2dfbe as docs/review-r2/RAW_SURVEY_RESULTS.json (.result holds the data — never
+>   re-survey the 23 landed slices). Phase A synthesis begins on the landed 23; the register
+>   doc marks the 10 pending dimensions explicitly.
 
 ## Phase plan — ROUND 2 (checkboxes are the resume pointer)
 - [ ] **Phase S — SURVEY** (Fable, 33 agents): in flight as `wf_d69567dc-f0d`.
