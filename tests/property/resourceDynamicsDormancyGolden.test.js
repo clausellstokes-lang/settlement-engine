@@ -32,7 +32,7 @@ import { dirname, resolve } from 'node:path';
 
 import { simulateCampaignWorldPulse } from '../../src/domain/worldPulse/index.js';
 import { ensureRegionalGraph } from '../../src/domain/region/index.js';
-import { normalizeForDormancy } from '../domain/religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 import { RESOURCE_DYNAMICS_TUNING } from '../../src/domain/worldPulse/resourceDynamicsKernel.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'resource-dynamics-dormancy-golden.json');

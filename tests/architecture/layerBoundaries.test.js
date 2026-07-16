@@ -29,7 +29,7 @@
  * @enforced-by this file (referenced from ARCHITECTURE.md's layer map)
  */
 
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { describe, expect, test } from 'vitest';
 
@@ -77,6 +77,83 @@ describe('layer boundaries (F29)', () => {
     expect(offenders, 'engine layers must stay headless (no React/Zustand/store imports)').toEqual([]);
   });
 
+  test('headless-engine spine is TRANSITIVELY clean (no domain→lib→React/store chain)', () => {
+    // The direct scan above only proves a spine file does not import React/Zustand/
+    // store ITSELF. It is NOT transitive: a domain file may import a lib leaf that
+    // (now or later) imports the store, and the whole engine silently loses its
+    // headless guarantee through that back door (code-quality-architecture-4 found
+    // six such domain→lib edges — customRegistry/entities/text — scanned by no
+    // walker). This walks the FULL src import graph and asserts nothing REACHABLE
+    // from a spine root (kernel/data/generators/domain), directly or transitively,
+    // pulls in React/Zustand/store. Reuses the same resolver as the cycle test.
+    const files = walk(SRC);
+    const rel = (p) => relative(SRC, p).replace(/\\/g, '/');
+    const fileSet = new Set(files.map(rel));
+    const stripComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^\s*\/\/.*$/gm, '');
+    const resolveImport = (fromFile, spec) => {
+      if (!spec.startsWith('.')) return null; // package specifiers checked directly below
+      const base = resolve(dirname(fromFile), spec);
+      for (const cand of [base, `${base}.js`, `${base}.jsx`, join(base, 'index.js'), join(base, 'index.jsx')]) {
+        const r = relative(SRC, cand).replace(/\\/g, '/');
+        if (fileSet.has(r)) return r;
+      }
+      return null;
+    };
+    // Per file: resolved intra-src edges + whether it DIRECTLY imports a forbidden
+    // specifier (package like 'react' or a relative store path).
+    const edgesOf = new Map();
+    const dirty = new Set();
+    for (const f of files) {
+      const self = rel(f);
+      const src = stripComments(readFileSync(f, 'utf8'));
+      const specs = [
+        ...src.matchAll(/from\s+['"]([^'"]+)['"]/g),
+        ...src.matchAll(/import\(\s*['"]([^'"]+)['"]\s*\)/g),
+        ...src.matchAll(/^\s*import\s+['"]([^'"]+)['"]/gm),
+      ].map((m) => m[1]);
+      if (specs.some((s) => FORBIDDEN.some((re) => re.test(s)))) dirty.add(self);
+      edgesOf.set(self, [...new Set(specs.map((s) => resolveImport(f, s)).filter(Boolean))]);
+    }
+    // Reverse reachability from the dirty set: every ancestor of a forbidden importer
+    // is "taint-reaching" (cycle-safe — a plain BFS over reversed edges).
+    const reverse = new Map();
+    for (const [from, tos] of edgesOf) for (const to of tos) {
+      if (!reverse.has(to)) reverse.set(to, []);
+      reverse.get(to).push(from);
+    }
+    const taintReaching = new Set(dirty);
+    const queue = [...dirty];
+    while (queue.length) {
+      const n = queue.shift();
+      for (const importer of reverse.get(n) || []) {
+        if (!taintReaching.has(importer)) { taintReaching.add(importer); queue.push(importer); }
+      }
+    }
+    // Find a witness chain root→…→forbidden for a readable failure (only on red).
+    const witnessChain = (root) => {
+      const path = [];
+      const seen = new Set();
+      const dfs = (node) => {
+        if (seen.has(node)) return false;
+        seen.add(node);
+        path.push(node);
+        if (dirty.has(node)) return true;
+        for (const next of edgesOf.get(node) || []) if (taintReaching.has(next) && dfs(next)) return true;
+        path.pop();
+        return false;
+      };
+      return dfs(root) ? path.join(' → ') : root;
+    };
+    const spineRoots = [...fileSet].filter((r) => /^(kernel|data|generators|domain)\//.test(r));
+    const offenders = spineRoots.filter((r) => taintReaching.has(r)).sort().map(witnessChain);
+    expect(
+      offenders,
+      'a headless-engine spine file transitively reaches React/Zustand/store. Route the offending edge ' +
+        'through a headless leaf: either relocate the pulled-in helper to src/kernel, or split the store/React ' +
+        'part out of the lib leaf so the spine imports only the pure half.',
+    ).toEqual([]);
+  }, 60_000);
+
   test('dependency-cycle set equals the checked-in baseline (shrink-only)', () => {
     // The known, tolerated cycles (canonical form: members rotated so the
     // lexicographically-smallest file leads, edge order preserved). Killing one
@@ -90,15 +167,17 @@ describe('layer boundaries (F29)', () => {
     // DEITY_RANK_AUTHORITY via display/deityEffects.js; refused — the constant
     // moved to the dependency-free leaf domain/deityConstants.js, causalState
     // imports the leaf, deityEffects re-exports it, and the baseline stays at 2.)
-    const ALLOWED = [
-      'components/compendium/CustomContent.jsx > components/compendium/Dependencies.jsx',
-      'generators/helpers.js > generators/priorityHelpers.js',
+    // Each allowed cycle as its MEMBER SET (order-invariant — an SCC is a set,
+    // not an ordered walk). Killing a cycle → REMOVE its entry here (locks the
+    // win). Adding one → this fails, and the answer is to break the cycle, not
+    // extend the list.
+    const ALLOWED_CYCLES = [
+      ['components/compendium/CustomContent.jsx', 'components/compendium/Dependencies.jsx'],
+      ['generators/helpers.js', 'generators/priorityHelpers.js'],
     ];
 
-    // Self-contained deterministic cycle detector (no dependency on madge):
-    // resolve relative imports within src/, DFS in sorted order, collect the
-    // recursion-stack slice at each back edge, canonicalize by rotating the
-    // smallest member first, dedup.
+    // Self-contained deterministic import graph (no dependency on madge):
+    // resolve relative imports within src/.
     const files = walk(SRC).sort();
     const rel = (p) => relative(SRC, p).replace(/\\/g, '/');
     const fileSet = new Set(files.map(rel));
@@ -109,7 +188,7 @@ describe('layer boundaries (F29)', () => {
         const r = relative(SRC, cand).replace(/\\/g, '/');
         if (fileSet.has(r)) return r;
       }
-      return existsSync(base) ? null : null;
+      return null; // unresolved (a package, or a path we don't map) — no edge
     };
     // Strip comments before scanning — JSDoc headers quote import examples
     // ("import { random } from './prng.js'") that a raw regex would read as
@@ -130,26 +209,59 @@ describe('layer boundaries (F29)', () => {
         .sort();
       graph.set(self, edges);
     }
-    const canonical = (cycle) => {
-      const i = cycle.indexOf([...cycle].sort()[0]);
-      return [...cycle.slice(i), ...cycle.slice(0, i)].join(' > ');
-    };
-    const cycles = new Set();
-    const state = new Map(); // 0 = unvisited, 1 = on stack, 2 = done
-    const stack = [];
-    const dfs = (node) => {
-      state.set(node, 1);
-      stack.push(node);
-      for (const next of graph.get(node) || []) {
-        const s = state.get(next) || 0;
-        if (s === 1) cycles.add(canonical(stack.slice(stack.indexOf(next))));
-        else if (s === 0) dfs(next);
-      }
-      stack.pop();
-      state.set(node, 2);
-    };
-    for (const node of [...graph.keys()].sort()) if (!state.get(node)) dfs(node);
 
-    expect([...cycles].sort()).toEqual([...ALLOWED].sort());
+    // Tarjan's strongly-connected-components. This REPLACES a back-edge DFS that
+    // recorded a cycle only at the first back edge it happened to walk, and could
+    // MISS a new cycle threading through an already-FINISHED (state===2) node —
+    // so enforcement silently depended on the lexicographic DFS visitation order
+    // (tests-estate-1). SCCs are order-invariant: a directed cycle is EXACTLY a
+    // strongly-connected component of size > 1 (self-edges are already filtered
+    // out above, so a singleton SCC is always acyclic). Every SCC is therefore
+    // either a singleton (fine) or must equal one of the allowed cycles' member
+    // sets. Recursive, in sorted node order for a deterministic component listing
+    // (the graph is a few hundred files — well within the call stack).
+    const index = new Map();
+    const low = new Map();
+    const onStack = new Set();
+    const sccStack = [];
+    const sccs = [];
+    let counter = 0;
+    const strongconnect = (v) => {
+      index.set(v, counter);
+      low.set(v, counter);
+      counter += 1;
+      sccStack.push(v);
+      onStack.add(v);
+      for (const w of graph.get(v) || []) {
+        if (!index.has(w)) {
+          strongconnect(w);
+          low.set(v, Math.min(low.get(v), low.get(w)));
+        } else if (onStack.has(w)) {
+          low.set(v, Math.min(low.get(v), index.get(w)));
+        }
+      }
+      if (low.get(v) === index.get(v)) {
+        const comp = [];
+        let w;
+        do { w = sccStack.pop(); onStack.delete(w); comp.push(w); } while (w !== v);
+        sccs.push(comp);
+      }
+    };
+    for (const node of [...graph.keys()].sort()) if (!index.has(node)) strongconnect(node);
+
+    // Canonicalize a member collection to an order-invariant key.
+    const canonicalSet = (members) => [...members].sort().join(' | ');
+    const cyclicSccs = sccs.filter((c) => c.length > 1).map(canonicalSet).sort();
+    const allowedSets = ALLOWED_CYCLES.map(canonicalSet).sort();
+
+    // Exact-set equality (shrink-only, both directions): a NEW cyclic SCC fails
+    // (break the cycle, don't extend the list); a KILLED cycle also fails until
+    // its allowlist entry is removed (the win must be locked).
+    expect(
+      cyclicSccs,
+      'the set of import cycles (strongly-connected components of size > 1) drifted from the allowlist. ' +
+        'A new cycle → break it (route the offending import through a dependency-free leaf, the deityConstants.js ' +
+        'pattern). A killed cycle → delete its row from ALLOWED_CYCLES to lock the win. Never extend the list to pass.',
+    ).toEqual(allowedSets);
   }, 60_000);
 });

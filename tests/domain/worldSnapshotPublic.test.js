@@ -133,6 +133,10 @@ describe('serializeWorldSnapshotPublic — HARD-DENY (every section enabled)', (
       'npcStates', 'factionStates', 'relationshipStates', 'pendingEvents', 'proposals',
       'stressors', 'pausedAdvance', 'settlementTickStates', 'rngSeed',
       'deferredImpacts', 'deferredWarFronts', 'preSnapshot', 'pendingMajors',
+      // security-privacy-r2-1: the conditional-ledger keys that had lagged the census.
+      'religionStates', 'warPosture', 'occupations', 'martialReadiness', 'conquestFeeds',
+      'mercenaryMarket', 'rulesetLog', 'spatialDigest', 'spatialLedgers', 'narrativeTempo',
+      'politicsLedgers',
     ]) {
       expect(keys.has(denied)).toBe(false);
     }

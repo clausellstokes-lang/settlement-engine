@@ -30,7 +30,7 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 // The canonical dormancy oracle (absent === {} === [], key-sorted) — the same
 // normalizer every "byte-identical" faith gate references. Imported from its
 // defining test, mirroring tests/domain/pantheon.test.js and occupation.test.js.
-import { normalizeForDormancy } from '../domain/religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 const PULSE_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'worldpulse-golden-master.json');
 const NOW = '2026-01-01T00:00:00.000Z';

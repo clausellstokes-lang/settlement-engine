@@ -45,20 +45,52 @@ export const WORLD_SNAPSHOT_PUBLIC_SCHEMA_VERSION = 1;
  * any opt-in. Listed for documentation + the defensive final-scrub assertion; the
  * allowlist construction below already omits them by never reading them. Kept as a
  * frozen set so the test can assert each is absent.
+ *
+ * REGISTRATION MANIFEST (security-privacy-r2-1): the second block below is the FULL
+ * set of worldState CONDITIONAL_LEDGER_KEYS (worldState.js) EXCEPT the public-derived
+ * allowlist — today only 'pantheon', which is surfaced under its own name as a scrubbed
+ * public subset. This list is HAND-MAINTAINED but kept in lockstep with the engine by
+ * tests/security/worldSnapshotDenyCensus.test.js, which derives the expected set from
+ * CONDITIONAL_LEDGER_KEYS − WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST and reds if a new
+ * conditional ledger (a new wave's key) is neither hard-denied here nor allowlisted.
+ * (Kept a manual list rather than importing CONDITIONAL_LEDGER_KEYS here: this module
+ * is security-critical and deliberately imports ONLY publicSafe.js — coupling it to the
+ * heavy worldState engine module would bloat the gallery chunk; the walker enforces the
+ * derive relationship without the import.) The census lagged 15 waves before this fix —
+ * spatialLedgers/politicsLedgers/warPosture/religionStates and the rest were unlisted.
  */
+
+/** Conditional-ledger keys whose PUBLIC DERIVATION is surfaced under their own name
+ *  (so they are NOT hard-denied). Today only the pantheon (a scrubbed deity subset). */
+export const WORLD_SNAPSHOT_PUBLIC_LEDGER_ALLOWLIST = Object.freeze(['pantheon']);
+
 export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+  // always-present private worldState keys (not conditional ledgers)
   'npcStates',
   'factionStates',
   'relationshipStates',
   'pendingEvents',
   'proposals',
   'stressors',
-  'pausedAdvance',
   'settlementTickStates',
   'rngSeed',
   'deferredImpacts',
   'deferredWarFronts',
   'deferredPartyImpacts',
+  // every worldState CONDITIONAL_LEDGER_KEY except the public allowlist (registration
+  // manifest — a new conditional ledger reds worldSnapshotDenyCensus.test.js until listed)
+  'religionStates',
+  'warPosture',
+  'occupations',
+  'pausedAdvance',
+  'martialReadiness',
+  'conquestFeeds',
+  'mercenaryMarket',
+  'rulesetLog',
+  'spatialDigest',
+  'spatialLedgers',
+  'narrativeTempo',
+  'politicsLedgers',
 ]);
 
 /** simulationRules keys safe to surface publicly (coarse world-shape toggles the

@@ -406,7 +406,7 @@ export function mintSteading({ parent, parentId, sats, tick, draw, nameOverride 
 function steadingNews(kind, parentId, tick, now, body) {
   return {
     id: `wizard_news.${tick}.${kind}.${parentId}`,
-    tick, createdAt: now, scope: 'local', significance: body.significance || 'minor',
+    tick, createdAt: now, scope: 'local', significance: body.significance || 'notable',
     severity: num(body.severity, 0.25), score: 40,
     headline: body.headline,
     summary: body.summary,
@@ -687,7 +687,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
           newsEntries.push(steadingNews('steading_charter_pending', parentId, tick, now, {
             headline: `${next.name} has outgrown its parent's shadow`,
             summary: `The steading of ${next.name} has reached village scale — a charter awaits.`,
-            significance: 'moderate', severity: 0.35,
+            significance: 'notable', severity: 0.35,
             reasons: ['Graduation to a chartered settlement is owner-ruled to fire at village scale (V2 executes pending charters).'],
           }));
         }
@@ -785,7 +785,7 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
           newsEntries.push(steadingNews('steadings_converged', parentId, tick, now, {
             headline: `${a.name} and ${b.name} fold into one palisade`,
             summary: `The neighbouring steadings of ${a.name} and ${b.name} have grown together into a single hamlet of ${folded.population}.`,
-            severity: 0.3, significance: 'moderate',
+            severity: 0.3, significance: 'notable',
             reasons: ['A second, distinct hamlet-birth path: coalescence of a frontier, not promotion of a steading.'],
           }));
         }

@@ -96,7 +96,7 @@ npx supabase db push
 npx supabase db diff
 ```
 
-**Current migration head: `135_revoke_service_update_profile_metadata_public.sql`** (this filename is kept
+**Current migration head: `136_world_snapshot_deny_census_lift.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 

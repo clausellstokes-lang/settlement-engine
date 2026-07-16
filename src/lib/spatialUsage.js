@@ -64,12 +64,21 @@ const enumStr = (v) => (typeof v === 'string' && v.length <= 40 ? v : undefined)
 // at level >= 0.55; below that it is ambient/decaying.
 const EMBATTLE_ENTER = 0.55;
 
-// The Phase-5.5 rule flags whose ADOPTION we measure (boolean toggles). Only the
-// ENABLED ones are emitted (a compact `flags_on` list, not a 20-key mostly-false map).
+// The Phase-5.5 rule flags whose ADOPTION we measure (boolean toggles readable off
+// simulationRules — the "virtual" wave flags like navalEnabled are ordinary rules
+// keys too). Only the ENABLED ones are emitted (a compact `flags_on` list, not a
+// 30-key mostly-false map). CURATED adoption list — extend it when a new merged wave
+// adds a gating flag worth measuring (lib-infra-copy-1: it had lagged 15 waves; naval/
+// upswing/resource-dynamics/infoStatecraft/momentum/corruptionWeb/intervention/
+// settlementLifecycle were blind). Not walker-enforced (unlike the ledger-key manifest
+// below) because many rules flags are internal sub-toggles not worth telemetry.
 const TRACKED_FLAGS = [
   'seasonsEnabled', 'warLayerEnabled', 'settlementStrategyEnabled', 'faithSpreadEnabled',
   'commodityFlowEnabled', 'allyIntelSharingEnabled', 'routineMajorApproval',
   'migrationFlowsEnabled', 'tradeFlowsEnabled', 'populationDynamicsEnabled',
+  // post-A1 merged-wave gating flags (lib-infra-copy-1)
+  'navalEnabled', 'upswingArcsEnabled', 'resourceDynamicsEnabled', 'infoStatecraftEnabled',
+  'momentumEnabled', 'corruptionWebEnabled', 'interventionEnabled', 'settlementLifecycleEnabled',
 ];
 
 /** The config a tick ran under (preset + info mode + CL-0 profile axes + enabled flags). */
@@ -119,6 +128,17 @@ export function extractSpatialUsage(worldState) {
     arrivals_in_transit: recCount(L.spatialArrivals),
     approvals_pending: (Array.isArray(ws.proposals) ? ws.proposals : [])
       .filter(p => p?.status === 'pending').length,
+    // ── post-A1 merged-wave movers (lib-infra-copy-1) ───────────────────────
+    naval: recCount(L.navalTransit),                 // W-NAVY sea movement
+    epidemic_sites: recCount(L.epidemic),            // W-pestilence spread
+    disinfo_active: recCount(L.disinfo),             // W-DOCTRINE-2 disinformation
+    credibility_tracked: recCount(L.credibility),    // W-DOCTRINE-2 credibility stock
+    upswing_arcs: recCount(L.upswing),               // W-UPSWING reconstruction/boom arcs
+    momentum_committed: recCount(L.commitments),     // momentum commitment ledger
+    interventions: recCount(L.interventions),        // W-CONVERGENCE foreign intervention
+    corruption_exposed: recCount(L.exposedCorruption), // W-DOCTRINE-3 revealed corruption
+    satellites: recCount(L.satellites),              // settlement-lifecycle satellites
+    war_campaigns: recCount(L.campaignPlans),        // W-DOCTRINE-1 supply-web campaigns
   };
   const migrationPop = sumLeaf(L.migration, r => r?.arrivals);
 
@@ -137,6 +157,17 @@ export function extractSpatialUsage(worldState) {
     ['dispatch_refusal', counts.dispatch_refusing],
     ['propagation', counts.arrivals_in_transit],
     ['approval_queue', counts.approvals_pending],
+    // ── post-A1 merged-wave movers (lib-infra-copy-1) ───────────────────────
+    ['naval', counts.naval],
+    ['epidemic', counts.epidemic_sites],
+    ['disinfo', counts.disinfo_active],
+    ['credibility', counts.credibility_tracked],
+    ['upswing', counts.upswing_arcs],
+    ['momentum', counts.momentum_committed],
+    ['intervention', counts.interventions],
+    ['corruption_exposed', counts.corruption_exposed],
+    ['satellites', counts.satellites],
+    ['war_campaign', counts.war_campaigns],
   ];
   const moversActive = MOVER_PRESENCE.filter(([, n]) => n > 0).map(([name]) => name);
 
@@ -154,3 +185,42 @@ export function extractSpatialUsage(worldState) {
   }
   return out;
 }
+
+// ── The spatialLedgers coverage MANIFEST (lib-infra-copy-1) ───────────────────
+// The registration convention that keeps this telemetry from lagging the engine
+// again: EVERY spatialLedgers key a domain kernel writes (via setSpatialLedger) must
+// be classified here — either TRACKED (extractSpatialUsage reads it into mover_counts/
+// movers_active) or EXEMPT (deliberately not an adoption "mover"). The walker
+// tests/lib/spatialLedgerCoverage.walker.test.js source-scans the setSpatialLedger
+// call sites and asserts the written-key set EQUALS TRACKED ∪ EXEMPT — so a new wave's
+// ledger key reds the gate until someone consciously tracks or exempts it.
+
+/** spatialLedgers keys extractSpatialUsage reads into the coarse mover signal. */
+export const TRACKED_LEDGER_KEYS = Object.freeze([
+  'embattlement', 'supplyShipments', 'migration', 'armyTransit', 'entrepots',
+  'tradeFlow', 'rumorLedgers', 'beliefMaps', 'moralDrift', 'dispatchWillingness',
+  'spatialArrivals', 'navalTransit', 'epidemic', 'disinfo', 'credibility', 'upswing',
+  'commitments', 'interventions', 'exposedCorruption', 'satellites', 'campaignPlans',
+]);
+
+/**
+ * spatialLedgers keys deliberately NOT surfaced as adoption movers, with the reason.
+ * These are substrate / reason-annotation / shared-bookkeeping ledgers whose owning
+ * layer's adoption is already visible through a tracked mover or a tracked flag; a
+ * separate presence signal would be redundant noise, not new information.
+ */
+export const EXEMPT_LEDGER_KEYS = Object.freeze({
+  commodityStocks: 'supply-web closed-inventory SUBSTRATE (commodityFlow); the trade_flow/caravans movers already signal the trade layer',
+  merchantAppetite: 'supply-web economic pressure STOCK, not a distinct exercised mover',
+  tradeOverture: 'E1d generosity per-pair warmth STOCK (the merchantAppetite idiom, drop-when-cold) feeding the existing trade-partner evolution rule — not a distinct mover',
+  lendAppetite: 'E1b generosity lender-appetite STOCK (the merchantAppetite idiom) hardening/softening the credit motive — not a distinct mover',
+  refugePostures: 'E1c generosity host-refuge POSTURE sub-ledger, read as the refugePosture01 axis by migrationKernel — the migration mover already signals that layer',
+  bufferDiscipline: 'E1 generosity reserve-discipline STOCK (give-side motive substrate), not a distinct exercised mover',
+  generosityWillingness: 'E1 generosity give-side WILLINGNESS STOCK (motive substrate feeding the generosity verbs), not a distinct exercised mover',
+  obligations: 'cross-wave debt ledger shared by upswing + convergence — those movers already signal their layers',
+  secrecyPostures: 'infoStatecraft HIDE posture sub-state (the disinfo/credibility movers represent the info wave)',
+  sightPostures: 'infoStatecraft SEE posture sub-state (ditto)',
+  peaceReasons: 'W-PEACE-1 typed peace-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
+  warReasons: 'W-PEACE-1 typed war-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
+  treaties: 'peace-OUTCOME state record (the diplomatic result of the war/peace layer, not a distinct mover)',
+});

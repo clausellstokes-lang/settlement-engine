@@ -19,6 +19,9 @@
  * is a warning so the linter doesn't block work but surfaces issues.
  */
 
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
@@ -26,6 +29,27 @@ import globals from 'globals';
 import visualBudget from './scripts/eslint-plugin-visual-budget.js';
 import analytics from './scripts/eslint-plugin-analytics.js';
 import jsxHygiene from './scripts/eslint-plugin-jsx-hygiene.js';
+
+// ── The size-ratchet baseline (code-quality-architecture-1 + -3) ─────────────
+// scripts/.size-baseline.json is the SINGLE SOURCE OF TRUTH for the per-file
+// max-lines ceilings of the files that legitimately exceed their layer ceiling
+// today. It REPLACES the old `max-lines: 'off'` grandfather blocks (which allowed
+// UNBOUNDED growth — pulseKernel grew +28% effective before this froze it). Each
+// entry becomes a per-file `max-lines: ['error', { max }]` override generated
+// below (spread in AFTER the per-layer rules so it wins). tests/lint/sizeBaseline.
+// test.js keeps this map honest: a file that grows past its number reds eslint; a
+// file that shrinks must have its number LOWERED (lock the win); a file that falls
+// under its layer ceiling must have its entry DELETED. Shrink-only, never raise.
+const __eslintDir = dirname(fileURLToPath(import.meta.url));
+const SIZE_BASELINE = JSON.parse(
+  readFileSync(join(__eslintDir, 'scripts/.size-baseline.json'), 'utf8'),
+);
+const sizeBaselineOverrides = Object.entries(SIZE_BASELINE)
+  .filter(([file]) => !file.startsWith('_'))
+  .map(([file, max]) => ({
+    files: [file],
+    rules: { 'max-lines': ['error', { max, skipBlankLines: true, skipComments: true }] },
+  }));
 
 // eslint-plugin-react doesn't yet support ESLint 10's flat-config
 // resolver (throws on contextOrFilename.getFilename). We drop it and
@@ -454,27 +478,17 @@ export default [
   // economy/ + power/ + services/ modules, all under 800 effective lines, with
   // the golden master byte-identical. This ratchet locks the shape: a generator
   // file that grows past 800 fails the gate.
-  // @enforced-by max-lines (this rule)
-  // The three remaining >800 legacy files (npcGenerator 1640, narrativeGenerator
-  // 1220, historyGenerator 1108) are grandfathered by explicit override below — a
-  // burn-down worklist, not a licence: decompose one, DELETE its override
-  // (shrink-only, same doctrine as every baseline). computeActiveChains and
-  // defenseGenerator have since fallen under the 800 ceiling and had their
-  // overrides deleted.
+  // @enforced-by max-lines (this rule) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
+  // The legacy files still over 800 (npcGenerator, narrativeGenerator,
+  // historyGenerator) are FROZEN at their current effective size by the size
+  // baseline (generated overrides at the bottom of this file) — no longer `off`
+  // (unbounded), a burn-down worklist: decompose one below 800 and DELETE its
+  // baseline entry. computeActiveChains and defenseGenerator have since fallen
+  // under the 800 ceiling and had their entries removed.
   {
     files: ['src/generators/**/*.js'],
     rules: {
       'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
-    },
-  },
-  {
-    files: [
-      'src/generators/npcGenerator.js',
-      'src/generators/narrativeGenerator.js',
-      'src/generators/historyGenerator.js',
-    ],
-    rules: {
-      'max-lines': 'off', // grandfathered — see ratchet note above; shrink-only
     },
   },
 
@@ -490,32 +504,47 @@ export default [
   // follow-up: warDeployment.evaluateWarLayer (~930-line function) decomposes
   // along its own step comments — behaviour-preserving, goldens byte-identical
   // (deferred; not part of this ratchet). A NEW domain file that grows past 800
-  // EFFECTIVE lines (skipBlankLines + skipComments) fails the gate.
-  // @enforced-by max-lines (this rule)
+  // EFFECTIVE lines (skipBlankLines + skipComments) is rejected by max-lines. Files
+  // ALREADY over 800 are frozen at their current size by scripts/.size-baseline.json (the
+  // generated per-file overrides at the bottom of this file) — NOT `off`. That is
+  // the code-quality-architecture-1 fix: `off` let pulseKernel grow +28% unbounded
+  // and never locked the stressors.js win (now 477 eff, under 800 — removed).
+  // @enforced-by max-lines (this rule) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
   {
     files: ['src/domain/**/*.js'],
     rules: {
       'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
     },
   },
-  // Grandfathered domain offenders — the files above the 800 EFFECTIVE-line
-  // ceiling TODAY (skipBlankLines + skipComments, measured by this very rule; raw
-  // wc -l runs much higher because these files are comment-dense). Shrink-only:
-  // decompose one below 800 and DELETE its entry. The list is derived from eslint
-  // itself, not raw line counts — several raw->800 files (settlement.schema,
-  // causalState, capacityModel) sit UNDER 800 effective and are deliberately absent.
+
+  // ── code-quality-architecture-3 — size-ratchet coverage extension ────────────
+  // The size ratchet previously covered only components (600), generators (800),
+  // and domain (800). The store, pdf, lib, hooks, and utils layers — and the
+  // src-root files (App.jsx was missed by the src/components/** glob) — had NO
+  // max-lines rule, so a 1,298-line slice or a 732-effective-line App.jsx grew
+  // unguarded. Same 800 ceiling as the other engine-adjacent layers (600 for the
+  // root .jsx, which is component-shaped); current over-ceiling files
+  // (settlementSlice, aiSlice, pdf/lib/viewModel, App.jsx) are frozen by the baseline.
+  // @enforced-by max-lines (these rules) + scripts/.size-baseline.json + tests/lint/sizeBaseline.test.js
   {
     files: [
-      'src/domain/display/causeConjunctionRoleContent.js', // 3890 eff
-      'src/domain/worldPulse/pulseKernel.js',              // 1092 eff
-      'src/domain/worldPulse/warDeployment.js',            // 1077 eff
-      'src/domain/worldPulse/applyWorldPulse.js',          //  890 eff — G-track (G1a-G2R) substance grew it past 800 at the golden merge; burn-down candidate
-      'src/domain/worldPulse/stressors.js',                //  860 eff
-      'src/domain/explanation.js',                         //  827 eff
-      'src/domain/worldPulse/npcAgency.js',                //  824 eff
+      'src/store/**/*.{js,jsx}',
+      'src/pdf/**/*.{js,jsx}',
+      'src/lib/**/*.{js,jsx}',
+      'src/hooks/**/*.{js,jsx}',
+      'src/utils/**/*.{js,jsx}',
+      'src/*.js', // src-root .js (main-graph glue); none over 800 today, future-proofed
     ],
     rules: {
-      'max-lines': 'off', // grandfathered — shrink-only burn-down worklist
+      'max-lines': ['error', { max: 800, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    // src-root .jsx (App.jsx / AppViews.jsx / main.jsx) — component-shaped, so the
+    // 600 component ceiling. App.jsx (955) is frozen by the size baseline below.
+    files: ['src/*.jsx'],
+    rules: {
+      'max-lines': ['error', { max: 600, skipBlankLines: true, skipComments: true }],
     },
   },
 
@@ -633,11 +662,15 @@ export default [
       // store, or lib layers (which would re-introduce RNG capture / IO leaks
       // into the data tables). Executable closures live in the generators layer
       // (stressNarrative.js, narrativeText.js); the data files hold only fields.
-      // @enforced-by this rule + tests/domain/dataPurity.test.js
+      // The kernel layer is NOT banned wholesale — data legitimately imports the
+      // pure, deterministic kernel/slugify.js — but the prng seam IS: kernel/prng.js
+      // carries generateSeed() (Date.now()+Math.random()), the one ambient-entropy
+      // vector in the kernel (scripts-build-ci-1 residual). rngContext.js is likewise
+      // banned (seeded-draw capture). @enforced-by this rule + tests/domain/dataPurity.test.js
       'no-restricted-imports': ['error', {
         patterns: [{
-          group: ['**/generators/**', '**/store/**', '**/lib/**'],
-          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib. Move executable logic into the generators layer and import data, not behavior.',
+          group: ['**/generators/**', '**/store/**', '**/lib/**', '**/kernel/prng*', '**/kernel/rngContext*'],
+          message: 'src/data/** must be pure data — no runtime imports of generators/store/lib, or the kernel prng/rngContext seams (generateSeed/ambient RNG re-introduces non-determinism). Move executable logic into the generators layer and import data, not behavior.',
         }],
       }],
     },
@@ -666,4 +699,11 @@ export default [
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
   },
+
+  // ── Per-file size-baseline overrides (generated from scripts/.size-baseline.json) ──
+  // MUST be last: flat config resolves rules last-match-wins, so each frozen per-file
+  // `max-lines` ceiling here overrides the per-layer 800/600 rules above for that one
+  // file. This replaces the old `max-lines: 'off'` grandfathers — the files are bounded
+  // at their current size, not unbounded. Edit the JSON, never these generated objects.
+  ...sizeBaselineOverrides,
 ];

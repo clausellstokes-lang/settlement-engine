@@ -62,7 +62,10 @@ describe('map-only lucide icon split', () => {
     }
   });
 
-  it('emits the lazy vendor-icons-map chunk (after a build)', () => {
+  // VERIFY_DIST-gated (stale-dist policy — see vendorPdfLazy.test.js header): this
+  // reads the fresh build's chunk SIZES, which are meaningless against a pre-build
+  // dist, so it runs only in the post-build `npm run verify:dist` re-run.
+  it.skipIf(!process.env.VERIFY_DIST)('emits the lazy vendor-icons-map chunk (after a build)', () => {
     const assets = join(ROOT, 'dist', 'assets');
     if (!existsSync(assets)) return; // build-dependent; vendorPdfLazy covers the budget
     const files = readdirSync(assets);

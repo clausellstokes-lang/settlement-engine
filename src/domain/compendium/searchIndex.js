@@ -25,9 +25,13 @@
 import { ARCHETYPES, REL_TYPES } from './catalogData.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
-// Valid destination tabs — must mirror the TABS ids in CompendiumPanel.
+// Valid destination tabs — must mirror the TABS ids in CompendiumPanel EXACTLY.
+// Pinned by tests/domain/compendiumSearch.test.js, which source-scans the panel's
+// TABS block so a new tab (like 'living', added 2026-07-16 — the global index had
+// drifted: the Living World tab was in the panel but not here, so a search could
+// never route to it) reds this until it is added (domain-region-dossier-guidance-5).
 export const COMPENDIUM_TABS = Object.freeze([
-  'tiers', 'economy', 'power', 'arcane', 'stress', 'neighbour', 'institutions',
+  'tiers', 'economy', 'power', 'arcane', 'living', 'stress', 'neighbour', 'institutions',
 ]);
 
 /**
@@ -123,6 +127,20 @@ const CROSS_SETTLEMENT_ENTRIES = [
   id: `xset-${slug(term)}`, term, category: 'Neighbour System', tab: 'neighbour', anchor: 'neighbours', keywords: kw,
 }));
 
+// The Living World tab (aboutLiving.systems) — the premium living-simulation systems
+// the reader searches for by name ("war", "pantheon", "chronicle") without knowing the
+// tab. Concise navigation entries mirroring the four LivingWorldTab systems; anchor
+// 'living-world' (CompendiumPanel ANCHOR_MAP). (guidance-5: this tab was searchable
+// nowhere before.)
+const LIVING_ENTRIES = [
+  ['Advance Time', 'push the world forward a month living simulation region responds premium cartographer'],
+  ['The Self-Ending War', 'siege coalition war exhaustion homeostasis burns out returns to peace'],
+  ['The Living Pantheon', 'deity contest converts seats cult major faith rises alignment corruption'],
+  ['The Chronicle', 'history pulse record scrubbable what happened self-writing'],
+].map(([term, kw]) => ({
+  id: `living-${slug(term)}`, term, category: 'Living World', tab: 'living', anchor: 'living-world', keywords: kw,
+}));
+
 // ── Derived entries from the shared arrays (zero-drift) ────────────────────
 
 const ARCHETYPE_ENTRIES = ARCHETYPES.map((a) => ({
@@ -155,6 +173,7 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...ECONOMY_ENTRIES,
   ...ARCHETYPE_ENTRIES,
   ...ARCANE_ENTRIES,
+  ...LIVING_ENTRIES,
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,

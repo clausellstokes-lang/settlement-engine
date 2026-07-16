@@ -18,7 +18,7 @@ import { describe, it, expect } from 'vitest';
 
 import { newsVoiceLine, newsVoiceCategory, VOICE_LINES, VOICE_FLOOR } from '../../src/domain/display/newsVoice.js';
 
-const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority', 'succor'];
+const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority', 'succor', 'prosperity'];
 const BUCKETS = ['onset', 'impact', 'relief', 'fade'];
 
 // Representative entry fields that hit each category (via impactKind) and each
@@ -28,7 +28,7 @@ const CATEGORY_IMPACT_KIND = {
   war: 'conflict_pressure', faith: 'religious_pressure', trade: 'import_shortage',
   pestilence: 'plague_arrival', calamity: 'calamity',
   migration: 'migration_pressure', authority: 'authority_instability',
-  succor: 'generosity_relief',
+  succor: 'generosity_relief', prosperity: 'boom',
 };
 const BUCKET_KIND = { onset: 'queued', impact: 'applied', relief: 'resolved', fade: 'ignored' };
 
@@ -257,6 +257,37 @@ describe('newsVoice — the newest movers get their own voice (content-immersion
       newsVoiceLine({ id: 'a', impactKind: 'authority_instability', kind: 'applied' }));
     expect(VOICE_LINES.migration.impact).toContain(
       newsVoiceLine({ id: 'm', impactKind: 'migration_pressure', kind: 'applied' }));
+  });
+});
+
+describe('newsVoice — the upswing abundance voice + the set-but-unclassified guard (content-immersion-r2-1)', () => {
+  it('boom / flourishing / reconstruction speak PROSPERITY, not the trade_route market-shortage line', () => {
+    // The upswing mints carry channelType 'trade_route' (boom) / 'settlement'; impactKind
+    // MUST classify first, or a boom borrows the trade crier's "shortage has bitten" line.
+    expect(newsVoiceCategory({ impactKind: 'boom', channelType: 'trade_route' })).toBe('prosperity');
+    expect(newsVoiceCategory({ impactKind: 'flourishing', channelType: 'settlement' })).toBe('prosperity');
+    expect(newsVoiceCategory({ impactKind: 'reconstruction', channelType: 'settlement' })).toBe('prosperity');
+    const line = newsVoiceLine({ id: 'b', impactKind: 'boom', channelType: 'trade_route', kind: 'applied' });
+    expect(VOICE_LINES.prosperity.impact).toContain(line);
+  });
+
+  it('bust (a market COLLAPSE) classifies explicitly to trade — a defensible hardship voice, not the channel fallback', () => {
+    expect(newsVoiceCategory({ impactKind: 'bust', channelType: 'trade_route' })).toBe('trade');
+  });
+
+  it('a set-but-UNCLASSIFIED impactKind gets NO voice, even with a war/trade channel (never the fallback)', () => {
+    // The core content-immersion-r2-1 fix: a non-empty impactKind that matches no
+    // classifier returns null rather than borrowing its channel's crier line.
+    expect(newsVoiceCategory({ impactKind: 'some_future_kind', channelType: 'trade_route' })).toBeNull();
+    expect(newsVoiceCategory({ impactKind: 'intervention_clash', channelType: 'war_front' })).toBeNull();
+    expect(newsVoiceLine({ id: 'z', impactKind: 'some_future_kind', channelType: 'trade_route', kind: 'applied' })).toBeNull();
+  });
+
+  it('a BARE entry (no impactKind) still uses the channelType fallback (unchanged)', () => {
+    // The guard must not break the legacy/persisted path: an empty impactKind still
+    // falls through to channelType.
+    expect(newsVoiceCategory({ impactKind: '', channelType: 'trade_route' })).toBe('trade');
+    expect(newsVoiceCategory({ channelType: 'war_front' })).toBe('war');
   });
 });
 

@@ -342,7 +342,11 @@ export function createDefaultWorldState(campaign = {}) {
 //                            generation baseline is sacred). The flow-derived economics
 //                            drift (display/tradeFlowEconomics.js) reads it; present
 //                            under the commodity-flow opt-in while goods move (sparse).
-const CONDITIONAL_LEDGER_KEYS = Object.freeze([
+// Exported for the public-snapshot deny-census walker (tests/security/
+// worldSnapshotDenyCensus.test.js), which asserts WORLD_SNAPSHOT_HARD_DENY covers every
+// conditional ledger except the public allowlist (security-privacy-r2-1). Export-only —
+// no production consumer imports this from here (the serializer stays decoupled).
+export const CONDITIONAL_LEDGER_KEYS = Object.freeze([
   'pantheon', 'religionStates', 'warPosture', 'occupations', 'pausedAdvance',
   'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog',
   'spatialDigest', 'spatialLedgers',

@@ -559,6 +559,11 @@ export default defineConfig({
     // DOM opt in with /** @vitest-environment jsdom */ at the top.
     // Component smoke tests in tests/ui/ use that pragma.
     environment: 'node',
+    // Pin the property layer's fast-check seed globally (test-gate-honesty-2):
+    // every fc.assert runs a deterministic, REPRODUCIBLE case sequence instead of
+    // a fresh random one per run. Only the seed is set (numRuns et al keep their
+    // library defaults). Rotation is a deliberate per-wave act — see the header.
+    setupFiles: ['./tests/setup/fastCheckSeed.js'],
     // Raise the per-test timeout above Vitest's 5000ms default. The
     // generation-heavy suites (e.g. tests/domain/distribution.test.js)
     // push 40–80 settlements through the FULL pipeline per test; in

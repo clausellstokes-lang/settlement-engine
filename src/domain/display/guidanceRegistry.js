@@ -328,6 +328,34 @@ export const LEGACY_GUIDANCE_COMPONENTS = Object.freeze([
 export const LEGACY_GUIDANCE_CEILING = LEGACY_GUIDANCE_COMPONENTS.length;
 
 /**
+ * UNWIRED WHISPERS (domain-region-dossier-guidance-2): whisper ids that are REGISTERED
+ * here but whose host component does NOT yet consume the guidance registry — a file
+ * exists, but the whisper does not actually RENDER through the selection/eligibility
+ * machinery. The old walker's "mounted surface" check only proved the host .jsx exists
+ * (file-exists ≠ renders); the strengthened check content-scans each host for guidance
+ * integration (imports the registry AND references a selection call / the whisper id /
+ * body / surface), which reds on these.
+ *
+ * ⚠️ SHRINK-ONLY, and W-R2-SURFACE OWNS THE BURN-DOWN: SURFACE wires each of these hosts
+ * through the registry (or removes the whisper) and DELETES its id here as it lands. This
+ * list is a DOCUMENTED, EMPTYING allowlist — not a licence. The census walker asserts (a)
+ * every listed id is a real whisper, and (b) every listed id is genuinely unwired (no
+ * stale entry once SURFACE wires it), so a wired whisper cannot hide here.
+ */
+export const UNWIRED_WHISPERS = Object.freeze([
+  'wizard_next_steps',        // WizardNextSteps — no registry import
+  'home_welcome_back',        // WelcomeBackCard — no registry import
+  'library_empty_invitation', // SampleDashboard — no registry import
+  'gallery_empty_invitation', // GalleryList — renders the copy directly, not via the registry
+  'realm_empty_invitation',   // CampaignEmptyState — no registry import
+  'realm_orders_teaching',    // RealmVerbComposer — no registry import
+  'realm_docket_teaching',    // RealmDocket — no registry import
+]);
+
+/** The shrink-only ceiling for UNWIRED_WHISPERS (only ever moves DOWN as SURFACE wires). */
+export const UNWIRED_WHISPERS_CEILING = UNWIRED_WHISPERS.length;
+
+/**
  * The retained registry object. The sentinel rides HERE (a live property of a
  * runtime-read frozen object) so it survives tree-shaking into the lazy chunk —
  * the non-vacuity fix. Consumers read `.whispers` / `.surfaces`, retaining the

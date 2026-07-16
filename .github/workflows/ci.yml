@@ -279,10 +279,14 @@ jobs:
   # The scripts/audit/religion-*.mjs probes drive the faith subsystem across many
   # seeded trials (patron-contest hold rates, schism drift, divine-mandate → coup
   # coupling, growth↔legitimacy balance) and emit distribution tables the owner
-  # reads when TUNING the constants. They are DIAGNOSTIC probes: they log surfaces
-  # and never assert a threshold, so they exit 0 by design — this lane produces
-  # log artifacts for human review, it is not a pass/fail gate (a balance drift
-  # shows up as a shifted distribution in the log, not a red build). Kept OFF the
+  # reads when TUNING the constants. THESE THREE religion probes are DIAGNOSTIC:
+  # they log surfaces and never assert a threshold, so they exit 0 by design — this
+  # lane produces log artifacts for human review, it is not a pass/fail gate (a
+  # balance drift shows up as a shifted distribution in the log, not a red build).
+  # NB (scripts-build-ci-3): "diagnostic-only" is NOT the framing for the whole soak
+  # surface — the separate `world-soak` lane below runs whole-world-soak.mjs, a
+  # genuine PASS/FAIL watchdog (composed-kernel same-seed byte-identity + population/
+  # cost envelopes, `process.exit(failures.length ? 1 : 0)`). Kept OFF the
   # per-push/PR hot path (each soak runs thousands of seeded pulse ticks) — only
   # the weekly cron and a manual workflow_dispatch trigger it, exactly like the
   # mutation sweep above.
@@ -316,6 +320,70 @@ jobs:
 
       - name: Divine-mandate → coup coupling soak
         run: node scripts/audit/religion-coup-soak.mjs --seeds 10 --ticks 100
+
+  # ── Whole-world soak lane (opt-in) — the composed-kernel PASS/FAIL watchdog ──
+  # scripts-build-ci-3: whole-world-soak.mjs is constitution law 1 (same-seed byte-
+  # identity) verified at the COMPOSED-kernel level — it generates a real 4-settlement
+  # region with the seeded generator, turns FULL_SIMULATION on (war stack at depth),
+  # advances 30 years through the production orchestrator, and ASSERTS: no crash /
+  # no NaN, byte-identical same-seed re-run (run B == run A every year), seed
+  # divergence (run C forks), bounded population, and the perf-scale-6 serialized-byte
+  # cost envelope. It `process.exit(failures.length ? 1 : 0)`, so it is a real PASS/
+  # FAIL step — a composed-engine determinism/cost regression REDS this job. Before
+  # this lane it ran only when an agent remembered to; after 15 engine waves the
+  # composed regression surface had outgrown the religion-only recurring soak.
+  #
+  # The five wave soaks (cause-lifecycle / conquest-market / war-cluster /
+  # institution-ecology / religion-plane) run alongside as DIAGNOSTIC log-artifact
+  # steps — they have no process.exit, only log distribution tables for human review
+  # (same contract as the religion probes above), so they never gate this job; only
+  # the whole-world watchdog does. Kept OFF the per-push/PR hot path — weekly cron +
+  # manual workflow_dispatch only, like the mutation sweep and religion lanes.
+  #
+  # Approx runtime (ubuntu-latest, in-memory, no I/O):
+  #   whole-world-soak     (--years 30, 4 settlements × 3 runs)  ~1-2 min  (PASS/FAIL)
+  #   cause-lifecycle-soak (--cohort 4000)                       ~seconds  (pure fns)
+  #   conquest-market-soak (--cohort 4000)                       ~seconds  (pure fns)
+  #   war-cluster-soak     (--cohort 4000)                       ~seconds  (pure fns)
+  #   institution-ecology-soak                                   ~seconds  (pure fns)
+  #   religion-plane-soak  (--seeds 24 --ticks 120)              ~10-30s
+  # The 20-minute timeout is generous headroom over the total.
+  world-soak:  # deploy-gate: optional — weekly/manual, never reports on a push
+    name: Whole-world soak (weekly / manual)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # PASS/FAIL: the composed-kernel same-seed byte-identity + cost watchdog.
+      # A nonzero exit (a determinism or cost-envelope regression) REDS this job.
+      - name: Whole-world composed-kernel soak (PASS/FAIL)
+        run: node scripts/audit/whole-world-soak.mjs --years 30
+
+      # DIAGNOSTIC log-artifact steps (no process.exit — they only print tables).
+      - name: Cause-lifecycle soak surfaces
+        run: node scripts/audit/cause-lifecycle-soak.mjs
+
+      - name: Conquest-market soak surfaces
+        run: node scripts/audit/conquest-market-soak.mjs
+
+      - name: War-cluster soak surfaces
+        run: node scripts/audit/war-cluster-soak.mjs
+
+      - name: Institution-ecology soak surfaces
+        run: node scripts/audit/institution-ecology-soak.mjs
+
+      - name: Religion-plane soak surfaces
+        run: node scripts/audit/religion-plane-soak.mjs --seeds 24 --ticks 120
 
   # ── Production deploy gated on the full green gate (finding F35) ─────────────
   # "The gate is the product": production must advance only through CI. This job

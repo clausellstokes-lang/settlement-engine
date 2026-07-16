@@ -837,7 +837,7 @@ function reconstructionNews(id, name, upgrade, skimmed, year, tick, now) {
   const graft = skimmed ? ' Yet not all the rebuilding coin reached the stonemasons — a quiet graft has taken root.' : '';
   return {
     id: `wizard_news.${tick}.reconstruction.${id}`,
-    tick, createdAt: now, scope: 'local', significance: 'moderate', severity: 0.4, score: 62,
+    tick, createdAt: now, scope: 'local', significance: 'notable', severity: 0.4, score: 62,
     headline: `${name} is rebuilt`,
     summary: `${name} has finished rebuilding in the year ${year}, its wounds closed by its own hands and its allies'.${built}${graft}`,
     kind: 'applied', impactKind: 'reconstruction', channelType: 'settlement',
@@ -920,7 +920,7 @@ function boomNews(id, name, arteries, fragile, tick, now) {
   const dep = fragile ? ' Its wealth rides on a single artery — a fragile prosperity.' : '';
   return {
     id: `wizard_news.${tick}.boom.${id}`,
-    tick, createdAt: now, scope: 'regional', significance: 'moderate', severity: 0.4, score: 60,
+    tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.4, score: 60,
     headline: `${name} is booming`,
     summary: `Brisk and sustained trade has tipped ${name} into a boom — markets swell and coin flows.${dep}`,
     kind: 'applied', impactKind: 'boom', channelType: 'trade_route',
@@ -954,7 +954,7 @@ function flourishingNews(id, name, founded, tick, now) {
   const built = founded ? ` A new ${founded} opens its doors — the founding bias of a fertile peace.` : '';
   return {
     id: `wizard_news.${tick}.flourishing.${id}`,
-    tick, createdAt: now, scope: 'regional', significance: 'moderate', severity: 0.3, score: 55,
+    tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.3, score: 55,
     headline: `${name} enters a golden age`,
     summary: `A long peace and steady rule have made ${name} culturally fertile — tolerance broadens and the temples keep warm.${built}`,
     kind: 'applied', impactKind: 'flourishing', channelType: 'settlement',

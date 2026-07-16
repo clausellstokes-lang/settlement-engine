@@ -38,7 +38,7 @@ function fnv1a32(str) {
   return h >>> 0;
 }
 
-/** @typedef {'war'|'faith'|'trade'|'pestilence'|'calamity'|'migration'|'authority'|'succor'} VoiceCategory */
+/** @typedef {'war'|'faith'|'trade'|'pestilence'|'calamity'|'migration'|'authority'|'succor'|'prosperity'} VoiceCategory */
 /** @typedef {'onset'|'impact'|'relief'|'fade'} VoiceBucket */
 
 // ── Category vocabularies (the categorization precedence) ────────────────────
@@ -248,6 +248,35 @@ export const VOICE_LINES = Object.freeze({
       'The feared reckoning in the halls of rule passed off in muttering alone, and nothing was overturned.',
     ]),
   }),
+  // Prosperity — the W-UPSWING abundance drama class (boom_flourishing): a boom,
+  // a flourishing, a town rebuilt. THE ABUNDANCE VOICE (content-immersion-r2-1): the
+  // registered upswing class deserves a crier of its own, not the market-shortage
+  // line its trade_route channel would otherwise borrow. (Its shadow, bust, routes to
+  // 'trade' — a market COLLAPSE genuinely reads as trade-hardship; see newsVoiceCategory.)
+  prosperity: Object.freeze({
+    onset: Object.freeze([
+      'The market roads run thick with laden wagons, and the guilds speak of fat years coming.',
+      'A rising tide of trade lifts every stall; coin flows freer than it has in a long age.',
+      'Word runs of plenty on the way — the barns fill early and the merchants wear easy smiles.',
+      'Good fortune gathers over the country, and the careful lay by against the day it turns.',
+    ]),
+    impact: Object.freeze([
+      'The boom has come in earnest — the markets swell, the coin runs bright, and every craft finds a buyer.',
+      'Plenty is upon the country in full; the granaries groan, the roads are gold with commerce, and the poorest table is not bare.',
+      'A golden season has broken over the town — the halls are warm, the temples kept, and no craftsman wants for work.',
+      'The good years have arrived; wealth pools along the market roads, and the whole country seems to stand a little taller.',
+    ]),
+    relief: Object.freeze([
+      'The boom has eased to a steady plenty; the wild coin settles, and the country keeps the wealth it won.',
+      'The golden rush cools to a comfortable warmth — the markets calm, and the good fortune sinks quiet roots.',
+      'The fat years mellow into a long ease; the ledgers close black, and prosperity becomes an ordinary thing.',
+    ]),
+    fade: Object.freeze([
+      'The promised plenty never quite arrived; the barns filled no fuller than most years, and the fat years stayed a rumour.',
+      'The looked-for boom came to little — the market roads stayed as they were, and the easy fortune passed the country by.',
+      'The golden season that was foretold guttered out; the coin ran no brighter, and the merchants pack away their hopes.',
+    ]),
+  }),
   // Succor — mercy in grain, one town's granary opened for another's hunger.
   succor: Object.freeze({
     onset: Object.freeze([
@@ -315,6 +344,10 @@ export const VOICE_FLOOR = Object.freeze({
     'Word of the grain sent to a hungry neighbour moves along the roads, and the town reckons the cost of its mercy.',
     'The matter of relief given and relief refused passes hand to hand, and every larder is counted anew.',
   ]),
+  prosperity: Object.freeze([
+    "Word of the country's good fortune moves along the market roads, and the guilds reckon their gains.",
+    'The matter of the fat years stirs every hearth, and the careful weigh how long the plenty will hold.',
+  ]),
 });
 
 /**
@@ -350,9 +383,23 @@ export function newsVoiceCategory(entry) {
   // 'applied' ⇒ the 'impact' bucket) is left UNCLASSIFIED on purpose: routing it to succor
   // would voice "aid flows" beneath a "turned away" headline; the grudge has its own surface.
   if (impactKind === 'generosity_relief') return 'succor';
+  // W-UPSWING abundance drama class (content-immersion-r2-1). boom/flourishing/
+  // reconstruction are PROSPERITY (impactKind-primary, ahead of boom's 'trade_route'
+  // channel — else the boom borrows a market-shortage line). bust is the shadow: a
+  // market COLLAPSE reads as trade-hardship, so it classifies to 'trade' EXPLICITLY
+  // (JUDGMENT, vetoable) rather than borrow the channel fallback the guard removes.
+  if (impactKind === 'boom' || impactKind === 'flourishing' || impactKind === 'reconstruction') return 'prosperity';
+  if (impactKind === 'bust') return 'trade';
   if (WAR_IMPACT_KINDS.has(impactKind)) return 'war';
   if (TRADE_IMPACT_KINDS.has(impactKind)) return 'trade';
-  // channelType is only a fallback when impactKind did not classify (bare/persisted entries).
+  // ── set-but-unclassified guard (content-immersion-r2-1) ─────────────────────
+  // A NON-EMPTY impactKind that matched none of the classifiers above gets NO voice
+  // — never the channelType fallback below. Without this, any new wave's impactKind
+  // (boom, intervention_clash, …) that happens to ride a war/trade channel borrows
+  // that channel's crier line beneath a headline it does not fit. Only BARE entries
+  // (no impactKind — persisted/legacy records) fall through to channelType.
+  if (impactKind) return null;
+  // channelType is the fallback ONLY for bare entries (impactKind absent).
   if (WAR_CHANNEL_TYPES.has(channelType)) return 'war';
   if (TRADE_CHANNEL_TYPES.has(channelType)) return 'trade';
   if (channelType === 'political_authority') return 'authority';

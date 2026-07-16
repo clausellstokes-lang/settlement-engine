@@ -121,6 +121,18 @@ describe('gallery world-snapshot scanner — net-current execution (pglite)', ()
     expect(await isSafe({ schemaVersion: 1, settlements: { Brack: { config: { primaryDeitySnapshot: { name: 'Sun' } } } } })).toBe(true);
   });
 
+  it('(135) rejects the merged-wave conditional ledgers (spatialLedgers/politicsLedgers/warPosture/…) at any depth', async () => {
+    // The census lift: every worldState CONDITIONAL_LEDGER_KEY but pantheon is hard-denied.
+    // These carry the DM-private heart of the sim (covert blocs, war posture, the raw
+    // spatial mover ledgers). The client final-scrub drops them; 135 mirrors that server-side.
+    for (const key of ['spatialLedgers', 'politicsLedgers', 'warPosture', 'religionStates', 'occupations', 'martialReadiness', 'conquestFeeds', 'mercenaryMarket', 'rulesetLog', 'spatialDigest', 'narrativeTempo']) {
+      expect(await isSafe({ schemaVersion: 1, [key]: { a: 1 } }), `${key} must be rejected`).toBe(false);
+      expect(await isSafe({ schemaVersion: 1, nested: [{ [key]: {} }] }), `nested ${key} must be rejected`).toBe(false);
+    }
+    // The PUBLIC-allowlisted pantheon is NOT rejected (its scrubbed derivation is surfaced).
+    expect(await isSafe({ schemaVersion: 1, pantheon: { sun: { tier: 'major', seats: 3 } } })).toBe(true);
+  });
+
   it('(130) accepts public economics-attribution notes but still rejects the private note keys', () => {
     // The `note` channel is narrowed to the genuinely-private note keys (mirroring the
     // client PRIVATE_KEY_RE): a published world snapshot embedding a settlement config

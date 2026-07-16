@@ -15,7 +15,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { ensureWorldState, canonizeWorldState } from '../../src/domain/worldPulse/worldState.js';
-import { normalizeForDormancy } from './religionDormancy.byteIdentity.test.js';
+import { normalizeForDormancy } from '../helpers/dormancyOracle.js';
 
 // A representative pre-KEYSTONE (aspatial) worldState: canonized, with the older
 // conditional ledgers present, but NO spatial marker/digest anywhere.
