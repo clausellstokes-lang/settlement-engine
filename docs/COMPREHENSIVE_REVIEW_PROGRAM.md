@@ -837,6 +837,24 @@ expected eager ≈ two key literals against the 85 B margin (measure-first law a
       done!")** — standing constitution + owner-gated classes survive as always.
 - [ ] **Phase E — END**: final gate + ledger rows + memory + owner report.
 
+**PHASE M TAKEOVER DOSSIER (read-only prep, 2026-07-16 ~05:30):** merge branch at c89a5372
+(W1+W2+W3a committed). The dead session's worktree (.claude/worktrees/agent-a04d3f325c72e62dd)
+holds coherent mid-wave WIP: STAGED = component adaptations (theme-constant replacements,
+master-only surface slimming — AccountMenu, EntityPicker, AccountProfileSection −282,
+GalleryCard, home/*; shape = W6 test-estate adaptation or W3b continuation); UNSTAGED = domain
+additions (npcs +46, simulationSpine +45, factionResponses +38, counterfactual, propagate,
+historyBeats, resolveConfig — shape = adapting RF code to master's imported tests). TAKEOVER
+PROTOCOL (decided, binding): (1) snapshot the WIP exactly as-is to a rescue branch (staged +
+unstaged committed with a WIP marker) BEFORE anything else — the preserve-foreign-WIP law;
+(2) identify the wave against MASTER_MERGE_PLAN §7; (3) finish-or-redo per the plan with the
+rescue as reference; (4) fold the advanced RF tip into master-merge-r1 before W7's
+constitutional gate. Remaining per plan: W3b?/W4 (F24 + controlBytes pin), W5 (guard-port +
+entity-link wiring), W6 (test estate ~350), W7 (full gate), W8 (owner gate: push + PR — the
+push is PRE-AUTHORIZED per the 2026-07-15 rulings; the PR merge button stays the owner's).
+**BATCH 2a DISPATCHED ~05:35 as `wf_f55e896e-435`** (TRUST/GUARDS/DATA off d05ffad2, fences
+disjoint from the running SEAMS/INTENT — five implementers in flight). W-R2-SURFACE queues
+behind INTENT+GUARDS merges (composer-file + walker-allowlist overlaps).
+
 ## OWNER CHARTER EXTENSION (2026-07-15 late night, verbatim: "after you do all of the surveying
 ## and fixing, i want you to continue where the merge was and the rest of the operations that follow")
 THIS session's full charter, in order: (1) Phase S/A/V/P/F — the round-2 review + fix program.
