@@ -45,6 +45,7 @@
 import { clamp01 } from '../../kernel/math.js';
 import { slugify } from '../../kernel/slugify.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
+import { RETIRED_CHAIN_ALIASES } from '../../data/supplyChainResourceIndex.js';
 import { getCompatibleResources, getTerrainType } from '../../generators/terrainHelpers.js';
 import { computeActiveChains } from '../../generators/computeActiveChains.js';
 import { withActiveCondition } from '../activeConditions.js';
@@ -462,7 +463,24 @@ export function reconcileProductionAfterResourceChange(economicState, ctx) {
   const stamped = Array.isArray(economicState.activeChains) ? economicState.activeChains : [];
   const survivingChains = stamped.filter((c) => !removedIds.has(`${c.needKey}.${c.chainId}`));
   const survivingIds = new Set(survivingChains.map((c) => `${c.needKey}.${c.chainId}`));
-  const mergedChains = [...survivingChains, ...addedChains.filter((c) => !survivingIds.has(cidOf(c)))];
+  let mergedChains = [...survivingChains, ...addedChains.filter((c) => !survivingIds.has(cidOf(c)))];
+
+  // [data-tables-3] Prune retired-alias chains a pre-fix save stamped (e.g. the thin
+  // 'food_security.fish' beside its 'food_security.fishing' successor). The catalog
+  // no longer produces the retired id, so it appears in neither before/after and the
+  // surgical filter above can't reach it. Drop it when its canonical successor is
+  // present (dedup the duplicate industry) OR was just removed (co-remove the orphan
+  // so a fishing_grounds removal doesn't leave 'fish' still exporting Preserved
+  // foods) — but keep a lone legacy chain whose successor is genuinely absent, so no
+  // live industry is silently lost. No-op for saves with no retired-alias chain.
+  {
+    const mergedIds = new Set(mergedChains.map((c) => `${c.needKey}.${c.chainId}`));
+    mergedChains = mergedChains.filter((c) => {
+      const canonical = RETIRED_CHAIN_ALIASES[`${c.needKey}.${c.chainId}`];
+      if (!canonical) return true;
+      return !(mergedIds.has(canonical) || removedIds.has(canonical));
+    });
+  }
 
   // Exports: prune the outputs a removed chain no longer produces (the calamity
   // precedent), then add the exportable outputs of newly-active chains.
