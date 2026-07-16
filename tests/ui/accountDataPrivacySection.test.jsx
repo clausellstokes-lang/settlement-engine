@@ -52,6 +52,9 @@ beforeEach(async () => {
   ({ default: AccountDataPrivacySection } = await import('../../src/components/account/AccountDataPrivacySection.jsx'));
 });
 
+// LINEAGE NOTE (master merge W6): the two setProductPref persistence tests were
+// removed — master's productPrefs store bag is a fenced system; this lineage
+// has no productPrefs (the section's other behaviors are pinned below).
 describe('AccountDataPrivacySection — export', () => {
   it('downloads the user data on Download JSON', async () => {
     render(<AccountDataPrivacySection auth={AUTH} settlementCount={2} campaignCount={1} />);
@@ -131,15 +134,5 @@ describe('AccountDataPrivacySection — bulk content deletion', () => {
 });
 
 describe('AccountDataPrivacySection — visibility prefs', () => {
-  it('persists the gallery-public default through setProductPref', () => {
-    render(<AccountDataPrivacySection auth={AUTH} settlementCount={2} campaignCount={1} />);
-    fireEvent.click(screen.getByLabelText('Make new gallery shares public'));
-    expect(setProductPref).toHaveBeenCalledWith('galleryPublicDefault', true);
-  });
 
-  it('persists the default share scope through setProductPref', () => {
-    render(<AccountDataPrivacySection auth={AUTH} settlementCount={2} campaignCount={1} />);
-    fireEvent.change(screen.getByLabelText(/Default share scope/i), { target: { value: 'public' } });
-    expect(setProductPref).toHaveBeenCalledWith('shareDefault', 'public');
-  });
 });

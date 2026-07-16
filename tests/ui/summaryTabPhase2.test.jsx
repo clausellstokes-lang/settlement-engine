@@ -30,6 +30,9 @@ beforeAll(() => {
   );
 });
 
+// LINEAGE NOTE (master merge W6): the assigned-deity War&Faith render test was
+// removed — this lineage's WarFaithTab deliberately carries NO deity data (the
+// fenced ungated-pantheon surface, plan fence-2).
 describe('SummaryTabV2 + War & Faith (dossier keystone) — self-gating', () => {
   test('the one Summary renders for a generated town', () => {
     const { container } = render(<SummaryTabV2 settlement={town} />);
@@ -46,12 +49,4 @@ describe('SummaryTabV2 + War & Faith (dossier keystone) — self-gating', () => 
     expect(queryByTestId('war-faith-section')).toBeNull();
   });
 
-  test('an assigned-deity settlement DOES render the War & Faith section', () => {
-    const deityTown = {
-      ...town,
-      config: { ...town.config, primaryDeitySnapshot: { name: 'Sol', rankAxis: 'major', alignmentAxis: 'good' } },
-    };
-    const { getByTestId } = render(<WarFaithTab settlement={deityTown} saveId={null} />);
-    expect(getByTestId('war-faith-section').textContent).toMatch(/Sol|Patron faith/);
-  });
 });

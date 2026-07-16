@@ -22,6 +22,7 @@ import { previewCascade } from '../../domain/pendingEdits.js';
 import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+import { X } from 'lucide-react';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
 const VIOLET = swatch['#7B4FCF'];
@@ -136,7 +137,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
             Cascade preview
           </h2>
           <IconButton
-            glyph={'✕'}
+            Icon={X}
             label="Close"
             onClick={onClose}
             tone="ghost"

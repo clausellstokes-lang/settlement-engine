@@ -143,17 +143,11 @@ describe('AccountProfileSection avatar URL (finding #2)', () => {
     expect(tile.getAttribute('style') || '').not.toMatch(/url\(/);
   });
 
-  test('shows a tier chip with the tier display name for a free user', () => {
-    render(<AccountProfileSection {...baseProps} auth={{ ...baseProps.auth, tier: 'free' }} />);
-    // The 'free' tier resolves to its display name; the raw key never appears.
-    expect(screen.getByText('Wanderer')).toBeTruthy();
-    expect(screen.queryByText(/free/i)).toBeNull();
-  });
-
-  test('omits the tier chip when no tier is present', () => {
-    render(<AccountProfileSection {...baseProps} />);
-    expect(screen.queryByText('Wanderer')).toBeNull();
-  });
+  // LINEAGE NOTE (master merge W6): master's tier chip ("Wanderer" display-name
+  // badge) belongs to its "north star" AccountProfileSection redesign, which
+  // this lineage resolved to the pre-redesign version — the chip does not exist
+  // here. The two chip tests were dropped with the fence reason; the avatar
+  // URL-safety tests above are the shared substance and stay.
 });
 
 describe('ImageCropper error surfacing (finding #5)', () => {

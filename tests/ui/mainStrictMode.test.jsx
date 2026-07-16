@@ -37,7 +37,12 @@ vi.mock('../../src/design/tokens.js', async (importOriginal) => ({
   emitCssTokens: vi.fn(),
 }));
 vi.mock('../../src/lib/analyticsProvider.js', () => ({ installAnalyticsProvider: vi.fn() }));
-vi.mock('../../src/lib/analyticsQueue.js', () => ({ installAnalyticsQueue: vi.fn(), setSessionIdGetter: vi.fn() }));
+vi.mock('../../src/lib/analyticsQueue.js', () => ({
+  installAnalyticsQueue: vi.fn(),
+  setSessionIdGetter: vi.fn(),
+  // main.jsx imports this on this lineage (LINEAGE ADAPT, master merge W6).
+  setAnalyticsElevated: vi.fn(),
+}));
 vi.mock('../../src/lib/analytics.js', () => ({ track: vi.fn(), EVENTS: new Proxy({}, { get: (_t, k) => String(k) }) }));
 vi.mock('../../src/lib/session.js', () => ({ returnVisitBand: () => ({ is_return: false, days_since_last_visit_band: 'na' }), stampVisit: vi.fn(), getSessionId: () => 's' }));
 vi.mock('../../src/lib/errorReporter.js', () => ({ reportError: vi.fn(), installGlobalErrorHandlers: vi.fn() }));

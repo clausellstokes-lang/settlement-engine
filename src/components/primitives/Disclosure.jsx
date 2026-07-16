@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { BORDER, CARD, CARD_HDR, FS, INK, MUTED, R, SECOND, SP, sans } from '../theme.js';
 import Badge from './Badge.jsx';
@@ -14,6 +14,9 @@ export default function Disclosure({
   onFirstOpen,
   style,
 }) {
+  // a11y: the trigger names its panel (ported master fix — aria-controls pairs
+  // with aria-expanded so AT users can jump to the disclosed region).
+  const panelId = useId();
   const [open, setOpen] = useState(defaultOpen);
   // Fire onFirstOpen once, the first time the section is revealed. Lets a
   // call site lazily teach a deep control (analytics step, coach) without a
@@ -40,6 +43,7 @@ export default function Disclosure({
         type="button"
         onClick={toggle}
         aria-expanded={open}
+        aria-controls={panelId}
         style={{
           width: '100%',
           display: 'flex',
@@ -78,7 +82,7 @@ export default function Disclosure({
         {actions && <span style={{ color: SECOND }}>{actions}</span>}
       </button>
       {open && (
-        <div style={{ padding: compact ? SP.md : SP.lg }}>
+        <div id={panelId} style={{ padding: compact ? SP.md : SP.lg }}>
           {children}
         </div>
       )}

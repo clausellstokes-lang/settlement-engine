@@ -12,7 +12,8 @@ import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTie
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
 
-const TERRAIN_WEIGHTS = [
+// Exported for the gallery facet-alignment contract (terrain facet vocabulary).
+export const TERRAIN_WEIGHTS = [
   ['plains', 22], ['hills', 18], ['forest', 13],
   ['riverside', 16], ['coastal', 16], ['mountain', 9], ['desert', 6],
 ];
@@ -27,7 +28,9 @@ const TERRAIN_ROUTE_POOLS = {
   desert:    ['crossroads','road','road','isolated','road'],
 };
 
-const CULTURES = [
+// Exported for the gallery facet-alignment contract (culture facet vocabulary
+// must match the generator's own list).
+export const CULTURES = [
   'germanic','latin','celtic','arabic','norse','slavic',
   'east_asian','mesoamerican','south_asian','steppe','greek',
 ];

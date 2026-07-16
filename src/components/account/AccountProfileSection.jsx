@@ -37,6 +37,32 @@ function RoleBadge({ role }) {
   );
 }
 
+/**
+ * Build a CSS background-image declaration for an avatar URL, but only for
+ * http(s) URLs we can trust — never javascript:/data:/other schemes — and with
+ * the value CSS-escaped so it cannot break out of the url() literal into
+ * arbitrary CSS (ported master fix). Returns null when the URL is empty or not
+ * a safe http(s) URL, so callers fall back to the initial-letter gradient.
+ * @param {string} url
+ * @returns {string | null}
+ */
+function avatarBackground(url) {
+  if (!url) return null;
+  let parsed;
+  try {
+    // Parse WITHOUT a base so only absolute URLs qualify — a bare string like
+    // `");background:red;//` won't be silently resolved to a same-origin URL.
+    parsed = new URL(url);
+  } catch {
+    return null;
+  }
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+  const escaped = typeof CSS !== 'undefined' && CSS.escape
+    ? CSS.escape(parsed.href)
+    : parsed.href.replace(/["\\]/g, '\\$&');
+  return `center / cover no-repeat url("${escaped}")`;
+}
+
 export default function AccountProfileSection({
   auth,
   avatarInput, setAvatarInput,
@@ -54,13 +80,12 @@ export default function AccountProfileSection({
         {/* Avatar */}
         <div style={{
           width: 56, height: 56, borderRadius: '50%', flexShrink: 0,
-          background: avatarInput
-            ? `center / cover no-repeat url("${avatarInput}")`
-            : `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
+          background: avatarBackground(avatarInput)
+            || `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           color: swatch.white, fontWeight: 700, fontSize: FS['22'], fontFamily: serif_,
         }}>
-          {!avatarInput && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
+          {!avatarBackground(avatarInput) && (auth.displayName || auth.user.email || '?')[0].toUpperCase()}
         </div>
 
         <div style={{ flex: 1 }}>

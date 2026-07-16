@@ -18,6 +18,13 @@ export const STATUS = {
   vulnerable:  { color: '#8a5010', bg: '#fdf8ec', border: '#e0c070', label: 'Vulnerable',  dot: '◐' },
   impaired:    { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Impaired',    dot: '○' },
   broken:      { color: '#8b1a1a', bg: '#fdf4f4', border: '#e8b0b0', label: 'Broken',      dot: '✕' },
+  // Ported master fix: computeActiveChains emits 'entrepot' (a healthy re-export
+  // hub); without its own chip it fell through to Vulnerable.
+  entrepot:            { color: '#a0762a', bg: '#faf6ec', border: '#d8c090', label: 'Entrepôt',            dot: '●' },
+  // Ported master fix: EconomicsTab emits this status; without its own chip it
+  // fell through to Vulnerable. Info-blue to match the magic tag (vetoable
+  // cosmetic: master chose blue over the old purple).
+  magically_sustained: { color: swatch.info, bg: swatch.infoBg, border: '#a0b0d8', label: 'Magically Sustained', dot: '✦' },
 };
 export const getStatus = s => STATUS[s] || STATUS.vulnerable;
 
