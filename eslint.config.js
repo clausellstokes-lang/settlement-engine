@@ -504,8 +504,8 @@ export default [
   // follow-up: warDeployment.evaluateWarLayer (~930-line function) decomposes
   // along its own step comments — behaviour-preserving, goldens byte-identical
   // (deferred; not part of this ratchet). A NEW domain file that grows past 800
-  // EFFECTIVE lines (skipBlankLines + skipComments) fails the gate. Files ALREADY
-  // over 800 are frozen at their current size by scripts/.size-baseline.json (the
+  // EFFECTIVE lines (skipBlankLines + skipComments) is rejected by max-lines. Files
+  // ALREADY over 800 are frozen at their current size by scripts/.size-baseline.json (the
   // generated per-file overrides at the bottom of this file) — NOT `off`. That is
   // the code-quality-architecture-1 fix: `off` let pulseKernel grow +28% unbounded
   // and never locked the stressors.js win (now 477 eff, under 800 — removed).
