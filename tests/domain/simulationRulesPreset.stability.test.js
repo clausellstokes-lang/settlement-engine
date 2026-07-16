@@ -161,6 +161,61 @@ describe('simulation rules preset — stability under future-flag churn', () => 
     expect(normalizeSimulationRules(keyless).presetId).toBe('full_simulation');
   });
 
+  // W-R2-LIGHT — the nine post-close engine-wave gates light TOGETHER in the
+  // three world-alive presets (owner ruling 2026-07-16). Unlike the eight war
+  // sub-flags (which graduated INTO RULE_COMPARISON_KEYS), these are VIRTUAL —
+  // ABSENT from DEFAULT_SIMULATION_RULES, so they are invisible to preset matching
+  // (the disastersEnabled precedent): a legacy save missing them still infers its
+  // preset, and every dark-config golden stays byte-identical. The list is spelled
+  // out here independently (anti-drift: renaming a flag in the source WAVES object
+  // must fail HERE, not silently test a ghost key).
+  const ENGINE_WAVE_FLAGS = [
+    'momentumEnabled',
+    'navalEnabled',
+    'interventionEnabled',
+    'settlementLifecycleEnabled',
+    'peaceEngineEnabled',
+    'supplyWebWarfareEnabled',
+    'upswingArcsEnabled',
+    'resourceDynamicsEnabled',
+    'constructiveFlowsEnabled',
+  ];
+  const WORLD_ALIVE_PRESET_IDS = ['dramatic_campaign', 'living_realm', 'full_simulation'];
+  const WAVE_DARK_PRESET_IDS = ['quiet_local', 'realistic_regional', 'static_campaign', 'narrative_campaign'];
+
+  test('the nine engine-wave flags are VIRTUAL (absent from the default surface + comparison keys)', () => {
+    // Anti-vacuity: exactly nine, no dupes.
+    expect(new Set(ENGINE_WAVE_FLAGS).size).toBe(9);
+    for (const flag of ENGINE_WAVE_FLAGS) {
+      // Virtual: not a default key (so it never persists on an untouched campaign)…
+      expect(DEFAULT_SIMULATION_RULES, `${flag} must stay absent from DEFAULT_SIMULATION_RULES`).not.toHaveProperty(flag);
+      // …and therefore not a comparison key (invisible to preset identity matching).
+      expect(RULE_COMPARISON_KEYS, `${flag} must NOT be a comparison key (would collapse legacy saves)`).not.toContain(flag);
+    }
+  });
+
+  test('the three world-alive presets light ALL NINE waves; the other four keep them dark', () => {
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      for (const flag of ENGINE_WAVE_FLAGS) {
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must be lit`).toBe(true);
+      }
+    }
+    for (const id of WAVE_DARK_PRESET_IDS) {
+      for (const flag of ENGINE_WAVE_FLAGS) {
+        // Absent (undefined) — the wave sleeps; the gate reads `=== true`.
+        expect(SIMULATION_RULE_PRESETS[id].rules[flag], `${id}.${flag} must stay dark`).not.toBe(true);
+      }
+    }
+    // Identity is UNTOUCHED by the new virtual keys: every lit preset (and a keyless
+    // copy of its rules) still round-trips to itself — this is the byte-stability
+    // property (legacy saves missing the waves keep their preset id).
+    for (const id of WORLD_ALIVE_PRESET_IDS) {
+      const keyless = { ...SIMULATION_RULE_PRESETS[id].rules };
+      delete keyless.presetId;
+      expect(normalizeSimulationRules(keyless).presetId, `${id} keyless re-infers itself`).toBe(id);
+    }
+  });
+
   // #5 — custom detection still fires (proves matching is not always-true).
   test('flipping one comparison key away from every preset yields custom', () => {
     const base = SIMULATION_RULE_PRESETS.dramatic_campaign.rules;

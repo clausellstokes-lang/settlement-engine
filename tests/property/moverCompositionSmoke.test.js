@@ -173,6 +173,21 @@ const projectionHash = ({ campaign, saves }) => {
 };
 
 describe('mover-composition smoke — the everything-on path stays alive, bounded, deterministic', () => {
+  // W-R2-LIGHT coverage assertion: the smoke drives FULL_SIM_RULES verbatim, so the
+  // "most feature-dense preset has ZERO executed ticks" hole this test closes now
+  // covers the NINE engine-wave gates automatically — but only if the preset actually
+  // carries them. Pin it: if a future edit drops a wave flag from full_simulation,
+  // this smoke would silently stop exercising that layer, so fail LOUD here instead.
+  it('the driven full_simulation preset lights all nine engine-wave gates (coverage is real)', () => {
+    for (const flag of [
+      'momentumEnabled', 'navalEnabled', 'interventionEnabled', 'settlementLifecycleEnabled',
+      'peaceEngineEnabled', 'supplyWebWarfareEnabled', 'upswingArcsEnabled',
+      'resourceDynamicsEnabled', 'constructiveFlowsEnabled',
+    ]) {
+      expect(FULL_SIM_RULES[flag], `full_simulation must light ${flag} for this smoke to cover it`).toBe(true);
+    }
+  });
+
   it(`survives ${TICKS} full_simulation ticks without throwing, and stays BOUNDED`, () => {
     const run = drive('fs-smoke-a'); // a throw in drive() fails the test (ALIVE)
 

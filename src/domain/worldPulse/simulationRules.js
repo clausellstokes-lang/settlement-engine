@@ -189,6 +189,33 @@ const OPEN = Object.freeze({
   migrationMode: 'distributed',
 });
 
+// ── THE NINE ENGINE-WAVE GATES (W-R2-LIGHT owner ruling, 2026-07-16) ──────────
+// The post-close anti-stasis stack's virtual gate flags, lit TOGETHER in the
+// three world-alive presets (dramatic_campaign / living_realm / full_simulation).
+// Like disastersEnabled / commodityFlowEnabled, these keys are ABSENT from
+// DEFAULT_SIMULATION_RULES — VIRTUAL, so they ride the ...overrides spread and add
+// NO persisted bytes to an existing campaign (normalize({}) carries none; the
+// engine gates read `=== true`, absent ⇒ dormant no-op ⇒ every dark-config golden
+// byte-identical). They are NOT RULE_COMPARISON_KEYS (not in DEFAULT), so preset
+// IDENTITY is unaffected: a legacy save missing them still infers its preset (the
+// disastersEnabled precedent). intervention/peaceEngine/supplyWebWarfare are
+// additionally AND-gated with warLayerEnabled (lit in all three); naval also needs
+// a spatially-canonized realm at runtime. Shared object (the QUIET/OPEN dedupe
+// idiom) so "the nine" have one source of truth. Byte-budget: the preset catalog
+// rides the eager store slice (normalizeSimulationRules → presetIdForRules), so
+// this adds a measured +252 B to the first-paint closure — well inside its margin.
+const WAVES = Object.freeze({
+  momentumEnabled: true,
+  navalEnabled: true,
+  interventionEnabled: true,
+  settlementLifecycleEnabled: true,
+  peaceEngineEnabled: true,
+  supplyWebWarfareEnabled: true,
+  upswingArcsEnabled: true,
+  resourceDynamicsEnabled: true,
+  constructiveFlowsEnabled: true,
+});
+
 // KEY ORDER IS LOAD-BEARING: presetIdForRules INFERS by first structural match,
 // so the LEGACY trio (quiet_local / realistic_regional / dramatic_campaign —
 // resolvable forever: old saves carry their ids, the realm toolbar chips apply
@@ -232,6 +259,9 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     religionDynamicsEnabled: true,
     seasonsEnabled: true,
     disastersEnabled: true,
+    // W-R2-LIGHT: the nine engine-wave gates — dramatic_campaign is a world-alive
+    // preset, so it runs the full anti-stasis stack (virtual flags; see WAVES).
+    ...WAVES,
   }),
   static_campaign: preset('static_campaign', 'Static Campaign', {
     propagationMode: 'off',
@@ -261,6 +291,13 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     // the realm canonizes a spatial digest (the engine gate); NOT a comparison
     // key, so pre-3.5 saves carrying this preset keep their identity.
     infoMode: 'perfect_delayed',
+    // W-R2-LIGHT: a "living realm" without the living-engine waves would lie — its
+    // distinction from full_simulation is APPROVAL POSTURE (routine autonomy), not
+    // engine depth, so it runs the same nine engine-wave gates (owner ruling).
+    // warLayerEnabled stays inherited-false, so the three warLayer-AND-gated waves
+    // (intervention/peaceEngine/supplyWebWarfare) sleep here until war is lit —
+    // living_realm's world moves, but does not start wars on its own.
+    ...WAVES,
   }),
   full_simulation: preset('full_simulation', 'Full Simulation', {
     ...OPEN,
@@ -299,6 +336,11 @@ export const SIMULATION_RULE_PRESETS = Object.freeze({
     worldProgression: 'autonomous',
     commodityFlowEnabled: true,
     allyIntelSharingEnabled: true,
+    // W-R2-LIGHT: the ceiling is everything-on by name — it runs the full nine-wave
+    // anti-stasis stack (warLayer is lit above, so intervention/peaceEngine/
+    // supplyWebWarfare fire here; the composition smoke + whole-world soak drive
+    // this preset verbatim, so they now cover the full stack automatically).
+    ...WAVES,
   }),
 });
 
