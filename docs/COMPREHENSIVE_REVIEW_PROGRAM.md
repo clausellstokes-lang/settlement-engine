@@ -972,6 +972,18 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ THE FOLD-IN IS COMMITTED @ 22bec368 (2026-07-16 ~16:20) — THE DUAL-LINEAGE ERA IS OVER.**
+One tree: master's two years + the spatial engine + 15 waves + the full round-2 fix program.
+Conflicts: 11 total, all reconciled (layerBoundaries = RF's SCC machinery + W6's ratchet-down,
+test-arbitrated 3/3; wizardNextSteps = RF's version, component exists; 6 both-sides-fixed
+components → RF fix-wave versions; the doc trio = THE UNION — RF base + W6's ungated-edge
+hazard set + the extended 057–136 MUST-APPLY security block — ALL 16 doc pin files 93/93
+green; settlementSlice ceiling → 1345 fold-in-union truth, reconciliation #4).
+**PREDICTION RESULTS: goldens BYTE-IDENTICAL 147/147 ✓ (the engine survived the fold-in).
+Budget MOSTLY cured: +4,723-over-old-budget → +3,472 over RATCHET #10's far tighter 1,066,400**
+(provenance: master's adopted entity-link + focus features RF's budget never funded) →
+**FP-G9 dispatched** (target ≥3,600 B; candidates: the canon-via-aiSlice split the trim census
+named, the entity-link chunk, a fresh merged-tree over-inclusion census). W7 runs after G9.
 **✅ W6 COMPLETE (2026-07-16 ~15:55, closing confirmation @ 830e2b23):** final suite
 5 failed / 11,367 passed — the red set EXACTLY the enumerated five (budget fold-in-cured ·
 EXEMPT_CEILING owner · 2× edge-bundle W7 · the documented flake 5/5 isolated). 220→5. One
