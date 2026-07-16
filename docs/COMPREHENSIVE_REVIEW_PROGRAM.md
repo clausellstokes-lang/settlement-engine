@@ -972,6 +972,11 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ W6 COMPLETE (2026-07-16 ~15:55, closing confirmation @ 830e2b23):** final suite
+5 failed / 11,367 passed — the red set EXACTLY the enumerated five (budget fold-in-cured ·
+EXEMPT_CEILING owner · 2× edge-bundle W7 · the documented flake 5/5 isolated). 220→5. One
+golden-shifting port (narrativeArrival tail-pick) correctly reverted to the signed-regen
+cluster rather than forced. Agent stood down; worktree is the manager's. THE FOLD-IN EXECUTES.
 **THE FINAL W6 LEDGER (2026-07-16 ~15:30, agent-delivered, ratified):** 220 failed files /
 485 failed tests at W6 open → **11 files / 21 tests**, classified: 2 owner-gated (budget
 fold-in-cured + EXEMPT_CEILING), 2 W7-scoped (edge-bundle freshness — the build-edge-shared
