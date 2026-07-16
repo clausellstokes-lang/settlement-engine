@@ -78,3 +78,50 @@ describe('ARCHITECTURE.md facts derive from the filesystem (F33)', () => {
     expect(Number(claim[2])).toBeLessThan(files * 1.25);
   });
 });
+
+describe('ARCHITECTURE.md carries the spatial engine + the real gate (docs-knowledge-2)', () => {
+  // The doc is the second-contributor map for a bus-factor-one repo; for 15 waves
+  // it omitted the entire Phase-5.5 spatial engine and described a 5-step gate
+  // while package.json ran 10. These pins derive both from the filesystem so the
+  // onboarding map can only be wrong loudly.
+
+  const { readdirSync, statSync } = require('node:fs');
+  const walkJs = (d, out = []) => {
+    for (const e of readdirSync(d)) {
+      const p = resolve(d, e);
+      if (statSync(p).isDirectory()) walkJs(p, out);
+      else if (/\.js$/.test(e)) out.push(p);
+    }
+    return out;
+  };
+
+  it('mentions the spatial-canon engine at its real path', () => {
+    // src/domain/spatial/ is a live engine (imported across the tree); the doc
+    // must name it or a new contributor cannot find the realm-map engine.
+    const dir = resolve(here, '../../src/domain/spatial');
+    expect(readdirSync(dir).length, 'src/domain/spatial should exist').toBeGreaterThan(0);
+    expect(archMd, 'ARCHITECTURE.md must mention src/domain/spatial').toMatch(/src\/domain\/spatial/);
+  });
+
+  it('states the worldPulse module count within drift tolerance', () => {
+    const n = walkJs(resolve(here, '../../src/domain/worldPulse')).length;
+    const claim = archMd.match(/`worldPulse\/`[^~]*~(\d+)\s*modules/);
+    expect(claim, 'ARCHITECTURE.md should state the worldPulse module count').toBeTruthy();
+    // The drift that shipped was "~74" vs 126 (0.59×). A 20% band catches that
+    // while tolerating a handful of new modules.
+    expect(Number(claim[1])).toBeGreaterThan(n * 0.8);
+    expect(Number(claim[1])).toBeLessThan(n * 1.2);
+  });
+
+  it("names every sub-step of package.json's check chain in 'The gate'", () => {
+    const pkg = JSON.parse(read('../../package.json'));
+    // The check script is a `&&`-joined list of `npm run <sub-step>` calls.
+    const subSteps = [...pkg.scripts.check.matchAll(/npm run ([\w:-]+)/g)].map((m) => m[1]);
+    expect(subSteps.length, 'check chain should have sub-steps').toBeGreaterThan(4);
+    const missing = subSteps.filter((s) => !archMd.includes(s));
+    expect(
+      missing,
+      `ARCHITECTURE.md 'The gate' omits check sub-step(s): ${missing.join(', ')}`,
+    ).toEqual([]);
+  });
+});

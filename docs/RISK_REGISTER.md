@@ -1,11 +1,19 @@
 # SettlementForge — Risk Register
 
-> **Living document. Last reviewed: 2026-06-16** (branch `analytics-intelligence-layer`).
+> **Historical risk register — last reviewed 2026-06-16** (branch
+> `analytics-intelligence-layer`). It predates the spatial engine, the multi-wave engine
+> stack, and the comprehensive review program, and is kept for its distributed-state /
+> seam analysis (still substantially accurate) — NOT as the current risk surface.
+>
+> **For the CURRENT live risks** (master-merge lineage collision, prod migration lag,
+> un-soaked deploy) see the execution playbook
+> [`docs/PHASE55_EXECUTION_PLAYBOOK.md`](./PHASE55_EXECUTION_PLAYBOOK.md) §0.0.2 and the
+> newest review doc [`docs/COMPREHENSIVE_REVIEW_2026-07-15.md`](./COMPREHENSIVE_REVIEW_2026-07-15.md).
 >
 > **Supersedes [`REVIEW_FINDINGS.md`](./REVIEW_FINDINGS.md)** — that file is a point-in-time
-> snapshot (2026-06-13) of a 133-finding multi-agent review. Most of its high-severity items
+> snapshot (2026-06-13) of a 133-finding multi-agent review; most of its high-severity items
 > have since been remediated (see [§4](#4-historical-findings-the-133-finding-snapshot)); it is
-> retained only as a historical record. **This file is the source of truth going forward.**
+> retained only as a historical record.
 
 ## How to use this
 

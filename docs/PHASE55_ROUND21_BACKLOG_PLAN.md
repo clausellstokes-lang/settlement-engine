@@ -1,6 +1,15 @@
 # THE ROUND-21+ BACKLOG PROGRAM — PLAN
 
 > **Progress** (append after every wave — this blockquote alone must reconstruct program state)
+> - 2026-07-16 (round-2 review, docs-knowledge-6): **W2 FEED-RETENTION POSTURE — post-ratchet-#9
+>   reality; the "it will fit" instruction in §1 below is OBSOLETE.** W2 is +363 B eager and the
+>   live first-paint margin under RATCHET #9 (`CLOSURE_BUDGET_BYTES` in
+>   `tests/build/vendorPdfLazy.test.js`, currently 1,121,903) is ~85 B — W2 does **NOT** fit.
+>   It is PRESERVED on branch `claude/round21-w2-feed-retention @ 2f4f7b58` (verified NOT an
+>   ancestor of the review-fixes tip) and re-applies **only inside its own FP-G reclaim window
+>   under the ratchet law — never a bare cherry-pick**. Sequencing is owned by
+>   `docs/COMPREHENSIVE_REVIEW_PROGRAM.md`; W2's live status was previously recorded only in
+>   Claude memory (round21-backlog-program) — this line is the in-repo record.
 > - 2026-07-13 (review program, ledger repair): **M11b CALAMITY LANDED @ 62c81a0c — the M1–M11
 >   ladder is COMPLETE**; every "M11b unbuilt/WIP/blocked" line below is historical. Ruins-as-
 >   artifacts is UNBLOCKED. ⚠️ HEADROOM CROSS-REF: current margin is 1,099B (post-M11b); W2 (+363B)
@@ -39,12 +48,15 @@ is dispatch-ready for a successor (or a later session), grouped by what unblocks
 
 ### 1. ⚠️ THE ONE OWNER DECISION — the budget fork (unblocks the eager third of the backlog)
 Feed-retention (and the other eager waves) need first-paint headroom. Two paths:
-- **(a) enact the parked +1,000 raise** (CLOSURE_BUDGET_BYTES 1,255,985 → ~1,256,985, the W5 precedent):
-  then LAND Wave 2 — cherry-pick `2f4f7b58` onto the review-fixes tip, bump the ratchet + its
-  documented-reason comment in `tests/build/vendorPdfLazy.test.js`, run the FULL gate (`npm run check`),
-  confirm verify:dist green, commit. Unblocks warding + map-as-legibility too.
-- **(b) FP-2-first (owner's standing ruling):** wait for the parallel FP-2 (`claude/phase55-parking-lot`)
-  to reclaim headroom, THEN land Wave 2 (cherry-pick `2f4f7b58`, it will fit; re-run the full gate).
+- **(a) enact an owner-authorized budget raise** (raise `CLOSURE_BUDGET_BYTES` in
+  `tests/build/vendorPdfLazy.test.js` — read its current value there, do not trust a number here;
+  the W5 precedent): then LAND Wave 2 — cherry-pick `2f4f7b58` onto the review-fixes tip, bump the
+  ratchet + its documented-reason comment, run the FULL gate (`npm run check`), confirm verify:dist
+  green, commit. Unblocks warding + map-as-legibility too.
+- **(b) FP-G reclaim-first (owner's standing ruling):** reclaim first-paint headroom (an FP-G
+  microtrim window) FIRST, THEN cherry-pick `2f4f7b58` — see the 2026-07-16 Progress note above:
+  under RATCHET #9 the margin is ~85 B and W2 is +363 B, so it does **NOT** fit today. Never a bare
+  cherry-pick; re-run the full gate after the reclaim.
 - Recommendation: **(b)** — feed-retention only matters at scale (>240-entry feeds), which are the
   long-run campaigns FP-2 targets. No blocker to the budget-free waves either way.
 
@@ -104,7 +116,8 @@ Gates (deep-work §4 tiers, this repo's concrete commands):
   + typecheck + typecheck:domain:strict + lint + test + build + verify:dist)
 - constitutional spot-checks per §0.2/§0.3: three golden masters byte-identical (generator /
   worldpulse / pdf), any-cast === 2252 EXACT, `npm run verify:dist` (dist contracts), the first-paint
-  closure-budget test (`tests/build/vendorPdfLazy.test.js`, CLOSURE_BUDGET_BYTES 1,255,985).
+  closure-budget test (`tests/build/vendorPdfLazy.test.js`, `CLOSURE_BUDGET_BYTES` — read the live
+  const there; it has ratcheted down since this plan was written).
 
 Every wave = an independent increment: architect the spec → dispatch an Opus implementer (fenced,
 `model:'opus'`, leaves work UNSTAGED) → run the §0.3 manager checklist + adversarial-verify on
@@ -116,7 +129,8 @@ a plan-note commit. **Push/deploy/master-merge are NEVER part of the loop** (own
 - **Budget: lazy/budget-free only.** No eager first-paint bytes without a NEW owner ratification.
   Items that need eager bytes (numeric prices, map-as-legibility, M10b) are PARKED, not built.
 - **Constitution (§0.2):** same-seed byte-identity (goldens never change silently); dormancy
-  (feature absent/off ⇒ byte-identical); first-paint ratchet (verify:dist green at 1,255,985);
+  (feature absent/off ⇒ byte-identical); first-paint ratchet (verify:dist green under the live
+  `CLOSURE_BUDGET_BYTES` const — down-only, never raised without the owner);
   any-cast EXACTLY 2252; pure engine functions (no Date.now/Math.random — seeded forks + FNV only);
   codepoint-sorted mutation.
 - **Product scope (owner, binding):** world-only (never party-facing — DM territory); sub-century
