@@ -57,6 +57,26 @@ export function Overview({ settlement, narrativeMode, vm }) {
         </Callout>
       )}
 
+      {/* ── Situation prose: arrival scene + pressure sentence (AI mode) ──
+          pdf-export-3: the overview slice carried these two most-atmospheric
+          passages but NO chapter rendered them — the docblock above promised
+          them, the paid AI export dropped them. Mirrors OverviewTab. Raw/
+          non-AI mode ⇒ both null ⇒ renders nothing ⇒ byte-identical. */}
+      {(o.arrivalScene || o.pressureSentence) && (
+        <Callout tone="ai" kicker="SITUATION">
+          {o.arrivalScene && (
+            <Text style={{ ...type.italic, color: palette.ink, fontSize: pt['10.5'], marginBottom: o.pressureSentence ? 4 : 0 }}>
+              {proseToPlainText(o.arrivalScene)}
+            </Text>
+          )}
+          {o.pressureSentence && (
+            <Text style={{ ...type.italic, color: palette.second, fontSize: pt['9.5'] }}>
+              {proseToPlainText(o.pressureSentence)}
+            </Text>
+          )}
+        </Callout>
+      )}
+
       {/* ── Identity strip ───────────────────────────────────────── */}
       <StatStrip
         stats={[

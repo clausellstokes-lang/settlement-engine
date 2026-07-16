@@ -16,7 +16,7 @@
  * settlement would print an empty timeline chapter, which is useless.
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FS, swatch } from '../theme.js';
 import { FileText, X, BookMarked, Clock, Edit3, Swords } from 'lucide-react';
 import { useStore } from '../../store/index.js';
@@ -67,13 +67,30 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
   const [format, setFormat] = useState('pdf');
   const effectiveFormat = hasFoundry ? format : 'pdf';
 
+  // pdf-export-2: the sheet is ALWAYS-MOUNTED (SettlementDetail keeps it in the
+  // tree). A canon-only variant picked in canon then uncanonized to draft would
+  // otherwise stay `picked` and export a GUTTED document (the exact hole pdf-5's
+  // disable fix targeted). A fresh open re-syncs useAi to the current AI overlay
+  // too (was frozen at first mount).
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (open) setUseAi(hasAi);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   if (!open) return null;
+
+  const isDisabledVariant = (id) => CANON_ONLY_VARIANTS.has(id) && phase !== 'canon';
+  // effectivePicked mirrors effectiveFormat: a picked-then-stranded canon-only
+  // variant falls back to the suggested variant for THIS phase, so the CTA never
+  // exports a gutted PDF regardless of the mounted-state pick.
+  const effectivePicked = isDisabledVariant(picked) ? suggested : picked;
 
   const variants = Object.entries(PDF_VARIANTS).map(([id, spec]) => ({
     id, ...spec,
     Icon: VARIANT_ICON[id] || FileText,
-    disabled: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon',
-    disabledReason: CANON_ONLY_VARIANTS.has(id) && phase !== 'canon'
+    disabled: isDisabledVariant(id),
+    disabledReason: isDisabledVariant(id)
       ? 'Available once the settlement is canonized.'
       : null,
   }));
@@ -166,13 +183,13 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
           <Button
             variant="primary"
             size="sm"
-            onClick={() => (effectiveFormat === 'foundry' ? onExportFoundry(picked, useAi) : onExport(picked, useAi))}
+            onClick={() => (effectiveFormat === 'foundry' ? onExportFoundry(effectivePicked, useAi) : onExport(effectivePicked, useAi))}
             disabled={exporting}
             busy={exporting}
           >
             {exporting
               ? (effectiveFormat === 'foundry' ? 'Building Module…' : 'Building PDF…')
-              : <>Export {effectiveFormat === 'foundry' ? `${PDF_VARIANTS[picked].label} Module` : PDF_VARIANTS[picked].label}</>}
+              : <>Export {effectiveFormat === 'foundry' ? `${PDF_VARIANTS[effectivePicked].label} Module` : PDF_VARIANTS[effectivePicked].label}</>}
           </Button>
         </footer>
       </div>

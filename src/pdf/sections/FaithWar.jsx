@@ -86,6 +86,8 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
   const beliefs = Array.isArray(lw.beliefs) ? lw.beliefs : [];
   const flowDrift = lw.flowDrift || null;
   const pestilence = lw.pestilence || null;
+  // ambition-fit-3: the realm's treaties (the war-room table).
+  const treaties = Array.isArray(lw.treaties) ? lw.treaties : [];
   const postureTone = POSTURE_TONE[posture.label] || 'muted';
 
   const headline = lw.atWar
@@ -199,11 +201,13 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
         <View style={{ marginBottom: space.sm }}>
           {tradeWars.map(prize => (
             <Line key={prize.prizeId} label="Trade war." tone="warn">
-              {prize.role === 'supplier'
-                ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
-                : prize.role === 'displaced'
-                  ? `Displaced as supplier of ${prize.commodityLabel} to ${prize.buyer}.`
-                  : `Contesting ${prize.commodityLabel} (${prize.buyer}).`}
+              {prize.role === 'market'
+                ? `Its ${prize.commodityLabel} market is a contested prize — ${prize.winner} now supplies it.`
+                : prize.role === 'supplier'
+                  ? `Now the primary supplier of ${prize.commodityLabel} to ${prize.buyer}.`
+                  : prize.role === 'displaced'
+                    ? `Displaced as supplier of ${prize.commodityLabel} to ${prize.buyer}.`
+                    : `Contesting ${prize.commodityLabel} for ${prize.buyer}'s market.`}
             </Line>
           ))}
         </View>
@@ -216,6 +220,31 @@ export function FaithWar({ settlement, narrativeMode, vm }) {
             {pestilence.presence} {pestilence.originFiction}
             {pestilence.care?.fiction ? ` ${pestilence.care.fiction}` : ''}
           </Line>
+        </View>
+      )}
+
+      {/* ── Treaties (ambition-fit-3: the war-room's crown page — the peace
+          engine's treaty table, the exact artifact the vision names) ──────── */}
+      {treaties.length > 0 && (
+        <View style={{ marginBottom: space.sm }}>
+          <HairRule />
+          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>TREATIES</Text>
+          {treaties.map(doc => (
+            <View key={doc.pairKey} style={{ marginBottom: 4 }} wrap={false}>
+              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>
+                {doc.title}
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}> · under {doc.victorName}&apos;s terms · {doc.complianceState}</Text>
+              </Text>
+              {doc.terms.map((term, i) => (
+                <Text key={i} style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
+                  {term.label}{Number.isFinite(term.yearsRemaining) ? ` (${term.yearsRemaining}y)` : ''} — {term.strainLine}
+                </Text>
+              ))}
+              {doc.frayingLine && (
+                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], fontStyle: 'italic' }}>{doc.frayingLine}</Text>
+              )}
+            </View>
+          ))}
         </View>
       )}
 

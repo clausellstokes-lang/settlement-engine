@@ -21,6 +21,8 @@ import { GOVERNING_SEAT_KEY } from '../../src/domain/worldPulse/beliefMap.js';
 const LIVE_LAYER_FIELDS = [
   // The reads this wave added (pdf-1) — the ones that were silently missing:
   'rumors', 'beliefs', 'flowDrift', 'pestilence',
+  // ambition-fit-3: the treaty table (the war-room's crown deliverable).
+  'treaties',
   // The war/faith reads already present — kept in the lane so they can't regress:
   'atWar', 'tradeWars', 'mobilization', 'army', 'tradePressure',
   'deity', 'pantheon', 'realmArcs', 'livePantheon',
@@ -55,6 +57,31 @@ describe('pdf-1 — PDF live-layer parity', () => {
     expect(vm.liveWorld).toBeTruthy();
     const missing = LIVE_LAYER_FIELDS.filter((k) => !(k in vm.liveWorld));
     expect(missing, `liveWorld is missing living-world reads: ${missing.join(', ')}`).toEqual([]);
+  });
+
+  test('ambition-fit-3: a standing treaty reaches the war-room slice (the treaty table)', () => {
+    const campaign = {
+      settlementId: 'iron',
+      worldState: {
+        tick: 20,
+        spatialLedgers: { treaties: { 'iron>weak': {
+          parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
+          mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 2, complianceState: 'strained',
+          terms: [
+            { type: 'tribute', family: 'economic', magnitude: 0.4, mintedTick: 12, expiresTick: 96, weightSpent: 1, complianceState: 'strained', trueState: 'strained', burden01: 0.5, receipt: 't' },
+          ],
+        } } },
+      },
+      nameById: { iron: 'Ironhold', weak: 'Weakmoor' },
+    };
+    const treatyVm = buildViewModel({ settlement: { ...liveSettlement(), name: 'Ironhold' }, campaign });
+    expect(Array.isArray(treatyVm.liveWorld.treaties)).toBe(true);
+    expect(treatyVm.liveWorld.treaties.length).toBeGreaterThan(0);
+    const doc = treatyVm.liveWorld.treaties[0];
+    expect(doc.title).toBe('The Peace of Weakmoor');
+    expect(doc.victorName).toBe('Ironhold');
+    expect(doc.terms.length).toBeGreaterThan(0);
+    expect(typeof doc.terms[0].label).toBe('string');
   });
 
   test('belief-divergence is wired (the DM projection reaches the premium chapter)', () => {
