@@ -103,6 +103,7 @@ export const OPERATIONS = Object.freeze({
   setSettlement: { opType:'setSettlement', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   clearSettlement: { opType:'clearSettlement', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   setSavedSettlements: { opType:'setSavedSettlements', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
+  setActiveSaveId: { opType:'setActiveSaveId', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   clearSavedSettlements: { opType:'clearSavedSettlements', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   removeSavedSettlement: { opType:'removeSavedSettlement', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   updateSavedSettlement: { opType:'updateSavedSettlement', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },

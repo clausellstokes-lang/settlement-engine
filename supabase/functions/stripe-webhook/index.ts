@@ -608,13 +608,29 @@ async function clawbackFounderForSession(
   if (!claimed || claimed.length === 0) return; // already reversed by a prior delivery.
 
   // is_founder is now false, so the founder-guarded downgrade path applies.
+  //
+  // POST-CLAIM FAILURE POSTURE (mirrors the referral-clawback note above,
+  // finding backend-functions-1): the is_founder flip IS the claim. A thrown
+  // error here would release the EVENT claim, but the redelivered refund/dispute
+  // finds is_founder already false and returns at the claim check (line 608) — so
+  // the downgrade / auth / credit steps would NEVER re-run, permanently stranding
+  // a refunded founder at tier=premium with the 30-credit bonus intact. Each step
+  // therefore LOGS, not throws, and runs independently of the others' success:
+  // the profiles row (is_founder=false while tier still premium) plus these
+  // structured logs are the operator's remediation surface, and every step is
+  // idempotent / hand-re-runnable (handle_premium_downgrade is founder-guarded off
+  // the now-false flag; service_adjust_credits is ledger-atomic + zero-clamped).
   const { error: downgradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: userId });
-  if (downgradeErr) throw new Error(`founder premium downgrade failed: ${downgradeErr.message}`);
+  if (downgradeErr) logError('stripe-webhook', userId, downgradeErr.message, { stage: 'founder_clawback_downgrade', key });
   const { error: authErr } = await supabase.auth.admin.updateUserById(userId, {
     user_metadata: { tier: 'free', is_founder: false },
   });
-  if (authErr) throw new Error(`founder auth downgrade failed: ${authErr.message}`);
-  await deductFounderCredits(supabase, userId, key);
+  if (authErr) logError('stripe-webhook', userId, authErr.message, { stage: 'founder_clawback_auth', key });
+  try {
+    await deductFounderCredits(supabase, userId, key);
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'founder_clawback_credits', key });
+  }
 }
 
 /**

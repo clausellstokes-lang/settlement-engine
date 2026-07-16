@@ -725,7 +725,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
                 mirrored from master's Save row (B4a). Self-gates by tier/config
                 (hidden for export-capable tiers), so it never competes with the
                 Save/Export primaries when they apply. */}
-            <BuyThisDossier settlement={settlement} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
+            <BuyThisDossier settlement={settlement} saveId={activeSaveId} onSignIn={onSignIn} onNavigate={onNavigate} size="lg" />
             <ExportDraftButton />
           </div>
 

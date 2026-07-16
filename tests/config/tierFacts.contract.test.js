@@ -84,6 +84,10 @@ describe('no raw tier-fact literal on the conversion surfaces', () => {
     'src/components/account/AccountSubscriptionSection.jsx',
     'src/components/pricing/FounderTile.jsx',
     'src/components/GenerateWizard.jsx',
+    // W-R2-TRUST (components-shell-commerce-3): the two post-purchase conversion
+    // surfaces a buyer reads seconds after paying $2.99.
+    'src/components/SingleDossierSuccessPage.jsx',
+    'src/components/generate/WizardNextSteps.jsx',
   ];
 
   // The exact stale claims that drifted (findings -1/-3/-4). These are specific
@@ -101,6 +105,13 @@ describe('no raw tier-fact literal on the conversion surfaces', () => {
     { re: /of 500\b/i,                 why: 'the Founder cap is 30 — render FOUNDER_SEAT_CAP' },
     { re: /first 500/i,                why: 'the Founder cap is 30 — render FOUNDER_SEAT_CAP' },
     { re: /500\s*-\s*seatsRemaining/,  why: 'the Founder cap is 30 — derive from FOUNDER_SEAT_CAP' },
+    // W-R2-TRUST (components-shell-commerce-3): the post-purchase upsell claimed a
+    // free account "unlocks full-screen edit" — but the SettlementDetail editor is
+    // gated to premium/founder/elevated (canEdit); free gets inline name edits only.
+    { re: /full-screen edit/i,         why: 'full-screen editing is a Cartographer capability — the free tier cannot; do not sell it as a free-account unlock' },
+    // The free save count as a spelled-out literal — render TIER_FACTS.free.saveLimit
+    // (FREE_SAVE_LIMIT) so it can never drift from the enforced cap.
+    { re: /\bthree dossiers\b/i,        why: 'free save cap is a derived fact — render FREE_SAVE_LIMIT, not the word "three"' },
   ];
 
   for (const rel of SURFACES) {
@@ -121,5 +132,8 @@ describe('no raw tier-fact literal on the conversion surfaces', () => {
     expect(read('src/components/HowToUse.jsx')).toMatch(/from ['"]\.\.\/config\/tierFacts\.js['"]/);
     // FounderTile sources the seat count from the founderSeats constant.
     expect(read('src/components/pricing/FounderTile.jsx')).toMatch(/FOUNDER_SEAT_CAP/);
+    // The post-purchase upsell now renders the free save cap from the module
+    // (W-R2-TRUST components-shell-commerce-3) rather than the literal "three".
+    expect(read('src/components/SingleDossierSuccessPage.jsx')).toMatch(/FREE_SAVE_LIMIT/);
   });
 });

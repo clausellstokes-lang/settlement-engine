@@ -1254,6 +1254,32 @@ export const createSettlementSlice = (set, get) => ({
       if (idx !== -1) Object.assign(state.savedSettlements[idx], partial);
     }),
 
+  /**
+   * Stamp the active save id for a freshly-persisted wizard save (finding
+   * components-shell-commerce-2). The Save-to-Library button and BuyThisDossier's
+   * "save it first" rung both call savesService.save() directly and never told
+   * the store the draft is now a saved row: activeSaveId stayed null, so
+   * requestExit kept warning "hasn't been saved yet" for ALL signed-in wizard
+   * savers, and the $2.99 durable-purchase rung stayed 'unsaved' so each
+   * save-first click re-ran the save (inserting a fresh row past the 3-save UI
+   * cap, which supabaseSave does not enforce). Binding the returned id here fixes
+   * all three: the exit dialog stops mis-warning, the rung advances to
+   * 'unpurchased', and the now-absent save-first button cannot be re-clicked.
+   *
+   * DELIBERATELY MINIMAL (byte constitution): this stamps ONLY activeSaveId — the
+   * load-bearing state for the fix — and does NOT upsert a full savedSettlements
+   * cache row. The full-row upsert the finding sketched would add ~500 B of eager
+   * store code (this slice ships in the first-paint `index` chunk) and blow the
+   * closure ratchet's ~80 B margin. The freshly-saved row still appears in the
+   * library on its next hydration (setSavedSettlements after savesService.list()),
+   * so the only thing deferred is an instant in-memory cache echo, not any
+   * correctness — see the in-caller notes in SaveToLibraryButton/BuyThisDossier.
+   *
+   * @param {string|number} saveId the id savesService.save() returned
+   */
+  setActiveSaveId: (saveId) =>
+    set(state => { if (saveId != null) state.activeSaveId = saveId; }),
+
   destroySavedSettlement: (id, reason = 'destroyed') => {
     const now = new Date().toISOString();
     // Annotated so tsc keeps the shape across the immer `set` closure assignment
