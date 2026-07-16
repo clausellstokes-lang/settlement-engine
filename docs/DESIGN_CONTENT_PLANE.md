@@ -149,6 +149,24 @@ asked for that the plane could not compile). Three consumers: the training corpu
 rate per rung = the compiler's real acceptance metric), and the roadmap radar (clustered
 refusals are the next knob/pack tier, demand-proven before it is designed).
 
+OWNER AMENDMENT (2026-07-16 evening: outlandish ideas — "both what was rejected by the
+system and what was built even with ontological differences… useful to me and other
+developers for games and worldbuilders… to understand effective user aggregate
+interests"): the event shape carries the dimensions the aggregate question needs — the
+RUNG used (entity / knob / pack), the §1b EXTENSION TIER exercised (composition /
+amendment-point / suppression / op-program), and for refusals a REASON CLASS
+(no-operation-type / taste-gate / pack-boundary / knob-bounds / validator) — so "what do
+worldbuilders actually want, and where does the system say no" is answerable from pure
+aggregates without reading anyone's content. A FOURTH consumer joins the three: **THE
+AGGREGATE INTEREST ATLAS** — k-anonymous, id-free theme/category/count aggregates
+suitable for publication beyond the product (developer/worldbuilder insights). GUARD
+(purpose limitation, non-negotiable): external sharing is a DISTINCT consent purpose,
+named in the consent language BEFORE collection begins — never retrofitted onto data
+collected for product improvement. Only theme/category/count aggregates ever leave;
+verbatim user creations are the user's IP and never do. k-floors per the A2 precedent
+(50/200). BYOK §3 (never logged) governs keys and raw provider traffic; consented seam
+events remain opt-in for BYOK users like everyone else.
+
 **COUPLING 2 — THE WORLD-HEALTH METRIC SUITE.** The SOAK_PLAN's 10 PASS criteria are
 refactored as a reusable EVALUATOR LIBRARY with two clients: (a) master batch certification —
 the soak as scheduled — and (b) per-account STREAMING health telemetry. A user's knob/pack
