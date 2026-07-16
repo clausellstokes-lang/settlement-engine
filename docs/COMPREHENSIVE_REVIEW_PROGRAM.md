@@ -958,6 +958,16 @@ call: ADOPT master's one-spend model (rewires requestDailyLife's 4 live call sit
 server contract) or KEEP RF's two-spend semantics (tests adapt/drop accordingly). The four
 NON-gated aiSlice fixes (cross-identity chronicle/rename/revert/hydrate bleeds + the
 setNestedPath proto-pollution guard) port regardless — ratified to W6.
+**W6 STRETCH 2 RATIFIED (2026-07-16, six commits c9231292..50f3298d):** tests/security FULLY
+GREEN 70 files / 774 tests — two REAL RF gaps fixed (gallery merge-patch/sanitize-on-write
+family; the money-path e2e stub replaced with master's LIVE journey, secrets-gated); avatar-XSS
+fixed; ai.js transport hardened (proto-guard, deadline, malformed-done fatal); backdrop URL
+guard live; docs rebuilt to merged reality + a broken pre-push hook found+fixed; honest
+rebaselines (rawButton DOWN 33→32; title= 471→502 all master-carried); aiSlice safe-ports
+landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self-ratifying
+(established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
+QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
+commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
 (d) **MEMBERSHIP ID NORMALIZATION (W6 misc verdict):** RF's campaignSettlements /
 getCampaignForSettlement do exact-match id compares — string/number-mismatched members are
 silently DROPPED from advances today; normalizing (master's String() model, matching RF's own
