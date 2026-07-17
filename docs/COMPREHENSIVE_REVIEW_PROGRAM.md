@@ -1098,6 +1098,13 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ RULING #8 SEQUENCING CONFIRMED BY THE OWNER (2026-07-17, "this should all sequence
+before the resurvey and soak"):** the doors + SM-5 build-out completes IN FULL before
+ROUND 3 and the soak — now an explicit owner statement, not a manager judgment. The
+binding chain: three running lanes fold → PUSH (RULING #7) → SM-5 ∥ door1 ∥ door3 (at the
+v2 fold) → door2 (at the SM-5 fold) → THE COMPOSITE (all folds in) → ROUND 3 resurveys
+THE WHOLE incl. every door → gap register → THE SOAK (engine certified WITH
+spatialConsequenceEnabled flags-on) → tuning → re-certs → ONE REGEN → THE VERY END.
 **⬛ OWNER RULING #8 (2026-07-17, "no include them before launch"): THE DOORS MOVE
 PRE-LAUNCH.** Supersedes the same-day post-launch placement. Corpus re-slotted @ w7-prep
 aca1a132 (doc renamed docs/DESIGN_MAP_DOORS.md). THE SHAPE: door 1 SPATIAL CONSEQUENCE =
