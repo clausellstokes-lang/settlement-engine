@@ -1098,6 +1098,32 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: AI TOKEN EFFICIENCY (2026-07-17, in-session): "where you believe it
+is possible without giving up quality, please optimize how AI is used to reasonably reduce
+any unnecessary spending of tokens. Because that could detract users from using it."**
+The architect's doctrine (Fable, this session — each lever vetoable): (1) RETRIEVAL SLICING
+BUDGETS — per-task slice budgets in the slicer registry; send only the slices the task
+class needs; compact canonical encodings of read-model slices over raw dumps; measure real
+prompt sizes per task and record them via the existing usage meter. (2) PROMPT-CACHE
+DISCIPLINE — static-first prompt assembly (system prompt, op-registry tool schema, design
+corpus, lens definitions FIRST; per-request slices LAST) so provider prompt caching prices
+the schema wall once, not per call. (3) ROUTING CLASSES ENFORCED — fast/balanced/deep per
+task type (§3 design) becomes enforced config, not convention: musings/suggested-questions
+fast-class; interpret balanced; construction compiles deep only where the comparator
+demands. (4) OPS-NOT-ESSAYS OUTPUT BOUNDING — structured op output with bounded max_tokens
+per task class; the compiler emits ops, never prose padding. (5) DELTA REVISE LOOPS —
+S5/S6 revise passes send DEVIATIONS ONLY, never full re-context. (6) ZERO-AI-WHERE-
+DETERMINISTIC — brief bundles/read-models stay pure code with AI prose only on top;
+suggested questions stay zero-cost (the Shell precedent). (7) PER-TASK TOKEN BUDGETS +
+ANOMALY FLAGS at the edge meter (a task blowing past its class budget is flagged to the
+operator; estimates stay labeled estimates). THE QUALITY BAR (non-negotiable): the
+grounding-parity + citation-law pins stay green — slicing may NEVER trim grounding below
+what the epistemic-fidelity law needs; acceptance metrics (§5) are the regression check.
+COMMERCIAL FRAME: task-priced credits mean efficiency = house margin on managed + visible
+cost relief for BYOK — the owner's adoption concern lands hardest on BYOK visible spend.
+EXECUTION: born-efficient directives RELAYED to the in-flight surveyor-s4-s6 lane (the
+map-exports mid-flight-relay precedent); the S1–S3 retrofit joins ROUND 3's fix stock as
+a named charge with an efficiency dimension in the survey.
 **⬛ OWNER RULING #7 (2026-07-17, in-session, verbatim: "after all of this lands, i first
 want you to push to github, then continue with the resurvey round 3 and onwards and so
 forth"): THE EARLY PUSH.** The push moves from THE VERY END to POST-FOLD / PRE-ROUND-3:
