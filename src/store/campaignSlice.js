@@ -511,7 +511,10 @@ export const createCampaignSlice = (set, get) => {
       for (const c of state.campaigns) {
         if (!isCampaignActive(c)) continue;
         const before = c.settlementIds || [];
-        const next = before.filter(id => id !== settlementId);
+        // Same String() model as the membership resolvers (Owner Ruling #5):
+        // without it, re-homing a number/string-mismatched member would leave
+        // a now-advancing ghost entry behind in the old campaign.
+        const next = before.filter(id => String(id) !== sid);
         if (next.length !== before.length) {
           c.settlementIds = next;
           // store-hooks-state-6: re-homing a settlement must also drop its queued
@@ -530,7 +533,9 @@ export const createCampaignSlice = (set, get) => {
         }
       }
       target.settlementIds = Array.isArray(target.settlementIds) ? target.settlementIds : [];
-      if (!target.settlementIds.includes(settlementId)) target.settlementIds.push(settlementId);
+      // String()-normalized dedupe (Owner Ruling #5): an exact-match check
+      // would let a member stored under the other id type be added twice.
+      if (!target.settlementIds.some(id => String(id) === sid)) target.settlementIds.push(settlementId);
       target.updatedAt = now;
       changedIds.add(target.id);
       persistCampaignState(state, Array.from(changedIds));
@@ -540,12 +545,17 @@ export const createCampaignSlice = (set, get) => {
     set(state => {
       const c = findActiveCampaign(state.campaigns, campaignId);
       if (!c) return;
-      c.settlementIds = c.settlementIds.filter(id => id !== settlementId);
+      // String()-normalized removal (Owner Ruling #5, same model as the
+      // membership resolvers): with normalized membership, an exact-match
+      // filter here would leave a mismatched member ADVANCING but unremovable
+      // (the remove affordance would silently no-op). The pendingEvents prune
+      // below always normalized — this brings the settlementIds filter in line.
+      const sid = String(settlementId);
+      c.settlementIds = (c.settlementIds || []).filter(id => String(id) !== sid);
       // Campaign-clock: drop any queued intentions the departing settlement had,
       // at the deliberate moment of removal — otherwise they'd be silently
       // destroyed at the next tick (the drain only acts on current members).
       if (c.worldState?.pendingEvents?.length) {
-        const sid = String(settlementId);
         const kept = c.worldState.pendingEvents.filter(e => String(e.saveId) !== sid);
         if (kept.length !== c.worldState.pendingEvents.length) {
           c.worldState = { ...c.worldState, pendingEvents: kept };
@@ -687,12 +697,17 @@ export const createCampaignSlice = (set, get) => {
   },
 
   getCampaignForSettlement: (settlementId) => {
-    // Crash-guard (ported master fix, safe half): a campaign row without a
-    // settlementIds array must not throw. NOTE: the String()-normalization of
-    // the id compare (master's other half) is OWNER-GATED — it changes sim
-    // membership (previously-dropped number/string-mismatched members would
-    // join world-pulse advances). See the master-merge owner decision queue.
-    return get().campaigns.find(c => isCampaignActive(c) && (c.settlementIds || []).includes(settlementId)) || null;
+    // Crash-guard (ported master fix): a campaign row without a settlementIds
+    // array must not throw. String()-normalized id compare (master's other
+    // half — was owner-gated, SIGNED under Owner Ruling #5's blanket
+    // 2026-07-17 "membership normalization"): matches the
+    // isSettlementClockBound / campaignSettlements membership model, so
+    // number/string-mismatched members resolve to their campaign. Null-guard
+    // mirrors isSettlementClockBound (String(null) must never match a literal
+    // 'null' entry).
+    if (settlementId == null) return null;
+    const sid = String(settlementId);
+    return get().campaigns.find(c => isCampaignActive(c) && (c.settlementIds || []).map(String).includes(sid)) || null;
   },
 
   // ── Campaign clock (Phase C) ────────────────────────────────────────────

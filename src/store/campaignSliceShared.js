@@ -79,8 +79,14 @@ export function findActiveCampaign(campaigns, campaignId) {
 export function campaignSettlements(state, campaignId) {
   const c = findActiveCampaign(state.campaigns, campaignId);
   if (!c) return [];
-  const ids = new Set(c.settlementIds || []);
-  return (state.savedSettlements || []).filter(save => ids.has(save.id));
+  // String-normalized membership (signed W6 misc verdict, Owner Ruling #5
+  // blanket 2026-07-17): settlement ids are an acknowledged number/string mix
+  // (cloud rows return numeric ids; local saves mint strings). This resolver
+  // feeds every world-pulse advance its member saves — the old exact-match
+  // Set silently dropped mismatched members from the pulse. Matches the
+  // isSettlementClockBound / applyEvent membership scans.
+  const ids = new Set((c.settlementIds || []).map(String));
+  return (state.savedSettlements || []).filter(save => ids.has(String(save.id)));
 }
 
 export function campaignCacheOwner(state) {

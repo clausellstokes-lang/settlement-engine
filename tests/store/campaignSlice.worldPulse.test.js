@@ -129,6 +129,56 @@ describe('campaignSlice world pulse', () => {
     expect(store.getState().savedSettlements[0].campaignState.worldPulse.lastTick).toBe(1);
   });
 
+  // Membership id normalization pin (Owner Ruling #5 blanket, 2026-07-17 — the
+  // signed W6 misc verdict; resolver-level pins live in
+  // campaignMembershipIdNormalization.test.js). Settlement ids are an
+  // acknowledged number/string mix; before the String()-normalization of
+  // campaignSettlements, the number-id member below was silently DROPPED from
+  // every advance while its string-id sibling pulsed.
+  test('a string-id member and a number-id member both advance', async () => {
+    const store = makeStore();
+    store.setState(state => {
+      state.savedSettlements = [
+        {
+          id: 'stoneford',
+          name: 'Stoneford',
+          phase: 'canon',
+          settlement: settlement('Stoneford'),
+          campaignState: { phase: 'canon', eventLog: [], locks: {} },
+        },
+        {
+          // NUMBER save id on purpose — the campaign row stores the string '7'.
+          id: 7,
+          name: 'Mossbridge',
+          phase: 'canon',
+          settlement: settlement('Mossbridge'),
+          campaignState: { phase: 'canon', eventLog: [], locks: {} },
+        },
+      ];
+      state.campaigns = [{
+        id: 'camp-mixed',
+        name: 'Mixed Ids Realm',
+        settlementIds: ['stoneford', '7'],
+        regionalGraph: ensureRegionalGraph(),
+        wizardNews: { currentTick: 0, entries: [] },
+        worldState: { rngSeed: 'mixed-seed', tick: 0, canonizedAt: '2026-01-01T00:00:00.000Z' },
+      }];
+    });
+
+    // autoResolve: the multi-tick path (advanceMultiTick default-on; one_month =
+    // 4 weekly ticks) PARKS at the first majors pause when auto-resolve is off,
+    // making the final tick seed-dependent. This pin is about MEMBERSHIP, not
+    // pause semantics — auto-resolving runs the whole interval deterministically.
+    const result = await store.getState().advanceCampaignWorld('camp-mixed', 'one_month', { now: '2026-01-01T00:00:00.000Z', autoResolve: true });
+    expect(result.tick).toBe(4);
+
+    const saves = store.getState().savedSettlements;
+    const stoneford = saves.find(s => String(s.id) === 'stoneford');
+    const mossbridge = saves.find(s => String(s.id) === '7');
+    expect(stoneford.campaignState.worldPulse.lastTick).toBe(4);
+    expect(mossbridge.campaignState.worldPulse.lastTick).toBe(4);
+  });
+
   test('retained inactive campaigns reject ordinary store mutations', async () => {
     const store = makeStore();
     store.setState(state => {
