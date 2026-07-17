@@ -972,6 +972,20 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ TWO OWNER COMMISSIONS (2026-07-17, "extremely important"): CONTENT VOLUME + NPC
+EDITABILITY (tasks #27/#26).** (1) CONTENT: more volume/variety/specificity everywhere thin,
+under PORTABLE SPECIFICITY (catalog-anchored, never canon proper nouns — "just enough generic
+so that it can be put into any campaign"); AI-bulk + register-guard validation + owner
+taste-sample; ⚠️ THE DETERMINISM CATCH recorded: growing seeded corpora shifts same-seed picks
+⇒ every corpus classifies VIEW-TIME (lands free) vs GENERATION-TIME (parks red, batches into
+THE ONE REGEN). Survey fleet maps thin spots first. (2) NPC BANK + EDIT_NPC: the facet law
+applied to NPCs — typed EDIT_NPC ops through the covenant (auto-integrates with the Decree
+Tracker), THE BANK (consolidated axes/temperaments/roles + the new TYPED GOAL CATALOG,
+bounded selection never free-text), EDITS CHANGE THE FUTURE NEVER THE PAST (receipted event;
+propagation via existing chokepointed reads), state-never-fate CLARIFIED (binds the engine;
+DM sovereignty is whom it protects), added NPCs become FULL CITIZENS via the counterpart
+criterion. Named future question (owner's, not smuggled): organic personality drift = new
+engine capability. Both queue behind the three running build-out lanes.
 **⬛ CHRONICLE AMENDMENT §5b (2026-07-17, @ 4b2f675b on w7-prep): ENTANGLEMENT
 CONSOLIDATION.** Owner: queued decrees "directly entangle with each other. so that is an
 area to consolidate." Entangled decree cones (chained / shared / conflicting / synergistic,
