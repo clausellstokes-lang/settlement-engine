@@ -268,7 +268,7 @@ export function buildTownMapModel(settlement, mapEdits = null) {
   // pre-v2 settlement and every v1 golden stays identical (the lane lands free). New
   // settlements mint v2 by carrying the marker; existing ones never do.
   if (mapEdits && Number(mapEdits.layoutLawVersion) === 2) {
-    return buildTownLayoutV2(s, mapEdits);
+    return buildTownLayoutV2(/** @type {import('./townLayoutV2.js').TownV2Settlement} */ (s), mapEdits);
   }
 
   // ── rng, derived internally (never ambient). layoutVariant salts the fork; a

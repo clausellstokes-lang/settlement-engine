@@ -34,7 +34,7 @@ import { clamp } from '../../kernel/math.js';
 
 const VIEW = 1000;
 
-/** Order-independent codepoint digit of a string (dossier-stable, no rng). */
+/** Order-independent codepoint digit of a string (dossier-stable, no rng). @param {string} str */
 function codeDigit(str) {
   let sum = 0;
   const s = String(str || '');
@@ -54,7 +54,8 @@ function codeDigit(str) {
 
 /** Terrain → a regional-grain amplitude (0 for flat, higher for broken country). The
  *  ONLY "organic" wiggle — and it is per-cause (region), per-district, and vanishes on
- *  flat land, so a featureless plains hamlet reads cleanly formal. */
+ *  flat land, so a featureless plains hamlet reads cleanly formal.
+ *  @type {Readonly<Record<string, number>>} */
 const TERRAIN_GRAIN = Object.freeze({
   plains: 0, desert: 3, riverside: 6, coastal: 6, forest: 12, hills: 18, mountain: 26,
 });
@@ -131,13 +132,18 @@ export function extractAsymmetrySources(arg) {
   return out;
 }
 
-/** A point at compass index `idx`, `pct`/1000 of the way out from a center. */
+/** A point at compass index `idx`, `pct`/1000 of the way out from a center.
+ * @param {{x:number,y:number}} core @param {number} idx @param {number} pct
+ * @returns {{x:number,y:number}} */
 function compassPoint(core, idx, pct) {
   const COMPASS = COMPASS16[idx % 16];
   return { x: clamp(core.x + Math.round((COMPASS[0] * pct) / 100), 0, VIEW), y: clamp(core.y + Math.round((COMPASS[1] * pct) / 100), 0, VIEW) };
 }
 
-/** Where a resource site sits, by its placement hint. */
+/** Where a resource site sits, by its placement hint.
+ * @param {string} hint @param {{x:number,y:number}} core
+ * @param {{x:number,y:number}|null} waterAnchor @param {Array<{x:number,y:number}>} gatePoints
+ * @param {number} digit @returns {{x:number,y:number}} */
 function resourcePoint(hint, core, waterAnchor, gatePoints, digit) {
   if (hint === 'water' && waterAnchor) return { x: waterAnchor.x, y: waterAnchor.y };
   if (hint === 'downstream' && waterAnchor) {

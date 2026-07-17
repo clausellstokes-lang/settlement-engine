@@ -33,7 +33,7 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 
 const VIEW = 1000;
 
-/** Order-independent codepoint digit of a string (seed-stable, no rng). */
+/** Order-independent codepoint digit of a string (seed-stable, no rng). @param {string} str */
 function codeDigit(str) {
   let sum = 0;
   const s = String(str || '');

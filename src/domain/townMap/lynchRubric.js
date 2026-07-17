@@ -50,14 +50,17 @@ export const RUBRIC_WEIGHTS = Object.freeze({
  * @property {Array<{ x:number, y:number }>} [nodes]
  */
 
-/** Squared distance between two {x,y} points (no sqrt — trig/irrational-free). */
+/** Squared distance between two {x,y} points (no sqrt — trig/irrational-free).
+ * @param {{x:number,y:number}} a @param {{x:number,y:number}} b @returns {number} */
 function dist2(a, b) {
   const dx = a.x - b.x;
   const dy = a.y - b.y;
   return dx * dx + dy * dy;
 }
 
-/** Axis-aligned bounding box of a polygon ([[x,y],…]). */
+/** Axis-aligned bounding box of a polygon ([[x,y],…]).
+ * @param {Array<[number,number]>} polygon
+ * @returns {{minX:number,minY:number,maxX:number,maxY:number}} */
 function bbox(polygon) {
   let minX = Infinity;
   let minY = Infinity;
@@ -72,7 +75,9 @@ function bbox(polygon) {
   return { minX, minY, maxX, maxY };
 }
 
-/** Fractional area of overlap between two AABBs, normalized by the smaller box. */
+/** Fractional area of overlap between two AABBs, normalized by the smaller box.
+ * @param {{minX:number,minY:number,maxX:number,maxY:number}} a
+ * @param {{minX:number,minY:number,maxX:number,maxY:number}} b @returns {number} */
 function boxOverlapFrac(a, b) {
   const ix = Math.max(0, Math.min(a.maxX, b.maxX) - Math.max(a.minX, b.minX));
   const iy = Math.max(0, Math.min(a.maxY, b.maxY) - Math.max(a.minY, b.minY));
@@ -308,6 +313,7 @@ export function scoreLynch(candidate) {
   let total = 0;
   for (const k of Object.keys(RUBRIC_WEIGHTS)) total += parts[k] * RUBRIC_WEIGHTS[k];
   // Round to 4 places so the score is a stable, machine-independent golden value.
+  /** @param {number} v */
   const round4 = (v) => Math.round(v * 10000) / 10000;
   /** @type {Record<string, number>} */
   const out = { total: round4(total) };

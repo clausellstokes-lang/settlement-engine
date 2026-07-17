@@ -35,12 +35,14 @@ const GROUND_TOP = 150;   // where map-y 0 lands on screen (leaves headroom for 
 const ELEV_SCALE = 1;     // pseudo-elevation → up-screen pixels
 
 /** Project a plan point (map x,y ∈ 0..1000) at pseudo-elevation `elev` to the oblique
- * screen space. Trig-free. @returns {{ x:number, y:number }} */
+ * screen space. Trig-free. @param {number} x @param {number} y @param {number} elev
+ * @returns {{ x:number, y:number }} */
 function project(x, y, elev) {
   return { x: Math.round(x), y: Math.round(GROUND_TOP + y * DEPTH - (elev || 0) * ELEV_SCALE) };
 }
 
-/** Category → roof-height multiplier: spires/keeps/towers stand tall, sheds squat. */
+/** Category → roof-height multiplier: spires/keeps/towers stand tall, sheds squat.
+ * @type {Readonly<Record<string, number>>} */
 const CATEGORY_HEIGHT = Object.freeze({
   religious: 1.55, civic: 1.35, noble: 1.3, arcane: 1.4, military: 1.25,
   merchant: 1.0, craft: 0.9, foreign: 0.95, residential: 0.8, industrial: 0.85,
@@ -48,14 +50,15 @@ const CATEGORY_HEIGHT = Object.freeze({
 });
 
 /** Pseudo-elevation of a landmark/fill building — tier scales the base, category the
- * silhouette. Deterministic in the model data (no rng). */
+ * silhouette. Deterministic in the model data (no rng).
+ * @param {string} kind @param {number} tierIndex @param {string} [category] @returns {number} */
 function buildingElevation(kind, tierIndex, category) {
   const base = kind === 'fill' ? 24 : 40 + tierIndex * 5;
-  const mult = CATEGORY_HEIGHT[category] ?? 0.9;
+  const mult = CATEGORY_HEIGHT[/** @type {string} */ (category)] ?? 0.9;
   return Math.round(base * mult);
 }
 
-/** Wall silhouette height — readiness (wallWeight) makes a prouder rampart. */
+/** Wall silhouette height — readiness (wallWeight) makes a prouder rampart. @param {number} wallWeight */
 function wallElevation(wallWeight) { return 34 + (wallWeight || 0) * 6; }
 
 /**

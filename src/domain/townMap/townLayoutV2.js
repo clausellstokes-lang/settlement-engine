@@ -79,13 +79,15 @@ const COMPASS = Object.freeze([
 
 /** Category centrality: lower ⇒ pulled to the inner rings (the historic core), the
  *  civic/faith/noble heart; higher ⇒ pushed to the periphery (the noxious trades,
- *  the shadow dens, the foreign quarter beyond the gate). */
+ *  the shadow dens, the foreign quarter beyond the gate).
+ *  @type {Readonly<Record<string, number>>} */
 const CATEGORY_CENTRALITY = Object.freeze({
   civic: 0, religious: 1, noble: 1, merchant: 2, arcane: 3, craft: 3,
   residential: 4, other: 4, military: 4, foreign: 5, industrial: 6, criminal: 6,
 });
 
-/** roadImportance band → integer stroke weight (same table as v1). */
+/** roadImportance band → integer stroke weight (same table as v1).
+ *  @type {Readonly<Record<string, number>>} */
 const ROAD_WEIGHT = Object.freeze({ low: 1, moderate: 2, major: 3, critical: 4 });
 
 /** defensiveTerrain band → wall weight (readiness styles the wall). */
@@ -117,22 +119,80 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {ProvEntry[]} provenance
  */
 /**
+ * An institution as this engine reads it (anchor identity + placement/aggregate cues).
+ * @typedef {Object} TownInstitution
+ * @property {string} [name] @property {string} [catalogId] @property {string} [localUid]
+ * @property {string} [priorityCategory] @property {string} [category] @property {string[]} [tags]
+ */
+/**
+ * The dossier the layout reads. Fields are optional (settlements arrive partial); the
+ * shapes are the null-safe "as-consumed" reads, structurally compatible with the
+ * district/map profile settlement contracts this file forwards `settlement` into.
  * @typedef {Object} TownV2Settlement
  * @property {string|number|null} [_seed] @property {string} [id] @property {string} [tier]
  * @property {number} [population]
- * @property {{ tradeRouteAccess?: string, terrainType?: string, biome?: string, terrainOverride?: string, monsterThreat?: string }|null} [config]
- * @property {{ quarters?: Array<{ location?: string }> }|null} [spatialLayout]
- * @property {unknown[]} [institutions] @property {unknown} [defenseProfile]
- * @property {{ exports?: string[], prosperity?: unknown }|null} [economicState]
+ * @property {{ tradeRouteAccess?: string, terrainType?: string, biome?: string, terrainOverride?: string, monsterThreat?: string }} [config]
+ * @property {{ quarters?: Array<{ location?: string }> }} [spatialLayout]
+ * @property {TownInstitution[]} [institutions]
+ * @property {{ hasWalls?: unknown, walls?: unknown, institutions?: { walls?: unknown } }} [defenseProfile]
+ * @property {{ exports?: string[], prosperity?: string|{ label?: string, tier?: string } }} [economicState]
  * @property {unknown} [urbanFabric]
+ */
+/**
+ * A ranked district descriptor (a real quarter, or the synthetic hamlet floor).
+ * @typedef {Object} TownDistrictSource
+ * @property {string} id @property {string} name @property {string} category
+ * @property {string} wealth @property {string} safety
+ * @property {boolean} synthetic @property {string} location
+ */
+/**
+ * The urban-fabric memory as read for a settlement (empty/null when the layer is dark).
+ * @typedef {Object} FabricRead
+ * @property {boolean} has
+ * @property {Record<string, number>} stocks
+ * @property {number|null} drift
+ * @property {Array<{ kind:string, severity:number, week:number }>} scars
+ * @property {Array<{ classes:string[], type:string, week:number }>} rebirths
+ */
+/**
+ * The shared generation context threaded through the candidate pipeline (built once per
+ * buildTownLayoutV2 call, read by every stage). Field types mirror their sources.
+ * @typedef {Object} LayoutCtx
+ * @property {string} seed
+ * @property {string} baseKey
+ * @property {string} tier
+ * @property {number} tierIndex
+ * @property {string|null} terrain
+ * @property {string|null} tradeAccess
+ * @property {boolean} hasWalls
+ * @property {boolean} isCoast
+ * @property {boolean} isRiver
+ * @property {import('../mapProfile.js').MapProfile} mapProfile
+ * @property {import('../activeConditions.js').ActiveCondition[]} activeConditions
+ * @property {TownInstitution[]} institutions
+ * @property {import('./institutionAssignment.js').AssignmentResult} assignment
+ * @property {TownDistrictSource[]} sources
+ * @property {FabricRead} fabric
+ * @property {import('./townMapModel.js').TownMapWater|null} water
+ * @property {{ x:number, y:number }|null} waterAnchor
+ * @property {{ x:number, y:number }} core
+ * @property {number} roadCount
+ * @property {number} roadWeight
+ * @property {import('./asymmetrySources.js').AsymmetrySource[]} asym
+ * @property {import('./siteGenesis.js').TownSite} site
+ * @property {'exploit'|'endure'|'fortify'} responseMode
+ * @property {Array<{ attractorRef:string, declinedBy:string, latentValue01:number, point:{ x:number, y:number } }>} latent
  */
 
 // ── deterministic vector helpers (integer direction table only) ───────────────
-/** Point at compass `dir`, `pct` percent of EXTENT from a center. @returns {{x:number,y:number}} */
+/** Point at compass `dir`, `pct` percent of EXTENT from a center.
+ * @param {number} cx @param {number} cy @param {number[]} dir @param {number} pct
+ * @returns {{x:number,y:number}} */
 function polar(cx, cy, dir, pct) {
   return { x: cx + Math.round((dir[0] * pct * EXTENT) / 10000), y: cy + Math.round((dir[1] * pct * EXTENT) / 10000) };
 }
-/** Perpendicular of a compass unit vector (for angular width). */
+/** Perpendicular of a compass unit vector (for angular width).
+ * @param {number[]} dir @returns {number[]} */
 function perp(dir) { return [-dir[1], dir[0]]; }
 
 /** Parse a quarter's `location` prose into placement biases (semantic placement).
@@ -159,7 +219,8 @@ function locationBias(text) {
   return { ringPush, water, elevated, dirIdx };
 }
 
-/** Choose the settlement morphology from water, walls, tier, terrain (form vocab). */
+/** Choose the settlement morphology from water, walls, tier, terrain (form vocab).
+ * @param {{ isCoast:boolean, isRiver:boolean, hasWalls:boolean, tierIndex:number, terrain:string|null }} morphInputs */
 function selectMorphology({ isCoast, isRiver, hasWalls, tierIndex, terrain }) {
   if (isCoast) return 'harbor-fan';       // Lübeck — quays fan inland from the water
   if (isRiver) return 'river-spine';      // Durham — the town straddles a river bend
@@ -208,6 +269,7 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   const exportsList = Array.isArray(s.economicState?.exports) ? s.economicState.exports : [];
 
   // ── URBAN FABRIC memory (empty/null when dark — absence is not neutrality) ──
+  /** @type {FabricRead} */
   const fabric = {
     has: hasFabric(s),
     stocks: fabricStocksFor(s),
@@ -221,7 +283,7 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   const assignment = assignInstitutionsToDistricts(institutions, derivedDistricts, assignRng);
 
   // ── district descriptors (real districts, or the synthetic hamlet floor) ────
-  /** @type {Array<{ id:string, name:string, category:string, wealth:string, safety:string, synthetic:boolean, location:string }>} */
+  /** @type {TownDistrictSource[]} */
   let sources;
   if (assignment.floored && assignment.syntheticDistrict) {
     sources = [{
@@ -271,6 +333,7 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   // ── STAGE 2 — GENESIS CORE nucleates ON the field (not the abstract center) ──
   const core = nucleateCore(asym.map((a) => ({ point: a.point, strength: a.strength })), canonGates, defaultCore);
 
+  /** @type {LayoutCtx} */
   const ctx = {
     seed, baseKey, tier, tierIndex, terrain, tradeAccess, hasWalls, isCoast, isRiver,
     mapProfile, activeConditions, institutions, assignment, sources, fabric,
@@ -286,20 +349,26 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   for (let attempt = 0; attempt < MAX_LAYOUT_RETRIES; attempt++) {
     const candidate = generateCandidate(ctx, attempt);
     const score = scoreLynch(candidate);
-    if (!best || score.total > bestScore.total) { best = candidate; bestScore = score; }
+    // `bestScore` is non-null whenever `best` is (they are only ever assigned together),
+    // so the `!best ||` short-circuit guarantees it is set before `.total` is read here.
+    if (!best || score.total > /** @type {Record<string, number>} */ (bestScore).total) { best = candidate; bestScore = score; }
     retries = attempt;
     if (score.total >= LYNCH_ACCEPT_FLOOR) break; // accepted — no need to keep drawing
   }
 
   // ── apply cosmetic pins (anchor-keyed nudges — version-independent anchors) ──
-  applyPins(best, mapEdits);
+  // The retry loop runs MAX_LAYOUT_RETRIES (>= 1) times and its first iteration always
+  // assigns (the `!best` branch), so `best`/`bestScore` are non-null from here on. tsc
+  // cannot prove the loop body ran, so the reads below carry narrowing casts (not a
+  // latent null — a documented loop invariant).
+  applyPins(/** @type {Candidate} */ (best), mapEdits);
 
   const morphology = selectMorphology(ctx);
   // Fold the STAGE-0 site + response-mode causes into the provenance map (they are
   // the roots most deformations trace back to). The response mode is recorded only when
   // it is MEANINGFUL — a distinctive fortify/endure, or an exploit that actually
   // declined advantages — so a featureless source-less town stays truly empty (formal).
-  const allProv = [...best.provenance, ...site.prov];
+  const allProv = [.../** @type {Candidate} */ (best).provenance, ...site.prov];
   if (responseMode !== 'exploit' || latent.length > 0) allProv.push(responseInfo.prov);
   const provenance = keyProvenance(allProv);
   return {
@@ -309,13 +378,13 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
     meta: {
       tier, terrain, tradeAccess, hasWalls,
       layoutVariant: variant,
-      buildingCount: best.buildings.length,
-      districtCount: best.districts.length,
+      buildingCount: /** @type {Candidate} */ (best).buildings.length,
+      districtCount: /** @type {Candidate} */ (best).districts.length,
       hamletCluster: assignment.floored,
       morphology,
       hasFabric: fabric.has,
-      lynchScore: bestScore.total,
-      lynchParts: bestScore,
+      lynchScore: /** @type {Record<string, number>} */ (bestScore).total,
+      lynchParts: /** @type {Record<string, number>} */ (bestScore),
       retries,
       deformedElementCount: Object.keys(provenance).length,
       // STAGE artifacts (the pipeline is site→field→core→…): the generated site kind,
@@ -325,12 +394,12 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
       responseMode,
       coreNucleated: core.x !== 500 || core.y !== 500,
     },
-    frame: best.frame,
-    skeleton: best.skeleton,
-    districts: best.districts,
-    buildings: best.buildings,
-    fortifications: best.fortifications,
-    overlays: best.overlays,
+    frame: /** @type {Candidate} */ (best).frame,
+    skeleton: /** @type {Candidate} */ (best).skeleton,
+    districts: /** @type {Candidate} */ (best).districts,
+    buildings: /** @type {Candidate} */ (best).buildings,
+    fortifications: /** @type {Candidate} */ (best).fortifications,
+    overlays: /** @type {Candidate} */ (best).overlays,
     // SOURCED-ASYMMETRY PROVENANCE (owner directive): a lookup-by-element map — every
     // deformed element → the named dossier cause(s) of its deformation. Data-only (a
     // follow-up wave renders hover explanations from it); a deformed element without a
@@ -345,7 +414,8 @@ export function buildTownLayoutV2(settlement, mapEdits = null) {
   };
 }
 
-/** A settlement's prosperity as 0..1 (drives resource-site pull strength). */
+/** A settlement's prosperity as 0..1 (drives resource-site pull strength).
+ * @param {TownV2Settlement|null|undefined} s @returns {number} */
 function prosperityScore(s) {
   const p = s?.economicState?.prosperity;
   const tier = typeof p === 'string' ? p : (p && typeof p === 'object' ? (p.label || p.tier) : '');
@@ -368,12 +438,15 @@ function keyProvenance(entries) {
   for (const e of list) {
     if (!byEl.has(e.element)) byEl.set(e.element, new Map());
     const dedupe = `${e.sourceFamily}|${e.sourceRef}|${e.effect}`;
-    byEl.get(e.element).set(dedupe, { sourceFamily: e.sourceFamily, sourceRef: e.sourceRef, effect: e.effect });
+    // set() on the line above guarantees the key exists; tsc does not correlate has/get.
+    /** @type {Map<string, { sourceFamily:string, sourceRef:string, effect:string }>} */
+    (byEl.get(e.element)).set(dedupe, { sourceFamily: e.sourceFamily, sourceRef: e.sourceRef, effect: e.effect });
   }
   /** @type {Record<string, Array<{ sourceFamily:string, sourceRef:string, effect:string }>>} */
   const out = {};
   for (const el of [...byEl.keys()].sort(compareCodepoint)) {
-    out[el] = [...byEl.get(el).values()].sort((a, b) => compareCodepoint(
+    // `el` came from byEl.keys(), so get(el) is defined; tsc cannot correlate the two.
+    out[el] = [.../** @type {Map<string, { sourceFamily:string, sourceRef:string, effect:string }>} */ (byEl.get(el)).values()].sort((a, b) => compareCodepoint(
       `${a.sourceFamily}|${a.effect}|${a.sourceRef}`,
       `${b.sourceFamily}|${b.effect}|${b.sourceRef}`,
     ));
@@ -384,7 +457,8 @@ function keyProvenance(entries) {
 /**
  * Draw ONE candidate arrangement for a given attempt salt. Deterministic in
  * (ctx, attempt). Returns the model sections plus a `nodes` list (convergence
- * squares) the rubric reads. @returns {Candidate}
+ * squares) the rubric reads.
+ * @param {LayoutCtx} ctx @param {number} attempt @returns {Candidate}
  */
 function generateCandidate(ctx, attempt) {
   const { baseKey, tierIndex, tradeAccess, hasWalls, isCoast, mapProfile, activeConditions,
@@ -463,6 +537,7 @@ function generateCandidate(ctx, attempt) {
  * asymmetry sources (region/resource/habit) + terrain grain — NO uniform jitter — and
  * every deformation is recorded as provenance. A source-less flat settlement therefore
  * lays out formally AND seed-independently.
+ * @param {LayoutCtx} ctx @param {string} morphology @param {number} attempt
  * @returns {{ districts: TownDistrict[], prov: ProvEntry[] }} */
 function placeDistricts(ctx, morphology, attempt) {
   const { sources, fabric, asym, core, terrain, seed, latent, responseMode } = ctx;
@@ -557,7 +632,9 @@ function placeDistricts(ctx, morphology, attempt) {
 
 /** Build a district polygon shaped by morphology: a radial wedge (organic/concentric/
  * harbor/river) or an orthogonal block (grid). Trig-free (perpendicular vectors). Clean
- * geometry — the asymmetry is applied by leanPolygon from named sources, not here. */
+ * geometry — the asymmetry is applied by leanPolygon from named sources, not here.
+ * @param {string} morphology @param {{x:number,y:number}} core @param {{x:number,y:number}} cen
+ * @param {number[]} dir @param {number} size @returns {Array<[number,number]>} */
 function districtPolygon(morphology, core, cen, dir, size) {
   if (morphology === 'bastide-grid') {
     const hw = Math.round(size * 0.72);
@@ -581,7 +658,10 @@ function districtPolygon(morphology, core, cen, dir, size) {
 
 /** Place every institution as a building inside its assigned district (short-block
  * grain — Jacobs). Deterministic fan (no jitter): the 16-dir golden-angle rotation
- * spreads them evenly. Landmarks stand apart; aggregates fill. */
+ * spreads them evenly. Landmarks stand apart; aggregates fill.
+ * @param {LayoutCtx} ctx @param {TownDistrict[]} districts
+ * @param {Map<string, TownDistrict>} districtByIdGeom @param {number} tierIndex
+ * @returns {import('./townMapModel.js').TownMapBuilding[]} */
 function placeBuildings(ctx, districts, districtByIdGeom, tierIndex) {
   const { institutions, assignment } = ctx;
   const anchored = institutions.map((inst) => ({ anchorKey: anchorForInstitution(inst), inst }));
@@ -618,12 +698,15 @@ function placeBuildings(ctx, districts, districtByIdGeom, tierIndex) {
  * (civic / noble / religious / merchant) that would otherwise sit just beyond it — the
  * wall is drawn to include what matters. Every kink records provenance ('wall-embrace').
  * Far-flung quarters stay outside as honest extramural faubourgs.
+ * @param {TownDistrict[]} districts @param {number[]} gateDirIdx @param {{x:number,y:number}} core
+ * @param {import('../mapProfile.js').MapProfile} mapProfile
  * @returns {{ fort: { walls: Array<[number,number]>, gates: Array<{x:number,y:number}>, readiness: string, wallWeight: number }, prov: Array<{element:string, sourceFamily:string, sourceRef:string, effect:string}> }} */
 function buildWall(districts, gateDirIdx, core, mapProfile) {
   const readinessIdx = Math.max(0, DEFENSIVE_BANDS.indexOf(mapProfile.outputs.defensiveTerrain));
   const VALUED = new Set(['civic', 'noble', 'religious', 'merchant', 'foreign']);
   /** A quarter worth walling in: a valued category OR a wealthy one (the harbor
-   *  warehouses, the moneyed suburb) that a wall extends to protect. */
+   *  warehouses, the moneyed suburb) that a wall extends to protect.
+   *  @param {TownDistrict} d @returns {boolean} */
   const worthWalling = (d) => VALUED.has(d.category) || d.wealth === 'wealthy' || d.wealth === 'opulent';
   // Base radius: enclose the INNER cluster (~60th percentile of district radii), so a
   // handful of outer quarters fall beyond it — the wall then either embraces them (if
@@ -664,7 +747,12 @@ function buildWall(districts, gateDirIdx, core, mapProfile) {
   return { fort: { walls, gates, readiness: DEFENSIVE_BANDS[readinessIdx] || 'open', wallWeight: readinessIdx + 1 }, prov };
 }
 
-/** Overlays — identical semantics to v1 (hazard markers + district condition badges). */
+/** Overlays — identical semantics to v1 (hazard markers + district condition badges).
+ * @param {import('../mapProfile.js').MapProfile} mapProfile
+ * @param {import('../activeConditions.js').ActiveCondition[]} activeConditions
+ * @param {TownDistrict[]} districts
+ * @param {ReturnType<typeof import('../../kernel/prng.js').createPRNG>} rng
+ * @returns {{ hazards: import('./townMapModel.js').TownMapHazard[], conditions: import('./townMapModel.js').TownMapConditionBadge[] }} */
 function buildOverlays(mapProfile, activeConditions, districts, rng) {
   const hazardMarkers = mapProfile.outputs.hazardMarkers.slice().sort((a, b) => compareCodepoint(a.id, b.id));
   const hazards = hazardMarkers.map((h, i) => {
@@ -692,7 +780,8 @@ function buildOverlays(mapProfile, activeConditions, districts, rng) {
 
 /** The scar severity (0..1) affecting a district category, or 0. Scar `kind`s are
  * typed (fire/plague/siege…); we map any scar to the whole town's stone and take the
- * strongest — a scarred town shows visibly tighter, patched grain. */
+ * strongest — a scarred town shows visibly tighter, patched grain.
+ * @param {FabricRead} fabric @param {string} category @returns {number} */
 function scarSeverityFor(fabric, category) {
   if (!fabric.has || fabric.scars.length === 0) return 0;
   let worst = 0;
@@ -702,7 +791,8 @@ function scarSeverityFor(fabric, category) {
   return worst * (exposed ? 1 : 0.6);
 }
 
-/** Whether a category was rebirthed by a recent catastrophe (draws fresh grain). */
+/** Whether a category was rebirthed by a recent catastrophe (draws fresh grain).
+ * @param {FabricRead} fabric @param {string} category @returns {boolean} */
 function rebirthedClass(fabric, category) {
   if (!fabric.has || fabric.rebirths.length === 0) return false;
   for (const r of fabric.rebirths) if (Array.isArray(r.classes) && r.classes.includes(category)) return true;
@@ -711,7 +801,9 @@ function rebirthedClass(fabric, category) {
 
 /** Apply anchor-keyed cosmetic pins (the same rule as v1: matching building/district
  * nudged, dangling anchors dropped, absent ⇒ no-op). Version-independent anchors mean
- * a v1 pin survives a v1→v2 redraw and still nudges the right element. */
+ * a v1 pin survives a v1→v2 redraw and still nudges the right element.
+ * @param {Candidate} model
+ * @param {{ layoutVariant?: number, pins?: Array<{ anchor?: string, dx?: number, dy?: number }>, layoutLawVersion?: number } | null | undefined} mapEdits */
 function applyPins(model, mapEdits) {
   const pins = Array.isArray(mapEdits?.pins) ? mapEdits.pins : [];
   if (pins.length === 0) return;
