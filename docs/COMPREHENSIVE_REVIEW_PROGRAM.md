@@ -1120,6 +1120,17 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ RULING #7 RE-AMENDED (2026-07-17, owner: "do it before the push"): THE
+DOCUMENTATION WAVE BUILDS BEFORE THE FIRST PUSH.** The prior push-before-doc-wave
+judgment is OWNER-VETOED; the chain is now: fog + panels fold → THE DOCUMENTATION WAVE
+(#19-#22, the committed brief) → THE PUSH (everything built, everything backed up) →
+composite (+ FP-G11 if demanded) → ROUND 3 → the tail unchanged. Recorded without
+re-litigation: the single-machine window extends through the doc wave — the owner's
+accepted trade, consistent with the literal "after everything is built" ruling. ALSO
+RATIFIED INTO THE LEDGER: the owner-side chip session FOLDED the domain-strict burn-down
+directly onto w7-prep @ 9150b464 (six v2 files annotated strict-clean, 112→0, ceiling
+stays 0 — burn-down over re-baseline, the better fix); the SM-5 spurious-gate finding is
+CLOSED; the piped-exit-masking hazard has its own memory.
 **⬛ FOLD: DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (2026-07-17) → w7-prep @ 2c980e4e**
 (merge of claude/spatial-consequence 3fee34ee off 66eda8e8; spot-checked, 17 files NUL-
 clean; recovered from the stall class by the status demand — the cure is 3-for-3). THE
