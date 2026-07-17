@@ -972,6 +972,18 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ MAP TRUTH-PROJECTION LAW + THE PANORAMA QUESTION (owner example, 2026-07-17):** the
+owner's worked example (underground lava-ringed cyberpunk custom settlement, parchment×
+cyberpunk blend, slanted side-view) confirms + sharpens the design: (1) THE MAP DEPICTS WHAT
+THE WORLD IS — setting substance comes from the (custom) settlement's dossier; a style may
+never paint what the data doesn't hold (the honest path for mismatches: offer the world-edit,
+then the map follows). (2) Bespoke definitions are COMPOSITIONAL (parchment ground ×
+cyberpunk glyph vocabulary = legal, intended). (3) ⚠️ SIDE-VIEW/OBLIQUE = a PROJECTION, not
+a style: needs pseudo-elevations (derivable deterministically from tier/institution/wall
+data) + a transform — real new capability; **OWNER-QUEUED DECISION: fold the PANORAMA
+PROJECTION into task #28 or park as map-v2** (once built it composes with every lens). The
+example is also the lens roadmap radar's first demand-proven entry (oov capture working as
+designed).
 **⬛ AI STYLE OVERHAUL REFINED (owner, 2026-07-17):** the compile context is THREE layers —
 the settlement DOSSIER (what it is) + the user's INPUT PROMPT (what they want) + THE DESIGN
 CORPUS itself (the four lens definitions + style schema as grounding — the AI composes
