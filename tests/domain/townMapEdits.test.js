@@ -35,10 +35,10 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('the schema is exactly {layoutVariant, pins, legendPrefs, styleLens} + pin/legend sub-keys', () => {
+  it('the schema is exactly {layoutVariant, pins, legendPrefs, styleLens, layoutLawVersion} + pin/legend sub-keys', () => {
     // A guard against a future key sneaking in without the denylist re-check above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'dx', 'dy', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens'],
+      ['anchor', 'dx', 'dy', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens'],
     );
   });
 });

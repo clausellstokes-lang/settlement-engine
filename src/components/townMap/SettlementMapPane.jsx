@@ -43,6 +43,7 @@ import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 import {
   buildTownMapModel, viewerPalette, TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID,
+  buildTownMapPanoramaDrawList,
 } from '../../domain/townMap/index.js';
 import {
   readMapEdits, readLegendPrefs, readStyleLens, normalizeMapEdits,
@@ -53,6 +54,8 @@ import { buildingHoverModel } from './hoverModel.js';
 import { districtColor } from './palette.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
+import SettlementMapPanorama from './SettlementMapPanorama.jsx';
+import Segmented from '../primitives/Segmented.jsx';
 import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
 
 const clampScale = (s) => Math.max(0.2, Math.min(8, s));
@@ -68,6 +71,7 @@ function gridLines(step) {
   for (let y = step; y < 1000; y += step) lines.push({ x1: 0, y1: y, x2: 1000, y2: y });
   return lines;
 }
+
 
 /** True when the device has a fine pointer (desktop) — the edit posture. Absent
  *  matchMedia (SSR / jsdom) ⇒ treat as desktop so the affordances are testable;
@@ -100,11 +104,17 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // persisted choice (settlement.mapEdits.styleLens) is the base; the override wins
   // for the session. Re-seeded to null on a settlement change, like the edits.
   const [lensOverride, setLensOverride] = useState(null);
+  // THE PANORAMA PROJECTION (#38): a view option — 'plan' (the interactive flat map)
+  // or 'panorama' (the oblique 2.5D projection). A PROJECTION, not a lens: it composes
+  // WITH the active lens and honors the same cosmetic mapEdits (WYSIWYG). Available to
+  // every viewer (viewing is free); reset to 'plan' on a settlement change.
+  const [viewMode, setViewMode] = useState('plan');
   const [seededKey, setSeededKey] = useState(settlementKey);
   if (seededKey !== settlementKey) {
     setSeededKey(settlementKey);
     setMapEdits(readMapEdits(settlement));
     setLensOverride(null);
+    setViewMode('plan');
   }
 
   const [desktop, setDesktop] = useState(detectFinePointer);
@@ -154,6 +164,12 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   }, [saveId, applyMapEdit]);
 
   const model = useMemo(() => buildTownMapModel(settlement, mapEdits), [settlement, mapEdits]);
+  // The oblique panorama draw-ops — computed only in panorama mode, under the active
+  // lens (so it re-poses the SAME model the plan shows, honoring edits + lens).
+  const panoramaOps = useMemo(
+    () => (viewMode === 'panorama' ? buildTownMapPanoramaDrawList(model, activeLens) : null),
+    [viewMode, model, activeLens],
+  );
   const districtsById = useMemo(() => {
     const m = new Map();
     for (const d of deriveAllDistricts(settlement)) m.set(d.id, d);
@@ -623,6 +639,31 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           })}
         </g>
       </svg>
+
+      {/* ── THE PANORAMA PROJECTION (#38) — a static oblique overlay shown in
+          'panorama' view mode. Self-contained 0..1000 vector layer over the plan
+          (the plan stays mounted behind it, so a flip back is instant). It reads the
+          SAME model + active lens, so it honors every cosmetic mapEdit (WYSIWYG). No
+          pointer events: the panorama is a presentation view, hover/edit stay in the
+          plan. ─────────────────────────────────────────────────────────────── */}
+      {viewMode === 'panorama' && panoramaOps && (
+        <SettlementMapPanorama ops={panoramaOps} bg={C.bg} name={settlement?.name} />
+      )}
+
+      {/* ── View toggle (Plan / Panorama) — top-left, always available (viewing is
+          free at every tier). A projection switch, not an edit. The canonical
+          Segmented pill (a primitive — focus ring, aria-pressed, min target). ── */}
+      {(districts.length > 0 || buildings.length > 0) && (
+        <div data-town-view-toggle style={{ position: 'absolute', top: 8, left: 8, zIndex: 2 }}>
+          <Segmented
+            size="sm"
+            ariaLabel="Map view"
+            value={viewMode}
+            onChange={setViewMode}
+            options={[{ id: 'plan', label: 'Plan' }, { id: 'panorama', label: 'Panorama' }]}
+          />
+        </div>
+      )}
 
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}

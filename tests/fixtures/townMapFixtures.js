@@ -185,3 +185,47 @@ export const GOLDEN_CONFIGS = Object.freeze(CONFIG_SPECS.map((spec, i) => ({
   spec: { tier: spec.tier, terrain: spec.terrain, walls: spec.walls, water: spec.water },
   settlement: makeTownFixture({ ...spec, seed: `sm1-${i}` }),
 })));
+
+// ── TOWN LAYOUT v2 (#38) corpus ───────────────────────────────────────────────
+// The v2 goldens EXTEND the v1 set (v1 stands untouched). The v2 corpus is the same
+// tier×terrain×walls×water spread built under the v2 engine, PLUS two extensions the
+// shared spread does not reach: a bastide-grid trigger (high-tier plains, NO walls, NO
+// water — the one morphology the walled/watered v1 spread never hits) and a
+// URBAN-FABRIC-LIT settlement (a populated `urbanFabric` mirror) so BOTH fabric
+// branches — dark fallback (every shared config) and hasFabric (this one) — are pinned.
+
+/** A compact urbanFabric MIRROR (fabricRead's read shape) for the lit golden case. */
+export function makeFabricMirror() {
+  return {
+    drift: 0.72,
+    stocks: { merchant: 0.9, criminal: 0.78, industrial: 0.6, religious: 0.45, civic: 0.3 },
+    scars: [{ kind: 'fire', severity: 0.7, week: 12 }, { kind: 'siege', severity: 0.4, week: 30 }],
+    rebirths: [{ classes: ['residential'], type: 'fire', week: 40 }],
+  };
+}
+
+/** The v2-only extension configs (bastide-grid + fabric-lit). Each carries the v2
+ *  mapEdits marker; the fabric one also carries the mirror on its settlement. */
+export const V2_EXTRA_CONFIGS = Object.freeze([
+  {
+    spec: { tier: 'metropolis', terrain: 'plains', walls: false, water: false },
+    mapEdits: { layoutLawVersion: 2 },
+    settlement: makeTownFixture({ tier: 'metropolis', terrain: 'plains', walls: false, water: false, seed: 'v2-bastide' }),
+  },
+  {
+    spec: { tier: 'city', terrain: 'hills', walls: true, water: false },
+    mapEdits: { layoutLawVersion: 2 },
+    settlement: { ...makeTownFixture({ tier: 'city', terrain: 'hills', walls: true, water: false, seed: 'v2-fabric' }), urbanFabric: makeFabricMirror() },
+  },
+]);
+
+/**
+ * The frozen v2 golden corpus: the shared spread under v2 + the two extensions. Each
+ * entry carries the `mapEdits` the model is built with (the v2 marker), so the golden
+ * test drives buildTownMapModel(settlement, mapEdits) exactly as a real v2 consumer does.
+ * @type {ReadonlyArray<{ spec: { tier: string, terrain: string, walls: boolean, water: boolean }, mapEdits: object, settlement: object }>}
+ */
+export const V2_GOLDEN_CONFIGS = Object.freeze([
+  ...GOLDEN_CONFIGS.map((c) => ({ spec: c.spec, mapEdits: { layoutLawVersion: 2 }, settlement: c.settlement })),
+  ...V2_EXTRA_CONFIGS,
+]);
