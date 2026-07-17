@@ -42,7 +42,7 @@ import { governingFactionOf } from '../rulingPower.js';
 import { COUP_COERCION } from '../rulingPowerCoup.js';
 // The trait-weight leaf (FP-G3): the single source both TRAIT maps live in; npcData.js
 // re-exports them. Imported from the leaf directly to keep npcData.js off any hot path.
-import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT } from '../../data/npcTraitWeights.js';
+import { TRAIT_AGGRESSION, TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../../data/npcTraitWeights.js';
 import { governanceLedger } from '../governanceLedger.js';
 import { readDispositionMultiplier } from './dispositionLedger.js';
 import { deityTemper, evil01, chaos01 } from './deityAxes.js';
@@ -93,16 +93,22 @@ function importanceWeight(npc = {}) {
   return 0.38;
 }
 
-// AUTHORED personality strings only. Reads the {dominant, flaw, modifier}
-// slots the generator writes (npcGenerator.js:81-84); tolerant of a flat string
-// or array shape. NEVER reads npcStates.alignment.
+// AUTHORED personality strings + the growth-layer acquired overlay. Reads the
+// {dominant, flaw, modifier} slots the generator writes (npcGenerator.js:81-84);
+// tolerant of a flat string or array shape; then appends the learned traits the
+// growth kernel weathered onto the NON-core npc.acquiredTraits[] (commission #36 —
+// absent ⇒ [] ⇒ byte-identical). NEVER reads npcStates.alignment.
 /** @param {import('../settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredTraits(npc = {}) {
   const p = npc.personality;
-  if (!p) return [];
-  if (typeof p === 'string') return [p];
-  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
-  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  const acquired = acquiredTraitDescriptors(npc);
+  /** @type {string[]} */
+  let core;
+  if (!p) core = [];
+  else if (typeof p === 'string') core = [p];
+  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
+  else core = [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  return acquired.length ? [...core, ...acquired] : core;
 }
 
 /** Signed aggression score for one NPC's authored personality (Σ of trait weights).

@@ -134,3 +134,34 @@ export const TRAIT_ALIGNMENT = Object.freeze({
   idealistic: 0.3,
   stoic: 0.1,
 });
+
+/**
+ * THE GROWTH-LAYER OVERLAY READER (owner commission #36, THE GROWTH LAYER). The acquired
+ * (learned/temporary) traits an NPC has weathered into — the descriptor strings the growth
+ * kernel (worldPulse/npcGrowthKernel.js) MIRRORS onto a NON-core `npc.acquiredTraits[]`
+ * field (each `{ trait, intensity, since, provenance }`). The core personality
+ * ({dominant,flaw,modifier}) is NEVER touched — this is a pure additive OVERLAY the
+ * personality-summing consumers (corruption npcAlignmentScore, disposition aggression/
+ * conscience, momentum commitment cliff) append to their authored-descriptor list so a
+ * learned trait "reflects in that NPC's decision making, stances, and goals" (owner).
+ *
+ * PLACEMENT: this zero-import light leaf, NOT the lazy npcGrowthKernel — the EAGER
+ * consumer corruption.js already imports this leaf, so the overlay reaches it at ZERO
+ * first-paint cost (importing the lazy kernel into eager corruption.js would drag the
+ * kernel into the entry closure — the FP-G3 light-leaf discipline, inverted: the reader
+ * lives with the eager-safe weights it feeds). ABSENT field ⇒ [] ⇒ every consumer is
+ * byte-identical (the dormancy law: no growth flag ⇒ no mirror ⇒ no acquiredTraits). Pure.
+ * @param {unknown} npc @returns {string[]}
+ */
+export function acquiredTraitDescriptors(npc) {
+  const raw = npc && typeof npc === 'object' && !Array.isArray(npc)
+    ? /** @type {{ acquiredTraits?: unknown }} */ (npc).acquiredTraits : null;
+  const acquired = Array.isArray(raw) ? raw : null;
+  if (!acquired || acquired.length === 0) return [];
+  const out = [];
+  for (const a of acquired) {
+    const t = a && typeof a === 'object' && !Array.isArray(a) ? /** @type {{trait?:unknown}} */ (a).trait : a;
+    if (typeof t === 'string' && t) out.push(t);
+  }
+  return out;
+}

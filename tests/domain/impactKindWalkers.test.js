@@ -66,6 +66,9 @@ const EXPECTED_VOICE = {
   intervention: null, intervention_clash: null, moral_reckoning: null, pantheon_ascendancy: null,
   pantheon_twilight: null, queue_refused: null, realm_verb_refused: null, sea_battle: null,
   spring_thaw: null, stressor_aftermath: null, stressor_graduated: null, stressor_wind_down: null,
+  // THE GROWTH LAYER (owner commission #36): a person weathering into a learned trait is a
+  // quiet local character beat, NOT a town-crier proclamation — deliberately unvoiced.
+  npc_growth: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

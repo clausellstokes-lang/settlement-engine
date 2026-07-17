@@ -70,6 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
+import { advanceNpcGrowth } from './npcGrowthKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -86,7 +87,7 @@ import { advanceBeliefMaps, beliefMisjudgmentNewsEntries, beliefsActive, detectC
 import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js';
 import { advanceMoralDrift, moralReckoningNewsEntries } from '../spatial/moralDrift.js';
 import { synthesizeRealmEvents, synthesizePantheonArcs } from './realmEvents.js';
-import { appendWizardNewsEntries } from '../region/index.js';
+import { appendWizardNewsEntries, applyPulseMover } from '../region/index.js';
 import { evaluatePopulationDynamics } from './populationDynamics.js';
 import { evaluateTierResourceDynamics } from './tierResourceDynamics.js';
 import { evaluateResourceDynamics } from './resourceDynamicsKernel.js';
@@ -2259,24 +2260,10 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // behind the virtual upswingArcsEnabled flag ⇒ a complete no-op (zero forks, zero
   // keys) — the upswing dormancy golden proves the wired-but-dormant mover is byte-
   // identical to pre-wire. AGGREGATE-only.
-  {
-    const upswing = advanceUpswing({
-      snapshot: postTimeSnapshot,
-      worldState: memoryState,
-      settlementUpdates,
-      graph: applied.regionalGraph,
-      rng,
-      tick: worldState.tick,
-      now,
-    });
-    if (upswing.changed) {
-      memoryState = upswing.worldState;
-      settlementUpdates = upswing.settlementUpdates;
-      if (upswing.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, upswing.newsEntries, { now });
-      }
-    }
-  }
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceUpswing({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    graph: applied.regionalGraph, rng, tick: worldState.tick, now,
+  }), memoryState, settlementUpdates, wizardNews, now));
   // W-LIFECYCLE — THE SATELLITE LANE + peakTier (DESIGN_SETTLEMENT_LIFECYCLE.md).
   // Runs AFTER upswing so a boom minted THIS tick feeds the seeding drive, and
   // AFTER the apply pass so a W-DISCOVERY resource_strike condition planted this
@@ -2289,24 +2276,26 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // everything. DORMANT behind the virtual settlementLifecycleEnabled flag ⇒ a
   // complete no-op (zero forks, zero keys) — the fenced pre-wire dormancy golden
   // (aspatial + spatial) proves wired-but-dormant is byte-identical. AGGREGATE-only.
-  {
-    const lifecycle = advanceSettlementLifecycle({
-      snapshot: postTimeSnapshot,
-      worldState: memoryState,
-      settlementUpdates,
-      pIndex,
-      rng,
-      tick: worldState.tick,
-      now,
-    });
-    if (lifecycle.changed) {
-      memoryState = lifecycle.worldState;
-      settlementUpdates = lifecycle.settlementUpdates;
-      if (lifecycle.newsEntries.length) {
-        wizardNews = appendWizardNewsEntries(wizardNews, lifecycle.newsEntries, { now });
-      }
-    }
-  }
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceSettlementLifecycle({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    pIndex, rng, tick: worldState.tick, now,
+  }), memoryState, settlementUpdates, wizardNews, now));
+  // THE GROWTH LAYER — acquired/temporary NPC traits (owner commission #36). Runs LAST of
+  // the per-settlement movers so its deposits read THIS tick's fully-settled durable
+  // outcomes — the calamity stamped, the boom/bust/flourishing/reconstruction condition
+  // minted by upswing, the siege lifted, the betrayal revealed. The D3 course machinery at
+  // person scale: durable outcomes deposit weighted experience toward candidate bank traits
+  // (distance-from-core-resisted), a threshold-crossing mints a RARE STICKY trait (hysteresis
+  // + cap + BOTH signs — unreinforced traits decay away, D5-band-scaled), and the minted set
+  // is MIRRORED onto the roster's NON-core npc.acquiredTraits[] (the overlay the existing
+  // consumer reads append — core personality NEVER written; state-never-fate holds). DORMANT
+  // behind the virtual npcGrowthEnabled flag ⇒ a complete no-op (zero deposits, zero
+  // npcGrowth key, zero mirror) — the growth dormancy golden proves wired-but-dormant is
+  // byte-identical to pre-wire. NO rng (deposits are reads).
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowth({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    graph: applied.regionalGraph, tick: worldState.tick, now,
+  }), memoryState, settlementUpdates, wizardNews, now));
   // W-PEACE-2 — THE PRICE OF PEACE (DESIGN_PEACE_ENGINE.md §11-15). When a war
   // winds down through the existing sue-for-peace path (a fresh recalled.cause =
   // sue_for_peace* stamp, not yet consumed by the war layer), the believed-stronger
