@@ -972,6 +972,16 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ MAP LENSES + AI OVERHAUL (owner extension, 2026-07-17, task #28 re-scoped):** FOUR
+NAMED LENSES at launch — parchment / watercolor / dark fantasy / VTT ("different lenses of
+the same settlement upon first generation"); switching instant+free forever (derived view);
+VTT = a FUNCTIONAL lens (grid/scale/contrast/token-res export — the style schema gains
+functional attributes); CROSS-LENS EDIT PIN (semantic mapEdits render correctly under every
+lens, fixture-proven). AI STYLE OVERHAUL (phase 2): credits-priced task — the AI composes a
+bespoke bounded style definition FROM the settlement's dossier → preview → accept/decline;
+TRUST-LADDER PLACEMENT (design ruling, vetoable): the rung between S2 and S3 — the AI's
+FIRST compile target, where failure is purely cosmetic (the schema wall guarantees
+ugly-never-unsafe); provisional pricing joins the owner queue.
 **⬛ OWNER COMMISSION: MAP BEAUTIFICATION + GENRE CARTOGRAPHY (2026-07-17, task #28).**
 Beautify the settlement maps; genre styles (cyberpunk/sci-fi/noir) for Content-Plane
 settlements. DESIGN: the semantic-draw-ops/renderer split (built for determinism) IS the
