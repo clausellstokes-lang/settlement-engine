@@ -83,11 +83,30 @@ export const PROVENANCE_LEDGER_KEY = 'provenance';
  */
 export const MAX_PROVENANCE_EDGES = 4096;
 
+// ── Shapes (the fields this writer reads; everything else rides through) ───────
+
+/**
+ * A raw applied outcome or news entry — only the fields the writer reads are named.
+ * @typedef {Object} ProvReceipt
+ * @property {string|number} [id]
+ * @property {string} [type]
+ * @property {string} [candidateType]
+ * @property {string} [impactKind]
+ * @property {string|number|ReadonlyArray<string|number>} [causedBy]  explicit parent seam
+ * @property {string|number} [sourceEventId]                          existing one-hop edge
+ */
+
+/** One recorded cause-edge entry. @typedef {{ parents: string[], type: string, tick: number }} ProvEntry */
+
+/** The ledger: receipt id → its recorded entry. @typedef {Record<string, ProvEntry>} ProvLedger */
+
+/** The minimal worldState surface this writer reads/writes. @typedef {Record<string, unknown>} ProvWorldState */
+
 /**
  * THE DORMANCY GATE — the virtual `provenanceLedgerEnabled` flag, read defensively
  * (mirrors upswingArcsActive). Absent from DEFAULT_SIMULATION_RULES, so an ordinary
  * campaign returns false and the writer is a pure no-op.
- * @param {any} worldState
+ * @param {ProvWorldState|null|undefined} worldState
  * @returns {boolean}
  */
 export function provenanceLedgerActive(worldState) {
@@ -101,7 +120,7 @@ export function provenanceLedgerActive(worldState) {
  * seam — scalar or array) then `sourceEventId` (the existing one-hop edge). String,
  * non-empty, in a stable order. Self-references and duplicates are dropped by the
  * caller (against the receipt's own id).
- * @param {any} item  a raw applied outcome or a raw news entry
+ * @param {ProvReceipt} item  a raw applied outcome or a raw news entry
  * @returns {string[]}
  */
 function rawParentIdsOf(item) {
@@ -121,7 +140,7 @@ function rawParentIdsOf(item) {
 /**
  * A short structural type for a receipt (never prose). Prefers the outcome type /
  * candidateType, else the news impactKind, else a generic marker.
- * @param {any} item
+ * @param {ProvReceipt} item
  * @returns {string}
  */
 function typeOf(item) {
@@ -136,17 +155,17 @@ function typeOf(item) {
  * as their children's parents). Deterministic: keyed by id, parents deduped/sorted
  * with self-edges dropped.
  * @param {Object} args
- * @param {any[]} args.outcomes      raw applied outcomes (applied.autoApplied ∪ proposals)
- * @param {any[]} args.newsEntries   raw news entries (applied.newsEntries) carrying sourceEventId
+ * @param {ProvReceipt[]} args.outcomes      raw applied outcomes (applied.autoApplied ∪ proposals)
+ * @param {ProvReceipt[]} args.newsEntries   raw news entries (applied.newsEntries) carrying sourceEventId
  * @param {Set<string>} args.durableIds  the ids that land in the durable pulseRecord
  * @param {number} args.tick
- * @returns {Record<string, { parents: string[], type: string, tick: number }>}
+ * @returns {ProvLedger}
  */
 export function collectProvenanceEdges({ outcomes = [], newsEntries = [], durableIds, tick }) {
-  /** @type {Record<string, { parents: string[], type: string, tick: number }>} */
+  /** @type {ProvLedger} */
   const edges = {};
   const scope = durableIds instanceof Set ? durableIds : null;
-  const consider = (/** @type {any} */ item) => {
+  const consider = (/** @type {ProvReceipt} */ item) => {
     const id = item?.id != null ? String(item.id) : '';
     if (!id) return;
     if (scope && !scope.has(id)) return;
@@ -173,11 +192,11 @@ export function collectProvenanceEdges({ outcomes = [], newsEntries = [], durabl
  * Rebuild a provenance ledger object with keys in sorted order — the serialization
  * is then insertion-order-independent (byte-stable regardless of merge order), the
  * `sortedRecord` idiom the upswing/spatial ledgers use.
- * @param {Record<string, any>} obj
- * @returns {Record<string, any>}
+ * @param {ProvLedger} obj
+ * @returns {ProvLedger}
  */
 function sortedLedger(obj) {
-  /** @type {Record<string, any>} */
+  /** @type {ProvLedger} */
   const out = {};
   for (const k of Object.keys(obj).sort()) out[k] = obj[k];
   return out;
@@ -188,8 +207,8 @@ function sortedLedger(obj) {
  * highest-tick edges (most recent lineage), evicting the lowest tick first; ties
  * broken by id descending so the survivor set is deterministic. Returns the ledger
  * unchanged (same reference intent) when already within the cap.
- * @param {Record<string, { parents: string[], type: string, tick: number }>} ledger
- * @returns {Record<string, { parents: string[], type: string, tick: number }>}
+ * @param {ProvLedger} ledger
+ * @returns {ProvLedger}
  */
 function compactToHorizon(ledger) {
   const ids = Object.keys(ledger);
@@ -198,7 +217,7 @@ function compactToHorizon(ledger) {
   const keep = ids
     .sort((a, b) => (ledger[b].tick - ledger[a].tick) || (a < b ? 1 : a > b ? -1 : 0))
     .slice(0, MAX_PROVENANCE_EDGES);
-  /** @type {Record<string, any>} */
+  /** @type {ProvLedger} */
   const next = {};
   for (const id of keep) next[id] = ledger[id];
   return next;
@@ -209,13 +228,13 @@ function compactToHorizon(ledger) {
  * horizon-compacted. GATED: inactive ⇒ the exact same worldState reference is
  * returned (no ledger key, byte-identical). Active but zero new edges + no prior
  * ledger ⇒ still no key (dormancy-neutral). Pure — never mutates.
- * @param {any} worldState
+ * @param {ProvWorldState} worldState
  * @param {Object} args
- * @param {any[]} args.outcomes
- * @param {any[]} args.newsEntries
+ * @param {ProvReceipt[]} args.outcomes
+ * @param {ProvReceipt[]} args.newsEntries
  * @param {Set<string>} args.durableIds
  * @param {number} args.tick
- * @returns {any} a new worldState (or the same reference when nothing changed)
+ * @returns {ProvWorldState} a new worldState (or the same reference when nothing changed)
  */
 export function recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick }) {
   if (!provenanceLedgerActive(worldState)) return worldState;
@@ -223,7 +242,7 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
   // The ledger key is a STRING LITERAL at every accessor call (not the
   // PROVENANCE_LEDGER_KEY constant) because the spatialLedgerCoverage walker scans
   // for literal-key setSpatialLedger writes — the 'upswing'/'reframes' idiom.
-  const prior = /** @type {Record<string, any>} */ (getSpatialLedger(worldState, 'provenance')) || null;
+  const prior = /** @type {ProvLedger|null} */ (getSpatialLedger(worldState, 'provenance')) || null;
   const priorObj = prior && typeof prior === 'object' && !Array.isArray(prior) ? prior : {};
   if (Object.keys(fresh).length === 0) {
     // Nothing to record this advance — leave the ledger (and its absence) untouched.
@@ -239,20 +258,25 @@ export function recordProvenanceLedger(worldState, { outcomes, newsEntries, dura
  * appendPulseHistory. When the ledger is dormant it IS appendPulseHistory (returns
  * its exact result — byte-identical). When lit it records the advance's cause-edges
  * first, then commits the pulse record. The durable receipt set (selectedOutcomes ∪
- * impactDigest ids) scopes the recording to exactly the chronicle's node ids.
- * @param {any} worldState
- * @param {any} pulseRecord   the record about to be appended (carries the durable ids + tick)
- * @param {any} applied       the applyWorldPulseOutcomes result (autoApplied/proposals/newsEntries)
- * @returns {any} the world state with pulseRecord appended (+ provenance when lit)
+ * impactDigest ids) scopes the recording to exactly the chronicle's node ids. The
+ * record/applied params are read structurally (cast to the fields used) so the
+ * broadly-typed kernel call site passes without an `any`.
+ * @param {ProvWorldState} worldState
+ * @param {Record<string, unknown>} pulseRecord   carries the durable ids + tick
+ * @param {Record<string, unknown>} applied       the applyWorldPulseOutcomes result
+ * @returns {ProvWorldState} the world state with pulseRecord appended (+ provenance when lit)
  */
 export function appendPulseHistoryWithProvenance(worldState, pulseRecord, applied) {
   if (!provenanceLedgerActive(worldState)) return appendPulseHistory(worldState, pulseRecord);
+  const rec = /** @type {{ tick?: number, selectedOutcomes?: ProvReceipt[], impactDigest?: ProvReceipt[] }} */ (pulseRecord || {});
+  const app = /** @type {{ autoApplied?: ProvReceipt[], proposals?: ProvReceipt[], newsEntries?: ProvReceipt[] }} */ (applied || {});
+  /** @type {Set<string>} */
   const durableIds = new Set();
-  for (const o of (pulseRecord?.selectedOutcomes || [])) if (o?.id != null) durableIds.add(String(o.id));
-  for (const d of (pulseRecord?.impactDigest || [])) if (d?.id != null) durableIds.add(String(d.id));
-  const outcomes = [...(applied?.autoApplied || []), ...(applied?.proposals || [])];
-  const newsEntries = applied?.newsEntries || [];
-  const tick = Number.isFinite(pulseRecord?.tick) ? Number(pulseRecord.tick) : Number(worldState?.tick) || 0;
+  for (const o of (rec.selectedOutcomes || [])) if (o?.id != null) durableIds.add(String(o.id));
+  for (const d of (rec.impactDigest || [])) if (d?.id != null) durableIds.add(String(d.id));
+  const outcomes = [...(app.autoApplied || []), ...(app.proposals || [])];
+  const newsEntries = app.newsEntries || [];
+  const tick = Number.isFinite(rec.tick) ? Number(rec.tick) : Number(worldState?.tick) || 0;
   const withLedger = recordProvenanceLedger(worldState, { outcomes, newsEntries, durableIds, tick });
   return appendPulseHistory(withLedger, pulseRecord);
 }

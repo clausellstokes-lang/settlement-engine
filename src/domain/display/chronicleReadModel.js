@@ -228,7 +228,7 @@ function buildThread(component) {
  * but the label is computed honestly rather than hardcoded.)
  * @param {Thread} a
  * @param {Thread} b
- * @param {import('./chronicleGraph.js').RecordedEdges} edges
+ * @param {import('./chronicleGraph.js').RecordedEdges|undefined} edges
  * @returns {boolean}
  */
 function threadsShareRecordedEdge(a, b, edges) {
@@ -260,7 +260,7 @@ function crossLinksFor(threads, edges) {
       const setB = new Set(b.keys);
       const shared = a.keys.filter((/** @type {string} */ k) => setB.has(k)).sort(byStr);
       if (shared.length === 0) continue;
-      const inferred = !threadsShareRecordedEdge(a, b, /** @type {any} */ (edges));
+      const inferred = !threadsShareRecordedEdge(a, b, edges);
       if (!links.has(a.id)) links.set(a.id, []);
       if (!links.has(b.id)) links.set(b.id, []);
       (links.get(a.id) || []).push({ id: b.id, dramaClass: b.dramaClass, sharedKeys: shared, inferred });
