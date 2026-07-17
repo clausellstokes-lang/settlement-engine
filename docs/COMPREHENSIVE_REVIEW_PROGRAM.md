@@ -972,6 +972,19 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: THE URBAN FABRIC LAYER (2026-07-17, task #39) + LAYOUT v2 TEMPORAL
+EXTENSION.** The map gains MEMORY: a pure projection of current state cannot show gradual
+history ("buildings and city designs are resistant to rapid change except in the case of
+catastrophe and rebirth") — so THE FABRIC LAYER = the growth layer for stone: district
+prominence integrators (deposits from ruling power / faith dominance / income sources /
+trade volume / population / food disparity; SLOW decay — the merchant quarter's prosperity
+lingers after the guild falls, gradually replaced) · ALIGNMENT = the drift rate of NEW
+fabric (lawful rubric-faithful; chaotic encroachment over the old planned bones — the
+palimpsest) · STRESSOR SCARS as decaying entries · CATASTROPHE the one fast path
+(calamityHistory → district rebirth). Map = projection(dossier + fabric); maps confirmed
+dynamic-with-the-dossier, now dynamic-with-history at stone's pace. Flag-gated engine
+integrator (mover pattern, consumer-census inputs), dark ⇒ byte-identical; #38 consumes
+when lit. Dispatches when the Growth Layer folds. The chronicle narrates fabric turns.
 **⬛ LAYOUT v2 REFINED (owner, 2026-07-17): MEDIEVAL FORM, MODERN COMPOSITION.** Form
 vocabulary from ACTUAL historical settlements (Carcassonne-concentric, Lübeck harbor-fan,
 Durham river-spine, bastide grids where fiction justifies; lot grain, growth scars,
