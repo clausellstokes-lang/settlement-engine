@@ -1098,6 +1098,26 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: DOOR 3 — THE KEYED SCALE (2026-07-17) → w7-prep @ eb958f4b** (merge of
+claude/interiors tip a4bc218a off 66eda8e8; spot-checked: fence HELD — zero townMap
+edits, all new files). Seeded semantic interiors: `${_seed}::interior:v1:<id>` fork,
+integer-only geometry (quarter-turn rotations, cross-machine stable) · facet-law grammar
+(NATURE kind via cohesionWeave.facetOf, declared ?? inferred ?? generic; FUNCTION variant
+rooms: heals⇒infirmary, judges⇒chamber) · THE ENVELOPE LAW vs the ACTIVE layout model
+(v2 else v1; entrance on the district-facing edge — the v1 16×16-landmark footprint rule
+= JUDGMENT #1) · prosperity-scaled furnishing · **corruption semantics: REVEALED ⇒
+visible evidence room; COVERT ⇒ a concealed chamber that never alters public geometry —
+fail-closed scrub pinned (publicSafe never derives it; both public paths byte-identical;
+covert walls never reach UVTT line-of-sight)** · UVTT pre-walled by construction ·
+scoped interiorEdits sidecar · all four lenses, zero new colors · store-free lazy
+InteriorView. NEW ADDITIVE GOLDEN FAMILY: 48-entry seed×tier×kind sha matrix (v1 town
+goldens untouched). Lane gate: full suite 12,495/0 · tsc 0 · strict 0 · validators green ·
+eager delta 0 B. FOLD RECEIPTS on merged tree: interior pins 49/49 · tsc 0 · build ✓ ·
+verify:dist 146/146 (the interiorLazy contract joins). SEAMS: enter-from-map hook =
+manager wires at the SM-5 fold (fence-forced, correct) · pricing = interiorExportGateReady
+predicate riding resolveExportAccess (OWNER LADDER PENDING). JUDGMENTs ×3 vetoable in the
+lane report. Lane memory written by the lane. ONE MAP WAVE DOWN, TWO BUILDING (SM-5 ·
+spatial-consequence); fog dispatches at the SM-5 fold.
 **⬛ OWNER COMMISSION: MAP-LAYER ANALYTICS (2026-07-17, in-session: "make sure the
 analytics also capture the data regarding settlement map layer generation as well"):**
 the map layer joins the telemetry seam. RELAYED to the live SM-5 lane (it owns the map
