@@ -76,7 +76,7 @@ export function exportDistrictColor(category, style = DEFAULT_STYLE_ID) {
 //    view space; gated by `style.furniture`. Underlay furniture (grid) draws under
 //    the map; overlay furniture (wash / cartouche / compass / scale bar) on top. ──
 
-/** VTT coordinate grid — light lines every `gridStep` under the map. @param {DrawOp[]} ops @param {any} style */
+/** VTT coordinate grid — light lines every `gridStep` under the map. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushGrid(ops, style) {
   const step = style.functional.gridStep || 50;
   const ink = style.palette.ink;
@@ -88,7 +88,7 @@ function pushGrid(ops, style) {
   }
 }
 
-/** Aged-paper wash — four faint translucent corner triangles. @param {DrawOp[]} ops @param {any} style */
+/** Aged-paper wash — four faint translucent corner triangles. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushWash(ops, style) {
   const ink = style.palette.ink;
   const c = 190;
@@ -102,7 +102,7 @@ function pushWash(ops, style) {
   for (const pts of corners) ops.push({ t: 'poly', pts, closed: true, fill: ink, fillOpacity: 0.05 });
 }
 
-/** Cartouche neatline — a double inked border frame. @param {DrawOp[]} ops @param {any} style */
+/** Cartouche neatline — a double inked border frame. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushCartouche(ops, style) {
   const ink = style.palette.ink;
   /** @param {number} a @param {number} w @param {number} o @returns {DrawOp} */
@@ -118,7 +118,7 @@ function pushCartouche(ops, style) {
   ops.push(frame(28, 1, 0.6));
 }
 
-/** Compass rose — a two-tone star in the lower-right corner. @param {DrawOp[]} ops @param {any} style */
+/** Compass rose — a two-tone star in the lower-right corner. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushCompass(ops, style) {
   const ink = style.palette.ink;
   const gold = style.palette.anchor;
@@ -133,7 +133,7 @@ function pushCompass(ops, style) {
   ops.push({ t: 'circle', cx, cy, r: 4, fill: gold, stroke: ink, strokeWidth: 0.75 });
 }
 
-/** Scale bar — a five-segment alternating bar, lower-left. @param {DrawOp[]} ops @param {any} style */
+/** Scale bar — a five-segment alternating bar, lower-left. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushScaleBar(ops, style) {
   const ink = style.palette.ink;
   const fill = style.palette.buildingFill;
