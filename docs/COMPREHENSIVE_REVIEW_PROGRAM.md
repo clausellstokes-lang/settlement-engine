@@ -972,6 +972,11 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RULING #6 (2026-07-17: "after these land simply stop"):** the manager FOLDS the
+five in-flight lanes as they report, then HALTS — no further dispatches this session
+(S4-S6, generation-time content, TOWN LAYOUT v2, the composite, ROUND 3 all HOLD). The
+successor resumes from the dossier's DISPATCH ORDER section. All pre-signed authorities
+(RULING #5, THE ONE REGEN) remain standing for the resume.
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
