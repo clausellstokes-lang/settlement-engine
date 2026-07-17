@@ -1098,6 +1098,24 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ LANE PARKED: CONTENT-GT-DOSSIER (2026-07-17, the owner-started session) — the
+DOSSIER+NAMING half of task #27 PARKED @ 577179fb on claude/generation-time-content-dossier
+(4 commits STACKED on the sibling generation-time branch @ f9720b5a — spot-checked; ⚠️ THE
+COMPOSITE TAKES THIS BRANCH, it supersedes the sibling).** THE LOAD-BEARING LAW: per-step
+PRNG forks + one-_roll()-per-pick ⇒ in-place pool growth is DRAW-COUNT INVARIANT; 0-draw
+surfaces use a pure fnv leaf (kernel/proseHash.js, canonical-at-zero). VERIFICATION BAR:
+base-vs-tree STRUCTURAL DIFF over the 187-row generator-golden grid — ONLY prose paths
+moved, zero structural/numeric fields (stronger than goldens-green). Grown: pressure
+sentences (the survey's CRITICAL) · POLITICAL_FLAVOR · arrival scenes · 56-institution
+desc sample · WORLD-SCOPED FACTION DEDUP (the survey's worst surface; pure rng-free
+post-pass in composeInstantWorld; ⚠️ rename by IDENTITY not name-match — the
+two-same-named-factions collapse bug found+pinned). Gate: 12,446 pass / 1 PARK RED =
+generatorGoldenMaster only (regen at THE ONE REGEN; never re-record early) · dist 145/145.
+DEFERRED-WITH-REASON in-branch (history-event wiring, ~245 institution descs, NPC pools,
+vignettes); OWNER-GATED untouched (displayName schema, deity growth). **OWNER TASTE GATE
+QUEUED: docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md** (+ the faction-rename strategy call +
+the 9-instance sentence-casing quirk noted). The content stack now parks TWO deep for the
+composite; the ONE REGEN batch grows accordingly.
 **⬛ THE FOUR CROWNS (owner, 2026-07-17, verbatim goals — THE AMBITION RUBRIC):** "i am
 trying to go for technologically and potentially: 1. best map generator 2. best settlement
 generator 3. best campaign simulator 4. best TTRPG use of AI — those are my goals that I
