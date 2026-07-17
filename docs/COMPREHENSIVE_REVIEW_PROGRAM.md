@@ -972,6 +972,24 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ SURVEYOR-S1b RATIFIED + FOLDED (2026-07-17 ~00:55; merge 114b0c7c + rollback-note fix
+bf10b52f) — THE AI CONSTITUTION IS FULLY IN CODE.** One mid-wave stall (agent parked on a
+monitor event that never fires — the known pattern; SendMessage resume worked, zero loss).
+All four seamed items shipped + pinned: §3b TWO-VOICES (claims[]/musings[] structural,
+sanitizeMusings strips smuggled actionable fields, registerPurity deterministic eval, the
+panel's "Surveyor muses" register) · §3c(4) CANARY (derived salted tracer, logged, PINNED
+never-in-output) · §3c(5) META-PROBE (migration 141: canary + meta_probe columns, writer
+DROP+recreated at 17 params; full throttle detector a documented seam) · §3f RIDER (frozen
+controlled vocab, id-free ai_analyst_rider event on BOTH managed and BYOK paths pinned by
+source scan, EVENTS_REV 7→8, CONFLICTED-WITNESS PINNED: a flattering rider beside bad claims
+still scores honestly). Branch gate 11,800/2 (EXEMPT_CEILING + the 137 rollback-note miss —
+**a REAL pre-existing find: the founder lane's focused gate never ran the discipline test;
+FIXED at fold @ bf10b52f**, discipline 4/4 + founder pins 11/11 green on the merged tree).
++36 B eager (the event name — the S1 precedent class); margin 2,054. JUDGMENTs ratified ×6
+(direct service-role analytics insert · derived-not-stored canary · deterministic purity
+regex · EVENTS_REV bump · musings-only = a charged valid turn · starter taxonomy w/ oov
+growth seam). OWNER QUEUE: migration 141 sign-off (verbatim in the agent report) ·
+SURVEYOR_CANARY_SECRET env at deploy. Chain head = 141 contiguous.
 **⬛ SURFACING CONFIRMATION (owner, 2026-07-17: does all the hidden machinery have its
 appropriate visible place for dossiers/realm, navigable and intuitive?).** DESIGN ANSWER:
 yes by architecture (machinery→read-model→surface; the scope hierarchy dossier/realm-
