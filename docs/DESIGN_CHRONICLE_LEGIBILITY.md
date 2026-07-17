@@ -60,6 +60,24 @@ PLACEMENT (owner's ruling): not forced to top news; ALWAYS present, findable, ne
 a consistent section of every advance report. FUTURE HOOK (seam, not this wave): the D7
 reframe read applied to decrees — intended vs believed reception of the DM's own acts.
 
+## 5b. ENTANGLEMENT CONSOLIDATION (owner amendment 2026-07-17: "some of these queued events
+## per the DM's orders directly entangle with each other. so that is an area to consolidate")
+Per-decree isolation MISLEADS when decrees interact: intersecting cones double-count, and
+the most important finding — the DM's own orders interacting — vanishes between separate
+entries. Entanglement is DETECTED mechanically over the receipts graph and rendered
+CONSOLIDATED:
+- **CHAINED**: decree B applied to state decree A created (B's cone roots inside A's cone).
+- **SHARED**: both cones feed the same downstream event.
+- **CONFLICTING**: a descendant of one reverses/negates a descendant of the other —
+  SELF-CONFLICT is a first-class named finding ("your embargo undid your granary order").
+- **SYNERGISTIC**: an outcome whose receipt traces to descendants of BOTH.
+RENDERING: entangled decrees form ONE cluster entry — the joint story, then per-decree
+contributions and standings WITHIN it; singletons render per §5 unchanged. Shared
+descendants attributed once (no double-count). The honest-nulls rule extends: "absorbed BY
+YOUR OWN DECREE Y" is a distinct standing from plain "absorbed" — the interaction IS the
+news, because both were their choices. Pin: a constructed two-decree conflict fixture must
+render as one cluster naming the conflict, never as two independent entries.
+
 ## 6. LOAD-BEARING SOURCING RULE
 The chronicle derives from the DURABLE stores (receipts / chronicle / obligations / op
 ledgers) — NEVER from the capped display feeds (wizardNews 240 etc.), so long spans never
