@@ -37,7 +37,8 @@
  *           | 'add-institution' | 'remove-institution'
  *           | 'add-resource' | 'remove-resource'
  *           | 'add-stressor' | 'remove-stressor'
- *           | 'edit-prose'} EditKind */
+ *           | 'edit-prose'
+ *           | 'edit-npc' | 'reassign-npc' | 'stasis-npc' | 'return-npc'} EditKind */
 
 export const EDIT_KINDS = Object.freeze([
   'rename-npc', 'rename-faction', 'rename-settlement',
@@ -45,6 +46,8 @@ export const EDIT_KINDS = Object.freeze([
   'add-resource', 'remove-resource',
   'add-stressor', 'remove-stressor',
   'edit-prose',
+  // DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (edit / reassign / stasis+return).
+  'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
 ]);
 
 const _editKindSet = new Set(EDIT_KINDS);
@@ -60,7 +63,13 @@ const _editKindSet = new Set(EDIT_KINDS);
 // tests/store/editActionPersist.test.js and tests/domain/pendingEdits.test.js.
 // (A plain frozen list + Array.includes, not a Set/helper: two entries, and this
 // module is first-paint eager, so the smaller shape is the byte-minimal one.)
-export const COMMITTABLE_EDIT_KINDS = Object.freeze(['rename-npc', 'rename-settlement']);
+// DESIGN_NPC_LIFECYCLE §2: the NPC ops join the committable set — each has a live
+// dispatcher (settlementSlice.commitPendingEdits) and a registered operation
+// (operationRegistry). Kept in lockstep with the commit switch.
+export const COMMITTABLE_EDIT_KINDS = Object.freeze([
+  'rename-npc', 'rename-settlement',
+  'edit-npc', 'reassign-npc', 'stasis-npc', 'return-npc',
+]);
 
 // Deterministic short discriminator (FNV-1a). The edit id must be stable for the
 // same (kind, payload, clock) so revert-by-id and idempotent re-appends stay
@@ -201,7 +210,10 @@ export function previewCascade(settlement, queue) {
         proseEdits += 1;
         break;
       default:
-        // unknown kinds were rejected at buildEdit() — defensive only
+        // The DESIGN_NPC_LIFECYCLE §2 NPC ops (edit/reassign/stasis/return) and any
+        // unknown kind fall through — deliberately uncounted in this coarse cascade
+        // banding to hold the first-paint budget (the ops still render per-kind in
+        // the PendingChangesBar). No eager summary switch for them.
         break;
     }
   }

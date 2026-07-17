@@ -107,7 +107,7 @@ import { makeActionResult } from './actionResult.js';
 import { setPrimaryDeityImpl, imposeCultImpl } from './settlementDeityHelpers.js';
 import {
   renameSettlementImpl, syncActiveNeighbourFieldsImpl,
-  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl,
+  recordCanonFlavorEntryImpl, canonizeSavedSettlementImpl, applyNpcOp,
 } from './settlementRenameHelpers.js';
 
 /**
@@ -530,13 +530,14 @@ export const createSettlementSlice = (set, get) => ({
             }
             break;
           }
-          // Unreachable by contract: queueEdit admits only COMMITTABLE_EDIT_KINDS,
-          // so every active edit here has a case above. Any committable-set /
-          // dispatcher drift that could reach this default is caught by the pins in
-          // editActionPersist.test.js + pendingEdits.test.js, not a runtime log
-          // (this branch is first-paint eager — the byte-minimal guard is no code).
+          // The remaining committable kinds are the DESIGN_NPC_LIFECYCLE §2 typed NPC
+          // ops (edit / reassign / stasis+return); applyNpcOp dispatches them (a
+          // canon-tolerant mutation delegated to settlementRenameHelpers so this
+          // at-ceiling slice stays net-zero). A truly-uncommittable kind never
+          // reaches here — queueEdit admits only COMMITTABLE_EDIT_KINDS, pinned in
+          // editActionPersist.test.js + pendingEdits.test.js.
           default:
-            break;
+            applyNpcOp(get, set, edit); break;
         }
       } catch (e) {
         console.warn(`[commitPendingEdits] ${edit.kind} failed:`, e);

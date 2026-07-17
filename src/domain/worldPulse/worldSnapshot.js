@@ -82,7 +82,15 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
     .filter(isCanonSave);
 
   const settlements = canonSaves.map(save => {
-    const settlement = saveSettlement(save);
+    // Participation view: stasis NPCs are excluded from the settlement the pulse
+    // reads (§2). Dormant (same reference) when none are shelved. `_s` is the
+    // loose (any) pulse-view settlement, so this narrows nothing downstream and
+    // the participation copy is byte-identical when no NPC is shelved.
+    const _s = saveSettlement(save);
+    const _npcs = /** @type {Array<{ stasis?: unknown }>} */ (_s?.npcs);
+    const settlement = (Array.isArray(_npcs) && _npcs.some((n) => n && n.stasis))
+      ? { ..._s, npcs: _npcs.filter((n) => !(n && n.stasis)) }
+      : _s;
     const id = saveId(save);
     const name = settlement?.name || save?.name || id;
     // causal / system / activeConditions depend SOLELY on the settlement

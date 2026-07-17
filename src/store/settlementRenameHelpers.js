@@ -27,6 +27,53 @@
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 
+// ── DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (delegated bodies) ─────────
+// commitPendingEdits' default case routes the NPC-lifecycle committable kinds here
+// (settlementSlice is AT its max-lines ceiling, so the bodies live in this delegated-
+// impl helper — the renameSettlementImpl precedent). CANON-TOLERANT: NPC lifecycle
+// edits change the FUTURE, never the past (no rename-style identity lock). Each writes
+// a DECLARED facet (npc.facets) so it is a permanent citizen of THE FACET LAW. Kept
+// eager-cheap for the tight first-paint budget: NO lazy-npcOps import (which would
+// pull the bank + PRNG into first paint), and the covenant UI resolves the seat
+// patch — the pure/canonical bodies + propagation model + all pins live in
+// domain/npc/npcOps.js, kept in lockstep with this thin dispatcher. The full bank
+// validation (facet vocab, stasis reasons) lives in that lazy spec + the covenant UI;
+// this eager dispatcher trusts the covenant payload (light presence guards only).
+
+/**
+ * Apply one typed NPC op to the live settlement (edit-npc / reassign-npc / stasis-npc
+ * / return-npc). Mutates through the slice's Immer set(); persists so the op survives
+ * reload. No-op-safe on a missing NPC / bad payload.
+ * @param {Function} get @param {Function} set @param {{ kind: string, payload?: any }} edit
+ */
+export function applyNpcOp(get, set, edit) {
+  const k = edit?.kind;
+  const p = edit?.payload || {};
+  let changed = false;
+  set(state => {
+    const npc = state.settlement?.npcs?.[p.npcIndex];
+    if (!npc) return;
+    if (k === 'edit-npc') {
+      if (!['alignment', 'temperament', 'role', 'goal'].includes(p.facetKind)) return;
+      npc.facets = { ...(npc.facets || {}), [p.facetKind]: p.value };
+      // Sync the live native field the engine/display reads (npcOps PROPAGATION MODEL).
+      if (p.facetKind === 'temperament') npc.personality = { ...(npc.personality || {}), dominant: p.value };
+      else if (p.facetKind === 'goal') npc.goal = { ...(npc.goal || {}), short: p.value };
+    } else if (k === 'reassign-npc' && p.target && typeof p.target === 'object') {
+      // Seat-held ties move to the new posting (the covenant UI passes ONLY seat
+      // fields); people-held relationship edges keyed by npc id travel untouched.
+      Object.assign(npc, p.target);
+    } else if (k === 'stasis-npc') {
+      if (!p.reason) return;
+      npc.stasis = { reason: p.reason };
+    } else if (k === 'return-npc') {
+      delete npc.stasis;
+    } else { return; }
+    changed = true;
+  });
+  if (changed) get().persistActiveSaveEdit?.();
+}
+
 /**
  * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
  * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
