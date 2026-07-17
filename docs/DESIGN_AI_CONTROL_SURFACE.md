@@ -82,6 +82,48 @@ second client.
   receipts, approval UX; providers are adapters (Anthropic first, OpenAI second). Routing
   classes fast/balanced/deep per task type; users buy OUTCOMES (task-priced credits), not tokens.
 
+## 3b. THE TWO-VOICES LAW (owner amendment 2026-07-16: "It should also respond back to the
+## user in conversation with ideas and expansions and clarifications where asked.")
+The Surveyor CONVERSES — ideation, expansions, alternatives, and clarifying questions back to
+the user are first-class, not just Q&A. One bright line keeps the honesty boundary intact:
+**THE REPORTING VOICE and THE MUSING VOICE are visibly distinct registers.**
+- REPORTING (what IS): citation-bound per the standing law; unsourceable ⇒ "the engine does
+  not record this." Never speculative content in this register.
+- MUSING (what COULD BE): clearly marked as suggestion (a distinct visual register in the
+  panel + a distinct block in the answer contract — not a prose disclaimer); creative freedom
+  is the point; NOTHING in this register lands in the world except through the standing typed-
+  ops → validation → preview → approval lane. Clarifying questions to the user are always
+  permitted (read-only conversation).
+- The answer contract carries the split structurally (e.g. `report[]` cited + `musings[]`
+  uncited) so the client renders them differently BY CONSTRUCTION — the register can never
+  blur by prompt drift. Eval: register-purity joins the §5 metrics (speculation appearing in
+  the report block = a scored failure).
+
+## 3c. EXTRACTION DEFENSE (owner amendment 2026-07-16: "I don't want my architecture being
+## deciphered by a cunning user using his AI. If we can protect and deter then yes.")
+FOUNDATION (by construction, already true): the provider model NEVER sees the engine — no
+source, kernels, formulas, tuned constants, or catalogs in any context; it reads DERIVED
+read-model slices only. Architecture cannot leak through a door it never entered. HONEST
+FLOOR (recorded): observable behavior is inferable — any player can reconstruct the
+rulebook's outline by experimenting; the moat is execution depth, not concept secrecy; we
+defend the gap between "can describe" and "can rebuild." THE DETER/DETECT/DENY STACK:
+1. NOTHING-SECRET-IN-THE-PACKET policy: instruction packets (persona/rules/vocabulary) are
+   treated as semi-public — a successful extraction yields nothing proprietary.
+2. DISCLOSURE HYGIENE: the Surveyor declines to discuss its instructions, retrieval
+   machinery, slice composition, or internals (soft deterrent, honestly labeled bypassable).
+3. NAMING HYGIENE: user-facing citations use public receipt names ONLY — never internal
+   module/system/file names; answers describe the world, not the software.
+4. CANARY TOKENS: each account's packet carries a unique inert marker; leaked packet text is
+   attributable to its account.
+5. EXTRACTION DETECTION on the audit spine: aiOperationLog already records prompt hash +
+   slice list per request — add pattern flags for systematic enumeration / meta-probing
+   (frequency of instruction-seeking questions, breadth-scan signatures) → throttle + review.
+   Probing is loud in a fully receipted system.
+6. ECONOMIC DETERRENCE: task-priced credits make bulk probing expensive by construction
+   (BYOK pays its own tokens but the per-request slice boundary still bounds exposure).
+7. TERMS: systematic extraction / reverse-engineering prohibited in ToS — the action basis
+   when the detector trips.
+
 ## 4. Commercial mapping (per the owner's spec, recorded decisions)
 - **Surveyor tier $19.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
   (the anon/free/premium × role orthogonality holds; entitlements gate the INTERFACE — the sim
