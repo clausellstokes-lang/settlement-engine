@@ -160,6 +160,12 @@ describe.runIf(haveMigration)('surveyor usage governors — real SQL (pglite)', 
       expect(r.warn).toBe(true);
     });
 
+    it('returns the user model_prefs so the edge can honour a per-task model override', async () => {
+      await setSettings({ model_prefs: { analysis: 'claude-haiku-4-5' } });
+      const r = await precheck('analysis');
+      expect(r.model_prefs).toMatchObject({ analysis: 'claude-haiku-4-5' });
+    });
+
     it('enforces a per-task-class cap independent of the global cap', async () => {
       await setSettings({ per_task_caps: { analysis: { daily_tokens: 500 } } });
       await recordUsage('analysis', 'claude-opus-4-8', 300, 300); // 600 ≥ 500 for analysis

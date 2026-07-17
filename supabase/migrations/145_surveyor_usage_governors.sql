@@ -325,6 +325,9 @@ begin
     'reason_class', v_reason, 'breached', v_breached,
     'daily_tokens', v_dtok, 'weekly_tokens', v_wtok,
     'daily_usd', round(v_dusd, 4), 'weekly_usd', round(v_wusd, 4),
+    -- the user's per-task model preference (the edge honours it for a BYOK call,
+    -- validated against the adapter-supported set; falls back to the server default).
+    'model_prefs', v_s.model_prefs,
     'caps', jsonb_build_object(
       'daily_token_cap', v_s.daily_token_cap, 'weekly_token_cap', v_s.weekly_token_cap,
       'daily_usd_cap', v_s.daily_usd_cap, 'weekly_usd_cap', v_s.weekly_usd_cap,

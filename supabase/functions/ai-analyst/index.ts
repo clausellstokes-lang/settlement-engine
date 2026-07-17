@@ -232,6 +232,11 @@ export async function handleAiAnalyst(
     let capturedRefusalClass: RefusalClass | null = null;
     let capturedRefusalMessage: string | null = null;
     let capturedRefusalDoors: string[] = [];
+    // #29: the user's per-task-class model preference (from the governor precheck) + the
+    // model actually called. A BYOK user's valid override wins; everyone else (and any
+    // invalid/unknown pref) falls back to the server default ANALYST_MODEL.
+    let capturedModelPref: string | null = null;
+    let capturedModel = ANALYST_MODEL;
 
     const estTokens = (s: string) => Math.max(1, Math.ceil(String(s || '').length / 4));
 
@@ -285,7 +290,15 @@ export async function handleAiAnalyst(
         }, cls === 'paused' ? 403 : 402, cors);
       }
       capturedWarn = pr?.warn === true;
+      const mp = (pre as { model_prefs?: Record<string, unknown> } | null)?.model_prefs;
+      const pref = mp && typeof mp[ANALYST_FEATURE] === 'string' ? String(mp[ANALYST_FEATURE]) : null;
+      capturedModelPref = pref;
     } catch (e) { logError('ai-analyst', user.id, e, { stage: 'governor' }); }
+
+    // Resolve the model actually called: a BYOK user's valid per-task override wins;
+    // an unknown/invalid pref or a managed (server-key) request uses the server default.
+    capturedModel = (providerKey.byok && capturedModelPref && ANTHROPIC_SUPPORTED_MODELS.includes(capturedModelPref))
+      ? capturedModelPref : ANALYST_MODEL;
 
     const outcome = await runCreditedCall({
       async reserve() {
@@ -314,7 +327,7 @@ export async function handleAiAnalyst(
         try {
           // §3e: world data routes only to a non-training-class adapter (throws otherwise).
           const adapter = routeWorldDataAdapter(anthropicAdapter);
-          resp = await adapter.call({ model: ANALYST_MODEL, apiKey: providerKey.key, prompt: capturedPrompt, signal: ac.signal, fetchImpl: providerFetch });
+          resp = await adapter.call({ model: capturedModel, apiKey: providerKey.key, prompt: capturedPrompt, signal: ac.signal, fetchImpl: providerFetch });
         } catch (fetchErr) {
           // Network / timeout ⇒ provider-down (not a key fault). Classify → refusal + health.
           await applyProviderError(classifyProviderThrow(fetchErr));
@@ -373,7 +386,7 @@ export async function handleAiAnalyst(
           const costUsd = providerKey.byok ? 0 : Number((((inTok / 1_000_000) * 5) + ((outTok / 1_000_000) * 25)).toFixed(6));
           const { error } = await supabaseAdmin.from('ai_usage_events').insert({
             user_id: user.id, feature: ANALYST_FEATURE, phase: null, provider: ANALYST_PROVIDER,
-            model: ANALYST_MODEL, model_preference: null,
+            model: capturedModel, model_preference: capturedModelPref,
             input_tokens: inTok, output_tokens: outTok,
             tokens_estimated: capturedUsage.input == null || capturedUsage.output == null,
             estimated_cost_usd: costUsd, ok, fellback: false, duration_ms: 0, spend_id: capturedSpendId,
@@ -387,7 +400,7 @@ export async function handleAiAnalyst(
     // Carries hashes + slice ids + coverage + byok flag — NEVER prose, PII, or the key.
     try {
       const rec = aiOperationLogRecord({
-        prompt: capturedPrompt, bundle, model: ANALYST_MODEL, modelVersion: `anthropic-${ANTHROPIC_VERSION}`,
+        prompt: capturedPrompt, bundle, model: capturedModel, modelVersion: `anthropic-${ANTHROPIC_VERSION}`,
         answerText: capturedAnswerText, audience, validated: capturedValidated,
         metaProbe, canary,
       });

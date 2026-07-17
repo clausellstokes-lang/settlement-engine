@@ -138,4 +138,12 @@ describe('ai-analyst — usage governors + graceful refusals (#29)', () => {
   it('records the refusal_class on the audit row', () => {
     expect(ANALYST).toContain('p_refusal_class: capturedRefusalClass');
   });
+
+  it('honours a BYOK user per-task model override, validated against the adapter set', () => {
+    // the chosen model is gated on the BYOK flag AND membership in the supported set;
+    // an invalid/managed request falls back to the server default.
+    expect(ANALYST).toMatch(/providerKey\.byok\s*&&\s*capturedModelPref\s*&&\s*ANTHROPIC_SUPPORTED_MODELS\.includes\(capturedModelPref\)/);
+    expect(ANALYST).toMatch(/model:\s*capturedModel/);        // the actual provider call uses it
+    expect(ANALYST).toContain('model: capturedModel, model_preference: capturedModelPref'); // metered
+  });
 });
