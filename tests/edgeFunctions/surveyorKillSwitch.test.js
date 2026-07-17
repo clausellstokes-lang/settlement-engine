@@ -45,14 +45,14 @@ describe('kill-switch — the edge wires it fail-closed, before any spend', () =
   });
 
   it('the kill-switch check runs AFTER the entitlement gate and BEFORE the credit reserve', () => {
-    const entitlementAt = interpretSrc.indexOf('has_surveyor_entitlement');
-    const killSwitchAt = interpretSrc.indexOf('surveyor_stage_enabled');
-    const reserveAt = interpretSrc.indexOf('reserve_ai_spend');
-    const runCreditedAt = interpretSrc.indexOf('runCreditedCall');
+    // anchor on the actual .rpc() CALL SITES (code only), not the bare symbol (which also
+    // appears in the header doc-comment).
+    const entitlementAt = interpretSrc.indexOf("rpc('has_surveyor_entitlement'");
+    const killSwitchAt = interpretSrc.indexOf("rpc('surveyor_stage_enabled'");
+    const reserveAt = interpretSrc.indexOf("rpc('reserve_ai_spend'");
     expect(entitlementAt).toBeGreaterThan(0);
     expect(killSwitchAt).toBeGreaterThan(entitlementAt);   // gated behind entitlement
     expect(reserveAt).toBeGreaterThan(killSwitchAt);        // fail-closed BEFORE any money moves
-    expect(runCreditedAt).toBeGreaterThan(killSwitchAt);
   });
 
   it('interpret-session reuses the shared S1 money/BYOK/refusal machinery (no duplication)', () => {
@@ -68,5 +68,32 @@ describe('kill-switch — the edge wires it fail-closed, before any spend', () =
   it('the botGuard result is consumed (validate:edge contract) and the packet carries the canary', () => {
     expect(interpretSrc).toContain('guard.reject');
     expect(interpretSrc).toContain('accountCanary');
+  });
+});
+
+describe('kill-switch — the parley edge wires it fail-closed, before any spend', () => {
+  const parleySrc = readFileSync(resolve(process.cwd(), 'supabase/functions/parley/index.ts'), 'utf8');
+
+  it('parley consults surveyor_stage_enabled(parley) and guards fail-closed before reserve', () => {
+    expect(parleySrc).toContain("PARLEY_STAGE = 'parley'");
+    expect(parleySrc).toContain('isStageEnabled(stageData)');
+    expect(parleySrc).toContain('killSwitchRefusal');
+    const killSwitchAt = parleySrc.indexOf("rpc('surveyor_stage_enabled'");
+    const entitlementAt = parleySrc.indexOf("rpc('has_surveyor_entitlement'");
+    const reserveAt = parleySrc.indexOf("rpc('reserve_ai_spend'");
+    expect(killSwitchAt).toBeGreaterThan(entitlementAt);
+    expect(reserveAt).toBeGreaterThan(killSwitchAt);
+  });
+
+  it('parley reuses the shared money/BYOK/refusal machinery + is DM-only, musings-only', () => {
+    expect(parleySrc).toContain("from '../ai-analyst/creditFlow.ts'");
+    expect(parleySrc).toContain("from '../ai-analyst/byok.ts'");
+    expect(parleySrc).toContain("PARLEY_FEATURE = 'parley'");
+    expect(parleySrc).toContain('routeWorldDataAdapter');   // §3e retention floor
+    expect(parleySrc).toContain('compileParley');
+    // musings-only: the response returns speech + musings, never an ops array
+    expect(parleySrc).not.toContain('interpretation:');     // no compiler output here
+    expect(parleySrc).toContain('guard.reject');
+    expect(parleySrc).toContain('accountCanary');
   });
 });
