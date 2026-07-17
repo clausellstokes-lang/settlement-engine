@@ -1098,6 +1098,20 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER RULING #7 (2026-07-17, in-session, verbatim: "after all of this lands, i first
+want you to push to github, then continue with the resurvey round 3 and onwards and so
+forth"): THE EARLY PUSH.** The push moves from THE VERY END to POST-FOLD / PRE-ROUND-3:
+when the three build-out lanes land, push to origin
+(github.com/clausellstokes-lang/settlement-engine) claude/w7-prep + the
+review-fixes-2026-07-08 ledger + every parked lane branch (claude/w-r2-g2,
+claude/generation-time-content) — BRANCHES AS BACKUP ONLY: no PR yet, no merge, no
+deploy; the merge button + db-push remain physically the owner's; the PR + deploy batch
+stay at THE VERY END. Motivation on record: the single-machine extinction risk named in
+the manager's assessment this session. STANDING PRACTICE from then on (manager JUDGMENT,
+vetoable): re-push at each subsequent milestone (post-ROUND-3 waves, post-soak,
+post-regen) so the remote never trails by more than one phase. The tail is otherwise
+unchanged: push → composite → ROUND 3 → gap register → soak → tuning → re-certs → ONE
+REGEN → final gate → THE VERY END (PR + deploy batch; the two carve-outs stand).
 **⬛⬛ THE RESUME (2026-07-17, successor session): DISPATCH ORDER EXECUTED.** Task board
 rebuilt (11 tasks mirroring the tail). THREE LANES DISPATCHED off w7-prep @ 07d3a1d2
 (Opus implementers, isolated worktrees, STEP -1 location guards + verify-first preambles):
