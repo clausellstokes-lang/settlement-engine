@@ -972,6 +972,30 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ TRIPLE FOLD + RATCHET #11 (2026-07-17 ~07:30; tips 1709e333/15b0fc6e/addd4011/e6f14414).**
+**BYOK SURFACE folded**: verify-by-test-call (never stored-healthy-unverified), provider-error
+classes → §3d refusals w/ switch-to-managed doors + persisted key health, the usage meter +
+user governors enforced at the edge door; migrations RENUMBERED at fold into the 143 gap
+(143_byok_health, 144_usage_governors + internal refs; chain contiguous head=144); the three
+shared docs reconciled (18 functions, 144 migrations, surveyor-byok in the deploy block).
+OWNER QUEUE: does BYOK skip the managed analysis-credit debit? (S1 behavior double-charges by
+design today — pricing call) · surveyor-byok joins the deploy list · envs at deploy:
+app.settings.byok_secret + SURVEYOR_CANARY_SECRET · price-estimates = operator config · its
+4 claimed "pre-existing base reds" CONTRADICT the gallery agent's clean gate on the same base
+— audited at the composite gate. **FP-G10 folded**: −33,803 B (SUPPLY_CHAIN_NEEDS' sole eager
+importer severed; byte-identity proven, slug-form guard pinned); FUTURE CANDIDATE RECORDED:
+full customRegistry de-eagering (−46KB ceiling, needs async deity-resolver refactor).
+**MAP STYLES folded**: the style layer (bounded data-only definitions in src/design; THE WALL
+pinned ×4; geometry-untouched proven), FOUR LENSES (parchment byte-identical to pre-refactor;
+watercolor; dark fantasy; VTT w/ grid+scale+token-raster export), the (seed,style) GOLDEN
+(18×4 sha-pinned), cross-lens edit pin, craft pass (corner washes/cartouche/compass — TASTE
+VETO PENDING at the published artifact), style schema → DESIGN_CONTENT_PLANE §7. JUDGMENTs
+ratified ×4 (mapEdits.styleLens over a new container · screen-adaptive parchment · plate
+inherits skin only · pane split for the ceiling). SEAMS: VTT download affordance · anon-
+gallery lens honor waits on the owner-gated §6 mapEdits opt-in · OG share image never renders
+the town map (pre-existing). **RATCHET #11 (manager's call at fold): 1,066,400 → 1,040,000**
+(−26.4KB banked; ~8.8KB headroom retained for S3–S6/gallery-2/content registrations; FINAL
+tightening at the composite gate). verify:dist 143/143 on a fresh build. S3 DISPATCHING.
 **✅ GALLERY-2 (PHASE 1) RATIFIED + FOLDED (2026-07-17 ~05:00; merge ad9f3067) — THE
 COVERT-CORRUPTION SCRUB IS BUILT + CERTIFIED.** The recorded leak (covert corruption
 impairments NAMING the corrupted NPC riding institutions[] through get_gallery_dossier to
