@@ -56,6 +56,9 @@ import { exposedCorruptionForPair } from './corruptionWeb.js';
 import { foreignClashIntensityOf } from './convergence.js';
 import { buildPressureSummary } from './relationshipEvolution.js';
 import { buildThreatByCid } from './martialReadiness.js';
+// D4 (DESIGN_SIM_DEPTH_R2): fear_of_dominance reads the hegemony sphere topology (belief-side).
+// no sphere ⇒ 0 everywhere ⇒ byte-identical. One-directional: hegemonyFear never imports this module.
+import { makeHegemonyFear } from './hegemonyFear.js';
 import { clamp01 } from '../../kernel/math.js';
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
@@ -106,6 +109,11 @@ export const WAR_REASON_TYPES = Object.freeze([
   // minting their next war BETWEEN themselves (proxy-stays-proxy — the reasons layer
   // decides escalation; 0 when the intervention layer is dark ⇒ byte-identical).
   'foreign_clash',
+  // D4 (DESIGN_SIM_DEPTH_R2): fear of a dominant power — Blainey's own first-class cause.
+  // A free settlement fears the BELIEVED strength-share of a hegemony sphere it neighbours
+  // (subordinates excluded — v1 balances, never bandwagons). 0 when no sphere / peaceEngine
+  // dark ⇒ byte-identical.
+  'fear_of_dominance',
 ]);
 
 /** The casus pacis taxonomy (design §14.2, the brief's seven + W-CONVERGENCE's spheres). */
@@ -120,6 +128,10 @@ export const PEACE_REASON_TYPES = Object.freeze([
   // W-CONVERGENCE: the mirror of foreign_clash — two clashing sponsors settling zones
   // of influence (the mutual-disengagement ground) instead of fighting.
   'spheres_understanding',
+  // D4: the distinct mirror of fear_of_dominance — the war-reason DIES when the believed
+  // imbalance does. When a once-feared sphere CRUMBLES, its free neighbours reconcile (the
+  // empire falls, the balance is restored). Feeds détente, NOT foreign_clash's mirror.
+  'balance_restored',
 ]);
 
 /**
@@ -150,6 +162,9 @@ export const REASON_MIRRORS = Object.freeze({
   corruption_exposed: 'belief_convergence',
   // W-CONVERGENCE: the clash of sponsors and its mutual-disengagement mirror.
   foreign_clash: 'spheres_understanding',
+  // D4: fear of a hegemon ↔ the balance restored when it crumbles (a DISTINCT peace kind,
+  // NOT a reuse of spheres_understanding — ruling 2: the walker stays strict + bijective).
+  fear_of_dominance: 'balance_restored',
 });
 
 // ── The shared substrate (imported by peaceReasons.js — shape law) ──────────
@@ -583,6 +598,11 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // The threat-environment index (existing martialReadiness read), built once.
   const threatByCid = buildThreatByCid(snapshot, worldState);
 
+  // D4: the hegemony fear context, built once per tick. hasSphere is a cheap ground-truth
+  // gate — no hegemony ⇒ every fearOf(...) returns 0 without per-observer work ⇒ byte-identical
+  // (the negative-control pin). Belief-side share is memoized per observer inside.
+  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
+
   // W-PEACE-2: the TREATY_DEFAULT feed — CLOSING this module's registration seam.
   // The treaties ledger (built by advanceTreaties, which runs THIS tick before the
   // war-reason mover) carries {parties, complianceState, defaultedBy, defaultSeverity01}
@@ -634,6 +654,9 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(worldState, fromId, toId, tick) }) },
       // W-CONVERGENCE: two sponsors on opposing sides of one internal contest (0 when dark).
       { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(worldState, fromId, toId) }) },
+      // D4: fromId (observer) fears toId's hegemony sphere if it centres one (0 when toId
+      // centres no sphere, when fromId is toId's subordinate, or no hegemony ⇒ byte-identical).
+      { type: 'fear_of_dominance', ...hegemonyFear.fearOf(fromId, toId) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);

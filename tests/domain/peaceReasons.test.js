@@ -303,9 +303,10 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     const brief = warCausalBrief(r.worldState, 'a', 'b');
     expect(brief.peacePresent).toBeGreaterThanOrEqual(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).toBe(`${brief.peacePresent} of ${PEACE_REASON_TYPES.length} peace reasons now present; this war is dying`);
-    // 8 = the wave-1 seven + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
-    expect(brief.peace.length).toBe(8);
-    expect(brief.war.length).toBe(8);
+    // 9 = the wave-1 seven + W-CONVERGENCE's foreign_clash↔spheres_understanding
+    //   + D4's fear_of_dominance↔balance_restored.
+    expect(brief.peace.length).toBe(9);
+    expect(brief.war.length).toBe(9);
     // Present rows carry their receipts + birth ticks; absent rows read empty.
     const present = brief.peace.find((row) => row.type === 'exhaustion');
     expect(present.present).toBe(true);
@@ -326,7 +327,7 @@ describe('warCausalBrief — the dramatic-irony read-model', () => {
     expect(brief.peacePresent).toBeLessThan(REASON_TUNING.IRONY_DYING_AT);
     expect(brief.line).not.toMatch(/dying/);
     const dark = warCausalBrief({ simulationRules: {} }, 'a', 'b');
-    expect(dark.line).toBe('0 of 8 peace reasons now present');
+    expect(dark.line).toBe('0 of 9 peace reasons now present');
     expect(dark.peacePresent).toBe(0);
     expect(dark.warPresent).toBe(0);
   });

@@ -25,7 +25,7 @@ describe('the symmetry law — war and peace reasons equally typed, equally rece
   it('the reason-type counts match across war/peace', () => {
     expect(WAR_REASON_TYPES.length).toBe(PEACE_REASON_TYPES.length);
     // 7 wave-1 casus + W-CONVERGENCE's foreign_clash ↔ spheres_understanding.
-    expect(WAR_REASON_TYPES.length).toBe(8);
+    expect(WAR_REASON_TYPES.length).toBe(9);
   });
 
   it('the receipt shapes match across war/peace (the shared record factory)', () => {

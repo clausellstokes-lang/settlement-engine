@@ -80,6 +80,9 @@ import { proposalIdFor, upsertProposal } from './worldState.js';
 // facet) OR the established hireable-force name/tag pattern.
 import { facetOf } from '../spatial/cohesionWeave.js';
 import { MERCENARY_MARKET_PATTERN } from './mercenaryMarket.js';
+// D4 (DESIGN_SIM_DEPTH_R2): fear of a rival AS A HEGEMON amplifies the DENIAL motive. One-
+// directional (hegemonyFear never imports convergence); 0 when no sphere ⇒ byte-identical.
+import { makeHegemonyFear } from './hegemonyFear.js';
 
 /** @typedef {import('../rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 /** A settlement item on the pre-tick snapshot (loose — the war-layer read shape). The
@@ -112,6 +115,10 @@ export const CONVERGENCE_TUNING = Object.freeze({
   // MOTIVE THRESHOLDS (design §2, all recon-verified computable).
   GRIP_PRESERVE_THRESHOLD: 0.25, // foreignGrip at/above which preserve_order fires
   KINSHIP_FLOOR: 0.2,            // §G kinship tie floor to matter
+  // D4 (DESIGN_SIM_DEPTH_R2): when the RIVAL a patron would deny is itself a feared hegemon,
+  // the denial motive is AMPLIFIED (the coalition that intervenes against the conqueror). A
+  // bounded ± multiplier on the denial score; 0 fear ⇒ ×1 ⇒ byte-identical.
+  DENIAL_HEGEMON_FEAR_W: 0.5,
 
   // INSTALLED-REGIME OBLIGATION (design §2 — the predatory-patron mint). A successful
   // challenger-intervention mints an obligation the installed regime OWES its patron,
@@ -284,17 +291,25 @@ export function scoreKinship({ kinshipIncumbent01 = 0, kinshipChallenger01 = 0 }
 
 /**
  * denial (COUNTER-INTERVENTION): a rival is already backing one side; the patron backs
- * the OTHER to deny them the prize. @param {{ rivalSide?: string|null, rivalStrength01?: number }} inputs
+ * the OTHER to deny them the prize. D4: AMPLIFIED (bounded) when that rival is itself a
+ * feared hegemon — the coalition that intervenes against the conqueror. hegemonFear01 = 0
+ * (no sphere / dark) ⇒ ×1 ⇒ byte-identical.
+ * @param {{ rivalSide?: string|null, rivalStrength01?: number, hegemonFear01?: number }} inputs
  * @returns {{ score: number, receipt: string, side: string|null }}
  */
-export function scoreDenial({ rivalSide = null, rivalStrength01 = 0 } = {}) {
+export function scoreDenial({ rivalSide = null, rivalStrength01 = 0, hegemonFear01 = 0 } = {}) {
   if (rivalSide !== INTERVENTION_SIDES.INCUMBENT && rivalSide !== INTERVENTION_SIDES.CHALLENGER) {
     return { score: 0, receipt: '', side: null };
   }
   const strength = clamp01(num(rivalStrength01, 0));
   if (strength <= 0) return { score: 0, receipt: '', side: null };
   const side = rivalSide === INTERVENTION_SIDES.INCUMBENT ? INTERVENTION_SIDES.CHALLENGER : INTERVENTION_SIDES.INCUMBENT;
-  return { score: clamp01(strength), side, receipt: 'A rival marches to claim this seat — we march to deny it them.' };
+  const fear = clamp01(num(hegemonFear01, 0));
+  const score = clamp01(strength * (1 + CONVERGENCE_TUNING.DENIAL_HEGEMON_FEAR_W * fear));
+  const receipt = fear > 0
+    ? 'A rising power marches to claim this seat — better a coalition now than a conqueror at our own gate later.'
+    : 'A rival marches to claim this seat — we march to deny it them.';
+  return { score, side, receipt };
 }
 
 /**
@@ -874,9 +889,10 @@ export function mercenaryReinforcementOf(snapshot, settlementId) {
  * state — the reads that feed the pure scorers. Belief-free (a physical operation).
  * @param {Snapshot} snapshot @param {WorldStateLike} worldState @param {string} patronId @param {string} targetId
  * @param {string} relType @param {string|null} sponsorId @param {string|null} rivalSide @param {number} rivalStrength01
+ * @param {number} [hegemonFear01]  D4: the patron's fear of the rival AS A HEGEMON (0 ⇒ byte-identical)
  * @returns {Record<string, unknown>}
  */
-function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, sponsorId, rivalSide, rivalStrength01) {
+function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, sponsorId, rivalSide, rivalStrength01, hegemonFear01 = 0) {
   const hostile01 = HOSTILE_REL.has(relType) ? 1 : 0;
   const friendly = FRIENDLY_REL.has(relType);
   // The corruption-web reads take their own (structurally-loose) WebSnapshot shape.
@@ -896,9 +912,11 @@ function motiveInputsFor(snapshot, worldState, patronId, targetId, relType, spon
     // kinship — §G ties are a later seam; wave 1 leaves them 0 (documented).
     kinshipIncumbent01: 0,
     kinshipChallenger01: 0,
-    // denial — a rival already committed to one side.
+    // denial — a rival already committed to one side. D4: hegemonFear01 amplifies the denial
+    // when that rival is a feared hegemon (0 ⇒ byte-identical).
     rivalSide,
     rivalStrength01,
+    hegemonFear01,
   };
 }
 
@@ -1000,6 +1018,10 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
     }
   }
 
+  // D4: the hegemony fear context, built once. hasSphere false ⇒ every fearOf(...) is 0
+  // (no hegemony ⇒ byte-identical denial). Belief-side share memoized per observer inside.
+  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
+
   for (const { targetId, sponsorId } of contests) {
     // Rival tracking within this target (denial): who already backs which side.
     const already = recordsForTarget(prior, targetId);
@@ -1017,12 +1039,14 @@ export function advanceIntervention({ snapshot, worldState, graph = null, rng, t
       if (next[key]) continue; // already intervening here
 
       // Denial read: the strongest rival already committed (opposite side is the target).
-      let rivalSide = null; let rivalStrength01 = 0;
+      let rivalSide = null; let rivalStrength01 = 0; let rivalInterId = null;
       for (const r of already) {
         const s = clamp01(r.strength / 100);
-        if (s > rivalStrength01) { rivalStrength01 = s; rivalSide = r.side; }
+        if (s > rivalStrength01) { rivalStrength01 = s; rivalSide = r.side; rivalInterId = r.interId != null ? String(r.interId) : null; }
       }
-      const inputs = motiveInputsFor(snapshot, worldState, patronId, targetId, relType, sponsorId, rivalSide, rivalStrength01);
+      // D4: does this patron FEAR the strongest rival as a hegemon? (0 ⇒ byte-identical denial).
+      const hegemonFear01 = rivalInterId ? hegemonyFear.fearOf(patronId, rivalInterId).score : 0;
+      const inputs = motiveInputsFor(snapshot, worldState, patronId, targetId, relType, sponsorId, rivalSide, rivalStrength01, hegemonFear01);
       const chosen = scoreMotives(inputs);
       if (!chosen.motive || !chosen.side) continue;
 
