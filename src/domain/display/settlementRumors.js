@@ -315,7 +315,7 @@ function capitalize(s) {
  * @param {string} key
  * @param {RumorArrivalRecord} record
  * @param {{ tick: number, nameFor: (id: string) => string,
- *   activatedDeityNames: ReadonlySet<string> | null }} ctx
+ *   activatedDeityNames: ReadonlySet<string> | null, newsDelayTicks?: number }} ctx
  */
 function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks = 0 }) {
   const completeness = clamp01(record.completeness01);
@@ -423,7 +423,8 @@ function severityBand(severity) {
  * deterministic total order (arrival desc, score desc, codepoint key).
  *
  * @param {Object} args
- * @param {{ tick?: number, spatialLedgers?: unknown } |
+ * @param {{ tick?: number, spatialLedgers?: unknown, simulationRules?: Record<string, unknown>,
+ *   spatialCanonVersion?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest } |
  *   null | undefined} args.worldState
  * @param {unknown} args.settlementId
  * @param {boolean} [args.includeGroundTruth]  DM/premium surfaces ⇒ true;
@@ -467,7 +468,7 @@ export function settlementRumors({
       || compareCodepoint(keyA, keyB));
   return arrived.map(([key, record]) => {
     const newsDelayTicks = newsDigest
-      ? hopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), settlementId)
+      ? hopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), String(settlementId))
       : 0;
     const projection = projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks });
     if (!includeGroundTruth) return projection;

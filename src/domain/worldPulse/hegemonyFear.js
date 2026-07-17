@@ -92,19 +92,24 @@ function pickSphere(spheres, observerId, centerId) {
  * (memoized per observer) + the distance discount, both off the SAME (worldState, snapshot).
  * `hasSphere` is a cheap ground-truth gate — false ⇒ every fear/balance read is 0 without any
  * per-observer work (the negative-control pin; byte-identical when no hegemony exists).
- * @param {{ worldState: Record<string, unknown>, snapshot: { settlements?: unknown[], byId?: Map<string, unknown> } | null | undefined }} args
+ * @param {{ worldState: Record<string, unknown>, snapshot: { settlements?: unknown[], byId?: unknown } | null | undefined }} args
  */
 export function makeHegemonyFear({ worldState, snapshot }) {
   const digest = activeSpatialDigest(worldState);
-  const settlements = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
+  const settlements = /** @type {Array<{ id?: unknown, name?: unknown, settlement?: { name?: unknown } | null }>} */ (
+    Array.isArray(snapshot?.settlements) ? snapshot.settlements : []);
+  /** @type {Map<string, unknown>} */
   const byId = snapshot?.byId instanceof Map
     ? snapshot.byId
-    : new Map(settlements.map((/** @type {{ id?: unknown }} */ it) => [String(it.id), it]));
+    : new Map(settlements.map((it) => [String(it.id), it]));
+  /** The snapshot item for a settlement id, in the shape navalStrengthOf reads.
+   *  @param {string} id @returns {import('./navalStrength.js').SnapItem | undefined} */
+  const itemOf = (id) => /** @type {import('./navalStrength.js').SnapItem | undefined} */ (byId.get(String(id)));
   // Land strength (0..1, the belief map's scale) + a PUBLIC naval term (0..1) — the aggregate
   // the design says INCLUDES navalStrength. Land is fogged per observer; naval is un-fogged.
-  const landOf = (/** @type {string} */ id) => clamp01(num(settlementStrength(byId.get(String(id)), {})));
+  const landOf = (/** @type {string} */ id) => clamp01(num(settlementStrength(itemOf(id), {})));
   const navalOf = (/** @type {string} */ id) => (digest
-    ? clamp01(num(navalStrengthOf(digest, byId.get(String(id)), id)) / HEGEMONY_FEAR_TUNING.NAVAL_STRENGTH_NORM)
+    ? clamp01(num(navalStrengthOf(digest, itemOf(id), id)) / HEGEMONY_FEAR_TUNING.NAVAL_STRENGTH_NORM)
     : 0);
   const groundStrengthOf = (/** @type {string} */ id) => landOf(id) + navalOf(id);
 
@@ -130,7 +135,7 @@ export function makeHegemonyFear({ worldState, snapshot }) {
   };
 
   const distanceWeightBetween = (/** @type {string} */ centerId, /** @type {string} */ observerId) => (
-    hasSphere ? mappedDistanceWeight(digest, String(centerId), String(observerId)) : 1);
+    hasSphere && digest ? mappedDistanceWeight(digest, String(centerId), String(observerId)) : 1);
 
   return {
     hasSphere,

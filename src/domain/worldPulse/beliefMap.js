@@ -1117,7 +1117,8 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
   // D1: the frozen digest for the distance surcharge, read ONCE — null unless
   // distancePricedNewsEnabled is lit (dark ⇒ every reportsBySubject below is passed
   // null ⇒ zero surcharge ⇒ byte-identical).
-  const newsDigest = distancePricedNewsActive(worldState) ? activeSpatialDigest(worldState) : null;
+  const newsDigest = distancePricedNewsActive(worldState)
+    ? activeSpatialDigest(/** @type {Parameters<typeof activeSpatialDigest>[0]} */ (worldState)) : null;
   // Every observer that either holds a belief OR heard a rumor this window. The
   // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
   // it. [spatial-engine-5]
