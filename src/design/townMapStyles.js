@@ -68,7 +68,12 @@ const PARCHMENT = {
   contrast: 'normal',
   hazardGlyph: 'triangle',
   anchorGlyph: 'disc',
-  furniture: [],
+  // THE CRAFT PASS (owner taste-veto): the default lens dressed as a hand-drawn
+  // map — an aged-paper wash at the corners, a double-line cartouche neatline, and
+  // an inked compass rose. Pure decorative furniture over the untouched base
+  // geometry; the linework itself is unchanged, so the map reads exactly as before,
+  // now framed. VTT deliberately stays bare (grid + scale, no ornament).
+  furniture: ['wash', 'cartouche', 'compass'],
   functional: { grid: false, gridStep: 0, scaleBar: false, tokenPx: 0 },
   rasterScale: 1,
   palette: {
@@ -109,6 +114,7 @@ const WATERCOLOR = {
   label: 'Watercolor',
   background: '#f4efe4',
   contrast: 'soft',
+  furniture: ['wash', 'cartouche', 'compass'],
   palette: {
     water: '#6f9bb3', road: '#9a8468', street: '#b0a184', ink: '#4a4030',
     wall: '#5c5038', gate: '#f4efe4', anchor: '#d8b25a', buildingFill: '#fbf8f0',
@@ -135,6 +141,7 @@ const DARK_FANTASY = {
   label: 'Dark Fantasy',
   background: '#1c1a15',
   contrast: 'high',
+  furniture: ['wash', 'cartouche', 'compass'],
   palette: {
     water: '#4a7fa0', road: '#8a7a5c', street: '#a8946e', ink: '#e8dcc0',
     wall: '#c8b48a', gate: '#1c1a15', anchor: '#d9a441', buildingFill: '#2a271f',

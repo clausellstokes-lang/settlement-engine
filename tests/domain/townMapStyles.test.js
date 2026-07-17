@@ -48,6 +48,12 @@ const geomSigList = (ops) => ops.map(geomSig).join('|');
 
 const richModel = () => buildTownMapModel(GOLDEN_CONFIGS[10].settlement); // city / coastal / walls / water
 
+/** A resolved lens with its decorative furniture stripped — the bare MAP geometry
+ *  under that lens's skin. Lets the geometry-untouched invariant compare the pure
+ *  map across lenses that carry DIFFERENT furniture (fantasy ornament vs VTT grid). */
+const bareStyle = (id) => ({ ...resolveTownMapStyle(id), furniture: [] });
+const bareSig = (model, id) => geomSigList(buildTownMapDrawList(model, bareStyle(id)));
+
 describe('map styles — registry + resolver', () => {
   it('exposes exactly the four named base lenses', () => {
     expect([...TOWN_MAP_STYLE_IDS]).toEqual(['parchment', 'watercolor', 'darkFantasy', 'vtt']);
@@ -124,24 +130,23 @@ describe('map styles — THE WALL (select from fixed capabilities, never arbitra
 });
 
 describe('map styles — geometry untouched (a re-skin never moves a shape)', () => {
-  it('the three furniture-free lenses share an identical geometry signature', () => {
+  it('all four lenses share ONE identical map geometry (furniture stripped)', () => {
     const model = richModel();
-    const sig = (id) => geomSigList(buildTownMapDrawList(model, id));
-    // parchment/watercolor/darkFantasy carry no furniture ⇒ same op set, same geometry.
-    expect(sig('watercolor')).toBe(sig('parchment'));
-    expect(sig('darkFantasy')).toBe(sig('parchment'));
+    const ref = bareSig(model, 'parchment');
+    for (const id of TOWN_MAP_STYLE_IDS) {
+      expect(bareSig(model, id), `${id} moved the map geometry`).toBe(ref);
+    }
   });
 
-  it('VTT keeps the SAME map geometry — it only ADDS furniture (grid + scale bar)', () => {
+  it('furniture is purely ADDITIVE — each lens is its bare map plus its own ornament', () => {
     const model = richModel();
-    const parch = buildTownMapDrawList(model, 'parchment');
-    const vtt = buildTownMapDrawList(model, 'vtt');
-    // The VTT list is the parchment map geometry with furniture prepended (grid)
-    // and appended (scale bar); the shared middle geometry must match parchment.
-    const parchSig = geomSigList(parch);
-    const vttSigs = vtt.map(geomSig);
-    expect(vttSigs.join('|')).toContain(parchSig);
-    expect(vtt.length).toBeGreaterThan(parch.length); // furniture added
+    for (const id of TOWN_MAP_STYLE_IDS) {
+      const withFur = buildTownMapDrawList(model, id);
+      const bare = buildTownMapDrawList(model, bareStyle(id));
+      const declared = resolveTownMapStyle(id).furniture;
+      if (declared.length === 0) expect(withFur.length).toBe(bare.length);
+      else expect(withFur.length).toBeGreaterThan(bare.length); // ornament added, geometry kept
+    }
   });
 });
 
@@ -176,19 +181,13 @@ describe('map styles — the CROSS-LENS EDIT pin (a semantic edit renders under 
     const anchor = base.buildings.find((b) => b.kind === 'landmark').anchorKey;
     const edited = buildTownMapModel(s, withPinNudge(null, anchor, 37, -21));
 
-    const sigBase = geomSigList(buildTownMapDrawList(base, 'parchment'));
-    const sigEdited = new Set(TOWN_MAP_STYLE_IDS.map((id) => geomSigList(buildTownMapDrawList(edited, id))
-      // strip VTT furniture so the comparison is over the shared map geometry
-      .split('|').filter((x) => !x.startsWith('line:') || !/,0$|,1000$/.test(x)).join('|')));
-
-    // 1) The edit actually changed the geometry (base ≠ edited).
-    expect(geomSigList(buildTownMapDrawList(edited, 'parchment'))).not.toBe(sigBase);
-    // 2) The three furniture-free lenses render the edited geometry IDENTICALLY.
-    const editedSig = (id) => geomSigList(buildTownMapDrawList(edited, id));
-    expect(editedSig('watercolor')).toBe(editedSig('parchment'));
-    expect(editedSig('darkFantasy')).toBe(editedSig('parchment'));
-    // 3) VTT's map geometry (its op list contains the parchment edited geometry).
-    expect(buildTownMapDrawList(edited, 'vtt').map(geomSig).join('|')).toContain(editedSig('parchment'));
+    // 1) The edit actually changed the map geometry (base ≠ edited, same lens).
+    expect(bareSig(edited, 'parchment')).not.toBe(bareSig(base, 'parchment'));
+    // 2) Every lens renders the edited map geometry IDENTICALLY (skin-independent).
+    const ref = bareSig(edited, 'parchment');
+    for (const id of TOWN_MAP_STYLE_IDS) {
+      expect(bareSig(edited, id), `${id} rendered the edit differently`).toBe(ref);
+    }
   });
 });
 
