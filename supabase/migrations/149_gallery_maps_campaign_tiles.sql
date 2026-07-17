@@ -29,8 +29,11 @@
 -- galleryMapMetadataPatch mirrors the same keys for edit-after-publish.
 --
 -- OPERATOR: apply via `supabase db push` AFTER 147 — rides the end-of-cycle
---   deploy batch. Idempotent; no data writes. Rollback: re-apply 089 (restores
---   publish_map) + 090 (restores the 15-column list projection).
+--   deploy batch. Idempotent; no data writes. (The `profiles` reference below
+--   is the read-only author-name JOIN — no money/PII table is written.)
+-- @rollback: re-apply migrations 089 + 090 verbatim (089 restores publish_map
+--   without the phase-2 stamps; 090 restores the 15-column list projection;
+--   function-only, no data reversal needed).
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- ── (1) publish_map — 089 verbatim + the two 147 facet stamps ─────────────────

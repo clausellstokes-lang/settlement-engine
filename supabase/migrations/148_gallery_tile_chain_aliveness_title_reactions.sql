@@ -40,8 +40,11 @@
 -- Depends on: 146 (gallery_reactions), 147 (the columns).
 -- OPERATOR: apply via `supabase db push` AFTER 146+147 — rides the end-of-cycle
 --   deploy batch. Idempotent (drop if exists + create or replace); no data
---   writes. Rollback: re-apply 076 + 093 (restores the chain without the
---   phase-2 columns).
+--   writes. (The `profiles` references below are read-only author-name JOINs —
+--   this migration writes no money/PII table.)
+-- @rollback: re-apply migrations 076 + 093 verbatim (they restore the whole
+--   tile-rows/list-RPC chain without the phase-2 columns; function-only, no
+--   data reversal needed).
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- Drop the dependents first (071's order): all read _gallery_public_tile_rows().

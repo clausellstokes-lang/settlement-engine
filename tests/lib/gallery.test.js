@@ -134,10 +134,12 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
         hasDeity: true,
         // Owner import opt-in facet (gallery_importable; surfaced by migration 071).
         importable: true,
-        // Retired facets must NOT be forwarded: governmentType / stability have no
-        // stable vocabulary to match, and atWar + the population range were dropped
-        // as redundant with tier/size and noisy.
+        // At-war facet: the server honored it since 063; forwarded since
+        // GALLERY-2 phase 2 (the /gallery/at-war hub) — no longer dropped.
         atWar: true,
+        // Retired facets must NOT be forwarded: governmentType / stability have no
+        // stable vocabulary to match, and the population range was dropped as
+        // redundant with tier/size and noisy.
         populationMin: 401,
         populationMax: 5000,
         governmentType: ['monarchy'],
@@ -150,6 +152,7 @@ describe('gallery.js — fetchPublicGallery (community listing)', () => {
         prosperity: ['Wealthy'],
         hasDeity: true,
         importable: true,
+        atWar: true,
       },
     }));
   });

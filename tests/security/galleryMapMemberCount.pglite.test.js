@@ -121,7 +121,11 @@ describe('gallery maps member_count — net-current execution (pglite)', () => {
         gallery_facet_member_band text,
         gallery_facet_at_war boolean,
         gallery_facet_dominant_culture text,
-        gallery_facet_tier_spread text
+        gallery_facet_tier_spread text,
+        -- Migration 147 columns (GALLERY-2 phase 2): the net-current publish_map
+        -- (149) stamps these and list_gallery_maps (149) projects them.
+        gallery_facet_aliveness integer,
+        gallery_facet_world_age text
       );
       -- Migration 076 added a LEFT JOIN onto profiles.external_name to resolve
       -- the map AUTHOR by owner id. This test exercises member_count, not the
