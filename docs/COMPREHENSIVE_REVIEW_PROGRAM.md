@@ -1120,6 +1120,19 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE DOCUMENTATION WAVE DISPATCHED (2026-07-17, owner: "can you run this now?" —
+early dispatch owner-ordered, ahead of the fog fold):** ONE Opus lane, claude/doc-wave
+off a4343044, executing docs/briefs/W_DOCUMENTATION_WAVE.md as law + both banked research
+sweeps as inputs. CONCURRENCY SAFETY (checked at dispatch): zero file overlap with the
+live fog lane (pages/copy vs map internals; the wave consumes map modules READ-ONLY for
+fixtures/catalogs; townMap components explicitly fenced OUT of the wave). Notable
+brief-plus additions in the dispatch: the failure-policy sentence ("never charged for a
+failed task") must be VERIFIED against actual edge behavior before it may be written —
+stop-and-report if the edge does not refund (a marketing claim is a claim); the demo-world
+seed = one config constant (the owner picks the final seed); the two source ratchets that
+bit the panels lane (inline slugify, native title=) pre-warned. Tasks #19-#22 in flight
+together. The fog-fold blocker on the wave is OWNER-OVERRIDDEN; the composite still waits
+for BOTH.
 **⬛ FOLD: THE AI SURFACE PANELS (2026-07-17) → w7-prep @ a4343044** (merge of
 claude/ai-panels tip a221c40c, 4 commits off eb958f4b; spot-checked — FENCE HELD (zero
 townMap-component/engine/edge-function edits), 15 files NUL-clean; recovered from the
