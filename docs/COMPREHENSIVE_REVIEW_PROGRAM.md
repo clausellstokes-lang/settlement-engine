@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ W8 GREEN LOCAL — THE MAINLINE FREEZES (2026-07-16 ~21:50, tip 5aa11dec + brief 4052fc9c).**
+The full constitutional gate on the unified tip carrying ALL of Phase O's folds (LIGHT ·
+GUIDE-2b · SM-4 · title tranche · DEPTH D1–D6 complete · 3 design amendments): **11,680
+passed / 11 skipped / 1 failed — the sole red is EXEMPT_CEILING 69>66 (owner-gated,
+exactly the enumerated set)** · verify:dist 143/143 exit 0 · build clean. NO PUSH.
+**THE BUILD-OUT FLEET IS DISPATCHED (3 Opus implementers, disjoint fences, all off
+4052fc9c):** W-R2-D7 the reframe layer (engine; parks dormant; reframeEnabled lighting =
+owner question) · SURVEYOR S1+S2 (edge/AI lane; migrations 138+; audience rule structural;
+BYOK never-logged) · THE FOUNDER LANE (display/schema; migration 137 DRAFT presented for
+signature). Migration numbers pre-assigned to prevent the 135-collision class. On their
+folds: THE COMPOSITE assembles (mainline+G2+D7) → ROUND 3 opens (task #25).
 **⬛ OWNER RULING #3 (2026-07-16 night, verbatim: "rather than regrade, i meant that I wanted
 to change the regrade into a complete resurvey similar to the orignal prompt... after
 building out everything, then the soak is last after that which then leads to tuning, and
