@@ -16,7 +16,7 @@ Props are coarse by construction — enums, bands, counts, booleans, hashes; nev
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
 - **EVENTS_REV:** 8
-- **Events:** 121 total — 117 essential, 4 research
+- **Events:** 126 total — 122 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
@@ -210,6 +210,21 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 | `AI_ANALYST_ANSWER` | `ai_analyst_answer` | essential | — |
 | `AI_ANALYST_FEEDBACK` | `ai_analyst_feedback` | essential | — |
 | `AI_ANALYST_RIDER` | `ai_analyst_rider` | essential | — |
+
+## Surveyor S3: the intent compiler (interpret) §5 evals — coarse, id-free
+
+| Constant | Event | Class | Enriched props (code-derived) |
+|---|---|---|---|
+| `AI_INTERPRET_ANSWER` | `ai_interpret_answer` | essential | — |
+| `AI_INTERPRET_CORRECTION` | `ai_interpret_correction` | essential | — |
+| `AI_INTERPRET_RIDER` | `ai_interpret_rider` | essential | — |
+
+## Surveyor S3: THE PARLEY (parley) §5 evals — coarse, id-free
+
+| Constant | Event | Class | Enriched props (code-derived) |
+|---|---|---|---|
+| `AI_PARLEY_ANSWER` | `ai_parley_answer` | essential | — |
+| `AI_PARLEY_RIDER` | `ai_parley_rider` | essential | — |
 
 ---
 

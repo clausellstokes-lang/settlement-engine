@@ -210,6 +210,29 @@ export const EVENTS = Object.freeze({
   // never content): { intent, themes[], refusal_reason, action_drafted, oov, audience,
   // byok, refused }. INTEREST data only — never a quality metric (conflicted-witness).
   AI_ANALYST_RIDER:               'ai_analyst_rider',
+
+  // ── Surveyor S3: the intent compiler (interpret) §5 evals — coarse, id-free ──
+  // Props (never content): { opCount, requiredCount, inferredCount, optionalCount,
+  // uncertainCount, protectedCount, unsupportedCount, coverageBand, refused, byok }.
+  // coverageBand = the sourced-op rate (the interpret analog of citation coverage).
+  AI_INTERPRET_ANSWER:            'ai_interpret_answer',
+  // The §9 CORRECTION TYPOLOGY signal (now live — the compiler ships). Props (id-free,
+  // enum only): { correctionClass } ∈ the six SURVEYOR_CLASSES. One per corrected op;
+  // the "correction-rate for interpret" eval. INTEREST data — never a quality gate.
+  AI_INTERPRET_CORRECTION:        'ai_interpret_correction',
+  // §3f THE ENRICHMENT RIDER for interpret — the model's ID-FREE, category-grade traffic
+  // tag, extracted SERVER-SIDE (condition-of-service, managed AND BYOK). Same controlled
+  // vocabulary + conflicted-witness rule as the analyst rider.
+  AI_INTERPRET_RIDER:             'ai_interpret_rider',
+
+  // ── Surveyor S3: THE PARLEY (parley) §5 evals — coarse, id-free ──────────────
+  // Props (never content): { entityClass, groundingCoverageBand, registerPurityBand,
+  // refused, byok }. groundingCoverageBand = the fraction of the persona's claims
+  // grounded in its own belief slice (the epistemic-fidelity eval).
+  AI_PARLEY_ANSWER:               'ai_parley_answer',
+  // §3f THE ENRICHMENT RIDER for the parley (ID-FREE, condition-of-service). The rider
+  // also tags entity-class + topic-class so the atlas learns what tables rehearse.
+  AI_PARLEY_RIDER:                'ai_parley_rider',
 });
 
 /**

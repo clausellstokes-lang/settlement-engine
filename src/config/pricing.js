@@ -73,13 +73,15 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
-// ── Surveyor (S1) task-priced managed-credit costs ─────────────────────────
+// ── Surveyor (S1 + S3) task-priced managed-credit costs ────────────────────
 // The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
 // pricing is an owner-queued decision. Kept in lockstep with the server-side
-// spend_credits CASE (migration 140) by the pricing contract test.
+// spend_credits CASE (migrations 140 + 145) by the pricing contract test.
 const SURVEYOR_AI_COSTS = Object.freeze({
-  analysis: 3,   // one analyst answer
-  brief:    4,   // one AI-prose brief layer
+  analysis:  3,   // one analyst answer (S1)
+  brief:     4,   // one AI-prose brief layer (S2)
+  interpret: 5,   // one session compile → proposed ops (S3)
+  parley:    3,   // one in-character consultation response (S3)
 });
 
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
