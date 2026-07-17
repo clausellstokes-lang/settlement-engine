@@ -972,6 +972,15 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: MAP EXPORTS (2026-07-17, task #37, DISPATCHED).** Settlement + realm
+maps export in SVG (native draw-list) / PNG / JPEG / WebP (rasterizer idiom, selectable
+resolutions) / single-map PDF (the plate precedent) — EXPORTS HONOR THE CURRENT LENS incl.
+bespoke styles (pinned); the VTT token-raster download button (the recorded map-styles seam)
+closes in-wave; realm map via the FMG bridge's surveyed export surface (browser-bound ⇒
+PLAUSIBLE-class, stated honestly). PRICING (manager rec, vetoable): image exports FREE to
+the account owner; single-map PDF rides the existing PDF entitlement lane; anon/gallery
+export = a recorded seam for an owner decision. SIX lanes now live: S3 · provenance ·
+growth · content-vt · gallery-p2 · map-exports.
 **⬛ OWNER RULING #5 (2026-07-17: "i give all remaining signoffs ahead of schedule") — THE
 BLANKET GRANT, executed with two carve-outs.** EXECUTED IMMEDIATELY: EXEMPT_CEILING 66→69
 signed at its source (operationRegistry.js @ c1a36002 — **THE PROGRAM'S LAST STANDING RED
