@@ -972,6 +972,25 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ ToS DRAFTS FOLDED + CONTENT SURVEY BANKED (2026-07-17 ~03:30).** docs/legal/
+TERMS_OF_USE_DRAFT.md + PRIVACY_POLICY_DRAFT.md merged (headed DRAFT—NOT IN FORCE; live pages
+untouched by design; every claim source-mapped; the 4-question legal-consult list in-draft).
+TWO REAL FINDINGS → OWNER QUEUE: (1) Cartographer PRICING DISCREPANCY — the pricing page
+shows $5.99/mo while config/pricing.js sets $6.00 (600¢): reconcile to one canonical figure;
+(2) the live PrivacyPage names only 3 of 4 consent purposes — the market plane / Aggregate
+Interest Atlas missing (the draft closes it; the live page updates in the pre-launch batch,
+REQUIRED before collection starts per §4b purpose-limitation). Its gate also surfaced a
+mainline docs-freshness drift (ARCHITECTURE.md "~880 test files" vs 1,174 real) — FIXED at
+fold @ 6d2ce3be (8/8). **THE CONTENT THINNESS SURVEY (6 agents, banked @
+docs/review-r2/CONTENT_THINNESS_SURVEY_RAW.txt):** headline verdicts — CALAMITY prose
+CRITICAL (one constitutionally type-blind template stamped PERMANENTLY into
+settlement.calamityHistory + the golden wizardNews surface; variety work must vary phrasing,
+never assert disaster kinds) · war/peace REASON RECEIPTS THIN (1 fixed sentence per type ×22
+types, persisted per settlement-pair — the same casus reads identically on every pair) ·
+newsVoice ADEQUATE (125 authored lines, the one multi-variant surface; the reframe drama
+class has NO voice category — a gap to fill) · kernel news templates 1-per-event-kind.
+Generation-time surfaces confirmed golden-bound ⇒ their volume waves PARK for the regen;
+view-time (newsVoice etc.) lands free. The generation-wave dispatch derives from this map.
 **⬛ THE FULL-BATCH DISPATCH (owner: "why don't you run these?", 2026-07-17 ~03:10):** all
 five staged waves + one funding lane launched concurrently off c765a032, disjoint fences,
 pre-assigned migrations (gallery 142+143 · BYOK 144+), STEP -1 location guards everywhere:
