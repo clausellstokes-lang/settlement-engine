@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ NPC WAVE: THE NO-DEAD-FACET LAW (owner, 2026-07-17: "every facet of an NPC's generation
+and their agent movement is coherent with the surrounding world every facet. nothing is
+useless").** Two directions, walker-enforced: (1) GENERATION READS THE WORLD — no facet
+rolled in a vacuum: minting reads settlement conditions / institution type / local faith and
+alignment climate / naming culture / active drama; goal chains seed from the settlement's
+actual condition; instant NPCs identical (constraints narrow context, never replace it).
+(2) THE WORLD READS EVERY FACET — every bank facet has ≥1 registered consumer (agency read,
+politics/corruption/reframe input, or display surface); agent movement traces to facets and
+every facet can move the agent. ENFORCEMENT: a FACET-CONSUMER WALKER (the operation-registry/
+whisper-census pattern) — a facet without a context source or a consumer fails the build.
+Folded into task #26.
 **⬛ NPC WAVE EXTENDED ×4 (owner, 2026-07-17, same night):** (1) OWNER CORRECTION FOLDED:
 goal EVOLUTION already exists (achieve/fail transitions) — the gap was added-NPC citizenship;
 the goal catalog becomes TRANSITION-TYPED (on-achieve successors / on-fail fallbacks,
