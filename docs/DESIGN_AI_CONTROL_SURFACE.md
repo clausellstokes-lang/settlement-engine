@@ -127,6 +127,19 @@ In-character consultation — the differentiator is EPISTEMIC FIDELITY, structur
   selection pulse; a new task class ('parley'), task-priced; DM-ONLY at first (the persona
   knows its own secrets) — a player-facing variant needs a beliefs-∩-player-safe compile
   (parked). Rider tags entity-class + topic-class (the atlas learns what tables rehearse).
+- **THE TOTAL-GROUNDING LAW (owner amendment 2026-07-17: faction/power, deity, power
+  rankings + rulings, economy, seasons, NPC relations — "all of that should factor into all
+  of this. Make sure it is cohesive"): THE PARLEY READS EVERYTHING THE ENGINE READS** — the
+  persona slice is a SUPERSET of the entity's engine-consumer census (the no-dead-facet
+  walker's census, consumed in reverse; walker-checkable parity: any mechanism that begins
+  reading an entity class automatically feeds its voice). THE MANIFEST, explicitly: faction
+  membership + archetype + stance · sovereign/power allegiance + the HEGEMONY READ through
+  the entity's fog (she ranks powers as her beliefs rank them) · standing rulings/decrees
+  touching her settlement/institution (felt through the reframe layer) · the settlement's
+  deity + doctrine courses + imposed-cult/heresy context · economy (prosperity, her
+  livelihood's supply state, trade dependencies, blockade pressure) · THE SEASON + its
+  pressures (harvest anxiety, winter road-dread) · the NPC web (patron/rival/kin/bloc edges,
+  people-held vs seat-held). All cited under the response.
 - **QUALITY**: consistency is guaranteed by grounding; aliveness is a taste problem —
   register guards + owner veto on the persona voice (the content-program bar).
 Read-only ⇒ ships AT LAUNCH under §2b. BUILD SLOT: the S3 wave (task #33, with the Shell).
