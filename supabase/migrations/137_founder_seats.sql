@@ -7,6 +7,8 @@
 --   owner signs the shape, but it must NOT be applied until then. See the report
 --   delivered with this migration for the verbatim shape + the sign-off questions.
 --
+-- @rollback: drop function if exists public.claim_next_founder_seat(uuid); drop function if exists public.set_founder_display_optin(text, text); drop function if exists public.list_founder_seats_public(); drop table if exists public.founder_seat_transfers; drop table if exists public.founder_seats;
+--
 -- ⚠️  WRITTEN, NOT APPLIED (the 130–136 standing pattern). supabase/applied-head.json
 --   is deliberately NOT bumped — prod stays at its applied head; `validate:migration-head`
 --   surfaces this as a pending (undeployed) migration (visible, not fatal). Everything
