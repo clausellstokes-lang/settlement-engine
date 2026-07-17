@@ -20,6 +20,7 @@
 
 import { mobilizationStandings, settlementMobilization, hasLiveMobilization } from './mobilizationStatus.js';
 import { settlementTradePressure } from './tradePressure.js';
+import { toPublicSafe } from './publicSafe.js';
 
 /** A confirmed trade-dependency channel between battlefield enemies. */
 function hostileGraph() {
@@ -86,6 +87,32 @@ export function runVisibilityAudit() {
   checks.push({
     label: 'No covert smuggling tie in a player trade-pressure read',
     pass: playerTies.every(t => t.covert !== true) && !playerTies.some(t => /smuggl/i.test(t.phrase)),
+  });
+
+  // ── 3. Covert corruption impairment never reaches the anon dossier ───────
+  // W-DOCTRINE-3 §6 / GALLERY-2 precondition: imposeCorruption stamps a covert
+  // impairment onto institutions[].impairments whose description NAMES the
+  // corrupted NPC. The public (anon) dossier projection (toPublicSafe default)
+  // must drop the WHOLE covert object — a key-strip would leave the naming
+  // description exposed. A non-covert public impairment must survive.
+  const covertDossier = toPublicSafe({
+    name: 'Brackwater', tier: 'town',
+    institutions: [{
+      name: 'The Tanners Guild', category: 'Crafts',
+      impairments: [
+        { type: 'corruption', severity: 'moderate', covert: true, causeEventId: 'evt_capture_9', appliedAt: 42,
+          description: "Aldric's capture quietly compromised The Tanners Guild." },
+        { type: 'flood_damage', severity: 'minor', description: 'Spring floods damaged the drying racks.' },
+      ],
+    }],
+  });
+  const dossierJson = JSON.stringify(covertDossier);
+  const covertImps = (covertDossier.institutions && covertDossier.institutions[0] && covertDossier.institutions[0].impairments) || [];
+  checks.push({
+    label: 'Covert corruption impairment omitted from the anon dossier projection',
+    pass: covertImps.every((/** @type {{ covert?: boolean }} */ i) => i && i.covert !== true)
+      && !dossierJson.includes('quietly compromised')
+      && !dossierJson.includes("Aldric's capture"),
   });
 
   const ok = checks.every(c => c.pass);
