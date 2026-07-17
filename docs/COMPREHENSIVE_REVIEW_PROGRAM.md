@@ -972,6 +972,25 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ W-R2-D7 RATIFIED + FOLDED (2026-07-16 ~23:45; merge 7d11428e) — THE REFRAME LAYER
+LANDS, and better than planned: ZERO golden shifts** (reframeEnabled purely virtual — dark
+even on peace-lit presets; the whole golden suite green on its branch), so D7 folds to the
+MAINLINE instead of parking — **THE COMPOSITE SIMPLIFIES TO mainline + G2 ONLY.** 7 commits
+788b5aa6→5a20b4d7: the reframeKernel lazy leaf (interpretationOf over the immutable
+obligations ledger — frozen-facts pin proves no interp path writes a transfer ledger) · both
+signs incl. the BRIGHT lane (enemies→allies via misreading, debtForgiven01 fuels the peace
+mirror) · consumer 1: ingratitude_debt + dependency_by_design casus with MINTED mirrors
+debt_forgiven + bonds_of_commerce (bijection walker 11/side, strict) · restitution term
+(economic family — peaceTerms at 788/800 ceiling) · corruption-leash bounded input · THE
+LEDGER OF GIFTS AND DEBTS irony read (DM sees true≠believed; player sees only their reading)
+· the 8th drama class. Branch gate 11,704/1 (sole red EXEMPT_CEILING) · verify:dist 143/143 ·
+zero eager (1,063,701) · merged-tree pins 70/70. JUDGMENTs ratified ×4 (deterministic
+transitions over rng — reads-not-rolls; advanceReframe folded atop advanceWarReasons with
+its own gate — pulseKernel ceiling respected; the minted mirrors; economic-family
+restitution). SEAMS: act-class v2 transition enumeration (intelligence/mediation/religion/
+kinship vocab-complete) · consumer-6 whisper/glossary (needs a UI host — display pass) ·
+generosityEV stale comment (ROUND-3 fodder). OWNER QUEUE: the reframeEnabled LIGHTING
+question joins D1's. Hazard recurred + caught: NUL-as-Set-key (controlBytes pin worked).
 **⬛ CONTROL-SURFACE AMENDMENT §3f (2026-07-16 ~23:30, @ 4e2dbc37 on w7-prep): THE
 ENRICHMENT RIDER.** Owner: capture the data before the provider forgets it + the rented AI
 deciphers its own traffic + "enforceable even if the user is providing their own API...
