@@ -18,6 +18,7 @@ import { flag } from '../lib/flags.js';
 import { EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { useMapBridge } from '../hooks/useMapBridge.js';
+import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
 import { isCanonSave } from '../domain/campaign/canon.js';
@@ -520,6 +521,11 @@ export default function WorldMap({ onNavigate } = {}) {
   // the user last used so its map loads first (sets the active id; the mount-sync
   // effect below paints the saved map). No-ops when a campaign is already active.
   useCampaignAutoResume({ canManageCampaigns, activeCampaigns, activeCampaignId });
+
+  // Instant World: materialize a staged realm's geography from its seed on first
+  // open (the composer stages the map plan, not the FMG snapshot). Inert for
+  // every non-instant campaign (guarded on mapState.pendingMapGen).
+  useInstantWorldMaterialize({ bridgeRef, bridgeReady, activeCampaign, bumpGeometryVersion });
 
   // On entry to the map (bridge ready) — and whenever the active campaign
   // resolves — re-sync the map. With a campaign active, its saved snapshot is

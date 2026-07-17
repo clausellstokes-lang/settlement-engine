@@ -55,7 +55,7 @@ export const OPERATIONS = Object.freeze({
   recordSnapshot: { opType:'recordSnapshot', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'versionHistory-snapshot', undoToken:'revertToSnapshot' },
   revertToSnapshot: { opType:'revertToSnapshot', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   destroySavedSettlement: { opType:'destroySavedSettlement', klass:'canon', slice:'settlementSlice', targetScope:'save', receiptRef:'eventLog-entry(DESTROY_SETTLEMENT)', undoToken:null },
-  // ── K-C MACRO (39) — orchestrators; existing receipts become receiptRef ──
+  // ── K-C MACRO (40) — orchestrators; existing receipts become receiptRef ──
   generateSettlement: { opType:'generateSettlement', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'pipelineHistory', undoToken:null },
   regenSection: { opType:'regenSection', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'regenerationDelta', undoToken:null },
   canonize: { opType:'canonize', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'uncanonize' },
@@ -64,6 +64,7 @@ export const OPERATIONS = Object.freeze({
   canonizeSavedSettlement: { opType:'canonizeSavedSettlement', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   commitPendingEdits: { opType:'commitPendingEdits', klass:'macro', slice:'settlementSlice', targetScope:'save', receiptRef:'versionHistory-snapshot', undoToken:'revertToSnapshot' },
   importGalleryMapWithCampaign: { opType:'importGalleryMapWithCampaign', klass:'macro', slice:'campaignSlice', targetScope:'campaign', receiptRef:'GALLERY_IMPORTED', undoToken:null },
+  instantWorld: { opType:'instantWorld', klass:'macro', slice:'instantWorldSlice', targetScope:'campaign', receiptRef:'campaign+canon-members', undoToken:null },
   importGallerySettlement: { opType:'importGallerySettlement', klass:'macro', slice:'campaignSlice', targetScope:'campaign', receiptRef:'gallery-import-id', undoToken:null },
   rebuildCampaignRegionalGraph: { opType:'rebuildCampaignRegionalGraph', klass:'macro', slice:'campaignRegionalSlice', targetScope:'campaign', receiptRef:'regionalGraph', undoToken:null },
   injectCampaignStressor: { opType:'injectCampaignStressor', klass:'macro', slice:'campaignRegionalSlice', targetScope:'campaign', receiptRef:'normalized-stressor', undoToken:'undoCampaignStressorBridge' },

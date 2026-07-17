@@ -39,6 +39,12 @@ const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 // world.
 const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
+// The premium one-click Instant World entry, shown beside the Basic/Advanced
+// mode picker for signed-in users. Lazy so its composer/config surface never
+// enters first paint; it self-gates on premium (fires the pricing moment for
+// non-premium reaches).
+const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'));
+
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
@@ -93,6 +99,12 @@ export function WizardEmptyState({
       )}
       {showModePicker && (
         <>
+          {/* One-click premium realm sits ABOVE the manual mode picker — the
+              instant path is the paid convenience; Basic/Advanced remain the
+              free road. Self-gates on premium (lazy). */}
+          <Suspense fallback={<ProofSkeleton height={120} />}>
+            <InstantWorldEntry isMobile={isMobile} onNavigate={onNavigate} />
+          </Suspense>
           <div className="sf-readable-strip" style={{ alignSelf: 'center', textAlign: 'center', fontSize: FS.sm, color: SECOND }}>
             Want full control? Use one of the modes below.
           </div>
