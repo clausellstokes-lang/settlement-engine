@@ -972,6 +972,18 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ THE FULL-BATCH DISPATCH (owner: "why don't you run these?", 2026-07-17 ~03:10):** all
+five staged waves + one funding lane launched concurrently off c765a032, disjoint fences,
+pre-assigned migrations (gallery 142+143 · BYOK 144+), STEP -1 location guards everywhere:
+MAP STYLES (#28) · BYOK SURFACE (#29) · ToS DRAFT (#30, docs/legal only, draft-not-in-force)
+· GALLERY-2 (#31 — **the covert-corruption scrub builds FIRST inside it**, JUDGMENT: the
+owner's gallery commission + recorded precondition authorize the BUILD; the SQL twin still
+DEPLOYS only in the very-end batch) · the CONTENT THINNESS SURVEY fleet (#27, 6 read-only
+agents: variant counts + view-time/generation-time classification per surface) ·
+**FP-G10** (reclaim ≥1.5KB from the closure interior, fenced away from all sibling files —
+the batch funds its own registration costs; ratchet-down decision stays the manager's at
+fold). Seven lanes live incl. the NPC wave. ROUND 3 opens when all of it + the provenance
+ledger (#32, serialized after NPC) have folded.
 **⬛ THE PROVENANCE LEDGER COMMISSIONED (owner, 2026-07-17: "commission"; task #32).**
 Recorded-not-reconstructed causality: a durable per-campaign receipt ledger with true
 cause-edges. ARCHITECT RULINGS (vetoable): flag-gated virtual writer (dark ⇒ byte-identical;
