@@ -41,6 +41,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { beliefsActive } from './beliefMap.js';
+import { isFaithSpreadEnabled } from './simulationRules.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { ARMY_ROLES } from '../spatial/armyTransit.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
@@ -100,6 +101,9 @@ export const MOMENTUM_TUNING = Object.freeze({
   LOUD_INTERVENTION: 0.5,   // an intervention — deniable, quieter
   LOUD_CAMPAIGN: 0.4,       // indirect supply-web war is COVERT by design — a quiet deposit
   LOUD_INCITEMENT: 1.0,     // rousing your own population is the LOUDEST (the owner's scenario)
+  // D3: an IMPOSED cult (a crown forcing a faith) is a loud public religious act — louder than a
+  // quiet campaign, below a full war-footing incitement. Owner-retunable.
+  LOUD_IMPOSITION: 0.6,
   // A covert act barely deposits (the rumor machinery knows what stays hidden).
   COVERT_LOUDNESS_MULT: 0.15,
 });
@@ -121,8 +125,12 @@ export function momentumActive(worldState) {
 }
 
 // ── THE BOUNDED COURSE TAXONOMY (design §1 — typed, never freetext) ──────────────
-/** The closed set of course kinds. A commitment is ALWAYS one of these — never freetext. */
-export const COURSE_KINDS = Object.freeze(['war', 'peace', 'campaign', 'contest', 'blockade']);
+/** The closed set of course kinds. A commitment is ALWAYS one of these — never freetext.
+ *  D3 (DESIGN_SIM_DEPTH_R2): `doctrine` — a crown's religious policy (an imposed cult) becomes
+ *  a belief-consuming course, so the last free reconsideration ends (all belief-using entities
+ *  are bound). courseKeyOf/parseCourseKey handle it via the generic `${kind}:${target}` shape,
+ *  target = the ACTIVATED deityRef (premium seam law 3: latent pantheon never named). */
+export const COURSE_KINDS = Object.freeze(['war', 'peace', 'campaign', 'contest', 'blockade', 'doctrine']);
 const COURSE_KIND_SET = new Set(COURSE_KINDS);
 
 /**
@@ -289,8 +297,10 @@ export function commitmentCoursesOf(worldState, tick = 0) {
  *   • INCITEMENT (warPosture mobilization on a live war) — rousing the populace is loudest;
  *     a COVERT preparation barely deposits.
  *   • SUPPLY-WEB CAMPAIGNS (campaignPlans) — course campaign:<target>, quiet (covert war).
+ *   • DOCTRINE (D3) — imposed cults (religionStates heresyStain) — course doctrine:<deityRef>,
+ *     gated separately on faithSpreadEnabled.
  * Empty when dormant ⇒ the fold is a no-op ⇒ byte-identical.
- * @param {{ spatialLedgers?: unknown, deployments?: unknown, warPosture?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown } | null | undefined} worldState
+ * @param {{ spatialLedgers?: unknown, deployments?: unknown, warPosture?: unknown, simulationRules?: Record<string, unknown>, spatialCanonVersion?: unknown, religionStates?: unknown } | null | undefined} worldState
  * @returns {CommitmentDeposit[]}
  */
 export function commitmentDepositsFor(worldState) {
@@ -369,6 +379,27 @@ export function commitmentDepositsFor(worldState) {
     const side = rec.side != null ? String(rec.side) : '';
     if (!interId || !target || !side) continue;
     push(interId, courseKeyOf({ kind: 'contest', target, side }), 'intervention', T.LOUD_INTERVENTION);
+  }
+
+  // 5. DOCTRINE (design D3 — the crown's religious policy binds too). An IMPOSED cult (a deity
+  //    carrying a heresyStain: the DM-impose / occupation force-install marker) is a live, loud,
+  //    PUBLIC religious commitment: it deposits into course doctrine:<deityRef> at the seat.
+  //    GATED SEPARATELY on faithSpreadEnabled — momentumActive gates only on beliefs ∧ momentum,
+  //    so a momentum-lit / faith-DARK world (the momentum dormancy golden) sees ZERO doctrine
+  //    deposits ⇒ byte-identical; doctrine rides momentum ∧ beliefs ∧ faith (the design's
+  //    intersection). deityRef is an ACTIVATED cult (it lives in religionStates) — the latent
+  //    pantheon is never named (premium seam law 3). Reads a top-level worldState key.
+  if (isFaithSpreadEnabled(/** @type {Record<string, unknown> | undefined} */ (ws.simulationRules))) {
+    const religionStates = asObject(ws.religionStates);
+    for (const cid of Object.keys(religionStates).sort(compareCodepoint)) {
+      const deities = asObject(asObject(religionStates[cid]).deities);
+      for (const ref of Object.keys(deities).sort(compareCodepoint)) {
+        const d = asObject(deities[ref]);
+        if (d.suppressed === true) continue;                        // a dead/suppressed cult is no live commitment
+        if (!(finiteNumber(d.heresyStain, 0) > 0)) continue;        // only an IMPOSED faith is a doctrine COMMITMENT
+        push(cid, courseKeyOf({ kind: 'doctrine', target: ref }), 'imposition', T.LOUD_IMPOSITION);
+      }
+    }
   }
 
   // SEAM NOTES — the remaining legible-act deposit sources (design §1), deferred to the

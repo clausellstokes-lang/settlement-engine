@@ -371,6 +371,14 @@ function pairInterest(a, b, kinship01) {
   let interest = structuralAffinity(a.archetype, b.archetype) * quadrantGate(kinship01);
   // rivals[] repulsion — a declared faction rivalry is a standing structural repulsion.
   if (a.rivalKeys.has(b.key) || b.rivalKeys.has(a.key)) interest *= 0.6;
+  // D3 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D3 x-cut "COUPLING (light)"): the crown's
+  // doctrine-course commitment (commitmentStockOf on doctrine:<deityRef>) should tilt the
+  // bloc-formation interest here (±, §G-clamped) — a zealot king pressing doctrine past its cliff
+  // is what doctrine-glued blocs form around/against ("the zealot king's court splits"). NOT wired
+  // this wave: pairInterest is pure (no worldState); threading the commitment in + biasing the
+  // formation draw shifts the lit-path settlementPolitics goldens (owner-gated golden-shift), and
+  // it AND-requires momentum ∧ beliefs ∧ faith lit + an imposed cult. The doctrine glue kind + the
+  // course both exist; the read is one commitmentStockOf call when this seam is closed.
   return round4(clamp(interest, 0, 3));
 }
 
