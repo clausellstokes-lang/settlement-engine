@@ -90,6 +90,44 @@ export default function TermsPage({ scrollToId = null } = {}) {
         </LegalP>
       </LegalSection>
 
+      {/* Founder Lifetime license + transfers — the offer's contractual terms.
+          Plain and honest, never investment framing (no "appreciating", "resale
+          value", "ownership", or "governance"). The transfer figures are the
+          license's own contract terms (what an incoming/outgoing holder pays and
+          receives), stated here deliberately per the Founder brief — distinct from
+          the Pricing page's product price list (F22). The transfer MECHANISM is not
+          live yet (a concierge process is planned); this section states the terms
+          that will govern it. */}
+      <LegalSection heading="Founder Lifetime license and transfers" id="terms-founder">
+        <LegalP>
+          Founder Lifetime is a transferable lifetime individual license, not a
+          subscription. It grants one person lifetime access to the paid tier and a
+          place in the credits. No more than 30 Founder seats will ever exist, and the
+          cap never grows — the name “Founder” is reserved for those 30 seats, and any
+          later tier will be named differently. A seat is an entitlement held by one
+          person; it is not the same thing as your account.
+        </LegalP>
+        <LegalP>
+          <strong style={{ color: INK }}>Transferring a seat.</strong> Because the cap
+          never grows, a seat can only change hands by succession — one holder passing
+          it to another, never by minting a new one. Transfers work only through
+          SettlementForge, and only after you have held the seat for at least 12 months.
+          When a seat transfers, the incoming holder pays the Founder transfer price
+          (currently $99) and the outgoing holder receives half of it (currently
+          $49.50), after we verify the transfer, it clears, and a payout delay passes.
+          What transfers is the seat and its lifetime access — nothing else. Your
+          account, your saved worlds, your narrative credits, and your personal data
+          stay with you and never move to the new holder.
+        </LegalP>
+        <LegalP>
+          A seat is a license to use SettlementForge for life, not an investment. We do
+          not describe or price it as an appreciating asset, and we may pause or decline
+          transfers for security, legal, or operational reasons. If we ever need to
+          change how transfers work, substantive changes bump the version stamped at the
+          top of this page.
+        </LegalP>
+      </LegalSection>
+
       {/* Refunds and cancellation — the real billing semantics, moved here from
           the retired standalone /refunds page. The former section headings
           survive as bold lead-in labels. Numbers stay on the Pricing page,
