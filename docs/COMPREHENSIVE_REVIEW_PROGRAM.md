@@ -1098,6 +1098,14 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE SECOND DESIGN-RESEARCH SWEEP (2026-07-17, owner: "look for the best examples
+both design and layout, online to emulate and then reconcile"):** wf_01b77ea7 dispatched
+for the documentation wave's other two members — pricing-page design excellence ·
+hobby/TTRPG market pricing norms (subscription-fatigue framing) · credit/usage-economy
+honest presentation (outcomes-not-tokens menus, BYOK framing) · reference/codex design
+(Civilopedia-class enumeration delight, docs-as-SEO) + completeness critic. BOTH sweeps
+(this + wf_7ada24b2 for About) reconcile into ONE documentation-wave brief when banked;
+the brief is the manager's synthesis artifact; the lane executes it at the wave's slot.
 **⬛ OWNER COMMISSION: THE PRICING PAGE OVERHAUL (2026-07-17, "do the same for the
 pricing page"; task #21 — THE DOCUMENTATION WAVE's third member, one lane w/ #19+#20):**
 assessment finding: the best-ENGINEERED page of the three (config-sourced law real,
