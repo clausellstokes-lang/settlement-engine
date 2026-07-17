@@ -972,6 +972,28 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ GALLERY-2 (PHASE 1) RATIFIED + FOLDED (2026-07-17 ~05:00; merge ad9f3067) — THE
+COVERT-CORRUPTION SCRUB IS BUILT + CERTIFIED.** The recorded leak (covert corruption
+impairments NAMING the corrupted NPC riding institutions[] through get_gallery_dossier to
+the anon gallery) is CLOSED: value-level covert-object drop in publicSafe.js + the SQL twin
+(migration 142), **field-for-field twin parity proven in real Postgres**; fail-closed pin
+(the naming description appears NOWHERE in the projection); the adversarial check joins the
+owner-facing visibility audit. Branch gate 11,856/1 (sole red EXEMPT_CEILING, NO flakes).
+Eager ≈ +34 B honest. Deploy of 142 rides the very-end batch. **THE VERIFY-FIRST FINDING:
+~70-80% of the GALLERY-2 brief ALREADY EXISTS** (gallery_votes w/ rate-limit · 12+ facet
+filters from canonical modules · relevance_score ranking w/ 9 sort keys · share_kind
+map-vs-campaign distinction · sharer editing minus title · OG/JSON-LD/sitemap-fan-out SEO ·
+the anon-cap trap SOLVED as caps-on-actions-never-render; residual: client-rendered body =
+the one open crawlability item) — the agent correctly refused to duplicate live
+infrastructure. JUDGMENTs ratified ×3 (scrub takes 142, contiguity-forced — **BYOK's 144/145
+renumber to 143/144 at its fold** · full-mode-keeps-covert (DM-publish is explicit) ·
+inherited doc-drift fixed+disclosed). **OWNER SIGN-OFF LIST (gallery phase 2 — the genuinely
+net-new): (1) ALIVENESS ranking** — formula weighting + snapshotted-column shape (design
+ready, the 063→071→076 drop-recreate precedent); **(2) REACTIONS** — the 6-item drafted
+fiction-register vocabulary awaits taste veto + green-light (engagement schema); **(3) the
+Campaigns third tab** — or does map_with_campaign already satisfy campaign-share?;
+**(4) gallery_title column**; **(5) facet hubs + the sitemap gallery fan-out flag** (depends
+on 1/3). Comments stay deferred post-launch per the standing ruling.
 **⬛ OWNER COMMISSION: THE GROWTH LAYER (2026-07-17, task #36) — acquired/temporary NPC
 traits.** Owner verbatim: core traits/flaws are "their constitutional core as people... they
 can also have learned or temporary traits... bold by nature being more cautious after losing
