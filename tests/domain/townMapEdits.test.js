@@ -18,8 +18,8 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  MAP_EDITS_SCHEMA_KEYS, readMapEdits, readLegendPrefs, readLayoutVariant,
-  normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref,
+  MAP_EDITS_SCHEMA_KEYS, readMapEdits, readLegendPrefs, readLayoutVariant, readStyleLens,
+  normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
 } from '../../src/domain/townMap/mapEdits.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
@@ -35,10 +35,10 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('the schema is exactly {layoutVariant, pins, legendPrefs} + pin/legend sub-keys', () => {
+  it('the schema is exactly {layoutVariant, pins, legendPrefs, styleLens} + pin/legend sub-keys', () => {
     // A guard against a future key sneaking in without the denylist re-check above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'dx', 'dy', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend'],
+      ['anchor', 'dx', 'dy', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens'],
     );
   });
 });
@@ -125,6 +125,35 @@ describe('mapEdits — variant + legend ops', () => {
     expect(readLegendPrefs(on)).toEqual({ showLabels: true, showLegend: false });
     expect(withLegendPref(on, 'showLabels', false)).toBeNull(); // clearing the only edit ⇒ null
     expect(withLegendPref(null, 'bogusKey', true)).toBeNull();  // unknown pref ignored
+  });
+});
+
+describe('mapEdits — styleLens (MAP STYLES; cosmetic, dormancy-lawful)', () => {
+  it('readStyleLens defaults to parchment; coerces an unknown lens to the default', () => {
+    expect(readStyleLens(null)).toBe('parchment');
+    expect(readStyleLens({})).toBe('parchment');
+    expect(readStyleLens({ styleLens: 'vtt' })).toBe('vtt');
+    expect(readStyleLens({ styleLens: 'no-such' })).toBe('parchment');
+  });
+
+  it('withStyleLens sets a non-default lens; selecting parchment clears it (byte-identity)', () => {
+    const vtt = withStyleLens(null, 'vtt');
+    expect(vtt).toEqual({ styleLens: 'vtt' });
+    expect(readStyleLens(vtt)).toBe('vtt');
+    expect(withStyleLens(vtt, 'parchment')).toBeNull(); // default ⇒ no edit ⇒ dormancy
+    expect(withStyleLens(null, 'bogus')).toBeNull();    // unknown coerces to default ⇒ null
+  });
+
+  it('normalizeMapEdits drops a default lens but keeps a non-default one', () => {
+    expect(normalizeMapEdits({ styleLens: 'parchment' })).toBeNull();
+    expect(normalizeMapEdits({ styleLens: 'watercolor' })).toEqual({ styleLens: 'watercolor' });
+  });
+
+  it('a lens rides alongside other edits without disturbing them', () => {
+    const e = withStyleLens({ layoutVariant: 2, pins: [{ anchor: 'a', dx: 1, dy: 1 }] }, 'darkFantasy');
+    expect(e.layoutVariant).toBe(2);
+    expect(e.pins).toEqual([{ anchor: 'a', dx: 1, dy: 1 }]);
+    expect(e.styleLens).toBe('darkFantasy');
   });
 });
 

@@ -21,11 +21,13 @@ export {
   readMapEdits,
   readLegendPrefs,
   readLayoutVariant,
+  readStyleLens,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
   nextLayoutVariant,
   withLegendPref,
+  withStyleLens,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
 // shared by the PDF plate + the library-card thumbnail. Imported ONLY by those
@@ -38,3 +40,18 @@ export {
   buildTownMapSvg,
   hasDrawableMap,
 } from './townMapDraw.js';
+// MAP STYLES — the bounded style layer (the four named lenses + the wall). A style
+// is data; the draw projection resolves it, the viewer reads it. Lazy (src/design,
+// consumed only by the town-map surfaces + tests), so first paint is unmoved.
+export {
+  TOWN_MAP_STYLE_IDS,
+  DEFAULT_STYLE_ID,
+  FURNITURE_KINDS,
+  HAZARD_GLYPHS,
+  ANCHOR_GLYPHS,
+  CONTRAST_LEVELS,
+  resolveTownMapStyle,
+  coerceStyleId,
+  styleDistrictColor,
+  viewerPalette,
+} from '../../design/townMapStyles.js';

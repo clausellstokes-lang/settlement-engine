@@ -24,7 +24,8 @@
  */
 
 import {
-  buildTownMapModel, readMapEdits, hasDrawableMap, buildTownMapSvg,
+  buildTownMapModel, readMapEdits, readStyleLens, hasDrawableMap, buildTownMapSvg,
+  resolveTownMapStyle,
 } from '../domain/townMap/index.js';
 
 const DEFAULT_SIZE = 128;
@@ -60,6 +61,13 @@ function thumbModel(settlement) {
   return hasDrawableMap(model) ? model : null;
 }
 
+/** The owner's chosen map lens for this settlement (MAP STYLES), default parchment.
+ * The thumbnail honors it (the library preview is the owner's own full-blob read).
+ * @param {any} settlement */
+function thumbStyle(settlement) {
+  return readStyleLens(readMapEdits(settlement));
+}
+
 /**
  * The stable cache key for a settlement's thumbnail at a given pixel size, or
  * `null` when there is no map to draw. PURE + deterministic: keyed on a content
@@ -74,8 +82,11 @@ function thumbModel(settlement) {
 export function townMapThumbCacheKey(settlement, size = DEFAULT_SIZE) {
   const model = thumbModel(settlement);
   if (!model) return null;
-  const svg = buildTownMapSvg(model, { width: size, height: size });
-  return `${size}|${fnv1aHex(svg)}`;
+  const style = thumbStyle(settlement);
+  const svg = buildTownMapSvg(model, { style, width: size, height: size });
+  // The lens is part of the identity: a re-skin re-keys the raster (the SVG hash
+  // already differs, but naming the lens keeps the key legible + collision-safe).
+  return `${size}|${style}|${fnv1aHex(svg)}`;
 }
 
 /** Insert with a simple size bound (evict the oldest-inserted). @param {string} key @param {string} url */
@@ -98,7 +109,7 @@ function cacheSet(key, url) {
  * @param {number} quality
  * @returns {Promise<string>}
  */
-function browserRasterize(svg, size, quality) {
+function browserRasterize(svg, size, quality, mime = 'image/jpeg') {
   return new Promise((resolve, reject) => {
     if (typeof document === 'undefined' || typeof URL === 'undefined' || !URL.createObjectURL) {
       reject(new Error('town-map thumbnail requires a browser canvas'));
@@ -116,7 +127,7 @@ function browserRasterize(svg, size, quality) {
         const ctx = canvas.getContext('2d');
         if (!ctx) throw new Error('canvas 2d context unavailable');
         ctx.drawImage(img, 0, 0, size, size);
-        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        const dataUrl = canvas.toDataURL(mime, quality);
         URL.revokeObjectURL(url);
         resolve(dataUrl);
       } catch (err) {
@@ -138,7 +149,7 @@ function browserRasterize(svg, size, quality) {
  * canvas encode runs once; changed content → a fresh raster. Browser-only for the
  * first (uncached) render of a given key.
  * @param {any} settlement the settlement blob (save.settlement)
- * @param {{ size?: number, quality?: number, rasterize?: (svg:string,size:number,quality:number)=>Promise<string> }} [opts]
+ * @param {{ size?: number, quality?: number, style?: string, rasterize?: (svg:string,size:number,quality:number,mime?:string)=>Promise<string> }} [opts]
  *   `rasterize` is an injection seam for tests (the real canvas raster is browser-only).
  * @returns {Promise<string | null>}
  */
@@ -146,14 +157,44 @@ export async function renderTownMapThumb(settlement, opts = {}) {
   const size = opts.size || DEFAULT_SIZE;
   const model = thumbModel(settlement);
   if (!model) return null;
-  const svg = buildTownMapSvg(model, { width: size, height: size });
-  const key = `${size}|${fnv1aHex(svg)}`;
+  const style = opts.style || thumbStyle(settlement);
+  const svg = buildTownMapSvg(model, { style, width: size, height: size });
+  const key = `${size}|${style}|${fnv1aHex(svg)}`;
   const hit = RASTER_CACHE.get(key);
   if (hit !== undefined) return hit;
   const raster = opts.rasterize || browserRasterize;
   const url = await raster(svg, size, opts.quality || DEFAULT_QUALITY);
   if (typeof url === 'string' && url) cacheSet(key, url);
   return url || null;
+}
+
+/**
+ * The token-resolution VTT battlemap raster (MAP STYLES — the VTT lens' functional
+ * export). Renders the settlement under the VTT lens at a size where each grid cell
+ * is exactly `tokenPx` pixels (cells = 1000 / gridStep), so the exported PNG drops
+ * onto a virtual tabletop at token scale with crisp grid lines. Reuses the shared
+ * rasterizer idiom (PNG, not JPEG, for sharp lines). NOT cached (a one-shot export)
+ * and browser-only for the real raster; the pure size math is testable via the seam.
+ * @param {any} settlement
+ * @param {{ rasterize?: (svg:string,size:number,quality:number,mime?:string)=>Promise<string> }} [opts]
+ * @returns {Promise<{ dataUrl: string, size: number } | null>}
+ */
+export async function renderTownMapTokenRaster(settlement, opts = {}) {
+  const model = thumbModel(settlement);
+  if (!model) return null;
+  const size = tokenRasterSize();
+  const svg = buildTownMapSvg(model, { style: 'vtt', width: size, height: size });
+  const raster = opts.rasterize || browserRasterize;
+  const dataUrl = await raster(svg, size, 1, 'image/png');
+  return typeof dataUrl === 'string' && dataUrl ? { dataUrl, size } : null;
+}
+
+/** The VTT token-raster pixel size (square): cells × tokenPx from the VTT lens. Pure. */
+export function tokenRasterSize() {
+  const vtt = resolveTownMapStyle('vtt');
+  const step = vtt.functional.gridStep || 50;
+  const cells = Math.round(1000 / step);
+  return cells * (vtt.functional.tokenPx || 70);
 }
 
 /** Test-only: current cache size. */
