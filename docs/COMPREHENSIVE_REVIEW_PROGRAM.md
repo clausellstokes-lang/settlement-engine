@@ -972,6 +972,19 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ THE PROVENANCE LEDGER RATIFIED + FOLDED (2026-07-17; merged; pins green on the merged
+tree) — ENGINE FINALE #1: RECORDED CAUSALITY IS REAL.** One writer (provenanceKernel lazy
+leaf at the appendPulseHistory chokepoint, net-zero pulseKernel wiring, 'provenance' in
+EXEMPT_LEDGER_KEYS); virtual provenanceLedgerEnabled (dark now; PRE-SIGNED to light at the
+regen); the chronicle upgraded — decree cones = EXACT recorded transitive descendants where
+edges exist, inference elsewhere, labels honest end-to-end. STORAGE SIGNED under Ruling #5's
+blanket (the recommended shape): in-blob at spatialLedgers.provenance, ~184 B/edge, ~18
+edges/advance, ~250 KB/80-advance window, MAX_PROVENANCE_EDGES=4096 (~750 KB ceiling,
+lowest-tick eviction). Dormancy PROVEN (golden + contract + additive-only; all 153 existing
+goldens green with the writer wired). JUDGMENTs ratified ×4 (in-blob · 4096 · one-hop
+news→outcome edges recorded — they light the recorded path in real advances · leaf
+re-export wiring). SEAM: the causedBy cross-outcome edge is unthreaded by kernels today —
+deeper recorded cones await kernel threading (post-launch stock; the machinery is ready).
 **⬛ REALM EXPORT LAYER CHOICE (owner, 2026-07-17; relayed in-flight):** realm map exports
 offer WITH-SETTLEMENTS vs TERRAIN-ONLY (the placements layer is an inclusion flag — it
 already composites separately); pin: same realm, same settings, the two variants differ
