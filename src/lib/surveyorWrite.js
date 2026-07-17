@@ -49,13 +49,13 @@ export function classifyRefusal(status) {
 /**
  * Build the anchor label + retrieval bundle the write edges ground on, from the same
  * campaign read-model the panels already hold. Pure client retrieval — no provider call.
- * @param {{ prompt: string, view?: string, params?: object, selectedSettlementId?: string|null,
+ * @param {{ prompt?: string, view?: string, params?: object, selectedSettlementId?: string|null,
  *           settlement?: object|null, savedSettlements?: Array<object>, activeCampaign?: object|null,
- *           worldState?: object|null }} ctx
+ *           worldState?: object|null }} [ctx]
  * @returns {{ anchorLabel: string, slices: Array<{ id: string, title: string }> }}
  */
 export function buildWriteContext({
-  prompt, view = 'home', params = {}, selectedSettlementId = null, settlement = null,
+  prompt = '', view = 'home', params = {}, selectedSettlementId = null, settlement = null,
   savedSettlements = [], activeCampaign = null, worldState = null,
 } = {}) {
   const tick = worldState?.tick ?? null;
@@ -124,7 +124,7 @@ function passMusings(data) {
 
 /**
  * S4 CUSTOM CONTENT — compile a homebrew request into a validated, field-labelled draft.
- * @param {{ intent: string } & Parameters<typeof buildWriteContext>[0]} ctx
+ * @param {{ intent?: string } & Parameters<typeof buildWriteContext>[0]} [ctx]
  * @returns {Promise<{ ok: boolean, draft?: object, musings?: Array<{text:string}>,
  *   summary?: object, error?: string, refusalKind?: string, refusalClass?: string|null,
  *   doors?: string[]|null, byok?: boolean, creditsRemaining?: number|null, earlyAccess?: boolean }>}
@@ -149,7 +149,7 @@ export async function compileCustomContent(ctx = {}) {
 /**
  * STYLE OVERHAUL — compile a prompt into a CANDIDATE bespoke map style (raw; the panel
  * re-validates it through validateBespokeStyle, so only known-role fields survive).
- * @param {{ prompt: string } & Parameters<typeof buildWriteContext>[0]} ctx
+ * @param {{ prompt?: string } & Parameters<typeof buildWriteContext>[0]} [ctx]
  * @returns {Promise<{ ok: boolean, candidate?: object|null, musings?: Array<{text:string}>,
  *   error?: string, refusalKind?: string, refusalClass?: string|null, doors?: string[]|null,
  *   byok?: boolean, creditsRemaining?: number|null, earlyAccess?: boolean }>}
@@ -172,7 +172,7 @@ export async function compileStyleOverhaul(ctx = {}) {
 /**
  * S5/S6 CONSTRUCTION — compile an intent into a raw generator CONFIG + declared CONSTRAINTS
  * (the panel validates both through the config wall before rendering / generating).
- * @param {{ intent: string, scope?: 'settlement'|'realm' } & Parameters<typeof buildWriteContext>[0]} ctx
+ * @param {{ intent?: string, scope?: 'settlement'|'realm' } & Parameters<typeof buildWriteContext>[0]} [ctx]
  * @returns {Promise<{ ok: boolean, rawConfig?: object, rawConstraints?: object,
  *   musings?: Array<{text:string}>, error?: string, refusalKind?: string,
  *   refusalClass?: string|null, doors?: string[]|null, byok?: boolean,
@@ -201,7 +201,7 @@ export async function compileConstruction(ctx = {}) {
  * A DELTA-ONLY construction revise pass (directive 5): sends ONLY the deviations + the
  * current config — never the original grounding. The panel builds the payload with
  * buildRevisePayload; this posts it and returns the corrected raw config.
- * @param {{ scope?: 'settlement'|'realm', payload: { deviations: Array<object>, config: object, _noSlices: true } }} ctx
+ * @param {{ scope?: 'settlement'|'realm', payload?: { deviations: Array<object>, config: object, _noSlices: true } }} [ctx]
  */
 export async function reviseConstruction(ctx = {}) {
   const scope = ctx.scope === 'realm' ? 'realm' : 'settlement';
@@ -226,7 +226,7 @@ export async function reviseConstruction(ctx = {}) {
 /**
  * S3 INTERPRET — compile session text into proposed ops (the interpretation the accept→mint
  * panel reviews per-item and applies). Returns the raw interpretation ({ ops:[...] }).
- * @param {{ sessionText: string, protectedContext?: object } & Parameters<typeof buildWriteContext>[0]} ctx
+ * @param {{ sessionText?: string, protectedContext?: object } & Parameters<typeof buildWriteContext>[0]} [ctx]
  * @returns {Promise<{ ok: boolean, interpretation?: object, seed?: string|null,
  *   interpretRef?: string|null, musings?: Array<{text:string}>, error?: string,
  *   refusalKind?: string, refusalClass?: string|null, doors?: string[]|null,
