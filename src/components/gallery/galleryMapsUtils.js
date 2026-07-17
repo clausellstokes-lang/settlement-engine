@@ -101,6 +101,7 @@ export function deriveTagVocabulary(items = []) {
 import { TIER_ORDER } from '../../domain/customContentSchema.js';
 import { liveSieges, liveTradeWars } from '../../domain/display/warStatus.js';
 import { resolveTerrain } from '../../domain/resolveTerrain.js';
+import { computeAliveness, campaignWorldAgeBand } from '../../lib/galleryAliveness.js';
 
 /** @param {any} m a campaign member view ({ tier, settlement }) @returns {string} */
 function memberTier(m) {
@@ -248,7 +249,8 @@ export function suggestedTagsForCampaign(campaign = {}, members = []) {
  * data, mirroring the dossier facet snapshot in ShareToGallery.jsx.
  * @param {any} campaign
  * @param {Array<any>} members
- * @returns {{ memberBand: string, atWar: boolean, dominantCulture: string, tierSpread: string }}
+ * @returns {{ memberBand: string, atWar: boolean, dominantCulture: string, tierSpread: string,
+ *             aliveness: number | null, worldAge: string | null }}
  */
 export function campaignFacets(campaign = {}, members = []) {
   const list = Array.isArray(members) ? members : [];
@@ -257,6 +259,11 @@ export function campaignFacets(campaign = {}, members = []) {
     atWar: atWar(campaign),
     dominantCulture: dominantCulture(list),
     tierSpread: tierSpread(list),
+    // GALLERY-2 phase 2 (147/149): the aliveness snapshot + world-age band from
+    // the campaign's live worldState — the SAME shared derivations the dossier
+    // path uses (lib/galleryAliveness.js), so the two snapshots never diverge.
+    aliveness: computeAliveness(campaign),
+    worldAge: campaignWorldAgeBand(campaign),
   };
 }
 

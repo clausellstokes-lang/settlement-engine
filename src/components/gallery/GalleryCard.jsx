@@ -21,8 +21,10 @@ import {
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
+import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
 import VoteButton from './VoteButton.jsx';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
@@ -140,8 +142,10 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             {item.name || t('gallery.untitled')}
           </h3>
         </Button>
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
-          {meta.join(' / ')}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+          <span>{meta.join(' / ')}</span>
+          {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
+          <AlivenessBadge score={item.aliveness} />
         </div>
         {item.description && (
           <div
@@ -178,6 +182,9 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             </span>
           ))}
         </div>
+        {/* Reader reactions (GALLERY-2 phase 2) — read-only digest of the top
+            structured reactions; the interactive row lives on the dossier. */}
+        <GalleryReactionSummary counts={item.reactions} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
           <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>

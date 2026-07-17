@@ -7,7 +7,9 @@
 
 import { useState } from 'react';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
+import GalleryCampaigns from './gallery/GalleryCampaigns.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
+import GalleryHubPage from './gallery/GalleryHubPage.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
@@ -15,7 +17,13 @@ import Button from './primitives/Button.jsx';
 import { SP, PAGE_MAX } from './theme.js';
 
 function GalleryTabs({ tab, setTab }) {
-  const tabs = [{ id: 'settlements', label: 'Settlements' }, { id: 'maps', label: 'Maps' }];
+  // GALLERY-2 phase 2: campaign shares (share_kind 'map_with_campaign') get
+  // their own tab; the Maps tab narrows to blank maps (kind 'map').
+  const tabs = [
+    { id: 'settlements', label: 'Settlements' },
+    { id: 'maps', label: 'Maps' },
+    { id: 'campaigns', label: 'Campaigns' },
+  ];
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.md}px ${SP.lg}px 0`, display: 'flex', gap: SP.xs }}>
       {tabs.map(t => {
@@ -36,7 +44,7 @@ function GalleryTabs({ tab, setTab }) {
   );
 }
 
-export default function GalleryPage({ onNavigate, routeSlug = null }) {
+export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = null }) {
   const [tab, setTab] = useState('settlements');
   const {
     auth,
@@ -55,6 +63,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     dossierLoading,
     dossierError,
     voteBusyId,
+    reactionBusyKey,
     reportBusyId,
     importBusyId,
     importedSlugs,
@@ -67,10 +76,27 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     toggleBoolFilter,
     clearFilters,
     voteOn,
+    reactOn,
     reportOn,
     importDossier,
     setDossierCommentCount,
   } = useGalleryPageState(routeSlug);
+
+  // Facet-hub landing (GALLERY-2 phase 2): /gallery/terrain/:kind etc. A hub
+  // is its own crawlable page — it renders INSTEAD of the tabbed index (and a
+  // dossier open still wins: /gallery/:slug never carries a hub param).
+  if (routeHub && !activeSlug) {
+    return (
+      <FeatureErrorBoundary
+        label="GalleryPage.hub"
+        kind="react.render.gallery"
+        fallbackTitle="This gallery collection could not be displayed."
+        resetKeys={[routeHub.facet, routeHub.value]}
+      >
+        <GalleryHubPage routeHub={routeHub} />
+      </FeatureErrorBoundary>
+    );
+  }
 
   if (activeSlug) {
     // Resilience: a public dossier is third-party, server-projected data — a
@@ -93,10 +119,12 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
           onBack={backToList}
           onOpen={openDossier}
           onVote={voteOn}
+          onReact={reactOn}
           onReport={reportOn}
           onImport={importDossier}
           onCommentCountChange={setDossierCommentCount}
           voteBusy={!!voteBusyId}
+          reactionBusyKey={reactionBusyKey}
           reportBusy={!!reportBusyId}
           importBusy={!!importBusyId}
           imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}
@@ -123,6 +151,10 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
         {tab === 'maps' ? (
           <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
             <GalleryMaps onNavigate={onNavigate} />
+          </div>
+        ) : tab === 'campaigns' ? (
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
+            <GalleryCampaigns onNavigate={onNavigate} />
           </div>
         ) : (
           <GalleryList

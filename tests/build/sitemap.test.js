@@ -14,7 +14,15 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES } from '../../src/lib/routes.js';
-import { buildSitemap, staticUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
+import { GALLERY_HUBS } from '../../src/lib/galleryHubs.js';
+import { buildSitemap, staticUrls, galleryHubUrls, NOINDEX_VIEWS, RETIRED_VIEWS } from '../../scripts/generate-sitemap.mjs';
+
+// The per-slug gallery fan-out is ON by default (GALLERY-2 phase 2) but needs
+// Supabase credentials to contribute anything. Pin it OFF here so the
+// byte-match below is deterministic even in an environment where credentials
+// happen to be exported — the committed file is the offline artifact (static
+// routes + facet hubs); slugs are appended at deploy where the env has creds.
+process.env.SITEMAP_INCLUDE_GALLERY = '0';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const committed = readFileSync(join(ROOT, 'public', 'sitemap.xml'), 'utf8');
@@ -56,5 +64,29 @@ describe('public/sitemap.xml', () => {
     expect(locs).not.toContain('https://settlementforge.com/home');
     const tabs = locs.filter((l) => l.includes('/compendium?tab='));
     expect(tabs).toHaveLength(7);
+  });
+
+  // GALLERY-2 phase 2 — the facet hubs (src/lib/galleryHubs.js).
+  it('fans the gallery out to every facet hub — one URL per manifest entry, committed', () => {
+    const hubLocs = galleryHubUrls().map((u) => u.loc);
+    // One URL per hub, no dupes, all under /gallery/.
+    expect(hubLocs).toHaveLength(GALLERY_HUBS.length);
+    expect(new Set(hubLocs).size).toBe(hubLocs.length);
+    for (const hub of GALLERY_HUBS) {
+      const loc = `https://settlementforge.com${hub.path}`;
+      expect(hubLocs).toContain(loc);
+      expect(committed, `hub ${hub.id} missing from the committed sitemap`).toContain(`<loc>${loc}</loc>`);
+    }
+    // The hub set = 7 terrains + 6 tiers + at-war + most-alive. A vocabulary
+    // change legitimately reshapes this — regenerate the sitemap with it.
+    expect(GALLERY_HUBS).toHaveLength(15);
+  });
+
+  it('the per-slug fan-out contributes nothing when suppressed or credential-less (deterministic committed file)', async () => {
+    // The suite-level pin sets SITEMAP_INCLUDE_GALLERY='0'; a fresh build must
+    // therefore be exactly static + hubs.
+    const fresh = await buildSitemap();
+    const urlCount = fresh.match(/<url>/g)?.length ?? 0;
+    expect(urlCount).toBe(staticUrls().length + galleryHubUrls().length);
   });
 });

@@ -565,6 +565,7 @@ export default function SettlementDetail({
             publicSlug={liveSaveEntry?.public_slug}
             settlement={detail.settlement}
             galleryDescription={liveSaveEntry?.gallery_description}
+            galleryTitle={liveSaveEntry?.gallery_title}
             galleryImageUrl={liveSaveEntry?.gallery_image_url}
             galleryImageAlt={liveSaveEntry?.gallery_image_alt}
             galleryTags={liveSaveEntry?.gallery_tags}

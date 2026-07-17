@@ -79,6 +79,15 @@ Set these in Vercel's dashboard → Project → Settings → Environment
 Variables. Redeploy after changing them so the new values bake into the
 client bundle.
 
+**Sitemap (GALLERY-2 phase 2, 2026-07-17):** the gallery per-slug fan-out is
+ON BY DEFAULT — `prebuild` (scripts/generate-sitemap.mjs) appends every public
+`/gallery/:slug` whenever `VITE_SUPABASE_URL` + `VITE_SUPABASE_ANON_KEY` exist
+in the build env, which they do on Vercel per the block above (no extra flag
+to set; `SITEMAP_INCLUDE_GALLERY=0` suppresses it). The COMMITTED
+`public/sitemap.xml` is the offline artifact — static routes + the 15 gallery
+facet hubs — and stays byte-pinned by tests/build/sitemap.test.js; the
+deployed `dist/sitemap.xml` is the superset with slugs.
+
 ## Database migrations (Supabase) — manual
 
 Migrations live in `supabase/migrations/*.sql`. Each new migration is
@@ -121,7 +130,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `144_surveyor_usage_governors.sql`** (this filename is kept
+**Current migration head: `148_gallery_maps_campaign_tiles.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 

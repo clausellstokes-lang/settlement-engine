@@ -89,10 +89,17 @@ export const ROUTES = Object.freeze([
   { view: 'dossier-success',       path: '/checkout/success',      title: 'Purchase Complete' },
 ]);
 
-// Param routes — matched after exact paths. Each declares a matcher regex
-// and a builder that turns the capture groups into a params object.
+// Param routes — matched after exact paths, IN ORDER. Each declares a matcher
+// regex and a builder that turns the capture groups into a params object.
+//
+// The gallery FACET HUBS (GALLERY-2 phase 2; manifest src/lib/galleryHubs.js)
+// must precede the dossier slug route: /gallery/at-war and /gallery/most-alive
+// would otherwise match the slug pattern. Unknown hub values still resolve to
+// the gallery view — GalleryHubPage renders its own not-found state.
 const PARAM_ROUTES = Object.freeze([
   { view: 'settlements', re: /^\/settlements\/([^/]+)$/, build: m => ({ id: decodeURIComponent(m[1]) }) },
+  { view: 'gallery', re: /^\/gallery\/(terrain|tier)\/([a-z0-9_-]+)$/, build: m => ({ hub: { facet: m[1], value: m[2] } }) },
+  { view: 'gallery', re: /^\/gallery\/(at-war|most-alive)$/, build: m => ({ hub: { facet: m[1] } }) },
   { view: 'gallery', re: /^\/gallery\/([^/]+)$/, build: m => ({ slug: decodeURIComponent(m[1]) }) },
 ]);
 
@@ -147,6 +154,13 @@ function normalizeLegacyView(v) {
 export function viewToPath(view, params) {
   if (params && params.slug && view === 'gallery') {
     return `/gallery/${encodeURIComponent(params.slug)}`;
+  }
+  // Facet-hub URLs (GALLERY-2 phase 2): /gallery/<facet>[/<value>].
+  if (params && params.hub && params.hub.facet && view === 'gallery') {
+    const { facet, value } = params.hub;
+    return value
+      ? `/gallery/${encodeURIComponent(facet)}/${encodeURIComponent(value)}`
+      : `/gallery/${encodeURIComponent(facet)}`;
   }
   if (params && params.id && view === 'settlements') {
     return `/settlements/${encodeURIComponent(params.id)}`;
