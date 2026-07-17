@@ -977,6 +977,26 @@ five in-flight lanes as they report, then HALTS — no further dispatches this s
 (S4-S6, generation-time content, TOWN LAYOUT v2, the composite, ROUND 3 all HOLD). The
 successor resumes from the dossier's DISPATCH ORDER section. All pre-signed authorities
 (RULING #5, THE ONE REGEN) remain standing for the resume.
+**⬛ FOLD 1/5 — GALLERY-2 PHASE 2 (2026-07-17):** folded into claude/w7-prep @ d17bc07f
+(merge of claude/gallery-p2 tip 126c95f6, 6 commits off c1d3f6eb; conflict-free — zero
+file overlap with the provenance/growth advance). All five signed deliverables: six-phrase
+reactions (votes-posture table, 120/h shared velocity, 3-way vocab parity), aliveness
+ranking (0.7·depth/80 + 0.3·ageBand, snapshot-at-publish both paths, null-when-unknown) +
+most_alive sort, Campaigns third tab (CampaignStatePanel mounted), gallery_title (one
+coalesce chokepoint), 15 facet hubs + sitemap default-ON (31 URLs, anon-render pinned).
+MIGRATIONS RENUMBERED AT FOLD 146-149→145-148 (145 freed by the BYOK renumber; validator:
+148 files contiguous — the lane's isolation-only 145-gap red DISSOLVED). Lane pins 301
+green on the merged tree; the one full-set red was the pglite load-flake, 41/41 in
+isolation. Lane full gate (pre-fold): 11,691 pass, 46 load-flaked files all green isolated,
+tsc 0, dist 145/145 fresh, +804 B eager (margin 7,164 under RATCHET #11). JUDGMENTs
+(vetoable, in the lane report): formula weights, +10 relevance cap, 120/h ceiling, top-3
+card chips, curated-in-hubs, sitemap creds-keyed default-ON. Seams: no aliveness backfill
+(re-share stamps, at_war precedent); maps/campaigns have no title lane (signed wording);
+code-ahead-of-schema window now 118→148, closes at the very-end deploy. NOTE: the lane's
+spawn-chip for the saves.js gallery_importable data-loss is ALREADY FIXED on
+claude/fix-gallery-list-importable @ e0d0c29c (unfolded; dossier resume item — NOT one of
+the five). ⚠️ SUCCESSOR: surveyor-s3's migrations 145/146 COLLIDE with the folded
+145-148 — renumber to 149/150 at S3's fold with internal-ref updates.
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
