@@ -1098,6 +1098,26 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER DESIGN REFINEMENT: SOURCED ASYMMETRY (2026-07-17, in-session, folded into #38):
+"nothing should be perfectly organic. there will always be slight or minor organic
+asymmetry from the region, resources, people's habits, etc. The best that we as people can
+do is to plan around it or use them to our natural advantage."** The refinement sharpens
+the v2 commission's "seeded irregularity within constraints" from cosmetic jitter to
+ASYMMETRY WITH PROVENANCE — every deformation has a named cause from the dossier: (1)
+REGION — terrain/water/slope already first-class (water-first morphologies); (2) RESOURCES
+— the settlement's actual income sources and resource sites pull districts, roads, and
+work-quarters toward them (the tannery-downstream exemplar generalized); (3) PEOPLE'S
+HABITS — desire paths cutting formal grids, market accretion at the gates facing the
+farmland/trade routes, habitual routes worn permanent (derived from institution adjacency
++ trade-route bearings + high-traffic pairs — an inference layer, shapes vetoable). THE
+PLAN-RESPONSE LAW (the owner's second clause): the planned elements READ AS RESPONSES to
+the asymmetries — walls kink to include what matters, grids deform where the stream cuts,
+the square sits where the desire paths converge — plan-around or exploit, never suppress.
+DISCIPLINE: no uniform jitter (global noise reads as noise, not history); irregularity is
+applied PER-CAUSE, deterministic from the seed fork + dossier only. COMPOSES with Lynch:
+imageability *needs* distinctive irregularity — sourced asymmetry should raise rubric
+scores, not fight them. All other #38 principles stand unchanged. RELAYED mid-flight to
+the town-layout-v2 lane.
 **⬛ OWNER COMMISSION: AI TOKEN EFFICIENCY (2026-07-17, in-session): "where you believe it
 is possible without giving up quality, please optimize how AI is used to reasonably reduce
 any unnecessary spending of tokens. Because that could detract users from using it."**
