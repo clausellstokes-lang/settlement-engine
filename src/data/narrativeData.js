@@ -13,22 +13,38 @@ export const ARRIVAL_SCENES = {
       `The market at ${r} is audible before it is visible — a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.`,
     (r) =>
       `${r}'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has worked out most of its problems.`,
+    (r) =>
+      `The road into ${r} is thick with carts by mid-morning, all of them heading for the same square, and the traffic tells you where the settlement's heart is before you can see it.`,
+    (r) =>
+      `You reach ${r} against a tide of people leaving it — the market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news.`,
   ],
   river: [
     (r) =>
       "The smell of the river reaches you before the settlement does — clean water, reeds, the particular mud of a working waterfront.",
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
+    (r) =>
+      `The river carries the sounds of ${r} to you around the bend before the buildings appear — a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`,
+    (r) =>
+      `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
   smoke: [
     (r) =>
       `The cookfire smoke of ${r} drifts on the wind in your direction — a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`,
     (r) => `${r} is visible as a smear of smoke on the horizon for a long time before the buildings resolve.`,
+    (r) =>
+      `You smell ${r} before anything else — woodsmoke and bread and livestock, the layered scent of a place where people have been living close together and cooking the same suppers for generations.`,
+    (r) =>
+      `The smoke above ${r} stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey.`,
   ],
   guild: [
     (r) =>
       `The sound of a hammer on metal reaches you from ${r}'s smithing quarter — a craftsperson's rhythm, not a soldier's.`,
     (r) => `${r} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.`,
+    (r) =>
+      `${r} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.`,
+    (r) =>
+      `The approach to ${r} is lined with the overflow of its crafts — timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`,
   ],
   ordinary: [
     (r) =>

@@ -11,6 +11,8 @@
 import { registerStep } from '../pipeline.js';
 import { TIER_ORDER } from '../../data/constants.js';
 import { institutionalCatalog, catalogIdForName } from '../../data/institutionalCatalog.js';
+import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
+import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { getBaseChance } from '../structuralValidator.js';
@@ -470,6 +472,21 @@ registerStep('assembleInstitutions', {
     if (inst.isCustom || inst.source === 'custom') continue;
     const catalogId = catalogIdForName(inst.name);
     if (catalogId) inst.catalogId = catalogId;
+  }
+
+  // CONTENT-GT-DOSSIER: draw-free institution-description variety. For institutions with
+  // authored variants, select one desc from [canonicalDesc, ...variants] by a PURE fnv hash
+  // of (settlement seed : institution name) — ZERO rng draws, so the generation stream stays
+  // byte-identical and only the persisted `desc` string varies (canonical-at-zero: a falsy
+  // seed or a name with no variants keeps the catalog desc). The chosen string is written
+  // back to the existing scalar `desc` field — no persistence-shape change. Skips custom
+  // institutions (they carry `description`, never a catalog key).
+  for (const inst of /** @type {any[]} */ (institutions)) {
+    if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
+    const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
+    if (variants && variants.length) {
+      inst.desc = pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`);
+    }
   }
 
   // Structural validation moved to structuralValidationPass (Wave 4b): it
