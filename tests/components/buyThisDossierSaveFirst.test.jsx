@@ -79,7 +79,7 @@ describe('BuyThisDossier "save first" rung', () => {
       />,
     );
 
-    const cta = screen.getByRole('button', { name: /save this settlement to buy its pdf/i });
+    const cta = screen.getByRole('button', { name: /save this settlement to unlock its exports/i });
     fireEvent.click(cta);
 
     await waitFor(() => expect(onSaveFirst).toHaveBeenCalledTimes(1));

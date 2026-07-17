@@ -322,6 +322,10 @@ function WorldMapToolbarImpl({
   handleImportImage,
   handleShareMap,
   sharingMap,
+  // MAP EXPORTS — the realm-map PNG download. Present only for the signed-in
+  // owner (WorldMap withholds it for anon), so the affordance itself is the gate.
+  handleExportMap,
+  exportingMap = false,
   mapTemplates,
   currentTemplate,
   handleTemplateChange,
@@ -576,6 +580,15 @@ function WorldMapToolbarImpl({
                     <IconButton onClick={() => handleShareMap()} disabled={sharingMap}>
                       <Share2 size={13} /> {sharingMap ? 'Opening…' : 'Share to gallery…'}
                     </IconButton>
+                    {/* Realm-map PNG export (terrain + settlement markers). Reuses
+                        the already-bundled Image glyph so no new lucide icon lands
+                        in the first-paint vendor chunk. Withheld for anon (the prop
+                        is undefined), so it is its own gate. */}
+                    {typeof handleExportMap === 'function' && (
+                      <IconButton onClick={handleExportMap} disabled={exportingMap}>
+                        <ImageIcon size={13} /> {exportingMap ? 'Exporting…' : 'Download map (PNG)'}
+                      </IconButton>
+                    )}
                   </>
                 )}
 

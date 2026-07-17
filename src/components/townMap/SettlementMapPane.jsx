@@ -52,6 +52,7 @@ import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
 import { districtColor } from './palette.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
+import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
 
 const clampScale = (s) => Math.max(0.2, Math.min(8, s));
@@ -640,6 +641,14 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         onToggleLegend={doToggleLegend}
         onReset={doReset}
       />
+
+      {/* ── MAP EXPORTS — the per-settlement export affordance (bottom-right).
+          Owner-only by construction: rendered only when a saveId is present (the
+          public gallery view passes saveId=null) AND the map has something to
+          draw. Gating (the $2.99 export-bundle lane) lives inside the menu. ── */}
+      {saveId != null && (districts.length > 0 || buildings.length > 0) && (
+        <SettlementMapExportMenu settlement={settlement} saveId={saveId} style={activeLens} />
+      )}
 
       {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}
       {active && active.kind === 'building' && isPinned && active.payload.show && (
