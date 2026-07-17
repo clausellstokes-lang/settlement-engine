@@ -1098,6 +1098,19 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE DOORS' CORPUS CITIZENSHIP (2026-07-17, owner clarification: "i meant to include
+all of these" — quoting the three doors WITH their post-launch placement):** the doors are
+now FULL corpus entries @ w7-prep 5bd601ea — docs/DESIGN_MAP_POST_LAUNCH_DOORS.md holds
+frozen designs + coherence matrices + build gates for THE SPATIAL CONSEQUENCE LAYER
+(map→engine via a derived sidecar spatial substrate; fields-not-entities; the
+WHERE-not-HOW-MUCH calamity law; virtual spatialConsequenceEnabled w/ dormancy golden;
+lights only in an owner-signed regen), THE TABLE LAYER (semantic-snap fog over the v2
+graph; zero-server v1 / realtime v2 separately gated; VTT-complement positioning), and
+THE KEYED SCALE (facet-law interiors under the envelope law; pre-walled UVTT by
+construction; institution-interiors-only charter clause). Map doc §14 reduced to a
+pointer. BUILD SLOT unchanged: post-launch roadmap, by the owner's own quoted placement;
+recommended order (vetoable) interiors → spatial consequence → fog, demand-checked via
+the radar pattern. The doors-vs-docs assumption from the prior row is RESOLVED: docs.
 **⬛ THE CORPUS AMENDMENT (2026-07-17, owner: "that includes the corpus"): the session's
 commissions are FROZEN INTO THE DESIGN CORPUS on the code lineage @ w7-prep 41d09959** —
 DESIGN_SETTLEMENT_MAP.md §12 (sourced asymmetry: provenance-annotated deformations,
