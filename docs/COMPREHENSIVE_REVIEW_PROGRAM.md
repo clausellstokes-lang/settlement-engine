@@ -972,6 +972,15 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: THE BYOK MANAGEMENT SURFACE (2026-07-17, task #29).** Provider pick →
+verify-by-test-call (never prefix-guess) → dynamic model dropdown from the key's ACTUAL
+list-models ∩ adapter-supported, per-task defaults + override, §3e retention class shown in
+the picker · failure classification → §3d graceful refusals (out-of-credit names the top-up
+door + switch-to-managed) + persistent key-health status · HONEST BOUNDARY: no provider
+exposes balance APIs — reactive detection; "our meter is your trend, your console is your
+truth" said in-UI · USAGE DASHBOARD (edge-metered token counts by day/task/model, estimated
+costs labeled estimates) + USER GOVERNORS (caps, warn-at-threshold, pause) enforced at the
+single edge door. The receipts culture applied to the user's own wallet.
 **⬛ MAP STYLES: NON-DESTRUCTIVE GUARANTEE (owner confirmation, 2026-07-17, folded into
 #28):** bespoke AI styles are ADDITIVE saved definitions — named, kept (credits bought an
 artifact, not a render), re-selectable; the four base lenses remain permanently available;
