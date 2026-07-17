@@ -48,6 +48,10 @@ const WarResolveSection = lazy(() => import('./WarResolveSection.jsx'));
 // 1,161,810 ratchet. RealmInspector itself rides a lazy chunk, so a static import keeps
 // TreatyPanel off first paint at zero manifest cost. @enforced-by tests/build/vendorPdfLazy.test.js
 import TreatyPanel from './TreatyPanel.jsx';
+// THE CHRONICLE (W-R2): the span-scaled advance report + decree tracker. STATIC for
+// the SAME FP-R reason — it rides RealmInspector's already-lazy chunk at zero eager
+// manifest cost (a lazy() here would mint a preload entry and tip the ratchet).
+import AdvanceReport from './AdvanceReport.jsx';
 
 /**
  * The inspector sections, in display order. `pantheon` self-hides when dormant;
@@ -387,6 +391,10 @@ function ChronicleSection({ campaign, nameById }) {
   }, [campaign, saves, pulseUndoStack]);
   return (
     <div style={{ display: 'grid', gap: SP.md }}>
+      {/* THE CHRONICLE — the span-scaled advance report + decree tracker, the
+          primary "after every advance" surface, above the scrubbable scrollback
+          and the raw news feed. */}
+      <AdvanceReport campaign={campaign} nameFor={nameFor} />
       <ChronicleScrollback campaign={campaign} nameFor={nameFor} causalByTick={causalByTick} />
       <WizardNewsPanel campaign={campaign} />
     </div>
