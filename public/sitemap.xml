@@ -4,9 +4,11 @@
 
   Derived from src/lib/routes.js: every indexable public route (excluding
   noindex app/auth/transient routes, guarded routes, and retired redirect
-  surfaces), the seven compendium sections, and — when SITEMAP_INCLUDE_GALLERY=1
-  in the deploy env — every public /gallery/:slug. Vercel serves /public/* as
-  static files. Regenerate with: node scripts/generate-sitemap.mjs
+  surfaces), the seven compendium sections, the gallery facet hubs
+  (src/lib/galleryHubs.js), and — at deploy, where Supabase credentials exist
+  in the env (opt out with SITEMAP_INCLUDE_GALLERY=0) — every public
+  /gallery/:slug. Vercel serves /public/* as static files. Regenerate with:
+  node scripts/generate-sitemap.mjs
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -88,5 +90,80 @@
     <loc>https://settlementforge.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/plains</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/hills</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/forest</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/riverside</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/coastal</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/mountain</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/terrain/desert</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/thorp</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/hamlet</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/village</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/town</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/city</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/tier/metropolis</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/at-war</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/gallery/most-alive</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

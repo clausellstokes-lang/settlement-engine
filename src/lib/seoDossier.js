@@ -74,3 +74,36 @@ export function setSharedDossierMeta(dossier) {
     ...(dossier.publishedAt ? { datePublished: dossier.publishedAt } : {}),
   });
 }
+
+/**
+ * Enrich the head for a gallery FACET HUB (GALLERY-2 phase 2). applyDocumentHead
+ * already canonicalized to the hub's own path (viewToPath's hub branch) with the
+ * generic gallery title; this upgrades the title/description to the hub's copy
+ * and emits a CollectionPage JSON-LD node. Safe no-op for a null hub. The next
+ * route change's applyDocumentHead resets everything.
+ * @param {{ path?: string, title?: string, blurb?: string } | null} hub
+ */
+export function setGalleryHubMeta(hub) {
+  if (typeof document === 'undefined' || !hub?.title || !hub?.path) return;
+  const pageTitle = `${hub.title} · ${SITE_NAME}`;
+  const description = hub.blurb || '';
+  const canonical = `${ORIGIN}${hub.path}`;
+
+  document.title = pageTitle;
+  upsertMeta('property', 'og:title', pageTitle);
+  upsertMeta('name', 'twitter:title', pageTitle);
+  if (description) {
+    upsertMeta('property', 'og:description', description);
+    upsertMeta('name', 'twitter:description', description);
+    upsertMeta('name', 'description', description);
+  }
+
+  upsertJsonLd('ld-gallery-item', {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: hub.title,
+    url: canonical,
+    description,
+    isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${ORIGIN}/` },
+  });
+}

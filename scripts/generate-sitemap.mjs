@@ -10,11 +10,19 @@
  * Home canonicalizes to '/', and the compendium fans out to one URL per tab
  * (each indexes with its own title via CompendiumPanel's ?tab= deep link).
  *
- * Public gallery slugs are OPT-IN and best-effort: set SITEMAP_INCLUDE_GALLERY=1
- * with VITE_SUPABASE_URL + VITE_SUPABASE_ANON_KEY in the env and this appends
- * every public /gallery/:slug. Off by default so `npm run build` stays offline
- * and deterministic; the deploy env (4h) flips it on. Any fetch failure is
- * swallowed — the static routes always ship.
+ * The gallery FACET HUBS (GALLERY-2 phase 2; src/lib/galleryHubs.js) are
+ * emitted unconditionally — they are static, deterministic URLs derived from
+ * the canonical facet vocabularies, so they live in the committed sitemap and
+ * the byte-match test covers them.
+ *
+ * Public gallery SLUGS are ON BY DEFAULT and best-effort (GALLERY-2 phase 2 —
+ * the owner-signed sitemap fan-out flip): with VITE_SUPABASE_URL +
+ * VITE_SUPABASE_ANON_KEY in the env (the deploy env has them) this appends
+ * every public /gallery/:slug. Without credentials it contributes nothing, so
+ * an offline `npm run build` stays deterministic and byte-matches the
+ * committed file. Set SITEMAP_INCLUDE_GALLERY=0 to suppress explicitly (the
+ * freshness test does, so its byte-match can never depend on ambient
+ * credentials). Any fetch failure is swallowed — the static routes always ship.
  *
  * Run: `node scripts/generate-sitemap.mjs`  (writes public/sitemap.xml)
  */
@@ -22,6 +30,7 @@ import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { ROUTES } from '../src/lib/routes.js';
+import { GALLERY_HUBS } from '../src/lib/galleryHubs.js';
 
 const ORIGIN = 'https://settlementforge.com';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -96,9 +105,21 @@ export function staticUrls() {
   return urls;
 }
 
-/** Best-effort public gallery slugs (opt-in). Never throws. */
+/**
+ * The gallery facet-hub URLs — static + deterministic (no network), derived
+ * from the canonical facet vocabularies via the hub manifest. Always emitted.
+ */
+export function galleryHubUrls() {
+  return GALLERY_HUBS.map((hub) => ({
+    loc: `${ORIGIN}${hub.path}`,
+    changefreq: 'daily',
+    priority: '0.7',
+  }));
+}
+
+/** Best-effort public gallery slugs (ON by default; opt-out '0'). Never throws. */
 async function galleryUrls() {
-  if (process.env.SITEMAP_INCLUDE_GALLERY !== '1') return [];
+  if (process.env.SITEMAP_INCLUDE_GALLERY === '0') return [];
   const url = process.env.VITE_SUPABASE_URL;
   const anon = process.env.VITE_SUPABASE_ANON_KEY;
   if (!url || !anon) return [];
@@ -126,7 +147,7 @@ async function galleryUrls() {
 }
 
 export async function buildSitemap() {
-  const urls = [...staticUrls(), ...(await galleryUrls())];
+  const urls = [...staticUrls(), ...galleryHubUrls(), ...(await galleryUrls())];
   const body = urls.map(urlEntry).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!--
@@ -134,9 +155,11 @@ export async function buildSitemap() {
 
   Derived from src/lib/routes.js: every indexable public route (excluding
   noindex app/auth/transient routes, guarded routes, and retired redirect
-  surfaces), the seven compendium sections, and — when SITEMAP_INCLUDE_GALLERY=1
-  in the deploy env — every public /gallery/:slug. Vercel serves /public/* as
-  static files. Regenerate with: node scripts/generate-sitemap.mjs
+  surfaces), the seven compendium sections, the gallery facet hubs
+  (src/lib/galleryHubs.js), and — at deploy, where Supabase credentials exist
+  in the env (opt out with SITEMAP_INCLUDE_GALLERY=0) — every public
+  /gallery/:slug. Vercel serves /public/* as static files. Regenerate with:
+  node scripts/generate-sitemap.mjs
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${body}

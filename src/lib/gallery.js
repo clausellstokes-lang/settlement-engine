@@ -780,6 +780,9 @@ function normalizeGalleryFilters(filters = {}) {
   if (filters.curatedOnly) out.curatedOnly = true;
   // Patron-deity presence facet (gallery_facet_deity, migration 063).
   if (filters.hasDeity) out.hasDeity = true;
+  // At-war facet (gallery_facet_at_war, migration 063). The server honored it
+  // all along; forwarded since GALLERY-2 phase 2 (the /gallery/at-war hub).
+  if (filters.atWar) out.atWar = true;
   // Owner import opt-in facet (gallery_importable, migration 047; surfaced as a
   // list facet by migration 071). Narrows to dossiers their owner allowed to clone.
   if (filters.importable) out.importable = true;

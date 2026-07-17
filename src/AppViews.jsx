@@ -93,7 +93,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'account'     && (authLoading ? <Loading /> : authTier !== 'anon' ? <AccountPage onNavigateAdmin={() => setView('admin')} /> : null)}
       {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
-      {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
+      {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersPage onNavigate={setView} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}

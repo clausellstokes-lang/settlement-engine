@@ -9,6 +9,7 @@ import { useState } from 'react';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryCampaigns from './gallery/GalleryCampaigns.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
+import GalleryHubPage from './gallery/GalleryHubPage.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
@@ -43,7 +44,7 @@ function GalleryTabs({ tab, setTab }) {
   );
 }
 
-export default function GalleryPage({ onNavigate, routeSlug = null }) {
+export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = null }) {
   const [tab, setTab] = useState('settlements');
   const {
     auth,
@@ -80,6 +81,22 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     importDossier,
     setDossierCommentCount,
   } = useGalleryPageState(routeSlug);
+
+  // Facet-hub landing (GALLERY-2 phase 2): /gallery/terrain/:kind etc. A hub
+  // is its own crawlable page — it renders INSTEAD of the tabbed index (and a
+  // dossier open still wins: /gallery/:slug never carries a hub param).
+  if (routeHub && !activeSlug) {
+    return (
+      <FeatureErrorBoundary
+        label="GalleryPage.hub"
+        kind="react.render.gallery"
+        fallbackTitle="This gallery collection could not be displayed."
+        resetKeys={[routeHub.facet, routeHub.value]}
+      >
+        <GalleryHubPage routeHub={routeHub} />
+      </FeatureErrorBoundary>
+    );
+  }
 
   if (activeSlug) {
     // Resilience: a public dossier is third-party, server-projected data — a
