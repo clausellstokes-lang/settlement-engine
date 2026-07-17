@@ -1098,6 +1098,15 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ RULING #7 AMENDED (2026-07-17, owner: "move git push to after everything is built"):
+THE PUSH MOVES TO POST-BUILD-OUT.** The first push now fires when the ENTIRE build-out is
+folded — both running lanes, all three map-wave dispatches (SM-5 ∥ door 1 ∥ door 3, then
+door 2), and the owner-side dossier-prose session — instead of at the original three-lane
+point. The chain becomes: build-out complete → PUSH (branches-as-backup; no PR/merge/
+deploy) → THE COMPOSITE → ROUND 3 → soak → tuning → re-certs → ONE REGEN → THE VERY END
+(PR + deploy). Standing re-push-at-milestones unchanged after the first push. Recorded
+without re-litigation: the single-machine exposure window now extends through the full
+build-out — the owner's accepted trade.
 **⬛ THE RECONCILIATION LAW (2026-07-17, owner-delegated "i let you decide how that
 works" — architect's mechanism, vetoable): how optimality relates to lawful↔chaos OVER
 TIME.** The FOUNDING response mode (exploit/endure/fortify; optimal or suboptimal) is the
