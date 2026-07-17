@@ -193,6 +193,75 @@ export function registerPurity(validated: ValidatedClaim[]): number {
   return list.filter((c) => !isSpeculativeReportText(c.text)).length / list.length;
 }
 
+// ── §3f THE ENRICHMENT RIDER — controlled vocabulary + server-side extraction ──
+
+/**
+ * §3f CONTROLLED VOCABULARY. The rider carries CATEGORY tags only — never content,
+ * never free text. Each list ends in a catch-all so an out-of-vocabulary tag maps to
+ * 'other' (the dictionary-growth signal). No theme DICTIONARY exists yet, so `themes`
+ * ships this STARTER taxonomy; growing it is the k-floored A2 seam (§3f layer 1):
+ * accumulate 'other' + oov counts, and promote a recurring bucket into a named theme
+ * once it clears the k-floor. Frozen so the vocabulary can't widen at runtime.
+ */
+export const RIDER_VOCAB = Object.freeze({
+  intents: Object.freeze(['lookup', 'overview', 'planning', 'ideation', 'clarification', 'action_request', 'meta', 'other']),
+  themes: Object.freeze(['factions', 'war', 'diplomacy', 'economy', 'settlement', 'npcs', 'religion', 'geography', 'events', 'other']),
+  refusalReasons: Object.freeze(['none', 'read_only', 'out_of_scope', 'dm_sovereign', 'unsupported', 'tier', 'other']),
+});
+
+/** The machine-readable ENRICHMENT RIDER, after coercion to the controlled vocabulary. */
+export interface EnrichmentRider {
+  intent: string;               // one of RIDER_VOCAB.intents
+  themes: string[];             // subset of RIDER_VOCAB.themes (deduped, capped)
+  refusalReason: string;        // one of RIDER_VOCAB.refusalReasons
+  actionDrafted: boolean;       // §3d bias-to-the-form seam (S1 read-only ⇒ false)
+  oov: boolean;                 // true iff any non-empty tag was coerced from out-of-vocabulary
+}
+
+/** Coerce one scalar tag to a vocabulary member. Empty/missing ⇒ `fallbackEmpty`
+ *  (no oov). A non-empty unrecognized value ⇒ the list's 'other'/catch-all + oov. */
+function coerceTag(
+  raw: unknown, allowed: readonly string[], fallbackEmpty: string, catchAll: string,
+): { value: string; oov: boolean } {
+  const v = typeof raw === 'string' ? raw.trim().toLowerCase() : '';
+  if (!v) return { value: fallbackEmpty, oov: false };
+  if (allowed.includes(v)) return { value: v, oov: false };
+  return { value: catchAll, oov: true };   // out-of-vocabulary ⇒ catch-all + growth signal
+}
+
+/**
+ * §3f: extract + VALIDATE the model's self-emitted rider against the controlled
+ * vocabulary. Interest data ONLY — intent / themes / refusal reason / action-drafted.
+ * NEVER quality metrics (the conflicted-witness rule: a model never grades its own
+ * compliance). A missing/garbage rider degrades to a benign default, never throws.
+ */
+export function extractRider(raw: unknown): EnrichmentRider {
+  const r = (raw && typeof raw === 'object') ? raw as Record<string, unknown> : {};
+  let oov = false;
+
+  const intent = coerceTag(r.intent, RIDER_VOCAB.intents, 'other', 'other');
+  oov = oov || intent.oov;
+
+  const refusal = coerceTag(r.refusalReason ?? r.refusal_reason, RIDER_VOCAB.refusalReasons, 'none', 'other');
+  oov = oov || refusal.oov;
+
+  const rawThemes = Array.isArray(r.themes) ? r.themes : (r.theme != null ? [r.theme] : []);
+  const themeSet = new Set<string>();
+  for (const t of rawThemes.slice(0, 12)) {
+    const c = coerceTag(t, RIDER_VOCAB.themes, '', 'other');
+    oov = oov || c.oov;
+    if (c.value) themeSet.add(c.value);
+  }
+
+  return {
+    intent: intent.value,
+    themes: [...themeSet].slice(0, 6),
+    refusalReason: refusal.value,
+    actionDrafted: r.actionDrafted === true || r.action_drafted === true,
+    oov,
+  };
+}
+
 /**
  * NAMING HYGIENE (§3c(3)): the PUBLIC receipt name for a cited slice — its human-facing
  * section title ("Spheres of influence"), never the internal slice id or `read:*` source
@@ -258,6 +327,11 @@ export function buildAnalystPrompt(
   // opaque marker (no explanation — disclosure hygiene above tells the model not to
   // discuss reference markers). If a packet leaks, this maps to the account.
   const canaryLine = canary ? `[packet-ref ${stripFences(String(canary)).slice(0, 40)}]\n` : '';
+  // §3f: the controlled-vocabulary enums, sourced from RIDER_VOCAB so the prompt and
+  // the server-side validator can never drift.
+  const intents = RIDER_VOCAB.intents.join('|');
+  const themes = RIDER_VOCAB.themes.join('|');
+  const refusals = RIDER_VOCAB.refusalReasons.join('|');
   const slicesText = bundle.slices
     .map((s) => {
       const body = stripFences(JSON.stringify(s.data ?? [])).slice(0, 6000);
@@ -277,7 +351,7 @@ SLICES (cite by id):
 ${slicesText || '(no slices — answer that the engine does not record this)'}
 ${FENCE_CLOSE}
 
-Return ONLY JSON of the form {"claims":[{"text":"<one sentence, what IS>","source":"<slice id or null>"}],"musings":[{"text":"<a suggestion, expansion, alternative, or clarifying question — what COULD BE; uncited>"}]}. Put grounded facts in "claims" (each citing a slice id); put everything speculative or conversational in "musings". No preamble, no markdown.`;
+Return ONLY JSON of the form {"claims":[{"text":"<one sentence, what IS>","source":"<slice id or null>"}],"musings":[{"text":"<a suggestion, expansion, alternative, or clarifying question — what COULD BE; uncited>"}],"rider":{"intent":"<${intents}>","themes":["<zero or more of: ${themes}>"],"refusalReason":"<${refusals}>","actionDrafted":false}}. Put grounded facts in "claims" (each citing a slice id); put everything speculative or conversational in "musings". The "rider" is a category tag of THIS request — pick ONLY from the listed values (anything else becomes "other"); it carries no content, names, or numbers. No preamble, no markdown.`;
 }
 
 // ── provider adapter contract (§3e THE FORGETTING LAW, STRUCTURE layer) ───────

@@ -29,9 +29,12 @@ import {
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
   registerProviderAdapter, routeWorldDataAdapter,
   sanitizeMusings, registerPurity,
-  accountCanary, detectMetaProbe,
+  accountCanary, detectMetaProbe, extractRider,
 } from './analystCore.ts';
-import type { MusingItem } from './analystCore.ts';
+import type { MusingItem, EnrichmentRider } from './analystCore.ts';
+// §3f: the ONE frozen event contract, shared with the client (single source of truth —
+// the freshness test pins bundle ≡ src/lib/analyticsEvents.js).
+import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
 // §3c(4): the salt that makes the per-account canary unguessable. A tracer works even
@@ -214,6 +217,7 @@ export async function handleAiAnalyst(
     let capturedValidated: ReturnType<typeof validateClaims> = [];
     let capturedMusings: MusingItem[] = [];
     let capturedRegisterPurity = 1;
+    let capturedRider: EnrichmentRider | null = null;
     let capturedRefused = false;
     let capturedUsage: { input: number | null; output: number | null } = { input: null, output: null };
 
@@ -266,6 +270,9 @@ export async function handleAiAnalyst(
         // TEXT alone — never from the rider (the §3f conflicted-witness rule).
         capturedMusings = sanitizeMusings(parsed.musings);
         capturedRegisterPurity = registerPurity(capturedValidated);
+        // §3f: the model's self-emitted rider, coerced to the controlled vocabulary
+        // (interest data only — never the quality metrics above).
+        capturedRider = extractRider(parsed.rider);
         capturedAnswerText = renderCitedAnswer(capturedValidated);
         // A pure clarifying-question turn (no grounded claims, only musings) is a valid,
         // non-empty answer: the analyst is allowed to ask back (§3b read-only conversation).
@@ -322,6 +329,36 @@ export async function handleAiAnalyst(
       });
       if (error) logError('ai-analyst', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
     } catch (e) { logError('ai-analyst', user.id, e, { stage: 'audit' }); }
+
+    // ── §3f THE ENRICHMENT RIDER — the ID-FREE, category-grade service-telemetry row ─
+    // The model tags its own traffic; we extract those tags into an analytics event with
+    // NO actor / session / subject id — the CONDITION-OF-SERVICE layer (managed AND BYOK,
+    // non-togglable, ToS-disclosed). Every interaction flows through this ONE edge path,
+    // so BYOK enforceability is STRUCTURAL — there is no bypass. Best-effort; never fails
+    // the response. CONFLICTED-WITNESS RULE: this carries INTEREST data only — the quality
+    // metrics (citation coverage, register purity) are computed independently above and
+    // are NEVER sourced from this rider. Content-grade capture stays consent-gated (§3).
+    try {
+      if (capturedRider) {
+        const { error } = await supabaseAdmin.from('analytics_events').insert({
+          event: ANALYTICS_EVENTS.AI_ANALYST_RIDER,
+          actor_id: null, session_id: null, subject_id: null,  // ID-FREE by construction
+          consent_tier: 'product',                              // condition-of-service (never research)
+          events_rev: ANALYTICS_EVENTS_REV,
+          props: {
+            // controlled vocabulary + booleans only — no content, names, numbers, or free text
+            intent: capturedRider.intent,
+            themes: capturedRider.themes,
+            refusal_reason: capturedRider.refusalReason,
+            action_drafted: capturedRider.actionDrafted,
+            oov: capturedRider.oov,                             // dictionary-growth signal (A2 seam)
+            audience, byok: providerKey.byok, refused: capturedRefused,
+          },
+          batch_id: crypto.randomUUID(), seq: 0,
+        });
+        if (error) logError('ai-analyst', user.id, `rider event insert failed: ${error.message}`, { stage: 'rider' });
+      }
+    } catch (e) { logError('ai-analyst', user.id, e, { stage: 'rider' }); }
 
     // ── map the outcome to a response ──────────────────────────────────────────────
     switch (outcome.outcome) {

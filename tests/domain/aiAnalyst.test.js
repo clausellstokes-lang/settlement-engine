@@ -26,7 +26,9 @@ import {
   citationLabel, registerProviderAdapter, routeWorldDataAdapter,
   sanitizeMusings, registerPurity, isSpeculativeReportText, impureReportClaims,
   accountCanary, detectMetaProbe,
+  extractRider, RIDER_VOCAB,
 } from '../../supabase/functions/ai-analyst/analystCore.ts';
+import { EVENTS } from '../../src/lib/analyticsEvents.js';
 
 // ── fixtures (a lit world with treaties/blocs/credibility + a private settlement) ──
 
@@ -381,6 +383,104 @@ describe('analyst — extraction defense: canary + meta-probe (§3c 4/5)', () =>
     });
     expect(rec.meta_probe).toBe(false);
     expect(rec.canary).toBeNull();
+  });
+});
+
+// ── §3f THE ENRICHMENT RIDER: controlled vocabulary + conflicted-witness ──────
+
+describe('analyst — the enrichment rider (§3f)', () => {
+  const world = litWorld();
+  const { slices } = selectSlices({ question: 'what factions dominate?', worldState: world, settlements: SETTLEMENTS, audience: 'dm' });
+  const bundle = buildRetrievalBundle(slices);
+
+  it('the rider event is a registered, id-free category event', () => {
+    expect(EVENTS.AI_ANALYST_RIDER).toBe('ai_analyst_rider');
+  });
+
+  it('the prompt asks for a controlled-vocabulary rider (enums sourced from RIDER_VOCAB)', () => {
+    const prompt = buildAnalystPrompt('who rules?', bundle, 'dm');
+    expect(prompt).toContain('"rider"');
+    for (const v of ['lookup', 'ideation', 'action_request', 'meta']) expect(prompt).toContain(v);
+    for (const v of ['factions', 'war', 'diplomacy']) expect(prompt).toContain(v);
+  });
+
+  it('extractRider COERCES to the controlled vocabulary; OOV ⇒ other + a growth signal', () => {
+    const r = extractRider({ intent: 'lookup', themes: ['factions', 'war'], refusalReason: 'none', actionDrafted: false });
+    expect(r).toEqual({ intent: 'lookup', themes: ['factions', 'war'], refusalReason: 'none', actionDrafted: false, oov: false });
+
+    // out-of-vocabulary values map to the catch-all AND raise the dictionary-growth flag
+    const oov = extractRider({ intent: 'summon_dragon', themes: ['macroeconomics', 'war'], refusalReason: 'because_i_said' });
+    expect(oov.intent).toBe('other');
+    expect(oov.themes).toContain('other');   // 'macroeconomics' → other
+    expect(oov.themes).toContain('war');     // known survives
+    expect(oov.refusalReason).toBe('other');
+    expect(oov.oov).toBe(true);
+    for (const t of oov.themes) expect(RIDER_VOCAB.themes).toContain(t);
+  });
+
+  it('a missing / garbage rider degrades to a benign default, never throws', () => {
+    expect(extractRider(undefined)).toEqual({ intent: 'other', themes: [], refusalReason: 'none', actionDrafted: false, oov: false });
+    expect(extractRider(null).intent).toBe('other');
+    expect(extractRider('nonsense').intent).toBe('other');
+    expect(extractRider({}).oov).toBe(false);        // absent ≠ out-of-vocabulary
+    expect(extractRider({ themes: 'factions' }).themes).toEqual([]); // non-array themes ignored
+  });
+
+  it('the rider carries INTEREST data ONLY — no quality metric fields (conflicted-witness)', () => {
+    const r = extractRider({ intent: 'lookup', themes: ['factions'], citationCoverage: 1, registerPurity: 1, quality: 'great' });
+    expect('citationCoverage' in r).toBe(false);
+    expect('registerPurity' in r).toBe(false);
+    expect('quality' in r).toBe(false);
+    expect(Object.keys(r).sort()).toEqual(['actionDrafted', 'intent', 'oov', 'refusalReason', 'themes']);
+  });
+
+  it('CONFLICTED-WITNESS: quality metrics are computed from CLAIMS, never from the rider', () => {
+    // A model self-reports a flattering rider WHILE emitting hallucinated + speculative
+    // claims. The quality metrics must reflect the CLAIMS, not the self-report.
+    const flatteringRider = extractRider({ intent: 'lookup', themes: ['factions'] });
+    const badClaims = validateClaims([
+      { text: 'Thornwall leads a sphere.', source: bundle.slices[0].id },            // ok
+      { text: 'A dragon razed the capital.', source: 'faction:not-real' },           // hallucinated citation
+      { text: 'The reeve might be plotting.', source: bundle.slices[0].id },          // speculation in report
+    ], bundle);
+    // coverage + purity are driven by the claims — the rider cannot lift them
+    expect(citationCoverage(badClaims)).toBeCloseTo(2 / 3, 5);   // one bad citation
+    expect(registerPurity(badClaims)).toBeCloseTo(2 / 3, 5);     // one speculation
+    // the rider is inert to those numbers — it has no such fields to source them from
+    expect(Object.keys(flatteringRider)).not.toContain('citationCoverage');
+    expect(Object.keys(flatteringRider)).not.toContain('registerPurity');
+  });
+});
+
+// ── §3f: the edge extracts the rider server-side as an ID-FREE event ───────────
+
+describe('analyst edge — the rider is emitted id-free, both paths (§3f)', () => {
+  const src = readFileSync(resolve(process.cwd(), 'supabase/functions/ai-analyst/index.ts'), 'utf8');
+  // The whole rider-emit block, anchored on two stable section comments.
+  const block = src.slice(src.indexOf('§3f THE ENRICHMENT RIDER'), src.indexOf('map the outcome to a response'));
+
+  it('the rider insert is ID-FREE (no actor / session / subject id)', () => {
+    expect(block).toContain('actor_id: null');
+    expect(block).toContain('session_id: null');
+    expect(block).toContain('subject_id: null');
+    expect(block).toContain('event: ANALYTICS_EVENTS.AI_ANALYST_RIDER');
+  });
+
+  it('the rider row carries controlled-vocab tags — never the question or answer text', () => {
+    expect(block).toContain('intent: capturedRider.intent');
+    expect(block).toContain('refusal_reason: capturedRider.refusalReason');
+    // no prose carriers in the rider props
+    expect(block).not.toContain('capturedAnswerText');
+    expect(block).not.toContain('capturedPrompt');
+    expect(/\bquestion\b/.test(block)).toBe(false);
+    // condition-of-service layer: product tier, never research/consent-gated
+    expect(block).toContain("consent_tier: 'product'");
+  });
+
+  it('the rider fires regardless of the key path (managed AND BYOK) — no byok gate on the emit', () => {
+    // the emit is guarded only by `if (capturedRider)`, never by providerKey.byok
+    expect(block).toContain('if (capturedRider)');
+    expect(/if\s*\(\s*providerKey\.byok/.test(block)).toBe(false);
   });
 });
 
