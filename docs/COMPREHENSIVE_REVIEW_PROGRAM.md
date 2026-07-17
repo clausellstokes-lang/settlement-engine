@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ CONTROL-SURFACE AMENDMENT §3e (2026-07-16 ~23:15, @ f4bf8da9 on w7-prep): THE
+FORGETTING LAW.** Owner ("any AI using this from my website has to delete their information
+after use") adopted on the manager's shape after discussion: enforced at the three REAL
+layers — statelessness by construction · contractual no-training + bounded/zero retention
+floor (verify provider terms at implementation, never from memory) · retentionClass as a
+REQUIRED walker-pinned adapter property with routing floors ('training'-class unroutable for
+world data; BYOK posture surfaced honestly). LOUD-NOT-HIDDEN (the commitment goes in the
+privacy policy; only the plumbing is invisible — the owner's "hidden" framing amended with
+consent). Prompt-based deletion claims PROHIBITED as retention theater. Promises never
+exceed contracts. Third addendum sent to the in-flight Surveyor implementer (adapter
+retentionClass + pin ship with S1).
 **⬛ CONTROL-SURFACE AMENDMENT §3d (2026-07-16 ~23:00, @ 3c69b34c on w7-prep): THE
 ACTION-READINESS LAW.** Owner: the AI accesses creation + realm management + post-creation
 edits, "always ready to take action where necessary and cordial and clear where it cannot."
