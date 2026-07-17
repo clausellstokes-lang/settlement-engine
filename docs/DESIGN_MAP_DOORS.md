@@ -1,12 +1,16 @@
-# DESIGN — THE THREE MAP DOORS (post-launch corpus entries)
-## Fable 5 architecture, 2026-07-17 — owner-commissioned full corpus citizenship; build slot = post-launch roadmap, NOT this tail (owner placement, quoted in the program ledger)
+# DESIGN — THE THREE MAP DOORS (corpus entries; PRE-LAUNCH per OWNER RULING #8)
+## Fable 5 architecture, 2026-07-17 — full corpus citizenship; BUILD SLOT MOVED PRE-LAUNCH by owner ruling #8 (2026-07-17, "no include them before launch"), superseding the same-day post-launch placement (filename renamed accordingly)
 
-Each door is a frozen design with its coherence matrix per the standing practice. None
-builds before launch: door 1 is a new engine capability (corpus reopening + owner-signed
-regen), doors 2–3 are new product scales whose demand should be measured first (the lens
-roadmap radar precedent). Recommended roadmap order (vetoable): INTERIORS → SPATIAL
-CONSEQUENCE → FOG-OF-WAR — interiors serve the most common session need ("we enter the
-tavern"); fog last because the UVTT pre-walled export covers its core need meanwhile.
+Each door is a frozen design with its coherence matrix per the standing practice. ALL
+THREE BUILD IN THIS TAIL: door 1 is the named wave for which the engine-frozen rule lifts
+(its commission = the corpus reopening; spatialConsequenceEnabled joins THE ONE REGEN
+lighting list, commission-signed, vetoable); doors 2–3 are new product scales shipping at
+launch under the launch-whole precedent (instrumented, ROUND 3 reviews them). SEQUENCING
+(manager, vetoable): at the town-layout-v2 fold dispatch SM-5 ∥ DOOR 1 ∥ DOOR 3 (disjoint
+fences: SM-5 owns existing map UI; door 1 is engine-side + canonize substrate; door 3 is
+new interior files w/ its map entry-hook seamed at fold); DOOR 2 dispatches at the SM-5
+fold (shared visibility machinery). Door 2's hosted realtime variant (v2) REMAINS
+post-launch gated — the zero-server v1 is the launch scope.
 
 ---
 

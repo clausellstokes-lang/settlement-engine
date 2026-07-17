@@ -340,11 +340,11 @@ denylist-safe, dormancy-lawful) · exports (WYSIWYG law extends: pins honor visi
 split per export audience) · tier gates (untouched; mapChains enforcement unaffected) ·
 first-paint (zero eager; map surface lazy by architecture).
 
-## 14. POST-LAUNCH DOORS (full corpus entries; deliberately NOT built in this tail)
+## 14. THE THREE MAP DOORS (full corpus entries; PRE-LAUNCH per owner ruling #8)
 
 The three doors — THE SPATIAL CONSEQUENCE LAYER (town-scale map→engine coupling), THE
 TABLE LAYER (in-app fog-of-war/session mode), and THE KEYED SCALE (building interiors) —
 hold FULL frozen designs with coherence matrices and build gates in
-**docs/DESIGN_MAP_POST_LAUNCH_DOORS.md** (owner-granted corpus citizenship, 2026-07-17;
-build slot = the post-launch roadmap by owner placement). That doc is the single
-authority; this section is a pointer, not a summary.
+**docs/DESIGN_MAP_DOORS.md** (owner-granted corpus citizenship 2026-07-17; build slot
+moved PRE-LAUNCH by owner ruling #8 the same day). That doc is the single authority; this
+section is a pointer, not a summary.
