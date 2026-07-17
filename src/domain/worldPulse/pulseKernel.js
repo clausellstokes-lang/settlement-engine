@@ -70,7 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowth } from './npcGrowthKernel.js';
+import { advanceNpcGrowthWithFabric } from './urbanFabricKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -2292,7 +2292,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // behind the virtual npcGrowthEnabled flag ⇒ a complete no-op (zero deposits, zero
   // npcGrowth key, zero mirror) — the growth dormancy golden proves wired-but-dormant is
   // byte-identical to pre-wire. NO rng (deposits are reads).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowth({
+  // THE URBAN FABRIC LAYER (owner commission #39) rides the SAME seam, composed AFTER
+  // growth inside advanceNpcGrowthWithFabric (urbanFabricKernel.js — the ceiling-safe
+  // name swap, the provenanceKernel idiom): the growth layer for STONE. Per-settlement
+  // district prominence stocks deposit from durable outcomes (ruling power, standing
+  // institutions, faith share, income, trade flow, population, food disparity) and
+  // decay on masonry half-lives over CALENDAR WEEKS; alignment = the drift-rate of new
+  // fabric; stressor scars decay on typed clocks; catastrophe (a fresh calamity stamp)
+  // is the ONE fast path — struck classes reset + a rebirth marker. Authoritative
+  // sidecar spatialLedgers.urbanFabric + a compact settlement.urbanFabric mirror (the
+  // acquiredTraits idiom) read by townMap/fabricRead.js when #38 lights. DORMANT behind
+  // the virtual urbanFabricEnabled flag ⇒ a complete no-op (zero key, zero mirror) —
+  // the fabric dormancy golden proves it. NO rng (deposits are reads).
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabric({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));

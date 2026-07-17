@@ -146,6 +146,8 @@ export const WHAT_PHRASES = Object.freeze({
   flourishing: 'a golden age',
   // THE GROWTH LAYER — a leader weathered into a learned trait (owner commission #36)
   npc_growth: 'a change in a leader\'s temper',
+  // THE URBAN FABRIC LAYER — a settlement's stone turned (owner commission #39)
+  urban_fabric: 'the changing face of a settlement',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
   blockade_lifted: 'a harbour opened again',
