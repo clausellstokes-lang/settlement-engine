@@ -245,7 +245,19 @@ describe('title= ratchet — native OS tooltips are a shrink-only census', () =>
   // where a hover title was neither). The button keeps a clean aria-label (no
   // title=); the deferred WorldMapToolbar tranche stays on the map-coordinated
   // pass (SM-4's display lane). Shrink-only resumes from 500.
-  const TITLE_BASELINE = 500;
+  // MAP-TITLE TRANCHE 500 → 485 (SM-4 has landed; the map lane is clear): the
+  // WorldMapToolbar's teaching titles migrated to an in-theme "?" control-
+  // reference panel (WorldMapToolbar.jsx MapControlsHelp, the GUIDE-2b house
+  // pattern — role=note, comprehension-first, mobile-reachable). 15 of the file's
+  // 16 native title= tooltips left the census: 13 teaching/restatement tooltips
+  // migrated to the panel, the dormant ResumeChip's dropped (its aria-label
+  // already carried the copy), and the Inspector's migrated to aria-label (it
+  // carries the dynamic unreviewed-pulse count — the badge is aria-hidden, so the
+  // announcement had to be preserved, not dropped). The ONE title left is Undo
+  // Advance: it folds in the last advance's interval + is pinned by
+  // advanceMultiTickToolbar.test.jsx (Stage-5), so it keeps its native title.
+  // Shrink-only resumes from 485.
+  const TITLE_BASELINE = 485;
 
   function countTitles() {
     let n = 0;

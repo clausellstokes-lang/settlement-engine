@@ -115,7 +115,6 @@ function MoreMenu({ children }) {
     <span ref={wrapRef} style={{ position: 'relative', display: 'inline-flex' }}>
       <IconButton
         onClick={() => setOpen(v => !v)}
-        title="More map tools"
         active={open}
         aria-expanded={open}
         aria-haspopup="menu"
@@ -202,7 +201,6 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
       onClick={onResume}
       disabled={disabled}
       aria-label={`Advance paused. Resume with recommendations, ${remaining} of ${total} steps remaining. Set per-major verdicts in the World Pulse panel.`}
-      title="The advance paused at a major fork. This resumes with every major applied as recommended — to keep or dismiss each one, use the paused-verdict surface in the World Pulse panel."
       style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         minHeight: 40, padding: '5px 11px',
@@ -221,6 +219,70 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
       <Zap size={14} /> Advance paused
       <Zap size={13} /> Resume with recommendations{remaining > 0 ? ` (${remaining} of ${total})` : ''}
     </Button>
+  );
+}
+
+/** The map-title tranche's in-theme control reference (sibling to GUIDE-2b's
+ *  LivingWorldHelp). Each toolbar control's teaching used to live only in a
+ *  native title= OS tooltip — hover-only, foreign chrome, and unreachable on a
+ *  touch device. Those teachings migrate here: a role=note panel rendered from
+ *  the study's own tokens, opened on demand from the "?" affordance, so the copy
+ *  is comprehension-first and mobile-reachable. Grouped to mirror the toolbar's
+ *  own clusters, and the actions tucked behind the "More" overflow are surfaced
+ *  too, so the panel doubles as a discovery aid. The single-tick Undo keeps its
+ *  own native title (it folds in the last advance's interval, which a static
+ *  panel cannot); its session-only caveat is repeated here for touch readers. */
+const MAP_CONTROL_HELP = Object.freeze([
+  ['The realm', [
+    ['Advance Realm', 'Advances the living world by the interval you choose above — a week through a year. Each advance runs a pulse whose changes wait for your review.'],
+    ['Undo Advance', 'Rolls the world back to just before the last advance. Available for the current session only; a page reload makes the advance permanent.'],
+  ]],
+  ['View', [
+    ['Layers', 'Shows or hides the map’s overlay layers.'],
+    ['Fit', 'Frames the whole realm in view.'],
+    ['Help', 'Walks you through the world map with a guided tour.'],
+  ]],
+  ['Campaign', [
+    ['Save', 'Saves the current map to the active campaign. Auto-save keeps it current between manual saves.'],
+  ]],
+  ['More menu', [
+    ['Rules', 'Opens the simulation rules — the dials and engine waves that shape how the realm evolves.'],
+    ['Quiet · Realistic · Dramatic', 'One-click presets that set how eventful the simulation runs.'],
+    ['Import / Clear Image', 'Import Image drapes a picture of your own over the map; Clear Image returns to the generated terrain.'],
+    ['Share to gallery', 'Opens the share editor to publish this map to the public gallery.'],
+    ['Regenerate', 'Rolls a fresh world from new terrain.'],
+    ['Clear Map', 'Removes the saved map from this campaign.'],
+  ]],
+]);
+
+function MapControlsHelp() {
+  return (
+    <div
+      role="note"
+      data-testid="map-controls-help"
+      style={{
+        flexBasis: '100%', display: 'grid', gap: SP.sm,
+        marginTop: SP.xs, padding: `${SP.sm}px ${SP.md}px`,
+        border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT,
+      }}
+    >
+      {MAP_CONTROL_HELP.map(([group, items]) => (
+        <div key={group} style={{ display: 'grid', gap: 3 }}>
+          <span style={{
+            fontSize: FS.xxs, fontWeight: 800, color: SECOND,
+            textTransform: 'uppercase', letterSpacing: '0.06em', fontFamily: sans,
+          }}>
+            {group}
+          </span>
+          {items.map(([name, desc]) => (
+            <div key={name} style={{ display: 'grid', gap: 1 }}>
+              <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900 }}>{name}</span>
+              <span style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, fontWeight: 600, lineHeight: 1.45 }}>{desc}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -277,6 +339,10 @@ function WorldMapToolbarImpl({
   const mapLoading = useStore(s => s.mapLoading);
   const mapError   = useStore(s => s.mapError);
   const imageMode  = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+
+  // The in-theme control reference (the "?" affordance). Replaces the native
+  // title= OS tooltips that used to carry each control's teaching.
+  const [mapHelpOpen, setMapHelpOpen] = useState(false);
 
   const campaignActive = canManageCampaigns && activeCampaignId;
 
@@ -338,7 +404,7 @@ function WorldMapToolbarImpl({
                 <>
                   {/* Save demoted to neutral secondary — the AutoSaveChip carries
                       reassurance, so Save no longer competes with Advance Realm. */}
-                  <IconButton data-tour="save" onClick={handleSaveMapToCampaign} title="Save map to campaign" disabled={savingMap}>
+                  <IconButton data-tour="save" onClick={handleSaveMapToCampaign} disabled={savingMap}>
                     <Save size={13} /> Save
                   </IconButton>
                   <Suspense fallback={null}>
@@ -379,7 +445,6 @@ function WorldMapToolbarImpl({
               </select>
               <IconButton
                 onClick={handleAdvanceRealm}
-                title="Advance realm simulation"
                 primary
                 disabled={worldPulseBusy}
               >
@@ -423,20 +488,32 @@ function WorldMapToolbarImpl({
               <IconButton
                 data-tour="layers"
                 onClick={() => setShowLayersPanel(v => !v)}
-                title="Toggle layer visibility"
                 active={showLayersPanel}
               >
                 <Layers size={13} /> Layers
               </IconButton>
-              <IconButton onClick={handleFit} title="Fit entire map in view">
+              <IconButton onClick={handleFit}>
                 <MapIcon size={13} /> Fit
               </IconButton>
               <IconButton
                 data-tour="help"
                 onClick={() => setTourOpen(true)}
-                title="Guided tour of the world map"
               >
                 <HelpCircle size={13} /> Help
+              </IconButton>
+              {/* The in-theme control reference. A text-glyph "?" (the study's
+                  help grammar, per HelpPopover) — distinct from the guided-tour
+                  "Help" beside it — toggles the role=note panel that now carries
+                  the teaching the native title= tooltips used to hold. No title=
+                  of its own (the accessible name is the aria-label), so it adds
+                  nothing to the native-tooltip census it exists to shrink. */}
+              <IconButton
+                onClick={() => setMapHelpOpen(o => !o)}
+                active={mapHelpOpen}
+                aria-label="About the map controls"
+                aria-expanded={mapHelpOpen}
+              >
+                ?
               </IconButton>
 
               {/* Overflow — rare / expert actions. Keeps the main bar to the
@@ -451,7 +528,6 @@ function WorldMapToolbarImpl({
                     <MenuHeader>Simulation</MenuHeader>
                     <IconButton
                       onClick={() => setShowSimulationRules(true)}
-                      title="Simulation rules"
                       active={showSimulationRules}
                       aria-pressed={showSimulationRules}
                     >
@@ -471,7 +547,6 @@ function WorldMapToolbarImpl({
                             onClick={() => handleApplyPreset(id)}
                             aria-pressed={active}
                             active={active}
-                            title={`Apply the ${label} simulation preset`}
                           >
                             {label}
                           </IconButton>
@@ -486,11 +561,11 @@ function WorldMapToolbarImpl({
                     <MenuHeader>Map &amp; sharing</MenuHeader>
                     {/* Custom map image (premium + active campaign). */}
                     {imageMode ? (
-                      <IconButton onClick={handleClearImage} title="Revert to generated terrain">
+                      <IconButton onClick={handleClearImage}>
                         <XIcon size={13} /> Clear Image
                       </IconButton>
                     ) : (
-                      <IconButton onClick={handleImportImage} title="Import a custom image to use as the map">
+                      <IconButton onClick={handleImportImage}>
                         <ImageIcon size={13} /> Import Image
                       </IconButton>
                     )}
@@ -498,7 +573,7 @@ function WorldMapToolbarImpl({
                         Settlements) is collapsed: the share editor now lets the
                         owner pick bare-map vs map-and-campaign inside its own kind
                         picker, so the toolbar just opens it. */}
-                    <IconButton onClick={() => handleShareMap()} disabled={sharingMap} title="Open the share editor to publish this map to the gallery">
+                    <IconButton onClick={() => handleShareMap()} disabled={sharingMap}>
                       <Share2 size={13} /> {sharingMap ? 'Opening…' : 'Share to gallery…'}
                     </IconButton>
                   </>
@@ -537,12 +612,12 @@ function WorldMapToolbarImpl({
                     {/* Destructive — danger variant + spacing so they never read
                         as peers of the config chips above (P8). */}
                     {!imageMode && (
-                      <Button variant="danger" size="sm" onClick={handleRegenerate} icon={<RefreshCw size={13} />} title="Regenerate a new world">
+                      <Button variant="danger" size="sm" onClick={handleRegenerate} icon={<RefreshCw size={13} />}>
                         Regenerate
                       </Button>
                     )}
                     {campaignActive && activeCampaign?.mapState && (
-                      <Button variant="danger" size="sm" onClick={handleClearMapFromCampaign} icon={<Trash2 size={13} />} title="Clear campaign map">
+                      <Button variant="danger" size="sm" onClick={handleClearMapFromCampaign} icon={<Trash2 size={13} />}>
                         Clear Map
                       </Button>
                     )}
@@ -564,7 +639,13 @@ function WorldMapToolbarImpl({
                   <IconButton
                     data-tour="inspector"
                     onClick={onToggleInspector}
-                    title={unreviewedCount > 0
+                    // The unreviewed count rides the accessible NAME (aria-label),
+                    // not a native title= OS tooltip: the amber badge below is
+                    // aria-hidden, so this is the count's only spoken channel, and
+                    // it stays reachable on touch (a hover title was not). Part of
+                    // the map-title tranche — the native title migrated to
+                    // aria-label rather than dropping, preserving the announcement.
+                    aria-label={unreviewedCount > 0
                       ? `Toggle the Realm Inspector. ${unreviewedCount} pulse proposal${unreviewedCount === 1 ? '' : 's'} awaiting review`
                       : 'Toggle the Realm Inspector'}
                     // Always tier-2 (secondary), with the inset shadow added only
@@ -582,7 +663,7 @@ function WorldMapToolbarImpl({
                       outlive the 2.6s toast. Sourced from the durable
                       worldState.proposals(status:pending), it clears as the GM
                       resolves them in the Inspector. Two channels: amber dot +
-                      digit. aria-hidden — the count is spoken via the button title. */}
+                      digit. aria-hidden — the count is spoken via the button aria-label. */}
                   {unreviewedCount > 0 && (
                     <span
                       aria-hidden="true"
@@ -603,6 +684,10 @@ function WorldMapToolbarImpl({
               </>
             )}
         </>
+
+        {/* In-theme control reference — wraps to its own full-width row below the
+            toolbar (flexBasis:100%) when the "?" affordance is open. */}
+        {mapHelpOpen && <MapControlsHelp />}
 
         {/* Status line */}
         {mapLoading && (
