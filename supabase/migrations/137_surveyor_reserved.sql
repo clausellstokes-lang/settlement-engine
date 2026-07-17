@@ -1,0 +1,23 @@
+-- ────────────────────────────────────────────────────────────────────────────
+-- 137_surveyor_reserved.sql — NUMBERING PLACEHOLDER (no-op). DELETE AT MASTER-MERGE.
+--
+-- WHY THIS EXISTS
+--   The Surveyor lane's real migrations are numbered 138+ (aiOperationLog, the
+--   surveyor entitlement + BYOK vault, the analyst credit costs) per the lane brief's
+--   collision-guard: the concurrent Founder lane owns `137_founder_seats`
+--   (WRITTEN-NOT-DEPLOYED, owner-gated). But this isolated worktree's migration head is
+--   136 and 137 is ABSENT here, so scripts/check-migration-head.mjs (contiguity) would
+--   FAIL `npm run check` on the gap at 137. This inert placeholder restores contiguity
+--   so the Surveyor gate is green in isolation WITHOUT touching the sibling's file.
+--
+-- MASTER-MERGE ACTION (required)
+--   When the Founder lane's real `137_founder_seats.sql` folds in, this placeholder
+--   COLLIDES with it (duplicate 137, caught by check-migration-head.duplicateNumbers).
+--   The merger DELETES THIS FILE — the sibling's real 137 takes the slot and the
+--   Surveyor 138–140 slot in contiguously after it. This file carries no schema, so
+--   deleting it is a pure no-op (nothing to migrate away).
+--
+-- Re-runnable: a no-op DO block. Applies cleanly under pglite (migrationSequenceAll).
+-- ────────────────────────────────────────────────────────────────────────────
+
+do $$ begin end $$;

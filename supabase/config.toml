@@ -472,6 +472,12 @@ verify_jwt = true
 [functions.generate-chronicle]
 verify_jwt = true
 
+# ai-analyst (Surveyor S1) — authenticated, user-facing AI control surface. verify_jwt
+# true (the handler additionally re-checks auth, account status, and the Surveyor
+# entitlement gate inside the function).
+[functions.ai-analyst]
+verify_jwt = true
+
 [functions.account-actions]
 verify_jwt = true
 
