@@ -1120,6 +1120,31 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: THE AI SURFACE PANELS (2026-07-17) → w7-prep @ a4343044** (merge of
+claude/ai-panels tip a221c40c, 4 commits off eb958f4b; spot-checked — FENCE HELD (zero
+townMap-component/engine/edge-function edits), 15 files NUL-clean; recovered from the
+stall class by the status demand — the cure is 4-for-4). The write stages are CLICK-ABLE:
+custom content w/ per-field Mechanical/Flavor/Unsupported badges + the honest
+no-rule-for-that list · style overhaul w/ LIVE map preview through the pure renderer +
+flip-back to the permanent base lenses, decline-persists-nothing · construction w/ the
+config wall, the real comparator's deviations in plain speech, bounded DELTA-ONLY revise
+("sends only the N deviations — no re-grounding"), settlement-lands-as-draft +
+realm-canonizes-nothing surfaced honestly · accept→mint w/ the explicit consent barrier,
+unroutable-surfaced-never-dropped, and the reproducibility receipt rendered (engine ver ·
+seed · N applied). One Surveyor's-workshop launcher (right-dock, JUDGMENT #1); S1 money
+moments verbatim; kill-switch refusals cordial + "nothing was charged"; early-access
+badges fail-honest (absent ⇒ shown). Lane gates foreground: suite 12,519/2 (both =
+the recorded advancePauseResume load-flake, green isolated) · +184 B eager CONFIRMED
+vs a temp-worktree base build (under the line) · lazy-membership contract + anti-vacuity.
+FOLD RECEIPTS on the merged tree: lane pins 26/26+1skip · tsc 0 · **domain:strict RUN
+EXPLICITLY: 0/0 ceiling** (the chip burn-down HOLDS with panels merged) · build ✓ · dist
+150/150. JUDGMENTs ×5 vetoable (launcher shape · the townMapStyleWall annotation touch —
+ACCEPTED, it kept tsc green · session-held style collection pending the owner's storage
+ruling · draft-save commit path · transport shape-tolerance w/ client-side re-validation).
+SEAMS: edge round-trips PLAUSIBLE-by-pattern (one browser click per stage at the soak) ·
+panel analytics events exist but unfired (small follow-up — ROUND-3/doc-wave stock) ·
+edge body field-name alignment checked at ROUND 3. **ONLY FOG REMAINS** — then the
+documentation wave → composite → PUSH → ROUND 3.
 **⬛ RULING #7 THIRD AMENDMENT (2026-07-17, owner: "do the push after the composite"):**
 the chain is now: fog + panels fold → THE DOCUMENTATION WAVE → **THE COMPOSITE (full
 gate)** → **THE PUSH (the backed-up state = the gate-verified whole; the composite
