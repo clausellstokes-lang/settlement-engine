@@ -19,6 +19,8 @@ import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
 import { REACTION_KEYS } from '../data/galleryReactionVocab.js';
+import { AGE_BAND_IDS } from '../domain/ageBands.js';
+import { clampAliveness } from './galleryAliveness.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
@@ -626,12 +628,9 @@ function sanitizeTile(row) {
   };
 }
 
-/** Clamp a stored aliveness score to an integer 0–100, or null when absent. */
-function sanitizeAliveness(value) {
-  const n = Number(value);
-  if (!Number.isFinite(n)) return null;
-  return Math.max(0, Math.min(100, Math.round(n)));
-}
+// Read-path aliveness clamp = THE shared null-safe clamp (galleryAliveness.js;
+// a bare Number(null) would smear "unknown" into 0).
+const sanitizeAliveness = clampAliveness;
 
 // Public-safe sanitization is consolidated in domain/display/publicSafe.js
 // (toPublicSafe) — a single, named, tested projection of the display spine
@@ -872,12 +871,7 @@ function galleryMetadataPatch(metadata = {}) {
   // (no owning campaign) clears the column so a save that LEFT its campaign
   // never keeps a stale liveness claim.
   if (metadata.facetAliveness !== undefined) {
-    // null must stay null (Number(null) coerces to 0, which would smear
-    // "unknown" into "provably lifeless").
-    const n = metadata.facetAliveness === null ? NaN : Number(metadata.facetAliveness);
-    patch.gallery_facet_aliveness = Number.isFinite(n)
-      ? Math.max(0, Math.min(100, Math.round(n)))
-      : null;
+    patch.gallery_facet_aliveness = clampAliveness(metadata.facetAliveness);
   }
   // The sharer-editable gallery title (migration 147): sanitized like the blurb
   // (same DOMPurify pass), then reduced to plain bounded text — a title is a
@@ -999,6 +993,10 @@ const WORLD_SECTION_KEYS = Object.freeze([
   'dashboard',
 ]);
 
+// The canonical age-band vocabulary (the 147 CHECK constraint mirrors it).
+// domain/ageBands.js is a zero-import pure leaf, so this costs nothing.
+const WORLD_AGE_BANDS = AGE_BAND_IDS;
+
 /**
  * Build the saved_maps gallery-metadata patch from an editor metadata bag.
  * Mirrors galleryMetadataPatch (settlements) but targets the saved_maps
@@ -1049,6 +1047,15 @@ function galleryMapMetadataPatch(metadata = {}) {
   }
   if (metadata.atWar !== undefined) {
     patch.gallery_facet_at_war = metadata.atWar === true;
+  }
+  // GALLERY-2 phase 2 (147/149): the campaign aliveness + world-age snapshots,
+  // mirroring the settlement twin's clamps (null = unknown, never 0).
+  if (metadata.aliveness !== undefined) {
+    patch.gallery_facet_aliveness = clampAliveness(metadata.aliveness);
+  }
+  if (metadata.worldAge !== undefined) {
+    const band = String(metadata.worldAge || '');
+    patch.gallery_facet_world_age = WORLD_AGE_BANDS.includes(band) ? band : null;
   }
   if (metadata.shareWorld !== undefined) {
     patch.gallery_share_world = metadata.shareWorld === true;

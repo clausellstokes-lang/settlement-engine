@@ -60,6 +60,22 @@ export const ALIVENESS_AGE_SCORES = Object.freeze({
 });
 
 /**
+ * THE ONE null-safe clamp for aliveness values, shared by every read/write/
+ * render site. The habitat this removes: `Number(null)` coerces to 0, so any
+ * site clamping with a bare Number() smears "unknown" (null) into "provably
+ * lifeless" (0) — the same bug shape appeared three times while building the
+ * feature (write patch, read sanitizer, badge). All sites now route here.
+ * @param {unknown} value
+ * @returns {number | null} an integer 0–100, or null for null/undefined/non-finite
+ */
+export function clampAliveness(value) {
+  if (value === null || value === undefined) return null;
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  return Math.max(0, Math.min(100, Math.round(n)));
+}
+
+/**
  * The aliveness score of an owning campaign, 0–100, or null when there is no
  * campaign (an un-owned / never-simulated settlement has no liveness to claim —
  * the column stays null, exactly like at_war's "cannot recompute" posture).

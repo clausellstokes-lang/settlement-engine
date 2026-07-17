@@ -19,6 +19,7 @@ import { resolve } from 'node:path';
 import {
   computeAliveness,
   campaignWorldAgeBand,
+  clampAliveness,
   ALIVENESS_DEPTH_CAP,
   ALIVENESS_WEIGHTS,
   ALIVENESS_AGE_SCORES,
@@ -88,6 +89,24 @@ describe('computeAliveness — the shipped formula (vetoable JUDGMENT, pinned)',
   it('is deterministic (same inputs, same score)', () => {
     const c = campaign(37, 29);
     expect(computeAliveness(c)).toBe(computeAliveness(c));
+  });
+});
+
+describe('clampAliveness — THE shared null-safe clamp (structural prevention)', () => {
+  // The habitat removed: Number(null) === 0. Every read/write/render site
+  // routes through this one clamp so "unknown" can never smear into 0.
+  it('null/undefined stay null — NEVER 0', () => {
+    expect(clampAliveness(null)).toBeNull();
+    expect(clampAliveness(undefined)).toBeNull();
+  });
+  it('non-finite reads null; numbers round + clamp to 0–100', () => {
+    expect(clampAliveness('alive')).toBeNull();
+    expect(clampAliveness(NaN)).toBeNull();
+    expect(clampAliveness(87.6)).toBe(88);
+    expect(clampAliveness(-4)).toBe(0);
+    expect(clampAliveness(9001)).toBe(100);
+    expect(clampAliveness(0)).toBe(0); // a REAL zero stays zero
+    expect(clampAliveness('42')).toBe(42);
   });
 });
 

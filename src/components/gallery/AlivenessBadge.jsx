@@ -10,14 +10,16 @@
  * Campaigns-tab card.
  */
 import { Activity } from 'lucide-react';
+import { clampAliveness } from '../../lib/galleryAliveness.js';
 import { BORDER2, CARD_ALT, GREEN, INK, sans, FS } from '../theme.js';
 
 const PILL = 999; // the pill radius idiom (design/tokens.js)
 
 export default function AlivenessBadge({ score, size = 'sm' }) {
-  const n = Number(score);
-  if (!Number.isFinite(n)) return null;
-  const value = Math.max(0, Math.min(100, Math.round(n)));
+  // THE shared null-safe clamp: an un-stamped share (null) renders NOTHING —
+  // unknown is not zero (Number(null) would coerce to 0).
+  const value = clampAliveness(score);
+  if (value === null) return null;
   // The score's upper half earns the living-green accent; the lower half stays
   // neutral ink (a quiet world is a fact, not a warning).
   const accent = value >= 50 ? GREEN : INK;

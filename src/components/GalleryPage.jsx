@@ -7,6 +7,7 @@
 
 import { useState } from 'react';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
+import GalleryCampaigns from './gallery/GalleryCampaigns.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
 import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
@@ -15,7 +16,13 @@ import Button from './primitives/Button.jsx';
 import { SP, PAGE_MAX } from './theme.js';
 
 function GalleryTabs({ tab, setTab }) {
-  const tabs = [{ id: 'settlements', label: 'Settlements' }, { id: 'maps', label: 'Maps' }];
+  // GALLERY-2 phase 2: campaign shares (share_kind 'map_with_campaign') get
+  // their own tab; the Maps tab narrows to blank maps (kind 'map').
+  const tabs = [
+    { id: 'settlements', label: 'Settlements' },
+    { id: 'maps', label: 'Maps' },
+    { id: 'campaigns', label: 'Campaigns' },
+  ];
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.md}px ${SP.lg}px 0`, display: 'flex', gap: SP.xs }}>
       {tabs.map(t => {
@@ -127,6 +134,10 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
         {tab === 'maps' ? (
           <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
             <GalleryMaps onNavigate={onNavigate} />
+          </div>
+        ) : tab === 'campaigns' ? (
+          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
+            <GalleryCampaigns onNavigate={onNavigate} />
           </div>
         ) : (
           <GalleryList

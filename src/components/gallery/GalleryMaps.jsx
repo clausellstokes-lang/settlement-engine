@@ -47,7 +47,10 @@ export default function GalleryMaps({ onNavigate }) {
   useEffect(() => {
     let ignore = false;
     setLoading(true); setError(null);
-    fetchGalleryMaps({ page: 0, pageSize: 36 })
+    // GALLERY-2 phase 2: campaign shares now live on their own Campaigns tab
+    // (GalleryCampaigns), so this tab narrows to blank maps. The server RPC
+    // honors the kind facet (normalizeMapFilters → p_filters).
+    fetchGalleryMaps({ page: 0, pageSize: 36, filters: { kind: ['map'] } })
       .then((r) => { if (!ignore) setItems(Array.isArray(r?.items) ? r.items : []); })
       .catch((e) => { if (!ignore) setError(e?.message || 'Could not load shared maps'); })
       .finally(() => { if (!ignore) setLoading(false); });
