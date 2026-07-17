@@ -972,6 +972,21 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ CONTROL-SURFACE AMENDMENT §3f (2026-07-16 ~23:30, @ 4e2dbc37 on w7-prep): THE
+ENRICHMENT RIDER.** Owner: capture the data before the provider forgets it + the rented AI
+deciphers its own traffic + "enforceable even if the user is providing their own API...
+part of the contract of using our services." Adopted with guardrails: controlled-vocabulary
+self-tagging rider in the answer contract · TWO capture layers (id-free category-grade =
+condition-of-service on managed AND BYOK — the id-free design is what makes the framing
+defensible, flagged to the consolidated pre-launch LEGAL CONSULT; content-grade corpus
+capture stays separately consent-gated) · BYOK enforceability is STRUCTURAL (keys server-side
+only ⇒ one edge path ⇒ no bypass; the ToS discloses what architecture guarantees; <~1% token
+overhead disclosed) · THE CONFLICTED-WITNESS RULE (quality metrics never self-reported —
+independent scoring gates the trust ladder) · honest boundary recorded (binds OUR surface;
+exported-data-in-outside-tools is beyond any contract). Fourth + final addendum sent to the
+in-flight Surveyor implementer; all four may seam as SURVEYOR-S1b if it is already gating.
+THE AI-LAYER CONSTITUTION CLOSES AT §3f (3b two-voices · 3c extraction defense · 3d
+action-readiness · 3e forgetting · 3f enrichment rider).
 **⬛ CONTROL-SURFACE AMENDMENT §3e (2026-07-16 ~23:15, @ f4bf8da9 on w7-prep): THE
 FORGETTING LAW.** Owner ("any AI using this from my website has to delete their information
 after use") adopted on the manager's shape after discussion: enforced at the three REAL
