@@ -324,11 +324,13 @@ export function buildRecordedEdges(provenance) {
       for (const p of parents) {
         const pid = String(p);
         if (pid === childId) continue;
-        if (!parentsOf.has(childId)) parentsOf.set(childId, new Set());
-        if (!parentsOf.get(childId).has(pid)) {
-          parentsOf.get(childId).add(pid);
-          if (!childrenOf.has(pid)) childrenOf.set(pid, new Set());
-          childrenOf.get(pid).add(childId);
+        let pset = parentsOf.get(childId);
+        if (!pset) { pset = new Set(); parentsOf.set(childId, pset); }
+        if (!pset.has(pid)) {
+          pset.add(pid);
+          let cset = childrenOf.get(pid);
+          if (!cset) { cset = new Set(); childrenOf.set(pid, cset); }
+          cset.add(childId);
           size += 1;
         }
       }
