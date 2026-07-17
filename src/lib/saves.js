@@ -203,7 +203,7 @@ function migrateSettlementShape(entry) {
 async function supabaseList() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .select('id, name, tier, data, config, toggles, seed, neighbour_links, ai_data, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, campaign_state, version_history, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   await loadNormalize(); // migrateSettlementShape reads _normalize synchronously
@@ -223,6 +223,11 @@ async function supabaseList() {
     aiData:    usable ? (row.ai_data || {}) : {},
     gallery_share_narrated: row.gallery_share_narrated || false,
     gallery_share_dm: row.gallery_share_dm || false,
+    // The two owner opt-ins ShareToGallery seeds from this entry and re-writes
+    // on every "Save gallery details" — dropping them here silently cleared
+    // the import opt-in + per-member overrides after a reload.
+    gallery_importable: row.gallery_importable || false,
+    gallery_member_overrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object') ? row.gallery_member_overrides : null,
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
     gallery_description: row.gallery_description || '',
@@ -264,7 +269,7 @@ async function supabaseList() {
 async function supabaseListMeta() {
   const { data, error } = await supabase
     .from('settlements')
-    .select('id, name, tier, seed, gallery_share_narrated, gallery_share_dm, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
+    .select('id, name, tier, seed, gallery_share_narrated, gallery_share_dm, gallery_importable, gallery_member_overrides, is_public, public_slug, gallery_description, gallery_title, gallery_image_url, gallery_image_alt, gallery_tags, access_state, inactive_reason, inactive_since, retention_expires_at, reactivated_free_at, created_at, updated_at')
     .order('updated_at', { ascending: false });
   if (error) throw error;
   return data.map(row => ({
@@ -279,6 +284,10 @@ async function supabaseListMeta() {
     aiData:    {},
     gallery_share_narrated: row.gallery_share_narrated || false,
     gallery_share_dm: row.gallery_share_dm || false,
+    // Same opt-in carry-through as supabaseList — the meta projection feeds
+    // the same ShareToGallery seeding paths.
+    gallery_importable: row.gallery_importable || false,
+    gallery_member_overrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object') ? row.gallery_member_overrides : null,
     is_public: row.is_public || false,
     public_slug: row.public_slug || null,
     gallery_description: row.gallery_description || '',
