@@ -1098,6 +1098,29 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ LANE PARKED: GENERATION-TIME CONTENT (2026-07-17) — task #27's remaining half
+BUILT + PARKED on claude/generation-time-content @ f9720b5a (3 commits off 07d3a1d2;
+spot-checked: files/base/shift-map match the report; UNFOLDED by design — joins the
+composite).** The three headliners grown via one pure mechanism (src/domain/worldPulse/
+eventProse.js, FNV-1a pickLine, CANONICAL-AT-ZERO — falsy seed ⇒ index 0 ⇒ the exact old
+string; no rng consumed, structural fields provably unmovable): calamity title/summary/
+reason pools BUCKET-NEUTRAL (law guard green) · all 22 war/peace/hegemony receipts seeded
+on the directed pair key (stable per pair, varies across pairs) · kernel news framing
+variety (upswing 4 / resource 2 / lifecycle 5) with every semantic token threaded
+unchanged. Lane gates: FULL SUITE 12,408/0 · tsc+domain-strict+lint 0 · dist 145/145 ·
+eager Δ≈0 (prose lives in lazy chunks only). +129 guard tests (register laws, 57-pool
+full reachability, determinism). **HONEST FINDING (refines the parks-RED expectation):
+the observable golden-red set is EMPTY** — the slice is golden-BINDING (varied prose
+persists into wizardNews/calamityHistory/reason ledgers and will populate regenerated
+goldens at THE ONE REGEN) but the current suite exact-pins almost none of it; the one
+predicted red resolved green by hash coincidence (verified by direct eval). DEFERRED-
+WITH-REASON (queued stock, lane-spawned follow-up): the dossier/naming generation-time
+surfaces (pressure sentence, faction names ⇒ needs a world-scoped dedupe registry,
+institution displayName ⇒ owner-gated schema field, persona/history/founding prose) =
+the taste-sample class — a sibling lane with owner samples, NOT blind bulk into the
+permanent regen; realm order/refusal prose untouched (code-matched realmVetoProse is
+load-bearing). JUDGMENTs ×2 recorded vetoably in the lane report (fence-at-event-prose;
+stampTitle stays canonical). Lane memory written by the lane.
 **⬛ RULING #8 SEQUENCING CONFIRMED BY THE OWNER (2026-07-17, "this should all sequence
 before the resurvey and soak"):** the doors + SM-5 build-out completes IN FULL before
 ROUND 3 and the soak — now an explicit owner statement, not a manager judgment. The
