@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: MAP BEAUTIFICATION + GENRE CARTOGRAPHY (2026-07-17, task #28).**
+Beautify the settlement maps; genre styles (cyberpunk/sci-fi/noir) for Content-Plane
+settlements. DESIGN: the semantic-draw-ops/renderer split (built for determinism) IS the
+theming architecture — (1) THE STYLE LAYER (all visual decisions read from a bounded style
+definition; geometry untouched; viewer/plate/thumbnail inherit one pass; determinism
+re-minted (seed,style)→bytes; mapEdits semantic ⇒ survive re-skins) · (2) THE FANTASY CRAFT
+PASS (owner taste-sample) · (3) THE STYLE SCHEMA into DESIGN_CONTENT_PLANE — a map style =
+rung-3 pack display content (market district stays a market district; the skin is the
+genre); THE WALL: styles select from fixed renderer capabilities, never arbitrary SVG/code
+(worst case ugly, never unsafe). Genre styles land with packs at S4+. Display lane;
+dispatches when a build-out lane frees.
 **✅ SURVEYOR-S1b RATIFIED + FOLDED (2026-07-17 ~00:55; merge 114b0c7c + rollback-note fix
 bf10b52f) — THE AI CONSTITUTION IS FULLY IN CODE.** One mid-wave stall (agent parked on a
 monitor event that never fires — the known pattern; SendMessage resume worked, zero loss).
