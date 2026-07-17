@@ -972,6 +972,23 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RE-SEQUENCING RULING #2 (2026-07-16 evening: "should we move the soak until after
+the regrade? because if there are bugs that block certain pathways and we fix that after the
+soak, then what is the point?") — THE SOAK CERTIFIES THE SHIPPING ENGINE.** The soak moves
+AFTER all engine content exists (not after the re-grade — the re-grade consumes soak
+evidence; tuning must still follow a soak because tuning targets ARE soak measurements).
+THE REVISED BINDING ORDER: DEPTH-2 fold → W8 full gate (mainline freezes green) → **D7
+BUILDS NOW** (parks red-by-design like G2 — its tuning-window slot existed only for shift
+batching, which the regen batch preserves) → **THE SOAK TIP composes**: a LOCAL integration
+branch = mainline + G2 + D7 (goldens red there by design; the soak harness builds worlds
+programmatically flags-on and never reads golden files; branch never pushes) → **THE SOAK
+runs on the composite** — organic underways, reframes, catalog fixes all exercised; any
+pathway-blocking bug fixes land on the composite and affected families re-run → verdicts →
+tuning (+ knob-registry enumeration mints) → NOW-genuinely-targeted re-certs → **THE ONE
+REGEN stays ONE** (G2+Underways+D7+tuning sign together; composite merges home; mainline
+gate green) → re-grade → gap register → THE VERY END. Cost: soak starts one D7-build later
+(Surveyor S1+S2 + founder lane run in parallel during it). Benefit: certification is of the
+final bytes; the re-cert step shrinks from a hidden second soak to an honest small one.
 **✅ MAP TITLE TRANCHE RATIFIED + FOLDED (2026-07-16 ~20:20; fd16993d merged).** WorldMap-
 Toolbar's 16 native title= surveyed: 13 → the new MapControlsHelp "?" panel (role=note, the
 GUIDE-2b house pattern; visible labels stay the accessible names) · 1 → aria-label (Inspector
