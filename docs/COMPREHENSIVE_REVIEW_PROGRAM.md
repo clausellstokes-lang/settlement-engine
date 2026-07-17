@@ -972,6 +972,15 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ LAYOUT v2 REFINED (owner, 2026-07-17): MEDIEVAL FORM, MODERN COMPOSITION.** Form
+vocabulary from ACTUAL historical settlements (Carcassonne-concentric, Lübeck harbor-fan,
+Durham river-spine, bastide grids where fiction justifies; lot grain, growth scars,
+wall+faubourg rhythm) composed under highest-order modern principles: **Lynch's five
+imageability elements as the engine's SELF-SCORING RUBRIC** (a layout must rate on
+paths/edges/districts/nodes/landmarks inside the bounded-retry loop before acceptance) ·
+Jacobs mixed-use/short-blocks · Alexander positive outdoor space · Gehl plaza enclosure ·
+sight-line axes, figure-ground, density gradients. "Shaped like history built it; reads
+like a master planner checked it." Folded into task #38.
 **⬛ OWNER COMMISSION: TOWN LAYOUT v2 (2026-07-17, task #38) — semantic urban planning.**
 First-draft maps follow real urban-morphology principles ("look and feel like it makes
 sense and be dynamic"): genesis cores + growth rings · water/terrain-first morphologies ·
