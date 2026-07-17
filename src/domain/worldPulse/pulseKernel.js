@@ -9,7 +9,7 @@ import { createPRNG } from '../../kernel/prng.js';
 import { advanceTime } from '../timeProgression.js';
 import { withActiveCondition } from '../activeConditions.js';
 import { buildWorldSnapshot } from './worldSnapshot.js';
-import { ensureWorldState, advanceWorldCalendar, appendPulseHistory, pulseIdFor, seasonForTick } from './worldState.js';
+import { ensureWorldState, advanceWorldCalendar, pulseIdFor, seasonForTick, appendPulseHistoryWithProvenance } from './provenanceKernel.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { ageRoamingStressors } from './stressors.js';
 import { recordWarResolutionIncidents } from './stressorDynamics.js';
@@ -2441,7 +2441,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       }
     }
   }
-  const finalWorldState = appendPulseHistory(memoryState, pulseRecord);
+  const finalWorldState = appendPulseHistoryWithProvenance(memoryState, pulseRecord, applied);
   // G — test-gated self-check: on a PAUSED tick, every deferred major's out-of-band
   // residue must have been stripped. Read-only + NODE_ENV==='test' only (byte-neutral to
   // the simulation), so a forgotten/drifted strip in a known residue store reds a test
