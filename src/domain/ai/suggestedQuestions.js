@@ -22,7 +22,10 @@ function forName(name) { return name || 'this settlement'; }
  * default so the empty state is never bare), never more.
  *
  * @param {{ scope?: string, entityId?: string|null }} [anchor]
- * @param {{ settlement?: any, worldState?: any, activeCampaign?: any }} [data]
+ * @param {{
+ *   settlement?: { name?: string, factions?: unknown[], powerStructure?: { factions?: unknown[] }, npcs?: unknown[] }|null,
+ *   worldState?: { spatialLedgers?: { treaties?: Record<string, unknown> } }|null,
+ * }} [data]
  * @returns {string[]} 3-4 question strings
  */
 export function suggestedQuestions(anchor = {}, { settlement = null, worldState = null } = {}) {

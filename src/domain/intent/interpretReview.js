@@ -54,26 +54,35 @@ export function resolveCorrectionClass(decision, op, action) {
 }
 
 /**
+ * A proposed op as the review consumes it (the edge's ProposedOp shape, structurally).
+ * @typedef {{ opType: string, params: Record<string, unknown>, label: string,
+ *            protectedFlags: string[], edited?: boolean }} ReviewOp
+ * A per-item DM decision.
+ * @typedef {{ action?: string, consented?: boolean, editedParams?: Record<string, unknown>,
+ *            editedType?: string, correctionClass?: string }} ReviewDecision
+ */
+
+/**
  * Apply the DM's per-item decisions to an interpretation. Pure.
- * @param {any} interpretation the validated interpretation ({ ops: ProposedOp[] })
- * @param {any} [decisions] a per-index map of { action, consented?, editedParams?, editedType?, correctionClass? }
+ * @param {{ ops?: ReviewOp[] }|null|undefined} interpretation the validated interpretation
+ * @param {Record<string|number, ReviewDecision>} [decisions] a per-index decision map
  * @returns {{
- *   accepted: Array<{ index: number, op: any }>,
+ *   accepted: Array<{ index: number, op: ReviewOp }>,
  *   blocked:  Array<{ index: number, reason: 'needs_consent' }>,
  *   corrections: Array<{ index: number, class: string }>,
  * }}
  */
 export function reviewInterpretation(interpretation, decisions = {}) {
   const ops = (interpretation && Array.isArray(interpretation.ops)) ? interpretation.ops : [];
-  /** @type {Array<{ index: number, op: any }>} */
+  /** @type {Array<{ index: number, op: ReviewOp }>} */
   const accepted = [];
   /** @type {Array<{ index: number, reason: 'needs_consent' }>} */
   const blocked = [];
   /** @type {Array<{ index: number, class: string }>} */
   const corrections = [];
-  ops.forEach((/** @type {any} */ op, /** @type {number} */ i) => {
+  ops.forEach((op, i) => {
     const raw = decisions[i] ?? decisions[String(i)] ?? { action: 'pending' };
-    const action = _actionSet.has(raw.action) ? raw.action : 'pending';
+    const action = raw.action != null && _actionSet.has(raw.action) ? raw.action : 'pending';
 
     if (action === 'approve' || action === 'edit') {
       // THE PROTECTED-CONSENT BARRIER — a flagged op is inert without explicit consent.
@@ -103,7 +112,8 @@ export function reviewInterpretation(interpretation, decisions = {}) {
 /**
  * The correction rate: the fraction of proposed ops the DM edited or rejected (the §5 eval
  * metric for interpret). 0 for an empty interpretation (nothing to correct). Pure.
- * @param {any} interpretation @param {any} [decisions]
+ * @param {{ ops?: ReviewOp[] }|null|undefined} interpretation
+ * @param {Record<string|number, ReviewDecision>} [decisions]
  * @returns {number} 0..1
  */
 export function correctionRate(interpretation, decisions = {}) {

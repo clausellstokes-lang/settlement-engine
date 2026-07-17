@@ -29,7 +29,7 @@ export const MANIFEST_KEYS = Object.freeze([
 /**
  * The manifest keys a persona of `entityClass` must cover. An NPC carries the person facets
  * PLUS the manifest; a settlement/faction carries the manifest only (no personal traits).
- * @param {'npc'|'settlement'|'faction'} entityClass
+ * @param {string} entityClass 'npc' | 'settlement' | 'faction'
  * @returns {string[]}
  */
 export function requiredManifestKeys(entityClass) {

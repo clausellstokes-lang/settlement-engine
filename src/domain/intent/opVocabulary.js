@@ -43,15 +43,19 @@ export function buildOpVocabulary() {
   };
 }
 
+/** An entity as the protection scan needs it (a structural slice of NPC / institution /
+ *  faction shapes — only the lock markers + id are read).
+ *  @typedef {{ id?: string|number, _authored?: boolean, locked?: boolean, pinned?: boolean }} ProtectableLite */
+
 /** True iff an entity carries a DM authorship / lock marker (the protected-target signal).
- *  @param {any} entity @returns {boolean} */
+ *  @param {ProtectableLite|null|undefined} entity @returns {boolean} */
 function isProtectedEntity(entity) {
   return !!entity && typeof entity === 'object' &&
     (entity._authored === true || entity.locked === true || entity.pinned === true);
 }
 
 /** Collect the ids of protected entities in a collection (NPCs / institutions / factions).
- *  @param {any[]} list @returns {string[]} */
+ *  @param {ProtectableLite[]|undefined} list @returns {string[]} */
 function protectedIdsIn(list) {
   /** @type {string[]} */
   const ids = [];
@@ -66,12 +70,11 @@ function protectedIdsIn(list) {
  * hand-authored/locked entities + whether the campaign is canonized. The compiler flags any
  * op grazing these so the review UI raises a consent barrier. Pure.
  *
- * @param {{ npcs?: any[], institutions?: any[], factions?: any[] }|null} settlement
+ * @param {{ npcs?: ProtectableLite[], institutions?: ProtectableLite[], factions?: ProtectableLite[] }|null} settlement
  * @param {string} [phase] the settlement's lifecycle phase ('draft' | 'canon')
  * @returns {{ protectedTargets: string[], identityLockedPhase: boolean }}
  */
 export function buildProtectedContext(settlement, phase) {
-  /** @type {any} */
   const s = settlement && typeof settlement === 'object' ? settlement : {};
   const protectedTargets = [
     ...protectedIdsIn(s.npcs),

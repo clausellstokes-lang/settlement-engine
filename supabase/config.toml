@@ -484,6 +484,18 @@ verify_jwt = true
 [functions.surveyor-byok]
 verify_jwt = true
 
+# interpret-session (Surveyor S3) — the intent compiler: authenticated, user-facing.
+# verify_jwt true (the handler additionally re-checks auth, account status, the
+# Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.interpret-session]
+verify_jwt = true
+
+# parley (Surveyor S3) — in-character consultation: authenticated, user-facing,
+# DM-only. verify_jwt true (the handler additionally re-checks auth, account status,
+# the Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.parley]
+verify_jwt = true
+
 [functions.account-actions]
 verify_jwt = true
 
