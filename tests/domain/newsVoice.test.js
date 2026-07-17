@@ -14,12 +14,19 @@
  * kernel, and never mutates a wizardNews entry.
  */
 
+import { readFileSync } from 'node:fs';
+
 import { describe, it, expect } from 'vitest';
 
 import { newsVoiceLine, newsVoiceCategory, VOICE_LINES, VOICE_FLOOR } from '../../src/domain/display/newsVoice.js';
 
-const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority', 'succor', 'prosperity'];
+const CATEGORIES = ['war', 'faith', 'trade', 'pestilence', 'calamity', 'migration', 'authority', 'succor', 'prosperity', 'reframe'];
 const BUCKETS = ['onset', 'impact', 'relief', 'fade'];
+
+// CONTENT-VT variety floor: every (category × bucket) cell must carry at least this
+// many distinct authored lines. Raised from the historical 3 because a busy simulated
+// year surfaces many beats of one class and a 3-4 pool visibly cycles in the feed.
+const CELL_FLOOR = 7;
 
 // Representative entry fields that hit each category (via impactKind) and each
 // bucket (via kind / the transition). Enumerating these two axes reaches every
@@ -29,6 +36,11 @@ const CATEGORY_IMPACT_KIND = {
   pestilence: 'plague_arrival', calamity: 'calamity',
   migration: 'migration_pressure', authority: 'authority_instability',
   succor: 'generosity_relief', prosperity: 'boom',
+  // reframe rides the RESERVED forward-looking 'reframe' impactKind (no wave mints a
+  // reframe wizardNews entry yet — the reframe kernel returns newsEntries:[]); the
+  // classifier in newsVoiceCategory routes this token so the dormant category is
+  // exercised by the coverage / register / reachability guards below.
+  reframe: 'reframe',
 };
 const BUCKET_KIND = { onset: 'queued', impact: 'applied', relief: 'resolved', fade: 'ignored' };
 
@@ -133,7 +145,7 @@ describe('newsVoice — determinism (strict) and anti-repetition (loose)', () =>
 });
 
 describe('newsVoice — herald register guard', () => {
-  /** Every authored line, cell-labelled, across the 12 cells + 2(-plus) floors. */
+  /** Every authored line, cell-labelled, across every category×bucket cell + floors. */
   function eachLine(fn) {
     for (const cat of CATEGORIES) {
       for (const bucket of BUCKETS) {
@@ -143,16 +155,16 @@ describe('newsVoice — herald register guard', () => {
     }
   }
 
-  it('every cell carries >=3 variants; every floor carries >=2', () => {
+  it(`every cell carries >=${CELL_FLOOR} variants; every floor carries >=2`, () => {
     for (const cat of CATEGORIES) {
       for (const bucket of BUCKETS) {
-        expect(VOICE_LINES[cat][bucket].length, `${cat}.${bucket}`).toBeGreaterThanOrEqual(3);
+        expect(VOICE_LINES[cat][bucket].length, `${cat}.${bucket}`).toBeGreaterThanOrEqual(CELL_FLOOR);
       }
       expect(VOICE_FLOOR[cat].length, `floor.${cat}`).toBeGreaterThanOrEqual(2);
     }
   });
 
-  it('all 12 cells and every floor are present and frozen', () => {
+  it('all category×bucket cells and every floor are present and frozen', () => {
     expect(Object.isFrozen(VOICE_LINES)).toBe(true);
     expect(Object.isFrozen(VOICE_FLOOR)).toBe(true);
     for (const cat of CATEGORIES) {
@@ -188,7 +200,7 @@ describe('newsVoice — herald register guard', () => {
     }
   });
 
-  it('lines are globally unique across all 12 cells (no line lives in two cells)', () => {
+  it('lines are globally unique across all cells (no line lives in two cells)', () => {
     const all = [];
     for (const cat of CATEGORIES) for (const bucket of BUCKETS) all.push(...VOICE_LINES[cat][bucket]);
     expect(new Set(all).size, 'a line appears in more than one cell').toBe(all.length);
@@ -288,6 +300,45 @@ describe('newsVoice — the upswing abundance voice + the set-but-unclassified g
     // falls through to channelType.
     expect(newsVoiceCategory({ impactKind: '', channelType: 'trade_route' })).toBe('trade');
     expect(newsVoiceCategory({ channelType: 'war_front' })).toBe('war');
+  });
+});
+
+describe('newsVoice — CONTENT-VT: the reframe voice + pool-growth safety', () => {
+  it('routes the reserved reframe impactKind to the reframe category (the 8th drama class)', () => {
+    // reframeKernel mints NO wizardNews entry today (advanceReframes → newsEntries:[]);
+    // this classifier RESERVES impactKind 'reframe' so a future reframe beat inherits a
+    // crier, closing the survey's named "reframe routes nowhere" gap. Dormant/forward-looking.
+    expect(newsVoiceCategory({ impactKind: 'reframe' })).toBe('reframe');
+    for (const bucket of BUCKETS) {
+      const line = newsVoiceLine({ id: `rf.${bucket}`, impactKind: 'reframe', kind: BUCKET_KIND[bucket] });
+      expect(VOICE_LINES.reframe[bucket], `reframe/${bucket}`).toContain(line);
+    }
+  });
+
+  it('the reframe voice does NOT hijack the epistemics/moral-drift near-neighbours', () => {
+    // belief_misjudgment is the facts/epistemics layer, moral_reckoning is moral drift —
+    // neither is the D7 reframe layer; both stay explicitly UNVOICED (the set-but-unclassified
+    // guard), so the reframe crier never speaks beneath one of their headlines.
+    expect(newsVoiceCategory({ impactKind: 'belief_misjudgment' })).toBeNull();
+    expect(newsVoiceCategory({ impactKind: 'moral_reckoning' })).toBeNull();
+  });
+
+  it('pool growth is byte-inert: newsVoiceLine is a pure read (never mutates the entry)', () => {
+    // Growing the pools is safe precisely because selection is VIEW-TIME: same entry ⇒ same
+    // line, and the read-model writes NOTHING back. A frozen entry proves it (a stray write
+    // would throw), and the line is stable across repeated calls at the new pool sizes.
+    const entry = Object.freeze({ id: 'vt.1', impactKind: 'conflict_pressure', channelType: 'war_front', kind: 'applied' });
+    const first = newsVoiceLine(entry);
+    expect(typeof first).toBe('string');
+    for (let i = 0; i < 8; i++) expect(newsVoiceLine(entry)).toBe(first);
+  });
+
+  it('the module is a pure byte-inert leaf: no imports, no wall-clock, no rng (source scan)', () => {
+    // The zero-eager / same-seed guarantee rests on this module reaching NO store, persistence,
+    // Date, or rng — so pool growth here can never move a golden or a first-paint byte.
+    const src = readFileSync(new URL('../../src/domain/display/newsVoice.js', import.meta.url), 'utf8');
+    expect(/^import[ {]/m.test(src), 'newsVoice must import nothing (pure leaf)').toBe(false);
+    expect(/new Date|Date\.now\(|Math\.random/.test(src), 'newsVoice must use no wall-clock / rng').toBe(false);
   });
 });
 
