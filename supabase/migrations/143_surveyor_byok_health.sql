@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 144_surveyor_byok_health.sql — BYOK MANAGEMENT SURFACE: persistent key-health
+-- 143_surveyor_byok_health.sql — BYOK MANAGEMENT SURFACE: persistent key-health
 -- + the VERIFY-BY-TEST-CALL receipt, and the aiOperationLog REFUSAL CLASS.
 --
 -- WHY THIS EXISTS

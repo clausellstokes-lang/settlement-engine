@@ -121,7 +121,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `142_scrub_covert_public_dossier.sql`** (this filename is kept
+**Current migration head: `144_surveyor_usage_governors.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 
@@ -169,7 +169,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 17 functions total — deploy all of them on a first cutover.
+There are 18 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -197,6 +197,7 @@ get no flag:
 npx supabase functions deploy stripe-webhook --no-verify-jwt          # Stripe posts a signature, not a JWT
 npx supabase functions deploy verify-single-dossier --no-verify-jwt   # Stripe session id, not auth
 npx supabase functions deploy ingest-events --no-verify-jwt           # anonymous analytics sink
+npx supabase functions deploy surveyor-byok                           # BYOK key verify + health (JWT)
 npx supabase functions deploy log-client-error --no-verify-jwt        # anonymous crash-report sink
 npx supabase functions deploy analytics-export --no-verify-jwt        # x-export-secret shared secret (cron)
 npx supabase functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-secret shared secret (nightly)
@@ -209,12 +210,12 @@ npx supabase functions deploy verify-checkout-session                 # account-
 npx supabase functions deploy create-customer-portal                  # "Manage subscription" billing portal
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
-npx supabase functions deploy ai-analyst                              # Surveyor S1 analyst (requires ANTHROPIC_API_KEY + BYOK secret)
+npx supabase functions deploy ai-analyst, surveyor-byok                              # Surveyor S1 analyst (requires ANTHROPIC_API_KEY + BYOK secret)
 npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **17 deployable functions** (every `supabase/functions/*` dir except
+There are **18 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
 and seven `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin

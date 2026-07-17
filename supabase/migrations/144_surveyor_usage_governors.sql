@@ -1,5 +1,5 @@
 -- ────────────────────────────────────────────────────────────────────────────
--- 145_surveyor_usage_governors.sql — BYOK MANAGEMENT SURFACE: the USAGE METER's
+-- 144_surveyor_usage_governors.sql — BYOK MANAGEMENT SURFACE: the USAGE METER's
 -- USER GOVERNORS (caps + warn-threshold + pause) and per-task MODEL PREFERENCES,
 -- plus the maintained price-ESTIMATE table the meter reads.
 --

@@ -16,7 +16,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG_145 = resolve(process.cwd(), 'supabase', 'migrations', '145_surveyor_usage_governors.sql');
+const MIG_145 = resolve(process.cwd(), 'supabase', 'migrations', '144_surveyor_usage_governors.sql');
 const haveMigration = existsSync(MIG_145);
 
 const UID = '11111111-1111-1111-1111-111111111111';

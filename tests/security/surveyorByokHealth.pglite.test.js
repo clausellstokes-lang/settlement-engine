@@ -1,5 +1,5 @@
 /**
- * surveyorByokHealth.pglite.test.js — runs the REAL PL/pgSQL from migration 144
+ * surveyorByokHealth.pglite.test.js — runs the REAL PL/pgSQL from migration 143
  * (BYOK MANAGEMENT SURFACE key-health + the aiOperationLog refusal class) against
  * in-process Postgres (pglite), like aiSpendReservation.pglite.test.js.
  *
@@ -20,7 +20,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const MIG_144 = resolve(process.cwd(), 'supabase', 'migrations', '144_surveyor_byok_health.sql');
+const MIG_144 = resolve(process.cwd(), 'supabase', 'migrations', '143_surveyor_byok_health.sql');
 const haveMigration = existsSync(MIG_144);
 
 const UID = '11111111-1111-1111-1111-111111111111';
