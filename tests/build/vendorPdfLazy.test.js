@@ -404,7 +404,12 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // W2 feed-retention +363, W-R2-DEPTH ~100, slack). The budget is DELIBERATELY NOT
 // lowered: dropping it would consume that reserved, owner-funded headroom. Goldens
 // byte-identical (no lit-path change). Monotone-down only; raises owner-signed.
-const CLOSURE_BUDGET_BYTES = 1_066_400;
+// RATCHET #11 (2026-07-17, FP-G10 fold): 1,066,400 -> 1,040,000. FP-G10 reclaimed
+// -33,803 B (the SUPPLY_CHAIN_NEEDS table's sole eager importer severed; closure
+// 1,065,000 -> 1,031,197). ~8.8KB headroom deliberately retained to fund the remaining
+// build-out waves' honest registration costs (S3-S6, gallery phase 2, content); the
+// FINAL tightening happens at the composite gate. Monotone-down per the constitution.
+const CLOSURE_BUDGET_BYTES = 1_040_000;
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
