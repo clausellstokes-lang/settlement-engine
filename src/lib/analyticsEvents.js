@@ -44,7 +44,7 @@ export { EDIT_KINDS };
  *  ID-FREE, category-grade self-tag, emitted SERVER-SIDE by the ai-analyst edge on
  *  BOTH managed + BYOK paths as a condition-of-service) and ai_analyst_answer gains
  *  the §3b register-purity band beside citation coverage. */
-export const EVENTS_REV = 8;
+export const EVENTS_REV = 9;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -233,6 +233,20 @@ export const EVENTS = Object.freeze({
   // §3f THE ENRICHMENT RIDER for the parley (ID-FREE, condition-of-service). The rider
   // also tags entity-class + topic-class so the atlas learns what tables rehearse.
   AI_PARLEY_RIDER:                'ai_parley_rider',
+
+  // ── Surveyor S4–S6: the WRITE stages (custom content, style overhaul, construct
+  //    settlement, construct realm) §5 evals — coarse, id-free. ONE shared answer/rider
+  //    pair for all four stages, discriminated by props.feature (eager-frugal: the
+  //    AI-surface ~0-eager rule + the shared closure margin — two names, not eight).
+  // Props (never content): { feature, stage, total, mechanicalCount, flavorCount,
+  // unsupportedCount, deviationCount, coverageBand, refused, byok, earlyAccess }.
+  // feature ∈ {customContent, styleOverhaul, constructSettlement, constructRealm}.
+  AI_STAGE_ANSWER:                'ai_stage_answer',
+  // §3f THE ENRICHMENT RIDER for the S4–S6 write stages (ID-FREE, condition-of-service,
+  // managed AND BYOK). Same controlled vocabulary + conflicted-witness rule as S1/S3;
+  // carries props.feature + the style-domain vocabulary (base lens, palette family,
+  // motif class, oov) when feature = styleOverhaul (the §3f/§4b lens roadmap radar).
+  AI_STAGE_RIDER:                 'ai_stage_rider',
 });
 
 /**
