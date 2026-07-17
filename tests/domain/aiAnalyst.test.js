@@ -24,6 +24,7 @@ import {
   buildRetrievalBundle, validateClaims, citationCoverage, unsourceableClaims, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, fnv1a32, bundleIsPlayerSafe, ENGINE_DOES_NOT_RECORD,
   citationLabel, registerProviderAdapter, routeWorldDataAdapter,
+  sanitizeMusings, registerPurity, isSpeculativeReportText, impureReportClaims,
 } from '../../supabase/functions/ai-analyst/analystCore.ts';
 
 // ── fixtures (a lit world with treaties/blocs/credibility + a private settlement) ──
@@ -237,6 +238,74 @@ describe('analyst — extraction defense + graceful refusal (§3c/§3d)', () => 
     // engine implementation — no kernels, movers, formulas, tuned constants, or source files.
     const preamble = buildAnalystPrompt('x', buildRetrievalBundle([]), 'dm');
     expect(/\bkernel\b|\bmover\b|tuned constant|\bformula\b|\.js\b|\bsrc\//i.test(preamble)).toBe(false);
+  });
+});
+
+// ── §3b THE TWO-VOICES LAW: the musing register + register purity ─────────────
+
+describe('analyst — two voices (§3b)', () => {
+  const world = litWorld();
+  const { slices } = selectSlices({ question: 'what factions dominate?', worldState: world, settlements: SETTLEMENTS, audience: 'dm' });
+  const bundle = buildRetrievalBundle(slices);
+
+  it('the prompt carries BOTH registers structurally: cited "claims" + uncited "musings"', () => {
+    const prompt = buildAnalystPrompt('who rules?', bundle, 'dm');
+    expect(prompt).toContain('"claims"');
+    expect(prompt).toContain('"musings"');
+    // the persona is told to converse but keep speculation OUT of the report register
+    expect(/two registers|musings register|what could be/i.test(prompt)).toBe(true);
+  });
+
+  it('MUSINGS are uncited BY CONSTRUCTION: sanitize strips any smuggled source/op/action', () => {
+    const cleaned = sanitizeMusings([
+      { text: 'You could stage a betrayal at the next council.', source: 'faction:x', op: 'FORCE_WAR', action: { kind: 'apply' } },
+      { text: '  Want this drafted as a proposal?  ' },
+      { text: '' },                 // blank dropped
+      'a bare-string musing',       // tolerated, coerced to { text }
+    ]);
+    expect(cleaned).toEqual([
+      { text: 'You could stage a betrayal at the next council.' },
+      { text: 'Want this drafted as a proposal?' },
+      { text: 'a bare-string musing' },
+    ]);
+    // NOTHING in a musing can carry a citation or an op — the register can never
+    // masquerade as a report claim or land in the world (S1 has no write path anyway).
+    for (const m of cleaned) {
+      expect(Object.keys(m)).toEqual(['text']);
+      expect('source' in m).toBe(false);
+      expect('op' in m).toBe(false);
+    }
+  });
+
+  it('sanitizeMusings caps the register (never an unbounded dump)', () => {
+    const many = Array.from({ length: 40 }, (_, i) => ({ text: `idea ${i}` }));
+    expect(sanitizeMusings(many).length).toBeLessThanOrEqual(8);
+    expect(sanitizeMusings(null)).toEqual([]);
+    expect(sanitizeMusings('nope')).toEqual([]);
+  });
+
+  it('REGISTER PURITY: speculation in the REPORT register is a scored failure', () => {
+    const clean = validateClaims([
+      { text: 'Thornwall leads a commerce sphere.', source: bundle.slices[0].id },
+      { text: 'Ashford pays tribute to Thornwall.', source: bundle.slices[0].id },
+    ], bundle);
+    expect(registerPurity(clean)).toBe(1);
+    expect(impureReportClaims(clean)).toEqual([]);
+
+    const blurred = validateClaims([
+      { text: 'Thornwall leads a commerce sphere.', source: bundle.slices[0].id },      // fact — fine
+      { text: 'Ashford might rebel if the tribute rises.', source: bundle.slices[0].id }, // speculation — impurity
+      { text: 'Perhaps the reeve is plotting a coup.', source: bundle.slices[0].id },     // speculation — impurity
+    ], bundle);
+    expect(registerPurity(blurred)).toBeCloseTo(1 / 3, 5);
+    expect(impureReportClaims(blurred)).toHaveLength(2);
+    expect(isSpeculativeReportText('Ashford might rebel')).toBe(true);
+    expect(isSpeculativeReportText('Ashford pays tribute')).toBe(false);
+  });
+
+  it('an empty report is fully pure (nothing to blur)', () => {
+    expect(registerPurity([])).toBe(1);
+    expect(registerPurity(validateClaims([], bundle))).toBe(1);
   });
 });
 

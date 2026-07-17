@@ -28,7 +28,9 @@ import {
   buildRetrievalBundle, validateClaims, citationCoverage, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
   registerProviderAdapter, routeWorldDataAdapter,
+  sanitizeMusings, registerPurity,
 } from './analystCore.ts';
+import type { MusingItem } from './analystCore.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
 const ANTHROPIC_VERSION = '2023-06-01';
@@ -50,11 +52,18 @@ function json(body: unknown, status = 200, headers: Record<string, string> = {})
   return new Response(JSON.stringify(body), { status, headers: { ...headers, 'Content-Type': 'application/json' } });
 }
 
-/** Parse the model's JSON claims contract. Robust to code fences / preamble; a
- *  non-JSON reply degrades to a single UNSOURCED claim (honesty boundary), never a throw. */
-function parseClaims(raw: string): Array<{ text: string; source: string | null }> {
+/** Parse the model's TWO-VOICES JSON contract (§3b). Robust to code fences /
+ *  preamble; a non-JSON reply degrades to a single UNSOURCED report claim (honesty
+ *  boundary), never a throw. Returns the three structural blocks: `claims` (the cited
+ *  REPORT register), `musings` (the uncited MUSING register), and `rider` (the raw
+ *  §3f enrichment rider, validated downstream against the controlled vocabulary). */
+function parseModelAnswer(raw: string): {
+  claims: Array<{ text: string; source: string | null }>;
+  musings: unknown;
+  rider: unknown;
+} {
   const text = String(raw ?? '').trim();
-  if (!text) return [];
+  if (!text) return { claims: [], musings: [], rider: null };
   const fenced = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
   const start = fenced.indexOf('{');
   const end = fenced.lastIndexOf('}');
@@ -62,14 +71,18 @@ function parseClaims(raw: string): Array<{ text: string; source: string | null }
     try {
       const obj = JSON.parse(fenced.slice(start, end + 1));
       if (obj && Array.isArray(obj.claims)) {
-        return obj.claims.map((c: any) => ({
-          text: typeof c?.text === 'string' ? c.text : String(c?.text ?? ''),
-          source: typeof c?.source === 'string' ? c.source : null,
-        }));
+        return {
+          claims: obj.claims.map((c: any) => ({
+            text: typeof c?.text === 'string' ? c.text : String(c?.text ?? ''),
+            source: typeof c?.source === 'string' ? c.source : null,
+          })),
+          musings: obj.musings,
+          rider: obj.rider,
+        };
       }
     } catch { /* fall through */ }
   }
-  return [{ text, source: null }]; // unparseable ⇒ one unsourced claim
+  return { claims: [{ text, source: null }], musings: [], rider: null }; // unparseable ⇒ one unsourced claim
 }
 
 function defaultUserClient(authHeader: string) {
@@ -188,6 +201,8 @@ export async function handleAiAnalyst(
     let capturedPrompt = '';
     let capturedAnswerText = '';
     let capturedValidated: ReturnType<typeof validateClaims> = [];
+    let capturedMusings: MusingItem[] = [];
+    let capturedRegisterPurity = 1;
     let capturedRefused = false;
     let capturedUsage: { input: number | null; output: number | null } = { input: null, output: null };
 
@@ -233,9 +248,17 @@ export async function handleAiAnalyst(
         };
         if (data?.stop_reason === 'refusal') { capturedRefused = true; return { ok: false, answerText: '' }; }
         const rawText = (data?.content?.[0]?.text || '').trim();
-        capturedValidated = validateClaims(parseClaims(rawText), bundle);
+        const parsed = parseModelAnswer(rawText);
+        capturedValidated = validateClaims(parsed.claims, bundle);
+        // §3b: the MUSING register — uncited by construction (sanitizeMusings drops any
+        // smuggled source/op). REGISTER PURITY is computed here, from the report claim
+        // TEXT alone — never from the rider (the §3f conflicted-witness rule).
+        capturedMusings = sanitizeMusings(parsed.musings);
+        capturedRegisterPurity = registerPurity(capturedValidated);
         capturedAnswerText = renderCitedAnswer(capturedValidated);
-        return { ok: !!capturedAnswerText, answerText: capturedAnswerText };
+        // A pure clarifying-question turn (no grounded claims, only musings) is a valid,
+        // non-empty answer: the analyst is allowed to ask back (§3b read-only conversation).
+        return { ok: !!capturedAnswerText || capturedMusings.length > 0, answerText: capturedAnswerText };
       },
       async refund(spendId, reason, elevated) {
         if (!spendId || elevated) return; // elevated spends are never real debits
@@ -300,7 +323,12 @@ export async function handleAiAnalyst(
         return json({
           answer: outcome.answerText,
           claims: capturedValidated,
+          // §3b TWO-VOICES: the uncited MUSING register, structurally separate from the
+          // cited report `claims` so the client renders them as distinct registers.
+          musings: capturedMusings,
           citationCoverage: citationCoverage(capturedValidated),
+          // §3b/§5 register-purity eval metric (independent of the §3f rider).
+          registerPurity: capturedRegisterPurity,
           audience,
           byok: providerKey.byok,
           creditsRemaining: outcome.balance,

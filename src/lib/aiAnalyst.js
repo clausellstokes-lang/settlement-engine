@@ -15,12 +15,14 @@ import { supabase, isConfigured } from './supabase.js';
 import { selectSlices } from '../domain/ai/index.js';
 import { track, EVENTS } from './analytics.js';
 
-/** Coarse band for the citation-coverage metric (never the raw float in telemetry). */
-function coverageBand(coverage) {
-  if (typeof coverage !== 'number') return 'unknown';
-  if (coverage >= 0.99) return 'full';
-  if (coverage >= 0.75) return 'high';
-  if (coverage >= 0.5) return 'partial';
+/** Coarse band for a 0..1 quality metric (never the raw float in telemetry). Shared
+ *  by citation coverage and §3b register purity — both are §5 eval metrics computed
+ *  server-side and banded here for id-free telemetry. */
+function qualityBand(value) {
+  if (typeof value !== 'number') return 'unknown';
+  if (value >= 0.99) return 'full';
+  if (value >= 0.75) return 'high';
+  if (value >= 0.5) return 'partial';
   return 'low';
 }
 
@@ -78,10 +80,18 @@ export async function askAnalyst({ question, worldState = null, settlements = []
     label: c.sourced ? (titleById.get(c.source) || 'the campaign record') : 'the engine does not record this',
   }));
 
+  // §3b TWO-VOICES: the uncited MUSING register — passed through verbatim (bare
+  // {text}), rendered as a visibly distinct "suggestion" register by the panel.
+  const musings = (Array.isArray(data?.musings) ? data.musings : [])
+    .map((m) => ({ text: typeof m?.text === 'string' ? m.text : '' }))
+    .filter((m) => m.text);
+
   const result = {
     answer: data?.answer,
     claims,
+    musings,
     citationCoverage: typeof data?.citationCoverage === 'number' ? data.citationCoverage : undefined,
+    registerPurity: typeof data?.registerPurity === 'number' ? data.registerPurity : undefined,
     audience: data?.audience || effectiveAudience,
     byok: !!data?.byok,
     creditsRemaining: data?.creditsRemaining ?? null,
@@ -90,7 +100,10 @@ export async function askAnalyst({ question, worldState = null, settlements = []
 
   track(EVENTS.AI_ANALYST_ANSWER, {
     audience: result.audience,
-    coverageBand: coverageBand(result.citationCoverage),
+    coverageBand: qualityBand(result.citationCoverage),
+    // §3b/§5 register-purity band, sits beside citation coverage. Both are computed
+    // server-side from the answer itself — never from the §3f self-emitted rider.
+    registerPurityBand: qualityBand(result.registerPurity),
     refused: result.refused,
     sliceCount: slices.length,
     byok: result.byok,

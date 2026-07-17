@@ -16,7 +16,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { X, ThumbsUp, ThumbsDown, Sparkles } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { getSurveyorAiCost } from '../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, sans, SP, R, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, sans, serif_, SP, R, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -154,6 +154,27 @@ export default function AiAnalystPanel({ visible = true }) {
                     </li>
                   ))}
                 </ul>
+              )}
+              {/* §3b TWO-VOICES: the MUSING register — visibly distinct from the cited
+                  report above. Serif + italic + a gold rule + a plain "suggestion"
+                  label mark it as what COULD BE; it is never cited and never a control. */}
+              {Array.isArray(result.musings) && result.musings.length > 0 && (
+                <div
+                  data-testid="analyst-musings"
+                  style={{
+                    borderLeft: `2px solid ${GOLD}`, paddingLeft: SP.sm,
+                    display: 'flex', flexDirection: 'column', gap: 4,
+                  }}
+                >
+                  <span style={{ fontSize: FS.xs, color: GOLD, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                    The Surveyor muses · suggestions, not the record
+                  </span>
+                  {result.musings.map((m, i) => (
+                    <p key={i} style={{ margin: 0, fontSize: FS.sm, color: MUTED, fontStyle: 'italic', fontFamily: serif_, lineHeight: 1.5 }}>
+                      {m.text}
+                    </p>
+                  ))}
+                </div>
               )}
               <div style={{ display: 'flex', gap: SP.sm, alignItems: 'center', fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
                 <span>Cited {result.claims?.filter((c) => c.sourced).length ?? 0}/{result.claims?.length ?? 0}</span>
