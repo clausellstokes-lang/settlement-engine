@@ -117,6 +117,21 @@ philosophy (a claim you can't drift from) applied to the metrics layer.
 - **Min-n floor:** 25 actors per cell.
 - **Method:** rate.
 
+## M8 — Town-map legibility engagement + generation profile
+
+- **Question:** Which town-map legibility surfaces do users actually engage (provenance
+  hover, change view, edge annotations, DM markers, the accessibility lens, panorama),
+  and what is the distribution of the generated map profiles (layout version, site kind,
+  morphology, response mode, Lynch band)? One feature-discriminated event carries both —
+  `feature`=`render` is the generation profile, the other features are engagement.
+- **Source events:** `town_map_layer_used`
+- **Denominator:** map renders (`town_map_layer_used` with feature=`render`).
+- **Cell grid:** feature × layoutVersion × morphology × responseMode (render side); feature × lens (engagement side).
+- **Suppression floor:** 50 renders per cell.
+- **Stage:** pre-launch — a single feature-discriminated event, measurable on synthetic/dogfood renders.
+- **Min-n floor:** 50 renders per cell.
+- **Method:** rate.
+
 ---
 
 ## Exempt events
