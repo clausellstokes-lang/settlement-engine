@@ -51,7 +51,9 @@ import {
 } from '../../domain/townMap/mapEdits.js';
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
+import { districtProvenance, mapProvenanceStory } from './provenanceModel.js';
 import { districtColor } from './palette.js';
+import SettlementMapNotes from './SettlementMapNotes.jsx';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
@@ -175,6 +177,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
     for (const d of deriveAllDistricts(settlement)) m.set(d.id, d);
     return m;
   }, [settlement]);
+  // THE LEGIBILITY DRAWER (SM-5) — the map-level surveyor's read (response mode +
+  // site cause + declined-advantage map). Null for a v1 map ⇒ the drawer self-gates.
+  const mapStory = useMemo(() => mapProvenanceStory(model), [model]);
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -322,13 +327,21 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   };
 
   const districtCardFor = (mapDistrict) => districtsById.get(mapDistrict.id) || null;
+  // THE MAP EXPLAINS ITSELF (SM-5) — the v2 engine's recorded cause(s) for this
+  // quarter, joined by district id. A v1 model has no provenance ⇒ [] ⇒ the card
+  // shows no section (graceful degradation, never a broken affordance).
+  const districtPayload = (mapDistrict) => ({
+    mapDistrict,
+    profile: districtCardFor(mapDistrict),
+    provenance: districtProvenance(model, mapDistrict.id),
+  });
   const onDistrictEnter = (mapDistrict) => (e) => {
     if (e.pointerType === 'touch') return;
-    setHovered({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
+    setHovered({ kind: 'district', payload: districtPayload(mapDistrict), anchor: anchorFrom(e) });
   };
   const onDistrictClick = (mapDistrict) => (e) => {
     e.stopPropagation();
-    setPinned({ kind: 'district', payload: { mapDistrict, profile: districtCardFor(mapDistrict) }, anchor: anchorFrom(e) });
+    setPinned({ kind: 'district', payload: districtPayload(mapDistrict), anchor: anchorFrom(e) });
   };
 
   const onOverlayEnter = (kind, payload) => (e) => {
@@ -665,6 +678,11 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         </div>
       )}
 
+      {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
+          surveyor's read (+ change view + roads out, added in their deliverables).
+          Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
+      <SettlementMapNotes settlement={settlement} story={mapStory} />
+
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}
       <SettlementMapEditControls
@@ -711,6 +729,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           anchor={active.anchor}
           mapDistrict={active.payload.mapDistrict}
           profile={active.payload.profile}
+          provenance={active.payload.provenance}
           pinned={isPinned}
           onClose={clearPin}
         />
