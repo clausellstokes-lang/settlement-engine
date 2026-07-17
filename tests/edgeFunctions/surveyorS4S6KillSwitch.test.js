@@ -54,10 +54,9 @@ for (const { fn, stage } of built) {
 }
 
 describe('S4–S6 kill-switch coverage', () => {
-  it('every built write stage was exercised above (at least custom-content by now)', () => {
-    expect(built.length).toBeGreaterThanOrEqual(1);
-    // Completeness note: this tightens to STAGES.length once construct-realm (the lane's
-    // last stage) lands — see the lane's final gate.
-    expect(built.length).toBeLessThanOrEqual(STAGES.length);
+  it('ALL FOUR write stages are present and each wires the kill-switch fail-closed', () => {
+    // The lane's last stage (construct-realm) has landed — completeness is now strict: every
+    // S4–S6 write stage must exist and have been exercised by the per-stage suites above.
+    expect(built.length).toBe(STAGES.length);
   });
 });
