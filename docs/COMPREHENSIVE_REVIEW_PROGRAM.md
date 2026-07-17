@@ -972,6 +972,21 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: INSTANT WORLD GENERATION (2026-07-16 late night, "before the soak") —
+PREMIUM-GATED per owner correction.** One-click coherent dynamic realm: basic config (3 knobs:
+realm size / tone→existing presets / surprise-me within curated bounds; the advanced wizard
+stays as the alternative), map + appropriate tier-mixed settlement count + auto-canonize with
+a DETERMINISTIC bounded validation-retry loop + the organic relationship/connection machinery.
+ARCHITECTURE: a COMPOSER (conductor over existing generators — zero generator changes, zero
+engine contact, new orchestration leaf) with THREE CLIENTS: the product's Instant World button
+(PREMIUM-GATED — the gate wraps the interface entry only; tier NEVER reaches the composer,
+pin-asserted) · THE SOAK HARNESS (the run families build worlds through the same composer —
+the century soak certifies the exact artifact class the button mints) · later Surveyor S5's
+compile target. Owner VETOED the manager's free-tier recommendation → instantness = the paid
+convenience, manual = the free road (instant-settlement precedent). Pins: same-seed
+fingerprint, output coherence invariants, appropriate-N mapping (presented vetoably),
+zero-eager, interface-only gate. SEQUENCE: dispatches when the Surveyor folds; ROUND 3
+reviews it; the soak runs through it.
 **✅ W-R2-D7 RATIFIED + FOLDED (2026-07-16 ~23:45; merge 7d11428e) — THE REFRAME LAYER
 LANDS, and better than planned: ZERO golden shifts** (reframeEnabled purely virtual — dark
 even on peace-lit presets; the whole golden suite green on its branch), so D7 folds to the
