@@ -1042,6 +1042,27 @@ affordance (none in v1 — owner decision). JUDGMENTs (vetoable): src/utils home
 builder (tsc-graph isolation, ~650 latent JSDoc errors proven avoided) · main-thread
 single-map PDF (tiny vector doc; F41 worker stays dossier-only) · two-commit shape (work
 preservation over per-deliverable commits — two session kills mid-lane).
+**⬛ FOLD 4/5 — THE URBAN FABRIC LAYER (2026-07-17):** folded into claude/w7-prep @
+72be500f (merge of claude/urban-fabric tip 0b9107d1, 3 commits off 9b9e525a; conflict-
+free). The map's memory, all five commissioned mechanisms: per-district prominence stocks
+(12-class integrators, interval-invariant over elapsedWeeks, no rng, categories pinned-
+not-imported to keep districtProfile out of the engine graph) · regime lingering = decay+
+deposit (two-regime fixture: 6mo dominant, ~2y overtake, ONE turn beat) · alignment-drift
+grain toward 1−lawfulness01 · typed stressor scars w/ per-kind masonry half-lives (78–260
+wk) · catastrophe fast-path (toll≥100 resets struck classes, ≥400 town-wide; REBIRTH_CAP
+6). Storage: sidecar spatialLedgers.urbanFabric (drop-when-empty) + compact settlement
+mirror (acquiredTraits idiom); measured 844 B/record, <2KB worst-case pinned. Virtual
+urbanFabricEnabled + COMMITTED dormancy golden (wired-dormant byte-identical, 1,195 pre-
+existing files green); #38 READ API fabricRead.js (empty-when-dark; drift null ≠ 0.5 —
+absence isn't neutrality). Zero eager bytes (closure 1,032,709 before AND after);
+pulseKernel name-swap only, ceiling 1387 green. Lane pins 28 green on the merged tree.
+JUDGMENT TABLES (signed under the RULING #5 blanket, vetoable): time constants (stock
+half-life 260wk, drift 104wk, scar map), deposit map (rates/week × signal01), caps/
+hysteresis (LEAD_FLOOR 1.0, TURN_MARGIN 1.15, STOCK_MAX 10). RECOVERY NOTE: the lane's
+worktree died with the rate-limit kill; remediated to .claude/worktrees/urban-fabric on
+the pre-authorized base — main tree never mutated. SEAMS: #38 layout engine consumes
+fabricRead when commissioned (hasFabric-branch + fallback); dossier/AI surfacing not
+wired (mirror available, grounding untouched); lighting rides the pre-signed regen batch.
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
