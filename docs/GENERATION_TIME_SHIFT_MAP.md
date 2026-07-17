@@ -32,9 +32,6 @@ sim chunk** (never eager first-paint), and the picks persist into save/golden da
 5. **Resource news** — discovery / exhaustion (headline+summary).
 6. **Settlement-lifecycle news** — the NEWS prose of the steading kinds (headline+summary
    +reasons). In-record `history` state-log strings and `impactKind`s are PRESERVED.
-7. **Realm order/refusal news** — applied-order + refusal news phrasing (the generation-time
-   leg baked into `wizardNews`). Gate-dark instructional boilerplate + veto codes preserved.
-
 **DEFERRED-with-reason** (routed to a sibling `CONTENT-GT-DOSSIER` lane with owner
 taste-samples — spawned as a follow-up task):
 
@@ -52,6 +49,7 @@ taste-samples — spawned as a follow-up task):
 | Deity names | `src/generators/data/deityPool.js` | Owner-ratified architecture (cross-settlement repetition IS the design). |
 | Naming cultures | `src/data/namingData.js` | Rated adequate; thousands of combos per culture. |
 | Impact digest | `src/domain/worldPulse/pulseHelpers.js` | Authors 0 prose (pure amplifier); fixed upstream for free. |
+| Realm order/refusal news | `src/domain/worldPulse/realmVerbExecution.js` | Mints ONLY on DM orders (zero organic chronicle repetition — survey's own note); the refusal summary/reasons delegate to `realmVetoProse`, the load-bearing code-matched boilerplate the survey flagged as fragile/triplicated (varying it risks the substring lookups); applied-order headlines/summaries are already per-verb varied by callers. Low value, real risk — deferred. |
 
 **Deferral rationale:** the dossier/naming corpora are exactly the commission's
 "AI-bulk + owner taste-sample" material (docs/COMPREHENSIVE_REVIEW_PROGRAM.md ~1565).
@@ -126,4 +124,57 @@ seed→same pick, different pairs differ).
 
 ## VERIFIED (after build)
 
-_(filled in after running the suite — actual red set vs predicted; eager delta)_
+**Actual golden-red set: EMPTY (0 reds).** Full suite `npx vitest run`:
+**1217 test files passed, 12408 tests passed, 0 failed** (26 skipped, pre-existing).
+`npm run typecheck` + `typecheck:domain:strict` + `lint` green; `npm run build` succeeds;
+`npm run verify:dist` 145/145 green.
+
+**Predicted-vs-actual reconciliation:**
+- The one predicted possible red — `calamity.kernel.integration.test.js:156` (exact
+  `stamp.name`) — resolved **GREEN**: the fixture is Thornwood / year 2, and
+  `fnv1a32("Thornwood::2") % 5 === 0`, so it selects the canonical variant. Verified by
+  direct evaluation (title varies for other name/year inputs, e.g. `Thornwood::7 →
+  "Thornwood's Great Calamity, year 7"`). This is fixture-luck, not an absence of variety.
+- `calamity.test.js:119-120` stay green (they pin the pure `stampTitle`, left unchanged;
+  the variety lives in the lazy kernel via `pickLine(CALAMITY_TITLES, …)`).
+- All other exact strings are pinned by keyword-regex, structural bounds, self-provided
+  inputs, or dark-flag dormancy hashes — none shifts.
+
+**Honest finding (the "park" is a no-op against the CURRENT suite):** this slice IS
+golden-BINDING — the varied prose persists into `wizardNews`, `calamityHistory`,
+`warReasons`/`peaceReasons` ledgers, and `pulseHistory` impactDigests on LIT paths, and
+the regenerated goldens at the ONE REGEN will carry it. But the current suite exact-pins
+almost none of it (keyword/structural assertions + dark-flag dormancy hashes + one title
+pin whose fixture hashes to canonical), so the observable red set is empty. The variety is
+proven instead by the new reachability + determinism guards (129 tests). The branch still
+PARKS (does not fold) per the standing ONE-REGEN discipline; it simply carries no red
+freight today. Should a lit-preset exact-string golden be added before the regen, it would
+red — expected and correct.
+
+**Eager-closure delta: ≈ 0 B.** The new prose lands only in lazy chunks
+(`advanceInterval.worker`, `peaceTerms`, `pdfRender.worker`) — NOT in the eager `index` or
+`engine-core`. `eventProse.js` is imported solely by lazy worldPulse sim kernels;
+`spatial/calamity.js` was left untouched (the calamity title variety lives in the lazy
+`calamityKernel`, so no spatial→worldPulse import and no eager risk). `vendorPdfLazy`
+engine-absent-from-closure + byte-budget contracts green.
+
+**Pool sizes before → after (single-template → variant pool):**
+
+| Surface | Pools | Before | After |
+|---|---|---|---|
+| Calamity | title / summary / reason | 1 / 1 / 1 | 5 / 5 / 5 |
+| War receipts | 10 types | 1 each | 4 each |
+| Peace receipts | 10 types (14 branch pools) | 1 each | 4 each |
+| Hegemony receipts | fear_of_dominance / balance_restored | 1 / 1 | 4 / 4 |
+| Decree default | 1 | 1 | 4 |
+| Upswing news | 4 kinds × (headline/summary/reason) | 1 each | 4 each |
+| Resource news | 2 kinds × (headline/summary) | 1 each | 4 each |
+| Lifecycle news | 5 kinds (headline/summary; founded has 2 provenance summary pools) | 1 each | 4 each |
+
+Registry: **57 pools** enumerated by `EVENT_PROSE_REGISTRY`, all reachability- and
+register-guarded. New guard tests: **129** (all green).
+
+**Commits (on `claude/generation-time-content`, unfolded/parked):**
+- `e117ae10` — calamity prose + eventProse picker
+- `ed2590f3` — war/peace receipts + kernel news + guards
+- (this doc update)
