@@ -8,7 +8,11 @@
  * edges — otherwise there's nothing to draw between. Chains are pairwise
  * (length 2 path); multi-hop tracing can come later if useful.
  *
- * ChainEdges.jsx consumes this shape directly via `useStore(s => s.supplyChains)`.
+ * ChainEdges.jsx consumes this shape directly (it calls computeMapChains in a
+ * useMemo over savedSettlements + placements — there is no supplyChains store
+ * slice; see its header). This module is deliberately TIER-BLIND: the mapChains
+ * premium gate wraps the affordances (MapOverlay render + layer toggles), never
+ * this derivation — pinned by tests/components/mapChainsTierGate.test.jsx.
  */
 
 import { CHAIN_DEFS, buildChainEdges } from './supplyChains.js';

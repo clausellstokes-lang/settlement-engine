@@ -745,7 +745,11 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
           {/* Campaign folders */}
           {campaigns.map(campaign => {
             const campSaves = canManageCampaigns && isCampaignActive(campaign)
-              ? campaign.settlementIds.map(id => saves.find(s => s.id === id))
+              // String()-normalized member lookup (Owner Ruling #5, same model
+              // as campaignSettlements): a number/string-mismatched member now
+              // ADVANCES, so it must also be visible in its campaign folder —
+              // otherwise it could never be removed from the campaign.
+              ? campaign.settlementIds.map(id => saves.find(s => String(s.id) === String(id)))
                   .filter(Boolean).filter(s => filteredIds.has(s.id))
               : [];
             return (
