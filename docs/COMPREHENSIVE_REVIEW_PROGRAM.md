@@ -972,6 +972,24 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ THE GROWTH LAYER RATIFIED + FOLDED (2026-07-17; clean merge — no conflict with
+provenance; both engine finales' pins 57/57 together on the merged tree) — **THE ENGINE'S
+CONSTRUCTION ERA IS OVER.** People learn: acquiredTraits w/ provenance/intensity/decay ·
+the npcGrowthKernel mover (D3 courses at person scale, POST-apply reads, no rng) · THE
+DISTANCE-FROM-CORE METRIC VERIFIED (bold→cautious 0.15 opposition — the owner's case —
+vs cruel-from-compassionate 0.86, near-unmintable) · overlays never core mutation (pinned) ·
+narratable npc_growth chronicle beats · sidecar storage (spatialLedgers.npcGrowth + mirror —
+defeats the ghost-write class). JUDGMENT TABLES SIGNED under Ruling #5's blanket (the
+recommended shapes): mintable set {cautious, proud, cynical, tenacious} · the 8-signal
+deposit map · the 2-vector opposition metric · sidecar+mirror storage. BONUS RATCHET: the
+mover-apply extraction LOWERED pulseKernel's ceiling 1410→1387 (a shrink locked on the
+engine's hottest file). CENSUS-HONEST SEAMS: political kinship reads a deliberately separate
+axis (premise refuted, deferred) · npcAgency reached transitively (no edit needed) ·
+clergyTraitPlane inert-extendable. Recovery note: this wave went silent 3h and was recovered
+by a status demand to full delivery — the stall class remains procedural, never fatal.
+**THE THREE WAITING WAVES NOW UNBLOCKED AND DISPATCHING: URBAN FABRIC (#39) ·
+GENERATION-TIME CONTENT (parks red) · THE MISC-SIGNED WAVE (membership normalization +
+mapChains).**
 **✅ THE PROVENANCE LEDGER RATIFIED + FOLDED (2026-07-17; merged; pins green on the merged
 tree) — ENGINE FINALE #1: RECORDED CAUSALITY IS REAL.** One writer (provenanceKernel lazy
 leaf at the appendPulseHistory chokepoint, net-zero pulseKernel wiring, 'provenance' in
