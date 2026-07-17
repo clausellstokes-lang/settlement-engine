@@ -34,10 +34,16 @@ const BAND_LABEL = { strong: 'a strong pull', moderate: 'a fair pull', slight: '
  *   story?: import('./provenanceModel.js').MapStory | null,
  *   changes?: ChangeViewModel | null,
  *   roads?: Array<{ roadId:string, neighborName:string, relationshipLabel:string, travelLabel:string|null }> | null,
+ *   onOpen?: () => void,
  * }} props
  */
-export default function SettlementMapNotes({ settlement, story = null, changes = null, roads = null }) {
+export default function SettlementMapNotes({ settlement, story = null, changes = null, roads = null, onOpen }) {
   const [open, setOpen] = useState(false);
+  const openDrawer = () => setOpen((v) => {
+    const next = !v;
+    if (next && typeof onOpen === 'function') onOpen();
+    return next;
+  });
 
   const hasStory = !!story && (!!story.responseLabel || story.site.length > 0 || story.declined.length > 0);
   // The change view opens the drawer only when it has REAL changes; a dark change
@@ -63,7 +69,7 @@ export default function SettlementMapNotes({ settlement, story = null, changes =
         size="sm"
         aria-expanded={open}
         aria-label={open ? 'Hide the map notes' : 'Read the map — what the map knows and never told'}
-        onClick={() => setOpen((v) => !v)}
+        onClick={openDrawer}
         style={{ minHeight: 0, padding: '3px 10px' }}
       >
         {open ? 'Close' : 'Read'}

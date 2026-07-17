@@ -60,6 +60,7 @@ import SettlementMapAnnotations from './SettlementMapAnnotations.jsx';
 import AnnotationComposer from './AnnotationComposer.jsx';
 import { useMapCamera } from './useMapCamera.js';
 import { useMapAnnotations } from './useMapAnnotations.js';
+import { useMapLayerAnalytics } from './useMapLayerAnalytics.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
@@ -205,7 +206,13 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // and the persisted markers (mapEdits.annotations). Editing rides the SAME `editing`
   // gate as every cosmetic edit; the final free/premium split is one predicate away
   // (owner-pending). Markers ride the blob and show for every viewer of the owner map.
-  const ann = useMapAnnotations({ mapEdits, editing, commitEdits, wrapperRef, transformRef });
+  // MAP-LAYER ANALYTICS (SM-5) — the generation profile + legibility engagement, one
+  // feature-discriminated event, best-effort, from the UI layer only.
+  const mapAnalytics = useMapLayerAnalytics({ model, settlement, hasEdgeLabels: edgeAnnotations.length > 0 });
+  const ann = useMapAnnotations({
+    mapEdits, editing, commitEdits, wrapperRef, transformRef,
+    onAdded: (count) => mapAnalytics.fire('annotation_add', { count }),
+  });
 
   // Interaction state machine: displayed card = pinned ?? hovered.
   // Each entry: { kind:'building'|'district'|'hazard'|'condition', payload, anchor:{x,y} }.
@@ -280,7 +287,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   });
   const onDistrictEnter = (mapDistrict) => (e) => {
     if (e.pointerType === 'touch') return;
-    setHovered({ kind: 'district', payload: districtPayload(mapDistrict), anchor: anchorFrom(e) });
+    const payload = districtPayload(mapDistrict);
+    if (payload.provenance.length > 0) mapAnalytics.fireOnce('provenance_hover');
+    setHovered({ kind: 'district', payload, anchor: anchorFrom(e) });
   };
   const onDistrictClick = (mapDistrict) => (e) => {
     e.stopPropagation();
@@ -352,6 +361,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   const doPickLens = (id) => {
     setLensOverride(id);
     if (editing) commitEdits(withStyleLens(mapEdits, id));
+    mapAnalytics.fire('lens_switch', { lens: id });
   };
   const hasEdits = !!mapEdits;
 
@@ -650,7 +660,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             size="sm"
             ariaLabel="Map view"
             value={viewMode}
-            onChange={setViewMode}
+            onChange={(m) => { setViewMode(m); if (m === 'panorama') mapAnalytics.fireOnce('panorama'); }}
             options={[{ id: 'plan', label: 'Plan' }, { id: 'panorama', label: 'Panorama' }]}
           />
         </div>
@@ -659,7 +669,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
       {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
           surveyor's read (+ change view + roads out, added in their deliverables).
           Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
-      <SettlementMapNotes settlement={settlement} story={mapStory} changes={changeView} roads={edgeAnnotations} />
+      <SettlementMapNotes
+        settlement={settlement} story={mapStory} changes={changeView} roads={edgeAnnotations}
+        onOpen={() => mapAnalytics.fireOnce('change_view')}
+      />
 
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}

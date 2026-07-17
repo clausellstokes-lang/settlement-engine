@@ -25,9 +25,10 @@ const clamp01k = (v) => (v < 0 ? 0 : v > 1000 ? 1000 : v);
  *   commitEdits: (next: import('../../domain/townMap/mapEdits.js').MapEdits | null) => void,
  *   wrapperRef: import('react').MutableRefObject<HTMLElement|null>,
  *   transformRef: import('react').MutableRefObject<{ tx:number, ty:number, scale:number, width:number, height:number }>,
+ *   onAdded?: (count: number) => void,
  * }} deps
  */
-export function useMapAnnotations({ mapEdits, editing, commitEdits, wrapperRef, transformRef }) {
+export function useMapAnnotations({ mapEdits, editing, commitEdits, wrapperRef, transformRef, onAdded }) {
   const [annotateMode, setAnnotateMode] = useState(false);
   const [composing, setComposing] = useState(null);
   const annotations = useMemo(() => readAnnotations(mapEdits), [mapEdits]);
@@ -55,9 +56,11 @@ export function useMapAnnotations({ mapEdits, editing, commitEdits, wrapperRef, 
 
   const addAnnotation = useCallback((label, audience) => {
     if (!composing) return;
-    commitEdits(withAnnotation(mapEdits, { x: composing.x, y: composing.y, label, audience }));
+    const next = withAnnotation(mapEdits, { x: composing.x, y: composing.y, label, audience });
+    commitEdits(next);
     setComposing(null);
-  }, [composing, commitEdits, mapEdits]);
+    if (typeof onAdded === 'function') onAdded(readAnnotations(next).length);
+  }, [composing, commitEdits, mapEdits, onAdded]);
 
   const removeAnnotation = useCallback((index) => {
     commitEdits(withoutAnnotationAt(mapEdits, index));
