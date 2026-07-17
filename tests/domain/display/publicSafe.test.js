@@ -127,6 +127,35 @@ describe('toPublicSafe (§1k)', () => {
     expect(out.config.cultDeitySnapshots).toEqual([{ name: 'Ash', alignmentAxis: 'evil' }]);
     expect(out.config.faithProfile).toEqual({ patron: { name: 'Sun', share: 62 } });
   });
+
+  it('(142) drops a COVERT corruption impairment (NPC-naming description) but keeps the public one', () => {
+    // W-DOCTRINE-3 §6 / GALLERY-2 precondition: imposeCorruption stamps a covert
+    // impairment onto institutions[].impairments whose description NAMES the corrupted
+    // NPC. `institutions` is allowlisted, and none of the impairment's keys trip the
+    // deeper denylist, so without the value-level covert drop the WHOLE object — naming
+    // description included — rode through to the anon dossier. A key-strip is insufficient
+    // (it leaves the description); the whole covert object must go. FAIL-CLOSED.
+    const out = toPublicSafe({
+      name: 'Brackwater', tier: 'town',
+      institutions: [{
+        name: 'The Tanners Guild', category: 'Crafts',
+        impairments: [
+          { type: 'corruption', severity: 'moderate', covert: true, causeEventId: 'evt_capture_9', appliedAt: 42,
+            description: "Aldric's capture quietly compromised The Tanners Guild." },
+          { type: 'flood_damage', severity: 'minor', description: 'Spring floods damaged the drying racks.' },
+        ],
+      }],
+    });
+    expect(out.institutions).toHaveLength(1);
+    expect(out.institutions[0].name).toBe('The Tanners Guild');
+    const imps = out.institutions[0].impairments;
+    expect(imps).toHaveLength(1);
+    expect(imps[0].type).toBe('flood_damage');
+    expect(imps.some(i => i && i.covert)).toBe(false);
+    // The NPC-naming description must appear NOWHERE in the projection.
+    expect(JSON.stringify(out)).not.toContain('quietly compromised');
+    expect(JSON.stringify(out)).not.toContain("Aldric's capture");
+  });
 });
 
 describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
@@ -152,6 +181,29 @@ describe('toPublicSafe — full DM view opt-in (gallery_share_dm)', () => {
     expect(out.npcs[0].secret).toBe('bastard heir');
     expect(out.npcs[0].plotHooks).toEqual(['blackmail']);
     expect(out.npcs[0].relationships).toEqual([{ with: 'x' }]);
+  });
+
+  it('(142) KEEPS covert corruption impairments in full mode (the DM-content share)', () => {
+    // JUDGMENT (vetoable — mirrors migration 142's scope note): the covert drop guards the
+    // ANON surface only (W-DOCTRINE-3 §6). gallery_share_dm is the owner's explicit
+    // DM-content publish (secrets, hooks, NPC goals) — a covert corruption fact is DM
+    // narrative consistent with that opt-in, so full mode preserves it. Full mode never
+    // calls sanitizePublicValue (it deep-clones + drops named blocks), so the covert
+    // impairment rides through by construction; this pins that intent. To flip: add the
+    // covert drop to the full-mode clone path + _gallery_dm_full_json and invert this pin.
+    const out = toPublicSafe({
+      name: 'Foo', tier: 'town', plotHooks: ['the heir is hidden'],
+      institutions: [{
+        name: 'The Tanners Guild', category: 'Crafts',
+        impairments: [
+          { type: 'corruption', severity: 'moderate', covert: true,
+            description: "Aldric's capture quietly compromised The Tanners Guild." },
+        ],
+      }],
+    }, { full: true });
+    expect(out.institutions[0].impairments).toHaveLength(1);
+    expect(out.institutions[0].impairments[0].covert).toBe(true);
+    expect(JSON.stringify(out)).toContain('quietly compromised');
   });
 
   it('strips DM notes even in full mode — truly confidential, never shared', () => {

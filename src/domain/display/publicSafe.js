@@ -114,6 +114,20 @@ export function sanitizePublicValue(value, path = []) {
   }
   if (!value || typeof value !== 'object') return value;
 
+  // COVERT DROP (W-DOCTRINE-3 §6): an object explicitly flagged `covert:true` is hidden
+  // DM state — e.g. a covert 'corruption' impairment on institutions[].impairments whose
+  // `description` NAMES the corrupted NPC ("<NPC>'s capture quietly compromised <inst>",
+  // stamped by imposeCorruption scope:'individual_institution'). Drop the WHOLE object
+  // from every public / anon / preview projection: stripping only the `covert` KEY (as
+  // COVERT_KEY_RE does for world snapshots) would leave the naming description exposed.
+  // This is a VALUE-level rule (no PRIVATE_KEY_RE token), so the token-⊆-SQL drift pin is
+  // untouched. Mirrored server-side by _gallery_sanitize_public_json (migration 142). The
+  // settlement ROOT never reaches here (toPublicSafe gates it via the top-level allowlist),
+  // so only NESTED objects are covert-checked — matching the SQL `not is_toplevel` guard.
+  // FAIL-CLOSED, like the rest of this projection. (Only default mode; the owner's
+  // gallery_share_dm full mode keeps its own DM content — see toPublicSafe.)
+  if (/** @type {Record<string, unknown>} */ (value).covert === true) return undefined;
+
   /** @type {Record<string, unknown>} */
   const out = {};
   for (const [key, child] of Object.entries(value)) {
