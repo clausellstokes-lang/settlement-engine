@@ -972,6 +972,27 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RULING #5 (2026-07-17: "i give all remaining signoffs ahead of schedule") — THE
+BLANKET GRANT, executed with two carve-outs.** EXECUTED IMMEDIATELY: EXEMPT_CEILING 66→69
+signed at its source (operationRegistry.js @ c1a36002 — **THE PROGRAM'S LAST STANDING RED
+CLEARS; gates are fully green** modulo isolation-proven flakes) · Cartographer priceCents
+600→599 (reconciled to the DISPLAYED $5.99, customer-facing prevails; pin honestly
+rebaselined @ c1d3f6eb) · **GALLERY PHASE 2 DISPATCHED** with all five signed (aliveness
+as designed · the six reaction lines VERBATIM · the Campaigns third tab · gallery_title ·
+facet hubs + sitemap fan-out ON; migrations 146+). PRE-SIGNED FOR THEIR MOMENTS: the three
+lighting questions (D1 news + reframeEnabled + provenanceLedgerEnabled light in the
+world-alive presets at the regen) · **THE ONE REGEN ITSELF** (executes at its post-soak slot
+without a further pause) · all migration shapes 137–144 + incoming per recommendations
+(founder ×4 asks per the manager's recommendations) · the four lenses + craft furniture
+(taste veto satisfied) · THE PANORAMA (build approved; queued behind S3 for the AI-file
+collision) · pgcrypto-as-built · provisional AI pricing · membership normalization +
+mapChains enforcement (a signed-misc wave queued behind the engine finales) · the W6 delta
+(pre-approved ROUND-3 fix stock). DEFAULTED VETOABLY (a two-option fork with no recorded
+recommendation): the daily-life fork stays TWO-SPEND as built. **THE TWO CARVE-OUTS a
+blanket grant cannot reach:** the LEGAL PACKAGE (ToS/privacy ship only through the
+professional consult — drafts stay not-in-force) and the SUPPORT-EMAIL verification (a
+factual check, stays on the deploy checklist). The push/PR remains pre-authorized as before;
+the merge button + db-push remain physically the owner's.
 **✅ TRIPLE FOLD + RATCHET #11 (2026-07-17 ~07:30; tips 1709e333/15b0fc6e/addd4011/e6f14414).**
 **BYOK SURFACE folded**: verify-by-test-call (never stored-healthy-unverified), provider-error
 classes → §3d refusals w/ switch-to-managed doors + persisted key health, the usage meter +
