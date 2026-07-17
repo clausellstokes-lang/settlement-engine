@@ -56,7 +56,7 @@ describe('BuyThisDossier save-first rung advance', () => {
     render(<BuyThisDossier settlement={{ name: 'Testburg', tier: 'wanderer' }} saveId={null} />);
 
     // Starts on the 'unsaved' rung (no onSaveFirst prop ⇒ internal fallback runs).
-    const cta = screen.getByRole('button', { name: /save this settlement to buy its pdf/i });
+    const cta = screen.getByRole('button', { name: /save this settlement to unlock its exports/i });
     fireEvent.click(cta);
 
     // The id was stamped exactly once with the returned save id.
@@ -66,6 +66,6 @@ describe('BuyThisDossier save-first rung advance', () => {
 
     // The rung advanced: the save-first CTA is gone (nothing left to double-click).
     await waitFor(() =>
-      expect(screen.queryByRole('button', { name: /save this settlement to buy its pdf/i })).toBeNull());
+      expect(screen.queryByRole('button', { name: /save this settlement to unlock its exports/i })).toBeNull());
   });
 });

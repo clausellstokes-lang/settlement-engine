@@ -18,6 +18,7 @@ import { flag } from '../lib/flags.js';
 import { EVENTS, track } from '../lib/analytics.js';
 import { useStore } from '../store/index.js';
 import { useMapBridge } from '../hooks/useMapBridge.js';
+import { useRealmMapExport } from '../hooks/useRealmMapExport.js';
 import { useInstantWorldMaterialize } from '../hooks/useInstantWorldMaterialize.js';
 import { MAP_MODES } from '../store/mapSlice.js';
 import { computeRoadEdges } from '../lib/roadNetwork.js';
@@ -731,6 +732,16 @@ export default function WorldMap({ onNavigate } = {}) {
     }
   }, [activeCampaignId, saveCampaignMap, showToast]);
 
+  // ── Export the realm map as a PNG (MAP EXPORTS) ───────────────────────
+  // The handler lives in useRealmMapExport (WorldMap is at its max-lines ceiling).
+  // The bridge exposes only exportThumb (a <=1024px terrain composite); the fork's
+  // native full exporters (getMapURL svg/png) are NOT bridged — a recorded seam.
+  // downloadRealmMapPng composites the terrain raster with the settlement-marker
+  // overlay → one PNG. Free to the signed-in owner (mirrors the free map-share
+  // lane); anon has no affordance (the toolbar item below is withheld).
+  const { exportingMap, handleExportMap: handleExportMapImage } =
+    useRealmMapExport({ bridgeRef, activeCampaign, showToast });
+
   // ── Worldbuilder keymap ───────────────────────────────────────────────
   // P (place) / T (terrain) / A (annotate) / R (routes) switch modes;
   // L toggles the layers panel; F fits the map; ⌘S saves; ⌘Z opens
@@ -828,6 +839,7 @@ export default function WorldMap({ onNavigate } = {}) {
         multiTickOn={multiTickOn} advanceSession={advanceSession} pausedAdvance={pausedAdvance} onResumeAdvance={handleResumeAdvance}
         canUndoPulse={canUndoPulse} handleUndoRealm={handleUndoRealm} lastAdvanceInterval={multiTickOn ? lastAdvanceInterval : null} setShowLayersPanel={setShowLayersPanel} showLayersPanel={showLayersPanel} setTourOpen={setTourOpen}
         handleClearImage={handleClearImage} handleImportImage={handleImportImage} handleShareMap={handleShareMap} sharingMap={sharingMap}
+        handleExportMap={authTier !== 'anon' ? handleExportMapImage : undefined} exportingMap={exportingMap}
         mapTemplates={mapTemplates} currentTemplate={currentTemplate} handleTemplateChange={handleTemplateChange} handleFit={handleFit} handleRegenerate={handleRegenerate}
         inspectorOpen={inspectorOpen} onToggleInspector={handleToggleInspector} unreviewedCount={unreviewedPulseCount}
         activePresetId={activeCampaign?.worldState?.simulationRules?.presetId} handleApplyPreset={handleApplyPreset}

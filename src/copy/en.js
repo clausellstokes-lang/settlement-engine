@@ -1172,18 +1172,20 @@ export const en = Object.freeze({
   // present the one-time download AS one-time (the retro auto-upgrade is a
   // grace we never promise up front, since it depends on browser storage).
   dossierExport: {
-    // Free account, dossier SAVED, no durable right yet.
+    // Free account, dossier SAVED, no durable right yet. One purchase unlocks the
+    // whole per-settlement EXPORT BUNDLE (owner ruling): the dossier PDF + every
+    // map export for this settlement.
     buySaved: {
-      cta:      'Keep the PDF for this settlement · {price}',
-      subline:  'A one-time purchase. The download stays yours for as long as this settlement is in your library.',
+      cta:      'Unlock all exports for this settlement · {price}',
+      subline:  'A one-time purchase unlocks every export for this settlement — the dossier PDF, the town-map images (SVG/PNG/JPEG/WebP), the single-map PDF, and the VTT token map. Yours to re-download for as long as it stays in your library.',
       busy:     'Redirecting…',
       error:    'Checkout could not start. Please try again.',
     },
-    // Free account, dossier NOT saved yet. Durable rights attach to a save, so
-    // the honest path is to save first.
+    // Free account, dossier NOT saved yet. Export rights attach to a save, so the
+    // honest path is to save first.
     saveFirst: {
-      cta:      'Save this settlement to buy its PDF',
-      subline:  'Durable download rights attach to a saved settlement. Save it first, then the {price} purchase is yours to re-download.',
+      cta:      'Save this settlement to unlock its exports',
+      subline:  'Export rights attach to a saved settlement. Save it first, then one {price} purchase unlocks all its exports — dossier PDF, map images, and the VTT token map — to re-download.',
       atCap:    'Your free account is at its save limit. Free a slot, or move to Cartographer for unlimited exports.',
       error:    'Could not save this settlement. Please try again.',
     },

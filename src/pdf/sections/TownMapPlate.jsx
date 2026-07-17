@@ -33,6 +33,14 @@ function pointsAttr(pts) {
   return pts.map(([x, y]) => `${x},${y}`).join(' ');
 }
 
+/** One draw op → a react-pdf Svg primitive. Exported (as `renderTownMapOp`) so the
+ * standalone single-map PDF document (src/pdf/TownMapDocument.jsx) maps ops to the
+ * SAME primitives as this plate — one op→primitive mapping, no drift.
+ * @param {import('../../domain/townMap/townMapDraw.js').DrawOp} op @param {number} i */
+export function renderTownMapOp(op, i) {
+  return renderOp(op, i);
+}
+
 /** One draw op → a react-pdf Svg primitive.
  * @param {import('../../domain/townMap/townMapDraw.js').DrawOp} op @param {number} i */
 function renderOp(op, i) {
