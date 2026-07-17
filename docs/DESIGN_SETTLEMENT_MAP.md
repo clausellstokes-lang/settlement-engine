@@ -340,15 +340,11 @@ denylist-safe, dormancy-lawful) · exports (WYSIWYG law extends: pins honor visi
 split per export audience) · tier gates (untouched; mapChains enforcement unaffected) ·
 first-paint (zero eager; map surface lazy by architecture).
 
-## 14. POST-LAUNCH DOORS (designed intent recorded; deliberately NOT built in this tail)
+## 14. POST-LAUNCH DOORS (full corpus entries; deliberately NOT built in this tail)
 
-- **Town-scale map→engine coupling** — fire along adjacent buildings, siege damage by wall
-  segment, adjacency-shaped rumor/corruption spread. The inverse of the fabric layer
-  (engine→map); a genuinely new engine capability class — waits for a corpus reopening
-  after launch. Coupling note: would consume the v2 adjacency graph; the engine stays
-  LLM-free and tick-deterministic regardless.
-- **In-app fog-of-war / session mode** — the launch strategy remains meet-VTTs-where-they-
-  are (UVTT pre-walled export); an in-app reveal layer would ride the v2 model + visibility
-  split if ever built.
-- **Building interiors** — a new scale (keyed interiors); out of scope for the world-only,
-  simplicity-over-fidelity charter unless the owner reopens it.
+The three doors — THE SPATIAL CONSEQUENCE LAYER (town-scale map→engine coupling), THE
+TABLE LAYER (in-app fog-of-war/session mode), and THE KEYED SCALE (building interiors) —
+hold FULL frozen designs with coherence matrices and build gates in
+**docs/DESIGN_MAP_POST_LAUNCH_DOORS.md** (owner-granted corpus citizenship, 2026-07-17;
+build slot = the post-launch roadmap by owner placement). That doc is the single
+authority; this section is a pointer, not a summary.
