@@ -972,6 +972,32 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ SURVEYOR S1+S2 RATIFIED + FOLDED (2026-07-17 ~00:30; merge a17d71b0) — THE FIRST AI
+SHIP.** 4 commits off 4052fc9c: the 7 PURE brief composers (player-safe settlement section
+asserted byte-for-byte ≡ toPublicSafe) · S1 core (state-slicers, citation law — hallucinated
+citations downgrade to "the engine does not record this", credit reserve→spend→refund
+round-trip) · the ai-analyst edge fn (JWT → surveyor entitlement interface-gate fail-closed →
+creditFlow → BYOK-or-server key never-logged → Anthropic adapter claude-opus-4-8 → citation
+enforcement → audit write) · lazy client panel (audience toggle = the structural rule's
+visible face; App.jsx ceiling respected via a 0-net-line wrapper). All 5 mandatory pins
+vitest-executed; branch gate 11,707 passed / sole real red EXEMPT_CEILING (+2 load-flakes
+proven 33/33 isolated); verify:dist 143/143; zero eager beyond 2 event names + the cost map.
+AMENDMENTS: §3c/§3d/§3e FOLDED + PINNED (retentionClass REQUIRED on the adapter contract —
+Anthropic declared 'bounded' conservatively w/ re-verify-at-deploy note; graceful refusals w/
+refusal-quality eval; naming hygiene) · §3b/§3f/canary/meta_probe SEAMED = **SURVEYOR-S1b**
+(dispatching). MERGE JUDGMENT executed: the agent's 137_surveyor_reserved placeholder DELETED
+in the merge commit (founder's real 137 keeps the slot; chain contiguous at head 140;
+migrationSequence 8/8; merged-tree pins 64/64). **OWNER SIGN-OFF QUEUE ADDITIONS (deploy
+batch):** migration 138 audit-spine shape · 139 entitlement + BYOK vault (pgcrypto+GUC
+fail-closed — VETOABLE if Supabase Vault/pgsodium preferred) · 140 provisional pricing
+analysis=3/brief=4 (final Surveyor pricing owner-queued) · BYOK requires app.settings.
+byok_secret at deploy (DEPLOY.md). Pending-deploy window now 23 migrations (118–140).
+**⬛ INSTANT WORLD SHAPE AMENDED (owner, mid-flight):** config gains a MAP-KIND knob (which
+world-map type to design in), and the instant world **PLACES EVERYTHING, CANONIZES NOTHING**
+— a fully-staged tableau amendable at t=0; canonization stays the user's deliberate act.
+Spec sharpened accordingly: INSTANT WORLD ≡ the state a completed manual wizard session
+reaches pre-canonize (composition-equivalence pin); the soak harness client = composer +
+canonize; the button = composer only.
 **⬛ OWNER COMMISSION: INSTANT WORLD GENERATION (2026-07-16 late night, "before the soak") —
 PREMIUM-GATED per owner correction.** One-click coherent dynamic realm: basic config (3 knobs:
 realm size / tone→existing presets / surprise-me within curated bounds; the advanced wizard
