@@ -972,6 +972,14 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ THE PROVENANCE LEDGER COMMISSIONED (owner, 2026-07-17: "commission"; task #32).**
+Recorded-not-reconstructed causality: a durable per-campaign receipt ledger with true
+cause-edges. ARCHITECT RULINGS (vetoable): flag-gated virtual writer (dark ⇒ byte-identical;
+joins the lighting/regen queue; the chronicle reads RECORDED edges where present, inferred
+elsewhere — the labels already distinguish) · size-model-before-shape (tiny prose-free
+entries; storage home proposed WITH NUMBERS — in-blob+compaction vs table — presented for
+signature). SEQUENCING: serializes AFTER the NPC wave (dispatcher-chokepoint collision) and
+BEFORE the soak (engine freeze) — the last engine-adjacent build of the program.
 **✅ THE CHRONICLE RATIFIED + FOLDED (2026-07-17 ~02:40; merged into w7-prep).** The advance
 report is real: the zoom pyramid (week⇒events … year⇒full pyramid, full descent always),
 thread extraction typed by the 8 drama classes, season chapters, delta-first, the deputy's
