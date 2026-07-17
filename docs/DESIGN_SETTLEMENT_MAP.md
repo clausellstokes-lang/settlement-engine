@@ -348,3 +348,39 @@ hold FULL frozen designs with coherence matrices and build gates in
 **docs/DESIGN_MAP_DOORS.md** (owner-granted corpus citizenship 2026-07-17; build slot
 moved PRE-LAUNCH by owner ruling #8 the same day). That doc is the single authority; this
 section is a pointer, not a summary.
+
+## 12b. THE GENERATIVE ORDER + THE RECONCILIATION LAW (owner refinements, 2026-07-17; corpus entry)
+
+The v2 pipeline's binding order (each stage composes on the one below):
+
+0. **THE SITE** — the physical canvas is GENERATED, not given: river/mountain flank/dunes/
+   marsh/coast derived from realm-map terrain at the settlement's position (REALM-COHERENCE
+   LAW: the town site is a zoom-in of its realm position, never a contradiction of it),
+   nearby resources (mines⇒slopes, fisheries⇒water, peat⇒marsh, salt⇒flats), and trade
+   routes (a river lane physically enters/exits along its bearings). Standalone settlements
+   derive from resources+trade alone. SUBSTANCE-FROM-DOSSIER / EXPRESSION-FROM-SEED:
+   whether the river exists = dossier; its meander = the v2 seed fork.
+1. **THE ECONOMIC FIELD** — attractor points + gradients from the dossier's actual economy,
+   laid on the site first; the town's raison d'être made spatial.
+2. **GENESIS CORE** nucleates ON the field (the core at the ford, the market where routes
+   converge) with a RESPONSE MODE — EXPLOIT / ENDURE / FORTIFY — chosen from the
+   settlement's character and history, optimal OR deliberately suboptimal ("take advantage
+   or not"); the choice is itself a recorded provenance cause.
+3. **ROADS** follow the economic gradients; **4. DISTRICTS** and semantic placement pull
+   toward their attractors; **5. THE COMPOSITION PASS** (Lynch rubric acceptance,
+   historical form vocabulary, plan-response law, wall-obeys-town, tier grammar) last.
+
+**THE LATENT ADVANTAGE MAP** — generation retains the gap between the site's attractor set
+and what the founding response mode declined ({attractorRef, declinedBy, latentValue01}),
+alongside the provenance annotations.
+
+**THE RECONCILIATION LAW** (owner-delegated mechanism, vetoable): over time, ALIGNMENT
+GOVERNS THE STYLE of the town's reconciliation with its site — not its morality. LAWFUL =
+planned, discrete, engineered moves toward the CHOSEN doctrine's optimum (a lawful
+fortress maintains its fortified suboptimum; lawful ≠ optimal, lawful = coherent).
+CHAOTIC = greedy local opportunism — continuous encroachment toward whatever is locally
+available, gaining fast and accumulating disorder (congestion grain, palimpsest).
+Direction from the latent advantage map; style+coordination from alignment; magnitude+
+timing from the urban fabric stocks (zero engine change — fabric already integrates
+history; v2's hasFabric branch interprets). Dark fabric ⇒ the founding form persists.
+Both signs even-handed: state-never-fate, no alignment moralizing.
