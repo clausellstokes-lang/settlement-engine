@@ -16,7 +16,7 @@ Props are coarse by construction — enums, bands, counts, booleans, hashes; nev
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
 - **EVENTS_REV:** 7
-- **Events:** 118 total — 114 essential, 4 research
+- **Events:** 120 total — 116 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
@@ -202,6 +202,13 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 |---|---|---|---|
 | `SETTLEMENT_FINGERPRINT_CAPTURED` | `settlement_fingerprint_captured` | research | — |
 | `CONSENT_UPDATED` | `consent_updated` | essential | — |
+
+## Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential)
+
+| Constant | Event | Class | Enriched props (code-derived) |
+|---|---|---|---|
+| `AI_ANALYST_ANSWER` | `ai_analyst_answer` | essential | — |
+| `AI_ANALYST_FEEDBACK` | `ai_analyst_feedback` | essential | — |
 
 ---
 

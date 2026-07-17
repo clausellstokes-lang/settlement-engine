@@ -17,6 +17,7 @@ import {
   getActivePacks,
   getActiveAiCosts,
   getAiCost,
+  getSurveyorAiCost,
   getVisibleTiers,
   singleDossierEnabled,
   findPackByKey,
@@ -47,6 +48,16 @@ describe('AI cost server contract', () => {
 
   it('new schedule matches the server-enforced new costs', () => {
     expect(_internal.NEW_AI_COSTS).toEqual(CONTRACT_AI_COSTS_NEW);
+  });
+
+  // Surveyor S1 task-priced managed credits — mirrors the spend_credits CASE in
+  // migration 140 (analysis=3, brief=4). Provisional pricing (owner-queued); when the
+  // owner re-tunes, this block + migration 140 change together.
+  it('surveyor task prices match the server spend_credits CASE (migration 140)', () => {
+    expect(_internal.SURVEYOR_AI_COSTS).toEqual({ analysis: 3, brief: 4 });
+    expect(getSurveyorAiCost('analysis')).toBe(3);
+    expect(getSurveyorAiCost('brief')).toBe(4);
+    expect(getSurveyorAiCost('nope')).toBe(0);
   });
 });
 
