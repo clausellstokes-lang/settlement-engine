@@ -1098,6 +1098,23 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: THE ABOUT PAGE OVERHAUL (2026-07-17, in-session; task #19):**
+purpose ratified in-session — "the place where the invisible becomes believable": the
+constitution translated for civilians (promises-as-guarantees: determinism · receipts ·
+state-never-fate · the schema wall · truth-projection; LIMITS stated proudly; the ladder
+in mechanism terms; the maker's face; philosophy retained + whole-system appreciation).
+Owner direction: digestible; medieval-century art/artistic schematics where appropriate;
+EMULATE THE BEST ONLINE EXAMPLES (research sweep wf_7ada24b2 dispatched: manifesto pages ·
+medieval art direction + public-domain sources · TTRPG market pages · digestible-depth
+patterns · completeness critic) then reconcile with what exists. SURVIVES the overhaul:
+the How-To inversion · the DM Philosophy tab · Compendium delegation (becomes the
+governing doc-pattern) · the Living World claim+coherence+reversible shape. DIES: the two
+hardcoded Cartographer price title= strings (config-sourced facts law) · the mangled
+punctuation · the pre-Surveyor AI framing · the 3-rung ladder. ART LAW: the product's own
+output is the art (v2 craft samples, panorama) + period-style schematics; public-domain
+vocabulary only. BUILD SLOT: post-folds (describe the FINISHED product), pre-ROUND-3 —
+ROUND 3 audits every About claim against the real product (receipts culture applied to
+marketing). Manual weight sheds into the guidance layer/Compendium per the purpose ruling.
 **⬛ THE 100% AUDIT + THE PANELS LANE (2026-07-17, triggered by the owner's "its going
 to be 100% by the end of this correct?"):** the completeness audit found ONE unslotted
 launch-required item — the AI write-stage PANELS (S4/S5/S6 + accept→mint interfaces;
