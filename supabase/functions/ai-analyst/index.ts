@@ -29,10 +29,15 @@ import {
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
   registerProviderAdapter, routeWorldDataAdapter,
   sanitizeMusings, registerPurity,
+  accountCanary, detectMetaProbe,
 } from './analystCore.ts';
 import type { MusingItem } from './analystCore.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
+// §3c(4): the salt that makes the per-account canary unguessable. A tracer works even
+// unset (the marker is still per-account-unique via user id) — the secret only raises
+// the guessing cost. Set SURVEYOR_CANARY_SECRET in prod.
+const CANARY_SECRET = Deno.env.get('SURVEYOR_CANARY_SECRET') || '';
 const ANTHROPIC_VERSION = '2023-06-01';
 // Provider-neutral by design; Anthropic first, latest model. Overridable per deploy.
 const ANALYST_MODEL = Deno.env.get('ANTHROPIC_CLAUDE_OPUS_4_8_MODEL') || 'claude-opus-4-8';
@@ -190,6 +195,12 @@ export async function handleAiAnalyst(
       return json({ error: 'player request carried a non-player-safe slice' }, 400, cors);
     }
 
+    // §3c EXTRACTION DEFENSE: the inert per-account packet canary (embedded in the
+    // instruction packet, logged for leak attribution) + the meta-probe flag (an
+    // extraction-signature question, logged for review). Neither ever reaches an answer.
+    const canary = accountCanary(user.id, CANARY_SECRET);
+    const metaProbe = detectMetaProbe(question);
+
     // BYOK: the user's key if present, else the server key. Resolved once, never logged.
     const providerKey = await resolveProviderKey(
       supabaseAdmin, user.id, ANALYST_PROVIDER, ANTHROPIC_API_KEY,
@@ -228,7 +239,7 @@ export async function handleAiAnalyst(
         return { ok: !!res?.ok, spendId: capturedSpendId, elevated: !!res?.elevated, balance: res?.balance ?? null, reason: res?.reason ?? null };
       },
       async callModel() {
-        capturedPrompt = buildAnalystPrompt(question, bundle, audience);
+        capturedPrompt = buildAnalystPrompt(question, bundle, audience, canary);
         const ac = new AbortController();
         const timer = setTimeout(() => ac.abort(), ANALYST_TIMEOUT_MS);
         let resp: Response;
@@ -297,6 +308,7 @@ export async function handleAiAnalyst(
       const rec = aiOperationLogRecord({
         prompt: capturedPrompt, bundle, model: ANALYST_MODEL, modelVersion: `anthropic-${ANTHROPIC_VERSION}`,
         answerText: capturedAnswerText, audience, validated: capturedValidated,
+        metaProbe, canary,
       });
       const { error } = await supabaseAdmin.rpc('write_ai_operation_log', {
         p_user: user.id, p_feature: ANALYST_FEATURE, p_audience: rec.audience,
@@ -305,6 +317,8 @@ export async function handleAiAnalyst(
         p_model: rec.model, p_model_version: rec.model_version, p_provider: ANALYST_PROVIDER,
         p_byok: providerKey.byok, p_citation_coverage: outcome.outcome === 'ok' ? rec.citation_coverage : null,
         p_claim_count: rec.claim_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
+        // §3c: the extraction-defense fields — inert canary + the meta-probe flag.
+        p_meta_probe: rec.meta_probe, p_canary: rec.canary,
       });
       if (error) logError('ai-analyst', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
     } catch (e) { logError('ai-analyst', user.id, e, { stage: 'audit' }); }
