@@ -35,7 +35,8 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number }} MapEdits */
+/** @typedef {{ x: number, y: number, label: string, audience: 'dm'|'player' }} MapAnnotation */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[] }} MapEdits */
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
@@ -44,10 +45,22 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 // it rides the blob exactly like a legend pref, honored on every full-blob read
 // (owner library, detail viewer, PDF, thumbnail); the anonymous-gallery drop is
 // the pre-existing owner-gated §6 opt-in (mapEdits is not on PUBLIC_TOPLEVEL_KEYS).
+//
+// SM-5 DM PIN/ANNOTATION LAYER — `annotations` (+ x/y/label/audience sub-keys) is a
+// COSMETIC-CLASS, denylist-safe container key: a DM's map markers ride the blob like
+// a nudge. Every new key was checked ∉ PRIVATE_KEY_RE (the naming-trap test enforces
+// it), so a public projection never SILENTLY strips one — instead the whole mapEdits
+// container is (already) owner-gated off the anonymous gallery (mapEdits ∉
+// PUBLIC_TOPLEVEL_KEYS), so a DM-only marker's TEXT never reaches a public viewer.
+// NOTE the deliberate law distinction: `pins` (position NUDGES) are anchor-keyed,
+// never coordinates; `annotations` (free DM markers) legitimately carry x/y because a
+// marker has no backing element to key on — a different concept, not a law violation.
+// The `audience` VALUE ('dm'|'player') is the export-visibility split (WYSIWYG law).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', // container
+  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', // container
   'anchor', 'dx', 'dy',                    // pin
   'showLabels', 'showLegend',              // legendPrefs
+  'x', 'y', 'label', 'audience',           // annotation
 ]);
 
 /** The layout-law versions the model can render. v1 is the DORMANT default (absent
@@ -69,8 +82,19 @@ const LEGEND_PREF_KEYS = Object.freeze(['showLabels', 'showLegend']);
 // value, never the render.
 const PIN_BOUND = 1000;
 
+// SM-5 DM annotations: coordinates live in the 0..1000 view space; labels are bounded
+// (a marker note, not prose); the count is capped so the blob can't grow unbounded.
+const VIEW_MAX = 1000;
+const ANNOTATION_LABEL_MAX = 80;
+const MAX_ANNOTATIONS = 50;
+
 /** @param {number} v @param {number} lo @param {number} hi */
 function clampNum(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+/** Coerce an audience to the SAFE default: a marker is DM-only unless explicitly
+ *  marked player-visible (fail-closed — a stray value never leaks to players).
+ *  @param {unknown} v @returns {'dm'|'player'} */
+function coerceAudience(v) { return v === 'player' ? 'player' : 'dm'; }
 
 /** Round to a stable integer (persisted deltas are whole view-units).
  * @param {number} v */
@@ -127,6 +151,33 @@ export function readLayoutLawVersion(edits) {
 }
 
 /**
+ * The DM annotation markers, validated + canonicalized: each carries a whole-unit
+ * in-bounds (x, y), a bounded non-empty label, and a fail-closed audience ('dm'
+ * unless explicitly 'player'). Malformed / label-less entries are dropped; the list
+ * is capped and sorted for a stable stringify (byte-stability, the dormancy law).
+ * Pure — never writes.
+ * @param {MapEdits | null | undefined} edits
+ * @returns {MapAnnotation[]}
+ */
+export function readAnnotations(edits) {
+  const raw = edits && Array.isArray(edits.annotations) ? edits.annotations : [];
+  /** @type {MapAnnotation[]} */
+  const out = [];
+  for (const a of raw) {
+    if (!a || typeof a !== 'object') continue;
+    const label = typeof a.label === 'string' ? a.label.trim().slice(0, ANNOTATION_LABEL_MAX) : '';
+    if (!label) continue;
+    if (!Number.isFinite(a.x) || !Number.isFinite(a.y)) continue;
+    const x = clampNum(roundInt(Number(a.x)), 0, VIEW_MAX);
+    const y = clampNum(roundInt(Number(a.y)), 0, VIEW_MAX);
+    out.push({ x, y, label, audience: coerceAudience(a.audience) });
+  }
+  // Canonical order: y, then x, then label (deterministic — no localeCompare).
+  out.sort((p, q) => (p.y - q.y) || (p.x - q.x) || (p.label < q.label ? -1 : p.label > q.label ? 1 : 0));
+  return out.slice(0, MAX_ANNOTATIONS);
+}
+
+/**
  * Canonicalize a container to its minimal byte-stable form, or `null` when it
  * carries no real edit. Keeps `layoutVariant` only when > 0; keeps `pins` only
  * when non-empty (each a whole-unit, in-bounds, non-zero nudge, sorted by anchor
@@ -176,6 +227,11 @@ export function normalizeMapEdits(edits) {
   const version = readLayoutLawVersion(edits);
   if (version !== DEFAULT_LAYOUT_LAW_VERSION) out.layoutLawVersion = version;
 
+  // annotations: kept ONLY when non-empty (absent ⇒ byte-identical dormancy — a map
+  // with no DM markers stringifies exactly like no-edit). Validated + sorted above.
+  const annotations = readAnnotations(edits);
+  if (annotations.length > 0) out.annotations = annotations;
+
   return Object.keys(out).length > 0 ? out : null;
 }
 
@@ -201,6 +257,33 @@ export function withPinNudge(edits, anchor, ddx, ddy) {
   const nextPins = pins.filter((p) => p.anchor !== key);
   nextPins.push({ anchor: key, dx, dy });
   return normalizeMapEdits({ ...base, pins: nextPins });
+}
+
+/** ADD a DM annotation marker at (x, y) with a label + audience. Returns a NEW
+ * normalized container. A label-less / out-of-bounds marker is dropped by normalize.
+ * The default audience is DM-only (fail-closed); pass 'player' for a player-visible
+ * marker. Pure — never mutates `edits`.
+ * @param {MapEdits | null | undefined} edits
+ * @param {{ x: number, y: number, label: string, audience?: 'dm'|'player' }} annotation
+ * @returns {MapEdits | null} */
+export function withAnnotation(edits, annotation) {
+  const base = normalizeMapEdits(edits) || {};
+  const list = Array.isArray(base.annotations) ? base.annotations.slice() : [];
+  const a = annotation && typeof annotation === 'object' ? annotation : { x: 0, y: 0, label: '' };
+  list.push({ x: Number(a.x), y: Number(a.y), label: String(a.label || ''), audience: coerceAudience(a.audience) });
+  return normalizeMapEdits({ ...base, annotations: list });
+}
+
+/** REMOVE the annotation at `index` (into the canonical/sorted list readAnnotations
+ * returns). Out-of-range ⇒ unchanged. Pure.
+ * @param {MapEdits | null | undefined} edits @param {number} index
+ * @returns {MapEdits | null} */
+export function withoutAnnotationAt(edits, index) {
+  const base = normalizeMapEdits(edits) || {};
+  const list = Array.isArray(base.annotations) ? base.annotations.slice() : [];
+  if (!Number.isInteger(index) || index < 0 || index >= list.length) return normalizeMapEdits(base);
+  list.splice(index, 1);
+  return normalizeMapEdits({ ...base, annotations: list });
 }
 
 /** Set the layoutVariant salt (a reroll). Non-negative integer; 0 clears it.

@@ -20,6 +20,7 @@ import { describe, expect, it } from 'vitest';
 import {
   MAP_EDITS_SCHEMA_KEYS, readMapEdits, readLegendPrefs, readLayoutVariant, readStyleLens,
   normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
+  readAnnotations, withAnnotation, withoutAnnotationAt,
 } from '../../src/domain/townMap/mapEdits.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
@@ -35,10 +36,12 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
     expect(offenders).toEqual([]);
   });
 
-  it('the schema is exactly {layoutVariant, pins, legendPrefs, styleLens, layoutLawVersion} + pin/legend sub-keys', () => {
+  it('the schema is exactly the container keys + pin/legend/annotation sub-keys', () => {
     // A guard against a future key sneaking in without the denylist re-check above.
+    // SM-5 honestly EXTENDS this pin with the annotation keys (annotations/x/y/label/
+    // audience) — every one re-checked ∉ PRIVATE_KEY_RE by the test above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'dx', 'dy', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens'],
+      ['anchor', 'annotations', 'audience', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
     );
   });
 });
@@ -154,6 +157,52 @@ describe('mapEdits — styleLens (MAP STYLES; cosmetic, dormancy-lawful)', () =>
     expect(e.layoutVariant).toBe(2);
     expect(e.pins).toEqual([{ anchor: 'a', dx: 1, dy: 1 }]);
     expect(e.styleLens).toBe('darkFantasy');
+  });
+});
+
+describe('mapEdits — DM annotations (SM-5; cosmetic, denylist-safe, dormancy-lawful)', () => {
+  it('withAnnotation adds a marker; readAnnotations validates + defaults audience to dm', () => {
+    const e = withAnnotation(null, { x: 300, y: 400, label: 'Ambush point' });
+    expect(readAnnotations(e)).toEqual([{ x: 300, y: 400, label: 'Ambush point', audience: 'dm' }]);
+  });
+
+  it('audience is fail-closed: only an explicit "player" is player-visible', () => {
+    const dm = withAnnotation(null, { x: 1, y: 1, label: 'secret door', audience: 'garbage' });
+    expect(readAnnotations(dm)[0].audience).toBe('dm');
+    const pl = withAnnotation(null, { x: 1, y: 1, label: 'the inn', audience: 'player' });
+    expect(readAnnotations(pl)[0].audience).toBe('player');
+  });
+
+  it('clamps coordinates to 0..1000, rounds to whole units, bounds the label, drops label-less', () => {
+    const e = withAnnotation(null, { x: 99999, y: -50.6, label: '  x'.padEnd(200, 'y'), audience: 'player' });
+    const a = readAnnotations(e)[0];
+    expect(a.x).toBe(1000);
+    expect(a.y).toBe(0);
+    expect(a.label.length).toBe(80);
+    // a label-less marker never persists
+    expect(withAnnotation(null, { x: 5, y: 5, label: '   ' })).toBeNull();
+  });
+
+  it('absent / empty ⇒ null container (dormancy: byte-identical to no-edit)', () => {
+    expect(normalizeMapEdits({ annotations: [] })).toBeNull();
+    expect(normalizeMapEdits({ annotations: [{ x: 1, y: 1 }] })).toBeNull(); // label-less dropped ⇒ empty ⇒ null
+    expect(readAnnotations(null)).toEqual([]);
+  });
+
+  it('withoutAnnotationAt removes by canonical index; out-of-range is a no-op', () => {
+    let e = withAnnotation(null, { x: 200, y: 100, label: 'B' });
+    e = withAnnotation(e, { x: 100, y: 100, label: 'A' }); // sorts before B (lower x at same y)
+    expect(readAnnotations(e).map((a) => a.label)).toEqual(['A', 'B']);
+    e = withoutAnnotationAt(e, 0); // removes A
+    expect(readAnnotations(e).map((a) => a.label)).toEqual(['B']);
+    expect(withoutAnnotationAt(e, 9)).toEqual(e); // out of range ⇒ unchanged
+  });
+
+  it('annotations ride alongside other edits without disturbing them', () => {
+    const e = withAnnotation({ layoutVariant: 2, styleLens: 'vtt' }, { x: 10, y: 20, label: 'here' });
+    expect(e.layoutVariant).toBe(2);
+    expect(e.styleLens).toBe('vtt');
+    expect(e.annotations).toHaveLength(1);
   });
 });
 

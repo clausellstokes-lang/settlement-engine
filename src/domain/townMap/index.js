@@ -41,6 +41,7 @@ export {
   readLayoutVariant,
   readStyleLens,
   readLayoutLawVersion,
+  readAnnotations,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
@@ -48,6 +49,8 @@ export {
   withLegendPref,
   withStyleLens,
   withLayoutLawVersion,
+  withAnnotation,
+  withoutAnnotationAt,
   newSettlementMapEdits,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
@@ -60,6 +63,7 @@ export {
   drawListToSvg,
   buildTownMapSvg,
   hasDrawableMap,
+  annotationDrawOps,
 } from './townMapDraw.js';
 // MAP STYLES — the bounded style layer (the four named lenses + the wall). A style
 // is data; the draw projection resolves it, the viewer reads it. Lazy (src/design,

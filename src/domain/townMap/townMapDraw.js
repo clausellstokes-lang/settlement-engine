@@ -266,6 +266,41 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
   return ops;
 }
 
+/**
+ * SM-5 (5) — draw ops for DM ANNOTATION MARKERS, filtered by export AUDIENCE (the
+ * WYSIWYG visibility split): a 'player' handout omits DM-only markers; 'dm' (the
+ * owner's own reference export) shows all, with player-visible markers filled solid
+ * and DM-only ones drawn hollow. Shapes only — the draw vocabulary has no text op, so
+ * a marker exports as a pin GLYPH (labels are a viewer-only affordance until a text op
+ * lands — recorded, not smuggled). DORMANT by construction: [] / no-match ⇒ [] ops ⇒
+ * the export is byte-identical to no-annotations (the golden is never perturbed
+ * because it drives buildTownMapDrawList, which this never touches).
+ * @param {Array<{ x:number, y:number, label?:string, audience?:'dm'|'player' }>|null|undefined} annotations
+ * @param {'dm'|'player'} [audience]
+ * @param {string | object} [styleArg]
+ * @returns {DrawOp[]}
+ */
+export function annotationDrawOps(annotations, audience = 'dm', styleArg = DEFAULT_STYLE_ID) {
+  const list = Array.isArray(annotations) ? annotations : [];
+  const style = resolveTownMapStyle(styleArg);
+  const accent = style.palette.anchor;
+  const bg = style.background;
+  /** @type {DrawOp[]} */
+  const ops = [];
+  for (const a of list) {
+    if (!a || typeof a !== 'object') continue;
+    // a 'player' handout shows ONLY player-visible markers (fail-closed on the split).
+    if (audience === 'player' && a.audience !== 'player') continue;
+    const x = Number(a.x);
+    const y = Number(a.y);
+    if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+    const dm = a.audience !== 'player';
+    ops.push({ t: 'circle', cx: x, cy: y, r: 7, fill: dm ? bg : accent, stroke: accent, strokeWidth: 2 });
+    ops.push({ t: 'circle', cx: x, cy: y, r: 2.5, fill: accent });
+  }
+  return ops;
+}
+
 /** XML/SVG-attribute-safe number: strip a `-0`, keep integers/finite decimals.
  * @param {number} n */
 function num(n) {

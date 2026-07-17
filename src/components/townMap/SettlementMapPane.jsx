@@ -56,7 +56,10 @@ import { buildEdgeAnnotations } from './edgeAnnotations.js';
 import { districtColor } from './palette.js';
 import SettlementMapNotes from './SettlementMapNotes.jsx';
 import SettlementMapEdgeLabels from './SettlementMapEdgeLabels.jsx';
+import SettlementMapAnnotations from './SettlementMapAnnotations.jsx';
+import AnnotationComposer from './AnnotationComposer.jsx';
 import { useMapCamera } from './useMapCamera.js';
+import { useMapAnnotations } from './useMapAnnotations.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
@@ -197,6 +200,12 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   const transformRef = useRef({ tx: 0, ty: 0, scale: 1, width: 0, height: 0 });
   const fittedRef = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
+
+  // THE DM PIN/ANNOTATION LAYER (SM-5) — annotate-mode, the click-to-place composer,
+  // and the persisted markers (mapEdits.annotations). Editing rides the SAME `editing`
+  // gate as every cosmetic edit; the final free/premium split is one predicate away
+  // (owner-pending). Markers ride the blob and show for every viewer of the owner map.
+  const ann = useMapAnnotations({ mapEdits, editing, commitEdits, wrapperRef, transformRef });
 
   // Interaction state machine: displayed card = pinned ?? hovered.
   // Each entry: { kind:'building'|'district'|'hazard'|'condition', payload, anchor:{x,y} }.
@@ -392,8 +401,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           data-town-bg
           x={0} y={0} width={size.width || 1} height={size.height || 1}
           fill="transparent"
-          onClick={clearPin}
-          style={{ pointerEvents: 'all' }}
+          onClick={(e) => { if (ann.beginCompose(e)) return; clearPin(); }}
+          style={{ pointerEvents: 'all', cursor: ann.annotateMode ? 'crosshair' : undefined }}
         />
         <g ref={gRef}>
           {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
@@ -601,8 +610,26 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           {/* ── EDGE ANNOTATIONS (SM-5) — the map's exits labelled to named
               neighbours (drawn last so labels read over the linework). ──────── */}
           <SettlementMapEdgeLabels annotations={edgeAnnotations} ink={C.ink} bg={C.bg} />
+
+          {/* ── DM PIN/ANNOTATION LAYER (SM-5) — the owner's persisted markers;
+              DM-only vs player-visible distinguished visually. ─────────────── */}
+          <SettlementMapAnnotations
+            annotations={ann.annotations}
+            editing={ann.annotateMode}
+            onRemove={ann.removeAnnotation}
+            ink={C.ink} bg={C.bg} accent={C.anchorFill}
+          />
         </g>
       </svg>
+
+      {/* ── DM marker placement popover (edit + annotate mode only). Keyed on the
+          placement point so each new placement remounts with fresh fields. ──── */}
+      <AnnotationComposer
+        key={ann.composing ? `${ann.composing.x}:${ann.composing.y}:${ann.composing.screenX}` : 'idle'}
+        composing={ann.composing}
+        onAdd={ann.addAnnotation}
+        onCancel={ann.cancelCompose}
+      />
 
       {/* ── THE PANORAMA PROJECTION (#38) — a static oblique overlay shown in
           'panorama' view mode. Self-contained 0..1000 vector layer over the plan
@@ -650,6 +677,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         onToggleLabels={doToggleLabels}
         onToggleLegend={doToggleLegend}
         onReset={doReset}
+        annotating={ann.annotateMode}
+        onToggleAnnotate={ann.toggleAnnotate}
       />
 
       {/* ── MAP EXPORTS — the per-settlement export affordance (bottom-right).
