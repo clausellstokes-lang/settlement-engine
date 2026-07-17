@@ -972,6 +972,11 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ REALM EXPORT LAYER CHOICE (owner, 2026-07-17; relayed in-flight):** realm map exports
+offer WITH-SETTLEMENTS vs TERRAIN-ONLY (the placements layer is an inclusion flag — it
+already composites separately); pin: same realm, same settings, the two variants differ
+ONLY by the placements layer. Named use-cases: player handouts (unexplored world) vs the
+DM's annotated reference.
 **⬛ FOUNDRY EXPORT UPGRADED (owner, 2026-07-17; relayed in-flight to map-exports):** beyond
 the token raster — a UNIVERSAL VTT scene export (.dd2vtt-class interchange): image + grid
 config + LINE-OF-SIGHT WALLS derived from the draw-list's real geometry (footprints/walls →
