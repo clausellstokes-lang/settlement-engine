@@ -1098,6 +1098,24 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE 100% AUDIT + THE PANELS LANE (2026-07-17, triggered by the owner's "its going
+to be 100% by the end of this correct?"):** the completeness audit found ONE unslotted
+launch-required item — the AI write-stage PANELS (S4/S5/S6 + accept→mint interfaces;
+pure halves built+pinned, interfaces seamed with no build slot; Ruling #4 launch-whole
+requires them). CLOSED: claude/ai-panels DISPATCHED off eb958f4b (fence-disjoint from
+both running lanes: AI components only) — custom-content labels flow · style-overhaul
+live-preview accept/decline · construction config-draft + comparator-deviations + delta
+revise · accept→mint surfaced w/ receipts; all lazy, kill-switch-aware, early-access
+labeled, S1 money moments. Task #18; the push + composite wait for it (it is part of
+"everything built"). THE 100% DEFINITION recorded for honesty: 100% = the LAUNCH-WHOLE
+scope. Deliberately OUTSIDE it (recorded, unbuilt-by-design): fog's hosted realtime v2 ·
+S4+ knobs/packs (gated on live acceptance metrics, post-launch by design) · seat-transfer
+mechanism (concierge, month 12) · gallery comments · radar-driven future lenses · deeper
+provenance kernel threading · CONTENT-VT-2 view-time stock. HUMAN-GATED (cannot be 100%
+without the owner): the taste vetoes (v2 maps · prose sample · atlas identity) · the
+entitlement-ladder ruling · counsel (drafts not-in-force) · support email · merge button
++ db push. Content-depth deferrals (institution descs, NPC pools, history-event wiring)
+ride the taste approvals into a post-taste content wave before the regen.
 **⬛ FOLD: DOOR 3 — THE KEYED SCALE (2026-07-17) → w7-prep @ eb958f4b** (merge of
 claude/interiors tip a4bc218a off 66eda8e8; spot-checked: fence HELD — zero townMap
 edits, all new files). Seeded semantic interiors: `${_seed}::interior:v1:<id>` fork,
