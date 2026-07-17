@@ -1120,6 +1120,22 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ S7 RE-SLOTTED PRE-ROUND-3 + DISPATCHED (2026-07-17, owner: "I want it built now for
+the resurvey to check for any bugs" — THE MACHINERY-NOW/VOCABULARY-GROWS COMPROMISE):**
+the tuning-window slot held S7 only because StopConditions wanted the knob vocabulary;
+the compromise splits them — S7's MACHINERY builds NOW (typed StopCondition evaluator
+behind a schema wall referencing only REGISTERED signals · acceleration ops as pressure
+nudges through existing dial/op vocabulary, never state-jumps · standing campaign
+instructions as compile-suffix injection, never engine state · the panel w/ kill-switch +
+early-access + money moments) while THE SIGNAL REGISTRY v1 seeds from the proven stable
+set (the 16 causal variables, 9 pressures, war/peace states, bands, ticks — golden-pinned
+for months) and grows ADDITIVE-ONLY: the tuning window mints knob entries into the SAME
+registry as DATA (the A3 empty-registry-rails + facet-law precedents; zero machinery
+rework by design). ROUND 3 now reviews real autonomy code — the owner's goal. Lane:
+claude/surveyor-s7 off a4343044, migrations 153+, fence-disjoint from BOTH live siblings
+(fog: townMap; doc wave: pages — S7's op-registry additions surface on the Compendium's
+generated page automatically). THREE LANES NOW LIVE; the composite waits for all; task
+#9 (tuning) keeps knob-minting + registry EXTENSION + counsel.
 **⬛ THE DOCUMENTATION WAVE DISPATCHED (2026-07-17, owner: "can you run this now?" —
 early dispatch owner-ordered, ahead of the fog fold):** ONE Opus lane, claude/doc-wave
 off a4343044, executing docs/briefs/W_DOCUMENTATION_WAVE.md as law + both banked research
