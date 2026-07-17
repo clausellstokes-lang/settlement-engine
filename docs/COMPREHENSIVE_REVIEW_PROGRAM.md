@@ -1098,6 +1098,23 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: THE PRICING PAGE OVERHAUL (2026-07-17, "do the same for the
+pricing page"; task #21 — THE DOCUMENTATION WAVE's third member, one lane w/ #19+#20):**
+assessment finding: the best-ENGINEERED page of the three (config-sourced law real,
+one-primary discipline, honest states, live founder meter w/ safe fallback) with a
+two-generation-old product shape. GAINS: (1) **THE SURVEYOR TIER RENDERED** — the $19.99
+AI tier has NO purchase surface today (the launch-whole ruling makes this a launch
+requirement); BYOK named on the card; prices stay owner-ruled config. (2) **THE
+TASK-PRICE MENU** — "users buy outcomes, not tokens" enforced: per-task credit costs
+rendered from operator config under the wave's drift contract; the stale
+one-settlement-prose credit gloss dies. (3) Export-bundle visibility row (vetoable
+revisit of the in-context-only judgment — the bundle is now dossier+maps+VTT per
+settlement; Cartographer includes it). (4) Feature lists + BOTH A/B variants rewritten
+to the finished product in mechanism terms; the tier cards render THE ENTITLEMENT-LADDER
+RULING when the owner makes it (current truth if still pending at build). (5) A "free
+forever" section — honesty as conversion. NO price changes ever from this lane. Same
+slot: post-folds, pre-ROUND-3; ROUND 3 audits. The three pages are ONE ARGUMENT
+(About=why trust → Compendium=proof → Pricing=convert) and build as one wave.
 **⬛ OWNER COMMISSION: THE COMPENDIUM OVERHAUL (2026-07-17, "do that as well"; task
 #20 — joins #19 as THE DOCUMENTATION WAVE, one lane, post-folds pre-ROUND-3):** the law
 library, generated-not-copied. THE REGISTRY-RENDER LAW (structural, the headline): every
