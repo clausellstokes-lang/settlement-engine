@@ -124,6 +124,10 @@ export const OPERATIONS = Object.freeze({
   // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (no
   // dedicated map undo action ⇒ undoToken:null).
   applyMapEdit: { opType:'applyMapEdit', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
+  // DOOR 2 — fog-of-war reveal edit (fogSessions sidecar: per-session district/street/
+  // building reveal). Mechanical: a durable blob write via the applyMapEdit persist idiom.
+  // Cosmetic-always (no canon lock); undo rides the blob's own time-travel (undoToken:null).
+  applyFogEdit: { opType:'applyFogEdit', klass:'mechanical', slice:'fogEditSlice', targetScope:'save', receiptRef:null, undoToken:null },
   syncActiveNeighbourFields: { opType:'syncActiveNeighbourFields', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:null },
   recordCanonFlavorEntry: { opType:'recordCanonFlavorEntry', klass:'mechanical', slice:'settlementSlice', targetScope:'save', receiptRef:null, undoToken:'undoLastEvent' },
   retryOutbox: { opType:'retryOutbox', klass:'mechanical', slice:'campaignSlice', targetScope:'campaign', receiptRef:null, undoToken:null },

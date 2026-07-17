@@ -47,9 +47,10 @@
 
 import {
   buildTownMapModel, readMapEdits, readStyleLens, buildTownMapSvg,
-  hasDrawableMap, coerceStyleId,
+  hasDrawableMap, coerceStyleId, viewerPalette,
   buildTownMapDrawList, drawListToSvg, annotationDrawOps, readAnnotations,
 } from '../domain/townMap/index.js';
+import { fogMaskFragment, injectFog } from '../domain/townMap/fogGeometry.js';
 import { renderTownMapTokenRaster } from './townMapThumb.js';
 import { slugify } from '../kernel/slugify.js';
 
@@ -108,8 +109,17 @@ export function exportLens(settlement, styleOverride) {
  * 'player' a handout omits DM-only ones). Composed by APPENDING annotation ops to the
  * draw list (buildTownMapDrawList is never touched, so its golden is never perturbed);
  * DORMANT — a map with no annotations produces []-extra ⇒ byte-identical to before.
+ *
+ * DOOR 2 — THE FOGGED HANDOUT (fog-of-war table layer): pass `opts.fogReveal` (a session's
+ * {districts,streets,buildings} reveal set) to overlay the fog MASK (unrevealed quarters
+ * hidden). The mask is INJECTED as a top `<g>` over the finished base SVG (fogGeometry:
+ * fogMaskFragment/injectFog) — the base draw list + annotation append are never touched, so
+ * the UNFOGGED export (`fogReveal` absent) returns BYTE-IDENTICAL to pre-fog (the WYSIWYG
+ * law extends to the mask; the unfogged handout stays pinned). Fog color tracks the lens ink.
  * @param {any} settlement
- * @param {{ style?: string, resolution?: number, audience?: 'dm'|'player' }} [opts]
+ * @param {{ style?: string, resolution?: number, audience?: 'dm'|'player',
+ *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
+ *   fogOpacity?: number }} [opts]
  * @returns {string | null}
  */
 export function townMapExportSvg(settlement, opts = {}) {
@@ -118,8 +128,14 @@ export function townMapExportSvg(settlement, opts = {}) {
   const style = exportLens(settlement, opts.style);
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
   const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);
-  if (markers.length === 0) return buildTownMapSvg(model, { style, width: size, height: size });
-  return drawListToSvg(buildTownMapDrawList(model, style).concat(markers), { style, width: size, height: size });
+  const base = markers.length === 0
+    ? buildTownMapSvg(model, { style, width: size, height: size })
+    : drawListToSvg(buildTownMapDrawList(model, style).concat(markers), { style, width: size, height: size });
+  // FOG HANDOUT (DOOR 2): overlay the mask ONLY when a reveal set is supplied; absent ⇒ the
+  // base is returned UNCHANGED (byte-identical to pre-fog — the unfogged-export pin).
+  if (!opts.fogReveal) return base;
+  const fragment = fogMaskFragment(model, opts.fogReveal, { color: viewerPalette(style).ink, opacity: opts.fogOpacity });
+  return injectFog(base, fragment);
 }
 
 /**
@@ -184,7 +200,10 @@ function browserRasterizeBlob(svg, size, mime, quality) {
 export async function renderTownMapExport(settlement, opts = {}) {
   const format = FORMATS[opts.format] ? opts.format : 'png';
   const fmt = FORMATS[format];
-  const svg = townMapExportSvg(settlement, { style: opts.style, resolution: opts.resolution, audience: opts.audience });
+  const svg = townMapExportSvg(settlement, {
+    style: opts.style, resolution: opts.resolution, audience: opts.audience,
+    fogReveal: opts.fogReveal, fogOpacity: opts.fogOpacity,
+  });
   if (svg == null) return null;
 
   if (!fmt.raster) {
@@ -285,7 +304,12 @@ export async function downloadTownMapExport(settlement, opts = {}) {
   const out = await renderTownMapExport(settlement, opts);
   if (!out) return null;
   const lens = exportLens(settlement, opts.style);
-  const filename = opts.filename || townMapExportFilename(settlement?.name, lens, out.ext, opts.date);
+  // A fogged player handout gets a '-handout' filename tag so it never overwrites the
+  // owner's own (DM/full) export sitting beside it in the downloads folder.
+  const base = opts.fogReveal
+    ? `${slug(settlement?.name, 'settlement')}-${slug(lens, 'parchment')}-handout-${ymd(opts.date)}.${out.ext}`
+    : townMapExportFilename(settlement?.name, lens, out.ext, opts.date);
+  const filename = opts.filename || base;
   downloadBlob(out.blob, filename);
   return out;
 }
