@@ -972,6 +972,19 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RULING #4 (2026-07-17: "I want all the ai capabilities at launch") — THE
+LAUNCH-WHOLE AMENDMENT (§2b @ c12b1a95 on w7-prep).** ALL Surveyor stages ship at launch.
+What survives: SAFETY (the schema wall — never the ladder — carries it; worst case stays a
+refused draft). What converts: the trust ladder becomes a MONITORING framework — every stage
+instrumented from day one, PER-STAGE KILL-SWITCHES at the entitlement layer, honest
+early-access labels on write stages until live metrics mature. PREREQUISITE-DRIVEN BUILD:
+S3 intent compiler + S4 custom content + S5/S6 construction (the instant-world composer =
+the compile target) build NOW alongside ROUND 3/soak (edge/display, engine-frozen-safe);
+S7 autonomy + tuning counsel + S4+ knobs/packs build in the post-soak tuning window (their
+prerequisites — the knob registry + the world-health library — are born there). Everything
+lands before THE VERY END = at launch. Tasks #33/#34/#35 boarded (~5 more waves; days at
+current velocity). ROUND 3 reviews the S3–S6 builds; the post-window builds get a targeted
+review before the regen.
 **✅ ToS DRAFTS FOLDED + CONTENT SURVEY BANKED (2026-07-17 ~03:30).** docs/legal/
 TERMS_OF_USE_DRAFT.md + PRIVACY_POLICY_DRAFT.md merged (headed DRAFT—NOT IN FORCE; live pages
 untouched by design; every claim source-mapped; the 4-question legal-consult list in-draft).
