@@ -972,6 +972,12 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ EXPORT PRICING RULED (owner, 2026-07-17, overrides the manager's free-images rec):**
+free tier pays the SAME $2.99 — the existing single-dossier entitlement UPGRADES into a
+per-settlement EXPORT BUNDLE: one purchase unlocks dossier PDF + VTT/Foundry raster + ALL
+map image formats for that settlement; premium = everything everywhere. Same lane, no new
+gate class, one pricing moment on every export affordance. Relayed to the in-flight
+map-exports implementer (fold-in ordered).
 **⬛ OWNER COMMISSION: MAP EXPORTS (2026-07-17, task #37, DISPATCHED).** Settlement + realm
 maps export in SVG (native draw-list) / PNG / JPEG / WebP (rasterizer idiom, selectable
 resolutions) / single-map PDF (the plate precedent) — EXPORTS HONOR THE CURRENT LENS incl.
