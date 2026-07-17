@@ -64,6 +64,7 @@ const VIEW_DESCRIPTIONS = {
   pricing:    'SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement simulation.',
   howto:      'How SettlementForge works, and how it compares to map tools and AI generators, for game masters building a living world.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
+  founders:   'The SettlementForge Founders: thirty lifetime seats, shown as a public lineage. Meet the people who backed the project first.',
   terms:      'The SettlementForge terms of service: your account, acceptable use, subscriptions, cancellation, and refunds.',
   privacy:    'The SettlementForge privacy policy: what we collect, how research telemetry is consent-gated and opt-out, and how to request deletion.',
   // /refunds is a back-compat alias that renders the Terms "Refunds and

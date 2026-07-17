@@ -57,6 +57,10 @@ export const ROUTES = Object.freeze([
   { view: 'admin',                 path: '/admin',                 title: 'Admin',                         guard: 'elevated' },
   { view: 'pricing',               path: '/pricing',               title: 'Pricing' },
   { view: 'gallery',               path: '/gallery',               title: 'Gallery',                       nav: { label: 'Gallery',    order: 60 } },
+  // The Founders page — the public seat lineage (30 lifetime seats). Public +
+  // indexable, footer-linked (no top-nav block), no guard. Lazy route; its lineage
+  // read is fail-closed (components/founders/FoundersPage.jsx).
+  { view: 'founders',              path: '/founders',              title: 'Founders' },
   // Legal / trust pages. Public + indexable (no nav block — they live in the
   // footer, not the top nav; no guard — anyone can read them). Content is
   // derived from the actual product behavior (see components/legal/*).

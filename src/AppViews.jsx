@@ -52,6 +52,9 @@ const ConfirmEmailPage  = lazy(() => import('./components/auth/ConfirmEmailPage.
 // there is no separate RefundsPage chunk.
 const TermsPage         = lazy(() => import('./components/legal/TermsPage.jsx'));
 const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'));
+// The public Founder seat-lineage page. Lazy — off the first-paint graph; its lineage
+// read (lib/founderLineage.js) is dynamically imported on mount and fails closed.
+const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
 
 export function Loading() {
   return (
@@ -91,6 +94,7 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
       {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : null)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} />}
+      {view === 'founders'    && <FoundersPage onNavigate={setView} />}
       {view === 'terms'       && <TermsPage />}
       {view === 'privacy'     && <PrivacyPage />}
       {/* /refunds is retired as a standalone page — its content is now the Terms

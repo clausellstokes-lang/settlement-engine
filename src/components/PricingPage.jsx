@@ -592,6 +592,14 @@ export default function PricingPage({ onNavigate }) {
         })()}
       </section>
 
+      {/* The Founder tier's proof surface: the public seat lineage. A quiet link so
+          a prospective Founder can see who is already in — the page is the proof. */}
+      <div style={{ textAlign: 'center', marginTop: `-${SP.md}px`, marginBottom: SECTION_GAP }}>
+        <Button variant="ghost" size="sm" onClick={() => onNavigate?.('founders')}>
+          Meet the Founders &rarr;
+        </Button>
+      </div>
+
       {/* ── Credit packs ────────────────────────────────────────────────── */}
       {/* P5 — the section is grouped by its parchment tint + the larger top gap
           (SECTION_GAP) alone, NOT by a border. The earlier 1px section border sat
