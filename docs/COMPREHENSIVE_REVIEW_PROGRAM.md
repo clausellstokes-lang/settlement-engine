@@ -1098,6 +1098,27 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER DESIGN REFINEMENT: SITE GENESIS — STAGE 0 (2026-07-17, in-session, folded
+into #38): "randomly generate a river or a mountain or a side of a mountain or sand dunes
+or a marsh or whatever makes sense from the combination of nearby resources, trade route
+and terrain. only then apply the principles of urban design... appropriately to take
+advantage OR NOT of the surroundings."** The pipeline gains its true first stage: (0)
+**THE SITE** — the physical canvas itself is GENERATED from the dossier's regional
+context: realm-map terrain/biome at the settlement's location (REALM-COHERENCE LAW: the
+town site is a zoom-in of its realm position and may not contradict it), nearby resources
+implying landforms (mines⇒slopes/rock faces, fisheries⇒shore/river, peat⇒marsh,
+salt⇒flats/dunes), trade routes implying physical carriers (a river trade lane means the
+river physically enters/exits along its bearings; overland routes shape passes/gaps).
+SUBSTANCE-FROM-DOSSIER / EXPRESSION-FROM-SEED extends to the site: WHETHER the river
+exists = substance; its meander, which mountain flank, the dune extent = seeded
+expression. Standalone settlements (no realm context) derive the site from resources +
+trade alone, neutral default. **THE "OR NOT" CLAUSE (owner nuance, made law):** the
+response mode to the site — EXPLOIT / ENDURE / FORTIFY — derives from the settlement's
+character and history (a fortress-origin town takes the defensible flank over the
+trade-optimal bank; the marsh town endures on stilts); deliberate suboptimality where the
+fiction justifies it. TEMPORAL ARC CONFIRMED AS-BUILT: growth-era change rides the urban
+fabric layer at stone's pace (owner: "as we currently designed"); the site itself is
+immutable short of catastrophe (fabric's rebirth path). RELAYED to the v2 lane (relay #4).
 **⬛ OWNER DESIGN REFINEMENT: ECONOMY-FIRST GENESIS (2026-07-17, in-session, folded into
 #38): "depending on the resources and terrain and everything else, procedurally and
 randomly generate that economic shape first onto the settlement map and only then apply
