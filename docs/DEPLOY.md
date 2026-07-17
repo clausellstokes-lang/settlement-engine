@@ -121,7 +121,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `136_world_snapshot_deny_census_lift.sql`** (this filename is kept
+**Current migration head: `140_ai_analyst_credit_costs.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 
@@ -169,7 +169,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 16 functions total — deploy all of them on a first cutover.
+There are 17 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -209,11 +209,12 @@ npx supabase functions deploy verify-checkout-session                 # account-
 npx supabase functions deploy create-customer-portal                  # "Manage subscription" billing portal
 npx supabase functions deploy generate-narrative
 npx supabase functions deploy generate-chronicle
+npx supabase functions deploy ai-analyst                              # Surveyor S1 analyst (requires ANTHROPIC_API_KEY + BYOK secret)
 npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **16 deployable functions** (every `supabase/functions/*` dir except
+There are **17 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
 and seven `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
@@ -224,7 +225,9 @@ Set the required env vars in the Supabase dashboard → Project →
 Functions → Secrets:
 
 ```
-ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle
+ANTHROPIC_API_KEY            # for generate-narrative + generate-chronicle + ai-analyst
+# BYOK (ai-analyst): also set the DB secret `app.settings.byok_secret` (pgcrypto passphrase
+# for surveyor_byok_keys); BYOK is fail-closed/unavailable until it is configured.
 RESEND_API_KEY               # for send-email (Resend provider key)
 RESEND_FROM_EMAIL            # for send-email (verified sender address)
 STRIPE_SECRET_KEY            # for webhook, checkout, and dossier verification

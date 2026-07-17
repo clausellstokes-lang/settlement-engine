@@ -73,6 +73,15 @@ const FAST_AI_COSTS = Object.freeze({
   progression: 4,
 });
 
+// ── Surveyor (S1) task-priced managed-credit costs ─────────────────────────
+// The AI control surface's task prices (design §4). PROVISIONAL — final Surveyor
+// pricing is an owner-queued decision. Kept in lockstep with the server-side
+// spend_credits CASE (migration 140) by the pricing contract test.
+const SURVEYOR_AI_COSTS = Object.freeze({
+  analysis: 3,   // one analyst answer
+  brief:    4,   // one AI-prose brief layer
+});
+
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
 
 export const AI_MODEL_OPTIONS = Object.freeze([
@@ -272,6 +281,11 @@ export function getAiCost(feature) {
   return getActiveAiCosts()[feature] ?? 0;
 }
 
+/** Cost in credits for a Surveyor task-priced feature ('analysis' | 'brief'). */
+export function getSurveyorAiCost(feature) {
+  return SURVEYOR_AI_COSTS[feature] ?? 0;
+}
+
 /** Cost in credits for a feature under the selected AI model preference. */
 export function getAiCostForModel(feature, modelPreference) {
   const schedule = isFastModelPreference(modelPreference) ? FAST_AI_COSTS : getActiveAiCosts();
@@ -306,5 +320,5 @@ export function findPackByKey(key) {
 // the admin panel show "all SKUs ever sold" without reaching through
 // flags.
 export const _internal = Object.freeze({
-  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, AI_MODEL_ALIASES,
+  LEGACY_PACKS, NEW_PACKS, LEGACY_AI_COSTS, NEW_AI_COSTS, FAST_AI_COSTS, SURVEYOR_AI_COSTS, AI_MODEL_ALIASES,
 });

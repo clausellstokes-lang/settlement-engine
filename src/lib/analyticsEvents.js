@@ -192,6 +192,12 @@ export const EVENTS = Object.freeze({
   // ── v2: research / consent ─────────────────────────────────────────────
   SETTLEMENT_FINGERPRINT_CAPTURED:'settlement_fingerprint_captured',  // research
   CONSENT_UPDATED:                'consent_updated',
+
+  // ── Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential) ──
+  // Props (never free text): { audience, coverageBand, refused, sliceCount, byok }.
+  AI_ANALYST_ANSWER:              'ai_analyst_answer',
+  // Answer acceptance signal. Props: { accepted } (thumbs up/down on the answer).
+  AI_ANALYST_FEEDBACK:            'ai_analyst_feedback',
 });
 
 /**

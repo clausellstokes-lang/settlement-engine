@@ -27,6 +27,7 @@ import { resolveProviderKey } from './byok.ts';
 import {
   buildRetrievalBundle, validateClaims, citationCoverage, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
+  registerProviderAdapter, routeWorldDataAdapter,
 } from './analystCore.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
@@ -105,6 +106,20 @@ async function callAnthropic(
   });
 }
 
+// §3e THE FORGETTING LAW (STRUCTURE): the Anthropic adapter declares its retention posture
+// as a REQUIRED property. RE-VERIFY at deploy — Anthropic's commercial terms + DPA — never
+// asserted from memory. Anthropic API today: inputs/outputs are NOT used to train models by
+// default, and retention is a bounded abuse-monitoring window (zero-data-retention is
+// available to eligible orgs). Declared 'bounded' = the conservative floor.
+// TODO-verify: confirm the current retention window + ZDR eligibility before deploy; upgrade
+// to 'zero' ONLY when the paper says so. (No prompt-side "delete after use" claim — §3e bans
+// that as theater; the guarantee is stateless requests + this contract, not a prompt line.)
+const anthropicAdapter = registerProviderAdapter({
+  id: 'anthropic',
+  retentionClass: 'bounded',
+  call: ({ model, apiKey, prompt, signal, fetchImpl }) => callAnthropic(apiKey, model, prompt, fetchImpl ?? fetch, signal),
+});
+
 export async function handleAiAnalyst(
   req: Request,
   deps: {
@@ -142,7 +157,8 @@ export async function handleAiAnalyst(
     // on !== true. (Provisioning of entitlements is owner-gated / concierge-v1.)
     const { data: entitled, error: entErr } = await supabaseUser.rpc('has_surveyor_entitlement');
     if (entErr) logError('ai-analyst', user.id, `has_surveyor_entitlement errored: ${entErr.message}`, { stage: 'entitlement' });
-    if (entitled !== true) return json({ error: 'The analyst requires a Surveyor plan.' }, 403, cors);
+    // §3d GRACEFUL REFUSAL: name the boundary + the nearest door the user CAN use now.
+    if (entitled !== true) return json({ error: 'The analyst is part of the Surveyor plan. You can still open the World Pulse and map panels — they read the same standings, factions, and rumors.' }, 403, cors);
 
     // Body: the client-built retrieval bundle. Cap + parse BEFORE consuming any quota.
     const raw = await req.text().catch(() => '');
@@ -202,7 +218,9 @@ export async function handleAiAnalyst(
         const timer = setTimeout(() => ac.abort(), ANALYST_TIMEOUT_MS);
         let resp: Response;
         try {
-          resp = await callAnthropic(providerKey.key, ANALYST_MODEL, capturedPrompt, providerFetch, ac.signal);
+          // §3e: world data routes only to a non-training-class adapter (throws otherwise).
+          const adapter = routeWorldDataAdapter(anthropicAdapter);
+          resp = await adapter.call({ model: ANALYST_MODEL, apiKey: providerKey.key, prompt: capturedPrompt, signal: ac.signal, fetchImpl: providerFetch });
         } catch (fetchErr) {
           if (fetchErr instanceof Error && fetchErr.name === 'AbortError') throw new Error(`Anthropic request timed out after ${ANALYST_TIMEOUT_MS}ms`);
           throw fetchErr;

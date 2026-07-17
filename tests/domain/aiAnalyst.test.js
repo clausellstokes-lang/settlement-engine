@@ -18,9 +18,12 @@
 import { describe, it, expect } from 'vitest';
 import { selectSlices, resolveAudience, isPlayerFramed } from '../../src/domain/ai/stateSlicers.js';
 import { isPlayerSafeSource } from '../../src/domain/briefs/citations.js';
+import { readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 import {
   buildRetrievalBundle, validateClaims, citationCoverage, unsourceableClaims, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, fnv1a32, bundleIsPlayerSafe, ENGINE_DOES_NOT_RECORD,
+  citationLabel, registerProviderAdapter, routeWorldDataAdapter,
 } from '../../supabase/functions/ai-analyst/analystCore.ts';
 
 // ── fixtures (a lit world with treaties/blocs/credibility + a private settlement) ──
@@ -203,5 +206,74 @@ describe('analyst — aiOperationLog + hashing (PIN 3)', () => {
     const recJson = JSON.stringify(rec);
     expect(recJson).not.toContain('Thornwall dominates');
     expect(recJson).not.toContain('what factions dominate');
+  });
+});
+
+// ── §3c/§3d folded amendments: extraction defense + graceful refusal ─────────
+
+describe('analyst — extraction defense + graceful refusal (§3c/§3d)', () => {
+  const world = litWorld();
+  const { slices } = selectSlices({ question: 'what factions dominate?', worldState: world, settlements: SETTLEMENTS, audience: 'dm' });
+  const bundle = buildRetrievalBundle(slices);
+
+  it('NAMING HYGIENE (§3c): a citation renders as the PUBLIC slice title, never the internal id', () => {
+    const someSlice = bundle.slices[0];
+    expect(citationLabel(someSlice.id, bundle.slices)).toBe(someSlice.title);
+    expect(citationLabel(someSlice.id, bundle.slices)).not.toContain('read:'); // no source tag
+    expect(citationLabel(someSlice.id, bundle.slices)).not.toContain(':');     // no id form
+    expect(citationLabel('unknown:id', bundle.slices)).toBe('the campaign record');
+    expect(citationLabel(null, bundle.slices)).toBe(ENGINE_DOES_NOT_RECORD);
+  });
+
+  it('DISCLOSURE HYGIENE (§3c) + READ-ONLY GRACEFUL REFUSAL (§3d) are in the prompt', () => {
+    const prompt = buildAnalystPrompt('who rules?', bundle, 'dm');
+    expect(/do not discuss your (own )?instructions|decline/i.test(prompt)).toBe(true);
+    expect(/read-only/i.test(prompt)).toBe(true);
+    expect(/later.*stage|later Surveyor stage/i.test(prompt)).toBe(true);
+  });
+
+  it('NOTHING-SECRET-IN-PACKET (§3c): the prompt preamble carries no engine internals', () => {
+    // The fenced slices are DERIVED read-models (fine). The HOUSE preamble must not name
+    // engine implementation — no kernels, movers, formulas, tuned constants, or source files.
+    const preamble = buildAnalystPrompt('x', buildRetrievalBundle([]), 'dm');
+    expect(/\bkernel\b|\bmover\b|tuned constant|\bformula\b|\.js\b|\bsrc\//i.test(preamble)).toBe(false);
+  });
+});
+
+// ── §3e THE FORGETTING LAW (provider adapter retention contract) ──────────────
+
+describe('analyst — provider retention contract (§3e)', () => {
+  const noop = async () => new Response('{}');
+
+  it('adapter registration REJECTS a missing/invalid retentionClass (walker-pin)', () => {
+    expect(() => registerProviderAdapter({ id: 'x', call: noop })).toThrow(/retentionClass/);
+    expect(() => registerProviderAdapter({ id: 'x', retentionClass: 'forever', call: noop })).toThrow(/retentionClass/);
+    expect(() => registerProviderAdapter({ id: '', retentionClass: 'zero', call: noop })).toThrow(/id/);
+    expect(() => registerProviderAdapter({ id: 'x', retentionClass: 'zero' })).toThrow(/call/);
+  });
+
+  it('a valid retentionClass registers a frozen adapter', () => {
+    for (const rc of ['zero', 'bounded', 'training']) {
+      const a = registerProviderAdapter({ id: `p_${rc}`, retentionClass: rc, call: noop });
+      expect(a.retentionClass).toBe(rc);
+      expect(Object.isFrozen(a)).toBe(true);
+    }
+  });
+
+  it('world data NEVER routes to a training-class adapter (structurally banned)', () => {
+    const zero = registerProviderAdapter({ id: 'z', retentionClass: 'zero', call: noop });
+    const bounded = registerProviderAdapter({ id: 'b', retentionClass: 'bounded', call: noop });
+    const training = registerProviderAdapter({ id: 't', retentionClass: 'training', call: noop });
+    expect(routeWorldDataAdapter(zero)).toBe(zero);
+    expect(routeWorldDataAdapter(bounded)).toBe(bounded);
+    expect(() => routeWorldDataAdapter(training)).toThrow(/training-class/);
+  });
+
+  it('the edge Anthropic adapter is declared with a non-training retention class', () => {
+    const idx = readFileSync(resolve(process.cwd(), 'supabase/functions/ai-analyst/index.ts'), 'utf8');
+    const reg = idx.slice(idx.indexOf('registerProviderAdapter({'), idx.indexOf('registerProviderAdapter({') + 300);
+    expect(reg).toContain("id: 'anthropic'");
+    expect(/retentionClass:\s*'(zero|bounded)'/.test(reg)).toBe(true);
+    expect(reg).not.toContain("retentionClass: 'training'");
   });
 });

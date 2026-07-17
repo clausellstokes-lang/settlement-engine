@@ -31,7 +31,8 @@
 --   Bodies are plpgsql (late-bound) so this migration DEFINES cleanly even where pgcrypto
 --   is absent (pglite/migrationSequenceAll) — the crypto resolves only at CALL time.
 --
--- Depends on: auth.users. Re-runnable. @rollback: drop the two tables + four functions.
+-- Depends on: auth.users. Re-runnable.
+-- @rollback: drop function public.surveyor_byok_get(uuid, text); drop function public.surveyor_byok_clear(text); drop function public.surveyor_byok_set(text, text); drop function public._surveyor_byok_secret(); drop function public.has_surveyor_entitlement(); drop table public.surveyor_byok_keys; drop table public.surveyor_entitlements;
 -- ────────────────────────────────────────────────────────────────────────────
 
 -- pgcrypto is standard on Supabase; guard the create so a test env without it (pglite)

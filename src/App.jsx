@@ -66,7 +66,9 @@ const PricingMomentCard = lazy(() => import('./components/pricing/PricingMomentC
 // Global floating feedback affordance (files a support ticket, tagged with the
 // active generation-id spine). Always mounted, self-gating on `visible`, so lazy
 // keeps its code + icons off the entry's first-paint closure.
-const FeedbackWidget = lazy(() => import('./components/FeedbackWidget.jsx'));
+// The global floating-widget cluster (feedback widget + Surveyor S1 analyst panel),
+// lazy so both stay off first paint; each self-gates on `visible`.
+const FloatingAffordances = lazy(() => import('./components/FloatingAffordances.jsx'));
 
 // Auth + checkout chrome the floating feedback widget stays off (its own
 // contract): the sign-in door, recovery, and the single-dossier landing.
@@ -890,7 +892,7 @@ export default function App() {
           Off the auth/checkout chrome; self-contained (reads the store, owns its
           open/submit state) so the mount is a one-liner. */}
       <Suspense fallback={null}>
-        <FeedbackWidget visible={!AUTH_ROUTE_VIEWS.has(view)} />
+        <FloatingAffordances visible={!AUTH_ROUTE_VIEWS.has(view)} />
       </Suspense>
 
       {/* ── Checkout result notice ────────────────────────────────

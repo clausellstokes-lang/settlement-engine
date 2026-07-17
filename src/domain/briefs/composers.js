@@ -29,8 +29,13 @@ import { SOURCE, section, assembleBrief } from './citations.js';
 
 // ── shared helpers ───────────────────────────────────────────────────────────
 
-/** A `(id) => name` resolver built from a settlements list (full or {id,name}). */
+/**
+ * A `(id) => name` resolver built from a settlements list (full or {id,name}).
+ * @param {Array<{id?: unknown, name?: unknown, settlement?: {id?: unknown, name?: unknown}}>|null|undefined} settlements
+ * @returns {(id: unknown) => string}
+ */
 function nameResolver(settlements) {
+  /** @type {Map<string, string>} */
   const byId = new Map();
   for (const s of Array.isArray(settlements) ? settlements : []) {
     if (!s) continue;
@@ -38,9 +43,10 @@ function nameResolver(settlements) {
     const name = s.name ?? s.settlement?.name;
     if (id != null) byId.set(String(id), name != null ? String(name) : String(id));
   }
-  return (id) => byId.get(String(id)) || String(id);
+  return (/** @type {unknown} */ id) => byId.get(String(id)) || String(id);
 }
 
+/** @param {Record<string, unknown>|null|undefined} settlement @returns {string} */
 function settlementIdOf(settlement) {
   return settlement && settlement.id != null ? String(settlement.id) : '';
 }
@@ -75,13 +81,14 @@ export function activeWarPairs(worldState) {
  * The DM settlement brief: the table-night leverage read (NPCs / hooks / twists /
  * red flags), the local blocs + conspiracies, the credibility band, and the rumor
  * ledger WITH ground truth (so the DM sees the divergence).
- * @param {{ settlement: Record<string, unknown>, worldState?: Record<string, unknown>, tick?: number }} ctx
+ * @param {{ settlement?: Record<string, unknown>|null, worldState?: Record<string, unknown>|null, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
 export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}) {
   const sid = settlementIdOf(settlement);
   const table = tonightAtTheTable(settlement);
   const blocs = settlementBlocs({ worldState, settlementId: sid, includeCovert: true });
+  const blocArr = (blocs && Array.isArray(blocs.blocs)) ? blocs.blocs : [];
   const cred = settlementCredibility({ worldState, settlementId: sid, tick, includeGroundTruth: false });
   const rumors = settlementRumors({ worldState, settlementId: sid, includeGroundTruth: true });
 
@@ -90,8 +97,8 @@ export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}
     audience: 'dm',
     sections: [
       section('table', 'At the table', SOURCE.NPC_TABLE, table),
-      blocs && blocs.blocs?.length
-        ? section('blocs', 'Factions & conspiracies', SOURCE.POLITICS_COVERT, blocs.blocs)
+      blocArr.length
+        ? section('blocs', 'Factions & conspiracies', SOURCE.POLITICS_COVERT, blocArr)
         : null,
       cred ? section('credibility', 'Standing', SOURCE.CREDIBILITY, [cred]) : null,
       section('rumors', 'What they say (vs. what is)', SOURCE.RUMORS_TRUTH, rumors),
@@ -106,13 +113,14 @@ export function settlementBrief({ settlement, worldState = null, tick = 0 } = {}
  * from a player-safe read; the settlement section IS exactly toPublicSafe(settlement),
  * asserted structurally by the pin. Audience 'player' — assembleBrief fails closed on
  * any non-player-safe source.
- * @param {{ settlement: Record<string, unknown>, worldState?: Record<string, unknown>, tick?: number }} ctx
+ * @param {{ settlement?: Record<string, unknown>|null, worldState?: Record<string, unknown>|null, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
 export function playerSafeBrief({ settlement, worldState = null, tick = 0 } = {}) {
   const sid = settlementIdOf(settlement);
   const publicProjection = toPublicSafe(settlement, { full: false });
   const blocs = settlementBlocs({ worldState, settlementId: sid, includeCovert: false, includeGroundTruth: false });
+  const blocArr = (blocs && Array.isArray(blocs.blocs)) ? blocs.blocs : [];
   const cred = settlementCredibility({ worldState, settlementId: sid, tick, includeGroundTruth: false });
   const rumors = settlementRumors({ worldState, settlementId: sid, includeGroundTruth: false });
 
@@ -124,8 +132,8 @@ export function playerSafeBrief({ settlement, worldState = null, tick = 0 } = {}
       hasPublic
         ? section('settlement', 'The settlement', SOURCE.SETTLEMENT_PUBLIC, [{ public: publicProjection }])
         : null,
-      blocs && blocs.blocs?.length
-        ? section('blocs', 'Visible factions', SOURCE.POLITICS_PUBLIC, blocs.blocs)
+      blocArr.length
+        ? section('blocs', 'Visible factions', SOURCE.POLITICS_PUBLIC, blocArr)
         : null,
       cred ? section('credibility', 'Reputation', SOURCE.CREDIBILITY, [cred]) : null,
       section('rumors', 'Word on the street', SOURCE.RUMORS_PUBLIC, rumors),
@@ -140,7 +148,7 @@ export function playerSafeBrief({ settlement, worldState = null, tick = 0 } = {}
  * blocs. Hegemony is an observable read (spheres derive from public treaty terms), so
  * it is player-safe at includeGroundTruth:false; the player audience additionally
  * hides covert conspiracies.
- * @param {{ worldState?: Record<string, unknown>, settlements?: Array<Record<string, unknown>>, audience?: 'dm'|'player' }} ctx
+ * @param {{ worldState?: Record<string, unknown>|null,settlements?: Array<Record<string, unknown>>, audience?: 'dm'|'player' }} ctx
  * @returns {import('./citations.js').Brief}
  */
 export function factionBrief({ worldState = null, settlements = [], audience = 'dm' } = {}) {
@@ -166,7 +174,7 @@ export function factionBrief({ worldState = null, settlements = [], audience = '
 /**
  * The regional brief: spheres, the war-causal motive read for every active war pair
  * (why the war, whether the peace is fraying), and the realm credibility standings.
- * @param {{ worldState?: Record<string, unknown>, settlements?: Array<Record<string, unknown>>, tick?: number }} ctx
+ * @param {{ worldState?: Record<string, unknown>|null,settlements?: Array<Record<string, unknown>>, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
 export function regionalBrief({ worldState = null, settlements = [], tick = 0 } = {}) {
@@ -201,7 +209,7 @@ export function regionalBrief({ worldState = null, settlements = [], tick = 0 } 
 /**
  * The weekly digest: a realm-wide roundup folding the faction + regional reads into a
  * single at-a-glance bundle — spheres, blocs, wars, standings.
- * @param {{ worldState?: Record<string, unknown>, settlements?: Array<Record<string, unknown>>, tick?: number }} ctx
+ * @param {{ worldState?: Record<string, unknown>|null,settlements?: Array<Record<string, unknown>>, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
 export function weeklyDigest({ worldState = null, settlements = [], tick = 0 } = {}) {
@@ -231,13 +239,13 @@ export function weeklyDigest({ worldState = null, settlements = [], tick = 0 } =
 /**
  * Session prep: the settlement's table leverage, its open plot-hook threads, and the
  * local rumor divergence — the "what to run tonight" bundle.
- * @param {{ settlement: Record<string, unknown>, worldState?: Record<string, unknown>, tick?: number }} ctx
+ * @param {{ settlement?: Record<string, unknown>|null, worldState?: Record<string, unknown>|null, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
-export function sessionPrep({ settlement, worldState = null, tick = 0 } = {}) {
+export function sessionPrep({ settlement, worldState = null } = {}) {
   const sid = settlementIdOf(settlement);
   const table = tonightAtTheTable(settlement);
-  const hooks = collectPlotHooks(settlement);
+  const hooks = collectPlotHooks(/** @type {import('../dossier/plotHooks.js').PlotHookSettlement} */ (settlement || {}));
   const rumors = settlementRumors({ worldState, settlementId: sid, includeGroundTruth: true });
 
   return assembleBrief({
@@ -258,18 +266,18 @@ export function sessionPrep({ settlement, worldState = null, tick = 0 } = {}) {
  * the settlement it contrasts the public rumor/politics/credibility reads against the
  * ground-truth reads and surfaces every divergence. DM-only by nature (it names the
  * truth players do not have).
- * @param {{ settlement: Record<string, unknown>, worldState?: Record<string, unknown>, tick?: number }} ctx
+ * @param {{ settlement?: Record<string, unknown>|null, worldState?: Record<string, unknown>|null, tick?: number }} ctx
  * @returns {import('./citations.js').Brief}
  */
-export function dramaticIronyBrief({ settlement, worldState = null, tick = 0 } = {}) {
+export function dramaticIronyBrief({ settlement, worldState = null } = {}) {
   const sid = settlementIdOf(settlement);
   const covert = settlementBlocs({ worldState, settlementId: sid, includeCovert: true });
   const publicBlocs = settlementBlocs({ worldState, settlementId: sid, includeCovert: false });
   const ironies = [];
 
   // Hidden conspiracies the players cannot see.
-  const publicCount = publicBlocs?.blocCount ?? 0;
-  const conspiracyCount = covert?.conspiracyCount ?? 0;
+  const publicCount = Number(publicBlocs?.blocCount) || 0;
+  const conspiracyCount = Number(covert?.conspiracyCount) || 0;
   if (conspiracyCount > 0) {
     ironies.push({
       kind: 'conspiracy',

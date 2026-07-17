@@ -143,6 +143,7 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
 - `help_popover_opened`, `compendium_search`, `generation_started`, `generation_failed`
 - `generation_step_timings`, `wizard_step_viewed`, `dossier_tab_viewed`, `dossier_section_dwell`
 - `dossier_read_session_summary`, `causal_explanation_opened`, `pipeline_rail_step_inspected`, `compendium_entry_opened`
+- `ai_analyst_answer`, `ai_analyst_feedback` — **awaiting-metric**: the Surveyor S1 §5 evals (citation coverage, refusal rate + quality, answer acceptance); formalize into a named metric when the analyst launches.
 - `npc_pinned`, `edit_dropped`, `canon_phase_changed`, `canon_edit_choice_made`
 - `narrative_drift_modal_shown`, `narrative_drift_decision`, `version_restored`, `event_edit_applied`
 - `ai_generation_started`, `ai_generation_completed`, `ai_generation_failed`, `ai_verifier_report`

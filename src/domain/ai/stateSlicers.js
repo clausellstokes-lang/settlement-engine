@@ -96,8 +96,8 @@ function routeKinds(question, audience, hasSettlement) {
  * rule. Player audience yields ONLY player-safe slices — a ground-truth slice is
  * dropped by construction.
  *
- * @param {{ question: string,
- *           worldState?: Record<string, unknown>,
+ * @param {{ question?: string,
+ *           worldState?: Record<string, unknown>|null,
  *           settlements?: Array<Record<string, unknown>>,
  *           settlement?: Record<string, unknown>|null,
  *           tick?: number,
@@ -110,8 +110,9 @@ export function selectSlices({ question = '', worldState = null, settlements = [
   const kinds = routeKinds(question, effective, hasSettlement);
 
   const slices = [];
+  const composers = /** @type {Record<string, { compose: Function, audience: string, scope: string }>} */ (BRIEF_COMPOSERS);
   for (const kind of kinds) {
-    const entry = BRIEF_COMPOSERS[kind];
+    const entry = composers[kind];
     if (!entry) continue;
     // A settlement-scoped brief with no settlement in scope contributes nothing.
     if (entry.scope === 'settlement' && !hasSettlement) continue;

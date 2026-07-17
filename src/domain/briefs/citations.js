@@ -47,16 +47,16 @@ export const SOURCE = Object.freeze({
  * slice whose source is NOT in this set may never appear in a player-audience bundle.
  * Frozen so the boundary can't be widened at runtime.
  */
-export const PLAYER_SAFE_SOURCES = Object.freeze(new Set([
+export const PLAYER_SAFE_SOURCES = /** @type {ReadonlySet<string>} */ (Object.freeze(new Set([
   SOURCE.HEGEMONY,
   SOURCE.POLITICS_PUBLIC,
   SOURCE.CREDIBILITY,
   SOURCE.RUMORS_PUBLIC,
   SOURCE.SETTLEMENT_PUBLIC,
-]));
+])));
 
 /** Every registered source id (for validation that a section tags a KNOWN source). */
-export const ALL_SOURCES = Object.freeze(new Set(Object.values(SOURCE)));
+export const ALL_SOURCES = /** @type {ReadonlySet<string>} */ (Object.freeze(new Set(Object.values(SOURCE))));
 
 /** The honesty boundary string: a claim with no source resolves to this. */
 export const ENGINE_DOES_NOT_RECORD = 'the engine does not record this';
@@ -122,8 +122,8 @@ export function section(id, title, source, items) {
  * @returns {Brief}
  */
 export function assembleBrief({ kind, audience, sections }) {
-  const kept = (Array.isArray(sections) ? sections : [])
-    .filter((s) => s && Array.isArray(s.items) && s.items.length > 0);
+  const kept = /** @type {BriefSection[]} */ ((Array.isArray(sections) ? sections : [])
+    .filter((s) => s && Array.isArray(s.items) && s.items.length > 0));
   if (audience === 'player') {
     for (const s of kept) {
       if (!isPlayerSafeSource(s.source)) {
@@ -151,7 +151,8 @@ export function bundleCitationCoverage(brief) {
   return cited / sections.length;
 }
 
-/** The distinct source tags a bundle draws on (its bibliography). */
+/** The distinct source tags a bundle draws on (its bibliography).
+ * @param {Brief|null|undefined} brief @returns {string[]} */
 export function bundleSources(brief) {
   const sections = brief && Array.isArray(brief.sections) ? brief.sections : [];
   return [...new Set(sections.map((s) => s?.source).filter(isKnownSource))];
