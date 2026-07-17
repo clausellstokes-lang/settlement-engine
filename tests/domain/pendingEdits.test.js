@@ -50,8 +50,13 @@ describe('pendingEdits — committable-kinds contract (no silent drop)', () => {
     }
   });
 
-  it('marks exactly the kinds commitPendingEdits dispatches (rename-npc, rename-settlement)', () => {
-    expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual(['rename-npc', 'rename-settlement']);
+  it('marks exactly the kinds commitPendingEdits dispatches (renames + the NPC lifecycle ops)', () => {
+    // DESIGN_NPC_LIFECYCLE §2 added live dispatchers for the three typed NPC ops
+    // (edit / reassign / stasis+return), so they join the committable set. Kept in
+    // lockstep with the commitPendingEdits switch.
+    expect([...COMMITTABLE_EDIT_KINDS].sort()).toEqual([
+      'edit-npc', 'reassign-npc', 'rename-npc', 'rename-settlement', 'return-npc', 'stasis-npc',
+    ]);
   });
 
   it('the un-dispatched scaffolding kinds are explicitly NOT committable', () => {

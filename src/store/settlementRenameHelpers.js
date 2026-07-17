@@ -27,6 +27,59 @@
  */
 import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 
+// ── DESIGN_NPC_LIFECYCLE §2 — the three typed NPC ops (delegated bodies) ─────────
+// commitPendingEdits' default case routes the NPC-lifecycle committable kinds here
+// (settlementSlice is AT its max-lines ceiling, so the bodies live in this delegated-
+// impl helper — the renameSettlementImpl precedent). CANON-TOLERANT: NPC lifecycle
+// edits change the FUTURE, never the past (no rename-style identity lock). Each writes
+// a DECLARED facet (npc.facets) so it is a permanent citizen of THE FACET LAW. The
+// pure/canonical bodies + propagation model + all pins live in domain/npc/npcOps.js;
+// these mutations are kept eager-cheap (no lazy-npcOps import, which would pull the
+// bank + PRNG into first paint) and in lockstep with that spec (light inline guards).
+const _NPC_SEAT_FIELDS = ['institutionId', 'factionLink', 'factionAffiliation', 'settlementId', 'role', 'linkedInstitutionIds', 'linkedFactionIds'];
+const _STASIS_REASONS = ['journey', 'imprisoned', 'missing', 'sequestered'];
+
+/**
+ * Apply one typed NPC op to the live settlement (edit-npc / reassign-npc / stasis-npc
+ * / return-npc). Mutates through the slice's Immer set(); persists so the op survives
+ * reload. No-op-safe on a missing NPC / bad payload.
+ * @param {Function} get @param {Function} set @param {{ kind: string, payload?: any }} edit
+ */
+export function applyNpcOp(get, set, edit) {
+  const kind = edit?.kind;
+  const p = edit?.payload || {};
+  let changed = false;
+  set(state => {
+    const npc = state.settlement?.npcs?.[p.npcIndex];
+    if (!npc) return;
+    if (kind === 'edit-npc') {
+      if (!['alignment', 'temperament', 'role', 'goal'].includes(p.facetKind)) return;
+      npc.facets = { ...(npc.facets || {}), [p.facetKind]: p.value };
+      // Sync the live native field the engine/display reads (npcOps PROPAGATION MODEL).
+      if (p.facetKind === 'temperament') npc.personality = { ...(npc.personality || {}), dominant: p.value };
+      else if (p.facetKind === 'goal') npc.goal = { ...(npc.goal || {}), short: p.value };
+      changed = true;
+    } else if (kind === 'reassign-npc') {
+      const t = p.target;
+      if (!t || typeof t !== 'object') return;
+      // Seat-held ties move to the new posting (old seat vacates into role-fill);
+      // people-held ties (relationship edges keyed by npc id) travel untouched.
+      for (const f of _NPC_SEAT_FIELDS) { if (f in t) npc[f] = t[f]; }
+      npc.reassignedTo = { institutionId: t.institutionId ?? null, settlementId: t.settlementId ?? null };
+      changed = true;
+    } else if (kind === 'stasis-npc') {
+      if (!_STASIS_REASONS.includes(p.reason)) return;
+      npc.stasis = { reason: p.reason };
+      changed = true;
+    } else if (kind === 'return-npc') {
+      if (!npc.stasis) return;
+      delete npc.stasis;
+      changed = true;
+    }
+  });
+  if (changed) get().persistActiveSaveEdit?.();
+}
+
 /**
  * Flush-only seam: reconcile the active store settlement's NEIGHBOUR fields
  * (neighbourNetwork + interSettlementRelationships) from a panel cascade's
