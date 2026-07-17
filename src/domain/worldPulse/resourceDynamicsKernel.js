@@ -54,6 +54,7 @@ import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { classifyResource } from './resourceTaxonomy.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
+import { pickLine, RESOURCE_NEWS } from './eventProse.js';
 
 // ── The loose sim shapes this mover reads (concrete typedefs — no `any`) ────────
 /** @typedef {{ get?: (id: string, kind: string) => ({ score?: number } | undefined) }} PressureIdx */
@@ -314,8 +315,8 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         severity: clamp01(0.3 + nextAcc * 0.35),
         probability: clamp01(T.DISCOVERY_EMIT_P + nextAcc * 0.22),
         applyMode: authorityFor(rules, 'resource_discovery', 'auto'),
-        headline: `${label} discovered near ${name}`,
-        summary: `Prospecting near ${name} has struck ${label.toLowerCase()} — a new resource for the local economy.`,
+        headline: pickLine(RESOURCE_NEWS.discovery.headline, `${cid}:${resource}:${tick}:h`, { label, labelLower: label.toLowerCase(), name }),
+        summary: pickLine(RESOURCE_NEWS.discovery.summary, `${cid}:${resource}:${tick}:s`, { label, labelLower: label.toLowerCase(), name }),
         reasons: [
           `Sustained prospecting pressure has built to ${Math.round(nextAcc * 100)}% (an arc, not a decree).`,
           `${label} is terrain-legal here — the ground could always have held it.`,
@@ -368,8 +369,8 @@ export function evaluateResourceDynamics(worldState, snapshot, pressureIdx, cont
         severity,
         probability: clamp01(T.REMOVAL_EMIT_P + severity * 0.28),
         applyMode: authorityFor(rules, 'resource_removal', 'auto'),
-        headline: `${label}'s workings near ${name} have given out`,
-        summary: `The ${label.toLowerCase()} near ${name} has been worked out — after long depletion the vein is done.`,
+        headline: pickLine(RESOURCE_NEWS.removal.headline, `${cid}:${resource}:${tick}:h`, { label, labelLower: label.toLowerCase(), name }),
+        summary: pickLine(RESOURCE_NEWS.removal.summary, `${cid}:${resource}:${tick}:s`, { label, labelLower: label.toLowerCase(), name }),
         reasons: [
           `${label} has dwelled depleted for ${dwell} ticks (≥ ${T.REMOVAL_DWELL}).`,
           `A nonrenewable resource (${taxonomy.kind}) does not recover once truly exhausted.`,

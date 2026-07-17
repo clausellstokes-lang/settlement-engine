@@ -32,6 +32,7 @@ import {
   WAR_REASON_TYPES, PEACE_REASON_TYPES,
 } from './warReasons.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { peaceReceipt } from './eventProse.js';
 import { buildPressureSummary, settlementStrength } from './relationshipEvolution.js';
 import { readBeliefStrength } from './beliefMap.js';
 import { findCrossPressuredMediator, fracturesAbandoning, treatyDocument } from './peaceTerms.js';
@@ -80,10 +81,10 @@ export const PEACE_REASON_TUNING = Object.freeze({
  * @param {{ scar01: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreExhaustion({ scar01 }) {
+export function scoreExhaustion({ scar01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(scar01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: `The war has worn the town to the bone — exhaustion ${score.toFixed(2)}; the seat needs peace to survive.` };
+  return { score, receipt: peaceReceipt('exhaustion', seed, { score: score.toFixed(2) }) };
 }
 
 /**
@@ -95,7 +96,7 @@ export function scoreExhaustion({ scar01 }) {
  * @param {{ marginA: number, marginB: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreBeliefConvergence({ marginA, marginB }) {
+export function scoreBeliefConvergence({ marginA, marginB }, /** @type {string | undefined} */ seed) {
   const divergence = Math.abs((Number(marginA) || 0) + (Number(marginB) || 0));
   const score = clamp01(1 - divergence / PEACE_REASON_TUNING.BLAINEY_DIVERGENCE_SCALE);
   if (score <= 0) return { score: 0, receipt: '' };
@@ -103,8 +104,8 @@ export function scoreBeliefConvergence({ marginA, marginB }) {
   return {
     score,
     receipt: converged
-      ? 'The fighting has taught both courts the same truth — no offer insults any longer.'
-      : `The courts' reckonings drift closer (divergence ${divergence.toFixed(2)}) — the war is running out of illusions.`,
+      ? peaceReceipt('belief_convergence.converged', seed)
+      : peaceReceipt('belief_convergence.drifting', seed, { divergence: divergence.toFixed(2) }),
   };
 }
 
@@ -128,7 +129,7 @@ export function scoreBeliefConvergence({ marginA, marginB }) {
  * @param {{ trade01: number, economy01: number, strangulation01?: number, blockade01?: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreEconomicStrangulation({ trade01, economy01, strangulation01 = 0, blockade01 = 0 }) {
+export function scoreEconomicStrangulation({ trade01, economy01, strangulation01 = 0, blockade01 = 0 }, /** @type {string | undefined} */ seed) {
   const base = clamp01(
     PEACE_REASON_TUNING.STRANGLE_TRADE_W * clamp01(Number(trade01) || 0)
     + PEACE_REASON_TUNING.STRANGLE_ECONOMY_W * clamp01(Number(economy01) || 0),
@@ -137,13 +138,9 @@ export function scoreEconomicStrangulation({ trade01, economy01, strangulation01
   const blockade = clamp01(Number(blockade01) || 0);
   const felt = clamp01(Math.max(base, strangle, blockade));
   if (felt <= 0) return { score: 0, receipt: '' };
-  let receipt = 'The routes are severed and the treasury bleeds — the war costs more than its aims.';
-  if (felt > base) {
-    receipt = blockade >= strangle
-      ? 'The harbour is blockaded — no keel comes or goes and the wharves stand idle; a strangled port cannot bear the war.'
-      : 'A neighbour strangles the supply web by design — the granary villages burn and the routes are cut; the war cannot be borne.';
-  }
-  return { score: felt, receipt };
+  let branch = 'base';
+  if (felt > base) branch = blockade >= strangle ? 'blockade' : 'supplyweb';
+  return { score: felt, receipt: peaceReceipt(`economic_strangulation.${branch}`, seed) };
 }
 
 /**
@@ -153,14 +150,14 @@ export function scoreEconomicStrangulation({ trade01, economy01, strangulation01
  * @param {{ peakAllies: number, nowAllies: number }} args
  * @returns {{ score: number, receipt: string, evidence?: Record<string, number> }}
  */
-export function scoreCoalitionFracture({ peakAllies, nowAllies }) {
+export function scoreCoalitionFracture({ peakAllies, nowAllies }, /** @type {string | undefined} */ seed) {
   const peak = Math.max(0, Math.floor(Number(peakAllies) || 0));
   const now = Math.max(0, Math.floor(Number(nowAllies) || 0));
   if (peak <= 0 || now >= peak) return { score: 0, receipt: '' };
   const score = clamp01((peak - now) / peak);
   return {
     score,
-    receipt: `The coalition thins — ${peak - now} of ${peak} co-belligerents have left the field.`,
+    receipt: peaceReceipt('coalition_fracture', seed, { peel: peak - now, peak }),
     evidence: { peakAllies: peak, nowAllies: now },
   };
 }
@@ -173,11 +170,12 @@ export function scoreCoalitionFracture({ peakAllies, nowAllies }) {
  * @param {{ impulse: number, mediatorName: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreMediation({ impulse, mediatorName }) {
+export function scoreMediation({ impulse, mediatorName }, /** @type {string | undefined} */ seed) {
   const on = clamp01(Number(impulse) || 0);
   if (on <= 0) return { score: 0, receipt: '' };
   const score = clamp01(PEACE_REASON_TUNING.MEDIATION_PRESENT * on);
-  return { score, receipt: `${mediatorName || 'A neighbour'} stands torn between the belligerents — its envoys carry terms both courts will hear.` };
+  // Every mediation variant LEADS with the mediator's name (the named-mediator receipt law).
+  return { score, receipt: peaceReceipt('mediation', seed, { mediatorName: mediatorName || 'A neighbour' }) };
 }
 
 /**
@@ -186,9 +184,9 @@ export function scoreMediation({ impulse, mediatorName }) {
  * @param {{ season: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreHarvestPressure({ season }) {
+export function scoreHarvestPressure({ season }, /** @type {string | undefined} */ seed) {
   if (String(season) !== 'autumn') return { score: 0, receipt: '' };
-  return { score: PEACE_REASON_TUNING.HARVEST_PRESENT, receipt: 'The harvest stands in the fields and the levies mutter of home — wars pause for bread.' };
+  return { score: PEACE_REASON_TUNING.HARVEST_PRESENT, receipt: peaceReceipt('harvest_pressure', seed) };
 }
 
 /**
@@ -198,17 +196,17 @@ export function scoreHarvestPressure({ season }) {
  * @param {{ commonThird: string | null, bothBesetByThirds: boolean }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreRealignment({ commonThird, bothBesetByThirds }) {
+export function scoreRealignment({ commonThird, bothBesetByThirds }, /** @type {string | undefined} */ seed) {
   if (commonThird) {
     return {
       score: PEACE_REASON_TUNING.REALIGNMENT_COMMON_THIRD,
-      receipt: 'A third banner is at both gates — signed in haste, for the horde was at the passes.',
+      receipt: peaceReceipt('realignment.common', seed),
     };
   }
   if (bothBesetByThirds) {
     return {
       score: PEACE_REASON_TUNING.REALIGNMENT_DISTINCT_THIRDS,
-      receipt: 'Each court is beset by another foe — this front is a luxury neither can keep.',
+      receipt: peaceReceipt('realignment.distinct', seed),
     };
   }
   return { score: 0, receipt: '' };
@@ -221,10 +219,10 @@ export function scoreRealignment({ commonThird, bothBesetByThirds }) {
  * understanding rises with the clash intensity. 0 when the intervention layer is dark ⇒
  * byte-identical. @param {{ clash01: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreSpheresUnderstanding({ clash01 }) {
+export function scoreSpheresUnderstanding({ clash01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(clash01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Better to draw a line between our claims than to make this proxy our own war — a sphere apiece, and the field left to them.' };
+  return { score, receipt: peaceReceipt('spheres_understanding', seed) };
 }
 
 /**
@@ -233,10 +231,10 @@ export function scoreSpheresUnderstanding({ clash01 }) {
  * grievance loses its cause. REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
  * @param {{ forgiven01?: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreDebtForgiven({ forgiven01 }) {
+export function scoreDebtForgiven({ forgiven01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(forgiven01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'The old grain-debt is spoken of as a gift once more — what was owed is forgiven, and the quarrel loses its cause.' };
+  return { score, receipt: peaceReceipt('debt_forgiven', seed) };
 }
 
 /**
@@ -245,10 +243,10 @@ export function scoreDebtForgiven({ forgiven01 }) {
  * interdependence). REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
  * @param {{ bonds01?: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreBondsOfCommerce({ bonds01 }) {
+export function scoreBondsOfCommerce({ bonds01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(bonds01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Too many looms and larders bind us to their markets — a war would cost more than either court could bear.' };
+  return { score, receipt: peaceReceipt('bonds_of_commerce', seed) };
 }
 
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
@@ -451,7 +449,7 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       const recentDeserters = fracturesAbandoning(worldState, partyId, tick).length;
       const peakAllies = Math.max(nowAllies + recentDeserters, nowAllies, Number(prevLedger?.[key]?.memo?.peakAllies) || 0);
       if (peakAllies > 0) memo = { peakAllies };
-      fracture = scoreCoalitionFracture({ peakAllies, nowAllies });
+      fracture = scoreCoalitionFracture({ peakAllies, nowAllies }, key);
     }
 
     // Mediation: the first (codepoint-ordered) third settlement cross-pressured
@@ -462,8 +460,8 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
     const third = thirdThreatRead(deployments, liveGraph, partyId, foeId);
 
     const computed = [
-      { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }) },
-      { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }) },
+      { type: 'exhaustion', ...scoreExhaustion({ scar01: Number(warExhaustion[partyId]) || 0 }, key) },
+      { type: 'belief_convergence', ...scoreBeliefConvergence({ marginA, marginB }, key) },
       {
         type: 'economic_strangulation',
         // W-DOCTRINE-1: elevate on a live supply-web strangulation of THIS belligerent
@@ -475,22 +473,22 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
           // W-MOMENTUM Stage 0(a): a blockade of THIS belligerent's own port
           // strangles its commerce (0 when no fleet holds it ⇒ byte-identical).
           blockade01: blockadeStrangulationOf(worldState, partyId),
-        }),
+        }, key),
       },
       { type: 'coalition_fracture', ...fracture },
-      { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }) },
-      { type: 'harvest_pressure', ...scoreHarvestPressure({ season }) },
-      { type: 'realignment', ...scoreRealignment(third) },
+      { type: 'mediation', ...scoreMediation({ impulse: mediator ? 1 : 0, mediatorName: mediator?.name || '' }, key) },
+      { type: 'harvest_pressure', ...scoreHarvestPressure({ season }, key) },
+      { type: 'realignment', ...scoreRealignment(third, key) },
       // W-CONVERGENCE: the mirror of foreign_clash — clashing sponsors settling spheres (0 when dark).
-      { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }) },
+      { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }, key) },
       // D4: the balance restored as a once-feared sphere centred on foeId crumbles (0 when foeId
       // centres no sphere, partyId is its subordinate, or no hegemony ⇒ byte-identical).
       { type: 'balance_restored', ...hegemonyFear.balanceRestoredOf(partyId, foeId) },
       // D7: the reframe peace mirrors — partyId has re-read foeId's old aid as a gift again, or
       // its trade tie with foeId as a binding mutual commerce. 0 when the reframe layer is dark /
       // no such bright reading ⇒ byte-identical (reframe reads THIS tick's fresh ledger).
-      { type: 'debt_forgiven', ...scoreDebtForgiven({ forgiven01: debtForgiven01(worldState, partyId, foeId) }) },
-      { type: 'bonds_of_commerce', ...scoreBondsOfCommerce({ bonds01: bondsOfCommerce01(worldState, partyId, foeId) }) },
+      { type: 'debt_forgiven', ...scoreDebtForgiven({ forgiven01: debtForgiven01(worldState, partyId, foeId) }, key) },
+      { type: 'bonds_of_commerce', ...scoreBondsOfCommerce({ bonds01: bondsOfCommerce01(worldState, partyId, foeId) }, key) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
