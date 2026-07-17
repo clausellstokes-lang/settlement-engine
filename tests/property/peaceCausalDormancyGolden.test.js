@@ -303,9 +303,9 @@ describe('peace-causal movers — lit-path anti-vacuity (§14: motive is state, 
     const a = attackers[0];
     const t = String(deployments[a].targetId);
     const brief = warCausalBrief(ws, a, t);
-    expect(brief.line).toMatch(/^\d of 9 peace reasons now present/);
-    expect(brief.peace.length).toBe(9);
-    expect(brief.war.length).toBe(9);
+    expect(brief.line).toMatch(/^\d of 11 peace reasons now present/);
+    expect(brief.peace.length).toBe(11);
+    expect(brief.war.length).toBe(11);
     expect(brief.peacePresent).toBeGreaterThan(0);
   }, 120_000);
 

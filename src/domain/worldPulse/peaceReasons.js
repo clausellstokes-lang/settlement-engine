@@ -46,6 +46,11 @@ import { foreignClashIntensityOf } from './convergence.js';
 // D4 (DESIGN_SIM_DEPTH_R2): balance_restored — the peace mirror of fear_of_dominance. Reads
 // the SAME belief-side hegemony sphere context; 0 when no sphere ⇒ byte-identical.
 import { makeHegemonyFear } from './hegemonyFear.js';
+// D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe peace mirrors — debt_forgiven (aid re-read as a
+// gift again) + bonds_of_commerce (the trade tie re-read as a binding mutual commerce). Pure
+// reads over THIS tick's reframe ledger (written by advanceWarReasons, which runs first). 0 when
+// the reframe layer is dark ⇒ byte-identical. reframeKernel is a leaf (never imports back).
+import { debtForgiven01, bondsOfCommerce01 } from './reframeKernel.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -220,6 +225,30 @@ export function scoreSpheresUnderstanding({ clash01 }) {
   const score = clamp01(Number(clash01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
   return { score, receipt: 'Better to draw a line between our claims than to make this proxy our own war — a sphere apiece, and the field left to them.' };
+}
+
+/**
+ * DEBT FORGIVEN (§D7 — the DISTINCT mirror of ingratitude_debt). The both-signs reconciliation
+ * lane has re-read the old aid as a gift again (gift_forgiven / unintended_kindness), and the
+ * grievance loses its cause. REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
+ * @param {{ forgiven01?: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreDebtForgiven({ forgiven01 }) {
+  const score = clamp01(Number(forgiven01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'The old grain-debt is spoken of as a gift once more — what was owed is forgiven, and the quarrel loses its cause.' };
+}
+
+/**
+ * BONDS OF COMMERCE (§D7 — the DISTINCT mirror of dependency_by_design). The same trade tie,
+ * re-read as a mutual bond that makes war too costly for either court (commercial
+ * interdependence). REFRAME-FED: 0 when the reframe layer is dark ⇒ byte-identical.
+ * @param {{ bonds01?: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreBondsOfCommerce({ bonds01 }) {
+  const score = clamp01(Number(bonds01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'Too many looms and larders bind us to their markets — a war would cost more than either court could bear.' };
 }
 
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
@@ -457,6 +486,11 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       // D4: the balance restored as a once-feared sphere centred on foeId crumbles (0 when foeId
       // centres no sphere, partyId is its subordinate, or no hegemony ⇒ byte-identical).
       { type: 'balance_restored', ...hegemonyFear.balanceRestoredOf(partyId, foeId) },
+      // D7: the reframe peace mirrors — partyId has re-read foeId's old aid as a gift again, or
+      // its trade tie with foeId as a binding mutual commerce. 0 when the reframe layer is dark /
+      // no such bright reading ⇒ byte-identical (reframe reads THIS tick's fresh ledger).
+      { type: 'debt_forgiven', ...scoreDebtForgiven({ forgiven01: debtForgiven01(worldState, partyId, foeId) }) },
+      { type: 'bonds_of_commerce', ...scoreBondsOfCommerce({ bonds01: bondsOfCommerce01(worldState, partyId, foeId) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
