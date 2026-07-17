@@ -62,7 +62,8 @@ export const ENGINE_VERSION = `gen-${GENERATOR_VERSION}/sim-${SIMULATION_VERSION
  * }} ApplyIntent
  */
 
-/** True iff `op` names a family this dispatcher can land. */
+/** True iff `op` names a family this dispatcher can land.
+ *  @param {{ opType?: unknown, family?: unknown }|null|undefined} op */
 function isDispatchable(op) {
   return !!op && typeof op === 'object' && typeof op.opType === 'string' && !!op.opType
     && (op.family === 'canon_event' || op.family === 'party_impact');

@@ -65,7 +65,8 @@ export const CONSTRAINT_BANDS = Object.freeze(['low', 'moderate', 'high']);
 const _dimSet = new Set(CONSTRAINT_DIMENSIONS);
 const _bandSet = new Set(CONSTRAINT_BANDS);
 
-/** Coarse target band for a 0..100 value. Pure. */
+/** Coarse target band for a 0..100 value. Pure.
+ *  @param {number} value @returns {'low'|'moderate'|'high'} */
 export function coarseBand(value) {
   if (!Number.isFinite(value)) return 'moderate';
   if (value < 34) return 'low';
@@ -73,6 +74,9 @@ export function coarseBand(value) {
   return 'moderate';
 }
 
+/** @typedef {{ type: string, values?: readonly string[], min?: number, max?: number, max_len?: number, check?: (v: unknown) => boolean }} FieldSpec */
+
+/** @param {FieldSpec} spec @param {unknown} value @returns {boolean} */
 function validOne(spec, value) {
   switch (spec.type) {
     case 'enum':
@@ -114,12 +118,14 @@ export function validateConfig(rawConfig, fields) {
   return { config, unsupported };
 }
 
-/** Validate a settlement config against the wall. Pure. */
+/** Validate a settlement config against the wall. Pure.
+ *  @param {Record<string, unknown>|null|undefined} rawConfig */
 export function validateSettlementConfig(rawConfig) {
   return validateConfig(rawConfig, SETTLEMENT_CONFIG_FIELDS);
 }
 
-/** Validate realm knobs against the wall. Pure. */
+/** Validate realm knobs against the wall. Pure.
+ *  @param {Record<string, unknown>|null|undefined} rawConfig */
 export function validateRealmConfig(rawConfig) {
   return validateConfig(rawConfig, REALM_CONFIG_FIELDS);
 }

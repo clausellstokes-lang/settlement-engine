@@ -47,7 +47,7 @@ export function compareResultToConstraints(settlement, constraints) {
   for (const dim of CONSTRAINT_DIMENSIONS) {
     const target = constraints && constraints[dim];
     if (!target) continue;
-    const dimState = /** @type {{ value?: number }} */ (state[dim]) || {};
+    const dimState = /** @type {{ value?: number }} */ ((/** @type {Record<string, { value?: number }>} */ (state))[dim]) || {};
     const actual = coarseBand(typeof dimState.value === 'number' ? dimState.value : NaN);
     if (actual === target) continue;
     const gap = Math.abs(BAND_RANK[target] - BAND_RANK[actual]);
@@ -78,7 +78,7 @@ export function compareRealmToConstraints(settlements, constraints) {
     const source = /** @type {{ settlement?: import('../state/deriveSystemState.js').SystemStateSource }} */ (s);
     const state = deriveSystemState(source?.settlement || /** @type {import('../state/deriveSystemState.js').SystemStateSource} */ (s));
     for (const dim of CONSTRAINT_DIMENSIONS) {
-      const v = /** @type {{ value?: number }} */ (state[dim])?.value;
+      const v = /** @type {{ value?: number }} */ ((/** @type {Record<string, { value?: number }>} */ (state))[dim])?.value;
       if (typeof v === 'number' && Number.isFinite(v)) sums[dim] = (sums[dim] || 0) + v;
     }
   }
@@ -87,14 +87,16 @@ export function compareRealmToConstraints(settlements, constraints) {
   return compareAggregate(avg, constraints);
 }
 
-/** Compare a pre-derived aggregate state map to constraints (helper for the realm comparator). */
+/** Compare a pre-derived aggregate state map to constraints (helper for the realm comparator).
+ *  @param {Record<string, { value?: number }>} avgState
+ *  @param {Record<string, 'low'|'moderate'|'high'>} constraints @returns {Deviation[]} */
 function compareAggregate(avgState, constraints) {
   /** @type {Deviation[]} */
   const deviations = [];
   for (const dim of CONSTRAINT_DIMENSIONS) {
     const target = constraints && constraints[dim];
     if (!target) continue;
-    const actual = coarseBand(avgState[dim]?.value);
+    const actual = coarseBand(avgState[dim]?.value ?? NaN);
     if (actual === target) continue;
     const gap = Math.abs(BAND_RANK[target] - BAND_RANK[actual]);
     deviations.push({ dimension: dim, target, actual, gap, direction: BAND_RANK[target] > BAND_RANK[actual] ? 'raise' : 'lower' });

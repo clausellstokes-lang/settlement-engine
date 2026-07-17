@@ -78,7 +78,8 @@ export const FLAVOR_FIELDS = Object.freeze([
 ]);
 const _FLAVOR_SET = new Set(FLAVOR_FIELDS);
 
-/** True iff `bucket` is a registered content type (fail-closed on non-strings). */
+/** True iff `bucket` is a registered content type (fail-closed on non-strings).
+ *  @param {unknown} bucket */
 export function isRegisteredBucket(bucket) {
   return typeof bucket === 'string' && _BUCKET_SET.has(bucket);
 }

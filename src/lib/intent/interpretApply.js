@@ -61,7 +61,7 @@ export async function runInterpretApply(io) {
       if (intent.target === 'recordPartyImpact') {
         if (typeof actions.recordPartyImpact !== 'function') { failed.push({ opType: intent.opType, family: intent.family, reason: 'no_verb' }); continue; }
         if (!intent.campaignId) { failed.push({ opType: intent.opType, family: intent.family, reason: 'no_campaign' }); continue; }
-        const res = await actions.recordPartyImpact(intent.campaignId, intent.action);
+        const res = /** @type {{ ok?: boolean, reason?: string }|null} */ (await actions.recordPartyImpact(intent.campaignId, intent.action));
         if (res && typeof res === 'object' && res.ok === false) { failed.push({ opType: intent.opType, family: intent.family, reason: String(res.reason || 'refused') }); continue; }
         applied.push({ opType: intent.opType, family: intent.family });
       } else if (intent.target === 'applyEvent') {

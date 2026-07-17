@@ -29,7 +29,7 @@ import { resolveTownMapStyle, TOWN_MAP_STYLE_IDS } from '../../design/townMapSty
 
 const _baseIdSet = new Set(TOWN_MAP_STYLE_IDS);
 
-/** True iff `id` names one of the four permanent base lenses. */
+/** True iff `id` names one of the four permanent base lenses. @param {unknown} id */
 export function isBaseLensId(id) {
   return typeof id === 'string' && _baseIdSet.has(id);
 }
@@ -50,7 +50,8 @@ export function addBespokeStyle(collection, id, validatedStyle) {
   return { ...base, [id]: validatedStyle };
 }
 
-/** Read a saved bespoke style by id, or null. Pure. */
+/** Read a saved bespoke style by id, or null. Pure.
+ *  @param {Record<string, unknown>|null|undefined} collection @param {unknown} id */
 export function readBespokeStyle(collection, id) {
   if (!collection || typeof collection !== 'object' || typeof id !== 'string') return null;
   const s = /** @type {Record<string, unknown>} */ (collection)[id];
@@ -59,7 +60,8 @@ export function readBespokeStyle(collection, id) {
 }
 
 /** Remove a bespoke style (non-destructive to the map — flip-back handles the active lens).
- *  Pure — returns a NEW collection. */
+ *  Pure — returns a NEW collection.
+ *  @param {Record<string, unknown>|null|undefined} collection @param {unknown} id */
 export function removeBespokeStyle(collection, id) {
   const base = (collection && typeof collection === 'object' && !Array.isArray(collection)) ? collection : {};
   if (typeof id !== 'string' || !(id in base)) return { ...base };
@@ -68,7 +70,8 @@ export function removeBespokeStyle(collection, id) {
   return out;
 }
 
-/** List the saved bespoke styles as { id, label } (sorted by id — deterministic). Pure. */
+/** List the saved bespoke styles as { id, label } (sorted by id — deterministic). Pure.
+ *  @param {Record<string, unknown>|null|undefined} collection */
 export function listBespokeStyles(collection) {
   if (!collection || typeof collection !== 'object') return [];
   return Object.keys(collection)
