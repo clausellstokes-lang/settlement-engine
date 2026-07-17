@@ -972,6 +972,25 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ FOUNDER LANE RATIFIED + FOLDED (2026-07-16 ~22:30; FF @ c733e5f4).** Three commits:
+c733e5f4 terms (#terms-founder: transferable lifetime individual license, cap-never-grows,
+Founder reserved for the 30, transfer-right reservation, no investment framing) · cc57835f
+the public /founders SEAT-LINEAGE page (lazy route, fail-closed 1..30 skeleton, all-Open
+pre-launch state, opted-approved names only, sitemap→16 URLs, Pricing-page nav — App.jsx AT
+its 732 ceiling so no footer link, JUDGMENT ratified) · af5757b1 DRAFT migration
+**137_founder_seats WRITTEN-NOT-APPLIED** (applied-head NOT bumped; 11 shape pins incl.
+fail-closed definer projection + pg_temp + append-only transfer ledger). EAGER HONESTY:
++366 B real route-registration cost (closure 1,064,067, margin 2,333) — the same cost every
+public route pays; NOT rounded to zero. Pins 42/42 on the merged tree. JUDGMENTs ratified ×5.
+**OWNER SIGN-OFF QUEUE (schema shape = owner-gated; presented, manager recommendations
+recorded):** (1) twin-log transfer table — RECOMMEND YES (append-only receipts culture);
+(2) gallery_author_slug beyond the brief's field list — RECOMMEND KEEP (the portal-of-proof
+link IS the page's strategic point per the owner's stated strategy); (3) definer projection
+RPC over bare SELECT policy — RECOMMEND YES (fail-closed column subset, established pattern);
+(4) transfer figures in Terms framed "currently" — RECOMMEND KEEP (terms are the contract;
+F22's numbers convention governed marketing surfaces). Deploy of 137 stays in the VERY-END
+db-push batch regardless. Seams: stripe-webhook claim hook proposed-not-wired (concierge v1);
+prior-holder scrub-right noted.
 **⬛ W8 GREEN LOCAL — THE MAINLINE FREEZES (2026-07-16 ~21:50, tip 5aa11dec + brief 4052fc9c).**
 The full constitutional gate on the unified tip carrying ALL of Phase O's folds (LIGHT ·
 GUIDE-2b · SM-4 · title tranche · DEPTH D1–D6 complete · 3 design amendments): **11,680
