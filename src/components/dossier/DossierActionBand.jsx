@@ -80,6 +80,7 @@ export default function DossierActionBand({
           publicSlug={liveSaveEntry?.public_slug}
           settlement={settlement}
           galleryDescription={liveSaveEntry?.gallery_description}
+          galleryTitle={liveSaveEntry?.gallery_title}
           galleryImageUrl={liveSaveEntry?.gallery_image_url}
           galleryImageAlt={liveSaveEntry?.gallery_image_alt}
           galleryTags={liveSaveEntry?.gallery_tags}

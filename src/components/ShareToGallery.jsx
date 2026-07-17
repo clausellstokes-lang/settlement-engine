@@ -23,6 +23,7 @@ import { validateDossier } from '../domain/validation/consistency.js';
 import { resolveTerrain } from '../domain/resolveTerrain.js';
 import { buildRealmArcSummary } from '../domain/display/realmArcSummary.js';
 import { settlementWarStatus } from '../domain/display/warStatus.js';
+import { computeAliveness } from '../lib/galleryAliveness.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
@@ -81,6 +82,7 @@ export default function ShareToGallery({
   campaignState = null,
   settlement = null,
   galleryDescription = '',
+  galleryTitle = '',
   galleryImageUrl = '',
   galleryImageAlt = '',
   galleryTags = [],
@@ -108,6 +110,9 @@ export default function ShareToGallery({
   const [slug, setSlug]         = useState(slugProp || null);
   const [detailsOpen, setDetailsOpen] = useState(!isPublicProp);
   const [description, setDescription] = useState(galleryDescription || '');
+  // Gallery display title (migration 147) — empty falls back to the settlement
+  // name at the server chokepoint (the 148 tile-rows coalesce).
+  const [title, setTitle] = useState(galleryTitle || '');
   const [imageUrl, setImageUrl] = useState(galleryImageUrl || '');
   const [imageAlt, setImageAlt] = useState(galleryImageAlt || '');
   const [tagsInput, setTagsInput] = useState((galleryTags?.length ? galleryTags : suggestedTagsFor(settlement)).join(', '));
@@ -164,10 +169,15 @@ export default function ShareToGallery({
       facetProsperity: settlement?.economicState?.prosperity || '',
       facetDeity: settlement?.config?.primaryDeitySnapshot?.name || '',
       facetAtWar: warStatus?.atWar === true,
+      // GALLERY-2 phase 2 (migration 147): the aliveness snapshot — pulse-history
+      // depth + world age band from the owning campaign's LIVE worldState (the
+      // same "cannot recompute" posture as atWar). null when campaign-less.
+      facetAliveness: computeAliveness(owningCampaign),
     };
   }, [owningCampaign, saveId, settlement]);
   const metadata = useMemo(() => ({
     description,
+    title,
     imageUrl,
     imageAlt,
     tags: tagsInput,
@@ -177,7 +187,7 @@ export default function ShareToGallery({
     memberOverrides,
     realmArcSummary,
     ...facets,
-  }), [description, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
+  }), [description, title, imageAlt, imageUrl, tagsInput, shareNarrated, shareDm, importable, memberOverrides, realmArcSummary, facets]);
 
   const hasNarrative = !!(liveAiData?.aiSettlement) || liveAiData?.narrativeMode === 'narrated';
   const hasDailyLife = !!(liveAiData?.aiDailyLife);
@@ -243,6 +253,7 @@ export default function ShareToGallery({
           is_public: true,
           public_slug: newSlug,
           gallery_description: description,
+          gallery_title: title,
           gallery_image_url: imageUrl,
           gallery_image_alt: imageAlt,
           gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
@@ -275,6 +286,7 @@ export default function ShareToGallery({
       // reload below is what fixes it. This is plain cache hygiene.)
       updateSavedSettlement?.(saveId, {
         gallery_description: description,
+        gallery_title: title,
         gallery_image_url: imageUrl,
         gallery_image_alt: imageAlt,
         gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
@@ -399,6 +411,26 @@ export default function ShareToGallery({
         memberOverrides={memberOverrides}
         setMemberOverrides={setMemberOverrides}
       />
+      <Field label="Gallery title (blank uses the settlement name)" htmlFor="share-to-gallery-title">
+        <input
+          id="share-to-gallery-title"
+          aria-label="Gallery title (blank uses the settlement name)"
+          value={title}
+          maxLength={120}
+          onChange={event => setTitle(event.target.value)}
+          placeholder={settlement?.name || 'Settlement name'}
+          style={{
+            minHeight: 32,
+            border: `1px solid ${BORDER}`,
+            borderRadius: R.md,
+            background: CARD,
+            color: INK,
+            fontFamily: sans,
+            fontSize: FS.xs,
+            padding: '6px 8px',
+          }}
+        />
+      </Field>
       <Field label="Public description">
         <GalleryDescriptionEditor value={description} onChange={setDescription} />
       </Field>

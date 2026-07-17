@@ -21,6 +21,7 @@ import {
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
+import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
@@ -141,8 +142,10 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             {item.name || t('gallery.untitled')}
           </h3>
         </Button>
-        <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
-          {meta.join(' / ')}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
+          <span>{meta.join(' / ')}</span>
+          {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
+          <AlivenessBadge score={item.aliveness} />
         </div>
         {item.description && (
           <div

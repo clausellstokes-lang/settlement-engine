@@ -25,6 +25,10 @@ const DEFAULT_SORT = 'relevant';
 
 export const GALLERY_SORT_OPTIONS = Object.freeze([
   ['relevant', 'Most relevant'],
+  // GALLERY-2 phase 2 (migration 148): the publish-time aliveness snapshot —
+  // worlds with the most lived simulation first; un-stamped shares fall back
+  // to relevance order (server-side nulls-last).
+  ['most_alive', 'Most alive'],
   ['top_voted', 'Top voted'],
   ['most_viewed', 'Most viewed'],
   ['most_commented', 'Most discussed'],
@@ -862,7 +866,45 @@ function galleryMetadataPatch(metadata = {}) {
   if (metadata.facetAtWar !== undefined) {
     patch.gallery_facet_at_war = metadata.facetAtWar === true;
   }
+  // GALLERY-2 phase 2 (migration 147). The aliveness snapshot: 0–100 int from
+  // the owning campaign's live worldState (src/lib/galleryAliveness.js) —
+  // exactly at_war's Path-A posture (client-derived, owner-RLS write). null
+  // (no owning campaign) clears the column so a save that LEFT its campaign
+  // never keeps a stale liveness claim.
+  if (metadata.facetAliveness !== undefined) {
+    // null must stay null (Number(null) coerces to 0, which would smear
+    // "unknown" into "provably lifeless").
+    const n = metadata.facetAliveness === null ? NaN : Number(metadata.facetAliveness);
+    patch.gallery_facet_aliveness = Number.isFinite(n)
+      ? Math.max(0, Math.min(100, Math.round(n)))
+      : null;
+  }
+  // The sharer-editable gallery title (migration 147): sanitized like the blurb
+  // (same DOMPurify pass), then reduced to plain bounded text — a title is a
+  // NAME, not rich text. Empty clears the column (the tile helper's coalesce
+  // falls back to settlements.name).
+  if (metadata.title !== undefined) {
+    patch.gallery_title = sanitizeGalleryTitle(metadata.title) || null;
+  }
   return patch;
+}
+
+const GALLERY_TITLE_LIMIT = 120;
+
+/**
+ * Title clamp shared by write + read: the blurb's sanitizer first (moderation
+ * parity), then strip any residual markup to inert text, collapse whitespace,
+ * bound to GALLERY_TITLE_LIMIT.
+ * @param {unknown} value
+ * @returns {string}
+ */
+function sanitizeGalleryTitle(value) {
+  if (typeof value !== 'string') return '';
+  return sanitizeGalleryHtml(value.slice(0, 1000))
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, GALLERY_TITLE_LIMIT);
 }
 
 /**

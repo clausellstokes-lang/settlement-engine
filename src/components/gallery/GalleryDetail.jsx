@@ -30,6 +30,7 @@ import { formatDate, formatNumber, GALLERY_RESPONSIVE_CSS, human, shareGalleryDo
 import { useStore } from '../../store/index.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import { setSharedDossierMeta } from '../../lib/seoDossier.js';
+import AlivenessBadge from './AlivenessBadge.jsx';
 import Button from '../primitives/Button.jsx';
 import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
@@ -170,6 +171,7 @@ export default function GalleryDetail({
             campaignState={ownedSave.campaignState}
             settlement={ownedSave.settlement}
             galleryDescription={ownedSave.gallery_description}
+            galleryTitle={ownedSave.gallery_title}
             galleryImageUrl={ownedSave.gallery_image_url}
             galleryImageAlt={ownedSave.gallery_image_alt}
             galleryTags={ownedSave.gallery_tags}
@@ -199,8 +201,10 @@ export default function GalleryDetail({
             <h1 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['36'], lineHeight: 1.05, fontWeight: 750 }}>
               {dossier.name || dossier.settlement?.name || t('gallery.untitled')}
             </h1>
-            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, textTransform: 'capitalize' }}>
-              {meta.join(' / ')}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: FS.sm, fontWeight: 850, textTransform: 'capitalize' }}>
+              <span>{meta.join(' / ')}</span>
+              {/* Aliveness (GALLERY-2 phase 2) — renders nothing when un-stamped. */}
+              <AlivenessBadge score={dossier.aliveness} size="md" />
             </div>
             {dossier.description ? (
               <div
