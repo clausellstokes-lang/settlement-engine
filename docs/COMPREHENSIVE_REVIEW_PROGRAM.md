@@ -972,6 +972,16 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: TOWN LAYOUT v2 (2026-07-17, task #38) — semantic urban planning.**
+First-draft maps follow real urban-morphology principles ("look and feel like it makes
+sense and be dynamic"): genesis cores + growth rings · water/terrain-first morphologies ·
+roads-before-buildings with convergence squares · SEMANTIC placement from the dossier (the
+actual tannery downstream — the advantage no generic generator has: a simulation-grade town
+behind the map) · wall-obeys-town · tier scale grammar · seeded irregularity within
+constraints. VERSIONING LAW: the town-map:v2 fork — new settlements v2, existing v1
+untouched, opt-in non-destructive redraw (edits survive, pinned), v2 goldens EXTEND (v1
+stands). Lenses/exports inherit automatically. Craft samples return for owner veto.
+Dispatches when MAP EXPORTS folds (same lane).
 **✅ CONTENT-VT RATIFIED + FOLDED (2026-07-17; commit 222806be merged; pins 34/34 on the
 merged tree incl. the SIGNED ceiling).** The news voice 129 → 342 lines (≥7/cell floor,
 9→10 categories): **THE REFRAME VOICE EXISTS** (both lanes — gifts curdling AND debts
