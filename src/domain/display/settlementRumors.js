@@ -144,6 +144,8 @@ export const WHAT_PHRASES = Object.freeze({
   bust: 'hard times',
   reconstruction: 'a town rebuilding',
   flourishing: 'a golden age',
+  // THE GROWTH LAYER — a leader weathered into a learned trait (owner commission #36)
+  npc_growth: 'a change in a leader\'s temper',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
   blockade_lifted: 'a harbour opened again',

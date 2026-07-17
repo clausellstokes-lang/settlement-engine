@@ -674,6 +674,29 @@ export function appendWizardNewsEntries(feed = {}, entries = [], options = {}) {
   };
 }
 
+/**
+ * Fold a per-settlement pulse mover's result into the kernel's threaded state (the
+ * upswing/lifecycle/growth applier — the "minimal-line" mover-registration idiom that keeps
+ * pulseKernel under its frozen line ceiling). A mover returns
+ * `{ changed, worldState, settlementUpdates?, newsEntries }`; when UNCHANGED it returns the
+ * same references, so this is byte-identical to the inline `if (r.changed) { … }` blocks it
+ * replaces. Pure; no side effects.
+ * @param {{ changed?: boolean, worldState?: Record<string, unknown>, settlementUpdates?: unknown[], newsEntries?: unknown[] }} result
+ * @param {Record<string, unknown>} worldState @param {unknown[]} settlementUpdates
+ * @param {ReturnType<typeof appendWizardNewsEntries>} wizardNews @param {string|null} now
+ * @returns {{ worldState: Record<string, unknown>, settlementUpdates: unknown[], wizardNews: ReturnType<typeof appendWizardNewsEntries> }} */
+export function applyPulseMover(result, worldState, settlementUpdates, wizardNews, now) {
+  if (!result || !result.changed) return { worldState, settlementUpdates, wizardNews };
+  const news = Array.isArray(result.newsEntries) && result.newsEntries.length
+    ? appendWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now: now ?? undefined })
+    : wizardNews;
+  return {
+    worldState: result.worldState !== undefined ? result.worldState : worldState,
+    settlementUpdates: result.settlementUpdates !== undefined ? result.settlementUpdates : settlementUpdates,
+    wizardNews: news,
+  };
+}
+
 export function summarizeWizardNews(feed = {}) {
   const current = ensureWizardNewsFeed(feed);
   const major = current.entries.filter(entry => entry.significance === WIZARD_NEWS_SIGNIFICANCE.MAJOR);
