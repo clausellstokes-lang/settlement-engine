@@ -972,6 +972,25 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ THE NPC LIFECYCLE RATIFIED + FOLDED (2026-07-17 ~04:00; merge f33e295b + bundle regen
+6dff8493).** NPCs are residents: THE BANK (consolidated vocabularies zero-drift-pinned + the
+22-goal TRANSITION-TYPED catalog with onAchieve/onFail — the survey CONFIRMED the owner's
+achieve-transitions exist (npcGoalCulmination 0.8 threshold) and found NO declarative
+successor table + NO symmetric fail transition before this wave) · THE OPS through the
+covenant (EDIT_NPC bank-bounded; REASSIGN with people-held-travels/seat-held-stays; STASIS
+typed+reversible with memory flowing + dormancy pass-through pinned; decree-tracker cones
+asserted) · INSTANT NPC (seeded, tier-blind, counterpart-pinned) · THE FACET-CONSUMER WALKER
+(EXEMPT_FACETS ceiling 0 — the no-dead-facet law enforced). 53 pins; honest +267 B eager
+(trimmed from +690 after the mid-flight budget warning — THE WARNING WORKED); margin ~1.36KB.
+JUDGMENTs ratified ×4 (delegated-helper dispatch — settlementSlice AT its 1345 ceiling ·
+temperament+goal propagate LIVE while alignment/role stay display+future — the npcAgency
+ceiling seam, documented · covenant-trusting thin dispatcher · self-contained seeded
+generator). **REAL PRE-EXISTING FINDING → ROUND 3: createNpc DROPS user-supplied
+flaw/temperament/goal/secret** (the ADD_NPC path claims verbatim landing and silently
+discards — domain/entities/npcs.js:113). SEAMS: npcState adoption of alignment/role edits
+(npcAgency headroom) · instant-NPC button host · REASSIGN target-picker UI · the op whisper.
+Freshness drift cleared at fold (bundle regen). NEW CEILING HAZARD memorialized:
+settlementSlice.js AT 1345 — store actions via delegated (get,set) helpers only.
 **⬛ OWNER RULING #4 (2026-07-17: "I want all the ai capabilities at launch") — THE
 LAUNCH-WHOLE AMENDMENT (§2b @ c12b1a95 on w7-prep).** ALL Surveyor stages ship at launch.
 What survives: SAFETY (the schema wall — never the ladder — carries it; worst case stays a
