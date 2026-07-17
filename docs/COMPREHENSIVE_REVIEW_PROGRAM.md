@@ -1098,6 +1098,28 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛⬛ THE RESUME (2026-07-17, successor session): DISPATCH ORDER EXECUTED.** Task board
+rebuilt (11 tasks mirroring the tail). THREE LANES DISPATCHED off w7-prep @ 07d3a1d2
+(Opus implementers, isolated worktrees, STEP -1 location guards + verify-first preambles):
+claude/surveyor-s4-s6 (the accept→mint seam + S4 custom content + AI style overhaul
+#28-p2 + S5 settlement construction + S6 realm construction; migrations 151+; launch-whole
+instrumentation + per-stage kill-switches per RULING #4) · claude/generation-time-content
+(calamity prose variety kept type-blind, war/peace reason receipts ×22, kernel news
+variants; predict-first shift map committed in-branch; PARKS RED, joins the composite) ·
+claude/town-layout-v2 (#38 semantic urban planning, Lynch five-element self-scoring rubric,
+town-map:v2 fork w/ versioning-law pins, fabricRead consumption w/ dark fallback, THE
+PANORAMA projection; v2 goldens EXTEND — lands free). **GALLERY OPT-IN FIX FOLDED @
+469db96a** (merge e0d0c29c; the SELECT-string conflict vs gallery-p2's gallery_title
+resolved by UNION in both list projections + both row mappings; receipts on the merged
+tree: lane pins 8/8, saves/gallery collision suites 20 files / 134 tests green, tsc 0 —
+the dossier resume item is CLOSED). SIDE-BRANCH AUDIT (git truth over stale memory):
+map-styles, instant-world, surveyor-s1b, fix-resource-taxonomy-boundaries are ALL already
+ancestors of w7-prep — the only genuinely unmerged side branches were w-r2-g2 (parks for
+the composite, by design) and the now-folded gallery fix; memory notes corrected. ROUND-3
+NOTE: the owner re-issued the original commission verbatim this session (Fable
+survey/dimensions + holistic code/product/fit assessment → Opus Ultracode verify+fix,
+bold-over-safe, substantive sim-logic cohesion in scope) — it executes at its slot (task
+#6, on the composite) per RULING #3; nothing about the re-issue changes the sequencing.
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
