@@ -50,6 +50,7 @@ import {
   hasDrawableMap, coerceStyleId,
 } from '../domain/townMap/index.js';
 import { renderTownMapTokenRaster } from './townMapThumb.js';
+import { slugify } from '../kernel/slugify.js';
 
 /** Selectable export resolutions (square, px). The town map lives in a 1000×1000
  *  vector space, so the resolution is the rendered pixel box. */
@@ -187,14 +188,10 @@ export async function renderTownMapExport(settlement, opts = {}) {
   return blob ? { blob, mime: fmt.mime, ext: fmt.ext, format } : null;
 }
 
-/** A filesystem-safe slug from an arbitrary string (lowercase, dash-joined). */
+/** A filesystem-safe slug from an arbitrary string — the ONE kernel slugify
+ * primitive (code-quality-5; never inline the idiom), capped at 60 chars. */
 function slug(s, fallback) {
-  const out = String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 60);
-  return out || fallback;
+  return slugify(s, { max: 60, fallback });
 }
 
 /** YYYY-MM-DD from a Date (local calendar day) — the filename date stamp. */

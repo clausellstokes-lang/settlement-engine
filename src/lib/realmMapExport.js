@@ -5,7 +5,8 @@
  * document owns only the settlement-marker overlay SVG (MapOverlay.jsx, tagged
  * `[data-map-overlay-svg]`). The bridge (src/lib/mapBridge.js) exposes ONE export
  * surface today — `exportThumb(size)`, which serializes + rasterizes the whole #map
- * SVG to a JPEG at up to 1024px (public/map/sf-bridge.js). The fork's NATIVE full
+ * SVG to a JPEG at up to 1024px (the iframe-side shim under public/map/, the
+ * sfBridge script). The fork's NATIVE full
  * exporters (getMapURL "svg"/"png"/"tiles"/"geojson", public/map/modules/io/
  * export.js) are NOT wired through the bridge — bridging them is a recorded seam.
  *
@@ -31,8 +32,9 @@
  */
 import { serializeOverlaySvg } from './mapThumb.js';
 import { downloadBlob } from './townMapExport.js';
+import { slugify } from '../kernel/slugify.js';
 
-// The FMG bridge exportThumb caps output at 1024px (sf-bridge.js); request the max
+// The FMG bridge exportThumb caps output at 1024px (the iframe-side shim); request the max
 // for the crispest honest export.
 const REALM_EXPORT_SIZE = 1024;
 
@@ -92,13 +94,10 @@ export async function renderRealmMapPngBlob({ bridge, size = REALM_EXPORT_SIZE }
   }
 }
 
-/** A filesystem-safe slug from a name (lowercase, dash-joined). */
+/** A filesystem-safe slug from a name — the ONE kernel slugify primitive
+ * (code-quality-5; never inline the idiom), capped at 60 chars. */
 function slug(s) {
-  return String(s || '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 60) || 'realm';
+  return slugify(s, { max: 60, fallback: 'realm' });
 }
 
 /** YYYY-MM-DD (local calendar day) filename date stamp. */
