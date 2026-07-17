@@ -1098,6 +1098,28 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: THE DOMAIN-STRICT BURN-DOWN (2026-07-17) → w7-prep @ 9150b464** (the
+task_be620e27 chip session; branch claude/domain-strict-burndown, rebased onto 2c980e4e;
+folded hard-gated from the chip — clean tree + no MERGE_HEAD + tip-unmoved verified in
+the w7-prep worktree immediately pre-merge; ff-only). THE V2-FOLD STRICT DEBT IS DEAD:
+112 errors across the six townMap files (townLayoutV2 86 · asymmetrySources 10 ·
+townPanorama 8 · lynchRubric 6 · siteGenesis 1 · townMapModel 1) → 0 by JSDoc annotation
+ONLY (+155/−48 lines; 17 inline paren-cast sites, semantics identical, each documenting a
+proven invariant; zero new `any` — domain-any 2230 unchanged; no new import statements;
+F24 python scan clean ×2). GOVERNANCE: burn-down over re-baseline —
+scripts/.domain-strict-baseline.json UNTOUCHED at total:0, the only-shrinks intent holds.
+Scope truth: the reported ~550 was the whole tsc surface; the ratchet counts src/domain
+only (112). changeView.js (SM-5's new domain file) VERIFIED strict-clean at the tip.
+RECEIPTS (re-earned on the rebased tree, exit codes read bare per the hardened
+discipline): node scripts/check-domain-strict.mjs exit 0 — "0 errors, ceiling 0" — from
+BOTH the chip and w7-prep worktrees · vitest battery 544 files / 6,521 passed (lint +
+architecture + build + domain + townMap v1/v2/style goldens byte-identical ⇒ zero
+behavior shift) · tsc full exit 0 · dist 146/146 · eslint 0 errors. JUDGMENTs (vetoable):
+TownV2Settlement `|null`→optional collapse on config/spatialLayout/economicState/
+defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) · its
+`tier` nullability under-declaration recorded as an in-file seam (guarded at
+townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
+battery + goldens + dist stand as the receipt; the composite full gate covers it.
 **⬛ FOLD: DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (2026-07-17) → w7-prep @ 2c980e4e**
 (merge of claude/spatial-consequence 3fee34ee off 66eda8e8; spot-checked, 17 files NUL-
 clean; recovered from the stall class by the status demand — the cure is 3-for-3). THE
@@ -1202,8 +1224,8 @@ REGEN pre-signed (six flags incl. spatialConsequenceEnabled).
 the sanctioned engine reopening — sidecar substrate, dormancy golden MANDATORY,
 WHERE-not-HOW-MUCH. 3. claude/ai-panels (off eb958f4b; agent-ad2c6c73ecd19e0da): the
 write-stage interfaces. Charges in full in the task-board descriptions + the ledger rows
-above. ALSO RUNNING owner-side: the domain-strict-baseline chip (task_be620e27) — locate
-its branch + fold. FOLD PROTOCOL: spot-check (show --stat + python NUL count vs claimed
+above. ALSO RUNNING owner-side: the domain-strict-baseline chip (task_be620e27) — DONE
+(2026-07-17): folded → w7-prep @ 9150b464 (ledger row above). FOLD PROTOCOL: spot-check (show --stat + python NUL count vs claimed
 scope) → merge in the w7-prep WORKTREE (hard-gate every command) → lane pins on merged
 tree → ledger row HERE → task update.
 **QUEUED:** fog (door 2) dispatches at the SM-5 fold (charge = task #16) · THE
