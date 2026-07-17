@@ -997,6 +997,29 @@ spawn-chip for the saves.js gallery_importable data-loss is ALREADY FIXED on
 claude/fix-gallery-list-importable @ e0d0c29c (unfolded; dossier resume item — NOT one of
 the five). ⚠️ SUCCESSOR: surveyor-s3's migrations 145/146 COLLIDE with the folded
 145-148 — renumber to 149/150 at S3's fold with internal-ref updates.
+**⬛ FOLD 2/5 — SURVEYOR S3 (2026-07-17):** folded into claude/w7-prep @ 9ade8e08 (merge
+of claude/surveyor-s3 tip 03b5e2b4, 5 commits off e6f14414). The three charges: A THE
+INTENT COMPILER (interpret-session; label taxonomy w/ uncertain-default, THE SCHEMA WALL
+= op registry as tool schema, protected-consent barrier structurally inert without
+consented:true, §9 correction typology LIVE via SURVEYOR_CLASSES, S1 money path verbatim
++ kill-switch gate) · C THE PARLEY (parley; epistemic fidelity structural twice — own-
+knowledge slicer + edge citation law w/ LEAK downgrade; total-grounding parity = 4 bank
+facets + 8 §2d legs, client≡edge no-drift; musings-only strips any op) · B THE SHELL
+(visible context anchor follows the page; zero-cost suggested questions, imports nothing).
+MIGRATIONS RENUMBERED AT FOLD 145/146→149/150 (the forecast collision with gallery's
+145-148; validator: 150 contiguous; full-sequence pglite green). Conflicts resolved:
+ARCHITECTURE.md count→150, DEPLOY.md head→150_surveyor_stage_kill_switch; pricing.js
+auto-merge VERIFIED (599 kept + interpret=5/parley=3). Lane pins 202 green on the merged
+tree (25 files). Lane gate (pre-fold): strict 0/0, lint 0, dist 143/143 fresh ×2, ~150 B
+eager (event-name strings only), EXEMPT_CEILING red was pre-signature-base only — clears
+here (mainline = signed 69). SIGN-OFF ASKS (ride the RULING #5 blanket; vetoable):
+interpret=5/parley=3 pricing · kill-switch semantics (absent-key⇒enabled, edge fail-
+closed, operator pauses via direct config edit, no self-service RPC) · S1-machinery-by-
+direct-import over _shared refactor · uncertain-default + protected-graze-inert. SEAMS:
+fuller §2c UI polish (docked panel, ambient glyphs, Cmd+K, first-open whisper + early-
+access copy) deferred as least-verifiable headless; accept→mint wiring from
+reviewInterpretation into applyWorldPulseProposal/recordPartyImpact = the designed next
+slice (both ends exist); personaSlicer degrades to muted facets on dormant worldState.
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
