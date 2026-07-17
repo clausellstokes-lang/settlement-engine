@@ -972,6 +972,26 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ THE CHRONICLE RATIFIED + FOLDED (2026-07-17 ~02:40; merged into w7-prep).** The advance
+report is real: the zoom pyramid (week⇒events … year⇒full pyramid, full descent always),
+thread extraction typed by the 8 drama classes, season chapters, delta-first, the deputy's
+diary, THE DECREE TRACKER with §5b entanglement clustering (two-decree conflict → ONE cluster
+naming the conflict, pin-executed; honest nulls as findings; every decree exactly once).
+40 new pins green; ZERO eager (lands in the lazy RealmInspector chunk — closure-BFS-verified);
+zero engine changes; durable-sourcing STRUCTURAL (source-scan: never reads wizardNews).
+JUDGMENTs ratified ×3 (pinned taxonomy dup over engine import · no doc-dup of §5b · guidance
+inline w/ map-pane registration deferred to the map pass). **⚠️ THE LOAD-BEARING SURVEY
+FINDING — THE PROVENANCE-DAG GAP (OWNER DECISION QUEUED):** the world's receipts do NOT form
+a durable parent→child causal DAG — derive-on-read Receipt edges name entities, not parent
+receipt ids; applied ops persist no stable causal id; the durable substrate is
+pulseHistory (CAPPED 80 advances, collapsed per-advance) + chronicles (24). Consequently
+decree CONES and thread CHAINS are ENTITY-INFERRED (shared keys + typed reasons + temporal
+order), honestly labelled `inferred` throughout the UI. THE DECISION: (a) accept inferred
+cones as shipped, or (b) commission THE PROVENANCE LEDGER — a durable per-campaign decree/
+receipt ledger with cause-edges (engine-adjacent writer + schema, owner-gated shape) giving
+EXACT cones, cross-advance thread stitching, and a stronger receipts thesis product-wide;
+if commissioned it must land BEFORE the soak (engine freeze). Also seamed: per-advance
+collapse loses interior-week placement; D7 decree-reception irony (named future).
 **⬛ TWO OWNER COMMISSIONS (2026-07-17, tasks #30/#31): TERMS OF USE + GALLERY-2.**
 (#30) ToS comprehensive redraft — tiers/credits/founder covenant/Surveyor conduct/BYOK +
 Forgetting-Law promises-never-exceeding-contracts/§3f rider disclosure/custom-content
