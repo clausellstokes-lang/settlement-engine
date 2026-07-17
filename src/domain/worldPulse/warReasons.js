@@ -59,6 +59,14 @@ import { buildThreatByCid } from './martialReadiness.js';
 // D4 (DESIGN_SIM_DEPTH_R2): fear_of_dominance reads the hegemony sphere topology (belief-side).
 // no sphere ⇒ 0 everywhere ⇒ byte-identical. One-directional: hegemonyFear never imports this module.
 import { makeHegemonyFear } from './hegemonyFear.js';
+// D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7): the reframe interpretation mover runs at the
+// TOP of advanceWarReasons behind its OWN gate (reframeActive), and its dark-aid read feeds the
+// ingratitude_debt casus. reframeKernel is a pure leaf (never imports back — the reasons DAG
+// stays acyclic). Absent flag / absent ledger ⇒ 0 ⇒ byte-identical.
+import { advanceReframe, reframeActive, debtClaim01, dependencyByDesign01 } from './reframeKernel.js';
+// D7: the proven-liar tilt — a low-credibility subject's past acts reframe darker. Injected as a
+// liar01 closure into advanceReframe; one-directional (informationStatecraft never imports this).
+import { credibilityScoreOf, credibilityDiscount } from './informationStatecraft.js';
 import { clamp01 } from '../../kernel/math.js';
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
@@ -114,6 +122,13 @@ export const WAR_REASON_TYPES = Object.freeze([
   // (subordinates excluded — v1 balances, never bandwagons). 0 when no sphere / peaceEngine
   // dark ⇒ byte-identical.
   'fear_of_dominance',
+  // D7 THE REFRAME LAYER: the aid we gave, now re-read as a debt unpaid (gift → debt_unpaid →
+  // tribute_extracted). The reframe casus — motive attribution as belief. 0 when reframe dark ⇒
+  // byte-identical. Its DISTINCT mirror is debt_forgiven (the aid re-read as a gift again).
+  'ingratitude_debt',
+  // D7: our trade-dependence, re-read as a leash built on purpose (commerce → dependency_by_design).
+  // 0 when reframe dark ⇒ byte-identical. Its DISTINCT mirror is bonds_of_commerce.
+  'dependency_by_design',
 ]);
 
 /** The casus pacis taxonomy (design §14.2, the brief's seven + W-CONVERGENCE's spheres). */
@@ -132,6 +147,13 @@ export const PEACE_REASON_TYPES = Object.freeze([
   // imbalance does. When a once-feared sphere CRUMBLES, its free neighbours reconcile (the
   // empire falls, the balance is restored). Feeds détente, NOT foreign_clash's mirror.
   'balance_restored',
+  // D7: the distinct mirror of ingratitude_debt — the debt is FORGIVEN back into a gift (the
+  // both-signs reconciliation lane reverses debt_unpaid → gift_forgiven), and the casus loses
+  // its cause. A distinct peace kind (never a reuse — the walker stays strict + bijective).
+  'debt_forgiven',
+  // D7: the distinct mirror of dependency_by_design — the same trade tie re-read as a MUTUAL
+  // bond that makes war too costly (commercial interdependence, Blainey-adjacent). Distinct kind.
+  'bonds_of_commerce',
 ]);
 
 /**
@@ -165,6 +187,13 @@ export const REASON_MIRRORS = Object.freeze({
   // D4: fear of a hegemon ↔ the balance restored when it crumbles (a DISTINCT peace kind,
   // NOT a reuse of spheres_understanding — ruling 2: the walker stays strict + bijective).
   fear_of_dominance: 'balance_restored',
+  // D7 (DESIGN_SIM_DEPTH_R2 §D7): the two reframe casus and their DISTINCT mirrors. The design
+  // names the war reasons + the both-signs reversal (debt_unpaid → gift_forgiven); it under-
+  // specifies the peace-REASON mirrors, so these are minted Blainey-consistent (JUDGMENT,
+  // vetoable): a debt is forgiven back into a gift; a dependence is re-read as a binding mutual
+  // commerce. Both distinct peace kinds (the strict bijection walker forbids reuse).
+  ingratitude_debt: 'debt_forgiven',
+  dependency_by_design: 'bonds_of_commerce',
 });
 
 // ── The shared substrate (imported by peaceReasons.js — shape law) ──────────
@@ -521,6 +550,31 @@ export function scoreCorruptionExposed({ exposedCorruption01 }) {
   return { score, receipt: 'Their court is rotten and the rot is now public — someone must answer for it.' };
 }
 
+/**
+ * INGRATITUDE DEBT (§D7, the reframe casus) — REFRAME-FED. `from` (the giver) has re-read the
+ * aid it once gave `to` as a debt unpaid (the dark-aid reframe reading, 0..1). The reframe layer
+ * is the fuel: 0 when reframe is dark ⇒ no record ⇒ byte-identical. The mint intent is frozen;
+ * only the MEANING moved — a war from a kindness misremembered (the layer's crown emergent).
+ * @param {{ debt01?: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreIngratitudeDebt({ debt01 }) {
+  const score = clamp01(Number(debt01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'The grain we gave in the lean years is spoken of now as a debt unpaid — ingratitude is its own casus.' };
+}
+
+/**
+ * DEPENDENCY BY DESIGN (§D7, the reframe casus) — REFRAME-FED. `from` (the dependent) has re-read
+ * its trade-dependence on `to` as a leash built on purpose (commerce → dependency_by_design). 0
+ * when reframe is dark ⇒ byte-identical.
+ * @param {{ design01?: number }} args @returns {{ score: number, receipt: string }}
+ */
+export function scoreDependencyByDesign({ design01 }) {
+  const score = clamp01(Number(design01) || 0);
+  if (score <= 0) return { score: 0, receipt: '' };
+  return { score, receipt: 'Our looms and larders were bound to their markets by design — a dependence built to be a leash.' };
+}
+
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
 
 /**
@@ -585,23 +639,42 @@ export function warReasonsFor(worldState, fromId, toId) {
  * @returns {WarReasonsAdvanceResult}
  */
 export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, tick }) {
-  // ── DORMANCY GATE (§8): absent ⇒ an immediate no-op. No key, no read. ──
-  if (!peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState))) {
+  // ── D7 THE REFRAME LAYER runs FIRST, behind its OWN gate (reframeActive), independent of the
+  // peace engine: its deterministic transition mover folds the interpretation ledger, and the
+  // reframe casus scorers below read THIS tick's fresh reads (facts frozen, meaning derived).
+  // BOTH gates dark ⇒ an immediate no-op (no reframe key, no war-reason key) ⇒ byte-identical —
+  // the historic §8 dormancy gate, widened to admit the reframe layer's independent gate. ──
+  const reframeLit = reframeActive(worldState);
+  const peaceLit = peaceCausalActive(/** @type {{ simulationRules?: Record<string, unknown> }} */(worldState));
+  if (!reframeLit && !peaceLit) {
     return { worldState, changed: false, newsEntries: [] };
+  }
+  // D4: the hegemony fear context, built ONCE and shared by the reframe mover (a fear tilt on
+  // gift/tribute readings) and the fear_of_dominance scorer. hasSphere is a cheap ground-truth
+  // gate — no hegemony ⇒ every fearOf(...) returns 0 without per-observer work ⇒ byte-identical
+  // (the negative-control pin). Belief-side share is memoized per observer inside.
+  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
+  let ws = /** @type {Record<string, unknown>} */ (worldState);
+  let reframeChanged = false;
+  if (reframeLit) {
+    // A proven liar's past acts reframe darker: liar01 = 1 − credibilityDiscount (0 for an
+    // honest/neutral or absent-ledger subject ⇒ neutral). Injected as a closure so reframeKernel
+    // stays a pure leaf that never imports the info-statecraft engine.
+    const credibilityOf = (/** @type {string} */ subjectId) => 1 - credibilityDiscount(credibilityScoreOf(ws, subjectId, tick));
+    const reframe = advanceReframe({ snapshot, worldState: ws, graph, hegemonyFear, credibilityOf, tick });
+    if (reframe.changed) { ws = reframe.worldState; reframeChanged = true; }
+  }
+  if (!peaceLit) {
+    return { worldState: ws, changed: reframeChanged, newsEntries: [] };
   }
 
   const edges = (graph?.edges && Array.isArray(graph.edges) ? graph.edges : null)
     || (Array.isArray(snapshot?.regionalGraph?.edges) ? snapshot.regionalGraph.edges : []);
-  const states = /** @type {Record<string, unknown>} */ (worldState.relationshipStates && typeof worldState.relationshipStates === 'object' ? worldState.relationshipStates : {});
-  const prevLedger = /** @type {ReasonLedger | null} */ (getSpatialLedger(worldState, 'warReasons'));
+  const states = /** @type {Record<string, unknown>} */ (ws.relationshipStates && typeof ws.relationshipStates === 'object' ? ws.relationshipStates : {});
+  const prevLedger = /** @type {ReasonLedger | null} */ (getSpatialLedger(ws, 'warReasons'));
 
   // The threat-environment index (existing martialReadiness read), built once.
-  const threatByCid = buildThreatByCid(snapshot, worldState);
-
-  // D4: the hegemony fear context, built once per tick. hasSphere is a cheap ground-truth
-  // gate — no hegemony ⇒ every fearOf(...) returns 0 without per-observer work ⇒ byte-identical
-  // (the negative-control pin). Belief-side share is memoized per observer inside.
-  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
+  const threatByCid = buildThreatByCid(snapshot, ws);
 
   // W-PEACE-2: the TREATY_DEFAULT feed — CLOSING this module's registration seam.
   // The treaties ledger (built by advanceTreaties, which runs THIS tick before the
@@ -609,7 +682,7 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   // at each treaty's top level — exactly scoreTreatyDefault's shape. Read directly
   // (no peaceTerms import ⇒ no cycle: peaceTerms imports this module's gate). Absent
   // (dark / no treaty) ⇒ []  ⇒ scoreTreatyDefault returns 0 ⇒ byte-identical.
-  const treatiesLedger = /** @type {Record<string, Record<string, unknown>> | undefined} */ (getSpatialLedger(worldState, 'treaties'));
+  const treatiesLedger = /** @type {Record<string, Record<string, unknown>> | undefined} */ (getSpatialLedger(ws, 'treaties'));
   const treatiesList = /** @type {Array<{ parties?: unknown[], complianceState?: string, defaultedBy?: unknown, defaultSeverity01?: number }>} */ (
     treatiesLedger && typeof treatiesLedger === 'object' ? Object.values(treatiesLedger) : []);
 
@@ -651,12 +724,18 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
           hostile,
         }),
       },
-      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(worldState, fromId, toId, tick) }) },
+      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(ws, fromId, toId, tick) }) },
       // W-CONVERGENCE: two sponsors on opposing sides of one internal contest (0 when dark).
-      { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(worldState, fromId, toId) }) },
+      { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(ws, fromId, toId) }) },
       // D4: fromId (observer) fears toId's hegemony sphere if it centres one (0 when toId
       // centres no sphere, when fromId is toId's subordinate, or no hegemony ⇒ byte-identical).
       { type: 'fear_of_dominance', ...hegemonyFear.fearOf(fromId, toId) },
+      // D7: fromId (the giver) re-reads the aid it gave toId as a debt unpaid (ingratitude), and
+      // fromId (the dependent) re-reads its trade tie with toId as a leash by design. 0 when the
+      // reframe layer is dark / no such reading ⇒ byte-identical. This IS the crown emergent:
+      // a war from a kindness misremembered.
+      { type: 'ingratitude_debt', ...scoreIngratitudeDebt({ debt01: debtClaim01(ws, fromId, toId) }) },
+      { type: 'dependency_by_design', ...scoreDependencyByDesign({ design01: dependencyByDesign01(ws, fromId, toId) }) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);
@@ -678,11 +757,12 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
   const prevSerialized = JSON.stringify(prevLedger || null);
   const nextSerialized = JSON.stringify(hasNext ? nextLedger : null);
   if (prevSerialized === nextSerialized) {
-    return { worldState, changed: false, newsEntries: [] };
+    // No war-reason change — but a reframe transition may still have moved ws this tick.
+    return { worldState: ws, changed: reframeChanged, newsEntries: [] };
   }
   const nextWorldState = hasNext
-    ? setSpatialLedger(worldState, 'warReasons', nextLedger)
-    : dropSpatialLedger(worldState, 'warReasons');
+    ? setSpatialLedger(ws, 'warReasons', nextLedger)
+    : dropSpatialLedger(ws, 'warReasons');
   return { worldState: nextWorldState, changed: true, newsEntries: [] };
 }
 

@@ -223,4 +223,5 @@ export const EXEMPT_LEDGER_KEYS = Object.freeze({
   peaceReasons: 'W-PEACE-1 typed peace-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   warReasons: 'W-PEACE-1 typed war-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   treaties: 'peace-OUTCOME state record (the diplomatic result of the war/peace layer, not a distinct mover)',
+  reframes: 'D7 per-pair motive-INTERPRETATION annotations (belief-side reframe readings — metadata on the war/peace/corruption layer, like warReasons/peaceReasons, not a distinct mover)',
 });

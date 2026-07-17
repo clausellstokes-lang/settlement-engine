@@ -45,6 +45,11 @@
  */
 
 import { peaceCausalActive, reasonPairKey } from './warReasons.js';
+// D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7, consumer 2): a victor's dark-aid reframe of the
+// loser (the reframed debt claim, restitutionClaim01) pushes a restitution asset — the reframed
+// claim priced + settleable through the EXISTING terms machinery (real goods move only here,
+// conservation untouched). reframeKernel is a pure leaf. 0 when dark ⇒ no asset ⇒ byte-identical.
+import { restitutionClaim01 } from './reframeKernel.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { buildPressureSummary, settlementStrength, applyRelationshipPatch } from './relationshipEvolution.js';
 import { readBeliefStrength, readBeliefRelationship, governingCoalition } from './beliefMap.js';
@@ -140,6 +145,13 @@ export const PEACE_TERMS_TUNING = Object.freeze({
 export const TERM_CATALOG = Object.freeze({
   tribute: Object.freeze({ family: 'economic', weight: 1.0, baseYears: 4, maxYears: 12, baseMag: 0.25, stream: true, executor: 'transfer' }),
   reparations: Object.freeze({ family: 'economic', weight: 0.8, baseYears: 2, maxYears: 5, baseMag: 0.4, stream: true, executor: 'transfer' }),
+  // D7: the reframed-debt REPAYMENT — a victor's dark-aid reframe ("the grain we gave is a debt
+  // unpaid") priced + settled as conserved installments. Shares the 'economic' family (one per
+  // family under §13 stacking — JUDGMENT: a reframed debt IS an economic repayment, and reuse
+  // avoids a house-voice-totality expansion that the tight 800-line ceiling cannot afford;
+  // vetoable to mint a 'restitution' family). Draftable only when restitutionClaim01 > 0 (the
+  // reframe-fed producer below) ⇒ never drafted when the reframe layer is dark ⇒ byte-identical.
+  restitution: Object.freeze({ family: 'economic', weight: 0.8, baseYears: 3, maxYears: 8, baseMag: 0.35, stream: true, executor: 'transfer' }),
   resource_share: Object.freeze({ family: 'economic', weight: 1.0, baseYears: 4, maxYears: 12, baseMag: 0.5, stream: true, executor: 'transfer' }),
   compelled_alliance: Object.freeze({ family: 'relational', weight: 1.2, baseYears: 4, maxYears: 8, baseMag: 0.3, stream: false, executor: 'overlay' }),
   demilitarization: Object.freeze({ family: 'security', weight: 0.9, baseYears: 5, maxYears: 10, baseMag: 0.5, stream: false, executor: 'readiness_cap' }),
@@ -167,7 +179,7 @@ export const TERM_FAMILIES = Object.freeze([...new Set(TERM_TYPES.map((t) => TER
 // Each class is appraised through the VICTOR'S OWN lens (its scarcity, threat,
 // archetype) against the loser's BELIEVED holdings; the top-three become terms.
 
-/** @typedef {'export_flows'|'treasury'|'military_posture'|'territory'|'alliance_network'|'security'|'government'|'intel'} AssetClass */
+/** @typedef {'export_flows'|'treasury'|'military_posture'|'territory'|'alliance_network'|'security'|'government'|'intel'|'reframed_debt'} AssetClass */
 
 /** Asset class → the term type it drafts (resource_share falls back to tribute
  *  when the loser has no named export to fraction). */
@@ -180,6 +192,7 @@ const CLASS_TERM = Object.freeze({
   security: 'non_aggression',
   government: 'puppet_seat',
   intel: 'disclosure',
+  reframed_debt: 'restitution', // D7: the reframe-fed producer's asset → restitution term
 });
 
 // ── Small shared helpers ────────────────────────────────────────────────────
@@ -328,6 +341,13 @@ export function appraiseLoserPortfolio(args) {
   push('alliance_network', (0.25 + loserAllyStrength01) * tilt.relational, '');
   // SECURITY — the low-weight fallback every peace can afford.
   push('security', (0.35 + 0.4 * victorThreat01) * tilt.security, '');
+  // D7 REFRAME CLAIM — a victor that has re-read its old aid to the loser as a debt unpaid
+  // (restitutionClaim01 > 0) brings that reframed claim to the table as an economic restitution
+  // term. Pushed ONLY when the reframe reading exists ⇒ the asset list is byte-identical when the
+  // reframe layer is dark (no phantom 0-value asset). Ranks by the reframe strength × believed
+  // ability to pay — a strong grievance against a wealthy loser is a strong claim.
+  const restitution01 = restitutionClaim01(worldState, victorId, loserId);
+  if (restitution01 > 0) push('reframed_debt', restitution01 * (0.6 + believedWealth01), '');
   // D4 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D4 consumers (i)/(ii)): the design
   // has fear_of_dominance TILT defensive/mutual_defense + sovereignty/non_intervention term
   // weights between free settlements near a hegemon. NOT built this wave: `defensive`/
@@ -444,6 +464,7 @@ function draftReceipt(type, asset, years, magnitude) {
     case 'tribute': return `A tribute stream — ${(magnitude * 100).toFixed(0)}% of the treasury for ${years} year${years === 1 ? '' : 's'}; it was always the coin they wanted.`;
     case 'resource_share': return `${asset.good || 'The staple export'} shall flow to the victor — a ${(magnitude * 100).toFixed(0)}% share for ${years} year${years === 1 ? '' : 's'}.`;
     case 'reparations': return `Reparations in ${years} year${years === 1 ? '' : 's'} of installments — the price of the war laid on the loser.`;
+    case 'restitution': return `Restitution for a debt long unpaid — ${(magnitude * 100).toFixed(0)}% for ${years} year${years === 1 ? '' : 's'}; the old grain-years, called in at last.`;
     case 'compelled_alliance': return `Forced allyship for ${years} year${years === 1 ? '' : 's'} — a banner compelled, and compelled loyalty rots.`;
     case 'demilitarization': return `A mobilization cap for ${years} year${years === 1 ? '' : 's'} — the beaten foe may not rearm.`;
     case 'non_aggression': return `A non-aggression pact ${years} year${years === 1 ? '' : 's'} — no war between these courts while it stands.`;
@@ -1288,6 +1309,7 @@ export function termLabel(type) {
     case 'resource_share': return 'resource share';
     case 'compelled_alliance': return 'compelled alliance';
     case 'demilitarization': return 'demilitarization';
+    case 'restitution': return 'restitution';
     case 'non_aggression': return 'non-aggression pact';
     case 'occupation_continuation': return 'occupation';
     case 'puppet_seat': return 'installed seat';

@@ -61,6 +61,11 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { clamp01 } from '../../kernel/math.js';
 import { hasClandestineFacet, UNDERWAYS_TUNING } from './clandestineFacet.js';
+// D7 THE REFRAME LAYER (DESIGN_SIM_DEPTH_R2 §D7, consumer 3): a darkly-reframed obligation the
+// target bears toward the patron (extortion_endured — a resented debt) is leash-eligible material,
+// one bounded on-ramp to recruitmentWeight. reframeKernel is a pure leaf (never imports back). 0
+// when the reframe layer is dark ⇒ ×1 ⇒ byte-identical.
+import { darkReframe01 } from './reframeKernel.js';
 // §4 FOREIGN CONSEQUENCE LANE — the blowback triple's downstream seams. All three
 // are engine-lazy leaves (relationship memory, the credibility stock, the war-reason
 // pair key), imported ONLY by this already-lazy module ⇒ ZERO first-paint bytes. None
@@ -129,6 +134,11 @@ export const CORRUPTION_WEB_TUNING = Object.freeze({
    *  to (1 + this) — "the patron who has been generous recruits cheap" (§2). 0 when the
    *  obligation ledger is absent ⇒ byte-neutral. */
   OBLIGATION_BOOST_MAX: 0.6,
+  /** D7: a darkly-reframed obligation the target bears (it reads the patron's aid as
+   *  extortion_endured — a resented debt) multiplies the recruiting weight by up to (1 +
+   *  this) on top of the raw obligation on-ramp — a court that already feels wronged is
+   *  cheaper to turn. 0 when the reframe layer is dark ⇒ byte-neutral. Soak-retunable. */
+  REFRAME_BOOST_MAX: 0.5,
   /** A target's HIDE secrecy level DEGRADES the channel quality toward this floor
    *  fraction (§2 "HIDE posture" weight; couples to secrecyPostures). */
   HIDE_DEGRADE: 0.6,
@@ -378,9 +388,13 @@ export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targe
   // D6 THE UNDERWAYS (coupling 3 — covert-operations affinity): clandestine infrastructure
   // in the target eases conspiracy formation. ×(1+0) without the facet ⇒ byte-identical.
   const clandestine01 = hasClandestineFacet(targetItem && targetItem.settlement && targetItem.settlement.institutions) ? 1 : 0;
+  // D7: the target's dark reframe of the patron's aid (extortion_endured — a resented debt) is
+  // leash-eligible material. 0 when the reframe layer is dark / no such reading ⇒ ×1 ⇒ byte-neutral.
+  const reframed01 = darkReframe01(worldState, targetId, patronId);
   const T = CORRUPTION_WEB_TUNING;
   const boosted = channel01
     * (1 + T.OBLIGATION_BOOST_MAX * obligation01)
+    * (1 + T.REFRAME_BOOST_MAX * reframed01)
     * (1 + UNDERWAYS_TUNING.CONSPIRACY_EASE * clandestine01);
   const degraded = boosted
     * (1 - (1 - T.HIDE_DEGRADE) * secrecy01)
