@@ -303,7 +303,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 });
 
 /** The committed exempt ceiling (shrink-only; lower it as actions are adopted). */
-export const EXEMPT_CEILING = 66;
+// OWNER-SIGNED 2026-07-17 ("i give all remaining signoffs ahead of schedule"): 66 -> 69.
+// The +3 are the fold-in's master-lineage ephemeral view-state actions (focusEntity,
+// clearFocusedEntity, hydrateServicesToggles) — the same class as the standing 66.
+// Shrink-only from here: adopting any exempt action into the operation surface lowers it.
+export const EXEMPT_CEILING = 69;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }
