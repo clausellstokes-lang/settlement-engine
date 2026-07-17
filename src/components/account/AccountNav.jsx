@@ -44,6 +44,7 @@ export const ACCOUNT_SECTIONS = [
   { id: 'support', label: 'Support' },
   { id: 'data', label: 'Data' },
   { id: 'preferences', label: 'Preferences' },
+  { id: 'ai', label: 'AI & keys' },
 ];
 
 /** Synthetic tab id for the elevated-only admin affordance on mobile. */
