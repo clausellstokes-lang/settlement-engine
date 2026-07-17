@@ -145,6 +145,8 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
 - `dossier_read_session_summary`, `causal_explanation_opened`, `pipeline_rail_step_inspected`, `compendium_entry_opened`
 - `ai_analyst_answer`, `ai_analyst_feedback` — **awaiting-metric**: the Surveyor S1 §5 evals (citation coverage, register purity, refusal rate + quality, answer acceptance); formalize into a named metric when the analyst launches.
 - `ai_analyst_rider` — **awaiting-metric**: the §3f ID-FREE enrichment rider (intent / theme / refusal-reason interest distributions, emitted server-side as a condition-of-service); a theme/intent-mix metric formalizes at launch. INTEREST data only — never a quality gate (the conflicted-witness rule).
+- `ai_interpret_answer`, `ai_interpret_correction`, `ai_interpret_rider` — **awaiting-metric**: the Surveyor S3 intent-compiler evals (proposed-op label mix, sourced-op coverage, the §9 correction-typology rate, register purity, the §3f rider); formalize into a named metric when the compiler launches. The correction signal is INTEREST data only — never a quality gate (the conflicted-witness rule).
+- `ai_parley_answer`, `ai_parley_rider` — **awaiting-metric**: the Surveyor S3 parley evals (entity-class mix, grounding coverage = epistemic fidelity, register purity, the §3f rider tagging entity + topic class); formalize into a named metric when the parley launches.
 - `npc_pinned`, `edit_dropped`, `canon_phase_changed`, `canon_edit_choice_made`
 - `narrative_drift_modal_shown`, `narrative_drift_decision`, `version_restored`, `event_edit_applied`
 - `ai_generation_started`, `ai_generation_completed`, `ai_generation_failed`, `ai_verifier_report`

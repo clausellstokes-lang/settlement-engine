@@ -15,7 +15,10 @@
 import { useState, useMemo, useCallback } from 'react';
 import { X, ThumbsUp, ThumbsDown, Sparkles } from 'lucide-react';
 import { useStore } from '../store/index.js';
+import { useRoute } from '../hooks/useRoute.js';
 import { getSurveyorAiCost } from '../config/pricing.js';
+import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
+import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, sans, serif_, SP, R, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
@@ -38,6 +41,8 @@ export default function AiAnalystPanel({ visible = true }) {
   const savedSettlements = useStore((s) => s.savedSettlements);
   const campaigns = useStore((s) => s.campaigns);
   const activeCampaignId = useStore((s) => s.activeCampaignId);
+  const selectedSettlementId = useStore((s) => s.selectedSettlementId);
+  const creditBalance = useStore((s) => s.creditBalance);
 
   const activeCampaign = useMemo(
     () => (Array.isArray(campaigns) ? campaigns.find((c) => c && c.id === activeCampaignId) : null) || null,
@@ -50,16 +55,37 @@ export default function AiAnalystPanel({ visible = true }) {
   );
   const cost = getSurveyorAiCost('analysis');
 
-  const ask = useCallback(async () => {
-    const q = question.trim();
+  // §2c THE CONTEXT ANCHOR — the panel follows the page: it derives the scope from the
+  // current route + selection so the "Reading: …" label + the default retrieval scope
+  // track what the DM is looking at (the §3c honesty made tangible).
+  const { view, params } = useRoute();
+  const anchor = useMemo(
+    () => deriveAnchor({ view, params, selectedSettlementId, settlement, savedSettlements, activeCampaign, tick: worldState?.tick ?? null }),
+    [view, params, selectedSettlementId, settlement, savedSettlements, activeCampaign, worldState?.tick],
+  );
+  // the settlement the anchor points at — the analyst's DEFAULT retrieval scope
+  const anchoredSettlement = useMemo(
+    () => anchorSettlement(anchor, { settlement, savedSettlements }) || settlement,
+    [anchor, settlement, savedSettlements],
+  );
+  // §2c THE ZERO-COST EMPTY STATE — read-model-derived questions, no provider call.
+  const suggestions = useMemo(
+    () => suggestedQuestions(anchor, { settlement: anchoredSettlement, worldState }),
+    [anchor, anchoredSettlement, worldState],
+  );
+
+  const ask = useCallback(async (override) => {
+    const q = (typeof override === 'string' ? override : question).trim();
     if (!q || loading) return;
+    setQuestion(q);
     setLoading(true);
     setResult(null);
     setFeedback(null);
     try {
       const { askAnalyst } = await import('../lib/aiAnalyst.js');
       const res = await askAnalyst({
-        question: q, worldState, settlements, settlement, tick: worldState?.tick || 0, audience,
+        // the ANCHOR is the default retrieval scope: the analyst reads what the DM sees
+        question: q, worldState, settlements, settlement: anchoredSettlement, tick: worldState?.tick || 0, audience,
       });
       setResult(res);
     } catch {
@@ -67,7 +93,7 @@ export default function AiAnalystPanel({ visible = true }) {
     } finally {
       setLoading(false);
     }
-  }, [question, loading, worldState, settlements, settlement, audience]);
+  }, [question, loading, worldState, settlements, anchoredSettlement, audience]);
 
   const rate = useCallback(async (accepted) => {
     setFeedback(accepted ? 'up' : 'down');
@@ -79,11 +105,11 @@ export default function AiAnalystPanel({ visible = true }) {
 
   if (!visible) return null;
 
-  const anchor = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
+  const dockPos = { position: 'fixed', left: SP.lg, bottom: SP.lg, zIndex: 60, fontFamily: sans };
 
   if (!open) {
     return (
-      <div style={anchor}>
+      <div style={dockPos}>
         <Button
           variant="ai"
           size="sm"
@@ -100,7 +126,7 @@ export default function AiAnalystPanel({ visible = true }) {
   return (
     <div
       style={{
-        ...anchor,
+        ...dockPos,
         width: 340, maxWidth: 'calc(100vw - 32px)', background: CARD, color: BODY,
         border: `1px solid ${BORDER}`, borderRadius: R.lg, padding: SP.lg,
         boxShadow: '0 8px 28px rgba(0,0,0,0.28)', display: 'flex', flexDirection: 'column', gap: SP.sm,
@@ -109,6 +135,20 @@ export default function AiAnalystPanel({ visible = true }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 700, color: INK }}>Campaign analyst</span>
         <IconButton Icon={X} label="Close the analyst" size="sm" onClick={() => setOpen(false)} />
+      </div>
+
+      {/* §2c THE CONTEXT ANCHOR — VISIBLE: transparency about what the analyst reads.
+          It follows the page (dossier ⇒ settlement · realm ⇒ realm · chronicle ⇒ advance). */}
+      <div
+        data-testid="surveyor-anchor"
+        aria-label={anchor.label}
+        style={{
+          fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
+          border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px`,
+          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        }}
+      >
+        {anchor.label}
       </div>
 
       {/* Audience toggle — the visible face of the structural audience rule. */}
@@ -127,14 +167,31 @@ export default function AiAnalystPanel({ visible = true }) {
         }}
       />
 
+      {/* Per-question estimated cost (task-priced ⇒ flat per answer) + the live balance. */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>
           {cost} credit{cost === 1 ? '' : 's'} per answer
+          {Number.isFinite(creditBalance) && <span> · {creditBalance} left</span>}
         </span>
-        <Button variant="aiSolid" size="sm" busy={loading} disabled={!question.trim()} onClick={ask}>
+        <Button variant="aiSolid" size="sm" busy={loading} disabled={!question.trim()} onClick={() => ask()}>
           {loading ? 'Thinking…' : 'Ask'}
         </Button>
       </div>
+
+      {/* §2c THE ZERO-COST EMPTY STATE — read-model-derived suggested questions (no AI
+          cost until asked). One tap stages the question; the DM still presses Ask. */}
+      {!result && !loading && !question.trim() && suggestions.length > 0 && (
+        <div data-testid="surveyor-suggestions" style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+            Try asking
+          </span>
+          {suggestions.map((q, i) => (
+            <Button key={i} variant="ai" size="sm" onClick={() => setQuestion(q)} style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
+              {q}
+            </Button>
+          ))}
+        </div>
+      )}
 
       {result && (
         <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, display: 'flex', flexDirection: 'column', gap: SP.sm }}>

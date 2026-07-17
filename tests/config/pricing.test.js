@@ -50,13 +50,16 @@ describe('AI cost server contract', () => {
     expect(_internal.NEW_AI_COSTS).toEqual(CONTRACT_AI_COSTS_NEW);
   });
 
-  // Surveyor S1 task-priced managed credits — mirrors the spend_credits CASE in
-  // migration 140 (analysis=3, brief=4). Provisional pricing (owner-queued); when the
-  // owner re-tunes, this block + migration 140 change together.
-  it('surveyor task prices match the server spend_credits CASE (migration 140)', () => {
-    expect(_internal.SURVEYOR_AI_COSTS).toEqual({ analysis: 3, brief: 4 });
+  // Surveyor S1+S3 task-priced managed credits — mirrors the spend_credits CASE in
+  // migrations 140 (analysis=3, brief=4) + 145 (interpret=5, parley=3). Provisional
+  // pricing (owner-queued); when the owner re-tunes, this block + those migrations
+  // change together.
+  it('surveyor task prices match the server spend_credits CASE (migrations 140 + 145)', () => {
+    expect(_internal.SURVEYOR_AI_COSTS).toEqual({ analysis: 3, brief: 4, interpret: 5, parley: 3 });
     expect(getSurveyorAiCost('analysis')).toBe(3);
     expect(getSurveyorAiCost('brief')).toBe(4);
+    expect(getSurveyorAiCost('interpret')).toBe(5);
+    expect(getSurveyorAiCost('parley')).toBe(3);
     expect(getSurveyorAiCost('nope')).toBe(0);
   });
 });
