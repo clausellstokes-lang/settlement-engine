@@ -11,7 +11,8 @@
  * Lazy-only (rides the panel chunk) — zero eager bytes. Emits only question strings.
  */
 
-/** Tailor a settlement question to its name (or a generic subject). */
+/** Tailor a settlement question to its name (or a generic subject).
+ *  @param {string} [name] @returns {string} */
 function forName(name) { return name || 'this settlement'; }
 
 /**
@@ -20,13 +21,15 @@ function forName(name) { return name || 'this settlement'; }
  * a people question, etc. Always returns between 3 and 4 questions (padding from a scope
  * default so the empty state is never bare), never more.
  *
- * @param {{ scope?: string, entityId?: string|null }} anchor
- * @param {{ settlement?: object|null, worldState?: object|null, activeCampaign?: object|null }} data
+ * @param {{ scope?: string, entityId?: string|null }} [anchor]
+ * @param {{ settlement?: any, worldState?: any, activeCampaign?: any }} [data]
  * @returns {string[]} 3-4 question strings
  */
 export function suggestedQuestions(anchor = {}, { settlement = null, worldState = null } = {}) {
   const scope = anchor && anchor.scope ? anchor.scope : 'none';
+  /** @type {string[]} */
   const out = [];
+  /** @param {string} q */
   const push = (q) => { if (q && !out.includes(q)) out.push(q); };
 
   if ((scope === 'settlement' || scope === 'map') && settlement) {

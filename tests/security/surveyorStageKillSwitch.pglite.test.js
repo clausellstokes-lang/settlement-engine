@@ -36,7 +36,7 @@ describe.runIf(haveMigration)('surveyor stage kill-switch — real SQL (pglite)'
       create table public.system_config (key text primary key, value jsonb not null);
     `);
     await db.exec(readFileSync(MIG_146, 'utf-8'));
-  });
+  }, 30000); // PGlite WASM cold-start + the migration exec can exceed the 10s hook default
 
   it('the seed enables every current stage (launch-whole default-on)', async () => {
     for (const s of ['analysis', 'brief', 'interpret', 'parley']) {

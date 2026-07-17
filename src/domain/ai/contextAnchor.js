@@ -21,9 +21,10 @@ const SETTLEMENT_VIEWS = new Set(['settlements', 'generate', 'compendium']);
 const REALM_VIEWS = new Set(['realm', 'map']);
 const CHRONICLE_VIEWS = new Set(['chronicle']);
 
+/** @param {string} id @param {any[]} savedSettlements @param {any} settlement @returns {string} */
 function settlementName(id, savedSettlements, settlement) {
   if (settlement && String(settlement.id) === String(id)) return settlement.name || 'this settlement';
-  const hit = (Array.isArray(savedSettlements) ? savedSettlements : []).find((s) => String(s?.id) === String(id));
+  const hit = (Array.isArray(savedSettlements) ? savedSettlements : []).find((/** @type {any} */ s) => String(s?.id) === String(id));
   return (hit && hit.name) || 'this settlement';
 }
 
@@ -34,9 +35,9 @@ function settlementName(id, savedSettlements, settlement) {
  * @param {{
  *   view?: string, params?: {id?: string},
  *   selectedSettlementId?: string|null,
- *   settlement?: object|null, savedSettlements?: Array,
- *   activeCampaign?: {name?: string}|null, tick?: number,
- * }} ctx
+ *   settlement?: any, savedSettlements?: any[],
+ *   activeCampaign?: {name?: string}|null, tick?: number|null,
+ * }} [ctx]
  * @returns {{ scope: string, entityId: string|null, label: string, week: number|null,
  *            retrieval: { settlementId: string|null, realm: boolean } }}
  */
@@ -75,12 +76,12 @@ export function deriveAnchor({
  * object (from the current settlement or the saved list) or null for a realm/none anchor.
  *
  * @param {ReturnType<typeof deriveAnchor>} anchor
- * @param {{ settlement?: object|null, savedSettlements?: Array }} data
- * @returns {object|null}
+ * @param {{ settlement?: any, savedSettlements?: any[] }} [data]
+ * @returns {any}
  */
 export function anchorSettlement(anchor, { settlement = null, savedSettlements = [] } = {}) {
   const id = anchor && anchor.retrieval && anchor.retrieval.settlementId;
   if (!id) return null;
   if (settlement && String(settlement.id) === String(id)) return settlement;
-  return (Array.isArray(savedSettlements) ? savedSettlements : []).find((s) => String(s?.id) === String(id)) || null;
+  return (Array.isArray(savedSettlements) ? savedSettlements : []).find((/** @type {any} */ s) => String(s?.id) === String(id)) || null;
 }

@@ -55,20 +55,23 @@ export function resolveCorrectionClass(decision, op, action) {
 
 /**
  * Apply the DM's per-item decisions to an interpretation. Pure.
- * @param {{ ops?: Array<{opType:string, params:object, label:string, protectedFlags:string[]}> }} interpretation
- * @param {Record<number, { action?: string, consented?: boolean, editedParams?: object, editedType?: string, correctionClass?: string }>} decisions
+ * @param {any} interpretation the validated interpretation ({ ops: ProposedOp[] })
+ * @param {any} [decisions] a per-index map of { action, consented?, editedParams?, editedType?, correctionClass? }
  * @returns {{
- *   accepted: Array<{ index: number, op: object }>,
+ *   accepted: Array<{ index: number, op: any }>,
  *   blocked:  Array<{ index: number, reason: 'needs_consent' }>,
  *   corrections: Array<{ index: number, class: string }>,
  * }}
  */
 export function reviewInterpretation(interpretation, decisions = {}) {
   const ops = (interpretation && Array.isArray(interpretation.ops)) ? interpretation.ops : [];
+  /** @type {Array<{ index: number, op: any }>} */
   const accepted = [];
+  /** @type {Array<{ index: number, reason: 'needs_consent' }>} */
   const blocked = [];
+  /** @type {Array<{ index: number, class: string }>} */
   const corrections = [];
-  ops.forEach((op, i) => {
+  ops.forEach((/** @type {any} */ op, /** @type {number} */ i) => {
     const raw = decisions[i] ?? decisions[String(i)] ?? { action: 'pending' };
     const action = _actionSet.has(raw.action) ? raw.action : 'pending';
 
@@ -100,7 +103,7 @@ export function reviewInterpretation(interpretation, decisions = {}) {
 /**
  * The correction rate: the fraction of proposed ops the DM edited or rejected (the §5 eval
  * metric for interpret). 0 for an empty interpretation (nothing to correct). Pure.
- * @param {object} interpretation @param {object} decisions
+ * @param {any} interpretation @param {any} [decisions]
  * @returns {number} 0..1
  */
 export function correctionRate(interpretation, decisions = {}) {
@@ -120,7 +123,7 @@ export function addedOpCorrection() {
 }
 
 /** True iff `cls` is a valid live interpret correction class (a Surveyor class, not the
- *  pre-Surveyor manual class). */
+ *  pre-Surveyor manual class). @param {unknown} cls @returns {boolean} */
 export function isInterpretCorrectionClass(cls) {
   return typeof cls === 'string' && _surveyorSet.has(cls) && isCorrectionClass(cls);
 }
