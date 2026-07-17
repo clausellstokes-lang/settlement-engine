@@ -972,6 +972,21 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ CONTENT-VT RATIFIED + FOLDED (2026-07-17; commit 222806be merged; pins 34/34 on the
+merged tree incl. the SIGNED ceiling).** The news voice 129 → 342 lines (≥7/cell floor,
+9→10 categories): **THE REFRAME VOICE EXISTS** (both lanes — gifts curdling AND debts
+forgiven), portable-specificity held (catalog generics only; calamity kept bucket-neutral
+per the constitution), all existing lines preserved verbatim, zero eager (the lazy panel
+chunk), register guards + 200-id full-reachability green. DURABLE FINDING (vetoable
+judgment, ratified): the reframe voice is DORMANT-FORWARD-LOOKING — the reframe kernel
+mints no news beat today (newsEntries:[] on every path); the routing reserves the token so
+a future beat inherits its crier; no existing impactKind was hijacked. HONEST BEHAVIOR NOTE
+(recorded): pool growth changes which variant an existing entry id renders (the FNV divisor)
+— view-time, byte-inert, the intended variety effect. SCOPE JUDGMENT ratified: the OTHER
+view-time-thin surfaces (newsBody single-variants, rumor frames, chronicle copy) deferred-
+with-reason — each needs a NEW selection mechanism, not pool growth; queued as CONTENT-VT-2
+stock (or ROUND-3 fodder). Task #27's remaining half = the GENERATION-TIME park wave
+(post-engine-finales, rides the regen).
 **⬛ EXPORT PRICING RULED (owner, 2026-07-17, overrides the manager's free-images rec):**
 free tier pays the SAME $2.99 — the existing single-dossier entitlement UPGRADES into a
 per-settlement EXPORT BUNDLE: one purchase unlocks dossier PDF + VTT/Foundry raster + ALL
