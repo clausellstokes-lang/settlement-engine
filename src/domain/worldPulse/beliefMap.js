@@ -57,7 +57,8 @@ import { compareCodepoint } from '../deterministicSort.js';
 import { factionArchetype } from '../factionArchetypes.js';
 import { infoModeOf } from './simulationRules.js';
 import { settlementStrength, buildPressureSummary } from './relationshipEvolution.js';
-import { hasSpatialLedger, getSpatialLedger } from '../spatial/distanceRead.js';
+import { hasSpatialLedger, getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
+import { hopDelayTicks } from './distancePricedNews.js';
 
 // ── The v1 faction slot + the M9a per-faction dimension ───────────────────────
 /** The governing seat's operational belief — the v1 map that DRIVES the war
@@ -251,6 +252,53 @@ export function belief(observerId, subjectId, worldState) {
   if (!beliefsActive(worldState)) return { source: 'truth' };                  // dormant ⇒ byte-exact
   const rec = beliefRecord(worldState, observerId, subjectId);
   return rec ? { source: 'belief', record: rec } : { source: 'unknown' };
+}
+
+// ── D1: DISTANCE-PRICED NEWS (DESIGN_SIM_DEPTH_R2 D1) ─────────────────────────
+// Information pays for distance the way grain does: a fact about a FAR origin reads
+// STALER to a distant observer, so misjudgment (the war-starter) grows with reach.
+// A REFINEMENT of the infoMode seam, gated by the VIRTUAL flag
+// `distancePricedNewsEnabled` — ABSENT from DEFAULT_SIMULATION_RULES *and every
+// preset* ⇒ dark EVERYWHERE ⇒ byte-identical to every campaign and golden until the
+// owner lights it (the preset-lighting question is parked on the owner queue; not
+// added to the WAVES catalog here — zero eager bytes). It COMPOSES with the existing
+// rumor-relay latency (rumorNetwork stamps arrivalTick += hopWeeks per graph hop):
+// `hopDelayTicks` (distancePricedNews.js) is an ADDITIVE recency surcharge — the
+// design's `effective age = actual age + hopDelayTicks(dist(O,S))` — applied ONCE per
+// consuming path (the belief recency fold below; the player rumor display). The
+// coherence matrix's "one delay application" rule is honored: the surcharge lands at
+// the recency fold, NEVER doubled against the credibility/fidelity axes. Its size is
+// owner-retunable at NEWS_SPEED_FACTOR; DM-truth surfaces are NEVER delayed (they are
+// not world actors — the delay is on actor epistemics only).
+
+/** Is distance-priced news LIT? beliefsActive (spatial marker present AND infoMode
+ *  non-omniscient) AND the virtual flag distancePricedNewsEnabled === true (absent ⇒
+ *  false ⇒ dormant ⇒ byte-identical). Mirrors momentumActive's AND-gate shape.
+ *  @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown> } | null | undefined} worldState */
+export function distancePricedNewsActive(worldState) {
+  if (!beliefsActive(worldState)) return false;
+  const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
+  return !!(rules && typeof rules === 'object'
+    && /** @type {Record<string, unknown>} */ (rules).distancePricedNewsEnabled === true);
+}
+
+/** D1 believed-need coupling (the coherence-matrix discovered COUPLING): a giver
+ *  learns of a receiver's distress THROUGH ITS DELAYED PICTURE, so its perceived need
+ *  is the ground-truth need SCALED by how current its belief of that subject is.
+ *  BeliefRecord gains NO field — the scale is DERIVED at read time from the existing
+ *  confidence (fresh news ⇒ full need; a stale/silent picture under-reads it ⇒ aid
+ *  lags coherently — "word of the famine reached the ally three weeks late"; a picture
+ *  the observer never formed ⇒ 0, it cannot act on need it has not heard of). truth/self
+ *  (dormant) ⇒ 1 (ground truth verbatim). Callers gate on distancePricedNewsActive, so
+ *  dark ⇒ this is never called ⇒ byte-identical.
+ *  @param {string} observerId @param {string} subjectId
+ *  @param {{ spatialCanonVersion?: unknown, simulationRules?: Record<string, unknown>, spatialLedgers?: unknown } | null | undefined} worldState
+ *  @returns {number} 0..1 */
+export function believedNeedScale(observerId, subjectId, worldState) {
+  const b = belief(observerId, subjectId, worldState);
+  if (b.source === 'truth') return 1;      // self / dormant ⇒ ground truth verbatim
+  if (b.source === 'unknown') return 0;    // marker present, no picture ⇒ cannot perceive the need
+  return clamp01(finiteNumber(b.record.confidence01, 0));
 }
 
 // ── The three chooser reads (byte-exact identity fallback) ────────────────────
@@ -543,9 +591,12 @@ function relationshipNeighbourhood(snapshot, worldState) {
  * @param {unknown} observerLedger  worldState.rumorLedgers[observerId]
  * @param {string} observerId @param {number} now
  * @param {((framing: string[]) => boolean) | null} [matchFraming]
+ * @param {import('../spatial/distanceRead.js').SpatialDigest | null} [digest]  D1
+ *   distance-priced news: when present (distancePricedNewsActive), each report's
+ *   effective age gains hopDelayTicks(origin→observer); null (dark) ⇒ byte-identical.
  * @returns {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>}
  */
-function reportsBySubject(observerLedger, observerId, now, matchFraming = null) {
+function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null) {
   /** @type {Map<string, Array<{ report: BeliefReport, arrivalTick: number }>>} */
   const out = new Map();
   const ledger = asObject(observerLedger);
@@ -572,7 +623,9 @@ function reportsBySubject(observerLedger, observerId, now, matchFraming = null) 
     /** @type {BeliefReport} */
     const report = {
       hopCount: Math.max(0, Math.floor(finiteNumber(rec.hopCount, 0))),
-      ageTicks: Math.max(0, now - arrivalTick),
+      // D1: effective info age = actual age (already rumor-relay-delayed) + the direct
+      // origin→observer distance surcharge (0 when digest null ⇒ byte-identical).
+      ageTicks: Math.max(0, now - arrivalTick) + hopDelayTicks(digest, sourceId, observerId),
       independentSources: Array.isArray(rec.corroborationRoots) ? rec.corroborationRoots.length : 1,
       completeness01: clamp01(finiteNumber(rec.completeness01, 1)),
       accuracy01: clamp01(finiteNumber(rec.accuracy01, 1)),
@@ -1061,6 +1114,11 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
 
   // ── NORMAL PATH: reconcile / decay per (observer, subject). ─────────────────
   const rumorLedgers = asObject(getSpatialLedger(worldState, 'rumorLedgers'));
+  // D1: the frozen digest for the distance surcharge, read ONCE — null unless
+  // distancePricedNewsEnabled is lit (dark ⇒ every reportsBySubject below is passed
+  // null ⇒ zero surcharge ⇒ byte-identical).
+  const newsDigest = distancePricedNewsActive(worldState)
+    ? activeSpatialDigest(/** @type {Parameters<typeof activeSpatialDigest>[0]} */ (worldState)) : null;
   // Every observer that either holds a belief OR heard a rumor this window. The
   // reserved seed sentinel is NOT an observer — realObserverKeys already excludes
   // it. [spatial-engine-5]
@@ -1078,7 +1136,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
     const priorSeat = asObject(priorObserver[GOVERNING_SEAT_KEY]);
     const seat = reconcileSlot({
       priorSlot: priorSeat,
-      reports: reportsBySubject(rumorLedgers[observerId], observerId, now),
+      reports: reportsBySubject(rumorLedgers[observerId], observerId, now, null, newsDigest),
       ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
     });
     if (seat.pruned) mutated = true;
@@ -1095,7 +1153,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
         const framingTag = /** @type {{ framingTag: string }} */ (slots.get(archetype)).framingTag;
         const built = reconcileSlot({
           priorSlot: asObject(priorObserver[archetype]),
-          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag)),
+          reports: reportsBySubject(rumorLedgers[observerId], observerId, now, (f) => f.includes(framingTag), newsDigest),
           ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
         });
         if (built.pruned) mutated = true;
@@ -1105,7 +1163,7 @@ export function advanceBeliefMaps({ snapshot, pressureIdx, worldState, tick, all
       const publicBuilt = reconcileSlot({
         priorSlot: asObject(priorObserver[PUBLIC_FACTION_KEY]),
         reports: reportsBySubject(rumorLedgers[observerId], observerId, now,
-          (f) => f.length === 0 || f.some((t) => leakedTags.has(t))),
+          (f) => f.length === 0 || f.some((t) => leakedTags.has(t)), newsDigest),
         ctx, neighbours, observerId, now, credibilityOf, sightOf, commitmentDiscountFor,
       });
       if (publicBuilt.pruned) mutated = true;

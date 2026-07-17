@@ -37,7 +37,8 @@
  */
 
 import { compareCodepoint } from '../deterministicSort.js';
-import { getSpatialLedger } from '../spatial/distanceRead.js';
+import { getSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
+import { hopDelayTicks } from '../worldPulse/distancePricedNews.js';
 
 /** @typedef {import('../spatial/rumorNetwork.js').RumorArrivalRecord} RumorArrivalRecord */
 
@@ -314,9 +315,9 @@ function capitalize(s) {
  * @param {string} key
  * @param {RumorArrivalRecord} record
  * @param {{ tick: number, nameFor: (id: string) => string,
- *   activatedDeityNames: ReadonlySet<string> | null }} ctx
+ *   activatedDeityNames: ReadonlySet<string> | null, newsDelayTicks?: number }} ctx
  */
-function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames }) {
+function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks = 0 }) {
   const completeness = clamp01(record.completeness01);
   const rawDeity = record.content?.deityName;
   const deityName = typeof rawDeity === 'string' && rawDeity
@@ -337,8 +338,11 @@ function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames })
     headline,
     detail,
     arrivalTick,
+    // agoTicks stays LITERAL (ticks since the packet arrived); D1's distance surcharge
+    // colours only the perceived STALENESS band — "word from the far coast runs weeks
+    // behind" (newsDelayTicks 0 when D1 dark ⇒ freshnessBand unchanged ⇒ byte-identical).
     agoTicks: Math.max(0, tick - arrivalTick),
-    freshness: freshnessBand(tick - arrivalTick),
+    freshness: freshnessBand(tick - arrivalTick + Math.max(0, finiteNumber(newsDelayTicks, 0))),
     distance: distanceBand(record.hopCount),
     confidence: confidenceBand(record),
     magnitude: completeness >= RUMOR_OUTLINE_THRESHOLD
@@ -419,7 +423,8 @@ function severityBand(severity) {
  * deterministic total order (arrival desc, score desc, codepoint key).
  *
  * @param {Object} args
- * @param {{ tick?: number, spatialLedgers?: unknown } |
+ * @param {{ tick?: number, spatialLedgers?: unknown, simulationRules?: Record<string, unknown>,
+ *   spatialCanonVersion?: number, spatialDigest?: import('../spatial/distanceRead.js').SpatialDigest } |
  *   null | undefined} args.worldState
  * @param {unknown} args.settlementId
  * @param {boolean} [args.includeGroundTruth]  DM/premium surfaces ⇒ true;
@@ -446,6 +451,15 @@ export function settlementRumors({
   const ledger = ledgers[String(settlementId)];
   if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) return [];
   const tick = Math.max(0, finiteNumber(worldState?.tick, 0));
+  // D1 distance-priced news (player-view staleness ONLY — the DM truth block is never
+  // delayed): the frozen digest, read once, gated on the virtual flag. The flag is read
+  // inline (never importing the belief engine into a display selector); activeSpatialDigest
+  // returns null without a spatial marker, and omniscient worlds carry no ledger to reach
+  // here — so absent flag / no digest ⇒ newsDelayTicks 0 ⇒ byte-identical projection.
+  const rules = /** @type {Record<string, unknown> | undefined} */ (
+    worldState && typeof worldState === 'object' ? worldState.simulationRules : undefined);
+  const newsDigest = rules && rules.distancePricedNewsEnabled === true
+    ? activeSpatialDigest(worldState) : null;
   const arrived = Object.entries(ledger)
     .filter(([, record]) => record && typeof record === 'object'
       && finiteNumber(record.arrivalTick, Infinity) <= tick)
@@ -453,7 +467,10 @@ export function settlementRumors({
       || (finiteNumber(b.score, 0) - finiteNumber(a.score, 0))
       || compareCodepoint(keyA, keyB));
   return arrived.map(([key, record]) => {
-    const projection = projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames });
+    const newsDelayTicks = newsDigest
+      ? hopDelayTicks(newsDigest, String(record?.provenance?.originId ?? ''), String(settlementId))
+      : 0;
+    const projection = projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, newsDelayTicks });
     if (!includeGroundTruth) return projection;
     return { ...projection, truth: projectTruth(record, wizardNews) };
   });

@@ -127,7 +127,7 @@ import {
 import { faithAlignmentQuadrant, structuralLens, hasCharityFacet } from '../spatial/cohesionWeave.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
-import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand } from './beliefMap.js';
+import { reconcileBelief, beliefsActive, strengthBandOf, strengthOfBand, distancePricedNewsActive, believedNeedScale } from './beliefMap.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { computeLawfulness, computeMalice } from './disposition.js';
 import { evil01, chaos01 } from './deityAxes.js';
@@ -489,7 +489,11 @@ export function advanceGenerosity({ snapshot, worldState, settlementUpdates, pIn
     // MOVERS SKIP REMNANTS (r2 economy-upswing-1), BOTH directions: a terminal-dead corpse
     // neither orients to give nor is a valid receiver of aid.
     if (lifecycleStatusOf(freshSettlement(giverId)) || lifecycleStatusOf(freshSettlement(receiverId))) return;
-    const need01 = needOf(receiverId);
+    // D1 believed-need coupling: once distance-priced news is lit, the giver acts on the need it
+    // has HEARD OF — ground-truth need scaled by how current its belief of the receiver is (a
+    // distant famine is unknown until word arrives ⇒ aid lags). Dark ⇒ verbatim ⇒ byte-identical.
+    // One code line (this file sits at its max-lines ceiling — the scaling logic lives in beliefMap).
+    const need01 = distancePricedNewsActive(worldState) ? needOf(receiverId) * believedNeedScale(giverId, receiverId, worldState) : needOf(receiverId);
     const kindRaw = normalizeRelationshipType(String(edge?.relationshipType || 'neutral'));
     const kind = KIND_MAP[kindRaw];
     if (!kind) return; // not a qualifying relationship kind

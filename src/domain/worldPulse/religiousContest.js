@@ -770,6 +770,15 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
     // an uncontested pantheon (or an absent PRNG) uses the deterministic share-based
     // flip. The PRNG is forked per settlement+tick ⇒ reproducible, never Math.random.
     const contestRng = rng?.fork ? rng.fork(`religion-contest::${tick}::${cid}`) : null;
+    // D3 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D3, pin 2 second clause "a committed
+    // crown discounts unrest counter-evidence"): a crown holding a doctrine:<patronRef> course
+    // (commitmentStockOf(worldState, cid, courseKeyOf({kind:'doctrine', target: state.patronRef}),
+    // tick)) should AMPLIFY the patron's contestWeight here (the committed crown fights harder to
+    // hold its imposed faith) — the loaded-dice weight the strategy chooser reads, applied to the
+    // religion contest. NOT wired this wave: it AND-requires momentum ∧ beliefs ∧ faith lit + an
+    // imposed cult + a live contest, and biasing this SEEDED (rng-forked) roll shifts the lit-path
+    // religion goldens — a golden-shifting change owner-gated to the tuning-window regen. The
+    // doctrine COURSE exists and is readable via commitmentStockOf when the seam is closed.
     if (!contestRng || !resolvePatronContest(state, contestRng)) selectPatron(state);
 
     // W-F3 authority reading (tick-start causal religious_authority score, rank fallback) —

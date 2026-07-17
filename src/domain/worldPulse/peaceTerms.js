@@ -328,6 +328,15 @@ export function appraiseLoserPortfolio(args) {
   push('alliance_network', (0.25 + loserAllyStrength01) * tilt.relational, '');
   // SECURITY — the low-weight fallback every peace can afford.
   push('security', (0.35 + 0.4 * victorThreat01) * tilt.security, '');
+  // D4 SEAM (DELIBERATELY DEFERRED — DESIGN_SIM_DEPTH_R2 D4 consumers (i)/(ii)): the design
+  // has fear_of_dominance TILT defensive/mutual_defense + sovereignty/non_intervention term
+  // weights between free settlements near a hegemon. NOT built this wave: `defensive`/
+  // `mutual_defense` terms do NOT exist in TERM_CATALOG, and `non_intervention` has ZERO
+  // asset-class producers here (it is a recorded-not-enforced seam already — see its catalog
+  // entry). Minting those term producers is a separate, larger change that would move the
+  // peace-causal LIT goldens and is outside D4's pinned scope (the pins cover the
+  // fear_of_dominance REASON, which IS wired into the war/peace reason ledgers, plus the
+  // DENIAL motive). The fear read is available via makeHegemonyFear when this seam is closed.
   // POLITICAL / INTEL — seam classes; low base, only a rich budget + fitting lens reaches them.
   push('government', 0.18 * believedWealth01 * tilt.political, '');
   push('intel', (0.15 + 0.5 * tradeScarcity) * tilt.informational, '');

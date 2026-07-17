@@ -43,6 +43,9 @@ import { blockadeStrangulationOf } from '../spatial/navalLayer.js';
 // W-CONVERGENCE — the foreign_clash intensity for the pair (the spheres_understanding
 // fuel). 0 when the intervention layer is dark ⇒ byte-identical. One-directional.
 import { foreignClashIntensityOf } from './convergence.js';
+// D4 (DESIGN_SIM_DEPTH_R2): balance_restored — the peace mirror of fear_of_dominance. Reads
+// the SAME belief-side hegemony sphere context; 0 when no sphere ⇒ byte-identical.
+import { makeHegemonyFear } from './hegemonyFear.js';
 import { seasonForTick } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { clamp01 } from '../../kernel/math.js';
@@ -345,6 +348,9 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
     worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {});
   const prevLedger = /** @type {import('./warReasons.js').ReasonLedger | null} */ (getSpatialLedger(worldState, 'peaceReasons'));
   const liveGraph = (graph && Array.isArray(graph.edges) ? graph : null) || snapshot?.regionalGraph || null;
+  // D4: the hegemony fear context (same belief-side read as the war side) — balance_restored
+  // rises as a feared sphere crumbles. hasSphere false ⇒ 0 everywhere ⇒ byte-identical.
+  const hegemonyFear = makeHegemonyFear({ worldState, snapshot });
 
   // The live war pairs, both directions, codepoint-ordered.
   /** @type {Map<string, { partyId: string, foeId: string }>} */
@@ -448,6 +454,9 @@ export function advancePeaceReasons({ snapshot, worldState, graph, pIndex = null
       { type: 'realignment', ...scoreRealignment(third) },
       // W-CONVERGENCE: the mirror of foreign_clash — clashing sponsors settling spheres (0 when dark).
       { type: 'spheres_understanding', ...scoreSpheresUnderstanding({ clash01: foreignClashIntensityOf(worldState, partyId, foeId) }) },
+      // D4: the balance restored as a once-feared sphere centred on foeId crumbles (0 when foeId
+      // centres no sphere, partyId is its subordinate, or no hegemony ⇒ byte-identical).
+      { type: 'balance_restored', ...hegemonyFear.balanceRestoredOf(partyId, foeId) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick, memo);
