@@ -60,6 +60,25 @@ second client.
    instructions (campaign-scoped, versioned, editable; injected into every compile; NEVER into
    engine state).
 
+## 2b. THE LAUNCH-WHOLE AMENDMENT (owner ruling 2026-07-17: "I want all the ai
+## capabilities at launch") — the trust ladder converts from shipping gate to monitor
+ALL stages (S1–S6, incl. the style-overhaul rung) BUILD AND SHIP AT LAUNCH. What changes and
+what survives:
+- SAFETY UNCHANGED: the schema wall was always the safety mechanism, not the ladder — every
+  write stage compiles to typed ops through validation/preview/per-item approval; worst case
+  remains a refused draft. Shipping whole adds zero world-integrity risk.
+- THE LADDER BECOMES A MONITORING FRAMEWORK: the §5 metrics + the §3f rider instrument every
+  stage from day one; PER-STAGE KILL-SWITCHES at the entitlement layer (server-side pause of
+  any stage without deploy); write stages carry an honest "early access" register at launch
+  until their live metrics mature. Evidence-before-confidence survives; it no longer blocks
+  the door.
+- SEQUENCING (prerequisite-driven, all pre-push): S3 session interpretation + S4 custom
+  entities + S5 construction (compiles onto the instant-world composer) build NOW — edge/
+  display lanes, engine-frozen-compatible, ROUND 3 reviews them; S4+ knobs build in the
+  post-soak TUNING WINDOW (the knob registry mints there — "one enumeration serves both");
+  S6 tuning counsel builds post-soak (the world-health evaluator library is born there);
+  rung-3 packs V1 per capacity. Everything lands before THE VERY END = at launch.
+
 ## 3. Hard rules (the constitution extended to the AI layer)
 - The AI NEVER writes state: ops only, through validation, through approval. No op type = no
   effect. The engine stays LLM-free; no AI call per tick ever.
