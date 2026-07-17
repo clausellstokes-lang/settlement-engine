@@ -79,6 +79,34 @@ what survives:
   S6 tuning counsel builds post-soak (the world-health evaluator library is born there);
   rung-3 packs V1 per capacity. Everything lands before THE VERY END = at launch.
 
+## 2c. THE SURVEYOR SHELL (owner UX commission 2026-07-17: the floating access pattern —
+## "a floating icon on the right side... opens up an appropriately sized text box... access
+## to whatever is in that account's settlements and maps etc with default expectation of the
+## page that they are in")
+The access architecture, on the owner's backbone + the ambient layer:
+1. **THE DOCKED PANEL**: floating sigil (right side, the Surveyor's compass) → a docked,
+   resizable side panel (never a modal — the world stays visible mid-conversation); mobile =
+   bottom sheet; Cmd+K palette shortcut as the power complement. Lazy chunk (S1's
+   FloatingAffordances/AiAnalystPanel is the seed — this spec refines it).
+2. **THE CONTEXT ANCHOR (the owner's page-default, formalized)**: every request carries an
+   anchor (page scope + selected entity) — dossier ⇒ that settlement · realm dashboard ⇒
+   realm · chronicle ⇒ the advance in view · map ⇒ viewport/selection. The anchor is VISIBLE
+   in the panel ("Reading: <entity> · Week <n>") with a tap-to-change scope chip —
+   transparency about what the AI sees (the §3c honesty made tangible). The state-slicers
+   consume the anchor as the default retrieval scope.
+3. **THE AMBIENT LAYER**: ask-here glyphs on every receipt/chronicle-beat/entity card (open
+   the panel PRE-ANCHORED with the obvious question staged); SELECTION-AWARENESS (a selected
+   NPC/institution pulses the sigil — one click anchors the ask).
+4. **THE EMPTY STATE**: anchor + 3-4 suggested questions derived from READ-MODELS (zero AI
+   cost until asked) + one-tap S2 brief shortcuts + credit balance.
+5. **IN-PANEL LAWS SURFACED**: two-voices rendering (cited report / marked musings) ·
+   audience toggle at top · per-question ESTIMATED CREDIT COST before send · §3d drafted
+   proposals render as approve/edit/discard cards in-panel, landing in the docket like any
+   decree (bias-to-the-form's UI). First-open whisper introduces the persona per the
+   guidance register.
+BUILD SLOT: rides the S3 wave (task #33 — it builds the review UI; the shell refinement
+lands with it).
+
 ## 3. Hard rules (the constitution extended to the AI layer)
 - The AI NEVER writes state: ops only, through validation, through approval. No op type = no
   effect. The engine stays LLM-free; no AI call per tick ever.
