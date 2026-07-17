@@ -991,6 +991,11 @@ discards — domain/entities/npcs.js:113). SEAMS: npcState adoption of alignment
 (npcAgency headroom) · instant-NPC button host · REASSIGN target-picker UI · the op whisper.
 Freshness drift cleared at fold (bundle regen). NEW CEILING HAZARD memorialized:
 settlementSlice.js AT 1345 — store actions via delegated (get,set) helpers only.
+**⬛ RULING #4 RATIONALE (owner, verbatim): "because the AI still costs tokens and money,
+the audience would want the full capabilities and not feel cheated at launch rather than
+rollout."** The task-priced model makes this rigorous: breadth is free to non-users and
+fairly priced to users — staging under pay-per-task pricing reads as withheld inventory,
+not prudence. Early-access labels + kill-switches keep what staging actually protected.
 **⬛ OWNER RULING #4 (2026-07-17: "I want all the ai capabilities at launch") — THE
 LAUNCH-WHOLE AMENDMENT (§2b @ c12b1a95 on w7-prep).** ALL Surveyor stages ship at launch.
 What survives: SAFETY (the schema wall — never the ladder — carries it; worst case stays a
