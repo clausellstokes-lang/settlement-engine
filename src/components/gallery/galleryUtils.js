@@ -98,6 +98,7 @@ export function galleryUrlFor(slug) {
  * public URL to clipboard. Never throws — returns { ok, method } so callers can
  * show success/failure feedback. A cancelled native share sheet is { ok:false,
  * cancelled:true } (not an error to surface).
+ * @param {{ slug?: string, name?: string }} [item] the tile/dossier being shared
  */
 export async function shareGalleryDossier({ slug, name } = {}) {
   if (!slug) return { ok: false, method: null };

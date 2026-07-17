@@ -1010,7 +1010,8 @@ const WORLD_AGE_BANDS = AGE_BAND_IDS;
  *   description?: string, imageUrl?: string, imageAlt?: string,
  *   tags?: string[]|string, importable?: boolean, realmArcSummary?: string,
  *   memberBand?: string, dominantCulture?: string, tierSpread?: string,
- *   atWar?: boolean, shareWorld?: boolean, worldSections?: string[],
+ *   atWar?: boolean, aliveness?: number|null, worldAge?: string|null,
+ *   shareWorld?: boolean, worldSections?: string[],
  *   worldSnapshot?: object|null,
  * }} [metadata]
  * @returns {Object} the saved_maps update patch
