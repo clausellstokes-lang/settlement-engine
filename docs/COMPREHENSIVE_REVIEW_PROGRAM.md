@@ -1098,6 +1098,29 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE RECONCILIATION LAW (2026-07-17, owner-delegated "i let you decide how that
+works" — architect's mechanism, vetoable): how optimality relates to lawful↔chaos OVER
+TIME.** The FOUNDING response mode (exploit/endure/fortify; optimal or suboptimal) is the
+starting point and stays character-derived. Over time the town reconciles with its site,
+and ALIGNMENT GOVERNS THE STYLE OF RECONCILIATION, not its morality: **LAWFUL = planned
+coherence toward the CHOSEN doctrine's optimum** — discrete, engineered, legible
+corrections (the drained quarter, the built quay, the aligned extension toward the
+harbor); a lawful fortress town MAINTAINS its fortified suboptimum deliberately (lawful
+= ordered execution of the doctrine, not trade-optimality worship). **CHAOTIC = greedy
+local opportunism** — continuous encroachment toward whatever advantage is locally
+available now (riverbank grabs, sprawl toward the trade gate), gaining fast and
+accumulating disorder (congestion grain, palimpsest over the old bones). Both signs are
+even-handed (state-never-fate; no alignment moralizing). MECHANISM (zero engine change —
+the fabric layer is folded and already carries the signals): the v2 engine computes and
+RETAINS **THE LATENT ADVANTAGE MAP** at generation (the site's unexploited attractors —
+the declined harbor, the unused ford — a natural byproduct of stages 0-1); the v2
+hasFabric branch INTERPRETS the existing fabric signals (alignment-drift grain toward
+1−lawfulness01 + prominence stocks) as reconciliation: direction from the latent map,
+style+coordination from lawfulness, magnitude+timing from fabric stocks. Dark fabric ⇒
+founding form persists (correct: no history yet). SM-5's change view narrates
+reconciliation turns for free. Lands wholly in the #38 lane (relay #5); latent-map
+retention joins the provenance annotations; pins: lawful-vs-chaotic reconciliation
+fixtures on the same site + same founding mode.
 **⬛ OWNER DESIGN REFINEMENT: SITE GENESIS — STAGE 0 (2026-07-17, in-session, folded
 into #38): "randomly generate a river or a mountain or a side of a mountain or sand dunes
 or a marsh or whatever makes sense from the combination of nearby resources, trade route
