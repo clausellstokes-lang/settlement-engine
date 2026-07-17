@@ -105,15 +105,15 @@ function pushWash(ops, style) {
 /** Cartouche neatline — a double inked border frame. @param {DrawOp[]} ops @param {any} style */
 function pushCartouche(ops, style) {
   const ink = style.palette.ink;
-  /** @param {number} a @param {number} w @param {number} o */
-  const frame = (a, w, o) => ({
+  /** @param {number} a @param {number} w @param {number} o @returns {DrawOp} */
+  const frame = (a, w, o) => (/** @type {DrawOp} */ ({
     t: 'poly',
-    pts: /** @type {Array<[number,number]>} */ ([[a, a], [VIEW - a, a], [VIEW - a, VIEW - a], [a, VIEW - a]]),
+    pts: [[a, a], [VIEW - a, a], [VIEW - a, VIEW - a], [a, VIEW - a]],
     closed: true,
     stroke: ink,
     strokeOpacity: o,
     strokeWidth: w,
-  });
+  }));
   ops.push(frame(18, 3, 0.85));
   ops.push(frame(28, 1, 0.6));
 }

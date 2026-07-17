@@ -55,6 +55,25 @@ export const TOWN_MAP_STYLE_IDS = Object.freeze(['parchment', 'watercolor', 'dar
 export const DEFAULT_STYLE_ID = 'parchment';
 
 /**
+ * A fully-resolved style definition — parchment defaults filled in for every field.
+ * @typedef {Object} TownMapStyle
+ * @property {string} id
+ * @property {string} label
+ * @property {string} background
+ * @property {string} contrast
+ * @property {string} hazardGlyph
+ * @property {string} anchorGlyph
+ * @property {ReadonlyArray<string>} furniture
+ * @property {{ grid: boolean, gridStep: number, scaleBar: boolean, tokenPx: number }} functional
+ * @property {number} rasterScale
+ * @property {Record<string, string>} palette
+ * @property {Record<string, string>} district
+ * @property {Record<string, number>} stroke
+ * @property {Record<string, number>} opacity
+ * @property {boolean} [__resolved]
+ */
+
+/**
  * PARCHMENT — the default lens. Its palette is the fixed EXPORT_PALETTE and its
  * weights/opacities reproduce the pre-style-layer draw output EXACTLY, so the
  * default derived view is byte-identical to the legacy plate/thumbnail (proven by
@@ -214,13 +233,13 @@ const RESOLVED = new Map();
  * definition — parchment defaults filled in for every unspecified field. An unknown
  * id falls back to parchment (fail-safe: an out-of-vocabulary lens is never unsafe,
  * just the default look). PURE + deterministic; no Date / Math.random.
- * @param {string | { id?: string } | null | undefined} styleOrId
- * @returns {typeof PARCHMENT}
+ * @param {string | { id?: string, __resolved?: boolean } | null | undefined} styleOrId
+ * @returns {TownMapStyle}
  */
 export function resolveTownMapStyle(styleOrId) {
   // Already a resolved style object (carries the internal marker) — pass through.
   if (styleOrId && typeof styleOrId === 'object' && styleOrId.__resolved === true) {
-    return /** @type {any} */ (styleOrId);
+    return /** @type {TownMapStyle} */ (styleOrId);
   }
   const id = typeof styleOrId === 'string'
     ? styleOrId
@@ -229,7 +248,7 @@ export function resolveTownMapStyle(styleOrId) {
   const cached = RESOLVED.get(key);
   if (cached) return cached;
   const over = OVERRIDES[key];
-  const resolved = Object.freeze({
+  const resolved = /** @type {TownMapStyle} */ (Object.freeze({
     __resolved: true,
     id: over.id || PARCHMENT.id,
     label: over.label || PARCHMENT.label,
@@ -244,7 +263,7 @@ export function resolveTownMapStyle(styleOrId) {
     district: mergeSub(PARCHMENT.district, over.district),
     stroke: mergeSub(PARCHMENT.stroke, over.stroke),
     opacity: mergeSub(PARCHMENT.opacity, over.opacity),
-  });
+  }));
   RESOLVED.set(key, resolved);
   return resolved;
 }

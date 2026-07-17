@@ -149,7 +149,7 @@ function browserRasterize(svg, size, quality, mime = 'image/jpeg') {
  * canvas encode runs once; changed content → a fresh raster. Browser-only for the
  * first (uncached) render of a given key.
  * @param {any} settlement the settlement blob (save.settlement)
- * @param {{ size?: number, quality?: number, rasterize?: (svg:string,size:number,quality:number)=>Promise<string> }} [opts]
+ * @param {{ size?: number, quality?: number, style?: string, rasterize?: (svg:string,size:number,quality:number,mime?:string)=>Promise<string> }} [opts]
  *   `rasterize` is an injection seam for tests (the real canvas raster is browser-only).
  * @returns {Promise<string | null>}
  */
