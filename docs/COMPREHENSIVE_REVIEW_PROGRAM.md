@@ -972,6 +972,14 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ AI STYLE OVERHAUL REFINED (owner, 2026-07-17):** the compile context is THREE layers —
+the settlement DOSSIER (what it is) + the user's INPUT PROMPT (what they want) + THE DESIGN
+CORPUS itself (the four lens definitions + style schema as grounding — the AI composes
+WITHIN the house design language, never from nothing). ANALYTICS CAPTURE EXPLICIT (§3f/§4b
+apply as everywhere): style-overhaul riders carry style-domain vocabulary (base lens,
+palette family, motif class, oov flag) → aggregated style intent = THE LENS ROADMAP RADAR
+(demand-proven next lenses/genre packs from what users ask for that the vocabulary can't
+yet express). Folded into task #28.
 **⬛ MAP LENSES + AI OVERHAUL (owner extension, 2026-07-17, task #28 re-scoped):** FOUR
 NAMED LENSES at launch — parchment / watercolor / dark fantasy / VTT ("different lenses of
 the same settlement upon first generation"); switching instant+free forever (derived view);
