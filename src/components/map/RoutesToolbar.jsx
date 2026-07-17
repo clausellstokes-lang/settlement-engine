@@ -25,8 +25,9 @@
 
 import { useStore } from '../../store';
 import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, MUTED, sans, FS, SP, R, swatch } from '../theme.js';
-import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff } from 'lucide-react';
+import { Link as LinkIcon, AlertTriangle, ChevronRight, Eye, EyeOff, Lock } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
+import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 // components-map-3: the filter chips draw from the canonical relationship palette
 // (relationshipEdgeStyle) — this toolbar used to show a gold "Client" dot beside a
 // purple drawn edge, a live cross-surface contradiction (P11).
@@ -41,6 +42,13 @@ export default function RoutesToolbar() {
   // map; we surface the WORST one as a single "your network is
   // strained" callout rather than enumerating every burg.
   const activeSettlement = useStore(s => s.settlement);
+  // mapChains tier gate (Owner Ruling #5 — "enforce mapChains"): this Chains
+  // eye-toggle is the second toggle affordance (LayersPanel's Supply-chains row
+  // is the first; the MapOverlay render is the third wiring point). Locked =
+  // visible with a Lock glyph; clicking fires the map-family pricing moment
+  // instead of toggling. The derivation (computeMapChains) stays tier-blind.
+  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
+  const authTier = useStore(s => s.auth?.tier);
 
   const activeFilter = Array.isArray(layers?.relationshipFilter)
     ? layers.relationshipFilter
@@ -144,14 +152,20 @@ export default function RoutesToolbar() {
         Roads
       </Button>
 
-      {/* Chains toggle */}
+      {/* Chains toggle — tier-gated (see mapChainsUnlocked above) */}
       <Button
         variant="ghost"
         size="sm"
-        onClick={() => toggleLayer('chains')}
-        title="Toggle the supply-chain layer"
-        aria-pressed={!!layers?.chains}
-        icon={layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
+        onClick={() => {
+          if (!mapChainsUnlocked) {
+            triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
+            return;
+          }
+          toggleLayer('chains');
+        }}
+        title={mapChainsUnlocked ? 'Toggle the supply-chain layer' : 'Supply chains unlock with Cartographer'}
+        aria-pressed={mapChainsUnlocked && !!layers?.chains}
+        icon={!mapChainsUnlocked ? <Lock size={11} data-testid="routes-chains-lock" /> : layers?.chains ? <Eye size={11} /> : <EyeOff size={11} />}
       >
         Chains
       </Button>

@@ -12,10 +12,11 @@
  *   - Native culture regions
  */
 
-import { X, Check } from 'lucide-react';
+import { X, Check, Lock } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
+import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
@@ -35,6 +36,15 @@ export default function LayersPanel({ onClose }) {
   const layers         = useStore(s => s.mapState.layers);
   const toggleLayer    = useStore(s => s.toggleLayer);
   const setLayerFilter = useStore(s => s.setLayerFilter);
+  // mapChains tier gate (Owner Ruling #5 — "enforce mapChains"): the Supply
+  // chains toggle is the affordance, so the gate lives HERE (and at the
+  // MapOverlay render + RoutesToolbar twin), never in the derivation. Locked =
+  // visible-but-locked per the RealmDashboardLocked "reachable, not hidden"
+  // precedent; a click on the locked row fires the map-family pricing moment
+  // instead of toggling (no store write — the stored layers.chains survives an
+  // upgrade untouched, so chains reappear without re-toggling).
+  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
+  const authTier = useStore(s => s.auth?.tier);
 
   const relFilter = new Set(Array.isArray(layers.relationshipFilter) ? layers.relationshipFilter : []);
   const regionalChannelFilter = new Set(
@@ -128,8 +138,16 @@ export default function LayersPanel({ onClose }) {
 
         <LayerToggle
           label="Supply chains"
-          checked={!!layers.chains}
-          onChange={() => toggleLayer('chains')}
+          checked={mapChainsUnlocked && !!layers.chains}
+          locked={!mapChainsUnlocked}
+          lockedHint="Supply chains unlock with Cartographer"
+          onChange={() => {
+            if (!mapChainsUnlocked) {
+              triggerPricingMoment('map_realm_teaser', useStore.getState().setActivePricingMoment, { tier: authTier });
+              return;
+            }
+            toggleLayer('chains');
+          }}
         />
         <LayerToggle
           label="Regional channels"
@@ -246,7 +264,7 @@ export default function LayersPanel({ onClose }) {
   );
 }
 
-function LayerToggle({ label, checked, onChange }) {
+function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
   const inputId = `layer-toggle-${String(label).replace(/\s+/g, '-').toLowerCase()}`;
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- handlers only apply decorative hover styling to this label-for-checkbox; no interactive behavior added
@@ -257,7 +275,7 @@ function LayerToggle({ label, checked, onChange }) {
       padding: `${SP.xs}px ${SP.sm}px`,
       cursor: 'pointer', userSelect: 'none',
       borderRadius: R.sm,
-      fontSize: FS.sm, color: INK,
+      fontSize: FS.sm, color: locked ? MUTED : INK,
     }}
       onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
@@ -265,12 +283,18 @@ function LayerToggle({ label, checked, onChange }) {
       <input
         id={inputId}
         type="checkbox"
-        aria-label={label}
+        aria-label={locked && lockedHint ? `${label} — ${lockedHint}` : label}
         checked={checked}
         onChange={onChange}
         style={{ accentColor: GOLD, cursor: 'pointer' }}
       />
       <span style={{ fontWeight: 600 }}>{label}</span>
+      {/* The gate moment stays VISIBLE (premium-seam law: a locked affordance,
+          not a hidden one) — the unlock path rides the aria-label hint (NOT a
+          native title= tooltip: the shrink-only title census, guidanceRegistry
+          walker, is the house doctrine against those); clicking fires the
+          pricing moment upstream. */}
+      {locked && <Lock size={11} color={GOLD} aria-hidden data-testid={`${inputId}-lock`} />}
     </label>
   );
 }

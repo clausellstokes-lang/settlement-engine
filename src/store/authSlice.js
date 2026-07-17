@@ -494,14 +494,14 @@ export const createAuthSlice = (set, get) => ({
     return TIER_GATE[tier]?.export === true;
   },
 
-  // NOTE: unwired enforcement hook. TIER_GATE marks mapChains premium-only, but
-  // this selector currently has NO consumers — supply-chain edges (ChainEdges,
-  // gated only by layers.chains, default ON) render for ALL tiers. Pricing is
-  // adopted AS-SHIPPED (free) per the reconciliation ruling; the gate is retained
-  // as the one wiring point if map-chains is ever monetized: consult it at the
-  // LayersPanel 'chains' toggle + the <ChainEdges/> render in
-  // components/MapOverlay.jsx, and default chains OFF for non-premium.
-  // Deliberate, documented — not a forgotten bug.
+  // ENFORCED (Owner Ruling #5, 2026-07-17 — "enforce mapChains", flipping the
+  // reconciliation-#4 as-shipped-free judgment at its recorded veto handle).
+  // Consumers: the <ChainEdges/> render in components/MapOverlay.jsx + the
+  // LayersPanel 'Supply chains' toggle + the RoutesToolbar 'Chains' toggle —
+  // the gate wraps the AFFORDANCES; the derivation (lib/computeMapChains.js /
+  // lib/supplyChains.js) stays tier-blind. Locked toggles stay visible and
+  // fire the map_realm_teaser pricing moment. The stored layers.chains default
+  // is untouched, so an upgrade restores the layer without re-toggling.
   canUseMapChains: () => {
     if (ELEVATED_ROLES.includes(get().auth.role)) return true;
     const { tier } = get().auth;

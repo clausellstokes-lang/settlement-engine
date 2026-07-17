@@ -47,6 +47,13 @@ export default function MapOverlay({ bridge, transformOut }) {
   // no FMG iframe / bridge viewport to mirror).
   const customBackdrop = useStore(s => s.mapState.customBackdrop);
   const imageMode = !!customBackdrop?.imageUrl;
+  // mapChains tier gate (Owner Ruling #5, 2026-07-17 — "enforce mapChains"):
+  // TIER_GATE marks supply-chain map edges premium-only; the gate wraps the
+  // AFFORDANCE (this render + the LayersPanel/RoutesToolbar toggles), never the
+  // derivation — ChainEdges/computeMapChains stay tier-blind. Selector-call
+  // pattern per SettlementDetail's canExportFreely (elevated roles pass inside
+  // canUseMapChains itself).
+  const mapChainsUnlocked = useStore(s => typeof s.canUseMapChains === 'function' && s.canUseMapChains());
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -311,7 +318,7 @@ export default function MapOverlay({ bridge, transformOut }) {
           {/* Geography-derived charted trails need FMG pack.cells — omitted in
               image mode (relationship/chain straight-line edges still render). */}
           {layers.roads && !imageMode && <RoadsLayer bridge={bridge} />}
-          {layers.chains        && <ChainEdges />}
+          {layers.chains && mapChainsUnlocked && <ChainEdges />}
           {layers.relationships && <RelationshipEdges />}
           <RegionalCausalityLayer />
           {/* UX Phase 5 — spatial war/faith glyphs (deployment arrows, siege rings +
