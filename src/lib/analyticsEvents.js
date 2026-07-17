@@ -43,8 +43,14 @@ export { EDIT_KINDS };
  *  rev 8: Surveyor S1b — the analyst gains ai_analyst_rider (§3f: the model's
  *  ID-FREE, category-grade self-tag, emitted SERVER-SIDE by the ai-analyst edge on
  *  BOTH managed + BYOK paths as a condition-of-service) and ai_analyst_answer gains
- *  the §3b register-purity band beside citation coverage. */
-export const EVENTS_REV = 9;
+ *  the §3b register-purity band beside citation coverage.
+ *  rev 9: (in-flight prior lanes).
+ *  rev 10: SM-5 map-layer capture — town_map_layer_used, ONE feature-discriminated
+ *  event carrying the town-map GENERATION profile (feature:'render') + LEGIBILITY
+ *  engagement (provenance_hover/change_view/edge_labels/annotation_add/lens_switch/
+ *  panorama). Counts/enums/bands only; fired client-side from the lazy pane via
+ *  src/lib/mapLayerAnalytics.js. Essential class; the engine emits nothing. */
+export const EVENTS_REV = 10;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -177,6 +183,17 @@ export const EVENTS = Object.freeze({
   MAP_PLACEMENT_REMOVED:          'map_placement_removed',
   MAP_ROUTE_DRAWN:                'map_route_drawn',
   MAP_SAVED:                      'map_saved',
+
+  // ── SM-5: the TOWN-MAP legibility layer. ONE feature-discriminated event (the
+  //    ai_stage_answer precedent — one name, not eight) carrying BOTH the map-
+  //    GENERATION profile (feature:'render' — layoutVersion/siteKind/morphology/
+  //    responseMode/lynchBand/retryCount/hasFabric) and LEGIBILITY ENGAGEMENT
+  //    (feature ∈ provenance_hover|change_view|edge_labels|annotation_add|
+  //    lens_switch|panorama; counts/enums/bands only). The post-launch fog +
+  //    interior layers INHERIT this event with new `feature` values (no new names).
+  //    Lens/style RADAR for AI style-compiles is already captured server-side
+  //    (ai_stage_* feature:'styleOverhaul') — this is the distinct RENDER moment.
+  TOWN_MAP_LAYER_USED:            'town_map_layer_used',
 
   // ── v2: sharing / export ───────────────────────────────────────────────
   PDF_EXPORT_COMPLETED:           'pdf_export_completed',

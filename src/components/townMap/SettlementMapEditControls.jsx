@@ -44,6 +44,7 @@ export default function SettlementMapEditControls({
   editing, showLegend, legendPrefs, hasEdits, districts,
   styleIds, activeLens, lensPersisted, onPickLens,
   onReroll, onToggleLabels, onToggleLegend, onReset,
+  annotating, onToggleAnnotate,
 }) {
   return (
     <>
@@ -74,6 +75,13 @@ export default function SettlementMapEditControls({
             aria-label="Show or hide the district-category legend">
             Legend
           </Button>
+          {typeof onToggleAnnotate === 'function' && (
+            <Button data-town-edit-annotate variant={annotating ? 'primary' : 'secondary'} size="sm"
+              aria-pressed={!!annotating} onClick={onToggleAnnotate}
+              aria-label="Toggle DM marker placement — click the map to drop a labelled pin">
+              Markers
+            </Button>
+          )}
           <Button data-town-edit-reset variant="ghost" size="sm" disabled={!hasEdits} onClick={onReset}
             aria-label="Clear all cosmetic map edits — restores the generated layout">
             Reset

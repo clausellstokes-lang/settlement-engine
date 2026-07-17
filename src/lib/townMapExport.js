@@ -48,6 +48,7 @@
 import {
   buildTownMapModel, readMapEdits, readStyleLens, buildTownMapSvg,
   hasDrawableMap, coerceStyleId,
+  buildTownMapDrawList, drawListToSvg, annotationDrawOps, readAnnotations,
 } from '../domain/townMap/index.js';
 import { renderTownMapTokenRaster } from './townMapThumb.js';
 import { slugify } from '../kernel/slugify.js';
@@ -99,10 +100,16 @@ export function exportLens(settlement, styleOverride) {
 
 /**
  * The native export SVG string for a settlement under a lens. Pure + deterministic:
- * (settlement, lens, resolution) → byte-identical SVG. `null` when there is nothing
- * to draw.
+ * (settlement, lens, resolution, audience) → byte-identical SVG. `null` when there is
+ * nothing to draw.
+ *
+ * SM-5 (5) — DM annotation markers ride the export under the WYSIWYG visibility split:
+ * `audience` ('dm' the owner's own reference export — the default — shows all markers;
+ * 'player' a handout omits DM-only ones). Composed by APPENDING annotation ops to the
+ * draw list (buildTownMapDrawList is never touched, so its golden is never perturbed);
+ * DORMANT — a map with no annotations produces []-extra ⇒ byte-identical to before.
  * @param {any} settlement
- * @param {{ style?: string, resolution?: number }} [opts]
+ * @param {{ style?: string, resolution?: number, audience?: 'dm'|'player' }} [opts]
  * @returns {string | null}
  */
 export function townMapExportSvg(settlement, opts = {}) {
@@ -110,7 +117,9 @@ export function townMapExportSvg(settlement, opts = {}) {
   if (!model) return null;
   const style = exportLens(settlement, opts.style);
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
-  return buildTownMapSvg(model, { style, width: size, height: size });
+  const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);
+  if (markers.length === 0) return buildTownMapSvg(model, { style, width: size, height: size });
+  return drawListToSvg(buildTownMapDrawList(model, style).concat(markers), { style, width: size, height: size });
 }
 
 /**
@@ -168,14 +177,14 @@ function browserRasterizeBlob(svg, size, mime, quality) {
  * The `rasterize` option is the browser-only-canvas injection seam (tests drive
  * it deterministically); the default is the real canvas rasterizer.
  * @param {any} settlement
- * @param {{ format?: string, resolution?: number, style?: string,
+ * @param {{ format?: string, resolution?: number, style?: string, audience?: 'dm'|'player',
  *   rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]
  * @returns {Promise<{ blob: Blob, mime: string, ext: string, format: string } | null>}
  */
 export async function renderTownMapExport(settlement, opts = {}) {
   const format = FORMATS[opts.format] ? opts.format : 'png';
   const fmt = FORMATS[format];
-  const svg = townMapExportSvg(settlement, { style: opts.style, resolution: opts.resolution });
+  const svg = townMapExportSvg(settlement, { style: opts.style, resolution: opts.resolution, audience: opts.audience });
   if (svg == null) return null;
 
   if (!fmt.raster) {

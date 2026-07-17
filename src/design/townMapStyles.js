@@ -48,8 +48,14 @@ export const ANCHOR_GLYPHS = Object.freeze(['disc', 'ring', 'star']);
 /** Contrast levels (an on-screen viewer hint; export always emits concrete color). */
 export const CONTRAST_LEVELS = Object.freeze(['soft', 'normal', 'high']);
 
-/** The named base lenses, in canonical order. Genre lenses land at S4+. */
-export const TOWN_MAP_STYLE_IDS = Object.freeze(['parchment', 'watercolor', 'darkFantasy', 'vtt']);
+/** The named base lenses, in canonical order. Genre lenses land at S4+.
+ *  `accessible` (SM-5, the ACCESSIBILITY LENS) is a colorblind-safe, high-contrast
+ *  data-only lens — an Okabe-Ito-derived district palette whose tints stay
+ *  distinguishable under the three common colour-vision deficiencies, plus crisp
+ *  high-contrast linework. It is a pure style definition (THE WALL holds: palette
+ *  hex + numbers only, no new renderer capability), so it composes with every
+ *  export/panorama/thumbnail exactly like the other lenses. */
+export const TOWN_MAP_STYLE_IDS = Object.freeze(['parchment', 'watercolor', 'darkFantasy', 'vtt', 'accessible']);
 
 /** The default lens id (byte-identical to the pre-style-layer export). */
 export const DEFAULT_STYLE_ID = 'parchment';
@@ -217,8 +223,64 @@ const VTT = {
   },
 };
 
+/**
+ * ACCESSIBLE — the ACCESSIBILITY LENS (SM-5, deliverable 6). A colorblind-safe,
+ * high-contrast lens: the district tints are an Okabe-Ito-derived set chosen so
+ * every category stays distinguishable under deuteranopia / protanopia /
+ * tritanopia (hue + luminance separation, not hue alone), the ground is a bright
+ * neutral, and the linework is heavy and near-opaque so shapes read on their own.
+ *
+ * THE WALL holds by construction: this is palette hex + numeric weights/opacities
+ * only — no new renderer capability, no pattern primitive (true hatching would need
+ * a new fill op threaded through the SVG/canvas/PDF adapters — a later, deliberate
+ * op-vocabulary change, recorded not smuggled). A clean cartouche neatline is the
+ * only furniture (no wash/compass) so nothing dilutes contrast.
+ */
+const ACCESSIBLE = {
+  id: 'accessible',
+  label: 'Accessible',
+  background: '#f7f7f4',
+  contrast: 'high',
+  hazardGlyph: 'diamond',
+  anchorGlyph: 'ring',
+  furniture: ['cartouche'],
+  functional: { grid: false, gridStep: 0, scaleBar: false, tokenPx: 0 },
+  rasterScale: 1,
+  palette: {
+    water: '#0072b2', road: '#4a4a4a', street: '#7a7a7a', ink: '#111111',
+    wall: '#111111', gate: '#f7f7f4', anchor: '#e69f00', buildingFill: '#ffffff',
+    hazardHigh: '#d55e00', hazardHighBg: '#fbe3d5', hazardMid: '#8a6d00', hazardMidBg: '#f5edcf',
+  },
+  // Okabe-Ito-derived, extended to the 12 district categories with distinct
+  // luminance/hue steps. Each pair is separated in more than hue alone so a
+  // colour-vision deficiency never collapses two adjacent categories.
+  district: {
+    civic: '#0072b2',        // blue
+    noble: '#cc79a7',        // reddish purple
+    merchant: '#e69f00',     // orange
+    religious: '#56b4e9',    // sky blue
+    arcane: '#5d3a9b',       // deep violet
+    craft: '#d55e00',        // vermillion
+    residential: '#009e73',  // bluish green
+    foreign: '#0f8b8d',      // teal
+    military: '#a11616',     // dark red
+    criminal: '#2b2b2b',     // near-black
+    industrial: '#7a4f0f',   // brown
+    other: '#6a6a6a',        // neutral gray
+  },
+  stroke: {
+    waterCoast: 2.5, river: 14, roadBase: 2.5, street: 3.5, anchor: 2,
+    wallBase: 2.5, gate: 2.5, district: 2.25, building: 2, badge: 2, hazard: 2,
+  },
+  opacity: {
+    waterFill: 0.2, waterCoastStroke: 0.75, riverStroke: 0.7, roadStroke: 0.7,
+    streetStroke: 0.7, districtFill: 0.3, districtAccent: 0.14, districtStroke: 0.9,
+    wallStroke: 1,
+  },
+};
+
 /** The raw lens overrides, merged over PARCHMENT by the resolver. */
-const OVERRIDES = { parchment: {}, watercolor: WATERCOLOR, darkFantasy: DARK_FANTASY, vtt: VTT };
+const OVERRIDES = { parchment: {}, watercolor: WATERCOLOR, darkFantasy: DARK_FANTASY, vtt: VTT, accessible: ACCESSIBLE };
 
 /** Shallow-merge one sub-object of a lens over the parchment default. */
 function mergeSub(base, over) {

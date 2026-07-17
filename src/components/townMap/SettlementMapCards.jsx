@@ -42,14 +42,16 @@ export function FloatingLabel({ anchor, children }) {
 /**
  * Map-native district card (deriveAllDistricts, joined by id). Kept at
  * InstitutionCard's visual weight but non-modal (a hover/pin popover).
- * @param {{ anchor:{x:number,y:number}, mapDistrict:any, profile:any, pinned:boolean, onClose:()=>void }} props
+ * @param {{ anchor:{x:number,y:number}, mapDistrict:any, profile:any, pinned:boolean,
+ *   onClose:()=>void, provenance?: Array<{family:string, familyLabel:string, ref:string, effect:string, effectLabel:string}> }} props
  */
-export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose }) {
+export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose, provenance }) {
   const { left, top } = clampAnchor(anchor, 320, 260);
   const name = profile?.name || mapDistrict?.name || 'District';
   const category = profile?.category || mapDistrict?.category || 'other';
   const color = districtColor(category);
   const insts = Array.isArray(profile?.institutions) ? profile.institutions : [];
+  const causes = Array.isArray(provenance) ? provenance : [];
   return (
     <div
       role={pinned ? 'dialog' : 'tooltip'}
@@ -91,6 +93,29 @@ export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose }) 
         {!profile && (
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>
             An outlying cluster with no distinct quarter.
+          </div>
+        )}
+        {/* THE MAP EXPLAINS ITSELF (SM-5) — the v2 engine's recorded cause(s) for why
+            this quarter sits, drifts, or is scarred where it is. Rendered ONLY when the
+            v2 model retained provenance (a v1 map passes []); the ref is the engine's
+            own string, shown verbatim (invents nothing — the InstitutionCard honesty gate). */}
+        {causes.length > 0 && (
+          <div style={{ marginTop: SP.xs, paddingTop: SP.sm, borderTop: `1px solid ${BORDER}` }}>
+            <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+              Why it sits here
+            </div>
+            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              {causes.map((c, i) => (
+                <li key={`prov-${i}`} style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <span style={{ fontSize: FS.xs, fontWeight: 700, color: INK, fontFamily: sans }}>
+                    {c.ref || c.familyLabel}
+                  </span>
+                  <span style={{ fontSize: FS.xxs, color: MUTED, fontFamily: sans }}>
+                    {`${c.familyLabel} · ${c.effectLabel}`}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>
