@@ -70,7 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowthWithFabric } from './urbanFabricKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -909,7 +909,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       snapshot: postTimeSnapshot,
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
-      tick: worldState.tick,
+      tick: worldState.tick, worldState, // (worldState = DOOR 1 siege-breach precision; dark ⇒ no-op)
       // NOTE: no warEconomy flag threaded — the homecoming credit is gated on the
       // record's BANKED deployedPopulation (whether population was actually debited),
       // not the live flag, so conservation holds under any flag combination and
@@ -1067,7 +1067,7 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
       snapshot: postTimeSnapshot,
       graph: postTimeSnapshot.regionalGraph,
       rng: rng.fork('war-layer'),
-      tick: worldState.tick,
+      tick: worldState.tick, worldState, // (worldState = DOOR 1 siege-breach precision; dark ⇒ no-op)
     });
   }
   // Religion dynamics: the deity contest + conversion spread +
@@ -2304,7 +2304,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // acquiredTraits idiom) read by townMap/fabricRead.js when #38 lights. DORMANT behind
   // the virtual urbanFabricEnabled flag ⇒ a complete no-op (zero key, zero mirror) —
   // the fabric dormancy golden proves it. NO rng (deposits are reads).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabric({
+  // DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (owner ruling #8; the map→engine coupling)
+  // rides the SAME seam, composed AFTER fabric inside advanceNpcGrowthWithFabricAndCon-
+  // sequence (spatialConsequenceKernel.js — the ceiling-safe name swap). A pure engine
+  // CONSUMER (the projection law: the engine never reads the layout — the compact SPATIAL
+  // SUBSTRATE is derived at canonize, OUTSIDE the engine, and read from
+  // spatialLedgers.spatialSubstrate). It reads THIS tick's fresh calamity stamps + the
+  // settled outcomes and narrates two WHERE consumers — a fresh calamity's district toll
+  // field (totals untouched) and a fresh covert exposure's district diffusion (magnitudes
+  // untouched); the siege-breach consumer is seamed at the war layer (deploymentReturn) +
+  // the fabric scar reader over the same substrate. DORMANT behind the virtual
+  // spatialConsequenceEnabled flag ⇒ a complete no-op (zero read, zero beat, NO worldState
+  // mutation) — the spatial-consequence dormancy golden proves it. NO rng.
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequence({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));

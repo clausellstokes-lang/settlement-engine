@@ -100,7 +100,10 @@ import { clamp, clamp01 } from '../../kernel/math.js';
 /** @typedef {{ settlements?: FabSnapItem[] }} FabSnapshot */
 /** @typedef {{ saveId?: (string|number), settlement?: FabSettlement }} FabUpdate */
 /** @typedef {{ v: number, since: number, last: number }} FabStock */
-/** @typedef {{ sev: number, tick: number, week: number }} FabScar */
+/** @typedef {{ sev: number, tick: number, week: number, seg?: number, did?: (string|null) }} FabScar
+ *   — seg/did are the DOOR 1 siege-breach precision (wall segment index + protected
+ *   districtId); present ONLY when the spatial-consequence layer stamped a breach into
+ *   the siege_lifted cause. Absent ⇒ byte-identical to the pre-door-1 scar. */
 /** @typedef {{ classes: string[], tick: number, type: string, week: number }} FabRebirth */
 /** @typedef {{ drift: number, led: string, rebirths: FabRebirth[], scars: Record<string, FabScar>,
  *   seenTick: number, stocks: Record<string, FabStock>, week: number }} FabRecord */
@@ -117,6 +120,31 @@ function asObject(v) {
 function compareCodepoint(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
 /** @param {number} v @returns {number} */
 function round4(v) { return Math.round(num(v, 0) * 10000) / 10000; }
+/** Append the DOOR 1 siege-breach precision (wall segment index + protected districtId)
+ *  to a scar record ONLY when a valid segment is present — the keys never appear
+ *  otherwise, so a dark spatial-consequence layer keeps every scar byte-identical.
+ *  @param {FabScar} rec @param {unknown} seg @param {unknown} did @returns {FabScar} */
+function withBreach(rec, seg, did) {
+  if (typeof seg === 'number' && Number.isFinite(seg)) {
+    rec.seg = Math.floor(seg);
+    rec.did = typeof did === 'string' ? did : null;
+  }
+  return rec;
+}
+/** The DOOR 1 breach precision carried inside a lifted-siege condition's causes[] (the
+ *  only field surviving deriveActiveCondition's whitelist), or undefined when the
+ *  spatial-consequence layer was dark. @param {Record<string, unknown>} cond
+ *  @returns {{ seg: number, did: (string|null) }|undefined} */
+function breachFromCauses(cond) {
+  const causes = Array.isArray(asObject(cond).causes) ? /** @type {unknown[]} */ (asObject(cond).causes) : [];
+  for (const c of causes) {
+    const co = asObject(c);
+    if (typeof co.wallSegmentId === 'number' && Number.isFinite(co.wallSegmentId)) {
+      return { seg: Math.floor(co.wallSegmentId), did: typeof co.districtId === 'string' ? co.districtId : null };
+    }
+  }
+  return undefined;
+}
 
 // ── THE DORMANCY GATE (constitutional) — a virtual, defensively-read flag ──────
 /**
@@ -417,7 +445,7 @@ function normalizeRecord(v, tick, weeks) {
     const sc = asObject(rawScars[kind]);
     const sev = num(sc.sev, 0);
     if (!(sev > 0)) continue;
-    scars[kind] = { sev, tick: Math.floor(num(sc.tick, tick)), week: num(sc.week, weeks) };
+    scars[kind] = withBreach({ sev, tick: Math.floor(num(sc.tick, tick)), week: num(sc.week, weeks) }, sc.seg, sc.did);
   }
   const rebirthsRaw = Array.isArray(o.rebirths) ? o.rebirths : [];
   /** @type {FabRebirth[]} */
@@ -492,9 +520,16 @@ function mirrorOf(rec) {
   for (const cls of Object.keys(rec.stocks).sort(compareCodepoint)) {
     stocks[cls] = round4(clamp01(rec.stocks[cls].v / FABRIC_TUNING.STOCK_MAX));
   }
-  const scars = Object.keys(rec.scars).sort(compareCodepoint).map((kind) => ({
-    kind, severity: round4(rec.scars[kind].sev), week: rec.scars[kind].week,
-  }));
+  const scars = Object.keys(rec.scars).sort(compareCodepoint).map((kind) => {
+    const sc = rec.scars[kind];
+    /** @type {Record<string, unknown>} */
+    const m = { kind, severity: round4(sc.sev), week: sc.week };
+    // DOOR 1 — surface the siege-breach precision on the mirror ONLY when present
+    // (dark ⇒ the keys never appear ⇒ byte-identical mirror). The layout engine reads
+    // wallSegmentId/districtId to draw the patched breach where it actually fell.
+    if (typeof sc.seg === 'number') { m.wallSegmentId = sc.seg; m.districtId = sc.did ?? null; }
+    return m;
+  });
   const rebirths = rec.rebirths.slice(-3).map((r) => ({ classes: r.classes, type: r.type, week: r.week }));
   return { drift: rec.drift, rebirths, scars, stocks };
 }
@@ -608,13 +643,13 @@ export function advanceUrbanFabric({ snapshot, worldState, settlementUpdates, ti
       for (const kind of Object.keys(prior.scars)) {
         const sc = prior.scars[kind];
         const sev = round4(decayed(sc.sev, weeks - prior.week, num(SCAR_HALF_LIFE_WEEKS[kind], 130)));
-        if (sev >= T.SCAR_PRUNE_EPSILON) scars[kind] = { sev, tick: sc.tick, week: sc.week };
+        if (sev >= T.SCAR_PRUNE_EPSILON) scars[kind] = withBreach({ sev, tick: sc.tick, week: sc.week }, sc.seg, sc.did);
       }
     }
-    const mintScar = (/** @type {string} */ kind, /** @type {number} */ sev) => {
+    const mintScar = (/** @type {string} */ kind, /** @type {number} */ sev, /** @type {{ seg?: number, did?: (string|null) }|undefined} */ breach = undefined) => {
       const existing = scars[kind];
       if (existing && existing.sev >= sev) return;
-      scars[kind] = { sev: round4(clamp01(sev)), tick: now2, week: weeks };
+      scars[kind] = withBreach({ sev: round4(clamp01(sev)), tick: now2, week: weeks }, breach?.seg, breach?.did);
     };
 
     // Fresh calamity stamps (tick high-water mark — the freshness cursor).
@@ -629,10 +664,13 @@ export function advanceUrbanFabric({ snapshot, worldState, settlementUpdates, ti
       mintScar(scarKindOf(String(stamp.type || '')), calamitySeverity(stamp));
     }
 
-    // Lifted sieges/occupations + live famine (condition/stressor outcomes).
-    const conds = Array.isArray(asObject(s).activeConditions) ? /** @type {Array<{archetype?: string}>} */ (asObject(s).activeConditions) : [];
-    if (conds.some((c) => c?.archetype === 'siege_lifted')) mintScar('siege_repairs', T.SCAR_SIEGE_SEV);
-    if (conds.some((c) => c?.archetype === 'occupation_lifted')) mintScar('occupation_marks', T.SCAR_OCCUPATION_SEV);
+    // Lifted sieges/occupations + live famine (condition/stressor outcomes). DOOR 1:
+    // a lifted siege carries the breach precision INSIDE its cause (deploymentReturn +
+    // the substrate) — lift it into the siege_repairs scar (absent ⇒ byte-identical).
+    const conds = Array.isArray(asObject(s).activeConditions) ? /** @type {Array<Record<string, unknown>>} */ (asObject(s).activeConditions) : [];
+    const siegeLifted = conds.find((c) => asObject(c).archetype === 'siege_lifted');
+    if (siegeLifted) mintScar('siege_repairs', T.SCAR_SIEGE_SEV, breachFromCauses(siegeLifted));
+    if (conds.some((c) => asObject(c).archetype === 'occupation_lifted')) mintScar('occupation_marks', T.SCAR_OCCUPATION_SEV);
     const stressors = Array.isArray(asObject(worldState).stressors) ? /** @type {unknown[]} */ (asObject(worldState).stressors) : [];
     if (famineFor(/** @type {Parameters<typeof famineFor>[0]} */ (stressors), sid)) mintScar('lean_years', T.SCAR_FAMINE_SEV);
 

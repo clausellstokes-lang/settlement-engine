@@ -42,6 +42,7 @@ import {
 import { stablePart } from './worldState.js';
 import { warFrontsInto } from './warFrontReads.js';
 import { formatCount } from '../formatNumber.js';
+import { spatialConsequenceActive, substrateOf, approachOctant, resolveBreachSegment } from '../spatial/spatialSubstrateRead.js';
 
 /** @param {string} a @param {string} b */
 const codepoint = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
@@ -119,6 +120,28 @@ function isBesieged(graph, homeId) {
   // it here rolled a phantom "lifts the siege at its gates" recovery (+ a false
   // chronicle beat) on an army returning to a merely-hostile home.
   return warFrontsInto(graph, homeId).length > 0;
+}
+
+/**
+ * DOOR 1 — THE SIEGE BREACH (consumer b). The relieved siege breached a specific wall
+ * segment, picked DETERMINISTICALLY from the substrate's per-segment strength + the
+ * attacker's approach (the lowest-codepoint besieger, via a stable per-pair octant).
+ * Returns the additive `{ wallSegmentId, districtId }` to spread INTO the siege_lifted
+ * cause (where the fabric scar reader lifts it into a precise scar). DORMANT — the flag
+ * absent or no substrate ⇒ `{}` ⇒ the cause is byte-identical. PURE.
+ * @param {Record<string, unknown>|null|undefined} worldState @param {string} homeId
+ * @param {{ channels?: unknown[] }|null|undefined} graph
+ * @returns {{ wallSegmentId?: number, districtId?: (string|null) }}
+ */
+function breachCauseFields(worldState, homeId, graph) {
+  if (!spatialConsequenceActive(worldState)) return {};
+  const sub = substrateOf(worldState, homeId);
+  if (!sub) return {};
+  const besiegers = warFrontsInto(graph, homeId).map(String).sort(codepoint);
+  const attacker = besiegers.length ? besiegers[0] : homeId;
+  const breach = resolveBreachSegment(sub, approachOctant(attacker, homeId));
+  if (!breach) return {};
+  return { wallSegmentId: breach.wallSegmentId, districtId: breach.districtId };
 }
 
 /**
@@ -204,9 +227,10 @@ function failedReturnOutcome({ kind, homeId, homeName, sourceId, ratio, pSuccess
  * @param {any} args.graph      the regional graph AFTER this tick's mints (so "besieged" is current)
  * @param {{ random: () => number, fork: (label:string) => any }} args.rng
  * @param {number} [args.tick]
+ * @param {Record<string, unknown>|null} [args.worldState]  for DOOR 1's siege-breach precision (flag + substrate); optional
  * @returns {any[]} probability-1 condition / power_transfer outcomes for applyWorldPulseOutcomes
  */
-export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0 }) {
+export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, graph, rng, tick = 0, worldState = null }) {
   const outcomes = [];
   const baseRng = rng.fork('deployment-return');
   // Codepoint-sort by home id so iteration order never leaks into output.
@@ -383,7 +407,11 @@ export function deploymentReturnOutcomes({ resolvedDeployments = [], snapshot, g
             archetype: 'siege_lifted',
             severity: 0.3,
             triggeredAt: { tick, sourceEventType: 'DEPLOYMENT_RETURN', sourceEventTargetId: sourceId },
-            causes: [{ source: homeId, effect: 'siege_lifted', reason: `${homeName}'s returning army relieved the siege.` }],
+            // DOOR 1 — the relieved siege breached a specific wall SEGMENT; the breach
+            // rides INSIDE the cause (the only field surviving deriveActiveCondition's
+            // whitelist), where the fabric scar reader lifts it into a precise scar.
+            // Dark / no substrate ⇒ {} spread ⇒ the cause is byte-identical.
+            causes: [{ source: homeId, effect: 'siege_lifted', reason: `${homeName}'s returning army relieved the siege.`, ...breachCauseFields(worldState, homeId, graph) }],
           },
         });
       } else {
