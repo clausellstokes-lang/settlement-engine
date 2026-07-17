@@ -972,6 +972,21 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ TWO OWNER COMMISSIONS (2026-07-17, tasks #30/#31): TERMS OF USE + GALLERY-2.**
+(#30) ToS comprehensive redraft — tiers/credits/founder covenant/Surveyor conduct/BYOK +
+Forgetting-Law promises-never-exceeding-contracts/§3f rider disclosure/custom-content
+ownership (display license only)/§3c(7) extraction prohibition/moderation — drafted complete,
+SHIPS ONLY through the consolidated pre-launch LEGAL CONSULT. (#31) GALLERY-2, "the native
+marketer... has to be perfect": three tabs = three artifact classes (Settlements · Maps ·
+Campaigns; the realm's MAP-share vs CAMPAIGN-share newly modeled — distinct flags, schema
+presented for signature) · facets from the existing controlled vocabularies (one taxonomy:
+analytics+Surveyor+discovery) · ranking incl. the ALIVENESS signal (deep-history worlds rank
+up) · authed receipted votes at launch, structured fiction-register reactions, full
+commentary POST-launch (the comment surface = the largest attack class) · sharer editing ·
+SEO (per-item OG/schema.org, dynamic sitemap, programmatic facet hubs; the anon-cap-vs-
+crawlability trap solved deliberately) · **PRECONDITION: the owner-gated covert-corruption
+anon-gallery scrub lands BEFORE amplification** (joins this wave's batch). ROUND 3's
+product-dimension centerpiece. Build-out queue: 2 running + 5 staged.
 **✅ INSTANT WORLD RATIFIED + FOLDED (2026-07-17 ~02:00; merged into w7-prep).** The
 one-click premium realm: the COMPOSER (conductor over existing generators — zero
 generator/engine/wizard changes; tier-blind, source-scan-pinned) → tier-mixed canon members
