@@ -1098,6 +1098,23 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: MAP-LAYER ANALYTICS (2026-07-17, in-session: "make sure the
+analytics also capture the data regarding settlement map layer generation as well"):**
+the map layer joins the telemetry seam. RELAYED to the live SM-5 lane (it owns the map
+surface): capture the v2 GENERATION PROFILE at map render (layoutVersion, siteKind,
+morphology, responseMode, Lynch-score band, retryCount, hasFabric, panorama use) ·
+legibility-feature engagement (SM-5's own deliverables born instrumented: hover-provenance
+opens, change-view use, pin creation, a11y lens selection) · v1→v2 redraw opt-ins ·
+lens/style selection where not already covered by the style radar. DISCIPLINE (the seam
+architecture + the S4 precedent): ENRICH existing events with properties over minting
+names; where a name is unavoidable, the shared feature-discriminated pattern (the
+ai_stage_answer two-event precedent); EVENTS_REV + dictionary + drift contract updated;
+event-name strings are EAGER — counted against the 5,944 B margin. PRIVACY: enums/bands/
+counts only — never map content, prose, or coordinates; consent tiers via the seam as
+everywhere. BOUNDARIES: the engine emits nothing (Door 1's substrate stays
+analytics-free — constitutional); doors 2/3 INHERIT the SM-5 instrumentation pattern at
+their folds (fog session starts/reveals; interior opens/exports — same enrich-first law).
+ROUND 3's survey checks map-analytics coverage against this row.
 **⬛ LANE PARKED: CONTENT-GT-DOSSIER (2026-07-17, the owner-started session) — the
 DOSSIER+NAMING half of task #27 PARKED @ 577179fb on claude/generation-time-content-dossier
 (4 commits STACKED on the sibling generation-time branch @ f9720b5a — spot-checked; ⚠️ THE
