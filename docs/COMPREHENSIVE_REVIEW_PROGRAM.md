@@ -972,6 +972,30 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ W-R2-DEPTH-2 RATIFIED + FOLDED (2026-07-16 ~21:20; merge 5aa11dec) — THE DEPTH WAVE IS
+COMPLETE (D1–D6 all landed).** Branch gate 11,677/1 (sole red EXEMPT_CEILING), verify:dist
+143/143, zero eager (closure 1,063,701, margin 2,699), 0 any-holes. **D1** distance-priced
+news (1971526b): flag PURELY VIRTUAL (not in WAVES/presets — dark everywhere until the owner
+lights it); belief recency-fold hop delay additive on rumor-relay latency; player rumor
+freshness distance-priced, DM truth NEVER delayed; the believed-need coupling reads
+ground-truth need × belief confidence (BeliefRecord unchanged per ruling 1). **D4** hegemony
++ fear_of_dominance (71aa6493): computation in worldPulse/hegemony.js with display as thin
+re-export (ruling 3 — its 9 tests pass verbatim); fear_of_dominance + DISTINCT mirror
+balance_restored (ruling 2 — bijection walker strict); belief-side sphere read (fogged land
++ public naval, the matrix's naval coupling); DENIAL counter-intervention amplifier in
+convergence. **D3** doctrine courses (3041387c): 'doctrine' COURSE_KINDS + imposed-cult
+deposits gated SEPARATELY on faithSpreadEnabled (momentum golden byte-identical); reversal
+priced once via the course-generic crack + synod off-ramp. JUDGMENTs ratified ×4 (provenance
+scalar origin; unknown⇒0 believed-need; fear formula NAVAL_STRENGTH_NORM=100; soak-tunable
+constants NEWS_SPEED_FACTOR/LOUD_IMPOSITION/DENIAL_HEGEMON_FEAR_W — these three JOIN THE
+TUNING WINDOW'S dial list). SEAMS recorded in-file (all golden-shifting-when-lit, belonging
+to the tuning/regen batch): D4 treaty-term weighting (defensive/mutual_defense don't exist
+yet), D3 pin-2b patron-contest bias, D3 bloc-glue pairInterest threading, D3 organic
+doctrine-crack detection. **OWNER QUEUE ADDITION: the D1 lighting question** — does
+distancePricedNewsEnabled join the three world-alive presets? (Shipped dark; lighting =
+owner call; if lit, it rides the regen batch.) The wrong-lineage trap fired a 7TH time; the
+brief guard corrected it. **W8 FULL GATE now running on the unified tip 5aa11dec** — on
+green, the mainline freezes and D7 + Surveyor S1+S2 dispatch per RE-SEQUENCING RULING #2.
 **⬛ OWNER RE-SEQUENCING RULING #2 (2026-07-16 evening: "should we move the soak until after
 the regrade? because if there are bugs that block certain pathways and we fix that after the
 soak, then what is the point?") — THE SOAK CERTIFIES THE SHIPPING ENGINE.** The soak moves
