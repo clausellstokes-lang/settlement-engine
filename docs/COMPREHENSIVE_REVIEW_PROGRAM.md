@@ -1063,6 +1063,41 @@ worktree died with the rate-limit kill; remediated to .claude/worktrees/urban-fa
 the pre-authorized base — main tree never mutated. SEAMS: #38 layout engine consumes
 fabricRead when commissioned (hasFabric-branch + fallback); dossier/AI surfacing not
 wired (mirror available, grounding untouched); lighting rides the pre-signed regen batch.
+**⬛ FOLD 5/5 — THE MISC-SIGNED WAVE (2026-07-17):** folded into claude/w7-prep @
+07d3a1d2 (merge of claude/misc-signed tip dfd0d4ec, 2 commits off 9b9e525a; conflict-
+free; the manager's containment commits b0837797/2173e93d were soft-reset + reshaped by
+the lane as granted, content verified verbatim-preserved). ITEM 1 membership id
+normalization: String() model at campaignSettlements + getCampaignForSettlement (the in-
+code OWNER-GATED deferral retired) + four same-seam writer siblings (addToCampaign prune/
+dedupe, removeFromCampaign filter + crash-guard, SettlementsPanel listing). ⚠️ ONE-TIME
+BEHAVIOR SHIFT (signed intent, in the commit body verbatim): campaigns holding number/
+string-mismatched member ids REGAIN those members into world-pulse advances — previously
+silently dropped. Zero golden shifts (audited: no golden carries settlementIds). Red-then-
+green advance pin: string + number members BOTH advance. ITEM 2 mapChains enforcement
+(closes the mapchains-gate-unenforced memory): the ccd0d670 cherry-pick was adjudicated
+STALE (documents, doesn't enforce; QuickInspector claim outdated) — implemented fresh at
+ALL THREE affordances (MapOverlay ChainEdges render, LayersPanel row, RoutesToolbar
+toggle); locked = visible + Lock glyph + map_realm_teaser moment (reuse JUDGMENT);
+derivation tier-blind (ChainEdges/supplyChains ZERO diff, source-scan pinned); stored
+layers.chains never rewritten (upgrade restores). Lane gate: eager closure 951,955 B
+(88,045 margin — its base predates later folds), dist 143/143, 2 pre-existing name-
+identical env flakes vs base named. Fold receipt: lane pins 23 + census walker green;
+composite receipt AFTER ALL FIVE FOLDS: migration head 150 contiguous + docs suite 93/93.
+SEAM: SettlementsPanel:748 still lacks || [] on campaign.settlementIds (pre-existing
+crash exposure, out of scope, recorded).
+
+**⬛⬛ THE STOP (2026-07-17): OWNER RULING #6 EXECUTED.** All five in-flight lanes are
+FOLDED into claude/w7-prep @ 07d3a1d2 (gallery d17bc07f → S3 9ade8e08 → map-exports
+7ff194aa → urban-fabric 72be500f → misc-signed 07d3a1d2). Migration chain 001–150
+contiguous; docs gates green on the composite; every fold verified by lane pins on the
+merged tree. NOTHING PUSHED. The session halts here per the ruling. SUCCESSOR: start at
+THE WEEKLY-LIMIT RESUME DOSSIER below — the DISPATCH ORDER section is the resume point;
+all RULING #5 pre-signed authorities (incl. THE ONE REGEN) remain standing. Un-dispatched
+per the stop: S4-S6, generation-time content, TOWN LAYOUT v2 (#38), the composite full
+gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list-
+importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
+boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
+@ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
