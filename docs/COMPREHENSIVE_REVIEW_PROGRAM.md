@@ -1098,6 +1098,32 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (2026-07-17) → w7-prep @ 2c980e4e**
+(merge of claude/spatial-consequence 3fee34ee off 66eda8e8; spot-checked, 17 files NUL-
+clean; recovered from the stall class by the status demand — the cure is 3-for-3). THE
+ENGINE'S SANCTIONED REOPENING IS BUILT AND DARK: the sidecar substrate derived at
+canonize from buildTownMapModel's OWN OUTPUT (coherence by construction — the
+commissioned JUDGMENT, ratified), structural-signature reuse, flag-gated dynamic import
+keeping townMap out of the engine graph; three consumers behind virtual
+spatialConsequenceEnabled — calamity WHERE-not-HOW-MUCH (toll totals untouched BY
+CONSTRUCTION: the reader kernel cannot return a worldState; bucket-neutral quarter
+beats, regex-pinned) · deterministic siege breach ({wallSegmentId, districtId} into
+siege_lifted; fabric scar gains seg/did strictly-additively; approach = stable FNV pair
+hash, aspatial-safe) · covert diffusion along real district adjacency, leash-bounded,
+magnitudes untouched. DORMANCY GOLDEN COMMITTED (dark byte-identical over real pulse
+ticks + contract + lit anti-vacuity). Lane gates all FOREGROUND: 12,125 tests / 0 fail
+(3 chunks) · +34 tests · tsc 0 · four validators · dist 145-green on its base · F24 scan
+15/15. FOLD RECEIPTS on the merged tree: lane pins + fabric dormancy cross-check 43/43 ·
+tsc 0 · build ✓ · dist 146/146. **MANAGER SIGN-OFF EXECUTED (vetoable): the +652 B eager
+delta SIGNED as-built** (the flag-gated canonize hook in the eager slice; the lane
+stop-and-reported per the brief; re-shaping a verified store seam for ~350 B was judged
+worse than the bytes — the slimmer-hook option is recorded FP-G11 stock; margin ≈5,249).
+JUDGMENTs ×9 vetoable in the lane report (flammability/adjacency/strength tables; ONE
+new recorded dial family CALAMITY_LEASH .55 / COVERT_LEASH .5 / DIFFUSION_HOPS 2 =
+tuning-window stock). SEAMS: fabricRead render-side breach surfacing = map-UI stock ·
+conquest-ended sieges scar-less (unchanged) · the 112-error townMap strict debt
+CONFIRMED pre-existing at pristine base (the chip session owns it). REMAINING LANES:
+fog + panels — then THE PUSH.
 **⬛ FOLD: SM-5 THE MAP LEGIBILITY WAVE (2026-07-17) → w7-prep @ d0857995** (merge of
 claude/sm-5-legibility tip f2e3d755, 8 commits off 66eda8e8; spot-checked, 32 files NUL-
 clean). ALL SEVEN delivered: provenance hover + the surveyor's-read drawer (self-gates on
