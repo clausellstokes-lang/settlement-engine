@@ -1098,6 +1098,26 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER DESIGN REFINEMENT: ECONOMY-FIRST GENESIS (2026-07-17, in-session, folded into
+#38): "depending on the resources and terrain and everything else, procedurally and
+randomly generate that economic shape first onto the settlement map and only then apply
+all the other principles."** The v2 pipeline ORDER is now explicit: (0) terrain/water →
+(1) **THE ECONOMIC FIELD, FIRST** — attractor points + gradients derived from the
+dossier's ACTUAL economy (income sources, resource sites, trade-route bearings, fertile/
+navigable terrain) laid onto the map with seeded organic variation → (2) the genesis core
+NUCLEATES ON the field (the market where routes converge, the core at the ford) → (3)
+roads-before-buildings FOLLOW the economic gradients → (4) districts/growth rings/semantic
+placement pull toward their attractors → (5) the composition pass (Lynch rubric,
+historical form vocabulary, plan-response, wall-obeys-town, tier grammar) applies LAST.
+TWO LAWS ATTACHED (architect, vetoable): **EXPRESSION-NOT-SUBSTANCE** — seeded variation
+moves the economic field's expression (which bank, which bearing, offsets), never its
+substance (the dossier decides WHAT exists; truth-projection law) · **"randomly" = SEEDED**
+(the v2 fork; determinism constitutional). SYNERGY: the economic field IS the primary
+sourced-asymmetry layer — stage-1 attractors become the provenance sourceRefs, making
+asymmetry-with-provenance automatic-by-construction. RELAYED mid-flight to the v2 lane.
+ALSO: the deferred CONTENT-GT-DOSSIER taste-sample lane (task_56fe7e02) was STARTED BY
+THE OWNER in a separate session — tracked on the board; the composite waits for its
+outcome like any lane.
 **⬛ LANE PARKED: GENERATION-TIME CONTENT (2026-07-17) — task #27's remaining half
 BUILT + PARKED on claude/generation-time-content @ f9720b5a (3 commits off 07d3a1d2;
 spot-checked: files/base/shift-map match the report; UNFOLDED by design — joins the
