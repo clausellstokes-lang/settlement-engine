@@ -972,6 +972,12 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ MAP STYLES: NON-DESTRUCTIVE GUARANTEE (owner confirmation, 2026-07-17, folded into
+#28):** bespoke AI styles are ADDITIVE saved definitions — named, kept (credits bought an
+artifact, not a render), re-selectable; the four base lenses remain permanently available;
+flip-back instant/free/non-destructive (derived view). The cross-lens edit pin EXTENDS to
+bespoke definitions (one semantic edit renders correctly under every style incl. custom).
+No path exists by which styling can lose edits, damage the map, or lock the user in.
 **⬛ MAP TRUTH-PROJECTION LAW + THE PANORAMA QUESTION (owner example, 2026-07-17):** the
 owner's worked example (underground lava-ringed cyberpunk custom settlement, parchment×
 cyberpunk blend, slanted side-view) confirms + sharpens the design: (1) THE MAP DEPICTS WHAT
