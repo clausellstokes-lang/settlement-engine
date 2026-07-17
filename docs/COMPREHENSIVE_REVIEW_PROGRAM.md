@@ -972,6 +972,13 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ CHRONICLE AMENDMENT §5b (2026-07-17, @ 4b2f675b on w7-prep): ENTANGLEMENT
+CONSOLIDATION.** Owner: queued decrees "directly entangle with each other. so that is an
+area to consolidate." Entangled decree cones (chained / shared / conflicting / synergistic,
+detected over the receipts graph) render as ONE cluster — joint story, per-decree standings
+within, shared descendants attributed once, SELF-CONFLICT a first-class named finding, and
+honest-nulls extended ("absorbed by your own decree Y" ≠ "absorbed"). Two-decree conflict
+fixture pin mandatory. Relayed to the in-flight chronicle implementer (early, survey phase).
 **⬛ OWNER COMMISSION: THE CHRONICLE (2026-07-17, advance legibility) — DESIGN FROZEN @
 09130996 (docs/DESIGN_CHRONICLE_LEGIBILITY.md), WAVE DISPATCHED.** The world-pulse/wizard-news/
 autoresolver surfaces must be "perfect and readible and digestible and navigable and workable"
