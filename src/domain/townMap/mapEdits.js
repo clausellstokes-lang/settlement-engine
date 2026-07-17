@@ -35,7 +35,7 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string }} MapEdits */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number }} MapEdits */
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
@@ -45,10 +45,19 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 // (owner library, detail viewer, PDF, thumbnail); the anonymous-gallery drop is
 // the pre-existing owner-gated §6 opt-in (mapEdits is not on PUBLIC_TOPLEVEL_KEYS).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', // container
+  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', // container
   'anchor', 'dx', 'dy',                    // pin
   'showLabels', 'showLegend',              // legendPrefs
 ]);
+
+/** The layout-law versions the model can render. v1 is the DORMANT default (absent
+ *  ⇒ v1 ⇒ byte-identical to every pre-v2 settlement + golden); v2 is the semantic
+ *  urban-planning engine, minted for new settlements and reachable by opt-in redraw.
+ *  @type {ReadonlyArray<number>} */
+export const LAYOUT_LAW_VERSIONS = Object.freeze([1, 2]);
+
+/** The default (dormant) layout-law version — the pre-v2 arrangement. */
+export const DEFAULT_LAYOUT_LAW_VERSION = 1;
 
 /** The legendPref keys whose default is `false` (omitted when off).
  * @type {ReadonlyArray<'showLabels'|'showLegend'>} */
@@ -108,6 +117,15 @@ export function readStyleLens(edits) {
   return coerceStyleId(edits && typeof edits.styleLens === 'string' ? edits.styleLens : undefined);
 }
 
+/** The chosen layout-law version (1 or 2). Absent / unknown / any non-2 value ⇒ the
+ * dormant v1 default (so every pre-v2 settlement and golden stays byte-identical);
+ * only an explicit 2 selects the v2 semantic-planning engine.
+ * @param {MapEdits | null | undefined} edits
+ * @returns {number} */
+export function readLayoutLawVersion(edits) {
+  return edits && Number(edits.layoutLawVersion) === 2 ? 2 : DEFAULT_LAYOUT_LAW_VERSION;
+}
+
 /**
  * Canonicalize a container to its minimal byte-stable form, or `null` when it
  * carries no real edit. Keeps `layoutVariant` only when > 0; keeps `pins` only
@@ -151,6 +169,12 @@ export function normalizeMapEdits(edits) {
   // byte-identical to no-edit, the dormancy law). An unknown id coerces to default.
   const lens = readStyleLens(edits);
   if (lens !== DEFAULT_STYLE_ID) out.styleLens = lens;
+
+  // layoutLawVersion: kept ONLY for v2 (the default v1 ⇒ omitted ⇒ byte-identical to
+  // no-edit, the dormancy law — exactly the styleLens pattern). This is what pins the
+  // versioning law: an absent marker renders v1 unchanged; only an explicit v2 flips.
+  const version = readLayoutLawVersion(edits);
+  if (version !== DEFAULT_LAYOUT_LAW_VERSION) out.layoutLawVersion = version;
 
   return Object.keys(out).length > 0 ? out : null;
 }
@@ -207,4 +231,28 @@ export function withLegendPref(edits, key, value) {
 export function withStyleLens(edits, lens) {
   const base = normalizeMapEdits(edits) || {};
   return normalizeMapEdits({ ...base, styleLens: coerceStyleId(lens) });
+}
+
+/** THE OPT-IN REDRAW (VERSIONING LAW): switch a settlement's map to a layout-law
+ * version NON-DESTRUCTIVELY. Every OTHER edit — pins, lens, legend prefs, reroll
+ * salt — is preserved verbatim (it merges over the existing container), because the
+ * cosmetic anchors (catalogId / localUid / district id) are version-independent, so a
+ * v1 pin still nudges the same building under v2. Selecting v1 clears the key ⇒
+ * byte-identical dormancy (a redraw back to the original arrangement loses nothing).
+ * A non-{1,2} value coerces to the v1 default.
+ * @param {MapEdits | null | undefined} edits @param {number} version @returns {MapEdits | null} */
+export function withLayoutLawVersion(edits, version) {
+  const base = normalizeMapEdits(edits) || {};
+  const v = Number(version) === 2 ? 2 : DEFAULT_LAYOUT_LAW_VERSION;
+  return normalizeMapEdits({ ...base, layoutLawVersion: v });
+}
+
+/** The mapEdits container a NEWLY-created settlement is minted with so it renders
+ * under the v2 engine (the VERSIONING LAW's "new settlements mint v2"). Pure — a
+ * caller at the settlement-CREATE boundary (never the generation pipeline, so the
+ * generator golden is untouched) stamps this onto the fresh blob; EXISTING settlements
+ * never pass through create again, so they stay v1. A minimal `{ layoutLawVersion: 2 }`.
+ * @returns {MapEdits} */
+export function newSettlementMapEdits() {
+  return { layoutLawVersion: 2 };
 }

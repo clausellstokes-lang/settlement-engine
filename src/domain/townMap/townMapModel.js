@@ -38,6 +38,7 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
 import { anchorForInstitution, anchorForDistrict } from './anchors.js';
 import { assignInstitutionsToDistricts } from './institutionAssignment.js';
+import { buildTownLayoutV2 } from './townLayoutV2.js';
 
 /** @typedef {ReturnType<typeof createPRNG>} Rng */
 
@@ -123,6 +124,8 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {number} [layoutVariant]  integer salt for a deterministic reroll (0/absent ⇒ base)
  * @property {TownMapPin[]} [pins]     anchor-keyed position nudges
  * @property {Record<string, unknown>} [legendPrefs]  reserved for SM-3 legend prefs
+ * @property {string} [styleLens]      the chosen map lens (MAP STYLES)
+ * @property {number} [layoutLawVersion]  1 (v1, dormant default) | 2 (v2 semantic engine)
  */
 
 /**
@@ -212,7 +215,10 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {number} overlayVersion
  * @property {{ tier: string, terrain: string|null, tradeAccess: string|null,
  *   hasWalls: boolean, layoutVariant: number, buildingCount: number,
- *   districtCount: number, hamletCluster: boolean }} meta
+ *   districtCount: number, hamletCluster: boolean, morphology?: string,
+ *   hasFabric?: boolean, lynchScore?: number, lynchParts?: Record<string, number>,
+ *   retries?: number, deformedElementCount?: number, siteKind?: string,
+ *   responseMode?: string, coreNucleated?: boolean }} meta
  * @property {{ water: TownMapWater|null, roads: TownMapRoad[] }} frame
  * @property {{ anchor: { x: number, y: number, kind: string }, pattern: string,
  *   streets: Array<{ from: Point, to: Point }> }} skeleton
@@ -220,6 +226,8 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * @property {TownMapBuilding[]} buildings
  * @property {TownMapFortifications|null} fortifications
  * @property {{ hazards: TownMapHazard[], conditions: TownMapConditionBadge[] }} overlays
+ * @property {Record<string, Array<{ sourceFamily: string, sourceRef: string, effect: string }>>} [provenance]
+ * @property {Array<{ attractorRef: string, declinedBy: string, latentValue01: number, point: { x: number, y: number } }>} [latentAdvantages]
  * @property {{ scarHistory: null, thumbnail: null, pdfPlate: null }} reserved
  */
 
@@ -251,6 +259,17 @@ function reservedSlots() {
  */
 export function buildTownMapModel(settlement, mapEdits = null) {
   const s = settlement || /** @type {TownMapSettlement} */ ({});
+
+  // ── VERSIONING LAW (task #38) ───────────────────────────────────────────────
+  // An explicit `mapEdits.layoutLawVersion === 2` selects the v2 semantic urban-
+  // planning engine (a SIBLING generation in townLayoutV2.js that emits this exact
+  // TownMapModel shape, so every lens / export / hover / pin inherits it). Absent /
+  // 1 / anything-else renders the v1 path BELOW, byte-for-byte unchanged — so every
+  // pre-v2 settlement and every v1 golden stays identical (the lane lands free). New
+  // settlements mint v2 by carrying the marker; existing ones never do.
+  if (mapEdits && Number(mapEdits.layoutLawVersion) === 2) {
+    return buildTownLayoutV2(s, mapEdits);
+  }
 
   // ── rng, derived internally (never ambient). layoutVariant salts the fork; a
   //    variant of 0 / absent yields the base key ⇒ byte-identical to no edits. ──

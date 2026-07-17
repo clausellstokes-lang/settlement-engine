@@ -9,6 +9,18 @@
 
 export { buildTownMapModel } from './townMapModel.js';
 export { anchorForInstitution, anchorForDistrict, slugify } from './anchors.js';
+// TOWN LAYOUT v2 (#38) — the semantic urban-planning engine (a sibling generation
+// under the same projection). Lazy, consumed only by the model dispatch + tests.
+export {
+  buildTownLayoutV2,
+  TOWN_MAP_GEOMETRY_VERSION_V2,
+  LAYOUT_LAW_VERSION_V2,
+  MAX_LAYOUT_RETRIES,
+} from './townLayoutV2.js';
+export { scoreLynch, RUBRIC_WEIGHTS, LYNCH_ACCEPT_FLOOR } from './lynchRubric.js';
+// THE PANORAMA PROJECTION (#38, RULING #5) — an oblique 2.5D projection of any model
+// that composes with every lens. Lazy, consumed only by the map surfaces + tests.
+export { buildTownMapPanoramaDrawList, buildTownMapPanoramaSvg } from './townPanorama.js';
 export {
   assignInstitutionsToDistricts,
   CATEGORY_AFFINITY,
@@ -18,16 +30,21 @@ export {
 // the lazy viewer pane + tests, so this stays out of the first-paint static closure.
 export {
   MAP_EDITS_SCHEMA_KEYS,
+  LAYOUT_LAW_VERSIONS,
+  DEFAULT_LAYOUT_LAW_VERSION,
   readMapEdits,
   readLegendPrefs,
   readLayoutVariant,
   readStyleLens,
+  readLayoutLawVersion,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
   nextLayoutVariant,
   withLegendPref,
   withStyleLens,
+  withLayoutLawVersion,
+  newSettlementMapEdits,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
 // shared by the PDF plate + the library-card thumbnail. Imported ONLY by those
