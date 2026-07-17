@@ -972,6 +972,18 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ MAP TITLE TRANCHE RATIFIED + FOLDED (2026-07-16 ~20:20; fd16993d merged).** WorldMap-
+Toolbar's 16 native title= surveyed: 13 → the new MapControlsHelp "?" panel (role=note, the
+GUIDE-2b house pattern; visible labels stay the accessible names) · 1 → aria-label (Inspector
+— its dynamic unreviewed-count was the only spoken channel, preserved not lost) · 1 dropped
+(ResumeChip, dormant + duplicate aria-label) · 1 KEPT native with reason (Undo Advance —
+dynamic interval copy pinned by advanceMultiTickToolbar). **Title census 500 → 485.** Zero
+eager (closure unchanged 1,063,603); pins 32/32 on the MERGED tree. JUDGMENTs ratified ×3
+(comprehensive panel; text-glyph "?" to differentiate from the lucide tour button; the three
+per-title dispositions). ⚠️ NEW HAZARD (agent-surfaced): with multiple worktrees on different
+lineages, MAIN-TREE ABSOLUTE PATHS silently read the ledger lineage's file (Read/grep against
+/Users/.../settlement-engine/src/... returned baseline-471 content while the worktree held
+485) — always path into the worktree and `git rev-parse HEAD` before trusting file content.
 **⬛ W-R2-DEPTH: 3 OF 6 SHIPPED + FOLDED (2026-07-16 ~20:00; true merge f69fd96b) — the
 agent stopped disciplined rather than rush a fourth build; D1/D3/D4 hand off with complete
 recon.** SHIPPED (each byte-identical-dormant BY PROOF, pinned, zero eager, branch gate
