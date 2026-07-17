@@ -98,9 +98,9 @@ export function validateBespokeStyle(candidate, meta = {}) {
     const f = /** @type {Record<string, unknown>} */ (c.functional);
     functional = Object.freeze({
       grid: typeof f.grid === 'boolean' ? f.grid : base.functional.grid,
-      gridStep: (isFiniteNum(f.gridStep) && f.gridStep >= 0 && f.gridStep <= GRID_STEP_MAX) ? f.gridStep : base.functional.gridStep,
+      gridStep: (isFiniteNum(f.gridStep) && /** @type {number} */ (f.gridStep) >= 0 && /** @type {number} */ (f.gridStep) <= GRID_STEP_MAX) ? /** @type {number} */ (f.gridStep) : base.functional.gridStep,
       scaleBar: typeof f.scaleBar === 'boolean' ? f.scaleBar : base.functional.scaleBar,
-      tokenPx: (isFiniteNum(f.tokenPx) && f.tokenPx >= 0 && f.tokenPx <= TOKEN_PX_MAX) ? f.tokenPx : base.functional.tokenPx,
+      tokenPx: (isFiniteNum(f.tokenPx) && /** @type {number} */ (f.tokenPx) >= 0 && /** @type {number} */ (f.tokenPx) <= TOKEN_PX_MAX) ? /** @type {number} */ (f.tokenPx) : base.functional.tokenPx,
     });
   }
 
