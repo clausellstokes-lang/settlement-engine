@@ -972,6 +972,13 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ FOUNDRY EXPORT UPGRADED (owner, 2026-07-17; relayed in-flight to map-exports):** beyond
+the token raster — a UNIVERSAL VTT scene export (.dd2vtt-class interchange): image + grid
+config + LINE-OF-SIGHT WALLS derived from the draw-list's real geometry (footprints/walls →
+vision-blocking segments; gates → portals) — Foundry imports arrive PRE-WALLED for dynamic
+lighting (no generator offers this; our geometry is semantic). Same $2.99/premium export
+bundle gate. 1:1 wall-geometry pin mandated; module-requirement honesty required in the
+report; seam as MAP-EXPORTS-2 if the wave is already gating.
 **⬛ OWNER COMMISSION: THE URBAN FABRIC LAYER (2026-07-17, task #39) + LAYOUT v2 TEMPORAL
 EXTENSION.** The map gains MEMORY: a pure projection of current state cannot show gradual
 history ("buildings and city designs are resistant to rapid change except in the case of
