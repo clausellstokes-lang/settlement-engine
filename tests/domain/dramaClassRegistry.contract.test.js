@@ -53,11 +53,11 @@ describe('drama-class registry — entry shape (walker (a))', () => {
 });
 
 describe('drama-class priority (walker (b))', () => {
-  test('DRAMA_CLASS_PRIORITY covers exactly the 7 design classes, once each', () => {
-    expect(DRAMA_CLASS_PRIORITY.length).toBe(7);
-    expect(new Set(DRAMA_CLASS_PRIORITY).size).toBe(7);
+  test('DRAMA_CLASS_PRIORITY covers exactly the 8 design classes, once each', () => {
+    expect(DRAMA_CLASS_PRIORITY.length).toBe(8);
+    expect(new Set(DRAMA_CLASS_PRIORITY).size).toBe(8);
     expect([...DRAMA_CLASS_PRIORITY].sort()).toEqual([
-      'boom_flourishing', 'calamity', 'economic_shock', 'plague', 'schism_contest', 'succession_coup', 'war',
+      'boom_flourishing', 'calamity', 'economic_shock', 'plague', 'reframe', 'schism_contest', 'succession_coup', 'war',
     ]);
   });
 
