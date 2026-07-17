@@ -32,12 +32,13 @@ import { cloneJson, persistSaveUpdate } from './settlementSliceHelpers.js';
 // (settlementSlice is AT its max-lines ceiling, so the bodies live in this delegated-
 // impl helper — the renameSettlementImpl precedent). CANON-TOLERANT: NPC lifecycle
 // edits change the FUTURE, never the past (no rename-style identity lock). Each writes
-// a DECLARED facet (npc.facets) so it is a permanent citizen of THE FACET LAW. The
-// pure/canonical bodies + propagation model + all pins live in domain/npc/npcOps.js;
-// these mutations are kept eager-cheap (no lazy-npcOps import, which would pull the
-// bank + PRNG into first paint) and in lockstep with that spec (light inline guards).
-const _NPC_SEAT_FIELDS = ['institutionId', 'factionLink', 'factionAffiliation', 'settlementId', 'role', 'linkedInstitutionIds', 'linkedFactionIds'];
-const _STASIS_REASONS = ['journey', 'imprisoned', 'missing', 'sequestered'];
+// a DECLARED facet (npc.facets) so it is a permanent citizen of THE FACET LAW. Kept
+// eager-cheap for the tight first-paint budget: NO lazy-npcOps import (which would
+// pull the bank + PRNG into first paint), and the covenant UI resolves the seat
+// patch — the pure/canonical bodies + propagation model + all pins live in
+// domain/npc/npcOps.js, kept in lockstep with this thin dispatcher. The full bank
+// validation (facet vocab, stasis reasons) lives in that lazy spec + the covenant UI;
+// this eager dispatcher trusts the covenant payload (light presence guards only).
 
 /**
  * Apply one typed NPC op to the live settlement (edit-npc / reassign-npc / stasis-npc
@@ -46,36 +47,29 @@ const _STASIS_REASONS = ['journey', 'imprisoned', 'missing', 'sequestered'];
  * @param {Function} get @param {Function} set @param {{ kind: string, payload?: any }} edit
  */
 export function applyNpcOp(get, set, edit) {
-  const kind = edit?.kind;
+  const k = edit?.kind;
   const p = edit?.payload || {};
   let changed = false;
   set(state => {
     const npc = state.settlement?.npcs?.[p.npcIndex];
     if (!npc) return;
-    if (kind === 'edit-npc') {
+    if (k === 'edit-npc') {
       if (!['alignment', 'temperament', 'role', 'goal'].includes(p.facetKind)) return;
       npc.facets = { ...(npc.facets || {}), [p.facetKind]: p.value };
       // Sync the live native field the engine/display reads (npcOps PROPAGATION MODEL).
       if (p.facetKind === 'temperament') npc.personality = { ...(npc.personality || {}), dominant: p.value };
       else if (p.facetKind === 'goal') npc.goal = { ...(npc.goal || {}), short: p.value };
-      changed = true;
-    } else if (kind === 'reassign-npc') {
-      const t = p.target;
-      if (!t || typeof t !== 'object') return;
-      // Seat-held ties move to the new posting (old seat vacates into role-fill);
-      // people-held ties (relationship edges keyed by npc id) travel untouched.
-      for (const f of _NPC_SEAT_FIELDS) { if (f in t) npc[f] = t[f]; }
-      npc.reassignedTo = { institutionId: t.institutionId ?? null, settlementId: t.settlementId ?? null };
-      changed = true;
-    } else if (kind === 'stasis-npc') {
-      if (!_STASIS_REASONS.includes(p.reason)) return;
+    } else if (k === 'reassign-npc' && p.target && typeof p.target === 'object') {
+      // Seat-held ties move to the new posting (the covenant UI passes ONLY seat
+      // fields); people-held relationship edges keyed by npc id travel untouched.
+      Object.assign(npc, p.target);
+    } else if (k === 'stasis-npc') {
+      if (!p.reason) return;
       npc.stasis = { reason: p.reason };
-      changed = true;
-    } else if (kind === 'return-npc') {
-      if (!npc.stasis) return;
+    } else if (k === 'return-npc') {
       delete npc.stasis;
-      changed = true;
-    }
+    } else { return; }
+    changed = true;
   });
   if (changed) get().persistActiveSaveEdit?.();
 }

@@ -191,7 +191,6 @@ export function previewCascade(settlement, queue) {
   let netStressors = 0;
   let renames = 0;
   let proseEdits = 0;
-  let npcOps = 0;
   let structuralCount = 0;
 
   for (const e of edits) {
@@ -210,15 +209,11 @@ export function previewCascade(settlement, queue) {
       case 'edit-prose':
         proseEdits += 1;
         break;
-      // DESIGN_NPC_LIFECYCLE §2 — the typed NPC ops (edit future, never the past).
-      case 'edit-npc':
-      case 'reassign-npc':
-      case 'stasis-npc':
-      case 'return-npc':
-        npcOps += 1;
-        break;
       default:
-        // unknown kinds were rejected at buildEdit() — defensive only
+        // The DESIGN_NPC_LIFECYCLE §2 NPC ops (edit/reassign/stasis/return) and any
+        // unknown kind fall through — deliberately uncounted in this coarse cascade
+        // banding to hold the first-paint budget (the ops still render per-kind in
+        // the PendingChangesBar). No eager summary switch for them.
         break;
     }
   }
@@ -243,9 +238,6 @@ export function previewCascade(settlement, queue) {
   }
   if (proseEdits > 0) {
     out.summaryLines.push(`${proseEdits} prose edit${proseEdits === 1 ? '' : 's'}`);
-  }
-  if (npcOps > 0) {
-    out.summaryLines.push(`${npcOps} NPC change${npcOps === 1 ? '' : 's'}`);
   }
 
   // Downstream counts — approximate, drawn from the live settlement.

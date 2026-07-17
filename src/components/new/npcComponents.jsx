@@ -9,6 +9,7 @@ import { useStore } from '../../store/index.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
 import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
+import NpcLifecycleControls from './NpcLifecycleControls.jsx';
 
 /**
  * Stable identifier used to pin an NPC. Matches the backend filter contract
@@ -269,6 +270,8 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               />
             </div>
           )}
+          {/* DESIGN_NPC_LIFECYCLE §2 — the bank-bounded lifecycle editor (edit-mode only). */}
+          {editMode && <NpcLifecycleControls npc={npc} resolveNpcIndex={resolveNpcIndex} />}
         </div>
       )}
     </div>
