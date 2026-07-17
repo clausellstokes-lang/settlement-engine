@@ -1098,6 +1098,20 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE DOCUMENTATION WAVE BRIEF COMMITTED (2026-07-17):
+docs/briefs/W_DOCUMENTATION_WAVE.md** — both sweeps banked (10/10 agents) and RECONCILED;
+the critics' contradictions ADJUDICATED (8 rulings, each vetoable): About = pure trust
+page (no ladder) · "credits" survives as wallet unit, pages lead with named-task
+dollar-anchored menus + the failure policy · badge Cartographer, WALL Surveyor, founder
+= charter-seal object · the AI claim lives in About+op-registry, never hero/pricing ·
+the data-longevity covenant assembled · receipts generated-never-hand-typed w/ the
+publishable list OWNER-GATED · Compendium seeds from a canonical demo world (seed =
+owner call) · no third sweep. Page skeletons fixed (About 6-band manifesto arc w/ the
+tick diagram + same-seed demo · Compendium hub-and-spoke w/ per-entry pages + A-Z index ·
+Pricing 5-band w/ the $2.99 bundle LEADING the one-time lane + Cartographer-as-service
+framing · Welcome additive). ART LAW: period craft never age damage; one house rose;
+the product's own output is the art; no stock, no AI illustration. The wave is now
+successor-dispatchable from the brief alone.
 **⬛ WELCOME PAGE ASSESSED + COMMISSIONED (2026-07-17; task #22 — THE DOCUMENTATION
 WAVE's fourth member): RECONCILE, DON'T REBUILD.** The best-aligned page of the four
 (~75% on-purpose): the salt-road narrative, the REAL-ENGINE-OUTPUT fixture w/ the
