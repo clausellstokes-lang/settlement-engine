@@ -107,6 +107,30 @@ The access architecture, on the owner's backbone + the ambient layer:
 BUILD SLOT: rides the S3 wave (task #33 — it builds the review UI; the shell refinement
 lands with it).
 
+## 2d. THE PARLEY (owner commission 2026-07-17: "how do you think X would respond or how
+## would X approach x topic? for NPCs, settlements, factions... not to commit the action but
+## to give the DM an idea... or even have a conversation with them")
+In-character consultation — the differentiator is EPISTEMIC FIDELITY, structurally enforced:
+- **THE PERSONA COMPILES FROM READ-MODELS**: the entity speaks from its OWN belief slice
+  (confidently wrong exactly as its rumor exposure made it; under D1 it has not heard what
+  has not reached it — the slicer machinery enforces this like the audience rule, never a
+  prompt), shaped by core personality + ACQUIRED traits (the Growth Layer), goals, alignment,
+  relationship warmth/grievances, and D7 reframes (the curdled gift colors its stance on the
+  asker). Settlements/factions speak collectively — the glue typology names WHO is speaking
+  (seat vs patron) and the answer may carry internal dissent.
+- **MUSINGS-REGISTER ONLY, NOTHING COMMITS**: pure read-side; every response clearly marked
+  interpretation, never the record; the AI AUDITIONS the character, the DM remains the
+  author (state-never-fate: the machine may guess at a soul, never decide one). GROUNDED:
+  each response cites the traits/beliefs/reframes that shaped it (receipts under the
+  roleplay). Multi-turn = a held persona anchor.
+- **ACCESS**: a "speak with…" affordance on entity cards via the Shell's ambient layer +
+  selection pulse; a new task class ('parley'), task-priced; DM-ONLY at first (the persona
+  knows its own secrets) — a player-facing variant needs a beliefs-∩-player-safe compile
+  (parked). Rider tags entity-class + topic-class (the atlas learns what tables rehearse).
+- **QUALITY**: consistency is guaranteed by grounding; aliveness is a taste problem —
+  register guards + owner veto on the persona voice (the content-program bar).
+Read-only ⇒ ships AT LAUNCH under §2b. BUILD SLOT: the S3 wave (task #33, with the Shell).
+
 ## 3. Hard rules (the constitution extended to the AI layer)
 - The AI NEVER writes state: ops only, through validation, through approval. No op type = no
   effect. The engine stays LLM-free; no AI call per tick ever.
