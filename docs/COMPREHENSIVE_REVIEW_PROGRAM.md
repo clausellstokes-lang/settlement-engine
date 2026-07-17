@@ -1098,6 +1098,32 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: THE MAP LEGIBILITY WAVE (SM-5) (2026-07-17, in-session: "do it all
+appropriately!" — the manager's map-layer proposal commissioned in full, sequencing
+delegated).** SIX DELIVERABLES, one Opus lane, SERIALIZED BEHIND the town-layout-v2 fold
+(same map-UI file surface — single-writer; dispatch at the v2 fold): (1) THE MAP EXPLAINS
+ITSELF — hover provenance for deformed/placed elements rendered from the v2 model's
+provenance annotations (the retention directive relayed to the v2 lane THIS SESSION: per-
+element {sourceFamily, sourceRef, effect}, presence-pinned as the no-uniform-jitter
+enforcement); InstitutionCard-hover precedent; Surveyor's-notes register. (2) THE CHANGE
+VIEW — a "what changed" mode over fabricRead (prominence shifts, new scars, rebuilt
+blocks since last visit / over N advances) + calamityHistory; graceful empty-state while
+fabric is dark pre-regen (whisper explains); the chronicle's spatial twin. (3) EDGE
+ANNOTATIONS — roads exiting the map labeled to named neighbors w/ travel time derived
+from existing neighbour_links/route distance data (verify source in-repo). (4) THE ATLAS
+IDENTITY — unified lens treatment across realm+town exports (one-atlas feeling; craft
+samples, owner taste veto). (5) DM PIN/ANNOTATION LAYER — DM-only vs player-visible
+markers riding the existing handout/reference export split; VERIFY-FIRST what mapEdits
+already covers before building; pins live in mapEdits keys (must dodge PRIVATE_KEY_RE
+substrings); no new gate class, no schema change. (6) COLORBLIND-SAFE/PATTERN-FILL lens
+variant via the style schema (one more bounded lens). SEQUENCING JUDGMENTS (vetoable):
+the first push (RULING #7) is NOT delayed — it fires when the original three lanes land;
+SM-5 folds after v2 and rides the standing re-push; ROUND 3 reviews SM-5 with everything
+else. **POST-LAUNCH ROADMAP STOCK (recorded so the doors are never lost, deliberately NOT
+built in this tail):** map→engine coupling at town scale (fire along adjacent buildings,
+siege damage by wall segment — new engine capability, corpus-closed) · in-app fog-of-war/
+session mode (the UVTT meet-VTTs-where-they-are strategy holds for launch) · building
+interiors (a new scale). Zero eager bytes expected across all six (map surface is lazy).
 **⬛ OWNER DESIGN REFINEMENT: SOURCED ASYMMETRY (2026-07-17, in-session, folded into #38):
 "nothing should be perfectly organic. there will always be slight or minor organic
 asymmetry from the region, resources, people's habits, etc. The best that we as people can
