@@ -155,8 +155,11 @@ describe('TIERS', () => {
     expect(TIERS.wanderer.maxSize).toBe('capital');
   });
 
-  it('cartographer is $6/mo and unlocks neighbourhood + supply chain', () => {
-    expect(TIERS.cartographer.priceCents).toBe(600);
+  it('cartographer is $5.99/mo and unlocks neighbourhood + supply chain', () => {
+    // Rebaselined 600→599 at the owner sign-off 2026-07-17: config reconciled to the
+    // DISPLAYED price (the pricing page showed $5.99 while config said $6.00 — the
+    // ToS wave's finding; customer-facing prevails).
+    expect(TIERS.cartographer.priceCents).toBe(599);
     expect(TIERS.cartographer.billing).toBe('monthly');
     expect(TIERS.cartographer.features.neighbourhoodSystem).toBe(true);
     expect(TIERS.cartographer.features.supplyChainMap).toBe(true);
