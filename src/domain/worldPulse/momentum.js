@@ -45,6 +45,7 @@ import { isFaithSpreadEnabled } from './simulationRules.js';
 import { mobilizationSeverity } from './mobilization.js';
 import { ARMY_ROLES } from '../spatial/armyTransit.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { acquiredTraitDescriptors } from '../../data/npcTraitWeights.js';
 // Stage 2 threshold reads (all EXPORTED, already eager via disposition ⇒ zero first-paint
 // delta when pulled through this lazy leaf): the entity's alignment coordinates + the
 // authored-importance weight + the legitimacy ledger.
@@ -593,15 +594,21 @@ export const THRESHOLD_TUNING = Object.freeze({
 });
 
 // ── TEMPERAMENT (the leader's character, aggregated) ────────────────────────────
-/** @param {unknown} v @returns {string[]} the authored personality descriptors of an NPC. */
+/** The authored personality descriptors of an NPC PLUS the growth-layer acquired overlay
+ *  (learned traits weathered onto the NON-core npc.acquiredTraits[] — commission #36; a
+ *  learned `proud`/`cautious` shifts the commitment cliff. Absent ⇒ [] ⇒ byte-identical).
+ *  @param {unknown} v @returns {string[]} */
 function authoredMomentumTraits(v) {
   const npc = asObject(v);
   const p = npc.personality;
-  if (!p) return [];
-  if (typeof p === 'string') return [p];
-  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
-  const o = asObject(p);
-  return [o.dominant, o.flaw, o.modifier].filter((x) => typeof x === 'string').map(String);
+  const acquired = acquiredTraitDescriptors(npc);
+  /** @type {string[]} */
+  let core;
+  if (!p) core = [];
+  else if (typeof p === 'string') core = [p];
+  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
+  else core = [asObject(p).dominant, asObject(p).flaw, asObject(p).modifier].filter((x) => typeof x === 'string').map(String);
+  return acquired.length ? [...core, ...acquired] : core;
 }
 
 /** The DECLARED npcTemperament facet on a custom NPC, or null (the facet law: a declared

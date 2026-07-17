@@ -23,7 +23,7 @@ import { institutionHasTag, TAG } from '../lib/entities.js';
 // re-exports it). npcAlignmentScore below reads it. corruption.js is EAGER (first paint),
 // so it imports the LIGHT leaf directly — importing from npcData.js would drag that 64 kB
 // module into the first-paint static closure (FP-G3 reclaim). @see data/npcTraitWeights.js
-import { TRAIT_ALIGNMENT } from '../data/npcTraitWeights.js';
+import { TRAIT_ALIGNMENT, acquiredTraitDescriptors } from '../data/npcTraitWeights.js';
 
 // ── Eligibility: corruptible flaws → corruption vector ──────────────────────
 // Maps the susceptible NPC personality flaws (from npcData.js negative+neutral)
@@ -144,14 +144,20 @@ export const DEITY_CORRUPTION_TUNING = Object.freeze({
 
 /** Lowercased authored personality descriptor strings for an NPC: reads the
  *  {dominant, flaw, modifier} slots the generator writes, tolerant of a flat
- *  string / array shape. NEVER reads npcStates.alignment (RNG-rolled).
+ *  string / array shape, PLUS the growth-layer acquired overlay (learned traits
+ *  the engine weathered onto the NON-core npc.acquiredTraits[] — commission #36;
+ *  absent ⇒ [] ⇒ byte-identical). NEVER reads npcStates.alignment (RNG-rolled).
  * @param {import('./settlement.schema.js').SimNpc} npc @returns {string[]} */
 function authoredAlignmentTraits(npc = {}) {
   const p = npc?.personality;
-  if (!p) return [];
-  if (typeof p === 'string') return [p];
-  if (Array.isArray(p)) return p.filter((x) => typeof x === 'string');
-  return [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  const acquired = acquiredTraitDescriptors(npc);
+  /** @type {string[]} */
+  let core;
+  if (!p) core = [];
+  else if (typeof p === 'string') core = [p];
+  else if (Array.isArray(p)) core = p.filter((x) => typeof x === 'string');
+  else core = [p.dominant, p.flaw, p.modifier].filter((x) => typeof x === 'string');
+  return acquired.length ? [...core, ...acquired] : core;
 }
 
 /** Signed good↔evil conscience score for an NPC's AUTHORED personality (Σ of
