@@ -231,3 +231,62 @@ soak's tuning pass touches the same constants (one enumeration serves both). Bui
 S4 (entities, per the existing ladder) → S4+ rung 2 (knobs) → rung 3 V1 (packs, vocabulary) →
 V2 (register skins). Every stage gated on the prior's acceptance metrics, per the Surveyor
 doctrine. Nothing here disturbs the current endgame sequence.
+
+## 7. THE MAP STYLE SCHEMA (rung-3 pack DISPLAY content — shipped as the four base lenses)
+
+A **map style** is rung-3 content: a **market district stays a market district; the style is
+the genre skin**. It edits the map's DISPLAY, never its substance — the truth-projection law
+holds (a style may never paint what the settlement's dossier doesn't hold). The
+semantic-draw-ops/renderer split built for determinism IS the theming architecture: geometry
+(every position, polygon, element size) comes from the frozen `buildTownMapModel` and is
+UNTOUCHED by a style; a style supplies only the visual attributes. So a re-skin is a **derived
+view** — instant, free, and NON-DESTRUCTIVE (no path by which styling can lose an edit or
+damage the map). SHIPPED NOW (not deferred to S4+): the style LAYER + four base lenses. Genre
+packs (cyberpunk / sci-fi / noir) are the S4+ content that lands on this schema.
+
+**THE SHAPE (a style is DATA — `src/design/townMapStyles.js`).** A definition carries:
+`id` · `label` · `background` (canvas hex) · `palette` (role → hex: water/road/street/ink/
+wall/gate/anchor/buildingFill + the four hazard tones) · `district` (category → hex) ·
+`stroke` (per-role line WEIGHTS, numbers) · `opacity` (per-role fill/stroke opacities) ·
+`furniture` (a subset of the fixed vocabulary — `wash` / `cartouche` / `compass` / `grid` /
+`scaleBar`) · `hazardGlyph` / `anchorGlyph` (from fixed glyph vocabularies) · `contrast`
+(`soft`/`normal`/`high`) · `functional` (`grid` / `gridStep` / `scaleBar` / `tokenPx` — the
+VTT knobs) · `rasterScale` (token-resolution export multiplier). Unspecified fields inherit
+the parchment default (a lens declares only what it changes).
+
+**THE WALL (the safety invariant).** A definition may only SELECT from the fixed renderer
+capabilities — a hex color, a numeric weight/opacity, a furniture kind, a glyph name, a
+contrast level. It can NEVER carry arbitrary SVG or code. The renderer emits one closed
+vocabulary of five primitive ops (poly/line/circle/rect/path); the SVG stays self-contained
+(no external refs / gradients — canvas-taint-free + machine-stable). **Worst case a style is
+ugly; it can never be unsafe.** This is exactly the ×SCHEMA-FENCING that lets the AILADDER
+place bespoke styling at its FIRST compile rung (S2→S3): failure is purely cosmetic.
+
+**DETERMINISM (×§2).** A style is config on the frozen-intent side: `render = f(model, style)`,
+byte-identical per (seed, style). The default lens (**parchment**) is byte-identical to the
+pre-style export; absent a chosen lens the container key is dropped (the dormancy law). The
+(seed, style) golden re-mints the determinism pin over the corpus × the lenses.
+
+**THE FOUR BASE LENSES.** `parchment` (default; the craft-pass hand-drawn map — wash,
+cartouche, compass) · `watercolor` (soft washes, warm paper) · `darkFantasy` (dark vellum,
+bright inked linework) · `vtt` (a FUNCTIONAL battlemap — coordinate grid + scale bar + high
+contrast + a token-resolution PNG export). Selection persists in the cosmetic, non-destructive
+`settlement.mapEdits.styleLens` (dormancy-lawful, denylist-safe), honored on every full-blob
+surface (library viewer, public-gallery viewer, PDF plate, card thumbnail); the
+anonymous-projection honor is the same owner-gated §6 opt-in the other mapEdits ride.
+
+**BESPOKE AI STYLES (a later wave — accommodated, not built here).** An AI-authored style
+lands as one more definition of THIS shape, validated against THE WALL — no code path changes
+(a style is data). It is COMPOSITIONAL (a parchment ground × a cyberpunk glyph vocabulary is a
+legal blend) and ADDITIVE-SAVED (credits buy a kept artifact; the four base lenses stay
+permanently available; flip-back is instant/free/non-destructive). The cross-lens edit pin
+EXTENDS to bespoke definitions (one semantic edit renders correctly under every style, custom
+included). The style-overhaul riders feed the LENS ROADMAP RADAR (demand-proven next
+lenses/genre packs — the ×ANALYTICS SEAM). The side-view/oblique PANORAMA is a PROJECTION, not
+a style (owner-queued, map-v2) — once built it composes with every lens.
+
+×FACET LAW (a style reads world FACETS to skin them; it never invents substance) · ×TRUTH-
+PROJECTION (the honest path for a data/skin mismatch is the world-edit, then the map follows) ·
+×PREMIUM SEAM (base lenses free forever; bespoke styles task-priced) · ×AILADDER (styling is
+the S2→S3 first compile target — ugly-never-unsafe by the wall) · ×GALLERY LOOP (a settlement
+seen in the owner's chosen genre is a stronger shared artifact).
