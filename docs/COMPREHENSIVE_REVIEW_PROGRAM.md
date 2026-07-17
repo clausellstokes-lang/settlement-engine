@@ -972,6 +972,21 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: THE GROWTH LAYER (2026-07-17, task #36) — acquired/temporary NPC
+traits.** Owner verbatim: core traits/flaws are "their constitutional core as people... they
+can also have learned or temporary traits... bold by nature being more cautious after losing
+several battles... traits or flaws further from their core personality should need more
+frequent or more severe events... they should all reflect in that NPC's decision making,
+stances, and goals." DESIGN (the D7 pattern at person scale — core frozen, growth derived):
+acquiredTraits[] from the SAME bank vocabulary w/ provenance+intensity+decay · acquisition
+via the D3 course machinery (weighted deposits, rare sticky hysteresis transitions, capped,
+both signs) · THE DISTANCE-FROM-CORE deposit-resistance rule · effects as derived
+effective-personality OVERLAYS entering the existing consumer reads (never core mutation —
+state-never-fate holds: the engine weathers a person, never rewrites them) · couplings ×D5
+(lifespan-scaled decay) ×D7 (growth shifts interpretation) ×chronicle (receipted beats)
+×decree-tracker ×no-dead-facet. Virtual flag, dark ⇒ byte-identical, lazy kernel leaf.
+ENGINE WORK ⇒ the pre-soak slot beside the Provenance Ledger — the engine's final two builds
+ride together; the soak certifies worlds where people learn.
 **✅ THE NPC LIFECYCLE RATIFIED + FOLDED (2026-07-17 ~04:00; merge f33e295b + bundle regen
 6dff8493).** NPCs are residents: THE BANK (consolidated vocabularies zero-drift-pinned + the
 22-goal TRANSITION-TYPED catalog with onAchieve/onFail — the survey CONFIRMED the owner's
