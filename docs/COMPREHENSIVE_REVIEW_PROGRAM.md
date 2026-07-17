@@ -972,6 +972,17 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ SURFACING CONFIRMATION (owner, 2026-07-17: does all the hidden machinery have its
+appropriate visible place for dossiers/realm, navigable and intuitive?).** DESIGN ANSWER:
+yes by architecture (machinery→read-model→surface; the scope hierarchy dossier/realm-
+dashboard/pulse/briefs/map/compendium + the chronicle as the incoming default doorway + the
+Surveyor as the universal where-do-I-look escape hatch; invisibility deliberate for decay
+rates/pacing/plumbing). KNOWN RECORDED GAPS (the census's first work list): calamityLedger
+live surface (W-UPSWING deferral) · doctrine commitment-stocks read · interventions-ledger
+direct view · D7 whisper/glossary seam. STRUCTURAL ADOPTION: ROUND 3 gains **EVERY LEDGER
+SHIPS ITS READ** — an executable census walker: every durable store maps to ≥1 registered
+display consumer OR an explicit INVISIBLE_BY_DESIGN ruling with reason; unsurfaced = build
+failure. Cross-scope navigation intuitiveness = a named ROUND-3 product-dimension re-read.
 **⬛ NPC WAVE: THE NO-DEAD-FACET LAW (owner, 2026-07-17: "every facet of an NPC's generation
 and their agent movement is coherent with the surrounding world every facet. nothing is
 useless").** Two directions, walker-enforced: (1) GENERATION READS THE WORLD — no facet
