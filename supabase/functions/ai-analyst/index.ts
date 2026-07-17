@@ -28,9 +28,19 @@ import {
   buildRetrievalBundle, validateClaims, citationCoverage, renderCitedAnswer,
   buildAnalystPrompt, aiOperationLogRecord, bundleIsPlayerSafe,
   registerProviderAdapter, routeWorldDataAdapter,
+  sanitizeMusings, registerPurity,
+  accountCanary, detectMetaProbe, extractRider,
 } from './analystCore.ts';
+import type { MusingItem, EnrichmentRider } from './analystCore.ts';
+// §3f: the ONE frozen event contract, shared with the client (single source of truth —
+// the freshness test pins bundle ≡ src/lib/analyticsEvents.js).
+import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY') || '';
+// §3c(4): the salt that makes the per-account canary unguessable. A tracer works even
+// unset (the marker is still per-account-unique via user id) — the secret only raises
+// the guessing cost. Set SURVEYOR_CANARY_SECRET in prod.
+const CANARY_SECRET = Deno.env.get('SURVEYOR_CANARY_SECRET') || '';
 const ANTHROPIC_VERSION = '2023-06-01';
 // Provider-neutral by design; Anthropic first, latest model. Overridable per deploy.
 const ANALYST_MODEL = Deno.env.get('ANTHROPIC_CLAUDE_OPUS_4_8_MODEL') || 'claude-opus-4-8';
@@ -50,11 +60,18 @@ function json(body: unknown, status = 200, headers: Record<string, string> = {})
   return new Response(JSON.stringify(body), { status, headers: { ...headers, 'Content-Type': 'application/json' } });
 }
 
-/** Parse the model's JSON claims contract. Robust to code fences / preamble; a
- *  non-JSON reply degrades to a single UNSOURCED claim (honesty boundary), never a throw. */
-function parseClaims(raw: string): Array<{ text: string; source: string | null }> {
+/** Parse the model's TWO-VOICES JSON contract (§3b). Robust to code fences /
+ *  preamble; a non-JSON reply degrades to a single UNSOURCED report claim (honesty
+ *  boundary), never a throw. Returns the three structural blocks: `claims` (the cited
+ *  REPORT register), `musings` (the uncited MUSING register), and `rider` (the raw
+ *  §3f enrichment rider, validated downstream against the controlled vocabulary). */
+function parseModelAnswer(raw: string): {
+  claims: Array<{ text: string; source: string | null }>;
+  musings: unknown;
+  rider: unknown;
+} {
   const text = String(raw ?? '').trim();
-  if (!text) return [];
+  if (!text) return { claims: [], musings: [], rider: null };
   const fenced = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '');
   const start = fenced.indexOf('{');
   const end = fenced.lastIndexOf('}');
@@ -62,14 +79,18 @@ function parseClaims(raw: string): Array<{ text: string; source: string | null }
     try {
       const obj = JSON.parse(fenced.slice(start, end + 1));
       if (obj && Array.isArray(obj.claims)) {
-        return obj.claims.map((c: any) => ({
-          text: typeof c?.text === 'string' ? c.text : String(c?.text ?? ''),
-          source: typeof c?.source === 'string' ? c.source : null,
-        }));
+        return {
+          claims: obj.claims.map((c: any) => ({
+            text: typeof c?.text === 'string' ? c.text : String(c?.text ?? ''),
+            source: typeof c?.source === 'string' ? c.source : null,
+          })),
+          musings: obj.musings,
+          rider: obj.rider,
+        };
       }
     } catch { /* fall through */ }
   }
-  return [{ text, source: null }]; // unparseable ⇒ one unsourced claim
+  return { claims: [{ text, source: null }], musings: [], rider: null }; // unparseable ⇒ one unsourced claim
 }
 
 function defaultUserClient(authHeader: string) {
@@ -177,6 +198,12 @@ export async function handleAiAnalyst(
       return json({ error: 'player request carried a non-player-safe slice' }, 400, cors);
     }
 
+    // §3c EXTRACTION DEFENSE: the inert per-account packet canary (embedded in the
+    // instruction packet, logged for leak attribution) + the meta-probe flag (an
+    // extraction-signature question, logged for review). Neither ever reaches an answer.
+    const canary = accountCanary(user.id, CANARY_SECRET);
+    const metaProbe = detectMetaProbe(question);
+
     // BYOK: the user's key if present, else the server key. Resolved once, never logged.
     const providerKey = await resolveProviderKey(
       supabaseAdmin, user.id, ANALYST_PROVIDER, ANTHROPIC_API_KEY,
@@ -188,6 +215,9 @@ export async function handleAiAnalyst(
     let capturedPrompt = '';
     let capturedAnswerText = '';
     let capturedValidated: ReturnType<typeof validateClaims> = [];
+    let capturedMusings: MusingItem[] = [];
+    let capturedRegisterPurity = 1;
+    let capturedRider: EnrichmentRider | null = null;
     let capturedRefused = false;
     let capturedUsage: { input: number | null; output: number | null } = { input: null, output: null };
 
@@ -213,7 +243,7 @@ export async function handleAiAnalyst(
         return { ok: !!res?.ok, spendId: capturedSpendId, elevated: !!res?.elevated, balance: res?.balance ?? null, reason: res?.reason ?? null };
       },
       async callModel() {
-        capturedPrompt = buildAnalystPrompt(question, bundle, audience);
+        capturedPrompt = buildAnalystPrompt(question, bundle, audience, canary);
         const ac = new AbortController();
         const timer = setTimeout(() => ac.abort(), ANALYST_TIMEOUT_MS);
         let resp: Response;
@@ -233,9 +263,20 @@ export async function handleAiAnalyst(
         };
         if (data?.stop_reason === 'refusal') { capturedRefused = true; return { ok: false, answerText: '' }; }
         const rawText = (data?.content?.[0]?.text || '').trim();
-        capturedValidated = validateClaims(parseClaims(rawText), bundle);
+        const parsed = parseModelAnswer(rawText);
+        capturedValidated = validateClaims(parsed.claims, bundle);
+        // §3b: the MUSING register — uncited by construction (sanitizeMusings drops any
+        // smuggled source/op). REGISTER PURITY is computed here, from the report claim
+        // TEXT alone — never from the rider (the §3f conflicted-witness rule).
+        capturedMusings = sanitizeMusings(parsed.musings);
+        capturedRegisterPurity = registerPurity(capturedValidated);
+        // §3f: the model's self-emitted rider, coerced to the controlled vocabulary
+        // (interest data only — never the quality metrics above).
+        capturedRider = extractRider(parsed.rider);
         capturedAnswerText = renderCitedAnswer(capturedValidated);
-        return { ok: !!capturedAnswerText, answerText: capturedAnswerText };
+        // A pure clarifying-question turn (no grounded claims, only musings) is a valid,
+        // non-empty answer: the analyst is allowed to ask back (§3b read-only conversation).
+        return { ok: !!capturedAnswerText || capturedMusings.length > 0, answerText: capturedAnswerText };
       },
       async refund(spendId, reason, elevated) {
         if (!spendId || elevated) return; // elevated spends are never real debits
@@ -274,6 +315,7 @@ export async function handleAiAnalyst(
       const rec = aiOperationLogRecord({
         prompt: capturedPrompt, bundle, model: ANALYST_MODEL, modelVersion: `anthropic-${ANTHROPIC_VERSION}`,
         answerText: capturedAnswerText, audience, validated: capturedValidated,
+        metaProbe, canary,
       });
       const { error } = await supabaseAdmin.rpc('write_ai_operation_log', {
         p_user: user.id, p_feature: ANALYST_FEATURE, p_audience: rec.audience,
@@ -282,9 +324,41 @@ export async function handleAiAnalyst(
         p_model: rec.model, p_model_version: rec.model_version, p_provider: ANALYST_PROVIDER,
         p_byok: providerKey.byok, p_citation_coverage: outcome.outcome === 'ok' ? rec.citation_coverage : null,
         p_claim_count: rec.claim_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
+        // §3c: the extraction-defense fields — inert canary + the meta-probe flag.
+        p_meta_probe: rec.meta_probe, p_canary: rec.canary,
       });
       if (error) logError('ai-analyst', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
     } catch (e) { logError('ai-analyst', user.id, e, { stage: 'audit' }); }
+
+    // ── §3f THE ENRICHMENT RIDER — the ID-FREE, category-grade service-telemetry row ─
+    // The model tags its own traffic; we extract those tags into an analytics event with
+    // NO actor / session / subject id — the CONDITION-OF-SERVICE layer (managed AND BYOK,
+    // non-togglable, ToS-disclosed). Every interaction flows through this ONE edge path,
+    // so BYOK enforceability is STRUCTURAL — there is no bypass. Best-effort; never fails
+    // the response. CONFLICTED-WITNESS RULE: this carries INTEREST data only — the quality
+    // metrics (citation coverage, register purity) are computed independently above and
+    // are NEVER sourced from this rider. Content-grade capture stays consent-gated (§3).
+    try {
+      if (capturedRider) {
+        const { error } = await supabaseAdmin.from('analytics_events').insert({
+          event: ANALYTICS_EVENTS.AI_ANALYST_RIDER,
+          actor_id: null, session_id: null, subject_id: null,  // ID-FREE by construction
+          consent_tier: 'product',                              // condition-of-service (never research)
+          events_rev: ANALYTICS_EVENTS_REV,
+          props: {
+            // controlled vocabulary + booleans only — no content, names, numbers, or free text
+            intent: capturedRider.intent,
+            themes: capturedRider.themes,
+            refusal_reason: capturedRider.refusalReason,
+            action_drafted: capturedRider.actionDrafted,
+            oov: capturedRider.oov,                             // dictionary-growth signal (A2 seam)
+            audience, byok: providerKey.byok, refused: capturedRefused,
+          },
+          batch_id: crypto.randomUUID(), seq: 0,
+        });
+        if (error) logError('ai-analyst', user.id, `rider event insert failed: ${error.message}`, { stage: 'rider' });
+      }
+    } catch (e) { logError('ai-analyst', user.id, e, { stage: 'rider' }); }
 
     // ── map the outcome to a response ──────────────────────────────────────────────
     switch (outcome.outcome) {
@@ -300,7 +374,12 @@ export async function handleAiAnalyst(
         return json({
           answer: outcome.answerText,
           claims: capturedValidated,
+          // §3b TWO-VOICES: the uncited MUSING register, structurally separate from the
+          // cited report `claims` so the client renders them as distinct registers.
+          musings: capturedMusings,
           citationCoverage: citationCoverage(capturedValidated),
+          // §3b/§5 register-purity eval metric (independent of the §3f rider).
+          registerPurity: capturedRegisterPurity,
           audience,
           byok: providerKey.byok,
           creditsRemaining: outcome.balance,

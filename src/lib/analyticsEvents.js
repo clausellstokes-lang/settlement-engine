@@ -39,8 +39,12 @@ export { EDIT_KINDS };
  *  flags_on) + spatial_active + a per-mover activity block (movers_active + coarse
  *  id-free mover_counts + migration_pop_band) read from the post-tick spatialLedgers;
  *  world_canonized (spatial path) gains spatial/version/lit-feature/digest-size props.
- *  Derivation is src/lib/spatialUsage.js (lazy side-channel). */
-export const EVENTS_REV = 7;
+ *  Derivation is src/lib/spatialUsage.js (lazy side-channel).
+ *  rev 8: Surveyor S1b — the analyst gains ai_analyst_rider (§3f: the model's
+ *  ID-FREE, category-grade self-tag, emitted SERVER-SIDE by the ai-analyst edge on
+ *  BOTH managed + BYOK paths as a condition-of-service) and ai_analyst_answer gains
+ *  the §3b register-purity band beside citation coverage. */
+export const EVENTS_REV = 8;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -194,10 +198,18 @@ export const EVENTS = Object.freeze({
   CONSENT_UPDATED:                'consent_updated',
 
   // ── Surveyor S1: the analyst (§5 eval metrics — coarse, id-free, essential) ──
-  // Props (never free text): { audience, coverageBand, refused, sliceCount, byok }.
+  // Props (never free text): { audience, coverageBand, registerPurityBand, refused,
+  // sliceCount, byok }. coverageBand + registerPurityBand are the §3b/§5 quality
+  // metrics, computed server-side from the answer — never from the §3f rider.
   AI_ANALYST_ANSWER:              'ai_analyst_answer',
   // Answer acceptance signal. Props: { accepted } (thumbs up/down on the answer).
   AI_ANALYST_FEEDBACK:            'ai_analyst_feedback',
+  // Surveyor S1b §3f THE ENRICHMENT RIDER — the model's self-emitted, ID-FREE,
+  // category-grade traffic tag, extracted SERVER-SIDE (condition-of-service layer,
+  // managed AND BYOK, non-togglable). Props (controlled vocabulary + booleans ONLY,
+  // never content): { intent, themes[], refusal_reason, action_drafted, oov, audience,
+  // byok, refused }. INTEREST data only — never a quality metric (conflicted-witness).
+  AI_ANALYST_RIDER:               'ai_analyst_rider',
 });
 
 /**
