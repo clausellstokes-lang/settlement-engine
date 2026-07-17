@@ -73,6 +73,11 @@ const EXPECTED_VOICE = {
   // quiet chronicle beat, NOT a town-crier proclamation — deliberately unvoiced (the
   // npc_growth precedent; catastrophe itself is already voiced via the calamity beat).
   urban_fabric: null,
+  // DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (owner ruling #8): WHERE a calamity/intrigue
+  // landed is district-precision chronicle detail, NOT a town-crier proclamation —
+  // deliberately unvoiced (the urban_fabric precedent; the calamity itself is already
+  // voiced via the calamity beat).
+  spatial_consequence: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

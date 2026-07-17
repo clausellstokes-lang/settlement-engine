@@ -255,6 +255,25 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
     // the canonize (telemetry is optional).
     let realmShape = null;
     try { ({ realmShape } = await import('../lib/constructionUsage.js')); } catch { /* telemetry optional */ }
+    // DOOR 1 — THE SPATIAL CONSEQUENCE LAYER (owner ruling #8): derive each town's
+    // compact SPATIAL SUBSTRATE from its ACTIVE layout HERE, at canonize (the
+    // projection law — the engine never reads the layout; the pulse reads this
+    // sidecar). Gated on the virtual spatialConsequenceEnabled flag ⇒ a DARK world
+    // never loads the layout body and carries no substrate key (byte-identical). The
+    // derivation body loads via a DYNAMIC import so the town-map graph it pulls stays
+    // OUT of the first-paint closure (the realmShape/constructionUsage precedent).
+    let spatialSubstrate = /** @type {any} */ (null);
+    {
+      const c0 = findActiveCampaign(get().campaigns, campaignId);
+      const rules = /** @type {any} */ (c0?.worldState)?.simulationRules;
+      if (rules && rules.spatialConsequenceEnabled === true) {
+        try {
+          const { deriveCampaignSubstrates } = await import('../lib/spatialSubstrateDerive.js');
+          const priorSub = /** @type {any} */ (c0?.worldState)?.spatialLedgers?.spatialSubstrate ?? null;
+          spatialSubstrate = deriveCampaignSubstrates(campaignSettlements(get(), campaignId), priorSub);
+        } catch { /* substrate optional — a chunk-load failure never breaks canonize */ }
+      }
+    }
     let campaignPersist = /** @type {any} */ (null);
     let settlementCount = 0;
     let regionalSnapshot = /** @type {any} */ (null);
@@ -266,6 +285,14 @@ export const createCampaignWorldPulseSlice = (set, get) => ({
       const saves = campaignSettlements(state, campaignId);
       settlementCount = saves.length;
       c.worldState = canonizeWorldState(c.worldState, now, c);
+      // Fold the DOOR-1 substrate into the sidecar (dark ⇒ spatialSubstrate is null
+      // ⇒ untouched ⇒ byte-identical).
+      if (spatialSubstrate) {
+        c.worldState = /** @type {any} */ ({
+          ...(/** @type {any} */ (c.worldState)),
+          spatialLedgers: { ...(/** @type {any} */ (c.worldState).spatialLedgers || {}), spatialSubstrate },
+        });
+      }
       // Compute the regional-topology snapshot while the graph draft is live.
       regionalSnapshot = extractRegionalGraphSnapshot(c.regionalGraph);
       if (realmShape) realmShapeSummary = realmShape(c.regionalGraph, saves);

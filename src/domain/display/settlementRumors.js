@@ -148,6 +148,7 @@ export const WHAT_PHRASES = Object.freeze({
   npc_growth: 'a change in a leader\'s temper',
   // THE URBAN FABRIC LAYER — a settlement's stone turned (owner commission #39)
   urban_fabric: 'the changing face of a settlement',
+  spatial_consequence: 'where in a settlement the blow fell',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
   blockade_lifted: 'a harbour opened again',
