@@ -1020,6 +1020,28 @@ fuller §2c UI polish (docked panel, ambient glyphs, Cmd+K, first-open whisper +
 access copy) deferred as least-verifiable headless; accept→mint wiring from
 reviewInterpretation into applyWorldPulseProposal/recordPartyImpact = the designed next
 slice (both ends exist); personaSlicer degrades to muted facets on dormant worldState.
+**⬛ FOLD 3/5 — MAP EXPORTS (2026-07-17):** folded into claude/w7-prep @ 7ff194aa (merge
+of claude/map-exports tip 017a921c, 2 commits off c1d3f6eb; conflict-free). The matrix:
+settlement SVG (byte-pinned per (settlement,lens,resolution)) · PNG/JPEG/WebP @ 1200/2400/
+4800 (shared SVG→canvas idiom; bytes deliberately unpinned — browser-native encoders) ·
+VTT token PNG (the recorded seam CLOSED) · single-map PDF (shared renderTownMapOp — no
+plate drift) · realm composite PNG (PLAUSIBLE: statically verified against the proven
+captureCampaignThumb idiom; one browser click settles it). WYSIWYG law: exports honor
+cosmetic mapEdits + the ACTIVE lens (override > persisted styleLens). THE $2.99 EXPORT
+BUNDLE (owner ruling executed): every format gates through the EXACT single-dossier lane
+(resolveExportAccess + dossierEntitlements + BuyThisDossier as the unlock rung) — one flag
+= dossier PDF + Foundry + all map exports; premium/founder/elevated free; NO new gate
+class, NO schema change; copy renamed to the bundle (2 tests updated, owner-directed).
+Zero eager bytes (closure 1,032,077 of 1,040,000 on ITS base); dist 143/143. Lane pins 59
+green on the merged tree post-fold. SEAMS in-file (MAP-EXPORTS-2): UVTT/Foundry pre-walled
+scene (full .uvtt shape + wall-derivation + 1:1 fixture pin SPECIFIED; stock Foundry needs
+a community importer — honest caveat) · realm with/without-settlements toggle (overlay-
+skip flag + terrain-bytes-identical pin specified) · bridging the fork's native getMapURL
+exporters (would lift realm export past 1024px + add realm SVG) · anon/gallery export
+affordance (none in v1 — owner decision). JUDGMENTs (vetoable): src/utils home for the PDF
+builder (tsc-graph isolation, ~650 latent JSDoc errors proven avoided) · main-thread
+single-map PDF (tiny vector doc; F41 worker stays dossier-only) · two-commit shape (work
+preservation over per-deliverable commits — two session kills mid-lane).
 **⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
 **STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
 @ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
