@@ -1098,6 +1098,31 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: SURVEYOR S4-S6 (2026-07-17) → w7-prep @ 9d86991e** (merge of
+claude/surveyor-s4-s6 tip b486f9ff, 6 commits off 07d3a1d2; spot-checked; CONFLICT-FREE).
+The AI control surface completes construction: ACCEPT→MINT (typed ApplyIntents through
+store verbs, per-item, reproducibility receipts; unroutable ops surfaced never dropped) ·
+S4 CUSTOM CONTENT (two-layer schema wall: registered-bucket landing + per-field
+MECHANICAL/FLAVOR/UNSUPPORTED labels — hallucinated mechanics structurally dead) · AI
+STYLE OVERHAUL (validateBespokeStyle resolves onto parchment keeping only known-role
+visual fields; truth-projection by construction; additive saves, base lenses permanent;
+cross-lens edit pin EXTENDS to bespoke, proven) · S5/S6 CONSTRUCTION (config-vocabulary-
+is-the-op w/ config-seam walker pin; DETERMINISTIC delta-only comparator, zero AI,
+generalizes to realm; canonizes-nothing-until-commit pinned at composeInstantWorld) ·
+BORN-EFFICIENT TOKEN LAYER (static-first prompts pinned byte-identical per task class;
+routing/max_tokens/slice+token budgets = operator config aiTaskConfig.js; canonicalJson +
+visible truncation, never silent grounding cuts; anomaly flags stamped+logged). Each
+stage: S1 money path verbatim + own kill-switch + early-access register. MIGRATIONS
+151/152 (credit costs + stage switches; head 152 contiguous, validator-confirmed).
+FOLD RECEIPTS on the merged tree: lane pins 107/107 · tsc 0 · build ✓ · verify:dist
+145/145 (closure ratchet green — lane-measured 1,034,056 B, margin 5,944) · four
+validators green. JUDGMENTs ×5 (vetoable, in the lane report): prices 6/3/6/8 provisional-
+per-the-blanket · two shared events (EVENTS_REV 9) · fast/balanced routing defaults ·
+apply-log rides existing surfaces (audit-spine persistence = OWNER-GATED follow-up) ·
+bespoke-style STORAGE SURFACE = owner-gated schema (flagged, mapEdits pins untouched).
+SEAMS: React panels (S3's least-verifiable-headless precedent) · style viewer-surface
+wiring (~6 surfaces → resolveActiveStyle) · edge shells PLAUSIBLE-by-pattern (CI deno
+check). Lane full suite pre-fold: 12,378/1 (the pglite load-flake class, green isolated).
 **⬛ RULING #7 AMENDED (2026-07-17, owner: "move git push to after everything is built"):
 THE PUSH MOVES TO POST-BUILD-OUT.** The first push now fires when the ENTIRE build-out is
 folded — both running lanes, all three map-wave dispatches (SM-5 ∥ door 1 ∥ door 3, then
