@@ -15,6 +15,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { getSurveyorAiCost } from '../../config/pricing.js';
+import { slugify } from '../../kernel/slugify.js';
 import { MUTED, BORDER, CARD_ALT, GREEN, sans, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
@@ -27,7 +28,8 @@ const CANDIDATE_LENS = '__candidate__';
 const DEFAULT_LENS_IDS = ['parchment', 'watercolor', 'darkFantasy', 'vtt'];
 const LENS_LABEL = { parchment: 'Parchment', watercolor: 'Watercolor', darkFantasy: 'Dark', vtt: 'VTT' };
 
-const slugify = (s) => String(s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'bespoke-style';
+/** The kernel slug primitive with this panel's namespace params (dash sep, 40-cap, fallback). */
+const styleSlug = (s) => slugify(s, { max: 40, fallback: 'bespoke-style' });
 
 export default function StyleOverhaulPanel() {
   const { creditBalance, ctx, settlement, savedSettlements } = useSurveyorContext();
@@ -61,7 +63,7 @@ export default function StyleOverhaulPanel() {
       const res = await compileStyleOverhaul({ ...ctx, prompt: q });
       if (!res.ok) { setResult({ error: res.error, refusalClass: res.refusalClass, doors: res.doors }); return; }
       const { validateBespokeStyle } = await import('../../design/townMapStyleWall.js');
-      const id = slugify(q);
+      const id = styleSlug(q);
       const { style, violations } = validateBespokeStyle(res.candidate, { id, label: q.slice(0, 40) });
       setStyleName(q.slice(0, 40));
       setResult({ style, violations: Array.isArray(violations) ? violations : [], musings: res.musings, byok: res.byok, earlyAccess: res.earlyAccess });
@@ -96,7 +98,7 @@ export default function StyleOverhaulPanel() {
     const style = result?.style;
     if (!style) return;
     const { addBespokeStyle } = await import('../../domain/townMap/bespokeStyles.js');
-    const id = slugify(styleName);
+    const id = styleSlug(styleName);
     const next = addBespokeStyle(collection, id, style);
     setCollection(next);
     setSaved({ id, label: styleName || id });

@@ -14,32 +14,21 @@ import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
 
 /** The §9 per-field honesty label. mechanical = real engine effect · flavor = kept, no
- *  mechanic · unsupported = a field the schema has no primitive for (surfaced, never invented). */
+ *  mechanic · unsupported = a field the schema has no primitive for (surfaced, never invented).
+ *  The label TEXT is the honest signal (no native title tooltip — the a11y-poor kind the
+ *  title= census discourages). */
 const LABEL_TONE = { mechanical: 'success', flavor: 'info', unsupported: 'warning' };
 const LABEL_TEXT = { mechanical: 'Mechanical', flavor: 'Flavor', unsupported: 'Unsupported' };
-const LABEL_HINT = {
-  mechanical: 'The engine reads this — a real effect.',
-  flavor: 'Kept as description — no mechanical effect.',
-  unsupported: 'The engine has no rule for this — it is not invented into a fake mechanic.',
-};
 export function FieldLabelBadge({ kind }) {
   const k = LABEL_TONE[kind] ? kind : 'unsupported';
-  return <Badge tone={LABEL_TONE[k]} size="sm" title={LABEL_HINT[k]}>{LABEL_TEXT[k]}</Badge>;
+  return <Badge tone={LABEL_TONE[k]} size="sm">{LABEL_TEXT[k]}</Badge>;
 }
 
 /** §2b THE EARLY-ACCESS REGISTER — an honest label on every write stage until its live
  *  metrics mature (the edge stamps earlyAccess; absent ⇒ treated as on, fail-honest). */
 export function EarlyAccessBadge({ show = true }) {
   if (!show) return null;
-  return (
-    <Badge
-      tone="ai"
-      size="sm"
-      title="Early access — this Surveyor capability is live but its quality metrics are still maturing."
-    >
-      Early access
-    </Badge>
-  );
+  return <Badge tone="ai" size="sm">Early access</Badge>;
 }
 
 /** The BYOK tag — surfaced post-response (the client never sees the key; the edge reports it). */
