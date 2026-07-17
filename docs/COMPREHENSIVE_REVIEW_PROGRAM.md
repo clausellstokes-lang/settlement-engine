@@ -972,6 +972,26 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER RULING #3 (2026-07-16 night, verbatim: "rather than regrade, i meant that I wanted
+to change the regrade into a complete resurvey similar to the orignal prompt... after
+building out everything, then the soak is last after that which then leads to tuning, and
+the very end."): ROUND 3 REPLACES THE RE-GRADE.** The dimensions-only re-grade is superseded
+by a COMPLETE round-3 review+fix program under the original commission verbatim (full
+exhaustive survey → objective holistic assessment → Opus-ultracode fixes for every finding,
+BOLD-OVER-SAFE — "objectively better with risk... every time" — Fable as architect/manager/
+checker after each fix). THE FINAL BINDING ORDER: W8 gate → BUILD-OUT (D7 parks-red ∥
+Surveyor S1+S2 ∥ founder lane) → THE COMPOSITE (mainline+G2+D7; local; never pushed) →
+**ROUND 3 on the composite** (the survey must see the COMPLETE shipping code; golden-shifting
+fixes batch with the regen — MANAGER JUDGMENT, vetoable: composite-as-substrate preserves
+the ONE-REGEN law; the alternative, an early signed regen + mainline round 3, costs a second
+golden event) → A+ gap register (task #24 — round 3 IS the deferred "final review") →
+**THE SOAK LAST** on the post-fix composite (the same certifies-the-shipping-engine logic as
+ruling #2, applied to the review as well: survey nothing twice, soak nothing stale) →
+verdicts → tuning + knob-registry enumeration → targeted re-certs → **THE ONE REGEN** (owner-
+signed: G2+Underways+D7+round-3 shifts+tuning) → composite merges home, mainline gate green →
+**THE VERY END** (push + PR + deploy batch). Tasks re-boarded: #25 ROUND 3 created; #24 + #7
+re-scoped. Timeline honesty recorded: round 2 ran ~2 days at full intensity; round 3
+comparable, likely faster on a twice-hardened tree.
 **✅ W-R2-DEPTH-2 RATIFIED + FOLDED (2026-07-16 ~21:20; merge 5aa11dec) — THE DEPTH WAVE IS
 COMPLETE (D1–D6 all landed).** Branch gate 11,677/1 (sole red EXEMPT_CEILING), verify:dist
 143/143, zero eager (closure 1,063,701, margin 2,699), 0 any-holes. **D1** distance-priced
