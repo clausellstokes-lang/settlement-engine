@@ -52,8 +52,10 @@ import {
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
 import { districtProvenance, mapProvenanceStory } from './provenanceModel.js';
+import { buildEdgeAnnotations } from './edgeAnnotations.js';
 import { districtColor } from './palette.js';
 import SettlementMapNotes from './SettlementMapNotes.jsx';
+import SettlementMapEdgeLabels from './SettlementMapEdgeLabels.jsx';
 import { useMapCamera } from './useMapCamera.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
@@ -185,6 +187,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // restrained on-map cue (dashed accent) on quarters rebuilt after a catastrophe.
   const changeView = useMemo(() => buildChangeView(settlement), [settlement]);
   const rebuiltClasses = useMemo(() => new Set(changeView.rebuiltClasses), [changeView]);
+  // EDGE ANNOTATIONS (SM-5) — the map's exits labelled to named neighbours. Honest:
+  // names + relationship only (the town-scale data carries no distance), no invented
+  // numbers. Empty ⇒ no labels, no drawer section (a neighbour-less town is unchanged).
+  const edgeAnnotations = useMemo(() => buildEdgeAnnotations(model, settlement), [model, settlement]);
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -591,6 +597,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
               </g>
             );
           })}
+
+          {/* ── EDGE ANNOTATIONS (SM-5) — the map's exits labelled to named
+              neighbours (drawn last so labels read over the linework). ──────── */}
+          <SettlementMapEdgeLabels annotations={edgeAnnotations} ink={C.ink} bg={C.bg} />
         </g>
       </svg>
 
@@ -622,7 +632,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
       {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
           surveyor's read (+ change view + roads out, added in their deliverables).
           Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
-      <SettlementMapNotes settlement={settlement} story={mapStory} changes={changeView} />
+      <SettlementMapNotes settlement={settlement} story={mapStory} changes={changeView} roads={edgeAnnotations} />
 
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}

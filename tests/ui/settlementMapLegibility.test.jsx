@@ -83,6 +83,35 @@ describe('SM-5 — the change view (deliverable 2)', () => {
   });
 });
 
+describe('SM-5 — edge annotations (deliverable 3)', () => {
+  test('named neighbours appear as on-map exit labels and in the Roads out section', () => {
+    stubMatchMedia(true);
+    const settlement = {
+      ...v2Fixture(),
+      neighbors: [
+        { name: 'Ashford', relationshipType: 'trade_partner' },
+        { name: 'Zephyr Hold', relationshipType: 'rival' },
+      ],
+    };
+    const { container } = render(<SettlementMapPane settlement={settlement} canEdit={false} saveId={null} />);
+    // on-map wayfinding labels
+    const labels = container.querySelectorAll('[data-town-edge-label]');
+    expect(labels.length).toBe(2);
+    expect(container.textContent).toMatch(/→ Ashford/);
+    // and the drawer gazetteer
+    fireEvent.click(container.querySelector('[data-town-notes-toggle]'));
+    const drawer = container.querySelector('[data-town-notes]');
+    expect(within(drawer).getByText(/Roads out/)).toBeTruthy();
+    expect(drawer.textContent).toMatch(/trade partner/);
+  });
+
+  test('a neighbour-less town shows no edge labels', () => {
+    stubMatchMedia(true);
+    const { container } = render(<SettlementMapPane settlement={v2Fixture()} canEdit={false} saveId={null} />);
+    expect(container.querySelectorAll('[data-town-edge-label]').length).toBe(0);
+  });
+});
+
 describe('SM-5 — graceful degradation (v1 has no provenance)', () => {
   test('a v1 district card shows no provenance section, and no drawer appears', () => {
     stubMatchMedia(true);
