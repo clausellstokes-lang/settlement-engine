@@ -195,8 +195,21 @@ pressure sentences below.
 - Institution NAME `displayName` schema — owner-gated persistence shape. Not started.
 - Institution service menus (935) — adequate register; deferred pending taste-pass.
 - Deity + naming-culture growth — owner-ratified; not touched.
-- [more after recon — faction world-registry scope, NPC drawUnique pools, institution-desc
-  full-301 scale vs representative sample.]
+- **Exhaustive institution descs (the other ~245 of 301)** — mechanism proven on a 56-institution
+  sample; the rest is mechanical pool-growth once the voice is taste-approved. Deferred.
+- **History-event descriptions** — 58 authored variants (2 per type) are BANKED in
+  `scratchpad/authored_history.json` but NOT yet wired: they carry substitution tokens
+  (`{resource}`/`{location}`/…) that must be verified against generateEventNarrative, and the
+  wiring needs `ctx._seed` threaded through generateHistory→generateEventNarrative. Deferred to a
+  follow-on (clean fnv wiring, same idiom as institutions).
+- **NPC display pools** — the authoring fan-out agent stalled (API error), so no strings landed;
+  the surface is otherwise draw-safe (single-pick) and can be grown in a follow-on. NPC_PERSONALITY_TRAITS
+  (negative/neutral) + NPC_CRIMINAL_SECRETS are DEFERRED regardless (content-branch draw hazard,
+  recon HIGH). The NPC_WANTS→`clothes` field mislabel (npcGenerator.js:286) is FLAGGED, not fixed
+  (pre-existing, out of a content-growth lane's scope).
+- **Deeper vignettes** — grew the survey's thinnest pools (ARRIVAL_SCENES 2→4); STRESS_DESCS
+  (needs the stressTypeContentWave keyword probes made pool-robust) and STRESS_NOTES (0-draw
+  lookup; hash-select needs a seed threaded into genArrivalDetail) deferred.
 
 ## OWNER-DECISION QUEUE (parked, deliberate)
 
@@ -214,7 +227,19 @@ values)
 - **Base = the sibling event-prose branch** (not bare `07d3a1d2`), to reuse `eventProse.js`'s
   pure `pickLine`/`fnv1a32` rather than fork it and to keep the two parked content lanes
   stacked for the composite. Veto reverts by `git rebase --onto 07d3a1d2 …`.
-- [scope depth + per-surface approaches recorded as they land.]
+- **Shared picker is a LOCAL kernel leaf** (`src/kernel/proseHash.js`), not a cross-import of
+  `eventProse.js`, to keep zero generators→worldPulse coupling. Veto: swap the import.
+- **religious_conversion selector swapped `name.length%3` → `pickRandom2`** (the survey-directed
+  CRITICAL fix; draw-neutral — pickRandom2 already fired on the 1-element array). Veto reverts
+  the closure to the deterministic index.
+- **World-scoped faction dedup** is the survey/brief-directed REPAIR of the worst thin-content
+  surface (settlement-local dedup is "the root cause"), NOT a new capability — implemented as a
+  pure post-pass that touches per-settlement generation not at all. Veto reverts by removing the
+  one `dedupeWorldFactionNames(settlements)` call. The rename STRATEGY (same-category descriptor,
+  then base+suffix probe) is a taste choice — see owner queue.
+- **Institution-desc scale: representative 56-institution sample this pass**, mechanism proven;
+  the exhaustive 301 is deferred to the taste-approval (deferral ledger). Veto: adjust the
+  sample / defer entirely.
 
 ---
 
@@ -245,6 +270,17 @@ values)
 >   `history.historicalCharacter` (90), `arrivalScene` (3). ZERO structural fields. Guard:
 >   `tests/generators/dossierContent.test.js` (walker + register + canonical-at-zero +
 >   determinism + wartime anchors). typecheck 0, lint clean, 52 institution/generator tests green.
+> - **Faction names (CRITICAL) — DONE + VERIFIED.** World-scoped dedup as a PURE, rng-free
+>   post-pass (`src/lib/instantWorld/factionDedup.js`) wired into `composeInstantWorld` after
+>   minting: per-settlement generation is byte-identical (the pass runs only on the composed
+>   bundle), and cross-settlement `factions[].name` collisions are renamed deterministically to
+>   world-unique same-category descriptors (conflicts parties/desc/plotHooks + powerStructure
+>   mirror kept consistent; dossier prose uses role-archetype names, never these). Renames by
+>   IDENTITY (fixed a bug where two same-name factions in one settlement — local dedup caps out
+>   — collapsed to one name). Zero collisions across 15 composed realms (all sizes × seeds);
+>   determinism preserved; 19 existing instant-world tests green + 7 new guards
+>   (`tests/lib/instantWorld/factionDedup.test.js`). instantWorldFingerprint VALUE shifts once
+>   (parked golden; the existing tests pin shape/determinism, not the value, so none red today).
 > - Plan opened 2026-07-17 from the survey (`CONTENT_THINNESS_SURVEY_RAW.txt`) + the sibling
 >   lane's deferral table.
 
