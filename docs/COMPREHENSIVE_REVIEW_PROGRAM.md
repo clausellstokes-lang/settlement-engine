@@ -972,6 +972,43 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛⬛ THE WEEKLY-LIMIT RESUME DOSSIER (2026-07-17) — A SUCCESSOR STARTS HERE.**
+**STATE:** code truth = `claude/w7-prep` (worktree .claude/worktrees/agent-a04d3f325c72e62dd)
+@ 9b9e525a; this main tree is LEDGER-ONLY — never build here. Budget 1,040,000 (RATCHET
+#11). EXEMPT_CEILING signed 69 (gates fully green). ALL sign-offs granted (RULING #5; THE
+ONE REGEN PRE-SIGNED; carve-outs: legal consult + support email).
+**FIVE LANES IN FLIGHT — worktrees/commits survive limits (limits kill reasoning, not disk):**
+1. claude/surveyor-s3 (agent-ae9ac861328f9e062, →53eaf814): compiler+Shell+Parley; mig 145+.
+2. claude/map-exports (agent-aed2165ea573f9147): exports + $2.99 bundle + UVTT Foundry +
+   realm toggle — possibly UNCOMMITTED (16 files): commit first at fold.
+3. claude/gallery-p2 (agent-a6db22641bc1c2dd3, 4/5 →179f7e17): five signed deliverables;
+   mig 146+.
+4. claude/urban-fabric (agent-ab9c0863330e9ab28, off 9b9e525a): the last engine brick.
+5. claude/misc-signed @ b0837797+WIP2 (agent-a828509d4ac41f3e0): membership norm + mapChains
+   — ⚠️ ITS CHECKOUT FELL BACK TO THE MAIN TREE (contained: WIP committed on its branch by
+   the manager, main tree restored, agent relocated to its worktree).
+ALSO: the owner's separate-session sharer-edit gallery-flags fix ended — locate + fold.
+**FOLD PROTOCOL:** spot-check (show --stat vs claimed scope) → merge into w7-prep IN ITS
+WORKTREE (cd + verify branch EVERY call — the cwd resets and lands in ACTIVE trees) → lane
+pins on merged tree → ledger row HERE (cd main; verify branch = review-fixes-2026-07-08) →
+task update. Migration collisions renumber at fold (143/144 precedent).
+**DISPATCH ORDER:** S4+S5+S6 after S3 · generation-time content after urban-fabric (PARKS
+RED, G2 pattern) · TOWN LAYOUT v2 (#38) + panorama after map-exports · seams as reported.
+Briefs: pwd + base-hash guards, FOREGROUND-BLOCKING gates (no background waits — phantom-
+monitor stalls ×5; SendMessage resume cures; a status demand recovered a 3h-silent agent).
+**THE TAIL (pre-signed; pauses only at counsel + the merge button):** THE COMPOSITE (w7-prep
++ claude/w-r2-g2 @ aec57981 + the parked generation-time branch; local) → ROUND 3 (#25: the
+original commission VERBATIM + the two censuses) → gap register (#24) → THE SOAK
+(docs/SOAK_PLAN_R2.md; CENTURY-300 first; instant-world composer+canonize = harness; LOCAL
+COMPUTE — under token scarcity run as long-lived background bash banking to files) → tuning
+window (dials; knob registry mints; #35 builds) → re-certs → **THE ONE REGEN (PRE-SIGNED —
+no pause): light distancePricedNewsEnabled + reframeEnabled + provenanceLedgerEnabled +
+urbanFabricEnabled + npcGrowthEnabled in the three world-alive presets; merge G2 +
+generation-time; regen goldens ONCE** → final gate → **THE VERY END (#22): push + PR
+(pre-authorized; MERGE BUTTON = owner's) + deploy batch (~27 migrations 118→head; envs
+byok_secret + SURVEYOR_CANARY_SECRET; covert-scrub SQL twin; sitemap; applied-head; SUPPORT
+EMAIL verification; LEGAL CONSULT — drafts NOT-IN-FORCE until counsel).** Hazards:
+memory/MEMORY.md.
 **✅ THE GROWTH LAYER RATIFIED + FOLDED (2026-07-17; clean merge — no conflict with
 provenance; both engine finales' pins 57/57 together on the merged tree) — **THE ENGINE'S
 CONSTRUCTION ERA IS OVER.** People learn: acquiredTraits w/ provenance/intensity/decay ·
