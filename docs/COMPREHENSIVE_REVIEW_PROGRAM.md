@@ -1098,6 +1098,29 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: SM-5 THE MAP LEGIBILITY WAVE (2026-07-17) → w7-prep @ d0857995** (merge of
+claude/sm-5-legibility tip f2e3d755, 8 commits off 66eda8e8; spot-checked, 32 files NUL-
+clean). ALL SEVEN delivered: provenance hover + the surveyor's-read drawer (self-gates on
+v1) · the change view (mirror-not-rederive; dark-fabric whisper; NO fabricated deltas —
+prominence has no baseline, honestly omitted) · edge annotations as honest wayfinding
+signs (VERIFIED no distance data exists ⇒ no invented numbers; real-weeks digest = a
+recorded seam) · the 5th ACCESSIBLE lens (Okabe-Ito; the four existing lenses proven
+byte-identical BEFORE the additive re-mint) · the DM pin layer (denylist-safe
+mapEdits.annotations, audience fail-closed, export appends — the draw-list golden never
+perturbed) · atlas-identity craft samples (docs/samples/atlas/ — TASTE VETO #3 QUEUED;
+realm-lens unification = an owner-gated seam, FMG-bound) · MAP-LAYER ANALYTICS (ONE
+feature-discriminated town_map_layer_used, EVENTS_REV 10, +43 B = the only eager byte
+cost; fog/interiors inherit the helper). FOLD RECEIPTS on the merged tree: 123 tests /
+12 files (pins + style/edits goldens + interior cross-checks) · tsc 0 · build ✓ · dist
+146/146. Closure 1,034,099 (margin 5,901). ⚠️ LANE FINDING (pre-existing, NOT SM-5's):
+**the v2 fold's domain:strict gate passed spuriously — the baseline is stale (~550
+noImplicitAny in the six townLayoutV2-family files, byte-identical to base)**; the
+owner-side chip session (task_be620e27) is fixing exactly this; fold-receipt discipline
+gains "run domain:strict explicitly, never via tail-pipe". Also confirmed pre-existing:
+the advancePauseResume 20s-timeout flake (passes at 90s). JUDGMENTs ×4 vetoable in the
+lane report (palette-not-pattern a11y · baseLenses stays 4 for AI composition ·
+glyph-only export markers · pins ride the existing editing gate pending the ladder).
+**FOG (DOOR 2) DISPATCHED off d0857995** — the last map wave; then panels remain.
 **⬛ THE DOCUMENTATION WAVE BRIEF COMMITTED (2026-07-17):
 docs/briefs/W_DOCUMENTATION_WAVE.md** — both sweeps banked (10/10 agents) and RECONCILED;
 the critics' contradictions ADJUDICATED (8 rulings, each vetoable): About = pure trust
