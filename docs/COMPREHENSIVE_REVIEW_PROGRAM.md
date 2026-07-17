@@ -972,6 +972,29 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ OWNER COMMISSION: THE CHRONICLE (2026-07-17, advance legibility) — DESIGN FROZEN @
+09130996 (docs/DESIGN_CHRONICLE_LEGIBILITY.md), WAVE DISPATCHED.** The world-pulse/wizard-news/
+autoresolver surfaces must be "perfect and readible and digestible and navigable and workable"
+across advance spans (week→month→season→year), and DM-queued changes applied across a long
+advance get a dedicated reflection surface ("it should be noted for the user because that was
+their choice"). THE DESIGN: the zoom law (hierarchical never-truncating pyramid:
+headline→chapters→threads→events, scaffolding scaled by span) · threads-over-timeline
+(causal-chain extraction typed by the 8 drama classes; the tempo governor's boundedness IS the
+tractability guarantee) · delta-first framing · the deputy's diary (auto-verdicts as beats in
+threads + rulings-in-your-absence w/ reversibility; accept-by-thread) · **THE DECREE TRACKER**
+(per applied DM op: landing week, direct receipt, the CAUSAL CONE of downstream descendants,
+span-end standing held/absorbed/contested/undone, HONEST NULLS reported as findings; always
+present, never top-forced, never lost) · durable-store sourcing rule (never read capped
+feeds) · pure read-models, deterministic, zero eager, zero engine. Diagnosis recorded: data
+layer A, presentation layer B- — the whole gap is display work. D7 decree-reception irony =
+named seam. Build-out at THREE concurrent waves: SURVEYOR-S1b · INSTANT WORLD · THE CHRONICLE.
+**⚠️ INCIDENT (contained, zero damage): the chronicle agent's base-guard checkout executed in
+the MAIN TREE** (the agent-cwd-fallback hazard — the wrong-lineage class's 8th firing, first
+of the fallback-hits-main-tree variant tonight): the main tree briefly sat on claude/chronicle;
+caught clean within minutes (no commits, no writes — the manager's own ledger insert no-op'd
+harmlessly on the wrong lineage's doc), main tree restored to review-fixes, the agent
+redirected to its own worktree with pwd-verification orders. RULE: dispatch prompts must add
+"verify pwd is inside your worktree path before STEP 0" — adopted for all future briefs.
 **✅ SURVEYOR S1+S2 RATIFIED + FOLDED (2026-07-17 ~00:30; merge a17d71b0) — THE FIRST AI
 SHIP.** 4 commits off 4052fc9c: the 7 PURE brief composers (player-safe settlement section
 asserted byte-for-byte ≡ toPublicSafe) · S1 core (state-slicers, citation law — hallucinated
