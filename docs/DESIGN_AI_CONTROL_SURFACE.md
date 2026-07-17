@@ -143,6 +143,33 @@ through the standing typed-ops → validation → preview → approval lane. Two
    preset + dialog path) to the AI layer. A dead-end refusal is a scored failure — refusal
    QUALITY joins the §5 evals alongside refusal rate.
 
+## 3e. THE FORGETTING LAW (owner amendment 2026-07-16, adopted on the manager's shape:
+## "any AI using this from my website has to delete their information after use")
+The rented model retains NOTHING of a user's world beyond the request — enforced at the
+three layers where it is REAL, never by prompt (a "delete after use" instruction would be
+retention theater and is prohibited as a claimed mechanism):
+1. **BY CONSTRUCTION (already true):** statelessness — each request is born with its packet
+   and dies with its response; no provider-side conversation state, no memory features, no
+   accumulation in a brain we don't own.
+2. **BY CONTRACT (the floor, mandatory):** every provider must satisfy — inputs/outputs
+   NEVER used for provider training + retention contractually bounded (zero-retention
+   adopted wherever the provider offers it; bounded abuse-monitoring windows accepted and
+   DISCLOSED until then). Verify current provider terms at implementation — never assert
+   from memory.
+3. **BY STRUCTURE (the immutable part):** retention posture is a FIRST-CLASS REQUIRED
+   property of the provider adapter contract — `retentionClass: 'zero' | 'bounded' |
+   'training'` declared per adapter; NO adapter registers without one (walker-pinned);
+   routing enforces a floor (world-data classes never route to 'training'-class adapters —
+   which are therefore banned in practice); BYOK surfaces the user's own provider's posture
+   honestly rather than laundering it.
+LOUD, NOT HIDDEN: the mechanism is invisible plumbing, but the COMMITMENT is public — the
+privacy policy states it in plain sentences ("your world data is never used to train
+provider models; provider retention is contractually bounded, zero where available; our own
+audit records store hashes and slice lists, not your content"). PROMISES NEVER EXCEED
+CONTRACTS: terms state the actual current floor and upgrade only when the paper does.
+Our own side already complies in spirit: aiOperationLog stores hashes not content; the
+training corpus is separately consent-gated opt-in (§3).
+
 ## 4. Commercial mapping (per the owner's spec, recorded decisions)
 - **Surveyor tier $19.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
   (the anon/free/premium × role orthogonality holds; entitlements gate the INTERFACE — the sim
