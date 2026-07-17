@@ -39,6 +39,7 @@ import { createCampaignSlice }     from './campaignSlice.js';
 import { createCampaignRegionalSlice } from './campaignRegionalSlice.js';
 import { createCampaignWorldPulseSlice } from './campaignWorldPulseSlice.js';
 import { createCustomContentSlice } from './customContentSlice.js';
+import { createInstantWorldSlice }  from './instantWorldSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
@@ -63,6 +64,7 @@ export const useStore = create(
           ...createCampaignRegionalSlice(set, get),
           ...createCampaignWorldPulseSlice(set, get),
           ...createCustomContentSlice(set, get),
+          ...createInstantWorldSlice(set, get),
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),
           ...createAccountImportSlice(set, get),
