@@ -38,6 +38,10 @@
 
 import { facetOf } from '../spatial/cohesionWeave.js';
 
+/** The NPC fields the bank reads (only these — declared over inferred).
+ * @typedef {{ personality?: Record<string, unknown>, role?: string, category?: string,
+ *   goal?: Record<string, unknown>, facets?: unknown, tags?: unknown }} BankNpc */
+
 // ── §1.1 The bounded attribute vocabularies (mirrors of the engine's native words) ──
 
 /** Alignment axes — mirrors worldPulse/npcAgency.js ALIGNMENTS (the law×good grid).
@@ -187,7 +191,7 @@ export function bankVocabulary(facetKind) {
 
 /** Keyword-inference fallback for an NPC facet, reading the NPC's own native fields
  *  (the "absent declaration ⇒ generated/inferred value" arm). Pure, total.
- *  @param {any} npc @param {string} facetKind @returns {string|null} */
+ *  @param {BankNpc} npc @param {string} facetKind @returns {string|null} */
 function inferNpcFacet(npc, facetKind) {
   if (!npc || typeof npc !== 'object') return null;
   switch (facetKind) {
@@ -216,7 +220,7 @@ function inferNpcFacet(npc, facetKind) {
  * Resolve an NPC's bank facet through THE FACET LAW: declared (`npc.facets.<kind>`
  * or a `facet:<kind>:<value>` tag, via the cohesionWeave chokepoint) wins; else the
  * NPC's own inferred value. Absent both ⇒ null (byte-identical to no facet).
- * @param {any} npc @param {string} facetKind @returns {string|null}
+ * @param {BankNpc} npc @param {string} facetKind @returns {string|null}
  */
 export function npcFacetOf(npc, facetKind) {
   // The chokepoint returns the DECLARED value (it has no inference table for NPC

@@ -10,28 +10,6 @@ function saveSettlement(save) {
   return save?.settlement || save;
 }
 
-/**
- * DESIGN_NPC_LIFECYCLE §2 — STASIS participation exclusion. A stasis NPC (npc.stasis
- * set) is excluded from ALL world-pulse participation reads (agency / recruitment /
- * blocs) by removing them from the settlement THE PULSE SEES here — this is the ONE
- * chokepoint every kernel read consumes (snapshot.settlements[].settlement). Their
- * seat vacates via the same role-fill machinery as reassignment, while their
- * relationship edges (on the regional graph, not settlement.npcs) keep decaying per
- * D5 — memory keeps flowing. npcId is name/id-keyed, so dropping a stasis NPC never
- * churns another NPC's id.
- *
- * DORMANCY: when no NPC is in stasis, the SAME settlement reference is returned —
- * the derivationCache identity and every downstream byte are unchanged (goldens use
- * no ops ⇒ this is a pass-through). The DM's own view still shows the NPC (the save's
- * settlement is untouched); only the pulse's participation view is pruned.
- * @param {any} settlement @returns {any}
- */
-function excludeStasisNpcs(settlement) {
-  const npcs = settlement?.npcs;
-  if (!Array.isArray(npcs) || !npcs.some((n) => n && n.stasis)) return settlement;
-  return { ...settlement, npcs: npcs.filter((n) => !(n && n.stasis)) };
-}
-
 /** @param {any} save */
 function saveId(save) {
   return String(save?.id || save?.settlement?.id || save?.settlementId || save?.name || 'unknown');
@@ -105,8 +83,14 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
 
   const settlements = canonSaves.map(save => {
     // Participation view: stasis NPCs are excluded from the settlement the pulse
-    // reads (§2). Dormant (same reference) when none are shelved.
-    const settlement = excludeStasisNpcs(saveSettlement(save));
+    // reads (§2). Dormant (same reference) when none are shelved. `_s` is the
+    // loose (any) pulse-view settlement, so this narrows nothing downstream and
+    // the participation copy is byte-identical when no NPC is shelved.
+    const _s = saveSettlement(save);
+    const _npcs = /** @type {Array<{ stasis?: unknown }>} */ (_s?.npcs);
+    const settlement = (Array.isArray(_npcs) && _npcs.some((n) => n && n.stasis))
+      ? { ..._s, npcs: _npcs.filter((n) => !(n && n.stasis)) }
+      : _s;
     const id = saveId(save);
     const name = settlement?.name || save?.name || id;
     // causal / system / activeConditions depend SOLELY on the settlement

@@ -29,14 +29,25 @@ import {
   NPC_ALIGNMENTS, NPC_TEMPERAMENTS, NPC_ROLE_ARCHETYPES, ROLE_GOAL_CHAIN,
 } from './npcBank.js';
 
+/** A bank-editable NPC (only the fields the ops read/write; the index signature
+ *  carries the arbitrary seat fields a reassignment moves).
+ * @typedef {{ id?: string|number, name?: string, facets?: Record<string, unknown>,
+ *   personality?: Record<string, unknown>, goal?: Record<string, unknown>, role?: string,
+ *   category?: string, stasis?: { reason?: string } } & Record<string, unknown>} OpNpc */
+/** @typedef {{ npcs?: OpNpc[], relationships?: unknown[] } & Record<string, unknown>} OpSettlement */
+/** A naming-culture pool (data/namingData.js entry). @typedef {{ maleNames?: string[],
+ *   femaleNames?: string[], surnames?: string[] } | null} NamingPool */
+/** A seeded PRNG (kernel/prng.js). @typedef {{ pick: (a: readonly string[]) => string,
+ *   random: () => number, randInt: (lo: number, hi: number) => number }} Prng */
+
 // ── §2 EDIT_NPC ──────────────────────────────────────────────────────────────
 
 /**
  * Apply a bank-bounded facet edit to an NPC. Pure — returns { ok, reason, npc }
  * with a NEW npc object (never mutates the input). Free-text / off-vocab values are
  * refused (ok:false, npc unchanged) — the bank is the validation source.
- * @param {any} npc @param {string} facetKind @param {unknown} value
- * @returns {{ ok: boolean, reason: string|null, npc: any }}
+ * @param {OpNpc} npc @param {string} facetKind @param {unknown} value
+ * @returns {{ ok: boolean, reason: string|null, npc: OpNpc }}
  */
 export function applyEditNpcFacet(npc, facetKind, value) {
   const v = validateNpcFacet(facetKind, value);
@@ -72,9 +83,9 @@ export const SEAT_HELD_FIELDS = Object.freeze([
  *   • PEOPLE-HELD ties (personal relationship edges, keyed by NPC id on
  *     settlement.relationships / the regional graph) TRAVEL with the NPC — this
  *     function never touches them, so they follow the person by construction.
- * @param {any} settlement @param {number} npcIndex
- * @param {{ institutionId?: any, factionLink?: any, factionAffiliation?: any, settlementId?: any, role?: any, linkedInstitutionIds?: any, linkedFactionIds?: any }} target
- * @returns {{ ok: boolean, reason: string|null, settlement: any }}
+ * @param {OpSettlement} settlement @param {number} npcIndex
+ * @param {Record<string, unknown>} target  the new seat fields (a subset of SEAT_HELD_FIELDS)
+ * @returns {{ ok: boolean, reason: string|null, settlement: OpSettlement }}
  */
 export function reassignNpc(settlement, npcIndex, target) {
   const npcs = settlement?.npcs;
@@ -82,11 +93,10 @@ export function reassignNpc(settlement, npcIndex, target) {
   if (!target || typeof target !== 'object') return { ok: false, reason: 'no target', settlement };
   const prev = npcs[npcIndex];
   const nextNpc = { ...prev };
-  const t = /** @type {Record<string, any>} */ (target);
   // Seat-held: overwrite ONLY the seat fields present on the target (the vacated
   // seat keeps nothing — this NPC no longer holds it).
   for (const f of SEAT_HELD_FIELDS) {
-    if (f in t) nextNpc[f] = t[f];
+    if (f in target) nextNpc[f] = target[f];
   }
   // Record the reassignment as a declared facet-style provenance stamp (no free-text).
   nextNpc.reassignedTo = {
@@ -110,8 +120,8 @@ export const STASIS_REASONS = Object.freeze(['journey', 'imprisoned', 'missing',
  * from ALL participation reads (agency / recruitment / blocs) at the buildWorldSnapshot
  * chokepoint, while their relationship edges keep decaying per D5 (memory flows). A
  * shelf, not a grave — reversible via returnNpc. Refuses an unknown reason.
- * @param {any} settlement @param {number} npcIndex @param {string} reason
- * @returns {{ ok: boolean, reason: string|null, settlement: any }}
+ * @param {OpSettlement} settlement @param {number} npcIndex @param {string} reason
+ * @returns {{ ok: boolean, reason: string|null, settlement: OpSettlement }}
  */
 export function enterStasis(settlement, npcIndex, reason) {
   const npcs = settlement?.npcs;
@@ -123,7 +133,7 @@ export function enterStasis(settlement, npcIndex, reason) {
 }
 
 /** Return an NPC from stasis (the reunion inherits the interim). Pure. No-op-safe on
- *  an NPC not in stasis. @param {any} settlement @param {number} npcIndex */
+ *  an NPC not in stasis. @param {OpSettlement} settlement @param {number} npcIndex */
 export function returnNpc(settlement, npcIndex) {
   const npcs = settlement?.npcs;
   if (!Array.isArray(npcs) || !npcs[npcIndex]) return { ok: false, reason: 'no npc at index', settlement };
@@ -137,7 +147,7 @@ export function returnNpc(settlement, npcIndex) {
 }
 
 /** True when an NPC is on the stasis shelf (the participation-exclusion predicate the
- *  buildWorldSnapshot chokepoint filters on). @param {any} npc */
+ *  buildWorldSnapshot chokepoint filters on). @param {OpNpc} npc */
 export function isInStasis(npc) {
   return !!(npc && typeof npc === 'object' && npc.stasis);
 }
@@ -151,7 +161,7 @@ export function isInStasis(npc) {
  * it will move on subsequent reads. Runtime emission rides the existing commit-snapshot
  * receipt today (like renameNPC); this builder is the typed, pinnable proof of the cone.
  * @param {'edit-npc'|'reassign-npc'|'stasis-npc'|'return-npc'} opType
- * @param {{ id?: any, name?: any }} npc
+ * @param {{ id?: string|number, name?: string }} npc
  * @param {{ facetKind?: string, effects?: string[], detail?: string }} [meta]
  */
 export function npcOpReceipt(opType, npc, meta = {}) {
@@ -179,7 +189,7 @@ const _CATEGORY_BY_ARCHETYPE = Object.freeze({
   healer: 'religious', labor_resource: 'economy', diplomat_outsider: 'noble', dissident: 'government',
 });
 
-/** @param {any} rng @param {any} cultureData @param {string} gender @returns {string} */
+/** @param {Prng} rng @param {NamingPool} cultureData @param {string} gender @returns {string} */
 function pickFromNaming(rng, cultureData, gender) {
   const first = (gender === 'female' ? cultureData?.femaleNames : cultureData?.maleNames) || cultureData?.maleNames || [];
   const last = cultureData?.surnames || [];
@@ -199,11 +209,11 @@ function pickFromNaming(rng, cultureData, gender) {
  *
  * @param {Object} [args]
  * @param {string|number} [args.seed]       deterministic seed (same seed ⇒ same NPC)
- * @param {any} [args.namingData]           the culture's NAMING_DATA entry (names)
+ * @param {NamingPool} [args.namingData]           the culture's NAMING_DATA entry (names)
  * @param {string|null} [args.role]         a role archetype constraint (else seeded)
- * @param {any} [args.institutionId]        seat constraint
- * @param {any} [args.settlementId]         seat constraint
- * @returns {any} a bank-valid SimNpc-shaped NPC
+ * @param {string|number|null} [args.institutionId]        seat constraint
+ * @param {string|number|null} [args.settlementId]         seat constraint
+ * @returns {OpNpc} a bank-valid SimNpc-shaped NPC
  */
 export function instantNpc({ seed = '', namingData = null, role = null, institutionId = null, settlementId = null } = {}) {
   const rng = createPRNG(`instant-npc:${seed}`);
@@ -240,7 +250,7 @@ export function instantNpc({ seed = '', namingData = null, role = null, institut
 
 /** The bank facets an instant NPC declares — used by the counterpart pin to assert an
  *  instant NPC resolves to a valid value through the facet law at every facet kind.
- *  @param {any} npc */
+ *  @param {OpNpc} npc */
 export function instantNpcFacetSummary(npc) {
   return {
     alignment: npcFacetOf(npc, 'alignment'),
