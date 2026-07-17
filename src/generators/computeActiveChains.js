@@ -8,6 +8,14 @@ import {RESOURCE_TO_CHAINS} from '../data/supplyChainResourceIndex.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
 import {RESOURCE_DATA} from '../data/resourceData.js';
 import {customDeps} from '../lib/dependencyEngine.js';
+// FP-G10: load (register) the prebuilt resource-chains catalog so
+// customDeps.chainsFedByResource below resolves legacy `feedsChains` refs via the
+// enumerated engineChainId path — exactly as before the enumerator + its ~60 KB
+// SUPPLY_CHAIN_NEEDS table were split off the first-paint closure into that lazy
+// leaf. This generator rides the lazy `engine` chunk, so the catalog loads with
+// generation, never on first paint. (chainsFedByResource is byte-identical even
+// unregistered — its slug fallback matches — this keeps the enumerated path live.)
+import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 

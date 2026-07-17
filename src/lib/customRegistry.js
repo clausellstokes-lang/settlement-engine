@@ -33,7 +33,6 @@ import { GOODS_MODIFIERS_BY_TIER, IMPORT_GOODS_BY_TIER } from '../data/tradeGood
 // file has every field this enumerator reads (label, historyColour,
 // viabilityNote) with zero imports.
 import { STRESS_TYPE_META as STRESS_TYPE_MAP } from '../data/stressTypesMeta.js';
-import { SUPPLY_CHAIN_NEEDS } from '../data/supplyChainData.js';
 
 // ── Constants ───────────────────────────────────────────────────────────────
 
@@ -310,35 +309,35 @@ function enumeratePrebuiltTradeGoods() {
   }));
 }
 
-function enumeratePrebuiltResourceChains() {
-  // Sourced from SUPPLY_CHAIN_NEEDS (need_group → chains[]) which is what the
-  // engine matches against. Each chain's refId slug encodes the full chain id
-  // (`<needKey>__<chainId>`) so consumers can reconstruct `<needKey>.<chainId>`
-  // to compare with the engine's chain ids.
-  const out = [];
-  for (const [needKey, need] of Object.entries(SUPPLY_CHAIN_NEEDS || {})) {
-    if (!needKey) continue;
-    const chains = Array.isArray(need?.chains) ? need.chains : [];
-    for (const chain of chains) {
-      if (!chain || typeof chain !== 'object') continue;
-      const slug = `${needKey}__${slugify(chain.id || chain.label || '')}`;
-      out.push({
-        refId: `prebuilt:resourceChains:${slug}`,
-        name: chain.label || chain.id || slug,
-        category: 'resourceChains',
-        subcategory: need?.label || needKey,
-        source: 'prebuilt',
-        tags: chain.exportable ? ['exportable'] : [],
-        desc: Array.isArray(chain.outputs) && chain.outputs.length
-          ? `→ ${chain.outputs.slice(0, 4).join(', ')}`
-          : (chain.resource ? `from ${chain.resource}` : ''),
-        // Engine-facing chain id (matches `${needKey}.${chain.id}` exactly)
-        engineChainId: chain.id ? `${needKey}.${chain.id}` : null,
-        raw: chain,
-      });
-    }
-  }
-  return out;
+// ── Prebuilt resource-chains: a LAZY-provided category (FP-G10 reclaim) ───────
+// The resource-chains enumerator + its ~60 KB SUPPLY_CHAIN_NEEDS table
+// (data/supplyChainData.js) were the SOLE first-paint (eager) importer of that
+// table, dragging it into the eager `data` chunk for a registry category NO
+// first-paint path consumes. The category is read only by
+// dependencyEngine.chainsFedByResource — a legacy `feedsChains` resolver whose
+// slug-reconstruction fallback is BYTE-IDENTICAL to the enumerated engineChainId
+// (every SUPPLY_CHAIN_NEEDS chain id is already a slug, and a missing chain falls
+// back on BOTH paths) — and by no live UI (feedsChains is no longer an authored
+// dependency field, so no picker/summary surfaces the prebuilt chains). The
+// enumerator + table now live in the lazy leaf lib/prebuiltResourceChains.js,
+// which self-registers via registerPrebuiltResourceChains on load. Until it loads,
+// this category is EMPTY — byte-identical, because chainsFedByResource falls back
+// and nothing lists prebuilt resourceChains. computeActiveChains (the feedsChains
+// consumer, on the lazy engine chunk) imports the leaf, so the catalog loads with
+// generation and the capability stays live off the first-paint path.
+// @enforced-by tests/build/vendorPdfLazy.test.js (first-paint byte budget) +
+//   tests/lib/prebuiltResourceChains.test.js (fallback byte-identity + registration).
+let _prebuiltResourceChainsEnum = null;
+
+/**
+ * Register the (lazy) prebuilt resource-chains enumerator. Called once from the
+ * lib/prebuiltResourceChains.js leaf on its load. Idempotent; invalidates the
+ * prebuilt cache so the next buildRegistry surfaces the freshly-loaded category.
+ * @param {() => any[]} fn
+ */
+export function registerPrebuiltResourceChains(fn) {
+  _prebuiltResourceChainsEnum = typeof fn === 'function' ? fn : null;
+  _prebuiltCache = null;
 }
 
 // Cache prebuilt enumerations (these never change at runtime).
@@ -361,7 +360,12 @@ function getPrebuiltEntries() {
     resources:      _safeEnum(enumeratePrebuiltResources, 'resources'),
     stressors:      _safeEnum(enumeratePrebuiltStressors, 'stressors'),
     tradeGoods:     _safeEnum(enumeratePrebuiltTradeGoods, 'tradeGoods'),
-    resourceChains: _safeEnum(enumeratePrebuiltResourceChains, 'resourceChains'),
+    // Lazy-provided (see registerPrebuiltResourceChains above): [] until the
+    // lib/prebuiltResourceChains.js leaf loads — byte-identical for every
+    // consumer (chainsFedByResource falls back; nothing lists this category).
+    resourceChains: _prebuiltResourceChainsEnum
+      ? _safeEnum(_prebuiltResourceChainsEnum, 'resourceChains')
+      : [],
   };
   return _prebuiltCache;
 }
