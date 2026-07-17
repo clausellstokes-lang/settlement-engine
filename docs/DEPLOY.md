@@ -130,7 +130,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `150_surveyor_stage_kill_switch.sql`** (this filename is kept
+**Current migration head: `152_surveyor_s4_s6_stage_switches.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 
@@ -178,7 +178,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 20 functions total — deploy all of them on a first cutover.
+There are 24 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -222,13 +222,17 @@ npx supabase functions deploy generate-chronicle
 npx supabase functions deploy ai-analyst, surveyor-byok                              # Surveyor S1 analyst (requires ANTHROPIC_API_KEY + BYOK secret)
 npx supabase functions deploy interpret-session                       # Surveyor S3 intent compiler (JWT + entitlement + kill-switch)
 npx supabase functions deploy parley                                  # Surveyor S3 in-character parley (JWT + entitlement + kill-switch)
+npx supabase functions deploy custom-content                          # Surveyor S4 custom-content compiler (JWT + entitlement + kill-switch)
+npx supabase functions deploy style-overhaul                          # Surveyor style-overhaul compiler (JWT + entitlement + kill-switch)
+npx supabase functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
+npx supabase functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
 npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **20 deployable functions** (every `supabase/functions/*` dir except
+There are **24 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
-and seven `verify_jwt = true` postures above are pinned in `config.toml`, the
+and eleven `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here.

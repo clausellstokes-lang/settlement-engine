@@ -15,8 +15,8 @@ in `src/lib/analyticsEvents.js`, and carries a class in the parallel `EVENT_CLAS
 Props are coarse by construction — enums, bands, counts, booleans, hashes; never names,
 prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamps).
 
-- **EVENTS_REV:** 8
-- **Events:** 126 total — 122 essential, 4 research
+- **EVENTS_REV:** 9
+- **Events:** 128 total — 124 essential, 4 research
 - **Research class** requires explicit opt-in (built + mirrored only under `research` consent, re-clamped server-side).
 - **Enriched props** below are the actual top-level keys the bound extractor emits (code-derived); events built inline at the call site show `—` and are documented in the taxonomy.
 
@@ -225,6 +225,8 @@ prose, seeds, or free text (the inverse-sanitizer discipline + server-side clamp
 |---|---|---|---|
 | `AI_PARLEY_ANSWER` | `ai_parley_answer` | essential | — |
 | `AI_PARLEY_RIDER` | `ai_parley_rider` | essential | — |
+| `AI_STAGE_ANSWER` | `ai_stage_answer` | essential | — |
+| `AI_STAGE_RIDER` | `ai_stage_rider` | essential | — |
 
 ---
 
