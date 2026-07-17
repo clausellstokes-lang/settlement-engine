@@ -478,6 +478,12 @@ verify_jwt = true
 [functions.ai-analyst]
 verify_jwt = true
 
+# surveyor-byok (BYOK MANAGEMENT SURFACE, #29) — authenticated key management: the
+# verify-by-test-call. verify_jwt true (the handler additionally re-checks auth,
+# account status, and the Surveyor entitlement gate inside the function).
+[functions.surveyor-byok]
+verify_jwt = true
+
 [functions.account-actions]
 verify_jwt = true
 

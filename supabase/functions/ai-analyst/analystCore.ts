@@ -363,16 +363,31 @@ Return ONLY JSON of the form {"claims":[{"text":"<one sentence, what IS>","sourc
 export type RetentionClass = 'zero' | 'bounded' | 'training';
 const RETENTION_CLASSES: ReadonlySet<string> = new Set(['zero', 'bounded', 'training']);
 
+/** The Anthropic adapter's supported model ids + retention posture (§3e) — the SINGLE
+ *  source shared by the ai-analyst adapter registration and the surveyor-byok model
+ *  picker, so the dropdown never offers a model the analyst would reject. RE-VERIFY the
+ *  retention posture against Anthropic's current terms at deploy (never from memory);
+ *  'bounded' is the conservative floor. For a BYOK key this is the USER's own provider
+ *  posture, surfaced honestly (§3e) rather than laundered. */
+export const ANTHROPIC_SUPPORTED_MODELS: readonly string[] = Object.freeze([
+  'claude-opus-4-8', 'claude-sonnet-4-5', 'claude-haiku-4-5',
+]);
+export const ANTHROPIC_RETENTION_CLASS: RetentionClass = 'bounded';
+
 export interface ProviderAdapter {
   id: string;
   retentionClass: RetentionClass;
+  /** The model ids this adapter supports (the picker's ceiling — the dynamic dropdown
+   *  is the key's list-models ∩ THIS set). May be empty (no static list declared). */
+  models: readonly string[];
   call: (args: { model: string; apiKey: string; prompt: string; signal: AbortSignal; fetchImpl?: typeof fetch }) => Promise<Response>;
 }
 
 /** Register a provider adapter. §3e: `retentionClass` is REQUIRED and must be a valid
- *  class — registration THROWS on a missing/invalid one (the walker-pin). */
+ *  class — registration THROWS on a missing/invalid one (the walker-pin). `models` is
+ *  the optional adapter-supported set the model picker intersects the key's list against. */
 export function registerProviderAdapter(adapter: {
-  id: string; retentionClass: unknown; call: ProviderAdapter['call'];
+  id: string; retentionClass: unknown; call: ProviderAdapter['call']; models?: readonly string[];
 }): ProviderAdapter {
   if (!adapter || typeof adapter.id !== 'string' || !adapter.id) {
     throw new Error('provider adapter requires an id');
@@ -383,7 +398,33 @@ export function registerProviderAdapter(adapter: {
   if (typeof adapter.retentionClass !== 'string' || !RETENTION_CLASSES.has(adapter.retentionClass)) {
     throw new Error(`provider adapter "${adapter.id}" requires retentionClass ∈ {zero,bounded,training} (§3e) — got ${String(adapter.retentionClass)}`);
   }
-  return Object.freeze({ id: adapter.id, retentionClass: adapter.retentionClass as RetentionClass, call: adapter.call });
+  const models = Array.isArray(adapter.models) ? adapter.models.filter((m) => typeof m === 'string' && m) : [];
+  return Object.freeze({
+    id: adapter.id,
+    retentionClass: adapter.retentionClass as RetentionClass,
+    models: Object.freeze([...models]),
+    call: adapter.call,
+  });
+}
+
+/**
+ * The DYNAMIC MODEL DROPDOWN set (§ owner commission #29): the models the picker offers
+ * = the key's list-models ∩ the adapter-supported set. Matching is FAMILY-AWARE, because
+ * a provider's raw model ids (e.g. `claude-opus-4-20250514`) need not equal our aliases
+ * (`claude-opus-4-8`): an adapter model is offered when a key id equals it OR shares its
+ * family stem (the id up to the last `-<token>`). When the key list is empty/unavailable
+ * (list-models failed), fall back to the full adapter set so the dropdown is never blank.
+ * Pure.
+ */
+export function intersectModels(keyModelIds: unknown, adapterModels: readonly string[]): string[] {
+  const adapter = (Array.isArray(adapterModels) ? adapterModels : []).filter((m) => typeof m === 'string' && m);
+  const keys = (Array.isArray(keyModelIds) ? keyModelIds : []).filter((m): m is string => typeof m === 'string' && !!m);
+  if (keys.length === 0) return [...adapter]; // fail-open: never a blank picker
+  const stem = (id: string) => id.replace(/-[^-]+$/, ''); // drop the last -token (version/date)
+  return adapter.filter((m) => {
+    const ms = stem(m);
+    return keys.some((k) => k === m || k.startsWith(ms) || stem(k) === ms);
+  });
 }
 
 /** Route a WORLD-DATA request. §3e floor: world data NEVER routes to a 'training'-class

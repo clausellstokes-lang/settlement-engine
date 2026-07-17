@@ -35,6 +35,7 @@ import { ReferralCard, RedeemBlock } from './account/ReferralRedeemBlocks.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
 import AccountEmailPreferencesSection from './account/AccountEmailPreferencesSection.jsx';
+import AccountAiKeysSection from './account/AccountAiKeysSection.jsx';
 
 export default function AccountPage({ onNavigateAdmin }) {
   const auth = useStore(s => s.auth);
@@ -248,6 +249,7 @@ export default function AccountPage({ onNavigateAdmin }) {
     support: 'Customer Support',
     data: 'Data and privacy',
     preferences: 'Preferences',
+    ai: 'AI provider and keys',
   };
 
   // The active section's panel. Each OUR section renders with its exact prior
@@ -320,6 +322,10 @@ export default function AccountPage({ onNavigateAdmin }) {
 
       {/* Preferences — OUR per-category email opt-out (migration 126). */}
       {section === 'preferences' && <AccountEmailPreferencesSection />}
+
+      {/* AI provider & keys — the BYOK MANAGEMENT SURFACE (#29): provider/key/verify,
+          per-task model choice, key-health, usage caps + pause, and the lazy meter. */}
+      {section === 'ai' && <AccountAiKeysSection />}
     </>
   );
 
