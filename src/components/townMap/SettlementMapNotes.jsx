@@ -40,16 +40,20 @@ export default function SettlementMapNotes({ settlement, story = null, changes =
   const [open, setOpen] = useState(false);
 
   const hasStory = !!story && (!!story.responseLabel || story.site.length > 0 || story.declined.length > 0);
-  const hasChangeSection = !!changes; // the change view always renders (lit content OR a dark whisper)
+  // The change view opens the drawer only when it has REAL changes; a dark change
+  // view is not itself a reason to surface the drawer (it would be noise on a plain
+  // map). But once the drawer is open for ANY reason, the change section renders —
+  // showing the dark-fabric whisper in place of content.
+  const hasRealChanges = !!changes && changes.hasAny;
   const hasRoads = Array.isArray(roads) && roads.length > 0;
-  if (!hasStory && !hasChangeSection && !hasRoads) return null;
+  if (!hasStory && !hasRealChanges && !hasRoads) return null;
 
   return (
     <div data-town-notes style={wrapStyle}>
       {open && (
         <div role="region" aria-label="Map notes" style={panelStyle}>
           {hasStory && <StorySection story={story} />}
-          {hasChangeSection && <ChangeSection changes={changes} settlement={settlement} />}
+          {changes && <ChangeSection changes={changes} settlement={settlement} />}
           {hasRoads && <RoadsSection roads={roads} />}
         </div>
       )}

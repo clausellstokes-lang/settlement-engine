@@ -13,7 +13,7 @@ import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, within } from '@testing-library/react';
 
 import SettlementMapPane from '../../src/components/townMap/SettlementMapPane.jsx';
-import { makeTownFixture } from '../fixtures/townMapFixtures.js';
+import { makeTownFixture, makeFabricMirror } from '../fixtures/townMapFixtures.js';
 
 function stubMatchMedia(matches) {
   window.matchMedia = (q) => ({
@@ -52,6 +52,34 @@ describe('SM-5 — the map explains itself (v2 provenance)', () => {
     expect(within(drawer).getByText(/The surveyor’s read/)).toBeTruthy();
     // the founding response mode is named (this coastal walled town founds to Fortify)
     expect(drawer.textContent).toMatch(/Fortify/);
+  });
+});
+
+describe('SM-5 — the change view (deliverable 2)', () => {
+  test('a lit map shows recent upheavals in the What changed section', () => {
+    stubMatchMedia(true);
+    const settlement = {
+      ...v2Fixture(),
+      urbanFabric: makeFabricMirror(),
+      calamityHistory: [{ type: 'plague', name: 'The Sickness', year: 38, tick: 200, deaths: 120, k: 1, targets: ['t'] }],
+    };
+    const { container } = render(<SettlementMapPane settlement={settlement} canEdit={false} saveId={null} />);
+    fireEvent.click(container.querySelector('[data-town-notes-toggle]'));
+    const drawer = container.querySelector('[data-town-notes]');
+    expect(within(drawer).getByText(/What changed/)).toBeTruthy();
+    expect(drawer.textContent).toMatch(/Rebuilt/);
+    expect(drawer.textContent).toMatch(/Fire damage/);
+  });
+
+  test('a dark-fabric map whispers instead of showing content', () => {
+    stubMatchMedia(true);
+    // v2 map (has a story ⇒ drawer opens) but NO fabric and NO calamity ⇒ dark change view.
+    const { container } = render(<SettlementMapPane settlement={v2Fixture()} canEdit={false} saveId={null} />);
+    fireEvent.click(container.querySelector('[data-town-notes-toggle]'));
+    const drawer = container.querySelector('[data-town-notes]');
+    expect(within(drawer).getByText(/What changed/)).toBeTruthy();
+    // the Surveyor's-note whisper renders in place of change content (validated register)
+    expect(drawer.textContent).toMatch(/A Note from the Surveyor/i);
   });
 });
 

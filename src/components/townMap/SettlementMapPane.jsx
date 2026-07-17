@@ -43,7 +43,7 @@ import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 import {
   buildTownMapModel, viewerPalette, TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID,
-  buildTownMapPanoramaDrawList,
+  buildTownMapPanoramaDrawList, buildChangeView,
 } from '../../domain/townMap/index.js';
 import {
   readMapEdits, readLegendPrefs, readStyleLens, normalizeMapEdits,
@@ -54,13 +54,13 @@ import { buildingHoverModel } from './hoverModel.js';
 import { districtProvenance, mapProvenanceStory } from './provenanceModel.js';
 import { districtColor } from './palette.js';
 import SettlementMapNotes from './SettlementMapNotes.jsx';
+import { useMapCamera } from './useMapCamera.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
 import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
 
-const clampScale = (s) => Math.max(0.2, Math.min(8, s));
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
 const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
@@ -180,6 +180,11 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // THE LEGIBILITY DRAWER (SM-5) — the map-level surveyor's read (response mode +
   // site cause + declined-advantage map). Null for a v1 map ⇒ the drawer self-gates.
   const mapStory = useMemo(() => mapProvenanceStory(model), [model]);
+  // THE CHANGE VIEW (SM-5) — the chronicle's spatial twin. Empty-when-dark by the
+  // fabricRead contract; the drawer shows a whisper then. `rebuiltClasses` drives a
+  // restrained on-map cue (dashed accent) on quarters rebuilt after a catastrophe.
+  const changeView = useMemo(() => buildChangeView(settlement), [settlement]);
+  const rebuiltClasses = useMemo(() => new Set(changeView.rebuiltClasses), [changeView]);
 
   const wrapperRef = useRef(null);
   const gRef = useRef(null);
@@ -231,85 +236,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
     }
   }, [size.width, size.height, writeTransform]);
 
-  // ── Self-owned pan / wheel-zoom / two-pointer pinch ─────────────────────────
-  useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return undefined;
-    const pointers = new Map();
-    let panning = false; let lastX = 0; let lastY = 0;
-    /** @type {{ dist:number, cx:number, cy:number, scale:number, tx:number, ty:number }|null} */
-    let pinch = null;
-    // Pan starts only on the map background (svg / wrapper / the bg rect) —
-    // buildings and districts own their own hover/click. MapOverlay precedent.
-    const isBackground = (target) => target === el || target.tagName === 'svg'
-      || target.getAttribute?.('data-town-bg') != null;
-
-    const beginPinch = () => {
-      const pts = [...pointers.values()];
-      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
-      const rect = el.getBoundingClientRect();
-      pinch = {
-        dist,
-        cx: (pts[0].x + pts[1].x) / 2 - rect.left,
-        cy: (pts[0].y + pts[1].y) / 2 - rect.top,
-        scale: transformRef.current.scale,
-        tx: transformRef.current.tx,
-        ty: transformRef.current.ty,
-      };
-    };
-
-    const onDown = (e) => {
-      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-      if (pointers.size === 2) { panning = false; beginPinch(); return; }
-      if (pointers.size !== 1) return;
-      if (e.button != null && e.button > 0) return; // primary / touch only
-      if (!isBackground(e.target)) return;
-      panning = true; lastX = e.clientX; lastY = e.clientY;
-      try { el.setPointerCapture?.(e.pointerId); } catch { /* ignore */ }
-    };
-    const onMove = (e) => {
-      if (pointers.has(e.pointerId)) pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-      if (pinch && pointers.size >= 2) {
-        const pts = [...pointers.values()];
-        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
-        const next = clampScale(pinch.scale * (dist / pinch.dist));
-        const k = next / pinch.scale;
-        writeTransform({ scale: next, tx: pinch.cx - (pinch.cx - pinch.tx) * k, ty: pinch.cy - (pinch.cy - pinch.ty) * k });
-        return;
-      }
-      if (!panning) return;
-      writeTransform({ tx: transformRef.current.tx + (e.clientX - lastX), ty: transformRef.current.ty + (e.clientY - lastY) });
-      lastX = e.clientX; lastY = e.clientY;
-    };
-    const onUp = (e) => {
-      pointers.delete(e.pointerId);
-      if (pointers.size < 2) pinch = null;
-      if (pointers.size === 0) panning = false;
-      try { el.releasePointerCapture?.(e.pointerId); } catch { /* ignore */ }
-    };
-    const onWheel = (e) => {
-      e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      const cx = e.clientX - rect.left; const cy = e.clientY - rect.top;
-      const factor = e.deltaY < 0 ? 1.1 : 1 / 1.1;
-      const next = clampScale(transformRef.current.scale * factor);
-      const k = next / transformRef.current.scale;
-      writeTransform({ scale: next, tx: cx - (cx - transformRef.current.tx) * k, ty: cy - (cy - transformRef.current.ty) * k });
-    };
-
-    el.addEventListener('pointerdown', onDown);
-    window.addEventListener('pointermove', onMove);
-    window.addEventListener('pointerup', onUp);
-    window.addEventListener('pointercancel', onUp);
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => {
-      el.removeEventListener('pointerdown', onDown);
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerup', onUp);
-      window.removeEventListener('pointercancel', onUp);
-      el.removeEventListener('wheel', onWheel);
-    };
-  }, [writeTransform]);
+  // ── Self-owned pan / wheel-zoom / two-pointer pinch (extracted leaf) ─────────
+  useMapCamera({ wrapperRef, transformRef, writeTransform });
 
   // ── Hover / pin handlers (touch drops hover; tap pins) ──────────────────────
   const anchorFrom = (e) => ({ x: e.clientX, y: e.clientY });
@@ -543,6 +471,19 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                     style={{ pointerEvents: 'none' }}
                   />
                 )}
+                {/* THE CHANGE VIEW (SM-5) — a restrained dashed accent on quarters
+                    rebuilt after a catastrophe (fabric rebirths). Dormant when the
+                    fabric records no rebuild ⇒ the common map is visually unchanged. */}
+                {rebuiltClasses.has(d.category) && (
+                  <polygon
+                    data-town-rebuilt={d.id}
+                    points={pointsOf(poly)}
+                    fill="none"
+                    stroke={C.ink} strokeOpacity={0.7} strokeWidth={2}
+                    strokeDasharray="6 4"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
                 {/* SM-3 label show/hide (legendPref) — district name at its centroid */}
                 {legendPrefs.showLabels && (() => {
                   const c = offsetXY(d.centroid.x, d.centroid.y, pv);
@@ -681,7 +622,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
       {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
           surveyor's read (+ change view + roads out, added in their deliverables).
           Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
-      <SettlementMapNotes settlement={settlement} story={mapStory} />
+      <SettlementMapNotes settlement={settlement} story={mapStory} changes={changeView} />
 
       {/* ── SM-3 edit chrome (desktop + canEdit + a saved blob only) + the
           legend (a legendPref honored for every viewer once set) ──────────── */}

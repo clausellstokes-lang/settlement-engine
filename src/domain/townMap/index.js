@@ -26,6 +26,10 @@ export {
   CATEGORY_AFFINITY,
   HAMLET_CLUSTER_ID,
 } from './institutionAssignment.js';
+// SM-5 THE CHANGE VIEW — the chronicle's spatial twin (rebuilt blocks / scars /
+// recent calamities), composed from fabricRead + the calamity read model. Pure,
+// lazy (consumed only by the map surfaces + tests).
+export { buildChangeView } from './changeView.js';
 // SM-3 — the cosmetic mapEdits container (pure read + merge ops). Imported ONLY by
 // the lazy viewer pane + tests, so this stays out of the first-paint static closure.
 export {
