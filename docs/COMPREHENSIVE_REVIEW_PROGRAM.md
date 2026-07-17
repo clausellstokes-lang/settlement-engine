@@ -1098,6 +1098,28 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ WELCOME PAGE ASSESSED + COMMISSIONED (2026-07-17; task #22 — THE DOCUMENTATION
+WAVE's fourth member): RECONCILE, DON'T REBUILD.** The best-aligned page of the four
+(~75% on-purpose): the salt-road narrative, the REAL-ENGINE-OUTPUT fixture w/ the
+"Forge this exact town / Same seed, same town, every time" determinism proof, real
+gallery cards w/ zero-shift fallback, the honest AI disclosure, hero-only-eager perf —
+ALL PROTECTED. The wave adds: (1) THE MAP WAYPOINT (the missing crown on the road — v2
+map + lens flip + provenance tease via the fixture idiom); (2) the Voice section's "the
+only AI feature" line EVOLVES before it becomes false at launch (keep the disclosure
+instinct; move to the schema-wall promise); (3) the closer's tier strip gains Surveyor +
+config-sourced facts (VERIFY the anon "completely randomized" line vs tierFacts); (4)
+landing-funnel analytics reconciled w/ the map-layer pattern. JUDGMENT (vetoable): no
+third research sweep — sweeps 1+2 cover landing patterns.
+**⬛ RESEARCH SWEEP 1 BANKED (wf_7ada24b2-812, 5/5 agents, 0 errors):** manifesto/
+medieval-art/market/digestibility + critic — full results at the task output file +
+journal.jsonl (paths in DOSSIER v2). Headline patterns for the brief: the Obsidian
+covenant (immutable one-sentence promises + the maker's face) · Ink &amp; Switch numbered
+ideals + honest comparison matrix · Ghost live-receipts (verifiable artifacts over
+claims) · the Ciechanowski dependency-order explainer (one annotated tick diagram) ·
+Anthropic's pre-emptive concession for the AI section · Tarsnap threat-model disclosure.
+Sweep 2 (wf_01b77ea7) still running. ⚠️ THE SPATIAL LANE STALLED in the recorded
+phantom-monitor class ("wait for the monitor's notification") — the SendMessage status
+demand issued (the cure is 2-for-2 across the program).
 **⬛⬛ THE RESUME DOSSIER v2 (2026-07-17 evening — the owner expects the 5-hour window
 cut; A SUCCESSOR STARTS HERE).**
 **STATE:** code truth = `claude/w7-prep` @ **eb958f4b** (worktree
