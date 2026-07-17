@@ -170,6 +170,38 @@ CONTRACTS: terms state the actual current floor and upgrade only when the paper 
 Our own side already complies in spirit: aiOperationLog stores hashes not content; the
 training corpus is separately consent-gated opt-in (§3).
 
+## 3f. THE ENRICHMENT RIDER (owner amendments 2026-07-16: capture-before-forgetting for
+## analytics, the AI deciphers its own traffic, "enforceable even if the user is providing
+## their own API... part of the contract of using our services")
+Every Surveyor response carries a machine-readable ENRICHMENT RIDER beside the human answer:
+controlled-vocabulary tags only — theme-dictionary ids, intent class, rung/extension tier,
+refusal reason-class, action-drafted flags. The model tags its own traffic as a byproduct of
+serving it (no second call; marginal tokens). Captured SERVER-SIDE in the edge function from
+the response in transit — composing cleanly with §3e (the PROVIDER keeps nothing; WE keep
+what this section and the consent planes permit).
+**THE TWO CAPTURE LAYERS:**
+1. CONDITION-OF-SERVICE (managed AND BYOK, non-togglable, ToS-disclosed): the ID-FREE,
+   CATEGORY-GRADE rider only — service telemetry about the world-machine, never content,
+   never free-text (out-of-vocabulary ⇒ 'other' + a dictionary-growth signal via the
+   k-floored A2 process). This layer's id-free design is what makes the
+   condition-of-service framing defensible — flag to the consolidated PRE-LAUNCH LEGAL
+   CONSULT (with the founder-payout items) for the strict-jurisdiction conditionality check.
+2. CONSENT-GATED (unchanged): content-grade capture — the corpus plane's full
+   intent→result→correction→refusal records — stays separately opt-in per §3. The rider
+   makes the consented corpus SEARCHABLE (collect-fine-aggregate-late).
+**BYOK ENFORCEABILITY IS STRUCTURAL, not merely contractual:** keys exist only server-side
+(§3), so every AI interaction — managed or BYOK — flows through the ONE edge path where the
+rider is constructed and captured; there is no bypass to write a term against. The ToS
+clause DISCLOSES what the architecture guarantees. BYOK honesty: rider token overhead rides
+the user's key (negligible, <~1%) — disclosed in BYOK terms.
+**THE CONFLICTED-WITNESS RULE:** self-emitted tags serve INTEREST data only (themes/intents/
+refusal reasons — roughly-right-at-scale is the point). QUALITY metrics (citation coverage,
+register purity, refusal quality) are INDEPENDENTLY scored (deterministic checks or a
+separate grader) — a model self-reporting its own compliance never gates the trust ladder.
+**HONEST BOUNDARY (recorded):** this binds every interaction through SettlementForge's
+surface — total coverage of our own pipe; it cannot and does not claim to bind what users do
+with exported data in outside tools.
+
 ## 4. Commercial mapping (per the owner's spec, recorded decisions)
 - **Surveyor tier $19.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
   (the anon/free/premium × role orthogonality holds; entitlements gate the INTERFACE — the sim
