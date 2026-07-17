@@ -165,3 +165,40 @@ describe('SettlementMapPane — edit affordances commit to the blob', () => {
     expect(savedMapEdits()).toBeUndefined(); // no pin, no container
   });
 });
+
+describe('SettlementMapPane — MAP STYLES lens switcher', () => {
+  test('the switcher (all four lenses) is shown for EVERY viewer, even read-only', () => {
+    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={null} />);
+    expect(container.querySelector('[data-town-lens-switcher]')).toBeTruthy();
+    for (const id of ['parchment', 'watercolor', 'darkFantasy', 'vtt']) {
+      expect(container.querySelector(`[data-town-lens="${id}"]`)).toBeTruthy();
+    }
+    expect(container.querySelector('[data-town-grid]')).toBeNull(); // parchment default: no grid
+  });
+
+  test('an EDITOR picking a lens PERSISTS it and re-skins the view', () => {
+    const { container } = render(<SettlementMapPane settlement={fixture} canEdit saveId={SAVE_ID} />);
+    fireEvent.click(container.querySelector('[data-town-lens="vtt"]'));
+    expect(savedMapEdits()).toEqual({ styleLens: 'vtt' });
+    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // VTT grid now drawn
+
+    // Back to parchment clears the key (byte-identity dormancy).
+    fireEvent.click(container.querySelector('[data-town-lens="parchment"]'));
+    expect(savedMapEdits()).toBeUndefined();
+    expect(container.querySelector('[data-town-grid]')).toBeNull();
+  });
+
+  test('a NON-editor picking a lens re-skins EPHEMERALLY (nothing persists)', () => {
+    const { container } = render(<SettlementMapPane settlement={fixture} canEdit={false} saveId={SAVE_ID} />);
+    fireEvent.click(container.querySelector('[data-town-lens="vtt"]'));
+    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // the derived view switched
+    expect(savedMapEdits()).toBeUndefined();                          // but nothing was written
+  });
+
+  test('a persisted lens is HONORED on load (rides the blob into the viewer)', () => {
+    const { container } = render(
+      <SettlementMapPane settlement={{ ...fixture, mapEdits: { styleLens: 'vtt' } }} canEdit={false} saveId={null} />,
+    );
+    expect(container.querySelector('[data-town-grid]')).toBeTruthy(); // opens already in VTT
+  });
+});

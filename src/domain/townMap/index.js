@@ -21,11 +21,13 @@ export {
   readMapEdits,
   readLegendPrefs,
   readLayoutVariant,
+  readStyleLens,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
   nextLayoutVariant,
   withLegendPref,
+  withStyleLens,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),
 // shared by the PDF plate + the library-card thumbnail. Imported ONLY by those

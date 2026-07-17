@@ -19,9 +19,9 @@
 import { View, Text, Svg, Polygon, Polyline, Line, Circle, Rect, Path } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
-import { type, palette, space, pt, swatch } from '../theme.js';
+import { type, palette, space, pt } from '../theme.js';
 import { cap } from '../lib/format.js';
-import { buildTownMapModel, hasDrawableMap, buildTownMapDrawList, exportDistrictColor } from '../../domain/townMap/index.js';
+import { buildTownMapModel, hasDrawableMap, buildTownMapDrawList, exportDistrictColor, readMapEdits, readStyleLens, resolveTownMapStyle } from '../../domain/townMap/index.js';
 
 // The plate's vector box, in PDF points. The model lives in a 0..1000 viewBox, so
 // this is a pure scale — square, to match the map's square coordinate space.
@@ -129,7 +129,13 @@ export function TownMapPlate({ settlement, narrativeMode, model = null }) {
   const m = model || buildTownMapModel(settlement);
   if (!hasDrawableMap(m)) return null;
 
-  const ops = buildTownMapDrawList(m);
+  // MAP STYLES: the plate inherits the owner's chosen LENS (skin only). The base
+  // GEOMETRY stays library-independent (m is built without cosmetic mapEdits), but
+  // the skin — palette, weights, cartouche/compass furniture — follows the chosen
+  // lens; default parchment is byte-identical to the pre-style plate.
+  const styleId = readStyleLens(readMapEdits(settlement));
+  const style = resolveTownMapStyle(styleId);
+  const ops = buildTownMapDrawList(m, styleId);
   const districts = Array.isArray(m.districts) ? m.districts : [];
   const meta = m.meta || {};
   const cats = legendCategories(districts);
@@ -159,9 +165,9 @@ export function TownMapPlate({ settlement, narrativeMode, model = null }) {
 
       {/* ── The vector plate ─────────────────────────────────────────────── */}
       <View style={{ alignItems: 'center', marginBottom: space.md }}>
-        <View style={{ border: `0.6pt solid ${palette.border}`, borderRadius: 3, padding: 2, backgroundColor: swatch['#FBF5E6'] }}>
+        <View style={{ border: `0.6pt solid ${palette.border}`, borderRadius: 3, padding: 2, backgroundColor: style.background }}>
           <Svg width={PLATE_PT} height={PLATE_PT} viewBox="0 0 1000 1000">
-            <Rect x={0} y={0} width={1000} height={1000} fill={swatch['#FBF5E6']} />
+            <Rect x={0} y={0} width={1000} height={1000} fill={style.background} />
             {ops.map(renderOp)}
           </Svg>
         </View>
@@ -175,7 +181,7 @@ export function TownMapPlate({ settlement, narrativeMode, model = null }) {
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
             {cats.map((c) => (
               <View key={c} style={{ flexDirection: 'row', alignItems: 'center', gap: 4, marginRight: 8, marginBottom: 3 }}>
-                <View style={{ width: 9, height: 9, borderRadius: 2, backgroundColor: exportDistrictColor(c) }} />
+                <View style={{ width: 9, height: 9, borderRadius: 2, backgroundColor: exportDistrictColor(c, styleId) }} />
                 <Text style={{ ...type.caption, color: palette.second, fontSize: pt['8'] }}>{cap(c)}</Text>
               </View>
             ))}

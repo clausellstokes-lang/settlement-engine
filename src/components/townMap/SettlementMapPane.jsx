@@ -36,27 +36,37 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  AMBER, AMBER_BG, BLUE, BODY, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, FS,
-  GOLD, INK, MUTED, PARCH, R, RED, RED_BG, SP, sans,
+  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD,
+  GOLD, INK, MUTED, PARCH, R, RED, RED_BG, sans,
 } from '../theme.js';
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
-import Button from '../primitives/Button.jsx';
 import { useStore } from '../../store/index.js';
-import { buildTownMapModel } from '../../domain/townMap/index.js';
 import {
-  readMapEdits, readLegendPrefs, normalizeMapEdits,
-  withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref,
+  buildTownMapModel, viewerPalette, TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID,
+} from '../../domain/townMap/index.js';
+import {
+  readMapEdits, readLegendPrefs, readStyleLens, normalizeMapEdits,
+  withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
 } from '../../domain/townMap/mapEdits.js';
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
 import { districtColor } from './palette.js';
 import SettlementMapEditControls from './SettlementMapEditControls.jsx';
+import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
 
 const clampScale = (s) => Math.max(0.2, Math.min(8, s));
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
 const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
 const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
+
+/** VTT grid line segments across the 0..1000 view space, every `step` units. */
+function gridLines(step) {
+  const lines = [];
+  for (let x = step; x < 1000; x += step) lines.push({ x1: x, y1: 0, x2: x, y2: 1000 });
+  for (let y = step; y < 1000; y += step) lines.push({ x1: 0, y1: y, x2: 1000, y2: y });
+  return lines;
+}
 
 /** True when the device has a fine pointer (desktop) — the edit posture. Absent
  *  matchMedia (SSR / jsdom) ⇒ treat as desktop so the affordances are testable;
@@ -84,10 +94,16 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // React "adjust state on prop change" pattern (a setState DURING render, not in
   // an effect: it re-renders before commit, no cascading effect). Keyed on the
   // stable settlement id so re-renders of the SAME settlement keep the working edits.
+  // MAP STYLES: an EPHEMERAL lens override so any viewer (owner, or a read-only
+  // gallery visitor) can flip lenses instantly + free — a derived view. The
+  // persisted choice (settlement.mapEdits.styleLens) is the base; the override wins
+  // for the session. Re-seeded to null on a settlement change, like the edits.
+  const [lensOverride, setLensOverride] = useState(null);
   const [seededKey, setSeededKey] = useState(settlementKey);
   if (seededKey !== settlementKey) {
     setSeededKey(settlementKey);
     setMapEdits(readMapEdits(settlement));
+    setLensOverride(null);
   }
 
   const [desktop, setDesktop] = useState(detectFinePointer);
@@ -101,6 +117,33 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
 
   const editing = !!canEdit && saveId != null && desktop;
   const legendPrefs = readLegendPrefs(mapEdits);
+
+  // The active lens = the ephemeral override, else the persisted choice. For the
+  // DEFAULT (parchment) the pane keeps its theme-adaptive tokens (its pre-existing
+  // print-twin/screen divergence); a chosen lens paints from the style's concrete
+  // palette (imported from the src/design token zone — no raw hex in this file).
+  const activeLens = lensOverride ?? readStyleLens(mapEdits);
+  const pal = activeLens === DEFAULT_STYLE_ID ? null : viewerPalette(activeLens);
+  // Role → concrete color: the lens palette when a lens is active, else theme tokens.
+  const C = {
+    water: pal ? pal.water : BLUE,
+    road: pal ? pal.road : MUTED,
+    street: pal ? pal.street : BORDER_STRONG,
+    anchorFill: pal ? pal.anchor : GOLD,
+    anchorStroke: pal ? pal.anchorStroke : INK,
+    wall: pal ? pal.wall : INK,
+    gateFill: pal ? pal.gate : PARCH,
+    gateStroke: pal ? pal.gateStroke : INK,
+    buildingIdle: pal ? pal.buildingFill : CARD,
+    ink: pal ? pal.ink : INK,
+    bg: pal ? pal.bg : PARCH,
+    hazHi: pal ? pal.hazardHigh : RED,
+    hazHiBg: pal ? pal.hazardHighBg : RED_BG,
+    hazMid: pal ? pal.hazardMid : AMBER,
+    hazMidBg: pal ? pal.hazardMidBg : AMBER_BG,
+  };
+  const districtTint = pal ? pal.district : districtColor;
+  const gridStep = pal ? pal.grid : 0;
 
   // The single writer: update the optimistic view AND persist to the blob.
   const commitEdits = useCallback((next) => {
@@ -330,6 +373,13 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   const doToggleLabels = () => commitEdits(withLegendPref(mapEdits, 'showLabels', !legendPrefs.showLabels));
   const doToggleLegend = () => commitEdits(withLegendPref(mapEdits, 'showLegend', !legendPrefs.showLegend));
   const doReset = () => commitEdits(null);
+  // Pick a lens: always update the ephemeral view; PERSIST it when the owner can
+  // edit (rides applyMapEdit into the blob, honored on every full-blob read). Free
+  // + instant + non-destructive — a re-skin never touches geometry or an edit.
+  const doPickLens = (id) => {
+    setLensOverride(id);
+    if (editing) commitEdits(withStyleLens(mapEdits, id));
+  };
   const hasEdits = !!mapEdits;
 
   const active = pinned ?? hovered;
@@ -358,7 +408,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         minHeight: 360,
         border: `1px solid ${BORDER}`,
         borderRadius: R.lg,
-        background: PARCH,
+        background: C.bg,
         overflow: 'hidden',
         touchAction: 'none',
         cursor: 'grab',
@@ -382,6 +432,15 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           style={{ pointerEvents: 'all' }}
         />
         <g ref={gRef}>
+          {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
+          {gridStep > 0 && (
+            <g data-town-grid style={{ pointerEvents: 'none' }}>
+              {gridLines(gridStep).map((ln, i) => (
+                <line key={`grid.${i}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} stroke={C.ink} strokeOpacity={0.14} strokeWidth={0.75} />
+              ))}
+            </g>
+          )}
+
           {/* ── water ─────────────────────────────────────────────────────── */}
           {frame.water && (
             frame.water.kind === 'coast'
@@ -389,14 +448,14 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 <polygon
                   data-town-water
                   points={`${pointsOf(frame.water.path)} 1000,1000 0,1000`}
-                  fill={BLUE} fillOpacity={0.16} stroke={BLUE} strokeOpacity={0.5} strokeWidth={2}
+                  fill={C.water} fillOpacity={0.16} stroke={C.water} strokeOpacity={0.5} strokeWidth={2}
                 />
               )
               : (
                 <polyline
                   data-town-water
                   points={pointsOf(frame.water.path)}
-                  fill="none" stroke={BLUE} strokeOpacity={0.55} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round"
+                  fill="none" stroke={C.water} strokeOpacity={0.55} strokeWidth={14} strokeLinecap="round" strokeLinejoin="round"
                 />
               )
           )}
@@ -406,7 +465,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             <line
               key={r.id}
               x1={r.from[0]} y1={r.from[1]} x2={r.to[0]} y2={r.to[1]}
-              stroke={MUTED} strokeOpacity={0.5} strokeWidth={2 + r.weight} strokeLinecap="round"
+              stroke={C.road} strokeOpacity={0.5} strokeWidth={2 + r.weight} strokeLinecap="round"
             />
           ))}
 
@@ -415,14 +474,14 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             <line
               key={`street.${i}`}
               x1={st.from.x} y1={st.from.y} x2={st.to.x} y2={st.to.y}
-              stroke={BORDER_STRONG} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
+              stroke={C.street} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
             />
           ))}
-          <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={GOLD} stroke={INK} strokeWidth={1.5} />
+          <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={C.anchorFill} stroke={C.anchorStroke} strokeWidth={1.5} />
 
           {/* ── district polygons (drawn first → buildings win z-order) ────── */}
           {districts.map((d) => {
-            const color = districtColor(d.category);
+            const color = districtTint(d.category);
             const on = hoverKey === d.id;
             const pv = previewFor(d.anchorKey);
             const poly = offsetPoints(d.polygon, pv);
@@ -460,8 +519,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                   return (
                     <text
                       x={c.x} y={c.y} textAnchor="middle" dominantBaseline="central"
-                      fill={INK} fontFamily={sans} fontSize={13} fontWeight={700}
-                      stroke={PARCH} strokeWidth={3} paintOrder="stroke"
+                      fill={C.ink} fontFamily={sans} fontSize={13} fontWeight={700}
+                      stroke={C.bg} strokeWidth={3} paintOrder="stroke"
                       style={{ pointerEvents: 'none', userSelect: 'none' }}
                     >
                       {d.name}
@@ -478,18 +537,18 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
               <polygon
                 data-town-walls
                 points={pointsOf(fortifications.walls)}
-                fill="none" stroke={INK} strokeOpacity={0.8}
+                fill="none" stroke={C.wall} strokeOpacity={0.8}
                 strokeWidth={1.5 + fortifications.wallWeight} strokeLinejoin="round"
               />
               {fortifications.gates.map((g, i) => (
-                <circle key={`gate.${i}`} cx={g.x} cy={g.y} r={7} fill={PARCH} stroke={INK} strokeWidth={2} />
+                <circle key={`gate.${i}`} cx={g.x} cy={g.y} r={7} fill={C.gateFill} stroke={C.gateStroke} strokeWidth={2} />
               ))}
             </g>
           )}
 
           {/* ── building landmarks (fill buildings render as the accent above) ─ */}
           {buildings.filter((b) => b.kind === 'landmark').map((b) => {
-            const color = districtColor(districts.find((d) => d.id === b.districtId)?.category);
+            const color = districtTint(districts.find((d) => d.id === b.districtId)?.category);
             const on = hoverKey === b.anchorKey;
             const s = on ? 11 : 8;
             const pv = previewFor(b.anchorKey);
@@ -500,7 +559,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 data-town-building={b.anchorKey}
                 x={pos.x - s} y={pos.y - s} width={s * 2} height={s * 2}
                 rx={3}
-                fill={on ? color : CARD}
+                fill={on ? color : C.buildingIdle}
                 fillOpacity={on ? 0.9 : 1}
                 stroke={color} strokeWidth={on ? 2.5 : 1.5}
                 style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
@@ -532,9 +591,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 onClick={onOverlayClick('condition', c)}
               >
                 <rect x={-9} y={-9} width={18} height={18} rx={4}
-                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
+                  fill={high ? C.hazHiBg : C.hazMidBg} stroke={high ? C.hazHi : C.hazMid}
                   strokeWidth={on ? 2.5 : 1.5} />
-                <circle cx={0} cy={0} r={2.5} fill={high ? RED : AMBER} />
+                <circle cx={0} cy={0} r={2.5} fill={high ? C.hazHi : C.hazMid} />
               </g>
             );
           })}
@@ -554,10 +613,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 onClick={onOverlayClick('hazard', h)}
               >
                 <path d="M 0 -10 L 9 6 L -9 6 Z"
-                  fill={high ? RED_BG : AMBER_BG} stroke={high ? RED : AMBER}
+                  fill={high ? C.hazHiBg : C.hazMidBg} stroke={high ? C.hazHi : C.hazMid}
                   strokeWidth={on ? 2.5 : 1.5} strokeLinejoin="round" />
-                <rect x={-1} y={-4} width={2} height={5} fill={high ? RED : AMBER} />
-                <rect x={-1} y={2} width={2} height={2} fill={high ? RED : AMBER} />
+                <rect x={-1} y={-4} width={2} height={5} fill={high ? C.hazHi : C.hazMid} />
+                <rect x={-1} y={2} width={2} height={2} fill={high ? C.hazHi : C.hazMid} />
               </g>
             );
           })}
@@ -572,6 +631,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         legendPrefs={legendPrefs}
         hasEdits={hasEdits}
         districts={districts}
+        styleIds={TOWN_MAP_STYLE_IDS}
+        activeLens={activeLens}
+        lensPersisted={editing}
+        onPickLens={doPickLens}
         onReroll={doReroll}
         onToggleLabels={doToggleLabels}
         onToggleLegend={doToggleLegend}
@@ -608,106 +671,6 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           <span style={{ color: MUTED }}>{` · ${active.payload.severityBand || ''}`}</span>
         </FloatingLabel>
       )}
-    </div>
-  );
-}
-
-// ── Small floating popover shell, viewport-clamped ────────────────────────────
-function clampAnchor(anchor, w, h) {
-  if (typeof window === 'undefined') return { left: (anchor?.x || 0) + 14, top: (anchor?.y || 0) + 14 };
-  const vw = window.innerWidth || 1024;
-  const vh = window.innerHeight || 768;
-  const left = Math.min((anchor?.x || 0) + 14, vw - w - 12);
-  const top = Math.min((anchor?.y || 0) + 14, vh - h - 12);
-  return { left: Math.max(12, left), top: Math.max(12, top) };
-}
-
-/** @param {{ anchor:{x:number,y:number}, children: import('react').ReactNode }} props */
-function FloatingLabel({ anchor, children }) {
-  const { left, top } = clampAnchor(anchor, 240, 44);
-  return (
-    <div
-      role="tooltip"
-      style={{
-        position: 'fixed', left, top, zIndex: 260, pointerEvents: 'none',
-        maxWidth: 260, padding: `${SP.xs}px ${SP.md}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
-        boxShadow: ELEV[2], fontFamily: sans, fontSize: FS.sm, lineHeight: 1.4,
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-/**
- * Map-native district card (deriveAllDistricts, joined by id). Kept at
- * InstitutionCard's visual weight but non-modal (a hover/pin popover).
- * @param {{ anchor:{x:number,y:number}, mapDistrict:any, profile:any, pinned:boolean, onClose:()=>void }} props
- */
-function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose }) {
-  const { left, top } = clampAnchor(anchor, 320, 260);
-  const name = profile?.name || mapDistrict?.name || 'District';
-  const category = profile?.category || mapDistrict?.category || 'other';
-  const color = districtColor(category);
-  const insts = Array.isArray(profile?.institutions) ? profile.institutions : [];
-  return (
-    <div
-      role={pinned ? 'dialog' : 'tooltip'}
-      aria-label={`${name} — district`}
-      style={{
-        position: 'fixed', left, top, zIndex: 260,
-        width: 'min(92vw, 320px)', maxHeight: 'min(70vh, 420px)', overflow: 'auto',
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[3],
-        pointerEvents: pinned ? 'auto' : 'none',
-      }}
-    >
-      <div style={{
-        display: 'flex', alignItems: 'flex-start', gap: SP.md,
-        padding: `${SP.md}px ${SP.md}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT,
-      }}>
-        <span style={{ width: 12, height: 12, borderRadius: 3, background: color, marginTop: 4, flexShrink: 0 }} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 900, lineHeight: 1.25 }}>{name}</div>
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>
-            {category}
-          </div>
-        </div>
-        {pinned && (
-          <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close district card" style={{ minHeight: 0, padding: '2px 8px' }}>
-            ×
-          </Button>
-        )}
-      </div>
-      <div style={{ padding: SP.md, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-        <Row label="Wealth" value={profile?.wealth || mapDistrict?.wealth} />
-        <Row label="Safety" value={profile?.safety || mapDistrict?.safety} />
-        {profile?.dominantFaction?.name && <Row label="Dominant faction" value={profile.dominantFaction.name} />}
-        {insts.length > 0 && (
-          <Row label="Institutions" value={insts.slice(0, 4).map((i) => i.label).join(', ') + (insts.length > 4 ? `, +${insts.length - 4} more` : '')} />
-        )}
-        {profile?.hook && (
-          <div style={{ marginTop: 2, color: BODY, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>{profile.hook}</div>
-        )}
-        {!profile && (
-          <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.45 }}>
-            An outlying cluster with no distinct quarter.
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/** @param {{ label:string, value:any }} props */
-function Row({ label, value }) {
-  if (value == null || value === '') return null;
-  return (
-    <div style={{ display: 'flex', gap: SP.sm, alignItems: 'baseline' }}>
-      <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', minWidth: 96, flexShrink: 0 }}>
-        {label}
-      </span>
-      <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm }}>{value}</span>
     </div>
   );
 }

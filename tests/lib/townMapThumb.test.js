@@ -15,7 +15,8 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 
 import {
-  townMapThumbCacheKey, renderTownMapThumb, _thumbCacheSize, _clearThumbCache,
+  townMapThumbCacheKey, renderTownMapThumb, renderTownMapTokenRaster, tokenRasterSize,
+  _thumbCacheSize, _clearThumbCache,
 } from '../../src/lib/townMapThumb.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
 
@@ -52,6 +53,42 @@ describe('townMapThumb — cache key contract', () => {
     const base = makeTownFixture({ tier: 'town', terrain: 'hills', walls: false, water: false, seed: 'thumb-roster' });
     const grown = { ...base, institutions: [...base.institutions, { name: 'A New Bank', priorityCategory: 'economy', localUid: 'uid-new' }] };
     expect(townMapThumbCacheKey(grown, 128)).not.toBe(townMapThumbCacheKey(base, 128));
+  });
+
+  it('HONORS + INVALIDATES on the chosen map lens (MAP STYLES styleLens)', () => {
+    const base = makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'thumb-lens' });
+    const vtt = { ...base, mapEdits: { styleLens: 'vtt' } };
+    const dark = { ...base, mapEdits: { styleLens: 'darkFantasy' } };
+    const kBase = townMapThumbCacheKey(base, 128);   // parchment (default)
+    expect(townMapThumbCacheKey(vtt, 128)).not.toBe(kBase);
+    expect(townMapThumbCacheKey(dark, 128)).not.toBe(kBase);
+    expect(townMapThumbCacheKey(vtt, 128)).not.toBe(townMapThumbCacheKey(dark, 128));
+    // the key names the lens (legible identity)
+    expect(townMapThumbCacheKey(vtt, 128)).toContain('|vtt|');
+  });
+});
+
+describe('townMapThumb — VTT token-resolution raster (the VTT functional export)', () => {
+  it('token size is cells × tokenPx (20 × 70 = 1400, square)', () => {
+    expect(tokenRasterSize()).toBe(1400);
+  });
+
+  it('renders a PNG at token resolution under the VTT lens (injected rasterizer)', async () => {
+    const s = makeTownFixture({ tier: 'city', terrain: 'plains', walls: true, water: false, seed: 'token-export' });
+    let seen = null;
+    const fakeRaster = async (svg, size, quality, mime) => { seen = { size, mime, hasGrid: /stroke-width="0.75"/.test(svg) }; return 'data:image/png;base64,FAKE'; };
+    const out = await renderTownMapTokenRaster(s, { rasterize: fakeRaster });
+    expect(out).toEqual({ dataUrl: 'data:image/png;base64,FAKE', size: 1400 });
+    expect(seen.size).toBe(1400);
+    expect(seen.mime).toBe('image/png');   // crisp lines, not JPEG
+    expect(seen.hasGrid).toBe(true);        // the VTT grid is present in the export
+  });
+
+  it('returns null for a map-less settlement', async () => {
+    let calls = 0;
+    const out = await renderTownMapTokenRaster({ institutions: [], spatialLayout: { quarters: [] } }, { rasterize: async () => { calls++; return 'x'; } });
+    expect(out).toBe(null);
+    expect(calls).toBe(0);
   });
 });
 

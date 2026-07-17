@@ -31,15 +31,21 @@
  * `<`/`>` comparisons (localeCompare is banned). Any-cast baseline 0 for new files.
  */
 
+import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs }} MapEdits */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string }} MapEdits */
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
 // silently strip one). Container keys + the pin sub-keys + the legendPref keys.
+// `styleLens` (the chosen map lens — MAP STYLES) is a cosmetic, denylist-safe key:
+// it rides the blob exactly like a legend pref, honored on every full-blob read
+// (owner library, detail viewer, PDF, thumbnail); the anonymous-gallery drop is
+// the pre-existing owner-gated §6 opt-in (mapEdits is not on PUBLIC_TOPLEVEL_KEYS).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', // container
+  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', // container
   'anchor', 'dx', 'dy',                    // pin
   'showLabels', 'showLegend',              // legendPrefs
 ]);
@@ -95,6 +101,13 @@ export function readLayoutVariant(edits) {
   return v > 0 ? v : 0;
 }
 
+/** The chosen map lens id, coerced to a valid style (default: parchment). The
+ * renderer reads this to skin the map; an unknown/absent value is the default lens.
+ * @param {MapEdits | null | undefined} edits */
+export function readStyleLens(edits) {
+  return coerceStyleId(edits && typeof edits.styleLens === 'string' ? edits.styleLens : undefined);
+}
+
 /**
  * Canonicalize a container to its minimal byte-stable form, or `null` when it
  * carries no real edit. Keeps `layoutVariant` only when > 0; keeps `pins` only
@@ -133,6 +146,11 @@ export function normalizeMapEdits(edits) {
   const legendPrefs = {};
   for (const k of LEGEND_PREF_KEYS) if (lp[k]) legendPrefs[k] = true;
   if (Object.keys(legendPrefs).length > 0) out.legendPrefs = legendPrefs;
+
+  // styleLens: kept ONLY for a non-default lens (the default parchment ⇒ omitted ⇒
+  // byte-identical to no-edit, the dormancy law). An unknown id coerces to default.
+  const lens = readStyleLens(edits);
+  if (lens !== DEFAULT_STYLE_ID) out.styleLens = lens;
 
   return Object.keys(out).length > 0 ? out : null;
 }
@@ -180,4 +198,13 @@ export function withLegendPref(edits, key, value) {
   const base = normalizeMapEdits(edits) || {};
   const legendPrefs = { ...(base.legendPrefs || {}), [key]: !!value };
   return normalizeMapEdits({ ...base, legendPrefs });
+}
+
+/** Choose the map lens (MAP STYLES). Selecting the default (parchment) clears the
+ * key ⇒ byte-identical dormancy. Non-destructive: this only skins the derived view,
+ * never the geometry, so no edit is ever lost by re-skinning.
+ * @param {MapEdits | null | undefined} edits @param {string} lens */
+export function withStyleLens(edits, lens) {
+  const base = normalizeMapEdits(edits) || {};
+  return normalizeMapEdits({ ...base, styleLens: coerceStyleId(lens) });
 }
