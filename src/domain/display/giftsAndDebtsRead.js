@@ -40,12 +40,27 @@ function nominalActClass(kind) {
 }
 
 /**
+ * @typedef {Object} GiftDebtAct
+ * @property {string} actClass
+ * @property {'giver'|'bearer'} role
+ * @property {string} kind
+ * @property {number} magnitude
+ * @property {number|null} mintTick
+ * @property {string} reading
+ * @property {string} sign
+ * @property {number} lean
+ * @property {number|null} sinceTick
+ * @property {{ predatoryIntent: boolean, trueKind: string, divergence?: string }} [truth]
+ */
+
+/**
  * The player-safe reading of ONE frozen act between (observer, subject): the nominal fact +
  * the observer's current reframe reading (or the base term when the pair never transitioned).
  * @param {Record<string, unknown>} worldState
  * @param {string} observerId @param {string} subjectId
  * @param {{ kind?: unknown, magnitude?: unknown, mintTick?: unknown }} rec
  * @param {'giver'|'bearer'} role  giver = the observer gave this aid; bearer = the observer owes it
+ * @returns {GiftDebtAct}
  */
 function projectAct(worldState, observerId, subjectId, rec, role) {
   const kind = String(rec?.kind || 'grain_relief');

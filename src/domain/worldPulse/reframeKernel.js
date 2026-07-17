@@ -210,7 +210,7 @@ export function reframePairKey(a, b) { return `${String(a)}>${String(b)}`; }
 
 /** @param {unknown} worldState @returns {Record<string, ReframeEntry> | null} */
 function reframeLedgerOf(worldState) {
-  return /** @type {Record<string, ReframeEntry> | null} */ (getSpatialLedger(worldState, 'reframes'));
+  return /** @type {Record<string, ReframeEntry> | null} */ (getSpatialLedger(/** @type {Record<string, unknown> | null | undefined} */ (worldState), 'reframes'));
 }
 
 /**
@@ -250,21 +250,24 @@ export function reframeEntryFor(worldState, a, b) {
 
 /** Dark-aid-reading strength: `from` (the giver) reads the aid it gave `to` as an unpaid
  *  debt (debt_unpaid / tribute_extracted). 0 when absent/neutral/bright. The ingratitude_debt
- *  + restitution fuel. @returns {number} */
+ *  + restitution fuel. @param {unknown} worldState @param {unknown} from @param {unknown} to
+ *  @returns {number} */
 export function debtClaim01(worldState, from, to) {
   const r = reframeReadingOf(worldState, from, to, 'aid');
   return r && isDarkReading(r.reading) ? Math.abs(r.lean) : 0;
 }
 
 /** `from` (the dependent) reads its trade tie with `to` as deliberately engineered
- *  (dependency_by_design). 0 otherwise. The dependency_by_design fuel. @returns {number} */
+ *  (dependency_by_design). 0 otherwise. The dependency_by_design fuel.
+ *  @param {unknown} worldState @param {unknown} from @param {unknown} to @returns {number} */
 export function dependencyByDesign01(worldState, from, to) {
   const r = reframeReadingOf(worldState, from, to, 'trade_dependence');
   return r && r.reading === 'dependency_by_design' ? Math.abs(r.lean) : 0;
 }
 
 /** Bright-aid/military reading: `party` reads `foe`'s past aid/protection as a genuine or
- *  forgiven kindness (gift_forgiven / unintended_kindness). The debt_forgiven peace fuel. */
+ *  forgiven kindness (gift_forgiven / unintended_kindness). The debt_forgiven peace fuel.
+ *  @param {unknown} worldState @param {unknown} party @param {unknown} foe @returns {number} */
 export function debtForgiven01(worldState, party, foe) {
   const aid = reframeReadingOf(worldState, party, foe, 'aid');
   const mil = reframeReadingOf(worldState, party, foe, 'military');
@@ -276,7 +279,8 @@ export function debtForgiven01(worldState, party, foe) {
 }
 
 /** Bright-trade reading: `party` reads its tie with `foe` as a mutual bond
- *  (bonds_of_commerce). The bonds_of_commerce peace fuel. @returns {number} */
+ *  (bonds_of_commerce). The bonds_of_commerce peace fuel.
+ *  @param {unknown} worldState @param {unknown} party @param {unknown} foe @returns {number} */
 export function bondsOfCommerce01(worldState, party, foe) {
   const r = reframeReadingOf(worldState, party, foe, 'trade_dependence');
   return r && r.reading === 'bonds_of_commerce' ? Math.abs(r.lean) : 0;
@@ -284,14 +288,16 @@ export function bondsOfCommerce01(worldState, party, foe) {
 
 /** A darkly-reframed obligation `target` holds against `patron` (the debtor's resented
  *  debt — extortion_endured / obligation_resented). Leash-eligible material (the corruption
- *  bounded input). 0 when absent/neutral/bright. @returns {number} */
+ *  bounded input). 0 when absent/neutral/bright.
+ *  @param {unknown} worldState @param {unknown} target @param {unknown} patron @returns {number} */
 export function darkReframe01(worldState, target, patron) {
   const r = reframeReadingOf(worldState, target, patron, 'tribute');
   return r && isDarkReading(r.reading) ? Math.abs(r.lean) : 0;
 }
 
 /** A victor's reframed debt claim against a loser (the restitution peace-term producer).
- *  Same read as debtClaim01 — the reframed claim, priced and settleable. @returns {number} */
+ *  Same read as debtClaim01 — the reframed claim, priced and settleable.
+ *  @param {unknown} worldState @param {unknown} victorId @param {unknown} loserId @returns {number} */
 export function restitutionClaim01(worldState, victorId, loserId) {
   return debtClaim01(worldState, victorId, loserId);
 }
@@ -338,8 +344,9 @@ export function advanceReframe({ snapshot, worldState, graph, hegemonyFear = nul
   const states = /** @type {Record<string, unknown>} */ (
     worldState.relationshipStates && typeof worldState.relationshipStates === 'object' ? worldState.relationshipStates : {});
   const byId = snapshot?.byId;
-  const fearOf = hegemonyFear && typeof hegemonyFear.fearOf === 'function'
-    ? (/** @type {string} */ o, /** @type {string} */ s) => clamp01(Number(hegemonyFear.fearOf(o, s)?.score) || 0)
+  const fearFn = hegemonyFear && typeof hegemonyFear.fearOf === 'function' ? hegemonyFear.fearOf : null;
+  const fearOf = fearFn
+    ? (/** @type {string} */ o, /** @type {string} */ s) => clamp01(Number(fearFn(o, s)?.score) || 0)
     : () => 0;
   const liarOf = typeof credibilityOf === 'function'
     ? (/** @type {string} */ s) => clamp01(Number(credibilityOf(s)) || 0)
@@ -368,12 +375,13 @@ export function advanceReframe({ snapshot, worldState, graph, hegemonyFear = nul
     ({ state: stateByPair.get(`${a}|${b}`) || NEUTRAL_STATE });
   const malOf = (/** @type {string} */ id) => {
     const item = byId?.get?.(String(id));
-    const mal = Number(settlementAlignment(/** @type {any} */ (item), worldState)?.malice01);
+    const mal = Number(settlementAlignment(/** @type {Parameters<typeof settlementAlignment>[0]} */ (item), /** @type {Parameters<typeof settlementAlignment>[1]} */ (worldState))?.malice01);
     return Number.isFinite(mal) ? clamp01(mal) : 0.5; // neutral (0.5) when unresolvable
   };
   const memWindowOf = (/** @type {string} */ id) => {
     const item = byId?.get?.(String(id));
-    const mult = memoryHorizonMultiplierOf(/** @type {any} */ (item && typeof item === 'object' && 'settlement' in item ? item.settlement : item));
+    const settlement = item && typeof item === 'object' && 'settlement' in item ? item.settlement : item;
+    const mult = memoryHorizonMultiplierOf(/** @type {Parameters<typeof memoryHorizonMultiplierOf>[0]} */ (settlement));
     return REFRAME_TUNING.BASE_MEMORY_TICKS * mult; // Infinity (undying) ⇒ never forgotten
   };
 
@@ -506,9 +514,9 @@ function foldReframes(prevLedger, candidates, tick) {
   const newOnes = resolved.filter((r) => r.isNew)
     .sort((a, b) => (Math.abs(b.lean) - Math.abs(a.lean)) || (a.pairKey < b.pairKey ? -1 : a.pairKey > b.pairKey ? 1 : (a.actClass < b.actClass ? -1 : 1)));
   const allowedNew = Math.max(0, T.CAP - existingCount);
-  const admitted = new Set(newOnes.slice(0, allowedNew).map((r) => `${r.pairKey} ${r.actClass}`));
+  const admitted = new Set(newOnes.slice(0, allowedNew)); // object-reference identity (no separator key)
   for (const r of resolved) {
-    if (r.isNew && !admitted.has(`${r.pairKey} ${r.actClass}`)) r.reading = null; // over cap ⇒ stays neutral
+    if (r.isNew && !admitted.has(r)) r.reading = null; // over cap ⇒ stays neutral
   }
   // Assemble the next ledger, codepoint-ordered.
   /** @type {Record<string, ReframeEntry>} */
