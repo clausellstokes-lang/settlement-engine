@@ -69,6 +69,10 @@ const EXPECTED_VOICE = {
   // THE GROWTH LAYER (owner commission #36): a person weathering into a learned trait is a
   // quiet local character beat, NOT a town-crier proclamation — deliberately unvoiced.
   npc_growth: null,
+  // THE URBAN FABRIC LAYER (owner commission #39): stone turning at masonry pace is a
+  // quiet chronicle beat, NOT a town-crier proclamation — deliberately unvoiced (the
+  // npc_growth precedent; catastrophe itself is already voiced via the calamity beat).
+  urban_fabric: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {
