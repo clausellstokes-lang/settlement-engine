@@ -1098,6 +1098,31 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ FOLD: TOWN LAYOUT v2 + PANORAMA (2026-07-17) → w7-prep** (merge of
+claude/town-layout-v2 tip cbbf04c5 off 07d3a1d2; spot-checked incl. the python NUL
+byte-count — 19 src/tests files CLEAN; conflict-free). ALL FIVE owner refinements built
+in: the staged pipeline (SITE genesis w/ realm-coherence law + exploit/endure/fortify
+response modes recorded as provenance → economic field w/ sourced asymmetry + NO uniform
+jitter, source-less towns provably seed-independent-formal → core nucleates ON the field
+→ roads/districts → Lynch bounded-retry composition w/ plan-response wall) · per-element
+provenance retained (cause-less deformation impossible by construction) · latent
+advantage map + THE RECONCILIATION LAW (lawful-fortify HOLDS doctrine — reconcile-hold
+pinned; chaotic encroaches; dark fabric ⇒ founding form persists) · panorama (oblique
+2.5D, composes w/ every lens, Plan/Panorama toggle). VERSIONING: v1 BYTE-IDENTICAL
+(default fork untouched), v2 opt-in via mapEdits.layoutLawVersion, v2 goldens EXTEND
+(20-config corpus, min Lynch 0.66 vs floor 0.5, all 5 morphologies + both fabric
+branches) — the lane LANDED FREE. FOLD RECEIPTS on the merged tree: lane pins 83/83 ·
+full property/golden suite 195/195 (v1+v2+style goldens together) · tsc 0 · build ✓ ·
+dist 145/145. ⚠️ F24 RECURRENCE: NUL bytes had crept into 6 template-literal separators
+in-lane — caught and cleaned by the lane, verified clean at fold by the byte-count
+recipe. JUDGMENTs (vetoable, in-file): LYNCH_ACCEPT_FLOOR 0.5 (golden-affecting to
+change) · MAX_RETRIES 6 · attractor/landform tables · reconciliation magnitudes 14/30 ·
+wall-embrace 45th percentile. SEAMS: **new-settlements-mint-v2 NOT auto-wired** (built +
+pinned; the 3 create chokepoints named; OWNER-GATED + rides the TASTE VETO — 9 craft
+samples at docs/samples/town-map-v2/ PENDING) · non-water landforms are model-data +
+placement influence only (bespoke draw-ops = fenced follow-up) · one pre-existing
+advancePauseResume flake noted, not lane-caused. **THE BUILD-OUT LANES ARE BOTH FOLDED —
+the three map waves (SM-5 ∥ DOOR 1 ∥ DOOR 3) DISPATCH NOW off the double-folded tip.**
 **⬛ FOLD: SURVEYOR S4-S6 (2026-07-17) → w7-prep @ 9d86991e** (merge of
 claude/surveyor-s4-s6 tip b486f9ff, 6 commits off 07d3a1d2; spot-checked; CONFLICT-FREE).
 The AI control surface completes construction: ACCEPT→MINT (typed ApplyIntents through
