@@ -124,6 +124,25 @@ defend the gap between "can describe" and "can rebuild." THE DETER/DETECT/DENY S
 7. TERMS: systematic extraction / reverse-engineering prohibited in ToS — the action basis
    when the detector trips.
 
+## 3d. THE ACTION-READINESS LAW (owner amendment 2026-07-16: "it should always be ready to
+## take action where necessary and also be cordial and clear where it cannot.")
+SCOPE CONFIRMED: the AI operates every door the human has — creation (S5 construction,
+S4/S4+ custom content), realm management (the composer surface: all registered realm verbs,
+force-as-proposal, the forecast, the mutable docket), post-creation edits (S3 session
+interpretation, dossier ops, custom-content edits) — arriving in trust-ladder order, all
+through the standing typed-ops → validation → preview → approval lane. Two halves:
+1. **BIAS TO THE FORM.** When conversation surfaces an actionable intent, the Surveyor
+   OFFERS THE DRAFTED ACTION (a compiled, previewed proposal — approve/edit/discard), not
+   prose about it. Readiness = the draft is always one approval away; NEVER action without
+   approval. In the musing register, ideas carry draft-affordances ("want this as a
+   proposal?").
+2. **THE GRACEFUL REFUSAL CONTRACT.** Every "no" is cordial, specific, and names the nearest
+   door: the boundary in plain language (no op type exists / arrives at a later trust stage /
+   DM-sovereign territory / validation failed because X / tier-gated) + what it CAN do
+   instead. Extends the realm-veto-prose culture (W-R2-LIGHT's dark-gate refusals naming the
+   preset + dialog path) to the AI layer. A dead-end refusal is a scored failure — refusal
+   QUALITY joins the §5 evals alongside refusal rate.
+
 ## 4. Commercial mapping (per the owner's spec, recorded decisions)
 - **Surveyor tier $19.99/mo** = Premium + the AI control surface; tier axis gains 'surveyor'
   (the anon/free/premium × role orthogonality holds; entitlements gate the INTERFACE — the sim
