@@ -19,6 +19,7 @@ import { clamp01 } from '../../kernel/math.js';
 import { POPULATION_RANGES, TIER_ORDER, PROSPERITY_TIERS, prosperityRank, popToTier } from '../../data/constants.js';
 import { formatCount } from '../formatNumber.js';
 import { stablePart } from './stablePart.js';
+import { settlementHasUnderways } from './clandestineFacet.js';
 import { normalizeSimulationRules } from './simulationRules.js';
 import { authorityFor } from './changeAuthorityPolicy.js';
 import { distributeMigrants } from './populationDynamics.js';
@@ -471,9 +472,15 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         : inst));
 
     // THE FATES PIN: dispersal stamps only — no record removed, no fate resolved.
+    // D6 THE UNDERWAYS (coupling 4 — the escape lane): a dying town with clandestine
+    // tunnels disperses its people "through the underways" — a receipt only, never a fate
+    // resolution. Absent the facet the note is byte-identical to before.
+    const dispersalNote = settlementHasUnderways(settlement)
+      ? 'Escaped through the underways — fate unresolved.'
+      : 'Left with the last wagons — fate unresolved.';
     const npcs = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
       .map((npc) => (npc && !npc.dispersed
-        ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote: 'Left with the last wagons — fate unresolved.' }
+        ? { ...npc, dispersed: true, dispersedAtTick: tick, dispersalNote }
         : npc));
 
     const residual = Math.max(0, Math.round(num(settlement.population, 0)));

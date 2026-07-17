@@ -25,6 +25,10 @@ import {
   DRAMA_CLASS_REGISTRY,
   DRAMA_CLASS_PRIORITY,
 } from './decisionTier.js';
+import { sublinearBonus, REALM_SCALING } from './realmScaling.js';
+// Re-exported so the pulse (already importing this module) reaches the decision-budget
+// scaler without a second import line into the size-capped pulseKernel (D2).
+export { sublinearBudget, REALM_SCALING } from './realmScaling.js';
 
 /** @typedef {import('./decisionTier.js').DramaClass} DramaClass */
 
@@ -331,14 +335,24 @@ export function governBirth({ candidate, snapshot, config }) {
 /**
  * Build the seam-injected tempo context from the PRE-TICK worldState (design §7.2
  * READ hook). Dormant ⇒ { active:false } ⇒ the seam is byte-identical to today.
+ *
+ * D2a THE SCALING LAW: `realmSize` (N settlements) sublinearly raises classMax so a large
+ * realm's per-settlement attention density stays realm-size-invariant (design §D2a). At
+ * N ≤ BASE_REALM the bonus is exactly 0 and the FROZEN budgets object is returned
+ * unchanged (byte-identical). realmSize defaults to 0 ⇒ existing callers are unaffected.
  * @param {TempoWorldState | null | undefined} worldState
  * @param {Record<string, unknown> | null | undefined} rules
+ * @param {number} [realmSize] realm settlement count (N)
  * @returns {TempoContext}
  */
-export function buildTempoContext(worldState, rules) {
+export function buildTempoContext(worldState, rules, realmSize = 0) {
   const tier = narrativeTempoOf(rules);
   if (tier === null) return { active: false };
-  const budgets = TEMPO_BUDGETS[tier];
+  const baseBudgets = TEMPO_BUDGETS[tier];
+  const classBonus = sublinearBonus(realmSize, REALM_SCALING.BASE_REALM, REALM_SCALING.TEMPO_SCALE_PER_ROOT);
+  const budgets = classBonus > 0
+    ? Object.freeze({ ...baseBudgets, classMax: baseBudgets.classMax + classBonus })
+    : baseBudgets;
   const elapsedWeeks = Number(worldState?.calendar?.elapsedWeeks);
   const weeks = Number.isFinite(elapsedWeeks) ? elapsedWeeks : 0;
   return {

@@ -44,6 +44,7 @@ import { clamp } from '../../kernel/math.js';
 import { foodLedger } from '../foodLedger.js';
 import { effectiveStressorSeverity } from './stressorSeverity.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
+import { settlementHasUnderways, UNDERWAYS_TUNING } from './clandestineFacet.js';
 
 const round1 = (/** @type {number} */ v) => Math.round(v * 10) / 10;
 // Storage moves in small steps (a one-month tithe is 0.03 months of food) —
@@ -305,9 +306,14 @@ export function advanceFoodStockpile(settlement, { interval = 'one_month', tick 
   // recorded in the stockpile bookkeeping so the dossier can say WHY the
   // blockade did or didn't bite (deriveBlockadeRelief reads it).
   const blockadeBypass = blockaded ? resolveBlockadeBypassChannel(settlement) : null;
-  const _channelShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
+  const _bypassShare = blockadeBypass === 'teleport' ? FOOD_IMPORT_RATES.teleport
     : blockadeBypass === 'airship' ? FOOD_IMPORT_RATES.airshipBesieged
     : 0;
+  // D6 THE UNDERWAYS (coupling 2 — siege endurance): a tunneled town keeps a bounded
+  // supply trickle under siege/occupation (the underways don't care which side the wall
+  // is on). +0 without the clandestine facet ⇒ _channelShare is byte-identical.
+  const _underwaysShare = blockaded && settlementHasUnderways(settlement) ? UNDERWAYS_TUNING.FOOD_TRICKLE : 0;
+  const _channelShare = _bypassShare + _underwaysShare;
   const blockadePct = blockaded
     ? Math.max(0, clamp(ledger.importDependency, 0, 1) - _channelShare) * 100
     : 0;

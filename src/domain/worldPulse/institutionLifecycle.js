@@ -42,6 +42,7 @@ import { stablePart } from './worldState.js';
 import { exactGoodId } from '../region/goodsCatalog.js';
 import { normalizeSimulationRules, intensityMultiplier } from './simulationRules.js';
 import { entriesForTier, catalogEntryByName, existingInstitutionNames } from './tierResourceDynamics.js';
+import { facetOf } from '../spatial/cohesionWeave.js';
 // W-F8: the moral/martial abolition applier re-verifies the lean at apply time; the build
 // lane tilts martial-gap emergence toward militarized towns (the war-supply birth
 // distribution). readinessOf 0 (no martial record) ⇒ tilt 1 ⇒ byte-identical seeding.
@@ -414,6 +415,27 @@ export function detectInstitutionGaps(/** @type {any} */ settlement, /** @type {
           break;
         }
       }
+    }
+  }
+
+  // D6 THE UNDERWAYS (coupling 5 — organic founding): sustained criminal presence at a
+  // village+ settlement calls for excavated tunnels (the mine-founds-itself pattern;
+  // excavation needs labor, so village+). The engine hook is wired HERE; the catalog +
+  // generation half rides Track-G2, so buildableCatalogEntry('underground_network')
+  // resolves to null on this lineage ⇒ addGap NO-OPS (byte-identical) and activates
+  // automatically once the catalog entry merges. Facet-read (never a name string): a
+  // 'vice'-nature institution is the criminal-underground signal; skip if tunnels exist.
+  if (tierRankOf(tier) >= tierRankOf('village')) {
+    const insts = /** @type {ReadonlyArray<unknown>} */ (Array.isArray(settlement.institutions) ? settlement.institutions : []);
+    const hasVice = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionNature') === 'vice');
+    const hasUnderways = insts.some((i) => facetOf(/** @type {Parameters<typeof facetOf>[0]} */ (i), 'institutionFunction') === 'clandestine');
+    if (hasVice && !hasUnderways) {
+      addGap(
+        buildableCatalogEntry('underground_network', settlement, existingNames),
+        'clandestine',
+        'A thriving criminal underground calls for excavated tunnels — smugglers’ warrens and escape ways.',
+        { via: 'underways' },
+      );
     }
   }
 
