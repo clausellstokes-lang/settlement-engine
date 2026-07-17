@@ -1120,6 +1120,17 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ RULING #7 THIRD AMENDMENT (2026-07-17, owner: "do the push after the composite"):**
+the chain is now: fog + panels fold → THE DOCUMENTATION WAVE → **THE COMPOSITE (full
+gate)** → **THE PUSH (the backed-up state = the gate-verified whole; the composite
+branch joins the push list)** → ROUND 3 → the tail unchanged. Task #12 deleted/recreated
+as #23 to avoid a dependency cycle (composite no longer waits on the push; the push
+waits on the composite; ROUND 3 waits on the push). The single-machine window now runs
+through the composite gate — the owner's accepted trade, restated once. ALSO: the panels
+lane stalled in the identical background-wait class (4th instance) — status demand
+issued (the cure's record now 3-for-3 pending its result); the fog lane's brief already
+carried the foreground warning; future briefs escalate the wording from warning to the
+hard rule with the sibling stall count.
 **⬛ RULING #7 RE-AMENDED (2026-07-17, owner: "do it before the push"): THE
 DOCUMENTATION WAVE BUILDS BEFORE THE FIRST PUSH.** The prior push-before-doc-wave
 judgment is OWNER-VETOED; the chain is now: fog + panels fold → THE DOCUMENTATION WAVE
