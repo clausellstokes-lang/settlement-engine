@@ -972,6 +972,16 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ CONTROL-SURFACE AMENDMENTS §3b+§3c (2026-07-16 ~22:45, @ 73cd69ff on w7-prep).**
+Owner: the Surveyor CONVERSES (ideas/expansions/clarifications) → §3b THE TWO-VOICES LAW
+(report register citation-bound / musings register clearly marked; the split is STRUCTURAL in
+the answer contract — client renders them differently by construction; register-purity joins
+the evals). Owner: protect the architecture from AI-assisted extraction → §3c EXTRACTION
+DEFENSE (foundation: the provider model NEVER sees the engine — derived slices only; honest
+floor recorded: observable behavior is inferable, the moat is execution depth; the stack:
+nothing-secret packets · disclosure hygiene · naming hygiene · per-account canaries ·
+audit-spine probe detection · economic deterrence · ToS clause). Scope addendum SENT to the
+in-flight Surveyor S1 implementer (fold-if-in-flight / seam-if-gating).
 **✅ FOUNDER LANE RATIFIED + FOLDED (2026-07-16 ~22:30; FF @ c733e5f4).** Three commits:
 c733e5f4 terms (#terms-founder: transferable lifetime individual license, cap-never-grows,
 Founder reserved for the 30, transfer-right reservation, no investment framing) · cc57835f
