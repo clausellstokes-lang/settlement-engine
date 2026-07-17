@@ -972,6 +972,18 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ NPC WAVE EXTENDED ×4 (owner, 2026-07-17, same night):** (1) OWNER CORRECTION FOLDED:
+goal EVOLUTION already exists (achieve/fail transitions) — the gap was added-NPC citizenship;
+the goal catalog becomes TRANSITION-TYPED (on-achieve successors / on-fail fallbacks,
+bounded), added NPCs declare or inherit-by-role a goal CHAIN and ride the same machinery
+(counterpart criterion). Only personality/alignment DRIFT remains the parked
+future question. (2) REASSIGN_NPC: moves between institutions/settlements — coherence
+answered by the EXISTING bloc-glue typology (people-held ties TRAVEL, seat-held ties STAY;
+vacancy → existing role-fill). (3) STASIS: revocable typed state (journey/imprisoned/
+missing/sequestered) — participation excluded, seat vacates, MEMORY KEEPS FLOWING per D5
+(the reunion inherits what the interim did); return receipted; a shelf not a grave. (4)
+INSTANT NPC: seeded, bank-valid, optionally constrained, counterpart-pinned; premium per
+the instant-settlement precedent (flagged). Task #26 re-scoped accordingly.
 **⬛ TWO OWNER COMMISSIONS (2026-07-17, "extremely important"): CONTENT VOLUME + NPC
 EDITABILITY (tasks #27/#26).** (1) CONTENT: more volume/variety/specificity everywhere thin,
 under PORTABLE SPECIFICITY (catalog-anchored, never canon proper nouns — "just enough generic
