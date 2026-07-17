@@ -82,10 +82,11 @@ export function reassignNpc(settlement, npcIndex, target) {
   if (!target || typeof target !== 'object') return { ok: false, reason: 'no target', settlement };
   const prev = npcs[npcIndex];
   const nextNpc = { ...prev };
+  const t = /** @type {Record<string, any>} */ (target);
   // Seat-held: overwrite ONLY the seat fields present on the target (the vacated
   // seat keeps nothing — this NPC no longer holds it).
   for (const f of SEAT_HELD_FIELDS) {
-    if (f in target) nextNpc[f] = target[f];
+    if (f in t) nextNpc[f] = t[f];
   }
   // Record the reassignment as a declared facet-style provenance stamp (no free-text).
   nextNpc.reassignedTo = {
@@ -155,12 +156,14 @@ export function isInStasis(npc) {
  */
 export function npcOpReceipt(opType, npc, meta = {}) {
   const targetId = String(npc?.id ?? npc?.name ?? 'npc');
-  const effects = (meta.effects || []).map((e) => ({ step: 'npc-facet', result: e }));
+  // effects: each moved facet is a TraceEffect { target, effect } — the cone's WHAT.
+  const effects = (meta.effects || []).map((e) => ({ target: e, effect: 'facet moves' }));
   return makeReceipt({
     source: 'edit',
     kind: 'npc',
     targetId,
-    causes: [{ step: opType, result: meta.detail || (meta.facetKind ? `${meta.facetKind} edited` : opType) }],
+    // causes: a TraceCause { source, reason } — the cone's WHY (the typed op).
+    causes: [{ source: opType, reason: meta.detail || (meta.facetKind ? `${meta.facetKind} edited` : opType) }],
     effects,
     tick: null,
   });
@@ -176,6 +179,7 @@ const _CATEGORY_BY_ARCHETYPE = Object.freeze({
   healer: 'religious', labor_resource: 'economy', diplomat_outsider: 'noble', dissident: 'government',
 });
 
+/** @param {any} rng @param {any} cultureData @param {string} gender @returns {string} */
 function pickFromNaming(rng, cultureData, gender) {
   const first = (gender === 'female' ? cultureData?.femaleNames : cultureData?.maleNames) || cultureData?.maleNames || [];
   const last = cultureData?.surnames || [];
@@ -193,15 +197,15 @@ function pickFromNaming(rng, cultureData, gender) {
  * COUNTERPART criterion). The generator is TIER-BLIND — the premium seam wraps the
  * button, never this (§3 / §6).
  *
- * @param {Object} args
- * @param {string|number} args.seed         deterministic seed (same seed ⇒ same NPC)
+ * @param {Object} [args]
+ * @param {string|number} [args.seed]       deterministic seed (same seed ⇒ same NPC)
  * @param {any} [args.namingData]           the culture's NAMING_DATA entry (names)
- * @param {string} [args.role]              a role archetype constraint (else seeded)
+ * @param {string|null} [args.role]         a role archetype constraint (else seeded)
  * @param {any} [args.institutionId]        seat constraint
  * @param {any} [args.settlementId]         seat constraint
  * @returns {any} a bank-valid SimNpc-shaped NPC
  */
-export function instantNpc({ seed, namingData = null, role = null, institutionId = null, settlementId = null } = {}) {
+export function instantNpc({ seed = '', namingData = null, role = null, institutionId = null, settlementId = null } = {}) {
   const rng = createPRNG(`instant-npc:${seed}`);
   const archetype = (role && NPC_ROLE_ARCHETYPES.includes(role)) ? role : rng.pick(NPC_ROLE_ARCHETYPES);
   const gender = rng.pick(_GENDERS);
@@ -210,7 +214,7 @@ export function instantNpc({ seed, namingData = null, role = null, institutionId
   const alignment = rng.pick(NPC_ALIGNMENTS);
   const flaw = rng.pick(_FLAWS);
   const chain = goalChainForRole(archetype) || ROLE_GOAL_CHAIN.civic;
-  const category = _CATEGORY_BY_ARCHETYPE[archetype] || 'government';
+  const category = (/** @type {Record<string, string>} */ (_CATEGORY_BY_ARCHETYPE))[archetype] || 'government';
   const powerLevel = rng.randInt(1, 11);
   const influence = powerLevel >= 8 ? 'high' : powerLevel >= 4 ? 'moderate' : 'low';
   const id = `npc.instant_${rng.random().toString(36).slice(2, 9)}`;
@@ -235,7 +239,8 @@ export function instantNpc({ seed, namingData = null, role = null, institutionId
 }
 
 /** The bank facets an instant NPC declares — used by the counterpart pin to assert an
- *  instant NPC resolves to a valid value through the facet law at every facet kind. */
+ *  instant NPC resolves to a valid value through the facet law at every facet kind.
+ *  @param {any} npc */
 export function instantNpcFacetSummary(npc) {
   return {
     alignment: npcFacetOf(npc, 'alignment'),

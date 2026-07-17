@@ -173,7 +173,8 @@ export const ROLE_INSTITUTION_NATURE = Object.freeze({
 /** The bank facet kinds. @type {readonly string[]} */
 export const NPC_FACET_KINDS = Object.freeze(['alignment', 'temperament', 'role', 'goal']);
 
-/** The bounded vocabulary for a facet kind, or null for a free-shape kind. */
+/** The bounded vocabulary for a facet kind, or null for a free-shape kind.
+ *  @param {string} facetKind @returns {readonly string[]|null} */
 export function bankVocabulary(facetKind) {
   switch (facetKind) {
     case 'alignment':   return NPC_ALIGNMENTS;
@@ -185,7 +186,8 @@ export function bankVocabulary(facetKind) {
 }
 
 /** Keyword-inference fallback for an NPC facet, reading the NPC's own native fields
- *  (the "absent declaration ⇒ generated/inferred value" arm). Pure, total. */
+ *  (the "absent declaration ⇒ generated/inferred value" arm). Pure, total.
+ *  @param {any} npc @param {string} facetKind @returns {string|null} */
 function inferNpcFacet(npc, facetKind) {
   if (!npc || typeof npc !== 'object') return null;
   switch (facetKind) {

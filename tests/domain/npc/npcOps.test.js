@@ -182,8 +182,9 @@ describe('THE DECREE-TRACKER RECEIPT — the cone attaches free', () => {
     expect(r.kind).toBe('npc');
     expect(r.id).toContain('n9');
     expect(Array.isArray(r.causes) && r.causes.length >= 1).toBe(true); // WHY
+    expect(r.causes[0].source).toBe('edit-npc');
     expect(Array.isArray(r.effects)).toBe(true);                        // WHAT it feeds
-    expect(r.effects[0].result).toBe('alignment');
+    expect(r.effects[0].target).toBe('alignment');
   });
 
   test('every op type produces a valid receipt (reassign / stasis / return)', () => {
