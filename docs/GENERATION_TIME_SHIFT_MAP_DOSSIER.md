@@ -284,5 +284,33 @@ values)
 > - Plan opened 2026-07-17 from the survey (`CONTENT_THINNESS_SURVEY_RAW.txt`) + the sibling
 >   lane's deferral table.
 
-[TO FILL as surfaces land: full-gate output (with the parked-golden reds enumerated),
-eager-closure delta, pool sizes before→after, guard-test counts, commits.]
+**FULL GATE (on the final tree, this lane's completion state):**
+- `test` (`vitest run`): **12,446 passed, 11 skipped, 1 failed** across 1,221 files. The one
+  failure is `tests/property/generatorGoldenMaster.test.js` — "every config produces
+  byte-identical output to the golden master" — the PREDICTED PARK RED (whole-settlement hash
+  moved because the prose grew). **Do NOT re-record; the ONE REGEN owns it** (`UPDATE_GOLDEN=1`).
+  No other golden (dormancy / instant-world fingerprint / lifecycle) red — confirming the shift
+  is confined to the grown prose fields.
+- `typecheck` 0 · `typecheck:domain:strict` 0 (ceiling 0) · `lint` clean · `validate:data` 0
+  dupes · `build` OK · `verify:dist` **145/145** (the new `kernel/proseHash.js` import +
+  `institutionDescVariants.js` + `factionDedup.js` do NOT bloat the eager first-paint closure).
+
+**Predicted-vs-actual reconciliation:** predicted "near-empty live-red set + the whole-object
+golden parks" — actual is EXACTLY that (0 live reds, 1 parked golden). The draw-count-invariance
+claim was proven independently by the base-vs-tree structural diff (only prose paths moved), so
+the golden red is legitimate content shift, not a structural regression.
+
+**Pool sizes before → after:** pressure sentences 15 pools (standard 3→6; compound branches 1→3
+per branch; religious_conversion selector fixed) · POLITICAL_FLAVOR 8 patterns (+2/+3 each) ·
+ARRIVAL_SCENES market/river/smoke/guild 2→4 · institution descs 56 institutions ×(1→3) ·
+faction names: settlement-local → world-unique (dedup pass, 0 collisions / 15 realms).
+
+**Guard tests added:** `tests/kernel/proseHash.test.js` + `tests/generators/dossierContent.test.js`
++ `tests/lib/instantWorld/factionDedup.test.js` (mechanism purity/canonical-at-zero, institution
+walker/register, religious_conversion re-roll variety, wartime anchors, faction collision-free +
+ref-consistency + intra-dup regression + determinism).
+
+**Commits (on `claude/generation-time-content-dossier`, PARKED — no fold/PR/deploy):**
+- Wave 1 `6452295c` — dossier narrative + institution prose (draw-count invariant).
+- Wave 2 `8b1a5648` — world-scoped faction-name dedup.
+- `54f08b05` — owner taste-sample (`docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md`).
