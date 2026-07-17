@@ -317,3 +317,38 @@ Stage 1-2 (analyst + briefs) are the recommended first Surveyor ship: read-only,
 valuable, monetizable, and they battle-test retrieval + routing before any write path exists.
 OWNER DECISIONS QUEUED: Surveyor pricing final, allowance sizes, provider order, corpus
 governance doc, the "Surveyor" name itself.
+
+## 7. TOKEN-EFFICIENCY DOCTRINE (owner commission, 2026-07-17; corpus entry)
+
+"Optimize how AI is used to reasonably reduce any unnecessary spending of tokens" — without
+giving up quality; user-visible AI cost is an adoption risk, hardest on BYOK (users watch
+their own console). Seven levers, each vetoable:
+
+1. **Retrieval slice budgets** — per-task-class slice budgets in the slicer registry;
+   compact canonical encodings of read-model slices (stable key order, nulls dropped) over
+   raw dumps; real prompt sizes measured per task class via the edge usage meter.
+2. **Prompt-cache discipline** — static-first assembly (system prompt, op-registry tool
+   schema, design corpus, lens definitions FIRST, byte-stable; per-request slices LAST) so
+   provider prompt caching prices the schema wall once, not per call. Static-prefix
+   byte-identity pinned per task class.
+3. **Routing classes enforced as config** — fast/balanced/deep per task type (§3) becomes
+   operator config, not convention; construction compiles use deep only where the
+   comparator demands.
+4. **Ops-not-essays** — structured op output, bounded max_tokens per task class; the
+   compiler emits ops and labels, never prose padding.
+5. **Delta revise loops** — S5/S6 revise passes send the comparator's deviations only plus
+   minimal correction context; never full re-context. Pinned.
+6. **Zero-AI-where-deterministic** — bundle assembly, validation, comparator judgment,
+   suggested prompts stay pure code; the AI is called only for the genuinely generative step.
+7. **Per-task token budgets + anomaly flags** at the edge meter (operator-visible overruns;
+   user-facing estimates stay labeled estimates).
+
+**THE QUALITY BAR (non-negotiable):** grounding-parity + citation-law pins stay green —
+slicing never trims grounding below what the epistemic-fidelity law requires; §5 acceptance
+metrics are the regression check. A lever that conflicts with quality is rejected and
+recorded as a JUDGMENT.
+
+**Commercial frame:** task-priced credits mean efficiency = house margin on managed +
+visible cost relief on BYOK. **Execution:** S4–S6 born efficient (directives relayed
+in-flight 2026-07-17); S1–S3 retrofit rides ROUND 3 as a named charge with an
+ai-cost-efficiency survey dimension.

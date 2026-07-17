@@ -283,3 +283,72 @@ per the standing ruling.
 - `TIER_GATE.mapChains` appears enforced nowhere (canUseMapChains has no consumer;
   ChainEdges.jsx computes with no tier check) — dead gate or missing enforcement; owner ruling.
 - The applyUserEditAction/renameNPC persist gap (§10.4).
+
+## 12. TOWN LAYOUT v2 — SOURCED ASYMMETRY (owner refinement, 2026-07-17; corpus entry)
+
+(Amendment note: §11's recon items have since RESOLVED on this lineage — mapChains enforced
+at all three affordances, hover emission restored, the persist gap fixed; the program ledger
+carries the receipts.)
+
+The v2 commission ("semantic urban planning", program ledger #38) is sharpened from "seeded
+irregularity within constraints" to **ASYMMETRY WITH PROVENANCE**: nothing is perfectly
+formal and nothing is noise — every deformation has a named cause from the dossier.
+
+- **Three source families:** REGION (terrain/water/slope — water-first morphologies),
+  RESOURCES (actual income sources + resource sites pull districts/roads/work-quarters —
+  the tannery-downstream exemplar generalized), HABITS (desire paths cutting formal grids,
+  market accretion at the gates facing farmland/trade bearings, habitual routes worn
+  permanent — derived from institution adjacency + trade-route bearings + high-traffic
+  pairs; the inference shapes are implementer JUDGMENTs, vetoable).
+- **THE PLAN-RESPONSE LAW:** planned elements read as RESPONSES to asymmetries — walls kink
+  to include what matters, grids deform where the stream cuts, squares sit where desire
+  paths converge. Plan-around or exploit; never suppress.
+- **NO UNIFORM JITTER:** irregularity applies per-cause only, deterministic from the
+  `${_seed}::town-map:v2` fork + dossier. Zero-source settlements come out cleanly formal.
+- **PROVENANCE RETAINED AS DATA:** the v2 layout model carries per-element
+  `{sourceFamily, sourceRef, effect}` annotations (presence-pinned — a deformed element
+  without a cause entry fails, which IS the no-uniform-jitter enforcement). Consumed by
+  §13(1).
+- **Composes with Lynch:** imageability requires distinctive irregularity; sourced asymmetry
+  raises rubric scores; conflicts reconcile through the plan-response law and get recorded.
+
+## 13. SM-5 — THE MAP LEGIBILITY WAVE (owner commission, 2026-07-17; corpus entry)
+
+Principle: the map knows more than it tells — surface what is already simulated. Six
+deliverables, one lane, serialized behind the v2 fold (shared map-UI files):
+
+1. **THE MAP EXPLAINS ITSELF** — hover provenance rendered from §12's annotations
+   (InstitutionCard-hover precedent; Surveyor's-notes register; the whisper laws apply).
+2. **THE CHANGE VIEW** — "what changed" mode over fabricRead (prominence shifts, new scars,
+   rebuilt blocks since last visit / over N advances) + calamityHistory; graceful empty
+   state while fabric is dark pre-regen; the chronicle's spatial twin.
+3. **EDGE ANNOTATIONS** — exits labeled to named neighbors with travel time from existing
+   neighbour_links/route distance data.
+4. **THE ATLAS IDENTITY** — unified lens treatment across realm+town exports (craft
+   samples; owner taste veto).
+5. **DM PIN/ANNOTATION LAYER** — DM-only vs player-visible markers riding the existing
+   handout/reference export split; verify-first against current mapEdits coverage; keys
+   dodge PRIVATE_KEY_RE; no new gate class, no schema change.
+6. **ACCESSIBILITY LENS** — colorblind-safe/pattern-fill variant via the style schema.
+
+**Coherence matrix (compact):** v2 provenance model (§12, read-only) · fabricRead
+(empty-when-dark contract; drift null ≠ 0.5) · chronicle (change view mirrors its beats,
+never re-derives) · guidance registry (map whispers registered, one-at-a-time law) ·
+neighbour_links/routes (edge annotations read, never write) · style schema (lenses 4→5+,
+bounded data-only definitions, THE WALL holds) · mapEdits (pins are cosmetic-class,
+denylist-safe, dormancy-lawful) · exports (WYSIWYG law extends: pins honor visibility
+split per export audience) · tier gates (untouched; mapChains enforcement unaffected) ·
+first-paint (zero eager; map surface lazy by architecture).
+
+## 14. POST-LAUNCH DOORS (designed intent recorded; deliberately NOT built in this tail)
+
+- **Town-scale map→engine coupling** — fire along adjacent buildings, siege damage by wall
+  segment, adjacency-shaped rumor/corruption spread. The inverse of the fabric layer
+  (engine→map); a genuinely new engine capability class — waits for a corpus reopening
+  after launch. Coupling note: would consume the v2 adjacency graph; the engine stays
+  LLM-free and tick-deterministic regardless.
+- **In-app fog-of-war / session mode** — the launch strategy remains meet-VTTs-where-they-
+  are (UVTT pre-walled export); an in-app reveal layer would ride the v2 model + visibility
+  split if ever built.
+- **Building interiors** — a new scale (keyed interiors); out of scope for the world-only,
+  simplicity-over-fidelity charter unless the owner reopens it.
