@@ -55,8 +55,8 @@ const bareStyle = (id) => ({ ...resolveTownMapStyle(id), furniture: [] });
 const bareSig = (model, id) => geomSigList(buildTownMapDrawList(model, bareStyle(id)));
 
 describe('map styles — registry + resolver', () => {
-  it('exposes exactly the four named base lenses', () => {
-    expect([...TOWN_MAP_STYLE_IDS]).toEqual(['parchment', 'watercolor', 'darkFantasy', 'vtt']);
+  it('exposes exactly the five named base lenses (parchment…vtt + the SM-5 accessible lens)', () => {
+    expect([...TOWN_MAP_STYLE_IDS]).toEqual(['parchment', 'watercolor', 'darkFantasy', 'vtt', 'accessible']);
     expect(DEFAULT_STYLE_ID).toBe('parchment');
   });
 
@@ -159,10 +159,10 @@ describe('map styles — determinism re-minted (seed, style) → identical bytes
     }
   });
 
-  it('the four lenses are mutually DISTINCT (a lens actually changes the render)', () => {
+  it('the five lenses are mutually DISTINCT (a lens actually changes the render)', () => {
     const model = richModel();
     const svgs = TOWN_MAP_STYLE_IDS.map((id) => buildTownMapSvg(model, { style: id }));
-    expect(new Set(svgs).size).toBe(4);
+    expect(new Set(svgs).size).toBe(5);
   });
 
   it('the DEFAULT (no style arg) is byte-identical to explicit parchment', () => {
@@ -202,6 +202,32 @@ describe('map styles — self-contained SVG per lens (canvas-taint-free)', () =>
       expect(/href\s*=/i.test(svg)).toBe(false);
       expect(/url\(/i.test(svg)).toBe(false);
     }
+  });
+});
+
+describe('map styles — the ACCESSIBILITY LENS (SM-5, deliverable 6)', () => {
+  it('is a colorblind-safe lens: every district category carries a DISTINCT tint', () => {
+    const s = resolveTownMapStyle('accessible');
+    const tints = Object.values(s.district);
+    // 12 categories, 12 distinct hex tints — no two categories collapse to one
+    // colour (the colour-vision-deficiency distinguishability the lens exists for).
+    expect(tints.length).toBe(12);
+    expect(new Set(tints.map((t) => t.toLowerCase())).size).toBe(12);
+  });
+
+  it('is high-contrast (contrast level `high`, near-opaque district strokes)', () => {
+    const s = resolveTownMapStyle('accessible');
+    expect(s.contrast).toBe('high');
+    expect(s.opacity.districtStroke).toBeGreaterThanOrEqual(0.85);
+    expect(s.opacity.wallStroke).toBeGreaterThanOrEqual(0.9);
+  });
+
+  it('honors THE WALL (data-only) and stays geometry-identical to the base map', () => {
+    const model = richModel();
+    // no new op types, and the bare geometry matches parchment (a re-skin, never a re-shape)
+    const KNOWN = new Set(['poly', 'line', 'circle', 'rect', 'path']);
+    for (const op of buildTownMapDrawList(model, 'accessible')) expect(KNOWN.has(op.t)).toBe(true);
+    expect(bareSig(model, 'accessible')).toBe(bareSig(model, 'parchment'));
   });
 });
 

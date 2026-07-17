@@ -1,12 +1,13 @@
 {
-  "hash": "eaf983061e2f6b83a2f7ab40aee9372022d13259f6411d11420c574d4ad8712e",
-  "bytes": 367796,
+  "hash": "e3ed5008eed4140dd4566cd72ceac7c87d4431f741e7702f07cedb0140df010f",
+  "bytes": 429020,
   "configs": 18,
-  "styles": 4,
+  "styles": 5,
   "opsByStyle": {
     "parchment": 670,
     "watercolor": 670,
     "darkFantasy": 670,
-    "vtt": 1246
+    "vtt": 1246,
+    "accessible": 508
   }
 }
