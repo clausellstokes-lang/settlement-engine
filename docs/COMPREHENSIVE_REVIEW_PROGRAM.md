@@ -972,6 +972,15 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ CONTROL-SURFACE AMENDMENT §3d (2026-07-16 ~23:00, @ 3c69b34c on w7-prep): THE
+ACTION-READINESS LAW.** Owner: the AI accesses creation + realm management + post-creation
+edits, "always ready to take action where necessary and cordial and clear where it cannot."
+Scope CONFIRMED (the AI drives the same doors the human has — composer verbs/forecast/docket,
+S3 interpretation, S4/S4+ content, S5 construction — trust-ladder order, standing ops lane).
+BIAS-TO-THE-FORM (actionable intent ⇒ a drafted, previewed proposal one approval away; never
+action without approval) + THE GRACEFUL REFUSAL CONTRACT (every no names the boundary + the
+nearest door; extends the W-R2-LIGHT refusal-prose culture to the AI; refusal QUALITY joins
+the evals). Second addendum sent to the in-flight Surveyor implementer (S1 refusal contract).
 **⬛ CONTROL-SURFACE AMENDMENTS §3b+§3c (2026-07-16 ~22:45, @ 73cd69ff on w7-prep).**
 Owner: the Surveyor CONVERSES (ideas/expansions/clarifications) → §3b THE TWO-VOICES LAW
 (report register citation-bound / musings register clearly marked; the split is STRUCTURAL in
