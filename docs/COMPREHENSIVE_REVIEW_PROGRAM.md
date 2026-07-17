@@ -1098,6 +1098,23 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER COMMISSION: THE COMPENDIUM OVERHAUL (2026-07-17, "do that as well"; task
+#20 — joins #19 as THE DOCUMENTATION WAVE, one lane, post-folds pre-ROUND-3):** the law
+library, generated-not-copied. THE REGISTRY-RENDER LAW (structural, the headline): every
+enumerable + number renders from the engine's own constants via the analytics-dictionary
++ drift-contract pattern — a tuned threshold diverging from the page FAILS CI; "cannot
+lie" becomes an enforced invariant before the tuning window can mint doc-lies. DIES: the
+hand-copied Economy/Arcane thresholds · the inline Tiers arrays · catalogData.js as a
+copy-module (re-sourced) · the Stress tab's silent hand-written fallback (fail-visible).
+REGENERATED: the Living World tab from the actual system registries — the full endgame
+engine + the preset-lighting truth (the off-by-default copy is stale post-ruling). NEW
+CATALOGS: deities/pantheon bank · composer verbs · THE OP REGISTRY RENDERED PUBLIC (the
+schema wall as a trust artifact — "every operation the AI is allowed to perform,
+enumerated") · lenses/styles · facet vocabularies · calamity buckets · the knob registry
+when minted. Custom mode reconciled with S4 (shared facet/injection-point vocabulary).
+KEPT: per-tab SEO metadata (extended) · anchor deep-links (the HelpPopover lifeline law) ·
+global search (index regenerates from the new sources). ROUND 3 audits the page's claims
+with everything else.
 **⬛ OWNER COMMISSION: THE ABOUT PAGE OVERHAUL (2026-07-17, in-session; task #19):**
 purpose ratified in-session — "the place where the invisible becomes believable": the
 constitution translated for civilians (promises-as-guarantees: determinism · receipts ·
