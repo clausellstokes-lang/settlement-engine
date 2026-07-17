@@ -18,6 +18,7 @@ import { toPublicSafe } from '../domain/display/publicSafe.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
+import { REACTION_KEYS } from '../data/galleryReactionVocab.js';
 
 const LIST_PAGE_SIZE = 24;
 const DEFAULT_SORT = 'relevant';
@@ -377,8 +378,9 @@ export async function fetchPublicDossier(slug) {
   // delay rendering; failure here just leaves the number stale.
   bumpPublicView(slug).catch(() => { /* swallow */ });
 
-  const [voteState, moreByCreator] = await Promise.all([
+  const [voteState, reactionState, moreByCreator] = await Promise.all([
     fetchGalleryVoteState(row.id),
+    fetchGalleryReactionState(row.id),
     fetchMoreByCreator(slug),
   ]);
 
@@ -389,6 +391,7 @@ export async function fetchPublicDossier(slug) {
       moreByCreator,
     }),
     voteState,
+    reactionState,
   };
 }
 
@@ -431,6 +434,64 @@ export async function fetchGalleryVoteState(settlementId) {
   if (error) return { netVotes: 0, voted: false };
   const row = Array.isArray(data) ? data[0] : data;
   return { netVotes: Math.max(0, Number(row?.net_votes) || 0), voted: !!row?.voted };
+}
+
+// ── Structured reactions (GALLERY-2 phase 2, migration 146) ──────────────────
+// Six fixed fiction-register phrases (src/data/galleryReactionVocab.js), never
+// free text. Same seam shape as votes: a toggle RPC + a state read, both
+// normalized through sanitizeReactionState (key-allowlisted, count-clamped)
+// because every gallery read re-clamps client-side.
+
+/**
+ * Normalize RPC reaction rows ([{ reaction_key, reaction_count, mine }]) into
+ * { counts: {key: n}, mine: {key: true} }. Unknown keys are dropped (bounded
+ * vocabulary — defense in depth over a drifted row); counts clamp to ≥ 0.
+ * Also accepts a jsonb counts object ({ key: n }) — the tile-row shape.
+ * @param {Array<Object>|Object|null} raw
+ * @returns {{ counts: Record<string, number>, mine: Record<string, boolean> }}
+ */
+export function sanitizeReactionState(raw) {
+  /** @type {Record<string, number>} */ const counts = {};
+  /** @type {Record<string, boolean>} */ const mine = {};
+  if (Array.isArray(raw)) {
+    for (const row of raw) {
+      const key = row?.reaction_key;
+      if (!REACTION_KEYS.includes(key)) continue;
+      counts[key] = Math.max(0, Math.floor(Number(row?.reaction_count)) || 0);
+      if (row?.mine === true) mine[key] = true;
+    }
+  } else if (raw && typeof raw === 'object') {
+    for (const key of REACTION_KEYS) {
+      const n = Math.max(0, Math.floor(Number(raw[key])) || 0);
+      if (n > 0) counts[key] = n;
+    }
+  }
+  return { counts, mine };
+}
+
+/**
+ * Toggle one of the six fixed reactions on a public settlement. Returns the
+ * settlement's full post-toggle reaction state. Auth-required server-side
+ * (toggle_gallery_reaction raises for anon/banned/over-velocity callers).
+ */
+export async function toggleGalleryReaction(settlementId, reactionKey) {
+  if (!isConfigured) throw new Error('Supabase not configured');
+  if (!REACTION_KEYS.includes(reactionKey)) throw new Error('Unknown reaction');
+  const { data, error } = await supabase.rpc('toggle_gallery_reaction', {
+    target_settlement_id: settlementId,
+    reaction: reactionKey,
+  });
+  if (error) throw new Error(error.message || 'Reaction failed');
+  try { track(EVENTS.GALLERY_ENGAGEMENT, { action: 'reaction' }); } catch { /* never affects the toggle */ }
+  return sanitizeReactionState(Array.isArray(data) ? data : []);
+}
+
+/** Per-key reaction counts + which the caller gave. Anon-safe (mine stays {}). */
+export async function fetchGalleryReactionState(settlementId) {
+  if (!isConfigured || !settlementId) return { counts: {}, mine: {} };
+  const { data, error } = await supabase.rpc('get_gallery_reaction_state', { target_settlement_id: settlementId });
+  if (error) return { counts: {}, mine: {} };
+  return sanitizeReactionState(Array.isArray(data) ? data : []);
 }
 
 export async function fetchGalleryComments(settlementId) {
@@ -552,7 +613,20 @@ function sanitizeTile(row) {
     atWar:        row.at_war === true,
     netVotes:     Math.max(0, Number(row.net_votes) || 0),
     commentCount: Math.max(0, Number(row.comment_count) || 0),
+    // GALLERY-2 phase 2 (migration 148 tile columns; absent rows read empty/null).
+    // reactions: per-key counts as a jsonb object — key-allowlisted + clamped.
+    reactions:    sanitizeReactionState(row.reactions || null).counts,
+    // aliveness: the publish-time snapshot (0–100 int; null = shared before the
+    // score existed — the owner re-shares to stamp it).
+    aliveness:    sanitizeAliveness(row.aliveness),
   };
+}
+
+/** Clamp a stored aliveness score to an integer 0–100, or null when absent. */
+function sanitizeAliveness(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  return Math.max(0, Math.min(100, Math.round(n)));
 }
 
 // Public-safe sanitization is consolidated in domain/display/publicSafe.js
@@ -642,6 +716,9 @@ function sanitizeDossier(row) {
     // §S4 realm-arc digest — written at publish (gallery_realm_arc_summary) but
     // previously never READ back; sanitized+bounded on read (ported master fix).
     realmArcSummary: sanitizeRealmArcSummary(row.gallery_realm_arc_summary),
+    // GALLERY-2 phase 2: the publish-time aliveness snapshot (148 dossier column;
+    // null for rows shared before the score existed).
+    aliveness:    sanitizeAliveness(row.aliveness),
     moreByCreator: Array.isArray(row.moreByCreator) ? row.moreByCreator.map(sanitizeTile) : [],
   };
 }

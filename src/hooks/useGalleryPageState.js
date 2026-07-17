@@ -6,6 +6,7 @@ import {
   fetchMyGallery,
   reportGalleryDossier,
   toggleGalleryVote,
+  toggleGalleryReaction,
 } from '../lib/gallery.js';
 import { navigate } from './useRoute.js';
 import { useStore } from '../store/index.js';
@@ -56,6 +57,9 @@ export function useGalleryPageState(routeSlug = null) {
   const [dossierLoading, setDossierLoading] = useState(false);
   const [dossierError, setDossierError] = useState(null);
   const [voteBusyId, setVoteBusyId] = useState(null);
+  // Reactions (GALLERY-2 phase 2) — busy key is `${id}:${reactionKey}` so one
+  // in-flight chip never locks the other five.
+  const [reactionBusyKey, setReactionBusyKey] = useState(null);
   const [reportBusyId, setReportBusyId] = useState(null);
   const [importBusyId, setImportBusyId] = useState(null);
   const [importedSlugs, setImportedSlugs] = useState(() => new Set());
@@ -249,6 +253,31 @@ export function useGalleryPageState(routeSlug = null) {
     }
   }, [auth?.user, voteBusyId]);
 
+  // Toggle one of the six structured reactions (mirrors voteOn: guard → RPC →
+  // patch the list tile AND the open dossier from the returned full state).
+  const reactOn = useCallback(async (item, reactionKey) => {
+    if (!auth?.user) {
+      setActionError('Sign in to react to public settlements.');
+      setActionNotice(null);
+      return;
+    }
+    if (!item?.id || !reactionKey || reactionBusyKey) return;
+    setReactionBusyKey(`${item.id}:${reactionKey}`);
+    setActionError(null);
+    setActionNotice(null);
+    try {
+      const result = await toggleGalleryReaction(item.id, reactionKey);
+      setItems(current => current.map(row => row.id === item.id ? { ...row, reactions: result.counts } : row));
+      setDossier(current => current?.id === item.id
+        ? { ...current, reactionState: result }
+        : current);
+    } catch (err) {
+      setActionError(err?.message || 'Reaction could not be saved.');
+    } finally {
+      setReactionBusyKey(null);
+    }
+  }, [auth?.user, reactionBusyKey]);
+
   const reportOn = useCallback(async (item, reason = 'other', body = '') => {
     if (!auth?.user) {
       setActionError('Sign in to report public settlements.');
@@ -316,6 +345,7 @@ export function useGalleryPageState(routeSlug = null) {
     dossierLoading,
     dossierError,
     voteBusyId,
+    reactionBusyKey,
     reportBusyId,
     importBusyId,
     importedSlugs,
@@ -328,6 +358,7 @@ export function useGalleryPageState(routeSlug = null) {
     toggleBoolFilter,
     clearFilters,
     voteOn,
+    reactOn,
     reportOn,
     importDossier,
     setDossierCommentCount,

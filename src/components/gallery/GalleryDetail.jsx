@@ -35,6 +35,7 @@ import ShareToGallery from '../ShareToGallery.jsx';
 import GalleryComments from './GalleryComments.jsx';
 import GalleryImage from './GalleryImage.jsx';
 import GalleryMoreByCreator from './GalleryMoreByCreator.jsx';
+import GalleryReactionChips from './GalleryReactionChips.jsx';
 import GalleryReportDialog from './GalleryReportDialog.jsx';
 import VoteButton from './VoteButton.jsx';
 
@@ -68,10 +69,12 @@ export default function GalleryDetail({
   onBack,
   onOpen,
   onVote,
+  onReact,
   onReport,
   onImport,
   onCommentCountChange,
   voteBusy,
+  reactionBusyKey,
   reportBusy,
   importBusy,
   imported,
@@ -263,6 +266,16 @@ export default function GalleryDetail({
                 onReport={onReport}
               />
             </div>
+            {/* Structured reactions (GALLERY-2 phase 2) — the six fixed phrases.
+                Rendered for everyone (anon included, counts visible); the press
+                itself routes through the hook's sign-in guard — caps bind
+                actions, never rendering. */}
+            <GalleryReactionChips
+              state={dossier.reactionState}
+              itemId={dossier.id}
+              busyKey={reactionBusyKey}
+              onReact={key => onReact?.(dossier, key)}
+            />
           </div>
         </div>
       </article>

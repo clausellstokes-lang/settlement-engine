@@ -55,6 +55,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     dossierLoading,
     dossierError,
     voteBusyId,
+    reactionBusyKey,
     reportBusyId,
     importBusyId,
     importedSlugs,
@@ -67,6 +68,7 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
     toggleBoolFilter,
     clearFilters,
     voteOn,
+    reactOn,
     reportOn,
     importDossier,
     setDossierCommentCount,
@@ -93,10 +95,12 @@ export default function GalleryPage({ onNavigate, routeSlug = null }) {
           onBack={backToList}
           onOpen={openDossier}
           onVote={voteOn}
+          onReact={reactOn}
           onReport={reportOn}
           onImport={importDossier}
           onCommentCountChange={setDossierCommentCount}
           voteBusy={!!voteBusyId}
+          reactionBusyKey={reactionBusyKey}
           reportBusy={!!reportBusyId}
           importBusy={!!importBusyId}
           imported={!!(dossier?.slug && importedSlugs?.has(dossier.slug))}

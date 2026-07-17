@@ -23,6 +23,7 @@ import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryU
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
 import Button from '../primitives/Button.jsx';
 import GalleryImage from './GalleryImage.jsx';
+import { GalleryReactionSummary } from './GalleryReactionChips.jsx';
 import VoteButton from './VoteButton.jsx';
 
 export default function GalleryCard({ item, onOpen, onVote, voting }) {
@@ -178,6 +179,9 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             </span>
           ))}
         </div>
+        {/* Reader reactions (GALLERY-2 phase 2) — read-only digest of the top
+            structured reactions; the interactive row lives on the dossier. */}
+        <GalleryReactionSummary counts={item.reactions} />
         <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexWrap: 'wrap', marginTop: 2 }}>
           <VoteButton count={item.netVotes} voted={item.voted} disabled={voting} onClick={() => onVote(item)} />
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
