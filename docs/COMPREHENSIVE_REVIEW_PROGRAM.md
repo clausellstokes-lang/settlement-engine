@@ -1098,6 +1098,21 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ OWNER RULING #8 (2026-07-17, "no include them before launch"): THE DOORS MOVE
+PRE-LAUNCH.** Supersedes the same-day post-launch placement. Corpus re-slotted @ w7-prep
+aca1a132 (doc renamed docs/DESIGN_MAP_DOORS.md). THE SHAPE: door 1 SPATIAL CONSEQUENCE =
+the named wave for which the engine-frozen rule lifts (its commission IS the corpus
+reopening); builds dormant w/ committed dormancy golden; **spatialConsequenceEnabled JOINS
+THE ONE REGEN lighting list** (commission-signed under this ruling, vetoable). Doors 2-3
+(TABLE LAYER v1 zero-server · KEYED SCALE interiors) ship at launch under the launch-whole
+precedent — instrumented, ROUND 3 reviews them; fog's hosted realtime v2 REMAINS
+post-launch gated (recorded in-doc). DISPATCH TOPOLOGY (manager, vetoable): at the
+town-layout-v2 fold → SM-5 ∥ DOOR 1 ∥ DOOR 3 (fences: SM-5 owns existing map UI · door 1
+engine-side + canonize substrate · door 3 new interior files, entry-hook seamed at fold);
+at the SM-5 fold → DOOR 2. Composite waits for all doors; ROUND 3 reviews the whole.
+HONEST COST NOTE (recorded, not re-litigated): the pre-launch tail grows by three lanes
+incl. one engine wave — launch moves later; the soak now certifies the engine WITH
+spatial consequence flags-on (charter unchanged: harness is flags-on by design).
 **⬛ THE DOORS' CORPUS CITIZENSHIP (2026-07-17, owner clarification: "i meant to include
 all of these" — quoting the three doors WITH their post-launch placement):** the doors are
 now FULL corpus entries @ w7-prep 5bd601ea — docs/DESIGN_MAP_POST_LAUNCH_DOORS.md holds
