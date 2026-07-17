@@ -1098,6 +1098,52 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛⬛ THE RESUME DOSSIER v2 (2026-07-17 evening — the owner expects the 5-hour window
+cut; A SUCCESSOR STARTS HERE).**
+**STATE:** code truth = `claude/w7-prep` @ **eb958f4b** (worktree
+.claude/worktrees/agent-a04d3f325c72e62dd). Main tree = LEDGER-ONLY (the wrong-lineage
+trap is at 9 recurrences; THE HARD GATE: `[ "$(git branch --show-current)" = "<expected>" ]
+|| exit 1` as the FIRST clause of every state-mutating compound; python replace() with an
+absent anchor no-ops silently — assert anchors). Folded this session: gallery-fix
+469db96a → S4-S6 9d86991e (migrations 151/152, head 152 contiguous) → layout-v2 66eda8e8
+→ interiors eb958f4b. PARKED for the composite: claude/generation-time-content-dossier @
+577179fb (SUPERSEDES claude/generation-time-content — take the dossier branch) ·
+claude/w-r2-g2 @ aec57981. Budget margin ≈5,944 B (FP-G11 reclaim likely at the
+composite). EXEMPT_CEILING signed 69. All RULING #5/#8 authorities standing; THE ONE
+REGEN pre-signed (six flags incl. spatialConsequenceEnabled).
+**THREE LANES LIVE (worktrees/commits survive limits):** 1. claude/sm-5-legibility (off
+66eda8e8; agent-a6f40f33f3d58a4ef): six legibility deliverables + map-layer analytics
+(7th, relayed). 2. claude/spatial-consequence (off 66eda8e8; agent-aca12ee96c53c8ba6):
+the sanctioned engine reopening — sidecar substrate, dormancy golden MANDATORY,
+WHERE-not-HOW-MUCH. 3. claude/ai-panels (off eb958f4b; agent-ad2c6c73ecd19e0da): the
+write-stage interfaces. Charges in full in the task-board descriptions + the ledger rows
+above. ALSO RUNNING owner-side: the domain-strict-baseline chip (task_be620e27) — locate
+its branch + fold. FOLD PROTOCOL: spot-check (show --stat + python NUL count vs claimed
+scope) → merge in the w7-prep WORKTREE (hard-gate every command) → lane pins on merged
+tree → ledger row HERE → task update.
+**QUEUED:** fog (door 2) dispatches at the SM-5 fold (charge = task #16) · THE
+DOCUMENTATION WAVE (#19 About / #20 Compendium / #21 Pricing / #22 Welcome — one lane,
+post-folds pre-ROUND-3) needs the two research sweeps' syntheses: run transcripts at
+~/.claude/projects/-Users-cstokes-Desktop-settlement-engine/4e5bd424-21ab-4307-ba41-bd048bb9061e/subagents/workflows/
+wf_7ada24b2-812 + wf_01b77ea7-fb1 (read journal.jsonl for banked results; scripts saved
+alongside — RE-RUN if unreadable; a new session cannot resume the runs).
+**THE ORDER (JUDGMENT, vetoable): PUSH (RULING #7 as amended) fires when the map waves +
+panels + fog fold — BEFORE the documentation wave (backup sooner; the wave rides the
+standing re-push)** → doc wave → THE COMPOSITE (w7-prep + w-r2-g2 + the DOSSIER content
+branch; full gate; audit BYOK's claimed base reds; final ratchet call) → ROUND 3 (#6: the
+commission verbatim + THE FOUR CROWNS rubric + ai-cost-efficiency dim; pre-approved
+stock: W6 delta · SettlementsPanel:748 guard · S1-S3 token retrofit · doc-wave claims
+audit) → gap register → THE SOAK (SOAK_PLAN_R2; CENTURY-300 first; flags-on incl.
+spatial) → tuning window (dials + knob registry + S7 #35) → re-certs → THE ONE REGEN
+(pre-signed, no pause) → final gate → THE VERY END (PR + deploy batch; ~35 migrations;
+carve-outs: LEGAL CONSULT + SUPPORT EMAIL; merge button + db-push = the owner's hands).
+**OWNER QUEUE (open, none blocking lanes):** taste vetoes ×3 (v2 samples
+docs/samples/town-map-v2/ · prose docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md · atlas
+identity at the SM-5 fold) · THE ENTITLEMENT-LADDER ruling (SM-5 pins + interiors export
++ pricing cards all render it) · bespoke-style storage surface · AI-op audit-spine
+persistence · provisional AI prices 6/3/6/8 · new-mint-v2 default (rides taste veto).
+Hazards: memory/MEMORY.md. The stall cure: a SendMessage status demand recovers silent
+agents (3h precedent).
 **⬛ THE SECOND DESIGN-RESEARCH SWEEP (2026-07-17, owner: "look for the best examples
 both design and layout, online to emulate and then reconcile"):** wf_01b77ea7 dispatched
 for the documentation wave's other two members — pricing-page design excellence ·
