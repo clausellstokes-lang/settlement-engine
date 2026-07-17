@@ -13,10 +13,8 @@
  * AccountPage chunk (zero first-paint bytes); the dashboard is a further lazy split.
  */
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { KeyRound } from 'lucide-react';
-import { INK, BODY, MUTED, BORDER, GOLD, GREEN, GREEN_BG, RED, RED_BG, AMBER, AMBER_BG, CARD_ALT, SP, R, FS, sans, swatch } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, GOLD, GREEN, GREEN_BG, RED, RED_BG, AMBER, AMBER_BG, CARD_ALT, SP, R, FS, sans, serif_, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
-import Section from './AccountSection.jsx';
 import {
   keyPrefixHint, getByokStatus, setByokKey, clearByokKey, verifyByokKey,
   getSurveyorSettings, setSurveyorSettings,
@@ -136,7 +134,14 @@ export default function AccountAiKeysSection() {
   const paused = !!settings?.paused;
 
   return (
-    <Section title="AI provider & keys" icon={KeyRound}>
+    // Inline card matching AccountSection's default tone. The heading is text content,
+    // NOT a `title=` prop, so this new section does not grow the shrink-only native
+    // title= census (tests/domain/guidanceRegistry.walker.test.js — never-raise ceiling).
+    <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden', background: CARD }}>
+      <div style={{ padding: `${SP.md}px ${SP.lg}px` }}>
+        <h2 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>AI provider &amp; keys</h2>
+      </div>
+      <div style={{ padding: `0 ${SP.lg}px ${SP.lg}px` }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg }}>
         <p style={{ fontSize: FS.sm, color: BODY, margin: 0, lineHeight: 1.5 }}>
           Bring your own provider key so Surveyor runs inference on your account. Your key is stored
@@ -269,6 +274,7 @@ export default function AccountAiKeysSection() {
           )}
         </div>
       </div>
-    </Section>
+      </div>
+    </div>
   );
 }

@@ -109,7 +109,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, marginBottom: SP.xs }}>Tokens by day</div>
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 56 }}>
           {agg.byDay.map((d) => (
-            <div key={d.day} title={`${d.day}: ${fmtInt(d.tokens)} tokens`}
+            <div key={d.day} aria-label={`${d.day}: ${fmtInt(d.tokens)} tokens`}
               style={{ flex: 1, height: `${Math.max(2, Math.round((d.tokens / dayMax) * 100))}%`, background: d.tokens ? GOLD : BORDER, borderRadius: 2, minHeight: 2 }} />
           ))}
         </div>
