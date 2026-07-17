@@ -496,6 +496,27 @@ verify_jwt = true
 [functions.parley]
 verify_jwt = true
 
+# custom-content (Surveyor S4) — homebrew content compiler: authenticated, user-facing,
+# DM-only. verify_jwt true (the handler additionally re-checks auth, account status, the
+# Surveyor entitlement gate, and the per-stage kill-switch inside the function).
+[functions.custom-content]
+verify_jwt = true
+
+# style-overhaul (Surveyor task #28 phase 2) — bespoke map-style compiler: authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.style-overhaul]
+verify_jwt = true
+
+# construct-settlement (Surveyor S5) — intent → settlement generator config: authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.construct-settlement]
+verify_jwt = true
+
+# construct-realm (Surveyor S6) — intent → realm composer config: authenticated, user-facing,
+# DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.construct-realm]
+verify_jwt = true
+
 [functions.account-actions]
 verify_jwt = true
 
