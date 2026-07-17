@@ -1098,6 +1098,17 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE CORPUS AMENDMENT (2026-07-17, owner: "that includes the corpus"): the session's
+commissions are FROZEN INTO THE DESIGN CORPUS on the code lineage @ w7-prep 41d09959** —
+DESIGN_SETTLEMENT_MAP.md §12 (sourced asymmetry: provenance-annotated deformations,
+plan-response law, no-uniform-jitter) + §13 (SM-5 legibility wave w/ compact coherence
+matrix per the standing designs-freeze-with-matrices practice) + §14 (the three post-launch
+doors recorded as designed-intent, deliberately unbuilt) and DESIGN_AI_CONTROL_SURFACE.md
+§7 (the token-efficiency doctrine: 7 levers, quality bar, commercial frame). The §11 recon
+staleness is annotated resolved in-doc. ASSUMPTION STATED VETOABLY: "includes the corpus"
+read as freeze-the-designs-into-the-corpus, NOT as build-the-three-doors-now — if the owner
+meant the doors, the corpus entries just written are their design prerequisite and lanes
+dispatch on the word.
 **⬛ OWNER COMMISSION: THE MAP LEGIBILITY WAVE (SM-5) (2026-07-17, in-session: "do it all
 appropriately!" — the manager's map-layer proposal commissioned in full, sequencing
 delegated).** SIX DELIVERABLES, one Opus lane, SERIALIZED BEHIND the town-layout-v2 fold
