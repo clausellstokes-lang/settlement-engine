@@ -181,7 +181,7 @@ shows all visible items.
 
 ## Backend (`supabase/`)
 
-- **migrations/** (141) — prod applied head tracked in `supabase/applied-head.json`,
+- **migrations/** (142) — prod applied head tracked in `supabase/applied-head.json`,
   ledger-checked by `npm run validate:migration-head`. Schema + RLS policies + credit ledger + gallery +
   version history + save-limit + profile-security + auth/credit trust-boundary
   repair (017) + account/billing models (018) + the community gallery —
@@ -245,7 +245,7 @@ verify:dist`.
 - **lint** — ESLint over `src/ tests/ scripts/`. Correctness = error,
   forward-looking React 19 + unused-vars = warn. Plus the visual-budget and
   analytics-event contracts (error).
-- **test** — Vitest, ~9,800 tests / ~880 files (unit, property-based, domain/
+- **test** — Vitest, ~11,900 tests / ~1175 files (unit, property-based, domain/
   store/lib integration, component/UI smoke, a11y, security, edge-function).
 - **build** — Vite/Rollup. `vite.config.js` `onwarn` **promotes missing/
   unresolved named imports to hard errors** (see Gotchas).
