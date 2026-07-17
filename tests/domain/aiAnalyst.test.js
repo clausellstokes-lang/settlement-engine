@@ -27,6 +27,7 @@ import {
   sanitizeMusings, registerPurity, isSpeculativeReportText, impureReportClaims,
   accountCanary, detectMetaProbe,
   extractRider, RIDER_VOCAB,
+  ANTHROPIC_RETENTION_CLASS,
 } from '../../supabase/functions/ai-analyst/analystCore.ts';
 import { EVENTS } from '../../src/lib/analyticsEvents.js';
 
@@ -515,9 +516,14 @@ describe('analyst — provider retention contract (§3e)', () => {
 
   it('the edge Anthropic adapter is declared with a non-training retention class', () => {
     const idx = readFileSync(resolve(process.cwd(), 'supabase/functions/ai-analyst/index.ts'), 'utf8');
-    const reg = idx.slice(idx.indexOf('registerProviderAdapter({'), idx.indexOf('registerProviderAdapter({') + 300);
+    const reg = idx.slice(idx.indexOf('registerProviderAdapter({'), idx.indexOf('registerProviderAdapter({') + 400);
     expect(reg).toContain("id: 'anthropic'");
-    expect(/retentionClass:\s*'(zero|bounded)'/.test(reg)).toBe(true);
+    // #29: retention class + the model-picker set are now sourced from the shared consts
+    // (so the picker and the adapter can never drift), not inline literals.
+    expect(reg).toContain('retentionClass: ANTHROPIC_RETENTION_CLASS');
+    expect(reg).toContain('models: ANTHROPIC_SUPPORTED_MODELS');
     expect(reg).not.toContain("retentionClass: 'training'");
+    // the shared const is itself a non-training class (the value behind the reference).
+    expect(['zero', 'bounded']).toContain(ANTHROPIC_RETENTION_CLASS);
   });
 });

@@ -30,8 +30,14 @@ import {
   registerProviderAdapter, routeWorldDataAdapter,
   sanitizeMusings, registerPurity,
   accountCanary, detectMetaProbe, extractRider,
+  fnv1a32, ANTHROPIC_SUPPORTED_MODELS, ANTHROPIC_RETENTION_CLASS,
 } from './analystCore.ts';
 import type { MusingItem, EnrichmentRider } from './analystCore.ts';
+// §3d graceful refusals + #29 provider-error classification / BYOK key-health.
+import {
+  classifyProviderError, classifyProviderThrow, healthFromClass, refusalForClass,
+} from './providerErrors.ts';
+import type { RefusalClass, ProviderErrorClass } from './providerErrors.ts';
 // §3f: the ONE frozen event contract, shared with the client (single source of truth —
 // the freshness test pins bundle ≡ src/lib/analyticsEvents.js).
 import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
@@ -137,7 +143,8 @@ async function callAnthropic(
 // that as theater; the guarantee is stateless requests + this contract, not a prompt line.)
 const anthropicAdapter = registerProviderAdapter({
   id: 'anthropic',
-  retentionClass: 'bounded',
+  retentionClass: ANTHROPIC_RETENTION_CLASS,
+  models: ANTHROPIC_SUPPORTED_MODELS,   // #29: the model picker's adapter-supported set
   call: ({ model, apiKey, prompt, signal, fetchImpl }) => callAnthropic(apiKey, model, prompt, fetchImpl ?? fetch, signal),
 });
 
@@ -220,8 +227,65 @@ export async function handleAiAnalyst(
     let capturedRider: EnrichmentRider | null = null;
     let capturedRefused = false;
     let capturedUsage: { input: number | null; output: number | null } = { input: null, output: null };
+    // #29: a provider failure's boundary class + the §3d graceful refusal it maps to,
+    // captured for the model_failed response and the aiOperationLog refusal_class receipt.
+    let capturedRefusalClass: RefusalClass | null = null;
+    let capturedRefusalMessage: string | null = null;
+    let capturedRefusalDoors: string[] = [];
 
     const estTokens = (s: string) => Math.max(1, Math.ceil(String(s || '').length / 4));
+
+    // #29: on a provider failure, capture the §3d refusal AND — for a BYOK key — persist
+    // the boundary class as the key's health (out_of_credit / invalid / rate_limited /
+    // down) so the settings surface shows a live status. 'other' leaves health untouched.
+    const applyProviderError = async (cls: ProviderErrorClass) => {
+      const refusal = refusalForClass(cls);
+      capturedRefusalClass = refusal.class;
+      capturedRefusalMessage = refusal.message;
+      capturedRefusalDoors = refusal.doors;
+      const health = healthFromClass(cls);
+      if (providerKey.byok && health) {
+        try {
+          await supabaseAdmin.rpc('surveyor_byok_set_health', {
+            p_user: user.id, p_provider: ANALYST_PROVIDER, p_health: health, p_error_class: cls, p_verified: false,
+          });
+        } catch (e) { logError('ai-analyst', user.id, e, { stage: 'health' }); }
+      }
+    };
+
+    // ── USER GOVERNORS (#29): the single edge door ─────────────────────────────────
+    // Enforce the user's own caps / pause BEFORE spending anything. Over-cap or paused ⇒
+    // a §3d graceful refusal, spend NOTHING, and receipt the refusal. Fails OPEN on RPC
+    // error (the global operator cap (086) still bounds total spend independently).
+    let capturedWarn = false;
+    try {
+      const { data: pre, error: preErr } = await supabaseAdmin.rpc('surveyor_usage_precheck', {
+        p_user: user.id, p_provider: ANALYST_PROVIDER, p_feature: ANALYST_FEATURE,
+      });
+      if (preErr) logError('ai-analyst', user.id, `usage_precheck errored: ${preErr.message}`, { stage: 'governor' });
+      const pr = pre as { allowed?: boolean; paused?: boolean; warn?: boolean; breached?: string } | null;
+      if (pr && pr.allowed === false) {
+        const cls: RefusalClass = pr.paused ? 'paused' : 'cap';
+        const refusal = refusalForClass(cls, { window: typeof pr.breached === 'string' ? pr.breached : undefined });
+        // Receipt the refused attempt (best-effort) — refused + WHY, no spend, no answer.
+        try {
+          await supabaseAdmin.rpc('write_ai_operation_log', {
+            p_user: user.id, p_feature: ANALYST_FEATURE, p_audience: audience,
+            p_prompt_hash: fnv1a32(question), p_answer_hash: null,
+            p_retrieval_slice_ids: [...bundle.ids], p_retrieval_sources: bundle.sources,
+            p_model: ANALYST_MODEL, p_model_version: `anthropic-${ANTHROPIC_VERSION}`, p_provider: ANALYST_PROVIDER,
+            p_byok: providerKey.byok, p_citation_coverage: null, p_claim_count: null,
+            p_refused: true, p_spend_id: null, p_meta_probe: metaProbe, p_canary: canary,
+            p_refusal_class: refusal.class,
+          });
+        } catch (e) { logError('ai-analyst', user.id, e, { stage: 'governor-audit' }); }
+        return json({
+          error: refusal.message, refused: true, refusalClass: refusal.class, doors: refusal.doors,
+          governor: { paused: !!pr.paused, breached: pr.breached ?? null },
+        }, cls === 'paused' ? 403 : 402, cors);
+      }
+      capturedWarn = pr?.warn === true;
+    } catch (e) { logError('ai-analyst', user.id, e, { stage: 'governor' }); }
 
     const outcome = await runCreditedCall({
       async reserve() {
@@ -252,10 +316,20 @@ export async function handleAiAnalyst(
           const adapter = routeWorldDataAdapter(anthropicAdapter);
           resp = await adapter.call({ model: ANALYST_MODEL, apiKey: providerKey.key, prompt: capturedPrompt, signal: ac.signal, fetchImpl: providerFetch });
         } catch (fetchErr) {
+          // Network / timeout ⇒ provider-down (not a key fault). Classify → refusal + health.
+          await applyProviderError(classifyProviderThrow(fetchErr));
           if (fetchErr instanceof Error && fetchErr.name === 'AbortError') throw new Error(`Anthropic request timed out after ${ANALYST_TIMEOUT_MS}ms`);
           throw fetchErr;
         } finally { clearTimeout(timer); }
-        if (!resp.ok) throw new Error(`Anthropic ${resp.status}`);
+        if (!resp.ok) {
+          // #29: classify the provider error (out_of_credit / invalid / rate_limited /
+          // down) from status + a bounded body slice (NEVER logged), map it to a §3d
+          // graceful refusal, and — for a BYOK key — persist it as key-health. Then throw
+          // so the creditFlow refund path runs (a failed attempt spends nothing).
+          const bodyText = await resp.text().catch(() => '');
+          await applyProviderError(classifyProviderError(resp.status, bodyText.slice(0, 2000)));
+          throw new Error(`Anthropic ${resp.status}`);
+        }
         const data = await resp.json();
         capturedUsage = {
           input: typeof data?.usage?.input_tokens === 'number' ? data.usage.input_tokens : null,
@@ -326,6 +400,8 @@ export async function handleAiAnalyst(
         p_claim_count: rec.claim_count, p_refused: capturedRefused, p_spend_id: capturedSpendId,
         // §3c: the extraction-defense fields — inert canary + the meta-probe flag.
         p_meta_probe: rec.meta_probe, p_canary: rec.canary,
+        // #29: the refusal class — WHY a failed/refused turn failed (never prose/PII/key).
+        p_refusal_class: capturedRefusalClass,
       });
       if (error) logError('ai-analyst', user.id, `write_ai_operation_log failed: ${error.message}`, { stage: 'audit' });
     } catch (e) { logError('ai-analyst', user.id, e, { stage: 'audit' }); }
@@ -369,7 +445,16 @@ export async function handleAiAnalyst(
       case 'insufficient':
         return json({ error: outcome.reason === 'spend_failed' ? 'Credit spend failed — no credits were charged.' : 'Insufficient credits', balance: outcome.balance }, 402, cors);
       case 'model_failed':
-        return json({ error: capturedRefused ? 'The analyst declined this request.' : 'Analysis failed. Your credits were refunded.', refused: capturedRefused, refunded: outcome.refunded }, 502, cors);
+        // #29 §3d: a classified provider failure surfaces its graceful refusal + doors
+        // (name the boundary + nearest door, incl. switch-to-managed). A failed attempt
+        // spent nothing (refunded). refusalClass also names WHY for the client.
+        return json({
+          error: capturedRefused
+            ? 'The analyst declined this request.'
+            : (capturedRefusalMessage || 'Analysis failed. Your credits were refunded.'),
+          refused: capturedRefused, refunded: outcome.refunded,
+          refusalClass: capturedRefusalClass, doors: capturedRefusalDoors,
+        }, 502, cors);
       case 'ok':
         return json({
           answer: outcome.answerText,
@@ -383,6 +468,8 @@ export async function handleAiAnalyst(
           audience,
           byok: providerKey.byok,
           creditsRemaining: outcome.balance,
+          // #29: the usage governor warned this turn is near a cap (still served).
+          usageWarning: capturedWarn,
         }, 200, cors);
     }
   } catch (e) {

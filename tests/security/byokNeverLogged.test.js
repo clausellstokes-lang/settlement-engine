@@ -85,3 +85,43 @@ describe('BYOK — the decrypted key is never logged', () => {
     expect(/api_key|secret|token|ciphertext/i.test(table)).toBe(false);
   });
 });
+
+// ── BYOK MANAGEMENT SURFACE (#29): the verify edge + key-health writes ──────────────
+describe('BYOK — the key never leaks through the management surface (#29)', () => {
+  // .rpc( is a sink here: the surveyor-byok verify path writes key HEALTH via an RPC and
+  // must pass only class/flags, never the key material.
+  const SINK_RE2 = /console\.\w+\(|logError\(|\.insert\(|\.rpc\(|write_ai_operation_log|surveyor_byok_set_health|ai_usage_events\b/;
+  const KEY_RE2 = /providerKey\.key\b|\bapiKey\b|surveyor_byok_get|pgp_sym_decrypt/;
+
+  it('surveyor-byok/index.ts: no log/telemetry/rpc sink line references the decrypted key', () => {
+    const offenders = [];
+    readFileSync(join(ROOT, 'supabase/functions/surveyor-byok/index.ts'), 'utf8')
+      .split('\n').forEach((line, i) => {
+        if (SINK_RE2.test(line) && KEY_RE2.test(line)) offenders.push(`${i + 1}: ${line.trim()}`);
+      });
+    expect(offenders).toEqual([]);
+  });
+
+  it('surveyor-byok: surveyor_byok_set_health is called with class/flags only — never the key', () => {
+    const src = readFileSync(join(ROOT, 'supabase/functions/surveyor-byok/index.ts'), 'utf8');
+    const idx = src.indexOf('surveyor_byok_set_health');
+    const call = src.slice(idx, idx + 400);
+    expect(call).not.toContain('providerKey.key');
+    expect(call).not.toContain('apiKey');
+  });
+
+  it('ai-analyst: the BYOK health-write on a provider error carries no key', () => {
+    const src = readFileSync(join(AI_DIR, 'index.ts'), 'utf8');
+    const idx = src.indexOf('surveyor_byok_set_health');
+    expect(idx).toBeGreaterThan(-1);
+    const call = src.slice(idx, idx + 400);
+    expect(call).not.toContain('providerKey.key');
+    expect(call).not.toContain('apiKey');
+  });
+
+  it('providerErrors.ts: the pure classifier is Deno-global-free and never names a key', () => {
+    const src = readFileSync(join(AI_DIR, 'providerErrors.ts'), 'utf8');
+    expect(/\bDeno\./.test(src)).toBe(false);
+    expect(/apiKey|providerKey|pgp_sym|surveyor_byok_get/.test(src)).toBe(false);
+  });
+});
