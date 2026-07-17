@@ -35,7 +35,7 @@
  *   naming the conflict; determinism)
  */
 
-import { nodesFromRecord, isDecreeNode } from './chronicleGraph.js';
+import { nodesFromRecord, isDecreeNode, buildRecordedEdges, recordedDescendants } from './chronicleGraph.js';
 
 /** @typedef {import('./chronicleGraph.js').ChronicleNode} ChronicleNode */
 /** @typedef {import('./chronicleGraph.js').PulseOutcome} PulseOutcome */
@@ -52,6 +52,7 @@ import { nodesFromRecord, isDecreeNode } from './chronicleGraph.js';
  * @property {string[]} cone
  * @property {ChronicleNode[]} coneNodes
  * @property {number} coneSize
+ * @property {boolean} coneInferred   true = entity-key inference; false = recorded provenance edges
  * @property {'held'|'absorbed'|'contested'|'undone'|'null'} standing
  * @property {boolean} standingInferred
  * @property {boolean} contested
@@ -170,26 +171,43 @@ function tierDir(tc) {
 }
 
 /**
- * Build the raw per-decree record: cone (co-advance entity-linked nodes, attributed
- * once), landing, standing, honest-null. `keyOwners` maps each entity key to the
- * node ids that carry it. Pure.
+ * Build the raw per-decree record: cone, landing, standing, honest-null. Pure.
+ *
+ * THE CONE, RECORDED WHERE POSSIBLE. When the provenance ledger carries recorded
+ * descendants of this decree (`edges` non-empty and the decree has ≥1 recorded
+ * child in this advance), the cone is EXACTLY the recorded transitive descendants
+ * within the advance — `coneInferred`/`standingInferred` become false. Otherwise the
+ * cone falls back to the co-advance entity-key intersection (the honest inference),
+ * labelled inferred. A recorded ledger that simply didn't link THIS decree also
+ * falls back (we never report an "exact recorded" empty cone the ledger never drew).
  * @param {ChronicleNode} decreeNode
  * @param {ChronicleNode[]} allNodes
  * @param {SpanFrame} entry
+ * @param {import('./chronicleGraph.js').RecordedEdges} [edges]  provenance adjacency
  * @returns {Decree}
  */
-function buildDecree(decreeNode, allNodes, entry) {
-  const decKeys = new Set(decreeNode.keys);
+function buildDecree(decreeNode, allNodes, entry, edges) {
   /** @type {ChronicleNode[]} */
-  const cone = [];
+  let cone = [];
+  let usedRecorded = false;
+  if (edges && edges.size) {
+    const scope = new Set(allNodes.map((/** @type {ChronicleNode} */ n) => n.nodeId));
+    const descIds = recordedDescendants(decreeNode.nodeId, edges, scope);
+    if (descIds.length > 0) {
+      const byId = new Map(allNodes.map((/** @type {ChronicleNode} */ n) => [n.nodeId, n]));
+      cone = descIds.map(id => byId.get(id)).filter(/** @returns {n is ChronicleNode} */(n) => !!n);
+      usedRecorded = true;
+    }
+  }
+  if (!usedRecorded) {
+    // Inferred fallback: co-advance nodes whose entity keys intersect the decree's.
+    const decKeys = new Set(decreeNode.keys);
+    cone = allNodes.filter(n => n.nodeId !== decreeNode.nodeId && n.keys.some((/** @type {string} */ k) => decKeys.has(k)));
+  }
   /** @type {{ node: ChronicleNode, reason: string }|null} */
   let breaking = null;
   let contested = false;
-  for (const n of allNodes) {
-    if (n.nodeId === decreeNode.nodeId) continue;
-    const shares = n.keys.some((/** @type {string} */ k) => decKeys.has(k));
-    if (!shares) continue;
-    cone.push(n);
+  for (const n of cone) {
     const rev = reversalSignal(decreeNode.raw, n.raw);
     if (rev) { contested = true; if (!breaking) breaking = { node: n, reason: rev }; }
   }
@@ -204,12 +222,13 @@ function buildDecree(decreeNode, allNodes, entry) {
     kind: decreeKind(decreeNode.raw),
     landing: landingWeek(decreeNode.raw, entry),
     receipt: decreeNode.raw,
-    keys: [...decKeys].sort(byStr),
+    keys: [...new Set(decreeNode.keys)].sort(byStr),
     cone: cone.map(n => n.nodeId),
     coneNodes: cone,
     coneSize: cone.length,
+    coneInferred: !usedRecorded,
     standing,
-    standingInferred: true,
+    standingInferred: !usedRecorded,
     contested,
     breakingEvent: breaking ? breaking.node.raw : null,
     breakingReason: breaking ? breaking.reason : null,
@@ -318,16 +337,19 @@ function describeCluster(members) {
  * (an object with empty arrays when the DM issued no orders — the section renders
  * "no decrees this advance", never absent).
  * @param {AdvanceEntry} entry
+ * @param {Record<string, { parents?: ReadonlyArray<string> }>} [provenance]  the
+ *   worldState.spatialLedgers.provenance ledger — cones read RECORDED edges where present.
  * @returns {DecreeSection}
  */
-export function decreesForAdvance(entry) {
+export function decreesForAdvance(entry, provenance) {
   /** @type {DecreeSection} */
   const empty = { total: 0, singletons: [], clusters: [], nulls: [], findings: [] };
   if (!entry || !entry.record) return empty;
   const nodes = nodesFromRecord(entry.record);
   const decreeNodes = nodes.filter(n => isDecreeNode(n.raw)).sort((a, b) => byStr(a.nodeId, b.nodeId));
   if (decreeNodes.length === 0) return empty;
-  const decrees = decreeNodes.map(d => buildDecree(d, nodes, entry));
+  const edges = buildRecordedEdges(provenance);
+  const decrees = decreeNodes.map(d => buildDecree(d, nodes, entry, edges));
   const clusters = clusterDecrees(decrees);
   const clusteredIds = new Set(clusters.flatMap(c => c.memberIds));
   // Partition: every decree appears exactly once — in a cluster, else as a null,
@@ -353,8 +375,9 @@ export function decreesForAdvance(entry) {
  * The whole-history decree ledger (newest-advance first) — the scrollback's decree
  * lane. Bounded by pulseHistory's cap (a §6 finding).
  * @param {AdvanceEntry[]} entries
+ * @param {Record<string, { parents?: ReadonlyArray<string> }>} [provenance]  recorded-edge ledger
  * @returns {Array<{ tick: number, spanLabel: string, decrees: DecreeSection }>}
  */
-export function decreeHistory(entries) {
-  return (Array.isArray(entries) ? entries : []).map(e => ({ tick: e.tick, spanLabel: e.spanLabel, decrees: decreesForAdvance(e) }));
+export function decreeHistory(entries, provenance) {
+  return (Array.isArray(entries) ? entries : []).map(e => ({ tick: e.tick, spanLabel: e.spanLabel, decrees: decreesForAdvance(e, provenance) }));
 }

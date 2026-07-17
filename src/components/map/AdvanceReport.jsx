@@ -162,7 +162,7 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
           {thread.crossLinks.slice(0, 3).map((l, i) => (
             <Chip key={i} tone={VIOLET} bg={VIOLET_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
           ))}
-          <span style={{ color: MUTED, fontWeight: 700 }}>(inferred)</span>
+          <span style={{ color: MUTED, fontWeight: 700 }}>({thread.crossLinks.some((l) => !l.inferred) ? 'recorded' : 'inferred'})</span>
         </div>
       )}
       {open && (
@@ -222,7 +222,7 @@ function DecreeCard({ decree, within }) {
         <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontStyle: 'italic' }}>{decree.finding}</div>
       ) : (
         <div style={{ color: SECOND, fontFamily: sans, fontSize: FS.micro }}>
-          {decree.coneSize} downstream {decree.coneSize === 1 ? 'effect' : 'effects'} <span style={{ color: MUTED }}>(inferred cone)</span>
+          {decree.coneSize} downstream {decree.coneSize === 1 ? 'effect' : 'effects'} <span style={{ color: MUTED }}>({decree.coneInferred === false ? 'recorded' : 'inferred'} cone)</span>
           {decree.breakingReason ? <> · <span style={{ color: RED }}>{decree.breakingReason}</span></> : null}
         </div>
       )}
@@ -294,8 +294,13 @@ export default function AdvanceReport({ campaign, nameFor }) {
   const safeIndex = Math.min(index, Math.max(0, entries.length - 1));
   const entry = entries[safeIndex] || null;
 
-  const chronicle = useMemo(() => (entry ? chronicleForAdvance(entry) : null), [entry]);
-  const decrees = useMemo(() => (entry ? decreesForAdvance(entry) : null), [entry]);
+  // THE PROVENANCE LEDGER (engine finale): recorded receipt→parent cause-edges. Present
+  // only when provenanceLedgerEnabled lit the campaign; absent ⇒ the chronicle infers
+  // from shared entities exactly as before. A plain read — no engine import.
+  const provenance = worldState?.spatialLedgers?.provenance;
+  const hasRecordedEdges = !!provenance && Object.keys(provenance).length > 0;
+  const chronicle = useMemo(() => (entry ? chronicleForAdvance(entry, provenance) : null), [entry, provenance]);
+  const decrees = useMemo(() => (entry ? decreesForAdvance(entry, provenance) : null), [entry, provenance]);
 
   // The altitude the reader is viewing — defaults to the span's deepest scaffolding
   // (full descent always AVAILABLE via the tabs).
@@ -391,7 +396,9 @@ export default function AdvanceReport({ campaign, nameFor }) {
       {/* ── Self-explaining footer (the whisper via an existing organ) ───── */}
       <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, lineHeight: 1.5, borderTop: `1px solid ${BORDER2}`, paddingTop: 6 }}>
         This report compresses — never truncates — what unfolded, scaled to the span.
-        Causal links between events are inferred from what they touched; click any receipt to find it on the map.
+        {hasRecordedEdges
+          ? ' Causal links are recorded from the engine’s provenance ledger where marked, inferred from shared entities otherwise; click any receipt to find it on the map.'
+          : ' Causal links between events are inferred from what they touched; click any receipt to find it on the map.'}
       </div>
     </div>
   );

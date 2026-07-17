@@ -31,7 +31,7 @@
 
 import {
   advanceEntries, altitudesForSpan, connectedComponents, dominantClass, classRank,
-  nodesFromRecord,
+  nodesFromRecord, buildRecordedEdges,
 } from './chronicleGraph.js';
 
 /** @typedef {import('./chronicleGraph.js').ChronicleNode} ChronicleNode */
@@ -222,13 +222,36 @@ function buildThread(component) {
 }
 
 /**
+/**
+ * Do any two nodes across threads a and b carry a DIRECT recorded edge? (Recorded
+ * edges normally unify a chain into ONE thread, so a recorded cross-link is rare —
+ * but the label is computed honestly rather than hardcoded.)
+ * @param {Thread} a
+ * @param {Thread} b
+ * @param {import('./chronicleGraph.js').RecordedEdges|undefined} edges
+ * @returns {boolean}
+ */
+function threadsShareRecordedEdge(a, b, edges) {
+  if (!edges || !edges.size) return false;
+  const bIds = new Set((b.beats || []).map((x) => x.nodeId));
+  for (const beat of (a.beats || [])) {
+    for (const p of (edges.parentsOf.get(beat.nodeId) || [])) if (bIds.has(p)) return true;
+    for (const c of (edges.childrenOf.get(beat.nodeId) || [])) if (bIds.has(c)) return true;
+  }
+  return false;
+}
+
+/**
  * Cross-links (§2): for each thread, the other threads it shares an entity key
  * with (the war thread references the famine thread it touched). Deterministic;
- * each link is `inferred` (shared-entity, not an explicit provenance edge).
+ * a link is `inferred` (shared-entity) UNLESS the provenance ledger records a direct
+ * causal edge between the two threads' receipts, in which case it is RECORDED. An
+ * empty/absent ledger ⇒ every link inferred (byte-identical to the pre-ledger read).
  * @param {Thread[]} threads
+ * @param {import('./chronicleGraph.js').RecordedEdges} [edges]
  * @returns {Map<string, Array<{ id: string, dramaClass: string|null, sharedKeys: string[], inferred: boolean }>>}
  */
-function crossLinksFor(threads) {
+function crossLinksFor(threads, edges) {
   /** @type {Map<string, Array<{ id: string, dramaClass: string|null, sharedKeys: string[], inferred: boolean }>>} */
   const links = new Map();
   for (let i = 0; i < threads.length; i++) {
@@ -237,10 +260,11 @@ function crossLinksFor(threads) {
       const setB = new Set(b.keys);
       const shared = a.keys.filter((/** @type {string} */ k) => setB.has(k)).sort(byStr);
       if (shared.length === 0) continue;
+      const inferred = !threadsShareRecordedEdge(a, b, edges);
       if (!links.has(a.id)) links.set(a.id, []);
       if (!links.has(b.id)) links.set(b.id, []);
-      (links.get(a.id) || []).push({ id: b.id, dramaClass: b.dramaClass, sharedKeys: shared, inferred: true });
-      (links.get(b.id) || []).push({ id: a.id, dramaClass: a.dramaClass, sharedKeys: shared, inferred: true });
+      (links.get(a.id) || []).push({ id: b.id, dramaClass: b.dramaClass, sharedKeys: shared, inferred });
+      (links.get(b.id) || []).push({ id: a.id, dramaClass: a.dramaClass, sharedKeys: shared, inferred });
     }
   }
   return links;
@@ -315,17 +339,21 @@ export function hasChronicle(worldState) {
  * DEFAULT altitude set for the span; full descent is always available (the UI can
  * render every layer regardless).
  * @param {AdvanceEntry} entry
+ * @param {Record<string, { parents?: ReadonlyArray<string> }>} [provenance]  the
+ *   worldState.spatialLedgers.provenance ledger — threads/links read RECORDED edges
+ *   where present, entity-key inference elsewhere. Absent ⇒ byte-identical.
  * @returns {Chronicle|null}
  */
-export function chronicleForAdvance(entry) {
+export function chronicleForAdvance(entry, provenance) {
   if (!entry || !entry.record) return null;
+  const edges = buildRecordedEdges(provenance);
   const nodes = nodesFromRecord(entry.record);
-  const components = connectedComponents(nodes);
+  const components = connectedComponents(nodes, edges);
   const threads = components
     .map(buildThread)
     // Deterministic thread order: by drama-class priority, then id.
     .sort((a, b) => classRank(a.dramaClass) - classRank(b.dramaClass) || byStr(a.id, b.id));
-  const links = crossLinksFor(threads);
+  const links = crossLinksFor(threads, edges);
   for (const t of threads) t.crossLinks = links.get(t.id) || [];
   const delta = deltaFirst(nodes);
   const diary = deputysDiary(threads);
@@ -355,7 +383,21 @@ export function chronicleForAdvance(entry) {
  */
 export function latestChronicle(worldState) {
   const entries = advanceEntries(worldState);
-  return entries.length ? chronicleForAdvance(entries[0]) : null;
+  return entries.length ? chronicleForAdvance(entries[0], provenanceOf(worldState)) : null;
+}
+
+/**
+ * The provenance ledger off a worldState (the recorded cause-edges), or undefined.
+ * A plain read of the Phase-5.5 conditional ledger family — no engine import.
+ * @param {ChronicleWorldState} worldState
+ * @returns {Record<string, { parents?: ReadonlyArray<string> }>|undefined}
+ */
+function provenanceOf(worldState) {
+  const ledgers = /** @type {{ spatialLedgers?: Record<string, unknown> }} */ (worldState)?.spatialLedgers;
+  const prov = ledgers && typeof ledgers === 'object' ? ledgers.provenance : undefined;
+  return prov && typeof prov === 'object' && !Array.isArray(prov)
+    ? /** @type {Record<string, { parents?: ReadonlyArray<string> }>} */ (prov)
+    : undefined;
 }
 
 /**
@@ -365,5 +407,6 @@ export function latestChronicle(worldState) {
  * @returns {Array<Chronicle|null>}
  */
 export function chronicleHistory(worldState) {
-  return advanceEntries(worldState).map(chronicleForAdvance);
+  const provenance = provenanceOf(worldState);
+  return advanceEntries(worldState).map(e => chronicleForAdvance(e, provenance));
 }

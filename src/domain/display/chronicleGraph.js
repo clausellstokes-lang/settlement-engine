@@ -287,15 +287,118 @@ export function nodesFromRecord(record) {
   return nodes.sort((a, b) => byStr(a.nodeId, b.nodeId));
 }
 
+// ── RECORDED CAUSALITY (THE PROVENANCE LEDGER read-model) ─────────────────────
+// The engine finale added a durable receipt→parent cause-edge ledger
+// (worldState.spatialLedgers.provenance, keyed by receipt id → { parents, type,
+// tick }). These pure readers let the chronicle prefer RECORDED edges over the
+// entity-key INFERENCE below wherever the ledger carries them — decree cones,
+// thread chains, and cross-links become exact where causality was recorded, and
+// stay inferred (and labelled so) elsewhere. The display chunk reads only the plain
+// serialized ledger object — it NEVER imports the engine writer (the zero-engine-
+// contact law). An empty/absent ledger yields empty maps ⇒ every read falls back to
+// inference ⇒ byte-identical to the pre-ledger chronicle.
+
+/**
+ * @typedef {Object} RecordedEdges
+ * @property {Map<string, Set<string>>} parentsOf    child id → its recorded parent ids
+ * @property {Map<string, Set<string>>} childrenOf   parent id → its recorded child ids
+ * @property {number} size                           total directed edges
+ */
+
+/**
+ * Build recorded-edge adjacency from a provenance ledger object. Absent/empty ⇒
+ * empty maps (size 0) ⇒ every downstream read is the inferred fallback.
+ * @param {Record<string, { parents?: ReadonlyArray<string> }>|null|undefined} provenance
+ * @returns {RecordedEdges}
+ */
+export function buildRecordedEdges(provenance) {
+  /** @type {Map<string, Set<string>>} */
+  const parentsOf = new Map();
+  /** @type {Map<string, Set<string>>} */
+  const childrenOf = new Map();
+  let size = 0;
+  if (provenance && typeof provenance === 'object' && !Array.isArray(provenance)) {
+    for (const childId of Object.keys(provenance)) {
+      const parents = provenance[childId]?.parents;
+      if (!Array.isArray(parents) || parents.length === 0) continue;
+      for (const p of parents) {
+        const pid = String(p);
+        if (pid === childId) continue;
+        let pset = parentsOf.get(childId);
+        if (!pset) { pset = new Set(); parentsOf.set(childId, pset); }
+        if (!pset.has(pid)) {
+          pset.add(pid);
+          let cset = childrenOf.get(pid);
+          if (!cset) { cset = new Set(); childrenOf.set(pid, cset); }
+          cset.add(childId);
+          size += 1;
+        }
+      }
+    }
+  }
+  return { parentsOf, childrenOf, size };
+}
+
+/**
+ * The recorded transitive descendants of `rootId` — every node reachable by
+ * following recorded child edges. Cycle-safe (visited set), deterministic (sorted).
+ * Walks THROUGH out-of-scope ids to reach in-scope grandchildren, but only in-scope
+ * ids are returned when `scope` is given (a decree's recorded cone = its downstream
+ * receipts WITHIN the advance). The root is never in its own cone.
+ * @param {string} rootId
+ * @param {RecordedEdges} edges
+ * @param {Set<string>} [scope]  restrict the returned set to these ids
+ * @returns {string[]}
+ */
+export function recordedDescendants(rootId, edges, scope) {
+  const root = String(rootId);
+  /** @type {Set<string>} */
+  const out = new Set();
+  const seen = new Set([root]);
+  const stack = [root];
+  while (stack.length) {
+    const cur = stack.pop();
+    const kids = edges?.childrenOf?.get(/** @type {string} */ (cur));
+    if (!kids) continue;
+    for (const k of kids) {
+      if (seen.has(k)) continue;
+      seen.add(k);
+      if (!scope || scope.has(k)) out.add(k);
+      stack.push(k);
+    }
+  }
+  out.delete(root);
+  return [...out].sort(byStr);
+}
+
+/**
+ * Is there a DIRECT recorded edge between a and b (either direction)? Used to flip a
+ * thread cross-link's `inferred` label to recorded.
+ * @param {string} aId
+ * @param {string} bId
+ * @param {RecordedEdges} edges
+ * @returns {boolean}
+ */
+export function hasRecordedEdge(aId, bId, edges) {
+  const a = String(aId), b = String(bId);
+  return !!(edges?.parentsOf?.get(a)?.has(b) || edges?.parentsOf?.get(b)?.has(a));
+}
+
 /**
  * Union-find connected components over the entity-key graph: two nodes are linked
  * when their key sets intersect. Each component becomes a THREAD (design §2, "the
  * causally-linked chain, extracted — never authored"). Deterministic: nodes are
  * pre-sorted by id, so component roots and membership order are stable.
+ *
+ * When `edges` (the RecordedEdges from the provenance ledger) is supplied and non-
+ * empty, RECORDED parent/child pairs also union — so a causally-linked chain the
+ * engine recorded stays ONE thread even if it crosses entity boundaries. An empty/
+ * omitted `edges` reproduces the pure entity-key components byte-for-byte.
  * @param {ChronicleNode[]} nodes
+ * @param {RecordedEdges} [edges]
  * @returns {ChronicleNode[][]}  components, each a node list (input order preserved)
  */
-export function connectedComponents(nodes) {
+export function connectedComponents(nodes, edges) {
   const parent = nodes.map((_, i) => i);
   const find = (/** @type {number} */ x) => { while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x]; } return x; };
   const union = (/** @type {number} */ a, /** @type {number} */ b) => { const ra = find(a), rb = find(b); if (ra !== rb) parent[Math.max(ra, rb)] = Math.min(ra, rb); };
@@ -309,6 +412,18 @@ export function connectedComponents(nodes) {
       else union(owner, i);
     }
   });
+  // Recorded edges: union each node with any co-present recorded parent (deterministic
+  // — node order is fixed; only pairs where BOTH endpoints are in this record union).
+  if (edges && edges.size) {
+    /** @type {Map<string, number>} */
+    const indexOf = new Map();
+    nodes.forEach((n, i) => { if (!indexOf.has(n.nodeId)) indexOf.set(n.nodeId, i); });
+    nodes.forEach((n, i) => {
+      const parents = edges.parentsOf.get(n.nodeId);
+      if (!parents) return;
+      for (const p of parents) { const j = indexOf.get(p); if (j != null) union(i, j); }
+    });
+  }
   /** @type {Map<number, ChronicleNode[]>} */
   const groups = new Map();
   nodes.forEach((n, i) => {
