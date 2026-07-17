@@ -972,6 +972,39 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**⬛ W-R2-DEPTH: 3 OF 6 SHIPPED + FOLDED (2026-07-16 ~20:00; true merge f69fd96b) — the
+agent stopped disciplined rather than rush a fourth build; D1/D3/D4 hand off with complete
+recon.** SHIPPED (each byte-identical-dormant BY PROOF, pinned, zero eager, branch gate
+11,623/1 sole-red EXEMPT_CEILING, verify:dist 143/143): **D5** lifespan-scaled memory
+(memoryHorizon facet, 4 bands via facetOf, both signs scale, undying erodes only via
+reconciliation; 6811b41a) · **D6 engine couplings** (new lazy clandestineFacet leaf —
+smuggle boost, siege land-leg food trickle, conspiracy ease, escape receipts,
+detectInstitutionGaps hook that no-ops until G2's catalog merges — custom-facet parity
+proven; 78045726) · **D2 THE SCALING LAW** (realmScaling leaf: √N sublinear tempo classMax +
+rollCandidates maxAuto/maxProposals; BASE_REALM=24 above every golden/soak N ⇒ dormancy by
+arithmetic; D2b VERIFIED supplyShipments top-k is per-destination local — correctly
+unchanged, pinned; 365036c2) + gate reconciliation (any-cast ratchet + aiGrounding bundle
+regen — cohesionWeave became a transitive input; de5031cb). Freshness re-verified on the
+MERGED tree (34/34). DEFERRALS-WITH-SEAMS ratified (all recorded in-file): D5 incident
+half-life scaling · D6 naval-interdiction leg (warDeployment AT ceiling) + exposure-discount
+leg (npcAgency AT ceiling; corruption.js is EAGER — a covertShelter param measured +23 B and
+was correctly reverted) · D2 proposal-ring/retention threading (their receipted-eviction
+prerequisite verified already landed via tick-core-2). The wrong-lineage trap hit a 6th time
+(worktree on d024286e master lineage) — the base-guard recipe corrected it again.
+**⚠️ HAZARD MEMORIALIZED: five hot engine files sit AT their max-lines ceilings**
+(pulseKernel, npcAgency, warDeployment among them; ceilings unraisable) — future engine
+waves must put logic in NEW LAZY LEAVES reached via re-exports (the D2 narrativeTempo
+re-export pattern), never add imports/lines to the capped files directly.
+**ARCHITECT RULINGS for the D1/D3/D4 remainder (recorded vetoably; dispatching W-R2-DEPTH-2):**
+(1) **D1 believed-need channel:** BeliefRecord gains NO new field (a persisted-shape change —
+owner-gated class); believed need is DERIVED AT READ TIME from the observer's delayed
+belief/rumor picture — facts frozen, meaning derived, byte-identical when the flag is dark.
+(2) **D4 peace mirror:** the war↔peace bijection walker stays STRICT — fear_of_dominance
+gets its own distinct mirror **balance_restored** (Blainey-consistent: the war-reason dies
+when the believed imbalance does), which FEEDS spheres_understanding rather than reusing
+foreign_clash's mirror. (3) **D4 layering:** the hegemony COMPUTATION belongs domain-side
+(worldPulse lazy leaf); display/hegemonyRead becomes a thin wrapper — display reads domain,
+never the reverse; warReasons imports the domain leaf.
 **✅ SM-4 RATIFIED + MERGED (2026-07-16 ~19:45; true merge 335d7856, zero conflicts).** The
 settlement-map endgame: the deterministic DRAW projection substrate (townMapDraw pure
 draw-ops + fixed export palette in src/design) → the PDF town-map PLATE (chapter 08C, first
