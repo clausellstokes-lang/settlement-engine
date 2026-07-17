@@ -972,6 +972,24 @@ landed goldens-identical. Lib family 115 files / 1,060 green. Agent RESUMED self
 (established patterns) for the final store cluster + comp tail; stops before fold-in. OWNER
 QUEUE ADDITIONS from W6: auth resilience family, token skew-grace, anti-enumeration,
 commit-vs-discard, StrictMode adoption, withTimeout wave, free-export check.
+**✅ INSTANT WORLD RATIFIED + FOLDED (2026-07-17 ~02:00; merged into w7-prep).** The
+one-click premium realm: the COMPOSER (conductor over existing generators — zero
+generator/engine/wizard changes; tier-blind, source-scan-pinned) → tier-mixed canon members
+placed on a deterministic FMG map → discovered regionalGraph → tone preset applied to a
+worldState PROVEN spatially UN-canonized (the owner's places-everything-canonizes-nothing
+law, pin-executed). THE CAMPAIGN ANSWER: the survey confirmed reading (a) — a realm IS a
+campaign; presence inherent, asserted in the equivalence pin. Pins 19/19 on the merged tree;
+composition-equivalence = the manual pre-canonize state. JUDGMENTs ratified ×4 (N-mapping
+5/9/14 tier pyramids · map-kind = the curated FMG template set · tone = Quiet/Realistic/
+Dramatic · composer homed in src/lib per the domain-ratchet rationale). SEAMS: the soak
+harness = composer+canonize (client #2, API ready); analytics event deferred (eager string
+vs thin margin — recorded); map materialization browser-bound ⇒ PLAUSIBLE (FMG iframe cannot
+run headless; the staged tableau is fully usable without it). ⚠️ EAGER HONESTY (manager
+measurement): the wave's TRUE delta ≈ +687 B (mode-picker entry + macro registration +
+WorldMap line — existing eager files growing; its own chunks confirmed absent from the
+closure). Budget contract 26/26 green on the merged build; **estimated margin now ~1.4KB —
+TIGHT**: both running lanes warned (strict-lazy discipline, stop-and-report above ~300 B);
+the remedy if a future fold busts = an FP-G10 reclaim wave (reclaim-first law, never raise).
 **⬛ OWNER COMMISSION: THE BYOK MANAGEMENT SURFACE (2026-07-17, task #29).** Provider pick →
 verify-by-test-call (never prefix-guess) → dynamic model dropdown from the key's ACTUAL
 list-models ∩ adapter-supported, per-task defaults + override, §3e retention class shown in
