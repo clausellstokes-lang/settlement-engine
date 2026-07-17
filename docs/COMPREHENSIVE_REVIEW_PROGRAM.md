@@ -1098,6 +1098,19 @@ gate, ROUND 3, the soak. Unfolded side branches on deck: claude/fix-gallery-list
 importable @ e0d0c29c (sharer-edit data-loss fix), claude/fix-resource-taxonomy-
 boundaries @ 48719d7a (owner-gated), claude/map-styles @ ac5318a1, claude/instant-world
 @ f472a350, claude/surveyor-s1b @ 30781a7a, claude/w-r2-g2 @ aec57981 (regen batch).
+**⬛ THE FOUR CROWNS (owner, 2026-07-17, verbatim goals — THE AMBITION RUBRIC):** "i am
+trying to go for technologically and potentially: 1. best map generator 2. best settlement
+generator 3. best campaign simulator 4. best TTRPG use of AI — those are my goals that I
+feel with my coherency engine I can beat before anyone else." BINDING ON ROUND 3: the
+resurvey's ambition-fit dimension grades against THESE FOUR explicitly (per-crown: where
+the build stands vs best-in-class, what blocks the crown, fix stock derived per crown).
+The manager's standing read (recorded for the graders): the four compound — the coherency
+engine makes each defensible BECAUSE the others exist (maps that mean things require the
+settlement engine; safe AI requires the simulator's op layer) — so competitors must beat
+all four at once to durably beat any one. Contested axes per crown: (1) aesthetics vs the
+hand-painted ceiling; (2) first-session legibility of already-won depth; (3) soak
+certification of century-scale aliveness; (4) panel UX + acceptance metrics + a fresh
+market scan (training-vintage competitor knowledge, pre-launch check recommended).
 **⬛ FOLD: TOWN LAYOUT v2 + PANORAMA (2026-07-17) → w7-prep** (merge of
 claude/town-layout-v2 tip cbbf04c5 off 07d3a1d2; spot-checked incl. the python NUL
 byte-count — 19 src/tests files CLEAN; conflict-free). ALL FIVE owner refinements built
