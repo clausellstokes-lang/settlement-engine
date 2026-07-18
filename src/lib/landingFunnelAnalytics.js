@@ -44,7 +44,7 @@ export function trackLandingView() {
 
 /**
  * The one interactive artifact control fired (the determinism replay).
- * @param {{ seed?: string | number }} [opts] — the landing fixture's constant seed.
+ * @param {{ seed?: string | number }} [opts] the landing fixture's constant seed.
  */
 export function trackLandingFixtureForge({ seed } = {}) {
   emit({ feature: 'fixture_forge', seed: seed ?? null });
