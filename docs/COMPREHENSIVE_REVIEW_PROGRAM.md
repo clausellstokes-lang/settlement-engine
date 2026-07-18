@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE WELCOME FILM RULING (owner, 2026-07-18: "i want the microsite animation for
+my welcome page… after each settlement tier it shows the different sections of the
+current welcome page before moving to the next. isn't that the 10,000 or million
+dollar website landing page?"):** the app Welcome gets the REAL scroll-scrubbed
+growth film — the microsite's travel-and-stop mechanic with the existing Welcome
+sections presenting at the frozen stops. REVERSES the manager's stills-only ruling
+(honesty note recorded: the eager budget guards the JS closure; streamed media never
+touched it — the true cost was network weight, now engineered instead of avoided).
+Slice C2 re-specced in THE_REMAINING_ARCHITECTURE.md with six engineering laws:
+stills-as-floor always (network-blocked walk proves the page whole without one video
+byte) · zero eager JS · six chapter-split all-keyframe legs ≤ ~8 MB each with
+idle-fetch + prefetch-ahead · desktop fine-pointer only (touch/reduced-motion = the
+stills journey) · taste-gate toggle for the walk · derivatives-only in git. Annex
+Welcome entry rewritten; the SVG map-journey design demoted to RECORDED ALTERNATIVE.
 **⬛⬛⭐ THE BASE RECONCILIATION MAP + MERGE FORENSICS LANDED (2026-07-18) — the owner's
 alternative-tree diagnosis CONFIRMED with one culprit.** docs/THE_BASE_RECONCILIATION_MAP.md
 committed: per-surface master(d024286e)-vs-composite(78a04afc) diff, classified, with a

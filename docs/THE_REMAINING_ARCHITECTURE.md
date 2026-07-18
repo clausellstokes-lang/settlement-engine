@@ -110,20 +110,46 @@ touched + tsc full + domain:strict + build + verify:dist (in that order).
   abandon (record) if p75 LCP worsens.
 - Pre-check: reread tests/design/contrast.test.js pins before touching chip colors.
 
-### Slice C2 — THE WELCOME: the Survey of One Settlement (app form)
+### Slice C2 — THE WELCOME: the Survey of One Settlement (THE FILM RULING)
+⬛ OWNER RULING 2026-07-18 ("i want the microsite animation for my welcome page…
+after each settlement tier it shows the different sections of the current welcome
+page before moving to the next"): the app Welcome GETS THE REAL SCRUBBED FILM —
+the microsite's travel-and-stop mechanic, verbatim in feel. This REVERSES the
+manager's stills-only ruling (recorded; the eager budget guards the JS closure —
+streamed media never touches it; the true cost is network weight, engineered below).
 - Reference implementation: marketing/website/src/main.js (the conductor: leg/stop
-  ranges, still-as-floor, reduced-motion stills-only). TRANSLATE, don't port: React,
-  NO video file ever (stills + CSS transforms/crossfades only), stills lazy below fold.
-- Structure: hero over still-0 (desk) → 6 travel legs (spacer-driven crossfade/scale
-  "travel" between stage stills) → 6 stops hosting the EXISTING Welcome sections
-  re-vehicled UNCHANGED: Forge@thorp · Brief@hamlet(demo dossier lf-033) ·
-  Voice@village · LivingWorld@town (+ the line "you have just watched this town
-  grow") · Artifacts/maps@city · rate-strip+door@metropolis. Funnel analytics events
-  preserved by name (grep them first; list in the report).
-- Mobile: legs compress (70vh), stills-only. Reduced-motion: instant stop states.
-- H4 THE ROAD spec (annex) governs the polish pass.
-- DONE-WHEN: all existing section tests green untouched; scroll walk at 3 postures;
-  eager delta ≤ +200 B (conductor code must ride the lazy Welcome chunk).
+  ranges, still-as-floor, freeze-at-stop, edge fades). TRANSLATE to React.
+- Structure: hero over still-0 (desk) → 6 travel legs where scroll SCRUBS the
+  growth film between tiers → 6 stops where the film freezes and the EXISTING
+  Welcome sections present re-vehicled UNCHANGED (retention law): Forge@thorp ·
+  Brief@hamlet(demo dossier lf-033) · Voice@village · LivingWorld@town (+ "you
+  have just watched this town grow") · Artifacts/maps@city ·
+  rate-strip+door@metropolis. Funnel analytics preserved by name (grep first,
+  list in the report); enrich existing events only — zero new eager names.
+- ENGINEERING LAWS (each is a done-when):
+  1. STILLS ARE THE FLOOR, ALWAYS: the desk still + six evolution plates render
+     the complete journey with the film entirely absent (z0 under video, exactly
+     the microsite architecture). The page must be fully readable and every CTA
+     functional before one video byte arrives — prove it with a network-blocked
+     walk. The film is a progressive enhancement, never a dependency.
+  2. ZERO EAGER JS: the conductor rides the lazy Welcome chunk; eager closure
+     delta = 0 B (the ratchet enforces it).
+  3. CHAPTER-SPLIT MEDIA, NEVER MONOLITHIC: re-encode the master
+     (marketing/assets/videos/settlementforge-journey-scrub.mp4) into SIX
+     per-leg ALL-KEYFRAME files (`-g 1 -keyint_min 1 -sc_threshold 0`), 720p,
+     CRF tuned to ≤ ~8 MB/leg. Leg 1 fetches on idle after first paint; leg N+1
+     prefetches when the viewer crosses stop N. LCP is untouched (hero paints
+     over the optimized still-0 image).
+  4. DESKTOP FINE-POINTER ONLY: touch/mobile and prefers-reduced-motion get the
+     stills journey (legs compress to 70vh, instant stop states) — already the
+     guaranteed floor, so one code path serves both.
+  5. TASTE-GATE: film presence behind a config toggle so the owner can compare
+     film-on vs stills-only at the walk without a rebuild.
+  6. Assets live under public/ as media (not JS); the ~460 MB marketing masters
+     question (§3 ⛔OWNER) is unchanged — only the optimized leg derivatives ship.
+- DONE-WHEN: all existing section tests green untouched; scroll walk at 3
+  postures + the network-blocked stills walk; eager JS delta 0 B; per-leg file
+  sizes recorded in the report.
 
 ### Slice C3 — THE LIBRARY: the ledger
 - Recipe from the phase-2 sample + MANIFEST 05. Real table; per-row seeded medallion
