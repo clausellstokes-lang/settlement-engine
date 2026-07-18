@@ -1144,8 +1144,16 @@ for TTRPG creation and framing. Manager scorecard recorded honestly: WON on 3
 opponent), 8 (the schema-wall trust architecture no competitor can tell); WINNABLE
 IN-PROGRAM on 1 (ILLUSTRATED TOWN closes Watabou's beauty axis), 5 (grounded prose;
 ROUND 3 content dimension), 6 (generative-not-wiki redefinition); NAMED GAPS on 2
-(world map art vs Azgaar/Inkarnate — THE ILLUSTRATED REALM is the follow-on
-candidate, ⛔OWNER pre-vs-post-launch) and 4 (the casual-game reframe: the loop
+(world map art vs Azgaar/Inkarnate — TWO candidate paths recorded: (a) THE
+ILLUSTRATED REALM [skin-registry idiom at world scale]; (b) THE AZGAAR BRIDGE
+[owner disclosure same day: "I use Azgaar… then i add my own system to it" — the
+owner's own workflow is the strategy: import the story-relevant layer of an Azgaar
+export (burgs→settlements, states→realms/factions, cultures/religions→facet-law
+declared content, biomes/routes→terrain+trade substrate; NEVER the heightmap
+physics — simplicity-over-fidelity holds) as DECLARED GEOGRAPHY compiled
+deterministically at import, making Azgaar a feeder instead of a rival; adoption
+lever for every existing Azgaar worldbuilder]. BOTH ⛔OWNER (new-capability class):
+pre-vs-post-launch and either/both undecided) and 4 (the casual-game reframe: the loop
 exists — verbs/Forecast/Docket/SessionMode/tempo — but game-feel was never surveyed
 as a discipline → GAME-FEEL added as a named ROUND 3 dimension). ROUND 3's
 experience charge re-aimed at the eight (architecture doc §4 amended). The strategic
