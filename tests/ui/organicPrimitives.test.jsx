@@ -13,6 +13,7 @@ import { render, cleanup } from '@testing-library/react';
 import Rule from '../../src/components/organic/Rule.jsx';
 import { Register, Marginalia } from '../../src/components/organic/Register.jsx';
 import { Surface, Display, Prose, Rubric, Ink, Eyebrow } from '../../src/components/organic/Manuscript.jsx';
+import { Emblem, CompassRose, SeededCartouche } from '../../src/components/organic/Ornament.jsx';
 
 afterEach(cleanup);
 
@@ -79,5 +80,24 @@ describe('Manuscript surface + text primitives', () => {
     expect(container.querySelector('.oc-eyebrow')).not.toBeNull();
     expect(container.querySelector('.oc-rubric--instruction')).not.toBeNull();
     expect(container.querySelector('.oc-ink-secondary')).not.toBeNull();
+  });
+});
+
+describe('Seeded ornament — decorative SVG, accessible name', () => {
+  it('an emblem and the compass rose are decorative (aria-hidden svg)', () => {
+    const { container } = render(<div><Emblem kind="mine" /><CompassRose /></div>);
+    const marks = container.querySelectorAll('.oc-ornament[aria-hidden="true"] svg');
+    expect(marks.length).toBe(2);
+    for (const svg of marks) expect(svg.getAttribute('role')).toBe('presentation');
+  });
+
+  it('the cartouche NAME stays real text (a11y tree), the frame stays aria-hidden', () => {
+    const { getByText, container } = render(<SeededCartouche seed="Thornwall">Thornwall</SeededCartouche>);
+    // The name is HTML, findable as text — never baked into the decorative SVG.
+    expect(getByText('Thornwall')).not.toBeNull();
+    const frame = container.querySelector('.oc-cartouche .oc-ornament[aria-hidden="true"] svg');
+    expect(frame).not.toBeNull();
+    // The SVG carries no text node — the name is not inside the decorative mark.
+    expect(frame.querySelector('text')).toBeNull();
   });
 });
