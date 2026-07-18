@@ -1120,6 +1120,22 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE SUBSTANCE BENCHMARK SWEEP DISPATCHED (2026-07-17, owner interjection: "what
+about the substance?" — the form/substance symmetry closed):** the design waves got four
+external-excellence sweeps; the substance had only ever been benchmarked against ITSELF
+(its constitution, its own rounds). Sweep #5 (wf_c143a10f) builds the missing external
+bar: the emergent-narrative canon (Tarn Adams / Sylvester's story-generator doctrine /
+CK3 drama design; the anecdote-factory principle + the stat-soup failure mode) · TTRPG
+TABLE-substance (the GM-craft canon: what world-detail generates SESSIONS vs shelf-weight
+— the lonely-lore problem; fronts/clocks) · living history (what makes generated history
+FEEL like history, not a log — the history-soup fix) · THE DEPTH-PERCEPTION GAP (the
+Nemesis-system solved case: what makes players CORRECTLY believe a world is deep — this
+product's own recorded risk, twice graded product-below-code). The critic adds the
+determinism-as-story-value + DM-as-audience angles. OUTPUT FEEDS ROUND 3: the substance
+graders hold the product to these five principles alongside the four crowns; the gap
+register inherits any misses. Substance census of the live machine at dispatch: 5 of 8
+build lanes are substance (content ×2, provenance threading, S7, rulings wiring); the
+entire tail (ROUND 3 → soak → tuning) is substance-verification by design.
 **⬛ RESEARCH SWEEP #3 BANKED (wf_cd021516, 5/5 agents, 0 errors — the organic craft
 corpus):** headline first principles for the law: **AUTHORSHIP VISIBLE** (the handmade
 read = evidence a person decided — signed/dated elements, one voice, structures only
