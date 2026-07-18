@@ -1120,6 +1120,19 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ ENGINE LIFT #2 SANCTIONED (2026-07-17, owner: "i also approve this" — the
+provenance causedBy threading; OVERRIDES freely-given ruling #8):** the owner personally
+sanctions the second engine-frozen lift. Lane claude/provenance-threading off a4343044,
+EIGHT lanes live. THE SHAPE LAW (the safety that makes this sane at max concurrency):
+causality flows as CALL-CONTEXT to the provenance writer — outcome objects never gain
+fields; world state byte-identical dark AND lit except the provenance sidecar; ALL
+dormancy goldens must stay green untouched. Deliverables: kernels thread cause-references
+at their mint sites (additive optional params, ceiling-safe lazy leaves) · THE THREADING
+CENSUS (every mint site dispositioned threaded/no-known-cause/deferred — committed doc,
+walker-pinned, no silent partial coverage) · flags-on multi-hop cone proof (decree →
+outcome → downstream RECORDED) · zero chronicle changes (the recorded/inferred labels
+get truer for free — a needed chronicle change = design smell, stop-and-report) ·
+edge-rate/eviction verified vs the 750 KB ceiling. ROUND 3 reviews it with everything.
 **⬛⬛ THE FREELY-GIVEN RULINGS (2026-07-17, owner: "i give my decision freely where
 appropriate for this!" — the Class B/D decisions made by the manager under explicit
 grant; EVERY ITEM VETOABLE):** (1) **PROSE TASTE: APPROVED** — the sample holds the
