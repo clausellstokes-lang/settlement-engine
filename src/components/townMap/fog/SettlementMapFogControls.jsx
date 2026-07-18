@@ -4,12 +4,31 @@
  * The DM's table-mode chrome: engage fog, pick/create a named session, choose the reveal brush
  * (reveal vs hide × auto/district/street/building), reveal-all / hide-all, open the live PLAYER
  * VIEW (shared screen), and export the fogged handout. Presentational — every action routes
- * through the useMapFog controller (which commits to the fogSessions sidecar). Gated by `editing`
- * (the pane's cosmetic-edit predicate); viewing a revealed map is free.
+ * through the useMapFog controller (which commits to the fogSessions sidecar).
+ *
+ * ENTITLEMENT (THE FREELY-GIVEN RULINGS, 2026-07-17): the table layer is PREMIUM (Cartographer),
+ * riding the SAME predicate as every cosmetic map edit (canEdit = premium|founder|elevated).
+ * The PREMIUM-SEAM LAW (the mapChains precedent) holds: the gate wraps the AFFORDANCE, never
+ * the derivation — `!entitled` renders the panel LOCKED-VISIBLE (a drawn padlock + teaser;
+ * clicking fires `onUnlock` → the purchase modal, the cosmetic-edit gate's own moment) and no
+ * fog interaction mounts. Stored fogSessions are never rewritten while locked, so an upgrade
+ * restores every session untouched. `editing` (entitled ∧ saveId ∧ desktop) additionally gates
+ * the working chrome — an entitled owner on mobile sees the device note, not the lock.
+ * Drawn-SVG padlock, no lucide (the map's icons-off posture).
  */
 import { useState } from 'react';
 import { INK, MUTED, BORDER, CARD, GREEN, AMBER, sans, FS, R, SP } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
+
+/** A small drawn padlock (the map chrome is lucide-free). */
+function LockGlyph({ size = 14 }) {
+  return (
+    <svg data-testid="fog-controls-lock" width={size} height={size} viewBox="0 0 14 14" aria-hidden="true">
+      <rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="none" stroke={INK} strokeWidth="1.5" />
+      <path d="M 4.5 6 V 4.2 a 2.5 2.5 0 0 1 5 0 V 6" fill="none" stroke={INK} strokeWidth="1.5" />
+    </svg>
+  );
+}
 
 const BRUSH_KINDS = [
   ['auto', 'Auto'], ['districts', 'Quarter'], ['streets', 'Street'], ['buildings', 'Building'],
@@ -24,11 +43,13 @@ const selStyle = {
  * @param {{
  *   fog: ReturnType<typeof import('./useMapFog.js').useMapFog>,
  *   editing: boolean,
+ *   entitled?: boolean,
+ *   onUnlock?: () => void,
  *   onOpenPlayerView: () => void,
  *   onExportHandout: () => void,
  * }} props
  */
-export default function SettlementMapFogControls({ fog, editing, onOpenPlayerView, onExportHandout }) {
+export default function SettlementMapFogControls({ fog, editing, entitled = false, onUnlock, onOpenPlayerView, onExportHandout }) {
   const [newName, setNewName] = useState('');
   const {
     sessionIds, activeSessionId, sessionName, fogActive, toggleFog, selectSession,
@@ -42,6 +63,30 @@ export default function SettlementMapFogControls({ fog, editing, onOpenPlayerVie
     display: 'flex', flexDirection: 'column', gap: SP.xs, minWidth: 220,
   };
   const row = { display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap' };
+
+  // THE LOCKED STATE (locked is VISIBLE, never absent — the mapChains law): the free tier
+  // sees the affordance with a drawn padlock + teaser; clicking fires the purchase modal.
+  // No fog interaction mounts, and stored fogSessions are never touched from here.
+  if (!entitled) {
+    return (
+      <div data-fog-controls style={wrap}>
+        <div style={{ ...row, justifyContent: 'space-between' }}>
+          <strong style={{ fontSize: FS.sm, letterSpacing: '0.02em' }}>Table / Fog</strong>
+          <LockGlyph />
+        </div>
+        <div style={{ color: MUTED, fontSize: FS.xs }}>
+          Run a live table session — reveal quarters, streets, and buildings as your players explore.
+        </div>
+        <Button
+          variant="secondary" size="sm"
+          onClick={() => { if (typeof onUnlock === 'function') onUnlock(); }}
+          title="The table layer is a Cartographer (premium) feature. Click to upgrade."
+        >
+          Fog of war (Premium)
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div data-fog-controls style={wrap}>

@@ -730,7 +730,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           handout export). Owner-only by construction (saveId present); the panel self-
           gates its edit affordances on `editing`. All rendering lives in the leaf. ── */}
       {saveId != null && (districts.length > 0 || buildings.length > 0) && (
-        <SettlementMapFogChrome fog={fog} editing={editing} settlement={settlement} activeLens={activeLens} fire={mapAnalytics.fire} />
+        <SettlementMapFogChrome fog={fog} editing={editing} entitled={!!canEdit} settlement={settlement} activeLens={activeLens} fire={mapAnalytics.fire} />
       )}
 
       {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}

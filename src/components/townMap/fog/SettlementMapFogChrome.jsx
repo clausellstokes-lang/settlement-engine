@@ -8,6 +8,7 @@
  * store-free second surface that stays off the pane chunk's eager path (the InteriorView posture).
  */
 import { lazy, Suspense, useCallback, useState } from 'react';
+import { useStore } from '../../../store/index.js';
 import SettlementMapFogControls from './SettlementMapFogControls.jsx';
 
 const FogPlayerView = lazy(() => import('./FogPlayerView.jsx'));
@@ -16,13 +17,21 @@ const FogPlayerView = lazy(() => import('./FogPlayerView.jsx'));
  * @param {{
  *   fog: ReturnType<typeof import('./useMapFog.js').useMapFog>,
  *   editing: boolean,
+ *   entitled?: boolean,
  *   settlement: any,
  *   activeLens: string,
  *   fire: (feature: string, props?: Record<string, unknown>) => void,
  * }} props
  */
-export default function SettlementMapFogChrome({ fog, editing, settlement, activeLens, fire }) {
+export default function SettlementMapFogChrome({ fog, editing, entitled = false, settlement, activeLens, fire }) {
   const [playerViewOpen, setPlayerViewOpen] = useState(false);
+  // THE FREELY-GIVEN RULINGS: fog is premium (Cartographer). The locked click opens the
+  // purchase modal — the SAME moment the cosmetic-edit gate (canEdit class) fires; no new
+  // pricing-moment vocabulary (the MomentReason union is a closed, owner-gated set).
+  const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
+  const onUnlock = useCallback(() => {
+    if (typeof setPurchaseModalOpen === 'function') setPurchaseModalOpen(true);
+  }, [setPurchaseModalOpen]);
 
   // The fogged player HANDOUT: the active session's reveal through the existing export matrix
   // (audience:'player' drops DM-only markers; the mask hides unrevealed quarters). Dynamic-import
@@ -43,6 +52,8 @@ export default function SettlementMapFogChrome({ fog, editing, settlement, activ
         <SettlementMapFogControls
           fog={fog}
           editing={editing}
+          entitled={entitled}
+          onUnlock={onUnlock}
           onOpenPlayerView={() => setPlayerViewOpen(true)}
           onExportHandout={onExportHandout}
         />
