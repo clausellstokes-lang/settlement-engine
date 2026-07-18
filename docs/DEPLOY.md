@@ -226,13 +226,14 @@ npx supabase functions deploy custom-content                          # Surveyor
 npx supabase functions deploy style-overhaul                          # Surveyor style-overhaul compiler (JWT + entitlement + kill-switch)
 npx supabase functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
 npx supabase functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
+npx supabase functions deploy surveyor-autonomy                       # Surveyor S7 autonomy composer (JWT + entitlement + kill-switch)
 npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **24 deployable functions** (every `supabase/functions/*` dir except
+There are **25 deployable functions** (every `supabase/functions/*` dir except
 `_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
-and eleven `verify_jwt = true` postures above are pinned in `config.toml`, the
+and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here.

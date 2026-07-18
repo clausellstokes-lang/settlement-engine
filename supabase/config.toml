@@ -517,6 +517,11 @@ verify_jwt = true
 [functions.construct-realm]
 verify_jwt = true
 
+# surveyor-autonomy (Surveyor S7) — autonomy composer (StopCondition + nudges): authenticated,
+# user-facing, DM-only. verify_jwt true (handler re-checks auth/entitlement/kill-switch).
+[functions.surveyor-autonomy]
+verify_jwt = true
+
 [functions.account-actions]
 verify_jwt = true
 
