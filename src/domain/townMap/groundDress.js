@@ -33,9 +33,17 @@
 
 import { createPRNG } from '../../kernel/prng.js';
 import { resolveTownMapStyle, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+import { SHADOW_DIR } from '../../design/townGlyphs/glyphCompiler.js';
 
 const VIEW = 1000;
 const R = Math.round;
+
+// THE ONE FIXED LIGHT — NW, shared with the glyph hatch (SHADOW_DIR). The unit shadow-fall
+// direction (SE, both components positive) the wall shadows + the flank relief hachures
+// ride, so nothing is ever lit from a second direction (design §1). Correctly-rounded sqrt.
+const SHADOW_MAG = Math.sqrt(SHADOW_DIR.dx * SHADOW_DIR.dx + SHADOW_DIR.dy * SHADOW_DIR.dy) || 1;
+const SHADOW_UX = SHADOW_DIR.dx / SHADOW_MAG;
+const SHADOW_UY = SHADOW_DIR.dy / SHADOW_MAG;
 
 /** @typedef {ReturnType<typeof createPRNG>} Rng */
 /** @typedef {import('./townMapDraw.js').DrawOp[]} Ops */
@@ -247,6 +255,63 @@ function pushHedges(ops, model, rng, ink, wDress, oDress, coastY) {
 }
 
 /**
+ * (6a) WALL SHADOWS — the fortification ring's drop shadow, cast to the SE by the ONE
+ * fixed NW light (SHADOW_DIR, shared with the glyph hatch). A shadow line parallel to each
+ * SE-FACING wall segment, offset outward-SE at the dress opacity — so the wall reads as
+ * lifted off the ground, lit from the SAME side as the buildings. NW-facing segments face
+ * the light and cast nothing. Absent walls ⇒ no shadows (v1 + v2 alike).
+ * @param {Ops} ops @param {Model} model @param {string} ink @param {number} wDress @param {number} oDress
+ */
+function pushWallShadows(ops, model, ink, wDress, oDress) {
+  const fort = model.fortifications;
+  if (!fort || !Array.isArray(fort.walls) || fort.walls.length < 3) return;
+  const walls = fort.walls;
+  let cxs = 0, cys = 0;
+  for (const p of walls) { cxs += p[0]; cys += p[1]; }
+  const cx = cxs / walls.length, cy = cys / walls.length;   // ring centroid
+  const off = 8;
+  for (let i = 0; i < walls.length; i++) {
+    const a = walls[i], b = walls[(i + 1) % walls.length];
+    const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+    // outward normal (points away from the ring centre)
+    let nx = -(b[1] - a[1]), ny = (b[0] - a[0]);
+    if ((mx - cx) * nx + (my - cy) * ny < 0) { nx = -nx; ny = -ny; }
+    // only the SE-facing segments cast a ground shadow (normal agrees with the light fall)
+    if (nx * SHADOW_UX + ny * SHADOW_UY <= 0) continue;
+    const ox = SHADOW_UX * off, oy = SHADOW_UY * off;
+    const x1 = R(a[0] + ox), y1 = R(a[1] + oy), x2 = R(b[0] + ox), y2 = R(b[1] + oy);
+    if (!onMap(x1) || !onMap(x2) || !onMap(y1) || !onMap(y2)) continue;
+    ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+  }
+}
+
+/**
+ * (6b) LANDFORM RELIEF — NW-lit hachures on the v2 MOUNTAIN-FLANK crest (design §1/§2, the
+ * v2 enrichment ON TOP of the base dress). Short downslope shadow strokes offset from the
+ * crest curve by the ONE fixed NW light (SHADOW_DIR), at the dress opacity. v1 / marsh /
+ * dune / plain models carry no such crest ⇒ no relief (the base dress already covers them).
+ * @param {Ops} ops @param {Model} model @param {string} ink @param {number} wDress @param {number} oDress
+ */
+function pushRelief(ops, model, ink, wDress, oDress) {
+  const landform = model.frame && model.frame.landform;
+  if (!landform || landform.kind !== 'mountain-flank' || !Array.isArray(landform.marks)) return;
+  let emitted = 0;
+  for (const m of landform.marks) {
+    if (emitted >= 8) break;
+    if (m.m !== 'curve' || !Array.isArray(m.pts) || m.pts.length < 2) continue;
+    for (let i = 0; i < m.pts.length && emitted < 8; i += 2) {   // every other crest point
+      const px = m.pts[i][0], py = m.pts[i][1];
+      const len = 12;
+      const x1 = R(px + SHADOW_UX * 3), y1 = R(py + SHADOW_UY * 3);
+      const x2 = R(px + SHADOW_UX * (3 + len)), y2 = R(py + SHADOW_UY * (3 + len));
+      if (!onMap(x1) || !onMap(x2) || !onMap(y1) || !onMap(y2)) continue;
+      ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+      emitted++;
+    }
+  }
+}
+
+/**
  * Emit the ground-dress draw ops for a model under a style. PURE + deterministic. Returns
  * [] for any style that does not name the dress fields (the dormancy law) — so only the
  * illustrated lens dresses the ground, and every other lens is byte-identical.
@@ -277,6 +342,10 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID) {
   pushRipples(ops, model, rng, ink, wDress, oDress);
   pushMeadow(ops, model, rng, ink, coastY);
   pushHedges(ops, model, rng, ink, wDress, oDress, coastY);
+  // IT2-b — depth under the ONE fixed NW light (shared with the glyph hatch): the wall
+  // ring's SE drop shadow + the v2 mountain-flank relief hachures.
+  pushWallShadows(ops, model, ink, wDress, oDress);
+  pushRelief(ops, model, ink, wDress, oDress);
 
   return ops;
 }
