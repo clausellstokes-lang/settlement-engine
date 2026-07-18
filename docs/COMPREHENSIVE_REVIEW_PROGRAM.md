@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE MOBILE COMPANION MANDATE + REALM DESKTOP-ONLY (owner, 2026-07-17: "make sure
+there is a 10,000 mobile companion piece as well… make sure realm is desktop only"):**
+the mobile experience carries the SAME $10k bar — a crafted FIELD COMPANION, never a
+collapsed desktop. Research sweep #4 DISPATCHED (wf_65e6aacd: premium mobile craft ·
+document-layout collapse · THE AT-TABLE COMPANION use-case (the DM's phone at the game
+table — glanceability, one hand, dim rooms, interruption-resilient; DM Summary/Daily
+Life are the vehicle) · graceful desktop-gating patterns + critic). PRODUCT RULING
+RECORDED: **THE REALM (world map + canonize + advance controls) IS DESKTOP-ONLY** —
+mobile meets a confident built-for-the-bigger-canvas gate with continuity (never
+apologetic error-speak); town maps/interiors/dossiers stay mobile (pending the sweep's
+verdict on map-viewing ergonomics). The organic craft wave (#32) absorbs the mobile
+companion charge; the preview legibility review now runs BOTH viewports incl. a
+dim-environment pass. The doc wave received the mobile addendum live (authored
+single-column collapse, mobile-tuned type, realm framed desktop-confident).
 **⬛ THE QUALITY BAR (owner, 2026-07-17, verbatim: "make it look like a $10,000 website
 with all of these functions and principles. thank you so much!"):** the organic craft
 wave + the documentation wave build to BESPOKE-AGENCY STANDARD — every choice authored,
