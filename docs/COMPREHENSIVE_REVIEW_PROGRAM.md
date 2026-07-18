@@ -1134,6 +1134,13 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ MINIATURES CHIP FOLDED (2026-07-18): claude/deep-craft-miniatures @ 332fdf56
+(owner-started session task_2bb0e68e, signed off there) merged → deep-craft @
+9906d793 (NUL-clean, geometry verified, focused gates + build + verify:dist all
+exit 0). The demo panels are half-scale FLAT exhibits via an opt-in `compact` prop;
+⚠ THE 44px LAW recorded in its memory (shrink chrome, never hit-targets). THE
+CREATE PAGE IS NOW WHOLE INCLUDING THE MINIATURES — the owner walk at 5199 shows
+everything.
 **⬛⭐ ILLUSTRATED TOWN IT-1 LANDED (2026-07-18) — the glyph spine, four commits on
 claude/illustrated-town @ e2d1f0de (base 78a04afc, NOT folded).** 490cf93a THE
 GLYPHS (glyphAssign + medieval library + compiler emitting ONLY the existing 5 op
