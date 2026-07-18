@@ -1120,6 +1120,24 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ PARK: CONTENT-GT-FINAL @ 23c77444 (2026-07-17) — THE CONTENT PROGRAM COMPLETES.**
+9 commits stacked on 577179fb (spot-checked: 19 files, NUL-clean; the stall cure's 7th
+save mid-finale). ALL SIX CHARGES: history events 29 types ×3 (the 58 banked variants
+recovered + token-parity-verified) · institutions EXHAUSTIVE 301/301 ×3 (the 56
+taste-approved originals byte-identical; the walker now an exhaustiveness ratchet) · NPC
+pools grown w/ lockstep mirrors (neg/neutral split honorably deferred) · vignettes
+(probes made pool-robust FIRST) · AMENDMENT A: the clunker class STRUCTURALLY IMPOSSIBLE
+(descriptor-swap-first w/ dedup-only pool; proof realm 21/21 distinct 0 clunkers) ·
+AMENDMENT B: the casing pass at the TRUE 13 sites (not the estimated 9 — the enumeration
+rule found 4 more; a declared one-time shift, legal in the parked lineage). THE PROOF:
+base-vs-tree structural diff over the 187-grid = PASS, only prose paths moved (18
+display paths, zero structural/numeric); the golden-red set = EXACTLY ONE FILE
+(generatorGoldenMaster — the parents' parked red; the ONE REGEN owns it). Gates on the
+final tree all green; dist 145/145 zero-eager on its lineage. JUDGMENTs ×6 vetoable
+(13-not-9 · prefix-not-suffix disambiguation · unweighted new traits — owner-gated
+follow-on · goals deferred · batch commit shape · the timeout disposition). **THE
+COMPOSITE now takes 23c77444 as the content stack's single tip.** Remaining live: THE
+LADDER · DOC-WAVE-2 · LANDFORMS — the program's last three builds.
 **⬛ FOLD: THE MAP-SURFACE GATE WIRING (2026-07-17) → w7-prep @ 9d1c9702** (772877f5 off
 the fog tip; 5 files NUL-clean; receipts 17/17 gate pins + tsc 0 + dist 150/150; 0 eager
 by construction, pane 597/600). THE LADDER RULING'S MAP CONSUMERS LANDED: DM pins gated
