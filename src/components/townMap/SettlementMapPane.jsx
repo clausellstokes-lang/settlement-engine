@@ -36,8 +36,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD,
-  GOLD, INK, MUTED, PARCH, R, RED, RED_BG, sans,
+  AMBER, AMBER_BG, BLUE, BORDER, BORDER_STRONG, CARD, GOLD, INK, MUTED, PARCH, R, RED, RED_BG, sans,
 } from '../theme.js';
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
