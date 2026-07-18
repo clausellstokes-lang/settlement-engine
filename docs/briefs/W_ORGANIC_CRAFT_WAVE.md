@@ -46,6 +46,17 @@
 - Fences at dispatch time: whatever lanes remain live then; the manager restates the
   fence list in the dispatch prompt.
 
+## Phase 4b — THE TABLET COMPANION (owner amendment; law §10; sweep wf_3c80f28a feeds it)
+The three-posture model lands (DESK/FIELD/THE SPREAD via pointer+hover+width+orientation,
+extending the isMobile layer); tablet composed at its own size per surface (keep-vs-stack
+gains a third column: SPREAD); **THE REALM ON TABLET** — pan/zoom/inspect first-class,
+drag-placement w/ tap-then-confirm + snap assists, our chrome at 44-48px, FMG iframe
+touch behavior VERIFIED EMPIRICALLY in the preview (never assumed; stop-and-report
+genuine iframe touch defects as findings, never patch the vendored fork silently); the
+flat-shared-surface mode for town map/fog honors the DM/player visibility split (a flat
+tablet facing players shows ONLY player-visible state). Orientation = two compositions.
+The preview review gains the tablet viewport, both orientations.
+
 ## Fold gates (in order, all mandatory)
 Lane full gate (four validators, tsc + strict explicit, lint, suite, build+dist, closure)
 → the manager's PREVIEW LEGIBILITY REVIEW: desktop + mobile viewports + the dim pass,

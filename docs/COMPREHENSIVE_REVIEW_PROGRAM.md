@@ -1120,6 +1120,29 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE TABLET COMPANION MANDATE (owner, 2026-07-17: "we need a tablet companion… This
+one can include the realm. do all the fixings"):** the THIRD POSTURE joins the law —
+DESK / FIELD / **THE SPREAD** (tablet: the open book + the shared table surface;
+**REALM-CAPABLE by owner ruling** — the desktop gate becomes desk+spread). Law §10
+committed on w7-prep; brief phase 4b added; sweep #6 dispatched (wf_3c80f28a: premium
+tablet craft · the tablet at the TTRPG table (GM-screen + the flat player-facing shared
+surface — the fog layer's true home under the visibility split) · touch-first complex
+tools (drag-placement precision) · the posture-model breakpoint problem + the FMG-touch
+critic). The preview review gains the tablet viewport, both orientations.
+**⬛ THE SUBSTANCE SWEEP BANKED (wf_c143a10f, 5/5):** the external substance bar for
+ROUND 3 — headline principles: THE PLAYER-MODEL PRINCIPLE (Sylvester: unperceived depth
+is noise; grade every kernel by its perceivable surface — the Ultima Online unnoticed-
+ecology cautionary tale) · STORY GENERATOR NOT SKILL TEST (disproportionate pushback +
+recovery arcs; loss transforms, never merely terminates) · APOPHENIA AS THE CONVERSION
+ENGINE (abstracted feedback + long-term relevance; under-specify interior states,
+over-specify identity + consequence — a receipt that states feelings leaves nothing to
+author) · ANTI-NUMERIC CONSEQUENCE (Adams: "lost an eye" retells, "-12 HP" doesn't;
+scars/grudges/heirlooms over modifier-soup) · **WRITE THE TARGET STORIES FIRST** (the
+DF method: golden narratives as acceptance tests — if no mechanism could produce the
+story, backlog; if it can't be PERCEIVED producing it, bug) · THE PLAYER-AS-ACTOR
+(receipts should regularly say "because you…"; spectator chronicles get retold by
+nobody). ROUND 3's substance graders hold the composite to these; the golden-narrative
+corpus is recommended as a standing ROUND 3 instrument.
 **⬛ THE ORGANIC CRAFT LAW FROZEN + THE WAVE BRIEF COMMITTED (2026-07-17):** both craft
 sweeps banked (10/10 agents) → docs/DESIGN_ORGANIC_CRAFT.md frozen on w7-prep (the one
 fiction = THE SURVEYOR'S WORKING DESK; the artifact/instrument split; manuscript grammar
