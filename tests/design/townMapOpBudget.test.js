@@ -12,11 +12,20 @@ import { describe, expect, it } from 'vitest';
 
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { buildTownMapDrawList } from '../../src/domain/townMap/townMapDraw.js';
+import { groundDressOps } from '../../src/domain/townMap/groundDress.js';
 import { GOLDEN_CONFIGS, V2_GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 // The class-catching ceiling. Empirically the largest golden metropolis lands FAR under
-// this (~a few hundred ops); the guard exists to catch an explosion, not to be tight.
+// this (glyph layer + ground dress: ~360 ops on the richest v2 metropolis); the guard
+// exists to catch an explosion, not to be tight.
 const OP_CEILING = 2200;
+
+// THE GROUND-DRESS CAP (IT-2). Dress is FRAME-level (farm belt / woods / ripples / meadow /
+// hedges / wall shadows / relief) — NOT per-building — so the per-building bound below
+// can't see it. Empirically the densest golden seed emits ≤ 88 dress ops; this cap (with
+// ~2× headroom) reds if a future density/mark-count change balloons the frame texture,
+// the exact frame-level explosion the per-building allowance would otherwise mask.
+const DRESS_CAP = 160;
 
 /** Every golden config's illustrated draw-op count, with a legible label. */
 function illustratedCounts() {
@@ -45,7 +54,8 @@ describe('town-map OP BUDGET — the illustrated lens does not explode', () => {
   });
 
   it('the illustrated lens adds a BOUNDED multiple over the parchment op count (no runaway)', () => {
-    // The largest v2 config: glyphs + shadows are a bounded expansion of the rect list.
+    // The largest v2 config: glyphs + shadows are a bounded expansion of the rect list,
+    // PLUS the frame-level ground dress (bounded separately by DRESS_CAP).
     const big = V2_GOLDEN_CONFIGS.reduce((a, b) => {
       const na = buildTownMapModel(a.settlement, a.mapEdits).buildings.length;
       const nb = buildTownMapModel(b.settlement, b.mapEdits).buildings.length;
@@ -55,6 +65,18 @@ describe('town-map OP BUDGET — the illustrated lens does not explode', () => {
     const parch = buildTownMapDrawList(model, 'parchment').length;
     const illus = buildTownMapDrawList(model, 'illustrated').length;
     expect(illus).toBeGreaterThan(parch);        // glyphs add detail
-    expect(illus).toBeLessThan(parch + model.buildings.length * 14 + 40); // ≤ ~14 ops/building + frame
+    // ≤ ~14 ops/building glyph expansion + the frame furniture + the ground-dress budget.
+    expect(illus).toBeLessThan(parch + model.buildings.length * 14 + 40 + DRESS_CAP);
+  });
+
+  it('the ground dress is a BOUNDED frame texture on every seed (≤ DRESS_CAP, > 0)', () => {
+    // Every golden seed gets dressed (the v1 COVERAGE LAW) and none explodes the frame.
+    const dress = [];
+    for (const { spec, settlement } of GOLDEN_CONFIGS) dress.push({ label: `v1 ${spec.tier}/${spec.terrain}`, ops: groundDressOps(buildTownMapModel(settlement), 'illustrated').length });
+    for (const { spec, settlement, mapEdits } of V2_GOLDEN_CONFIGS) dress.push({ label: `v2 ${spec.tier}/${spec.terrain}`, ops: groundDressOps(buildTownMapModel(settlement, mapEdits), 'illustrated').length });
+    const worst = dress.reduce((a, b) => (b.ops > a.ops ? b : a));
+    expect(worst.ops, `${worst.label} emitted ${worst.ops} dress ops (> ${DRESS_CAP})`).toBeLessThanOrEqual(DRESS_CAP);
+    const sparsest = dress.reduce((a, b) => (b.ops < a.ops ? b : a));
+    expect(sparsest.ops, `${sparsest.label} got no ground dress (v1 coverage law)`).toBeGreaterThan(0);
   });
 });
