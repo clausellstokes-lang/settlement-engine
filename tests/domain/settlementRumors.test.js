@@ -14,6 +14,7 @@ import {
   distanceBand,
   freshnessBand,
   hasRumorLedgers,
+  HEADLINE_FRAMES,
   settlementRumors,
   whatPhrase,
 } from '../../src/domain/display/settlementRumors.js';
@@ -301,6 +302,89 @@ describe('read-model mechanics', () => {
     // An unknown future token degrades to readable words, never a raw slug.
     expect(whatPhrase('npc_some_future_arc')).toBe('some future arc');
     expect(whatPhrase('utterly_new_beat')).toBe('utterly new beat');
+  });
+
+  // ── HEADLINE FRAME variety (content-vt-2) ──────────────────────────────────
+  const NAMES = new Map([['s2', 'Thornwall']]);
+  const nameFor = (id) => NAMES.get(id) || id;
+  function renderHeadline(what, { eventRef, hopCount = 2, completeness01 = 0.9, settlementId = 's1' } = {}) {
+    const worldState = {
+      tick: 10,
+      spatialLedgers: { rumorLedgers: { [settlementId]: { k1: {
+        arrivalTick: 8, hopCount, completeness01, eventTick: 5, score: 40, eventRef,
+        content: { what, whereId: 's2', magnitude: 2, partyIds: ['s2'] },
+      } } } },
+    };
+    return settlementRumors({ worldState, settlementId, nameFor })[0].headline;
+  }
+  // hopCount/completeness that land each completeness band (thresholds 0.5 / 0.3).
+  const BANDS = {
+    firsthand: { hopCount: 0, completeness01: 1 },
+    outline: { hopCount: 2, completeness01: 0.9 },
+    vague: { hopCount: 2, completeness01: 0.4 },
+    thin: { hopCount: 2, completeness01: 0.2 },
+  };
+
+  it('every frame template carries its slots and no engine token (register)', () => {
+    const DENY = ['_', 'deploy', 'stressor', 'npc', 'impactkind', 'candidatetype', 'queued', 'applied'];
+    for (const [band, pool] of Object.entries(HEADLINE_FRAMES)) {
+      expect(pool.length, `${band} has variety`).toBeGreaterThanOrEqual(2);
+      for (const frame of pool) {
+        expect(frame.includes('{where}'), `${band}: "${frame}" carries {where}`).toBe(true);
+        if (band !== 'thin') {
+          expect(/\{[Ww]hat\}/.test(frame), `${band}: "${frame}" carries the subject`).toBe(true);
+        }
+        const lc = frame.toLowerCase();
+        for (const bad of DENY) {
+          expect(lc.includes(bad), `${band}: "${frame}" leaks "${bad}"`).toBe(false);
+        }
+      }
+    }
+  });
+
+  it('DETERMINISM: same event ref ⇒ same frame; frame is stable across viewers', () => {
+    for (const band of Object.keys(BANDS)) {
+      const a = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', ...BANDS[band] });
+      const b = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', ...BANDS[band] });
+      expect(a, band).toBe(b);
+      // Seed is the event ref, NOT the viewer — a different listening settlement
+      // hearing the SAME event frames it identically (the where is the same too).
+      const other = renderHeadline('conflict_pressure', { eventRef: 'evt.stable.9', settlementId: 's7', ...BANDS[band] });
+      expect(other, `${band} cross-viewer`).toBe(a);
+    }
+  });
+
+  it('the subject phrase + place ride EVERY selected frame (facts never move)', () => {
+    // Across many event refs (⇒ different frames), the fiction still names the
+    // subject phrase and the place — only the connective framing changes.
+    for (let i = 0; i < 40; i++) {
+      const h = renderHeadline('strategy_deploy', { eventRef: `e${i}`, ...BANDS.outline });
+      expect(h.includes('Thornwall'), h).toBe(true);
+      expect(h.includes('soldiers marching to war'), h).toBe(true);
+      expect(h.toLowerCase().includes('strategy deploy'), h).toBe(false);
+    }
+  });
+
+  it('ANTI-REPETITION: distinct event refs reach the whole pool of each band', () => {
+    for (const [band, cfg] of Object.entries(BANDS)) {
+      const seen = new Set();
+      for (let i = 0; i < 300; i++) seen.add(renderHeadline('conflict_pressure', { eventRef: `ev_${i}`, ...cfg }));
+      expect(seen.size, `${band} fully reachable`).toBe(HEADLINE_FRAMES[band].length);
+    }
+  });
+
+  it('CANONICAL-AT-ZERO: a telling with no stable seed renders the original frame', () => {
+    // No eventRef and no ledger key seed ⇒ index-0 frame (the pre-content-vt-2
+    // wording), so any seedless path is byte-identical.
+    const worldState = {
+      tick: 10,
+      spatialLedgers: { rumorLedgers: { s1: { '': {
+        arrivalTick: 8, hopCount: 2, completeness01: 0.9, eventTick: 5, score: 40,
+        content: { what: 'conflict_pressure', whereId: 's2', magnitude: 2, partyIds: ['s2'] },
+      } } } },
+    };
+    const h = settlementRumors({ worldState, settlementId: 's1', nameFor })[0].headline;
+    expect(h).toBe('Merchants bring word of the drums of war in Thornwall');
   });
 
   it('activatedDeityNamesFrom reads ONLY the public embedded snapshots', () => {
