@@ -231,6 +231,17 @@
   font-size: var(--oc-type-uiM); color: var(--oc-ink-secondary); letter-spacing: 0.02em;
 }
 
+/* ── THE MATERIAL LAYER — pre-baked paper grain (Deep Craft, foundation 1) ────
+   Opt-in alpha-overlay tooth on grounds. The tiles are pre-baked seeded noise
+   (scripts/gen-paper-grain.mjs; runtime feTurbulence is BANNED — law §8) at
+   ≤4.5% peak opacity, so every ink token keeps its contrast headroom (law §6).
+   The URL only fetches when a matching element actually renders — no .oc-grain
+   on a first-paint surface means zero first-paint bytes. .oc-field subtrees
+   swap to the dim fiber tile automatically. */
+.oc-grain { background-image: url('/textures/paper-grain-light.png'); background-repeat: repeat; }
+.oc-field .oc-grain,
+.oc-grain--dim { background-image: url('/textures/paper-grain-dim.png'); }
+
 /* Reduced motion: the organic layer has no motion, but honour the intent. */
 @media (prefers-reduced-motion: reduce) {
   .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

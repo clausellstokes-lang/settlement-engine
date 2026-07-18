@@ -22,6 +22,7 @@ export * from './instruments.js';
 export * from './fluidScale.js';
 export * from './posture.js';
 export * from './rules.js';
+export * from './material.js';
 
 /**
  * The organic tokens as a flat { cssVarName: value } map — the single projection
