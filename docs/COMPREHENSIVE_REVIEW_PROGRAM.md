@@ -1120,6 +1120,36 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ FOLD: THE DOCUMENTATION WAVE 2/2 @ 08486264 (+ reconciliation 019d1a2e) — THE
+DOCUMENTATION WAVE COMPLETES, ALL FOUR PAGES SHIPPED.** ABOUT = the six-band trust page
+(the whole-loop schematic in the engraving register · the philosophy ladder w/ the DM
+prose surviving · THE COVENANT w/ six VERIFIED receipts — state-never-fate quoted from
+source, retention pinned to migration 023, the AI no-write-path proven over all 164 ops ·
+the tick diagram before its text · the concession-first AI section · the audit close;
+UnderTheHoodTab reaped). COMPENDIUM = THE REGISTRY-RENDER LAW real (one generated
+artifact + the freshness contract — divergence FAILS CI; the op registry PUBLIC in its
+real shape, 164 ops walker-pinned; hubs: Operations/Deities/Lenses/Facets/Calamity/the
+REAL 16 Living-World systems w/ preset truth from configs; tier bands CORRECTED from
+source — a disclosed on-screen fix; the A-Z crawlable index). THE CONTRACT'S IN-TREE
+CATCHES: the '14' stale comment (flagged, engine file ladder-fenced) · the wrong Thorp
+band (fixed) · brief premises honestly refined (archetypes AUTHORED-labeled — no engine
+source exists; calamity = the one bucket; the 9 PRESSURE_KINDS real but the old
+parenthetical wrong). **THE THIRD CROSS-LANE CATCH AT FOLD:** the doc-count contracts
+red (24 vs 25 edge functions — S7 crossed the branch point); reconciled @ 019d1a2e.
+JUDGMENTs incl. THE MAKER'S-NAME WITHHOLD (publishing the owner's real name on the
+public About = owner-gated; the one-builder framing + /founders link used — **OWNER
+QUEUE: name/face publication**) + the demo world = the sanctioned lf-033 fixture seed.
+SEAMS: custom-mode↔S4 vocabulary reconciliation deferred-with-reason · the preset
+war-gate nuance labeled. Receipts on the merged tree: 101/104→green after
+reconciliation (19/19 doc contracts) · tsc 0 · dist 150/150.
+**⬛⬛ THE ORGANIC CRAFT WAVE DISPATCHED (phases 1-2 + MANDATORY STOP at the taste
+veto)** — claude/organic-craft off 019d1a2e: the foundation (ink ramp · the rule family ·
+rubrication · fluid scales · the three-posture model · subset fonts · the seeded-ornament
+library v1 + its NEW golden family) + the five-screen sample set → STOP for the manager's
+preview legibility review + the owner's veto; phases 3-5 (the census-enforced app-wide
+sweep + the mobile/tablet companions + the verification ratchet) await the go. **THE
+PROGRAM'S FINAL BUILD DISPATCH. Live: THE LADDER + THE CRAFT WAVE — everything else is
+folded, parked, or proof.**
 **⬛ THE SURFACE CENSUS (owner confirmation: the craft wave covers "every single page"):**
 the wave brief gains a required enumeration deliverable — every route/view/panel/modal
 dispositioned (recomposed / instrument-exempt-with-reason / deferred-with-reason); the
