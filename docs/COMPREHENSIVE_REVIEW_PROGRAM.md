@@ -1120,6 +1120,32 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ THE FREELY-GIVEN RULINGS (2026-07-17, owner: "i give my decision freely where
+appropriate for this!" — the Class B/D decisions made by the manager under explicit
+grant; EVERY ITEM VETOABLE):** (1) **PROSE TASTE: APPROVED** — the sample holds the
+register (fact + complication, dry, specific; "The theology was settled quickly. The
+estate is where the fighting is."); TWO REQUIRED AMENDMENTS: the faction de-clunk rule
+(descriptor-swap-first, banned-stack guard — "The Commercial Circle Inner Circle" class
+dies) + the govFaction casing pass (all 9, deliberate shift in the parked lineage). THE
+BIG CONTENT WAVE DISPATCHED (claude/content-gt-final stacked on 577179fb; parks;
+supersedes both content parents in the composite). (2) **V2 MAP TASTE: PROVISIONAL
+PASS** — engineering criteria conclusive (Lynch ≥0.66 across 20 configs, determinism,
+morphology coverage); the aesthetic veto STAYS OPEN until the regen (revert = one
+config line); default-mint wiring dispatched. (3) **ATLAS SAMPLES: PROVISIONAL PASS**
+(same logic; display-only, instantly revertible). (4) **THE ENTITLEMENT LADDER: RULED
+as recommended** — FREE: map view · provenance hover · five lenses · panorama · gallery
+view. CARTOGRAPHER: map editing · DM pins · change-view depth · fog · interiors (ONE
+free sample per settlement) · v1→v2 redraw. Bundle $2.99 unchanged. SURVEYOR: AI.
+Engine NEVER tier-gated (constitutional). Lock-glyph-teaser everywhere. Relayed
+mid-flight to fog + the doc wave; SM-5-pins/interiors wiring at the fog fold (#30).
+(5) **BESPOKE-STYLE STORAGE: mapEdits.bespokeStyles** (blob-resident, zero migration;
+per-account library = post-launch stock). (6) **AUDIT-SPINE: build additively** (155+
+only if unavoidable; server-surface gaps stop-and-report). Both in the RULINGS-WIRING
+lane (claude/rulings-wiring). (7) **ANON/GALLERY EXPORT: NO for v1** (caps-on-actions-
+never-render; sign-in is the conversion step). (8) **PROVENANCE causedBy THREADING:
+STAYS POST-LAUNCH** — decided on merits (kernel-wide ceiling-file edits at max
+concurrency vs a payoff that matters only lit-and-launched). SEVEN LANES NOW LIVE (fog ·
+doc wave · S7 · content-vt-2 · fp-g11 · content-gt-final · rulings-wiring).
 **⬛ THE PULL-FORWARD SWEEP (2026-07-17, owner: "is there anything waiting post-resurvey
 or post-soak that we can build now for the resurvey to validate?"):** the deferred stock
 audited into three classes. **CLASS A — DISPATCHED NOW:** CONTENT-VT-2 (the view-time
