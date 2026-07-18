@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { BookOpen, Zap, Star, Cpu, List, Scale, HelpCircle, Globe } from 'lucide-react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, sans, serif_, FS, swatch } from './theme.js';
+import { Zap, Star, List, Scale, HelpCircle, Globe } from 'lucide-react';
+import { GOLD, GOLD_TXT, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, PARCH, R, ELEV, PAGE_MAX, PROSE_MAX, sans, serif_, FS, swatch } from './theme.js';
 import { ANON_MAX_SIZE_LABEL } from '../config/tierFacts.js';
 import AccountFAQ from './account/AccountFAQ.jsx';
 import LivingWorldTab from './howto/LivingWorldTab.jsx';
+import AboutManifesto from './howto/AboutManifesto.jsx';
 
 // Responsive multi-column container for card/list-heavy tab content. Uses
 // `column-width` (not a fixed count) so it fills a wide desktop card with as
@@ -14,14 +15,15 @@ const COLS = (col = 340) => ({ columnWidth: `${col}px`, columnGap: '22px' });
 const NO_BREAK = { breakInside: 'avoid', WebkitColumnBreakInside: 'avoid' };
 
 
+// The Keeper's Handbook tabs — the PRACTICAL guide that sits below the About
+// manifesto (the trust page). "Under the Hood" (the derivation mechanics) and
+// "DM Philosophy" were folded UP into the manifesto (the mechanism + philosophy
+// bands) and their tabs retired; the orphaned howto/UnderTheHoodTab.jsx was reaped.
 const TABS = [
   { id:'quick',  label:'Quick Start',   Icon: Zap },
   { id:'power',  label:'Power User',    Icon: Star },
-  // "The Living World" sits between Power User and Under the Hood: the bridge
-  // from the static dossier to the premium living simulation.
+  // "The Living World" bridges the static dossier to the premium living simulation.
   { id:'living', label:'The Living World', Icon: Globe },
-  { id:'logic',  label:'Under the Hood',Icon: Cpu },
-  { id:'phil',   label:'DM Philosophy', Icon: BookOpen },
   { id:'ref',    label:'Reference',     Icon: List },
   { id:'compare',label:'How We Compare',Icon: Scale },
   { id:'faq',    label:'FAQ',           Icon: HelpCircle },
@@ -131,7 +133,7 @@ function QuickTab() {
         <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
       <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
-      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and. Where relevant. Legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
+      <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and — where relevant — legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
       <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
       <Tip>You don't need to read every tab before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
@@ -206,210 +208,6 @@ function PowerTab() {
     </div>
   );
 }
-
-function LogicTab() {
-  return <>
-    <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, marginBottom:12 }}>
-      Understanding these mechanics lets you use the generator as a world-building tool rather than a
-      random oracle. The outputs aren't random. They're derived.
-    </p>
-    <div style={COLS()}>
-    <Insight title="Constraint-Driven, Not Random">
-      The distinction matters. A random generator picks from tables. This engine resolves constraints.
-      Your slider values, trade route, terrain, stress conditions, forced/excluded institutions, and
-      neighbour relationship are all constraints. The engine finds the most internally coherent
-      settlement satisfying all of them simultaneously. This is why changing one constraint produces
-      a systematically different settlement rather than a random variation. The outputs feel inevitable
-      rather than arbitrary because they are: given those constraints, this is what the town is.
-    </Insight>
-    <Insight title="Sliders as Probability Weights">
-      The sliders don't guarantee institutions. They shift their probability. Military ≥80 makes a
-      Garrison very likely but not certain. It also raises the probability of walls, fortifications,
-      and military-aligned NPCs, and the chance the dominant faction is a military bloc.
-      Interaction between sliders creates compound archetypes: Military ≥70 + Religion ≥68 can trigger
-      Crusader Synthesis where church and military are fused.
-    </Insight>
-    <Insight title="Magic as an Economic Buffer">
-      High Magic doesn't just add magic institutions. It acts as a buffer against economic and food
-      deficits. Arcane institutions can substitute for missing production infrastructure. A settlement
-      with no farmland and no road access but high magic will survive because the generator treats
-      magical supply as a partial substitute for material supply chains. Lower the Magic slider and
-      that same settlement faces a viability warning.
-    </Insight>
-    <Insight title="Prosperity Cascades from Multiple Inputs">
-      Prosperity isn't set by a dial. It's the output of export volume × export value, income source
-      count, trade route access, supply chain completeness, safety profile, and stress conditions.
-      A comfortable prosperity can mask a fragile foundation. The Viability tab shows exactly which
-      factors are propping the number up and which are absent.
-    </Insight>
-    <Insight title="Stress Compounds, Not Stacks">
-      Multiple stresses create compound conditions. Famine + Politically Fractured means food
-      distribution is contested by factions, not just scarce. The compound modifies NPC secrets
-      (who is hoarding, who is profiteering), faction tensions (which bloc controls the grain), and
-      safety profile. The DM Summary names the compound condition explicitly.
-    </Insight>
-    <Insight title="Faction Power Reflects Institutional Base and Settlement Performance">
-      Faction raw power comes from institutional presence and slider priorities. But effective power
-      is modified by public legitimacy. The governing authority's performance multiplier ranges from
-      ×0.60 (legitimacy crisis) to ×1.30 (endorsed). Criminal factions receive an inverse multiplier:
-      when governance fails, criminal power grows. The public legitimacy score derives from prosperity,
-      safety, defensibility, and food security. So every economic and military decision affects the
-      power structure indirectly. NPC groups are distributed across all power factions using
-      power-weighted assignment with a diversity cap, so no single faction monopolises the settlement's
-      organised population.
-    </Insight>
-    <Insight title="Neighbour Relationships Bias the Economy">
-      When generating with an active neighbour, the relationship type modifies the economic engine
-      before institutions are selected. A trade_partner skews production toward complementary exports.
-      A rival suppresses them. A patron introduces dependency: the client's economy is partially shaped
-      by what the patron demands. Two identical configurations produce different economies depending
-      on who their neighbour is.
-    </Insight>
-    <Insight title="NPC Structural Positions Derive from the Live Settlement State">
-      Each significant NPC carries a structural position, a goal, and a constraint. All derived from
-      the settlement's current conditions, not from generic role templates. A Guild Master in a
-      legitimacy-crisis city with corrupted criminal capture gets a fundamentally different position
-      than one in a prosperous, well-governed settlement. The top NPCs by power relevance also carry
-      a rank indicator. Dominant or subordinate within their faction type. Producing different
-      templates for the most powerful government NPC versus a secondary civic official. The goal field
-      on those NPCs reflects the settlement's specific pressures rather than a generic role description.
-    </Insight>
-    <Insight title="History and Present Are Structurally Connected">
-      Historical events connect to current conditions through a temporal plausibility filter. A famine
-      500 years ago does not explain today's food shortage. Only recent events (within roughly 30-80
-      years depending on event type) can explain current economic or safety conditions. Political
-      crises within the last 80 years can explain current legitimacy deficits. Religious events 60-300
-      years ago can explain current institutional prominence or decline. Where a historical event and
-      the current state are in meaningful tension. A prior political disruption whose pressure hasn't
-      resolved, a recovery the settlement has moved through. A legacy annotation surfaces it using
-      the event's own name and lasting effects. The annotation tells the DM the structural relationship;
-      the DM supplies the world-specific meaning.
-    </Insight>
-    <Insight title="Supply Chains Create Fragility">
-      Production isn't isolated. It's sequential. A tannery requires hides (hunting economy or
-      livestock). A leatherworker requires tanned leather. An armorer requires leather and metal.
-      Break any link and the downstream chain fails. A Prosperous settlement may be one institution
-      away from struggling: remove the mill and the grain surplus collapses, exports drop, and
-      prosperity slides within a generation. The Viability tab shows exactly which chains are
-      intact, which are broken, and which are propped up by magic or trade substitutes.
-    </Insight>
-    <Insight title="The AI Narrative Prompt is a Structured Brief">
-      The export isn't a description. It's a structured brief: settlement name, tier, economic profile,
-      power structure summary, active NPCs with goals and secrets, stress conditions, history events,
-      and faction tensions. When given to an AI assistant, this brief enables consistent fiction across
-      multiple queries because everything the AI needs is in the brief, not in its training.
-      The coherence of the brief is what makes the AI coherent.
-    </Insight>
-    </div>
-  </>;
-}
-
-function PhilosophyTab() {
-  return <>
-    {/* Opening card */}
-    <div style={{ padding:'14px 16px', background:'linear-gradient(135deg,#1c1409 0%,#2d1f0e 100%)',
-      borderRadius:7, marginBottom:14 }}>
-      <div style={{ fontFamily:serif_, fontSize: FS['16'], fontWeight:600, color:GOLD, marginBottom:8 }}>
-        Discover your own world.
-      </div>
-      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:'0 0 10px' }}>
-        The settlement that emerges from your constraints isn't one you scripted. It's one you
-        uncovered. You set the conditions of your world: the terrain, the trade pressures, the
-        regional history you've established. The generator derives what a settlement in those
-        conditions would actually look like. What appears is genuinely new to you, even though
-        you built the world it lives in.
-      </p>
-      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:'0 0 10px' }}>
-        Every explorer of their own world is bounded by three things: <strong style={{color:GOLD}}>discovery</strong>. What
-        you find when you arrive<strong style={{color:GOLD}}>disappointment</strong>. What isn't
-        there, and <strong style={{color:GOLD}}>ingenuity</strong>. What you make of both. These
-        aren't limitations of the tool. They're the texture of world-building done honestly.
-      </p>
-      <p style={{ fontSize:FS.sm, color:swatch['#C8B098'], lineHeight:1.75, margin:0 }}>
-        Every settlement this tool produces is meant to be woven into your world, not dropped into it.
-        Rename the NPCs. Adjust the factions to fit your regional politics. Keep what fits; change
-        what doesn't. The generator gives you a coherent foundation. What you build on top is yours.
-      </p>
-    </div>
-
-    <div style={COLS()}>
-    <Insight title="Extending Your Reach into the Unmapped Parts">
-      Even the most detailed campaign setting has places that haven't been fully developed yet.
-      The generator reaches into that unmapped space and gives you a coherent foundation to
-      work from. Without the hours of manual derivation. You don't have to build every trade
-      economy from scratch. Generate a baseline that makes mechanical sense for the region,
-      then layer your world's specific history, culture, and context over it. The foundation
-      is consistent. What you add on top is what makes it yours.
-    </Insight>
-
-    <Insight title="Discovery and Disappointment as Craft">
-      Sometimes the generator produces something unexpected. You imagined a cathedral town,
-      the constraints gave you a garrison and a black market. That's not the tool contradicting
-      you. It's offering a variation worth considering. Accept it, modify it, or reject it
-      entirely. But sit with it for a moment first: why didn't the church reach this far?
-      What fills the spiritual vacuum in a military settlement with a criminal undercurrent?
-      The unexpected result often deepens the setting more than the expected one would have,
-      precisely because you had to earn it. Disappointment, in world-building, is frequently
-      the beginning of something more interesting.
-    </Insight>
-
-    <Insight title="Integration, Not Isolation">
-      These settlements are not self-contained islands. They are nodes in the network of your
-      world. Connected to everything around them by trade, politics, history, and conflict.
-      The export economy points outward: who buys what this town produces? The import
-      dependencies point inward: where does what they need come from? The faction tensions
-      connect to regional powers. The NPC histories reach beyond the settlement's borders.
-      Use the generator's output as a starting point for those connections, not as a finished
-      picture. The settlement becomes real when it has relationships with the rest of your world.
-    </Insight>
-
-    <Insight title="What the Players Experience">
-      When a settlement has genuine internal logic. When the blacksmith is poor because the
-      iron supply chain is broken, not because the DM needed a plot point. Players sense it.
-      The town feels like it existed before they arrived, and like it will continue to exist
-      after they leave. That quality of world-presence is hard to fake and hard to manufacture
-      intentionally. It emerges naturally from coherent generation. The gift to the player is
-      a world that pushes back: that has gaps where the DM didn't place gaps, services where
-      the conditions warranted them, and tensions that don't resolve neatly because they weren't
-      written to resolve neatly.
-    </Insight>
-
-    <Insight title="Constraint as an Invitation, Not a Limit">
-      When a settlement doesn't have what a player is looking for, that's not a failure of
-      preparation. It's the world being honest. The frontier town doesn't have Remove Curse
-      because no institution here provides it. Now: who would know someone who does? How far
-      would the party have to travel? What would it cost to bring that service here? The
-      constraint generates the question, and the question generates the session. A world
-      that always provides exactly what players need isn't a world. It's a service. The
-      constraint is what makes the world feel real, and the DM's ingenuity is what makes
-      the constraint feel fair.
-    </Insight>
-
-    <Insight title="Actions Have Downstream Consequences">
-      Every supply chain in the settlement is a chain of implications. The mill produces flour;
-      the baker needs flour; the tavern buys bread; the garrison relies on the tavern for rations.
-      If the party burns the mill. Or hires away the miller, or disrupts the grain supply by
-      triggering a siege. Everything downstream degrades in sequence. The bread runs out.
-      The garrison goes hungry. Morale fractures. This is mapped out in the Supply Chains and
-      Viability panels. Not as flavour, but as a literal dependency graph. Before the party
-      does something dramatic, you can see what they're actually touching. After they do it,
-      you know exactly what breaks and in what order. The generator gives you the map of
-      consequences before the players create them.
-    </Insight>
-
-    <Insight title="Using the Generator Mid-Session">
-      Players go somewhere you didn't prepare. Generate now, in two minutes, with settings that
-      match what the region would produce: terrain, trade route, threat level, rough prosperity.
-      Read the DM Summary tab. That's your brief. The institution list tells you what's there.
-      The NPCs give you named people with actual motivations. The Daily Life tab tells you what
-      the place feels like to arrive in. You're not improvising from nothing. You're revealing
-      a place that the conditions of your world would plausibly have produced. Then you adapt it,
-      as you always do.
-    </Insight>
-    </div>
-  </>;
-}
-
 
 function RefSection({ title, rows }) {
   // breakInside:avoid keeps a heading glued to its rows when the parent flows
@@ -582,10 +380,25 @@ export default function HowToUse({ standalone=false }) {
   });
 
   if (standalone) return (
-    // Centered, shared-width card sized to its content. No full-height cream
-    // fill — short tabs let the parchment painting show through to the footer
-    // instead of stretching a dead cream rectangle (the old `flex:1` bug).
+    // The About TRUST PAGE leads (the manifesto), with the practical Keeper's
+    // Handbook (the tabbed guide) below it. Centered, shared-width; short tabs let
+    // the parchment painting show through to the footer (no dead cream rectangle).
     <div style={{ maxWidth: PAGE_MAX, margin:'0 auto', width:'100%' }}>
+      <AboutManifesto />
+
+      {/* THE KEEPER'S HANDBOOK — the practical, day-to-day guide. */}
+      <div style={{ maxWidth: PROSE_MAX, margin:'44px auto 14px' }}>
+        <div style={{ fontFamily:sans, fontSize:FS.xs, fontWeight:800, letterSpacing:'0.14em',
+          textTransform:'uppercase', color:GOLD_TXT, marginBottom:6 }}>The practical guide</div>
+        <h2 style={{ fontFamily:serif_, fontSize:FS['22'], fontWeight:600, color:INK, margin:0, lineHeight:1.2 }}>
+          The Keeper&rsquo;s Handbook
+        </h2>
+        <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'6px 0 0', fontFamily:sans }}>
+          How to drive the generator, day to day. Look any rule or catalog up in the{' '}
+          <a href="/compendium" style={{ color:GOLD_TXT, textDecoration:'underline', textUnderlineOffset:3, fontWeight:600 }}>Compendium</a>.
+        </p>
+      </div>
+
       <div style={{ background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl,
         boxShadow:ELEV[1], overflow:'hidden' }}>
         {/* Tab bar */}
@@ -611,8 +424,6 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
           {activeTab==='living' && <LivingWorldTab />}
-          {activeTab==='logic' && <LogicTab />}
-          {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}
           {activeTab==='faq' && <FaqTab />}
@@ -646,8 +457,6 @@ export default function HowToUse({ standalone=false }) {
           {activeTab==='quick' && <QuickTab />}
           {activeTab==='power' && <PowerTab />}
           {activeTab==='living' && <LivingWorldTab />}
-          {activeTab==='logic' && <LogicTab />}
-          {activeTab==='phil'  && <PhilosophyTab />}
           {activeTab==='ref'   && <RefTab />}
           {activeTab==='compare' && <CompareTab />}
           {activeTab==='faq' && <FaqTab />}
