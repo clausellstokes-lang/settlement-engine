@@ -1120,6 +1120,15 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ OWNER OVERRIDE (2026-07-18): LOCALIZATION MOVES PRE-ROUND-3.** The depth
+standard's gap-5 disposition ("post-launch roadmap by name") is superseded the same day it
+was written: the owner rules localization is built BEFORE the resurvey so ROUND 3
+validates it. Recon fan-out dispatched over the w7-prep lineage (copy architecture ·
+hard-coded-string prevalence · formatting/plural sites · engine-prose boundary ·
+budget/persistence). Wave brief = docs/briefs/W_LOCALIZATION_WAVE.md. Build sequencing:
+L1 infrastructure lane dispatches at the craft phases-1-2 fold (both waves rewrite
+src/copy — never in parallel); the extraction law rides the craft phases-3-5 census sweep
+(one app-wide pass, two laws).
 **⬛ THE DEPTH STANDARD RATIFIED (owner, 2026-07-17: the $10k-vs-$1M framework + "I
 want the absolute best that Fable can do"):** the standing check on all website work —
 the bar is DEPTH/CONSISTENCY/VALIDATION/WHOLE-EXPERIENCE EXECUTION, never screenshot
