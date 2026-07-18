@@ -109,7 +109,7 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  * `nodes` + the accumulated `provenance`.
  * @typedef {Object} Candidate
  * @property {string} morphology
- * @property {{ water: import('./townMapModel.js').TownMapWater|null, roads: import('./townMapModel.js').TownMapRoad[] }} frame
+ * @property {{ water: import('./townMapModel.js').TownMapWater|null, roads: import('./townMapModel.js').TownMapRoad[], landform?: import('./siteGenesis.js').TownLandform }} frame
  * @property {{ anchor: { x:number, y:number, kind:string }, pattern: string, streets: Array<{ from:{x:number,y:number}, to:{x:number,y:number} }> }} skeleton
  * @property {import('./townMapModel.js').TownMapDistrict[]} districts
  * @property {import('./townMapModel.js').TownMapBuilding[]} buildings
@@ -462,7 +462,7 @@ function keyProvenance(entries) {
  */
 function generateCandidate(ctx, attempt) {
   const { baseKey, tierIndex, tradeAccess, hasWalls, isCoast, mapProfile, activeConditions,
-    core, water, roadCount, roadWeight } = ctx;
+    core, water, roadCount, roadWeight, site } = ctx;
   const rng = createPRNG(`${baseKey}::attempt:${attempt}`);
   const morphology = selectMorphology(ctx);
 
@@ -529,7 +529,13 @@ function generateCandidate(ctx, attempt) {
   // ── (6) Overlays — hazard markers + district-level condition badges (as v1) ──
   const overlays = buildOverlays(mapProfile, activeConditions, districts, rng);
 
-  return { morphology, frame: { water, roads }, skeleton, districts, buildings, fortifications, overlays, nodes, provenance };
+  // THE NON-WATER LANDFORM (task #38 fenced follow-up): the generated site's
+  // renderable texture rides in the frame beside the water, so every renderer (draw
+  // list, pane, panorama, exports) inherits it with zero coupling. Present ONLY for
+  // marsh/dunes/mountain-flank; absent for water/plain ⇒ the frame is `{ water, roads }`
+  // byte-identical to the pre-landform model (the dormancy law + the v1 frame shape).
+  const frame = site.landform ? { water, roads, landform: site.landform } : { water, roads };
+  return { morphology, frame, skeleton, districts, buildings, fortifications, overlays, nodes, provenance };
 }
 
 /** Place the districts. Ranked inner→outer by category centrality (+ fabric prominence

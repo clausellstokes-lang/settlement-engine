@@ -133,6 +133,48 @@ function pushCompass(ops, style) {
   ops.push({ t: 'circle', cx, cy, r: 4, fill: gold, stroke: ink, strokeWidth: 0.75 });
 }
 
+/** Mark weight TIER (0 fine · 1 medium · 2 heavy) → concrete stroke width, from the
+ * style's base landform ink weight. Rounded for clean, cross-machine-stable bytes.
+ * @param {number} w @param {number} base @returns {number} */
+function landformWeight(w, base) {
+  const mult = w >= 2 ? 1.5 : w === 1 ? 1 : 0.6;
+  return Math.round(base * mult * 100) / 100;
+}
+
+/**
+ * THE NON-WATER LANDFORM (task #38 fenced follow-up) — turn a model landform's marks
+ * (marsh reeds+stipple · dune contour curves · mountain hachures) into primitive draw
+ * ops in the engraved register: all ink (style.palette.ink), distinguished by PATTERN
+ * (dots vs curves vs strokes), never colour — so every lens (incl. the colourblind-safe
+ * accessible lens) reads them. GEOMETRY IS UNTOUCHED per lens (identical marks → identical
+ * ops); only the ink weight/opacity differ (THE WALL: the style SELECTS, never draws).
+ * Stipple dots are opaque ink (tone comes from density, the engraver's idiom); strokes and
+ * contours take the style's landform opacity. Absent landform ⇒ [] ⇒ byte-identical output.
+ * @param {import('./siteGenesis.js').TownLandform | null | undefined} landform
+ * @param {string | object} [styleArg]
+ * @returns {DrawOp[]}
+ */
+export function landformDrawOps(landform, styleArg = DEFAULT_STYLE_ID) {
+  /** @type {DrawOp[]} */
+  const ops = [];
+  if (!landform || typeof landform !== 'object' || !Array.isArray(landform.marks)) return ops;
+  const style = resolveTownMapStyle(styleArg);
+  const ink = style.palette.ink;
+  const base = style.stroke.landform ?? 1.4;
+  const inkOpacity = style.opacity.landform ?? 0.5;
+  for (const m of landform.marks) {
+    if (!m || typeof m !== 'object') continue;
+    if (m.m === 'dot') {
+      ops.push({ t: 'circle', cx: m.x, cy: m.y, r: m.r, fill: ink });
+    } else if (m.m === 'stroke') {
+      ops.push({ t: 'line', x1: m.x1, y1: m.y1, x2: m.x2, y2: m.y2, stroke: ink, strokeWidth: landformWeight(m.w, base), strokeOpacity: inkOpacity });
+    } else if (m.m === 'curve' && Array.isArray(m.pts)) {
+      ops.push({ t: 'poly', pts: m.pts.map((p) => /** @type {[number,number]} */ ([p[0], p[1]])), closed: false, stroke: ink, strokeOpacity: inkOpacity, strokeWidth: landformWeight(m.w, base) });
+    }
+  }
+  return ops;
+}
+
 /** Scale bar — a five-segment alternating bar, lower-left. @param {DrawOp[]} ops @param {import('../../design/townMapStyles.js').TownMapStyle} style */
 function pushScaleBar(ops, style) {
   const ink = style.palette.ink;
@@ -190,6 +232,11 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
       ops.push({ t: 'poly', pts: frame.water.path.map((p) => [p[0], p[1]]), closed: false, stroke: P.water, strokeOpacity: O.riverStroke, strokeWidth: S.river });
     }
   }
+
+  // ── (1b) non-water landform texture (marsh / dunes / mountain-flank) — terrain
+  //    under the urban layer. Present only on v2 models with a landform site; absent
+  //    ⇒ no ops ⇒ byte-identical (the dormancy law). ─────────────────────────────
+  if (frame.landform) for (const o of landformDrawOps(frame.landform, style)) ops.push(o);
 
   // ── (2) approach roads ────────────────────────────────────────────────────────
   for (const r of (Array.isArray(frame.roads) ? frame.roads : [])) {

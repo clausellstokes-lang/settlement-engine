@@ -23,7 +23,7 @@
  */
 
 import { resolveTownMapStyle, styleDistrictColor, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
-import { drawListToSvg } from './townMapDraw.js';
+import { drawListToSvg, landformDrawOps } from './townMapDraw.js';
 
 const VIEW = 1000;
 
@@ -60,6 +60,37 @@ function buildingElevation(kind, tierIndex, category) {
 
 /** Wall silhouette height — readiness (wallWeight) makes a prouder rampart. @param {number} wallWeight */
 function wallElevation(wallWeight) { return 34 + (wallWeight || 0) * 6; }
+
+/** Pseudo-elevation lift for a landform kind — a mountain-flank stands proud as raised
+ * relief, dunes roll gently, a marsh lies flat on the wet ground. @param {string} kind */
+function landformLift(kind) {
+  return kind === 'mountain-flank' ? 34 : kind === 'dunes' ? 10 : 0;
+}
+
+/** Re-pose ONE flat landform op (circle / line / open-poly — the only kinds
+ * landformDrawOps emits) through the oblique projection at pseudo-elevation `lift`,
+ * carrying its ink/weight/opacity across so the panorama landform matches the flat
+ * one exactly, only re-posed. @param {DrawOp} op @param {number} lift @returns {DrawOp} */
+function projectLandformOp(op, lift) {
+  if (op.t === 'circle') {
+    const q = project(op.cx, op.cy, lift);
+    return { t: 'circle', cx: q.x, cy: q.y, r: op.r, fill: op.fill };
+  }
+  if (op.t === 'line') {
+    const a = project(op.x1, op.y1, lift);
+    const b = project(op.x2, op.y2, lift);
+    return { t: 'line', x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: op.stroke, strokeWidth: op.strokeWidth, strokeOpacity: op.strokeOpacity };
+  }
+  if (op.t === 'poly') {
+    // open poly (a contour curve)
+    const pts = op.pts.map((p) => {
+      const q = project(p[0], p[1], lift);
+      return /** @type {[number,number]} */ ([q.x, q.y]);
+    });
+    return { t: 'poly', pts, closed: false, stroke: op.stroke, strokeOpacity: op.strokeOpacity, strokeWidth: op.strokeWidth };
+  }
+  return op; // defensive — landformDrawOps emits only circle/line/poly
+}
 
 /**
  * Build the oblique panorama draw-op list for a model under a style. Same op
@@ -111,6 +142,14 @@ export function buildTownMapPanoramaDrawList(model, styleArg = DEFAULT_STYLE_ID)
     } else {
       ops.push({ t: 'poly', pts, closed: false, stroke: P.water, strokeOpacity: O.riverStroke, strokeWidth: S.river });
     }
+  }
+
+  // ── (1b) non-water landform — the SAME flat marks re-posed onto the oblique plane
+  //    at a per-kind pseudo-elevation (a mountain-flank stands proud as relief). Absent
+  //    ⇒ nothing added (the dormancy law). ──────────────────────────────────────────
+  if (frame.landform) {
+    const lift = landformLift(frame.landform.kind);
+    for (const o of landformDrawOps(frame.landform, style)) ops.push(projectLandformOp(o, lift));
   }
 
   // ── (2) roads + streets on the ground plane ───────────────────────────────────

@@ -219,7 +219,7 @@ const AGGREGATE_RE = /lodging|residential|tenement|housing|hostel|dormitor|board
  *   hasFabric?: boolean, lynchScore?: number, lynchParts?: Record<string, number>,
  *   retries?: number, deformedElementCount?: number, siteKind?: string,
  *   responseMode?: string, coreNucleated?: boolean }} meta
- * @property {{ water: TownMapWater|null, roads: TownMapRoad[] }} frame
+ * @property {{ water: TownMapWater|null, roads: TownMapRoad[], landform?: import('./siteGenesis.js').TownLandform }} frame
  * @property {{ anchor: { x: number, y: number, kind: string }, pattern: string,
  *   streets: Array<{ from: Point, to: Point }> }} skeleton
  * @property {TownMapDistrict[]} districts

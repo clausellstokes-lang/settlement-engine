@@ -229,3 +229,30 @@ export const V2_GOLDEN_CONFIGS = Object.freeze([
   ...GOLDEN_CONFIGS.map((c) => ({ spec: c.spec, mapEdits: { layoutLawVersion: 2 }, settlement: c.settlement })),
   ...V2_EXTRA_CONFIGS,
 ]);
+
+// ── NON-WATER LANDFORM corpus (task #38 fenced follow-up) ─────────────────────
+// One settlement per non-water landform kind, for the landform render pins. The
+// shared v2 corpus already exercises mountain-flank (hills/mountain terrain) and
+// dunes (desert terrain), but carries NO marsh — a marsh needs a wet biome or a
+// reed/peat economy, which the tier×terrain spread never produces — so this adds an
+// explicit reed-economy marsh alongside a mountain-flank + a dune-field.
+/** @param {{ kind:'marsh'|'dunes'|'mountain-flank', seed:string }} arg */
+function makeLandformFixture({ kind, seed }) {
+  if (kind === 'mountain-flank') return makeTownFixture({ tier: 'city', terrain: 'mountain', walls: true, water: false, seed });
+  if (kind === 'dunes') return makeTownFixture({ tier: 'city', terrain: 'desert', walls: true, water: false, seed });
+  // marsh — a riverside settlement whose reed/peat economy substantiates the wetland.
+  const s = makeTownFixture({ tier: 'city', terrain: 'riverside', walls: false, water: true, seed });
+  s.economicState = { ...s.economicState, exports: ['reed', 'peat'] };
+  return s;
+}
+
+/**
+ * The frozen non-water-landform corpus. Each is built with the v2 marker; each
+ * produces its named site kind (asserted in the render pins).
+ * @type {ReadonlyArray<{ kind: 'marsh'|'dunes'|'mountain-flank', settlement: object }>}
+ */
+export const LANDFORM_FIXTURES = Object.freeze([
+  { kind: 'mountain-flank', settlement: makeLandformFixture({ kind: 'mountain-flank', seed: 'lf-mountain' }) },
+  { kind: 'dunes', settlement: makeLandformFixture({ kind: 'dunes', seed: 'lf-dunes' }) },
+  { kind: 'marsh', settlement: makeLandformFixture({ kind: 'marsh', seed: 'lf-marsh' }) },
+]);
