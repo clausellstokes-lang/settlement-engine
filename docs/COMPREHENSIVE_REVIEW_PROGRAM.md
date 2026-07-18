@@ -1120,6 +1120,28 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ THE ORGANIC CRAFT LAW RATIFIED (2026-07-17, owner: "Do it! But before you do, look
+online at the best examples… identify first principles… then reconcile… and build
+everything appropriately" + the preview legibility mandate):** the UI redesigns under the
+product's own map laws — asymmetry with provenance (SEEDED ornament via the FNV idiom,
+never jitter) · period craft never age damage (engraved rules in 2-3 ink weights,
+rubrication over callout boxes, manuscript grouping — rules/marginalia/initials — over
+card grids, ink-tone elevation, NO drop shadows) · THE ARTIFACT/INSTRUMENT SPLIT (display
+surfaces organic; interaction targets geometric, quiet, accessible — the surveyor's field
+kit: hand-drawn world, machined instruments) · product-output-as-art · boxes rare and
+meaningful (seal/plate/charter only). MOTIVE on record: the owner rejects the
+platform/AI-made subconscious read; immersion maximized WITH digestibility. SEQUENCE (the
+owner's ordered method): research sweep #3 DISPATCHED (wf_cd021516: handcrafted-web
+first principles · print-craft chrome · diegetic game UI · legibility-on-craft w/ the
+audit checklist + critic) → the manager writes the corpus law + reconciliation brief →
+THE ORGANIC CRAFT WAVE builds AT THE DOC-WAVE FOLD (single-writer on tokens/primitives;
+task #32) → **THE PREVIEW LEGIBILITY REVIEW gates the fold** (owner-mandated: the manager
+drives the app in the browser preview — every surface readable against its background,
+navigable; the research's audit checklist is the instrument) → owner taste veto on a
+sample screen set before the app-wide sweep. The doc wave received the direction as a
+mid-flight addendum (rules-over-boxes · ink-tone elevation · the split · seeded ornament ·
+legibility floor) so the four pages are BORN under the law. Presentation only — zero
+logic, zero goldens.
 **⬛ ENGINE LIFT #2 SANCTIONED (2026-07-17, owner: "i also approve this" — the
 provenance causedBy threading; OVERRIDES freely-given ruling #8):** the owner personally
 sanctions the second engine-frozen lift. Lane claude/provenance-threading off a4343044,
