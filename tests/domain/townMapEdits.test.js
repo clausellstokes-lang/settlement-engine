@@ -20,8 +20,10 @@ import { describe, expect, it } from 'vitest';
 import {
   MAP_EDITS_SCHEMA_KEYS, readMapEdits, readLegendPrefs, readLayoutVariant, readStyleLens,
   normalizeMapEdits, withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
-  readAnnotations, withAnnotation, withoutAnnotationAt,
+  readAnnotations, withAnnotation, withoutAnnotationAt, readBespokeStyles, withBespokeStyles,
 } from '../../src/domain/townMap/mapEdits.js';
+import { addBespokeStyle, removeBespokeStyle, resolveActiveStyle } from '../../src/domain/townMap/bespokeStyles.js';
+import { validateBespokeStyle } from '../../src/design/townMapStyleWall.js';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import { PRIVATE_KEY_RE } from '../../src/domain/display/publicSafe.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
@@ -39,9 +41,11 @@ describe('mapEdits — the key-naming trap (load-bearing)', () => {
   it('the schema is exactly the container keys + pin/legend/annotation sub-keys', () => {
     // A guard against a future key sneaking in without the denylist re-check above.
     // SM-5 honestly EXTENDS this pin with the annotation keys (annotations/x/y/label/
-    // audience) — every one re-checked ∉ PRIVATE_KEY_RE by the test above.
+    // audience); S4-S6 honestly EXTENDS it with `bespokeStyles` (the CONTAINER key only —
+    // its value is an opaque wall-validated collection, so its dynamic ids + role fields are
+    // not a fixed vocabulary and cannot join the list). Every listed key ∉ PRIVATE_KEY_RE above.
     expect([...MAP_EDITS_SCHEMA_KEYS].sort()).toEqual(
-      ['anchor', 'annotations', 'audience', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
+      ['anchor', 'annotations', 'audience', 'bespokeStyles', 'dx', 'dy', 'label', 'layoutLawVersion', 'layoutVariant', 'legendPrefs', 'pins', 'showLabels', 'showLegend', 'styleLens', 'x', 'y'],
     );
   });
 });
@@ -203,6 +207,56 @@ describe('mapEdits — DM annotations (SM-5; cosmetic, denylist-safe, dormancy-l
     expect(e.layoutVariant).toBe(2);
     expect(e.styleLens).toBe('vtt');
     expect(e.annotations).toHaveLength(1);
+  });
+});
+
+describe('mapEdits — bespokeStyles (S4-S6; per-settlement, blob-resident, dormancy-lawful)', () => {
+  const styleA = validateBespokeStyle({ label: 'Ink', background: '#101418' }, { id: 'ink', label: 'Ink' }).style;
+  const styleB = validateBespokeStyle({ label: 'Rose', background: '#f0d0d8' }, { id: 'rose', label: 'Rose' }).style;
+
+  it('the wall gives __resolved styles the collection algebra requires', () => {
+    expect(styleA.__resolved).toBe(true);
+    expect(styleB.__resolved).toBe(true);
+  });
+
+  it('ROUND-TRIP: withBespokeStyles stores the collection; readBespokeStyles reads it back', () => {
+    const coll = addBespokeStyle(addBespokeStyle({}, 'ink', styleA), 'rose', styleB);
+    const e = withBespokeStyles(null, coll);
+    expect(Object.keys(readBespokeStyles(e)).sort()).toEqual(['ink', 'rose']);
+    // survives a JSON round-trip (the applyMapEdit cloneJson persist) with __resolved intact.
+    const round = JSON.parse(JSON.stringify(e));
+    expect(readBespokeStyles(round).ink.__resolved).toBe(true);
+    // resolveActiveStyle picks the saved definition for a bespoke id, base lens otherwise.
+    expect(resolveActiveStyle('ink', readBespokeStyles(round)).background).toBe('#101418');
+    expect(resolveActiveStyle('parchment', readBespokeStyles(round)).__resolved).toBe(true); // base lens still resolves
+  });
+
+  it('DORMANCY: an empty / all-invalid collection DROPS the key (byte-identical to no-edit)', () => {
+    expect(withBespokeStyles(null, {})).toBeNull();
+    expect(withBespokeStyles(null, null)).toBeNull();
+    expect(normalizeMapEdits({ bespokeStyles: {} })).toBeNull();
+    expect(normalizeMapEdits({ bespokeStyles: { ink: { background: '#fff' } } })).toBeNull(); // not __resolved ⇒ dropped ⇒ empty ⇒ null
+    expect(readBespokeStyles(null)).toEqual({});
+    expect(readBespokeStyles({ bespokeStyles: [] })).toEqual({}); // arrays are not a collection
+  });
+
+  it('DELETED-BESPOKE-NEVER-STRANDS: removing the last style returns the blob byte-identical', () => {
+    const one = withBespokeStyles(null, addBespokeStyle({}, 'ink', styleA));
+    const emptied = withBespokeStyles(one, removeBespokeStyle(readBespokeStyles(one), 'ink'));
+    expect(emptied).toBeNull(); // dormancy: no styles ⇒ no container
+  });
+
+  it('CROSS-EDIT COEXISTENCE: bespokeStyles ride alongside pins/lens without disturbing them', () => {
+    const base = withStyleLens(withPinNudge(null, 'cat:tavern', 10, -5), 'vtt');
+    const e = withBespokeStyles(base, addBespokeStyle({}, 'ink', styleA));
+    expect(e.pins).toEqual([{ anchor: 'cat:tavern', dx: 10, dy: -5 }]); // pin survives
+    expect(e.styleLens).toBe('vtt');                                    // lens survives
+    expect(Object.keys(readBespokeStyles(e))).toEqual(['ink']);        // style stored
+    // and removing the style leaves the OTHER edits intact (only the bespoke key drops).
+    const without = withBespokeStyles(e, {});
+    expect(without.pins).toEqual([{ anchor: 'cat:tavern', dx: 10, dy: -5 }]);
+    expect(without.styleLens).toBe('vtt');
+    expect(without.bespokeStyles).toBeUndefined();
   });
 });
 

@@ -7,13 +7,16 @@
  * NAMED additive save into the bespokeStyles collection, or declined (nothing persists). The
  * rejected fields are listed honestly; base lenses are permanent and always one tap back.
  *
- * PERSISTENCE SEAM (owner-gated): the bespokeStyles STORAGE surface is an owner-gated schema —
- * no store verb exists yet (flagged in the S4-S6 fold). Accept therefore builds the additive
- * collection (the pure addBespokeStyle op) and holds it for the session; the durable write-back
- * is surfaced honestly as pending, never faked. Transport + renderer are dynamic-imported.
+ * PERSISTENCE (RULED — mapEdits.bespokeStyles, blob-resident + per-settlement): Accept builds
+ * the additive collection (the pure addBespokeStyle op) and PERSISTS it onto the active saved
+ * settlement's mapEdits via the existing applyMapEdit store verb (the same dumb, dormancy-lawful
+ * setter every cosmetic map edit rides — in-memory + durable, drop-when-empty). A settlement not
+ * yet saved has nowhere to persist, so accept honestly asks the user to save it first. Transport
+ * + renderer are dynamic-imported; the map-edit domain ops ride the same lazy chunk.
  */
 
 import { useState, useCallback, useEffect } from 'react';
+import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import { slugify } from '../../kernel/slugify.js';
 import { MUTED, BORDER, CARD_ALT, GREEN, sans, SP, R, FS } from '../theme.js';
@@ -32,8 +35,14 @@ const LENS_LABEL = { parchment: 'Parchment', watercolor: 'Watercolor', darkFanta
 const styleSlug = (s) => slugify(s, { max: 40, fallback: 'bespoke-style' });
 
 export default function StyleOverhaulPanel() {
-  const { creditBalance, ctx, settlement, savedSettlements } = useSurveyorContext();
+  const { creditBalance, ctx, settlement, savedSettlements, activeSaveId } = useSurveyorContext();
+  const applyMapEdit = useStore((s) => s.applyMapEdit);
   const previewSettlement = settlement || savedSettlements[0] || null;
+
+  // The DURABLE persist target: the active saved settlement (its blob carries mapEdits).
+  // null ⇒ an unsaved draft with nowhere to persist (accept asks to save it first).
+  const persistId = (activeSaveId != null && savedSettlements.some((s) => String(s?.id) === String(activeSaveId)))
+    ? String(activeSaveId) : null;
 
   const [prompt, setPrompt] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,8 +50,7 @@ export default function StyleOverhaulPanel() {
   const [lens, setLens] = useState(CANDIDATE_LENS);
   const [previewSvg, setPreviewSvg] = useState('');
   const [styleName, setStyleName] = useState('');
-  const [collection, setCollection] = useState({}); // session-held additive collection (owner-gated persistence)
-  const [saved, setSaved] = useState(null); // { id, label } | null
+  const [saved, setSaved] = useState(null); // { id, label, persisted } | null
   const [lensIds, setLensIds] = useState(DEFAULT_LENS_IDS);
 
   // Fetch the canonical base-lens list lazily (avoids a hardcode drifting from the source).
@@ -97,12 +105,21 @@ export default function StyleOverhaulPanel() {
   const accept = useCallback(async () => {
     const style = result?.style;
     if (!style) return;
-    const { addBespokeStyle } = await import('../../domain/townMap/bespokeStyles.js');
     const id = styleSlug(styleName);
-    const next = addBespokeStyle(collection, id, style);
-    setCollection(next);
-    setSaved({ id, label: styleName || id });
-  }, [result, styleName, collection]);
+    // No saved target ⇒ nowhere to persist (unsaved draft): surface honestly, persist nothing.
+    if (!persistId || typeof applyMapEdit !== 'function') { setSaved({ id, label: styleName || id, persisted: false }); return; }
+    const { addBespokeStyle } = await import('../../domain/townMap/bespokeStyles.js');
+    const { readMapEdits, readBespokeStyles, withBespokeStyles } = await import('../../domain/townMap/mapEdits.js');
+    // Read the target's CURRENT blob FRESH from the store (no stale closure), so repeated
+    // accepts accumulate additively over what is already durably saved.
+    const target = useStore.getState().savedSettlements.find((s) => String(s?.id) === persistId);
+    const targetEdits = readMapEdits(target?.settlement);
+    const nextCollection = addBespokeStyle(readBespokeStyles(targetEdits), id, style);
+    // withBespokeStyles preserves every OTHER edit (pins/lens/legend/annotations) and drops the
+    // key when the collection is empty (dormancy). applyMapEdit takes the pre-normalized container.
+    applyMapEdit(persistId, withBespokeStyles(targetEdits, nextCollection));
+    setSaved({ id, label: styleName || id, persisted: true });
+  }, [result, styleName, persistId, applyMapEdit]);
 
   const decline = useCallback(() => { setResult(null); setPreviewSvg(''); setSaved(null); }, []);
 
@@ -174,8 +191,17 @@ export default function StyleOverhaulPanel() {
 
           {saved && (
             <div data-testid="style-saved" style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, lineHeight: 1.5 }}>
-              <span style={{ color: GREEN }}>◆</span> Saved this session as “{saved.label}”. The base lenses stay permanent;
-              you can flip back anytime. Durable save across sessions is pending the owner’s storage-surface ruling.
+              {saved.persisted ? (
+                <>
+                  <span style={{ color: GREEN }}>◆</span> Saved “{saved.label}” to this settlement’s map — it stays across
+                  sessions. The base lenses stay permanent; you can flip back anytime.
+                </>
+              ) : (
+                <>
+                  <span style={{ color: GREEN }}>◆</span> Composed “{saved.label}”. Save this settlement to your library to
+                  keep the style across sessions. The base lenses stay permanent; you can flip back anytime.
+                </>
+              )}
             </div>
           )}
         </div>
