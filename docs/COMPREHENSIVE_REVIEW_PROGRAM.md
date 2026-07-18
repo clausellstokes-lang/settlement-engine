@@ -1120,6 +1120,17 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE SEAL APPROVED — IMPLEMENT + PLACE (owner, 2026-07-18: "i like the seal;logo
+impliment it also place it appropriately"):** the simplified device is the APPROVED house
+mark (favicon A stands). Placement register relayed to the running lane — core (already
+dispatched): tab favicon set · header wordmark lockup on every page · About seal moment
+w/ motto caption · export colophon w/ settlement-medallion counterseal. ADDENDUM
+placements (manager judgment under "appropriately", vetoable): site-footer colophon
+(small device, the printer's-mark position) · the loading emblem (the device as the
+diegetic app-loading mark) · error/404 clerk's-slip stamp (small device on the slip —
+the fiction holds even when lost) · OG/social share image (device on parchment for link
+unfurls; static asset, zero eager). Rule held everywhere: the mark never carries text;
+the name is always adjacent type.
 **⬛ TASTE VETO PASSED + PHASES 3-5 DISPATCHED (2026-07-18, owner: "run: 1. Craft
 phases 3-5... 2. The craft fold... 3. THE COMPOSITE"):** the five-sample direction is
 APPROVED by the owner's build order; the STOP releases. Dispatched to the standing craft
