@@ -70,13 +70,15 @@ export function compileGlyph({ glyph, cx, cy, mirror = false, footprint = GLYPH_
 
   for (const st of glyph.strokes) {
     if (!st) continue;
-    if (st.r === 'circle' && Array.isArray(st.c)) {
-      ops.push({
-        t: 'circle',
-        cx: Math.round(vx(st.c[0])), cy: Math.round(vy(st.c[1])),
-        r: Math.max(1, Math.round((st.rad || 0.1) * W)),
-        stroke: ink, strokeWidth: bw,
-      });
+    if (st.r === 'circle') {
+      if (Array.isArray(st.c)) {
+        ops.push({
+          t: 'circle',
+          cx: Math.round(vx(st.c[0])), cy: Math.round(vy(st.c[1])),
+          r: Math.max(1, Math.round((st.rad || 0.1) * W)),
+          stroke: ink, strokeWidth: bw,
+        });
+      }
       continue;
     }
     if (!Array.isArray(st.p) || st.p.length === 0) continue;

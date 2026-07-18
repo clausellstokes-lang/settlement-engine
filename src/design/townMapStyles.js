@@ -61,6 +61,23 @@ export const TOWN_MAP_STYLE_IDS = Object.freeze(['parchment', 'watercolor', 'dar
 export const DEFAULT_STYLE_ID = 'parchment';
 
 /**
+ * THE ILLUSTRATED lens id (THE ILLUSTRATED TOWN, IT-1). Deliberately NOT a member of
+ * TOWN_MAP_STYLE_IDS: that set is the pure-RE-SKIN family — every member shares ONE
+ * identical geometry (the geometry-untouched invariant), is pinned by the style golden,
+ * and drives the entitlement ladder's "all N lenses" count (LENS_COUNT, a paid surface).
+ * The illustrated lens RE-SHAPES geometry (buildings become oblique-elevation GLYPHS, not
+ * rects), so it categorically is not a re-skin; it is a distinct sixth lens, registered
+ * here + in OVERRIDES (so resolve/coerce/persist all work) and offered to the lens picker
+ * via TOWN_MAP_LENS_IDS. Adding it to TOWN_MAP_STYLE_IDS instead would shift the style
+ * golden, trip the geometry-untouched sweeps, and silently bump the paid LENS_COUNT.
+ */
+export const ILLUSTRATED_STYLE_ID = 'illustrated';
+
+/** Every PICKABLE base lens id — the five re-skins plus the illustrated glyph lens. The
+ *  lens picker lists THESE; TOWN_MAP_STYLE_IDS stays the golden/entitlement-pinned five. */
+export const TOWN_MAP_LENS_IDS = Object.freeze([...TOWN_MAP_STYLE_IDS, ILLUSTRATED_STYLE_ID]);
+
+/**
  * A fully-resolved style definition — parchment defaults filled in for every field.
  * @typedef {Object} TownMapStyle
  * @property {string} id
@@ -76,6 +93,7 @@ export const DEFAULT_STYLE_ID = 'parchment';
  * @property {Record<string, string>} district
  * @property {Record<string, number>} stroke
  * @property {Record<string, number>} opacity
+ * @property {string} [glyphSet]  a registered glyph-set id (the illustrated lens); absent ⇒ legacy rects
  * @property {boolean} [__resolved]
  */
 
@@ -287,8 +305,27 @@ const ACCESSIBLE = {
   },
 };
 
+/**
+ * ILLUSTRATED — THE CARTOGRAPHER'S ART LAYER (THE ILLUSTRATED TOWN, IT-1). A sparse
+ * override over parchment that turns ON the glyph layer: buildings render as oblique-
+ * elevation glyphs from the named glyph set (`glyphSet`, THE WALL selects a REGISTERED
+ * set id — never raw geometry). Everything else inherits parchment (its palette, district
+ * tints, and the aged-paper cartouche + compass frame), so the base map still reads as a
+ * hand-drawn chart. `opacity.shadow` sets the one-fixed-NW-light hatch weight; `opacity
+ * .roofFill` the faint roof tint wash; a finer building stroke suits the glyph linework.
+ * The five re-skin lenses never name `glyphSet`, so their output is byte-identical (their
+ * building branch stays the legacy rect — the parchment===legacy pin holds).
+ */
+const ILLUSTRATED = {
+  id: 'illustrated',
+  label: 'Illustrated',
+  glyphSet: 'medieval',
+  stroke: { building: 1.1 },
+  opacity: { shadow: 0.18, roofFill: 0.16 },
+};
+
 /** The raw lens overrides, merged over PARCHMENT by the resolver. */
-const OVERRIDES = { parchment: {}, watercolor: WATERCOLOR, darkFantasy: DARK_FANTASY, vtt: VTT, accessible: ACCESSIBLE };
+const OVERRIDES = { parchment: {}, watercolor: WATERCOLOR, darkFantasy: DARK_FANTASY, vtt: VTT, accessible: ACCESSIBLE, illustrated: ILLUSTRATED };
 
 /** Shallow-merge one sub-object of a lens over the parchment default. */
 function mergeSub(base, over) {
@@ -333,6 +370,9 @@ export function resolveTownMapStyle(styleOrId) {
     district: mergeSub(PARCHMENT.district, over.district),
     stroke: mergeSub(PARCHMENT.stroke, over.stroke),
     opacity: mergeSub(PARCHMENT.opacity, over.opacity),
+    // The glyph-set selector — present ONLY on the illustrated lens; absent (undefined)
+    // on every re-skin lens ⇒ the draw layer keeps the legacy building rects (byte-identical).
+    glyphSet: over.glyphSet,
   }));
   RESOLVED.set(key, resolved);
   return resolved;
@@ -378,5 +418,8 @@ export function viewerPalette(styleOrId) {
     district: (category) => s.district[typeof category === 'string' ? category : 'other'] || s.district.other,
     contrast: s.contrast,
     grid: s.functional.grid ? s.functional.gridStep : 0,
+    // The glyph set (illustrated lens) — lets the pane switch to the static op-list
+    // underlay for glyph buildings; null for every re-skin lens.
+    glyphSet: s.glyphSet || null,
   };
 }

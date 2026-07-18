@@ -45,6 +45,11 @@
 // in the sanctioned token zone (raw-color budget), not inline in this domain file.
 import { EXPORT_PALETTE } from '../../design/townMapExportPalette.js';
 import { resolveTownMapStyle, styleDistrictColor, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
+// THE GLYPH LAYER (THE ILLUSTRATED TOWN, IT-1) — the medieval glyph library + compiler
+// (design/townGlyphs) and the institution→glyphKind mapping (glyphAssign). Reached ONLY
+// via this already-lazy draw surface, so first paint is unmoved (the townMapLazy pin).
+import { getGlyphSet, compileGlyph, FALLBACK_GLYPH_KIND } from '../../design/townGlyphs/index.js';
+import { glyphKindFor } from './glyphAssign.js';
 
 export { EXPORT_PALETTE };
 
@@ -274,13 +279,29 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
     }
   }
 
-  // ── (6) building landmarks (fill buildings are the accent above) ──────────────
+  // ── (6) buildings — legacy landmark rects, OR (illustrated lens) oblique glyphs ─
+  // A lens carrying a `glyphSet` (only the illustrated lens does) switches this z-slot
+  // to the GLYPH LAYER: each landmark gets a full oblique-elevation glyph and each fill-
+  // mass building a simplified massing row (the LOD rule). Glyphs COMPILE DOWN to the
+  // primitive op vocabulary, so the SVG/PDF/thumbnail/raster surfaces render them free.
+  // Absent glyphSet ⇒ the legacy rect branch below, byte-identical (parchment===legacy).
   const districtCategoryById = new Map(districts.map((d) => [d.id, d.category]));
-  for (const b of buildings) {
-    if (b.kind !== 'landmark') continue;
-    const color = styleDistrictColor(districtCategoryById.get(b.districtId), style);
-    const s = 8;
-    ops.push({ t: 'rect', x: b.position.x - s, y: b.position.y - s, w: s * 2, h: s * 2, rx: 3, fill: P.buildingFill, stroke: color, strokeWidth: S.building });
+  const glyphLib = style.glyphSet ? getGlyphSet(style.glyphSet) : null;
+  if (glyphLib) {
+    for (const b of buildings) {
+      const cat = districtCategoryById.get(b.districtId);
+      const tint = styleDistrictColor(cat, style);
+      const { kind, mirror } = glyphKindFor(b, cat);
+      const glyph = glyphLib[kind] || glyphLib[FALLBACK_GLYPH_KIND];
+      for (const op of compileGlyph({ glyph, cx: b.position.x, cy: b.position.y, mirror, style, tint })) ops.push(op);
+    }
+  } else {
+    for (const b of buildings) {
+      if (b.kind !== 'landmark') continue;
+      const color = styleDistrictColor(districtCategoryById.get(b.districtId), style);
+      const s = 8;
+      ops.push({ t: 'rect', x: b.position.x - s, y: b.position.y - s, w: s * 2, h: s * 2, rx: 3, fill: P.buildingFill, stroke: color, strokeWidth: S.building });
+    }
   }
 
   // ── (7) condition badges (district-level, the living layer) ───────────────────

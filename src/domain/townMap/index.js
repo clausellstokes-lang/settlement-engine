@@ -104,6 +104,8 @@ export {
 // consumed only by the town-map surfaces + tests), so first paint is unmoved.
 export {
   TOWN_MAP_STYLE_IDS,
+  TOWN_MAP_LENS_IDS,
+  ILLUSTRATED_STYLE_ID,
   DEFAULT_STYLE_ID,
   FURNITURE_KINDS,
   HAZARD_GLYPHS,
