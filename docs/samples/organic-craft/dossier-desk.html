@@ -341,12 +341,39 @@
   animation: oc-ruledraw var(--oc-motion-strike) var(--oc-ease-ink) both;
 }
 
+/* ── THE ARRIVAL — hero H1 (docs/DESIGN_DEEP_CRAFT_PAGES.md, phase 0d spec) ────
+   Forge → dossier delivered as a document laid down. The orchestration class
+   goes on the dossier's mount wrapper: the wrapper LAYS DOWN, then each
+   top-level block of the document UNFOLDS on a token-derived stagger (half the
+   ink beat per rank — no literal durations, ever). Content is fully in the DOM
+   at t=0; blocks beyond rank 12 arrive together in the final rank, so the last
+   block begins ≤ (ink/2)×13 = 1,170ms and settles ≤ 1,590ms — under the 2s law
+   at any block count. Reduced-motion: the document is simply present (below). */
+.oc-arrival { animation: oc-laydown var(--oc-motion-lay) var(--oc-ease-settle) both; }
+.oc-arrival > div > * {
+  animation: oc-unfold var(--oc-motion-settle) var(--oc-ease-settle) both;
+  animation-delay: calc(var(--oc-motion-ink) * var(--oc-arrival-i, 13) / 2);
+}
+.oc-arrival > div > *:nth-child(1)  { --oc-arrival-i: 2; }
+.oc-arrival > div > *:nth-child(2)  { --oc-arrival-i: 3; }
+.oc-arrival > div > *:nth-child(3)  { --oc-arrival-i: 4; }
+.oc-arrival > div > *:nth-child(4)  { --oc-arrival-i: 5; }
+.oc-arrival > div > *:nth-child(5)  { --oc-arrival-i: 6; }
+.oc-arrival > div > *:nth-child(6)  { --oc-arrival-i: 7; }
+.oc-arrival > div > *:nth-child(7)  { --oc-arrival-i: 8; }
+.oc-arrival > div > *:nth-child(8)  { --oc-arrival-i: 9; }
+.oc-arrival > div > *:nth-child(9)  { --oc-arrival-i: 10; }
+.oc-arrival > div > *:nth-child(10) { --oc-arrival-i: 11; }
+.oc-arrival > div > *:nth-child(11) { --oc-arrival-i: 12; }
+
 /* Reduced motion: every behavior collapses to its instant end state; the
    organic layer honours the intent globally, not only inside .oc-surface. */
 @media (prefers-reduced-motion: reduce) {
   .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-  [class*='oc-m-'], [class*='oc-m-']::after, [class*='oc-m-']::before {
+  [class*='oc-m-'], [class*='oc-m-']::after, [class*='oc-m-']::before,
+  .oc-arrival, .oc-arrival > div > * {
     animation-duration: 0.001ms !important;
+    animation-delay: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
 }

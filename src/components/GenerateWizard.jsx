@@ -704,8 +704,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           <Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>Loading settlement view...</div>}>
             {/* P139 — cap the dossier body to the shared page width so it
                 doesn't sprawl edge-to-edge on wide screens; the sticky nav
-                toolbar above stays full-width. */}
-            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
+                toolbar above stays full-width.
+                THE ARRIVAL (Deep Craft H1): the oc-arrival orchestration lays
+                the dossier down as a composed document (organic.css; presentation
+                only — content is fully in the DOM at t=0, instant under
+                reduced-motion, and it replays on any dossier re-mount, e.g.
+                returning via View Settlement — the document is re-delivered). */}
+            <div className="oc-arrival" style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               <OutputContainer hideHeader />
             </div>
           </Suspense>
