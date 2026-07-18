@@ -166,3 +166,33 @@ strength for years. A second exposure refreshes and extends the mark. The mark l
 the ladder sidecar (single-writer), joins the challenge receipt by name, and deposits
 toward cynical through the existing map. Pin: the exposed-climber-halved fixture +
 lifespan-scaled decay + refresh-on-reexposure.
+
+## 11. THE LONG GAME (owner refinement, 2026-07-17: time, cumulation, the three-body ladder)
+**THE STANDING STOCK**: per-NPC standing is an INTEGRATOR (the fabric prominence idiom —
+deposits/withdrawals/slow decay toward baseline, interval-invariant): stakes-weighted
+achievements deposit; failures withdraw magnitude-mirrored; old glory decays. Challenges
+draw on the STOCK, never a recent window — surplus is years of harvest.
+**PACING (promotions are rare — four stacked brakes)**: (1) sustained-margin threshold
+(challenger stock vs defender stock+seat must exceed a real margin, LEAD_FLOOR/
+TURN_MARGIN idiom, held not spiked); (2) windows remain gates; (3) per-faction
+YEARS-SCALE cooldown after any succession (the transition-instability period = the
+interregnum); (4) the E0 governor caps ladder events realm-wide (the cacophony guard).
+Target cadence: a succession per faction every few sim-years — a DIAL, soak-certified.
+**GOAL HORIZONS**: duration mints WITH stakes (small = weeks; great works = years);
+partial progress deposits proportionally at evaluation points (long works pay as they
+visibly advance; reversal withdraws). SITUATION SHIFTS remint honestly: premise-died-by-
+outside-forces ⇒ LAPSED (no reward, no penalty — the honest null, receipted: "with the
+war's end, her purpose shifted"); only own-domain collapse withdraws as failure; rung/
+faction/state-band changes remint (already §3.2).
+**THE THREE-BODY LADDER**: every holder is simultaneously defender-below and
+challenger-above on ONE stock; **mounting a challenge weakens your own defense for its
+duration** — the ambitious middle straining at the top is exposed to the patient bottom
+(timing becomes strategy with zero strategy code; the bottom's best moment is the
+middle's boldest). A successful displacement opens an IMMEDIATE succession contest for
+the vacated seat (chain reactions), capped at ONE chain per faction per window; the
+cooldown then seals the court. Conservation holds: adjacent rungs only — the peon still
+climbs twice, but the second climb may come cheap into a seat left warm by another's
+ambition. Pins: stock integrator determinism + decay · sustained-margin (spike never
+fires) · attempt-weakens-defense (the three-body fixture: bottom takes middle WHILE
+middle assaults top) · lapsed-vs-failed resolution · partial-progress deposits · the
+chain cap · cadence bounds under the E0 governor.
