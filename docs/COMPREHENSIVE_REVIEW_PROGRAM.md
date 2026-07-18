@@ -1120,6 +1120,25 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ RESEARCH SWEEP #3 BANKED (wf_cd021516, 5/5 agents, 0 errors — the organic craft
+corpus):** headline first principles for the law: **AUTHORSHIP VISIBLE** (the handmade
+read = evidence a person decided — signed/dated elements, one voice, structures only
+this product could have; the CMS-slot smell is the tell) · **CONTENT-FIRST ASSEMBLAGE**
+(Chimero's grain: layout emerges from what it holds; no scroll-jacking slickness) ·
+**BREAK THE CONTAINER HABIT** (Müller: containers-in-containers IS the sameness; compose
+spreads, not stacks — the hero/three-cards/feature-rows skeleton is the template tell
+whatever skin it wears) · **BESPOKE FORM PER SURFACE** (The Pudding: dossier ≠ gallery ≠
+settings in composition; one type/color system, different forms) · **CRAFT LIVES IN
+TYPOGRAPHIC MICRO-DECISIONS** (Tufte/Butterick: measure, sidenotes, true small caps,
+body-colored underlined links) · **DENSITY WITH THE ICEBERG** (Gwern: dropcaps, collapse,
+near-monochrome discipline + the design-graveyard removal discipline) · **DRAWN-FOR-
+PURPOSE MARKS** (Appleton: icon-library glyphs at display level = a named AI-slop tell) ·
+**ONE FICTION, TOTAL COMMITMENT** (Poolsuite: the surveyor's working desk lives in every
+empty state and error message; thin theming over standard components reads as a skin) ·
+**WHIMSY UNREPEATED** (a quirk repeated becomes a system). Full results + journal paths
+in DOSSIER v2's recovery block (wf_cd021516-430). Sweep #4 (mobile) still running; the
+corpus law + reconciliation brief write when both are banked; the wave builds at the
+doc-wave fold.
 **⬛ THE MOBILE COMPANION MANDATE + REALM DESKTOP-ONLY (owner, 2026-07-17: "make sure
 there is a 10,000 mobile companion piece as well… make sure realm is desktop only"):**
 the mobile experience carries the SAME $10k bar — a crafted FIELD COMPANION, never a
