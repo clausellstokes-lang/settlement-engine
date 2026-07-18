@@ -84,7 +84,7 @@ describe('applyFogEdit — the persist triple', () => {
   beforeEach(() => { store = makeStore(); withActiveSave(store); });
 
   test('live + entry + editedAt + cloud + reload all carry the reveal', async () => {
-    store.getState().applyFogEdit(SAVE_ID, FOG);
+    await store.getState().applyFogEdit(SAVE_ID, FOG);
     expect(store.getState().settlement.fogSessions).toEqual(FOG);        // live
     expect(persistedEntry(store).settlement.fogSessions).toEqual(FOG);   // entry synced
     expect(store.getState().editedAt).not.toBeNull();                    // editedAt stamped
@@ -92,9 +92,9 @@ describe('applyFogEdit — the persist triple', () => {
     expect(reloadInto(persistedEntry(store)).fogSessions).toEqual(FOG);  // survives reload
   });
 
-  test('editing does not disturb the settlement content beyond the container', () => {
+  test('editing does not disturb the settlement content beyond the container', async () => {
     const before = structuredClone(store.getState().settlement);
-    store.getState().applyFogEdit(SAVE_ID, FOG);
+    await store.getState().applyFogEdit(SAVE_ID, FOG);
     const { fogSessions: _f, ...restAfter } = store.getState().settlement;
     expect(restAfter).toEqual(before); // only fogSessions was added
   });
@@ -106,10 +106,10 @@ describe('applyFogEdit — clear restores byte-identity (dormancy law)', () => {
     withActiveSave(store);
     const cleanReload = stableJson(reloadInto(persistedEntry(store)));
 
-    store.getState().applyFogEdit(SAVE_ID, FOG);
+    await store.getState().applyFogEdit(SAVE_ID, FOG);
     expect('fogSessions' in store.getState().settlement).toBe(true);
 
-    store.getState().applyFogEdit(SAVE_ID, null); // hide/clear everything
+    await store.getState().applyFogEdit(SAVE_ID, null); // hide/clear everything
     expect('fogSessions' in store.getState().settlement).toBe(false);        // dropped, not hollow {}
     expect('fogSessions' in persistedEntry(store).settlement).toBe(false);
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
@@ -126,7 +126,7 @@ describe('applyFogEdit — cosmetic-always + guards', () => {
     store.getState().canonize();
     expect(store.getState().phase).toBe('canon');
 
-    store.getState().applyFogEdit(SAVE_ID, FOG);
+    await store.getState().applyFogEdit(SAVE_ID, FOG);
     expect(store.getState().settlement.fogSessions).toEqual(FOG); // wrote despite canon lock
     await vi.waitFor(() => expect(saves.update).toHaveBeenCalled());
   });
@@ -134,7 +134,7 @@ describe('applyFogEdit — cosmetic-always + guards', () => {
   test('unknown id: no mutation, no cloud write', async () => {
     const store = makeStore();
     withActiveSave(store);
-    store.getState().applyFogEdit('no-such-save', FOG);
+    await store.getState().applyFogEdit('no-such-save', FOG);
     expect('fogSessions' in store.getState().settlement).toBe(false);
     await new Promise(r => setTimeout(r, 0));
     expect(saves.update).not.toHaveBeenCalled();

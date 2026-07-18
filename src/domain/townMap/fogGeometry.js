@@ -231,7 +231,10 @@ export function revealShapes(model, reveal) {
   return shapes;
 }
 
-/** Whether a session reveals nothing that resolves in this model (⇒ full-cover fog). Pure. */
+/** Whether a session reveals nothing that resolves in this model (⇒ full-cover fog). Pure.
+ *  @param {TownMapModel | null | undefined} model
+ *  @param {{ districts?: string[], streets?: string[], buildings?: string[] } | null | undefined} reveal
+ *  @returns {boolean} */
 export function isFullyFogged(model, reveal) {
   return revealShapes(model, reveal).length === 0;
 }

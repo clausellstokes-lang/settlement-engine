@@ -63,6 +63,24 @@ describe('the FOGGED handout overlays the mask through the existing matrix', () 
     // both carry the fog; the DM export carries the extra DM-only marker ⇒ longer
     expect(handout).toContain('data-town-fog');
     expect(dmFogged.length).toBeGreaterThan(handout.length);
+    // STRUCTURAL two-audience pin: the DM-only marker's pin glyph (a circle at its exact
+    // coordinates) is ABSENT from the player handout and PRESENT in the DM export; the
+    // player-visible marker renders in BOTH. (annotationDrawOps emits r=7 pin circles.)
+    expect(dmFogged).toContain('cx="300" cy="300" r="7"');       // DM-only pin — DM sees it
+    expect(handout).not.toContain('cx="300" cy="300"');           // …the players never do
+    expect(handout).toContain('cx="600" cy="600" r="7"');         // player pin — shown to both
+    expect(dmFogged).toContain('cx="600" cy="600" r="7"');
+  });
+
+  it('the PLAYER VIEW projection (the FogPlayerView contract: audience player + opaque mask) masks both', () => {
+    // FogPlayerView renders EXACTLY this projection (style, audience:'player', fogOpacity:1),
+    // so this pins the live shared-screen view ≡ the fogged handout structure (WYSIWYG).
+    const withPins = { ...baseV2, mapEdits: { layoutLawVersion: 2, annotations: ANNOTATIONS } };
+    const view = townMapExportSvg(withPins, { style: 'parchment', resolution: 1000, audience: 'player', fogReveal: reveal, fogOpacity: 1 });
+    expect(view).toContain('data-town-fog');                      // unrevealed areas masked
+    expect(view).toContain('fill-opacity="1" mask="url(#sf-fog)"'); // fully opaque for players
+    expect(view).not.toContain('cx="300" cy="300"');              // DM-only pin masked out
+    expect(view).toContain('cx="600" cy="600" r="7"');            // player pin visible
   });
 
   it('the fog color tracks the active lens (parchment vs accessible differ)', () => {

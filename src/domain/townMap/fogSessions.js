@@ -44,7 +44,9 @@ import { slugify } from './anchors.js';
 /** @typedef {{ name?: string, districts?: string[], streets?: string[], buildings?: string[] }} FogSession */
 /** @typedef {Record<string, FogSession>} FogSessionsContainer */
 
-/** The reveal-set kinds, in canonical order (used by the mutators + the mask builder). */
+/** The reveal-set kinds, in canonical order (used by the mutators + the mask builder).
+ *  Typed as the literal union so `entry[kind]` indexes FogSession without an any-hole.
+ *  @type {ReadonlyArray<'districts'|'streets'|'buildings'>} */
 export const FOG_REVEAL_KINDS = Object.freeze(['districts', 'streets', 'buildings']);
 
 /** The full set of SCHEMA keys the sidecar may carry — pinned ∉ PRIVATE_KEY_RE (the
@@ -117,7 +119,8 @@ export function readReveal(entry) {
   };
 }
 
-/** Whether a session reveals ANYTHING (any of the three lists non-empty). Pure. */
+/** Whether a session reveals ANYTHING (any of the three lists non-empty). Pure.
+ *  @param {FogSession | null | undefined} entry @returns {boolean} */
 export function sessionHasReveal(entry) {
   const r = readReveal(entry);
   return r.districts.length > 0 || r.streets.length > 0 || r.buildings.length > 0;
