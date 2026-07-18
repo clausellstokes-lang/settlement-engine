@@ -20,9 +20,27 @@
 import { useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import SurveyorNote from '../guidance/SurveyorNote.jsx';
+import { useStore } from '../../store/index.js';
 import { BODY, BORDER, CARD_ALT, ELEV, FS, INK, MUTED, R, SP, sans } from '../theme.js';
 
 const BAND_LABEL = { strong: 'a strong pull', moderate: 'a fair pull', slight: 'a slight pull' };
+
+// THE CHANGE-VIEW DEPTH GATE (THE FREELY-GIVEN RULINGS: change-view depth is
+// Cartographer). The view RENDERS for everyone (reading stays free); the HISTORY
+// DEPTH gates — a free reader sees the most-recent change in each band, and the
+// deeper history is one purchase-moment away. The derivation (buildChangeView) is
+// tier-blind by contract; only this affordance slices to the free depth.
+const FREE_CHANGE_DEPTH = 1;
+
+/** A small drawn padlock — the map chrome is lucide-free (the fog controls precedent). */
+function LockGlyph({ size = 13 }) {
+  return (
+    <svg data-testid="change-view-lock" width={size} height={size} viewBox="0 0 14 14" aria-hidden="true">
+      <rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="none" stroke={INK} strokeWidth="1.5" />
+      <path d="M 4.5 6 V 4.2 a 2.5 2.5 0 0 1 5 0 V 6" fill="none" stroke={INK} strokeWidth="1.5" />
+    </svg>
+  );
+}
 
 /**
  * @typedef {{ hasAny: boolean,
@@ -34,10 +52,11 @@ const BAND_LABEL = { strong: 'a strong pull', moderate: 'a fair pull', slight: '
  *   story?: import('./provenanceModel.js').MapStory | null,
  *   changes?: ChangeViewModel | null,
  *   roads?: Array<{ roadId:string, neighborName:string, relationshipLabel:string, travelLabel:string|null }> | null,
+ *   entitled?: boolean,
  *   onOpen?: () => void,
  * }} props
  */
-export default function SettlementMapNotes({ settlement, story = null, changes = null, roads = null, onOpen }) {
+export default function SettlementMapNotes({ settlement, story = null, changes = null, roads = null, entitled = false, onOpen }) {
   const [open, setOpen] = useState(false);
   const openDrawer = () => setOpen((v) => {
     const next = !v;
@@ -59,7 +78,7 @@ export default function SettlementMapNotes({ settlement, story = null, changes =
       {open && (
         <div role="region" aria-label="Map notes" style={panelStyle}>
           {hasStory && <StorySection story={story} />}
-          {changes && <ChangeSection changes={changes} settlement={settlement} />}
+          {changes && <ChangeSection changes={changes} settlement={settlement} entitled={entitled} />}
           {hasRoads && <RoadsSection roads={roads} />}
         </div>
       )}
@@ -113,18 +132,31 @@ function StorySection({ story }) {
   );
 }
 
-/** WHAT CHANGED — recent spatial upheavals, or a dark-fabric whisper. */
-function ChangeSection({ changes, settlement }) {
+/** WHAT CHANGED — recent spatial upheavals, or a dark-fabric whisper. The band
+ *  DEPTH gates: a free reader sees the most recent change per band; the deeper
+ *  history is a Cartographer purchase-moment away. */
+function ChangeSection({ changes, settlement, entitled = false }) {
+  const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
+  const onUnlock = () => { if (typeof setPurchaseModalOpen === 'function') setPurchaseModalOpen(true); };
+  // The free depth caps EACH band; entitled readers see the full derived depth. The
+  // derivation is untouched (tier-blind) — this is a pure view-time slice.
+  const depth = entitled ? Infinity : FREE_CHANGE_DEPTH;
+  const rebuilt = changes.rebuilt.slice(0, depth);
+  const scars = changes.scars.slice(0, depth);
+  const calamities = changes.calamities.slice(0, depth);
+  const hidden = (changes.rebuilt.length - rebuilt.length)
+    + (changes.scars.length - scars.length)
+    + (changes.calamities.length - calamities.length);
   return (
     <section style={sectionStyle}>
       <SectionHead>What changed</SectionHead>
       {changes.hasAny ? (
         <>
-          {changes.rebuilt.length > 0 && (
+          {rebuilt.length > 0 && (
             <div style={{ marginBottom: SP.xs }}>
               <div style={subHeadStyle}>Rebuilt</div>
               <ul style={listStyle}>
-                {changes.rebuilt.map((r, i) => (
+                {rebuilt.map((r, i) => (
                   <li key={`rb-${i}`} style={rowStyle}>
                     <span style={rowLead}>{r.label}</span>
                     <span style={rowSub}>{r.detail}</span>
@@ -133,11 +165,11 @@ function ChangeSection({ changes, settlement }) {
               </ul>
             </div>
           )}
-          {changes.scars.length > 0 && (
+          {scars.length > 0 && (
             <div style={{ marginBottom: SP.xs }}>
               <div style={subHeadStyle}>Scars</div>
               <ul style={listStyle}>
-                {changes.scars.map((s, i) => (
+                {scars.map((s, i) => (
                   <li key={`sc-${i}`} style={rowStyle}>
                     <span style={rowLead}>{s.label}</span>
                     <span style={rowSub}>{s.detail}</span>
@@ -146,11 +178,11 @@ function ChangeSection({ changes, settlement }) {
               </ul>
             </div>
           )}
-          {changes.calamities.length > 0 && (
+          {calamities.length > 0 && (
             <div>
               <div style={subHeadStyle}>Recent calamities</div>
               <ul style={listStyle}>
-                {changes.calamities.map((c, i) => (
+                {calamities.map((c, i) => (
                   <li key={`cal-${i}`} style={rowStyle}>
                     <span style={rowLead}>{c.label}</span>
                     <span style={rowSub}>{c.detail}</span>
@@ -158,6 +190,21 @@ function ChangeSection({ changes, settlement }) {
                 ))}
               </ul>
             </div>
+          )}
+          {/* THE DEPTH LOCK — the earlier changes gate to Cartographer. Visible (a
+              drawn padlock + the count) so the free reader knows what upgrading buys;
+              clicking fires the purchase modal. No stored state is touched. */}
+          {!entitled && hidden > 0 && (
+            <Button
+              data-town-change-depth-locked
+              variant="ghost" size="sm"
+              onClick={onUnlock}
+              aria-label={`See ${hidden} earlier ${hidden === 1 ? 'change' : 'changes'} — a Cartographer premium feature`}
+              style={depthLockStyle}
+            >
+              <LockGlyph />
+              <span>{`See ${hidden} earlier ${hidden === 1 ? 'change' : 'changes'} (Premium)`}</span>
+            </Button>
           )}
         </>
       ) : (
@@ -215,4 +262,11 @@ const proseStyle = { margin: `0 0 ${SP.xs}px`, fontSize: FS.sm, color: BODY, fon
 const subHeadStyle = {
   color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800,
   textTransform: 'uppercase', letterSpacing: '0.06em', margin: `${SP.xs}px 0 2px`,
+};
+const depthLockStyle = {
+  justifyContent: 'flex-start', gap: SP.xs, marginTop: SP.xs,
+  width: '100%', textAlign: 'left', whiteSpace: 'normal', minHeight: 0,
+  padding: `${SP.xs}px ${SP.sm}px`, background: 'transparent',
+  border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+  color: MUTED, fontSize: FS.xs, fontWeight: 700,
 };
