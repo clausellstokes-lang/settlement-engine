@@ -1134,6 +1134,15 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE REMAINING ARCHITECTURE COMMITTED (owner order, 2026-07-18: "architect what
+must be done out exhaustively... I may run out of fable").** docs/
+THE_REMAINING_ARCHITECTURE.md is now THE SUCCESSOR DOCUMENT for everything left:
+successor protocol + state + every deep-wave slice (C1-fin…C16 with per-slice laws,
+protected behaviors, done-whens) + phase D + the fold + the push completion (w/ the
+LFS/move decision) + ROUND 3 staffing & pre-stocked intake + soak + tuning + THE ONE
+REGEN steps + THE VERY END + the owner decision queue + post-launch owed + the hazard
+compendium (every trap that has fired). Any session — Fable or not — executes FROM
+that doc. The ledger remains the record of what then happened.
 **⬛⬛ DEEP WAVE 0b→1c LANDED (2026-07-18) @ 78431763 — THE OWNER WALK OPENS.** Seven
 commits: 0b MATERIAL (FNV-seeded byte-stable grain tiles 3.1/2.9 kB, ink-bite frames,
 feTurbulence-ban pin) · 0c MOTION (the closed twelve, ≤700ms, reduced-motion collapse
