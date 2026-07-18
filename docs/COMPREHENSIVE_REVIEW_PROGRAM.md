@@ -1134,6 +1134,16 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE JOURNEY MECHANIC COMMISSIONED (owner, 2026-07-18):** the home page becomes a
+scroll-driven cartographic journey — the traveling line along a road on a real engine-
+rendered map, waypoints unfurling the existing sections as paper plates. RULING: built
+as SVG + DOM bound to scroll progress (synced-to-content, cheap, accessible, dissociation-
+safe), NEVER scrubbed video; video reserved for the optional hero intro + ambient loop
+(taste-gated). Annex's Welcome entry rewritten (supersedes THE ROAD tune). Prototype
+map-travel film generated via Seedance for eyes-on comparison at checkpoint 1. The
+reference-library session also delivered: THE EVOLUTION SERIES (six chained ages of one
+settlement, landmark lineage held), the alive-world people ruling (staffage welcomed;
+crier + scriptorium rehabilitated), and the ~250MB raw-masters note (LFS/move before push).
 **⬛ THE INSTRUMENT PRINCIPLE + THE REFERENCE LIBRARY (owner, 2026-07-18):** the wave
 paused at "wait stop" gains its art direction first. Owner reframe, now law: THE WEBSITE
 IS THE PRODUCT, not an advertisement for one — it must be simultaneously navigable,
