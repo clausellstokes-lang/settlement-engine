@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE LADDER §11 THE LONG GAME (owner, 2026-07-17: "a promotion isn't supposed to
+happen every other week… goals should span weeks to years… a cumulation of impact where
+failure takes it away… a three-way rise"):** STANDING = an integrator STOCK (fabric
+prominence idiom; deposits/withdrawals/decay; challenges draw the stock, never a streak)
+· FOUR PACING BRAKES (sustained margin — spikes never fire · windows · years-scale
+post-succession cooldown = the interregnum · the E0 realm cap); cadence = a per-faction
+succession every few sim-years, A DIAL for the tuning window · GOAL HORIZONS mint with
+stakes (weeks→years; partial progress deposits; LAPSED vs failed honest-null resolution
+on situation shifts) · THE THREE-BODY LADDER (one stock defends below and challenges
+above; MOUNTING A CHALLENGE WEAKENS YOUR OWN DEFENSE — the bottom's best moment is the
+middle's boldest; chain-capped vacancy cascades; adjacent rungs only, always). Frozen +
+relayed w/ the three-body fixture mandated. The design is now 11 sections + matrix —
+the most owner-refined mechanism of the program (5 refinement rounds, matching v2's map
+record).
 **⬛ THE LADDER §10 THE STIGMA MARK (owner, 2026-07-17: "if they are exposed for
 corruption, it becomes twice as hard for them to get promoted for a long time"):**
 exposure now cuts BOTH ways — the widest window against a defender AND a challengeScore
