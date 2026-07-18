@@ -148,11 +148,16 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
     // the sample becomes a real save, not just an unsaved draft.
     if (canSave) {
       try {
+        // V2 DEFAULT-MINT (create chokepoint 2/3): a forked settlement is a NEW settlement —
+        // mint layout v2 onto its fresh blob (non-clobbering; a fork carries no mapEdits).
+        // Lazy import keeps first-paint byte-identical.
+        const { newSettlementMapEdits } = await import('../domain/townMap/mapEdits.js');
+        const minted = result.mapEdits ? result : { ...result, mapEdits: newSettlementMapEdits() };
         await savesService.save({
-          name: result.name || sample.name,
-          tier: result.tier || sample.tier,
-          settlement: result,
-          config: result._config || forkedConfig,
+          name: minted.name || sample.name,
+          tier: minted.tier || sample.tier,
+          settlement: minted,
+          config: minted._config || forkedConfig,
         });
       } catch (e) {
         console.error('[SettlementsPanel] fork auto-save failed:', e);

@@ -138,11 +138,16 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
     setBusy(true); setError(null);
     try {
       const { saves: savesService } = await import('../lib/saves.js');
-      const config = settlement._config || null;
+      // V2 DEFAULT-MINT (create chokepoint 3/3): the save-first rung persists a NEW settlement —
+      // mint layout v2 onto its fresh blob (non-clobbering; an existing mapEdits container is
+      // preserved verbatim). Lazy import keeps first-paint byte-identical.
+      const { newSettlementMapEdits } = await import('../domain/townMap/mapEdits.js');
+      const minted = settlement.mapEdits ? settlement : { ...settlement, mapEdits: newSettlementMapEdits() };
+      const config = minted._config || null;
       const newSaveId = await savesService.save({
-        name: settlement.name || 'Untitled Settlement',
-        tier: settlement.tier || 'unknown',
-        settlement,
+        name: minted.name || 'Untitled Settlement',
+        tier: minted.tier || 'unknown',
+        settlement: minted,
         config,
       });
       // Stamp the active save id AND hold it locally so the rung advances to

@@ -32,11 +32,17 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
     if (!settlement || saving) return;
     setSaveError(null);
     setSaving(true);
+    // V2 DEFAULT-MINT (create chokepoint 1/3): a newly-saved settlement mints layout v2
+    // onto its fresh blob. Non-clobbering — an existing mapEdits container (a lens/pin the
+    // draft already carries) is preserved verbatim; EXISTING saves never re-enter here.
+    // Lazy import keeps first-paint byte-identical.
+    const { newSettlementMapEdits } = await import('../../domain/townMap/mapEdits.js');
+    const minted = settlement.mapEdits ? settlement : { ...settlement, mapEdits: newSettlementMapEdits() };
     const payload = {
-      name: settlement.name || 'Untitled Settlement',
-      tier: settlement.tier || 'unknown',
-      settlement,
-      config: settlement._config || null,
+      name: minted.name || 'Untitled Settlement',
+      tier: minted.tier || 'unknown',
+      settlement: minted,
+      config: minted._config || null,
     };
     // Safety net: stash the dossier locally BEFORE the network call. If the save
     // stalls and the user refreshes to recover, the empty-state offers to restore
@@ -77,12 +83,19 @@ export function SaveToLibraryButton({ settlement, canSave, isMobile: _isMobile, 
       if (typeof onSignIn === 'function') onSignIn();
       // Lazy-load to avoid pulling authIntents into the wizard bundle
       // until the user actually clicks the button.
-      import('../../lib/authIntents.js').then(({ setPending, INTENTS }) => {
+      Promise.all([
+        import('../../lib/authIntents.js'),
+        import('../../domain/townMap/mapEdits.js'),
+      ]).then(([{ setPending, INTENTS }, { newSettlementMapEdits }]) => {
+        // V2 DEFAULT-MINT (create chokepoint 1/3, anon→signup arm): the post-signup save
+        // (store/index.js SAVE_SETTLEMENT handler) persists this stashed settlement verbatim,
+        // so mint v2 here too — a new save mints v2 whether the user is signed in or not.
+        const minted = settlement.mapEdits ? settlement : { ...settlement, mapEdits: newSettlementMapEdits() };
         setPending(INTENTS.SAVE_SETTLEMENT, {
-          name: settlement.name || 'Untitled Settlement',
-          tier: settlement.tier || 'unknown',
-          settlement,
-          config: settlement._config || null,
+          name: minted.name || 'Untitled Settlement',
+          tier: minted.tier || 'unknown',
+          settlement: minted,
+          config: minted._config || null,
         });
         // Analytics + auth flow open
         import('../../lib/analytics.js').then(({ Funnel, EVENTS }) => {

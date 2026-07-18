@@ -42,6 +42,7 @@ export {
   readStyleLens,
   readLayoutLawVersion,
   readAnnotations,
+  readBespokeStyles,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
@@ -51,6 +52,7 @@ export {
   withLayoutLawVersion,
   withAnnotation,
   withoutAnnotationAt,
+  withBespokeStyles,
   newSettlementMapEdits,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),

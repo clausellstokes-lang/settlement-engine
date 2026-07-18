@@ -36,7 +36,7 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
 /** @typedef {{ x: number, y: number, label: string, audience: 'dm'|'player' }} MapAnnotation */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[] }} MapEdits */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[], bespokeStyles?: Record<string, unknown> }} MapEdits */
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
@@ -56,8 +56,19 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 // never coordinates; `annotations` (free DM markers) legitimately carry x/y because a
 // marker has no backing element to key on — a different concept, not a law violation.
 // The `audience` VALUE ('dm'|'player') is the export-visibility split (WYSIWYG law).
+//
+// S4-S6 BESPOKE STYLES — `bespokeStyles` (a per-settlement { [id]: TownMapStyle } of
+// wall-validated saved map styles) is a COSMETIC-CLASS, denylist-safe container key: a saved
+// Surveyor map style rides the blob like a lens choice. The key itself is re-checked ∉
+// PRIVATE_KEY_RE (the naming-trap test enforces it). Its VALUE is an OPAQUE, wall-validated
+// collection: the ids are user slugs and each style is a fixed known-role visual object
+// (design/townMapStyleWall.validateBespokeStyle keeps only known roles + carries __resolved),
+// so no arbitrary substance persists — and the whole mapEdits container is (already) owner-gated
+// off the anonymous gallery (mapEdits ∉ PUBLIC_TOPLEVEL_KEYS), so the value's nested keys never
+// reach a public projection. This is why only the CONTAINER key joins the schema list below (the
+// collection's dynamic ids + role fields are not — and cannot be — a fixed vocabulary).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', // container
+  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', 'bespokeStyles', // container
   'anchor', 'dx', 'dy',                    // pin
   'showLabels', 'showLegend',              // legendPrefs
   'x', 'y', 'label', 'audience',           // annotation
@@ -71,6 +82,14 @@ export const LAYOUT_LAW_VERSIONS = Object.freeze([1, 2]);
 
 /** The default (dormant) layout-law version — the pre-v2 arrangement. */
 export const DEFAULT_LAYOUT_LAW_VERSION = 1;
+
+/** THE ONE DIAL — the layout-law version a NEWLY-created settlement mints under (the
+ *  VERSIONING LAW's "new settlements mint v2"; the v2 taste veto is PROVISIONALLY PASSED).
+ *  The three create chokepoints (SaveToLibraryButton / SettlementsPanel fork / BuyThisDossier
+ *  save-first) stamp `newSettlementMapEdits()` onto the fresh blob. A taste veto reverts the
+ *  default in ONE LINE: set this to `DEFAULT_LAYOUT_LAW_VERSION` (1) and new settlements mint
+ *  v1 again — EXISTING settlements are untouched either way (they never pass through create). */
+export const NEW_SETTLEMENT_LAYOUT_LAW_VERSION = 2;
 
 /** The legendPref keys whose default is `false` (omitted when off).
  * @type {ReadonlyArray<'showLabels'|'showLegend'>} */
@@ -178,6 +197,28 @@ export function readAnnotations(edits) {
 }
 
 /**
+ * The saved bespoke-style collection ({ [id]: TownMapStyle }) — per-settlement, blob-resident.
+ * PURE — never writes. Absent / non-object ⇒ {}. Only entries that are wall-validated
+ * (`__resolved:true`, the readBespokeStyle contract in bespokeStyles.js) survive, so a stray
+ * value never resolves as a style and the dormancy collapse (below) can tell empty from present.
+ * @param {MapEdits | null | undefined} edits
+ * @returns {Record<string, unknown>}
+ */
+export function readBespokeStyles(edits) {
+  const raw = edits && typeof edits.bespokeStyles === 'object' && edits.bespokeStyles && !Array.isArray(edits.bespokeStyles)
+    ? /** @type {Record<string, unknown>} */ (edits.bespokeStyles) : {};
+  /** @type {Record<string, unknown>} */
+  const out = {};
+  for (const id of Object.keys(raw)) {
+    const v = raw[id];
+    if (v && typeof v === 'object' && !Array.isArray(v) && /** @type {{ __resolved?: boolean }} */ (v).__resolved === true) {
+      out[id] = v;
+    }
+  }
+  return out;
+}
+
+/**
  * Canonicalize a container to its minimal byte-stable form, or `null` when it
  * carries no real edit. Keeps `layoutVariant` only when > 0; keeps `pins` only
  * when non-empty (each a whole-unit, in-bounds, non-zero nudge, sorted by anchor
@@ -231,6 +272,12 @@ export function normalizeMapEdits(edits) {
   // with no DM markers stringifies exactly like no-edit). Validated + sorted above.
   const annotations = readAnnotations(edits);
   if (annotations.length > 0) out.annotations = annotations;
+
+  // bespokeStyles: kept ONLY when the collection holds ≥1 wall-validated (__resolved) style
+  // (absent / empty ⇒ byte-identical dormancy — deleting the LAST bespoke style returns the
+  // blob to no-edit, the flip-back law's storage half). readBespokeStyles drops stray entries.
+  const bespokeStyles = readBespokeStyles(edits);
+  if (Object.keys(bespokeStyles).length > 0) out.bespokeStyles = bespokeStyles;
 
   return Object.keys(out).length > 0 ? out : null;
 }
@@ -330,12 +377,29 @@ export function withLayoutLawVersion(edits, version) {
   return normalizeMapEdits({ ...base, layoutLawVersion: v });
 }
 
+/** SET the per-settlement bespoke-style collection (the S4-S6 style-overhaul accept path's
+ * durable half). Returns a NEW normalized container merged over the existing one, preserving
+ * every OTHER edit (pins, lens, legend, annotations) — or `null` when the whole container is
+ * now empty. An empty / all-invalid collection DROPS the `bespokeStyles` key, so deleting the
+ * last saved style returns the blob byte-identical to no-edit (the flip-back / dormancy law).
+ * The collection is expected to be built with domain/townMap/bespokeStyles.js's addBespokeStyle
+ * (each entry wall-validated, __resolved); normalize re-checks and drops any that are not. Pure.
+ * @param {MapEdits | null | undefined} edits
+ * @param {Record<string, unknown> | null | undefined} collection
+ * @returns {MapEdits | null} */
+export function withBespokeStyles(edits, collection) {
+  const base = normalizeMapEdits(edits) || {};
+  const next = (collection && typeof collection === 'object' && !Array.isArray(collection)) ? collection : {};
+  return normalizeMapEdits({ ...base, bespokeStyles: next });
+}
+
 /** The mapEdits container a NEWLY-created settlement is minted with so it renders
  * under the v2 engine (the VERSIONING LAW's "new settlements mint v2"). Pure — a
  * caller at the settlement-CREATE boundary (never the generation pipeline, so the
  * generator golden is untouched) stamps this onto the fresh blob; EXISTING settlements
- * never pass through create again, so they stay v1. A minimal `{ layoutLawVersion: 2 }`.
+ * never pass through create again, so they stay v1. The version is THE ONE DIAL
+ * (NEW_SETTLEMENT_LAYOUT_LAW_VERSION) so a taste veto reverts in one line.
  * @returns {MapEdits} */
 export function newSettlementMapEdits() {
-  return { layoutLawVersion: 2 };
+  return { layoutLawVersion: NEW_SETTLEMENT_LAYOUT_LAW_VERSION };
 }
