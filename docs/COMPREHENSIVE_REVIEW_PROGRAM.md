@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ C1r BASE RESTORATION LANDED (2026-07-18) — the create page wears master's
+skeleton again.** claude/deep-craft fb5e8031 → C1r-a @ c722c99b (config stage =
+master's single LayeredConfigurationPanel; wizardStep stepping DELETED per ruling;
+StepIndicator/WizardCommitBand removed [importers checked; WizardChipRow retained —
+ChangeModeBar imports it]; TradeDynamicsPanel double-disclosure flattened) → C1r-b @
+2a12cc9c (theme.js LANDING_MAX surfaced; WizardEmptyState + HomeHero = master's
+remediated composition; ANON GAUGE LAW ENFORCED + new absence pin
+homeHeroAnonGauge.test.jsx — the law violation no e2e caught is closed). Receipts:
+all gates bare-green per commit; FULL SUITE 13,185/12 skipped/5 failed = the 4
+parked golden families + aiGroundingBundle.freshness (pre-existing at base — diff
+touches zero generator/aiGrounding inputs; generatorGoldenMaster UNSHIFTED =
+generation-neutral proven). Census: all 63 KEEP controls verified reachable; only
+the 3 step-nav controls deleted (ruled). Ratchets 1090/117/273/248 →
+1082/115/270/247 (ceilings lowered in-commit). Eager 1,038,588 → 1,038,614 B
+(+26 B, the LANDING_MAX export; headroom 1,386 B). TEN JUDGMENT rows recorded
+vetoably in the lane report + memory c1fin-base-recut-shipped.md — load-bearing:
+setEntryPath-not-in-store (brief contradiction caught by VERIFY-FIRST; live exit
+machinery kept), tierFacts.contract requires the config import (master's hardcoded
+$2.99 would fail it), master's STRUCTURE + deep-craft MATERIAL (flat plates/
+ClerkNote over master's rounded+shadowed — tolerance-0 kill-list), InstantWorldEntry
+temporarily UNMOUNTED (re-home below the fold = C1r-c's recorded deferral, must
+land). REMAINING: C1r-c craft consolidation (one commissioning plate · Advanced
+behind the .oc-m-unfold leaf · demo miniatures · tint trio · evolution backdrops
+measured · InstantWorldEntry re-home) — fresh implementer, same worktree. The
+restored create page is SERVABLE from the worktree for the owner walk.
 **⬛⬛⭐ THE EIGHT CROWNS RATIFIED (owner, 2026-07-18: "work hard and get me the best
 website! With this, we would have one of if not the best:"):** the benchmark expands
 from four crowns to EIGHT — 1 settlement map generators · 2 world map generators ·
