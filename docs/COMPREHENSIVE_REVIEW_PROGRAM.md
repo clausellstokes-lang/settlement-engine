@@ -1120,6 +1120,15 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ OWNER RESCISSION (2026-07-18, minutes later): LOCALIZATION STOPPED.** On hearing
+the scope boundary (UI chrome localizes; engine prose = per-language corpora + goldens,
+a content-layer rewrite per language), the owner stopped the wave: "then stop the
+localization." The recon workflow was killed mid-flight (no results consumed); NO brief
+will be written (docs/briefs/W_LOCALIZATION_WAVE.md does not exist); NO build lane
+dispatches; NO extraction law rides the craft phases-3-5 sweep. Standing disposition
+restored: localization = post-launch roadmap BY NAME (depth-standard gap-5 re-corrected);
+the copy registries keep the door structurally open; English-first at launch. The
+override row above stands as history.
 **⬛ OWNER OVERRIDE (2026-07-18): LOCALIZATION MOVES PRE-ROUND-3.** The depth
 standard's gap-5 disposition ("post-launch roadmap by name") is superseded the same day it
 was written: the owner rules localization is built BEFORE the resurvey so ROUND 3

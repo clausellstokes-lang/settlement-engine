@@ -81,9 +81,9 @@ Every craft fold (and the manager's preview review) checks these columns explici
 4. CONTENT IS DESIGN — headlines, labels, CTAs, error messages, and onboarding copy are
    in scope for every recomposed surface (the voice ruling + copy-source guards apply).
 5. THE HONEST GAPS STAY NAMED — real-user task validation is POST-LAUNCH OWED (every
-   surface ships instrumented so judgment converts to evidence at contact); localization is a
-   PRE-ROUND-3 BUILD (owner override 2026-07-18 — see docs/briefs/W_LOCALIZATION_WAVE.md;
-   the resurvey validates it).
+   surface ships instrumented so judgment converts to evidence at contact); localization is STOPPED
+   by owner order (2026-07-18): not built pre-launch; it rests on the post-launch
+   roadmap by name (the copy registries keep the door structurally open).
 The distinctive-identity test remains: authored-never-defaulted; a polished variation of
 a familiar template FAILS this standard even if beautiful.
 
