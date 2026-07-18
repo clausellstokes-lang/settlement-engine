@@ -123,3 +123,35 @@ no autonomy coupling — StopConditions may reference ladder signals only when t
 tuning window mints them) · goldens (dark byte-identical; lit shifts ride THE ONE
 REGEN) · first-paint (engine lazy leaf; ~0 eager) · state-never-fate + DM sovereignty
 (§4g, the constitution's spine).
+
+## 8. THE STANDING LOOP (owner refinement, 2026-07-17: ladder→faction feedback)
+The circuit closes both ways. (a) **LEADERSHIP QUALITY**: the rung-holders' aggregate
+standing (stakes-weighted achievement record + alignment fit − clash) deposits a bounded
+modifier the faction's EFFECTIVE-power read consumes — achievers lift their faction
+above its institutional base; failures sink it. (b) **CHURN IS PRICED**: every contested
+challenge deposits transition instability — a decaying tax (fabric half-life idiom) on
+faction power + legitimacy; replacement = new quality bought at turmoil's price.
+(c) **LEGITIMACY READS THE HOW**: window-legitimate successions cost little (renewal);
+norm-breaking/leverage usurpations tax faction legitimacy — and PUBLIC legitimacy via
+the governance ledger when the governing faction is the stage. (d) **ENTRENCHMENT**: a
+long-winning defender deposits toward entrenched/rigid traits, which RAISES their clash
+score as the settlement drifts — success plants the fall; dynasties rot mechanically,
+no scripted arc. SINGLE-WRITER LAW: the ladder kernel writes ONLY its sidecar; power/
+legitimacy reads consume the modifiers when lit (absent ⇒ 1.0 ⇒ byte-identical dark).
+
+## 9. WEIGHTED DEEDS (owner refinement: goals are not equal)
+Every goal carries a **STAKES value priced at mint, settled at outcome**: state-distance
+(famine→secure ≫ half-band nudge) × signal scope (settlement-wide ≫ one institution) ×
+adversity context (war/crisis multiplies) × faction-domain relevance. The challenge
+receipt cites both sides' stakes-weighted records — **the challenger who did the greater
+deed beats the defender who held the smaller one, even when both succeeded** (the
+owner's rule verbatim). FLAWS = RISK APPETITE: proud/bold select high-stakes goals
+(fast climbs, hard falls); cautious grind small reliable deeds — one great gamble can
+overtake a steady tenure, and a failed gamble drops the gambler hard. Failure mirrors
+magnitude (+growth deposits toward cynicism/humility). ANTI-FARMING: stakes derive from
+real state distance; the achievement window averages by WEIGHT, never count. PERSONAL
+GROWTH AS EVIDENCE: deed-acquired traits (provenance-carrying) add a growth term to the
+climber's score. Matrix additions: faction power read (+ladder modifier consumption,
+read-only from the mirror) · public legitimacy read (+governance-ledger deposits on
+norm-breaking governing successions) · growth layer (+entrenchment pathway through the
+existing deposit map; no new mintable traits without the matrix check).
