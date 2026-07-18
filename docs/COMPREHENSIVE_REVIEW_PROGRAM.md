@@ -1120,6 +1120,14 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE QUALITY BAR (owner, 2026-07-17, verbatim: "make it look like a $10,000 website
+with all of these functions and principles. thank you so much!"):** the organic craft
+wave + the documentation wave build to BESPOKE-AGENCY STANDARD — every choice authored,
+never defaulted; optical alignment, tuned small-caps tracking, held baseline rhythm; ONE
+hand across every page (the house rules/rose/rubrication family); RESTRAINT AS LUXURY
+(the $10k look is impeccable typography/spacing/hierarchy, not ornament volume). Relayed
+to the live doc wave; binds the organic wave's brief; the preview legibility review
+judges against THIS bar.
 **⬛⬛ THE ORGANIC CRAFT LAW RATIFIED (2026-07-17, owner: "Do it! But before you do, look
 online at the best examples… identify first principles… then reconcile… and build
 everything appropriately" + the preview legibility mandate):** the UI redesigns under the
