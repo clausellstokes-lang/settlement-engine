@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE ORGANIC CRAFT LAW FROZEN + THE WAVE BRIEF COMMITTED (2026-07-17):** both craft
+sweeps banked (10/10 agents) → docs/DESIGN_ORGANIC_CRAFT.md frozen on w7-prep (the one
+fiction = THE SURVEYOR'S WORKING DESK; the artifact/instrument split; manuscript grammar
+— scale/ink/position/rubrication replace containers; typography tiers w/ faux-small-caps
+ban; seeded ornament UNDER GOLDEN DISCIPLINE; the legibility floor; the mobile field
+companion §7 w/ the realm desktop-gate; the performance law §8) +
+docs/briefs/W_ORGANIC_CRAFT_WAVE.md (5 phases w/ the taste veto BETWEEN sample-set and
+app-wide sweep; inherited rulings incl. **OFFLINE SCOPED OUT** — the service-worker/
+iOS-eviction/snapshot-vs-migration-staleness complex is owner-queued as its own charge,
+no offline promise in copy (the worse-than-nothing precedent); the /map/ webmanifest
+partial-scope install trap recorded). The critics' repo-verified catches ruled in:
+mid-range-device budgets join tests/build as a ratchet; fonts subset w/ byte budget;
+turbulence/blend-mode bans; the existing isMobile layer extended never greenfielded.
+The wave is successor-dispatchable from the brief at the doc-wave fold.
 **⬛ THE SUBSTANCE BENCHMARK SWEEP DISPATCHED (2026-07-17, owner interjection: "what
 about the substance?" — the form/substance symmetry closed):** the design waves got four
 external-excellence sweeps; the substance had only ever been benchmarked against ITSELF
