@@ -186,7 +186,9 @@ function evaluateTest(node, frame, evaluations) {
     value: null,
     pass: false,
   };
-  if (!resolution.ok) {
+  // `=== false` (not `!`) so BOTH tsconfigs narrow the discriminated union — the
+  // non-strict full config misses the `!x.ok` narrowing (caught by the full gate).
+  if (resolution.ok === false) {
     record.reason = resolution.reason;
     evaluations.push(record);
     return false; // an unreadable signal NEVER fires a condition
