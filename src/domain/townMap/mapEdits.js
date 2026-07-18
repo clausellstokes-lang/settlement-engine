@@ -72,6 +72,14 @@ export const LAYOUT_LAW_VERSIONS = Object.freeze([1, 2]);
 /** The default (dormant) layout-law version — the pre-v2 arrangement. */
 export const DEFAULT_LAYOUT_LAW_VERSION = 1;
 
+/** THE ONE DIAL — the layout-law version a NEWLY-created settlement mints under (the
+ *  VERSIONING LAW's "new settlements mint v2"; the v2 taste veto is PROVISIONALLY PASSED).
+ *  The three create chokepoints (SaveToLibraryButton / SettlementsPanel fork / BuyThisDossier
+ *  save-first) stamp `newSettlementMapEdits()` onto the fresh blob. A taste veto reverts the
+ *  default in ONE LINE: set this to `DEFAULT_LAYOUT_LAW_VERSION` (1) and new settlements mint
+ *  v1 again — EXISTING settlements are untouched either way (they never pass through create). */
+export const NEW_SETTLEMENT_LAYOUT_LAW_VERSION = 2;
+
 /** The legendPref keys whose default is `false` (omitted when off).
  * @type {ReadonlyArray<'showLabels'|'showLegend'>} */
 const LEGEND_PREF_KEYS = Object.freeze(['showLabels', 'showLegend']);
@@ -334,8 +342,9 @@ export function withLayoutLawVersion(edits, version) {
  * under the v2 engine (the VERSIONING LAW's "new settlements mint v2"). Pure — a
  * caller at the settlement-CREATE boundary (never the generation pipeline, so the
  * generator golden is untouched) stamps this onto the fresh blob; EXISTING settlements
- * never pass through create again, so they stay v1. A minimal `{ layoutLawVersion: 2 }`.
+ * never pass through create again, so they stay v1. The version is THE ONE DIAL
+ * (NEW_SETTLEMENT_LAYOUT_LAW_VERSION) so a taste veto reverts in one line.
  * @returns {MapEdits} */
 export function newSettlementMapEdits() {
-  return { layoutLawVersion: 2 };
+  return { layoutLawVersion: NEW_SETTLEMENT_LAYOUT_LAW_VERSION };
 }

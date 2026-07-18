@@ -14,7 +14,7 @@ import { describe, expect, it } from 'vitest';
 import { buildTownMapModel } from '../../src/domain/townMap/index.js';
 import {
   readLayoutLawVersion, withLayoutLawVersion, withPinNudge, withStyleLens,
-  withLegendPref, newSettlementMapEdits,
+  withLegendPref, newSettlementMapEdits, NEW_SETTLEMENT_LAYOUT_LAW_VERSION,
 } from '../../src/domain/townMap/mapEdits.js';
 import { anchorForInstitution } from '../../src/domain/townMap/anchors.js';
 import { HAMLET_CLUSTER_ID } from '../../src/domain/townMap/institutionAssignment.js';
@@ -61,6 +61,13 @@ describe('v2 versioning law — default is v1, v2 is opt-in', () => {
     const minted = newSettlementMapEdits();
     expect(readLayoutLawVersion(minted)).toBe(2);
     expect(buildTownMapModel(s, minted).layoutLawVersion).toBe(2);
+  });
+
+  it('THE ONE DIAL: the mint reads NEW_SETTLEMENT_LAYOUT_LAW_VERSION (taste veto = one line)', () => {
+    // The default-mint the three create chokepoints stamp is driven by ONE exported constant,
+    // so a taste veto flips it in one place. Today it ships v2.
+    expect(NEW_SETTLEMENT_LAYOUT_LAW_VERSION).toBe(2);
+    expect(newSettlementMapEdits().layoutLawVersion).toBe(NEW_SETTLEMENT_LAYOUT_LAW_VERSION);
   });
 });
 
