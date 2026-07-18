@@ -35,8 +35,20 @@ const resolveTierCatalog = (t) =>
 
 describe('INSTITUTION_DESC_VARIANTS — walker + register laws', () => {
   const entries = Object.entries(INSTITUTION_DESC_VARIANTS);
-  it('is a non-vacuous representative sample', () => {
-    expect(entries.length).toBeGreaterThanOrEqual(30);
+  it('is EXHAUSTIVE: every catalog institution bearing a desc has a variants entry (Charge 2 ratchet)', () => {
+    // The inverse walker: the catalog is the denominator. A new catalog institution
+    // must ship with authored desc variants (or this pin flags the gap deliberately).
+    const missing = [];
+    for (const [tier, cats] of Object.entries(institutionalCatalog)) {
+      for (const [cat, insts] of Object.entries(cats)) {
+        for (const [name, entry] of Object.entries(insts)) {
+          if (typeof entry?.desc !== 'string' || !entry.desc) continue;
+          if (!INSTITUTION_DESC_VARIANTS[`${tier}|${cat}|${name}`]) missing.push(`${tier}|${cat}|${name}`);
+        }
+      }
+    }
+    expect(missing, `catalog institutions without desc variants: ${missing.join(', ')}`).toEqual([]);
+    expect(entries.length).toBeGreaterThanOrEqual(301);
   });
   it('every key resolves to a real catalog institution carrying a canonical desc', () => {
     for (const [key] of entries) {
@@ -71,7 +83,15 @@ describe('INSTITUTION_DESC_VARIANTS — walker + register laws', () => {
 });
 
 describe('institution desc variety at generation (draw-free fnv select)', () => {
-  it('every generated institution desc is either its canonical or an authored variant', () => {
+  it('every generated institution desc is either a catalog canonical or an authored variant', () => {
+    // The assembly post-pass selects from [ARRIVED desc, ...variants[settlementTier|cat|name]].
+    // The arrived desc is usually the settlement tier's canonical, but institutions can
+    // legitimately arrive carrying ANOTHER tier's catalog desc (e.g. a village with the
+    // hamlet 'Dairy farmer' text) — so the acceptance set is {any tier's canonical for this
+    // cat|name} ∪ that key's variants.
+    const canonsFor = (cat, name) => Object.keys(institutionalCatalog)
+      .map((t) => institutionalCatalog[t]?.[cat]?.[name]?.desc)
+      .filter((d) => typeof d === 'string');
     const seeds = ['inst-a', 'inst-b', 'inst-c'];
     for (const seed of seeds) {
       for (const settType of ['village', 'town', 'city']) {
@@ -81,8 +101,8 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
           const key = `${settType}|${inst.category}|${inst.name}`;
           const variants = INSTITUTION_DESC_VARIANTS[key];
           if (!variants) continue; // no authored variants → catalog desc unchanged (not asserted here)
-          const canon = resolveTierCatalog(settType)[inst.category][inst.name].desc;
-          expect([canon, ...variants], `${key} desc from its pool`).toContain(inst.desc);
+          const pool = [...canonsFor(inst.category, inst.name), ...variants];
+          expect(pool, `${key} desc from its pool`).toContain(inst.desc);
         }
       }
     }
