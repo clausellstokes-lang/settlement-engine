@@ -15,6 +15,8 @@ import { dirname, resolve } from 'node:path';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { pickVariant } from '../../src/kernel/proseHash.js';
 import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { generatePressureSentence } from '../../src/generators/narrativeGenerator.js';
@@ -165,5 +167,68 @@ describe('AMENDMENT B — sentence-start faction interpolations are capitalised 
     const r = { name: 'Ashholt', govFaction: 'the town council', commodity: 'grain' };
     // under_siege[1] uses govFaction mid-sentence after "; " — must remain lowercase.
     expect(PRESSURE_SENTENCES.under_siege(r)[1]).toMatch(/second week; the town council controls/);
+  });
+});
+
+describe('HISTORY_DESC_VARIANTS — Charge 1: banked history-event descriptions', () => {
+  const CANON = Object.fromEntries(HISTORICAL_EVENTS_DATA.map((e) => [e.type, e.description]));
+  const entries = Object.entries(HISTORY_DESC_VARIANTS);
+  // The tokens generateEventNarrative.defaultTokens resolves (parity gate).
+  const KNOWN_TOKENS = new Set(['{quarter}', '{building_type}', '{percent}', '{duration}', '{location}', '{dragon_color}', '{authority}', '{method}', '{former_ruler}', '{family_name}', '{new_family}', '{faction}', '{outcome}', '{ally_settlement}', '{route_type}', '{destination}', '{reason}', '{guild_name}', '{demands}', '{frequency}', '{bank_name}', '{resource}', '{deity}', '{heresy_type}', '{saint_name}', '{order_name}', '{doctrinal_dispute}', '{wizard_name}', '{magical_effect}', '{plane_name}', '{founder}']);
+
+  it('covers every catalog event type, 2 variants each', () => {
+    expect(entries.length).toBe(HISTORICAL_EVENTS_DATA.length);
+    for (const [type, variants] of entries) {
+      expect(CANON[type], `${type} is a real catalog type`).toBeTruthy();
+      expect(variants.length, `${type} variant count`).toBe(2);
+    }
+  });
+
+  it('every variant is non-empty, trimmed, distinct from canonical, and token-safe', () => {
+    for (const [type, variants] of entries) {
+      for (const v of variants) {
+        expect(v.length, `${type} non-empty`).toBeGreaterThan(0);
+        expect(v, `${type} trimmed`).toBe(v.trim());
+        expect(v, `${type} differs from canonical`).not.toBe(CANON[type]);
+        // No leaked object/undefined markers; only substitution tokens are {…}.
+        expect(v, `${type} no leak`).not.toMatch(/\bundefined\b|\[object|\bNaN\b| {2,}/);
+        const toks = v.match(/\{[a-z_]+\}/g) || [];
+        for (const t of toks) expect(KNOWN_TOKENS.has(t), `${type}: unknown token ${t}`).toBe(true);
+        // String.replace substitutes only the first occurrence — a token must not repeat.
+        expect(new Set(toks).size, `${type}: a token repeats`).toBe(toks.length);
+      }
+    }
+  });
+
+  it('canonical-at-zero: a falsy seed keeps the catalog description', () => {
+    for (const [type, variants] of entries) {
+      expect(pickVariant([CANON[type], ...variants], null)).toBe(CANON[type]);
+      expect(pickVariant([CANON[type], ...variants], '')).toBe(CANON[type]);
+    }
+  });
+
+  it('generated history descriptions leave no token residue and stay in the authored pool', () => {
+    // Token-free types (canonical + both variants carry no {…}) admit an EXACT pool check.
+    const tokenFree = new Set(entries
+      .filter(([type, vs]) => ![CANON[type], ...vs].some((s) => /\{[a-z_]+\}/.test(s)))
+      .map(([type]) => type));
+    for (const seed of ['h-a', 'h-b', 'h-c']) {
+      for (const settType of ['town', 'city']) {
+        const s = generateSettlementPipeline({ settType, terrainOverride: 'plains', tradeRouteAccess: 'road' }, null, { seed, customContent: {} });
+        for (const ev of s.history?.historicalEvents || []) {
+          expect(String(ev.description), `${ev.templateType} residue`).not.toMatch(/\{[a-z_]+\}/);
+          if (tokenFree.has(ev.templateType)) {
+            const pool = [CANON[ev.templateType], ...HISTORY_DESC_VARIANTS[ev.templateType]];
+            expect(pool, `${ev.templateType} desc in pool`).toContain(ev.description);
+          }
+        }
+      }
+    }
+  });
+
+  it('same seed reproduces the same history descriptions (determinism)', () => {
+    const descs = (seed) => (generateSettlementPipeline({ settType: 'city', terrainOverride: 'plains' }, null, { seed, customContent: {} })
+      .history?.historicalEvents || []).map((e) => e.description);
+    expect(descs('det-hist')).toEqual(descs('det-hist'));
   });
 });

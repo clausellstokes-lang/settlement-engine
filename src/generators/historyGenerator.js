@@ -16,7 +16,7 @@ import { getInstFlags, getStressFlags, pick, pickRandom2, random01, randInt } fr
 import { random as _rng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
-import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES } from '../data/historyData.js';
+import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
 
 // ─── priorityMult ─────────────────────────────────────────────────────────────
 // Convert a 0–100 priority/influence score to a 0–2 multiplier centred at 1.
@@ -454,7 +454,7 @@ const generateTradeNarrative2 = (category, context) => {
  * variables and selecting effects/hooks appropriate to the event severity.
  */
 
-const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
+const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
     '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
@@ -506,7 +506,10 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}) => {
     ...extraTokens,
   };
 
-  let description = eventTemplate.description;
+  // CONTENT-GT-FINAL (Charge 1): draw-free variant pick (historyData.historyDescription);
+  // token substitution below is unchanged and its draw count is fixed (defaultTokens builds
+  // every pick regardless of which tokens the chosen variant references).
+  let description = historyDescription(eventTemplate, descSeed);
   Object.entries(defaultTokens).forEach(([token, value]) => {
     description = description.replace(token, String(value));
   });
@@ -883,7 +886,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
 
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens);
+    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`);
     event.type = cat;
     // Preserve the stable template id alongside the display category. The final
     // dedup keys on templateType (not category), so two distinct arcs in the same
@@ -927,7 +930,7 @@ const generateRelationshipEvent = (age, tier, config, context = null) => {
       const anchorType = ANCHOR_TYPE_MAP[cat];
       const tmpl = anchorType ? HISTORICAL_EVENTS_DATA.find(e => e.type === anchorType) : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens);
+      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`);
       if (replacement) {
         replacement.type = cat;
         replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
@@ -1091,7 +1094,9 @@ export const generateHistory = (
   const context = buildHistoryContext(config, institutions, economicState, powerStructure);
   if (context) context._institutions = institutions;
 
-  // Founding narrative
+  // Founding narrative. The per-settlement seed for draw-free prose-variant selection
+  // rides on config._seed (stamped by the caller) — read at the generateEventNarrative
+  // call sites (Charge 1) and, in Charge 4, by genArrivalDetail for STRESS_NOTES.
   const founding = genArrivalDetail(config, context);
   founding.age = age;
 

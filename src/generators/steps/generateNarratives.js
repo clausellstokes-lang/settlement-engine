@@ -50,7 +50,9 @@ registerStep('generateNarratives', {
     tier, tradeRoute, null, effectiveConfig,
     economicViability?.metrics?.foodBalance || null
   );
-  const history = generateHistory(tier, effectiveConfig, institutions, economicViability, economicState, powerStructure);
+  // Stamp the pipeline seed onto the config so generateHistory's prose-variant selection
+  // (draw-free) is stable per settlement — effectiveConfig itself carries no _seed.
+  const history = generateHistory(tier, { ...effectiveConfig, _seed: ctx._seed }, institutions, economicViability, economicState, powerStructure);
 
   // Legacy annotations
   const legacyAnnotations = deriveLegacyAnnotations(history, {
