@@ -1,4 +1,4 @@
-import { emblem, emblemForKind, cartouche, compassRose } from '../../design/organic/ornament/compose.js';
+import { emblem, emblemForKind, cartouche, cartoucheDeviceLayout, compassRose } from '../../design/organic/ornament/compose.js';
 
 /**
  * components/organic/Ornament — the seeded-ornament React surface (law §5).
@@ -32,6 +32,18 @@ export function SeededCartouche({ seed, mode = 'light', width = 320, height = 96
   // Responsive: cap at the intrinsic width but shrink to fit a narrow pane, holding
   // the aspect ratio (so the field-mode dossier survives a 320px reflow). The frame
   // SVG scales via its viewBox; the label overlays.
+  //
+  // OPTICAL PADDING (review revision): the label's clearances derive from the SAME
+  // cartoucheDeviceLayout the composer draws with — past the medallion's right
+  // edge + gutter on the left, and a mirrored gutter + the frame's inner detail
+  // (~12px) on the right — expressed as PERCENTAGES of the intrinsic size so they
+  // scale with the responsive plate. Title size is container-scaled in organic.css
+  // (.oc-cartouche is an inline-size container), so the name never crowds the
+  // frame at any width.
+  const dev = cartoucheDeviceLayout(height);
+  const padLeftPct = ((dev.endX + dev.gutter) / width) * 100;
+  const padRightPct = ((dev.gutter + 12) / width) * 100;
+  const pad = (n) => `${Math.round(n * 100) / 100}%`;
   return (
     <span className="oc-cartouche" style={{ position: 'relative', display: 'block', width: `${width}px`, maxWidth: '100%', aspectRatio: `${width} / ${height}` }}>
       <span
@@ -42,9 +54,7 @@ export function SeededCartouche({ seed, mode = 'light', width = 320, height = 96
       />
       <span
         className="oc-cartouche__label"
-        // The left device medallion occupies ~19% of the width; pad the name past
-        // it so the label centres in the remaining plate.
-        style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', textAlign: 'center', padding: '0 8% 0 22%', boxSizing: 'border-box' }}
+        style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: `0 ${pad(padRightPct)} 0 ${pad(padLeftPct)}`, boxSizing: 'border-box', overflow: 'hidden' }}
       >
         {children}
       </span>

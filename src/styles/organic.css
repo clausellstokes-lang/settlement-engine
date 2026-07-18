@@ -150,6 +150,12 @@
 .oc-ornament svg { display: block; }
 /* A cartouche frame scales to its (responsive) container, holding aspect ratio. */
 .oc-cartouche__frame svg { width: 100%; height: 100%; }
+/* The plate is an inline-size container: the NAME sizes to the plate, never to the
+   viewport (the review revision — a viewport-fluid display size crowded the frame
+   at desk widths). 15cqi of a 300px plate ≈ 45px, capped at 2.05rem; the floor
+   keeps short plates legible. line-height tight so two-line names stay inside. */
+.oc-cartouche { container-type: inline-size; }
+.oc-cartouche__label .oc-display { font-size: clamp(1.25rem, 15cqi, 2.05rem); line-height: 1.06; margin: 0; text-wrap: balance; }
 
 /* Reduced motion: the organic layer has no motion, but honour the intent. */
 @media (prefers-reduced-motion: reduce) {

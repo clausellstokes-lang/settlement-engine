@@ -34,7 +34,7 @@ export const dossierFixture = Object.freeze({
   npcs: [
     { name: 'Alderman Coss Rell', role: 'Head of the merchant council', trait: 'Reads every ledger; trusts none of them.' },
     { name: 'Mother Vane', role: 'Keeper of the sea-shrine', trait: 'Buried three husbands to the tide; blesses the fleet anyway.' },
-    { name: 'Dcovey Ash', role: 'Harbour-guild boss', trait: 'Would rather dredge than be dredged out of business.' },
+    { name: 'Dovey Ash', role: 'Harbour-guild boss', trait: 'Would rather dredge than be dredged out of business.' },
   ],
   hooks: [
     'The toll-clerk’s ledger shows a barge that pays the road toll but is never seen on the road.',

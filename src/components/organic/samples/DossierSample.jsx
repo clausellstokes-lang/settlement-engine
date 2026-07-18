@@ -1,7 +1,7 @@
 import { Surface, Display, Eyebrow, Rubric, Prose, Ink } from '../Manuscript.jsx';
 import { Register, Marginalia } from '../Register.jsx';
 import Rule from '../Rule.jsx';
-import { Emblem, SeededCartouche } from '../Ornament.jsx';
+import { SeededCartouche } from '../Ornament.jsx';
 import { dossierFixture as d } from './fixtures.js';
 
 /**
@@ -51,11 +51,13 @@ export default function DossierSample({ field = false, posture = 'desk' }) {
     <Surface field={field} posture={posture} as="article" className="oc-dossier oc-prose-host">
       <header>
         <Eyebrow>A surveyor’s dossier</Eyebrow>
+        {/* The cartouche's own device medallion IS the settlement's mark — no
+            second emblem beside it (review revision: the flex-wrapped duplicate
+            rendered as an orphaned glyph below the plate at field widths). */}
         <div className="oc-dossier__plate">
           <SeededCartouche seed={d.name} mode={field ? 'field' : 'light'} width={300} height={88}>
             <Display size="xl" as="h1">{d.name}</Display>
           </SeededCartouche>
-          <Emblem kind={d.emblemKind} mode={field ? 'field' : 'light'} size={56} />
         </div>
         <p className="oc-dossier__facts">
           <Rubric>Tier</Rubric> <Ink>{d.tier}</Ink>{'  ·  '}

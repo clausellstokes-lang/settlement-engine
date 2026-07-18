@@ -63,6 +63,29 @@ export function cornerPiece(seed, { corner = 'tl', mode = 'light', size = 24 } =
 }
 
 /**
+ * The device medallion's layout inside a cartouche of a given height — ONE source
+ * for the composer (draws it) and the React label overlay (pads past it), so the
+ * optical clearances are a documented system, not per-callsite magic (the review
+ * revision: at desk widths the device straddled the inner frame line and the
+ * title crowded the right inner edge).
+ *
+ *   inset  — the medallion ring's clearance from the frame's INNER line (the
+ *            frames draw their inner detail at x≈7..12, so the ring starts at 14).
+ *   r      — the emblem roundel radius (capped so ring + emblem sit fully clear
+ *            of the frame at every height).
+ *   endX   — the medallion's right-most extent (ring edge) — the label pads past
+ *            endX + gutter; the right pad mirrors the gutter against the frame.
+ * @param {number} height
+ */
+export function cartoucheDeviceLayout(height) {
+  const inset = 14;
+  const r = Math.min(20, Math.max(10, Math.floor(height / 2) - inset));
+  const ringR = r + 3;
+  const cx = inset + ringR;
+  return Object.freeze({ inset, r, ringR, cx, cy: height / 2, endX: cx + ringR, gutter: 10 });
+}
+
+/**
  * The seeded CARTOUCHE — a rare, meaningful nameplate (seal / plate / charter).
  * Frame + one corner hand mirrored to four corners + a left DEVICE emblem, all
  * chosen from independent sub-hashes of the seed: 3 frames × 4 corners × 8 devices
@@ -85,10 +108,9 @@ export function cartouche(seed, { mode = 'light', width = 320, height = 96, devi
   let deviceMark = '';
   if (device) {
     const em = pick.pick('device', EMBLEMS);
-    // A left medallion: a ruled roundel + the emblem, centred vertically.
-    const cx = 34, cy = height / 2, r = Math.min(24, height / 2 - 10);
+    const { r, ringR, cx, cy } = cartoucheDeviceLayout(height);
     const s = (2 * r) / 48; // emblem 48-box → roundel diameter
-    deviceMark = `<circle cx="${cx}" cy="${cy}" r="${r + 3}" fill="none" stroke="${p.faint}" stroke-width="1"/>`
+    deviceMark = `<circle cx="${cx}" cy="${cy}" r="${ringR}" fill="none" stroke="${p.faint}" stroke-width="1"/>`
       + `<g transform="translate(${cx - r},${cy - r}) scale(${round(s)})">${em.draw(p)}</g>`;
   }
   return svgWrap(width, height, `${frame.draw(p, width, height)}${corners}${deviceMark}`, {});
