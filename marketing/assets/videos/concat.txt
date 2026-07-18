@@ -1,0 +1,6 @@
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-0-dive.mp4'
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-1-thorp-hamlet.mp4'
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-2-hamlet-village.mp4'
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-3-village-town.mp4'
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-4-town-city.mp4'
+file '/Users/cstokes/Desktop/settlement-engine/marketing/assets/videos/leg-5-city-metropolis.mp4'

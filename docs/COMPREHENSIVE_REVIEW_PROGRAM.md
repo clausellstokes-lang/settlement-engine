@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ THE SURVEY OF ONE SETTLEMENT — THE MICROSITE BUILT (2026-07-18).** The owner's
+travel-and-stop design executed end to end: SIX CHAINED FILM LEGS generated (Seedance
+start/end-frame anchoring — desk-dive + five growth legs, each landing ON the approved
+evolution plate; 270 credits), concatenated to a 30.25s all-keyframe scrub film (900p
+CRF24, 76MB prototype-grade); the microsite REBUILT as travel-and-stop: legs drive film
+chapters, stops freeze the film and crossfade to the crisp stage stills (no ScrollTrigger
+pins anywhere — content height can never desync the film), stills-as-floor layering
+covers unbuffered seeks, touch/reduced-motion get the stills-only journey. Six stops =
+Forge@thorp · Brief@hamlet · Voice@village · LivingWorld@town ("you have just watched
+this town grow — that is the engine, working") · Artifacts+audience@city ·
+Ledger+Door@metropolis. CONFIRMED by DOM receipts: conductor maps mid-leg-2 → t=12.6/30.25
+w/ film visible; stop-4 → film hidden, frozen at the town landing frame (t=20.12),
+still-4 crossfading in. Build green (vite). ⚠️ pane screenshots unreliable after scripted
+scrolls (stale-frame defect) — logic receipts stand; the visual walk is the owner's.
+Preview: cd marketing/website && npm run dev → http://localhost:5301. The app's Welcome
+inherits this design per the annex (stills + CSS travel, film optional).
 **⬛ BATCH-2 PLATE AUDITS (2026-07-18):** settlements.jpg = REGENERATE (mappa-mundi
 concept KEPT for the Library; strip the enthroned saint + haloed figure + crosses
 [invented-faith only], illegible-only text, house palette, quiet zones; sun-face + vine

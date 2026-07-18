@@ -1,0 +1,310 @@
+/* SettlementForge landing — base layout, typography, sections, video layer.
+   Brand tokens from marketing/copy/brand-kit.md. Parchment-and-ink; no glass,
+   no gradients-as-decoration, no drop shadows — rules and plates instead. */
+
+:root {
+  --parchment: #efe6d4;
+  --parchment-2: #e8dcc8;
+  --umber: #221c17;
+  --ink: #2b2320;
+  --ink-soft: #4a3f38;
+  --muted: #6b5d52;
+  --oxblood: #9a2b1e;
+  --oxblood-dim: #c05a3f;
+  --gold: #b08d3f;
+  --gold-deep: #8f7130;
+  --line: rgba(43, 35, 32, 0.38);
+  --line-faint: rgba(43, 35, 32, 0.16);
+
+  --font: "Lora", Georgia, serif;
+  --font-label: "Nunito", -apple-system, sans-serif;
+
+  --pad-x: clamp(1.25rem, 5vw, 6rem);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+
+body {
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--umber);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── The film layer ──────────────────────────────────────────────────── */
+
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* above the stills: the film covers the floor only while traveling */
+}
+
+/* Warm dim, not gray: the lamp pulled closer at the frame's edges. */
+.bg-tint {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at 50% 42%,
+    rgba(34, 28, 23, 0) 38%,
+    rgba(34, 28, 23, 0.18) 68%,
+    rgba(34, 28, 23, 0.52) 100%
+  );
+}
+
+.bg-still {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+.bg-still[data-still="0"] { opacity: 1; }
+
+.bg-video { opacity: 0; transition: opacity 250ms linear; }
+
+#page { position: relative; z-index: 10; }
+
+/* ── Type voices ─────────────────────────────────────────────────────── */
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  margin-bottom: 1rem;
+}
+
+h1, h2 { font-weight: 600; line-height: 1.06; letter-spacing: -0.01em; }
+
+/* ── Nav ─────────────────────────────────────────────────────────────── */
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem var(--pad-x);
+  background: rgba(34, 28, 23, 0.9);
+  border-bottom: 1px solid rgba(239, 230, 212, 0.14);
+}
+
+.nav__lockup { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+.nav__seal { filter: invert(0.88) sepia(0.9) saturate(0.5) brightness(1.05); }
+.nav__logo {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold);
+  letter-spacing: 0.01em;
+}
+
+/* ── Sections ────────────────────────────────────────────────────────── */
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 14vh var(--pad-x);
+}
+
+/* 1 · Hero */
+.hero { min-height: 100svh; }
+
+.hero__wash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 62% 58% at 38% 52%,
+    rgba(239, 230, 212, 0.88) 0%,
+    rgba(239, 230, 212, 0.55) 55%,
+    rgba(239, 230, 212, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__inner { position: relative; max-width: 44rem; }
+.hero__title { font-size: clamp(2.6rem, 7vw, 5.2rem); }
+.hero__dek {
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  color: var(--ink-soft);
+  max-width: 34rem;
+  margin-top: 1.4rem;
+  line-height: 1.55;
+}
+.hero__cta { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 2.1rem; }
+.hero__honest {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+/* Travel legs: tall quiet spacers that drive the film. */
+.leg {
+  position: relative;
+  height: 160vh;
+}
+.leg__note {
+  position: sticky;
+  top: 46vh;
+  display: block;
+  text-align: center;
+  font-style: italic;
+  color: rgba(239, 230, 212, 0.92);
+  font-size: 1.05rem;
+  text-shadow: 0 1px 10px rgba(34, 28, 23, 0.75);
+  letter-spacing: 0.02em;
+}
+
+/* Stops: natural-height sections; the film is frozen beneath them. */
+.stop--right { justify-content: flex-end; }
+.stop--center { justify-content: center; }
+.plate__age {
+  font-style: italic;
+  color: var(--gold-deep);
+  font-size: 0.9rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line-faint);
+  padding-bottom: 0.7rem;
+}
+
+/* 3–5 · Features */
+.feature--right { justify-content: flex-end; }
+.feature--left { justify-content: flex-start; }
+
+.stop h2, .specs h2 { font-size: clamp(1.9rem, 3.6vw, 3rem); margin-bottom: 1rem; }
+.stop .plate p { line-height: 1.6; color: var(--ink-soft); margin-top: 0.8rem; max-width: 30rem; }
+.plate__foot { font-style: italic; color: var(--muted); }
+.plate__motto {
+  font-style: italic;
+  color: var(--oxblood);
+  border-top: 1px solid var(--line-faint);
+  padding-top: 0.9rem;
+  margin-top: 1.2rem !important;
+}
+
+/* Stop 5: artifacts + the audience grid */
+.stop5 { display: flex; flex-direction: column; gap: 1.6rem; align-items: flex-start; }
+.audience {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  max-width: 58rem;
+}
+.audience__card { max-width: none; padding: 1.2rem 1.4rem; }
+.audience__card p:last-child { line-height: 1.55; color: var(--ink-soft); }
+.workflow-card__k {
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.7rem;
+}
+
+/* Stop 6: the ledger + the door */
+.stop6 { display: flex; flex-direction: column; gap: 1.8rem; align-items: center; width: 100%; }
+.buy__plate { text-align: center; }
+
+/* 7 · Specs */
+.specs { justify-content: center; }
+.specs__plate { width: min(46rem, 100%); }
+.specs__table { width: 100%; border-collapse: collapse; margin-top: 1.4rem; }
+.specs__table tr { border-top: 1px solid var(--line-faint); }
+.specs__table tr:first-child { border-top: 3px double var(--line); }
+.specs__table th {
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  text-align: left;
+  padding: 0.85rem 1.2rem 0.85rem 0;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.specs__table td { padding: 0.85rem 0; line-height: 1.5; color: var(--ink-soft); }
+
+/* 8 · The door */
+.buy { justify-content: center; text-align: center; }
+.buy__plate { width: min(38rem, 100%); }
+.buy__title { font-size: clamp(2rem, 4.4vw, 3.4rem); margin: 0.4rem 0 1.6rem; }
+.buy__honest { font-style: italic; color: var(--muted); margin-top: 1.1rem; }
+.buy__rate {
+  display: inline-block;
+  margin-top: 1.4rem;
+  color: var(--oxblood);
+  font-style: italic;
+}
+
+/* 9 · Footer */
+.footer {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 14vh var(--pad-x) 7vh;
+  background: var(--umber);
+  color: var(--parchment-2);
+}
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 100%;
+  height: 38vh;
+  background: linear-gradient(to bottom, transparent, var(--umber));
+  pointer-events: none;
+}
+.footer__seal { filter: invert(0.88) sepia(0.9) saturate(0.5) brightness(1.05); }
+.footer__big { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; color: var(--gold); margin-top: 0.8rem; }
+.footer__motto { font-style: italic; color: var(--oxblood-dim); margin-top: 0.3rem; }
+.footer__links { display: flex; gap: 1.6rem; justify-content: center; margin: 1.6rem 0 1.2rem; }
+.footer__links a {
+  color: var(--parchment-2);
+  text-decoration: none;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(239, 230, 212, 0.3);
+  padding-bottom: 2px;
+}
+.footer__links a:hover { color: var(--gold); border-color: var(--gold); }
+.footer__oath { color: rgba(239, 230, 212, 0.6); font-size: 0.9rem; }
+
+/* ── Reveals ─────────────────────────────────────────────────────────── */
+
+.reveal { opacity: 0; transform: translateY(22px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .impact__head .word { opacity: 1 !important; filter: none !important; transform: none !important; }
+}
+
+/* ── Mobile / touch: stills-only journey (the film hides; stops still tell
+     the whole growth story through the stage stills) ─────────────────── */
+
+@media (hover: none), (max-width: 768px) {
+  .bg-video { display: none; }
+  .leg { height: 70vh; }
+  .stop--right, .stop--center { justify-content: center; }
+  .nav__enter { display: none; }
+}
