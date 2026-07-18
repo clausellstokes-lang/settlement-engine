@@ -368,7 +368,13 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
 - Deploy batch: ~35 pending migrations in numeric order (138–154+), the edge
   functions, the covert-scrub migration 142 rides here. Staging first if available.
 - CARVE-OUTS before public: ⛔OWNER LEGAL CONSULT (ToS/privacy + trademark clearance
-  for the seal) · ⛔OWNER support@settlementforge.com confirmation.
+  for the seal) · SUPPORT EMAIL FLIP (owner intent 2026-07-18: branded
+  support@settlementforge.com redirecting to settlementforge@gmail.com; MX probe
+  that day = EMPTY, forwarding NOT yet configured — ⛔OWNER configures email
+  routing at the registrar/DNS, then: verify MX + one test mail round-trips, THEN
+  flip SUPPORT_EMAIL's default in src/copy/support.js to the branded address in
+  the same deploy batch; the gmail default stays until the test passes — never
+  flip first).
 - ⛔OWNER physically: the PR merge button · `supabase db push`.
 
 ## §9 THE OWNER DECISION QUEUE (nothing blocks until its named point)

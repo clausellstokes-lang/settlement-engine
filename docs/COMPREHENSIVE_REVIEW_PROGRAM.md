@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ DELEGATION #2 EXECUTED (owner: "use your best judgement for #2… support@
+settlementforge.com is suppose to redirect to settlementforge@gmail.com",
+2026-07-18):** (1) MARKETING MASTERS MOVED per the recorded default — ~381MB
+archived to ~/Desktop/settlementforge-marketing-masters/ (file-count parity
+verified), git rm'd @ ced265b8 w/ README pointer; art-direction MANIFEST restored
+to git @ b0c74a4d (doctrine text, not a master); microsite bg.mp4 (73MB, under
+GitHub's 100MB hard limit) deliberately retained so the prototype stays runnable.
+Tracked marketing weight 474MB → 92MB — THE PUSH-SIZE BLOCKER IS CLEARED.
+(2) SUPPORT EMAIL: owner intent = branded address forwarding to the gmail; MX
+probe EMPTY (no mail routing exists yet) ⇒ FAIL-SAFE SEQUENCING ruled: code
+default stays settlementforge@gmail.com until the owner configures DNS email
+routing + a test mail round-trips, THEN the one-line flip to the branded address
+rides the deploy batch (§8 carve-out rewritten; memory reopened). Never flip
+before the test.
 **⬛ MINIATURES CHIP FOLDED (2026-07-18): claude/deep-craft-miniatures @ 332fdf56
 (owner-started session task_2bb0e68e, signed off there) merged → deep-craft @
 9906d793 (NUL-clean, geometry verified, focused gates + build + verify:dist all
