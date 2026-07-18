@@ -93,7 +93,14 @@ export const semantic = Object.freeze({
   pageBg:        color['parchment-50'],
   cardBg:        color['parchment-50'],
   cardHover:     color['parchment-100'],
-  cardBorder:    color['parchment-200'],
+  // THE MATERIALS BRIDGE (Organic Craft, 2026-07-18): the app-wide card border /
+  // divider is now the feint-rule material — the organic ink ramp's hairline tone
+  // (design/organic/ink.js INK.hairline), the receding subdivision rule of the
+  // manuscript grammar. One value swap, zero structural change; every surface
+  // reading BORDER/cardBorder renders the new material. parchment-200 itself is
+  // unchanged (exact-value swatch references keep their promise). Decorative
+  // dividers carry no WCAG floor; interactive boundaries still use BORDER_STRONG.
+  cardBorder:    '#C8B89A',
 
   // Text
   textPrimary:   color['ink-900'],
@@ -512,7 +519,8 @@ export const legacy = Object.freeze({
   // ratio on parchment is what AA mandates and what MUTED fails.
   BODY:     color['ink-600'],
   SECOND:   color['ink-800'],
-  BORDER:   color['parchment-200'],
+  // THE MATERIALS BRIDGE: BORDER is the feint-rule hairline (see semantic.cardBorder).
+  BORDER:   '#C8B89A',
   BORDER2:  '#F0E5C8',            // a lighter parchment-150
   CARD:     '#FFFBF5',            // slightly warmer than parchment-50 for cards
   PARCH:    color['parchment-50'],

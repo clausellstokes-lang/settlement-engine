@@ -4,6 +4,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import './styles/a11y.css';
+// THE ORGANIC CRAFT layer (pure CSS — the primitive classes + the generated
+// :root token vars). Eager CSS so every surface can speak the manuscript
+// grammar; the organic JS stays lazy (tests/design/organicVars.test.js pins it).
+import './styles/organic.css';
+import './styles/organicVars.css';
 import { useStore } from './store';
 import { emitCssTokens } from './design/tokens.js';
 import { installAnalyticsProvider } from './lib/analyticsProvider.js';
