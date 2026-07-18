@@ -22,7 +22,7 @@
  * Pure module — no React, no DOM, no flags. Safe to unit test in node.
  */
 
-import { ARCHETYPES, REL_TYPES } from './catalogData.js';
+import { COMPENDIUM_DATA as CD } from './generated/compendiumData.generated.js';
 import { compareCodepoint } from '../deterministicSort.js';
 
 // Valid destination tabs — must mirror the TABS ids in CompendiumPanel EXACTLY.
@@ -31,7 +31,8 @@ import { compareCodepoint } from '../deterministicSort.js';
 // drifted: the Living World tab was in the panel but not here, so a search could
 // never route to it) reds this until it is added (domain-region-dossier-guidance-5).
 export const COMPENDIUM_TABS = Object.freeze([
-  'tiers', 'economy', 'power', 'arcane', 'living', 'stress', 'neighbour', 'institutions',
+  'overview', 'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane',
+  'deities', 'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
 ]);
 
 /**
@@ -143,7 +144,7 @@ const LIVING_ENTRIES = [
 
 // ── Derived entries from the shared arrays (zero-drift) ────────────────────
 
-const ARCHETYPE_ENTRIES = ARCHETYPES.map((a) => ({
+const ARCHETYPE_ENTRIES = CD.archetypes.entries.map((a) => ({
   id: `arch-${slug(a.name)}`,
   term: a.name,
   category: 'Archetype',
@@ -152,13 +153,59 @@ const ARCHETYPE_ENTRIES = ARCHETYPES.map((a) => ({
   keywords: `${a.cat} ${a.cond} ${a.desc}`,
 }));
 
-const REL_ENTRIES = REL_TYPES.map((r) => ({
+const REL_ENTRIES = CD.relationships.entries.map((r) => ({
   id: `rel-${slug(r.id)}`,
   term: r.label,
   category: 'Neighbour Relationship',
   tab: 'neighbour',
   anchor: 'neighbours',
   keywords: r.effect,
+}));
+
+// ── New registry hubs — derived from the generated artifact (zero-drift) ────
+const DEITY_ENTRIES = CD.deities.entries.map((d) => ({
+  id: `deity-${slug(d.slug)}`,
+  term: d.name,
+  category: 'Deity',
+  tab: 'deities',
+  anchor: `deity-${slug(d.slug)}`,
+  keywords: `${d.portfolio} ${d.alignment} ${d.law} ${d.temperament} ${d.rank} ${d.domain}`,
+}));
+
+const OPERATION_ENTRIES = CD.operations.entries.map((o) => ({
+  id: `op-${slug(o.opType)}`,
+  term: o.opType,
+  category: 'Operation',
+  tab: 'operations',
+  anchor: `op-${slug(o.opType)}`,
+  keywords: `${o.klass} ${o.targetScope} ${o.receiptRef || ''} ${o.undoToken ? 'undo reversible' : 'one-way'}`,
+}));
+
+const SYSTEM_ENTRIES = CD.systems.map((s) => ({
+  id: `system-${slug(s.id)}`,
+  term: s.label,
+  category: 'Living World System',
+  tab: 'living',
+  anchor: `system-${slug(s.id)}`,
+  keywords: `${s.flag} ${s.dormant ? 'dormant' : s.presets.join(' ')} simulation`,
+}));
+
+const LENS_ENTRIES = CD.lenses.entries.map((l) => ({
+  id: `lens-${slug(l.id)}`,
+  term: l.label,
+  category: 'Map Lens',
+  tab: 'lenses',
+  anchor: `lens-${slug(l.id)}`,
+  keywords: `${l.id} map style render`,
+}));
+
+const CALAMITY_ENTRIES = CD.calamity.flavors.map((f) => ({
+  id: `calamity-${slug(f.key)}`,
+  term: f.title,
+  category: 'Calamity',
+  tab: 'calamity',
+  anchor: `calamity-${slug(f.key)}`,
+  keywords: `${f.key} disaster great calamity`,
 }));
 
 /**
@@ -174,9 +221,14 @@ export const COMPENDIUM_INDEX = Object.freeze(/** @type {CompendiumEntry[]} */ (
   ...ARCHETYPE_ENTRIES,
   ...ARCANE_ENTRIES,
   ...LIVING_ENTRIES,
+  ...SYSTEM_ENTRIES,
   ...STRESS_ENTRIES,
   ...REL_ENTRIES,
   ...CROSS_SETTLEMENT_ENTRIES,
+  ...DEITY_ENTRIES,
+  ...OPERATION_ENTRIES,
+  ...LENS_ENTRIES,
+  ...CALAMITY_ENTRIES,
 ].map(Object.freeze)));
 
 // ── Scoring ────────────────────────────────────────────────────────────────

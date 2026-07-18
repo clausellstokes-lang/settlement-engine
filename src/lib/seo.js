@@ -62,7 +62,7 @@ const VIEW_DESCRIPTIONS = {
   generate:   'Generate a living tabletop-RPG settlement in seconds: economy, factions, NPCs, institutions, and history, ready for the table.',
   compendium: 'The SettlementForge compendium: settlement tiers, trade and economy, power and faction archetypes, religion, stress, the neighbour system, and the institution catalog.',
   pricing:    'SettlementForge pricing. Generate and save settlements for free, or unlock the Realm, AI narration, and cross-settlement simulation.',
-  howto:      'How SettlementForge works, and how it compares to map tools and AI generators, for game masters building a living world.',
+  howto:      'Why SettlementForge can be trusted: a deterministic world simulator built by one person. The covenant, how one town is derived, and where the AI is caged by mechanism, plus the keeper\'s handbook.',
   gallery:    'Browse settlements and realms shared by the SettlementForge community.',
   founders:   'The SettlementForge Founders: thirty lifetime seats, shown as a public lineage. Meet the people who backed the project first.',
   terms:      'The SettlementForge terms of service: your account, acceptable use, subscriptions, cancellation, and refunds.',

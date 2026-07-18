@@ -47,15 +47,19 @@ vi.mock('../../src/store/index.js', () => {
   return { useStore };
 });
 
-describe('HowToUse — Living World tab + split Under-the-Hood', () => {
-  it('mounts and exposes The Living World + Under the Hood tabs', async () => {
+describe('HowToUse — the About manifesto + the Keeper\'s Handbook tabs', () => {
+  it('mounts, keeps The Living World tab, and retires the folded-up tabs', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { container } = render(<HowToUse standalone />);
     expect(container.firstChild).not.toBeNull();
-    // The new tab buttons are present.
     const labels = [...container.querySelectorAll('button[role="tab"]')].map(b => b.textContent.trim());
+    // The practical handbook keeps The Living World tab.
     expect(labels).toContain('The Living World');
-    expect(labels).toContain('Under the Hood');
+    // DOC WAVE 2/2: "Under the Hood" (derivation mechanics) and "DM Philosophy"
+    // were folded UP into the About manifesto (the mechanism + philosophy bands),
+    // and the orphaned howto/UnderTheHoodTab.jsx was reaped. Their tabs are gone.
+    expect(labels).not.toContain('Under the Hood');
+    expect(labels).not.toContain('DM Philosophy');
   });
 
   it('clicking The Living World renders the thesis + the value ladder', async () => {
@@ -70,20 +74,16 @@ describe('HowToUse — Living World tab + split Under-the-Hood', () => {
     expect(container.textContent).toContain('Advance Time');
   });
 
-  it('Under the Hood renders the derivation mechanics insights', async () => {
+  it('the About manifesto renders the derivation mechanics (folded up, always visible)', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { container } = render(<HowToUse standalone />);
-    clickTab(container, 'Under the Hood');
+    // The manifesto is a linear trust page — the mechanism band renders on mount,
+    // not behind a tab click.
     const text = container.textContent.toLowerCase();
-    // LINEAGE NOTE (master merge W6): the original assertions pinned master's
-    // SPLIT Under-the-Hood ("Generation: how one town is derived" / "Simulation:
-    // how the region moves" / "sixteen causal variables" / "why-trace"). RF's
-    // LogicTab is the single non-split "Under the Hood" mechanics tab; the
-    // assertions are re-pointed to its actual constraint-derivation insights.
-    expect(text).toContain('the outputs aren\'t random. they\'re derived');
-    expect(text).toContain('constraint-driven, not random');
-    expect(text).toContain('sliders as probability weights');
-    expect(text).toContain('magic as an economic buffer');
+    expect(text).toContain('resolves constraints');
+    expect(text).toContain('constraint-driven worldbuilding');
+    expect(text).toContain('sliders shift probability');
+    expect(text).toContain('causal variables');
   });
 });
 

@@ -16,8 +16,8 @@
  *
  * We mock the store (the panel reads getCustomContentCount() on mount, plus the
  * custom-content selectors in the custom-mode branch) and analytics (the global
- * search bar pulls Funnel/EVENTS). Default mode is the built-in catalog with the
- * 'tiers' tab, whose stable copy we assert on.
+ * search bar pulls Funnel/EVENTS). Default mode is the built-in catalog on the
+ * Overview dashboard, whose stable artifact-rendered copy we assert on.
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
@@ -70,11 +70,11 @@ describe('CompendiumPanel — decomposition smoke', () => {
     expect(document.body).toBeTruthy();
     expect(container.firstChild).not.toBeNull();
 
-    // Default mode is the built-in catalog on the 'tiers' tab. Pinning the
-    // TiersTab's stable copy means a broken extraction (e.g. CatalogTabs →
-    // primitives import) would surface here.
+    // Default mode is the built-in catalog on the Overview dashboard (DOC WAVE 2/2).
+    // Pinning its stable, artifact-rendered copy means a broken extraction (e.g.
+    // CompendiumDashboard/CatalogHubs → primitives/artifact import) surfaces here.
     expect(
-      screen.getByText(/Tier determines the maximum institution count/),
+      screen.getByText(/rendered by the deterministic engine from its own registries/),
     ).toBeTruthy();
   });
 
@@ -84,7 +84,7 @@ describe('CompendiumPanel — decomposition smoke', () => {
 
     expect(container.firstChild).not.toBeNull();
     expect(
-      screen.getByText(/Tier determines the maximum institution count/),
+      screen.getByText(/rendered by the deterministic engine from its own registries/),
     ).toBeTruthy();
   });
 });

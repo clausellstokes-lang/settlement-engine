@@ -58,12 +58,12 @@ describe('public/sitemap.xml', () => {
     expect(locs).not.toContain('/admin');
   });
 
-  it('canonicalizes home to / and fans the compendium out to seven sections', () => {
+  it('canonicalizes home to / and fans the compendium out to its 14 sections', () => {
     const locs = staticUrls().map((u) => u.loc);
     expect(locs).toContain('https://settlementforge.com/');
     expect(locs).not.toContain('https://settlementforge.com/home');
     const tabs = locs.filter((l) => l.includes('/compendium?tab='));
-    expect(tabs).toHaveLength(7);
+    expect(tabs).toHaveLength(14);
   });
 
   // GALLERY-2 phase 2 — the facet hubs (src/lib/galleryHubs.js).

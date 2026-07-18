@@ -66,8 +66,12 @@ const HINTS = {
   privacy:    { changefreq: 'yearly',  priority: '0.3' },
 };
 
-// The seven compendium sections (CompendiumPanel TABS) — each gets its own URL.
-const COMPENDIUM_TABS = ['tiers', 'economy', 'power', 'arcane', 'stress', 'neighbour', 'institutions'];
+// The compendium sections (CompendiumPanel TABS) — each gets its own URL. The bare
+// /compendium is the Overview, so it is not repeated as ?tab=overview here.
+const COMPENDIUM_TABS = [
+  'tiers', 'economy', 'power', 'institutions', 'operations', 'arcane', 'deities',
+  'living', 'lenses', 'facets', 'stress', 'calamity', 'neighbour', 'az',
+];
 
 /** Is this ROUTES entry an indexable public content route? */
 function isIndexable(route) {
