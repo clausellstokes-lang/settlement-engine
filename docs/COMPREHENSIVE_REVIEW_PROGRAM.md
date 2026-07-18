@@ -1128,9 +1128,9 @@ on the current base; its bytes already inside the measured 1,034,683 closure). T
 ledger's own 2026-07-16 satellite-queue row recorded exactly this ("W2 4cf84a40 already
 ancestors — stale blocked-notes corrected") — the FP-G11 fold row's "W2 UNLOCKED"
 dispatch reasoned from the stale round-21 memory without cross-checking that correction.
-Task #33 closed ALREADY-DONE; the empty lane branch deleted (manager flip of the lane's
-keep-judgment: an empty tip-pointer confuses successor branch audits; this row is the
-record). THE PROCESS LESSON, now standing: **a "parked/blocked" note is dead the moment
+Task #33 closed ALREADY-DONE; the empty lane branch deletion BLOCKED by its worktree
+checkout — left pinned like every other lane worktree (the lane's keep-judgment stands
+after all; this row is the record either way). THE PROCESS LESSON, now standing: **a "parked/blocked" note is dead the moment
 any ledger row resolves it — before dispatching ANY satellite, grep the ledger for its
 LATEST mention, not its memory entry**; the round-21 memory is trued to match.
 **⬛ FOLD: FP-G11 (2026-07-17) → w7-prep @ b745c20c** (one config-only commit; spot-checked
