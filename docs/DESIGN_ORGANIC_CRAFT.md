@@ -101,3 +101,24 @@ viewport.
 The preview legibility review (desktop + mobile + dim pass) gates every craft fold; the
 owner's taste veto on a sample screen set precedes any app-wide sweep; legibility beats
 immersion in every collision, permanently.
+
+## 10. THE TABLET COMPANION (owner amendment, 2026-07-17: "we need a tablet companion…
+## This one can include the realm")
+
+THE THREE-POSTURE MODEL replaces the mobile/desktop binary: **DESK** (desktop — the full
+instrument bench, realm included) · **FIELD** (phone — the prompter/notebook, realm
+gated) · **THE SPREAD** (tablet — the open book and the shared surface, **REALM-CAPABLE
+by owner ruling**). Postures derive from pointer/hover capability + width + orientation
+(a posture model, never width-only breakpoints), building on the existing isMobile layer
+— extended, never greenfielded. Tablet is COMPOSED AT ITS OWN SIZE (the stretched-phone
+and shrunken-desktop failure modes are the named tells): two-page spreads where the
+book metaphor earns it, orientation as two compositions (landscape spread vs portrait
+scroll), floating instrument panels over artifact grounds. THE TABLE SCENARIOS the
+tablet uniquely owns: the GM-screen replacement (reference + trackers at the elbow) and
+THE FLAT SHARED SURFACE (the town map/fog layer laid on the table for players — the fog
+table layer's true home; the DM/player visibility split governs what a flat tablet may
+show). REALM ON TOUCH: pan/zoom/inspect first-class; drag-placement with fat-finger
+precision assists (tap-then-confirm placement, snap, loupe-class aids per the research);
+44-48px on every realm control OUR chrome owns; the FMG iframe's touch behavior verified
+empirically at build, never assumed. Sweep wf_3c80f28a feeds the wave's tablet phase;
+the preview legibility review gains the tablet viewport both orientations.
