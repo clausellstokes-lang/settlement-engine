@@ -42,12 +42,13 @@ import { collectRealizedEmigrationEvents, dispatchMigrations } from './migration
 import { migrationActive } from '../spatial/migration.js';
 import { distributeMigrants, applyPopulationOutcomeToSettlement } from './populationDynamics.js';
 import {
-  calamityEnabled, annualHazard, rollStrike, withinCooldown, disasterTypeFor, stampTitle,
+  calamityEnabled, annualHazard, rollStrike, withinCooldown, disasterTypeFor,
   selectStrikeTargets, planInstitutionFate, resolvePopulationLoss, CALAMITY_TUNING,
   exposureMultiplier, normalizeExposure, severityScaleFor, severityKFactorFor,
   DEFAULT_CALAMITY_SEVERITY, CALAMITY_SEVERITY_BANDS,
 } from '../spatial/calamity.js';
 import { lifecycleStatusOf } from './settlementLifecycleFirstClass.js';
+import { pickLine, CALAMITY_TITLES, CALAMITY_SUMMARIES, CALAMITY_REASONS } from './eventProse.js';
 
 // ── Kernel-local read shapes (0-hole discipline — no `any` holes) ─────────────
 /** @typedef {import('../spatial/distanceRead.js').SpatialDigest} SpatialDigest */
@@ -406,7 +407,7 @@ function resolveStrikeOnSettlement({ settlement, item, id, year, tick, forkFn, s
   // cosmetic flavor hint (save-shape unchanged); optional DM `flavorText` is freetext.
   const settlementName = String(item?.name || s.name || id);
   const stamp = /** @type {CalStamp} */ ({
-    type: flavorHint, name: stampTitle(settlementName, year), year, tick,
+    type: flavorHint, name: pickLine(CALAMITY_TITLES, `${settlementName}::${year}`, { name: settlementName, year }), year, tick,
     deaths: loss.deaths, exodus: loss.exodus, k: targets.length, targets,
     ...(flavorText ? { flavorText: String(flavorText) } : {}),
   });
@@ -725,7 +726,11 @@ function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
     severity: 0.8,
     score: 88,
     headline: stampName,
-    summary: `A calamity has struck ${settlementName}: ${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin, about ${loss.deaths} dead, and many more take to the roads.`,
+    summary: pickLine(CALAMITY_SUMMARIES, `${id}::${tick}`, {
+      name: settlementName,
+      ruin: `${k === 1 ? 'an institution lies' : `${k} institutions lie`} in ruin`,
+      deaths: loss.deaths,
+    }),
     kind: 'applied',
     impactKind: 'calamity',
     channelType: 'disaster',
@@ -734,7 +739,7 @@ function strikeNews(id, settlementName, stampName, loss, k, tick, now) {
     channelIds: [],
     sourceEventId: `calamity.${id}.${tick}`,
     tags: ['world_pulse', 'calamity', 'disaster'],
-    reasons: ['The calamity struck where the land lies most exposed — a reckoning of geography.'],
+    reasons: [pickLine(CALAMITY_REASONS, `${id}::${tick}::reason`)],
   };
 }
 

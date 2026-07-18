@@ -164,8 +164,8 @@ export function regenHistoryPipeline(settlement, config, options = {}) {
   const prevRng = setActiveRng(createPRNG(seed));
   try {
     return generateHistory(
-      settlement.tier, config, settlement.institutions || [],
-      settlement.economicViability, settlement.economicState, settlement.powerStructure
+      settlement.tier, { ...config, _seed: settlement._seed ?? seed }, settlement.institutions || [],
+      settlement.economicViability, settlement.economicState, settlement.powerStructure,
     );
   } finally {
     clearActiveRng(prevRng);

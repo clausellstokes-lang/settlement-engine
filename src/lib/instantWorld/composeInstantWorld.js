@@ -51,6 +51,7 @@ import { SIMULATION_RULE_PRESETS } from '../../domain/worldPulse/simulationRules
 import { validateDossier } from '../../domain/validation/consistency.js';
 import { extractReducedFingerprint, stableStringify } from '../structuralFingerprint.js';
 import { deriveWorldPlan, normalizeBasicConfig } from '../../domain/instantWorld/worldPlan.js';
+import { dedupeWorldFactionNames } from './factionDedup.js';
 
 const SCHEMA_VERSION = 2;
 // Bounded, seed-derived coherence retries. A minted settlement that trips the
@@ -156,6 +157,15 @@ export function composeInstantWorld({
       _slot: site.slot,
     };
   });
+
+  // ── World-scoped faction-name de-dup (CONTENT-GT-DOSSIER) ──────────────────
+  // Settlement generation dedups faction names only settlement-locally, so a realm
+  // collides (many members each name a faction "The Trade Compact"). This PURE,
+  // rng-free post-pass renames cross-settlement collisions deterministically — the
+  // members are already minted, so per-settlement generation is untouched (zero
+  // rng/golden impact); only the composed bundle's faction names (and the derived
+  // fingerprint) change. See ./factionDedup.js.
+  dedupeWorldFactionNames(settlements);
 
   // ── Place them on the map at the planned sites ─────────────────────────────
   const placements = /** @type {Record<string, any>} */ ({});

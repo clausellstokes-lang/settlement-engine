@@ -43,6 +43,7 @@ import { withCampaignHistoryEvent } from './stressorAftermath.js';
 import { promotesTo } from './calamityKernel.js';
 import { embattlementLevel } from '../spatial/embattlement.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { pickLine, UPSWING_NEWS } from './eventProse.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ name?: string, required?: boolean, category?: string, status?: string,
@@ -838,13 +839,13 @@ function reconstructionNews(id, name, upgrade, skimmed, year, tick, now) {
   return {
     id: `wizard_news.${tick}.reconstruction.${id}`,
     tick, createdAt: now, scope: 'local', significance: 'notable', severity: 0.4, score: 62,
-    headline: `${name} is rebuilt`,
-    summary: `${name} has finished rebuilding in the year ${year}, its wounds closed by its own hands and its allies'.${built}${graft}`,
+    headline: pickLine(UPSWING_NEWS.reconstruction.headline, `${id}:${tick}:h`, { name }),
+    summary: pickLine(UPSWING_NEWS.reconstruction.summary, `${id}:${tick}:s`, { name, year, built, graft }),
     kind: 'applied', impactKind: 'reconstruction', channelType: 'settlement',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `reconstruction.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'reconstruction'],
-    reasons: ['A conserved rebuild — its own prosperity, builders, peace, and its allies\' investment repaid.'],
+    reasons: [pickLine(UPSWING_NEWS.reconstruction.reasons, `${id}:${tick}:r`)],
   };
 }
 
@@ -921,13 +922,13 @@ function boomNews(id, name, arteries, fragile, tick, now) {
   return {
     id: `wizard_news.${tick}.boom.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.4, score: 60,
-    headline: `${name} is booming`,
-    summary: `Brisk and sustained trade has tipped ${name} into a boom — markets swell and coin flows.${dep}`,
+    headline: pickLine(UPSWING_NEWS.boom.headline, `${id}:${tick}:h`, { name }),
+    summary: pickLine(UPSWING_NEWS.boom.summary, `${id}:${tick}:s`, { name, dep }),
     kind: 'applied', impactKind: 'boom', channelType: 'trade_route',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `boom.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'boom'],
-    reasons: [`The boom is fed by ${arteries.length} trade artery${arteries.length === 1 ? '' : 's'} — a composition the trade movers already built.`],
+    reasons: [pickLine(UPSWING_NEWS.boom.reasons, `${id}:${tick}:r`, { arteries: arteries.length, arteryS: arteries.length === 1 ? '' : 's' })],
   };
 }
 
@@ -938,13 +939,13 @@ function bustNews(id, name, arteries, embattled, tick, now) {
   return {
     id: `wizard_news.${tick}.bust.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'major', severity: 0.6, score: 70,
-    headline: `${name}'s boom has busted`,
-    summary: `The trade that made ${name} rich has collapsed — ${cause}, and the boom curdles into flight and empty stalls.`,
+    headline: pickLine(UPSWING_NEWS.bust.headline, `${id}:${tick}:h`, { name }),
+    summary: pickLine(UPSWING_NEWS.bust.summary, `${id}:${tick}:s`, { name, cause }),
     kind: 'applied', impactKind: 'bust', channelType: 'trade_route',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `bust.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'bust'],
-    reasons: [`The boom's own dependency concentration was its undoing${arteries[0] ? ` — the ${arteries[0]} artery` : ''}.`],
+    reasons: [pickLine(UPSWING_NEWS.bust.reasons, `${id}:${tick}:r`, { arteryClause: arteries[0] ? ` — the ${arteries[0]} artery` : '' })],
   };
 }
 
@@ -955,12 +956,12 @@ function flourishingNews(id, name, founded, tick, now) {
   return {
     id: `wizard_news.${tick}.flourishing.${id}`,
     tick, createdAt: now, scope: 'regional', significance: 'notable', severity: 0.3, score: 55,
-    headline: `${name} enters a golden age`,
-    summary: `A long peace and steady rule have made ${name} culturally fertile — tolerance broadens and the temples keep warm.${built}`,
+    headline: pickLine(UPSWING_NEWS.flourishing.headline, `${id}:${tick}:h`, { name }),
+    summary: pickLine(UPSWING_NEWS.flourishing.summary, `${id}:${tick}:s`, { name, built }),
     kind: 'applied', impactKind: 'flourishing', channelType: 'settlement',
     settlementIds: [id], impactIds: [], channelIds: [],
     sourceEventId: `flourishing.${id}.${tick}`,
     tags: ['world_pulse', 'upswing', 'flourishing', 'boom_flourishing'],
-    reasons: ['A bounded cultural attractor — no army, no treasury swell, only the fertility of a long peace.'],
+    reasons: [pickLine(UPSWING_NEWS.flourishing.reasons, `${id}:${tick}:r`)],
   };
 }

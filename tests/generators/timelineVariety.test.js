@@ -49,7 +49,11 @@ describe('generators-domain-6 — timeline variety + budget', () => {
       max = Math.max(max, (s.history?.historicalEvents || []).length);
     }
     expect(max).toBeGreaterThan(8);
-  });
+    // 120 full metropolis generations overrun the 20s default testTimeout on
+    // slow/loaded runners — a wall-clock false positive (verified failing at base
+    // 577179fb too), not a correctness fault. Same allowance the generatorGoldenMaster
+    // and composeInstantWorld blocks use for the same reason.
+  }, 120_000);
 
   it('no two events in one timeline ever share a chapter title (cross-type collision guard)', () => {
     for (let i = 0; i < 80; i++) {

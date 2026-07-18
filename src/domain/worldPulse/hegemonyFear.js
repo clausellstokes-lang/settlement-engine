@@ -29,6 +29,7 @@ import { settlementStrength } from './relationshipEvolution.js';
 import { navalStrengthOf } from './navalStrength.js';
 import { activeSpatialDigest, mappedDistanceWeight } from '../spatial/distanceRead.js';
 import { clamp01 } from '../../kernel/math.js';
+import { hegemonyReceipt } from './eventProse.js';
 
 /** Bounded, owner-retunable tuning (soak). */
 export const HEGEMONY_FEAR_TUNING = Object.freeze({
@@ -44,25 +45,25 @@ function num(v) { return Number.isFinite(Number(v)) ? Number(v) : 0; }
  * The PURE fear scorer: does observer O fear the sphere centred at C? 0 unless C centres a
  * sphere in O's believed read, O is neither C nor one of C's subordinates, and the believed
  * share × distance discount is positive. @param {{ observerId: string, centerId: string,
- * spheres: Array<Record<string, unknown>>, distanceWeight01: number }} args
+ * spheres: Array<Record<string, unknown>>, distanceWeight01: number, seed?: string }} args
  * @returns {{ score: number, receipt: string }} */
-export function scoreFearOfDominance({ observerId, centerId, spheres, distanceWeight01 }) {
+export function scoreFearOfDominance({ observerId, centerId, spheres, distanceWeight01, seed }) {
   const sphere = pickSphere(spheres, observerId, centerId);
   if (!sphere) return { score: 0, receipt: '' };
   const share = clamp01(num(sphere.strengthShare));
   const near = clamp01(num(distanceWeight01));
   const score = clamp01(share * near);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: `The shadow of ${sphere.centerName} falls long over the free towns — better to gather against it than be swallowed one by one.` };
+  return { score, receipt: hegemonyReceipt('fear_of_dominance', seed, { centerName: sphere.centerName }) };
 }
 
 /**
  * The PURE peace mirror: the balance restored as a once-feared sphere CRUMBLES. Fear-base ×
  * the strained-tie fraction — a firm empire scores 0 (fear rules), a fraying one scores as its
  * grip slips. @param {{ observerId: string, centerId: string,
- * spheres: Array<Record<string, unknown>>, distanceWeight01: number }} args
+ * spheres: Array<Record<string, unknown>>, distanceWeight01: number, seed?: string }} args
  * @returns {{ score: number, receipt: string }} */
-export function scoreBalanceRestored({ observerId, centerId, spheres, distanceWeight01 }) {
+export function scoreBalanceRestored({ observerId, centerId, spheres, distanceWeight01, seed }) {
   const sphere = pickSphere(spheres, observerId, centerId);
   if (!sphere) return { score: 0, receipt: '' };
   const share = clamp01(num(sphere.strengthShare));
@@ -72,7 +73,7 @@ export function scoreBalanceRestored({ observerId, centerId, spheres, distanceWe
   const strainFrac = memberCount > 0 ? clamp01(strained / memberCount) : 0;
   const score = clamp01(share * near * strainFrac);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: `${sphere.centerName}'s grip is slipping — with the shadow lifting, old rivals can breathe and treat.` };
+  return { score, receipt: hegemonyReceipt('balance_restored', seed, { centerName: sphere.centerName }) };
 }
 
 /** The sphere centred at C in O's believed read, or null when O should feel nothing about C
@@ -146,6 +147,7 @@ export function makeHegemonyFear({ worldState, snapshot }) {
         observerId, centerId,
         spheres: believedSpheresFor(observerId),
         distanceWeight01: distanceWeightBetween(centerId, observerId),
+        seed: `${observerId}>${centerId}`,
       });
     },
     /** balance_restored for pair (observer, center). @param {string} observerId @param {string} centerId */
@@ -155,6 +157,7 @@ export function makeHegemonyFear({ worldState, snapshot }) {
         observerId, centerId,
         spheres: believedSpheresFor(observerId),
         distanceWeight01: distanceWeightBetween(centerId, observerId),
+        seed: `${observerId}>${centerId}`,
       });
     },
   };

@@ -8,6 +8,9 @@
 //   2. The genuine history-generation data (AGE_BY_TIER, HISTORICAL_EVENTS_DATA,
 //      EVENT_TYPE_NAMES) consumed by historyGenerator.js.
 
+import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
+import { pickVariant } from '../kernel/proseHash.js';
+
 // Notable power-holder roles by domain (government, religious, noble, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
 // can hold influence in a settlement and the conditions under which it appears.
@@ -1503,3 +1506,21 @@ export const EVENT_TYPE_NAMES = {
   demographic_pressure: 'The Influx',
   trade_dispute:       'The Trade Dispute',
 }
+
+/**
+ * CONTENT-GT-FINAL (Charge 1): choose a historical-event description among the catalog
+ * canonical (index 0) + its authored variants (historyDescVariants.js), by a pure fnv
+ * hash of a stable per-event seed — ZERO rng draws (kernel/proseHash.pickVariant,
+ * canonical-at-zero). A falsy seed, or a type with no variants, returns the canonical.
+ * Lives here (not in the code-capped historyGenerator.js) and folds into that file's
+ * existing historyData import — the hot-file "lazy leaf" rule.
+ * @param {{type?: string, description: string}} eventTemplate
+ * @param {string|number|null} [seed]
+ * @returns {string}
+ */
+export const historyDescription = (eventTemplate, seed) => {
+  const variants = HISTORY_DESC_VARIANTS[eventTemplate.type];
+  return variants
+    ? pickVariant([eventTemplate.description, ...variants], seed)
+    : eventTemplate.description;
+};

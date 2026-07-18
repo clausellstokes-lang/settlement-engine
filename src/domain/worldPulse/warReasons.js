@@ -68,6 +68,7 @@ import { advanceReframe, reframeActive, debtClaim01, dependencyByDesign01 } from
 // liar01 closure into advanceReframe; one-directional (informationStatecraft never imports this).
 import { credibilityScoreOf, credibilityDiscount } from './informationStatecraft.js';
 import { clamp01 } from '../../kernel/math.js';
+import { warReceipt, pickLine, DECREE_DEFAULT_RECEIPTS } from './eventProse.js';
 
 // ── Tuning (bounded named constants — owner-retunable per design §8) ────────
 
@@ -418,13 +419,14 @@ export function peaceCausalActive(worldState) {
  * (which the E1b credit-default seam and the lever nudges feed) blended with
  * the decayed incident memoryScore, both already 0..1 on the edge state.
  * @param {{ resentment?: number, memoryScore?: number } | null | undefined} relState
+ * @param {string} [seed] the directed-pair phrasing seed (absent ⇒ canonical wording)
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreGrievance(relState) {
+export function scoreGrievance(relState, seed) {
   const resentment = clamp01(Number(relState?.resentment) || 0);
   const memory = clamp01(Number(relState?.memoryScore) || 0);
   const score = clamp01(REASON_TUNING.GRIEVANCE_RESENTMENT_W * resentment + REASON_TUNING.GRIEVANCE_MEMORY_W * memory);
-  return { score, receipt: `A ledger of grievances stands open — resentment ${resentment.toFixed(2)}, memory ${memory.toFixed(2)}.` };
+  return { score, receipt: warReceipt('grievance', seed, { resentment: resentment.toFixed(2), memory: memory.toFixed(2) }) };
 }
 
 /**
@@ -435,9 +437,10 @@ export function scoreGrievance(relState) {
  * waves land.
  * @param {{ resentment?: number, recentIncidents?: Array<{ type?: string, tick?: number }> } | null | undefined} relState
  * @param {number} tick
+ * @param {string} [seed] the directed-pair phrasing seed (absent ⇒ canonical wording)
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreRevanchism(relState, tick) {
+export function scoreRevanchism(relState, tick, seed) {
   const resentment = clamp01(Number(relState?.resentment) || 0);
   if (resentment < REASON_TUNING.REVANCHISM_RESENTMENT_FLOOR) return { score: 0, receipt: '' };
   const incidents = Array.isArray(relState?.recentIncidents) ? relState.recentIncidents : [];
@@ -451,7 +454,7 @@ export function scoreRevanchism(relState, tick) {
   }
   if (wounds === 0) return { score: 0, receipt: '' };
   const score = clamp01(wounds * REASON_TUNING.REVANCHISM_PER_WOUND) * resentment;
-  return { score, receipt: `Old wounds unforgotten — ${wounds} mark${wounds === 1 ? '' : 's'} in the ledger, and the grudge still burns.` };
+  return { score, receipt: warReceipt('revanchism', seed, { wounds, s: wounds === 1 ? '' : 's' }) };
 }
 
 /**
@@ -461,11 +464,11 @@ export function scoreRevanchism(relState, tick) {
  * @param {{ own01: number, foe01: number }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreResourcePressure({ own01, foe01 }) {
+export function scoreResourcePressure({ own01, foe01 }, /** @type {string | undefined} */ seed) {
   const gap = clamp01(Number(own01) || 0) - clamp01(Number(foe01) || 0);
   const score = clamp01(gap * REASON_TUNING.RESOURCE_ENVY_GAIN);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Their granaries stand full while ours thin — hunger is faster than patience.' };
+  return { score, receipt: warReceipt('resource_pressure', seed) };
 }
 
 /**
@@ -478,7 +481,7 @@ export function scoreResourcePressure({ own01, foe01 }) {
  *           fromId: string, toId: string }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreTreatyDefault({ treaties, fromId, toId }) {
+export function scoreTreatyDefault({ treaties, fromId, toId }, /** @type {string | undefined} */ seed) {
   if (!Array.isArray(treaties) || treaties.length === 0) return { score: 0, receipt: '' };
   let worst = 0;
   for (const t of treaties) {
@@ -489,7 +492,7 @@ export function scoreTreatyDefault({ treaties, fromId, toId }) {
     worst = Math.max(worst, clamp01(Number(t?.defaultSeverity01) || 0.6));
   }
   if (worst <= 0) return { score: 0, receipt: '' };
-  return { score: worst, receipt: 'The treaty lies broken and the promised wagons never came — oathbreach is casus.' };
+  return { score: worst, receipt: warReceipt('treaty_default', seed) };
 }
 
 /**
@@ -499,11 +502,11 @@ export function scoreTreatyDefault({ treaties, fromId, toId }) {
  * @param {{ threat01: number, hostile: boolean }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreEncirclement({ threat01, hostile }) {
+export function scoreEncirclement({ threat01, hostile }, /** @type {string | undefined} */ seed) {
   if (!hostile) return { score: 0, receipt: '' };
   const score = clamp01(Number(threat01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'War stands at the borders on more sides than one — better to strike than be ringed.' };
+  return { score, receipt: warReceipt('encirclement', seed) };
 }
 
 /**
@@ -513,10 +516,10 @@ export function scoreEncirclement({ threat01, hostile }) {
  * auto-declared war. 0 when the intervention layer is dark ⇒ byte-identical.
  * @param {{ clash01: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreForeignClash({ clash01 }) {
+export function scoreForeignClash({ clash01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(clash01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Our banners and theirs bleed for opposite claimants on the same field — the proxy is becoming our own quarrel.' };
+  return { score, receipt: warReceipt('foreign_clash', seed) };
 }
 
 /**
@@ -527,13 +530,13 @@ export function scoreForeignClash({ clash01 }) {
  * @param {{ legitimacyScore: number, hostile: boolean }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreLegitimacyHunger({ legitimacyScore, hostile }) {
+export function scoreLegitimacyHunger({ legitimacyScore, hostile }, /** @type {string | undefined} */ seed) {
   if (!hostile) return { score: 0, receipt: '' };
   const legit = Number.isFinite(legitimacyScore) ? Number(legitimacyScore) : 50;
   const ceiling = REASON_TUNING.LEGITIMACY_HUNGER_CEILING;
   if (legit >= ceiling) return { score: 0, receipt: '' };
   const score = clamp01((ceiling - legit) / ceiling);
-  return { score, receipt: 'The seat is contested at home — a foreign enemy is cheaper than a domestic answer.' };
+  return { score, receipt: warReceipt('legitimacy_hunger', seed) };
 }
 
 /**
@@ -544,10 +547,10 @@ export function scoreLegitimacyHunger({ legitimacyScore, hostile }) {
  * @param {{ exposedCorruption01?: number | null }} args
  * @returns {{ score: number, receipt: string }}
  */
-export function scoreCorruptionExposed({ exposedCorruption01 }) {
+export function scoreCorruptionExposed({ exposedCorruption01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(exposedCorruption01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Their court is rotten and the rot is now public — someone must answer for it.' };
+  return { score, receipt: warReceipt('corruption_exposed', seed) };
 }
 
 /**
@@ -557,10 +560,10 @@ export function scoreCorruptionExposed({ exposedCorruption01 }) {
  * only the MEANING moved — a war from a kindness misremembered (the layer's crown emergent).
  * @param {{ debt01?: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreIngratitudeDebt({ debt01 }) {
+export function scoreIngratitudeDebt({ debt01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(debt01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'The grain we gave in the lean years is spoken of now as a debt unpaid — ingratitude is its own casus.' };
+  return { score, receipt: warReceipt('ingratitude_debt', seed) };
 }
 
 /**
@@ -569,10 +572,10 @@ export function scoreIngratitudeDebt({ debt01 }) {
  * when reframe is dark ⇒ byte-identical.
  * @param {{ design01?: number }} args @returns {{ score: number, receipt: string }}
  */
-export function scoreDependencyByDesign({ design01 }) {
+export function scoreDependencyByDesign({ design01 }, /** @type {string | undefined} */ seed) {
   const score = clamp01(Number(design01) || 0);
   if (score <= 0) return { score: 0, receipt: '' };
-  return { score, receipt: 'Our looms and larders were bound to their markets by design — a dependence built to be a leash.' };
+  return { score, receipt: warReceipt('dependency_by_design', seed) };
 }
 
 // ── The factor (the consumption read — bounded, centered on 1.0) ────────────
@@ -712,21 +715,21 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
     const foePressure = pressureBlend(pIndex, toId);
 
     const computed = [
-      { type: 'grievance', ...scoreGrievance(relState) },
-      { type: 'revanchism', ...scoreRevanchism(relState, tick) },
-      { type: 'resource_pressure', ...scoreResourcePressure({ own01: ownPressure, foe01: foePressure }) },
-      { type: 'treaty_default', ...scoreTreatyDefault({ treaties: treatiesList, fromId, toId }) },
-      { type: 'encirclement', ...scoreEncirclement({ threat01: threatByCid.get(fromId) || 0, hostile }) },
+      { type: 'grievance', ...scoreGrievance(relState, key) },
+      { type: 'revanchism', ...scoreRevanchism(relState, tick, key) },
+      { type: 'resource_pressure', ...scoreResourcePressure({ own01: ownPressure, foe01: foePressure }, key) },
+      { type: 'treaty_default', ...scoreTreatyDefault({ treaties: treatiesList, fromId, toId }, key) },
+      { type: 'encirclement', ...scoreEncirclement({ threat01: threatByCid.get(fromId) || 0, hostile }, key) },
       {
         type: 'legitimacy_hunger',
         ...scoreLegitimacyHunger({
           legitimacyScore: Number(fromItem?.causal?.scores?.public_legitimacy),
           hostile,
-        }),
+        }, key),
       },
-      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(ws, fromId, toId, tick) }) },
+      { type: 'corruption_exposed', ...scoreCorruptionExposed({ exposedCorruption01: exposedCorruptionForPair(ws, fromId, toId, tick) }, key) },
       // W-CONVERGENCE: two sponsors on opposing sides of one internal contest (0 when dark).
-      { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(ws, fromId, toId) }) },
+      { type: 'foreign_clash', ...scoreForeignClash({ clash01: foreignClashIntensityOf(ws, fromId, toId) }, key) },
       // D4: fromId (observer) fears toId's hegemony sphere if it centres one (0 when toId
       // centres no sphere, when fromId is toId's subordinate, or no hegemony ⇒ byte-identical).
       { type: 'fear_of_dominance', ...hegemonyFear.fearOf(fromId, toId) },
@@ -734,8 +737,8 @@ export function advanceWarReasons({ snapshot, worldState, graph, pIndex = null, 
       // fromId (the dependent) re-reads its trade tie with toId as a leash by design. 0 when the
       // reframe layer is dark / no such reading ⇒ byte-identical. This IS the crown emergent:
       // a war from a kindness misremembered.
-      { type: 'ingratitude_debt', ...scoreIngratitudeDebt({ debt01: debtClaim01(ws, fromId, toId) }) },
-      { type: 'dependency_by_design', ...scoreDependencyByDesign({ design01: dependencyByDesign01(ws, fromId, toId) }) },
+      { type: 'ingratitude_debt', ...scoreIngratitudeDebt({ debt01: debtClaim01(ws, fromId, toId) }, key) },
+      { type: 'dependency_by_design', ...scoreDependencyByDesign({ design01: dependencyByDesign01(ws, fromId, toId) }, key) },
     ];
 
     const entry = foldPairReasons(prevLedger?.[key], computed, tick);
@@ -832,7 +835,7 @@ export function declareCasus(worldState, { fromId, toId, type, severity01 = 0.6,
     score,
     tick: Number.isFinite(tick) ? Number(tick) : 0,
     sinceTick: prevEntry?.reasons?.[String(type)]?.sinceTick,
-    receipt: String(receipt || '').trim() || `Declared by decree: ${String(type)} against ${to}.`,
+    receipt: String(receipt || '').trim() || pickLine(DECREE_DEFAULT_RECEIPTS, `${key}#decree`, { type: String(type), to }),
   });
   // r2 worldpulse-war-military-5: write the decree into a DECREED sub-ledger so the next tick's
   // state-derived fold carries it (max-merged, ramping down) instead of dropping it — `force ≡

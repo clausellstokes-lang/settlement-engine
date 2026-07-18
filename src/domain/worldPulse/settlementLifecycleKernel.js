@@ -59,6 +59,7 @@ import { NAMING_DATA } from '../../data/namingData.js';
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { withActiveCondition, withoutActiveCondition } from '../activeConditions.js';
 import { stablePart } from './stablePart.js';
+import { pickLine, LIFECYCLE_NEWS } from './eventProse.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ archetype?: string, id?: string, triggeredAt?: { sourceEventTargetId?: string } }} LcCondition */
@@ -572,8 +573,10 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
           reason: 'parent terminal death — the orbit dispersed with the settlement',
         });
         newsEntries.push(steadingNews('steading_orbit_dispersed', parentId, tick, now, {
-          headline: `The steadings around ${String(parent0.name || parentId)} empty out`,
-          summary: `With ${String(parent0.name || parentId)} dead, its ${orphanSats.length} outlying steading${orphanSats.length === 1 ? '' : 's'} emptied — ${dispersed} folk scattered to the wider world with the town's own.`,
+          headline: pickLine(LIFECYCLE_NEWS.orbit_dispersed.headline, `${parentId}:${tick}:h`, { parent: String(parent0.name || parentId) }),
+          summary: pickLine(LIFECYCLE_NEWS.orbit_dispersed.summary, `${parentId}:${tick}:s`, {
+            parent: String(parent0.name || parentId), count: orphanSats.length, countS: orphanSats.length === 1 ? '' : 's', dispersed,
+          }),
           severity: 0.35,
           reasons: ['A dead parent cannot hold its orbit; the frontier folk dispersed with the last wagons.'],
         }));
@@ -630,10 +633,10 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
             sources: { boom, strike: !!strike, inflow },
           });
           newsEntries.push(steadingNews('steading_founded', parentId, tick, now, {
-            headline: `A new steading rises near ${String(parent0.name || parentId)}`,
+            headline: pickLine(LIFECYCLE_NEWS.founded.headline, `${parentId}:${rec.id}:${tick}:h`, { parent: String(parent0.name || parentId) }),
             summary: rec.provenance === 'resource_strike'
-              ? `${debit} settlers have raised the steading of ${rec.name} on the new ${String(rec.resourceKey || '').replace(/_/g, ' ')} workings.`
-              : `${debit} settlers have struck out from ${String(parent0.name || parentId)} to found the steading of ${rec.name}.`,
+              ? pickLine(LIFECYCLE_NEWS.founded.summary_strike, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, resource: String(rec.resourceKey || '').replace(/_/g, ' ') })
+              : pickLine(LIFECYCLE_NEWS.founded.summary_growth, `${parentId}:${rec.id}:${tick}:s`, { debit, name: rec.name, parent: String(parent0.name || parentId) }),
             reasons: [
               boom ? 'A boom sends capital and families looking outward.' : null,
               strike ? 'A fresh resource strike wants hands at the vein.' : null,
@@ -685,8 +688,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
           next.history = [...next.history.slice(-(T.HISTORY_CAP - 1)), 'The steading has outgrown its parent\'s shadow; a charter awaits.'];
           receipts.push({ id: parentId, kind: 'satellite_charter_pending', satId: next.id, name: next.name, population: next.population, deferredTo: 'V2 graduation (owner-parked)' });
           newsEntries.push(steadingNews('steading_charter_pending', parentId, tick, now, {
-            headline: `${next.name} has outgrown its parent's shadow`,
-            summary: `The steading of ${next.name} has reached village scale — a charter awaits.`,
+            headline: pickLine(LIFECYCLE_NEWS.charter_pending.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
+            summary: pickLine(LIFECYCLE_NEWS.charter_pending.summary, `${parentId}:${next.id}:${tick}:s`, { name: next.name }),
             significance: 'notable', severity: 0.35,
             reasons: ['Graduation to a chartered settlement is owner-ruled to fire at village scale (V2 executes pending charters).'],
           }));
@@ -717,8 +720,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
             residualReturned: residual, dwell, remnant: 'none — a satellite never mints a ruin (the scarcity law)',
           });
           newsEntries.push(steadingNews('steading_abandoned', parentId, tick, now, {
-            headline: `The steading of ${next.name} is abandoned`,
-            summary: `Without backing or newcomers, ${next.name} failed; its last folk walked back to ${String(parentLive?.name || parentId)}.`,
+            headline: pickLine(LIFECYCLE_NEWS.abandoned.headline, `${parentId}:${next.id}:${tick}:h`, { name: next.name }),
+            summary: pickLine(LIFECYCLE_NEWS.abandoned.summary, `${parentId}:${next.id}:${tick}:s`, { name: next.name, parent: String(parentLive?.name || parentId) }),
             severity: 0.3,
             reasons: [`Backing fell to ${Math.round(backing01 * 100)}% and stayed there for ${dwell} ticks.`],
           }));
@@ -783,8 +786,8 @@ export function advanceSettlementLifecycle({ snapshot, worldState, settlementUpd
             names: [a.name, b.name], population: folded.population, tier: 'hamlet',
           });
           newsEntries.push(steadingNews('steadings_converged', parentId, tick, now, {
-            headline: `${a.name} and ${b.name} fold into one palisade`,
-            summary: `The neighbouring steadings of ${a.name} and ${b.name} have grown together into a single hamlet of ${folded.population}.`,
+            headline: pickLine(LIFECYCLE_NEWS.coalesced.headline, `${parentId}:${a.name}:${b.name}:${tick}:h`, { a: a.name, b: b.name }),
+            summary: pickLine(LIFECYCLE_NEWS.coalesced.summary, `${parentId}:${a.name}:${b.name}:${tick}:s`, { a: a.name, b: b.name, pop: folded.population }),
             severity: 0.3, significance: 'notable',
             reasons: ['A second, distinct hamlet-birth path: coalescence of a frontier, not promotion of a steading.'],
           }));
