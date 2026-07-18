@@ -81,6 +81,7 @@ import {
 } from './npcLadderState.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
+import { faithRuptured } from './npcLadderCoherence.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -322,9 +323,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       // lifecycle (§3.2 mint/evolve, §9 weighted deeds, §11.3 partial-progress deposits).
       /** @type {Set<string>} the rung-holders freshly exposed for corruption THIS advance */
       const freshExposed = new Set();
+      /** @type {Set<string>} §4b religious-faction heads standing AGAINST their faith */
+      const ruptured = new Set();
       rungs.forEach((nid, rungIndex) => {
         activeNids.add(nid);
         const npcObj = npcByNid.get(nid) || {};
+        if (faithRuptured(npcObj, faction, worldState, sid)) ruptured.add(nid);
         const priorSt = prior.npcs[nid];
         /** @type {LadderStanding} */
         let st;
@@ -358,7 +362,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
         ? /** @type {ReturnType<typeof resolveFactionChallenges>} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 })
         : resolveFactionChallenges({
           rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
-          seed, factionRising, factionFalling, freshExposed, worldState,
+          seed, factionRising, factionFalling, freshExposed, faithRuptured: ruptured, worldState,
           realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
         });
       if (truncated) rec.cooldownUntil = Math.max(rec.cooldownUntil, weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS);

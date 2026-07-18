@@ -149,13 +149,15 @@ export function defenseScore(d, ctx) {
 }
 
 /** The windows a defender is vulnerable through (§2). @param {Combatant} d @param {ChallengeCtx} ctx
- *  @param {boolean} defenderExposed @returns {string[]} the open window reasons ([] ⇒ no window) */
-export function openWindows(d, ctx, defenderExposed) {
+ *  @param {boolean} defenderExposed @param {boolean} [faithRuptured] the high priest against his god (4b)
+ *  @returns {string[]} the open window reasons ([] ⇒ no window) */
+export function openWindows(d, ctx, defenderExposed, faithRuptured = false) {
   /** @type {string[]} */
   const w = [];
   if (ctx.factionFalling) w.push('faction_power_falling');
   if (d.standing < LADDER_TUNING.STAND_BASELINE) w.push('incumbent_underperforming');
   if (defenderExposed || d.stigma) w.push('revealed_corruption');
+  if (faithRuptured) w.push('faith_rupture'); // §4b PERMANENT — a head against his faith cannot rest
   return w;
 }
 
@@ -203,12 +205,14 @@ function grudgeSevOf(rec, defenderNid) {
  * @param {unknown} a.faction @param {string} a.fkey
  * @param {number} a.cooldownUntil @param {number} a.weeks @param {number} a.tick @param {string} a.seed
  * @param {boolean} a.factionRising @param {boolean} a.factionFalling
- * @param {Set<string>} a.freshExposed @param {Record<string, unknown>} a.worldState @param {number} a.realmBudget
+ * @param {Set<string>} a.freshExposed @param {Set<string>} [a.faithRuptured] the ruptured defenders (4b)
+ * @param {Record<string, unknown>} a.worldState @param {number} a.realmBudget
  * @returns {ChallengePlan}
  */
 export function resolveFactionChallenges(a) {
   const T = CHALLENGE_TUNING;
   const { rungs, npcs, npcByNid, faction, fkey, cooldownUntil, weeks, tick, seed, factionRising, factionFalling, freshExposed, worldState, realmBudget } = a;
+  const faithRuptured = a.faithRuptured instanceof Set ? a.faithRuptured : new Set();
   const empty = /** @type {ChallengePlan} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 });
   if (cooldownUntil > weeks) return empty;           // (3) the interregnum
   if (realmBudget <= 0) return empty;                 // (4) the realm E0 cap is spent
@@ -243,7 +247,7 @@ export function resolveFactionChallenges(a) {
   for (let i = 1; i < rungCount; i++) {
     const defender = mk(i - 1);
     defender.isChallenging = straining.has(defender.nid); // decided on the earlier iteration
-    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid));
+    const windows = openWindows(defender, ctx, freshExposed.has(defender.nid), faithRuptured.has(defender.nid));
     if (!windows.length) continue;
     const challenger = mk(i);
     challenger.grudgeVsDefender = grudgeSevOf(npcs[challenger.nid], defender.nid);
