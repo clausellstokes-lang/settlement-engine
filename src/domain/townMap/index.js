@@ -65,6 +65,37 @@ export {
   hasDrawableMap,
   annotationDrawOps,
 } from './townMapDraw.js';
+// THE TABLE LAYER (DOOR 2) — the fog-of-war session sidecar (pure read + merge ops) +
+// the semantic-snap reveal geometry. Imported ONLY by the lazy fog surfaces + the export
+// lane + tests, so this stays out of the first-paint static closure (the townMapLazy pin).
+export {
+  FOG_REVEAL_KINDS,
+  FOG_SESSIONS_SCHEMA_KEYS,
+  fogSessionId,
+  readFogSessions,
+  readFogSession,
+  readReveal,
+  sessionHasReveal,
+  listFogSessionIds,
+  normalizeFogSession,
+  normalizeFogSessions,
+  withSession,
+  withoutSession,
+  withRenamedSession,
+  withRevealed,
+  withRevealSet,
+  withClearedReveal,
+} from './fogSessions.js';
+export {
+  FOG_VIEW,
+  fogStreets,
+  allRevealIds,
+  snapToSemantic,
+  revealShapes,
+  isFullyFogged,
+  fogMaskFragment,
+  injectFog,
+} from './fogGeometry.js';
 // MAP STYLES — the bounded style layer (the four named lenses + the wall). A style
 // is data; the draw projection resolves it, the viewer reads it. Lazy (src/design,
 // consumed only by the town-map surfaces + tests), so first paint is unmoved.

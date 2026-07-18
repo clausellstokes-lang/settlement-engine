@@ -66,6 +66,13 @@ import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
+// DOOR 2 — THE TABLE LAYER (fog of war). The pane threads three leaves: the map-space overlay
+// (+ the reveal-brush capture), the wiring hook (optimistic mirror + persist + controller), and
+// the DM chrome (controls + lazy player view + handout export). Kept out-of-file so the pane
+// (a max-lines-capped hot file) grows by a handful of lines, not a block (lazy leaf + re-export).
+import SettlementMapFog, { FogBrushCapture } from './fog/SettlementMapFog.jsx';
+import SettlementMapFogChrome from './fog/SettlementMapFogChrome.jsx';
+import { useFogLayer } from './fog/useFogLayer.js';
 
 const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
@@ -212,6 +219,12 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   const ann = useMapAnnotations({
     mapEdits, editing, commitEdits, wrapperRef, transformRef,
     onAdded: (count) => mapAnalytics.fire('annotation_add', { count }),
+  });
+  // DOOR 2 THE TABLE LAYER — the fog wiring (optimistic mirror + persist + reveal-brush/session
+  // controller), bundled in a leaf so the pane grows by one call. Analytics ride SM-5's map-layer
+  // helper, feature-discriminated (fog_session / fog_reveal), enums/counts only, best-effort.
+  const fog = useFogLayer({
+    settlement, settlementKey, model, editing, saveId, wrapperRef, transformRef, fire: mapAnalytics.fire,
   });
 
   // Interaction state machine: displayed card = pinned ?? hovered.
@@ -629,7 +642,18 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             onRemove={ann.removeAnnotation}
             ink={C.ink} bg={C.bg} accent={C.anchorFill}
           />
+
+          {/* ── DOOR 2 THE TABLE LAYER — the fog overlay (last child ⇒ on top of the
+              linework, in 0..1000 map space so it pans/zooms). The DM sees a light
+              tint marking what players cannot see; the player view / handout render
+              the SAME mask opaque (WYSIWYG). pointerEvents:none — the brush + hover
+              handlers underneath still fire. ─────────────────────────────────── */}
+          <SettlementMapFog model={model} reveal={fog.activeReveal} color={C.ink} />
         </g>
+
+        {/* ── DOOR 2 the reveal-BRUSH capture (screen space, on top of <g> so a click
+            anywhere on the map snaps to the nearest feature). ─────────────────── */}
+        <FogBrushCapture fog={fog} width={size.width} height={size.height} enabled={viewMode === 'plan'} />
       </svg>
 
       {/* ── DM marker placement popover (edit + annotate mode only). Keyed on the
@@ -700,6 +724,13 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           draw. Gating (the $2.99 export-bundle lane) lives inside the menu. ── */}
       {saveId != null && (districts.length > 0 || buildings.length > 0) && (
         <SettlementMapExportMenu settlement={settlement} saveId={saveId} style={activeLens} />
+      )}
+
+      {/* ── DOOR 2 THE TABLE LAYER — the DM fog chrome (controls + live player view +
+          handout export). Owner-only by construction (saveId present); the panel self-
+          gates its edit affordances on `editing`. All rendering lives in the leaf. ── */}
+      {saveId != null && (districts.length > 0 || buildings.length > 0) && (
+        <SettlementMapFogChrome fog={fog} editing={editing} entitled={!!canEdit} settlement={settlement} activeLens={activeLens} fire={mapAnalytics.fire} />
       )}
 
       {/* ── Cards / labels (displayed = pinned ?? hovered) ─────────────────── */}

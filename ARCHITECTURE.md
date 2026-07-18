@@ -147,7 +147,7 @@ section is only the entry pointer to it.
 
 ## State (`store/index.js`)
 
-One Zustand store composed from 16 slices, with `immer + persist +
+One Zustand store composed from 17 slices, with `immer + persist +
 subscribeWithSelector + devtools`. **`persist.partialize` deliberately persists
 only lightweight, user-owned data (config + toggles)** — never the large
 generated settlement object. `onRehydrate` resets the wizard to the mode picker.

@@ -43,6 +43,7 @@ import { createInstantWorldSlice }  from './instantWorldSlice.js';
 import { createOnboardingSlice }    from './onboardingSlice.js';
 import { createUiSlice }            from './uiSlice.js';
 import { createAccountImportSlice } from './accountImportSlice.js';
+import { createFogEditSlice }       from './fogEditSlice.js';
 import { mergePersistedState }     from './persistMerge.js';
 import { setCustomContentSource }   from '../lib/dependencyEngine.js';
 import { saves as savesService }    from '../lib/saves.js';
@@ -68,6 +69,7 @@ export const useStore = create(
           ...createOnboardingSlice(set, get),
           ...createUiSlice(set, get),
           ...createAccountImportSlice(set, get),
+          ...createFogEditSlice(set, get),
         })),
         {
           name: 'settlementforge',
