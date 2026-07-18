@@ -1120,6 +1120,26 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ FOLD: THE LADDER @ e160177f (2026-07-17) — ENGINE LIFT #3 LANDS; THE ENGINE'S
+CONSTRUCTION ENDS FOR THE THIRD AND FINAL TIME.** 7 commits (17 files NUL-clean; ~1,790
+engine lines in lazy leaves; pulseKernel net-zero): the standing integrator · dynamic
+goals over the REUSED S7 registry w/ the attribution rule + honest lapsed · the
+challenge engine (windows, non-short-circuiting receipts, seeded resolution, the
+three-body single-pass, conservation swap/drop, four brakes, the stigma tax, D5
+grudges) · §8's standing loop closing BOTH ways single-writer (leadership quality
+consumed in coupContenders — a well-led faction RESISTS coups, turmoil INVITES them;
+dark-safe factor===1) · coup truncation · the faith-rupture permanent window · the
+npc_ladder beat. ALL NAMED FIXTURES PINNED: three-body, both-succeed-greater-deed,
+stigma-halved, multi-claimant attribution, sustained-margin-spike-never-wins, the
+ANTI-STASIS CENTURY BAND both bounds. All 19 prior dormancy goldens green + its own;
+fold receipts 65/65 + tsc 0 + strict 0/0 + dist 150/150. **npcLadderEnabled JOINS THE
+ONE REGEN (seven flags).** Tuning tables documented as soak dials (CHALLENGE_RATE 0.05,
+COOLDOWN 104wk, STIGMA_TAX 0.5, half-life 156wk…). SEAMS → ROUND-3/owner stock:
+pantheon rising-lift + war-god methods · explicit alignment modulation · the growth-
+trait entrenchment deposit (needs a growth-kernel signal input — single-writer
+preserved) · chained vacancy succession · provenance edges · display stock (NPC-card
+rung/goal, Power-tab read) · the open-bottom amendment STILL OWNER-PENDING. **ONE LANE
+REMAINS: THE CRAFT WAVE (phases 1-2). Construction is otherwise OVER.**
 **⬛⬛ FOLD: THE DOCUMENTATION WAVE 2/2 @ 08486264 (+ reconciliation 019d1a2e) — THE
 DOCUMENTATION WAVE COMPLETES, ALL FOUR PAGES SHIPPED.** ABOUT = the six-band trust page
 (the whole-loop schematic in the engraving register · the philosophy ladder w/ the DM
