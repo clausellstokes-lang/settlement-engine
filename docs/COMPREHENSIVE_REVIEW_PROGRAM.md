@@ -1134,6 +1134,17 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ DEEP WAVE PHASE 0a LANDED (2026-07-18) @ c335c355 on claude/deep-craft.** THE
+KILL-LIST RATCHETS committed shrink-only-exact (title-census idiom), THE FOUR STARTING
+COUNTS frozen at the composite base: borderRadius 1,097 · boxShadow 118 · rgba() washes
+275 · tinted callout tokens 251. Receipts: 4/4 ratchet tests green, eslint clean,
+hard-gated commit, post-commit survival clean. The lane then STOPPED HONESTLY at the
+commit boundary on context exhaustion (JUDGMENT ratified: verified-resumable over
+half-built). Handoff facts banked: eager headroom ~3,000 B · Welcome = stills+CSS only ·
+the pre-existing reds are CURED on this base (only the four parked golden families red).
+FRESH-CONTEXT LANE dispatched for phase 0b→cluster 1: works IN the standing worktree
+(the branch is checked out there; a new worktree cannot hold it), self-contained brief,
+commit-at-boundaries discipline, hard stop after cluster 1 for the owner walk.
 **⬛ THE DEEP WAVE RESUMES (owner, 2026-07-18: "continue with the deep wave according to
 everything that we have now").** The two open plate regenerations CLOSED first
 (settlements-mappa: saints/halos/crosses out, sun-face + vines + sea-serpent kept, quiet
