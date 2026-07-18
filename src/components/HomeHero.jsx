@@ -19,7 +19,7 @@
  * the flat plate are the Deep Craft craft layer that sits on top.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
@@ -64,12 +64,13 @@ function popFigure(size) {
   return isTop ? `${fmt(r.min)}+` : `${fmt(r.min)}–${fmt(r.max)}`;
 }
 
-function GaugeStation({ value, label, active, onClick }) {
+function GaugeStation({ value, label, active, onClick, onHover }) {
   return (
     <button
       type="button"
       data-settlement-size={value}
       onClick={() => onClick(value)}
+      onMouseEnter={() => onHover?.(value)}
       aria-pressed={active}
       className="sf-gauge-station oc-m-inkdarken oc-m-press"
       style={{
@@ -128,6 +129,27 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   // plain-language message; a retry strip renders beneath the CTA pointing back
   // at handleBegin — this is the most fragile point in the funnel.
   const [beginError, setBeginError] = useState(null);
+  // THE STAGE BACKDROP (C1r-c3). The six evolution stills (one settlement, six
+  // ages — the MANIFEST ruling) render as a faint stage backdrop behind the
+  // gauge, keyed to the chosen station. INTERACTION-GATED: `stageLive` is false
+  // until the visitor first touches the gauge, so NO still is fetched before the
+  // hero's LCP (the funnel's hottest surface pays zero at first paint — the still
+  // loads only once the user has engaged). Hovering a station PREFETCHES its
+  // still (browser cache warm) so the pick is instant; the set dedupes so a
+  // station warms once. All of this rides HomeHero's lazy chunk (zero eager JS).
+  const [stageLive, setStageLive] = useState(false);
+  const prefetched = useRef(new Set());
+  const prefetchStage = (size) => {
+    if (typeof window === 'undefined') return;
+    if (prefetched.current.has(size)) return;
+    prefetched.current.add(size);
+    const img = new window.Image();
+    img.src = `/evolution/${size}.jpg`;
+  };
+  const pickStage = (size) => {
+    setPickedSize(size);
+    setStageLive(true);
+  };
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
@@ -261,25 +283,65 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           outline: 2px solid ${GOLD};
           outline-offset: 2px;
         }
+        /* THE STAGE BACKDROP (C1r-c3). Faint, sepia-toned, masked top+bottom so
+           it reads as a ground the strip sits ON, never a wash competing with the
+           ink stations (opacity 0.13 keeps the INK labels + population figures AA
+           on the parchment). Flat — no radius, shadow, or rgba. The still fades in
+           on first pick; under prefers-reduced-motion it is simply present. */
+        .sf-gauge-backdrop {
+          position: absolute;
+          top: -6px; left: -6px; right: -6px; bottom: -10px;
+          width: calc(100% + 12px); height: calc(100% + 16px);
+          object-fit: cover; object-position: center 45%;
+          pointer-events: none; z-index: 0;
+          opacity: 0.13;
+          filter: sepia(0.45) saturate(0.8);
+          -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%, #000 78%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 30%, #000 78%, transparent);
+          animation: sf-gauge-fade var(--oc-motion-settle) var(--oc-ease-settle) both;
+        }
+        @keyframes sf-gauge-fade { from { opacity: 0; } to { opacity: 0.13; } }
+        @media (prefers-reduced-motion: reduce) {
+          .sf-gauge-backdrop { animation: none; opacity: 0.13; }
+        }
       `}</style>
-      <div
-        role="group"
-        aria-label={t('generate.gauge.label')}
-        style={{
-          display: 'flex', alignItems: 'flex-start', marginTop: SP.xl,
-          borderTop: `1px solid ${GOLD_DEEP}`,
-          paddingTop: 0, flexWrap: 'wrap',
-        }}
-      >
-        {sizes.map(size => (
-          <GaugeStation
-            key={size}
-            value={size}
-            label={t(`generate.sizes.${size}`)}
-            active={pickedSize === size}
-            onClick={setPickedSize}
+      <div style={{ position: 'relative', marginTop: SP.xl }}>
+        {/* The tier's evolution still, faint behind the strip. Rendered ONLY
+            after first interaction (stageLive) so first paint fetches nothing;
+            keyed by pickedSize so each pick re-mounts and fades the new age in
+            (static under reduced-motion — see the sf-gauge-backdrop rule below).
+            Decorative (empty alt, aria-hidden); the ink stations sit above it. */}
+        {stageLive && (
+          <img
+            key={pickedSize}
+            className="sf-gauge-backdrop"
+            src={`/evolution/${pickedSize}.jpg`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
           />
-        ))}
+        )}
+        <div
+          role="group"
+          aria-label={t('generate.gauge.label')}
+          style={{
+            position: 'relative', zIndex: 1,
+            display: 'flex', alignItems: 'flex-start',
+            borderTop: `1px solid ${GOLD_DEEP}`,
+            paddingTop: 0, flexWrap: 'wrap',
+          }}
+        >
+          {sizes.map(size => (
+            <GaugeStation
+              key={size}
+              value={size}
+              label={t(`generate.sizes.${size}`)}
+              active={pickedSize === size}
+              onClick={pickStage}
+              onHover={prefetchStage}
+            />
+          ))}
+        </div>
       </div>
       {/* One memo line: the chosen station's hint (the owner law caps visible
           clerk's notes at one — the cap memo retired with the capped stations). */}
