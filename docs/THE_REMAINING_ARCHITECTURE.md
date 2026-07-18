@@ -231,8 +231,10 @@ in UX form: small local payloads first). Architecture: the S3 intent compiler IS
 router; the existing stage panels (S1 analyst, S4 content, S5/S6 construction, style
 overhaul, S7 autonomy) become DESTINATIONS the router opens, never entry points —
 FloatingAffordances re-composes to the single left-edge slate tab (marginalia
-position; slate per the honesty law; no text until hover). Entitlement: marker
-lock-glyph-teases for non-Surveyor tiers (ladder idiom), vetoable. Machinery
+position; slate per the honesty law; no text until hover). Entitlement: OWNER-RATIFIED 2026-07-18
+("AI capabilities beyond polish are gated by surveyor premium") — the door and
+everything behind it are SURVEYOR-gated; the marker lock-glyph-teases for lower
+tiers; Polish/Narrate rides its own credit pricing below the tier. Machinery
 unchanged — this is front-of-house consolidation; the schema wall, per-stage
 kill-switches, and early-access labels all survive verbatim.
 - The deferred violet→slate conversion: define slate as a semantic token pair
