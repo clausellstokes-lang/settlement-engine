@@ -1120,6 +1120,17 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE GATE PROTOCOL CHANGE (2026-07-17, owner: "if we switched gates to fable will it
+be faster?" — answered + adopted, vetoable):** model-switching would NOT speed gates
+(vitest wall-clock is machine-bound; Fable-as-implementer would also invert the standing
+model split). THE REAL SPEEDUP ADOPTED: **lanes run FOCUSED gates only** (own tests +
+tsc + strict + lint + build + dist + closure); **the FULL suite runs ONCE PER FOLD, by
+the manager, in the fold tree, foreground.** Three wins: full-suite runs drop from
+per-lane to per-fold · the stall class's trigger (babysitting long suites) mostly
+disappears · contention flakes fade (the 18s-alone/77s-under-load advancePauseResume
+receipt). Honest cost: cross-suite regressions surface at fold, not in-lane — same
+checker, hours later, still pre-merge. Applies to all future briefs; the two in-flight
+gate-stage lanes keep their current instructions.
 **⬛ SWEEP #6 BANKED + LAW §10b (2026-07-17):** the tablet research corrected the law
 before anyone built from it — **TABLET GRIP INVERTS THE PHONE** (thumbs at the side
 edges/corners; bottom bars ergonomically hostile on a held tablet — the FIELD bottom-
