@@ -73,7 +73,7 @@ export default function HomeSampleDossier({ compact = false }) {
   // narrows; the header type and paddings step down. This card is static, so
   // there is no hit target to preserve.
   const M = compact
-    ? { cardMax: 300, cardMargin: '16px auto 32px', headPad: '9px 12px',
+    ? { cardMax: 300, cardMargin: '0 auto 32px', headPad: '9px 12px',
         nameFS: FS['13.5'], bodyPad: 11, bodyGap: 7, calloutPad: 8, footPad: '7px 12px 11px' }
     : { cardMax: 480, cardMargin: '24px auto 56px', headPad: '12px 16px',
         nameFS: FS['16'], bodyPad: 14, bodyGap: 10, calloutPad: 10, footPad: '8px 16px 14px' };

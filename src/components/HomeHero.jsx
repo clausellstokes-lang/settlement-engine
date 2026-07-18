@@ -259,7 +259,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             fontFamily: serif_, fontStyle: 'italic',
             fontSize: FS.md, color: BODY, lineHeight: 1.55,
           }}>
-            Pick a size. Roll a settlement. Every size from thorp to metropolis.
+            Pick a size. Roll a settlement — instant generation, every size from thorp to metropolis.
           </p>
         </>
       )}
