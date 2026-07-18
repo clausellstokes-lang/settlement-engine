@@ -1120,6 +1120,23 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ SWEEP #6 BANKED + LAW §10b (2026-07-17):** the tablet research corrected the law
+before anyone built from it — **TABLET GRIP INVERTS THE PHONE** (thumbs at the side
+edges/corners; bottom bars ergonomically hostile on a held tablet — the FIELD bottom-
+third law does NOT port to THE SPREAD) · landscape = the SYNTHETIC SPREAD (paired
+recto/verso compositions, never portrait-but-wider) · the Van de Graaf/Tschichold canon
+as COMPUTABLE text-block geometry (manuscript grammar by construction, not padding) ·
+Flipboard-class FOLIO TEMPLATES for generated content (bespoke-looking output from
+procedural input — the exact match for a generator product) · one signature handleable-
+artifact interaction, maintained. §10b committed on w7-prep. ALL SIX RESEARCH SWEEPS
+NOW BANKED (30 agents, 0 errors). **DECREE-PROVENANCE TIMING (owner asked "does any of
+this need to be fixed?"):** the one real fix from the refutation (approved proposals
+apply without provenance recording) STAYS IN ROUND 3's pre-approved stock — vetoable
+JUDGMENT: the fix touches the world-pulse apply path contested by two live lanes
+(FP-G11's slice hook + rulings-wiring's audit-spine); the flag is dark until the regen
+so no user-visible window exists; ROUND 3's fix waves verify it adversarially. Pulls
+forward on the owner's word once those lanes fold. Fog re-stalled (5th instance) +
+re-cured by demand #2; its code committed @ 3234076b before the stall — zero risk.
 **⬛⬛ THE THREADING REFUTATION (2026-07-17) — ENGINE LIFT #2 CLOSES AS
 INVESTIGATED-AND-REFUTED, the stop-and-report doctrine at its best.** The lane made ZERO
 edits and disproved the commission's premise with EXECUTED PROBES on lit runs: (1) all
