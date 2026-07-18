@@ -1120,6 +1120,18 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE LADDER §8+§9 (owner refinements, relayed mid-flight):** THE STANDING LOOP —
+ladder→faction feedback closes the circuit (leadership quality lifts effective power ·
+churn priced as decaying instability · legitimacy reads the HOW of succession, public
+legitimacy taxed on norm-breaking governing usurpations · ENTRENCHMENT: long tenure
+deposits rigidity which raises clash as the world drifts — success plants the fall,
+dynasties rot mechanically) + WEIGHTED DEEDS — stakes priced at goal-mint (state-distance
+× scope × adversity × domain), settled at outcome; **the greater deed beats the smaller
+even when both succeed** (the owner's rule verbatim, fixture-pinned); flaws = risk
+appetite; anti-farming by weight-averaged windows; deed-acquired growth as evidence.
+Single-writer preserved (sidecar modifiers; reads consume when lit; absent ⇒ 1.0 ⇒
+dark byte-identity holds). Frozen in the corpus; relayed to the live lane w/ the named
+pin set incl. the both-succeed fixture.
 **⬛⬛ THE LADDER COMMISSIONED (owner: "build it… cohesive completely with the NPC's
 entire description and the settlement's entire state and shape") — ENGINE LIFT #3.**
 Design FROZEN w/ the full coherence matrix: docs/DESIGN_THE_LADDER.md @ w7-prep —
