@@ -9,13 +9,13 @@ dry, a fact + the complication it creates; never purple, never generic-fantasy)?
 string preserves the interpolated tokens and the meaning of the line it varies; the goldens
 regen once at the ONE REGEN.
 
-**Honest note (pre-existing, not introduced here):** a few pressure lines read with a
-lowercase "the town council …" at a sentence start. That is the existing `${govFaction}`
-interpolation casing (the value is lowercased "the …" while its fallback is capitalized) —
-the base's own variants do it in 5 places; this lane added 4 more in the same established
-style. A sentence-boundary capitalization pass over `govFaction`/`topFaction` would fix all
-9 at once; it is queued as a candidate cleanup, not done here (it would rework the owner's
-existing prose and is out of a content-growth lane's scope).
+**RESOLVED in CONTENT-GT-FINAL (AMENDMENT B — the casing pass):** the lowercase
+"the town council …" at a sentence start is fixed. A pure, idempotent `capFirst` helper now
+wraps EXACTLY the sentence-start `${govFaction}`/`${topFaction}` interpolations — identified
+by their capitalised "The …" fallback (the mid-sentence sites carry a lowercase "the …"
+fallback and are left untouched). The true count was 13, not the 9 estimated here (the
+compound insurgency/mass_migration/wartime pools each grew 1→3 per branch, adding sentence-
+start sites). One-time golden shift, legal on the parked content stack; prose-only.
 
 ---
 
@@ -51,20 +51,33 @@ The catalog line stays index-0 (canonical); a settlement deterministically picks
 - A distant lord's man, set here to watch the settlement and remit what it owes. His writ is legitimate; his welcome is not.
 - Placed by a lord who never visits, he holds official charge of the settlement. The paperwork backs him. The neighbours do not.
 
-## 3. World-scoped faction names — the same faction no longer appears in two towns
+## 3. World-scoped faction names — world-unique AND de-clunked (AMENDMENT A)
 
-A composed medium realm (settlement-local dedup would repeat names across members); every faction name is now world-unique:
+A composed medium realm (settlement-local dedup would repeat names across members); every
+faction name is now world-unique. **AMENDMENT A — THE FACTION DE-CLUNK RULE** reworked the
+rename strategy: DESCRIPTOR-SWAP first (draw a different clean base from a widened, dedup-only
+same-category pool), an adjectival PREFIX modifier only as a last resort, and a banned-stack
+guard. The old suffix-stacking clunkers — "The Commercial Circle Inner Circle", "The Free
+Alliance Coalition", "The Devout Circle League", "The Merchant Bloc Combine", "The Faithful
+Assembly League", "The Common Interest League" — are now **structurally impossible** (no
+collective noun is ever appended, so a repeated- or doubled-collective can never be minted).
 
-- **Drumbeck**: The Commercial Circle · The Governing Council · The Old Houses
-- **Geraspyrgos**: The Establishment Concord · The Independent Bloc
-- **Lagourbs**: The Merchant Bloc · The Administrative Circle · The Devout Circle · The Clergy Alliance
-- **Goldwiese**: The Establishment Coalition · The Commercial Circle Inner Circle · The Faithful Assembly League
-- **Shanzhen**: The Common Interest · The Civic Authority
-- **Pantekastro**: The Establishment
-- **Aquamagnum**: The Free Alliance · The Merchant Bloc Combine
-- **Kitakou**: The Free Alliance Coalition · The Devout Circle League · The Grey Council · The Common Interest League
+Regenerated realm (`composeInstantWorld` seed `taste-medium-1`, medium) — every rename is a
+whole, distinct descriptor; note the SWAPs where the old code would have suffix-stacked:
 
-_(23 factions across 9 members, 23 distinct — zero collisions.)_
+- **Oberberg**: The Devout Circle · The Holy Compact · The Commercial Circle · The Trade Compact · The Faithful Assembly
+- **Rundwiese**: The Clergy Alliance · The Grey Council
+- **Bayankum**: The Establishment
+- **Naranjooatl**: The Administrative Circle · The Merchant Bloc
+- **Umavaram**: The Civic Authority · The Old Houses · The Common Interest · The Independent Circle _(swap, not "…Interest League")_
+- **Qaryahpara**: The Landed Bloc · The Governing Council · The Craftsmen's League
+- **Langkirche**: The Free League · The Congregation League
+- **Cathcross**: The Independent Bloc
+- **Silberplatz**: The Popular Front
+
+_(21 factions across 9 members, 21 distinct — zero collisions, **zero clunkers**. The
+banned-stack guard is proved impossible-to-violate over the whole candidate space in
+tests/lib/instantWorld/factionDedup.test.js.)_
 
 ---
 

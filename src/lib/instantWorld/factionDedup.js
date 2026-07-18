@@ -26,40 +26,127 @@
 import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
 
-// Suffixes that distinguish a reused base descriptor without introducing a foreign
-// category keyword the inferFactionCategory fallback would mis-read (Assembly/Bloc etc.
-// are deliberately excluded — they map to government/noble in factionCategories.js).
-const DISAMBIG_SUFFIXES = Object.freeze(['Inner Circle', 'League', 'Coalition', 'Concord', 'Combine']);
+// ── AMENDMENT A — THE FACTION DE-CLUNK RULE ──────────────────────────────────
+// The old strategy stacked a collective-noun SUFFIX onto a reused base descriptor
+// ("The Commercial Circle Inner Circle", "The Free Alliance Coalition", "The Devout
+// Circle League"). Two clunk classes: a repeated collective noun (Circle…Circle) and
+// a doubled collective/honorific (Alliance + Coalition). The rework:
+//   1. DESCRIPTOR-SWAP FIRST — draw a DIFFERENT clean base from a WIDENED same-category
+//      pool. This resolves almost every realistic collision with a whole, distinct name.
+//   2. A distinguishing PREFIX MODIFIER (adjectival, NEVER a collective noun) only as a
+//      last resort, when every clean base in the category is already used world-wide.
+//      A prefix adjective cannot stack a second org-noun, so the two clunk classes are
+//      STRUCTURALLY IMPOSSIBLE — proved by the banned-stack guard over the whole space.
+//   3. A numeric disambiguator only if even that is exhausted (never, for any realm).
+//
+// The widened pool is DEDUP-ONLY and lives HERE, never in powerData.FACTION_DESCRIPTORS:
+// generateFactions draws per-settlement names from that shared table through a draw-count-
+// VARIABLE retry loop, so widening it would perturb the per-settlement rng stream and
+// cascade the generator golden. This pass is rng-free and runs only on the composed
+// bundle, so these extras touch nothing in per-settlement generation.
+//
+// Each extra contains its OWN category keyword (or, for 'other'/crafts, no other
+// category's keyword) so inferFactionCategory(name) stays in {thatCategory, 'other'} —
+// a rename never mis-assigns a faction to a WRONG specific category (guarded by a test).
+export const FACTION_DESCRIPTORS_EXTRA = Object.freeze({
+  economy: ["The Merchants' Consortium", 'The Trade Syndicate', 'The Market Guild', 'The Ledger Houses', 'The Commerce League', "The Factors' Union"],
+  government: ['The Civic Assembly', 'The Municipal Council', "The Magistrates' Court", 'The Chancery Bench', "The Aldermen's Board", "The Governors' Seat"],
+  military: ['The Guard Union', 'The Garrison Order', "The Knights' Charter", "The Soldiers' League", "The Watchmen's Company", 'The Mercenary Compact'],
+  religious: ['The Temple Union', 'The Congregation League', 'The Ecclesiastical Council', 'The Faithful Order', 'The Devout League', 'The Clergy Chapter'],
+  magic: ["The Mages' Conclave", 'The Arcane Order', "The Wizards' League", 'The Tower Union', "The Alchemists' Circle", "The Sorcerers' Compact"],
+  criminal: ["The Thieves' Union", 'The Shadow League', 'The Underworld Compact', "The Smugglers' Ring", 'The Cartel', "The Assassins' Circle"],
+  crafts: ["The Craftsmen's Union", "The Artisans' League", "The Makers' Compact", 'The Guild of Artificers', 'The Craft Consortium', "The Journeymen's Circle"],
+  noble: ['The Noble Houses', 'The Landed Gentry', 'The Manor Bloc', 'The Aristocratic Circle', 'The Feudal Order', 'The Heritage Houses'],
+  other: ['The Independent Circle', 'The Free League', 'The Common Union', 'The Neutral Bloc', 'The Popular Front', 'The Unaligned Bloc'],
+});
+
+// Collective/organisational nouns — the tokens a faction name ends on. Two of these in
+// the ADDED disambiguation is the clunk the amendment forbids; a MODIFIER is never one.
+export const COLLECTIVE_NOUNS = Object.freeze(new Set([
+  'Alliance', 'Coalition', 'Bloc', 'Combine', 'League', 'Compact', 'Circle', 'Concord',
+  'Council', 'Assembly', 'Guild', 'Union', 'Order', 'Consortium', 'Congress', 'Chamber',
+  'Syndicate', 'Front', 'Board', 'Company', 'Conclave', 'Ring', 'Cartel',
+]));
+
+// Distinguishing prefixes: strictly ADJECTIVAL (none is a collective noun, asserted by a
+// test), so `${MOD} ${base}` adds no second org-noun and reads as a real faction name.
+export const DISTINGUISH_MODIFIERS = Object.freeze([
+  'Greater', 'Elder', 'United', 'Reformed', 'Grand', 'Old', 'New', 'Lesser',
+  'Lower', 'Upper', 'Second', 'Third', 'Northern', 'Southern', 'Eastern', 'Western',
+]);
+
+/** The widened, dedup-only clean-base pool for a category. Pure. @param {string} c */
+function basePool(c) {
+  return [...(FACTION_DESCRIPTORS[c] || FACTION_DESCRIPTORS.other), ...(FACTION_DESCRIPTORS_EXTRA[c] || [])];
+}
 
 /**
- * The deterministic candidate name space for a category: the base descriptors first (the
- * clean, distinct names), then base+suffix combos. Pure.
- * @param {string} category @returns {string[]}
+ * THE BANNED-STACK GUARD. A name is banned iff it has an adjacent duplicate word
+ * ("Circle Circle") OR any single collective noun appears more than once ("… Circle …
+ * Circle"). Base descriptors carrying two DISTINCT collectives ("The Guild Alliance",
+ * "The Order of the Watch") are legitimate and pass. Because every disambiguation adds
+ * only an adjectival prefix (no collective), the doubled-collective clunk
+ * ("Alliance Coalition") can never be minted — a test asserts the whole candidate space
+ * (bases ∪ modifier×base) is guard-clean. @param {string} name @returns {boolean}
  */
-function candidateNames(category) {
-  const bases = FACTION_DESCRIPTORS[category] || FACTION_DESCRIPTORS.other;
+export function hasBannedStack(name) {
+  const toks = String(name).replace(/^The\s+/i, '').split(/\s+/);
+  for (let i = 0; i < toks.length - 1; i += 1) if (toks[i] === toks[i + 1]) return true;
+  const seen = new Map();
+  for (const t of toks) {
+    if (!COLLECTIVE_NOUNS.has(t)) continue;
+    const n = (seen.get(t) || 0) + 1;
+    if (n > 1) return true;
+    seen.set(t, n);
+  }
+  return false;
+}
+
+/**
+ * The full deterministic candidate space for a category, in priority order: the widened
+ * clean bases first (SWAP), then guard-clean `${modifier} ${base}` combos (last resort).
+ * Pure. Exported for the de-clunk guard test. @param {string} category @returns {string[]}
+ */
+export function candidateNames(category) {
+  const bases = basePool(category);
   const out = [...bases];
-  for (const suf of DISAMBIG_SUFFIXES) for (const b of bases) out.push(`${b} ${suf}`);
+  for (const mod of DISTINGUISH_MODIFIERS) {
+    for (const b of bases) {
+      const name = `The ${mod} ${b.replace(/^The\s+/i, '')}`;
+      if (!hasBannedStack(name)) out.push(name);
+    }
+  }
   return out;
 }
 
 /**
  * Pick a world-unique name for a collided faction: fnv-hash a stable seed to a start
- * index in the candidate space, then probe deterministically for the first name not yet
- * used world-wide. Falls back to a numeric disambiguator only if the whole space (bases ×
- * suffixes) is exhausted — impossible for any realistic realm. Pure (no rng).
- * @param {string} category @param {Set<string>} used @param {string} seed
+ * index, then probe deterministically for the first candidate not yet used world-wide.
+ * The candidate ORDER (clean bases, then modifier combos) makes a descriptor SWAP win
+ * over any suffix/modifier form whenever a clean base is free. Numeric disambiguator only
+ * if the whole (bases × modifiers) space is exhausted — impossible for any realistic
+ * realm. Pure (no rng). @param {string} category @param {Set<string>} used @param {string} seed
  */
 function pickUniqueName(category, used, seed) {
+  const bases = basePool(category);
+  // Hash to a start index WITHIN the clean-base band so the swap is seed-varied but
+  // still always prefers a whole distinct base before any modifier form.
+  const baseStart = fnv1a32(seed) % bases.length;
+  for (let i = 0; i < bases.length; i += 1) {
+    const name = bases[(baseStart + i) % bases.length];
+    if (!used.has(name)) return name;
+  }
+  // All clean bases used world-wide → walk the guard-clean modifier combos (built lazily,
+  // only when the whole clean-base pool is spent — the rare last-resort path).
   const cands = candidateNames(category);
-  const start = fnv1a32(seed) % cands.length;
+  const modStart = fnv1a32(`${seed}::mod`) % cands.length;
   for (let i = 0; i < cands.length; i += 1) {
-    const name = cands[(start + i) % cands.length];
+    const name = cands[(modStart + i) % cands.length];
     if (!used.has(name)) return name;
   }
   let n = 2;
   let name;
-  do { name = `${cands[start]} ${n}`; n += 1; } while (used.has(name));
+  do { name = `${bases[baseStart]} ${n}`; n += 1; } while (used.has(name));
   return name;
 }
 
