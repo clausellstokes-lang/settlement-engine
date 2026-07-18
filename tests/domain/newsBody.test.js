@@ -10,7 +10,7 @@
 
 import { describe, it, expect } from 'vitest';
 
-import { newsBodyText, newsReasonPhrases } from '../../src/domain/display/newsBody.js';
+import { newsBodyText, newsReasonPhrases, BODY_POOLS } from '../../src/domain/display/newsBody.js';
 
 const TRANSITIONS = ['queued', 'ready', 'applied', 'resolved', 'ignored', 'expired'];
 
@@ -73,5 +73,76 @@ describe('newsBody — reasons recast into fiction', () => {
     expect(newsReasonPhrases(null)).toEqual([]);
     expect(newsReasonPhrases({})).toEqual([]);
     expect(newsReasonPhrases({ reasons: [null, '', undefined] })).toEqual([]);
+  });
+});
+
+describe('newsBody — VIEW-TIME variety (CONTENT-VT-2)', () => {
+  const BANNED = ['queued', 'ready', 'applied', 'resolved', 'expired', 'via ', '_'];
+
+  it('every pool line (all variants, both scopes) stays in the house voice', () => {
+    for (const [cell, pool] of Object.entries(BODY_POOLS)) {
+      expect(pool.length, `${cell} has variety`).toBeGreaterThanOrEqual(2);
+      for (const raw of pool) {
+        // Fill the scope token both ways so scope-bearing lines are scanned whole.
+        for (const scope of ['in the town', 'across the region', 'across the realm']) {
+          const text = raw.replace('{scope}', scope);
+          expect(/[.!?]$/.test(text), `${cell}: "${text}" terminal punct`).toBe(true);
+          const lc = text.toLowerCase();
+          for (const bad of BANNED) {
+            expect(lc.includes(bad), `${cell} leaks "${bad}": ${text}`).toBe(false);
+          }
+        }
+      }
+    }
+  });
+
+  it('CANONICAL-AT-ZERO: an entry with no id renders the original single line, byte-identical', () => {
+    // Index 0 of each pool is the pre-CONTENT-VT-2 string; an id-less entry must
+    // pick it, so every legacy / id-less caller is unchanged.
+    expect(newsBodyText({ kind: 'queued' })).toBe(BODY_POOLS.queued[0]);
+    expect(newsBodyText({ kind: 'ready' })).toBe(BODY_POOLS.ready[0]);
+    expect(newsBodyText({ kind: 'resolved' })).toBe(BODY_POOLS.resolved[0]);
+    expect(newsBodyText({ kind: 'ignored' })).toBe(BODY_POOLS.ignored[0]);
+    expect(newsBodyText({ kind: 'expired' })).toBe(BODY_POOLS.expired[0]);
+    expect(newsBodyText({ kind: 'weird_state', scope: 'realm' })).toBe(BODY_POOLS.default[0].replace('{scope}', 'across the realm'));
+    expect(newsBodyText({ kind: 'applied', scope: 'settlement', severity: 0.3 }))
+      .toBe(BODY_POOLS.appliedLight[0].replace('{scope}', 'in the town'));
+    expect(newsBodyText({ kind: 'applied', scope: 'regional', severity: 0.9 }))
+      .toBe(BODY_POOLS.appliedHeavy[0].replace('{scope}', 'across the region'));
+    // The same holds when id is explicitly null/empty (the `?? ''` path).
+    expect(newsBodyText({ kind: 'queued', id: null })).toBe(BODY_POOLS.queued[0]);
+    expect(newsBodyText({ kind: 'queued', id: '' })).toBe(BODY_POOLS.queued[0]);
+  });
+
+  it('DETERMINISM: same id ⇒ same line; the pick is stable across calls', () => {
+    for (const kind of ['queued', 'ready', 'resolved', 'ignored', 'expired']) {
+      const a = newsBodyText({ kind, id: 'wizard_news.7.x.evt42' });
+      const b = newsBodyText({ kind, id: 'wizard_news.7.x.evt42' });
+      expect(a, kind).toBe(b);
+    }
+    // applied is keyed by severity band too — same id + same band is stable.
+    const h1 = newsBodyText({ kind: 'applied', scope: 'realm', severity: 0.9, id: 'e1' });
+    const h2 = newsBodyText({ kind: 'applied', scope: 'realm', severity: 0.9, id: 'e1' });
+    expect(h1).toBe(h2);
+  });
+
+  it('ANTI-REPETITION: distinct ids reach the whole pool (full reachability)', () => {
+    // Sweep enough ids that every variant of every pool is drawn at least once.
+    const seen = /** @type {Record<string, Set<string>>} */ ({});
+    for (const cell of Object.keys(BODY_POOLS)) seen[cell] = new Set();
+    for (let i = 0; i < 400; i++) {
+      const id = `evt_${i}`;
+      seen.queued.add(newsBodyText({ kind: 'queued', id }));
+      seen.ready.add(newsBodyText({ kind: 'ready', id }));
+      seen.resolved.add(newsBodyText({ kind: 'resolved', id }));
+      seen.ignored.add(newsBodyText({ kind: 'ignored', id }));
+      seen.expired.add(newsBodyText({ kind: 'expired', id }));
+      seen.default.add(newsBodyText({ kind: 'other', scope: 'regional', id }));
+      seen.appliedHeavy.add(newsBodyText({ kind: 'applied', scope: 'regional', severity: 0.9, id }));
+      seen.appliedLight.add(newsBodyText({ kind: 'applied', scope: 'regional', severity: 0.3, id }));
+    }
+    for (const [cell, pool] of Object.entries(BODY_POOLS)) {
+      expect(seen[cell].size, `${cell} fully reachable`).toBe(pool.length);
+    }
   });
 });
