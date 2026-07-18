@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: THE MAP-SURFACE GATE WIRING (2026-07-17) → w7-prep @ 9d1c9702** (772877f5 off
+the fog tip; 5 files NUL-clean; receipts 17/17 gate pins + tsc 0 + dist 150/150; 0 eager
+by construction, pane 597/600). THE LADDER RULING'S MAP CONSUMERS LANDED: DM pins gated
+(locked-visible padlock on saved maps; stored annotations untouched; viewing free;
+anon/gallery unaffected) · change-view depth gated (free = the newest change per band —
+the honest teaser floor; premium = full depth; the derivation tier-blind, pinned). TWO
+HONEST STOP-AND-REPORTS ACCEPTED: interiors have NO consumer yet (the enter-from-map
+hook = the recorded unbuilt seam; the pure most-prominent-institution free-sample rule
+RECOMMENDED for when it lands) · the v1→v2 redraw affordance is PREMATURE until the
+owner's taste veto. ROUND-3 STOCK GAINED: the built-but-unwired interior hook · the
+invisibly-gated map-edit chrome (hidden, no teaser — "lock-glyph-teaser everywhere"
+wants one) · interior-export monetization intent superseded by the ladder (owner
+surface). REMAINING LIVE: the ladder · doc-wave-2 · landforms · big content. The
+entitlement ladder is now FULLY WIRED at every existing affordance.
 **⬛ THE CHALLENGE ROUND (owner: "feel free to challenge me" — four challenges
 delivered):** (1) **OPEN-BOTTOM AMENDMENT proposed, OWNER-PENDING** — the closed
 displacement ladder over a fixed cast reaches equilibrium (person-scale stasis, the
