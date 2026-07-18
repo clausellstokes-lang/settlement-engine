@@ -1,6 +1,8 @@
 // npcData.js — NPC table data extracted from npcGenerator.js
 // All constants exported for use by npcGenerator.js
 
+import { pickVariant } from '../kernel/proseHash.js';
+
 export const MANNERISMS = [
   'drums fingers on surfaces when thinking',
   'never makes direct eye contact with inferiors',
@@ -55,6 +57,18 @@ export const SPEECH_PATTERNS = [
   "Repeats key words for emphasis: 'The contract. The contract is clear'",
   'Addresses strangers formally and familiars by diminutives',
   'Uses long pauses as punctuation — sits comfortably in silence',
+  // CONTENT-GT-FINAL (Charge 3): +10 — the survey's thinnest personality slot (was 20).
+  // Single-pick draw site (generateReligionType), draw-count invariant.
+  'Never interrupts — waits out even the longest speaker, then answers the first point only',
+  "Answers questions with inventories: 'Three reasons. First—'",
+  'Trails off mid-sentence when approaching something they regret knowing',
+  'Speaks quickly when lying, slowly when bargaining — the local traders know the tell',
+  'Quotes their own past pronouncements as though citing law',
+  'Talks to everyone in the room except the person the answer is for',
+  'Prefaces bad news with elaborate courtesy, good news with none',
+  'Wields professional titles with surgical precision — rank omitted is rank denied',
+  "Says 'as you know' before telling people things they do not know",
+  'Ends disagreements by restating the other position, slightly wrong',
 ];
 
 // Personality-trait pools (positive / negative / neutral adjectives). The NPC
@@ -92,6 +106,26 @@ export const NPC_PERSONALITY_TRAITS = {
     'warm-hearted',
     'level-headed',
     'forthright',
+    // CONTENT-GT-FINAL (Charge 3): +15. Single-pick draw site (draw-count invariant);
+    // no code branches on positive-trait VALUES (corruption checks presence only).
+    // LOCKSTEP LAW: domain/npc/npcBank.js NPC_TEMPERAMENTS mirrors this pool EXACTLY
+    // (same entries, same order) — append there too; the npcBank counterpart pin
+    // (tests/domain/npc/npcBank.test.js) enforces it.
+    'prudent',
+    'candid',
+    'gracious',
+    'stalwart',
+    'discerning',
+    'equitable',
+    'temperate',
+    'courteous',
+    'dependable',
+    'astute',
+    'conscientious',
+    'good-humoured',
+    'unflappable',
+    'plain-dealing',
+    'hospitable',
   ],
   negative: [
     'greedy',
@@ -344,48 +378,80 @@ export const NPC_FEATURES = [
   'eyes that never stop moving',
 ];
 
+// CONTENT-GT-FINAL (Charge 3): each category 4→8 — the survey's thinnest cells. The
+// entries are CLOTHING descriptions consumed as the appearance `clothes` field
+// (npcGenerator.js:286); the constant NAME is the recorded mislabel (flagged in the
+// shift map, deliberately not renamed — the wiring is correct). Single-pick draw site.
 export const NPC_WANTS = {
   government: [
     'formal robes of office',
     'expensive but conservative merchant dress',
     'a chain of office worn even off-duty',
     'court attire with discreet personal touches',
+    'robes cut for a taller predecessor, never altered',
+    'official dress one grade above their actual station',
+    'sombre official black with a jewelled clasp nobody asks about',
+    'immaculate formal wear that has clearly never seen weather',
   ],
   military: [
     'functional armour with personal sigils',
     'guard uniform kept immaculate',
     "soldier's practical dress with officer's insignia",
     "battle-worn plate they haven't replaced",
+    'a dress uniform kept for funerals, worn thin at the elbows',
+    'mismatched armour pieces, each from a different campaign',
+    'a field coat carrying the insignia of a disbanded company',
+    'civilian dress worn like a uniform — pressed, squared, joyless',
   ],
   religious: [
     'religious vestments layered over travelling clothes',
     'simple robes of their order',
     'ceremonial attire worn at all times',
     'plain devotional dress with one opulent accessory',
+    'vestments a size too grand for the shrine they serve',
+    'threadbare robes patched with fabric from finer ones',
+    'a formal habit with a travel-stained hem never cleaned',
+    'lay clothes with the collar of the order left visible',
   ],
   economy: [
     'merchant dress — practical but signalling wealth through material',
     'guild colours worn with pride',
     'clothes that once cost a fortune and now show the miles',
     'well-cut but understated trading clothes',
+    'sober broadcloth with buttons worth more than the coat',
+    'foreign-cut clothes from a market they want to be asked about',
+    "a ledger-keeper's plain dress with ink at the right cuff",
+    "last season's fashion maintained with visible determination",
   ],
   criminal: [
     'nondescript working clothes chosen specifically to be forgettable',
     'fine clothes worn ironically over rougher garments',
     'guard or clergy disguise worn as a habit',
     'whatever is clean — they move frequently',
+    "a dockhand's oilskins over hands too clean for the work",
+    'respectable dress exactly average for the street they work',
+    'good boots and cheap everything else',
+    'a heavy coat worn indoors, contents unexamined',
   ],
   magic: [
     'scholarly robes with heavy pockets',
     "travelling mage's coat covered in small pouches",
     'deceptively plain clothes that crackle faintly with residual energy',
     'formal academic dress worn with absent-minded disregard',
+    'robes singed at one cuff and never mended',
+    'practical dress with chalk dust in every seam',
+    "a scholar's gown two institutions out of date",
+    'ordinary clothes with a lining that clinks faintly',
   ],
   other: [
     'clothes practical for their work with one personal flourish',
     'travel-worn but well-maintained gear',
     "second-hand fine clothes that don't quite fit",
     "whatever was available — they don't care about dress",
+    'work clothes patched by someone who loved them',
+    'a good coat inherited from a larger relative',
+    'dress entirely without signal — deliberately so',
+    'weathered gear maintained past the point of economy',
   ],
 };
 
@@ -1255,134 +1321,324 @@ export const NPC_PRESENTATION_MODES = {
 // purged symbol is pinned absent by tests/joins/deadCode.test.js (do not re-name
 // it here — the ratchet greps this file for the literal name).
 
+// CONTENT-GT-FINAL (Charge 3): pair-keyed, draw-FREE variety for the relationship
+// archetype prose (the survey's "every 'old_debt' pair in the world is described
+// identically" cell). Each archetype's desc/tension grew 1→3 template closures; the
+// closure used for a given pair is selected by a pure fnv hash of the DIRECTED pair
+// key (`${r.name}>${s.name}`, salted per field) — ZERO rng draws, so the relationship
+// roll stream is byte-identical, and the archetype OBJECTS are unchanged (consumers
+// compare them with === and Object.entries().find — identity is load-bearing). The
+// same pair always renders the same line; different pairs stop sharing one realm-wide
+// template. Index 0 of every pool is the pre-existing canonical closure, verbatim.
+const pairProse = (salt, variants) => (r, s) =>
+  pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`)(r, s);
+
 export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory — ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`,
-    tension: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory — ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`,
+      (r, s) =>
+        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`,
+      (r, s) =>
+        `What ${r.name} sells is respectability, and ${s.name} is a steady customer — goods move through channels no inspector has thought to draw on a map.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
+      (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.',
+      (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`,
+    ]),
     type: 'patron_client',
   },
   econ_crim_exploitation: {
     label: 'Protection Arrangement',
-    desc: (r, s) =>
-      `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`,
-    tension: (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`,
+      (r, s) =>
+        `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`,
+      (r, s) =>
+        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
+      (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`,
+      (r, s) => `A rival crew has offered ${r.name} a better rate. Accepting would be a declaration of war on ${s.name}.`,
+    ]),
     type: 'debtor_creditor',
   },
   mil_crim_corruption: {
     label: 'Corrupt Arrangement',
-    desc: (r, s) =>
-      `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`,
-    tension: (r, s) =>
-      'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`,
+      (r, s) =>
+        `${s.name}'s operation runs on a schedule ${r.name} provides — patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`,
+      (r, s) =>
+        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
+      (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`,
+      (r, s) => 'The payments have started arriving late. In this trade, late is a message.',
+    ]),
     type: 'ally',
   },
   mil_crim_suppression: {
     label: 'Active Suppression',
-    desc: (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
-    tension: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
+    desc: pairProse('d', [
+      (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
+      (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
+      (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
+      (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`,
+      (r, s) => `Someone in ${r.name}'s command reports to ${s.name}. The file says so; it does not say who.`,
+    ]),
     type: 'enemy',
   },
   econ_mil_contract: {
     label: 'Security Contract',
-    desc: (r, s) =>
-      `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
-    tension: (r, s) =>
-      `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
+      (r, s) =>
+        `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`,
+      (r, s) =>
+        `The contract between ${r.name} and ${s.name} is renewed annually with a handshake; what it actually covers has never been written down anywhere.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
+      (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`,
+      (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.',
+    ]),
     type: 'patron_client',
   },
   rel_mil_crusader: {
     label: 'Sacred Commission',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} operate as a unified authority — temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
-    tension: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} operate as a unified authority — temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
+      (r, s) =>
+        `Between ${r.name}'s pulpit and ${s.name}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
+      (r, s) =>
+        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
+      (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.',
+      (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
+    ]),
     type: 'ally',
   },
   rel_crim_fraud: {
     label: 'Institutional Cover',
-    desc: (r, s) =>
-      `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`,
-    tension: (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`,
+      (r, s) =>
+        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
+      (r, s) =>
+        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover — unknowingly, which is what makes it work.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
+      (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`,
+      (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
+    ]),
     type: 'ally',
   },
   mag_crim_market: {
     label: 'Arcane Supplier',
-    desc: (r, s) =>
-      `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`,
-    tension: (r, s) =>
-      `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`,
+      (r, s) =>
+        `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`,
+      (r, s) =>
+        `${r.name} takes commissions from ${s.name} that no guild register records — small workings, expertly done, each one deniable and none of them innocent.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
+      (r, s) => `${s.name} has begun asking for workings of a different order — the kind with witnesses. ${r.name} has not yet said no.`,
+      (r, s) => `Another practitioner has noticed ${r.name}'s signature in the residue. Professional courtesy has limits.`,
+    ]),
     type: 'patron_client',
   },
   gov_econ_dependence: {
     label: 'Financial Dependence',
-    desc: (r, s) =>
-      `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests — and ${s.name} does not let this be forgotten.`,
-    tension: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests — and ${s.name} does not let this be forgotten.`,
+      (r, s) =>
+        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`,
+      (r, s) =>
+        `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
+      (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
+      (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`,
+    ]),
     type: 'debtor_creditor',
   },
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`,
-    tension: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`,
+      (r, s) =>
+        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`,
+      (r, s) =>
+        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
+      (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
+      (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
+    ]),
     type: 'political',
   },
   peer_rivalry: {
     label: 'Professional Rivalry',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded — neither has crossed the line into genuine enmity. Yet.`,
-    tension: (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded — neither has crossed the line into genuine enmity. Yet.`,
+      (r, s) =>
+        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`,
+      (r, s) =>
+        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
+      (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.',
+      (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.',
+    ]),
     type: 'rival',
   },
   mentor_legacy: {
     label: 'Mentor and Successor',
-    desc: (r, s) =>
-      `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`,
-    tension: (r, s) =>
-      `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`,
+      (r, s) =>
+        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`,
+      (r, s) =>
+        `What ${s.name} knows, ${r.name} taught — including, inconveniently, how to outmanoeuvre a teacher.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) =>
+        `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
+      (r, s) => `${r.name} has one favour left to call in, and is saving it. ${s.name} knows, and is watching for it.`,
+      (r, s) => `A third party has asked ${r.name}, quietly, whether ${s.name} can be trusted. The answer took too long.`,
+    ]),
     type: 'mentor_student',
   },
   mutual_leverage: {
     label: 'Mutual Leverage',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`,
-    tension: (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`,
+      (r, s) =>
+        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`,
+      (r, s) =>
+        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store — carefully, and with great mutual politeness.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
+      (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.',
+      (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`,
+    ]),
     type: 'political',
   },
   wary_alliance: {
     label: 'Pragmatic Alliance',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} work together because the alternative — working against each other — is worse for both. The alliance holds as long as the calculation holds.`,
-    tension: (r, s) => 'A third party is actively working to change that calculation.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} work together because the alternative — working against each other — is worse for both. The alliance holds as long as the calculation holds.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
+      (r, s) =>
+        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'A third party is actively working to change that calculation.',
+      (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.',
+      (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`,
+    ]),
     type: 'ally',
   },
   genuine_respect: {
     label: 'Genuine Respect',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`,
-    tension: (r, s) => 'They are about to be on opposite sides of a significant decision.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`,
+      (r, s) =>
+        `${r.name} and ${s.name} disagree often and trust completely — each has watched the other be right at cost, and neither forgets it.`,
+      (r, s) =>
+        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'They are about to be on opposite sides of a significant decision.',
+      (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.',
+      (r, s) => 'The respect is real and the interests are diverging. Both can read a map.',
+    ]),
     type: 'respect',
   },
   old_debt: {
     label: 'Outstanding Debt',
-    desc: (r, s) =>
-      `${r.name} owes ${s.name} something significant — a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`,
-    tension: (r, s) => `${s.name} is about to call it in.`,
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} owes ${s.name} something significant — a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`,
+      (r, s) =>
+        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`,
+      (r, s) =>
+        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => `${s.name} is about to call it in.`,
+      (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`,
+      (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.',
+    ]),
     type: 'debtor_creditor',
   },
   family_complication: {
     label: 'Family Complication',
-    desc: (r, s) =>
-      `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`,
-    tension: (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`,
+      (r, s) =>
+        `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`,
+      (r, s) =>
+        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
+      (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.',
+      (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.',
+    ]),
     type: 'family',
   },
   bitter_history: {
     label: 'Unresolved History',
-    desc: (r, s) =>
-      `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`,
-    tension: (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
+    desc: pairProse('d', [
+      (r, s) =>
+        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`,
+      (r, s) =>
+        `${r.name} and ${s.name} were something to each other once — partners, friends, perhaps more — and the wreck of it is the one subject on which both are permanently silent.`,
+      (r, s) =>
+        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`,
+    ]),
+    tension: pairProse('t', [
+      (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
+      (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.',
+      (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
+    ]),
     type: 'enemy',
   },
 };

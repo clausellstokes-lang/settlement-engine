@@ -61,6 +61,12 @@ export const NPC_TEMPERAMENTS = Object.freeze([
   'principled', 'protective', 'diplomatic', 'resourceful', 'scholarly', 'pious',
   'merciful', 'tenacious', 'methodical', 'intuitive', 'perceptive', 'steadfast',
   'magnanimous', 'incorruptible', 'warm-hearted', 'level-headed', 'forthright',
+  // CONTENT-GT-FINAL (Charge 3): +15, the EXACT lockstep mirror of the
+  // NPC_PERSONALITY_TRAITS.positive growth (same entries, same order) — the
+  // counterpart pin in tests/domain/npc/npcBank.test.js enforces equality.
+  'prudent', 'candid', 'gracious', 'stalwart', 'discerning', 'equitable',
+  'temperate', 'courteous', 'dependable', 'astute', 'conscientious',
+  'good-humoured', 'unflappable', 'plain-dealing', 'hospitable',
 ]);
 
 /** Role archetype — the 12 agency archetypes (worldPulse/npcAgency inferRoleArchetype
