@@ -254,3 +254,74 @@ export async function compileInterpretation(ctx = {}) {
     ...commonFields(d),
   };
 }
+
+/**
+ * S7 AUTONOMY — compose a natural-language run request into a PROPOSED typed
+ * StopCondition + acceleration nudges. The edge walls against the client-posted
+ * vocabularies; the REAL registry then re-validates here (the domain schema wall is
+ * the suspenders), so a condition the local registry rejects arrives as null with the
+ * failure surfaced — never silently repaired. Standing campaign instructions ride the
+ * request from the campaign record into the compile's per-request suffix.
+ * @param {{ intent?: string } & Parameters<typeof buildWriteContext>[0]} [ctx]
+ * @returns {Promise<{ ok: boolean, composition?: { stopCondition: object|null, maxWeeks: number,
+ *   nudges: Array<object>, unsupported: Array<{requested:string, reason:string}> },
+ *   musings?: Array<{text:string}>, error?: string, refusalKind?: string,
+ *   refusalClass?: string|null, doors?: string[]|null, byok?: boolean,
+ *   creditsRemaining?: number|null, earlyAccess?: boolean }>}
+ */
+export async function composeAutonomy(ctx = {}) {
+  const intent = typeof ctx.intent === 'string' ? ctx.intent.trim() : '';
+  if (!intent) return { ok: false, error: 'Describe the run you want first.', refusalKind: 'input' };
+  const {
+    signalRegistryEntries, NUDGE_TYPES, validateStopCondition, validateNudge,
+    clampAutonomousWeeks, instructionsForCompile,
+  } = await import('../domain/autonomy/index.js');
+  const { anchorLabel, slices } = buildWriteContext({ ...ctx, prompt: intent });
+  const settlementIds = (Array.isArray(ctx.savedSettlements) ? ctx.savedSettlements : [])
+    .map((s) => ({ id: String(s?.id ?? ''), name: typeof s?.name === 'string' ? s.name : String(s?.id ?? '') }))
+    .filter((s) => s.id);
+  const vocabulary = {
+    signals: signalRegistryEntries().map((e) => ({
+      id: e.id, type: e.type, scope: e.scope,
+      values: e.values ? [...e.values] : undefined, min: e.min, max: e.max,
+    })),
+    nudgeTypes: [...NUDGE_TYPES],
+    settlementIds,
+  };
+  const res = await postWrite('surveyor-autonomy', {
+    intent, anchorLabel, vocabulary, slices,
+    standingInstructions: instructionsForCompile(ctx.activeCampaign || null),
+  });
+  if (!res.ok) return res;
+  const d = res.data;
+  const raw = (d && typeof d.composition === 'object' && d.composition) ? d.composition : {};
+  const unsupported = (Array.isArray(raw.unsupported) ? raw.unsupported : [])
+    .filter((u) => u && typeof u.requested === 'string')
+    .map((u) => ({ requested: u.requested, reason: typeof u.reason === 'string' ? u.reason : 'unregistered_signal' }));
+  // THE SUSPENDERS: the REAL registry re-validates the composed condition + nudges.
+  let stopCondition = (raw.stopCondition && typeof raw.stopCondition === 'object') ? raw.stopCondition : null;
+  if (stopCondition) {
+    const wall = validateStopCondition(stopCondition);
+    if (!wall.ok) {
+      stopCondition = null;
+      unsupported.push({ requested: 'the composed stop condition', reason: 'failed_local_wall' });
+    }
+  }
+  const settlementIdSet = settlementIds.map((s) => s.id);
+  const nudges = [];
+  for (const n of (Array.isArray(raw.nudges) ? raw.nudges : [])) {
+    if (validateNudge(n, { settlementIds: settlementIdSet }).ok) nudges.push(n);
+    else unsupported.push({ requested: String(n?.type ?? '(nudge)'), reason: 'failed_local_wall' });
+  }
+  return {
+    ok: true,
+    composition: {
+      stopCondition,
+      maxWeeks: clampAutonomousWeeks(raw.maxWeeks),
+      nudges,
+      unsupported,
+    },
+    musings: passMusings(d),
+    ...commonFields(d),
+  };
+}

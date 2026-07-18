@@ -27,12 +27,14 @@ const CustomContentPanel = lazy(() => import('./CustomContentPanel.jsx'));
 const StyleOverhaulPanel = lazy(() => import('./StyleOverhaulPanel.jsx'));
 const ConstructionPanel = lazy(() => import('./ConstructionPanel.jsx'));
 const InterpretApplyPanel = lazy(() => import('./InterpretApplyPanel.jsx'));
+const AutonomyPanel = lazy(() => import('./AutonomyPanel.jsx'));
 
 const STAGES = [
   { id: 'content', label: 'Content', Body: CustomContentPanel },
   { id: 'style', label: 'Style', Body: StyleOverhaulPanel },
   { id: 'construct', label: 'Build', Body: ConstructionPanel },
   { id: 'apply', label: 'Apply', Body: InterpretApplyPanel },
+  { id: 'autonomy', label: 'Run', Body: AutonomyPanel }, // S7 (additive registration)
 ];
 
 export default function SurveyorWorkshop({ visible = true }) {
