@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
+import { POPULATION_RANGES, TIER_ORDER } from '../data/constants.js';
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
@@ -11,6 +12,20 @@ import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
+
+// Population figure for a tier <option>, derived from the enforced source of
+// truth POPULATION_RANGES (already in the eager data chunk — zero closure cost).
+// Mirrors THE GAUGE's popFigure in HomeHero.jsx so the dropdown and the ranges
+// cannot drift: the top tier renders open-ended (min+). Copy-law: no hand-typed
+// population numbers here (thorp/hamlet had stale 20-80 / 81-400 bands).
+const popRange = (tier) => {
+  const r = POPULATION_RANGES[tier];
+  if (!r) return '';
+  const fmt = (n) => n.toLocaleString('en-US');
+  return TIER_ORDER[TIER_ORDER.length - 1] === tier
+    ? `${fmt(r.min)}+`
+    : `${fmt(r.min)}–${fmt(r.max)}`;
+};
 
 // The 17 archetypes + priority sliders moved to the Character preset card
 // (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
@@ -260,12 +275,12 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               updateConfig({settType:v});
             }}>
             <option value="random">Random</option>
-            <option value="thorp">Thorp (20-80)</option>
-            <option value="hamlet">Hamlet (81-400)</option>
-            <option value="village">Village (401-900)</option>
-            {!blockTownPlus && <option value="town">Town (901-5,000)</option>}
-            {!blockTownPlus && <option value="city">City (5,001-25,000)</option>}
-            {!blockTownPlus && <option value="metropolis">Metropolis (25,001+)</option>}
+            <option value="thorp">{`Thorp (${popRange('thorp')})`}</option>
+            <option value="hamlet">{`Hamlet (${popRange('hamlet')})`}</option>
+            <option value="village">{`Village (${popRange('village')})`}</option>
+            {!blockTownPlus && <option value="town">{`Town (${popRange('town')})`}</option>}
+            {!blockTownPlus && <option value="city">{`City (${popRange('city')})`}</option>}
+            {!blockTownPlus && <option value="metropolis">{`Metropolis (${popRange('metropolis')})`}</option>}
             {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town. Requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
