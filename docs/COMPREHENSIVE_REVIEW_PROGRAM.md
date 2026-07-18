@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE INSTRUMENT PRINCIPLE + THE REFERENCE LIBRARY (owner, 2026-07-18):** the wave
+paused at "wait stop" gains its art direction first. Owner reframe, now law: THE WEBSITE
+IS THE PRODUCT, not an advertisement for one — it must be simultaneously navigable,
+aesthetic WITHOUT being busy, immersive, intuitive: self-advertisement + database +
+simulator + generator + gallery in one working instrument. Commission: generate AS MANY
+reference images as needed (Higgsfield MCP, premium tier, best photoreal model by
+exploration) as THE ART-DIRECTION LIBRARY for the deep wave — organized by register
+recipe (environment/materials/artifact/ledger/lexicon/charter/write-desk/map-kit/
+specimen-drawer/dispatch/dim-lantern/hero moments), each with a TRANSLATION NOTE (what
+the UI takes: grammar/hierarchy/texture; what it never takes: period density/clutter).
+Real product assets (the seal, a real map export) feed generations as reference
+elements. References only — nothing ships without the taste veto; the canonical mark
+is always our vector, never a model's approximation. Library → marketing/assets/
+references/ + manifest; the deep-craft lane receives it as binding art direction.
 **⬛ OWNER GO (2026-07-18): THE DEEP CRAFT WAVE DISPATCHES — "let's rework the website
 first. keep everything that you developed and lets develop from there."** The wave runs
 BEFORE ROUND 3 (inside the standing preview-pause). Governing spec =
