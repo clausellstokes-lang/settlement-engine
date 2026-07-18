@@ -109,7 +109,9 @@ describe('stress-type registration manifest (structural prevention)', () => {
 
   // ── Source-scanned (function-local) tables — per-key presence ────────────────
   const scanned = [
-    ['src/generators/narrativeGenerator.js', 'STRESS_NOTES'],
+    // STRESS_NOTES moved to the data leaf (CONTENT-GT-FINAL Charge 4: variant pools +
+    // the max-lines leaf rule); the walker follows the table to its home.
+    ['src/data/narrativeData.js', 'STRESS_NOTES'],
     ['src/generators/npcGenerator.js', 'STRESS_BOOSTS'],
     ['src/generators/npcGenerator.js', 'STRESS_SECRET_BOOSTS'],
     ['src/generators/npcGenerator.js', 'STRESS_TO_CATEGORY'],

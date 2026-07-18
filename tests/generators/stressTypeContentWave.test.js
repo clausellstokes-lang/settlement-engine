@@ -12,6 +12,7 @@ import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../src/data/stressInstitutionEffects.js';
 import { buildStressContext } from '../../src/generators/stressGenerator.js';
+import { STRESS_DESCS } from '../../src/generators/narrativeGenerator.js';
 
 const NEW = ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt'];
 const gen = (extra, seed) =>
@@ -28,23 +29,24 @@ describe('generators-domain-1 + data-tables-3 — stress-type content wave', () 
     }
   });
 
+  // POOL-ROBUST PROBES (CONTENT-GT-FINAL Charge 4): the arrival scene's opening line is
+  // pickRandom2(STRESS_DESCS[type])(name) — assert the scene OPENS on one of the type's own
+  // pool renderings, whatever the pool's current depth. Growing a pool can never break this
+  // (the old fixed-phrase regexes went stale on any authoring change).
+  const opensOnPool = (s, st) => {
+    const arrival = String(s.arrivalScene || '');
+    return (STRESS_DESCS[st] || []).some((fn) => arrival.startsWith(fn(s.name)));
+  };
+
   it('a slave-revolt town opens on the revolt, not on market day', () => {
     const s = gen({ stressType: 'slave_revolt' }, 'sr-arrival');
-    const arrival = String(s.arrivalScene || '');
-    expect(arrival).toMatch(/shut in daylight|checkpoint|auction platform|rising that did this|carried through/i);
+    expect(opensOnPool(s, 'slave_revolt'), `arrival opens off-pool: ${String(s.arrivalScene).slice(0, 90)}`).toBe(true);
   });
 
-  it('each new type opens its arrival scene on stress-appropriate imagery', () => {
-    const probes = {
-      insurgency: /toll-keeper|notices|watching the town|orders that leave/i,
-      mass_migration: /families|tents and lean-tos|leaving|three languages/i,
-      wartime: /heavy wagons|young men are not|requisition column|forges work/i,
-      religious_conversion: /Two temples|shrine|holy day|bells/i,
-      slave_revolt: /shut in daylight|checkpoint|auction platform|carried through/i,
-    };
+  it('each new type opens its arrival scene on its own stress vignette pool', () => {
     for (const st of NEW) {
       const s = gen({ stressType: st }, `arr-${st}`);
-      expect(String(s.arrivalScene || ''), `${st} arrival not stress-flavored`).toMatch(probes[st]);
+      expect(opensOnPool(s, st), `${st} arrival opens off-pool: ${String(s.arrivalScene).slice(0, 90)}`).toBe(true);
     }
   });
 
