@@ -70,7 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -2316,7 +2316,19 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // the fabric scar reader over the same substrate. DORMANT behind the virtual
   // spatialConsequenceEnabled flag ⇒ a complete no-op (zero read, zero beat, NO worldState
   // mutation) — the spatial-consequence dormancy golden proves it. NO rng.
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequence({
+  // THE LADDER (ENGINE LIFT #3) rides the SAME seam, composed AFTER the consequence
+  // reader inside advanceNpcGrowthWithFabricAndConsequenceAndLadder (npcLadderKernel.js
+  // — the ceiling-safe name swap, the provenanceKernel idiom): the missing MIDDLE rung
+  // between the growth layer (person-change) and coups (regime-change). Per faction, a
+  // persistent contested rank ladder derives at first-lit from the existing structural-
+  // position indicators (dotRank/internalSeats), each holder's standing is an integrator
+  // stock, dynamic goals are typed conditions over registered S7 signals, and windowed
+  // challenges swap rungs (conservation law) via E0-classed rare-sticky contests.
+  // Authoritative sidecar spatialLedgers.npcLadder + a compact settlement.npcLadder mirror
+  // read by townMap/ladderRead.js when lit. DORMANT behind the virtual npcLadderEnabled
+  // flag ⇒ a complete no-op (zero key, zero mirror) — the ladder dormancy golden proves
+  // it. NO rng (contests draw from the seed fork + registered signals only).
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadder({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));
