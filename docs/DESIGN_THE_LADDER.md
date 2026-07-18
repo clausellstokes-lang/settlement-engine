@@ -155,3 +155,14 @@ climber's score. Matrix additions: faction power read (+ladder modifier consumpt
 read-only from the mirror) · public legitimacy read (+governance-ledger deposits on
 norm-breaking governing successions) · growth layer (+entrenchment pathway through the
 existing deposit map; no new mintable traits without the matrix check).
+
+## 10. THE STIGMA MARK (owner refinement, 2026-07-17: exposure taxes ambition)
+An NPC EXPOSED for corruption (covert → revealed) carries a stigma mark: **challengeScore
+×0.5 for a long, lifespan-scaled duration** (the D5 band idiom — years for humans, longer
+for the long-lived; decaying, receipted, narratable). The symmetry completes: exposure is
+the widest WINDOW against a defender AND a halving TAX on a climber — crime's cost cuts
+both ways; the evil/leverage path still exists but a caught schemer climbs at half
+strength for years. A second exposure refreshes and extends the mark. The mark lives in
+the ladder sidecar (single-writer), joins the challenge receipt by name, and deposits
+toward cynical through the existing map. Pin: the exposed-climber-halved fixture +
+lifespan-scaled decay + refresh-on-reexposure.
