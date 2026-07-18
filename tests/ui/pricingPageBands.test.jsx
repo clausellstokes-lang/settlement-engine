@@ -53,9 +53,12 @@ vi.mock('../../src/store/index.js', () => {
 
 import PricingPage from '../../src/components/PricingPage.jsx';
 import {
-  getActiveAiCosts, getCreditAnchor, approxDollarsForCredits,
-  getFounderBreakEvenMonths, SURVEYOR_SURFACE, SINGLE_DOSSIER, TIERS,
+  getActiveAiCosts, SINGLE_DOSSIER, TIERS,
 } from '../../src/config/pricing.js';
+import {
+  getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths,
+  SURVEYOR_SURFACE,
+} from '../../src/config/pricingDisplay.js';
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../src/config/entitlementLadder.js';
 import { pricingPage, tp } from '../../src/copy/pricingPage.js';
 

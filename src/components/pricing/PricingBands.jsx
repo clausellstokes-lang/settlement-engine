@@ -14,10 +14,11 @@
  * pricing.* keys where the old cards already own them. Numbers: config only.
  */
 
+import { getActiveAiCosts, TIERS } from '../../config/pricing.js';
 import {
-  getActiveAiCosts, getCreditAnchor, approxDollarsForCredits,
-  getFounderBreakEvenMonths, SURVEYOR_SURFACE, TIERS,
-} from '../../config/pricing.js';
+  getCreditAnchor, approxDollarsForCredits, getFounderBreakEvenMonths,
+  SURVEYOR_SURFACE,
+} from '../../config/pricingDisplay.js';
 import { ENTITLEMENT_LADDER, RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
