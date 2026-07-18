@@ -198,15 +198,13 @@ function GoodsPanel() {
   );
 }
 
+// TradeDynamicsPanel mounts inside LayeredConfigurationPanel's Deep-constraints
+// Disclosure, which already supplies the "Trade Dynamics" title, collapse
+// affordance, and the wizard_step_viewed funnel fire. The component's own outer
+// collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
+// its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
+// there is exactly one disclosure layer. GoodsPanel renders directly. (Restores
+// master's flattening — base of record; the double-disclosure was the merge regression.)
 export default function TradeDynamicsPanel() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
-      <button type="button" onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:swatch['#F5EDE0'], border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
-        <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize: FS['16'], fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
-        <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
-      </button>
-      {open && <GoodsPanel />}
-    </div>
-  );
+  return <GoodsPanel />;
 }

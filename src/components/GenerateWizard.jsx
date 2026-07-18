@@ -13,34 +13,28 @@
  * Reads all state from the Zustand store — zero props.
  */
 import { useCallback, useState, useRef, useEffect, lazy, Suspense } from 'react';
-import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import ConfigurationPanel from './ConfigurationPanel';
-import InstitutionalGrid from './InstitutionalGrid';
-import ServicesTogglePanel from './ServicesTogglePanel';
-import TradeDynamicsPanel from './TradeDynamicsPanel';
+// UX overhaul Phase 6 — the Create fork (Basic/Advanced ModeSelector + the linear
+// step wizard) collapses into ONE layered ConfigurationPanel. The old per-step
+// panels (Institutions/Services/Trade) are absorbed into its Deep-constraints
+// collapsibles, each keeping its wizard step id so funnel analytics still fire.
+import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
 import WizardNextSteps from './generate/WizardNextSteps.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch, PAGE_MAX, CHROME } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
-import { flag } from '../lib/flags.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import Button from './primitives/Button.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
-import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
-import useIsMobile from '../hooks/useIsMobile.js';
 import { ChangeModeBar } from './generate/ChangeModeBar.jsx';
 import { ModeSelector } from './generate/ModeSelector.jsx';
-import { StepIndicator } from './generate/StepIndicator.jsx';
 import { SaveToLibraryButton } from './generate/SaveToLibraryButton.jsx';
 import BuyThisDossier from './BuyThisDossier.jsx';
 import { WizardEmptyState } from './generate/WizardEmptyState.jsx';
-import { WizardChipRow } from './generate/WizardChipRow.jsx';
 import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
-import { WizardCommitBand } from './generate/WizardCommitBand.jsx';
 import ExportDraftButton from './generate/ExportDraftButton.jsx';
 import { ClerkNote, ClerkNoteStrong } from './generate/ClerkNote.jsx';
 import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
@@ -52,34 +46,9 @@ const OutputContainer = lazy(() => import('./OutputContainer'));
 const PipelineReveal = lazy(() => import('./generate/PipelineReveal.jsx'));
 
 // ── Step definitions ─────────────────────────────────────────────────────────
-
-const STEPS = [
-  {
-    id: 'config',
-    label: 'General Configuration',
-    hint: 'Set the foundations: tier, trade route, culture, threat level, and priority sliders. These shape the probability space for everything downstream.',
-  },
-  {
-    id: 'institutions',
-    label: 'Institutions',
-    hint: 'Force or exclude specific institutions. The generator uses your toggles as hard constraints. Forced institutions always appear, excluded ones never do.',
-  },
-  {
-    id: 'services',
-    label: 'Available Services',
-    hint: 'Services are provided by institutions. Force a service to guarantee it appears; exclude it to prevent it. Missing institutions may be added to satisfy forced services.',
-  },
-  {
-    id: 'trade',
-    label: 'Trade Dynamics',
-    hint: 'Control which goods your settlement exports and imports. These feed into supply chains, economic viability, and cross-settlement trade dependencies.',
-  },
-];
-
-// Stable step id for analytics. Past the last real step the advanced wizard
-// shows the "Ready to Generate" close-out, which has no STEPS entry — give it
-// its own coarse id so wizard_step_viewed / wizard_abandoned stay meaningful.
-const stepIdFor = (index) => STEPS[index]?.id || 'closeout';
+// The linear step wizard collapsed into LayeredConfigurationPanel (UX overhaul
+// Phase 6); the step ids (config / institutions / services / trade) now live on
+// its Deep-constraints collapsibles, which fire wizard_step_viewed as they open.
 
 // duration → coarse dwell band (taxonomy §Banding vocabularies). Derived
 // inline so the analytics prop stays coarse (no raw millisecond values).
@@ -99,7 +68,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   const settlement    = useStore(s => s.settlement);
   const activeSaveId  = useStore(s => s.activeSaveId);
   const config        = useStore(s => s.config);
-  const wizardStep    = useStore(s => s.wizardStep);
   const wizardMode    = useStore(s => s.wizardMode);
   const loadedFromSave = useStore(s => s.loadedFromSave);
   const importedNeighbour = useStore(s => s.importedNeighbour);
@@ -123,10 +91,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // dossier appears.
   const pipelineRevealActive = useStore(s => s.pipelineRevealActive);
   const dismissPipelineReveal = useStore(s => s.dismissPipelineReveal);
-
-  // Live viewport check (not the isMobile prop): the Advanced hard-constraint
-  // panels gate to desktop below, and the gate must react to rotation/resize.
-  const mobileViewport = useIsMobile();
 
   // Local state for back navigation
   const [showOutput, setShowOutput] = useState(true);
@@ -159,46 +123,18 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     }
   }, [settlement]);
 
-  // P144 / A-4 — Wizard step focus management. When the advanced wizard
-  // advances or retreats a step, keyboard + screen-reader users were left
-  // on the now-clicked (or now-disabled) nav button with no signal that
-  // the step changed. On each step *change* (not initial mount) we move
-  // focus to the new step's heading — made programmatically focusable via
-  // tabIndex=-1 and labelled "Step N of M: …" — so the change is both
-  // announced and navigable. Additive; gated on wizardStepFocus.
-  const stepHeadingRef = useRef(null);
-  const prevWizardStepRef = useRef(wizardStep);
+  // Analytics: the linear step wizard collapsed into the layered Create panel
+  // (UX overhaul Phase 6). LayeredConfigurationPanel now fires wizard_step_viewed
+  // for each section (config / institutions / services / trade) as it is opened —
+  // it is the SOLE emitter, so no competing per-step fire lives here. Here we seed
+  // the abandonment session with the always-mounted `config` step so
+  // wizard_abandoned still reports a meaningful last step when the user leaves
+  // without generating.
   useEffect(() => {
-    const advanced = wizardMode === 'advanced';
-    if (advanced && !settlement && prevWizardStepRef.current !== wizardStep) {
-      stepHeadingRef.current?.focus();
-    }
-    prevWizardStepRef.current = wizardStep;
-  }, [wizardStep, wizardMode, settlement]);
-
-  // Analytics: wizard_step_viewed. Fires on each step transition in the
-  // advanced, pre-generation wizard (the only mode with multiple steps).
-  // Additive + fire-and-forget; never touches navigation. Direction is
-  // derived from the previous step seen by THIS effect so it tracks the
-  // step the user actually lands on (including the close-out at STEPS.length).
-  const prevAnalyticsStepRef = useRef(null);
-  useEffect(() => {
-    if (wizardMode !== 'advanced' || settlement) return;
-    const prev = prevAnalyticsStepRef.current;
-    if (prev === wizardStep) return;
-    const stepId = stepIdFor(wizardStep);
-    try {
-      track(EVENTS.WIZARD_STEP_VIEWED, {
-        step_id: stepId,
-        step_index: wizardStep,
-        mode: 'advanced',
-        direction: prev == null ? 'next' : (wizardStep >= prev ? 'next' : 'back'),
-      });
-    } catch { /* analytics must never affect the wizard */ }
-    visitedSteps.current.add(stepId);
-    lastViewedStep.current = stepId;
-    prevAnalyticsStepRef.current = wizardStep;
-  }, [wizardStep, wizardMode, settlement]);
+    if (settlement) return;
+    visitedSteps.current.add('config');
+    if (lastViewedStep.current == null) lastViewedStep.current = 'config';
+  }, [settlement]);
 
   // Analytics: wizard_abandoned. Fires once on pagehide OR unmount when the
   // user left the wizard without generating this session. Mount-only effect
@@ -425,51 +361,80 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
     );
   }
 
-  // Basic mode (renamed from 'quick' in the comprehensive review):
-  // General Config only, then generate. Renders the SAME ConfigurationPanel
-  // as Advanced step 0 — just no further steps. Layout matches Advanced
-  // (full-width, no maxWidth) so step 1 reads as the same surface in
-  // both modes; the only difference between Basic and Advanced is what
-  // comes AFTER step 1, not the width of step 1 itself.
-  if (wizardMode === 'basic' && !settlement) {
+  // ── ONE layered Create panel (UX overhaul Phase 6) ──────────────────────────
+  // The Basic/Advanced fork collapsed: any selected mode, pre-generation, renders
+  // the single LayeredConfigurationPanel (Character preset → Foundations →
+  // Fine-tune → Deep constraints → Place in Region). Size is NOT gated — free
+  // accounts generate up to metropolis. Anonymous users never reach here (the
+  // hero generates instantly; the mode picker is signed-in only). This restores
+  // master's single-surface config stage (base of record); the linear stepped
+  // wizard it replaced was the 0168e287-merge regression.
+  if (!settlement) {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
+      // Cap the config stage to the shared page width — mirrors the dossier
+      // branch (PAGE_MAX, below) so the input view is framed, not full-bleed (P12).
+      <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', gap: SP.xl, padding: `${SP.xl}px 0` }}>
+        {/* Mode switch (Basic ⇄ Advanced) + the null/Create-exit path. The live
+            store has no entryPath, so this is the plain setWizardMode binding
+            (setWizardMode(null) exits to the Create landing). */}
         <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />
 
-        {/* Canonical config-stage header (replaces the gold helper banner).
-            as="h2": the app chrome already renders the wordmark as the page h1. */}
+        <WizardLoadedBanners
+          loadedFromSave={loadedFromSave}
+          clearLoadedFromSave={clearLoadedFromSave}
+          importedNeighbour={importedNeighbour}
+          clearNeighbour={clearNeighbour}
+        />
+
+        {/* Instructional intro — the canonical PageHeader idiom (eyebrow + serif
+            title + italic subtitle). The only saturated-gold mass on this page is
+            the Generate button (P4 one-focal-point). as="h2": the app chrome owns
+            the page h1. Mode-specific guidance rides the subtitle. */}
         <PageHeader
           as="h2"
           size="sm"
           eyebrow={t('generate.introEyebrow')}
           title={t('generate.introTitle')}
-          subtitle={t('generate.introSubtitleBasic')}
+          subtitle={wizardMode === 'advanced'
+            ? t('generate.introSubtitleAdvanced')
+            : t('generate.introSubtitleBasic')}
         />
 
-        <div
-          style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden' }}
-        >
-          <div style={{ padding: `${SP.md}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
-            <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK }}>General Configuration</span>
-          </div>
-          <div style={{ padding: `${SP.lg}px 0 0`, background: CARD }}>
-            <ConfigurationPanel />
-          </div>
+        <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
+          {/* showPlaceInRegion is a conscious decision (census A3): the
+              Place-in-Region layer is a KEEP control that master's base-of-record
+              composition renders in Advanced (the panel internally gates it to
+              advanced-on-desktop, so Basic never shows it regardless). */}
+          <LayeredConfigurationPanel
+            mode={wizardMode === 'advanced' ? 'advanced' : 'basic'}
+            showPlaceInRegion={wizardMode === 'advanced'}
+          />
         </div>
 
+        {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
+            review step; Advanced, where the user set real constraints, gets a
+            "Ready to generate" summary so Generate reads as a confirmation. */}
+        {wizardMode === 'advanced' && <WizardCloseout />}
+
+        {/* First-generation failures land HERE too (P10). The store re-throws
+            before it ever sets `settlement`, so on a failed first roll the
+            pre-generate branch re-renders — without this block the click was a
+            silent dead-end. Carried by the Deep Craft clerk's-note idiom (no
+            tinted wash); the Generate button below is the retry affordance. */}
+        {generateError && (
+          <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
+            {generateError}
+          </ClerkNote>
+        )}
+
+        {/* The single primary CTA on the pre-generate region — styled entirely by
+            the Button primitive (no re-skinning gradient/shadow), so it reads as
+            the one focal point (P4) with the canonical primary look. */}
         <Button
           variant="primary"
           fullWidth
           onClick={handleGenerate}
-          style={{
-            padding: isMobile ? `${SP.xl}px 0` : `${SP.xl - 2}px 0`,
-            background: `linear-gradient(135deg, ${GOLD} 0%, #b8860b 100%)`,
-            color: swatch.white, border: 'none', borderRadius: R.lg + 2,
-            fontFamily: serif_,
-            fontSize: isMobile ? 22 : FS.xxl, fontWeight: 600, letterSpacing: '0.02em',
-            boxShadow: '0 4px 20px rgba(160,118,42,0.45)',
-            transition: 'opacity 0.15s, transform 0.1s',
-          }}
+          data-onboard-highlight={onboardingActive && onboardingStep === 1 ? 'true' : undefined}
         >
           Generate Draft
         </Button>
@@ -489,168 +454,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
   // config landing — the hero generates instantly; Basic/Advanced are signed-in
   // only.)
 
-  // Advanced mode: step-by-step wizard.
-  const isAdvanced = wizardMode === 'advanced';
-  const currentStepDef = STEPS[wizardStep] || STEPS[0];
-
-  // P119 / W-1 — Wizard chrome diet. When the flag is on, collapse the
-  // ChangeModeBar + two full-width banners into a single chip row. The
-  // step indicator + step hint banner also collapse into one combined
-  // header (rendered by the step content already).
-  const chromeDiet = flag('wizardChromeDiet');
-
+  // ── Post-generation: the dossier view (and the navigated-back recall). ──────
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-
-      {/* Change-mode bar (collapse after first generation OR when diet is on) */}
-      {!settlement && !chromeDiet && <ChangeModeBar mode={wizardMode} onChangeMode={setWizardMode} />}
-
-      {/* P119 — Combined chip row when diet is on. A single max-32px-tall
-          strip with: an inline "Advanced ⇄ Quick" toggle, a config-loaded
-          chip, a neighbour-active chip. All three were previously full
-          banner rows; now they fit in one. */}
-      {chromeDiet && !settlement && (
-        <WizardChipRow
-          wizardMode={wizardMode}
-          setWizardMode={setWizardMode}
-          loadedFromSave={loadedFromSave}
-          clearLoadedFromSave={clearLoadedFromSave}
-          importedNeighbour={importedNeighbour}
-          clearNeighbour={clearNeighbour}
-        />
-      )}
-
-      {/* Banners — only when the chrome diet is off (legacy path) */}
-      {!chromeDiet && (
-        <WizardLoadedBanners
-          loadedFromSave={loadedFromSave}
-          clearLoadedFromSave={clearLoadedFromSave}
-          importedNeighbour={importedNeighbour}
-          clearNeighbour={clearNeighbour}
-        />
-      )}
-
-      {/* Step indicator + hint (advanced mode, pre-generation). Bounded to real
-          steps — at wizardStep === STEPS.length the "Ready to Generate" state owns
-          the view (WizardCloseout below), so this block must not render a ghost
-          "Step N+1" banner with empty content and duplicate nav. */}
-      {isAdvanced && !settlement && wizardStep < STEPS.length && (
-        <>
-          {/* Canonical config-stage header, mounted once above the step
-              indicator. as="h2": the app chrome owns the page h1. */}
-          <PageHeader
-            as="h2"
-            size="sm"
-            eyebrow={t('generate.introEyebrow')}
-            title={t('generate.introTitle')}
-            subtitle={t('generate.introSubtitleAdvanced')}
-          />
-
-          <StepIndicator currentStep={wizardStep} totalSteps={STEPS.length} />
-
-          {/* Contextual hint for current step — a rubric-headed clerk's note
-              (Deep Craft cluster 1; the gold tinted banner retired). */}
-          <ClerkNote rubric={`Step ${wizardStep + 1} · ${currentStepDef.label}`}>
-            {currentStepDef.hint}
-          </ClerkNote>
-
-          {/* Current step content. P144 / A-4 — the step-change effect
-              moves focus to this labelled region so a step swap is both
-              announced (aria-label "Step N of M: …") and navigable for
-              keyboard users. outline:none stops the programmatic focus
-              from drawing a stray ring on this non-tabbable container. */}
-          <div
-            ref={stepHeadingRef}
-            tabIndex={-1}
-            role="group"
-            aria-label={`Step ${wizardStep + 1} of ${STEPS.length}: ${currentStepDef.label}`}
-            style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, overflow: 'hidden', outline: 'none', background: CARD }}
-          >
-            <div style={{ padding: `${SP.lg - 2}px ${SP.lg}px`, background: CARD_HDR, borderBottom: `1px solid ${BORDER2}` }}>
-              <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 600, color: INK }}>
-                {currentStepDef.label}
-              </span>
-            </div>
-            <div style={{ padding: 0 }}>
-              {wizardStep === 0 && <ConfigurationPanel />}
-              {/* Mobile + Advanced: the hard-constraint editors (Institutions,
-                  Services, Trade) are raw authoring tools with no readable
-                  preview to teaser, so on a phone they get the plain "best on
-                  desktop" gate. Step 0 stays fully usable; the nav buttons
-                  below keep the gated steps walkable. The constraints roll
-                  from working defaults until refined on a larger screen. */}
-              {wizardStep >= 1 && wizardStep <= 3 && (
-                mobileViewport ? (
-                  <div style={{ padding: SP.lg }} data-testid="deep-constraints-mobile-gate">
-                    <DesktopOnlyGate
-                      title="Hard constraints are best set on desktop"
-                      message="Forcing or forbidding specific institutions, services, and trade goods needs the full constraint console, which has room to work on a larger screen. On your phone you can pick a character, set the foundations, and generate a draft. The simulator rolls these constraints from working defaults until you refine them on desktop."
-                    />
-                  </div>
-                ) : (
-                  <>
-                    {wizardStep === 1 && <InstitutionalGrid />}
-                    {wizardStep === 2 && <ServicesTogglePanel />}
-                    {wizardStep === 3 && <TradeDynamicsPanel />}
-                  </>
-                )
-              )}
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div style={{ display: 'flex', gap: SP.sm + 2, justifyContent: 'space-between' }}>
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => setWizardStep(Math.max(0, wizardStep - 1))}
-              disabled={wizardStep === 0}
-              icon={<ChevronLeft size={16} />}
-            >
-              Back
-            </Button>
-
-            {wizardStep < STEPS.length - 1 ? (
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => setWizardStep(wizardStep + 1)}
-                trailingIcon={<ChevronRight size={16} />}
-              >
-                Next
-              </Button>
-            ) : (
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => setWizardStep(STEPS.length)}
-                trailingIcon={<ChevronRight size={16} />}
-              >
-                Ready to Generate
-              </Button>
-            )}
-          </div>
-        </>
-      )}
-
-      {/* P145 / W-2 — close-out summary. Only in the advanced wizard's
-          final "Ready to Generate" state (pre-generation); recaps the
-          four steps of config before the commit. Self-gates on the flag. */}
-      {isAdvanced && wizardStep >= STEPS.length && !settlement && (
-        <WizardCloseout />
-      )}
-
-      {/* Generate commit band — the pre-generate close-out commit only. Once a
-          settlement exists, re-rolling lives in the sticky toolbar's quiet
-          Regenerate (beside New), so the just-earned dossier below is never
-          out-shouted by a second full-width gold band. */}
-      {!settlement && isAdvanced && wizardStep >= STEPS.length && (
-        <WizardCommitBand
-          isMobile={isMobile}
-          handleGenerate={handleGenerate}
-          generateError={generateError}
-        />
-      )}
 
       {/* Regenerate moved into the sticky toolbar (beside New). The re-roll
           error alert stays here so a failed regenerate surfaces above the

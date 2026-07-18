@@ -52,10 +52,17 @@ const CEILINGS = Object.freeze({
   // 1095→1090, tintedCallouts 251→248 — five wizard callout washes
   // (restore-draft, step hint, regen error, last-generated, magical-trade)
   // became rubric-headed clerk's notes.
-  borderRadius: 1090,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 117,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 273,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 248,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  // Lowered again (C1r-a, THE BASE RE-CUT — create config stage restored to
+  // master's single LayeredConfigurationPanel): borderRadius 1090→1083,
+  // boxShadow 117→115, rgba 273→270, tintedCallouts 248→247. The stepped-wizard
+  // chrome fell — GenerateWizard's step cards + gradient/shadow Generate button
+  // dropped to the Button primitive, the two orphaned chrome files
+  // (StepIndicator/WizardCommitBand) were deleted, and TradeDynamicsPanel's
+  // redundant "Step 4" outer disclosure was flattened (master's base).
+  borderRadius: 1083,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 247,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
