@@ -1120,6 +1120,15 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ OWNER SEAL AMENDMENT (2026-07-18):** the Colophon drops the SF monogram — the
+STATION (triangle + red dot) enlarges as the sole central device between rim legend and
+skyline; the name lives entirely in the legend + motto (pure sigillographic composition:
+device signals the class, legend individuates). The SIGNET keeps the monogram (period-
+correct: signets carried initials; a clean division of labor between registers). Manager
+additions under "fix anything else": device stroke raised to rule-family weight (no
+hairlines), interpunct anchors flanking the legend, two subordinate field pellets
+(worked-field discipline; VETOABLE — say the word and they go), triangle optically
+centered in the field. Final drawn vectors ride the phases-3-5 dispatch.
 **⬛ MANAGER PREVIEW REVIEW: PASS WITH REVISIONS (2026-07-18) + THE LOGO RECONCILIATION.**
 Review ran from the LANE worktree via a scratchpad static server (main-tree preview hazard
 honored; lineage curl-probed). VERDICT: the composition system reads authored at desk,
