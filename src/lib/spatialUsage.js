@@ -223,6 +223,7 @@ export const EXEMPT_LEDGER_KEYS = Object.freeze({
   peaceReasons: 'W-PEACE-1 typed peace-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   warReasons: 'W-PEACE-1 typed war-reason ANNOTATIONS (metadata on the war/peace layer, not a mover)',
   treaties: 'peace-OUTCOME state record (the diplomatic result of the war/peace layer, not a distinct mover)',
+  npcLadder: 'THE LADDER intra-faction standings SIDECAR (recorded rank/standing stocks + challenge state; annotation/state ledger like reframes/warReasons — the faction movers already signal that layer, not a distinct mover)',
   reframes: 'D7 per-pair motive-INTERPRETATION annotations (belief-side reframe readings — metadata on the war/peace/corruption layer, like warReasons/peaceReasons, not a distinct mover)',
   provenance: 'THE PROVENANCE LEDGER causal-edge ANNOTATIONS (receipt→parent cause-edges recorded at commit for the chronicle; structural metadata over every layer, like warReasons/reframes, not a distinct exercised mover — adoption is the provenanceLedgerEnabled flag)',
   urbanFabric: 'THE URBAN FABRIC LAYER district prominence/scars/drift STOCKS (the map\'s memory, projected onto settlement.urbanFabric for the town-map layout engine; a read-model over every layer\'s durable outcomes, not a distinct exercised mover — adoption is the urbanFabricEnabled flag)',

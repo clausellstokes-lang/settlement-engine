@@ -4,12 +4,13 @@
  * (the SEO practice: anchor ids must NOT change per build). Pure, no React.
  */
 
+import { slugify } from '../../kernel/slugify.js';
+
 /** @param {unknown} s @returns {string} */
 export function slug(s) {
-  return String(s == null ? '' : s)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+  // s == null ? '' : s (NOT s || '') — 0/false slugify to '0'/'false' here; raw
+  // coercion preserves that while null/undefined still collapse to ''.
+  return slugify(s == null ? '' : s, { raw: true });
 }
 
 // The fixed header offset so a shared #anchor deep-link lands below the sticky

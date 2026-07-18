@@ -581,6 +581,9 @@ const TWIN_ACTION_FILES = Object.freeze([
   'store/campaignRegionalSlice.js', // the action definitions (WS4: extracted from campaignSlice)
   'store/settlementSlice.js',       // the ONE directive consumer (+ undo withdraw)
   'store/operationRegistry.js',     // Track K manifest — NAMES them (inert opType/undoToken data), no wiring
+  'components/surveyor/AutonomyPanel.jsx',                    // S7 autonomy surface — NAMES the ops in its acceleration menu (display strings, no wiring)
+  'domain/autonomy/accelerationOps.js',                       // S7 acceleration registry — sanctioned op catalog referencing the twin opTypes
+  'domain/compendium/generated/compendiumData.generated.js',  // generated law-library artifact — documents the ops (regenerated, never hand-wired)
 ]);
 
 describe('source scan — the trio is written only through the lifecycle', () => {

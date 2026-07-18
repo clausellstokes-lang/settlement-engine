@@ -13,6 +13,7 @@
 import { importanceWeight } from '../entities/npcs.js';
 import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
+import { slugify } from '../../kernel/slugify.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 export function num(v, fallback) {
@@ -93,7 +94,7 @@ export function ladderFactionKey(faction) {
 }
 /** @param {string} value @returns {string} */
 function normalizeToken(value) {
-  return String(value || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 80) || 'unknown';
+  return slugify(value, { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' });
 }
 
 /** The NPC's faction handle (the generator's canonical affiliation fields, first present).

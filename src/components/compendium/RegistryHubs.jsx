@@ -86,11 +86,11 @@ export function OperationsHub() {
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>
               <span style={{ background: `${GOLD}14`, borderRadius: 3, padding: '1px 6px' }}>scope: {o.targetScope}</span>
-              <span style={{ background: o.receiptRef ? '#1a5a2814' : swatch.mutedBg || '#e8e2d6',
+              <span style={{ background: o.receiptRef ? '#1a5a2814' : swatch['#E8E2D6'],
                 color: o.receiptRef ? '#1a5a28' : MUT, borderRadius: 3, padding: '1px 6px' }}>
                 {o.receiptRef ? `receipt: ${o.receiptRef}` : 'no receipt'}
               </span>
-              <span style={{ background: o.undoToken ? '#1a3a7a14' : (swatch.mutedBg || '#e8e2d6'),
+              <span style={{ background: o.undoToken ? '#1a3a7a14' : (swatch['#E8E2D6']),
                 color: o.undoToken ? '#1a3a7a' : MUT, borderRadius: 3, padding: '1px 6px' }}>
                 {o.undoToken ? 'reversible' : 'one-way'}
               </span>

@@ -31,6 +31,8 @@
  * Pure, deterministic, tolerant of malformed/partial data. No engine imports, no
  * React, no store.
  */
+import { slugify } from '../../kernel/slugify.js';
+
 
 /** @param {unknown} v @returns {Record<string, unknown>} */
 function asObject(v) {
@@ -178,7 +180,7 @@ function factionKeyOf(faction) {
   const id = /** @type {{ id?: unknown }} */ (f).id;
   if (typeof id === 'string' && id) return id;
   const name = typeof (/** @type {{ name?: unknown }} */ (f).name) === 'string' ? /** @type {{ name: string }} */ (f).name : '';
-  const token = String(name || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 80) || 'unknown';
+  const token = slugify(name, { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' });
   return `fac.${token}`;
 }
 

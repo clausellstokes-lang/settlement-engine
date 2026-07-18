@@ -187,6 +187,9 @@ describe('B4 consumers — the overlay is enforced, not parallel', () => {
       // hand-mirrored list this file's header documents), the same
       // no-parallel-ruleset intent this allowlist enforces.
       'tests/data/stringCouplingRegistry.test.js',
+      // S7 signal registry: READ-ONLY vocabulary import (PRIMARY_RELATIONSHIP_TYPES
+      // as a signal-source enum) — no rule evaluation, no parallel ruleset.
+      'src/domain/autonomy/signalRegistry.js',
     ];
     const offenders = hits.filter(p => !SANCTIONED.some(s => p.endsWith(s)));
     expect(offenders, `unexpected importers: ${offenders.join(', ')}`).toEqual([]);
