@@ -135,6 +135,10 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
   if (active.includes('wartime')) idx = Math.max(0, idx - 1);
   if (active.includes('mass_migration')) idx = Math.max(0, idx - 1);
   if (active.includes('religious_conversion')) idx = Math.max(0, idx - 1);
+  // [generators-domain-1] slave_revolt was the one second-wave type with no direct
+  // prosperity row — active armed conflict with the market's commercial operations
+  // suspended is at least as prosperity-suppressing as the siblings above. Golden-shifting (G2).
+  if (active.includes('slave_revolt')) idx = Math.max(0, idx - 1);
   return LABELS[Math.min(5, Math.max(0, idx))];
 };
 

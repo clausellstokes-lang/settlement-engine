@@ -225,7 +225,10 @@ export const RESOURCE_DATA = {
     label: "Coal or Peat Deposits",
     icon: "",
     desc: "Surface-accessible fuel for forges, kilns, and domestic heating",
-    commodities: ["timber"],
+    // data-tables-5: coal deposits emit 'coal' (→ fuel category), not the stray 'timber'
+    // token that made every coal settlement read as a timber producer. 'peat' is already
+    // live via marshlands, so 'coal' keeps coal deposits distinct. Golden-shifting (G2).
+    commodities: ["coal"],
     instBoosts: { smith: 1.3, smelter: 1.5, brick: 1.6, potter: 1.4, charcoal: 1.6 },
     tradeGoods: ["Coal", "Peat fuel"],
     forbidden: ["port"],

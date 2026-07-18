@@ -1499,6 +1499,12 @@ export const INSTITUTION_SERVICES = {
     "Customs bypass": { on: true, p: 0.8, desc: "Get shipments past checkpoints without inspection." },
     "Untaxed goods import": { on: false, p: 0.6, desc: "Bring in taxable goods without paying duties." }
   },
+  // [D6 THE UNDERWAYS] the underground network's service menu — joins the crime menus.
+  "Underground network": {
+    "Discreet passage": { on: true, p: 1.0, desc: "Move people beneath the walls unseen." },
+    "Untaxed storage": { on: true, p: 0.8, desc: "Hold goods in dug caches off the rolls." },
+    "No-questions transport": { on: false, p: 0.6, desc: "Carry cargo with no manifest or toll." }
+  },
   "Underground city": {
     "Black market bazaar": { on: true, p: 1.0, desc: "Full criminal marketplace for goods and services unavailable above ground." },
     "Hidden quarter access": { on: true, p: 0.8, desc: "Navigate the underground without getting lost or robbed." },

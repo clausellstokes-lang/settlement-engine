@@ -52,7 +52,7 @@
  */
 
 import { pathCost, calibration, isMapped, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
-import { chooseRoute, banditryLoss, embattlementLevel } from './embattlement.js';
+import { chooseRoute, banditryLoss, routeDangerLevel } from './embattlement.js';
 
 // The generalized supply-starvation impairment kind + its cause namespace. The
 // KIND is declared in the entities/status.js InstitutionImpairmentType union; the
@@ -363,8 +363,12 @@ export function stepSupplyLink(link, prior, ctx) {
   // (b) ARRIVE — a valid shipment reaching its arrival tick delivers.
   if (record && tick >= record.arrivalTick) {
     const forked = ctx.rng && typeof ctx.rng.fork === 'function' ? ctx.rng.fork(`banditry:${key}:${record.arrivalTick}`) : null;
-    // Real shipments ride M1's banditry through embattled ground (delivered fraction).
-    const danger = embattlementLevel(ctx.worldState, record.sourceId);
+    // [spatial-engine-1] Real shipments ride M1's banditry through the ROUTE's embattled
+    // ground (delivered fraction) — the per-hop danger of the chosen path, NOT the origin's
+    // embattlement (the node route-danger deliberately excludes). A war-zone intermediary or
+    // besieged destination now nicks the load; a calm road from an embattled producer does not.
+    const arriveRoute = chooseRoute(ctx.digest, ctx.worldState, record.sourceId, destinationId, ctx.riskTolerance, ctx.season ?? null);
+    const danger = routeDangerLevel(arriveRoute);
     const bandit = banditryLoss({ channelStrength: 1, dangerLevel: danger, rng: forked || undefined });
     bufferWeeks = round2(SUPPLY_TUNING.BUFFER_WEEKS * clamp01(finiteNumber(bandit.delivered, 1)));
     record = null;

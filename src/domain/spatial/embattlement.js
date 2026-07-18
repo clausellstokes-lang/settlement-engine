@@ -368,6 +368,25 @@ export function scoreRoute(path, worldState, baseCost, riskTolerance, medianHopC
 }
 
 /**
+ * [spatial-engine-1] A bounded 0..1 danger scalar for a CHOSEN route — the value
+ * banditryLoss's dangerLevel expects. scoreRoute.danger is the SUM of embattlement
+ * over the TRAVERSED hops (origin EXCLUDED; destination + intermediaries in), so the
+ * realized banditry reads the route's PER-HOP MEAN: a long calm route isn't
+ * over-penalized, a besieged destination / war-zone intermediary registers, and an
+ * embattled ORIGIN alone (the node routing already excludes — the caravan has left)
+ * contributes nothing. Replaces the old origin-embattlement read at both arrival sites,
+ * making realized loss consistent with the route-CHOICE danger model.
+ * @param {ScoredRoute|null|undefined} route
+ * @returns {number} 0..1
+ */
+export function routeDangerLevel(route) {
+  if (!route || !Array.isArray(route.path)) return 0;
+  const hops = route.path.length - 1; // traversed hops (origin excluded, mirroring scoreRoute's i=1..end)
+  if (hops <= 0) return 0;
+  return clamp01(finiteNumber(route.danger, 0) / hops);
+}
+
+/**
  * Choose the cheapest-vs-safest route for a mover between two settlements: RE-SCORE
  * the k cached candidate routes (a pure function of the frozen digest, derived +
  * memoized once — never re-pathfound) against the live embattlement field, and

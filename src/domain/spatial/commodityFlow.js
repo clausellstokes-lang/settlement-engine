@@ -73,7 +73,7 @@
  */
 
 import { hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
-import { chooseRoute, banditryLoss, embattlementLevel } from './embattlement.js';
+import { chooseRoute, banditryLoss, embattlementLevel, routeDangerLevel } from './embattlement.js';
 import { supplyActive, routeIntercepted, routeWeeks, pickSource, starvationReceipt } from './supplyShipments.js';
 import { dispatchDecision, appetiteOf, stepAppetite, needPremium, DISPATCH_TUNING } from './dispatchEV.js';
 import {
@@ -636,8 +636,12 @@ export function advanceCommodityFlow({
         if (tap > 0) { setStock(stocks, interId, rec.input, stockOf(stocks, interId, rec.input, 0) + tap); remaining -= tap; }
       }
       // Banditry on the remainder (M1's delivered fraction, on the quantity).
+      // [spatial-engine-1] danger reads the CHOSEN route's per-hop embattlement (the same
+      // `route` scored above), NOT the origin's — consistent with route CHOICE. An embattled
+      // intermediary or besieged destination nicks the load; a calm road from an embattled
+      // producer does not (origin is excluded from route danger).
       const forked = rng && typeof rng.fork === 'function' ? rng.fork(`banditry:${key}:${rec.arrivalTick}`) : null;
-      const danger = embattlementLevel(worldState, rec.sourceId);
+      const danger = routeDangerLevel(route);
       const bandit = banditryLoss({ channelStrength: 1, dangerLevel: danger, rng: forked || undefined });
       const delivered = Math.max(0, Math.min(remaining, Math.floor(remaining * clamp01(finiteNumber(bandit.delivered, 1)))));
       lost += remaining - delivered;

@@ -146,4 +146,30 @@ describe('stress-type registration manifest (structural prevention)', () => {
     }
     expect(unresolved, `unresolved tension mappings: ${unresolved.join(', ')}`).toEqual([]);
   });
+
+  // ── [generators-domain-1] numeric-consumer coupling (defense / food / prosperity) ────
+  // The inline stress-CONSUMER blocks (defense penalties, food production, prosperity
+  // index) are SELECTIVE by design — each type couples to the dimensions its viabilityNote
+  // implies, so a "covers every type" walker does not fit them. These targeted scans pin the
+  // couplings the round-2 fix added, so they cannot silently regress to half-integrated.
+  it('the second-wave types couple to DEFENSE via the priorityHelpers multipliers (NOT the inline penalty block — that would double-count)', () => {
+    const ph = read('src/generators/priorityHelpers.js');
+    for (const t of ['insurgency', 'mass_migration', 'wartime', 'religious_conversion', 'slave_revolt']) {
+      expect(ph.includes(`'${t}'`), `priorityHelpers missing defense-input coupling for ${t}`).toBe(true);
+    }
+  });
+
+  it('the food-impacting second-wave types are coupled in BOTH food generators (production/consumption)', () => {
+    const foodGen = read('src/generators/foodGenerator.js');
+    const foodBal = read('src/generators/economy/foodBalance.js');
+    for (const t of ['wartime', 'slave_revolt', 'mass_migration']) {
+      expect(foodGen.includes(`'${t}'`), `foodGenerator.js has no food coupling for ${t}`).toBe(true);
+      expect(foodBal.includes(`'${t}'`), `foodBalance.js has no food coupling for ${t}`).toBe(true);
+    }
+  });
+
+  it('slave_revolt has a direct prosperity-index penalty row (the one second-wave type that lacked one)', () => {
+    const prosperity = read('src/generators/economy/prosperity.js');
+    expect(prosperity.includes(`'slave_revolt'`), 'prosperity.js has no slave_revolt penalty row').toBe(true);
+  });
 });

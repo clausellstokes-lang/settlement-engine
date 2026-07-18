@@ -348,10 +348,13 @@ describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
     expect(sev(tick(s0))).toBe(0.5);
   });
 
-  it('a no-status condition holds severity — canonical defaulting must not invent motion', () => {
-    // Raw partial, never derived: no status written. Plague's template
-    // defaults to 'worsening', so this pins that the drift reads the
-    // status as written, not the canonical default.
+  it('[domain-top-state-1] a no-status condition holds severity flat across TWO ticks — canonical defaulting must not invent motion', () => {
+    // Raw partial, never derived: no status written. Plague's template defaults to
+    // 'worsening'. Before the fix the FIRST tick wrote the canonical 'worsening'
+    // back onto the condition, and the SECOND tick read that written direction and
+    // climbed +0.04 — inventing motion the condition never claimed. The drift must
+    // leave a directionless condition flat forever, so the written status must NOT
+    // be canonicalized to a directional default. (Old code failed the second tick.)
     const s0 = { activeConditions: [{
       archetype: 'plague', severity: 0.6,
       duration: { elapsedTicks: 0, expiresAtTicks: 12 },
@@ -359,14 +362,22 @@ describe('withTickedConditionDurations() — severity dynamics (W5#5)', () => {
     const s1 = tick(s0);
     expect(sev(s1)).toBe(0.6);
     expect(s1.activeConditions[0].duration.elapsedTicks).toBe(1);
+    // the written status is not a directional default that would drift next tick
+    expect(s1.activeConditions[0].status).not.toBe('worsening');
+    const s2 = tick(s1);
+    expect(sev(s2)).toBe(0.6);
   });
 
-  it("a legacy 'active' status holds severity — flat is correct for non-directional statuses", () => {
+  it("[domain-top-state-1] a legacy 'active' status holds severity flat across TWO ticks — flat is correct for non-directional statuses", () => {
     const s0 = { activeConditions: [{
       archetype: 'plague', severity: 0.6, status: 'active',
       duration: { elapsedTicks: 0, expiresAtTicks: 12 },
     }] };
-    expect(sev(tick(s0))).toBe(0.6);
+    const s1 = tick(s0);
+    expect(sev(s1)).toBe(0.6);
+    // the legacy status is preserved, not rewritten to the directional default
+    expect(s1.activeConditions[0].status).not.toBe('worsening');
+    expect(sev(tick(s1))).toBe(0.6);
   });
 
   it('drift scales with the interval (week 0.25x, year 6x)', () => {

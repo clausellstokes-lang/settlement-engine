@@ -131,7 +131,11 @@ export const STRESSOR_CATALOG = Object.freeze({
     birthThreshold: 0.7,
     spreadChannels: ['regional_authority', 'information_network', 'faction_patronage'],
     residualEffects: ['claimant_grievances', 'legal_precedent_shock', 'faction_purges'],
-    affectedSystems: ['public_legitimacy', 'faction_stability', 'law_order'],
+    // [domain-top-state-2] declares BOTH: a lawless interregnum erodes the rule of law
+    // (law_order — now the real 16th SYSTEM_VARIABLE, reached directly since its alias was
+    // dropped) AND opens criminal opportunity (the effect the stale law_order→criminal_
+    // opportunity alias used to provide). Co-exist decision, recorded. Golden-shifting (G2).
+    affectedSystems: ['public_legitimacy', 'faction_stability', 'law_order', 'criminal_opportunity'],
   },
   monster_raider_pressure: {
     label: 'Monster or raider pressure',
@@ -385,15 +389,20 @@ export function normalizeStressor(stressor = {}) {
 }
 
 // The catalog's affectedSystems were authored with a looser vocabulary than
-// causalState.SYSTEM_VARIABLES — faction_stability / law_order / tax_revenue
-// are not real causal variables, so residual conditions carrying them silently
-// no-op'd against the substrate. Map them onto the nearest real variable at
-// emission time (catalog keeps its semantic names).
+// causalState.SYSTEM_VARIABLES — faction_stability and tax_revenue are not real
+// causal variables, so residual conditions carrying them silently no-op'd against
+// the substrate. Map them onto the nearest real variable at emission time (catalog
+// keeps its semantic names).
+// [domain-top-state-2] law_order was ALSO aliased here (→ criminal_opportunity) back
+// when it was inert; it is now the real 16th SYSTEM_VARIABLE (causalState.js), so the
+// alias is DROPPED — law_order-declaring conditions reach the purpose-built variable and
+// deriveLawOrder's condition scan fires. The one stressor that declared law_order
+// (succession_void) now co-declares criminal_opportunity, so the opportunist effect the
+// alias used to carry survives. Golden-shifting (G2).
 // Exported so the string-coupling registry can pin crisisLifecycle's hand-mirrored
 // copy (STRESSOR_SYSTEM_ALIASES) as byte-identical to this canonical table.
 export const CAUSAL_SYSTEM_ALIASES = Object.freeze({
   faction_stability: 'faction_power',
-  law_order: 'criminal_opportunity', // lawless interregnum -> opportunists move in
   tax_revenue: 'trade_connectivity',
 });
 

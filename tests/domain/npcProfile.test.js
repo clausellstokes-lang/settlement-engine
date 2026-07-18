@@ -13,6 +13,7 @@ import {
   deriveAllNpcProfiles,
   npcArchetypeBreakdown,
   dominantNpcRemovalImpact,
+  normalizeNpcRank,
 } from '../../src/domain/npcProfile.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
 
@@ -79,6 +80,45 @@ function minorTraderNpc(over = {}) {
 }
 
 // ── deriveNpcProfile (single NPC) ───────────────────────────────────────
+
+describe('[domain-top-state-4] NPC rank vocabulary — generator → NpcRank palette translation', () => {
+  const NPC_RANK_UNION = ['dominant', 'secondary', 'minor']; // the NpcRank union + palette keys
+  const GENERATOR_RANKS = ['dominant', 'subordinate'];       // npcStructure.getRank's output set
+
+  it('RATCHET: every generator rank normalizes INTO the NpcRank union', () => {
+    for (const r of GENERATOR_RANKS) expect(NPC_RANK_UNION).toContain(normalizeNpcRank(r));
+    // absent / unknown / numeric-legacy ranks collapse to 'minor' — never escape the union, never crash
+    for (const r of [undefined, null, '', 'bogus', 3, 0]) expect(NPC_RANK_UNION).toContain(normalizeNpcRank(r));
+  });
+
+  it("maps the generator's 'subordinate' onto the 'secondary' tier (the previously-dead palette)", () => {
+    expect(normalizeNpcRank('subordinate')).toBe('secondary');
+    expect(normalizeNpcRank('SUBORDINATE')).toBe('secondary'); // case-insensitive
+    expect(normalizeNpcRank('dominant')).toBe('dominant');
+    expect(normalizeNpcRank('minor')).toBe('minor');
+  });
+
+  it('a numeric legacy structuralRank does not crash toLowerCase and reads as minor', () => {
+    expect(() => normalizeNpcRank(3)).not.toThrow();
+    expect(normalizeNpcRank(3)).toBe('minor');
+  });
+
+  it("a 'subordinate' NPC now surfaces rank 'secondary' and draws the LIVE secondary palette (distinct from minor)", () => {
+    const secondary = deriveNpcProfile(militaryCaptain({ structuralRank: 'subordinate' }));
+    const minor     = deriveNpcProfile(militaryCaptain({ structuralRank: 'minor' }));
+    expect(secondary.rank).toBe('secondary');
+    expect(secondary.consequenceIfRemoved.severity).toBe('secondary');
+    expect(secondary.consequenceIfRemoved.consequences.length).toBeGreaterThan(0);
+    // the secondary tier is DISTINCT from minor — proof the palette is reachable, not a fallback
+    expect(secondary.consequenceIfRemoved.consequences).not.toEqual(minor.consequenceIfRemoved.consequences);
+  });
+
+  it('a numeric structuralRank through deriveNpcProfile does not throw and reads minor', () => {
+    const p = deriveNpcProfile(militaryCaptain({ structuralRank: 3 }));
+    expect(p.rank).toBe('minor');
+    expect(p.consequenceIfRemoved.severity).toBe('minor');
+  });
+});
 
 describe('deriveNpcProfile()', () => {
   it('produces all canonical fields on a rich NPC', () => {

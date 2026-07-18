@@ -147,6 +147,15 @@ export function generateFoodSecurity(tier, institutions, config) {
   if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
   if (stressPlague)   { productionMult  *= 0.75; }
   if (stressOccupied) { consumptionMult *= 1.20; }
+  // [generators-domain-1] second-wave stress types whose viabilityNote implies a food
+  // impact: wartime conscription thins the agricultural workforce; a slave_revolt disrupts
+  // labour-dependent production; mass_migration stresses the food balance (immigration →
+  // more mouths). Defense scores stay coupled to these types via the priorityHelpers
+  // effective-score multipliers, so there is deliberately NO inline defense penalty (it
+  // would double-count). Golden-shifting (G2).
+  if (stresses.includes('wartime'))        { productionMult  *= 0.85; }
+  if (stresses.includes('slave_revolt'))   { productionMult  *= 0.80; }
+  if (stresses.includes('mass_migration')) { consumptionMult *= 1.15; }
 
   const dailyNeed       = population * PER_CAPITA_NEED * consumptionMult;
   // Seeded crop-fortune variance (±8%): the SAME config yields a slightly

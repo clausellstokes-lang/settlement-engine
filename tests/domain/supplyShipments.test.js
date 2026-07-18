@@ -33,6 +33,7 @@ import {
   supplyInterdictionLevel,
   linkKey,
 } from '../../src/domain/spatial/supplyShipments.js';
+import { chooseRoute, routeDangerLevel } from '../../src/domain/spatial/embattlement.js';
 import { resolveSiegeVerdict } from '../../src/domain/worldPulse/warDeployment.js';
 import { applyBlockadeTransportImpairment } from '../../src/domain/worldPulse/blockadeTransport.js';
 import { severityFor, effectiveStatus, withImpairment } from '../../src/domain/entities/status.js';
@@ -283,17 +284,38 @@ describe('M2 — caravan latency rides the PULSE clock (coarse intervals do not 
 });
 
 describe('M2 — banditry integration (real, delivered shipments; deterministic + bounded)', () => {
-  it('the delivered buffer is deterministic given the forked rng, and bounded below', () => {
+  const embattle = (id, level = 0.9) => worldWith({
+    spatialLedgers: { embattlement: { [id]: { level, phase: 'embattled', sinceTick: 0, lastTick: 0 } } },
+  });
+  const arrivingIron = { institutionId: 'smithy', settlementId: 'c', input: 'iron', sourceId: 'p1', arrivalTick: 2, starving: false };
+
+  it('[spatial-engine-1] routeDangerLevel excludes the ORIGIN and reads the traversed hops', () => {
+    // The p1 -> c route is [p1, g, c]; origin p1 is excluded from route danger (scoreRoute
+    // sums i=1..end), so an embattled producer contributes nothing while an embattled gate
+    // on the path does. This is the crux of the fix: realized banditry now reads the SAME
+    // danger the route CHOICE prices, not the single node routing deliberately ignores.
     const digest = lineDigest();
+    expect(routeDangerLevel(chooseRoute(digest, embattle('p1'), 'p1', 'c', 1, null))).toBe(0);
+    expect(routeDangerLevel(chooseRoute(digest, embattle('g'), 'p1', 'c', 1, null))).toBeGreaterThan(0);
+    // per-hop MEAN, not the raw sum: g at 0.9 over the 2 traversed hops (g, c) reads 0.45.
+    expect(routeDangerLevel(chooseRoute(digest, embattle('g'), 'p1', 'c', 1, null))).toBeCloseTo(0.45);
+  });
+
+  it('[spatial-engine-1] an embattled SOURCE alone inflicts NO banditry — delivers exactly as a calm route', () => {
     const link = ironLink(0, true);
-    // An embattled source ⇒ banditry may nick the delivered quantity; still bounded.
-    const world = worldWith({ spatialLedgers: { embattlement: { p1: { level: 0.9, phase: 'embattled', sinceTick: 0, lastTick: 0 } } } });
-    const arriving = { institutionId: 'smithy', settlementId: 'c', input: 'iron', sourceId: 'p1', arrivalTick: 2, starving: false };
-    const run = () => stepSupplyLink(link, arriving, clearCtx({ tick: 2, worldState: world, rng: forkRng() })).bufferWeeks;
-    expect(run()).toBe(run()); // deterministic
+    const embattledSource = stepSupplyLink(link, arrivingIron, clearCtx({ tick: 2, worldState: embattle('p1'), rng: forkRng() })).bufferWeeks;
+    const calm = stepSupplyLink(link, arrivingIron, clearCtx({ tick: 2, worldState: worldWith(), rng: forkRng() })).bufferWeeks;
+    expect(embattledSource).toBe(calm); // the caravan already left p1 — its embattlement can't nick it
+  });
+
+  it('[spatial-engine-1] an embattled GATE on the route rides banditry: deterministic + bounded, never above a calm delivery', () => {
+    const link = ironLink(0, true);
+    const run = () => stepSupplyLink(link, arrivingIron, clearCtx({ tick: 2, worldState: embattle('g'), rng: forkRng() })).bufferWeeks;
+    const calm = stepSupplyLink(link, arrivingIron, clearCtx({ tick: 2, worldState: worldWith(), rng: forkRng() })).bufferWeeks;
+    expect(run()).toBe(run()); // deterministic given the forked rng
+    expect(run()).toBeLessThanOrEqual(calm); // an embattled route hop can only nick, never boost
     // Non-catastrophic: banditry never delivers less than (1 - BANDITRY_MAX_LOSS) of the buffer.
     expect(run()).toBeGreaterThanOrEqual(T.BUFFER_WEEKS * 0.5);
-    expect(run()).toBeLessThanOrEqual(T.BUFFER_WEEKS);
   });
 });
 
