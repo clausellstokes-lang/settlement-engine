@@ -1120,6 +1120,18 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: NON-WATER LANDFORMS (2026-07-17) → w7-prep @ d01a85ab** (5cb92caa off the fog
+tip; 12 files NUL-clean; clean merge across the gate-wiring pane edits). THE SITE IS
+VISIBLE: marsh/dunes/mountain-flank render across the flat map, all five lenses
+(pattern-never-colour), the panorama (per-kind pseudo-elevation — the flank stands
+proud), and every export through the ONE geometry source. THE WALL held (two numeric
+roles); provenance hover explains each kind for free; the v2 golden re-minted
+DECLARED-ADDITIVE w/ the 12/20-byte-identical-first proof; the style golden proven
+untouched-correct (v1 models carry no landform — the reasoned divergence from the SM-5
+precedent). Fold receipts: 37/37 (landform pins + BOTH goldens + panorama + gate
+cross-check) · tsc 0 · dist 150/150. Aesthetics join the standing v2 TASTE-VETO posture
+(samples on request). JUDGMENTs ×3 vetoable (mark vocabularies/densities · ink weights ·
+panorama lifts). **THE LAST TWO BUILDS: THE LADDER · DOC-WAVE-2.**
 **⬛ PARK: CONTENT-GT-FINAL @ 23c77444 (2026-07-17) — THE CONTENT PROGRAM COMPLETES.**
 9 commits stacked on 577179fb (spot-checked: 19 files, NUL-clean; the stall cure's 7th
 save mid-finale). ALL SIX CHARGES: history events 29 types ×3 (the 58 banked variants
