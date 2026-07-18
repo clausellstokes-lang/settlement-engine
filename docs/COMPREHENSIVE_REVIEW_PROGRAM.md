@@ -1120,6 +1120,21 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: FP-G11 (2026-07-17) → w7-prep @ b745c20c** (one config-only commit; spot-checked
+vite.config.js alone; build ✓ + dist 150/150 on the merged tree). RECLAIM: formatNumber
+excised from eager engine-core (**−341 B**; resolves the FP-G7 deferral; no first-paint
+importer existed). Closure **1,034,683**, margin **5,317**; RATCHET **HELD at 1,040,000**
+(ratified — final tightening at the composite, the FP-G10 precedent). THE HEADLINE
+CORRECTED + BANKED TO MEMORY (customregistry-deeagering-gated): ~41KB is real but the
+whale tables do NOT drop and the blocker is a sync→async conversion on persisted-event-
+writing deity actions — an owner-gated lane if ever needed, never a byte-wave rider; the
+safe-reclaim space is now EXHAUSTED (every remaining eager table has a genuine first-paint
+consumer). Spatial-slimmer deferral ratified (sub-350B real vs a dormancy-golden seam).
+**W2 UNLOCKED: the five-day "re-apply when byte-free" precondition is MET** (+363 B
+affordable) — the re-apply lane DISPATCHED per the standing rule (claude/w2-feed-retention
+off b745c20c; re-express the change never merge the ancient branch; revalidate
+feedDistribution 0.45 + goldens + true delta on THIS tree; the first lane briefed under
+the new focused-gate protocol). Task #33; the composite waits.
 **⬛ FOLD: CONTENT-VT-2 (2026-07-17) → w7-prep @ 1c22428c** (merge of claude/content-vt-2
 tip 39a56a1d, 4 commits off a4343044; spot-checked: exactly 8 files, fence held, NUL
 clean). The view-time-thin surfaces CONTENT-VT deferred-with-reason are GROWN: newsBody
