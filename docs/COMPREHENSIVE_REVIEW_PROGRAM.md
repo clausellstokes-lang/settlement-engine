@@ -1134,6 +1134,23 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ILLUSTRATED TOWN IT-1 LANDED (2026-07-18) — the glyph spine, four commits on
+claude/illustrated-town @ e2d1f0de (base 78a04afc, NOT folded).** 490cf93a THE
+GLYPHS (glyphAssign + medieval library + compiler emitting ONLY the existing 5 op
+kinds) · 6ef45afd THE ILLUSTRATED LENS (sibling-registry id; five existing lenses
+byte-identical) · e8646987 THE PANE UNDERLAY + LOD + op-budget guard (the
+two-render-paths divergence class CLOSED for illustrated mode) · e2d1f0de
+illustratedTownGolden family MINTED. FULL SUITE 13,201 passed / 6 failed —
+TRIAGED: 4 parked golden families (expected) + advancePauseResume 20s timeout
+(LOAD FLAKE, 9/9 green in isolation — second confirmation of the concurrent-lane
+flake class same evening) + aiGroundingBundle.freshness. FRESHNESS FORENSIC:
+PROVEN PRE-EXISTING at the composite base — the recorded bundle's 48 inputs
+intersect IT-1's diff at ZERO files. ⚠ HONESTY FLAG: the composite assembly row
+listed "freshness regen" among its 10 dispositioned reds, yet the red exists at
+78a04afc — the regen either didn't land or re-drifted at assembly; CURE QUEUED at
+the deep-wave fold (npm run build:edge-shared, declared cause, mechanical re-pin).
+Expected-red set on the composite lineage is 4 parked + freshness until that cure.
+IT-2 (ground dress) next in the same worktree.
 **⬛⭐ C1 COMPLETE — THE COMMISSIONING DESK IS WHOLE (2026-07-18, deep-craft tip
 01ad3a8f).** C1r-c landed in three commits: 5e7cbdf4 THE LEAF (one commissioning
 plate; Advanced entirely behind .oc-m-unfold; InstantWorldEntry RE-HOMED below the

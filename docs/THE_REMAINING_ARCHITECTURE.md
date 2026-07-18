@@ -280,9 +280,14 @@ kill-switches, and early-access labels all survive verbatim.
 ### THE DEEP-WAVE FOLD (manager)
 1. NUL-scan the full diff (python). 2. Merge --no-ff into claude/the-composite in its
 worktree (hard-gated). 3. Bare gates: build → verify:dist → tsc → strict → lint.
-4. FULL suite: expected reds = the four parked goldens ONLY; triage anything else by
-name vs 78431763. 5. Ledger row + memory. 6. ⛔OWNER: the finished-site walk (serve
-the merged tree) before ROUND 3 dispatches.
+4. FULL suite: expected reds = the four parked goldens + aiGroundingBundle.freshness
+(proven pre-existing at 78a04afc, 2026-07-18 forensic — the composite's claimed
+"freshness regen" didn't stick); CURE AT THIS FOLD: `npm run build:edge-shared`
+regen, declared cause, then freshness leaves the expected set. Triage anything else
+by name vs the base. ⚠ FLAKE PROTOCOL (proven twice 2026-07-18): pglite hook-timeout
+and 20s test-timeout reds under concurrent-lane machine load are retriaged by
+ISOLATION RE-RUN before any diagnosis. 5. Ledger row + memory. 6. ⛔OWNER: the
+finished-site walk (serve the merged tree) before ROUND 3 dispatches.
 
 ## §3 THE PUSH — completion protocol
 `GIT_TERMINAL_PROMPT=0 git ls-remote origin HEAD` (auth probe) → push in small
