@@ -220,6 +220,17 @@
 .oc-cartouche { container-type: inline-size; }
 .oc-cartouche__label .oc-display { font-size: clamp(1.25rem, 15cqi, 2.05rem); line-height: 1.06; margin: 0; text-wrap: balance; }
 
+/* ── The colophon — seal and counterseal at a document's foot ─────────────────
+   Self-sufficient: mounts on live surfaces OUTSIDE an .oc-surface, so it reads
+   the :root --oc-* vars directly (organicVars.css), never the surface role vars. */
+.oc-colophon { text-align: center; padding: var(--oc-space-md) 0 var(--oc-space-sm); }
+.oc-colophon__seals { display: inline-flex; align-items: center; gap: var(--oc-space-md); }
+.oc-colophon__counterseal { opacity: 0.85; }
+.oc-colophon__motto {
+  margin-top: 6px; font-family: 'Lora', 'Crimson Text', Georgia, serif; font-style: italic;
+  font-size: var(--oc-type-uiM); color: var(--oc-ink-secondary); letter-spacing: 0.02em;
+}
+
 /* Reduced motion: the organic layer has no motion, but honour the intent. */
 @media (prefers-reduced-motion: reduce) {
   .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }

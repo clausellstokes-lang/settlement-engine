@@ -13,6 +13,7 @@ import { navigate } from '../hooks/useRoute.js';
 import { triggerPricingMoment } from '../lib/pricingMoments.js';
 import DossierSessionNotices from './dossier/DossierSessionNotices.jsx';
 import DossierActionBand from './dossier/DossierActionBand.jsx';
+import HouseColophon from './organic/HouseColophon.jsx';
 import { flag } from '../lib/flags.js';
 import { Funnel, EVENTS } from '../lib/analytics.js';
 import { useSectionDwell } from '../hooks/useSectionDwell.js';
@@ -874,6 +875,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               </div>
             </FeatureErrorBoundary>
           </Suspense>
+          {/* The dossier foot — seal and counterseal (the house device beside this
+              settlement's own seeded medallion) with the motto caption; the
+              ceremonial close of the document (owner placement, 2026-07-18). */}
+          <HouseColophon seed={activeSettlement?.name} />
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>
