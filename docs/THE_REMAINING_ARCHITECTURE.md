@@ -48,7 +48,19 @@ organization, button placement, layout discipline. Master is a STRICT ANCESTOR o
 composite (887 commits behind, same lineage) — restoration is per-page structural
 diffing, never merging. EVERY §2 slice now runs three steps in order: (1) SET THE BASE —
 restore master's page organization where the composite regressed it (per THE BASE
-RECONCILIATION MAP, docs/THE_BASE_RECONCILIATION_MAP.md once committed); (2) PLUG IN
+RECONCILIATION MAP, docs/THE_BASE_RECONCILIATION_MAP.md — COMMITTED 2026-07-18; three
+regressed surfaces confirmed: S1 dossier header-reroll/world-order/overview-affordances/
+PostGenCoach, S2 library NextActionRail two-column, S3 create single
+LayeredConfigurationPanel vs stepped wizard; S4 nav ALREADY ALIGNED; FORENSICS
+CONFIRMED the owner's alternative-tree diagnosis with ONE culprit for the whole class:
+merge commit 0168e287 "MASTER MERGE W1" (2026-07-15) resolved ~147 contested UI files
+to the program/"ours" side, discarding master's parallel P7–P12 organization; the 886
+commits after it never restored them. Restoration recipe per slice:
+`git diff 0168e287^2 0168e287 -- <path>` shows exactly what the merge discarded;
+master's version lives intact at `d024286e:<path>`. The ~138 collateral files beyond
+the nine surveyed surfaces (pricing, library toolbar, settlements cards, how-to,
+primitives, copy, theme) get the same master-first walk by their owning slices before
+craft treatment); (2) PLUG IN
 the post-master functionality (guide · AI panels · map stack · exports · entitlements ·
 seal · analytics) into that organization; (3) CRAFT TREATMENT on top — heavier
 treatment WELCOME (owner: "I'm okay with heavier treatment but the base has to be set
@@ -69,6 +81,16 @@ same commit as each win. Focused gates per commit: own tests + kill-list + eslin
 touched + tsc full + domain:strict + build + verify:dist (in that order).
 
 ### Slice C1-fin — finish the commissioning desk
+- BASE-MAP RE-CUT (2026-07-18): SET THE BASE first from master's versions —
+  `d024286e:src/components/generate/WizardEmptyState.jsx` (quiet non-large
+  ModeSelector, LANDING_MAX frame), `d024286e:src/components/HomeHero.jsx` (GA-inlined
+  heroV2, primitive SizeButton, three sizes), and master's single
+  `LayeredConfigurationPanel` config stage in `GenerateWizard.jsx` (drop
+  StepIndicator/WizardCommitBand/per-step Institutions-Services-Trade panels; the
+  orphaned `LayeredConfigurationPanel.jsx` still exists in the composite tree — revive
+  it). Keep `InstantWorldEntry` as a subordinate premium card. RE-AUDIT the landed
+  1a/1b/1c work against this base (the gauge lives in master's compact hero card, not
+  a new composition). Master's three-button hero already satisfies the anon veto.
 - ⛔OWNER VETO LANDED on judgment #3: the anonymous gauge shows HAMLET→TOWN ONLY —
   remove capped-tier stations from anon render (signed-in keeps all six).
 - CREATE CONSOLIDATION (owner ruling): pre-generation = ONE commissioning plate

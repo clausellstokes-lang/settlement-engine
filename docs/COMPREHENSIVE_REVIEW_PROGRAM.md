@@ -1134,6 +1134,29 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛⭐ THE BASE RECONCILIATION MAP + MERGE FORENSICS LANDED (2026-07-18) — the owner's
+alternative-tree diagnosis CONFIRMED with one culprit.** docs/THE_BASE_RECONCILIATION_MAP.md
+committed: per-surface master(d024286e)-vs-composite(78a04afc) diff, classified, with a
+RECONCILED BASE spec per page. Three surfaces regressed (S1 dossier: header reroll
+reintroduced · world group no longer NPC-first · relationship-web jump downgraded to
+static text · Spatial Layout demoted · floating PostGenCoach lost; S2 library: the
+two-column NextActionRail right rail REMOVED; S3 create: master's single
+LayeredConfigurationPanel replaced by the old stepped wizard — the very thing the
+owner's "too many pieces" veto names); S4 nav ALREADY ALIGNED. FORENSICS: the entire
+regression class traces to ONE commit — merge `0168e287` "MASTER MERGE W1"
+(2026-07-15, 568 conflicts), which resolved ~147 contested UI files to the program
+("ours") side and discarded master's parallel P7–P12 organization (master was the
+SECOND parent; its refinements never entered the lineage; the 886 later commits built
+on the regressed skeleton, no later restoration — tip==merge on every probe). The
+owner's mechanism ("worked continuously on an alternative tree; structure lost after
+the remerge") is exactly right. Restoration recipe recorded in the map + §1b of
+THE_REMAINING_ARCHITECTURE.md: per path, `git diff 0168e287^2 0168e287 -- <path>`
+shows what was discarded; master's version lives intact at `d024286e:<path>`;
+~138 collateral files beyond the nine surveyed (pricing, library toolbar, settlements
+cards, how-to, primitives, copy, theme) get the same master-first walk by their owning
+slices. C1-fin re-cut to build from master's WizardEmptyState/HomeHero/
+LayeredConfigurationPanel. Next: the deep-craft lane resumes under the three-step
+order (SET THE BASE → PLUG IN → CRAFT).
 **⬛⬛ THE BASE RULING (owner clarification ×2, 2026-07-18) — SUPERSEDES the same-day
 dossier-model row's "preserve-and-polish only" framing:** the GITHUB SITE (origin/master
 @ d024286e) is THE UI BASE OF RECORD — its page organization, button placement, and
