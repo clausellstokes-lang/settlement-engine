@@ -69,11 +69,15 @@ export function WizardEmptyState({
               the landing's vertical length: proof of the static dossier beside
               proof of the living world. */}
           <div className="sf-proof-pair">
-            <Suspense fallback={<ProofSkeleton height={360} />}>
-              <HomeSampleDossier />
+            {/* Below the fold, both proof cards render as half-scale miniatures
+                (C1r-c2 "true miniatures") — flat, narrower exhibits that stop the
+                pair from doubling the landing's vertical length. `compact` is
+                presentational; the replay keeps its >=44px scrubber controls. */}
+            <Suspense fallback={<ProofSkeleton height={300} />}>
+              <HomeSampleDossier compact />
             </Suspense>
-            <Suspense fallback={<ProofSkeleton height={360} />}>
-              <RegionWakeReplay onUpgrade={() => onNavigate?.('pricing')} />
+            <Suspense fallback={<ProofSkeleton height={300} />}>
+              <RegionWakeReplay compact onUpgrade={() => onNavigate?.('pricing')} />
             </Suspense>
           </div>
         </>
