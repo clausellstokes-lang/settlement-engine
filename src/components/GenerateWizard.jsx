@@ -353,6 +353,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           setWizardMode={setWizardMode}
           onSignIn={onSignIn}
           onNavigate={onNavigate}
+          isMobile={isMobile}
         />
       </>
     );
@@ -397,21 +398,34 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             : t('generate.introSubtitleBasic')}
         />
 
-        <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
-          {/* showPlaceInRegion is a conscious decision (census A3): the
-              Place-in-Region layer is a KEEP control that master's base-of-record
-              composition renders in Advanced (the panel internally gates it to
-              advanced-on-desktop, so Basic never shows it regardless). */}
-          <LayeredConfigurationPanel
-            mode={wizardMode === 'advanced' ? 'advanced' : 'basic'}
-            showPlaceInRegion={wizardMode === 'advanced'}
-          />
-        </div>
+        {/* THE LEAF (C1r-c1 — the FORGE commissioning-desk composition, docs/
+            DESIGN_DEEP_CRAFT_PAGES.md: "Advanced unfolds a second leaf"). The
+            configuration is a folded leaf that opens from its crease — oc-m-unfold,
+            behavior #2 of the sanctioned twelve (design/organic/motion.js). LAYOUT
+            ONLY: the SAME LayeredConfigurationPanel + WizardCloseout are re-vehicled
+            inside the leaf with ZERO handler changes, and the content is fully in
+            the DOM at t=0 (the reveal is presentation over complete content, instant
+            under prefers-reduced-motion via the global oc-m- collapse), so the
+            behavioral pins — layeredConfigurationPanel + generateWizardFocus — hold
+            unchanged. The inner flex column re-supplies the SP.xl gap the two blocks
+            had as sibling flex children before the leaf wrapped them. */}
+        <div className="oc-m-unfold" style={{ display: 'flex', flexDirection: 'column', gap: SP.xl }}>
+          <div data-onboard-highlight={onboardingActive && onboardingStep === 0 ? 'true' : undefined}>
+            {/* showPlaceInRegion is a conscious decision (census A3): the
+                Place-in-Region layer is a KEEP control that master's base-of-record
+                composition renders in Advanced (the panel internally gates it to
+                advanced-on-desktop, so Basic never shows it regardless). */}
+            <LayeredConfigurationPanel
+              mode={wizardMode === 'advanced' ? 'advanced' : 'basic'}
+              showPlaceInRegion={wizardMode === 'advanced'}
+            />
+          </div>
 
-        {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
-            review step; Advanced, where the user set real constraints, gets a
-            "Ready to generate" summary so Generate reads as a confirmation. */}
-        {wizardMode === 'advanced' && <WizardCloseout />}
+          {/* Pre-commit recap — Advanced only. Basic's "pick and go" needs no
+              review step; Advanced, where the user set real constraints, gets a
+              "Ready to generate" summary so Generate reads as a confirmation. */}
+          {wizardMode === 'advanced' && <WizardCloseout />}
+        </div>
 
         {/* First-generation failures land HERE too (P10). The store re-throws
             before it ever sets `settlement`, so on a failed first roll the

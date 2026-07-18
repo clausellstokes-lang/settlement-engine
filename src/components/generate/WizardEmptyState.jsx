@@ -40,12 +40,20 @@ const HomeSampleDossier = lazy(() => import('../home/HomeSampleDossier.jsx'));
 // teaser ladder reads: proof of the static dossier → proof of the LIVING world.
 const RegionWakeReplay = lazy(() => import('../home/RegionWakeReplay.jsx'));
 
+// The premium "Instant World" entry — re-homed below the fold as a SUBORDINATE
+// exhibit (C1r-c1 / the FORGE composition's "demo artifacts below the fold").
+// Lazy exactly as before (never in first paint); it self-gates internally on
+// premium/elevated (a non-premium reach fires the pricing moment), so it renders
+// only in the signed-in mode-picker context where it has always lived.
+const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'));
+
 export function WizardEmptyState({
   showHomeHero,
   showModePicker,
   setWizardMode,
   onSignIn,
   onNavigate,
+  isMobile,
 }) {
   // ONE landing frame. The whole Create-landing stack (hero + proof cards + the
   // signed-in heading + mode picker) shares LANDING_MAX so the column has a
@@ -121,6 +129,18 @@ export function WizardEmptyState({
               active — ModeSelector reads `mode` as undefined. */}
           <ModeSelector mode={undefined} onModeChange={setWizardMode} />
         </section>
+      )}
+      {/* THE PREMIUM EXHIBIT (C1r-c1). Instant World re-homed here, BELOW the
+          mode picker, as a subordinate below-the-fold exhibit — it was dropped
+          from this surface's above-the-fold slot in C1r-b (the single-plate law)
+          and is otherwise unmounted anywhere; re-mounting it here (same props +
+          handlers, still lazy) restores the functionality without competing with
+          the hero's Forge CTA. Gated to the signed-in mode-picker context, since
+          it self-gates on premium and anon never reaches the mode picker. */}
+      {showModePicker && (
+        <Suspense fallback={<ProofSkeleton height={120} />}>
+          <InstantWorldEntry isMobile={isMobile} onNavigate={onNavigate} />
+        </Suspense>
       )}
     </div>
   );
