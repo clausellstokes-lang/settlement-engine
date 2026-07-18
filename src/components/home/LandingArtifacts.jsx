@@ -31,6 +31,8 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import StateBadge from '../primitives/StateBadge.jsx';
 import Badge from '../primitives/Badge.jsx';
+import Segmented from '../primitives/Segmented.jsx';
+import { slugify } from '../../kernel/slugify.js';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT,
@@ -40,7 +42,7 @@ import {
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
-import { Funnel } from '../../lib/analytics.js';
+import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
 
@@ -102,9 +104,10 @@ function ForgeExactButton({ onNavigate }) {
 
   const forgeExact = async () => {
     if (forging) return;
-    // Optional-chained funnel tag (no new analytics plumbing) — a no-op until
-    // the analytics wave lands the event, mirroring Funnel.welcomeView.
-    Funnel.landingFixtureForge?.({ seed: fixture.seed });
+    // W-DOC: the landing funnel LANDED — landing_funnel_used
+    // feature:'fixture_forge' via the SM-5-pattern lazy helper (the seed is the
+    // fixture's constant — provenance, not user data).
+    trackLandingFixtureForge({ seed: fixture.seed });
     if (authTier === 'anon' && anonAtCap()) { onNavigate('generate'); return; }
     setForging(true);
     try {
@@ -362,6 +365,47 @@ export function RealmMapCard() {
             </Chip>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ── 05 · The map — THE MAP WAYPOINT's frozen lens plates (W-DOC, brief §4) ────
+// The plates are FROZEN REAL ENGINE OUTPUT: scripts/generate-landing-map-
+// plates.mjs replays the fixture's exact seed + config (drift-gated: the replay
+// must still produce the fixture town), renders the v2 layout in each lens, and
+// freezes the SVGs under public/landing-maps/. The flip swaps plates of the
+// SAME town — one town, one memory, two lenses — so the control is honest by
+// construction. Plate paths derive from the kernel slugify (the same call the
+// generator used), so the component and the script can never disagree on a name.
+// No new lucide icons here (see the header note — vendor-icons is eager).
+export function MapPlateCard() {
+  const lenses = tl('map.lenses') || [];
+  const [lens, setLens] = useState(lenses[0]?.id || 'parchment');
+  const lensLabel = (lenses.find(l => l.id === lens) || lenses[0] || {}).label || lens;
+  const src = `/landing-maps/${slugify(fixture.town.name)}.${lens}.svg`;
+  return (
+    <div style={{ ...cardStyle, maxWidth: 560, margin: `${SP.xl}px auto 0`, padding: SP.lg }}>
+      <img
+        src={src}
+        alt={tl('map.alt', { name: fixture.town.name, lens: lensLabel })}
+        width={720}
+        height={720}
+        loading="lazy"
+        style={{ display: 'block', width: '100%', height: 'auto', borderRadius: R.md, border: `1px solid ${BORDER}` }}
+      />
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.md, marginTop: SP.md, flexWrap: 'wrap' }}>
+        <Segmented
+          ariaLabel={tl('map.lensLabel')}
+          size="sm"
+          options={lenses.map(l => ({ id: l.id, label: l.label }))}
+          value={lens}
+          onChange={setLens}
+        />
+        <span style={monoTag}>{seedTag()}</span>
+      </div>
+      <div style={{ fontFamily: sans, fontSize: FS.sm, fontWeight: 600, color: SECOND, marginTop: SP.sm }}>
+        {tl('map.provenance', { name: fixture.town.name })}
       </div>
     </div>
   );

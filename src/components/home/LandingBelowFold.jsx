@@ -1,8 +1,8 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
  * Welcome page: the salt-road journey 01·Forge → 02·Brief → 03·Voice →
- * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE chunk by
- * HomeLanding.jsx so the hero paints first (LCP).
+ * 04·Realm → 05·Map → 06·Commons → 07·Set out + footer. Lazy-loaded as ONE
+ * chunk by HomeLanding.jsx so the hero paints first (LCP).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
@@ -24,9 +24,15 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
+// Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
+// interpolates these instead of hand-typing the numbers, so a catalog change
+// (anon size ceiling, free save cap) can never drift from what the strip shows.
+// tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
+// so it adds nothing to the first-paint closure.
+import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, MapPlateCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
 
 const MONO = fontFamily.mono;
@@ -257,6 +263,16 @@ function FounderSeatLine() {
   );
 }
 
+// Interpolate the config-sourced tier facts into a closer-strip body. The copy
+// carries {anonSize}/{freeSaves} tokens (copy/landing.js); the numbers come from
+// config/tierFacts.js so the strip can never restate a ceiling the catalog didn't
+// (brief §4 / ruling #6 — config-sourced facts, zero hand-typed numbers).
+const TIER_FACT_VARS = { anonSize: ANON_MAX_SIZE_LABEL, freeSaves: FREE_SAVE_LIMIT };
+function fillTierBody(body) {
+  return String(body).replace(/\{(\w+)\}/g, (m, name) =>
+    Object.prototype.hasOwnProperty.call(TIER_FACT_VARS, name) ? String(TIER_FACT_VARS[name]) : m);
+}
+
 function TierStrip() {
   const tiers = tl('closer.tiers') || [];
   return (
@@ -266,28 +282,35 @@ function TierStrip() {
     }}>
       {tiers.map((tier) => (
         <div key={tier.name} style={{
-          background: 'rgba(251,245,230,0.08)',
-          border: tier.accent ? '1px solid rgba(224,192,128,0.55)' : '1px solid rgba(244,234,208,0.25)',
+          background: tier.aiWall ? 'rgba(123,79,207,0.10)' : 'rgba(251,245,230,0.08)',
+          // Surveyor is walled in the violet AI channel (ruling #3); Cartographer
+          // keeps the gold accent; the rest read as quiet parchment.
+          border: tier.aiWall ? '1px solid rgba(123,79,207,0.5)'
+            : tier.accent ? '1px solid rgba(224,192,128,0.55)'
+            : '1px solid rgba(244,234,208,0.25)',
           borderRadius: R.lg, padding: '18px 20px',
         }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
-            {/* Per-segment badge colour: a 'Premium' segment always renders gold
-                (so Founder's "Premium · Lifetime" matches Cartographer's gold
-                PREMIUM); everything else follows the tier's accent. */}
+            {/* Per-segment badge colour: the AI-channel band renders violet; a
+                'Premium' segment always renders gold (so Founder's "Premium ·
+                Lifetime" matches Cartographer's gold PREMIUM); everything else
+                follows the tier's accent. */}
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>
               {String(tier.badge).split(' · ').map((seg, i) => (
                 <span key={seg}>
                   {i > 0 && <span style={{ color: 'rgba(244,234,208,0.7)' }}>{' · '}</span>}
-                  <span style={{ color: (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)' : 'rgba(244,234,208,0.7)' }}>{seg}</span>
+                  <span style={{ color: tier.aiWall ? 'rgba(180,150,235,1)'
+                    : (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)'
+                    : 'rgba(244,234,208,0.7)' }}>{seg}</span>
                 </span>
               ))}
             </span>
           </div>
           <div style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 600, lineHeight: 1.55, color: 'rgba(251,245,230,0.85)' }}>
-            {tier.body}
+            {fillTierBody(tier.body)}
           </div>
           {tier.seatLive && <FounderSeatLine />}
         </div>
@@ -431,7 +454,25 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <RealmMapCard />
       </section>
 
-      {/* ══ 05 · The commons — plain parchment ══ */}
+      {/* ══ 05 · The map — plain parchment; THE MAP WAYPOINT (W-DOC, brief §4).
+          The plate card renders the frozen v2 lens plates of the FIXTURE town
+          (the same town as §02's dossier — the seed tag is the receipt), with
+          the lens flip + provenance tease. ══ */}
+      <section id="map" aria-labelledby="sf-map-title" style={{ ...pad, background: PARCH }}>
+        <Waypoint pill={tl('map.waypoint')} />
+        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
+          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+            <h2 id="sf-map-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
+            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
+          </div>
+          <MapPlateCard />
+          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
+            {tl('map.tease')}
+          </p>
+        </div>
+      </section>
+
+      {/* ══ 06 · The commons — plain parchment ══ */}
       <section id="commons" aria-labelledby="sf-commons-title" style={{ ...pad, background: PARCH }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -446,7 +487,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 06 · Set out — dark painted create scene + footer ══ */}
+      {/* ══ 07 · Set out — dark painted create scene + footer ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"

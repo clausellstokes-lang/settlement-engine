@@ -13,6 +13,19 @@
       "port": 5175
     },
     {
+      "name": "dev-doc-wave",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "vite",
+        "/Users/cstokes/Desktop/settlement-engine/.claude/worktrees/agent-a5a179f4f9d530b14",
+        "--port",
+        "5176",
+        "--strictPort",
+        "--host"
+      ],
+      "port": 5176
+    },
+    {
       "name": "preview-dist",
       "runtimeExecutable": "npx",
       "runtimeArgs": [

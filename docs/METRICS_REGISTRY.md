@@ -177,3 +177,8 @@ not a product funnel), **diagnostic** (health/latency/failure taxonomy), and
 - `gallery_published`, `gallery_unpublished`, `gallery_dossier_viewed`, `gallery_engagement`
 - `gallery_imported`, `settlement_reopened`, `settlement_deleted`, `library_viewed`
 - `session_started`, `settlement_fingerprint_captured`, `consent_updated`
+- `landing_funnel_used` — **funnel-leg** (W-DOC): the Welcome landing's ONE
+  feature-discriminated event (feature=`view` once per session · `fixture_forge`,
+  the determinism-replay click). The landing leg of the funnel already measured
+  transitively by the homepage/anon-generation metrics; promote to a named
+  landing-conversion metric when the documentation wave's four pages ship.
