@@ -1120,6 +1120,19 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE CHALLENGE ROUND (owner: "feel free to challenge me" — four challenges
+delivered):** (1) **OPEN-BOTTOM AMENDMENT proposed, OWNER-PENDING** — the closed
+displacement ladder over a fixed cast reaches equilibrium (person-scale stasis, the
+program's oldest disease); recommendation: conservation holds above the floor, the
+bottom rung opens to population/REASSIGN entrants; contradicts the owner's literal rule
+⇒ theirs to decide. (2) **THE ATTRIBUTION RULE — RULED (delegated, vetoable), relayed**:
+shared-signal goals credit by DOMAIN + OFFICE w/ fractional out-of-domain pay + honest
+receipts; the multi-claimant free-riding fixture mandated. (3) **THE ANTI-STASIS BOUND —
+RULED, relayed**: the cadence dial carries BOTH bounds; the soak certifies
+successions-per-faction-century within a band (never zero, never churn). (4) **THE SCOPE
+LINE, stated to the owner**: the ladder = the recommended LAST new pre-launch mechanism
+(fourth engine reopening); further ideas → the post-launch corpus with honors unless
+fixes — "the best thing to add now is a launch date."
 **⬛ THE LADDER §11 THE LONG GAME (owner, 2026-07-17: "a promotion isn't supposed to
 happen every other week… goals should span weeks to years… a cumulation of impact where
 failure takes it away… a three-way rise"):** STANDING = an integrator STOCK (fabric
