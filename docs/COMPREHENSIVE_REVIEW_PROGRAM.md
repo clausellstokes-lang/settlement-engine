@@ -1134,6 +1134,19 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE DEEP WAVE RESUMES (owner, 2026-07-18: "continue with the deep wave according to
+everything that we have now").** The two open plate regenerations CLOSED first
+(settlements-mappa: saints/halos/crosses out, sun-face + vines + sea-serpent kept, quiet
+center-right · about-fireside: ordinary travelers around the storyteller, zero fantasy
+costume). The lane re-dispatched with THE ACCUMULATED LAW SET: the original deep-wave
+order (phase-0 ratchets/material/motion/heroes → commissioning-desk cluster → OWNER STOP
+→ remaining clusters) + THE INSTRUMENT PRINCIPLE + the reference library as BINDING art
+direction (MANIFEST translation notes; alive-world people ruling) + THE PLATE INTEGRATION
+CHARGE (improved plates through the optimize pipeline into public/backgrounds, replacing
+the audited originals; evolution stills = the tier/journey backdrops) + THE WELCOME =
+the Survey of One Settlement in its app form (stills + CSS travel-and-stop per the annex;
+the microsite at marketing/website is the working reference implementation; the 76MB film
+NEVER enters the app — stills only; eager budget guarded).
 **⬛⬛ THE SURVEY OF ONE SETTLEMENT — THE MICROSITE BUILT (2026-07-18).** The owner's
 travel-and-stop design executed end to end: SIX CHAINED FILM LEGS generated (Seedance
 start/end-frame anchoring — desk-dive + five growth legs, each landing ON the approved
