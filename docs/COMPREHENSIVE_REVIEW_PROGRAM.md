@@ -1120,6 +1120,17 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE LIMIT STRIKE + TRIPLE RESUME (2026-07-17 evening): the session limit killed all
+three live lanes mid-work (fog · doc wave · S7); the dossier's law held — limits kill
+reasoning, not disk.** Survived state, verified before resuming: fog banked commit
+59dde1ea (engine core: reveal sidecar + snap geometry + fogged export) + 4 WIP files ·
+doc wave 2 WIP files, ZERO commits (⚠️ the near-loss case — its resume instruction
+escalates commit cadence to per-page minimum) · S7 clean-tree exploration, findings safe
+in-transcript (key: injectCampaignStressor IS the existing nudge op to consume; no
+existing registry/StopCondition machinery — build both). ALL THREE RESUMED from
+transcripts with checkpoint-first instructions. PROCESS LESSON for every future brief:
+the commit-early rule is limit-armor, not tidiness — a lane with zero commits is one
+limit away from losing everything but its transcript.
 **⬛ S7 RE-SLOTTED PRE-ROUND-3 + DISPATCHED (2026-07-17, owner: "I want it built now for
 the resurvey to check for any bugs" — THE MACHINERY-NOW/VOCABULARY-GROWS COMPROMISE):**
 the tuning-window slot held S7 only because StopConditions wanted the knob vocabulary;
