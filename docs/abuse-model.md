@@ -47,7 +47,7 @@ before exposing new attack surface.
 
 ### Edge functions
 
-There are **24** edge functions under `supabase/functions/` (excluding
+There are **25** edge functions under `supabase/functions/` (excluding
 `_shared/`). They split by auth posture, but share one baseline defense
 as of Tier 0.10.
 
