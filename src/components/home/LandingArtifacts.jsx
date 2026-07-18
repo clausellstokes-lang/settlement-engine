@@ -40,7 +40,7 @@ import {
 } from '../theme.js';
 import { useStore } from '../../store/index.js';
 import { anonAtCap } from '../../lib/anonGenCounter.js';
-import { Funnel } from '../../lib/analytics.js';
+import { trackLandingFixtureForge } from '../../lib/landingFunnelAnalytics.js';
 import { tl } from '../../copy/landing.js';
 import { fixture } from './landingFixture.js';
 
@@ -102,9 +102,10 @@ function ForgeExactButton({ onNavigate }) {
 
   const forgeExact = async () => {
     if (forging) return;
-    // Optional-chained funnel tag (no new analytics plumbing) — a no-op until
-    // the analytics wave lands the event, mirroring Funnel.welcomeView.
-    Funnel.landingFixtureForge?.({ seed: fixture.seed });
+    // W-DOC: the landing funnel LANDED — landing_funnel_used
+    // feature:'fixture_forge' via the SM-5-pattern lazy helper (the seed is the
+    // fixture's constant — provenance, not user data).
+    trackLandingFixtureForge({ seed: fixture.seed });
     if (authTier === 'anon' && anonAtCap()) { onNavigate('generate'); return; }
     setForging(true);
     try {

@@ -23,7 +23,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import { PARCH, PARCH_100, GOLD, FS, SP, sans, serif_ } from './theme.js';
-import { Funnel } from '../lib/analytics.js';
+import { trackLandingView } from '../lib/landingFunnelAnalytics.js';
 import { tl } from '../copy/landing.js';
 
 // Everything below the hero fold, code-split into ONE lazy chunk so the hero is
@@ -45,11 +45,12 @@ function scrollToForge(e) {
 }
 
 export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }) {
-  // Instrument the Welcome page: fire a once-per-session welcome_view. Optional-
-  // chained exactly as before so it degrades to a no-op until the analytics
-  // wave lands the event (preserved behavior).
+  // Instrument the Welcome page (W-DOC): the landing funnel joins the SM-5
+  // pattern — landing_funnel_used feature:'view', once per session, via the
+  // lazy helper (lib/landingFunnelAnalytics.js). This LANDS the previously
+  // dormant Funnel.welcomeView seam.
   useEffect(() => {
-    Funnel.welcomeView?.();
+    trackLandingView();
   }, []);
 
   // Full-bleed: cancel <main>'s padding so every section spans edge to edge.

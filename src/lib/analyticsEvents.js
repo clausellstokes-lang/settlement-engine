@@ -49,8 +49,14 @@ export { EDIT_KINDS };
  *  event carrying the town-map GENERATION profile (feature:'render') + LEGIBILITY
  *  engagement (provenance_hover/change_view/edge_labels/annotation_add/lens_switch/
  *  panorama). Counts/enums/bands only; fired client-side from the lazy pane via
- *  src/lib/mapLayerAnalytics.js. Essential class; the engine emits nothing. */
-export const EVENTS_REV = 10;
+ *  src/lib/mapLayerAnalytics.js. Essential class; the engine emits nothing.
+ *  rev 11: W-DOC — the Welcome landing funnel joins the SM-5 pattern:
+ *  landing_funnel_used, ONE feature-discriminated event (feature:'view' once per
+ *  session · 'fixture_forge' with the fixture's constant seed — no user data).
+ *  Fired client-side from the lazy landing chunk via
+ *  src/lib/landingFunnelAnalytics.js; lands the previously dormant
+ *  Funnel.welcomeView / Funnel.landingFixtureForge seams. Essential class. */
+export const EVENTS_REV = 11;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -194,6 +200,9 @@ export const EVENTS = Object.freeze({
   //    Lens/style RADAR for AI style-compiles is already captured server-side
   //    (ai_stage_* feature:'styleOverhaul') — this is the distinct RENDER moment.
   TOWN_MAP_LAYER_USED:            'town_map_layer_used',
+  // W-DOC (rev 11): the Welcome landing funnel — ONE feature-discriminated event
+  // (the town_map_layer_used precedent): feature:'view' | 'fixture_forge'.
+  LANDING_FUNNEL_USED:            'landing_funnel_used',
 
   // ── v2: sharing / export ───────────────────────────────────────────────
   PDF_EXPORT_COMPLETED:           'pdf_export_completed',

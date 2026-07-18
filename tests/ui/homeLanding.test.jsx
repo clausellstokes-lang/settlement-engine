@@ -31,11 +31,12 @@ import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
 
-// Analytics is fire-and-forget (welcome_view + the optional-chained
-// landing-fixture forge tag); stub it so the mount path stays quiet.
+// Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
+// helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
+// module); stub it so the mount path stays quiet.
 vi.mock('../../src/lib/analytics.js', () => ({
   track: vi.fn(),
-  Funnel: { welcomeView: vi.fn() },
+  Funnel: {},
   EVENTS: new Proxy({}, { get: (_t, k) => String(k) }),
 }));
 
