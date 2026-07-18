@@ -1120,6 +1120,30 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ THE THREADING REFUTATION (2026-07-17) — ENGINE LIFT #2 CLOSES AS
+INVESTIGATED-AND-REFUTED, the stop-and-report doctrine at its best.** The lane made ZERO
+edits and disproved the commission's premise with EXECUTED PROBES on lit runs: (1) all
+50 recorded edges in real advances are same-tick news→outcome — causedBy is 100%
+unthreaded exactly as the seam said; (2) the engine's true causality is CROSS-ADVANCE
+and ENTITY-KEYED (coups resolve from stressor.id; returns from deployment ledger keys —
+entity keys, never durable receipt ids; the parent receipt lives in a PRIOR advance);
+(3) the chronicle reader scopes recorded cones to SAME-ADVANCE co-minted node pairs —
+so kernel-threaded edges would be stored and never surfaced. The only true-edge paths:
+persist parent-receipt ids onto world-state entities (VIOLATES THE SHAPE LAW) or a
+cross-advance chronicle reader (a DISPLAY capability, out of fence, the brief's named
+design-smell). THE COMPLETE MINT-SITE CENSUS is dispositioned in the lane report
+(cross-advance/entity-keyed ×9 families · root-cause ×6 · no-mint ×16; the one
+same-advance candidate found and rejected as sibling-not-parent). CONTINGENCY HAZARD
+BANKED: worldState.proposals clones outcomes (applyWorldPulse:1000) — any future
+causedBy context leaks there; scrub + whole-worldState residue pin required. VERDICT:
+freely-given ruling #8 VINDICATED on grounds unknown when the owner overrode it; the
+sanction closes honorably (the owner approved a premise the probes then refuted — the
+refutation IS the deliverable). THE REAL UNLOCK named + owner-queued post-launch: **the
+cross-advance recorded-cone chronicle reader** (display lift; the ledger already stores
+cross-advance edges it would consume). ROUND 3 inherits the census + probes as
+causality-review instruments. Decree-effects finding for ROUND 3 stock: approved
+proposals apply WITHOUT provenance recording (applyWorldPulseProposal path) — a genuine
+recorded-causality gap worth a fix wave.
 **⬛ THE TABLET COMPANION MANDATE (owner, 2026-07-17: "we need a tablet companion… This
 one can include the realm. do all the fixings"):** the THIRD POSTURE joins the law —
 DESK / FIELD / **THE SPREAD** (tablet: the open book + the shared table surface;
