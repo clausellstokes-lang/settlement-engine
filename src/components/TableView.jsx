@@ -57,6 +57,32 @@ export default function TableView({ settlement, onClose }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  // FIELD MODE wake lock (Organic Craft law §7 — the cook-mode pattern): while
+  // the at-table view is open the screen stays awake, where supported. The lock
+  // is auto-released by the platform when the tab hides; we re-acquire on
+  // visibilitychange so returning mid-session keeps the table lit. Fails silent
+  // (older Safari): the surface works identically without it. Interruption
+  // persistence is already the caller's tableViewOpen pref (the store idiom).
+  useEffect(() => {
+    let lock = null;
+    let disposed = false;
+    const acquire = async () => {
+      try {
+        if (!disposed && document.visibilityState === 'visible') {
+          lock = await navigator.wakeLock?.request?.('screen');
+        }
+      } catch { /* unsupported or denied — the view works without it */ }
+    };
+    const onVis = () => { if (document.visibilityState === 'visible') acquire(); };
+    acquire();
+    document.addEventListener('visibilitychange', onVis);
+    return () => {
+      disposed = true;
+      document.removeEventListener('visibilitychange', onVis);
+      try { lock?.release?.(); } catch { /* already released */ }
+    };
+  }, []);
+
   const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
   const stressors = Array.isArray(settlement?.stressors) ? settlement.stressors : [];
   const pressure = settlement?.pressureSentence || '';
