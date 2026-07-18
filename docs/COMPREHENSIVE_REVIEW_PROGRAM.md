@@ -1143,17 +1143,25 @@ for TTRPG creation and framing. Manager scorecard recorded honestly: WON on 3
 (substance — the deepest moat), 7 (simulator — category of one; the soak is the only
 opponent), 8 (the schema-wall trust architecture no competitor can tell); WINNABLE
 IN-PROGRAM on 1 (ILLUSTRATED TOWN closes Watabou's beauty axis), 5 (grounded prose;
-ROUND 3 content dimension), 6 (generative-not-wiki redefinition); NAMED GAPS on 2
-(world map art vs Azgaar/Inkarnate — TWO candidate paths recorded: (a) THE
-ILLUSTRATED REALM [skin-registry idiom at world scale]; (b) THE AZGAAR BRIDGE
-[owner disclosure same day: "I use Azgaar… then i add my own system to it" — the
-owner's own workflow is the strategy: import the story-relevant layer of an Azgaar
-export (burgs→settlements, states→realms/factions, cultures/religions→facet-law
-declared content, biomes/routes→terrain+trade substrate; NEVER the heightmap
-physics — simplicity-over-fidelity holds) as DECLARED GEOGRAPHY compiled
-deterministically at import, making Azgaar a feeder instead of a rival; adoption
-lever for every existing Azgaar worldbuilder]. BOTH ⛔OWNER (new-capability class):
-pre-vs-post-launch and either/both undecided) and 4 (the casual-game reframe: the loop
+ROUND 3 content dimension), 6 (generative-not-wiki redefinition); CROWN 2 RE-SCORED
+(⬛ ERRATUM + owner correction, same day: "our FMG fork is literally azgaar's
+system" — VERIFIED in-tree: public/map/ = 636-file vendored fork of Azgaar's FMG
+(MIT, LICENSE-FMG.txt carried), iframe + typed postMessage RPC via
+public/map/sf-bridge.js (~1,136 lines), 4 inline main.js patches, upgrade runbook
+docs/fmg-fork.md, setup docs/azgaar-bridge.md — "the map provides geography…your
+settlements provide depth." The manager's earlier "world map gap vs Azgaar" scoring
+and the proposed import bridge were written WITHOUT checking the tree — the bridge
+already IS the architecture, and FMG's native .map load means bring-your-own-Azgaar-
+world is largely inherent. CROWN 2 THEREFORE STANDS FAR STRONGER THAN SCORED:
+Azgaar-class world generation by construction + the living layer no FMG install
+has. Remaining crown-2 work re-scoped: (a) house coherence of the realm surface
+(deep-craft C5 chrome — already specced); (b) OPTIONAL: a house FMG style preset so
+the world map wears the parchment-and-ink hand (FMG's own style system; small,
+vetoable) — THE ILLUSTRATED REALM as a from-scratch build is SUPERSEDED by this;
+(c) ROUND 3 intake ADDS: sf-bridge postMessage RPC security/origin audit + the
+public/map gate-coverage question (the fork sits outside eslint/tsc/vitest by
+design — verify what its only gates actually cover) + FMG-upgrade currency check.
+MIT attribution rides the existing ⛔OWNER legal-consult carve-out) and 4 (the casual-game reframe: the loop
 exists — verbs/Forecast/Docket/SessionMode/tempo — but game-feel was never surveyed
 as a discipline → GAME-FEEL added as a named ROUND 3 dimension). ROUND 3's
 experience charge re-aimed at the eight (architecture doc §4 amended). The strategic

@@ -278,18 +278,24 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   generators · 6 setting & world builder · 7 world simulator for TTRPGs · 8 AI usages
   for TTRPG creation and framing) · substance benchmarks (the depth standard's five
   columns) · performance/eager · security/abuse · AI cost-efficiency · content/voice ·
-  a11y · GAME-FEEL (crown 4's survey lens). Standing gap register from the crown
-  scorecard: crown 2 is the honest weak claim — THE ILLUSTRATED REALM (skin-registry
-  idiom at world scale) is the named follow-on candidate, ⛔OWNER whether pre- or
-  post-launch. Every finding: adversarially verified (2-of-3 refuters) before the
-  fix list.
+  a11y · GAME-FEEL (crown 4's survey lens). Crown-2 RE-SCORED (owner correction +
+  in-tree verification, 2026-07-18): the world map IS Azgaar's FMG, vendored fork at
+  public/map/ (iframe + sf-bridge.js postMessage RPC; docs/fmg-fork.md runbook) —
+  Azgaar-class by construction + the living layer; THE ILLUSTRATED REALM from-scratch
+  build is SUPERSEDED by an optional house FMG style preset (vetoable, small). Every
+  finding: adversarially verified (2-of-3 refuters) before the fix list.
 - PRE-STOCKED ITEMS (must appear in the survey's intake): W6 delta audit ·
   SettlementsPanel:748 guard · S1–S3 token retrofit · doc-claims audit · interior
   entry hook · edit-chrome teaser · decree-provenance gap (applyWorldPulseProposal
   applies without provenance recording) · panel analytics · S3–S6 instruction
   adoption · ladder recorded seams · the 23-literal tokenize-down (raw-color budget
   1450→) · slugify dedup (ladder token fn) · PDF counterseal refactor · annex/survey
-  naming reconcile · Wizard/Forge spawn-task overlap check (task_7e1e1e51).
+  naming reconcile · Wizard/Forge spawn-task overlap check (task_7e1e1e51) ·
+  sf-bridge postMessage RPC security/origin audit (public/map/sf-bridge.js, the FMG
+  iframe bridge) · public/map gate-coverage verification (the vendored FMG fork sits
+  outside eslint/tsc/vitest by design — docs/fmg-fork.md names its only real gates;
+  confirm they run) · FMG-fork upgrade currency check (drift vs upstream; runbook
+  docs/fmg-fork.md).
 - FIX WAVES: one commit per finding-cluster, full gate at each wave end, ledger rows.
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 
