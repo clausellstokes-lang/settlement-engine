@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE ILLUSTRATED TOWN COMMISSIONED (owner, 2026-07-18: "do it!" + the reskin
+note):** the owner's map critique ratified as a wave — the settlement map lacks
+terrain/season art, reads as a flat bird's-eye diagram of blocks, and needs the
+cartographer's-illustration treatment: the BIRD'S-FLIGHT idiom (planimetric streets,
+buildings drawn as oblique miniatures — church w/ spire, mill w/ wheel), ground dress
+(fields/woods/water/relief hachures extending the landforms mark vocabulary), season
++ live-state dress (winter/harvest/siege/scars from sim reads), paper-depth effects
+(one light source, ink-hatched shadows) — NO literal WebGL 3D (rejected: breaks house
+style, wrong cost). Ships as a NEW LENS; the plan view SURVIVES as the orthographic
+source of truth for UVTT/exports; own additive golden family; existing map goldens
+untouched. FIRST-CLASS (owner directive, same message): THE SKIN REGISTRY — glyph
+sets/palettes/dress rules as DATA per the facet law, so the AI surfaces (S4 custom
+content / StyleOverhaul accept→mint) can mint RESKINS and GENRE skins (the genre-pack
+door made concrete at the map layer); manual picks persist via mapEdits/bespokeStyles.
+Vetoable placements (recorded): illustrated lens FREE as the default presentation
+face; curated alternate skin packs CARTOGRAPHER; AI-minted skins SURVEYOR. Task #36;
+recon workflow dispatched (render architecture · AI style seam · live-state reads ·
+export constraints); design doc DESIGN_ILLUSTRATED_TOWN.md next, then the lane.
 **⬛ THE WELCOME FILM RULING (owner, 2026-07-18: "i want the microsite animation for
 my welcome page… after each settlement tier it shows the different sections of the
 current welcome page before moving to the next. isn't that the 10,000 or million
