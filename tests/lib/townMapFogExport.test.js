@@ -7,7 +7,7 @@
  *   • the fog color tracks the active lens (parchment vs accessible differ).
  */
 import { describe, expect, it } from 'vitest';
-import { buildTownMapModel, allRevealIds, readMapEdits, viewerPalette } from '../../src/domain/townMap/index.js';
+import { buildTownMapModel, allRevealIds, readMapEdits, viewerPalette, revealShapes } from '../../src/domain/townMap/index.js';
 import { buildTownMapSvg } from '../../src/domain/townMap/townMapDraw.js';
 import { townMapExportSvg } from '../../src/lib/townMapExport.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
@@ -81,6 +81,20 @@ describe('the FOGGED handout overlays the mask through the existing matrix', () 
     expect(view).toContain('fill-opacity="1" mask="url(#sf-fog)"'); // fully opaque for players
     expect(view).not.toContain('cx="300" cy="300"');              // DM-only pin masked out
     expect(view).toContain('cx="600" cy="600" r="7"');            // player pin visible
+  });
+
+  it('a V1 (quarters/buildings) model reveals + masks too — both layout laws supported', () => {
+    // The DEFAULT model (no layoutLawVersion ⇒ v1): districts are quarters, buildings carry
+    // anchorKeys — the same id contract, so semantic-snap fog works at v1 granularity.
+    const v1 = { ...makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'fog-exp' }) };
+    const v1Model = buildTownMapModel(v1, null);
+    const ids = allRevealIds(v1Model);
+    expect(ids.districts.length).toBeGreaterThan(0);           // quarters revealable
+    expect(ids.buildings.length).toBeGreaterThan(0);           // buildings revealable
+    const v1Reveal = { districts: ids.districts.slice(0, 1) };
+    expect(revealShapes(v1Model, v1Reveal).length).toBeGreaterThan(0); // the shape resolves
+    const fogged = townMapExportSvg(v1, { style: 'parchment', resolution: 1024, audience: 'player', fogReveal: v1Reveal });
+    expect(fogged).toContain('data-town-fog');                 // the v1 handout masks
   });
 
   it('the fog color tracks the active lens (parchment vs accessible differ)', () => {
