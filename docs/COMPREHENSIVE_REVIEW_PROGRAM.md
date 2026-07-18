@@ -1120,6 +1120,23 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ CRAFT WAVE PHASES 1-2 COMPLETE — STOP HONORED (2026-07-18):** claude/organic-craft
+@ b94f13c8 (base 019d1a2e, 6 commits, clean). Foundation (ink ramp · rubric · fluid scale ·
+three-posture usePosture · rule family · instruments · seeded-ornament library w/ byte-stable
+golden family) + 5-screen sample set as self-contained drift-guarded HTML
+(docs/samples/organic-craft/) + the census scaffold (30 routes + modals, all PENDING).
+Receipts: ~115 lane tests green · tsc 0 · strict 0 · lint-on-touched 0 · build 0 ·
+verify:dist 150/150 · EAGER DELTA 0 B (organic layer fully tree-shaken). Contrast AA
+CONFIRMED per state at the letterform. 8 JUDGMENTs recorded w/ rejected alternatives
+(depth-standard compliant; shadows-retirement + IM-Fell display binary = named deferrals).
+⚠️ CRITICAL PRE-EXISTING FINDING: base tip 019d1a2e itself reds — SettlementMapPane.jsx
+601>600 lint ceiling (not in .size-baseline.json) + 7 full-suite failures REPRODUCED at a
+clean base checkout (relationshipCompatibility · crisisTripleSync · rawButtonBaseline ·
+rawColorLiteral · sizeBaseline · slugifyIdiomBaseline · swatchResolves; some possibly
+worktree-environmental — VENDOR-MANIFEST empty in that run). NOT this lane's; TRIAGE OWED
+AT THE COMPOSITE (name-identity vs base discipline). NEXT: manager preview legibility
+review (desk/field/dim from the LANE worktree — never the main-tree preview) → owner
+taste veto → phases 3-5 dispatch.
 **⬛ GUIDANCE-COHERENCE CHECKPOINTS PINNED (2026-07-18, owner coherence question):** four
 binding checkpoints added to the craft brief for phases 3-5 (whispers→marginalia w/ registry
 intact · title census monotone down w/ the false-positive caveat · Handbook + WorldMapToolbar
