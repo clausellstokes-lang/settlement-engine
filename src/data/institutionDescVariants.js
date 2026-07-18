@@ -1,39 +1,238 @@
 /**
- * institutionDescVariants.js — CONTENT-GT-DOSSIER lane: extra description variants for
- * a representative cross-tier sample of institutions. Keyed by the exact
- * `${tier}|${category}|${name}` catalog path. These are the NON-canonical variants ONLY;
- * the catalog's own `desc` stays the canonical index-0 entry, and assembleInstitutions
- * selects among [canonicalDesc, ...variants] with a pure fnv hash of (settlement seed +
- * institution name) — ZERO rng draws (kernel/proseHash.pickVariant, canonical-at-zero).
- * A settlement without a matching key keeps its single catalog desc unchanged.
+ * institutionDescVariants.js — CONTENT-GT lane: extra description variants for the
+ * institution catalog, keyed by the exact `${tier}|${category}|${name}` catalog path.
+ * These are the NON-canonical variants ONLY; the catalog's own `desc` stays the
+ * canonical index-0 entry, and assembleInstitutions selects among
+ * [canonicalDesc, ...variants] with a pure fnv hash of (settlement seed + institution
+ * name) — ZERO rng draws (kernel/proseHash.pickVariant, canonical-at-zero). A
+ * settlement without a matching key keeps its single catalog desc unchanged.
  *
- * Representative sample (mechanism + taste-sample); the exhaustive 301 is deferred to the
- * owner taste-approval per docs/GENERATION_TIME_SHIFT_MAP_DOSSIER.md.
+ * CONTENT-GT-FINAL (Charge 2): grown from the taste-approved 56-institution sample to
+ * the EXHAUSTIVE catalog (every institution bearing a desc), 2 variants each, in the
+ * approved register — every stated fact (population gates, counts, prices, part-time/
+ * full-time status, charter/monopoly clauses) preserved verbatim in meaning. Guarded by
+ * tests/generators/dossierContent.test.js (walker + register + canonical-at-zero).
  */
 export const INSTITUTION_DESC_VARIANTS = Object.freeze({
+  "city|Adventuring|Dungeon delving supply district": [
+    "Specialised kit for the delving trade. +1 weapons, silver weapons, and the like.",
+    "Gear for those who go underground. +1 weapons, silver weapons, and such.",
+  ],
+  "city|Adventuring|Mercenary quarter": [
+    "Sellsword companies under proper organisation, mustering hundreds to thousands.",
+    "Organised bands of hired blades. Major forces, hundreds to thousands strong.",
+  ],
+  "city|Adventuring|Multiple adventurers' guilds": [
+    "Rival organisations.",
+    "Guilds set against one another.",
+  ],
+  "city|Adventuring|Sage's quarter": [
+    "Scholars and researchers, gathered in number.",
+    "A cluster of learned men and their researches.",
+  ],
+  "city|Crafts|Glassmakers": [
+    "Windows, vessels, and mirrors. The craft demands real skill.",
+    "Glass for windows, vessels, and mirrors. Expert work, not casual.",
+  ],
+  "city|Crafts|Luxury goods quarter": [
+    "Silks, spices, and other precious goods.",
+    "The trade in silk, spice, and precious things.",
+  ],
+  "city|Crafts|Printing house": [
+    "Books and broadsheets, where the technology has arrived.",
+    "Printed books and broadsheets, only if the craft exists at all.",
+  ],
+  "city|Crafts|Specialized metalworkers": [
+    "Armourers, swordsmiths, and jewellers, each in its own guild.",
+    "Swordsmiths, armourers, jewellers. The trades kept to separate guilds.",
+  ],
+  "city|Criminal|Black market": [
+    "Trade in forbidden goods, conducted out of sight.",
+    "Illicit wares, bought and sold in hidden places.",
+  ],
+  "city|Criminal|Contract killer": [
+    "A lone hand or small cell, working below the level that would sustain an assassins guild. Work comes through criminal go-betweens: less dependable, but deniable.",
+    "One killer, or a handful, operating beneath the threshold an assassins guild would need. Contracts arrive by way of criminal intermediaries, less reliable and for that reason harder to trace back.",
+  ],
+  "city|Criminal|Front businesses": [
+    "Warehouses, taverns, and shops that mask criminal work.",
+    "Criminal operations screened behind honest-looking warehouses, taverns, and shops.",
+  ],
+  "city|Criminal|Human trafficking network": [
+    "A wholly hidden operation that moves persons across borders outside any legal channel. It arises only where no lawful slave market stands. It runs its own logistics, its own safe houses, and its own bought border officials.",
+    "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. It appears only where no legal slave market exists to absorb the traffic. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
+  ],
+  "city|Criminal|Kidnapping ring": [
+    "It seizes free persons and slips them into slavery on forged provenance papers. Where a legal market stands it borrows that infrastructure; where none does, it works alone.",
+    "Free persons are taken and passed into slavery through counterfeit provenance documents. It leans on the legal market's apparatus wherever one exists, and runs its own where it does not.",
+  ],
+  "city|Criminal|Multiple criminal factions": [
+    "Rival gangs, forever disputing their turf.",
+    "Several gangs at odds, quarrelling over ground.",
+  ],
+  "city|Criminal|Smuggling network": [
+    "An organised trade in contraband.",
+    "Contraband, moved by an organised hand.",
+  ],
   "city|Criminal|Thieves' guild chapter": [
     "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.",
     "An arm of the wider criminal order, 30 to 100 strong. It needs a city of 10,000 or more to survive.",
+  ],
+  "city|Defense|Citadel": [
+    "The inner fortress, and the last refuge when a siege closes in.",
+    "An innermost stronghold, the city's final hold under siege.",
   ],
   "city|Defense|City walls and gates": [
     "Towered stone walls. Several gatehouses along their length.",
     "Masonry ramparts studded with towers and pierced by many gates.",
   ],
+  "city|Defense|Garrison": [
+    "Professional soldiers, kept by noble or crown.",
+    "A standing body of soldiers, in noble or royal pay.",
+  ],
   "city|Defense|Professional city watch": [
     "A standing force of the law, roughly one in a hundred residents.",
     "Full-time keepers of order, numbering about 1% of the city.",
+  ],
+  "city|Economy|Apothecary district": [
+    "Apothecary shops crowded into one quarter, where competition forces each to specialise. One leans to chirurgery, another to herbal preparations, a third to imported medicines. Between them they carry herbalism kits, medicinal herbs, surgical supplies, and basic antidotes.",
+    "A cluster of apothecaries pressed close enough that competition drives them apart in trade, some to surgery, some to herb-work, some to medicines brought from abroad. Herbalism kits, medicinal herbs, surgical supplies, and basic antidotes are all to be had.",
+  ],
+  "city|Economy|Auction house": [
+    "A formal house for the sale of costly goods: estates, ships, livestock, art, and now and then persons. It takes a premium from buyer and seller both.",
+    "The recognised venue for high-value lots, be they estates, ships, livestock, art, or on occasion persons. Both buyer and seller pay its premium.",
   ],
   "city|Economy|Banking houses": [
     "Loans, coin exchange, and letters of credit. The beginnings of banking, viable above 5,000 souls.",
     "Lending, currency exchange, and credit by letter. Rudimentary banking, and only past 5,000 population.",
   ],
+  "city|Economy|Barge and river transport company": [
+    "A fleet of river barges working scheduled and commissioned runs. It carries bulk cargo, passengers, and military supply along the river network.",
+    "River barges run in fleet, some to a schedule and some to order. Bulk freight, passengers, and army supply all move on them through the river network.",
+  ],
+  "city|Economy|Caravan masters' exchange": [
+    "The city-scale form: permanent offices where caravan masters, merchants, and armed escorts do business. It handles bonded freight, route intelligence, the assembly of armed convoys, and the settling of commercial disputes.",
+    "A city-scale exchange with standing offices, where caravan masters meet merchants and armed escorts to transact. Bonded freight, route intelligence, armed convoy assembly, and commercial dispute resolution are all conducted here.",
+  ],
+  "city|Economy|Cartographer's guild": [
+    "A guild of professional cartographers turning out regional maps, sea charts, property surveys, and military reconnaissance. It sells ready-made maps and works to commission. No maps in the region are more accurate than the city's.",
+    "Professional cartographers, guild-organised, producing regional maps, sea charts, property surveys, and reconnaissance maps for the army. Some sell off the shelf, others are drawn to order. The city's are the most accurate maps the region has.",
+  ],
+  "city|Economy|City granaries": [
+    "Several large grain stores feed the city between them. The state keeps them.",
+    "Grain held in large state-run stores and given out across the city.",
+  ],
+  "city|Economy|Craft guilds (30-80)": [
+    "Specialisation carried to an extreme, down to gold-beaters and mirror-makers.",
+    "Trades split so finely they yield gold-beaters and mirror-makers.",
+  ],
   "city|Economy|Daily markets": [
     "Trade that never closes, spread across several sites.",
     "Standing markets in more than one quarter, open every day.",
   ],
+  "city|Economy|Docks/port facilities": [
+    "Where there is coast or river to reach. Bulk trade cannot do without them.",
+    "Present only with sea or river access, and indispensable to trade in bulk.",
+  ],
+  "city|Economy|Furrier's district": [
+    "Fur processors, traders, and retailers gathered into one quarter. It is high-value work, for good fur is a luxury good.",
+    "Those who dress, trade, and sell fur, all pressed into one district. The trade runs high, quality pelts being luxuries.",
+  ],
+  "city|Economy|Harbour master's office": [
+    "It orders port traffic, gathers anchorage fees, assigns the berths, and holds the maritime law. Port cities only.",
+    "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced. Found only in port cities.",
+  ],
+  "city|Economy|Inns and taverns (district)": [
+    "Several inn districts, given over to merchants, travellers, and those who stay long.",
+    "More than one quarter of inns, serving the merchant, the traveller, and the lingering guest.",
+  ],
+  "city|Economy|Major annual fairs": [
+    "Merchants from abroad. Letters of credit are honoured.",
+    "Foreign traders attend, and credit by letter is taken.",
+  ],
+  "city|Economy|Merchant guilds (15-40)": [
+    "A force to be reckoned with in politics.",
+    "Politically, a power in their own right.",
+  ],
+  "city|Economy|Mint (official)": [
+    "Coin struck under state or noble charter. It sets a single standard of currency across the region and returns a steady revenue through seigniorage.",
+    "Chartered by state or noble to make coin, it standardises the region's currency and yields significant ongoing revenue by seigniorage.",
+  ],
+  "city|Economy|Multiple market squares": [
+    "Several standing market squares, one to a district.",
+    "Permanent markets in more than one square, each serving its own quarter.",
+  ],
+  "city|Economy|Shipyard": [
+    "A city-scale yard building large merchant ships and warships alike. It holds several dry docks, a ropewalk, a sail loft, and its own ironworks. It employs many, and matters to the state's defence.",
+    "Here large merchant and war vessels are built at city scale, across multiple dry docks, with ropewalk, sail loft, and dedicated ironworks besides. A major employer, and a strategic military asset.",
+  ],
+  "city|Economy|Slave market": [
+    "A settled auction block with holding pens, registered brokers, and papers of provenance. Commerce in persons, sanctioned by law, taxed and regulated and woven into the city's economy.",
+    "An established block for the sale of persons, with holding facilities, licensed brokers, and provenance documents. The law permits it; it is taxed, regulated, and set deep in the city economy.",
+  ],
+  "city|Economy|Slave market district": [
+    "A standing, licensed quarter for the trade in persons: auction halls, holding compounds, broker offices, and the legal and financial apparatus around them. It works at a scale no single market block could reach.",
+    "A permanent district, licensed for commerce in persons, with auction halls, holding compounds, broker offices, and the attendant legal and financial infrastructure. The scale runs well beyond one market block.",
+  ],
+  "city|Economy|Warehouse district": [
+    "Where merchant goods are stored.",
+    "Storage set aside for the merchants' stock.",
+  ],
+  "city|Entertainment|Bardic college": [
+    "Music taught in the formal way, with an amphitheatre and dormitories. Even a small campus wants 10,000 or more people.",
+    "A formal schooling in music: amphitheatre, dormitories, and all. Nothing under 10,000 sustains even a small campus.",
+  ],
+  "city|Entertainment|Brothel (red light district)": [
+    "A prostitution quarter, lawful or merely suffered.",
+    "A quarter given to prostitution, whether licensed or just tolerated.",
+  ],
+  "city|Entertainment|Colosseum/arena": [
+    "Gladiators, or beasts set to fight, on a massive scale.",
+    "Games of the arena, gladiatorial bouts or monster fights, staged at great size.",
+  ],
+  "city|Entertainment|Fighting pits": [
+    "Combat outside the law, or barely within it, held underground.",
+    "Fights unlawful or half-lawful, staged in hidden places.",
+  ],
+  "city|Entertainment|Gambling district": [
+    "Gaming houses packed together, kept honest by Zone of Truth.",
+    "A concentration of gaming houses, with Zone of Truth to enforce fair play.",
+  ],
+  "city|Entertainment|Gambling halls": [
+    "Houses given wholly to play. Not all of them lawful.",
+    "Establishments for gambling and nothing else, some of them illegal.",
+  ],
+  "city|Entertainment|Multiple theaters": [
+    "Standing venues, worked by professional companies.",
+    "Permanent playhouses with companies that make their living at it.",
+  ],
+  "city|Entertainment|Opera house": [
+    "High culture, kept by elite patrons.",
+    "A house of high art, sustained by the patronage of the elite.",
+  ],
+  "city|Entertainment|Red light district": [
+    "A large prostitution quarter, and an organised one.",
+    "Prostitution on a large and organised scale, held to one quarter.",
+  ],
   "city|Entertainment|Theaters": [
     "Fixed houses for performance.",
     "Standing venues for the stage.",
+  ],
+  "city|Exotic|Airship docking (high magic)": [
+    "Mooring towers, warded against the weather by magic. Eberron-style.",
+    "Towers to moor airships, with magical protection from the elements, in the Eberron manner.",
+  ],
+  "city|Exotic|Dragon resident": [
+    "An ancient wyrm that dwells within the city.",
+    "The city is home to an ancient dragon.",
+  ],
+  "city|Exotic|Dream parlors (high magic)": [
+    "Experiences worked by the 5th level Dream spell: lucid dreams shared between minds, and speech within them.",
+    "The 5th level Dream spell sold as experience, offering shared lucid dreaming and communication through it.",
+  ],
+  "city|Exotic|Golem workforce": [
+    "Constructed servants, where the magic allows them.",
+    "Servants made rather than born, if magic permits it.",
   ],
   "city|Government|Mayor and council": [
     "An elected council backed by a complete administrative staff.",
