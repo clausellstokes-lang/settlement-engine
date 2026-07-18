@@ -176,3 +176,40 @@ describe('ladder mover — dormancy golden (wired-but-dormant is byte-identical 
     expect(newsKinds.npc_ladder || 0, 'no npc_ladder beat when dormant').toBe(0);
   });
 });
+
+describe('ladder mover — lit-path anti-vacuity (the roster becomes a court)', () => {
+  it('gate ON: the ledger populates, the mirror lands, the governing faction has an ordered ladder', () => {
+    const lit = driveTicks('ladder-b', true, 6, 'one_week');
+    // The authoritative sidecar populates for the court town (id 'a').
+    const ledger = lit.campaign.worldState?.spatialLedgers?.npcLadder;
+    expect(ledger && Object.keys(ledger).length, 'the npcLadder ledger populates when lit').toBeGreaterThan(0);
+    const recA = ledger?.a;
+    expect(recA?.factions, 'the court town carries per-faction ladders').toBeTruthy();
+    // The Merchants' Guild ladder derived from the three ranked office-holders,
+    // top rung first (Guildmaster → Factor → Clerk by importance/dots/structural rank).
+    const fkeys = Object.keys(recA.factions);
+    const guildKey = fkeys.find((k) => recA.factions[k].rungs.includes('a:n_master'));
+    expect(guildKey, 'the guild ladder exists').toBeTruthy();
+    const rungs = recA.factions[guildKey].rungs;
+    expect(rungs, 'the ladder is ordered top-rung first by structural position')
+      .toEqual(['a:n_master', 'a:n_second', 'a:n_third']);
+    // Each rung carries a standing stock; the top rung seeds above the floor.
+    expect(recA.npcs['a:n_master'].stock, 'the top rung seeds highest')
+      .toBeGreaterThan(recA.npcs['a:n_third'].stock);
+    // The read-model mirror landed on the settlement (the ladderRead contract).
+    const ashford = lit.saves.find((s) => s.id === 'a')?.settlement;
+    expect(ashford?.npcLadder?.factions, 'the mirror carries the faction ladders').toBeTruthy();
+    const mRungs = ashford.npcLadder.factions[guildKey]?.rungs;
+    expect(Array.isArray(mRungs) && mRungs.length, 'the mirror carries the ordered rungs').toBe(3);
+    expect(mRungs[0].npcId).toBe('a:n_master');
+    expect(typeof mRungs[0].standing, 'the mirror standing is a normalized number').toBe('number');
+  }, 30_000);
+
+  it('gate ON: the plain faction-less town grows NO ladder (drop-when-empty)', () => {
+    const lit = driveTicks('ladder-b', true, 6, 'one_week');
+    const ledger = lit.campaign.worldState?.spatialLedgers?.npcLadder || {};
+    expect(ledger.b, 'a town with no ranked faction members carries no ladder record').toBeUndefined();
+    const briar = lit.saves.find((s) => s.id === 'b')?.settlement;
+    expect(briar?.npcLadder, 'no mirror on the faction-less town').toBeUndefined();
+  }, 30_000);
+});

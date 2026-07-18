@@ -69,7 +69,13 @@
  *   + lit anti-vacuity), tests/domain/npcLadderKernel.test.js (the conservation /
  *   window / goal / coherence / three-body / stigma / standing-loop pins).
  */
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
+import {
+  LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
+  rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
+  sortedRecord, mirrorOf,
+} from './npcLadderState.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -101,21 +107,11 @@ import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKe
  *   basis: string }} LadderGoal */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
 /** @typedef {{ sev: number, week: number }} LadderGrudge */
-/** @typedef {{ rungs: string[], cooldownUntil: number }} LadderFactionRec */
+/** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number }} LadderFactionRec */
 /** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding> }} LadderRecord */
 
-/** @param {unknown} v @param {number} fallback @returns {number} */
-export function num(v, fallback) {
-  return typeof v === 'number' && Number.isFinite(v) ? v : fallback;
-}
-/** @param {unknown} v @returns {Record<string, unknown>} */
-export function asObject(v) {
-  return v && typeof v === 'object' && !Array.isArray(v) ? /** @type {Record<string, unknown>} */ (v) : {};
-}
-/** Codepoint compare for byte-stable iteration. @param {string} a @param {string} b */
-export function compareCodepoint(a, b) { return a < b ? -1 : a > b ? 1 : 0; }
-/** @param {number} v @returns {number} */
-export function round4(v) { return Math.round(num(v, 0) * 10000) / 10000; }
+// The pure state helpers (num/asObject/compareCodepoint/round4 + derivation, decay,
+// normalization, byte-stable sort, mirror) live in the npcLadderState.js sibling leaf.
 
 // ── THE DORMANCY GATE (constitutional) — a virtual, defensively-read flag ──────
 /**
@@ -178,11 +174,155 @@ export function advanceNpcLadder({ snapshot, worldState, settlementUpdates, tick
  * @returns {NpcLadderAdvanceResult}
  */
 function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }) {
-  // Placeholder for the mechanism build-out. Until derivation lands, the lit path is
-  // itself a no-op (no ladder can move before it exists); the dormancy golden pins
-  // the DARK path, which never reaches here.
-  void snapshot; void tick; void now;
-  return { worldState, settlementUpdates, changed: false, newsEntries: [] };
+  void now;
+  const T = LADDER_TUNING;
+  const now2 = Math.max(0, Math.floor(num(tick, 0)));
+  const weeks = num(asObject(asObject(worldState).calendar).elapsedWeeks, now2);
+  const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
+  const itemById = new Map(items.map((it) => [String(it.id), it]));
+
+  /** @type {Map<string, number>} */
+  const updateIndex = new Map();
+  settlementUpdates.forEach((u, i) => updateIndex.set(String(u.saveId), i));
+  const freshSettlement = (/** @type {string} */ id) => {
+    const ui = updateIndex.get(String(id));
+    if (ui !== undefined) return settlementUpdates[ui]?.settlement;
+    return itemById.get(String(id))?.settlement;
+  };
+
+  const priorLedger = asObject(getSpatialLedger(worldState, 'npcLadder'));
+  /** @type {Record<string, LadderRecord>} */
+  const nextLedger = {};
+  /** @type {Map<string, Map<string, string>>} sid → (npcId → name) for the mirror */
+  const nameBySettlement = new Map();
+
+  const orderedIds = items.map((it) => String(it.id)).sort(compareCodepoint);
+
+  // ── PASS 1: per live settlement — derive/reconcile ladders, decay standings. ──
+  for (const sid of orderedIds) {
+    const s = freshSettlement(sid);
+    if (!s) continue;
+    const prior = normalizeRecord(priorLedger[sid], weeks);
+    const factionsList = Array.isArray(asObject(asObject(s).powerStructure).factions)
+      ? /** @type {Array<Record<string, unknown>>} */ (asObject(asObject(s).powerStructure).factions) : [];
+    const cap = rungCapForTier(/** @type {string} */ (asObject(s).tier));
+
+    /** @type {Record<string, import('./npcLadderKernel.js').LadderFactionRec>} */
+    const factions = {};
+    /** @type {Record<string, import('./npcLadderKernel.js').LadderStanding>} */
+    const npcs = {};
+    /** @type {Map<string, string>} */
+    const nameByNid = new Map();
+    /** @type {Set<string>} */
+    const activeNids = new Set();
+
+    for (const faction of factionsList) {
+      const fkey = ladderFactionKey(faction);
+      if (factions[fkey]) continue; // first faction wins a duplicate key (byte-stable)
+      const eligible = eligibleMembersOf(sid, s, faction, fkey);
+      for (const m of eligible) nameByNid.set(m.npcId, m.name);
+      const eligibleIds = eligible.map((m) => m.npcId);
+      const eligibleSet = new Set(eligibleIds);
+      const priorRec = prior.factions[fkey];
+
+      // Reconcile the persistent ordering: keep prior rungs still eligible (the ladder
+      // is CONTESTED, not re-derived — challenges own the ordering); append new eligible
+      // members at the FLOOR (they enter at the bottom and must climb); cap new additions.
+      let rungs;
+      if (priorRec && priorRec.rungs.length) {
+        const keptPrior = priorRec.rungs.filter((nid) => eligibleSet.has(nid));
+        const priorSet = new Set(priorRec.rungs);
+        const newOnes = eligibleIds.filter((nid) => !priorSet.has(nid));
+        const room = Math.max(0, cap - keptPrior.length);
+        rungs = [...keptPrior, ...newOnes.slice(0, room)];
+      } else {
+        rungs = eligibleIds.slice(0, cap); // first-lit derivation from structural order
+      }
+      if (!rungs.length) continue;
+
+      // Standings: decay an existing record toward baseline; seed a new rung by its
+      // structural height (the defender's-advantage head start).
+      rungs.forEach((nid, rungIndex) => {
+        activeNids.add(nid);
+        const priorSt = prior.npcs[nid];
+        if (priorSt) {
+          const decayed = decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week));
+          npcs[nid] = { ...priorSt, stock: round4(decayed), week: weeks };
+        } else {
+          npcs[nid] = {
+            stock: round4(seedStandingForRung(rungIndex, rungs.length)),
+            since: weeks, week: weeks, goal: null, stigma: null, grudges: {},
+          };
+        }
+      });
+
+      const power = num(asObject(faction).power, 0);
+      factions[fkey] = {
+        rungs,
+        cooldownUntil: priorRec ? priorRec.cooldownUntil : 0,
+        lastPower: power,
+      };
+    }
+
+    // Orphan standings (an NPC that held a rung last tick but is on none now): decay on
+    // the base clock; keep only while still meaningful, else prune (drop-when-empty).
+    for (const nid of Object.keys(prior.npcs)) {
+      if (activeNids.has(nid)) continue;
+      const priorSt = prior.npcs[nid];
+      const decayed = decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week));
+      const meaningful = Math.abs(decayed - T.STAND_BASELINE) >= T.PRUNE_EPSILON
+        || priorSt.goal || priorSt.stigma || Object.keys(priorSt.grudges).length > 0;
+      if (!meaningful) continue;
+      npcs[nid] = { ...priorSt, stock: round4(decayed), week: weeks };
+    }
+
+    nameBySettlement.set(sid, nameByNid);
+    nextLedger[sid] = { factions, npcs };
+  }
+
+  // ── PASS 2: mirror the read model onto the roster (self-healing projection). ──
+  let nextUpdates = settlementUpdates;
+  let cloned = false;
+  for (const sid of orderedIds) {
+    const ui = updateIndex.get(sid);
+    if (ui === undefined) continue;
+    const s = freshSettlement(sid);
+    if (!s) continue;
+    const rec = nextLedger[sid];
+    // Modifiers are neutral until the §8 standing loop lands — an empty map ⇒ the mirror
+    // omits every modifier ⇒ ladderRead coalesces to null/0 ⇒ byte-identical at the read.
+    const desired = rec ? mirrorOf(/** @type {import('./npcLadderKernel.js').LadderRecord} */ (rec), nameBySettlement.get(sid) || new Map(), new Map()) : null;
+    const current = asObject(s).npcLadder;
+    const same = JSON.stringify(current ?? null) === JSON.stringify(desired ?? null);
+    if (same) continue;
+    if (!cloned) { nextUpdates = settlementUpdates.slice(); cloned = true; }
+    if (desired == null) {
+      const { npcLadder: _drop, ...rest } = /** @type {Record<string, unknown>} */ (/** @type {unknown} */ (s));
+      nextUpdates[ui] = { ...nextUpdates[ui], settlement: /** @type {import('./npcLadderKernel.js').LadderSettlement} */ (rest) };
+    } else {
+      nextUpdates[ui] = { ...nextUpdates[ui], settlement: { ...s, npcLadder: desired } };
+    }
+  }
+
+  // ── PERSIST (drop-when-empty). Nothing changed ⇒ byte-identical. ──
+  /** @type {Record<string, unknown>} */
+  const persisted = {};
+  for (const sid of Object.keys(nextLedger).sort(compareCodepoint)) {
+    const sorted = sortedRecord(/** @type {import('./npcLadderKernel.js').LadderRecord} */ (nextLedger[sid]));
+    if (sorted) persisted[sid] = sorted;
+  }
+  let nextWorldState = worldState;
+  let changed = cloned;
+  const prevSerialized = JSON.stringify(Object.keys(priorLedger).length ? priorLedger : null);
+  const nextSerialized = JSON.stringify(Object.keys(persisted).length ? persisted : null);
+  if (prevSerialized !== nextSerialized) {
+    nextWorldState = Object.keys(persisted).length
+      ? setSpatialLedger(worldState, 'npcLadder', persisted)
+      : dropSpatialLedger(worldState, 'npcLadder');
+    changed = true;
+  }
+
+  return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries: [] };
 }
 
 // ── THE PULSE SEAM — growth+fabric+consequence composed with the ladder mover ──
