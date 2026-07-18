@@ -1120,6 +1120,11 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ GUIDANCE-COHERENCE CHECKPOINTS PINNED (2026-07-18, owner coherence question):** four
+binding checkpoints added to the craft brief for phases 3-5 (whispers→marginalia w/ registry
+intact · title census monotone down w/ the false-positive caveat · Handbook + WorldMapToolbar
+deferrals re-flagged not absorbed · dissociation test × artifact test compose). The two
+waves are one philosophy at two layers; the sweep lands them as one system.
 **⬛ OWNER RESCISSION (2026-07-18, minutes later): LOCALIZATION STOPPED.** On hearing
 the scope boundary (UI chrome localizes; engine prose = per-language corpora + goldens,
 a content-layer rewrite per language), the owner stopped the wave: "then stop the

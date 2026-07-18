@@ -65,6 +65,27 @@ and phases 3-4 close only when the census carries zero undispositioned entries. 
 one-fiction pass (empty states, errors, loaders) rides the same census. No silent skips;
 the preview legibility review walks the census, not a sample.
 
+## GUIDANCE-LAYER COHERENCE (binds phases 3-5; recorded 2026-07-18)
+The craft wave and THE GUIDANCE LAYER (DESIGN_GUIDANCE_LAYER.md, frozen 2026-07-15) are
+the same philosophy at two layers — guidance made the TEACHING diegetic (the dissociation
+test), craft makes the MATERIAL diegetic (the artifact test). The sweep must land them as
+one system:
+1. WHISPERS GET A MANUSCRIPT HOME — registered whispers/hints restyle as marginalia and
+   clerk's annotations (manuscript grammar has real margins); NEVER unhost or bypass the
+   whisper registry/strict walker (UNWIRED_WHISPERS ceiling 0 stays 0).
+2. TITLE CENSUS IS MONOTONE DOWN — native title= tooltips break the fiction (gray browser
+   box on parchment); the sweep continues GUIDE-2b's ratchet (500 at last fold) downward,
+   never up. ⚠️ census regex counts component props (<X title=>) as false positives —
+   removing/renaming those also moves the number; report deltas by class.
+3. RECORDED DEFERRALS STAY RULED — the Keeper's Handbook full narrative rewrite and the
+   WorldMapToolbar teaching-title tranche are DELIBERATE deferrals (owner-voice work /
+   map-coordinated pass); the sweep restyles their CONTAINERS only and re-flags both in
+   its report — it does not absorb them silently.
+4. THE TESTS COMPOSE — every teaching element passes BOTH: the dissociation test ("could
+   this be screenshotted and mistaken for the world's own furniture?") and the artifact
+   test ("what document is this?"). A styled tooltip that teaches out-of-world FAILS even
+   if beautiful.
+
 ## THE DEPTH STANDARD (owner-ratified 2026-07-17 — the standing check on every craft fold)
 The bar is not screenshot beauty; it is DEPTH, CONSISTENCY, VALIDATION, AND EXECUTION
 ACROSS THE ENTIRE EXPERIENCE ("the best Fable can do" — the owner's framework, ledgered).
