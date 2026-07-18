@@ -1120,6 +1120,31 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: DOOR 2 — THE TABLE LAYER (fog v1) (2026-07-17) → w7-prep @ 08613d1b** (merge
+of claude/fog-table-layer tip 9f41b75f, 6 commits off d0857995; 21 files NUL-clean; the
+lane survived one limit strike + two stall cures). THE LAST MAP WAVE IS HOME: fogSessions
+sidecar (interiorEdits idiom; denylist-safe pinned; dormancy byte-identical; reveals
+keyed on stable model ids — a reroll never loses a reveal; bounded 12 sessions/400 ids) ·
+semantic-snap brush along real edges (version-agnostic street synthesis) · SVG mask union
+(overlap-correct; townMapDraw untouched) · the fogged handout through the WHOLE export
+matrix (absent ⇒ byte-identical, toBe-pinned) · TWO AUDIENCES ONE PROJECTION (the live
+player view renders EXACTLY the handout export — equality by construction) · fail-closed
+(fogSessions ∉ PUBLIC_TOPLEVEL_KEYS, pinned) · THE PREMIUM GATE per the ladder ruling
+(locked-VISIBLE drawn padlock + purchase moment; stored sessions never rewritten locked) ·
+SM-5 analytics inherited (3 features, zero new names). Lane: 112/112 pins, +209 B eager
+measured vs base (under the line), strict-clean own files. FOLD RECEIPTS on the merged
+tree: fog pins subset 22/22 · tsc 0 · build ✓ · dist 150/150; **the clean full suite =
+the composite gate by design** (the lane's full-suite runs were owner-parallel-load
+flakes — every red green isolated + base-proven; both its real reds were its own and
+fixed with proof). JUDGMENTs ×5 vetoable in the lane report (sidecar-over-mapEdits ·
+mask-over-drawops · trampoline+lazy-body · purchase-modal-not-new-moment ·
+handout-in-panel). SEAMS: §6 gallery full-mode strip rides the owner-gated gallery
+opt-in · PDF/VTT fogged variants absent by design v1 · panorama shows no fog (a
+presentation view). **ALL SEVEN MAP WAVES ARE NOW FOLDED.** LANDFORMS + GATE-WIRING
+DISPATCH at this fold per the standing queue. THE SECOND LIMIT STRIKE (4 lanes killed
+late-stage) recovered clean: doc-wave 4 commits + checkpoint · S7 six · rulings-wiring
+two (one red file from done) · content-gt-final ELEVEN — the commit-early armor held
+everywhere; all four resumed with focused-gate instructions.
 **⬛ ERRATUM: THE W2 RE-DISPATCH WAS STALE (2026-07-17, the lane's stop-and-report —
 verify-first catching the MANAGER's error at 17-tool-call cost):** W2 feed-retention was
 ALREADY FOLDED 2026-07-16 via cherry-pick 4cf84a40 (patch-id identical to the parked
