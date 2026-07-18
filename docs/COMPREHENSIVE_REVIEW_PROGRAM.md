@@ -1120,6 +1120,23 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD: CONTENT-VT-2 (2026-07-17) → w7-prep @ 1c22428c** (merge of claude/content-vt-2
+tip 39a56a1d, 4 commits off a4343044; spot-checked: exactly 8 files, fence held, NUL
+clean). The view-time-thin surfaces CONTENT-VT deferred-with-reason are GROWN: newsBody
+1→4/cell · rumor headline frames 1→4/band (seeded on eventRef — the same event frames
+identically at every settlement that hears it) · chronicle quiet-advance framing 1→4/span
+· the market crier 1→4/tag. Every mechanism CANONICAL-AT-ZERO (all legacy/id-less callers
+byte-identical); facts ride every frame unchanged; **0 eager bytes grep-proven** (all 14
+new strings in lazy chunks only); **zero golden/snapshot movement** (the rumor golden
+hashes structured ledger records, never headlines). Charge-4 sweep dispositioned every
+other 1-variant view-time surface (surveyor's notes/whispers/S2 titles correctly
+deferred w/ survey-grounded reasons). Lane ran the FULL gate green pre-protocol-change
+(suite exit 0, strict 0/0, dist 150/150); fold receipts on the merged tree: pins 61/61 ·
+tsc 0 · build ✓ · dist 150/150. JUDGMENTs ×4 vetoable (local fnv copies per the
+chunk-isolation idiom · the market-crier exact-frame assertion evolved to a fact-pin —
+a unit-assertion update, NOT a golden re-record · chronicle populated-branch untouched ·
+eventRef seeding). One honest view-time note recorded: WHICH equally-valid variant
+renders differs for id-bearing entries — the intended variety, nothing persisted moves.
 **⬛ THE GATE PROTOCOL CHANGE (2026-07-17, owner: "if we switched gates to fable will it
 be faster?" — answered + adopted, vetoable):** model-switching would NOT speed gates
 (vitest wall-clock is machine-bound; Fable-as-implementer would also invert the standing
