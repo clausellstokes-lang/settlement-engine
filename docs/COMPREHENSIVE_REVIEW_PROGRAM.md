@@ -1120,6 +1120,12 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE FUNCTIONALITY RETENTION LAW (owner, 2026-07-18: "even with the website
+overhaul, retain all the functionality!"):** written into the craft brief as a binding
+law for every phase — recomposition never rewrite; functional parity per surface; the
+existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
+= violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
+and the conflict is reported. Relayed mid-flight to the running lane.
 **⬛ THE SEAL APPROVED — IMPLEMENT + PLACE (owner, 2026-07-18: "i like the seal;logo
 impliment it also place it appropriately"):** the simplified device is the APPROVED house
 mark (favicon A stands). Placement register relayed to the running lane — core (already

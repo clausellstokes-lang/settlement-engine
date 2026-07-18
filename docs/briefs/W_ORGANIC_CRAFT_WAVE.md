@@ -86,6 +86,23 @@ one system:
    test ("what document is this?"). A styled tooltip that teaches out-of-world FAILS even
    if beautiful.
 
+## THE FUNCTIONALITY RETENTION LAW (owner order 2026-07-18 — binds every phase)
+The overhaul is a RECOMPOSITION, never a functional rewrite. Every capability the app has
+today survives the sweep intact: every control, route, modal, keyboard path, focus order,
+aria behavior, form flow, store interaction, analytics event, entitlement gate, export
+path, and edge case. Concretely:
+1. A recomposed surface keeps FUNCTIONAL PARITY — same actions reachable, same states
+   handled, same wiring to the store; only the presentation layer moves. Removing or
+   "simplifying away" an affordance is FORBIDDEN without a DEFERRED-with-reason census
+   row naming it.
+2. The proof is the EXISTING TEST SUITE: every test that covered a touched surface stays
+   green untouched — rewriting a test to match reduced behavior is a violation, not a fix.
+   New craft tests ADD; they never replace behavioral pins.
+3. Census dispositions cannot drop functionality: INSTRUMENT-EXEMPT exists precisely so
+   that a surface too functional to recompose safely keeps its current chrome.
+4. When recomposition and functionality conflict, FUNCTIONALITY WINS and the conflict is
+   reported — the fiction bends before the tool does.
+
 ## THE DEPTH STANDARD (owner-ratified 2026-07-17 — the standing check on every craft fold)
 The bar is not screenshot beauty; it is DEPTH, CONSISTENCY, VALIDATION, AND EXECUTION
 ACROSS THE ENTIRE EXPERIENCE ("the best Fable can do" — the owner's framework, ledgered).
