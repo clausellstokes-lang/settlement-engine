@@ -164,3 +164,63 @@ describe('ladder goals — standing deposits through the mover (§9 weighted dee
     expect(JSON.stringify(a.rec)).toBe(JSON.stringify(b.rec));
   });
 });
+
+describe('§8 the standing loop + §7 coup truncation', () => {
+  const npcs3 = [
+    npc('n_master', 'Master', 'pillar', 3, 'dominant'),
+    npc('n_factor', 'Factor', 'key', 2, 'subordinate'),
+    npc('n_clerk', 'Clerk', 'notable', 1, 'minor'),
+  ];
+
+  it('§8a the mirror carries a bounded leadership-quality power modifier (single-writer)', () => {
+    const { settlement } = advance(courtSettlement(npcs3));
+    const fac = settlement.npcLadder.factions;
+    const fkey = Object.keys(fac).find((k) => fac[k].rungs.some((r) => r.npcId === 'a:n_master'));
+    const mod = fac[fkey].powerModifier;
+    expect(typeof mod, 'the power modifier rides the mirror when lit').toBe('number');
+    expect(mod).toBeGreaterThanOrEqual(0.85);
+    expect(mod).toBeLessThanOrEqual(1.15);
+  });
+
+  it('§8 dark-modifier contract: ladderRead coalesces an absent modifier — a dark world is byte-identical', () => {
+    // A faction-less town grows no ladder ⇒ no mirror ⇒ the read returns NULL (not 1.0).
+    const { settlement } = advance({ name: 'Empty', tier: 'town', powerStructure: { factions: [] }, npcs: [], activeConditions: [] });
+    expect(settlement?.npcLadder, 'no mirror on a faction-less town').toBeUndefined();
+  });
+
+  it('§7 COUP TRUNCATION: a fresh coup this tick seals the governing faction (cooldown set, no succession)', () => {
+    // A governing faction whose bottom rung far outclasses the top (would churn) — but a
+    // coup landed THIS tick, so the ladder DEFERS: the faction is sealed for the interregnum.
+    const coupTown = () => ({
+      name: 'Ashford', tier: 'city',
+      powerStructure: { factions: [{ ...guild, isGoverning: true }], publicLegitimacy: { score: 55 } },
+      npcs: [npc('n_a', 'A', 'pillar', 3, 'dominant'), npc('n_b', 'B', 'key', 2, 'subordinate')],
+      institutions: [],
+      activeConditions: [{ archetype: 'government_overthrown', triggeredAt: { tick: 260 } }],
+    });
+    const { rec } = advance(coupTown(), { weeks: 260, tick: 260, priorLedger: null });
+    const fkey = Object.keys(rec.factions)[0];
+    expect(rec.factions[fkey].cooldownUntil, 'the coup sealed the faction for the interregnum').toBeGreaterThan(260);
+    // The ladder deferred — no rung inversion the coup didn't author (rungs stay structural).
+    expect(rec.factions[fkey].rungs).toEqual(['a:n_a', 'a:n_b']);
+  });
+
+  it('§8b instability is a DECAYING tax: with no contests it fades toward zero over weeks', () => {
+    // Seed a faction record carrying instability; a quiet advance decays it.
+    const withInstab = {
+      a: { factions: { [ladderFactionKeyFor(guild)]: { rungs: ['a:n_a', 'a:n_b'], instability: 0.8, week: 200, lastPower: 60 } }, npcs: {} },
+    };
+    const town = {
+      name: 'Ashford', tier: 'city', powerStructure: { factions: [guild], publicLegitimacy: { score: 55 } },
+      npcs: [npc('n_a', 'A', 'pillar', 3, 'dominant'), npc('n_b', 'B', 'key', 2, 'subordinate')], institutions: [], activeConditions: [],
+    };
+    const { rec } = advance(town, { weeks: 400, tick: 400, priorLedger: withInstab }); // 200 weeks later
+    const fkey = Object.keys(rec.factions)[0];
+    expect(rec.factions[fkey].instability, 'instability decayed over ~2 half-lives').toBeLessThan(0.4);
+  });
+});
+
+/** The ladder faction key for a faction entry (mirrors npcLadderState.ladderFactionKey). */
+function ladderFactionKeyFor(faction) {
+  return faction.id || `fac.${String(faction.name).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}`;
+}

@@ -58,6 +58,15 @@ export const LADDER_TUNING = Object.freeze({
   GRUDGE_HALF_LIFE_WEEKS: 156, // ~3 years base — grudges are real but fade
   STIGMA_MINT_SEV: 1.0,        // a fresh exposure stamps a full mark (refresh extends)
   MARK_PRUNE_EPSILON: 0.05,
+  // §8 THE STANDING LOOP (ladder→faction feedback, single-writer to the mirror):
+  // (a) leadership quality → a bounded power modifier; (b) churn instability (a decaying
+  // tax on the faction, the fabric half-life idiom); (c) legitimacy-of-the-how modifier.
+  LEADERSHIP_GAIN: 0.3,        // quality (−0.5..~+0.5 centred) × this ⇒ ±~0.15 power swing
+  POWER_MOD_MIN: 0.85, POWER_MOD_MAX: 1.15,
+  INSTABILITY_HALF_LIFE_WEEKS: 104, // churn fades over ~2 years
+  CHURN_BUMP: 0.35,            // per contested challenge this advance (win OR fail)
+  LEGIT_TAX: 0.12,             // per NORM-BREAKING (leverage/stigma) succession
+  LEGIT_MOD_MIN: 0.8,
 });
 
 // Ladder length by settlement tier (3–5 rungs; a thorp is a single seat). JUDGMENT.
@@ -267,7 +276,10 @@ function normalizeGrudges(v) {
 export function normalizeFactionRec(v) {
   const o = asObject(v);
   const rungs = Array.isArray(o.rungs) ? o.rungs.filter((r) => typeof r === 'string' && r).map(String) : [];
-  return { rungs, cooldownUntil: Math.floor(num(o.cooldownUntil, 0)), lastPower: num(o.lastPower, 0) };
+  return {
+    rungs, cooldownUntil: Math.floor(num(o.cooldownUntil, 0)), lastPower: num(o.lastPower, 0),
+    instability: clamp01(num(o.instability, 0)), week: num(o.week, 0),
+  };
 }
 /** @param {unknown} v @param {number} weeks @returns {import('./npcLadderKernel.js').LadderRecord} */
 export function normalizeRecord(v, weeks) {
@@ -315,11 +327,12 @@ export function sortedRecord(rec) {
   const factions = {};
   for (const fkey of Object.keys(rec.factions).sort(compareCodepoint)) {
     const f = rec.factions[fkey];
-    if (!f.rungs.length && !(f.cooldownUntil > 0) && !(f.lastPower > 0)) continue;
+    if (!f.rungs.length && !(f.cooldownUntil > 0) && !(f.lastPower > 0) && !(f.instability > 0)) continue;
     /** @type {Record<string, unknown>} */
     const fr = { rungs: f.rungs };
     if (f.cooldownUntil > 0) fr.cooldownUntil = f.cooldownUntil;
     if (f.lastPower > 0) fr.lastPower = round4(f.lastPower);
+    if (f.instability > 0) { fr.instability = round4(f.instability); fr.week = f.week; }
     factions[fkey] = fr;
   }
   /** @type {Record<string, unknown>} */

@@ -70,7 +70,7 @@
  *   window / goal / coherence / three-body / stigma / standing-loop pins).
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
-import { clamp } from '../../kernel/math.js';
+import { clamp, clamp01 } from '../../kernel/math.js';
 import { npcId } from './npcAgency.js';
 import { memoryHorizonMultiplierOf } from './relationshipEvolution.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
@@ -80,7 +80,7 @@ import {
   sortedRecord, mirrorOf, maintainMarks,
 } from './npcLadderState.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
-import { CHALLENGE_TUNING, resolveFactionChallenges } from './npcLadderChallenge.js';
+import { CHALLENGE_TUNING, resolveFactionChallenges, clashOf } from './npcLadderChallenge.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -114,7 +114,7 @@ import { CHALLENGE_TUNING, resolveFactionChallenges } from './npcLadderChallenge
  *   progress: number, basis: string }} LadderGoal */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
 /** @typedef {{ sev: number, week: number }} LadderGrudge */
-/** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number }} LadderFactionRec */
+/** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number, instability: number, week: number }} LadderFactionRec */
 /** @typedef {{ factions: Record<string, LadderFactionRec>, npcs: Record<string, LadderStanding> }} LadderRecord */
 
 // The pure state helpers (num/asObject/compareCodepoint/round4 + derivation, decay,
@@ -255,6 +255,8 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   const nextLedger = {};
   /** @type {Map<string, Map<string, string>>} sid → (npcId → name) for the mirror */
   const nameBySettlement = new Map();
+  /** @type {Map<string, Map<string, { power: number, legit: number, instab: number }>>} sid → §8 modifiers */
+  const modBySettlement = new Map();
 
   const orderedIds = items.map((it) => String(it.id)).sort(compareCodepoint);
 
@@ -284,6 +286,11 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const nameByNid = new Map();
     /** @type {Set<string>} */
     const activeNids = new Set();
+    /** @type {Map<string, { power: number, legit: number, instab: number }>} §8 mirror modifiers */
+    const modByFkey = new Map();
+    // COUP TRUNCATION (§7): a fresh coup this tick replaces the top rung wholesale — the
+    // ladder DEFERS (truncates the stage faction's pending challenges + seals it).
+    const coupTruncated = coupTruncatedFkeys(s, factionsList, now2);
 
     for (const faction of factionsList) {
       const fkey = ladderFactionKey(faction);
@@ -345,12 +352,17 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       // ── THE CHALLENGE ENGINE (§2/§3/§11.4): windowed, seeded, margin-gated contests
       // (a win SWAPS the pair — conservation; a loss drops the challenger — the stake). ──
       /** @type {LadderFactionRec} */
-      const rec = { rungs, cooldownUntil: priorRec ? priorRec.cooldownUntil : 0, lastPower: power };
-      const plan = resolveFactionChallenges({
-        rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
-        seed, factionRising, factionFalling, freshExposed, worldState,
-        realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
-      });
+      const rec = { rungs, cooldownUntil: priorRec ? priorRec.cooldownUntil : 0, lastPower: power, instability: priorRec ? priorRec.instability : 0, week: weeks };
+      const truncated = coupTruncated.has(fkey);
+      const plan = truncated
+        ? /** @type {ReturnType<typeof resolveFactionChallenges>} */ ({ nextRungs: rungs, events: [], grudgeMints: [], withdraws: [], successions: 0 })
+        : resolveFactionChallenges({
+          rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
+          seed, factionRising, factionFalling, freshExposed, worldState,
+          realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
+        });
+      if (truncated) rec.cooldownUntil = Math.max(rec.cooldownUntil, weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS);
+      let normBreakingWins = 0;
       if (plan.events.length) {
         rec.rungs = plan.nextRungs;
         // The STAKE (§2): a failed challenge stamps a D5 grudge (hardens the same defender
@@ -367,8 +379,27 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
           rec.cooldownUntil = weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS; // (3) the interregnum
           realmSuccessions += plan.successions;
         }
-        for (const ev of plan.events) newsEntries.push(ladderBeat(sid, townName, fkey, ev, now2, now));
+        // §8c LEGITIMACY READS THE HOW: a norm-breaking usurpation (a stigmatized or covert-
+        // compromised climber taking the seat) taxes legitimacy; a clean windowed rise is renewal.
+        for (const ev of plan.events) {
+          if (ev.kind === 'rise') {
+            const cst = npcs[ev.challengerNid];
+            const cobj = npcByNid.get(ev.challengerNid) || {};
+            if ((cst && cst.stigma) || cobj.corrupt === true) normBreakingWins += 1;
+          }
+          newsEntries.push(ladderBeat(sid, townName, fkey, ev, now2, now));
+        }
       }
+      // §8 THE STANDING LOOP (single-writer to the mirror): leadership quality → the power
+      // modifier; churn → the decaying instability tax; the HOW → the legitimacy modifier.
+      const decayWeeks = priorRec ? Math.max(0, weeks - priorRec.week) : 0;
+      const loop = factionLoopModifiers({
+        rungs: rec.rungs, npcs, npcByNid, faction,
+        priorInstability: priorRec ? priorRec.instability : 0, decayWeeks,
+        contests: plan.events.length, normBreakingWins,
+      });
+      rec.instability = loop.instab;
+      modByFkey.set(fkey, { power: loop.power, legit: loop.legit, instab: loop.instab });
       factions[fkey] = rec;
     }
 
@@ -385,6 +416,7 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     }
 
     nameBySettlement.set(sid, nameByNid);
+    modBySettlement.set(sid, modByFkey);
     nextLedger[sid] = { factions, npcs };
   }
 
@@ -397,9 +429,9 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const s = freshSettlement(sid);
     if (!s) continue;
     const rec = nextLedger[sid];
-    // Modifiers are neutral until the §8 standing loop lands — an empty map ⇒ the mirror
-    // omits every modifier ⇒ ladderRead coalesces to null/0 ⇒ byte-identical at the read.
-    const desired = rec ? mirrorOf(/** @type {import('./npcLadderKernel.js').LadderRecord} */ (rec), nameBySettlement.get(sid) || new Map(), new Map()) : null;
+    // §8 modifiers ride the mirror when non-neutral (absent ⇒ ladderRead coalesces to
+    // null/0 ⇒ byte-identical at the flag-gated read site).
+    const desired = rec ? mirrorOf(/** @type {import('./npcLadderKernel.js').LadderRecord} */ (rec), nameBySettlement.get(sid) || new Map(), modBySettlement.get(sid) || new Map()) : null;
     const current = asObject(s).npcLadder;
     const same = JSON.stringify(current ?? null) === JSON.stringify(desired ?? null);
     if (same) continue;
@@ -432,6 +464,61 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   if (newsEntries.length) changed = true;
 
   return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries };
+}
+
+// ── §8 THE STANDING LOOP + §7 coup truncation ─────────────────────────────────
+/**
+ * The faction's §8 mirror modifiers (single-writer — projected onto the mirror; the read
+ * side consumes them when lit): (a) LEADERSHIP QUALITY → a bounded power modifier (the
+ * rung-holders' mean standing + goal service − clash lifts/sinks the faction above its
+ * institutional base); (b) CHURN → a decaying instability tax (the fabric half-life idiom,
+ * bumped per contested challenge); (c) LEGITIMACY-OF-THE-HOW → a modifier taxed by norm-
+ * breaking usurpations. PURE.
+ * @param {{ rungs: string[], npcs: Record<string, LadderStanding>, npcByNid: Map<string, Record<string, unknown>>,
+ *   faction: unknown, priorInstability: number, decayWeeks: number, contests: number, normBreakingWins: number }} a
+ * @returns {{ power: number, legit: number, instab: number }}
+ */
+function factionLoopModifiers(a) {
+  const { rungs, npcs, npcByNid, faction, priorInstability, decayWeeks, contests, normBreakingWins } = a;
+  let q = 0;
+  let n = 0;
+  for (const nid of rungs) {
+    const st = npcs[nid];
+    if (!st) continue;
+    const clash = clashOf(npcByNid.get(nid) || {}, faction);
+    const goalProg = st.goal ? st.goal.progress : 0;
+    q += clamp01(st.stock / LADDER_TUNING.STAND_MAX) - 0.5 * clash + 0.3 * goalProg;
+    n += 1;
+  }
+  const quality = n ? q / n : 0.5;
+  const power = clamp(1 + LADDER_TUNING.LEADERSHIP_GAIN * (quality - 0.5) * 2, LADDER_TUNING.POWER_MOD_MIN, LADDER_TUNING.POWER_MOD_MAX);
+  const decayed = decayWeeks > 0 ? priorInstability * Math.pow(0.5, decayWeeks / LADDER_TUNING.INSTABILITY_HALF_LIFE_WEEKS) : priorInstability;
+  const instab = clamp01(decayed + LADDER_TUNING.CHURN_BUMP * contests);
+  const legit = clamp(1 - LADDER_TUNING.LEGIT_TAX * normBreakingWins, LADDER_TUNING.LEGIT_MOD_MIN, 1);
+  return { power: round4(power), legit: round4(legit), instab: round4(instab) };
+}
+
+/**
+ * The faction keys whose ladder a FRESH coup this tick truncates (§7 — a coup replaces the
+ * top rung wholesale; the ladder defers, never contradicts it). Reads the settlement's
+ * fresh coup condition (government_overthrown / coup_suppressed, triggeredAt.tick === now)
+ * and truncates the GOVERNING faction (the coup's stage). PURE.
+ * @param {Record<string, unknown>} s @param {Array<Record<string, unknown>>} factionsList @param {number} now2
+ * @returns {Set<string>}
+ */
+function coupTruncatedFkeys(s, factionsList, now2) {
+  /** @type {Set<string>} */
+  const set = new Set();
+  const conds = Array.isArray(asObject(s).activeConditions) ? /** @type {unknown[]} */ (asObject(s).activeConditions) : [];
+  const fresh = conds.some((c) => {
+    const co = asObject(c);
+    const arch = String(co.archetype || '');
+    if (arch !== 'government_overthrown' && arch !== 'coup_suppressed') return false;
+    return Math.floor(num(asObject(co.triggeredAt).tick, -1)) === now2;
+  });
+  if (!fresh) return set;
+  for (const f of factionsList) if (asObject(f).isGoverning === true) set.add(ladderFactionKey(f));
+  return set;
 }
 
 // ── The ladder beat (house voice) ─────────────────────────────────────────────
