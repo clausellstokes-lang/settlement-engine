@@ -312,6 +312,40 @@ function causalReceipt(tag, driftBand) {
   return driftBand === 'surplus' ? 'for the roads run thick with wagons' : 'for the season has been generous';
 }
 
+// ── The CRIER-LINE frame pools (content-vt-2) ───────────────────────────────
+// The market crier cried ONE fixed frame ("{label} runs {priced} — dear,
+// {receipt}."), so every settlement's economics tab read the same shape. Each
+// tag (dear/cheap) is now a small pool of interchangeable frames; the FACTS —
+// the good {label}, the coarse {priced} quote, and the causal {receipt} — ride
+// every frame unchanged (mirror-not-rederive), and only the crier's phrasing
+// varies. Selection is a pure FNV of the good's id, so a given good is always
+// cried the same way and different goods generally read differently.
+// CANONICAL-AT-ZERO: index 0 of each pool is the original line.
+/** @type {Readonly<Record<'dear'|'cheap', ReadonlyArray<string>>>} */
+export const CRIER_FRAMES = Object.freeze({
+  dear: Object.freeze([
+    '{label} runs {priced} — dear, {receipt}.',
+    '{label} is dear at {priced} now, {receipt}.',
+    "They're asking {priced} for {label} — dear, {receipt}.",
+    '{label} fetches {priced} these days — dear, {receipt}.',
+  ]),
+  cheap: Object.freeze([
+    '{label} runs {priced} — cheap, {receipt}.',
+    '{label} is cheap at {priced} now, {receipt}.',
+    "There's {label} going for {priced} — cheap, {receipt}.",
+    '{label} fetches only {priced} these days — cheap, {receipt}.',
+  ]),
+});
+
+/** Fill a crier frame for a tag, seeded on the good id (index 0 when seedless).
+ *  @param {'dear'|'cheap'} tag @param {string} seed
+ *  @param {{ label: string, priced: string, receipt: string }} slots @returns {string} */
+function crierLineFor(tag, seed, { label, priced, receipt }) {
+  const pool = CRIER_FRAMES[tag];
+  const frame = seed ? pool[fnv1a32(`${seed}::${tag}`) % pool.length] : pool[0];
+  return frame.replace('{label}', label).replace('{priced}', priced).replace('{receipt}', receipt);
+}
+
 /**
  * The strongest-deviation "dear / cheap this season" highlight over a set of
  * quotes, or null when every good is steady. A shortage (dear) outranks a
@@ -338,7 +372,7 @@ export function strongestDeviation(quotes, driftBand) {
     id: pick.id,
     label: pick.label,
     tag,
-    crierLine: `${pick.label} runs ${pick.priced} — ${tag}, ${receipt}.`,
+    crierLine: crierLineFor(tag, String(pick.id ?? ''), { label: pick.label, priced: pick.priced, receipt }),
   };
 }
 
