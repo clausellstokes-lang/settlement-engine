@@ -1134,6 +1134,19 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER GO (2026-07-18): THE DEEP CRAFT WAVE DISPATCHES — "let's rework the website
+first. keep everything that you developed and lets develop from there."** The wave runs
+BEFORE ROUND 3 (inside the standing preview-pause). Governing spec =
+docs/DESIGN_DEEP_CRAFT_PAGES.md (the per-page annex: foundation additions — material
+layer, 12-behavior motion grammar, 4 hero moments — five register recipes across every
+route, kill-list ratchets to zero, functionality pins untouched). Base = THE COMPOSITE
+@ 78a04afc on new branch claude/deep-craft (everything built is kept and developed FROM
+— nothing reverts). Execution: the warm craft lane, sequential clusters, phase 0 first
+w/ ratchets committed before any surface moves; OWNER CHECKPOINT after cluster 1 +
+THE ARRIVAL (hard stop for the live walk); manager by-exception review at every boundary;
+full suite at the fold. ROUND 3 stays held until the wave folds + the owner's finished-
+site walk. THE PUSH (#23) executes in parallel per the stated plan (probe → measured →
+backgrounded → per-branch verified).
 **⬛⬛ THE COMPOSITE ASSEMBLED + GATED (2026-07-18) @ 78a04afc on claude/the-composite.**
 Merges: w-r2-g2 @ aec57981 (2 conflicts: npcProfile resolved by SUBSUMPTION — the incoming
 normalizeNpcRank provably contains the ported master fix; grounding bundle REGENERATED,
