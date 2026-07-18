@@ -1134,6 +1134,23 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛⭐ THE EIGHT CROWNS RATIFIED (owner, 2026-07-18: "work hard and get me the best
+website! With this, we would have one of if not the best:"):** the benchmark expands
+from four crowns to EIGHT — 1 settlement map generators · 2 world map generators ·
+3 settlement substance generators · 4 casual game engines · 5 prose & hooks
+generators · 6 setting & world builder · 7 world simulator for TTRPGs · 8 AI usages
+for TTRPG creation and framing. Manager scorecard recorded honestly: WON on 3
+(substance — the deepest moat), 7 (simulator — category of one; the soak is the only
+opponent), 8 (the schema-wall trust architecture no competitor can tell); WINNABLE
+IN-PROGRAM on 1 (ILLUSTRATED TOWN closes Watabou's beauty axis), 5 (grounded prose;
+ROUND 3 content dimension), 6 (generative-not-wiki redefinition); NAMED GAPS on 2
+(world map art vs Azgaar/Inkarnate — THE ILLUSTRATED REALM is the follow-on
+candidate, ⛔OWNER pre-vs-post-launch) and 4 (the casual-game reframe: the loop
+exists — verbs/Forecast/Docket/SessionMode/tempo — but game-feel was never surveyed
+as a discipline → GAME-FEEL added as a named ROUND 3 dimension). ROUND 3's
+experience charge re-aimed at the eight (architecture doc §4 amended). The strategic
+through-line recorded: seven crowns rest on one moat — meaning under everything —
+and the eighth is the website the deep wave is building.
 **⬛⭐ THE ILLUSTRATED TOWN COMMISSIONED (owner, 2026-07-18: "do it!" + the reskin
 note):** the owner's map critique ratified as a wave — the settlement map lacks
 terrain/season art, reads as a flat bird's-eye diagram of blocks, and needs the

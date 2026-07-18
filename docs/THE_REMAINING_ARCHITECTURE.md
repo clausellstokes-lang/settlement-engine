@@ -271,11 +271,18 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   mature my code to absolute perfection... cohesive, complete, immersive... not just
   in code but in experience." Run it VERBATIM as the survey's charter.
 - STAFFING (fan-out; Opus lanes; adversarial verify): survey dimensions — correctness ·
-  engine cohesion/counterparts · experience/immersion (vs the FOUR CROWNS: best map
-  generator on the meaning axis, best settlement generator, best campaign simulator,
-  best TTRPG AI) · substance benchmarks (the depth standard's five columns) ·
-  performance/eager · security/abuse · AI cost-efficiency · content/voice · a11y.
-  Every finding: adversarially verified (2-of-3 refuters) before the fix list.
+  engine cohesion/counterparts · experience/immersion (vs THE EIGHT CROWNS, owner-
+  ratified 2026-07-18, superseding the four: 1 settlement map generators · 2 world map
+  generators · 3 settlement substance generators · 4 casual game engines [game-feel:
+  pacing, session rhythm, return-pull — NEW named dimension] · 5 prose & hooks
+  generators · 6 setting & world builder · 7 world simulator for TTRPGs · 8 AI usages
+  for TTRPG creation and framing) · substance benchmarks (the depth standard's five
+  columns) · performance/eager · security/abuse · AI cost-efficiency · content/voice ·
+  a11y · GAME-FEEL (crown 4's survey lens). Standing gap register from the crown
+  scorecard: crown 2 is the honest weak claim — THE ILLUSTRATED REALM (skin-registry
+  idiom at world scale) is the named follow-on candidate, ⛔OWNER whether pre- or
+  post-launch. Every finding: adversarially verified (2-of-3 refuters) before the
+  fix list.
 - PRE-STOCKED ITEMS (must appear in the survey's intake): W6 delta audit ·
   SettlementsPanel:748 guard · S1–S3 token retrofit · doc-claims audit · interior
   entry hook · edit-chrome teaser · decree-provenance gap (applyWorldPulseProposal
