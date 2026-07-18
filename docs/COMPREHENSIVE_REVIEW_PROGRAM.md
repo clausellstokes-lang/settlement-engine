@@ -1120,6 +1120,36 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ FOLD ×2: THE RULINGS WIRING @ 14c504a4 + SURVEYOR S7 @ e1631619 (2026-07-17).**
+**RULINGS WIRING (charges 1+2; charge 3 = an honored stop-and-report):** v2 DEFAULT-MINT
+live at the three create chokepoints + the anon→signup arm (THE ONE DIAL
+NEW_SETTLEMENT_LAYOUT_LAW_VERSION=2 — a taste veto reverts in one line; BEHAVIOR SHIFT
+ruled+recorded: new saves render v2) · BESPOKE-STYLE PERSISTENCE (mapEdits.bespokeStyles;
+fail-closed reads; drop-when-empty; applyMapEdit chokepoint; deleted-never-strands
+pinned) · **CHARGE 3 QUEUED TO THE OWNER**: no sanctioned client path to the audit spine
+exists — every route violates a standing fence (service-role-only RPC · no edge action ·
+the Track-K no-new-shape clause); the record renders in ReceiptLine by design; THREE
+OPTIONS on the owner queue (edge apply-log endpoint [manager rec] · signed 155+ RPC ·
+blob key). Receipts on merged tree: 72/72 + tsc + dist 150/150; +38 B.
+**S7 — THE TRUST LADDER IS COMPLETE S1→S7:** the signal registry v1 (47 proven reads,
+additive-only w/ meaning-drift refusal — the tuning window mints INTO it) · StopConditions
+behind the wall (determinism pinned through the REAL kernel: same seed ⇒ same stop tick,
+receipts JSON-identical) · nudges CONSUME injectCampaignStressor (recon: no new primitive
+needed; ceiling lockstep w/ realm severe) · standing instructions (suffix-only — the
+static prefix byte-identical with/without, pinned; fence-breakout stripped) · the edge on
+the S4-S6 spine + kill-switch 'autonomy' · the panel as the workshop's 5th stage
+(picker-only; THE STOP RECEIPT w/ seed+engine version) · migrations 153/154 (head 154
+contiguous) · +173 B. Receipts on merged tree: S7 battery 66/66 + strict 0/0 + dist
+150/150. LANE CORRECTIONS BANKED: no Compendium op-page generator exists yet (my
+dispatch overclaimed — it is the DOC WAVE's charge, flagged not invented) · S3-S6
+compile-suffix adoption of standing instructions = a small follow-up seam (ROUND-3
+stock) · DEPLOY.md posture prose was pre-existing stale ('eleven true' at fifteen) —
+corrected+disclosed · ⚠️ NEW HAZARD MEMORIZED by the lane (preview-tool-serves-main-tree
+— wrong-lineage recurrence #10 via a new vector; probe recipe inside). JUDGMENTs ×8
+vetoable in the report (47-seed set · no-NOT combinators · cap=CATCH_UP_CAP_WEEKS
+imported · 4cr provisional · shared analytics events). REMAINING LIVE: doc wave · big
+content (parks) · landforms · gate wiring — then the craft wave at the doc fold →
+COMPOSITE → PUSH → ROUND 3.
 **⬛ FOLD: DOOR 2 — THE TABLE LAYER (fog v1) (2026-07-17) → w7-prep @ 08613d1b** (merge
 of claude/fog-table-layer tip 9f41b75f, 6 commits off d0857995; 21 files NUL-clean; the
 lane survived one limit strike + two stall cures). THE LAST MAP WAVE IS HOME: fogSessions
