@@ -41,7 +41,7 @@ import {
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 import {
-  buildTownMapModel, viewerPalette, TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID,
+  buildTownMapModel, viewerPalette, TOWN_MAP_LENS_IDS, DEFAULT_STYLE_ID,
   buildTownMapPanoramaDrawList, buildChangeView,
 } from '../../domain/townMap/index.js';
 import {
@@ -69,6 +69,12 @@ import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
 // texture, drawn under the urban layer from the SAME marks the exports use. A lazy leaf
 // (re-export idiom) so the max-lines-capped pane grows by one element, not a block.
 import SettlementMapLandform from './SettlementMapLandform.jsx';
+// THE VTT GRID + THE ILLUSTRATED UNDERLAY — two static map-space leaves (the landform
+// precedent), kept out-of-file so the max-lines-capped pane grows by a call, not a block.
+// The underlay is the illustrated lens's SINGLE art source (the same buildTownMapDrawList
+// the exports use), mounted under the interactive layers whose fills go transparent.
+import SettlementMapGrid from './SettlementMapGrid.jsx';
+import SettlementMapIllustratedUnderlay from './SettlementMapIllustratedUnderlay.jsx';
 // DOOR 2 — THE TABLE LAYER (fog of war). The pane threads three leaves: the map-space overlay
 // (+ the reveal-brush capture), the wiring hook (optimistic mirror + persist + controller), and
 // the DM chrome (controls + lazy player view + handout export). Kept out-of-file so the pane
@@ -81,15 +87,6 @@ const pointsOf = (polygon) => polygon.map(([x, y]) => `${x},${y}`).join(' ');
 // Apply a transient drag-preview offset (map units) to a polygon / point.
 const offsetPoints = (polygon, p) => (p ? polygon.map(([x, y]) => [x + p.dx, y + p.dy]) : polygon);
 const offsetXY = (x, y, p) => (p ? { x: x + p.dx, y: y + p.dy } : { x, y });
-
-/** VTT grid line segments across the 0..1000 view space, every `step` units. */
-function gridLines(step) {
-  const lines = [];
-  for (let x = step; x < 1000; x += step) lines.push({ x1: x, y1: 0, x2: x, y2: 1000 });
-  for (let y = step; y < 1000; y += step) lines.push({ x1: 0, y1: y, x2: 1000, y2: y });
-  return lines;
-}
-
 
 /** True when the device has a fine pointer (desktop) — the edit posture. Absent
  *  matchMedia (SSR / jsdom) ⇒ treat as desktop so the affordances are testable;
@@ -173,6 +170,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   };
   const districtTint = pal ? pal.district : districtColor;
   const gridStep = pal ? pal.grid : 0;
+  // THE ILLUSTRATED lens (glyph buildings). When active, the pane mounts the static
+  // op-list underlay as the SOLE visual and turns the interactive layers into transparent
+  // hit-targets, so on-screen art and exports never diverge (design §4, the two-paths cure).
+  const illustrated = !!(pal && pal.glyphSet);
 
   // The single writer: update the optimistic view AND persist to the blob.
   const commitEdits = useCallback((next) => {
@@ -431,17 +432,17 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           style={{ pointerEvents: 'all', cursor: ann.annotateMode ? 'crosshair' : undefined }}
         />
         <g ref={gRef}>
-          {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
-          {gridStep > 0 && (
-            <g data-town-grid style={{ pointerEvents: 'none' }}>
-              {gridLines(gridStep).map((ln, i) => (
-                <line key={`grid.${i}`} x1={ln.x1} y1={ln.y1} x2={ln.x2} y2={ln.y2} stroke={C.ink} strokeOpacity={0.14} strokeWidth={0.75} />
-              ))}
-            </g>
-          )}
+          {/* ── THE ILLUSTRATED UNDERLAY — the illustrated lens's SINGLE art source (the
+              same buildTownMapDrawList the exports use), mounted UNDER the interactive
+              layers; the plain visual layers below self-suppress and the interactive
+              fills go transparent for hit-testing (design §4, the two-paths cure). ─── */}
+          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeLens} />}
 
-          {/* ── water ─────────────────────────────────────────────────────── */}
-          {frame.water && (
+          {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
+          <SettlementMapGrid step={gridStep} ink={C.ink} />
+
+          {/* ── water (suppressed under the illustrated underlay) ──────────── */}
+          {!illustrated && frame.water && (
             frame.water.kind === 'coast'
               ? (
                 <polygon
@@ -462,10 +463,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           {/* ── non-water landform (marsh reeds / dune contours / mountain
               hachures) — terrain texture beneath the urban layer. Renders nothing
               for a water/plain/v1 site. Honors the active lens (WYSIWYG). ────── */}
-          <SettlementMapLandform landform={frame.landform} lens={activeLens} ink={C.ink} />
+          {!illustrated && <SettlementMapLandform landform={frame.landform} lens={activeLens} ink={C.ink} />}
 
           {/* ── approach roads ────────────────────────────────────────────── */}
-          {frame.roads.map((r) => (
+          {!illustrated && frame.roads.map((r) => (
             <line
               key={r.id}
               x1={r.from[0]} y1={r.from[1]} x2={r.to[0]} y2={r.to[1]}
@@ -473,15 +474,15 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             />
           ))}
 
-          {/* ── skeleton streets + anchor ─────────────────────────────────── */}
-          {skeleton.streets.map((st, i) => (
+          {/* ── skeleton streets + anchor (suppressed under the illustrated underlay) ─ */}
+          {!illustrated && skeleton.streets.map((st, i) => (
             <line
               key={`street.${i}`}
               x1={st.from.x} y1={st.from.y} x2={st.to.x} y2={st.to.y}
               stroke={C.street} strokeOpacity={0.55} strokeWidth={3} strokeLinecap="round"
             />
           ))}
-          <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={C.anchorFill} stroke={C.anchorStroke} strokeWidth={1.5} />
+          {!illustrated && <circle cx={skeleton.anchor.x} cy={skeleton.anchor.y} r={8} fill={C.anchorFill} stroke={C.anchorStroke} strokeWidth={1.5} />}
 
           {/* ── district polygons (drawn first → buildings win z-order) ────── */}
           {districts.map((d) => {
@@ -495,9 +496,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                   data-town-district={d.id}
                   points={pointsOf(poly)}
                   fill={color}
-                  fillOpacity={on ? 0.24 : 0.14}
+                  fillOpacity={illustrated ? (on ? 0.24 : 0) : (on ? 0.24 : 0.14)}
                   stroke={color}
-                  strokeOpacity={on ? 0.95 : 0.45}
+                  strokeOpacity={illustrated ? (on ? 0.95 : 0) : (on ? 0.95 : 0.45)}
                   strokeWidth={on ? 3 : 1.5}
                   style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                   onPointerEnter={onDistrictEnter(d)}
@@ -508,8 +509,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                   onPointerCancel={editing ? endDrag : undefined}
                   onClick={(e) => { if (consumedDragClick()) return; onDistrictClick(d)(e); }}
                 />
-                {/* aggregate lodging/mass-residential → a subtle district-fill accent */}
-                {districtsWithFill.has(d.id) && (
+                {/* aggregate lodging/mass-residential → a subtle district-fill accent
+                    (suppressed under the illustrated underlay, which draws it) */}
+                {!illustrated && districtsWithFill.has(d.id) && (
                   <polygon
                     points={pointsOf(poly)}
                     fill={color} fillOpacity={0.08}
@@ -548,8 +550,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             );
           })}
 
-          {/* ── fortifications (walls + gates) ────────────────────────────── */}
-          {fortifications && (
+          {/* ── fortifications (walls + gates; suppressed under the illustrated underlay) ─ */}
+          {!illustrated && fortifications && (
             <g style={{ pointerEvents: 'none' }}>
               <polygon
                 data-town-walls
@@ -576,9 +578,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 data-town-building={b.anchorKey}
                 x={pos.x - s} y={pos.y - s} width={s * 2} height={s * 2}
                 rx={3}
-                fill={on ? color : C.buildingIdle}
+                fill={illustrated ? 'transparent' : (on ? color : C.buildingIdle)}
                 fillOpacity={on ? 0.9 : 1}
-                stroke={color} strokeWidth={on ? 2.5 : 1.5}
+                stroke={illustrated ? (on ? color : 'transparent') : color} strokeWidth={on ? 2.5 : 1.5}
                 style={{ cursor: editing ? 'move' : 'pointer', pointerEvents: 'auto' }}
                 onPointerEnter={onBuildingEnter(b)}
                 onPointerLeave={clearHover}
@@ -608,9 +610,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 onClick={onOverlayClick('condition', c)}
               >
                 <rect x={-9} y={-9} width={18} height={18} rx={4}
-                  fill={high ? C.hazHiBg : C.hazMidBg} stroke={high ? C.hazHi : C.hazMid}
+                  fill={illustrated && !on ? 'transparent' : (high ? C.hazHiBg : C.hazMidBg)} stroke={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)}
                   strokeWidth={on ? 2.5 : 1.5} />
-                <circle cx={0} cy={0} r={2.5} fill={high ? C.hazHi : C.hazMid} />
+                <circle cx={0} cy={0} r={2.5} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
               </g>
             );
           })}
@@ -630,10 +632,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 onClick={onOverlayClick('hazard', h)}
               >
                 <path d="M 0 -10 L 9 6 L -9 6 Z"
-                  fill={high ? C.hazHiBg : C.hazMidBg} stroke={high ? C.hazHi : C.hazMid}
+                  fill={illustrated && !on ? 'transparent' : (high ? C.hazHiBg : C.hazMidBg)} stroke={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)}
                   strokeWidth={on ? 2.5 : 1.5} strokeLinejoin="round" />
-                <rect x={-1} y={-4} width={2} height={5} fill={high ? C.hazHi : C.hazMid} />
-                <rect x={-1} y={2} width={2} height={2} fill={high ? C.hazHi : C.hazMid} />
+                <rect x={-1} y={-4} width={2} height={5} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
+                <rect x={-1} y={2} width={2} height={2} fill={illustrated && !on ? 'transparent' : (high ? C.hazHi : C.hazMid)} />
               </g>
             );
           })}
@@ -715,7 +717,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         legendPrefs={legendPrefs}
         hasEdits={hasEdits}
         districts={districts}
-        styleIds={TOWN_MAP_STYLE_IDS}
+        styleIds={TOWN_MAP_LENS_IDS}
         activeLens={activeLens}
         lensPersisted={editing}
         onPickLens={doPickLens}
