@@ -363,6 +363,14 @@ export const swatch = Object.freeze({
   '#C8A84A': '#c8a84a', // random-pool chip border
   '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
   '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
+  // THE HOUSE DEVICE (the eager brand mark, components/brand/HouseDevice.jsx).
+  // The organic-craft rubric oxblood + the dim-field ink/rubric — canonical
+  // definitions live in src/design/organic/{rubrication,ink}.js (lazy); these
+  // swatch keys give the EAGER header/loading/error mark token-routed access
+  // without pulling the organic layer into the first-paint closure.
+  '#8B2E2E': '#8b2e2e', // rubric oxblood — the device seal-point (light)
+  '#ECE0C6': '#ece0c6', // dim-field ink — the device strokes on dark grounds
+  '#E8A860': '#e8a860', // dim-field rubric — the device seal-point on dark grounds
   // Dossier reading-palette (src/components/new/tabs/tabPalette.js) — the darker
   // status/category colors the dense dossier tabs use (a deliberate print-legibility
   // palette on parchment, distinct from the lighter screen chrome tokens). Most

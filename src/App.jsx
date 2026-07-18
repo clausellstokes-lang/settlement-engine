@@ -18,7 +18,8 @@
  *   admin       — Developer admin panel (elevated roles only)
  */
 import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { Map as MapIcon, Zap, Shield, X } from 'lucide-react';
+import { Zap, Shield, X } from 'lucide-react';
+import HouseDevice from './components/brand/HouseDevice.jsx';
 import useIsMobile from './hooks/useIsMobile';
 import { useStore } from './store/index.js';
 import { initOutbox } from './store/campaignSliceShared.js';
@@ -539,9 +540,9 @@ export default function App() {
               variant="ghost"
               onClick={() => setView('home')}
               aria-label="SettlementForge home"
-              icon={<MapIcon size={18} color={GOLD} />}
               style={{ gap: SP.xs, minHeight: 44, padding: `0 ${SP.xs}px` }}
             >
+              <HouseDevice size={20} style={{ flexShrink: 0 }} />
               <span aria-hidden="true" style={{ fontSize: FS.lg, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em' }}>
                 <span style={{ fontSize: '1.28em' }}>S</span>ettlement<span style={{ fontSize: '1.28em' }}>F</span>orge
               </span>
@@ -575,14 +576,12 @@ export default function App() {
                 aria-label="SettlementForge home"
                 style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer', display: 'flex', alignItems: 'center' }}
               >
+                <HouseDevice size={26} style={{ marginRight: SP.sm, flexShrink: 0 }} />
                 <h1
                   aria-hidden="true"
                   style={{ margin: 0, fontSize: FS.h1, fontWeight: 800, color: GOLD, fontFamily: serif_, letterSpacing: '0.01em', lineHeight: 1.1 }}
                 >
-                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span>
-                  <span>ettlement</span>
-                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span>
-                  <span>orge</span>
+                  <span style={{ fontSize: '1.32em', fontWeight: 800 }}>S</span><span>ettlement</span><span style={{ fontSize: '1.32em', fontWeight: 800 }}>F</span><span>orge</span>
                 </h1>
               </button>
             </div>
@@ -787,6 +786,7 @@ export default function App() {
               {t('footer.privacy')}
             </Button>
           </nav>
+          <Button variant="ghost" size="sm" onClick={() => setView('home')} aria-label="SettlementForge home" style={{ minHeight: isMobile ? 44 : undefined }}><HouseDevice size={20} /></Button>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
             <span>{t('footer.copyright', { year: 2026 })}</span>
             <span aria-hidden="true" style={{ color: 'rgba(244,234,208,0.4)' }}>·</span>

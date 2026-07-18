@@ -20,6 +20,7 @@
 import { Suspense, lazy } from 'react';
 import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
+import HouseDevice from './components/brand/HouseDevice.jsx';
 
 // Lazy-loaded views (code-split off the first-paint graph).
 const HomeLanding     = lazy(() => import('./components/HomeLanding.jsx'));
@@ -57,8 +58,12 @@ const PrivacyPage       = lazy(() => import('./components/legal/PrivacyPage.jsx'
 const FoundersPage      = lazy(() => import('./components/founders/FoundersPage.jsx'));
 
 export function Loading() {
+  // The diegetic loading emblem — the still house device over the plain word
+  // (owner placement addendum #2: no spinner-replacement theatrics; a still ink
+  // mark, reduced-motion safe by construction since nothing animates).
   return (
     <div style={{ padding: 40, textAlign: 'center', color: MUTED, fontFamily: sans }}>
+      <HouseDevice size={40} mode="light" weight="standard" style={{ display: 'block', margin: '0 auto 10px', opacity: 0.85 }} />
       Loading...
     </div>
   );
