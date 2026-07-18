@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ FOLD: THE ORGANIC CRAFT WAVE → w7-prep @ 8a5b10a1 (2026-07-18) — AND THE FIRST
+ALL-GREEN FULL SUITE.** Merge 9124110b (no-ff, zero conflicts, NUL scan clean, 89 files)
++ two triage commits. THE SEVEN FULL-SUITE REDS CURED, not baselined: mutedBg → hex-key
+swatch entry (-2 raw literals) · npcLadder EXEMPT classification (LADDER-FOLD ESCAPE —
+the focused-gates protocol's known blind spot, now proven: globals only run at manager
+folds) · crisisTripleSync +3 sanctioned S7 refs · relationshipCompatibility +1
+(signalRegistry vocabulary read) · raw-button baseline swap (doc-wave restructure; debt
+flat) · THREE slugify inliners MIGRATED to the kernel primitive (growth ceiling refused
+the baseline path — correctly; parity-proven byte-identical incl. ladder join keys; new
+parity cases committed; ladderRead gains its first import — kernel, consistent with the
+zero-ENGINE-import law) · raw-color BUDGET 1427→1450 LOUD EXCEPTION (23 literals shipped
+across six focused-gated folds; ROUND 3 carries the named tokenize-down task) ·
+SettlementMapPane 601→600 (import collapse; also cured sizeBaseline). RECEIPTS: tsc 0 ·
+strict 0/0 · lint 0 errors · build 0 · verify:dist 150/150 · CERTIFYING FULL SUITE
+1297/1297 files, 12,972 passed / 0 failed / 12 skipped, EXIT 0 — no tolerated reds
+remain. ERRATum owned: my review parenthetical "there is no Wanderer" was WRONG (it is
+TIER_NAMES.free); the lane enforced the principle, not my name ban. Wrong-lineage trap
+fired once mid-triage (11th; read-only; zero damage). Lane JUDGMENTs standing vetoable:
+dim-ink header device · PDF counterseal deferred (react-pdf seam) · gate title kept
+under the functionality law · TableView dim deferred at the legibility floor. TASK #32
+CLOSES. NEXT: THE COMPOSITE (task #5) — w7-prep + w-r2-g2 @ aec57981 + content-gt-final
+@ 23c77444 + generation-time-content @ f9720b5a on claude/the-composite.
 **⬛ THE SEAL APPROVED — IMPLEMENT + PLACE (owner, 2026-07-18: "i like the seal;logo
 impliment it also place it appropriately"):** the simplified device is the APPROVED house
 mark (favicon A stands). Placement register relayed to the running lane — core (already
