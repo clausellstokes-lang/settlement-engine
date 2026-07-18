@@ -9,8 +9,9 @@
 import { describe, it, expect } from 'vitest';
 import {
   ladderFactionsOf, ladderRungsOf, ladderPowerModifierOf, ladderLegitimacyModifierOf,
-  ladderInstabilityOf, ladderGoalOf, hasLadder,
+  ladderInstabilityOf, ladderGoalOf, hasLadder, ladderEffectivePowerFactor,
 } from '../../src/domain/townMap/ladderRead.js';
+import { ladderFactionKey } from '../../src/domain/worldPulse/npcLadderState.js';
 
 describe('ladderRead — empty-when-dark contract', () => {
   const darkCases = [undefined, null, {}, { npcLadder: null }, { npcLadder: undefined }, { npcLadder: 'nonsense' }, { npcLadder: [] }];
@@ -62,6 +63,24 @@ describe('ladderRead — empty-when-dark contract', () => {
     expect(ladderRungsOf(settlement, 'fac.unknown')).toEqual([]);
     expect(ladderPowerModifierOf(settlement, 'fac.unknown')).toBeNull();
     expect(ladderGoalOf(settlement, 'a:nobody')).toBeNull();
+  });
+
+  it('§8 read-side: ladderEffectivePowerFactor is EXACTLY 1.0 when dark (byte-identical), lit when populated', () => {
+    const faction = { name: "Merchants' Guild" };
+    // DARK: no mirror ⇒ factor exactly 1.0 (the consumer gates on === 1 for byte-identity).
+    for (const s of [undefined, null, {}, { npcLadder: null }]) {
+      expect(ladderEffectivePowerFactor(s, faction)).toBe(1);
+    }
+    // LIT: the write side keys the mirror by ladderFactionKey — the read must find it (the
+    // key cross-check). A well-led faction reads ABOVE 1; churn erodes it below.
+    const fkey = ladderFactionKey(faction);
+    const wellLed = { npcLadder: { factions: { [fkey]: { rungs: [{ npcId: 'a:x', name: 'X', standing: 0.9 }], powerModifier: 1.1 } } } };
+    expect(ladderEffectivePowerFactor(wellLed, faction)).toBeCloseTo(1.1, 6);
+    const churning = { npcLadder: { factions: { [fkey]: { rungs: [{ npcId: 'a:x', name: 'X', standing: 0.5 }], powerModifier: 1.1, instability: 0.5 } } } };
+    expect(ladderEffectivePowerFactor(churning, faction), 'churn erodes effective power').toBeLessThan(1.1);
+    // A faction id (when present) keys directly.
+    const byId = { npcLadder: { factions: { 'fac.custom': { rungs: [{ npcId: 'a:x', name: 'X', standing: 0.9 }], powerModifier: 1.05 } } } };
+    expect(ladderEffectivePowerFactor(byId, { id: 'fac.custom', name: 'Ignored' })).toBeCloseTo(1.05, 6);
   });
 
   it('clamps standing to 0..1 and tolerates malformed rung entries', () => {

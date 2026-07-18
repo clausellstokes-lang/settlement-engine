@@ -163,3 +163,38 @@ export function ladderGoalOf(settlement, npcId) {
 export function hasLadder(settlement) {
   return mirror(settlement) != null;
 }
+
+// ── §8 THE STANDING LOOP read-side consumption (dark-safe by mirror-presence) ──
+// The share of effective power a maximally-unstable faction sheds (churn erodes power —
+// a coup exploits turmoil). JUDGMENT — say "veto".
+const INSTAB_POWER_WEIGHT = 0.4;
+
+/** The stable ladder key for a faction entry — MUST match npcLadderState.ladderFactionKey
+ *  byte-for-byte (the write side keys the mirror identically; a drift silently misses the
+ *  lookup ⇒ no §8 effect when lit, still dark-safe). Cross-checked by ladderRead.test.js.
+ *  @param {{ id?: unknown, name?: unknown }|null|undefined} faction @returns {string} */
+function factionKeyOf(faction) {
+  const f = faction && typeof faction === 'object' ? faction : {};
+  const id = /** @type {{ id?: unknown }} */ (f).id;
+  if (typeof id === 'string' && id) return id;
+  const name = typeof (/** @type {{ name?: unknown }} */ (f).name) === 'string' ? /** @type {{ name: string }} */ (f).name : '';
+  const token = String(name || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '').slice(0, 80) || 'unknown';
+  return `fac.${token}`;
+}
+
+/**
+ * The §8 EFFECTIVE-POWER multiplier for a faction — leadership quality (the power modifier)
+ * eroded by churn instability. Returns EXACTLY 1.0 when the ladder is dark/absent (no
+ * mirror ⇒ null modifier + 0 instability), so a consumer that gates on `factor === 1`
+ * stays byte-identical dark. Lit ⇒ a well-led, stable faction reads ABOVE 1 (resists the
+ * coup harder); a churning one BELOW.
+ * @param {{ npcLadder?: unknown }|null|undefined} settlement
+ * @param {{ id?: unknown, name?: unknown }|null|undefined} faction @returns {number}
+ */
+export function ladderEffectivePowerFactor(settlement, faction) {
+  const fkey = factionKeyOf(faction);
+  const mod = ladderPowerModifierOf(settlement, fkey);
+  const instab = ladderInstabilityOf(settlement, fkey);
+  const powerMod = mod == null ? 1 : mod;
+  return powerMod * (1 - INSTAB_POWER_WEIGHT * instab);
+}
