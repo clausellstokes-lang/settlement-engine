@@ -314,3 +314,101 @@ ref-consistency + intra-dup regression + determinism).
 - Wave 1 `6452295c` — dossier narrative + institution prose (draw-count invariant).
 - Wave 2 `8b1a5648` — world-scoped faction-name dedup.
 - `54f08b05` — owner taste-sample (`docs/CONTENT_GT_DOSSIER_TASTE_SAMPLE.md`).
+
+---
+
+# CONTENT-GT-FINAL (THE BIG CONTENT WAVE) — VERIFIED-AFTER
+
+Lane: `claude/content-gt-final` (base = this branch's tip `577179fb`; REPLACES both parked
+content branches as the stack's tip in the composite). Unblocked by the taste approval
+(THE FREELY-GIVEN RULINGS) with two required amendments. Same laws, same park:
+**PARKS RED; the goldens regen ONCE at the ONE REGEN; nothing re-recorded here.**
+
+## What landed (per charge, all verified)
+
+1. **History-event descriptions (`48211f56`)** — the 58 banked variants (2 per catalog
+   type, recovered from the authoring lane's scratchpad) wired via
+   `historyData.historyDescription` + `HISTORY_DESC_VARIANTS`
+   (src/data/historyDescVariants.js): pure fnv on
+   `${config._seed}::histEvent::${i}::${type}` (anchor pass salted `::histAnchor::`),
+   canonical-at-zero, ZERO draws. Seed threading: generateNarratives stamps
+   `{ ...effectiveConfig, _seed: ctx._seed }`; regenHistoryPipeline stamps the
+   settlement's own `_seed` (a history regen reproduces its descriptions). Token parity
+   vs `generateEventNarrative.defaultTokens` verified (no unknown tokens, no repeats —
+   String.replace substitutes first occurrence only).
+2. **Institution descriptions EXHAUSTIVE (`f3b0e129`, `d656d25f`)** — the remaining 245
+   catalog institutions grew desc pools (2 fact-preserving variants each; the 56
+   taste-approved originals byte-identical, verified against a snapshot). NEW RATCHET:
+   the walker is an exhaustiveness pin — every catalog institution bearing a desc MUST
+   have a variants entry. Discovery: an institution can arrive carrying ANOTHER tier's
+   catalog desc (village with the hamlet 'Dairy farmer' text) — the assembly pool is
+   `[arrivedDesc, ...variants]`, and the membership guard now mirrors that.
+3. **NPC display pools (`e39076e0`)** — positives 30→45 with the EXACT
+   `NPC_TEMPERAMENTS` lockstep mirror (counterpart pin green); SPEECH_PATTERNS 20→30;
+   NPC_WANTS 7×4→7×8 (clothing text; the constant-name mislabel stays FLAGGED, wiring
+   correct); STRESS_ECONOMIC_EFFECTS desc+tension 1→3 per archetype via `pairProse` —
+   pure fnv on the DIRECTED pair key `${r.name}>${s.name}` (salted per field), zero
+   draws, archetype object identity untouched (=== comparisons + identity
+   reverse-lookup preserved).
+4. **Deeper vignettes (`badd5291`)** — probes made POOL-ROBUST FIRST (arrival opens on
+   a member of the type's own STRESS_DESCS pool — growth can't break them), then
+   STRESS_DESCS 4→6 ×15 (single pickRandom2, draw-invariant) and STRESS_NOTES 1→3 ×15
+   via pickVariant on `${config._seed}::stressNote::${type}` (the site is a 0-draw
+   lookup; the variety is 0-draw too; seedless ⇒ canonical). Both tables moved to
+   src/data/narrativeData.js (narrativeGenerator sits at its max-lines ratchet;
+   STRESS_DESCS re-exported so consumer import paths are unchanged; the registration
+   walker's scan path follows the table).
+5. **AMENDMENT A — faction de-clunk (`3ef2abd7`)** — descriptor-SWAP first from a
+   WIDENED, DEDUP-ONLY pool (6 extras/category inside factionDedup.js — NEVER in
+   powerData.FACTION_DESCRIPTORS, whose per-settlement retry loop is
+   draw-count-variable); adjectival PREFIX modifier as last resort (a true suffix
+   stacks a second collective — the clunk itself); banned-stack guard + candidate-space
+   pins make the historical clunkers structurally impossible. IDENTITY-rename law
+   preserved. Extras verified against inferFactionCategory (two authoring fixes:
+   'Diocesan Council'→'Ecclesiastical Council', 'Estate Compact'→'Heritage Houses');
+   a modifier prefix provably never changes a base's inferred category. Taste-sample §3
+   regenerated as proof (21/21 distinct, 0 clunkers).
+6. **AMENDMENT B — the casing pass (`56e3203f`)** — `capFirst` on EXACTLY the
+   sentence-start `${govFaction}`/`${topFaction}` interpolations, identified by their
+   capitalised `"The …"` fallback: **13 sites (12 gov + 1 top), not the estimated 9**
+   (the compound-pool growth added sentence-start sites); the 20 lowercase-fallback
+   mid-sentence sites untouched. Idempotent; fallback path byte-identical. DELIBERATE
+   ONE-TIME SHIFT: reworks existing owner prose; legal because this stack parks for the
+   ONE REGEN.
+
+## The proof (re-run at completion)
+
+Base(577179fb)-vs-tree structural diff over the 187-row generator-golden grid: the ONLY
+normalized leaf paths that move are display prose —
+`history.historicalEvents[].description`, `history.founding.stressNote`,
+`institutions[].desc` (+ its `defenseProfile.*.desc` projections),
+`npcs[].personality.dominant/.speech`, `npcs[].physical.clothes` (+ the
+`factions[].members[]` mirrors), `relationships[].description/.tension`,
+`prominentRelationship.full/.tension/.phrasing` — **ZERO structural/numeric fields.**
+(pressureSentence/arrivalScene shift only under active stress, not in the standard grid;
+the casing + vignette changes are pinned by direct guards instead.)
+
+## Deferral-ledger updates (recorded, not re-findable bugs)
+
+- **NPC_PERSONALITY_TRAITS negative/neutral** — REMAINS deferred (content-branch draw
+  hazard: `includes('arrogant'|'greedy'|'pragmatic')` + keyword-classified
+  NPC_CRIMINAL_SECRETS).
+- **NPC_FACTION_GOALS growth** — deferred (role-specific authoring ×25 roles + the
+  `/grain/g` literal-replace hazard in the goal substituter; single-pick, safely
+  growable in a follow-on).
+- **TRAIT_ALIGNMENT/TRAIT_AGGRESSION weights for the 15 new positives** — deliberately
+  NOT added: the weight leaf's contract says absent ⇒ exactly 0 ("adding vocabulary
+  never silently churns the score"), and the leaf is FIRST-PAINT EAGER (weighting costs
+  eager bytes + grazes corruption tuning — owner-gated follow-on if wanted).
+- **NPC_WANTS→`clothes` mislabel** — still FLAGGED, not fixed (wiring is correct; the
+  constant name is the lie).
+- Institution NAME displayName schema · service menus (935) · deity/naming pools —
+  unchanged from the parent's ledger (owner-gated / adequate / ratified).
+
+## Test-infrastructure notes
+
+- `tests/generators/timelineVariety.test.js` budget loop given the 120s golden-master
+  timeout (`9ebb4c62`) — CONFIRMED pre-existing wall-clock flake (times out at base
+  577179fb too, verified in a temp worktree).
+- `tests/lib/instantWorld/factionDedup.test.js` full-realm compose tests given the same
+  120s allowance (full generation ~38s each on a loaded runner; dedup itself is O(collisions)).
