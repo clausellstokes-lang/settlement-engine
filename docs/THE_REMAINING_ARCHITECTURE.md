@@ -42,6 +42,20 @@
 - External chip session running: task_7e1e1e51 (ConfigurationPanel stale population
   literals) — do not duplicate; rebase-check its result before touching that file.
 
+## §1b THE BASE RULING (owner, 2026-07-18 — read before any §2 slice)
+origin/master @ d024286e (the deployed GitHub site) is THE UI BASE OF RECORD: page
+organization, button placement, layout discipline. Master is a STRICT ANCESTOR of the
+composite (887 commits behind, same lineage) — restoration is per-page structural
+diffing, never merging. EVERY §2 slice now runs three steps in order: (1) SET THE BASE —
+restore master's page organization where the composite regressed it (per THE BASE
+RECONCILIATION MAP, docs/THE_BASE_RECONCILIATION_MAP.md once committed); (2) PLUG IN
+the post-master functionality (guide · AI panels · map stack · exports · entitlements ·
+seal · analytics) into that organization; (3) CRAFT TREATMENT on top — heavier
+treatment WELCOME (owner: "I'm okay with heavier treatment but the base has to be set
+properly"). The functionality-retention law covers BOTH inventories: nothing master's
+organization had, and nothing the composite added, may be lost. Anon gauge shows
+hamlet→town only; create pre-generation consolidates to one commissioning plate.
+
 ## §2 THE DEEP CRAFT WAVE — REMAINING SLICES
 Standing laws for every slice: FUNCTIONALITY RETENTION (structure moves, behavior
 never; touched-surface behavioral tests stay green UNTOUCHED — a rewritten pin is a

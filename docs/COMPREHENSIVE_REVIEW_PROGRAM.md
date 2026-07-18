@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ THE BASE RULING (owner clarification ×2, 2026-07-18) — SUPERSEDES the same-day
+dossier-model row's "preserve-and-polish only" framing:** the GITHUB SITE (origin/master
+@ d024286e) is THE UI BASE OF RECORD — its page organization, button placement, and
+layout discipline. The current local lineage's pages are a REGRESSED STARTING POINT,
+not the endpoint. TWOFOLD GOAL, no order: (1) absorb into that base ALL functionality
+built since (guide · AI · maps · exports · entitlements · seal · everything); (2) run
+the craft overhaul FROM that base — HEAVIER TREATMENT WELCOME once the base is set
+properly. EMPIRICAL DISCOVERY: master is a STRICT ANCESTOR of the composite (0 vs 887
+commits; merge-base = master's tip) — no cross-lineage merge exists at the UI level;
+the regression lives somewhere in the 887 and is repaired by per-page structural
+restoration, not by merging. THE BASE RECONCILIATION MAP survey dispatched (read-only:
+master vs composite per surface, differences classified ORGANIZATION-REGRESSION vs
+FUNCTIONALITY-ADDITION vs NEUTRAL-RESTYLE → the reconciled base spec per page). The
+deep wave's slices now run: SET THE BASE → plug in the new functionality → craft
+treatment on top. The anon gauge veto (hamlet→town) and create-consolidation rulings
+stand unchanged.
 **⬛ THE DOSSIER MODEL RULING + TWO VETOES (owner, 2026-07-18, four screenshots):**
 (1) THE DOSSIER LAYOUT MODEL = the screenshots' information architecture (identity band ·
 crisis banner+hook · Systems Health status-cards-over-meters · collapsible
