@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ THE COMPOSITE ASSEMBLED + GATED (2026-07-18) @ 78a04afc on claude/the-composite.**
+Merges: w-r2-g2 @ aec57981 (2 conflicts: npcProfile resolved by SUBSUMPTION — the incoming
+normalizeNpcRank provably contains the ported master fix; grounding bundle REGENERATED,
+never hand-merged) + content-gt-final @ 23c77444 (clean; generation-time-content confirmed
+already inside — the recorded supersession) . STATIC GATES first-pass green: build 0 ·
+dist 150/150 · tsc 0 · strict 0/0 · lint 0. FULL SUITE 13,149 passed; the 10 reds
+dispositioned BY NAME: (1) npcProfile ×2 = REAL cross-branch semantic collision — g2's
+rank-vocabulary rename (subordinate→secondary) half-landed; COMPLETED at assembly (9 tier
+keys + the pre-rename test migrated, tier content asserted unchanged — declared shift,
+label only) · (2) sizeBaseline ×2 = narrativeGenerator SHRANK 905→730 (the content wave's
+win) — left the baseline · (3) compendiumDataFreshness = regen on the merged tree ·
+(4) dossierContent = G2's DECLARED "Underways catalog half (RED by design)" content debt —
+PAID: Underground network desc variants AUTHORED at three tiers in the corpus register
+(the coverage contract caught a cross-branch IOU exactly as built to) · (5-8) the FOUR
+PARKED GOLDEN FAMILIES (generatorGoldenMaster · beliefMapGolden · worldpulseDeityGolden ·
+pdf goldenViewModel) — verified pure output diffs, re-mint at THE ONE REGEN, the standing
+plan's expected red set. TASK #5 CLOSES. THE PUSH (#23) executes next; ROUND 3 remains
+HELD at the owner's preview-pause gate (+ the open owner decision: THE DEEP COMPOSITION
+WAVE recommendation, answer pending).
 **⬛ OWNER GATE INSERTED (2026-07-18): PREVIEW-PAUSE BEFORE ROUND 3.** Owner order:
 "before the resurvey, pause and show me a preview." ROUND 3 (task #6) does NOT
 auto-dispatch at the push. Sequence amended: composite suite → red audit → ledger →
