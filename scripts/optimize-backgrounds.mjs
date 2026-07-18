@@ -55,6 +55,9 @@ async function main() {
 
   const sources = readdirSync(BG_DIR)
     .filter((f) => f.toLowerCase().endsWith('.jpg'))
+    // *.orig.jpg are pre-replacement paintings PRESERVED for the owner
+    // checkpoint (Deep Craft phase 0e) — never shipped, never twinned.
+    .filter((f) => !f.toLowerCase().endsWith('.orig.jpg'))
     .sort();
 
   if (sources.length === 0) {
