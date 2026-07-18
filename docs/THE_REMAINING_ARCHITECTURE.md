@@ -55,6 +55,12 @@ same commit as each win. Focused gates per commit: own tests + kill-list + eslin
 touched + tsc full + domain:strict + build + verify:dist (in that order).
 
 ### Slice C1-fin — finish the commissioning desk
+- ⛔OWNER VETO LANDED on judgment #3: the anonymous gauge shows HAMLET→TOWN ONLY —
+  remove capped-tier stations from anon render (signed-in keeps all six).
+- CREATE CONSOLIDATION (owner ruling): pre-generation = ONE commissioning plate
+  (headline + gauge + one gold Forge + one honesty line); Advanced ENTIRELY behind
+  the unfolding leaf; visible clerk's notes ≤1 (the rest live inside the leaf);
+  demo artifacts below the fold as exhibits — fewer visible pieces before the choice.
 - Advanced second leaf: the existing Advanced controls re-composed as labeled scale
   rules (terrain/age/wealth/trouble) inside an unfolding second leaf (`.oc-m-unfold`);
   SAME control components re-vehicled — zero handler changes; the leaf is layout only.
@@ -92,12 +98,20 @@ touched + tsc full + domain:strict + build + verify:dist (in that order).
   bulk select, quota banner, open/delete/export flows, empty-state SurveyorNote.
 - DEFERRED-legal only with reason rows. Lower radii/shadow ceilings per conversion.
 
-### Slice C4 — THE DOSSIER: the bound report, per tab
-- Summary: manuscript treatment (drop cap arrival, marginalia provenance column,
-  situation register, rubric crisis block, keyed figures, hooks list) — the CONTENT
-  is generator output; only the frame recomposes. Tabs → folder-tab chrome (ink
-  weight active; same tab state machine). Systems/World: ledger tables + annals
-  (recorded/inferred markers preserved). Notes: feint-rule notebook (same persistence).
+### Slice C4 — THE DOSSIER: preserve-and-polish the RULED MODEL (owner, 2026-07-18)
+- THE MODEL IS THE CURRENT LAYOUT per the owner's four screenshots (ledger row of the
+  same date): identity band · crisis banner+hook · Systems Health status cards over
+  labeled meters · collapsible Origin/Geography/Layout · institutions chip-row · the
+  Draft→Saved→Canon→Realm→Shared stepper · header actions · right-rail
+  Narrate/Export/Edit · anon save+buy footer · dark prose bands (data on parchment,
+  world-voice on umber). DO NOT RESTRUCTURE. Craft applies as MATERIALS+TYPE only:
+  plates/hairline rules where cards sit, house serif+small-caps, oxblood criticals,
+  medallion in the identity band, colophon foot. Manuscript grammar (drop caps,
+  marginalia) ONLY on prose surfaces (Overview narrative, DM Summary, Plot Hooks).
+- ADD the wave functionality this layout predates: provenance-on-hover on every
+  number (SM-5 idiom) · map-stack entry points (lenses/panorama/interiors/change
+  view/DM pins/fog) · chronicle annals markers · slate AI surfaces + the stamp ·
+  entitlement gating per the ruled ladder · config-fed figures (zero hand-typed).
 - Panels (each its register, all behavior kept): Chronicle=annals · Trade=factor's
   ledger · Services=posted bill (toggle daggers = same toggles) · Deities=votive
   register · WhatChanged=erratum slip · Config/Preview/StaleNarrative = instrument

@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE DOSSIER MODEL RULING + TWO VETOES (owner, 2026-07-18, four screenshots):**
+(1) THE DOSSIER LAYOUT MODEL = the screenshots' information architecture (identity band ·
+crisis banner+hook · Systems Health status-cards-over-meters · collapsible
+Origin/Geography/Layout · institutions chip-row · the Draft→Saved→Canon→Realm→Shared
+stepper · persistent header actions · right-rail Narrate/Export/Edit · anon footer
+save+buy pair · DARK PROSE BANDS as the two-register solution). C4 REFRAMED: preserve-
+and-polish that IA — craft applies as MATERIALS+TYPE only (plates/rules/serif/oxblood/
+medallion/colophon); manuscript grammar scoped to PROSE surfaces (Overview, DM Summary);
+ADD the wave functionality the layout predates (provenance hover · map-stack entries ·
+annals · slate AI + stamp · entitlement gates · config figures). (2) VETO of deep-wave
+JUDGMENT #3: the anonymous gauge shows HAMLET→TOWN ONLY — capped tiers out of anon
+sight. (3) CREATE CONSOLIDATION: pre-generation = ONE commissioning plate (headline +
+gauge + one gold Forge + one honesty line); Advanced entirely behind the leaf; clerk's
+notes ≤1 visible; demo artifacts below the fold as exhibits.
 **⬛⭐ THE REMAINING ARCHITECTURE COMMITTED (owner order, 2026-07-18: "architect what
 must be done out exhaustively... I may run out of fable").** docs/
 THE_REMAINING_ARCHITECTURE.md is now THE SUCCESSOR DOCUMENT for everything left:
