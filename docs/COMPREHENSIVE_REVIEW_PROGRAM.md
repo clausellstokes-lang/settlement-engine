@@ -1134,6 +1134,12 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ ONE DOOR VISIBILITY CLARIFIED (owner, 2026-07-18: "the floating AI button
+should only show for the surveyor premium"):** the left-edge marker renders ONLY
+for Surveyor-tier users — no lock-tease, no placeholder; the margin stays empty
+for everyone else. SUPERSEDES the manager's lock-glyph-tease default in the One
+Door row below. AI-tier discovery = Pricing page + tierFacts surfaces, never
+in-app chrome. Polish/Narrate (own credit track) unaffected. C13 spec amended.
 **⬛ WALK FEEDBACK #1 (owner, 2026-07-18, the cluster-1 walk's first verdicts):**
 (1) REMOVE the Instant World premium card from the create page ENTIRELY; (2) fold
 "instant generation" into the line "Pick a size. Roll a settlement. Every size from
