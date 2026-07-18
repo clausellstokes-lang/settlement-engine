@@ -27,9 +27,15 @@
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
 import { render, cleanup, screen, within } from '@testing-library/react';
+import fs from 'node:fs';
+import path from 'node:path';
+import url from 'node:url';
 import HomeLanding from '../../src/components/HomeLanding.jsx';
 import { landing } from '../../src/copy/landing.js';
 import { fixture } from '../../src/components/home/landingFixture.js';
+import { slugify } from '../../src/kernel/slugify.js';
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // Analytics is fire-and-forget (landing_funnel_used via the SM-5-pattern lazy
 // helper — lib/landingFunnelAnalytics.js imports track + EVENTS from this
@@ -66,11 +72,11 @@ describe('HomeLanding — scrollable landing', () => {
     expect(h1s[0].textContent).toBe(landing.hero.h1a + landing.hero.h1b);
   });
 
-  test('all six section headings render from the copy registry', async () => {
+  test('all seven section headings render from the copy registry', async () => {
     renderLanding();
     const headings = [
       landing.forge.h2, landing.brief.h2, landing.voice.h2,
-      landing.realm.h2, landing.commons.h2, landing.closer.h2,
+      landing.realm.h2, landing.map.h2, landing.commons.h2, landing.closer.h2,
     ];
     for (const h2 of headings) {
       expect(await screen.findByText(h2)).toBeTruthy();
@@ -169,6 +175,48 @@ describe('HomeLanding — scrollable landing', () => {
     const tags = screen.getAllByText(new RegExp(`seed · ${fixture.seed}`));
     expect(tags.length).toBeGreaterThanOrEqual(2); // brief + voice (+ why-trace with week)
     expect(screen.getByText(`seed · ${fixture.seed} · week ${fixture.weeks}`)).toBeTruthy();
+  });
+
+  // ── W-DOC — THE MAP WAYPOINT (§05) ─────────────────────────────────────────
+  test('the map waypoint renders the fixture-town plate with an honest lens flip', async () => {
+    renderLanding();
+    await screen.findByText(landing.map.h2);
+    // The lens flip is a REAL control (a second sanctioned interactive control
+    // beside W-L2/5's forge-exact — it swaps frozen plates of the SAME town,
+    // never forging anything, so the one-forge-control rule is intact).
+    for (const l of landing.map.lenses) {
+      expect(screen.getByRole('button', { name: l.label })).toBeTruthy();
+    }
+    // The plate <img> resolves the DEFAULT lens (first in the registry) and its
+    // alt names the fixture town (a11y floor + the same-town honesty claim).
+    const defaultLens = landing.map.lenses[0];
+    const alt = landing.map.alt
+      .replace('{name}', fixture.town.name).replace('{lens}', defaultLens.label);
+    const img = screen.getByAltText(alt);
+    expect(img.getAttribute('src')).toContain(`.${defaultLens.id}.svg`);
+    // Flip: the second lens re-points the SAME img at that lens's plate.
+    const second = landing.map.lenses[1];
+    screen.getByRole('button', { name: second.label }).click();
+    const flipped = await screen.findByAltText(
+      landing.map.alt.replace('{name}', fixture.town.name).replace('{lens}', second.label),
+    );
+    expect(flipped.getAttribute('src')).toContain(`.${second.id}.svg`);
+  });
+
+  test('the frozen lens plates exist and carry the fixture provenance (the plate drift contract)', () => {
+    // The generator (scripts/generate-landing-map-plates.mjs) drift-gates the
+    // town at emit time; this pin makes a MISSING or foreign plate fail CI: one
+    // committed plate per registry lens, each stamped with the fixture's seed +
+    // town, each a v2 render (layoutLawVersion is asserted by the generator).
+    const dir = path.resolve(__dirname, '../../public/landing-maps');
+    for (const l of landing.map.lenses) {
+      const file = path.join(dir, `${slugify(fixture.town.name)}.${l.id}.svg`);
+      const svg = fs.readFileSync(file, 'utf8');
+      expect(svg).toContain(`seed ${fixture.seed}`);
+      expect(svg).toContain(`style ${l.id}`);
+      expect(svg).toContain(fixture.town.name);
+      expect(svg).toContain('<svg');
+    }
   });
 
   test('commons fallback renders all four decorative slots when the gallery is unreachable', async () => {

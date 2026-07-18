@@ -1,8 +1,8 @@
 /**
  * home/LandingBelowFold.jsx — everything below the hero fold of the scrollable
  * Welcome page: the salt-road journey 01·Forge → 02·Brief → 03·Voice →
- * 04·Realm → 05·Commons → 06·Set out + footer. Lazy-loaded as ONE chunk by
- * HomeLanding.jsx so the hero paints first (LCP).
+ * 04·Realm → 05·Map → 06·Commons → 07·Set out + footer. Lazy-loaded as ONE
+ * chunk by HomeLanding.jsx so the hero paints first (LCP).
  *
  * The §02/§03/§04 artifacts render FROZEN REAL ENGINE OUTPUT (owner amendment
  * W-L2/1) and live in ./LandingArtifacts.jsx with their fixture; §05 renders up
@@ -32,7 +32,7 @@ import { tl } from '../../copy/landing.js';
 import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
-  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
+  MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, MapPlateCard, SCENE, cardStyle,
 } from './LandingArtifacts.jsx';
 
 const MONO = fontFamily.mono;
@@ -454,7 +454,25 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         <RealmMapCard />
       </section>
 
-      {/* ══ 05 · The commons — plain parchment ══ */}
+      {/* ══ 05 · The map — plain parchment; THE MAP WAYPOINT (W-DOC, brief §4).
+          The plate card renders the frozen v2 lens plates of the FIXTURE town
+          (the same town as §02's dossier — the seed tag is the receipt), with
+          the lens flip + provenance tease. ══ */}
+      <section id="map" aria-labelledby="sf-map-title" style={{ ...pad, background: PARCH }}>
+        <Waypoint pill={tl('map.waypoint')} />
+        <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
+          <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
+            <h2 id="sf-map-title" style={{ ...h2Style(isMobile), marginBottom: SP.md }}>{tl('map.h2')}</h2>
+            <p style={{ ...proseStyle, margin: 0 }}>{tl('map.body')}</p>
+          </div>
+          <MapPlateCard />
+          <p style={{ ...proseStyle, maxWidth: 640, margin: `${SP.xl}px auto 0`, textAlign: 'center', fontStyle: 'italic', color: SECOND }}>
+            {tl('map.tease')}
+          </p>
+        </div>
+      </section>
+
+      {/* ══ 06 · The commons — plain parchment ══ */}
       <section id="commons" aria-labelledby="sf-commons-title" style={{ ...pad, background: PARCH }}>
         <Waypoint pill={tl('commons.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -469,7 +487,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 06 · Set out — dark painted create scene + footer ══ */}
+      {/* ══ 07 · Set out — dark painted create scene + footer ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"
