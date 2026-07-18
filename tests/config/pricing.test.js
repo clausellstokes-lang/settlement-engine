@@ -50,14 +50,15 @@ describe('AI cost server contract', () => {
     expect(_internal.NEW_AI_COSTS).toEqual(CONTRACT_AI_COSTS_NEW);
   });
 
-  // Surveyor S1+S3+S4–S6 task-priced managed credits — mirrors the spend_credits CASE in
+  // Surveyor S1+S3+S4–S7 task-priced managed credits — mirrors the spend_credits CASE in
   // migrations 140 (analysis=3, brief=4) + 149 (interpret=5, parley=3) + 151 (customContent=6,
-  // styleOverhaul=3, constructSettlement=6, constructRealm=8). Provisional pricing
-  // (owner-queued); when the owner re-tunes, this block + those migrations change together.
-  it('surveyor task prices match the server spend_credits CASE (migrations 140 + 149 + 151)', () => {
+  // styleOverhaul=3, constructSettlement=6, constructRealm=8) + 153 (autonomy=4). Provisional
+  // pricing (owner-queued); when the owner re-tunes, this block + those migrations change together.
+  it('surveyor task prices match the server spend_credits CASE (migrations 140 + 149 + 151 + 153)', () => {
     expect(_internal.SURVEYOR_AI_COSTS).toEqual({
       analysis: 3, brief: 4, interpret: 5, parley: 3,
       customContent: 6, styleOverhaul: 3, constructSettlement: 6, constructRealm: 8,
+      autonomy: 4,
     });
     expect(getSurveyorAiCost('analysis')).toBe(3);
     expect(getSurveyorAiCost('brief')).toBe(4);
@@ -67,6 +68,7 @@ describe('AI cost server contract', () => {
     expect(getSurveyorAiCost('styleOverhaul')).toBe(3);
     expect(getSurveyorAiCost('constructSettlement')).toBe(6);
     expect(getSurveyorAiCost('constructRealm')).toBe(8);
+    expect(getSurveyorAiCost('autonomy')).toBe(4);
     expect(getSurveyorAiCost('nope')).toBe(0);
   });
 });
