@@ -51,6 +51,13 @@ export const LADDER_TUNING = Object.freeze({
   // Prune a standing record whose stock has decayed to (essentially) baseline AND
   // carries no goal/stigma/grudge — a spent record drops (byte-identical-dormant).
   PRUNE_EPSILON: 0.05,
+  // §10 THE STIGMA MARK + §4e D5 GRUDGES: lifespan-scaled half-lives (weeks, × the
+  // settlement's memory-horizon band — years for humans, longer for the long-lived; the
+  // npcGrowth decay idiom). A caught schemer climbs at half strength for years.
+  STIGMA_HALF_LIFE_WEEKS: 312, // ~6 years base — "a caught schemer climbs at half strength for years"
+  GRUDGE_HALF_LIFE_WEEKS: 156, // ~3 years base — grudges are real but fade
+  STIGMA_MINT_SEV: 1.0,        // a fresh exposure stamps a full mark (refresh extends)
+  MARK_PRUNE_EPSILON: 0.05,
 });
 
 // Ladder length by settlement tier (3–5 rungs; a thorp is a single seat). JUDGMENT.
@@ -156,11 +163,61 @@ export function decayStandingTowardBaseline(stock, deltaWeeks) {
   return base + (stock - base) * factor;
 }
 
+/** Lifespan-scaled exponential decay of a mark severity over elapsed weeks (the npcGrowth
+ *  D5-band idiom — Infinity band ⇒ no time decay). PURE.
+ *  @param {number} sev @param {number} deltaWeeks @param {number} halfLife @param {number} bandMult @returns {number} */
+function decayMark(sev, deltaWeeks, halfLife, bandMult) {
+  if (!(sev > 0) || !(deltaWeeks > 0)) return sev;
+  if (!Number.isFinite(bandMult)) return sev; // undying ⇒ the mark never fades
+  return sev * Math.pow(0.5, deltaWeeks / Math.max(1, halfLife * bandMult));
+}
+
+/**
+ * Maintain a standing record's MARKS across an advance (§10 stigma + §4e D5 grudges):
+ * decay both on their lifespan-scaled clocks (band-scaled), then detect a FRESH corruption
+ * exposure (timesExposed bumped or newly ousted vs the last-seen values) and mint/refresh
+ * the stigma mark. Returns the updated standing + whether a fresh exposure fired this
+ * advance (the widest challenge window §2 + the §10 tax trigger). PURE.
+ * @param {import('./npcLadderKernel.js').LadderStanding} st @param {Record<string, unknown>} npc
+ * @param {number} bandMult @param {number} weeks @param {number} tick
+ * @returns {{ st: import('./npcLadderKernel.js').LadderStanding, freshExposed: boolean }}
+ */
+export function maintainMarks(st, npc, bandMult, weeks, tick) {
+  const T = LADDER_TUNING;
+  // Decay stigma + grudges on their band-scaled clocks; prune spent marks.
+  let stigma = st.stigma;
+  if (stigma) {
+    const sev = round4(decayMark(stigma.sev, Math.max(0, weeks - stigma.week), T.STIGMA_HALF_LIFE_WEEKS, bandMult));
+    stigma = sev >= T.MARK_PRUNE_EPSILON ? { sev, week: weeks, tick: stigma.tick } : null;
+  }
+  /** @type {Record<string, import('./npcLadderKernel.js').LadderGrudge>} */
+  const grudges = {};
+  for (const k of Object.keys(st.grudges).sort(compareCodepoint)) {
+    const g = st.grudges[k];
+    const sev = round4(decayMark(g.sev, Math.max(0, weeks - g.week), T.GRUDGE_HALF_LIFE_WEEKS, bandMult));
+    if (sev >= T.MARK_PRUNE_EPSILON) grudges[k] = { sev, week: weeks };
+  }
+  // Fresh exposure detection: the corruption mirror bumps timesExposed / sets ousted.
+  const exposedNow = Math.floor(num(npc.timesExposed, 0));
+  const oustedNow = npc.ousted === true;
+  const first = st.lastExposed === undefined;
+  const freshExposed = !first && (exposedNow > num(st.lastExposed, 0) || (oustedNow && st.wasOusted !== true));
+  if (freshExposed) {
+    // Mint or REFRESH+extend the stigma mark (§10 second-exposure refreshes).
+    stigma = { sev: T.STIGMA_MINT_SEV, week: weeks, tick: Math.floor(tick) };
+  }
+  return {
+    st: { ...st, stigma, grudges, lastExposed: exposedNow, wasOusted: oustedNow },
+    freshExposed,
+  };
+}
+
 // ── Record normalization (defensive reads of the persisted shape) ─────────────
 /** @param {unknown} v @param {number} weeks @returns {import('./npcLadderKernel.js').LadderStanding} */
 export function normalizeStanding(v, weeks) {
   const o = asObject(v);
-  return {
+  /** @type {import('./npcLadderKernel.js').LadderStanding} */
+  const st = {
     stock: clamp(num(o.stock, LADDER_TUNING.STAND_BASELINE), 0, LADDER_TUNING.STAND_MAX),
     since: num(o.since, weeks),
     week: num(o.week, weeks),
@@ -168,6 +225,9 @@ export function normalizeStanding(v, weeks) {
     stigma: normalizeStigma(o.stigma),
     grudges: normalizeGrudges(o.grudges),
   };
+  if (typeof o.lastExposed === 'number' && Number.isFinite(o.lastExposed)) st.lastExposed = Math.floor(o.lastExposed);
+  if (o.wasOusted === true) st.wasOusted = true;
+  return st;
 }
 /** @param {unknown} v @returns {import('./npcLadderKernel.js').LadderGoal|null} */
 function normalizeGoal(v) {
@@ -243,6 +303,8 @@ function sortedStanding(st) {
     for (const k of gk) g[k] = { sev: st.grudges[k].sev, week: st.grudges[k].week };
     out.grudges = g;
   }
+  if (typeof st.lastExposed === 'number' && st.lastExposed > 0) out.lastExposed = st.lastExposed;
+  if (st.wasOusted === true) out.wasOusted = true;
   return out;
 }
 /** The codepoint-sorted persisted record (byte-stable serialization). Empty ⇒ null so an

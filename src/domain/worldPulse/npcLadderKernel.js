@@ -72,13 +72,15 @@
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
 import { clamp } from '../../kernel/math.js';
 import { npcId } from './npcAgency.js';
+import { memoryHorizonMultiplierOf } from './relationshipEvolution.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
 import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
   rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
-  sortedRecord, mirrorOf,
+  sortedRecord, mirrorOf, maintainMarks,
 } from './npcLadderState.js';
 import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
+import { CHALLENGE_TUNING, resolveFactionChallenges } from './npcLadderChallenge.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -104,6 +106,8 @@ import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar }
  * @property {LadderGoal|null} goal — the current minted goal (null ⇒ none this state)
  * @property {LadderStigma|null} stigma — the §10 exposure mark (null ⇒ clean)
  * @property {Record<string, LadderGrudge>} grudges — §4e D5 marks, keyed by defender npcId
+ * @property {number} [lastExposed] last-seen timesExposed count (fresh-exposure detection)
+ * @property {boolean} [wasOusted] last-seen ousted flag (fresh-exposure detection)
  */
 /** @typedef {{ condition: import('../autonomy/stopConditions.js').StopCondition, stakes: number,
  *   horizonWeeks: number, mintedWeek: number, mintedRung: number, startScore: number,
@@ -218,8 +222,10 @@ export function advanceNpcLadder({ snapshot, worldState, settlementUpdates, tick
  * @returns {NpcLadderAdvanceResult}
  */
 function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }) {
-  void now;
   const T = LADDER_TUNING;
+  /** @type {Array<Record<string, unknown>>} */
+  const newsEntries = [];
+  let realmSuccessions = 0; // (4) the realm-wide E0 cap on successions per advance
   const now2 = Math.max(0, Math.floor(num(tick, 0)));
   const weeks = num(asObject(asObject(worldState).calendar).elapsedWeeks, now2);
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
@@ -261,6 +267,9 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       ? /** @type {Array<Record<string, unknown>>} */ (asObject(asObject(s).powerStructure).factions) : [];
     const cap = rungCapForTier(/** @type {string} */ (asObject(s).tier));
     const causalItem = snapshot?.byId?.get?.(sid) || itemById.get(sid) || null;
+    const bandMult = memoryHorizonMultiplierOf(/** @type {Parameters<typeof memoryHorizonMultiplierOf>[0]} */ (/** @type {unknown} */ (s)));
+    const townName = String(itemById.get(sid)?.name || asObject(s).name || sid);
+    const seed = String(asObject(worldState).rngSeed || '');
     // npcId → npc object (for the goal lens); the SAME key the growth layer computes.
     /** @type {Map<string, Record<string, unknown>>} */
     const npcByNid = new Map();
@@ -301,10 +310,14 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       if (!rungs.length) continue;
 
       // Standings: decay an existing record toward baseline; seed a new rung by its
-      // structural height (the defender's-advantage head start). Then run the GOAL
+      // structural height (the defender's-advantage head start). Maintain the §10 stigma +
+      // §4e grudge marks (band-scaled decay + fresh-exposure mint), then run the GOAL
       // lifecycle (§3.2 mint/evolve, §9 weighted deeds, §11.3 partial-progress deposits).
+      /** @type {Set<string>} the rung-holders freshly exposed for corruption THIS advance */
+      const freshExposed = new Set();
       rungs.forEach((nid, rungIndex) => {
         activeNids.add(nid);
+        const npcObj = npcByNid.get(nid) || {};
         const priorSt = prior.npcs[nid];
         /** @type {LadderStanding} */
         let st;
@@ -317,17 +330,46 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
             since: weeks, week: weeks, goal: null, stigma: null, grudges: {},
           };
         }
-        npcs[nid] = applyGoalLifecycle(st, {
-          npc: npcByNid.get(nid) || {}, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
+        const marks = maintainMarks(st, npcObj, bandMult, weeks, now2);
+        if (marks.freshExposed) freshExposed.add(nid);
+        npcs[nid] = applyGoalLifecycle(marks.st, {
+          npc: npcObj, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
         });
       });
 
       const power = num(asObject(faction).power, 0);
-      factions[fkey] = {
-        rungs,
-        cooldownUntil: priorRec ? priorRec.cooldownUntil : 0,
-        lastPower: power,
-      };
+      const priorPower = priorRec ? priorRec.lastPower : power;
+      const factionRising = power > priorPower + CHALLENGE_TUNING.POWER_TRAJECTORY_EPS;
+      const factionFalling = power < priorPower - CHALLENGE_TUNING.POWER_TRAJECTORY_EPS;
+
+      // ── THE CHALLENGE ENGINE (§2/§3/§11.4): windowed, seeded, margin-gated contests
+      // (a win SWAPS the pair — conservation; a loss drops the challenger — the stake). ──
+      /** @type {LadderFactionRec} */
+      const rec = { rungs, cooldownUntil: priorRec ? priorRec.cooldownUntil : 0, lastPower: power };
+      const plan = resolveFactionChallenges({
+        rungs, npcs, npcByNid, faction, fkey, cooldownUntil: rec.cooldownUntil, weeks, tick: now2,
+        seed, factionRising, factionFalling, freshExposed, worldState,
+        realmBudget: CHALLENGE_TUNING.REALM_SUCCESSION_CAP - realmSuccessions,
+      });
+      if (plan.events.length) {
+        rec.rungs = plan.nextRungs;
+        // The STAKE (§2): a failed challenge stamps a D5 grudge (hardens the same defender
+        // on a repeat) + withdraws a share of the challenger's standing.
+        for (const gm of plan.grudgeMints) {
+          const cr = npcs[gm.challengerNid];
+          if (cr) cr.grudges = { ...cr.grudges, [gm.defenderNid]: { sev: CHALLENGE_TUNING.GRUDGE_MINT_SEV, week: weeks } };
+        }
+        for (const w of plan.withdraws) {
+          const cr = npcs[w.nid];
+          if (cr) cr.stock = round4(clamp(cr.stock - cr.stock * w.share, 0, T.STAND_MAX));
+        }
+        if (plan.successions > 0) {
+          rec.cooldownUntil = weeks + CHALLENGE_TUNING.COOLDOWN_WEEKS; // (3) the interregnum
+          realmSuccessions += plan.successions;
+        }
+        for (const ev of plan.events) newsEntries.push(ladderBeat(sid, townName, fkey, ev, now2, now));
+      }
+      factions[fkey] = rec;
     }
 
     // Orphan standings (an NPC that held a rung last tick but is on none now): decay on
@@ -387,8 +429,45 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       : dropSpatialLedger(worldState, 'npcLadder');
     changed = true;
   }
+  if (newsEntries.length) changed = true;
 
-  return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries: [] };
+  return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries };
+}
+
+// ── The ladder beat (house voice) ─────────────────────────────────────────────
+/**
+ * The npc_ladder chronicle beat — a rise (a challenger displaced the rung above) or a
+ * failed challenge (ambition punished). Unvoiced crier-wise (the urban_fabric precedent);
+ * the FULL reason receipt enumerates every window + score input. AGGREGATE court motion —
+ * ranks move, never a named soul's FATE (state-never-fate §4g).
+ * @param {string} sid @param {string} townName @param {string} fkey
+ * @param {import('./npcLadderChallenge.js').ChallengeEvent} ev @param {number} tick @param {string|null} now
+ * @returns {Record<string, unknown>}
+ */
+function ladderBeat(sid, townName, fkey, ev, tick, now) {
+  const win = ev.kind === 'rise';
+  const windows = ev.windows.length ? ev.windows.join(', ') : 'an open contest';
+  const headline = win
+    ? `${ev.challengerName} takes the seat above ${ev.defenderName}`
+    : `${ev.challengerName}'s bid against ${ev.defenderName} fails`;
+  const summary = win
+    ? `In ${townName}, ${ev.challengerName} has displaced ${ev.defenderName} and risen a rung — a promotion is a displacement, and every rise has a named loser.`
+    : `In ${townName}, ${ev.challengerName} moved against ${ev.defenderName} and was thrown back — ambition risked something real, and the challenger drops a rung for it.`;
+  const reason = win
+    ? `A windowed challenge (${windows}) cleared the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The ranks swapped — conservation holds, no title inflation.`
+    : `A windowed challenge (${windows}) fell short of the sustained margin: challenge ${ev.cScore} vs defense ${ev.dScore}. The defender held; the challenger dropped a rung and carries the grudge.`;
+  const slug = `${ev.kind}.${fkey}.${ev.challengerNid}.${ev.defenderNid}`;
+  return {
+    id: `wizard_news.${tick}.npc_ladder.${sid}.${slug}`,
+    tick, createdAt: now, scope: 'local', significance: 'notable', severity: win ? 0.35 : 0.25, score: win ? 48 : 43,
+    headline,
+    summary,
+    kind: 'applied', impactKind: 'npc_ladder', channelType: 'settlement',
+    settlementIds: [sid], impactIds: [], channelIds: [],
+    sourceEventId: `npc_ladder.${sid}.${slug}.${tick}`,
+    tags: ['world_pulse', 'npc_ladder', ev.kind],
+    reasons: [reason],
+  };
 }
 
 // ── THE PULSE SEAM — growth+fabric+consequence composed with the ladder mover ──
