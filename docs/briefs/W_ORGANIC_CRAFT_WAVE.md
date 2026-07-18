@@ -65,6 +65,27 @@ and phases 3-4 close only when the census carries zero undispositioned entries. 
 one-fiction pass (empty states, errors, loaders) rides the same census. No silent skips;
 the preview legibility review walks the census, not a sample.
 
+## THE DEPTH STANDARD (owner-ratified 2026-07-17 — the standing check on every craft fold)
+The bar is not screenshot beauty; it is DEPTH, CONSISTENCY, VALIDATION, AND EXECUTION
+ACROSS THE ENTIRE EXPERIENCE ("the best Fable can do" — the owner's framework, ledgered).
+Every craft fold (and the manager's preview review) checks these columns explicitly:
+1. WHOLE-EXPERIENCE COHERENCE — the census at zero undispositioned; empty/error/loading
+   states, forms, account surfaces, and long-form content hold the same standard as the
+   showcase pages; the site must not collapse past the front door.
+2. SYSTEM, NOT INSTANCES — every visual decision lands as a documented token/primitive/
+   rule (the law doc is the system documentation); no one-off styling that a future
+   contributor cannot reproduce.
+3. EVIDENCE, NOT VIBES — rejected alternatives recorded (the JUDGMENT discipline);
+   contrast/targets/reflow verified per state, not per screenshot; the performance
+   ratchets green on throttled mid-range devices.
+4. CONTENT IS DESIGN — headlines, labels, CTAs, error messages, and onboarding copy are
+   in scope for every recomposed surface (the voice ruling + copy-source guards apply).
+5. THE HONEST GAPS STAY NAMED — real-user task validation is POST-LAUNCH OWED (every
+   surface ships instrumented so judgment converts to evidence at contact); localization
+   is post-launch ROADMAP by name (the copy registries keep the door open).
+The distinctive-identity test remains: authored-never-defaulted; a polished variation of
+a familiar template FAILS this standard even if beautiful.
+
 ## Fold gates (in order, all mandatory)
 Lane full gate (four validators, tsc + strict explicit, lint, suite, build+dist, closure)
 → the manager's PREVIEW LEGIBILITY REVIEW: desktop + mobile viewports + the dim pass,

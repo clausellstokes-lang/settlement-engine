@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE DEPTH STANDARD RATIFIED (owner, 2026-07-17: the $10k-vs-$1M framework + "I
+want the absolute best that Fable can do"):** the standing check on all website work —
+the bar is DEPTH/CONSISTENCY/VALIDATION/WHOLE-EXPERIENCE EXECUTION, never screenshot
+beauty. Five columns added to the craft-wave fold gates (whole-experience coherence via
+the census · system-not-instances · evidence-not-vibes incl. rejected-alternatives
+recording · content-is-design · the honest gaps named). MAPPING BANKED: the program
+already fills the framework's expensive columns structurally (six research corpora =
+the documented research · the census = the past-the-front-door law · the law doc +
+golden-disciplined ornament = the design system · drift contracts + the JUDGMENT ledger
+= testing-and-evidence incl. why-rejected · the lane structure = the multidisciplinary
+team). THE TWO HONEST GAPS: real-user task validation = POST-LAUNCH OWED (all surfaces
+ship instrumented; ROUND 3's product-fit = the internal proxy) · LOCALIZATION = absent,
+now a NAMED post-launch roadmap item (copy registries keep the door open). ROUND 3's
+claims/product audit inherits the five columns. Relayed to the live craft lane.
 **⬛⬛ FOLD: THE LADDER @ e160177f (2026-07-17) — ENGINE LIFT #3 LANDS; THE ENGINE'S
 CONSTRUCTION ENDS FOR THE THIRD AND FINAL TIME.** 7 commits (17 files NUL-clean; ~1,790
 engine lines in lazy leaves; pulseKernel net-zero): the standing integrator · dynamic
