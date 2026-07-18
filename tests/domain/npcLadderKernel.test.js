@@ -26,14 +26,17 @@ function courtSettlement(npcs, extra = {}) {
     npcs, institutions: [], activeConditions: [], ...extra,
   };
 }
-/** Drive one lit advance; return { worldState, settlement (post-mirror), rec }. */
-function advance(settlement, { weeks = 260, tick = 260, priorLedger = null } = {}) {
+/** Drive one lit advance; return { worldState, settlement (post-mirror), rec }. When
+ *  `causal` is supplied, the snapshot carries a byId Map with that causal state so goals
+ *  can mint/evaluate (the real-pulse postTimeSnapshot condition). */
+function advance(settlement, { weeks = 260, tick = 260, priorLedger = null, causal = null } = {}) {
   const worldState = {
     simulationRules: { npcLadderEnabled: true },
     calendar: { elapsedWeeks: weeks },
     ...(priorLedger ? { spatialLedgers: { npcLadder: priorLedger } } : {}),
   };
-  const snapshot = { settlements: [{ id: 'a', name: 'Ashford', settlement }] };
+  const item = { id: 'a', name: 'Ashford', settlement, ...(causal ? { causal } : {}) };
+  const snapshot = { settlements: [item], ...(causal ? { byId: new Map([['a', item]]) } : {}) };
   const settlementUpdates = [{ saveId: 'a', settlement }];
   const r = advanceNpcLadder({ snapshot, worldState, settlementUpdates, tick, now: null });
   const outSettlement = r.settlementUpdates[0]?.settlement;
@@ -134,5 +137,30 @@ describe('ladder standing — the integrator (fabric idiom) + interval invarianc
     const again = advance(first.settlement, { weeks: 260, tick: 260, priorLedger: { a: first.rec } });
     expect(again.rec).toEqual(first.rec);
     expect(again.result.changed).toBe(false);
+  });
+});
+
+describe('ladder goals — standing deposits through the mover (§9 weighted deeds, §11.3)', () => {
+  const npcs = [npc('n_master', 'Master', 'pillar', 3, 'dominant')];
+  it('a goal that visibly ADVANCES deposits into standing; a REVERSAL withdraws (magnitude-mirrored)', () => {
+    // Mint the goal at a low domain score (economic_capacity 30 → threshold), banking progress 0.
+    const t0 = advance(courtSettlement(npcs), { weeks: 260, tick: 260, causal: { scores: { economic_capacity: 30 }, bands: {} } });
+    const s0 = t0.rec.npcs['a:n_master'].stock;
+    expect(t0.rec.npcs['a:n_master'].goal, 'the rung-holder minted a goal').toBeTruthy();
+    // Next advance: the domain signal ROSE — visible progress deposits, standing rises.
+    const t1 = advance(t0.settlement, { weeks: 264, tick: 264, priorLedger: { a: t0.rec }, causal: { scores: { economic_capacity: 55 }, bands: {} } });
+    const s1 = t1.rec.npcs['a:n_master'].stock;
+    expect(s1, 'visible progress deposits into standing').toBeGreaterThan(s0);
+    // Next advance: the signal FELL back — the reversal withdraws (standing drops from s1).
+    const t2 = advance(t1.settlement, { weeks: 268, tick: 268, priorLedger: { a: t1.rec }, causal: { scores: { economic_capacity: 30 }, bands: {} } });
+    const s2 = t2.rec.npcs['a:n_master'].stock;
+    expect(s2, 'a reversal withdraws standing, magnitude-mirrored').toBeLessThan(s1);
+  });
+
+  it('determinism: same seed/state ⇒ byte-identical goal + standing across two runs', () => {
+    const causal = { scores: { economic_capacity: 30 }, bands: {} };
+    const a = advance(courtSettlement(npcs), { weeks: 260, tick: 260, causal });
+    const b = advance(courtSettlement(npcs), { weeks: 260, tick: 260, causal });
+    expect(JSON.stringify(a.rec)).toBe(JSON.stringify(b.rec));
   });
 });

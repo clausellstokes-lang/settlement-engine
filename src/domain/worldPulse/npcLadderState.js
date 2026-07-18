@@ -179,6 +179,7 @@ function normalizeGoal(v) {
     horizonWeeks: Math.max(1, Math.floor(num(o.horizonWeeks, 1))),
     mintedWeek: num(o.mintedWeek, 0),
     mintedRung: Math.floor(num(o.mintedRung, 0)),
+    startScore: round4(num(o.startScore, 0)),
     progress: round4(clamp01(num(o.progress, 0))),
     basis: typeof o.basis === 'string' ? o.basis : '',
   };
@@ -230,7 +231,8 @@ function sortedStanding(st) {
   if (st.goal) {
     out.goal = {
       basis: st.goal.basis, condition: st.goal.condition, horizonWeeks: st.goal.horizonWeeks,
-      mintedRung: st.goal.mintedRung, mintedWeek: st.goal.mintedWeek, progress: st.goal.progress, stakes: st.goal.stakes,
+      mintedRung: st.goal.mintedRung, mintedWeek: st.goal.mintedWeek, progress: st.goal.progress,
+      stakes: st.goal.stakes, startScore: st.goal.startScore,
     };
   }
   if (st.stigma) out.stigma = { sev: st.stigma.sev, tick: st.stigma.tick, week: st.stigma.week };

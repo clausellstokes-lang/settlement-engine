@@ -70,12 +70,15 @@
  *   window / goal / coherence / three-body / stigma / standing-loop pins).
  */
 import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { clamp } from '../../kernel/math.js';
+import { npcId } from './npcAgency.js';
 import { advanceNpcGrowthWithFabricAndConsequence } from './spatialConsequenceKernel.js';
 import {
   LADDER_TUNING, num, asObject, compareCodepoint, round4, ladderFactionKey, eligibleMembersOf,
   rungCapForTier, seedStandingForRung, decayStandingTowardBaseline, normalizeRecord,
   sortedRecord, mirrorOf,
 } from './npcLadderState.js';
+import { GOAL_TUNING, mintGoal, evaluateGoal, attributionWeight, goalSignalVar } from './npcLadderGoals.js';
 
 // ── Kernel-local read shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ id?: string, name?: string, label?: string, role?: string, title?: string,
@@ -103,8 +106,8 @@ import {
  * @property {Record<string, LadderGrudge>} grudges — §4e D5 marks, keyed by defender npcId
  */
 /** @typedef {{ condition: import('../autonomy/stopConditions.js').StopCondition, stakes: number,
- *   horizonWeeks: number, mintedWeek: number, mintedRung: number, progress: number,
- *   basis: string }} LadderGoal */
+ *   horizonWeeks: number, mintedWeek: number, mintedRung: number, startScore: number,
+ *   progress: number, basis: string }} LadderGoal */
 /** @typedef {{ sev: number, week: number, tick: number }} LadderStigma */
 /** @typedef {{ sev: number, week: number }} LadderGrudge */
 /** @typedef {{ rungs: string[], cooldownUntil: number, lastPower: number }} LadderFactionRec */
@@ -125,6 +128,47 @@ import {
 export function npcLadderActive(worldState) {
   const rules = worldState && typeof worldState === 'object' ? worldState.simulationRules : null;
   return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).npcLadderEnabled === true);
+}
+
+// v1 goals reference NO pressure signals, so an empty pressures stub satisfies the S7
+// frame contract (resolveSignal touches frame.pressures ONLY for pressure.* reads).
+const EMPTY_PRESSURES = Object.freeze({ get: () => null });
+
+/**
+ * The per-rung GOAL lifecycle (§3.2 dynamic goals · §9 weighted deeds · §11.3 partial-
+ * progress deposits · the ATTRIBUTION RULE). Evaluate the current goal; deposit its
+ * stakes-weighted, attribution-weighted PROGRESS DELTA into the standing stock (a
+ * reversal withdraws, magnitude-mirrored); remint on completion / horizon expiry / rung
+ * change; an unreadable signal ⇒ the premise LAPSED (honest null — remint, no reward or
+ * penalty). Returns the updated standing. PURE.
+ * @param {LadderStanding} st
+ * @param {{ npc: Record<string, unknown>, faction: unknown, rungIndex: number, sid: string,
+ *   frame: import('../autonomy/signalRegistry.js').SignalFrame,
+ *   item: {causal?: unknown}|null, weeks: number }} ctx
+ * @returns {LadderStanding}
+ */
+function applyGoalLifecycle(st, ctx) {
+  const { npc, faction, rungIndex, sid, frame, item, weeks } = ctx;
+  const mint = () => mintGoal({ npc, faction, rungIndex, sid, frame, item, weeks });
+  let goal = st.goal;
+  let stock = st.stock;
+  if (!goal) return { ...st, goal: mint() };
+  const ev = evaluateGoal(goal, frame);
+  if (!ev.readable) {
+    // LAPSED — the premise died by outside forces (the signal is gone): remint, no deposit.
+    return { ...st, goal: mint() };
+  }
+  const delta = ev.progress - goal.progress;
+  const aw = attributionWeight(rungIndex, faction, goalSignalVar(goal));
+  const deposit = goal.stakes * delta * aw * GOAL_TUNING.DEPOSIT_SCALE;
+  stock = clamp(stock + deposit, 0, LADDER_TUNING.STAND_MAX);
+  goal = { ...goal, progress: ev.progress };
+  // Settle at outcome: a fired deed, an expired horizon, or a rung change reminds a fresh
+  // goal (the delta above is already banked — completion/expiry keep the earned deposits).
+  const expired = (weeks - goal.mintedWeek) >= goal.horizonWeeks;
+  const rungChanged = goal.mintedRung !== rungIndex;
+  if (ev.fired || expired || rungChanged) goal = mint();
+  return { ...st, stock: round4(stock), goal };
 }
 
 // ── The advance ───────────────────────────────────────────────────────────────
@@ -181,6 +225,16 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
   const items = Array.isArray(snapshot?.settlements) ? snapshot.settlements : [];
   const itemById = new Map(items.map((it) => [String(it.id), it]));
 
+  // The S7 reading frame for goal predicates — the registry evaluator resolves causal
+  // signals from the snapshot's memoized item.causal (settlement-scoped, freshness-safe).
+  // v1 goals reference NO pressure signals, so an empty pressures stub suffices. Ensure a
+  // byId Map is present (the pulse's postTimeSnapshot always carries one with causal; a
+  // bare snapshot falls back to itemById — its items lack causal ⇒ goals read unreadable
+  // ⇒ mint null, which is safe).
+  const frameSnapshot = snapshot && snapshot.byId instanceof Map ? snapshot : { ...snapshot, byId: itemById };
+  const goalFrame = /** @type {import('../autonomy/signalRegistry.js').SignalFrame} */ (
+    /** @type {unknown} */ ({ snapshot: frameSnapshot, pressures: EMPTY_PRESSURES, tick: now2 }));
+
   /** @type {Map<string, number>} */
   const updateIndex = new Map();
   settlementUpdates.forEach((u, i) => updateIndex.set(String(u.saveId), i));
@@ -206,6 +260,12 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
     const factionsList = Array.isArray(asObject(asObject(s).powerStructure).factions)
       ? /** @type {Array<Record<string, unknown>>} */ (asObject(asObject(s).powerStructure).factions) : [];
     const cap = rungCapForTier(/** @type {string} */ (asObject(s).tier));
+    const causalItem = snapshot?.byId?.get?.(sid) || itemById.get(sid) || null;
+    // npcId → npc object (for the goal lens); the SAME key the growth layer computes.
+    /** @type {Map<string, Record<string, unknown>>} */
+    const npcByNid = new Map();
+    const roster = Array.isArray(asObject(s).npcs) ? /** @type {unknown[]} */ (asObject(s).npcs) : [];
+    roster.forEach((n, i) => { npcByNid.set(npcId(sid, /** @type {Parameters<typeof npcId>[1]} */ (n), i), asObject(n)); });
 
     /** @type {Record<string, import('./npcLadderKernel.js').LadderFactionRec>} */
     const factions = {};
@@ -241,19 +301,25 @@ function advanceLitLadder({ snapshot, worldState, settlementUpdates, tick, now }
       if (!rungs.length) continue;
 
       // Standings: decay an existing record toward baseline; seed a new rung by its
-      // structural height (the defender's-advantage head start).
+      // structural height (the defender's-advantage head start). Then run the GOAL
+      // lifecycle (§3.2 mint/evolve, §9 weighted deeds, §11.3 partial-progress deposits).
       rungs.forEach((nid, rungIndex) => {
         activeNids.add(nid);
         const priorSt = prior.npcs[nid];
+        /** @type {LadderStanding} */
+        let st;
         if (priorSt) {
           const decayed = decayStandingTowardBaseline(priorSt.stock, Math.max(0, weeks - priorSt.week));
-          npcs[nid] = { ...priorSt, stock: round4(decayed), week: weeks };
+          st = { ...priorSt, stock: round4(decayed), week: weeks };
         } else {
-          npcs[nid] = {
+          st = {
             stock: round4(seedStandingForRung(rungIndex, rungs.length)),
             since: weeks, week: weeks, goal: null, stigma: null, grudges: {},
           };
         }
+        npcs[nid] = applyGoalLifecycle(st, {
+          npc: npcByNid.get(nid) || {}, faction, rungIndex, sid, frame: goalFrame, item: causalItem, weeks,
+        });
       });
 
       const power = num(asObject(faction).power, 0);
