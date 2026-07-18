@@ -1120,6 +1120,16 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ OWNER SIMPLIFICATION RULING (2026-07-18, "simplify it — too many elements"):** the
+mark reduces to its IRREDUCIBLE DEVICE — ring broken by the roofline, station triangle,
+red seal-point. STRUCK: rim legend, motto, field pellets, double ring, the SF from the
+primary mark. The name + motto move OUT of the device into the wordmark lockup (type
+beside the mark) and ceremonial captions (export colophon sets the motto as a line under
+the device, not inside it). Favicon = OWNER CHOICE PENDING: (A) the same device redrawn
+heavier — RECOMMENDED, one mark everywhere · (B) the SF signet surviving only in the tab.
+The accretion was the process's fault, not the owner's — each element entered justified;
+Rand's reduction discipline is the answer, and the struck elements remain available to
+ceremonial contexts by typography, never inside the mark.
 **⬛ OWNER SEAL AMENDMENT (2026-07-18):** the Colophon drops the SF monogram — the
 STATION (triangle + red dot) enlarges as the sole central device between rim legend and
 skyline; the name lives entirely in the legend + motto (pure sigillographic composition:
