@@ -29,6 +29,12 @@
   --_hairline: var(--oc-ink-hairline);
   --_rubric: var(--oc-rubric);
   --_entry: var(--oc-entry);
+  /* Instrument fills — the operated register's own machined surfaces. */
+  --_btn-fill: var(--oc-btn-fill);
+  --_btn-ink: var(--oc-btn-ink);
+  --_btn-border: var(--oc-btn-border);
+  --_btn-primary: var(--oc-btn-primary);
+  --_btn-primary-ink: var(--oc-btn-primaryink);
   --_serif: 'Lora', 'Crimson Text', Georgia, serif;
   --_sans: 'Nunito', system-ui, sans-serif;
   color: var(--_ink-body);
@@ -45,6 +51,11 @@
   --_hairline: var(--oc-field-hairline);
   --_rubric: var(--oc-field-rubric);
   --_entry: var(--oc-field-entry);
+  --_btn-fill: var(--oc-field-btn-fill);
+  --_btn-ink: var(--oc-field-btn-ink);
+  --_btn-border: var(--oc-field-btn-border);
+  --_btn-primary: var(--oc-field-btn-primary);
+  --_btn-primary-ink: var(--oc-field-btn-primaryink);
 }
 
 /* ── Typography tiers (the fluid scale) ───────────────────────────────────────
@@ -56,7 +67,7 @@
 .oc-prose p + p { text-indent: 1.1em; }               /* the pilcrow→indent lesson */
 .oc-prose p:first-of-type { text-indent: 0; }
 
-.oc-display   { font-family: var(--_serif); color: var(--_ink); line-height: 1.12; font-weight: 700; letter-spacing: 0.002em; }
+.oc-display   { font-family: var(--_serif); color: var(--_ink); line-height: 1.12; font-weight: 700; letter-spacing: 0.002em; margin: 0 0 0.3em; }
 .oc-display--xl { font-size: var(--oc-type-displayXL); }
 .oc-display--l  { font-size: var(--oc-type-displayL); }
 .oc-display--m  { font-size: var(--oc-type-displayM); }
@@ -137,6 +148,8 @@
 /* ── Seeded ornament — decorative, non-interactive, clean space around it ─────*/
 .oc-ornament { display: inline-block; line-height: 0; }
 .oc-ornament svg { display: block; }
+/* A cartouche frame scales to its (responsive) container, holding aspect ratio. */
+.oc-cartouche__frame svg { width: 100%; height: 100%; }
 
 /* Reduced motion: the organic layer has no motion, but honour the intent. */
 @media (prefers-reduced-motion: reduce) {

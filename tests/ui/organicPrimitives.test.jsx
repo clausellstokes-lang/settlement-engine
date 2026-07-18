@@ -72,7 +72,7 @@ describe('Manuscript surface + text primitives', () => {
       <Surface>
         <Eyebrow>Surveyor’s desk</Eyebrow>
         <Display size="xl" as="h1">Thornwall</Display>
-        <Rubric role="instruction">Begin here</Rubric>
+        <Rubric variant="instruction">Begin here</Rubric>
         <Ink tone="secondary">a gloss</Ink>
       </Surface>,
     );

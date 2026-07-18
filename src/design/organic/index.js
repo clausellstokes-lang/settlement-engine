@@ -13,10 +13,12 @@
 
 import { INK, FIELD_INK } from './ink.js';
 import { RUBRIC, FIELD_RUBRIC } from './rubrication.js';
+import { INSTRUMENT, FIELD_INSTRUMENT } from './instruments.js';
 import { TYPE, SPACE } from './fluidScale.js';
 
 export * from './ink.js';
 export * from './rubrication.js';
+export * from './instruments.js';
 export * from './fluidScale.js';
 export * from './posture.js';
 export * from './rules.js';
@@ -36,6 +38,8 @@ export function organicCssVars() {
   vars['--oc-entry'] = RUBRIC.entry;
   vars['--oc-field-rubric'] = FIELD_RUBRIC.rubric;
   vars['--oc-field-entry'] = FIELD_RUBRIC.entry;
+  for (const [k, v] of Object.entries(INSTRUMENT)) vars[`--oc-btn-${k.toLowerCase()}`] = v;
+  for (const [k, v] of Object.entries(FIELD_INSTRUMENT)) vars[`--oc-field-btn-${k.toLowerCase()}`] = v;
   for (const [k, s] of Object.entries(TYPE)) vars[`--oc-type-${k}`] = s.clamp;
   for (const [k, s] of Object.entries(SPACE)) vars[`--oc-space-${k}`] = s.clamp;
   return vars;

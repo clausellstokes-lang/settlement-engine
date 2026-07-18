@@ -24,6 +24,7 @@ import {
 // dim); the decorative hairline is pinned as a negative control (fails as text).
 import { INK as OINK, FIELD_INK, INK_TEXT_STEPS, FIELD_TEXT_STEPS } from '../../src/design/organic/ink.js';
 import { RUBRIC, FIELD_RUBRIC } from '../../src/design/organic/rubrication.js';
+import { INSTRUMENT, FIELD_INSTRUMENT } from '../../src/design/organic/instruments.js';
 // Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
 // warning / ai tones previously coloured their LABEL with the -500 fill hue
 // (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
@@ -246,5 +247,32 @@ describe('Organic FIELD mode legibility (WCAG AA 4.5:1 on the warm dark panel)',
   test('the field ground is warm, not pure black (halation rule)', () => {
     expect(FIELD_INK.ground).not.toBe('#000000');
     expect(FIELD_INK.ink).not.toBe('#FFFFFF');
+  });
+});
+
+// ── THE INSTRUMENT FILLS — legible at EVERY state, light + field (§2/§6) ──────
+// Ornamented/quiet controls owe three contrasts per state (label/fill, boundary/
+// ground, focus/landing). These pin the label/fill and boundary/ground floors for
+// the instrument register's fills in both modes, so a machined control is always
+// readable — the per-state validation the depth standard demands, not a screenshot.
+describe('Organic instrument fills — legible at every state (WCAG AA / 1.4.11)', () => {
+  test('quiet fill: ink on fill clears AA', () => {
+    expect(ratio(INSTRUMENT.ink, INSTRUMENT.fill)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('primary fill: ink on the gold primary clears AA (never white-on-gold)', () => {
+    expect(ratio(INSTRUMENT.primaryInk, INSTRUMENT.primary)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio('#FFFFFF', INSTRUMENT.primary)).toBeLessThan(AA_TEXT); // documents the retired pairing
+  });
+  test('instrument boundary is perceivable on card + page (1.4.11)', () => {
+    expect(ratio(INSTRUMENT.border, CARD)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(INSTRUMENT.border, PARCH)).toBeGreaterThanOrEqual(AA_UI);
+  });
+  test('FIELD quiet + primary fills clear AA on the dark ground', () => {
+    expect(ratio(FIELD_INSTRUMENT.ink, FIELD_INSTRUMENT.fill)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(FIELD_INSTRUMENT.primaryInk, FIELD_INSTRUMENT.primary)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('FIELD boundary is perceivable on the field ground + panel (1.4.11)', () => {
+    expect(ratio(FIELD_INSTRUMENT.border, FIELD_INK.ground)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(FIELD_INSTRUMENT.border, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_UI);
   });
 });

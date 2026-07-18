@@ -29,10 +29,13 @@ export function CompassRose({ mode = 'light', size = 64 }) {
  */
 export function SeededCartouche({ seed, mode = 'light', width = 320, height = 96, children }) {
   const svg = cartouche(seed, { mode, width, height });
+  // Responsive: cap at the intrinsic width but shrink to fit a narrow pane, holding
+  // the aspect ratio (so the field-mode dossier survives a 320px reflow). The frame
+  // SVG scales via its viewBox; the label overlays.
   return (
-    <span className="oc-cartouche" style={{ position: 'relative', display: 'inline-block', width, height }}>
+    <span className="oc-cartouche" style={{ position: 'relative', display: 'block', width: `${width}px`, maxWidth: '100%', aspectRatio: `${width} / ${height}` }}>
       <span
-        className="oc-ornament"
+        className="oc-cartouche__frame oc-ornament"
         aria-hidden="true"
         style={{ position: 'absolute', inset: 0 }}
         dangerouslySetInnerHTML={{ __html: svg }}
