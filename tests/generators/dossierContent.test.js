@@ -138,3 +138,32 @@ describe('pressure pools stay well-formed after growth', () => {
     for (const s of lose) { expect(s).toMatch(/losing people and resources/); expect(s).not.toMatch(/on the right side of it/); }
   });
 });
+
+describe('AMENDMENT B — sentence-start faction interpolations are capitalised (casing pass)', () => {
+  const RAW = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../../src/generators/narrativeText.js'), 'utf8');
+  it('no capitalised-fallback (sentence-start) govFaction/topFaction interpolation is left unwrapped', () => {
+    // A capitalised "The …" fallback marks a sentence-start site; every one must go
+    // through capFirst so a set lowercase faction value ("the town council") opens the
+    // sentence capitalised. Mid-sentence sites (lowercase "the …" fallback) stay raw.
+    expect(RAW).not.toMatch(/\$\{r\.govFaction \|\| "The /);
+    expect(RAW).not.toMatch(/\$\{r\.topFaction \|\| "The /);
+    expect(RAW).toMatch(/capFirst\(r\.govFaction\)/);
+  });
+  it('a lowercase faction value opens a sentence-start pool entry capitalised', () => {
+    const r = { name: 'Ashholt', govFaction: 'the town council', topFaction: 'the merchant guild', commodity: 'grain', compound: { criminalEffective: 70, militaryEffective: 20, economyOutput: 40 } };
+    // famine[4] and the insurgency compound[0] both OPEN a sentence on govFaction.
+    expect(PRESSURE_SENTENCES.famine(r)[4]).toMatch(/^The town council of Ashholt/);
+    expect(PRESSURE_SENTENCES.insurgency(r)[0]).toMatch(/current arrangement\. The town council still holds/);
+    // indebted[1] OPENS on topFaction.
+    expect(PRESSURE_SENTENCES.indebted(r)[1]).toMatch(/^The merchant guild took the loans/);
+  });
+  it('capFirst is idempotent — an already-capitalised faction value is unchanged', () => {
+    const r = { name: 'Ashholt', govFaction: 'The Governing Council', commodity: 'grain' };
+    expect(PRESSURE_SENTENCES.famine(r)[4]).toMatch(/^The Governing Council of Ashholt/);
+  });
+  it('mid-sentence faction interpolations stay lowercase (not over-capitalised)', () => {
+    const r = { name: 'Ashholt', govFaction: 'the town council', commodity: 'grain' };
+    // under_siege[1] uses govFaction mid-sentence after "; " — must remain lowercase.
+    expect(PRESSURE_SENTENCES.under_siege(r)[1]).toMatch(/second week; the town council controls/);
+  });
+});

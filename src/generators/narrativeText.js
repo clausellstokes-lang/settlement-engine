@@ -20,6 +20,20 @@
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js";
 
+// AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
+// carry a value that is usually lowercased ("the town council"), while their
+// fallback strings are capitalised or not depending on POSITION. A capitalised
+// "The …" fallback marks a SENTENCE-START interpolation (the author capitalised
+// the fallback there); a lowercase "the …" fallback marks a mid-sentence one.
+// capFirst uppercases the first letter of a set faction value so a sentence that
+// OPENS on the interpolated value no longer reads "the town council announced …".
+// It is idempotent (a value already capitalised — e.g. a FACTION_DESCRIPTORS name
+// — is unchanged) and passes falsy through, so the fallback path is byte-identical.
+// Applied ONLY at the capitalised-fallback (sentence-start) sites; the lowercase-
+// fallback (mid-sentence) sites are left untouched. One-time golden shift (this
+// branch parks for the regen); prose-only, so the structural diff stays clean.
+const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() + s.slice(1) : s);
+
 // ─── Per-stress pressure sentences (consumed by narrativeGenerator) ──────────
 // Each value is a function (detail) => string[]. Only succession_void draws rng
 // (a hoisted weeks count — see below). The single selector generatePressureSentence
@@ -44,7 +58,7 @@ export const PRESSURE_SENTENCES = {
     `The harvest failure has restructured every relationship in ${r.name} — whoever controls food now controls the settlement, and at least three factions have worked this out.`,
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} is, and isn't saying, and the reasons for that silence are complicated.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
-    `${r.govFaction || "The council"} of ${r.name} announced a fair distribution of the ${r.commodity || "grain"} reserves last week; the announcement and the distribution are turning out to be two different things.`,
+    `${capFirst(r.govFaction) || "The council"} of ${r.name} announced a fair distribution of the ${r.commodity || "grain"} reserves last week; the announcement and the distribution are turning out to be two different things.`,
     `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people — they take what they are given and calculate, silently, how long it will last.`,
   ],
   occupied: (r) => [
@@ -65,7 +79,7 @@ export const PRESSURE_SENTENCES = {
   ],
   indebted: (r) => [
     `${r.name} owes more than it can repay; the creditor's representative arrived last month, and every civic decision since has been made with one eye on what they might accept as partial satisfaction.`,
-    `${r.topFaction || "The dominant faction"} took the loans and ${r.govFaction || "the current council"} is repaying them — a distinction that has not gone unnoticed and is not forgotten.`,
+    `${capFirst(r.topFaction) || "The dominant faction"} took the loans and ${r.govFaction || "the current council"} is repaying them — a distinction that has not gone unnoticed and is not forgotten.`,
     `The debt has a clause that ${r.topNPCName ? r.topNPCName + " has read" : "almost nobody has read"} and that would change the entire conversation if it became public.`,
     `The creditor has begun taking payment from ${r.name} in things other than coin — a warehouse here, a toll right there — and each transfer is legal, documented, and slightly worse than the last.`,
     `${r.name} still keeps up appearances: the civic buildings are painted, the festival was held. The money for both was borrowed, which everyone knows and no one says, because saying it would end the appearances that are the only asset left.`,
@@ -74,7 +88,7 @@ export const PRESSURE_SENTENCES = {
   recently_betrayed: (r) => [
     `Someone inside ${r.name} sold something important — recently enough that the wound is open, not yet scarred over — and the settlement's institutions are running at reduced trust while everyone suspects everyone else.`,
     `The betrayal's consequences are still unfolding; ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the most senior official"} knows more than they've disclosed about what was sold and to whom.`,
-    `${r.govFaction || "The council"} has been investigating the betrayal for three weeks with nothing to show for it, which either means they're incompetent or the answer leads somewhere they don't want to go.`,
+    `${capFirst(r.govFaction) || "The council"} has been investigating the betrayal for three weeks with nothing to show for it, which either means they're incompetent or the answer leads somewhere they don't want to go.`,
     `Since the betrayal, ${r.name} has become a place where people finish fewer sentences and lock more doors; the trust that made the settlement work is not gone, but it is being rationed.`,
     `Everyone in ${r.name} has privately assembled their own list of who might have done it, and the lists do not agree, and the disagreement is doing almost as much damage as the original act.`,
     `The betrayal cost ${r.name} something specific — a contract, a caravan, a name that vouched for the place — and the loss of it is only now working its way through the ledgers, arriving as bad news that seems, wrongly, unrelated.`,
@@ -90,7 +104,7 @@ export const PRESSURE_SENTENCES = {
   plague_onset: (r) => [
     `Something is spreading in ${r.name}; the quarantine is partial, the healers are overwhelmed, and the ${r.topNPCRole || "official"} who first identified it has gone quiet in a way that suggests either pressure or something worse.`,
     "The disease has not yet become a plague, but the window for preventing that outcome is narrowing; every day the quarantine is ignored or negotiated around makes the arithmetic worse.",
-    `${r.govFaction || "The council"} is managing disclosure of the outbreak, which means what residents know and what is actually true have started to diverge.`,
+    `${capFirst(r.govFaction) || "The council"} is managing disclosure of the outbreak, which means what residents know and what is actually true have started to diverge.`,
     `The sickness in ${r.name} has already sorted the population into those who can afford to leave, those who can afford to isolate, and those who can do neither — and the last group has noticed the sorting.`,
     `The healers of ${r.name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.`,
     `A cordon has gone up around one quarter of ${r.name}, and the people inside it and the people outside it are already telling different stories about why — stories that will outlast the sickness whichever way it goes.`,
@@ -124,13 +138,13 @@ export const PRESSURE_SENTENCES = {
       (((d = r.compound) == null ? void 0 : d.militaryEffective) || 0) &&
       (((l = r.compound) == null ? void 0 : l.economyOutput) || 50) < 48
       ? [
-          `The commons of ${r.name} have stopped pretending to accept the current arrangement. ${r.govFaction || "The governing authority"} still holds the buildings and the official seal, but it is governing by momentum rather than consent. The first faction leader to offer a credible alternative will find an audience.`,
-          `The street has gone quiet in ${r.name}, and the quiet is not calm — it is the pause before a thing that everyone can feel coming. ${r.govFaction || "The governing authority"} issues orders that are heard, noted, and not obeyed, and each unobeyed order costs it more than the last.`,
+          `The commons of ${r.name} have stopped pretending to accept the current arrangement. ${capFirst(r.govFaction) || "The governing authority"} still holds the buildings and the official seal, but it is governing by momentum rather than consent. The first faction leader to offer a credible alternative will find an audience.`,
+          `The street has gone quiet in ${r.name}, and the quiet is not calm — it is the pause before a thing that everyone can feel coming. ${capFirst(r.govFaction) || "The governing authority"} issues orders that are heard, noted, and not obeyed, and each unobeyed order costs it more than the last.`,
           `In ${r.name} the rents go uncollected, the summons go unanswered, and the men ${r.govFaction || "the governing authority"} sends to enforce either turn back or turn coat. The revolt has not started because it has, in every way that matters, already happened.`,
         ]
       : [
           `The challenge to ${r.govFaction || "the current authority"} in ${r.name} is institutional — not the street but the ledger and the meeting room. Revenue is being held. Officials are slow-walking decisions. Someone is building a coalition, and ${r.govFaction || "the governing faction"} knows it but cannot act without legitimising what they are trying to suppress.`,
-          `The insurgency in ${r.name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${r.govFaction || "The governing faction"} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.`,
+          `The insurgency in ${r.name} wears a clerk's coat. Permits stall in the right offices, funds arrive short and late, and the people doing it can each point to a rule that excuses them. ${capFirst(r.govFaction) || "The governing faction"} is being strangled by its own procedures, wielded by people who have read them more carefully than it has.`,
           `No one in ${r.name} is marching, and that is what makes it dangerous. The opposition to ${r.govFaction || "the current authority"} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force — and it is close to being able to.`,
         ];
   },
@@ -138,12 +152,12 @@ export const PRESSURE_SENTENCES = {
     var o;
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
-          `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community — they share streets and markets but not language, custom, or trust. ${r.govFaction || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,
+          `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community — they share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to is now straining under the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
-          `${r.name} has grown a second town at its edges — newer, poorer, and not quite governed by the same rules as the first. ${r.govFaction || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
+          `${r.name} has grown a second town at its edges — newer, poorer, and not quite governed by the same rules as the first. ${capFirst(r.govFaction) || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
         ]
       : [
-          `${r.name} is smaller than it was. The departure is orderly, which is its own kind of alarm — it means the people leaving have thought it through. ${r.govFaction || "The governing authority"} is trying to arrest the decline without acknowledging it publicly. So far neither effort is working.`,
+          `${r.name} is smaller than it was. The departure is orderly, which is its own kind of alarm — it means the people leaving have thought it through. ${capFirst(r.govFaction) || "The governing authority"} is trying to arrest the decline without acknowledging it publicly. So far neither effort is working.`,
           `Each season fewer households remain in ${r.name}, and the ones that go are, quietly, the ones that could go — the skilled, the connected, the solvent. What is left behind concentrates, and ${r.govFaction || "the governing authority"} presides over an emptying it dares not name.`,
           `The road out of ${r.name} is busier than the road in, and both are watched — by ${r.govFaction || "the governing authority"}, which cannot forbid people to leave, and by those who stayed, who are keeping a private account of who did not.`,
         ];
@@ -158,7 +172,7 @@ export const PRESSURE_SENTENCES = {
           `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`,
         ]
       : [
-          `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${r.govFaction || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
+          `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
           `The war reaches ${r.name} as a series of demands rather than battles: levies of men, of ${r.commodity || "grain"}, of coin, each one framed as duty and none of them refusable. ${r.name} is losing people and resources it will not get back, and the front it is bleeding for is somewhere it will never see.`,
           `Every capable pair of hands ${r.name} could spare, and several it could not, has gone to the war; what remains is losing people and resources by attrition — a workshop closed for want of a master, a field unsown for want of a back — while ${r.govFaction || "the governing authority"} reports the settlement loyal and does not report the rest.`,
         ];
@@ -170,11 +184,11 @@ export const PRESSURE_SENTENCES = {
   // selects one — draw-count unchanged (pickRandom2 already fired on the 1-element
   // array), real re-roll variety gained. Index 0 stays the canonical scenario-0 line.
   religious_conversion: (r) => [
-    `The new faith in ${r.name} does not yet have a building. It has the congregation. ${r.govFaction || "The authorities"} have not yet decided whether this is a religious matter, a political one, or both — and the delay in deciding is itself a decision that both sides are interpreting.`,
+    `The new faith in ${r.name} does not yet have a building. It has the congregation. ${capFirst(r.govFaction) || "The authorities"} have not yet decided whether this is a religious matter, a political one, or both — and the delay in deciding is itself a decision that both sides are interpreting.`,
     `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`,
     `The conversion order in ${r.name} was formally acknowledged within the week. The compliance was faster than anyone expected. The depth of that compliance is a separate question that no one with authority is asking loudly, because the answer would require a response.`,
     `The new faith has taken the young of ${r.name} first, which the old faith has noticed and cannot answer — you cannot argue a congregation back, and every festival now draws two crowds of visibly different ages to two different squares.`,
-    `${r.govFaction || "The authorities"} in ${r.name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom — the worst kind of debt to have taken on.`,
+    `${capFirst(r.govFaction) || "The authorities"} in ${r.name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom — the worst kind of debt to have taken on.`,
     `The conversion in ${r.name} is being managed as a property question as much as a spiritual one: which endowments, which burial rights, which festival days transfer with the congregation. The theology was settled quickly. The estate is where the fighting is.`,
   ],
   slave_revolt: (r) => [
