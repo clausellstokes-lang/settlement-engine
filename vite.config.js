@@ -78,8 +78,18 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // lazy-only consumers (verified: no eager entry-closure edge reads them), so
 // they can ride the lazy `engine` chunk with the generators instead of sitting
 // eager in engine-core. Excised here so BOTH the chunk routing and the
-// eager-graph classifier (line ~143) agree. formatNumber is DELIBERATELY LEFT IN
-// (its ~27 lazy consumers risk shared-chunk churn — kept until measured worth it).
+// eager-graph classifier (line ~143) agree.
+// FP-G11 (2026-07-17): formatNumber.js — the FP-G7 note DEFERRED this one ("kept
+// until measured worth it") over a shared-chunk-churn worry. MEASURED at this fold:
+// NO first-paint module reaches it (every one of its ~19 importers is generator-/
+// worldPulse-/display-lazy — verified: zero store/eager-domain importer), so it
+// rode eager engine-core for nothing. Excising it moves its single main-graph copy
+// to the lazy `engine` chunk (where its worldPulse consumers already live): closure
+// 1,035,024 -> 1,034,683 (-341 B; engine-core 80,961 -> 80,617). The churn worry does
+// NOT materialize — the only OTHER chunks carrying it are the two web-worker bundles
+// (advanceInterval.worker, pdfRender.worker), independent entry bundles that always
+// carried their own copy and are untouched here. Pure deterministic formatter ⇒
+// chunk placement is behaviorally invisible (goldens byte-identical).
 // @guarded-by tests/build/vendorPdfLazy.test.js: engine-absent-from-closure +
 // the first-paint byte budget (re-entry of any of these reds one or the other).
 // FP-G8 (2026-07-16): settlement.schema.js — a pure schema/constant LEAF (zero
@@ -99,6 +109,7 @@ for (const frag of [
   '/src/domain/resolveTerrain.js',
   '/src/domain/region/foldTradeCategories.js',
   '/src/domain/settlement.schema.js',
+  '/src/domain/formatNumber.js',
 ]) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
