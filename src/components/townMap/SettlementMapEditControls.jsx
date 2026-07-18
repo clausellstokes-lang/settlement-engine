@@ -19,9 +19,20 @@
  * Pure vector / theme tokens only; no lucide icons (the map's Icons-off posture).
  */
 import Button from '../primitives/Button.jsx';
-import { BORDER, CARD, ELEV, FS, INK, R, SP, sans } from '../theme.js';
+import { useStore } from '../../store/index.js';
+import { BORDER, CARD, ELEV, FS, INK, MUTED, R, SP, sans } from '../theme.js';
 import { resolveTownMapStyle } from '../../domain/townMap/index.js';
 import { districtColor } from './palette.js';
+
+/** A small drawn padlock — the map chrome is lucide-free (the fog controls precedent). */
+function LockGlyph({ size = 14 }) {
+  return (
+    <svg data-testid="dm-pins-lock" width={size} height={size} viewBox="0 0 14 14" aria-hidden="true">
+      <rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="none" stroke={INK} strokeWidth="1.5" />
+      <path d="M 4.5 6 V 4.2 a 2.5 2.5 0 0 1 5 0 V 6" fill="none" stroke={INK} strokeWidth="1.5" />
+    </svg>
+  );
+}
 
 /**
  * @param {{
@@ -38,17 +49,26 @@ import { districtColor } from './palette.js';
  *   onToggleLabels: () => void,
  *   onToggleLegend: () => void,
  *   onReset: () => void,
+ *   entitled?: boolean,
+ *   savedMap?: boolean,
  * }} props
  */
 export default function SettlementMapEditControls({
   editing, showLegend, legendPrefs, hasEdits, districts,
   styleIds, activeLens, lensPersisted, onPickLens,
   onReroll, onToggleLabels, onToggleLegend, onReset,
-  annotating, onToggleAnnotate,
+  annotating, onToggleAnnotate, entitled = false, savedMap = false,
 }) {
   return (
     <>
       <MapLensSwitcher styleIds={styleIds} activeLens={activeLens} persisted={!!lensPersisted} onPickLens={onPickLens} />
+      {/* THE DM PIN GATE (THE FREELY-GIVEN RULINGS: DM pins are Cartographer). The
+          locked state is VISIBLE, never absent (the fog/mapChains premium-seam law):
+          a free owner with a saved map sees the affordance with a drawn padlock +
+          teaser; clicking fires the purchase modal (the cosmetic-edit gate's own
+          moment — no new pricing-moment vocabulary). No annotate mode mounts and the
+          stored annotations are never rewritten, so an upgrade restores them intact. */}
+      {savedMap && !entitled && <LockedMarkers />}
       {editing && (
         <div
           data-town-edit-chrome
@@ -90,6 +110,44 @@ export default function SettlementMapEditControls({
       )}
       {showLegend && <MapLegend districts={districts} />}
     </>
+  );
+}
+
+/**
+ * THE LOCKED DM-PINS TEASER — the free-tier premium moment for DM markers. A drawn
+ * padlock + one line of teaser + the "(Premium)" button that opens the purchase modal
+ * (the fog controls' locked-panel precedent). Positioned where the working Markers
+ * button would sit (top-right, the edit-chrome corner). It touches NO annotation state:
+ * clicking only surfaces the pricing moment, so stored markers survive an upgrade.
+ */
+function LockedMarkers() {
+  const setPurchaseModalOpen = useStore((s) => s.setPurchaseModalOpen);
+  const onUnlock = () => { if (typeof setPurchaseModalOpen === 'function') setPurchaseModalOpen(true); };
+  return (
+    <div
+      data-town-pins-locked
+      style={{
+        position: 'absolute', top: SP.sm, right: SP.sm, zIndex: 4,
+        display: 'flex', flexDirection: 'column', gap: SP.xs, maxWidth: 'min(78vw, 220px)',
+        padding: SP.sm, background: CARD, border: `1px solid ${BORDER}`,
+        borderRadius: R.md, boxShadow: ELEV[1], fontFamily: sans,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.xs }}>
+        <strong style={{ fontSize: FS.sm, letterSpacing: '0.02em', color: INK }}>DM markers</strong>
+        <LockGlyph />
+      </div>
+      <div style={{ color: MUTED, fontSize: FS.xs }}>
+        Drop labelled pins for secrets, quest hooks, and player-visible landmarks.
+      </div>
+      <Button
+        variant="secondary" size="sm" onClick={onUnlock}
+        aria-label="DM markers are a Cartographer premium feature — upgrade to unlock"
+      >
+        DM markers (Premium)
+      </Button>
+      <div style={{ color: MUTED, fontSize: FS.xs }}>Unlocks with Cartographer.</div>
+    </div>
   );
 }
 

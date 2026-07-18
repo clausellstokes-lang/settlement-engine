@@ -695,6 +695,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           Self-gates: renders nothing when no section has content (e.g. a v1 map). ── */}
       <SettlementMapNotes
         settlement={settlement} story={mapStory} changes={changeView} roads={edgeAnnotations}
+        entitled={!!canEdit}
         onOpen={() => mapAnalytics.fireOnce('change_view')}
       />
 
@@ -716,6 +717,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         onReset={doReset}
         annotating={ann.annotateMode}
         onToggleAnnotate={ann.toggleAnnotate}
+        entitled={!!canEdit}
+        savedMap={saveId != null}
       />
 
       {/* ── MAP EXPORTS — the per-settlement export affordance (bottom-right).
