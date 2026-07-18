@@ -1120,6 +1120,13 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE LADDER §10 THE STIGMA MARK (owner, 2026-07-17: "if they are exposed for
+corruption, it becomes twice as hard for them to get promoted for a long time"):**
+exposure now cuts BOTH ways — the widest window against a defender AND a challengeScore
+×0.5 stigma on any climber for a lifespan-scaled duration (D5 bands; decaying;
+refresh-on-reexposure; receipted by name in challenge receipts; deposits toward cynical).
+The evil/leverage path survives but crime costs years. Frozen §10 + relayed to the live
+lane w/ the exposed-climber-halved fixture mandated.
 **⬛ THE LADDER §8+§9 (owner refinements, relayed mid-flight):** THE STANDING LOOP —
 ladder→faction feedback closes the circuit (leadership quality lifts effective power ·
 churn priced as decaying instability · legitimacy reads the HOW of succession, public
