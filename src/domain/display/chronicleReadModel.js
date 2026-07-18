@@ -108,6 +108,58 @@ function seasonOf(weeks) {
 
 const byStr = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? -1 : a > b ? 1 : 0);
 
+/** FNV-1a 32-bit — the pure quiet-headline variant hash (no rng, no clock). A LOCAL
+ *  copy of the 8-line helper (the newsVoice.js precedent — a display sidecar keeps
+ *  its own copy rather than importing a sibling's tables). @param {string} str */
+function fnv1a32(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
+/**
+ * THE QUIET-ADVANCE FALLBACK pool (content-vt-2). When an advance carries no
+ * dominant thread the headline was a single fixed sentence ("The year passed
+ * quietly.") that repeated VERBATIM down the 80-advance scrollback. Each span now
+ * has a small pool of interchangeable quiet framings — the SPAN is the only fact,
+ * and it rides every line (mirror-not-rederive). Selection is a pure FNV of the
+ * advance tick, so a given advance always reads the same and adjacent quiet
+ * advances generally differ. CANONICAL-AT-ZERO: index 0 is the original sentence.
+ * This is the ONLY authored copy here that grows — the populated headline
+ * ("The year: <title>") deliberately reuses the persisted crier-voiced thread
+ * title (register-safe), so its variety is already owned by the event/crier slice.
+ * @type {Readonly<Record<'week'|'month'|'season'|'year', ReadonlyArray<string>>>}
+ */
+export const QUIET_FALLBACK = Object.freeze({
+  week: Object.freeze([
+    'The week passed quietly.',
+    'The week passed without event.',
+    'A quiet week, with little to note.',
+    'The week slipped by, calm and uneventful.',
+  ]),
+  month: Object.freeze([
+    'The month passed quietly.',
+    'The month passed without event.',
+    'A quiet month, with little to note.',
+    'The month slipped by, calm and uneventful.',
+  ]),
+  season: Object.freeze([
+    'The season passed quietly.',
+    'The season passed without event.',
+    'A quiet season, with little to note.',
+    'The season slipped by, calm and uneventful.',
+  ]),
+  year: Object.freeze([
+    'The year passed quietly.',
+    'The year passed without event.',
+    'A quiet year, with little to note.',
+    'The year slipped by, calm and uneventful.',
+  ]),
+});
+
 /**
  * The distinct (season, year) chapters the span [prevWeek+1 .. week] crossed, in
  * chronological order. A within-season span yields ONE chapter. The temporal
@@ -309,17 +361,23 @@ export function deputysDiary(threads) {
 
 /**
  * One fiction-register headline for the whole advance — a single line naming the
- * span and the dominant thread. Register-safe: it reuses the persisted (already
- * crier-voiced) top-thread headline rather than authoring new prose.
+ * span and the dominant thread. Register-safe: the POPULATED headline reuses the
+ * persisted (already crier-voiced) top-thread headline rather than authoring new
+ * prose; the QUIET fallback draws a per-advance framing from the pool (content-vt-2,
+ * seeded on the tick so it is deterministic per advance).
  * @param {string} spanLabel
  * @param {Thread[]} threads
+ * @param {number} [tick]  the advance tick — the quiet-fallback frame seed
  * @returns {string}
  */
-function headlineFor(spanLabel, threads) {
+function headlineFor(spanLabel, threads, tick = 0) {
   const top = threads.find(t => t.dramaClass) || threads[0];
   const frame = spanLabel === 'week' ? 'The week' : spanLabel === 'month' ? 'The month' : spanLabel === 'season' ? 'The season' : 'The year';
-  if (!top) return `${frame} passed quietly.`;
-  return `${frame}: ${top.title}`;
+  if (top) return `${frame}: ${top.title}`;
+  const span = /** @type {'week'|'month'|'season'|'year'} */ (
+    spanLabel === 'week' || spanLabel === 'month' || spanLabel === 'season' ? spanLabel : 'year');
+  const pool = QUIET_FALLBACK[span];
+  return pool[fnv1a32(`${tick}::${span}`) % pool.length];
 }
 
 /**
@@ -364,7 +422,7 @@ export function chronicleForAdvance(entry, provenance) {
     spanWeeks: entry.spanWeeks,
     spanLabel: entry.spanLabel,
     altitudes: altitudesForSpan(/** @type {SpanLabel} */ (entry.spanLabel)),
-    headline: headlineFor(entry.spanLabel, threads),
+    headline: headlineFor(entry.spanLabel, threads, entry.tick),
     delta,
     chapters,
     threads,

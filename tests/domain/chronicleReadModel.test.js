@@ -14,7 +14,7 @@
 import { describe, it, expect } from 'vitest';
 
 import {
-  hasChronicle, latestChronicle, chronicleForAdvance, chapterSeasons, deltaFirst,
+  hasChronicle, latestChronicle, chronicleForAdvance, chapterSeasons, deltaFirst, QUIET_FALLBACK,
 } from '../../src/domain/display/chronicleReadModel.js';
 import { advanceEntries, nodesFromRecord } from '../../src/domain/display/chronicleGraph.js';
 import { seasonForTick } from '../../src/domain/worldPulse/worldState.js';
@@ -83,6 +83,43 @@ describe('chronicleReadModel — delta-first (§3)', () => {
     expect(d.tiers).toEqual([{ id: 'A', from: 2, to: 3 }]);
     expect(d.relationships).toEqual([{ key: 'A::C', kind: 'war-declared' }]);
     expect(d.hasContent).toBe(true);
+  });
+});
+
+describe('chronicleReadModel — quiet-advance framing variety (content-vt-2)', () => {
+  // A no-thread advance (empty outcomes) hits the quiet fallback; span > 13 weeks
+  // ⇒ 'year'. Vary the newest tick to vary the frame seed.
+  const quietYear = (tick) => latestChronicle({ pulseHistory: [
+    { tick: 4, selectedOutcomes: [], impactDigest: [] },
+    { tick, selectedOutcomes: [], impactDigest: [] },
+  ] }).headline;
+
+  it('every quiet frame names its span and reads as a sentence; index 0 is the original', () => {
+    for (const [span, pool] of Object.entries(QUIET_FALLBACK)) {
+      expect(pool[0], `${span} canonical`).toBe(`The ${span} passed quietly.`);
+      expect(pool.length, `${span} has variety`).toBeGreaterThanOrEqual(2);
+      for (const line of pool) {
+        expect(line.includes(span), `${span}: "${line}" names the span`).toBe(true);
+        expect(/[.!?]$/.test(line), `${span}: "${line}" terminal punct`).toBe(true);
+      }
+    }
+  });
+
+  it('DETERMINISM: the same advance always frames the quiet line the same way', () => {
+    expect(quietYear(60)).toBe(quietYear(60));
+    // And it is one of the year pool's lines (facts unchanged, only framing).
+    expect(QUIET_FALLBACK.year).toContain(quietYear(60));
+  });
+
+  it('ANTI-REPETITION: across advances the quiet frame reaches the whole pool', () => {
+    const seen = new Set();
+    for (let t = 20; t < 320; t++) seen.add(quietYear(t));
+    expect(seen.size).toBe(QUIET_FALLBACK.year.length);
+  });
+
+  it('a POPULATED advance still reuses the persisted thread title (register-safe, unchanged)', () => {
+    const ws = { pulseHistory: [{ tick: 52, selectedOutcomes: [{ id: 'o', headline: 'War at the ford', targetSaveId: 'A', severity: 0.9 }], impactDigest: [] }] };
+    expect(latestChronicle(ws).headline).toBe('The year: War at the ford');
   });
 });
 
