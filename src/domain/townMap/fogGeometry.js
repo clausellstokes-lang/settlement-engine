@@ -39,10 +39,12 @@ const NODE_EPS = 6;           // endpoint→node match tolerance (endpoints ARE 
 
 /** @typedef {import('./townMapModel.js').TownMapModel} TownMapModel */
 
-/** Squared distance (avoids a sqrt for comparisons). */
+/** Squared distance (avoids a sqrt for comparisons).
+ *  @param {number} ax @param {number} ay @param {number} bx @param {number} by */
 function d2(ax, ay, bx, by) { const dx = ax - bx; const dy = ay - by; return dx * dx + dy * dy; }
 
-/** Distance from point (px,py) to segment (a→b), squared. Pure. */
+/** Distance from point (px,py) to segment (a→b), squared. Pure.
+ *  @param {number} px @param {number} py @param {number} ax @param {number} ay @param {number} bx @param {number} by */
 function segDist2(px, py, ax, ay, bx, by) {
   const vx = bx - ax; const vy = by - ay;
   const wx = px - ax; const wy = py - ay;
@@ -52,7 +54,8 @@ function segDist2(px, py, ax, ay, bx, by) {
   return d2(px, py, ax + t * vx, ay + t * vy);
 }
 
-/** Ray-cast point-in-polygon over a closed ring `[[x,y],…]`. Pure. */
+/** Ray-cast point-in-polygon over a closed ring `[[x,y],…]`. Pure.
+ *  @param {number} px @param {number} py @param {ReadonlyArray<ReadonlyArray<number>>} ring */
 function pointInPolygon(px, py, ring) {
   if (!Array.isArray(ring) || ring.length < 3) return false;
   let inside = false;
@@ -65,16 +68,20 @@ function pointInPolygon(px, py, ring) {
   return inside;
 }
 
-/** The model's districts / buildings arrays (defensive). */
+/** The model's districts array (defensive). @param {TownMapModel | null | undefined} model */
 function districtsOf(model) { return model && Array.isArray(model.districts) ? model.districts : []; }
+/** The model's buildings array (defensive). @param {TownMapModel | null | undefined} model */
 function buildingsOf(model) { return model && Array.isArray(model.buildings) ? model.buildings : []; }
+/** The model's street segments (defensive). @param {TownMapModel | null | undefined} model */
 function streetSegsOf(model) {
   const sk = model && model.skeleton;
   return sk && Array.isArray(sk.streets) ? sk.streets : [];
 }
 
 /** Resolve a point to the nearest semantic NODE (anchor or a district centroid) within eps,
- *  returning a stable node id: 'core' for the anchor, else the district id. Pure. */
+ *  returning a stable node id: 'core' for the anchor, else the district id. Pure.
+ *  @param {TownMapModel | null | undefined} model @param {number} x @param {number} y
+ *  @returns {string | null} */
 function nodeIdAt(model, x, y) {
   const anchor = model && model.skeleton && model.skeleton.anchor;
   let bestId = null;
@@ -232,7 +239,8 @@ export function isFullyFogged(model, reveal) {
 /** XML-attribute-safe number (strips -0). @param {number} n */
 function num(n) { const v = Number(n); return String(Number.isFinite(v) ? (v === 0 ? 0 : v) : 0); }
 
-/** One reveal shape → the BLACK mask element string (union member). Pure. */
+/** One reveal shape → the BLACK mask element string (union member). Pure.
+ *  @param {RevealShape} shape */
 function shapeToMaskSvg(shape) {
   if (shape.kind === 'district') {
     const pts = shape.points.map(([x, y]) => `${num(x)},${num(y)}`).join(' ');
@@ -259,7 +267,7 @@ function shapeToMaskSvg(shape) {
  */
 export function fogMaskFragment(model, reveal, opts = {}) {
   const color = typeof opts.color === 'string' ? opts.color : '#12100b';
-  const opacity = Number.isFinite(opts.opacity) ? opts.opacity : 0.92;
+  const opacity = Number.isFinite(opts.opacity) ? Number(opts.opacity) : 0.92;
   const id = typeof opts.maskId === 'string' && opts.maskId ? opts.maskId : 'sf-fog';
   const holes = revealShapes(model, reveal).map(shapeToMaskSvg).join('');
   const V = FOG_VIEW;

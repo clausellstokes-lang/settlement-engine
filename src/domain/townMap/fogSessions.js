@@ -62,7 +62,8 @@ const SESSION_NAME_MAX = 60;
 const MAX_SESSIONS = 12;
 const MAX_REVEAL_IDS = 400;
 
-/** Coerce + bound a session id (a slug of the name). Empty ⇒ 'session'. Pure. */
+/** Coerce + bound a session id (a slug of the name). Empty ⇒ 'session'. Pure.
+ *  @param {unknown} name @returns {string} */
 export function fogSessionId(name) {
   const slug = slugify(name).slice(0, SESSION_NAME_MAX);
   return slug || 'session';
