@@ -1134,6 +1134,14 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ BATCH-2 PLATE AUDITS (2026-07-18):** settlements.jpg = REGENERATE (mappa-mundi
+concept KEPT for the Library; strip the enthroned saint + haloed figure + crosses
+[invented-faith only], illegible-only text, house palette, quiet zones; sun-face + vine
+borders + sea-serpent KEPT as period cartographic furniture — vetoable ruling) ·
+about.jpg = REGENERATE (fireside-storytelling concept KEPT; the elf/dwarf/starred-wizard/
+goggled-gnome party = the generic-fantasy tell — recast as ordinary travelers around the
+teller; fire, dusk road, listeners stay). Journey prototype film rendering (Seedance job
+d81b0186; deliver on completion). Remaining audits: pricing, account, progression, landing/.
 **⬛ THE JOURNEY MECHANIC COMMISSIONED (owner, 2026-07-18):** the home page becomes a
 scroll-driven cartographic journey — the traveling line along a road on a real engine-
 rendered map, waypoints unfurling the existing sections as paper plates. RULING: built
