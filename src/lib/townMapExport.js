@@ -194,6 +194,8 @@ function browserRasterizeBlob(svg, size, mime, quality) {
  * it deterministically); the default is the real canvas rasterizer.
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, audience?: 'dm'|'player',
+ *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
+ *   fogOpacity?: number,
  *   rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]
  * @returns {Promise<{ blob: Blob, mime: string, ext: string, format: string } | null>}
  */
@@ -297,6 +299,9 @@ export function downloadBlob(blob, filename) {
  * raster; SVG works anywhere Blob exists.
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, filename?: string,
+ *   audience?: 'dm'|'player',
+ *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
+ *   fogOpacity?: number,
  *   date?: Date, rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]
  * @returns {Promise<{ blob: Blob, mime: string, ext: string, format: string } | null>}
  */

@@ -65,14 +65,14 @@ describe('free tier — the locked state is VISIBLE, never absent', () => {
     render(<SettlementMapFogChrome fog={fogStub()} editing={false} entitled={false} settlement={SETTLEMENT} activeLens="parchment" fire={() => {}} />);
     expect(screen.getByTestId('fog-controls-lock')).toBeTruthy();               // the lock glyph
     expect(screen.getByText(/Run a live table session/)).toBeTruthy();          // the teaser
-    expect(screen.getByTitle(/Cartographer \(premium\) feature/)).toBeTruthy(); // the upgrade hint
+    expect(screen.getByText('Unlocks with Cartographer.')).toBeTruthy();        // the upgrade hint
     // NO working chrome mounts while locked (the engage checkbox is premium chrome)
     expect(screen.queryByLabelText('Engage fog of war')).toBeNull();
   });
 
   test('clicking the locked affordance fires the purchase modal and NEVER a fog write', () => {
     render(<SettlementMapFogChrome fog={fogStub()} editing={false} entitled={false} settlement={SETTLEMENT} activeLens="parchment" fire={() => {}} />);
-    fireEvent.click(screen.getByTitle(/Cartographer \(premium\) feature/));
+    fireEvent.click(screen.getByRole('button', { name: /Cartographer premium feature/ }));
     expect(storeState.setPurchaseModalOpen).toHaveBeenCalledWith(true);
     expect(storeState.applyFogEdit).not.toHaveBeenCalled(); // stored fogSessions untouched — an upgrade restores them
   });

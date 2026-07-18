@@ -80,10 +80,11 @@ export default function SettlementMapFogControls({ fog, editing, entitled = fals
         <Button
           variant="secondary" size="sm"
           onClick={() => { if (typeof onUnlock === 'function') onUnlock(); }}
-          title="The table layer is a Cartographer (premium) feature. Click to upgrade."
+          aria-label="Fog of war is a Cartographer premium feature — upgrade to unlock"
         >
           Fog of war (Premium)
         </Button>
+        <div style={{ color: MUTED, fontSize: FS.xs }}>Unlocks with Cartographer.</div>
       </div>
     );
   }
@@ -118,7 +119,7 @@ export default function SettlementMapFogControls({ fog, editing, entitled = fals
               ))}
             </select>
             {activeSessionId ? (
-              <Button variant="ghost" size="sm" onClick={deleteActive} title="Delete this session">Delete</Button>
+              <Button variant="ghost" size="sm" onClick={deleteActive} aria-label="Delete this fog session">Delete</Button>
             ) : null}
           </div>
           <div style={row}>
@@ -155,7 +156,7 @@ export default function SettlementMapFogControls({ fog, editing, entitled = fals
               {/* Audiences */}
               <div style={{ ...row, marginTop: SP.xs }}>
                 <Button variant="secondary" size="sm" onClick={onOpenPlayerView}>Player view</Button>
-                <Button variant="ghost" size="sm" onClick={onExportHandout} disabled={!hasReveal} title={hasReveal ? 'Download a fogged player handout' : 'Reveal something first'}>Handout</Button>
+                <Button variant="ghost" size="sm" onClick={onExportHandout} disabled={!hasReveal} aria-label="Download a fogged player handout">Handout</Button>
               </div>
             </>
           ) : (
