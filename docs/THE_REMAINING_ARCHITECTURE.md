@@ -207,7 +207,24 @@ streamed media never touches it; the true cost is network weight, engineered bel
   delete flow byte-identical.
 - C12 Checkout success: the receipt artifact + colophon (purchased-dossier moment).
 
-### Slice C13 — THE SURVEYOR AI: the write-desk (THE SLATE RULING lands here)
+### Slice C13 — THE SURVEYOR AI: the write-desk (THE SLATE RULING + THE ONE DOOR)
+⬛ OWNER RULING 2026-07-18 (THE ONE DOOR): AI access = ONE floating marker on the
+LEFT edge of the page only ("Ask the Surveyor" wording = vetoable manager suggestion
+over the owner's "AI / ask me anything"). It is THE ONLY AI entry point in the app
+besides the dossier Polish/Narrate (owner-named carve-out; proposal-slip
+accept/decline stamps are results, not entries). ALL prompts route through it.
+CONTEXT-FIRST LAW: the router assumes every request concerns the CURRENT surface —
+grounding envelope = (route + active tab + map lens + selected entity) → current
+settlement → world → product — and moves outward ONLY when the intent classifier
+says the request exceeds the local scope (this is the AI token-efficiency doctrine
+in UX form: small local payloads first). Architecture: the S3 intent compiler IS the
+router; the existing stage panels (S1 analyst, S4 content, S5/S6 construction, style
+overhaul, S7 autonomy) become DESTINATIONS the router opens, never entry points —
+FloatingAffordances re-composes to the single left-edge slate tab (marginalia
+position; slate per the honesty law; no text until hover). Entitlement: marker
+lock-glyph-teases for non-Surveyor tiers (ladder idiom), vetoable. Machinery
+unchanged — this is front-of-house consolidation; the schema wall, per-stage
+kill-switches, and early-access labels all survive verbatim.
 - The deferred violet→slate conversion: define slate as a semantic token pair
   (light/dim) in tokens.js; AI-authored/proposal surfaces convert to DRAFT-document
   slips (slate border + "PROPOSED — the engine writes canon" small-cap line via the

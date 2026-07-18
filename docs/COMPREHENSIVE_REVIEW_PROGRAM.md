@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE ONE DOOR RULING (owner, 2026-07-18: "on the left hand side of the page only…
+a floating marker for AI or an 'ask me anything'. it is the only access to AI in the
+document besides the polish for dossiers. all prompts go through it and it should be
+smart enough to work with what its got first defaulting to thinking that every
+request is on the page it is on before moving outward"):** AI front-of-house
+consolidates to ONE left-edge floating marker (slate tab, marginalia position, no
+text until hover; "Ask the Surveyor" wording vetoable). Carve-outs, named and
+closed: dossier Polish/Narrate + proposal-slip stamps (results, not entries). The S3
+intent compiler becomes the router; S1/S4/S5/S6/style/S7 panels become destinations,
+never entry points. CONTEXT-FIRST LAW: grounding envelope = current surface → 
+settlement → world → product, escalating only on classifier verdict — the
+token-efficiency doctrine in UX form. Schema wall / kill-switches / early-access
+labels survive verbatim. Lands at deep-wave slice C13 (architecture doc amended);
+guide whispers unaffected (deterministic registry, not AI).
 **⬛⭐ C1r BASE RESTORATION LANDED (2026-07-18) — the create page wears master's
 skeleton again.** claude/deep-craft fb5e8031 → C1r-a @ c722c99b (config stage =
 master's single LayeredConfigurationPanel; wizardStep stepping DELETED per ruling;
