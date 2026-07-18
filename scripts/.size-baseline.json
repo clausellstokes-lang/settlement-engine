@@ -8,7 +8,6 @@
   "src/domain/worldPulse/pulseKernel.js": 1387,
   "src/domain/worldPulse/warDeployment.js": 1134,
   "src/generators/historyGenerator.js": 883,
-  "src/generators/narrativeGenerator.js": 905,
   "src/generators/npcGenerator.js": 1498,
   "src/pdf/lib/viewModel.js": 1043,
   "src/store/aiSlice.js": 961,

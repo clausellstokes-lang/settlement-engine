@@ -367,7 +367,7 @@ export const COMPENDIUM_DATA = Object.freeze({
   },
   "institutions": {
     "tierCount": 6,
-    "entryCount": 301,
-    "distinctNames": 270
+    "entryCount": 304,
+    "distinctNames": 271
   }
 });

@@ -337,12 +337,13 @@ describe('consequenceIfRemoved', () => {
     expect(profile.consequenceIfRemoved.consequences.length).toBeGreaterThan(0);
   });
 
-  it('a subordinate-rank NPC reads the subordinate tier, not minor', () => {
+  it("a subordinate-rank NPC reads the mid tier (now keyed 'secondary'), not minor", () => {
     // getRank (npcStructure.js) emits 'dominant' | 'subordinate' — the mid tier.
-    // It must resolve to the intended (formerly dead) subordinate consequences,
-    // NOT fall through to the trivial single-line minor tier.
+    // COMPOSITE vocabulary migration (2026-07-18, declared): the tier key follows
+    // normalizeNpcRank's palette vocabulary ('secondary'); the tier CONTENT below
+    // is asserted unchanged — the rename moved the label, never the consequences.
     const profile = deriveNpcProfile(militaryCaptain({ structuralRank: 'subordinate' }));
-    expect(profile.consequenceIfRemoved.severity).toBe('subordinate');
+    expect(profile.consequenceIfRemoved.severity).toBe('secondary');
     const cons = profile.consequenceIfRemoved.consequences;
     // The subordinate military tier has two lines; the minor tier has one.
     expect(cons.length).toBe(2);

@@ -124,7 +124,8 @@ function templateForArchetype(archetype) {
 // for what happens if they're killed, exiled, retired, or co-opted.
 // Severity scales with `structuralRank`; the consequence palette comes from
 // the archetype. The generator's getRank (npcStructure.js) emits
-// 'dominant' | 'subordinate', so the mid tier is keyed 'subordinate' to match
+// 'dominant' | 'subordinate'; normalizeNpcRank maps that onto the palette
+// vocabulary ('secondary'), so the mid tier is keyed 'secondary' to match
 // (ported master fix — keying it 'secondary' left every non-dominant NPC
 // falling through to 'minor'). 'minor' is retained for legacy/explicit-minor.
 
@@ -137,7 +138,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public order strains within weeks; criminal activity rises.',
       'A succession dispute opens among the surviving captains.',
     ],
-    subordinate: [
+    secondary: [
       'A unit captain loses their reporting line briefly.',
       'A subordinate moves up; the new face takes time to settle.',
     ],
@@ -152,7 +153,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public legitimacy of the governing body drops several bands.',
       'Quiet courtiers and clients realign overnight.',
     ],
-    subordinate: [
+    secondary: [
       'A clerk or under-official scrambles to backfill paperwork.',
       'The governing body absorbs the role temporarily.',
     ],
@@ -167,7 +168,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Public mourning becomes a political moment.',
       'The governing faction loses a major source of moral cover.',
     ],
-    subordinate: [
+    secondary: [
       'A novice or under-priest steps up unprepared.',
       'Donations dip until a new face earns trust.',
     ],
@@ -182,7 +183,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A rival guildmaster consolidates the routes.',
       'Tax revenue drops as the books reshuffle.',
     ],
-    subordinate: [
+    secondary: [
       'A specific contract goes unfulfilled; clients seek alternatives.',
       'Guild succession becomes the dinner-table topic.',
     ],
@@ -196,7 +197,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Cheap imports flow in unchecked; quality drops.',
       'Apprentices scatter to other masters.',
     ],
-    subordinate: [
+    secondary: [
       'A workshop closes or transfers ownership.',
     ],
     minor: [
@@ -210,7 +211,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'A corruption network collapses; protected favors become vulnerable.',
       'The watch claims a public victory whether or not it caused this.',
     ],
-    subordinate: [
+    secondary: [
       'A lieutenant takes over; old favors get reaccounted.',
     ],
     minor: [
@@ -224,7 +225,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Arcane research projects stall or move elsewhere.',
       'Public superstition resurges without the moderating expert.',
     ],
-    subordinate: [
+    secondary: [
       'A research line is paused; reagents get reassigned.',
     ],
     minor: [
@@ -237,7 +238,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
       'Local cells of resistance test the new chain of command.',
       'Tribute schedules slip while the transition settles.',
     ],
-    subordinate: [
+    secondary: [
       'A junior officer takes a temporary command.',
     ],
     minor: [
@@ -248,7 +249,7 @@ const REMOVAL_CONSEQUENCES = Object.freeze({
     dominant: [
       'A noticeable absence in civic life that the settlement adapts around.',
     ],
-    subordinate: [
+    secondary: [
       'A small role goes unfilled briefly.',
     ],
     minor: [

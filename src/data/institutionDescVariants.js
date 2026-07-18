@@ -78,6 +78,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.",
     "An arm of the wider criminal order, 30 to 100 strong. It needs a city of 10,000 or more to survive.",
   ],
+  "city|Criminal|Underground network": [
+    "A warren of tunnels beneath the city, wide enough for cargo and old enough that no one alive knows every branch.",
+    "Excavated ways running under walls and wards alike; whole shipments pass below the city without touching a street.",
+  ],
   "city|Defense|Citadel": [
     "The inner fortress, and the last refuge when a siege closes in.",
     "An innermost stronghold, the city's final hold under siege.",
@@ -774,6 +778,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
     "Pickpockets and bruisers working together. Ten to thirty strong.",
     "An organised crew of cutpurses and toughs, some 10 to 30 of them.",
   ],
+  "town|Criminal|Underground network": [
+    "Tunnels and false cellars, dug and linked to move contraband beneath the streets.",
+    "A network of excavated passages joining cellars and yards to the town's edge — none of it on any map.",
+  ],
   "town|Defense|Barracks": [
     "Quarters for the guard or a small garrison.",
     "Lodging for guardsmen, or a modest garrison.",
@@ -1113,6 +1121,10 @@ export const INSTITUTION_DESC_VARIANTS = Object.freeze({
   "village|Criminal|Smuggling network": [
     "Goods pass through the village while dodging tolls and the eyes of the law. Commonly built around one particular commodity.",
     "A route by which wares slip past tolls and legal notice, usually fixed to a single commodity.",
+  ],
+  "village|Criminal|Underground network": [
+    "Passages dug beneath the village, through which goods move unseen.",
+    "A handful of tunnels under the houses, cut to slip contraband past the law.",
   ],
   "village|Defense|Citizen militia": [
     "A community drawn up for its own defence. It turns out for raids and monster attacks, and holds together better than any hamlet levy.",
