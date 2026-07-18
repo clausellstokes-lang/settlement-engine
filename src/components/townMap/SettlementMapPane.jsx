@@ -66,6 +66,10 @@ import SettlementMapExportMenu from './SettlementMapExportMenu.jsx';
 import SettlementMapPanorama from './SettlementMapPanorama.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import { FloatingLabel, DistrictCard } from './SettlementMapCards.jsx';
+// THE NON-WATER LANDFORM (task #38 fenced follow-up) — the marsh/dune/mountain terrain
+// texture, drawn under the urban layer from the SAME marks the exports use. A lazy leaf
+// (re-export idiom) so the max-lines-capped pane grows by one element, not a block.
+import SettlementMapLandform from './SettlementMapLandform.jsx';
 // DOOR 2 — THE TABLE LAYER (fog of war). The pane threads three leaves: the map-space overlay
 // (+ the reveal-brush capture), the wiring hook (optimistic mirror + persist + controller), and
 // the DM chrome (controls + lazy player view + handout export). Kept out-of-file so the pane
@@ -455,6 +459,11 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
                 />
               )
           )}
+
+          {/* ── non-water landform (marsh reeds / dune contours / mountain
+              hachures) — terrain texture beneath the urban layer. Renders nothing
+              for a water/plain/v1 site. Honors the active lens (WYSIWYG). ────── */}
+          <SettlementMapLandform landform={frame.landform} lens={activeLens} ink={C.ink} />
 
           {/* ── approach roads ────────────────────────────────────────────── */}
           {frame.roads.map((r) => (

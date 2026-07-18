@@ -52,13 +52,150 @@ const DRY_BIOME_RE = /desert|arid|dune|waste|scrub|steppe|badland/i;
 const WET_BIOME_RE = /marsh|swamp|fen|bog|coast|river|delta|lake|estuar|wetland/i;
 
 /**
+ * @typedef {{ m:'dot', x:number, y:number, r:number }
+ *   | { m:'stroke', x1:number, y1:number, x2:number, y2:number, w:number }
+ *   | { m:'curve', pts:Array<[number,number]>, w:number }} LandformMark
+ *   A landform texture primitive in the engraved register (the bounded draw
+ *   vocabulary the renderer paints): a stipple DOT, a hachure/reed STROKE, or a
+ *   contour CURVE. `w` is the ink-weight TIER (0 fine · 1 medium · 2 heavy) — the
+ *   craft law's 2–3 ink weights; the STYLE maps a tier to concrete pixels, so
+ *   geometry stays lens-independent (THE WALL).
+ */
+/**
+ * @typedef {{ kind:'marsh'|'dunes'|'mountain-flank', marks:LandformMark[] }} TownLandform
+ *   The NON-WATER landform's renderable texture (marsh reeds/stipple · dune
+ *   contours · mountain hachures), generated as MODEL DATA so every renderer (the
+ *   flat draw list, the interactive pane, the panorama, the exports) reads ONE
+ *   geometry. Null for water/plain kinds. Seed-expressed, trig-free, deterministic.
+ */
+/**
  * @typedef {Object} TownSite
  * @property {{ kind:'coast'|'river', path:Array<[number,number]> }|null} water
  * @property {{ x:number, y:number }|null} waterAnchor
  * @property {string} kind    coast | river | marsh | dunes | mountain-flank | plain
  * @property {boolean} hasWater
  * @property {Array<{ element:string, sourceFamily:string, sourceRef:string, effect:string }>} prov
+ * @property {TownLandform|null} landform   the non-water landform texture, or null
  */
+
+const LVIEW = 1000;
+
+/** Deterministic, cross-machine-stable pseudo-jitter in [-span, span] from an integer
+ * index (32-bit integer hash; no Math.random, no Date). Same index ⇒ same value on
+ * every machine, so a landform's marks are byte-identical (a golden can pin them).
+ * @param {number} n @param {number} span @returns {number} */
+function jit(n, span) {
+  let h = Math.imul(((n | 0) ^ 0x9e3779b9) >>> 0, 0x85ebca6b) >>> 0;
+  h ^= h >>> 13;
+  h = Math.imul(h, 0xc2b2ae35) >>> 0;
+  h ^= h >>> 16;
+  return (h % (2 * span + 1)) - span;
+}
+
+/**
+ * THE NON-WATER LANDFORM (task #38 fenced follow-up) — generate the renderable
+ * texture for a marsh / dune-field / mountain-flank site, as MODEL DATA in the
+ * bounded mark vocabulary. The DISTINCTION is by PATTERN (reeds+stipple vs contour
+ * curves vs slope hachures), never colour — so it reads under every lens, incl. the
+ * colourblind-safe accessible lens. Placement is seed-EXPRESSED (which flank, which
+ * margin) over SUBSTANCE fixed by kind; positions hug a peripheral band so the
+ * urban core stays legible. PURE + trig-free + deterministic. Braun & Hogenberg /
+ * Dürer register (DESIGN_ORGANIC_CRAFT.md §5): hatching as tone, 2–3 ink weights.
+ * @param {'marsh'|'dunes'|'mountain-flank'} kind
+ * @param {string} seed
+ * @param {{ x:number, y:number }|null} waterAnchor  the marsh's wet-ground centre, if any
+ * @returns {TownLandform}
+ */
+export function generateLandform(kind, seed, waterAnchor) {
+  const d = codeDigit(`${seed}::landform:${kind}`);
+  /** @type {LandformMark[]} */
+  const marks = [];
+
+  if (kind === 'marsh') {
+    // Reeds + stipple around the wet ground (near the river's low anchor), clustered
+    // toward a seeded corner of that low band. The classic wetland tuft-and-dot mark.
+    const cx = clamp((waterAnchor ? waterAnchor.x : 520) + jit(d, 90), 180, LVIEW - 180);
+    const cy = clamp((waterAnchor ? waterAnchor.y : 560) + jit(d + 7, 70), 300, LVIEW - 160);
+    for (let i = 0; i < 34; i++) {
+      // a rough disc of stipple (radius up to ~185), skipping the very centre so the
+      // wet ground reads as a band, not a blob.
+      const ax = jit(d + i * 3 + 1, 190);
+      const ay = jit(d + i * 3 + 2, 150);
+      if (ax * ax + ay * ay < 1600) continue; // keep a small clear eye
+      marks.push({ m: 'dot', x: clamp(cx + ax, 8, LVIEW - 8), y: clamp(cy + ay, 8, LVIEW - 8), r: 3 + (i % 2) });
+    }
+    for (let i = 0; i < 13; i++) {
+      // a reed tuft: a short vertical stroke with a splayed side blade (two strokes).
+      const rx = clamp(cx + jit(d + i * 5 + 100, 170), 12, LVIEW - 12);
+      const ry = clamp(cy + jit(d + i * 5 + 101, 130), 40, LVIEW - 12);
+      const hgt = 16 + (i % 3) * 4;
+      marks.push({ m: 'stroke', x1: rx, y1: ry, x2: rx, y2: ry - hgt, w: 1 });
+      marks.push({ m: 'stroke', x1: rx, y1: ry - Math.round(hgt * 0.55), x2: rx + (i % 2 ? 6 : -6), y2: ry - hgt, w: 0 });
+    }
+    return { kind, marks };
+  }
+
+  // ── mountain-flank + dunes share a peripheral EDGE frame (a seeded flank/margin) ──
+  const edge = d % 4;                      // 0 top · 1 right · 2 bottom · 3 left
+  const vertical = edge === 0 || edge === 2;  // depth runs along y
+  const nearLow = edge === 0 || edge === 3;   // ridge/crest hugs the 0-side
+  const ridge = nearLow ? 84 : LVIEW - 84;
+  const inward = nearLow ? 1 : -1;            // toward the urban core
+  /** Map (along, depth) in the flank's own frame to a view point. @param {number} a @param {number} p */
+  const pt = (a, p) => /** @type {[number,number]} */ (
+    vertical ? [clamp(a, 0, LVIEW), clamp(p, 0, LVIEW)] : [clamp(p, 0, LVIEW), clamp(a, 0, LVIEW)]);
+
+  if (kind === 'mountain-flank') {
+    // A ridge crest hugging the flank, then hachures fanning DOWNSLOPE toward the town
+    // — short strokes perpendicular to the contour, fading (shorter, sparser) with
+    // distance from the crest (Dürer slope shading).
+    /** @type {Array<[number,number]>} */
+    const crest = [];
+    for (let k = 0; k <= 6; k++) {
+      const a = 150 + k * 116;
+      crest.push(pt(a, ridge + jit(d + k, 22)));
+    }
+    marks.push({ m: 'curve', pts: crest, w: 2 });
+    for (let row = 0; row < 4; row++) {
+      const depth = ridge + inward * (46 + row * 52);
+      const len = (28 - row * 5);          // hachures shorten downslope (tone fades)
+      const cols = 8 - row;                // and thin out
+      for (let k = 0; k < cols; k++) {
+        const a = 168 + k * Math.round(680 / Math.max(1, cols)) + jit(d + row * 17 + k, 12);
+        const p0 = depth + jit(d + row * 23 + k, 8);
+        const [x1, y1] = pt(a, p0);
+        const [x2, y2] = pt(a + jit(d + row * 29 + k, 6), p0 + inward * len);
+        marks.push({ m: 'stroke', x1, y1, x2, y2, w: row === 0 ? 1 : 0 });
+      }
+    }
+    return { kind, marks };
+  }
+
+  // dunes — nested crescent contour curves rolling in from the dry margin, plus a
+  // scatter of sand stipple. The rolling-arc pattern (no straight hatching) reads as
+  // a dune field distinct from the mountain's hachures.
+  for (let row = 0; row < 5; row++) {
+    const depth = ridge + inward * (44 + row * 46);
+    /** @type {Array<[number,number]>} */
+    const arc = [];
+    for (let k = 0; k <= 6; k++) {
+      const a = 132 + k * 123;
+      // a trig-free crescent: the middle of each arc dips toward the core (a fixed
+      // rational bump), offset per row so the dunes interleave.
+      const bump = [0, 10, 17, 20, 17, 10, 0][k];
+      const p = depth + inward * bump + jit(d + row * 13 + k, 9);
+      arc.push(pt(a, p));
+    }
+    marks.push({ m: 'curve', pts: arc, w: row % 2 === 0 ? 1 : 0 });
+  }
+  for (let i = 0; i < 12; i++) {
+    const a = 150 + jit(d + i * 3 + 200, 340) + 170;
+    const p = ridge + inward * (60 + (jit(d + i * 3 + 201, 90) + 90));
+    const [x, y] = pt(a, p);
+    marks.push({ m: 'dot', x, y, r: 2 });
+  }
+  return { kind, marks };
+}
 
 /**
  * STAGE 0 — generate the site. @param {{
@@ -115,7 +252,14 @@ export function generateSite(arg) {
     prov.push({ element: 'site:landform', sourceFamily: 'region', sourceRef: 'the flats/dunes (dry biome / salt)', effect: 'site-flats' });
   }
 
-  return { water, waterAnchor, kind, hasWater, prov };
+  // THE NON-WATER LANDFORM texture (marsh / dunes / mountain-flank) — generated as
+  // model data so it RENDERS. Water/plain kinds carry none (null ⇒ the renderers add
+  // no ops ⇒ byte-identical to the pre-landform output; the dormancy law).
+  const landform = (kind === 'marsh' || kind === 'dunes' || kind === 'mountain-flank')
+    ? generateLandform(kind, seed, waterAnchor)
+    : null;
+
+  return { water, waterAnchor, kind, hasWater, prov, landform };
 }
 
 /**

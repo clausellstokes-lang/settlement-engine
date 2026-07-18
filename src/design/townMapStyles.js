@@ -117,15 +117,18 @@ const PARCHMENT = {
   },
   district: { ...EXPORT_PALETTE.district },
   // Line weights (in the 0..1000 view space). road/wall add the model's own
-  // per-element weight on top of the base.
+  // per-element weight on top of the base. `landform` is the base ink weight for the
+  // non-water landform marks (marsh reeds · dune contours · mountain hachures); the
+  // renderer scales it by each mark's weight TIER (the craft law's 2–3 ink weights).
   stroke: {
     waterCoast: 2, river: 14, roadBase: 2, street: 3, anchor: 1.5,
     wallBase: 1.5, gate: 2, district: 1.5, building: 1.5, badge: 1.5, hazard: 1.5,
+    landform: 1.4,
   },
   opacity: {
     waterFill: 0.16, waterCoastStroke: 0.5, riverStroke: 0.55, roadStroke: 0.5,
     streetStroke: 0.55, districtFill: 0.14, districtAccent: 0.08, districtStroke: 0.45,
-    wallStroke: 0.8,
+    wallStroke: 0.8, landform: 0.5,
   },
 };
 
@@ -231,10 +234,14 @@ const VTT = {
  * neutral, and the linework is heavy and near-opaque so shapes read on their own.
  *
  * THE WALL holds by construction: this is palette hex + numeric weights/opacities
- * only — no new renderer capability, no pattern primitive (true hatching would need
- * a new fill op threaded through the SVG/canvas/PDF adapters — a later, deliberate
- * op-vocabulary change, recorded not smuggled). A clean cartouche neatline is the
- * only furniture (no wash/compass) so nothing dilutes contrast.
+ * only — no new renderer capability. The NON-WATER LANDFORM texture (marsh reeds /
+ * dune contours / mountain hachures) that later landed renders from CONCRETE marks
+ * in the existing op vocabulary (line/circle/curve), NOT a pattern-fill primitive,
+ * so it composes here like any other geometry: this lens simply carries a heavier,
+ * more opaque landform ink so each landform's PATTERN reads on its own — the
+ * distinction is by mark shape, never colour (colourblind-safe by construction). A
+ * clean cartouche neatline is the only furniture (no wash/compass) so nothing
+ * dilutes contrast.
  */
 const ACCESSIBLE = {
   id: 'accessible',
@@ -271,11 +278,12 @@ const ACCESSIBLE = {
   stroke: {
     waterCoast: 2.5, river: 14, roadBase: 2.5, street: 3.5, anchor: 2,
     wallBase: 2.5, gate: 2.5, district: 2.25, building: 2, badge: 2, hazard: 2,
+    landform: 2,
   },
   opacity: {
     waterFill: 0.2, waterCoastStroke: 0.75, riverStroke: 0.7, roadStroke: 0.7,
     streetStroke: 0.7, districtFill: 0.3, districtAccent: 0.14, districtStroke: 0.9,
-    wallStroke: 1,
+    wallStroke: 1, landform: 0.8,
   },
 };
 

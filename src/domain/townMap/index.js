@@ -60,6 +60,7 @@ export {
   EXPORT_PALETTE,
   exportDistrictColor,
   buildTownMapDrawList,
+  landformDrawOps,
   drawListToSvg,
   buildTownMapSvg,
   hasDrawableMap,
