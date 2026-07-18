@@ -1134,6 +1134,11 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER GATE INSERTED (2026-07-18): PREVIEW-PAUSE BEFORE ROUND 3.** Owner order:
+"before the resurvey, pause and show me a preview." ROUND 3 (task #6) does NOT
+auto-dispatch at the push. Sequence amended: composite suite → red audit → ledger →
+PUSH (#23, standing order) → SERVE THE COMPOSITE LIVE (vite from the composite branch,
+lineage-probed) → OWNER WALK-THROUGH → ROUND 3 dispatches only on the owner's word.
 **⬛⬛ FOLD: THE ORGANIC CRAFT WAVE → w7-prep @ 8a5b10a1 (2026-07-18) — AND THE FIRST
 ALL-GREEN FULL SUITE.** Merge 9124110b (no-ff, zero conflicts, NUL scan clean, 89 files)
 + two triage commits. THE SEVEN FULL-SUITE REDS CURED, not baselined: mutedBg → hex-key
