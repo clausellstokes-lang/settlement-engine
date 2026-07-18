@@ -1134,6 +1134,15 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ WALK FEEDBACK #1 (owner, 2026-07-18, the cluster-1 walk's first verdicts):**
+(1) REMOVE the Instant World premium card from the create page ENTIRELY; (2) fold
+"instant generation" into the line "Pick a size. Roll a settlement. Every size from
+thorp to metropolis." (manager judgment, vetoable: the phrase doubles as the
+entitlement-gated entry to the instant flow so the capability keeps a doorway —
+plain-copy + recorded deferral if wiring is awkward); (3) the two demo miniature
+boxes must START AT THE SAME HEIGHT (top-align the exhibit pair). Lands as C1r-d in
+the deep-craft lane; then the lane proceeds to SURFACE 2 (library settlement view)
+restoration per the reconciliation-map S2 spec + THE LIVING BACKDROP ruling.
 **⬛ DELEGATION #2 EXECUTED (owner: "use your best judgement for #2… support@
 settlementforge.com is suppose to redirect to settlementforge@gmail.com",
 2026-07-18):** (1) MARKETING MASTERS MOVED per the recorded default — ~381MB
