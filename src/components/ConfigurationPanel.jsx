@@ -6,6 +6,7 @@ import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
+import { ClerkNote } from './generate/ClerkNote.jsx';
 import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 
@@ -293,20 +294,13 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
              Isolated unavailable at {config.settType} tier without magic infrastructure
           </div>}
         </div>
-        {/* ── Isolation + Town+ warning ───────────────────────────────────── */}
+        {/* ── Isolation + Town+ warning — a rubric-headed clerk's note
+            (Deep Craft cluster 1; the blue tinted wash retired). */}
         {['town','city','metropolis'].includes(config.settType) &&
           config.tradeRouteAccess === 'isolated' && (
-          <div style={{
-            background: swatch.infoBg,
-            border: '1px solid #a0b0e0',
-            borderLeft: '3px solid #3a5ab0',
-            borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
-          }}>
-            <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
-            <span style={{color:swatch['#2A3A6A']}}>
-              A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
-            </span>
-          </div>
+          <ClerkNote rubric="✦ Magical Trade Infrastructure" style={{ fontSize: FS.xs }}>
+            A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
+          </ClerkNote>
         )}
 
         <div><Lbl topic="terrain">Terrain</Lbl>

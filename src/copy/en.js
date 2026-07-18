@@ -140,6 +140,10 @@ export const en = Object.freeze({
       souls:    'souls',
       capMemo:  'The lighter sizes open with a free account.',
     },
+    // Clerk's-note rubric heads (Deep Craft cluster 1 — the apparatus voice).
+    notes: {
+      errorRubric: 'Generation failed',
+    },
     // Mode selector (migrated from copy/strings.js `generate.*`). One verb per
     // action class: Forge (first generation) / Reforge (regenerate). "Draft" is
     // the artifact noun (draft → canon lifecycle is preserved).

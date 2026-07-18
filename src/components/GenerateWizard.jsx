@@ -42,6 +42,7 @@ import { WizardLoadedBanners } from './generate/WizardLoadedBanners.jsx';
 import { WizardOutputToolbar } from './generate/WizardOutputToolbar.jsx';
 import { WizardCommitBand } from './generate/WizardCommitBand.jsx';
 import ExportDraftButton from './generate/ExportDraftButton.jsx';
+import { ClerkNote, ClerkNoteStrong } from './generate/ClerkNote.jsx';
 import { readDraft, clearDraft } from '../lib/pendingSaveDraft.js';
 
 // Lazy-load OutputContainer — 457 kB chunk deferred until settlement is generated
@@ -393,22 +394,21 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       <>
         {restorableDraft && (
           <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%', padding: `${SP.md}px 0 0` }}>
-            <div style={{
-              background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8,
-              padding: '12px 16px', display: 'flex', flexWrap: 'wrap', alignItems: 'center',
-              gap: 12, justifyContent: 'space-between',
-            }}>
-              <div style={{ fontFamily: sans, fontSize: FS.sm, color: swatch['#5A3A00'], flex: '1 1 280px' }}>
-                <strong>A save was interrupted.</strong>{' '}
-                Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
-                {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
-                  ? `"${restorableDraft.name}"` : 'settlement'} is still here.
-              </div>
-              <div style={{ display: 'flex', gap: SP.sm }}>
-                <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
-                <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
-              </div>
-            </div>
+            {/* The interrupted-save recovery, as a rubric-headed clerk's note
+                (Deep Craft cluster 1 — no tinted wash; the rubric speaks). */}
+            <ClerkNote
+              rubric="A save was interrupted"
+              actions={
+                <>
+                  <Button variant="primary" size="sm" onClick={handleRestoreDraft}>Restore</Button>
+                  <Button variant="ghost" size="sm" onClick={handleDismissDraft}>Discard</Button>
+                </>
+              }
+            >
+              Your unsaved {restorableDraft.tier && restorableDraft.tier !== 'unknown' ? `${restorableDraft.tier} ` : ''}
+              {restorableDraft.name && restorableDraft.name !== 'Untitled Settlement'
+                ? `"${restorableDraft.name}"` : 'settlement'} is still here.
+            </ClerkNote>
           </div>
         )}
         <WizardEmptyState
@@ -548,17 +548,11 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
           <StepIndicator currentStep={wizardStep} totalSteps={STEPS.length} />
 
-          {/* Contextual hint for current step */}
-          <div style={{
-            padding: `${SP.sm + 2}px ${SP.lg}px`, background: swatch['#FEF9EE'],
-            border: `1px solid ${GOLD}`, borderLeft: `4px solid ${GOLD}`,
-            borderRadius: R.lg - 1, fontSize: FS.md, color: SECOND, lineHeight: 1.5,
-          }}>
-            <strong style={{ fontFamily: serif_ }}>
-              Step {wizardStep + 1}: {currentStepDef.label}
-            </strong>
-            {' — '}{currentStepDef.hint}
-          </div>
+          {/* Contextual hint for current step — a rubric-headed clerk's note
+              (Deep Craft cluster 1; the gold tinted banner retired). */}
+          <ClerkNote rubric={`Step ${wizardStep + 1} · ${currentStepDef.label}`}>
+            {currentStepDef.hint}
+          </ClerkNote>
 
           {/* Current step content. P144 / A-4 — the step-change effect
               moves focus to this labelled region so a step swap is both
@@ -662,18 +656,13 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
           error alert stays here so a failed regenerate surfaces above the
           dossier. */}
       {settlement && generateError && (
-        <div role="alert" style={{
-          marginTop: SP.sm,
-          padding: `${SP.sm}px ${SP.md}px`,
-          background: swatch.dangerBg,
-          border: '1px solid #e8b0b0',
-          borderRadius: R.md,
-          color: swatch.danger,
-          fontFamily: sans,
-          fontSize: FS.sm,
-        }}>
+        <ClerkNote
+          role="alert"
+          rubric={t('generate.notes.errorRubric')}
+          style={{ marginTop: SP.sm }}
+        >
           {generateError}
-        </div>
+        </ClerkNote>
       )}
 
       {/* P100 — pipeline reveal overlay. Renders only when the flag is on,
@@ -756,27 +745,22 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
       {/* When settlement exists but user navigated back — show re-view option + mode picker */}
       {settlement && !showOutput && (
         <>
-          <div style={{
-            padding: `${SP.md}px ${SP.lg}px`, background: swatch.successBg,
-            border: '1px solid #4a8a60', borderRadius: R.lg,
-            display: 'flex', alignItems: 'center', gap: SP.md,
-          }}>
-            <div style={{ flex: 1 }}>
-              <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>
-                Last generated: {settlement.name || 'Untitled'}
-              </span>
-              <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: SP.sm }}>
-                {settlement.tier}
-              </span>
-            </div>
-            <Button
-              variant="success"
-              size="sm"
-              onClick={() => setShowOutput(true)}
-            >
-              View Settlement
-            </Button>
-          </div>
+          {/* The last-generated recall, as a clerk's note (green wash retired). */}
+          <ClerkNote
+            rubric="Last generated"
+            actions={
+              <Button
+                variant="success"
+                size="sm"
+                onClick={() => setShowOutput(true)}
+              >
+                View Settlement
+              </Button>
+            }
+          >
+            <ClerkNoteStrong>{settlement.name || 'Untitled'}</ClerkNoteStrong>
+            {' · '}{settlement.tier}
+          </ClerkNote>
 
           {/* Mode picker — let the user start fresh in either generation mode.
               Picking a mode here clears the current settlement so the wizard

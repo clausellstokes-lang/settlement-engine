@@ -48,10 +48,14 @@ const CEILINGS = Object.freeze({
   // Lowered 2026-07-18 (cluster 1, THE GAUGE): borderRadius 1097→1095,
   // boxShadow 118→117, rgba 275→273 — the hero size cards and the hero
   // plate's shadow/radius fell to the scale-rule recomposition.
-  borderRadius: 1095,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again same day (cluster 1c, THE CLERK'S NOTES): borderRadius
+  // 1095→1090, tintedCallouts 251→248 — five wizard callout washes
+  // (restore-draft, step hint, regen error, last-generated, magical-trade)
+  // became rubric-headed clerk's notes.
+  borderRadius: 1090,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 117,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 273,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 251,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 248,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
