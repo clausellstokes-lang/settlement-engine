@@ -244,6 +244,11 @@ streamed media never touches it; the true cost is network weight, engineered bel
    harness remains a named deferral if not built).
 6. Eager report to the byte; closure ≤ 1,040,000 with the delta enumerated.
 7. Full behavioral suite green with pins untouched (manager's fold, below).
+8. THE BASE RESTORATION LEDGER (docs/THE_BASE_RESTORATION_LEDGER.md) shows ZERO
+   PENDING rows — every file merge 0168e287 decided against master carries a named
+   disposition (restored / matches-master / program-side-ruled / superseded /
+   deferred-with-reason); the 10 ⛔ADJUDICATE deletions each have an individual
+   verdict. Owning slices update their rows in the same commit as the work.
 
 ### THE DEEP-WAVE FOLD (manager)
 1. NUL-scan the full diff (python). 2. Merge --no-ff into claude/the-composite in its
