@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ C1 COMPLETE — THE COMMISSIONING DESK IS WHOLE (2026-07-18, deep-craft tip
+01ad3a8f).** C1r-c landed in three commits: 5e7cbdf4 THE LEAF (one commissioning
+plate; Advanced entirely behind .oc-m-unfold; InstantWorldEntry RE-HOMED below the
+fold — the recorded deferral PAID, mounted in WizardEmptyState) · 4075b499 THE TINT
+TRIO (wizard banners → clerk's notes; ceilings lowered in-commit) · 01ad3a8f THE
+STAGE BACKDROP (six evolution stills as gauge backdrops — optimized jpgs 133-150 KB
+each under public/evolution/, static media ZERO eager JS, new pin
+homeHeroStageBackdrop.test.jsx). Gates: verify:dist 150/150 · FULL SUITE 13,148
+passed / 5 failed = EXACTLY the expected five (4 parked golden families +
+aiGrounding freshness). ⚠ FLAKE CLASS RECORDED: the first full-suite run showed 5
+EXTRA reds — all tests/security/*.pglite.test.js, all "Hook timed out in 10000ms" —
+under concurrent-lane machine load; isolation re-run 51/51 green in 5.6s. Protocol
+note for every future fold: pglite hook-timeout reds under load are retriaged by
+ISOLATION RE-RUN before any diagnosis. Also confirmed in passing: the FMG fork's
+supply-chain gate (validate-map-fork VENDOR-MANIFEST checks) EXISTS and is
+test-exercised — partially answers the ROUND 3 intake item. THE CREATE PAGE IS THE
+FIRST SURFACE THROUGH ALL THREE STEPS (base → functionality → craft): master's
+skeleton, every control, the consolidation ruling, the evolution echo. OWNER WALK
+READY at localhost:5199 (vite serves the worktree live).
 **⬛ THE LIVING BACKDROP + EDIT-GATE RATIFICATION (owner, 2026-07-18):** (1) the
 library settlement view's BACKGROUND = that settlement's last-viewed map — persisted
 as the state tuple {view: plan|panorama, lens/skin}, re-rendered deterministically as
