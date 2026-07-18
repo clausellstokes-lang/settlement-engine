@@ -1,15 +1,18 @@
 /**
- * WizardLoadedBanners.jsx — legacy (chrome-diet-off) status banners.
+ * WizardLoadedBanners.jsx — the loaded-config / active-neighbour status notes.
  *
- * Extracted byte-for-byte from GenerateWizard.jsx. Two full-width
- * banners: "Config loaded" and "Neighbour active". Each self-gates on
- * its own datum. Rendered only on the legacy path (the parent still
- * guards the whole block on !chromeDiet). Presentational — values and
- * handlers arrive via props; state stays in the parent wizard.
+ * Deep Craft (C1r-c2 — THE TINT TRIO): the two tinted status banners (the amber
+ * "Config loaded" wash + the green "Neighbour active" wash) become rubric-headed
+ * clerk's notes. The tinted callout box was the SaaS tell — a coloured wash +
+ * radius announcing tone by background; the clerk's note is the manuscript's way
+ * (one reserved rubric voice, a single drawn rule at the left, NO wash, NO radius,
+ * NO shadow — tone lives in the rubric's words). Each note self-gates on its own
+ * datum; the clear affordance rides the note's actions slot. Presentational —
+ * every value and handler arrives via props; state stays in the parent wizard.
  */
 
 import { X } from 'lucide-react';
-import { swatch, FS } from '../theme.js';
+import { ClerkNote, ClerkNoteStrong } from './ClerkNote.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
 export function WizardLoadedBanners({
@@ -21,25 +24,27 @@ export function WizardLoadedBanners({
   return (
     <>
       {loadedFromSave && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch['#FDF8EE'], border: '2px solid #b8860b', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: FS['16'], flexShrink: 0 }}>&#128203;</span>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch['#5A3A00'] }}>Config loaded: {loadedFromSave.name}</span>
-            {loadedFromSave.tier && <span style={{ fontSize: FS.sm, color: swatch['#8A6020'], marginLeft: 8 }}>{loadedFromSave.tier}</span>}
-          </div>
-          <IconButton Icon={X} glyph="×" label="Clear loaded config" tone="active" size="md" onClick={clearLoadedFromSave} />
-        </div>
+        <ClerkNote
+          rubric="Config loaded"
+          actions={
+            <IconButton Icon={X} glyph="×" label="Clear loaded config" tone="ghost" size="md" onClick={clearLoadedFromSave} />
+          }
+        >
+          <ClerkNoteStrong>{loadedFromSave.name}</ClerkNoteStrong>
+          {loadedFromSave.tier ? <>{' · '}{loadedFromSave.tier}</> : null}
+        </ClerkNote>
       )}
 
       {importedNeighbour && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: swatch.successBg, border: '2px solid #4a8a60', borderRadius: 8, padding: '10px 14px' }}>
-          <span style={{ fontSize: FS['16'] }}>&#127760;</span>
-          <div style={{ flex: 1 }}>
-            <span style={{ fontSize: FS.md, fontWeight: 700, color: swatch.success }}>Neighbour active: {importedNeighbour.name}</span>
-            <span style={{ fontSize: FS.sm, color: swatch['#4A8A60'], marginLeft: 8 }}>{importedNeighbour.tier}</span>
-          </div>
-          <IconButton Icon={X} glyph="×" label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
-        </div>
+        <ClerkNote
+          rubric="Neighbour active"
+          actions={
+            <IconButton Icon={X} glyph="×" label="Clear neighbour" tone="ghost" size="md" onClick={clearNeighbour} />
+          }
+        >
+          <ClerkNoteStrong>{importedNeighbour.name}</ClerkNoteStrong>
+          {importedNeighbour.tier ? <>{' · '}{importedNeighbour.tier}</> : null}
+        </ClerkNote>
       )}
     </>
   );

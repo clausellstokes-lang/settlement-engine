@@ -64,10 +64,16 @@ const CEILINGS = Object.freeze({
   // composition landed on the FLAT parchment plate (no rounded/shadow section)
   // so boxShadow/rgba/tinted held. The P10 failure surface uses the ClerkNote
   // idiom (no tinted wash), not master's swatch.dangerBg strip.
-  borderRadius: 1082,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C1r-c2, THE TINT TRIO): borderRadius 1082→1078,
+  // tintedCallouts 247→246. WizardLoadedBanners' two status banners (amber
+  // "Config loaded" + green successBg "Neighbour active") became rubric-headed
+  // clerk's notes (−2 radius, −1 tinted), and the orphaned WizardChipRow — a
+  // chrome-diet A/B leftover with ZERO importers repo-wide (its "ChangeModeBar
+  // imports it" premise was false) — was deleted (−2 radius).
+  borderRadius: 1078,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 247,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
