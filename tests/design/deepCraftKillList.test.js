@@ -59,7 +59,12 @@ const CEILINGS = Object.freeze({
   // dropped to the Button primitive, the two orphaned chrome files
   // (StepIndicator/WizardCommitBand) were deleted, and TradeDynamicsPanel's
   // redundant "Step 4" outer disclosure was flattened (master's base).
-  borderRadius: 1083,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C1r-b, hero base-set): borderRadius 1083→1082 — HomeHero's
+  // anon-cap inner gradient card fell to a plain centered block; master's
+  // composition landed on the FLAT parchment plate (no rounded/shadow section)
+  // so boxShadow/rgba/tinted held. The P10 failure surface uses the ClerkNote
+  // idiom (no tinted wash), not master's swatch.dangerBg strip.
+  borderRadius: 1082,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 247,  // the tinted callout box — replaced by rubric-headed clerk's notes

@@ -103,9 +103,13 @@ export const ELEV = L.ELEV;
 // Shared caps so pages stop inventing their own narrow columns. PAGE_MAX for
 // content/reference/marketing pages, PROSE_MAX for reading columns inside a
 // wide page, FORM_MAX for genuine forms (auth/success) that stay narrow.
-export const PAGE_MAX  = L.PAGE_MAX;
-export const PROSE_MAX = L.PROSE_MAX;
-export const FORM_MAX  = L.FORM_MAX;
+export const PAGE_MAX    = L.PAGE_MAX;
+export const PROSE_MAX   = L.PROSE_MAX;
+// LANDING_MAX — the compact landing/hero frame (narrower than PAGE_MAX). The
+// Create hero + empty-state column share it so the landing reads as one framed
+// composition rather than sprawling full-bleed (P12).
+export const LANDING_MAX = L.LANDING_MAX;
+export const FORM_MAX    = L.FORM_MAX;
 
 // ── Display fallbacks ────────────────────────────────────────────────────────
 // One source for "this fact is absent/unknown". Render this (an em-dash) instead

@@ -350,10 +350,7 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
         <WizardEmptyState
           showHomeHero={showHomeHero}
           showModePicker={showModePicker}
-          isMobile={isMobile}
-          wizardMode={wizardMode}
           setWizardMode={setWizardMode}
-          authTier={authTier}
           onSignIn={onSignIn}
           onNavigate={onNavigate}
         />
