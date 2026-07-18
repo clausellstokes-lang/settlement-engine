@@ -49,6 +49,7 @@ export const AI_TASK_CONFIG = Object.freeze({
   styleOverhaul:       Object.freeze({ routing: 'fast',     maxTokens: 1500, sliceBudget: Object.freeze({ maxSlices: 4, maxChars: 2000 }), tokenBudget: 8000 }),
   constructSettlement: Object.freeze({ routing: 'balanced', maxTokens: 1800, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 12000 }),
   constructRealm:      Object.freeze({ routing: 'balanced', maxTokens: 1800, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 12000 }),
+  autonomy:            Object.freeze({ routing: 'balanced', maxTokens: 1500, sliceBudget: Object.freeze({ maxSlices: 6, maxChars: 2500 }), tokenBudget: 10000 }),
 });
 
 /** The task's routing class (default 'balanced' for an unknown task). */

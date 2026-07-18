@@ -86,6 +86,7 @@ const SURVEYOR_AI_COSTS = Object.freeze({
   styleOverhaul:       3,   // one bespoke map-style definition (the S2→S3 rung)
   constructSettlement: 6,   // one intent → generated settlement (S5)
   constructRealm:      8,   // one intent → composed realm (S6)
+  autonomy:            4,   // one autonomy compose: stop condition + nudges (S7)
 });
 
 export const DEFAULT_MODEL_PREFERENCE = 'anthropic_claude_opus_4_8';
