@@ -132,6 +132,14 @@ export const en = Object.freeze({
       city:    'Politics. Districts. Things that go wrong at scale.',
       metropolis: 'The seat of something larger than itself.',
     },
+    // THE GAUGE — the commissioning desk's scale-rule size strip (Deep Craft
+    // cluster 1). Figures come from data/constants POPULATION_RANGES at render;
+    // no number is ever spelled here (the copy law).
+    gauge: {
+      label:    'Settlement size',
+      souls:    'souls',
+      capMemo:  'The lighter sizes open with a free account.',
+    },
     // Mode selector (migrated from copy/strings.js `generate.*`). One verb per
     // action class: Forge (first generation) / Reforge (regenerate). "Draft" is
     // the artifact noun (draft → canon lifecycle is preserved).

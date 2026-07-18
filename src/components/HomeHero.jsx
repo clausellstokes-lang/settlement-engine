@@ -35,6 +35,7 @@ import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
 import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
 import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
+import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -42,36 +43,65 @@ import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 const ANON_SIZES = ['hamlet', 'village', 'town'];
 const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
-function SizeButton({ value, label, hint, active, onClick, compact = false }) {
+// ── THE GAUGE (Deep Craft cluster 1) ─────────────────────────────────────────
+// One scale-rule strip replaces the size cards: six stations on a single
+// drawn rule, the chosen size ink-filled, sizes outside the viewer's
+// entitlement rendered lighter with one memo line beneath. Figures derive
+// from data/constants POPULATION_RANGES (already in the eager data chunk —
+// zero new closure modules) and set in old-style numerals; the top tier
+// renders open-ended (min+), matching the ladder's honest ceiling. Every
+// station stays a real <button data-settlement-size> (the e2e flows' locator
+// contract); capped stations are disabled, never hidden — the ladder's shape
+// is part of the pitch.
+
+/** Old-style population figure for a size token: "8–60", top tier "25,001+". */
+function popFigure(size) {
+  const r = POPULATION_RANGES[size];
+  if (!r) return '';
+  const fmt = (n) => n.toLocaleString('en-US');
+  const isTop = TIER_ORDER[TIER_ORDER.length - 1] === size;
+  return isTop ? `${fmt(r.min)}+` : `${fmt(r.min)}–${fmt(r.max)}`;
+}
+
+function GaugeStation({ value, label, active, enabled, onClick }) {
   return (
     <button
       type="button"
       data-settlement-size={value}
-      onClick={() => onClick(value)}
+      onClick={enabled ? () => onClick(value) : undefined}
+      disabled={!enabled}
       aria-pressed={active}
+      className="sf-gauge-station oc-m-inkdarken oc-m-press"
       style={{
-        flex: '1 1 0', minWidth: compact ? 92 : 120,
-        padding: compact ? `${SP.sm}px ${SP.sm}px` : `${SP.md}px ${SP.md}px`,
-        textAlign: 'left',
-        background: active ? 'rgba(201,162,76,0.10)' : '#fff',
-        border: `1.5px solid ${active ? GOLD : BORDER}`,
-        borderRadius: R.lg,
-        cursor: 'pointer',
-        transition: 'border-color 0.15s, background 0.15s',
-        fontFamily: sans,
+        flex: '1 1 0', minWidth: 76, padding: `0 ${SP.xs}px ${SP.sm}px`,
+        background: 'transparent', border: 'none',
+        cursor: enabled ? 'pointer' : 'default',
+        textAlign: 'center', fontFamily: sans,
+        opacity: enabled ? 1 : 0.45,
       }}
     >
+      {/* The station marker sits ON the rule (pulled up over the strip's
+          drawn border). Filled = chosen; open = available; faint = capped. */}
+      <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true" focusable="false"
+        style={{ display: 'block', margin: '-7px auto 4px' }}>
+        <circle cx="6.5" cy="6.5" r={active ? 5 : 3.5}
+          fill={active ? INK : '#FBF5E6'}
+          stroke={active ? INK : (enabled ? GOLD_DEEP : BODY)}
+          strokeWidth={active ? 1 : 1.5} />
+      </svg>
       <div style={{
-        fontFamily: serif_, fontSize: compact ? FS.md : FS.lg, fontWeight: 600, color: INK,
-        marginBottom: 2,
+        fontFamily: serif_, fontSize: FS.md, fontWeight: active ? 700 : 500,
+        color: active ? INK : BODY, lineHeight: 1.2,
       }}>
         {label}
       </div>
-      {hint && (
-        <div style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.35 }}>
-          {hint}
-        </div>
-      )}
+      <div style={{
+        fontSize: FS.xxs, color: BODY, marginTop: 1,
+        fontVariantNumeric: 'oldstyle-nums', letterSpacing: '0.01em',
+        opacity: active ? 1 : 0.8,
+      }}>
+        {popFigure(value)}
+      </div>
     </button>
   );
 }
@@ -155,8 +185,6 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.xl + 2,
-        boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
         fontFamily: sans,
         textAlign: 'center',
       }}
@@ -248,26 +276,67 @@ export default function HomeHero({ onSignIn, onNavigate }) {
         </>
       )}
 
-      {/* ── Size picker ───────────────────────────────────────────────
-          Anon sees 3 buttons (hamlet/village/town); signed-in sees 6
-          (thorp through capital). Same primitive, more buttons.
+      {/* ── The double rule — the desk header closes, the instrument begins.
+          (Rule grammar: double = total/finality; pure CSS, zero JS.) */}
+      <div aria-hidden="true" style={{
+        maxWidth: 520, margin: `${SP.xl}px auto 0`, height: 5,
+        borderTop: `1px solid ${INK}`, borderBottom: `2px solid ${INK}`,
+        opacity: 0.55,
+      }} />
+
+      {/* ── THE GAUGE ─────────────────────────────────────────────────
+          One scale-rule strip, six stations on a drawn rule. Every
+          station renders for every audience (the ladder IS the pitch);
+          stations beyond the viewer's entitlement are lighter, disabled,
+          and explained by one memo line. The chosen station is
+          ink-filled. Focus stays perceivable without pointer state.
       */}
-      <div style={{
-        display: 'flex', gap: SP.sm, marginTop: SP.xl,
-        justifyContent: 'center', flexWrap: 'wrap',
-      }}>
-        {sizes.map(size => (
-          <SizeButton
+      <style>{`
+        .sf-gauge-station:focus-visible {
+          outline: 2px solid ${GOLD};
+          outline-offset: 2px;
+        }
+      `}</style>
+      <div
+        role="group"
+        aria-label={t('generate.gauge.label')}
+        style={{
+          display: 'flex', alignItems: 'flex-start', marginTop: SP.xl,
+          borderTop: `1px solid ${GOLD_DEEP}`,
+          paddingTop: 0, flexWrap: 'wrap',
+        }}
+      >
+        {TIER_ORDER.map(size => (
+          <GaugeStation
             key={size}
             value={size}
             label={t(`generate.sizes.${size}`)}
-            hint={isAnon ? t(`generate.sizeHint.${size}`) : null}
             active={pickedSize === size}
+            enabled={sizes.includes(size)}
             onClick={setPickedSize}
-            compact={!isAnon}
           />
         ))}
       </div>
+      {/* The chosen station's hint (anon keeps the card hints' content, now
+          as one line for the active choice); the cap memo names why the
+          lighter stations wait. */}
+      {isAnon && (
+        <p style={{
+          margin: `${SP.sm}px auto 0`, maxWidth: 480,
+          fontFamily: serif_, fontStyle: 'italic',
+          fontSize: FS.sm, color: BODY, lineHeight: 1.5,
+        }}>
+          {t(`generate.sizeHint.${pickedSize}`)}
+        </p>
+      )}
+      {isAnon && (
+        <p style={{
+          margin: `${SP.xs}px auto 0`, fontSize: FS.xs, color: BODY,
+          opacity: 0.8,
+        }}>
+          {t('generate.gauge.capMemo')}
+        </p>
+      )}
 
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>

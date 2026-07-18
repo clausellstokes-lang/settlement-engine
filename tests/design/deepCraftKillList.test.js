@@ -45,9 +45,12 @@ function countLines(re) {
 
 // ── THE CEILINGS — shrink-only; lower in the same commit as each win. ─────────
 const CEILINGS = Object.freeze({
-  borderRadius: 1097,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 118,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 275,    // off-palette translucent washes — ink tones come from the ramp
+  // Lowered 2026-07-18 (cluster 1, THE GAUGE): borderRadius 1097→1095,
+  // boxShadow 118→117, rgba 275→273 — the hero size cards and the hero
+  // plate's shadow/radius fell to the scale-rule recomposition.
+  borderRadius: 1095,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 117,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 273,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 251,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
