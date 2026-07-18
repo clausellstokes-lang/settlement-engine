@@ -50,6 +50,11 @@ import { resolveTownMapStyle, styleDistrictColor, DEFAULT_STYLE_ID } from '../..
 // via this already-lazy draw surface, so first paint is unmoved (the townMapLazy pin).
 import { getGlyphSet, compileGlyph, FALLBACK_GLYPH_KIND } from '../../design/townGlyphs/index.js';
 import { glyphKindFor } from './glyphAssign.js';
+// THE GROUND DRESS (THE ILLUSTRATED TOWN, IT-2) — the whole-ground-plane texture (farm
+// furrows · woods stipple · water ripples · meadow · hedges · wall shadows + relief). A
+// pure op emitter gated on the illustrated lens's dress fields; [] for every other lens
+// (the dormancy law), so the re-skin goldens never move. Same lazy surface, no eager cost.
+import { groundDressOps } from './groundDress.js';
 
 export { EXPORT_PALETTE };
 
@@ -242,6 +247,13 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
   //    under the urban layer. Present only on v2 models with a landform site; absent
   //    ⇒ no ops ⇒ byte-identical (the dormancy law). ─────────────────────────────
   if (frame.landform) for (const o of landformDrawOps(frame.landform, style)) ops.push(o);
+
+  // ── (1c) ground dress (the illustrated lens's whole-ground-plane texture) — farm
+  //    furrows / woods stipple / water ripples / meadow / hedges / wall shadows + relief,
+  //    drawn HERE (below the streets / districts / buildings) adjacent to the landform.
+  //    Gated on the dress style fields ⇒ [] on every re-skin + the accessible lens ⇒
+  //    byte-identical (the dormancy law), exactly like the landform block above. ──────
+  for (const o of groundDressOps(model, style)) ops.push(o);
 
   // ── (2) approach roads ────────────────────────────────────────────────────────
   for (const r of (Array.isArray(frame.roads) ? frame.roads : [])) {

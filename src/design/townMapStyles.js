@@ -313,15 +313,19 @@ const ACCESSIBLE = {
  * tints, and the aged-paper cartouche + compass frame), so the base map still reads as a
  * hand-drawn chart. `opacity.shadow` sets the one-fixed-NW-light hatch weight; `opacity
  * .roofFill` the faint roof tint wash; a finer building stroke suits the glyph linework.
- * The five re-skin lenses never name `glyphSet`, so their output is byte-identical (their
- * building branch stays the legacy rect — the parchment===legacy pin holds).
+ * `opacity.dress` / `stroke.dress` (IT-2) set the GROUND DRESS density + ink weight — the
+ * farm furrows / woods stipple / water ripples / meadow / hedges / wall shadows that fill
+ * the parchment (groundDress.js). BOTH the shadow-bearing dress marks and the glyph hatch
+ * are lit from the ONE fixed NW light. The five re-skin lenses (AND the accessible lens)
+ * never name `glyphSet` or `dress`, so their output is byte-identical (their building
+ * branch stays the legacy rect and they emit ZERO dress — the parchment===legacy pin holds).
  */
 const ILLUSTRATED = {
   id: 'illustrated',
   label: 'Illustrated',
   glyphSet: 'medieval',
-  stroke: { building: 1.1 },
-  opacity: { shadow: 0.18, roofFill: 0.16 },
+  stroke: { building: 1.1, dress: 1.1 },
+  opacity: { shadow: 0.18, roofFill: 0.16, dress: 0.5 },
 };
 
 /** The raw lens overrides, merged over PARCHMENT by the resolver. */
