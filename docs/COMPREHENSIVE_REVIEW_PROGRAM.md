@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛ DEEP WAVE 0b→1c LANDED (2026-07-18) @ 78431763 — THE OWNER WALK OPENS.** Seven
+commits: 0b MATERIAL (FNV-seeded byte-stable grain tiles 3.1/2.9 kB, ink-bite frames,
+feTurbulence-ban pin) · 0c MOTION (the closed twelve, ≤700ms, reduced-motion collapse
+pinned, keyframes transform/opacity-only) · 0d HERO SPECS in-tree · 0e PLATES (six
+replaced w/ .orig preserved, ten added, webp twins < budget, consumers intact) ·
+1a THE GAUGE (six stations from TIER_ORDER, figures from POPULATION_RANGES at render,
+E2E locator + walker contracts preserved) · 1b THE ARRIVAL (token-computed ≤2s law,
+content in DOM at t=0, reduced-motion instant) · 1c CLERK'S NOTES (one primitive, five
+callouts converted, role=alert kept). RATCHETS MOVED: radii 1097→1090 · shadows 118→117 ·
+rgba 275→273 · callouts 251→248. EAGER DELTA 0 B (closure 1,038,588 at base and tip).
+SIX JUDGMENTs vetoable (16:9 plates uncropped · ARRIVAL replays on remount · gauge shows
+capped tiers to anons as pitch · ink-darken color-transition sanction · progression webp
+twin · annex/survey naming discrepancy recorded). CLUSTER 1 PARTIAL by name: advanced
+second leaf · slate slips (deferred to the AI cluster) · demo miniatures · Wizard tint
+trio · evolution-still gauge backdrops (own measured slice) all NOT built. Hard stop
+honored; the walk runs on 78431763; the completion slice dispatches AFTER owner feedback.
 **⬛ DEEP WAVE PHASE 0a LANDED (2026-07-18) @ c335c355 on claude/deep-craft.** THE
 KILL-LIST RATCHETS committed shrink-only-exact (title-census idiom), THE FOUR STARTING
 COUNTS frozen at the composite base: borderRadius 1,097 · boxShadow 118 · rgba() washes
