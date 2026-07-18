@@ -24,6 +24,12 @@ import {
   FS, SP, R, ELEV, sans, serif_,
 } from '../theme.js';
 import { tl } from '../../copy/landing.js';
+// Config-sourced tier facts (brief §4 / ruling #6): the closer tier strip
+// interpolates these instead of hand-typing the numbers, so a catalog change
+// (anon size ceiling, free save cap) can never drift from what the strip shows.
+// tierFacts imports only config/pricing.js and rides this lazy below-fold chunk,
+// so it adds nothing to the first-paint closure.
+import { ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT } from '../../config/tierFacts.js';
 import { fetchPublicGallery } from '../../lib/gallery.js';
 import {
   MiniDossierCard, VoiceCards, WhyTraceCard, RealmMapCard, SCENE, cardStyle,
@@ -257,6 +263,16 @@ function FounderSeatLine() {
   );
 }
 
+// Interpolate the config-sourced tier facts into a closer-strip body. The copy
+// carries {anonSize}/{freeSaves} tokens (copy/landing.js); the numbers come from
+// config/tierFacts.js so the strip can never restate a ceiling the catalog didn't
+// (brief §4 / ruling #6 — config-sourced facts, zero hand-typed numbers).
+const TIER_FACT_VARS = { anonSize: ANON_MAX_SIZE_LABEL, freeSaves: FREE_SAVE_LIMIT };
+function fillTierBody(body) {
+  return String(body).replace(/\{(\w+)\}/g, (m, name) =>
+    Object.prototype.hasOwnProperty.call(TIER_FACT_VARS, name) ? String(TIER_FACT_VARS[name]) : m);
+}
+
 function TierStrip() {
   const tiers = tl('closer.tiers') || [];
   return (
@@ -266,28 +282,35 @@ function TierStrip() {
     }}>
       {tiers.map((tier) => (
         <div key={tier.name} style={{
-          background: 'rgba(251,245,230,0.08)',
-          border: tier.accent ? '1px solid rgba(224,192,128,0.55)' : '1px solid rgba(244,234,208,0.25)',
+          background: tier.aiWall ? 'rgba(123,79,207,0.10)' : 'rgba(251,245,230,0.08)',
+          // Surveyor is walled in the violet AI channel (ruling #3); Cartographer
+          // keeps the gold accent; the rest read as quiet parchment.
+          border: tier.aiWall ? '1px solid rgba(123,79,207,0.5)'
+            : tier.accent ? '1px solid rgba(224,192,128,0.55)'
+            : '1px solid rgba(244,234,208,0.25)',
           borderRadius: R.lg, padding: '18px 20px',
         }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, marginBottom: 6, flexWrap: 'wrap' }}>
             <span style={{ fontFamily: serif_, fontSize: FS.xxl, fontWeight: 600, color: PARCH }}>{tier.name}</span>
-            {/* Per-segment badge colour: a 'Premium' segment always renders gold
-                (so Founder's "Premium · Lifetime" matches Cartographer's gold
-                PREMIUM); everything else follows the tier's accent. */}
+            {/* Per-segment badge colour: the AI-channel band renders violet; a
+                'Premium' segment always renders gold (so Founder's "Premium ·
+                Lifetime" matches Cartographer's gold PREMIUM); everything else
+                follows the tier's accent. */}
             <span style={{
               fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.08em', textTransform: 'uppercase',
             }}>
               {String(tier.badge).split(' · ').map((seg, i) => (
                 <span key={seg}>
                   {i > 0 && <span style={{ color: 'rgba(244,234,208,0.7)' }}>{' · '}</span>}
-                  <span style={{ color: (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)' : 'rgba(244,234,208,0.7)' }}>{seg}</span>
+                  <span style={{ color: tier.aiWall ? 'rgba(180,150,235,1)'
+                    : (tier.accent || /^premium$/i.test(seg)) ? 'rgba(224,192,128,1)'
+                    : 'rgba(244,234,208,0.7)' }}>{seg}</span>
                 </span>
               ))}
             </span>
           </div>
           <div style={{ fontFamily: sans, fontSize: FS.md, fontWeight: 600, lineHeight: 1.55, color: 'rgba(251,245,230,0.85)' }}>
-            {tier.body}
+            {fillTierBody(tier.body)}
           </div>
           {tier.seatLive && <FounderSeatLine />}
         </div>

@@ -90,9 +90,13 @@ export const landing = {
     waypoint: '03 · The voice',
     h2:     'The same facts, in a voice for the table.',
     body:   'The Narrative Layer turns raw simulation into table-ready prose. It never invents facts. Everything it needs is already in the brief.',
-    // Owner directive: disclose the AI up front (not prominent). This is the one
-    // AI feature; the whole rest of the product is derived by the engine.
-    aiNote: 'The Narrative Layer is powered by AI. It is the only feature in SettlementForge that is.',
+    // Owner directive: disclose the AI up front (not prominent). The Narrative
+    // Layer is no longer the ONLY AI surface (the Surveyor workshop is another),
+    // so this line evolved (W-DOC reconcile, brief §4) from the stale "only AI
+    // feature" claim to the SCHEMA-WALL promise: every AI feature reads and
+    // proposes; only the deterministic engine writes canon (structural, not
+    // policy). The promise is true of the Narrative Layer and every AI surface.
+    aiNote: 'The Narrative Layer is powered by AI. Every AI feature here reads and proposes; only the deterministic engine writes canon.',
     rawTag: 'what the engine derived',
     credit:      '1 credit',
     cta:         'Narrate',
@@ -151,10 +155,20 @@ export const landing = {
     sub:      'Forge a town before the kettle boils. Keep it if it’s good.',
     cta:      'Forge your first settlement',
     // 'Free. No account needed.' removed here (owner) — the hero already says it.
+    // W-DOC reconcile (brief §4): the numeric facts ({anonSize}, {freeSaves})
+    // are CONFIG-SOURCED — TierStrip interpolates them from config/tierFacts.js
+    // (ANON_MAX_SIZE_LABEL, FREE_SAVE_LIMIT), never hand-typed, so the closer can
+    // never restate a ceiling the catalog didn't. The anon line was corrected:
+    // "completely randomized" was an overstatement (the engine rolls the five
+    // priority sliders per generation via _randomizePriorities, then derives the
+    // town from those constraints — it is not "completely" random). Surveyor
+    // renders as the WALLED violet AI-channel early-access band (ruling #3),
+    // not a subscription tier — it is the optional AI workshop, priced per task.
     tiers: [
-      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, completely randomized, no sign-up. Up to Town size, nothing kept.' },
-      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to three saves, and sharing to the Gallery.' },
+      { name: 'Anonymous',    badge: 'Free · no account', body: 'Up to three forges a day, no sign-up — priorities rolled, the town derived from them. Up to {anonSize} size, nothing kept.' },
+      { name: 'Wanderer',     badge: 'Free · account',    body: 'A free account unlocks every size with full settlement customization, a Library with up to {freeSaves} saves, and sharing to the Gallery.' },
       { name: 'Cartographer', badge: 'Premium',           body: 'The living simulation: the Realm, wars that end themselves, custom content, and gallery import. Unlimited saves and unlimited exports.', accent: true },
+      { name: 'Surveyor',     badge: 'AI · early access', body: 'The optional AI workshop: an analyst for your world, prose briefs, and session interpretation that proposes edits for you to approve — it never writes canon. Bring your own key.', aiWall: true },
       { name: 'Founder',      badge: 'Premium · Lifetime', body: 'Everything Cartographer runs, forever. One payment, no clock.', seatLive: true },
     ],
     fullPricing: 'Full pricing',
