@@ -122,3 +122,28 @@ precision assists (tap-then-confirm placement, snap, loupe-class aids per the re
 44-48px on every realm control OUR chrome owns; the FMG iframe's touch behavior verified
 empirically at build, never assumed. Sweep wf_3c80f28a feeds the wave's tablet phase;
 the preview legibility review gains the tablet viewport both orientations.
+
+### §10b — THE SPREAD's own ergonomics + geometry (sweep wf_3c80f28a banked; corrections binding)
+- **GRIP INVERTS THE PHONE:** tablets are held at the SIDES; thumbs rest middle-to-upper
+  side edges and corners. Primary controls/nav pin to the UPPER SIDE EDGES + corners —
+  the FIELD posture's bottom-third law does NOT port (phone bottom bars are
+  ergonomically hostile on a held tablet; top-center and bottom-center are the dead
+  zones). Bottom edge only for canvas-preview scrubber-class controls.
+- **LANDSCAPE = THE SYNTHETIC SPREAD** (the fixed-layout book convention): views author
+  as paired recto/verso compositions (map plate recto, ledger/commentary verso);
+  PORTRAIT = the single folio page. Never "portrait but wider."
+- **THE CANON IS COMPUTABLE:** derive the tablet text block with the Van de Graaf /
+  Tschichold construction (works for any ratio; asymmetric inner/outer margins; the
+  wide outer margin HOSTS marginalia) — manuscript grammar by construction geometry,
+  never padding tokens. Portrait ~3:4 is the closest any screen comes to the codex leaf.
+- **FOLIO TEMPLATES FOR GENERATED CONTENT** (the Flipboard engine principle): a small
+  set of hand-designed page templates + a selector computing density/pacing/crop per
+  page — bespoke-looking output from procedural input; uniformity is what exposes
+  machine layout. SIMULTANEITY is the tablet's own capability: two/three-pane
+  compositions (map + dossier) + floating panels anchored to touch, not modal takeovers.
+- **ONE SIGNATURE INTERACTION, MAINTAINED:** at most one or two handleable-artifact
+  moments (pick up a plate and pinch it open) carry the entire bespoke impression;
+  spectacle that interrupts reading, and one-off interactions too bespoke to maintain,
+  are the recorded failure modes. Type tunes to tablet reading distance per orientation
+  (~55-70ch, larger body than desktop; justified+hyphenated legal in the manuscript
+  register since column widths are known).
