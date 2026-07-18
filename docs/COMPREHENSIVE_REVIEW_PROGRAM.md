@@ -1120,6 +1120,14 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ PRE-RECONCILIATION AMENDMENT (owner challenge 2026-07-18: "can't you pre-reconcile
+the unevenness?"):** ACCEPTED — the predicted first-pass unevenness is not inevitable;
+it followed from a binary exemption valve. The census gains the MATERIALS-ONLY bridge
+tier (token/CSS-level materials swap, zero structural/behavioral change — the phase-1
+ink ramp's 1:1 mapping to shipped colors was built for exactly this), plus JOURNEY-
+CLUSTER ordering (no user flow crosses an old/new chrome seam mid-journey) and a phase-5
+SEAM CHECK. Residual unevenness after the bridge = structural grammar only, which reads
+as room-to-room variety. INSTRUMENT-EXEMPT retired as a visual state. Relayed mid-flight.
 **⬛ THE FUNCTIONALITY RETENTION LAW (owner, 2026-07-18: "even with the website
 overhaul, retain all the functionality!"):** written into the craft brief as a binding
 law for every phase — recomposition never rewrite; functional parity per surface; the

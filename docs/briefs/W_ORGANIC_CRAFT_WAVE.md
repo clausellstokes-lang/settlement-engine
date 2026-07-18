@@ -86,6 +86,25 @@ one system:
    test ("what document is this?"). A styled tooltip that teaches out-of-world FAILS even
    if beautiful.
 
+## THE PRE-RECONCILIATION AMENDMENT (owner challenge 2026-07-18 — kills first-pass unevenness)
+The census disposition set gains a BRIDGE TIER. Dispositions are now: RECOMPOSED /
+MATERIALS-ONLY / DEFERRED-with-reason. Rules:
+1. MATERIALS-ONLY (the bridge): a surface too functional to recompose safely does NOT
+   keep its old chrome — it receives the materials pass ONLY: grounds, ink tokens, rule
+   family, type stack swapped at the token/CSS level with ZERO structural or behavioral
+   change (the phase-1 ink ramp maps 1:1 to the shipped ink-900/800/600 precisely so
+   this swap is mechanical). Functional parity is trivially preserved — no DOM moves.
+   INSTRUMENT-EXEMPT is hereby retired as a visual state; exemption now means
+   "structurally exempt," never "visually alien."
+2. JOURNEY-CLUSTER ORDERING: recompose in user-flow clusters, not by directory — no
+   single user journey (forge → dossier → map → export; browse → pricing → checkout;
+   library → open → advance) may cross an old-chrome/new-chrome seam mid-flow. A flow
+   is either all-recomposed or bridge-consistent before the sweep moves on.
+3. THE SEAM CHECK at phase 5: walk the named journeys and verify no material seam
+   remains anywhere a user travels; report residual STRUCTURAL variance (layout grammar
+   differences) honestly — that is the only unevenness allowed to survive, and it reads
+   as room-to-room variety, not as two products.
+
 ## THE FUNCTIONALITY RETENTION LAW (owner order 2026-07-18 — binds every phase)
 The overhaul is a RECOMPOSITION, never a functional rewrite. Every capability the app has
 today survives the sweep intact: every control, route, modal, keyboard path, focus order,
