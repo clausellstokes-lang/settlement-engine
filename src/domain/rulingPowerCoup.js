@@ -20,6 +20,7 @@
 import { clamp01 } from '../kernel/math.js';
 import { factionArchetype, FACTION_ARCHETYPES } from './factionArchetypes.js';
 import { governingFactionOf, num, round2, nameOf } from './rulingPower.js';
+import { ladderEffectivePowerFactor } from './townMap/ladderRead.js';
 
 /** @typedef {import('./rulingPower.js').RulingPowerSettlement} RulingPowerSettlement */
 
@@ -87,7 +88,10 @@ export function coupContenders(settlement) {
     .filter(f => f && f !== governing)
     .map(f => {
       const archetype = factionArchetype(f);
-      const power = num(f.power);
+      // §8 read-side: effective power = base × the ladder's leadership/churn factor. The
+      // factor is EXACTLY 1 when the ladder is dark (no npcLadder mirror) ⇒ byte-identical.
+      const factor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), f);
+      const power = factor === 1 ? num(f.power) : round2(num(f.power) * factor);
       return {
         name: nameOf(f),
         archetype,
@@ -101,7 +105,8 @@ export function coupContenders(settlement) {
     .sort(byWeightDescThenName)
     .slice(0, 3);
 
-  const incumbentPower = num(governing?.power);
+  const incFactor = ladderEffectivePowerFactor(/** @type {{ npcLadder?: unknown }} */ (/** @type {unknown} */ (settlement)), governing);
+  const incumbentPower = incFactor === 1 ? num(governing?.power) : round2(num(governing?.power) * incFactor);
   const amplifiedWeight = round2(incumbentPower * govMultiplier);
   const gated = challengers.length < 3
     || amplifiedWeight >= challengers[challengers.length - 1].weight;

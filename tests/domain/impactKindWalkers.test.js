@@ -78,6 +78,10 @@ const EXPECTED_VOICE = {
   // deliberately unvoiced (the urban_fabric precedent; the calamity itself is already
   // voiced via the calamity beat).
   spatial_consequence: null,
+  // THE LADDER (owner commission, engine lift #3): a rise/fall within a faction's rank
+  // order is a quiet court beat carrying its own reason receipt, NOT a town-crier
+  // proclamation — deliberately unvoiced (the npc_growth/urban_fabric precedent).
+  npc_ladder: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {
