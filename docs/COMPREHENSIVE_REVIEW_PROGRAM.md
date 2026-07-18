@@ -1120,6 +1120,26 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE PULL-FORWARD SWEEP (2026-07-17, owner: "is there anything waiting post-resurvey
+or post-soak that we can build now for the resurvey to validate?"):** the deferred stock
+audited into three classes. **CLASS A — DISPATCHED NOW:** CONTENT-VT-2 (the view-time
+selection mechanisms CONTENT-VT deferred-with-reason; lands free, claude/content-vt-2)
+· FP-G11 (the byte reclaim pulled ahead of the composite; headline candidate = the
+customRegistry de-eagering −46KB ceiling; claude/fp-g11; W2 feed-retention viability
+verdict included) · NON-WATER LANDFORM RENDERING (the v2 fenced follow-up — marsh/dunes/
+flank become VISIBLE; queued at the fog fold, shared map surface). FIVE LANES now live.
+**CLASS B — BLOCKED ON THE OWNER, NOT THE SOAK (deciding these tonight puts all of it in
+front of ROUND 3):** the v2 map taste veto (→ default-mint wiring) · the prose taste
+sample (→ THE BIG CONTENT WAVE: ~245 institution descs, NPC pools, history-event wiring)
+· the entitlement ladder (→ gate wiring across SM-5 pins/interiors/fog/pricing cards) ·
+the bespoke-style storage ruling (→ persistence builds) · the AI-op audit-spine ruling ·
+the anon/gallery export affordance decision. **CLASS C — GENUINELY IMMOVABLE:** dial
+values, knob entries, tuning counsel, re-certs (all soak-OUTPUT-dependent by definition)
+· S4+ content-plane knobs (owner-gated on LIVE post-launch acceptance metrics) · fog
+realtime v2 (scope discipline, recommend keeping post-launch). **CLASS D — OWNER-CHOICE
+ENGINE ITEM (flagged, not taken):** provenance causedBy kernel threading (dark ⇒
+byte-identical; would deepen ROUND 3's causality review; needs another engine-frozen
+lift — the owner's call, not the manager's).
 **⬛ THE LIMIT STRIKE + TRIPLE RESUME (2026-07-17 evening): the session limit killed all
 three live lanes mid-work (fog · doc wave · S7); the dossier's law held — limits kill
 reasoning, not disk.** Survived state, verified before resuming: fog banked commit
