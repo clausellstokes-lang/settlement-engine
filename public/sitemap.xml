@@ -42,7 +42,37 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium?tab=institutions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium?tab=operations</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium?tab=arcane</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium?tab=deities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium?tab=living</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium?tab=lenses</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://settlementforge.com/compendium?tab=facets</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -52,12 +82,17 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://settlementforge.com/compendium?tab=calamity</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://settlementforge.com/compendium?tab=neighbour</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://settlementforge.com/compendium?tab=institutions</loc>
+    <loc>https://settlementforge.com/compendium?tab=az</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

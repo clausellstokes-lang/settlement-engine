@@ -2,28 +2,46 @@ import { useState, useMemo } from 'react';
 import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, serif_, FS, swatch, EMPTY_VALUE } from '../theme.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes';
 import { getInstitutionalCatalog, getFullCatalogWithTierMeta } from '../../generators/lookups.js';
-// P139 — REL_TYPES + ARCHETYPES lifted to the shared pure-data module so the
-// global-search index (CP-4) and these tabs render from one source of truth.
-import { ARCHETYPES, REL_TYPES } from '../../domain/compendium/catalogData.js';
+// THE REGISTRY-RENDER LAW: tiers, archetypes and relationships all render from the
+// generated drift-contract artifact (tiers from the engine's POPULATION_RANGES;
+// archetypes/relationships routed through from the authored catalogData taxonomy).
+// A divergent constant fails tests/docs/compendiumDataFreshness.test.js.
+import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { Tag, Row, Card } from './primitives.jsx';
 import Button from '../primitives/Button.jsx';
 
-// REL_TYPES + ARCHETYPES are imported from '../../domain/compendium/catalogData.js'
-// (see import block above). CAT_COLORS stays here — it's display-only.
+// Archetypes + relationships render from the generated artifact CD (see import
+// block above). CAT_COLORS stays here — it's display-only.
 const CAT_COLORS = { Economic:'#a0762a', Military:'#8b1a1a', Religious:'#1a4a2a', Magic:'#3a1a7a', Criminal:'#4a1a4a', Balanced:'#1a3a7a' };
 
 // ── Tab content ─────────────────────────────────────────────────────────────
+
+// Per-tier display metadata — the population BANDS render from CD.tiers (the engine
+// POPULATION_RANGES, corrected: the old inline bands were wrong, e.g. Thorp 20-80 vs
+// the real 8-60). Only the colour + institution-count prose stays authored here.
+const TIER_META = {
+  thorp:      { color:'#8b1a1a', desc:'Single institution. Subsistence only.' },
+  hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
+  village:    { color:'#a0762a', desc:'4-6 institutions. Surplus production begins. Weekly market.' },
+  town:       { color:'#1a5a28', desc:'7-10 institutions. Specialization appears. Guilds form.' },
+  city:       { color:'#1a3a7a', desc:'11-14 institutions. Full institutional diversity. Factional politics.' },
+  metropolis: { color:'#4a1a6a', desc:'15+ institutions. All systems active. Complex faction dynamics.' },
+};
 
 export function TiersTab({ _search='' }) {
   return <>
     <p id="tiers" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
       Tier determines the maximum institution count, population band, and available institution categories.
     </p>
-    {[['Thorp','20-80','#8b1a1a','Single institution. Subsistence only.'],['Hamlet','80-400','#a05010','2-3 institutions. Local subsistence. Minimal trade.'],['Village','400-900','#a0762a','4-6 institutions. Surplus production begins. Weekly market.'],['Town','900-4,000','#1a5a28','7-10 institutions. Specialization appears. Guilds form.'],['City','4,000-25,000','#1a3a7a','11-14 institutions. Full institutional diversity. Factional politics.'],['Metropolis','25,000+','#4a1a6a','15+ institutions. All systems active. Complex faction dynamics.']].map(([name,pop,color,desc])=>(
-      <div key={name} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
-        <div style={{ minWidth:90, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color}}>{name}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
-        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{desc}</div>
-      </div>))}
+    {CD.tiers.map((t)=>{
+      const meta = TIER_META[t.id] || { color:GOLD, desc:'' };
+      const pop = `${t.min.toLocaleString()}–${t.max.toLocaleString()}`;
+      return (
+      <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
+        <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:FS.xxs,color:MUT}}>{pop} pop.</div></div>
+        <div style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{meta.desc}</div>
+      </div>);
+    })}
     <div id="trade-routes" style={{ fontFamily:serif_, fontSize: FS['14'], fontWeight:600, color:INK, margin:'16px 0 8px' }}>Trade Route Access</div>
     {[['Road','Standard land access. Moderate trade volume.','#6b5340'],['Crossroads','Multiple road intersections. Higher institution diversity.','#a0762a'],['Port','Sea or river access. Maritime exports, fishing, naval institutions.','#1a3a7a'],['River','Inland waterway. Cheaper bulk movement. Mill and granary likely.','#1a5a28'],['Mountain Pass','Strategic chokepoint. Toll and garrison institutions likely.','#8b1a1a'],['Isolated','No trade route. Subsistence by necessity.','#4a1a4a']].map(([name,desc,color])=>(
       <div key={name} style={{ display:'flex', gap:10, padding:'6px 0', borderBottom:`1px solid ${BOR}` }}>
@@ -51,9 +69,9 @@ export function EconomyTab() {
 }
 
 export function PowerTab_({ search='' }) {
-  const cats = ['All','Economic','Military','Religious','Criminal','Magic','Balanced'];
+  const cats = ['All', ...CD.archetypes.categories];
   const [cat, setCat] = useState('All');
-  const filtered = ARCHETYPES.filter(a => (cat==='All'||a.cat===cat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
+  const filtered = CD.archetypes.entries.filter(a => (cat==='All'||a.cat===cat) && (!search||a.name.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search)));
   return <>
     <p style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Archetypes emerge when slider combinations cross thresholds. Faction power = institutional base x public legitimacy.</p>
     <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:12 }}>
@@ -108,7 +126,7 @@ export function StressTab({ search='' }) {
 export function NeighbourTab({ search='' }) {
   return <>
     <p id="neighbours" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>Relationship types modify the economic engine, faction weights, and institution probabilities before generation.</p>
-    {REL_TYPES.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
+    {CD.relationships.entries.filter(r=>!search||r.label.toLowerCase().includes(search)||r.effect.toLowerCase().includes(search)).map(r => (
       <div key={r.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <span style={{ fontSize:FS.xs, fontWeight:700, color:r.color, minWidth:105, flexShrink:0, background:`${r.color}14`, borderRadius:4, padding:'2px 7px', textAlign:'center' }}>{r.label}</span>
         <span style={{ fontSize:FS.sm, color:SEC, lineHeight:1.5 }}>{r.effect}</span>
@@ -147,35 +165,5 @@ export function InstitutionsTab({ _config, search }) {
           {inst.desc && <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.4, marginTop:4 }}>{inst.desc}</div>}
         </div>))}
     </div>
-  </>;
-}
-
-// ── Living World — the campaign-advance reference tab ────────────────────────
-// Static, curated reference over the living-world systems (no backend, no store).
-// Each group is [title, accent color, prose]. Accents are display-only literals,
-// same convention as CAT_COLORS above.
-const LIVING_WORLD_GROUPS = [
-  ['Causal Substrate', '#1a3a7a',
-    'Sixteen canonical variables (legitimacy, food security, unrest, religious authority, …) the engine carries per settlement. Generation seeds them; each advance re-derives them from prior state, never wall-clock.'],
-  ['Pressures and Strength', '#a0762a',
-    'Nine pressures (military, economic, social, religious, …) score how much a settlement is being pushed. They roll up into a single defend-or-yield signal that drives strategy.'],
-  ['World Pulse', '#1a5a28',
-    'The per-tick advance: stressors fire, populations and trade drift, institutions are born and die, proposals queue for the DM. Off-by-default toggles keep a peacetime save byte-identical.'],
-  ['War Layer', '#8b1a1a',
-    'Armies march, sieges form, conquests change rulers; warExhaustion rises until a self-ending peace. Entirely dormant unless the War-layer rule is enabled.'],
-  ['Religion and Pantheon', '#7a5a1a',
-    'Assigned deities contest converts, gain seats, and steer corruption / aggression / magic legality through their axes. Dormant until a primary deity is assigned and Religion dynamics are on.'],
-];
-
-export function LivingWorldTab() {
-  return <>
-    <p id="living-world" style={{ fontSize:FS.sm, color:SEC, lineHeight:1.6, margin:'0 0 12px' }}>
-      The generator builds a town in seconds; the <strong>living world</strong> then runs the region for
-      years. These are the systems that wake up once a campaign advances. Each is opt-in, off by default,
-      and silent for a non-campaign save.
-    </p>
-    {LIVING_WORLD_GROUPS.map(([title, accent, body]) => (
-      <Card key={title} title={title} accent={accent}>{body}</Card>
-    ))}
   </>;
 }

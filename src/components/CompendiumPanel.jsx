@@ -1,23 +1,35 @@
 import { useState, useEffect } from 'react';
 import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
-import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe } from 'lucide-react';
+// Icons reuse the set already bundled in the eager vendor-icons chunk (List rides
+// in via HowToUse) — no NEW lucide icon is introduced, so first paint is unmoved.
+import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe, List } from 'lucide-react';
 import Button from './primitives/Button.jsx';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
-import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, LivingWorldTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
+import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
+import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
+import { DeitiesHub, LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
+import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
 import { CustomContentManager } from './compendium/CustomContent.jsx';
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
 const TABS = [
-  { id:'tiers',       label:'Tiers & Routes',    Icon: Layers },
+  { id:'overview',    label:'Overview',           Icon: Layers },
+  { id:'tiers',       label:'Tiers & Routes',     Icon: Layers },
   { id:'economy',     label:'Economy',            Icon: Coins },
   { id:'power',       label:'Power & Factions',   Icon: Shield },
-  { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
-  { id:'living',      label:'Living World',       Icon: Globe },
-  { id:'stress',      label:'Stress',             Icon: AlertTriangle },
-  { id:'neighbour',   label:'Neighbour System',   Icon: Link2 },
   { id:'institutions',label:'Institutions',       Icon: Building2 },
+  { id:'operations',  label:'Operations',         Icon: Shield },
+  { id:'arcane',      label:'Magic & Religion',   Icon: Sparkles },
+  { id:'deities',     label:'Deities',            Icon: Sparkles },
+  { id:'living',      label:'Living World',       Icon: Globe },
+  { id:'lenses',      label:'Map Lenses',         Icon: Globe },
+  { id:'facets',      label:'Facets',             Icon: Building2 },
+  { id:'stress',      label:'Stress',             Icon: AlertTriangle },
+  { id:'calamity',    label:'Calamity',           Icon: AlertTriangle },
+  { id:'neighbour',   label:'Neighbour System',   Icon: Link2 },
+  { id:'az',          label:'A–Z Index',     Icon: List },
 ];
 
 // P127 / CP-3 — Anchor → tab map. HelpPopover and external deep-links
@@ -38,6 +50,14 @@ const ANCHOR_TO_TAB = Object.freeze({
   'cultures':     'arcane',
   'religion':     'arcane',
   'living-world': 'living',
+  'systems':      'living',
+  'pressures':    'living',
+  'presets':      'living',
+  'operations':   'operations',
+  'deities':      'deities',
+  'lenses':       'lenses',
+  'facets':       'facets',
+  'calamity':     'calamity',
   'stress':       'stress',
   'threat':       'stress',
   'neighbours':   'neighbour',
@@ -68,6 +88,20 @@ const TAB_META = Object.freeze({
                   desc: 'Trade partner, ally, patron, client, rival, cold war, hostile. How linked settlements modify each other\'s economy, military, and criminal presence.' },
   institutions: { title: 'Institutional catalog: SettlementForge Compendium',
                   desc: 'Every institution the simulator can generate, the conditions that select it, what it implies for the settlement, and how it interacts with others.' },
+  overview:     { title: 'The SettlementForge Compendium',
+                  desc: 'Every catalog the deterministic engine renders from its own registries: tiers, institutions, archetypes, deities, the operation registry, map lenses, facets, calamity, and the Living World systems.' },
+  operations:   { title: 'The operation registry: SettlementForge Compendium',
+                  desc: 'Every operation the engine can perform, with its class (canon / macro / mechanical), scope, the receipt it leaves, and whether it can be undone. The AI never appears as an author.' },
+  deities:      { title: 'Deities & pantheon: SettlementForge Compendium',
+                  desc: 'The core pantheon: each deity\'s portfolio, alignment, temperament, rank, and domain. The vocabulary for authoring your own gods.' },
+  lenses:       { title: 'Map lenses & style schema: SettlementForge Compendium',
+                  desc: 'The map rendering lenses (parchment, watercolor, dark fantasy, VTT, accessible) and the style-schema vocabulary a bespoke lens must stay inside.' },
+  facets:       { title: 'Facets & interior grammar: SettlementForge Compendium',
+                  desc: 'The institution-nature facets and the interior grammar — the interior kinds, room kinds, and furnishing kinds every building draws from.' },
+  calamity:     { title: 'Calamity reference: SettlementForge Compendium',
+                  desc: 'The one unified calamity mechanic, its cosmetic terrain flavours, and its severity bands. Honest by design: a flood and a fire differ in the telling, not the maths.' },
+  az:           { title: 'A–Z index: SettlementForge Compendium',
+                  desc: 'Every named Compendium entry in one alphabetical index — archetypes, deities, operations, systems, and more, each a stable deep-link.' },
 });
 
 export default function CompendiumPanel({ config, standalone=false }) {
@@ -94,7 +128,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
     const hash = (window.location.hash || '').replace(/^#/, '');
     const fromHash = ANCHOR_TO_TAB[hash];
     if (fromHash) return fromHash;
-    return 'tiers';
+    return 'overview';
   })();
   const [activeTab, setActiveTab] = useState(initialTab);
 
@@ -141,17 +175,36 @@ export default function CompendiumPanel({ config, standalone=false }) {
     };
   }, [activeTab, standalone]);
 
+  // Jump to a tab and scroll a section/entry anchor into view (used by the
+  // Overview dashboard's hub links and the A–Z index's per-entry links).
+  const goto = (tab, anchor) => {
+    setActiveTab(tab);
+    if (typeof window === 'undefined' || !anchor) return;
+    try { window.history.replaceState(null, '', `#${anchor}`); } catch { /* hash unavailable */ }
+    setTimeout(() => {
+      const el = document.getElementById(anchor);
+      if (el && typeof el.scrollIntoView === 'function') el.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 140);
+  };
+
   const renderTab = () => {
     const q = search.toLowerCase();
     switch(activeTab) {
+      case 'overview':     return <CompendiumOverview onNavigate={goto}/>;
       case 'tiers':        return <TiersTab search={q}/>;
       case 'economy':      return <EconomyTab/>;
       case 'power':        return <PowerTab_ search={q}/>;
-      case 'arcane':       return <ArcaneTab/>;
-      case 'living':       return <LivingWorldTab/>;
-      case 'stress':       return <StressTab search={q}/>;
-      case 'neighbour':    return <NeighbourTab search={q}/>;
       case 'institutions': return <InstitutionsTab config={config} search={search}/>;
+      case 'operations':   return <OperationsHub/>;
+      case 'arcane':       return <ArcaneTab/>;
+      case 'deities':      return <DeitiesHub/>;
+      case 'living':       return <SystemsHub/>;
+      case 'lenses':       return <LensesHub/>;
+      case 'facets':       return <FacetsHub/>;
+      case 'stress':       return <StressTab search={q}/>;
+      case 'calamity':     return <CalamityHub/>;
+      case 'neighbour':    return <NeighbourTab search={q}/>;
+      case 'az':           return <AtoZIndex onNavigate={goto}/>;
       default:             return null;
     }
   };
@@ -179,7 +232,10 @@ export default function CompendiumPanel({ config, standalone=false }) {
   // at PAGE_MAX (below); inside it, the grid tabs (Power, Institutions)
   // fill the frame so they flow into more columns, while the prose/row
   // tabs keep a comfortable reading measure so lines don't sprawl.
-  const gridTab = activeTab === 'power' || activeTab === 'institutions';
+  // The grid/wide hubs fill the frame (flow into more columns); the prose tabs keep
+  // a comfortable reading measure so lines don't sprawl.
+  const WIDE_TABS = new Set(['overview', 'power', 'institutions', 'operations', 'deities', 'living', 'lenses', 'facets', 'calamity', 'az']);
+  const gridTab = WIDE_TABS.has(activeTab);
   const contentColumn = standalone
     ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }
     : { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
