@@ -1120,6 +1120,36 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ MANAGER PREVIEW REVIEW: PASS WITH REVISIONS (2026-07-18) + THE LOGO RECONCILIATION.**
+Review ran from the LANE worktree via a scratchpad static server (main-tree preview hazard
+honored; lineage curl-probed). VERDICT: the composition system reads authored at desk,
+field, and dim — the library ledger (memo-line italics, phase-glyph standing, CANON small
+caps) is the strongest instrument proof; pricing's differentiated bench + dagger markers
+kill the uniform-cards tell; the field/dim dossier (gold-on-umber lamplight) is the best
+single screen of the set. FOUR REVISIONS for phases 3-5 (none veto-blocking): (1) desk-width
+cartouche crowds its frame — title touches the right inner edge, tower device straddles the
+border (field-width composes correctly ⇒ width-dependent bug; optical padding pass owed);
+(2) field stack renders an ORPHANED duplicate tower glyph below the cartouche; (3) fixture
+typo "Dcovey Ash"; (4) sample-fiction values (tier name "Wanderer", hand-typed $5.99/30-
+credit figures) must bind config + copy registries at live wiring — never leak from samples.
+OWNER TASTE VETO NOW OPEN (server left running: http://127.0.0.1:8642/docs/samples/
+organic-craft/index.html). LOGO RESEARCH LANDED (4 lenses, ~40 sourced principles).
+RECONCILIATION RULINGS (vetoable): two-register system VINDICATED by both canons (great-
+seal→signet register descent; UNC/NASA/Wisconsin redraw-don't-shrink; names stay Colophon/
+Signet) · the Colophon gains the LEGEND (sigillography: the legend, not the device, is the
+load-bearing identifier) — name on the rim + the house MOTTO "STATE · NEVER · FATE" (the
+Aldus/Plantin emblem+motto formula, drawn from the covenant line already shipped) · the
+Signet stays text-light (SF only); letterless ring+skyline+dot fallback PRE-AUTHORIZED if
+SF aliases at true 16px (Starbucks-siren precedent; the red station dot is the wayfinding
+accent) · stroke floor at signet scale (Material 2dp-equivalent; redraw never shrink) ·
+Safari ignores SVG-favicon prefers-color-scheme ⇒ PNG dark fallback REQUIRED at wiring ·
+maskable safe zone (central 80%) for touch icons · SEAL+COUNTERSEAL INSIGHT: exports carry
+the house Signet beside the settlement's own seeded cartouche medallion — authentication
+layering straight from sigillography, zero new machinery (the craft wave's 96-slot
+medallion IS the counterseal) · register-governance table (which mark where, who
+authorizes) = a phase-3 law-doc section. Round seal = civic/secular register: correct.
+Rand caution BANKED: the mark's meaning arrives by association, not decoding — "logos are
+never love at first sight."
 **⬛ CRAFT WAVE PHASES 1-2 COMPLETE — STOP HONORED (2026-07-18):** claude/organic-craft
 @ b94f13c8 (base 019d1a2e, 6 commits, clean). Foundation (ink ramp · rubric · fluid scale ·
 three-posture usePosture · rule family · instruments · seeded-ornament library w/ byte-stable
