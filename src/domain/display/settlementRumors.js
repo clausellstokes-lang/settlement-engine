@@ -53,6 +53,18 @@ function clamp01(v) {
   return Math.max(0, Math.min(1, n));
 }
 
+/** FNV-1a 32-bit — the pure frame-selection hash (no rng, no wall clock). A LOCAL
+ *  copy of the 8-line helper (the newsVoice.js precedent — a display sidecar keeps
+ *  its own copy rather than importing a sibling's content tables). @param {string} str */
+function fnv1a32(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h >>> 0;
+}
+
 // ── The what-token → in-world PHRASE vocabulary (content-immersion-1) ─────────
 // The rumor's SUBJECT is captured from a wizardNews entry's impactKind (which is
 // itself an engine candidateType/kind token — 'strategy_deploy', 'plague_arrival',
@@ -256,29 +268,86 @@ function nameOf(id, nameFor) {
   return id == null || id === '' ? 'parts unknown' : nameFor(String(id));
 }
 
+// ── The HEADLINE FRAME pools (content-vt-2) ─────────────────────────────────
+// The rumor headline picked ONE fixed frame per completeness band — so a
+// year-long advance's rumor tab cycled "Merchants bring word of …" / "Travellers
+// speak of …" verbatim down the list. Each band is now a small pool of
+// interchangeable frames; the SUBJECT ({what}, an in-world phrase) and PLACE
+// ({where}, a settlement name) ride EVERY frame unchanged — only the connective
+// framing varies (mirror-not-rederive: the rumor's facts never move). Selection
+// is a pure FNV-1a hash of the telling's stable event ref, so the SAME event
+// frames the same way at every settlement that hears it, and two DIFFERENT events
+// in one tab generally read differently. CANONICAL-AT-ZERO: index 0 of every pool
+// is the original frame. Byte-inert — settlementRumors renders fresh into the
+// lazy dossier/PDF/brief chunks and no rumor prose persists (the ledger golden
+// hashes the STRUCTURED records, never these strings).
+//
+// FRAME LAW: every frame carries {where}; the FIRSTHAND/OUTLINE/VAGUE frames also
+// carry {what}; no frame emits an engine token (the walker + the render tests
+// enforce the subject vocabulary). {What} is {what} capitalized.
+/** @type {Readonly<Record<'firsthand'|'outline'|'vague'|'thin', ReadonlyArray<string>>>} */
+export const HEADLINE_FRAMES = Object.freeze({
+  firsthand: Object.freeze([
+    '{What} in {where}',
+    '{What} — and {where} sees it firsthand',
+    '{What}, here in {where}',
+    '{What} in {where}, for all to see',
+  ]),
+  outline: Object.freeze([
+    'Merchants bring word of {what} in {where}',
+    'Down the trade roads comes word of {what} in {where}',
+    'The caravans carry word of {what} in {where}',
+    'Word is brought of {what} in {where}',
+  ]),
+  vague: Object.freeze([
+    'Travellers speak of {what} somewhere near {where}',
+    'Wayfarers mutter of {what} somewhere near {where}',
+    'There is loose talk of {what} off near {where}',
+    'Faint word comes of {what} somewhere near {where}',
+  ]),
+  thin: Object.freeze([
+    'Travellers speak of trouble near {where}',
+    'Wayfarers speak of some trouble off near {where}',
+    'There is vague talk of trouble near {where}',
+    'Faint word of trouble drifts in from near {where}',
+  ]),
+});
+
+/**
+ * Pick a headline frame for a band and fill it. index 0 (the original frame) when
+ * the telling has no stable seed; otherwise a deterministic FNV pick.
+ * @param {'firsthand'|'outline'|'vague'|'thin'} band
+ * @param {string} seed
+ * @param {{ what: string, where: string }} slots
+ * @returns {string}
+ */
+function frameHeadline(band, seed, { what, where }) {
+  const pool = HEADLINE_FRAMES[band];
+  const frame = seed ? pool[fnv1a32(`${seed}::${band}`) % pool.length] : pool[0];
+  return frame
+    .replace('{What}', capitalize(what))
+    .replace('{what}', what)
+    .replace('{where}', where);
+}
+
 /**
  * The rendered player fiction for one telling. Built ONLY from scrubbed
  * values: the what-token, the where/party settlement NAMES, the magnitude
  * band, and (when activated-public) the deity name. Never event prose.
  * @param {RumorArrivalRecord} record
- * @param {{ nameFor: (id: string) => string, deityName: string | null }} ctx
+ * @param {{ nameFor: (id: string) => string, deityName: string | null, seed?: string }} ctx
  * @returns {{ headline: string, detail: string }}
  */
-function renderFiction(record, { nameFor, deityName }) {
+function renderFiction(record, { nameFor, deityName, seed = '' }) {
   const completeness = clamp01(record.completeness01);
   const what = whatPhrase(record.content?.what);
   const where = nameOf(record.content?.whereId, nameFor);
   const firsthand = finiteNumber(record.hopCount, 0) === 0;
-  let headline;
-  if (firsthand) {
-    headline = `${capitalize(what)} in ${where}`;
-  } else if (completeness >= RUMOR_OUTLINE_THRESHOLD) {
-    headline = `Merchants bring word of ${what} in ${where}`;
-  } else if (completeness >= RUMOR_VAGUE_THRESHOLD) {
-    headline = `Travellers speak of ${what} somewhere near ${where}`;
-  } else {
-    headline = `Travellers speak of trouble near ${where}`;
-  }
+  const band = firsthand ? 'firsthand'
+    : completeness >= RUMOR_OUTLINE_THRESHOLD ? 'outline'
+    : completeness >= RUMOR_VAGUE_THRESHOLD ? 'vague'
+    : 'thin';
+  const headline = frameHeadline(band, seed, { what, where });
   const parts = [];
   if (completeness >= RUMOR_OUTLINE_THRESHOLD) {
     parts.push(`They call it ${magnitudePhrase(record.content?.magnitude ?? 0)}.`);
@@ -334,7 +403,10 @@ function projectPlayerRumor(key, record, { tick, nameFor, activatedDeityNames, n
     : completeness >= RUMOR_OUTLINE_THRESHOLD
       ? (record.content?.partyIds || []).slice(0, 1).map(String)
       : [];
-  const { headline, detail } = renderFiction(record, { nameFor, deityName });
+  // Frame seed: the telling's stable canonical event ref (so the same event frames
+  // the same way at every settlement that hears it), falling back to the ledger key.
+  const seed = String(record.eventRef ?? key ?? '');
+  const { headline, detail } = renderFiction(record, { nameFor, deityName, seed });
   const arrivalTick = Math.max(0, finiteNumber(record.arrivalTick, 0));
   return {
     id: String(key),

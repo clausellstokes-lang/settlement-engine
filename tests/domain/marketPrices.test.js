@@ -16,7 +16,7 @@ import { dirname, join } from 'node:path';
 import { describe, it, expect } from 'vitest';
 import {
   deriveMarketPrices, deriveMarketQuote, denominate, basePriceFor, unitFor,
-  resolveGood, commodityBandForGood, strongestDeviation,
+  resolveGood, commodityBandForGood, strongestDeviation, CRIER_FRAMES,
   BASE_PRICE_BY_CLASS, SCARCITY_MULTIPLIER, DEFAULT_BASE_COPPERS,
   BAND_STOCKPILE_TARGET, BAND_SHORTAGE_FRAC, BAND_SURPLUS_FRAC,
 } from '../../src/domain/display/marketPrices.js';
@@ -223,11 +223,59 @@ describe('Wave 7 marketPrices — the strongest-deviation HIGHLIGHT', () => {
     const m = deriveMarketPrices({ economicState: ECO, worldState: world(stocks), settlementId: 'forge', flowDrift: { band: 'shortage' } });
     expect(m.highlight).not.toBeNull();
     expect(m.highlight?.tag).toBe('dear');
-    expect(m.highlight?.crierLine).toMatch(/runs .* — dear, for the roads are cut\.$/);
+    // The crier FRAME varies view-time (content-vt-2, seeded on the good id); the
+    // FACTS are pinned — a DEAR line carrying the shortage receipt, ending as a
+    // spoken sentence, with no bare decimal.
+    const line = m.highlight?.crierLine ?? '';
+    expect(line).toContain('dear');
+    expect(line).toContain('for the roads are cut');
+    expect(line.endsWith('.')).toBe(true);
+    expect(line).not.toMatch(NO_DECIMAL);
   });
 
   it('a steady-only board has no highlight', () => {
     expect(strongestDeviation([], null)).toBeNull();
+  });
+
+  // ── CRIER-LINE frame variety (content-vt-2) ──────────────────────────────────
+  const quote = (id, tag) => ({
+    id, label: 'Grain', unit: 'bushel', coppers: tag === 'dear' ? 40 : 8,
+    spoken: tag === 'dear' ? 'four silver' : 'eight copper',
+    priced: tag === 'dear' ? 'four silver the bushel' : 'eight copper the bushel',
+    band: tag === 'dear' ? 'shortage' : 'surplus', tag, raw: '40 cp',
+  });
+
+  it('CANONICAL-AT-ZERO: index 0 of each pool is the original crier frame', () => {
+    expect(CRIER_FRAMES.dear[0]).toBe('{label} runs {priced} — dear, {receipt}.');
+    expect(CRIER_FRAMES.cheap[0]).toBe('{label} runs {priced} — cheap, {receipt}.');
+    for (const [tag, pool] of Object.entries(CRIER_FRAMES)) {
+      expect(pool.length, `${tag} has variety`).toBeGreaterThanOrEqual(2);
+      for (const frame of pool) {
+        for (const slot of ['{label}', '{priced}', '{receipt}']) {
+          expect(frame.includes(slot), `${tag}: "${frame}" carries ${slot}`).toBe(true);
+        }
+        expect(frame.includes(tag), `${tag}: "${frame}" names the tag`).toBe(true);
+        expect(/[.!?]$/.test(frame), `${tag}: "${frame}" terminal punct`).toBe(true);
+      }
+    }
+  });
+
+  it('DETERMINISM: the same good is always cried the same way', () => {
+    const a = strongestDeviation([quote('grain', 'dear')], 'shortage')?.crierLine;
+    const b = strongestDeviation([quote('grain', 'dear')], 'shortage')?.crierLine;
+    expect(a).toBe(b);
+    // The facts (priced + receipt) ride whatever frame the good draws.
+    expect(a).toContain('four silver the bushel');
+    expect(a).toContain('for the roads are cut');
+  });
+
+  it('ANTI-REPETITION: distinct goods reach the whole frame pool of each tag', () => {
+    for (const tag of ['dear', 'cheap']) {
+      const drift = tag === 'dear' ? 'shortage' : 'surplus';
+      const seen = new Set();
+      for (let i = 0; i < 300; i++) seen.add(strongestDeviation([quote(`g_${i}`, tag)], drift)?.crierLine);
+      expect(seen.size, `${tag} fully reachable`).toBe(CRIER_FRAMES[tag].length);
+    }
   });
 });
 
