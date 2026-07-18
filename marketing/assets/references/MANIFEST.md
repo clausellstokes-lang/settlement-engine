@@ -27,3 +27,18 @@
 
 Real anchors: `settlementforge-map.png` (docs/samples/town-map-v2 ASYMMETRY-RICH-harbor,
 rendered) · `settlementforge-seal.png` (public/apple-touch-icon).
+
+## THE EVOLUTION SERIES (owner ruling 2026-07-18: one settlement, six ages)
+The tier plates are ONE PLACE growing across generations — chained generation, each
+stage referencing its predecessor + the fixed origin geography (the river's S-bend, the
+low hill, the ford, the ancient standing stone, the great oak). Persistent-landmark
+lineage: footpath→lane→high street · well→green→fountain · palisade→stone wall→inner
+ring of three · stepping stones→plank→trestle→stone bridges · shrine-stone→shrine-house→
+temple→sanctuary · the standing stone preserved in the citadel court at metropolis.
+PEOPLE RULING: alive-world staffage WELCOMED throughout (owner: "part of our charm");
+faces stay small and painterly; real-world religious imagery still excluded (invented
+faith only). Files: evolution-1-thorp … evolution-6-metropolis. The standalone
+hamlet/town/metropolis plates are kept as -alt comparisons; the evolution series is
+canonical for the tier gauge. Also rehabilitated under the people ruling:
+gallery-crier-alive (the crowd restored, all boards illegible) ·
+compendium-scriptorium-alive (secular clerks, no monastic dress).
