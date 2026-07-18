@@ -1120,6 +1120,19 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ ERRATUM: THE W2 RE-DISPATCH WAS STALE (2026-07-17, the lane's stop-and-report —
+verify-first catching the MANAGER's error at 17-tool-call cost):** W2 feed-retention was
+ALREADY FOLDED 2026-07-16 via cherry-pick 4cf84a40 (patch-id identical to the parked
+2f4f7b58; ancestor of the tip; retention 7/7 + the 0.45 anti-monoculture gate 3/3 green
+on the current base; its bytes already inside the measured 1,034,683 closure). The
+ledger's own 2026-07-16 satellite-queue row recorded exactly this ("W2 4cf84a40 already
+ancestors — stale blocked-notes corrected") — the FP-G11 fold row's "W2 UNLOCKED"
+dispatch reasoned from the stale round-21 memory without cross-checking that correction.
+Task #33 closed ALREADY-DONE; the empty lane branch deleted (manager flip of the lane's
+keep-judgment: an empty tip-pointer confuses successor branch audits; this row is the
+record). THE PROCESS LESSON, now standing: **a "parked/blocked" note is dead the moment
+any ledger row resolves it — before dispatching ANY satellite, grep the ledger for its
+LATEST mention, not its memory entry**; the round-21 memory is trued to match.
 **⬛ FOLD: FP-G11 (2026-07-17) → w7-prep @ b745c20c** (one config-only commit; spot-checked
 vite.config.js alone; build ✓ + dist 150/150 on the merged tree). RECLAIM: formatNumber
 excised from eager engine-core (**−341 B**; resolves the FP-G7 deferral; no first-paint
