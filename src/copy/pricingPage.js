@@ -85,6 +85,7 @@ export const pricingPage = {
         narrative:           'Narrate a settlement',
         dailyLife:           'Narrate daily life',
         progression:         'Narrate a progression',
+        autonomy:            'Compose an autonomous run',
       },
       anchor: 'Credits are {perCredit} each in the starter pack; larger packs cost less per credit.',
       estimate: 'Dollar figures are estimates at the starter-pack rate. Task prices in credits are flat and do not vary.',
