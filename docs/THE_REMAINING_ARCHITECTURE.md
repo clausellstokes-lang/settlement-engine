@@ -152,6 +152,16 @@ streamed media never touches it; the true cost is network weight, engineered bel
   sizes recorded in the report.
 
 ### Slice C3 — THE LIBRARY: the ledger
+⬛ OWNER RULING 2026-07-18 (THE LIVING BACKDROP, lands with the settlement-view
+restoration this slice shares with C4): the settlement view's background = that
+settlement's LAST-VIEWED map — persist the tuple {view: plan|panorama, lens/skin}
+DEVICE-LOCAL (localStorage per settlement; the mapEdits blob is an owner-gated
+persistence surface and must not churn on mere viewing — vetoable JUDGMENT),
+re-render deterministically as a low-opacity ink wash under the dossier plates +
+right rail (no blur; extend the contrast pins over it; lazy, zero eager bytes).
+Never-viewed ⇒ default plan lens. Auto-upgrades to the illustrated/seasonal
+portrait at THE ILLUSTRATED TOWN fold. Map edit gating stays CARTOGRAPHER per the
+entitlement ladder (owner re-ratified same day).
 - Recipe from the phase-2 sample + MANIFEST 05. Real table; per-row seeded medallion
   (16px, from the ornament composer, memoized); memo-line italics from live state
   (reuse the situation/stressor summary selectors — read-only); CANON rubric small

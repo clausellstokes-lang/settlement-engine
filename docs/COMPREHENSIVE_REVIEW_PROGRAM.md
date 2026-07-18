@@ -1134,6 +1134,20 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE LIVING BACKDROP + EDIT-GATE RATIFICATION (owner, 2026-07-18):** (1) the
+library settlement view's BACKGROUND = that settlement's last-viewed map — persisted
+as the state tuple {view: plan|panorama, lens/skin}, re-rendered deterministically as
+a low-opacity ink wash under the dossier plates (never a raster; always current with
+world state; contrast pins extended over it; no blur — wash only). Never-viewed ⇒
+default plan lens (no settlement page is bare). JUDGMENT (vetoable): persistence
+starts DEVICE-LOCAL (localStorage keyed by settlement) — the mapEdits blob would
+churn saves on mere viewing and is an owner-gated persistence surface; cross-device
+promotion = owner call. Lands with the C3/C4 library-view restoration; upgrades
+automatically to the illustrated/seasonal portrait when THE ILLUSTRATED TOWN folds.
+(2) "settlement map edits are gated by premium" RATIFIES the standing entitlement
+ladder verbatim (2026-07-17: FREE = view/hover/5 lenses/panorama; CARTOGRAPHER =
+editing/pins/change-view depth/fog/interiors/v2-redraw; SURVEYOR = AI) — no change
+needed; if the owner meant stricter-than-Cartographer, amend on their word.
 **⬛ THE ONE DOOR RULING (owner, 2026-07-18: "on the left hand side of the page only…
 a floating marker for AI or an 'ask me anything'. it is the only access to AI in the
 document besides the polish for dossiers. all prompts go through it and it should be
