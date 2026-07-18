@@ -1120,6 +1120,40 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛⬛ THE LADDER COMMISSIONED (owner: "build it… cohesive completely with the NPC's
+entire description and the settlement's entire state and shape") — ENGINE LIFT #3.**
+Design FROZEN w/ the full coherence matrix: docs/DESIGN_THE_LADDER.md @ w7-prep —
+displacement-only conservation (every promotion has a named loser) · window-gated
+challenges w/ structural defender's advantage + the challenger's stake · the three
+determinants (faction power trajectory · DYNAMIC GOALS as derived reads REUSING the S7
+registry/evaluator, flaws biasing selection, goals reminting on rung/state change · the
+growth layer's opposition metric as the clash price) · the §4 coherence mandate per the
+owner's comprehensiveness order (alignment methods: lawful-through-windows/chaotic-
+discounted/good-on-service/evil-on-leverage · patron-deity faith coherence + the
+pantheon lift + the faith-rupture permanent window · compromised leverage/time-bomb ·
+traits both directions through the existing deposit map · D5 grudge-hardening · reframe
+via existing act classes only · STATE-NEVER-FATE: ranks move, people remain) · dormant
+npcLadderEnabled + mandatory dormancy golden + sidecar/mirror storage + the name-swap
+kernel chain + zero migrations. Lane dispatched (claude/the-ladder off a4e73651).
+**⬛ FOLD: THE DOCUMENTATION WAVE 1/2 @ a585a891 (+ the reconciliation a4e73651):**
+WELCOME + PRICING born-complete (live-browser verified by the lane): the map waypoint w/
+drift-gated frozen lens plates of the fixture's own town · the schema-wall disclosure ·
+Surveyor RENDERED (walled violet, task-priced, BYOK) · THE FOUNDER CHARTER (live meter,
+derived arithmetic, never-reopens ON-PAGE) · the one-time lane + THE TASK MENU (11→12
+tasks, ≈$ anchor, worked months, labeled estimates) · **THE FAILURE POLICY VERIFIED AT
+BOTH REFUND EDGES BEFORE WRITTEN** (partial-polish nuance in the FAQ, not dropped) ·
+THE ENTITLEMENT LADDER rendered w/ per-row enforcement markers (ruled-vs-derived visible
+to ROUND 3's claims audit) · the 8-pin drift contract + copy-source guard. +680 B raw
+eager SIGNED (~45 B semantic; minifier layout churn attributed; the composite arbitrates).
+**THE DRIFT CONTRACT'S FIRST CATCH AT FOLD:** S7's autonomy task entered config after the
+lane branched — the task-menu walker FAILED the fold until the copy gained its entry
+(reconciliation a4e73651; 8/8 green) — cross-lane doc-drift caught by machinery, not
+eyes. About+Compendium = DOC-WAVE-2 DISPATCHED (claude/doc-wave-2) w/ the two banked
+contradictions RULED: the op-registry page grounds in the REAL shape (klass/scope/
+receipt — no invented schema enum; the read/propose/write story = S-stage architecture)
+· all counts render from source (the "nine pressures" claim dies). PLAUSIBLE banked for
+ROUND 3: credits-never-expire is enforcement-by-absence. Tasks #21/#22 CLOSED; #19/#20
+ride doc-wave-2; the craft wave (#32) dispatches at ITS fold.
 **⬛ FOLD ×2: THE RULINGS WIRING @ 14c504a4 + SURVEYOR S7 @ e1631619 (2026-07-17).**
 **RULINGS WIRING (charges 1+2; charge 3 = an honored stop-and-report):** v2 DEFAULT-MINT
 live at the three create chokepoints + the anon→signup arm (THE ONE DIAL
