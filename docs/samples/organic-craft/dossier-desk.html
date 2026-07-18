@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The settlement dossier — desk · Organic Craft sample</title>
+<style>
+@font-face{font-family:'Lora';src:url('/fonts/Lora-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Lora';src:url('/fonts/Lora-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Lora';src:url('/fonts/Lora-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Lora';src:url('/fonts/Lora-BoldItalic.woff2') format('woff2');font-weight:700;font-style:italic;font-display:swap;}
+@font-face{font-family:'Nunito';src:url('/fonts/Nunito-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Nunito';src:url('/fonts/Nunito-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:'Nunito';src:url('/fonts/Nunito-ExtraBold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap;}
+:root {
+  --oc-ink-deepest: #1B1408;
+  --oc-ink-strong: #2C2210;
+  --oc-ink-body: #4A3B22;
+  --oc-ink-secondary: #6B5340;
+  --oc-ink-hairline: #C8B89A;
+  --oc-field-ground: #211B12;
+  --oc-field-panel: #2C2416;
+  --oc-field-ink: #ECE0C6;
+  --oc-field-body: #D8C8A8;
+  --oc-field-secondary: #C0AE8A;
+  --oc-field-faint: #9C8C6E;
+  --oc-field-hairline: #5A4E38;
+  --oc-rubric: #8B2E2E;
+  --oc-entry: #6A511F;
+  --oc-field-rubric: #E8A860;
+  --oc-field-entry: #D9B566;
+  --oc-btn-fill: #F4EAD0;
+  --oc-btn-ink: #2C2210;
+  --oc-btn-border: #A6863C;
+  --oc-btn-primary: #C9A24C;
+  --oc-btn-primaryink: #1B1408;
+  --oc-field-btn-fill: #2C2416;
+  --oc-field-btn-ink: #ECE0C6;
+  --oc-field-btn-border: #907E56;
+  --oc-field-btn-primary: #D9B566;
+  --oc-field-btn-primaryink: #1B1408;
+  --oc-type-eyebrow: clamp(0.6875rem, 0.6619rem + 0.1136vw, 0.75rem);
+  --oc-type-uiS: clamp(0.75rem, 0.7372rem + 0.0568vw, 0.7813rem);
+  --oc-type-uiM: clamp(0.8125rem, 0.7869rem + 0.1136vw, 0.875rem);
+  --oc-type-uiL: clamp(0.875rem, 0.8494rem + 0.1136vw, 0.9375rem);
+  --oc-type-mono: clamp(0.8125rem, 0.7997rem + 0.0568vw, 0.8438rem);
+  --oc-type-body: clamp(1rem, 0.9489rem + 0.2273vw, 1.125rem);
+  --oc-type-bodyLarge: clamp(1.0625rem, 0.9858rem + 0.3409vw, 1.25rem);
+  --oc-type-displayS: clamp(1.3125rem, 1.1591rem + 0.6818vw, 1.6875rem);
+  --oc-type-displayM: clamp(1.5625rem, 1.2813rem + 1.25vw, 2.25rem);
+  --oc-type-displayL: clamp(1.875rem, 1.3636rem + 2.2727vw, 3.125rem);
+  --oc-type-displayXL: clamp(2.25rem, 1.4318rem + 3.6364vw, 4.25rem);
+  --oc-space-xs: clamp(0.25rem, 0.2244rem + 0.1136vw, 0.3125rem);
+  --oc-space-sm: clamp(0.5rem, 0.4489rem + 0.2273vw, 0.625rem);
+  --oc-space-md: clamp(0.75rem, 0.6477rem + 0.4545vw, 1rem);
+  --oc-space-lg: clamp(1rem, 0.8466rem + 0.6818vw, 1.375rem);
+  --oc-space-xl: clamp(1.375rem, 1.1193rem + 1.1364vw, 2rem);
+  --oc-space-xxl: clamp(1.875rem, 1.4148rem + 2.0455vw, 3rem);
+  --oc-space-xxxl: clamp(2.75rem, 1.9318rem + 3.6364vw, 4.75rem);
+}
+.oc-sample-page{margin:0;min-height:100vh;background:#f7f0e4;padding:clamp(1rem,3vw,2.5rem) 0;-webkit-font-smoothing:antialiased;}
+.oc-sample-page--field{background:var(--oc-field-ground);}
+.oc-sample-frame{max-width:72rem;margin:0 auto;}
+/* ─────────────────────────────────────────────────────────────────────────────
+   organic.css — THE ORGANIC CRAFT primitive stylesheet (law §3/§4/§6/§7).
+
+   The manuscript grammar as CSS: register grids driven by CONTAINER queries (a
+   panel adapts to its pane, never the viewport — law §8), asymmetric functional
+   margins with the wide outer margin as the gloss channel, graded dropcaps, the
+   rule family's spacing, and the FIELD-mode dim theme as a single class swap.
+
+   EVERYTHING is scoped under .oc-* / .oc-surface so it can be loaded beside the
+   live app without touching one existing pixel (phase-1 zero-regression). Colours
+   and sizes come from the JS tokens via var(--oc-*), emitted by
+   design/organic/index.js#emitOrganicTokens (lazy) or inlined by the sample
+   generator. No @font-face here — the app already registers the faces (index.css)
+   and the fixtures inline them, so this file never double-declares a face.
+   No runtime filters, no blend-modes on long registers (§8).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── The surface: role vars, swapped wholesale in field mode ──────────────────
+   Components read the ROLE vars (--_ink*, --_ground, --_rubric); the light values
+   are the default, and .oc-field re-points every one to the warm-dark ramp. One
+   class turns the whole subtree into the field notebook. */
+.oc-surface {
+  --_ground: var(--oc-page-ground, #fbf5e6);
+  --_panel: #fffbf5;
+  --_ink: var(--oc-ink-deepest);
+  --_ink-strong: var(--oc-ink-strong);
+  --_ink-body: var(--oc-ink-body);
+  --_ink-secondary: var(--oc-ink-secondary);
+  --_hairline: var(--oc-ink-hairline);
+  --_rubric: var(--oc-rubric);
+  --_entry: var(--oc-entry);
+  /* Instrument fills — the operated register's own machined surfaces. */
+  --_btn-fill: var(--oc-btn-fill);
+  --_btn-ink: var(--oc-btn-ink);
+  --_btn-border: var(--oc-btn-border);
+  --_btn-primary: var(--oc-btn-primary);
+  --_btn-primary-ink: var(--oc-btn-primaryink);
+  --_serif: 'Lora', 'Crimson Text', Georgia, serif;
+  --_sans: 'Nunito', system-ui, sans-serif;
+  color: var(--_ink-body);
+  background-color: var(--_ground);
+  font-family: var(--_serif);
+}
+.oc-surface.oc-field {
+  --_ground: var(--oc-field-ground);
+  --_panel: var(--oc-field-panel);
+  --_ink: var(--oc-field-ink);
+  --_ink-strong: var(--oc-field-ink);
+  --_ink-body: var(--oc-field-body);
+  --_ink-secondary: var(--oc-field-secondary);
+  --_hairline: var(--oc-field-hairline);
+  --_rubric: var(--oc-field-rubric);
+  --_entry: var(--oc-field-entry);
+  --_btn-fill: var(--oc-field-btn-fill);
+  --_btn-ink: var(--oc-field-btn-ink);
+  --_btn-border: var(--oc-field-btn-border);
+  --_btn-primary: var(--oc-field-btn-primary);
+  --_btn-primary-ink: var(--oc-field-btn-primaryink);
+}
+
+/* ── Typography tiers (the fluid scale) ───────────────────────────────────────
+   Reading serif on a 45–90ch measure; display = the period voice at 24px+ only;
+   ui = compact chrome. Ink DENSITY (tone) ranks content, never a box. */
+.oc-prose { max-width: 68ch; font-size: var(--oc-type-body); line-height: 1.62; color: var(--_ink-body); }
+.oc-prose.oc-prose--wide { max-width: 82ch; }
+.oc-prose p { margin: 0 0 0.9em; }
+.oc-prose p + p { text-indent: 1.1em; }               /* the pilcrow→indent lesson */
+.oc-prose p:first-of-type { text-indent: 0; }
+
+.oc-display   { font-family: var(--_serif); color: var(--_ink); line-height: 1.12; font-weight: 700; letter-spacing: 0.002em; margin: 0 0 0.3em; }
+.oc-display--xl { font-size: var(--oc-type-displayXL); }
+.oc-display--l  { font-size: var(--oc-type-displayL); }
+.oc-display--m  { font-size: var(--oc-type-displayM); }
+.oc-display--s  { font-size: var(--oc-type-displayS); }
+
+.oc-eyebrow {
+  font-family: var(--_sans); font-size: var(--oc-type-eyebrow); font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--_ink-secondary);
+}
+
+/* Ink tonal steps as text colours (depth = ink, not shadow). */
+.oc-ink          { color: var(--_ink); }
+.oc-ink-strong   { color: var(--_ink-strong); }
+.oc-ink-body     { color: var(--_ink-body); }
+.oc-ink-secondary{ color: var(--_ink-secondary); }
+
+/* ── The rubric — the interface speaking (one reserved voice) ─────────────────*/
+.oc-rubric {
+  color: var(--_rubric); font-family: var(--_sans); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; font-size: var(--oc-type-eyebrow);
+}
+.oc-rubric--instruction { text-transform: none; letter-spacing: 0.01em; font-style: italic; font-family: var(--_serif); }
+.oc-entry { color: var(--_entry); }
+
+/* Links declare themselves without colour alone and without hover (§6). */
+.oc-prose a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.14em; text-decoration-color: var(--_rubric); }
+
+/* ── The register: manuscript grid without boxes (CONTAINER queries) ──────────
+   Narrow → one column, gloss reflows inline beneath its anchor. Wide → the
+   asymmetric two-column codex leaf: main block + the wide outer gloss margin. */
+.oc-register { container-type: inline-size; container-name: register; }
+.oc-register__inner { display: grid; grid-template-columns: 1fr; gap: var(--oc-space-md); }
+.oc-register__gloss { font-size: var(--oc-type-uiM); color: var(--_ink-secondary); font-style: italic; }
+.oc-register__gloss > * + * { margin-top: var(--oc-space-sm); }
+
+@container register (min-width: 44rem) {
+  .oc-register__inner {
+    grid-template-columns: minmax(0, 1fr) clamp(11rem, 26cqi, 17rem);
+    column-gap: var(--oc-space-xl);
+    align-items: start;
+  }
+  .oc-register__gloss { border-left: 1px solid var(--_hairline); padding-left: var(--oc-space-md); }
+}
+
+/* ── Marginalia — a tap-gloss that re-anchors from space to point on narrow ───
+   Wide: the gloss lives in the margin channel. Narrow: an inline italic aside in
+   flow (also the screen-reader order). The <details> gives a real tap target. */
+.oc-margin-note { font-size: var(--oc-type-uiM); color: var(--_ink-secondary); font-style: italic; }
+.oc-margin-note > summary { cursor: pointer; list-style: none; }
+.oc-margin-note > summary::-webkit-details-marker { display: none; }
+
+/* ── The illuminated initial (graded dropcap) ─────────────────────────────────
+   At most one large initial per view marks THE entry point. CSS initial-letter
+   with a float fallback (@supports) — no wrapper markup that a screen reader
+   would split. */
+.oc-dropcap::first-letter {
+  -webkit-initial-letter: 3;
+  initial-letter: 3;
+  font-family: var(--_serif);
+  font-weight: 700;
+  color: var(--_entry);
+  margin-right: 0.08em;
+}
+@supports not (initial-letter: 3) {
+  .oc-dropcap::first-letter {
+    float: left; font-size: 3.1em; line-height: 0.78; padding: 0.02em 0.08em 0 0; color: var(--_entry); font-weight: 700;
+  }
+}
+
+/* ── Rules — the family's block rhythm (SVG comes from Rule.jsx / rules.js) ────*/
+.oc-rule { display: block; width: 100%; }
+.oc-rule--hairline { margin: var(--oc-space-sm) 0; }
+.oc-rule--single   { margin: var(--oc-space-lg) 0; }
+.oc-rule--double   { margin: var(--oc-space-xl) 0; }
+.oc-rule--swelled  { margin: var(--oc-space-lg) auto; width: auto; text-align: center; }
+.oc-rule--swelled svg { display: inline-block; max-width: min(100%, 16rem); height: auto; }
+
+/* ── Seeded ornament — decorative, non-interactive, clean space around it ─────*/
+.oc-ornament { display: inline-block; line-height: 0; }
+.oc-ornament svg { display: block; }
+/* A cartouche frame scales to its (responsive) container, holding aspect ratio. */
+.oc-cartouche__frame svg { width: 100%; height: 100%; }
+/* The plate is an inline-size container: the NAME sizes to the plate, never to the
+   viewport (the review revision — a viewport-fluid display size crowded the frame
+   at desk widths). 15cqi of a 300px plate ≈ 45px, capped at 2.05rem; the floor
+   keeps short plates legible. line-height tight so two-line names stay inside. */
+.oc-cartouche { container-type: inline-size; }
+.oc-cartouche__label .oc-display { font-size: clamp(1.25rem, 15cqi, 2.05rem); line-height: 1.06; margin: 0; text-wrap: balance; }
+
+/* ── The colophon — seal and counterseal at a document's foot ─────────────────
+   Self-sufficient: mounts on live surfaces OUTSIDE an .oc-surface, so it reads
+   the :root --oc-* vars directly (organicVars.css), never the surface role vars. */
+.oc-colophon { text-align: center; padding: var(--oc-space-md) 0 var(--oc-space-sm); }
+.oc-colophon__seals { display: inline-flex; align-items: center; gap: var(--oc-space-md); }
+.oc-colophon__counterseal { opacity: 0.85; }
+.oc-colophon__motto {
+  margin-top: 6px; font-family: 'Lora', 'Crimson Text', Georgia, serif; font-style: italic;
+  font-size: var(--oc-type-uiM); color: var(--oc-ink-secondary); letter-spacing: 0.02em;
+}
+
+/* Reduced motion: the organic layer has no motion, but honour the intent. */
+@media (prefers-reduced-motion: reduce) {
+  .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   samples.css — the phase-2 taste-veto sample COMPOSITIONS (Organic Craft law).
+
+   BESPOKE FORM PER SURFACE is the point: the dossier (artifact register) is NOT
+   laid out like the library (instrument ledger) which is NOT laid out like the
+   catalog or the pricing bench — one shared type/ink/rubric system, different
+   compositions. These classes read the primitive var(--oc-*) / var(--_*) tokens
+   from organic.css, so field mode swaps here too. Container queries so each
+   surface adapts to its pane (never the viewport). Loaded only by the sample
+   fixtures + a phase-3 harness; scoped under .oc-* — zero effect on the live app.
+
+   Legibility floor (§6): every text-on-fill here clears AA against its ground.
+   The two instrument FILLS (parchment / brand gold) are literal because the
+   fixture carries only the --oc-* vars, not the app's --color-* tokens; the
+   ink-on-those pairings are the app's proven ≥4.5 combinations.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.oc-dossier, .oc-compendium, .oc-library, .oc-pricing {
+  container-type: inline-size;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 4cqi, 2.5rem);
+  box-sizing: border-box;
+}
+.oc-dossier.oc-prose-host, .oc-compendium.oc-prose-host { max-width: 58rem; }
+
+/* Screen-reader-only (table captions / action-column labels in the static sample). */
+.oc-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ── Documented utilities + reading rhythm (system-not-instances) ─────────────
+   The samples carry NO one-off inline magic: tabular figures, the italic aside,
+   and the paragraph/section rhythm are all named, reproducible rules keyed off the
+   surface + fluid space tokens — a future contributor reproduces a surface by
+   composing these, never by copying a margin literal. */
+.oc-tnum { font-variant-numeric: tabular-nums; }
+.oc-i { font-style: italic; }
+.oc-dossier section, .oc-compendium section { margin: 0 0 var(--oc-space-md); }
+.oc-dossier p, .oc-compendium p { margin: 0 0 0.7em; }
+.oc-dossier ol, .oc-dossier ul { margin: 0.4em 0 0; padding-left: 1.2em; }
+.oc-dossier li { margin: 0 0 0.5em; }
+.oc-register__gloss p { margin: 0 0 0.5em; }
+
+/* ── Instrument primitives (quiet, orthodox — the operated register) ──────────
+   Fully tokenised: fills come from the --_btn-* role vars (design/organic/
+   instruments.js), so a button is never a literal and field mode swaps for free. */
+.oc-btn {
+  display: inline-block;
+  font-family: var(--_sans); font-size: var(--oc-type-uiM); font-weight: 700;
+  color: var(--_btn-ink); background: var(--_btn-fill); border: 1px solid var(--_btn-border);
+  border-radius: 4px; padding: 0.4em 0.9em; cursor: pointer; line-height: 1.1;
+}
+.oc-btn--primary { color: var(--_btn-primary-ink); background: var(--_btn-primary); border-color: var(--_btn-primary); }
+
+.oc-control {
+  display: inline-block;
+  font-family: var(--_sans); font-size: var(--oc-type-uiS); color: var(--_ink-secondary);
+  border: 1px solid var(--_btn-border); border-radius: 4px; padding: 0.35em 0.7em; white-space: nowrap;
+}
+.oc-control--input { flex: 1 1 12rem; min-width: 8rem; }
+
+.oc-segmented { display: inline-flex; border: 1px solid var(--_btn-border); border-radius: 4px; overflow: hidden; margin: var(--oc-space-sm) 0; }
+.oc-segmented__opt { font-family: var(--_sans); font-size: var(--oc-type-uiS); font-weight: 700; color: var(--_ink-secondary); padding: 0.35em 0.9em; border-right: 1px solid var(--_btn-border); }
+.oc-segmented__opt:last-child { border-right: 0; }
+.oc-segmented__opt--on { color: var(--_btn-ink); background: var(--_btn-fill); }
+
+/* ── DOSSIER (artifact register) ─────────────────────────────────────────────*/
+.oc-dossier__plate { display: flex; align-items: center; flex-wrap: wrap; gap: var(--oc-space-md); margin: var(--oc-space-sm) 0; }
+.oc-dossier__plate .oc-display { margin: 0; }
+.oc-dossier__facts { font-family: var(--_serif); font-size: var(--oc-type-bodyLarge); margin: 0.4em 0; }
+.oc-dossier__facts .oc-rubric { font-size: var(--oc-type-eyebrow); }
+.oc-dossier__char { font-style: italic; }
+.oc-dossier__foot { margin-top: var(--oc-space-xl); }
+
+.oc-score-register { width: 100%; border-collapse: collapse; margin: 0.4em 0; }
+.oc-score-register th { text-align: left; font-weight: normal; padding: 0.5em 0.8em 0.5em 0; white-space: nowrap; vertical-align: baseline; }
+.oc-score-register td { padding: 0.5em 0.8em; vertical-align: baseline; }
+.oc-score-register tr + tr th, .oc-score-register tr + tr td { border-top: 1px solid var(--_hairline); }
+.oc-score-register__num { font-family: var(--_serif); font-size: var(--oc-type-bodyLarge); white-space: nowrap; text-align: right; }
+.oc-crisis { margin-top: var(--oc-space-lg); padding-left: var(--oc-space-md); border-left: 2px solid var(--_rubric); }
+.oc-hooks li::marker { color: var(--_rubric); }
+
+/* ── LIBRARY (instrument ledger) ─────────────────────────────────────────────*/
+.oc-library__quota { font-family: var(--_sans); font-size: var(--oc-type-uiM); margin: 0.3em 0 0.8em; }
+.oc-library__toolbar { display: flex; flex-wrap: wrap; gap: var(--oc-space-sm); align-items: center; margin: var(--oc-space-sm) 0; }
+
+/* A genuinely tabular comparison surface → a real table; the sanctioned narrow
+   behaviour is horizontal-scroll-in-container (keep-vs-stack ruling), not a stack. */
+.oc-ledger-scroll { overflow-x: auto; margin-top: var(--oc-space-sm); }
+.oc-ledger { width: 100%; border-collapse: collapse; min-width: 34rem; }
+.oc-ledger thead th { text-align: left; font-weight: normal; padding: 0 var(--oc-space-md) 0.5em 0; vertical-align: bottom; }
+.oc-ledger tbody td { padding: 0.7em var(--oc-space-md) 0.7em 0; border-top: 1px solid var(--_hairline); vertical-align: top; }
+.oc-ledger thead th:last-child, .oc-ledger tbody td:last-child { padding-right: 0; }
+.oc-ledger__signal { font-size: var(--oc-type-uiM); font-style: italic; margin-top: 0.15em; }
+.oc-ledger__standing { white-space: nowrap; }
+.oc-ledger__standing .oc-pip { margin-right: 0.3em; }
+.oc-ledger__actions { text-align: right; white-space: nowrap; }
+.oc-pip { font-size: 0.7em; }
+
+/* ── COMPENDIUM (reference catalog) ──────────────────────────────────────────*/
+.oc-catalog__entry { padding: var(--oc-space-sm) 0; }
+.oc-catalog__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--oc-space-md); }
+.oc-catalog__head .oc-display { margin: 0; }
+.oc-catalog__entry p { margin: 0.2em 0 0.4em; }
+.oc-catalog__tags { font-size: var(--oc-type-uiM); margin: 0.2em 0 0; }
+.oc-catalog__tags .oc-rubric { font-size: var(--oc-type-eyebrow); }
+
+/* ── PRICING (the differentiated bench — NOT three uniform cards) ────────────*/
+.oc-tiers { display: grid; grid-template-columns: 1fr; gap: var(--oc-space-lg); margin: var(--oc-space-md) 0; }
+@container (min-width: 46rem) { .oc-tiers { grid-template-columns: 1fr 1.15fr 1fr; align-items: start; } }
+.oc-tier { padding: var(--oc-space-md); border-top: 2px solid var(--_hairline); }
+.oc-tier .oc-display { margin: 0 0 0.1em; }
+.oc-bundle .oc-display { margin: 0.1em 0; }
+.oc-bundle__body p { margin: 0; }
+.oc-tier--featured { border-top-color: var(--_entry); background: linear-gradient(180deg, rgba(201,162,76,0.08), transparent 40%); }
+.oc-tier__flag { margin-bottom: 0.2em; }
+.oc-tier__price { font-family: var(--_serif); font-size: var(--oc-type-displayS); margin: 0.2em 0; }
+.oc-tier--featured .oc-tier__price { font-size: var(--oc-type-displayM); }
+.oc-tier__tag { font-size: var(--oc-type-uiM); margin: 0 0 0.6em; }
+.oc-tier__features { list-style: none; padding: 0; margin: 0 0 var(--oc-space-md); font-size: var(--oc-type-uiL); }
+.oc-tier__features li { margin: 0 0 0.5em; text-indent: -1.1em; padding-left: 1.1em; }
+.oc-tier__mark { color: var(--_rubric); font-weight: 700; }
+.oc-pricing__service { font-family: var(--_serif); font-size: var(--oc-type-body); max-width: 46rem; margin: var(--oc-space-md) 0; }
+.oc-bundle { display: flex; flex-wrap: wrap; gap: var(--oc-space-lg); align-items: center; justify-content: space-between; }
+.oc-bundle__price { display: flex; flex-direction: column; align-items: flex-end; gap: var(--oc-space-sm); font-family: var(--_serif); font-size: var(--oc-type-displayS); }
+
+</style>
+</head>
+<body class="oc-sample-page" data-posture="desk">
+<main class="oc-sample-frame"><article class="oc-surface oc-dossier oc-prose-host" data-posture="desk"><header><div class="oc-eyebrow">A surveyor’s dossier</div><div class="oc-dossier__plate"><span class="oc-cartouche" style="position:relative;display:block;width:300px;max-width:100%;aspect-ratio:300 / 88"><span class="oc-cartouche__frame oc-ornament" aria-hidden="true" style="position:absolute;inset:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 88" width="300" height="88" class="oc-ornament-svg" role="presentation" aria-hidden="true" focusable="false"><rect x="3" y="3" width="294" height="82" rx="4" fill="none" stroke="#4A3B22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="7" y="7" width="286" height="74" rx="2" fill="none" stroke="#C8B89A" stroke-width="1"/><g transform="translate(6,6)"><g fill="none" stroke="#4A3B22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 4 L18 4"/><path d="M4 4 L12 12"/></g></g><g transform="translate(294,6) scale(-1,1)"><g fill="none" stroke="#4A3B22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 4 L18 4"/><path d="M4 4 L12 12"/></g></g><g transform="translate(294,82) scale(-1,-1)"><g fill="none" stroke="#4A3B22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 4 L18 4"/><path d="M4 4 L12 12"/></g></g><g transform="translate(6,82) scale(1,-1)"><g fill="none" stroke="#4A3B22" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L4 4 L18 4"/><path d="M4 4 L12 12"/></g></g><circle cx="37" cy="44" r="23" fill="none" stroke="#C8B89A" stroke-width="1"/><g transform="translate(17,24) scale(0.8333)"><g fill="none" stroke="#4A3B22" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 41 L17 19 L31 19 L31 41"/><path d="M15 19 L15 13 L18 13 L18 16 L21 16 L21 13 L27 13 L27 16 L30 16 L30 13 L33 13 L33 19"/><path d="M21 41 L21 31 Q24 27.5 27 31 L27 41"/></g><circle cx="24" cy="24.5" r="1.5" fill="#4A3B22"/></g></svg></span><span class="oc-cartouche__label" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 7.33% 0 23.33%;box-sizing:border-box;overflow:hidden"><h1 class="oc-display oc-display--xl">Thornwall</h1></span></span></div><p class="oc-dossier__facts"><span class="oc-rubric">Tier</span> <span class="oc-ink-body">Town</span>  ·  <span class="oc-rubric">Souls</span> <span class="oc-ink-body oc-tnum">2,400</span>  ·  <span class="oc-ink-secondary">On the coast road; a tidal harbour</span></p><p><span class="oc-ink-secondary oc-i">“A wall town that learned to trade with the sea it once feared.”</span></p><div class="oc-rule oc-rule--double" aria-hidden="true"><svg viewBox="0 0 1000 5" preserveAspectRatio="none" width="100%" height="5" role="presentation" aria-hidden="true" focusable="false"><rect x="0" y="0" width="1000" height="1" fill="#4A3B22"/><rect x="0" y="3" width="1000" height="1.75" fill="#4A3B22"/></svg></div></header><div class="oc-register"><div class="oc-register__inner"><div class="oc-register__body"><section><span class="oc-rubric">Arrival</span><div class="oc-prose oc-dropcap"><p>You come to Thornwall by the coast road, and the wall shows first — grey stone the height of four men, salt-stained on its seaward face. The gate stands open in daylight; a toll-clerk keeps a ledger you are welcome to read and unwelcome to argue with. Beyond, the town falls toward a tidal harbour where the fishing fleet lies careened at low water and the warehouses smell of pitch and drying cod.</p></div></section><div class="oc-rule oc-rule--swelled" aria-hidden="true"><svg viewBox="0 0 260 12" width="260" height="12" role="presentation" aria-hidden="true" focusable="false"><path d="M6 6 Q 130 1.4 254 6 Q 130 10.6 6 6 Z" fill="#6B5340"/><circle cx="130" cy="6" r="1.6" fill="#6B5340"/></svg></div><section><span class="oc-rubric">The current situation</span><table class="oc-score-register"><caption class="oc-visually-hidden">Current situation</caption><tbody><tr><th scope="row" class="oc-rubric">Power</th><td class="oc-score-register__note"><span class="oc-ink-secondary">A merchant council, lately at odds with the harbour guild.</span></td><td class="oc-score-register__num"><span class="oc-ink-strong">62</span><span class="oc-ink-secondary"> / 100</span></td></tr><tr><th scope="row" class="oc-rubric">Economy</th><td class="oc-score-register__note"><span class="oc-ink-secondary">Salt, salt-cod, and the toll on the coast road.</span></td><td class="oc-score-register__num"><span class="oc-ink-strong">71</span><span class="oc-ink-secondary"> / 100</span></td></tr><tr><th scope="row" class="oc-rubric">Defense</th><td class="oc-score-register__note"><span class="oc-ink-secondary">The wall is sound; the garrison is thin and underpaid.</span></td><td class="oc-score-register__num"><span class="oc-ink-strong">68</span><span class="oc-ink-secondary"> / 100</span></td></tr></tbody></table></section><section class="oc-crisis"><span class="oc-rubric">Active crisis — The harbour silts</span><div class="oc-prose"><p>A winter of storms has pushed the bar across the harbour mouth; deep-keeled ships now wait for the tide or unload offshore.</p></div><p><span class="oc-rubric oc-rubric--instruction">The hook.</span> <span class="oc-ink-body">The council will pay well for a survey of the bar — and better for anyone who can move it.</span></p></section><div class="oc-rule oc-rule--single" aria-hidden="true"><svg viewBox="0 0 1000 2" preserveAspectRatio="none" width="100%" height="2" role="presentation" aria-hidden="true" focusable="false"><rect x="0" y="0" width="1000" height="1.25" fill="#4A3B22"/></svg></div><section class="oc-figures"><span class="oc-rubric">Key figures</span><p><span class="oc-ink-strong">Alderman Coss Rell</span> — <span class="oc-ink-secondary">Head of the merchant council. </span><span class="oc-ink-body oc-i">Reads every ledger; trusts none of them.</span></p><p><span class="oc-ink-strong">Mother Vane</span> — <span class="oc-ink-secondary">Keeper of the sea-shrine. </span><span class="oc-ink-body oc-i">Buried three husbands to the tide; blesses the fleet anyway.</span></p><p><span class="oc-ink-strong">Dovey Ash</span> — <span class="oc-ink-secondary">Harbour-guild boss. </span><span class="oc-ink-body oc-i">Would rather dredge than be dredged out of business.</span></p></section><section><span class="oc-rubric">Plot hooks</span><ol class="oc-hooks"><li><span class="oc-ink-body">The toll-clerk’s ledger shows a barge that pays the road toll but is never seen on the road.</span></li><li><span class="oc-ink-body">Mother Vane wants the old sea-shrine on the bar re-consecrated before the dredging disturbs it.</span></li><li><span class="oc-ink-body">A Redwater factor is quietly buying up silted-harbour warehouses at a loss — or an investment.</span></li></ol></section><section><span class="oc-rubric">Institutions</span><p><span class="oc-ink-body">The Merchant Council  ·  The Harbour Guild  ·  The Sea-Shrine of the Vane  ·  The Coast-Road Toll</span></p></section></div><aside class="oc-register__gloss"><details class="oc-margin-note" open=""><summary class="oc-rubric oc-rubric--instruction">Whence these numbers?</summary><div><p>Population from the tier band (Town: 1,000–5,000), settled near the median.</p><p>The harbour crisis is this settlement’s active stressor — it will resolve, worsen, or spread as the region advances.</p><p>The Redwater factor is a live relationship edge to a neighbouring settlement.</p></div></details><p><span class="oc-ink-secondary">Recorded on the coast road, at the toll-gate, in fair weather. — S.</span></p></aside></div></div><footer class="oc-dossier__foot"><div class="oc-rule oc-rule--single" aria-hidden="true"><svg viewBox="0 0 1000 2" preserveAspectRatio="none" width="100%" height="2" role="presentation" aria-hidden="true" focusable="false"><rect x="0" y="0" width="1000" height="1.25" fill="#4A3B22"/></svg></div><p><span class="oc-ink-secondary">Surveyed for the table. State, never fate — the engine records what happened; the fate of any named soul is yours to decide.</span></p></footer></article></main>
+</body>
+</html>

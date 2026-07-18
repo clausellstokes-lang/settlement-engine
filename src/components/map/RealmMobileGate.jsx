@@ -27,11 +27,34 @@
  * @param {() => void} [props.onSelectCampaign] empty-state: select a campaign
  * @param {boolean} [props.hasCampaigns]        whether any campaign is selectable
  */
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { SP, CHROME, bottomClearance } from '../theme.js';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
+import Button from '../primitives/Button.jsx';
 
 const RealmDashboard = lazy(() => import('./RealmDashboard.jsx'));
+
+/** The gate-ending ACTION (law §7: every gate ends in an action — deep link /
+ *  state-waits promise). Copies the realm's own URL for the desk session; the
+ *  label confirms in place. Email-me-a-link and QR are recorded deferrals
+ *  (backend send + a QR dependency respectively — census rows). */
+function CopyRealmLink() {
+  const [copied, setCopied] = useState(false);
+  return (
+    <Button
+      size="sm"
+      variant="secondary"
+      onClick={() => {
+        try {
+          navigator.clipboard?.writeText?.(new URL('/realm', window.location.origin).href);
+          setCopied(true);
+        } catch { /* clipboard unavailable — the label simply stays */ }
+      }}
+    >
+      {copied ? 'Link copied — it will be waiting' : 'Copy the desktop link'}
+    </Button>
+  );
+}
 
 export default function RealmMobileGate({
   campaign, canManageCampaigns, tier, onUpgrade, nameById,
@@ -47,10 +70,15 @@ export default function RealmMobileGate({
         paddingBottom: bottomClearance(CHROME.bottomNav + SP.lg),
       }}
     >
+      {/* Law §7 — gate the tool, never the data: capability-forward copy (the
+          companion role named, the state-waits promise), and the gate ends in an
+          action. The TITLE keeps its pinned wording (worldMapMobileGate.test.jsx
+          asserts it — the tool wins; conflict recorded in the census). */}
       <DesktopOnlyGate
         variant="gate"
         title="The Realm is best explored on desktop"
-        message="The world map is a hands-on canvas for placing settlements, advancing the realm, and charting routes, and those tools want a larger screen and a pointer. Open the Realm on a desktop to build and run your world. Below is a read-only look at the state of your realm."
+        message="The Realm table is built for a bigger canvas — placing settlements, advancing years, and charting routes want a desk and a pointer. Your world is saved and will be waiting, exactly here, when you next sit down at one. Below, the field companion: a read-only look at the living state of your realm."
+        cta={<CopyRealmLink />}
       />
       <Suspense fallback={null}>
         <RealmDashboard

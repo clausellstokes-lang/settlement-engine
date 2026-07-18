@@ -6,6 +6,7 @@ import { EVENTS } from '../../lib/analytics.js';
 import EditableInline from '../primitives/EditableInline.jsx';
 import Button from '../primitives/Button.jsx';
 import { threatDisplay } from '../map/settlementThreat.js';
+import { emblem } from '../../design/organic/ornament/compose.js';
 
 // Dossier header bar — extracted verbatim from OutputContainer's render.
 // Presentational only: every value/handler arrives via props; the parent
@@ -24,6 +25,10 @@ export default function DossierHeaderRow({
 }) {
   return (
           <div style={{ padding: '14px 20px', background: 'linear-gradient(135deg, #1c1409 0%, #2d1f0e 60%, #1c1409 100%)', display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap', borderBottom: '1px solid rgba(196,154,60,0.2)' }}>
+            {/* The settlement's seeded medallion — its own mark on its own dossier
+                (same seed slot as the foot colophon's counterseal, so header and
+                foot carry ONE mark). Decorative; dim-palette for the ink band. */}
+            <span aria-hidden="true" style={{ flexShrink: 0, lineHeight: 0 }} dangerouslySetInnerHTML={{ __html: emblem(settlement.name || 'settlement', { mode: 'field', size: 38 }) }} />
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.h1, fontWeight: 600, color: swatch['#C49A3C'], lineHeight: 1.1 }}>
                 {(!readOnly && queueEdit) ? (

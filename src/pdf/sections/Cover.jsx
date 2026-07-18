@@ -11,6 +11,8 @@
 import { Page, View, Text } from '@react-pdf/renderer';
 import { sheet, palette, type, page as pageGeo, toneBg, pt, swatch } from '../theme.js';
 import { EditableText } from '../primitives/Editable.jsx';
+import { HouseDeviceSeal } from '../primitives/HouseDeviceSeal.jsx';
+import { HOUSE_MOTTO } from '../../design/organic/logo.js';
 import { humanize, num, stripZwnj, cap, label as toLabel } from '../lib/format.js';
 
 const TONE_COLOR = (key, fallback = palette.muted) => palette[key] || fallback;
@@ -299,7 +301,12 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             paddingTop: 12, borderTop: `0.5pt solid ${palette.border}`,
           }}
         >
-          <Text style={{ ...type.cover_meta, color: palette.faint }}>SETTLEMENTFORGE</Text>
+          {/* The house device beside the name in type — the export seal (the
+              settlement counterseal is web-only for now; see HouseDeviceSeal). */}
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ marginRight: 5 }}><HouseDeviceSeal size={14} /></View>
+            <Text style={{ ...type.cover_meta, color: palette.faint }}>SETTLEMENTFORGE</Text>
+          </View>
           <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
             <Text style={{ ...type.cover_meta, color: palette.faint, marginRight: 6 }}>CAMPAIGN</Text>
             <View style={{ width: 130 }}>
@@ -316,6 +323,10 @@ export function Cover({ settlement, narrativeMode = false, vm, isFounder = false
             <Text style={{ ...type.cover_meta, color: palette.faint }}>{date}</Text>
           </View>
         </View>
+        {/* The ceremonial motto caption — adjacent type, never inside the mark. */}
+        <Text style={{ ...type.cover_meta, color: palette.faint, textAlign: 'center', marginTop: 6, fontSize: pt['7'] || 7 }}>
+          {HOUSE_MOTTO}
+        </Text>
       </View>
     </Page>
   );

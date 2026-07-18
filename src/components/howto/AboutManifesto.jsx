@@ -26,6 +26,7 @@ import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compend
 import { RETENTION_MONTHS } from '../../config/entitlementLadder.js';
 import { WholeLoopSchematic, TickDiagram } from './aboutSchematics.jsx';
 import ForgeExactDemo from './ForgeExactDemo.jsx';
+import HouseColophon from '../organic/HouseColophon.jsx';
 
 // ── Presentational helpers ───────────────────────────────────────────────────
 const PROSE = { fontSize: FS.md, color: SEC, lineHeight: 1.75, fontFamily: sans };
@@ -87,6 +88,9 @@ export default function AboutManifesto() {
     <div style={{ padding: '8px 0 8px' }}>
       {/* ── BAND 1 · HERO ──────────────────────────────────────────────────── */}
       <Band first>
+        {/* The seal moment — the large house device + the motto caption in type
+            (owner placement: the About page opens under the maker's seal). */}
+        <div style={{ marginBottom: 18 }}><HouseColophon size={56} /></div>
         <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em',
           textTransform: 'uppercase', color: GOLD_TXT, marginBottom: 8 }}>What this is</div>
         <h1 style={{ fontFamily: serif_, fontSize: FS.h1, fontWeight: 700, color: INK,

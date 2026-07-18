@@ -93,7 +93,14 @@ export const semantic = Object.freeze({
   pageBg:        color['parchment-50'],
   cardBg:        color['parchment-50'],
   cardHover:     color['parchment-100'],
-  cardBorder:    color['parchment-200'],
+  // THE MATERIALS BRIDGE (Organic Craft, 2026-07-18): the app-wide card border /
+  // divider is now the feint-rule material — the organic ink ramp's hairline tone
+  // (design/organic/ink.js INK.hairline), the receding subdivision rule of the
+  // manuscript grammar. One value swap, zero structural change; every surface
+  // reading BORDER/cardBorder renders the new material. parchment-200 itself is
+  // unchanged (exact-value swatch references keep their promise). Decorative
+  // dividers carry no WCAG floor; interactive boundaries still use BORDER_STRONG.
+  cardBorder:    '#C8B89A',
 
   // Text
   textPrimary:   color['ink-900'],
@@ -363,6 +370,14 @@ export const swatch = Object.freeze({
   '#C8A84A': '#c8a84a', // random-pool chip border
   '#A0B0E0': '#a0b0e0', // ConfigurationPanel magical-trade-infrastructure info box border
   '#0F766E': '#0f766e', // LiveWarStatus trade-war accent (teal — second channel keyed by tone)
+  // THE HOUSE DEVICE (the eager brand mark, components/brand/HouseDevice.jsx).
+  // The organic-craft rubric oxblood + the dim-field ink/rubric — canonical
+  // definitions live in src/design/organic/{rubrication,ink}.js (lazy); these
+  // swatch keys give the EAGER header/loading/error mark token-routed access
+  // without pulling the organic layer into the first-paint closure.
+  '#8B2E2E': '#8b2e2e', // rubric oxblood — the device seal-point (light)
+  '#ECE0C6': '#ece0c6', // dim-field ink — the device strokes on dark grounds
+  '#E8A860': '#e8a860', // dim-field rubric — the device seal-point on dark grounds
   // Dossier reading-palette (src/components/new/tabs/tabPalette.js) — the darker
   // status/category colors the dense dossier tabs use (a deliberate print-legibility
   // palette on parchment, distinct from the lighter screen chrome tokens). Most
@@ -504,7 +519,8 @@ export const legacy = Object.freeze({
   // ratio on parchment is what AA mandates and what MUTED fails.
   BODY:     color['ink-600'],
   SECOND:   color['ink-800'],
-  BORDER:   color['parchment-200'],
+  // THE MATERIALS BRIDGE: BORDER is the feint-rule hairline (see semantic.cardBorder).
+  BORDER:   '#C8B89A',
   BORDER2:  '#F0E5C8',            // a lighter parchment-150
   CARD:     '#FFFBF5',            // slightly warmer than parchment-50 for cards
   PARCH:    color['parchment-50'],

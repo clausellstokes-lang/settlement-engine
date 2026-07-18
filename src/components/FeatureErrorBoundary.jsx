@@ -26,6 +26,7 @@
 import { Component } from 'react';
 import { reportError } from '../lib/errorReporter.js';
 import Button from './primitives/Button.jsx';
+import HouseDevice from './brand/HouseDevice.jsx';
 import { FS, SP, R, sans, swatch } from './theme.js';
 
 /** Shallow per-element comparison of two resetKeys arrays. */
@@ -98,6 +99,9 @@ export default class FeatureErrorBoundary extends Component {
             fontFamily: sans,
           }}
         >
+          {/* The clerk's-slip stamp — the house device holds the fiction even
+              when a view fails (owner placement addendum #3). */}
+          <HouseDevice size={22} mode="light" style={{ display: 'block', marginBottom: SP.xs, opacity: 0.7 }} />
           <div style={{ fontWeight: 700, marginBottom: SP.xs }}>{title}</div>
           <div style={{ marginBottom: SP.sm, color: swatch.mutedBrown }}>
             The rest of the app is still working. You can try again or navigate away.

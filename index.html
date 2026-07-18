@@ -31,6 +31,20 @@
     <link rel="preload" href="/fonts/Nunito-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/Lora-Bold.woff2" as="font" type="font/woff2" crossorigin />
 
+    <!-- ── THE HOUSE DEVICE favicon set (owner-approved mark, 2026-07-18) ──────
+      favicon.svg carries an embedded prefers-color-scheme swap (warm-black ink on
+      light tabs, parchment-pale on dark; the seal-point shifts to the dim-field
+      rubric). Safari ignores SVG favicons AND media attributes on icon links, so
+      it takes favicon.ico (PNG-in-ICO 16+32, light ink); the media-queried dark
+      PNG serves Chromium/Firefox dark tabs. The apple-touch icon is full-bleed
+      parchment with the device inside the central-80% maskable safe zone. All
+      static files under public/ — zero eager bytes. Regenerate:
+      node scripts/gen-organic-logo.mjs -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
     <!-- ── Social / unfurl metadata (Open Graph + Twitter) ────────────────────
       These STATIC tags give the landing page a rich unfurl in Slack, iMessage,
       Discord, Twitter/X, Facebook, etc. Before this the card rendered blank.
@@ -49,13 +63,13 @@
     <meta property="og:description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://settlementforge.com/" />
-    <meta property="og:image" content="https://settlementforge.com/og-default.png" />
+    <meta property="og:image" content="https://settlementforge.com/og-craft.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SettlementForge — Forge a settlement worth running a campaign in." />
     <meta name="twitter:description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
-    <meta name="twitter:image" content="https://settlementforge.com/og-default.png" />
+    <meta name="twitter:image" content="https://settlementforge.com/og-craft.png" />
   </head>
   <body>
     <div id="root"></div>

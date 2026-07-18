@@ -1,0 +1,174 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   organic.css — THE ORGANIC CRAFT primitive stylesheet (law §3/§4/§6/§7).
+
+   The manuscript grammar as CSS: register grids driven by CONTAINER queries (a
+   panel adapts to its pane, never the viewport — law §8), asymmetric functional
+   margins with the wide outer margin as the gloss channel, graded dropcaps, the
+   rule family's spacing, and the FIELD-mode dim theme as a single class swap.
+
+   EVERYTHING is scoped under .oc-* / .oc-surface so it can be loaded beside the
+   live app without touching one existing pixel (phase-1 zero-regression). Colours
+   and sizes come from the JS tokens via var(--oc-*), emitted by
+   design/organic/index.js#emitOrganicTokens (lazy) or inlined by the sample
+   generator. No @font-face here — the app already registers the faces (index.css)
+   and the fixtures inline them, so this file never double-declares a face.
+   No runtime filters, no blend-modes on long registers (§8).
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── The surface: role vars, swapped wholesale in field mode ──────────────────
+   Components read the ROLE vars (--_ink*, --_ground, --_rubric); the light values
+   are the default, and .oc-field re-points every one to the warm-dark ramp. One
+   class turns the whole subtree into the field notebook. */
+.oc-surface {
+  --_ground: var(--oc-page-ground, #fbf5e6);
+  --_panel: #fffbf5;
+  --_ink: var(--oc-ink-deepest);
+  --_ink-strong: var(--oc-ink-strong);
+  --_ink-body: var(--oc-ink-body);
+  --_ink-secondary: var(--oc-ink-secondary);
+  --_hairline: var(--oc-ink-hairline);
+  --_rubric: var(--oc-rubric);
+  --_entry: var(--oc-entry);
+  /* Instrument fills — the operated register's own machined surfaces. */
+  --_btn-fill: var(--oc-btn-fill);
+  --_btn-ink: var(--oc-btn-ink);
+  --_btn-border: var(--oc-btn-border);
+  --_btn-primary: var(--oc-btn-primary);
+  --_btn-primary-ink: var(--oc-btn-primaryink);
+  --_serif: 'Lora', 'Crimson Text', Georgia, serif;
+  --_sans: 'Nunito', system-ui, sans-serif;
+  color: var(--_ink-body);
+  background-color: var(--_ground);
+  font-family: var(--_serif);
+}
+.oc-surface.oc-field {
+  --_ground: var(--oc-field-ground);
+  --_panel: var(--oc-field-panel);
+  --_ink: var(--oc-field-ink);
+  --_ink-strong: var(--oc-field-ink);
+  --_ink-body: var(--oc-field-body);
+  --_ink-secondary: var(--oc-field-secondary);
+  --_hairline: var(--oc-field-hairline);
+  --_rubric: var(--oc-field-rubric);
+  --_entry: var(--oc-field-entry);
+  --_btn-fill: var(--oc-field-btn-fill);
+  --_btn-ink: var(--oc-field-btn-ink);
+  --_btn-border: var(--oc-field-btn-border);
+  --_btn-primary: var(--oc-field-btn-primary);
+  --_btn-primary-ink: var(--oc-field-btn-primaryink);
+}
+
+/* ── Typography tiers (the fluid scale) ───────────────────────────────────────
+   Reading serif on a 45–90ch measure; display = the period voice at 24px+ only;
+   ui = compact chrome. Ink DENSITY (tone) ranks content, never a box. */
+.oc-prose { max-width: 68ch; font-size: var(--oc-type-body); line-height: 1.62; color: var(--_ink-body); }
+.oc-prose.oc-prose--wide { max-width: 82ch; }
+.oc-prose p { margin: 0 0 0.9em; }
+.oc-prose p + p { text-indent: 1.1em; }               /* the pilcrow→indent lesson */
+.oc-prose p:first-of-type { text-indent: 0; }
+
+.oc-display   { font-family: var(--_serif); color: var(--_ink); line-height: 1.12; font-weight: 700; letter-spacing: 0.002em; margin: 0 0 0.3em; }
+.oc-display--xl { font-size: var(--oc-type-displayXL); }
+.oc-display--l  { font-size: var(--oc-type-displayL); }
+.oc-display--m  { font-size: var(--oc-type-displayM); }
+.oc-display--s  { font-size: var(--oc-type-displayS); }
+
+.oc-eyebrow {
+  font-family: var(--_sans); font-size: var(--oc-type-eyebrow); font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--_ink-secondary);
+}
+
+/* Ink tonal steps as text colours (depth = ink, not shadow). */
+.oc-ink          { color: var(--_ink); }
+.oc-ink-strong   { color: var(--_ink-strong); }
+.oc-ink-body     { color: var(--_ink-body); }
+.oc-ink-secondary{ color: var(--_ink-secondary); }
+
+/* ── The rubric — the interface speaking (one reserved voice) ─────────────────*/
+.oc-rubric {
+  color: var(--_rubric); font-family: var(--_sans); font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; font-size: var(--oc-type-eyebrow);
+}
+.oc-rubric--instruction { text-transform: none; letter-spacing: 0.01em; font-style: italic; font-family: var(--_serif); }
+.oc-entry { color: var(--_entry); }
+
+/* Links declare themselves without colour alone and without hover (§6). */
+.oc-prose a { color: inherit; text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.14em; text-decoration-color: var(--_rubric); }
+
+/* ── The register: manuscript grid without boxes (CONTAINER queries) ──────────
+   Narrow → one column, gloss reflows inline beneath its anchor. Wide → the
+   asymmetric two-column codex leaf: main block + the wide outer gloss margin. */
+.oc-register { container-type: inline-size; container-name: register; }
+.oc-register__inner { display: grid; grid-template-columns: 1fr; gap: var(--oc-space-md); }
+.oc-register__gloss { font-size: var(--oc-type-uiM); color: var(--_ink-secondary); font-style: italic; }
+.oc-register__gloss > * + * { margin-top: var(--oc-space-sm); }
+
+@container register (min-width: 44rem) {
+  .oc-register__inner {
+    grid-template-columns: minmax(0, 1fr) clamp(11rem, 26cqi, 17rem);
+    column-gap: var(--oc-space-xl);
+    align-items: start;
+  }
+  .oc-register__gloss { border-left: 1px solid var(--_hairline); padding-left: var(--oc-space-md); }
+}
+
+/* ── Marginalia — a tap-gloss that re-anchors from space to point on narrow ───
+   Wide: the gloss lives in the margin channel. Narrow: an inline italic aside in
+   flow (also the screen-reader order). The <details> gives a real tap target. */
+.oc-margin-note { font-size: var(--oc-type-uiM); color: var(--_ink-secondary); font-style: italic; }
+.oc-margin-note > summary { cursor: pointer; list-style: none; }
+.oc-margin-note > summary::-webkit-details-marker { display: none; }
+
+/* ── The illuminated initial (graded dropcap) ─────────────────────────────────
+   At most one large initial per view marks THE entry point. CSS initial-letter
+   with a float fallback (@supports) — no wrapper markup that a screen reader
+   would split. */
+.oc-dropcap::first-letter {
+  -webkit-initial-letter: 3;
+  initial-letter: 3;
+  font-family: var(--_serif);
+  font-weight: 700;
+  color: var(--_entry);
+  margin-right: 0.08em;
+}
+@supports not (initial-letter: 3) {
+  .oc-dropcap::first-letter {
+    float: left; font-size: 3.1em; line-height: 0.78; padding: 0.02em 0.08em 0 0; color: var(--_entry); font-weight: 700;
+  }
+}
+
+/* ── Rules — the family's block rhythm (SVG comes from Rule.jsx / rules.js) ────*/
+.oc-rule { display: block; width: 100%; }
+.oc-rule--hairline { margin: var(--oc-space-sm) 0; }
+.oc-rule--single   { margin: var(--oc-space-lg) 0; }
+.oc-rule--double   { margin: var(--oc-space-xl) 0; }
+.oc-rule--swelled  { margin: var(--oc-space-lg) auto; width: auto; text-align: center; }
+.oc-rule--swelled svg { display: inline-block; max-width: min(100%, 16rem); height: auto; }
+
+/* ── Seeded ornament — decorative, non-interactive, clean space around it ─────*/
+.oc-ornament { display: inline-block; line-height: 0; }
+.oc-ornament svg { display: block; }
+/* A cartouche frame scales to its (responsive) container, holding aspect ratio. */
+.oc-cartouche__frame svg { width: 100%; height: 100%; }
+/* The plate is an inline-size container: the NAME sizes to the plate, never to the
+   viewport (the review revision — a viewport-fluid display size crowded the frame
+   at desk widths). 15cqi of a 300px plate ≈ 45px, capped at 2.05rem; the floor
+   keeps short plates legible. line-height tight so two-line names stay inside. */
+.oc-cartouche { container-type: inline-size; }
+.oc-cartouche__label .oc-display { font-size: clamp(1.25rem, 15cqi, 2.05rem); line-height: 1.06; margin: 0; text-wrap: balance; }
+
+/* ── The colophon — seal and counterseal at a document's foot ─────────────────
+   Self-sufficient: mounts on live surfaces OUTSIDE an .oc-surface, so it reads
+   the :root --oc-* vars directly (organicVars.css), never the surface role vars. */
+.oc-colophon { text-align: center; padding: var(--oc-space-md) 0 var(--oc-space-sm); }
+.oc-colophon__seals { display: inline-flex; align-items: center; gap: var(--oc-space-md); }
+.oc-colophon__counterseal { opacity: 0.85; }
+.oc-colophon__motto {
+  margin-top: 6px; font-family: 'Lora', 'Crimson Text', Georgia, serif; font-style: italic;
+  font-size: var(--oc-type-uiM); color: var(--oc-ink-secondary); letter-spacing: 0.02em;
+}
+
+/* Reduced motion: the organic layer has no motion, but honour the intent. */
+@media (prefers-reduced-motion: reduce) {
+  .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
