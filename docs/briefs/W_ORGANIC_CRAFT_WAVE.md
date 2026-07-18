@@ -57,6 +57,14 @@ flat-shared-surface mode for town map/fog honors the DM/player visibility split 
 tablet facing players shows ONLY player-visible state). Orientation = two compositions.
 The preview review gains the tablet viewport, both orientations.
 
+## THE SURFACE CENSUS (owner confirmation 2026-07-17: "every single page" — enforced by enumeration)
+Phase 3 opens by ENUMERATING every route, view, panel, and modal in the app (the routes
+registry + AppViews + the modal/panel inventory) into a committed census doc; every entry
+is dispositioned — RECOMPOSED / INSTRUMENT-EXEMPT-with-reason / DEFERRED-with-reason —
+and phases 3-4 close only when the census carries zero undispositioned entries. The
+one-fiction pass (empty states, errors, loaders) rides the same census. No silent skips;
+the preview legibility review walks the census, not a sample.
+
 ## Fold gates (in order, all mandatory)
 Lane full gate (four validators, tsc + strict explicit, lint, suite, build+dist, closure)
 → the manager's PREVIEW LEGIBILITY REVIEW: desktop + mobile viewports + the dim pass,

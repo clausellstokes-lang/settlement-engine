@@ -1120,6 +1120,12 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ THE SURFACE CENSUS (owner confirmation: the craft wave covers "every single page"):**
+the wave brief gains a required enumeration deliverable — every route/view/panel/modal
+dispositioned (recomposed / instrument-exempt-with-reason / deferred-with-reason); the
+phases close at zero undispositioned entries; the preview review walks the census.
+Coverage = every page + every empty state/error/loader under the one-fiction pass, three
+postures each; the artifact/instrument split governs WITHIN pages, never exempts one.
 **⬛ FOLD: NON-WATER LANDFORMS (2026-07-17) → w7-prep @ d01a85ab** (5cb92caa off the fog
 tip; 12 files NUL-clean; clean merge across the gate-wiring pane edits). THE SITE IS
 VISIBLE: marsh/dunes/mountain-flank render across the flat map, all five lenses
