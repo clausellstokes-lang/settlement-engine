@@ -1120,6 +1120,20 @@ defenseProfile (the as-consumed truth; every read null-guarded; goldens prove) �
 `tier` nullability under-declaration recorded as an in-file seam (guarded at
 townLayoutV2.js:202) · the full ~12k suite NOT re-run for a comment-only diff — the
 battery + goldens + dist stand as the receipt; the composite full gate covers it.
+**⬛ TASTE VETO PASSED + PHASES 3-5 DISPATCHED (2026-07-18, owner: "run: 1. Craft
+phases 3-5... 2. The craft fold... 3. THE COMPOSITE"):** the five-sample direction is
+APPROVED by the owner's build order; the STOP releases. Dispatched to the standing craft
+lane (context intact): the census-enforced app-wide sweep → mobile/tablet companions →
+verification ratchet, carrying the four review revisions, the guidance checkpoints, the
+depth standard, and THE FINAL LOGO (the simplified device: ring/roofline/triangle/seal-
+point; hand-inked vectors; wordmark lockup; motto-as-caption ceremonial only; FAVICON A
+adopted per manager recommendation VETOABLE — one device everywhere, SVG+prefers-color-
+scheme with the Safari PNG dark fallback, maskable safe zone, ICO+apple-touch; header
+mark; export colophon = house device + the settlement's seeded medallion counterseal;
+the About seal moment). Gates: focused-only in-lane; the full suite runs at MY fold,
+where the pre-existing base reds (SettlementMapPane 601>600 + 7 suite failures at clean
+base) get name-identity triage. Then THE COMPOSITE (task #5) → PUSH (#23) → ROUND 3 (#6)
+per the standing sequence.
 **⬛ OWNER SIMPLIFICATION RULING (2026-07-18, "simplify it — too many elements"):** the
 mark reduces to its IRREDUCIBLE DEVICE — ring broken by the roofline, station triangle,
 red seal-point. STRUCK: rim legend, motto, field pellets, double ring, the SF from the
