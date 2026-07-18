@@ -14,9 +14,16 @@ import { describe, expect, test } from 'vitest';
 
 import {
   AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
-  GOLD_TXT, GREEN, GREEN_BG, INK, PARCH, RED, RED_BG, VIOLET, VIOLET_BG, VIOLET_DEEP,
+  GOLD_TXT, GREEN, GREEN_BG, INK, PARCH, PARCH_100, RED, RED_BG, VIOLET, VIOLET_BG, VIOLET_DEEP,
   swatch,
 } from '../../src/components/theme.js';
+// THE ORGANIC CRAFT ink ramp + rubric (design/organic/*). Imported DIRECTLY, never
+// via the theme.js shim — the whole organic layer is lazy and must stay out of the
+// first-paint static closure (the shim is eager). Every text step owes AA at the
+// letterform on the DARKEST paper tone it sits on (PARCH_100 light / the field panel
+// dim); the decorative hairline is pinned as a negative control (fails as text).
+import { INK as OINK, FIELD_INK, INK_TEXT_STEPS, FIELD_TEXT_STEPS } from '../../src/design/organic/ink.js';
+import { RUBRIC, FIELD_RUBRIC } from '../../src/design/organic/rubrication.js';
 // Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
 // warning / ai tones previously coloured their LABEL with the -500 fill hue
 // (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
@@ -180,4 +187,64 @@ describe('Resource-state chip legibility (WCAG AA 4.5:1)', () => {
       expect(ratio(fg, bg)).toBeGreaterThanOrEqual(AA_TEXT);
     });
   }
+});
+
+// ── THE ORGANIC CRAFT ink tonal ramp (law §3/§6) ─────────────────────────────
+// The ramp replaces drop-shadow hierarchy with graded ink on parchment. Each
+// TEXT step is measured against PARCH_100 (#F4EAD0) — the darkest paper tone a
+// glyph sits on — so the floor holds on every surface, with headroom above 4.5
+// reserved for a future grain overlay. The `hairline` step is the sole non-text
+// tone (a feint receding rule); it is pinned as a negative control that would
+// fail AS text, documenting the split exactly like the app's fill-vs-text tokens.
+describe('Organic ink ramp text legibility (WCAG AA 4.5:1 on the darkest ground)', () => {
+  for (const step of INK_TEXT_STEPS) {
+    test(`ink.${step} (${OINK[step]}) on parchment-100 >= ${AA_TEXT}:1`, () => {
+      expect(ratio(OINK[step], PARCH_100)).toBeGreaterThanOrEqual(AA_TEXT);
+      // and on the two lighter grounds, a fortiori
+      expect(ratio(OINK[step], CARD)).toBeGreaterThanOrEqual(AA_TEXT);
+      expect(ratio(OINK[step], PARCH)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  test('the feint hairline is a decorative rule tone, not text (documents the split)', () => {
+    expect(ratio(OINK.hairline, PARCH_100)).toBeLessThan(AA_TEXT);
+  });
+});
+
+// ── THE RUBRIC (law §3) — one reserved accent, AA as text ────────────────────
+// Rubric tones ("the interface speaking") are used for section labels / do-this
+// instructions / the current entry, so they carry text and owe AA on the darkest
+// paper tone. The oxblood is deliberately distinct from the destructive red-600
+// (that hue owns errors); both channels stay legible and separate.
+describe('Organic rubric text legibility (WCAG AA 4.5:1)', () => {
+  for (const [role, hex] of Object.entries(RUBRIC)) {
+    test(`rubric.${role} (${hex}) on parchment-100 >= ${AA_TEXT}:1`, () => {
+      expect(ratio(hex, PARCH_100)).toBeGreaterThanOrEqual(AA_TEXT);
+      expect(ratio(hex, CARD)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  test('rubric oxblood is a distinct hue from the destructive red-600', () => {
+    expect(RUBRIC.rubric).not.toBe(RED);
+  });
+});
+
+// ── FIELD MODE (dim) legibility — warm ink on warm dark gray (law §6) ─────────
+// The field notebook's own ramp: off-white-ish ink on a warm dark ground, never
+// pure white on pure black (halation). Text steps + rubric owe AA against the
+// darkest field ground text sits on (the lifted panel).
+describe('Organic FIELD mode legibility (WCAG AA 4.5:1 on the warm dark panel)', () => {
+  for (const step of FIELD_TEXT_STEPS) {
+    test(`fieldInk.${step} (${FIELD_INK[step]}) on the field panel >= ${AA_TEXT}:1`, () => {
+      expect(ratio(FIELD_INK[step], FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_TEXT);
+      expect(ratio(FIELD_INK[step], FIELD_INK.ground)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  for (const [role, hex] of Object.entries(FIELD_RUBRIC)) {
+    test(`fieldRubric.${role} (${hex}) on the field panel >= ${AA_TEXT}:1`, () => {
+      expect(ratio(hex, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  test('the field ground is warm, not pure black (halation rule)', () => {
+    expect(FIELD_INK.ground).not.toBe('#000000');
+    expect(FIELD_INK.ink).not.toBe('#FFFFFF');
+  });
 });
