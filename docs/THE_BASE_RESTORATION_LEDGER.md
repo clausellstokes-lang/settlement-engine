@@ -184,8 +184,8 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/components/OutputContainer.jsx | ● | PARTIAL @ eba0be75 (suppressNarrativeCta revived, backward-compatible) — S1 spec items (world order, header) remain at C4 |
-| M | src/components/dossier/DossierHeaderRow.jsx | ● | SPEC READY (map S1) |
+| M | src/components/OutputContainer.jsx | ● | RESTORED @ 50f2ba14 + 2abed50e (TAB_GROUPS world = NPC-first per P8; header suppression at panel A; earlier PARTIAL @ eba0be75 suppressNarrativeCta retained) — craft step-3 still owed at C4 |
+| M | src/components/dossier/DossierHeaderRow.jsx | ● | RESTORED @ 507662c0 (header reroll REMOVED → tab bodies; HEADER_FACT #D8C8A8 high-contrast per P7; allowRename REVIVED — caller wiring = C3 scope) |
 | M | src/components/dossier/DossierNarrativeButtons.jsx |  | SPEC READY (map S1) |
 | M | src/components/dossier/DossierTabStrip.jsx |  | SPEC READY (map S1) |
 | M | src/components/dossier/FirstDossierCallouts.jsx |  | SPEC READY (map S1) |
@@ -198,7 +198,7 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 | M | src/components/new/tabs/HistoryTab.jsx |  | SPEC READY (map S1) |
 | M | src/components/new/tabs/MagicTab.jsx |  | SPEC READY (map S1) |
 | M | src/components/new/tabs/NPCsTab.jsx |  | SPEC READY (map S1) |
-| M | src/components/new/tabs/OverviewTab.jsx |  | SPEC READY (map S1) |
+| M | src/components/new/tabs/OverviewTab.jsx |  | RESTORED @ 2abed50e (actionable "Full relationship web →" onNavigateTab jump revived; Spatial Layout own top-level Section) — craft step-3 still owed at C4 |
 | M | src/components/new/tabs/PowerTab.jsx | ● | SPEC READY (map S1) |
 | M | src/components/new/tabs/RelationshipsTab.jsx |  | SPEC READY (map S1) |
 | M | src/components/new/tabs/ResourcesTab.jsx |  | SPEC READY (map S1) |
