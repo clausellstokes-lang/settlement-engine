@@ -16,7 +16,11 @@ import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, In
 import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
 import { DeitiesHub, LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
 import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
-import { CustomContentManager, ReadOnlyCustomContentList } from './compendium/CustomContent.jsx';
+import { CustomContentManager, ReadOnlyCustomContentList, CUSTOM_CATEGORIES } from './compendium/CustomContent.jsx';
+
+// The custom-content bucket keys a ?cat= deep-link may open (validated so an
+// arbitrary query value can never select a non-existent bucket).
+const CUSTOM_CAT_KEYS = new Set(CUSTOM_CATEGORIES.map((c) => c.key));
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
@@ -111,11 +115,21 @@ const TAB_META = Object.freeze({
 });
 
 export default function CompendiumPanel({ config, standalone=false }) {
+  // Honor a ?cat=<bucket> deep-link on mount — a direct link into the custom-
+  // content workspace focused on one authoring bucket (e.g. ?cat=deities from an
+  // "Author a deity" CTA). Only a valid CUSTOM_CATEGORIES key is honored.
+  const initialCat = (() => {
+    if (typeof window === 'undefined') return null;
+    const c = new URLSearchParams(window.location.search).get('cat');
+    return c && CUSTOM_CAT_KEYS.has(c) ? c : null;
+  })();
   // Honor a ?mode=custom deep-link on mount (the EventComposer deity field's
-  // "Author a deity" CTA lands here) so the custom-content tab opens directly.
+  // "Author a deity" CTA lands here) so the custom-content tab opens directly. A
+  // valid ?cat= implies custom mode — the buckets live only in the custom workspace.
   const initialMode = (() => {
     if (typeof window === 'undefined') return 'catalog';
-    return new URLSearchParams(window.location.search).get('mode') === 'custom' ? 'custom' : 'catalog';
+    if (new URLSearchParams(window.location.search).get('mode') === 'custom') return 'custom';
+    return initialCat ? 'custom' : 'catalog';
   })();
   const [mode, setMode] = useState(initialMode); // 'catalog' | 'custom'
   // Honor a ?tab=foo deep-link on mount so search-engine landing pages
@@ -323,7 +337,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
             />
             {/* Read-only browse of any items already saved — the mobile read path.
                 Renders nothing when there are no items, so the gate stands alone. */}
-            <ReadOnlyCustomContentList search={search.toLowerCase()} />
+            <ReadOnlyCustomContentList search={search.toLowerCase()} initialCat={initialCat} />
           </div>
         </>
       ) : (
@@ -335,7 +349,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
             {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
           </div>
           <div style={{ padding:'14px', background:CARD, ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
-            <CustomContentManager search={search.toLowerCase()}/>
+            <CustomContentManager search={search.toLowerCase()} initialCat={initialCat}/>
           </div>
         </>
       )}
