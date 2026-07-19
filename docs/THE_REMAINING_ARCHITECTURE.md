@@ -359,10 +359,22 @@ A+ at this stage, rinse and repeat.")
   PDF counterseal structured-path refactor · the deterministic-violet re-tones
   · Viability→ adjudication · WhatChangedPanel wire-or-remove · ?cat= deep-link
   · folder thead a11y · journey_stop enrichment · vendorManifest try/finally).
-  Class B stays stage-blocked (named ceilings); Class C stays the owner's. The
-  de-eagering additionally receives a dedicated Fable ADVERSARIAL VERIFICATION
-  pass at fold batch 3 (persistence substrate, escalation clause). Cycle 1's
-  intake is thereby PURE REVIEW.
+  ⭐ WAVE C (the B re-audit, 2026-07-19 — the manager's own "stage-blocked"
+  label was safety-shaped): the §16 traditions seams are BUILDABLE DARK NOW and
+  move into the completion waves — festival-week map dress (groundDressOps
+  hook) · REFRAME_VOCAB 'tradition' act class (rides reframeEnabled) ·
+  culture-vector tradition read · tradition trade-lane bonus · cross-settlement
+  pilgrimage — each with dormancy proofs + lit-path harness tests, certification
+  deferred to the regen/soak (the only part that truly waits). TRUE Class B
+  (nothing code can satisfy): player validation · soak-data tuning · lit
+  certification. Class C stays the owner's, BUT two items gate
+  build-completeness and are ASKED with recommendations: (1) HowToUse — REC:
+  keep the About-pivot structure, restore master's lost Philosophy/UnderTheHood
+  content INTO it; (2) Surveyor-tier — REC: premium-as-Surveyor declared FINAL
+  launch semantics (the chokepoint stands). The de-eagering additionally
+  receives a dedicated Fable ADVERSARIAL VERIFICATION pass at fold batch 3
+  (persistence substrate, escalation clause). Cycle 1's intake is thereby PURE
+  REVIEW.
 - ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete) → the
   de-eagering lane (owner-ordered) → THE LOOP's cycles run to convergence →
   ⬛ THE PUSH IMMEDIATELY AFTER THE LOOP (owner, final clarification
