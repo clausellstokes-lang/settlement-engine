@@ -1153,6 +1153,21 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ FOLD BATCH 1 COMPLETE (2026-07-19, deep-craft @ aa55836a — the FABLE
+reconciler, flawless).** Three folds, ZERO conflicts, every pre-ruled
+reconciliation held EMPIRICALLY: 3430815c FOLD c2 (the whole journey-legs film
+system incl. c2l; 18 blobs NUL-clean; organicSamples verified GREEN post-fold —
+no reintroduced drift; 9 non-golden reds all isolation-cleared at machine load
+634) · 12c3120f FOLD c13 (slate chokepoint + door; tokens/theme = c13 wholesale
+by clean auto-merge; StaleNarrativeModal gold survives; en.js 20 new keys, no
+collisions; index.css both appends verified against both parents) · aa55836a
+FOLD c5 (H2 beats; zero overlap). EAGER BYTE-EXACT: pre-fold 1,038,886 → c2 +0
+→ c13 +49 (EXACTLY as pre-signed, all in the index chunk) → c5 +0 = 1,038,935;
+margin 1,065 B. Suites: fold-2 and fold-3 + the final confirmation each closed
+at EXACTLY the 5 parked goldens (13,279 green; totals grew fold-over-fold as
+branch tests registered). Folded branches ancestor-verified and cleaned up
+(worktrees + branches removed). THE BURN-DOWN LANE dispatches into the freed
+worktree with the ceiling seat + the now-unblocked identifier rename.
 **⬛⭐ C16 THE SHELL COMPLETE (2026-07-19, claude/deep-craft-c16 @ 41ae4a1e, 4
 commits, NOT folded).** Modals→plates over warm-dim (machinery byte-identical) ·
 toasts→desk-edge slips (centering moved off transform to free it for the slip —
