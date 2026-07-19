@@ -175,14 +175,14 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Hunters pool knowledge, prepare game, and sell pelts. Tracks routes, seasons, and dangerous animals.',
         tags: ['trade', 'military'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       'Charcoal burner': {
         required: false,
         baseChance: 0.2,
         desc: 'Operates kilns in nearby woodland. Supplies fuel for smithing and baking — essential intermediate step between forest and forge.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       Maltster: {
         required: false,
@@ -217,7 +217,7 @@ export const institutionalCatalog = {
         baseChance: 0.18,
         desc: 'Cuts and dresses stone blocks for construction. A crew of quarrymen with picks and wedges — slow but the only way to get proper building material.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       'Pack animal trader': {
         required: false,
@@ -231,7 +231,7 @@ export const institutionalCatalog = {
         baseChance: 0.25,
         desc: 'Keeps cattle or goats for milk, butter, and cheese. The only reliable fat and protein source during grain shortages. Seasonal — production peaks in summer.',
         tags: ['food', 'trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
       Shepherd: {
         required: false,
@@ -245,7 +245,7 @@ export const institutionalCatalog = {
         baseChance: 0.2,
         desc: 'Evaporates salt from coastal water or brine springs. Produces the raw salt used for preservation. Only viable near salt flats or coastal access.',
         tags: ['trade'],
-        priorityCategory: 'government',
+        priorityCategory: 'economy',
       },
     },
     Government: {
@@ -1002,7 +1002,7 @@ export const institutionalCatalog = {
         baseChance: 0.4,
         desc: 'Sells road maps, regional surveys, and coastal charts. Takes commissions for estate surveys and dungeon sketching. Maintains a reference collection of older maps for consultation. Standard stop for adventurers, merchants, and military scouts.',
         tags: ['education', 'trade'],
-        priorityCategory: 'economy',
+        priorityCategory: 'crafts',
       },
       'Assay office': {
         required: false,

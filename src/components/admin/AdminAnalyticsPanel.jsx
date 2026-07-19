@@ -10,8 +10,8 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
-import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, sans, serif_, SP, R, FS, swatch } from '../theme.js';
-import Button from '../primitives/Button.jsx';
+import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
+import Segmented from '../primitives/Segmented.jsx';
 
 const DASHBOARDS = [
   { id: 'funnel', label: 'First-gen funnel' },
@@ -46,32 +46,30 @@ export default function AdminAnalyticsPanel() {
     }
   }, []);
 
+  // Data-load effect: load() sets loading/rows on mount + dashboard change. Intentional.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(dashboard); }, [dashboard, load]);
 
   const columns = rows.length ? Object.keys(rows[0]) : [];
 
+  // P5 anti-box-soup: no outer frame/heading here. This panel only ever renders
+  // inside AdminPanel's <Section> (which supplies the card + the "Analytics"
+  // <h2>), so a self-framed card-in-card with a duplicate <h3> title would be a
+  // nested-card false-floor. Render flat content; the parent owns the boundary.
   return (
-    <section aria-label="Analytics dashboards" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.lg, marginTop: SP.lg,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.sm }}>
-        <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>Analytics</h3>
+    <section aria-label="Analytics dashboards">
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
         {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
-      <div role="tablist" aria-label="Dashboard" style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs, margin: `${SP.sm}px 0` }}>
-        {DASHBOARDS.map(d => {
-          const active = d.id === dashboard;
-          return (
-            <Button
-              key={d.id} type="button" role="tab" aria-selected={active}
-              variant={active ? 'gold' : 'ghost'} size="sm"
-              onClick={() => setDashboard(d.id)}
-            >
-              {d.label}
-            </Button>
-          );
-        })}
+      <div style={{ margin: `${SP.sm}px 0` }}>
+        <Segmented
+          options={DASHBOARDS.map(d => ({ id: d.id, label: d.label }))}
+          value={dashboard}
+          onChange={setDashboard}
+          size="sm"
+          ariaLabel="Dashboard"
+        />
       </div>
 
       {loading && <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}

@@ -285,6 +285,7 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   clearOnboardingNudge: { slice: 'onboardingSlice', reason: 'transient post-onboarding nudge toast' },
   setPurchaseModalOpen: { slice: 'creditsSlice', reason: 'UI modal visibility flag' },
   setDossierClaimToast: { slice: 'uiSlice', reason: 'transient toast; excluded from persist partialize' },
+  setAuthModalOpen: { slice: 'uiSlice', reason: 'UI modal visibility flag; excluded from persist partialize' },
   setUserPref: { slice: 'uiSlice', reason: 'userPrefs (e.g. tableViewOpen) deliberately excluded from persist; transient overlay flag' },
   setWizardStep: { slice: 'configSlice', reason: 'wizard step; deliberately not persisted' },
   setWizardMode: { slice: 'configSlice', reason: 'wizard mode; deliberately not persisted' },
@@ -311,7 +312,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // The +3 are the fold-in's master-lineage ephemeral view-state actions (focusEntity,
 // clearFocusedEntity, hydrateServicesToggles) — the same class as the standing 66.
 // Shrink-only from here: adopting any exempt action into the operation surface lowers it.
-export const EXEMPT_CEILING = 69;
+// 69 -> 70 (restoration #16): setAuthModalOpen lifted from App-local useState onto the
+// store so the signup/unlock PricingMomentCard can route an anon user to sign-in rather
+// than the buy-credits wall. Same K-D EXEMPT class (UI modal visibility flag) as the
+// standing setPurchaseModalOpen — a documented ratchet raise, not an omission.
+export const EXEMPT_CEILING = 70;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

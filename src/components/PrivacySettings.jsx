@@ -44,9 +44,13 @@ function Toggle({ on, disabled, onClick, label }) {
   );
 }
 
+// Rows group by vertical padding alone — the per-row borderBottom drew a false
+// floor on every row (including the last), the same anti-pattern the sibling
+// AccountPreferencesSection's PrefRow already removed. Matching it keeps the two
+// on-page toggle lists consistent (P5).
 function Row({ id, title, desc, on, disabled, note, onToggle }) {
   return (
-    <div style={{ display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.sm}px 0`, borderBottom: `1px solid ${BORDER}` }}>
+    <div style={{ display: 'flex', gap: SP.md, alignItems: 'flex-start', padding: `${SP.md}px 0` }}>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>{title}</div>
         <div style={{ fontSize: FS.xs, color: BODY, marginTop: 2, lineHeight: 1.45, fontFamily: sans }}>{desc}</div>
@@ -57,7 +61,16 @@ function Row({ id, title, desc, on, disabled, note, onToggle }) {
   );
 }
 
-export default function PrivacySettings() {
+/**
+ * @param {object} props
+ * @param {boolean} [props.bare] When true (embedded inside an Account Section),
+ *   render as a borderless sub-group: no concentric card chrome, and the title
+ *   demoted to the same inline keyword-row the sibling sub-groups use, so the
+ *   parent Section's border is the only boundary and spacing carries the
+ *   grouping (P5 anti-box-soup). Defaults to false for standalone callers
+ *   (onboarding/consent) that still want the self-contained card.
+ */
+export default function PrivacySettings({ bare = false }) {
   const [consent, setLocal] = useState(getConsent);
   const dnt = dntEnabled();
 
@@ -72,14 +85,28 @@ export default function PrivacySettings() {
     });
   };
 
+  const sectionStyle = bare
+    ? { marginTop: 0 }
+    : {
+        border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD,
+        padding: `${SP.md}px ${SP.lg}px`, marginTop: SP.lg,
+      };
+
   return (
-    <section aria-label="Privacy &amp; data" style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD,
-      padding: `${SP.md}px ${SP.lg}px`, marginTop: SP.lg,
-    }}>
-      <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>
-        Privacy &amp; data
-      </h3>
+    <section aria-label="Privacy &amp; data" style={sectionStyle}>
+      {bare ? (
+        // Inline keyword-row title — sits level with the sibling sub-group
+        // headers ("Export my data" / "Delete content") in
+        // AccountDataPrivacySection so the embedded instance reads as one more
+        // sub-group, not a second concentric card (P5 anti-box-soup).
+        <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK, fontFamily: sans }}>
+          Privacy &amp; analytics
+        </div>
+      ) : (
+        <h3 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>
+          Privacy &amp; data
+        </h3>
+      )}
       <p style={{ fontSize: FS.xs, color: BODY, margin: `${SP.xs}px 0 ${SP.sm}px`, lineHeight: 1.5, fontFamily: sans }}>
         Usage and settlement <em>structure</em> help improve the generator. Your private campaign
         text, NPC secrets, and notes are never collected. Research is on by default and anonymous;

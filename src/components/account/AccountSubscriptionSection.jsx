@@ -8,13 +8,14 @@
  * and arrive via props.
  */
 import { lazy as _lazy, Suspense as _Suspense } from 'react';
-import { Crown, TrendingDown, CreditCard } from 'lucide-react';
+import { Crown, TrendingDown, CreditCard, ArrowRight } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
 import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, R, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
+import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
 // P116 / X-8 — Founder Lifetime tile, audience-gated to worldbuilder
 // behavior. Self-gates inside; renders null for non-worldbuilder users.
 const FounderTile = _lazy(() => import('../pricing/FounderTile.jsx'));
@@ -31,9 +32,16 @@ export default function AccountSubscriptionSection({
   purchaseError,
   purchasing,
   handlePurchase,
+  onNavigatePricing,
 }) {
+  const isFree = !isElevated && auth.tier !== 'premium';
+  // P8 — one primary per region. When the audience-earned Founder tile is
+  // eligible it renders its OWN solid-gold "Claim seat" primary lower in this
+  // section; the generic upgrade CTA below then drops to secondary so exactly
+  // one focal click survives (Founder is the higher-intent action).
+  const founderTileShowing = useFounderTileEligible();
   return (
-    <Section title={t('account.subscriptionHeading')} icon={Crown}>
+    <Section title={t('account.subscriptionHeading')} tone="feature">
       <div style={{ display: 'flex', gap: SP.lg, flexWrap: 'wrap' }}>
         {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
         <div style={{
@@ -131,6 +139,23 @@ export default function AccountSubscriptionSection({
           )}
         </div>
       </div>
+
+      {/* Conversion CTA — the one high-emphasis primary action of this region.
+          Free users get an obvious first click to Pricing; the per-tile upsell
+          footers above all point here. Navigation-only — never a purchase. */}
+      {isFree && (
+        <div style={{ marginTop: SP.lg }}>
+          <Button
+            variant={founderTileShowing ? 'secondary' : 'primary'}
+            size="lg"
+            icon={<Crown size={16} />}
+            trailingIcon={<ArrowRight size={16} />}
+            onClick={onNavigatePricing}
+          >
+            See Cartographer
+          </Button>
+        </div>
+      )}
 
       {auth.tier === 'premium' && !isElevated && (
         <div style={{ marginTop: SP.lg }}>

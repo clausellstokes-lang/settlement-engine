@@ -345,9 +345,13 @@ export default function AccountDataPrivacySection({
           </Button>
         </div>
 
-        {/* ── Privacy & analytics consent (existing component) ────────────── */}
+        {/* ── Privacy & analytics consent (existing component) ──────────────
+            Embedded `bare` so it flattens to a borderless sub-group: the
+            parent Section border is the only boundary, and PrivacySettings'
+            inline title sits level with the sibling sub-group headers instead
+            of drawing a second concentric card (P5). */}
         <div>
-          <PrivacySettings />
+          <PrivacySettings bare />
         </div>
 
         {/* ── Bulk content deletion ─────────────────────────────────────── */}
