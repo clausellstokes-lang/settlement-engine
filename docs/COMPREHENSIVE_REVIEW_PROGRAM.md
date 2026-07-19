@@ -1134,6 +1134,34 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19, "build it all!") — THE ROADS WAVE IS ORDERED.** The
+full journeys-with-stakes design builds, pre-loop, as a dark engine wave: mission-purposed
+NPC travel drawing purposes from EXISTING calendars/ledgers (traditions observances ·
+trade agreements · diplomatic repair · LADDER rank missions — travel as a ladder move
+with a location requirement) · traveler selection ladder-inverse (envoys from the middle
+ranks; the great travel only for tradition-critical/personal missions) · routing reads
+the faction's KNOWN intel picture while outcomes roll against TRUTH (information
+statecraft becomes materially consequential) · FOUR threat classes: occupation/army >
+siege-during-stay > embattled roads (bandits/monsters) > HOSTILE-RECEPTION arrival (the
+owner's mid-design addition: stale-intel dispatch into a hostile court, or mid-visit
+relations souring; host detention itself costs the detainer legitimacy — self-balancing;
+optional GUEST-RIGHT tradition coupling lowers detention odds during observances) ·
+capture = threat-strength × exposure ÷ protection(importance), armies partially bypass
+protection · HOSTAGE = stasis via ONE participation-gate chokepoint (ladder, faction
+contribution, tradition roles, seats all consult one predicate) · ransom paid over time
+commensurate with ladder-derived influence, debiting existing power/legitimacy machinery;
+party intervention via the existing edit dispatcher (COMMITTABLE_EDIT_KINDS rule) ·
+low personality-weighted COVERT compromised conversion via the existing corruption system
+(beneficiary = captor) · cadence/range governed (per-NPC yearly caps, neighbor radius,
+~1-week stays, return-home default; siege/all-roads-hostile extend) · CARVED LAW: NO
+death outcomes EVER — captivity always ends in release/rescue/conversion (the owner's
+never-resolve-a-named-fate scope boundary) · dark virtual flag + byte-identical dormancy
+goldens + own rng streams + catch-up-collapse stamping compliance + full persistence
+lifecycle trace on hostage state. SEQUENCE: the 5-lens recon workflow (running) → Fable
+architect → docs/DESIGN_THE_ROADS.md (Money-Wave treatment: frozen laws, slices, gates,
+receipts) → Opus implementation lanes → adversarial dormancy verify → fold. ⛔OWNER-
+QUEUED (not self-ruled): whether the roads flag JOINS the pre-signed ONE REGEN lit set —
+default built-dark with the lighting decision separate.
 **⬛⭐ WAVE E — LAUNCH OPS COMPLETE (2026-07-19, claude/wave-e-launch-ops @ f61f80a9,
 9 lettered commits atop aad6265e — manager-verified merge-base).** The brief proved ~70%
 STALE (error pipeline, sitemap/og machinery, refund policy page all pre-existed); the

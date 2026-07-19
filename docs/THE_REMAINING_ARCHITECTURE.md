@@ -450,6 +450,17 @@ A+ at this stage, rinse and repeat.")
   lifetime stays whole; instead $49.50 standing buyback + 18-month dormancy
   nudge + 5-year-unreachable abandonment (90d notices, claimable credit,
   escheat). DESIGN_MONEY_WAVE §6.8 / slice M-10.
+  ⬛⭐ THE ROADS WAVE (owner ruling 2026-07-19 "build it all!"): journeys-with-
+  stakes — mission-purposed travel (traditions/trade/diplomacy/ladder-rank
+  purposes) · intel-known routing vs truth outcomes · four threat classes
+  (occupation/army · siege · embattled roads · hostile-reception arrival with
+  guest-right coupling) · hostage stasis via one participation chokepoint ·
+  influence-priced ransom debiting legitimacy · covert compromised conversion
+  via the existing system · governed cadence (~1-week stays, return-home) ·
+  NO DEATH OUTCOMES EVER (scope boundary) · dark virtual flag + dormancy
+  goldens + own rng streams. Pipeline: recon workflow → Fable architect →
+  DESIGN_THE_ROADS.md → Opus lanes → dormancy verify → fold. ⛔owner: ONE
+  REGEN list membership.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
