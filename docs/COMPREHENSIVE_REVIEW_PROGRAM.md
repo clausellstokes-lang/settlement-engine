@@ -1153,6 +1153,28 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ THE BURN-DOWN COMPLETE (2026-07-19, deep-craft @ 78f51611, 7 commits).**
+THE FINAL FOUR: borderRadius 1043→982 · boxShadow 112→108 · rgba 264→260 ·
+tinted 235→232 (every drop same-commit, tolerance-0) + rawColor BUDGET locked
+at the 1443 measured floor (zero slack — fold-2 re-triages if incoming
+branches add literals). C5-a complete across all six realm surfaces (rail/
+inspector/layers/pulse/report/stage → flat plates + ClerkNotes; H2 beats
+PRESERVED with grep evidence — PlacementsLayer never touched) · C3-e chips
+flat · residual demo (InstitutionalGrid −14). THE RENAME: partial by PROOF —
+9 local-const leaf files renamed (kill-list pattern gained SLATE_BG, count
+preserved); the remainder (6 off-limits files · theme/tokens exports · swatch
+keys · pattern cleanup) is BLOCKED by unfolded branches and lands as FOLD
+BATCH 2's closing sweep (recipe ledgered in the lane report); rename eager
+delta 0 BY CONSTRUCTION (PLAUSIBLE — confirmed at the fold's measurement).
+REMAINING-OFFENDER MAP delivered: 857 clear radii across ~250 files (top
+targets named — EconomicsTab 35, LandingBelowFold, SummaryTab 27…) + 41
+off-limits files quarantined for their folds — the residual walk to literal
+0×4 is a MULTI-WAVE program handed to Phase D sequencing, not a residual
+pass. Full suite EXACTLY the 5, zero timeouts. ⭐ FOLD BATCH 2 DISPATCHES
+(Fable): six branches in order pages → resto2 → resto3 → c14c15 → c16 →
+resto1, ceilings set to measured counts per fold, pre-ruled reconciliations
+(TableView=lamp tones · CampaignFolder=union · App.jsx regions), the rename
+COMPLETION as the batch's final commit, eager re-measured (+199 c16 signed).
 **⬛⭐ RESTORATION SWEEP 3 COMPLETE (2026-07-19, claude/restoration-compendium @
 f9b07930, 8 commits) — WITH THIS, 22 OF THE CENSUS'S 23 OWED ROWS ARE CLOSED
 (#1 HowToUse = the owner's direction call).** #9 CompendiumPanel identity +
