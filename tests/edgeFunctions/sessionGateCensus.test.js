@@ -23,11 +23,11 @@ const read = (name) => {
 };
 
 // The §7.2 paid-surface roster. Each must be gated by request-layer OR belt.
-// founder-transfer is added when M-6 lands (it wires the gate on every action).
 const REQUIRED = [
   'ai-analyst', 'generate-narrative', 'generate-chronicle', 'custom-content',
   'style-overhaul', 'interpret-session', 'parley', 'surveyor-autonomy',
   'surveyor-byok', 'create-checkout', 'create-customer-portal', 'account-actions',
+  'founder-transfer',
 ];
 
 // DELIBERATELY DEFERRED (documented, not a gap to re-find): verify-checkout-session
@@ -58,5 +58,20 @@ describe('single-session census — every paid surface is gated (request-layer O
 
   it('the deferred set is explicitly recorded (documented, not a silent gap)', () => {
     expect(DEFERRED).toContain('verify-checkout-session');
+  });
+
+  // Tier 0.5 trust-boundary extension (§6.3/LAW 2): founder-transfer is a NEW
+  // Stripe-session-creating entry point. Its session must bind to server-validated
+  // state — the case id + the JWT user id — never a client assertion.
+  it('founder-transfer binds its checkout session to the validated case + verified user id', () => {
+    const src = read('founder-transfer');
+    expect(src.length).toBeGreaterThan(0);
+    // The session metadata carries the server-controlled purpose + the validated case.
+    expect(/purpose:\s*'founder_seat_transfer'/.test(src)).toBe(true);
+    expect(/transfer_case_id:\s*caseId/.test(src)).toBe(true);
+    // supabase_user_id comes from the verified user (user.id), NOT the request body.
+    expect(/supabase_user_id:\s*user\.id/.test(src)).toBe(true);
+    // The master switch gates every action before any work.
+    expect(/founder_transfer_enabled/.test(src)).toBe(true);
   });
 });
