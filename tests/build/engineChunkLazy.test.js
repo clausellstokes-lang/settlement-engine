@@ -38,6 +38,14 @@ import { resolve, join } from 'node:path';
 
 const distDir = resolve(process.cwd(), 'dist');
 const assetsDir = join(distDir, 'assets');
+// The BIG lazy generator chunk (`engine-<hash>.js`) — NOT the small first-paint
+// `engine-core-<hash>.js` shared-vocabulary chunk (vite.config manualChunks). The
+// negative lookahead makes `.find`/`.filter` deterministic: `engine-core-*` sorts
+// before `engine-<hash>` in readdir order, so a bare /^engine-.../ matcher would
+// non-deterministically pick engine-core whenever the big chunk's content hash
+// happens to sort after "core" — a latent flake, independent of any real size
+// change. Selecting on identity (not hash order) is the fix.
+const ENGINE_CHUNK_RE = /^engine-(?!core-)[A-Za-z0-9_-]+\.js$/;
 const distExists = existsSync(distDir) && existsSync(assetsDir);
 const requireDist = process.env.VERIFY_DIST === '1';
 
@@ -49,12 +57,12 @@ describe.runIf(requireDist)('engine chunk dist verification is not vacuously ski
 
 describe.runIf(distExists)('engine chunk — first-paint contract', () => {
   it('engine is its own chunk in dist/assets/', () => {
-    const engine = readdirSync(assetsDir).filter(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f));
+    const engine = readdirSync(assetsDir).filter(f => ENGINE_CHUNK_RE.test(f));
     expect(engine.length).toBeGreaterThan(0);
   });
 
   it('engine chunk is within a sane size band (catches both a merge-into-hot-chunk and runaway growth)', () => {
-    const engine = readdirSync(assetsDir).find(f => /^engine-[A-Za-z0-9_-]+\.js$/.test(f));
+    const engine = readdirSync(assetsDir).find(f => ENGINE_CHUNK_RE.test(f));
     expect(engine).toBeDefined();
     const size = statSync(join(assetsDir, engine)).size;
     expect(size).toBeGreaterThan(200_000);   // < this → engine likely merged into a hot chunk

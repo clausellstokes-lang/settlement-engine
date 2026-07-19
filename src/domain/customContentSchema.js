@@ -262,6 +262,58 @@ export function validateDeity(deity = {}) {
   return { ok: errors.length === 0, errors };
 }
 
+// ── Traditions (THE TRADITIONS wave, Engine Lift #4 / slice T-5) ───────────────
+// The `traditions` custom-content bucket: a DECLARED per-settlement observance that,
+// once the traditions layer lights (traditionsEnabled at THE ONE REGEN), can claim a
+// genesis slot (declared-over-derived, DESIGN_TRADITIONS §11). Authored content is a
+// NAME plus an OPTIONAL typed motif (element × act) drawn from the same vocabulary the
+// derived founding traditions use, plus an optional free-text epithet.
+//
+// The two key arrays are DUPLICATED as frozen literals from src/data/traditionCorpus.js
+// (TRADITION_ELEMENTS / TRADITION_ACTS ids) rather than IMPORTED — this schema module is
+// EAGER (the store slice imports it), and importing the corpus would drag its tables into
+// first-paint. A drift-guard test (customContentSchema traditions) pins these equal to the
+// corpus so they can never silently diverge.
+export const TRADITION_ELEMENT_KEYS = Object.freeze([
+  'founding', 'first-landing', 'charter', 'hearth', 'harvest', 'river', 'stone', 'the-dead',
+  'field', 'forge', 'market', 'hunt', 'long-sun', 'tide', 'greening', 'stars',
+]);
+export const TRADITION_ACT_KEYS = Object.freeze(['feast', 'procession', 'vigil', 'contest', 'fair', 'offering']);
+export const TRADITION_EPITHET_MAX_LENGTH = 300;
+
+/**
+ * Validate an authored tradition record (the validateDeity template). Returns { ok, errors };
+ * the store slice rejects a write whose `errors` is non-empty so a bad motif never reaches the
+ * cloud. A tradition needs a NAME; the motif fields are OPTIONAL-TOLERANT (a bare-name tradition
+ * claims a genesis slot and lets genesis supply the motif) — a PRESENT motifElement/motifAct
+ * must be a valid corpus key, an ABSENT one is admitted; a present epithet must be free text
+ * within the cap. Pure; no store/React. DESIGN_TRADITIONS §11.
+ * @param {{ name?: unknown, motifElement?: unknown, motifAct?: unknown, epithet?: unknown }} [tradition]
+ * @returns {{ ok: boolean, errors: string[] }}
+ */
+export function validateTradition(tradition = {}) {
+  /** @type {string[]} */
+  const errors = [];
+  const name = String(tradition?.name || '').trim();
+  if (!name) errors.push('A tradition needs a name.');
+  // The motif reads are `unknown`; cast to string only to satisfy the frozen-key
+  // `.includes()` element type — a non-string value still compares unequal (rejected).
+  if (tradition?.motifElement != null && !TRADITION_ELEMENT_KEYS.includes(/** @type {string} */ (tradition.motifElement))) {
+    errors.push(`motifElement must be one of: ${TRADITION_ELEMENT_KEYS.join(', ')}.`);
+  }
+  if (tradition?.motifAct != null && !TRADITION_ACT_KEYS.includes(/** @type {string} */ (tradition.motifAct))) {
+    errors.push(`motifAct must be one of: ${TRADITION_ACT_KEYS.join(', ')}.`);
+  }
+  if (tradition?.epithet != null) {
+    if (typeof tradition.epithet !== 'string') {
+      errors.push('epithet must be free text (a string).');
+    } else if (tradition.epithet.length > TRADITION_EPITHET_MAX_LENGTH) {
+      errors.push(`epithet must stay within ${TRADITION_EPITHET_MAX_LENGTH} characters.`);
+    }
+  }
+  return { ok: errors.length === 0, errors };
+}
+
 // Settlement tiers, smallest → largest, for tier gates (min/max).
 export const TIER_ORDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 

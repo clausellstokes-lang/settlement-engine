@@ -55,3 +55,7 @@ export const WarFaithTab = lazy(() => import('../new/tabs/WarFaithTab.jsx'));
 // reveal on the includeGroundTruth seam. Lazy; the tab itself only registers
 // when the owning campaign carries a rumor ledger (dormant ⇒ no tab at all).
 export const RumorsTab = lazy(() => import('../new/tabs/RumorsTab.jsx'));
+// THE TRADITIONS wave (Engine Lift #4, T-1) — the founding-traditions register
+// (World group, beside Daily Life). Lazy so the genesis leaf + tradition corpus
+// ride THIS chunk, never the first-paint graph (ratchet: traditions lazy).
+export const TraditionsTab = lazy(() => import('../new/tabs/TraditionsTab.jsx'));

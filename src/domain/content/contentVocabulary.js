@@ -13,7 +13,7 @@
  * THE SCHEMA WALL, two layers:
  *   1. BUCKET REGISTRATION — a drafted entry lands only in one of the registered content
  *      buckets (institutions / services / resources / stressors / tradeGoods / factions /
- *      deities). A bucket outside this set is UNSUPPORTED (no content type = no landing).
+ *      deities / traditions). A bucket outside this set is UNSUPPORTED (no content type = no landing).
  *   2. FIELD LABELLING (the S4 honesty rule) — each field of a valid entry is MECHANICAL
  *      (a bounded taxonomy the engine reads → real effect), FLAVOR (free/descriptive text
  *      → kept, no mechanical effect), or UNSUPPORTED (a field the schema has no primitive
@@ -28,6 +28,7 @@ import {
   CONTENT_GROUP_KEYS, CRITICALITY_KEYS, ECONOMIC_WEIGHT_KEYS, DEFENSE_ROLE_KEYS,
   POWER_AUTHORITY_KEYS, FOOD_IMPACT_KEYS, SATISFIES_KEYS,
   DEITY_ALIGNMENT_KEYS, DEITY_TEMPER_KEYS, DEITY_TIER_KEYS, DEITY_LAW_KEYS,
+  TRADITION_ELEMENT_KEYS, TRADITION_ACT_KEYS,
   TIER_ORDER,
 } from '../customContentSchema.js';
 
@@ -37,7 +38,7 @@ import {
  * asserts it matches the customContentSlice buckets so a new bucket cannot leave a stale wall.
  */
 export const CONTENT_BUCKETS = Object.freeze([
-  'institutions', 'services', 'resources', 'stressors', 'tradeGoods', 'factions', 'deities',
+  'institutions', 'services', 'resources', 'stressors', 'tradeGoods', 'factions', 'deities', 'traditions',
 ]);
 const _BUCKET_SET = new Set(CONTENT_BUCKETS);
 
@@ -60,6 +61,8 @@ export const MECHANICAL_FIELDS = Object.freeze({
   temperamentAxis: DEITY_TEMPER_KEYS,
   rankAxis:        DEITY_TIER_KEYS,
   lawAxis:         DEITY_LAW_KEYS,
+  motifElement:    TRADITION_ELEMENT_KEYS,
+  motifAct:        TRADITION_ACT_KEYS,
   tierMin:         TIER_ORDER,
   tierMax:         TIER_ORDER,
   magical:         true,
@@ -73,7 +76,7 @@ export const MECHANICAL_FIELDS = Object.freeze({
  * — a hallucinated mechanic with no primitive, surfaced honestly (never invented).
  */
 export const FLAVOR_FIELDS = Object.freeze([
-  'name', 'label', 'description', 'portfolio', 'tags', 'note', 'blurb',
+  'name', 'label', 'description', 'portfolio', 'epithet', 'tags', 'note', 'blurb',
   'severity', 'affects', 'archetype', 'condition', 'subtype',
 ]);
 const _FLAVOR_SET = new Set(FLAVOR_FIELDS);

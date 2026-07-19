@@ -42,6 +42,7 @@ const EMPTY_CONTENT = {
   tradeGoods: [],
   factions: [],
   deities: [],
+  traditions: [],
   supplyChains: [],
   tradeRoutes: [],
   powerPresets: [],

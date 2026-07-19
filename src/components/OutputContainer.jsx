@@ -54,7 +54,7 @@ import {
   ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel,
   EconomicsTab, HistoryTab, MagicTab, NPCsTab, NotesTab, OverviewTab,
   PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, VersionsTab,
+  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab,
   ViabilityTab, WarFaithTab,
 } from './dossier/dossierLazyTabs.js';
 
@@ -84,13 +84,12 @@ export const TAB_GROUPS = Object.freeze({
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
-  // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` is a data-only
-  // registration seam (owner: "the tab should exist in the world tab of the
-  // dossier", slotted beside daily_life — culture next to daily life): the culture
-  // engine + TraditionsTab live on claude/traditions, NOT here, so nothing pushes
-  // `traditions` into `allTabs` and the resolver below drops it. When that branch
-  // merges, its presence-gate + renderTab case + component plug into this already-
-  // placed slot with no reorder. Deliberately inert until then — not a dead tab.
+  // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
+  // tab should exist in the world tab of the dossier", slotted beside daily_life —
+  // culture next to daily life) was placed here by the deep-craft wave as a
+  // data-only seam and WIRED at the composite fold: TraditionsTab, its TABS
+  // registration and renderTab case arrived with claude/traditions and plugged
+  // into this already-placed slot with no reorder.
   world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
@@ -111,6 +110,10 @@ const TABS = [
   { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
+  // THE TRADITIONS wave (T-1) — the founding-traditions register (World group,
+  // beside Daily Life). Reuses the already-bundled Drama glyph (festivals /
+  // ceremony) so registering the tab adds no new first-paint icon.
+  { id: 'traditions', label: 'Traditions', Icon: Drama },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
   { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
@@ -599,6 +602,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
+      // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
+      // the settlement.traditions mirror; then this same tab renders the live state.
+      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;

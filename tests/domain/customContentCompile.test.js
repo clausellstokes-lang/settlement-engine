@@ -44,7 +44,7 @@ describe('custom content — the schema wall (PIN 1)', () => {
   });
 
   it('CONTENT_BUCKETS is the registered content-type set; isRegisteredBucket fences it', () => {
-    expect(CONTENT_BUCKETS).toEqual(['institutions', 'services', 'resources', 'stressors', 'tradeGoods', 'factions', 'deities']);
+    expect(CONTENT_BUCKETS).toEqual(['institutions', 'services', 'resources', 'stressors', 'tradeGoods', 'factions', 'deities', 'traditions']);
     expect(isRegisteredBucket('institutions')).toBe(true);
     expect(isRegisteredBucket('starships')).toBe(false);
     expect(isRegisteredBucket(42)).toBe(false);

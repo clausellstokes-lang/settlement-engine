@@ -39,6 +39,7 @@ import { Relationships } from './sections/Relationships.jsx';
 import { AIAppendix } from './sections/AIAppendix.jsx';
 import { SystemStateSnapshot } from './sections/SystemStateSnapshot.jsx';
 import { FaithWar } from './sections/FaithWar.jsx';
+import { Traditions } from './sections/Traditions.jsx';
 import { TownMapPlate } from './sections/TownMapPlate.jsx';
 import { Timeline as TimelineChapter } from './sections/Timeline.jsx';
 import { buildViewModel } from './lib/viewModel.js';
@@ -112,6 +113,10 @@ export function SettlementPDF({
   // layered causal-detail form (16-var grid + pressures). Every other variant
   // keeps the default 4-dim snapshot byte-identical.
   const stateCausalDetail = variant === 'campaign_state';
+  // THE TRADITIONS register (07B, T-5) — variant/canon gated AND self-gating on the
+  // settlement.traditions MIRROR (the townMapPlate precedent). A draft, or any export
+  // while the traditions layer is DARK (no mirror), ⇒ no chapter ⇒ byte-identical.
+  const showTraditions = inc('traditions') && Array.isArray(safe.traditions) && safe.traditions.length > 0;
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -130,6 +135,7 @@ export function SettlementPDF({
     inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
     inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
     inc('identityDailyLife')   && { no: '07',  title: 'Identity & Daily Life' },
+    showTraditions             && { no: '07B', title: 'Traditions', note: 'festivals & rites' },
     inc('services')            && { no: '08A', title: 'Services', note: 'what players can buy' },
     inc('institutions')        && { no: '08B', title: 'Institutions', note: 'who runs what' },
     showTownMap                && { no: '08C', title: 'Town Map', note: 'deterministic plan' },
@@ -161,6 +167,7 @@ export function SettlementPDF({
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showTownMap                && <TownMapPlate          settlement={safe} narrativeMode={useAi} model={townMapModel} />}
