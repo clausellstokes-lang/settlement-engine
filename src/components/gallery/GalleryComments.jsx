@@ -2,25 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 
 import {
-  addGalleryComment,
-  deleteGalleryComment,
-  fetchGalleryComments,
-} from '../../lib/gallery.js';
+  addGalleryComment, deleteGalleryComment, fetchGalleryComments, } from '../../lib/gallery.js';
 import {
-  BODY,
-  BORDER,
-  CARD,
-  CARD_ALT,
-  FS,
-  INK,
-  MUTED,
-  R,
-  RED,
-  RED_BG,
-  SP,
-  sans,
-  serif_,
-} from '../theme.js';
+  BODY, BORDER, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SP, sans, serif_ } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import DeleteConfirmation from '../DeleteConfirmation.jsx';
 import { formatDate } from './galleryUtils.js';
@@ -109,7 +93,6 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
               boxSizing: 'border-box',
               resize: 'vertical',
               border: `1px solid ${BORDER}`,
-              borderRadius: R.md,
               background: CARD,
               color: INK,
               fontFamily: sans,
@@ -134,22 +117,22 @@ export default function GalleryComments({ dossier, auth, onCountChange }) {
           </div>
         </div>
       ) : (
-        <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+        <div style={{ border: `1px dashed ${BORDER}`, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
           Sign in to comment. Anyone can read the discussion.
         </div>
       )}
       {error && (
-        <div style={{ border: `1px solid ${RED}`, borderRadius: R.md, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
           {error}
         </div>
       )}
       <div style={{ display: 'grid', gap: 8 }}>
         {comments.length === 0 ? (
-          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+          <div style={{ border: `1px dashed ${BORDER}`, padding: SP.md, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No comments yet.
           </div>
         ) : comments.map(comment => (
-          <article key={comment.id} style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: SP.md, display: 'grid', gap: 6 }}>
+          <article key={comment.id} style={{ border: `1px solid ${BORDER}`, background: CARD, padding: SP.md, display: 'grid', gap: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 950 }}>
                 {comment.authorLabel}

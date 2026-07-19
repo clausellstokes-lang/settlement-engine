@@ -13,7 +13,7 @@
  * AccountPage chunk (zero first-paint bytes); the dashboard is a further lazy split.
  */
 import { Suspense, lazy, useEffect, useState } from 'react';
-import { INK, BODY, MUTED, BORDER, CARD, GOLD, GREEN, GREEN_BG, RED, RED_BG, AMBER, AMBER_BG, CARD_ALT, SP, R, FS, sans, serif_, swatch } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, GOLD, GREEN, RED, AMBER, CARD_ALT, SP, R, FS, sans, serif_, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import {
   keyPrefixHint, getByokStatus, setByokKey, clearByokKey, verifyByokKey,
@@ -31,16 +31,16 @@ const TASK_CLASSES = [
 /** Perceivable status chip for each health state. */
 function healthMeta(health) {
   switch (health) {
-    case 'healthy':       return { label: 'Healthy', color: GREEN, bg: GREEN_BG };
-    case 'out_of_credit': return { label: 'Out of credit', color: AMBER, bg: AMBER_BG };
-    case 'invalid':       return { label: 'Invalid or expired', color: RED, bg: RED_BG };
-    case 'rate_limited':  return { label: 'Rate-limited', color: AMBER, bg: AMBER_BG };
+    case 'healthy':       return { label: 'Healthy', color: GREEN, bg: 'transparent' };
+    case 'out_of_credit': return { label: 'Out of credit', color: AMBER, bg: 'transparent' };
+    case 'invalid':       return { label: 'Invalid or expired', color: RED, bg: 'transparent' };
+    case 'rate_limited':  return { label: 'Rate-limited', color: AMBER, bg: 'transparent' };
     case 'down':          return { label: 'Provider unavailable', color: MUTED, bg: CARD_ALT };
     default:              return { label: 'Not verified', color: MUTED, bg: CARD_ALT };
   }
 }
 
-const inputStyle = { padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK, background: '#fff', width: '100%', boxSizing: 'border-box' };
+const inputStyle = { padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: '#fff', width: '100%', boxSizing: 'border-box' };
 const labelStyle = { fontSize: FS.xs, color: MUTED, fontFamily: sans, marginBottom: 2 };
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString() : '—');
 
@@ -137,7 +137,7 @@ export default function AccountAiKeysSection() {
     // Inline card matching AccountSection's default tone. The heading is text content,
     // NOT a `title=` prop, so this new section does not grow the shrink-only native
     // title= census (tests/domain/guidanceRegistry.walker.test.js — never-raise ceiling).
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden', background: CARD }}>
+    <div style={{ border: `1px solid ${BORDER}`, overflow: 'hidden', background: CARD }}>
       <div style={{ padding: `${SP.md}px ${SP.lg}px` }}>
         <h2 style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 600, color: INK, margin: 0 }}>AI provider &amp; keys</h2>
       </div>
@@ -149,7 +149,7 @@ export default function AccountAiKeysSection() {
         </p>
 
         {error && (
-          <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>{error}</div>
+          <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger }}>{error}</div>
         )}
 
         {/* ── Provider + key + verify ─────────────────────────────────────────── */}
@@ -181,7 +181,7 @@ export default function AccountAiKeysSection() {
 
         {/* ── Key-health status ───────────────────────────────────────────────── */}
         {statusRow?.has_key && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap', padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap', padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD_ALT }}>
             <span style={{ padding: `2px ${SP.sm}px`, borderRadius: R.pill || R.md, fontSize: FS.xs, fontWeight: 700, color: hm.color, background: hm.bg, border: `1px solid ${hm.color}` }}>{hm.label}</span>
             <span style={{ fontSize: FS.xs, color: MUTED }}>Last verified: {fmtDate(statusRow?.last_verified_at)}</span>
             <div style={{ marginLeft: 'auto', display: 'flex', gap: SP.sm }}>

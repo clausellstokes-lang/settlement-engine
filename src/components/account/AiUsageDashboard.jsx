@@ -9,7 +9,7 @@
  * the truth.
  */
 import { useEffect, useState } from 'react';
-import { INK, BODY, MUTED, BORDER, GOLD, GOLD_BG, CARD_ALT, SP, R, FS, sans } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, GOLD, GOLD_BG, CARD_ALT, SP, FS, sans } from '../theme.js';
 import { getUsageEvents, getPriceEstimates, estimateUsd } from '../../lib/surveyorByok.js';
 
 const fmtInt = (n) => (Number(n) || 0).toLocaleString('en-US');
@@ -51,7 +51,7 @@ export function aggregateUsage(events) {
 
 function Kpi({ label, value, sub }) {
   return (
-    <div style={{ flex: '1 1 120px', minWidth: 0, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+    <div style={{ flex: '1 1 120px', minWidth: 0, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD_ALT }}>
       <div style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>{label}</div>
       <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, fontFamily: sans }}>{value}</div>
       {sub && <div style={{ fontSize: FS.xs, color: MUTED }}>{sub}</div>}
@@ -64,7 +64,7 @@ function BarRow({ label, tokens, max }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>
       <div style={{ width: 120, fontSize: FS.sm, color: BODY, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{label}</div>
-      <div style={{ flex: 1, height: 10, background: BORDER, borderRadius: R.sm, overflow: 'hidden' }}>
+      <div style={{ flex: 1, height: 10, background: BORDER, overflow: 'hidden' }}>
         <div style={{ width: `${pct}%`, height: '100%', background: GOLD }} />
       </div>
       <div style={{ width: 72, textAlign: 'right', fontSize: FS.xs, color: MUTED, fontVariantNumeric: 'tabular-nums' }}>{fmtInt(tokens)}</div>
@@ -110,7 +110,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
         <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 56 }}>
           {agg.byDay.map((d) => (
             <div key={d.day} aria-label={`${d.day}: ${fmtInt(d.tokens)} tokens`}
-              style={{ flex: 1, height: `${Math.max(2, Math.round((d.tokens / dayMax) * 100))}%`, background: d.tokens ? GOLD : BORDER, borderRadius: 2, minHeight: 2 }} />
+              style={{ flex: 1, height: `${Math.max(2, Math.round((d.tokens / dayMax) * 100))}%`, background: d.tokens ? GOLD : BORDER, minHeight: 2 }} />
           ))}
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function AiUsageDashboard({ provider = 'anthropic' }) {
         </div>
       )}
 
-      <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.sm}px ${SP.md}px` }}>
+      <div style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5, background: GOLD_BG, border: `1px solid ${BORDER}`, padding: `${SP.sm}px ${SP.md}px` }}>
         Costs are <strong>estimates</strong> from a maintained price table. No provider exposes a live balance,
         so this meter is your <em>trend</em> — your provider’s console is the source of truth.
       </div>

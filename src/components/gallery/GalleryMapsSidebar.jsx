@@ -9,15 +9,7 @@ import { useId } from 'react';
 
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  CARD_ALT,
-  FS,
-  GOLD,
-  GOLD_TXT,
-  INK,
-  R,
-  SP,
-  sans,
-} from '../theme.js';
+  CARD_ALT, FS, GOLD, GOLD_TXT, INK, SP, sans } from '../theme.js';
 import BottomSheet from '../primitives/BottomSheet.jsx';
 import Button from '../primitives/Button.jsx';
 import {
@@ -218,7 +210,6 @@ export default function GalleryMapsSidebar({ filters, tagVocabulary = [], onTogg
       gap: SP.lg,
       alignSelf: 'start',
       padding: SP.md,
-      borderRadius: R.lg,
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm }}>

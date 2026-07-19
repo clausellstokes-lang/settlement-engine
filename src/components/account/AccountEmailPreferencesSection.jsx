@@ -13,7 +13,7 @@
  */
 import { useEffect, useState } from 'react';
 import { Mail } from 'lucide-react';
-import { GOLD, INK, BODY, MUTED, BORDER, SP, R, FS, swatch } from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, SP, FS, swatch } from '../theme.js';
 import { EMAIL_CATEGORIES, getMyEmailPreferences, setMyEmailPreference } from '../../lib/emailPreferences.js';
 import Section from './AccountSection.jsx';
 
@@ -65,7 +65,7 @@ export default function AccountEmailPreferencesSection() {
         </p>
 
         {error && (
-          <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+          <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, fontSize: FS.sm, color: swatch.danger }}>
             {error}
           </div>
         )}
@@ -78,7 +78,7 @@ export default function AccountEmailPreferencesSection() {
               <div key={cat.id} style={{
                 display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
                 gap: SP.md, padding: `${SP.sm}px ${SP.md}px`,
-                border: `1px solid ${BORDER}`, borderRadius: R.md,
+                border: `1px solid ${BORDER}`,
               }}>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontSize: FS.md, fontWeight: 600, color: INK }}>{cat.label}</div>

@@ -24,7 +24,7 @@ import { ImagePlus, Trash2 } from 'lucide-react';
 import ImageCropper from './ImageCropper.jsx';
 import Button from '../primitives/Button.jsx';
 import { validateImageFile, uploadGalleryCover } from '../../lib/imageUpload.js';
-import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, RED, sans, FS, R, SP } from '../theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, INK, BODY, GOLD, MUTED, RED, sans, FS, SP } from '../theme.js';
 
 const COVER_ASPECT = 16 / 9;
 
@@ -110,7 +110,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
   if (value) {
     return (
       <div style={{ display: 'grid', gap: SP.xs }}>
-        <div style={{ position: 'relative', width: '100%', aspectRatio: String(COVER_ASPECT), borderRadius: R.md, overflow: 'hidden', border: `1px solid ${BORDER2}`, background: CARD_ALT }}>
+        <div style={{ position: 'relative', width: '100%', aspectRatio: String(COVER_ASPECT), overflow: 'hidden', border: `1px solid ${BORDER2}`, background: CARD_ALT }}>
           <img src={value} alt={alt || 'Gallery cover'} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
         <div style={{ display: 'flex', gap: SP.sm }}>
@@ -141,7 +141,7 @@ export default function CoverImageField({ value = '', onChange, ownerId, settlem
         style={{
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6,
           padding: `${SP.md}px ${SP.sm}px`, minHeight: 96, textAlign: 'center',
-          border: `1.5px dashed ${dragOver ? GOLD : BORDER}`, borderRadius: R.md,
+          border: `1.5px dashed ${dragOver ? GOLD : BORDER}`,
           background: dragOver ? CARD_ALT : CARD, color: BODY, cursor: 'pointer',
           fontFamily: sans, fontSize: FS.xxs, transition: 'border-color 120ms, background 120ms',
         }}

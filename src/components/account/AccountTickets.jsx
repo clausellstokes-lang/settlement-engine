@@ -23,9 +23,7 @@ import Button from '../primitives/Button.jsx';
 import Pill from '../primitives/Pill.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED,
-  sans, FS, SP, R, swatch,
-} from '../theme.js';
+  GOLD_TXT, INK, SECOND, BODY, BORDER, BORDER2, CARD_HDR, RED, sans, FS, SP, swatch } from '../theme.js';
 
 const CATEGORIES = ['general', 'billing', 'bug', 'account', 'gallery', 'feature', 'other'];
 const PRIORITIES = ['low', 'normal', 'high', 'urgent'];
@@ -62,7 +60,7 @@ function StatusPill({ status }) {
       icon={open
         ? <CircleDot size={11} aria-hidden="true" />
         : <CheckCircle2 size={11} aria-hidden="true" />}
-      style={{ borderRadius: R.sm }}
+      style={{}}
     >
       {STATUS_LABEL[status] || status}
     </Pill>
@@ -163,7 +161,7 @@ export default function AccountTickets() {
 
   const inputStyle = {
     width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-    border: `1px solid ${BORDER}`, borderRadius: R.md,
+    border: `1px solid ${BORDER}`,
     fontSize: FS.md, fontFamily: sans, outline: 'none', boxSizing: 'border-box',
   };
 
@@ -195,7 +193,7 @@ export default function AccountTickets() {
       {error && (
         <div role="alert" style={{
           padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg,
-          border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: RED,
+          border: '1px solid #e8b0b0', fontSize: FS.sm, color: RED,
         }}>
           {error}
         </div>
@@ -216,7 +214,7 @@ export default function AccountTickets() {
                 style={{
                   justifyContent: 'flex-start', textAlign: 'left', gap: SP.sm,
                   padding: `${SP.sm + 2}px ${SP.md}px`, border: `1px solid ${BORDER2}`,
-                  borderRadius: R.md, background: swatch.white, whiteSpace: 'normal',
+                  background: swatch.white, whiteSpace: 'normal',
                 }}>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <span style={{ fontSize: FS.xxs, color: BODY, fontFamily: sans }}>{t.ticket_number}</span>
@@ -278,7 +276,7 @@ export default function AccountTickets() {
           </div>
 
           {active.linked_faq && (
-            <div style={{ fontSize: FS.sm, color: SECOND, background: swatch['#FBF5E6'], padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md }}>
+            <div style={{ fontSize: FS.sm, color: SECOND, background: swatch['#FBF5E6'], padding: `${SP.sm}px ${SP.md}px` }}>
               Support linked a help article that may answer this: <strong>{active.linked_faq}</strong>
             </div>
           )}
@@ -294,7 +292,7 @@ export default function AccountTickets() {
                 <div key={ev.id} style={{
                   padding: `${SP.sm}px ${SP.md}px`,
                   background: fromAgent ? CARD_HDR : swatch.white,
-                  border: `1px solid ${BORDER2}`, borderRadius: R.md,
+                  border: `1px solid ${BORDER2}`,
                   alignSelf: fromAgent ? 'flex-start' : 'flex-end',
                   maxWidth: '85%',
                 }}>

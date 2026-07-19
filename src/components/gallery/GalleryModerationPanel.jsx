@@ -5,21 +5,7 @@ import { fetchGalleryReports, resolveGalleryReport } from '../../lib/gallery.js'
 import { navigate } from '../../hooks/useRoute.js';
 import Button from '../primitives/Button.jsx';
 import {
-  BODY,
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  INK,
-  MUTED,
-  R,
-  RED,
-  RED_BG,
-  SECOND,
-  SP,
-  sans,
-} from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, INK, MUTED, RED, RED_BG, SECOND, SP, sans } from '../theme.js';
 import { formatDate, human } from './galleryUtils.js';
 
 const STATUS_OPTIONS = [
@@ -37,7 +23,6 @@ function StatusPill({ status }) {
       alignItems: 'center',
       minHeight: 22,
       padding: '2px 7px',
-      borderRadius: R.sm,
       border: `1px solid ${active ? RED : BORDER2}`,
       background: active ? RED_BG : CARD_ALT,
       color: active ? RED : SECOND,
@@ -106,7 +91,7 @@ export default function GalleryModerationPanel() {
   return (
     <div style={{ display: 'grid', gap: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
-        <div style={{ display: 'inline-flex', border: `1px solid ${BORDER}`, borderRadius: R.md, overflow: 'hidden' }}>
+        <div style={{ display: 'inline-flex', border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
           {STATUS_OPTIONS.map(([id, label]) => {
             const active = status === id;
             return (
@@ -135,7 +120,7 @@ export default function GalleryModerationPanel() {
       </div>
 
       {error && (
-        <div style={{ border: `1px solid ${RED}`, borderRadius: R.md, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+        <div style={{ border: `1px solid ${RED}`, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
           {error}
         </div>
       )}
@@ -145,7 +130,7 @@ export default function GalleryModerationPanel() {
           Loading gallery reports...
         </div>
       ) : reports.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+        <div style={{ textAlign: 'center', padding: SP.xl, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
           No gallery reports in this queue.
         </div>
       ) : (
@@ -158,7 +143,6 @@ export default function GalleryModerationPanel() {
                 gap: SP.sm,
                 padding: SP.md,
                 border: `1px solid ${report.status === 'open' ? RED : BORDER}`,
-                borderRadius: R.md,
                 background: report.status === 'open' ? CARD_ALT : CARD,
               }}
             >

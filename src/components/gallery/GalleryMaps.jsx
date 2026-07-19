@@ -12,9 +12,7 @@ import { useStore } from '../../store';
 import { fetchGalleryMaps, fetchGalleryMap } from '../../lib/gallery.js';
 import Button from '../primitives/Button.jsx';
 import {
-  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
-  sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  GOLD_BG, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, sans, serif_, SP, FS, swatch } from '../theme.js';
 
 export default function GalleryMaps({ onNavigate }) {
   const auth = useStore(s => s.auth);
@@ -78,7 +76,7 @@ export default function GalleryMaps({ onNavigate }) {
     <div style={{ fontFamily: sans }}>
       {notice && (
         <div style={{
-          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md, fontSize: FS.sm,
+          margin: `0 0 ${SP.md}px`, padding: `${SP.sm}px ${SP.md}px`, fontSize: FS.sm,
           background: notice.kind === 'ok' ? (swatch.successBg || GOLD_BG) : (swatch.dangerBg || '#fbeaea'),
           color: notice.kind === 'ok' ? INK : (swatch.danger || '#9b1c1c'),
           border: `1px solid ${BORDER}`,
@@ -96,7 +94,7 @@ export default function GalleryMaps({ onNavigate }) {
             {detailLoading && <p style={{ color: MUTED, fontSize: FS.sm }}>Loading preview…</p>}
             {!detailLoading && !d.slug && <p style={{ color: MUTED, fontSize: FS.sm }}>This map is no longer available.</p>}
             {!detailLoading && d.slug && (
-              <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden' }}>
+              <div style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
                 <div style={{ background: CARD_ALT, maxHeight: 420, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {img ? (
                     <img src={img} alt={d.name || 'Map'} style={{ maxWidth: '100%', maxHeight: 420, display: 'block' }} />
@@ -112,7 +110,7 @@ export default function GalleryMaps({ onNavigate }) {
                       <div style={{ fontFamily: sans, fontSize: FS.xs, fontWeight: 700, color: INK, margin: `${SP.xs}px 0` }}>Settlements ({memberList.length})</div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.xs }}>
                         {memberList.map((mm, i) => (
-                          <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px` }}>
+                          <span key={mm.old_id || i} style={{ fontSize: FS.xs, color: SECOND, background: PARCH, border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px` }}>
                             {mm.name || 'Settlement'}{mm.tier ? ` · ${mm.tier}` : ''}
                           </span>
                         ))}
@@ -140,7 +138,7 @@ export default function GalleryMaps({ onNavigate }) {
       {!viewingSlug && (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: SP.md }}>
         {items.map((m) => (
-          <div key={m.slug} style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <div key={m.slug} style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div style={{ height: 130, background: CARD_ALT, position: 'relative' }}>
               {/* Show a picture whenever one exists — an auto-generated thumb
                   (thumb_url) OR the owner cover (image_url, the terrain snapshot
@@ -154,7 +152,7 @@ export default function GalleryMaps({ onNavigate }) {
                   Generated terrain
                 </div>
               )}
-              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: '1px 5px' }}>
+              <span style={{ position: 'absolute', top: 6, right: 6, fontSize: FS.pico, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 0.4, color: SECOND, background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 5px' }}>
                 {m.kind === 'map_with_campaign' ? 'Map + Campaign' : 'Blank map'}
               </span>
             </div>
@@ -164,7 +162,7 @@ export default function GalleryMaps({ onNavigate }) {
               {Array.isArray(m.tags) && m.tags.length > 0 && (
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
                   {m.tags.slice(0, 4).map((t) => (
-                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, borderRadius: R.sm, padding: '1px 5px' }}>{t}</span>
+                    <span key={t} style={{ fontSize: FS.pico, color: MUTED, background: PARCH, padding: '1px 5px' }}>{t}</span>
                   ))}
                 </div>
               )}

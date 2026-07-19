@@ -1,14 +1,6 @@
 import { GALLERY_SORT_OPTIONS } from '../../lib/gallery.js';
 import {
-  BORDER,
-  CARD,
-  BODY,
-  FS,
-  INK,
-  R,
-  SP,
-  sans,
-} from '../theme.js';
+  BORDER, CARD, BODY, FS, INK, SP, sans } from '../theme.js';
 
 export default function GalleryTopbar({ search, setSearch, sort, setSort, total, loading, disabled = false }) {
   return (
@@ -34,7 +26,6 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
             boxSizing: 'border-box',
             padding: '8px 10px',
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
             color: INK,
             fontFamily: sans,
@@ -52,7 +43,6 @@ export default function GalleryTopbar({ search, setSearch, sort, setSort, total,
         style={{
           minHeight: 44,
           border: `1px solid ${BORDER}`,
-          borderRadius: R.md,
           background: CARD,
           color: INK,
           fontFamily: sans,

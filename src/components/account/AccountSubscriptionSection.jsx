@@ -12,7 +12,7 @@ import { Crown, TrendingDown, CreditCard, ArrowRight } from 'lucide-react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, R, FS, swatch, AMBER } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import { useFounderTileEligible } from '../../hooks/useFounderTileEligible.js';
@@ -46,7 +46,7 @@ export default function AccountSubscriptionSection({
         {/* Tier card — P125 / AC-1 grows an "unlock" footer for free users. */}
         <div style={{
           flex: '1 1 180px',
-          background: GOLD_BG, borderRadius: R.lg,
+          background: GOLD_BG,
           border: `1px solid rgba(160,118,42,0.2)`,
           overflow: 'hidden',
         }}>
@@ -78,7 +78,7 @@ export default function AccountSubscriptionSection({
         {/* Credits card — grows "try Narrate" footer when balance is 0. */}
         <div style={{
           flex: '1 1 180px',
-          background: 'rgba(124,58,237,0.06)', borderRadius: R.lg,
+          background: 'rgba(124,58,237,0.06)',
           border: '1px solid rgba(124,58,237,0.15)',
           overflow: 'hidden',
         }}>
@@ -107,7 +107,7 @@ export default function AccountSubscriptionSection({
         {/* Saves card — grows "one save left" / "saves full" footer. */}
         <div style={{
           flex: '1 1 180px',
-          background: 'rgba(42,122,42,0.06)', borderRadius: R.lg,
+          background: 'rgba(42,122,42,0.06)',
           border: '1px solid rgba(42,122,42,0.15)',
           overflow: 'hidden',
         }}>
@@ -185,7 +185,7 @@ export default function AccountSubscriptionSection({
           {purchaseError && (
             <div style={{
               padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-              background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md,
+              background: swatch.dangerBg, border: '1px solid #e8b0b0',
               fontSize: FS.sm, color: swatch.danger,
             }}>
               {purchaseError}
@@ -211,14 +211,14 @@ export default function AccountSubscriptionSection({
                   style={{
                     flex: 1, padding: `${SP.md}px ${SP.sm}px`,
                     background: CARD, border: `2px solid ${accent}20`,
-                    borderRadius: R.lg, cursor: 'pointer', fontFamily: sans,
+                    cursor: 'pointer', fontFamily: sans,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
                     opacity: purchasing ? 0.6 : 1, position: 'relative',
                   }}>
                   {p.discount && (
                     <span style={{
                       position: 'absolute', top: -8, right: -4,
-                      padding: '2px 6px', borderRadius: R.sm, background: accent,
+                      padding: '2px 6px', background: accent,
                       color: swatch.white, fontSize: FS.micro, fontWeight: 800,
                     }}>{p.discount}</span>
                   )}

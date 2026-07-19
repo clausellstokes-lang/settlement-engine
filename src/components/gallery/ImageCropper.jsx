@@ -13,12 +13,8 @@ import { useEffect, useRef, useState } from 'react';
 import { RotateCcw, Check, X } from 'lucide-react';
 
 import {
-  clampOffset,
-  centeredOffset,
-  cropRectFromTransform,
-  outputSize,
-} from './cropGeometry.js';
-import { BORDER2, CARD_ALT, GOLD, MUTED, R, RED, SP, FS, sans } from '../theme.js';
+  clampOffset, centeredOffset, cropRectFromTransform, outputSize, } from './cropGeometry.js';
+import { BORDER2, CARD_ALT, GOLD, MUTED, RED, SP, FS, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -164,7 +160,6 @@ export default function ImageCropper({ src, aspect = 16 / 9, onCancel, onCommit,
           width: '100%',
           aspectRatio: String(aspect),
           overflow: 'hidden',
-          borderRadius: R.md,
           border: `1px solid ${BORDER2}`,
           background: CARD_ALT,
           cursor: dragging ? 'grabbing' : 'grab',

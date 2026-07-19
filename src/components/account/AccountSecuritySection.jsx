@@ -18,14 +18,12 @@
  */
 import { useEffect, useState } from 'react';
 import {
-  KeyRound, Link2, Unlink, Check,
-} from 'lucide-react';
+  KeyRound, Link2, Unlink, Check, } from 'lucide-react';
 import { auth as authService } from '../../lib/auth.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
-} from '../theme.js';
+  GOLD_TXT, INK, MUTED, SECOND, BODY, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import { TINT_GOLD } from './accountTheme.js';
 import Section from './AccountSection.jsx';
 import Pill from '../primitives/Pill.jsx';
@@ -39,14 +37,14 @@ const LINKABLE = [
 function fieldStyle() {
   return {
     padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`,
-    borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK,
+    fontSize: FS.sm, fontFamily: sans, color: INK,
     boxSizing: 'border-box', width: '100%',
   };
 }
 
 function ErrorBanner({ children }) {
   return (
-    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+    <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', fontSize: FS.sm, color: swatch.danger }}>
       {children}
     </div>
   );
@@ -54,7 +52,7 @@ function ErrorBanner({ children }) {
 
 function OkBanner({ children }) {
   return (
-    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+    <div style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', fontSize: FS.sm, color: swatch.success }}>
       {children}
     </div>
   );

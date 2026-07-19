@@ -26,18 +26,13 @@ import { serializeWorldSnapshotPublic } from '../../domain/display/worldSnapshot
 import { buildRealmArcSummary } from '../../domain/display/realmArcSummary.js';
 import { captureMapThumb, captureCampaignThumb } from '../../lib/mapThumb.js';
 import {
-  KIND_OPTIONS,
-  suggestedTagsForCampaign,
-  campaignFacets,
-} from './galleryMapsUtils.js';
+  KIND_OPTIONS, suggestedTagsForCampaign, campaignFacets, } from './galleryMapsUtils.js';
 import GalleryDescriptionEditor from '../GalleryDescriptionEditor.jsx';
 import CoverImageField from './CoverImageField.jsx';
 import WorldSectionToggles, { WORLD_SECTIONS } from './WorldSectionToggles.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  BORDER, BORDER2, CARD, CARD_ALT, sans, SP, R, FS, GREEN, GREEN_BG,
-  RED, INK, BODY, MUTED,
-} from '../theme.js';
+  BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, GREEN_BG, RED, INK, BODY, MUTED } from '../theme.js';
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -262,7 +257,7 @@ export default function MapShareEditor({
     return (
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '6px 10px', borderRadius: R.md,
+        padding: '6px 10px',
         background: 'transparent', color: MUTED,
         fontSize: FS.xs, fontFamily: sans, fontStyle: 'italic',
       }}>
@@ -401,7 +396,7 @@ export default function MapShareEditor({
   const detailsForm = detailsOpen && (
     <div style={{
       width: '100%', display: 'grid', gap: SP.sm, padding: SP.sm,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, marginTop: SP.xs,
+      border: `1px solid ${BORDER2}`, background: CARD_ALT, marginTop: SP.xs,
     }}>
       <Field label="What to share">
         <KindPicker value={kind} onChange={setKind} canShareCampaign={canShareCampaign} />
@@ -409,7 +404,7 @@ export default function MapShareEditor({
       {/* Owner opt-in: allow other DMs to import (clone) the shared map. */}
       <label htmlFor="map-share-importable" style={{
         display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-        padding: SP.sm, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+        padding: SP.sm, border: `1px solid ${BORDER2}`, background: CARD,
       }}>
         <input
           id="map-share-importable"
@@ -435,7 +430,7 @@ export default function MapShareEditor({
         {seedingCover && !imageUrl ? (
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            minHeight: 96, border: `1px dashed ${BORDER}`, borderRadius: R.md,
+            minHeight: 96, border: `1px dashed ${BORDER}`,
             background: CARD, color: MUTED, fontFamily: sans, fontSize: FS.xxs,
           }}>
             Capturing the map for the cover…
@@ -458,7 +453,7 @@ export default function MapShareEditor({
           onChange={event => setImageAlt(event.target.value)}
           placeholder={campaign?.name ? `Map of ${campaign.name}` : 'Image description'}
           style={{
-            minHeight: 32, border: `1px solid ${BORDER}`, borderRadius: R.md,
+            minHeight: 32, border: `1px solid ${BORDER}`,
             background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
           }}
         />
@@ -471,7 +466,7 @@ export default function MapShareEditor({
           onChange={event => setTagsInput(event.target.value)}
           placeholder="coastal, small realm, at war"
           style={{
-            minHeight: 32, border: `1px solid ${BORDER}`, borderRadius: R.md,
+            minHeight: 32, border: `1px solid ${BORDER}`,
             background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, padding: '6px 8px',
           }}
         />
@@ -497,7 +492,7 @@ export default function MapShareEditor({
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap', fontFamily: sans, width: '100%' }}>
         <span style={{
           display: 'inline-flex', alignItems: 'center', gap: 5,
-          padding: '4px 9px', borderRadius: R.md,
+          padding: '4px 9px',
           background: GREEN_BG, color: GREEN, border: `1px solid ${GREEN}`,
           fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em',
         }}>

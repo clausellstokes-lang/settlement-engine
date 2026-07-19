@@ -12,7 +12,7 @@
  * checkboxes and hands back the next Set.
  */
 
-import { sans, SP, R, FS, CARD, CARD_ALT, BORDER2, INK, BODY, MUTED } from '../theme.js';
+import { sans, SP, FS, CARD, CARD_ALT, BORDER2, INK, BODY, MUTED } from '../theme.js';
 
 /**
  * The five revealable world sections: [key, label, helper]. The keys MUST stay in
@@ -44,7 +44,7 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
   return (
     <div style={{
       display: 'grid', gap: SP.xs, padding: SP.sm,
-      border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD,
+      border: `1px solid ${BORDER2}`, background: CARD,
     }}>
       <div style={{ display: 'grid', gap: 2 }}>
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
@@ -62,7 +62,7 @@ export default function WorldSectionToggles({ enabled, onToggle }) {
             htmlFor={id}
             style={{
               display: 'flex', alignItems: 'flex-start', gap: 8, cursor: 'pointer',
-              padding: SP.xs, border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT,
+              padding: SP.xs, border: `1px solid ${BORDER2}`, background: CARD_ALT,
             }}
           >
             <input

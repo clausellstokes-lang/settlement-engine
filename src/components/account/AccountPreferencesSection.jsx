@@ -13,8 +13,7 @@
  */
 import { useStore } from '../../store/index.js';
 import {
-  INK, SECOND, BODY, BORDER, sans, SP, R, FS, swatch,
-} from '../theme.js';
+  INK, SECOND, BODY, BORDER, sans, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 
 const PDF_STYLES = [
@@ -25,7 +24,7 @@ const PDF_STYLES = [
 
 function selectStyle() {
   return {
-    padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md,
+    padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`,
     fontSize: FS.sm, fontFamily: sans, color: INK, background: swatch.white,
   };
 }

@@ -20,20 +20,7 @@ import { ExternalLink } from 'lucide-react';
 
 import { TIER_LABELS } from '../new/design.js';
 import {
-  BORDER,
-  BORDER2,
-  CARD,
-  CARD_ALT,
-  FS,
-  GOLD,
-  INK,
-  MUTED,
-  R,
-  SECOND,
-  SP,
-  sans,
-  serif_,
-} from '../theme.js';
+  BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, SP, sans, serif_ } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { galleryUrlFor, human } from './galleryUtils.js';
 
@@ -45,7 +32,7 @@ function LinkedMemberCard({ member }) {
   return (
     <a
       href={galleryUrlFor(member.public_slug)}
-      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, textDecoration: 'none' }}
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: SP.sm, padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, background: CARD, textDecoration: 'none' }}
     >
       <span style={{ minWidth: 0 }}>
         <span style={{ display: 'block', color: INK, fontFamily: serif_, fontSize: FS.md, fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -77,7 +64,7 @@ function InlineMemberCard({ member }) {
   };
   const canExpand = !!member?.settlement;
   return (
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${BORDER}`, background: CARD, overflow: 'hidden' }}>
       <Button
         variant="ghost"
         fullWidth
