@@ -65,28 +65,64 @@ function makeClaimTable(mode: 'track' | 'absent' = 'track') {
 
 /** A recording stub of the service-role admin client. Captures every RPC/auth/table
  *  write so a test can assert what the handler did (or, for forgeries, did NOT do). */
-function makeStub(claimMode: 'track' | 'absent' = 'track') {
+function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Record<string, unknown> | null } = {}) {
   const claims = makeClaimTable(claimMode);
   const calls: { rpc: Array<{ fn: string; args: unknown }>; authUpdates: unknown[]; profileUpdates: unknown[] } = {
     rpc: [], authUpdates: [], profileUpdates: [],
   };
+  // money_events model (156): upsert dedupes on event_key (ignoreDuplicates → a
+  // replayed webhook re-inserts nothing); update().in() is the status flip.
+  const moneyEvents: Array<Record<string, unknown>> = [];
   const client = {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
     from: (table: string) => {
       if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'money_events') {
+        return {
+          upsert: (row: Record<string, unknown>, _o?: { onConflict?: string; ignoreDuplicates?: boolean }) => {
+            const key = row.event_key as string;
+            // Model the table's `status` default ('paid') the webhook relies on.
+            if (!moneyEvents.some((r) => r.event_key === key)) moneyEvents.push({ status: 'paid', ...row });
+            return Promise.resolve({ data: null, error: null });
+          },
+          update: (vals: Record<string, unknown>) => ({
+            in: (_col: string, keys: string[]) => {
+              for (const r of moneyEvents) if (keys.includes(r.event_key as string)) Object.assign(r, vals);
+              return Promise.resolve({ data: null, error: null });
+            },
+          }),
+        };
+      }
+      // profiles lookups may be seeded (findUserIdForStripeCustomer / the invoice
+      // renewal path); every other table's select defaults to empty. The update
+      // chain returns a thenable that also carries .eq()/.is() so both
+      // `.update().eq()` (awaited) and `.update().eq().is()` (the sub back-fill)
+      // resolve without a TypeError.
+      const seeded = table === 'profiles' ? (opts.profile ?? null) : null;
+      const upd = (vals: unknown) => {
+        calls.profileUpdates.push(vals);
+        const chain: Record<string, unknown> = {
+          eq: () => chain, is: () => Promise.resolve({ error: null }),
+          then: (res: (v: { error: null }) => unknown) => res({ error: null }),
+        };
+        return chain;
+      };
       return {
-        update: (vals: unknown) => ({ eq: (_col: string, _val: string) => { calls.profileUpdates.push(vals); return Promise.resolve({ error: null }); } }),
-        // Chainable select builder: supports any number of .eq() before .maybeSingle()
-        // (the checkout dedup chains .eq('source',…).eq('metadata->>stripe_session_id',…)).
+        update: upd,
+        // No-op upsert for incidental tables (e.g. single_dossier_purchases on the
+        // anonymous dossier path) so those writes don't TypeError under this stub.
+        upsert: () => Promise.resolve({ data: null, error: null }),
+        // Chainable select builder: supports any number of .eq()/.ilike()/.is()
+        // before .maybeSingle() (the checkout dedup chains .eq('source',…)…).
         select: () => {
-          const builder = { eq: () => builder, ilike: () => builder, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+          const builder = { eq: () => builder, ilike: () => builder, is: () => builder, limit: () => builder, maybeSingle: () => Promise.resolve({ data: seeded, error: null }) };
           return builder;
         },
       };
     },
     rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
   };
-  return { calls, claims, adminClient: () => client };
+  return { calls, claims, moneyEvents, adminClient: () => client };
 }
 
 /** Stripe v1 signature header: t=<ts>,v1=HMAC_SHA256(secret, `${ts}.${payload}`). */
@@ -1725,4 +1761,174 @@ Deno.test('a single_dossier WITHOUT a checkout_token is a no-op bind (not an err
   const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
   assertEquals(res.status, 200);
   assertEquals(stub.binds.length, 0);
+});
+
+// ── Money spine (156/157 money_events, DESIGN_MONEY_WAVE §2, slice M-1) ───────
+// The webhook mirrors every successful money movement into money_events. These
+// EXECUTE the mirror through the real handler and assert the row (kind, amount,
+// receipt, event_key redelivery shield, and the refund/dispute status flip).
+
+// deno-lint-ignore no-explicit-any
+function moneyStripe(opts: { receiptUrl?: string; chargeId?: string; hostedInvoiceUrl?: string; sessionForPI?: string | null } = {}): any {
+  return {
+    paymentIntents: {
+      retrieve: (_id: string, _p?: unknown) => Promise.resolve({
+        latest_charge: { id: opts.chargeId ?? 'ch_x', receipt_url: opts.receiptUrl ?? 'https://stripe.test/receipt' },
+      }),
+    },
+    invoices: {
+      retrieve: (_id: string) => Promise.resolve({ hosted_invoice_url: opts.hostedInvoiceUrl ?? 'https://stripe.test/inv', charge: 'ch_inv' }),
+    },
+    // charge→session resolution for refund/dispute clawback keys.
+    charges: { retrieve: (_id: string) => Promise.resolve({ id: 'ch_x', invoice: null, payment_intent: 'pi_ref' }) },
+    checkout: { sessions: { list: (_p: { payment_intent: string }) => Promise.resolve({ data: opts.sessionForPI === null ? [] : [{ id: opts.sessionForPI ?? 'cs_default' }] }) } },
+    subscriptions: { retrieve: (_id: string) => Promise.resolve({ status: 'active' }) },
+  };
+}
+
+Deno.test('money spine: a paid credit-pack checkout mirrors exactly ONE money_events row, replay-safe', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r1', chargeId: 'ch_1' });
+  const mk = (evtId: string) => JSON.stringify({
+    id: evtId, type: 'checkout.session.completed',
+    data: { object: { id: 'cs_cp', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_cp',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  const b1 = mk('evt_cp_1');
+  const res = await handleStripeWebhook(req(b1, { 'stripe-signature': await sign(b1, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  const row = stub.moneyEvents[0];
+  assertEquals(row.kind, 'credit_pack');
+  assertEquals(row.event_key, 'sess:cs_cp');
+  assertEquals(row.user_id, 'u1');
+  assertEquals(row.amount_cents, 500);
+  assertEquals(row.currency, 'usd');
+  assertEquals(row.receipt_url, 'https://stripe.test/r1');
+  assertEquals(row.stripe_charge_id, 'ch_1');
+  assertEquals(row.status, 'paid');
+  // Redelivery under a NEW event id (same session) — the event_key upsert shield
+  // holds it at exactly one row.
+  const b2 = mk('evt_cp_2');
+  await handleStripeWebhook(req(b2, { 'stripe-signature': await sign(b2, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1);
+});
+
+Deno.test('money spine: a founder_lifetime checkout mirrors a founder_seat row with its receipt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rf', chargeId: 'ch_f' });
+  const body = JSON.stringify({
+    id: 'evt_f', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_f', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_f',
+      metadata: { supabase_user_id: 'uf', product: 'founder_lifetime' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'founder_seat');
+  assertEquals(stub.moneyEvents[0].amount_cents, 9900);
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/rf');
+});
+
+Deno.test('money spine: an anonymous single_dossier mirrors a row with user_id NULL (LAW 9)', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/rd', chargeId: 'ch_d' });
+  const body = JSON.stringify({
+    id: 'evt_d', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_d', payment_status: 'paid', amount_total: 299, currency: 'usd', payment_intent: 'pi_d',
+      customer_details: { email: 'buyer@x.com' },
+      metadata: { product: 'single_dossier', anonymous: 'true', checkout_token: 'tok_abc' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'single_dossier');
+  assertEquals(stub.moneyEvents[0].user_id, null);
+  assertEquals(stub.moneyEvents[0].amount_cents, 299);
+});
+
+Deno.test('money spine: a premium checkout mirrors subscription_start with the hosted invoice receipt', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ hostedInvoiceUrl: 'https://stripe.test/hosted' });
+  const body = JSON.stringify({
+    id: 'evt_p', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_p', payment_status: 'paid', amount_total: 900, currency: 'usd',
+      subscription: 'sub_p', invoice: 'in_p', customer: 'cus_p',
+      metadata: { supabase_user_id: 'up', product: 'premium' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'subscription_start');
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/hosted');
+  assertEquals(stub.moneyEvents[0].stripe_invoice_id, 'in_p');
+});
+
+Deno.test('money spine: a refund flips the mirrored row status to refunded', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r2', chargeId: 'ch_2', sessionForPI: 'cs_ref' });
+  const paid = JSON.stringify({
+    id: 'evt_seed_r', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_ref', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_ref',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].status, 'paid');
+  const refund = JSON.stringify({
+    id: 'evt_ref', type: 'charge.refunded',
+    data: { object: { id: 'ch_2', invoice: null, payment_intent: 'pi_ref' } },
+  });
+  const res = await handleStripeWebhook(req(refund, { 'stripe-signature': await sign(refund, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+});
+
+Deno.test('money spine: a dispute flips the mirrored row status to disputed', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/r3', chargeId: 'ch_3', sessionForPI: 'cs_dis' });
+  const paid = JSON.stringify({
+    id: 'evt_seed_d', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_dis', payment_status: 'paid', amount_total: 500, currency: 'usd', payment_intent: 'pi_ref',
+      metadata: { supabase_user_id: 'u1', product: 'credits_25', credits: '25' } } },
+  });
+  await handleStripeWebhook(req(paid, { 'stripe-signature': await sign(paid, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents[0].status, 'paid');
+  const dispute = JSON.stringify({
+    id: 'evt_dis', type: 'charge.dispute.created',
+    data: { object: { id: 'dp_1', charge: 'ch_3' } },
+  });
+  const res = await handleStripeWebhook(req(dispute, { 'stripe-signature': await sign(dispute, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  assertEquals(stub.moneyEvents[0].status, 'disputed');
+});
+
+Deno.test('money spine: a subscription RENEWAL invoice mirrors one row; a subscription_create invoice does NOT (no double-count)', async () => {
+  // subscription_cycle (renewal) → one subscription_renewal row.
+  const cycleStub = makeStub('track', { profile: { id: 'u_sub', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const cycle = JSON.stringify({
+    id: 'evt_cycle', type: 'invoice.paid',
+    data: { object: { id: 'in_cycle', customer: 'cus_x', billing_reason: 'subscription_cycle',
+      subscription: 'sub_x', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+      hosted_invoice_url: 'https://stripe.test/renewal' } },
+  });
+  const res1 = await handleStripeWebhook(req(cycle, { 'stripe-signature': await sign(cycle, SECRET) }), { adminClient: cycleStub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res1.status, 200);
+  assertEquals(cycleStub.moneyEvents.length, 1);
+  assertEquals(cycleStub.moneyEvents[0].kind, 'subscription_renewal');
+  assertEquals(cycleStub.moneyEvents[0].event_key, 'inv:in_cycle');
+  assertEquals(cycleStub.moneyEvents[0].receipt_url, 'https://stripe.test/renewal');
+
+  // subscription_create → the *_start row comes from the checkout session, so the
+  // invoice writes NO money_events row (a Checkout-created sub fires both events).
+  const createStub = makeStub('track', { profile: { id: 'u_sub', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const create = JSON.stringify({
+    id: 'evt_create', type: 'invoice.paid',
+    data: { object: { id: 'in_create', customer: 'cus_x', billing_reason: 'subscription_create',
+      subscription: 'sub_x', amount_paid: 900, currency: 'usd', period_end: 1893456000,
+      hosted_invoice_url: 'https://stripe.test/create' } },
+  });
+  const res2 = await handleStripeWebhook(req(create, { 'stripe-signature': await sign(create, SECRET) }), { adminClient: createStub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res2.status, 200);
+  assertEquals(createStub.moneyEvents.length, 0);
 });

@@ -1172,9 +1172,206 @@ async function clawbackDossierEntitlementForSession(
   }
 }
 
+// ── The money ledger mirror (156, DESIGN_MONEY_WAVE §2) ──────────────────────
+//
+// Every successful money movement mirrors ONE row into money_events (the purchase
+// ledger reads it). Defined here (below handleStripeWebhook, with the 108 set) so
+// this file's signature-first textual order is untouched — none of these helpers
+// read session.metadata, and they run only from dispatchStripeEvent (after the
+// signature is verified). EVERY writer is NEVER-THROW into the money path: a mirror
+// failure logs via logError and must not stall fulfillment (the referralEmails /
+// dossier-voucher posture). event_key is the redelivery shield — the upsert
+// ignoreDuplicates makes a replayed webhook re-insert nothing.
+type MoneyEventKind =
+  | 'credit_pack' | 'founder_seat' | 'single_dossier'
+  | 'subscription_start' | 'subscription_renewal'
+  | 'surveyor_start' | 'surveyor_renewal' | 'auto_reload'
+  | 'seat_transfer_payment' | 'seat_transfer_payout' | 'refund_note';
+
+/** Server-composed, human-readable description for a mirrored row (NOT NULL). The
+ *  UI maps kind→label itself (purchaseHistory.js); this is the durable audit text. */
+function describeMoneyKind(kind: MoneyEventKind, extra: { credits?: number } = {}): string {
+  switch (kind) {
+    case 'credit_pack': return extra.credits ? `Credit pack (${extra.credits} credits)` : 'Credit pack';
+    case 'founder_seat': return 'Founder Lifetime seat';
+    case 'single_dossier': return 'Single dossier export';
+    case 'subscription_start': return 'Cartographer subscription';
+    case 'subscription_renewal': return 'Cartographer subscription renewal';
+    case 'surveyor_start': return 'Surveyor subscription';
+    case 'surveyor_renewal': return 'Surveyor subscription renewal';
+    case 'auto_reload': return 'AI credit auto-reload';
+    case 'seat_transfer_payment': return 'Founder seat transfer';
+    case 'seat_transfer_payout': return 'Founder seat transfer payout';
+    case 'refund_note': return 'Refund note';
+    default: return 'Purchase';
+  }
+}
+
+interface MoneyEventRow {
+  event_key: string;
+  user_id: string | null;
+  occurred_at: string;
+  kind: MoneyEventKind;
+  amount_cents: number;
+  currency: string;
+  description: string;
+  receipt_url: string | null;
+  stripe_session_id?: string | null;
+  stripe_invoice_id?: string | null;
+  stripe_payment_intent_id?: string | null;
+  stripe_charge_id?: string | null;
+  metadata?: Record<string, unknown>;
+}
+
+/** Upsert one money_events row, deduped on event_key (a replayed webhook re-inserts
+ *  nothing). NEVER throws — a mirror-write failure is logged, not propagated. */
+async function writeMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  row: MoneyEventRow,
+): Promise<void> {
+  try {
+    const { error } = await supabase
+      .from('money_events')
+      .upsert(row, { onConflict: 'event_key', ignoreDuplicates: true });
+    if (error) {
+      logError('stripe-webhook', row.user_id, error.message, { stage: 'write_money_event', event_key: row.event_key });
+    }
+  } catch (err) {
+    logError('stripe-webhook', row.user_id, err, { stage: 'write_money_event', event_key: row.event_key });
+  }
+}
+
+/** Retrieve a one-time payment's hosted receipt via payment_intent → latest_charge.
+ *  One extra Stripe call on the fulfillment path; the caller isolates it so a miss
+ *  leaves receipt_url NULL (honest degradation) without dropping the ledger row. */
+async function captureChargeReceipt(
+  stripeApi: typeof stripe,
+  paymentIntentId: string,
+): Promise<{ receiptUrl: string | null; chargeId: string | null }> {
+  const pi = await stripeApi.paymentIntents.retrieve(paymentIntentId, { expand: ['latest_charge'] });
+  const charge = pi?.latest_charge;
+  if (charge && typeof charge === 'object') {
+    return { receiptUrl: (charge as Stripe.Charge).receipt_url ?? null, chargeId: (charge as Stripe.Charge).id ?? null };
+  }
+  return { receiptUrl: null, chargeId: null };
+}
+
+/** Mirror ONE checkout fulfillment into money_events (event_key sess:{id}). One-time
+ *  products capture the charge receipt (payment_intent → latest_charge); subscription
+ *  starts capture the hosted invoice receipt (session.invoice). Subscriptions are
+ *  mirrored HERE (the *_start row); their renewals come from invoice.paid on
+ *  billing_reason='subscription_cycle', so a Checkout-created subscription — which
+ *  fires BOTH completed AND a subscription_create invoice — is never double-counted. */
+async function mirrorCheckoutMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  session: Stripe.Checkout.Session,
+  kind: MoneyEventKind,
+  userId: string | null,
+  credits: number,
+): Promise<void> {
+  try {
+    const isSubscription = kind === 'subscription_start' || kind === 'surveyor_start';
+    const paymentIntentId = typeof session.payment_intent === 'string'
+      ? session.payment_intent : session.payment_intent?.id ?? null;
+    const invoiceId = typeof session.invoice === 'string'
+      ? session.invoice : session.invoice?.id ?? null;
+
+    let receiptUrl: string | null = null;
+    let chargeId: string | null = null;
+    try {
+      if (isSubscription && invoiceId) {
+        const inv = await stripeApi.invoices.retrieve(invoiceId);
+        receiptUrl = inv?.hosted_invoice_url ?? null;
+        chargeId = typeof inv?.charge === 'string' ? inv.charge : (inv?.charge as Stripe.Charge | null)?.id ?? null;
+      } else if (!isSubscription && paymentIntentId) {
+        const cap = await captureChargeReceipt(stripeApi, paymentIntentId);
+        receiptUrl = cap.receiptUrl;
+        chargeId = cap.chargeId;
+      }
+    } catch (recErr) {
+      // Receipt is optional — a miss leaves the column NULL and the UI shows no
+      // link (honest degradation). Log, still write the row.
+      logError('stripe-webhook', userId, recErr, { stage: 'mirror_receipt_capture', session_id: session.id });
+    }
+
+    await writeMoneyEvent(supabase, {
+      event_key: `sess:${session.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind,
+      amount_cents: typeof session.amount_total === 'number' ? session.amount_total : 0,
+      currency: session.currency ?? 'usd',
+      description: describeMoneyKind(kind, { credits }),
+      receipt_url: receiptUrl,
+      stripe_session_id: session.id,
+      stripe_invoice_id: invoiceId,
+      stripe_payment_intent_id: paymentIntentId,
+      stripe_charge_id: chargeId,
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'mirror_checkout_money_event', session_id: session.id, kind });
+  }
+}
+
+/** Mirror a subscription RENEWAL invoice into money_events (event_key inv:{id}). The
+ *  hosted invoice url is the permanent receipt. NEVER throws. */
+async function mirrorInvoiceMoneyEvent(
+  supabase: ReturnType<typeof adminClient>,
+  invoice: Stripe.Invoice,
+  userId: string,
+  kind: MoneyEventKind,
+): Promise<void> {
+  try {
+    await writeMoneyEvent(supabase, {
+      event_key: `inv:${invoice.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind,
+      amount_cents: typeof invoice.amount_paid === 'number' ? invoice.amount_paid : 0,
+      currency: invoice.currency ?? 'usd',
+      description: describeMoneyKind(kind),
+      receipt_url: invoice.hosted_invoice_url ?? null,
+      stripe_invoice_id: invoice.id,
+      stripe_payment_intent_id: typeof invoice.payment_intent === 'string'
+        ? invoice.payment_intent : invoice.payment_intent?.id ?? null,
+      stripe_charge_id: typeof invoice.charge === 'string'
+        ? invoice.charge : (invoice.charge as Stripe.Charge | null)?.id ?? null,
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'mirror_invoice_money_event', invoice_id: invoice.id, kind });
+  }
+}
+
+/** Flip the mirrored row's status on a refund/dispute. Keyed on the SAME candidate
+ *  keys resolveChargeClawbackKeys already computes (sess:/inv: forms) — the one
+ *  sanctioned mutation on money_events. NEVER throws (a status-mirror failure must
+ *  not stall the referral/dossier/founder clawbacks running alongside it). */
+async function flipMoneyEventStatus(
+  supabase: ReturnType<typeof adminClient>,
+  keys: string[],
+  status: 'refunded' | 'disputed',
+): Promise<void> {
+  if (keys.length === 0) return;
+  try {
+    const eventKeys = keys.flatMap((k) => [`sess:${k}`, `inv:${k}`]);
+    const { error } = await supabase
+      .from('money_events')
+      .update({ status })
+      .in('event_key', eventKeys);
+    if (error) {
+      logError('stripe-webhook', null, error.message, { stage: 'flip_money_event_status', status });
+    }
+  } catch (err) {
+    logError('stripe-webhook', null, err, { stage: 'flip_money_event_status', status });
+  }
+}
+
 // The per-event handlers, extracted from the inline switch so the claim/release
 // bracket above stays readable. Behavior is IDENTICAL to the previous inline
-// switch — every guard, log line, and throw is preserved verbatim.
+// switch — every guard, log line, and throw is preserved verbatim; the money_events
+// mirror calls added below are additive and NEVER-throw (they cannot change any
+// existing guard, log, or throw).
 async function dispatchStripeEvent(
   event: Stripe.Event,
   supabase: ReturnType<typeof adminClient>,
@@ -1354,6 +1551,20 @@ async function dispatchStripeEvent(
         // Stripe's webhook dashboard + retries instead of being swallowed.
         throw new Error(`Unhandled checkout product: ${product || '(missing)'} (session=${session.id})`);
       }
+
+      // MONEY LEDGER MIRROR (156): one money_events row per successful fulfilment.
+      // Runs only after the branches above complete — the unpaid-defer and the
+      // out-of-order dead-subscription paths `break` before reaching here, so no
+      // un-fulfilled session is ever mirrored. Anonymous single_dossier mirrors
+      // with user_id NULL (a financial record with no owner). NEVER-throw.
+      let mirrorKind: MoneyEventKind | null = null;
+      if (product === 'premium') mirrorKind = 'subscription_start';
+      else if (product === 'founder_lifetime') mirrorKind = 'founder_seat';
+      else if (product === 'single_dossier') mirrorKind = 'single_dossier';
+      else if (credits > 0) mirrorKind = 'credit_pack';
+      if (mirrorKind) {
+        await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, mirrorKind, userId ?? null, credits);
+      }
       break;
     }
 
@@ -1384,6 +1595,13 @@ async function dispatchStripeEvent(
     case 'invoice.payment_succeeded': {
       const invoice = event.data.object as Stripe.Invoice;
       const profile = await grantMonthlyAllowanceIfNeeded(supabase, invoice);
+      // MONEY LEDGER (156): mirror RENEWALS only (billing_reason 'subscription_
+      // cycle'). The *_start row is written from the checkout session, so a
+      // subscription_create invoice must NOT write a second row (a Checkout-created
+      // subscription fires both events). NEVER-throw.
+      if (profile?.userId && invoice.billing_reason === 'subscription_cycle') {
+        await mirrorInvoiceMoneyEvent(supabase, invoice, profile.userId, 'subscription_renewal');
+      }
       // REFERRAL (107): the referee's FIRST paid subscription invoice
       // (billing_reason 'subscription_create' — renewals are 'subscription_
       // cycle') with real money moved. grant_referral re-asserts both gates.
@@ -1434,6 +1652,10 @@ async function dispatchStripeEvent(
         // and the 30-credit bonus. No-ops for every key that never granted the bonus.
         await clawbackFounderForSession(supabase, key);
       }
+      // MONEY LEDGER (156): flip the mirrored row's status (refund → 'refunded',
+      // dispute → 'disputed') on the SAME candidate keys. The one sanctioned
+      // mutation on money_events; NEVER-throw so it can't stall the clawbacks above.
+      await flipMoneyEventStatus(supabase, keys, event.type === 'charge.dispute.created' ? 'disputed' : 'refunded');
       break;
     }
 
