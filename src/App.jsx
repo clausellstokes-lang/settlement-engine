@@ -610,7 +610,7 @@ export default function App() {
                         color: active ? GOLD : PARCH_100,
                         fontSize: FS.sm, fontWeight: active ? 700 : 500,
                         fontFamily: sans,
-                        letterSpacing: '0.04em', textTransform: 'none',
+                        letterSpacing: '0.14em', textTransform: 'uppercase',
                         transition: 'all 0.2s',
                       }}
                     >

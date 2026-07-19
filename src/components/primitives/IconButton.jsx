@@ -17,7 +17,10 @@
 import useIsMobile from '../../hooks/useIsMobile.js';
 
 const TONES = {
-  default:  { bg: '#fff',                       fg: '#1c1409', border: '#d2bd96', hover: '#fffbf5' },
+  // THE OC INSTRUMENT BASE FACE (organic craft §2): quiet machined parchment,
+  // ink glyph, perceivable gold-hairline boundary — the reserved instrument
+  // tokens (--oc-btn-*), AA / 1.4.11 pinned in contrast.test.js.
+  default:  { bg: 'var(--oc-btn-fill)',         fg: 'var(--oc-btn-ink)', border: 'var(--oc-btn-border)', hover: '#fffbf5' },
   primary:  { bg: '#a0762a',                    fg: '#ffffff', border: '#a0762a', hover: '#8c651e' },
   ghost:    { bg: 'transparent',                fg: '#6b5340', border: 'transparent', hover: 'rgba(160,118,42,0.08)' },
   active:   { bg: 'rgba(160,118,42,0.12)',      fg: '#1c1409', border: '#a0762a', hover: 'rgba(160,118,42,0.18)' },
@@ -53,6 +56,7 @@ export default function IconButton({
   Icon, label, onClick,
   tone = 'default', size = 'md',
   disabled, pressed, type = 'button',
+  className = '',
   ...rest
 }) {
   if (!label) {
@@ -79,6 +83,8 @@ export default function IconButton({
       aria-label={label || 'button'}
       title={label || ''}
       aria-pressed={pressed === undefined ? undefined : !!pressed}
+      // Instrument press (organic motion #5); caller className preserved after.
+      className={`oc-m-press ${className}`.trim()}
       style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         // Desktop: fixed box. Mobile: floor to >=44 in both axes (min-* lets the
