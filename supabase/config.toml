@@ -427,6 +427,14 @@ verify_jwt = false
 [functions.pricing-resync-cron]
 verify_jwt = false
 
+# Cron-invoked nightly retention-expiry warning (migration 163, pg_net → this
+# function), authenticated by the x-cron-secret shared secret
+# (RETENTION_WARNING_CRON_SECRET), not a JWT — fail-closed on a wrong/missing
+# secret (403) and refuses to run unconfigured (503). Same posture as
+# pricing-resync-cron; the platform gate would reject the JWT-less cron call.
+[functions.retention-warning-cron]
+verify_jwt = false
+
 # Per-template self-auth: authenticated templates read the recipient from
 # auth.getUser() (401 without it); the anonymous cap_warning path takes an explicit
 # recipient behind a per-IP/per-recipient rate limit + bot guard. The platform gate
