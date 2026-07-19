@@ -383,6 +383,17 @@ A+ at this stage, rinse and repeat.")
   registry idiom). Same machinery beneath: debit-point trigger · off-session
   PaymentIntent · webhook-gated grants · idempotency lock · SCA
   notify-to-complete · migration written-not-deployed.
+  ⬛ WAVE B #14 — THE PURCHASE LEDGER (owner-commissioned 2026-07-19, MERGES
+  with #13's history table — one ledger for every money event): a past-
+  purchases section in the account page (C11 registry-ledger idiom): date ·
+  kind (dossier/credits/auto-top-up/subscription renewal) · amount · the
+  STRIPE-HOSTED receipt link (receipt_url for one-time; hosted invoice for
+  renewals — permanent links captured at webhook time). Architecture:
+  WEBHOOK-MIRRORED local purchase_history table (checkout.session.completed +
+  invoice.paid handlers write rows; RLS per-user; the page reads OUR table —
+  no client Stripe calls, instant, offline-proof) + a one-time backfill for
+  pre-existing purchases · migration WRITTEN-NOT-DEPLOYED · zero eager (the
+  account page is lazy) · paid-surface behavior untouched (read-only surface).
   ⭐ WAVE C (the B re-audit, 2026-07-19 — the manager's own "stage-blocked"
   label was safety-shaped): the §16 traditions seams are BUILDABLE DARK NOW and
   move into the completion waves — festival-week map dress (groundDressOps
