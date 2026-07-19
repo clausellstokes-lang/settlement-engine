@@ -1134,6 +1134,12 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ HELD COMMIT RELEASED (2026-07-19): DESIGN_DEEP_COUPLINGS.md committed (1,155 lines).**
+The architect folded the relationship-memory cohesion in as §10.5 D-7 THE MEMORY WEAVE
+(read-the-substrate + wire-the-ghost-events + contested-loss-writes-a-mark, pre-fold;
+D-7c faction-pair schema ⛔OWNER-GATED). Full doc D-0..D-7, §1-§16. Manager-validated
+structurally complete (recon-hazards §16 last, per house style). The blank-turn hiccup
+cost nothing — all state intact.
 **⬛⭐ THE DEEP COUPLINGS DESIGN IS WRITTEN (2026-07-19) — docs/DESIGN_DEEP_COUPLINGS.md
 (1,040 lines, uncommitted in the main tree; COMMIT HELD until the architect folds in the
 relationship-memory cohesion addendum, then manager-validate + commit the complete doc).**
