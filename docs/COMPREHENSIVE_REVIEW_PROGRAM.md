@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE PERIMETER FINISHER COMPLETE — WAVE D IS FULLY CODE-COMPLETE (2026-07-19,
+claude/wave-d-perimeter @ d93197da, WD-h..WD-k atop 4b65ab82 — manager-verified
+merge-base = composite tip).** All three finisher items at code-complete: (1) TURNSTILE
+wired end-to-end — one lazy flag-gated CaptchaGate mounted at AuthPanel + PurchaseModal
++ BuyThisDossier + SingleDossierSuccessPage, token threaded through auth + checkout,
+server verify FAIL-CLOSED in create-checkout (before any Stripe call) and
+verify-if-present in verify-single-dossier (never trap a paying customer — vetoable
+judgment), CSP pinned, flag-off byte-path PROVEN (no eager chunk carries the flag);
+activation = keys + dashboard only per PERIMETER_RUNBOOK. (2) AI LIMITER — migration
+156_ai_ip_token_bucket (written-not-deployed): cross-instance atomic smooth-refill
+bucket, FAIL-CLOSED per-IP burst gate (429 over / 503 infra — never silent-open) wired
+into ALL 11 AI functions after auth before spend; ⚠ deploy law: 156 pushes WITH/BEFORE
+the edge functions. (3) PIN BACKFILL — 5 pglite files / 37 tests locking the census's
+real-but-unpinned walls (save-limit, AI idempotency, rate-limiter RPCs, deny-all RLS,
+money check constraints). Receipts: deno 317/317 · vitest reds = exactly the 4 parked
+goldens + the sibling budget red · zero eager proven · strict/lint/typecheck 0.
+⚠ CONFIRMED AT FOLD: the 156 DOUBLE-MINT (perimeter token-bucket vs wave-e admin-errors)
+— fold batch 3 executes the contiguous renumber across ALL lanes (wave-e + perimeter +
+money 157-161 + wave-b 162+; names-not-numbers proven in every lane). THE FREED LANE →
+WAVE C DISPATCHED (claude/wave-c-seams off aad6265e, Opus): the five dark traditions
+seams, buildable-dark per THE_REMAINING_ARCHITECTURE.
 **⬛⭐ OWNER RULING (2026-07-19) — THE SECRETS SEAM (general law, relayed to the
 roads architect as a frozen law):** shared campaign links WITHOUT the "show DM secrets"
 toggle must NOT render DM-truth data — NPC movements/whereabouts, military piece
