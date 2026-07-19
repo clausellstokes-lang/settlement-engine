@@ -22,7 +22,7 @@
 import { useMemo } from 'react';
 import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '../../../domain/traditions/genesis.js';
 import {
-  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, R, SECOND, sans,
+  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
 
 const OUTCOME_LABEL = {
@@ -50,12 +50,18 @@ function TraditionRow({ rec, preview }) {
   const provenance = log.length > 0
     ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded — ${recentCauses.join('; ')}`
     : (rec.expression?.epithet || null);
+  // Rule-framed plate (the composite kill-list reconciliation): the card and its
+  // motif stamp fell to the flat idiom — radius struck, the gold tinted wash now a
+  // gold-ruled ink stamp (the ResumeChip precedent). The motif tooltip is struck
+  // too: its text is already VISIBLE as the row's small-cap motif chip, and a
+  // native title= on an aria-hidden glyph is an AT-invisible affordance (the
+  // title= census stays at its shrink-only baseline).
   return (
-    <article style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: '10px 12px' }}>
+    <article style={{ border: `1px solid ${BORDER}`, background: CARD, padding: '10px 12px' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
-        <span aria-hidden="true" title={`${humanizeMotif(rec.coreMotif?.element)} · ${humanizeMotif(rec.coreMotif?.act)}`} style={{
+        <span aria-hidden="true" style={{
           flex: '0 0 auto', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          width: 22, height: 22, borderRadius: R.sm, background: GOLD_BG, color: GOLD,
+          width: 22, height: 22, border: `1px solid ${GOLD}`, color: GOLD,
           fontSize: FS.sm, fontWeight: 900, lineHeight: 1, alignSelf: 'center',
         }}>
           {glyph}
@@ -126,7 +132,7 @@ export default function TraditionsTab({ settlement }) {
         ))}
       </div>
       {preview && (
-        <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: FS.xxs, background: CARD_ALT, border: `1px dashed ${BORDER}`, borderRadius: R.md, padding: '8px 10px' }}>
+        <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: FS.xxs, background: CARD_ALT, border: `1px dashed ${BORDER}`, padding: '8px 10px' }}>
           These are <span style={{ color: GOLD, fontWeight: 800 }}>founding traditions</span> — the core each
           settlement carries from its origin. In a living campaign they gain owners, hold or fail by the year,
           and slowly change.
