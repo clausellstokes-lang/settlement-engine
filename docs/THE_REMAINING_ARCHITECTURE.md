@@ -394,8 +394,8 @@ A+ at this stage, rinse and repeat.")
   no client Stripe calls, instant, offline-proof) + a one-time backfill for
   pre-existing purchases · migration WRITTEN-NOT-DEPLOYED · zero eager (the
   account page is lazy) · paid-surface behavior untouched (read-only surface).
-  ⭐ WAVE E — LAUNCH OPS (PROPOSED 2026-07-19 from the manager's gap sweep;
-  awaiting the owner's go): (A) production error reporting + alerting —
+  ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
+  utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
   owner notification; uptime checks on site + edge functions (the biggest
   gap: launch is otherwise blind); (B) production email posture — custom SMTP
