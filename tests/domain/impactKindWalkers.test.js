@@ -82,6 +82,11 @@ const EXPECTED_VOICE = {
   // order is a quiet court beat carrying its own reason receipt, NOT a town-crier
   // proclamation — deliberately unvoiced (the npc_growth/urban_fabric precedent).
   npc_ladder: null,
+  // THE TRADITIONS (owner commission, engine lift #4): a festival held or set aside is a
+  // chronicle beat carrying its own reason receipt, and no crier VoiceCategory fits a
+  // culture observance — deliberately unvoiced (the npc_ladder/urban_fabric precedent; a
+  // dedicated 'culture' crier is a T-5 surface question, not a T-2 mis-route).
+  tradition: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

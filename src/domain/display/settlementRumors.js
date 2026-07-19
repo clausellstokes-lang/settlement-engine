@@ -163,6 +163,8 @@ export const WHAT_PHRASES = Object.freeze({
   spatial_consequence: 'where in a settlement the blow fell',
   // THE LADDER — a shift in a faction's rank order (owner commission, engine lift #3)
   npc_ladder: 'a change in who holds rank within a faction',
+  // THE TRADITIONS — a settlement's festival held or set aside (owner commission, engine lift #4)
+  tradition: 'a festival kept',
   // W-NAVY sea war
   blockade_declared: 'a harbour sealed off',
   blockade_lifted: 'a harbour opened again',
