@@ -41,13 +41,14 @@ import {
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 import {
-  buildTownMapModel, viewerPalette, TOWN_MAP_LENS_IDS, DEFAULT_STYLE_ID,
+  buildTownMapModel, TOWN_MAP_LENS_IDS,
   buildTownMapPanoramaDrawList, buildChangeView, resolveMapDress,
 } from '../../domain/townMap/index.js';
 import {
   readMapEdits, readLegendPrefs, readStyleLens, normalizeMapEdits,
   withPinNudge, withLayoutVariant, nextLayoutVariant, withLegendPref, withStyleLens,
 } from '../../domain/townMap/mapEdits.js';
+import { useActiveSkin } from './useActiveSkin.js';
 import { deriveAllDistricts } from '../../domain/districtProfile.js';
 import { buildingHoverModel } from './hoverModel.js';
 import { districtProvenance, mapProvenanceStory } from './provenanceModel.js';
@@ -157,7 +158,11 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // print-twin/screen divergence); a chosen lens paints from the style's concrete
   // palette (imported from the src/design token zone — no raw hex in this file).
   const activeLens = lensOverride ?? readStyleLens(mapEdits);
-  const pal = activeLens === DEFAULT_STYLE_ID ? null : viewerPalette(activeLens);
+  // THE SKIN REGISTRY (IT-4): the ACTIVE style OBJECT (a worn skin resolved through the settlement's
+  // bespoke collection), the viewer palette, the glyph-underlay flag, and the saved-skin list for
+  // the picker — a lazy leaf so the max-lines-capped pane grows by one call. All read the RESOLVED
+  // style OBJECT, so a skin's palette/glyphSet reach the viewer in lockstep with every export.
+  const { activeStyle, savedSkins, pal, illustrated } = useActiveSkin(mapEdits, activeLens);
   // Role → concrete color: the lens palette when a lens is active, else theme tokens.
   const C = {
     water: pal ? pal.water : BLUE,
@@ -178,10 +183,9 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   };
   const districtTint = pal ? pal.district : districtColor;
   const gridStep = pal ? pal.grid : 0;
-  // THE ILLUSTRATED lens (glyph buildings). When active, the pane mounts the static
-  // op-list underlay as the SOLE visual and turns the interactive layers into transparent
-  // hit-targets, so on-screen art and exports never diverge (design §4, the two-paths cure).
-  const illustrated = !!(pal && pal.glyphSet);
+  // `illustrated` (from useActiveSkin) is true when the active style names a glyphSet: the pane
+  // mounts the static op-list underlay as the SOLE visual and turns the interactive layers into
+  // transparent hit-targets, so on-screen art and exports never diverge (design §4, two-paths cure).
 
   // The single writer: update the optimistic view AND persist to the blob.
   const commitEdits = useCallback((next) => {
@@ -198,8 +202,8 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // The oblique panorama draw-ops — computed only in panorama mode, under the active
   // lens (so it re-poses the SAME model the plan shows, honoring edits + lens).
   const panoramaOps = useMemo(
-    () => (viewMode === 'panorama' ? buildTownMapPanoramaDrawList(model, activeLens) : null),
-    [viewMode, model, activeLens],
+    () => (viewMode === 'panorama' ? buildTownMapPanoramaDrawList(model, activeStyle) : null),
+    [viewMode, model, activeStyle],
   );
   const districtsById = useMemo(() => {
     const m = new Map();
@@ -448,7 +452,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
               same buildTownMapDrawList the exports use), mounted UNDER the interactive
               layers; the plain visual layers below self-suppress and the interactive
               fills go transparent for hit-testing (design §4, the two-paths cure). ─── */}
-          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeLens} dress={dress} />}
+          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeStyle} dress={dress} />}
 
           {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
           <SettlementMapGrid step={gridStep} ink={C.ink} />
@@ -475,7 +479,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           {/* ── non-water landform (marsh reeds / dune contours / mountain
               hachures) — terrain texture beneath the urban layer. Renders nothing
               for a water/plain/v1 site. Honors the active lens (WYSIWYG). ────── */}
-          {!illustrated && <SettlementMapLandform landform={frame.landform} lens={activeLens} ink={C.ink} />}
+          {!illustrated && <SettlementMapLandform landform={frame.landform} lens={activeStyle} ink={C.ink} />}
 
           {/* ── approach roads ────────────────────────────────────────────── */}
           {!illustrated && frame.roads.map((r) => (
@@ -733,7 +737,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
         legendPrefs={legendPrefs}
         hasEdits={hasEdits}
         districts={districts}
-        styleIds={TOWN_MAP_LENS_IDS}
+        styleIds={TOWN_MAP_LENS_IDS} bespokeSkins={savedSkins}
         activeLens={activeLens}
         lensPersisted={editing}
         onPickLens={doPickLens}

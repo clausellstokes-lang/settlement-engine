@@ -42,6 +42,7 @@ function LockGlyph({ size = 14 }) {
  *   hasEdits: boolean,
  *   districts: Array<{ category: string }>,
  *   styleIds?: ReadonlyArray<string>,
+ *   bespokeSkins?: ReadonlyArray<{ id: string, label: string }>,
  *   activeLens?: string,
  *   lensPersisted?: boolean,
  *   onPickLens?: (id: string) => void,
@@ -55,13 +56,13 @@ function LockGlyph({ size = 14 }) {
  */
 export default function SettlementMapEditControls({
   editing, showLegend, legendPrefs, hasEdits, districts,
-  styleIds, activeLens, lensPersisted, onPickLens,
+  styleIds, bespokeSkins, activeLens, lensPersisted, onPickLens,
   onReroll, onToggleLabels, onToggleLegend, onReset,
   annotating, onToggleAnnotate, entitled = false, savedMap = false,
 }) {
   return (
     <>
-      <MapLensSwitcher styleIds={styleIds} activeLens={activeLens} persisted={!!lensPersisted} onPickLens={onPickLens} />
+      <MapLensSwitcher styleIds={styleIds} bespokeSkins={bespokeSkins} activeLens={activeLens} persisted={!!lensPersisted} onPickLens={onPickLens} />
       {/* THE DM PIN GATE (THE FREELY-GIVEN RULINGS: DM pins are Cartographer). The
           locked state is VISIBLE, never absent (the fog/mapChains premium-seam law):
           a free owner with a saved map sees the affordance with a drawn padlock +
@@ -156,10 +157,19 @@ function LockedMarkers() {
  * named lens. Shown for every viewer; the active lens is highlighted. Accessible
  * names via aria-label, never native title= (the guidance title= census is
  * shrink-only). Theme tokens only.
- * @param {{ styleIds?: ReadonlyArray<string>, activeLens?: string, persisted: boolean, onPickLens?: (id:string)=>void }} props
+ *
+ * THE SKIN REGISTRY (IT-4): saved bespoke skins (AI-minted style overhauls) are listed AFTER the
+ * base lenses under a rubric DIVIDER, so a saved skin can finally be SELECTED and WORN (the dead
+ * seam, closed). A skin button uses the skin's OWN saved label (not resolveTownMapStyle, which
+ * would collapse a bespoke id to the parchment label) and, selected, wears the same active-highlight
+ * as a base lens. Selecting one calls the same onPickLens the base lenses use — the render surfaces
+ * resolve it through resolveActiveStyle. Absent any saved skins ⇒ no divider (byte-identical chrome).
+ * @param {{ styleIds?: ReadonlyArray<string>, bespokeSkins?: ReadonlyArray<{ id:string, label:string }>,
+ *   activeLens?: string, persisted: boolean, onPickLens?: (id:string)=>void }} props
  */
-function MapLensSwitcher({ styleIds, activeLens, persisted, onPickLens }) {
+function MapLensSwitcher({ styleIds, bespokeSkins, activeLens, persisted, onPickLens }) {
   if (!Array.isArray(styleIds) || styleIds.length === 0 || typeof onPickLens !== 'function') return null;
+  const skins = Array.isArray(bespokeSkins) ? bespokeSkins : [];
   return (
     <div
       data-town-lens-switcher
@@ -188,6 +198,34 @@ function MapLensSwitcher({ styleIds, activeLens, persisted, onPickLens }) {
           </Button>
         );
       })}
+      {skins.length > 0 && (
+        <>
+          {/* THE RUBRIC DIVIDER — a thin vertical rule separating the shipped base lenses from
+              the owner's saved AI skins (no lucide; a bare bordered span). */}
+          <span
+            data-town-lens-divider
+            aria-hidden="true"
+            style={{ alignSelf: 'stretch', width: 1, margin: '2px 4px', background: BORDER }}
+          />
+          {skins.map((skin) => {
+            const on = skin.id === activeLens;
+            return (
+              <Button
+                key={skin.id}
+                data-town-skin={skin.id}
+                variant={on ? 'primary' : 'ghost'}
+                size="sm"
+                aria-pressed={on}
+                onClick={() => onPickLens(skin.id)}
+                aria-label={`Draw this map in your saved skin ${skin.label}${persisted ? ' and keep it as the chosen style' : ''}`}
+                style={{ minHeight: 0, padding: '2px 8px' }}
+              >
+                {skin.label}
+              </Button>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }

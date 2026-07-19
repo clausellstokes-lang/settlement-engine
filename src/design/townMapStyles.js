@@ -382,9 +382,23 @@ export function resolveTownMapStyle(styleOrId) {
   return resolved;
 }
 
-/** A valid style id, coerced to the default when unknown/absent. @param {unknown} id */
-export function coerceStyleId(id) {
-  return typeof id === 'string' && OVERRIDES[id] ? id : DEFAULT_STYLE_ID;
+/**
+ * A valid style id, coerced to the default when unknown/absent. A base lens id (present in
+ * OVERRIDES) is ALWAYS accepted and is checked FIRST, so a base lens can never be shadowed
+ * (the flip-back law). `extraValidIds` — the saved bespoke-skin ids for the surface being
+ * resolved — widens the set of accepted ids so a saved skin can be worn: an id that is not a
+ * base lens but IS a known bespoke id passes through; anything else falls back to the default.
+ * Absent `extraValidIds` ⇒ the historical behavior EXACTLY (base ids only), so every legacy
+ * single-arg caller is byte-identical.
+ * @param {unknown} id
+ * @param {ReadonlyArray<string> | null | undefined} [extraValidIds]  known bespoke ids for this surface
+ * @returns {string}
+ */
+export function coerceStyleId(id, extraValidIds) {
+  if (typeof id !== 'string' || !id) return DEFAULT_STYLE_ID;
+  if (OVERRIDES[id]) return id;                                   // a base lens — never shadowed
+  if (Array.isArray(extraValidIds) && extraValidIds.includes(id)) return id; // a known bespoke skin
+  return DEFAULT_STYLE_ID;
 }
 
 /** The district tint for a category under a style (fallback: `other`).

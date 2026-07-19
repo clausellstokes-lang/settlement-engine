@@ -24,8 +24,8 @@
  */
 
 import {
-  buildTownMapModel, readMapEdits, readStyleLens, hasDrawableMap, buildTownMapSvg,
-  resolveTownMapStyle, resolveMapDress,
+  buildTownMapModel, readMapEdits, readStyleLens, readBespokeStyles, hasDrawableMap, buildTownMapSvg,
+  resolveTownMapStyle, resolveActiveStyle, resolveMapDress,
 } from '../domain/townMap/index.js';
 
 const DEFAULT_SIZE = 128;
@@ -61,11 +61,19 @@ function thumbModel(settlement) {
   return hasDrawableMap(model) ? model : null;
 }
 
-/** The owner's chosen map lens for this settlement (MAP STYLES), default parchment.
- * The thumbnail honors it (the library preview is the owner's own full-blob read).
+/** The owner's chosen map lens ID for this settlement (MAP STYLES), default parchment — a base
+ * lens id OR a saved bespoke skin id. Used to KEY the raster cache (legible + collision-safe).
  * @param {any} settlement */
 function thumbStyle(settlement) {
   return readStyleLens(readMapEdits(settlement));
+}
+
+/** The RESOLVED active style OBJECT for a lens id — a saved bespoke skin's definition when the id
+ * names one (THE SKIN REGISTRY, IT-4), else the base-lens resolution (parchment-safe). This is what
+ * is DRAWN, so the thumbnail wears a worn skin in lockstep with the pane + exports (WYSIWYG).
+ * @param {any} settlement @param {string} styleId */
+function thumbStyleObject(settlement, styleId) {
+  return resolveActiveStyle(styleId, readBespokeStyles(readMapEdits(settlement)));
 }
 
 /** IT-3: the season/state portrait for the thumbnail (resolved from the card's worldState),
@@ -92,8 +100,8 @@ export function townMapThumbCacheKey(settlement, size = DEFAULT_SIZE, worldState
   const model = thumbModel(settlement);
   if (!model) return null;
   const style = thumbStyle(settlement);
-  const svg = buildTownMapSvg(model, { style, width: size, height: size, dress: thumbDress(settlement, worldState) });
-  // The lens is part of the identity: a re-skin re-keys the raster (the SVG hash
+  const svg = buildTownMapSvg(model, { style: thumbStyleObject(settlement, style), width: size, height: size, dress: thumbDress(settlement, worldState) });
+  // The lens ID is part of the identity: a re-skin re-keys the raster (the SVG hash
   // already differs, but naming the lens keeps the key legible + collision-safe).
   return `${size}|${style}|${fnv1aHex(svg)}`;
 }
@@ -168,7 +176,7 @@ export async function renderTownMapThumb(settlement, opts = {}) {
   const model = thumbModel(settlement);
   if (!model) return null;
   const style = opts.style || thumbStyle(settlement);
-  const svg = buildTownMapSvg(model, { style, width: size, height: size, dress: thumbDress(settlement, opts.worldState) });
+  const svg = buildTownMapSvg(model, { style: thumbStyleObject(settlement, style), width: size, height: size, dress: thumbDress(settlement, opts.worldState) });
   const key = `${size}|${style}|${fnv1aHex(svg)}`;
   const hit = RASTER_CACHE.get(key);
   if (hit !== undefined) return hit;

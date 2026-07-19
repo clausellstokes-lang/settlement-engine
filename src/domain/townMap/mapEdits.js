@@ -160,11 +160,18 @@ export function readLayoutVariant(edits) {
   return v > 0 ? v : 0;
 }
 
-/** The chosen map lens id, coerced to a valid style (default: parchment). The
- * renderer reads this to skin the map; an unknown/absent value is the default lens.
+/** The chosen map lens id, coerced to a valid style (default: parchment). The renderer reads
+ * this to skin the map; an unknown/absent value is the default lens. A SAVED BESPOKE SKIN id
+ * present in this blob's own `bespokeStyles` collection is admitted (the seam that lets a skin be
+ * WORN); a stale bespoke id (its definition deleted) self-heals to the default (flip-back). A base
+ * lens id is never shadowed. Absent any bespoke collection ⇒ byte-identical to the historical
+ * base-only coercion (the dormancy law).
  * @param {MapEdits | null | undefined} edits */
 export function readStyleLens(edits) {
-  return coerceStyleId(edits && typeof edits.styleLens === 'string' ? edits.styleLens : undefined);
+  return coerceStyleId(
+    edits && typeof edits.styleLens === 'string' ? edits.styleLens : undefined,
+    Object.keys(readBespokeStyles(edits)),
+  );
 }
 
 /** The chosen layout-law version (1 or 2). Absent / unknown / any non-2 value ⇒ the
@@ -385,7 +392,9 @@ export function withLegendPref(edits, key, value) {
  * @param {MapEdits | null | undefined} edits @param {string} lens */
 export function withStyleLens(edits, lens) {
   const base = normalizeMapEdits(edits) || {};
-  return normalizeMapEdits({ ...base, styleLens: coerceStyleId(lens) });
+  // Admit a saved bespoke skin id (present in this blob's own collection) so a skin can be
+  // SELECTED; a base lens is never shadowed; anything unknown coerces to the default (clears).
+  return normalizeMapEdits({ ...base, styleLens: coerceStyleId(lens, Object.keys(readBespokeStyles(base))) });
 }
 
 /** PIN (or clear) the season override (IT-3): a DM fixes "this is the winter map", independent

@@ -24,8 +24,8 @@
  */
 import { Document, Page, View, Text, Svg, Rect } from '@react-pdf/renderer';
 import {
-  buildTownMapModel, buildTownMapDrawList, resolveTownMapStyle,
-  readMapEdits, readStyleLens, coerceStyleId, hasDrawableMap,
+  buildTownMapModel, buildTownMapDrawList,
+  readMapEdits, readStyleLens, readBespokeStyles, coerceStyleId, resolveActiveStyle, hasDrawableMap,
 } from '../domain/townMap/index.js';
 import { pt } from './theme.js';
 import { renderTownMapOp } from './sections/TownMapPlate.jsx';
@@ -57,9 +57,13 @@ export function TownMapDocument({ settlement, style, dress = null }) {
     );
   }
 
-  const styleId = style != null ? coerceStyleId(style) : readStyleLens(readMapEdits(settlement));
-  const st = resolveTownMapStyle(styleId);
-  const ops = buildTownMapDrawList(model, styleId, dress);
+  // THE SKIN REGISTRY (IT-4): resolve the ACTIVE style through the saved bespoke collection so a
+  // worn skin renders here in lockstep with the pane + image export (the WYSIWYG law). A base lens
+  // id and a stale/absent bespoke id both fall through to resolveTownMapStyle (parchment-safe).
+  const collection = readBespokeStyles(readMapEdits(settlement));
+  const styleId = style != null ? coerceStyleId(style, Object.keys(collection)) : readStyleLens(readMapEdits(settlement));
+  const st = resolveActiveStyle(styleId, collection);
+  const ops = buildTownMapDrawList(model, st, dress);
   const name = typeof settlement?.name === 'string' && settlement.name.trim()
     ? settlement.name.trim()
     : 'Settlement';

@@ -46,8 +46,8 @@
  */
 
 import {
-  buildTownMapModel, readMapEdits, readStyleLens, buildTownMapSvg,
-  hasDrawableMap, coerceStyleId, viewerPalette,
+  buildTownMapModel, readMapEdits, readStyleLens, readBespokeStyles, buildTownMapSvg,
+  hasDrawableMap, coerceStyleId, resolveActiveStyle, viewerPalette,
   buildTownMapDrawList, drawListToSvg, annotationDrawOps, readAnnotations,
 } from '../domain/townMap/index.js';
 import { fogMaskFragment, injectFog } from '../domain/townMap/fogGeometry.js';
@@ -88,15 +88,19 @@ function exportModel(settlement) {
 }
 
 /**
- * The lens to draw under: an explicit override (the pane's active lens) wins,
- * else the settlement's persisted styleLens. Always a valid style id.
+ * The lens ID to draw under: an explicit override (the pane's active lens) wins, else the
+ * settlement's persisted styleLens. Always a valid style id — a base lens OR a saved bespoke skin
+ * id present in THIS settlement's collection (THE SKIN REGISTRY, IT-4). A base lens is never
+ * shadowed; an unknown override coerces to the default. The FILENAME reads this id, so a worn skin
+ * names the file honestly.
  * @param {any} settlement
  * @param {string | null | undefined} styleOverride
  * @returns {string}
  */
 export function exportLens(settlement, styleOverride) {
-  if (styleOverride != null) return coerceStyleId(styleOverride);
-  return readStyleLens(readMapEdits(settlement));
+  const edits = readMapEdits(settlement);
+  if (styleOverride != null) return coerceStyleId(styleOverride, Object.keys(readBespokeStyles(edits)));
+  return readStyleLens(edits);
 }
 
 /**
@@ -129,7 +133,11 @@ export function exportLens(settlement, styleOverride) {
 export function townMapExportSvg(settlement, opts = {}) {
   const model = exportModel(settlement);
   if (!model) return null;
-  const style = exportLens(settlement, opts.style);
+  // THE SKIN REGISTRY (IT-4): resolve the ACTIVE style OBJECT through the saved bespoke collection
+  // and DRAW with it, so a worn skin exports in lockstep with the pane (WYSIWYG). A base lens id and
+  // a stale/absent bespoke id both resolve parchment-safe; every draw surface below reads ONE style.
+  const styleId = exportLens(settlement, opts.style);
+  const style = resolveActiveStyle(styleId, readBespokeStyles(readMapEdits(settlement)));
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
   const dress = opts.dress || null;
   const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);

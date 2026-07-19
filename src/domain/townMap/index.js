@@ -106,6 +106,18 @@ export {
   fogMaskFragment,
   injectFog,
 } from './fogGeometry.js';
+// THE SKIN REGISTRY (THE ILLUSTRATED TOWN, IT-4) — the pure additive-save + flip-back
+// resolver for saved bespoke skins. resolveActiveStyle is the chokepoint every render surface
+// routes through so a saved skin is WORN in lockstep (pane / image export / thumbnail / PDF);
+// a base lens is never shadowed. Lazy (consumed only by the town-map surfaces + AI panel + tests).
+export {
+  isBaseLensId,
+  addBespokeStyle,
+  readBespokeStyle,
+  removeBespokeStyle,
+  listBespokeStyles,
+  resolveActiveStyle,
+} from './bespokeStyles.js';
 // MAP STYLES — the bounded style layer (the four named lenses + the wall). A style
 // is data; the draw projection resolves it, the viewer reads it. Lazy (src/design,
 // consumed only by the town-map surfaces + tests), so first paint is unmoved.
