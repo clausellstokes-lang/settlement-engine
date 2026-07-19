@@ -33,6 +33,7 @@ import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsS
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
 import AccountPurchaseHistoryPanel from './account/AccountPurchaseHistoryPanel.jsx';
 import AccountAutoReloadPanel from './account/AccountAutoReloadPanel.jsx';
+import AccountSeatTransferPanel from './account/AccountSeatTransferPanel.jsx';
 import { ReferralCard, RedeemBlock } from './account/ReferralRedeemBlocks.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
@@ -300,6 +301,7 @@ export default function AccountPage({ onNavigateAdmin }) {
           />
           <AccountPurchaseHistoryPanel auth={auth} />
           <AccountAutoReloadPanel auth={auth} />
+          <AccountSeatTransferPanel auth={auth} />
           <div>
             <ReferralCard auth={auth} />
             <RedeemBlock onNavigatePricing={() => navigate('pricing')} />

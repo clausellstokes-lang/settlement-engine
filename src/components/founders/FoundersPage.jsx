@@ -223,6 +223,16 @@ export default function FoundersPage({ onNavigate }) {
         ))}
       </ul>
 
+      {/* The §12 promise, one line under the lineage: seats are transferable through
+          the official process only (copy-only — the flow itself lives on the account
+          page, its terms on the Terms page). */}
+      <p style={{
+        marginTop: SP.lg, fontFamily: sans, fontSize: FS.sm, color: BODY, lineHeight: 1.6,
+      }}>
+        Founder seats can change hands through the official transfer process, subject to
+        the published terms.
+      </p>
+
       {/* The charter's signature rule — a gold line closes the document at the foot. */}
       <p style={{
         marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${GOLD_DEEP}`,
