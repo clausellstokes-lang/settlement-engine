@@ -89,12 +89,12 @@ function OpCard({ op, index, decision, onDecide }) {
   );
 }
 
-export default function InterpretApplyPanel() {
+export default function InterpretApplyPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx, activeCampaignId, activeSaveId } = useSurveyorContext();
   const applyEvent = useStore((s) => s.applyEvent);
   const recordPartyImpact = useStore((s) => s.recordPartyImpact);
 
-  const [sessionText, setSessionText] = useState('');
+  const [sessionText, setSessionText] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null); // { interpretation, seed, interpretRef, musings, byok } | { error }
   const [decisions, setDecisions] = useState({});

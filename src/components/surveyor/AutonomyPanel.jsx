@@ -117,7 +117,7 @@ function conditionFromRows(rows, combinator) {
   return { version: 1, root: { kind: combinator === 'all' ? 'all' : 'some', children: nodes } };
 }
 
-export default function AutonomyPanel() {
+export default function AutonomyPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx, activeCampaignId, activeCampaign, savedSettlements } = useSurveyorContext();
   const advanceCampaignWorld = useStore((s) => s.advanceCampaignWorld);
   const injectCampaignStressor = useStore((s) => s.injectCampaignStressor);
@@ -152,7 +152,7 @@ export default function AutonomyPanel() {
   const [maxWeeks, setMaxWeeks] = useState(4);
 
   // ── compose (the money moment) ─────────────────────────────────────────────
-  const [intent, setIntent] = useState('');
+  const [intent, setIntent] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const compose = useCallback(async () => {

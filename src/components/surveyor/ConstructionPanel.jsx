@@ -30,13 +30,13 @@ const MAX_REVISE_ROUNDS = 2;
 const costFor = (scope) => getSurveyorAiCost(scope === 'realm' ? 'constructRealm' : 'constructSettlement');
 const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`;
 
-export default function ConstructionPanel() {
+export default function ConstructionPanel({ initialPrompt = '', initialScope }) {
   const { creditBalance, ctx } = useSurveyorContext();
   const instantWorld = useStore((s) => s.instantWorld);
   const setActiveSaveId = useStore((s) => s.setActiveSaveId);
 
-  const [scope, setScope] = useState('settlement');
-  const [intent, setIntent] = useState('');
+  const [scope, setScope] = useState(initialScope === 'realm' ? 'realm' : 'settlement');
+  const [intent, setIntent] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [seed, setSeed] = useState('');
   const [round, setRound] = useState(0);

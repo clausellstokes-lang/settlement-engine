@@ -90,7 +90,14 @@ describe('Surveyor write panels — source-level eager-import guard', () => {
     }
   });
 
-  it('FloatingAffordances hosts the workshop (the intentional lazy-chunk membership)', () => {
-    expect(read('src/components/FloatingAffordances.jsx')).toMatch(/SurveyorWorkshop/);
+  // RETARGET (C13, THE ONE DOOR): FloatingAffordances now hosts SurveyorDoor, which
+  // statically hosts BOTH destinations (workshop + analyst). The pin's intent —
+  // the write surfaces ride the FloatingAffordances lazy chunk, never their own eager
+  // path — is preserved by pinning each static link of the membership chain.
+  it('FloatingAffordances → SurveyorDoor → workshop/analyst (the intentional lazy-chunk membership chain)', () => {
+    expect(read('src/components/FloatingAffordances.jsx')).toMatch(/SurveyorDoor/);
+    const door = read('src/components/surveyor/SurveyorDoor.jsx');
+    expect(door).toMatch(/SurveyorWorkshop/);
+    expect(door).toMatch(/AiAnalystPanel/);
   });
 });

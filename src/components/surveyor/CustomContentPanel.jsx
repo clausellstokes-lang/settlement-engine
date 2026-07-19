@@ -96,11 +96,11 @@ function DraftEntryCard({ entry: e, index, decision, onDecide }) {
   );
 }
 
-export default function CustomContentPanel() {
+export default function CustomContentPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx } = useSurveyorContext();
   const addCustomItem = useStore((s) => s.addCustomItem);
 
-  const [intent, setIntent] = useState('');
+  const [intent, setIntent] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null); // { draft, musings, byok, earlyAccess } | { error, ... }
   const [decisions, setDecisions] = useState({});

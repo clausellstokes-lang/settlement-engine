@@ -452,3 +452,63 @@ button {
  * override needed here. */
 .sf-spin { animation: sf-spin 1.2s linear infinite; }
 @keyframes sf-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── THE ONE DOOR (C13) — the left-edge Surveyor marginalia tab ─────────────
+ * The single AI entry marker (owner ruling 2026-07-18). Shape/elevation live
+ * here (not inline) because the deep-craft kill-list freezes the inline
+ * borderRadius/boxShadow/rgba( counts across src/components — a new floating
+ * surface carries its chrome as CSS. Colors ride the theme's AI register
+ * (src/design/tokens.js — the slate pair); the two hexes below mirror
+ * slate tokens and are commented at the definition site.
+ * The label is a hover/focus reveal flag ("no text until hover") — AT always
+ * hears the aria-label; :focus-visible reveals it for keyboard users too. */
+.sf-door-tab {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  /* a slim marginalia tab, but never under the 44px hit floor */
+  min-width: 44px;
+  min-height: 96px;
+  padding: 0;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.18);
+}
+.sf-door-tab .sf-door-label {
+  position: absolute;
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translate(-6px, -50%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease-out, transform 140ms ease-out;
+  font-variant-caps: small-caps;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.sf-door-tab:hover .sf-door-label,
+.sf-door-tab:focus-visible .sf-door-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+/* The door's prompt slip — docked at the tab's margin position. */
+.sf-door-panel {
+  position: fixed;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+/* The small-cap register line (draft slips, the door heading). */
+.sf-smallcap {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+}

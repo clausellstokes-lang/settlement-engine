@@ -34,7 +34,7 @@ const LENS_LABEL = { parchment: 'Parchment', watercolor: 'Watercolor', darkFanta
 /** The kernel slug primitive with this panel's namespace params (dash sep, 40-cap, fallback). */
 const styleSlug = (s) => slugify(s, { max: 40, fallback: 'bespoke-style' });
 
-export default function StyleOverhaulPanel() {
+export default function StyleOverhaulPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx, settlement, savedSettlements, activeSaveId } = useSurveyorContext();
   const applyMapEdit = useStore((s) => s.applyMapEdit);
   const previewSettlement = settlement || savedSettlements[0] || null;
@@ -44,7 +44,7 @@ export default function StyleOverhaulPanel() {
   const persistId = (activeSaveId != null && savedSettlements.some((s) => String(s?.id) === String(activeSaveId)))
     ? String(activeSaveId) : null;
 
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null); // { style, violations, musings, byok } | { error }
   const [lens, setLens] = useState(CANDIDATE_LENS);
