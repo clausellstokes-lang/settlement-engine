@@ -28,6 +28,9 @@ import { WASH_INK_OPACITY } from '../../src/components/settlementDetail/Settleme
 import { INK as OINK, FIELD_INK, INK_TEXT_STEPS, FIELD_TEXT_STEPS } from '../../src/design/organic/ink.js';
 import { RUBRIC, FIELD_RUBRIC } from '../../src/design/organic/rubrication.js';
 import { INSTRUMENT, FIELD_INSTRUMENT } from '../../src/design/organic/instruments.js';
+// THE LANTERN TABLE (C14) — the four lamp-tone kind accents (moss/gold/slate/ember)
+// worn by TableView on its umber field ground; pinned per-state below.
+import { LAMP_ACCENTS } from '../../src/design/organic/lampTones.js';
 // Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
 // warning / ai tones previously coloured their LABEL with the -500 fill hue
 // (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
@@ -279,6 +282,36 @@ describe('Organic FIELD mode legibility (WCAG AA 4.5:1 on the warm dark panel)',
   test('the field ground is warm, not pure black (halation rule)', () => {
     expect(FIELD_INK.ground).not.toBe('#000000');
     expect(FIELD_INK.ink).not.toBe('#FFFFFF');
+  });
+});
+
+// ── THE LANTERN TABLE (C14) — the four lamp-tone kind accents on the umber ground ─
+// TableView is the dim "desk by night" (reference plate 04): the four cheat-sheet
+// kinds (NPC / HOOK / TWIST / RED) are accented with LAMP TONES (moss / gold / slate
+// / ember) instead of the light-theme saturated hues. Each tone is used BOTH as the
+// KIND label (owes AA 4.5:1 as text) and as the card's left rule (owes 1.4.11's 3:1
+// UI-boundary floor). The ground is FIELD_INK.panel — the lifted umber plate, the
+// darkest tone a lamp label sits on; the desk behind it (FIELD_INK.ground) is darker
+// still, so the tones clear there a fortiori. slate supersedes the violet TWIST accent
+// on this surface (the honesty law's AI hue, cooled to a lamp tone for the field).
+describe('THE LANTERN TABLE lamp-tone kind accents (WCAG AA 4.5:1 on the umber field ground)', () => {
+  const pairs = [
+    ['NPC / moss',    LAMP_ACCENTS.NPC],
+    ['HOOK / gold',   LAMP_ACCENTS.HOOK],
+    ['TWIST / slate', LAMP_ACCENTS.TWIST],
+    ['RED / ember',   LAMP_ACCENTS.RED],
+  ];
+  for (const [name, hex] of pairs) {
+    test(`${name} (${hex}) label on the umber panel >= ${AA_TEXT}:1`, () => {
+      expect(ratio(hex, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_TEXT); // as label text
+      expect(ratio(hex, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_UI);   // as the card's left rule (1.4.11)
+      expect(ratio(hex, FIELD_INK.ground)).toBeGreaterThanOrEqual(AA_TEXT); // on the darker desk, a fortiori
+    });
+  }
+  // The retired accents documented: brand amber failed AA as a label even on white
+  // (3.09:1) — the exact deferral the lamp tones pay by re-grounding onto the umber.
+  test('the retired saturated amber accent would fail AA as a label even on white (documents the lift)', () => {
+    expect(ratio(swatch['#D08020'], '#FFFFFF')).toBeLessThan(AA_TEXT);
   });
 });
 

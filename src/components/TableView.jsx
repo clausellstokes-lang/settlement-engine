@@ -26,26 +26,32 @@ import { X } from 'lucide-react';
 import { FS, ELEV, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { tonightAtTheTable, prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { FIELD_INK } from '../design/organic/ink.js';
+import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
 import IconButton from './primitives/IconButton.jsx';
 
-const GOLD = swatch['#8C6F32'];
-const GOLD_ACCENT = swatch['#C9A24C'];
-const INK = swatch['#1B1408'];
-const INK_DEEP = swatch['#2C2210'];
-const BODY = swatch['#3A2F18'];
-const MUTED = swatch['#9C8068'];
-const PARCH = swatch['#FBF5E6'];
-const BORDER = swatch['#E8D9B0'];
+// THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
+// ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
+// stays the dark ink band it already was; the body drops from parchment to the
+// field-notebook (dim) ramp so the whole surface reads as one pool of lamplight.
+const GOLD_ACCENT = swatch['#C9A24C']; // header title on the dark ink band
+const INK = swatch['#1B1408'];         // header gradient — deepest ink
+const INK_DEEP = swatch['#2C2210'];    // header gradient — second stop
+const MUTED = swatch['#9C8068'];       // header subtitle on the dark band
 
-const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
-const AMBER = swatch['#D08020'];
-const RED = swatch['#A23434'];
+// The dim/field ramp (contrast-proven in tests/design/contrast.test.js).
+const UMBER_DESK = FIELD_INK.ground;   // #211B12 — the night desk (panel ground)
+const UMBER_CARD = FIELD_INK.panel;    // #2C2416 — a lifted plate on the desk (the umber)
+const CREAM = FIELD_INK.ink;           // #ECE0C6 — primary ink in field mode
+const CREAM_BODY = FIELD_INK.body;     // #D8C8A8 — body copy in field mode
+const CREAM_FAINT = FIELD_INK.faint;   // #9C8C6E — faint labels (AA on the panel)
+const FIELD_RULE = FIELD_INK.hairline; // #5A4E38 — the feint rule tone on the dark ground
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
-const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: VIOLET, RED };
+// The four lamp-tone kind accents (moss/gold/slate/ember), legible on UMBER_CARD.
+const KIND_ACCENT = LAMP_ACCENTS;
 const KIND_LABEL = { NPC: 'NPC', HOOK: 'HOOK', TWIST: 'TWIST', RED: 'RED' };
 
 export default function TableView({ settlement, onClose }) {
@@ -114,8 +120,8 @@ export default function TableView({ settlement, onClose }) {
         style={{
           width: '100%', maxWidth: 380,
           height: '100%', maxHeight: 760,
-          background: PARCH,
-          border: `1px solid ${BORDER}`,
+          background: UMBER_DESK,
+          border: `1px solid ${FIELD_RULE}`,
           borderRadius: 14,
           boxShadow: ELEV[3],
           overflow: 'hidden',
@@ -171,12 +177,12 @@ export default function TableView({ settlement, onClose }) {
           {pressure && (
             <div style={{
               padding: '10px 12px',
-              background: swatch.white,
-              border: `1px solid ${BORDER}`,
-              borderLeft: `3px solid ${GOLD}`,
+              background: UMBER_CARD,
+              border: `1px solid ${FIELD_RULE}`,
+              borderLeft: `3px solid ${LAMP_ACCENTS.HOOK}`,
               borderRadius: 6,
               fontFamily: serif, fontSize: FS.lg, fontStyle: 'italic',
-              color: INK_DEEP, lineHeight: 1.5,
+              color: CREAM, lineHeight: 1.5,
             }}>
               {pressure}
             </div>
@@ -189,8 +195,8 @@ export default function TableView({ settlement, onClose }) {
                 <span key={i} style={{
                   fontSize: FS.micro, fontWeight: 800,
                   letterSpacing: '0.04em', textTransform: 'uppercase',
-                  color: RED, background: 'rgba(162,52,52,0.08)',
-                  border: '1px solid rgba(162,52,52,0.25)',
+                  color: LAMP_ACCENTS.RED, background: 'rgba(224,121,78,0.12)',
+                  border: '1px solid rgba(224,121,78,0.32)',
                   borderRadius: 4, padding: '3px 8px',
                 }}>
                   {s.label || s.type}
@@ -204,14 +210,14 @@ export default function TableView({ settlement, onClose }) {
             <div style={{
               fontSize: FS.micro, fontWeight: 800,
               letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: AMBER, marginBottom: 8,
+              color: LAMP_ACCENTS.HOOK, marginBottom: 8,
             }}>
               🕯 Tonight at the table
             </div>
 
             {entries.length === 0 ? (
               <div style={{
-                fontSize: FS.sm, color: MUTED, fontStyle: 'italic', lineHeight: 1.5,
+                fontSize: FS.sm, color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
               }}>
                 No table-night entries derived yet. Generate a richer settlement
                 or run the narrative layer.
@@ -219,12 +225,12 @@ export default function TableView({ settlement, onClose }) {
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 {entries.map((row, i) => {
-                  const accent = KIND_ACCENT[row.kind] || GOLD;
+                  const accent = KIND_ACCENT[row.kind] || CREAM_FAINT;
                   return (
                     <div key={i} style={{
                       padding: '10px 12px',
-                      background: swatch.white,
-                      border: `1px solid ${BORDER}`,
+                      background: UMBER_CARD,
+                      border: `1px solid ${FIELD_RULE}`,
                       borderLeft: `4px solid ${accent}`,
                       borderRadius: 6,
                     }}>
@@ -234,7 +240,7 @@ export default function TableView({ settlement, onClose }) {
                       }}>
                         <span style={{
                           fontFamily: serif, fontWeight: 700, fontSize: FS.md,
-                          color: INK, minWidth: 0,
+                          color: CREAM, minWidth: 0,
                         }}>
                           {row.title}
                         </span>
@@ -245,7 +251,7 @@ export default function TableView({ settlement, onClose }) {
                           {KIND_LABEL[row.kind] || row.kind}
                         </span>
                       </div>
-                      <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+                      <div style={{ fontSize: FS.sm, color: CREAM_BODY, lineHeight: 1.5 }}>
                         {row.body}
                       </div>
                     </div>
@@ -257,7 +263,7 @@ export default function TableView({ settlement, onClose }) {
 
           <div style={{
             marginTop: 'auto', paddingTop: 6,
-            fontSize: FS.xxs, color: MUTED, textAlign: 'center', fontStyle: 'italic',
+            fontSize: FS.xxs, color: CREAM_FAINT, textAlign: 'center', fontStyle: 'italic',
           }}>
             Tap outside or press Esc to close
           </div>
