@@ -372,6 +372,17 @@ A+ at this stage, rinse and repeat.")
   authentication_required path notifies-to-complete, never silent-retries ·
   settings + top-up-ledger migration WRITTEN-NOT-DEPLOYED. Paid-surface +
   schema surfaces owner-ordered here; inert until keys/deploy.
+  ⬛ AMENDED SAME DAY — EMULATE ANTHROPIC'S OWN COUNTERPART (owner): the model
+  is RELOAD-TO-TARGET, not fixed packs — "when balance falls below X credits,
+  bring it back up to Y" (charge = the delta, priced from config at the credit
+  granularity, zero hand-typed numbers; the median-of-past-purchases seeds Y's
+  initial suggestion only). Full counterpart set: the auto-reload toggle w/
+  threshold+target · the MONTHLY SPEND LIMIT (now spec, not just judgment) ·
+  LOW-BALANCE NOTIFICATION at the threshold even with auto-reload OFF · the
+  billing/top-up HISTORY surfaced in the account page (the top-up ledger table,
+  registry idiom). Same machinery beneath: debit-point trigger · off-session
+  PaymentIntent · webhook-gated grants · idempotency lock · SCA
+  notify-to-complete · migration written-not-deployed.
   ⭐ WAVE C (the B re-audit, 2026-07-19 — the manager's own "stage-blocked"
   label was safety-shaped): the §16 traditions seams are BUILDABLE DARK NOW and
   move into the completion waves — festival-week map dress (groundDressOps
