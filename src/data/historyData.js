@@ -11,7 +11,7 @@
 import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
 import { pickVariant } from '../kernel/proseHash.js';
 
-// Notable power-holder roles by domain (government, religious, noble, crafts,
+// Notable power-holder roles by domain (government, religious, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
 // can hold influence in a settlement and the conditions under which it appears.
 // Consumed by getUpgradeOpportunities to surface tier-appropriate roles.
@@ -167,6 +167,85 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['wealth', 'justice'],
     },
+    // ── Noble / feudal leadership ────────────────────────────────────────────
+    // Merged from the former POWER_ROLES_BY_CATEGORY.noble bucket. 'noble' was a
+    // dead bucket key: getUpgradeOpportunities (economy/upgradeOpportunities.js)
+    // surfaces a bucket's roles only when some institution carries
+    // priorityCategory/category equal to the bucket key, but no catalog entry
+    // uses 'noble' on either axis and the closed-set category vocabulary
+    // (src/data/categoryVocabulary.js) never admits one — so the bucket never
+    // matched a settlement. The domain layer already aliases 'noble' to
+    // 'government' (deriveNpcProfile maps noble leverage to government; see
+    // src/domain/npcProfile.js, pinned by tests/domain/wave1CohesionFixes.test.js),
+    // so these feudal leadership roles belong in the reachable 'government'
+    // bucket, where they now surface for any settlement with a government
+    // institution at the right tier. goalCategories and the requiresInstKeyword
+    // coherence gates are preserved exactly as they stood in the noble bucket.
+    {
+      role: 'Lord/Lady of the Manor',
+      title: 'noble',
+      priority: 8,
+      minTier: 'village',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Baron/Baroness',
+      title: 'noble',
+      priority: 9,
+      minTier: 'town',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Court Advisor',
+      title: 'advisor',
+      priority: 7,
+      minTier: 'town',
+      goalCategories: ['power', 'knowledge'],
+    },
+    {
+      role: 'House Steward',
+      title: 'steward',
+      priority: 6,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Noble Heir',
+      title: 'noble',
+      priority: 5,
+      minTier: 'hamlet',
+      goalCategories: ['personal', 'power'],
+    },
+    {
+      role: 'Land Agent',
+      title: 'agent',
+      priority: 5,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Knight/Dame',
+      title: 'knight',
+      priority: 7,
+      minTier: 'village',
+      goalCategories: ['protection', 'personal'],
+    },
+    {
+      role: 'Duke/Duchess',
+      title: 'noble',
+      priority: 10,
+      minTier: 'metropolis',
+      goalCategories: ['power', 'wealth'],
+      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
+    },
+    {
+      role: 'Royal Chamberlain',
+      title: 'noble',
+      priority: 8,
+      minTier: 'city',
+      goalCategories: ['power', 'personal'],
+      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
+    },
   ],
   religious: [
     {
@@ -284,73 +363,6 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['spiritual', 'justice'],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
-    },
-  ],
-  noble: [
-    {
-      role: 'Lord/Lady of the Manor',
-      title: 'noble',
-      priority: 8,
-      minTier: 'village',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Baron/Baroness',
-      title: 'noble',
-      priority: 9,
-      minTier: 'town',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Court Advisor',
-      title: 'advisor',
-      priority: 7,
-      minTier: 'town',
-      goalCategories: ['power', 'knowledge'],
-    },
-    {
-      role: 'House Steward',
-      title: 'steward',
-      priority: 6,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Noble Heir',
-      title: 'noble',
-      priority: 5,
-      minTier: 'hamlet',
-      goalCategories: ['personal', 'power'],
-    },
-    {
-      role: 'Land Agent',
-      title: 'agent',
-      priority: 5,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Knight/Dame',
-      title: 'knight',
-      priority: 7,
-      minTier: 'village',
-      goalCategories: ['protection', 'personal'],
-    },
-    {
-      role: 'Duke/Duchess',
-      title: 'noble',
-      priority: 10,
-      minTier: 'metropolis',
-      goalCategories: ['power', 'wealth'],
-      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
-    },
-    {
-      role: 'Royal Chamberlain',
-      title: 'noble',
-      priority: 8,
-      minTier: 'city',
-      goalCategories: ['power', 'personal'],
-      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
     },
   ],
   crafts: [
