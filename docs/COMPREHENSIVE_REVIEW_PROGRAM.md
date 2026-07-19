@@ -1153,6 +1153,24 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ THE CALIBER SWEEP COMPLETE (2026-07-19) — all five owner-ordered
+conversions landed at sample-true form.** The closer, caliber-primitives @
+41c2702f: CP-a Segmented → THE DIVIDER-STRIP (sample cited to the line —
+docs/samples .oc-segmented; gold btn-border hairline + dividers; active =
+FILL + WEIGHT 800/600 two-channel BY CONSTRUCTION, grayscale-legible; ARIA
+byte-identical; 14 importers censused — the brief's 12 was stale — 61 tests
+green; foundationPrimitives needed ZERO retargets, no shape pin existed) ·
+CP-b Card DE-SHADOW + THE FLAT PIN (cardElevation retargeted from the pre-law
+ELEV[1] to boxShadow==='' + the hairline edge, jsdom serialization
+probe-verified BEFORE writing assertions; 4 Card importers censused, none
+relied on lift). Eager +0 EXACT both commits. Fold-3 ceiling deltas: radii
+906→905 · shadows 98→96 (+ map's tinted 214→208 · rgba 234→232). 4 JUDGMENTs
+vetoable (gold vs parchment border · 800/600 vs the sample's constant 700 ·
+no Card overflow clip · transparent inactive cells). Full suite triaged to
+EXACTLY: 2 declared drops + the 4 parked + load flakes + the sibling budget
+red. THE SWEEP'S FIVE: strip ✓ · flat Card ✓ · stamp chips ✓ · token scrims ✓
+· the perf harness ✓ — every "safe" call from the compromise audit now stands
+at the objectively best form.
 **⬛⭐ CALIBER MAP LANE COMPLETE (2026-07-19, claude/caliber-map @ e2b00102, 2
 commits).** CM-a AdvanceReport source-stamp re-tone: the three tinted chip
 washes → rule-framed stamps on the ChronicleTab three-tone register (thread
