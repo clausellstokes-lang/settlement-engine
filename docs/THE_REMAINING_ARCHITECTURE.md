@@ -367,13 +367,15 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   iframe bridge) · public/map gate-coverage verification (the vendored FMG fork sits
   outside eslint/tsc/vitest by design — docs/fmg-fork.md names its only real gates;
   confirm they run) · FMG-fork upgrade currency check (drift vs upstream; runbook
-  docs/fmg-fork.md) · ⚠ THE LADDER FACTION-KEY BUG (traditions recon 2026-07-18,
-  PLAUSIBLE-static-read): ladderFactionKey/npcInFaction (npcLadderState.js:88,112)
-  read faction.name/.id but REAL powerStructure.factions carry the name in .faction
-  (no .name, no id — rulingStructure.js:424) ⇒ on real data every faction slugifies
-  to fac.unknown and collides first-wins; ladder tests pass on .name fixtures.
-  VERIFY + fix (.faction fallback) BEFORE npcLadderEnabled lights at the regen; the
-  traditions faction.power deferred seam also waits on this.
+  docs/fmg-fork.md) · ✅ THE LADDER FACTION-KEY BUG — RETIRED 2026-07-19 (pulled
+  forward, CONFIRMED empirically + FIXED @ 14e8a2fa on claude/the-ladder): real
+  generatePowerStructure records carry .faction only ⇒ pre-fix every faction keyed
+  fac.unknown and the ladder produced ZERO ladders on real data (worse than the
+  recorded merge hypothesis). Fix = factionName accessor chokepoint (npcLadderState)
+  + the read-side mirror factionKeyOf (townMap/ladderRead.js — the coup path would
+  have desynced write/read keys); 3 sites fixed, classification consumers verified
+  N/A via factionArchetype; real-shape pin 9/9 revert-proven; dormancy byte-identity
+  green. The traditions faction.power seam now waits only on the folds.
 - FIX WAVES: one commit per finding-cluster, full gate at each wave end, ledger rows.
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 

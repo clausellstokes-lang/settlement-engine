@@ -1153,7 +1153,25 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
-**⬛ C2 MEDIA-PREP LANE REPORTED (2026-07-19) — ENCODE BLOCKED, RECIPE DELIVERED.** No
+**⬛⭐ THE LADDER FACTION-KEY BUG RETIRED (2026-07-19, claude/the-ladder @ 14e8a2fa).**
+The ROUND 3 pre-stocked item, pulled forward to an idle worktree and CONFIRMED on
+genuine generator data: all six real factions keyed `fac.unknown` and — worse than
+the recorded hypothesis — `advanceNpcLadder` produced ZERO ladders on real data
+(npcInFaction blind too). Fix: `factionName` accessor chokepoint
+(`.faction||.name||.label`, id precedence kept) in npcLadderState consumed by
+ladderFactionKey + npcInFaction, PLUS the read-side mirror `factionKeyOf`
+(townMap/ladderRead.js:176) — live on the coup path via rulingPowerCoup ⇒ fixing
+only the write side would have desynced write/read keys (the lockstep test guards
+the pair). Denominator: 3 identity sites fixed; classification consumers
+(clashOf/faithRuptured/mintGoal) N/A — already correct via factionArchetype; no
+out-of-lane sites (the idiom pre-existed, the lane's fresh code had omitted it).
+Real-shape pin npcLadderFactionKey.test.js: 5 fail pre-fix / 9 pass post-fix,
+proven by patch-revert (no stash; the foreign analytics stash untouched). Gates:
+ladder suite 7 files/65 tests green incl. dormancy golden · coup consumers 43
+tests green (dark-path factor 1.0 byte-identity) · eslint/tsc clean. Full suite
+deliberately at fold (parked branch). npcLadderEnabled is now SAFE to light at the
+regen; the traditions faction.power seam (§16) waits only on the folds. Manager
+checker pass verified commit/tree/files against the report. No
 ffmpeg/ffprobe/equivalent exists on this machine (exhaustively probed; Homebrew absent;
 installs forbidden to agents). Delivered to ~/Desktop/settlementforge-marketing-masters/
 derived-legs/: MANIFEST.md (source analysis, both boundary tables, asset inventory) +
