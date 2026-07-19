@@ -143,6 +143,7 @@ export const ROADS_TUNING = Object.freeze({
   OBSERVANCE_LEAD_WEEKS: 2, // window opens within hop-time + this
   MAX_JOURNEY_HOPS: 2, // near-radius: destinations within 2 trade-graph hops
   MAX_HOP_WEEKS: 3, // near-radius: hopWeeks(home,dest) <= this
+  OBSERVANCE_MIN_SCALE_BAND: 2, // a neighbour observance must be town-scale (band >= 2) to draw a pilgrim
   JOURNEY_CHANCE: 0.35, // per eligible NPC-year (the world-seed cadence draw)
   ABROAD_CAP: 2, // per-settlement concurrency cap
   MIN_TRAVEL_WEIGHT: 0.4, // importance >= notable travels; minor/nameless never

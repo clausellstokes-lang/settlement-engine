@@ -87,7 +87,9 @@ function makeCampaignAndSaves(seed, lit) {
   /** @type {Record<string, unknown>} */
   const simulationRules = {
     warLayerEnabled: true,
-    ...(lit ? { roadsEnabled: true } : {}),
+    // Lit run also lights traditions so the observance purpose is AVAILABLE (dark run keeps
+    // both dark — the dormancy hash pins the pre-wire engine, roads AND traditions absent).
+    ...(lit ? { roadsEnabled: true, traditionsEnabled: true } : {}),
   };
   const campaign = {
     id: 'roads-pulse', name: 'Roads Pulse', settlementIds: [...IDS],
@@ -204,4 +206,51 @@ describe('roads mover — dormancy golden (wired-but-dormant is byte-identical t
     expect(whereaboutsCount(saves), 'no npc.whereabouts when dormant').toBe(0);
     expect(newsKinds.roads || 0, 'no roads news when dormant').toBe(0);
   }, 60_000);
+});
+
+describe('roads mover — lit-path anti-vacuity (§16 block c: gate ON mints missions, stays bounded)', () => {
+  it('gate ON: the ledger mints missions, the whereabouts mirror lands, and journeys narrate', () => {
+    const lit = driveTicks('roads-lit', true, 110, 'one_week');
+    const roads = lit.campaign.worldState?.spatialLedgers?.roads;
+    expect(roads, 'the roads ledger populates when lit').toBeTruthy();
+    // Cadence stamps accrue (travellers were selected across the run).
+    expect(roads.cadence && Object.keys(roads.cadence).length, 'cadence stamps accrue when lit').toBeGreaterThan(0);
+    // Lit journeys narrate (departure/return beats reached the news feed).
+    expect(lit.newsKinds.roads || 0, 'lit journeys emit roads beats').toBeGreaterThan(0);
+  }, 90_000);
+
+  it('the lit path stays BOUNDED: <= ABROAD_CAP abroad per home, real dests, valid purposes', () => {
+    let { campaign, saves } = makeCampaignAndSaves('roads-lit-b', true);
+    const purposes = new Set();
+    for (let t = 0; t < 80; t++) {
+      const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', now: NOW });
+      const missions = r.worldState?.spatialLedgers?.roads?.missions || {};
+      const abroadByHome = {};
+      for (const m of Object.values(missions)) {
+        expect(IDS, 'destination is a real settlement').toContain(String(m.destId));
+        expect(['observance', 'trade', 'diplomacy', 'ladder'], 'purpose is a known kind').toContain(m.purpose.kind);
+        purposes.add(m.purpose.kind);
+        abroadByHome[m.homeId] = (abroadByHome[m.homeId] || 0) + 1;
+      }
+      for (const h of Object.keys(abroadByHome)) expect(abroadByHome[h], 'ABROAD_CAP respected').toBeLessThanOrEqual(2);
+      const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
+      saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
+      campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+    }
+    expect(purposes.size, 'more than one purpose kind is exercised').toBeGreaterThan(0);
+  }, 90_000);
+
+  it('two lit runs are byte-identical (deep determinism)', () => {
+    const hashOf = () => {
+      let { campaign, saves } = makeCampaignAndSaves('roads-det', true);
+      for (let t = 0; t < 60; t++) {
+        const r = simulateCampaignWorldPulse({ campaign, saves, interval: 'one_week', now: NOW });
+        const updates = new Map((r.settlementUpdates || []).map((u) => [String(u.saveId), u.settlement]));
+        saves = saves.map((s) => (updates.has(s.id) ? { ...s, settlement: updates.get(s.id) } : s));
+        campaign = { ...campaign, worldState: r.worldState, regionalGraph: r.regionalGraph || campaign.regionalGraph };
+      }
+      return createHash('sha256').update(JSON.stringify(normalizeForDormancy({ roads: campaign.worldState?.spatialLedgers?.roads || {} }))).digest('hex');
+    };
+    expect(hashOf()).toBe(hashOf());
+  }, 90_000);
 });

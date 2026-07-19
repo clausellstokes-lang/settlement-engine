@@ -26,11 +26,13 @@
  *     substring); the joined calamity prose speaks the bucket ("calamity"). Variety here
  *     adds PHRASING, never disaster-kind vocabulary.
  *
- * Pure leaf: imports nothing, imported only by the lazy worldPulse sim kernels
+ * Pure leaf: imports ONLY the roads prose data leaf (src/data/roadsProse.js — the
+ * CONTENT-GT content-in-data rule), imported only by the lazy worldPulse sim kernels
  * (calamityKernel, warReasons, peaceReasons, hegemonyFear, upswingKernel,
- * resourceDynamicsKernel, settlementLifecycleKernel, realmVerbExecution) ⇒ it rides the
- * lazy engine chunk, never the eager first-paint closure.
+ * resourceDynamicsKernel, settlementLifecycleKernel, realmVerbExecution, roadsKernel) ⇒ it
+ * rides the lazy engine chunk, never the eager first-paint closure.
  */
+import { ROADS_NEWS } from '../../data/roadsProse.js';
 
 /**
  * FNV-1a 32-bit — the pure variant-selection hash (no rng, no Date). Matches the
@@ -555,6 +557,7 @@ flattenPools('hegemony', HEGEMONY_RECEIPTS, REGISTRY);
 flattenPools('upswing', UPSWING_NEWS, REGISTRY);
 flattenPools('resource', RESOURCE_NEWS, REGISTRY);
 flattenPools('lifecycle', LIFECYCLE_NEWS, REGISTRY);
+flattenPools('roads', ROADS_NEWS, REGISTRY); // THE ROADS (ENGINE LIFT #5) — the src/data leaf
 
 /** The flat walker manifest: every prose pool, id'd. @type {ReadonlyArray<{ id: string, pool: readonly ProseVariant[] }>} */
 export const EVENT_PROSE_REGISTRY = Object.freeze(REGISTRY);
