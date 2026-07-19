@@ -73,6 +73,8 @@ interface Deps {
   emailDispatch?: (o: { to: string; from: string; subject: string; text: string; apiKey: string }) => Promise<any>;
   /** The expected due-runner cron secret. Defaults to FOUNDER_TRANSFER_CRON_SECRET; injectable for tests. */
   cronSecret?: () => string | undefined;
+  /** Whether Stripe Connect is enabled (payout limb). Defaults to STRIPE_CONNECT_ENABLED; injectable for tests. */
+  connectEnabled?: () => boolean;
 }
 
 export async function handleFounderTransfer(req: Request, deps: Deps = {}): Promise<Response> {
@@ -329,15 +331,58 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
         return json({ ok: true, cases: Array.isArray(data) ? data : [] });
       }
 
+      // ── reelect_payout (outgoing): re-open a PARKED cash election → credits ────────
+      case 'reelect_payout': {
+        // A 'connect_cash' payout that parked at 'held' (Connect absent) is re-opened
+        // to 'account_credits' and re-armed to 'scheduled' by the RPC — the next
+        // due-runner sweep then releases it as credits (§6.6, the immediate-fallback).
+        const caseId = typeof payload.case_id === 'string' ? payload.case_id : '';
+        if (!caseId) return json({ error: 'case_id is required' }, 400);
+        const { data: r, error: rErr } = await admin.rpc('reelect_transfer_payout', { p_case: caseId, p_from: user.id });
+        if (rErr) throw new Error(rErr.message);
+        if (!r?.ok) return json({ error: 'cannot_reelect', reason: r?.reason ?? 'unknown' }, 409);
+        return json({ ok: true });
+      }
+
       // ── payout_onboarding (outgoing, ≥ cooling): Connect Express — KEY-INERT ───────
       case 'payout_onboarding': {
         // Connect is enabled only after platform onboarding + keys + LEGAL SIGN-OFF
-        // (runbook §11 step 5). Without the platform key this refuses cleanly (LAW 1).
-        if (!Deno.env.get('STRIPE_CONNECT_ENABLED')) {
+        // (runbook §11 step 5). Without the platform key this refuses cleanly (LAW 1) —
+        // no Stripe call is even attempted, so the surface is dark by construction.
+        const connectOn = deps.connectEnabled?.() ?? Boolean(Deno.env.get('STRIPE_CONNECT_ENABLED'));
+        if (!connectOn) {
           return json({ error: 'connect_unavailable' }, 503);
         }
-        // The Express account create + account link land in M-8 (the payout limb).
-        return json({ error: 'connect_unavailable' }, 503);
+        // The caller must have a cash-election payout awaiting a connected account.
+        const { data: payoutCase } = await admin.from('founder_transfer_cases')
+          .select('id').eq('from_user', user.id).eq('payout_form', 'connect_cash')
+          .in('payout_status', ['scheduled', 'held', 'releasing']).limit(1).maybeSingle();
+        if (!payoutCase) return json({ error: 'no_pending_payout' }, 404);
+        try {
+          const account = await stripeApi.accounts.create({ type: 'express', metadata: { supabase_user_id: user.id } });
+          const link = await stripeApi.accountLinks.create({
+            account: account.id, type: 'account_onboarding',
+            refresh_url: `${CLIENT_URL}/account?section=subscription&connect=refresh`,
+            return_url: `${CLIENT_URL}/account?section=subscription&connect=done`,
+          });
+          // Stash the connected account on this holder's cash-election payout(s) so the
+          // due-runner can release to it. Never touches account data (LAW 10).
+          await admin.from('founder_transfer_cases')
+            .update({ connect_account_id: account.id, updated_at: new Date().toISOString() })
+            .eq('from_user', user.id).eq('payout_form', 'connect_cash')
+            .in('payout_status', ['scheduled', 'held', 'releasing']);
+          // Re-arm cash payouts that PARKED at 'held' (Connect was absent at their due
+          // time): now that a connected account exists, flip them back to 'scheduled'
+          // so the next due-runner sweep releases them. Same payout-status sub-machine
+          // sweepReleasePayouts already drives rawly. (scheduled/releasing untouched.)
+          await admin.from('founder_transfer_cases')
+            .update({ payout_status: 'scheduled', updated_at: new Date().toISOString() })
+            .eq('from_user', user.id).eq('payout_form', 'connect_cash').eq('payout_status', 'held');
+          return json({ ok: true, url: link.url });
+        } catch (e) {
+          logError('founder-transfer', user.id, (e as Error)?.message ?? 'connect onboarding failed', { stage: 'payout_onboarding' });
+          return json({ error: 'connect_onboarding_failed' }, 500);
+        }
       }
 
       default:
@@ -542,15 +587,121 @@ async function runFinalizeEdgeLeg(admin: AnyClient, c: { id: string; from_user: 
     'Your SettlementForge Founder seat transfer has completed and the seat is now yours. Your Founder benefits are active on your next sign-in.', deps.emailDispatch);
 }
 
-// ── The payout limb (§6.6/M-8) + the stewardship limb (§6.8/M-10) plug their release
-//    + sweep logic into the due-runner here. Stubs until those slices land.
-// deno-lint-ignore no-unused-vars
-async function sweepReleasePayouts(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
-  return 0; // M-8: claim scheduled→releasing → Stripe transfer or credits election → released/held/failed.
+// ── THE PAYOUT LIMB (§6.6/M-8) ──────────────────────────────────────────────────
+// Must match create-checkout's CREDIT_AMOUNTS['credits_25'] (the §4.4 rate denominator).
+const CREDITS_25 = 25;
+let _rateCache: { at: number; unitAmount: number; currency: string } | null = null;
+/** Test-only: clear the in-memory starter-price cache between cases. */
+export function __resetRateCacheForTest(): void { _rateCache = null; }
+
+/** The per-credit rate (§4.4): STRIPE_PRICE_CREDITS_25 unit_amount / 25, cached 10 min.
+ *  Missing env / retrieve failure ⇒ null (the credits election parks 'held', LAW 1). */
+async function creditRate(stripeApi: typeof stripe): Promise<{ unitAmount: number; currency: string } | null> {
+  const now = Date.now();
+  if (_rateCache && now - _rateCache.at < 10 * 60 * 1000) {
+    return { unitAmount: _rateCache.unitAmount, currency: _rateCache.currency };
+  }
+  const priceId = Deno.env.get('STRIPE_PRICE_CREDITS_25');
+  if (!priceId) return null;
+  try {
+    const price = await stripeApi.prices.retrieve(priceId);
+    const ua = typeof price?.unit_amount === 'number' ? price.unit_amount : null;
+    if (!ua || ua <= 0) return null;
+    const currency = typeof price?.currency === 'string' && price.currency ? price.currency : 'usd';
+    _rateCache = { at: now, unitAmount: ua, currency };
+    return { unitAmount: ua, currency };
+  } catch { return null; }
 }
+
+/** Mirror the payout into money_events (idempotent per event_key). */
+async function writePayoutMoneyEvent(admin: AnyClient, p: {
+  eventKey: string; fromUser: string; amountCents: number; kind: string; description: string;
+  meta: Record<string, unknown>; nowIso: string;
+}): Promise<void> {
+  try {
+    await admin.from('money_events').upsert([{
+      event_key: p.eventKey, user_id: p.fromUser, occurred_at: p.nowIso,
+      kind: p.kind, amount_cents: p.amountCents, currency: 'usd',
+      description: p.description, status: 'paid', metadata: p.meta,
+    }], { onConflict: 'event_key', ignoreDuplicates: true });
+  } catch (e) { logError('founder-transfer', p.fromUser, (e as Error)?.message ?? 'money_events write failed', { stage: 'payout_money_event' }); }
+}
+
+interface PayoutJob {
+  fromUser: string; form: string; amountCents: number; connectAccountId: string | null;
+  refKey: 'case_id' | 'buyback_id'; refId: string;
+  idemKey: string; eventKey: string; kind: string; description: string;
+}
+
+/** Perform ONE payout (§6.6). Returns the outcome — the caller maps it to its own
+ *  table's status column (transfer cases: payout_status; buybacks: state). Pure of any
+ *  status writes so the SAME machinery drives both transfers and buybacks.
+ *  · account_credits → system_grant_credits('seat_payout', keyed by refId) → grant-once.
+ *  · connect_cash    → stripe.transfers.create with idempotencyKey (double-payout-proof).
+ *  · Connect absent / no rate → 'held' (LAW 1 posture). Stripe error → 'failed'. */
+async function performPayout(
+  admin: AnyClient, stripeApi: typeof stripe, job: PayoutJob, connectOn: boolean, nowIso: string,
+): Promise<{ outcome: 'released' | 'held' | 'failed'; transferId: string | null; credits: number | null }> {
+  if (job.form === 'account_credits') {
+    const rate = await creditRate(stripeApi);
+    if (!rate) { logError('founder-transfer', job.fromUser, 'no credit rate — payout parked held', { stage: 'payout_credits', ref: job.refId }); return { outcome: 'held', transferId: null, credits: null }; }
+    const credits = Math.round((job.amountCents * CREDITS_25) / rate.unitAmount);
+    if (credits <= 0) return { outcome: 'held', transferId: null, credits: null };
+    const { error } = await admin.rpc('system_grant_credits', {
+      target_user: job.fromUser, amount: credits, source: 'seat_payout',
+      metadata: { [job.refKey]: job.refId },
+    });
+    if (error) { logError('founder-transfer', job.fromUser, error.message, { stage: 'payout_grant', ref: job.refId }); return { outcome: 'held', transferId: null, credits: null }; }
+    await writePayoutMoneyEvent(admin, { eventKey: job.eventKey, fromUser: job.fromUser, amountCents: job.amountCents, kind: job.kind, description: job.description, meta: { form: 'credits', [job.refKey]: job.refId, credits }, nowIso });
+    return { outcome: 'released', transferId: null, credits };
+  }
+  // connect_cash
+  if (!connectOn || !job.connectAccountId) {
+    return { outcome: 'held', transferId: null, credits: null }; // Connect absent → park (LAW 1).
+  }
+  try {
+    const transfer = await stripeApi.transfers.create(
+      { amount: job.amountCents, currency: 'usd', destination: job.connectAccountId, metadata: { [job.refKey]: job.refId } },
+      { idempotencyKey: job.idemKey },
+    );
+    const transferId = (transfer?.id as string | null) ?? null;
+    await writePayoutMoneyEvent(admin, { eventKey: job.eventKey, fromUser: job.fromUser, amountCents: job.amountCents, kind: job.kind, description: job.description, meta: { form: 'cash', [job.refKey]: job.refId, stripe_transfer_id: transferId }, nowIso });
+    return { outcome: 'released', transferId, credits: null };
+  } catch (e) {
+    logError('founder-transfer', job.fromUser, (e as Error)?.message ?? 'transfer failed', { stage: 'payout_transfer', ref: job.refId });
+    return { outcome: 'failed', transferId: null, credits: null };
+  }
+}
+
+/** Release due transfer payouts (§6.6). Claims one at a time (claim_due_transfer_payout),
+ *  performs the payout, maps the outcome to payout_status. The atomic claim + the Stripe
+ *  idempotency key make double-release impossible. */
+async function sweepReleasePayouts(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
+  const connectOn = deps.connectEnabled?.() ?? Boolean(Deno.env.get('STRIPE_CONNECT_ENABLED'));
+  let released = 0;
+  for (let i = 0; i < 200; i += 1) {
+    const { data: claim } = await admin.rpc('claim_due_transfer_payout');
+    if (!claim?.ok) break;
+    const r = await performPayout(admin, stripeApi, {
+      fromUser: claim.from_user, form: claim.payout_form, amountCents: claim.payout_amount_cents,
+      connectAccountId: claim.connect_account_id ?? null,
+      refKey: 'case_id', refId: claim.case_id,
+      idemKey: `payout-${claim.case_id}`, eventKey: `payout:${claim.case_id}`,
+      kind: 'seat_transfer_payout', description: 'Founder seat transfer payout',
+    }, connectOn, nowIso);
+    await admin.from('founder_transfer_cases')
+      .update({ payout_status: r.outcome, updated_at: nowIso, ...(r.transferId ? { stripe_transfer_id: r.transferId } : {}) })
+      .eq('id', claim.case_id);
+    if (r.outcome === 'released') released += 1;
+  }
+  return released;
+}
+
+// ── The stewardship limb (§6.8/M-10) plugs its buyback release + sweeps here. Stubs
+//    until that slice lands.
 // deno-lint-ignore no-unused-vars
 async function sweepReleaseBuybacks(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
-  return 0; // M-10: the standing-buyback payouts ride the same release machinery.
+  return 0; // M-10: the standing-buyback payouts ride the same performPayout machinery.
 }
 // deno-lint-ignore no-unused-vars
 async function sweepStewardship(admin: AnyClient, deps: Deps, nowIso: string): Promise<number> {
