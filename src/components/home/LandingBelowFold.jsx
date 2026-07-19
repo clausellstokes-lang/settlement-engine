@@ -14,9 +14,10 @@
  * and decorative chips are plain spans (§3.8); <section aria-labelledby> + h2.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Lock, ChevronDown, ArrowRight, Sparkles, Map as MapIcon } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
+import WelcomeJourneyBackdrop from './WelcomeJourneyBackdrop.jsx';
 import { fontFamily, radius } from '../../design/tokens.js';
 import {
   INK, SECOND, BODY, MUTED, GOLD, GOLD_DEEP, GOLD_TXT, GOLD_BG,
@@ -352,10 +353,19 @@ function LandingFooter({ onNavigate }) {
 // no onSignIn is needed here — the auth CTA lives only in the hero.
 export default function LandingBelowFold({ isMobile, onNavigate }) {
   const pad = sectionPad(isMobile);
+  // The scroll-journey root: the film backdrop measures the `.leg` travel spacers
+  // inside this container to drive its playhead (home/useScrollJourney).
+  const rootRef = useRef(null);
 
   return (
     <>
-      {/* ══ 01 · Forge — painted thorpe scene ══ */}
+      {/* THE FILM (Slice C2): the fixed travel-and-stop growth film, behind the
+          stops (zIndex 0). The stops + legs below sit at zIndex 1 over it. */}
+      <WelcomeJourneyBackdrop rootRef={rootRef} />
+      <div ref={rootRef} style={{ position: 'relative', zIndex: 1 }}>
+        {/* leg 1 · desk → thorp */}
+        <div className="sf-welcome-leg" data-welcome-leg="0" aria-hidden="true" />
+        {/* ══ 01 · Forge — painted thorpe scene (stop 1 · thorp) ══ */}
       <section
         id="forge"
         aria-labelledby="sf-forge-title"
@@ -379,7 +389,9 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 02 · The brief — plain parchment ══ */}
+        {/* leg 2 · thorp → hamlet */}
+        <div className="sf-welcome-leg" data-welcome-leg="1" aria-hidden="true" />
+        {/* ══ 02 · The brief — plain parchment (stop 2 · hamlet) ══ */}
       <section id="brief" aria-labelledby="sf-brief-title" style={{ ...pad, background: PARCH }}>
         <Waypoint pill={tl('brief.waypoint')} />
         <div style={twoColGrid(36)}>
@@ -398,7 +410,9 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 03 · The voice — plain parchment (#F7F0E4), hairline borders ══ */}
+        {/* leg 3 · hamlet → village */}
+        <div className="sf-welcome-leg" data-welcome-leg="2" aria-hidden="true" />
+        {/* ══ 03 · The voice — plain parchment (#F7F0E4), hairline borders (stop 3 · village) ══ */}
       <section
         id="voice"
         aria-labelledby="sf-voice-title"
@@ -431,13 +445,24 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 04 · The Realm — painted city scene + CARTOGRAPHER pill ══ */}
+        {/* leg 4 · village → town */}
+        <div className="sf-welcome-leg" data-welcome-leg="3" aria-hidden="true" />
+        {/* ══ 04 · The Realm — painted city scene + CARTOGRAPHER pill (stop 4 · town) ══ */}
       <section
         id="realm"
         aria-labelledby="sf-realm-title"
         className="sf-landing-scene-cream"
         style={{ ...pad, '--sf-scene': SCENE('city') }}
       >
+        {/* THE FILM RULING (owner): the town-stop caption — the film has just
+            scrubbed desk → town, so the world is alive before "make it canon". */}
+        <p style={{
+          maxWidth: CONTENT_MAX, margin: `0 auto ${SP.md}px`, textAlign: 'center',
+          fontFamily: sans, fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.1em',
+          textTransform: 'uppercase', color: GOLD_DEEP,
+        }}>
+          {tl('journey.townGrew')}
+        </p>
         <Waypoint pill={tl('realm.waypoint')} goldPill={tl('realm.waypointPill')} />
         <div style={twoColGrid(28)}>
           <div style={panelStyle}>
@@ -458,6 +483,10 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
           The plate card renders the frozen v2 lens plates of the FIXTURE town
           (the same town as §02's dossier — the seed tag is the receipt), with
           the lens flip + provenance tease. ══ */}
+        {/* leg 5 · town → city */}
+        <div className="sf-welcome-leg" data-welcome-leg="4" aria-hidden="true" />
+        {/* Stop 5 · city — §05 The map and §06 The commons both present here (the
+            city stop; the artifacts + maps the spec groups at this tier). */}
       <section id="map" aria-labelledby="sf-map-title" style={{ ...pad, background: PARCH }}>
         <Waypoint pill={tl('map.waypoint')} />
         <div style={{ maxWidth: CONTENT_MAX, margin: `${SP.xl}px auto 0` }}>
@@ -487,7 +516,9 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
       </section>
 
-      {/* ══ 07 · Set out — dark painted create scene + footer ══ */}
+        {/* leg 6 · city → metropolis */}
+        <div className="sf-welcome-leg" data-welcome-leg="5" aria-hidden="true" />
+        {/* ══ 07 · Set out — dark painted create scene + footer (stop 6 · metropolis) ══ */}
       <section
         id="closer"
         aria-labelledby="sf-closer-title"
@@ -521,6 +552,7 @@ export default function LandingBelowFold({ isMobile, onNavigate }) {
         </div>
         <LandingFooter onNavigate={onNavigate} />
       </section>
+      </div>
     </>
   );
 }
