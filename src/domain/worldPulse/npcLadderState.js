@@ -82,15 +82,27 @@ export function rungCapForTier(tier) {
 }
 
 // ── Faction key + membership (the §8 read-side consumer computes the SAME key) ──
-/** The stable ladder key for a faction entry — its own id, else the normalized name.
+/** The faction entry's display NAME across record shapes. REAL powerStructure.factions
+ *  records carry the name in `.faction` (rulingStructure.js keys governingName off it, and
+ *  the domain accessor rulingPower.nameOf reads `.faction || .name`); the test-fixture /
+ *  legacy shape uses `.name`/`.label`. Without the `.faction` arm every real faction
+ *  slugified to `fac.unknown` and the ladder merged them into one — THE FACTION-KEY BUG.
+ *  Single chokepoint for both the key and the membership match. @param {Record<string, unknown>} f @returns {string} */
+function factionName(f) {
+  if (typeof f.faction === 'string' && f.faction) return f.faction;
+  if (typeof f.name === 'string' && f.name) return f.name;
+  if (typeof f.label === 'string' && f.label) return f.label;
+  return '';
+}
+/** The stable ladder key for a faction entry — its own id, else the normalized name
+ *  (the generator's `.faction`, else `.name`/`.label`; see factionName).
  *  The read-side power/legitimacy consumer keys its mirror lookup identically.
- *  @param {{ id?: unknown, name?: unknown }} faction @returns {string} */
+ *  @param {{ id?: unknown, name?: unknown, faction?: unknown }} faction @returns {string} */
 export function ladderFactionKey(faction) {
   const f = asObject(faction);
   const id = f.id;
   if (typeof id === 'string' && id) return id;
-  const name = typeof f.name === 'string' ? f.name : '';
-  return `fac.${normalizeToken(name)}`;
+  return `fac.${normalizeToken(factionName(f))}`;
 }
 /** @param {string} value @returns {string} */
 function normalizeToken(value) {
@@ -108,10 +120,11 @@ function npcFactionHandle(npc) {
 }
 /** Does this NPC belong to the given faction? Matches the generator affiliation handle
  *  (normalized) against the faction name/key, or linkedFactionIds against the faction id.
- *  @param {Record<string, unknown>} npc @param {{ id?: unknown, name?: unknown }} faction @param {string} fkey */
+ *  The faction name is read via factionName (`.faction` on real records, else `.name`).
+ *  @param {Record<string, unknown>} npc @param {{ id?: unknown, name?: unknown, faction?: unknown }} faction @param {string} fkey */
 export function npcInFaction(npc, faction, fkey) {
   const f = asObject(faction);
-  const name = typeof f.name === 'string' ? f.name : '';
+  const name = factionName(f);
   const handle = npcFactionHandle(npc);
   if (handle && (normalizeToken(handle) === normalizeToken(name) || handle === f.id || `fac.${normalizeToken(handle)}` === fkey)) return true;
   const linked = Array.isArray(npc.linkedFactionIds) ? npc.linkedFactionIds : [];

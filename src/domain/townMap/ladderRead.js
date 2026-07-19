@@ -174,12 +174,16 @@ const INSTAB_POWER_WEIGHT = 0.4;
 /** The stable ladder key for a faction entry — MUST match npcLadderState.ladderFactionKey
  *  byte-for-byte (the write side keys the mirror identically; a drift silently misses the
  *  lookup ⇒ no §8 effect when lit, still dark-safe). Cross-checked by ladderRead.test.js.
- *  @param {{ id?: unknown, name?: unknown }|null|undefined} faction @returns {string} */
+ *  The name is read via `.faction` (real powerStructure records — rulingPower.nameOf), then
+ *  `.name`/`.label` (fixtures); without `.faction` every real faction keyed `fac.unknown`.
+ *  @param {{ id?: unknown, name?: unknown, faction?: unknown, label?: unknown }|null|undefined} faction @returns {string} */
 function factionKeyOf(faction) {
-  const f = faction && typeof faction === 'object' ? faction : {};
-  const id = /** @type {{ id?: unknown }} */ (f).id;
+  const f = /** @type {{ id?: unknown, name?: unknown, faction?: unknown, label?: unknown }} */ (faction && typeof faction === 'object' ? faction : {});
+  const id = f.id;
   if (typeof id === 'string' && id) return id;
-  const name = typeof (/** @type {{ name?: unknown }} */ (f).name) === 'string' ? /** @type {{ name: string }} */ (f).name : '';
+  const name = typeof f.faction === 'string' && f.faction ? f.faction
+    : typeof f.name === 'string' && f.name ? f.name
+      : typeof f.label === 'string' && f.label ? f.label : '';
   const token = slugify(name, { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' });
   return `fac.${token}`;
 }
