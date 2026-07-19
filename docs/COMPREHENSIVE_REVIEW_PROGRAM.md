@@ -1153,6 +1153,22 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ THE PERF HARNESS BUILT + BASELINED (2026-07-19, claude/caliber-perf @
+f5e142e8, 2 commits) — the program's most-deferred item retired.** ZERO new
+dependencies (JUDGMENT: reused the e2e suite's existing Playwright + Chromium
+over the pre-authorized puppeteer add — the shared node_modules untouched with
+six lanes live). CDP 4× CPU throttle + cache-disabled cold loads; 6 journeys ×
+3 cold samples + 1 warm, median+spread; `npm run perf:throttled`; baseline
+committed at scripts/perf/baselines/ (gitCommit aad6265e, chromium 148).
+FIRST REAL NUMBERS (throttled): pricing LCP 676ms · create 648 · home 904 ·
+library 1248 · realm 1760 · THE DOSSIER JOURNEY Ready ≈10s (generation is
+CPU-bound, barely cache-movable — the empirical justification for THEATER MODE,
+and a named loop-survey target for the perf dimension). FINDING (intake): no
+URL-addressable deterministic demo-dossier route exists (the lf-033 fixture is
+inline-only) — a ?demo= hook is the enabler if wanted, flagged not built.
+Smoke rot-guard 8 tests; eslint/build green. WAVE A CLUSTER 1 (the dossier
+tabs — the residual sweep's biggest block, ~190 offenders) DISPATCHES into the
+freed capacity — seven lanes territory now: six live + cal-prim's suite closing.
 **⬛ OWNER RULINGS ×2 (2026-07-19, "with the standard I have set, do your
 recommendation for Class C"):** (1) ⭐ HOWTOUSE RESOLVED — the About/Compendium
 pivot STRUCTURE stands; master's lost Philosophy + Under-the-Hood content is
