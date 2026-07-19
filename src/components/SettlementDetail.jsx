@@ -22,21 +22,15 @@ import { flag } from '../lib/flags.js';
 import { resolveExportSeam } from './settlementDetail/resolveExportSeam.js';
 import { useStore } from '../store/index.js';
 
-const OutputContainer = lazy(() => import('./OutputContainer'));
 // W-Session — the distraction-free run-of-play takeover. Lazy like TableView:
 // the chunk loads only when the DM actually opens it (zero first-paint bytes).
 const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
-// SM-2 — the town-map viewer. Own lazy chunk (design Option A): the map code
-// loads only when the user picks the Map segment, never on first paint (the
-// pane chunk + the town-map model are absent from the entry static closure —
-// tests/build/townMapLazy.test.js). NOTE: consuming buildTownMapModel from this
-// (settlements) route makes Rollup hoist two shared read-models
-// (districtProfile → threatProfile, pulled in by the model's own
-// deriveAllDistricts) into the entry __vite__mapDeps manifest — a +93 B
-// first-paint delta that is UNAVOIDABLE (a minimal pane importing only
-// buildTownMapModel measures the same). Same mechanism as the memory's
-// W4c/W4e/W4h shared-read-model hoists; resolution is owner-gated (budget raise).
-const SettlementMapPane = lazy(() => import('./townMap/SettlementMapPane.jsx'));
+// The [Dossier | Map] body + phase-aware NextActionRail two-column dossier hero
+// (RESTORED @ S2r-a) is extracted to its own component to keep this surface
+// under the component-size ratchet. It owns the lazy OutputContainer +
+// SettlementMapPane chunks (still absent from the entry static closure —
+// tests/build/townMapLazy.test.js, vendorPdfLazy.test.js).
+import SettlementDossierHero from './settlementDetail/SettlementDossierHero.jsx';
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
@@ -71,13 +65,11 @@ import { t } from '../copy/index.js';
 // which centralizes the visual styling and the role="status" a11y
 // announcement under one shared component.
 import StateBadge        from './primitives/StateBadge.jsx';
-import Segmented         from './primitives/Segmented.jsx';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
 import NetworkEffectsPanel from './settlementDetail/SettlementDetailNetworkEffectsPanel.jsx';
 import LinkNeighbourCard from './settlementDetail/SettlementDetailLinkNeighbourCard.jsx';
 import SettlementDetailEditNames from './settlementDetail/SettlementDetailEditNames.jsx';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch, PAGE_MAX } from './theme';
-import DetailErrorBoundary from './settlementDetail/DetailErrorBoundary.jsx';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, FS, swatch } from './theme';
 
 const REL_COLORS = {
   trade_partner:'#1a5a28', allied:'#1a3a7a', patron:'#4a1a6a',
@@ -218,7 +210,8 @@ export default function SettlementDetail({
   // Campaign-clock identity lock: NPC + faction names freeze once the settlement
   // is canonized. The store hydrates `phase` from the opened save, so the live
   // store value tracks this detail view. Renames are a draft-only affordance.
-  const isCanonLocked = useStore(s => s.phase) === 'canon';
+  const phase = useStore(s => s.phase);
+  const isCanonLocked = phase === 'canon';
 
   // Tier 5.4 — premium-gated manual editing. The edit toggle lives on
   // the store so per-tab EditableText components can read it without
@@ -741,33 +734,24 @@ export default function SettlementDetail({
         </>
       )}
 
-      {/* SM-2 — [Dossier | Map] lens toggle. Sits ABOVE the body (both edit and
-          view modes); the map is a sibling of OutputContainer, never inside it
-          (OutputContainer renders 3 surfaces; the town map is library-only). */}
-      {detail.settlement && (
-        <div style={{ maxWidth: PAGE_MAX, margin: '0 auto 12px', width: '100%' }}>
-          <Segmented
-            ariaLabel="Settlement view"
-            options={[{ id: 'dossier', label: 'Dossier' }, { id: 'map', label: 'Map' }]}
-            value={detailView}
-            onChange={setDetailView}
-          />
-        </div>
-      )}
-
-      {detail.settlement&&<div style={{marginBottom:12}}>
-        <DetailErrorBoundary>
-          <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
-            {/* P139 — cap the dossier body to the shared page width (the
-                detail toolbar above stays full-width). */}
-            <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
-              {detailView === 'map'
-                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} />
-                : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />}
-            </div>
-          </Suspense>
-        </DetailErrorBoundary>
-      </div>}
+      {/* The [Dossier | Map] body + the phase-aware NextActionRail two-column
+          dossier hero (RESTORED @ S2r-a). Read mode = master's two-column hero
+          (toggle-fed body + sticky rail aside); edit mode = single full-width
+          column below the edit chrome. The rail wiring + shared canonize confirm
+          live inside. */}
+      <SettlementDossierHero
+        detail={detail}
+        detailView={detailView}
+        setDetailView={setDetailView}
+        editMode={editMode}
+        canEdit={canEdit}
+        saveId={saveId}
+        authTier={authTier}
+        phase={phase}
+        narrated={narrated}
+        toggleEditMode={toggleEditMode}
+        openExportSheet={() => { setPdfError(null); setExportSheetOpen(true); }}
+      />
 
       <ConfirmDialog
         open={confirmRevertRaw}

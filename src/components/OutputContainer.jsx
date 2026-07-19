@@ -147,7 +147,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -674,6 +674,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       storeShowNarrative={storeShowNarrative}
       setShowNarrative={setShowNarrative}
       runNarrativeLayer={runNarrativeLayer}
+      suppressNarrativeCta={suppressNarrativeCta}
     />
   );
 

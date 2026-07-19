@@ -19,6 +19,11 @@ export default function DossierNarrativeButtons({
   storeShowNarrative,
   setShowNarrative,
   runNarrativeLayer,
+  // When the NextActionRail owns the paid narrate/regenerate CTAs (the read-mode
+  // dossier hero), the dossier header keeps ONLY the free raw/narrated view
+  // toggle — the credit-spending Generate/Regenerate buttons are suppressed here
+  // so a single narrate entry point competes for the focal (restored @ S2r-a).
+  suppressNarrativeCta = false,
 }) {
     // Unsaved settlements: render nothing here. The AI-enrichment affordance
     // moved to a slim hint line below the tab strip so the header stays
@@ -38,6 +43,8 @@ export default function DossierNarrativeButtons({
 
     // State 1: no narrative yet → single generate button
     if (!aiSettlement && !aiLoading) {
+      // Suppressed in read mode (the rail owns the paid first-narrate CTA).
+      if (suppressNarrativeCta) return null;
       return (
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
           <Button
@@ -94,7 +101,9 @@ export default function DossierNarrativeButtons({
         >
           {inNarrativeView ? 'View Raw Simulation' : 'View Narrative'}
         </Button>
-        {/* Regenerate button — spends credits */}
+        {/* Regenerate button — spends credits. Suppressed in read mode (the
+            rail owns the paid Regenerate rung); the free view toggle stays. */}
+        {!suppressNarrativeCta && (
         <Button
           variant="ai"
           size="sm"
@@ -106,6 +115,7 @@ export default function DossierNarrativeButtons({
         >
           {regenerating ? (displayProgress || 'Regenerating\u2026') : `Regenerate${costLabel}`}
         </Button>
+        )}
       </div>
     );
 }
