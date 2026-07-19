@@ -575,6 +575,10 @@ function advanceLitRoads(args) {
         id: `ransom.${mid}`, npcKey: str(m.npcKey), npcName: str(m.npcName), homeId, captorId: res.captorId,
         threatClass: res.cls, purposeKind: str(asObject(m.purpose).kind), missionId: mid,
         startedTick: now2, startedWeek: weekClock, termWeeks, remainingWeeks: termWeeks,
+        // THE STALE-INTEL RECEIPT (§19): the believed danger the envoy was dispatched under,
+        // carried onto the capture record — a poorly-informed faction's capture cites how
+        // little it knew (knownDangerAtDispatch < the truth that took them).
+        knownDangerAtDispatch: num(m.knownDangerAtDispatch, 0),
         hostileAtCapture, conversionRolled: true, willConvert,
       };
       delete missions[mid];
