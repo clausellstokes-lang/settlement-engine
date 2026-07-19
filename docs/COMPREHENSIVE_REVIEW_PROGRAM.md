@@ -1153,6 +1153,27 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ RESTORATION SWEEP 2 COMPLETE (2026-07-19, claude/restoration-chrome @
+aaeec163, 8 commits).** All of census #4–7, #15–16, #22–23 restored, grafted
+onto the pages materials (never wholesale-reverted). WIP VERDICT: the dead
+agent's PrivacySettings diff was COHERENT-PARTIAL — COMPLETED per its own note
+(consent default untouched, owner policy). Highlights: #16 THE ANON BUY-WALL
+BUG FIXED with the mandatory routing pin (gold signup ⇒ setAuthModalOpen,
+NEVER the purchase modal) — required the store-lift + operationRegistry
+registration + EXEMPT_CEILING 69→70 + the compendium-data regen (⭐ NEW HAZARD
+memory'd: store actions have a DERIVED lifecycle path through the public
+Compendium artifact; compendiumDataFreshness catches skips) · #15 seat meter +
+checkout retry (square-cut, rgba-neutral via GOLD_WASH DRY) · #7 the way back
+(wordmark home link, Page frame, 44px, BORDER_STRONG) · #6 the free-tier
+upgrade CTA + P8 two-primary demotion · #22 lastingEffects to master's 16
+templates — DECLARED same-seed generator shift (all four parked goldens
+confirmed red at base, none re-recorded) · #23 all SIX cross-tier splits
+normalized (census said 4; the ported true-zero guard requires 6) + master's
+guard test live again. Kill-list held 981/103/243/217 (declared branch red,
+counts only down). Deferrals: the noble-bucket restructure (chip task_7308e7ad)
+· 13 current-authored event types have no master lastingEffects (content
+invention ≠ restoration). Full suite 13,219 / EXACTLY the 7 expected on this
+lineage. FOLD-READY. Burn-down nudged (rename + final-four still owed).
 **⬛⭐ RESTORATION SWEEP 1 COMPLETE (2026-07-19, claude/restoration-pdf @
 2e4f3282, 4 commits).** All of census §1 #18–21 restored: R1-a #20 causal-detail
 threading (inherited, re-verified) · cd4b7f40 R1-b #21 viewModel (entity-anchor
