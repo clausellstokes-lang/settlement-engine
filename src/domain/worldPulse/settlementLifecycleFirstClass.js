@@ -405,7 +405,7 @@ const MAX_CAMPAIGN_HISTORY_EVENTS = 20; // mirrors stressorAftermath's campaign-
 /** Append a campaign-era historicalEvents entry (dedup by campaignEventId; the
  *  oldest campaign-era entry is pruned past the cap — generation history never).
  *  @param {LcSettlement} settlement
- *  @param {{ id: string, name: string, type: string, description: string, severity: string }} event
+ *  @param {{ id: string, name: string, type: string, description: string, severity: string, lastingEffects?: string[] }} event
  *  @param {number|null} tick @returns {LcSettlement} */
 function withLifecycleHistoryEvent(settlement, event, tick) {
   const history = /** @type {{ historicalEvents?: Array<Record<string, unknown>> }} */ (settlement.history || {});
@@ -415,7 +415,11 @@ function withLifecycleHistoryEvent(settlement, event, tick) {
   const entry = {
     campaignEventId: eventId, campaignEra: true, tick: tick ?? null, yearsAgo: 0,
     name: event.name, type: event.type, description: event.description,
-    severity: event.severity, lastingEffects: [], plotHooks: [], anchored: true,
+    severity: event.severity,
+    // Authored lasting-effects prose (taste-vetoable). STRING ARRAY contract
+    // (stressorAftermath.js:67-70): the history consumers .join/.map on it.
+    lastingEffects: Array.isArray(event.lastingEffects) ? event.lastingEffects : [],
+    plotHooks: [], anchored: true,
   };
   const campaignEvents = events.filter((e) => e?.campaignEra);
   let nextEvents = [...events, entry];
@@ -520,6 +524,16 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         ? `${name} — once a great city — dwindled to a final thorp and died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved.`
         : `${name} dwindled and was abandoned; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.`,
       severity: 'major',
+      lastingEffects: grade === 'relic_ruin'
+        ? [
+            'The ruin stands as a landmark and a warning on every map that shows it.',
+            'Scavengers and the curious pick over what the last residents left behind.',
+            'The roads that once converged here slacken and fall out of use.',
+          ]
+        : [
+            'A quiet, unmarked site is all that remains where the settlement stood.',
+            'The trade ties and roads that once ran through it fade with its passing.',
+          ],
     }, tick);
     // Sync the config.eventConditions projection (+ the _config twin) to the now-empty
     // activeConditions (r2 economy-upswing-6): else a full regeneration re-promotes an
@@ -564,6 +578,14 @@ export function applySettlementLifecycleOutcomeToSettlement(settlement, outcome)
         ? `${newName} was founded on the ruin of ${name} — the old stones remember, and the new thorp aspires.`
         : `${newName} was founded where ${name} once stood; the old site lives again.`,
       severity: 'moderate',
+      lastingEffects: fromGrade === 'relic_ruin'
+        ? [
+            'The new thorp rises on cleared ground and the reused foundations of the old.',
+            'The older ruins nearby still draw scavengers, pilgrims, and storytellers.',
+          ]
+        : [
+            'The resettled site inherits cleared land and the old field boundaries.',
+          ],
     }, tick);
     return next;
   }
