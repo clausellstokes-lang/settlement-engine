@@ -1898,6 +1898,99 @@ Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now 
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), true);
 });
 
+// ── Founder seat TRANSFER money crossing (§6.6/§6.7, M-7) ────────────────────
+Deno.test('a founder_seat_transfer payment marks the case paid (cooling) + mirrors seat_transfer_payment', async () => {
+  const stub = makeStub('track', { rpcData: { transfer_case_mark_paid: { ok: true } } });
+  const body = JSON.stringify({
+    id: 'evt_transfer_paid', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_transfer_1', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_t',
+      metadata: { purpose: 'founder_seat_transfer', transfer_case_id: 'case-1', supabase_user_id: 'u_in' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: moneyStripe() });
+  assertEquals(res.status, 200);
+  const mark = stub.calls.rpc.find((c) => c.fn === 'transfer_case_mark_paid');
+  assertEquals(mark !== undefined, true);
+  assertEquals((mark!.args as { p_case: string; p_price_cents: number }).p_case, 'case-1');
+  assertEquals((mark!.args as { p_price_cents: number }).p_price_cents, 9900);
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'seat_transfer_payment');
+});
+
+Deno.test('an expired founder_seat_transfer session regresses the case (never-throw)', async () => {
+  const stub = makeStub('track', { rpcData: { transfer_case_regress_awaiting_payment: { ok: true } } });
+  const body = JSON.stringify({ id: 'evt_transfer_expired', type: 'checkout.session.expired', data: { object: { id: 'cs_transfer_exp' } } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'transfer_case_regress_awaiting_payment'), true);
+});
+
+/** Stub for the transfer chargeback matrix: founder_transfer_cases resolves the
+ *  given case by stripe_session_id; records seat flag updates + rpc calls. */
+// deno-lint-ignore no-explicit-any
+function makeTransferClawbackStub(caseRow: Record<string, unknown> | null) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const seatUpdates: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'founder_transfer_cases') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: caseRow, error: null }) };
+        return b;
+      }
+      if (table === 'founder_seats') {
+        return { update: (vals: Record<string, unknown>) => { seatUpdates.push(vals); return { eq: () => Promise.resolve({ error: null }) }; } };
+      }
+      if (table === 'money_events') {
+        return { update: () => ({ in: () => Promise.resolve({ error: null }) }), upsert: () => Promise.resolve({ error: null }) };
+      }
+      // deno-lint-ignore no-explicit-any
+      const sel: any = { select: () => sel, eq: () => sel, maybeSingle: () => Promise.resolve({ data: null, error: null }) };
+      return { select: () => sel, update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
+    },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'clawback_referral') return Promise.resolve({ data: { ok: false }, error: null });
+      if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
+      return Promise.resolve({ data: { ok: true }, error: null });
+    },
+  };
+  return { rpc, seatUpdates, adminClient: () => client };
+}
+// deno-lint-ignore no-explicit-any
+const transferStripe = (): any => ({
+  charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_t' }) },
+  checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: 'cs_transfer_1' }] }) } },
+});
+const transferRefund = (evt: string) => JSON.stringify({ id: evt, type: 'charge.refunded', data: { object: { id: 'ch_t', invoice: null, payment_intent: 'pi_t' } } });
+
+Deno.test('chargeback of a COOLING transfer aborts the case (no seat moved)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-1', state: 'cooling', payout_status: 'none', seat_id: 3 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_cooling'), { 'stripe-signature': await sign(transferRefund('evt_t_cooling'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  const ab = stub.rpc.find((c) => c.fn === 'transfer_case_abort');
+  assertEquals(ab !== undefined, true);
+  assertEquals((ab!.args as { p_actor: string }).p_actor, 'chargeback');
+});
+
+Deno.test('chargeback of a FINALIZED transfer (payout not released) reverses the case (seat moves back)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-2', state: 'finalized', payout_status: 'scheduled', seat_id: 4 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_final'), { 'stripe-signature': await sign(transferRefund('evt_t_final'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_reverse'), true);
+});
+
+Deno.test('chargeback of a FINALIZED transfer AFTER payout released flags the seat (accepted residual)', async () => {
+  const stub = makeTransferClawbackStub({ id: 'case-3', state: 'finalized', payout_status: 'released', seat_id: 5 });
+  const res = await handleStripeWebhook(req(transferRefund('evt_t_paid_out'), { 'stripe-signature': await sign(transferRefund('evt_t_paid_out'), SECRET) }), { adminClient: stub.adminClient, stripeClient: transferStripe() });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_reverse'), false); // NOT reversed
+  assertEquals(stub.seatUpdates.some((u) => u.security_status === 'flagged'), true);
+});
+
 // ── Delivery-stash session bind (dossier_purchases, migration 122) ──────────
 // Ported OURS-only lane: the paid single_dossier branch backfills
 // dossier_purchases.stripe_session_id keyed on the checkout_token, so

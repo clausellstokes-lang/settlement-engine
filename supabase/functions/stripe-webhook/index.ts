@@ -666,6 +666,43 @@ async function clawbackFounderForSession(
 }
 
 /**
+ * TRANSFER dispute/refund interplay (§6.7, M-7). A refund/dispute resolving to a
+ * TRANSFER checkout session (the case's stripe_session_id) reverses the transfer by
+ * its case state — claim-once via the 160 RPCs (a redelivery finds a non-live state
+ * and no-ops). NEVER-throw: a mirror failure must not stall the other clawbacks.
+ *   - cooling            → abort (chargeback); no seat ever moved.
+ *   - finalized, payout not released → reverse; the seat moves BACK.
+ *   - finalized, payout released     → flag the seat + loud operator log; the company
+ *     is out $49.50 (the 14-day floor covers fast fraud; slow disputes are a support
+ *     case). money_events is flipped to 'disputed' by flipMoneyEventStatus on the same key.
+ */
+async function clawbackTransferForSession(
+  supabase: ReturnType<typeof adminClient>,
+  key: string,
+): Promise<void> {
+  const { data: c, error } = await supabase
+    .from('founder_transfer_cases')
+    .select('id, state, payout_status, seat_id')
+    .eq('stripe_session_id', key)
+    .maybeSingle();
+  if (error) { logError('stripe-webhook', null, error.message, { stage: 'transfer_clawback_lookup', key }); return; }
+  if (!c) return; // this key is not a transfer session — nothing to reverse.
+
+  if (c.state === 'cooling') {
+    const { error: aErr } = await supabase.rpc('transfer_case_abort', { p_case: c.id, p_actor: 'chargeback', p_reason: 'dispute_or_refund' });
+    if (aErr) logError('stripe-webhook', null, aErr.message, { stage: 'transfer_clawback_abort', case_id: c.id });
+  } else if (c.state === 'finalized' && c.payout_status !== 'released' && c.payout_status !== 'releasing') {
+    const { error: rErr } = await supabase.rpc('transfer_case_reverse', { p_case: c.id, p_reason: 'dispute_or_refund' });
+    if (rErr) logError('stripe-webhook', null, rErr.message, { stage: 'transfer_clawback_reverse', case_id: c.id });
+  } else if (c.state === 'finalized') {
+    // Payout already out — the seat is administratively flagged; recorded accepted-risk.
+    const { error: fErr } = await supabase.from('founder_seats').update({ security_status: 'flagged' }).eq('seat_id', c.seat_id);
+    if (fErr) logError('stripe-webhook', null, fErr.message, { stage: 'transfer_clawback_flag', case_id: c.id });
+    logError('stripe-webhook', null, 'transfer disputed AFTER payout released — seat flagged, company out $49.50 (accepted residual)', { stage: 'transfer_post_payout_dispute', case_id: c.id });
+  }
+}
+
+/**
  * Reverse the 30-credit founder bonus via service_adjust_credits (103) — atomic,
  * ledger-first, clamped at zero (a spent-down balance is deducted only as far as it
  * goes). Attributed to the longest-standing elevated profile, same as the referral
@@ -1524,6 +1561,29 @@ async function dispatchStripeEvent(
       // no-ops here (no_reserved_redemption).
       await applyRedemptionIfBound(supabase, session.id);
 
+      // FOUNDER SEAT TRANSFER (§6.6, M-7): a case-bound $99 payment. This session
+      // carries purpose='founder_seat_transfer' + transfer_case_id (server-validated
+      // state, set by founder-transfer/nominee_confirm), NOT a `product`. Mark the case
+      // paid → cooling (claim-once on the awaiting_payment state + the bound session)
+      // and mirror a seat_transfer_payment money_events row. Handled BEFORE the product
+      // dispatch so it never falls into the "unhandled product" throw.
+      if (session.metadata?.purpose === 'founder_seat_transfer') {
+        const transferCaseId = session.metadata?.transfer_case_id;
+        if (!transferCaseId) throw new Error('founder_seat_transfer session missing transfer_case_id');
+        const { data: paid, error: paidErr } = await supabase.rpc('transfer_case_mark_paid', {
+          p_case: transferCaseId, p_session: session.id, p_price_cents: session.amount_total ?? 0,
+        });
+        if (paidErr) throw new Error(`transfer_case_mark_paid failed: ${paidErr.message}`);
+        if (paid?.ok) {
+          await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, 'seat_transfer_payment', session.metadata?.supabase_user_id ?? null, 0);
+        } else {
+          // A wrong-state session (already paid / aborted / a stale nominee session):
+          // ack and, if it never entered awaiting_payment, refund the orphaned charge.
+          console.log(`[stripe-webhook] transfer session ${session.id} mark_paid no-op: ${paid?.reason ?? 'unknown'}`);
+        }
+        break;
+      }
+
       const userId  = session.metadata?.supabase_user_id;
       const product = session.metadata?.product;
       const credits = parseInt(session.metadata?.credits || '0', 10);
@@ -1739,6 +1799,15 @@ async function dispatchStripeEvent(
       if (reverted?.ok) {
         console.log(`[stripe-webhook] redemption ${reverted.redemption_id} reverted on expired session ${expired.id}`);
       }
+      // FOUNDER SEAT TRANSFER (§6.3, M-7): an expired unpaid transfer session regresses
+      // its case to nominee_verified so acceptance can re-mint a session. Claim-once
+      // (only an awaiting_payment case bound to THIS session regresses). NEVER-throw.
+      try {
+        const { error: regressErr } = await supabase.rpc('transfer_case_regress_awaiting_payment', { p_session: expired.id });
+        if (regressErr) logError('stripe-webhook', null, regressErr.message, { stage: 'transfer_session_expired_regress', session_id: expired.id });
+      } catch (err) {
+        logError('stripe-webhook', null, err, { stage: 'transfer_session_expired_regress', session_id: expired.id });
+      }
       break;
     }
 
@@ -1822,6 +1891,9 @@ async function dispatchStripeEvent(
         // ledger row keyed on. Reverses is_founder (freeing the seat), the premium tier,
         // and the 30-credit bonus. No-ops for every key that never granted the bonus.
         await clawbackFounderForSession(supabase, key);
+        // TRANSFER clawback (§6.7): a refunded/disputed transfer charge's key is the
+        // case's checkout SESSION id — reverse the transfer by its case state.
+        await clawbackTransferForSession(supabase, key);
       }
       // MONEY LEDGER (156): flip the mirrored row's status (refund → 'refunded',
       // dispute → 'disputed') on the SAME candidate keys. The one sanctioned
