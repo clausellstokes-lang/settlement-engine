@@ -1149,8 +1149,12 @@ return-on-liberation emergent · migration ADOPTION via mover origins · count s
 by tier (thorp 1-2 → metropolis many). Effects = READ-MANY, WRITE-BOUNDED pulses
 through existing channels (trade, legitimacy, faith standing, news, chronicle,
 hooks) — never new write paths into other kernels. Surfaces: dossier Traditions
-register · almanac · chronicle · map festival dress (IT-3 coupling) · exports ·
-facet-law custom kind (S4; AI proposals Surveyor-gated). Backfill for existing
+tab REGISTERED IN THE WORLD GROUP (owner placement, same day: "the tab should exist
+in the world tab of the dossier" — a data-only TAB_GROUPS/TABS registration per the
+reconciled-base plug-in pattern; world group stays NPC-first per master's ordering
+law; manager judgment, vetoable: Traditions slots beside daily_life — culture next
+to daily life) · almanac · chronicle · map festival dress (IT-3 coupling) ·
+exports · facet-law custom kind (S4; AI proposals Surveyor-gated). Backfill for existing
 settlements at flag-light (veteran-backfill pattern). traditionsEnabled = THE
 EIGHTH FLAG in the pre-signed ONE REGEN; genesis content parks red on generator
 goldens (generation-time precedent); ROUND 3 reviews; SOAK certifies occurrence
