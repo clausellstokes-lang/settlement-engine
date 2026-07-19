@@ -527,7 +527,12 @@ A+ at this stage, rinse and repeat.")
   have desynced write/read keys); 3 sites fixed, classification consumers verified
   N/A via factionArchetype; real-shape pin 9/9 revert-proven; dormancy byte-identity
   green. The traditions faction.power seam now waits only on the folds. ·
-  vendorManifestExactSet.test.js NON-ATOMIC MV of public/map/libs/flatqueue.js
+  AI-adapter API-shape check (owner Q 2026-07-19 answered: NO plugin/MCP needed —
+  the Messages API + the schema wall IS the integration; verify the adapters use
+  PROMPT CACHING on the stable grounding prefixes [managed-credit cost] +
+  tool-forced structured outputs where the wall parses JSON; an official
+  SettlementForge MCP server = optional post-launch owner offering, deliberately
+  NOT built now per the perimeter posture) · vendorManifestExactSet.test.js NON-ATOMIC MV of public/map/libs/flatqueue.js
   (proven to strand a deleted file + .bak on mid-run crash; two lanes bitten
   2026-07-19) — add try/finally restoration so a crashed run cannot damage the tree. ·
   WhatChangedPanel has NO live importer (tested at whatChangedPanel.test.jsx, mounted
