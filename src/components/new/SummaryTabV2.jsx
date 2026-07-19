@@ -215,7 +215,6 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
           padding: 12,
           background: PARCH,
           border: `1px solid ${BORDER}`,
-          borderRadius: 6,
           display: 'flex', flexDirection: 'column', gap: 6,
         }}>
           <div style={{
@@ -255,7 +254,6 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
                     background: swatch.white,
                     border: `1px solid ${BORDER}`,
                     borderLeft: `3px solid ${accent}`,
-                    borderRadius: 4,
                   }}
                 >
                   <div style={{

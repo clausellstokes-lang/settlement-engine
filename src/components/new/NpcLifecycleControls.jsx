@@ -29,7 +29,6 @@ const selectStyle = {
   color: swatch.inkMag2,
   background: swatch['#FAF8F4'],
   border: `1px solid ${swatch['#EDE3CC']}`,
-  borderRadius: 4,
   padding: '2px 4px',
   maxWidth: '100%',
 };
@@ -55,7 +54,7 @@ export default function NpcLifecycleControls({ npc, resolveNpcIndex }) {
   };
 
   return (
-    <div style={{ marginTop: 6, padding: '6px 8px', background: swatch['#F5F0E8'], borderRadius: 4 }}>
+    <div style={{ marginTop: 6, padding: '6px 8px', background: swatch['#F5F0E8']}}>
       <div style={{ fontSize: FS.micro, fontWeight: 700, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 4 }}>
         Edit (bank) — queues a reviewable change
       </div>

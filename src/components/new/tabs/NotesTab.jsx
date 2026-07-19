@@ -86,7 +86,6 @@ export default function NotesTab({ saveId, notes, section }) {
     resize: 'vertical',
     boxSizing: 'border-box',
     border: `1px solid ${BORDER}`,
-    borderRadius: 6,
     padding: '10px 12px',
     fontSize: FS.sm,
     lineHeight: 1.55,
@@ -100,7 +99,7 @@ export default function NotesTab({ saveId, notes, section }) {
       <TabIntro tabKey="notes" />
       <div style={{ display: 'grid', gap: 14 }}>
         {showDm && (
-          <section style={{ border: `1px solid ${BORDER}`, borderRadius: 8, padding: 14, background: swatch['#FAF8F4'] }}>
+          <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#FAF8F4'] }}>
             <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               DM Notes
             </div>
@@ -115,7 +114,7 @@ export default function NotesTab({ saveId, notes, section }) {
         )}
 
         {showAi && (
-          <section style={{ border: `1px solid ${BORDER}`, borderRadius: 8, padding: 14, background: swatch['#F7F0E4'] }}>
+          <section style={{ border: `1px solid ${BORDER}`, padding: 14, background: swatch['#F7F0E4'] }}>
             <div style={{ ...sans, fontSize: FS.xxs, fontWeight: 800, color: GOLD, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               Campaign Context
             </div>

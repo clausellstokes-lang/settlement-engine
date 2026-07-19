@@ -28,7 +28,7 @@ function Quote(q) {
       <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,minWidth:0}}>{q.label}</span>
       <span style={{fontSize:FS.sm,color:swatch.inkMag2}}>{q.priced}</span>
       {q.tag !== 'steady' && (
-        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,borderRadius:3,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color,background:`${color}15`,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.05em'}}>{q.tag}</span>
       )}
     </div>
   );
