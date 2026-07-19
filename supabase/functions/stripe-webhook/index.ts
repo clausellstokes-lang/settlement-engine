@@ -602,6 +602,7 @@ async function deductReferralCredits(
  */
 async function clawbackFounderForSession(
   supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
   key: string,
 ): Promise<void> {
   const { data: grantRow, error: grantErr } = await supabase
@@ -613,6 +614,14 @@ async function clawbackFounderForSession(
   if (grantErr) throw new Error(`founder clawback lookup failed: ${grantErr.message}`);
   const userId = grantRow?.user_id as string | undefined;
   if (!userId) return; // this key never granted the founder bonus — nothing to reverse.
+
+  // FP-4 (§6.7): BEFORE reversing founder state, abort any LIVE transfer case for this
+  // holder's seat (refunding the nominee's $99 if the case was paid — the abort-refund
+  // path). Ordered FIRST so the subsequent transfer_case_finalize refuses (wrong_state):
+  // otherwise the cooling case would still finalize, handing the just-unwound seat to the
+  // nominee AND scheduling a $49.50 payout to the refunded holder (double recovery). The
+  // live-state filter makes it idempotent — a redelivery finds no live case and no-ops.
+  await abortLiveCaseForClawback(supabase, stripeApi, userId);
 
   // Claim-once: flip is_founder true→false in one atomic statement. A redelivered
   // refund/dispute finds it already false, claims no row, and no-ops.
@@ -662,6 +671,53 @@ async function clawbackFounderForSession(
     if (seatErr) logError('stripe-webhook', userId, seatErr.message, { stage: 'founder_clawback_seat_release', key });
   } catch (err) {
     logError('stripe-webhook', userId, err, { stage: 'founder_clawback_seat_release', key });
+  }
+}
+
+/**
+ * FP-4 (§6.7, family 2): abort any LIVE transfer case for a holder whose ORIGINAL $99 is
+ * being goodwill-refunded, refunding the nominee's $99 if that case was already paid. This
+ * is the §6.7 "clawback FIRST aborts any live case" ordering that M-7 deferred. Called by
+ * clawbackFounderForSession BEFORE the is_founder flip so a subsequent transfer_case_finalize
+ * refuses (the case is no longer 'cooling'). Idempotent: the partial-unique live-case filter
+ * (one live case per from_user) returns nothing on a redelivery once aborted, so no second
+ * abort or refund is attempted; the refund also carries the same `abort-refund-<case>` key
+ * as the edge abort path, so even a racing edge abort dedups to ONE Stripe refund.
+ * NEVER-throw — a failure here logs and lets the founder reversal proceed.
+ */
+async function abortLiveCaseForClawback(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  userId: string,
+): Promise<void> {
+  try {
+    const { data: liveCase, error } = await supabase
+      .from('founder_transfer_cases')
+      .select('id, state, stripe_session_id')
+      .eq('from_user', userId)
+      .in('state', ['initiated', 'nominee_verified', 'awaiting_payment', 'cooling'])
+      .maybeSingle();
+    if (error) { logError('stripe-webhook', userId, error.message, { stage: 'founder_clawback_live_case_lookup' }); return; }
+    if (!liveCase) return; // no live case for this holder's seat — nothing to abort.
+
+    const { data: aborted, error: aErr } = await supabase.rpc('transfer_case_abort', {
+      p_case: liveCase.id, p_actor: 'admin', p_reason: 'goodwill_refund_original',
+    });
+    if (aErr) { logError('stripe-webhook', userId, aErr.message, { stage: 'founder_clawback_case_abort', case_id: liveCase.id }); return; }
+
+    // Refund the nominee's $99 iff the aborted case was paid (cooling). Same idempotency
+    // key as the edge abort-refund path so both dedup to one Stripe refund object.
+    if (aborted?.was_paid && aborted?.payment_session) {
+      const sess = await stripeApi.checkout.sessions.retrieve(aborted.payment_session as string);
+      const pi = typeof sess.payment_intent === 'string' ? sess.payment_intent : sess.payment_intent?.id ?? null;
+      if (pi) {
+        await stripeApi.refunds.create({ payment_intent: pi }, { idempotencyKey: `abort-refund-${liveCase.id}` });
+      } else {
+        logError('stripe-webhook', userId, 'aborted transfer case has no payment_intent to refund', { stage: 'founder_clawback_case_refund', case_id: liveCase.id });
+      }
+    }
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'founder_clawback_case_abort', user_id: userId });
   }
 }
 
@@ -1960,7 +2016,7 @@ async function dispatchStripeEvent(
         // invoice, so its key is the checkout SESSION id — the same id its founder_grant
         // ledger row keyed on. Reverses is_founder (freeing the seat), the premium tier,
         // and the 30-credit bonus. No-ops for every key that never granted the bonus.
-        await clawbackFounderForSession(supabase, key);
+        await clawbackFounderForSession(supabase, stripeApi, key);
         // TRANSFER clawback (§6.7): a refunded/disputed transfer charge's key is the
         // case's checkout SESSION id — reverse the transfer by its case state.
         await clawbackTransferForSession(supabase, key);

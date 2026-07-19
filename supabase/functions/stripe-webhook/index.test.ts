@@ -1681,8 +1681,13 @@ function makeFounderStub(
   // W-R2-TRUST backend-functions-1: inject a transient failure into a POST-CLAIM
   // step. Defaults are null (all steps succeed) so existing callers are unchanged.
   inject: { downgrade?: { message: string } | null; auth?: { message: string } | null; adjust?: { message: string } | null } = {},
+  // FP-4 (§6.7): a LIVE transfer case for the clawed-back holder's seat. null (default)
+  // = no live case → the abort path no-ops, so every existing caller is unchanged. When
+  // present, the founder_transfer_cases live-state lookup resolves it until it is aborted.
+  liveCase: Record<string, unknown> | null = null,
 ) {
   const state = { isFounder: true };
+  const caseState = { aborted: false };
   const rpc: Array<{ fn: string; args: Record<string, unknown> }> = [];
   const authUpdates: Array<{ id: string; attrs: Record<string, unknown> }> = [];
   const claim = makeClaimTable('track');
@@ -1707,6 +1712,9 @@ function makeFounderStub(
         }
         // profiles: the elevated-actor lookup for the credit clawback.
         if (table === 'profiles') return Promise.resolve({ data: { id: 'admin_u' }, error: null });
+        // FP-4: the live-case lookup (from_user + state in the live set). Models the DB
+        // partial-unique + the live-state filter — once aborted, no live case remains.
+        if (table === 'founder_transfer_cases') return Promise.resolve({ data: caseState.aborted ? null : liveCase, error: null });
         return Promise.resolve({ data: null, error: null });
       },
       // Awaitable terminal: profiles.update({is_founder:false}).eq().eq().select('id').
@@ -1734,10 +1742,30 @@ function makeFounderStub(
       if (fn === 'clawback_dossier_entitlement') return Promise.resolve({ data: { entitlement_id: null }, error: null });
       if (fn === 'handle_premium_downgrade') return Promise.resolve({ data: inject.downgrade ? null : { ok: true }, error: inject.downgrade ?? null });
       if (fn === 'service_adjust_credits') return Promise.resolve({ data: inject.adjust ? null : { prev: 30, next: 0, delta: -30 }, error: inject.adjust ?? null });
+      // FP-4: aborting the live case flips it out of the live set (claim-once) and reports
+      // was_paid + the payment session so the webhook can refund the nominee's $99.
+      if (fn === 'transfer_case_abort') {
+        caseState.aborted = true;
+        return Promise.resolve({ data: { ok: true, was_paid: liveCase?.state === 'cooling', payment_session: liveCase?.stripe_session_id ?? null }, error: null });
+      }
       return Promise.resolve({ data: null, error: null });
     },
   };
   return { state, rpc, authUpdates, adminClient: () => client };
+}
+/** Founder-clawback stripe stub that ALSO records the FP-4 nominee refund. */
+// deno-lint-ignore no-explicit-any
+function founderStripeWithRefunds(sessionId = 'cs_founder') {
+  const refunds: Array<{ params: unknown; opts: unknown }> = [];
+  return {
+    refunds,
+    // deno-lint-ignore no-explicit-any
+    client: {
+      charges: { retrieve: (id: string) => Promise.resolve({ id, invoice: null, payment_intent: 'pi_f' }) },
+      checkout: { sessions: { list: () => Promise.resolve({ data: [{ id: sessionId }] }), retrieve: (_id: string) => Promise.resolve({ payment_intent: 'pi_transfer' }) } },
+      refunds: { create: (params: unknown, opts: unknown) => { refunds.push({ params, opts }); return Promise.resolve({ id: 're_f' }); } },
+    } as any,
+  };
 }
 
 const founderRefund = (eventId: string) => JSON.stringify({
@@ -1877,6 +1905,65 @@ Deno.test('a refund of a NON-founder charge never releases a seat', async () => 
     { adminClient: stub.adminClient, stripeClient: founderStripe('cs_creditpack') },  // not the founder session
   );
   assertEquals(stub.rpc.some((c) => c.fn === 'release_founder_seat_on_clawback'), false);
+});
+
+// ── FP-4 (fraud-fix, §6.7 family 2): CLAWBACK ABORTS THE LIVE CASE FIRST ──────
+// A goodwill refund of the ORIGINAL $99 for a seat CURRENTLY in a live transfer case must
+// FIRST abort that case (refunding the nominee's $99 if paid) and THEN release the seat.
+// Before the fix, clawbackFounderForSession only released the seat — the cooling case
+// still finalized, moving the just-unwound seat to the nominee AND scheduling a $49.50
+// payout to the refunded holder (double recovery). Aborting first drives the case out of
+// 'cooling' so the due-runner's transfer_case_finalize refuses (wrong_state).
+Deno.test('FP-4: a goodwill refund during a LIVE cooling case ABORTS+refunds it BEFORE the seat release (§6.7)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_goodwill');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(res.status, 200);
+  // The live case was aborted as 'admin' …
+  const abort = stub.rpc.find((c) => c.fn === 'transfer_case_abort');
+  assertEquals(abort !== undefined, true);
+  assertEquals((abort!.args as { p_actor: string }).p_actor, 'admin');
+  // … the nominee's paid $99 was refunded, keyed abort-refund-<case> (dedups with the edge path) …
+  assertEquals(st.refunds.length, 1);
+  assertEquals((st.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'abort-refund-case-live');
+  assertEquals((st.refunds[0].params as { payment_intent: string }).payment_intent, 'pi_transfer');
+  // … and the abort ran BEFORE the seat release (ordering that makes finalize refuse).
+  const abortIdx = stub.rpc.findIndex((c) => c.fn === 'transfer_case_abort');
+  const releaseIdx = stub.rpc.findIndex((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(abortIdx >= 0 && releaseIdx > abortIdx, true);
+  // The seat is still released (the clawback still frees the seat back to the pool).
+  assertEquals(stub.state.isFounder, false);
+});
+
+Deno.test('FP-4: a live INITIATED (unpaid) case is aborted but no refund fires (nothing was paid)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-unpaid', state: 'initiated', stripe_session_id: null });
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_unpaid');
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_abort'), true);
+  assertEquals(st.refunds.length, 0);   // an unpaid case never entered cooling → nothing to refund
+});
+
+Deno.test('FP-4: a goodwill refund with NO live case never aborts (unchanged clawback)', async () => {
+  const stub = makeFounderStub();   // no live case injected
+  const st = founderStripeWithRefunds();
+  const body = founderRefund('evt_fp4_nocase');
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  assertEquals(stub.rpc.some((c) => c.fn === 'transfer_case_abort'), false);
+  assertEquals(st.refunds.length, 0);
+});
+
+Deno.test('FP-4: a redelivered goodwill refund aborts the case exactly once (live-state filter)', async () => {
+  const stub = makeFounderStub('cs_founder', {}, { id: 'case-live', state: 'cooling', stripe_session_id: 'cs_transfer_99' });
+  const st = founderStripeWithRefunds();
+  const first = founderRefund('evt_fp4_redeliver_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  const second = founderRefund('evt_fp4_redeliver_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: st.client });
+  // The first abort drove the case out of the live set; the redelivery finds none.
+  assertEquals(stub.rpc.filter((c) => c.fn === 'transfer_case_abort').length, 1);
+  assertEquals(st.refunds.length, 1);   // idempotency key would dedup anyway, but no 2nd attempt is even made
 });
 
 Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now wired)', async () => {
