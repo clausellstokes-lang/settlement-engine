@@ -110,6 +110,21 @@ touched + tsc full + domain:strict + build + verify:dist (in that order).
   abandon (record) if p75 LCP worsens.
 - Pre-check: reread tests/design/contrast.test.js pins before touching chip colors.
 
+### Slice C2L — THE LOADING JOURNEYS (owner-commissioned 2026-07-18)
+Two loading backgrounds, both PROGRESS-SCRUBBED (never wall-clock-timed):
+(1) GENERATION LOADING: the journey film's desk→<target-tier> segment as the
+loading page's background, playhead driven by the ACTUAL pipeline-step progress
+signal (the microsite conductor idiom with generation progress replacing scroll) —
+the film lands on the chosen tier exactly as the dossier arrives; chapter mapping =
+the film's existing 6 legs; final frozen frame = the ordered tier. (2) REALM/FMG
+LOADING: the scroll-unfurl map film (video-refs library) plays while the FMG iframe
+boots. BOTH inherit the Welcome film's six engineering laws verbatim (streamed
+media zero-JS, fetch-at-click racing generation, stills floor, chapter/segment
+files, desktop fine-pointer only w/ stills fallback, taste-gate toggle). Masters:
+~/Desktop/settlementforge-marketing-masters/. ⚠ taste call at the walk: the
+8-second thorp segment's playback rate. Integrates with PipelineReveal (its
+THEATER-ONCE disposition stands — the film is the theater's backdrop).
+
 ### Slice C2 — THE WELCOME: the Survey of One Settlement (THE FILM RULING)
 ⬛ OWNER RULING 2026-07-18 ("i want the microsite animation for my welcome page…
 after each settlement tier it shows the different sections of the current welcome

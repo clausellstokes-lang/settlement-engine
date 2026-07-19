@@ -1134,6 +1134,12 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ THE LOADING JOURNEYS COMMISSIONED (owner, 2026-07-18):** generation loading =
+the journey film desk→target-tier, PROGRESS-SCRUBBED off the real pipeline steps
+(manager insight ratified into the spec: scrub beats timing — the film always lands
+with the dossier); realm loading = the scroll-unfurl film while FMG boots. New
+slice C2L in the architecture doc; six film laws inherited; thorp-speed = walk
+taste call.
 **⬛⭐ THE LIVING BACKDROP LANDED (2026-07-18, deep-craft @ a7afc9cc, 3 commits).**
 d308c579 fail-silent localStorage leaf (sf.lastMapView.<saveId> {view,lens}; the
 mapEdits blob NEVER touched; net-ZERO pane growth — statement-merge absorbed the
