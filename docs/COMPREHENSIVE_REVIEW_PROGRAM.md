@@ -1153,6 +1153,31 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C5 THE REALM LANDED (2026-07-19, claude/deep-craft-c5 @ 329bde0b, 3
+commits, NOT folded) — H2 + the re-home shipped; the materials pass DEFERRED
+with the ceiling-seat reason.** 5ca47081 InstantWorldEntry RE-HOMED (the
+UNREACHABLE premium composer now mounts lazy in SettlementPalette's desktop
+empty state — subordinate placement JUDGMENT over map-overlay/CampaignEmptyState
+alternatives; reachability proven by emitted lazy chunk + binding + host pins;
+zero eager). · 4cb025ba + 329bde0b H2 THE FIRST ADVANCE: three beats (medallion
+ink-pulse touched-set stagger ≤8 · almanac page-turn · report slip), fire-once
+read-side off the EXISTING pulseHistory counter — no new persisted state;
+`.oc-m-*` only; reduced-motion collapses; regression guard 3/3. Fence census
+clean: desktop-gate title untouched · title ratchet 485 green · SM-5 pins live
+in townMap not realm chrome · WorldMapStage untouched (C2L moot). Known
+limitation documented: catch-up in living worlds may claim the first pulse
+("the map marks the first change of the session" — acceptable). C5-a chrome
+materials DEFERRED (JUDGMENT, vetoable): exact-equality kill-list + the C3
+single-writer seat make any de-round land red from this lane; the rail's core
+intent (ADVANCE = the one gold) already holds; per-file offender table recorded
+(41 radii · 5 shadows · 7 rgba · 13 tinted across 6 realm files). ⚠ FINDING:
+organicSamples.test.js red on the whole lineage — dossier-desk.html fixture
+stale vs C4c-g's .oc-dropcap-prose (the focused-gates blind spot, again) —
+HANDED to C3 as addendum #2 (deliberate regen, declared cause). ⭐ MANAGER PLAN:
+after C3 lands, THE BURN-DOWN LANE dispatches on the deep-craft branch holding
+the ceiling seat — C5-a realm materials + the accumulated would-be wins + the
+C13 identifier rename + the walk toward Phase D's kill-list ZERO×4. Full suite
+13,207 / expected-5 + 2 isolation-cleared flakes + the handed-off fixture red.
 **⬛ C1-FIN REMAINDER: STALE-BRIEF STOP (2026-07-19) — the manager's brief was
 WRONG and the lane caught it.** Items 1/2/4 (create consolidation + unfold leaf ·
 wizard tint trio · evolution backdrops) were ALREADY SHIPPED on this lineage as
