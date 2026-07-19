@@ -1735,6 +1735,68 @@ Deno.test('a refund of a NON-founder charge leaves founder state untouched', asy
   assertEquals(stub.rpc.some((c) => c.fn === 'service_adjust_credits'), false);
 });
 
+// ── Seat REGISTER clawback release (137/§6.1, M-5c) ──────────────────────────
+// The founder clawback now ALSO releases the durable seat back to the unclaimed
+// pool (release_founder_seat_on_clawback) — the mirror of the founder_lifetime
+// claim. It is a POST-CLAIM step (after the is_founder flip), so a redelivered
+// refund that finds is_founder already false never re-runs it (no double release).
+Deno.test('founder clawback releases the seat AFTER the is_founder flip + downgrade (ordering)', async () => {
+  const stub = makeFounderStub();
+  const body = founderRefund('evt_founder_seat_release_1');
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe() },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.state.isFounder, false);                                   // the flip (the claim) ran
+  const release = stub.rpc.find((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(release !== undefined, true);
+  assertEquals((release!.args as { p_user: string }).p_user, 'founder_u');
+  // Ordering: the release runs AFTER the downgrade (a post-claim step, not before the flip).
+  const downgradeIdx = stub.rpc.findIndex((c) => c.fn === 'handle_premium_downgrade');
+  const releaseIdx = stub.rpc.findIndex((c) => c.fn === 'release_founder_seat_on_clawback');
+  assertEquals(downgradeIdx >= 0 && releaseIdx > downgradeIdx, true);
+});
+
+Deno.test('a redelivered founder refund releases the seat exactly once (idempotent)', async () => {
+  const stub = makeFounderStub();
+  const first = founderRefund('evt_seat_release_a');
+  await handleStripeWebhook(req(first, { 'stripe-signature': await sign(first, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  const second = founderRefund('evt_seat_release_b');   // new event id, same charge/session
+  await handleStripeWebhook(req(second, { 'stripe-signature': await sign(second, SECRET) }), { adminClient: stub.adminClient, stripeClient: founderStripe() });
+  // The is_founder flip is the claim; the redelivery no-ops before the release step.
+  assertEquals(stub.rpc.filter((c) => c.fn === 'release_founder_seat_on_clawback').length, 1);
+});
+
+Deno.test('a refund of a NON-founder charge never releases a seat', async () => {
+  const stub = makeFounderStub('cs_founder');
+  const body = founderRefund('evt_nonfounder_no_release');
+  await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: founderStripe('cs_creditpack') },  // not the founder session
+  );
+  assertEquals(stub.rpc.some((c) => c.fn === 'release_founder_seat_on_clawback'), false);
+});
+
+Deno.test('a founder_lifetime checkout claims the durable seat (137 hook is now wired)', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_founder_seat_claim', type: 'checkout.session.completed',
+    data: { object: { id: 'cs_founder_claim', payment_status: 'paid', amount_total: 9900, currency: 'usd', payment_intent: 'pi_fc',
+      metadata: { supabase_user_id: 'uf', product: 'founder_lifetime' } } },
+  });
+  const res = await handleStripeWebhook(
+    req(body, { 'stripe-signature': await sign(body, SECRET) }),
+    { adminClient: stub.adminClient, stripeClient: moneyStripe() },
+  );
+  assertEquals(res.status, 200);
+  const claim = stub.calls.rpc.find((c) => c.fn === 'claim_next_founder_seat');
+  assertEquals(claim !== undefined, true);
+  assertEquals((claim!.args as { p_user: string }).p_user, 'uf');
+  // The seat claim is never-throw: fulfilment (the credit bonus) still ran.
+  assertEquals(stub.calls.rpc.some((c) => c.fn === 'system_grant_credits'), true);
+});
+
 // ── Delivery-stash session bind (dossier_purchases, migration 122) ──────────
 // Ported OURS-only lane: the paid single_dossier branch backfills
 // dossier_purchases.stripe_session_id keyed on the checkout_token, so

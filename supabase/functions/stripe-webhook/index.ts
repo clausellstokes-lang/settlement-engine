@@ -649,6 +649,20 @@ async function clawbackFounderForSession(
   } catch (err) {
     logError('stripe-webhook', userId, err, { stage: 'founder_clawback_credits', key });
   }
+
+  // SEAT REGISTER (137, §6.1): release the seat back to the unclaimed pool — the
+  // mirror of claim_next_founder_seat. Post-claim + log-don't-throw like the steps
+  // above: the is_founder flip is the claim, so a redelivered refund/dispute finds it
+  // already false, returns at the claim check, and NEVER re-runs this (no double
+  // release). release_founder_seat_on_clawback is itself claim-once (a cleared holder
+  // no-ops). The fuller "abort any LIVE transfer case for this seat first" interplay
+  // (§6.7) lands in M-7; this basic release is the mirror the seat register needs.
+  try {
+    const { error: seatErr } = await supabase.rpc('release_founder_seat_on_clawback', { p_user: userId });
+    if (seatErr) logError('stripe-webhook', userId, seatErr.message, { stage: 'founder_clawback_seat_release', key });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'founder_clawback_seat_release', key });
+  }
 }
 
 /**
@@ -1585,6 +1599,17 @@ async function dispatchStripeEvent(
         if (profileError) throw new Error(`Failed to update founder profile: ${profileError.message}`);
         const { error: restoreError } = await supabase.rpc('restore_premium_settlements', { target_user: userId! });
         if (restoreError) throw new Error(`Premium restore failed: ${restoreError.message}`);
+
+        // SEAT REGISTER (137, §6.1): claim the durable seat entitlement now that the
+        // profile writes have landed. NEVER-throw into fulfillment — is_founder stays
+        // the fast flag + the money truth, and a missed seat row is operator-repairable
+        // via the idempotent primitive (log-don't-throw). 137's deliberate deferral ends.
+        try {
+          const { error: seatErr } = await supabase.rpc('claim_next_founder_seat', { p_user: userId! });
+          if (seatErr) logError('stripe-webhook', userId!, seatErr.message, { stage: 'founder_seat_claim', session: session.id });
+        } catch (err) {
+          logError('stripe-webhook', userId!, err, { stage: 'founder_seat_claim', session: session.id });
+        }
 
         // Founder bonus: one-time 30-credit grant (idempotent on session id).
         await grantCreditsForSessionOnce(supabase, userId!, FOUNDER_CREDIT_BONUS, 'founder_grant', session.id, /* oncePerUser */ true);
