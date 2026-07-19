@@ -1134,6 +1134,33 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE FABLE FRAUD-PASS — VERDICT: SAFE TO FOLD, THREE P1 MONEY BUGS CAUGHT
+(2026-07-19, claude/money-wave; FP-a committed @ 9d971f5c).** The mandatory §10
+adversarial pass executed all ten families + the four flagged suspects as real attacks.
+CLEAN under executed attack: families 3/4/5/6/9 (double-payout · chargeback matrices ·
+webhook replay · state-machine fuzz · auto-reload abuse) + suspect (a) the abort-token
+bypass (forged token 403s, bypass is abort-scoped). HARDENED FP-a: founder-transfer had
+NO config.toml entry → deploy.sh would ship it JWT-gated → the tokenless run_due
+due-runner would 401 in prod, SILENTLY KILLING finalize/payout/expiry/stewardship; pinned
+verify_jwt=false, verifyJwtPins 511 green (was red). THREE P1 FINDINGS (executed probes,
+none exploitable while dark, ALL launch-blockers for the transfer/buyback surfaces):
+FP-2 a nominee's $99 for an aborted/expired case is NEVER refunded (the promised
+refunds.create was never written) · FP-4 the §6.7 "abort the live case first" ordering
+was deferred to M-7 and NEVER landed → a goodwill $99 refund double-recovers ($99 back +
+$49.50 payout + seat still moves) · FP-3 the buyback has no eligibility hold/payout floor
+→ buy $99 → buyback $25 → chargeback $99 = +$25/cycle. P2s: anomaly pre-check fails OPEN
+(should hold) · missing session_superseded_during_transfer audit event · unauthenticated
+takeover-victim abort needs a valid JWT (suspect b — owner-gated new surface). P3: the
+abort-token hash is 32-bit FNV (unguessable case_id + rate limit make it non-exploitable;
+SHA-256 = cheap defense-in-depth). The exploit probes are PRESERVED (scratchpad, NOT
+committed — they pass by demonstrating the bug; each inverts to a red-first pin when
+fixed — good judgment, ratified). MANAGER RULING (no-compromises directive): fix all
+three P1s + the cheap P2 hardening AT THE SOURCE before the money branch folds — a
+FRAUD-FIX LANE dispatched on claude/money-wave. FP-3 RECONCILIATION (owner-queued, built
+dark, vetoable): gate the buyback PAYOUT RELEASE on dispute-safety (original_purchase_at
++ ~120d, mirroring LAW 8) while PRESERVING "any time" initiation — honors the stewardship
+"any time" ruling AND the anti-fraud requirement; the owner confirms before founder_buyback
+goes live (runbook step 6). Suspect (b) unauthenticated abort → owner queue.
 **⬛⭐⭐ THE MONEY WAVE IS FULLY IMPLEMENTED (2026-07-19, claude/money-wave @ 0c2244b8,
 34 commits atop aad6265e — manager-verified lineage).** Final slices landed: M-9e
 active-session surface (lazy fetchActiveSession + relocated sign-out-everywhere +
