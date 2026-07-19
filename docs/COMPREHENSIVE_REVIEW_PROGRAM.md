@@ -1153,6 +1153,31 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C3 THE LIBRARY LEDGER COMPLETE (2026-07-19, deep-craft @ 97aa4f3d, 5
+commits incl. both addenda).** d06f4a89 the list becomes a REAL semantic table
+(SettlementCard → <tr>, one renderer — JUDGMENT over a div idiom; both call
+sites wrapped; UnassignedLedger extracted as a leaf because SettlementsPanel
+sits at its 600 ceiling) · 680d3138 memo-lines (the OutputContainer stressor
+derivation, read-only) + interpunct + margin tallies (same checkbox, same
+handlers) · a6255918 THE OWED WIRING: allowRename live via the canonical
+renameSettlement store writer (NOT the live-editor queueEdit — reconciliation
+reasoned) + the LIFECYCLE TRAP traced and closed: renameDetailSettlement pure
+helper syncs the detail view (name would ghost until re-open otherwise;
+7-case unit pin) · ecfe0d1a addendum 1: the config-panel de-round (9 pills,
+ceiling 1052→1043 by the test's own counter) · 97aa4f3d addendum 2: the
+organicSamples fixture regen — cause confirmed C4c-g, diff verified +180/-0
+all `.oc-dropcap-prose` surface; THE LINEAGE RED IS CURED. Protected-behavior
+census 52/52 green across 6 suites. Kill-list now radius 1043 · shadow 112 ·
+rgba 264 · tinted 235. Full suite 13,217 / EXACTLY the expected 5 + 1
+isolation-cleared flake. 6 JUDGMENTs vetoable (incl. allowRename gated on
+readOnly&&saveId any-owner — replaces the old free-tier Edit-Names path).
+Deferrals: retained sub-content chips' radii (burn-down's) · folder sub-table
+thead a11y trade. ⭐ THE FOLD BATCH 1 DISPATCHES (Fable, escalation clause):
+c2 (contains c2l) → c13 → c5 fold into deep-craft @ 97aa4f3d — per-fold NUL
+scan, --no-ff, bare gates, FULL suite, reconciliation rules pre-stated
+(tokens.js = c13's chokepoint wins · StaleNarrativeModal = the gold re-tone
+wins · css/copy appends union). THE BURN-DOWN lane follows on the merged tip
+with the seat + the now-unblocked identifier rename.
 **⬛⭐ C5 THE REALM LANDED (2026-07-19, claude/deep-craft-c5 @ 329bde0b, 3
 commits, NOT folded) — H2 + the re-home shipped; the materials pass DEFERRED
 with the ceiling-seat reason.** 5ca47081 InstantWorldEntry RE-HOMED (the
