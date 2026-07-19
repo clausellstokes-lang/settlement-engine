@@ -119,8 +119,15 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
   const { data: { user }, error: authError } = await userClient.auth.getUser();
   if (authError || !user) return json({ error: 'Unauthorized' }, 401);
 
-  // SINGLE-SESSION GATE (§7.2): a superseded device takes NO transfer step.
-  if (await isSessionSuperseded(admin, user.id, authHeader, deviceLabelFromRequest(req))) {
+  // SINGLE-SESSION GATE (§7.2): a superseded device takes NO transfer step — EXCEPT the
+  // deliberately session-INDEPENDENT email-token abort (§6.3/§7.3): "a party locked out of
+  // their session (§7 interplay) … can STILL halt the transfer." The one-click abort token
+  // IS the authorization for that escape hatch, so a token-bearing abort skips the gate (the
+  // token hash is validated in the abort handler; a bad token still 403s, and abort only
+  // CANCELS a transfer — it never moves value to a superseded caller). Every OTHER action,
+  // and a tokenless abort, still evicts a superseded device. (M-9f, §10.7.)
+  const wantsTokenAbort = action === 'abort' && typeof payload.token === 'string' && payload.token.trim().length > 0;
+  if (!wantsTokenAbort && await isSessionSuperseded(admin, user.id, authHeader, deviceLabelFromRequest(req))) {
     return json({ error: 'session_superseded' }, 401);
   }
 

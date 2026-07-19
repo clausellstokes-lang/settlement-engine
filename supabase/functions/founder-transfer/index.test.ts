@@ -104,6 +104,40 @@ Deno.test('a SUPERSEDED session → 401 (no transfer step taken)', async () => {
   assertEquals((await res.json()).error, 'session_superseded');
 });
 
+// A signed JWT-ish token carrying a session_id claim (the gate decodes it without verifying).
+const jwtWithSession = (sid: string) => {
+  const b64 = (o: unknown) => btoa(JSON.stringify(o)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  return `${b64({ alg: 'HS256' })}.${b64({ sub: 'u1', session_id: sid })}.sig`;
+};
+
+Deno.test('§10.7 escape hatch: a SUPERSEDED session with an abort TOKEN still halts the transfer (session-independent)', async () => {
+  // A different device won the session (sessionRow), so this caller's JWT is superseded —
+  // yet the email-token abort MUST still work (§6.3/§7.3: the escape hatch for a party
+  // locked out of their session). The gate is skipped ONLY because a token is present.
+  const { deps, rpcCalls } = makeDeps({
+    sessionRow: { session_id: 'winner-session' },
+    rows: { founder_transfer_cases: { from_user: 'u1', to_user: null, state: 'cooling', stripe_session_id: null } },
+    rpc: { transfer_case_abort: { ok: true, was_paid: false } },
+  });
+  const res = await handleFounderTransfer(
+    req({ action: 'abort', case_id: 'c1', token: 'escape-hatch-token' }, { Authorization: `Bearer ${jwtWithSession('evicted-session')}` }),
+    deps,
+  );
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).ok, true);
+  assertEquals(rpcCalls.some((c) => c.fn === 'transfer_case_abort'), true);
+});
+
+Deno.test('§10.7 the gate still holds: a SUPERSEDED session aborting WITHOUT a token → 401 (only the token bypasses)', async () => {
+  const { deps } = makeDeps({ sessionRow: { session_id: 'winner-session' } });
+  const res = await handleFounderTransfer(
+    req({ action: 'abort', case_id: 'c1' }, { Authorization: `Bearer ${jwtWithSession('evicted-session')}` }),
+    deps,
+  );
+  assertEquals(res.status, 401);
+  assertEquals((await res.json()).error, 'session_superseded');
+});
+
 Deno.test('velocity over-cap → 429', async () => {
   const { deps } = makeDeps({ rate: false });
   const res = await handleFounderTransfer(req({ action: 'status' }), deps);
