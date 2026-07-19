@@ -505,12 +505,19 @@ describe('W-DOCTRINE-3b §4 — leash re-pointing on patron death/retreat (cause
     expect(out.events.find((e) => e.stage === 're-adjudicated')).toBeFalsy();
   });
 
-  it('foreignEndpointLive: present+standing ⇒ live; absent/destroyed/occupied ⇒ dead; non-foreign/faction-only ⇒ live', () => {
+  it('foreignEndpointLive: present+standing ⇒ live; absent/destroyed ⇒ dead; occupied (real occupations map) ⇒ dead; non-foreign/faction-only ⇒ live', () => {
     const snap = { byId: new Map([['p', { id: 'p', settlement: { status: 'thriving' } }]]) };
     expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, snap)).toBe(true);
     expect(foreignEndpointLive({ foreign: true, settlementId: 'gone' }, snap)).toBe(false);
     expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, { byId: new Map([['p', { id: 'p', settlement: { status: 'destroyed' } }]]) })).toBe(false);
-    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, { byId: new Map([['p', { id: 'p', settlement: { occupiedBy: 'x' } }]]) })).toBe(false);
+    // BUG-ENCODING-PIN CORRECTION (ruin-filter lane, coherence audit R3 point-bug #5):
+    // occupation is now read from the REAL worldState.occupations map (3rd arg), keyed by
+    // settlement id — NOT the never-written `s.occupiedBy` field the buggy code AND this
+    // pin previously relied on. The old pin "verified" the fix through the same dead field
+    // production never writes, so it validated a path that never fired. Corrected:
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, snap, { p: { occupierId: 'x' } })).toBe(false); // occupied ⇒ dead (real map)
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, snap, {})).toBe(true);                          // no occupation ⇒ live (dormant)
+    expect(foreignEndpointLive({ foreign: true, settlementId: 'p' }, { byId: new Map([['p', { id: 'p', settlement: { occupiedBy: 'x' } }]]) })).toBe(true); // dead s.occupiedBy field is now INERT ⇒ live
     expect(foreignEndpointLive({ foreign: false, settlementId: 'p' }, snap)).toBe(true);   // not our concern
     expect(foreignEndpointLive({ foreign: true, settlementId: null }, snap)).toBe(true);    // faction-only: never spuriously re-point
   });
