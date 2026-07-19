@@ -1153,6 +1153,29 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C2L THE LOADING JOURNEYS LANDED (2026-07-19, claude/deep-craft-c2l @
+a8b5d313, 3 commits, NOT folded).** eedb67bf generation film = PipelineReveal's
+z0 backdrop (THEATER-ONCE stands; store-key pins untouched; reveal timing
+untouched) · fbfa3c0b realm/FMG reality-mode unfurl in WorldMapStage (WorldMap
+is a 600-cap hot file — mount JUDGMENT) · a8b5d313 shared-clamp ratchet fix.
+ONE conductor (useJourneyConductor: pure computeJourneyFrame + the arrival
+gate); THE UNIFYING LAW unit-tested ("CANNOT finish no matter how much
+wall-clock passes"). JUDGMENTs (vetoable): generation arrived=!!settlement
+(pure theater — the artifact exists at mount; reality machinery ships on the
+realm surface where it's native, holdBoundary 0.9) · taste-gate loadingJourneyFilm
+default OFF (stills-floor ships; the walk flips ?flag.loadingJourneyFilm=true;
+loadingJourneySetBg toggles bg↔journey sets live). Media: BOTH sets copied to
+public/media/journey-legs/ (bg 43 MB · journey 11 MB; losing set DELETED at the
+walk — recorded owner call). Stills floor proven (film-absent + video-error
+renders); per-leg prefetch (hidden preload of leg N+1); eager delta 0 B
+EMPIRICALLY (new loadingJourneyLazy fingerprint test, non-vacuous). Full suite
+13,187 / expected-5 + 2 isolation-cleared flakes (49/49). ⚠ FINDING: NO realm
+scroll-unfurl master EXISTS in the archive (the playbook's assumption was
+wrong) — C2L-b ships the machine + parchment floor + a documented <video>
+drop-in seam (public/media/realm-unfurl/); producing/choosing the unfurl film
+JOINS THE OWNER QUEUE (walk item). MEMORY.md near its read cap (~20.3 KB) —
+consolidation pass queued for a quiet moment. C2 dispatches STACKED on the C2L
+tip (claude/deep-craft-c2 off a8b5d313) to REUSE the conductor + media.
 **⬛⭐ C4 CRAFT STEP-3 MAIN PASS LANDED (2026-07-19, deep-craft @ 409a326f, 6
 commits).** Six dossier panels → their registers, each a lettered commit with
 gates green + ceilings lowered in lockstep: C4c-a ChronicleTab=ANNALS · C4c-b

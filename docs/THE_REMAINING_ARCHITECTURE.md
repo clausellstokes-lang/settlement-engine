@@ -437,6 +437,9 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
 - ⛔OWNER physically: the PR merge button · `supabase db push`.
 
 ## §9 THE OWNER DECISION QUEUE (nothing blocks until its named point)
+realm-unfurl film (C2L finding 2026-07-19: no master exists; the machine + drop-in
+seam ship; produce/choose the film = taste + media production) · losing
+journey-legs media set deleted at the walk (bg vs journey) ·
 cluster-1 walk (NOW) · finished-site walk (at fold) · six deep-wave JUDGMENTs ·
 plate .orig deletions · open-bottom ladder amendment · maker's-name on About ·
 audit-spine write path (rec: edge endpoint; can ride ROUND 3) · founder-seat
