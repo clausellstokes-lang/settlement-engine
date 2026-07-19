@@ -87,6 +87,11 @@ const EXPECTED_VOICE = {
   // culture observance — deliberately unvoiced (the npc_ladder/urban_fabric precedent; a
   // dedicated 'culture' crier is a T-5 surface question, not a T-2 mis-route).
   tradition: null,
+  // THE ROADS (owner commission, engine lift #5): a named NPC's journey / capture /
+  // ransom / return is a chronicle beat carrying its own roadsProse headline+summary,
+  // NOT a town-crier proclamation — deliberately unvoiced (the tradition/npc_ladder
+  // precedent; newsVoiceCategory returns null for it via the set-but-unclassified guard).
+  roads: null,
 };
 
 describe('impactKind walkers (content-immersion-r2-1/-2)', () => {

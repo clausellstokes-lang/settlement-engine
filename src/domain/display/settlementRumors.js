@@ -80,6 +80,7 @@ function fnv1a32(str) {
 /** @type {Readonly<Record<string, string>>} */
 export const WHAT_PHRASES = Object.freeze({
   // war / conflict candidate types
+  roads: 'travellers upon the roads',
   strategy_deploy: 'soldiers marching to war',
   war_mobilization: 'a call to arms',
   war_conscription: 'a levy of men called up',
