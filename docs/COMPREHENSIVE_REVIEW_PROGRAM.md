@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ILLUSTRATED TOWN IT-2 LANDED (2026-07-18) — the ground dress, three commits
+on claude/illustrated-town @ 7f3664eb.** db62302c groundDressOps (pure domain
+module; furrows/tree-stipple/ripples/meadow-dots/hedge-ticks; v1 COVERAGE LAW
+proven — every golden config dressed, min 19 ops on the sparsest) · f40ed162 the
+ONE NW LIGHT extracted (SHADOW_DIR; wall shadows + mountain-flank relief;
+extraction proven byte-identical before depth added) · 7f3664eb contrast pins +
+DRESS_CAP op-budget guard. Op counts: parchment 92 UNCHANGED; illustrated 277→360
+on the largest metropolis (ceiling 2200, no raise). All five re-skin lenses + the
+accessible lens byte-identical (dormancy: no dress field ⇒ []); illustratedTownGolden
+re-minted twice, additively, causes declared. Slice seal 101/101; verify:dist
+150/150; zero eager bytes; domain:strict 0. Lane-end full suite triaged under
+MACHINE LOAD 130-225 (concurrent sessions): every non-expected red = 20s-timeout
+LOAD FLAKE (fourth confirmation tonight); lane provably cannot reach any failing
+test (diff-scope + import proof). Vetoable JUDGMENTs recorded: dress densities ·
+all-ink marks (no tinted water ripples) · SE-only wall shadows · offsets. Foreign
+stash (analytics-intelligence-layer) preserved untouched. IT-3 (THE SEASONS)
+dispatches next with IT-2's interface contract (parameter-swaps on groundDressOps ·
+SHADOW_DIR canonical · dormancy-gate mirror for worldCalendar · season folded into
+the geometry-digest seed · DRESS_CAP 160).
 **⬛⬛ THE DOSSIER CONTENT MODEL IS CLOSED (owner, 2026-07-18: "with this the
 dossiers are done. i was missing culture and this added that in for me"):** with
 Traditions placed in the World group, the owner declares the dossier CONTENT-
