@@ -50,6 +50,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
+import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import { maybeAutoReload } from '../_shared/autoReload.ts';
 
 import { safeJsonParse, deepClone, getByPath, applyMutated, isEmptyPayload } from './jsonUtils.ts';
@@ -1014,6 +1015,13 @@ export async function handleGenerateNarrative(
     const supabaseUser = makeUserClient(authHeader);
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) throw new Error('Not authenticated');
+    // SINGLE-SESSION GATE (§7.2, M-9 census upgrade): reject a superseded device BEFORE any
+    // spend or free-narrative claim. supabaseAdmin is created later in this fn, so the gate
+    // reads through a throwaway admin client; a superseded session gets a clean 401 Response
+    // (not the outer throw).
+    if (await isSessionSuperseded(makeAdminClient(), user.id, authHeader, deviceLabelFromRequest(req))) {
+      return new Response(JSON.stringify({ error: 'session_superseded' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+    }
 
     // Parse request — cap the body BEFORE parsing (mirrors generate-chronicle):
     // the credit charged is fixed regardless of input size, so an unbounded
