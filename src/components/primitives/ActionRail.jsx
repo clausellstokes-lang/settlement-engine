@@ -19,7 +19,7 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, GOLD_DEEP, INK, CARD, BORDER, PARCH } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
 import { useIconsOn } from './IconsContext.js';
@@ -130,13 +130,13 @@ function ActionRow({ item }) {
             <span
               style={{
                 // S2r-c materials: flat parchment chip, hairline-ruled — no radius,
-                // palette tones (the master rail's rounded + rgba tag is struck).
+                // palette tokens (the master rail's rounded + rgba tag is struck).
                 flexShrink: 0,
                 fontSize: FS.xxs, fontWeight: 700,
                 letterSpacing: '0.02em',
                 padding: '1px 5px',
-                background: item.primary ? '#f6ecd6' : '#f3ecdc',
-                border: `1px solid ${item.primary ? '#d8c9a0' : tone.border}`,
+                background: PARCH,
+                border: `1px solid ${BORDER}`,
               }}
             >
               {item.tag}
@@ -160,5 +160,9 @@ function ActionRow({ item }) {
   );
 }
 
-const primaryTone   = { bg: '#a0762a', fg: '#fffbf5', border: '#a0762a' };
-const secondaryTone = { bg: '#fff',    fg: '#1c1409', border: '#d2bd96' };
+// S2r-c materials: the rail's tones re-vehicled from master's raw hex onto the
+// deep-craft palette tokens (gold-700 primary, parchment card + parchment-ink
+// secondary, palette border) — same families, routed through the ramp so no raw
+// color literal lands in the tree.
+const primaryTone   = { bg: GOLD_DEEP, fg: CARD, border: GOLD_DEEP };
+const secondaryTone = { bg: CARD,      fg: INK,  border: BORDER };
