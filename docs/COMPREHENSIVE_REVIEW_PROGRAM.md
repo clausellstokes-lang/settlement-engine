@@ -1153,6 +1153,30 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐⭐ THE COMPOSITE IS ASSEMBLED (2026-07-19, claude/the-composite @
+aad6265e — the deep-wave fold COMPLETE).** Fold 3 illustrated-town @ 857c5274:
+3 conflicts resolved as pre-studied (SettlementDetail selectors moved INTO the
+extracted SettlementDossierHero beside their consumer — vetoable; SettlementCard
+worldState prop re-expressed in the ledger row; contrast.test pure union); one
+union red (the IT3-c season select's rounded corner) cured at aad6265e per the
+C5-a select precedent. THE FRESHNESS CURE @ 7009db36: edge-shared regenerated
+(aiGrounding 48 inputs hash 72ab2db8…; declared cause; green RE-EARNED on the
+committed bytes after the hook's fix pass) — freshness LEAVES the expected set
+after weeks. THE CLOSE, QUOTED: "Test Files 4 failed | 1353 passed · Tests 4
+failed | 13,606 passed | 13 skipped" — EXACTLY the 4 parked golden families,
+ZERO flakes; verify:dist 153/154 (sole red = the owner-ruled budget breach,
+curing in the de-eager lane); closure 1,040,998 byte-identical through folds
+3–5 (the no-deepening condition held exactly). ⭐ FOUR PARALLEL LANES
+DISPATCHED off aad6265e per the owner's parallel order: DE-EAGERING (Fable —
+the ordered architecture; every persisted path dispositioned with round-trip
+pins; acceptance = verify:dist green UNDER the untouched 1,040,000) · CALIBER-
+PRIMITIVES (Segmented divider-strip + Card de-shadow/pin retarget) · CALIBER-
+MAP (AdvanceReport stamp re-tone + scrim tokens; H2 fenced) · CALIBER-PERF
+(the throttled-vitals harness BUILT + baseline recorded; devDep pre-authorized
+dev-only). Kill-list law for the batch: no lane touches it; declared reds with
+exact deltas; FOLD BATCH 3 sets ceilings to measured. Then: fold batch 3 →
+budget re-tighten → THE ROUND 3 LOOP opens (standard audit first) → THE PUSH
+at convergence.
 **⬛ THE SECOND COMPROMISE SWEEP (2026-07-19, owner-prompted: "were there any
 other compromises?").** Full-program deferral audit, three classes: ⭐ CLASS A
 (scope-law refusals, orderable — now COMMITTED MANDATORY CYCLE-1 INTAKE, fixed
