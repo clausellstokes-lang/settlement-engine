@@ -70,7 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions } from './traditionsKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -2328,7 +2328,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // read by townMap/ladderRead.js when lit. DORMANT behind the virtual npcLadderEnabled
   // flag ⇒ a complete no-op (zero key, zero mirror) — the ladder dormancy golden proves
   // it. NO rng (contests draw from the seed fork + registered signals only).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadder({
+  // THE TRADITIONS (ENGINE LIFT #4: culture) rides the SAME seam, composed AFTER the
+  // ladder inside advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions
+  // (traditionsKernel.js — the ceiling-safe name swap, the ladder/provenanceKernel idiom):
+  // per-settlement holidays/festivals minted at first-lit tick (byte-identical to the T-1
+  // view-time preview), occurring on the calendar, succeeding or failing by a weighted
+  // world-seed roll, and feeding economy + legitimacy + faith through the bounded §5
+  // applicators. Authoritative sidecar spatialLedgers.traditions + a compact
+  // settlement.traditions mirror read by the dossier Traditions tab. DORMANT behind the
+  // virtual traditionsEnabled flag ⇒ a complete no-op (zero key, zero mirror, zero news) —
+  // the traditions dormancy golden proves it. The ONE draw per (tradition, year) is a
+  // tick-invariant world-seed fork (never the per-tick pulse rng).
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));
