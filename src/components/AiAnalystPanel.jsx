@@ -21,7 +21,7 @@ import { getSurveyorAiCost } from '../config/pricing.js';
 import { deriveAnchor, anchorSettlement } from '../domain/ai/contextAnchor.js';
 import { suggestedQuestions } from '../domain/ai/suggestedQuestions.js';
 import { t } from '../copy/index.js';
-import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, R, FS } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, CARD_ALT, GOLD, RED, SLATE, SLATE_DEEP, sans, serif_, SP, FS } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import Segmented from './primitives/Segmented.jsx';
@@ -113,8 +113,8 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
       style={{
         ...dockPos,
         width: 340, maxWidth: 'calc(100vw - 32px)', background: CARD, color: BODY,
-        border: `1px solid ${SLATE}`, borderRadius: R.lg, padding: SP.lg,
-        boxShadow: '0 8px 28px rgba(0,0,0,0.28)', display: 'flex', flexDirection: 'column', gap: SP.sm,
+        border: `1px solid ${SLATE}`, padding: SP.lg,
+        display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -129,7 +129,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
         aria-label={anchor.label}
         style={{
           fontSize: FS.xs, color: MUTED, fontFamily: sans, background: CARD_ALT,
-          border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `2px ${SP.sm}px`,
+          border: `1px solid ${BORDER}`, padding: `2px ${SP.sm}px`,
           overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
         }}
       >
@@ -146,7 +146,7 @@ export default function AiAnalystPanel({ open = false, onClose, initialQuestion 
         placeholder={audience === 'player' ? 'Ask something safe to share with the party…' : 'Ask about factions, wars, standings, secrets…'}
         rows={2}
         style={{
-          width: '100%', boxSizing: 'border-box', resize: 'vertical', borderRadius: R.md,
+          width: '100%', boxSizing: 'border-box', resize: 'vertical',
           border: `1px solid ${BORDER}`, background: CARD_ALT, color: INK, padding: SP.sm,
           fontSize: FS.sm, fontFamily: sans,
         }}

@@ -121,7 +121,6 @@ function StepRow({ entry, isLast, traces }) {
                 padding: '6px 8px',
                 background: swatch.white,
                 border: `1px solid ${RAIL_BORDER}`,
-                borderRadius: 4,
                 fontSize: FS.xs, color: BODY, lineHeight: 1.5,
               }}>
                 <div style={{ fontWeight: 600, color: INK }}>
@@ -188,7 +187,6 @@ function SimulationSpine({ settlement }) {
         background: swatch.white,
         border: `1px solid ${RAIL_BORDER}`,
         borderLeft: `3px solid ${COG_COLOR}`,
-        borderRadius: 4,
         fontFamily: sans,
       }}
     >
@@ -236,7 +234,6 @@ export default function PipelineRail({ compact = false }) {
       style={{
         background: RAIL_BG,
         border: `1px solid ${RAIL_BORDER}`,
-        borderRadius: 8,
         padding: compact ? '12px 14px' : '16px 18px',
         fontFamily: sans,
       }}

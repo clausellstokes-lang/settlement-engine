@@ -261,7 +261,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
         </Button>
         <Button onClick={()=>setMode('custom')} variant={mode==='custom'?'ai':'ghost'} size="sm" icon={<Sparkles size={13}/>} aria-pressed={mode==='custom'} style={{ flex:1 }}>
           My Custom Content
-          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:'rgba(124,58,237,0.15)', color:swatch['#7C3AED'], borderRadius:8, padding:'1px 6px' }}>{customContentCount}</span>}
+          {customContentCount > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background: swatch['#FAF8F4'], color:swatch['#7C3AED'], padding:'1px 6px' }}>{customContentCount}</span>}
         </Button>
       </div>
 

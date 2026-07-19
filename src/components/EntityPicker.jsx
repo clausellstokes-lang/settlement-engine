@@ -110,7 +110,7 @@ export default function EntityPicker({
 
   return (
     <div style={{
-      border: `1px solid ${BORDER}`, borderRadius: 6,
+      border: `1px solid ${BORDER}`,
       background: CARD, padding: 6,
     }}>
       {/* Selected chips */}
@@ -136,7 +136,6 @@ export default function EntityPicker({
                   padding: '2px 6px 2px 8px',
                   background: missing ? '#fdebec' : `${accent}14`,
                   border: `1px solid ${accent}55`,
-                  borderRadius: 12,
                   fontSize: FS.xs, fontWeight: 600,
                   color: accent, fontFamily: sans,
                 }}
@@ -147,7 +146,7 @@ export default function EntityPicker({
                   <span style={{
                     fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                     background: `${PURPLE}28`, color: PURPLE,
-                    borderRadius: 4, padding: '0 3px',
+                    padding: '0 3px',
                   }}>CUSTOM</span>
                 )}
                 <IconButton
@@ -169,7 +168,6 @@ export default function EntityPicker({
           display: 'flex', alignItems: 'center', gap: 6,
           padding: '4px 6px',
           border: `1px solid ${focused ? GOLD : BORDER}`,
-          borderRadius: 4,
           background: swatch.white,
         }}>
           <Search size={11} color={MUTED} />
@@ -193,10 +191,9 @@ export default function EntityPicker({
       {focused && suggestions.length > 0 && (
         <div style={{
           marginTop: 4,
-          border: `1px solid ${BORDER}`, borderRadius: 4,
+          border: `1px solid ${BORDER}`,
           background: swatch.white,
           maxHeight: 220, overflowY: 'auto',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
         }}>
           {suggestions.map(s => (
             <button
@@ -224,7 +221,7 @@ export default function EntityPicker({
                 <span style={{
                   fontSize: FS.nano, fontWeight: 800, letterSpacing: '0.05em',
                   background: `${PURPLE}20`, color: PURPLE,
-                  borderRadius: 4, padding: '1px 4px',
+                  padding: '1px 4px',
                 }}>CUSTOM</span>
               )}
             </button>
@@ -237,7 +234,7 @@ export default function EntityPicker({
         <div style={{
           marginTop: 4, padding: '6px 8px',
           fontSize: FS.xs, color: MUTED, fontStyle: 'italic',
-          border: `1px dashed ${BORDER}`, borderRadius: 4,
+          border: `1px dashed ${BORDER}`,
         }}>
           No matches in {cats.join(' / ') || 'catalog'}. Add a custom entry first if needed.
         </div>
@@ -248,7 +245,6 @@ export default function EntityPicker({
         <div style={{
           marginTop: 6, padding: '4px 8px',
           background: swatch['#FDEBEC'], border: '1px solid #f0c8cc',
-          borderRadius: 4,
           fontSize: FS.xxs, color: swatch.danger,
           display: 'flex', alignItems: 'center', gap: 4,
         }}>

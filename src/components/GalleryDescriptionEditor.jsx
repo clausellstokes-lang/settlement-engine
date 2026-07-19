@@ -13,7 +13,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Bold, Italic, Underline, Heading, List, ListOrdered, Link2, Eraser, Check, X } from 'lucide-react';
 
 import { sanitizeGalleryHtml } from '../lib/sanitizeGalleryHtml.js';
-import { AMBER_DEEP, BORDER2, CARD, CARD_ALT, INK, MUTED, R, FS, sans } from './theme.js';
+import { AMBER_DEEP, BORDER2, CARD, CARD_ALT, INK, MUTED, FS, sans } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 
 const exec = (cmd, value = null) => {
@@ -139,7 +139,7 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
   };
 
   return (
-    <div style={{ border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD, overflow: 'hidden' }}>
+    <div style={{ border: `1px solid ${BORDER2}`, background: CARD, overflow: 'hidden' }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, padding: 5, background: CARD_ALT, borderBottom: `1px solid ${BORDER2}`, alignItems: 'center' }}>
         <ToolbarButton icon={Bold} title="Bold" onMouseDown={(e) => cmd(e, 'bold')} />
         <ToolbarButton icon={Italic} title="Italic" onMouseDown={(e) => cmd(e, 'italic')} />
@@ -162,7 +162,7 @@ export default function GalleryDescriptionEditor({ value = '', onChange, maxLeng
               aria-label="Link URL"
               // eslint-disable-next-line jsx-a11y/no-autofocus -- focus the URL field when the link popover opens so the user can type immediately
               autoFocus
-              style={{ width: 150, border: `1px solid ${BORDER2}`, borderRadius: R.sm, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
+              style={{ width: 150, border: `1px solid ${BORDER2}`, padding: '2px 6px', fontFamily: sans, fontSize: FS.xxs, color: INK }}
             />
             <ToolbarButton icon={Check} title="Apply link" onMouseDown={(e) => { e.preventDefault(); applyLink(); }} />
             <ToolbarButton icon={X} title="Cancel" onMouseDown={(e) => { e.preventDefault(); setLinkOpen(false); }} />

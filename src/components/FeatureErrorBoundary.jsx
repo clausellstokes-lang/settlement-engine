@@ -27,7 +27,7 @@ import { Component } from 'react';
 import { reportError } from '../lib/errorReporter.js';
 import Button from './primitives/Button.jsx';
 import HouseDevice from './brand/HouseDevice.jsx';
-import { FS, SP, R, sans, swatch } from './theme.js';
+import { FS, SP, sans, swatch } from './theme.js';
 
 /** Shallow per-element comparison of two resetKeys arrays. */
 function keysChanged(a, b) {
@@ -92,8 +92,7 @@ export default class FeatureErrorBoundary extends Component {
             margin: SP.md,
             padding: SP.lg,
             border: `1px solid ${swatch.danger}`,
-            borderRadius: R.lg,
-            background: swatch.dangerBg,
+            background: swatch['#FAF8F4'],
             color: swatch.danger,
             fontSize: FS.sm,
             fontFamily: sans,

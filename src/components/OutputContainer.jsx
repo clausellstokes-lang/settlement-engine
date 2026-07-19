@@ -710,7 +710,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           trigger in the action band below, not as a top-of-page rail — so the
           dossier card itself is the default landing surface and the simulation
           detail is one tap away rather than always-on chrome above the fold. */}
-      <div style={{ background: 'rgba(255,251,245,0.96)', border: '1px solid #c8b89a', borderRadius: 10, overflow: 'hidden', boxShadow: '0 4px 24px rgba(0,0,0,0.35)' }}>
+      <div style={{ background: swatch['#FFFBF5'], border: '1px solid #c8b89a', overflow: 'hidden' }}>
         {/* Header — suppressed via hideHeader in the embedded generate-flow view,
             where the wizard's own sticky toolbar already shows name/tier/pop, so
             the two dark identity bars collapse into one. */}
@@ -740,7 +740,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             extra !publicDossier keeps it off an anonymous gallery visitor's view —
             they have no Library to return to and no saveId (a false 'Draft'). */}
         {!playerView && !hideHeader && !publicDossier && (
-          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: 'rgba(250,248,244,0.97)', display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
+          <div style={{ padding: `${SP.sm}px ${SP.lg}px 0`, background: swatch['#FAF8F4'], display: 'flex', alignItems: 'center', gap: SP.md, overflowX: 'auto' }}>
             <Button variant="ghost" size="sm" onClick={() => navigate('settlements')} style={{ flexShrink: 0, padding: 0, color: swatch.inkMag3, whiteSpace: 'nowrap' }}>{'‹ Library'}</Button>
             <LifecycleSpine stage={lifecycleStage} />
           </div>
@@ -804,7 +804,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           />
         )}
         {/* Content — dimmed overlay during regenerate so the user sees "something is changing" */}
-        <div style={{ position: 'relative', minHeight: 300, background: 'rgba(250,248,244,0.97)' }}>
+        <div style={{ position: 'relative', minHeight: 300, background: swatch['#FAF8F4'] }}>
           {/* ── Banners above tab content ────────────────────────────────────────
               Banner targeting:
                 • Thesis (identity-level prose) lives only on Summary & Overview —
@@ -847,10 +847,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               style={{
                 position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
                 zIndex: 20, background: 'rgba(74,26,122,0.95)', color: swatch['#F0D8FF'],
-                padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(160,100,220,0.6)',
+                padding: '8px 16px', border: '1px solid rgba(160,100,220,0.6)',
                 fontSize: FS.sm, fontWeight: 700, fontFamily: 'Nunito, sans-serif',
                 display: 'flex', alignItems: 'center', gap: 8,
-                boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
               }}
             >
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>{'\u2726'}</span>
@@ -863,10 +862,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
               // + a few content bars) so a slow first-paint of a heavy lazy tab
               // reads as structured content arriving, not a stall. (B2.)
               <div aria-busy="true" aria-label="Loading section" style={{ padding: SP.lg, display: 'flex', flexDirection: 'column', gap: SP.sm }}>
-                <div style={{ height: 18, width: '40%', borderRadius: 4, background: swatch['#E8DCC8'] }} />
-                <div style={{ height: 10, width: '90%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
-                <div style={{ height: 10, width: '75%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
-                <div style={{ height: 10, width: '82%', borderRadius: 4, background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 18, width: '40%', background: swatch['#E8DCC8'] }} />
+                <div style={{ height: 10, width: '90%', background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '75%', background: swatch['#EDE3CC'] }} />
+                <div style={{ height: 10, width: '82%', background: swatch['#EDE3CC'] }} />
               </div>
             }
           >

@@ -19,7 +19,7 @@
 import { useState } from 'react';
 import { getConsent, setConsent, dntEnabled } from '../lib/consent.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, R } from './theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP } from './theme.js';
 
 function Toggle({ on, disabled, onClick, label }) {
   return (
@@ -38,7 +38,7 @@ function Toggle({ on, disabled, onClick, label }) {
     >
       <span style={{
         position: 'absolute', top: 2, left: on ? 20 : 2, width: 18, height: 18, borderRadius: '50%',
-        background: CARD, transition: 'left 120ms', boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        background: CARD, transition: 'left 120ms',
       }} />
     </button>
   );
@@ -88,7 +88,7 @@ export default function PrivacySettings({ bare = false }) {
   const sectionStyle = bare
     ? { marginTop: 0 }
     : {
-        border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD,
+        border: `1px solid ${BORDER}`, background: CARD,
         padding: `${SP.md}px ${SP.lg}px`, marginTop: SP.lg,
       };
 

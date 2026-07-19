@@ -21,7 +21,7 @@ import { track, EVENTS } from '../lib/analytics.js';
 // collapsibles, each keeping its wizard step id so funnel analytics still fire.
 import LayeredConfigurationPanel from './generate/LayeredConfigurationPanel.jsx';
 import WizardCloseout from './generate/WizardCloseout.jsx';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, PAGE_MAX, CHROME } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, PAGE_MAX, CHROME } from './theme.js';
 import { t } from '../copy/index.js';
 import { anonAtCap } from '../lib/anonGenCounter.js';
 import { ConfirmDialog } from './primitives/Dialog.jsx';
@@ -583,7 +583,6 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
             padding: `${SP.lg}px ${SP.lg}px ${SP.md}px`,
             background: CARD,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.lg,
           }}>
             <div style={{ textAlign: 'center', marginBottom: SP.md }}>
               <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, marginBottom: SP.xs }}>

@@ -25,7 +25,7 @@ import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Stat from './primitives/Stat.jsx';
-import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, R, FS } from './theme.js';
+import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, FS } from './theme.js';
 
 // Icons-off surface: the section header is text-only. The action-vs-reference
 // boundary the old header glyph carried is now held by the differential
@@ -35,7 +35,7 @@ import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP,
 function Section({ title, children, actions }) {
   return (
     <div style={{
-      border: `1px solid ${BORDER}`, borderRadius: R.xl, overflow: 'hidden',
+      border: `1px solid ${BORDER}`, overflow: 'hidden',
       background: CARD,
     }}>
       <div style={{

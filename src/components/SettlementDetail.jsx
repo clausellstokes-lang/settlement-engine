@@ -432,7 +432,7 @@ export default function SettlementDetail({
       {/* Local keyframe so the export-button spinner animates even when
           OutputContainer (which also defines @keyframes spin) isn't mounted. */}
       <style>{'@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}'}</style>
-      <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:swatch['#F5EDE0'],border:`1px solid ${BORDER}`,borderRadius:8}}>
+      <div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:16,padding:'12px 14px',background:swatch['#F5EDE0'],border:`1px solid ${BORDER}`}}>
         <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
           <Button variant="secondary" size="sm" icon={<ChevronLeft size={13}/>} onClick={()=>{setDetail(null);setLinking(false);}}>
             Back to list
@@ -468,11 +468,11 @@ export default function SettlementDetail({
               title="This dossier contains hand-edited prose. The engine preserves these fields across rerolls; the AI overlay passes them through verbatim."
               style={{
                 display:'inline-flex',alignItems:'center',gap:4,
-                padding:'3px 9px',borderRadius:11,fontSize:FS.xxs,fontWeight:800,
+                padding:'3px 9px',fontSize:FS.xxs,fontWeight:800,
                 fontFamily:sans,letterSpacing:'0.07em',textTransform:'uppercase',
-                background:'rgba(90,42,138,0.14)',
+                background:'transparent',
                 color:swatch.ai,
-                border:'1px solid rgba(160,100,220,0.35)',
+                border:'1px solid #5A6E82',
               }}
             >
               <Edit3 size={10}/> Edited · {editedCount}
@@ -573,7 +573,7 @@ export default function SettlementDetail({
           rather than living inline in the dense button row. Owners only;
           ShareToGallery self-gates on auth + canonized state. */}
       {saveId && shareOpen && (
-        <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, padding:'10px 14px', marginBottom:14, background:CARD }}>
+        <div style={{ border:`1px solid ${BORDER}`, padding:'10px 14px', marginBottom:14, background:CARD }}>
           <div style={{ fontSize:FS.xxs, fontWeight:800, color:MUTED, textTransform:'uppercase', letterSpacing:'0.06em', marginBottom:8, display:'flex', alignItems:'center', gap:6 }}>
             <Share2 size={12}/> {liveSaveEntry?.is_public ? 'Edit Gallery Listing' : 'Share to Gallery'}
           </div>
@@ -606,7 +606,7 @@ export default function SettlementDetail({
         <Button variant="info" size="sm" onClick={()=>{onLoad({settlement:detail.settlement,config:detail.config,institutionToggles:detail.institutionToggles,categoryToggles:detail.categoryToggles,goodsToggles:detail.goodsToggles||{},servicesToggles:detail.servicesToggles||{},});setDetail(null);}}>
           ↩ Apply Saved Configuration &amp; Regenerate
         </Button>
-        <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',borderRadius:4,border:`1px solid ${BORDER}`}}>
+        <span style={{fontSize:FS.xxs,color:SECOND,lineHeight:1.4,flex:1,background:CARD,padding:'4px 8px',border:`1px solid ${BORDER}`}}>
           Restores settings &amp; runs a fresh generation. The new settlement will differ from the saved one.
         </span>
       </div>
@@ -675,7 +675,7 @@ export default function SettlementDetail({
         onExportFoundry={foundryEnabled ? handleFoundryExport : undefined}
       />
       {pdfError && (
-        <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:`3px solid ${swatch.danger}`,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
           {pdfError}
         </div>
       )}
@@ -683,7 +683,7 @@ export default function SettlementDetail({
       {/* Neighbour links — moved out of the always-visible header into its own
           card here, under Edit Dossier. The toggle reveals the linking picker;
           the network list below shows existing links. */}
-      <div style={{ border:`1px solid ${BORDER}`, borderRadius:8, overflow:'hidden', marginBottom:14 }}>
+      <div style={{ border:`1px solid ${BORDER}`, overflow:'hidden', marginBottom:14 }}>
         <button type="button" aria-pressed={linking} onClick={()=>setLinking(v=>!v)} style={{ width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:linking?'#f5ede0':CARD, border:'none', cursor:'pointer', textAlign:'left' }}>
           <Link2 size={14} color="#2a3a7a"/>
           <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:600, color:INK, flex:1 }}>Link a Neighbouring Settlement</span>
@@ -692,7 +692,7 @@ export default function SettlementDetail({
         {linking&&<div style={{ padding:'10px 14px', borderTop:`1px solid ${BORDER}` }}><LinkNeighbourCard currentSave={detail} allSaves={saves} onLink={handleLink}/></div>}
       </div>
 
-      {network.length>0&&!linking&&<div style={{background:swatch.infoBg,border:'1px solid #c0c8e8',borderRadius:8,padding:'12px 14px',marginBottom:14}}>
+      {network.length>0&&!linking&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'12px 14px',marginBottom:14}}>
         <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.info,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8,display:'flex',alignItems:'center',gap:6}}>
           <Link2 size={12}/> Neighbour Network ({network.length})
         </div>
@@ -702,7 +702,7 @@ export default function SettlementDetail({
           return<div key={i} style={{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #dde4f8'}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:c,flexShrink:0}}/>
             <span style={{fontSize:FS.sm,fontWeight:600,color:INK,flex:1}}>{n.name}</span>
-            <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px',borderRadius:3}}>{rel}</span>
+            <span style={{fontSize:FS.xxs,color:c,fontWeight:600,background:`${c}18`,padding:'1px 6px'}}>{rel}</span>
             <IconButton Icon={X} label="Remove link" tone="ghost" size="md" onClick={()=>removeNeighbour(i)} />
           </div>;
         })}
@@ -746,7 +746,7 @@ export default function SettlementDetail({
             onExportFoundry={foundryEnabled ? handleFoundryExport : undefined}
           />
           {pdfError && (
-            <div style={{background:swatch.dangerBg,border:'1px solid #e8b0b0',borderRadius:8,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
+            <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8b0b0',borderLeft:`3px solid ${swatch.danger}`,padding:'10px 12px',marginBottom:12,color:swatch.danger,fontSize:FS.sm,fontFamily:sans}}>
               {pdfError}
             </div>
           )}

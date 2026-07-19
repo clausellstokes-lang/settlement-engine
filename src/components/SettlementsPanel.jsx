@@ -637,7 +637,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
   // reactivationError both render through this so the two error rows stay
   // visually identical and neither forks a raw-hex border. No dedicated
   // danger-border token exists, so the border falls back to swatch.danger.
-  const alertStyle = { padding:'9px 12px', background:swatch.dangerBg, color:swatch.danger, border:`1px solid ${swatch.danger}`, borderRadius:6, fontFamily:sans, fontSize:FS.sm };
+  const alertStyle = { padding:'9px 12px', background:swatch['#FAF8F4'], color:swatch.danger, border:`1px solid ${swatch.danger}`, fontFamily:sans, fontSize:FS.sm };
   return (
     // Differential rhythm, not a flat 12px stack: the funnel cluster (alerts +
     // header + meter) groups tight via local margins, then a single loose break
@@ -704,7 +704,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
                 onKeyDown={e => { if (e.key === 'Enter') handleCreateCampaign(); if (e.key === 'Escape') setShowNewCampaign(false); }}
                 // eslint-disable-next-line jsx-a11y/no-autofocus -- new-campaign field appears on user action; focus lets them type the name immediately
                 placeholder="Campaign name..." autoFocus
-                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, borderRadius:5, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
+                style={{ flex:1, padding:'6px 10px', border:`1px solid ${BORDER}`, fontSize:FS.sm, fontFamily:sans, outline:'none' }}/>
               <Button variant="primary" size="sm" onClick={handleCreateCampaign} disabled={!newCampaignName.trim()}>Create</Button>
               <Button variant="secondary" size="sm" onClick={() => { setShowNewCampaign(false); setNewCampaignName(''); }}>Cancel</Button>
             </div>
@@ -722,7 +722,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // rhythm; role=status announces the polite loading live region.
         <div role="status" aria-live="polite" aria-busy="true" aria-label="Loading saves" style={{ marginTop:SP.xl, display:'flex', flexDirection:'column', gap:SP.sm }}>
           {[0,1,2].map(i => (
-            <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}`, borderRadius:7 }} />
+            <div key={i} aria-hidden="true" style={{ height:76, background:PARCH, border:`1px solid ${BORDER}`, borderLeft:`3px solid ${BORDER}` }} />
           ))}
         </div>
       ) : (saves.length === 0 && campaigns.length === 0) ? (
@@ -737,7 +737,7 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
         // Offer a recovery CTA rather than a silent dead-end (no inert list).
         // Flat PARCH placeholder surface — distinct from the CARD-filled real
         // cards so the surface itself carries the elevation difference.
-        <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, borderRadius:8, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
+        <div style={{ padding:'28px 16px', textAlign:'center', background:PARCH, display:'flex', flexDirection:'column', alignItems:'center', gap:SP.sm }}>
           <h2 style={{ margin:0, fontFamily:serif_, fontSize:FS.lg, fontWeight:600, color:INK }}>No settlements match your search or filters</h2>
           <div style={{ maxWidth:PROSE_MAX, fontFamily:sans, fontSize:FS.sm, color:BODY }}>Try a broader term, or clear the active filters to see all {saves.length} saved settlement{saves.length === 1 ? '' : 's'}.</div>
           <Button variant="secondary" size="sm" onClick={() => { setLibraryQuery(''); setLibraryFilters({}); }}>Clear filters</Button>

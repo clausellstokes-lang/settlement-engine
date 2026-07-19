@@ -28,7 +28,7 @@ import { useStore } from '../store/index.js';
 import { supabase, isConfigured } from '../lib/supabase.js';
 import { deriveGenerationId } from '../lib/generationTelemetry.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { INK, BODY, MUTED, BORDER, CARD, sans, SP, R, FS, swatch } from './theme.js';
+import { INK, BODY, MUTED, BORDER, CARD, sans, SP, FS, swatch } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 export default function FeedbackWidget({ visible = true }) {
@@ -101,7 +101,7 @@ export default function FeedbackWidget({ visible = true }) {
           size="md"
           icon={<MessageSquare size={14} />}
           onClick={() => setOpen(true)}
-          style={{ boxShadow: '0 2px 10px rgba(0,0,0,0.18)' }}
+          style={{}}
           aria-haspopup="dialog"
         >
           Feedback
@@ -120,8 +120,6 @@ export default function FeedbackWidget({ visible = true }) {
         maxWidth: 'calc(100vw - 32px)',
         background: CARD,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.xl,
-        boxShadow: '0 8px 28px rgba(0,0,0,0.22)',
         padding: SP.lg,
         display: 'flex', flexDirection: 'column', gap: SP.md,
       }}
@@ -148,7 +146,7 @@ export default function FeedbackWidget({ visible = true }) {
           </p>
 
           {error && (
-            <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+            <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch['#FAF8F4'], borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger }}>
               {error}
             </div>
           )}
@@ -162,7 +160,7 @@ export default function FeedbackWidget({ visible = true }) {
               onChange={e => setEmail(e.target.value)}
               style={{
                 width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-                border: `1px solid ${BORDER}`, borderRadius: R.md,
+                border: `1px solid ${BORDER}`,
                 fontSize: FS.sm, fontFamily: sans, outline: 'none', boxSizing: 'border-box',
               }}
             />
@@ -176,7 +174,7 @@ export default function FeedbackWidget({ visible = true }) {
             rows={4}
             style={{
               width: '100%', padding: `${SP.sm + 2}px ${SP.md}px`,
-              border: `1px solid ${BORDER}`, borderRadius: R.md,
+              border: `1px solid ${BORDER}`,
               fontSize: FS.sm, fontFamily: sans, outline: 'none',
               resize: 'vertical', boxSizing: 'border-box',
             }}

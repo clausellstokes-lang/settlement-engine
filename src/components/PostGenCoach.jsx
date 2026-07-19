@@ -36,8 +36,7 @@ import { X, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, GOLD_BG, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, R,
-} from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP } from './theme.js';
 import Button from './primitives/Button.jsx';
 import IconButton from './primitives/IconButton.jsx';
 import { buildNextSteps } from './generate/nextSteps.js';
@@ -103,8 +102,6 @@ export default function PostGenCoach() {
         width: 340, maxWidth: 'calc(100vw - 48px)',
         background: CARD,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
-        boxShadow: '0 2px 10px rgba(27,20,8,0.08)',
         fontFamily: sans, color: INK,
         overflow: 'hidden',
       }}
@@ -146,7 +143,7 @@ export default function PostGenCoach() {
               flexShrink: 0,
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               width: 20, height: 20, borderRadius: '50%',
-              background: GOLD_BG, border: `1px solid ${GOLD}`,
+              background: `${GOLD}18`, border: `1px solid ${GOLD}`,
               color: GOLD, fontSize: FS.xs, fontWeight: 700, lineHeight: 1,
             }}
           >
