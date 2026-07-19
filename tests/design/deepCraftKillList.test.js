@@ -178,10 +178,16 @@ const CEILINGS = Object.freeze({
   // structural borderRadius:0 rule is KEPT (the flat-rule doctrine). Radius only —
   // the swatch tints are unchanged. First of the app-wide residual clear-file sweep;
   // the remaining offender map (clear vs off-limits) is in the lane report.
-  borderRadius: 982,    // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 108,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 260,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 232,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  // Lowered again (FOLD: claude/deep-craft-pages @ 55e4a69c — the P-a..P-g page
+  // recompositions land): borderRadius 982→911 (−71), boxShadow 108→98 (−10),
+  // rgba 260→238 (−22), tintedCallouts 232→214 (−18) — the declared −121 total.
+  // Auth/compendium/pricing/gallery/founders/account surfaces fell to the
+  // rule-framed plate idiom in the pages lane; ceilings set to the measured
+  // post-fold counts (tolerance-0).
+  borderRadius: 911,    // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 98,        // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 238,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 214,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
