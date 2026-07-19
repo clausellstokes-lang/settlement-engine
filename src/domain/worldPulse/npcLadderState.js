@@ -14,6 +14,7 @@ import { importanceWeight } from '../entities/npcs.js';
 import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { slugify } from '../../kernel/slugify.js';
+import { isOffStage } from '../roads/state.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 export function num(v, fallback) {
@@ -143,7 +144,7 @@ export function eligibleMembersOf(sid, settlement, faction, fkey) {
   const rows = [];
   npcs.forEach((npc, index) => {
     const n = asObject(npc);
-    if (n.stasis) return;
+    if (isOffStage(n)) return; // BELT (THE ROADS §8): stasis OR a roads hostage — defense-in-depth
     if (!npcInFaction(n, faction, fkey)) return;
     const w = importanceWeight(/** @type {Parameters<typeof importanceWeight>[0]} */ (/** @type {unknown} */ (n)));
     if (w < LADDER_TUNING.RUNG_ELIGIBLE_FLOOR) return;

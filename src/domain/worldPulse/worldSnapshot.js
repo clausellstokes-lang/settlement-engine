@@ -4,6 +4,7 @@ import { ensureRegionalGraph } from '../region/index.js';
 import { deriveAllActiveConditions } from '../activeConditions.js';
 import { isCanonSave } from '../campaign/canon.js';
 import { ensureWorldState } from './worldState.js';
+import { isOffStage } from '../roads/state.js';
 
 /** @param {any} save */
 function saveSettlement(save) {
@@ -82,14 +83,19 @@ export function buildWorldSnapshot({ campaign, saves = [], worldState = null, re
     .filter(isCanonSave);
 
   const settlements = canonSaves.map(save => {
-    // Participation view: stasis NPCs are excluded from the settlement the pulse
-    // reads (§2). Dormant (same reference) when none are shelved. `_s` is the
-    // loose (any) pulse-view settlement, so this narrows nothing downstream and
-    // the participation copy is byte-identical when no NPC is shelved.
+    // Participation view: OFF-STAGE NPCs are excluded from the settlement the pulse reads —
+    // DM-shelved (stasis) OR a roads HOSTAGE (whereabouts.state==='hostage'). THE ONE
+    // chokepoint (THE ROADS §8): isOffStage widens the existing stasis filter, so every pulse
+    // kernel that reads the snapshot's settlement excludes a hostage from agency/growth/
+    // recruitment/blocs/ladder/councils/coups in ONE move. Presence-driven: the whereabouts
+    // key exists only when the roads mover wrote it, so a dark world reduces isOffStage to
+    // isInStasis exactly ⇒ byte-identical (the roads dormancy golden proves it). Dormant (same
+    // reference) when none are off-stage. TRAVELLERS are never filtered (travel is narrative,
+    // §1 law 5); the full roster survives on `save` for the roads mover to manage hostages.
     const _s = saveSettlement(save);
-    const _npcs = /** @type {Array<{ stasis?: unknown }>} */ (_s?.npcs);
-    const settlement = (Array.isArray(_npcs) && _npcs.some((n) => n && n.stasis))
-      ? { ..._s, npcs: _npcs.filter((n) => !(n && n.stasis)) }
+    const _npcs = /** @type {Array<Record<string, unknown>>} */ (_s?.npcs);
+    const settlement = (Array.isArray(_npcs) && _npcs.some((n) => isOffStage(n)))
+      ? { ..._s, npcs: _npcs.filter((n) => !isOffStage(n)) }
       : _s;
     const id = saveId(save);
     const name = settlement?.name || save?.name || id;
