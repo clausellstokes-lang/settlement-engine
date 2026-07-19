@@ -160,6 +160,25 @@ export const TEMPLATES = Object.freeze({
     ].join('\n'),
     html: null,
   },
+  // ops_error_alert — the item-A error-alert consumer (Wave E). Kept in sync with
+  // the edge copy in supabase/functions/send-email/index.ts. Authenticated only
+  // (never added to ANON_OK_TEMPLATES). Numbers from report_client_error_alert().
+  ops_error_alert: {
+    subject: 'SettlementForge: {distinctSignatures} distinct crash signatures in {windowMinutes} min',
+    text: [
+      'Client error alert.',
+      '',
+      'In the last {windowMinutes} minutes SettlementForge saw',
+      '{distinctSignatures} distinct crash signature(s) — over the alert',
+      'threshold of {threshold}.',
+      '',
+      'Open the admin panel → Client Errors for the grouped signatures,',
+      'counts, and sample messages.',
+      '',
+      '— SettlementForge ops',
+    ].join('\n'),
+    html: null,
+  },
 });
 
 // ── Public API ─────────────────────────────────────────────────────────────
