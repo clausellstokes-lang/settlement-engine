@@ -214,12 +214,12 @@ export default function ServicesTogglePanel() {
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
                         <span style={{fontSize:FS.sm, fontWeight:700, color:swatch.inkMag, fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
-                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>}
+                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
-                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>}
+                    {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
-                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowedCount} allowed</span>
-                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forcedCount} forced</span>
+                      <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>
+                      <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forcedCount} forced</span>
                     </>}
                     <span style={{fontSize:FS.micro, color:MUTED, marginLeft:4}}>{svcEntries.length}</span>
                     <span style={{fontSize:FS.xxs, color:MUTED}}>{isOpen ? '▲' : '▼'}</span>

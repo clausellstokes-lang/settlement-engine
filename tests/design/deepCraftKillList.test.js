@@ -125,7 +125,14 @@ const CEILINGS = Object.freeze({
   // borderRadius:8 fell to feint row rules (the ledger idiom — rows on the ground,
   // parted by rules), the selected state's z-axis boxShadow ring became a gold left
   // rail, and the active row's translucent rgba fill became the page parchment.
-  borderRadius: 1052,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C3-d, THE CONFIG-PANEL DE-ROUND): borderRadius 1052→1043. The nine
+  // rounded count-badge pills on the create/config surface fell to flat plate stamps —
+  // TradeDynamicsPanel's 5 (the good's constraint tag + the section-header forced/
+  // allowed counts) and ServicesTogglePanel's 4 (the category-header forced/allowed
+  // counts). Same handlers, same bg/ink; only the rounding is struck. The structural
+  // borderRadius:0 rules stay. LayeredConfigurationPanel gained net-neutral register
+  // rules under its two numbered group headers (a border, not a counted pattern).
+  borderRadius: 1043,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 112,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 264,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes

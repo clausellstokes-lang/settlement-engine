@@ -61,7 +61,7 @@ function GoodCard({ good, state, onCycle }) {
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
           <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
-          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, padding:'0 4px'}}>{cc.label}</span>}
           {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
         </div>
         {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
@@ -82,12 +82,12 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
     }}>
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
-        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
-        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
     </button>
