@@ -188,9 +188,14 @@ const CEILINGS = Object.freeze({
   // restorations land): borderRadius 911→909 (−2). The chrome lane's admin/
   // account/auth/pricing restorations are net −2 rounded corners; boxShadow/
   // rgba/tinted hold. Ceilings set to the measured post-fold counts.
-  borderRadius: 909,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (FOLD: claude/restoration-compendium @ f9b07930 — R3
+  // compendium/gallery restorations land): borderRadius 909→906 (−3),
+  // rgba 238→234 (−4). The CustomContent consolidation (the inline
+  // CustomItemAttributes/Upsell block fell to the leaf module) and the
+  // gallery/catalog restorations are net −7; boxShadow/tinted hold.
+  borderRadius: 906,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 98,        // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 238,    // off-palette translucent washes — ink tones come from the ramp
+  rgbaLiterals: 234,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 214,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
