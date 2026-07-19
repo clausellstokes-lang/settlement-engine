@@ -51,7 +51,7 @@ describe('collectPlotHooks — THE TRADITIONS register (T-5)', () => {
 
   test('a failed festival raises a tradition-category hook naming the town', () => {
     const hooks = collectPlotHooks({ name: 'Ashford', traditions: [rec({ lastOutcome: 'failure' })] });
-    const t = hooks.filter(h => h.category === 'tradition');
+    const t = hooks.filter(h => h.source === 'Traditions');
     expect(t.length).toBe(1);
     expect(t[0].source).toBe('Traditions');
     expect(t[0].role).toBe('The Harvest Feast');
@@ -64,7 +64,7 @@ describe('collectPlotHooks — THE TRADITIONS register (T-5)', () => {
       name: 'Ashford',
       traditions: [rec({ suppressedBy: { overlordId: 'b' }, lastOutcome: 'failure' })],
     });
-    const t = hooks.filter(h => h.category === 'tradition');
+    const t = hooks.filter(h => h.source === 'Traditions');
     expect(t.length).toBe(1);
     // the suppressed-rite theme (not the failure theme) — precedence resolved to 'suppressed'
     expect(t[0].text.toLowerCase()).toMatch(/overlord|banned|forced under|behind closed doors|secret|resistance/);
@@ -72,8 +72,8 @@ describe('collectPlotHooks — THE TRADITIONS register (T-5)', () => {
   });
 
   test('a settlement with no traditions mirror adds no tradition hooks (byte-identical)', () => {
-    expect(collectPlotHooks({ name: 'Ashford' }).filter(h => h.category === 'tradition')).toEqual([]);
+    expect(collectPlotHooks({ name: 'Ashford' }).filter(h => h.source === 'Traditions')).toEqual([]);
     expect(collectPlotHooks({ name: 'Ashford', traditions: [rec({ lastOutcome: 'good' })] })
-      .filter(h => h.category === 'tradition')).toEqual([]); // a quiet rite raises none
+      .filter(h => h.source === 'Traditions')).toEqual([]); // a quiet rite raises none
   });
 });

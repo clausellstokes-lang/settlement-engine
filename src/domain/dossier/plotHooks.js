@@ -33,7 +33,6 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   safety: { color: '#5a2a8a', label: 'Safety' },
   history: { color: '#1a4a2a', label: 'History' },
   relationship: { color: '#5a3a1a', label: 'Relationships' },
-  tradition: { color: '#7a4a8a', label: 'Traditions' },
 });
 
 /**
@@ -318,9 +317,9 @@ export function collectPlotHooks(settlement = {}) {
     if (!hook) return;
     push(hooks, {
       text: hook.text,
-      source: 'Traditions',
+      source: 'Traditions', // the source label marks these; they ride the existing 'tension' category
       role: hook.source, // the tradition's name
-      category: 'tradition',
+      category: 'tension',
       priority: hook.priority,
       accent: hook.priority >= 8,
     });
