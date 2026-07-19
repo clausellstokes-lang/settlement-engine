@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ C4 PANELS A-C LANDED (2026-07-18, deep-craft @ 2abed50e) — THE DOSSIER BASE
+IS SET.** 507662c0 Panel A DossierHeaderRow (header reroll REMOVED — stays in tab
+bodies; HEADER_FACT #D8C8A8 high-contrast; allowRename REVIVED at the component —
+caller wiring = C3 scope; emblem + formatCount kept [display-determinism JUDGMENT])
+· 50f2ba14 Panel B TAB_GROUPS World NPC-FIRST restored (npcs·relationships·rumors·
+daily_life·traditions·history·neighbours; traditions = INERT data-seam until the
+lane folds) · 2abed50e Panel C OverviewTab (actionable "Full relationship web →"
+onNavigateTab Button + Spatial Layout own top-level Section; radii 1078→1077
+locked). Step-2 PLUG-IN verified complete; step-3 CRAFT deferred (base-first per
+the owner). Full suite 13,195 / 11 reds = expected-5 + 6 isolation-cleared load
+flakes. ONE legal pin retarget, named: renameConsolidation case 1 (the composite
+had pinned allowRename-as-INERT — the exact regression being reversed).
+RESTORATION-LEDGER: 6 S1 rows → RESTORED (transcribe from this row); WizardNextSteps/
+PostGenCoach row stays PENDING. ⛔ PANEL D (PostGenCoach revival) DELIBERATELY
+STOPPED — it collides with the guidance-registry walker (W-GUIDE-1 retired
+PostGenCoach; budget pin = one whisper/surface). SUCCESSOR RECIPE RECORDED in the
+C4 report + here in brief: revive master's PostGenCoach as the HOST of the
+wizard-postgen whisper (registry component swap), remove in-page WizardNextSteps
+(→ LEGACY ledger), update walker census/budget pins, reconcile 6 named test files,
+FULL suite (App-mount + walker = blind-spot risk). Deferral recorded: master's
+"Viability →" button (not map-flagged; follow-up candidate, not smuggled).
 **⬛⭐ THE CONTINUITY ORDER (owner, 2026-07-18): "if i run out of fable,
 automatically switch and continue all the work with opus 4.8 ultracode fast.
 don't wait on me."** — Recorded in START_HERE §6b: an Opus 4.8 successor (fast,
