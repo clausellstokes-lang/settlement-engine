@@ -359,6 +359,19 @@ A+ at this stage, rinse and repeat.")
   PDF counterseal structured-path refactor · the deterministic-violet re-tones
   · Viability→ adjudication · WhatChangedPanel wire-or-remove · ?cat= deep-link
   · folder thead a11y · journey_stop enrichment · vendorManifest try/finally).
+  ⬛ WAVE B #13 — AUTO-REPURCHASE FOR AI CREDITS (owner-commissioned
+  2026-07-19): opt-in (OFF default) account-page controls in the C11 registry
+  idiom — threshold · refill amount (default = the MEDIAN of the user's own
+  past credit purchases, selectable among pack sizes) · a monthly auto-spend
+  CAP (manager judgment, vetoable — runaway-proofing) · per-top-up receipts ·
+  one-click cancel. Mechanics: saved payment method via setup_future_usage
+  consent at checkout (consent copy in the register idiom, card-network
+  compliant) · trigger AT THE DEBIT POINT in the credit-spending edge function
+  · off-session PaymentIntent server-side · webhook-confirmed BEFORE any
+  credit grant · idempotency lock + cooldown per crossing · the SCA
+  authentication_required path notifies-to-complete, never silent-retries ·
+  settings + top-up-ledger migration WRITTEN-NOT-DEPLOYED. Paid-surface +
+  schema surfaces owner-ordered here; inert until keys/deploy.
   ⭐ WAVE C (the B re-audit, 2026-07-19 — the manager's own "stage-blocked"
   label was safety-shaped): the §16 traditions seams are BUILDABLE DARK NOW and
   move into the completion waves — festival-week map dress (groundDressOps
