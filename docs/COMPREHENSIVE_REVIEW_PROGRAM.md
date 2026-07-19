@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ROADS RECON COMPLETE — THE PREMISE IS REFUTED; THE WAVE IS GREENFIELD
+(2026-07-19, 5-lens workflow, 5/5 agents, receipts in the run journal).** MANAGER
+CORRECTION, owned: the manager told the owner NPC travel exists ("the mover") from
+program memory — WRONG. Traditions T-2's "mover" is a per-settlement CULTURE kernel
+(traditionsKernel.js:53 — "AGGREGATE culture motion… never a named soul's fate");
+migrationKernel moves population COUNTS ("NAMED-NPC-SAFE", :18); armies march as force
+tokens (warDeployment); rumors travel hop-by-hop over trade edges (rumorNetwork:5);
+NPCs have NO location field at all (npcProfile / settlement.schema:195 — nested under
+their owning settlement); no travel layer, no travel flag, no travel rng stream exists.
+NAMED-NPC TRAVEL IS ABSENT — the Roads Wave builds it from scratch. WHAT THE SUBSTRATE
+OFFERS (rich): the trade-edge graph + hopWeeks timing, the occupation 5-rung ladder +
+war fronts + embattlement layer (threat classes), rumorNetwork/infoMode (the KNOWN
+picture for intel-based routing — exactly the design's knowledge-vs-truth seam), the
+corruption web's FOREIGN-PATRON precedent (cross-settlement NPC linkage — the
+conversion mechanism's template), ladder goals (purpose vocabulary to extend with
+location-bearing missions). BOUNDARY RECONCILIATION REQUIRED: two kernel headers carve
+named-NPC protection as design law — the roads design must define itself as the SOLE
+sanctioned named-NPC motion layer under the owner's explicit "build it all!" ruling,
+amend those boundary comments in place, and preserve the deeper law via the carved
+NO-DEATH rule (travel suspends fates, never resolves them). FABLE ROADS ARCHITECT
+DISPATCHED with the full journal receipts → docs/DESIGN_THE_ROADS.md.
 **⬛ OWNER RULING (2026-07-19) — THE FALLBACK ORDER: Supabase Pro + Stripe Connect
 both BUILD-WITH-FALLBACKS; launch blocks on neither.** DESIGN_MONEY_WAVE amended in
 place: (1) THE PAYOUT ELECTION — outgoing holders (transfers AND buybacks) elect
