@@ -171,7 +171,14 @@ const CEILINGS = Object.freeze({
   // regional-count badges (queued/applied/resolved), plus the shared Pip in
   // LivingWorldSignalRow (war/faith/disposition/standing). Radius only; the semantic
   // tints (neighbour hue, success/danger/info/gold washes) are unchanged.
-  borderRadius: 996,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (residual sweep #1, InstitutionalGrid): borderRadius 996→982. The
+  // institution-grid's fourteen rounded chip/tag/container/swatch corners (radii 3 and
+  // 5 — the forced/allowed count tags, category + danger stamps, the dashed group
+  // container, the clickable rows, the 14px swatch) fell to flat stamps; the one
+  // structural borderRadius:0 rule is KEPT (the flat-rule doctrine). Radius only —
+  // the swatch tints are unchanged. First of the app-wide residual clear-file sweep;
+  // the remaining offender map (clear vs off-limits) is in the lane report.
+  borderRadius: 982,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 108,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 260,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 232,  // the tinted callout box — replaced by rubric-headed clerk's notes

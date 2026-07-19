@@ -71,7 +71,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         style={{
           display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: 8,
           padding: '5px 10px', background: swatch['#F5F0E8'],
-          border: `1px dashed ${swatch['#C8B89A']}`, borderRadius: 5, minHeight: 0,
+          border: `1px dashed ${swatch['#C8B89A']}`, minHeight: 0,
           textAlign: 'left', fontWeight: 400, marginBottom: open ? 4 : 0,
         }}
       >
@@ -83,7 +83,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
         {forcedCount > 0 && (
           <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
             background: swatch['#FDF0E8'], border: `1px solid ${swatch['#E08040']}`,
-            borderRadius: 3, padding: '1px 6px' }}>
+            padding: '1px 6px' }}>
             {forcedCount} forced in
           </span>
         )}
@@ -95,7 +95,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
       {open && !allCollapsed && (
         <div style={{ paddingLeft: 8, display: 'flex', flexDirection: 'column', gap: 3 }}>
           <div style={{ fontSize: FS.xxs, color: MUTED, fontStyle: 'italic', marginBottom: 4, padding: '2px 6px',
-            background: swatch['#FAF8F4'], borderRadius: 3, border: `1px solid ${swatch['#E8DCC8']}` }}>
+            background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E8DCC8']}` }}>
             These institutions are excluded by default. Click to force-include. Contradictions will appear in the Viability tab.
           </div>
           {Object.entries(institutions).sort(([a],[b])=>a.localeCompare(b)).map(([name, instDef]) => {
@@ -111,7 +111,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 onBlur={(e) => { e.currentTarget.style.outline = 'none'; }}
                 style={{
                   display: 'flex', alignItems: 'flex-start', gap: 8,
-                  padding: '5px 8px', borderRadius: 5, cursor: 'pointer',
+                  padding: '5px 8px', cursor: 'pointer',
                   background: isForced ? swatch['#FDF0E8'] : swatch['#FAF8F4'],
                   border: `1px ${isForced ? 'solid' : 'dashed'} ${isForced ? swatch['#E08040'] : swatch['#D8C8A8']}`,
                   opacity: isForced ? 1 : 0.65,
@@ -119,7 +119,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 }}
               >
                 <div style={{
-                  width: 14, height: 14, borderRadius: 3, marginTop: 1, flexShrink: 0,
+                  width: 14, height: 14, marginTop: 1, flexShrink: 0,
                   background: isForced ? swatch['#C05010'] : 'transparent',
                   border: `2px solid ${isForced ? swatch['#C05010'] : swatch['#A08060']}`,
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -133,7 +133,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                     {instDef.nativeTier && (
                       <span style={{ fontSize: FS.micro, fontWeight: 600, marginLeft: 6,
                         color: MUTED, background: swatch['#F0E8D8'],
-                        border: `1px solid ${swatch['#D8C8A8']}`, borderRadius: 3, padding: '0 4px' }}>
+                        border: `1px solid ${swatch['#D8C8A8']}`, padding: '0 4px' }}>
                         {instDef.nativeTier}
                       </span>
                     )}
@@ -147,7 +147,7 @@ function OutOfTierSection({ category, institutions, tier, toggles, onToggle, for
                 {isForced && (
                   <span style={{ fontSize: FS.micro, fontWeight: 800, color: swatch['#8A3010'],
                     background: swatch['#FDF0E8'], border: `1px solid ${swatch['#E08040']}`,
-                    borderRadius: 3, padding: '1px 5px', flexShrink: 0 }}>Forced</span>
+                    padding: '1px 5px', flexShrink: 0 }}>Forced</span>
                 )}
               </div>
             );
@@ -245,19 +245,19 @@ function InstitutionCard({ name, def, tier, category, state, onToggle, isOutOfTi
                 textDecoration: isExcluded ? 'line-through' : 'none',
                 opacity: isExcluded ? 0.7 : 1 }}>{name}</span>
           {def.p !== undefined && (
-            <span style={{ fontSize: FS.xxs, color: muted, background: swatch['#F0EAD8'], borderRadius: 3, padding: '0 4px' }}>
+            <span style={{ fontSize: FS.xxs, color: muted, background: swatch['#F0EAD8'], padding: '0 4px' }}>
               {Math.round((def.p || 0) * 100)}%
             </span>
           )}
           {def.exclusiveGroup && !def.required && (
-            <span style={{ fontSize: FS.xxs, color: swatch.danger, background: swatch['#FDF0F0'], borderRadius: 3, padding: '0 4px' }}>
+            <span style={{ fontSize: FS.xxs, color: swatch.danger, background: swatch['#FDF0F0'], padding: '0 4px' }}>
               excl.
             </span>
           )}
           {labelText && (
             <span style={{ fontSize: FS.micro, fontWeight: 700, color: labelColor,
               background: `${labelColor}15`, border: `1px solid ${labelColor}40`,
-              borderRadius: 3, padding: '1px 4px',
+              padding: '1px 4px',
               textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               {labelText}
             </span>
@@ -332,22 +332,22 @@ function CategorySection({ category, institutions, tier, toggles, onToggle, isEn
             {category}
           </span>
           {forceCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: catColor, background: `${catColor}20`, borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: catColor, background: `${catColor}20`, padding: '1px 5px' }}>
               {forceCount} forced
             </span>
           )}
           {excludeCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], padding: '1px 5px' }}>
               {excludeCount} excluded
             </span>
           )}
           {overrideCount > 0 && (
-            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], border: `1px solid ${swatch['#C88A8A']}`, borderRadius: 3, padding: '1px 5px' }}>
+            <span style={{ fontSize: FS.micro, fontWeight: 700, color: swatch.danger, background: swatch['#FDF0F0'], border: `1px solid ${swatch['#C88A8A']}`, padding: '1px 5px' }}>
               {overrideCount} req. overridden
             </span>
           )}
         </div>
-        <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], borderRadius: 3, padding: '1px 5px', marginRight: 4 }}>
+        <span style={{ fontSize: FS.micro, color: muted, background: swatch['#EDE3CC'], padding: '1px 5px', marginRight: 4 }}>
           {Object.keys(institutions).length - forceCount - excludeCount} allowed
         </span>
         <span style={{ fontSize: FS.xxs, color: muted, marginRight: 4 }}>{isCollapsed ? '▼' : '▲'}</span>
