@@ -570,6 +570,24 @@ Two kernel headers carve named-NPC protection as law and MUST be amended in plac
   return leg; escort = the RELEASING side's courtesy detail). The existing
   "peace between home and captor" early-release trigger becomes bilateral
   and universal; pinned both directions.
+- THE INTERCEPTION RACE (owner refinement, same day: "third party, if the
+  news reaches them, may try to intercept peace negotiations"): an embassy's
+  departure mints a QUIET news event that propagates through the EXISTING
+  rumor network (hop-by-hop over trade edges, hopWeeks-delayed, fidelity-
+  degraded — no new carrier). Any third-party power AT WAR WITH THE TARGET
+  whose rumor ledger RECEIVES the embassy news while the mission is in
+  flight acquires the strategic motive (a separate peace frees the target's
+  armies against them) and becomes an INFORMED HUNTER: its army columns
+  within reach of the embassy's route gain a HUNT AMPLIFIER on the T1
+  encounter roll for THAT mission (they are actively looking). Outcome on
+  interception = the third-party rule (capture, no negotiation) — and the
+  suit dies unheard. THE RACE IS EMERGENT AND HONEST: a short road may
+  outrun the news entirely; a distant suit gives the rumor time to arrive;
+  an 'unreliable' infoMode third party may never learn or learn wrong; an
+  omniscient one hunts from the first tick. The intel layer now matters a
+  THIRD time (routing · verification · interception). Zero new machinery:
+  the rumor lattice carries the news, armyTransit already knows where the
+  hunters are, and the hazard evaluation reads one amplifier term.
 - PURPOSE 6 — DOMINION INSPECTION: an envoy of an occupying/suzerain power
   travels to view an occupied or vassalized holding (destination = a
   settlement under the home power's occupation-ladder rung); low external

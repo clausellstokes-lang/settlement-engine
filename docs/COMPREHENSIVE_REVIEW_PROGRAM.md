@@ -1134,6 +1134,15 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER REFINEMENT (2026-07-19, same hour) — THE INTERCEPTION RACE joins R-8:**
+a third party at war with the target, IF the news of the embassy reaches it through
+the existing rumor lattice (hop-delayed, fidelity-degraded — no new carrier), becomes
+an INFORMED HUNTER: its in-reach army columns gain a hunt amplifier on that mission's
+T1 roll, and interception kills the suit unheard (the third-party capture rule).
+The race is emergent: a short road can outrun the rumor; a distant suit gives it time;
+an unreliable-mode enemy may never learn. The intel layer now matters a third time
+(routing · verification · interception). Zero new machinery. DESIGN_THE_ROADS §11b
+amended (this commit); rides the queued R-8 dispatch.
 **⬛⭐ OWNER RULING (2026-07-19) — THE EMBASSY EXTENSION (roads R-8).** Peace
 embassies join the roads: wartime sue-for-peace journeys with TWO VENUES (road parley
 when the TARGET's own army intercepts · court suit at the enemy gate), the THIRD-PARTY
