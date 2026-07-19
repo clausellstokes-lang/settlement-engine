@@ -19,6 +19,13 @@ import { generatePowerStructure } from '../../src/generators/power/rulingStructu
 import { ladderFactionKey, npcInFaction } from '../../src/domain/worldPulse/npcLadderState.js';
 import { ladderEffectivePowerFactor } from '../../src/domain/townMap/ladderRead.js';
 import { advanceNpcLadder } from '../../src/domain/worldPulse/npcLadderKernel.js';
+import { factionOwnerKey } from '../../src/domain/traditions/politics.js';
+import { slugify } from '../../src/kernel/slugify.js';
+
+// The ladder's own slug params (npcLadderState.normalizeToken / ladderRead.factionKeyOf).
+// Imported rather than hand-rolled: src/kernel/slugify.js is the SINGLE slug primitive, and a
+// test that re-implements it is a 9th variant that drifts silently from the code it pins.
+const LADDER_SLUG = { sep: '_', max: 80, fallback: 'unknown', empty: 'unknown' };
 
 const economicState = { tier: 'city', economyOutput: 70, wealthLevel: 'wealthy' };
 const richCity = { priorities: { economy: 80, military: 70, religion: 65, criminal: 30 } };
@@ -39,7 +46,15 @@ describe('THE FACTION-KEY BUG: real .faction records key distinctly (write side)
     for (const k of keys) expect(k).not.toBe('fac.unknown');
     // And the slug is the real name normalized (spot-check the governing entry).
     const gov = factions.find((f) => f.isGoverning) || factions[0];
-    expect(ladderFactionKey(gov)).toBe(`fac.${gov.faction.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '')}`);
+    expect(ladderFactionKey(gov)).toBe(`fac.${slugify(gov.faction, LADDER_SLUG)}`);
+  });
+
+  it('.faction WINS over .name — the precedence that binds the key to rulingPower.nameOf', () => {
+    // nameOf reads `.faction || .name`; the ladder key MUST agree, or a record carrying both
+    // (a fixture patched onto real data) would key one way for the ladder and another for
+    // every other power consumer. This precedence is the whole contract — pin it explicitly.
+    expect(ladderFactionKey({ faction: 'Alpha', name: 'Beta' })).toBe('fac.alpha');
+    expect(npcInFaction({ factionAffiliation: 'Alpha' }, { faction: 'Alpha', name: 'Beta' }, 'fac.alpha')).toBe(true);
   });
 
   it('hand-shaped real records get distinct name-slug keys', () => {
@@ -102,6 +117,16 @@ describe('THE FACTION-KEY BUG: end-to-end — the kernel grows ONE ladder per re
     // Each faction's ladder holds its OWN head (not merged into one bucket).
     const allRungNids = Object.values(rec.factions).flatMap((fr) => fr.rungs);
     expect(allRungNids.sort()).toEqual(['a:h0', 'a:h1', 'a:h2']);
+
+    // CLOSE THE WRITE→READ LOOP ON REAL DATA. Everything above pins the WRITE key; the read
+    // side (ladderRead.factionKeyOf) is a SEPARATE function that must agree byte-for-byte, and
+    // asserting a hand-typed literal on both sides only pins that two humans typed the same
+    // string. Feed the mirror the kernel actually projected back through the real read path:
+    // a miss coalesces to exactly 1.0 (the dark-safe value), so "not 1" is the drift detector.
+    const written = r.settlementUpdates[0].settlement;
+    for (const f of [f0, f1, f2]) {
+      expect(ladderEffectivePowerFactor(written, f)).not.toBe(1);
+    }
   });
 });
 
@@ -120,5 +145,34 @@ describe('THE ACCESSOR SERVES BOTH SHAPES: the .name/.id fixture path stays gree
     const fixture = { name: "Merchants' Guild" };
     const fkey = ladderFactionKey(fixture);
     expect(npcInFaction({ factionAffiliation: "Merchants' Guild" }, fixture, fkey)).toBe(true);
+  });
+});
+
+describe('THE CROSS-LAYER JOIN: traditions ownerKey must equal the ladder key', () => {
+  // traditionsKernel.js reads ladderInstabilityOf(settlement, rec.ownerKey) — the TRADITIONS
+  // owner key (politics.factionOwnerKey) indexed straight into the LADDER's mirror. That is a
+  // THIRD key-minter joining this keyspace, and it was previously DEAD: pre-fix the ladder
+  // keyed every real faction fac.unknown while factionOwnerKey keyed the true slug, so the
+  // lookup could never hit. Fixing the ladder key ACTIVATES this coupling — festival outcomes
+  // become ladder-churn-sensitive once both flags are lit. Pin the parity so it cannot drift.
+  it('factionOwnerKey and ladderFactionKey agree on every real generated faction', () => {
+    const { factions } = generatePowerStructure('city', economicState, null, richCity, []);
+    expect(factions.length).toBeGreaterThan(1);
+    for (const f of factions) {
+      expect(factionOwnerKey(f)).toBe(ladderFactionKey(f));
+    }
+  });
+
+  it('DOCUMENTED DIVERGENCE: an .id-bearing record keys differently on the two sides', () => {
+    // NOT cured by the faction-key fix and NOT cured here — pinned as the CURRENT behavior so
+    // the gap is visible rather than latent. ladderFactionKey short-circuits on `.id` and
+    // returns it verbatim; factionOwnerKey ignores `.id` entirely and always slugs the name.
+    // Real generator records carry no `.id`, so the join is sound on generated data; hand-
+    // authored/fixture records that DO carry one (e.g. sampleDossier.json's fac.garrison) miss.
+    // Reconciling the two minters is an owner-gated keyspace decision, deliberately deferred.
+    const idBearing = { id: 'fac.garrison', faction: 'The Garrison' };
+    expect(ladderFactionKey(idBearing)).toBe('fac.garrison');
+    expect(factionOwnerKey(idBearing)).toBe('fac.the_garrison');
+    expect(factionOwnerKey(idBearing)).not.toBe(ladderFactionKey(idBearing));
   });
 });
