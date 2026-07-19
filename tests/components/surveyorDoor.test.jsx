@@ -4,9 +4,10 @@
  * surveyorDoor.test.jsx — THE ONE DOOR contract (C13, owner ruling 2026-07-18).
  *
  * Pins the four laws of the door:
- *   1. ENTITLEMENT — the marker renders ONLY for the Surveyor tier ('premium' via the
- *      isSurveyorTier chokepoint): no lock-tease, no placeholder — the margin is EMPTY
- *      for anon/free.
+ *   1. ENTITLEMENT (owner ruling 2026-07-19, FINAL) — the marker renders ONLY for a
+ *      live Surveyor entitlement, a Founder, or an elevated role (via the isSurveyorTier
+ *      chokepoint): no lock-tease — the margin is EMPTY for anon/free AND for
+ *      Cartographer 'premium' (the discriminator: 'premium' alone is insufficient).
  *   2. ONE DOOR — the tab opens a prompt slip; prompts route to DESTINATIONS (the
  *      analyst / a workshop stage); the destinations receive the staged prompt.
  *   3. CONTEXT-FIRST — the slip shows the visible anchor (what the Surveyor reads).
@@ -18,10 +19,19 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 
 afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
-const { storeRef } = vi.hoisted(() => ({ storeRef: { current: {} } }));
+const { storeRef, entitledRef } = vi.hoisted(() => ({
+  storeRef: { current: { auth: {} } },
+  entitledRef: { current: true },
+}));
 
 vi.mock('../../src/store/index.js', () => ({
   useStore: (selector) => selector(storeRef.current),
+}));
+// The Surveyor gate is resolved by the lazy useSurveyorEntitled hook; mock it so
+// the door renders synchronously here. The chokepoint predicate (isSurveyorTier)
+// is re-exported real from the door module and tested directly below.
+vi.mock('../../src/components/surveyor/useSurveyorEntitled.js', () => ({
+  useSurveyorEntitled: () => entitledRef.current,
 }));
 vi.mock('../../src/components/surveyor/useSurveyorContext.js', () => ({
   useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town' }),
@@ -41,7 +51,7 @@ vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', () => ({
 
 import SurveyorDoor, { isSurveyorTier } from '../../src/components/surveyor/SurveyorDoor.jsx';
 
-const setTier = (tier) => { storeRef.current = { auth: { tier } }; };
+const setEntitled = (v) => { entitledRef.current = v; };
 
 function openDoor() {
   render(<SurveyorDoor />);
@@ -49,17 +59,14 @@ function openDoor() {
 }
 
 describe('SurveyorDoor — entitlement (the marker law)', () => {
-  it('renders NOTHING for anon and free tiers — an empty margin, no lock-tease', () => {
-    for (const tier of ['anon', 'free']) {
-      setTier(tier);
-      const { container, unmount } = render(<SurveyorDoor />);
-      expect(container.innerHTML, `tier "${tier}" must see an empty margin`).toBe('');
-      unmount();
-    }
+  it('renders NOTHING for a non-entitled user — empty margin, no lock-tease', () => {
+    setEntitled(false);
+    const { container } = render(<SurveyorDoor />);
+    expect(container.innerHTML).toBe('');
   });
 
-  it('renders the tab for the Surveyor tier, with no visible text until hover (aria-label carries the name)', () => {
-    setTier('premium');
+  it('renders the tab for an entitled user, no visible text until hover (aria-label carries the name)', () => {
+    setEntitled(true);
     render(<SurveyorDoor />);
     const tab = screen.getByRole('button', { name: /ask the surveyor/i });
     expect(tab.getAttribute('aria-label')).toBe('Ask the Surveyor');
@@ -67,14 +74,18 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
     expect(tab.querySelector('[aria-hidden="true"]')?.textContent).toBe('Ask the Surveyor');
   });
 
-  it('isSurveyorTier is the one chokepoint: premium only', () => {
-    expect(isSurveyorTier('premium')).toBe(true);
-    expect(isSurveyorTier('free')).toBe(false);
-    expect(isSurveyorTier('anon')).toBe(false);
+  it('isSurveyorTier chokepoint: entitlement OR founder OR elevated role; Cartographer premium excluded', () => {
+    expect(isSurveyorTier({ hasSurveyorEntitlement: true })).toBe(true);
+    expect(isSurveyorTier({ isFounder: true })).toBe(true);
+    expect(isSurveyorTier({ role: 'admin' })).toBe(true);
+    expect(isSurveyorTier({ role: 'developer' })).toBe(true);
+    expect(isSurveyorTier({ tier: 'premium' })).toBe(false); // Cartographer — no door
+    expect(isSurveyorTier({ tier: 'free' })).toBe(false);
+    expect(isSurveyorTier(null)).toBe(false);
   });
 
   it('respects the route-level visible gate (auth/checkout chrome)', () => {
-    setTier('premium');
+    setEntitled(true);
     const { container } = render(<SurveyorDoor visible={false} />);
     expect(container.innerHTML).toBe('');
   });
@@ -82,13 +93,13 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
 
 describe('SurveyorDoor — the prompt slip routes to destinations', () => {
   it('shows the visible anchor (context-first made tangible) in the slip', () => {
-    setTier('premium');
+    setEntitled(true);
     openDoor();
     expect(screen.getByTestId('surveyor-anchor').textContent).toBe('Reading: Test Town');
   });
 
   it('routes a question to the ANALYST with the question staged', () => {
-    setTier('premium');
+    setEntitled(true);
     openDoor();
     fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
       target: { value: 'why is bread so expensive here?' },
@@ -102,7 +113,7 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
   });
 
   it('routes a making-prompt to the WORKSHOP with the stage pre-selected and the prompt seeded', () => {
-    setTier('premium');
+    setEntitled(true);
     openDoor();
     fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
       target: { value: 'reskin the map in a woodcut style' },
@@ -114,7 +125,7 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
   });
 
   it('RETENTION: the promptless register links open the analyst / the workshop directly', () => {
-    setTier('premium');
+    setEntitled(true);
     openDoor();
     fireEvent.click(screen.getByRole('button', { name: /open the workshop/i }));
     expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('content');

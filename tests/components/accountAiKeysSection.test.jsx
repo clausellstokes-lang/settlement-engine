@@ -10,7 +10,14 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup, waitFor } from '@testing-library/react';
 
-afterEach(() => { cleanup(); vi.clearAllMocks(); });
+// The BYOK surface is Surveyor-gated via the lazy useAccountSurveyorGate hook;
+// default it to entitled so the presentation tests render, reset after each.
+const entitledRef = vi.hoisted(() => ({ current: true }));
+vi.mock('../../src/components/account/useAccountSurveyorGate.js', () => ({
+  useAccountSurveyorGate: () => entitledRef.current,
+}));
+
+afterEach(() => { cleanup(); vi.clearAllMocks(); entitledRef.current = true; });
 
 const api = vi.hoisted(() => ({
   status: [],
@@ -32,6 +39,12 @@ vi.mock('../../src/lib/surveyorByok.js', () => ({
 import AccountAiKeysSection from '../../src/components/account/AccountAiKeysSection.jsx';
 
 describe('AccountAiKeysSection — BYOK management surface (#29)', () => {
+  it('renders NOTHING for a non-entitled account (Surveyor gate, discriminator)', () => {
+    entitledRef.current = false; // e.g. Cartographer premium — no surveyor entitlement
+    const { container } = render(<AccountAiKeysSection />);
+    expect(container.innerHTML).toBe('');
+  });
+
   it('save→verify surfaces key-health + a per-model picker with retention class', async () => {
     api.status = []; // no key yet
     // saving creates the vault row (has_key), mirroring surveyor_byok_set

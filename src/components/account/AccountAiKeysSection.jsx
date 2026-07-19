@@ -13,6 +13,7 @@
  * AccountPage chunk (zero first-paint bytes); the dashboard is a further lazy split.
  */
 import { Suspense, lazy, useEffect, useState } from 'react';
+import { useAccountSurveyorGate } from './useAccountSurveyorGate.js';
 import { INK, BODY, MUTED, BORDER, CARD, GOLD, GREEN, GREEN_BG, RED, RED_BG, AMBER, AMBER_BG, CARD_ALT, SP, R, FS, sans, serif_, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import {
@@ -45,6 +46,11 @@ const labelStyle = { fontSize: FS.xs, color: MUTED, fontFamily: sans, marginBott
 const fmtDate = (iso) => (iso ? new Date(iso).toLocaleString() : '—');
 
 export default function AccountAiKeysSection() {
+  // Defense-in-depth: the BYOK surface is Surveyor-gated (owner ruling
+  // 2026-07-19). AccountPage already hides the nav tab + section render for
+  // non-entitled accounts; this guard makes the component itself refuse to
+  // render if it is ever mounted directly, so the discriminator can't leak.
+  const surveyorEntitled = useAccountSurveyorGate();
   const [statusRow, setStatusRow] = useState(null); // the anthropic byok status row, or null
   const [settings, setSettings] = useState(null);
   const [keyInput, setKeyInput] = useState('');
@@ -73,6 +79,9 @@ export default function AccountAiKeysSection() {
   };
 
   useEffect(() => { (async () => { await refreshStatus(); await loadSettings(); })(); }, []);
+
+  // Surveyor-gate the whole surface (after the hooks, so hook order is stable).
+  if (!surveyorEntitled) return null;
 
   const hint = keyPrefixHint(PROVIDER, keyInput);
   const health = verify?.health || statusRow?.health || 'unverified';

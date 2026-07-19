@@ -27,6 +27,7 @@ import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Button from './primitives/Button.jsx';
 import AccountNav from './account/AccountNav.jsx';
+import { useAccountSurveyorGate } from './account/useAccountSurveyorGate.js';
 import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
@@ -41,6 +42,10 @@ export default function AccountPage({ onNavigateAdmin }) {
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
+  // The AI & keys (BYOK) surface is Surveyor-gated (owner ruling 2026-07-19):
+  // the nav tab and section render only for the Surveyor-entitled/Founders/
+  // elevated — Cartographer 'premium' gets no AI keys, clean and without a tease.
+  const surveyorEntitled = useAccountSurveyorGate();
   const savedSettlements = useStore(s => s.savedSettlements);
   const campaigns = useStore(s => s.campaigns);
   const maxSaves = useStore(s => s.maxSaves());
@@ -326,7 +331,7 @@ export default function AccountPage({ onNavigateAdmin }) {
 
       {/* AI provider & keys — the BYOK MANAGEMENT SURFACE (#29): provider/key/verify,
           per-task model choice, key-health, usage caps + pause, and the lazy meter. */}
-      {section === 'ai' && <AccountAiKeysSection />}
+      {section === 'ai' && surveyorEntitled && <AccountAiKeysSection />}
     </>
   );
 
@@ -347,6 +352,7 @@ export default function AccountPage({ onNavigateAdmin }) {
           section={section}
           setSection={setSection}
           isElevated={isElevated}
+          showAiKeys={surveyorEntitled}
           onNavigateAdmin={onNavigateAdmin}
         />
         {/* Content panel. tabIndex={-1} + aria-label make it a focusable, named

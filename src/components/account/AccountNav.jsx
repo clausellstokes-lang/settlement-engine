@@ -21,6 +21,7 @@
  * @param {string} props.section                 active section id
  * @param {(id:string)=>void} props.setSection   section setter
  * @param {boolean} [props.isElevated=false]     show the Developer-Admin affordance
+ * @param {boolean} [props.showAiKeys=true]      show the Surveyor-gated "AI & keys" row
  * @param {() => void} [props.onNavigateAdmin]   admin-panel navigator
  */
 import { Shield, ChevronRight } from 'lucide-react';
@@ -54,18 +55,22 @@ export default function AccountNav({
   section,
   setSection,
   isElevated = false,
+  showAiKeys = true,
   onNavigateAdmin,
 }) {
   const isMobile = useIsMobile();
   const showAdmin = Boolean(isElevated && onNavigateAdmin);
+  // The "AI & keys" row is Surveyor-gated (owner ruling 2026-07-19): hidden
+  // entirely for non-entitled accounts — no lock-tease, matching the door.
+  const sections = showAiKeys ? ACCOUNT_SECTIONS : ACCOUNT_SECTIONS.filter((s) => s.id !== 'ai');
 
   // ── Mobile: the shipped tab strip, no section hidden ──────────────────────
   // The admin link rides as a trailing tab so the elevated affordance survives
   // the reflow; selecting it navigates away rather than switching a panel.
   if (isMobile) {
     const tabs = showAdmin
-      ? [...ACCOUNT_SECTIONS, { id: ADMIN_TAB_ID, label: 'Admin' }]
-      : ACCOUNT_SECTIONS;
+      ? [...sections, { id: ADMIN_TAB_ID, label: 'Admin' }]
+      : sections;
     return (
       <MobileTabStrip
         tabs={tabs}
@@ -83,7 +88,7 @@ export default function AccountNav({
   // ── Desktop: a vertical rail of ghost rows ────────────────────────────────
   return (
     <nav aria-label="Account settings" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
-      {ACCOUNT_SECTIONS.map(({ id, label }) => {
+      {sections.map(({ id, label }) => {
         const active = section === id;
         return (
           <Button
