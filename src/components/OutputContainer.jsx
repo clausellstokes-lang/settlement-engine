@@ -883,8 +883,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           </Suspense>
           {/* The dossier foot — seal and counterseal (the house device beside this
               settlement's own seeded medallion) with the motto caption; the
-              ceremonial close of the document (owner placement, 2026-07-18). */}
-          <HouseColophon seed={activeSettlement?.name} />
+              ceremonial close of the document (owner placement, 2026-07-18).
+              H3 THE EXPORT CEREMONY (C15-b): the web dossier foot impresses the
+              seal + pulses the medallion once as the document closes. */}
+          <HouseColophon seed={activeSettlement?.name} ceremony />
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>
