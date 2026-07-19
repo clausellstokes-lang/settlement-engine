@@ -1,4 +1,5 @@
 import { compareCodepoint } from '../deterministicSort.js';
+import { traditionHook } from '../traditions/prose.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -32,6 +33,7 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   safety: { color: '#5a2a8a', label: 'Safety' },
   history: { color: '#1a4a2a', label: 'History' },
   relationship: { color: '#5a3a1a', label: 'Relationships' },
+  tradition: { color: '#7a4a8a', label: 'Traditions' },
 });
 
 /**
@@ -195,12 +197,14 @@ function push(out, hook) {
  */
 /**
  * @typedef {Object} PlotHookSettlement
+ * @property {string} [name]
  * @property {PlotHookNpc[]} [npcs]
  * @property {PlotHookConflict[]} [conflicts]
  * @property {{ currentTensions?: PlotHookTension[], historicalEvents?: PlotHookEvent[], [key: string]: unknown }} [history]
  * @property {PlotHookRelationship[]} [relationships]
  * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
+ * @property {unknown[]} [traditions]  THE TRADITIONS mirror (T-5) — outcome/relation hooks
  */
 
 /**
@@ -303,6 +307,23 @@ export function collectPlotHooks(settlement = {}) {
       priority: event.anchored ? 7 : 5,
       accent: Boolean(event.anchored),
     }));
+  });
+
+  // THE TRADITIONS wave (T-5) — outcome/relation-conditioned hooks off the festival
+  // register (settlement.traditions MIRROR). A failed/cancelled/triumphant festival, a
+  // rite suppressed under an overlord / just liberated / carried in by settlers each raise
+  // a seeded hook. Absent mirror (dark / draft) ⇒ nothing added, byte-identical.
+  (settlement.traditions || []).forEach((rec) => {
+    const hook = traditionHook(/** @type {Parameters<typeof traditionHook>[0]} */ (rec), { town: settlement.name });
+    if (!hook) return;
+    push(hooks, {
+      text: hook.text,
+      source: 'Traditions',
+      role: hook.source, // the tradition's name
+      category: 'tradition',
+      priority: hook.priority,
+      accent: hook.priority >= 8,
+    });
   });
 
   // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the

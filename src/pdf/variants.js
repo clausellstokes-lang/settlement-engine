@@ -34,6 +34,9 @@ export const PDF_VARIANTS = {
       // The Faith & War chapter is canon-only AND premium/self-gated — a draft
       // brief never carries live war/faith.
       faithWar: false,
+      // The Traditions register (07B, T-5) is a live-campaign chapter (mirror-only);
+      // a draft brief carries no mirror, so it never appears here regardless.
+      traditions: false,
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -69,6 +72,9 @@ export const PDF_VARIANTS = {
       // the live-world slice is dormant ⇒ a peaceful / deity-free canon save is
       // byte-identical.
       faithWar: 'if-canon',
+      // THE TRADITIONS register (07B, T-5) — canon-only, self-gating on the
+      // settlement.traditions mirror (dark ⇒ no chapter ⇒ byte-identical).
+      traditions: 'if-canon',
       tonightAtTheTable: true,
       npcQuickRef: true,
       notableNpcs: true,
@@ -100,6 +106,7 @@ export const PDF_VARIANTS = {
       systemState: true,
       timeline: 'if-canon',
       faithWar: false,
+      traditions: false,
       tonightAtTheTable: false,
       npcQuickRef: false,
       notableNpcs: false,
@@ -138,6 +145,7 @@ export const PDF_VARIANTS = {
       systemState: true,
       timeline: 'if-canon',
       faithWar: 'if-canon',
+      traditions: 'if-canon',
       tonightAtTheTable: true,
       npcQuickRef: false,
       notableNpcs: false,

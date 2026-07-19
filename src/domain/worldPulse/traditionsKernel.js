@@ -67,6 +67,7 @@ import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
 import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKernel.js';
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 import { advanceRelations } from '../traditions/relations.js';
+import { traditionBeatProse } from '../traditions/prose.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -400,16 +401,12 @@ function applyFaithNudges(religionStates, bySid) {
   return cloned ? out : religionStates;
 }
 
-// ── the tradition beat (house voice) ──────────────────────────────────────────
-const OUTCOME_PHRASE = Object.freeze({
-  triumph: 'was a triumph', good: 'was well kept', modest: 'was modestly kept',
-  troubled: 'passed under a shadow', failure: 'failed', cancelled: 'was set aside',
-});
-
 /**
  * A tradition-outcome chronicle beat (a held observance's fortune this year). MAJOR for a
  * triumph/failure of the settlement's grandest observance; NOTABLE otherwise. AGGREGATE
- * culture motion — the town's festival, never a named soul's fate. Pure.
+ * culture motion — the town's festival, never a named soul's fate. The outcome PHRASING is
+ * drawn from the traditionProse pools, seeded on the stable per-(tradition,year) outcomeId
+ * (canonical-at-zero — a seedless caller would land the pre-existing string). Pure.
  * @param {Object} a
  * @param {string} a.sid @param {string} a.townName @param {TraditionRec} a.rec
  * @param {string} a.outcome @param {number} a.year @param {number} a.tick @param {string|null} a.now
@@ -418,23 +415,20 @@ const OUTCOME_PHRASE = Object.freeze({
  */
 function traditionBeat(a) {
   const { sid, townName, rec, outcome, year, tick, now, major } = a;
-  const phrase = /** @type {Record<string, string>} */ (OUTCOME_PHRASE)[outcome] || 'was held';
   const positive = outcome === TRADITION_OUTCOME.TRIUMPH || outcome === TRADITION_OUTCOME.GOOD;
   // §6 display-side accountability: a faction/institution owner is NAMED (the seat is the
   // town itself, so a seat-owned observance needs no attribution beyond the town).
   const named = (rec.ownerKind === 'faction' || rec.ownerKind === 'institution') && typeof rec.ownerLabel === 'string' && rec.ownerLabel
     ? rec.ownerLabel : null;
   const ownerBit = named ? ` It is kept by ${named}, who answer for its fortune.` : '';
+  const outcomeId = `tradition.${outcome}.${sid}.${year}`;
+  const { phrase, summary } = traditionBeatProse({ outcome, name: rec.name, town: townName, ownerBit, seed: outcomeId });
   const headline = outcome === TRADITION_OUTCOME.CANCELLED
     ? `${townName} sets aside ${rec.name}`
     : `${rec.name} ${phrase} in ${townName}`;
-  const summary = outcome === TRADITION_OUTCOME.CANCELLED
-    ? `In ${townName}, ${rec.name} was set aside this year — hardship left no room for the observance, and a people that keeps its restraint is remembered for it too.${ownerBit}`
-    : `In ${townName}, ${rec.name} ${phrase} this year. A settlement's traditions carry its identity forward; each holding — or failing — is a mark on the year.${ownerBit}`;
   const reason = outcome === TRADITION_OUTCOME.CANCELLED
     ? `Cancelled under hard stress or a desperate economy (§3 skip) — no success roll was taken; a mild legitimacy cost fell ${named ? `at half weight on the town (${named} named)` : 'on the seat'}.`
     : `A weighted success roll (§4) resolved to ${outcome}; the outcome fed the settlement's economy and legitimacy${named ? ` at half weight (${named} named)` : ''} through the bounded §5 applicators.`;
-  const outcomeId = `tradition.${outcome}.${sid}.${year}`;
   return {
     id: `wizard_news.${tick}.tradition.${sid}.${rec.id}.${year}`,
     tick,
