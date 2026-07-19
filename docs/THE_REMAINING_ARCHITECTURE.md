@@ -645,11 +645,12 @@ A+ at this stage, rinse and repeat.")
   "the walkthrough is pure visual aesthetics but the soak and tuning are the
   core machine. Changing the visibility is always easier than the
   interconnected machine we have underneath"). The tail order is now:
-  loop convergence → THE PUSH → soak (machine 2) → tuning → THE WALK (visual
-  rulings, cheap by construction) → THE ONE REGEN (walk fixes fold into the
-  regen batch's final 100%-green gate) → THE VERY END. The walk inspects the
-  live skin (not flag-gated), so walking pre-regen loses nothing; any
-  walk-driven visual fix lands before the regen's final full gate.
+  loop convergence → THE PUSH → soak (machine 2) → tuning → THE ONE REGEN →
+  THE WALK → THE VERY END. (AMENDED same day, owner: "walk after the one
+  regen" — the owner walks the FULLY-LIT world, every flag on, the final
+  product as users will meet it. Walk-driven fixes are render-layer by nature
+  — golden-neutral — so post-regen fixes never force a re-regen; they gate
+  THE VERY END instead.)
 - ⬛ 2026-07-19 OWNER RULING (SOAK_PLAN_R2 §5 is the authority): THREE LEVELS
   (CERT-30 / CENTURY-100 / CENTURY-300, all PASS criteria at each) + the COMBINATORIAL
   MANDATE (tick-path toggle matrix: L1 factorial where affordable, L2 all-on +

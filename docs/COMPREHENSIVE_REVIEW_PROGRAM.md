@@ -1134,6 +1134,12 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER AMENDMENT (2026-07-19, same day) — THE WALK MOVES AFTER THE ONE REGEN.**
+Final tail order: loop convergence → PUSH → SOAK → TUNING → ONE REGEN → THE WALK →
+THE VERY END. The owner now walks the FULLY-LIT world — every flag on, the product
+exactly as users will meet it — instead of the dark twin. Manager note ratifying the
+mechanics: walk fixes are render-layer (golden-neutral), so post-regen fixes never
+force a re-regen; they gate THE VERY END. Charter §5 amended (this commit).
 **⬛ OWNER RULING (2026-07-19) — THE MACHINE BEFORE THE MIRROR: soak + tuning
 re-sequenced BEFORE the finished-site walkthrough** ("the walkthrough is pure visual
 aesthetics but the soak and tuning are the core machine. Changing the visibility is
