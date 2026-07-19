@@ -1134,6 +1134,19 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — PUSH #3, THE ACTIVATION PUSH ("the final push after
+the very end").** THE VERY END's batch-2 deploy is NOT the last git op: activation steps
+clear on EXTERNAL timelines (MX verification, legal sign-off, Stripe Connect approval)
+and each produces a POST-LAUNCH code change — canonically the support-email flip
+(src/copy/support.js, permitted only after the MX probe + a test mail round-trips) and
+any code gated on legal (transfer activation). PUSH #3 carries those to origin +
+redeploys; it MAY fire more than once (each cleared external gate = one activation push).
+Dashboard/env activations (system_config flags, keys, toggles per runbook §11) are NOT
+git and ride no push. ⛔owner, each on a 100%-green gate. The program is not truly closed
+until every owner-gated activation surface is live or a recorded deferral. Charter §5
+amended (this commit). FULL TAIL: convergence → PUSH#1 (dark, for soak) → soak → tuning →
+ONE REGEN → WALK → PUSH#2 (lit, re-minted) → THE VERY END (batch-2 deploy + merge) →
+PUSH#3 (activation, ×N as external gates clear).
 **⬛ OWNER RULING (2026-07-19) — TWO PUSHES, NOT ONE ("there has to be one more push
 after the one regen").** The tail has TWO pushes: PUSH #1 at loop convergence ships the
 DARK soak-ready composite to origin (so machine 2 pulls it for the soak — a

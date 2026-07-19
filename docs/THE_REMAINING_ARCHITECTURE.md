@@ -646,7 +646,7 @@ A+ at this stage, rinse and repeat.")
   core machine. Changing the visibility is always easier than the
   interconnected machine we have underneath"). The tail order is now:
   loop convergence → PUSH #1 → soak (machine 2) → tuning → THE ONE REGEN →
-  THE WALK → PUSH #2 → THE VERY END. (AMENDED same day, owner: "walk after the
+  THE WALK → PUSH #2 → THE VERY END → PUSH #3 (activation). (AMENDED same day, owner: "walk after the
   one regen" — the owner walks the FULLY-LIT world, every flag on, the final
   product as users will meet it. Walk-driven fixes are render-layer by nature
   — golden-neutral — so post-regen fixes never force a re-regen; they gate
@@ -663,6 +663,21 @@ A+ at this stage, rinse and repeat.")
   deploy stale pre-regen dark code. Both pushes are ⛔owner (any push is
   owner-gated); PUSH #2's full gate must be 100% green (the regen's re-mint
   closes the parked-golden reds) before it fires.
+  ⬛ PUSH #3 — THE ACTIVATION PUSH (owner ruling 2026-07-19: "the final push
+  after the very end"). THE VERY END's batch-2 deploy is NOT the last git op:
+  several activation steps clear on EXTERNAL timelines and each produces a code
+  change that lands AFTER launch — canonically the SUPPORT-EMAIL FLIP
+  (src/copy/support.js SUPPORT_EMAIL → the branded address, permitted ONLY
+  after the MX probe verifies + a test mail round-trips — "never flip first"),
+  plus any code gated on the LEGAL SIGN-OFF (transfer activation) or the STRIPE
+  CONNECT approval clearing. PUSH #3 carries those post-launch code flips to
+  origin + redeploys. It may fire MORE THAN ONCE (MX, legal, and Connect can
+  clear on different days — each cleared gate = one activation push). Purely
+  dashboard/env activations (system_config enabled flags, keys, toggles per the
+  runbook §11) are NOT git and ride no push — PUSH #3 is only for activation
+  changes that touch CODE. ⛔owner, each on a 100%-green gate. The program is
+  not truly closed until every owner-gated activation surface is either live or
+  a recorded deliberate deferral.
 - ⬛ 2026-07-19 OWNER RULING (SOAK_PLAN_R2 §5 is the authority): THREE LEVELS
   (CERT-30 / CENTURY-100 / CENTURY-300, all PASS criteria at each) + the COMBINATORIAL
   MANDATE (tick-path toggle matrix: L1 factorial where affordable, L2 all-on +
