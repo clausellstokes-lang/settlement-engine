@@ -1153,6 +1153,27 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C4 CRAFT STEP-3 MAIN PASS LANDED (2026-07-19, deep-craft @ 409a326f, 6
+commits).** Six dossier panels → their registers, each a lettered commit with
+gates green + ceilings lowered in lockstep: C4c-a ChronicleTab=ANNALS · C4c-b
+DeityAssignmentPanel=VOTIVE (violet accent → RUBRIC gold, vetoable) · C4c-c
+CascadePreviewPanel=PREVIEW PLATE (five tints → two-tone rubric, vetoable) ·
+C4c-d WhatChangedPanel=ERRATUM SLIP · C4c-e ServicesTab=POSTED BILL (radii −14)
+· C4c-f StaleNarrativeModal=INSTRUMENT PLATE (regenerate primary re-toned gold —
+deterministic regen, not AI authorship; C13 lane instructed to EXCLUDE it from
+the slate sweep; fold reconciles). Cumulative burn: radii 1077→1054 · shadows
+115→113 · rgba 270→265 · tinted 246→235 (tolerance-0 held). Zero eager; zero
+new contrast pins needed (pinned ink/rubric tones on parchment grounds only).
+Full suite 13,188 / expected-5 + 3 isolation-cleared flakes (39/39). MANAGER
+RULINGS on the lane's asks: (1) Trade/Config/ServicesToggle panels (all inside
+LayeredConfigurationPanel) → DEFERRED to a C1-FIN REMAINDER slice (C1 territory;
+queued, not grazed); (2) ServicesTab state-tint re-tone + its per-state contrast
+pins → rides C4c-g; (3) manuscript grammar (prose surfaces) = the C4 spec's
+remaining half → C4c-g DISPATCHES NOW (Opus; deep-craft worktree freed); (4)
+WhatChangedPanel has NO live importer (tested, mounted nowhere) → filed to
+ROUND 3 pre-stock (wire-or-remove adjudication). Durable gotcha ledgered: the
+no-raw-color rule counts bare hex ONLY in color/background/fill/stroke/border*Color
+props — border shorthand strings, rgba(), and token refs are exempt.
 **⬛ OWNER CORRECTION (2026-07-19) — THE DEADLINE IS 11:59:59 PM PT **JULY 19**
 (= 02:59:59 EDT July 20), not tonight: ~25.5 hours of runway from issuance, all
 of it inside the free-Fable window.** Strategy adjusted: Fable escalations are

@@ -378,7 +378,10 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   green. The traditions faction.power seam now waits only on the folds. ·
   vendorManifestExactSet.test.js NON-ATOMIC MV of public/map/libs/flatqueue.js
   (proven to strand a deleted file + .bak on mid-run crash; two lanes bitten
-  2026-07-19) — add try/finally restoration so a crashed run cannot damage the tree.
+  2026-07-19) — add try/finally restoration so a crashed run cannot damage the tree. ·
+  WhatChangedPanel has NO live importer (tested at whatChangedPanel.test.jsx, mounted
+  nowhere in src/ — found at C4c-d 2026-07-19; erratum-slip materials applied so it is
+  register-correct if wired) — adjudicate wire-or-remove.
 - FIX WAVES: one commit per finding-cluster, full gate at each wave end, ledger rows.
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 
