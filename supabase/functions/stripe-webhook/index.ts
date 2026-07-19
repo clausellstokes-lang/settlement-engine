@@ -1367,6 +1367,89 @@ async function flipMoneyEventStatus(
   }
 }
 
+// ── Auto-reload payment confirmation (158, §4.5) ─────────────────────────────
+//
+// The off-session PaymentIntent's create result is NOT trusted for the grant
+// (_shared/autoReload.ts only stamps the PI id). The WEBHOOK is authoritative:
+//   payment_intent.succeeded (purpose credit_auto_reload) → grant credits (atomic
+//     per-PI claim via system_grant_credits 'auto_reload' key → exactly once
+//     across redelivery) → attempt 'succeeded' (claim-once) → money_events row.
+//   payment_intent.payment_failed → attempt 'failed' + reason (best-effort).
+
+/** Grant the reloaded credits, mark the attempt succeeded, mirror money_events. The
+ *  GRANT throws on RPC error (releases the event claim → Stripe redelivers →
+ *  re-grant is idempotent on the PI key); the post-grant steps are best-effort. */
+async function handleAutoReloadSucceeded(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  pi: Stripe.PaymentIntent,
+): Promise<void> {
+  const userId = pi.metadata?.supabase_user_id;
+  const attemptId = pi.metadata?.attempt_id;
+  const credits = parseInt(pi.metadata?.credits || '0', 10);
+  if (!userId || !attemptId || !(credits > 0)) {
+    logError('stripe-webhook', userId ?? null, 'auto_reload PI missing metadata', { stage: 'auto_reload_succeeded', payment_intent: pi.id });
+    return;
+  }
+
+  // AUTHORITATIVE grant: system_grant_credits claims once per PI id (158 delivery
+  // key), so a redelivered succeeded event grants exactly once. Throws on error.
+  await grantCredits(supabase, userId, credits, 'auto_reload', { stripe_payment_intent_id: pi.id });
+
+  // Post-grant, best-effort (log-don't-throw) — the grant is the money truth and
+  // is idempotent, so a partial failure here is operator-repairable off the rows.
+  try {
+    await supabase.from('credit_auto_reload_attempts')
+      .update({ state: 'succeeded', resolved_at: new Date().toISOString() })
+      .eq('stripe_payment_intent_id', pi.id)
+      .in('state', ['pending', 'requires_action']);
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'auto_reload_mark_succeeded', payment_intent: pi.id });
+  }
+
+  let receiptUrl: string | null = null;
+  let chargeId: string | null = null;
+  try {
+    const cap = await captureChargeReceipt(stripeApi, pi.id);
+    receiptUrl = cap.receiptUrl;
+    chargeId = cap.chargeId;
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'auto_reload_receipt', payment_intent: pi.id });
+  }
+  await writeMoneyEvent(supabase, {
+    event_key: `pi:${pi.id}`,
+    user_id: userId,
+    occurred_at: new Date().toISOString(),
+    kind: 'auto_reload',
+    amount_cents: typeof pi.amount_received === 'number' ? pi.amount_received
+      : (typeof pi.amount === 'number' ? pi.amount : 0),
+    currency: pi.currency ?? 'usd',
+    description: describeMoneyKind('auto_reload', { credits }),
+    receipt_url: receiptUrl,
+    stripe_payment_intent_id: pi.id,
+    stripe_charge_id: chargeId,
+  });
+}
+
+/** Mark a failed auto-reload attempt (best-effort; a payment_failed is terminal). */
+async function handleAutoReloadFailed(
+  supabase: ReturnType<typeof adminClient>,
+  pi: Stripe.PaymentIntent,
+): Promise<void> {
+  try {
+    await supabase.from('credit_auto_reload_attempts')
+      .update({
+        state: 'failed',
+        failure_reason: pi.last_payment_error?.code || 'payment_failed',
+        resolved_at: new Date().toISOString(),
+      })
+      .eq('stripe_payment_intent_id', pi.id)
+      .in('state', ['pending', 'requires_action']);
+  } catch (err) {
+    logError('stripe-webhook', pi.metadata?.supabase_user_id ?? null, err, { stage: 'auto_reload_mark_failed', payment_intent: pi.id });
+  }
+}
+
 // The per-event handlers, extracted from the inline switch so the claim/release
 // bracket above stays readable. Behavior is IDENTICAL to the previous inline
 // switch — every guard, log line, and throw is preserved verbatim; the money_events
@@ -1588,6 +1671,21 @@ async function dispatchStripeEvent(
       if (reverted?.ok) {
         console.log(`[stripe-webhook] redemption ${reverted.redemption_id} reverted on expired session ${expired.id}`);
       }
+      break;
+    }
+
+    // ── Auto-reload off-session confirmation (158, §4.5) ───────────────────
+    case 'payment_intent.succeeded': {
+      const pi = event.data.object as Stripe.PaymentIntent;
+      if (pi.metadata?.purpose !== 'credit_auto_reload') break; // not ours — ignore
+      await handleAutoReloadSucceeded(supabase, stripeApi, pi);
+      break;
+    }
+
+    case 'payment_intent.payment_failed': {
+      const pi = event.data.object as Stripe.PaymentIntent;
+      if (pi.metadata?.purpose !== 'credit_auto_reload') break;
+      await handleAutoReloadFailed(supabase, pi);
       break;
     }
 

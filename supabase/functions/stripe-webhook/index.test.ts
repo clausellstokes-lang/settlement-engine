@@ -73,6 +73,8 @@ function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Rec
   // money_events model (156): upsert dedupes on event_key (ignoreDuplicates → a
   // replayed webhook re-inserts nothing); update().in() is the status flip.
   const moneyEvents: Array<Record<string, unknown>> = [];
+  // credit_auto_reload_attempts model (158): records update().eq().in() calls.
+  const autoReloadUpdates: Array<{ vals: Record<string, unknown>; key: string; states: string[] }> = [];
   const client = {
     auth: { admin: { updateUserById: (_id: string, attrs: unknown) => { calls.authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
     from: (table: string) => {
@@ -90,6 +92,15 @@ function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Rec
               for (const r of moneyEvents) if (keys.includes(r.event_key as string)) Object.assign(r, vals);
               return Promise.resolve({ data: null, error: null });
             },
+          }),
+        };
+      }
+      if (table === 'credit_auto_reload_attempts') {
+        return {
+          update: (vals: Record<string, unknown>) => ({
+            eq: (_col: string, key: string) => ({
+              in: (_col2: string, states: string[]) => { autoReloadUpdates.push({ vals, key, states }); return Promise.resolve({ data: null, error: null }); },
+            }),
           }),
         };
       }
@@ -122,7 +133,7 @@ function makeStub(claimMode: 'track' | 'absent' = 'track', opts: { profile?: Rec
     },
     rpc: (fn: string, args: unknown) => { calls.rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
   };
-  return { calls, claims, moneyEvents, adminClient: () => client };
+  return { calls, claims, moneyEvents, autoReloadUpdates, adminClient: () => client };
 }
 
 /** Stripe v1 signature header: t=<ts>,v1=HMAC_SHA256(secret, `${ts}.${payload}`). */
@@ -1931,4 +1942,80 @@ Deno.test('money spine: a subscription RENEWAL invoice mirrors one row; a subscr
   const res2 = await handleStripeWebhook(req(create, { 'stripe-signature': await sign(create, SECRET) }), { adminClient: createStub.adminClient, stripeClient: moneyStripe() });
   assertEquals(res2.status, 200);
   assertEquals(createStub.moneyEvents.length, 0);
+});
+
+// ── Auto-reload confirmation (158, §4.5, slice M-3d) ─────────────────────────
+// payment_intent.succeeded (purpose credit_auto_reload) is the authoritative
+// grant: credits granted (per-PI idempotency key), attempt succeeded, money_events
+// mirrored. A non-auto-reload PI is ignored.
+
+const autoReloadPI = (evtId: string, over: Record<string, unknown> = {}) => JSON.stringify({
+  id: evtId, type: 'payment_intent.succeeded',
+  data: { object: {
+    id: 'pi_ar', amount: 459, amount_received: 459, currency: 'usd',
+    metadata: { purpose: 'credit_auto_reload', supabase_user_id: 'u1', attempt_id: 'att_1', credits: '23' },
+    ...over,
+  } },
+});
+
+Deno.test('auto-reload: payment_intent.succeeded grants credits, marks the attempt, mirrors money_events', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
+  const body = autoReloadPI('evt_ar_1');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(res.status, 200);
+  const grant = stub.calls.rpc.find((c) => c.fn === 'system_grant_credits');
+  assertEquals((grant!.args as Record<string, unknown>).source, 'auto_reload');
+  assertEquals((grant!.args as Record<string, unknown>).amount, 23);
+  assertEquals(((grant!.args as Record<string, unknown>).metadata as Record<string, string>).stripe_payment_intent_id, 'pi_ar');
+  // attempt claimed succeeded (only pending/requires_action flips)
+  assertEquals(stub.autoReloadUpdates[0].vals.state, 'succeeded');
+  assertEquals(stub.autoReloadUpdates[0].key, 'pi_ar');
+  assertEquals(stub.autoReloadUpdates[0].states, ['pending', 'requires_action']);
+  // money_events row (pi: key, kind auto_reload)
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'auto_reload');
+  assertEquals(stub.moneyEvents[0].event_key, 'pi:pi_ar');
+  assertEquals(stub.moneyEvents[0].receipt_url, 'https://stripe.test/ar');
+});
+
+Deno.test('auto-reload: a redelivery under a NEW event id keeps exactly ONE money_events row (per-PI dedup key)', async () => {
+  const stub = makeStub();
+  const stripe = moneyStripe({ receiptUrl: 'https://stripe.test/ar', chargeId: 'ch_ar' });
+  const b1 = autoReloadPI('evt_ar_a');
+  await handleStripeWebhook(req(b1, { 'stripe-signature': await sign(b1, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  const b2 = autoReloadPI('evt_ar_b'); // same PI, new event id (belt 1 does not dedup this)
+  await handleStripeWebhook(req(b2, { 'stripe-signature': await sign(b2, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe });
+  assertEquals(stub.moneyEvents.length, 1); // event_key pi:pi_ar shield holds it
+  // Both grants carry the SAME PI idempotency key, so system_grant_credits dedups.
+  const grants = stub.calls.rpc.filter((c) => c.fn === 'system_grant_credits');
+  assertEquals(grants.length, 2);
+  for (const g of grants) {
+    assertEquals(((g.args as Record<string, unknown>).metadata as Record<string, string>).stripe_payment_intent_id, 'pi_ar');
+  }
+});
+
+Deno.test('auto-reload: a NON-auto-reload payment_intent.succeeded is ignored', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_other', type: 'payment_intent.succeeded',
+    data: { object: { id: 'pi_other', amount: 500, currency: 'usd', metadata: { purpose: 'something_else' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.calls.rpc.length, 0);
+  assertEquals(stub.moneyEvents.length, 0);
+  assertEquals(stub.autoReloadUpdates.length, 0);
+});
+
+Deno.test('auto-reload: payment_intent.payment_failed marks the attempt failed with the error code', async () => {
+  const stub = makeStub();
+  const body = JSON.stringify({
+    id: 'evt_ar_fail', type: 'payment_intent.payment_failed',
+    data: { object: { id: 'pi_ar', metadata: { purpose: 'credit_auto_reload', supabase_user_id: 'u1', attempt_id: 'att_1' }, last_payment_error: { code: 'card_declined' } } },
+  });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.autoReloadUpdates[0].vals.state, 'failed');
+  assertEquals(stub.autoReloadUpdates[0].vals.failure_reason, 'card_declined');
 });
