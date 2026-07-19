@@ -90,3 +90,75 @@ export async function checkUserIpRate(
   }
   return true;
 }
+
+// ── AI per-IP burst gate (Wave-D item 2) ─────────────────────────────────────
+// The 11 AI edge functions meter spend with the per-USER daily limiter
+// (consume_ai_generate_rate_limit, 079) which is deliberately FAIL-OPEN. This adds
+// the missing PER-IP dimension on the cross-instance token bucket (migration 156,
+// consume_token_bucket), and it is FAIL-CLOSED — the same posture as the hard spend
+// cap, because it guards provider COGS: a definite over-limit is 429, and a
+// limiter-INFRASTRUCTURE error is a 503 DENY, never a silent open.
+
+/** Server-fixed per-IP AI burst allowance (matches migration 156's ai_ip_rate_limit
+ *  config default): a 40-request burst refilling ~40/hour. Not client-overridable. */
+const AI_IP_CAPACITY = 40;
+const AI_IP_REFILL_PER_SEC = 40 / 3600; // ≈ 0.0111 tokens/sec → 40/hour sustained
+
+export type AiIpRateResult = { ok: boolean; reason: 'under' | 'over' | 'error' | 'skipped' };
+
+/**
+ * Consume one token from the caller's per-IP AI bucket. FAIL-CLOSED on a limiter
+ * infra error ('error' → the caller returns 503). SKIPS (ok:true, 'skipped')
+ * when there is no real client IP: production edge traffic always carries
+ * cf-connecting-ip, so the '0.0.0.0' sentinel only appears locally / in tests,
+ * where the gate must be inert (no RPC call at all).
+ *
+ * @param admin a service-role client (consume_token_bucket is service_role-only)
+ */
+export async function checkAiIpRate(
+  admin: RateAdmin,
+  ip: string | null | undefined,
+  opts?: { capacity?: number; refillPerSec?: number },
+): Promise<AiIpRateResult> {
+  if (!ip || ip === '0.0.0.0') return { ok: true, reason: 'skipped' };
+  const capacity = opts?.capacity ?? AI_IP_CAPACITY;
+  const refillPerSec = opts?.refillPerSec ?? AI_IP_REFILL_PER_SEC;
+  try {
+    const { data, error } = await admin.rpc('consume_token_bucket', {
+      p_key: `aiip:${ip}`,
+      p_capacity: capacity,
+      p_refill_per_sec: refillPerSec,
+      p_cost: 1,
+    });
+    if (error) return { ok: false, reason: 'error' };            // fail-CLOSED: infra error → 503
+    const allowed = (data as { allowed?: boolean } | null)?.allowed;
+    if (allowed === true) return { ok: true, reason: 'under' };
+    if (allowed === false) return { ok: false, reason: 'over' }; // definite over-limit → 429
+    return { ok: false, reason: 'error' };                        // unexpected shape → fail-closed
+  } catch {
+    return { ok: false, reason: 'error' };                        // thrown transport error → fail-closed
+  }
+}
+
+/**
+ * Convenience wrapper for the 11 AI call sites: runs checkAiIpRate and returns a
+ * ready-to-return 429 (over) / 503 (infra error) Response, or null to proceed.
+ * The 503 copy mirrors the AI spend-cap idiom ("temporarily unavailable, no
+ * credits charged"). Keeps each call site to two lines.
+ */
+export async function aiIpRateGuard(
+  admin: RateAdmin,
+  ip: string | null | undefined,
+  corsHeaders: Record<string, string>,
+): Promise<Response | null> {
+  const r = await checkAiIpRate(admin, ip);
+  if (r.ok) return null;
+  const status = r.reason === 'over' ? 429 : 503;
+  const error = r.reason === 'over'
+    ? 'Too many AI requests from your network right now. Please wait a moment and try again.'
+    : 'The AI service is briefly unavailable. Please try again in a moment. No credits were charged.';
+  return new Response(
+    JSON.stringify({ error }),
+    { status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+  );
+}

@@ -48,6 +48,7 @@ import {
 import { botGuard } from '../_shared/requestMeta.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 // Structured error logging for the money/AI path (review B16 observability).
 import { logError } from '../_shared/logError.ts';
 
@@ -1096,6 +1097,14 @@ export async function handleGenerateNarrative(
       : null;
 
     const supabaseAdmin = makeAdminClient();
+
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Placed after admin resolution but BEFORE any reserve/spend/claim, so
+    // an over-limit or infra error leaks no reservation. Inert in tests / local (no
+    // cf-connecting-ip → sentinel IP → no RPC). corsHeaders is this fn's CORS var.
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, corsHeaders);
+    if (ipGate) return ipGate;
 
     // Idempotent rollback of a claimed free narrative (migration 118). Runs ONLY where
     // the paid path would refund, and only when a free claim is actually held. The

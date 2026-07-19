@@ -22,6 +22,7 @@ import { botGuard } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+import { aiIpRateGuard } from '../_shared/rateLimit.ts';
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')!;
 const CHRONICLE_MODEL = 'claude-haiku-4-5-20251001';
@@ -176,6 +177,12 @@ export async function handleGenerateChronicle(
     const supabaseAdmin = makeAdminClient();
     const { data: { user }, error: authError } = await supabaseUser.auth.getUser();
     if (authError || !user) return json({ error: 'Unauthorized' }, 401, cors);
+
+    // Wave-D per-IP AI burst gate (item 2): FAIL-CLOSED on the cross-instance token
+    // bucket (migration 156) — 429 over-limit, 503 on a limiter-infra error, never a
+    // silent open. Inert in tests / local (no cf-connecting-ip → sentinel IP → no RPC).
+    const ipGate = await aiIpRateGuard(supabaseAdmin, guard.meta.ip, cors);
+    if (ipGate) return ipGate;
 
     // Trust-boundary gate: reject a banned / disabled / soft-deleted account
     // even though its JWT is still valid (review B16 finding #1). The DB
