@@ -1134,6 +1134,29 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE RUIN-FILTER STRUCTURAL LANE COMPLETE (2026-07-19, claude/ruin-filter @
+4c1ccadc, RF-a/b/c atop aad6265e — manager-verified).** The coherence-matrix ruin-class
+defect + point bugs, fixed STRUCTURALLY. RF-a: the shared accessor
+src/domain/institutions/institutionRoster.js (isLiveInstitution/liveInstitutions, pure,
+no store import) + the TRUE DENOMINATOR routed — a 3-batch census of ALL 70 src/domain
+.institutions readers found 12 unfiltered functional aggregators (the audit named 4):
+militaryStrength · religionLegitimacy · corruptionImpair · pestilence · stressorDynamics ·
+resourceDynamicsKernel · tradeFlow · discoverDependencyCandidates · healingLedger ·
+capacityModel · magicProfile · causalState — all through the chokepoint; + the deityTemper
+revival point bug. RF-b: corruptionWeb.foreignEndpointLive reads the REAL worldState.occupations
+(the dead occupiedBy field is gone) + the bug-encoding-pin correction. RF-c: the inventory
+ratchet ruinFilterRoster.walker (structural-prevention — 70 readers, 18 compliant, 52
+exempt-with-reason manifest; a new unfiltered reader fails until dispositioned).
+⭐ NO GOLDEN SHIFT PROVEN: all four parked manifests regenerated at BOTH base and branch —
+byte-identical (the corpus has no post-calamity/ruined scenarios); nothing re-minted. Probes
+11/11 (ruined institution contributes zero to each consumer, occupied⇒dead). domain-strict 0,
+typecheck 0, lint clean, build ✓. domainAnyCast ratcheted DOWN 2230→2229. ⚠ +116 EAGER BYTES
+(institutionRoster enters first-paint via eager derivation consumers) → the de-eager reclaim
+covers it at fold (owner-gated budget, reconciled there). ⛔OWNER-QUEUED DEFERRAL: should a
+calamity that razes a PORT sever sea-lane/teleport CONNECTIVITY? The lane's siege model is
+node-starvation not edge-severance — a genuine owner design call (seaLanes/teleportEdges/
+spatialDigest NOT touched). FOLD-READY. THE FREED SLOT → DEEP COUPLINGS D-0+D-1 dispatched
+(pre-fold foundation off aad6265e).
 **⬛⭐⭐ THE ROADS WAVE IS COMPLETE — R-1..R-8 (2026-07-19, claude/the-roads @ 21bba9a1,
 25 commits atop aad6265e — manager-verified lineage).** R-8 THE EMBASSY landed all four
 charges: PEACE EMBASSY (purpose 5 — a court at open war sues the enemy, bypassing the §4
