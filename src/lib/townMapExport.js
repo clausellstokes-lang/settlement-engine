@@ -116,8 +116,12 @@ export function exportLens(settlement, styleOverride) {
  * fogMaskFragment/injectFog) — the base draw list + annotation append are never touched, so
  * the UNFOGGED export (`fogReveal` absent) returns BYTE-IDENTICAL to pre-fog (the WYSIWYG
  * law extends to the mask; the unfogged handout stays pinned). Fog color tracks the lens ink.
+ * SEASON (IT-3): pass `opts.dress` (the pane's resolved season/state portrait) so the exported
+ * file matches the on-screen season (WYSIWYG). Absent ⇒ seasonless base bytes (byte-identical to
+ * pre-IT-3 — the dormancy law extends to every export surface).
  * @param {any} settlement
  * @param {{ style?: string, resolution?: number, audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number }} [opts]
  * @returns {string | null}
@@ -127,10 +131,11 @@ export function townMapExportSvg(settlement, opts = {}) {
   if (!model) return null;
   const style = exportLens(settlement, opts.style);
   const size = opts.resolution || DEFAULT_EXPORT_RESOLUTION;
+  const dress = opts.dress || null;
   const markers = annotationDrawOps(readAnnotations(readMapEdits(settlement)), opts.audience || 'dm', style);
   const base = markers.length === 0
-    ? buildTownMapSvg(model, { style, width: size, height: size })
-    : drawListToSvg(buildTownMapDrawList(model, style).concat(markers), { style, width: size, height: size });
+    ? buildTownMapSvg(model, { style, width: size, height: size, dress })
+    : drawListToSvg(buildTownMapDrawList(model, style, dress).concat(markers), { style, width: size, height: size });
   // FOG HANDOUT (DOOR 2): overlay the mask ONLY when a reveal set is supplied; absent ⇒ the
   // base is returned UNCHANGED (byte-identical to pre-fog — the unfogged-export pin).
   if (!opts.fogReveal) return base;
@@ -194,6 +199,7 @@ function browserRasterizeBlob(svg, size, mime, quality) {
  * it deterministically); the default is the real canvas rasterizer.
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number,
  *   rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]
@@ -203,7 +209,7 @@ export async function renderTownMapExport(settlement, opts = {}) {
   const format = FORMATS[opts.format] ? opts.format : 'png';
   const fmt = FORMATS[format];
   const svg = townMapExportSvg(settlement, {
-    style: opts.style, resolution: opts.resolution, audience: opts.audience,
+    style: opts.style, resolution: opts.resolution, audience: opts.audience, dress: opts.dress,
     fogReveal: opts.fogReveal, fogOpacity: opts.fogOpacity,
   });
   if (svg == null) return null;
@@ -300,6 +306,7 @@ export function downloadBlob(blob, filename) {
  * @param {any} settlement
  * @param {{ format?: string, resolution?: number, style?: string, filename?: string,
  *   audience?: 'dm'|'player',
+ *   dress?: import('../domain/townMap/groundDress.js').MapDress | null,
  *   fogReveal?: { districts?: string[], streets?: string[], buildings?: string[] } | null,
  *   fogOpacity?: number,
  *   date?: Date, rasterize?: (svg:string,size:number,mime:string,quality?:number)=>Promise<Blob> }} [opts]

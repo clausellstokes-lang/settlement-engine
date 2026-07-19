@@ -21,10 +21,12 @@ import { useEffect, useRef, useState } from 'react';
 import { BORDER, PARCH, R } from '../theme.js';
 
 /**
- * @param {{ settlement: any, size?: number }} props
+ * @param {{ settlement: any, size?: number, worldState?: any }} props
  *   `settlement` is the save blob (save.settlement); `size` is the displayed px box.
+ *   `worldState` (IT-3, OPTIONAL) paints the thumbnail's live season; absent (an unfoldered
+ *   card) ⇒ seasonless base bytes.
  */
-export default function SettlementCardMapThumb({ settlement, size = 46 }) {
+export default function SettlementCardMapThumb({ settlement, size = 46, worldState = null }) {
   // 'pending' → show the placeholder box (and observe it); 'ready' → the <img>;
   // 'empty' → render nothing (map-less / no canvas / failed).
   const [status, setStatus] = useState('pending');
@@ -50,7 +52,7 @@ export default function SettlementCardMapThumb({ settlement, size = 46 }) {
       try {
         const { renderTownMapThumb } = await import('../../lib/townMapThumb.js');
         // 2x the display box for a crisp raster on retina / downscale.
-        const url = await renderTownMapThumb(settlement, { size: size * 2 });
+        const url = await renderTownMapThumb(settlement, { size: size * 2, worldState });
         if (cancelled) return;
         if (typeof url === 'string' && url) { setDataUrl(url); setStatus('ready'); }
         else setStatus('empty');
@@ -73,7 +75,7 @@ export default function SettlementCardMapThumb({ settlement, size = 46 }) {
     }, { rootMargin: '300px' });
     io.observe(el);
     return () => { cancelled = true; io.disconnect(); };
-  }, [settlement, size]);
+  }, [settlement, size, worldState]);
 
   if (!settlement || status === 'empty') return null;
 

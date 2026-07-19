@@ -25,7 +25,7 @@
 
 import {
   buildTownMapModel, readMapEdits, readStyleLens, hasDrawableMap, buildTownMapSvg,
-  resolveTownMapStyle,
+  resolveTownMapStyle, resolveMapDress,
 } from '../domain/townMap/index.js';
 
 const DEFAULT_SIZE = 128;
@@ -68,6 +68,14 @@ function thumbStyle(settlement) {
   return readStyleLens(readMapEdits(settlement));
 }
 
+/** IT-3: the season/state portrait for the thumbnail (resolved from the card's worldState),
+ * or null (seasonless base bytes) when the card has no live campaign context. The cache key
+ * hashes the rendered SVG, so a season change re-keys the raster automatically.
+ * @param {any} settlement @param {any} worldState */
+function thumbDress(settlement, worldState) {
+  return worldState ? resolveMapDress(settlement, worldState) : null;
+}
+
 /**
  * The stable cache key for a settlement's thumbnail at a given pixel size, or
  * `null` when there is no map to draw. PURE + deterministic: keyed on a content
@@ -77,13 +85,14 @@ function thumbStyle(settlement) {
  * (the canvas raster itself is browser-only, like shareImage.renderShareCardPng).
  * @param {any} settlement
  * @param {number} [size]
+ * @param {any} [worldState]  IT-3: the campaign clock; absent ⇒ seasonless key (byte-identical)
  * @returns {string | null}
  */
-export function townMapThumbCacheKey(settlement, size = DEFAULT_SIZE) {
+export function townMapThumbCacheKey(settlement, size = DEFAULT_SIZE, worldState = null) {
   const model = thumbModel(settlement);
   if (!model) return null;
   const style = thumbStyle(settlement);
-  const svg = buildTownMapSvg(model, { style, width: size, height: size });
+  const svg = buildTownMapSvg(model, { style, width: size, height: size, dress: thumbDress(settlement, worldState) });
   // The lens is part of the identity: a re-skin re-keys the raster (the SVG hash
   // already differs, but naming the lens keeps the key legible + collision-safe).
   return `${size}|${style}|${fnv1aHex(svg)}`;
@@ -149,8 +158,9 @@ function browserRasterize(svg, size, quality, mime = 'image/jpeg') {
  * canvas encode runs once; changed content → a fresh raster. Browser-only for the
  * first (uncached) render of a given key.
  * @param {any} settlement the settlement blob (save.settlement)
- * @param {{ size?: number, quality?: number, style?: string, rasterize?: (svg:string,size:number,quality:number,mime?:string)=>Promise<string> }} [opts]
+ * @param {{ size?: number, quality?: number, style?: string, worldState?: any, rasterize?: (svg:string,size:number,quality:number,mime?:string)=>Promise<string> }} [opts]
  *   `rasterize` is an injection seam for tests (the real canvas raster is browser-only).
+ *   `worldState` (IT-3, OPTIONAL) paints the thumbnail's season; absent ⇒ seasonless base bytes.
  * @returns {Promise<string | null>}
  */
 export async function renderTownMapThumb(settlement, opts = {}) {
@@ -158,7 +168,7 @@ export async function renderTownMapThumb(settlement, opts = {}) {
   const model = thumbModel(settlement);
   if (!model) return null;
   const style = opts.style || thumbStyle(settlement);
-  const svg = buildTownMapSvg(model, { style, width: size, height: size });
+  const svg = buildTownMapSvg(model, { style, width: size, height: size, dress: thumbDress(settlement, opts.worldState) });
   const key = `${size}|${style}|${fnv1aHex(svg)}`;
   const hit = RASTER_CACHE.get(key);
   if (hit !== undefined) return hit;

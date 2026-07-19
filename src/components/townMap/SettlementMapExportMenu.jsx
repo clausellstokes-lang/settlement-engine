@@ -34,10 +34,12 @@ import {
 } from '../../lib/townMapExport.js';
 
 /**
- * @param {{ settlement: any, saveId?: string|number|null, style?: string }} props
- *   `style` is the pane's active lens — the export honors it.
+ * @param {{ settlement: any, saveId?: string|number|null, style?: string, dress?: import('../../domain/townMap/groundDress.js').MapDress | null }} props
+ *   `style` is the pane's active lens — the export honors it. `dress` (IT-3, OPTIONAL) is the
+ *   resolved season/state portrait so the exported file matches the on-screen season (WYSIWYG);
+ *   absent ⇒ seasonless base bytes.
  */
-export default function SettlementMapExportMenu({ settlement, saveId = null, style }) {
+export default function SettlementMapExportMenu({ settlement, saveId = null, style, dress = null }) {
   const [open, setOpen] = useState(false);
   const [resolution, setResolution] = useState(DEFAULT_EXPORT_RESOLUTION);
   const [busy, setBusy] = useState(null);   // which action id is running
@@ -88,7 +90,7 @@ export default function SettlementMapExportMenu({ settlement, saveId = null, sty
     }
   };
 
-  const doImage = (format) => run(format, () => downloadTownMapExport(settlement, { format, resolution, style }));
+  const doImage = (format) => run(format, () => downloadTownMapExport(settlement, { format, resolution, style, dress }));
   const doToken = run('token', () => downloadTownMapTokenRaster(settlement));
   const doPdf = run('pdf', async () => {
     // Keep @react-pdf/renderer out of the town-map chunk's static graph — load the
@@ -96,7 +98,7 @@ export default function SettlementMapExportMenu({ settlement, saveId = null, sty
     // The builder lives in src/utils (beside generateSettlementPDF) so its .jsx
     // import stays out of the tsc-checked .js tree (see its header).
     const { generateTownMapPdf } = await import('../../utils/townMapPdfExport.js');
-    await generateTownMapPdf(settlement, { style });
+    await generateTownMapPdf(settlement, { style, dress });
   });
 
   return (

@@ -208,6 +208,11 @@ export default function SettlementDetail({
   // this, the OutputContainer's narrative chrome would show "Generate"
   // for a save that already has a narrative on disk.
   const saveId = detail?.saveData?.id || null;
+  // IT-3 THE SEASON PORTRAIT: the owning campaign's live worldState (the same seam the PDF/
+  // Foundry export uses), threaded into the map pane so the illustrated map paints the current
+  // season. A stable store reference (resolveExportSeam reads owning.worldState) ⇒ no extra
+  // re-render; null for an unfoldered save ⇒ seasonless base bytes (the dormancy law).
+  const mapWorldState = useStore(s => (saveId != null ? resolveExportSeam(s, saveId).campaign?.worldState || null : null));
   const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
   const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
   const clearAiSettlement = useStore(s => s.clearAiSettlement);
@@ -762,7 +767,7 @@ export default function SettlementDetail({
                 detail toolbar above stays full-width). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               {detailView === 'map'
-                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} />
+                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} worldState={mapWorldState} />
                 : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />}
             </div>
           </Suspense>

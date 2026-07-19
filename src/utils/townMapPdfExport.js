@@ -25,7 +25,7 @@ import { downloadBlob, exportLens, townMapExportFilename } from '../lib/townMapE
  * the PDF Blob (so a caller could also preview/upload it). Browser-only (needs a
  * document to trigger the download).
  * @param {any} settlement
- * @param {{ style?: string, filename?: string, date?: Date }} [opts]
+ * @param {{ style?: string, filename?: string, date?: Date, dress?: import('../domain/townMap/groundDress.js').MapDress | null }} [opts]
  * @returns {Promise<Blob>}
  */
 export async function generateTownMapPdf(settlement, opts = {}) {
@@ -35,7 +35,7 @@ export async function generateTownMapPdf(settlement, opts = {}) {
   ]);
   const style = opts.style;
   const blob = await pdf(
-    React.createElement(TownMapDocument, { settlement, style }),
+    React.createElement(TownMapDocument, { settlement, style, dress: opts.dress || null }),
   ).toBlob();
 
   const lens = exportLens(settlement, style);

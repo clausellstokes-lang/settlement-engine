@@ -36,11 +36,13 @@ import { renderTownMapOp } from './sections/TownMapPlate.jsx';
 const PLATE_PT = 500;
 
 /**
- * @param {{ settlement: any, style?: string }} props
+ * @param {{ settlement: any, style?: string, dress?: import('../domain/townMap/groundDress.js').MapDress | null }} props
  *   `style` is the lens id to draw under (the pane's active lens); omitted falls
- *   back to the settlement's persisted styleLens.
+ *   back to the settlement's persisted styleLens. `dress` (IT-3, OPTIONAL) carries the
+ *   season/state portrait so the PDF plate matches the on-screen season (WYSIWYG);
+ *   absent ⇒ seasonless base bytes.
  */
-export function TownMapDocument({ settlement, style }) {
+export function TownMapDocument({ settlement, style, dress = null }) {
   const model = buildTownMapModel(settlement, readMapEdits(settlement));
 
   // A map-less settlement still yields a valid one-page document (a short note),
@@ -57,7 +59,7 @@ export function TownMapDocument({ settlement, style }) {
 
   const styleId = style != null ? coerceStyleId(style) : readStyleLens(readMapEdits(settlement));
   const st = resolveTownMapStyle(styleId);
-  const ops = buildTownMapDrawList(model, styleId);
+  const ops = buildTownMapDrawList(model, styleId, dress);
   const name = typeof settlement?.name === 'string' && settlement.name.trim()
     ? settlement.name.trim()
     : 'Settlement';

@@ -30,6 +30,10 @@ export {
 // recent calamities), composed from fabricRead + the calamity read model. Pure,
 // lazy (consumed only by the map surfaces + tests).
 export { buildChangeView } from './changeView.js';
+// IT-3 THE SEASON/STATE PORTRAIT — the pure resolver that turns a settlement's live
+// worldState + reads into the bounded MapDress the ground-dress layer consumes. Never
+// stored on the settlement; null ⇒ seasonless base bytes. Lazy (map surfaces + tests only).
+export { resolveMapDress } from './mapDress.js';
 // SM-3 — the cosmetic mapEdits container (pure read + merge ops). Imported ONLY by
 // the lazy viewer pane + tests, so this stays out of the first-paint static closure.
 export {

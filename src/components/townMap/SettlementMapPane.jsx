@@ -42,7 +42,7 @@ import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
 import {
   buildTownMapModel, viewerPalette, TOWN_MAP_LENS_IDS, DEFAULT_STYLE_ID,
-  buildTownMapPanoramaDrawList, buildChangeView,
+  buildTownMapPanoramaDrawList, buildChangeView, resolveMapDress,
 } from '../../domain/townMap/index.js';
 import {
   readMapEdits, readLegendPrefs, readStyleLens, normalizeMapEdits,
@@ -97,9 +97,13 @@ function detectFinePointer() {
 }
 
 /**
- * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null }} props
+ * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null, worldState?: any }} props
+ * `worldState` (IT-3, OPTIONAL) is the campaign's live clock context — its `.calendar.season`
+ * paints the illustrated map's SEASON and its `.rngSeed` re-derives the year's severity (via
+ * resolveMapDress). Absent (a standalone library detail / the public gallery) ⇒ seasonless base
+ * bytes (the dormancy law). Never stored on the settlement.
  */
-export default function SettlementMapPane({ settlement, canEdit = false, saveId = null }) {
+export default function SettlementMapPane({ settlement, canEdit = false, saveId = null, worldState = null }) {
   const applyMapEdit = useStore(s => s.applyMapEdit);
 
   // ── SM-3 cosmetic edit state ────────────────────────────────────────────────
@@ -183,6 +187,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   }, [saveId, applyMapEdit]);
 
   const model = useMemo(() => buildTownMapModel(settlement, mapEdits), [settlement, mapEdits]);
+  // THE SEASON/STATE PORTRAIT (IT-3): the bounded MapDress resolved from the live worldState —
+  // threaded into the illustrated underlay + every export so the season paints ONE geometry.
+  // Absent worldState ⇒ null ⇒ seasonless base bytes (the dormancy law). Never persisted.
+  const dress = useMemo(() => resolveMapDress(settlement, worldState), [settlement, worldState]);
   // The oblique panorama draw-ops — computed only in panorama mode, under the active
   // lens (so it re-poses the SAME model the plan shows, honoring edits + lens).
   const panoramaOps = useMemo(
@@ -436,7 +444,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
               same buildTownMapDrawList the exports use), mounted UNDER the interactive
               layers; the plain visual layers below self-suppress and the interactive
               fills go transparent for hit-testing (design §4, the two-paths cure). ─── */}
-          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeLens} />}
+          {illustrated && <SettlementMapIllustratedUnderlay model={model} lens={activeLens} dress={dress} />}
 
           {/* ── VTT coordinate grid (a functional lens; drawn beneath the map) ── */}
           <SettlementMapGrid step={gridStep} ink={C.ink} />
@@ -736,7 +744,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           public gallery view passes saveId=null) AND the map has something to
           draw. Gating (the $2.99 export-bundle lane) lives inside the menu. ── */}
       {saveId != null && (districts.length > 0 || buildings.length > 0) && (
-        <SettlementMapExportMenu settlement={settlement} saveId={saveId} style={activeLens} />
+        <SettlementMapExportMenu settlement={settlement} saveId={saveId} style={activeLens} dress={dress} />
       )}
 
       {/* ── DOOR 2 THE TABLE LAYER — the DM fog chrome (controls + live player view +

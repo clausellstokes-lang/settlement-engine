@@ -37,6 +37,28 @@ import { SHADOW_DIR } from '../../design/townGlyphs/glyphCompiler.js';
 
 const VIEW = 1000;
 const R = Math.round;
+/** Round an opacity/weight to 2 decimals — a stable, machine-identical serialization
+ *  (the SVG `num()` prints the shortest round-trip; rounding keeps season-muted values
+ *  clean like 0.3, never a float tail). @param {number} v */
+const R2 = (v) => Math.round(v * 100) / 100;
+
+/**
+ * THE SEASON + STATE DRESS CONTEXT (THE ILLUSTRATED TOWN, IT-3). A bounded, display-only
+ * portrait of the town NOW — resolved by domain/townMap/mapDress.js from the campaign's
+ * worldState + the settlement's own reads, NEVER stored on the settlement. Threaded into
+ * `groundDressOps` as an OPTIONAL third argument; ABSENT (null/undefined) ⇒ the seasonless
+ * base bytes (the dormancy law at season strength — every existing caller stays byte-
+ * identical). Season swaps PARAMETERS on the existing marks; state adds bounded marks.
+ * @typedef {Object} MapDress
+ * @property {'spring'|'summer'|'autumn'|'winter'|null} [season]  the display season
+ * @property {'drought'|'hard_winter'|'bountiful'|null} [severity]  the year's seeded verdict
+ * @property {MapDressState|null} [state]  live state marks (IT3-b)
+ *
+ * @typedef {Object} MapDressState
+ * @property {boolean} [besieged]  siege works ring (war-state read)
+ * @property {number} [scarLevel]  0..1 max scar severity ⇒ scar grain (0/absent ⇒ none)
+ * @property {string[]} [rebuiltCategories]  district categories under rebirth ⇒ scaffold ticks
+ */
 
 // THE ONE FIXED LIGHT — NW, shared with the glyph hatch (SHADOW_DIR). The unit shadow-fall
 // direction (SE, both components positive) the wall shadows + the flank relief hachures
@@ -78,10 +100,17 @@ function onMap(v, m = 4) {
 /**
  * (1) FIELD FURROWS — a ploughed field patch in each approach road's OUTER band (the farm
  * belt near the map edge): parallel furrow lines flanking the road, ALIGNED to it.
+ * SEASON (IT-3): WINTER mutes the furrows (snow-covered fields — fewer rows, lower opacity);
+ * AUTUMN adds a harvest STUBBLE tick perpendicular across the band (the reaped field). Absent
+ * season ⇒ neither branch ⇒ byte-identical to the base furrows.
  * @param {Ops} ops @param {Model} model @param {Rng} rng @param {string} ink
  * @param {number} wDress @param {number} oDress @param {number|null} coastY
+ * @param {'spring'|'summer'|'autumn'|'winter'|null} season
  */
-function pushFurrows(ops, model, rng, ink, wDress, oDress, coastY) {
+function pushFurrows(ops, model, rng, ink, wDress, oDress, coastY, season) {
+  const winter = season === 'winter';
+  const autumn = season === 'autumn';
+  const oFur = winter ? R2(oDress * 0.6) : oDress;    // muted under snow
   const roads = (model.frame && model.frame.roads) || [];
   let ri = 0;
   for (const road of roads) {
@@ -95,7 +124,7 @@ function pushFurrows(ops, model, rng, ink, wDress, oDress, coastY) {
     const t = f.randFloat(0.18, 0.34);                // how far in from the edge (outer band)
     const bx = fx + ux * mag * t, by = fy + uy * mag * t;
     const gap = f.randFloat(26, 46);                  // clearance from the road centre
-    const rows = 3 + (f.chance(0.5) ? 1 : 0);         // 3–4 furrows
+    const rows = (winter ? 2 : 3) + (f.chance(0.5) ? 1 : 0);  // winter: sparser furrows
     const len = f.randFloat(30, 46);
     for (let k = 0; k < rows; k++) {
       const off = gap + k * 9;
@@ -104,7 +133,17 @@ function pushFurrows(ops, model, rng, ink, wDress, oDress, coastY) {
       const x2 = R(cxp + ux * len / 2), y2 = R(cyp + uy * len / 2);
       if (coastY != null && (y1 > coastY || y2 > coastY)) continue;   // not into the sea
       if (!onMap(x1) || !onMap(x2) || !onMap(y1) || !onMap(y2)) continue;
-      ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+      ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oFur });
+      // AUTUMN harvest stubble: one short perpendicular tick straddling the furrow (the
+      // reaped-field convention). Seeded off the row so it rides the same stream.
+      if (autumn && k % 2 === 0) {
+        const sh = 4;
+        const hx1 = R(cxp - px * sh), hy1 = R(cyp - py * sh);
+        const hx2 = R(cxp + px * sh), hy2 = R(cyp + py * sh);
+        if (onMap(hx1) && onMap(hx2) && onMap(hy1) && onMap(hy2) && (coastY == null || (hy1 <= coastY && hy2 <= coastY))) {
+          ops.push({ t: 'line', x1: hx1, y1: hy1, x2: hx2, y2: hy2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        }
+      }
     }
   }
 }
@@ -112,11 +151,15 @@ function pushFurrows(ops, model, rng, ink, wDress, oDress, coastY) {
 /**
  * (2) TREE-GLYPH STIPPLES — small wooded clumps at the outer margins, away from the water
  * band. Stipple canopy dots (opaque ink, tone from density — the landform idiom) with an
- * occasional trunk tick.
+ * occasional trunk tick. SEASON (IT-3): WINTER draws BARE trees (a trunk + two branch ticks,
+ * no canopy) — the leafless winter woods. Absent/other season ⇒ the full-canopy default
+ * (byte-identical to the base woods).
  * @param {Ops} ops @param {Model} model @param {Rng} rng @param {string} ink
  * @param {number} wDress @param {number} oDress @param {number|null} coastY
+ * @param {'spring'|'summer'|'autumn'|'winter'|null} season
  */
-function pushWoods(ops, model, rng, ink, wDress, oDress, coastY) {
+function pushWoods(ops, model, rng, ink, wDress, oDress, coastY, season) {
+  const winter = season === 'winter';
   /** @type {Array<[number, number]>} */
   const corners = [[180, 180], [820, 180], [180, 820], [820, 820]];
   const f = rng.fork('woods');
@@ -134,9 +177,17 @@ function pushWoods(ops, model, rng, ink, wDress, oDress, coastY) {
       if (!onMap(tx, 8) || !onMap(ty, 8)) continue;
       if (coastY != null && ty > coastY - 8) continue;
       const rad = 3 + (k % 2);
-      ops.push({ t: 'circle', cx: tx, cy: ty, r: rad, fill: ink });   // canopy stipple (opaque)
-      if (g.chance(0.5)) {
-        ops.push({ t: 'line', x1: tx, y1: R(ty + rad), x2: tx, y2: R(ty + rad + 5), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+      if (winter) {
+        // BARE TREE — a short trunk + two upward branch ticks, no canopy (the leafless woods).
+        const th = 5 + (k % 2);
+        ops.push({ t: 'line', x1: tx, y1: R(ty - th), x2: tx, y2: R(ty + th), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        ops.push({ t: 'line', x1: tx, y1: R(ty - th), x2: R(tx - 3), y2: R(ty - th - 3), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        ops.push({ t: 'line', x1: tx, y1: R(ty - th), x2: R(tx + 3), y2: R(ty - th - 3), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+      } else {
+        ops.push({ t: 'circle', cx: tx, cy: ty, r: rad, fill: ink });   // canopy stipple (opaque)
+        if (g.chance(0.5)) {
+          ops.push({ t: 'line', x1: tx, y1: R(ty + rad), x2: tx, y2: R(ty + rad + 5), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        }
       }
     }
     placed++;
@@ -199,18 +250,28 @@ function pushRipples(ops, model, rng, ink, wDress, oDress) {
 
 /**
  * (4) MEADOW DOTTING — sparse stipple on the open ground, away from the built districts
- * and the water. Opaque ink dots (tone from density — the landform idiom).
+ * and the water. Opaque ink dots (tone from density — the landform idiom). SEASON (IT-3):
+ * WINTER swaps the dot for a SNOW FLECK (a short horizontal tick, distinct in PATTERN so the
+ * accessible lens still reads it by shape); DROUGHT severity thins the field + swaps in a
+ * parched CRACK; BOUNTIFUL / HARD_WINTER thicken the count. Absent season+severity ⇒ the
+ * base round dots at the base density (byte-identical).
  * @param {Ops} ops @param {Model} model @param {Rng} rng @param {string} ink
  * @param {number|null} coastY
+ * @param {'spring'|'summer'|'autumn'|'winter'|null} season
+ * @param {'drought'|'hard_winter'|'bountiful'|null} severity
+ * @param {number} wDress @param {number} oDress
  */
-function pushMeadow(ops, model, rng, ink, coastY) {
+function pushMeadow(ops, model, rng, ink, coastY, season, severity, wDress, oDress) {
+  const winter = season === 'winter';
+  const drought = severity === 'drought';
+  const chance = drought ? 0.22 : (severity === 'bountiful' || severity === 'hard_winter') ? 0.44 : 0.34;
   const centroids = (model.districts || []).map((d) => d.centroid);
   const f = rng.fork('meadow');
   let cell = 0;
   for (let gx = 150; gx <= VIEW - 150; gx += 150) {
     for (let gy = 150; gy <= VIEW - 150; gy += 150) {
       const g = f.fork(`m:${cell++}`);
-      if (!g.chance(0.34)) continue;
+      if (!g.chance(chance)) continue;
       const x = R(gx + g.randInt(-46, 46));
       const y = R(gy + g.randInt(-46, 46));
       if (coastY != null && y > coastY - 10) continue;
@@ -220,7 +281,13 @@ function pushMeadow(ops, model, rng, ink, coastY) {
         if (ddx * ddx + ddy * ddy < 100 * 100) { near = true; break; }
       }
       if (near) continue;
-      ops.push({ t: 'circle', cx: x, cy: y, r: 2, fill: ink });
+      if (winter) {
+        ops.push({ t: 'line', x1: R(x - 2), y1: y, x2: R(x + 2), y2: y, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });  // snow fleck
+      } else if (drought) {
+        ops.push({ t: 'line', x1: R(x - 2), y1: R(y - 2), x2: R(x + 2), y2: R(y + 2), stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });  // parched crack
+      } else {
+        ops.push({ t: 'circle', cx: x, cy: y, r: 2, fill: ink });
+      }
     }
   }
 }
@@ -315,11 +382,22 @@ function pushRelief(ops, model, ink, wDress, oDress) {
  * Emit the ground-dress draw ops for a model under a style. PURE + deterministic. Returns
  * [] for any style that does not name the dress fields (the dormancy law) — so only the
  * illustrated lens dresses the ground, and every other lens is byte-identical.
+ * SEASON + STATE (IT-3): the OPTIONAL third `dress` argument re-skins the marks for the
+ * town's current portrait — season swaps parameters (winter snow / bare trees / muted
+ * furrows; autumn harvest stubble; drought crack; density from severity), and state adds
+ * bounded marks (siege ring / scar grain / rebirth scaffold). The season+severity are FOLDED
+ * INTO THE SEED so winter and summer of the same town differ deterministically. ABSENT
+ * (null/undefined) ⇒ no seed suffix + no variant branch + no state ⇒ byte-identical to the
+ * seasonless base (the dormancy law at season strength — every existing 2-arg caller is
+ * unmoved). PURE: `dress` is a plain resolved context (domain/townMap/mapDress.js reads the
+ * settlement/worldState; this emitter never touches either — so the golden path, which passes
+ * no dress, is structurally byte-identical regardless of a settlement's live state).
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
  * @param {string | object} [styleArg]  a style id or a resolved style
+ * @param {MapDress | null} [dress]  the season/state context; null ⇒ seasonless base bytes
  * @returns {import('./townMapDraw.js').DrawOp[]}
  */
-export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID) {
+export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null) {
   /** @type {import('./townMapDraw.js').DrawOp[]} */
   const ops = [];
   if (!model || typeof model !== 'object') return ops;
@@ -331,16 +409,22 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID) {
   if (oDress == null || wDress == null) return ops;
 
   const ink = style.palette.ink;
-  const rng = createPRNG(`ground-dress:${geometryDigest(model)}`);
+  // SEASON CONTEXT — bounded reads off the optional dress; absent ⇒ null ⇒ seasonless.
+  const season = dress && typeof dress.season === 'string' ? dress.season : null;
+  const severity = dress && typeof dress.severity === 'string' ? dress.severity : null;
+  // Fold season+severity into the seed so a town's winter texture differs from its summer;
+  // an ABSENT season leaves the seed EXACTLY `ground-dress:<digest>` ⇒ byte-identical.
+  const seasonKey = season ? `:${season}${severity ? ':' + severity : ''}` : '';
+  const rng = createPRNG(`ground-dress:${geometryDigest(model)}${seasonKey}`);
   const water = (model.frame && model.frame.water) || null;
   const coastY = water && water.kind === 'coast' && Array.isArray(water.path) && water.path[0]
     ? water.path[0][1]
     : null;
 
-  pushFurrows(ops, model, rng, ink, wDress, oDress, coastY);
-  pushWoods(ops, model, rng, ink, wDress, oDress, coastY);
+  pushFurrows(ops, model, rng, ink, wDress, oDress, coastY, season);
+  pushWoods(ops, model, rng, ink, wDress, oDress, coastY, season);
   pushRipples(ops, model, rng, ink, wDress, oDress);
-  pushMeadow(ops, model, rng, ink, coastY);
+  pushMeadow(ops, model, rng, ink, coastY, season, severity, wDress, oDress);
   pushHedges(ops, model, rng, ink, wDress, oDress, coastY);
   // IT2-b — depth under the ONE fixed NW light (shared with the glyph hatch): the wall
   // ring's SE drop shadow + the v2 mountain-flank relief hachures.

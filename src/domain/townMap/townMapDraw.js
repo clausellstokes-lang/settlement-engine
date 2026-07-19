@@ -204,11 +204,16 @@ function pushScaleBar(ops, style) {
  * thumbnail draws no labels. Z-order mirrors the viewer (grid → water → roads →
  * streets → anchor → districts → fortifications → building landmarks → condition
  * badges → hazards → overlay furniture).
+ * SEASON + STATE (THE ILLUSTRATED TOWN, IT-3): the OPTIONAL third `dress` argument carries
+ * the town's current portrait (season / severity / live state) into the ground-dress layer.
+ * ABSENT (the 2-arg call every golden + export uses today) ⇒ the seasonless base bytes — so
+ * this parameter is a pure additive extension and existing outputs stay byte-identical.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
  * @param {string | object} [styleArg]  a style id ('parchment'…'vtt') or a resolved style
+ * @param {import('./groundDress.js').MapDress | null} [dress]  season/state context; null ⇒ seasonless
  * @returns {DrawOp[]}
  */
-export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
+export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID, dress = null) {
   /** @type {DrawOp[]} */
   const ops = [];
   if (!model || typeof model !== 'object') return ops;
@@ -253,7 +258,7 @@ export function buildTownMapDrawList(model, styleArg = DEFAULT_STYLE_ID) {
   //    drawn HERE (below the streets / districts / buildings) adjacent to the landform.
   //    Gated on the dress style fields ⇒ [] on every re-skin + the accessible lens ⇒
   //    byte-identical (the dormancy law), exactly like the landform block above. ──────
-  for (const o of groundDressOps(model, style)) ops.push(o);
+  for (const o of groundDressOps(model, style, dress)) ops.push(o);
 
   // ── (2) approach roads ────────────────────────────────────────────────────────
   for (const r of (Array.isArray(frame.roads) ? frame.roads : [])) {
@@ -455,14 +460,15 @@ export function drawListToSvg(ops, opts = {}) {
 
 /**
  * Convenience: model → self-contained SVG string (drawList + drawListToSvg) under a
- * style. Same (model, style) ⇒ byte-identical SVG.
+ * style. Same (model, style, dress) ⇒ byte-identical SVG. The optional `dress` (IT-3) carries
+ * the season/state portrait through to the ground-dress layer; absent ⇒ seasonless base bytes.
  * @param {import('./townMapModel.js').TownMapModel | null | undefined} model
- * @param {{ width?: number, height?: number, background?: string, style?: string|object }} [opts]
+ * @param {{ width?: number, height?: number, background?: string, style?: string|object, dress?: import('./groundDress.js').MapDress | null }} [opts]
  * @returns {string}
  */
 export function buildTownMapSvg(model, opts = {}) {
   const style = resolveTownMapStyle(opts.style);
-  return drawListToSvg(buildTownMapDrawList(model, style), { width: opts.width, height: opts.height, background: opts.background, style });
+  return drawListToSvg(buildTownMapDrawList(model, style, opts.dress || null), { width: opts.width, height: opts.height, background: opts.background, style });
 }
 
 /**

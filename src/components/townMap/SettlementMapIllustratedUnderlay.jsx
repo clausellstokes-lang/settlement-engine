@@ -41,11 +41,13 @@ function opElement(op, i) {
 }
 
 /**
- * The static illustrated art layer (fills its 0..1000 map-space parent group).
- * @param {{ model: import('../../domain/townMap/townMapModel.js').TownMapModel, lens: string|object }} props
+ * The static illustrated art layer (fills its 0..1000 map-space parent group). The optional
+ * `dress` (IT-3) carries the season/state portrait into the SAME draw list the exports use, so
+ * the on-screen season and every export stay one geometry; absent ⇒ seasonless base bytes.
+ * @param {{ model: import('../../domain/townMap/townMapModel.js').TownMapModel, lens: string|object, dress?: import('../../domain/townMap/groundDress.js').MapDress | null }} props
  */
-export default function SettlementMapIllustratedUnderlay({ model, lens }) {
-  const ops = useMemo(() => buildTownMapDrawList(model, lens), [model, lens]);
+export default function SettlementMapIllustratedUnderlay({ model, lens, dress = null }) {
+  const ops = useMemo(() => buildTownMapDrawList(model, lens, dress), [model, lens, dress]);
   return (
     <g data-town-illustrated style={{ pointerEvents: 'none' }}>
       {ops.map((op, i) => opElement(op, i))}
