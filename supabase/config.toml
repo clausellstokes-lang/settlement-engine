@@ -449,6 +449,12 @@ verify_jwt = false
 [functions.og-image]
 verify_jwt = false
 
+# Liveness + optional deep DB probe for uptime monitoring (Wave E). Anonymous by
+# design — external uptime services and the bundled scripts/ops/uptime-probe.mjs
+# poll it with no JWT; it reads no user data and takes no write path.
+[functions.health]
+verify_jwt = false
+
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
 # Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
 # on any of these would expose an authenticated/money/admin endpoint to unauth

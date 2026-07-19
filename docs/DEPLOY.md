@@ -130,7 +130,7 @@ public projection, **135** revokes the PUBLIC grant on the role/tier RPC, and
 **136** lifts the world-snapshot deny census. A by-the-book operator must never
 under-apply this trust-boundary set.
 
-**Current migration head: `155_custom_content_traditions.sql`** (this filename is kept
+**Current migration head: `156_client_error_reports.sql`** (this filename is kept
 current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js` derives the
 head from `supabase/migrations/` and fails the gate if this line drifts).
 
@@ -178,7 +178,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 25 functions total — deploy all of them on a first cutover.
+There are 26 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -213,6 +213,7 @@ npx supabase functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-s
 npx supabase functions deploy send-email --no-verify-jwt              # per-template self-auth + anon cap-warning
 npx supabase functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
 npx supabase functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
+npx supabase functions deploy health --no-verify-jwt                  # uptime liveness + deep DB probe (no JWT)
 # verify_jwt = true (require an authenticated user — no flag):
 npx supabase functions deploy create-checkout
 npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
@@ -231,8 +232,8 @@ npx supabase functions deploy account-actions
 npx supabase functions deploy admin-actions
 ```
 
-There are **25 deployable functions** (every `supabase/functions/*` dir except
-`_shared`) — deploy all of them on a first cutover. The nine `verify_jwt = false`
+There are **26 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The ten `verify_jwt = false`
 and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
