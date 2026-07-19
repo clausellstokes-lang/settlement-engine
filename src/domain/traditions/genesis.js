@@ -425,6 +425,19 @@ function ordinalWeek(weekOfSeason) {
   return WEEK_ORDINALS[clampInt(weekOfSeason, 1, 13) - 1];
 }
 
+// ── DISPLAY HELPERS (the register — shared by the dossier tab + the PDF section) ──
+/** Element id → register glyph, single-sourced off the corpus vocabulary. @type {Readonly<Record<string, string>>} */
+const MOTIF_GLYPH = Object.freeze(Object.fromEntries(TRADITION_ELEMENTS.map((e) => [e.id, e.glyph])));
+
+/**
+ * The one-char register glyph for a motif element id (the corpus `glyph` field),
+ * '·' for an unknown/absent element. Pure, total, display-only — genesis never reads it.
+ * @param {string|null|undefined} elementId @returns {string}
+ */
+export function motifGlyph(elementId) {
+  return MOTIF_GLYPH[String(elementId ?? '')] || '·';
+}
+
 /**
  * Render a tradition window as register prose — "Harvest, the third week" — via the
  * canonical seasonForTick math (never derived from month labels). Handles a two-week

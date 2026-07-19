@@ -64,5 +64,29 @@ describe('TraditionsTab — preview mode (draft settlement)', () => {
     expect(screen.getByText(/Owner: The Watch/)).toBeTruthy();
     expect(screen.getByText(/a triumph/)).toBeTruthy();
     expect(screen.getByText(/1 change recorded/)).toBeTruthy();
+    // T-5 register polish: the motif glyph renders (stars ⇒ ✦).
+    expect(screen.getByText('✦')).toBeTruthy();
+  });
+
+  it('renders the mutationLog as a provenance trail of its recent causes (T-5)', () => {
+    const mirror = [{
+      id: 'tradition.x.0', name: 'The Founders’ Feast', coreMotif: { element: 'founding', act: 'feast' },
+      window: { startWeekOfYear: 4, weeks: 1 }, scaleBand: 4, ownerKey: 'seat',
+      ownerLabel: 'The Council', deityRef: null, expression: { trappings: [], epithet: '' },
+      mutationLog: [
+        { year: 40, kind: 'scale-up', cause: 'the town outgrew the old scale' },
+        { year: 71, kind: 'reassignment', cause: 'the seat changed hands by coup' },
+        { year: 96, kind: 'restoration', cause: 'the occupation ended; the old rite returned' },
+      ],
+      lastHeldYear: 96, lastOutcome: 'good', suppressedBy: null, adoptedFrom: null,
+    }];
+    render(<TraditionsTab settlement={{ name: 'Karth', traditions: mirror }} />);
+    const container = screen.getByTestId('traditions-tab');
+    // the count + the trail of causes (most recent last)
+    expect(container.textContent).toMatch(/3 changes recorded/);
+    expect(container.textContent).toMatch(/the town outgrew the old scale/);
+    expect(container.textContent).toMatch(/the occupation ended; the old rite returned/);
+    // the motif glyph for a founding rite (⌂)
+    expect(screen.getByText('⌂')).toBeTruthy();
   });
 });

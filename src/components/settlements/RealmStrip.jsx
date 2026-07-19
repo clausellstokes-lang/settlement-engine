@@ -22,6 +22,7 @@
  */
 
 import { liveSieges } from '../../domain/display/warStatus.js';
+import { deriveTraditionAlmanac } from '../../domain/traditions/almanac.js';
 import { GOLD_TXT, BODY, VIOLET_DEEP, FS, sans, swatch } from '../theme.js';
 
 const SIEGE_RED = swatch['#8B1A1A'];
@@ -126,6 +127,14 @@ export default function RealmStrip({ campaign, settlements = [] }) {
   // Phase 4b — committed member changes whose regional ripple awaits the Advance.
   const pendingPropagation = pendingPropagationSettlements(worldState);
 
+  // THE TRADITIONS almanac (T-5) — observances whose window opens later this season,
+  // read from the settlement.traditions MIRROR only. Dark/absent (no lit mirror) ⇒
+  // available:false ⇒ the segment self-hides, byte-identical to today.
+  const almanac = deriveTraditionAlmanac({
+    settlements,
+    weekTick: Number.isFinite(worldState?.calendar?.elapsedWeeks) ? worldState.calendar.elapsedWeeks : tick,
+  });
+
   return (
     <div
       data-testid="realm-strip"
@@ -158,6 +167,12 @@ export default function RealmStrip({ campaign, settlements = [] }) {
           <span style={{ color: BODY }}>
             {newsAge === 0 ? 'News this week' : `News ${newsAge} week${newsAge === 1 ? '' : 's'} ago`}
           </span>
+        </Seg>
+      )}
+
+      {almanac.available && (
+        <Seg title="Festivals whose window opens later this season (from the world's traditions).">
+          <span data-testid="realm-almanac" style={{ color: GOLD_TXT, fontWeight: 700 }}>{almanac.display}</span>
         </Seg>
       )}
 

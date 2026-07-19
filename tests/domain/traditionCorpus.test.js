@@ -21,7 +21,7 @@ const ACT_IDS = ['feast', 'procession', 'vigil', 'contest', 'fair', 'offering'];
 function allStrings() {
   const out = [];
   const push = (v) => { if (typeof v === 'string') out.push(v); };
-  for (const e of TRADITION_ELEMENTS) { push(e.id); push(e.noun); push(e.genitive); push(e.adjective); }
+  for (const e of TRADITION_ELEMENTS) { push(e.id); push(e.glyph); push(e.noun); push(e.genitive); push(e.adjective); }
   for (const a of TRADITION_ACTS) { push(a.id); push(a.noun); }
   TRADITION_NAME_TEMPLATES.forEach(push);
   TRADITION_ADJECTIVES.forEach(push);
@@ -68,6 +68,12 @@ describe('traditionCorpus — vocabulary contract', () => {
   });
   it('every element declares a valid season', () => {
     for (const e of TRADITION_ELEMENTS) expect(SEASONS).toContain(e.season);
+  });
+  it('every element carries a non-empty register glyph (T-5)', () => {
+    for (const e of TRADITION_ELEMENTS) {
+      expect(typeof e.glyph, `glyph missing for ${e.id}`).toBe('string');
+      expect(e.glyph.length).toBeGreaterThan(0);
+    }
   });
   it('exactly one founding-era origin is preferred but several are eligible', () => {
     const foundingFit = TRADITION_ELEMENTS.filter((e) => e.foundingFit).map((e) => e.id);

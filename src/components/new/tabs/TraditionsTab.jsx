@@ -20,9 +20,9 @@
  */
 
 import { useMemo } from 'react';
-import { deriveFoundingTraditions, describeTraditionWindow } from '../../../domain/traditions/genesis.js';
+import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '../../../domain/traditions/genesis.js';
 import {
-  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, R, SECOND, sans,
+  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, R, SECOND, sans,
 } from '../../theme.js';
 
 const OUTCOME_LABEL = {
@@ -38,17 +38,28 @@ function humanizeMotif(id) {
     .join(' ');
 }
 
-/** A tradition row: name, motif chip, window phrase, owner, last outcome, provenance. */
+/** A tradition row: motif glyph, name, motif chip, window phrase, owner, last outcome, provenance. */
 function TraditionRow({ rec, preview }) {
   const owner = preview ? '—' : (rec.ownerLabel || rec.ownerKey || '—');
   const outcome = preview ? '—' : (OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '—');
+  const glyph = motifGlyph(rec.coreMotif?.element);
   const log = Array.isArray(rec.mutationLog) ? rec.mutationLog : [];
+  // The mutationLog as a provenance line (design §10): a count, then the most recent
+  // changes as their own readable causes (the tradition's history, most recent last).
+  const recentCauses = log.map((e) => (e && typeof e.cause === 'string' ? e.cause : '')).filter(Boolean).slice(-3);
   const provenance = log.length > 0
-    ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded — ${log[log.length - 1].cause}`
+    ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded — ${recentCauses.join('; ')}`
     : (rec.expression?.epithet || null);
   return (
     <article style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD, padding: '10px 12px' }}>
       <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+        <span aria-hidden="true" title={`${humanizeMotif(rec.coreMotif?.element)} · ${humanizeMotif(rec.coreMotif?.act)}`} style={{
+          flex: '0 0 auto', display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          width: 22, height: 22, borderRadius: R.sm, background: GOLD_BG, color: GOLD,
+          fontSize: FS.sm, fontWeight: 900, lineHeight: 1, alignSelf: 'center',
+        }}>
+          {glyph}
+        </span>
         <h4 style={{ margin: 0, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900, overflowWrap: 'anywhere' }}>
           {rec.name}
         </h4>

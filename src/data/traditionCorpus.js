@@ -23,6 +23,7 @@
  *
  * @typedef {Object} TraditionElement
  * @property {string}   id          motif element key (design §2 vocabulary)
+ * @property {string}   glyph       a one-char register glyph (display only; genesis never reads it)
  * @property {string}   noun        the display noun ("Harvest")
  * @property {string}   genitive    the "of …" form ("the Harvest", "the Dead")
  * @property {string}   adjective   the attributive form ("Harvest", "Mourning")
@@ -46,22 +47,22 @@
  * @type {ReadonlyArray<TraditionElement>}
  */
 export const TRADITION_ELEMENTS = Object.freeze([
-  { id: 'founding',      noun: 'Founding',   genitive: 'the Founding',        adjective: 'Founding', season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: true },
-  { id: 'first-landing', noun: 'Landfall',   genitive: 'the First Landing',   adjective: 'Landing',  season: 'spring', terrains: Object.freeze(['coastal', 'riverside']),     econ: Object.freeze(['port', 'river']),         deityFit: false, foundingFit: true },
-  { id: 'charter',       noun: 'Charter',    genitive: 'the Charter',         adjective: 'Charter',  season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads']),            deityFit: false, foundingFit: true },
-  { id: 'hearth',        noun: 'Hearth',     genitive: 'the Hearth',          adjective: 'Hearth',   season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'harvest',       noun: 'Harvest',    genitive: 'the Harvest',         adjective: 'Harvest',  season: 'autumn', terrains: Object.freeze(['plains', 'hills']),          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'river',         noun: 'River',      genitive: 'the River',           adjective: 'River',    season: 'summer', terrains: Object.freeze(['riverside']),                econ: Object.freeze(['river']),                 deityFit: false, foundingFit: false },
-  { id: 'stone',         noun: 'Standing Stone', genitive: 'the Standing Stones', adjective: 'Stone', season: 'winter', terrains: Object.freeze(['mountain', 'hills']),     econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'the-dead',      noun: 'Dead',       genitive: 'the Dead',            adjective: 'Mourning', season: 'autumn', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
-  { id: 'field',         noun: 'Furrow',     genitive: 'the Fields',          adjective: 'Field',    season: 'spring', terrains: Object.freeze(['plains']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'forge',         noun: 'Forge',      genitive: 'the Forge',           adjective: 'Forge',    season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze(['road']),                  deityFit: false, foundingFit: false },
-  { id: 'market',        noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false },
-  { id: 'hunt',          noun: 'Hunt',       genitive: 'the Hunt',            adjective: 'Hunt',     season: 'autumn', terrains: Object.freeze(['forest']),                   econ: Object.freeze(['isolated']),              deityFit: false, foundingFit: false },
-  { id: 'long-sun',      noun: 'Long Sun',   genitive: 'the Long Sun',        adjective: 'Sun',      season: 'summer', terrains: Object.freeze(['desert']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'tide',          noun: 'Tide',       genitive: 'the Tide',            adjective: 'Tide',     season: 'summer', terrains: Object.freeze(['coastal']),                  econ: Object.freeze(['port']),                  deityFit: false, foundingFit: false },
-  { id: 'greening',      noun: 'Greening',   genitive: 'the Greening',        adjective: 'Green',    season: 'spring', terrains: Object.freeze(['forest', 'plains']),         econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'stars',         noun: 'Stars',      genitive: 'the Stars',           adjective: 'Star',     season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
+  { id: 'founding',      glyph: '⌂', noun: 'Founding',   genitive: 'the Founding',        adjective: 'Founding', season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: true },
+  { id: 'first-landing', glyph: '⚓', noun: 'Landfall',   genitive: 'the First Landing',   adjective: 'Landing',  season: 'spring', terrains: Object.freeze(['coastal', 'riverside']),     econ: Object.freeze(['port', 'river']),         deityFit: false, foundingFit: true },
+  { id: 'charter',       glyph: '✒', noun: 'Charter',    genitive: 'the Charter',         adjective: 'Charter',  season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads']),            deityFit: false, foundingFit: true },
+  { id: 'hearth',        glyph: '▲', noun: 'Hearth',     genitive: 'the Hearth',          adjective: 'Hearth',   season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'harvest',       glyph: '❦', noun: 'Harvest',    genitive: 'the Harvest',         adjective: 'Harvest',  season: 'autumn', terrains: Object.freeze(['plains', 'hills']),          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'river',         glyph: '≈', noun: 'River',      genitive: 'the River',           adjective: 'River',    season: 'summer', terrains: Object.freeze(['riverside']),                econ: Object.freeze(['river']),                 deityFit: false, foundingFit: false },
+  { id: 'stone',         glyph: '◆', noun: 'Standing Stone', genitive: 'the Standing Stones', adjective: 'Stone', season: 'winter', terrains: Object.freeze(['mountain', 'hills']),     econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'the-dead',      glyph: '☾', noun: 'Dead',       genitive: 'the Dead',            adjective: 'Mourning', season: 'autumn', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
+  { id: 'field',         glyph: '▦', noun: 'Furrow',     genitive: 'the Fields',          adjective: 'Field',    season: 'spring', terrains: Object.freeze(['plains']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'forge',         glyph: '⚒', noun: 'Forge',      genitive: 'the Forge',           adjective: 'Forge',    season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze(['road']),                  deityFit: false, foundingFit: false },
+  { id: 'market',        glyph: '⚖', noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false },
+  { id: 'hunt',          glyph: '➹', noun: 'Hunt',       genitive: 'the Hunt',            adjective: 'Hunt',     season: 'autumn', terrains: Object.freeze(['forest']),                   econ: Object.freeze(['isolated']),              deityFit: false, foundingFit: false },
+  { id: 'long-sun',      glyph: '☀', noun: 'Long Sun',   genitive: 'the Long Sun',        adjective: 'Sun',      season: 'summer', terrains: Object.freeze(['desert']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'tide',          glyph: '∿', noun: 'Tide',       genitive: 'the Tide',            adjective: 'Tide',     season: 'summer', terrains: Object.freeze(['coastal']),                  econ: Object.freeze(['port']),                  deityFit: false, foundingFit: false },
+  { id: 'greening',      glyph: '✿', noun: 'Greening',   genitive: 'the Greening',        adjective: 'Green',    season: 'spring', terrains: Object.freeze(['forest', 'plains']),         econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
+  { id: 'stars',         glyph: '✦', noun: 'Stars',      genitive: 'the Stars',           adjective: 'Star',     season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
 ]);
 
 /**
