@@ -89,7 +89,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
           background: leg.bg || '#faf8ec',
           border: `1px solid ${leg.color}40`,
           borderLeft: `4px solid ${leg.color}`,
-          borderRadius: 8, padding: '12px 16px', marginBottom: 14,
+          padding: '12px 16px', marginBottom: 14,
         }}>
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
@@ -110,7 +110,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {Object.entries(leg.breakdown || {}).map(([k,v]) => (
                   <div key={k} style={{
-                    fontSize:FS.xxs, fontWeight:700, borderRadius:4, padding:'2px 8px',
+                    fontSize:FS.xxs, fontWeight:700, padding:'2px 8px',
                     background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
                     color:      v > 0 ? '#1a5a28' : v < 0 ? '#8b1a1a' : '#9c8068',
                     border: `1px solid ${v > 0 ? '#a8d8b0' : v < 0 ? '#e8c0c0' : '#e0d0b0'}`,
@@ -120,7 +120,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 ))}
               </div>
               {leg.governanceFractured && (
-                <div style={{marginTop:8,background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:5,padding:'6px 10px',fontSize: FS['11.5'],color:swatch['#5A1A1A'],lineHeight:1.4}}>
+                <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: FS['11.5'],color:swatch['#5A1A1A'],lineHeight:1.4}}>
                   <strong>Governance fractured.</strong> Real decisions are being made informally. The faction that appears to govern is not the faction that governs.
                 </div>
               )}
@@ -135,7 +135,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
         background: isCritical?'#fdf4f4': isStable?'#f0faf4':'#fdf8e8',
         border: `1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`,
         borderLeft: `4px solid ${stabilityColor}`,
-        borderRadius:8, padding:'12px 16px', marginBottom:14,
+        padding:'12px 16px', marginBottom:14,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
@@ -150,7 +150,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                 {governing.powerLabel || ''} ({governing.power})
               </span>
               {governing.modifier && (
-                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',borderRadius:3,padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.03em'}}>
+                <span style={{fontSize:FS.micro,fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px',textTransform:'uppercase',letterSpacing:'0.03em'}}>
                   {governing.modifier}
                 </span>
               )}
@@ -160,7 +160,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
           {crimCapture && crimCapture !== 'none' && (
             <div style={{flexShrink:0}}>
               <div style={{fontSize:FS.micro,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginBottom:3}}>Criminal Capture</div>
-              <span style={{fontSize:FS.xxs,fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,borderRadius:4,padding:'2px 8px'}}>
+              <span style={{fontSize:FS.xxs,fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
                 {captureStyle.label}
               </span>
             </div>
@@ -172,7 +172,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
       {/* ── POWER DISTRIBUTION ───────────────────────────────────────────── */}
       <Section title={`Power Distribution · ${pf.length} Factions`} collapsible defaultOpen>
         {/* Stacked bar */}
-        <div style={{display:'flex',height:22,borderRadius:5,overflow:'hidden',marginBottom:12,gap:1}}>
+        <div style={{display:'flex',height:22,overflow:'hidden',marginBottom:12,gap:1}}>
           {pf.map((f,i) => {
             const pct = Math.round((f.power||0) / total * 100);
             const c   = FACTION_COLORS[i % FACTION_COLORS.length];
@@ -200,7 +200,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
 
             return (
               <div key={i} ref={i === focusIndex ? focusedRowRef : null}>
-                <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',borderRadius:5,
+                <div style={{display:'flex',alignItems:'center',gap:7,padding:'6px 8px',
                   background:isExp?'#f5f0e8':f.legitimacyCrisis?'#fdf4f4':'transparent',
                   cursor:f.desc?'pointer':'default',
                   border: f.legitimacyCrisis ? '1px solid #e8c0c0' : '1px solid transparent',
@@ -212,14 +212,14 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                     onClick: () => setExpandedFaction(isExp ? null : i),
                     onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
                   } : {})}>
-                  <div style={{width:11,height:11,borderRadius:2,background:c,flexShrink:0}}/>
+                  <div style={{width:11,height:11,background:c,flexShrink:0}}/>
                   {f.legitimacyCrisis && <span style={{fontSize:FS.xxs,color:swatch.danger,flexShrink:0}}>⚠</span>}
                   <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0,lineHeight:1.2}}>
                     <InstitutionLink name={f.faction} settlement={s} />
                   </span>
                   {/* Power label */}
                   {f.powerLabel && (
-                    <span style={{fontSize:FS.micro,fontWeight:700,color:powerLabelColor(f.powerLabel),background:`${powerLabelColor(f.powerLabel)}12`,border:`1px solid ${powerLabelColor(f.powerLabel)}30`,borderRadius:3,padding:'1px 5px',flexShrink:0,textTransform:'uppercase',letterSpacing:'0.04em'}}>
+                    <span style={{fontSize:FS.micro,fontWeight:700,color:powerLabelColor(f.powerLabel),background:`${powerLabelColor(f.powerLabel)}12`,border:`1px solid ${powerLabelColor(f.powerLabel)}30`,padding:'1px 5px',flexShrink:0,textTransform:'uppercase',letterSpacing:'0.04em'}}>
                       {f.powerLabel}
                     </span>
                   )}
@@ -229,7 +229,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                     {f.power}
                   </span>
                   {matchedGroups.length > 0 && (
-                    <span style={{fontSize:FS.micro,fontWeight:600,color:c,background:`${c}15`,border:`1px solid ${c}40`,borderRadius:3,padding:'1px 5px',flexShrink:0}}>
+                    <span style={{fontSize:FS.micro,fontWeight:600,color:c,background:`${c}15`,border:`1px solid ${c}40`,padding:'1px 5px',flexShrink:0}}>
                       {matchedGroups.reduce((n,g) => n+(g.members||[]).length, 0)}m
                     </span>
                   )}
@@ -238,7 +238,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
 
                 {/* Sub-faction groups */}
                 {matchedGroups.map((fg,gi) => (
-                  <div key={gi} style={{display:'flex',alignItems:'center',gap:6,padding:'3px 8px 3px 24px',marginTop:1,background:`${c}08`,borderLeft:`2px solid ${c}30`,borderRadius:'0 0 4px 0'}}>
+                  <div key={gi} style={{display:'flex',alignItems:'center',gap:6,padding:'3px 8px 3px 24px',marginTop:1,background:`${c}08`,borderLeft:`2px solid ${c}30`}}>
                     <span style={{fontSize:FS.xxs,color:c}}>↳</span>
                     <span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag,flex:1}}>{fg.name}</span>
                     <span style={{fontSize:FS.xxs,color:swatch.inkMag3}}>{(fg.members||[]).length} member{(fg.members||[]).length!==1?'s':''}</span>
@@ -247,7 +247,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
 
                 {/* Expanded description */}
                 {isExp && f.desc && (
-                  <div style={{padding:'6px 12px 8px 28px',background:swatch['#FAF8F4'],borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2,borderRadius:'0 0 4px 4px'}}>
+                  <div style={{padding:'6px 12px 8px 28px',background:swatch['#FAF8F4'],borderLeft:`2px solid ${c}`,marginLeft:4,marginBottom:4,marginTop:2}}>
                     <p style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.65,margin:'0 0 4px'}}>{f.desc}</p>
                     {f.crisisNote && (
                       <p style={{fontSize: FS['11.5'],color:swatch.danger,fontStyle:'italic',margin:'6px 0 0',lineHeight:1.4}}>⚠ {f.crisisNote}</p>
@@ -256,7 +256,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
                       <div style={{marginTop:8}}>
                         <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.05em',marginRight:8}}>Associated:</span>
                         {matchedGroups.flatMap(g => g.members||[]).slice(0,5).map((mem,j) => (
-                          <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,borderRadius:8,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
+                          <span key={j} style={{fontSize:FS.xxs,color:c,background:`${c}15`,border:`1px solid ${c}35`,padding:'1px 7px',marginRight:4,display:'inline-block',marginBottom:2}}>
                             {mem.name} <span style={{color:MUTED}}>({mem.role})</span>
                           </span>
                         ))}
@@ -277,12 +277,12 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
         <Section title={`Current Tensions (${tensions.length})`} collapsible defaultOpen accent="#b8860b">
           <div style={{display:'flex',flexDirection:'column',gap:6}}>
             {tensions.map((t,i) => (
-              <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:6,padding:'9px 13px'}}>
+              <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'9px 13px'}}>
                 <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{typeof t==='object'?t.description:t}</p>
                 {t.factions?.length > 0 && (
                   <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
                     {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],borderRadius:3,padding:'0 6px'}}>{f}</span>
+                      <span key={j} style={{fontSize:FS.xxs,fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
                     ))}
                   </div>
                 )}
@@ -300,10 +300,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote }) {
             const intColor = iHigh?'#8b1a1a':iLow?'#1a5a28':'#a0762a';
             const intLabel = iHigh?'HIGH TENSION':iLow?'LOW TENSION':'MODERATE';
             return (
-              <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,borderRadius:7,padding:'12px 14px',marginBottom:10}}>
+              <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
                 <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
                   <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                  <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,borderRadius:3,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
+                  <span style={{fontSize:FS.micro,fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
                 </div>
                 {c.issue  && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
                 {c.stakes && <p style={{fontSize:FS.sm,color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
