@@ -43,7 +43,7 @@ import { normalizeSimulationRules } from '../../domain/worldPulse/simulationRule
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
-import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, R, SP } from '../theme.js';
+import { INK, BODY, MUTED, BORDER2, CARD, GOLD, sans, FS, SP } from '../theme.js';
 
 export const LIVING_WORLD_GATES = Object.freeze([
   Object.freeze({
@@ -197,7 +197,7 @@ function Gate({ gate, rules, campaignId, canWrite, busyKey, setBusyKey }) {
       data-testid={`living-world-gate-${gate.key}`}
       style={{
         display: 'flex', alignItems: 'center', gap: 6, padding: '4px 8px',
-        border: `1px solid ${checked ? GOLD : BORDER2}`, borderRadius: R.md,
+        border: `1px solid ${checked ? GOLD : BORDER2}`,
         background: checked ? 'rgba(201,162,76,0.12)' : CARD,
         cursor: canWrite && !blockedByDrift ? 'pointer' : 'default',
         opacity: blockedByDrift ? 0.6 : 1,
@@ -233,7 +233,7 @@ function LivingWorldHelp() {
     <div
       role="note"
       data-testid="living-world-help"
-      style={{ display: 'grid', gap: 6, padding: '7px 9px', border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD }}
+      style={{ display: 'grid', gap: 6, padding: '7px 9px', border: `1px solid ${BORDER2}`, background: CARD }}
     >
       {LIVING_WORLD_GATES.map(g => (
         <div key={g.key} style={{ display: 'grid', gap: 1 }}>

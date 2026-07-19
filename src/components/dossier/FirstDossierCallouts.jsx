@@ -97,7 +97,6 @@ export default function FirstDossierCallouts() {
               background: bg,
               border: `1px solid ${accent}40`,
               borderLeft: `3px solid ${accent}`,
-              borderRadius: 5,
               display: 'flex', alignItems: 'flex-start', gap: 12,
             }}
           >

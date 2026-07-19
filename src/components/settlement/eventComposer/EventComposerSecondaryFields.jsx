@@ -14,7 +14,7 @@
  * not change authored-stressor onset math; porting derived onset is a domain wave.
  */
 
-import { INK, BORDER, sans, FS, R, swatch } from '../../theme.js';
+import { INK, BORDER, sans, FS, swatch } from '../../theme.js';
 import { RULING_POWER_CAUSES } from '../../../domain/rulingPower.js';
 import { inferImportance } from '../../../domain/entities/npcs.js';
 import { Field } from './Field.jsx';
@@ -116,7 +116,7 @@ export function EventComposerSecondaryFields({
                                  'Minor. No engine effect.'
         }>
           <div style={{
-            padding: '4px 8px', border: `1px solid ${BORDER}`, borderRadius: R.sm,
+            padding: '4px 8px', border: `1px solid ${BORDER}`,
             fontSize: FS.xs, fontFamily: sans, color: INK, minWidth: 180,
             background: swatch['#FAF8F4'], fontWeight: 700,
             textTransform: 'capitalize', display: 'flex', alignItems: 'center',

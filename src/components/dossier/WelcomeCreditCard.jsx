@@ -23,7 +23,7 @@
 import { useEffect, useState } from 'react';
 import { useStore } from '../../store/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { INK, sans, serif_, FS, SP, R, swatch, BODY } from '../theme.js';
+import { INK, sans, serif_, FS, SP, swatch, BODY } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const SLATE = swatch['#5A6E82'];
@@ -139,7 +139,6 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
       padding: SP.md,
       background: `linear-gradient(135deg, ${SLATE_BG}88, ${SLATE_BG}33)`,
       borderLeft: `3px solid ${SLATE}`,
-      borderRadius: R.md,
       fontFamily: sans,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: SP.md }}>

@@ -68,7 +68,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     return (
       <div style={{
         display:'flex', alignItems:'center', gap:8, padding:'12px 14px',
-        background:swatch['#EEE9DF'], border:'1px solid #c9c0b2', borderRadius:8,
+        background:swatch['#EEE9DF'], border:'1px solid #c9c0b2',
         opacity:0.72, color:MUTED, fontFamily:sans,
       }}>
         <FolderOpen size={14}/>
@@ -87,7 +87,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // rounded explicitly to match the parent so the cream background doesn't
   // poke outside the rounded outer border.
   return (
-    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
+    <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}` }}>
       {/* Campaign header. On mobile the row wraps (flexWrap) so the campaign name
           isn't crushed by the trailing controls (Advance Time / PDF / Rename /
           Delete): the name claims a full-width line and the control cluster
@@ -100,7 +100,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
             <input value={editDraft} onChange={e => setEditDraft(e.target.value)} aria-label="Campaign name"
               onKeyDown={e => { if (e.key === 'Enter') { onRenameCampaign(campaign.id, editDraft); setEditing(false); } if (e.key === 'Escape') setEditing(false); }}
               // eslint-disable-next-line jsx-a11y/no-autofocus -- inline rename field appears on user action; focus lets them type the new name immediately
-              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, borderRadius:3, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
+              style={{ flex:1, padding:'2px 6px', border:`1px solid ${GOLD}`, fontSize:FS.sm, fontFamily:sans, outline:'none' }} autoFocus/>
             <IconButton Icon={Check} label="Save name" onClick={() => { onRenameCampaign(campaign.id, editDraft); setEditing(false); }} tone="ghost" size="sm"/>
             <IconButton Icon={X} label="Cancel rename" onClick={() => setEditing(false)} tone="danger" size="sm"/>
           </div>
@@ -122,7 +122,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               onClick={(e) => e.stopPropagation()}
               disabled={settlements.length === 0 || !worldCanonized || advanceInFlight}
               title="How far one Advance Time step carries the campaign world"
-              style={{ fontSize:FS.xs, fontFamily:sans, color:INK, background:CARD, border:`1px solid ${BORDER}`, borderRadius:5, padding:'4px 6px', cursor: advanceInFlight ? 'default' : 'pointer' }}>
+              style={{ fontSize:FS.xs, fontFamily:sans, color:INK, background:CARD, border:`1px solid ${BORDER}`, padding:'4px 6px', cursor: advanceInFlight ? 'default' : 'pointer' }}>
               <option value="one_week">Week</option>
               <option value="one_month">Month</option>
               <option value="one_season">Season</option>

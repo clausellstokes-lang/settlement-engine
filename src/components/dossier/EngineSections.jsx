@@ -24,8 +24,7 @@ import { entityIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
 import {
-  FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, R, swatch,
-} from '../theme.js';
+  FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GOLD, GREEN, RED, AMBER, sans, SP, swatch } from '../theme.js';
 
 // Fixed detail rung — this lineage has no altitude/detail-level store, so the
 // former `level !== 'guided'` gates always show detail. See the header note.
@@ -40,7 +39,7 @@ function BandPill({ band }) {
   if (!band) return null;
   return (
     <span data-band={band} style={{
-      display: 'inline-block', padding: '1px 7px', borderRadius: R.sm, fontSize: FS.xxs,
+      display: 'inline-block', padding: '1px 7px', fontSize: FS.xxs,
       fontWeight: 800, letterSpacing: 0.3, textTransform: 'uppercase', color: swatch.white,
       background: BAND_COLOR[band] || MUTED,
     }}>{band}</span>
@@ -51,7 +50,7 @@ function SectionShell({ title, accent = GOLD, testid, children }) {
   return (
     <div data-testid={testid} style={{
       background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${accent}`,
-      borderRadius: R.md, overflow: 'hidden', margin: '12px 0', fontFamily: sans,
+      overflow: 'hidden', margin: '12px 0', fontFamily: sans,
     }}>
       <div style={{
         fontSize: FS.xs, fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.06em',
@@ -112,7 +111,7 @@ export function EconomicsGranarySection({ settlement }) {
             </span>
           </div>
           {pct != null && (
-            <div style={{ height: 8, background: BORDER, borderRadius: R.sm, overflow: 'hidden' }}>
+            <div style={{ height: 8, background: BORDER, overflow: 'hidden' }}>
               <div style={{ width: `${pct}%`, height: '100%', background: pct >= 50 ? GREEN : pct >= 25 ? AMBER : RED }} />
             </div>
           )}
@@ -123,7 +122,7 @@ export function EconomicsGranarySection({ settlement }) {
           {model.flags.map(f => (
             <span key={f} style={{
               fontSize: FS.xxs, fontWeight: 700, color: f === 'blockade' ? RED : GOLD,
-              background: CARD_HDR, border: `1px solid ${BORDER}`, borderRadius: 3, padding: '1px 6px',
+              background: CARD_HDR, border: `1px solid ${BORDER}`, padding: '1px 6px',
               textTransform: 'uppercase', letterSpacing: '0.04em',
             }}>{f}</span>
           ))}

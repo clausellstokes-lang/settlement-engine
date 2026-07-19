@@ -220,7 +220,6 @@ function VariantCard({ v, picked, onPick }) {
         // once, on the dispatch seal (the footer Export button).
         background: picked ? 'rgba(28,20,9,0.05)' : '#fff',
         border: `1px solid ${picked ? swatch.inkMag2 : '#d2bd96'}`,
-        borderRadius: 6,
         cursor: v.disabled ? 'not-allowed' : 'pointer',
         opacity: v.disabled ? 0.5 : 1,
         textAlign: 'left',
@@ -266,7 +265,7 @@ const sheetStyle = {
   width: 'min(480px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: '#fffbf5',
-  border: '1px solid #d2bd96', borderRadius: 8,
+  border: '1px solid #d2bd96',
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {

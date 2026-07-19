@@ -30,7 +30,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
     // three relationship pieces, grouped by the parent's gap, not a standalone
     // bordered card (P5 anti-box-soup; the self-margin double-counted the parent
     // flex gap and broke the spacing rhythm).
-    <div role="group" aria-labelledby="network-effects-heading" style={{ background: swatch['#F8F4EE'], borderRadius: 8, padding: '12px 14px' }}>
+    <div role="group" aria-labelledby="network-effects-heading" style={{ background: swatch['#F8F4EE'], padding: '12px 14px' }}>
       {/* Level-1 panel keyword + the dominant signal as the headline fact. */}
       <div style={{ display: 'flex', alignItems: 'baseline', flexWrap: 'wrap', gap: '2px 10px', marginBottom: 10 }}>
         <h3 id="network-effects-heading" style={{ fontSize: FS.sm, fontWeight: 700, color: swatch['#5A3A1A'], textTransform: 'uppercase', letterSpacing: '0.06em', margin: 0 }}>
@@ -53,14 +53,13 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
           return (
             <div key={key} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <span style={{ fontSize: FS.xxs, fontWeight: 600, color: SECOND, minWidth: 80, fontFamily: sans }}>{label}</span>
-              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], borderRadius: 4, overflow: 'hidden', position: 'relative' }}>
+              <div style={{ flex: 1, height: 8, background: swatch['#E8E0D4'], overflow: 'hidden', position: 'relative' }}>
                 <div style={{
                   position: 'absolute',
                   [isPos ? 'left' : 'right']: 0,
                   top: 0, height: '100%',
                   width: `${pct}%`,
                   background: isPos ? '#2a7a3a' : '#8b1a1a',
-                  borderRadius: 4,
                   transition: 'width 0.3s',
                 }} />
               </div>
@@ -104,7 +103,7 @@ export default function NetworkEffectsPanel({ settlementId, saves, relColors }) 
               <span style={{ fontSize: FS.xs, fontWeight: 600, color: INK, flex: 1 }}>
                 {src.settlementName}
               </span>
-              <span style={{ fontSize: FS.xs, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px', borderRadius: 3 }}>
+              <span style={{ fontSize: FS.xs, color: relColor, fontWeight: 600, background: `${relColor}18`, padding: '1px 5px' }}>
                 {relLabel}
               </span>
               {causalLabel && <span style={{ fontSize: FS.xs, color: BODY }} title={causalLabel}>{causalLabel}</span>}

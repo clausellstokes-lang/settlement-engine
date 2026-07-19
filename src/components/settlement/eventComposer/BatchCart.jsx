@@ -10,7 +10,7 @@
 import { X, Check } from 'lucide-react';
 import { validateBatch } from '../../../domain/events/batch.js';
 import { EVENT_REGISTRY } from '../../../domain/events/registryFull.js';
-import { GOLD, INK, MUTED, sans, FS, SP, R, swatch } from '../../theme.js';
+import { GOLD, INK, MUTED, sans, FS, SP, swatch } from '../../theme.js';
 import { labelOfTarget } from './helpers.js';
 import { DeltaRow } from './PreviewPanel.jsx';
 import Button from '../../primitives/Button.jsx';
@@ -22,7 +22,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refu
   return (
     <div style={{
       marginTop: SP.sm, padding: SP.sm,
-      background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`, borderRadius: R.sm,
+      background: swatch['#FAF8F4'], border: `1px solid ${GOLD}`,
     }}>
       <div style={{
         fontSize: FS.xs, fontWeight: 800, color: MUTED, fontFamily: sans,
@@ -49,7 +49,7 @@ export function BatchCart({ staged, settlement, phase, pendingBatchPreview, refu
       {refusalNotice && (
         <div style={{
           marginTop: 6, padding: '6px 8px', border: `1px solid ${swatch.danger}`,
-          borderRadius: R.sm, background: swatch.dangerBg,
+          background: swatch.dangerBg,
           fontSize: FS.xxs, fontFamily: sans, color: swatch.danger, fontWeight: 700, lineHeight: 1.4,
         }}>
           ✕ {refusalNotice}

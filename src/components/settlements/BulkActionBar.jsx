@@ -96,7 +96,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                 Add to campaign
               </Button>
               {moveOpen && !disabled && (
-                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 6, boxShadow: '0 4px 16px rgba(0,0,0,0.15)', minWidth: 160, padding: 4 }}>
+                <div role="menu" style={{ position: 'absolute', left: 0, top: '100%', marginTop: 4, zIndex: 20, background: CARD, border: `1px solid ${BORDER}`, boxShadow: '0 4px 16px rgba(0,0,0,0.15)', minWidth: 160, padding: 4 }}>
                   {campaigns.length === 0 && <div style={{ padding: '5px 8px', fontSize: FS.xs, color: BODY }}>No campaigns yet</div>}
                   {campaigns.map(c => (
                     // No minHeight override: menu items inherit Button's sm floor so
@@ -104,7 +104,7 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
                     // smallest targets on the surface (P7).
                     <Button key={c.id} variant="ghost" fullWidth role="menuitem" icon={<FolderOpen size={10} color={GOLD} />}
                       onClick={() => { bulk.addToCampaignBulk(c.id); setMoveOpen(false); }}
-                      style={{ justifyContent: 'flex-start', textAlign: 'left', padding: '6px 8px', gap: 4, fontSize: FS.xs, color: INK, fontWeight: 400, borderRadius: 3 }}>
+                      style={{ justifyContent: 'flex-start', textAlign: 'left', padding: '6px 8px', gap: 4, fontSize: FS.xs, color: INK, fontWeight: 400 }}>
                       {c.name}
                     </Button>
                   ))}

@@ -30,7 +30,7 @@ import { GOODS_MODIFIERS_BY_TIER } from '../../data/tradeGoodsData.js';
 import { RESOURCE_DATA } from '../../data/resourceData.js';
 import { WAR_STRESSOR_TYPES, INFILTRATION_STRESSOR_TYPES } from '../../domain/worldPulse/warStressorTypes.js';
 import StaleNarrativeModal from '../StaleNarrativeModal.jsx';
-import { MUTED, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { MUTED, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import EditQueueBanner from './eventComposer/EditQueueBanner.jsx';
 import { PARTY, PARTY_BG, campaignPeerOptions } from './eventComposer/helpers.js';
 import { PreviewPanel } from './eventComposer/PreviewPanel.jsx';
@@ -419,7 +419,7 @@ export default function EventComposer({ onLink = null }) {
 
   return (
     <div data-anchor="event-composer" style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+      background: CARD, border: `1px solid ${BORDER}`,
       padding: SP.sm, marginTop: SP.sm,
     }}>
       <div style={{
@@ -698,7 +698,7 @@ export default function EventComposer({ onLink = null }) {
             title="Mark this change as a direct result of the party's actions. In a canon campaign it also ripples through the world."
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6, alignSelf: 'flex-end',
-              padding: '5px 9px', borderRadius: R.sm, cursor: 'pointer',
+              padding: '5px 9px', cursor: 'pointer',
               border: `1px solid ${partyCaused ? PARTY : BORDER}`,
               background: partyCaused ? PARTY_BG : 'transparent',
               color: partyCaused ? PARTY : MUTED, fontSize: FS.xs, fontFamily: sans, fontWeight: 700,

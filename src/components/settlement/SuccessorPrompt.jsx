@@ -23,7 +23,7 @@
 
 import { Crown, UserPlus, X, ArrowRight } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, FS, SP, swatch } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -175,7 +175,6 @@ export default function SuccessorPrompt() {
               padding: SP.sm,
               background: swatch['#FFF7EC'],
               border: `1px solid #e0b070`,
-              borderRadius: R.sm,
               fontSize: FS.xs, fontFamily: sans, color: swatch['#7A4F0F'],
               marginBottom: 12, lineHeight: 1.5,
             }}>
@@ -221,7 +220,7 @@ const sheetStyle = {
   width: 'min(440px, calc(100vw - 32px))',
   maxHeight: 'calc(100vh - 32px)', overflow: 'auto',
   background: CARD,
-  border: `1px solid ${BORDER}`, borderRadius: R.md,
+  border: `1px solid ${BORDER}`,
   boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
 };
 const headerStyle = {
@@ -242,7 +241,7 @@ const successorBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 8,
   padding: '8px 10px',
   background: '#fffbf5',
-  border: `1px solid ${BORDER}`, borderRadius: R.sm,
+  border: `1px solid ${BORDER}`,
   cursor: 'pointer', textAlign: 'left',
   fontFamily: sans,
 };
