@@ -1153,6 +1153,36 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ FOLD BATCH 2 COMPLETE (2026-07-19, deep-craft @ 76cccbf2 — Fable, six
+folds + the rename completion).** Per-fold NUL-clean; conflicts = only the two
+pre-identified (CustomContent leaf: the branch's consolidation TAKEN with
+HEAD's C13-b slate hex carried into the leaf — a silent violet resurrection
+prevented; CampaignFolder PROSE_MAX: union via the sibling UnassignedLedger
+idiom). Ceiling reconciliations measured per fold: FINAL FOUR = radii 906 ·
+shadows 98 · rgba 234 · tinted 214; rawColor 1403 (adversarially exact-pinned).
+THE RENAME COMPLETION (76cccbf2, 45 files): theme/tokens exports
+VIOLET*→SLATE* with NO aliases; retired swatch keys → honest slate hex across
+ALL 19 call sites (the brief's parenthetical undercounted — 14 files);
+tintedCallouts pattern drops VIOLET_BG, count law intact at 214; TINT_VIOLET
+stat-tile pair correctly excluded (genuinely violet, different register).
+EAGER TO THE BYTE: 1,039,830 / 1,040,000 (c16's +199 exact; rename −6;
+headroom 170 B). Final suite: 13,326 green / EXACTLY the 5 parked. ⚠ CAUGHT:
+the owner's chip session landed R2-i @ 27eae9e9 (noble→government bucket,
+census #22 follow-up, declared golden extension 155/187) on restoration-chrome
+AFTER the fold took aaeec163 — R2-i rides the composite assembly.
+**⬛ JUDGMENT (manager, vetoable) — PHASE D DISPOSITION:** items 2/6/8 CLOSED
+(census · eager report byte-exact · restoration ledger zero-PENDING); item 1's
+literal ZERO×4 TRANSFERS INTO THE ROUND 3 LOOP (the burn-down proved the
+residual is a ~250-file multi-wave program; the loop's A+ convergence + the
+shrink-only ratchets carry it; the owner's loop ruling supersedes the original
+sequencing); items 3/4/5 (contrast walk · seam walk · throttled perf) ride the
+loop's cycle-1 survey + the owner walk; the perf e2e harness stays a named
+deferral. Say "veto" to force the residual sweep BEFORE the composite instead.
+⭐ THE COMPOSITE ASSEMBLY DISPATCHES (Fable): R2-i → deep-craft, then
+deep-craft + traditions @ 80b8ad71 + illustrated-town @ d16d348e →
+claude/the-composite, WITH the aiGrounding freshness CURE (build:edge-shared,
+declared) — expected end-state suite: EXACTLY THE 4 PARKED GOLDEN FAMILIES.
+Then THE PUSH (hard, undelayable) → the walk → THE LOOP.
 **⬛⭐⭐ OWNER RULING (2026-07-19 morning) — THE ROUND 3 LOOP (supersedes the
 single-pass ROUND 3):** verbatim intent recorded in THE_REMAINING_ARCHITECTURE
 §4 (rewritten this date). The shape: after THE COMPOSITE assembles, run
