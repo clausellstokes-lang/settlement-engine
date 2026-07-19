@@ -461,6 +461,12 @@ A+ at this stage, rinse and repeat.")
   goldens + own rng streams. Pipeline: recon workflow → Fable architect →
   DESIGN_THE_ROADS.md → Opus lanes → dormancy verify → fold. ⛔owner: ONE
   REGEN list membership.
+  + TWO SURFACES (owner 2026-07-19): THE TRAVELERS OVERLAY (realm-map toggle
+  layer: in-transit armies/road-borne migrants/traveling NPCs with direction
+  + ETA; read-only derived, lazy; NPC sub-layer flag-gated, army/migration
+  sub-layers plain UI over live systems) + THE ROAD SCENE (party-travel DM
+  staging: deterministic route-truth scene brief, eventProse idioms, optional
+  AI dressing via existing metered surfaces; the party is NEVER simulated).
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +

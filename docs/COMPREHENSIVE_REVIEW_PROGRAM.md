@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — THE ROADS WAVE GROWS TWO SURFACES (relayed to the
+running architect mid-design):** (A) THE TRAVELERS OVERLAY — a realm-map TOGGLE LAYER
+(recon-confirmed absent today: transit data exists, no renderer) drawing in-transit
+armies (position from progress-fraction along trade edges, direction, banner, ETA),
+road-borne migrant masses (only when road-borne), and traveling named NPCs along the
+roads; follows the existing map-layer toggle precedent; purely derived read-only
+rendering, lazy, zero eager; the NPC sub-layer renders only when the roads flag lights
+(dormancy-trivial), the army/migration sub-layers read live systems as plain UI — the
+wave's only not-flag-gated deliverable. (B) THE ROAD SCENE — party-travel staging for
+the DM: origin→destination picked from the map, a DETERMINISTIC scene brief composed
+from truth-state along the route (armies + allegiance + direction · migrant columns
+WITH their causal reason · traveling NPCs + purpose + escort · embattled/bandit/monster
+conditions · destination siege/occupation/festival + guest-right timing), in the
+eventProse/brief-composer idioms, optional AI dressing through the EXISTING metered
+surfaces (sessionGate applies); the party is NEVER simulated — a lens + composer, no
+sim write. Both join the slice plan with their own commits/gates.
 **⬛⭐ ROADS RECON COMPLETE — THE PREMISE IS REFUTED; THE WAVE IS GREENFIELD
 (2026-07-19, 5-lens workflow, 5/5 agents, receipts in the run journal).** MANAGER
 CORRECTION, owned: the manager told the owner NPC travel exists ("the mover") from
