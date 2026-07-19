@@ -8,19 +8,28 @@
  *   • SEASON   — `worldState.calendar.season` (the live in-world clock).
  *   • SEVERITY — re-derived via `seasonalSeverityFor(worldState.rngSeed, year, settlementId)`
  *                (seasons.js), the seeded "no two winters alike" verdict; never persisted.
+ *   • STATE    (IT3-b) — the town's live condition, ALL from EXISTING pure reads, each dormant-
+ *                absent: BESIEGED via settlementWarStatus (worldState + regionalGraph); SCAR
+ *                grain via fabricScarsOf (the urban-fabric mirror — dark ⇒ empty); REBIRTH
+ *                classes via fabricRebirthsOf. Read-only; never stored on the settlement.
  *
- * DORMANCY (the law this file upholds): when there is nothing to dress — no campaign / no live
- * season — it returns `null`, and the caller passes `null` into buildTownMapDrawList ⇒ the
+ * DORMANCY (the law this file upholds): when there is nothing to dress — no live season AND no
+ * state — it returns `null`, and the caller passes `null` into buildTownMapDrawList ⇒ the
  * SEASONLESS BASE BYTES (byte-identical to every 2-arg golden + export). Standalone surfaces
- * (a library detail with no campaign, the anonymous gallery) hit exactly that path.
+ * (a library detail with no campaign, the anonymous gallery) hit exactly that path. The state
+ * reads are individually dormant-absent too — a settlement with no urban-fabric mirror + no
+ * siege yields no state marks (the mirror is DARK by default).
  *
- * PURITY: reads plain objects + calls the pure `seasonalSeverityFor` (no store, no Date, no
- * Math.random, no localeCompare — the townMap domain source-scan bans them). The threaded input
- * is `worldState` (not a bare calendar) because the SEVERITY draw needs `worldState.rngSeed`,
- * which the calendar object does not carry — the calendar alone is insufficient.
+ * PURITY: reads plain objects + calls the pure seasons/warStatus/fabricRead selectors (no store,
+ * no Date, no Math.random, no localeCompare — the townMap domain source-scan bans them). The
+ * threaded input is `worldState` (not a bare calendar) because the SEVERITY draw needs
+ * `worldState.rngSeed`, which the calendar object does not carry — the calendar alone is
+ * insufficient; `regionalGraph` (optional) is needed only for the siege read.
  */
 
 import { seasonalSeverityFor } from '../worldPulse/seasons.js';
+import { settlementWarStatus } from '../display/warStatus.js';
+import { fabricScarsOf, fabricRebirthsOf } from './fabricRead.js';
 
 /** The bounded season vocabulary (the 4-4-5 calendar's four quarters). */
 const SEASONS = Object.freeze(new Set(['spring', 'summer', 'autumn', 'winter']));
@@ -34,24 +43,59 @@ function normSeason(raw) {
 }
 
 /**
- * Resolve the season/severity portrait for a settlement's map. PURE. Returns `null` when there
- * is no live season to paint (no worldState / no calendar season) ⇒ the caller passes null ⇒
- * seasonless base bytes (the dormancy law).
- * @param {{ id?: string|number } | null | undefined} settlement
+ * Resolve the town's live STATE marks (IT3-b) — all from EXISTING pure reads, each dormant-
+ * absent. Returns `null` when the town is in no notable state (no siege, no scars, no rebirth)
+ * ⇒ contributes nothing to the dormancy decision. PURE.
+ * @param {{ id?: string|number, urbanFabric?: unknown } | null | undefined} settlement
+ * @param {any} worldState @param {any} regionalGraph
+ * @returns {import('./groundDress.js').MapDressState | null}
+ */
+function resolveMapState(settlement, worldState, regionalGraph) {
+  // SCAR grain — the worst stressor severity (0 ⇒ none). Whole-fabric, per the read layer:
+  // fabricScarsOf surfaces scars by kind + severity, not per district (dark mirror ⇒ []).
+  let scarLevel = 0;
+  for (const s of fabricScarsOf(settlement)) if (s.severity > scarLevel) scarLevel = s.severity;
+
+  // REBIRTH — the deduped set of district CLASSES the mirror marks rebuilt (dark ⇒ ∅). The
+  // dress matches these against each district's `category` to place the scaffold.
+  const rebuiltSet = new Set();
+  for (const r of fabricRebirthsOf(settlement)) for (const c of r.classes) rebuiltSet.add(c);
+  const rebuiltCategories = [...rebuiltSet].sort();  // codepoint order (no localeCompare)
+
+  // BESIEGED — a live war-state read (worldState + regionalGraph, both required). There is NO
+  // per-settlement siege flag on the settlement object; this is the war-status selector.
+  let besieged = false;
+  if (worldState && settlement && settlement.id != null) {
+    const st = settlementWarStatus({ settlementId: settlement.id, worldState, regionalGraph });
+    besieged = !!(st && Array.isArray(st.besiegedBy) && st.besiegedBy.length > 0);
+  }
+
+  if (!besieged && scarLevel <= 0 && rebuiltCategories.length === 0) return null;
+  return { besieged, scarLevel, rebuiltCategories };
+}
+
+/**
+ * Resolve the season + state portrait for a settlement's map. PURE. Returns `null` when there
+ * is nothing to paint (no live season AND no state) ⇒ the caller passes null ⇒ seasonless base
+ * bytes (the dormancy law). `regionalGraph` (optional) is needed only for the siege read — a
+ * surface without it (the thumbnail) still gets scars + rebirth (settlement-only reads).
+ * @param {{ id?: string|number, urbanFabric?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { season?: string, year?: number } | null, rngSeed?: string } | null | undefined} worldState
+ * @param {any} [regionalGraph]
  * @returns {import('./groundDress.js').MapDress | null}
  */
-export function resolveMapDress(settlement, worldState) {
+export function resolveMapDress(settlement, worldState, regionalGraph = null) {
   const calendar = worldState && typeof worldState === 'object' ? worldState.calendar : null;
   const season = normSeason(calendar ? calendar.season : null);
-  if (!season) return null;
+  const state = resolveMapState(settlement, worldState, regionalGraph);
+  if (!season && !state) return null;
 
   const rngSeed = worldState && typeof worldState.rngSeed === 'string' ? worldState.rngSeed : null;
   const year = calendar && Number.isFinite(calendar.year) ? Number(calendar.year) : null;
   const settlementId = settlement && settlement.id != null ? settlement.id : null;
-  const severity = (rngSeed && year != null && settlementId != null)
+  const severity = (season && rngSeed && year != null && settlementId != null)
     ? seasonalSeverityFor(rngSeed, year, settlementId)
     : null;
 
-  return { season, severity };
+  return { season, severity, state };
 }

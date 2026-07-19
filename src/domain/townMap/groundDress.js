@@ -379,6 +379,110 @@ function pushRelief(ops, model, ink, wDress, oDress) {
 }
 
 /**
+ * (7) STATE DRESS (IT3-b) — the town's LIVE condition, each mark gated on a read in `state`
+ * (absent ⇒ zero ops ⇒ dormant, the dormancy law): a SIEGE WORKS ring of besieger palisade ticks
+ * OUTSIDE the wall (or blocking the approach roads) when besieged; SCAR GRAIN crosshatch over the
+ * built quarters when the urban-fabric mirror records scars (WHOLE-fabric, severity-scaled — the
+ * read layer surfaces scars by severity, not per district); REBIRTH SCAFFOLD ticks on the
+ * districts whose CLASS the mirror marks rebuilt (matched to district.category). All-ink, bounded,
+ * NO trig (the domain purity scan bans it) — the ring rides the wall/road geometry, not cos/sin.
+ * @param {Ops} ops @param {Model} model @param {Rng} rng @param {string} ink
+ * @param {number} wDress @param {number} oDress @param {number|null} coastY @param {MapDressState} state
+ */
+function pushStateDress(ops, model, rng, ink, wDress, oDress, coastY, state) {
+  /** on-map + not-into-the-sea guard for a segment.
+   *  @param {number} x1 @param {number} y1 @param {number} x2 @param {number} y2 */
+  const okSeg = (x1, y1, x2, y2) => onMap(x1) && onMap(x2) && onMap(y1) && onMap(y2)
+    && (coastY == null || (y1 <= coastY && y2 <= coastY));
+
+  // ── SIEGE WORKS RING — besieger palisade ticks encircling the town (design §3). Trig-free:
+  //    ride the wall ring's OWN vertices (offset outward from the centroid) when walls exist,
+  //    else block each APPROACH ROAD's outer end. Bounded.
+  if (state.besieged) {
+    const fort = model.fortifications;
+    const walls = fort && Array.isArray(fort.walls) && fort.walls.length >= 3 ? fort.walls : null;
+    if (walls) {
+      let sx = 0, sy = 0;
+      for (const p of walls) { sx += p[0]; sy += p[1]; }
+      const cx = sx / walls.length, cy = sy / walls.length;   // ring centroid
+      let placed = 0;
+      for (let i = 0; i < walls.length && placed < 16; i++) {
+        const a = walls[i], b = walls[(i + 1) % walls.length];
+        const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
+        let ox = mx - cx, oy = my - cy;                        // outward from the centre
+        const om = Math.sqrt(ox * ox + oy * oy) || 1; ox /= om; oy /= om;
+        const bx = mx + ox * 42, by = my + oy * 42;            // camp offset outside the wall
+        const tx = -oy, ty = ox, len = 7;                      // tangent tick (the palisade line)
+        const x1 = R(bx - tx * len), y1 = R(by - ty * len), x2 = R(bx + tx * len), y2 = R(by + ty * len);
+        if (!okSeg(x1, y1, x2, y2)) continue;
+        ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        placed++;
+      }
+    } else {
+      const roads = (model.frame && model.frame.roads) || [];
+      let placed = 0;
+      for (const road of roads) {
+        if (placed >= 8) break;
+        const fx = road.from[0], fy = road.from[1], tx0 = road.to[0], ty0 = road.to[1];
+        const px = fx + (tx0 - fx) * 0.14, py = fy + (ty0 - fy) * 0.14;   // just in from the edge
+        let dx = tx0 - fx, dy = ty0 - fy; const m = Math.sqrt(dx * dx + dy * dy) || 1; dx /= m; dy /= m;
+        const nx = -dy, ny = dx, len = 8;                      // tick ACROSS the road (a blockade)
+        const x1 = R(px - nx * len), y1 = R(py - ny * len), x2 = R(px + nx * len), y2 = R(py + ny * len);
+        if (!okSeg(x1, y1, x2, y2)) continue;
+        ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        placed++;
+      }
+    }
+  }
+
+  // ── SCAR GRAIN — patched/damaged crosshatch over the built quarters, count from the worst
+  //    scar severity (heavier scars ⇒ denser grain). Whole-fabric (not per district). Bounded.
+  if (typeof state.scarLevel === 'number' && state.scarLevel > 0) {
+    const districts = model.districts || [];
+    const perDistrict = state.scarLevel >= 0.66 ? 2 : 1;
+    const f = rng.fork('scar');
+    let placed = 0;
+    for (const d of districts) {
+      if (placed >= 18) break;
+      const g = f.fork(`d:${d.id}`);
+      for (let k = 0; k < perDistrict && placed < 18; k++) {
+        const cx = R(d.centroid.x + g.randInt(-14, 14)), cy = R(d.centroid.y + g.randInt(-14, 14));
+        if (!onMap(cx, 6) || !onMap(cy, 6) || (coastY != null && cy > coastY)) continue;
+        const x1 = R(cx - 4), y1 = R(cy - 4), x2 = R(cx + 4), y2 = R(cy + 4);  // a short damage tick
+        ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        placed++;
+      }
+    }
+  }
+
+  // ── REBIRTH SCAFFOLD — a small construction scaffold (two poles + a top brace) on each district
+  //    whose CLASS the mirror marks rebuilt. Bounded to a handful of quarters.
+  if (Array.isArray(state.rebuiltCategories) && state.rebuiltCategories.length > 0) {
+    const rebuilt = new Set(state.rebuiltCategories);
+    let placed = 0;
+    for (const d of (model.districts || [])) {
+      if (placed >= 6) break;
+      if (!rebuilt.has(d.category)) continue;
+      const cx = d.centroid.x, cy = d.centroid.y, h = 9;
+      /** @type {Array<[number,number,number,number]>} */
+      const poles = [
+        [cx - 4, cy + 3, cx - 4, cy - h],       // left pole
+        [cx + 4, cy + 3, cx + 4, cy - h],       // right pole
+        [cx - 5, cy - h + 3, cx + 5, cy - h + 3], // top brace
+      ];
+      let any = false;
+      for (const [ax, ay, bx, by] of poles) {
+        const x1 = R(ax), y1 = R(ay), x2 = R(bx), y2 = R(by);
+        if (!okSeg(x1, y1, x2, y2)) continue;
+        ops.push({ t: 'line', x1, y1, x2, y2, stroke: ink, strokeWidth: wDress, strokeOpacity: oDress });
+        any = true;
+      }
+      if (any) placed++;
+    }
+  }
+}
+
+/**
  * Emit the ground-dress draw ops for a model under a style. PURE + deterministic. Returns
  * [] for any style that does not name the dress fields (the dormancy law) — so only the
  * illustrated lens dresses the ground, and every other lens is byte-identical.
@@ -412,6 +516,7 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null)
   // SEASON CONTEXT — bounded reads off the optional dress; absent ⇒ null ⇒ seasonless.
   const season = dress && typeof dress.season === 'string' ? dress.season : null;
   const severity = dress && typeof dress.severity === 'string' ? dress.severity : null;
+  const state = dress && dress.state && typeof dress.state === 'object' ? dress.state : null;
   // Fold season+severity into the seed so a town's winter texture differs from its summer;
   // an ABSENT season leaves the seed EXACTLY `ground-dress:<digest>` ⇒ byte-identical.
   const seasonKey = season ? `:${season}${severity ? ':' + severity : ''}` : '';
@@ -430,6 +535,9 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null)
   // ring's SE drop shadow + the v2 mountain-flank relief hachures.
   pushWallShadows(ops, model, ink, wDress, oDress);
   pushRelief(ops, model, ink, wDress, oDress);
+  // IT3-b — STATE DRESS: siege works ring / scar grain / rebirth scaffold, each gated on a read
+  // in `state` (absent ⇒ zero ops ⇒ dormant). Seeded off the same season-aware stream.
+  if (state) pushStateDress(ops, model, rng, ink, wDress, oDress, coastY, state);
 
   return ops;
 }

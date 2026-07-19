@@ -97,13 +97,14 @@ function detectFinePointer() {
 }
 
 /**
- * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null, worldState?: any }} props
+ * @param {{ settlement: any, canEdit?: boolean, saveId?: string|number|null, worldState?: any, regionalGraph?: any }} props
  * `worldState` (IT-3, OPTIONAL) is the campaign's live clock context — its `.calendar.season`
  * paints the illustrated map's SEASON and its `.rngSeed` re-derives the year's severity (via
- * resolveMapDress). Absent (a standalone library detail / the public gallery) ⇒ seasonless base
- * bytes (the dormancy law). Never stored on the settlement.
+ * resolveMapDress). `regionalGraph` (OPTIONAL) feeds the siege-works STATE read. Absent (a
+ * standalone library detail / the public gallery) ⇒ seasonless base bytes (the dormancy law).
+ * Never stored on the settlement.
  */
-export default function SettlementMapPane({ settlement, canEdit = false, saveId = null, worldState = null }) {
+export default function SettlementMapPane({ settlement, canEdit = false, saveId = null, worldState = null, regionalGraph = null }) {
   const applyMapEdit = useStore(s => s.applyMapEdit);
 
   // ── SM-3 cosmetic edit state ────────────────────────────────────────────────
@@ -190,7 +191,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   // THE SEASON/STATE PORTRAIT (IT-3): the bounded MapDress resolved from the live worldState —
   // threaded into the illustrated underlay + every export so the season paints ONE geometry.
   // Absent worldState ⇒ null ⇒ seasonless base bytes (the dormancy law). Never persisted.
-  const dress = useMemo(() => resolveMapDress(settlement, worldState), [settlement, worldState]);
+  const dress = useMemo(() => resolveMapDress(settlement, worldState, regionalGraph), [settlement, worldState, regionalGraph]);
   // The oblique panorama draw-ops — computed only in panorama mode, under the active
   // lens (so it re-poses the SAME model the plan shows, honoring edits + lens).
   const panoramaOps = useMemo(

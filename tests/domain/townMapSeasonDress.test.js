@@ -142,3 +142,97 @@ describe('season dress — resolveMapDress (the season source)', () => {
       .not.toBe(stable(buildTownMapDrawList(model, 'illustrated')));
   });
 });
+
+describe('state dress (IT3-b) — DORMANCY (absent read ⇒ zero state ops)', () => {
+  it('no state === state:null (byte-identical to season-only)', () => {
+    const model = richModel();
+    const winter = stable(groundDressOps(model, 'illustrated', { season: 'winter' }));
+    expect(stable(groundDressOps(model, 'illustrated', { season: 'winter', state: null }))).toBe(winter);
+    // an all-false state adds nothing (no siege, no scars, no rebirth)
+    expect(stable(groundDressOps(model, 'illustrated', { season: 'winter', state: { besieged: false, scarLevel: 0, rebuiltCategories: [] } }))).toBe(winter);
+  });
+
+  it('resolveMapDress: a dark urban-fabric mirror + no siege ⇒ no state (null when seasonless)', () => {
+    expect(resolveMapDress({ id: 'x' }, null)).toBeNull();                          // nothing at all
+    expect(resolveMapDress({ id: 'x', urbanFabric: {} }, null)).toBeNull();          // dark mirror
+    expect(resolveMapDress({ id: 'x', urbanFabric: { scars: [] } }, null)).toBeNull();
+    // a season with a dark mirror ⇒ season present, state null
+    const d = resolveMapDress({ id: 'x' }, { calendar: { season: 'summer', year: 1 } });
+    expect(d.state).toBeNull();
+  });
+});
+
+describe('state dress (IT3-b) — each mark appears from its read', () => {
+  it('SIEGE works ring — besieged adds ops over the base', () => {
+    const model = richModel();
+    const base = groundDressOps(model, 'illustrated').length;
+    const sieged = groundDressOps(model, 'illustrated', { state: { besieged: true } }).length;
+    expect(sieged).toBeGreaterThan(base);
+  });
+
+  it('SCAR grain — scarLevel adds ops, heavier scars add more', () => {
+    const model = richModel();
+    const base = groundDressOps(model, 'illustrated').length;
+    const light = groundDressOps(model, 'illustrated', { state: { scarLevel: 0.3 } }).length;
+    const heavy = groundDressOps(model, 'illustrated', { state: { scarLevel: 0.9 } }).length;
+    expect(light).toBeGreaterThan(base);
+    expect(heavy).toBeGreaterThanOrEqual(light);
+  });
+
+  it('REBIRTH scaffold — a rebuilt district CLASS adds scaffold ops on the matching quarter', () => {
+    const model = richModel();
+    const cat = model.districts[0].category;
+    const base = groundDressOps(model, 'illustrated').length;
+    const rebuilt = groundDressOps(model, 'illustrated', { state: { rebuiltCategories: [cat] } }).length;
+    expect(rebuilt).toBeGreaterThan(base);
+    // an unmatched class adds nothing (no district carries it)
+    expect(groundDressOps(model, 'illustrated', { state: { rebuiltCategories: ['__no_such_class__'] } }).length).toBe(base);
+  });
+
+  it('is deterministic across runs (state marks are seeded, no trig)', () => {
+    const model = richModel();
+    const dress = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 0.8, rebuiltCategories: [model.districts[0].category] } };
+    expect(stable(groundDressOps(model, 'illustrated', dress))).toBe(stable(groundDressOps(model, 'illustrated', dress)));
+  });
+});
+
+describe('state dress (IT3-b) — resolveMapDress wires the reads', () => {
+  it('SCARS — urbanFabric.scars ⇒ state.scarLevel = the worst severity', () => {
+    const settlement = { id: 's9', urbanFabric: { scars: [{ kind: 'siege_repairs', severity: 0.4, week: 10 }, { kind: 'lean_years', severity: 0.8, week: 12 }] } };
+    const d = resolveMapDress(settlement, null);
+    expect(d).not.toBeNull();
+    expect(d.state.scarLevel).toBe(0.8);
+  });
+
+  it('REBIRTH — urbanFabric.rebirths ⇒ state.rebuiltCategories (deduped, sorted)', () => {
+    const settlement = { id: 's9', urbanFabric: { rebirths: [{ classes: ['market', 'civic'], type: 'fire', week: 8 }, { classes: ['civic'], type: 'flood', week: 9 }] } };
+    const d = resolveMapDress(settlement, null);
+    expect(d.state.rebuiltCategories).toEqual(['civic', 'market']);
+  });
+
+  it('SIEGE — a deployment targeting the settlement ⇒ state.besieged', () => {
+    const worldState = { deployments: { enemyTown: { targetId: 's9' } } };
+    const d = resolveMapDress({ id: 's9' }, worldState);
+    expect(d.state.besieged).toBe(true);
+    // a settlement NOT targeted ⇒ not besieged
+    expect(resolveMapDress({ id: 'other' }, worldState)).toBeNull();
+  });
+});
+
+describe('state dress (IT3-b) — BOUNDED (full stack ≤ DRESS_CAP)', () => {
+  it('the worst season + siege + scars + all-classes rebuilt stays ≤ DRESS_CAP on every seed', () => {
+    let worst = { label: '', ops: 0 };
+    const configs = [
+      ...GOLDEN_CONFIGS.map((c) => ({ label: `v1 ${c.spec.tier}/${c.spec.terrain}`, model: buildTownMapModel(c.settlement) })),
+      ...V2_GOLDEN_CONFIGS.map((c) => ({ label: `v2 ${c.spec.tier}/${c.spec.terrain}`, model: buildTownMapModel(c.settlement, c.mapEdits) })),
+    ];
+    for (const c of configs) {
+      const cats = [...new Set((c.model.districts || []).map((d) => d.category))];
+      for (const severity of ['bountiful', 'hard_winter', 'drought']) {
+        const n = groundDressOps(c.model, 'illustrated', { season: 'winter', severity, state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } }).length;
+        if (n > worst.ops) worst = { label: `${c.label} ${severity}`, ops: n };
+      }
+    }
+    expect(worst.ops, `worst full-stack dress ${worst.label} = ${worst.ops} (> ${DRESS_CAP})`).toBeLessThanOrEqual(DRESS_CAP);
+  });
+});

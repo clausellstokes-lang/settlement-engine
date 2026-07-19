@@ -213,6 +213,9 @@ export default function SettlementDetail({
   // season. A stable store reference (resolveExportSeam reads owning.worldState) ⇒ no extra
   // re-render; null for an unfoldered save ⇒ seasonless base bytes (the dormancy law).
   const mapWorldState = useStore(s => (saveId != null ? resolveExportSeam(s, saveId).campaign?.worldState || null : null));
+  // The owning campaign's regionalGraph — feeds the illustrated map's siege-works STATE read
+  // (IT3-b). A stable store reference; null for an unfoldered save ⇒ no siege marks (dormant).
+  const mapRegionalGraph = useStore(s => (saveId != null ? resolveExportSeam(s, saveId).campaign?.regionalGraph || null : null));
   const hydrateAiFromSave = useStore(s => s.hydrateAiFromSave);
   const revertCurrentToRaw = useStore(s => s.revertCurrentToRaw);
   const clearAiSettlement = useStore(s => s.clearAiSettlement);
@@ -767,7 +770,7 @@ export default function SettlementDetail({
                 detail toolbar above stays full-width). */}
             <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', width: '100%' }}>
               {detailView === 'map'
-                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} worldState={mapWorldState} />
+                ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} worldState={mapWorldState} regionalGraph={mapRegionalGraph} />
                 : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} />}
             </div>
           </Suspense>
