@@ -640,6 +640,16 @@ A+ at this stage, rinse and repeat.")
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 
 ## §5 THE SOAK
+- ⬛⭐ 2026-07-19 OWNER RE-SEQUENCING RULING — THE MACHINE BEFORE THE MIRROR: the
+  SOAK and TUNING run BEFORE the finished-site walkthrough (verbatim rationale:
+  "the walkthrough is pure visual aesthetics but the soak and tuning are the
+  core machine. Changing the visibility is always easier than the
+  interconnected machine we have underneath"). The tail order is now:
+  loop convergence → THE PUSH → soak (machine 2) → tuning → THE WALK (visual
+  rulings, cheap by construction) → THE ONE REGEN (walk fixes fold into the
+  regen batch's final 100%-green gate) → THE VERY END. The walk inspects the
+  live skin (not flag-gated), so walking pre-regen loses nothing; any
+  walk-driven visual fix lands before the regen's final full gate.
 - ⬛ 2026-07-19 OWNER RULING (SOAK_PLAN_R2 §5 is the authority): THREE LEVELS
   (CERT-30 / CENTURY-100 / CENTURY-300, all PASS criteria at each) + the COMBINATORIAL
   MANDATE (tick-path toggle matrix: L1 factorial where affordable, L2 all-on +

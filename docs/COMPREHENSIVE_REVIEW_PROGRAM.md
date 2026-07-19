@@ -1134,6 +1134,16 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — THE MACHINE BEFORE THE MIRROR: soak + tuning
+re-sequenced BEFORE the finished-site walkthrough** ("the walkthrough is pure visual
+aesthetics but the soak and tuning are the core machine. Changing the visibility is
+always easier than the interconnected machine we have underneath"). Tail order now:
+loop convergence → PUSH → SOAK (machine 2, three levels + combinatorial matrix) →
+TUNING (same-seed honesty rows per tune) → THE WALK (visual rulings) → THE ONE REGEN
+(walk fixes fold into its final 100%-green gate) → THE VERY END. Charter §5 amended
+(this commit). Rationale ratified by the manager: walk feedback is render-layer by
+nature and cheap at any point; tuning feedback changes the interconnected machine and
+must precede the goldens' final re-record.
 **⬛⭐ OWNER RULING (2026-07-19) — THE COHERENCE MANDATE joins THE ROUND 3 LOOP
 (an upward amendment of the A+ standard, per the standing ratchet clause).** Verbatim
 intent: every system must be coherent with the intended/logical/intuitive nature of
