@@ -119,9 +119,15 @@ const CEILINGS = Object.freeze({
   // brand header wash + violet primary-button gradient (and their rgba borders/
   // washes) became a parchment header band + the house gold primary (ink on gold).
   // The warm-dim backdrop scrim (one rgba) is kept as the modal ground.
-  borderRadius: 1054,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 113,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 265,    // off-palette translucent washes — ink tones come from the ramp
+  // Lowered again (C3-a, THE LEDGER — SettlementCard → a ledger <tr>): borderRadius
+  // 1054→1052, boxShadow 113→112, rgba 265→264. The library card stopped being a
+  // rounded box: the wrapper's borderRadius:7 and the retained-inactive badge's
+  // borderRadius:8 fell to feint row rules (the ledger idiom — rows on the ground,
+  // parted by rules), the selected state's z-axis boxShadow ring became a gold left
+  // rail, and the active row's translucent rgba fill became the page parchment.
+  borderRadius: 1052,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 112,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 264,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 

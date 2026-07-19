@@ -6,7 +6,7 @@ import { useFunnelEvent } from '../hooks/useFunnelEvent.js';
 
 import {generateCrossSettlementConflictsDeterministic} from '../generators/crossSettlementConflicts';
 import {getAllModifiers} from '../lib/relationshipGraph.js';
-import { INK, BODY, SECOND, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
+import { INK, BODY, BORDER, sans, serif_, FS, SP, swatch, PROSE_MAX, PARCH } from './theme.js';
 import { useStore } from '../store/index.js';
 import { navigate } from '../hooks/useRoute.js';
 import { viewToPath } from '../lib/routes.js';
@@ -24,7 +24,6 @@ import LibraryToolbar, { applyLibraryFilters as _applyLibraryFilters } from './l
 import SettlementDetail from './SettlementDetail';
 import { forkSeedFor } from '../data/sampleSettlements.js';
 import { migrateConfig, findSaveById, saveCountBand, dayGapBand, canonPhaseOf, lastEditedMs, hasAiData, computeBulkDelete } from './settlements/helpers.js';
-import { SettlementCard } from './settlements/SettlementCard.jsx';
 import { CampaignFolder } from './settlements/CampaignFolder.jsx';
 import { SampleDashboard } from './settlements/SampleDashboard.jsx';
 import SaveQuotaMeter from './settlements/SaveQuotaMeter.jsx';
@@ -33,6 +32,7 @@ import { useCampaignAdvance } from './settlements/useCampaignAdvance.js';
 import Button from './primitives/Button.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
+import UnassignedLedger from './settlements/UnassignedLedger.jsx';
 
 // ── Main Panel ──────────────────────────────────────────────────────────────
 
@@ -796,37 +796,15 @@ export default function SettlementsPanel({ onNavigate, routeId }) {
               where MUTED at FS.xxs failed 4.5:1) keeps it from adding a fourth
               dominance level. */}
           {unassignedSaves.length > 0 && (
-            <section>
-              <h2 style={{ margin:'0 0 6px', paddingLeft:4, fontSize:FS.xs, fontWeight:700, color:SECOND, textTransform:'uppercase', letterSpacing:'0.06em', fontFamily:sans }}>
-                {campaigns.length > 0 ? 'Unassigned' : 'Settlements'} ({unassignedSaves.length})
-              </h2>
-              {/* Single readable column, capped at PROSE_MAX. The prior 2-up
-                  grid (minmax 360px) squeezed each card so narrow that the
-                  settlement NAME ellipsis-clipped to 1-2 chars once the tier
-                  label + health pip shared its row. A capped full-width card
-                  gives the name ample room; the cap keeps the action cluster
-                  from being stranded far from the name on a wide monitor. */}
-              <div style={{ display:'grid', gridTemplateColumns:'1fr', maxWidth:PROSE_MAX, gap:SP.sm }}>
-                {unassignedSaves.map(s => (
-                  <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
-                    onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
-                    deleteConfirmed={deleteConfirmed} campaigns={activeCampaigns}
-                    addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
-                    currentCampaignId={null}
-                    onReactivate={handleReactivateSave}
-                    canReactivate={canReactivateInactive}
-                    reactivatingId={reactivatingId}
-                    onCanonize={handleCanonize}
-                    onAdvanceTime={handleAdvanceCampaignTime}
-                    onCreateCampaign={openCreateCampaign}
-                    onNavigate={onNavigate}
-                    canManageCampaigns={canManageCampaigns}
-                    selectMode={selectMode}
-                    selected={selectedIds.has(s.id)}
-                    onToggleSelect={toggleSelect}/>
-                ))}
-              </div>
-            </section>
+            <UnassignedLedger
+              saves={unassignedSaves} campaignsExist={campaigns.length > 0}
+              allModifiers={allModifiers} onView={onViewSettlement}
+              deleteId={deleteId} setDeleteId={setDeleteId} deleteConfirmed={deleteConfirmed}
+              campaigns={activeCampaigns} addToCampaign={addToCampaign} removeFromCampaign={removeFromCampaign}
+              onReactivate={handleReactivateSave} canReactivate={canReactivateInactive} reactivatingId={reactivatingId}
+              onCanonize={handleCanonize} onAdvanceTime={handleAdvanceCampaignTime} onCreateCampaign={openCreateCampaign}
+              onNavigate={onNavigate} canManageCampaigns={canManageCampaigns}
+              selectMode={selectMode} selectedIds={selectedIds} onToggleSelect={toggleSelect} />
           )}
         </div>
       )}

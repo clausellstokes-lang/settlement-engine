@@ -193,14 +193,22 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         />
       )}
 
-      {/* Nested settlements */}
+      {/* Nested settlements — the campaign's own ledger table. Its rows share the
+          same ledger idiom as the unassigned pile; the folder header already
+          states the campaign, so the table carries a hidden caption rather than
+          repeating the column heads. */}
       {!collapsed && (
-        <div style={{ padding:'6px 8px 8px', display:'flex', flexDirection:'column', gap:4 }}>
+        <div style={{ padding:'6px 8px 8px' }}>
           {settlements.length === 0 ? (
             <div style={{ padding:'10px 8px', fontSize:FS.xs, color:MUTED, textAlign:'center', fontStyle:'italic' }}>
               No settlements in this campaign yet. Use the arrow button to move settlements here.
             </div>
-          ) : settlements.map(s => (
+          ) : (
+          <div style={{ overflowX:'auto' }}>
+            <table style={{ width:'100%', borderCollapse:'collapse' }}>
+              <caption style={{ position:'absolute', width:1, height:1, padding:0, margin:-1, overflow:'hidden', clip:'rect(0 0 0 0)', whiteSpace:'nowrap', border:0 }}>Settlements in {campaign.name}</caption>
+              <tbody>
+          {settlements.map(s => (
             <SettlementCard key={s.id} s={s} allModifiers={allModifiers}
               onView={onViewSettlement} deleteId={deleteId} setDeleteId={setDeleteId}
               deleteConfirmed={deleteConfirmed} campaigns={campaigns}
@@ -222,6 +230,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               selected={!!selectedIds?.has?.(s.id)}
               onToggleSelect={onToggleSelect}/>
           ))}
+              </tbody>
+            </table>
+          </div>
+          )}
         </div>
       )}
     </div>
