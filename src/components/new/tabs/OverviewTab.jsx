@@ -200,7 +200,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
 
       {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
       {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,borderRadius:8,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.arrivalScene&&<p style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
+        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
         {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
         {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
       </div>}

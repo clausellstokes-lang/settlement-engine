@@ -171,7 +171,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             The town in 4 sentences
           </div>
 
-          <p style={{
+          <p className="oc-dropcap-prose" style={{
             margin: '8px 0 0',
             fontFamily: serif, fontSize: FS['14.5'],
             color: INK_DEEP, lineHeight: 1.65,
