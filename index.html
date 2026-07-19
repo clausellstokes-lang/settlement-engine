@@ -49,14 +49,20 @@
       These STATIC tags give the landing page a rich unfurl in Slack, iMessage,
       Discord, Twitter/X, Facebook, etc. Before this the card rendered blank.
 
-      Scope note: this is the LANDING unfurl only. Per-gallery-page dynamic OG
-      (a shared dossier link showing its own settlement name + painting) needs a
-      prerender / SSR meta layer because the app is a client-rendered SPA and
-      scrapers do not run JS. That is a Phase 5+ follow-up, out of scope here.
+      SSR honesty note (Wave E): the app is a client-rendered SPA, so a scraper
+      that does not run JS sees only these static defaults for a given route.
+      Per-gallery-page dynamic OG (a shared dossier link showing its own
+      settlement name + card) IS handled for non-JS scrapers by the
+      /api/gallery-meta prerender (vercel.json rewrites /gallery/:slug → it; it
+      stamps per-slug title/description/image into the served HTML). JS-driven
+      routes (compendium tabs, pricing, etc.) upgrade their head at runtime via
+      src/lib/seo.js applyDocumentHead(), but a non-JS crawler of those routes
+      still sees the static set below — closing that would need per-route
+      prerender/SSR, a recorded follow-up, not built here.
 
       og:image must be a fully-qualified absolute URL — Slack/Twitter/Facebook
-      scrapers reject root-relative image paths. It points at an existing
-      painting already shipped in public/backgrounds/. -->
+      scrapers reject root-relative image paths. It points at the house-sealed
+      share card public/og-craft.png (matched by src/lib/seo.js). -->
     <meta name="description" content="Most generators roll on a table. This one simulates. First settlement or hundredth: the pieces explain each other." />
     <meta property="og:site_name" content="SettlementForge" />
     <meta property="og:title" content="SettlementForge — Forge a settlement worth running a campaign in." />

@@ -31,12 +31,12 @@ describe('applyDocumentHead — per-route OG + Twitter', () => {
   it('a public route emits the default card + a large-image twitter card', () => {
     applyDocumentHead('pricing');
     expect(meta('property', 'og:type')).toBe('website');
-    expect(meta('property', 'og:image')).toBe('https://settlementforge.com/og-default.png');
+    expect(meta('property', 'og:image')).toBe('https://settlementforge.com/og-craft.png');
     expect(meta('property', 'og:image:width')).toBe('1200');
     expect(meta('property', 'og:image:height')).toBe('630');
     expect(meta('property', 'og:image:type')).toBe('image/png');
     expect(meta('name', 'twitter:card')).toBe('summary_large_image');
-    expect(meta('name', 'twitter:image')).toBe('https://settlementforge.com/og-default.png');
+    expect(meta('name', 'twitter:image')).toBe('https://settlementforge.com/og-craft.png');
     expect(meta('name', 'twitter:title')).toBeTruthy();
   });
 
@@ -66,7 +66,7 @@ describe('applyDocumentHead — per-route OG + Twitter', () => {
   it('a gallery item falls back to the default card when the project URL is unset', () => {
     vi.stubEnv('VITE_SUPABASE_URL', '');
     applyDocumentHead('gallery', { slug: 'ashford-9f2' });
-    expect(meta('property', 'og:image')).toBe('https://settlementforge.com/og-default.png');
+    expect(meta('property', 'og:image')).toBe('https://settlementforge.com/og-craft.png');
   });
 
   it('leaving a gallery item clears the per-item CreativeWork graph', () => {

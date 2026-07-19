@@ -30,7 +30,11 @@ const DEFAULT_DESCRIPTION = 'SettlementForge generates living tabletop-RPG settl
 
 // The site-default unfurl card (1200×630 PNG). Raster, because Facebook, X,
 // LinkedIn, Slack, Discord et al. do not rasterize SVG.
-const OG_IMAGE_DEFAULT = `${ORIGIN}/og-default.png`;
+// The house-sealed share card (the station device + wordmark), matching the
+// static og:image in index.html. Previously og-default.png (the pre-seal
+// wordmark-only card) — a JS-rendered route or a fallback then served the old
+// image while the static unfurl showed the seal.
+const OG_IMAGE_DEFAULT = `${ORIGIN}/og-craft.png`;
 const OG_IMAGE_ALT_DEFAULT = 'SettlementForge: living settlements for game masters';
 
 // Supabase project URL, inlined at build. The dynamic OG endpoint is a
