@@ -412,6 +412,26 @@ A+ at this stage, rinse and repeat.")
   PINS: cartographer-premium never renders the door · surveyor + founder do ·
   BYOK-within-entitlement never debits credits · neither-tier-nor-entitlement
   = empty margin.
+  ⬛⭐ WAVE B — THE MONEY WAVE (owner ruling 2026-07-19: the Founder transfer
+  system BUILDS pre-launch, pre-loop — per the owner's full transfer-model doc,
+  ratified with 4 amendments [death/succession line · no bonus on transfer ·
+  side-payment disclaimer · fixed-$99-as-feature affirmed]): items #13
+  auto-reload + #14 purchase ledger + #16 Surveyor provisioning + #17 FOUNDER
+  TRANSFERS build as ONE coherent wave over shared Stripe/webhook/payout
+  infrastructure. Transfers spec: the seat entitlement record (supersedes
+  draft migration 137 — seat id · holder · dates · eligibility · full history
+  · payment/security status · cooldown), the five-state machine (initiate →
+  verify → accept+pay → 72h cooling → finalize; delayed payout 14-30d), dual
+  2FA + reauth + recovery-lockout during transfer, 12-month hold/cooldown,
+  $99 in / $49.50 out via STRIPE CONNECT (code-complete, KEY-INERT — owner
+  activation = Connect platform enablement + keys + LEGAL SIGN-OFF, a HARD
+  gate before live), notifications via the Wave E mail seam, terms +
+  Founders-page promise copy ("official process, subject to the published
+  terms") for the legal consult. ⚠ MANDATORY before the loop: a dedicated
+  FABLE FRAUD-PASS (takeover-initiated transfers · cooldown/clawback races ·
+  double-payout · chargeback-mid-cooling). Concerns ledgered: Connect is an
+  external owner-side dependency; legal gates activation; the loop's start
+  moves by ~a fleet-day.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
