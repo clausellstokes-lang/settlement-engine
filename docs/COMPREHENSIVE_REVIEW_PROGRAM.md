@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⬛⭐ THE TRADITIONS COMMISSIONED — ENGINE LIFT #4 (owner, 2026-07-18: "lets bring
+in culture" → "yes do it"):** per-settlement traditions (holidays · festivals ·
+events · fairs) as the culture layer. Owner spec ratified: seeded genesis from the
+settlement's ORIGIN · immutable CORE MOTIF with slow, checkpoint-gated expression
+mutations (tier crossing / ownership change / deity change / imposition / migration
+threshold / generational drift — hysteresis + caps, reframe-class discipline) ·
+calendar-timebound (season+month mechanics, fictional week in prose) · weighted-PRNG
+outcome TIERS (triumph→failure, plus CANCELLED≠FAILED — manager's determination per
+owner delegation) with weights from prosperity band, stressors, owner-power health,
+seasonal severity, scale-vs-means mismatch · POWER OWNERSHIP with legitimacy stakes
+and state-driven re-assignment · vassal IMPOSITION with the suppressed-core
+return-on-liberation emergent · migration ADOPTION via mover origins · count scales
+by tier (thorp 1-2 → metropolis many). Effects = READ-MANY, WRITE-BOUNDED pulses
+through existing channels (trade, legitimacy, faith standing, news, chronicle,
+hooks) — never new write paths into other kernels. Surfaces: dossier Traditions
+register · almanac · chronicle · map festival dress (IT-3 coupling) · exports ·
+facet-law custom kind (S4; AI proposals Surveyor-gated). Backfill for existing
+settlements at flag-light (veteran-backfill pattern). traditionsEnabled = THE
+EIGHTH FLAG in the pre-signed ONE REGEN; genesis content parks red on generator
+goldens (generation-time precedent); ROUND 3 reviews; SOAK certifies occurrence
+cadence + mutation rarity as named metrics. Recon workflow dispatched (time/calendar
++ catch-up-collapse hazard · powers/legitimacy · movement/relations incl. mover
+origins + vassal state · event/content machinery); DESIGN_TRADITIONS.md freezes on
+its receipts. Task #37.
 **⬛ ONE DOOR VISIBILITY CLARIFIED (owner, 2026-07-18: "the floating AI button
 should only show for the surveyor premium"):** the left-edge marker renders ONLY
 for Surveyor-tier users — no lock-tease, no placeholder; the margin stays empty
