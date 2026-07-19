@@ -618,6 +618,11 @@ export const auth = {
   unlinkIdentity:     (identity) => loadAuthSecurity().then(m => m.unlinkIdentity(identity)),
   signOutEverywhere:  () => loadAuthSecurity().then(m => m.signOutEverywhere()),
   getAccountNumber:   () => loadAuthSecurity().then(m => m.getAccountNumber()),
+  // Single concurrent session (§7.3, M-9d). Only signOutLocalSession is exposed here —
+  // it is the ONE session call reached from eager store code (evictSession). claim +
+  // is-current + fetchActive are called from LAZY modules (sessionClient, the account
+  // panel) that import authSecurity directly, so they need no eager wrapper.
+  signOutLocalSession: () => loadAuthSecurity().then(m => m.signOutLocalSession()),
   updateDisplayName:  isConfigured ? supabaseUpdateDisplayName   : mockUpdateDisplayName,
   updateProfilePreferences: isConfigured ? supabaseUpdateProfilePreferences : mockUpdateProfilePreferences,
   // Security questions + gated recovery (migrations 066-068).

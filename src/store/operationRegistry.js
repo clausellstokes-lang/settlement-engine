@@ -305,6 +305,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
   clearFocusedEntity: { slice: 'uiSlice', reason: 'clears the transient dossier hyperlink focus; excluded from persist' },
   // Merge-introduced services-toggle hydration (transient session hydration).
   hydrateServicesToggles: { slice: 'configSlice', reason: 'hydrates transient services toggles from a loaded save; session-only, not re-persisted' },
+  // Single-session eviction (§7.3, M-9d): raises the transient sessionEvicted banner
+  // flag + a LOCAL sign-out. It NEVER mutates durable/saved state (the LIFECYCLE PIN
+  // is the wall) and sessionEvicted is excluded from the persist partialize — the same
+  // K-D EXEMPT class (transient session flag) as the standing setAuthModalOpen.
+  evictSession: { slice: 'authSlice', reason: 'transient single-session eviction banner flag + local sign-out; excluded from persist partialize' },
 });
 
 /** The committed exempt ceiling (shrink-only; lower it as actions are adopted). */
@@ -316,7 +321,11 @@ export const EXEMPT_OPERATIONS = Object.freeze({
 // store so the signup/unlock PricingMomentCard can route an anon user to sign-in rather
 // than the buy-credits wall. Same K-D EXEMPT class (UI modal visibility flag) as the
 // standing setPurchaseModalOpen — a documented ratchet raise, not an omission.
-export const EXEMPT_CEILING = 70;
+// 70 -> 71 (MONEY WAVE M-9d): evictSession — the single-session eviction banner flag +
+// local sign-out (§7.3). Authorized by the wave's LAW 6 ("+ EXEMPT_CEILING bump if
+// tripped"); same transient-session-flag K-D class as setAuthModalOpen. A documented,
+// spec-sanctioned ratchet raise.
+export const EXEMPT_CEILING = 71;
 
 /** Action names carrying an opType (the registered operation surface). */
 export function registeredActionNames() { return Object.keys(OPERATIONS); }

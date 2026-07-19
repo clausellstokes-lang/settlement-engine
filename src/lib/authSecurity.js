@@ -174,7 +174,92 @@ async function supabaseGetAccountNumber() {
   }
 }
 
+// ── Single concurrent session (§7.3, M-9d) ───────────────────────────────────
+
+/**
+ * Compose a COARSE device label (browser + OS family) from the UA — never PII.
+ * Feeds claim_current_session and the account Active-session panel.
+ * @returns {string}
+ */
+export function sessionDeviceLabel() {
+  try {
+    const ua = (typeof navigator !== 'undefined' && navigator.userAgent) || '';
+    const browser = /Edg\//.test(ua) ? 'Edge'
+      : /OPR\/|Opera/.test(ua) ? 'Opera'
+      : /Firefox\//.test(ua) ? 'Firefox'
+      : /Chrome\//.test(ua) ? 'Chrome'
+      : /Safari\//.test(ua) ? 'Safari' : 'Browser';
+    const os = /Windows/.test(ua) ? 'Windows'
+      : /Mac OS X|Macintosh/.test(ua) ? 'macOS'
+      : /Android/.test(ua) ? 'Android'
+      : /iPhone|iPad|iPod/.test(ua) ? 'iOS'
+      : /Linux/.test(ua) ? 'Linux' : 'device';
+    return `${browser} on ${os}`;
+  } catch { return 'Browser'; }
+}
+
+/**
+ * Claim this account to THE CURRENT session (last-login-wins, §7.1). Fire-and-
+ * forget from SIGNED_IN — NEVER throws; a claim failure is a silent no-op (the
+ * paid-surface request gate is the real enforcement, not this claim).
+ * @param {string} [deviceLabel]
+ */
+async function supabaseClaimCurrentSession(deviceLabel) {
+  try { await supabase.rpc('claim_current_session', { p_device_label: deviceLabel || sessionDeviceLabel() }); }
+  catch { /* never block auth on a claim failure */ }
+}
+
+/**
+ * Is THIS session still the account's current one? Returns TRUE on any error or
+ * absent row — LENIENT, matching the server gate's missing-row-ALLOWS rollout
+ * safety: the authoritative eviction is the paid-surface request gate, so the
+ * client validator never evicts on a transient read failure.
+ * @returns {Promise<boolean>}
+ */
+async function supabaseIsCurrentSession() {
+  try {
+    const { data, error } = await supabase.rpc('is_current_session');
+    if (error) return true;
+    return data !== false;
+  } catch { return true; }
+}
+
+/**
+ * Sign out ONLY this device's session (LOCAL scope) — the eviction path. The
+ * OTHER device's session is the legitimate winner and must NOT be revoked
+ * (never global here). The SIGNED_OUT event still fires and transitions auth to
+ * anon exactly as a normal sign-out does.
+ */
+async function supabaseSignOutLocalSession() {
+  try { await supabase.auth.signOut({ scope: 'local' }); }
+  catch { /* the SIGNED_OUT event path still runs */ }
+}
+
+/**
+ * Read the caller's current active-session row (coarse device + signed-in time)
+ * for the account Security panel. Owner-SELECT RLS; never throws → null.
+ * @returns {Promise<{deviceLabel: string|null, signedInAt: string|null}|null>}
+ */
+async function supabaseFetchActiveSession() {
+  try {
+    const { data, error } = await supabase
+      .from('current_account_session')
+      .select('device_label, signed_in_at')
+      .maybeSingle();
+    if (error || !data) return null;
+    return { deviceLabel: data.device_label || null, signedInAt: data.signed_in_at || null };
+  } catch { return null; }
+}
+
 // ── Mock implementations (local dev without Supabase) ────────────────────────
+
+async function mockClaimCurrentSession() { /* no-op in mock mode */ }
+async function mockIsCurrentSession() { return true; }
+async function mockSignOutLocalSession() { mockSaveAuth(null); }
+async function mockFetchActiveSession() {
+  const saved = mockLoadAuth();
+  return saved?.user ? { deviceLabel: sessionDeviceLabel(), signedInAt: new Date().toISOString() } : null;
+}
 
 async function mockReauthenticateWithPassword() {
   // Local dev has no real password store; treat re-auth as a no-op success.
@@ -219,3 +304,8 @@ export const linkIdentity = isConfigured ? supabaseLinkIdentity : mockLinkIdenti
 export const unlinkIdentity = isConfigured ? supabaseUnlinkIdentity : mockUnlinkIdentity;
 export const signOutEverywhere = isConfigured ? supabaseSignOutEverywhere : mockSignOutEverywhere;
 export const getAccountNumber = isConfigured ? supabaseGetAccountNumber : mockGetAccountNumber;
+// Single concurrent session (§7.3, M-9d).
+export const claimCurrentSession = isConfigured ? supabaseClaimCurrentSession : mockClaimCurrentSession;
+export const isCurrentSession = isConfigured ? supabaseIsCurrentSession : mockIsCurrentSession;
+export const signOutLocalSession = isConfigured ? supabaseSignOutLocalSession : mockSignOutLocalSession;
+export const fetchActiveSession = isConfigured ? supabaseFetchActiveSession : mockFetchActiveSession;
