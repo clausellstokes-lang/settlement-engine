@@ -1153,6 +1153,29 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C2 THE WELCOME FILM COMPLETE (2026-07-19, claude/deep-craft-c2 @ 34f4e554,
+3 commits stacked on the C2L tip, NOT folded).** 3d82a444 C2-a scroll conductor:
+shared-core EXTRACTION (projectLegFrame consumed by BOTH the clock and scroll
+drivers — extended, never forked; dependency-free rAF, redundant-frame 0.008
+guards; library rejection recorded). · 46ef7167 C2-b sections re-vehicled: 7
+current sections → 6 stops (commons shares the city stop), retention pin
+homeLanding.test.jsx GREEN UNTOUCHED; analytics = exactly 2 pre-existing
+LANDING_FUNNEL_USED firings, preserved by name, zero new eager names. ·
+34f4e554 C2-c floor proofs + zero-eager ratchet. LAWS: stills floor CONFIRMED at
+test level AND live (flag-off ⇒ videoCount 0, zero mp4 fetches; fixed-backdrop
+stacking risk cleared); eager delta 0 B (fingerprint absent from the entry
+closure, verify:dist 154); per-leg prefetch inherited; desktop-fine-pointer +
+taste-gate welcomeJourneyFilm (+ shared set toggle). JUDGMENT (vetoable at the
+walk): LEG-SPACER architecture — sections keep their painted backgrounds, the
+film shows through transparent travel legs (retention-maximal); the full-bleed
+glass-sections alternative is the recorded veto direction. Deferrals →
+walk/queue: section-background harmonization (§04 city art vs town stop) ·
+journey_stop analytics enrichment · the visual scrub is PLAUSIBLE pending the
+owner's manual walk (recipe in the lane report; the browser pane hangs on
+programmatic scroll of this app — environment limit, reproduced on unmodified
+base). Full suite 13,245 / EXACTLY the 5 + 1 isolation-cleared flake (its
+isolated runtime 31.6s exceeds the 20s cap under 3-lane load). C1-FIN REMAINDER
+dispatches.
 **⬛⭐⭐ C13 THE ONE DOOR COMPLETE (2026-07-19, claude/deep-craft-c13 @ 4ccb2766,
 FABLE lane, 3 commits, NOT folded).** 7a2e0c14 the door+router: entry census
 found exactly 2 non-carve-out entries (analyst launcher, workshop compass) —
