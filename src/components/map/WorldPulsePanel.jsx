@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
@@ -70,6 +70,29 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
   }, [resumeBusy, campaignId, dismissedMajorIds, resolveIntervalMajors]);
   const saves = useStore(s => s.savedSettlements);
   const nameById = useMemo(() => nameMapFromSaves(saves), [saves]);
+
+  // H2 · THE FIRST ADVANCE — the almanac's new page turns in. On the session's
+  // first committed advance, the pulse page pivots at its binding (oc-m-pageturn)
+  // as it settles. Detection is read-side off the existing advance counter
+  // (worldState.pulseHistory grows by one per advance), baselined at mount; the
+  // panel mounts before the advance commits (openInspectorAt('pulse') runs ahead
+  // of the commit), so the first increase is the DM's first advance. Component-
+  // local refs keep it once — NO new store field, NO persisted state; reduced-
+  // motion collapses the turn to instant via the global [class*='oc-m-'] rule.
+  const almanacPulseLen = campaign?.worldState?.pulseHistory?.length || 0;
+  const almanacBaselineRef = useRef(null);
+  const almanacTurnedRef = useRef(false);
+  const [almanacTurn, setAlmanacTurn] = useState(false);
+  useEffect(() => {
+    if (almanacBaselineRef.current == null) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
+    if (almanacTurnedRef.current) { almanacBaselineRef.current = almanacPulseLen; return undefined; }
+    if (almanacPulseLen <= almanacBaselineRef.current) return undefined;
+    almanacTurnedRef.current = true;
+    almanacBaselineRef.current = almanacPulseLen;
+    setAlmanacTurn(true);
+    const timer = setTimeout(() => setAlmanacTurn(false), 900);
+    return () => clearTimeout(timer);
+  }, [almanacPulseLen]);
 
   // M10b catch-up now fires from campaign ACTIVATION (setActiveCampaign — the
   // §0.6.1-named site), not from this panel's mount, so the world moves on every
@@ -267,7 +290,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </div>
       )}
 
-      <div style={{
+      <div
+        className={almanacTurn ? 'oc-m-pageturn' : undefined}
+        style={{
         flex: 1,
         minHeight: 0,
         overflowY: 'auto',

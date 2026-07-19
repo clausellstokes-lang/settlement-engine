@@ -55,6 +55,14 @@ export default function PlacementsLayer({ transformRef }) {
     const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
     return camp?.worldState?.spatialLedgers?.satellites || null;
   });
+  // H2 · THE FIRST ADVANCE — the active campaign's living-world state, read so
+  // the medallion ink-pulse (below) can detect the session's first committed
+  // advance off the EXISTING advance counter (worldState.pulseHistory grows by
+  // one record per advance). null for every world without a campaign.
+  const advanceWorldState = useStore(s => {
+    const camp = s.campaigns?.find(c => c.id === s.activeCampaignId);
+    return camp?.worldState || null;
+  });
 
   // Drag-to-move state for the currently-selected placement.
   // Holds { burgId, pointerId, origin:{sx,sy}, startPt:{x,y} } during drag.
@@ -116,6 +124,59 @@ export default function PlacementsLayer({ transformRef }) {
     }
     return out;
   }, [placements, saveById, satellitesLedger]);
+
+  // ── H2 · THE FIRST ADVANCE — the medallion ink-pulse ───────────────────
+  // On the FIRST committed advance of the session, every medallion the tick
+  // TOUCHED breathes once (oc-m-inkpulse), staggered in reading order. The
+  // pulse marks CHANGE, not spectacle: a settlement the advance left alone
+  // never pulses (DESIGN_DEEP_CRAFT_PAGES.md H2 LAW). Detection is read-side
+  // off the existing advance counter — worldState.pulseHistory grows by one
+  // record per advance (an interval collapses to one record). We baseline its
+  // length at mount and fire on the first increase; component-local refs keep
+  // it once-per-session with NO new store field and NO persisted state. A
+  // reload remounts this layer and re-baselines, so an already-advanced world
+  // never re-pulses. Motion is className-only; reduced-motion collapses it to
+  // an instant no-op via the global [class*='oc-m-'] rule.
+  const pulseCount = advanceWorldState?.pulseHistory?.length || 0;
+  const pulseBaselineRef = useRef(null);
+  const heroFiredRef = useRef(false);
+  const [firstAdvancePulse, setFirstAdvancePulse] = useState(null);
+  useEffect(() => {
+    // Establish the baseline the first time a real world is present (after any
+    // open-time catch-up has already landed its records).
+    if (pulseBaselineRef.current == null) { pulseBaselineRef.current = pulseCount; return undefined; }
+    if (heroFiredRef.current) { pulseBaselineRef.current = pulseCount; return undefined; }
+    if (pulseCount <= pulseBaselineRef.current) return undefined;
+    heroFiredRef.current = true;
+    pulseBaselineRef.current = pulseCount;
+    const hist = advanceWorldState?.pulseHistory || [];
+    const last = hist[hist.length - 1];
+    const touched = new Set();
+    for (const o of (last?.selectedOutcomes || [])) {
+      for (const sid of (o?.settlementIds || o?.affectedSettlementIds || [])) {
+        if (sid != null) touched.add(String(sid));
+      }
+    }
+    if (!touched.size) return undefined;
+    // Reading order = top-to-bottom then left-to-right; the stagger index is
+    // capped at 8 so the whole cascade still settles under the 1.4s hero budget
+    // no matter how many settlements the tick touched (ranks beyond 8 pulse
+    // together, mirroring THE ARRIVAL's final-rank rule).
+    const order = new Map();
+    items
+      .filter(it => it.settlementId != null && touched.has(String(it.settlementId)))
+      .slice()
+      .sort((a, b) => (a.y - b.y) || (a.x - b.x))
+      .forEach((it, i) => order.set(String(it.settlementId), Math.min(i, 8)));
+    // Synchronizing a one-shot ceremony to an external counter (the store's
+    // advance history) — the canonical exception the codebase already takes
+    // where React-side motion must fire on an external-state transition.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFirstAdvancePulse({ ids: touched, order });
+    // Clear after one cycle so the class does not linger on the medallions.
+    const timer = setTimeout(() => setFirstAdvancePulse(null), 1600);
+    return () => clearTimeout(timer);
+  }, [pulseCount, advanceWorldState, items]);
 
   if (!items.length) return null;
 
@@ -192,10 +253,17 @@ export default function PlacementsLayer({ transformRef }) {
         const preview = (dragPreview && dragPreview.burgId === it.burgId) ? dragPreview : null;
         const x = preview ? preview.x : it.x;
         const y = preview ? preview.y : it.y;
+        // H2: this medallion breathes once iff the first advance of the session
+        // touched its settlement; the reading-order rank drives the stagger.
+        const pulsing = !!(firstAdvancePulse && it.settlementId != null && firstAdvancePulse.ids.has(String(it.settlementId)));
+        const pulseDelay = pulsing ? (firstAdvancePulse.order.get(String(it.settlementId)) || 0) : 0;
         return (
           <g
             key={it.burgId}
-            style={{ pointerEvents: 'auto' }}
+            className={pulsing ? 'oc-m-inkpulse' : undefined}
+            style={pulsing
+              ? { pointerEvents: 'auto', animationDelay: `calc(var(--oc-motion-ink) * ${pulseDelay} / 2)` }
+              : { pointerEvents: 'auto' }}
             data-hover-settlement-id={it.settlementId || undefined}
             onPointerEnter={(e) => {
               // Hover-peek is a fine-pointer affordance. On touch a tap fires
