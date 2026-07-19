@@ -208,6 +208,42 @@
   }
 }
 
+/* ── The dossier prose initial (2-line, self-sufficient) ──────────────────────
+   The manuscript grammar on the dossier's FLOWING PROSE surfaces only (the
+   Overview narrative band, the DM Summary lede) — NEVER a data register. Unlike
+   .oc-dropcap above (the .oc-surface entry: 3 lines, role-var toned) these
+   paragraphs sit OUTSIDE an .oc-surface, so this reads the :root ink ramp
+   directly and needs no surface context. Two lines suits the dossier's compact
+   prose. Tone is per-ground via --oc-dropcap-ink (the dark --oc-entry default
+   for parchment; a dark umber band passes the light --oc-field-entry inline).
+   Upright even inside italic prose; initial-letter with the float fallback. */
+.oc-dropcap-prose::first-letter {
+  -webkit-initial-letter: 2;
+  initial-letter: 2;
+  font-family: 'Lora', 'Crimson Text', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--oc-dropcap-ink, var(--oc-entry));
+  margin-right: 0.09em;
+}
+@supports not (initial-letter: 2) {
+  .oc-dropcap-prose::first-letter {
+    float: left; font-size: 2.4em; line-height: 0.8; padding: 0.02em 0.1em 0 0; margin-right: 0;
+    color: var(--oc-dropcap-ink, var(--oc-entry)); font-weight: 700; font-style: normal;
+    font-family: 'Lora', 'Crimson Text', Georgia, serif;
+  }
+}
+/* Narrow panes: the initial steps down to normal so a short prose block on a
+   phone-width pane isn't dominated by one glyph (graceful degradation). */
+@media (max-width: 520px) {
+  .oc-dropcap-prose::first-letter { -webkit-initial-letter: 1; initial-letter: 1; }
+}
+@supports not (initial-letter: 1) {
+  @media (max-width: 520px) {
+    .oc-dropcap-prose::first-letter { float: none; font-size: 1.5em; line-height: inherit; padding: 0; }
+  }
+}
+
 /* ── Rules — the family's block rhythm (SVG comes from Rule.jsx / rules.js) ────*/
 .oc-rule { display: block; width: 100%; }
 .oc-rule--hairline { margin: var(--oc-space-sm) 0; }
