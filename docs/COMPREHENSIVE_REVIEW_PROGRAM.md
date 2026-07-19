@@ -1153,6 +1153,19 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ CALIBER MAP LANE COMPLETE (2026-07-19, claude/caliber-map @ e2b00102, 2
+commits).** CM-a AdvanceReport source-stamp re-tone: the three tinted chip
+washes → rule-framed stamps on the ChronicleTab three-tone register (thread
+gold · decree oxblood+Landmark · crosslink sepia+GitBranch — word+glyph+tone
+tellability; all tones pre-pinned AA; SLATE fully retired from the surface);
+H2 slip + fire-once + receipts + handlers grep-verified byte-identical. CM-b
+scrim tokenization WITH a correct doomed-literal divergence: the brief's
+warmdim/ink-mix suggestion would have INVERTED the ground under dark-on-light
+copy — the scrims re-grounded byte-exact on the parchment token via color-mix
+instead (vetoable toward PARCH_100 alignment); the C2L unfurl seam + drag
+inset untouched. Deltas for FOLD 3: tinted 214→208 · rgba 234→232; zero eager
+(byte-identical verify:dist across both commits). Full suite: the 4 parked +
+declared reds only after isolation-clearing a 3-sibling contention storm.
 **⬛⭐ THE WELCOME SCRUB: PLAUSIBLE → CONFIRMED (2026-07-19, manager-executed
 on the composite @ aad6265e).** Playwright drove a real Chromium through the
 full served journey (the preview-pane scroll-hang bypassed via the perf lane's
