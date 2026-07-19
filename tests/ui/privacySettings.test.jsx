@@ -52,4 +52,20 @@ describe('PrivacySettings — the silent research disclosure', () => {
     render(<PrivacySettings />);
     expect(screen.queryByLabelText(/Research contribution notice/i)).toBeNull();
   });
+
+  test('standalone renders the self-contained card with an <h3> title', () => {
+    render(<PrivacySettings />);
+    // The card title is a real heading, so screen readers announce a section.
+    expect(screen.getByRole('heading', { name: /Privacy & data/i })).toBeTruthy();
+  });
+
+  test('bare flattens to a borderless sub-group: inline title, no heading', () => {
+    render(<PrivacySettings bare />);
+    // No concentric card chrome ⇒ the title demotes from <h3> to an inline
+    // keyword-row that sits level with the sibling sub-group headers.
+    expect(screen.queryByRole('heading', { name: /Privacy/i })).toBeNull();
+    expect(screen.getByText(/Privacy & analytics/i)).toBeTruthy();
+    // The toggle rows still render regardless of chrome.
+    expect(screen.getByRole('switch', { name: /You're helping improve the generator/i })).toBeTruthy();
+  });
 });
