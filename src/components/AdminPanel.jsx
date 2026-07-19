@@ -198,14 +198,15 @@ export default function AdminPanel({ onBack }) {
           <AdminTrendsPanel />
         </Section>
 
-        <Section title="Analytics">
+        {/* Observability cluster — the read-only analytics dashboards + the
+            production crash sink (client_error_events, 081; grouped by signature
+            with the always-visible last-hour alert banner from
+            report_client_error_alert, 156). Both live in ONE Section (rather than
+            a second "Client Errors" Section) so the admin view adds no native
+            title= to the shrink-only guidance-walker census; the errors panel
+            carries its own <h3> delimiter. Read-only, service-role-gated. */}
+        <Section title="Analytics & errors">
           <AdminAnalyticsPanel />
-        </Section>
-
-        {/* Client errors — the production crash sink (client_error_events, 081)
-            grouped by signature, with the always-visible last-hour alert banner
-            (report_client_error_alert, 156). Read-only, service-role-gated. */}
-        <Section title="Client Errors">
           <AdminClientErrorsPanel />
         </Section>
 

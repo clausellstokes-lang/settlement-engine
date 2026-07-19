@@ -49,6 +49,10 @@ const SELF_AUTH_FALSE = new Set([
   // gallery data and takes no write path. The platform gate would 401 every social
   // preview. See supabase/functions/og-image/index.ts.
   'og-image',
+  // health — uptime liveness + optional deep DB probe (Wave E). The callers are
+  // uptime monitors / the ops probe with no JWT; it reads no user data and takes
+  // no write path. See supabase/functions/health/index.ts.
+  'health',
 ]);
 
 describe('every edge function pins verify_jwt explicitly in config.toml', () => {

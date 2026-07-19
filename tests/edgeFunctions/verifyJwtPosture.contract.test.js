@@ -50,6 +50,7 @@ const INTENDED_ANON = new Set([
   'send-email',            // anon cap_warning path behind a per-IP/recipient rate limit
   'auth-recovery',         // logged-out password recovery; the caller has no JWT
   'og-image',              // unfurl bots (no JWT) fetching public gallery OG cards
+  'health',                // uptime monitors / the ops probe (no JWT); reads no user data
 ]);
 // Everything else must be JWT-gated (platform default), notably:
 const INTENDED_JWT = [

@@ -12,7 +12,7 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase.js';
-import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, SP, FS, swatch } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD_HDR, sans, serif_, SP, FS, swatch } from '../theme.js';
 
 const COLUMNS = [
   { key: 'signature', label: 'Signature' },
@@ -62,26 +62,30 @@ export default function AdminClientErrorsPanel() {
 
   const over = alert?.over_threshold === true;
 
-  // P5 anti-box-soup: no outer frame/heading — this only renders inside
-  // AdminPanel's <Section> (which supplies the card + the "Client Errors" <h2>).
+  // Renders inside AdminPanel's "Analytics & errors" <Section> beneath the
+  // analytics dashboards, so it carries its own <h3> delimiter (a rule-topped
+  // heading, not a native title= tooltip) rather than a second Section frame.
   return (
     <section aria-label="Client error reports">
+      <h3 style={{ margin: `${SP.lg}px 0 ${SP.sm}px`, paddingTop: SP.md, borderTop: `1px solid ${BORDER}`, fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK }}>
+        Client errors
+      </h3>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'flex-end', flexWrap: 'wrap', gap: SP.sm }}>
         {refreshedAt && <span style={{ fontSize: FS.xs, color: MUTED }}>refreshed {new Date(refreshedAt).toLocaleString('en-US')}</span>}
       </div>
 
-      {/* Always-visible alert banner (the ops threshold signal). */}
+      {/* Always-visible alert banner (the ops threshold signal). Rule-framed
+          plate (left rule, no tint, no radius) per the deep-craft idiom — the
+          over-threshold state reads in the oxblood rule + ink, not a wash. */}
       {alert && (
         <div
           role={over ? 'alert' : undefined}
           style={{
             margin: `${SP.sm}px 0`,
-            padding: `${SP.sm}px ${SP.md}px`,
-            borderRadius: 6,
+            padding: `${SP.xs}px ${SP.md}px`,
             fontFamily: sans,
             fontSize: FS.sm,
-            border: `1px solid ${over ? swatch.danger : BORDER}`,
-            background: over ? swatch.dangerBg : CARD_HDR,
+            borderLeft: `3px solid ${over ? swatch.danger : BORDER}`,
             color: over ? swatch.danger : SECOND,
           }}
         >
