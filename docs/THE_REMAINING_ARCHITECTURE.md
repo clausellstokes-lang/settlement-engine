@@ -375,7 +375,10 @@ or move masters out of git (Desktop archive) keeping only optimized derivatives 
   + the read-side mirror factionKeyOf (townMap/ladderRead.js — the coup path would
   have desynced write/read keys); 3 sites fixed, classification consumers verified
   N/A via factionArchetype; real-shape pin 9/9 revert-proven; dormancy byte-identity
-  green. The traditions faction.power seam now waits only on the folds.
+  green. The traditions faction.power seam now waits only on the folds. ·
+  vendorManifestExactSet.test.js NON-ATOMIC MV of public/map/libs/flatqueue.js
+  (proven to strand a deleted file + .bak on mid-run crash; two lanes bitten
+  2026-07-19) — add try/finally restoration so a crashed run cannot damage the tree.
 - FIX WAVES: one commit per finding-cluster, full gate at each wave end, ledger rows.
 - EXIT: findings ledger complete; fixes folded; full suite green (four parked reds).
 

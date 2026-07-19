@@ -22,7 +22,7 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| D | src/components/PostGenCoach.jsx |  | SPEC READY (map S1) — ⚠ supersedes the guidance-layer retirement (vetoable collision, recorded) |
+| D | src/components/PostGenCoach.jsx |  | RESTORED @ 67586c86 (revived as HOST of the wizard-postgen whisper — registry component swap; WizardNextSteps deleted → LEGACY; one-whisper budget pin intact; the guidance-walker collision resolved exactly per the ledgered recipe) |
 
 ## C3/C4 (library rail) — 2 files
 
@@ -55,7 +55,7 @@ Per-file recipe: `git show d024286e:<path>` · `git diff 0168e287^2 0168e287 -- 
 
 | St | File | Δpost | Disposition |
 |---|---|---|---|
-| M | src/App.jsx | ● | SPEC READY (map S1/S4) |
+| M | src/App.jsx | ● | PARTIAL @ 67586c86 (PostGenCoach app-level lazy mount restored, master's placement) — C16 shell/nav treatment remains; ⚠ file sits EXACTLY at its 732 max-lines ceiling |
 
 ## assign at slice — 97 files
 

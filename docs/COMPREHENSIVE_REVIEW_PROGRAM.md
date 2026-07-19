@@ -1153,6 +1153,49 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C4 PANEL D LANDED (2026-07-19, deep-craft @ 67586c86) — THE DOSSIER BASE
+COMPLETE (all four panels).** PostGenCoach revived as HOST of the wizard-postgen
+whisper exactly per the ledgered recipe (registry component swap; WizardNextSteps
+deleted → LEGACY; the one-whisper-per-surface budget pin enforced unweakened).
+Repo contradiction resolved by trusting the repo: nextSteps.js is master's pure
+builder, byte-identical at the tip — KEPT (the brief's "remove nextSteps.js
+wiring" read wrong). Functionality census: 7 behaviors retained · "Generate
+another" DEFERRED-with-reason (master's coach never rendered the builder's
+detached footer — base-of-record) · a11y wrapper follows master (role=dialog).
+ONE pin retarget named: tierFacts.contract SURFACES → nextSteps.js (host file
+deleted; guard unweakened; Panel-A precedent). JUDGMENTs (vetoable): deep-craft
+materials over master's dark card (tolerance-0 kill-list bars the rgba raise) ·
+forward-moves only, no duplicate teaching · co-located lazy mount with App.jsx
+net-zero at its EXACT 732 max-lines ceiling · DECLARED behavior shift: the coach
+is app-level on any route while undismissed (master's placement) vs the old
+in-page create-only card. Gates: focused all green · verify:dist 150/150 · full
+suite 13,092 green / expected-5 + 13 pglite isolation-cleared load flakes.
+RESTORATION-LEDGER: PostGenCoach row → RESTORED @ 67586c86; App.jsx → PARTIAL
+(C16 shell/nav remains). ⚠ NEW HAZARDS (memory'd): App.jsx sits at its exact
+732 ceiling; a JSX {/* */} comment COUNTS as a code line under max-lines.
+**⬛⭐ THE ILLUSTRATED TOWN WAVE COMPLETE (2026-07-19, claude/illustrated-town @
+d16d348e).** IT-5 verified retroactively COMPLETE (the prior agent died
+pre-gates; every gate now executed green; the IT5-b re-mint proven
+DECLARED-ADDITIVE — only the illustrated per-lens row moved, +2,586 ops, all
+five base-lens hashes byte-identical). IT-6 THE FACE shipped as two TEST-ONLY
+commits: 9cb2ece2 census guard (done-when #9 as executed proof — every existing
+map affordance reachable in illustrated mode) · d16d348e free-face invariant pin
+(illustrated FREE locked cross-module; LENS_COUNT=5 untouched — altering the
+advertised paid count is an owner-gated paid-surface claim). §8 DONE-WHEN walked
+9/9 with executed evidence; full suite 13,193 green / EXACTLY the expected-5 +
+isolation-cleared contention flakes. Default lens NOT flipped (⛔owner taste
+call at the walk; the one-click picker is the decision surface). Deferrals
+stand: 08C conversion at the regen · curated-pack gate at the 2nd pack · the
+§10 register. Wave PARKED fold-ready; completion memory
+illustrated-town-it5-it6-shipped.md.
+**⚠ FLATQUEUE ROOT-CAUSED (2026-07-19) — the manager's earlier "git lstat
+artifact" diagnosis is RETRACTED.** tests/build/vendorManifestExactSet.test.js
+proves its walker by NON-ATOMICALLY mv-ing public/map/libs/flatqueue.js aside
+during suite runs; crashed/contended mid-mv it strands the file deleted with a
+.bak — currently TRUE in the traditions worktree (repair queued for after its
+running suite: restore from .bak). The IT worktree's transient D was the same
+mv window observed mid-flight. FILED to ROUND 3 pre-stock: make the test
+crash-safe (try/finally restoration).
 **⬛ OWNER RULING (2026-07-19) — THE MASTER FORK: "bg and journey" — BOTH.** The C2
 leg derivation encodes BOTH candidate masters for comparison at the taste walk:
 bg.mp4 (marketing/website/public/bg.mp4, 76.3 MB, 30.25s ⇒ 5.042s legs — the film
