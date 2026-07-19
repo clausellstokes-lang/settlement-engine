@@ -78,6 +78,33 @@ export function computeBulkDelete(saves, ids) {
   return { remaining, modifiedIds };
 }
 
+/**
+ * Pure computation behind the dossier-header inline settlement rename (C3 / C4
+ * Panel A handoff): given the open `detail` and a new name, return the detail with
+ * the settlement name patched on BOTH the live copy and the embedded saveData (the
+ * `name` column + `settlement.name`), so the open saved-dossier view reflects the
+ * rename immediately. The store's renameSettlement (the single town-rename writer)
+ * owns the persist + the savedSettlements update; this ONLY keeps the local detail
+ * copy in lockstep — renameSettlement mutates savedSettlements, not this component's
+ * detail state, and the header's EditableInline renders from its `value` prop after
+ * commit, so without this the name would revert until re-open. Null / empty-name
+ * tolerant: returns the detail unchanged (same reference) when there is nothing to do.
+ * @param {any} detail
+ * @param {string} newName
+ * @returns {any} the next detail (or the same reference when unchanged)
+ */
+export function renameDetailSettlement(detail, newName) {
+  const trimmed = String(newName || '').trim();
+  if (!detail || !trimmed) return detail;
+  return {
+    ...detail,
+    settlement: { ...(detail.settlement || {}), name: trimmed },
+    saveData: detail.saveData
+      ? { ...detail.saveData, name: trimmed, settlement: { ...(detail.saveData.settlement || {}), name: trimmed } }
+      : detail.saveData,
+  };
+}
+
 export function regionalCountsForSave(campaign, saveId) {
   const impacts = campaign?.regionalGraph?.queuedImpacts || [];
   const counts = { queued: 0, applied: 0, resolved: 0, ignored: 0, expired: 0 };

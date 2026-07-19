@@ -41,7 +41,7 @@ const SettlementDossierBackdrop = lazy(() => import('./SettlementDossierBackdrop
 export default function SettlementDossierHero({
   detail, detailView, setDetailView,
   editMode, canEdit, saveId, authTier, phase, narrated,
-  toggleEditMode, openExportSheet,
+  toggleEditMode, openExportSheet, onRenameSettlement,
 }) {
   // NextActionRail inputs — reuse existing selectors; no new store fields.
   const canonize = useStore(s => s.canonize);
@@ -82,7 +82,7 @@ export default function SettlementDossierHero({
         <Suspense fallback={<div style={{ padding: 20, textAlign: 'center', color: MUTED }}>Loading...</div>}>
           {detailView === 'map'
             ? <SettlementMapPane settlement={detail.settlement} canEdit={canEdit} saveId={saveId} />
-            : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} suppressNarrativeCta={!editMode} />}
+            : <OutputContainer settlement={detail.settlement} readOnly saveId={saveId} suppressNarrativeCta={!editMode} onRenameSettlement={onRenameSettlement} />}
         </Suspense>
       </DetailErrorBoundary>
     </div>

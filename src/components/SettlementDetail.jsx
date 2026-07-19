@@ -31,6 +31,7 @@ const SessionMode = lazy(() => import('./session/SessionMode.jsx'));
 // SettlementMapPane chunks (still absent from the entry static closure —
 // tests/build/townMapLazy.test.js, vendorPdfLazy.test.js).
 import SettlementDossierHero from './settlementDetail/SettlementDossierHero.jsx';
+import { renameDetailSettlement } from './settlements/helpers.js';
 import ChroniclePanel from './ChroniclePanel.jsx';
 // Campaign-state engine UI — phase, locks, system state, events,
 // timeline, coherence checks. Each is hidden when not relevant
@@ -221,6 +222,10 @@ export default function SettlementDetail({
   const toggleEditMode       = useStore(s => s.toggleEditMode);
   const isSettlementEdited   = useStore(s => s.isSettlementEdited);
   const countSettlementEdits = useStore(s => s.countSettlementEdits);
+  // The single town-rename writer (renameSettlementImpl): renames the SAVED
+  // settlement by id and persists it (name column + blob). Wired to the dossier
+  // header's inline rename for the saved-dossier editor (C3 / C4 Panel A handoff).
+  const renameSettlement     = useStore(s => s.renameSettlement);
   const authTier             = useStore(s => s.auth?.tier);
   const isElevated           = useStore(s => typeof s.isElevated === 'function' ? s.isElevated() : false);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
@@ -290,6 +295,23 @@ export default function SettlementDetail({
     if (!saveId) return;
     setConfirmRevertRaw(false);
     await revertCurrentToRaw(saveId);
+  };
+
+  // Settlement-name rename from the dossier header's inline edit (readOnly saved
+  // view). renameSettlement is the single writer — it updates savedSettlements +
+  // persists the name column and blob. We ALSO patch the local `detail` copy so
+  // the open view reflects the new name immediately: renameSettlement mutates the
+  // store's savedSettlements, not this component's detail state, and EditableInline
+  // renders from its `value` prop after commit — so without this the header (and
+  // the whole propSettlement-fed dossier body) would revert to the old name until
+  // the settlement is re-opened. Settlement-name renames are allowed even in canon
+  // (renameSettlementImpl records a RENAME_SETTLEMENT chronicle line), so — unlike
+  // npc/faction — this is NOT gated on isCanonLocked.
+  const handleRenameSettlement = (newName) => {
+    const trimmed = String(newName || '').trim();
+    if (!saveId || !trimmed) return;
+    renameSettlement(saveId, trimmed);
+    setDetail(d => renameDetailSettlement(d, trimmed));
   };
 
   // Wrapper: call parent applyRename then clear local edit state
@@ -751,6 +773,7 @@ export default function SettlementDetail({
         narrated={narrated}
         toggleEditMode={toggleEditMode}
         openExportSheet={() => { setPdfError(null); setExportSheetOpen(true); }}
+        onRenameSettlement={handleRenameSettlement}
       />
 
       <ConfirmDialog

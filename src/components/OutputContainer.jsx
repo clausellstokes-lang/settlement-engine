@@ -155,7 +155,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -715,6 +715,12 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             saveId={saveId}
             stressObj={stressObj}
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
+            // The owner's saved dossier (readOnly + saveId) opts into inline
+            // settlement rename; the public gallery view (readOnly, no saveId)
+            // never does. The callback threads from SettlementDetail, which owns
+            // the persist (renameSettlement) + the detail-view sync.
+            allowRename={readOnly && !!saveId && typeof onRenameSettlement === 'function'}
+            onRenameSettlement={onRenameSettlement}
           />
         )}
         {/* Lifecycle secondary bar — a thin parchment band under the identity
