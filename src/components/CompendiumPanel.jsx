@@ -4,13 +4,19 @@ import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, 
 // in via HowToUse) — no NEW lucide icon is introduced, so first paint is unmoved.
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe, List } from 'lucide-react';
 import Button from './primitives/Button.jsx';
+import Page from './primitives/Page.jsx';
+import PageHeader from './primitives/PageHeader.jsx';
+import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
+import useIsMobile from '../hooks/useIsMobile.js';
+import { navigate } from '../hooks/useRoute.js';
 import { useStore } from '../store/index.js';
 import CompendiumGlobalSearch from './compendium/CompendiumGlobalSearch.jsx';
 import { TiersTab, EconomyTab, PowerTab_, ArcaneTab, StressTab, NeighbourTab, InstitutionsTab } from './compendium/CatalogTabs.jsx';
 import { OperationsHub, SystemsHub } from './compendium/RegistryHubs.jsx';
 import { DeitiesHub, LensesHub, FacetsHub, CalamityHub } from './compendium/CatalogHubs.jsx';
 import { CompendiumOverview, AtoZIndex } from './compendium/CompendiumDashboard.jsx';
-import { CustomContentManager } from './compendium/CustomContent.jsx';
+import { CustomContentManager, ReadOnlyCustomContentList } from './compendium/CustomContent.jsx';
 
 // ── Built-in Catalog Tabs ───────────────────────────────────────────────────
 
@@ -151,6 +157,9 @@ export default function CompendiumPanel({ config, standalone=false }) {
   }, [activeTab]);
   const [search, setSearch] = useState('');
   const customContentCount = useStore(s => s.getCustomContentCount());
+  // ONE reactive mobile flag for every mobile branch below. Desktop reads this
+  // as false and every desktop branch renders exactly as before.
+  const isMobile = useIsMobile();
 
   // Tier 8.7 — swap document.title + meta description per tab. Only
   // applies in standalone mode (i.e. when the compendium is the page,
@@ -240,12 +249,13 @@ export default function CompendiumPanel({ config, standalone=false }) {
     ? { maxWidth: gridTab ? '100%' : PROSE_MAX, marginLeft: 'auto', marginRight: 'auto' }
     : { maxWidth: 760, marginLeft: 'auto', marginRight: 'auto' };
 
-  return (
+  const panel = (
     <div style={standalone
       ? { maxWidth: PAGE_MAX, margin:'0 auto', width:'100%', background:CARD, border:`1px solid ${BOR}`, overflow:'hidden' }
       : { overflow:'hidden' }}>
-      {/* Mode toggle */}
-      <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
+      {/* Mode toggle. On mobile the two-option pill can exceed 375px; the band
+          scrolls horizontally so the toggle stays whole instead of clipping. */}
+      <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4, ...(isMobile ? { overflowX:'auto', WebkitOverflowScrolling:'touch' } : {}) }}>
         <Button onClick={()=>setMode('catalog')} variant={mode==='catalog'?'gold':'ghost'} size="sm" icon={<Building2 size={13}/>} aria-pressed={mode==='catalog'} style={{ flex:1 }}>
           Built-in Catalog
         </Button>
@@ -259,24 +269,61 @@ export default function CompendiumPanel({ config, standalone=false }) {
         <>
           {/* P139 / CP-4 — global type-ahead search across every section. */}
           <CompendiumGlobalSearch onSelect={handleGlobalSelect} />
-          {/* Tab bar + search */}
+          {/* Tab bar + search. The tab strip is a WAI-ARIA tablist; the content
+              region below is its labelled tabpanel. On mobile the strip silently
+              clips off-screen, so we swap in MobileTabStrip (active-into-view,
+              edge fades, keyboard pattern). idPrefix="compendium" makes it stamp
+              the same compendium-tab-<id> / compendium-panel-<id> ids the panel
+              labels itself by, so the aria wiring carries over unchanged. */}
           <div style={{ background:PARCH, borderBottom:`1px solid ${BOR}` }}>
-            <div style={{ display:'flex', overflowX:'auto', gap:0 }}>
+            {isMobile ? (
+              <MobileTabStrip
+                tabs={TABS}
+                value={activeTab}
+                onChange={setActiveTab}
+                ariaLabel="Compendium sections"
+                idPrefix="compendium"
+              />
+            ) : (
+            <div role="tablist" aria-label="Compendium sections" style={{ display:'flex', overflowX:'auto', gap:0 }}>
               {TABS.map(({ id, label, Icon }) => (
-                <button key={id} type="button" aria-pressed={activeTab===id} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'8px 13px', background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
+                <button key={id} type="button" role="tab" id={`compendium-tab-${id}`} aria-selected={activeTab===id} aria-controls={`compendium-panel-${id}`} onClick={()=>setActiveTab(id)} style={{ display:'flex', alignItems:'center', gap:5, padding:'11px 13px', minHeight:44, background:activeTab===id?CARD:'transparent', border:'none', borderBottom:activeTab===id?`2px solid ${GOLD}`:'2px solid transparent', cursor:'pointer', color:activeTab===id?INK:MUT, fontFamily:sans, fontSize:FS.xs, fontWeight:activeTab===id?700:500, whiteSpace:'nowrap', flexShrink:0 }}>
                   <Icon size={12}/> {label}
                 </button>))}
             </div>
+            )}
             <div style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 14px', borderTop:`1px solid ${BOR}` }}>
               <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
               <input aria-label="Search catalog" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
               {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
             </div>
           </div>
-          <div style={{ padding:'14px', background:CARD, ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
+          <div role="tabpanel" id={`compendium-panel-${activeTab}`} aria-labelledby={`compendium-tab-${activeTab}`} style={{ padding:'14px', background:CARD, ...(standalone || isMobile ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <div style={contentColumn}>
               {renderTab()}
             </div>
+          </div>
+        </>
+      ) : isMobile ? (
+        <>
+          {/* MOBILE: the custom-content manager is desktop-grade authoring
+              (multi-bucket forms, dependency pickers, pack import/export). We
+              still let you SEARCH and READ existing items, then gate authoring
+              behind a calm "best on desktop" panel. */}
+          <div style={{ display:'flex', alignItems:'center', gap:8, padding:'8px 14px', background:PARCH, borderBottom:`1px solid ${BOR}`, minHeight:36 }}>
+            <Search size={12} style={{ color:MUT, flexShrink:0 }}/>
+            <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
+            {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
+          </div>
+          <div style={{ padding:'14px', background:CARD }}>
+            <DesktopOnlyGate
+              title="Author custom content on desktop"
+              message="Building institutions, deities, trade goods, and content packs takes the full authoring workspace, which has room to work on a larger screen. Your existing items are listed below to read, and you can open this on desktop to add or edit them."
+              cta={<Button variant="secondary" size="sm" onClick={() => navigate('generate')}>Test custom content in a generation</Button>}
+            />
+            {/* Read-only browse of any items already saved — the mobile read path.
+                Renders nothing when there are no items, so the gate stands alone. */}
+            <ReadOnlyCustomContentList search={search.toLowerCase()} />
           </div>
         </>
       ) : (
@@ -293,5 +340,21 @@ export default function CompendiumPanel({ config, standalone=false }) {
         </>
       )}
     </div>
+  );
+
+  if (!standalone) return panel;
+
+  // Standalone page identity: the canonical Page frame + PageHeader (eyebrow /
+  // serif title / italic subtitle), matching the Library/Gallery/Pricing
+  // pattern. Embedded panels keep their host heading and skip this.
+  return (
+    <Page>
+      <PageHeader
+        eyebrow="Rules and data reference"
+        title="Compendium"
+        subtitle="How the simulator builds and runs a settlement: the rules behind every dossier."
+      />
+      {panel}
+    </Page>
   );
 }

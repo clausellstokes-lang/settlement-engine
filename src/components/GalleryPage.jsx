@@ -6,6 +6,8 @@
  */
 
 import { useState } from 'react';
+import { Sparkles } from 'lucide-react';
+import { t as tr } from '../copy/index.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import GalleryCampaigns from './gallery/GalleryCampaigns.jsx';
 import GalleryDetail from './gallery/GalleryDetail.jsx';
@@ -14,33 +16,35 @@ import GalleryList from './gallery/GalleryList.jsx';
 import GalleryMaps from './gallery/GalleryMaps.jsx';
 import { useGalleryPageState } from '../hooks/useGalleryPageState.js';
 import Button from './primitives/Button.jsx';
-import { SP, PAGE_MAX } from './theme.js';
+import PageHeader from './primitives/PageHeader.jsx';
+import Page from './primitives/Page.jsx';
+import Segmented from './primitives/Segmented.jsx';
+import { SP } from './theme.js';
 
-function GalleryTabs({ tab, setTab }) {
-  // GALLERY-2 phase 2: campaign shares (share_kind 'map_with_campaign') get
-  // their own tab; the Maps tab narrows to blank maps (kind 'map').
-  const tabs = [
-    { id: 'settlements', label: 'Settlements' },
-    { id: 'maps', label: 'Maps' },
-    { id: 'campaigns', label: 'Campaigns' },
-  ];
+/**
+ * One shared page frame + identity header for every tab. The title/subtitle and
+ * the cross-sell "Forge your own" CTA give both the browse tabs and the maps/
+ * campaigns tabs a single width/identity frame (P12) and one page-level header
+ * (P6). The forge CTA is SECONDARY here: the gallery's primary job is browse/
+ * open a dossier, not divert to the generator (P8) — the generator owns the
+ * loud primary on its own surface.
+ */
+function GalleryHeader({ onNavigate }) {
   return (
-    <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.md}px ${SP.lg}px 0`, display: 'flex', gap: SP.xs }}>
-      {tabs.map(t => {
-        const active = tab === t.id;
-        return (
-          <Button
-            key={t.id}
-            variant={active ? 'gold' : 'ghost'}
-            size="md"
-            onClick={() => setTab(t.id)}
-            aria-pressed={active}
-          >
-            {t.label}
-          </Button>
-        );
-      })}
-    </div>
+    <PageHeader
+      eyebrow={tr('gallery.eyebrow')}
+      title={tr('gallery.pageTitle')}
+      subtitle={tr('gallery.pageSubtitle')}
+      actions={
+        <Button
+          variant="secondary"
+          icon={<Sparkles size={14} />}
+          onClick={() => onNavigate?.('generate')}
+        >
+          {tr('gallery.forgeYourOwn')}
+        </Button>
+      }
+    />
   );
 }
 
@@ -136,12 +140,27 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
   }
 
   return (
-    <>
-      <GalleryTabs tab={tab} setTab={setTab} />
-      {/* Resilience: the browsing list + the maps grid render server-projected
-          community payloads. A throw in either degrades to a recoverable
-          in-place fallback rather than a full-app white screen. resetKey is the
-          active tab so toggling tabs clears a stale error. */}
+    <Page>
+      <GalleryHeader onNavigate={onNavigate} />
+      {/* The tabs are a view switch (Settlements / Maps / Campaigns), not a
+          header action, so they sit below the page header. Segmented reads the
+          selected state in two channels (fill + weight) per a11y (P7). */}
+      <div style={{ marginBottom: SP.lg }}>
+        <Segmented
+          options={[
+            { id: 'settlements', label: 'Settlements' },
+            { id: 'maps', label: 'Maps' },
+            { id: 'campaigns', label: 'Campaigns' },
+          ]}
+          value={tab}
+          onChange={setTab}
+          ariaLabel="Gallery view"
+        />
+      </div>
+      {/* Resilience: the browsing list + the maps/campaigns grids render
+          server-projected community payloads. A throw in any degrades to a
+          recoverable in-place fallback rather than a full-app white screen.
+          resetKey is the active tab so toggling tabs clears a stale error. */}
       <FeatureErrorBoundary
         label="GalleryPage.list"
         kind="react.render.gallery"
@@ -149,13 +168,9 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
         resetKeys={[tab]}
       >
         {tab === 'maps' ? (
-          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
-            <GalleryMaps onNavigate={onNavigate} />
-          </div>
+          <GalleryMaps onNavigate={onNavigate} />
         ) : tab === 'campaigns' ? (
-          <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: SP.lg }}>
-            <GalleryCampaigns onNavigate={onNavigate} />
-          </div>
+          <GalleryCampaigns onNavigate={onNavigate} />
         ) : (
           <GalleryList
             items={items}
@@ -182,6 +197,6 @@ export default function GalleryPage({ onNavigate, routeSlug = null, routeHub = n
           />
         )}
       </FeatureErrorBoundary>
-    </>
+    </Page>
   );
 }

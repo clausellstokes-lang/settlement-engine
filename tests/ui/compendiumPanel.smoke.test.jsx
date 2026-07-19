@@ -87,4 +87,28 @@ describe('CompendiumPanel — decomposition smoke', () => {
       screen.getByText(/rendered by the deterministic engine from its own registries/),
     ).toBeTruthy();
   });
+
+  // RESTORATION #9 — the standalone-page identity (Page frame + PageHeader) and
+  // the WAI-ARIA tab wiring (role=tablist/tab/tabpanel with matching id linkage)
+  // were dropped at the composite; this pins that they are wired back.
+  test('standalone carries the PageHeader identity and ARIA tab wiring', async () => {
+    const CompendiumPanel = (await import('../../src/components/CompendiumPanel.jsx')).default;
+    render(<CompendiumPanel standalone />);
+
+    // PageHeader identity: the serif page title, not just a document.title swap.
+    expect(screen.getByRole('heading', { level: 1, name: 'Compendium' })).toBeTruthy();
+
+    // The tab strip is a labelled tablist; every tab declares role=tab; the
+    // content region is a tabpanel whose id matches the selected tab's
+    // aria-controls (the linkage AT relies on).
+    const tablist = screen.getByRole('tablist', { name: 'Compendium sections' });
+    expect(tablist).toBeTruthy();
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs.length).toBeGreaterThan(0);
+    const panel = screen.getByRole('tabpanel');
+    const selected = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+    expect(selected).toBeTruthy();
+    expect(selected.getAttribute('aria-controls')).toBe(panel.getAttribute('id'));
+    expect(panel.getAttribute('aria-labelledby')).toBe(selected.getAttribute('id'));
+  });
 });

@@ -6,12 +6,13 @@ import {ChevronDown, ChevronRight, Edit3, Check, X, Map as MapIcon, FileText, Fo
 // users only need this code when they click "Export Campaign PDF".
 const generateCampaignPDF = (...args) =>
   import('../../utils/generateCampaignPDF.js').then(m => m.generateCampaignPDF(...args));
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, RED, RED_BG, sans, serif_, FS, PROSE_MAX, swatch } from '../theme.js';
 import { isCampaignActive } from '../../lib/campaigns.js';
 import { useStore } from '../../store/index.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
+import useIsMobile from '../../hooks/useIsMobile.js';
 import RegionalGraphSummary from '../region/RegionalGraphSummary.jsx';
 import { SettlementCard } from './SettlementCard.jsx';
 import RealmStrip from './RealmStrip.jsx';
@@ -25,6 +26,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
     const match = (settlements || []).find(sv => String(sv?.id) === String(id));
     return match?.name || match?.settlement?.name || String(id);
   };
+  const isMobile = useIsMobile();
   // Disable Advance while a tick is already running for THIS campaign — the store
   // also no-ops a re-entrant advance, but greying the button stops the double-click
   // from queuing a second intent + gives the DM visible feedback the tick is busy.
@@ -86,8 +88,11 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
   // poke outside the rounded outer border.
   return (
     <div style={{ background:'rgba(255,251,245,0.96)', border:`1px solid ${BORDER}`, borderRadius:8 }}>
-      {/* Campaign header */}
-      <div style={{ display:'flex', alignItems:'center', gap:8, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
+      {/* Campaign header. On mobile the row wraps (flexWrap) so the campaign name
+          isn't crushed by the trailing controls (Advance Time / PDF / Rename /
+          Delete): the name claims a full-width line and the control cluster
+          reflows below it. Desktop keeps the single non-wrapping row. */}
+      <div style={{ display:'flex', alignItems:'center', gap:8, flexWrap: isMobile ? 'wrap' : undefined, padding:'10px 12px', background:swatch['#F5EDE0'], borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`, borderTopLeftRadius:8, borderTopRightRadius:8, borderBottomLeftRadius: collapsed ? 8 : 0, borderBottomRightRadius: collapsed ? 8 : 0 }}>
         <IconButton Icon={collapsed ? ChevronRight : ChevronDown} label={collapsed ? 'Expand campaign' : 'Collapse campaign'} onClick={() => toggleCollapsed(campaign.id)} tone="ghost" size="md"/>
         <FolderOpen size={14} color={GOLD}/>
         {editing ? (
@@ -100,7 +105,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
             <IconButton Icon={X} label="Cancel rename" onClick={() => setEditing(false)} tone="danger" size="sm"/>
           </div>
         ) : (
-          <span style={{ flex:1, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
+          <span style={{ flex:1, minWidth: isMobile ? '60%' : undefined, fontSize:FS.md, fontWeight:700, color:INK, fontFamily:serif_ }}>{campaign.name}</span>
         )}
         <span style={{ fontSize:FS.xxs, color:MUTED, fontFamily:sans }}>{settlements.length} settlement{settlements.length !== 1 ? 's' : ''}</span>
         {campaign.mapState && <MapIcon size={11} color={GOLD} title="Map saved"/>}
@@ -164,6 +169,12 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
         </div>
       )}
 
+      {/* State-of-the-realm strip — self-hides when the world is dormant (not
+          canonized), so it's byte-identical for a non-simulated campaign. It
+          renders BEFORE the delete-confirm block so the realm summary stays
+          anchored under the header and a confirm dialog slides in below it. */}
+      {!collapsed && <RealmStrip campaign={campaign} settlements={settlements} />}
+
       {/* Campaign delete confirmation */}
       {confirmDelete && (
         <DeleteConfirmation
@@ -173,10 +184,6 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
           onCancel={() => setConfirmDelete(false)}
         />
       )}
-
-      {/* State-of-the-realm strip — self-hides when the world is dormant (not
-          canonized), so it's byte-identical for a non-simulated campaign. */}
-      {!collapsed && <RealmStrip campaign={campaign} settlements={settlements} />}
 
       {!collapsed && (
         <RegionalGraphSummary
@@ -196,7 +203,10 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
       {/* Nested settlements — the campaign's own ledger table. Its rows share the
           same ledger idiom as the unassigned pile; the folder header already
           states the campaign, so the table carries a hidden caption rather than
-          repeating the column heads. */}
+          repeating the column heads. The scroll wrapper is capped at PROSE_MAX
+          (the UnassignedLedger idiom) so the member NAME always shows in full
+          on a wide viewport (R3-h's restored member-name cap carried into the
+          C3 ledger structure). */}
       {!collapsed && (
         <div style={{ padding:'6px 8px 8px' }}>
           {settlements.length === 0 ? (
@@ -204,7 +214,7 @@ export function CampaignFolder({ campaign, settlements, allModifiers, onViewSett
               No settlements in this campaign yet. Use the arrow button to move settlements here.
             </div>
           ) : (
-          <div style={{ overflowX:'auto' }}>
+          <div style={{ overflowX:'auto', maxWidth:PROSE_MAX }}>
             <table style={{ width:'100%', borderCollapse:'collapse' }}>
               <caption style={{ position:'absolute', width:1, height:1, padding:0, margin:-1, overflow:'hidden', clip:'rect(0 0 0 0)', whiteSpace:'nowrap', border:0 }}>Settlements in {campaign.name}</caption>
               <tbody>

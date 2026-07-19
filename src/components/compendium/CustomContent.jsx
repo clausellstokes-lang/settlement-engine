@@ -1,21 +1,32 @@
 import { useState } from 'react';
-import { GOLD, INK, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, swatch } from '../theme.js';
-import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
-import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, TRADE_CATEGORIES, satisfiesOptions,
+import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, SP, swatch } from '../theme.js';
+import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Copy, Wand2, X, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
+import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, satisfiesOptions,
   DEITY_ALIGNMENT, DEITY_LAW, DEITY_TIER, DEITY_PORTFOLIO_MAX_LENGTH } from '../../domain/customContentSchema.js';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import { td } from '../../copy/deityAuthoring.js';
 import DeityEffectPreview from './DeityEffectPreview.jsx';
 import PantheonActivationStrip from './PantheonActivationStrip.jsx';
+import FactionEventBanner from './FactionEventBanner.jsx';
 import ContentPackBar from './ContentPackBar.jsx';
 import SupplyChainsManager from './SupplyChainsManager.jsx';
 import CategorySelect from '../primitives/CategorySelect.jsx';
+import { AUTHORING_LANES } from './customCategories.js';
 import { useStore } from '../../store/index.js';
+import { navigate } from '../../hooks/useRoute.js';
+import { buildRegistry } from '../../lib/customRegistry.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { Tag } from './primitives.jsx';
 import { DependencySummary, DependenciesSection } from './Dependencies.jsx';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
+// CustomItemAttributes + CustomContentUpsell live in leaf modules so this
+// manager stays under the component-size ratchet; re-exported for existing
+// import sites.
+export { CustomItemAttributes } from './CustomItemAttributes.jsx';
+import { CustomItemAttributes } from './CustomItemAttributes.jsx';
+export { CustomContentUpsell } from './CustomContentGate.jsx';
+import { CustomContentUpsell } from './CustomContentGate.jsx';
 
 // ── Custom Content Manager ──────────────────────────────────────────────────
 
@@ -147,98 +158,6 @@ const FIELD_LABELS = {
   domain:        td('form.domainLabel'),
 };
 
-// §14 — resolve a stored enum key to its human label for the detail view.
-const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
-// Compact capitalize for a stored enum key (deity axis chips).
-const cap = (s) => (s ? String(s).charAt(0).toUpperCase() + String(s).slice(1) : s);
-
-/**
- * CustomItemAttributes — the post-creation "detail sheet" for a saved custom
- * item, mirroring how the prebuilt catalog surfaces an object's properties.
- * Renders only the attributes the author actually set, as labelled chips, so a
- * saved item reads like a real compendium entry rather than just a name + blurb.
- */
-export function CustomItemAttributes({ item }) {
-  const chips = [];
-  if (item.essential === true) chips.push({ label: 'Essential', color: '#1a4a20' });
-  if (item.magical === true) chips.push({ label: 'Magical', color: swatch.magic });
-  if (item.criminal === true) chips.push({ label: 'Criminal', color: '#8b1a1a' });
-  if (item.authority) chips.push({ label: `Authority · ${keyLabel(POWER_AUTHORITIES, item.authority)}`, color: '#1a3a7a' });
-  if (item.defenseRole) chips.push({ label: `Defense · ${keyLabel(DEFENSE_ROLES, item.defenseRole)}`, color: '#8b1a1a' });
-  if (item.criticality) chips.push({ label: keyLabel(CRITICALITY, item.criticality), color: '#a0762a' });
-  if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
-  if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
-  if (item.satisfies) chips.push({ label: `Trade category · ${keyLabel(TRADE_CATEGORIES, item.satisfies) || item.satisfies}`, color: '#7c3aed' });
-  if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
-  if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
-  if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
-  // Deity axes — moral / order / rank / domain (never the derived temper). Use
-  // the compact capitalized key, not the verbose enum label.
-  if (item.alignmentAxis) chips.push({ label: `Moral · ${cap(item.alignmentAxis)}`, color: '#7c3aed' });
-  if (item.lawAxis && item.lawAxis !== 'neutral') chips.push({ label: `Order · ${cap(item.lawAxis)}`, color: '#7c3aed' });
-  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#435463' });
-  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5010' });
-  if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
-  if (!chips.length) return null;
-  return (
-    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 6 }}>
-      {chips.map((c, i) => <Tag key={i} label={c.label} color={c.color} />)}
-    </div>
-  );
-}
-
-// ── Premium upsell card (shown to free / anon users in the Custom tab) ─────
-export function CustomContentUpsell({ existingCount, isAnon }) {
-  const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
-  return (
-    <div style={{
-      padding: '24px 20px', textAlign: 'center',
-      background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(160,118,42,0.06) 100%)',
-      border: '1px solid rgba(124,58,237,0.25)', borderRadius: 10,
-    }}>
-      <div style={{
-        display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        width: 56, height: 56, borderRadius: '50%',
-        background: 'rgba(124,58,237,0.12)', marginBottom: 12,
-      }}>
-        <Sparkles size={26} color="#7c3aed" />
-      </div>
-      <div style={{
-        fontSize: FS['18'], fontWeight: 700, fontFamily: serif_, color: INK, marginBottom: 4,
-      }}>
-        Custom Compendium &mdash; Premium
-      </div>
-      <div style={{
-        fontSize: FS.md, color: SEC, lineHeight: 1.55, marginBottom: 16,
-        maxWidth: 460, margin: '0 auto 16px',
-      }}>
-        Build your own institutions, resources, stressors, trade goods, power presets, and defense
-        scenarios. Custom content is synced to your account and available across devices.
-      </div>
-
-      {existingCount > 0 && (
-        <div style={{
-          padding: '10px 14px', background: 'rgba(160,118,42,0.10)',
-          border: `1px solid ${GOLD}55`, borderRadius: 7,
-          fontSize: FS.sm, color: GOLD, fontWeight: 600, marginBottom: 16,
-          maxWidth: 460, margin: '0 auto 16px',
-        }}>
-          You have <strong>{existingCount}</strong> grandfathered custom item{existingCount === 1 ? '' : 's'}.
-          They&rsquo;re still browseable below in read-only mode.
-        </div>
-      )}
-
-      {isAnon ? (
-        <div style={{ fontSize: FS.sm, color: MUT }}>Sign in and upgrade to Premium to unlock.</div>
-      ) : (
-        <Button variant="ai" size="lg" onClick={() => setPurchaseModalOpen(true)}>
-          Upgrade to Premium
-        </Button>
-      )}
-    </div>
-  );
-}
-
 // ── Read-only viewer for grandfathered local items (free tier) ─────────────
 export function ReadOnlyCustomContentList({ search }) {
   const customContent = useStore(s => s.customContent);
@@ -264,8 +183,8 @@ export function ReadOnlyCustomContentList({ search }) {
           const count = (customContent[c.key] || []).length;
           if (count === 0) return null;
           return (
-            <button key={c.key} type="button" onClick={() => setActiveCat(c.key)} style={{
-              display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px',
+            <button key={c.key} type="button" aria-pressed={activeCat === c.key} onClick={() => setActiveCat(c.key)} style={{
+              display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px', minHeight: 44,
               borderRadius: 12, fontSize: FS.xs,
               fontWeight: activeCat === c.key ? 700 : 500, cursor: 'pointer',
               border: `1px solid ${activeCat === c.key ? c.color : BOR}`,
@@ -312,6 +231,29 @@ export function ReadOnlyCustomContentList({ search }) {
   );
 }
 
+// Clone a prebuilt registry seed into an editable draft — the registry entry's
+// stable display fields mapped onto the form's draft shape (a "start from a
+// built-in" starting point the author then edits + saves as their own item).
+function seedDraftFromPrebuilt(entry) {
+  if (!entry) return {};
+  const draft = {
+    name: entry.name ? `${entry.name} (copy)` : '',
+    description: entry.desc || '',
+  };
+  if (entry.subcategory && entry.subcategory !== 'custom') draft.category = entry.subcategory;
+  if (Array.isArray(entry.tags) && entry.tags.length) draft.tags = entry.tags.join(', ');
+  if (entry.tierMin) draft.tierMin = entry.tierMin;
+  return draft;
+}
+
+// Resolve a bucket key → its CUSTOM_CATEGORIES definition (the W-C4 inline defs
+// above, so tab colours/icons/labels stay the authored set). The two authoring
+// lanes reference bucket KEYS; the defs come from here.
+const CATEGORY_BY_KEY = Object.fromEntries(CUSTOM_CATEGORIES.map((c) => [c.key, c]));
+
+// Buckets with a prebuilt catalog to clone from ("start from a built-in").
+const SEEDABLE = new Set(['institutions', 'services', 'resources', 'stressors', 'tradeGoods']);
+
 export function CustomContentManager({ search }) {
   const customContent = useStore(s => s.customContent);
   const addCustomItem = useStore(s => s.addCustomItem);
@@ -319,14 +261,24 @@ export function CustomContentManager({ search }) {
   const deleteCustomItem = useStore(s => s.deleteCustomItem);
   const canUseCustomContent = useStore(s => s.canUseCustomContent());
   const authTier = useStore(s => s.auth.tier);
-  const _customContentLoading = useStore(s => s.customContentLoading);
-  const _customContentError = useStore(s => s.customContentError);
+  const customContentLoading = useStore(s => s.customContentLoading);
+  const customContentError = useStore(s => s.customContentError);
+  const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
 
   const [activeCat, setActiveCat] = useState('institutions');
   const [addingNew, setAddingNew] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [draft, setDraft] = useState({});
+  // "Start from a built-in" seed picker: surface prebuilt seeds to clone.
+  const [showSeeds, setShowSeeds] = useState(false);
+  // Progressive disclosure: essentials lead; the long schema tail collapses
+  // behind an "Advanced attributes" toggle (deities show all axes flat — they
+  // ARE the essentials; see renderForm).
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  // Name of the item just saved (new, not edited) — drives the P9 peak/end
+  // affordance so the authoring loop closes on a runnable next step ("test it").
+  const [justSaved, setJustSaved] = useState(null);
 
   const catDef = CUSTOM_CATEGORIES.find(c => c.key === activeCat);
   const items = customContent[activeCat] || [];
@@ -350,7 +302,7 @@ export function CustomContentManager({ search }) {
     );
   }
 
-  const resetDraft = () => { setDraft({}); setAddingNew(false); setEditingId(null); };
+  const resetDraft = () => { setDraft({}); setAddingNew(false); setEditingId(null); setShowSeeds(false); setJustSaved(null); };
 
   const handleSave = () => {
     if (!draft.name?.trim()) return;
@@ -368,15 +320,31 @@ export function CustomContentManager({ search }) {
     } else {
       addCustomItem(activeCat, toSave);
       setAddingNew(false);
+      // New item saved — close the loop on a runnable next step (P9).
+      setJustSaved(draft.name.trim());
     }
     setDraft({});
+    setShowSeeds(false);
   };
 
   const handleEdit = (item) => {
     setEditingId(item.id);
     setDraft({ ...item });
     setAddingNew(false);
+    setShowSeeds(false);
   };
+
+  // "Start from a built-in" — clone a prebuilt registry seed into an editable
+  // draft (the author then tweaks + saves it as their own custom item).
+  const cloneFromSeed = (entry) => {
+    setDraft(seedDraftFromPrebuilt(entry));
+    setAddingNew(true);
+    setEditingId(null);
+    setShowSeeds(false);
+  };
+  const seedEntries = (showSeeds && SEEDABLE.has(activeCat))
+    ? buildRegistry(customContent).listPrebuilt(activeCat === 'services' ? 'services' : activeCat).slice(0, 60)
+    : [];
 
   // Multi-select "pill" picker for controlled-vocabulary list fields (tags,
   // commodities, stressor channels) — selectable, not free text. Stores the
@@ -476,7 +444,27 @@ export function CustomContentManager({ search }) {
   };
 
   const singular = catDef.singular || catDef.label.slice(0,-1);
-  const renderForm = () => (
+  // One labelled form field (label nests the control + its hint). Base's field
+  // styling (MUT label, FIELD_LABELS override, micro hint) — colours unchanged.
+  const renderFormField = (f) => (
+    <div key={f}>
+      {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the renderField control + has matching htmlFor, but the static nesting check can't see through renderField(). label-has-associated-control passes. */}
+      <label htmlFor={`ccm-field-${f}`} style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+        {FIELD_LABELS[f] || f.replace(/([A-Z])/g,' $1')}
+        {renderField(f)}
+      </label>
+      {FIELD_HINTS[f] && <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:2, lineHeight:1.4 }}>{FIELD_HINTS[f]}</div>}
+    </div>
+  );
+  const renderForm = () => {
+    // Essentials lead at full prominence; the rest of the bucket's schema is the
+    // demoted "Advanced attributes" tail (progressive disclosure). Deities are
+    // exempt — their axes ARE the essentials, so they render flat (W-C4).
+    const disclosure = activeCat !== 'deities';
+    const ESSENTIAL_FIELDS = ['name', 'category', 'description'];
+    const essentials = disclosure ? catDef.fields.filter(f => ESSENTIAL_FIELDS.includes(f)) : catDef.fields;
+    const advanced = disclosure ? catDef.fields.filter(f => !ESSENTIAL_FIELDS.includes(f)) : [];
+    return (
     <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
       <div style={{ fontSize:FS.xs, fontWeight:700, color:swatch.magic, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
         {editingId ? 'Edit Item' : 'New Custom ' + singular}
@@ -485,17 +473,20 @@ export function CustomContentManager({ search }) {
         <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5, marginBottom:8 }}>{td('form.intro')}</div>
       )}
       <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-        {catDef.fields.map(f => (
-          <div key={f}>
-            {/* eslint-disable-next-line jsx-a11y/label-has-for -- deprecated rule; label nests the renderField control + has matching htmlFor, but the static nesting check can't see through renderField(). label-has-associated-control passes. */}
-            <label htmlFor={`ccm-field-${f}`} style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em' }}>
-              {FIELD_LABELS[f] || f.replace(/([A-Z])/g,' $1')}
-              {renderField(f)}
-            </label>
-            {FIELD_HINTS[f] && <div style={{ fontSize:FS.micro, color:MUT, fontStyle:'italic', marginTop:2, lineHeight:1.4 }}>{FIELD_HINTS[f]}</div>}
-          </div>
-        ))}
+        {essentials.map(renderFormField)}
       </div>
+      {advanced.length > 0 && (
+        <div style={{ marginTop:10 }}>
+          <Button variant="ghost" size="sm" aria-expanded={showAdvanced} onClick={() => setShowAdvanced(s => !s)}>
+            {showAdvanced ? '▾' : '▸'} Advanced attributes ({advanced.length})
+          </Button>
+          {showAdvanced && (
+            <div style={{ display:'flex', flexDirection:'column', gap:6, marginTop:8 }}>
+              {advanced.map(renderFormField)}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Deities — the derived-temper note + the live single-source effect preview. */}
       {activeCat === 'deities' && (
@@ -519,48 +510,153 @@ export function CustomContentManager({ search }) {
         <Button variant="secondary" size="sm" onClick={resetDraft}>Cancel</Button>
       </div>
     </div>
-  );
+    );
+  };
 
   return (
     <div>
       {/* Content packs — export/import authored content as a portable JSON pack
           (premium; file-based, no backend). */}
       <ContentPackBar />
-      {/* Category tabs */}
-      <div style={{ display:'flex', gap:4, flexWrap:'wrap', marginBottom:12 }}>
-        {CUSTOM_CATEGORIES.map(c => {
-          const count = (customContent[c.key]||[]).length;
-          return (
-            <button key={c.key} type="button" onClick={() => { setActiveCat(c.key); resetDraft(); }}
-              style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
-              <c.Icon size={11}/> {c.label}
-              {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
-            </button>
-          );
-        })}
-      </div>
+      {/* Sync status — visible whenever a cloud sync is in flight, regardless of
+          which bucket is active. Without it, switching to a cached bucket during
+          a background sync showed no status, so a later sync error popped with no
+          preceding process to end (P10). */}
+      {customContentLoading && !customContentError && (
+        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, padding:'6px 12px', marginBottom:10, fontSize:FS.xs, color:BODY, fontStyle:'italic' }}>
+          Syncing your custom content…
+        </div>
+      )}
 
-      {/* Deities — the OUR-milestones activation/dormancy strip (name-free). */}
+      {/* Sync failure — a paid synced-write surface must not fail silently.
+          Surface the error in plain language with a one-click retry. */}
+      {customContentError && (
+        <div role="alert" style={{ display:'flex', alignItems:'center', gap:8, flexWrap:'wrap', padding:'8px 12px', marginBottom:10, background:`${swatch.danger}10`, borderLeft:`3px solid ${swatch.danger}` }}>
+          <span style={{ flex:1, minWidth:180, fontSize:FS.sm, color:BODY, lineHeight:1.45 }}>
+            Your custom content could not sync: {customContentError}
+          </span>
+          <Button variant="secondary" size="sm" onClick={() => loadCustomContentFromCloud()}>Retry sync</Button>
+        </div>
+      )}
+
+      {/* Two authoring lanes: STATIC settlement content vs the LIVING-WORLD
+          content that powers the simulation, so the conceptual split reads from
+          the layout (wider gap between lanes than within one). */}
+      {AUTHORING_LANES.map((lane, li) => (
+        <div key={lane.key} data-testid={`authoring-lane-${lane.key}`} style={{ marginBottom: li < AUTHORING_LANES.length - 1 ? SP.xl : SP.md }}>
+          <div style={{ fontSize:FS.xs, fontWeight:800, color: lane.key === 'living' ? swatch['#7A5A1A'] : INK, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:2 }}>
+            {lane.label}
+          </div>
+          <div style={{ fontSize:FS.xs, color:BODY, lineHeight:1.4, marginBottom:6 }}>{lane.blurb}</div>
+          <div style={{ display:'flex', gap:4, flexWrap:'wrap' }}>
+            {lane.buckets.map(key => {
+              const c = CATEGORY_BY_KEY[key];
+              if (!c) return null;
+              const count = (customContent[c.key]||[]).length;
+              return (
+                <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
+                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+                  <c.Icon size={11}/> {c.label}
+                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      {/* Deities — the activation/dormancy strip (name-free). */}
       {activeCat === 'deities' && <PantheonActivationStrip />}
+
+      {/* Factions arrive via an in-world event, not generation. */}
+      {activeCat === 'factions' && <FactionEventBanner />}
 
       {/* Supply Chains: discovered + verified, not hand-authored — its own manager. */}
       {activeCat === 'supplyChains' && <SupplyChainsManager />}
 
-      {/* Add button */}
+      {/* Add / Start-from-a-built-in / Test-in-a-generation affordances. */}
       {activeCat !== 'supplyChains' && !addingNew && !editingId && (
-        <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); }} style={{ marginBottom:10 }}>
-          Add Custom {singular}
-        </Button>
+        <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', marginBottom:10 }}>
+          <Button variant="ai" size="sm" icon={<Plus size={12}/>} onClick={() => { setAddingNew(true); setDraft({}); setShowSeeds(false); setJustSaved(null); }}>
+            Add Custom {singular}
+          </Button>
+          {SEEDABLE.has(activeCat) && (
+            <Button variant="secondary" size="sm" icon={<Copy size={12}/>} onClick={() => setShowSeeds(s => !s)} aria-pressed={showSeeds}>
+              Start from a built-in
+            </Button>
+          )}
+          {/* The forward exit from authoring, set apart as a distinct next step. */}
+          <Button variant="secondary" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')} title="Run a generation that draws on your custom content." style={{ marginLeft:'auto' }}>
+            Test in a generation
+          </Button>
+        </div>
+      )}
+
+      {/* Built-in seed picker (clone a catalog entry into an editable draft). */}
+      {!addingNew && !editingId && showSeeds && seedEntries.length > 0 && (
+        <div data-testid="builtin-seed-picker" style={{ borderLeft:`3px solid ${swatch.magic}`, padding:'8px 10px', marginBottom:10, background:CARD, maxHeight:200, overflowY:'auto' }}>
+          <div style={{ fontSize:FS.xxs, fontWeight:700, color:MUT, textTransform:'uppercase', letterSpacing:'0.04em', marginBottom:6 }}>
+            Clone a built-in {catDef.label.toLowerCase().replace(/s$/,'')} as a starting point
+          </div>
+          <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
+            {seedEntries.map(entry => (
+              <Button key={entry.refId} variant="ghost" size="sm" onClick={() => cloneFromSeed(entry)}
+                style={{ display:'flex', alignItems:'center', gap:6, justifyContent:'flex-start', textAlign:'left', border:`1px solid ${BOR}`, padding:'5px 8px', background:'transparent', color:INK }}>
+                <span style={{ fontSize:FS.xs, fontWeight:600, flex:1 }}>{entry.name}</span>
+                {entry.subcategory && <Tag label={entry.subcategory} color={catDef.color}/>}
+              </Button>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Add/edit form */}
       {activeCat !== 'supplyChains' && (addingNew || editingId) && renderForm()}
 
-      {/* Items list */}
-      {activeCat !== 'supplyChains' && (filtered.length === 0 ? (
-        <div style={{ padding:'20px 16px', textAlign:'center', fontSize:FS.sm, color:MUT }}>
-          No custom {catDef.label.toLowerCase()} yet. Click "Add" to create one.
+      {/* Peak/end (P9): the authoring loop just closed on a save — offer the one
+          forward action (run a generation that uses it) instead of snapping
+          silently back to the list. Dismissible; hidden while authoring. */}
+      {justSaved && !addingNew && !editingId && (
+        <div role="status" style={{ display:'flex', alignItems:'center', gap:8, flexWrap:'wrap', padding:'8px 12px', marginBottom:10, background:`${swatch.magic}0d`, borderLeft:`3px solid ${swatch.magic}` }}>
+          <span style={{ flex:1, minWidth:160, fontSize:FS.sm, color:BODY, lineHeight:1.45 }}>
+            <strong>{justSaved}</strong> saved. See it shape a world.
+          </span>
+          <Button variant="ai" size="sm" icon={<Wand2 size={12}/>} onClick={() => navigate('generate')}>
+            Test in a generation
+          </Button>
+          <IconButton Icon={X} glyph="×" label="Dismiss" tone="ghost" size="sm" onClick={() => setJustSaved(null)} />
         </div>
+      )}
+
+      {/* Items list */}
+      {activeCat !== 'supplyChains' && (
+        customContentLoading && items.length === 0 ? (
+        <div data-testid="custom-content-loading" style={{ display:'flex', flexDirection:'column', gap:6 }}>
+          {[0,1,2].map(i => (
+            <div key={i} style={{ height:44, background:`${swatch.magic}0d`, border:`1px solid ${BOR}` }}/>
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
+        // Honest empty states: distinguish "filtered to nothing" from "truly none
+        // yet", and offer a one-click out of each.
+        search && items.length > 0 ? (
+          <div style={{ padding:'20px 16px', textAlign:'center' }}>
+            <div style={{ fontSize:FS.sm, color:MUT, marginBottom:10 }}>
+              No custom {catDef.label.toLowerCase()} match &ldquo;{search}&rdquo;.
+            </div>
+          </div>
+        ) : (
+          <div style={{ padding:'20px 16px', textAlign:'center' }}>
+            <div style={{ fontSize:FS.sm, color:MUT, marginBottom: SEEDABLE.has(activeCat) ? 10 : 0 }}>
+              No custom {catDef.label.toLowerCase()} yet. Use the Add button above to create one.
+            </div>
+            {SEEDABLE.has(activeCat) && (
+              <Button variant="secondary" size="sm" icon={<Copy size={12}/>} onClick={() => setShowSeeds(true)}>
+                Start from a built-in {singular.toLowerCase()}
+              </Button>
+            )}
+          </div>
+        )
       ) : (
         <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
           {filtered.map(item => (
