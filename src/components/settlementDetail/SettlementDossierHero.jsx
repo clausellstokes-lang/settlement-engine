@@ -22,6 +22,7 @@ import { lazy, Suspense, useState } from 'react';
 import Segmented from '../primitives/Segmented.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import DetailErrorBoundary from './DetailErrorBoundary.jsx';
+import FeatureErrorBoundary from '../FeatureErrorBoundary.jsx';
 import NextActionRail from '../settlement/NextActionRail.jsx';
 import { useNextActionRailHandlers } from './useNextActionRailHandlers.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -33,6 +34,9 @@ import { MUTED, PAGE_MAX, CHROME } from '../theme';
 // (tests/build/townMapLazy.test.js, vendorPdfLazy.test.js).
 const OutputContainer = lazy(() => import('../OutputContainer'));
 const SettlementMapPane = lazy(() => import('../townMap/SettlementMapPane.jsx'));
+// THE LIVING BACKDROP wash (LB-b) — lazy exactly like the pane so the town-map
+// model's fork-key fingerprint stays off first paint (tests/build/townMapLazy).
+const SettlementDossierBackdrop = lazy(() => import('./SettlementDossierBackdrop.jsx'));
 
 export default function SettlementDossierHero({
   detail, detailView, setDetailView,
@@ -92,13 +96,23 @@ export default function SettlementDossierHero({
           {body}
         </div>
       ) : (
-        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'flex-start', marginBottom: 24 }}>
-          <div style={{ flex: '1 1 520px', minWidth: 0 }}>
+        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'flex-start', marginBottom: 24, position: 'relative' }}>
+          {/* THE LIVING BACKDROP — the last-viewed map as a faint ink wash behind
+              the dossier plates + rail (zIndex 0). Isolated: a load/render failure
+              renders nothing, never the core view. */}
+          {saveId && (
+            <FeatureErrorBoundary label="settlement-backdrop" fallback={() => null}>
+              <Suspense fallback={null}>
+                <SettlementDossierBackdrop settlement={detail.settlement} saveId={saveId} />
+              </Suspense>
+            </FeatureErrorBoundary>
+          )}
+          <div style={{ flex: '1 1 520px', minWidth: 0, position: 'relative', zIndex: 1 }}>
             {toggle}
             {body}
           </div>
           {saveId && (
-            <aside style={{ flex: '0 1 248px', minWidth: 0, position: 'sticky', top: isMobile ? CHROME.headerMobile + CHROME.stickyTop : CHROME.stickyTop, alignSelf: 'flex-start' }}>
+            <aside style={{ flex: '0 1 248px', minWidth: 0, position: 'sticky', top: isMobile ? CHROME.headerMobile + CHROME.stickyTop : CHROME.stickyTop, alignSelf: 'flex-start', zIndex: 1 }}>
               <NextActionRail
                 settlement={detail.settlement}
                 save={detail.saveData || detail}
