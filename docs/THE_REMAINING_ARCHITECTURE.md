@@ -192,6 +192,10 @@ entitlement ladder (owner re-ratified same day).
   panel-by-panel with a commit each.
 
 ### Slice C5 — THE REALM: the surveyor's table + H2 THE FIRST ADVANCE
+- ADDED (S2r deferral ruling, 2026-07-18): MOUNT InstantWorldEntry in the Realm
+  empty state (its natural host — it composes a realm). The component is currently
+  UNREACHABLE (create-page card removed by owner walk fix); the retention law
+  requires this re-home; same props/handlers, subordinate premium placement.
 - Chrome only; the map canvas is already in-fiction. Top surveyor's rail (lens strip,
   advance = the winding key, the page's one gold); layers → clipped field card;
   inspector → field note (cartouche-lite + mini-register); pulse → almanac strip.
