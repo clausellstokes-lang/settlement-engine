@@ -155,7 +155,12 @@ values ('founder_transfer_cron', jsonb_build_object(
 insert into public.system_config (key, value)
 values ('founder_buyback', jsonb_build_object(
   'enabled', false,
-  'note', 'Founder standing-buyback master switch. enabled=false until the owner lights it (dark by default; the account affordance renders the coming-soon line while off).'
+  -- FP-3 (§6.8 family 10): the buyback PAYOUT-release hold, in days. The buyback may be
+  -- initiated any time (owner stewardship ruling), but the $25 payout parks until the
+  -- ORIGINAL $99's chargeback window (~120 days) has closed — read at claim time by
+  -- claim_due_buyback_payout via _buyback_payout_hold_days(). Owner-tunable.
+  'payout_hold_days', 120,
+  'note', 'Founder standing-buyback master switch + payout-hold dial. enabled=false until the owner lights it (dark by default). payout_hold_days holds the $25 payout until the original $99 dispute window closes (FP-3).'
 )) on conflict (key) do nothing;
 
 -- THE SEAT-BUYBACK PRICE DIAL (owner ruling 2026-07-19): ONE shared cents figure read at

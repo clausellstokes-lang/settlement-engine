@@ -152,6 +152,60 @@ describe('the buyback challenge (caseless 6.2 idiom) + payout claim', () => {
   });
 });
 
+// ── FP-3 (fraud-fix, §6.8 family 10): THE BUYBACK PAYOUT DISPUTE-SAFETY HOLD ──
+// The standing buyback may be INITIATED at any time (owner stewardship ruling), but its
+// $25 payout must NOT release while the ORIGINAL $99 is still chargeback-eligible (~120
+// days). Otherwise buy $99 → buyback $25 → chargeback $99 nets +$25 with no timing
+// barrier (the transfer path is protected by LAW 8's 12-month hold; the buyback has no
+// eligibility gate, so the PAYOUT carries the hold instead). The hold window is the
+// buyback_payout_hold_days dial (default 120), read at claim time.
+describe('FP-3 (§6.8 family 10) — the buyback payout parks until the original $99 dispute window closes', () => {
+  it('a seat bought TODAY can be bought back today, but its payout HOLDS on the next sweep (not due)', async () => {
+    // FROM bought seat 1 TODAY: the original $99 is fully chargeback-eligible.
+    await svc(`update public.founder_seats set holder_user_id='${FROM}', security_status='normal', original_purchase_at=now(), held_since=now(), transfer_eligible_at=now()+interval '12 months', acquired_via='purchase' where seat_id=1`);
+    // A TRANSFER of this fresh seat is correctly refused (LAW 8 hold) …
+    const openTry = (await svc1(`select public.transfer_case_open(1::smallint, '${FROM}'::uuid, 'nom@example.com', 'connect_cash') as r`)).r;
+    expect(openTry.ok).toBe(false);
+    expect(openTry.reason).toBe('not_yet_eligible');
+    // … but the BUYBACK INITIATION succeeds any time (the owner's stewardship ruling).
+    const bb = (await svc1(`select public.claim_founder_seat_buyback('${FROM}'::uuid, 'connect_cash') as r`)).r;
+    expect(bb.ok).toBe(true);
+    expect(bb.amount_cents).toBe(2500);
+    // The seat has ALREADY returned to the pool (the release is immediate) …
+    expect((await svc1(`select holder_user_id from public.founder_seats where seat_id=1`)).holder_user_id).toBe(null);
+    // … yet the $25 payout is HELD — the sweep finds nothing due while the $99 can be disputed.
+    const claim = (await svc1(`select public.claim_due_buyback_payout() as r`)).r;
+    expect(claim.ok).toBe(false);
+    expect(claim.reason).toBe('none_due');
+    // The buyback row is parked at pending_payout (not lost — it releases once the window elapses).
+    expect((await svc1(`select state from public.founder_seat_buybacks where id='${bb.buyback_id}'`)).state).toBe('pending_payout');
+  });
+
+  it('an AGED seat (original purchase past the hold window) pays out normally', async () => {
+    // beforeEach set seat 1 to original_purchase_at = now()-400d (well past 120d).
+    const bb = (await svc1(`select public.claim_founder_seat_buyback('${FROM}'::uuid, 'connect_cash') as r`)).r;
+    expect(bb.ok).toBe(true);
+    const claim = (await svc1(`select public.claim_due_buyback_payout() as r`)).r;
+    expect(claim.ok).toBe(true);
+    expect(claim.buyback_id).toBe(bb.buyback_id);
+  });
+
+  it('the buyback_payout_hold_days dial tunes the window (owner-tunable, read at claim time)', async () => {
+    await svc(`update public.founder_seats set holder_user_id='${FROM}', security_status='normal', original_purchase_at=now(), held_since=now() where seat_id=1`);
+    // Default 120d → a fresh seat holds.
+    const bbHeld = (await svc1(`select public.claim_founder_seat_buyback('${FROM}'::uuid, 'connect_cash') as r`)).r;
+    expect(bbHeld.ok).toBe(true);
+    expect((await svc1(`select public.claim_due_buyback_payout() as r`)).r.ok).toBe(false);
+    // Dial the hold to 0 → the parked payout is now due on the next sweep.
+    await svc(`update public.system_config set value = value || jsonb_build_object('payout_hold_days', 0) where key='founder_buyback'`);
+    const claim = (await svc1(`select public.claim_due_buyback_payout() as r`)).r;
+    expect(claim.ok).toBe(true);
+    expect(claim.buyback_id).toBe(bbHeld.buyback_id);
+    // Restore the dial (beforeEach does not reset the founder_buyback row).
+    await svc(`update public.system_config set value = value || jsonb_build_object('payout_hold_days', 120) where key='founder_buyback'`);
+  });
+});
+
 describe('the dormancy nudge sweep (§6.8)', () => {
   it('nudges a dormant holder once, respects the re-nudge window, and never nudges on absent data', async () => {
     // FROM signed in 20 months ago (dormant > 18mo).

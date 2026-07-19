@@ -28,6 +28,7 @@
 -- @rollback: drop function if exists public.sweep_seat_abandonment();
 --   drop function if exists public.sweep_seat_dormancy_nudges();
 --   drop function if exists public.claim_due_buyback_payout();
+--   drop function if exists public._buyback_payout_hold_days();
 --   drop function if exists public.claim_founder_seat_buyback(uuid, text);
 --   drop function if exists public.verify_buyback_challenge(uuid, text);
 --   drop function if exists public.issue_buyback_challenge(uuid);
@@ -128,7 +129,7 @@ language plpgsql
 security definer
 set search_path = public, pg_temp
 as $$
-declare caller_role text; v_seat smallint; v_from_name text; v_amount int; v_form text; v_bid uuid;
+declare caller_role text; v_seat smallint; v_from_name text; v_amount int; v_form text; v_bid uuid; v_orig timestamptz;
 begin
   caller_role := coalesce(current_setting('request.jwt.claim.role', true), auth.role());
   if caller_role <> 'service_role' then
@@ -142,11 +143,14 @@ begin
     return jsonb_build_object('ok', false, 'reason', 'live_case');
   end if;
 
-  -- The caller must hold a seat whose security posture is 'normal'.
+  -- The caller must hold a seat whose security posture is 'normal'. Snapshot the seat's
+  -- ORIGINAL purchase timestamp NOW (FP-3): the release below nulls it on the seat, but
+  -- the payout hold needs it to gate on the original $99's chargeback window.
   select seat_id,
          case when display_name_status = 'approved'
-              then nullif(btrim(coalesce(display_name_optin, '')), '') end
-    into v_seat, v_from_name
+              then nullif(btrim(coalesce(display_name_optin, '')), '') end,
+         original_purchase_at
+    into v_seat, v_from_name, v_orig
     from public.founder_seats
    where holder_user_id = p_user and security_status = 'normal';
   if v_seat is null then return jsonb_build_object('ok', false, 'reason', 'no_seat'); end if;
@@ -167,8 +171,8 @@ begin
   insert into public.founder_seat_transfers (seat_id, from_holder, to_holder, from_display_name, note)
     values (v_seat, p_user, null, v_from_name, 'buyback');
   update public.profiles set is_founder = false, updated_at = now() where id = p_user;
-  insert into public.founder_seat_buybacks (seat_id, user_id, amount_cents, payout_form, state)
-    values (v_seat, p_user, v_amount, v_form, 'pending_payout')
+  insert into public.founder_seat_buybacks (seat_id, user_id, amount_cents, payout_form, state, original_purchase_at)
+    values (v_seat, p_user, v_amount, v_form, 'pending_payout', v_orig)
     returning id into v_bid;
 
   return jsonb_build_object('ok', true, 'buyback_id', v_bid, 'seat_id', v_seat,
@@ -178,29 +182,64 @@ $$;
 revoke all on function public.claim_founder_seat_buyback(uuid, text) from public;
 grant execute on function public.claim_founder_seat_buyback(uuid, text) to service_role;
 
+-- ── 2b. _buyback_payout_hold_days — the FP-3 payout-hold dial reader ──────────────
+-- ⚠⚠ JUDGMENT (FP-3, vetoable — OWNER CONFIRMS BEFORE founder_buyback GOES LIVE) ⚠⚠
+--   The owner's stewardship ruling is that the standing buyback may be INITIATED at any
+--   time (no 12-month eligibility gate, unlike a transfer — LAW 8). But a seat bought
+--   TODAY has an original $99 that is still fully chargeback-eligible (~120 days). With
+--   no hold, buy $99 → buyback $25 → chargeback $99 nets the attacker +$25 with no timing
+--   barrier. The transfer path is protected by LAW 8 (a seat is transfer-eligible only 12
+--   months after purchase, by which time the $99 dispute window has closed); the buyback
+--   has no such gate, so the HOLD MOVES TO THE PAYOUT: the seat still releases to the pool
+--   immediately on buyback, but the $25 payout parks at 'pending_payout' until
+--   original_purchase_at + buyback_payout_hold_days has elapsed. This reconciles "any
+--   time" (initiation is unchanged) with the anti-arbitrage requirement (the money waits).
+--   Default 120 days mirrors LAW 8's chargeback-window logic; owner-tunable via the dial.
+create or replace function public._buyback_payout_hold_days()
+returns int
+language sql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+  select coalesce(
+    (select (value->>'payout_hold_days')::int from public.system_config where key = 'founder_buyback'),
+    120);
+$$;
+revoke all on function public._buyback_payout_hold_days() from public;
+grant execute on function public._buyback_payout_hold_days() to service_role;
+
 -- ── 3. claim_due_buyback_payout — the atomic release claim (§6.8) ────────────────
--- Mirror of claim_due_transfer_payout for buybacks (no payout floor — the 12-month hold
--- means the original $99 dispute window has closed, LAW 8). Claims ONE pending_payout
--- (or stale-releasing) buyback to 'releasing'; the due-runner then performs the payout
--- (performPayout, idempotencyKey buyback-<id>) and maps the outcome to state.
+-- Mirror of claim_due_transfer_payout for buybacks. THE PAYOUT HOLD (FP-3): unlike a
+-- transfer (LAW 8 guarantees the original $99's dispute window closed before it can
+-- begin), a buyback can be initiated on a fresh seat — so the payout claim SKIPS any
+-- buyback whose original_purchase_at + buyback_payout_hold_days has not yet elapsed (a
+-- NULL original_purchase_at — a granted/estate seat with no $99 — has no dispute risk and
+-- releases immediately). Claims ONE due pending_payout (or stale-releasing) buyback to
+-- 'releasing'; the due-runner then performs the payout (performPayout, idempotencyKey
+-- buyback-<id>) and maps the outcome to state.
 create or replace function public.claim_due_buyback_payout()
 returns jsonb
 language plpgsql
 security definer
 set search_path = public, pg_temp
 as $$
-declare caller_role text; v_bb public.founder_seat_buybacks%rowtype;
+declare caller_role text; v_bb public.founder_seat_buybacks%rowtype; v_hold_days int;
 begin
   caller_role := coalesce(current_setting('request.jwt.claim.role', true), auth.role());
   if caller_role <> 'service_role' then
     raise exception 'claim_due_buyback_payout is service-role only (got: %)', caller_role;
   end if;
+  v_hold_days := public._buyback_payout_hold_days();
   update public.founder_seat_buybacks
     set state = 'releasing', updated_at = now()
     where id = (
       select id from public.founder_seat_buybacks
-      where state = 'pending_payout'
-         or (state = 'releasing' and updated_at < now() - interval '10 minutes')
+      where (state = 'pending_payout'
+         or (state = 'releasing' and updated_at < now() - interval '10 minutes'))
+        -- FP-3: hold the payout until the original $99 dispute window has closed.
+        and (original_purchase_at is null
+             or original_purchase_at + make_interval(days => v_hold_days) <= now())
       order by created_at
       limit 1
       for update skip locked

@@ -182,6 +182,12 @@ create table if not exists public.founder_seat_buybacks (
   amount_cents      int not null,
   payout_form       text not null default 'connect_cash'
                       check (payout_form in ('connect_cash','account_credits')),
+  -- FP-3 (§6.8 family 10): the seat's ORIGINAL purchase timestamp, snapshotted at claim
+  -- (the seat row's own original_purchase_at is nulled on release). claim_due_buyback_payout
+  -- holds the $25 payout until original_purchase_at + buyback_payout_hold_days has elapsed —
+  -- the standing buyback has no LAW-8 eligibility gate, so the payout carries the
+  -- chargeback-window hold instead. NULL (granted/estate seat, no $99) ⇒ no hold.
+  original_purchase_at timestamptz,
   connect_account_id text,
   stripe_transfer_id text unique,
   created_at        timestamptz not null default now(),
