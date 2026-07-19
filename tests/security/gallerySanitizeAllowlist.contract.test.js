@@ -53,6 +53,13 @@ function parseSqlAllowlist(sql) {
   return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
 }
 
+/** Parse the `npc_allowed constant text[] := array[ '…','…' ];` NPC-field allowlist. */
+function parseSqlNpcAllowlist(sql) {
+  const m = sql.match(/npc_allowed\s+constant\s+text\[\]\s*:=\s*array\[([\s\S]*?)\]/i);
+  if (!m) throw new Error('could not find npc_allowed allowlist in migration 123');
+  return [...m[1].matchAll(/'([^']+)'/g)].map(x => x[1]);
+}
+
 const migExists = existsSync(MIGRATION);
 
 describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)', () => {
@@ -81,6 +88,16 @@ describe.runIf(migExists)('public sanitizer allowlist — drift pin (SQL ⇄ JS)
     ]) {
       expect(set.has(forbidden)).toBe(false);
     }
+  });
+
+  // THE ROADS §15 binding 1: npc.whereabouts (the live-movement display mirror) is DM-SECRET
+  // BY CONSTRUCTION — never added to the NPC allowlist on EITHER side, so every shared/
+  // gallery/anonymous payload drops it by fail-closed omission.
+  it('the SQL npc_allowed field allowlist does NOT carry whereabouts (roads §15 binding 1)', () => {
+    const npcKeys = new Set(parseSqlNpcAllowlist(sql));
+    expect(npcKeys.has('whereabouts'), 'npc.whereabouts must never be a public NPC field').toBe(false);
+    // sanity: the allowlist is the real (non-empty) NPC field gate.
+    expect(npcKeys.has('name')).toBe(true);
   });
 
   it('the SQL denylist folds in seed/_config so nested config._seed cannot leak (099)', () => {
@@ -181,6 +198,30 @@ describe('public sanitizer allowlist — round trip against a REAL settlement', 
     for (const k of ['tabNotes', 'narrativeNotes', 'dmCompass', 'identityMarkers', 'frictionPoints', 'connectionsMap']) {
       expect(out[k], `"${k}" must be stripped`).toBeUndefined();
     }
+  });
+
+  // THE ROADS §15 binding 1 (JS twin): an NPC's live whereabouts mirror is dropped by the
+  // fail-closed NPC allowlist (publicNpc copies only the 11 public fields) — the roads
+  // secret-by-construction guarantee on the public projection.
+  it('drops npc.whereabouts from the public projection (roads §15 binding 1)', () => {
+    const npcs = Array.isArray(settlement.npcs) ? settlement.npcs : [];
+    const hydrated = {
+      ...settlement,
+      npcs: [
+        { id: 'trav', name: 'The Envoy', role: 'envoy', category: 'government',
+          whereabouts: { state: 'hostage', placeId: 'dulwich', missionId: 'road.x', sinceTick: 5, expectedReturnTick: null } },
+        ...npcs,
+      ],
+    };
+    const out = toPublicSafe(hydrated);
+    expect(Array.isArray(out.npcs), 'npcs survive as a public subtree').toBe(true);
+    for (const n of out.npcs) {
+      expect(n.whereabouts, 'no NPC may carry whereabouts on the public projection').toBeUndefined();
+    }
+    // …while the ordinary public NPC fields still come through.
+    const envoy = out.npcs.find((n) => n.id === 'trav');
+    expect(envoy).toBeDefined();
+    expect(envoy.name).toBe('The Envoy');
   });
 
   // Deeper-level defense-in-depth: an allowed top-level subtree still gets its

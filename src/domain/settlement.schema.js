@@ -276,6 +276,7 @@ export const FIELD_ALIASES = Object.freeze({
  *   structuralRank?: (string | number),
  *   secret?: any,
  *   goal?: any,
+ *   whereabouts?: any,
  *   personality?: any,
  *   physical?: any,
  *   presentation?: any,
