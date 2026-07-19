@@ -41,6 +41,13 @@ export const createUiSlice = (set, get) => ({
   // Transient (out of the persist partialize) so a reload lands unfocused.
   focusedEntity: null,
 
+  // Whether the sign-in modal is open. Lifted onto the store (was App-local
+  // useState) so an app-wide nudge — the signup/unlock PricingMomentCard fired
+  // at an anonymous user — can route to sign-in instead of the buy-credits wall.
+  // Transient: deliberately excluded from the persist partialize (a reload lands
+  // with no modal open), the same class as purchaseModalOpen.
+  authModalOpen: false,
+
   // ── Actions ──────────────────────────────────────────────────────────────
 
   /** Set (or clear, with null) the dossier retro-claim confirmation toast. */
@@ -62,6 +69,10 @@ export const createUiSlice = (set, get) => ({
   /** Clear the focused entity (e.g. on dossier teardown). */
   clearFocusedEntity: () =>
     set(state => { state.focusedEntity = null; }),
+
+  /** Open or close the sign-in modal (transient; not persisted). */
+  setAuthModalOpen: (open) =>
+    set(state => { state.authModalOpen = !!open; }),
 
   /** Set a transient UI preference by key. */
   setUserPref: (key, value) =>
