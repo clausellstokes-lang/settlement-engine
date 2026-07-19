@@ -3,7 +3,7 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import {Ti, sans, Section, Empty, TabIntro} from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
-import { VIABILITY_EXCLUDED_TYPES, VIABILITY_EXCLUDED_SEV } from '../../../domain/display/viabilityFilter.js';
+import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 
@@ -39,22 +39,16 @@ export function ViabilityTab({settlement:s, narrativeNote}) {
   const criticalIssues = [...(v.issues||[]).filter(i => i.severity==='critical' && i.type !== 'stress_consequence')].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
   // Strip dependency/resource chain issues — those are in Economics & Resources tabs
   // Viability only shows logic violations, structural conflicts, and by-design
-  // contradictions. Exclusion lists shared with the PDF viabilitySlice (pdf-6).
-  const filteredWarnings = (v.warnings||[]).filter(w =>
-    !VIABILITY_EXCLUDED_TYPES.includes(w.type) &&
-    !VIABILITY_EXCLUDED_SEV.includes(w.severity) &&
-    w.category !== 'Resource Access' &&
-    w.category !== 'Resource Chain' &&
-    w.category !== 'Economic Opportunity' &&
-    w.category !== 'Water Dependency'
-  );
+  // contradictions. Route through the ONE shared adjudicator (isViabilityItem)
+  // so the web tab and the PDF viabilitySlice cannot drift (pdf-6): it applies
+  // the type + severity + category exclusion lists in one place.
+  const filteredWarnings = (v.warnings||[]).filter(isViabilityItem);
   // Suggestions (opportunities) excluded from Viability tab — see Economics tab
 
   const otherIssues    = [...(v.issues||[]).filter(i =>
     i.severity!=='critical' && i.severity!=='by_design' &&
     i.type !== 'stress_consequence' &&
-    !VIABILITY_EXCLUDED_TYPES.includes(i.type) &&
-    !VIABILITY_EXCLUDED_SEV.includes(i.severity)
+    isViabilityItem(i)
   )].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
 
   // Clean plot hook text (strip embedded " PLOT HOOK: " prefix)
