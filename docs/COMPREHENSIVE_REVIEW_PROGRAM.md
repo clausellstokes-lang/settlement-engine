@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE ROADS WAVE IS COMPLETE — R-1..R-8 (2026-07-19, claude/the-roads @ 21bba9a1,
+25 commits atop aad6265e — manager-verified lineage).** R-8 THE EMBASSY landed all four
+charges: PEACE EMBASSY (purpose 5 — a court at open war sues the enemy, bypassing the §4
+damper; road-parley + court-suit venues; insult/humility amplifier ∈[−1,+1] → RECEIVED /
+HOSTAGE / TURNED-HOME, never worse) · THIRD-PARTY RULE + INTERCEPTION RACE (a rumour-informed
+third power at war with the target becomes a hunter with a T1 hunt-amplifier — the rider
+races the news; NO new carrier, reads one rumour key) · AMNESTY (peace frees ALL mutual
+hostages both sides, pinned bidirectional) · ESCORT REFINEMENT (escort01 freezes
+militaryQuality01 × settlementWeight01 at dispatch) + PURPOSES 6 (dominion inspection) & 7
+(rumour verification — the RETURN writes the home rumour ledger, LAW 6 write g). WAR-SEAM
+WIRED (not deferred): a heard suit deposits to roadsEmbassies; settlementStrategy's
+sue_for_peace consumes it via a gated multiplier ×1-when-absent ⇒ byte-identical, war
+goldens never move. Receipts: build ✓ · eager delta 0 (embassy all engine/lazy) · dormancy
+golden all three green · §17 write-list clean (roads + roadsReturnedCaptives + roadsEmbassies
++ rumorLedgers only) · suite = 4 parked goldens (confirmed at base) + flakes + the census
+fix (21bba9a1). DECLARED one-time lit shift (R8-b): escorts scale DOWN for a weak seat →
+marginally more captures; dark byte-identical. ⚠ FOLD-COORDINATION: the settlementStrategy.js
+edit lives in a WAR-system file — the fold/master-merge reconciles it with any parallel war
+work. THE ROADS ARE WHOLE: travel · four threat classes · capture/ransom/conversion · party
+ops · overlay · road scene · embassies. Task #35 CLOSED. Roads is FOLD-READY (fold batch 3).
+Deep Couplings D-5/D-6 (third-party ransom, sea roads) now UNBLOCK at the roads fold.
 **⬛ HELD COMMIT RELEASED (2026-07-19): DESIGN_DEEP_COUPLINGS.md committed (1,155 lines).**
 The architect folded the relationship-memory cohesion in as §10.5 D-7 THE MEMORY WEAVE
 (read-the-substrate + wire-the-ghost-events + contested-loss-writes-a-mark, pre-fold;
