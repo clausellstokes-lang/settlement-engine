@@ -120,12 +120,12 @@ export default function PantheonPanel({ campaign }) {
   return (
     <section style={{
       flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column',
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: 8, overflow: 'hidden',
+      background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden',
     }}>
       {/* P11: bespoke 34px-chip + h2 + meta header, token-matched to WorldPulsePanel
           so Pantheon and Pulse read identically (the same reconciliation made there). */}
       <header style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '13px 16px', borderBottom: `1px solid ${BORDER}`, background: CARD_ALT }}>
-        <div style={{ width: 34, height: 34, borderRadius: 8, border: `1px solid ${BORDER2}`, background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <div style={{ width: 34, height: 34, border: `1px solid ${BORDER2}`, background: CARD, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Sparkles size={18} color={GOLD} />
         </div>
         <div style={{ minWidth: 0 }}>
@@ -139,7 +139,7 @@ export default function PantheonPanel({ campaign }) {
 
       <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: 16, display: 'flex', flexDirection: 'column', gap: 16 }}>
         {!hasPantheon(campaign) ? (
-          <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+          <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: BODY, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
             No pantheon yet. Assign a patron deity to a settlement to awaken the realm&apos;s faith.
           </div>
         ) : (
@@ -148,7 +148,7 @@ export default function PantheonPanel({ campaign }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
                 <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Realm Arcs</div>
                 {arcs.map((line, i) => (
-                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: 6, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+                  <div key={i} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, background: CARD_ALT, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
                     {line}
                   </div>
                 ))}
@@ -182,7 +182,7 @@ export default function PantheonPanel({ campaign }) {
                   const aStrength = Math.round(deityTierStrength(tierById.get(String(c.aId))) * 100);
                   const bStrength = Math.round(deityTierStrength(tierById.get(String(c.bId))) * 100);
                   return (
-                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, borderRadius: 6, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
+                    <div key={`${c.contestedId}-${c.aId}-${c.bId}`} style={{ padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${TIER_COLOR.minor}`, background: CARD, color: INK, fontFamily: sans, fontSize: FS.xs, lineHeight: 1.4 }}>
                       <strong>{deityName(settlementItems, c.aId)}</strong> ({c.aSeats} seat{c.aSeats === 1 ? '' : 's'}, {aStrength}% strength)
                       {' vs '}
                       <strong>{deityName(settlementItems, c.bId)}</strong> ({c.bSeats} seat{c.bSeats === 1 ? '' : 's'}, {bStrength}% strength)
@@ -212,7 +212,7 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
   const strength = deityTierStrength(deity.tier);
   const statusWord = deityStatusWord(deity);
   return (
-    <div style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${tierColor}`, borderRadius: 6, background: CARD }}>
+    <div style={{ border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${tierColor}`, background: CARD }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px' }}>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800 }}>{name}</div>
@@ -229,9 +229,9 @@ function DeityRow({ deity, tierColor, name, snapshot }) {
             role="img"
             aria-label={`Faith strength ${Math.round(strength * 100)} percent (${statusWord})`}
             title={`Base faith strength: ${Math.round(strength * 100)}%`}
-            style={{ marginTop: 5, height: 4, borderRadius: 2, background: BORDER2, overflow: 'hidden' }}
+            style={{ marginTop: 5, height: 4, background: BORDER2, overflow: 'hidden' }}
           >
-            <div style={{ width: `${Math.round(strength * 100)}%`, height: '100%', background: tierColor, borderRadius: 2 }} />
+            <div style={{ width: `${Math.round(strength * 100)}%`, height: '100%', background: tierColor }} />
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2, flexShrink: 0 }}>

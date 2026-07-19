@@ -18,7 +18,7 @@ import { FolderOpen, PlusCircle, LayoutDashboard, X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
 import { t } from '../../copy/index.js';
 import { isGuidanceDismissed, markGuidanceDismissed } from '../../lib/guidance.js';
-import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, R, sans } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, BORDER, FS, SP, sans } from '../theme.js';
 
 // content-immersion-r2-3: the registered realm_empty_invitation whisper — its body
 // (guidance.invitations.realm) was dead copy that rendered NOWHERE. On the true
@@ -37,7 +37,7 @@ export default function CampaignEmptyState({ lead, onCreateCampaign, onSelectCam
   return (
     <div style={{
       display: 'grid', gap: SP.sm, justifyItems: 'start',
-      padding: SP.md, borderRadius: R.md, background: GOLD_BG,
+      padding: SP.md, background: GOLD_BG,
     }}>
       <FolderOpen size={18} color={GOLD} />
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800, lineHeight: 1.4 }}>

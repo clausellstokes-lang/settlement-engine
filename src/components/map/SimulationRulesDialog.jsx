@@ -3,15 +3,11 @@ import { Eye, Settings2, X } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import {
-  SIMULATION_RULE_PRESETS,
-  normalizeSimulationRules,
-  worldProgressionOf,
-} from '../../domain/worldPulse/simulationRules.js';
+  SIMULATION_RULE_PRESETS, normalizeSimulationRules, worldProgressionOf, } from '../../domain/worldPulse/simulationRules.js';
 import { validateSimulationProfile } from '../../domain/worldPulse/simulationProfile.js';
 import { DomainRows, EngineWaves, WorldLawAxes } from './SimulationRulesAxes.jsx';
 import {
-  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, R, RED, SP, sans,
-} from '../theme.js';
+  BODY, BORDER, BORDER2, CARD, CARD_ALT, ELEV, FS, GOLD, GOLD_BG, INK, MUTED, RED, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
@@ -115,7 +111,6 @@ function Select({ id, value, options, onChange, disabled = false }) {
         minHeight: 36,
         padding: `${SP.xs}px ${SP.sm}px`,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.md,
         background: CARD,
         color: INK,
         fontFamily: sans,
@@ -140,7 +135,6 @@ function Toggle({ checked, label, onChange, disabled = false }) {
       minHeight: 32,
       padding: '6px 8px',
       border: `1px solid ${BORDER2}`,
-      borderRadius: R.md,
       background: checked ? GOLD_BG : CARD,
       color: INK,
       fontFamily: sans,
@@ -170,7 +164,6 @@ function Metric({ label, value }) {
       minWidth: 0,
       padding: SP.sm,
       border: `1px solid ${BORDER2}`,
-      borderRadius: R.md,
       background: CARD,
     }}>
       <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, fontWeight: 850, textTransform: 'uppercase' }}>
@@ -339,7 +332,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           maxHeight: 'min(92vh, 800px)',
           overflow: 'auto',
           border: `1px solid ${BORDER}`,
-          borderRadius: R.lg,
           background: CARD_ALT,
           boxShadow: ELEV[3],
         }}
@@ -355,7 +347,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: R.lg,
             border: `1px solid ${BORDER}`,
             background: CARD_ALT,
             display: 'flex',
@@ -399,7 +390,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           {advanceBlocked && (
             <div
               data-testid="rules-advance-blocked" role="status" aria-live="polite"
-              style={{ border: `1px solid ${GOLD}`, borderRadius: R.md, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
+              style={{ border: `1px solid ${GOLD}`, padding: SP.sm, background: GOLD_BG, color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}
             >
               The realm is advancing. Give it a moment, then save your rules.
             </div>
@@ -407,7 +398,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
           {error && (
             <div style={{
               border: '1px solid rgba(197,74,74,0.45)',
-              borderRadius: R.md,
               padding: SP.sm,
               background: 'rgba(197,74,74,0.08)',
               color: RED,
@@ -444,7 +434,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                       padding: SP.sm,
                       textAlign: 'left',
                       border: `1px solid ${selected ? GOLD : BORDER2}`,
-                      borderRadius: R.md,
                       background: selected ? GOLD_BG : CARD,
                       color: INK,
                       cursor: advanceBlocked ? 'default' : 'pointer',
@@ -545,7 +534,6 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
             gap: SP.sm,
             padding: SP.md,
             border: `1px solid ${BORDER}`,
-            borderRadius: R.md,
             background: CARD,
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap' }}>
@@ -570,7 +558,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
               </Button>
             </div>
             {frozen ? (
-              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, borderRadius: R.md, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div data-testid="rules-frozen-note" style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
                 Time is frozen: the world will not advance (the Advance action is disabled) until you set Time back to “On your mark”. Everything is preserved exactly as it stands.
               </div>
             ) : previewResult ? (
@@ -609,7 +597,7 @@ function SimulationRulesDialogContent({ campaign, onClose }) {
                 )}
               </>
             ) : (
-              <div style={{ border: `1px dashed ${BORDER2}`, borderRadius: R.md, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
+              <div style={{ border: `1px dashed ${BORDER2}`, padding: SP.sm, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800 }}>
                 No preview yet.
               </div>
             )}

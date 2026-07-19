@@ -105,14 +105,13 @@ export default function AutoSaveChip({ saving = false }) {
         padding: '3px 9px',
         background: `${dotColor}10`,
         border: `1px solid ${dotColor}45`,
-        borderRadius: 12,
         fontSize: FS.xs, color: dirty || saving ? '#3A2F18' : MUTED,
         fontFamily: sans, fontWeight: 600,
         userSelect: 'none',
       }}
     >
       <span style={{
-        width: 6, height: 6, borderRadius: 3,
+        width: 6, height: 6,
         background: dotColor,
         boxShadow: saving ? `0 0 0 2px ${dotColor}30` : 'none',
         animation: saving ? 'sf-asc-pulse 1.2s ease-in-out infinite' : 'none',

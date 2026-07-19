@@ -13,7 +13,7 @@
 import { useMemo, useState } from 'react';
 import { Crown, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { realmVerbs, realmVetoProse } from '../../domain/events/realmManifest.js';
 import { t } from '../../copy/index.js';
@@ -26,7 +26,7 @@ const ORDERS_WHISPER_ID = 'realm_orders_teaching';
 
 const selectStyle = {
   fontSize: 12, fontFamily: 'inherit', padding: '4px 6px',
-  border: `1px solid ${BORDER}`, borderRadius: 4, background: CARD, color: INK,
+  border: `1px solid ${BORDER}`, background: CARD, color: INK,
 };
 
 /** Band submission rule (words at the table, numbers in the engine): a key
@@ -96,7 +96,7 @@ export default function RealmVerbComposer({ campaign }) {
   if (!campaign?.worldState?.canonizedAt) return null;
 
   return (
-    <div style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.sm, marginTop: SP.sm }}>
+    <div style={{ background: CARD, border: `1px solid ${BORDER}`, padding: SP.sm, marginTop: SP.sm }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: 6, marginBottom: SP.sm,
         fontSize: FS.xs, fontWeight: 800, fontFamily: sans, color: MUTED,
@@ -107,7 +107,7 @@ export default function RealmVerbComposer({ campaign }) {
       {taught && (
         <div style={{
           display: 'flex', alignItems: 'flex-start', gap: 6, marginBottom: SP.sm,
-          padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+          padding: SP.sm, border: `1px dashed ${BORDER}`,
           fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5,
         }}>
           <span style={{ flex: 1 }}>{t('guidance.realmOrders')}</span>
@@ -134,7 +134,7 @@ export default function RealmVerbComposer({ campaign }) {
       </div>
 
       {active && !active.verdict.available && (
-        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, borderRadius: R.sm, fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
+        <div style={{ padding: SP.sm, border: `1px dashed ${BORDER}`, fontSize: FS.xxs, fontFamily: sans, color: MUTED, lineHeight: 1.5 }}>
           {/* Grayed-WITH-REASON (design LAW): unavailability teaches. */}
           {active.verdict.reasons.join(' ')} {active.verdict.unlocks.join(' ')}
         </div>
@@ -209,7 +209,7 @@ export default function RealmVerbComposer({ campaign }) {
       {notice && (
         <div style={{
           marginTop: SP.xs, padding: SP.sm, border: `1px ${notice.ok ? 'solid' : 'dashed'} ${BORDER}`,
-          borderRadius: R.sm, fontSize: FS.xxs, fontFamily: sans, color: notice.ok ? INK : MUTED,
+          fontSize: FS.xxs, fontFamily: sans, color: notice.ok ? INK : MUTED,
         }}>
           {notice.text}
         </div>

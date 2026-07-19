@@ -10,7 +10,7 @@
 import { MousePointer2, Type, Pin, Trees, Trash2, Undo2, Redo2 } from 'lucide-react';
 import { useStore } from '../../store';
 import { ANNOTATE_TOOLS, FOREST_STYLES } from '../../store/mapSlice.js';
-import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, SECOND, BORDER, BORDER2, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 
@@ -50,12 +50,12 @@ export default function AnnotateToolbar() {
     <div style={{
       display: 'flex', alignItems: 'center', gap: SP.sm, flexWrap: 'wrap',
       padding: `${SP.sm}px ${SP.md}px`,
-      background: CARD, borderRadius: R.lg, border: `1px solid ${BORDER}`,
+      background: CARD, border: `1px solid ${BORDER}`,
     }}>
       {/* Tool selector */}
       <div style={{
         display: 'flex', gap: 2, padding: 2,
-        background: BORDER2, borderRadius: R.md,
+        background: BORDER2,
       }}>
         <ToolButton
           active={annotateTool === ANNOTATE_TOOLS.SELECT}
@@ -116,7 +116,7 @@ export default function AnnotateToolbar() {
             value={opts.labelColor}
             onChange={e => setOpt('labelColor', e.target.value)}
             aria-label="Color"
-            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
+            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, cursor: 'pointer' }}
           />
         </>
       )}
@@ -140,7 +140,7 @@ export default function AnnotateToolbar() {
             value={opts.markerColor}
             onChange={e => setOpt('markerColor', e.target.value)}
             aria-label="Color"
-            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, borderRadius: R.sm, cursor: 'pointer' }}
+            style={{ width: 26, height: 22, border: `1px solid ${BORDER}`, cursor: 'pointer' }}
           />
         </>
       )}
@@ -233,7 +233,6 @@ function OptionLabel({ children }) {
 const selectStyle = {
   padding: '4px 8px',
   border: `1px solid ${BORDER}`,
-  borderRadius: R.sm,
   background: CARD,
   fontSize: FS.xxs, fontFamily: sans, color: INK,
   cursor: 'pointer',

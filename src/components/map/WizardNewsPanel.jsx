@@ -60,7 +60,6 @@ function MetaPill({ children, tone = 'neutral' }) {
       minHeight: 22,
       padding: '2px 7px',
       border: `1px solid ${BORDER2}`,
-      borderRadius: 6,
       background: bg,
       color,
       fontFamily: sans,
@@ -100,14 +99,12 @@ function NewsEntry({ entry, compact = false, nameById }) {
       gap: 9,
       padding: compact ? '9px 10px' : '12px 13px',
       border: `1px solid ${major ? GOLD : BORDER}`,
-      borderRadius: 8,
       background: major ? GOLD_BG : CARD,
       boxShadow: major ? '0 8px 22px rgba(108, 75, 24, 0.08)' : 'none',
     }}>
       <div style={{
         width: 28,
         height: 28,
-        borderRadius: 7,
         background: CARD,
         border: `1px solid ${BORDER2}`,
         display: 'flex',
@@ -211,7 +208,6 @@ function ThreadCard({ thread, compact = false, nameById }) {
       <NewsEntry entry={head} compact={compact} nameById={nameById} />
       <details style={{
         border: `1px solid ${BORDER2}`,
-        borderRadius: 8,
         background: CARD_ALT,
         overflow: 'hidden',
       }}>
@@ -285,7 +281,6 @@ function ThreadColumn({ icon, title, threads, majorCount, emptyText, nameById })
       {threads.length === 0 ? (
         <div style={{
           border: `1px dashed ${BORDER}`,
-          borderRadius: 8,
           padding: 16,
           color: MUTED,
           fontFamily: sans,
@@ -386,7 +381,6 @@ export default function WizardNewsPanel({ campaign }) {
       flexDirection: 'column',
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       overflow: 'hidden',
     }}>
       <header style={{
@@ -400,7 +394,6 @@ export default function WizardNewsPanel({ campaign }) {
         <div style={{
           width: 34,
           height: 34,
-          borderRadius: 8,
           border: `1px solid ${BORDER2}`,
           background: CARD,
           display: 'flex',
@@ -461,7 +454,7 @@ export default function WizardNewsPanel({ campaign }) {
           {chronicles[0] && (
             <article style={{
               border:`1px solid ${BORDER2}`, borderLeft:`3px solid ${GOLD}`,
-              borderRadius:6, background:CARD_ALT, padding:'10px 12px',
+              background:CARD_ALT, padding:'10px 12px',
             }}>
               <div style={{ display:'flex', alignItems:'center', gap:6, color:GOLD, fontFamily:sans, fontSize:FS.xs, fontWeight:900 }}>
                 <BookOpen size={13}/> Chronicle, tick {chronicles[0].tick}

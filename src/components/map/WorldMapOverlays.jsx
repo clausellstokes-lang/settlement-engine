@@ -8,7 +8,7 @@
  */
 
 import { Suspense, lazy } from 'react';
-import { sans, FS, R, ELEV, swatch } from '../theme.js';
+import { sans, FS, ELEV, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ConfirmDialog } from '../primitives/Dialog.jsx';
 import { t } from '../../copy/index.js';
@@ -57,7 +57,7 @@ export function WorldMapOverlays({
           display: 'flex', alignItems: 'center', gap: 12,
           padding: '10px 18px',
           background: toast.kind === 'error' ? swatch['#8A2A2A'] : toast.kind === 'info' ? swatch.info : swatch.success,
-          color: swatch.white, borderRadius: R.md, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
+          color: swatch.white, fontSize: FS.sm, fontWeight: 700, fontFamily: sans,
           boxShadow: ELEV[2],
           zIndex: 100,
         }}>
@@ -70,7 +70,7 @@ export function WorldMapOverlays({
               style={{
                 flexShrink: 0,
                 background: 'rgba(255,255,255,0.16)', color: swatch.white,
-                border: '1px solid rgba(255,255,255,0.4)', borderRadius: R.sm,
+                border: '1px solid rgba(255,255,255,0.4)',
                 padding: '4px 10px', fontSize: FS.xs, fontWeight: 800,
                 minHeight: undefined,
               }}
@@ -101,7 +101,7 @@ export function WorldMapOverlays({
               {!worldCanonized && (
                 <div style={{
                   background: swatch['#FAF8F4'], border: `1px solid ${swatch.stressAmber}55`,
-                  borderLeft: `3px solid ${swatch.stressAmber}`, borderRadius: R.sm,
+                  borderLeft: `3px solid ${swatch.stressAmber}`,
                   padding: '10px 12px', marginBottom: advanceExtra ? 10 : 0,
                 }}>
                   <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.5, marginBottom: 8 }}>

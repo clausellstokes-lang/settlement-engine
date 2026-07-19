@@ -18,7 +18,7 @@ import { ScrollText, HeartHandshake, AlertTriangle } from 'lucide-react';
 import { renderAllTreaties } from '../../domain/display/treatyDocument.js';
 import { Section } from './WorldPulsePrimitives.jsx';
 import WarCausalBrief from './WarCausalBrief.jsx';
-import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, sans, FS, SP, R } from '../theme.js';
+import { INK, BODY, MUTED, SECOND, CARD, CARD_ALT, BORDER, BORDER2, RED, RED_BG, GREEN, GREEN_BG, AMBER, AMBER_BG, sans, FS, SP } from '../theme.js';
 
 /** Compliance → semantic tone (routed through design tokens — no raw color). */
 const STATE_TONE = { honored: 'good', strained: 'warn', defaulted: 'danger', expired: 'neutral' };
@@ -34,7 +34,7 @@ function StateChip({ state }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', minHeight: 20, padding: '1px 7px',
-      border: `1px solid ${c.border}`, borderRadius: 6, background: c.bg, fontFamily: sans,
+      border: `1px solid ${c.border}`, background: c.bg, fontFamily: sans,
       color: c.fg, fontSize: FS.pico, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>{state}</span>
   );
@@ -50,7 +50,7 @@ function TermRow({ term }) {
     <li style={{
       display: 'flex', flexDirection: 'column', gap: 3, padding: '7px 9px',
       border: `1px solid ${term.fraying ? TONE_COLOR.danger.border : BORDER}`,
-      borderRadius: R.sm, background: term.fraying ? TONE_COLOR.danger.bg : CARD,
+      background: term.fraying ? TONE_COLOR.danger.bg : CARD,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, textTransform: 'capitalize' }}>
@@ -75,7 +75,7 @@ function TreatyCard({ doc, nameById, worldState }) {
   const victor = nameOf(nameById, doc.victorId, doc.victorName);
   const loser = nameOf(nameById, doc.loserId, doc.loserName);
   return (
-    <article style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT, padding: SP.sm, display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <article style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: SP.sm, display: 'flex', flexDirection: 'column', gap: 8 }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
         <ScrollText size={14} color={INK} />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>The Peace of {loser}</span>

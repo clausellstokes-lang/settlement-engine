@@ -21,8 +21,7 @@ import MapShareEditor from '../gallery/MapShareEditor.jsx';
 import { IconButton } from './IconButton.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import {
-  BORDER, CARD, CARD_HDR, ELEV, INK, R, SP, sans, serif_, FS,
-} from '../theme.js';
+  BORDER, CARD, CARD_HDR, ELEV, INK, SP, sans, serif_, FS } from '../theme.js';
 
 /**
  * @param {Object} props
@@ -86,7 +85,7 @@ export default function MapShareEditorOverlay({ open, onClose, bridgeRef = null 
         tabIndex={-1}
         style={{
           width: '100%', maxWidth: 620, marginTop: SP.xl,
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+          background: CARD, border: `1px solid ${BORDER}`,
           boxShadow: ELEV[2], overflow: 'hidden',
         }}
       >

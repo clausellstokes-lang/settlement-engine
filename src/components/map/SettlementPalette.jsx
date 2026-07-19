@@ -10,7 +10,7 @@ import { lazy, Suspense, useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
-import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R, swatch, EMPTY_VALUE } from '../theme.js';
+import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 import { threatDisplay } from './settlementThreat.js';
@@ -89,7 +89,6 @@ export default function SettlementPalette({
               width: '100%',
               padding: '6px 8px 6px 26px',
               border: `1px solid ${BORDER}`,
-              borderRadius: R.sm,
               fontSize: FS.xs, fontFamily: sans,
               background: CARD,
               outline: 'none',
@@ -279,7 +278,6 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
         marginBottom: 4,
         background: placed ? GOLD_BG : CARD,
         border: `1px solid ${placed ? GOLD : BORDER}`,
-        borderRadius: R.sm,
         cursor: 'grab',
         opacity: placed ? 0.75 : 1,
         fontSize: FS.sm, fontFamily: sans, color: INK,
@@ -325,7 +323,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
                 color: threatTone.text,
                 background: `${threatTone.fill}1A`,
                 border: `1px solid ${threatTone.fill}55`,
-                borderRadius: 3, padding: '1px 5px',
+                padding: '1px 5px',
                 textTransform: 'uppercase', letterSpacing: '0.04em',
               }}>
                 {threatTone.label}
@@ -339,7 +337,7 @@ function SettlementCard({ save, placed, onSelect, onHover }) {
                   color: swatch['#8A5A20'],
                   background: 'rgba(196,128,60,0.10)',
                   border: '1px solid rgba(196,128,60,0.30)',
-                  borderRadius: 3, padding: '1px 5px',
+                  padding: '1px 5px',
                   maxWidth: 110, overflow: 'hidden',
                   textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                 }}

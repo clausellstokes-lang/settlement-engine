@@ -33,7 +33,7 @@ function Row({ accent, heading, detail }) {
   return (
     <div style={{
       padding: '8px 10px', border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${accent}`,
-      borderRadius: 6, background: CARD,
+      background: CARD,
     }}>
       <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, lineHeight: 1.3 }}>{heading}</div>
       {detail && <div style={{ color: BODY, fontFamily: sans, fontSize: FS.xxs, lineHeight: 1.4 }}>{detail}</div>}

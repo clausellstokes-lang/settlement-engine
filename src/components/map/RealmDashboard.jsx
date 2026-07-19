@@ -27,13 +27,7 @@ import { Lock, Sparkles, Globe, Flame, Users, ArrowUp, ArrowRight } from 'lucide
 
 import { useStore } from '../../store/index.js';
 import {
-  liveSieges,
-  warExhaustionStandings,
-  warExhaustionBand,
-  activeDeployments,
-  liveTradeWars,
-  dispositionStandings,
-} from '../../domain/display/warStatus.js';
+  liveSieges, warExhaustionStandings, warExhaustionBand, activeDeployments, liveTradeWars, dispositionStandings, } from '../../domain/display/warStatus.js';
 import { mobilizationStandings } from '../../domain/display/mobilizationStatus.js';
 import { occupationStandings } from '../../domain/display/occupationStatus.js';
 import { hegemonyRead } from '../../domain/display/hegemonyRead.js';
@@ -42,7 +36,7 @@ import { hasPantheon } from './PantheonPanel.jsx';
 import LivingWorldGates from '../settlements/LivingWorldGates.jsx';
 import WhileYouWereAway from './WhileYouWereAway.jsx';
 import { PANTHEON_TUNING } from '../../domain/worldPulse/pantheon.js';
-import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, R, SP, sans } from '../theme.js';
+import { AMBER_DEEP, BODY, CARD, CARD_ALT, FS, GOLD, INK, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 
@@ -120,7 +114,6 @@ function Stat({ Icon, label, value, sub, subTitle, tone, delta, focal = false, v
       borderLeft: accent ? `3px solid ${accent}` : 'none',
       paddingLeft: accent ? SP.sm : (focal ? SP.md : 0),
       background: focal && accent ? CARD : undefined,
-      borderRadius: focal && accent ? R.md : undefined,
     }}>
       <span style={{ display: 'flex', alignItems: 'center', gap: 6, color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         {Icon && <Icon size={12} />}{label}
@@ -209,7 +202,6 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
       display: 'grid', gap: SP.md,
       padding: SP.lg,
       border: `1px solid ${GOLD}`,
-      borderRadius: R.lg,
       background: CARD_ALT,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -233,7 +225,7 @@ function RealmDashboardLocked({ tier, onUpgrade, campaign }) {
           aria-label={`Your realm's conflict band: ${previewTension.label} (unlock to read live)`}
           style={{
             display: 'grid', gap: 3,
-            padding: `${SP.sm}px ${SP.md}px`, borderRadius: R.md,
+            padding: `${SP.sm}px ${SP.md}px`,
             background: CARD, borderLeft: `3px solid ${previewTension.tone === 'crisis' ? RED : previewTension.tone === 'hot' ? AMBER_DEEP : GOLD}`,
           }}
         >

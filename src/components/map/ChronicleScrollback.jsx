@@ -21,12 +21,9 @@ import { BookOpen, ChevronLeft, ChevronRight, MapPin, ScrollText, Sparkles } fro
 
 import { useStore } from '../../store/index.js';
 import {
-  chronicleTimeline,
-  hasTimeline,
-  tickCausalDiff,
-} from '../../domain/display/chronicleTimeline.js';
+  chronicleTimeline, hasTimeline, tickCausalDiff, } from '../../domain/display/chronicleTimeline.js';
 import { buildChronicleGrounding } from '../../domain/worldPulse/chronicle.js';
-import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, R, SECOND, SP, sans } from '../theme.js';
+import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN, INK, MUTED, RED, SECOND, SP, sans } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 // Advance-scaling Stage 4: interval → its real one-week tick count, so the
@@ -70,7 +67,7 @@ function IntervalChronicleSummary({ campaign, nameFor }) {
     <article
       data-testid="interval-chronicle-summary"
       style={{
-        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.md,
+        border: `1px solid ${GOLD}`, borderLeft: `3px solid ${GOLD}`,
         background: GOLD_BG, padding: '10px 12px', display: 'grid', gap: 6,
       }}
     >
@@ -115,7 +112,7 @@ function HeadlineCard({ headline: h, resolveName, onHighlight }) {
     </>
   );
   const cardStyle = {
-    border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD,
+    border: `1px solid ${BORDER2}`, background: CARD,
     padding: '8px 10px',
   };
   if (!canHighlight) {
@@ -194,7 +191,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
   if (!populated) {
     return (
       <div data-testid="chronicle-scrollback-empty" style={{
-        padding: SP.md, border: `1px dashed ${BORDER2}`, borderRadius: R.md,
+        padding: SP.md, border: `1px dashed ${BORDER2}`,
         color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
       }}>
         No chronicle yet. Advance the realm to record its history; the timeline will
@@ -214,7 +211,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {/* ── Tick scrubber ─────────────────────────────────────────────────── */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
-        padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`,
         background: CARD_ALT,
       }}>
         <Button
@@ -259,7 +256,6 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
               style={{
                 minWidth: 24, minHeight: undefined, padding: '2px 6px',
                 border: `1px solid ${i === safeIndex ? GOLD : BORDER2}`,
-                borderRadius: R.sm,
                 background: i === safeIndex ? GOLD : CARD,
                 color: i === safeIndex ? INK : SECOND,
                 fontSize: FS.micro, fontWeight: 850,
@@ -275,7 +271,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {selected.chronicles.map((c, i) => (
         <article key={c.id || i} style={{
           border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`,
-          borderRadius: R.sm, background: CARD_ALT, padding: '10px 12px',
+          background: CARD_ALT, padding: '10px 12px',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 900 }}>
             <BookOpen size={13} /> Chronicle, tick {c.tick}
@@ -306,7 +302,7 @@ export default function ChronicleScrollback({ campaign, nameFor, causalByTick })
       {/* ── Per-tick causal diff (compareCausalState) ─────────────────────── */}
       {causalDiff.length > 0 && (
         <div data-testid="chronicle-causal-diff" style={{
-          border: `1px solid ${BORDER2}`, borderRadius: R.md, background: CARD_ALT, padding: '8px 10px',
+          border: `1px solid ${BORDER2}`, background: CARD_ALT, padding: '8px 10px',
         }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 900, marginBottom: 5 }}>
             Causal shift this tick

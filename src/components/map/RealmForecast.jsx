@@ -13,7 +13,7 @@
 import { useState } from 'react';
 import { Telescope } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { MUTED, INK, BORDER, CARD, sans, FS, SP, R } from '../theme.js';
+import { MUTED, INK, BORDER, CARD, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const INTERVALS = [
@@ -84,7 +84,7 @@ export default function RealmForecast({ campaign }) {
           {stale && (
             <div style={{
               padding: SP.sm, marginBottom: SP.sm, border: `1px dashed ${BORDER}`,
-              borderRadius: R.sm, fontSize: FS.xxs, fontFamily: sans, color: MUTED,
+              fontSize: FS.xxs, fontFamily: sans, color: MUTED,
             }}>
               The world or the docket changed underneath this forecast — it no longer speaks for the pending future. Run it again.
             </div>
@@ -96,7 +96,7 @@ export default function RealmForecast({ campaign }) {
           )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
             {view.digest.members.map(m => (
-              <div key={m.saveId} style={{ padding: SP.sm, border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD }}>
+              <div key={m.saveId} style={{ padding: SP.sm, border: `1px solid ${BORDER}`, background: CARD }}>
                 <div style={{ fontSize: FS.xs, fontFamily: sans, color: INK, fontWeight: 700 }}>
                   {m.name}
                   <span style={{ color: MUTED, fontWeight: 400, marginLeft: 8 }}>
@@ -117,7 +117,7 @@ export default function RealmForecast({ campaign }) {
               that belong to NO single member (realm-wide events: treaties,
               coalitions, foreign intervention), rendered as a realm band. */}
           {(view.digest.realm || []).length > 0 && (
-            <div style={{ marginTop: SP.sm, padding: SP.sm, border: `1px solid ${BORDER}`, borderRadius: R.sm, background: CARD }}>
+            <div style={{ marginTop: SP.sm, padding: SP.sm, border: `1px solid ${BORDER}`, background: CARD }}>
               <div style={{
                 fontSize: FS.xxs, fontWeight: 800, fontFamily: sans, color: MUTED,
                 letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2,
