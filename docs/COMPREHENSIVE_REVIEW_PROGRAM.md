@@ -1134,6 +1134,23 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE LIVING BACKDROP LANDED (2026-07-18, deep-craft @ a7afc9cc, 3 commits).**
+d308c579 fail-silent localStorage leaf (sf.lastMapView.<saveId> {view,lens}; the
+mapEdits blob NEVER touched; net-ZERO pane growth — statement-merge absorbed the
+import at the exact 600-line ceiling) · a2b30a1d the lazy wash leaf mounted in
+SettlementDossierHero (inline data-URI SVG, object-fit cover, pointerEvents none,
+zIndex under content) · a7afc9cc contrast pin + round-trip tests. PROOFS: eager
+closure BYTE-IDENTICAL base-vs-tip (1,038,624 B / 7 files, delta 0; town-map
+fingerprint absent from entry closure) · WASH_INK_OPACITY 0.10 contrast-pinned
+(heading 13.5:1, body 8.0:1 — AA clear; the pin imports the constant so retuning
+re-proves) · full suite 13,204 passed / EXACTLY the expected 5, no flakes · live
+negative path verified on 5199 + real-Chromium stacking probe (jsdom can't prove
+paint order — the probe did). Vetoable: opacity 0.10 · read-mode-only ·
+data-URI-img render. Recorded seam: bespoke lens ids wash as parchment (writer only
+ever writes base ids — matches the thumbnail). Transient local draft "Pantevrysi"
+created during live verification — discardable. THE OWNER'S BACKDROP RULING IS
+BUILT END-TO-END; upgrades to the illustrated/seasonal portrait automatically at
+the IT fold.
 **⬛⭐ ILLUSTRATED TOWN IT-3 LANDED (2026-07-18, claude/illustrated-town @
 5324c246, 4 commits).** Season dress as parameter swaps on groundDressOps (winter
 snow/bare trees/muted furrows · autumn stubble · drought crack · severity deepens);
