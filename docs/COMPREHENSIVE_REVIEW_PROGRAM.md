@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ WAVE B FINISHER CLOSED (2026-07-19, claude/wave-b-finisher @ e7dc528b — WBF-a..d
++ closure fixes WBFC-a/b; VERDICT: defects found, fixed, every remaining red classified).**
+The closer proved the focused-gates blind spot RE-BIT TWICE (WBF-b tripped domainAnyCast/
+rawColor/title= ; WBF-d tripped verifyJwtPosture + the doc-freshness cluster — adding a
+migration or edge fn trips ~5 full-suite doc/contract tests no focused gate covers).
+FIXES: WBFC-a 0c190db0 (three {any[]} JSDoc holes retyped to real TraditionRec shapes —
+domainAnyCastBaseline 9/9, strict 0, runtime byte-identical) · WBFC-b e7dc528b
+(retention-warning-cron registered in the verifyJwtPosture INTENDED_ANON list — RECORDS
+the shipped x-cron-secret posture, the 115 idiom; MANAGER RATIFIED, owner-vetoable).
+RECONCILED: 7 load-flake files pass in isolation · 4 parked goldens fail identically at
+base · 2 migration-gap files declared/fold-owned · doc-freshness cluster (4 files)
+FOLD-OWNED (renumber-coupled; per-lane edits would be wrong at fold). MANAGER
+ADJUDICATIONS on the two governance ratchets (vetoable): rawColorLiteral +2 (the
+traditions category color follows the grandfathered CUSTOM_CATEGORIES hex pattern) →
+FOLD RE-PINS 1403→1405 declared; the deeper all-categories token migration → LOOP
+INTAKE. guidanceRegistry title= +6 → THE FOLD EXECUTES THE RECIPE (rename the local
+Band/Mechanism `title` prop → `heading`, behavior-preserving, census drops ~14; WBF-a's
+2 real tooltips → aria-label) — reduction over re-pin. RECEIPTS CONFIRMED:
+traditionsDormancyGolden GREEN (pure leaf untouched) · kill-list counts IDENTICAL at
+ceiling vs base · closure 1,041,007 = base+9 B (one minified alias-table binding in
+engine-core, no feature code eager — declared) · lane feature tests green · WBF-c
+TASTE-VETOABLE for the walk. DURABLE FACTS BANKED TO MEMORY: the full suite now exceeds
+the 10-min Bash cap (shard 1/2+2/2 foreground) · the title= census false-positives on
+component props named title. FREED SLOT → WAVE A CLUSTER 2 DISPATCHED
+(claude/wave-a2-sweep off aad6265e: the kill-list conversion beyond new/).
 **⬛ SESSION-LIMIT STRIKE #2 (2026-07-19, resets 3pm ET) — three lanes killed
 mid-work; EMPIRICAL SURVEY: near-zero loss (the lettered-commit discipline held).**
 money-wave @ 4dfa4506 (M-7b+c THE DUE-RUNNER landed; M-8 IN FLIGHT: dirty
