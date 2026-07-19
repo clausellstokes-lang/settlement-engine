@@ -36,16 +36,30 @@ import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
+import { getSpatialLedger } from '../spatial/distanceRead.js';
+import { popToTier, TIER_ORDER } from '../../data/constants.js';
+import { TRADITION_TRAPPINGS, TRADITION_EPITHETS } from '../../data/traditionCorpus.js';
 
 /** @typedef {import('./genesis.js').TraditionRec} TraditionRec */
 /** @typedef {Parameters<typeof nameOf>[0]} RulingFactionLike */
 
 const A = FACTION_ARCHETYPES;
 
+// ── §7 MUTATION dials (soak-certified; every entry vetoable) ────────────────────
+const HYSTERESIS_YEARS = 8;   // the minimum gap between two SLOW mutations of one tradition
+const DRIFT_PERIOD = 30;      // generational drift cadence (~once per 30 years)
+const DRIFT_MIN_YEAR = 8;     // no drift before a tradition has had time to settle
+const CLAIM_CHANCE = 0.35;    // an ascendant regime's chance to claim a faction/institution tradition
+
 // ── narrowing helpers (self-contained; the kernel's asObject idiom, 0-hole) ──
 /** @param {unknown} x @returns {Record<string, unknown>} */
 function asObject(x) {
   return x && typeof x === 'object' && !Array.isArray(x) ? /** @type {Record<string, unknown>} */ (x) : {};
+}
+/** @param {unknown} x @param {number} d @returns {number} */
+function num(x, d) {
+  const n = Number(x);
+  return Number.isFinite(n) ? n : d;
 }
 /** Codepoint-stable compare (byte-stable ordering). @param {string} a @param {string} b @returns {number} */
 function cmp(a, b) {
@@ -73,6 +87,18 @@ export function institutionOwnerKey(name) {
 function settlementSeedOf(settlement) {
   const identity = asObject(settlement.identity);
   return String(settlement._seed ?? settlement.id ?? identity.seed ?? 'tradition-seedless');
+}
+
+// ── TIER INDEX (mirrors genesis.resolveTierBand exactly, so the scale-crossing sensor never drifts) ──
+/** @type {Readonly<Record<string, number>>} */
+const TIER_INDEX = Object.freeze({ thorp: 0, hamlet: 1, village: 2, town: 3, city: 4, metropolis: 5, capital: 6 });
+/** @param {Record<string, unknown>} settlement @returns {number} */
+function tierIndexOf(settlement) {
+  const raw = typeof settlement.tier === 'string' ? settlement.tier : '';
+  if (raw && raw in TIER_INDEX) return TIER_INDEX[raw];
+  const pop = typeof settlement.population === 'number' ? settlement.population : 0;
+  const fb = TIER_ORDER.indexOf(popToTier(pop)) >= 0 ? popToTier(pop) : 'village';
+  return TIER_INDEX[fb] ?? 2;
 }
 
 // ── MOTIF → desired owner archetype (§6 assignment table) ──────────────────────
@@ -185,10 +211,98 @@ export function assignOwnership(recs, settlement) {
   });
 }
 
+// ── §7 checkpoint READERS (all pure; stateless comparisons against fresh state) ──
+/** The settlement's current patron deity ref (config.primaryDeitySnapshot, the genesis
+ *  source), or null. @param {Record<string, unknown>} settlement @returns {string|null} */
+function currentPatronRef(settlement) {
+  const snap = asObject(asObject(settlement.config).primaryDeitySnapshot);
+  if (typeof snap._deityRef === 'string' && snap._deityRef) return snap._deityRef;
+  const prim = asObject(settlement.primaryDeity);
+  return typeof prim._deityRef === 'string' && prim._deityRef ? prim._deityRef : null;
+}
+/** The urban-fabric leading district class for a settlement (the authoritative ledger's
+ *  `led`), or null when the fabric layer is dark/absent.
+ *  @param {Record<string, unknown>} worldState @param {string} sid @returns {string|null} */
+function fabricLeaderOf(worldState, sid) {
+  const led = asObject(asObject(getSpatialLedger(worldState, 'urbanFabric'))[sid]).led;
+  return typeof led === 'string' && led ? led : null;
+}
+/** The human phrase for the most recent power transfer's cause (previousGovernments), or null.
+ *  @param {Record<string, unknown>} settlement @returns {string|null} */
+function lastTransferCause(settlement) {
+  const prev = asObject(settlement.powerStructure).previousGovernments;
+  const list = Array.isArray(prev) ? prev : [];
+  const last = list.length ? asObject(list[list.length - 1]) : null;
+  const cause = last && typeof last.cause === 'string' ? last.cause : '';
+  return cause ? `the seat changed hands by ${cause}` : null;
+}
+/** The latest year in a record's mutationLog (−Infinity when never mutated) — the hysteresis
+ *  clock. @param {TraditionRec} rec @returns {number} */
+function lastMutationYear(rec) {
+  const log = Array.isArray(/** @type {Record<string, unknown>} */ (rec).mutationLog) ? /** @type {unknown[]} */ (/** @type {Record<string, unknown>} */ (rec).mutationLog) : [];
+  let m = -Infinity;
+  for (const e of log) { const y = num(asObject(e).year, -Infinity); if (y > m) m = y; }
+  return m;
+}
+/** Is a record anchored to a city quarter (fair/market) — the class an urban-fabric turn
+ *  re-anchors? @param {TraditionRec} rec @returns {boolean} */
+function isDistrictAnchored(rec) {
+  const motif = asObject(/** @type {Record<string, unknown>} */ (rec).coreMotif);
+  return motif.act === 'fair' || motif.element === 'market';
+}
+/** Is generational drift DUE for a record this year (a seeded ~30-year phase per tradition)?
+ *  @param {TraditionRec} rec @param {number} year @returns {boolean} */
+function driftDue(rec, year) {
+  if (year < DRIFT_MIN_YEAR) return false;
+  const phase = createPRNG(`${String(asObject(rec).id)}::tradition:drift`).randInt(0, DRIFT_PERIOD - 1);
+  return ((year - phase) % DRIFT_PERIOD) === 0;
+}
+/** The ascendant-regime claim roll for a faction/institution tradition on a seat change
+ *  (tick-invariant world-seed fork). @param {string} rngSeed @param {TraditionRec} rec @param {number} year @returns {boolean} */
+function claimRoll(rngSeed, rec, year) {
+  return createPRNG(`${rngSeed}::tradition:claim:${String(asObject(rec).id)}:${year}`).chance(CLAIM_CHANCE);
+}
+
+/** Re-DRESS a record's expression (§7 — trappings + epithet re-picked from the corpus by act;
+ *  the CORE MOTIF and the NAME stay immutable — grandeur rides scaleBand, not a rename). Seeded,
+ *  deterministic. @param {TraditionRec} rec @param {string} seedKey @returns {TraditionRec} */
+function reexpressed(rec, seedKey) {
+  const act = String(asObject(asObject(rec).coreMotif).act || 'feast');
+  const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (TRADITION_TRAPPINGS)[act] || TRADITION_TRAPPINGS.feast;
+  const rng = createPRNG(seedKey);
+  const order = rng.shuffle(pool.map((_, i) => i));
+  /** @type {string[]} */
+  const trappings = [];
+  for (let i = 0; i < order.length && trappings.length < 2; i += 1) trappings.push(pool[order[i]]);
+  const epithet = rng.fork('epithet').pick(/** @type {string[]} */ ([...TRADITION_EPITHETS])) || TRADITION_EPITHETS[0];
+  const expr = asObject(/** @type {Record<string, unknown>} */ (rec).expression);
+  return /** @type {TraditionRec} */ ({ ...rec, expression: { ...expr, trappings, epithet } });
+}
+
+/** Append a mutationLog {year, kind, cause} row (a new object; never mutate the input).
+ *  @param {TraditionRec} rec @param {number} year @param {string} kind @param {string} cause @returns {TraditionRec} */
+function logMutation(rec, year, kind, cause) {
+  const raw = /** @type {Record<string, unknown>} */ (rec).mutationLog;
+  const log = Array.isArray(raw) ? raw : [];
+  return /** @type {TraditionRec} */ ({ ...rec, mutationLog: [...log, { year, kind, cause }] });
+}
+
 /**
- * Advance a settlement's ownership one lit tick. T3-a scope: assign ownership at the
- * FIRST-LIT mint; carry ownership unchanged otherwise (the reassignment checkpoints +
- * §7 mutations land in T3-b). Returns the possibly-new records + whether anything changed.
+ * Advance a settlement's ownership + expression one lit tick (§6 reassignment checkpoints +
+ * §7 mutations). At the FIRST-LIT mint: assign ownership only (mutations begin the next tick,
+ * so a freshly minted set never spuriously drifts). Otherwise run, per record, a single-slot
+ * precedence of checkpoints (cap 1 mutation/record/tick):
+ *   1. SEAT change — a seat-owned record follows the new seat (pointer always); a faction/
+ *      institution record may be CLAIMED by the ascendant regime (seeded); a vanished
+ *      institution ORPHANS to the seat.
+ *   2. RE-DEDICATION — a devotional record follows a KNOWN new patron.
+ *   3. SCALE-UP — a real tier crossing steps every record's scaleBand up one (the founding
+ *      core is the crossing sensor: currentTier > its scaleBand).
+ *   4. FABRIC turn — a district-anchored record re-anchors when the fabric leader turns
+ *      (hysteresis-gated; the founding core carries the fabricLed sensor).
+ *   5. DRIFT — a generation reshapes the keeping (~30-year seeded schedule; hysteresis-gated).
+ * Structural pointer moves (owner/deity/scale) always track reality; the mutationLog row +
+ * re-dress is what the cosmetic checkpoints (4,5) hysteresis-gate. Pure + deterministic.
  * @param {Object} a
  * @param {TraditionRec[]} a.recs
  * @param {Record<string, unknown>} a.settlement
@@ -198,9 +312,93 @@ export function assignOwnership(recs, settlement) {
  * @param {boolean} a.minted
  * @returns {{ recs: TraditionRec[], changed: boolean }}
  */
-export function advancePolitics({ recs, settlement, minted }) {
+export function advancePolitics({ recs, settlement, worldState, sid, year, minted }) {
   if (minted) return { recs: assignOwnership(recs, settlement), changed: true };
-  return { recs, changed: false };
+  if (!recs.length) return { recs, changed: false };
+
+  const seat = seatOwnerOf(settlement);
+  const patronRef = currentPatronRef(settlement);
+  const curTier = tierIndexOf(settlement);
+  const rngSeed = String(worldState.rngSeed || '');
+
+  const founding = asObject(recs[0]);
+  const foundingScale = num(founding.scaleBand, curTier);
+  const tierCrossed = foundingScale < curTier;         // the founding core is the crossing sensor
+  const fabricLedNow = fabricLeaderOf(worldState, sid);
+  const fabricLedPrev = typeof founding.fabricLed === 'string' ? founding.fabricLed : null;
+  const fabricTurned = !!fabricLedNow && !!fabricLedPrev && fabricLedNow !== fabricLedPrev;
+  // A seat change is visible in the seat-owned records still pointing at the OLD seat key.
+  const seatChanged = seat.key != null && recs.some((r) => asObject(r).ownerKind === 'seat' && asObject(r).ownerKey !== seat.key);
+  const transferCause = seatChanged ? lastTransferCause(settlement) : null;
+  const instRoster = Array.isArray(settlement.institutions) ? settlement.institutions : [];
+  const instKeys = new Set(instRoster.map((raw) => institutionOwnerKey(asObject(raw).name)));
+
+  let changed = false;
+  const out = recs.map((raw, i) => {
+    let rec = raw;
+    const kind = asObject(rec).ownerKind;
+    const ownerKey = asObject(rec).ownerKey;
+    /** @type {{ kind: string, cause: string }|null} */
+    let mutation = null;
+
+    // 1. SEAT reassignment (structural; pointer always tracks reality).
+    if (seat.key != null) {
+      if (kind === 'seat' && ownerKey !== seat.key) {
+        rec = /** @type {TraditionRec} */ ({ ...rec, ownerKey: seat.key, ownerLabel: seat.label });
+        mutation = { kind: 'reassignment', cause: transferCause || 'the seat changed hands' };
+      } else if ((kind === 'faction' || kind === 'institution') && seatChanged && claimRoll(rngSeed, rec, year)) {
+        rec = /** @type {TraditionRec} */ ({ ...rec, ownerKey: seat.key, ownerKind: 'seat', ownerLabel: seat.label });
+        mutation = { kind: 'reassignment', cause: `${transferCause || 'the seat changed hands'}; the new order took up the observance` };
+      }
+    }
+    // 1b. institution ORPHAN — its keeper left the roster; the seat takes it up.
+    if (!mutation && kind === 'institution' && !instKeys.has(String(ownerKey)) && seat.key != null) {
+      rec = /** @type {TraditionRec} */ ({ ...rec, ownerKey: seat.key, ownerKind: 'seat', ownerLabel: seat.label });
+      mutation = { kind: 'reassignment', cause: 'its keeper is gone; the seat took it up' };
+    }
+    // 2. RE-DEDICATION — a devotional record follows a KNOWN new patron (never re-dedicate to
+    //    an absent patron; that would erase a valid dedication).
+    if (!mutation && patronRef) {
+      const deityRef = asObject(rec).deityRef;
+      if (typeof deityRef === 'string' && deityRef && deityRef !== patronRef) {
+        rec = /** @type {TraditionRec} */ ({ ...rec, deityRef: patronRef });
+        mutation = { kind: 'rededication', cause: 'the town took a new patron' };
+      }
+    }
+    // 3. SCALE-UP — a real tier crossing steps grandeur up one band (scaleBand tracks the tier).
+    if (!mutation && tierCrossed) {
+      const cur = num(asObject(rec).scaleBand, 0);
+      const next = Math.min(curTier, cur + 1);
+      if (next !== cur) {
+        rec = /** @type {TraditionRec} */ ({ ...rec, scaleBand: next });
+        mutation = { kind: 'scale-up', cause: 'the town outgrew the old scale' };
+      }
+    }
+    // Hysteresis floor for the SLOW cosmetic checkpoints (4,5).
+    const hysteresisOk = (year - lastMutationYear(rec)) >= HYSTERESIS_YEARS;
+    // 4. FABRIC turn — a district-anchored record re-anchors when the quarter's leader turns.
+    if (!mutation && fabricTurned && isDistrictAnchored(rec) && hysteresisOk) {
+      mutation = { kind: 'reanchor', cause: 'the quarter that kept it changed hands' };
+    }
+    // 5. DRIFT — a generation reshapes the keeping.
+    if (!mutation && driftDue(rec, year) && hysteresisOk) {
+      mutation = { kind: 'drift', cause: 'a generation reshaped the keeping' };
+    }
+
+    if (mutation) {
+      rec = reexpressed(rec, `${rngSeed}::tradition:reexpress:${String(asObject(rec).id)}:${year}:${mutation.kind}`);
+      rec = logMutation(rec, year, mutation.kind, mutation.cause);
+      changed = true;
+    }
+    // Keep the founding core's fabric sensor current (index 0 only; only when fabric is lit).
+    if (i === 0 && fabricLedNow && asObject(rec).fabricLed !== fabricLedNow) {
+      rec = /** @type {TraditionRec} */ ({ ...rec, fabricLed: fabricLedNow });
+      changed = true;
+    }
+    return rec;
+  });
+
+  return { recs: changed ? out : recs, changed };
 }
 
 // ── EFFECT ROUTING (§6 stakes) ─────────────────────────────────────────────────
