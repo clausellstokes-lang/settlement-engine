@@ -31,6 +31,7 @@ import AccountProfileSection from './account/AccountProfileSection.jsx';
 import AccountSecuritySection from './account/AccountSecuritySection.jsx';
 import AccountRecoveryQuestionsSection from './account/AccountRecoveryQuestionsSection.jsx';
 import AccountSubscriptionSection from './account/AccountSubscriptionSection.jsx';
+import AccountPurchaseHistoryPanel from './account/AccountPurchaseHistoryPanel.jsx';
 import { ReferralCard, RedeemBlock } from './account/ReferralRedeemBlocks.jsx';
 import AccountSupportSection from './account/AccountSupportSection.jsx';
 import AccountDataPrivacySection from './account/AccountDataPrivacySection.jsx';
@@ -296,6 +297,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             handlePurchase={handlePurchase}
             onNavigatePricing={() => navigate('pricing')}
           />
+          <AccountPurchaseHistoryPanel auth={auth} />
           <div>
             <ReferralCard auth={auth} />
             <RedeemBlock onNavigatePricing={() => navigate('pricing')} />
