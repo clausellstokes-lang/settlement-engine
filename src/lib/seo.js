@@ -110,12 +110,17 @@ function upsertCanonical(href) {
 
 function setRobotsNoindex(noindex) {
   const existing = document.head.querySelector('meta[name="robots"]');
-  if (noindex) {
-    if (existing) existing.setAttribute('content', 'noindex, nofollow');
-    else upsertMeta('name', 'robots', 'noindex, nofollow');
-  } else if (existing) {
-    existing.remove();
-  }
+  // Private / app / auth routes: keep them out of the index entirely.
+  // Public routes: no noindex, but PRESERVE the AI-training reservation
+  // (noai, noimageai) that ships statically in index.html — otherwise this
+  // per-route pass would STRIP it the moment the SPA mounts, leaving a
+  // JS-executing crawler with no meta signal on the very pages (gallery,
+  // pricing, compendium) that are crawlable content. The site-wide
+  // X-Robots-Tag: noai, noimageai response header (vercel.json) carries the
+  // reservation on every response regardless; this keeps the meta coherent.
+  const content = noindex ? 'noindex, nofollow' : 'noai, noimageai';
+  if (existing) existing.setAttribute('content', content);
+  else upsertMeta('name', 'robots', content);
 }
 
 /** Upsert a JSON-LD <script> keyed by a stable id, so re-renders replace it. */
