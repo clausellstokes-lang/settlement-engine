@@ -371,7 +371,21 @@ A+ at this stage, rinse and repeat.")
   build-completeness and are ASKED with recommendations: (1) HowToUse — REC:
   keep the About-pivot structure, restore master's lost Philosophy/UnderTheHood
   content INTO it; (2) Surveyor-tier — REC: premium-as-Surveyor declared FINAL
-  launch semantics (the chokepoint stands). The de-eagering additionally
+  launch semantics (the chokepoint stands).
+  ⭐ WAVE D — THE PERIMETER (owner-commissioned 2026-07-19: protect the work
+  from external-AI mishandling/mutation/bot-waves; users use the owner's
+  systems, not outside AI): audit-then-harden — crawler governance (robots.txt
+  AI-crawler directives + noai meta + TDM headers) · rate-limit audit + server-
+  side limits on every edge/auth endpoint · server-side quota/invariant proofs
+  · bot-wave anomaly detection in the existing analytics seam (cadence/velocity
+  flags) · the sf-bridge origin audit (pre-stocked) · ToS anti-automation
+  clauses (drafted for the legal consult). OWNER-KEY SEAMS built but inert:
+  hosting WAF/bot-filter toggles · Turnstile-class verification (one-key
+  activation). HONEST LIMITS recorded: crawler directives are voluntary-
+  compliance; user-credentialed browser agents are indistinguishable from
+  users — the defense is server-side validity + limits + telemetry (automation
+  gains nothing, corrupts nothing, gets noticed).
+  The de-eagering additionally
   receives a dedicated Fable ADVERSARIAL VERIFICATION pass at fold batch 3
   (persistence substrate, escalation clause). Cycle 1's intake is thereby PURE
   REVIEW.
