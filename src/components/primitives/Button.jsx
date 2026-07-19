@@ -2,7 +2,7 @@ import { Loader2 } from 'lucide-react';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import {
-  AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER_STRONG, CARD, ELEV, FS,
+  AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
   VIOLET, VIOLET_BG, VIOLET_DEEP, sans, swatch,
 } from '../theme.js';
@@ -18,14 +18,17 @@ const VARIANTS = {
     bg: GOLD,
     fg: INK,
     border: GOLD,
-    shadow: ELEV[1],
+    shadow: 'none',
   },
-  // Neutral action — card fill with a >=3:1 border so the boundary (the only
-  // affordance cue) is perceivable (WCAG 1.4.11).
+  // Neutral action — THE OC INSTRUMENT BASE FACE (organic craft §2): the quiet
+  // machined parchment surface, ink label, perceivable gold-hairline boundary.
+  // The values are the reserved instrument tokens (design/organic/instruments.js,
+  // projected to --oc-btn-* at :root), whose label/fill + boundary/ground pairs
+  // are pinned AA / 1.4.11 in contrast.test.js.
   secondary: {
-    bg: CARD,
-    fg: INK,
-    border: BORDER_STRONG,
+    bg: 'var(--oc-btn-fill)',
+    fg: 'var(--oc-btn-ink)',
+    border: 'var(--oc-btn-border)',
     shadow: 'none',
   },
   // Low-stakes / link-style. NOTE: ghost has no fill or border, so it must only
@@ -59,7 +62,7 @@ const VARIANTS = {
     bg: VIOLET,
     fg: swatch.white,
     border: VIOLET,
-    shadow: ELEV[1],
+    shadow: 'none',
   },
   success: {
     bg: GREEN_BG,
@@ -115,6 +118,7 @@ export default function Button({
   type = 'button',
   onClick,
   style,
+  className = '',
   ...rest
 }) {
   const v = VARIANTS[variant] || VARIANTS.secondary;
@@ -137,6 +141,9 @@ export default function Button({
       title={title}
       onClick={onClick}
       disabled={inert}
+      // The instrument gives under the finger (organic motion #5 press). Any
+      // caller-supplied className is preserved after it (prop-compatible).
+      className={`oc-m-press ${className}`.trim()}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -146,7 +153,7 @@ export default function Button({
         minHeight,
         padding: s.padding,
         border: `1px solid ${v.border}`,
-        borderRadius: R.lg,
+        borderRadius: R.sm,
         background: v.bg,
         color: v.fg,
         fontFamily: sans,
