@@ -8,11 +8,35 @@
  * import. This imports authSecurity DIRECTLY (both are lazy chunks), so no eager auth.js
  * wrapper is needed for claim/is-current.
  */
-import { claimCurrentSession, isCurrentSession } from './authSecurity.js';
+import { claimCurrentSession, isCurrentSession, sessionDeviceLabel } from './authSecurity.js';
 
-/** Claim this account to THE CURRENT session (last-login-wins, §7.1). Never throws. */
+/**
+ * Claim this account to THE CURRENT session (last-login-wins, §7.1). Never throws.
+ *
+ * M-9e (§7.4): when the claim SUPERSEDED a different prior session, fire — lazily,
+ * fire-and-forget, never blocking auth — two side effects:
+ *   · the new-device sign-in notification through the Wave-E mail seam
+ *     (template 'new_device_signin', payload {device_label, at}); inert until that
+ *     seam registers the template + RESEND keys land (send-email returns a soft
+ *     unknown_template today), never-throw.
+ *   · the supersession analytics ENRICH (LAW 4, zero new eager names): the existing
+ *     session_started event carrying superseded_prior:true.
+ * @returns {Promise<{superseded: boolean, deviceLabel: string, at: string}>}
+ */
 export async function claimSession() {
-  try { await claimCurrentSession(); } catch { /* never block auth on a claim failure */ }
+  let res = { superseded: false, deviceLabel: sessionDeviceLabel(), at: new Date().toISOString() };
+  try { res = (await claimCurrentSession()) || res; } catch { /* never block auth on a claim failure */ }
+  if (res?.superseded) {
+    const device_label = res.deviceLabel || sessionDeviceLabel();
+    const at = res.at || new Date().toISOString();
+    import('./emailLifecycle.js')
+      .then(({ notifyNewDeviceSignin }) => notifyNewDeviceSignin({ device_label, at }))
+      .catch(() => { /* the seam is inert until Wave E folds — never block auth */ });
+    import('./analytics.js')
+      .then(({ track, EVENTS }) => track(EVENTS.SESSION_STARTED, { superseded_prior: true }))
+      .catch(() => { /* analytics is best-effort */ });
+  }
+  return res;
 }
 
 /**

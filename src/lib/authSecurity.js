@@ -199,14 +199,58 @@ export function sessionDeviceLabel() {
 }
 
 /**
+ * Decode the `session_id` claim from a Supabase access token WITHOUT re-verifying it
+ * (getSession already handed us our OWN live token). Returns null on any unrecognised
+ * shape. Mirrors the server gate's decodeSessionId (sessionGate.ts) so the client's
+ * supersession read uses the same claim the request-layer gate enforces on.
+ * @param {string} [token]
+ * @returns {string|null}
+ */
+function decodeJwtSessionId(token) {
+  try {
+    const parts = String(token || '').split('.');
+    if (parts.length < 2) return null;
+    let payload = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+    payload += '='.repeat((4 - (payload.length % 4)) % 4);
+    const claims = JSON.parse(atob(payload));
+    const sid = claims?.session_id;
+    return typeof sid === 'string' && sid.length > 0 ? sid : null;
+  } catch { return null; }
+}
+
+/**
  * Claim this account to THE CURRENT session (last-login-wins, §7.1). Fire-and-
  * forget from SIGNED_IN — NEVER throws; a claim failure is a silent no-op (the
  * paid-surface request gate is the real enforcement, not this claim).
+ *
+ * Returns a coarse result the caller (sessionClient) uses to drive the M-9e
+ * new-device notification + the supersession analytics enrich (§7.4): `superseded`
+ * is true iff THIS new session replaced a DIFFERENT prior session. Detected by a
+ * best-effort PRE-CLAIM read of the owner's own current_account_session row (RLS
+ * owner-SELECT, 161) compared against this token's session_id — so the LANDED 161
+ * claim RPC and its pglite probe stay frozen (no migration/return-shape change). A
+ * read failure just reports superseded:false; it never affects the claim itself.
  * @param {string} [deviceLabel]
+ * @returns {Promise<{superseded: boolean, deviceLabel: string, at: string}>}
  */
 async function supabaseClaimCurrentSession(deviceLabel) {
-  try { await supabase.rpc('claim_current_session', { p_device_label: deviceLabel || sessionDeviceLabel() }); }
+  const label = deviceLabel || sessionDeviceLabel();
+  const at = new Date().toISOString();
+  let superseded = false;
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    const mySid = decodeJwtSessionId(session?.access_token);
+    if (mySid) {
+      const { data: prior } = await supabase
+        .from('current_account_session')
+        .select('session_id')
+        .maybeSingle();
+      if (prior && prior.session_id && String(prior.session_id) !== mySid) superseded = true;
+    }
+  } catch { /* best-effort supersession detection — never affects the claim below */ }
+  try { await supabase.rpc('claim_current_session', { p_device_label: label }); }
   catch { /* never block auth on a claim failure */ }
+  return { superseded, deviceLabel: label, at };
 }
 
 /**
@@ -253,7 +297,10 @@ async function supabaseFetchActiveSession() {
 
 // ── Mock implementations (local dev without Supabase) ────────────────────────
 
-async function mockClaimCurrentSession() { /* no-op in mock mode */ }
+async function mockClaimCurrentSession() {
+  // No real session store in mock mode — a claim never supersedes a prior device.
+  return { superseded: false, deviceLabel: sessionDeviceLabel(), at: new Date().toISOString() };
+}
 async function mockIsCurrentSession() { return true; }
 async function mockSignOutLocalSession() { mockSaveAuth(null); }
 async function mockFetchActiveSession() {
