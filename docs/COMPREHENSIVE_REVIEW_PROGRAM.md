@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE MONEY WAVE IS FULLY IMPLEMENTED (2026-07-19, claude/money-wave @ 0c2244b8,
+34 commits atop aad6265e — manager-verified lineage).** Final slices landed: M-9e
+active-session surface (lazy fetchActiveSession + relocated sign-out-everywhere +
+new_device_signin seam consumer, inert · analytics enrich superseded_prior, zero new
+eager names) · M-9f the §10.7 fraud-charter session probes (two-device claim race ·
+replayed-JWT rejection · eviction-mid-transfer session-orthogonality) WITH A REAL
+SECURITY FIX — the landed M-6 gate ran BEFORE the abort handler, making the
+session-INDEPENDENT abort escape hatch unreachable under the exact eviction it exists
+for; a token-bearing abort now skips the session gate (token hash = authorization) ·
+M-10 stewardship COMPLETE with the $25 dial bound in (seat_buyback_cents read at claim
+by buyback AND abandonment credit; transfer payout stays price/2=$49.50; ladder
+transfer>buyback PINNED; migration 164; buyback via shared performPayout; dormancy 18mo/
+abandonment 5y/90d→escheat, any sign-in aborts) · CENSUS UPGRADE — request-layer
+single-session gate on all 8 credit-spending AI surfaces (sessionGateCensus 17/17,
+both-layers pin). WHOLE-WAVE RECEIPTS: deno edge 391/0 · lane-end pins 63/63 (lifecycle
+· transition matrix · stewardship · fraud-charter · census · double-release impossible
+both payout paths · credits-election grant-once both) · closure 1,041,856 (§16 ≤900 B
+eviction allowance untouched; the standing budget red is the composite breach de-eager
+cures at fold) · full-suite reds = 4 parked goldens + the fold-owned doc/contract
+cluster (164) + one proven flake, NONE from these slices. FLAGGED FOR THE FRAUD-PASS
+(vetoable, beyond brief): the abort-token gate bypass · a fully-unauthenticated
+takeover-victim abort · the §7.3 supersession-during-transfer audit event on gated 401 ·
+founder-transfer's config.toml verify_jwt pin (deploy-config, fold/owner). NOW: THE FABLE
+FRAUD-PASS (§10 charter — MANDATORY before the fold) DISPATCHED over the assembled wave.
 **⬛ OWNER REFINEMENT (2026-07-19, same hour) — THE INTERCEPTION RACE joins R-8:**
 a third party at war with the target, IF the news of the embassy reaches it through
 the existing rumor lattice (hop-delayed, fidelity-degraded — no new carrier), becomes
