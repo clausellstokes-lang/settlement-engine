@@ -1134,6 +1134,25 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ T-3 POLITICS LANDED (2026-07-18, claude/traditions @ b79ea3d7, 2 commits).**
+0b7f410a ownership at mint (motif-fit; seat/faction/institution; keys on the REAL
+.faction shape via nameOf — the §17 hazard dodged) + owner-targeted legitimacy
+(seat full-weight, faction/institution HALF + news names them; the instability
+term self-lit) · b79ea3d7 reassignment checkpoints (seat-follow · ascendant claim
+0.35 · orphan→seat) + §7 mutations (rededication/scale-up/reanchor/drift; 8yr
+hysteresis on slow kinds; structural kinds fire on-event) — every mutation appends
+mutationLog {year,kind,cause}. LIT WALKTHROUGH REAL: a coup re-anchored the
+Founding Feast to The Iron Compact with a named log row; growth stepped scaleBand
+3→4; core motif + NAME IMMUTABLE (JUDGMENT: grandeur rides trappings, never a
+rename — stable dossier identity). Suite 13,263 / expected-5 + 1 isolation-cleared
+flake; dark golden byte-identical; zero eager. T-4 INTERFACE (binding): assign
+ownership to NEW records only (assignOwnership clobbers if re-run whole-set);
+index 0 = the founding core = the tier/fabric SENSOR — imposition suppresses,
+adoption replaces lowest non-founding, index 0 never moves; new mutationLog kinds
+restoration/adoption are STRUCTURAL (on-event). Dials soak-tunable. REMAINING:
+T-4 · T-5 · IT-6 · C4 Panel D (recipe ledgered) + craft · C2/C2L film · C3/C5-C16
+· Phase D — all briefs derivable from the frozen designs + these rows per
+START_HERE §5.
 **⬛⭐ C4 PANELS A-C LANDED (2026-07-18, deep-craft @ 2abed50e) — THE DOSSIER BASE
 IS SET.** 507662c0 Panel A DossierHeaderRow (header reroll REMOVED — stays in tab
 bodies; HEADER_FACT #D8C8A8 high-contrast; allowRename REVIVED at the component —
