@@ -1839,6 +1839,79 @@ async function dispatchStripeEvent(
       break;
     }
 
+    case 'customer.subscription.updated': {
+      // SUBSCRIPTION PAUSE / RESUME (downgrade audit; manager addendum). Stripe's
+      // customer-portal "pause" sets pause_collection on the subscription WITHOUT a
+      // .deleted event — so a paused Cartographer sub previously retained premium
+      // indefinitely (the audit's UNHANDLED finding). Treat pause_collection-active
+      // as a downgrade-equivalent and resumption as a restore.
+      //
+      // SURVEYOR DISCRIMINATION FIRST (like .deleted): a surveyor sub id lives ONLY in
+      // surveyor_entitlements (never profiles.stripe_subscription_id). A surveyor
+      // .updated must not touch Cartographer premium — surveyor pause is out of scope
+      // here (it keeps its entitlement; a future item may revisit).
+      const subscription = event.data.object as Stripe.Subscription;
+      const subId = subscription.id;
+
+      const { data: surveyorRow, error: survProbeErr } = await supabase
+        .from('surveyor_entitlements').select('user_id').eq('stripe_subscription_id', subId).maybeSingle();
+      if (survProbeErr) throw new Error(`Surveyor sub probe failed: ${survProbeErr.message}`);
+      if (surveyorRow) {
+        console.log(`[stripe-webhook] subscription.updated ${subId} is a Surveyor sub — pause handling is Cartographer-only, ignoring`);
+        break;
+      }
+
+      const updatedCustomerId = subscription.customer as string;
+      const updatedProfile = await findUserIdForStripeCustomer(supabase, updatedCustomerId);
+      if (!updatedProfile?.userId) break;
+      // Founders hold premium for life regardless of any subscription state.
+      if (updatedProfile.isFounder) {
+        console.log(`[stripe-webhook] subscription.updated ${subId} for founder ${updatedProfile.userId} — premium is lifetime, ignoring`);
+        break;
+      }
+      // STALE-SUB GUARD (087 idiom): only act on the user's CURRENTLY-recorded sub, so
+      // a redelivered/reordered .updated for an old subscription can't move their tier.
+      if (updatedProfile.stripeSubscriptionId && updatedProfile.stripeSubscriptionId !== subId) {
+        console.log(`[stripe-webhook] ignoring subscription.updated for ${subId}; user ${updatedProfile.userId}'s current sub is ${updatedProfile.stripeSubscriptionId}`);
+        break;
+      }
+
+      const isPaused = subscription.pause_collection != null;
+      if (isPaused) {
+        // JUDGMENT (vetoable): reuse handle_premium_downgrade rather than a new
+        // pause-specific state — a paused sub IS a loss of premium access, and the
+        // downgrade's 3-month retention window protects the user's assets exactly as a
+        // cancellation would (a resume within the window restores cleanly). Idempotent:
+        // only a currently-premium user downgrades (a redelivered pause no-ops).
+        if (updatedProfile.tier !== 'premium') {
+          console.log(`[stripe-webhook] subscription ${subId} paused but user ${updatedProfile.userId} is already not premium — no-op`);
+          break;
+        }
+        const { error: pauseDowngradeErr } = await supabase.rpc('handle_premium_downgrade', { target_user: updatedProfile.userId });
+        if (pauseDowngradeErr) throw new Error(`Premium pause-downgrade failed: ${pauseDowngradeErr.message}`);
+        const { error: pauseAuthErr } = await supabase.auth.admin.updateUserById(updatedProfile.userId, { user_metadata: { tier: 'free' } });
+        if (pauseAuthErr) throw new Error(`Auth pause-downgrade failed: ${pauseAuthErr.message}`);
+        // The recorded stripe_subscription_id is deliberately KEPT (unlike .deleted) so
+        // a later resume matches it and restores premium.
+        console.log(`[stripe-webhook] user ${updatedProfile.userId} downgraded to free while subscription ${subId} is paused`);
+      } else if (subscription.status === 'active') {
+        // Resume: restore premium ONLY if a prior pause left the user non-premium.
+        // A normal active .updated on an already-premium user is a no-op (the common
+        // case — most .updated events are routine and must not thrash the tier).
+        if (updatedProfile.tier === 'premium') break;
+        const { error: resumeAuthErr } = await supabase.auth.admin.updateUserById(updatedProfile.userId, { user_metadata: { tier: 'premium' } });
+        if (resumeAuthErr) throw new Error(`Auth resume-upgrade failed: ${resumeAuthErr.message}`);
+        const { error: resumeProfileErr } = await supabase.from('profiles')
+          .update({ tier: 'premium', premium_downgraded_at: null, premium_retention_expires_at: null })
+          .eq('id', updatedProfile.userId);
+        if (resumeProfileErr) throw new Error(`Resume profile update failed: ${resumeProfileErr.message}`);
+        const { error: resumeRestoreErr } = await supabase.rpc('restore_premium_settlements', { target_user: updatedProfile.userId });
+        if (resumeRestoreErr) throw new Error(`Resume restore failed: ${resumeRestoreErr.message}`);
+        console.log(`[stripe-webhook] user ${updatedProfile.userId} restored to premium after subscription ${subId} resumed`);
+      }
+      break;
+    }
+
     case 'customer.subscription.deleted': {
       // Downgrade from premium
       const subscription = event.data.object as Stripe.Subscription;

@@ -625,6 +625,107 @@ Deno.test('a REDELIVERED delete on an already-free user is a no-op (no retention
   assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);  // idempotent — not re-downgraded
 });
 
+// ── customer.subscription.updated: pause / resume (downgrade audit + addendum) ─
+// Stripe's portal "pause" sets pause_collection WITHOUT a .deleted — so a paused
+// Cartographer sub must downgrade (it no longer pays), and resumption must restore.
+// Discriminate surveyor subs (they live only in surveyor_entitlements); honor the
+// founder + stale-sub guards; idempotent both directions.
+// deno-lint-ignore no-explicit-any
+function makePauseStub(cfg: { isSurveyor?: boolean; profile: Record<string, unknown> | null }) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const authUpdates: Array<Record<string, unknown>> = [];
+  const profileUpdates: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    auth: { admin: { updateUserById: (_id: string, attrs: Record<string, unknown>) => { authUpdates.push(attrs); return Promise.resolve({ error: null }); } } },
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'surveyor_entitlements') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: cfg.isSurveyor ? { user_id: 'surv_u' } : null, error: null }) };
+        return b;
+      }
+      // deno-lint-ignore no-explicit-any
+      const sel: any = { select: () => sel, eq: () => sel, ilike: () => sel, maybeSingle: () => Promise.resolve({ data: cfg.profile, error: null }) };
+      return {
+        select: () => sel,
+        update: (vals: Record<string, unknown>) => {
+          profileUpdates.push(vals);
+          // deno-lint-ignore no-explicit-any
+          const u: any = { eq: () => u, then: (res: (v: unknown) => unknown) => Promise.resolve({ error: null }).then(res) };
+          return u;
+        },
+      };
+    },
+    rpc: (fn: string, args: unknown) => { rpc.push({ fn, args }); return Promise.resolve({ error: null }); },
+  };
+  return { rpc, authUpdates, profileUpdates, adminClient: () => client };
+}
+
+const subUpdatedEvent = (subId: string, opts: { customer?: string; pause?: unknown; status?: string } = {}) =>
+  JSON.stringify({
+    id: `evt_upd_${subId}_${opts.pause ? 'p' : 'a'}`,
+    type: 'customer.subscription.updated',
+    data: { object: { id: subId, customer: opts.customer ?? 'cus_pause', pause_collection: opts.pause ?? null, status: opts.status ?? 'active' } },
+  });
+
+Deno.test('a PAUSED Cartographer subscription downgrades the user to free (no silent premium retention)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), true);
+  assertEquals(stub.authUpdates.some((a) => JSON.stringify(a) === JSON.stringify({ user_metadata: { tier: 'free' } })), true);
+});
+
+Deno.test('a RESUMED subscription restores premium for a previously-paused (non-premium) user', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
+  const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'restore_premium_settlements'), true);
+  assertEquals(stub.authUpdates.some((a) => JSON.stringify(a) === JSON.stringify({ user_metadata: { tier: 'premium' } })), true);
+  assertEquals(stub.profileUpdates.some((u) => u.tier === 'premium' && u.premium_downgraded_at === null), true);
+});
+
+Deno.test('a paused SURVEYOR subscription never touches Cartographer premium', async () => {
+  const stub = makePauseStub({ isSurveyor: true, profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_surv', { pause: { behavior: 'void' } });
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a paused subscription for a FOUNDER never downgrades (premium is lifetime)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: true, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a pause on a STALE (non-current) subscription id does not downgrade', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_NEW', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_OLD', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
+Deno.test('a routine active .updated on an already-premium user is a no-op (no tier thrash)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'premium' } });
+  const body = subUpdatedEvent('sub_x', { pause: null, status: 'active' });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'restore_premium_settlements'), false);
+  assertEquals(stub.authUpdates.length, 0);
+});
+
+Deno.test('a pause on an already-non-premium user is a no-op (idempotent)', async () => {
+  const stub = makePauseStub({ profile: { id: 'u1', is_founder: false, stripe_subscription_id: 'sub_x', tier: 'free' } });
+  const body = subUpdatedEvent('sub_x', { pause: { behavior: 'void' } });
+  await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), stub);
+  assertEquals(stub.rpc.some((c) => c.fn === 'handle_premium_downgrade'), false);
+});
+
 // ── Email-fallback profile binding: ILIKE must be EXACT, never a pattern ─────
 // findUserIdForStripeCustomer falls back to email matching when no profile has
 // the Stripe customer id. ILIKE treats %/_/\ as wildcards, so an unescaped
