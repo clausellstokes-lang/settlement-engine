@@ -28,6 +28,10 @@ const REL_COLORS = { rival:'#8b1a1a', cold_war:'#8b1a1a', hostile:'#8b1a1a', all
 const LEDGER_CELL = { padding: `${SP.sm}px ${SP.md}px`, borderTop: `1px solid ${BORDER}`, verticalAlign: 'top' };
 // The small-caps rubric — the ledger's head/marker voice (Organic Craft law §2).
 const RUBRIC = { fontFamily: sans, fontSize: FS.xs, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' };
+// Visually-hidden but focusable/clickable — the real checkbox behind the inked
+// margin tally. The label wraps both input + glyph, so a click on the glyph (or
+// keyboard focus + space) toggles the input; the tally is a pure visual re-vehicle.
+const TALLY_INPUT_HIDDEN = { position: 'absolute', width: 1, height: 1, margin: -1, padding: 0, overflow: 'hidden', clip: 'rect(0 0 0 0)', border: 0, whiteSpace: 'nowrap' };
 
 // ── Settlement Card — a ledger row (reused in campaigns + unassigned) ──────────
 // Renders a <tr>: both call sites (the unassigned pile + each CampaignFolder) wrap
@@ -81,6 +85,20 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
   // beside it is the accessible label.
   const medallion = useMemo(() => emblem(s.name || 'settlement', { mode: 'light', size: 16 }), [s.name]);
 
+  // Memo-line — the settlement's active stressor, the SAME situation summary the
+  // dossier header consumes (OutputContainer's stressObj derivation feeds
+  // DossierHeaderRow, which renders stressObj.label). Read-only projection over the
+  // live settlement blob; a settlement with no active stressor shows no memo-line.
+  const stressObj = s.settlement?.stress
+    ? (Array.isArray(s.settlement.stress) ? s.settlement.stress[0] : s.settlement.stress)
+    : null;
+  const memoLine = stressObj?.label || null;
+
+  // The row's "world" after the interpunct — its owning campaign's name (the
+  // ledger idiom "name · world"), resolved from the campaigns roster. Null for an
+  // unassigned row (no campaign ⇒ just the name).
+  const campaignName = currentCampaignId ? (campaigns || []).find(c => c.id === currentCampaignId)?.name : null;
+
   // Whole-row click is a MOUSE-ONLY convenience: the explicit Open button (and,
   // in select mode, the checkbox) is the real accessible affordance, so the row
   // carries no role/tabindex. Clicks from inside the action cluster, the kebab
@@ -130,6 +148,10 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               htmlFor={`select-${s.id}`}
               style={{ display:'inline-flex', alignItems:'center', justifyContent:'center', padding:SP.xs, cursor: active ? 'pointer' : 'not-allowed' }}
             >
+              {/* The margin tally — the select control re-vehicled to an inked
+                  ledger tick (SAME input + handler). The native checkbox chrome is
+                  visually hidden behind an inked square; the input stays the
+                  accessible, focusable control. */}
               <input
                 id={`select-${s.id}`}
                 type="checkbox"
@@ -137,8 +159,9 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
                 disabled={!active}
                 onChange={() => active && onToggleSelect?.(s.id)}
                 aria-label={`Select ${s.name}`}
-                style={{ width:16, height:16, flexShrink:0, cursor: active ? 'pointer' : 'not-allowed', accentColor: GOLD }}
+                style={TALLY_INPUT_HIDDEN}
               />
+              <span aria-hidden="true" style={{ width:14, height:14, flexShrink:0, display:'inline-flex', alignItems:'center', justifyContent:'center', border:`1px solid ${selected ? GOLD : BORDER}`, color:GOLD, fontSize:FS.xs, fontWeight:800, lineHeight:1, opacity: active ? 1 : 0.5 }}>{selected ? '✓' : ''}</span>
             </label>
           </td>
         )}
@@ -146,11 +169,15 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
         {/* ── Settlement — medallion + name lead the row; the retained living-world
             detail stacks below (self-gating, byte-identical when dormant). */}
         <td style={selectMode ? LEDGER_CELL : { ...LEDGER_CELL, borderLeft: leadRail }}>
-          <div style={{ display:'flex', alignItems:'center', gap:SP.sm, minWidth:0 }}>
-            <span aria-hidden="true" style={{ flexShrink:0, lineHeight:0 }} dangerouslySetInnerHTML={{ __html: medallion }} />
+          <div style={{ display:'flex', alignItems:'baseline', gap:SP.sm, minWidth:0 }}>
+            <span aria-hidden="true" style={{ flexShrink:0, lineHeight:0, alignSelf:'center' }} dangerouslySetInnerHTML={{ __html: medallion }} />
             {/* The name is a real heading so screen-reader users navigate row-by-row. */}
             <h3 style={{ margin:0, fontSize:FS.lg, fontWeight:700, color:INK, fontFamily:serif_, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap', minWidth:0 }}>{s.name}</h3>
+            {/* "name · world" — the owning campaign after the interpunct. */}
+            {campaignName && <span style={{ fontSize:FS.sm, color:SECOND, whiteSpace:'nowrap', flexShrink:0 }}><span aria-hidden="true">· </span>{campaignName}</span>}
           </div>
+          {/* Memo-line — the settlement's live situation, in the surveyor's italic. */}
+          {memoLine && <div style={{ marginTop:2, fontStyle:'italic', fontSize:FS.sm, color:SECOND }}>{memoLine}</div>}
 
           {/* Living-world detail — retained verbatim; the row is self-gating so a
               peaceful, non-campaign, deity-free card shows only the identity line. */}
