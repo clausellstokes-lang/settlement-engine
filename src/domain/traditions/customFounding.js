@@ -24,7 +24,8 @@ import { createPRNG } from '../../kernel/prng.js';
  * epithet? }) into a founding TraditionRec, matching genesis's assembleRec key
  * order and null campaign-time fields (ownership/outcomes exist only where time
  * exists). A seeded, stable startWeekOfYear stands in for the absent authored date.
- * @param {{id?:string,name?:string,motifElement?:string,motifAct?:string,epithet?:string}} custom
+ * @typedef {{ id?: string, name?: string, motifElement?: string, motifAct?: string, epithet?: string }} CustomTraditionInput
+ * @param {CustomTraditionInput} custom
  */
 export function adaptCustomTradition(custom) {
   const id = `custom:${custom?.id ?? custom?.name ?? 'unnamed'}`;
@@ -53,9 +54,9 @@ export function adaptCustomTradition(custom) {
 /**
  * Return the founding set with authored custom traditions appended. An empty/absent
  * custom list ⇒ `baseRecs` returned UNCHANGED (byte-identical), preserving the golden.
- * @param {any[]} baseRecs   the output of deriveFoundingTraditions(settlement)
- * @param {any[]} customTraditions   customContent.traditions (may be undefined)
- * @returns {any[]}
+ * @param {import('./genesis.js').TraditionRec[]} baseRecs   the output of deriveFoundingTraditions(settlement)
+ * @param {CustomTraditionInput[]} customTraditions   customContent.traditions (may be undefined)
+ * @returns {Array<import('./genesis.js').TraditionRec | ReturnType<typeof adaptCustomTradition>>}
  */
 export function mergeCustomFoundingTraditions(baseRecs, customTraditions) {
   const base = Array.isArray(baseRecs) ? baseRecs : [];
