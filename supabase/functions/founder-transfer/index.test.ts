@@ -16,7 +16,7 @@ Deno.env.set('RESEND_API_KEY', 're_test');
 Deno.env.set('RESEND_FROM_EMAIL', 'noreply@settlementforge.com');
 Deno.env.set('STRIPE_PRICE_CREDITS_25', 'price_c25'); // the §4.4 rate anchor (credits election)
 
-const { handleFounderTransfer, __resetRateCacheForTest } = await import('./index.ts');
+const { handleFounderTransfer, hashToken, __resetRateCacheForTest } = await import('./index.ts');
 
 const req = (body: unknown, headers: Record<string, string> = { Authorization: 'Bearer jwt' }) =>
   new Request('https://edge/founder-transfer', { method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) });
@@ -34,6 +34,11 @@ function makeDeps(cfg: {
   connectOn?: boolean;              // deps.connectEnabled (payout_onboarding)
   // deno-lint-ignore no-explicit-any
   stripe?: any;                     // deps.stripeClient (payout_onboarding)
+  // The founder_transfer_events rows the abort-token hash lookup awaits (FF-d hashToken pins).
+  events?: Array<{ id: string; detail: Record<string, unknown> }>;
+  // Override the admin credential-change read (FF-d anomaly fail-closed pin).
+  // deno-lint-ignore no-explicit-any
+  getUserById?: (id?: string) => Promise<any>;
 } = {}) {
   const rpcCalls: Array<{ fn: string; args: unknown }> = [];
   const updateCalls: Array<{ table: string; obj: Record<string, unknown> }> = [];
@@ -58,14 +63,16 @@ function makeDeps(cfg: {
       select: () => b, eq: () => b, not: () => b, in: () => b, limit: () => b,
       maybeSingle: () => Promise.resolve({ data: (cfg.rows ?? {})[table] ?? null, error: null }),
       update: (obj: Record<string, unknown>) => { updateCalls.push({ table, obj }); return b; },
+      // The founder_transfer_events abort-token query is awaited directly (no maybeSingle).
       // deno-lint-ignore no-explicit-any
-      then: (resolve: any, reject: any) => Promise.resolve({ error: null }).then(resolve, reject),
+      then: (resolve: any, reject: any) =>
+        Promise.resolve({ data: table === 'founder_transfer_events' ? (cfg.events ?? []) : null, error: null }).then(resolve, reject),
     };
     return b;
   };
   // deno-lint-ignore no-explicit-any
   const admin: any = { rpc, from, auth: { admin: {
-    getUserById: () => Promise.resolve({ data: { user: { updated_at: '2000-01-01T00:00:00Z', email: 'from@x.com' } }, error: null }),
+    getUserById: cfg.getUserById ?? (() => Promise.resolve({ data: { user: { updated_at: '2000-01-01T00:00:00Z', email: 'from@x.com' } }, error: null })),
     updateUserById: () => Promise.resolve({ data: {}, error: null }),
   } } };
   // deno-lint-ignore no-explicit-any
@@ -182,6 +189,79 @@ Deno.test('an unknown action → 400', async () => {
   const { deps } = makeDeps({});
   const res = await handleFounderTransfer(req({ action: 'wat' }), deps);
   assertEquals(res.status, 400);
+});
+
+// ── FF-d (fraud-fix P2 hardening) ────────────────────────────────────────────
+// (1) The initiate anomaly pre-check FAILS CLOSED (§6.3's conservative intent): a read
+//     error on the credential-change probe HOLDS the initiate rather than proceeding blind.
+Deno.test('FF-d: initiate FAILS CLOSED when the credential-change read throws (security_hold, case NOT opened)', async () => {
+  const { deps, rpcCalls } = makeDeps({
+    rows: { founder_seats: { seat_id: 7 } },
+    getUserById: () => Promise.reject(new Error('supabase admin down')),
+    rpc: { transfer_case_open: { ok: true, case_id: 'case-x' }, issue_transfer_challenge: { ok: true, code: '123456' } },
+  });
+  const res = await handleFounderTransfer(req({ action: 'initiate', to_email: 'nom@x.com' }), deps);
+  assertEquals(res.status, 403);
+  assertEquals((await res.json()).error, 'security_hold');
+  // The anomaly read failed → the case was NEVER opened (held before opening, not after).
+  assertEquals(rpcCalls.some((c) => c.fn === 'transfer_case_open'), false);
+});
+
+// (2) A mid-transfer supersession leaves a trace: a superseded, case-bearing action
+//     appends a 'session_superseded_during_transfer' case audit event before the 401 (§7.3).
+Deno.test('FF-d: a superseded case-bearing action appends the §7.3 session_superseded_during_transfer event before 401', async () => {
+  const { deps, rpcCalls } = makeDeps({ sessionRow: { session_id: 'winner' } });
+  const res = await handleFounderTransfer(
+    req({ action: 'nominee_confirm', case_id: 'c1', code: '000000' }, { Authorization: `Bearer ${jwtWithSession('evicted')}` }),
+    deps,
+  );
+  assertEquals(res.status, 401);
+  assertEquals((await res.json()).error, 'session_superseded');
+  const ev = rpcCalls.find((c) => c.fn === '_log_founder_transfer_event');
+  assertEquals(ev !== undefined, true);
+  assertEquals((ev!.args as { p_case: string; p_event: string }).p_case, 'c1');
+  assertEquals((ev!.args as { p_event: string }).p_event, 'session_superseded_during_transfer');
+});
+
+// (3) hashToken is a REAL SHA-256 digest (64 hex chars), not the 32-bit FNV fold (8 chars).
+Deno.test('FF-d: hashToken is a SHA-256 digest (64 hex chars), deterministic', async () => {
+  const h = await hashToken('the-real-token');
+  assertEquals(h.length, 64);
+  assertEquals(/^[0-9a-f]{64}$/.test(h), true);
+  assertEquals(await hashToken('the-real-token'), h);         // deterministic
+  assertEquals((await hashToken('a-different-token')) === h, false);
+});
+
+// (3b) Round-trip: a NON-party holding the REAL token aborts (the hash IS the authorization);
+//      a FORGED token does not. Proves the digest round-trips end to end (fraudPass a1/a2).
+Deno.test('FF-d: a non-party with the REAL abort token aborts; a forged token is rejected', async () => {
+  const token = 'the-real-token';
+  const good = makeDeps({
+    sessionRow: { session_id: 'winner' },
+    rows: { founder_transfer_cases: { from_user: 'other-a', to_user: 'other-b', state: 'cooling', stripe_session_id: null } },
+    events: [{ id: 'e1', detail: { token_hash: await hashToken(token) } }],
+    rpc: { transfer_case_abort: { ok: true, was_paid: false } },
+  });
+  const okRes = await handleFounderTransfer(
+    req({ action: 'abort', case_id: 'c1', token }, { Authorization: `Bearer ${jwtWithSession('evicted')}` }),
+    good.deps,
+  );
+  assertEquals(okRes.status, 200);
+  assertEquals(good.rpcCalls.some((c) => c.fn === 'transfer_case_abort'), true);
+
+  const forged = makeDeps({
+    sessionRow: { session_id: 'winner' },
+    rows: { founder_transfer_cases: { from_user: 'other-a', to_user: 'other-b', state: 'cooling', stripe_session_id: null } },
+    events: [{ id: 'e1', detail: { token_hash: await hashToken(token) } }],
+    rpc: { transfer_case_abort: { ok: true, was_paid: false } },
+  });
+  const badRes = await handleFounderTransfer(
+    req({ action: 'abort', case_id: 'c1', token: 'a-forged-token' }, { Authorization: `Bearer ${jwtWithSession('evicted')}` }),
+    forged.deps,
+  );
+  assertEquals(badRes.status, 403);
+  assertEquals((await badRes.json()).error, 'invalid_token');
+  assertEquals(forged.rpcCalls.some((c) => c.fn === 'transfer_case_abort'), false);
 });
 
 // ───────────────────────────── run_due (the due-runner, §6.6) ─────────────────────

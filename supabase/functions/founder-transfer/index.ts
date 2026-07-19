@@ -132,6 +132,22 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
   // and a tokenless abort, still evicts a superseded device. (M-9f, §10.7.)
   const wantsTokenAbort = action === 'abort' && typeof payload.token === 'string' && payload.token.trim().length > 0;
   if (!wantsTokenAbort && await isSessionSuperseded(admin, user.id, authHeader, deviceLabelFromRequest(req))) {
+    // §7.3 observability (FF-d): a mid-transfer credential fight — a superseded device
+    // taking a case-bearing step — must leave a trace on the case audit log (the anomaly
+    // signal the fraud pass probes). Append BEFORE the 401. Never-throw: a logging failure
+    // must not turn the eviction into a 500. actor 'system' (the enforcing gate; the
+    // 160 actor enum has no 'session' value).
+    const gatedCaseId = typeof payload.case_id === 'string' ? payload.case_id.trim() : '';
+    if (gatedCaseId) {
+      try {
+        await admin.rpc('_log_founder_transfer_event', {
+          p_case: gatedCaseId, p_actor: 'system', p_event: 'session_superseded_during_transfer',
+          p_detail: { action, at: new Date().toISOString() },
+        });
+      } catch (e) {
+        logError('founder-transfer', user.id, (e as Error)?.message ?? 'audit append failed', { stage: 'session_superseded_audit', case_id: gatedCaseId });
+      }
+    }
     return json({ error: 'session_superseded' }, 401);
   }
 
@@ -158,13 +174,18 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
         // is the audit read — it bumps on password change / recovery; a broad signal,
         // so it conservatively HOLDS more often, the safe direction for a transfer).
         try {
-          const { data: got } = await admin.auth.admin.getUserById(user.id);
+          const { data: got, error: gErr } = await admin.auth.admin.getUserById(user.id);
+          if (gErr) throw new Error(gErr.message ?? 'getUserById error');
           const updatedAt = got?.user?.updated_at ? new Date(got.user.updated_at).getTime() : 0;
           if (updatedAt && Date.now() - updatedAt < 7 * 24 * 3600 * 1000) {
             return json({ error: 'security_hold', reason: 'recent_credential_change' }, 403);
           }
         } catch (e) {
+          // FAIL CLOSED (FF-d, §6.3): a read failure HOLDS the initiate rather than opening
+          // a case blind — the conservative direction for a value-moving transfer (mirrors
+          // the recovery lockout's fail-closed posture).
           logError('founder-transfer', user.id, (e as Error)?.message ?? 'getUserById failed', { stage: 'anomaly' });
+          return json({ error: 'security_hold', reason: 'anomaly_check_unavailable' }, 403);
         }
 
         // Find the caller's seat.
@@ -307,9 +328,10 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
         } else if (token) {
           const { data: ev } = await admin.from('founder_transfer_events')
             .select('id, detail').eq('case_id', caseId).eq('event', 'abort_token_issued');
+          const wanted = await hashToken(token);      // async SHA-256 (FF-d); computed once
           const ok = Array.isArray(ev) && ev.some((row) => {
             const h = (row.detail as Record<string, unknown> | null)?.token_hash;
-            return typeof h === 'string' && h === hashToken(token);
+            return typeof h === 'string' && h === wanted;
           });
           if (!ok) return json({ error: 'invalid_token' }, 403);
           actor = 'outgoing';
@@ -378,13 +400,17 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
         // Anomaly pre-check: credentials changed within 7 days (mirror initiate — a
         // buyback releases the seat + pays out, so it holds on a recent credential change).
         try {
-          const { data: got } = await admin.auth.admin.getUserById(user.id);
+          const { data: got, error: gErr } = await admin.auth.admin.getUserById(user.id);
+          if (gErr) throw new Error(gErr.message ?? 'getUserById error');
           const updatedAt = got?.user?.updated_at ? new Date(got.user.updated_at).getTime() : 0;
           if (updatedAt && Date.now() - updatedAt < 7 * 24 * 3600 * 1000) {
             return json({ error: 'security_hold', reason: 'recent_credential_change' }, 403);
           }
         } catch (e) {
+          // FAIL CLOSED (FF-d, §6.3): a read failure HOLDS the buyback (releases seat + pays
+          // out) rather than proceeding blind — same posture as initiate above.
           logError('founder-transfer', user.id, (e as Error)?.message ?? 'getUserById failed', { stage: 'buyback_anomaly' });
+          return json({ error: 'security_hold', reason: 'anomaly_check_unavailable' }, 403);
         }
         const { data: ch, error: chErr } = await admin.rpc('issue_buyback_challenge', { p_user: user.id });
         if (chErr) throw new Error(chErr.message);
@@ -472,12 +498,13 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
 
 /** Deterministic single-use token hash (the abort email token; the cooling sweep
  *  stores it, the `abort` action verifies against it). */
-export function hashToken(token: string): string {
-  // A stable non-cryptographic fold is sufficient here — the token is high-entropy and
-  // single-use; the hash only avoids storing the raw token in the events log.
-  let h = 0x811c9dc5;
-  for (let i = 0; i < token.length; i += 1) { h ^= token.charCodeAt(i); h = Math.imul(h, 0x01000193); }
-  return (h >>> 0).toString(16).padStart(8, '0');
+export async function hashToken(token: string): Promise<string> {
+  // A real SHA-256 digest (Web Crypto — present in the Deno edge runtime), hex-encoded.
+  // The token is high-entropy + single-use; the hash only avoids storing the raw token in
+  // the events log. Upgraded from a foldable 32-bit FNV hash (FF-d) so the stored value
+  // resists any preimage/collision search — the digest, not the fold, is the wall.
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
+  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
 /** A high-entropy single-use abort token (session-INDEPENDENT — §6.3, the takeover
@@ -577,7 +604,7 @@ async function sweepCoolingNotifications(admin: AnyClient, deps: Deps): Promise<
     // sweep re-mints nothing on the next hour). The token is emailed in the same pass.
     await admin.rpc('_log_founder_transfer_event', {
       p_case: c.id, p_actor: 'system', p_event: 'abort_token_issued',
-      p_detail: { token_hash: hashToken(token) },
+      p_detail: { token_hash: await hashToken(token) },
     });
     const abortUrl = `${CLIENT_URL}/account?section=subscription&transfer_case=${c.id}&transfer_abort=${encodeURIComponent(token)}`;
     const fromEmail = await lookupEmail(admin, c.from_user);
