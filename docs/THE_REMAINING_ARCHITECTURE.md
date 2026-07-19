@@ -346,10 +346,14 @@ do not simply stop the program and wait for me to push… create a loop cycle of
 complete exhaustive review cycle to fixes until there is materially no more
 fixes to be made and every dimension that can be made into A+ is made into an
 A+ at this stage, rinse and repeat.")
-- ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete). The owner walk
-  runs ALONGSIDE, NON-BLOCKING (walk feedback = rulings, folded into the next
-  cycle's intake); pushes continue per Ruling #7 as backup; NOTHING in the loop
-  waits on a push.
+- ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete) → ⬛ THE PUSH
+  IMMEDIATELY (owner amendment 2026-07-19: "push after just in case, i can't
+  delay it after that for safety then the site-walk") — the full §3 push
+  completion runs as a HARD, UNDELAYABLE step the moment the composite exists
+  (all branches, per-branch SHA verification; the safety snapshot) → THEN the
+  site-walk (owner) — the walk remains NON-BLOCKING to the loop's cycles (walk
+  feedback = rulings, folded into the next cycle's intake); further pushes
+  continue per Ruling #7 as backup after each cycle's fix waves.
 - THE CYCLE (repeat until convergence): (1) FULL RESURVEY — fan-out across every
   dimension (correctness · cohesion/counterparts · experience/immersion vs THE
   EIGHT CROWNS · substance benchmarks · performance/eager · security/abuse · AI
