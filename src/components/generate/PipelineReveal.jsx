@@ -35,7 +35,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
-import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { GOLD, INK_DEEP, sans, serif_, FS, SP, swatch } from '../theme.js';
 import { flag } from '../../lib/flags.js';
 import { legsForTier } from '../loadingJourney/journeyManifest.js';
 import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
@@ -183,7 +183,6 @@ export default function PipelineReveal({ onComplete }) {
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: 'linear-gradient(180deg, rgba(43,33,16,0.85), rgba(27,20,8,0.95))',
         border: `1px solid ${GOLD}55`,
-        borderRadius: R.lg,
         textAlign: 'center',
       }}>
         <div style={{
@@ -213,7 +212,7 @@ export default function PipelineReveal({ onComplete }) {
         <div style={{
           marginTop: SP.lg, height: 3,
           background: 'rgba(201,162,76,0.15)',
-          borderRadius: 2, overflow: 'hidden',
+          overflow: 'hidden',
         }}>
           <div style={{
             height: '100%',

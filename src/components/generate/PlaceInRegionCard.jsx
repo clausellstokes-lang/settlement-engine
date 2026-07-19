@@ -21,7 +21,7 @@
 import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { buildRegistry } from '../../lib/customRegistry.js';
-import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, R, PROSE_MAX } from '../theme.js';
+import { INK, SECOND, BODY, BORDER, BORDER2, CARD, GOLD, sans, serif_, FS, SP, PROSE_MAX } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 export default function PlaceInRegionCard() {
@@ -41,7 +41,7 @@ export default function PlaceInRegionCard() {
   }, [customContent]);
 
   const wrap = {
-    border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.lg,
+    border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD}`,
     padding: `${SP.md}px ${SP.lg}px`, background: CARD,
   };
   const heading = (
@@ -87,7 +87,7 @@ export default function PlaceInRegionCard() {
             id="place-campaign"
             value={targetId}
             onChange={e => updateConfig({ targetCampaignId: e.target.value || null })}
-            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, borderRadius: 5, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
+            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
           >
             <option value="">Unassigned (keep it standalone)</option>
             {campaigns.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -103,7 +103,7 @@ export default function PlaceInRegionCard() {
             id="place-deity"
             value={deityRef}
             onChange={e => updateConfig({ primaryDeityRef: e.target.value || null })}
-            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, borderRadius: 5, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
+            style={{ width: '100%', padding: '6px 10px', border: `1px solid ${BORDER2}`, fontSize: FS.sm, fontFamily: sans, color: INK, background: CARD, cursor: 'pointer' }}
           >
             <option value="">No primary deity (dormant)</option>
             {deities.map(d => <option key={d.refId} value={d.refId}>{d.name}</option>)}

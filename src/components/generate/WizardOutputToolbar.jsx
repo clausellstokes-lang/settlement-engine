@@ -15,7 +15,7 @@
 
 import { lazy, Suspense } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, R, FS, CHROME } from '../theme.js';
+import { GOLD, INK, INK_DEEP, MUTED, serif_, SP, FS, CHROME } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 
@@ -34,7 +34,6 @@ export function WizardOutputToolbar({
       display: 'flex', alignItems: 'center', gap: SP.md, flexWrap: 'wrap',
       padding: `${SP.md}px ${SP.lg}px`,
       background: `linear-gradient(to right, ${INK}, ${INK_DEEP})`,
-      borderRadius: R.lg,
       boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
       // Cap the toolbar to the dossier's column and centre it so on wide screens
       // its edges align to the PAGE_MAX dossier below instead of overhanging full

@@ -27,9 +27,7 @@ import Button from '../primitives/Button.jsx';
 import Stat from '../primitives/Stat.jsx';
 import { TextInputDialog } from '../primitives/Dialog.jsx';
 import {
-  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN,
-  sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  INK, MUTED, BODY, BORDER, BORDER2, CARD_HDR, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
 
 /** Invoke an admin-actions edge action. Returns the data payload or throws. */
 async function callAdmin(body) {
@@ -222,7 +220,7 @@ export default function AdminUsersPanel() {
       <div style={{
         display: 'flex', alignItems: 'center', gap: SP.sm,
         padding: `${SP.sm}px ${SP.md}px`, marginBottom: SP.md,
-        background: swatch.white, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        background: swatch.white, border: `1px solid ${BORDER}`,
       }}>
         <input
           type="text" aria-label="Search users by id, email, or name"
@@ -247,7 +245,7 @@ export default function AdminUsersPanel() {
       {/* Results list */}
       {results.length > 0 && (
         <div role="table" aria-label="Search results"
-          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}`, borderRadius: R.md }}>
+          style={{ maxHeight: 220, overflowY: 'auto', marginBottom: SP.md, border: `1px solid ${BORDER2}` }}>
           <div role="row" style={{
             display: 'flex', gap: SP.sm, padding: `${SP.xs}px ${SP.md}px`,
             background: CARD_HDR, borderBottom: `1px solid ${BORDER2}`,
@@ -279,7 +277,7 @@ export default function AdminUsersPanel() {
 
       {/* Selected user — REDACTED summary */}
       {selected && (
-        <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, padding: SP.lg, background: swatch.white }}>
+        <div style={{ border: `1px solid ${BORDER}`, padding: SP.lg, background: swatch.white }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.md }}>
             <div>
               <h4 style={{ margin: 0, fontFamily: serif_, fontSize: FS.lg, color: INK }}>
@@ -324,7 +322,7 @@ export default function AdminUsersPanel() {
             <div aria-label="Billing summary" style={{
               display: 'flex', flexWrap: 'wrap', gap: SP.lg, alignItems: 'center',
               padding: SP.md, marginBottom: SP.md,
-              background: CARD_HDR, border: `1px solid ${BORDER2}`, borderRadius: R.md,
+              background: CARD_HDR, border: `1px solid ${BORDER2}`,
             }}>
               <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 Billing

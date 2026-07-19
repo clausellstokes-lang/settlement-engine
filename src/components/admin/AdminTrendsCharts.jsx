@@ -7,9 +7,7 @@
  */
 import { useId, useMemo } from 'react';
 import {
-  INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH,
-  RED, GREEN, sans, serif_, SP, R, FS, swatch,
-} from '../theme.js';
+  INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, CARD_ALT, CARD_HDR, PARCH, RED, GREEN, sans, serif_, SP, FS, swatch } from '../theme.js';
 import { PALETTE, fmtInt, fmtVal, fmtBucket } from './AdminTrendsShared.js';
 
 // ── tiny UI atoms ────────────────────────────────────────────────────────────
@@ -27,7 +25,7 @@ export function Select({ value, onChange, options, label }) {
         value={value} onChange={(e) => onChange(e.target.value)}
         style={{
           fontFamily: sans, fontSize: FS.xs, color: INK, background: CARD, cursor: 'pointer',
-          border: `1px solid ${BORDER}`, borderRadius: R.md, padding: `${SP.xs}px ${SP.sm}px`,
+          border: `1px solid ${BORDER}`, padding: `${SP.xs}px ${SP.sm}px`,
         }}
       >
         {options.map((o) => <option key={o.key} value={o.key}>{o.label}</option>)}
@@ -38,7 +36,7 @@ export function Select({ value, onChange, options, label }) {
 
 export function Card({ title, control, children }) {
   return (
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.lg, background: CARD, padding: SP.md }}>
+    <div style={{ border: `1px solid ${BORDER}`, background: CARD, padding: SP.md }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, flexWrap: 'wrap', marginBottom: SP.sm }}>
         <h4 style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK_DEEP, margin: 0 }}>{title}</h4>
         {control}
@@ -53,7 +51,7 @@ export function Kpi({ label, value, avg, delta }) {
   const color = delta.dir === 'up' ? swatch.success || GREEN : delta.dir === 'down' ? swatch.danger || RED : MUTED;
   const arrow = delta.dir === 'up' ? '▲' : delta.dir === 'down' ? '▼' : '·';
   return (
-    <div style={{ border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT, padding: `${SP.sm}px ${SP.md}px`, minWidth: 116 }}>
+    <div style={{ border: `1px solid ${BORDER}`, background: CARD_ALT, padding: `${SP.sm}px ${SP.md}px`, minWidth: 116 }}>
       <div style={{ fontFamily: sans, fontSize: FS.xxs, color: MUTED, textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</div>
       <div style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK, lineHeight: 1.1, marginTop: 2 }}>{fmtVal(value, avg)}</div>
       <div style={{ fontFamily: sans, fontSize: FS.xxs, color, marginTop: 2 }}>{arrow} {delta.label} <span style={{ color: MUTED }}>vs prior</span></div>
@@ -83,7 +81,7 @@ export function MultiLineChart({ series, granularity }) {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.xs }}>
         {series.map((s) => (
           <span key={s.key} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: FS.xxs, color: SECOND }}>
-            <span style={{ width: 10, height: 3, borderRadius: 2, background: s.color }} /> {s.label}
+            <span style={{ width: 10, height: 3, background: s.color }} /> {s.label}
           </span>
         ))}
       </div>
@@ -156,7 +154,7 @@ export function StackedBarChart({ rows, granularity }) {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm, marginBottom: SP.xs }}>
         {cats.map((c, i) => (
           <span key={c} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontFamily: sans, fontSize: FS.xxs, color: SECOND }}>
-            <span style={{ width: 10, height: 10, borderRadius: 2, background: colorOf(c, i) }} /> {c}
+            <span style={{ width: 10, height: 10, background: colorOf(c, i) }} /> {c}
           </span>
         ))}
       </div>
@@ -208,8 +206,8 @@ export function BarList({ rows, max = 12 }) {
       {items.map(([k, v], i) => (
         <div key={k} style={{ display: 'grid', gridTemplateColumns: '120px 1fr 64px', alignItems: 'center', gap: SP.sm, fontFamily: sans, fontSize: FS.xs }}>
           <span title={k} style={{ color: SECOND, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{k}</span>
-          <span style={{ background: PARCH, borderRadius: R.sm, height: 14, position: 'relative' }}>
-            <span style={{ display: 'block', height: '100%', width: `${(v / peak) * 100}%`, background: PALETTE[i % PALETTE.length], borderRadius: R.sm }} />
+          <span style={{ background: PARCH, height: 14, position: 'relative' }}>
+            <span style={{ display: 'block', height: '100%', width: `${(v / peak) * 100}%`, background: PALETTE[i % PALETTE.length] }} />
           </span>
           <span style={{ color: INK, textAlign: 'right' }}>{fmtInt(v)} <span style={{ color: MUTED }}>({((v / total) * 100).toFixed(0)}%)</span></span>
         </div>

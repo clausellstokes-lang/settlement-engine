@@ -52,7 +52,7 @@ export default function ForgeExactDemo() {
   };
 
   return (
-    <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`, borderRadius: 8,
+    <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${GOLD}`,
       padding: '16px 18px', background: PARCH, display: 'flex', flexWrap: 'wrap',
       alignItems: 'center', gap: 16, justifyContent: 'space-between' }}>
       <div style={{ flex: '1 1 320px', minWidth: 0 }}>

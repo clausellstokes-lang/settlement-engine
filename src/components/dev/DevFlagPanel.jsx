@@ -89,7 +89,7 @@ export default function DevFlagPanel() {
           ...baseStyle,
           padding: '6px 10px',
           background: swatch.inkMag, color: GOLD,
-          border: '1px solid #c9a24c', borderRadius: 6,
+          border: '1px solid #c9a24c',
           boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
         }}
       >
@@ -106,7 +106,6 @@ export default function DevFlagPanel() {
       width: 340, maxHeight: '70vh',
       display: 'flex', flexDirection: 'column',
       background: PARCH, border: '2px solid #1c1409',
-      borderRadius: 8,
       boxShadow: '0 8px 24px rgba(0,0,0,0.35)',
       overflow: 'hidden',
     }}>
@@ -168,7 +167,7 @@ export default function DevFlagPanel() {
                     <span title="Override set (clear to use default)" style={{
                       fontSize: FS.micro, fontWeight: 700, color: SLATE,
                       background: SLATE_BG, border: '1px solid #5A6E82',
-                      borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
+                      padding: '0 4px', letterSpacing: '0.04em',
                     }}>
                       OVERRIDE
                     </span>

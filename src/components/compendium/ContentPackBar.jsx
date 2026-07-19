@@ -82,7 +82,7 @@ export default function ContentPackBar() {
       data-testid="content-pack-bar"
       style={{
         marginBottom: 12, padding: '8px 12px', background: CARD,
-        border: `1px solid ${BOR}`, borderRadius: 7,
+        border: `1px solid ${BOR}`,
         display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
       }}
     >

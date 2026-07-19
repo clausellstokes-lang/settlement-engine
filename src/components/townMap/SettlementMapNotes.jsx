@@ -21,7 +21,7 @@ import { useState } from 'react';
 import Button from '../primitives/Button.jsx';
 import SurveyorNote from '../guidance/SurveyorNote.jsx';
 import { useStore } from '../../store/index.js';
-import { BODY, BORDER, CARD_ALT, ELEV, FS, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD_ALT, ELEV, FS, INK, MUTED, SP, sans } from '../theme.js';
 
 const BAND_LABEL = { strong: 'a strong pull', moderate: 'a fair pull', slight: 'a slight pull' };
 
@@ -251,7 +251,7 @@ const panelStyle = {
   maxWidth: 'min(78vw, 300px)', maxHeight: 'min(70vh, 460px)', overflow: 'auto',
   display: 'flex', flexDirection: 'column', gap: SP.md,
   padding: SP.md, background: CARD_ALT, border: `1px solid ${BORDER}`,
-  borderRadius: R.lg, boxShadow: ELEV[3],
+  boxShadow: ELEV[3],
 };
 const sectionStyle = { display: 'flex', flexDirection: 'column' };
 const listStyle = { margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 4 };
@@ -267,6 +267,6 @@ const depthLockStyle = {
   justifyContent: 'flex-start', gap: SP.xs, marginTop: SP.xs,
   width: '100%', textAlign: 'left', whiteSpace: 'normal', minHeight: 0,
   padding: `${SP.xs}px ${SP.sm}px`, background: 'transparent',
-  border: `1px dashed ${BORDER}`, borderRadius: R.sm,
+  border: `1px dashed ${BORDER}`,
   color: MUTED, fontSize: FS.xs, fontWeight: 700,
 };

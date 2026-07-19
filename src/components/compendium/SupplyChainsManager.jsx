@@ -61,7 +61,7 @@ export default function SupplyChainsManager() {
       {/* Intro callout: left-accent only (not a full box) so it matches the
           chain cards' grammar and doesn't out-weight the content it introduces
           — the heaviest container is reserved for the chains, not the explainer (P5). */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, borderLeft: `3px solid ${swatch.magic}`, borderRadius: 7, background: swatch['#F8F4FF'] }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, padding: '10px 12px', marginBottom: 12, borderLeft: `3px solid ${swatch.magic}`, background: swatch['#F8F4FF'] }}>
         <div style={{ fontSize: FS.xs, color: BODY, fontFamily: sans, lineHeight: 1.5 }}>
           Supply chains are <strong>discovered automatically</strong> from your custom institutions,
           services, resources, and trade goods. The engine connects what each one produces to what
@@ -77,7 +77,7 @@ export default function SupplyChainsManager() {
           <div style={sectionLabel}>Confirmed ({confirmed.length})</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
             {confirmed.map((chain) => (
-              <div key={chain.id || chain.chainId} style={{ border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GREEN}`, borderRadius: 7, padding: '8px 12px', background: 'rgba(240,250,242,0.6)' }}>
+              <div key={chain.id || chain.chainId} style={{ border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GREEN}`, padding: '8px 12px', background: 'rgba(240,250,242,0.6)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginBottom: 6 }}>
                   <span style={{ fontSize: FS.sm, fontWeight: 800, color: INK, fontFamily: sans }}>{chain.label}</span>
                   <Button variant="ghost" size="sm" icon={<Trash2 size={12} />} onClick={() => deleteCustomItem('supplyChains', chain.id)}>
@@ -102,7 +102,7 @@ export default function SupplyChainsManager() {
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {pending.map((chain) => (
-            <div key={chain.chainId} style={{ border: `1px solid ${BORDER}`, borderLeft: `3px solid ${AMBER}`, borderRadius: 7, padding: '8px 12px', background: 'rgba(253,248,236,0.6)' }}>
+            <div key={chain.chainId} style={{ border: `1px solid ${BORDER}`, borderLeft: `3px solid ${AMBER}`, padding: '8px 12px', background: 'rgba(253,248,236,0.6)' }}>
               <ChainRow chain={chain} instNames={instNames} primaryExports={exportsOf(chain)} />
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
                 <input
@@ -110,7 +110,7 @@ export default function SupplyChainsManager() {
                   value={names[chain.chainId] ?? ''}
                   onChange={(e) => setNames((d) => ({ ...d, [chain.chainId]: e.target.value }))}
                   placeholder={`Name this chain (e.g. ${chain.label})`}
-                  style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, borderRadius: 4, fontSize: FS.xs, fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
+                  style={{ flex: '1 1 220px', minWidth: 180, padding: '5px 8px', border: `1px solid ${BORDER}`, fontSize: FS.xs, fontFamily: sans, color: INK, background: swatch.white, outline: 'none' }}
                 />
                 <Button variant="success" size="sm" icon={<Check size={12} />} onClick={() => confirm(chain)}>
                   Confirm

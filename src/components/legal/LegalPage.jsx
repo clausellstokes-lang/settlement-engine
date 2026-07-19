@@ -12,7 +12,7 @@
  */
 import Page from '../primitives/Page.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
-import { PROSE_MAX, INK, BODY, GOLD_DEEP, BORDER, CARD, serif_, sans, FS, SP, R } from '../theme.js';
+import { PROSE_MAX, INK, BODY, GOLD_DEEP, BORDER, CARD, serif_, sans, FS, SP } from '../theme.js';
 import { POLICY_STATUS, POLICY_EFFECTIVE } from '../../lib/policyVersion.js';
 
 /** A titled prose section. */
@@ -66,7 +66,7 @@ export default function LegalPage({ eyebrow, title, subtitle, children }) {
       <div role="note" style={{
         marginBottom: SP.lg, padding: `${SP.sm}px ${SP.md}px`,
         background: CARD, border: `1px solid ${BORDER}`,
-        borderLeft: `4px solid ${GOLD_DEEP}`, borderRadius: R.md,
+        borderLeft: `4px solid ${GOLD_DEEP}`,
         fontFamily: sans, fontSize: FS.xs, color: BODY, lineHeight: 1.5,
       }}>
         <strong style={{ color: INK }}>{POLICY_STATUS}.</strong>{' '}

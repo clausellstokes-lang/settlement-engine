@@ -16,7 +16,7 @@
  */
 
 import { lazy, Suspense } from 'react';
-import { BORDER, CARD, INK, BODY, sans, serif_, SP, R, FS, LANDING_MAX } from '../theme.js';
+import { BORDER, CARD, INK, BODY, sans, serif_, SP, FS, LANDING_MAX } from '../theme.js';
 import HomeHero from '../HomeHero.jsx';
 import { ModeSelector } from './ModeSelector.jsx';
 import PageHeader from '../primitives/PageHeader.jsx';
@@ -27,7 +27,7 @@ import PageHeader from '../primitives/PageHeader.jsx';
 function ProofSkeleton({ height }) {
   return (
     <div aria-hidden="true" style={{
-      height, borderRadius: R.lg, border: `1px solid ${BORDER}`, background: CARD,
+      height, border: `1px solid ${BORDER}`, background: CARD,
       opacity: 0.6,
     }} />
   );

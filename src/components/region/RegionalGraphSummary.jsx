@@ -138,7 +138,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                borderRadius: 5,
                 background: swatch['#F8F4EE'],
               }}
             >
@@ -178,7 +177,6 @@ export default function RegionalGraphSummary({
                 alignItems: 'center',
                 gap: 7,
                 padding: '5px 7px',
-                borderRadius: 5,
                 background: GOLD_BG,
               }}
             >

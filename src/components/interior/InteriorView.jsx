@@ -17,7 +17,7 @@
  */
 
 import { useMemo } from 'react';
-import { INK, MUTED, BORDER, CARD, PARCH, sans, FS, R, SP } from '../theme.js';
+import { INK, MUTED, BORDER, CARD, PARCH, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import {
   buildInteriorModel, buildInteriorSvg, applyInteriorEdits, hasDrawableInterior,
@@ -62,7 +62,7 @@ export default function InteriorView({
   return (
     <div style={{
       fontFamily: sans, background: CARD, color: INK, border: `1px solid ${BORDER}`,
-      borderRadius: R.lg, padding: SP.md, maxWidth: size + SP.md * 2,
+      padding: SP.md, maxWidth: size + SP.md * 2,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: SP.sm, marginBottom: SP.sm }}>
         <div>
@@ -85,7 +85,7 @@ export default function InteriorView({
           alt={`Interior floor plan of ${name}`}
           width={size}
           height={size}
-          style={{ display: 'block', width: size, maxWidth: '100%', height: 'auto', background: PARCH, borderRadius: R.md }}
+          style={{ display: 'block', width: size, maxWidth: '100%', height: 'auto', background: PARCH }}
         />
       ) : (
         <div style={{ fontSize: FS.md, color: MUTED, padding: SP.lg, textAlign: 'center' }}>

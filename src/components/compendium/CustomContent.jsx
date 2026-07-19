@@ -185,7 +185,7 @@ export function ReadOnlyCustomContentList({ search }) {
           return (
             <button key={c.key} type="button" aria-pressed={activeCat === c.key} onClick={() => setActiveCat(c.key)} style={{
               display: 'flex', alignItems: 'center', gap: 4, padding: '4px 10px', minHeight: 44,
-              borderRadius: 12, fontSize: FS.xs,
+              fontSize: FS.xs,
               fontWeight: activeCat === c.key ? 700 : 500, cursor: 'pointer',
               border: `1px solid ${activeCat === c.key ? c.color : BOR}`,
               background: activeCat === c.key ? `${c.color}14` : 'transparent',
@@ -194,7 +194,7 @@ export function ReadOnlyCustomContentList({ search }) {
               <c.Icon size={11} /> {c.label}
               <span style={{
                 fontSize: FS.micro, fontWeight: 700, background: `${c.color}20`, color: c.color,
-                borderRadius: 6, padding: '0 4px', marginLeft: 2,
+                padding: '0 4px', marginLeft: 2,
               }}>{count}</span>
             </button>
           );
@@ -208,7 +208,7 @@ export function ReadOnlyCustomContentList({ search }) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {filtered.map(item => (
             <div key={item.id} style={{
-              border: `1px solid ${BOR}`, borderLeft: `3px solid #7c3aed`, borderRadius: 7,
+              border: `1px solid ${BOR}`, borderLeft: `3px solid #7c3aed`,
               padding: '8px 12px', background: 'rgba(255,251,245,0.95)', opacity: 0.85,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -368,7 +368,7 @@ export function CustomContentManager({ search }) {
               aria-pressed={on}
               onClick={() => { const next = new Set(set); if (on) next.delete(opt); else next.add(opt); setDraft(d => ({ ...d, [field]: Array.from(next) })); }}
               style={{
-                padding:'2px 8px', borderRadius:10, fontSize:FS.xxs, minHeight:0,
+                padding:'2px 8px', fontSize:FS.xxs, minHeight:0,
                 letterSpacing:'0.03em',
                 border:`1px solid ${on?accent:BOR}`,
                 background:on?`${accent}14`:'transparent',
@@ -383,7 +383,7 @@ export function CustomContentManager({ search }) {
 
   const renderField = (field) => {
     const val = draft[field] || '';
-    const shared = { id:`ccm-field-${field}`, value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, borderRadius:4, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
+    const shared = { id:`ccm-field-${field}`, value:val, onChange:e => setDraft(d=>({...d,[field]:e.target.value})), style:{ width:'100%', padding:'5px 8px', border:`1px solid ${BOR}`, fontSize:FS.sm, fontFamily:sans, color:INK, outline:'none', background:CARD } };
 
     switch(field) {
       case 'category': return <CategorySelect type={activeCat} value={val} customContent={customContent} onChange={v => setDraft(d => ({ ...d, category: v }))} style={shared.style} />;
@@ -465,7 +465,7 @@ export function CustomContentManager({ search }) {
     const essentials = disclosure ? catDef.fields.filter(f => ESSENTIAL_FIELDS.includes(f)) : catDef.fields;
     const advanced = disclosure ? catDef.fields.filter(f => !ESSENTIAL_FIELDS.includes(f)) : [];
     return (
-    <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', borderRadius:7, marginBottom:10 }}>
+    <div style={{ padding:'10px 12px', background:swatch['#F8F4FF'], border:'1px solid #d0c0e0', marginBottom:10 }}>
       <div style={{ fontSize:FS.xs, fontWeight:700, color:swatch.magic, textTransform:'uppercase', letterSpacing:'0.05em', marginBottom:8 }}>
         {editingId ? 'Edit Item' : 'New Custom ' + singular}
       </div>
@@ -555,9 +555,9 @@ export function CustomContentManager({ search }) {
               const count = (customContent[c.key]||[]).length;
               return (
                 <button key={c.key} type="button" aria-pressed={activeCat===c.key} onClick={() => { setActiveCat(c.key); resetDraft(); }}
-                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, borderRadius:12, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
+                  style={{ display:'flex', alignItems:'center', gap:4, padding:'4px 10px', minHeight:44, fontSize:FS.xs, fontWeight:activeCat===c.key?700:500, cursor:'pointer', border:`1px solid ${activeCat===c.key?c.color:BOR}`, background:activeCat===c.key?`${c.color}14`:'transparent', color:activeCat===c.key?c.color:SEC }}>
                   <c.Icon size={11}/> {c.label}
-                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, borderRadius:6, padding:'0 4px', marginLeft:2 }}>{count}</span>}
+                  {count > 0 && <span style={{ fontSize:FS.micro, fontWeight:700, background:`${c.color}20`, color:c.color, padding:'0 4px', marginLeft:2 }}>{count}</span>}
                 </button>
               );
             })}
@@ -660,7 +660,7 @@ export function CustomContentManager({ search }) {
       ) : (
         <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
           {filtered.map(item => (
-            <div key={item.id} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid #7c3aed`, borderRadius:7, padding:'8px 12px', background:'rgba(255,251,245,0.95)' }}>
+            <div key={item.id} style={{ border:`1px solid ${BOR}`, borderLeft:`3px solid #7c3aed`, padding:'8px 12px', background:'rgba(255,251,245,0.95)' }}>
               <div style={{ display:'flex', alignItems:'center', gap:6 }}>
                 <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK, flex:1 }}>{item.name}</span>
                 <Tag label="Custom" color='#7c3aed'/>
@@ -680,7 +680,7 @@ export function CustomContentManager({ search }) {
                       // Translucent danger fill — was solid swatch.danger on
                       // swatch.danger text, rendering the label invisible.
                       background:`${swatch.danger}14`, border:'1px solid #8b1a1a44',
-                      borderRadius:8, padding:'1px 6px',
+                      padding:'1px 6px',
                       textTransform:'uppercase', letterSpacing:'0.04em',
                     }}>{a}</span>
                   ))}

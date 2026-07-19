@@ -8,7 +8,7 @@
  * districtColor tint (a text popover, theme-adaptive) regardless of the map lens.
  */
 import Button from '../primitives/Button.jsx';
-import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, MUTED, R, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_ALT, ELEV, FS, INK, MUTED, SP, sans } from '../theme.js';
 import { districtColor } from './palette.js';
 
 /** Viewport-clamped popover position (offset from the anchor, kept on-screen). */
@@ -30,7 +30,7 @@ export function FloatingLabel({ anchor, children }) {
       style={{
         position: 'fixed', left, top, zIndex: 260, pointerEvents: 'none',
         maxWidth: 260, padding: `${SP.xs}px ${SP.md}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.md,
+        background: CARD, border: `1px solid ${BORDER}`,
         boxShadow: ELEV[2], fontFamily: sans, fontSize: FS.sm, lineHeight: 1.4,
       }}
     >
@@ -59,7 +59,7 @@ export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose, pr
       style={{
         position: 'fixed', left, top, zIndex: 260,
         width: 'min(92vw, 320px)', maxHeight: 'min(70vh, 420px)', overflow: 'auto',
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg, boxShadow: ELEV[3],
+        background: CARD, border: `1px solid ${BORDER}`, boxShadow: ELEV[3],
         pointerEvents: pinned ? 'auto' : 'none',
       }}
     >
@@ -67,7 +67,7 @@ export function DistrictCard({ anchor, mapDistrict, profile, pinned, onClose, pr
         display: 'flex', alignItems: 'flex-start', gap: SP.md,
         padding: `${SP.md}px ${SP.md}px ${SP.sm}px`, borderBottom: `1px solid ${BORDER}`, background: CARD_ALT,
       }}>
-        <span style={{ width: 12, height: 12, borderRadius: 3, background: color, marginTop: 4, flexShrink: 0 }} />
+        <span style={{ width: 12, height: 12, background: color, marginTop: 4, flexShrink: 0 }} />
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ color: INK, fontFamily: sans, fontSize: FS.md, fontWeight: 900, lineHeight: 1.25 }}>{name}</div>
           <div style={{ color: MUTED, fontFamily: sans, fontSize: FS.xxs, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 800 }}>

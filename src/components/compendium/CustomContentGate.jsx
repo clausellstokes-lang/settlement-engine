@@ -17,7 +17,7 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
     <div style={{
       padding: '24px 20px', textAlign: 'center',
       background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(160,118,42,0.06) 100%)',
-      border: '1px solid rgba(124,58,237,0.25)', borderRadius: 10,
+      border: '1px solid rgba(124,58,237,0.25)',
     }}>
       <div style={{
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
@@ -42,7 +42,7 @@ export function CustomContentUpsell({ existingCount, isAnon }) {
       {existingCount > 0 && (
         <div style={{
           padding: '10px 14px', background: 'rgba(160,118,42,0.10)',
-          border: `1px solid ${GOLD}55`, borderRadius: 7,
+          border: `1px solid ${GOLD}55`,
           fontSize: FS.sm, color: GOLD, fontWeight: 600, marginBottom: 16,
           maxWidth: 460, margin: '0 auto 16px',
         }}>
