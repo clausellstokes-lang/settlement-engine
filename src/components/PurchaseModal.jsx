@@ -28,8 +28,12 @@ export default function PurchaseModal({ onClose }) {
   const creditBalance = useStore(s => s.creditBalance);
   const authTier      = useStore(s => s.auth.tier);
   const isElevated    = useStore(s => s.isElevated());
+  const isSignedIn    = useStore(s => Boolean(s.auth?.user?.id));
   const [loading, setLoading] = useState(null); // product key being purchased
   const [error, setError]     = useState(null);
+  // Auto-reload consent (§4.2): OFF by default. Drives savePaymentMethod on the
+  // credit-pack checkout so a future off-session reload can charge the saved card.
+  const [saveCard, setSaveCard] = useState(false);
   // Redeem code (107): seeded from the Account-page handoff, editable inline.
   // Advisory input only — create-checkout re-validates and reserves it.
   const [redeemCode, setRedeemCode]     = useState(() => getPendingRedeemCode());
@@ -57,7 +61,7 @@ export default function PurchaseModal({ onClose }) {
       // before the first payment lands. recordIntent never throws and a
       // rejection surfaces as a note — it must never block the purchase.
       await referral.recordIntent();
-      const { redeemNotice: notice } = await startCheckout(product, { redeemCode });
+      const { redeemNotice: notice } = await startCheckout(product, { redeemCode, savePaymentMethod: saveCard });
       // The code is consumed (reserved or declined server-side) — drop the
       // stash so it cannot resurface on a later, unrelated purchase.
       clearPendingRedeemCode();
@@ -233,6 +237,26 @@ export default function PurchaseModal({ onClose }) {
               );
             })}
           </div>
+
+          {/* Auto-reload consent (§4.2 / #13). Signed-in only (a saved card needs an
+              account). OFF by default; the whole label is the ~44px tap target. */}
+          {isSignedIn && (
+            <label htmlFor="auto-reload-consent" style={{ display: 'flex', alignItems: 'flex-start', gap: SP.sm, marginTop: SP.sm, cursor: 'pointer' }}>
+              <input
+                id="auto-reload-consent"
+                type="checkbox"
+                checked={saveCard}
+                onChange={(e) => setSaveCard(e.target.checked)}
+                style={{ marginTop: 2, width: 18, height: 18, flexShrink: 0 }}
+                aria-label="Save my card for automatic credit reloads"
+              />
+              <span style={{ fontSize: FS.xs, color: MUTED, lineHeight: 1.5 }}>
+                Save my card for automatic credit reloads. When your balance runs low we'll
+                top it back up to your target and charge this card. Off by default — manage or
+                cancel anytime from your account.
+              </span>
+            </label>
+          )}
 
           {/* Redeem-code disclosure (107). The typed code rides along on
               whichever pack the reader buys; the server decides whether it fits

@@ -128,6 +128,10 @@ export async function startCheckout(product, options = {}) {
     ...(redeemCode ? { redeemCode } : {}),
     ...(saveId ? { saveId } : {}),
     ...(isAnonymousProduct && options.settlement ? { settlement: options.settlement } : {}),
+    // Auto-reload consent (§4.2): the server re-gates this to signed-in credit-pack
+    // payment sessions before it attaches setup_future_usage. Sending the flag is
+    // harmless anywhere else.
+    ...(options.savePaymentMethod === true ? { savePaymentMethod: true } : {}),
   };
 
   const { data, error } = await supabase.functions.invoke('create-checkout', { body });

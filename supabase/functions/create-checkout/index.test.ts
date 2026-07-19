@@ -574,3 +574,56 @@ Deno.test('a single_dossier WITHOUT a settlement still creates the session (clie
   assertEquals(admin.upserts.length, 0);    // nothing to stash server-side
   assertEquals(stripe.created.length, 1);   // checkout still proceeds
 });
+
+// ── Auto-reload consent: savePaymentMethod → setup_future_usage (M-3b, §4.2) ────
+// A signed-in credit-pack buyer may opt to save the card off-session. Gated
+// server-side on payment mode + signed-in + credit-pack; never trusts the flag
+// alone to bypass those conditions.
+
+Deno.test('savePaymentMethod on a signed-in credit pack sets payment_intent_data.setup_future_usage=off_session', async () => {
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);
+  const params = stripe.created[0];
+  assertEquals((params.payment_intent_data as Record<string, unknown>)?.setup_future_usage, 'off_session');
+});
+
+Deno.test('a credit pack WITHOUT savePaymentMethod carries no payment_intent_data', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+Deno.test('savePaymentMethod is ignored on a SUBSCRIPTION product (payment_intent_data invalid in subscription mode)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'premium', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(stripe.created[0].mode, 'subscription');
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+Deno.test('savePaymentMethod is ignored for an ANONYMOUS buyer (no signed-in user)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'single_dossier', savePaymentMethod: true, checkoutToken: 'a'.repeat(40) }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient(null), adminClient: makeAdminClient(null) },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
+
+Deno.test('savePaymentMethod is ignored on a non-credit-pack payment product (founder_lifetime)', async () => {
+  const stripe = makeStripe();
+  await handleCreateCheckout(
+    req({ product: 'founder_lifetime', savePaymentMethod: true }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient('cus_existing', 10) },
+  );
+  assertEquals('payment_intent_data' in stripe.created[0], false);
+});
