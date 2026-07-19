@@ -22,7 +22,7 @@
 import { useMemo } from 'react';
 import { buildRegistry, customRefIdFromItem, mintDeityRef } from '../../../lib/customRegistry.js';
 import { reconcileCultImposition, capacityForTier } from '../../../domain/worldPulse/religionState.js';
-import { deitySnapshotFrom } from '../../../store/settlementDeityHelpers.js';
+import { deitySnapshotFrom } from '../../../store/deitySnapshot.js';
 import { MUTED, sans, FS } from '../../theme.js';
 import Button from '../../primitives/Button.jsx';
 import { navigate } from '../../../hooks/useRoute.js';

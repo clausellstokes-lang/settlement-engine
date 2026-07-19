@@ -17,8 +17,22 @@
 
 import { customContentService } from '../lib/customContent.js';
 import { migrateCustomContent } from '../domain/customContentMigrations.js';
-import { validateDeity, validateTradition } from '../domain/customContentSchema.js';
-import { customDeps } from '../lib/dependencyEngine.js';
+import { invalidateCustomDepsIfLoaded } from '../lib/customContentSource.js';
+
+// ── The validation chokepoint (de-eager lane, 2026-07-19) ────────────────────
+// validateDeity/validateTradition used to be STATIC imports, which made this
+// EAGER slice drag customContentSchema into the first-paint closure. The schema
+// now loads lazily AT the chokepoint: every axis-bearing write AWAITS it here —
+// a submit racing the lazy load is still validated (the write proceeds only
+// after the validator ran), never skipped. Non-axis buckets resolve without
+// touching the schema, so their writes stay one microtask from synchronous.
+// Returns null when valid / not-validated; a joined error string when invalid.
+async function validationErrorsFor(category, item) {
+  if (category !== 'deities' && category !== 'traditions') return null;
+  const { validateDeity, validateTradition } = await import('../domain/customContentSchema.js');
+  const { ok, errors } = category === 'deities' ? validateDeity(item) : validateTradition(item);
+  return ok ? null : errors.join(' ');
+}
 
 const LOCAL_KEY = 'sf_custom_content';
 const LOCAL_KEY_PREFIX = 'sf_custom_content:';
@@ -135,27 +149,22 @@ export const createCustomContentSlice = (set, get) => {
   // These run optimistically against local state and fire-and-forget the cloud
   // sync when premium. UI surfaces errors via customContentError.
 
-  /** Add a custom item to a category. */
-  addCustomItem: (category, item) => {
+  /** Add a custom item to a category.
+   *  ASYNC (de-eager lane): the axis-bearing buckets await the lazily-loaded
+   *  schema at the validation chokepoint; other buckets resolve immediately.
+   *  Resolves to the same values the old sync form returned — null when the
+   *  write was rejected by validation, undefined when the insert landed. */
+  addCustomItem: async (category, item) => {
     // Schema validation for buckets that declare frozen enum axes. The deities
     // bucket's axes mirror the 049/056 DB CHECK exactly — reject a bad axis here
     // so it never reaches the cloud (where the CHECK would hard-reject it).
-    if (category === 'deities') {
-      const { ok, errors } = validateDeity(item);
-      if (!ok) {
-        set(state => { state.customContentError = errors.join(' '); });
-        return null;
-      }
-    }
-    // Traditions (T-5): a name is required; a present motif must be a valid corpus key —
-    // reject here so a bad motif never reaches the cloud (the 155 category CHECK admits the
-    // bucket; the client validator is the field gate, as factions/deities are).
-    if (category === 'traditions') {
-      const { ok, errors } = validateTradition(item);
-      if (!ok) {
-        set(state => { state.customContentError = errors.join(' '); });
-        return null;
-      }
+    // Traditions (T-5): a name is required; a present motif must be a valid
+    // corpus key — the 155 category CHECK admits the bucket; the client
+    // validator is the field gate, as factions/deities are.
+    const validationError = await validationErrorsFor(category, item);
+    if (validationError != null) {
+      set(state => { state.customContentError = validationError; });
+      return null;
     }
     // Optimistic local insert
     const entry = {
@@ -209,25 +218,22 @@ export const createCustomContentSlice = (set, get) => {
     }
   },
 
-  /** Update a custom item. */
-  updateCustomItem: (category, id, partial) => {
+  /** Update a custom item.
+   *  ASYNC (de-eager lane): same chokepoint contract as addCustomItem —
+   *  resolves null when the merged result fails validation, else applies. */
+  updateCustomItem: async (category, id, partial) => {
     // Validate the merged result for axis-bearing buckets so an edit can't demote
-    // a valid deity to a bad axis (which the cloud CHECK would reject).
-    if (category === 'deities') {
-      const existing = (get().customContent.deities || []).find(x => x.id === id) || {};
-      const { ok, errors } = validateDeity({ ...existing, ...partial });
-      if (!ok) {
-        set(state => { state.customContentError = errors.join(' '); });
-        return null;
-      }
-    }
-    if (category === 'traditions') {
-      const existing = (get().customContent.traditions || []).find(x => x.id === id) || {};
-      const { ok, errors } = validateTradition({ ...existing, ...partial });
-      if (!ok) {
-        set(state => { state.customContentError = errors.join(' '); });
-        return null;
-      }
+    // a valid deity to a bad axis (which the cloud CHECK would reject). The merge
+    // target is read at call time; the apply below re-finds the row by id, so a
+    // row deleted during the schema await simply no-ops (idx === -1), exactly as
+    // an unknown id always has.
+    const existing = (category === 'deities' || category === 'traditions')
+      ? (get().customContent[category] || []).find(x => x.id === id) || {}
+      : null;
+    const validationError = await validationErrorsFor(category, { ...existing, ...partial });
+    if (validationError != null) {
+      set(state => { state.customContentError = validationError; });
+      return null;
     }
     set(state => {
       // Guard an unknown category so .findIndex doesn't throw on undefined.
@@ -335,7 +341,9 @@ export const createCustomContentSlice = (set, get) => {
       // caches by a (count : latest-updatedAt) key, which can't detect a cloud
       // sync that swaps items WITHOUT changing the count or bumping the latest
       // updatedAt — the next generation would otherwise use a stale registry.
-      customDeps.invalidate();
+      // Via the seam (de-eager): a no-op while the lazy registry module hasn't
+      // loaded — exact, because its FIRST build always reads the live source.
+      invalidateCustomDepsIfLoaded();
       // Mirror to local for offline read-only access on this device
       localWrite(get().customContent, ownerId);
     } catch (err) {
@@ -356,7 +364,7 @@ export const createCustomContentSlice = (set, get) => {
               state.customContentError = null;
             });
             // Same wholesale-replace stale-key concern as the cloud path above.
-            customDeps.invalidate();
+            invalidateCustomDepsIfLoaded();
             restored = true;
           }
         }

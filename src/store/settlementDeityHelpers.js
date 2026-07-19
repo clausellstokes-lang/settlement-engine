@@ -35,20 +35,14 @@
 
 import { buildRegistryFromStore, mintDeityRef } from '../lib/customRegistry.js';
 import { reconcileCultImposition } from '../domain/worldPulse/religionState.js';
+import { deitySnapshotFrom } from './deitySnapshot.js';
 
-/** Build the self-contained deity snapshot from an authored deity record. */
-export function deitySnapshotFrom(raw) {
-  return {
-    name: raw.name,
-    alignmentAxis: raw.alignmentAxis,
-    temperamentAxis: raw.temperamentAxis,
-    rankAxis: raw.rankAxis,
-    // lawAxis (B5) — a legacy 3-axis deity has none; mutate.js defaults it to
-    // 'neutral' in the embed, so the snapshot stays self-contained either way.
-    lawAxis: raw.lawAxis,
-    ...(raw.domain ? { domain: raw.domain } : {}),
-  };
-}
+// deitySnapshotFrom lives in the zero-import ./deitySnapshot.js leaf since the
+// de-eager lane (2026-07-19): this module is now loaded ONLY via dynamic import
+// (the async store actions), and the composer field's static need for the
+// snapshot builder must not re-anchor the whole registry graph. Re-exported
+// verbatim so existing importers keep the single source of truth.
+export { deitySnapshotFrom } from './deitySnapshot.js';
 
 /**
  * Assign (or clear) the current settlement's primary deity — the STORE half of

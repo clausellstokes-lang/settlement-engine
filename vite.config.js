@@ -103,6 +103,18 @@ const ENGINE_SHARED_DOMAIN = computeEngineSharedDomain();
 // normalize-pin note below even documented it "stays in engine-core"). Excised
 // here AND pinned to settlement-normalize below, so it rides the lazy chunk with
 // its two importers and both the routing and the eager-graph classifier agree.
+// DE-EAGER LANE (2026-07-19): customContentSchema.js — the custom-content
+// validation/taxonomy module. ESD derived it into eager engine-core because the
+// generator tier-gate steps import passesTierGate — but its EAGER consumers
+// (customContentSlice's validateDeity/validateTradition chokepoint,
+// settlementSlice's eligibleCustomContent in the async generate action) now
+// reach it ONLY by dynamic import, and every static importer is lazy
+// (generators/engine, compendium UI, contentPacks, gallery TIER_ORDER,
+// contentVocabulary). Excised here AND pinned to the lazy 'custom-schema'
+// chunk below so routing and the eager-graph classifier agree (the FP-G7/FP-G8
+// excision convention). Its TRADITION_*_KEYS mirror of the corpus stays
+// deliberately duplicated — now to keep the corpus tables out of the small
+// validation chunk — with the customContentTraditions drift guard unchanged.
 for (const frag of [
   '/src/domain/customCategories.js',
   '/src/domain/magicFilter.js',
@@ -110,6 +122,7 @@ for (const frag of [
   '/src/domain/region/foldTradeCategories.js',
   '/src/domain/settlement.schema.js',
   '/src/domain/formatNumber.js',
+  '/src/domain/customContentSchema.js',
 ]) ENGINE_SHARED_DOMAIN.delete(frag);
 const isEngineSharedDomain = (id) => {
   for (const frag of ENGINE_SHARED_DOMAIN) if (id.includes(frag)) return true;
@@ -126,7 +139,9 @@ const isEngineSharedDomain = (id) => {
 //   • the src/main.jsx static graph            (the entry chunk itself),
 //   • the engine-core generator spine + ENGINE_SHARED_DOMAIN (engine-core),
 //   • src/kernel/**                            (kernel),
-//   • lookups.js + customRegistry + dependencyEngine (routed to 'data') —
+//   • lookups.js                               (routed to 'data') —
+//     (customRegistry + dependencyEngine were seeds until the de-eager lane,
+//      2026-07-19 — they now ride the lazy 'custom-registry' chunk) —
 // because a static edge from ANY of those chunks into a "lazy" chunk would
 // drag that chunk straight back into the first-paint closure (the W4h lesson:
 // follow the chunk graph, not intuition). Dynamic import() is a lazy boundary
@@ -176,9 +191,14 @@ function computeEagerModuleGraph() {
     join(SRC, 'generators/crossSettlementConflicts.js'),
     join(SRC, 'generators/steps/stepMetadata.js'),
     // libs routed into the eager 'data' chunk below
+    // DE-EAGER LANE (2026-07-19): customRegistry.js + dependencyEngine.js are
+    // NO LONGER seeded here — the store now reaches them only through the
+    // lib/customContentSource.js seam + dynamic imports, so they ride the lazy
+    // 'custom-registry' chunk (pinned below). Re-seeding either would silently
+    // re-drag ~41 KB (registry code + stressTypesMeta) into first paint; the
+    // customRegistryLazy build test + the byte budget both fail loudly if an
+    // eager static edge into them ever returns.
     join(SRC, 'generators/lookups.js'),
-    join(SRC, 'lib/customRegistry.js'),
-    join(SRC, 'lib/dependencyEngine.js'),
     // kernel chunk
     ...walk(join(SRC, 'kernel')),
     // engine-core's shared-domain members (fragments → absolute paths)
@@ -531,17 +551,54 @@ export default defineConfig({
           )
             return 'engine-core';
 
-          // ── customRegistry + dependencyEngine ──────────────────────
-          // These are reached from BOTH the entry (via store/index →
-          // dependencyEngine) AND from lazy generator code. Without
-          // this explicit assignment, Rollup auto-merges them into the
-          // engine chunk to avoid duplication, which pulls the entire
-          // engine chunk into the entry's static graph. Routing them
-          // to the data chunk (where they semantically belong as data
-          // wiring) preserves the engine chunk's lazy boundary.
+          // ── The custom-content source seam (EAGER, pinned to kernel) ──
+          // lib/customContentSource.js is the tiny zero-dependency seam the
+          // store wires at boot and the LAZY registry reads on load. It is
+          // shared by the entry AND the custom-registry chunk — left unpinned,
+          // Rollup co-located it INTO custom-registry, which made the ENTRY
+          // statically import the whole registry chunk (and its data-lazy
+          // deps): measured +351 kB of first-paint regression, the exact
+          // inversion of the de-eager goal. Pin it to the eager kernel chunk
+          // (the house home for tiny dependency-free seam layers, like the
+          // PRNG context) so the edge direction stays custom-registry(lazy) →
+          // kernel(eager), never entry → custom-registry. Must match BEFORE
+          // the custom-registry rule below.
+          if (id.includes('/src/lib/customContentSource.js'))
+            return 'kernel';
+
+          // ── customRegistry + dependencyEngine (LAZY since the de-eager ──
+          // lane, 2026-07-19). These used to be routed into the EAGER 'data'
+          // chunk because store/index statically imported dependencyEngine
+          // (the setCustomContentSource wiring). That wiring now goes through
+          // the tiny eager seam (lib/customContentSource.js), and every
+          // remaining importer is lazy: the engine-chunk generators, the
+          // compendium/wizard/deity UI chunks, and the dynamic-imported
+          // settlementDeityHelpers. WITHOUT a pin Rollup would co-locate the
+          // pair into the big engine chunk (their largest importer), forcing
+          // every Compendium/wizard surface to fetch ~618 kB of generators
+          // just to enumerate the registry — and pushing the engine chunk
+          // against its 660 kB size assertion. The named lazy chunk keeps the
+          // registry independently fetchable. The WHALE TABLES it enumerates
+          // (institutionalCatalog, institutionServices, resourceData,
+          // tradeGoodsData) STAY in the eager 'data' chunk — each has its own
+          // first-paint consumer (FP-G11) — so this chunk statically imports
+          // 'data', the safe lazy→eager direction.
+          // @enforced-by tests/build/customRegistryLazy.test.js (absent from
+          //   the entry closure + present in a lazy chunk) + the byte budget.
           if (id.includes('/src/lib/customRegistry.js') ||
               id.includes('/src/lib/dependencyEngine.js'))
-            return 'data';
+            return 'custom-registry';
+
+          // ── customContentSchema (LAZY, its own tiny chunk) ─────────
+          // Excised from ENGINE_SHARED_DOMAIN above (de-eager lane). Pinned
+          // to a dedicated ~3 kB chunk — NOT into 'custom-registry' — so the
+          // slice's validation chokepoint (await import at add/update) and the
+          // gallery's TIER_ORDER read fetch the schema alone, not the 41 kB
+          // registry; the engine + compendium chunks statically import it the
+          // safe lazy→lazy way. Its only outward edge is deterministicSort
+          // (eager engine-core) — lazy→eager, safe.
+          if (id.includes('/src/domain/customContentSchema.js'))
+            return 'custom-schema';
 
           // ── Generator engine (all generators together — they have ──
           // ── circular imports that prevent clean sub-chunking)      ──

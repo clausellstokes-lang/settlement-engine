@@ -52,24 +52,28 @@
  */
 
 import { buildRegistry, parseRefId } from './customRegistry.js';
+import { getCustomContentSource, registerCustomDepsInvalidate } from './customContentSource.js';
 
-// ── Custom content source (injected) ───────────────────────────────────────
+// ── Custom content source (injected via the eager seam) ─────────────────────
 // The generator should not import the Zustand store. Instead, the caller
 // (app at init, or pipeline per-call) tells us where to read from. Default
 // returns an empty object — generators always work, just with no custom
 // content visible.
+//
+// DE-EAGER (2026-07-19): the getter now lives in lib/customContentSource.js —
+// a tiny EAGER seam — so the store can wire it at boot WITHOUT statically
+// importing this module (which would drag the whole registry + its enumerator
+// code into the first-paint closure; it used to cost ~41 KB there). This module
+// loads lazily with its real consumers (generation, Compendium, deity
+// assignment) and reads the seam's getter on each registry build. The seam
+// also lets the slice invalidate our cache without importing us: we register
+// the invalidator there on load (before load there is no cache to invalidate).
+// setCustomContentSource is re-exported below so headless callers (tests,
+// scripts) keep their one-stop import; the app's boot wiring imports the seam
+// directly.
+export { setCustomContentSource } from './customContentSource.js';
 
-let _sourceGetter = () => ({});
 let _override = null; // for withCustomContent()
-
-/**
- * Wire the global source. Typically called once at app startup with a
- * function that returns the live store's customContent slice.
- */
-export function setCustomContentSource(getter) {
-  _sourceGetter = typeof getter === 'function' ? getter : () => ({});
-  customDeps.invalidate();
-}
 
 /**
  * Run `fn()` with `customContent` as the override source. Useful for
@@ -114,7 +118,7 @@ function currentKey(customContent) {
 }
 
 function getRegistry() {
-  const cc = (_override != null ? _override : _sourceGetter()) || {};
+  const cc = (_override != null ? _override : getCustomContentSource()()) || {};
   const key = currentKey(cc);
   if (key === _registryKey && _registryCache) return _registryCache;
   _registryCache = buildRegistry(cc);
@@ -352,7 +356,7 @@ export const customDeps = {
    * activeChains, so they don't perturb chain-impairment math. Empty when none.
    */
   confirmedSupplyChains() {
-    const cc = (_override != null ? _override : _sourceGetter()) || {};
+    const cc = (_override != null ? _override : getCustomContentSource()()) || {};
     const chains = Array.isArray(cc.supplyChains) ? cc.supplyChains : [];
     return chains.filter((c) => c?.verification?.state === 'confirmed');
   },
@@ -360,5 +364,11 @@ export const customDeps = {
   // ── Lower-level escape hatch ───────────────────────────────────────────
   registry() { return getRegistry(); },
 };
+
+// DE-EAGER: hand the seam our invalidator so the (eager) slice can flush the
+// registry cache after a cloud sync without statically importing this module.
+// Registered at module load — before that there IS no cache, so the seam's
+// no-op-when-unloaded is exact (the first build always reads the live source).
+registerCustomDepsInvalidate(() => customDeps.invalidate());
 
 export default customDeps;
