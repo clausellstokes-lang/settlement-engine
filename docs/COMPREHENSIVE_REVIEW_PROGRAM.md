@@ -1134,6 +1134,30 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ WAVE E — LAUNCH OPS COMPLETE (2026-07-19, claude/wave-e-launch-ops @ f61f80a9,
+9 lettered commits atop aad6265e — manager-verified merge-base).** The brief proved ~70%
+STALE (error pipeline, sitemap/og machinery, refund policy page all pre-existed); the
+lane trusted the repo and GAP-FILLED: client error dedup+sampling · migration 156
+(grouped error-report reads + 8/hr alert threshold) · AdminClientErrorsPanel with
+always-on alert banner · new `health` edge fn + uptime probe script · provider-neutral
+mailAdapter (Resend default/Postmark, inert) + ops_error_alert template (authed-only) ·
+og-craft.png JS-default alignment · PurchaseModal policy links (+18 B eager, DECLARED,
+absorbed by the de-eager reclaim at fold) · 3 ops runbooks. All local gates 0; suite reds
+= the 4 parked goldens + load-flaky pglite (proven pass in isolation) + the PRE-EXISTING
+budget red (base proven over at 1,040,996 — note a 2 B measurement discrepancy vs WA1's
+1,040,998; immaterial under the 18,036 B reclaim; reconcile at fold). ⚠ FOLD HAZARDS
+REGISTERED: (1) MIGRATION 156 IS DOUBLE-MINTED — wave-e 156 AND perimeter ~156, with
+money-wave designed at 157-161: fold batch 3 renumbers contiguously (pure file renames —
+no code references numbers; RPC names are the interface); (2) config.toml +
+send-email/log-client-error additive edits overlap perimeter-owned files — reconcile at
+fold. OWNER/LEGAL QUEUE +1: accountFaq.refundWindow (en.js ~1402) asserts an UNENFORCED
+"7 days if not downloaded" refund rule contradicting actual clawback behavior — surfaced,
+not changed (paid-surface policy text). DE-EAGER CONFIRMED SHIPPED @ 2c4d599b (closure
+1,022,962; Fable adversarial verify owed at fold 3). FREED LANE → WAVE B REMAINDER +
+DOWNGRADE-AUDIT FIXES dispatched (claude/wave-b-remainder off aad6265e, Opus): the
+non-money Wave B items (Class-A ×11 · HowToUse restore · Surveyor-gate comment · #15
+door discriminator) + the audit's ordered fixes (P0 purge-spares-entitlements ·
+retention email ramp · pause handling; BYOK server gate stays money-wave M-4's).
 **⬛⭐ WA1 — THE DOSSIER TABS COMPLETE (2026-07-19, claude/wave-a-tabs @ 8fdd4b95,
 10 lettered commits atop aad6265e — manager-verified merge-base = composite tip).** The
 entire src/components/new/ dossier-tab family converted to the flat rule-framed
