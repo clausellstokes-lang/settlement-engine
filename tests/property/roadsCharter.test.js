@@ -20,7 +20,12 @@ import { ensureRegionalGraph } from '../../src/domain/region/index.js';
 import { buildSpatialDigest } from '../../src/domain/spatial/index.js';
 import { makeGridPack, placeSettlements } from '../fixtures/spatialPackFixtures.js';
 import { advanceRoads } from '../../src/domain/worldPulse/roadsKernel.js';
-import { PURPOSE_KINDS, ROADS_TUNING, protectionOf, exposureOf, captureProbability } from '../../src/domain/roads/state.js';
+import {
+  PURPOSE_KINDS, ROADS_TUNING, protectionOf, exposureOf, captureProbability,
+  roadsImportanceWeight, factionPowerStanding01, embassyEnvoyWeight01, embassyAmplifier,
+  embassyReceivedP, embassyDetainShare,
+} from '../../src/domain/roads/state.js';
+import { embassySuitPeaceMult, embassyPairKey, EMBASSY_LEDGER_KEY } from '../../src/domain/roads/embassyLedger.js';
 import { RESIDUE_STRIP_SITES } from '../../src/domain/worldPulse/pulseKernel.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 
@@ -302,5 +307,130 @@ describe('§19 THE ADVERSARIAL SELF-AUDIT', () => {
     for (const ledgers of malformed) {
       expect(() => litRoads({ spatialLedgers: ledgers })).not.toThrow();
     }
+  });
+});
+
+// ── §11b THE EMBASSY WALKTHROUGH (R8-c) ─────────────────────────────────────────
+// The four charter cells the owner named: a peace sued and settled with amnesty release; an
+// insult suit; a third-party interception; the rumour-race won and lost. Forced direct-mover
+// fixtures (the seed-search idiom) — every cell quotes its chronicle receipt, and NO cell
+// removes a named NPC (the no-death law over the embassy arc).
+describe('§11b THE EMBASSY WALKTHROUGH — the four named cells', () => {
+  const EIDS = ['home', 'foe', 'way', 'third'];
+  const ED = (() => { const pk = makeGridPack({ cols: 6, rows: 5 }); const pl = placeSettlements(pk, EIDS.length); return buildSpatialDigest({ pack: pk, placements: pl.map((p, i) => ({ id: EIDS[i], cellId: p.cellId })) }); })();
+  const EMID = 'road.home.home:env.40';
+  const envoy = (over = {}) => ({ id: 'env', name: 'The Envoy', importance: 'notable', category: 'government', personality: { dominant: 'bold' }, faction: 'Crown', ...over });
+  const etown = (name, npcs = [], over = {}) => ({ name, tier: 'town', npcs, economicState: { prosperity: 'Comfortable' }, powerStructure: { publicLegitimacy: { score: 55 }, factions: [{ faction: 'Crown', isGoverning: true, power: 60 }] }, ...over });
+  const egraph = (extra = {}) => ensureRegionalGraph({
+    edges: [
+      { id: 'e.home.foe', from: 'home', to: 'foe', relationshipType: extra.hfRel || 'hostile' },
+      { id: 'e.home.third', from: 'home', to: 'third', relationshipType: extra.htRel || 'trade_partner' },
+      { id: 'e.foe.third', from: 'foe', to: 'third', relationshipType: extra.ftRel || 'trade_partner' },
+    ],
+    channels: [{ from: 'home', to: 'way', type: 'trade_route', status: 'confirmed', strength: 0.5 }, { from: 'way', to: 'foe', type: 'trade_route', status: 'confirmed', strength: 0.5 }, ...(extra.channels || [])],
+  });
+  const embassy = (over = {}) => ({ id: EMID, npcKey: 'home:env', npcName: 'The Envoy', homeId: 'home', destId: 'foe', purpose: { kind: 'embassy', ref: 'home~foe' }, phase: 'visiting', path: ['home', 'way', 'foe'], departTick: 40, legArrivalTick: 80, stayWeeks: 2, escort01: 0.6, riskTolerance01: 0.9, knownDangerAtDispatch: 0, trappedBySiege: false, startedYear: 1, ...over });
+  const TK = 60;
+  const eworld = ({ seed, mission = null, rules = {}, extraLedgers = {}, relationshipStates = {} }) => ({ rngSeed: seed, tick: TK, simulationRules: { roadsEnabled: true, warLayerEnabled: true, ...rules }, calendar: { elapsedWeeks: TK, year: 1 }, spatialCanonVersion: 1, spatialDigest: ED, relationshipStates, spatialLedgers: { ...(mission ? { roads: { missions: { [EMID]: mission } } } : {}), ...extraLedgers } });
+  const eargs = (worldState, g, homeNpcs) => {
+    const s = { home: etown('Ashford', homeNpcs), foe: etown('Blackmoor'), way: etown('Wayfar'), third: etown('Corvin') };
+    const settlements = EIDS.map((id) => ({ id, name: s[id].name, settlement: s[id] }));
+    return { snapshot: { settlements }, worldState, settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: g, tick: TK, now: null };
+  };
+  const roll1 = (seed) => createPRNG(`${seed}::roads-hazard:${EMID}:${TK}`).random();
+  const metrics = (npcOver = {}) => { const n = envoy(npcOver); const w = roadsImportanceWeight(n); const ew = embassyEnvoyWeight01({ importanceWeight01: w, factionPower01: factionPowerStanding01(etown('H', [n]), n) }); return { w, ew, amp: embassyAmplifier(ew) }; };
+  const headlinesFor = (r, tag) => (r.newsEntries || []).filter((e) => Array.isArray(e.tags) && e.tags.includes(tag)).map((e) => String(e.headline));
+
+  it('CELL 1 — A PEACE SUED AND SETTLED WITH AMNESTY RELEASE', () => {
+    // (a) sued: the court suit is heard ⇒ a suit is deposited + a NOTABLE receipt.
+    const { amp } = metrics();
+    let received = null;
+    for (let i = 0; i < 40000 && received == null; i++) { if (roll1(`sued-${i}`) < embassyReceivedP(amp) - 0.02) received = `sued-${i}`; }
+    const rHeard = advanceRoads(eargs(eworld({ seed: received, mission: embassy() }), egraph(), [envoy()]));
+    const suit = rHeard.worldState?.spatialLedgers?.[EMBASSY_LEDGER_KEY]?.[embassyPairKey('home', 'foe')];
+    expect(suit, 'the suit was heard and deposited').toBeTruthy();
+    const heardHeadline = headlinesFor(rHeard, 'embassy_received')[0];
+    expect(heardHeadline, 'a peace-received receipt').toBeTruthy();
+    // (b) settled: the war system CONSUMES the deposited suit — sue_for_peace weight lifts >1.
+    expect(embassySuitPeaceMult(rHeard.worldState, 'home', ['foe']), 'the war system weights peace up').toBeGreaterThan(1);
+    // (c) amnesty: with the war now at peace, a hostage home holds at the foe is released.
+    const ransom = { id: 'ransom.h', npcKey: 'home:cap', npcName: 'The Captive', homeId: 'home', captorId: 'foe', threatClass: 'T4', purposeKind: 'embassy', missionId: 'm.h', startedTick: 1, startedWeek: 1, termWeeks: 30, remainingWeeks: 20, hostileAtCapture: true, conversionRolled: true, willConvert: false };
+    const captive = { id: 'cap', name: 'The Captive', importance: 'notable', category: 'government', whereabouts: { state: 'hostage', placeId: 'foe', purposeKind: 'embassy', sinceTick: 1, expectedReturnTick: null, missionId: 'm.h' } };
+    const rAmnesty = advanceRoads(eargs(eworld({ seed: 'amnesty', extraLedgers: { roads: { missions: {}, ransoms: { 'ransom.h': ransom } } }, relationshipStates: { 'e.home.foe': { relationshipType: 'trade_partner' } } }), egraph({ hfRel: 'trade_partner' }), [captive]));
+    expect(Object.keys(rAmnesty.worldState?.spatialLedgers?.roads?.ransoms || {}).length, 'the amnesty released the captive on peace').toBe(0);
+    const freed = headlinesFor(rAmnesty, 'ransom_peace')[0];
+    expect(freed, 'an amnesty-release receipt').toBeTruthy();
+     
+    console.log(`CELL1 sued: "${heardHeadline}" | freed: "${freed}"`);
+  });
+
+  it('CELL 2 — AN INSULT SUIT (the lowest envoy reads as an insult; the suit is turned home)', () => {
+    // The lowest-of-the-lowest envoy: minimal faction power ⇒ a NEGATIVE amplifier (insult),
+    // which LOWERS receivedP and RAISES the detain share vs a humble envoy.
+    const insultNpc = envoy({ faction: 'Rabble' }); // no matching home faction ⇒ default power, low weight
+    const home = etown('Ashford', [insultNpc], { powerStructure: { publicLegitimacy: { score: 55 }, factions: [{ faction: 'Crown', isGoverning: true, power: 60 }, { faction: 'Rabble', power: 5 }] } });
+    const w = roadsImportanceWeight(insultNpc);
+    const ew = embassyEnvoyWeight01({ importanceWeight01: w, factionPower01: factionPowerStanding01(home, insultNpc) });
+    const amp = embassyAmplifier(ew);
+    expect(amp, 'the lowest envoy reads as an insult (amplifier < the humble case)').toBeLessThan(embassyAmplifier(embassyEnvoyWeight01({ importanceWeight01: 1, factionPower01: 1 })));
+    // force the roll into the TURNED-HOME band (above received + detain) ⇒ the suit is rebuffed.
+    const recv = embassyReceivedP(amp); const detainCut = recv + (1 - recv) * embassyDetainShare(amp);
+    let seed = null;
+    for (let i = 0; i < 40000 && seed == null; i++) { const rr = roll1(`ins-${i}`); if (rr >= detainCut + 0.01 && rr < 0.999) seed = `ins-${i}`; }
+    const settlements = EIDS.map((id) => ({ id, name: id, settlement: id === 'home' ? home : etown(id) }));
+    const r = advanceRoads({ snapshot: { settlements }, worldState: eworld({ seed, mission: embassy() }), settlementUpdates: settlements.map((it) => ({ saveId: it.id, settlement: it.settlement })), saves: settlements.map((it) => ({ id: it.id, settlement: it.settlement })), graph: egraph(), tick: TK, now: null });
+    const rebuff = headlinesFor(r, 'embassy_rebuffed')[0];
+    expect(rebuff, 'the insulting suit was turned home').toBeTruthy();
+    expect(r.worldState?.spatialLedgers?.[EMBASSY_LEDGER_KEY], 'a rebuffed insult deposits no suit').toBeUndefined();
+     
+    console.log(`CELL2 insult (amp=${amp.toFixed(3)}): "${rebuff}"`);
+  });
+
+  it('CELL 3 — A THIRD-PARTY INTERCEPTION (a home-enemy takes the envoy; the suit dies unheard)', () => {
+    const army = { 'third>way': { armyId: 'third', originId: 'third', destId: 'way', path: ['way'], departTick: 0, arrivalTick: 200, position01: 0 } };
+    let seed = null;
+    for (let i = 0; i < 40000 && seed == null; i++) { if (roll1(`tp-${i}`) < ROADS_TUNING.T1_BASE * 0.5) seed = `tp-${i}`; }
+    const r = advanceRoads(eargs(eworld({ seed, mission: embassy({ phase: 'outbound' }), extraLedgers: { armyTransit: army }, relationshipStates: { 'e.home.third': { relationshipType: 'hostile' } } }), egraph({ htRel: 'hostile' }), [envoy()]));
+    const ransom = Object.values(r.worldState?.spatialLedgers?.roads?.ransoms || {})[0];
+    expect(ransom, 'a third-party enemy simply took the envoy hostage').toBeTruthy();
+    expect(ransom.captorId).toBe('third');
+    expect(r.worldState?.spatialLedgers?.[EMBASSY_LEDGER_KEY], 'the suit died unheard — no deposit').toBeUndefined();
+    const captured = headlinesFor(r, 'capture')[0];
+     
+    console.log(`CELL3 interception: "${captured}"`);
+  });
+
+  it('CELL 4 — THE RUMOUR-RACE WON AND LOST', () => {
+    const army = { 'third>way': { armyId: 'third', originId: 'third', destId: 'way', path: ['way'], departTick: 0, arrivalTick: 200, position01: 0 } };
+    // LOST: an OMNISCIENT third power at war with the target hunts from tick 0 ⇒ interception.
+    let capSeed = null;
+    for (let i = 0; i < 40000 && capSeed == null; i++) { if (roll1(`lost-${i}`) < ROADS_TUNING.T1_BASE * 0.5) capSeed = `lost-${i}`; }
+    const rLost = advanceRoads(eargs(eworld({ seed: capSeed, mission: embassy({ phase: 'outbound' }), extraLedgers: { armyTransit: army }, relationshipStates: { 'e.foe.third': { relationshipType: 'hostile' } } }), egraph({ ftRel: 'hostile' }), [envoy()]));
+    const lostRansom = Object.values(rLost.worldState?.spatialLedgers?.roads?.ransoms || {})[0];
+    expect(lostRansom, 'the news outran the road — an informed hunter intercepted').toBeTruthy();
+    expect(lostRansom.captorId).toBe('third');
+    // WON: a NON-omniscient third power that never received the news does NOT act — the short
+    // road outran the news; the embassy passes unmolested.
+    const rWon = advanceRoads(eargs(eworld({ seed: 'won', mission: embassy({ phase: 'outbound' }), rules: { infoMode: 'perfect_delayed' }, extraLedgers: { armyTransit: army }, relationshipStates: { 'e.foe.third': { relationshipType: 'hostile' } } }), egraph({ ftRel: 'hostile' }), [envoy()]));
+    expect(Object.keys(rWon.worldState?.spatialLedgers?.roads?.ransoms || {}).length, 'the road outran the news — no interception').toBe(0);
+    expect(Object.keys(rWon.worldState?.spatialLedgers?.roads?.missions || {}).length, 'the embassy rides on').toBe(1);
+     
+    console.log(`CELL4 race — LOST: "${headlinesFor(rLost, 'capture')[0]}" | WON: the road outran the news (no interception)`);
+  });
+
+  it('NO-DEATH over the embassy arc: a detained/intercepted envoy is a hostage, never removed', () => {
+    // Force a court-suit DETENTION (hostage) and assert the envoy persists (a ransom stands, the
+    // roster is intact) — the matrix has no removal branch.
+    const { amp } = metrics();
+    const recv = embassyReceivedP(amp);
+    let seed = null;
+    for (let i = 0; i < 40000 && seed == null; i++) { const rr = roll1(`det-${i}`); if (rr >= recv + 0.01 && rr < recv + (1 - recv) * embassyDetainShare(amp) - 0.01) seed = `det-${i}`; }
+    const r = advanceRoads(eargs(eworld({ seed, mission: embassy() }), egraph(), [envoy()]));
+    const ransom = Object.values(r.worldState?.spatialLedgers?.roads?.ransoms || {})[0];
+    expect(ransom, 'a detained embassy becomes a hostage (ransom stands) — never removed').toBeTruthy();
+    expect(ransom.captorId).toBe('foe');
+    // the envoy is still on the home roster (the mirror marks them hostage; no roster removal).
+    const homeNpcs = (r.settlementUpdates.find((u) => u.saveId === 'home')?.settlement?.npcs) || [];
+    expect(homeNpcs.some((n) => n.id === 'env'), 'the hostage envoy is still seated at home (no-death)').toBe(true);
   });
 });
