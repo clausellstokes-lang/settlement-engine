@@ -74,31 +74,10 @@ export default function GalleryList({
   return (
     <div style={{ maxWidth: PAGE_MAX, margin: '0 auto', padding: `${SP.lg}px ${SP.lg}px`, fontFamily: sans, color: INK }}>
       <style>{GALLERY_RESPONSIVE_CSS}</style>
-      <header className="sf-readable-surface" style={{
-        display: 'grid',
-        gridTemplateColumns: 'minmax(0, 1fr) auto',
-        gap: SP.md,
-        alignItems: 'end',
-        marginBottom: SP.lg,
-        padding: SP.lg,
-      }}>
-        <div style={{ minWidth: 0 }}>
-          <h1 style={{ margin: 0, color: INK, fontFamily: serif_, fontSize: FS['36'], lineHeight: 1.05, fontWeight: 750 }}>
-            {t('gallery.pageTitle')}
-          </h1>
-          <p style={{ margin: `${SP.xs}px 0 0`, maxWidth: 680, color: BODY, fontFamily: serif_, fontSize: FS.lg, lineHeight: 1.5, fontStyle: 'italic' }}>
-            {t('gallery.pageSubtitle')}
-          </p>
-        </div>
-        <Button
-          variant="primary"
-          icon={<Sparkles size={14} />}
-          onClick={() => onNavigate?.('generate')}
-        >
-          {t('gallery.forgeYourOwn')}
-        </Button>
-      </header>
-
+      {/* The page title / subtitle / forge CTA identity is the SHARED page
+          header owned by GalleryPage (so the Maps and Campaigns tabs carry it
+          too), not a per-panel header here — otherwise the Settlements tab
+          renders "Gallery" twice. The empty-state forge invitation below stays. */}
       {actionError && <StatusMessage tone="danger">{actionError}</StatusMessage>}
       {actionNotice && <StatusMessage tone="success">{actionNotice}</StatusMessage>}
 
