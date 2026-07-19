@@ -112,9 +112,16 @@ const CEILINGS = Object.freeze({
   // 236→235 (the search-empty dangerBg callout → a parchment clerk's note kept on
   // its oxblood left rule). The impaired/reduced/missing STATE tints are raw-hex
   // (not kill-list-counted); their rubric re-tone is a deferred follow-up.
-  borderRadius: 1057,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 114,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 268,    // off-palette translucent washes — ink tones come from the ramp
+  // Lowered again (C4c-f, THE INSTRUMENT PLATE — StaleNarrativeModal materials
+  // pass): borderRadius 1057→1054, boxShadow 114→113, rgba 268→265. The stale-
+  // narrative notice de-rounded (dialog :10 + the two option-card :6 struck) to a
+  // rule-framed plate; the ELEV[3] z-axis drop-shadow was struck; the violet AI-
+  // brand header wash + violet primary-button gradient (and their rgba borders/
+  // washes) became a parchment header band + the house gold primary (ink on gold).
+  // The warm-dim backdrop scrim (one rgba) is kept as the modal ground.
+  borderRadius: 1054,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 113,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 265,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
