@@ -346,6 +346,23 @@ do not simply stop the program and wait for me to push… create a loop cycle of
 complete exhaustive review cycle to fixes until there is materially no more
 fixes to be made and every dimension that can be made into A+ is made into an
 A+ at this stage, rinse and repeat.")
+- ⬛⭐ THE FINAL-REVIEW DOCTRINE (owner, 2026-07-19: "the whole point of the
+  review cycle is to be the FINAL review! that means we need to have everything
+  complete in code before then… no compromises on the best quality and
+  objectively best architecture"): THE LOOP REVIEWS A FINISHED CODEBASE — it
+  never builds missing features. ENTRY THEREFORE REQUIRES BUILD-COMPLETENESS:
+  after the de-eager + caliber lanes fold (batch 3), THE COMPLETION WAVES run
+  BEFORE the loop: WAVE A = the zero×4 residual sweep to LITERAL ZERO (the
+  burn-down's offender map, parallel lanes by cluster, ceilings set at folds) ·
+  WAVE B = the eleven Class-A items built (lastingEffects authoring [taste-
+  vetoable prose] · traditions genesis consumption + manual authoring UI · the
+  PDF counterseal structured-path refactor · the deterministic-violet re-tones
+  · Viability→ adjudication · WhatChangedPanel wire-or-remove · ?cat= deep-link
+  · folder thead a11y · journey_stop enrichment · vendorManifest try/finally).
+  Class B stays stage-blocked (named ceilings); Class C stays the owner's. The
+  de-eagering additionally receives a dedicated Fable ADVERSARIAL VERIFICATION
+  pass at fold batch 3 (persistence substrate, escalation clause). Cycle 1's
+  intake is thereby PURE REVIEW.
 - ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete) → the
   de-eagering lane (owner-ordered) → THE LOOP's cycles run to convergence →
   ⬛ THE PUSH IMMEDIATELY AFTER THE LOOP (owner, final clarification
