@@ -61,7 +61,7 @@ import { seasonForTick } from './worldState.js';
 import { seasonalSeverityFor } from './seasons.js';
 import { PROSPERITY_TIERS, prosperityRank } from '../../data/constants.js';
 import { tradeRouteTier } from '../tradeRouteSemantics.js';
-import { getSpatialLedger, setSpatialLedger, dropSpatialLedger } from '../spatial/distanceRead.js';
+import { getSpatialLedger, setSpatialLedger, dropSpatialLedger, activeSpatialDigest } from '../spatial/distanceRead.js';
 import { activeArchetypes } from '../activeConditions.js';
 import { ladderInstabilityOf } from '../townMap/ladderRead.js';
 import { WAR_STRESSOR_TYPES } from './warStressorTypes.js';
@@ -69,6 +69,7 @@ import { advanceNpcGrowthWithFabricAndConsequenceAndLadder } from './npcLadderKe
 import { advancePolitics, routedLegitimacyHit } from '../traditions/politics.js';
 import { advanceRelations } from '../traditions/relations.js';
 import { traditionBeatProse } from '../traditions/prose.js';
+import { pilgrimageDraw } from '../traditions/pilgrimage.js';
 
 /**
  * @typedef {import('../traditions/genesis.js').TraditionRec} TraditionRec
@@ -574,6 +575,12 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
     }
   }
 
+  // §16 (Wave C) PILGRIMAGE: the frozen spatial digest, resolved ONCE per tick (a grand festival
+  // draws pilgrims from nearby reachable settlements, lifting its outcome). Null on an ASPATIAL
+  // campaign ⇒ zero draw ⇒ every host outcome is byte-identical to the pre-seam engine (the §9
+  // aspatial dormancy, mirrored). A pure read.
+  const spatialDigest = activeSpatialDigest(worldState);
+
   // §5 accumulators (applied ONCE after the pass, through the bounded writers).
   /** @type {Map<string, number>} */
   const prosperityDeltas = new Map();
@@ -633,7 +640,11 @@ function advanceLitTraditions({ snapshot, worldState, settlementUpdates, tick, n
       if (skip) {
         outcome = TRADITION_OUTCOME.CANCELLED;
       } else {
-        const score = successScore({ rec, settlement: s, worldState, sid, year, warTypes });
+        // §16 (Wave C) pilgrimage attendance: a grand festival draws pilgrims from nearby reachable
+        // settlements, lifting its success. Bounded; 0 when aspatial (digest null) ⇒ byte-identical.
+        const pilgrimBonus = pilgrimageDraw({ hostId: sid, hostRec: rec, settlements: items, digest: spatialDigest });
+        const score = clampNum(successScore({ rec, settlement: s, worldState, sid, year, warTypes }) + pilgrimBonus,
+          TRAD_TUNING.SCORE_MIN, TRAD_TUNING.SCORE_MAX);
         const r = createPRNG(`${String(asObject(worldState).rngSeed || '')}::tradition:${rec.id}:${year}`).random();
         outcome = outcomeForDraw(score, r);
       }
