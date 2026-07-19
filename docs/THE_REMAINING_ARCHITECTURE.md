@@ -346,14 +346,17 @@ do not simply stop the program and wait for me to push… create a loop cycle of
 complete exhaustive review cycle to fixes until there is materially no more
 fixes to be made and every dimension that can be made into A+ is made into an
 A+ at this stage, rinse and repeat.")
-- ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete) → ⬛ THE PUSH
-  IMMEDIATELY (owner amendment 2026-07-19: "push after just in case, i can't
-  delay it after that for safety then the site-walk") — the full §3 push
-  completion runs as a HARD, UNDELAYABLE step the moment the composite exists
-  (all branches, per-branch SHA verification; the safety snapshot) → THEN the
-  site-walk (owner) — the walk remains NON-BLOCKING to the loop's cycles (walk
-  feedback = rulings, folded into the next cycle's intake); further pushes
-  continue per Ruling #7 as backup after each cycle's fix waves.
+- ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete) → the
+  de-eagering lane (owner-ordered) → THE LOOP's cycles run to convergence →
+  ⬛ THE PUSH IMMEDIATELY AFTER THE LOOP (owner, final clarification
+  2026-07-19: "the push happens immediately after the loop… everything before
+  that must happen with the utmost highest caliber and quality") — the full §3
+  push completion fires the moment convergence is declared, delayed by NOTHING
+  at that boundary. The site-walk runs whenever the owner walks (non-blocking;
+  feedback = next cycle's intake). MANAGER ASSUMPTION (vetoable): Ruling #7's
+  quiet interim branch-backup pushes remain authorized during the loop (pure
+  safety, never a deploy) — say "no interim pushes" to hold ALL pushing until
+  after convergence.
 - THE CYCLE (repeat until convergence): (1) FULL RESURVEY — fan-out across every
   dimension (correctness · cohesion/counterparts · experience/immersion vs THE
   EIGHT CROWNS · substance benchmarks · performance/eager · security/abuse · AI
