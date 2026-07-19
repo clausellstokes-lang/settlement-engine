@@ -1,13 +1,20 @@
 -- ════════════════════════════════════════════════════════════════════════════
 -- 137_founder_seats.sql — the Founder seat as a first-class ENTITLEMENT.
 -- ════════════════════════════════════════════════════════════════════════════
--- ⚠️⚠️  DRAFT — PRESENTED FOR OWNER SIGN-OFF, NOT DECIDED.  ⚠️⚠️
---   The schema SHAPE here is owner-gated (the standing rule for anything touching
---   persistence). This file is written so it CAN be deployed unchanged once the
---   owner signs the shape, but it must NOT be applied until then. See the report
---   delivered with this migration for the verbatim shape + the sign-off questions.
+-- ✅ SIGNED OFF 2026-07-19 (owner ruling, ledger @ 15ba006c → the Money Wave freeze):
+--   the seat-register SHAPE is decided. This file is REWRITTEN IN PLACE (never
+--   applied anywhere — prod head is 117) into the production seat register v2: it
+--   KEEPS everything the sign-off draft had (both tables, the seed, the RLS
+--   posture, the public projection, the opt-in RPC, the claim primitive) and ADDS
+--   the transfer-lifecycle columns/stamps (§6.1), WIRES the webhook seat-claim hook
+--   (137's deliberate deferral ends — see the founder_lifetime branch in
+--   stripe-webhook), and adds the mirrored clawback release. Rewriting in place
+--   (rather than a superseding migration) keeps the chain free of duplicate table
+--   definitions and keeps list_founder_seats_public where its shipped client
+--   (founderLineage.js) expects it. Still WRITTEN-NOT-DEPLOYED (the whole 118+ chain
+--   ships together at the owner's `db push`).
 --
--- @rollback: drop function if exists public.claim_next_founder_seat(uuid); drop function if exists public.set_founder_display_optin(text, text); drop function if exists public.list_founder_seats_public(); drop table if exists public.founder_seat_transfers; drop table if exists public.founder_seats;
+-- @rollback: drop function if exists public.release_founder_seat_on_clawback(uuid); drop function if exists public.claim_next_founder_seat(uuid); drop function if exists public.set_founder_display_optin(text, text); drop function if exists public.list_founder_seats_public(); drop table if exists public.founder_seat_transfers; drop table if exists public.founder_seats;
 --
 -- ⚠️  WRITTEN, NOT APPLIED (the 130–136 standing pattern). supabase/applied-head.json
 --   is deliberately NOT bumped — prod stays at its applied head; `validate:migration-head`
@@ -93,11 +100,30 @@ create table if not exists public.founder_seats (
   -- When the CURRENT holder took the seat. NULL while unclaimed.
   held_since         timestamptz,
   claimed_at         timestamptz,
+  -- ── Transfer lifecycle (§6.1, Money Wave). All nullable/defaulted so a plain
+  --    unclaimed-seat INSERT and an existing claimed row both stay valid. ──────
+  -- When the seat was ORIGINALLY purchased (stamped at first claim; the 12-month
+  -- hold + chargeback invariant (LAW 8) are measured from here). NULL pre-sale.
+  original_purchase_at timestamptz,
+  -- How the CURRENT holder acquired the seat. 'purchase' at first claim; 'transfer'
+  -- when a finalize moves it; 'estate'/'grant' for the concierge paths.
+  acquired_via         text not null default 'purchase'
+                         check (acquired_via in ('purchase','transfer','estate','grant')),
+  -- held_since + 12 months: the earliest this holder may initiate a transfer.
+  transfer_eligible_at timestamptz,
+  -- The most recent finalize that moved this seat (for the per-seat cooldown).
+  last_transfer_at     timestamptz,
+  -- last_transfer_at + 12 months: no second transfer of this seat before this.
+  cooldown_until       timestamptz,
+  -- The seat's security posture. 'transfer_locked' bars new transfers; 'flagged'
+  -- marks a post-payout dispute; 'escheat' marks an abandoned seat (§6.8).
+  security_status text not null default 'normal'
+                         check (security_status in ('normal','transfer_locked','flagged','escheat')),
   updated_at         timestamptz not null default now()
 );
 
 comment on table public.founder_seats is
-  'The 30 Founder seats as first-class ENTITLEMENTS (seat_id 1..30, immutable), separate from the account (holder_user_id is a nullable pointer, ON DELETE SET NULL). Holder display fields are OPT-IN and moderated; only display_name_status=approved ever projects publicly via list_founder_seats_public(). The simulation NEVER reads this table (premium-seam law). DRAFT — awaiting owner sign-off of the shape.';
+  'The 30 Founder seats as first-class ENTITLEMENTS (seat_id 1..30, immutable), separate from the account (holder_user_id is a nullable pointer, ON DELETE SET NULL). Holder display fields are OPT-IN and moderated; only display_name_status=approved ever projects publicly via list_founder_seats_public(). The simulation NEVER reads this table (premium-seam law). Transfer lifecycle columns (§6.1) added at the Money Wave freeze; seat records are purge-immune (LAW 9).';
 
 comment on column public.founder_seats.holder_user_id is
   'Nullable pointer to the current holder (auth.users). ON DELETE SET NULL — a deleted account releases the pointer but the seat entitlement row persists. NEVER exposed publicly.';
@@ -130,7 +156,7 @@ create table if not exists public.founder_seat_transfers (
 );
 
 comment on table public.founder_seat_transfers is
-  'Append-only Founder seat lineage. One row per succession; from_display_name snapshots the outgoing holder''s opted display name (NULL if not opted in). No update/delete policy — INSERT-only via the service-role write path. Transfers append, never erase. DRAFT — awaiting owner sign-off.';
+  'Append-only Founder seat lineage. One row per succession; from_display_name snapshots the outgoing holder''s opted display name (NULL if not opted in). No update/delete policy — INSERT-only via the service-role write path. Transfers append, never erase (reversals/buybacks/abandonment append a note row, they do NOT delete history).';
 
 create index if not exists idx_founder_transfers_seat on public.founder_seat_transfers(seat_id, transferred_at);
 
@@ -250,13 +276,14 @@ grant execute on function public.set_founder_display_optin(text, text) to authen
 comment on function public.set_founder_display_optin(text, text) is
   'Holder self-service: set/clear the caller''s own seat opt-in display name + gallery slug. Re-enters moderation (status=pending). Cannot change seat_id/holder. authenticated only.';
 
--- ── 7. Seat assignment PRIMITIVE (service-role) — the webhook HOOK stays DEFERRED ─
--- Claims the LOWEST unclaimed seat for a user and stamps held-since. This is the
--- entitlement primitive the "service-role writes for seat assignment" requirement
--- names. ⚠️ WIRING IT INTO stripe-webhook (call on a founder_lifetime purchase) is
--- the "propose, do not wire" hook — NOT added to supabase/functions/stripe-webhook
--- here; see the report. Idempotent per user: a user who already holds a seat gets it
--- back rather than a second seat (defends the never-mint cap).
+-- ── 7. Seat assignment PRIMITIVE (service-role) — the webhook HOOK is NOW WIRED ──
+-- Claims the LOWEST unclaimed seat for a user and stamps the original-purchase
+-- lifecycle. 137's deliberate deferral ends: the stripe-webhook founder_lifetime
+-- branch calls this AFTER the profile writes, never-throw into fulfillment
+-- (log-don't-throw; is_founder stays the fast flag and the money truth, a missed
+-- seat row is operator-repairable via this idempotent primitive). Idempotent per
+-- user: a user who already holds a seat gets it back rather than a second seat
+-- (defends the never-mint cap).
 create or replace function public.claim_next_founder_seat(p_user uuid)
 returns jsonb
 language plpgsql
@@ -282,12 +309,18 @@ begin
   end if;
 
   -- Claim the lowest unclaimed seat atomically (row lock; skip locked so concurrent
-  -- purchases take distinct seats). NULL ⇒ sold out (all 30 held).
+  -- purchases take distinct seats). NULL ⇒ sold out (all 30 held). The transfer
+  -- lifecycle stamps (§6.1) are set here at the ORIGINAL purchase: original_purchase_at
+  -- anchors the 12-month hold + chargeback invariant (LAW 8), and transfer_eligible_at
+  -- = held_since + 12 months is the earliest this holder may initiate a transfer.
   update public.founder_seats
-     set holder_user_id = p_user,
-         held_since     = now(),
-         claimed_at     = now(),
-         updated_at     = now()
+     set holder_user_id       = p_user,
+         held_since           = now(),
+         claimed_at           = now(),
+         original_purchase_at = now(),
+         acquired_via         = 'purchase',
+         transfer_eligible_at = now() + interval '12 months',
+         updated_at           = now()
    where seat_id = (
      select seat_id from public.founder_seats
       where holder_user_id is null
@@ -309,4 +342,77 @@ revoke all on function public.claim_next_founder_seat(uuid) from public;
 grant execute on function public.claim_next_founder_seat(uuid) to service_role;
 
 comment on function public.claim_next_founder_seat(uuid) is
-  'Service-role seat-assignment primitive: claims the LOWEST unclaimed seat for p_user (idempotent — an existing holder gets their seat back, never a second). The stripe-webhook HOOK that calls this on a founder_lifetime purchase is DEFERRED (propose, do not wire). service_role only.';
+  'Service-role seat-assignment primitive: claims the LOWEST unclaimed seat for p_user, stamping original_purchase_at/held_since/transfer_eligible_at (idempotent — an existing holder gets their seat back, never a second). Called by the stripe-webhook founder_lifetime branch (never-throw). service_role only.';
+
+-- ── 8. Clawback seat RELEASE (service-role) — the mirror of the claim ────────────
+-- When a founder_lifetime purchase is refunded/charged-back, clawbackFounderForSession
+-- flips is_founder→false; this RPC mirrors that on the seat register: it clears the
+-- holder (the seat returns to the unclaimed pool — the refunded seat is resellable,
+-- the cap intact) and appends a lineage note so the succession record is honest. Runs
+-- AFTER the is_founder flip, log-don't-throw (the existing post-claim posture). Claim-
+-- once by construction: a redelivered refund finds the holder already cleared and the
+-- UPDATE ... WHERE holder_user_id = p_user touches no row (returns released:false).
+-- The outgoing holder's opted display name is snapshotted into the lineage row (only
+-- if they had opted in), matching the finalize/transfer lineage discipline.
+create or replace function public.release_founder_seat_on_clawback(p_user uuid)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_role text;
+  v_seat smallint;
+  v_from_name text;
+begin
+  v_role := coalesce(current_setting('request.jwt.claim.role', true), auth.role());
+  if v_role <> 'service_role' then
+    raise exception 'release_founder_seat_on_clawback is service-role only (got: %)', v_role;
+  end if;
+  if p_user is null then
+    raise exception 'a user is required';
+  end if;
+
+  -- Snapshot the outgoing holder's opted+approved display name BEFORE clearing, so
+  -- the lineage keeps what they chose to show as a Founder (NULL if never opted in).
+  select case when display_name_status = 'approved'
+              then nullif(btrim(coalesce(display_name_optin, '')), '') end
+    into v_from_name
+  from public.founder_seats
+  where holder_user_id = p_user;
+
+  -- Claim-once: clear the holder and reset the seat to a fresh unclaimed state. A
+  -- redelivered refund finds no matching holder and no-ops.
+  update public.founder_seats
+     set holder_user_id       = null,
+         display_name_optin   = null,
+         display_name_status  = 'pending',
+         gallery_author_slug  = null,
+         held_since           = null,
+         claimed_at           = null,
+         original_purchase_at = null,
+         acquired_via         = 'purchase',
+         transfer_eligible_at = null,
+         last_transfer_at     = null,
+         cooldown_until       = null,
+         security_status      = 'normal',
+         updated_at           = now()
+   where holder_user_id = p_user
+  returning seat_id into v_seat;
+
+  if v_seat is null then
+    return jsonb_build_object('released', false);
+  end if;
+
+  insert into public.founder_seat_transfers (seat_id, from_holder, to_holder, from_display_name, note)
+    values (v_seat, p_user, null, v_from_name, 'clawback');
+
+  return jsonb_build_object('released', true, 'seat_id', v_seat);
+end;
+$$;
+
+revoke all on function public.release_founder_seat_on_clawback(uuid) from public;
+grant execute on function public.release_founder_seat_on_clawback(uuid) to service_role;
+
+comment on function public.release_founder_seat_on_clawback(uuid) is
+  'Service-role mirror of claim_next_founder_seat for the refund/chargeback clawback: clears the holder (seat returns to the unclaimed pool, cap intact) and appends a ''clawback'' lineage note. Claim-once (a redelivered refund finds the holder cleared and no-ops). service_role only.';
