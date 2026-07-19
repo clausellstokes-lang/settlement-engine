@@ -23,9 +23,11 @@ const assetsDir = join(distDir, 'assets');
 const distExists = existsSync(distDir) && existsSync(assetsDir);
 const requireDist = process.env.VERIFY_DIST === '1';
 
-// Kept in sync with journeyManifest.js's JOURNEY_FILM_FINGERPRINT (hardcoded here
-// the way interiorLazy hardcodes '::interior:v1:' — the string must survive minification).
-const JOURNEY_FINGERPRINT = '::loading-journey:v1:';
+// Kept in sync with the source fingerprints (hardcoded here the way interiorLazy
+// hardcodes '::interior:v1:' — each string must survive minification):
+//   journeyManifest.js JOURNEY_FILM_FINGERPRINT (generation film) and
+//   RealmUnfurlLoading.jsx REALM_UNFURL_FINGERPRINT (realm/FMG loading).
+const JOURNEY_FINGERPRINTS = Object.freeze(['::loading-journey:v1:', '::realm-unfurl:v1:']);
 
 function staticImportSpecifiers(code) {
   const specs = new Set();
@@ -64,13 +66,15 @@ describe.runIf(requireDist)('C2L lazy dist verification is not vacuously skipped
   });
 });
 
-describe.runIf(distExists)('C2L — the loading journey film stays off first paint', () => {
-  it('the film fingerprint is ABSENT from the entry transitive static closure', () => {
-    const { files } = entryStaticClosure();
-    const leaked = files.filter((f) => readFileSync(join(assetsDir, f), 'utf-8').includes(JOURNEY_FINGERPRINT));
-    expect(
-      leaked,
-      `the loading journey conductor reached first paint via the static graph (chunks: ${leaked.join(', ')}).`,
-    ).toHaveLength(0);
-  });
+describe.runIf(distExists)('C2L — the loading journeys stay off first paint', () => {
+  const { files } = distExists ? entryStaticClosure() : { files: [] };
+  for (const fingerprint of JOURNEY_FINGERPRINTS) {
+    it(`fingerprint ${fingerprint} is ABSENT from the entry transitive static closure`, () => {
+      const leaked = files.filter((f) => readFileSync(join(assetsDir, f), 'utf-8').includes(fingerprint));
+      expect(
+        leaked,
+        `a loading-journey conductor reached first paint via the static graph (chunks: ${leaked.join(', ')}).`,
+      ).toHaveLength(0);
+    });
+  }
 });

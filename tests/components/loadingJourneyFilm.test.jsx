@@ -14,6 +14,7 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import JourneyFilm from '../../src/components/loadingJourney/JourneyFilm.jsx';
 import { JOURNEY_FILM_FINGERPRINT } from '../../src/components/loadingJourney/journeyManifest.js';
+import RealmUnfurlLoading, { REALM_UNFURL_FINGERPRINT } from '../../src/components/loadingJourney/RealmUnfurlLoading.jsx';
 
 const STILL_RE = /\/media\/journey-legs\/bg\/still-\d+-[a-z]+\.jpg$/;
 
@@ -68,5 +69,19 @@ describe('THE FLOOR — the journey renders from stills with the film absent', (
     } finally {
       window.matchMedia = realMM;
     }
+  });
+});
+
+describe('THE REALM UNFURL FLOOR — parchment renders while the FMG iframe boots', () => {
+  it('renders the parchment scroll floor with no film master (the drop-in seam is empty)', () => {
+    const { container } = render(<RealmUnfurlLoading bridgeReady={false} />);
+    const root = container.querySelector('[data-realm-unfurl]');
+    expect(root, 'the unfurl backdrop must render while booting').not.toBeNull();
+    expect(root.getAttribute('data-realm-unfurl')).toBe(REALM_UNFURL_FINGERPRINT);
+    // The parchment texture is the floor material (existing shipped asset).
+    const parchment = [...container.querySelectorAll('div')].find((d) => (d.getAttribute('style') || '').includes('paper-grain'));
+    expect(parchment, 'the parchment floor renders film-independently').toBeDefined();
+    // No master exists yet → no <video> even on a fine pointer.
+    expect(container.querySelector('video'), 'the unfurl video seam is empty until a master ships').toBeNull();
   });
 });

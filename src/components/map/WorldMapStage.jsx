@@ -15,6 +15,7 @@
 
 import { memo, Suspense, lazy } from 'react';
 import { Loader, AlertTriangle, RefreshCw } from 'lucide-react';
+import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
@@ -22,6 +23,9 @@ import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, R, swatch, 
 import Button from '../primitives/Button.jsx';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
+// C2L surface 2 — the reality-mode scroll-unfurl backdrop over the booting FMG
+// iframe. Lazy (rides this route chunk, zero eager) + taste-gated at the mount.
+const RealmUnfurlLoading = lazy(() => import('../loadingJourney/RealmUnfurlLoading.jsx'));
 const PlacementDetailCard = lazy(() => import('./PlacementDetailCard.jsx'));
 const QuickInspector  = lazy(() => import('./QuickInspector.jsx'));
 const LayersPanel     = lazy(() => import('./LayersPanel.jsx'));
@@ -67,6 +71,9 @@ function WorldMapStageImpl({
   const mapError      = useStore(s => s.mapError);
   const setMapMode    = useStore(s => s.setMapMode);
   const imageMode     = useStore(s => !!s.mapState.customBackdrop?.imageUrl);
+  // C2L taste-gate: the realm scroll-unfurl loading backdrop (default off ⇒ this
+  // surface is byte-unchanged; the walk flips it on to compare without a rebuild).
+  const showRealmFilm = flag('loadingJourneyFilm');
   return (
       showingWizardNews ? (
         <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
@@ -163,6 +170,16 @@ function WorldMapStageImpl({
               }}
             />
           )}
+          {/* C2L — the scroll-unfurl loading backdrop over the booting FMG iframe
+              (reality mode: holds until the bridge is truly ready, then plays the
+              final unfurl and self-dismisses). Only the FMG boot path (not the
+              image backdrop, which skips the iframe). Taste-gated + lazy;
+              decorative — the toolbar "Loading…" status line stays the a11y floor. */}
+          {showRealmFilm && !imageMode && (
+            <Suspense fallback={null}>
+              <RealmUnfurlLoading bridgeReady={bridgeReady} />
+            </Suspense>
+          )}
           {(bridgeReady || imageMode) && (
             <Suspense fallback={null}>
               {/* bridgeRef.current is read during render to pass into the overlay.
@@ -170,7 +187,7 @@ function WorldMapStageImpl({
                   constructed once during the bridge-init effect and never
                   reassigned for the lifetime of this WorldMap instance. In image
                   mode there is no bridge (the overlay self-drives). */}
-              {/* eslint-disable-next-line react-hooks/refs */}
+              { }
               {/* RF's F2 ref contract (master-merge W1 mis-resolution fixed at W6): the
                   parent live-reads transformOut for the drop handler — master's
                   onTransform CALLBACK spelling silently severed the threading. */}

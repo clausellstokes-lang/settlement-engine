@@ -36,7 +36,7 @@ import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
-import { useFlag } from '../../lib/flags.js';
+import { flag } from '../../lib/flags.js';
 import { legsForTier } from '../loadingJourney/journeyManifest.js';
 import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
 
@@ -69,8 +69,8 @@ export default function PipelineReveal({ onComplete }) {
   // C2L — the loading journey film as this theater's BACKDROP. Off by default
   // (taste-gate); the stills floor + reveal card are unchanged when off.
   const hasSettlement = useStore(s => !!s.settlement);
-  const showFilm = useFlag('loadingJourneyFilm');
-  const useBgSet = useFlag('loadingJourneySetBg');
+  const showFilm = flag('loadingJourneyFilm');
+  const useBgSet = flag('loadingJourneySetBg');
   const [filmClock, setFilmClock] = useState(null);
 
   // Stable label lookup. tx() returns the whole map; we read once.
