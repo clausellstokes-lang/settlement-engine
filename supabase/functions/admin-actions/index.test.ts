@@ -522,3 +522,51 @@ Deno.test('backfill_money_events rejects a non-highest role (403) and reads no S
   assertEquals(listed, false);
   assertEquals(stub.upserts.length, 0);
 });
+
+// ── Surveyor admin verbs (159, §5, slice M-4c) ───────────────────────────────
+
+Deno.test('grant_surveyor routes to grant_surveyor_entitlement (highest-role, audited)', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  const call = stub.rpc.find((c) => c.fn === 'grant_surveyor_entitlement');
+  assertEquals((call!.args as { p_user: string }).p_user, 'u9');
+  assertEquals((call!.args as { p_source: string }).p_source, 'grant');
+  const audit = stub.rpc.find((c) => c.fn === 'write_audit');
+  assertEquals((audit!.args as { p_action: string }).p_action, 'grant_surveyor');
+});
+
+Deno.test('revoke_surveyor routes to revoke_surveyor_entitlement (audited, destructive)', async () => {
+  const stub = makeAdminClient('developer');
+  const res = await handleAdminActions(
+    req({ action: 'revoke_surveyor', userId: 'u9', reason: 'refund' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'dev1', email: 'dev@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.some((c) => c.fn === 'revoke_surveyor_entitlement'), true);
+  const audit = stub.rpc.find((c) => c.fn === 'write_audit');
+  assertEquals((audit!.args as { p_action: string }).p_action, 'revoke_surveyor');
+});
+
+Deno.test('grant_surveyor is rejected for a non-highest role (403, no RPC dispatched)', async () => {
+  const stub = makeAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor', userId: 'u9' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'sup1', email: 'sup@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 403);
+  assertEquals(stub.rpc.length, 0);
+});
+
+Deno.test('grant_surveyor requires a userId', async () => {
+  const stub = makeAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'grant_surveyor' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 400);
+  assertEquals(stub.rpc.length, 0);
+});

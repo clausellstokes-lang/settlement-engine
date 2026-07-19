@@ -1297,6 +1297,41 @@ export async function handleAdminActions(
         return json({ success: true, ...(data || {}) });
       }
 
+      // ── Surveyor provisioning (159, §5) — the concierge path that replaces manual
+      // SQL, LIVE ON DEPLOY (moves no money, needs no Stripe price). Highest-role,
+      // audited, target by user id. grant/revoke go through the 159 service RPCs.
+      case "grant_surveyor": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { error: gErr } = await adminClient.rpc("grant_surveyor_entitlement", {
+          p_user: userId, p_source: "grant", p_subscription_id: null, p_customer_id: null,
+        });
+        if (gErr) return adminFail(gErr, 500);
+        await writeAudit({
+          action: "grant_surveyor",
+          targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
+          after: { status: "active", source: "grant" },
+          destructive: false, reversible: true,
+        });
+        return json({ success: true });
+      }
+
+      case "revoke_surveyor": {
+        if (!isHighest) return json({ error: "Insufficient privileges" }, 403);
+        if (!userId) return json({ error: "Missing userId" }, 400);
+        const { data: revoked, error: rErr } = await adminClient.rpc("revoke_surveyor_entitlement", {
+          p_user: userId, p_reason: auditReason,
+        });
+        if (rErr) return adminFail(rErr, 500);
+        await writeAudit({
+          action: "revoke_surveyor",
+          targetUserId: userId, targetType: "surveyor_entitlement", targetId: String(userId),
+          after: { status: "revoked" },
+          destructive: true, reversible: true,
+        });
+        return json({ success: true, revoked: Boolean(revoked) });
+      }
+
       // ── Money-spine backfill (156/157 money_events, DESIGN_MONEY_WAVE §2/§11) ──
       // One-time, highest-role, audited. Pages Stripe's historical checkout
       // sessions + invoices and upserts money_events rows through the SAME
