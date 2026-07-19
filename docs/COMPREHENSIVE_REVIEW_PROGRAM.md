@@ -1153,6 +1153,25 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ OWNER RULING (2026-07-19) — "then de-eager": THE DE-EAGERING LANE IS
+ORDERED; the 998-byte breach cures by ARCHITECTURE, not by re-pin.** The owner
+chose the objectively-better path over the manager's bridge recommendation
+(recommendation recorded, vetoed — the system working as designed) and thereby
+waived the push-first sequencing: the push now fires AFTER the de-eagering
+lands and verify:dist goes green UNDER the untouched 1,040,000 budget. THE
+LANE (Fable, escalation clause — persistence blast radius): convert the
+custom-content registry/schema out of the eager closure (sync→async persisted-
+path conversion, ~41KB reclaim per the gated memory); EVERY read path
+dispositioned — slice add/update dispatch · AI accept→mint · store hydration
+from persisted saves · canonize · import/export · the server twin's
+vocab.buckets wall (must not desync) · gen:compendium-data · the
+TRADITION_*_KEYS drift-guard architecture (survives or re-homes, never
+silently dropped); dormancy goldens byte-identical; generation same-seed
+untouched (validation is write-side — verify, don't assume). AFTER LANDING:
+the manager RE-TIGHTENS the budget to the new measured floor (deliberate
+shrink, declared). Dispatch waits on the assembly's fold-3+cure completion
+(same worktree). Sequence: assembly close → de-eager lane → re-tighten →
+THE PUSH → walk → THE LOOP.
 **⬛⭐⭐ THE COMPOSITE ASSEMBLY — folds 1–2 VERIFIED, STOPPED-BY-CONSTITUTION at
 b4e0f017 (2026-07-19); ⛔ THE 998-BYTE BUDGET DECISION QUEUED (blocks the
 push).** Step 0: R2-i swept into deep-craft @ 7fe77a85 (NUL-clean incl.
