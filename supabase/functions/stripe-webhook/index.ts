@@ -1285,6 +1285,7 @@ interface MoneyEventRow {
   currency: string;
   description: string;
   receipt_url: string | null;
+  status?: 'paid' | 'refunded' | 'disputed' | 'reversed';   // default 'paid'; a refund_note sets 'refunded'
   stripe_session_id?: string | null;
   stripe_invoice_id?: string | null;
   stripe_payment_intent_id?: string | null;
@@ -1436,6 +1437,72 @@ async function flipMoneyEventStatus(
   }
 }
 
+/**
+ * FP-2 (§6.8 family 8 / §6.6): refund a $99 transfer charge that COMPLETED for a case
+ * that is no longer awaiting_payment. transfer_case_mark_paid no-opped (wrong_state), so
+ * the seat never moved for THIS session — the nominee's charge is orphaned and must be
+ * returned. The ONE exception is a redelivery of the session that LEGITIMATELY paid the
+ * case (paid_at set AND stripe_session_id === this session): that money bought the cooling
+ * seat and must NOT be clawed back. Redelivery-safe by construction: the Stripe
+ * idempotencyKey dedups the refund and the money_events event_key dedups the note, so a
+ * replay re-sends the same refund request and re-inserts no row. NEVER-throw — a
+ * refund/mirror failure must not turn the ack into a redelivery loop that keeps
+ * re-completing the same charge (the operator log is the remediation surface).
+ */
+async function refundOrphanedTransferCharge(
+  supabase: ReturnType<typeof adminClient>,
+  stripeApi: typeof stripe,
+  session: Stripe.Checkout.Session,
+  caseId: string,
+  reason: string,
+): Promise<void> {
+  const userId = session.metadata?.supabase_user_id ?? null;
+  try {
+    // Only refund when THIS session did not legitimately pay the case. A found case whose
+    // paid_at is set AND whose bound session IS this one is the seat-buying payment
+    // (redelivered) — leave it. An absent case row means the $99 has no valid home → refund.
+    const { data: c, error: cErr } = await supabase
+      .from('founder_transfer_cases')
+      .select('paid_at, stripe_session_id')
+      .eq('id', caseId)
+      .maybeSingle();
+    if (cErr) { logError('stripe-webhook', userId, cErr.message, { stage: 'transfer_orphan_lookup', session_id: session.id, case_id: caseId }); return; }
+    const paidByThisSession = !!c && c.paid_at != null && c.stripe_session_id === session.id;
+    if (paidByThisSession) {
+      console.log(`[stripe-webhook] transfer session ${session.id} mark_paid no-op (${reason}) — this session legitimately paid case ${caseId}; NOT refunding`);
+      return;
+    }
+
+    // Resolve the charge's payment_intent and refund it, idempotency-keyed on the session.
+    const full = await stripeApi.checkout.sessions.retrieve(session.id);
+    const pi = typeof full.payment_intent === 'string' ? full.payment_intent : full.payment_intent?.id ?? null;
+    if (pi) {
+      await stripeApi.refunds.create({ payment_intent: pi }, { idempotencyKey: `transfer-orphan-refund-${session.id}` });
+      console.log(`[stripe-webhook] orphaned transfer session ${session.id} (case ${caseId}, ${reason}) refunded`);
+    } else {
+      logError('stripe-webhook', userId, 'orphaned transfer charge has no payment_intent to refund', { stage: 'transfer_orphan_refund', session_id: session.id, case_id: caseId });
+    }
+
+    // Mirror a refund_note into the money ledger (redelivery-safe via the event_key upsert).
+    await writeMoneyEvent(supabase, {
+      event_key: `refund:transfer-orphan:${session.id}`,
+      user_id: userId,
+      occurred_at: new Date().toISOString(),
+      kind: 'refund_note',
+      amount_cents: typeof session.amount_total === 'number' ? session.amount_total : 0,
+      currency: session.currency ?? 'usd',
+      description: describeMoneyKind('refund_note'),
+      receipt_url: null,
+      status: 'refunded',
+      stripe_session_id: session.id,
+      stripe_payment_intent_id: pi,
+      metadata: { reason: 'transfer_orphan_refund', transfer_case_id: caseId, mark_paid_reason: reason },
+    });
+  } catch (err) {
+    logError('stripe-webhook', userId, err, { stage: 'transfer_orphan_refund', session_id: session.id, case_id: caseId });
+  }
+}
+
 // ── Auto-reload payment confirmation (158, §4.5) ─────────────────────────────
 //
 // The off-session PaymentIntent's create result is NOT trusted for the grant
@@ -1577,9 +1644,12 @@ async function dispatchStripeEvent(
         if (paid?.ok) {
           await mirrorCheckoutMoneyEvent(supabase, stripeApi, session, 'seat_transfer_payment', session.metadata?.supabase_user_id ?? null, 0);
         } else {
-          // A wrong-state session (already paid / aborted / a stale nominee session):
-          // ack and, if it never entered awaiting_payment, refund the orphaned charge.
-          console.log(`[stripe-webhook] transfer session ${session.id} mark_paid no-op: ${paid?.reason ?? 'unknown'}`);
+          // FP-2 (§6.8 family 8): a wrong-state session (aborted/expired, or a stale
+          // nominee session superseded by a re-minted one). The seat never moved for THIS
+          // session, so the orphaned charge is refunded — UNLESS this is a redelivery of
+          // the session that legitimately paid the case (that money bought the cooling
+          // seat). Redelivery-safe (idempotency-keyed refund + event_key-deduped note).
+          await refundOrphanedTransferCharge(supabase, stripeApi, session, transferCaseId, paid?.reason ?? 'unknown');
         }
         break;
       }

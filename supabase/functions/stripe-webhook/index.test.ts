@@ -1924,6 +1924,101 @@ Deno.test('an expired founder_seat_transfer session regresses the case (never-th
   assertEquals(stub.calls.rpc.some((c) => c.fn === 'transfer_case_regress_awaiting_payment'), true);
 });
 
+// ── FP-2 (fraud-fix, §6.8 family 8): THE ORPHAN CHARGE REFUND ────────────────
+// A $99 transfer checkout can COMPLETE for a case that is no longer awaiting_payment
+// (aborted/expired between session creation and payment, or a stale nominee session
+// superseded by a re-minted one). transfer_case_mark_paid no-ops (wrong_state), the seat
+// never moved for THIS session, and the charge is orphaned — it MUST be refunded once,
+// with a refund_note mirrored — EXCEPT a redelivery of the session that LEGITIMATELY paid
+// the case (that money bought the cooling seat; refunding it would strip a paid transfer).
+// deno-lint-ignore no-explicit-any
+function makeOrphanStub(caseRow: Record<string, unknown> | null, markPaid: Record<string, unknown>) {
+  const claims = makeClaimTable();
+  const rpc: Array<{ fn: string; args: unknown }> = [];
+  const moneyEvents: Array<Record<string, unknown>> = [];
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (table: string) => {
+      if (table === 'processed_webhook_events') return claims.builder();
+      if (table === 'founder_transfer_cases') {
+        // deno-lint-ignore no-explicit-any
+        const b: any = { select: () => b, eq: () => b, maybeSingle: () => Promise.resolve({ data: caseRow, error: null }) };
+        return b;
+      }
+      if (table === 'money_events') {
+        return { upsert: (row: Record<string, unknown>) => { if (!moneyEvents.some((r) => r.event_key === row.event_key)) moneyEvents.push({ status: 'paid', ...row }); return Promise.resolve({ error: null }); } };
+      }
+      // deno-lint-ignore no-explicit-any
+      const b: any = { select: () => b, eq: () => b, in: () => b, maybeSingle: () => Promise.resolve({ data: null, error: null }), update: () => ({ eq: () => Promise.resolve({ error: null }) }) };
+      return b;
+    },
+    rpc: (fn: string, args: unknown) => {
+      rpc.push({ fn, args });
+      if (fn === 'transfer_case_mark_paid') return Promise.resolve({ data: markPaid, error: null });
+      return Promise.resolve({ data: null, error: null });
+    },
+  };
+  return { rpc, moneyEvents, adminClient: () => client };
+}
+/** A stripe stub recording refunds.create + resolving the session's payment_intent. */
+// deno-lint-ignore no-explicit-any
+function orphanStripe(): any {
+  const refunds: Array<{ params: unknown; opts: unknown }> = [];
+  return {
+    refunds,
+    stripeClient: {
+      refunds: { create: (params: unknown, opts: unknown) => { refunds.push({ params, opts }); return Promise.resolve({ id: 're_orphan' }); } },
+      checkout: { sessions: { retrieve: (_id: string) => Promise.resolve({ payment_intent: 'pi_orphan' }) } },
+    },
+  };
+}
+const transferCompleted = (sessionId: string, caseId: string) => JSON.stringify({
+  id: `evt_${sessionId}`, type: 'checkout.session.completed',
+  data: { object: { id: sessionId, payment_status: 'paid', amount_total: 9900, currency: 'usd',
+    metadata: { purpose: 'founder_seat_transfer', transfer_case_id: caseId, supabase_user_id: 'u_nominee' } } },
+});
+
+Deno.test('FP-2: a $99 completed for an ABORTED transfer case refunds exactly once + mirrors a refund_note', async () => {
+  // The case was aborted/expired: mark_paid no-ops (wrong_state); paid_at is null.
+  const stub = makeOrphanStub({ paid_at: null, stripe_session_id: null }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_orphan_99', 'case-aborted');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stub.rpc.filter((c) => c.fn === 'transfer_case_mark_paid').length, 1);
+  // The orphaned charge is refunded, idempotency-keyed on the session id.
+  assertEquals(stripe.refunds.length, 1);
+  assertEquals((stripe.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'transfer-orphan-refund-cs_orphan_99');
+  assertEquals((stripe.refunds[0].params as { payment_intent: string }).payment_intent, 'pi_orphan');
+  // A refund_note is mirrored into the money ledger.
+  assertEquals(stub.moneyEvents.length, 1);
+  assertEquals(stub.moneyEvents[0].kind, 'refund_note');
+  assertEquals(stub.moneyEvents[0].status, 'refunded');
+});
+
+Deno.test('FP-2: a REPLAY of the session that LEGITIMATELY paid the case never refunds', async () => {
+  // The paying session moved the seat (paid_at set, stripe_session_id === this session);
+  // its redelivery finds the case cooling → mark_paid wrong_state, but must NOT refund.
+  const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_paid_99' }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_paid_99', 'case-live');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stripe.refunds.length, 0);          // the paying session's money is NOT clawed back
+  assertEquals(stub.moneyEvents.length, 0);
+});
+
+Deno.test('FP-2: a STALE nominee session (a DIFFERENT session paid the case) IS refunded', async () => {
+  // The case was paid by a re-minted session; this older session is orphaned → refund it.
+  const stub = makeOrphanStub({ paid_at: '2026-01-01T00:00:00Z', stripe_session_id: 'cs_new_99' }, { ok: false, reason: 'wrong_state' });
+  const stripe = orphanStripe();
+  const body = transferCompleted('cs_old_99', 'case-live');
+  const res = await handleStripeWebhook(req(body, { 'stripe-signature': await sign(body, SECRET) }), { adminClient: stub.adminClient, stripeClient: stripe.stripeClient });
+  assertEquals(res.status, 200);
+  assertEquals(stripe.refunds.length, 1);
+  assertEquals((stripe.refunds[0].opts as { idempotencyKey: string }).idempotencyKey, 'transfer-orphan-refund-cs_old_99');
+});
+
 /** Stub for the transfer chargeback matrix: founder_transfer_cases resolves the
  *  given case by stripe_session_id; records seat flag updates + rpc calls. */
 // deno-lint-ignore no-explicit-any
