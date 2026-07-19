@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ WAVE B REMAINDER + DOWNGRADE FIXES COMPLETE (2026-07-19,
+claude/wave-b-remainder @ 80db0799, 11 commits atop aad6265e — manager-verified
+lineage).** Landed: THE DOOR DISCRIMINATOR #15 (door + AI-keys gate =
+has_surveyor_entitlement OR is_founder OR elevated; CARTOGRAPHER PREMIUM EXCLUDED per the
+owner ruling; +9 pins; zero eager via lazy per-chunk entitlement read — the store-thread
+alternative measured +321 eager B, vetoable) · THE P0 PURGE FIX (migration 162: the
+retention purge SPARES settlements holding a live dossier entitlement — purge-destroys-
+paid-rights is CURED; +6 pglite pins) · retention-warning template + notify helper ·
+viability adjudication (deliberate declared shift: excluded-category issues leave the web
+tab, matching the PDF) · WhatChangedPanel WIRED with an honesty guard · a11y theads ·
+?cat= deep-link · journey_stop analytics enrichment (zero new eager names) ·
+lastingEffects authored prose (deity golden proven mechanical-only — innocent) · the
+Surveyor-comment finalization · vendorManifest atomic-rename crash-safety (the flatqueue
+class CLOSED structurally). Receipts: 13,624 P / 9 reds all accounted (4 parked goldens +
+5 migration-numbering fold-artifacts of brief-mandated 162) · closure 1,040,998 = base
+EXACT. MANAGER ADJUDICATION on WB-g (deterministic-violet re-tones): item CLOSED AS
+MISCONCEIVED (vetoable) — C13 already converted the AI-register violets; the remaining
+violets are SEMANTIC (deity/arcane/account wash) and re-toning them would erase the
+AI-vs-arcane distinction the C13 honesty law protects. DEFERRALS → THE WAVE B FINISHER
+(dispatched, claude/wave-b-finisher off aad6265e): WB-h HowToUse substance restore into
+AboutManifesto (master d024286e recipe) · WB-j traditions authoring UI + genesis
+consumption (CustomContent at ceiling — extract first; dormancy golden preserved via
+consumer-side merge) · audit-2.2 inactive-card read-only Export · the scheduled
+retention-dispatch job (inert against the seam). SUBSCRIPTION-PAUSE → RELAYED to the
+money lane (they own stripe-webhook: add customer.subscription.updated pause handling).
+WB-k counterseal stays post-launch-owed (C15 §10, recipe recorded).
 **⬛⭐ MONEY WAVE DISPATCH 1 COMPLETE — M-1..M-4 (2026-07-19, claude/money-wave @
 d8c7bc8d, 15 commits atop aad6265e — manager-verified lineage).** THE SPINE: migration
 157 money_events (append-mostly, event_key redelivery shield, FK-independent of
