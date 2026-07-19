@@ -1134,6 +1134,27 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19) — THE COHERENCE MANDATE joins THE ROUND 3 LOOP
+(an upward amendment of the A+ standard, per the standing ratchet clause).** Verbatim
+intent: every system must be coherent with the intended/logical/intuitive nature of
+every other system, and where a coherence piece is MISSING between two subsystems whose
+FOUNDATION exists, the loop BUILDS it — completeness, not just correctness. OPERATIONALIZED
+with convergence guardrails: (1) THE PAIR MATRIX — cycle 1 enumerates the full pairwise
+system matrix ONCE (war · occupation · migration · trade/supply · rumor/intel · beliefs ·
+traditions · ladder · corruption · generosity · calamity/upswing · roads · politics/
+legitimacy · prosperity · religion — ~15 systems, ~105 pairs), classifying each pair:
+COHERENT / INCOHERENT (= defect, fix) / MISSING-WITH-FOUNDATION (= candidate) /
+MISSING-NO-FOUNDATION (deferred seam) / ORTHOGONAL (recorded). (2) THE FOUR GATES — a
+candidate BUILDS during the loop only if it: uses existing machinery on both sides (no
+new subsystems) · obeys the dark/dormancy constitution · has a soak-bandable effect ·
+is not owner-parked scope. Gate-failures → deferred seams or the owner queue, never
+silent. (3) CONVERGENCE REDEFINED: zero must-fix findings AND zero gate-passing
+coherence gaps unbuilt (built or explicitly deferred-with-rationale). Builds land in
+early cycles; later cycles verify only. (4) The soak's leave-one-out matrix covers every
+new coupling by construction. SEED EXAMPLE recorded for the matrix: journeys READ the
+rumor network for routing but a returning traveler does not WRITE the home settlement's
+rumor ledger about the visited place — foundation exists both sides; the class's
+archetype.
 **⬛ OWNER RULING (2026-07-19, "done!") — THE $25 DIAL:** the manager's
 recommendation adopted verbatim: the TRANSFER share stays $49.50 (price/2 — the even
 split is the anti-side-deal incentive, defended and ratified); the STANDING BUYBACK and

@@ -467,6 +467,17 @@ A+ at this stage, rinse and repeat.")
   sub-layers plain UI over live systems) + THE ROAD SCENE (party-travel DM
   staging: deterministic route-truth scene brief, eventProse idioms, optional
   AI dressing via existing metered surfaces; the party is NEVER simulated).
+  ⬛⭐ THE COHERENCE MANDATE (owner 2026-07-19, §4 loop amendment — A+ standard
+  ratcheted UP): the loop gains a COHERENCE AUDIT dimension — cycle 1
+  enumerates the full pairwise system matrix once (~15 systems / ~105 pairs;
+  COHERENT / INCOHERENT=defect / MISSING-WITH-FOUNDATION=candidate /
+  MISSING-NO-FOUNDATION=deferred / ORTHOGONAL); candidates BUILD during the
+  loop only through the FOUR GATES (existing machinery both sides · dark/
+  dormancy constitution · soak-bandable effect · not owner-parked); gate
+  failures → deferred seams/owner queue. CONVERGENCE = zero must-fix AND zero
+  gate-passing gaps unbuilt. Seed archetype: returning travelers should WRITE
+  the home rumor ledger about visited places (read-side exists, write-side
+  missing, foundation both sides).
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
