@@ -146,7 +146,7 @@ function tradeReachable(graph, homeId, maxHops) {
 function observanceMatch(destRecs, weekOfYear, hopWeeksOut) {
   const recs = Array.isArray(destRecs) ? destRecs : [];
   if (!recs.length) return null;
-  const maxScale = recs.reduce((m, r) => Math.max(m, num(asObject(r).scaleBand, 0)), 0);
+  const maxScale = recs.reduce((m, r) => Math.max(/** @type {number} */ (m), num(asObject(r).scaleBand, 0)), 0);
   let best = null;
   for (const r of recs) {
     const rec = asObject(r);
@@ -166,7 +166,7 @@ function observanceMatch(destRecs, weekOfYear, hopWeeksOut) {
 /**
  * The path node the traveller occupies right now (§7): the dest while visiting; interpolated
  * along the frozen path (forward outbound, reverse returning). Pure.
- * @param {Record<string, unknown>} m @param {number} weekClock @param {unknown} digest @param {string|null} season
+ * @param {Record<string, unknown>} m @param {number} weekClock @param {import('../spatial/distanceRead.js').SpatialDigest} digest @param {string|null} season
  * @returns {string}
  */
 function currentHopOf(m, weekClock, digest, season) {
@@ -195,7 +195,7 @@ function currentHopOf(m, weekClock, digest, season) {
 function armyOnHop(armyLedger, graph, worldState, hop, homeId) {
   for (const key of Object.keys(armyLedger).sort(cmp)) {
     const rec = asObject(armyLedger[key]);
-    if (currentRegion(rec) !== hop) continue;
+    if (currentRegion(/** @type {import('../spatial/armyTransit.js').ArmyTransitRecord} */ (rec)) !== hop) continue;
     const armyHome = str(rec.armyId || rec.originId);
     if (!armyHome || armyHome === homeId) continue;
     const rt = relationshipTypeBetween(graph, worldState, armyHome, homeId);
@@ -296,7 +296,7 @@ function sortKeys(obj) {
 
 /**
  * Estimate a mission's expected-return week (display-only; null while trapped). Pure.
- * @param {Record<string, unknown>} m @param {unknown} digest @param {string|null} season @returns {number|null}
+ * @param {Record<string, unknown>} m @param {import('../spatial/distanceRead.js').SpatialDigest} digest @param {string|null} season @returns {number|null}
  */
 function expectedReturnWeek(m, digest, season) {
   if (m.trappedBySiege) return null;
@@ -336,9 +336,9 @@ function advanceLitRoads(args) {
   const worldState = /** @type {Record<string, unknown>} */ (args.worldState);
   const settlementUpdates = /** @type {Array<Record<string, unknown>>} */ (args.settlementUpdates);
   const graph = asObject(args.graph);
-  const digest = args.digest;
+  const digest = /** @type {import('../spatial/distanceRead.js').SpatialDigest} */ (args.digest);
   const now2 = Math.max(0, Math.floor(num(args.tick, 0))); // per-call event-fork counter
-  const now = args.now == null ? null : args.now;
+  const now = /** @type {string | null} */ (args.now == null ? null : args.now);
   const weekClock = num(asObject(asObject(worldState).calendar).elapsedWeeks, now2); // calendar weeks
   const clock = seasonForTick(weekClock);
   const year = num(clock.year, 1);
@@ -502,7 +502,7 @@ function advanceLitRoads(args) {
   // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
   /** @type {Map<string, number>} legitimacy hits (capture home hit · T4 detain host hit) */
   const legitimacyHits = new Map();
-  const bumpLegit = (id, d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
+  const bumpLegit = (/** @type {string} */ id, /** @type {number} */ d) => legitimacyHits.set(id, (legitimacyHits.get(id) || 0) + d);
   const armyLedger = asObject(getSpatialLedger(worldState, 'armyTransit'));
   const occupations = asObject(asObject(worldState).occupations);
   const priorTraditionsG = asObject(getSpatialLedger(worldState, 'traditions'));
@@ -628,7 +628,7 @@ function advanceLitRoads(args) {
     if (!idSet.has(captorId)) early = 'captor_gone';
     else if (asObject(asObject(occupations)[captorId]).occupierId) early = 'captor_occupied';
     else if (r.hostileAtCapture && !atOpenWar(graph, homeId, captorId) && !HOSTILE_RUNGS.has(relationshipTypeBetween(graph, worldState, homeId, captorId))) early = 'peace';
-    const termEnd = r.remainingWeeks <= 0;
+    const termEnd = /** @type {number} */ (r.remainingWeeks) <= 0;
     if (!early && !termEnd) { ransoms[rid] = r; continue; } // still captive — carry the updated record
 
     // RELEASE: the captive turns for home ('returning' over hopWeeks); the ransom record clears.
@@ -709,7 +709,7 @@ function advanceLitRoads(args) {
       // BORROWED-PURPOSE scan (first match): observance → trade → diplomacy → ladder.
       let purpose = null; let dest = ''; let major = false; let hopWeeksOut = 1; let fullWeight = false;
       for (const cand of inRange) {
-        const obs = observanceMatch(priorTraditions[cand.dest], weekOfYear, cand.hopWeeksOut);
+        const obs = observanceMatch(/** @type {unknown[]} */ (priorTraditions[cand.dest]), weekOfYear, cand.hopWeeksOut);
         if (obs) { purpose = { kind: 'observance', ref: obs.id }; dest = cand.dest; hopWeeksOut = cand.hopWeeksOut; major = obs.critical; fullWeight = obs.critical; break; }
       }
       if (!purpose && TRADE_CATEGORY.test(categoryOf(npc))) {
@@ -857,6 +857,7 @@ function advanceLitRoads(args) {
   const priorReturned = asObject(getSpatialLedger(worldState, 'roadsReturnedCaptives'));
   if (Object.keys(priorReturned).length || returnedCaptiveDeposits.length) {
     const npcStates = asObject(asObject(worldState).npcStates);
+    /** @type {Record<string, unknown>} */
     const nextReturned = {};
     for (const key of Object.keys(priorReturned).sort(cmp)) {
       const r = asObject(priorReturned[key]);
@@ -888,7 +889,7 @@ function advanceLitRoads(args) {
  * advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions (a name swap). Roads dark/
  * aspatial ⇒ an exact no-op inside the composition. No cycle: this leaf imports the traditions
  * kernel; none import back.
- * @param {Parameters<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions>[0]} args
+ * @param {Parameters<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions>[0] & { saves?: unknown }} args
  * @returns {ReturnType<typeof advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions>}
  */
 export function advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads(args) {

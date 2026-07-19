@@ -133,7 +133,7 @@ export function roadsActive(worldState) {
  * @returns {boolean}
  */
 export function isOffStage(npc) {
-  if (isInStasis(npc)) return true;
+  if (isInStasis(/** @type {Parameters<typeof isInStasis>[0]} */ (npc))) return true;
   const w = npc && typeof npc === 'object' ? /** @type {Record<string, unknown>} */ (npc).whereabouts : null;
   return !!(w && typeof w === 'object' && /** @type {Record<string, unknown>} */ (w).state === 'hostage');
 }
@@ -236,9 +236,9 @@ export function riskToleranceOf(npc) {
 export function militaryQuality01(a) {
   const T = ROADS_TUNING;
   const q = T.MIL_QUALITY_BASE
-    + T.MIL_QUALITY_READINESS * clamp01(a.readiness01)
-    + T.MIL_QUALITY_EXPERIENCE * clamp01(a.experience01)
-    + T.MIL_QUALITY_CAPACITY * clamp01(a.capacityBand01);
+    + T.MIL_QUALITY_READINESS * clamp01(/** @type {number} */ (a.readiness01))
+    + T.MIL_QUALITY_EXPERIENCE * clamp01(/** @type {number} */ (a.experience01))
+    + T.MIL_QUALITY_CAPACITY * clamp01(/** @type {number} */ (a.capacityBand01));
   return clampNum(q, T.MIL_QUALITY_MIN, T.MIL_QUALITY_MAX);
 }
 
@@ -290,7 +290,7 @@ const CONVERSION_RESISTANT_DOMINANTS = new Set(['zealous', 'principled']);
  * Conversion flaw factor (§10): a corruptible flaw amplifies (1.6); a zealous/principled
  * dominant resists (0.4); else base (1.0). CORRUPTIBLE_FLAWS is passed in (the corruption
  * leaf owns the canonical set) to keep this leaf dependency-light. Pure.
- * @param {unknown} npc @param {Set<string>|string[]} corruptibleFlaws @returns {number}
+ * @param {unknown} npc @param {Set<string>|readonly string[]} corruptibleFlaws @returns {number}
  */
 export function conversionFlawFactor(npc, corruptibleFlaws) {
   const T = ROADS_TUNING;
