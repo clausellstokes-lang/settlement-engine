@@ -1134,6 +1134,28 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ THE COHERENCE MATRIX IS PRE-COMPUTED (2026-07-19) — docs/COHERENCE_MATRIX_R3.md
+committed (this commit).** The 16-agent workflow (15 rows + synthesis, 3.3M subagent
+tokens) classified all 105 system-pairs from BOTH endpoints against aad6265e: COHERENT 74
+(~70% — the engine is a MATURE coupled web, not silos) · MISSING_WITH_FOUNDATION 17 ·
+INCOHERENT_DEFECT 8 (+1 intra-cluster = 9) · ORTHOGONAL 4 · MISSING_NO_FOUNDATION 2. KEY
+FINDING: 4 of 9 defects are ONE root cause — consumers never filter _worldPulseInactive/
+status that calamityKernel.ruin() sets, so destroyed buildings still function (flattened
+garrison fights · ruined cathedral backs faith · razed building gets reform rolls ·
+flattened healing house counts as plague care). 12 candidates gate IN (loop build queue,
+ranked: migration→rumor carrier + the traditions quartet lead) · 8 gate OUT (6 roads
+seams PENDING-FOLD incl. the owner's OWN beliefs×roads flagship seed → owner-queue HIGHEST
+post-fold; prosperity×calamity → owner-signed golden re-mint). 15 disagreements recorded —
+every ruin-class defect was calamity-flagged and counterpart-missed (the "owner can't see
+its consumers' staleness" pattern). MANAGER DECISION: the CONFIRMED DEFECTS are pre-staged
+NOW (not carried through the fold into the loop) — THE RUIN-FILTER STRUCTURAL LANE
+dispatched off aad6265e (the _worldPulseInactive filtered accessor + inventory ratchet
+closing the 4-defect class + the 2 dead-read point bugs in militaryStrength.js + the
+occupation×corruption dead-field check); the gated-IN FEATURES stay loop intake per the
+mandate (behavior-additive, the loop's honesty-row discipline). Declared behavior shift
+expected (destroyed things stop functioning) — the lane declares every shifted golden,
+does NOT re-mint (the ONE REGEN / fold reconciles). Matrix doc = the loop's pre-stocked
+intake; the successor executes cycle 1 from it.
 **⬛⭐⭐ ROADS FINAL COMPLETE — RS-a + R-5..R-7 + THE §19 CHARTER (2026-07-19,
 claude/the-roads @ a9d69975, 7 commits atop fa0bd2e7; 21 total on the branch).**
 STRICT-CLEAN: the 35 type-holes annotated JSDoc-only, byte-neutral, roads goldens
