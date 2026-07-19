@@ -1153,6 +1153,30 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C6–C12 THE PAGES COMPLETE (2026-07-19, claude/deep-craft-pages @ 55e4a69c,
+7 lettered commits P-a..P-g, NOT folded).** Pricing bench (differentiated
+top-rules, daggers, gold stamp) · Compendium lexicon (shared Tag/Card engine
+de-round, hairline plates) · Gallery specimen drawers (inkdarken hover, clerk's
+report form) · Founders CHARTER (rule-framed; the struck-tally board DECLINED —
+the page is a deliberate NAMED lineage "portal of proof", JUDGMENT) · Auth
+restraint (ruled slips, rubric notes, same strings/flows) · Checkout receipt
+artifact + colophon · Account danger zone rubric-ruled (typed-confirmation
+delete byte-identical, pins green). C9 PAID-SURFACE PROOF: FoundersPage owns no
+checkout/seat-write; FounderTile untouched entirely; 66 founder tests green.
+121 OFFENDERS REMOVED (−71 radii/−10 shadows/−22 rgba/−18 tinted; branch counts
+983/103/243/217). ⚠ MANAGER'S BRIEF CONTRADICTION OWNED: "remove offenders but
+don't move ceilings" under tolerance-0 = the 4 kill-list sub-reds the branch
+now carries BY DESIGN — RESOLUTION PRE-RULED: fold batch 2 sets each ceiling to
+the measured post-merge count in the fold operation (shrink-only, deliberate);
+the branch's organicSamples red is the pre-C3-e base state, cured at fold. 2
+contrast JUDGMENTs (white-on-gold → ink-on-gold 7.6:1, vetoable). C13-overlap
+discipline held (AI-violet left untouched on shared files; deferral list
+ledgered). Deferrals: account sections beyond the danger zone · gallery
+detail/tabs/hubs · compendium write register + dropcap host — all legal Phase-D
+census reason-rows. Full suite 13,205 / expected-5 + the 4 by-design + the
+pre-base fixture + 1 isolation-cleared flake. THE PHASE-D CENSUS AGENT
+dispatches into the freed slot (read-only disposition sweep of the restoration
+ledger's PENDING rows — de-serializing the Phase-D gate's biggest grind).
 **⬛⭐ C3 THE LIBRARY LEDGER COMPLETE (2026-07-19, deep-craft @ 97aa4f3d, 5
 commits incl. both addenda).** d06f4a89 the list becomes a REAL semantic table
 (SettlementCard → <tr>, one renderer — JUDGMENT over a div idiom; both call
