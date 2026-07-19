@@ -200,13 +200,92 @@ describe('D7 trade-dependence class', () => {
 });
 
 describe('D7 vocabulary shape', () => {
-  it('the vocabulary is frozen and total over the 8 act classes', () => {
+  it('the vocabulary is frozen and total over the 9 act classes', () => {
     expect(Object.isFrozen(REFRAME_VOCAB)).toBe(true);
-    expect(Object.keys(REFRAME_VOCAB).length).toBe(8);
+    expect(Object.keys(REFRAME_VOCAB).length).toBe(9); // Wave C added the 'tradition' class (8 → 9)
     for (const [, v] of Object.entries(REFRAME_VOCAB)) {
       expect(typeof v.base).toBe('string');
       expect(Array.isArray(v.dark) && v.dark.length >= 1).toBe(true);
       expect(typeof v.bright).toBe('string');
     }
+    // the Wave C tradition class carries the imposition vocabulary
+    expect(REFRAME_VOCAB.tradition.base).toBe('observance');
+    expect(REFRAME_VOCAB.tradition.dark).toContain('rite_supplanted');
+    expect(isDarkReading('rite_supplanted')).toBe(true);
+    expect(isDarkReading('culture_effaced')).toBe(true);
+    expect(isBrightReading('custom_welcomed')).toBe(true);
+  });
+});
+
+describe('D7 FACT SOURCE 3 — tradition imposition reframe (Wave C, §8/§16)', () => {
+  /** A lit world with a traditions sidecar: `vassal` had a rite suppressed by `overlord`. */
+  function makeTraditionWorld({ trust = 0.5, resentment = 0.0, lit = true } = {}) {
+    const key = relationshipKeyFromEdge({ from: 'vassal', to: 'overlord' });
+    const worldState = {
+      simulationRules: lit ? { reframeEnabled: true } : {},
+      relationshipStates: { [key]: { relationshipType: 'rival', trust, resentment } },
+      spatialLedgers: {
+        traditions: {
+          vassal: [
+            { id: 'tradition.vassal.0', coreMotif: { element: 'founding', act: 'feast' }, scaleBand: 3, suppressedBy: null },
+            { id: 'tradition.vassal.1', coreMotif: { element: 'harvest', act: 'fair' }, scaleBand: 2, suppressedBy: { overlordId: 'overlord', sinceYear: 4, traded: { id: 'tradition.vassal.1::imposed' } } },
+          ],
+        },
+      },
+    };
+    const byId = new Map([
+      ['vassal', { id: 'vassal', settlement: {} }],
+      ['overlord', { id: 'overlord', settlement: {} }],
+    ]);
+    const snapshot = { byId, regionalGraph: { edges: [{ from: 'vassal', to: 'overlord' }] } };
+    return { worldState, snapshot };
+  }
+
+  it('a mildly resented imposition mints the band-0 DARK reading (observance → rite_supplanted)', () => {
+    // predatory (+darkening) with a light grievance clears DARK_ENTER but not DEEPEN ⇒ band 0.
+    const { worldState, snapshot } = makeTraditionWorld({ trust: 0.05, resentment: 0.1 });
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    expect(r.changed).toBe(true);
+    const reading = reframeReadingOf(r.worldState, 'vassal', 'overlord', 'tradition');
+    expect(reading?.reading).toBe('rite_supplanted');
+    expect(reading?.sign).toBe('dark');
+  });
+
+  it('a deeply resented imposition DEEPENS to the band-1 reading (culture_effaced)', () => {
+    const { worldState, snapshot } = makeTraditionWorld({ trust: 0.05, resentment: 0.85 });
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    const reading = reframeReadingOf(r.worldState, 'vassal', 'overlord', 'tradition');
+    expect(reading?.reading).toBe('culture_effaced');
+    expect(reading?.sign).toBe('dark');
+  });
+
+  it('a welcomed imposition mints a BRIGHT tradition reading (custom_welcomed)', () => {
+    const { worldState, snapshot } = makeTraditionWorld({ trust: 0.95, resentment: 0.0 });
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    const reading = reframeReadingOf(r.worldState, 'vassal', 'overlord', 'tradition');
+    expect(reading?.reading).toBe('custom_welcomed');
+    expect(reading?.sign).toBe('bright');
+  });
+
+  it('DORMANCY: reframe dark ⇒ no reframe ledger even with an imposition present', () => {
+    const { worldState, snapshot } = makeTraditionWorld({ resentment: 0.9, lit: false });
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    expect(r.changed).toBe(false);
+    expect(r.worldState.spatialLedgers.reframes).toBeUndefined();
+  });
+
+  it('BYTE-IDENTITY: reframe lit but NO traditions ledger ⇒ no tradition candidate (unchanged)', () => {
+    const { worldState, snapshot } = makeTraditionWorld({ trust: 0.05, resentment: 0.85 });
+    delete worldState.spatialLedgers.traditions; // traditions dark ⇒ the fact source finds nothing
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    expect(r.changed).toBe(false); // no obligations, no traditions ⇒ nothing to reframe
+    expect(reframeReadingOf(r.worldState, 'vassal', 'overlord', 'tradition')).toBeFalsy();
+  });
+
+  it('an un-suppressed set raises NO tradition candidate (only a live suppression is the fact)', () => {
+    const { worldState, snapshot } = makeTraditionWorld({ trust: 0.05, resentment: 0.85 });
+    worldState.spatialLedgers.traditions.vassal[1].suppressedBy = null; // liberation cleared it
+    const r = advanceReframe({ snapshot, worldState, tick: 20 });
+    expect(reframeReadingOf(r.worldState, 'vassal', 'overlord', 'tradition')).toBeFalsy();
   });
 });
