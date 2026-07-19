@@ -49,10 +49,10 @@ describe('customContentSlice — deities bucket', () => {
     expect(store.getState().customContent.deities).toEqual([]);
   });
 
-  test('create → list → delete round-trips a valid deity', () => {
+  test('create → list → delete round-trips a valid deity', async () => {
     const store = makeStore();
 
-    store.getState().addCustomItem('deities', VALID_DEITY);
+    await store.getState().addCustomItem('deities', VALID_DEITY);
     const listed = store.getState().getCustomItems('deities');
     expect(listed).toHaveLength(1);
     expect(listed[0]).toMatchObject({
@@ -69,50 +69,50 @@ describe('customContentSlice — deities bucket', () => {
     expect(store.getState().getCustomItems('deities')).toHaveLength(0);
   });
 
-  test('validation rejects a bad alignment axis', () => {
+  test('validation rejects a bad alignment axis', async () => {
     const store = makeStore();
-    const res = store.getState().addCustomItem('deities', { ...VALID_DEITY, alignmentAxis: 'lawful' });
+    const res = await store.getState().addCustomItem('deities', { ...VALID_DEITY, alignmentAxis: 'lawful' });
     expect(res).toBeNull();
     expect(store.getState().getCustomItems('deities')).toHaveLength(0);
     expect(store.getState().customContentError).toMatch(/alignmentAxis/);
   });
 
-  test('validation rejects a bad temperament axis and a bad rank axis', () => {
+  test('validation rejects a bad temperament axis and a bad rank axis', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('deities', { ...VALID_DEITY, temperamentAxis: 'sleepy' });
+    await store.getState().addCustomItem('deities', { ...VALID_DEITY, temperamentAxis: 'sleepy' });
     expect(store.getState().getCustomItems('deities')).toHaveLength(0);
 
-    store.getState().addCustomItem('deities', { ...VALID_DEITY, rankAxis: 'demigod' });
-    expect(store.getState().getCustomItems('deities')).toHaveLength(0);
-  });
-
-  test('validation rejects a deity with no name', () => {
-    const store = makeStore();
-    store.getState().addCustomItem('deities', { ...VALID_DEITY, name: '   ' });
+    await store.getState().addCustomItem('deities', { ...VALID_DEITY, rankAxis: 'demigod' });
     expect(store.getState().getCustomItems('deities')).toHaveLength(0);
   });
 
-  test('updating a deity to a bad axis is rejected and leaves the row intact', () => {
+  test('validation rejects a deity with no name', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('deities', VALID_DEITY);
+    await store.getState().addCustomItem('deities', { ...VALID_DEITY, name: '   ' });
+    expect(store.getState().getCustomItems('deities')).toHaveLength(0);
+  });
+
+  test('updating a deity to a bad axis is rejected and leaves the row intact', async () => {
+    const store = makeStore();
+    await store.getState().addCustomItem('deities', VALID_DEITY);
     const { id } = store.getState().getCustomItems('deities')[0];
 
-    const res = store.getState().updateCustomItem('deities', id, { rankAxis: 'archgod' });
+    const res = await store.getState().updateCustomItem('deities', id, { rankAxis: 'archgod' });
     expect(res).toBeNull();
     const after = store.getState().getCustomItems('deities')[0];
     expect(after.rankAxis).toBe('major'); // unchanged
   });
 
-  test('a valid update is applied', () => {
+  test('a valid update is applied', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('deities', VALID_DEITY);
+    await store.getState().addCustomItem('deities', VALID_DEITY);
     const { id } = store.getState().getCustomItems('deities')[0];
 
-    store.getState().updateCustomItem('deities', id, { rankAxis: 'cult' });
+    await store.getState().updateCustomItem('deities', id, { rankAxis: 'cult' });
     expect(store.getState().getCustomItems('deities')[0].rankAxis).toBe('cult');
   });
 
-  test('premium gate: a non-premium store keeps deities local-only (no cloud)', () => {
+  test('premium gate: a non-premium store keeps deities local-only (no cloud)', async () => {
     // customContentService.isConfigured is false in tests, so cloud sync never
     // runs regardless; the gate we assert here is the canUseCustomContent
     // predicate the slice consults before any cloud op. A non-premium store
@@ -120,7 +120,7 @@ describe('customContentSlice — deities bucket', () => {
     // branch is skipped — proving the D.0 client gate is wired to this bucket.
     const free = makeStore({ premium: false });
     expect(free.getState().canUseCustomContent()).toBe(false);
-    free.getState().addCustomItem('deities', VALID_DEITY);
+    await free.getState().addCustomItem('deities', VALID_DEITY);
     // Local write still happens (read-only-on-reload is enforced elsewhere);
     // the important guarantee is the gate value the cloud branch reads.
     expect(free.getState().getCustomItems('deities')).toHaveLength(1);

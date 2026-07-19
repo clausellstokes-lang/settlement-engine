@@ -99,33 +99,35 @@ describe('settlementSlice deity mount — embed → religion gate', () => {
     expect(isSubsystemActive(worldSnapshot(store), 'religion')).toBe(true);
   });
 
-  test('setPrimaryDeity(null) is wired (dispatches applyEvent) and leaves the settlement dormant', () => {
+  test('setPrimaryDeity(null) is wired (dispatches applyEvent) and leaves the settlement dormant', async () => {
     // Proves the store MOUNT is wired: the clear path delegates to the deity impl,
     // which dispatches SET_PRIMARY_DEITY through applyEvent and returns its envelope
     // (not null). No embed appears — correct for a clear (a null payload sheds the
     // patron); the non-null assign embed is pinned in deityRefCollision.test.js.
-    const res = store.getState().setPrimaryDeity(null);
+    // The actions are ASYNC since the de-eager lane (registry rides a lazy chunk);
+    // the resolved envelope/null contract is unchanged.
+    const res = await store.getState().setPrimaryDeity(null);
     expect(res).not.toBeNull();
     expect('primaryDeitySnapshot' in store.getState().settlement.config).toBe(false);
     expect(isSubsystemActive(worldSnapshot(store), 'religion')).toBe(false);
   });
 
-  test('setPrimaryDeity refuses a ref for an unauthored deity (no half embed)', () => {
-    const res = store.getState().setPrimaryDeity('custom:lu_nonexistent');
+  test('setPrimaryDeity refuses a ref for an unauthored deity (no half embed)', async () => {
+    const res = await store.getState().setPrimaryDeity('custom:lu_nonexistent');
     expect(res).toBeNull();
     expect('primaryDeitySnapshot' in store.getState().settlement.config).toBe(false);
   });
 
-  test('imposeCult remove on empty cults is a no-op; unknown add refuses', () => {
-    expect(store.getState().imposeCult(null)).toBeNull();
-    expect(store.getState().imposeCult('custom:lu_nonexistent')).toBeNull();
+  test('imposeCult remove on empty cults is a no-op; unknown add refuses', async () => {
+    expect(await store.getState().imposeCult(null)).toBeNull();
+    expect(await store.getState().imposeCult('custom:lu_nonexistent')).toBeNull();
     expect('cultDeitySnapshots' in store.getState().settlement.config).toBe(false);
     expect(isSubsystemActive(worldSnapshot(store), 'religion')).toBe(false);
   });
 
-  test('setPrimaryDeity with no active settlement is inert', () => {
+  test('setPrimaryDeity with no active settlement is inert', async () => {
     store.setState(s => { s.settlement = null; });
-    expect(store.getState().setPrimaryDeity('custom:x')).toBeNull();
+    expect(await store.getState().setPrimaryDeity('custom:x')).toBeNull();
   });
 });
 

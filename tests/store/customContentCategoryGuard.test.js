@@ -37,18 +37,18 @@ function makeStore() {
 describe('customContent mutators guard an unknown category (finding #9)', () => {
   beforeEach(() => installLocalStorage());
 
-  it('addCustomItem creates the bucket instead of throwing', () => {
+  it('addCustomItem creates the bucket instead of throwing', async () => {
     const store = makeStore();
-    expect(() => store.getState().addCustomItem('totallyNewBucket', { name: 'X' }))
-      .not.toThrow();
+    // async since the de-eager lane — a rejection would fail this await, which
+    // is the same no-throw pin the sync wrapper used to assert.
+    await store.getState().addCustomItem('totallyNewBucket', { name: 'X' });
     expect(store.getState().customContent.totallyNewBucket).toHaveLength(1);
     expect(store.getState().customContent.totallyNewBucket[0].name).toBe('X');
   });
 
-  it('updateCustomItem on an unknown category is a safe no-op', () => {
+  it('updateCustomItem on an unknown category is a safe no-op', async () => {
     const store = makeStore();
-    expect(() => store.getState().updateCustomItem('phantomBucket', 'id-1', { name: 'Y' }))
-      .not.toThrow();
+    await store.getState().updateCustomItem('phantomBucket', 'id-1', { name: 'Y' });
     expect(store.getState().customContent.phantomBucket).toEqual([]);
   });
 
@@ -59,9 +59,9 @@ describe('customContent mutators guard an unknown category (finding #9)', () => 
     expect(store.getState().customContent.ghostBucket).toEqual([]);
   });
 
-  it('known buckets are unaffected (regression guard)', () => {
+  it('known buckets are unaffected (regression guard)', async () => {
     const store = makeStore();
-    store.getState().addCustomItem('institutions', { name: 'Grand Hall' });
+    await store.getState().addCustomItem('institutions', { name: 'Grand Hall' });
     expect(store.getState().customContent.institutions[0].name).toBe('Grand Hall');
   });
 });
