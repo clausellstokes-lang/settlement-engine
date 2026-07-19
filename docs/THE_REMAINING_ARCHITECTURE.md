@@ -394,6 +394,15 @@ A+ at this stage, rinse and repeat.")
   no client Stripe calls, instant, offline-proof) + a one-time backfill for
   pre-existing purchases · migration WRITTEN-NOT-DEPLOYED · zero eager (the
   account page is lazy) · paid-surface behavior untouched (read-only surface).
+  ⬛ WAVE B #15 — THE BYOK DOOR (owner-prompted 2026-07-19: BYOK must not be
+  blocked): the SurveyorDoor render predicate becomes `isSurveyorTier(tier) ||
+  hasStoredByokKey` — a stored key = self-funded Surveyor access (adapter
+  selects the user's key; managed credits NEVER debited on BYOK calls — verify
+  the spend path branches correctly, pin it); the no-lock-tease law survives
+  (neither tier nor key ⇒ clean empty margin); the schema wall + rate limits
+  apply identically to BYOK traffic. Resolves the C13 recorded tension in
+  favor of the owner's original tier+credits+BYOK vision. Pin: door renders
+  for key-holders; door absent for neither; credits untouched on BYOK.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
