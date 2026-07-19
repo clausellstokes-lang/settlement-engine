@@ -85,7 +85,7 @@ function resolveMapState(settlement, worldState, regionalGraph) {
  * clock computed locally (never derived from month labels — DESIGN_TRADITIONS §17), agreeing with
  * worldState.seasonForTick / almanac.clockOfTick by construction. PURE.
  * @param {{ traditions?: unknown } | null | undefined} settlement
- * @param {{ calendar?: { elapsedWeeks?: number } | null } | null | undefined} worldState
+ * @param {{ calendar?: { elapsedWeeks?: number, season?: string, year?: number } | null } | null | undefined} worldState
  * @returns {import('./groundDress.js').MapDressFestival | null}
  */
 function resolveFestival(settlement, worldState) {
@@ -118,7 +118,7 @@ function resolveFestival(settlement, worldState) {
  * (optional) is needed only for the siege read — a surface without it (the thumbnail) still gets
  * scars + rebirth (settlement-only reads). Festival dress reads the settlement.traditions mirror.
  * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown, traditions?: unknown } | null | undefined} settlement
- * @param {{ calendar?: { season?: string, year?: number } | null, rngSeed?: string } | null | undefined} worldState
+ * @param {{ calendar?: { season?: string, year?: number, elapsedWeeks?: number } | null, rngSeed?: string } | null | undefined} worldState
  * @param {unknown} [regionalGraph]
  * @returns {import('./groundDress.js').MapDress | null}
  */
