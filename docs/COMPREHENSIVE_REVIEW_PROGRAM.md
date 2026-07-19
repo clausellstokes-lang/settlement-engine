@@ -1134,6 +1134,22 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ ILLUSTRATED TOWN IT-3 LANDED (2026-07-18, claude/illustrated-town @
+5324c246, 4 commits).** Season dress as parameter swaps on groundDressOps (winter
+snow/bare trees/muted furrows · autumn stubble · drought crack · severity deepens);
+state dress (siege ring — trig-free, rides wall/road geometry · scar grain ·
+rebirth scaffold), all read-only + dormant-absent; seasonOverride mapEdits key in
+the exact styleLens shape (naming-trap green, drop-when-default). PROOFS:
+seasonless byte-identity AT GOLDEN STRENGTH (base illustrated golden = EMPTY git
+diff, not re-minted); blob byte-identity; accessible lens zero-dress asserted; ops
+88 seasonless / 153 full-stack vs cap 160. Seasonal golden ADDITIVE (104 configs).
+JUDGMENT (sound, recorded): threaded worldState not bare calendar (severity needs
+rngSeed); scar dress whole-fabric (no per-district ids exist). Suite: 5 expected +
+1 confirmed load flake + 1 self-caught any-cast regression fixed in-lane.
+⚠ PROCESS RATCHET: domainAnyCastBaseline caught BOTH T-1 and IT-3 only at lane end
+— it now joins the PER-COMMIT gate list for any lane touching src/domain (T-2's
+brief already carries it; standing rule for all future briefs). IT-4 (the registry
+— the dead-seam closure) dispatches.
 **⬛⭐ TRADITIONS T-1 LANDED (2026-07-18, claude/traditions @ 686d2cb9, 3 commits).**
 cfe352b1 genesis leaf (400-line pure domain) + corpus data leaf + 51 tests ·
 1d649950 the World-group TraditionsTab (lazy; data-only registration; drafts get the
