@@ -160,6 +160,33 @@ export const TEMPLATES = Object.freeze({
     ].join('\n'),
     html: null,
   },
+
+  // Retention warning (downgrade-transition audit 2.2): when a lapsed account's
+  // settlements beyond its free slots are held in read-only retention and the
+  // retention window is closing, warn the owner BEFORE the purge so they can
+  // export or resubscribe. Authenticated template (recipient from auth.uid()).
+  retention_warning: {
+    subject: 'Your retained settlements expire soon',
+    text: [
+      'Hello {displayName},',
+      '',
+      'Your account has returned to the free tier, so settlements beyond your',
+      'free slots are held in read-only retention. They will be permanently',
+      'removed after {retentionUntil} unless you act.',
+      '',
+      'To keep them, you can:',
+      '  • Reactivate or export a retained settlement from your library:',
+      '    https://settlementforge.com/settlements',
+      '  • Resubscribe to restore full access to every retained settlement:',
+      '    https://settlementforge.com/pricing',
+      '',
+      'Your simulator output is untouched — retention only limits how many',
+      'settlements stay in your live library.',
+      '',
+      '— SettlementForge',
+    ].join('\n'),
+    html: null,
+  },
 });
 
 // ── Public API ─────────────────────────────────────────────────────────────

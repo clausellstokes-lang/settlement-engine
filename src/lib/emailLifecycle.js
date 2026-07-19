@@ -23,6 +23,13 @@
  *   notifyCapWarning      — anonGenCounter.js, when anon hits the cap
  *                            (clients only — server has no email
  *                            address for an anon yet)
+ *   notifyRetentionWarning — the retention-warning ramp (downgrade-transition
+ *                            audit 2.2). Authenticated; server reads the
+ *                            recipient from auth.uid(). The robust dispatch is a
+ *                            SCHEDULED server job over settlements nearing
+ *                            retention_expires_at (deferred to the Wave-E mail
+ *                            seam); this helper is the ready client/edge-callable
+ *                            consumer of the template.
  */
 
 import { supabase, isConfigured } from './supabase.js';
@@ -165,4 +172,14 @@ export function notifyCapWarning({ recipient, capUsed, capTotal }) {
     capUsed:  String(capUsed ?? 3),
     capTotal: String(capTotal ?? 3),
   }, recipient);
+}
+
+/** Retention warning — a downgraded account's retained-inactive settlements are
+ *  nearing the purge window. Authenticated call; the server reads the recipient
+ *  from auth.uid(). Fire-and-forget, same as the rest. */
+export function notifyRetentionWarning({ displayName, retentionUntil } = {}) {
+  return send('retention_warning', {
+    displayName:    displayName || 'there',
+    retentionUntil: retentionUntil || 'soon',
+  });
 }
