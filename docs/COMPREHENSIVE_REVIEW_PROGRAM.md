@@ -1134,6 +1134,32 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐⭐ ROADS FINAL COMPLETE — RS-a + R-5..R-7 + THE §19 CHARTER (2026-07-19,
+claude/the-roads @ a9d69975, 7 commits atop fa0bd2e7; 21 total on the branch).**
+STRICT-CLEAN: the 35 type-holes annotated JSDoc-only, byte-neutral, roads goldens
+byte-identical, strict 0/ceiling 0. R-5 THE PARTY'S HAND: ransom-npc/rescue-npc via the
+marker model (whereabouts.partyRelease, single-writer preserved) — ransom keeps captor
+prosperity + spares home both hits, rescue voids conversion + inflames via the existing
+recordPartyImpact; edit-kinds + fingerprint + commitPendingEdits round-trip pinned.
+R-6 THE TRAVELERS OVERLAY: lazy TravelersLayer (armies · road-borne migrants · envoys)
++ LayersPanel row/filter + pure geometry leaf + the shared-payload secrets probe.
+R-7 THE ROAD SCENE: pure composer (3 sections, DM-only ROADS_TRUTH, zero-write,
+inert-not-crash) + "Stage the Road" + metered AI-dressing; both surfaces + the overlay
+consult viewerSeesDmSecrets (fail-closed). §19 CHARTER EXECUTED (roadsCharter 10/10):
+the 12-YEAR LIT WALKTHROUGH (named-NPC id set conserved EVERY TICK — no-death as a
+per-tick invariant · ≤1 genesis journey/NPC-year · every purpose a registered kind ·
+captives released never removed · dark twin clean) · catch-up equivalence (no store
+cursor · zero RESIDUE_STRIP entries) · the adversarial audit (no-death source scan ·
+stale-intel receipt cites knownDangerAtDispatch=0 · double-jeopardy · DM-collision fuzz
+· ledger-shape fuzz). Receipts: build+typecheck 0 · closure 1,041,483 (+422 B cumulative,
+within the §16 600 B declared ceiling; the branch-base overage is the owner-gated
+roads-wave red) · suite reds = the 4 parked goldens + one isolation-verified flake ONLY.
+DURABLE FACT: new edit kinds flow into analyticsEvents.EVENTS via EDIT_KINDS → require
+`npm run build:edge-shared` (a regen step alongside operationRegistry/gen:compendium).
+FOLD POINTS: sessionGate composes at fold (money §7.2); ROADS_TRUTH needs the server
+citation allowlist (analystCore) at fold. THE FREED SLOT → R-8 THE EMBASSY EXTENSION
+DISPATCHED (§11b: peace embassies · interception race · dominion/rumor purposes · escort
+refinement) — the LAST roads build.
 **⬛⭐⭐ THE FABLE FRAUD-PASS — VERDICT: SAFE TO FOLD, THREE P1 MONEY BUGS CAUGHT
 (2026-07-19, claude/money-wave; FP-a committed @ 9d971f5c).** The mandatory §10
 adversarial pass executed all ten families + the four flagged suspects as real attacks.
