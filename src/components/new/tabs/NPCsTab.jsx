@@ -62,7 +62,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
         {pinnedCount > 0 && (
           <span
             title="Pinned NPCs are preserved across regenerate/progress. Their goal and secret won't be rewritten."
-            style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:'rgba(106,42,154,0.1)',border:'1px solid rgba(160,100,220,0.35)',borderRadius:12,padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
+            style={{fontSize:FS.xxs,fontWeight:800,color:swatch.ai,background:swatch['#F0EBFF'],border:'1px solid #c8a8e8',padding:'2px 10px',letterSpacing:'0.04em',flexShrink:0,cursor:'help'}}>
             ⚲ {pinnedCount} PINNED
           </span>
         )}
@@ -76,7 +76,7 @@ export function NPCsTab({npcs, onRerollNPCs, settlement, narrativeNote, pinnedId
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Filter by name, role, or faction"
             placeholder="Filter by name, role, or faction…"
-            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',borderRadius:5,fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
+            style={{width:'100%',padding:'7px 28px 7px 28px',border:'1px solid #c8b89a',fontSize:FS.sm,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:8,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear filter" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
         {[

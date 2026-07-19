@@ -21,7 +21,7 @@ function AnchorFact({ label, value, accent }) {
       background: accent ? `${accent}0d` : '#faf8f4',
       border: `1px solid ${accent ? `${accent}30` : BORDER}`,
       borderLeft: `3px solid ${accent || '#c8b89a'}`,
-      borderRadius: 5, padding: '5px 9px',
+      padding: '5px 9px',
     }}>
       <div style={{ fontSize: FS['8.5'], fontWeight: 700, color: accent || MUTED, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 1 }}>{label}</div>
       <div style={{ fontSize: FS['11.5'], fontWeight: 700, color: INK, lineHeight: 1.2 }}>{value || EMPTY_VALUE}</div>
@@ -189,10 +189,9 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
         <div
           style={{
             padding: '10px 14px', marginBottom: 16,
-            background: 'linear-gradient(135deg, rgba(122,70,26,0.06), rgba(160,118,42,0.04))',
+            background: PARCH,
             border: `1px solid ${BORDER}`,
             borderLeft: '3px solid #a0762a',
-            borderRadius: 6,
             fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
             fontFamily: sans,
           }}
@@ -221,8 +220,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {/* ── ERROR ─────────────────────────────────────────────────────────── */}
       {error && (
         <div style={{
-          background: swatch.dangerBg, border: '1px solid #e8c0c0',
-          borderRadius: 7, padding: '12px 14px', marginBottom: 14,
+          background: swatch['#FAF8F4'], border: '1px solid #e8c0c0',
+          padding: '12px 14px', marginBottom: 14,
           fontSize: FS['11.5'], color: swatch.danger,
         }}>
           <strong>Error:</strong> {error}
@@ -236,11 +235,10 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           {regenerating && (
             <div style={{
               position: 'absolute', top: 8, left: '50%', transform: 'translateX(-50%)',
-              zIndex: 20, background: 'rgba(122,70,26,0.95)', color: CARD,
-              padding: '8px 16px', borderRadius: 20, border: '1px solid rgba(196,128,60,0.6)',
+              zIndex: 20, background: INK, color: CARD,
+              padding: '8px 16px', border: '1px solid #c4803c',
               fontSize: FS['11.5'], fontWeight: 700, fontFamily: sans,
               display: 'flex', alignItems: 'center', gap: 8,
-              boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
             }}>
               <span style={{ display: 'inline-block', animation: 'spin 1.2s linear infinite' }}>⟳</span>
               {storeAiProgress || 'Regenerating…'}
@@ -249,7 +247,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           <div style={{
             background: PARCH,
             border: `1px solid ${BORDER}`,
-            borderRadius: 8,
             padding: mobile ? '16px 14px' : '20px 22px',
             opacity: regenerating ? 0.55 : 1,
             transition: 'opacity 0.2s',
@@ -274,7 +271,7 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       {!hasContent && !loading && !error && (
         <div style={{
           background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
-          borderRadius: 8, padding: '32px 20px', textAlign: 'center',
+          padding: '32px 20px', textAlign: 'center',
         }}>
           <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
             What is daily life like here?
