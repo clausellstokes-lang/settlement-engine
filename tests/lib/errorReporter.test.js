@@ -19,7 +19,8 @@ async function loadWithEndpoint(url = ENDPOINT) {
   const beacon = vi.fn(() => true);
   Object.defineProperty(globalThis.navigator, 'sendBeacon', { value: beacon, configurable: true });
   const mod = await import('../../src/lib/errorReporter.js');
-  mod.__resetErrorReporterState();
+  // Fresh module per test (vi.resetModules) → the in-memory dedup Set + counter
+  // start empty; no reset export needed.
   return { beacon, reportError: mod.reportError };
 }
 
