@@ -4,7 +4,7 @@
 ### This file assumes you know NOTHING. Read it fully before touching anything.
 
 ## 1. WHAT THIS IS
-SettlementForge — a deterministic D&D settlement/world simulator (~430k LOC,
+SettlementForge — a deterministic D&D settlement/world simulator (~612k LOC,
 React/Zustand/Supabase), solo owner **Clausell Stokes**. A long audit-driven
 program is mid-flight toward launch. The owner delegates heavily ("do what you
 think is best") but every judgment is recorded VETOABLY in the ledger; certain
