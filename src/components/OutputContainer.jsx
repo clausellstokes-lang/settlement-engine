@@ -54,7 +54,7 @@ import {
   ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel,
   EconomicsTab, HistoryTab, MagicTab, NPCsTab, NotesTab, OverviewTab,
   PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, VersionsTab,
+  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab,
   ViabilityTab, WarFaithTab,
 } from './dossier/dossierLazyTabs.js';
 
@@ -82,7 +82,7 @@ import {
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'traditions', 'npcs', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
@@ -102,6 +102,10 @@ const TABS = [
   { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
+  // THE TRADITIONS wave (T-1) — the founding-traditions register (World group,
+  // beside Daily Life). Reuses the already-bundled Drama glyph (festivals /
+  // ceremony) so registering the tab adds no new first-paint icon.
+  { id: 'traditions', label: 'Traditions', Icon: Drama },
   { id: 'npcs',       label: 'NPCs',       Icon: Users },
   { id: 'dm_notes',   label: 'DM Notes',   Icon: StickyNote },
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
@@ -591,6 +595,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
+      // Traditions — the founding-traditions register (THE TRADITIONS wave, T-1).
+      // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
+      // the settlement.traditions mirror; then this same tab renders the live state.
+      case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
       case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
