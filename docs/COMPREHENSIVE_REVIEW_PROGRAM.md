@@ -1153,6 +1153,25 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ C14+C15 COMPLETE (2026-07-19, claude/deep-craft-c14c15 @ 7748d49a, 3
+commits, NOT folded).** 68434851 THE LANTERN TABLE: four lamp tones on umber
+(moss 6.29 · gold 7.05 · slate 6.28 · ember 5.12 — all AA on the panel AND the
+darker desk; 4 pins + a negative control documenting the retired amber's
+failure) in a NEW lazy token module lampTones.js (single source; TableView now
+DECOUPLED from the shared violet/slate tokens — fold rule: TableView's accent
+block resolves to the lamp tones over c13's line) · wake-lock untouched
+(effects outside every edit range, pins green) · 5eea9a3d THE DISPATCH DESK
+(parcel rows, ONE gold dispatch, quiet toggles) · 7748d49a H3 (seal meets
+medallion at the dossier foot; fire-once via CSS animation-fill 'both'
+once-per-mount JUDGMENT — no persisted state; HouseColophon `ceremony` prop
+default FALSE = byte-identical elsewhere; counterseal seam intact). ⚠ SPEC
+CORRECTION ledgered: the playbook's `.oc-m-seal-impress`/`.oc-m-medallion-pulse`
+NEVER EXISTED — the closed vocabulary spells them oc-m-impress/oc-m-inkpulse;
+doc fixed. Ratchet-neutral by choice (one available rgba win handed to the
+seat-holder via fold-2 notes). Full suite 13,198 / the 5 + pre-C3-e fixture red
+(base predates the cure) + 2 isolation-cleared flakes; eager 0. RESTORATION
+SWEEP 3 dispatches (compendium/gallery cluster, sibling of sweep 2 on the pages
+lineage — disjoint files; CampaignFolder edits fold-flagged vs C3's).
 **⬛⭐⭐ FOLD BATCH 1 COMPLETE (2026-07-19, deep-craft @ aa55836a — the FABLE
 reconciler, flawless).** Three folds, ZERO conflicts, every pre-ruled
 reconciliation held EMPIRICALLY: 3430815c FOLD c2 (the whole journey-legs film

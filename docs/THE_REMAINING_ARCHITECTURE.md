@@ -285,8 +285,10 @@ kill-switches, and early-access labels all survive verbatim.
 
 ### Slice C15 — EXPORT: the dispatch desk + H3 THE EXPORT CEREMONY
 - ExportSheet → parcel rows (labeled formats, one gold dispatch). H3 per spec at the
-  web dossier foot/export moment: seal meets medallion (`.oc-m-seal-impress` +
-  `.oc-m-medallion-pulse`, once). PDF counterseal remains a RECORDED SEAM (react-pdf
+  web dossier foot/export moment: seal meets medallion (`.oc-m-impress` +
+  `.oc-m-inkpulse`, once — CORRECTED 2026-07-19: this doc's original
+  `.oc-m-seal-impress`/`.oc-m-medallion-pulse` names never existed; the closed
+  twelve-behavior vocabulary spells them as above; C15-b used the real names). PDF counterseal remains a RECORDED SEAM (react-pdf
   cannot mount ornament SVG strings — the structured-path refactor is its own future
   slice; do NOT half-fix).
 
