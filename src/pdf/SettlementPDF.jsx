@@ -108,6 +108,10 @@ export function SettlementPDF({
     variant, phase, hasLiveWorld: !!vm.liveWorld, faithUnlocked,
     narrated: useAi, eventCount: eventLog?.length || 0,
   });
+  // The "Campaign State / War Room" variant promotes the State chapter to its
+  // layered causal-detail form (16-var grid + pressures). Every other variant
+  // keeps the default 4-dim snapshot byte-identical.
+  const stateCausalDetail = variant === 'campaign_state';
 
   // ToC entries — must match the chapters actually rendered below, which
   // are now variant-gated. Build by filtering against the same `inc()`
@@ -119,7 +123,7 @@ export function SettlementPDF({
     inc('overview')            && { no: '01',  title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
     inc('tonightAtTheTable')   && { no: '02',  title: 'Tonight at the Table', note: 'quick prep' },
     inc('npcQuickRef')         && { no: '03',  title: 'NPC Quick Reference', note: 'index' },
-    showState                  && { no: '03B', title: 'Current State', note: '4-dim snapshot' },
+    showState                  && { no: '03B', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
     showTimeline               && { no: '03C', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
     showFaithWar               && { no: '03D', title: 'Faith & War', note: 'live campaign state' },
     inc('notableNpcs')         && { no: '04',  title: 'Notable NPCs', note: 'detailed sheets' },
@@ -150,7 +154,7 @@ export function SettlementPDF({
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
       {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
