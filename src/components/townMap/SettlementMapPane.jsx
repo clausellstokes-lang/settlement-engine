@@ -40,6 +40,10 @@ import {
 } from '../theme.js';
 import InstitutionCard from '../primitives/InstitutionCard.jsx';
 import { useStore } from '../../store/index.js';
+// THE LIVING BACKDROP (owner ruling 2026-07-18) — device-local last-viewed {view,lens}
+// memory. Written here (READ-ONLY to map state; never touches the mapEdits blob); read
+// by the library dossier's SettlementDossierBackdrop wash. Fail-silent leaf.
+import { writeLastMapView } from '../../lib/lastMapView.js';
 import {
   buildTownMapModel, viewerPalette, TOWN_MAP_STYLE_IDS, DEFAULT_STYLE_ID,
   buildTownMapPanoramaDrawList, buildChangeView,
@@ -373,11 +377,12 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
   const doReset = () => commitEdits(null);
   // Pick a lens: always update the ephemeral view; PERSIST it when the owner can
   // edit (rides applyMapEdit into the blob, honored on every full-blob read). Free
-  // + instant + non-destructive — a re-skin never touches geometry or an edit.
+  // + instant + non-destructive — a re-skin never touches geometry or an edit. The
+  // trailing writeLastMapView records the device-local last-lens for THE LIVING
+  // BACKDROP (localStorage only; independent of the blob).
   const doPickLens = (id) => {
-    setLensOverride(id);
-    if (editing) commitEdits(withStyleLens(mapEdits, id));
-    mapAnalytics.fire('lens_switch', { lens: id });
+    setLensOverride(id); if (editing) commitEdits(withStyleLens(mapEdits, id));
+    mapAnalytics.fire('lens_switch', { lens: id }); writeLastMapView(saveId, { view: viewMode, lens: id });
   };
   const hasEdits = !!mapEdits;
 
@@ -692,7 +697,7 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
             size="sm"
             ariaLabel="Map view"
             value={viewMode}
-            onChange={(m) => { setViewMode(m); if (m === 'panorama') mapAnalytics.fireOnce('panorama'); }}
+            onChange={(m) => { setViewMode(m); if (m === 'panorama') mapAnalytics.fireOnce('panorama'); writeLastMapView(saveId, { view: m, lens: activeLens }); }}
             options={[{ id: 'plan', label: 'Plan' }, { id: 'panorama', label: 'Panorama' }]}
           />
         </div>
