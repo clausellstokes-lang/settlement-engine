@@ -447,7 +447,7 @@ function advanceLitRoads(args) {
           if (!m.waitReceipted) {
             const s = freshSettlement(homeId); const seed = `wait.${mid}.${year}`;
             newsEntries.push(roadsBeat({
-              sid: homeId, tick: now2, now, significance: 'minor',
+              sid: homeId, tick: now2, now, significance: 'notable',
               headline: pickLine(ROADS_NEWS.trapped.headline, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
               summary: pickLine(ROADS_NEWS.trapped.summary, seed, { npc: str(m.npcName), home: str(asObject(s).name || homeId), dest: str(m.destId) }),
               seed, tags: ['wait'],
@@ -590,17 +590,17 @@ function advanceLitRoads(args) {
       m.legArrivalTick = num(m.legArrivalTick, 0) + 1;
       if (!m.delayReceipted) {
         m.delayReceipted = true; const seed = `delay.${mid}.${now2}`;
-        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed'] }));
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.delayed.headline, seed, interp), summary: pickLine(ROADS_NEWS.delayed.summary, seed, interp), seed, tags: ['delayed'] }));
       }
     } else if (res.outcome === 'trapped') {
       if (!m.trappedBySiege) {
         m.trappedBySiege = true; const seed = `trap.${mid}`;
-        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.trapped.headline, seed, interp), summary: pickLine(ROADS_NEWS.trapped.summary, seed, interp), seed, tags: ['trapped'] }));
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.trapped.headline, seed, interp), summary: pickLine(ROADS_NEWS.trapped.summary, seed, interp), seed, tags: ['trapped'] }));
       }
     } else if (res.outcome === 'robbed') {
       if (!m.robbedReceipted) {
         m.robbedReceipted = true; const seed = `rob.${mid}.${now2}`;
-        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'minor', headline: pickLine(ROADS_NEWS.robbed.headline, seed, interp), summary: pickLine(ROADS_NEWS.robbed.summary, seed, interp), seed, tags: ['robbed'] }));
+        newsEntries.push(roadsBeat({ sid: homeId, tick: now2, now, significance: 'notable', headline: pickLine(ROADS_NEWS.robbed.headline, seed, interp), summary: pickLine(ROADS_NEWS.robbed.summary, seed, interp), seed, tags: ['robbed'] }));
       }
     } else if (res.outcome === 'expelled') {
       const retWeeks = Math.max(1, num(hopWeeks(digest, destId, homeId, season), 1));
