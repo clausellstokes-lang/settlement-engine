@@ -55,11 +55,15 @@ const R2 = (v) => Math.round(v * 100) / 100;
  * @property {'spring'|'summer'|'autumn'|'winter'|null} [season]  the display season
  * @property {'drought'|'hard_winter'|'bountiful'|null} [severity]  the year's seeded verdict
  * @property {MapDressState|null} [state]  live state marks (IT3-b)
+ * @property {MapDressFestival|null} [festival]  festival-week marks (Wave C, traditions §10)
  *
  * @typedef {Object} MapDressState
  * @property {boolean} [besieged]  siege works ring (war-state read)
  * @property {number} [scarLevel]  0..1 max scar severity ⇒ scar grain (0/absent ⇒ none)
  * @property {string[]} [rebuiltCategories]  district categories under rebirth ⇒ scaffold ticks
+ *
+ * @typedef {Object} MapDressFestival
+ * @property {number} [scale]  the grandest in-window observance's scale band (0..6 ⇒ lantern density)
  */
 
 // THE ONE FIXED LIGHT — NW, shared with the glyph hatch (SHADOW_DIR). The unit shadow-fall
@@ -485,6 +489,43 @@ function pushStateDress(ops, model, rng, ink, wDress, oDress, coastY, state) {
 }
 
 /**
+ * FESTIVAL DRESS (Wave C — DESIGN_TRADITIONS §10: "festival-week dress via the state-dress hook —
+ * lanterns on the high street during the window"). Lantern dots strung along the town's HIGH STREET
+ * (the single longest `model.skeleton.streets` segment — the principal thoroughfare, the pushHedges
+ * spine) while an observance's window is open, the count rising with the festival's scale band (a
+ * thorp rite hangs a few; a metropolis spectacle strings the whole street). Bounded low (≤ FEST_CAP,
+ * inside the shared DRESS_CAP even stacked on the worst crisis-state dress), all-ink, deterministic
+ * off the same season-aware stream; the marks are ADDED (never a parameter swap), so an ABSENT
+ * festival ⇒ this is never called ⇒ byte-identical to the base — the dormancy law, exactly as
+ * pushStateDress upholds it.
+ * @param {Ops} ops @param {Model} model @param {Rng} rng @param {string} ink
+ * @param {number|null} coastY @param {MapDressFestival} festival
+ */
+function pushFestivalDress(ops, model, rng, ink, coastY, festival) {
+  const streets = (model.skeleton && model.skeleton.streets) || [];
+  if (!streets.length) return;
+  // The HIGH STREET = the longest thoroughfare (codepoint-free length compare, deterministic).
+  let high = null; let bestLen = -1;
+  for (const st of streets) {
+    const dx = st.to.x - st.from.x, dy = st.to.y - st.from.y;
+    const len = dx * dx + dy * dy;
+    if (len > bestLen) { bestLen = len; high = st; }
+  }
+  if (!high) return;
+  const scale = Number.isFinite(Number(festival.scale)) ? Math.max(0, Math.floor(Number(festival.scale))) : 0;
+  const FEST_CAP = 8; // total lantern budget (≤ the shared DRESS_CAP headroom over the crisis stack)
+  const count = Math.max(3, Math.min(FEST_CAP, 3 + scale)); // 3..8 lanterns by grandeur
+  const ax = high.from.x, ay = high.from.y, dx = high.to.x - high.from.x, dy = high.to.y - high.from.y;
+  const f = rng.fork('festival');
+  for (let k = 0; k < count; k += 1) {
+    const t = (k + 1) / (count + 1) + f.randFloat(-0.03, 0.03); // evenly strung, small jitter
+    const cx = R(ax + dx * t), cy = R(ay + dy * t);
+    if (!onMap(cx, 6) || !onMap(cy, 6) || (coastY != null && cy > coastY)) continue;
+    ops.push({ t: 'circle', cx, cy, r: 1.8, fill: ink }); // a hung lantern (opaque, the meadow-fleck idiom)
+  }
+}
+
+/**
  * Emit the ground-dress draw ops for a model under a style. PURE + deterministic. Returns
  * [] for any style that does not name the dress fields (the dormancy law) — so only the
  * illustrated lens dresses the ground, and every other lens is byte-identical.
@@ -524,6 +565,7 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null)
   const season = liveSeason || styleBias;
   const severity = dress && typeof dress.severity === 'string' ? dress.severity : null;
   const state = dress && dress.state && typeof dress.state === 'object' ? dress.state : null;
+  const festival = dress && dress.festival && typeof dress.festival === 'object' ? dress.festival : null;
   // Fold season+severity into the seed so a town's winter texture differs from its summer;
   // an ABSENT season leaves the seed EXACTLY `ground-dress:<digest>` ⇒ byte-identical.
   const seasonKey = season ? `:${season}${severity ? ':' + severity : ''}` : '';
@@ -545,6 +587,9 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null)
   // IT3-b — STATE DRESS: siege works ring / scar grain / rebirth scaffold, each gated on a read
   // in `state` (absent ⇒ zero ops ⇒ dormant). Seeded off the same season-aware stream.
   if (state) pushStateDress(ops, model, rng, ink, wDress, oDress, coastY, state);
+  // Wave C — FESTIVAL DRESS: lanterns on the high street during an observance's window, gated on
+  // a read in `festival` (absent ⇒ zero ops ⇒ dormant, byte-identical). Same season-aware stream.
+  if (festival) pushFestivalDress(ops, model, rng, ink, coastY, festival);
 
   return ops;
 }

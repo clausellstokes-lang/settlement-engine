@@ -76,14 +76,48 @@ function resolveMapState(settlement, worldState, regionalGraph) {
 }
 
 /**
+ * Resolve the FESTIVAL portrait (Wave C — DESIGN_TRADITIONS §10 festival-week map dress): the
+ * grandest ACTIVE (non-suppressed) observance whose window is OPEN this week, read from the
+ * `settlement.traditions` MIRROR. The mirror is written ONLY when the traditions layer is lit (the
+ * T-2 mover's PASS-2 projection) and is ABSENT when the layer is dark — so its presence IS the "lit"
+ * signal, and a dark/absent campaign yields `null` ⇒ no festival dress ⇒ byte-identical (the dormancy
+ * law, mirroring resolveMapState's dormant-absent reads). The week-of-year is the canonical 4-4-5
+ * clock computed locally (never derived from month labels — DESIGN_TRADITIONS §17), agreeing with
+ * worldState.seasonForTick / almanac.clockOfTick by construction. PURE.
+ * @param {{ traditions?: unknown } | null | undefined} settlement
+ * @param {{ calendar?: { elapsedWeeks?: number } | null } | null | undefined} worldState
+ * @returns {import('./groundDress.js').MapDressFestival | null}
+ */
+function resolveFestival(settlement, worldState) {
+  const recs = settlement && Array.isArray(settlement.traditions) ? settlement.traditions : null;
+  if (!recs || !recs.length) return null;
+  const calendar = worldState && typeof worldState === 'object' ? worldState.calendar : null;
+  const elapsedWeeks = calendar && Number.isFinite(calendar.elapsedWeeks) ? Number(calendar.elapsedWeeks) : null;
+  if (elapsedWeeks == null) return null; // no live clock ⇒ no festival week
+  const weekOfYear = ((Math.floor(elapsedWeeks) % 52) + 52) % 52 + 1; // 1..52
+  let scale = -1;
+  for (const rec of recs) {
+    if (!rec || typeof rec !== 'object' || rec.suppressedBy) continue; // a suppressed rite does not occur
+    const win = rec.window && typeof rec.window === 'object' ? rec.window : null;
+    if (!win) continue;
+    const start = Math.max(1, Math.min(52, Math.floor(Number(win.startWeekOfYear) || 1)));
+    const weeks = Math.max(1, Math.min(2, Math.floor(Number(win.weeks) || 1)));
+    if (weekOfYear < start || weekOfYear > start + weeks - 1) continue; // window not open this week
+    const s = Number.isFinite(Number(rec.scaleBand)) ? Number(rec.scaleBand) : 0;
+    if (s > scale) scale = s;
+  }
+  return scale >= 0 ? { scale } : null;
+}
+
+/**
  * Resolve the season + state portrait for a settlement's map. PURE. Returns `null` when there
  * is nothing to paint (no season AND no state) ⇒ the caller passes null ⇒ seasonless base bytes
  * (the dormancy law). The season is the DM's PINNED override (settlement.mapEdits.seasonOverride,
  * IT3-c) when set, else the live world clock — so a pinned map paints its season even with no
  * campaign (severity still derives from the live year when a worldState is present). `regionalGraph`
  * (optional) is needed only for the siege read — a surface without it (the thumbnail) still gets
- * scars + rebirth (settlement-only reads).
- * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown } | null | undefined} settlement
+ * scars + rebirth (settlement-only reads). Festival dress reads the settlement.traditions mirror.
+ * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown, traditions?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { season?: string, year?: number } | null, rngSeed?: string } | null | undefined} worldState
  * @param {unknown} [regionalGraph]
  * @returns {import('./groundDress.js').MapDress | null}
@@ -93,7 +127,8 @@ export function resolveMapDress(settlement, worldState, regionalGraph = null) {
   // The PINNED override (IT3-c) wins over the live season; absent ⇒ follow the world clock.
   const season = readSeasonOverride(readMapEdits(settlement)) || normSeason(calendar ? calendar.season : null);
   const state = resolveMapState(settlement, worldState, regionalGraph);
-  if (!season && !state) return null;
+  const festival = resolveFestival(settlement, worldState);
+  if (!season && !state && !festival) return null;
 
   const rngSeed = worldState && typeof worldState.rngSeed === 'string' ? worldState.rngSeed : null;
   const year = calendar && Number.isFinite(calendar.year) ? Number(calendar.year) : null;
@@ -102,5 +137,5 @@ export function resolveMapDress(settlement, worldState, regionalGraph = null) {
     ? seasonalSeverityFor(rngSeed, year, settlementId)
     : null;
 
-  return { season, severity, state };
+  return { season, severity, state, festival };
 }
