@@ -103,10 +103,19 @@ const CEILINGS = Object.freeze({
   // borderRadius 1072→1071. The "what changed & why" card de-rounded to a
   // rule-framed correction slip (container borderRadius:R.md struck); regressions
   // now read in the oxblood erratum voice, improvements in neutral ink.
-  borderRadius: 1071,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C4c-e, THE POSTED BILL — ServicesTab de-round pass):
+  // borderRadius 1071→1057 (all 14 rounded corners struck: the header strip, the
+  // four impairment count tags, the search field, the two search-result blocks,
+  // the category-health grid + missing cards, the notable-absences note, the
+  // category containers, and the two category header tags), rgba 269→268 (the
+  // search field's translucent-white bg → parchment token), tintedCallouts
+  // 236→235 (the search-empty dangerBg callout → a parchment clerk's note kept on
+  // its oxblood left rule). The impaired/reduced/missing STATE tints are raw-hex
+  // (not kill-list-counted); their rubric re-tone is a deferred follow-up.
+  borderRadius: 1057,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 114,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 269,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 236,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  rgbaLiterals: 268,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({
