@@ -116,7 +116,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
     >
       <div style={{
         display: 'flex', alignItems: 'center', gap: 8,
-        border: `1px solid ${BOR}`, borderRadius: 6,
+        border: `1px solid ${BOR}`,
         background: CARD, padding: '6px 10px',
       }}>
         <input
@@ -155,8 +155,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
           style={{
             position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
             zIndex: 50, listStyle: 'none', margin: 0, padding: 4,
-            background: CARD, border: `1px solid ${BOR}`, borderRadius: 6,
-            boxShadow: '0 12px 28px rgba(0,0,0,0.18)',
+            background: CARD, border: `1px solid ${BOR}`,
             maxHeight: dropdownMaxHeight, overflowY: 'auto',
           }}
         >
@@ -173,7 +172,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                   style={{
                     width: '100%', textAlign: 'left',
                     display: 'flex', alignItems: 'center', gap: 8,
-                    padding: '7px 9px', border: 'none', borderRadius: 4,
+                    padding: '7px 9px', border: 'none',
                     cursor: 'pointer', fontFamily: sans,
                     background: i === active ? `${GOLD}14` : 'transparent',
                   }}
@@ -183,7 +182,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
                   </span>
                   <span style={{
                     fontSize: FS.xs, fontWeight: 700, color,
-                    background: `${color}18`, borderRadius: 8, padding: '1px 7px',
+                    background: `${color}18`, padding: '1px 7px',
                     textTransform: 'uppercase', letterSpacing: '0.04em',
                     whiteSpace: 'nowrap',
                   }}>
@@ -200,7 +199,7 @@ export default function CompendiumGlobalSearch({ onSelect }) {
         <div style={{
           position: 'absolute', left: 14, right: 14, top: '100%', marginTop: -2,
           zIndex: 50, padding: '10px 12px', background: CARD,
-          border: `1px solid ${BOR}`, borderRadius: 6,
+          border: `1px solid ${BOR}`,
           fontSize: FS.sm, color: BODY, fontFamily: sans,
           display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         }}>

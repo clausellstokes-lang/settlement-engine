@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, R, ELEV, PAGE_MAX, PROSE_MAX } from './theme.js';
+import { GOLD, INK, MUTED as MUT, BORDER as BOR, CARD, PARCH, sans, FS, swatch, PAGE_MAX, PROSE_MAX } from './theme.js';
 // Icons reuse the set already bundled in the eager vendor-icons chunk (List rides
 // in via HowToUse) — no NEW lucide icon is introduced, so first paint is unmoved.
 import { Search, Layers, Coins, Shield, Sparkles, AlertTriangle, Link2, Building2, Globe, List } from 'lucide-react';
@@ -242,8 +242,8 @@ export default function CompendiumPanel({ config, standalone=false }) {
 
   return (
     <div style={standalone
-      ? { maxWidth: PAGE_MAX, margin:'0 auto', width:'100%', background:CARD, border:`1px solid ${BOR}`, borderRadius:R.xl, boxShadow:ELEV[1], overflow:'hidden' }
-      : { borderRadius:8, overflow:'hidden' }}>
+      ? { maxWidth: PAGE_MAX, margin:'0 auto', width:'100%', background:CARD, border:`1px solid ${BOR}`, overflow:'hidden' }
+      : { overflow:'hidden' }}>
       {/* Mode toggle */}
       <div style={{ display:'flex', background:swatch['#F5EDE0'], borderBottom:`1px solid ${BOR}`, padding:'6px 14px', gap:4 }}>
         <Button onClick={()=>setMode('catalog')} variant={mode==='catalog'?'gold':'ghost'} size="sm" icon={<Building2 size={13}/>} aria-pressed={mode==='catalog'} style={{ flex:1 }}>
@@ -273,7 +273,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
               {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
             </div>
           </div>
-          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
+          <div style={{ padding:'14px', background:CARD, ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <div style={contentColumn}>
               {renderTab()}
             </div>
@@ -287,7 +287,7 @@ export default function CompendiumPanel({ config, standalone=false }) {
             <input aria-label="Search custom content" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search custom content..." style={{ flex:1, border:'none', background:'transparent', fontFamily:sans, fontSize:FS.sm, color:INK, outline:'none' }}/>
             {search && <Button onClick={()=>setSearch('')} variant="ghost" size="sm" aria-label="Clear search">x</Button>}
           </div>
-          <div style={{ padding:'14px', background:'rgba(255,251,245,0.95)', ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
+          <div style={{ padding:'14px', background:CARD, ...(standalone ? {} : { maxHeight:'60vh', overflowY:'auto' }) }}>
             <CustomContentManager search={search.toLowerCase()}/>
           </div>
         </>

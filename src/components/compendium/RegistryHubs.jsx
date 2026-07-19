@@ -78,20 +78,19 @@ export function OperationsHub() {
         {shown.map((o) => (
           <div key={o.opType} id={`op-${slug(o.opType)}`}
             style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
-              borderLeft: `3px solid ${KLASS_COLOR[o.klass] || GOLD}`, borderRadius: 6, padding: '8px 10px',
-              background: 'rgba(255,251,245,0.95)' }}>
+              borderLeft: `3px solid ${KLASS_COLOR[o.klass] || GOLD}`, padding: '8px 10px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
               <code style={{ fontFamily: 'monospace', fontSize: FS['12.5'], fontWeight: 700, color: INK, flex: 1 }}>{o.opType}</code>
               <Tag label={o.klass} color={KLASS_COLOR[o.klass] || GOLD} />
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>
-              <span style={{ background: `${GOLD}14`, borderRadius: 3, padding: '1px 6px' }}>scope: {o.targetScope}</span>
+              <span style={{ background: `${GOLD}14`, padding: '1px 6px' }}>scope: {o.targetScope}</span>
               <span style={{ background: o.receiptRef ? '#1a5a2814' : swatch['#E8E2D6'],
-                color: o.receiptRef ? '#1a5a28' : MUT, borderRadius: 3, padding: '1px 6px' }}>
+                color: o.receiptRef ? '#1a5a28' : MUT, padding: '1px 6px' }}>
                 {o.receiptRef ? `receipt: ${o.receiptRef}` : 'no receipt'}
               </span>
               <span style={{ background: o.undoToken ? '#1a3a7a14' : (swatch['#E8E2D6']),
-                color: o.undoToken ? '#1a3a7a' : MUT, borderRadius: 3, padding: '1px 6px' }}>
+                color: o.undoToken ? '#1a3a7a' : MUT, padding: '1px 6px' }}>
                 {o.undoToken ? 'reversible' : 'one-way'}
               </span>
             </div>
@@ -138,8 +137,7 @@ export function SystemsHub() {
         {systems.map((s) => (
           <div key={s.id} id={`system-${slug(s.id)}`}
             style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
-              borderLeft: `3px solid ${s.dormant ? MUT : GOLD}`, borderRadius: 6, padding: '8px 10px',
-              background: 'rgba(255,251,245,0.95)' }}>
+              borderLeft: `3px solid ${s.dormant ? MUT : GOLD}`, padding: '8px 10px' }}>
             <div style={{ fontFamily: serif_, fontSize: FS['12.5'], fontWeight: 700, color: INK, marginBottom: 3 }}>{s.label}</div>
             <code style={{ fontFamily: 'monospace', fontSize: FS.xxs, color: SEC }}>{s.flag}</code>
             <div style={{ marginTop: 5, fontSize: FS.xxs, color: SEC, fontFamily: sans }}>

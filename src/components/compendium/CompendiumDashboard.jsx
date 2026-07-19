@@ -48,11 +48,13 @@ export function CompendiumOverview({ onNavigate }) {
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(220px,1fr))', gap:10 }}>
         {CATALOGS.map((c) => (
           <a key={c.tab} href={hubHref(c.tab, c.anchor)} onClick={(e) => onLink(e, onNavigate, c.tab, c.anchor)}
-            style={{ display:'block', textDecoration:'none', border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`, borderRadius:8,
-              padding:'12px 14px', background:'rgba(255,251,245,0.95)', cursor:'pointer' }}>
+            style={{ display:'block', textDecoration:'none', border:`1px solid ${BOR}`, borderLeft:`3px solid ${GOLD}`,
+              padding:'12px 14px', cursor:'pointer' }}>
             <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:8, marginBottom:4 }}>
               <span style={{ fontFamily:serif_, fontSize:FS.md, fontWeight:700, color:INK }}>{c.label}</span>
-              <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT }}>{c.count}</span>
+              {/* Drawer-label count: old-style figures sit the number into the
+                  running serif line — the lexicon register, not a chrome badge. */}
+              <span style={{ fontFamily:serif_, fontSize:FS.lg, fontWeight:700, color:GOLD_TXT, fontVariantNumeric:'oldstyle-nums' }}>{c.count}</span>
             </div>
             <div style={{ fontSize:FS.xs, color:SEC, lineHeight:1.5 }}>{c.blurb}</div>
           </a>
