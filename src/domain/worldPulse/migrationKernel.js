@@ -43,7 +43,7 @@ import { chooseRoute, riskToleranceFromAlignment } from '../spatial/embattlement
 // ── Kernel-local read-shapes (0-hole discipline: no `any`) ────────────────────
 /** @typedef {{ population?: number, config?: { primaryDeitySnapshot?: { alignmentAxis?: string, lawAxis?: string } | null },
  *   economicState?: { prosperity?: unknown, foodSecurity?: { storageMonths?: number } | null },
- *   powerStructure?: { governingName?: string } | null,
+ *   powerStructure?: { governingName?: string } | null, traditions?: unknown,
  *   populationHistory?: Array<{ tick: number|null, delta: number, population: number, reason: string, outcomeId?: string }> } } MigSettlement */
 /** @typedef {{ id?: (string|number), name?: string, settlement?: MigSettlement,
  *   causal?: { scores?: { economic_capacity?: number, trade_connectivity?: number } } }} MigSnapItem */
@@ -87,9 +87,31 @@ export const MIGRATION_KERNEL_TUNING = Object.freeze({
 
 // ── Live culture-vector extraction (the §II.5-2 LIVE read) ────────────────────
 /**
+ * The settlement's active tradition motif-ELEMENT signature (Wave C — DESIGN_TRADITIONS §1/§16:
+ * "the culture VECTOR MAY read tradition state as one input"). Read from the settlement.traditions
+ * MIRROR (present ONLY when the traditions layer is lit); the deduped, sorted (byte-stable) set of
+ * motif elements of its ACTIVE (non-suppressed) observances. Absent/dark ⇒ [] ⇒ a no-signal that
+ * closes no distance (byte-identical when traditions are dark). Pure, total.
+ * @param {unknown} traditions @returns {string[]}
+ */
+function traditionElementsOf(traditions) {
+  if (!Array.isArray(traditions)) return [];
+  /** @type {Set<string>} */
+  const set = new Set();
+  for (const rec of traditions) {
+    if (!rec || typeof rec !== 'object' || /** @type {Record<string, unknown>} */ (rec).suppressedBy) continue;
+    const motif = /** @type {Record<string, unknown>} */ (rec).coreMotif;
+    const el = motif && typeof motif === 'object' && typeof /** @type {Record<string, unknown>} */ (motif).element === 'string'
+      ? String(/** @type {Record<string, unknown>} */ (motif).element) : '';
+    if (el) set.add(el);
+  }
+  return [...set].sort();
+}
+
+/**
  * Build a settlement's CULTURE VECTOR from CURRENT worldState (never the frozen
  * digest): dominant-deity axes, W0 alignment, economic character, governing archetype
- * + identity. Pure live read.
+ * + identity, and (Wave C) its active tradition motif signature. Pure live read.
  * @param {MigSnapItem} item @param {Record<string, unknown>} worldState
  * @returns {CultureVector}
  */
@@ -111,6 +133,7 @@ export function buildCultureVector(item, worldState) {
     economy01: clamp01(econCapacity),
     archetype: factionArchetype(governing || settlement?.powerStructure?.governingName || null),
     governingName: String(settlement?.powerStructure?.governingName || ''),
+    traditionElements: traditionElementsOf(settlement?.traditions),
   };
 }
 

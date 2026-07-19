@@ -25,7 +25,7 @@ import {
   roadDeathRate, destinationScore, splitTravellers, enqueueColumns, releaseArrivals,
   migrationActive, MIGRATION_TUNING, SPATIAL_DISTRIBUTION_MODE, FORBIDDEN_DISTRIBUTION_MODE,
 } from '../../src/domain/spatial/migration.js';
-import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING } from '../../src/domain/spatial/cultureDistance.js';
+import { cultureDistance, cultureAffinity, regimeAxes, CULTURE_TUNING, traditionKinship01 } from '../../src/domain/spatial/cultureDistance.js';
 import {
   buildCultureVector, dispatchMigrations, releaseMigrationArrivals, originTolerance,
   collectRealizedEmigrationEvents,
@@ -183,6 +183,47 @@ describe('M4 — cultureDistance composite', () => {
     // A trade tie NEVER adds distance: identical settlements stay 0 regardless of ties.
     expect(cultureDistance(good, good, { tradeTie01: 0 })).toBe(0);
     expect(cultureDistance(good, good, { tradeTie01: 1 })).toBe(0);
+  });
+
+  it('tradition kinship (Wave C §16): shared motifs CLOSE distance multiplicatively, absent ⇒ no change', () => {
+    // Two settlements keeping the SAME festival motifs read culturally closer.
+    const withMotifs = (v, els) => ({ ...v, traditionElements: els });
+    const shared = ['harvest', 'river'];
+    const a = withMotifs(good, shared);
+    const b = withMotifs(evil, shared);
+    const bare = cultureDistance(good, evil);            // no traditionElements ⇒ kinship 0 ⇒ unchanged
+    const kin = cultureDistance(a, b);                   // identical motif sets ⇒ kinship 1 ⇒ closer
+    expect(kin).toBeLessThan(bare);
+    expect(kin).toBeCloseTo(bare * (1 - CULTURE_TUNING.TRAD_CLOSE), 9);
+    // BYTE-IDENTITY: an absent motif set on either side closes nothing (traditions dark).
+    expect(cultureDistance(a, evil)).toBeCloseTo(bare, 12);
+    expect(cultureDistance(good, b)).toBeCloseTo(bare, 12);
+    // and it NEVER adds distance — identical settlements stay exactly 0.
+    expect(cultureDistance(a, a)).toBe(0);
+  });
+
+  it('traditionKinship01 is the Jaccard overlap of the motif-element sets (symmetric, total)', () => {
+    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['a', 'b'] })).toBe(1);
+    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['c', 'd'] })).toBe(0);
+    expect(traditionKinship01({ traditionElements: ['a', 'b', 'c'] }, { traditionElements: ['b', 'c', 'd'] })).toBeCloseTo(2 / 4, 9); // |∩|=2 / |∪|=4
+    expect(traditionKinship01({ traditionElements: ['a'] }, { traditionElements: [] })).toBe(0); // absent ⇒ 0
+    expect(traditionKinship01(null, { traditionElements: ['a'] })).toBe(0);
+    expect(traditionKinship01({ traditionElements: ['a', 'b'] }, { traditionElements: ['b', 'a'] })).toBe(1); // order-free
+  });
+
+  it('buildCultureVector reflects the traditions mirror (present ⇒ motif elements; absent ⇒ [])', () => {
+    const worldState = baseWorld(digest8());
+    const item = makeItem('s000', {});
+    // no mirror ⇒ no signal
+    expect(buildCultureVector(item, worldState).traditionElements).toEqual([]);
+    // a lit mirror ⇒ the active (non-suppressed) motif elements, deduped + sorted
+    item.settlement.traditions = [
+      { coreMotif: { element: 'river', act: 'feast' }, suppressedBy: null },
+      { coreMotif: { element: 'harvest', act: 'fair' }, suppressedBy: null },
+      { coreMotif: { element: 'harvest', act: 'procession' }, suppressedBy: null }, // dup element
+      { coreMotif: { element: 'stone', act: 'vigil' }, suppressedBy: { overlordId: 'o' } }, // suppressed ⇒ skipped
+    ];
+    expect(buildCultureVector(item, worldState).traditionElements).toEqual(['harvest', 'river']);
   });
 
   it('same overlord (governingName) reads closer than rival overlords (governance identity)', () => {

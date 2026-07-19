@@ -50,6 +50,10 @@ export const CULTURE_TUNING = Object.freeze({
   // MULTIPLICATIVELY reduces the core distance by up to TRADE_CLOSE (behaviour makes
   // two trading settlements "close"). Absent a tie ⇒ no change (never adds distance).
   TRADE_CLOSE: 0.25,
+  // TRADITION KINSHIP (Wave C — §16): shared festival motifs are a CLOSING pull too, never
+  // additive — two settlements keeping the same KINDS of observances read culturally closer, by
+  // up to TRAD_CLOSE. Absent (traditions dark / no shared motifs) ⇒ 0 ⇒ no change (byte-identical).
+  TRAD_CLOSE: 0.2,
   // Governance sub-weights: the regime-type 3-axis gap vs the same-overlord identity.
   W_REGIME: 0.6,   // how alike the FORM of rule is
   W_IDENTITY: 0.4, // do they answer to the SAME sovereign (governingName)?
@@ -102,7 +106,28 @@ function axis01(v) {
  * @property {number} economy01     economic character 0..1 (wealth/capacity; 0.5 = unknown)
  * @property {string} archetype     the governing faction's canonical archetype (FACTION_ARCHETYPES.*)
  * @property {string} governingName the governing power identity (same overlord ⇒ close)
+ * @property {string[]} [traditionElements]  active tradition motif elements (Wave C §16; absent/[] = no signal)
  */
+
+/**
+ * The tradition KINSHIP between two culture vectors' active motif-element sets — the Jaccard
+ * overlap in [0,1] (1 = identical motif cultures, 0 = disjoint OR either side absent). A pairwise
+ * culture signal: two settlements keeping the same KINDS of festivals are culturally akin. Pure,
+ * symmetric, total; an empty/absent set on either side ⇒ 0 (no closing pull ⇒ byte-identical when
+ * traditions are dark). Reads ONLY the vector fields (never state) — the zero-import-leaf discipline.
+ * @param {CultureVector|null|undefined} a @param {CultureVector|null|undefined} b @returns {number}
+ */
+export function traditionKinship01(a, b) {
+  const ea = a && Array.isArray(a.traditionElements) ? a.traditionElements : [];
+  const eb = b && Array.isArray(b.traditionElements) ? b.traditionElements : [];
+  const setA = new Set(ea.map(String));
+  const setB = new Set(eb.map(String));
+  if (!setA.size || !setB.size) return 0;
+  let inter = 0;
+  for (const e of setA) if (setB.has(e)) inter += 1;
+  const union = setA.size + setB.size - inter;
+  return union > 0 ? inter / union : 0;
+}
 
 /**
  * The 3-axis regime position for a governing archetype (the §II.5-2 "factionArchetype
@@ -167,7 +192,10 @@ export function cultureDistance(a, b, ctx = {}) {
   // 4. TRADE TIES — a heavy established trade tie MULTIPLICATIVELY CLOSES the distance
   // (never adds any). tradeTie01 ∈ [0,1]: 1 = heavy trade ⇒ up to TRADE_CLOSE closer.
   const tradeTie = clamp01(typeof ctx.tradeTie01 === 'number' && Number.isFinite(ctx.tradeTie01) ? ctx.tradeTie01 : 0);
-  return clamp01(core * (1 - T.TRADE_CLOSE * tradeTie));
+  // 6. TRADITION KINSHIP (Wave C §16) — shared festival motifs MULTIPLICATIVELY CLOSE the distance
+  // too (never additive). Absent (traditions dark / disjoint motifs) ⇒ 0 ⇒ no change (byte-identical).
+  const kinship = traditionKinship01(va, vb);
+  return clamp01(core * (1 - T.TRADE_CLOSE * tradeTie) * (1 - T.TRAD_CLOSE * kinship));
 }
 
 /**
