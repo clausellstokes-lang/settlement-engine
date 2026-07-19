@@ -1134,6 +1134,31 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ RELATIONSHIP-MEMORY RECON — VERDICT: settlement plane ALREADY organic + cohesive
+(do NOT rebuild); 4 bounded cohesion gaps to close (2026-07-19, read-only @ aad6265e).**
+The owner's "evolve organically with memory, cohesive like everything else" is largely
+SATISFIED on the settlement↔settlement plane: worldState.relationshipStates keyed per
+graph-edge, RUNG (10 types) OVER continuous 0..1 scalars (trust/resentment/fear/…),
+PERSISTED decaying event memory (recentIncidents ×8 + history ×12), ONE writer
+(applyRelationshipPatch — every subsystem routes through it, no bypass), THREE tuned
+decay mechanisms (12%/tick mean-reversion · 4-tick incident half-life · the owner's D5
+lifespan bands fleeting/generational/long/undying). Solid foundation for tunnel-vision/
+contested-goals — REUSE, don't rebuild. FOUR GAPS (all closeable with existing machinery):
+(1) READ-SIDE: ~50 consumers branch on the coarse RUNG; only 3 read the incident memory
+(war-revanchism, generosity, peace-trigger) — the rich memory is largely write-only for
+sim behavior. (2) GHOST EVENTS: roads/route capture (spatialConsequenceKernel) and
+tradition imposition (traditions/relations → occupations, not relationshipStates) leave
+NO grievance mark. (3) FACTION plane has NO pairwise memory (solo scalars + static seeded
+rivals[] + a static archetype label that never accumulates/decays). (4) NPC pairwise
+memory is negative-only + siloed (rivalryTargets no-decay + ladder grudges 3yr-half-life,
+un-unified; no positive bonds; succession deliberately resets). RECORDED DEFERRAL: the
+incident half-life isn't yet D5-band-scaled (relationshipMemory.js:13-22, wiring ready).
+DISPOSITION relayed to the Deep Couplings architect: fold gaps 1+2 in as build slices
+(read the substrate via the warReasons.scoreGrievance/scoreRevanchism template; wire the
+ghost events through applyRelationshipPatch with typed incidents route_seized/rite_imposed
+— additive, reversible, existing machinery); gap 3 (faction-pair grievance ledger = NEW
+persisted schema) designed but ⛔OWNER-GATED sign-off; gap 4 optional per the
+state-never-fate doctrine (extend the ladder grudge, never a parallel graph).
 **⬛ OWNER REFINEMENT (2026-07-19) — CONTESTED GOALS × RELATIONS = TUNNEL VISION
 (relayed to the running architect).** NPC relationship history + personality modulate
 contest behavior: a strong grievance toward a specific rival (D5 relationship-memory +
