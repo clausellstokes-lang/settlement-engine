@@ -1134,6 +1134,18 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19) — THE SECRETS SEAM (general law, relayed to the
+roads architect as a frozen law):** shared campaign links WITHOUT the "show DM secrets"
+toggle must NOT render DM-truth data — NPC movements/whereabouts, military piece
+positions/directions, road-scene briefs, "amongst other data." Binding requirements:
+redaction rides the SAME chokepoint as the certified covert-leak scrub precedent (one
+seam, not a parallel one); if no share-secrets toggle exists it is designed as ONE
+default-OFF toggle behind ONE predicate; FAIL CLOSED (ambiguous share context =
+redacted); render-layer law (sim state untouched); the DATA must not ship to the client
+in redacted views — not merely CSS-hidden (verification probe specified). GENERAL SCOPE
+NOTE for THE ROUND 3 LOOP: shared-surface secret redaction is hereby an audit dimension
+across ALL surfaces, not just roads — the loop verifies every shared/public projection
+against the DM-secret classification.
 **⬛ OWNER RULING (2026-07-19) — CAPTURE FORMULA REFINEMENT (relayed to the running
 architect):** the PROTECTION term gains the home settlement's MILITARY MIGHT — protection
 = importance-scaled escort × home military quality (read from existing garrison/force
