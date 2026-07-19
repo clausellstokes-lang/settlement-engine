@@ -1134,6 +1134,24 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ OWNER RULING (2026-07-19) — THE CONTESTED GOALS CLASS (7th Deep-Couplings
+piece, the largest — relayed to the running architect).** A NEW CLASS of NPC goals for
+POWER/POLITICS COMPETITION, ADDED to (never replacing) the solo npcLadderGoals: two NPCs
+CONTEST — CROSS-FACTION (same goal, or opposite ends/block) OR INTRA-FACTION (rises of
+power / curb a lower rival, extending THE LADDER). KNOWING vs UNKNOWING (the belief-axis
+earns its keep — knowing = aware of the rival & deliberately suppressing, the
+incumbent-vs-insurgent motive; unknowing = blind parallel contest; INFORMATION = contest
+AGENCY). RISK-TOLERANCE mechanic (roads-style, personality-derived). THE NOVELTY:
+resolution is a HEAD-TO-HEAD CONTEST against the peer (relative power/rank/influence/
+backing/risk + knowing-advantage), NOT the solo threshold roll — needs a shared contest
+seed + a single-writer 'contests' ledger keyed by the pair. NO-DEATH HOLDS (a contest
+resolves a GOAL not a fate; loser takes a standing hit → resentful future rival). PLAYER
+CHOICE (the point): SIDE / SUPPORT / IGNORE via new edit-dispatcher kinds (the roads
+party-op precedent) — a new political affordance for the DM. Designed in
+DESIGN_DEEP_COUPLINGS as its own slice cluster (sequences after the belief-axis);
+architect may recommend a dedicated follow-on if too large. HONESTY: the most
+player-facing addition yet AND another big pre-loop piece atop an already-large
+commission — extends the build phase; lands substantially under the Opus successor.
 **⬛⭐⭐ OWNER RULING (2026-07-19) — THE DEEP COUPLINGS WAVE: build ALL SIX
 new-machinery features, highest caliber, PRE-LOOP** ("I like all of them. build them
 thoroughly and to the highest caliber before the resurvey. build it all"). The six
