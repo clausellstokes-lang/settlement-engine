@@ -380,8 +380,14 @@ A+ at this stage, rinse and repeat.")
   · bot-wave anomaly detection in the existing analytics seam (cadence/velocity
   flags) · the sf-bridge origin audit (pre-stocked) · ToS anti-automation
   clauses (drafted for the legal consult). OWNER-KEY SEAMS built but inert:
-  hosting WAF/bot-filter toggles · Turnstile-class verification (one-key
-  activation). HONEST LIMITS recorded: crawler directives are voluntary-
+  hosting WAF/bot-filter toggles · ⬛ ADAPTIVE CAPTCHA (owner addendum
+  2026-07-19): Turnstile MANAGED mode — invisible-first, challenge
+  only-when-necessary (native) — wired into sign-in/sign-up/password-reset via
+  Supabase Auth captchaToken; DELIBERATELY NOT on the anonymous generation
+  funnel (conversion frictionless — JUDGMENT); lazy widget behind the flag,
+  zero eager; graceful degradation in the house register; activation checklist
+  in the runbook (keys → flag → dashboard toggle → test sign-in).
+  HONEST LIMITS recorded: crawler directives are voluntary-
   compliance; user-credentialed browser agents are indistinguishable from
   users — the defense is server-side validity + limits + telemetry (automation
   gains nothing, corrupts nothing, gets noticed).
