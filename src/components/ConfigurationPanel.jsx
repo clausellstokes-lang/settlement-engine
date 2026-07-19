@@ -1,15 +1,31 @@
 import { useMemo } from 'react';
 import {STRESS_TYPE_MAP} from '../data/stressTypes';
+import { POPULATION_RANGES, TIER_ORDER } from '../data/constants.js';
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
+import { ClerkNote } from './generate/ClerkNote.jsx';
 import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
 import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 
 const PARCHMENT=swatch['#F7F0E4'];
+
+// Population figure for a tier <option>, derived from the enforced source of
+// truth POPULATION_RANGES (already in the eager data chunk — zero closure cost).
+// Mirrors THE GAUGE's popFigure in HomeHero.jsx so the dropdown and the ranges
+// cannot drift: the top tier renders open-ended (min+). Copy-law: no hand-typed
+// population numbers here (thorp/hamlet had stale 20-80 / 81-400 bands).
+const popRange = (tier) => {
+  const r = POPULATION_RANGES[tier];
+  if (!r) return '';
+  const fmt = (n) => n.toLocaleString('en-US');
+  return TIER_ORDER[TIER_ORDER.length - 1] === tier
+    ? `${fmt(r.min)}+`
+    : `${fmt(r.min)}–${fmt(r.max)}`;
+};
 
 // The 17 archetypes + priority sliders moved to the Character preset card
 // (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
@@ -259,12 +275,12 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               updateConfig({settType:v});
             }}>
             <option value="random">Random</option>
-            <option value="thorp">Thorp (20-80)</option>
-            <option value="hamlet">Hamlet (81-400)</option>
-            <option value="village">Village (401-900)</option>
-            {!blockTownPlus && <option value="town">Town (901-5,000)</option>}
-            {!blockTownPlus && <option value="city">City (5,001-25,000)</option>}
-            {!blockTownPlus && <option value="metropolis">Metropolis (25,001+)</option>}
+            <option value="thorp">{`Thorp (${popRange('thorp')})`}</option>
+            <option value="hamlet">{`Hamlet (${popRange('hamlet')})`}</option>
+            <option value="village">{`Village (${popRange('village')})`}</option>
+            {!blockTownPlus && <option value="town">{`Town (${popRange('town')})`}</option>}
+            {!blockTownPlus && <option value="city">{`City (${popRange('city')})`}</option>}
+            {!blockTownPlus && <option value="metropolis">{`Metropolis (${popRange('metropolis')})`}</option>}
             {blockTownPlus && <option value="town" disabled style={{color:swatch['#BBBBBB']}}>Town. Requires magic or road</option>}
             <option value="custom">Custom…</option>
           </Sel>
@@ -293,20 +309,13 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
              Isolated unavailable at {config.settType} tier without magic infrastructure
           </div>}
         </div>
-        {/* ── Isolation + Town+ warning ───────────────────────────────────── */}
+        {/* ── Isolation + Town+ warning — a rubric-headed clerk's note
+            (Deep Craft cluster 1; the blue tinted wash retired). */}
         {['town','city','metropolis'].includes(config.settType) &&
           config.tradeRouteAccess === 'isolated' && (
-          <div style={{
-            background: swatch.infoBg,
-            border: '1px solid #a0b0e0',
-            borderLeft: '3px solid #3a5ab0',
-            borderRadius: 6, padding: '8px 12px', fontSize: FS.xs, lineHeight: 1.55,
-          }}>
-            <span style={{fontWeight:700,color:swatch['#3A5AB0']}}>✦ Magical Trade Infrastructure</span><br/>
-            <span style={{color:swatch['#2A3A6A']}}>
-              A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
-            </span>
-          </div>
+          <ClerkNote rubric="✦ Magical Trade Infrastructure" style={{ fontSize: FS.xs }}>
+            A Teleportation Circle and arcane maintainer will be forced into this {config.settType}. Its only connection to the outside world. All trade flows through the circle. If it fails, the settlement collapses.
+          </ClerkNote>
         )}
 
         <div><Lbl topic="terrain">Terrain</Lbl>

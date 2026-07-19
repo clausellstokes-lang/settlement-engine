@@ -13,10 +13,13 @@
 import { describe, expect, test } from 'vitest';
 
 import {
-  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
-  GOLD_TXT, GREEN, GREEN_BG, INK, PARCH, PARCH_100, RED, RED_BG, VIOLET, VIOLET_BG, VIOLET_DEEP,
+  AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BODY, BORDER_STRONG, CARD, GOLD, GOLD_DEEP, GOLD_SOFT,
+  GOLD_TXT, GREEN, GREEN_BG, INK, MUTED, PARCH, PARCH_100, RED, RED_BG, SLATE, SLATE_BG, SLATE_DEEP,
   swatch,
 } from '../../src/components/theme.js';
+// THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
+// backdrop opacity re-runs this contrast proof against the new value.
+import { WASH_INK_OPACITY } from '../../src/components/settlementDetail/SettlementDossierBackdrop.jsx';
 // THE ORGANIC CRAFT ink ramp + rubric (design/organic/*). Imported DIRECTLY, never
 // via the theme.js shim — the whole organic layer is lazy and must stay out of the
 // first-paint static closure (the shim is eager). Every text step owes AA at the
@@ -25,10 +28,13 @@ import {
 import { INK as OINK, FIELD_INK, INK_TEXT_STEPS, FIELD_TEXT_STEPS } from '../../src/design/organic/ink.js';
 import { RUBRIC, FIELD_RUBRIC } from '../../src/design/organic/rubrication.js';
 import { INSTRUMENT, FIELD_INSTRUMENT } from '../../src/design/organic/instruments.js';
+// THE LANTERN TABLE (C14) — the four lamp-tone kind accents (moss/gold/slate/ember)
+// worn by TableView on its umber field ground; pinned per-state below.
+import { LAMP_ACCENTS } from '../../src/design/organic/lampTones.js';
 // Badge primitive (src/components/primitives/Badge.jsx) tinted tones. The gold /
 // warning / ai tones previously coloured their LABEL with the -500 fill hue
-// (GOLD / AMBER / VIOLET), which failed AA as text on their soft tints. They now
-// use the darker text steps (GOLD_TXT, AMBER_DEEP, VIOLET_DEEP). Pinned so a
+// (GOLD / AMBER / SLATE), which failed AA as text on their soft tints. They now
+// use the darker text steps (GOLD_TXT, AMBER_DEEP, SLATE_DEEP). Pinned so a
 // future edit can't drop the label back onto its fill hue. GOLD_BG is a
 // translucent rgba over varying surfaces, so the gold tone is checked against its
 // opaque soft-gold reference (GOLD_SOFT), the worst-case lightest backing.
@@ -65,8 +71,8 @@ describe('Button variant text legibility (WCAG AA 4.5:1)', () => {
     ['gold',      GOLD_TXT,   GOLD_SOFT], // tertiary/active — gold-800 on opaque soft-gold
     ['warning',   AMBER_DEEP, AMBER_BG],  // amber-700 on amber-100
     ['danger',    RED,        RED_BG],
-    ['ai',        VIOLET_DEEP, VIOLET_BG],
-    ['aiSolid',   '#FFFFFF',   VIOLET],     // loud violet primary — white on violet-500
+    ['ai',        SLATE_DEEP, SLATE_BG],
+    ['aiSolid',   '#FFFFFF',   SLATE],     // loud AI primary — white on slate-500
     ['success',   GREEN,      GREEN_BG],
     ['info',      BLUE,       BLUE_BG],
   ];
@@ -96,7 +102,7 @@ describe('Badge tinted-tone text legibility (WCAG AA 4.5:1)', () => {
   const pairs = [
     ['gold',    GOLD_TXT,    GOLD_SOFT], // gold-800 on opaque soft-gold (GOLD_BG backing)
     ['warning', AMBER_DEEP,  AMBER_BG],  // amber-700 on amber-100
-    ['ai',      VIOLET_DEEP, VIOLET_BG], // violet-700 on violet-100
+    ['ai',      SLATE_DEEP, SLATE_BG], // slate-700 on slate-100
   ];
   for (const [name, fg, bg] of pairs) {
     test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
@@ -105,7 +111,7 @@ describe('Badge tinted-tone text legibility (WCAG AA 4.5:1)', () => {
   }
   test('the retired fill-hue labels would fail as text (documents the split)', () => {
     expect(ratio(GOLD, GOLD_SOFT)).toBeLessThan(AA_TEXT);
-    expect(ratio(VIOLET, VIOLET_BG)).toBeLessThan(AA_TEXT);
+    expect(ratio(SLATE, SLATE_BG)).toBeLessThan(AA_TEXT);
   });
 });
 
@@ -190,6 +196,35 @@ describe('Resource-state chip legibility (WCAG AA 4.5:1)', () => {
   }
 });
 
+// ServicesTab per-state tints (C4c-h — the state-tint contrast pass). The
+// impaired/reduced/missing status pills + the category-health grid were re-
+// grounded off the SaaS alert fills (bright pink/peach/cream) and the cool mint
+// 'healthy' wash onto the WARM PARCHMENT family, per the C4c-e recipe (impaired→
+// oxblood, reduced→amber-deep, missing→gold, healthy→warm parchment). The state
+// rides the INK: oxblood text for impaired, amber-deep for reduced, gold for
+// missing, neutral ink for healthy — and each pill/cell also carries a bold
+// status WORD (and the grid/cards a left rule), so colour is never the sole
+// channel. These pin the fg text over each new parchment fill at AA as text.
+describe('ServicesTab state-tint text legibility (WCAG AA 4.5:1)', () => {
+  const pairs = [
+    ['impaired', swatch['#7A1A1A'], swatch['#F4DEDE']], // oxblood on warm rose-parchment
+    ['reduced',  swatch['#7A3A00'], swatch['#FBEAD0']], // amber-deep on warm amber-parchment
+    ['missing',  swatch['#7A5010'], swatch['#F0E4C0']], // gold on warm gold-parchment
+    ['healthy',  swatch.inkMag3,    swatch['#F0EAD8']], // neutral ink on warm parchment
+  ];
+  for (const [name, fg, bg] of pairs) {
+    test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
+      expect(ratio(fg, bg)).toBeGreaterThanOrEqual(AA_TEXT);
+    });
+  }
+  // The missing card's darker body ink + the grid's near-black category title
+  // clear AA a fortiori on their fills (documents the headroom above the floor).
+  test('missing card body ink + grid title clear AA on their fills', () => {
+    expect(ratio(swatch['#5A3A10'], swatch['#F0E4C0'])).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(swatch.inkMag, swatch['#F4DEDE'])).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+});
+
 // ── THE ORGANIC CRAFT ink tonal ramp (law §3/§6) ─────────────────────────────
 // The ramp replaces drop-shadow hierarchy with graded ink on parchment. Each
 // TEXT step is measured against PARCH_100 (#F4EAD0) — the darkest paper tone a
@@ -250,6 +285,36 @@ describe('Organic FIELD mode legibility (WCAG AA 4.5:1 on the warm dark panel)',
   });
 });
 
+// ── THE LANTERN TABLE (C14) — the four lamp-tone kind accents on the umber ground ─
+// TableView is the dim "desk by night" (reference plate 04): the four cheat-sheet
+// kinds (NPC / HOOK / TWIST / RED) are accented with LAMP TONES (moss / gold / slate
+// / ember) instead of the light-theme saturated hues. Each tone is used BOTH as the
+// KIND label (owes AA 4.5:1 as text) and as the card's left rule (owes 1.4.11's 3:1
+// UI-boundary floor). The ground is FIELD_INK.panel — the lifted umber plate, the
+// darkest tone a lamp label sits on; the desk behind it (FIELD_INK.ground) is darker
+// still, so the tones clear there a fortiori. slate supersedes the violet TWIST accent
+// on this surface (the honesty law's AI hue, cooled to a lamp tone for the field).
+describe('THE LANTERN TABLE lamp-tone kind accents (WCAG AA 4.5:1 on the umber field ground)', () => {
+  const pairs = [
+    ['NPC / moss',    LAMP_ACCENTS.NPC],
+    ['HOOK / gold',   LAMP_ACCENTS.HOOK],
+    ['TWIST / slate', LAMP_ACCENTS.TWIST],
+    ['RED / ember',   LAMP_ACCENTS.RED],
+  ];
+  for (const [name, hex] of pairs) {
+    test(`${name} (${hex}) label on the umber panel >= ${AA_TEXT}:1`, () => {
+      expect(ratio(hex, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_TEXT); // as label text
+      expect(ratio(hex, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_UI);   // as the card's left rule (1.4.11)
+      expect(ratio(hex, FIELD_INK.ground)).toBeGreaterThanOrEqual(AA_TEXT); // on the darker desk, a fortiori
+    });
+  }
+  // The retired accents documented: brand amber failed AA as a label even on white
+  // (3.09:1) — the exact deferral the lamp tones pay by re-grounding onto the umber.
+  test('the retired saturated amber accent would fail AA as a label even on white (documents the lift)', () => {
+    expect(ratio(swatch['#D08020'], '#FFFFFF')).toBeLessThan(AA_TEXT);
+  });
+});
+
 // ── THE INSTRUMENT FILLS — legible at EVERY state, light + field (§2/§6) ──────
 // Ornamented/quiet controls owe three contrasts per state (label/fill, boundary/
 // ground, focus/landing). These pin the label/fill and boundary/ground floors for
@@ -274,5 +339,45 @@ describe('Organic instrument fills — legible at every state (WCAG AA / 1.4.11)
   test('FIELD boundary is perceivable on the field ground + panel (1.4.11)', () => {
     expect(ratio(FIELD_INSTRUMENT.border, FIELD_INK.ground)).toBeGreaterThanOrEqual(AA_UI);
     expect(ratio(FIELD_INSTRUMENT.border, FIELD_INK.panel)).toBeGreaterThanOrEqual(AA_UI);
+  });
+});
+
+// ── THE LIVING BACKDROP wash (LB-c) — dossier text stays AA over the map ink wash ──
+// The library dossier's background is the last-viewed town map: a parchment layer
+// with the map SVG painted at WASH_INK_OPACITY on top. The darkest a wash pixel can
+// ever get is the map's darkest ink over parchment at that opacity. Model the worst
+// case conservatively as PURE BLACK (darker than any lens tone) composited over
+// PARCH, and prove the dossier's heading (INK) and body (BODY) copy still clear AA
+// over it. MUTED is pinned as the negative control: it is chrome-only and fails as
+// body over the wash exactly as it does on plain parchment — the backdrop never
+// carries MUTED body text, so this documents the split, it does not gate it.
+/** Alpha-composite `top` over `bottom` at `alpha` → the effective background hex. */
+function composite(top, bottom, alpha) {
+  const t = parseInt(top.slice(1), 16);
+  const b = parseInt(bottom.slice(1), 16);
+  const mix = (sh) => Math.round(alpha * ((t >> sh) & 255) + (1 - alpha) * ((b >> sh) & 255));
+  return `#${[mix(16), mix(8), mix(0)].map((x) => x.toString(16).padStart(2, '0')).join('')}`;
+}
+
+describe('THE LIVING BACKDROP wash — dossier text legibility over the map ink wash', () => {
+  // Worst case: a fully-black map pixel washed over parchment at the wash opacity.
+  const washFloor = composite('#000000', PARCH, WASH_INK_OPACITY);
+
+  test(`heading ink (INK) clears AA over the wash @ opacity ${WASH_INK_OPACITY}`, () => {
+    expect(ratio(INK, washFloor)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('body copy (BODY) clears AA over the wash', () => {
+    // BODY already owes AA on plain parchment; the wash only nudges the ground
+    // darker, so proving it here proves the whole read surface holds.
+    expect(ratio(BODY, PARCH)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(BODY, washFloor)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('the wash opacity is faint (a ghost, not a background image)', () => {
+    // A guard on the taste value itself: a wash strong enough to threaten body
+    // contrast would be a design regression, caught here before it ships.
+    expect(WASH_INK_OPACITY).toBeLessThanOrEqual(0.15);
+  });
+  test('MUTED is chrome-only — it fails as body over the wash (documents the split)', () => {
+    expect(ratio(MUTED, washFloor)).toBeLessThan(AA_TEXT);
   });
 });

@@ -12,7 +12,10 @@ import { FS, ELEV } from '../theme.js';
  */
 
 const VARIANTS = {
-  default:    { bg: '#fffbf5', border: '#d2bd96', titleColor: '#1c1409' },
+  // default reads in the oc ink ramp (organic craft §3): the hairline rule-frame
+  // and the deepest ink title. bg + the ELEV[1] shadow (pinned by
+  // cardElevation.test.jsx) are unchanged — a would-be no-z-axis burn-down.
+  default:    { bg: '#fffbf5', border: 'var(--oc-ink-hairline)', titleColor: 'var(--oc-ink-deepest)' },
   suggestion: { bg: '#fff7ec', border: '#e0b070', titleColor: '#7a4f0f' },  // soft amber — for AI/onboarding hooks
   danger:     { bg: '#fff5f5', border: '#c89a9a', titleColor: '#8b1a1a' },
   info:       { bg: '#f0f4ff', border: '#c0c8e8', titleColor: '#2a3a7a' },

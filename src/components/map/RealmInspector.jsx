@@ -31,7 +31,7 @@ import BeliefDivergenceBand from './BeliefDivergenceBand.jsx';
 import RealmIntrigue from './RealmIntrigue.jsx';
 import { hasLiveWarState } from '../../domain/display/warStatus.js';
 import { hasPantheon } from './PantheonPanel.jsx';
-import { BODY, BORDER, CARD, CARD_ALT, FS, R, SECOND, SP, sans } from '../theme.js';
+import { BODY, BORDER, CARD, CARD_ALT, FS, SECOND, SP, sans } from '../theme.js';
 import { IconButton } from './IconButton.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 
@@ -186,9 +186,7 @@ export default function RealmInspector({
         ...sizeStyle,
         display: 'flex', flexDirection: 'column',
         border: `1px solid ${BORDER}`,
-        borderRadius: R.lg,
         background: CARD_ALT,
-        boxShadow: '0 8px 32px rgba(0,0,0,0.28)',
         overflow: 'hidden',
       }}
     >

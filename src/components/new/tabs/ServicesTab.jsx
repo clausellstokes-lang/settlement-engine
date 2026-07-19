@@ -82,16 +82,16 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
       <NarrativeNote note={narrativeNote} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',borderRadius:8,padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
         <div style={{flex:1,minWidth:0}}>
           <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>
           <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories</span>
         </div>
         <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-          {totalImpaired>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',borderRadius:4,padding:'2px 8px'}}>{totalImpaired} impaired</span>}
-          {totalDegraded>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FFF0E0'],border:'1px solid #e09050',borderRadius:4,padding:'2px 8px'}}>{totalDegraded} reduced</span>}
-          {missing.length>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A5010'],background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderRadius:4,padding:'2px 8px'}}>{missing.length} missing</span>}
-          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',borderRadius:4,padding:'2px 8px'}}>✓ No impairments</span>}
+          {totalImpaired>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
+          {totalDegraded>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
+          {missing.length>0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
+          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
         </div>
       </div>
 
@@ -102,18 +102,18 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
           <input value={search} onChange={e=>setSearch(e.target.value)}
             aria-label="Search services"
             placeholder='Search services, "healing", "horse", "fence", "wizard"…'
-            style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',borderRadius:6,fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:'rgba(250,248,244,0.97)',boxSizing:'border-box'}}/>
+            style={{width:'100%',padding:'9px 32px',border:'1px solid #c8b89a',fontSize:FS.md,fontFamily:'Nunito,sans-serif',color:swatch.inkMag,background:swatch['#FAF8F4'],boxSizing:'border-box'}}/>
           {search&&<span style={{position:'absolute',right:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex'}}><IconButton Icon={X} label="Clear search" onClick={()=>setSearch('')} tone="ghost" size="sm" /></span>}
         </div>
 
         {searchResults !== null && (
           <div style={{marginTop:8}}>
             {searchResults.length === 0
-              ? <div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:6,padding:'10px 14px',fontSize:FS.md,color:swatch['#5A1A1A']}}>
+              ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:FS.md,color:swatch['#5A1A1A']}}>
                   <strong>Not available</strong>. Nothing matching "{search}" in this settlement.
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
-              : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',borderRadius:6,padding:'10px 14px'}}>
+              : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',padding:'10px 14px'}}>
                   <div style={{fontSize:FS.xs,fontWeight:700,color:swatch.inkMag3,marginBottom:8}}>✓ {searchResults.length} result{searchResults.length!==1?'s':''} found</div>
                   {searchResults.map((r,i)=>(
                     <div key={i} style={{marginBottom:6}}>
@@ -139,10 +139,10 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 const cs = catStats[cat] || {total:0,imp:0,deg:0,vul:0};
                 const hasImp = cs.imp > 0;
                 const hasDeg = cs.deg > 0 && !hasImp;
-                const borderColor = hasImp?'#e8a0a0':hasDeg?'#e0b050':'#c8d8a0';
-                const bg = hasImp?'#fdf4f4':hasDeg?'#fdf8e8':'#f4faf0';
+                const borderColor = hasImp?'#d8c8a8':hasDeg?'#e0c080':'#d0c0a8';
+                const bg = hasImp?'#f4dede':hasDeg?'#fbead0':'#f0ead8';
                 return (
-                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,borderRadius:5,padding:'6px 10px',cursor:'pointer'}}
+                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,padding:'6px 10px',cursor:'pointer'}}
                     onClick={()=>{
                       setOpenCats(prev=>({...prev,[cat]:true}));
                       setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
@@ -168,7 +168,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
               {missing.map(cat => {
                 const meta = Ts[cat] || {label:cat,accent:'#6b5340',icon:'•'};
                 return (
-                  <div key={'missing-'+cat} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'6px 10px',opacity:0.8}}>
+                  <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
                     <div style={{display:'flex',alignItems:'center',gap:5}}>
                       <span style={{fontSize:FS.md}}>{meta.icon}</span>
                       <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>{meta.label}</span>
@@ -183,7 +183,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
 
         {/* ── NOTABLE ABSENCES ─────────────────────────────────────────────── */}
         {missing.length > 0 && (
-          <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',borderRadius:6,padding:'9px 14px',marginBottom:14,fontSize:FS.sm,color:swatch['#5A3A10']}}>
+          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:FS.sm,color:swatch['#5A3A10']}}>
             <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}. The party will need to look elsewhere.
           </div>
         )}
@@ -206,7 +206,7 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                 background: isCriminal?'#1a0a0a':`${meta.accent}08`,
                 border:`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,
                 borderLeft:`3px solid ${accentColor}`,
-                borderRadius:7,overflow:'hidden'
+                overflow:'hidden'
               }}>
                 {/* Category toggle — bespoke: full-width header row with left-aligned
                     icon/label/count, conditional impairment badges, an auto-pushed
@@ -222,8 +222,8 @@ export function ServicesTab({ services, settlement, narrativeNote}) {
                   <span style={{fontSize: FS['14']}}>{meta.icon}</span>
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor,textTransform:'uppercase',letterSpacing:'0.06em'}}>{meta.label}</span>
                   <span style={{fontSize:FS.xs,color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
-                  {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#FDE8E8'],border:'1px solid #f0a0a0',borderRadius:3,padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
-                  {!hasImp&&hasDeg&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FFF0E0'],border:'1px solid #e09050',borderRadius:3,padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
+                  {hasImp&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
+                  {!hasImp&&hasDeg&&<span style={{fontSize:FS.xxs,fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'1px 5px',marginLeft:2}}>{cs.deg} reduced</span>}
                   <span style={{fontSize:FS.xxs,color:isCriminal?'#8a5050':'#9c8068',marginLeft:'auto'}}>{open?'▲':'▼'}</span>
                 </button>
 

@@ -33,7 +33,7 @@ import { SINGLE_DOSSIER } from '../config/pricing.js';
 import { FREE_SAVE_LIMIT } from '../config/tierFacts.js';
 import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
-import { GOLD, INK, BORDER, CARD, sans, serif_, SP, R, FS, swatch, GREEN, RED } from './theme.js';
+import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
 
 const MUTED = swatch['#6B5340'];
@@ -181,7 +181,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
         padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
@@ -203,8 +203,9 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           style={{
             display: 'inline-block', marginTop: SP.lg,
             padding: `${SP.sm + 2}px ${SP.lg}px`,
-            background: GOLD, color: swatch.white,
-            border: 'none', borderRadius: R.button,
+            // Ink-on-gold (the house AA badge pairing), square-cut instrument.
+            background: GOLD, color: INK,
+            border: 'none',
             fontFamily: sans, fontSize: FS.md, fontWeight: 700,
             textDecoration: 'none',
           }}
@@ -221,7 +222,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`,
         padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <AlertCircle size={32} color={GOLD} style={{ margin: '0 auto' }} />
@@ -251,7 +252,7 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
     return (
       <div style={{
         maxWidth: 560, margin: `${SP.xxl}px auto`, padding: `${SP.xxl}px ${SP.xl}px`,
-        background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
         fontFamily: sans, color: INK, textAlign: 'center',
       }}>
         <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
@@ -262,16 +263,16 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
 
   return (
     <div style={{
+      // The receipt artifact — a plate on the warm parchment ground; the frame
+      // is a hairline rule, not a rounded shadow-card (depth is ink, not lift).
       maxWidth: 640, margin: `${SP.xxl}px auto`,
       padding: `${SP.xxl}px ${SP.xl}px`,
       background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
       border: `1px solid ${BORDER}`,
-      borderRadius: R.xl + 2,
       fontFamily: sans, color: INK, textAlign: 'center',
-      boxShadow: '0 8px 28px rgba(27,20,8,0.12)',
     }}>
       <div style={{
-        width: 56, height: 56, borderRadius: '50%',
+        width: 56, height: 56,
         background: GREEN, color: swatch.white,
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         margin: '0 auto',
@@ -319,20 +320,34 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
           </div>
         )}
 
+        {/* The ruled record block — the receipt artifact: item · price · date,
+            framed by rules (no box). The price stays config-fed. */}
+        <div style={{
+          margin: `${SP.md}px auto 0`, maxWidth: 340,
+          borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}`,
+          padding: `${SP.sm}px 0`, textAlign: 'left',
+          display: 'grid', gap: 4, fontFamily: sans,
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: SP.sm }}>
+            <span style={{ fontSize: FS.sm, color: BODY }}>Single dossier</span>
+            <span style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>{SINGLE_DOSSIER.priceLabel}</span>
+          </div>
+          <div style={{ fontSize: FS.xs, color: MUTED }}>
+            {new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date())}
+          </div>
+        </div>
         <p style={{
           margin: `${SP.sm}px auto 0`, maxWidth: 420,
           fontSize: FS.xs, color: MUTED, lineHeight: 1.55,
         }}>
-          Receipt sent to the email you entered at checkout. Your purchase total
-          was {SINGLE_DOSSIER.priceLabel}.
+          Receipt sent to the email you entered at checkout.
         </p>
       </div>
 
       {/* Sign-up upsell */}
       <div style={{
         marginTop: SP.xxl, padding: `${SP.lg}px ${SP.xl}px`,
-        background: 'rgba(255,251,245,0.7)', border: `1px solid ${BORDER}`,
-        borderRadius: R.xl,
+        background: CARD, border: `1px solid ${BORDER}`,
       }}>
         <h2 style={{
           margin: 0, fontFamily: serif_, fontSize: FS.xl, color: INK,
@@ -366,6 +381,15 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
             Generate another
           </Button>
         </div>
+      </div>
+
+      {/* The colophon — the maker's mark at the receipt's foot, under a rule. */}
+      <div style={{
+        marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${BORDER}`,
+        fontFamily: serif_, fontSize: FS.xs, letterSpacing: '0.14em',
+        textTransform: 'uppercase', color: MUTED,
+      }}>
+        SettlementForge
       </div>
     </div>
   );

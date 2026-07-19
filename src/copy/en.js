@@ -132,6 +132,18 @@ export const en = Object.freeze({
       city:    'Politics. Districts. Things that go wrong at scale.',
       metropolis: 'The seat of something larger than itself.',
     },
+    // THE GAUGE — the commissioning desk's scale-rule size strip (Deep Craft
+    // cluster 1). Figures come from data/constants POPULATION_RANGES at render;
+    // no number is ever spelled here (the copy law).
+    gauge: {
+      label:    'Settlement size',
+      souls:    'souls',
+      capMemo:  'The lighter sizes open with a free account.',
+    },
+    // Clerk's-note rubric heads (Deep Craft cluster 1 — the apparatus voice).
+    notes: {
+      errorRubric: 'Generation failed',
+    },
     // Mode selector (migrated from copy/strings.js `generate.*`). One verb per
     // action class: Forge (first generation) / Reforge (regenerate). "Draft" is
     // the artifact noun (draft → canon lifecycle is preserved).
@@ -537,6 +549,26 @@ export const en = Object.freeze({
     progressCta:    'Apply event and progress narrative',
   },
 
+  // ── THE ONE DOOR (C13) — the single Surveyor entry + the proposal register ─
+  // `label` carries the manager's suggested wording over the owner's literal
+  // "AI / ask me anything" — VETOABLE (recorded in the C13 report); a veto is a
+  // one-string edit here. `proposed` is the owner's ruling line VERBATIM (the
+  // draft-slip small-cap register; its em-dash is owner-specified copy).
+  surveyorDoor: {
+    label:        'Ask the Surveyor',
+    heading:      'The Surveyor',
+    close:        'Close the Surveyor',
+    promptLabel:  'Ask the Surveyor about this page, or tell it what to make',
+    placeholder:  'Ask about what you are looking at, or describe what you want made…',
+    routeHint:    'Questions, session recaps, content, styles, builds.',
+    route:        'Take it to the Surveyor',
+    openAnalyst:  'Open the analyst',
+    openWorkshop: 'Open the workshop',
+    proposed:     'PROPOSED — the engine writes canon',
+    analystFrom:  'The analyst replies',
+    youAsked:     'You asked',
+  },
+
   // ── Tab intro lines (italic, prose-l, beneath each tab title) ────────────
   // Source: UI Redesign §18.9. These set the tone for each tab in one line.
   tabs: {
@@ -608,7 +640,7 @@ export const en = Object.freeze({
       simulated: 'The rail shows the steps the engine took. Open any to see what it decided.',
       save:      'Sign in and your work survives the tab close. Your first three saves are free.',
     },
-    // The post-generate what's-next guide (WizardNextSteps).
+    // The post-generate what's-next coach (PostGenCoach — the C4 host).
     wizardNextSteps: 'A short, state-aware list of what to do with a fresh settlement.',
     // W-COMPOSER-2: the realm forcing surface + the docket (mechanism whispers).
     realmOrders: 'Anything the world can do, you can order. Orders stage as proposals; the walls hold even under force.',

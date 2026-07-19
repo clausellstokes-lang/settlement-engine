@@ -33,7 +33,7 @@ import PlaceInRegionCard from './PlaceInRegionCard.jsx';
 import Disclosure from '../primitives/Disclosure.jsx';
 import DesktopOnlyGate from '../primitives/DesktopOnlyGate.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { INK, MUTED, SECOND, serif_, FS, SP } from '../theme.js';
+import { INK, MUTED, SECOND, BORDER, serif_, FS, SP } from '../theme.js';
 
 // Deep-constraints sections — each keeps its wizard STEP ID so funnel analytics
 // (wizard_step_viewed) still fire when the section is opened.
@@ -116,7 +116,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
           label now sits as a borderless group header above that single card —
           the dominant entry point (P4), grouping carried by spacing (P5). */}
       <div data-section-id="config" style={{ marginBottom: SP.sm }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px`, borderBottom: `1px solid ${BORDER}` }}>
           <span style={{ fontFamily: serif_, fontSize: FS.xl, fontWeight: 700, color: INK }}>1 · Foundations</span>
           <span style={{ fontSize: FS.xs, color: MUTED }}>size, route, culture: the essentials</span>
         </div>
@@ -137,7 +137,7 @@ export default function LayeredConfigurationPanel({ mode = 'advanced', showPlace
               WHAT this group controls at a visible tier, not a muted micro-cap
               that reads as fine print. This is the expert accelerator — sell that
               the depth exists, never bury it. */}
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px` }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: SP.sm, padding: `0 ${SP.xs}px ${SP.xs}px`, borderBottom: `1px solid ${BORDER}` }}>
             <span style={{ fontFamily: serif_, fontSize: FS.lg, fontWeight: 700, color: INK }}>
               2 · Institutions, services &amp; trade
             </span>

@@ -28,17 +28,24 @@ import { useStore } from '../../store/index.js';
 import { buildRegistry, mintDeityRef } from '../../lib/customRegistry.js';
 import { capacityForTier } from '../../domain/worldPulse/cultImpositionApply.js';
 import { td } from '../../copy/deityAuthoring.js';
-import { BORDER, CARD, FS, INK, MUTED, SECOND, sans, swatch } from '../theme.js';
+import { BORDER, CARD, FS, INK, MUTED, SECOND, sans } from '../theme.js';
+import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
 
-const DEITY_ACCENT = swatch['#7C3AED'];
+// THE VOTIVE REGISTER (Deep Craft — the dossier's faith register voice): the
+// patron/cult assignment reads as a rule-framed dedication plate, not a rounded
+// SaaS card in the AI-content violet. The accent is the votive gold (RUBRIC.entry
+// — the illuminated entry mark), which is contrast-PINNED as text on CARD /
+// parchment (tests/design/contrast.test.js); the SaaS violet #7C3AED it replaces
+// read below AA as a heading label on the light card.
+const DEITY_ACCENT = RUBRIC.entry;
 
 const wrapStyle = {
-  border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`, borderRadius: 7,
+  border: `1px solid ${BORDER}`, borderLeft: `3px solid ${DEITY_ACCENT}`,
   padding: '10px 12px', background: CARD, marginBottom: 10, fontFamily: sans,
 };
 const selectStyle = {
-  width: '100%', padding: '5px 8px', border: `1px solid ${BORDER}`, borderRadius: 4,
+  width: '100%', padding: '5px 8px', border: `1px solid ${BORDER}`,
   fontSize: FS.sm, fontFamily: sans, color: INK, outline: 'none', background: CARD,
 };
 const headingStyle = {

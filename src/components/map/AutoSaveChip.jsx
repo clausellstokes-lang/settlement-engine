@@ -32,7 +32,7 @@ import { mapDirtyFingerprint } from './mapDirtyFingerprint.js';
 
 const GOLD = swatch['#C9A24C'];
 const AMBER = swatch['#D08020'];
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const MUTED = swatch['#9C8068'];
 const sans = '"Nunito", system-ui, sans-serif';
 
@@ -83,7 +83,7 @@ export default function AutoSaveChip({ saving = false }) {
   const relative = formatRelative(saved);
 
   if (saving) {
-    dotColor = VIOLET;
+    dotColor = SLATE;
     label = 'Saving…';
   } else if (dirty) {
     dotColor = AMBER;

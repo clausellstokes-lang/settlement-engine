@@ -82,7 +82,16 @@ import {
 export const TAB_GROUPS = Object.freeze({
   summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
   systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic', 'war_faith'] },
-  world:   { label: 'World',   tabs: ['relationships', 'rumors', 'daily_life', 'npcs', 'history', 'neighbours'] },
+  // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
+  // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
+  // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` is a data-only
+  // registration seam (owner: "the tab should exist in the world tab of the
+  // dossier", slotted beside daily_life — culture next to daily life): the culture
+  // engine + TraditionsTab live on claude/traditions, NOT here, so nothing pushes
+  // `traditions` into `allTabs` and the resolver below drops it. When that branch
+  // merges, its presence-gate + renderTab case + component plug into this already-
+  // placed slot with no reorder. Deliberately inert until then — not a dead tab.
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'daily_life', 'traditions', 'history', 'neighbours'] },
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
@@ -107,7 +116,6 @@ const TABS = [
   { id: 'ai_notes',   label: 'AI Notes',   Icon: Sparkles },
   { id: 'chronicle',  label: 'Chronicle',  Icon: ScrollText },
 ];
-const REROLLABLE = { npcs: 'Reroll NPCs', history: 'Reroll History' };
 
 // Coarse dwell-time banding (taxonomy §"Banding vocabularies": dwell_ms_band).
 // Derived inline so no raw durations ever leave the client.
@@ -147,7 +155,7 @@ export function collectChronicle(saveEntry, settlement, publicChronicle = null) 
   }, { limit: 60, reference: chronicleReferenceFor(saveEntry) });
 }
 
-export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null }) {
+export default function OutputContainer({ settlement: propSettlement, readOnly = false, saveId = null, playerView = false, hideHeader = false, publicChronicle = null, suppressNarrativeCta = false, onRenameSettlement = null }) {
   const storeSettlement = useStore(s => s.settlement);
   const storeAi = useStore(s => s.aiSettlement);
   const storeSetAi = useStore(s => s.setAiSettlement);
@@ -591,7 +599,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
       case 'daily_life': return <DailyLifeTab settlement={s} aiSettlement={aiSettlement} saveId={saveId} onRequestDailyLife={() => requestAiAction('dailyLife')} />;
-      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} />;
+      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} />;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} />;
       case 'power':      return (
@@ -674,6 +682,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       storeShowNarrative={storeShowNarrative}
       setShowNarrative={setShowNarrative}
       runNarrativeLayer={runNarrativeLayer}
+      suppressNarrativeCta={suppressNarrativeCta}
     />
   );
 
@@ -705,10 +714,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             settlement={settlement}
             saveId={saveId}
             stressObj={stressObj}
-            selectedTab={selectedTab}
-            onRegenerate={onRegenerate}
-            REROLLABLE={REROLLABLE}
             narrativeButtons={(!flag('narrativeLayerStrip') || readOnly) && renderNarrativeButtons()}
+            // The owner's saved dossier (readOnly + saveId) opts into inline
+            // settlement rename; the public gallery view (readOnly, no saveId)
+            // never does. The callback threads from SettlementDetail, which owns
+            // the persist (renameSettlement) + the detail-view sync.
+            allowRename={readOnly && !!saveId && typeof onRenameSettlement === 'function'}
+            onRenameSettlement={onRenameSettlement}
           />
         )}
         {/* Lifecycle secondary bar — a thin parchment band under the identity
@@ -877,8 +889,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
           </Suspense>
           {/* The dossier foot — seal and counterseal (the house device beside this
               settlement's own seeded medallion) with the motto caption; the
-              ceremonial close of the document (owner placement, 2026-07-18). */}
-          <HouseColophon seed={activeSettlement?.name} />
+              ceremonial close of the document (owner placement, 2026-07-18).
+              H3 THE EXPORT CEREMONY (C15-b): the web dossier foot impresses the
+              seal + pulses the medallion once as the document closes. */}
+          <HouseColophon seed={activeSettlement?.name} ceremony />
           <style>{'@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }'}</style>
         </div>
       </div>

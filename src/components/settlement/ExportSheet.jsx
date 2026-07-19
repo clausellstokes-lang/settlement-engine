@@ -139,7 +139,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
               {[{ id: 'pdf', label: 'PDF Dossier' }, { id: 'foundry', label: 'Foundry VTT Module' }].map(opt => (
                 <Button
                   key={opt.id}
-                  variant={format === opt.id ? 'gold' : 'secondary'}
+                  variant={format === opt.id ? 'secondary' : 'ghost'}
                   size="sm"
                   onClick={() => setFormat(opt.id)}
                   aria-pressed={format === opt.id}
@@ -164,7 +164,7 @@ export default function ExportSheet({ open, onClose, onExport, onExportFoundry, 
               {[{ ai: false, label: 'Raw Simulation' }, { ai: true, label: 'AI-Enhanced' }].map(opt => (
                 <Button
                   key={opt.label}
-                  variant={useAi === opt.ai ? 'gold' : 'secondary'}
+                  variant={useAi === opt.ai ? 'secondary' : 'ghost'}
                   size="sm"
                   onClick={() => setUseAi(opt.ai)}
                   aria-pressed={useAi === opt.ai}
@@ -215,8 +215,11 @@ function VariantCard({ v, picked, onPick }) {
       style={{
         display: 'flex', alignItems: 'flex-start', gap: 10,
         padding: 10,
-        background: picked ? 'rgba(160,118,42,0.10)' : '#fff',
-        border: `1px solid ${picked ? '#a0762a' : '#d2bd96'}`,
+        // A dispatch parcel: quiet by default, selection carried by an ink border
+        // + a faint ink wash + the trailing tally mark — never gold. Gold is spent
+        // once, on the dispatch seal (the footer Export button).
+        background: picked ? 'rgba(28,20,9,0.05)' : '#fff',
+        border: `1px solid ${picked ? swatch.inkMag2 : '#d2bd96'}`,
         borderRadius: 6,
         cursor: v.disabled ? 'not-allowed' : 'pointer',
         opacity: v.disabled ? 0.5 : 1,
@@ -224,7 +227,7 @@ function VariantCard({ v, picked, onPick }) {
         fontFamily: 'system-ui, -apple-system, sans-serif',
       }}
     >
-      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch['#A0762A'] }} />
+      <Icon size={18} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0, color: swatch.inkMag2 }} />
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: FS.md, fontWeight: 700, color: swatch.inkMag }}>
           {v.label}
@@ -238,6 +241,11 @@ function VariantCard({ v, picked, onPick }) {
           </div>
         )}
       </div>
+      {picked && (
+        <span aria-hidden="true" style={{ flexShrink: 0, alignSelf: 'center', fontSize: FS.md, fontWeight: 800, color: swatch.inkMag2 }}>
+          ✓
+        </span>
+      )}
     </button>
   );
 }

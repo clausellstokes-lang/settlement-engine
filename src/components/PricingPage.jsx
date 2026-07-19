@@ -33,7 +33,7 @@ import { tp } from '../copy/pricingPage.js';
 import { t } from '../copy/index.js';
 import { useCopy } from '../hooks/useCopy.js';
 import { useFlag } from '../lib/flags.js';
-import { GOLD, INK, PARCH, sans, serif_, SP, R, FS, BODY, swatch, PROSE_MAX, FORM_MAX } from './theme.js';
+import { GOLD, INK, PARCH, sans, serif_, SP, FS, BODY, PROSE_MAX, FORM_MAX } from './theme.js';
 import { space } from '../design/tokens.js';
 
 // Between-section rhythm: SP tops out at xxl=24, which also appears as
@@ -59,6 +59,7 @@ import { TierCard, PackTile } from './pricing/PricingTierCards.jsx';
 import {
   SurveyorBand, FounderCharterBand, TaskMenu, ComparisonTable, PricingFaq,
 } from './pricing/PricingBands.jsx';
+import { ClerkNote } from './generate/ClerkNote.jsx';
 
 
 
@@ -257,24 +258,15 @@ export default function PricingPage({ onNavigate }) {
       </p>
 
       {checkoutError && (
-        <div
+        // The tinted danger callout becomes a rubric-headed clerk's note (the
+        // C1c idiom): the apparatus speaks the failure in one oxblood rubric
+        // voice on a drawn left rule — no wash, no radius. Text + retry action
+        // + alert semantics unchanged.
+        <ClerkNote
+          rubric="Checkout"
           role="alert"
-          style={{
-            margin: `0 auto ${HEADER_GAP}px`,
-            maxWidth: FORM_MAX,
-            padding: `${SP.sm}px ${SP.md}px`,
-            background: swatch.dangerBg,
-            border: '1px solid #e8b0b0',
-            borderRadius: R.md,
-            color: swatch.danger,
-            fontFamily: sans,
-            fontSize: FS.sm,
-            display: 'flex', flexDirection: 'column', gap: SP.sm,
-            alignItems: 'center',
-          }}
-        >
-          <span>{checkoutError}</span>
-          {lastAttempt && (
+          style={{ margin: `0 auto ${HEADER_GAP}px`, maxWidth: FORM_MAX }}
+          actions={lastAttempt && (
             <Button
               type="button"
               variant="danger"
@@ -285,7 +277,9 @@ export default function PricingPage({ onNavigate }) {
               Try again
             </Button>
           )}
-        </div>
+        >
+          {checkoutError}
+        </ClerkNote>
       )}
 
       {/* ── Checkout riders (107): redeem code + referral intent ────────── */}
@@ -404,7 +398,6 @@ export default function PricingPage({ onNavigate }) {
         aria-labelledby="one-time-heading"
         style={{
           background: PARCH,
-          borderRadius: R.xl,
           padding: `${SP.xl}px ${SP.lg}px`,
           marginBottom: SECTION_GAP,
         }}

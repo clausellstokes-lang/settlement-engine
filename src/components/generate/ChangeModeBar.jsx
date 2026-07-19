@@ -14,7 +14,7 @@ import { INK, MUTED, SECOND, BORDER, CARD_HDR, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 
-// Shared with WizardChipRow (the chrome-diet strip renders the same switch).
+// The Basic⇄Advanced switch options for the breadcrumb switch below.
 export const MODE_OPTIONS = [
   { id: 'basic', label: 'Basic' },
   { id: 'advanced', label: 'Advanced' },

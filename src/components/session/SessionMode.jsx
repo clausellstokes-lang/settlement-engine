@@ -51,14 +51,14 @@ const MUTED = swatch['#9C8068'];
 const PARCH = swatch['#FBF5E6'];
 const BORDER = swatch['#E8D9B0'];
 const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
-const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: VIOLET, RED };
+const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: SLATE, RED };
 
 const BAND_TONE = {
   Stable: GREEN, Strained: AMBER, Vulnerable: AMBER, Critical: RED,
@@ -381,7 +381,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                       {tell && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>{tell}</div>}
                       {goal && <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}><em>Wants:</em> {goal}</div>}
                       {secret && (
-                        <div style={{ marginTop: 4, fontSize: FS.xs, color: VIOLET, lineHeight: 1.45 }}>
+                        <div style={{ marginTop: 4, fontSize: FS.xs, color: SLATE, lineHeight: 1.45 }}>
                           <span style={{ fontWeight: 800, letterSpacing: '0.06em', fontSize: FS.nano }}>SECRET</span> {secret}
                         </div>
                       )}

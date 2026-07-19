@@ -20,7 +20,7 @@
 
 import {
   GOLD, GOLD_TXT, INK, SECOND as SEC, MUTED as MUT, BORDER as BOR, CARD,
-  serif_, sans, FS, VIOLET, VIOLET_DEEP, PROSE_MAX,
+  serif_, sans, FS, SLATE, SLATE_DEEP, PROSE_MAX,
 } from '../theme.js';
 import { COMPENDIUM_DATA as CD } from '../../domain/compendium/generated/compendiumData.generated.js';
 import { RETENTION_MONTHS } from '../../config/entitlementLadder.js';
@@ -244,15 +244,15 @@ export default function AboutManifesto() {
           it was about provenance and consent. So we don&rsquo;t ask you to trust a policy. We show you
           the architecture.
         </p>
-        <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${VIOLET}`, borderRadius: 8,
-          padding: '14px 16px', background: `${VIOLET}0A`, marginBottom: 16 }}>
+        <div style={{ border: `1px solid ${BOR}`, borderLeft: `3px solid ${SLATE}`, borderRadius: 8,
+          padding: '14px 16px', background: `${SLATE}0A`, marginBottom: 16 }}>
           <p style={{ fontSize: FS.sm, color: SEC, lineHeight: 1.7, margin: 0, fontFamily: sans }}>
             The AI works in three stages, and each stage has exactly one job. An analyst
-            <strong style={{ color: VIOLET_DEEP }}> reads </strong>
+            <strong style={{ color: SLATE_DEEP }}> reads </strong>
             the simulated state — the facts the engine already derived. A compiler
-            <strong style={{ color: VIOLET_DEEP }}> proposes </strong>
+            <strong style={{ color: SLATE_DEEP }}> proposes </strong>
             table-ready prose or a plan, grounded in those facts. And only the deterministic engine
-            <strong style={{ color: VIOLET_DEEP }}> writes </strong>
+            <strong style={{ color: SLATE_DEEP }}> writes </strong>
             to canon, through the same named operations everything else uses. There is no fourth
             stage where the model edits your world. The model narrates; it never decides.
           </p>

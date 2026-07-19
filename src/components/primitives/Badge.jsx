@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import {
   AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, BORDER, CARD_ALT, FS, GOLD_BG, GOLD_TXT,
-  GREEN, GREEN_BG, MUTED, RED, RED_BG, R, SECOND, SP, VIOLET_BG, VIOLET_DEEP,
+  GREEN, GREEN_BG, MUTED, RED, RED_BG, R, SECOND, SP, SLATE_BG, SLATE_DEEP,
   sans,
 } from '../theme.js';
 import { useIconsOn } from './IconsContext.js';
@@ -14,7 +14,7 @@ const TONES = {
   warning: { bg: AMBER_BG, fg: AMBER_DEEP, border: BORDER },
   danger: { bg: RED_BG, fg: RED, border: BORDER },
   info: { bg: BLUE_BG, fg: BLUE, border: BORDER },
-  ai: { bg: VIOLET_BG, fg: VIOLET_DEEP, border: BORDER },
+  ai: { bg: SLATE_BG, fg: SLATE_DEEP, border: BORDER },
 };
 
 const SIZES = {

@@ -11,7 +11,7 @@
 import { HISTORY_DESC_VARIANTS } from './historyDescVariants.js';
 import { pickVariant } from '../kernel/proseHash.js';
 
-// Notable power-holder roles by domain (government, religious, noble, crafts,
+// Notable power-holder roles by domain (government, religious, crafts,
 // military, economy, criminal, magic, other). Each entry describes a role that
 // can hold influence in a settlement and the conditions under which it appears.
 // Consumed by getUpgradeOpportunities to surface tier-appropriate roles.
@@ -167,6 +167,85 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['wealth', 'justice'],
     },
+    // ── Noble / feudal leadership ────────────────────────────────────────────
+    // Merged from the former POWER_ROLES_BY_CATEGORY.noble bucket. 'noble' was a
+    // dead bucket key: getUpgradeOpportunities (economy/upgradeOpportunities.js)
+    // surfaces a bucket's roles only when some institution carries
+    // priorityCategory/category equal to the bucket key, but no catalog entry
+    // uses 'noble' on either axis and the closed-set category vocabulary
+    // (src/data/categoryVocabulary.js) never admits one — so the bucket never
+    // matched a settlement. The domain layer already aliases 'noble' to
+    // 'government' (deriveNpcProfile maps noble leverage to government; see
+    // src/domain/npcProfile.js, pinned by tests/domain/wave1CohesionFixes.test.js),
+    // so these feudal leadership roles belong in the reachable 'government'
+    // bucket, where they now surface for any settlement with a government
+    // institution at the right tier. goalCategories and the requiresInstKeyword
+    // coherence gates are preserved exactly as they stood in the noble bucket.
+    {
+      role: 'Lord/Lady of the Manor',
+      title: 'noble',
+      priority: 8,
+      minTier: 'village',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Baron/Baroness',
+      title: 'noble',
+      priority: 9,
+      minTier: 'town',
+      goalCategories: ['power', 'wealth'],
+    },
+    {
+      role: 'Court Advisor',
+      title: 'advisor',
+      priority: 7,
+      minTier: 'town',
+      goalCategories: ['power', 'knowledge'],
+    },
+    {
+      role: 'House Steward',
+      title: 'steward',
+      priority: 6,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Noble Heir',
+      title: 'noble',
+      priority: 5,
+      minTier: 'hamlet',
+      goalCategories: ['personal', 'power'],
+    },
+    {
+      role: 'Land Agent',
+      title: 'agent',
+      priority: 5,
+      minTier: 'village',
+      goalCategories: ['wealth', 'personal'],
+    },
+    {
+      role: 'Knight/Dame',
+      title: 'knight',
+      priority: 7,
+      minTier: 'village',
+      goalCategories: ['protection', 'personal'],
+    },
+    {
+      role: 'Duke/Duchess',
+      title: 'noble',
+      priority: 10,
+      minTier: 'metropolis',
+      goalCategories: ['power', 'wealth'],
+      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
+    },
+    {
+      role: 'Royal Chamberlain',
+      title: 'noble',
+      priority: 8,
+      minTier: 'city',
+      goalCategories: ['power', 'personal'],
+      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
+    },
   ],
   religious: [
     {
@@ -284,73 +363,6 @@ export const POWER_ROLES_BY_CATEGORY = {
       minTier: 'town',
       goalCategories: ['spiritual', 'justice'],
       requiresInstKeyword: ['monastery', 'cathedral', 'friary'],
-    },
-  ],
-  noble: [
-    {
-      role: 'Lord/Lady of the Manor',
-      title: 'noble',
-      priority: 8,
-      minTier: 'village',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Baron/Baroness',
-      title: 'noble',
-      priority: 9,
-      minTier: 'town',
-      goalCategories: ['power', 'wealth'],
-    },
-    {
-      role: 'Court Advisor',
-      title: 'advisor',
-      priority: 7,
-      minTier: 'town',
-      goalCategories: ['power', 'knowledge'],
-    },
-    {
-      role: 'House Steward',
-      title: 'steward',
-      priority: 6,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Noble Heir',
-      title: 'noble',
-      priority: 5,
-      minTier: 'hamlet',
-      goalCategories: ['personal', 'power'],
-    },
-    {
-      role: 'Land Agent',
-      title: 'agent',
-      priority: 5,
-      minTier: 'village',
-      goalCategories: ['wealth', 'personal'],
-    },
-    {
-      role: 'Knight/Dame',
-      title: 'knight',
-      priority: 7,
-      minTier: 'village',
-      goalCategories: ['protection', 'personal'],
-    },
-    {
-      role: 'Duke/Duchess',
-      title: 'noble',
-      priority: 10,
-      minTier: 'metropolis',
-      goalCategories: ['power', 'wealth'],
-      requiresInstKeyword: ['palace', 'royal seat', "noble governor", "government complex"],
-    },
-    {
-      role: 'Royal Chamberlain',
-      title: 'noble',
-      priority: 8,
-      minTier: 'city',
-      goalCategories: ['power', 'personal'],
-      requiresInstKeyword: ['palace', 'royal seat', "government complex"],
     },
   ],
   crafts: [
@@ -1110,6 +1122,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'succession_crisis',
     description: 'The ruler of the time was aging or ill, and potential heirs jockeyed for position',
     factions: ['Legitimate heir', 'Popular candidate', 'Power behind throne'],
+    lastingEffects: [
+      'Rival claimant bloodlines still contest ceremonial precedence',
+      'Succession now governed by a charter drafted in the aftermath',
+    ],
     plotHooks: [
       "A would-be heir approaches outsiders to investigate a rival's past",
       'The ailing ruler wants a final errand completed before naming a successor',
@@ -1121,6 +1137,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'economic_disparity',
     description: 'Growing wealth gap between merchant class and common laborers creates resentment',
     factions: ['Wealthy merchants', 'Poor workers', 'Moderate reformers'],
+    lastingEffects: [
+      'Wage disputes settled by a standing arbitration council since founded',
+      "The merchant quarter and the labourers' quarter remain walled apart",
+    ],
     plotHooks: [
       'A reformer has been found dead — suicide or silenced?',
       "A hidden ledger documenting wage theft is circulating in the workers' quarter",
@@ -1132,6 +1152,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'religious_tension',
     description: 'Different faiths or interpretations competed for influence and converts',
     factions: ['Orthodox believers', 'Reformists', 'Secular faction'],
+    lastingEffects: [
+      "Two rival congregations still divide the settlement's faithful",
+      'Public preaching restricted to licensed grounds after the unrest',
+    ],
     plotHooks: [
       'A relic claimed by both sides has resurfaced in a private collection',
       'The reformist leader is being blackmailed into silence',
@@ -1143,6 +1167,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'guild_conflict',
     description: 'Rival guilds competed for market share and political influence',
     factions: ['Established guilds', 'Upstart guilds', 'Non-guild workers'],
+    lastingEffects: [
+      'Guild membership rolls now audited by an outside adjudicator',
+      "One guild's charter was revoked and never fully restored",
+    ],
     plotHooks: [
       "A guild master's records have gone missing ahead of an audit",
       'A journeyman denied mastership has proof the exam was rigged',
@@ -1154,6 +1182,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'external_threat',
     description: 'News of approaching danger divided the community on how to respond',
     factions: ['Prepare for war', 'Seek diplomacy', 'Flee/hide'],
+    lastingEffects: [
+      'Watch towers and muster drills maintained since the alarm',
+      'A standing levy roster kept ready in the town archive',
+    ],
     plotHooks: [
       'The threat is being exaggerated by someone who profits from wartime contracts',
       'A diplomatic channel exists that the war faction is suppressing',
@@ -1165,6 +1197,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'resource_scarcity',
     description: 'A critical resource became scarce, causing hoarding and price gouging',
     factions: ['Hoarders', 'Desperate poor', 'Price regulators'],
+    lastingEffects: [
+      'Emergency granary reserves mandated by ordinance since the shortage',
+      'Price ceilings on the affected goods still enforced in lean seasons',
+    ],
     plotHooks: [
       'A warehouse full of the resource is being held off the market deliberately',
       'The scarcity was engineered — someone destroyed the competing supply route',
@@ -1176,6 +1212,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'crime_wave',
     description: 'A surge in criminal activity overwhelmed the authorities; vigilantes began to form',
     factions: ['Official guards', 'Vigilantes', 'Criminal organisations'],
+    lastingEffects: [
+      'An expanded watch and a night curfew survive from the crackdown',
+      'Vigilante bands never fully disbanded and still operate quietly',
+    ],
     plotHooks: [
       'The crime wave is coordinated — someone is directing it to create a pretext',
       'A guard captain is on the payroll of the criminal network',
@@ -1187,6 +1227,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'magical_controversy',
     description: 'Debate over the role and regulation of magic divided the community',
     factions: ['Pro-magic', 'Anti-magic', 'Regulation advocates'],
+    lastingEffects: [
+      'Spellcasting now requires a licence from the local authority',
+      'The site of the disputed working remains cordoned and warded',
+    ],
     plotHooks: [
       'A recent magical accident was covered up and the victims silenced',
       'An anti-magic agitator is secretly using magic themselves',
@@ -1198,6 +1242,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'generational_divide',
     description: 'Old ways vs new ideas creates conflict between age groups',
     factions: ['Traditionalists', 'Progressives', 'Pragmatic middle'],
+    lastingEffects: [
+      'Council seats now formally split between the old and young factions',
+      'A youth assembly won a permanent advisory voice in the aftermath',
+    ],
     plotHooks: [
       "A traditional practice conceals something the elders don't want examined",
       "A young reformer has uncovered records that undermine the old guard's legitimacy",
@@ -1209,6 +1257,10 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'corruption_scandal',
     description: 'Evidence of official corruption has surfaced but powerful figures resist investigation',
     factions: ['Corrupt officials', 'Reformers', 'Complicit beneficiaries'],
+    lastingEffects: [
+      'An oversight office was established to audit officials afterward',
+      'Several old families carry names still quietly disgraced',
+    ],
     plotHooks: [
       'The investigator who uncovered the corruption has received a death threat',
       "A key witness can be found — but won't speak without protection",
@@ -1223,6 +1275,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Debtors who took the loans',
       'Those who will bear the cost',
       'Those who profited and escaped',
+    ],
+    lastingEffects: [
+      'Tribute payments to the external creditor continue on a schedule',
+      'Municipal borrowing now capped by a charter clause',
     ],
     plotHooks: [
       'The original loan documents contain a clause that was never disclosed publicly',
@@ -1240,6 +1296,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Former resistance',
       'New generation wanting to move on',
     ],
+    lastingEffects: [
+      'Collaborator and resistance families still keep to separate quarters',
+      'Wartime property seizures remain legally unresolved',
+    ],
     plotHooks: [
       "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
       'Resistance fighters kept records that would expose people still in power',
@@ -1255,6 +1315,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Security hardliners',
       'Civil libertarians',
       'Actual agents exploiting the confusion',
+    ],
+    lastingEffects: [
+      'A standing security office and informant network persist',
+      'Denunciation records from the panic remain sealed in the archive',
     ],
     plotHooks: [
       'One of the loudest voices warning about infiltration is themselves an agent',
@@ -1272,6 +1336,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Current occupants',
       'Legal class profiting from ambiguity',
     ],
+    lastingEffects: [
+      'The contested parcel remains legally unassigned and unbuilt',
+      'Rival charters over the land are both still lodged with the court',
+    ],
     plotHooks: [
       'The original charter is held in a private archive whose owner has gone missing',
       'Something of value was found on the disputed land — which is why the claim is suddenly being pressed',
@@ -1288,6 +1356,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Newcomers',
       'Merchants who benefit from cheap newcomer labour',
     ],
+    lastingEffects: [
+      'Newcomer and old-family districts remain socially distinct',
+      'A resettlement compact governs where new arrivals may hold property',
+    ],
     plotHooks: [
       'The newcomers fled something — and that something has sent agents after them',
       "A series of 'accidents' targeting newcomers is being attributed to chance",
@@ -1303,6 +1375,10 @@ export const HISTORICAL_EVENTS_DATA = [
       'Multiple weak claimants',
       'Pragmatists who want stability',
       'Those who prefer the vacuum',
+    ],
+    lastingEffects: [
+      'Rival claimants still hold competing partial authority',
+      'A regency council formed in the interim never fully dissolved',
     ],
     plotHooks: [
       "The departed leader left a sealed document designating a successor — and someone wants it destroyed before it's read",

@@ -6,12 +6,9 @@ import {
   BORDER,
   CARD,
   CARD_ALT,
-  ELEV,
   FS,
   INK,
-  R,
   RED,
-  RED_BG,
   SP,
   sans,
 } from '../theme.js';
@@ -78,6 +75,7 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
       {open && (
         <div
           role="presentation"
+          className="oc-m-warmdim"
           onMouseDown={event => {
             if (event.target === event.currentTarget) onCancel();
           }}
@@ -89,7 +87,6 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
             alignItems: 'center',
             justifyContent: 'center',
             padding: SP.lg,
-            background: 'rgba(27,20,8,0.46)',
           }}
         >
           <form
@@ -100,10 +97,11 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
             onSubmit={submit}
             style={{
               width: 'min(100%, 480px)',
+              // The clerk's form as a plate on the warm-dim ground — hairline
+              // frame, no rounded corner, no elevation shadow (depth is the dim
+              // room, not a z-axis lift).
               border: `1px solid ${BORDER}`,
-              borderRadius: R.lg,
               background: CARD,
-              boxShadow: ELEV[3],
               overflow: 'hidden',
             }}
           >
@@ -139,7 +137,6 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                   style={{
                     minHeight: 44,
                     border: `1px solid ${BORDER}`,
-                    borderRadius: R.md,
                     background: CARD_ALT,
                     color: INK,
                     fontFamily: sans,
@@ -163,7 +160,6 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                   style={{
                     resize: 'vertical',
                     border: `1px solid ${BORDER}`,
-                    borderRadius: R.md,
                     background: CARD_ALT,
                     color: INK,
                     fontFamily: sans,
@@ -177,7 +173,9 @@ export default function GalleryReportDialog({ dossier, auth, disabled, onReport 
                 Reports are reviewed by developer/admin accounts.
               </div>
               {error && (
-                <div style={{ border: `1px solid ${RED}`, borderRadius: R.md, background: RED_BG, color: RED, padding: SP.sm, fontFamily: sans, fontSize: FS.xs, fontWeight: 850 }}>
+                // The tinted error box becomes a rubric-ruled note (errors as
+                // rubric notes, not washes): oxblood left rule, oxblood text.
+                <div style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 850, lineHeight: 1.5 }}>
                   {error}
                 </div>
               )}

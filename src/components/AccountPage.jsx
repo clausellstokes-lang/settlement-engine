@@ -294,6 +294,7 @@ export default function AccountPage({ onNavigateAdmin }) {
             purchaseError={purchaseError}
             purchasing={purchasing}
             handlePurchase={handlePurchase}
+            onNavigatePricing={() => navigate('pricing')}
           />
           <div>
             <ReferralCard auth={auth} />

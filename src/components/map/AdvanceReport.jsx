@@ -29,7 +29,7 @@ import { chronicleForAdvance, hasChronicle } from '../../domain/display/chronicl
 import { decreesForAdvance } from '../../domain/display/decreeTracker.js';
 import {
   AMBER, AMBER_BG, BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, GREEN,
-  INK, MUTED, RED, R, SECOND, SP, VIOLET, VIOLET_BG, sans,
+  INK, MUTED, RED, SECOND, SP, SLATE, SLATE_BG, sans,
 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
@@ -59,7 +59,7 @@ function Chip({ children, tone = SECOND, bg = CARD_ALT }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3, padding: '1px 7px',
-      borderRadius: R.pill || 999, background: bg, color: tone,
+      background: bg, color: tone,
       fontFamily: sans, fontSize: FS.micro, fontWeight: 850, whiteSpace: 'nowrap',
     }}>{children}</span>
   );
@@ -85,7 +85,7 @@ function ReceiptRow({ node, resolveName, onHighlight }) {
       )}
     </>
   );
-  const style = { border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD, padding: '6px 8px' };
+  const style = { border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px' };
   if (!canHighlight) return <div data-testid="chronicle-receipt" style={style}>{body}</div>;
   const go = () => onHighlight(ids[0]);
   return (
@@ -139,7 +139,7 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
   const label = CLASS_LABEL[thread.dramaClass] || 'Thread';
   return (
     <article data-testid="chronicle-thread" style={{
-      border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`, borderRadius: R.sm,
+      border: `1px solid ${BORDER2}`, borderLeft: `3px solid ${GOLD}`,
       background: CARD_ALT, padding: '8px 10px', display: 'grid', gap: 5,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
@@ -157,10 +157,10 @@ function ThreadCard({ thread, resolveName, onHighlight, threadsById }) {
         {thread.arc.stands && thread.arc.stands !== thread.arc.turned ? <> · <strong style={{ color: SECOND }}>stands</strong> {thread.arc.stands}</> : null}
       </div>
       {thread.crossLinks?.length > 0 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: VIOLET, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexWrap: 'wrap', color: SLATE, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>
           <GitBranch size={10} /> touches
           {thread.crossLinks.slice(0, 3).map((l, i) => (
-            <Chip key={i} tone={VIOLET} bg={VIOLET_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
+            <Chip key={i} tone={SLATE} bg={SLATE_BG}>{CLASS_LABEL[threadsById.get(l.id)?.dramaClass] || 'thread'}</Chip>
           ))}
           <span style={{ color: MUTED, fontWeight: 700 }}>({thread.crossLinks.some((l) => !l.inferred) ? 'recorded' : 'inferred'})</span>
         </div>
@@ -185,7 +185,7 @@ function DeputyDiary({ diary }) {
       <SectionTitle icon={Scale} tone={SECOND}>Rulings in your absence</SectionTitle>
       <div style={{ display: 'grid', gap: 4 }}>
         {diary.verdicts.slice(0, 12).map((v, i) => (
-          <div key={i} style={{ border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD, padding: '6px 8px' }}>
+          <div key={i} style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '6px 8px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
               <span style={{ color: INK, fontFamily: sans, fontSize: FS.xxs, fontWeight: 800, flex: 1, minWidth: 0 }}>{v.headline}</span>
               <Chip tone={v.reversibility === 'consumed' ? MUTED : GREEN}>
@@ -210,7 +210,7 @@ function StandingBadge({ standing }) {
 
 function DecreeCard({ decree, within }) {
   return (
-    <div data-testid="chronicle-decree" style={{ border: `1px solid ${BORDER2}`, borderRadius: R.sm, background: CARD, padding: '7px 9px', display: 'grid', gap: 4 }}>
+    <div data-testid="chronicle-decree" style={{ border: `1px solid ${BORDER2}`, background: CARD, padding: '7px 9px', display: 'grid', gap: 4 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <Chip tone={AMBER} bg={AMBER_BG}><Landmark size={10} /> {human(decree.kind)}</Chip>
         <span style={{ color: MUTED, fontFamily: sans, fontSize: FS.micro, fontWeight: 800 }}>{decree.landing.label}</span>
@@ -234,7 +234,7 @@ function DecreeCluster({ cluster }) {
   return (
     <div data-testid="chronicle-decree-cluster" style={{
       border: `1px solid ${cluster.selfConflict ? RED : AMBER}`, borderLeft: `3px solid ${cluster.selfConflict ? RED : AMBER}`,
-      borderRadius: R.sm, background: AMBER_BG, padding: '8px 10px', display: 'grid', gap: 5,
+      background: AMBER_BG, padding: '8px 10px', display: 'grid', gap: 5,
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
         <Chip tone={cluster.selfConflict ? RED : AMBER} bg={CARD}>{human(cluster.relation)}</Chip>
@@ -254,7 +254,7 @@ function DecreeSection({ decrees }) {
   // its honest empty line so the DM's choices are never lost.
   return (
     <div data-testid="chronicle-decree-section" style={{
-      border: `1px solid ${AMBER}`, borderRadius: R.md, background: CARD_ALT, padding: '9px 11px', display: 'grid', gap: 7,
+      border: `1px solid ${AMBER}`, background: CARD_ALT, padding: '9px 11px', display: 'grid', gap: 7,
     }}>
       <SectionTitle icon={Landmark} tone={AMBER}>Your decrees</SectionTitle>
       {decrees.total === 0 ? (
@@ -284,6 +284,16 @@ const ALTITUDE_LABEL = { headline: 'Headline', chapters: 'Chapters', threads: 'T
  * @param {any} props.campaign
  * @param {(id: any) => string} [props.nameFor]
  */
+// H2 · THE FIRST ADVANCE — a session-scoped one-shot for the report slip. The
+// advance report lives in the Chronicle section, which the advance flow does not
+// auto-open (the inspector opens to Pulse on advance), so the report cannot ride
+// the same mount-time signal the pulse page and the medallions use. Instead it
+// slips onto the desk (oc-m-slipin) the FIRST time it is viewed with a chronicle
+// present this session. This module-scoped flag is presentation-only session
+// memory — not persisted, not a store field — and re-evaluates (resets) on a
+// full reload, so a returning reader sees the report already at rest.
+let reportSlipShown = false;
+
 export default function AdvanceReport({ campaign, nameFor }) {
   const setSelectedSettlementId = useStore(s => s.setSelectedSettlementId);
   const resolveName = nameFor || ((id) => String(id));
@@ -291,6 +301,13 @@ export default function AdvanceReport({ campaign, nameFor }) {
 
   const entries = useMemo(() => advanceEntries(worldState), [worldState]);
   const [index, setIndex] = useState(0);
+  // Consume the session one-shot only when this mount will actually render a
+  // chronicle — the `both`-fill slip plays once and rests, so no cleanup timer.
+  const [reportSlip] = useState(() => {
+    if (!worldState || !hasChronicle(worldState) || reportSlipShown) return false;
+    reportSlipShown = true;
+    return true;
+  });
   const safeIndex = Math.min(index, Math.max(0, entries.length - 1));
   const entry = entries[safeIndex] || null;
 
@@ -311,7 +328,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
   if (!hasChronicle(worldState) || !chronicle) {
     return (
       <div data-testid="advance-report-empty" style={{
-        padding: SP.md, border: `1px dashed ${BORDER2}`, borderRadius: R.md,
+        padding: SP.md, border: `1px dashed ${BORDER2}`,
         color: BODY, fontFamily: sans, fontSize: FS.xs, fontWeight: 750, lineHeight: 1.5,
       }}>
         No advance to report yet. Advance the realm and this report will compress what
@@ -325,9 +342,9 @@ export default function AdvanceReport({ campaign, nameFor }) {
   const show = (name) => chronicle.altitudes.includes(name) || activeAltitude === name || name === 'events';
 
   return (
-    <div data-testid="advance-report" style={{ display: 'grid', gap: SP.sm }}>
+    <div data-testid="advance-report" className={reportSlip ? 'oc-m-slipin' : undefined} style={{ display: 'grid', gap: SP.sm }}>
       {/* ── Advance scrubber ─────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, padding: `6px ${SP.sm}px`, border: `1px solid ${BORDER}`, background: CARD_ALT }}>
         <Button variant="ghost" size="sm" aria-label="Newer advance" disabled={safeIndex <= 0} onClick={() => setIndex(i => Math.max(0, i - 1))} style={{ minHeight: undefined, padding: 2 }}>
           <ChevronLeft size={15} />
         </Button>
@@ -349,7 +366,7 @@ export default function AdvanceReport({ campaign, nameFor }) {
           const active = activeAltitude === name;
           return (
             <Button key={name} variant="ghost" size="sm" aria-pressed={active} onClick={() => setAltitude(name)}
-              style={{ minHeight: undefined, padding: '2px 8px', border: `1px solid ${active ? GOLD : BORDER2}`, borderRadius: R.sm, background: active ? GOLD : CARD, color: active ? INK : (isDefault ? SECOND : MUTED), fontSize: FS.micro, fontWeight: 850 }}>
+              style={{ minHeight: undefined, padding: '2px 8px', border: `1px solid ${active ? GOLD : BORDER2}`, background: active ? GOLD : CARD, color: active ? INK : (isDefault ? SECOND : MUTED), fontSize: FS.micro, fontWeight: 850 }}>
               {ALTITUDE_LABEL[name]}
             </Button>
           );

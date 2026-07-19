@@ -27,11 +27,15 @@ vi.mock('../../src/components/HomeHero.jsx', () => ({
 }));
 
 vi.mock('../../src/components/home/HomeSampleDossier.jsx', () => ({
-  default: () => <div data-testid="sample-dossier" />,
+  default: ({ compact }) => (
+    <div data-testid="sample-dossier" data-compact={String(!!compact)} />
+  ),
 }));
 
 vi.mock('../../src/components/home/RegionWakeReplay.jsx', () => ({
-  default: () => <div data-testid="region-wake-replay" />,
+  default: ({ compact }) => (
+    <div data-testid="region-wake-replay" data-compact={String(!!compact)} />
+  ),
 }));
 
 describe('WizardEmptyState — anon-Create tidying', () => {
@@ -60,6 +64,11 @@ describe('WizardEmptyState — anon-Create tidying', () => {
     expect(pair).not.toBeNull();
     expect(pair.querySelector('[data-testid="sample-dossier"]')).not.toBeNull();
     expect(pair.querySelector('[data-testid="region-wake-replay"]')).not.toBeNull();
+
+    // C1r-c2: both proof cards render as half-scale miniatures below the fold, so
+    // WizardEmptyState passes `compact` to each.
+    expect(pair.querySelector('[data-testid="sample-dossier"]').getAttribute('data-compact')).toBe('true');
+    expect(pair.querySelector('[data-testid="region-wake-replay"]').getAttribute('data-compact')).toBe('true');
 
     // The removed redundant banner copy must not render anywhere.
     expect(screen.queryByText(/unlock Basic/i)).toBeNull();

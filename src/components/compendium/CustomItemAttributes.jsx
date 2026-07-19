@@ -5,17 +5,18 @@
  * upsell preview (CustomContentGate.jsx) can render it without the two files
  * importing each other — that mutual import was a fresh ESM cycle (see
  * tests/architecture/importCycles.test.js). A leaf with no sibling imports
- * breaks the cycle.
+ * breaks the cycle AND keeps the manager under the component-size ratchet.
  */
 import { swatch } from '../theme.js';
 import {
   CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, TRADE_CATEGORIES,
-  DEITY_ALIGNMENT, DEITY_TEMPER, DEITY_TIER, DEITY_LAW,
 } from '../../domain/customContentSchema.js';
 import { Tag } from './primitives.jsx';
 
-// Resolve a stored enum key to its human label for the detail view.
+// §14 — resolve a stored enum key to its human label for the detail view.
 const keyLabel = (list, key) => (list.find((o) => o.key === key)?.label) || key;
+// Compact capitalize for a stored enum key (deity axis chips).
+const cap = (s) => (s ? String(s).charAt(0).toUpperCase() + String(s).slice(1) : s);
 
 /**
  * CustomItemAttributes — the post-creation "detail sheet" for a saved custom
@@ -34,14 +35,15 @@ export function CustomItemAttributes({ item }) {
   if (item.economicWeight) chips.push({ label: keyLabel(ECONOMIC_WEIGHT, item.economicWeight), color: '#1a5a28' });
   if (item.foodImpact) chips.push({ label: `Food · ${item.foodImpact}`, color: '#7a5010' });
   if (item.satisfies) chips.push({ label: `Trade category · ${keyLabel(TRADE_CATEGORIES, item.satisfies) || item.satisfies}`, color: '#7c3aed' });
-  if (item.alignmentAxis) chips.push({ label: `Alignment · ${keyLabel(DEITY_ALIGNMENT, item.alignmentAxis)}`, color: '#7a5a1a' });
-  if (item.temperamentAxis) chips.push({ label: `Temperament · ${keyLabel(DEITY_TEMPER, item.temperamentAxis)}`, color: '#7a5a1a' });
-  if (item.rankAxis) chips.push({ label: `Rank · ${keyLabel(DEITY_TIER, item.rankAxis).split(':')[0]}`, color: '#7a5a1a' });
-  if (item.lawAxis) chips.push({ label: `Law · ${keyLabel(DEITY_LAW, item.lawAxis).split(':')[0]}`, color: '#7a5a1a' });
-  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5a1a' });
   if (item.archetype) chips.push({ label: `Archetype · ${item.archetype}`, color: '#6a1a4a' });
   if (item.scale) chips.push({ label: `Scale · ${item.scale}`, color: '#6a1a4a' });
   if (item.severity) chips.push({ label: `Severity · ${item.severity}`, color: '#8b1a1a' });
+  // Deity axes — moral / order / rank / domain (never the derived temper). Use
+  // the compact capitalized key, not the verbose enum label.
+  if (item.alignmentAxis) chips.push({ label: `Moral · ${cap(item.alignmentAxis)}`, color: '#7c3aed' });
+  if (item.lawAxis && item.lawAxis !== 'neutral') chips.push({ label: `Order · ${cap(item.lawAxis)}`, color: '#7c3aed' });
+  if (item.rankAxis) chips.push({ label: `Rank · ${cap(item.rankAxis)}`, color: '#435463' });
+  if (item.domain) chips.push({ label: `Domain · ${item.domain}`, color: '#7a5010' });
   if (item.tierMin || item.tierMax) chips.push({ label: `Tiers · ${item.tierMin || 'any'}–${item.tierMax || '∞'}`, color: '#6b5340' });
   if (!chips.length) return null;
   return (

@@ -137,6 +137,42 @@
   }
 }
 
+/* ── The dossier prose initial (2-line, self-sufficient) ──────────────────────
+   The manuscript grammar on the dossier's FLOWING PROSE surfaces only (the
+   Overview narrative band, the DM Summary lede) — NEVER a data register. Unlike
+   .oc-dropcap above (the .oc-surface entry: 3 lines, role-var toned) these
+   paragraphs sit OUTSIDE an .oc-surface, so this reads the :root ink ramp
+   directly and needs no surface context. Two lines suits the dossier's compact
+   prose. Tone is per-ground via --oc-dropcap-ink (the dark --oc-entry default
+   for parchment; a dark umber band passes the light --oc-field-entry inline).
+   Upright even inside italic prose; initial-letter with the float fallback. */
+.oc-dropcap-prose::first-letter {
+  -webkit-initial-letter: 2;
+  initial-letter: 2;
+  font-family: 'Lora', 'Crimson Text', Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: var(--oc-dropcap-ink, var(--oc-entry));
+  margin-right: 0.09em;
+}
+@supports not (initial-letter: 2) {
+  .oc-dropcap-prose::first-letter {
+    float: left; font-size: 2.4em; line-height: 0.8; padding: 0.02em 0.1em 0 0; margin-right: 0;
+    color: var(--oc-dropcap-ink, var(--oc-entry)); font-weight: 700; font-style: normal;
+    font-family: 'Lora', 'Crimson Text', Georgia, serif;
+  }
+}
+/* Narrow panes: the initial steps down to normal so a short prose block on a
+   phone-width pane isn't dominated by one glyph (graceful degradation). */
+@media (max-width: 520px) {
+  .oc-dropcap-prose::first-letter { -webkit-initial-letter: 1; initial-letter: 1; }
+}
+@supports not (initial-letter: 1) {
+  @media (max-width: 520px) {
+    .oc-dropcap-prose::first-letter { float: none; font-size: 1.5em; line-height: inherit; padding: 0; }
+  }
+}
+
 /* ── Rules — the family's block rhythm (SVG comes from Rule.jsx / rules.js) ────*/
 .oc-rule { display: block; width: 100%; }
 .oc-rule--hairline { margin: var(--oc-space-sm) 0; }
@@ -168,7 +204,141 @@
   font-size: var(--oc-type-uiM); color: var(--oc-ink-secondary); letter-spacing: 0.02em;
 }
 
-/* Reduced motion: the organic layer has no motion, but honour the intent. */
+/* ── THE MATERIAL LAYER — pre-baked paper grain (Deep Craft, foundation 1) ────
+   Opt-in alpha-overlay tooth on grounds. The tiles are pre-baked seeded noise
+   (scripts/gen-paper-grain.mjs; runtime feTurbulence is BANNED — law §8) at
+   ≤4.5% peak opacity, so every ink token keeps its contrast headroom (law §6).
+   The URL only fetches when a matching element actually renders — no .oc-grain
+   on a first-paint surface means zero first-paint bytes. .oc-field subtrees
+   swap to the dim fiber tile automatically. */
+.oc-grain { background-image: url('/textures/paper-grain-light.png'); background-repeat: repeat; }
+.oc-field .oc-grain,
+.oc-grain--dim { background-image: url('/textures/paper-grain-dim.png'); }
+
+/* ── THE MOTION GRAMMAR — twelve behaviors, paper physics only ────────────────
+   (Deep Craft, foundation 2; tokens in design/organic/motion.js → --oc-motion-*
+   / --oc-ease-* via organicVars.css.) The vocabulary is CLOSED: these twelve,
+   nothing else. No bounce, no spring, no generic fade; keyframes animate
+   TRANSFORM/OPACITY ONLY (compositor-cheap — pinned by organicMotion.test.js);
+   hover ink-darken transitions color-family properties in place (small paint,
+   no continuous work). Reduced-motion collapses every behavior to its instant
+   end state at the foot of this file. */
+
+/* 1 · lay-down — page arrival: the document lands and settles. */
+.oc-m-laydown { animation: oc-laydown var(--oc-motion-lay) var(--oc-ease-settle) both; }
+@keyframes oc-laydown {
+  from { opacity: 0; transform: translateY(-10px) rotate(-0.3deg) scale(1.004); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* 2 · unfold — a folded leaf opens from its crease (top edge). */
+.oc-m-unfold { animation: oc-unfold var(--oc-motion-settle) var(--oc-ease-settle) both; transform-origin: top center; }
+@keyframes oc-unfold {
+  from { opacity: 0; transform: scaleY(0.94); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* 3 · rule-draw — a rule draws itself once, left to right (first paint). */
+.oc-m-ruledraw { animation: oc-ruledraw var(--oc-motion-lay) var(--oc-ease-ink) both; transform-origin: left center; }
+@keyframes oc-ruledraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* 4 · ink-darken — hover: ink darkens in place. NEVER lift, NEVER shadow. */
+.oc-m-inkdarken { transition: color var(--oc-motion-ink) var(--oc-ease-ink), background-color var(--oc-motion-ink) var(--oc-ease-ink), border-color var(--oc-motion-ink) var(--oc-ease-ink), text-decoration-color var(--oc-motion-ink) var(--oc-ease-ink), opacity var(--oc-motion-ink) var(--oc-ease-ink); }
+
+/* 5 · press — the instrument gives under the finger. */
+.oc-m-press { transition: transform var(--oc-motion-press) var(--oc-ease-press); }
+.oc-m-press:active { transform: translateY(1px) scale(0.985); }
+
+/* 6 · slip-in — a slip slid onto the desk edge (toasts, notes). */
+.oc-m-slipin { animation: oc-slipin var(--oc-motion-settle) var(--oc-ease-settle) both; }
+@keyframes oc-slipin {
+  from { opacity: 0; transform: translateX(14px) rotate(0.4deg); }
+  to   { opacity: 1; transform: translateX(0) rotate(0deg); }
+}
+
+/* 7 · page-turn — the almanac leaf pivots at its binding. */
+.oc-m-pageturn { animation: oc-pageturn var(--oc-motion-lay) var(--oc-ease-settle) both; transform-origin: left center; }
+@keyframes oc-pageturn {
+  from { opacity: 0; transform: perspective(1200px) rotateY(-14deg); }
+  to   { opacity: 1; transform: perspective(1200px) rotateY(0deg); }
+}
+
+/* 8 · impress — the seal arrives with weight, sets, and is done (plays once). */
+.oc-m-impress { animation: oc-impress var(--oc-motion-lay) var(--oc-ease-settle) both; }
+@keyframes oc-impress {
+  from { opacity: 0; transform: scale(1.12); }
+  60%  { opacity: 1; transform: scale(0.985); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* 9 · ink-pulse — one breath of ink acknowledges a change (medallions). */
+.oc-m-inkpulse { animation: oc-inkpulse var(--oc-motion-lay) var(--oc-ease-ink) both; }
+@keyframes oc-inkpulse {
+  from { opacity: 1; }
+  45%  { opacity: 0.55; }
+  to   { opacity: 1; }
+}
+
+/* 10 · warm-dim — the room dims warm behind a modal plate; the overlay's color
+   is mixed from the deep ink token (in-palette by construction). */
+.oc-m-warmdim { background-color: color-mix(in srgb, var(--oc-ink-deepest) 58%, transparent); animation: oc-warmdim var(--oc-motion-settle) var(--oc-ease-ink) both; }
+@keyframes oc-warmdim {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* 11 · draft-settle — an AI draft settles onto the desk, tentative until stamped. */
+.oc-m-draftsettle { animation: oc-draftsettle var(--oc-motion-settle) var(--oc-ease-settle) both; }
+@keyframes oc-draftsettle {
+  from { opacity: 0; transform: translateY(6px) rotate(0.25deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
+
+/* 12 · tally-strike — the line struck through: done, counted. The host gets
+   position; the stroke is a drawn ::after, left to right. */
+.oc-m-tallystrike { position: relative; }
+.oc-m-tallystrike::after {
+  content: ''; position: absolute; left: -0.1em; right: -0.1em; top: 50%;
+  height: 0.08em; background: currentColor; transform-origin: left center;
+  animation: oc-ruledraw var(--oc-motion-strike) var(--oc-ease-ink) both;
+}
+
+/* ── THE ARRIVAL — hero H1 (docs/DESIGN_DEEP_CRAFT_PAGES.md, phase 0d spec) ────
+   Forge → dossier delivered as a document laid down. The orchestration class
+   goes on the dossier's mount wrapper: the wrapper LAYS DOWN, then each
+   top-level block of the document UNFOLDS on a token-derived stagger (half the
+   ink beat per rank — no literal durations, ever). Content is fully in the DOM
+   at t=0; blocks beyond rank 12 arrive together in the final rank, so the last
+   block begins ≤ (ink/2)×13 = 1,170ms and settles ≤ 1,590ms — under the 2s law
+   at any block count. Reduced-motion: the document is simply present (below). */
+.oc-arrival { animation: oc-laydown var(--oc-motion-lay) var(--oc-ease-settle) both; }
+.oc-arrival > div > * {
+  animation: oc-unfold var(--oc-motion-settle) var(--oc-ease-settle) both;
+  animation-delay: calc(var(--oc-motion-ink) * var(--oc-arrival-i, 13) / 2);
+}
+.oc-arrival > div > *:nth-child(1)  { --oc-arrival-i: 2; }
+.oc-arrival > div > *:nth-child(2)  { --oc-arrival-i: 3; }
+.oc-arrival > div > *:nth-child(3)  { --oc-arrival-i: 4; }
+.oc-arrival > div > *:nth-child(4)  { --oc-arrival-i: 5; }
+.oc-arrival > div > *:nth-child(5)  { --oc-arrival-i: 6; }
+.oc-arrival > div > *:nth-child(6)  { --oc-arrival-i: 7; }
+.oc-arrival > div > *:nth-child(7)  { --oc-arrival-i: 8; }
+.oc-arrival > div > *:nth-child(8)  { --oc-arrival-i: 9; }
+.oc-arrival > div > *:nth-child(9)  { --oc-arrival-i: 10; }
+.oc-arrival > div > *:nth-child(10) { --oc-arrival-i: 11; }
+.oc-arrival > div > *:nth-child(11) { --oc-arrival-i: 12; }
+
+/* Reduced motion: every behavior collapses to its instant end state; the
+   organic layer honours the intent globally, not only inside .oc-surface. */
 @media (prefers-reduced-motion: reduce) {
   .oc-surface * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  [class*='oc-m-'], [class*='oc-m-']::after, [class*='oc-m-']::before,
+  .oc-arrival, .oc-arrival > div > * {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
 }

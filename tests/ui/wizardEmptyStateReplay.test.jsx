@@ -48,4 +48,22 @@ describe('WizardEmptyState mounts RegionWakeReplay', () => {
     await new Promise(r => setTimeout(r, 20));
     expect(queryByTestId('region-wake-replay')).toBeNull();
   });
+
+  // C1r-c2: WizardEmptyState renders the replay as a half-scale miniature
+  // (`compact`). The miniature shrinks type and padding, but MUST keep every
+  // scrubber control at the >=44px touch-target floor — the a11y guard that ruled
+  // out a pure CSS-scale wrapper. This locks that the compact path never scales a
+  // hit target below the floor.
+  test('compact miniature keeps every scrubber control at the 44px touch floor', async () => {
+    storeState = { auth: { tier: 'anon' }, settlement: null };
+    const { findByTestId, container } = render(<WizardEmptyState {...baseProps} />);
+    await findByTestId('region-wake-replay');
+    const buttons = container.querySelectorAll(
+      '[data-testid="region-wake-replay"] button'
+    );
+    expect(buttons.length).toBeGreaterThan(0);
+    for (const b of buttons) {
+      expect(parseInt(b.style.minHeight, 10)).toBeGreaterThanOrEqual(44);
+    }
+  });
 });

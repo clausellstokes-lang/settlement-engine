@@ -6,7 +6,7 @@
  * Placed settlements show a "placed" badge and are visually muted.
  */
 
-import { useMemo, useState } from 'react';
+import { lazy, Suspense, useMemo, useState } from 'react';
 import { MapPin, Search, GripVertical, PlusCircle } from 'lucide-react';
 import { useStore } from '../../store';
 import { formatCount } from '../../domain/formatNumber.js';
@@ -14,6 +14,17 @@ import { BODY, GOLD, GOLD_BG, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HD
 import Button from '../primitives/Button.jsx';
 import CampaignEmptyState from './CampaignEmptyState.jsx';
 import { threatDisplay } from './settlementThreat.js';
+
+// S2r re-home (C5): InstantWorldEntry — the premium one-click realm composer —
+// was orphaned when the owner's create-page walk fix unmounted its only card
+// (WizardEmptyState). Its natural host is the Realm empty state: it COMPOSES a
+// realm, so the no-campaign moment is exactly where "build a whole realm at
+// once" belongs. Mounted subordinate to the Create/Select CTA, never the page's
+// gold (Advance owns that, and Advance only renders once a campaign is active,
+// so the two golds never co-occur). Lazy so the heavy composer never enters the
+// palette chunk — the realm-surfaces-lazy law holds; the desktop gate means it
+// is never reached on a phone, so isMobile is pinned false.
+const InstantWorldEntry = lazy(() => import('../instant/InstantWorldEntry.jsx'));
 
 export default function SettlementPalette({
   saves = [], placements = {}, activeCampaign, onNavigate,
@@ -109,6 +120,14 @@ export default function SettlementPalette({
           }}>
             A campaign holds your map and its living world. Only canon settlements drop onto the map.
           </div>
+          {/* S2r re-home (C5): the premium one-click realm composer, subordinate
+              to the Create/Select CTA above it. Self-gates on premium (a
+              non-premium reach fires the pricing moment); lazy, so the composer
+              never enters the palette chunk. isMobile is pinned false — the Realm
+              is desktop-gated, so this sidebar never renders on a phone. */}
+          <Suspense fallback={null}>
+            <InstantWorldEntry isMobile={false} onNavigate={onNavigate} />
+          </Suspense>
         </div>
       )}
 

@@ -30,7 +30,12 @@ import { tl } from '../copy/landing.js';
 // the only first-paint work on the landing surface (spec §8).
 const LandingBelowFold = lazy(() => import('./home/LandingBelowFold.jsx'));
 
-const HERO_SCENE = "url('/backgrounds/landing/village-1400.jpg')";
+// C2 THE FILM RULING: the hero sits over STILL-0, the desk (the growth film's
+// origin frame), not the old village scene — the journey begins at the desk and
+// the film scrubs desk → thorp on the first travel leg below. This eager still is
+// also the hero's LCP paint (law #3: the hero paints over the optimized still-0
+// image); the lazy film backdrop mounts behind and aligns on it at scroll top.
+const HERO_SCENE = "url('/media/journey-legs/bg/still-0-desk.jpg')";
 
 // Respect reduced motion for the "follow the road" smooth scroll.
 function prefersReducedMotion() {
@@ -66,6 +71,10 @@ export default function HomeLanding({ isMobile, signedIn, onNavigate, onSignIn }
         className="sf-landing-hero"
         style={{
           '--sf-scene': HERO_SCENE,
+          // Lift the hero above the fixed film backdrop (zIndex 0, mounted in the
+          // lazy below-fold): the hero owns its own eager still-0 paint (LCP), the
+          // backdrop only shows through the transparent travel legs below.
+          position: 'relative', zIndex: 1,
           display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
           textAlign: 'center', padding: isMobile ? `${SP.xxl * 2}px ${SP.lg}px ${SP.xxl}px` : '72px 24px 48px',
         }}

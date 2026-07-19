@@ -32,9 +32,11 @@ vi.mock('../../src/lib/aiAnalyst.js', () => ({
 
 import AiAnalystPanel from '../../src/components/AiAnalystPanel.jsx';
 
+// RETARGET (C13, THE ONE DOOR): the panel's self-owned launcher is retired — the
+// SurveyorDoor routes here and controls `open`. The two-voices contract this file
+// pins is unchanged; only the opening scaffolding moved to the controlled prop.
 function openAndAsk() {
-  render(<AiAnalystPanel />);
-  fireEvent.click(screen.getByRole('button', { name: /open the campaign analyst/i }));
+  render(<AiAnalystPanel open />);
   fireEvent.change(screen.getByLabelText(/your question for the campaign analyst/i), {
     target: { value: 'who rules the region?' },
   });

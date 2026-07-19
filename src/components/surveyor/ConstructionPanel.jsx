@@ -18,7 +18,7 @@ import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
-import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea } from './surveyorPanelKit.jsx';
+import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
 const SCOPE_OPTIONS = [{ id: 'settlement', label: 'Settlement' }, { id: 'realm', label: 'Realm' }];
 const DIMENSION_LABEL = {
@@ -30,13 +30,13 @@ const MAX_REVISE_ROUNDS = 2;
 const costFor = (scope) => getSurveyorAiCost(scope === 'realm' ? 'constructRealm' : 'constructSettlement');
 const newSeed = () => `surveyor-${Math.random().toString(36).slice(2, 10)}`;
 
-export default function ConstructionPanel() {
+export default function ConstructionPanel({ initialPrompt = '', initialScope }) {
   const { creditBalance, ctx } = useSurveyorContext();
   const instantWorld = useStore((s) => s.instantWorld);
   const setActiveSaveId = useStore((s) => s.setActiveSaveId);
 
-  const [scope, setScope] = useState('settlement');
-  const [intent, setIntent] = useState('');
+  const [scope, setScope] = useState(initialScope === 'realm' ? 'realm' : 'settlement');
+  const [intent, setIntent] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [seed, setSeed] = useState('');
   const [round, setRound] = useState(0);
@@ -169,6 +169,7 @@ export default function ConstructionPanel() {
       {config && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
           <Eyebrow>Config draft{round > 0 ? ` · revise pass ${round}` : ''}</Eyebrow>
+          <ProposalSlipLine />
           <div data-testid="construct-config" style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             {configKeys.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>No registered config keys were emitted.</p>}
             {configKeys.map((k) => (
@@ -246,7 +247,7 @@ export default function ConstructionPanel() {
             <span style={{ fontSize: FS.xs, color: MUTED, fontFamily: sans }}>Revise budget spent — commit as-is or refine your prompt.</span>
           )}
 
-          <Button variant="aiSolid" size="sm" busy={committing} disabled={committing} onClick={commit}>
+          <Button variant="primary" size="sm" busy={committing} disabled={committing} onClick={commit}>
             {scope === 'realm' ? 'Place the realm' : 'Create the settlement'}
           </Button>
           {committed && (

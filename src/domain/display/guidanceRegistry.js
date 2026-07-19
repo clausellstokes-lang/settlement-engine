@@ -54,7 +54,7 @@ export const GUIDANCE_BUDGET_CLASSES = Object.freeze(['teaching', 'wayfinding', 
  *  wave; its guidance dispositions register in a later, map-coordinated pass. */
 export const GUIDANCE_SURFACES = Object.freeze([
   'dossier',        // the generated-dossier top band (FirstDossierCallouts)
-  'wizard-postgen', // the post-generate what's-next guide (WizardNextSteps)
+  'wizard-postgen', // the post-generate what's-next coach (PostGenCoach)
   'home',           // the signed-in home hero (WelcomeBackCard)
   'config',         // inline config-field help (HelpPopover)
   // ── W-GUIDE-2: empty-states-as-invitations (§8). Each empty seam becomes a
@@ -165,7 +165,13 @@ export const GUIDANCE_WHISPERS = Object.freeze([
     component: 'FirstDossierCallouts',
   }),
 
-  // ── Post-generate what's-next (WizardNextSteps, re-registered inventory). ──
+  // ── Post-generate what's-next (PostGenCoach, the C4 component swap). The one
+  //    wizard-postgen whisper is now HOSTED by the revived PostGenCoach coach
+  //    (the standalone WizardNextSteps card it replaced is deleted). Still ONE
+  //    whisper on the surface — the swap changed the renderer, not the budget.
+  //    The read/watch/save teaching stays consolidated on the DOSSIER band
+  //    (the postgen_* whispers above); the coach carries only the forward
+  //    "what's next" moves, so the swap does not duplicate teaching. ──────────
   whisper({
     id: 'wizard_next_steps',
     surface: 'wizard-postgen',
@@ -179,7 +185,7 @@ export const GUIDANCE_WHISPERS = Object.freeze([
     newbornOnly: false,
     body: 'guidance.wizardNextSteps',
     budgetClass: 'wayfinding',
-    component: 'WizardNextSteps',
+    component: 'PostGenCoach',
   }),
 
   // ── Return-visit resume (WelcomeBackCard, re-registered inventory). ───────
@@ -307,9 +313,11 @@ export const GUIDANCE_WHISPERS = Object.freeze([
  * instructional component is registered OR on this list (both directions).
  *
  * Seeded from the §1 census MINUS the components W-GUIDE-1 registers
- * (FirstDossierCallouts, WizardNextSteps, WelcomeBackCard, HelpPopover) and MINUS
- * the retired PostGenCoach (deleted, not legacy). Map-pane instructional
- * components stay here until the map-coordinated pass.
+ * (FirstDossierCallouts, WelcomeBackCard, HelpPopover) and the wizard-postgen
+ * host. C4 revived that host as PostGenCoach (a registered whisper host, not
+ * legacy) and DELETED the standalone WizardNextSteps card it replaced — so
+ * neither is on this ledger. Map-pane instructional components stay here until
+ * the map-coordinated pass.
  *
  * W-GUIDE-2 §8 burned down two: SampleDashboard + CampaignEmptyState are now
  * registered (the empty-states-as-invitations sweep), so they move OFF this
@@ -345,7 +353,8 @@ export const LEGACY_GUIDANCE_CEILING = LEGACY_GUIDANCE_COMPONENTS.length;
 // W-R2-SURFACE-2 (content-immersion-r2-3) BURNED THIS DOWN TO EMPTY: every host is
 // now wired through the unified sf:guidance dismissal (lib/guidance) with its body
 // rendered or its dismissal unified — RealmVerbComposer + RealmDocket mount the
-// once-dead mechanism whispers; WizardNextSteps migrated off its legacy key; the
+// once-dead mechanism whispers; the wizard-postgen host (C4: PostGenCoach) rides the
+// unified sf:guidance:wizard_next_steps dismissal; the
 // four empty-invitation hosts (WelcomeBackCard, SampleDashboard, GalleryList,
 // CampaignEmptyState) reference + dismiss their whispers. The walker is now FULLY
 // STRICT: every whisper must render via its host — nothing hides here.

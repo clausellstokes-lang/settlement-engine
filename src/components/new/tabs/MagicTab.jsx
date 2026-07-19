@@ -12,7 +12,7 @@
 
 import { deriveMagicPosture } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
-import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, VIOLET, VIOLET_BG, sans, SP, R } from '../../theme.js';
+import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, SLATE_BG, sans, SP, R } from '../../theme.js';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -31,7 +31,7 @@ function Facet({ label, value }) {
       gap: SP.sm, padding: `${SP.xs}px 0`, borderBottom: `1px solid ${BORDER}`,
     }}>
       <span style={{ fontSize: FS.sm, fontWeight: 600, color: INK }}>{label}</span>
-      <span style={{ fontSize: FS.sm, fontWeight: 800, color: VIOLET, textTransform: 'capitalize' }}>{value}</span>
+      <span style={{ fontSize: FS.sm, fontWeight: 800, color: SLATE, textTransform: 'capitalize' }}>{value}</span>
     </div>
   );
 }
@@ -95,10 +95,10 @@ export default function MagicTab({ settlement }) {
           {/* Deity ⇄ magic-legality coupling (self-gates to nothing without a major deity). */}
           {magicCoupling.length > 0 && (
             <div data-testid="magic-deity-coupling" style={{
-              background: VIOLET_BG, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${VIOLET}`,
+              background: SLATE_BG, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
               borderRadius: R.md, padding: `${SP.sm}px ${SP.md}px`,
             }}>
-              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: VIOLET, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
+              <div style={{ fontSize: FS.xxs, fontWeight: 800, color: SLATE, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>
                 Deity &amp; magic
               </div>
               {magicCoupling.map((line, i) => (

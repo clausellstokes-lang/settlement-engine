@@ -7,11 +7,11 @@
  * state, no store, no side effects.
  */
 import {
-  GOLD, BLUE, GREEN, AMBER, VIOLET, RED,
+  GOLD, BLUE, GREEN, AMBER, SLATE, RED,
 } from '../theme.js';
 
 // Series/category palette (cycled). 'other' bucket uses MUTED.
-export const PALETTE = [GOLD, BLUE, GREEN, AMBER, VIOLET, RED, '#0E7C7B', '#9B5DE5'];
+export const PALETTE = [GOLD, BLUE, GREEN, AMBER, SLATE, RED, '#0E7C7B', '#9B5DE5'];
 
 // ── formatting helpers ───────────────────────────────────────────────────────
 export const NF = new Intl.NumberFormat('en-US');

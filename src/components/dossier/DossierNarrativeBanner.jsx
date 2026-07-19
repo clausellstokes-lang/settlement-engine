@@ -44,12 +44,12 @@ export default function DossierNarrativeBanner({
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#7B4FCF'] }}>{'\u2726'}</span>
+                <span style={{ fontSize: FS.md, flexShrink: 0, marginTop: 2, color: swatch['#5A6E82'] }}>{'\u2726'}</span>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   {/* One label vocabulary across every narrative-layer shell (the
                       action strip, this banner, the per-tab note): "Narrative
                       Layer" in one violet treatment. */}
-                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#7B4FCF'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+                  <div style={{ fontSize: FS.xs, fontWeight: 800, color: swatch['#5A6E82'], textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
                     Narrative Layer
                   </div>
                   {showThesis

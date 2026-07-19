@@ -13,8 +13,6 @@ import { Activity } from 'lucide-react';
 import { clampAliveness } from '../../lib/galleryAliveness.js';
 import { BORDER2, CARD_ALT, GREEN, INK, sans, FS } from '../theme.js';
 
-const PILL = 999; // the pill radius idiom (design/tokens.js)
-
 export default function AlivenessBadge({ score, size = 'sm' }) {
   // THE shared null-safe clamp: an un-stamped share (null) renders NOTHING —
   // unknown is not zero (Number(null) would coerce to 0).
@@ -31,7 +29,6 @@ export default function AlivenessBadge({ score, size = 'sm' }) {
         display: 'inline-flex', alignItems: 'center', gap: 4,
         padding: compact ? '2px 8px' : '4px 10px',
         border: `1px solid ${BORDER2}`,
-        borderRadius: PILL,
         background: CARD_ALT,
         color: accent,
         fontFamily: sans,

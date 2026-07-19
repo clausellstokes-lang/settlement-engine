@@ -27,12 +27,20 @@ import { GOLD, INK, BORDER, sans, serif_, FS, SP, R, swatch, BODY, MUTED, CHROME
 import useIsMobile from '../../hooks/useIsMobile.js';
 import Button from '../primitives/Button.jsx';
 
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 
 // Reasons that want the violet (Cartographer / Founder upgrade) accent
 // rather than the gold (tier-unlock / signup) accent. Anything not in
 // this set uses gold.
-const VIOLET_REASONS = new Set([
+//
+// This same set ALSO partitions the click destination, so the eyebrow,
+// label, accent, and action all agree on one mental model (P8/P11): a
+// violet reason is an UPGRADE moment → it opens the purchase/upgrade modal;
+// a gold reason is a SIGNUP/UNLOCK moment fired at an anonymous user (its
+// body copy literally says "Sign in (free)…") → it opens the auth modal.
+// The previous build sent every reason to the purchase modal, so the gold
+// "Sign in to unlock" CTA landed an anonymous user in a buy-credits wall.
+const SLATE_REASONS = new Set([
   'third_save',
   'regen_burst',
   'map_clicked',
@@ -48,6 +56,10 @@ export default function PricingMomentCard() {
   const activeMoment = useStore(s => s.activePricingMoment);
   const clearMoment = useStore(s => s.clearActivePricingMoment);
   const setPurchaseModalOpen = useStore(s => s.setPurchaseModalOpen);
+  // Signup/unlock moments fire at anonymous users — their honest destination is
+  // sign-in, not the buy-credits modal (restoration #16; lifted onto uiSlice so
+  // this app-wide nudge can reach it).
+  const setAuthModalOpen = useStore(s => s.setAuthModalOpen);
   const [exiting, setExiting] = useState(false);
 
   // Pre-declare handlers via useCallback so the auto-dismiss effect can
@@ -61,6 +73,12 @@ export default function PricingMomentCard() {
   }, [clearMoment]);
 
   const reason = activeMoment?.reason;
+  // One source of truth for the moment's intent — drives accent, eyebrow, label,
+  // AND the click destination so they cannot drift apart (P8/P11). A violet
+  // reason upgrades (purchase modal); a gold reason is a signup/unlock prompt for
+  // an anon user (auth modal).
+  const isUpgrade = SLATE_REASONS.has(reason);
+
   const handleDismiss = useCallback(() => {
     Funnel.track(EVENTS.PRICING_MOMENT_DISMISSED, { reason });
     handleExit();
@@ -68,9 +86,12 @@ export default function PricingMomentCard() {
 
   const handleClick = useCallback(() => {
     Funnel.track(EVENTS.PRICING_MOMENT_CLICKED, { reason });
-    setPurchaseModalOpen?.(true);
+    // Route to the destination the eyebrow + label promise: upgrade moments open
+    // the purchase modal; signup/unlock moments open sign-in (never the buy-wall).
+    if (isUpgrade) setPurchaseModalOpen?.(true);
+    else setAuthModalOpen?.(true);
     handleExit();
-  }, [reason, setPurchaseModalOpen, handleExit]);
+  }, [reason, isUpgrade, setPurchaseModalOpen, setAuthModalOpen, handleExit]);
 
   // Auto-dismiss after 30s if the user doesn't interact. Critique X-2:
   // moments are doors, not walls — they don't hold the screen.
@@ -83,8 +104,7 @@ export default function PricingMomentCard() {
   if (!activeMoment) return null;
 
   const { headline, body } = activeMoment;
-  const isViolet = VIOLET_REASONS.has(reason);
-  const accent = isViolet ? VIOLET : GOLD;
+  const accent = isUpgrade ? SLATE : GOLD;
 
   return (
     <div
@@ -120,7 +140,7 @@ export default function PricingMomentCard() {
         textTransform: 'uppercase', color: accent,
         marginBottom: 6,
       }}>
-        {isViolet ? 'Cartographer' : 'Upgrade'}
+        {isUpgrade ? 'Cartographer' : 'Upgrade'}
       </div>
       <div style={{
         fontFamily: serif_, fontSize: FS.lg, fontWeight: 600,
@@ -140,7 +160,7 @@ export default function PricingMomentCard() {
           onClick={handleClick}
           style={{ background: accent, color: swatch.white, border: `1px solid ${accent}` }}
         >
-          {isViolet ? 'See Cartographer' : 'Sign in to unlock'}
+          {isUpgrade ? 'See Cartographer' : 'Sign in to unlock'}
         </Button>
         <Button
           variant="ghost"

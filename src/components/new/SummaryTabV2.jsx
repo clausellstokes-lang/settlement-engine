@@ -40,7 +40,7 @@ const PARCH = swatch['#FBF5E6'];
 const BORDER = swatch['#E8D9B0'];
 
 const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const AMBER = swatch['#D08020'];
 const RED = swatch['#A23434'];
 
@@ -50,7 +50,7 @@ const sans = '"Nunito", system-ui, sans-serif';
 const KIND_ACCENT = {
   NPC:   GREEN,
   HOOK:  AMBER,
-  TWIST: VIOLET,
+  TWIST: SLATE,
   RED:   RED,
 };
 
@@ -171,7 +171,7 @@ export default function SummaryTabV2({ settlement, onOpenTableView }) {
             The town in 4 sentences
           </div>
 
-          <p style={{
+          <p className="oc-dropcap-prose" style={{
             margin: '8px 0 0',
             fontFamily: serif, fontSize: FS['14.5'],
             color: INK_DEEP, lineHeight: 1.65,

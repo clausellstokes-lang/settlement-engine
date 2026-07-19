@@ -18,7 +18,7 @@
 
 import { useState, useSyncExternalStore } from 'react';
 import { X } from 'lucide-react';
-import { FS, swatch, GOLD, PARCH, VIOLET, VIOLET_BG, BODY } from '../theme.js';
+import { FS, swatch, GOLD, PARCH, SLATE, SLATE_BG, BODY } from '../theme.js';
 import { FLAGS, flag, setFlagOverride } from '../../lib/flags.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -166,8 +166,8 @@ export default function DevFlagPanel() {
                   {name}
                   {overridden && (
                     <span title="Override set (clear to use default)" style={{
-                      fontSize: FS.micro, fontWeight: 700, color: VIOLET,
-                      background: VIOLET_BG, border: '1px solid #7B4FCF',
+                      fontSize: FS.micro, fontWeight: 700, color: SLATE,
+                      background: SLATE_BG, border: '1px solid #5A6E82',
                       borderRadius: 3, padding: '0 4px', letterSpacing: '0.04em',
                     }}>
                       OVERRIDE

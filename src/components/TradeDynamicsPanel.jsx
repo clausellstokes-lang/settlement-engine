@@ -61,7 +61,7 @@ function GoodCard({ good, state, onCycle }) {
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'baseline', gap:6, flexWrap:'wrap'}}>
           <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{good.name}</span>
-          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, borderRadius:3, padding:'0 4px'}}>{cc.label}</span>}
+          {cc.label && <span style={{fontSize:FS.xxs, fontWeight:700, color:cc.text, background:cc.bg, padding:'0 4px'}}>{cc.label}</span>}
           {good.requiredInstitution && <span style={{fontSize:FS.xxs, color:MUTED, fontStyle:'italic'}}>needs {good.requiredInstitution}</span>}
         </div>
         {good.desc && <p style={{fontSize:FS.xs, color:SECOND, lineHeight:1.3, marginTop:1, marginBottom:0}}>{good.desc}</p>}
@@ -82,12 +82,12 @@ function SectionHeader({ label, forced, allowed, _total, isOpen, onToggle }) {
     }}>
       <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
         <span style={{fontSize:FS.sm, fontWeight:700, color:INK, fontFamily:"'Crimson Text', Georgia, serif"}}>{label}</span>
-        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>}
+        {forced>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>}
       </span>
-      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>}
+      {forced===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>}
       {forced>0 && <>
-        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], borderRadius:3, padding:'1px 5px'}}>{allowed} allowed</span>
-        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, borderRadius:3, padding:'1px 5px'}}>{forced} forced</span>
+        <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowed} allowed</span>
+        <span style={{fontSize:FS.micro, fontWeight:700, color:GOLD, background:`${GOLD}20`, padding:'1px 5px'}}>{forced} forced</span>
       </>}
       <span style={{fontSize:FS.xxs, color:MUTED, marginLeft:4}}>{isOpen ? '▲' : '▼'}</span>
     </button>
@@ -198,15 +198,13 @@ function GoodsPanel() {
   );
 }
 
+// TradeDynamicsPanel mounts inside LayeredConfigurationPanel's Deep-constraints
+// Disclosure, which already supplies the "Trade Dynamics" title, collapse
+// affordance, and the wizard_step_viewed funnel fire. The component's own outer
+// collapsible was a redundant disclosure-inside-disclosure (box-soup); it (and
+// its leftover "Step 4" linear-wizard label and dead icon slot) is removed so
+// there is exactly one disclosure layer. GoodsPanel renders directly. (Restores
+// master's flattening — base of record; the double-disclosure was the merge regression.)
 export default function TradeDynamicsPanel() {
-  const [open, setOpen] = useState(false);
-  return (
-    <div style={{border:`1px solid ${BORDER}`, borderRadius:8}}>
-      <button type="button" onClick={()=>setOpen(v=>!v)} style={{width:'100%', display:'flex', alignItems:'center', gap:8, padding:'10px 14px', background:swatch['#F5EDE0'], border:'none', cursor:'pointer', textAlign:'left', borderBottom:open?'1px solid #e0d0b0':'none', fontFamily:sans}}>
-        <span style={{fontFamily:'Crimson Text, Georgia, serif', fontSize: FS['16'], fontWeight:600, color:INK, flex:1}}>Step 4: Trade Dynamics</span>
-        <span style={{fontSize:FS.xs, color:MUTED, fontWeight:500}}>{open ? 'Collapse' : 'Configure Trade'}</span>
-      </button>
-      {open && <GoodsPanel />}
-    </div>
-  );
+  return <GoodsPanel />;
 }

@@ -87,7 +87,10 @@ describe('no raw tier-fact literal on the conversion surfaces', () => {
     // W-R2-TRUST (components-shell-commerce-3): the two post-purchase conversion
     // surfaces a buyer reads seconds after paying $2.99.
     'src/components/SingleDossierSuccessPage.jsx',
-    'src/components/generate/WizardNextSteps.jsx',
+    // C4: the post-generate state-aware save-framing copy moved out of the
+    // deleted WizardNextSteps card into its pure builder (nextSteps.js), which
+    // PostGenCoach renders — so the stale-tier-fact guard follows the copy here.
+    'src/components/generate/nextSteps.js',
   ];
 
   // The exact stale claims that drifted (findings -1/-3/-4). These are specific

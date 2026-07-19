@@ -22,12 +22,16 @@ import { X } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { CREDIT_COSTS } from '../store/creditsSlice.js';
 import { t } from '../copy/index.js';
-import { INK, MUTED, SECOND, BORDER, CARD, sans, FS, ELEV, swatch } from './theme.js';
+import { INK, MUTED, SECOND, BORDER, CARD, CARD_HDR, GOLD, GOLD_DEEP, sans, FS } from './theme.js';
 import IconButton from './primitives/IconButton.jsx';
 import useDialogFocusTrap from './primitives/useDialogFocusTrap.js';
 
-const PURPLE = swatch['#6A2A9A'];
-const PURPLE_BG = 'rgba(90,42,138,0.08)';
+// THE INSTRUMENT PLATE (Deep Craft — the dossier's modal-as-plate voice): the
+// stale-narrative notice reads as a rule-framed plate over the warm-dim modal
+// ground, not a shadowed rounded card in the SaaS AI-violet. Print has no z-axis —
+// the plate edge is a rule, never elevation. The primary "Regenerate" action wears
+// the house gold primary (ink-on-gold, contrast-PINNED); the violet AI-brand wash
+// is retired for the parchment header band.
 
 export default function StaleNarrativeModal({
   open,
@@ -67,8 +71,7 @@ export default function StaleNarrativeModal({
         aria-label={t('staleNarrative.heading')}
         tabIndex={-1}
         style={{
-          background: CARD, border: `1px solid ${BORDER}`, borderRadius: 10,
-          boxShadow: ELEV[3],
+          background: CARD, border: `1px solid ${BORDER}`,
           maxWidth: 480, width: '100%',
           overflow: 'hidden',
         }}
@@ -76,7 +79,7 @@ export default function StaleNarrativeModal({
         {/* Header */}
         <div style={{
           padding: '14px 18px',
-          background: `linear-gradient(135deg, ${PURPLE_BG}, rgba(90,42,138,0.02))`,
+          background: CARD_HDR,
           borderBottom: `1px solid ${BORDER}`,
           display: 'flex', alignItems: 'center', gap: 10,
         }}>
@@ -115,10 +118,10 @@ export default function StaleNarrativeModal({
             aria-label={t('staleNarrative.regenerateTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
-              padding: '10px 12px', borderRadius: 6,
-              background: `linear-gradient(135deg, ${PURPLE}, #4a1a7a)`,
-              border: `1px solid rgba(160,100,220,0.55)`,
-              color: swatch['#F0D8FF'], fontFamily: sans,
+              padding: '10px 12px',
+              background: GOLD,
+              border: `1px solid ${GOLD_DEEP}`,
+              color: INK, fontFamily: sans,
               cursor: 'pointer', textAlign: 'left',
             }}
           >
@@ -138,7 +141,7 @@ export default function StaleNarrativeModal({
             aria-label={t('staleNarrative.continueTitle')}
             style={{
               display: 'flex', alignItems: 'center', gap: 10,
-              padding: '10px 12px', borderRadius: 6,
+              padding: '10px 12px',
               background: CARD,
               border: `1px solid ${BORDER}`,
               color: SECOND, fontFamily: sans,

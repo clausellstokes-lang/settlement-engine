@@ -20,8 +20,6 @@ import Button from '../primitives/Button.jsx';
 import { BORDER2, CARD, GOLD_TXT, INK, sans, FS, SP } from '../theme.js';
 
 const SUMMARY_LIMIT = 3;
-// The pill radius idiom (design/tokens.js uses 999 for pill-shaped controls).
-const PILL = 999;
 
 /** Interactive dossier chip row. `state` = { counts, mine } (sanitizeReactionState). */
 export default function GalleryReactionChips({ state, onReact, busyKey = null, itemId = null }) {
@@ -43,7 +41,6 @@ export default function GalleryReactionChips({ state, onReact, busyKey = null, i
             aria-label={`${pressed ? 'Remove reaction' : 'React'}: ${label}${count ? ` (${count})` : ''}`}
             disabled={busy}
             busy={busy}
-            style={{ borderRadius: PILL }}
             onClick={event => {
               event.stopPropagation();
               onReact?.(key);
@@ -78,7 +75,6 @@ export function GalleryReactionSummary({ counts }) {
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '2px 8px',
             border: `1px solid ${BORDER2}`,
-            borderRadius: PILL,
             background: CARD,
             color: INK,
             fontFamily: sans, fontSize: FS.xxs, fontWeight: 700,

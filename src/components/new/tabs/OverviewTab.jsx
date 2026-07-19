@@ -8,6 +8,7 @@ import {deriveFoodBalance} from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
+import Button from '../../primitives/Button.jsx';
 
 // ── Module-scope helper components ─────────────────────────────────────
 // React Hooks plugin v7 flags components defined inside render functions
@@ -43,9 +44,8 @@ function StatusTag({ label, value, _color, accent }) {
   );
 }
 
-export function OverviewTab({ settlement:r, narrativeNote}) {
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab}) {
   const [instOpen, setInstOpen] = useState(false);
-  const [spatialOpen, setSpatialOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   if (!r) return null;
 
@@ -200,7 +200,7 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
 
       {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
       {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,borderRadius:8,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.arrivalScene&&<p style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
+        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:FS.md,color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
         {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
         {r.pressureSentence&&<p style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
       </div>}
@@ -219,7 +219,10 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',borderRadius:7,padding:'9px 13px',marginBottom:14}}>
         <div style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:4}}>Notable Connection</div>
         <p style={{fontSize: FS['12.5'],...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
-        <p style={{fontSize:FS.xxs,color:MUTED,margin:'5px 0 0'}}>→ Full relationship web in the Relationships tab.</p>
+        {/* Actionable cross-tab jump — restored from the composite's static text
+            reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
+            navigation control). Falls back to nothing when no navigator is wired. */}
+        {onNavigateTab&&<div style={{marginTop:5}}><Button variant="ghost" size="sm" onClick={()=>onNavigateTab('relationships')} style={{padding:'2px 6px'}}>Full relationship web →</Button></div>}
       </div>}
 
       {/* ── RESOURCE CONTEXT (terrain strengths) ─────────────────────────── */}
@@ -242,28 +245,25 @@ export function OverviewTab({ settlement:r, narrativeNote}) {
         </div>
       </Section>}
 
-      {/* ── SPATIAL LAYOUT ────────────────────────────────────────────────── */}
-      {r.spatialLayout?.quarters?.length>0&&<div style={{border:'1px solid #c8d8b0',borderRadius:8,overflow:'hidden',marginBottom:14}}>
-        <button type="button" onClick={()=>setSpatialOpen(v=>!v)} aria-label={spatialOpen?'Collapse spatial layout':'Expand spatial layout'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'9px 13px',background:spatialOpen?'#edf5e8':'#f4faf0',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
-          <div style={{display:'flex',alignItems:'center',gap:8}}>
-            <span style={{fontSize:FS.xs,fontWeight:700,color:swatch['#1A4A2A'],textTransform:'uppercase',letterSpacing:'0.06em'}}>Spatial Layout</span>
-            <span style={{fontSize:FS.xs,color:MUTED}}>{r.spatialLayout.quarters.length} quarters</span>
-          </div>
-          <span style={{fontSize:FS.xs,color:MUTED}}>{spatialOpen?'▲':'▼'}</span>
-        </button>
-        {spatialOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #c8d8b0'}}>
-          {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
-          <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
-            {r.spatialLayout.quarters.map((q,i)=>(
-              <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',borderRadius:6,padding:'8px 10px'}}>
-                <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
-                <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
-                {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
-              </div>
-            ))}
-          </div>
-        </div>}
-      </div>}
+      {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
+          Routed through the shared Section primitive so its header reads at the
+          same serif altitude as Systems Health / Tensions / Geography and the
+          layer-cake scan has one consistent top-level collapsible level (P6) —
+          restored from the composite's bespoke green sub-collapsible per THE
+          BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
+          in with Geography). Inner quarter cards keep the composite's craft. */}
+      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} quarters)`} collapsible defaultOpen={false} accent="#1a5a28">
+        {r.spatialLayout.layout&&<p style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
+        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
+          {r.spatialLayout.quarters.map((q,i)=>(
+            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',borderRadius:6,padding:'8px 10px'}}>
+              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
+              <p style={{fontSize:FS.xs,color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
+              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:FS.xxs,color:MUTED,margin:'3px 0 0'}}>• {lm}</p>)}
+            </div>
+          ))}
+        </div>
+      </Section>}
 
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>

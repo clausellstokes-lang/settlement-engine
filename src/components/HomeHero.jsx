@@ -2,26 +2,24 @@
  * HomeHero.jsx — Landing hero with two variants.
  *
  * Variants:
- *   1. Anonymous — marketing eyebrow + headline + anti-AI positioning
- *      + size picker (hamlet / village / town — the anon TIER_GATE
- *      ceiling) + Begin CTA. Drives the funnel from cold visitor
- *      through first dossier.
+ *   1. Anonymous — anti-AI headline (GA, heroV2 inlined) + THE GAUGE
+ *      (scale-rule size picker, hamlet / village / town — the anon TIER_GATE
+ *      ceiling) + Begin CTA. Drives the funnel from cold visitor through first
+ *      dossier.
  *   2. Signed-in — "Welcome back" header + instant generation across
  *      all six tiers (thorp → metropolis). No marketing text, no
  *      anti-AI line — the user is converted; they just need to roll.
- *      The bottom of the card surfaces the legacy Quick/Advanced
- *      modes as "Want full control?" affordances.
+ *      The Basic/Advanced mode picker below the hero carries "want full control".
  *
- * Both variants share:
- *   - SizeButton primitive
- *   - handleBegin() generator + analytics + anon cap accounting
- *   - The parchment gold gradient + ornament
+ * Both variants share THE GAUGE, handleBegin() (generator + analytics + anon
+ * cap accounting), and the flat parchment plate (Deep Craft materials bridge).
  *
- * Flag:
- *   `homepageAnonGen` (default on). When off, the hero never mounts.
+ * Base of record: master's remediated composition (LANDING_MAX frame, inlined
+ * heroV2, P10 first-click failure surface, registry-routed copy). The gauge and
+ * the flat plate are the Deep Craft craft layer that sits on top.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
@@ -29,12 +27,13 @@ import {
   anonAtCap, anonGensRemaining, DEFAULT_DAILY_CAP,
 } from '../lib/anonGenCounter.js';
 import { Funnel } from '../lib/analytics.js';
-import { flag } from '../lib/flags.js';
 import WelcomeBackCard from './home/WelcomeBackCard.jsx';
 import AnonTierTeaser from './AnonTierTeaser.jsx';
 import Button from './primitives/Button.jsx';
-import { GOLD, INK, BODY, BORDER, sans, serif_, SP, R, FS, GOLD_DEEP, swatch } from './theme.js';
+import { ClerkNote } from './generate/ClerkNote.jsx';
+import { GOLD, INK, BODY, BORDER, sans, serif_, SP, FS, GOLD_DEEP, GOLD_TXT, LANDING_MAX } from './theme.js';
 import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
+import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
 // Sizes per audience. Anonymous gets the Wanderer-tier ceiling
 // (TIER_GATE.anon.maxTier === 'town'); signed-in users get the full
@@ -42,36 +41,67 @@ import { TIER_FACTS, SINGLE_DOSSIER_PRICE } from '../config/tierFacts.js';
 const ANON_SIZES = ['hamlet', 'village', 'town'];
 const ALL_SIZES  = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 
-function SizeButton({ value, label, hint, active, onClick, compact = false }) {
+// ── THE GAUGE (Deep Craft cluster 1) ─────────────────────────────────────────
+// One scale-rule strip replaces the size cards: the viewer's entitled stations
+// on a single drawn rule, the chosen size ink-filled. Figures derive from
+// data/constants POPULATION_RANGES (already in the eager data chunk — zero new
+// closure modules) and set in old-style numerals; the top tier renders
+// open-ended (min+). Every station stays a real <button data-settlement-size>
+// (the e2e flows' locator contract).
+//
+// OWNER LAW (veto on cluster 1a): the anonymous gauge renders ONLY the anon
+// entitlement (hamlet / village / town) — the strip maps `sizes`, NOT the full
+// TIER_ORDER, so capped stations are ABSENT for anon (not merely faint). The
+// six-station ladder shows solely for signed-in viewers, where every station is
+// enabled.
+
+/** Old-style population figure for a size token: "8–60", top tier "25,001+". */
+function popFigure(size) {
+  const r = POPULATION_RANGES[size];
+  if (!r) return '';
+  const fmt = (n) => n.toLocaleString('en-US');
+  const isTop = TIER_ORDER[TIER_ORDER.length - 1] === size;
+  return isTop ? `${fmt(r.min)}+` : `${fmt(r.min)}–${fmt(r.max)}`;
+}
+
+function GaugeStation({ value, label, active, onClick, onHover }) {
   return (
     <button
       type="button"
       data-settlement-size={value}
       onClick={() => onClick(value)}
+      onMouseEnter={() => onHover?.(value)}
       aria-pressed={active}
+      className="sf-gauge-station oc-m-inkdarken oc-m-press"
       style={{
-        flex: '1 1 0', minWidth: compact ? 92 : 120,
-        padding: compact ? `${SP.sm}px ${SP.sm}px` : `${SP.md}px ${SP.md}px`,
-        textAlign: 'left',
-        background: active ? 'rgba(201,162,76,0.10)' : '#fff',
-        border: `1.5px solid ${active ? GOLD : BORDER}`,
-        borderRadius: R.lg,
+        flex: '1 1 0', minWidth: 76, padding: `0 ${SP.xs}px ${SP.sm}px`,
+        background: 'transparent', border: 'none',
         cursor: 'pointer',
-        transition: 'border-color 0.15s, background 0.15s',
-        fontFamily: sans,
+        textAlign: 'center', fontFamily: sans,
       }}
     >
+      {/* The station marker sits ON the rule (pulled up over the strip's
+          drawn border). Filled = chosen; open = available. */}
+      <svg width="13" height="13" viewBox="0 0 13 13" aria-hidden="true" focusable="false"
+        style={{ display: 'block', margin: '-7px auto 4px' }}>
+        <circle cx="6.5" cy="6.5" r={active ? 5 : 3.5}
+          fill={active ? INK : '#FBF5E6'}
+          stroke={active ? INK : GOLD_DEEP}
+          strokeWidth={active ? 1 : 1.5} />
+      </svg>
       <div style={{
-        fontFamily: serif_, fontSize: compact ? FS.md : FS.lg, fontWeight: 600, color: INK,
-        marginBottom: 2,
+        fontFamily: serif_, fontSize: FS.md, fontWeight: active ? 700 : 500,
+        color: active ? INK : BODY, lineHeight: 1.2,
       }}>
         {label}
       </div>
-      {hint && (
-        <div style={{ fontSize: FS.xxs, color: BODY, lineHeight: 1.35 }}>
-          {hint}
-        </div>
-      )}
+      <div style={{
+        fontSize: FS.xxs, color: BODY, marginTop: 1,
+        fontVariantNumeric: 'oldstyle-nums', letterSpacing: '0.01em',
+        opacity: active ? 1 : 0.8,
+      }}>
+        {popFigure(value)}
+      </div>
     </button>
   );
 }
@@ -95,6 +125,31 @@ export default function HomeHero({ onSignIn, onNavigate }) {
 
   const [pickedSize, setPickedSize] = useState(defaultSize);
   const [generating, setGenerating] = useState(false);
+  // First-click failures must not be silent (P10). The catch below stores a
+  // plain-language message; a retry strip renders beneath the CTA pointing back
+  // at handleBegin — this is the most fragile point in the funnel.
+  const [beginError, setBeginError] = useState(null);
+  // THE STAGE BACKDROP (C1r-c3). The six evolution stills (one settlement, six
+  // ages — the MANIFEST ruling) render as a faint stage backdrop behind the
+  // gauge, keyed to the chosen station. INTERACTION-GATED: `stageLive` is false
+  // until the visitor first touches the gauge, so NO still is fetched before the
+  // hero's LCP (the funnel's hottest surface pays zero at first paint — the still
+  // loads only once the user has engaged). Hovering a station PREFETCHES its
+  // still (browser cache warm) so the pick is instant; the set dedupes so a
+  // station warms once. All of this rides HomeHero's lazy chunk (zero eager JS).
+  const [stageLive, setStageLive] = useState(false);
+  const prefetched = useRef(new Set());
+  const prefetchStage = (size) => {
+    if (typeof window === 'undefined') return;
+    if (prefetched.current.has(size)) return;
+    prefetched.current.add(size);
+    const img = new window.Image();
+    img.src = `/evolution/${size}.jpg`;
+  };
+  const pickStage = (size) => {
+    setPickedSize(size);
+    setStageLive(true);
+  };
   const atCap = anonAtCap();
   const remaining = anonGensRemaining();
 
@@ -110,6 +165,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
   const handleBegin = async () => {
     if (isAnon && atCap) return;
     if (generating) return;
+    setBeginError(null);
     setGenerating(true);
     try {
       // Signed-in users go to 'basic' (renamed from 'quick'); anon
@@ -129,6 +185,7 @@ export default function HomeHero({ onSignIn, onNavigate }) {
       }
     } catch (e) {
       console.error('[HomeHero] generate failed:', e);
+      setBeginError('Something went wrong forging your settlement. Try again.');
     } finally {
       setGenerating(false);
     }
@@ -151,87 +208,46 @@ export default function HomeHero({ onSignIn, onNavigate }) {
     <section
       aria-label={isAnon ? 'Anonymous settlement generator' : 'Welcome back. Instant generator'}
       style={{
-        maxWidth: 720, margin: `${SP.xl}px auto ${SP.xxl}px`,
+        // Deep Craft material: a FLAT parchment plate (hairline rule, no rounded
+        // corners or drop shadow) framed at LANDING_MAX (master's composition).
+        maxWidth: LANDING_MAX, margin: `${SP.xl}px auto ${SP.xxl}px`,
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: `linear-gradient(180deg, #FBF5E6 0%, #F4EAD0 100%)`,
         border: `1px solid ${BORDER}`,
-        borderRadius: R.xl + 2,
-        boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
         fontFamily: sans,
         textAlign: 'center',
       }}
     >
       {/* ── Header ────────────────────────────────────────────────────
           Two voices: marketing for anon, "Welcome back" for signed-in.
-          Anon carries the eyebrow + headline + anti-AI line; signed-in
-          gets a short greeting + a "Pick a size, hit Generate" prompt.
       */}
       {isAnon ? (
-        flag('heroV2') ? (
-          // P117 / H-1 — Two-voice hero rewrite. Anti-AI line as H1
-          // (worldbuilder hook); italic deck translates for the new DM
-          // ("the pieces explain each other"). Eyebrow + footer-signin +
-          // anti-AI quote block all removed — the H1 IS the anti-AI line.
-          <>
-            <h1 style={{
-              margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: FS['32'], color: INK, lineHeight: 1.15,
-              letterSpacing: '-0.005em',
-            }}>
-              {t('hero.v2.headline')}<br />
-              <em style={{ color: GOLD_DEEP }}>{t('hero.v2.headlineAccent')}</em>
-            </h1>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 520,
-              fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
-            }}>
-              {t('hero.v2.deck')}
-            </p>
-          </>
-        ) : (
-          <>
-            <div style={{
-              fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-              textTransform: 'uppercase', color: GOLD_DEEP,
-              marginBottom: SP.sm,
-            }}>
-              {t('hero.eyebrow')}
-            </div>
-            <h1 style={{
-              margin: 0, fontFamily: serif_, fontWeight: 600,
-              fontSize: FS['32'], color: INK, lineHeight: 1.15,
-            }}>
-              {t('hero.title')}
-            </h1>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 520,
-              fontFamily: serif_, fontStyle: 'italic',
-              fontSize: FS.lg, color: BODY, lineHeight: 1.55,
-            }}>
-              {t('hero.subtitle')}
-            </p>
-            <p style={{
-              margin: `${SP.md}px auto 0`, maxWidth: 480,
-              padding: `${SP.xs}px ${SP.md}px`,
-              borderLeft: `2px solid ${GOLD}`,
-              fontFamily: sans, fontSize: FS.sm, color: swatch['#5A4A2A'],
-              lineHeight: 1.5, textAlign: 'left',
-              fontStyle: 'italic',
-            }}>
-              {t('hero.antiAi')}
-            </p>
-          </>
-        )
-      ) : (
+        // Two-voice hero (GA — heroV2 promoted + inlined). Anti-AI line as H1
+        // (worldbuilder hook); italic deck translates for the new DM. The old
+        // eyebrow + separate anti-AI quote block were dropped: the H1 IS the anti-AI line.
         <>
-          <div style={{
-            fontSize: FS.xs, fontWeight: 700, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: GOLD_DEEP,
-            marginBottom: SP.sm,
+          <h1 style={{
+            margin: 0, fontFamily: serif_, fontWeight: 600,
+            fontSize: FS['32'], color: INK, lineHeight: 1.15,
+            letterSpacing: '-0.005em',
           }}>
-            Instant Generation
-          </div>
+            {t('hero.v2.headline')}<br />
+            <em style={{ color: GOLD_DEEP }}>{t('hero.v2.headlineAccent')}</em>
+          </h1>
+          <p style={{
+            margin: `${SP.md}px auto 0`, maxWidth: 520,
+            fontFamily: serif_, fontStyle: 'italic',
+            fontSize: FS.lg, color: BODY, lineHeight: 1.55,
+          }}>
+            {t('hero.v2.deck')}
+          </p>
+        </>
+      ) : (
+        // No eyebrow on the signed-in hero. WelcomeBackCard (when it mounts
+        // directly above) carries an eyebrow+serif-title pair; a matching
+        // eyebrow here would make two stacked cards read as co-equal focal
+        // points. Dropping it lets the hero H1 be the unambiguous squint winner.
+        <>
           <h1 style={{
             margin: 0, fontFamily: serif_, fontWeight: 600,
             fontSize: FS['28'], color: INK, lineHeight: 1.2,
@@ -243,77 +259,140 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             fontFamily: serif_, fontStyle: 'italic',
             fontSize: FS.md, color: BODY, lineHeight: 1.55,
           }}>
-            Pick a size. Roll a settlement. Full ladder unlocked.
+            Pick a size. Roll a settlement — instant generation, every size from thorp to metropolis.
           </p>
         </>
       )}
 
-      {/* ── Size picker ───────────────────────────────────────────────
-          Anon sees 3 buttons (hamlet/village/town); signed-in sees 6
-          (thorp through capital). Same primitive, more buttons.
+      {/* ── The double rule — the desk header closes, the instrument begins.
+          (Rule grammar: double = total/finality; pure CSS, zero JS.) */}
+      <div aria-hidden="true" style={{
+        maxWidth: 520, margin: `${SP.xl}px auto 0`, height: 5,
+        borderTop: `1px solid ${INK}`, borderBottom: `2px solid ${INK}`,
+        opacity: 0.55,
+      }} />
+
+      {/* ── THE GAUGE ─────────────────────────────────────────────────
+          One scale-rule strip. Anon renders ONLY its entitlement
+          (hamlet/village/town) per the owner law; signed-in renders the full
+          six-station ladder. The chosen station is ink-filled. Focus stays
+          perceivable without pointer state.
       */}
-      <div style={{
-        display: 'flex', gap: SP.sm, marginTop: SP.xl,
-        justifyContent: 'center', flexWrap: 'wrap',
-      }}>
-        {sizes.map(size => (
-          <SizeButton
-            key={size}
-            value={size}
-            label={t(`generate.sizes.${size}`)}
-            hint={isAnon ? t(`generate.sizeHint.${size}`) : null}
-            active={pickedSize === size}
-            onClick={setPickedSize}
-            compact={!isAnon}
+      <style>{`
+        .sf-gauge-station:focus-visible {
+          outline: 2px solid ${GOLD};
+          outline-offset: 2px;
+        }
+        /* THE STAGE BACKDROP (C1r-c3). Faint, sepia-toned, masked top+bottom so
+           it reads as a ground the strip sits ON, never a wash competing with the
+           ink stations (opacity 0.13 keeps the INK labels + population figures AA
+           on the parchment). Flat — no radius, shadow, or rgba. The still fades in
+           on first pick; under prefers-reduced-motion it is simply present. */
+        .sf-gauge-backdrop {
+          position: absolute;
+          top: -6px; left: -6px; right: -6px; bottom: -10px;
+          width: calc(100% + 12px); height: calc(100% + 16px);
+          object-fit: cover; object-position: center 45%;
+          pointer-events: none; z-index: 0;
+          opacity: 0.13;
+          filter: sepia(0.45) saturate(0.8);
+          -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%, #000 78%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 30%, #000 78%, transparent);
+          animation: sf-gauge-fade var(--oc-motion-settle) var(--oc-ease-settle) both;
+        }
+        @keyframes sf-gauge-fade { from { opacity: 0; } to { opacity: 0.13; } }
+        @media (prefers-reduced-motion: reduce) {
+          .sf-gauge-backdrop { animation: none; opacity: 0.13; }
+        }
+      `}</style>
+      <div style={{ position: 'relative', marginTop: SP.xl }}>
+        {/* The tier's evolution still, faint behind the strip. Rendered ONLY
+            after first interaction (stageLive) so first paint fetches nothing;
+            keyed by pickedSize so each pick re-mounts and fades the new age in
+            (static under reduced-motion — see the sf-gauge-backdrop rule below).
+            Decorative (empty alt, aria-hidden); the ink stations sit above it. */}
+        {stageLive && (
+          <img
+            key={pickedSize}
+            className="sf-gauge-backdrop"
+            src={`/evolution/${pickedSize}.jpg`}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
           />
-        ))}
+        )}
+        <div
+          role="group"
+          aria-label={t('generate.gauge.label')}
+          style={{
+            position: 'relative', zIndex: 1,
+            display: 'flex', alignItems: 'flex-start',
+            borderTop: `1px solid ${GOLD_DEEP}`,
+            paddingTop: 0, flexWrap: 'wrap',
+          }}
+        >
+          {sizes.map(size => (
+            <GaugeStation
+              key={size}
+              value={size}
+              label={t(`generate.sizes.${size}`)}
+              active={pickedSize === size}
+              onClick={pickStage}
+              onHover={prefetchStage}
+            />
+          ))}
+        </div>
       </div>
+      {/* One memo line: the chosen station's hint (the owner law caps visible
+          clerk's notes at one — the cap memo retired with the capped stations). */}
+      {isAnon && (
+        <p style={{
+          margin: `${SP.sm}px auto 0`, maxWidth: 480,
+          fontFamily: serif_, fontStyle: 'italic',
+          fontSize: FS.sm, color: BODY, lineHeight: 1.5,
+        }}>
+          {t(`generate.sizeHint.${pickedSize}`)}
+        </p>
+      )}
 
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>
         {isAnon && atCap ? (
-          // P113 / X-5 — Reframe the anon cap as an unlock, not a wall.
-          // Lead with what signin gets you, not with what you've used up.
-          // (The old "$2.99 buy this dossier" side-door was removed — it was a
-          // no-op CTA scrolling to an anchor that renders nowhere on home.)
+          // Reframe the anon cap as an unlock, not a wall. Plain centered block
+          // (no inner card — the section is already a bordered parchment surface,
+          // so a second identically-filled bordered card was a false boundary).
+          // Hierarchy leads with the UNLOCK VALUE and demotes the spent-allowance
+          // recap to a quiet subhead. Tier facts stay config-derived
+          // (TIER_FACTS/SINGLE_DOSSIER_PRICE) so they can never drift from the cap.
           <>
-          <div style={{
-            padding: SP.lg,
-              background: `linear-gradient(135deg, #FBF5E6, #F4EAD0)`,
-              border: `1px solid ${GOLD}`,
-              borderRadius: R.lg,
-              maxWidth: 460, margin: '0 auto', textAlign: 'center',
-            }}>
+            <div style={{ maxWidth: 460, margin: '0 auto', textAlign: 'center' }}>
+              <div style={{ fontSize: FS.xs, color: BODY, marginBottom: SP.sm }}>
+                {t('hero.anonCap.spent')}
+              </div>
               <div style={{
                 fontFamily: serif_, fontSize: FS['18'], fontWeight: 600,
-                color: INK, marginBottom: 6,
+                color: INK, lineHeight: 1.4,
               }}>
-                You’ve explored <em style={{ color: GOLD_DEEP }}>hamlet, village, town.</em>
-              </div>
-              <div style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.55 }}>
                 <b>Sign in (free)</b> to unlock thorp through metropolis and
                 save up to {TIER_FACTS.free.saveLimit} drafts. Keep any dossier&apos;s
                 PDF for {SINGLE_DOSSIER_PRICE}, or export freely with Cartographer.
               </div>
               <Button
+                type="button"
                 variant="primary"
                 size="lg"
-                onClick={onSignIn}
+                onClick={() => onSignIn?.()}
                 style={{ marginTop: SP.md }}
               >
                 Create free account →
               </Button>
-              {/* The "$2.99 buy this dossier" side-door was removed: it scrolled
-                  to a [data-buy-this-dossier] anchor that renders nowhere on the
-                  home surface (a no-op money CTA). A dead, paid control is the
-                  worst trust signal to this audience; the free-account path above
-                  is the one honest action here. */}
             </div>
             <AnonTierTeaser onSignIn={onSignIn} />
           </>
         ) : (
           <>
             <Button
+              type="button"
               variant="primary"
               size="lg"
               onClick={handleBegin}
@@ -324,12 +403,20 @@ export default function HomeHero({ onSignIn, onNavigate }) {
             >
               {generating
                 ? 'Forging…'
-                : flag('heroV2') && isAnon
+                : isAnon
                   ? t('hero.v2.ctaTemplate', { tier: t(`generate.sizes.${pickedSize}`).toLowerCase() })
-                  : isAnon
-                    ? t('hero.cta')
-                    : `Forge a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
+                  : `Generate a ${t(`generate.sizes.${pickedSize}`).toLowerCase()}`}
             </Button>
+            {/* Plain-language failure surface (P10). The Deep Craft clerk's-note
+                idiom (no tinted wash, role=alert passed through); the CTA above IS
+                the retry. First-click failures are the most fragile funnel point. */}
+            {beginError && (
+              <div style={{ marginTop: SP.sm, textAlign: 'left' }}>
+                <ClerkNote role="alert" rubric={t('generate.notes.errorRubric')}>
+                  {beginError}
+                </ClerkNote>
+              </div>
+            )}
             {isAnon && (
               <p style={{
                 margin: `${SP.sm}px auto 0`, fontSize: FS.xs, color: BODY,
@@ -356,19 +443,22 @@ export default function HomeHero({ onSignIn, onNavigate }) {
           {onSignIn && (
             <>
               {' '}
-              <button
-                type="button"
+              {/* Inline link on the Button primitive (ghost) so HomeHero leaves
+                  the raw-button baseline; the gold-text underline + 44px target
+                  are preserved via style overrides. */}
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={onSignIn}
                 style={{
-                  background: 'none', border: 'none', padding: `0 ${SP.xs}px`,
-                  color: GOLD, fontFamily: 'inherit', fontSize: 'inherit',
-                  cursor: 'pointer', textDecoration: 'underline',
                   display: 'inline-flex', alignItems: 'center',
-                  minHeight: 44, minWidth: 44,
+                  padding: `0 ${SP.xs}px`, minHeight: 44, minWidth: 44,
+                  color: GOLD_TXT, fontFamily: 'inherit', fontSize: 'inherit',
+                  fontWeight: 'inherit', textDecoration: 'underline',
                 }}
               >
                 Sign in
-              </button>
+              </Button>
               .
             </>
           )}

@@ -53,13 +53,14 @@ export const CARD_ALT = L.CARD_ALT;
 export const CARD_HDR = L.CARD_HDR;
 
 // Flat aliases for dashed-key palette colors (P120 / V-2 color burn-down).
-export const VIOLET    = L.VIOLET;
-export const VIOLET_BG = L.VIOLET_BG;
-// VIOLET_DEEP / AMBER_DEEP — legible TEXT foregrounds for the violet/amber tint
-// surfaces (violet-500/amber-500 as text fail AA on their -100 tint). Values match
-// the reference tokens (violet-700 / amber-700); this is a token DEFINITION file,
-// exempt from no-raw-color.
-export const VIOLET_DEEP = '#6A3FBF'; // AI text on violet-100 (== color['violet-700'])
+export const SLATE    = L.SLATE;
+export const SLATE_BG = L.SLATE_BG;
+// SLATE_DEEP / AMBER_DEEP — legible TEXT foregrounds for the AI-slate/amber tint
+// surfaces (the -500 fills as text fail AA on their -100 tint). SLATE_DEEP
+// re-exports the reference token so THE SLATE CONVERSION (C13) has one value
+// source; this is a token DEFINITION file, exempt from no-raw-color.
+// (VIOLET*→SLATE* rename completed at fold batch 2, 2026-07-19 — no aliases.)
+export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate-700'])
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const RED       = L.RED;
 export const RED_BG    = L.RED_BG;
@@ -103,9 +104,13 @@ export const ELEV = L.ELEV;
 // Shared caps so pages stop inventing their own narrow columns. PAGE_MAX for
 // content/reference/marketing pages, PROSE_MAX for reading columns inside a
 // wide page, FORM_MAX for genuine forms (auth/success) that stay narrow.
-export const PAGE_MAX  = L.PAGE_MAX;
-export const PROSE_MAX = L.PROSE_MAX;
-export const FORM_MAX  = L.FORM_MAX;
+export const PAGE_MAX    = L.PAGE_MAX;
+export const PROSE_MAX   = L.PROSE_MAX;
+// LANDING_MAX — the compact landing/hero frame (narrower than PAGE_MAX). The
+// Create hero + empty-state column share it so the landing reads as one framed
+// composition rather than sprawling full-bleed (P12).
+export const LANDING_MAX = L.LANDING_MAX;
+export const FORM_MAX    = L.FORM_MAX;
 
 // ── Display fallbacks ────────────────────────────────────────────────────────
 // One source for "this fact is absent/unknown". Render this (an em-dash) instead

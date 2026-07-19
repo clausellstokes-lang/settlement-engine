@@ -64,7 +64,7 @@ export default function DossierActionBand({
     >
       {showNarrativePitch && (
         <div style={{ flex: 1, minWidth: 200 }}>
-          <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#7B4FCF'] }}>Narrative Layer</div>
+          <div style={{ fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.14em', textTransform: 'uppercase', color: swatch['#5A6E82'] }}>Narrative Layer</div>
           <div style={{ fontSize: FS.xs, color: swatch['#4A3B22'], marginTop: 2, lineHeight: 1.4 }}>Turns the simulated dossier into prose your players will hear at the table.</div>
         </div>
       )}

@@ -22,7 +22,7 @@
 import { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, SECOND, MUTED, BORDER, sans, SP, R, FS, GOLD_BG } from '../theme.js';
+import { GOLD, SECOND, MUTED, BORDER, sans, SP, FS } from '../theme.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { getTierDisplayName } from '../../config/pricing.js';
 import { flag } from '../../lib/flags.js';
@@ -220,19 +220,21 @@ export default function AuthPanel({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: SP.md }}>
       {showTabs && (
-        <div style={{ display: 'flex', borderRadius: R.md, overflow: 'hidden', border: `1px solid ${BORDER}` }}>
+        <div style={{ display: 'flex', overflow: 'hidden', border: `1px solid ${BORDER}` }}>
           {[['signin', 'Sign In'], ['signup', 'Create Account']].map(([id, label]) => (
-            // Bespoke segmented-control tab: flex:1 borderless square segments
-            // clipped by the parent's overflow:hidden, with a conditional gold
-            // active fill driven by `mode === id`. The Button primitive forces
-            // its own 1px border + R.lg rounding, which would break the seamless
-            // segmented look — so this stays raw (accessible via its text label).
+            // Bespoke segmented-control tab: flex:1 borderless square segments.
+            // The active station is marked by a DRAWN gold rule + gold ink (the
+            // nav idiom), never a tinted fill. The Button primitive forces its
+            // own border + rounding, which would break the seamless segmented
+            // look — so this stays raw (accessible via its text label).
             <button key={id} type="button" onClick={() => requestMode(id)}
               aria-pressed={mode === id}
               style={{
                 flex: 1, padding: `${SP.sm}px 0`,
-                background: mode === id ? GOLD_BG : 'transparent',
-                border: 'none', cursor: 'pointer',
+                background: 'transparent',
+                border: 'none',
+                borderBottom: mode === id ? `2px solid ${GOLD}` : '2px solid transparent',
+                cursor: 'pointer',
                 fontSize: FS.sm, fontWeight: mode === id ? 700 : 500,
                 color: mode === id ? GOLD : MUTED, fontFamily: sans,
                 // Mobile 44px tap floor (the primitive's floor doesn't reach this

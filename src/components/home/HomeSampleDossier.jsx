@@ -32,18 +32,18 @@ const GOLD = swatch['#C9A24C'];
 const MUTED = swatch['#9C8068'];
 const BORDER = swatch['#E8D9B0'];
 const GREEN = swatch['#4A7A3A'];
-const VIOLET = swatch['#7B4FCF'];
+const SLATE = swatch['#5A6E82'];
 const AMBER = swatch['#D08020'];
 const sans = '"Nunito", system-ui, sans-serif';
 const serif = '"Crimson Text", Georgia, serif';
 
 const CALLOUTS = [
   { key: 'newDm',         accent: GREEN,  bg: '#E2EEDB' },
-  { key: 'worldbuilder',  accent: VIOLET, bg: '#EBE2FA' },
+  { key: 'worldbuilder',  accent: SLATE, bg: '#E4E9EE' },
   { key: 'fridaysSession',accent: AMBER,  bg: '#FBEAD0', italic: true },
 ];
 
-export default function HomeSampleDossier() {
+export default function HomeSampleDossier({ compact = false }) {
   const tier = useStore(s => s.auth.tier);
   // F40: this card only reads `settlement` for TRUTHINESS (the self-gate). Now
   // that it mounts on /home for every anon cold visitor, subscribing to the
@@ -67,6 +67,17 @@ export default function HomeSampleDossier() {
   if (tier !== 'anon') return null;
   if (hasSettlement) return null;
 
+  // Miniature scale ("half-scale dossier plate") for the below-the-fold proof
+  // pair (C1r-c2). Presentational only — same fixture, self-gate, and analytics.
+  // The plate goes flat (rule-framed, no rounded corners or elevation) and
+  // narrows; the header type and paddings step down. This card is static, so
+  // there is no hit target to preserve.
+  const M = compact
+    ? { cardMax: 300, cardMargin: '0 auto 32px', headPad: '9px 12px',
+        nameFS: FS['13.5'], bodyPad: 11, bodyGap: 7, calloutPad: 8, footPad: '7px 12px 11px' }
+    : { cardMax: 480, cardMargin: '24px auto 56px', headPad: '12px 16px',
+        nameFS: FS['16'], bodyPad: 14, bodyGap: 10, calloutPad: 10, footPad: '8px 16px 14px' };
+
   const name = t('sampleDossier.header.name');
   const meta = t('sampleDossier.header.meta');
 
@@ -74,22 +85,22 @@ export default function HomeSampleDossier() {
     <section
       aria-label="Sample settlement dossier"
       style={{
-        maxWidth: 480, margin: '24px auto 56px',
+        maxWidth: M.cardMax, margin: M.cardMargin,
         background: swatch.white,
         border: `1px solid ${BORDER}`,
-        borderRadius: 8,
+        borderRadius: compact ? 0 : 8,
         overflow: 'hidden',
-        boxShadow: '0 6px 24px rgba(27,20,8,0.08)',
+        boxShadow: compact ? 'none' : '0 6px 24px rgba(27,20,8,0.08)',
         fontFamily: sans,
       }}
     >
       <header style={{
-        padding: '12px 16px',
+        padding: M.headPad,
         background: `linear-gradient(135deg, ${INK_DEEP}, ${INK})`,
         color: GOLD,
       }}>
         <div style={{
-          fontFamily: serif, fontSize: FS['16'], fontWeight: 600,
+          fontFamily: serif, fontSize: M.nameFS, fontWeight: 600,
         }}>
           {name}
           <span style={{
@@ -105,8 +116,8 @@ export default function HomeSampleDossier() {
       </header>
 
       <div style={{
-        padding: 14,
-        display: 'flex', flexDirection: 'column', gap: 10,
+        padding: M.bodyPad,
+        display: 'flex', flexDirection: 'column', gap: M.bodyGap,
       }}>
         {CALLOUTS.map(({ key, accent, bg, italic }) => {
           const eyebrow = t(`sampleDossier.callouts.${key}.eyebrow`);
@@ -115,11 +126,11 @@ export default function HomeSampleDossier() {
             <div
               key={key}
               style={{
-                padding: 10,
+                padding: M.calloutPad,
                 background: bg,
                 border: `1px solid ${accent}40`,
                 borderLeft: `3px solid ${accent}`,
-                borderRadius: 5,
+                borderRadius: compact ? 0 : 5,
               }}
             >
               <div style={{
@@ -143,7 +154,7 @@ export default function HomeSampleDossier() {
       </div>
 
       <footer style={{
-        padding: '8px 16px 14px',
+        padding: M.footPad,
         borderTop: `1px dashed ${BORDER}`,
         fontSize: FS.xs, color: MUTED,
         fontStyle: 'italic', textAlign: 'center',

@@ -20,13 +20,13 @@ import { useMemo, useState, useCallback } from 'react';
 import { Check, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, SLATE, sans, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import {
-  MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine,
+  MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine,
 } from './surveyorPanelKit.jsx';
 import {
   signalRegistryEntries, signalById,
@@ -117,7 +117,7 @@ function conditionFromRows(rows, combinator) {
   return { version: 1, root: { kind: combinator === 'all' ? 'all' : 'some', children: nodes } };
 }
 
-export default function AutonomyPanel() {
+export default function AutonomyPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx, activeCampaignId, activeCampaign, savedSettlements } = useSurveyorContext();
   const advanceCampaignWorld = useStore((s) => s.advanceCampaignWorld);
   const injectCampaignStressor = useStore((s) => s.injectCampaignStressor);
@@ -152,7 +152,7 @@ export default function AutonomyPanel() {
   const [maxWeeks, setMaxWeeks] = useState(4);
 
   // ── compose (the money moment) ─────────────────────────────────────────────
-  const [intent, setIntent] = useState('');
+  const [intent, setIntent] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const compose = useCallback(async () => {
@@ -275,10 +275,11 @@ export default function AutonomyPanel() {
       {nudges.length > 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xs }}>
           <Eyebrow>Proposed nudges — raise conditions, the simulator decides</Eyebrow>
+          <ProposalSlipLine />
           {nudges.map((n, i) => (
             <div key={i} data-testid={`autonomy-nudge-${i}`} style={{
               display: 'flex', alignItems: 'center', gap: SP.xs, flexWrap: 'wrap',
-              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : GOLD}`, borderRadius: R.md,
+              border: `1px solid ${nudgeDecisions[i] === 'discard' ? BORDER : nudgeDecisions[i] === 'approve' ? GOLD : SLATE}`, borderRadius: R.md,
               padding: SP.xs, background: nudgeDecisions[i] === 'discard' ? CARD_ALT : '#fff',
               opacity: nudgeDecisions[i] === 'discard' ? 0.6 : 1,
             }}>

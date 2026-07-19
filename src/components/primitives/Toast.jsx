@@ -1,5 +1,5 @@
 import {
-  BLUE, BLUE_BG, BORDER, ELEV, FS, GREEN, GREEN_BG, RED, RED_BG, R, SP,
+  BLUE, BLUE_BG, BORDER, FS, GREEN, GREEN_BG, RED, RED_BG, R, SP,
   sans,
 } from '../theme.js';
 
@@ -24,10 +24,16 @@ export default function Toast({ toast, position = 'bottom' }) {
     <div
       role={isError ? 'alert' : 'status'}
       aria-live={isError ? 'assertive' : 'polite'}
+      // The note slips onto the desk edge (organic motion #6 slip-in). Centering
+      // moves off transform (left/right:0 + margin auto) so the slip animation's
+      // transform is free; the visual position is unchanged, reduced-motion-safe.
+      className="oc-m-slipin"
       style={{
         position: 'fixed',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        left: 0,
+        right: 0,
+        marginInline: 'auto',
+        width: 'fit-content',
         ...vertical,
         zIndex: 260,
         maxWidth: 'min(92vw, 520px)',
@@ -39,7 +45,10 @@ export default function Toast({ toast, position = 'bottom' }) {
         fontFamily: sans,
         fontSize: FS.sm,
         fontWeight: 900,
-        boxShadow: ELEV[2],
+        // A slip is flat paper — no z-axis (organic craft §6). Kept as a
+        // value-swap so the tolerance-0 kill-list stays exact; a would-be
+        // burn-down deletion on the shadow ratchet.
+        boxShadow: 'none',
       }}
     >
       {toast.text}

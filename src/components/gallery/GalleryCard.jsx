@@ -17,7 +17,6 @@ import {
   SP,
   sans,
   serif_,
-  swatch,
 } from '../theme.js';
 import { formatDate, formatNumber, human, shareGalleryDossier } from './galleryUtils.js';
 import { sanitizeGalleryHtml } from '../../lib/sanitizeGalleryHtml.js';
@@ -53,16 +52,20 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
   ].filter(Boolean).slice(0, 5);
 
   return (
-    <article style={{
-      minWidth: 0,
-      overflow: 'hidden',
-      border: `1px solid ${item.curated ? GOLD : BORDER}`,
-      borderRadius: 8,
-      background: CARD,
-      boxShadow: item.curated ? '0 8px 22px rgba(201,162,76,0.18)' : '0 4px 14px rgba(27,20,8,0.08)',
-      display: 'flex',
-      flexDirection: 'column',
-    }}>
+    <article
+      className={`oc-m-inkdarken sf-gallery-card${item.curated ? ' sf-gallery-card--curated' : ''}`}
+      style={{
+        minWidth: 0,
+        overflow: 'hidden',
+        // The specimen plate: a hairline frame (law §3, "plates in hairline
+        // frames"), curated in gold — no rounded corner, no drop-shadow lift.
+        // Depth is ink, never elevation; the frame inks darker on hover.
+        border: `1px solid ${item.curated ? GOLD : BORDER}`,
+        background: CARD,
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <button
         type="button"
         onClick={() => onOpen(item.slug)}
@@ -85,9 +88,10 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
               gap: 4,
               minHeight: 24,
               padding: '3px 7px',
-              borderRadius: 999,
               background: GOLD,
-              color: swatch.white,
+              // Ink-on-gold, the house AA badge pairing (7.6:1) — the
+              // white-on-gold this carried was the retired 2.4:1 failure.
+              color: INK,
               fontFamily: sans,
               fontSize: FS.xxs,
               fontWeight: 950,
@@ -101,7 +105,6 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
                 gap: 3,
                 minHeight: 24,
                 padding: '3px 7px',
-                borderRadius: 999,
                 background: CARD,
                 color: GOLD,
                 border: `1px solid ${GOLD}`,
@@ -169,7 +172,6 @@ export default function GalleryCard({ item, onOpen, onVote, voting }) {
             <span key={`${tag}-${index}`} style={{
               display: 'inline-flex',
               padding: '2px 6px',
-              borderRadius: 5,
               border: `1px solid ${BORDER2}`,
               background: CARD_ALT,
               color: SECOND,

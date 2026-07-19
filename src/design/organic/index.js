@@ -15,6 +15,7 @@ import { INK, FIELD_INK } from './ink.js';
 import { RUBRIC, FIELD_RUBRIC } from './rubrication.js';
 import { INSTRUMENT, FIELD_INSTRUMENT } from './instruments.js';
 import { TYPE, SPACE } from './fluidScale.js';
+import { MOTION_DURATION, MOTION_EASE } from './motion.js';
 
 export * from './ink.js';
 export * from './rubrication.js';
@@ -22,6 +23,8 @@ export * from './instruments.js';
 export * from './fluidScale.js';
 export * from './posture.js';
 export * from './rules.js';
+export * from './material.js';
+export * from './motion.js';
 
 /**
  * The organic tokens as a flat { cssVarName: value } map — the single projection
@@ -42,6 +45,8 @@ export function organicCssVars() {
   for (const [k, v] of Object.entries(FIELD_INSTRUMENT)) vars[`--oc-field-btn-${k.toLowerCase()}`] = v;
   for (const [k, s] of Object.entries(TYPE)) vars[`--oc-type-${k}`] = s.clamp;
   for (const [k, s] of Object.entries(SPACE)) vars[`--oc-space-${k}`] = s.clamp;
+  for (const [k, v] of Object.entries(MOTION_DURATION)) vars[`--oc-motion-${k}`] = v;
+  for (const [k, v] of Object.entries(MOTION_EASE)) vars[`--oc-ease-${k}`] = v;
   return vars;
 }
 

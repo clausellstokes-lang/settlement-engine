@@ -13,12 +13,12 @@ import { useState, useCallback } from 'react';
 import { Check, Pencil, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, RED, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, RED, SLATE, sans, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
-import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine } from './surveyorPanelKit.jsx';
+import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ReceiptLine, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
 const cost = getSurveyorAiCost('interpret');
 const OP_LABEL_TONE = { required: 'gold', inferred: 'info', optional: 'muted', uncertain: 'warning' };
@@ -35,7 +35,7 @@ function OpCard({ op, index, decision, onDecide }) {
     <div
       data-testid={`op-${index}`}
       style={{
-        border: `1px solid ${action === 'reject' ? BORDER : GOLD}`, borderRadius: R.md, padding: SP.sm,
+        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : SLATE}`, borderRadius: R.md, padding: SP.sm,
         background: action === 'reject' ? CARD_ALT : '#fff', opacity: action === 'reject' ? 0.6 : 1,
         display: 'flex', flexDirection: 'column', gap: 6,
       }}
@@ -89,12 +89,12 @@ function OpCard({ op, index, decision, onDecide }) {
   );
 }
 
-export default function InterpretApplyPanel() {
+export default function InterpretApplyPanel({ initialPrompt = '' }) {
   const { creditBalance, ctx, activeCampaignId, activeSaveId } = useSurveyorContext();
   const applyEvent = useStore((s) => s.applyEvent);
   const recordPartyImpact = useStore((s) => s.recordPartyImpact);
 
-  const [sessionText, setSessionText] = useState('');
+  const [sessionText, setSessionText] = useState(initialPrompt);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null); // { interpretation, seed, interpretRef, musings, byok } | { error }
   const [decisions, setDecisions] = useState({});
@@ -165,12 +165,13 @@ export default function InterpretApplyPanel() {
       {interpretation && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
           <Eyebrow>Proposed ops · approve, edit, or reject each</Eyebrow>
+          <ProposalSlipLine />
           {ops.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>The Surveyor proposed no ops from this text.</p>}
           {ops.map((op, i) => (
             <OpCard key={i} op={op} index={i} decision={decisions[i]} onDecide={decide} />
           ))}
 
-          <Button variant="aiSolid" size="sm" busy={applying} disabled={!anyApproved || applying} onClick={applyAccepted}>
+          <Button variant="primary" size="sm" busy={applying} disabled={!anyApproved || applying} onClick={applyAccepted}>
             Apply accepted ops
           </Button>
 
