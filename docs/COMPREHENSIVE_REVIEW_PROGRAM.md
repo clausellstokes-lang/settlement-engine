@@ -1153,6 +1153,16 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐ THE WELCOME SCRUB: PLAUSIBLE → CONFIRMED (2026-07-19, manager-executed
+on the composite @ aad6265e).** Playwright drove a real Chromium through the
+full served journey (the preview-pane scroll-hang bypassed via the perf lane's
+driver): ALL SIX LEGS load in sequence · currentTime ADVANCES with scroll
+within every leg (leg-1 0→0.55→3.26s · leg-3 0→1.58→4.28 · leg-6 2.55→4.99) ·
+each boundary mounts the next leg at 0 · STOPS show video opacity 0 over the
+crisp still (the stills-floor law live) with EDGE FADES mid-transition (op
+0.13/0.61 sampled) · the journey ends FROZEN at the metropolis still. Three
+screenshots delivered to the owner. The mechanics claim is now CONFIRMED;
+only the human-hand FEEL (pacing taste) remains the walk's.
 **⬛⭐ THE PERF HARNESS BUILT + BASELINED (2026-07-19, claude/caliber-perf @
 f5e142e8, 2 commits) — the program's most-deferred item retired.** ZERO new
 dependencies (JUDGMENT: reused the e2e suite's existing Playwright + Chromium
