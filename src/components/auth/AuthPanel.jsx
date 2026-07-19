@@ -30,6 +30,7 @@ import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import ForgotPasswordFlow from './ForgotPasswordFlow.jsx';
+import CaptchaGate from '../perimeter/CaptchaGate.jsx';
 import {
   // `Button` here is the auth-page full-width CTA (its own prop API: always
   // width:100%, variants primary/success/danger/ghost) — kept under an alias so
@@ -68,6 +69,13 @@ export default function AuthPanel({
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [magicSent, setMagicSent] = useState(false); // email sign-in link dispatched
+  // Wave-D perimeter (INERT until the perimeterCaptcha flag + Turnstile keys are
+  // set): the human-verification token for the Supabase-native captcha on
+  // signInWithPassword / signUp. Stays null while the flag is off (CaptchaGate
+  // renders nothing), and the token rides as an ADDITIVE arg — so the flag-off
+  // path is byte-identical. Server enforcement is the owner's Supabase dashboard
+  // "Enable Captcha protection" toggle. See docs/PERIMETER_RUNBOOK.md.
+  const [captchaToken, setCaptchaToken] = useState(null);
   // The segmented Sign In / Create Account toggle is a RAW <button> (it can't be
   // the Button primitive without breaking the seamless borderless segments), so
   // it misses the primitive's mobile 44px tap floor — apply it inline on mobile.
@@ -115,7 +123,9 @@ export default function AuthPanel({
     setError(null);
     setLoading(true);
     try {
-      await authSignIn(email.trim(), password, rememberMe);
+      // captchaToken is undefined-safe: null while the perimeterCaptcha flag is
+      // off, so this call is byte-identical to before until the owner activates it.
+      await authSignIn(email.trim(), password, rememberMe, captchaToken || undefined);
       onAuthed?.();
     } catch (e) {
       setError(e.message || 'Sign-in failed');
@@ -133,7 +143,7 @@ export default function AuthPanel({
     setError(null);
     setLoading(true);
     try {
-      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password);
+      const { needsVerification, existingAccount } = await authSignUp(email.trim(), password, captchaToken || undefined);
       if (existingAccount) {
         // Supabase reports a signup for an already-registered email with empty
         // identities and no error / no email — the verify screen would never
@@ -268,6 +278,11 @@ export default function AuthPanel({
       {mode === 'signin' && (
         <Checkbox checked={rememberMe} onChange={setRememberMe} label={t('auth.rememberMe')} />
       )}
+
+      {/* Wave-D human verification (INERT until the perimeterCaptcha flag + keys
+          are set). Managed/invisible mode: silent for humans, so it does not add
+          a visible step to the form. Renders nothing while the flag is off. */}
+      <CaptchaGate action={mode === 'signup' ? 'signup' : 'signin'} onToken={setCaptchaToken} />
 
       <AuthCTAButton onClick={submit} disabled={loading}>
         {loading

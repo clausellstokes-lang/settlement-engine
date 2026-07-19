@@ -6,6 +6,12 @@ import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+// Wave-D human verification (INERT until TURNSTILE_SECRET_KEY is set). This is the
+// POST-PAYMENT verify step, so it is deliberately VERIFY-ONLY-IF-PRESENT: a paid
+// buyer must always be able to collect their PDF, so a missing/blocked token is
+// NEVER a block here — only a present-but-invalid token is rejected. Key-inert
+// while unconfigured. See docs/PERIMETER_RUNBOOK.md.
+import { verifyTurnstile } from '../_shared/verifyTurnstile.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -176,7 +182,7 @@ export async function handleVerifyDossier(
   if (guard.reject) return guard.reject;
 
   try {
-    const { sessionId, checkoutToken } = await req.json();
+    const { sessionId, checkoutToken, captchaToken } = await req.json();
     // Bound the length before the charset check: a real Stripe checkout session
     // id is well under 100 chars, so cap generously. Without this the
     // `[A-Za-z0-9]+` pattern would accept a multi-megabyte string and still
@@ -187,6 +193,22 @@ export async function handleVerifyDossier(
     }
     if (typeof checkoutToken !== 'string' || checkoutToken.length < 24 || checkoutToken.length > 128) {
       throw new Error('Invalid checkout token');
+    }
+
+    // Wave-D human verification, BEFORE the Stripe retrieve. VERIFY-ONLY-IF-PRESENT:
+    // this endpoint runs AFTER the buyer has already paid, so a missing/blocked token
+    // must never trap a paying customer — only a token that is present AND fails
+    // verification is rejected (catches a bot posting a garbage token). INERT while
+    // TURNSTILE_SECRET_KEY is unset (verifyTurnstile returns ok:true). The IP limiter
+    // + secret checkout-token match remain the real walls; captcha is defense-in-depth.
+    if (typeof captchaToken === 'string' && captchaToken) {
+      const turnstile = await verifyTurnstile(captchaToken, readRequestMeta(req).ip);
+      if (!turnstile.ok) {
+        return new Response(
+          JSON.stringify({ verified: false, error: 'We could not verify your request. Please try again.' }),
+          { status: 403, headers: { ...headers, 'Content-Type': 'application/json' } },
+        );
+      }
     }
 
     // Throttle BEFORE hitting Stripe (input validation above is free; the

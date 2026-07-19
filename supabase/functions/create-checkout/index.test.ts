@@ -574,3 +574,80 @@ Deno.test('a single_dossier WITHOUT a settlement still creates the session (clie
   assertEquals(admin.upserts.length, 0);    // nothing to stash server-side
   assertEquals(stripe.created.length, 1);   // checkout still proceeds
 });
+
+// ── Wave-D human verification (Turnstile) ─────────────────────────────────────
+// verifyTurnstile gates the session-creation door BEFORE any Stripe call. It is
+// INERT (a no-op, ok:true) until TURNSTILE_SECRET_KEY is set — so the money path
+// is byte-identical while unconfigured — and FAILS CLOSED (403) when active: a
+// missing/failed token shows the house-register error and never reaches Stripe.
+// verifyTurnstile itself is pinned in _shared/verifyTurnstile.test.ts; these pin
+// the create-checkout WIRING (inert byte-path, fail-closed, active happy path).
+
+/** Stub globalThis.fetch so a secret-configured verifyTurnstile resolves a known
+ *  siteverify verdict without touching the network. Returns a restore fn. */
+function stubFetch(success: boolean): () => void {
+  const original = globalThis.fetch;
+  // deno-lint-ignore no-explicit-any
+  globalThis.fetch = (() => Promise.resolve(new Response(JSON.stringify({ success }), { status: 200 }))) as any;
+  return () => { globalThis.fetch = original; };
+}
+
+Deno.test('INERT: a captchaToken in the body does not change the flow while unconfigured (byte-identical)', async () => {
+  Deno.env.delete('TURNSTILE_SECRET_KEY');
+  const stripe = makeStripe();
+  const res = await handleCreateCheckout(
+    req({ product: 'credits_25', captchaToken: 'anything' }, { Authorization: 'Bearer jwt' }),
+    { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+  );
+  assertEquals(res.status, 200);            // inert → the token is a no-op
+  assertEquals(stripe.created.length, 1);   // checkout proceeds exactly as before
+});
+
+Deno.test('ACTIVE + a MISSING token FAILS CLOSED (403) before any Stripe call', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25' }, { Authorization: 'Bearer jwt' }),   // no captchaToken
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stripe.created.length, 0);   // the door never opened
+  } finally {
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+Deno.test('ACTIVE + a VALID token proceeds (200) to Stripe', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(true);
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25', captchaToken: 'good-token' }, { Authorization: 'Bearer jwt' }),
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 200);
+    assertEquals(stripe.created.length, 1);
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});
+
+Deno.test('ACTIVE + a FAILED token is rejected (403) before Stripe', async () => {
+  Deno.env.set('TURNSTILE_SECRET_KEY', 'sk_test');
+  const restore = stubFetch(false);
+  try {
+    const stripe = makeStripe();
+    const res = await handleCreateCheckout(
+      req({ product: 'credits_25', captchaToken: 'bad-token' }, { Authorization: 'Bearer jwt' }),
+      { stripeClient: stripe.stripeClient, userClient: makeUserClient({ id: 'u1', email: 'u1@x.com' }), adminClient: makeAdminClient() },
+    );
+    assertEquals(res.status, 403);
+    assertEquals(stripe.created.length, 0);
+  } finally {
+    restore();
+    Deno.env.delete('TURNSTILE_SECRET_KEY');
+  }
+});

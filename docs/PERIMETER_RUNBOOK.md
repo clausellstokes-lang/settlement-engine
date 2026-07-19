@@ -50,39 +50,59 @@ incident; the code-level limits are the always-on baseline.
 
 ---
 
-## Turnstile human-verification — activation checklist (ships INERT)
+## Turnstile human-verification — activation checklist (CODE-COMPLETE; INERT until keyed)
 
-The seam is built and **off**. With `perimeterCaptcha` false and no keys, the
-widget is never imported (zero eager bytes), no `captchaToken` is sent, and the
-server helper `verifyTurnstile` returns `{ ok: true, enforced: false }` — so
-nothing changes for anyone. To activate:
+The seam is now **code-complete and wired end to end** (WD-h), and ships **off**.
+With `perimeterCaptcha` false and no keys, the widget is never imported (zero eager
+bytes beyond the ~20-line `CaptchaGate` wrapper), no `captchaToken` is sent, and the
+server helper `verifyTurnstile` returns `{ ok: true, enforced: false }` — so nothing
+changes for anyone. **Activation is now KEYS + DASHBOARD ONLY — no code steps
+remain.** What is already wired:
+
+- **Client widget** — `CaptchaGate` (flag-gated + lazy) renders the managed/invisible
+  `TurnstileGate` in `AuthPanel` (sign-in + sign-up — covers the modal and the
+  `/signin` · `/register` pages), `PurchaseModal` (credit packs / premium / founder),
+  `BuyThisDossier` (the anon **and** signed-in-durable dossier confirms), and
+  `SingleDossierSuccessPage` (the post-payment return). The container reserves a
+  ≥44px touch target and degrades to a null token on script-block/expiry (never a
+  dead-end).
+- **Client token threading** — `authSignIn` / `authSignUp` pass `captchaToken` into
+  Supabase-native `signInWithPassword` / `signUp` (additive); `startCheckout` and
+  `verifySingleDossierPurchase` carry it in the edge-function body (additive).
+- **Server verify** — `verifyTurnstile(token, ip)` runs **before any Stripe call** in
+  `create-checkout` (**fail-closed**: a missing/failed token returns the house-register
+  403 and never opens the session) and in `verify-single-dossier`
+  (**verify-only-if-present**: a post-payment step, so a missing/blocked token NEVER
+  blocks a paying buyer — only a present-but-invalid token is rejected).
+- **CSP** — `https://challenges.cloudflare.com` is already allowed in the app block's
+  `script-src` + `frame-src` (static, flag-independent, harmless while inert; the
+  `/map/` fork policy is deliberately untouched). Pinned in `cspHeaderShape.test.js`.
+
+To activate (keys + dashboard only):
 
 1. **Create a Turnstile widget** in the Cloudflare dashboard (managed mode). Note
    the **site key** (public) and **secret key** (private).
 2. **Client site key** — set `VITE_TURNSTILE_SITE_KEY=<site key>` in the build
    env (Vercel project env). Without it the widget renders nothing.
 3. **Flip the flag** — set `perimeterCaptcha` on (env `VITE_FLAG_PERIMETER_CAPTCHA=true`,
-   or `?flag.perimeterCaptcha=true` for a single-browser test). This makes the
-   auth/checkout surfaces lazily import + render the widget.
-4. **Auth flows (sign-in / sign-up / password reset):** the client already passes
-   `captchaToken` into Supabase's native captcha support (additive). Turn on
-   **Supabase Dashboard → Authentication → Settings → Enable Captcha protection**,
-   provider **Turnstile**, and paste the **secret key** there. *This dashboard
-   toggle is what actually enforces auth captcha* — the client token alone does
-   nothing until it is on.
-5. **Checkout flows (session creation):** set the edge-function secret
-   `TURNSTILE_SECRET_KEY=<secret key>` (`supabase secrets set`), then wire
-   `verifyTurnstile(token, ip)` into the checkout-session-creation functions
-   (`create-checkout`, `verify-single-dossier`) before the Stripe session is
-   created, returning a house-register error (never a stuck button) when
-   `ok === false`. The helper is inert until this secret is set.
-6. **CSP** — add `https://challenges.cloudflare.com` to `script-src` **and**
-   `frame-src` in `vercel.json` (both the app block and, if the widget can appear
-   there, keep the map block as-is). While inert this is deliberately NOT shipped.
-7. **Test:** with everything on, do a real sign-in, a sign-up, a password reset,
-   and a $2.99 dossier purchase (including the **anonymous** buy path). Confirm the
-   widget is invisible for a normal human and that a blocked/expired token shows
-   the house error idiom, not a dead-end.
+   or `?flag.perimeterCaptcha=true` for a single-browser test).
+4. **Auth flows (sign-in / sign-up):** turn on **Supabase Dashboard → Authentication
+   → Settings → Enable Captcha protection**, provider **Turnstile**, and paste the
+   **secret key** there. *This dashboard toggle is what actually enforces auth
+   captcha* — the client token alone does nothing until it is on. (The logged-out
+   password-recovery flow is the security-question challenge through the already
+   bot-guarded + rate-limited `auth-recovery` edge function, not Supabase-native
+   captcha, so it needs no widget.)
+5. **Checkout flows:** set the edge-function secret `TURNSTILE_SECRET_KEY=<secret key>`
+   (`supabase secrets set`). `create-checkout` then enforces (fail-closed) and
+   `verify-single-dossier` enforces only a present token (never trapping a paid
+   buyer). The helper is inert until this secret is set.
+6. **Test:** with everything on, do a real sign-in, a sign-up, and a $2.99 dossier
+   purchase (including the **anonymous** buy path). Confirm the widget is invisible
+   for a normal human, that a blocked/expired token at checkout shows the house error
+   idiom (not a dead-end), and that a paid buyer returning to
+   `SingleDossierSuccessPage` still receives the PDF even if the challenge script is
+   blocked.
 
 **Deliberate exclusions (do NOT add captcha here):** the anonymous **generation**
 funnel (the conversion surface stays frictionless — rate limits + bot-wave

@@ -147,6 +147,34 @@ describe('CSP fork isolation — app-strict vs /map/-relaxed, one header per pat
   });
 });
 
+describe('CSP admits the Wave-D Turnstile widget (challenges.cloudflare.com)', () => {
+  // The human-verification widget (docs/PERIMETER_RUNBOOK.md, item 7) loads a
+  // script from + renders a frame served by challenges.cloudflare.com. The
+  // allowance is STATIC + flag-independent (harmless while inert — nothing
+  // requests the host until the perimeterCaptcha flag + keys are set), and lives
+  // on the APP block ONLY. This pin locks it so a careless CSP edit can't silently
+  // drop it (which would break the widget the instant the owner activates it).
+  const TURNSTILE = 'https://challenges.cloudflare.com';
+
+  it('the app script-src admits challenges.cloudflare.com', () => {
+    const [appCsp] = cspHeadersFor('/index.html');
+    expect(directive(appCsp, 'script-src')).toContain(TURNSTILE);
+  });
+
+  it('the app frame-src admits challenges.cloudflare.com', () => {
+    const [appCsp] = cspHeadersFor('/index.html');
+    expect(directive(appCsp, 'frame-src')).toContain(TURNSTILE);
+  });
+
+  it('the allowance does NOT leak into the /map/ fork policy', () => {
+    // The map fork is a separate policy; the Turnstile widget never renders there,
+    // so the allowance stays scoped to the app block (no policy widening for /map/).
+    const [mapCsp] = cspHeadersFor('/map/index.html');
+    expect(directive(mapCsp, 'script-src')).not.toContain(TURNSTILE);
+    expect(directive(mapCsp, 'frame-src')).not.toContain(TURNSTILE);
+  });
+});
+
 describe('vercel.json keeps the SPA + gallery rewrites intact', () => {
   it('preserves the gallery-meta prerender rewrite and the SPA catch-all', () => {
     const dests = vercel.rewrites.map((r) => r.destination);

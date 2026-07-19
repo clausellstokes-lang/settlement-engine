@@ -38,6 +38,7 @@ import { t } from '../copy/index.js';
 import { sans, FS, RED, BODY } from './theme.js';
 import Button from './primitives/Button.jsx';
 import DossierLadderModal from './dossier/DossierLadderModal.jsx';
+import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 /**
  * Pure export-access decision — exported for direct unit testing without a React
@@ -83,6 +84,10 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   const [busy, setBusy]   = useState(false);
   const [error, setError] = useState(null);
   const [ladderOpen, setLadderOpen] = useState(false);
+  // Wave-D human verification (INERT until the perimeterCaptcha flag + Turnstile
+  // keys are set): a managed-Turnstile token, ADDITIVE onto the create-checkout
+  // body. Null while the flag is off, so the checkout body is byte-identical.
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const access = resolveExportAccess({ tier, canExportFreely, saveId: effectiveSaveId, entitled: cached === true });
 
@@ -116,7 +121,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
       }
       // Best-effort retro-claim voucher — a failure must not block a paid download.
       try { stashDossierClaim({ settlement, checkoutToken }); } catch { /* non-fatal */ }
-      await startCheckout('single_dossier', { checkoutToken, settlement });
+      await startCheckout('single_dossier', { checkoutToken, settlement, captchaToken: captchaToken || undefined });
       // startCheckout redirects on success; we only reach here on failure.
     } catch (e) {
       setError(e.message || t('dossierExport.buySaved.error'));
@@ -170,7 +175,7 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
   async function runSavedCheckout() {
     setBusy(true); setError(null);
     try {
-      await startCheckout('single_dossier', { checkoutToken: createDossierCheckoutToken(), saveId });
+      await startCheckout('single_dossier', { checkoutToken: createDossierCheckoutToken(), saveId, captchaToken: captchaToken || undefined });
       // Redirects on success.
     } catch (e) {
       setError(e.message || t('dossierExport.buySaved.error'));
@@ -197,6 +202,9 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           {`Buy this dossier for ${SINGLE_DOSSIER.priceLabel}`}
         </Button>
         <span style={captionStyle}>One-time, no account needed.</span>
+        {/* Wave-D human verification (INERT until activated). Managed/invisible;
+            the token is captured before the ladder's one-time checkout fires. */}
+        <CaptchaGate action="dossier" onToken={setCaptchaToken} />
         {error && <span style={errStyle}>{error}</span>}
         {ladderOpen && (
           <DossierLadderModal
@@ -259,6 +267,8 @@ export default function BuyThisDossier({ settlement, saveId = null, onSignIn, on
           : t('dossierExport.buySaved.cta', { price: SINGLE_DOSSIER.priceLabel })}
       </Button>
       <span style={captionStyle}>{t('dossierExport.buySaved.subline')}</span>
+      {/* Wave-D human verification (INERT until activated). Managed/invisible. */}
+      <CaptchaGate action="dossier" onToken={setCaptchaToken} />
       {error && <span style={errStyle}>{error}</span>}
     </div>
   );

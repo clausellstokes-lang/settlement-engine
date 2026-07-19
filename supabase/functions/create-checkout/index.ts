@@ -51,6 +51,11 @@ import { botGuard, readRequestMeta } from '../_shared/requestMeta.ts';
 import { logError } from '../_shared/logError.ts';
 // One CORS allowlist for every edge function (incl. Cloudflare Pages preview).
 import { getCorsHeaders as sharedCorsHeaders } from '../_shared/cors.ts';
+// Wave-D human verification (INERT until TURNSTILE_SECRET_KEY is set): gates the
+// session-creation door against scripted checkout abuse. Key-inert — a no-op that
+// returns { ok:true, enforced:false } until the owner activates it, so the money
+// path is byte-identical while unconfigured. See docs/PERIMETER_RUNBOOK.md.
+import { verifyTurnstile } from '../_shared/verifyTurnstile.ts';
 
 const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!, { apiVersion: '2023-10-16' });
 
@@ -309,9 +314,28 @@ export async function handleCreateCheckout(
     // saved settlement at checkout, the durable-rights entitlement (108) binds
     // to it. It is verified for ownership below and stashed in the session
     // metadata; the webhook grants the right on the paid session.
-    const { product, checkoutToken, redeemCode, saveId, settlement } = await req.json();
+    const { product, checkoutToken, redeemCode, saveId, settlement, captchaToken } = await req.json();
     if (!product || !PRICE_MAP[product]) {
       throw new Error(`Invalid product: ${product}. Valid: ${Object.keys(PRICE_MAP).join(', ')}`);
+    }
+
+    // Wave-D human verification, BEFORE any Stripe call. INERT until the owner sets
+    // TURNSTILE_SECRET_KEY (verifyTurnstile returns { ok:true } → this passes and the
+    // path is byte-identical). When active it FAILS CLOSED: a missing/failed/expired
+    // token returns the house-register error (never a stuck button — the client shows
+    // the message and can retry), consistent with the money path's fail-closed
+    // posture. The token is minted by the purchase surface's managed/invisible
+    // CaptchaGate. Placed here so it gates every product uniformly, pre-amplification.
+    const { ip: captchaIp } = readRequestMeta(req);
+    const turnstile = await verifyTurnstile(
+      typeof captchaToken === 'string' ? captchaToken : null,
+      captchaIp,
+    );
+    if (!turnstile.ok) {
+      return new Response(
+        JSON.stringify({ error: 'We could not verify your request. Please try again.' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      );
     }
 
     // Tier 7.4 — single-dossier is anonymous-allowed (per pricing.js

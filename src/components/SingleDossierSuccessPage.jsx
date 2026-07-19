@@ -35,6 +35,7 @@ import { supportMailto } from '../copy/support.js';
 import { Funnel, EVENTS, track } from '../lib/analytics.js';
 import { GOLD, INK, BORDER, CARD, sans, serif_, SP, FS, swatch, GREEN, RED } from './theme.js';
 import Button from './primitives/Button.jsx';
+import CaptchaGate from './perimeter/CaptchaGate.jsx';
 
 const MUTED = swatch['#6B5340'];
 const BODY  = swatch['#4A3B22'];
@@ -81,13 +82,18 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
 
   const autoDownloadedRef = useRef(false);
   const analyticsFiredRef = useRef(false);
+  // Wave-D human verification (INERT until activated): a managed-Turnstile token
+  // held in a ref so it rides the verify call WITHOUT re-running the mount-time
+  // verification. This is a POST-PAYMENT step — verify-single-dossier verifies the
+  // token ONLY IF present and NEVER blocks a paid buyer on a missing/blocked one.
+  const captchaTokenRef = useRef(null);
 
   // The async verification. Kept free of any SYNCHRONOUS setState so it is safe
   // to invoke directly from the mount effect (results land only in .then/.catch).
   const doVerify = useCallback(() => {
     if (!canAttempt) return () => {};
     let cancelled = false;
-    verifySingleDossierPurchase(sessionId, token)
+    verifySingleDossierPurchase(sessionId, token, captchaTokenRef.current || undefined)
       .then(data => {
         if (cancelled) return;
         // Prefer the server-persisted settlement; fall back to the local stash.
@@ -257,6 +263,11 @@ export default function SingleDossierSuccessPage({ onSignUp, onGenerateAnother }
       }}>
         <h1 style={{ margin: 0, fontFamily: serif_, fontSize: FS.xxl }}>Confirming your purchase</h1>
         <p style={{ margin: `${SP.sm}px 0 0`, color: BODY }}>Checking the paid Stripe session before preparing the PDF.</p>
+        {/* Wave-D human verification (INERT until activated). Managed/invisible;
+            mints a best-effort token for the verify call. This is post-payment, so
+            the server never blocks delivery on a missing token — renders nothing
+            while the perimeterCaptcha flag is off. */}
+        <CaptchaGate action="verify" onToken={(tok) => { captchaTokenRef.current = tok; }} />
       </div>
     );
   }
