@@ -184,7 +184,11 @@ const CEILINGS = Object.freeze({
   // Auth/compendium/pricing/gallery/founders/account surfaces fell to the
   // rule-framed plate idiom in the pages lane; ceilings set to the measured
   // post-fold counts (tolerance-0).
-  borderRadius: 911,    // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (FOLD: claude/restoration-chrome @ aaeec163 — R2 chrome
+  // restorations land): borderRadius 911→909 (−2). The chrome lane's admin/
+  // account/auth/pricing restorations are net −2 rounded corners; boxShadow/
+  // rgba/tinted hold. Ceilings set to the measured post-fold counts.
+  borderRadius: 909,    // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 98,        // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 238,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 214,  // the tinted callout box — replaced by rubric-headed clerk's notes
