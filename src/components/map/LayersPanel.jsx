@@ -17,7 +17,7 @@ import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { useStore } from '../../store';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP, R } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, BORDER2, CARD, CARD_HDR, sans, FS, SP } from '../theme.js';
 import { REGIONAL_CHANNEL_TYPES } from '../../domain/region/index.js';
 import { regionalChannelColor, regionalImpactColor } from '../../lib/regionalMapOverlay.js';
 // components-map-3: the relationship palette is single-sourced from
@@ -86,7 +86,7 @@ export default function LayersPanel({ onClose }) {
     <div style={{
       width: 240, minHeight: 0,
       display: 'flex', flexDirection: 'column',
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+      background: CARD, border: `1px solid ${BORDER}`,
       overflow: 'hidden',
     }}>
       {/* Header */}
@@ -274,7 +274,6 @@ function LayerToggle({ label, checked, onChange, locked = false, lockedHint }) {
       display: 'flex', alignItems: 'center', gap: SP.xs,
       padding: `${SP.xs}px ${SP.sm}px`,
       cursor: 'pointer', userSelect: 'none',
-      borderRadius: R.sm,
       fontSize: FS.sm, color: locked ? MUTED : INK,
     }}
       onMouseEnter={e => (e.currentTarget.style.background = '#faf6ef')}
@@ -314,7 +313,6 @@ function FilterChip({ label, color, active, onClick }) {
         background: active ? color : 'transparent',
         color: active ? '#fff' : INK,
         border: `1px solid ${color}`,
-        borderRadius: 12,
         fontSize: FS.xxs, fontWeight: 700, fontFamily: sans,
         boxShadow: 'none',
       }}

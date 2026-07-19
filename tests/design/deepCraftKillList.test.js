@@ -132,9 +132,20 @@ const CEILINGS = Object.freeze({
   // counts). Same handlers, same bg/ink; only the rounding is struck. The structural
   // borderRadius:0 rules stay. LayeredConfigurationPanel gained net-neutral register
   // rules under its two numbered group headers (a border, not a counted pattern).
-  borderRadius: 1043,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 112,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 264,    // off-palette translucent washes — ink tones come from the ramp
+  // Lowered again (C5-a·i, THE SURVEYOR'S TABLE — realm chrome flattened, part 1):
+  // borderRadius 1043→1035, boxShadow 112→110, rgba 264→262. Three realm map surfaces
+  // dropped their SaaS elevation/rounding to the flat-plate idiom: RealmInspector's
+  // right-dock rail (container radius + its z-axis drop-shadow, one rgba, struck — the
+  // 1px rule separates it from the map), WorldMapStage (the map "table" frame + both
+  // flanking SidebarShell columns de-rounded; the drop-preview inset + hint tooltip
+  // de-rounded and the tooltip's drop-shadow struck), and LayersPanel (its own column
+  // frame, the layer-toggle hover rows, and the filter chips de-rounded to flat stamps;
+  // the chips KEEP boxShadow:'none' — it suppresses the primary Button's ELEV[1], so
+  // striking it would ADD elevation). Beats/behavior untouched; the two functional
+  // parchment load/error scrims stay (raw-hex, a tokenize-later follow-up).
+  borderRadius: 1035,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 110,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 262,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 

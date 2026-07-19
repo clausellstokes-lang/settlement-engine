@@ -19,7 +19,7 @@ import { flag } from '../../lib/flags.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { useStore } from '../../store/index.js';
 import { MAP_MODES } from '../../store/mapSlice.js';
-import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, R, swatch, PARCH_100 } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, RED, BORDER, CARD, PARCH, FS, SP, swatch, PARCH_100 } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 
 const MapOverlay     = lazy(() => import('../MapOverlay.jsx'));
@@ -128,7 +128,6 @@ function WorldMapStageImpl({
             position: 'relative',
             background: PARCH,
             border: `2px solid ${isDraggingOver ? GOLD : BORDER}`,
-            borderRadius: R.lg,
             overflow: 'hidden',
             minHeight: 0,
           }}
@@ -261,7 +260,7 @@ function WorldMapStageImpl({
             <>
               <div style={{
                 position: 'absolute', inset: 12, border: `3px dashed ${GOLD}`,
-                borderRadius: R.lg, background: 'rgba(160,118,42,0.06)',
+                background: 'rgba(160,118,42,0.06)',
                 pointerEvents: 'none',
               }} />
               {/* Drop preview tooltip. Shows during drag with
@@ -282,9 +281,8 @@ function WorldMapStageImpl({
                     position: 'absolute', top: 24, right: 24,
                     padding: '8px 12px', background: INK,
                     color: PARCH_100,
-                    border: `1px solid ${GOLD}`, borderRadius: R.sm,
+                    border: `1px solid ${GOLD}`,
                     fontSize: FS.xs, lineHeight: 1.45,
-                    boxShadow: '0 12px 32px rgba(0,0,0,0.40)',
                     pointerEvents: 'none', maxWidth: 220,
                   }}
                 >
@@ -325,7 +323,7 @@ function SidebarShell({ children }) {
   return (
     <div style={{
       width: 240, minHeight: 0, display: 'flex', flexDirection: 'column',
-      background: CARD, border: `1px solid ${BORDER}`, borderRadius: R.lg,
+      background: CARD, border: `1px solid ${BORDER}`,
       overflow: 'hidden',
     }}>
       {children}
