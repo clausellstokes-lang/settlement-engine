@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { INK, BODY, MUTED as MUT, SECOND as SEC, BORDER as BOR, CARD, sans, serif_, FS, SP, swatch } from '../theme.js';
-import { Sparkles, AlertTriangle, Link2, Building2, Plus, Edit3, Trash2, Copy, Wand2, X, Package, HeartHandshake, Flag, Coins } from 'lucide-react';
+import { Plus, Edit3, Trash2, Copy, Wand2, X } from 'lucide-react';
 import { CRITICALITY, ECONOMIC_WEIGHT, DEFENSE_ROLES, POWER_AUTHORITIES, FOOD_IMPACT, satisfiesOptions,
-  DEITY_ALIGNMENT, DEITY_LAW, DEITY_TIER, DEITY_PORTFOLIO_MAX_LENGTH } from '../../domain/customContentSchema.js';
+  DEITY_ALIGNMENT, DEITY_LAW, DEITY_TIER, DEITY_PORTFOLIO_MAX_LENGTH,
+  TRADITION_ELEMENT_KEYS, TRADITION_ACT_KEYS, TRADITION_EPITHET_MAX_LENGTH } from '../../domain/customContentSchema.js';
 import { deityTemper } from '../../domain/worldPulse/deityAxes.js';
 import { td } from '../../copy/deityAuthoring.js';
 import DeityEffectPreview from './DeityEffectPreview.jsx';
@@ -30,86 +31,10 @@ import { CustomContentUpsell } from './CustomContentGate.jsx';
 
 // ── Custom Content Manager ──────────────────────────────────────────────────
 
-// Per-category schema:
-//   fields:        flat scalar fields rendered in the main form
-//   dependencies:  refId-array fields rendered in the always-visible Dependencies
-//                  section (it's what wires custom content into generation + chain
-//                  discovery, so it never collapses). Each dep field is
-//                  { key, label, category | categories[], single?, hint? } where
-//                  `category` (or `categories` for a multi-bucket picker, e.g.
-//                  tradeGoods + services) is the registry category to pick from.
-export const CUSTOM_CATEGORIES = [
-  { key:'institutions', label:'Institutions', Icon:Building2, color:'#1a3a7a',
-    fields:['name','category','authority','tags','essential','magical','criminal','defenseRole','foodImpact','satisfies','description','tierMin','tierMax'],
-    dependencies: [
-      { key:'produces',    label:'Produces (goods/services)', categories:['tradeGoods','services'],
-        hint:'Trade goods or services this institution generates when present.' },
-      { key:'requires',    label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
-        hint:'Resources, goods, or services this institution consumes — its absence makes the institution viability-marginal.' },
-      { key:'subsumes',    label:'Subsumes (absorbs)',         category:'institutions',
-        hint:'Institutions this one represents — when present, the smaller ones aren’t listed separately.' },
-    ],
-  },
-  { key:'services',     label:'Services',     Icon:HeartHandshake, color:'#0e7c86',
-    fields:['name','category','authority','criticality','economicWeight','magical','criminal','foodImpact','description','tierMin','tierMax'],
-    dependencies: [
-      { key:'providedBy', label:'Provided by (institution)', category:'institutions', single:true,
-        hint:'The institution that offers this service (a service is something an institution provides).' },
-      { key:'requires',   label:'Requires (inputs)',          categories:['resources','tradeGoods','services'],
-        hint:'Resources, goods, or services this service consumes to operate.' },
-    ],
-  },
-  { key:'resources',    label:'Resources',    Icon:Package,   color:'#1a5a28',
-    fields:['name','category','criticality','foodImpact','commodities','description'],
-    dependencies: [
-      { key:'yields',  label:'Output (goods/services)', categories:['tradeGoods','services'],
-        hint:'Goods or services this base resource yields once worked (built-in + custom) — feeds supply-chain discovery as the resource → processor → output flow.' },
-      { key:'enables', label:'Enables institutions', category:'institutions',
-        hint:'Institutions whose viability is boosted by access to this resource.' },
-    ],
-  },
-  { key:'stressors',    label:'Stressors',    Icon:AlertTriangle, color:'#8b1a1a',
-    fields:['name','description','severity','affects'],
-    dependencies: [
-      { key:'disablesInstitutions', label:'Disables institutions', category:'institutions',
-        hint:'Institutions suspended or degraded while this stressor is active.' },
-      { key:'disablesGoods',        label:'Disables trade goods',  category:'tradeGoods',
-        hint:'Goods whose production halts under this stressor.' },
-    ],
-  },
-  { key:'tradeGoods',   label:'Trade Goods',  Icon:Coins,     color:'#a0762a',
-    fields:['name','category','criticality','economicWeight','foodImpact','satisfies','description'],
-    dependencies: [
-      { key:'requiredInstitution', label:'Required institution',  category:'institutions', single:true,
-        hint:'Single institution that must be present for this good to be produced.' },
-      { key:'requiredResources',   label:'Required resources',     categories:['resources','tradeGoods','services'],
-        hint:'Resources, intermediate goods, or services needed to produce this good (built-in + custom).' },
-    ],
-  },
-  // Deities — homebrew gods (premium custom content). PURE authoring: the axes
-  // ride an embed only once a DM ASSIGNS the deity as a settlement's patron
-  // (DeityAssignmentPanel → the SET_PRIMARY_DEITY canon event); tier NEVER touches
-  // generation. `portfolio` is a free-text flavor field with ZERO mechanics.
-  { key:'deities',      label:'Deities',      Icon:Sparkles,  color:'#7c3aed', singular:'Deity',
-    fields:['name','alignmentAxis','lawAxis','rankAxis','portfolio','domain'] },
-  { key:'factions',     label:'Factions',     Icon:Flag,      color:'#6a1a4a',
-    fields:['name','authority','archetype','agenda','scale','methods','magical','criminal','defenseRole','description','tierMin'],
-    dependencies: [
-      { key:'controls',  label:'Controls institutions', category:'institutions',
-        hint:'Institutions this faction holds sway over.' },
-      { key:'rivals',    label:'Rivals (conflicts with)', category:'factions',
-        hint:'Factions this one is in conflict with — flagged if both are present.' },
-    ],
-  },
-  // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
-  // above), not hand-authored — this tab renders its own discover/verify
-  // manager (SupplyChainsManager) instead of the generic add form.
-  { key:'supplyChains', label:'Supply Chains', Icon:Link2,   color:'#a0762a', discovered:true },
-  // Trade Routes / Power Presets / Defense Presets removed (§14): redundant with
-  // the trade-route, government, and defense controls already in the generation
-  // config. Supply chains are not hand-authored here either — they're discovered
-  // (see the Supply Chains tab) from entity inputs/outputs.
-];
+// The category defs (icons/colours/fields) live in a leaf so this manager
+// stays under the component-size ratchet; re-exported for existing import sites.
+export { CUSTOM_CATEGORIES } from './customCategoryDefs.js';
+import { CUSTOM_CATEGORIES, CATEGORY_BY_KEY } from './customCategoryDefs.js';
 
 const STRESSOR_AFFECT_CATEGORIES = [
   'economy', 'safety', 'supply chains', 'military', 'religion', 'magic',
@@ -147,7 +72,14 @@ const FIELD_HINTS = {
   rankAxis:       td('form.rankHint'),
   portfolio:      td('form.portfolioHint'),
   domain:         td('form.domainHint'),
+  // Traditions (WB-j) — plain-language, no lazy namespace (light corpus vocab).
+  motifElement:   'The founding image this holiday is built around — harvest, the hearth, the river, the dead.',
+  motifAct:       'How the town observes it — a feast, a procession, a vigil, a contest, a fair, or an offering.',
+  epithet:        'An optional flavour line shown beneath the tradition in a dossier.',
 };
+
+// Humanize a frozen motif key for a select option ("the-dead" → "The Dead").
+const humanizeMotifKey = (k) => String(k || '').split('-').map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(' ');
 
 // Field-label overrides — nicer than the auto camelCase split for deity axes.
 const FIELD_LABELS = {
@@ -246,10 +178,6 @@ function seedDraftFromPrebuilt(entry) {
   return draft;
 }
 
-// Resolve a bucket key → its CUSTOM_CATEGORIES definition (the W-C4 inline defs
-// above, so tab colours/icons/labels stay the authored set). The two authoring
-// lanes reference bucket KEYS; the defs come from here.
-const CATEGORY_BY_KEY = Object.fromEntries(CUSTOM_CATEGORIES.map((c) => [c.key, c]));
 
 // Buckets with a prebuilt catalog to clone from ("start from a built-in").
 const SEEDABLE = new Set(['institutions', 'services', 'resources', 'stressors', 'tradeGoods']);
@@ -265,7 +193,14 @@ export function CustomContentManager({ search }) {
   const customContentError = useStore(s => s.customContentError);
   const loadCustomContentFromCloud = useStore(s => s.loadCustomContentFromCloud);
 
-  const [activeCat, setActiveCat] = useState('institutions');
+  // Deep-link: ?cat=<bucket> (e.g. the EventComposer "Author a deity" CTA lands
+  // ?mode=custom&cat=deities; WB-j adds ?cat=traditions) opens that lane directly.
+  // Validated against the authored bucket set, so a bogus cat is inert.
+  const [activeCat, setActiveCat] = useState(() => {
+    if (typeof window === 'undefined') return 'institutions';
+    const cat = new URLSearchParams(window.location.search).get('cat');
+    return cat && CATEGORY_BY_KEY[cat] ? cat : 'institutions';
+  });
   const [addingNew, setAddingNew] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -439,6 +374,18 @@ export function CustomContentManager({ search }) {
         );
       }
       case 'domain': return <input {...shared} placeholder={td('form.domainPlaceholder')}/>;
+      // ── Tradition motif (element / act) + epithet flavor (WB-j) ───────────────
+      case 'motifElement': return <select {...shared} value={val||''}><option value="">Any founding image…</option>{TRADITION_ELEMENT_KEYS.map(k=><option key={k} value={k}>{humanizeMotifKey(k)}</option>)}</select>;
+      case 'motifAct': return <select {...shared} value={val||''}><option value="">Any observance…</option>{TRADITION_ACT_KEYS.map(k=><option key={k} value={k}>{humanizeMotifKey(k)}</option>)}</select>;
+      case 'epithet': {
+        const ev = draft.epithet || '';
+        return (
+          <>
+            <textarea {...shared} value={ev} rows={2} maxLength={TRADITION_EPITHET_MAX_LENGTH} placeholder="A short flavour line — e.g. “kept since the first hearth was lit”." style={{...shared.style, resize:'vertical'}}/>
+            <div style={{ textAlign:'right', fontSize:FS.micro, color:MUT, marginTop:2 }}>{ev.length} / {TRADITION_EPITHET_MAX_LENGTH}</div>
+          </>
+        );
+      }
       default: return <input {...shared} placeholder={field.charAt(0).toUpperCase()+field.slice(1)}/>;
     }
   };
@@ -460,7 +407,7 @@ export function CustomContentManager({ search }) {
     // Essentials lead at full prominence; the rest of the bucket's schema is the
     // demoted "Advanced attributes" tail (progressive disclosure). Deities are
     // exempt — their axes ARE the essentials, so they render flat (W-C4).
-    const disclosure = activeCat !== 'deities';
+    const disclosure = activeCat !== 'deities' && activeCat !== 'traditions';
     const ESSENTIAL_FIELDS = ['name', 'category', 'description'];
     const essentials = disclosure ? catDef.fields.filter(f => ESSENTIAL_FIELDS.includes(f)) : catDef.fields;
     const advanced = disclosure ? catDef.fields.filter(f => !ESSENTIAL_FIELDS.includes(f)) : [];

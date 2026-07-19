@@ -80,6 +80,12 @@ export const CUSTOM_CATEGORIES = [
   { key:'deities',      label:'Deities',       color:'#7a5a1a',
     fields:['name','alignmentAxis','temperamentAxis','rankAxis','lawAxis','domain','description'],
   },
+  // Traditions — homebrew holidays/festivals/rites (WB-j). motifElement/motifAct
+  // pick the frozen genesis vocab; epithet is free-text flavor. No dependencies —
+  // they surface in the dossier's Traditions tab, not through generation wiring.
+  { key:'traditions',   label:'Traditions',    color:'#8a5a1a',
+    fields:['name','motifElement','motifAct','epithet'],
+  },
   // Supply Chains are DISCOVERED (inferred from the inputs/outputs of the types
   // above), not hand-authored — this tab renders its own discover/verify
   // manager (SupplyChainsManager) instead of the generic add form.
@@ -108,8 +114,8 @@ export const AUTHORING_LANES = [
   {
     key: 'living',
     label: 'Living World (powers the simulation)',
-    blurb: 'Deities and factions. Deities are dormant until assigned + religion dynamics are on; factions enter an existing world through an event, not generation.',
-    buckets: ['deities', 'factions'],
+    blurb: 'Deities, traditions, and factions. Deities are dormant until assigned + religion dynamics are on; traditions are the holidays a town keeps; factions enter an existing world through an event, not generation.',
+    buckets: ['deities', 'traditions', 'factions'],
   },
 ];
 
