@@ -155,10 +155,20 @@ const CEILINGS = Object.freeze({
   // scrubber/altitude-tab is rule-framed (R import retired); the H2 slip beat is
   // untouched. The amber/gold/violet chip color-coding (semantic BG washes) is kept as
   // a deferred source-stamp follow-up (re-tone, not re-round).
-  borderRadius: 1010,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 110,       // print has no z-axis — depth is ink, never elevation
+  // Lowered again (C5-a·iii, THE SURVEYOR'S TABLE — the rail, part 3): borderRadius
+  // 1010→1002, boxShadow 110→108, tintedCallouts 234→232. WorldMapToolbar dropped all
+  // 8 of its rounded corners (the More-menu popover, the advance-progress track, the
+  // dormant resume chip, the map-controls help note, the three <select> controls, and
+  // the inspector unreviewed-count badge) and both z-axis shadows (the popover's ELEV[2]
+  // and the count badge's ELEV[1] — floating chrome now separates by its strong rule,
+  // not a lift). The dormant multi-tick ResumeChip's AMBER_BG wash became an amber
+  // border+ink stamp (−1 usage +1 import both drop AMBER_BG → −2 tinted). ELEV/R/
+  // AMBER_BG imports retired; the seven data-tour anchors, the teaching-title panel,
+  // and the pinned desktop-gate title are all untouched.
+  borderRadius: 1002,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 108,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 260,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 234,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  tintedCallouts: 232,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

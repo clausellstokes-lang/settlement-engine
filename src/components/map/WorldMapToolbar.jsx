@@ -26,7 +26,7 @@ import {
   Eye, Settings,
 } from 'lucide-react';
 import { useStore } from '../../store/index.js';
-import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_BG, AMBER_DEEP, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, ELEV, PARCH_100, sans, FS, SP, R } from '../theme.js';
+import { GOLD, GOLD_SOFT, GOLD_TXT, INK, MUTED, BODY, SECOND, AMBER, AMBER_DEEP, RED, BORDER, BORDER_STRONG, CARD, CARD_ALT, PARCH_100, sans, FS, SP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import { ModeSwitch } from './ModeSwitch.jsx';
 import { IconButton } from './IconButton.jsx';
@@ -131,8 +131,7 @@ function MoreMenu({ children }) {
             position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 30,
             display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: SP.xs,
             minWidth: 200, padding: SP.sm,
-            background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
-            boxShadow: ELEV[2],
+            background: CARD_ALT, border: `1px solid ${BORDER_STRONG}`,
           }}
           // Dismiss ONLY when a real action button inside the menu is activated.
           // The previous unconditional close fired on ANY click in the popover —
@@ -170,7 +169,7 @@ function AdvanceProgress({ done, total }) {
         aria-label={`Advancing the realm, ${safeDone} of ${safeTotal} steps`}
         style={{
           position: 'relative', flex: 1, minWidth: 64, height: 6,
-          borderRadius: 3, background: CARD_ALT, border: `1px solid ${BORDER}`,
+          background: CARD_ALT, border: `1px solid ${BORDER}`,
           overflow: 'hidden',
         }}
       >
@@ -204,8 +203,8 @@ function ResumeChip({ pausedAdvance, onResume, disabled }) {
       style={{
         display: 'inline-flex', alignItems: 'center', gap: SP.xs,
         minHeight: 40, padding: '5px 11px',
-        border: `1px solid ${AMBER}`, borderRadius: R.sm,
-        background: AMBER_BG, color: AMBER_DEEP,
+        border: `1px solid ${AMBER}`,
+        background: CARD, color: AMBER_DEEP,
         fontFamily: sans, fontSize: FS.xs, fontWeight: 800,
         whiteSpace: 'nowrap',
       }}
@@ -263,7 +262,7 @@ function MapControlsHelp() {
       style={{
         flexBasis: '100%', display: 'grid', gap: SP.sm,
         marginTop: SP.xs, padding: `${SP.sm}px ${SP.md}px`,
-        border: `1px solid ${BORDER}`, borderRadius: R.md, background: CARD_ALT,
+        border: `1px solid ${BORDER}`, background: CARD_ALT,
       }}
     >
       {MAP_CONTROL_HELP.map(([group, items]) => (
@@ -385,7 +384,6 @@ function WorldMapToolbarImpl({
                   minHeight: 40,
                   padding: '5px 10px',
                   border: `1px solid ${activeCampaignId ? BORDER : GOLD}`,
-                  borderRadius: R.sm,
                   background: activeCampaignId ? CARD : GOLD_SOFT,
                   fontSize: FS.sm, fontFamily: sans,
                   color: activeCampaignId ? INK : GOLD_TXT,
@@ -437,7 +435,7 @@ function WorldMapToolbarImpl({
                 style={{
                   minHeight: 40,
                   padding: '5px 9px',
-                  border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                  border: `1px solid ${BORDER}`,
                   background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
                   cursor: 'pointer',
                 }}
@@ -610,7 +608,7 @@ function WorldMapToolbarImpl({
                             flex: 1,
                             minHeight: 40,
                             padding: '5px 10px',
-                            border: `1px solid ${BORDER}`, borderRadius: R.sm,
+                            border: `1px solid ${BORDER}`,
                             background: CARD, fontSize: FS.xs, fontFamily: sans, color: INK,
                             cursor: 'pointer',
                           }}
@@ -685,9 +683,8 @@ function WorldMapToolbarImpl({
                         minWidth: 16, height: 16, padding: '0 4px',
                         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                         background: AMBER, color: PARCH_100,
-                        borderRadius: 8, fontSize: FS.xxs, fontWeight: 800,
+                        fontSize: FS.xxs, fontWeight: 800,
                         fontFamily: sans, lineHeight: 1,
-                        boxShadow: ELEV[1],
                       }}
                     >
                       {unreviewedCount > 9 ? '9+' : unreviewedCount}
