@@ -28,11 +28,8 @@ import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { buildSeatLineage, isSeatHeld } from '../../lib/founderLineage.js';
 import {
   PAGE_MAX, INK, BODY, MUTED, GOLD_DEEP, BORDER, CARD, CARD_ALT,
-  serif_, sans, FS, SP, R,
+  serif_, sans, FS, SP,
 } from '../theme.js';
-
-const GOLD_FAINT = 'rgba(160,118,42,0.10)';
-const GOLD_LINE = 'rgba(160,118,42,0.28)';
 
 /** ISO → "Month YYYY", best-effort; falls back to the raw value on any parse trouble. */
 function heldSinceLabel(iso) {
@@ -79,8 +76,9 @@ function HeldSeat({ seat, onNavigate }) {
     <li style={{
       listStyle: 'none',
       background: CARD,
-      border: `1px solid ${GOLD_LINE}`,
-      borderRadius: R.md,
+      // A claimed seat is the charter's honored plate — a gold hairline frame,
+      // square-cut (no rounded card). Open seats stay a neutral dashed plate.
+      border: `1px solid ${GOLD_DEEP}`,
       padding: SP.md,
       display: 'flex', flexDirection: 'column', gap: SP.xs,
     }}>
@@ -117,8 +115,7 @@ function OpenSeat({ seat }) {
     <li style={{
       listStyle: 'none',
       background: CARD_ALT,
-      border: `1px dashed ${GOLD_LINE}`,
-      borderRadius: R.md,
+      border: `1px dashed ${BORDER}`,
       padding: SP.md,
       display: 'flex', flexDirection: 'column', gap: SP.xs,
       minHeight: 96, justifyContent: 'center',
@@ -173,10 +170,11 @@ export default function FoundersPage({ onNavigate }) {
           framing, no talk of resale value or ownership. A seat is a lifetime license
           with a place in the credits; its transfer terms live on the Terms page. */}
       <div style={{
-        background: GOLD_FAINT,
-        border: `1px solid ${GOLD_LINE}`,
-        borderRadius: R.lg,
-        padding: SP.lg,
+        // The charter block: a heavy gold rule heads the document and a hairline
+        // closes it (rules carry the frame — law §3), no wash, no rounded box.
+        borderTop: `2px solid ${GOLD_DEEP}`,
+        borderBottom: `1px solid ${BORDER}`,
+        padding: `${SP.lg}px 0`,
         marginBottom: SP.xl,
         display: 'flex', flexDirection: 'column', gap: SP.sm,
       }}>
@@ -225,8 +223,10 @@ export default function FoundersPage({ onNavigate }) {
         ))}
       </ul>
 
+      {/* The charter's signature rule — a gold line closes the document at the foot. */}
       <p style={{
-        marginTop: SP.xl, fontFamily: sans, fontSize: FS.xs, color: MUTED, lineHeight: 1.6,
+        marginTop: SP.xl, paddingTop: SP.md, borderTop: `1px solid ${GOLD_DEEP}`,
+        fontFamily: sans, fontSize: FS.xs, color: MUTED, lineHeight: 1.6,
       }}>
         A Founder is shown by the display name they opted into, never by their account.
         A seat is separate from the account that holds it.

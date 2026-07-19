@@ -11,7 +11,7 @@ import { FOUNDER_SEAT_CAP } from '../../lib/founderSeats.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t, tx } from '../../copy/index.js';
 import {
-  GOLD, GOLD_DEEP, INK, SECOND, BORDER, CARD, sans, serif_, SP, R, FS, BODY,
+  GOLD, GOLD_DEEP, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
 } from '../theme.js';
 import FounderBadge from '../primitives/FounderBadge.jsx';
 import Button from '../primitives/Button.jsx';
@@ -23,6 +23,10 @@ function FeatureRow({ children }) {
       padding: '4px 0', color: BODY, fontSize: FS.sm,
       fontFamily: sans, lineHeight: 1.5,
     }}>
+      {/* The rubric dagger — the feature-list mark of the pricing bench (the
+          taste-approved pricing-desk sample). Decorative (aria-hidden); the
+          feature TEXT carries the meaning, so it owes no contrast floor. */}
+      <span aria-hidden="true" style={{ color: 'var(--oc-rubric)', fontWeight: 700, flexShrink: 0 }}>†</span>
       <span>{children}</span>
     </li>
   );
@@ -62,34 +66,30 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
       aria-describedby={emphasised ? recommendedId : undefined}
       style={{
         flex: '1 1 240px', minWidth: 240, maxWidth: 320,
-        background: CARD,
-        // P4 — exactly one focal card. The recommended tier carries the heavy
-        // gold border + lift; siblings stay quiet (hairline border, no shadow)
-        // so the single highlight survives the squint test instead of three
-        // near-identical bordered boxes competing (P5 anti-box-soup).
-        border: emphasised ? `2px solid ${GOLD}` : `1px solid ${BORDER}`,
-        borderRadius: R.xl,
+        // THE DIFFERENTIATED BENCH (organic-craft law §3 + the pricing-desk
+        // sample): the tiers are ruled columns on the page ground, NOT three
+        // uniform rounded shadow-cards (the AI-slop tell). The recommended tier
+        // wins on a heavier GOLD TOP RULE + more ink/scale + the flag — one
+        // focal channel that survives the squint test, never a shadow or a wash.
+        borderTop: emphasised ? `3px solid ${GOLD}` : `2px solid ${BORDER}`,
         padding: emphasised
           ? `${SP.lg}px ${SP.lg}px ${SP.xl}px`
           : `${SP.md}px ${SP.lg}px ${SP.lg}px`,
         display: 'flex', flexDirection: 'column', gap: SP.md,
-        boxShadow: emphasised
-          ? '0 6px 24px rgba(201,162,76,0.25)'
-          : 'none',
-        position: 'relative',
       }}
     >
       {emphasised && (
         <span
           id={recommendedId}
           style={{
-            position: 'absolute', top: -10, right: 16,
-            // P7 — the page's most-emphasised label must clear AA. White-on-gold
-            // was 2.4:1 (the exact pairing the app already retired in Button +
-            // FounderBadge); ink-on-gold is 7.6:1, the house recommended-badge idiom.
+            alignSelf: 'flex-start',
+            // The recommended flag as a small gold STAMP at the head of the
+            // column (a rationed, meaningful mark — law §3), square-cut, in
+            // flow beneath the gold rule, not a rounded corner pill. Ink-on-gold
+            // is the house AA pairing (7.6:1; white-on-gold 2.4:1 was retired).
             background: GOLD, color: INK,
             fontSize: FS.xs, fontWeight: 800, letterSpacing: '0.06em',
-            padding: '3px 9px', borderRadius: 4,
+            padding: '3px 9px',
             textTransform: 'uppercase',
           }}
         >
@@ -161,12 +161,12 @@ export function TierCard({ tier, ctaLabel, ctaKind, isPrimaryCta, onCta, loading
             <div
               aria-hidden="true"
               style={{
-                height: 4, borderRadius: R.sm, overflow: 'hidden',
+                height: 4, overflow: 'hidden',
                 background: BORDER,
               }}
             >
               <div style={{
-                height: '100%', borderRadius: R.sm, background: GOLD,
+                height: '100%', background: GOLD,
                 width: `${Math.min(100, Math.max(0, ((FOUNDER_SEAT_CAP - founderSeatsRemaining) / FOUNDER_SEAT_CAP) * 100))}%`,
               }} />
             </div>
@@ -225,20 +225,15 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
       style={{
         flex: '1 1 160px', minWidth: 160,
         padding: `${SP.lg}px ${SP.md}px`,
-        // P5 anti-box-soup — ONE elevation channel per tile. The non-emphasised
-        // tiles separate from the parchment section tint by the faint shadow
-        // ALONE (border + shadow was two channels doing one job, re-creating the
-        // bordered spreadsheet grid the section comment claims to have removed);
-        // the focal pack carries the single gold border (no shadow) so exactly
-        // one tile reads as elevated.
-        background: emphasised ? 'rgba(201,162,76,0.06)' : CARD,
-        border: emphasised ? `2px solid ${GOLD}` : 'none',
-        boxShadow: emphasised ? 'none' : '0 1px 4px rgba(27,20,8,0.06)',
-        borderRadius: R.xl,
+        // Plates in hairline frames (law §3): each pack is a square-cut plate on
+        // the parchment card ground — the focal pack carries the single gold
+        // rule, the rest a perceivable hairline (BORDER_STRONG ≥3:1). One ink
+        // channel, no shadow, no rounded-card tell, no off-palette wash.
+        background: CARD,
+        border: emphasised ? `2px solid ${GOLD}` : `1px solid ${BORDER_STRONG}`,
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
         cursor: loading ? 'wait' : 'pointer',
         fontFamily: sans, opacity: loading ? 0.6 : 1,
-        position: 'relative',
       }}
     >
       {/* P3/P4/P6 — three ranked levels, delta-first. The PRICE keeps the

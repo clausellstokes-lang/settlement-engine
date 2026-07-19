@@ -10,7 +10,7 @@ import { useState, useId } from 'react';
 import { AlertCircle, CheckCircle, Mail, Shield, Map as MapIcon, Eye, EyeOff } from 'lucide-react';
 import {
   GOLD, INK, INK_DEEP, MUTED, SECOND, BORDER, CARD, sans, serif_,
-  SP, R, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
+  SP, FS, swatch, VIOLET, VIOLET_BG, FORM_MAX,
 } from '../theme.js';
 import DSButton from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
@@ -53,7 +53,7 @@ export function OAuthButton({ glyph, label, onClick, disabled, soonNote }) {
         <span style={{
           fontSize: FS.micro, fontWeight: 800, letterSpacing: '0.06em',
           textTransform: 'uppercase', color: VIOLET,
-          background: VIOLET_BG, padding: '2px 5px', borderRadius: 3,
+          background: VIOLET_BG, padding: '2px 5px',
           marginLeft: 4,
         }}>
           Soon
@@ -134,7 +134,9 @@ export function Input({ type = 'text', placeholder, value, onChange, onKeyDown, 
         padding: isPassword
           ? `${SP.md}px 44px ${SP.md}px ${SP.lg - 2}px`
           : `${SP.md}px ${SP.lg - 2}px`,
-        border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        // The ruled slip: a hairline field, square-cut (restraint law — the
+        // plainest pages), no rounded input chrome.
+        border: `1px solid ${BORDER}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, outline: 'none',
         boxSizing: 'border-box',
@@ -190,7 +192,7 @@ export function Select({ value, onChange, ariaLabel, children }) {
       style={{
         width: '100%',
         padding: `${SP.md}px ${SP.lg - 2}px`,
-        border: `1px solid ${BORDER}`, borderRadius: R.lg,
+        border: `1px solid ${BORDER}`,
         fontSize: FS['14'], fontFamily: sans,
         background: swatch.white, color: INK, outline: 'none',
         boxSizing: 'border-box', cursor: 'pointer',
@@ -262,9 +264,11 @@ export function Alert({ type, children }) {
       role={type === 'error' ? 'alert' : 'status'}
       aria-live={type === 'error' ? 'assertive' : 'polite'}
       style={{
+        // A rubric-ruled note above the form (never a tinted wash box): one drawn
+        // rule in the tone's ink, the message in that ink. Roles + strings kept.
         display: 'flex', alignItems: 'flex-start', gap: SP.sm,
-        padding: `${SP.sm + 2}px ${SP.md}px`,
-        background: c.bg, border: `1px solid ${c.border}`, borderRadius: R.md,
+        padding: `${SP.sm + 2}px 0 ${SP.sm + 2}px ${SP.md}px`,
+        borderLeft: `3px solid ${c.text}`,
         fontSize: FS.sm, color: c.text, lineHeight: 1.5,
       }}>
       <c.Icon size={16} style={{ flexShrink: 0, marginTop: 1 }} />
@@ -284,7 +288,7 @@ export function RoleBadge({ role }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,
-      padding: '2px 8px', borderRadius: R.md,
+      padding: '2px 8px',
       background: c.bg, color: c.color,
       fontSize: FS.xxs, fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
@@ -321,9 +325,10 @@ export function AuthPageShell({ title, subtitle, children, footer }) {
       </div>
 
       <div style={{
-        background: CARD, borderRadius: R.xl,
+        // The register-desk plate: a hairline frame, square-cut, no elevation
+        // shadow (the plainest page in the app — the restraint law).
+        background: CARD,
         border: `1px solid ${BORDER}`,
-        boxShadow: '0 8px 40px rgba(0,0,0,0.12)',
         overflow: 'hidden',
       }}>
         <div style={{

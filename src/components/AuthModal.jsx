@@ -13,7 +13,7 @@
  * This file is now just modal chrome.
  */
 import { X } from 'lucide-react';
-import { GOLD, INK, INK_DEEP, BORDER, CARD, serif_, SP, R, FS } from './theme.js';
+import { GOLD, INK, INK_DEEP, BORDER, CARD, serif_, SP, FS } from './theme.js';
 import { t } from '../copy/index.js';
 import IconButton from './primitives/IconButton.jsx';
 import AuthPanel from './auth/AuthPanel.jsx';
@@ -29,11 +29,10 @@ export default function AuthModal({ onClose, isMobile = false }) {
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- backdrop click-to-close; keyboard dismissal (Escape) is handled by useDialogFocusTrap.
     <div
       onClick={onClose}
+      className="oc-m-warmdim"
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
-        background: 'rgba(0,0,0,0.6)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        backdropFilter: 'blur(4px)',
       }}
     >
       {/* Propagation guard only: stops clicks/keys inside the card from bubbling to the backdrop's close handler — not real interactivity. */}
@@ -47,9 +46,10 @@ export default function AuthModal({ onClose, isMobile = false }) {
         aria-modal="true"
         aria-labelledby="auth-modal-title"
         style={{
-          background: CARD, borderRadius: R.xl,
+          // The auth plate on the warm-dim ground: hairline frame, square-cut,
+          // no elevation shadow (depth is the dim room, not a z-axis lift).
+          background: CARD,
           border: `1px solid ${BORDER}`,
-          boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
           width: '90%', maxWidth: 420, overflow: 'hidden',
           // Mobile: the tall sign-up form (email + 2 passwords + CTA +
           // alternatives) can overrun a short phone viewport. Bound the dialog

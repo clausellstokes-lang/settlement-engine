@@ -42,8 +42,7 @@ export function DeitiesHub() {
         {shown.map((d) => (
           <div key={d.slug} id={`deity-${slug(d.slug)}`}
             style={{ scrollMarginTop: ANCHOR_SCROLL_MARGIN, border: `1px solid ${BOR}`,
-              borderLeft: `3px solid ${ALIGN_COLOR[d.alignment] || GOLD}`, borderRadius: 7, padding: '10px 12px',
-              background: 'rgba(255,251,245,0.95)' }}>
+              borderLeft: `3px solid ${ALIGN_COLOR[d.alignment] || GOLD}`, padding: '10px 12px' }}>
             <div style={{ fontFamily: serif_, fontSize: FS.md, fontWeight: 700, color: INK, marginBottom: 3 }}>{d.name}</div>
             <div style={{ fontSize: FS.xs, color: SEC, lineHeight: 1.5, marginBottom: 6, maxWidth: '32em' }}>{d.portfolio}</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>

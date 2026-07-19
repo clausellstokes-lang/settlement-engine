@@ -30,7 +30,7 @@ import { useStore } from '../../store/index.js';
 import PrivacySettings from '../PrivacySettings.jsx';
 import Button from '../primitives/Button.jsx';
 import {
-  INK, BODY, BORDER, BORDER_STRONG, CARD, sans, SP, R, FS, swatch,
+  INK, BODY, BORDER, BORDER_STRONG, CARD, sans, SP, FS, swatch,
 } from '../theme.js';
 import Section from './AccountSection.jsx';
 
@@ -44,7 +44,7 @@ const DELETE_PHRASE = 'DELETE';
 const IMPORT_TRIGGER_STYLE = (enabled) => ({
   display: 'inline-flex', alignItems: 'center', gap: 6,
   minHeight: 40, padding: `${SP.sm}px ${SP.md}px`,
-  border: `1px solid ${BORDER_STRONG}`, borderRadius: R.lg,
+  border: `1px solid ${BORDER_STRONG}`,
   background: CARD, color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 800,
   cursor: enabled ? 'pointer' : 'not-allowed', opacity: enabled ? 1 : 0.62,
 });
@@ -269,7 +269,7 @@ export default function AccountDataPrivacySection({
           )}
 
           {importStage === 'preview' && importPreview && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.md, background: swatch.infoBg, border: `1px solid ${BORDER}`, borderRadius: R.md }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, paddingLeft: SP.md, borderLeft: `3px solid ${swatch.info}` }}>
               <div style={{ fontSize: FS.sm, color: INK }}>
                 This file holds <strong>{importPreview.settlements}</strong> settlement{importPreview.settlements === 1 ? '' : 's'} and{' '}
                 <strong>{importPreview.campaigns}</strong> campaign{importPreview.campaigns === 1 ? '' : 's'}.
@@ -299,11 +299,11 @@ export default function AccountDataPrivacySection({
           {importStage === 'result' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm }}>
               {importError ? (
-                <div role="alert" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.danger }}>
+                <div role="alert" style={{ paddingLeft: SP.md, borderLeft: `3px solid ${swatch.danger}`, fontSize: FS.sm, color: swatch.danger, lineHeight: 1.5 }}>
                   {importError}
                 </div>
               ) : (
-                <div role="status" style={{ padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+                <div role="status" style={{ paddingLeft: SP.md, borderLeft: `3px solid ${swatch.success}`, fontSize: FS.sm, color: swatch.success, lineHeight: 1.5 }}>
                   Imported {importResult?.settlementsImported ?? 0} settlement{(importResult?.settlementsImported ?? 0) === 1 ? '' : 's'}
                   {importResult?.campaignsImported ? ` and ${importResult.campaignsImported} campaign${importResult.campaignsImported === 1 ? '' : 's'}` : ''}.
                   {(importResult?.settlementsSkipped?.length || importResult?.campaignsSkipped?.length) ? (
@@ -359,7 +359,7 @@ export default function AccountDataPrivacySection({
             Permanently remove all your saved content. This cannot be undone.
           </p>
           {confirmWipe ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, padding: SP.md, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, paddingLeft: SP.md, borderLeft: `3px solid ${swatch.danger}` }}>
               {wipeError && <div role="alert" style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>{wipeError}</div>}
               <div style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>
                 Delete all {confirmWipe}? This permanently removes
@@ -388,7 +388,7 @@ export default function AccountDataPrivacySection({
             Delete my account
           </div>
           {deleteQueued ? (
-            <div style={{ marginTop: SP.sm, padding: `${SP.sm}px ${SP.md}px`, background: swatch.successBg, border: '1px solid #b0d8b0', borderRadius: R.md, fontSize: FS.sm, color: swatch.success }}>
+            <div role="status" style={{ marginTop: SP.sm, paddingLeft: SP.md, borderLeft: `3px solid ${swatch.success}`, fontSize: FS.sm, color: swatch.success, lineHeight: 1.5 }}>
               Your deletion request has been received. Your account is scheduled for removal and we are signing you out now. Contact support if this was a mistake.
             </div>
           ) : !deleteOpen ? (
@@ -402,7 +402,7 @@ export default function AccountDataPrivacySection({
               </Button>
             </>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm, padding: SP.md, background: swatch.dangerBg, border: '1px solid #e8b0b0', borderRadius: R.md }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, marginTop: SP.sm, paddingLeft: SP.md, borderLeft: `3px solid ${swatch.danger}` }}>
               {deleteError && <div role="alert" style={{ fontSize: FS.sm, color: swatch.danger, fontWeight: 700 }}>{deleteError}</div>}
               <span id="delete-confirm-label" style={{ fontSize: FS.xs, fontWeight: 700, color: swatch.danger }}>
                 Type {DELETE_PHRASE} to confirm
@@ -415,7 +415,7 @@ export default function AccountDataPrivacySection({
                 value={deletePhrase}
                 onChange={e => setDeletePhrase(e.target.value)}
                 placeholder={DELETE_PHRASE}
-                style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, borderRadius: R.md, fontSize: FS.sm, fontFamily: sans, color: INK }}
+                style={{ padding: `${SP.sm}px ${SP.md}px`, border: `1px solid ${BORDER}`, fontSize: FS.sm, fontFamily: sans, color: INK }}
               />
               <div style={{ display: 'flex', gap: SP.sm }}>
                 <Button
