@@ -51,7 +51,7 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
         <div style={{height:1,flex:1,background:`${color}35`}}/>
         <span style={{fontSize:FS.xs,fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
         {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,borderRadius:3,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
+          <span style={{fontSize:FS.micro,fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
         }
         <span style={{fontSize:FS.xxs,color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
@@ -65,24 +65,24 @@ export function NPCCategoryGroup({category, label, group, impFilter, search, rel
 export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e0d0b0'}}) {
   const [open,setOpen]=useState(false);
   return (
-    <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,borderRadius:7,overflow:'hidden',marginBottom:10}}>
+    <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
       <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
           <div style={{flex:1}}>
             <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
+              <span style={{fontSize:FS.micro,fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
               <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],borderRadius:3,padding:'1px 6px'}}>◆ EMERGENT</span>}
+              {rel.flagDriven&&<span style={{fontSize:FS.micro,fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px'}}>◆ EMERGENT</span>}
             </div>
             <div style={{fontSize:FS.xs,color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
           </div>
           <span style={{fontSize:FS.xs,color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
         </div>
       </button>
-      {open&&<div style={{padding:'10px 14px',background:'rgba(250,248,244,0.97)',borderTop:`1px solid ${style.border}`}}>
+      {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
         <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',borderRadius:5,padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:FS.sm,color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
       </div>}
     </div>
   );
@@ -93,9 +93,9 @@ export function ConflictCard({conflict:c}) {
   const intStyle={high:{color:'#8b1a1a',label:'HIGH TENSION'},moderate:{color:'#a0762a',label:'MODERATE TENSION'},low:{color:'#1a5a28',label:'LOW TENSION'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
-    <div style={{background:swatch.dangerBg,border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',borderRadius:7,padding:'12px 14px',marginBottom:10}}>
+    <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
-        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,borderRadius:3,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
+        <span style={{fontSize:FS.micro,fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
         <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
       </div>
       <p style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
@@ -162,9 +162,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
       background:swatch['#FAF8F4'],
       border:`1px solid ${isPinned ? '#c8a8e8' : `${color}20`}`,
       borderLeft:`3px solid ${isPinned ? pinColor : color}`,
-      borderRadius:6,marginBottom:6,overflow:'hidden',
-      // Subtle tint when pinned — mirrors the narrative panel's purple wash.
-      boxShadow: isPinned ? `inset 2px 0 0 rgba(106,42,154,0.08)` : 'none',
+      marginBottom:6,overflow:'hidden',
     }}>
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,padding:'8px 12px',background:'none',border:'none',cursor:'pointer',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
         <div style={{flex:1,minWidth:0}}>
@@ -187,9 +185,8 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             style={{
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
-              borderRadius:4,
-              background: isPinned ? 'rgba(106,42,154,0.12)' : 'transparent',
-              border: `1px solid ${isPinned ? 'rgba(160,100,220,0.45)' : 'transparent'}`,
+              background: isPinned ? swatch['#F0EBFF'] : 'transparent',
+              border: `1px solid ${isPinned ? '#c8a8e8' : 'transparent'}`,
               color: isPinned ? pinColor : '#b8a898',
               cursor:'pointer',
               transition:'all 0.15s',
@@ -204,7 +201,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
         <div style={{padding:'0 12px 10px',borderTop:`1px solid ${color}15`}}>
           {publicTraits.length > 0 && (
             <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:6,marginTop:6}}>
-              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],borderRadius:3,padding:'0 5px'}}>{t.label}: {t.value}</span>)}
+              {publicTraits.map((t,i) => <span key={`${t.key}-${i}`} title={t.value} style={{fontSize:FS.xxs,color:swatch.inkMag3,background:swatch['#EDE3CC'],padding:'0 5px'}}>{t.label}: {t.value}</span>)}
             </div>
           )}
           {(npc.corrupt || npc.ousted) && (
@@ -216,16 +213,16 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
                   ...(compromiseLc?.tone === 'muted'
-                    ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.10)', border:'1px solid rgba(120,90,40,0.35)' }
+                    ? { color:swatch.inkMag3, border:'1px solid #b8a878' }
                     : compromiseLc?.tone === 'exposed'
-                      ? { color:swatch.inkMag3, background:'rgba(120,90,40,0.12)', border:'1px solid rgba(120,90,40,0.4)' }
-                      : { color:swatch.danger, background:'rgba(139,26,26,0.12)', border:'1px solid rgba(139,26,26,0.4)' }),
-                  borderRadius:4,padding:'1px 6px',
+                      ? { color:swatch.inkMag3, border:'1px solid #b09860' }
+                      : { color:swatch.danger, border:'1px solid #d0a0a0' }),
+                  padding:'1px 6px',
                 }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
-                  background:'rgba(120,90,40,0.12)',border:'1px solid rgba(120,90,40,0.4)',borderRadius:4,padding:'1px 6px',
+                  border:'1px solid #b09860',padding:'1px 6px',
                 }}>Exposed</span>
               )}
               {npc.corrupt && npc.corruptTies?.criminalInstitution && (
@@ -255,7 +252,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
             </p>
           )}
           {(npc.secret || editMode) && (
-            <div style={{marginTop:6,background:swatch['#F5F0E8'],borderRadius:4,padding:'5px 8px'}}>
+            <div style={{marginTop:6,background:swatch['#F5F0E8'],padding:'5px 8px'}}>
               <span style={{fontSize:FS.xxs,fontWeight:700,color:swatch.inkMag3}}>Secret: </span>
               <EditableText
                 value={typeof npc.secret === 'string' ? npc.secret : (npc.secret?.what || '')}

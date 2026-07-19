@@ -20,10 +20,9 @@ export function NarrativeNote({ note }) {
   return (
     <div style={{
       marginBottom: 14,
-      background: 'linear-gradient(135deg, rgba(74,26,122,0.05), rgba(106,42,154,0.03))',
-      border: '1px solid rgba(123,79,207,0.25)',
-      borderLeft: '3px solid rgba(123,79,207,0.70)',
-      borderRadius: 7,
+      background: swatch['#FAF8F4'],
+      border: '1px solid #c8b89a',
+      borderLeft: '3px solid #5A6E82',
       overflow: 'hidden',
       fontFamily: sans,
     }}>
