@@ -168,11 +168,21 @@ begin
   end if;
 
   select * into v_settings from public.credit_auto_reload_settings where user_id = p_user;
-  if not found or not v_settings.enabled then
-    return jsonb_build_object('ok', false, 'reason', 'disabled');
+  if not found then
+    -- Never configured → no reload AND no low-balance nudge (the nudge is for users
+    -- who set up auto-reload, per §4.3).
+    return jsonb_build_object('ok', false, 'reason', 'no_settings');
   end if;
 
   v_balance := public.get_credit_balance(p_user);
+
+  if not v_settings.enabled then
+    -- Configured-but-OFF: report whether they have actually crossed below threshold,
+    -- so the caller can fire the low-balance nudge (§4.3) exactly when it applies.
+    return jsonb_build_object('ok', false, 'reason', 'disabled',
+      'below_threshold', (v_balance < v_settings.threshold_credits));
+  end if;
+
   if v_balance >= v_settings.threshold_credits then
     return jsonb_build_object('ok', false, 'reason', 'above_threshold');
   end if;
@@ -209,7 +219,8 @@ begin
   where user_id = p_user and month_bucket = v_bucket
     and state in ('succeeded', 'pending', 'requires_action');
   if v_spent + v_amount > v_settings.monthly_cap_cents then
-    return jsonb_build_object('ok', false, 'reason', 'cap');
+    -- Capped, but they ARE below threshold (passed that gate) → the nudge applies.
+    return jsonb_build_object('ok', false, 'reason', 'cap', 'below_threshold', true);
   end if;
 
   -- The claim: the partial unique index bars a second open attempt.

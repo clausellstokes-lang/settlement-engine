@@ -105,6 +105,23 @@ async function safeNotify(deps: AutoReloadDeps, kind: AutoReloadNotifyKind, payl
   } catch { /* notifications never break the money path */ }
 }
 
+/** The low-balance nudge (§4.3): configured-but-can't-fire + below threshold →
+ *  notify at most once per month_bucket (mark_low_balance_notified is the claim). */
+async function maybeLowBalanceNotify(
+  admin: Admin, userId: string, deps: AutoReloadDeps, now: number,
+  // deno-lint-ignore no-explicit-any
+  claim: any,
+): Promise<void> {
+  try {
+    const eligible = (claim?.reason === 'disabled' && claim?.below_threshold === true) || claim?.reason === 'cap';
+    if (!eligible) return;
+    const bucket = new Date(now).toISOString().slice(0, 7); // 'YYYY-MM' (UTC)
+    const { data: stamped, error } = await admin.rpc('mark_low_balance_notified', { p_user: userId, p_bucket: bucket });
+    if (error || !stamped) return; // already nudged this bucket, or transient error
+    await safeNotify(deps, 'low_balance', { userId });
+  } catch { /* never throw */ }
+}
+
 /**
  * Fire-and-forget auto-reload check for one user, run AFTER a successful spend.
  * NEVER throws.
@@ -122,7 +139,14 @@ export async function maybeAutoReload(admin: Admin, userId: string, deps: AutoRe
       p_user: userId, p_unit_amount_cents: price.unitAmount, p_credits_per_unit: CREDITS_25,
     });
     if (claimErr) { logError('auto-reload', userId, claimErr.message, { stage: 'claim' }); return; }
-    if (!claim?.ok) return;                    // refused — a no-op (low-balance notify is §4.3/M-3f)
+    if (!claim?.ok) {
+      // Refused. The one refusal that warrants a nudge: the user CONFIGURED
+      // auto-reload but it can't fire while they're below threshold — either it's
+      // OFF (reason 'disabled' + below_threshold) or the monthly cap blocked it
+      // (reason 'cap'). At most one nudge per month_bucket (§4.3).
+      await maybeLowBalanceNotify(admin, userId, deps, now, claim);
+      return;
+    }
 
     const attemptId = claim.attempt_id as string;
     const amountCents = claim.amount_cents as number;

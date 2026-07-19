@@ -84,9 +84,25 @@ describe('claim_auto_reload_attempt', () => {
     expect((await claim(db)).reason).toBe('above_threshold');
   });
 
-  it('refuses when disabled', async () => {
-    await seed(db, { balance: 1, enabled: false });
-    expect((await claim(db)).reason).toBe('disabled');
+  it('refuses when disabled, reporting below_threshold for the low-balance nudge', async () => {
+    await seed(db, { balance: 1, enabled: false, threshold: 5 });
+    const r = await claim(db);
+    expect(r.reason).toBe('disabled');
+    expect(r.below_threshold).toBe(true);
+  });
+
+  it('disabled but ABOVE threshold reports below_threshold false (no nudge)', async () => {
+    await seed(db, { balance: 20, enabled: false, threshold: 5 });
+    const r = await claim(db);
+    expect(r.reason).toBe('disabled');
+    expect(r.below_threshold).toBe(false);
+  });
+
+  it('refuses with no_settings when the user never configured auto-reload', async () => {
+    await db.exec(`insert into auth.users(id) values ('${U}') on conflict do nothing;`);
+    await db.exec(`insert into public._test_bal(user_id, balance) values ('${U}', 1) on conflict (user_id) do update set balance = 1;`);
+    // No credit_auto_reload_settings row seeded.
+    expect((await claim(db)).reason).toBe('no_settings');
   });
 
   it('refuses over the monthly cap', async () => {

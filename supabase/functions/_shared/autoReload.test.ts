@@ -13,11 +13,15 @@ const { maybeAutoReload, __resetPriceCacheForTest } = await import('./autoReload
 const U = 'user-1';
 
 // deno-lint-ignore no-explicit-any
-function makeAdmin(claim: any, opts: { customerId?: string | null } = {}) {
+function makeAdmin(claim: any, opts: { customerId?: string | null; stamped?: boolean } = {}) {
   const updates: Array<{ table: string; vals: Record<string, unknown>; id: string }> = [];
   const rpcCalls: Array<{ fn: string; args: unknown }> = [];
   const client = {
-    rpc: (fn: string, args: unknown) => { rpcCalls.push({ fn, args }); return Promise.resolve({ data: claim, error: null }); },
+    rpc: (fn: string, args: unknown) => {
+      rpcCalls.push({ fn, args });
+      if (fn === 'mark_low_balance_notified') return Promise.resolve({ data: opts.stamped ?? false, error: null });
+      return Promise.resolve({ data: claim, error: null });
+    },
     from: (table: string) => ({
       select: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: opts.customerId === undefined ? { stripe_customer_id: 'cus_1' } : { stripe_customer_id: opts.customerId }, error: null }) }) }),
       update: (vals: Record<string, unknown>) => ({ eq: (_c: string, id: string) => { updates.push({ table, vals, id }); return Promise.resolve({ error: null }); } }),
@@ -160,4 +164,51 @@ Deno.test('dark (no-op) when no Stripe key and no injected client', async () => 
   } finally {
     if (prev) Deno.env.set('STRIPE_SECRET_KEY', prev);
   }
+});
+
+// ── Low-balance nudge (§4.3, slice M-3f) — inert notify seam, claim-once ──────
+
+Deno.test('low-balance nudge fires when auto-reload is OFF and below threshold (claim-once stamp)', async () => {
+  __resetPriceCacheForTest();
+  const a = makeAdmin({ ok: false, reason: 'disabled', below_threshold: true }, { stamped: true });
+  const s = makeStripe();
+  const notified: string[] = [];
+  await maybeAutoReload(a.admin, U, { stripe: s, notify: (kind) => { notified.push(kind); } });
+  const mark = a.rpcCalls.find((c) => c.fn === 'mark_low_balance_notified');
+  assertEquals((mark!.args as Record<string, unknown>).p_user, U);
+  assertEquals(notified, ['low_balance']);
+  assertEquals(s._created.length, 0); // no reload — it's OFF
+});
+
+Deno.test('low-balance nudge fires when the monthly cap blocked the reload', async () => {
+  __resetPriceCacheForTest();
+  const a = makeAdmin({ ok: false, reason: 'cap', below_threshold: true }, { stamped: true });
+  const notified: string[] = [];
+  await maybeAutoReload(a.admin, U, { stripe: makeStripe(), notify: (kind) => { notified.push(kind); } });
+  assertEquals(notified, ['low_balance']);
+});
+
+Deno.test('no nudge when disabled but NOT below threshold', async () => {
+  __resetPriceCacheForTest();
+  const a = makeAdmin({ ok: false, reason: 'disabled', below_threshold: false });
+  const notified: string[] = [];
+  await maybeAutoReload(a.admin, U, { stripe: makeStripe(), notify: (kind) => { notified.push(kind); } });
+  assertEquals(a.rpcCalls.some((c) => c.fn === 'mark_low_balance_notified'), false);
+  assertEquals(notified, []);
+});
+
+Deno.test('no nudge when above threshold or already nudged this bucket (stamp false)', async () => {
+  __resetPriceCacheForTest();
+  // above_threshold → not eligible, no mark
+  const a1 = makeAdmin({ ok: false, reason: 'above_threshold' });
+  const n1: string[] = [];
+  await maybeAutoReload(a1.admin, U, { stripe: makeStripe(), notify: (k) => { n1.push(k); } });
+  assertEquals(a1.rpcCalls.some((c) => c.fn === 'mark_low_balance_notified'), false);
+  assertEquals(n1, []);
+  // eligible but the stamp says already-notified this bucket → no duplicate send
+  const a2 = makeAdmin({ ok: false, reason: 'cap', below_threshold: true }, { stamped: false });
+  const n2: string[] = [];
+  await maybeAutoReload(a2.admin, U, { stripe: makeStripe(), notify: (k) => { n2.push(k); } });
+  assertEquals(a2.rpcCalls.some((c) => c.fn === 'mark_low_balance_notified'), true);
+  assertEquals(n2, []); // stamp false → no send
 });
