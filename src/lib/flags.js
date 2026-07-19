@@ -192,6 +192,25 @@ export const FLAGS = Object.freeze({
     default: true,
     description: 'Simulation-led premium pricing copy. ON (default) = "generate a town, then run the region" — names the simulation, never size. OFF = the old "unlimited saves / full size" copy.',
   },
+
+  // ── Loading journeys (Slice C2L) — the taste-gate ──────────────────────────
+  // The progress-scrubbed growth film as the generation loading backdrop (and the
+  // reality-mode unfurl behind the realm/FMG boot). Default OFF: the stills floor
+  // is the shipping default; the walk flips this on to compare film-on vs
+  // stills-only WITHOUT a rebuild (engineering law #5). Streamed media never
+  // touches the eager JS closure; flag-off ships zero network weight.
+  loadingJourneyFilm: {
+    default: false,
+    description: 'C2L: the progress-scrubbed journey film as the loading backdrop (generation + realm). OFF = stills floor only (default). Flip on at the taste walk to compare without a rebuild.',
+  },
+  // Which produced media set the film uses when loadingJourneyFilm is on. TRUE =
+  // the "bg" set (six 5.04s legs, ~42 MB, cinematic drift); FALSE = the "journey"
+  // set (six 2.5s legs, ~10 MB, lean). The owner ruled BOTH ship to the walk; this
+  // switches between them at runtime. The losing set is deleted at the walk ruling.
+  loadingJourneySetBg: {
+    default: true,
+    description: 'C2L media-set toggle (only meaningful when loadingJourneyFilm is on). TRUE = "bg" set (5.04s legs, ~42 MB); FALSE = "journey" set (2.5s legs, ~10 MB). The walk compares the two; the loser is deleted.',
+  },
 });
 
 // ── Resolution ────────────────────────────────────────────────────────────

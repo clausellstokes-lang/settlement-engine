@@ -36,6 +36,9 @@ import { useStore } from '../../store/index.js';
 import { tx } from '../../copy/index.js';
 import { Funnel, EVENTS } from '../../lib/analytics.js';
 import { GOLD, INK_DEEP, sans, serif_, FS, SP, R, swatch } from '../theme.js';
+import { useFlag } from '../../lib/flags.js';
+import { legsForTier } from '../loadingJourney/journeyManifest.js';
+import JourneyFilm from '../loadingJourney/JourneyFilm.jsx';
 
 // Mono font for the step list. theme.js doesn't export one, so we
 // declare it locally — kept tight (single value, used once).
@@ -63,6 +66,12 @@ export default function PipelineReveal({ onComplete }) {
   const history = useStore(s => s.pipelineHistory || []);
   const settlementName = useStore(s => s.settlement?.name || 'this settlement');
   const tier = useStore(s => s.settlement?.tier);
+  // C2L — the loading journey film as this theater's BACKDROP. Off by default
+  // (taste-gate); the stills floor + reveal card are unchanged when off.
+  const hasSettlement = useStore(s => !!s.settlement);
+  const showFilm = useFlag('loadingJourneyFilm');
+  const useBgSet = useFlag('loadingJourneySetBg');
+  const [filmClock, setFilmClock] = useState(null);
 
   // Stable label lookup. tx() returns the whole map; we read once.
   const labelMap = useMemo(() => tx('pipelineSteps') || {}, []);
@@ -106,6 +115,11 @@ export default function PipelineReveal({ onComplete }) {
       const rolled = (minS + Math.random() * (maxS - minS)) * 1000;
       targetMsRef.current = Math.max(MIN_TOTAL_MS, rolled);
     }
+    // Share this reveal's timeline with the loading film so it scrubs the growth
+    // and lands on the ordered tier exactly as the dossier arrives (both keyed to
+    // startedAt + targetMs). Setting state here does not re-arm this effect (its
+    // deps exclude filmClock), so the reveal's own timing is untouched.
+    setFilmClock({ startedAt: startedAtRef.current, targetMs: targetMsRef.current });
 
     let i = 0;
     let dwellTimer = null;
@@ -149,7 +163,22 @@ export default function PipelineReveal({ onComplete }) {
         animation: 'sf-fadeIn 0.2s ease-out',
       }}
     >
+      {/* C2L backdrop — the desk→tier growth film, scrubbed by this reveal's
+          timeline (zIndex 0, behind the card). Only when the taste-gate is on and
+          the shared clock is stamped; the stills are its own guaranteed floor. */}
+      {showFilm && filmClock && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <JourneyFilm
+            set={useBgSet ? 'bg' : 'journey'}
+            legsToPlay={legsForTier(tier)}
+            arrived={hasSettlement}
+            scriptWindowMs={filmClock.targetMs}
+            startedAtMs={filmClock.startedAt}
+          />
+        </div>
+      )}
       <div style={{
+        position: 'relative', zIndex: 1,
         maxWidth: 460, width: '90%',
         padding: `${SP.xxl}px ${SP.xl}px`,
         background: 'linear-gradient(180deg, rgba(43,33,16,0.85), rgba(27,20,8,0.95))',
