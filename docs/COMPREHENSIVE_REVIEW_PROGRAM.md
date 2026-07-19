@@ -1153,6 +1153,32 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ WAVE D — THE PERIMETER COMPLETE (2026-07-19, claude/wave-d-perimeter @
+4b65ab82, 7 commits) + THE FINISHER ORDERED.** WD-a crawler governance (the
+major AI-training/assistant crawler set blocked; funnel crawlers + unfurl bots
+deliberately preserved — the og-image botGuard trap AVOIDED; noai persisted
+through SPA mount via seo.js; X-Robots-Tag noai + TDM-Reservation headers) ·
+WD-b ⭐ A REAL DEFECT FIXED: mapBridge parent-inbound source check was
+FAIL-OPEN when contentWindow was momentarily null — now fail-closed both
+directions; vendored fork untouched · WD-c the ToS anti-automation draft ·
+WD-d bot-wave telemetry (_vband additive prop, no new names, zero eager,
+band-only privacy; ingest-side velocity windows) · WD-e the rate-limit audit
+TABLE + the clean gap hardened (customer-portal per-user 20/hr + per-IP 60/hr
+fail-closed) · WD-f the wall census (an earlier claim CORRECTED —
+verify-checkout WAS pinned; real-but-unpinned backfill list delivered:
+save-limit trigger · claim_ai_request · limiter RPCs · deny-all RLS · the
+CHECK class; the load-bearing ingest_check_rate pin ADDED 5/5) · WD-g the
+Turnstile seam + PERIMETER_RUNBOOK (honest-limits verbatim-in-spirit). Eager
++3 B net (signed). Suite 13,610 / the 4 parked + sibling budget red + 2
+isolation-cleared. ⬛ MANAGER VETO on its JUDGMENT #3: the seam stopped short
+of CODE-COMPLETE wiring (render sites + verifyTurnstile call-sites left as
+documented steps) — under build-completeness, activation = keys + dashboard
+ONLY. THE PERIMETER FINISHER DISPATCHES: (1) wire Turnstile render
+(AuthPanel/PurchaseModal) + server verify call-sites (create-checkout /
+verify-single-dossier) + CSP allowance, flag-gated, key-inert, pinned; (2)
+the AI limiter goes FAIL-CLOSED + gains the IP dimension (cost-exposure
+hardening inside the commission — the token-bucket migration WRITTEN-not-
+deployed); (3) the census pin backfill list.
 **⬛⭐⭐ THE CALIBER SWEEP COMPLETE (2026-07-19) — all five owner-ordered
 conversions landed at sample-true form.** The closer, caliber-primitives @
 41c2702f: CP-a Segmented → THE DIVIDER-STRIP (sample cited to the line —
