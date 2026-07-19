@@ -143,10 +143,22 @@ const CEILINGS = Object.freeze({
   // the chips KEEP boxShadow:'none' — it suppresses the primary Button's ELEV[1], so
   // striking it would ADD elevation). Beats/behavior untouched; the two functional
   // parchment load/error scrims stay (raw-hex, a tokenize-later follow-up).
-  borderRadius: 1035,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C5-a·ii, THE SURVEYOR'S TABLE — the pulse & the chronicle, part 2):
+  // borderRadius 1035→1010, rgba 262→260, tintedCallouts 235→234. WorldPulsePanel
+  // de-rounded ALL 15 of its plates (both section shells + icon stamps, the paused-
+  // verdict surface, the roll rows, the six dashed empty notes) and its two rgba red
+  // error boxes + the gold proposal-counsel note became rubric-headed ClerkNotes (−2
+  // rgba, −1 GOLD_BG; the RED import retired); the H2 page-turn beat is untouched. The
+  // gold advance-adjacent tints (advancing bar, paused surface, passed-roll rows) stay
+  // — gold is the house advance channel, not a SaaS wash. AdvanceReport de-rounded all
+  // 10 of its plates: the Chip is now a square small-caps source stamp and every card/
+  // scrubber/altitude-tab is rule-framed (R import retired); the H2 slip beat is
+  // untouched. The amber/gold/violet chip color-coding (semantic BG washes) is kept as
+  // a deferred source-stamp follow-up (re-tone, not re-round).
+  borderRadius: 1010,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 110,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 262,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 235,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  rgbaLiterals: 260,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 234,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

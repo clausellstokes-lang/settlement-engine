@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Activity, BookMarked, CheckCircle2, Clock3, XCircle } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
-import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, RED, SECOND, sans } from '../theme.js';
+import { BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GOLD_BG, INK, MUTED, SECOND, sans } from '../theme.js';
+import { ClerkNote } from '../generate/ClerkNote.jsx';
 import {
   ACTIVE_UI_STAGES,
   WAR_SHAPED_TYPES,
@@ -176,7 +177,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         flexDirection: 'column',
         background: CARD,
         border: `1px solid ${BORDER}`,
-        borderRadius: 8,
         overflow: 'hidden',
       }}>
         <header style={{
@@ -190,7 +190,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
           <div style={{
             width: 34,
             height: 34,
-            borderRadius: 8,
             border: `1px solid ${BORDER2}`,
             background: CARD,
             display: 'flex',
@@ -212,9 +211,9 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </header>
         <div style={{ padding: 16 }}>
           {actionError && (
-            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
               {actionError}
-            </div>
+            </ClerkNote>
           )}
           <OutcomeCard
             title="Start the campaign's World Clock first"
@@ -240,7 +239,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
       flexDirection: 'column',
       background: CARD,
       border: `1px solid ${BORDER}`,
-      borderRadius: 8,
       overflow: 'hidden',
     }}>
       <header style={{
@@ -254,7 +252,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         <div style={{
           width: 34,
           height: 34,
-          borderRadius: 8,
           border: `1px solid ${BORDER2}`,
           background: CARD,
           display: 'flex',
@@ -319,12 +316,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
         </div>
         <Section title="Pending Proposals" count={pending.length}>
           {actionError && (
-            <div style={{ border: '1px solid rgba(197,74,74,0.45)', borderRadius: 8, padding: 10, marginBottom: 10, color: RED, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, background: 'rgba(197,74,74,0.08)' }}>
+            <ClerkNote rubric="The realm balked" role="alert" style={{ marginBottom: 10 }}>
               {actionError}
-            </div>
+            </ClerkNote>
           )}
           {paused && (
-            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, borderRadius: 8, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div data-testid="paused-verdict-surface" style={{ border: `1px solid ${GOLD}`, padding: 12, marginBottom: 10, background: GOLD_BG, display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ color: INK, fontFamily: sans, fontSize: FS.xs, fontWeight: 800, lineHeight: 1.5 }}>
                 The advance paused for your word. {pendingMajors.length > 0
                   ? `${pendingMajors.length} major turn${pendingMajors.length === 1 ? '' : 's'} await your verdict — keep each (it applies as recommended) or dismiss it — then resume the interval.`
@@ -369,12 +366,12 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
             </div>
           )}
           {pending.length > 0 && proposalNote && (
-            <div style={{ border: `1px solid ${BORDER2}`, borderRadius: 8, padding: 10, marginBottom: 10, color: MUTED, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, background: GOLD_BG }}>
+            <ClerkNote rubric="The realm's counsel" style={{ marginBottom: 10 }}>
               {proposalNote}
-            </div>
+            </ClerkNote>
           )}
           {pending.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pending proposals.
             </div>
           ) : (
@@ -417,7 +414,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
 
         <Section title="Active Stressors & Echoes" count={activeStressors.length + echoes.length}>
           {activeStressors.length + echoes.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No active stressors. The realm is quiet — for now.
             </div>
           ) : (
@@ -482,7 +479,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
 
         <Section title="Latest Pulse" count={latestPulse ? selected : 0}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : (
@@ -521,11 +518,11 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
 
         <Section title="Impact Digest" count={impactDigest.length}>
           {!latestPulse ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No pulse history yet.
             </div>
           ) : impactDigest.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No regional impacts recorded for this pulse.
             </div>
           ) : (
@@ -548,7 +545,7 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
 
         <Section title="Roll Explanations" count={rolls.length}>
           {rolls.length === 0 ? (
-            <div style={{ border: `1px dashed ${BORDER}`, borderRadius: 8, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
+            <div style={{ border: `1px dashed ${BORDER}`, padding: 16, color: MUTED, fontFamily: sans, fontSize: FS.sm, background: CARD_ALT }}>
               No rolls recorded.
             </div>
           ) : (
@@ -563,7 +560,6 @@ export default function WorldPulsePanel({ campaign, advancing = false }) {
                     gap: 8,
                     padding: 10,
                     border: `1px solid ${passed ? GOLD : BORDER}`,
-                    borderRadius: 8,
                     background: passed ? GOLD_BG : CARD,
                   }}>
                     <Clock3 size={15} color={passed ? GOLD : MUTED} style={{ marginTop: 2 }} />
