@@ -70,7 +70,7 @@ import { armyTransitLedger } from '../spatial/armyTransit.js';
 import { advanceSettlementPestilence } from './pestilenceKernel.js';
 import { advanceGenerosity } from './generosityKernel.js';
 import { advanceUpswing } from './upswingKernel.js';
-import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions } from './traditionsKernel.js';
+import { advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads } from './roadsKernel.js';
 import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
 import { advanceSettlementLifecycle } from './settlementLifecycleKernel.js';
 import { evaluateSettlementLifecycle } from './settlementLifecycleFirstClass.js';
@@ -2339,7 +2339,18 @@ export function simulateCampaignWorldPulse({ campaign, saves = [], interval = 'o
   // virtual traditionsEnabled flag ⇒ a complete no-op (zero key, zero mirror, zero news) —
   // the traditions dormancy golden proves it. The ONE draw per (tradition, year) is a
   // tick-invariant world-seed fork (never the per-tick pulse rng).
-  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditions({
+  // THE ROADS (ENGINE LIFT #5: named-NPC travel · capture · ransom · conversion) rides the
+  // SAME seam, composed AFTER traditions inside advanceNpcGrowthWithFabricAndConsequenceAnd-
+  // LadderAndTraditionsAndRoads (roadsKernel.js — the ceiling-safe name swap): a lazy leaf
+  // that moves middle-rank envoys to neighbour settlements on purposed missions, rolls the
+  // gauntlet against TRUTH while routing on the KNOWN picture, and shelves a captured named
+  // NPC off-stage (the isOffStage chokepoint) until ransom/rescue/expulsion/covert
+  // conversion. Authoritative sidecar spatialLedgers.roads + a compact npc.whereabouts
+  // display mirror. DORMANT behind the virtual roadsEnabled flag AND the spatial-canon gate
+  // ⇒ a complete no-op (zero key, zero mirror, zero news) — the roads dormancy golden proves
+  // wired-but-dormant is byte-identical to pre-wire. Cadence forks a tick-invariant world
+  // seed; hazards fork the per-tick pulse rng confluence with stable labels.
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover(advanceNpcGrowthWithFabricAndConsequenceAndLadderAndTraditionsAndRoads({
     snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
     graph: applied.regionalGraph, tick: worldState.tick, now,
   }), memoryState, settlementUpdates, wizardNews, now));
