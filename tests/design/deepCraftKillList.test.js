@@ -83,7 +83,12 @@ const CEILINGS = Object.freeze({
   // the composite's bespoke green sub-collapsible to master's shared Section
   // primitive (own top-level collapsible level), striking the hand-rolled outer
   // div's inline borderRadius:8 (the Section's frame lives in the primitive).
-  borderRadius: 1077,   // the rounded-card tell — plates are rule-framed, not rounded
+  // Lowered again (C4c-a, THE ANNALS — ChronicleTab materials pass): borderRadius
+  // 1077→1075. The Chronicle's cool-blue rounded event cards became a ruled
+  // parchment register — the row's borderRadius:7 and the source-chip's
+  // borderRadius:3 both struck (rows are a left source-rule + a feint annal
+  // hairline now; chips are square small-caps source stamps).
+  borderRadius: 1075,   // the rounded-card tell — plates are rule-framed, not rounded
   boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
   rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
   tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
