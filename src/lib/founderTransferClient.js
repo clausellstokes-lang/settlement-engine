@@ -104,3 +104,32 @@ export function reelectPayout({ caseId }) {
 export function payoutOnboarding() {
   return callAction('payout_onboarding', {});
 }
+
+// ── The standing buyback (§6.8, M-10) — its OWN master switch (founder_buyback) ────
+
+/**
+ * Read whether the standing buyback is available (its master switch is on) + the
+ * caller's open buyback rows. NEVER throws; `available:false` means the buyback is dark
+ * (independent of the transfer switch) — the affordance renders nothing.
+ * @returns {Promise<{ available: boolean, buybacks: Array<object> }>}
+ */
+export async function fetchBuybackStatus() {
+  if (!isConfigured) return { available: false, buybacks: [] };
+  try {
+    const { data, error } = await supabase.functions.invoke(FN, { body: { action: 'buyback_status' } });
+    if (error) return { available: false, buybacks: [] };
+    return { available: data?.available === true, buybacks: Array.isArray(data?.buybacks) ? data.buybacks : [] };
+  } catch {
+    return { available: false, buybacks: [] };
+  }
+}
+
+/** Outgoing: anomaly-checked start → emailed buyback confirmation code. */
+export function buybackStart() {
+  return callAction('buyback_start', {});
+}
+
+/** Outgoing: verify the code → release the seat + record the buyback. @returns {{buyback_id, amount_cents}} */
+export function buybackConfirm({ code, payoutForm }) {
+  return callAction('buyback_confirm', { code, payout_form: payoutForm });
+}

@@ -82,6 +82,104 @@ const PAYOUT_LABEL = {
   failed: 'Your payout could not be completed — contact support',
 };
 
+/**
+ * BuybackAffordance (§6.8, M-10) — the standing buyback, rendered for a founder with no
+ * live transfer case. Self-contained (own availability read + state) so it is INDEPENDENT
+ * of the transfer master switch: dark by default (its own founder_buyback switch), it
+ * renders nothing until the owner lights it. Challenge-confirmed: start → emailed code →
+ * confirm (the seat is released + a payout scheduled at the seat_buyback_cents amount).
+ */
+function BuybackAffordance({ onDone }) {
+  const [available, setAvailable] = useState(null); // null = loading
+  const [step, setStep] = useState('idle');         // 'idle' | 'code'
+  const [payoutForm, setPayoutForm] = useState('connect_cash');
+  const [code, setCode] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState(null);
+  const [notice, setNotice] = useState(null);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const { fetchBuybackStatus } = await import('../../lib/founderTransferClient.js');
+        const { available: avail } = await fetchBuybackStatus();
+        if (alive) setAvailable(avail);
+      } catch { if (alive) setAvailable(false); }
+    })();
+    return () => { alive = false; };
+  }, []);
+
+  const start = useCallback(async () => {
+    setBusy(true); setError(null); setNotice(null);
+    try {
+      const { buybackStart } = await import('../../lib/founderTransferClient.js');
+      await buybackStart();
+      setStep('code');
+      setNotice('We emailed you a confirmation code.');
+    } catch (e) {
+      setError(e?.message || 'The buyback could not be started.');
+    } finally { setBusy(false); }
+  }, []);
+
+  const confirm = useCallback(async () => {
+    setBusy(true); setError(null); setNotice(null);
+    try {
+      const { buybackConfirm } = await import('../../lib/founderTransferClient.js');
+      await buybackConfirm({ code: code.trim(), payoutForm });
+      setStep('idle'); setCode('');
+      setNotice('Your seat has been sold back. Your payout will follow.');
+      if (typeof onDone === 'function') await onDone();
+    } catch (e) {
+      setError(e?.message || 'The buyback could not be completed.');
+    } finally { setBusy(false); }
+  }, [code, payoutForm, onDone]);
+
+  // Dark by default (own switch) or still loading → render nothing.
+  if (available === null || available === false) return null;
+
+  return (
+    <div style={{ marginTop: SP.xl }}>
+      <div style={{ fontSize: FS.sm, fontWeight: 700, color: INK }}>Sell your seat back</div>
+      <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.6, margin: `${SP.xs}px 0 ${SP.sm}px` }}>
+        You can sell your Founder seat back to SettlementForge at any time. The seat returns
+        to the pool and you receive the standing buyback amount at the payout form you elect.
+      </p>
+      {step === 'idle' ? (
+        <div>
+          <Row label="Your payout">
+            <select aria-label="Buyback payout form" value={payoutForm}
+              onChange={(e) => setPayoutForm(e.target.value)} style={{ ...textInputStyle, width: 220 }}>
+              <option value="connect_cash">Cash via Stripe (requires onboarding)</option>
+              <option value="account_credits">Account credits</option>
+            </select>
+          </Row>
+          <div style={{ marginTop: SP.md }}>
+            <Button variant="secondary" size="md" disabled={busy} onClick={start}>
+              {busy ? 'Working…' : 'Sell seat back — email me a code'}
+            </Button>
+          </div>
+          <Note>You’ll confirm with an emailed code. Re-enter your password first if prompted.</Note>
+        </div>
+      ) : (
+        <div>
+          <Row label="Confirmation code">
+            <input aria-label="Buyback confirmation code" style={codeInputStyle} value={code}
+              inputMode="numeric" onChange={(e) => setCode(e.target.value)} />
+          </Row>
+          <div style={{ marginTop: SP.md }}>
+            <Button variant="primary" size="md" disabled={busy || !code} onClick={confirm}>
+              {busy ? 'Working…' : 'Confirm sale'}
+            </Button>
+          </div>
+        </div>
+      )}
+      {error && <Note tone="danger">{error}</Note>}
+      {notice && <Note tone="success">{notice}</Note>}
+    </div>
+  );
+}
+
 export default function AccountSeatTransferPanel({ auth }) {
   const signedIn = Boolean(auth?.user?.id);
   const isFounder = Boolean(auth?.isFounder);
@@ -142,16 +240,23 @@ export default function AccountSeatTransferPanel({ auth }) {
     return null;
   }
 
+  // The buyback affordance is INDEPENDENT of the transfer switch (§6.8): a founder with no
+  // live/incoming case can sell their seat back whenever the buyback switch is lit.
+  const buybackEligible = isFounder && !incoming && !outgoing;
+
   return (
     <Section title="Founder seat transfer">
       {loading ? (
         <div style={{ fontSize: FS.sm, color: MUTED, padding: `${SP.sm}px 0` }}>Loading…</div>
       ) : !available ? (
-        // KEY-INERT: the master switch is off. Show the promise, not controls.
-        <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.6, margin: `${SP.xs}px 0 0` }}>
-          Founder seats can change hands through the official transfer process. Transfers
-          are coming under the published terms.
-        </p>
+        <>
+          {/* KEY-INERT: the transfer master switch is off. Show the promise, not controls. */}
+          <p style={{ fontSize: FS.sm, color: BODY, lineHeight: 1.6, margin: `${SP.xs}px 0 0` }}>
+            Founder seats can change hands through the official transfer process. Transfers
+            are coming under the published terms.
+          </p>
+          {buybackEligible && <BuybackAffordance onDone={refresh} />}
+        </>
       ) : (
         <div>
           {/* ── Incoming: a nominee with a pending invitation ── */}
@@ -302,6 +407,9 @@ export default function AccountSeatTransferPanel({ auth }) {
               )}
             </div>
           )}
+
+          {/* The standing buyback — independent switch; only for a founder with no case. */}
+          {buybackEligible && <BuybackAffordance onDone={refresh} />}
 
           {error && <Note tone="danger">{error}</Note>}
           {notice && <Note tone="success">{notice}</Note>}

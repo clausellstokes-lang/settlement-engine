@@ -40,6 +40,7 @@ function makeDeps(cfg: {
   const rpc = (fn: string, args: unknown) => {
     rpcCalls.push({ fn, args });
     if (fn === 'founder_transfer_enabled') return Promise.resolve({ data: cfg.enabled ?? true, error: null });
+    if (fn === 'founder_buyback_enabled') return Promise.resolve({ data: (cfg as { buybackEnabled?: boolean }).buybackEnabled ?? cfg.enabled ?? true, error: null });
     if (fn === 'ingest_check_rate') return Promise.resolve({ data: cfg.rate ?? true, error: null });
     const map = cfg.rpc ?? {};
     return Promise.resolve({ data: map[fn] ?? null, error: null });
@@ -63,7 +64,10 @@ function makeDeps(cfg: {
     return b;
   };
   // deno-lint-ignore no-explicit-any
-  const admin: any = { rpc, from, auth: { admin: { getUserById: () => Promise.resolve({ data: { user: { updated_at: '2000-01-01T00:00:00Z' } }, error: null }) } } };
+  const admin: any = { rpc, from, auth: { admin: {
+    getUserById: () => Promise.resolve({ data: { user: { updated_at: '2000-01-01T00:00:00Z', email: 'from@x.com' } }, error: null }),
+    updateUserById: () => Promise.resolve({ data: {}, error: null }),
+  } } };
   // deno-lint-ignore no-explicit-any
   const userClient: any = { auth: { getUser: () => Promise.resolve({ data: { user: cfg.user === undefined ? { id: 'u1', email: 'from@x.com' } : cfg.user }, error: null }) }, rpc };
   return {
@@ -211,6 +215,12 @@ function makeRunDueDeps(cfg: {
   const profiles = cfg.profiles ?? {};
   const users = cfg.users ?? {};
   const payoutClaims = [...(cfg.payoutClaims ?? [])];
+  // deno-lint-ignore no-explicit-any
+  const buybackClaims = [...(((cfg as any).buybackClaims) ?? [])];
+  // deno-lint-ignore no-explicit-any
+  const dormancyNudges = ((cfg as any).dormancyNudges) ?? null;
+  // deno-lint-ignore no-explicit-any
+  const abandonment = ((cfg as any).abandonment) ?? null;
   const rpc = (fn: string, args: unknown) => {
     calls.rpc.push({ fn, args });
     if (fn === 'expire_stale_transfer_cases') return Promise.resolve({ data: cfg.expired ?? 0, error: null });
@@ -219,6 +229,11 @@ function makeRunDueDeps(cfg: {
     if (fn === 'claim_due_transfer_payout') {
       return Promise.resolve({ data: payoutClaims.length ? payoutClaims.shift() : { ok: false, reason: 'none_due' }, error: null });
     }
+    if (fn === 'claim_due_buyback_payout') {
+      return Promise.resolve({ data: buybackClaims.length ? buybackClaims.shift() : { ok: false, reason: 'none_due' }, error: null });
+    }
+    if (fn === 'sweep_seat_dormancy_nudges') return Promise.resolve({ data: dormancyNudges, error: null });
+    if (fn === 'sweep_seat_abandonment') return Promise.resolve({ data: abandonment, error: null });
     if (fn === 'system_grant_credits') return Promise.resolve({ data: 100, error: null });
     return Promise.resolve({ data: null, error: null });
   };
@@ -496,6 +511,138 @@ Deno.test('reelect_payout: re-opens a parked cash election (RPC ok) → 200, cal
   const call = rpcCalls.find((c) => c.fn === 'reelect_transfer_payout');
   assertEquals((call!.args as { p_case: string }).p_case, 'c9');
   assertEquals((call!.args as { p_from: string }).p_from, 'u1'); // the JWT-verified caller
+});
+
+// ───────────────────────── THE STEWARDSHIP LIMB (§6.8, M-10) ─────────────────────
+
+Deno.test('buyback_start: the buyback master switch OFF → feature_unavailable (independent of transfers)', async () => {
+  const { deps } = makeDeps({ buybackEnabled: false });
+  const res = await handleFounderTransfer(req({ action: 'buyback_start' }), deps);
+  assertEquals(res.status, 503);
+  assertEquals((await res.json()).error, 'feature_unavailable');
+});
+
+Deno.test('buyback_status: switch ON → available:true (dark switch → feature_unavailable)', async () => {
+  let res = await handleFounderTransfer(req({ action: 'buyback_status' }), makeDeps({ buybackEnabled: true }).deps);
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).available, true);
+  res = await handleFounderTransfer(req({ action: 'buyback_status' }), makeDeps({ buybackEnabled: false }).deps);
+  assertEquals(res.status, 503);
+});
+
+Deno.test('buyback_start: a non-founder → 403; a founder in a live case → 409', async () => {
+  let d = makeDeps({ buybackEnabled: true, rows: {} });
+  let res = await handleFounderTransfer(req({ action: 'buyback_start' }), d.deps);
+  assertEquals(res.status, 403);
+  assertEquals((await res.json()).error, 'not_a_founder');
+
+  d = makeDeps({ buybackEnabled: true, rows: { founder_seats: { seat_id: 3, security_status: 'normal' } }, rpc: { has_active_transfer_lock: true } });
+  res = await handleFounderTransfer(req({ action: 'buyback_start' }), d.deps);
+  assertEquals(res.status, 409);
+  assertEquals((await res.json()).error, 'live_case');
+});
+
+Deno.test('buyback_start: a founder with a normal seat → issues + emails the buyback code', async () => {
+  const { deps, rpcCalls } = makeDeps({
+    buybackEnabled: true,
+    rows: { founder_seats: { seat_id: 3, security_status: 'normal' } },
+    rpc: { has_active_transfer_lock: false, issue_buyback_challenge: { ok: true, code: '424242' } },
+  });
+  const res = await handleFounderTransfer(req({ action: 'buyback_start' }), deps);
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).challenge_issued, true);
+  assertEquals(rpcCalls.some((c) => c.fn === 'issue_buyback_challenge'), true);
+});
+
+Deno.test('buyback_confirm: verifies the code, releases the seat, runs the ex-founder tier leg', async () => {
+  const { deps, rpcCalls } = makeDeps({
+    buybackEnabled: true,
+    rows: { profiles: { stripe_subscription_id: null } },   // non-subscribed → downgrade
+    rpc: {
+      verify_buyback_challenge: { ok: true },
+      claim_founder_seat_buyback: { ok: true, buyback_id: 'bb-1', seat_id: 3, amount_cents: 2500, payout_form: 'connect_cash' },
+      handle_premium_downgrade: {},
+    },
+  });
+  const res = await handleFounderTransfer(req({ action: 'buyback_confirm', code: '424242', payout_form: 'connect_cash' }), deps);
+  const body = await res.json();
+  assertEquals(res.status, 200);
+  assertEquals(body.buyback_id, 'bb-1');
+  assertEquals(body.amount_cents, 2500);
+  assertEquals(rpcCalls.some((c) => c.fn === 'claim_founder_seat_buyback'), true);
+  assertEquals(rpcCalls.some((c) => c.fn === 'handle_premium_downgrade'), true);
+});
+
+Deno.test('buyback_confirm: a bad code → 400 and NO seat release', async () => {
+  const { deps, rpcCalls } = makeDeps({ buybackEnabled: true, rpc: { verify_buyback_challenge: { ok: false, reason: 'bad_code' } } });
+  const res = await handleFounderTransfer(req({ action: 'buyback_confirm', code: '000000' }), deps);
+  assertEquals(res.status, 400);
+  assertEquals(rpcCalls.some((c) => c.fn === 'claim_founder_seat_buyback'), false);
+});
+
+Deno.test('run_due: a buyback connect_cash payout releases via ONE transfer keyed buyback-<id>, state → paid', async () => {
+  const { deps, calls } = makeRunDueDeps({
+    secret: 's', connectOn: true,
+    buybackClaims: [{ ok: true, buyback_id: 'bb9', from_user: 'fromB', payout_form: 'connect_cash', payout_amount_cents: 2500, connect_account_id: 'acct_b' }],
+  });
+  const res = await handleFounderTransfer(dueReq('s'), deps);
+  const body = await res.json();
+  assertEquals(res.status, 200);
+  assertEquals(body.swept.buybacksReleased, 1);
+  assertEquals(calls.transfers.length, 1);
+  assertEquals(calls.transfers[0].idempotencyKey, 'buyback-bb9');
+  assertEquals(calls.transfers[0].params.amount, 2500);
+  const upd = calls.updates.find((u) => u.table === 'founder_seat_buybacks');
+  assertEquals((upd!.obj as { state: string }).state, 'paid');
+  const me = calls.upserts.find((u) => u.table === 'money_events');
+  assertEquals((me!.rows as Array<{ event_key: string; kind: string }>)[0].event_key, 'buyback:bb9');
+  assertEquals((me!.rows as Array<{ kind: string }>)[0].kind, 'seat_buyback');
+});
+
+Deno.test('run_due: a buyback with Connect ABSENT parks at held (no Stripe call)', async () => {
+  const { deps, calls } = makeRunDueDeps({
+    secret: 's', connectOn: false,
+    buybackClaims: [{ ok: true, buyback_id: 'bb2', from_user: 'f2', payout_form: 'connect_cash', payout_amount_cents: 2500, connect_account_id: null }],
+  });
+  const res = await handleFounderTransfer(dueReq('s'), deps);
+  assertEquals((await res.json()).swept.buybacksReleased, 0);
+  assertEquals(calls.transfers.length, 0);
+  const upd = calls.updates.find((u) => u.table === 'founder_seat_buybacks');
+  assertEquals((upd!.obj as { state: string }).state, 'held');
+});
+
+Deno.test('run_due: a buyback account_credits election grants seat_payout credits, dedup by buyback_id', async () => {
+  __resetRateCacheForTest();
+  const { deps, calls } = makeRunDueDeps({
+    secret: 's', connectOn: false, priceUnitAmount: 500, // 20c/credit → round(2500*25/500)=125
+    buybackClaims: [{ ok: true, buyback_id: 'bb3', from_user: 'f3', payout_form: 'account_credits', payout_amount_cents: 2500, connect_account_id: null }],
+  });
+  const res = await handleFounderTransfer(dueReq('s'), deps);
+  assertEquals((await res.json()).swept.buybacksReleased, 1);
+  assertEquals(calls.transfers.length, 0);
+  const grant = calls.rpc.find((c) => c.fn === 'system_grant_credits');
+  const gArgs = grant!.args as { amount: number; source: string; metadata: { buyback_id: string } };
+  assertEquals(gArgs.amount, 125);
+  assertEquals(gArgs.source, 'seat_payout');
+  assertEquals(gArgs.metadata.buyback_id, 'bb3');
+});
+
+Deno.test('run_due: the stewardship sweeps email dormancy nudges + abandonment notices/escheats', async () => {
+  const { deps, calls } = makeRunDueDeps({
+    secret: 's',
+    dormancyNudges: [{ seat_id: 7, user_id: 'dormant1' }],
+    abandonment: [
+      { action: 'notice', seat_id: 8, user_id: 'quiet1' },
+      { action: 'escheated', seat_id: 9, user_id: 'gone1' },
+      { action: 'cleared', seat_id: 10, user_id: 'back1' },
+    ],
+  });
+  const res = await handleFounderTransfer(dueReq('s'), deps);
+  const body = await res.json();
+  assertEquals(res.status, 200);
+  assertEquals(body.swept.stewardship, 4);          // 1 nudge + 3 abandonment actions
+  // Emails: dormancy nudge + abandonment notice + escheat confirmation = 3 (cleared: none).
+  assertEquals(calls.emails.length, 3);
 });
 
 Deno.test('reelect_payout: a non-reelectable case → 409', async () => {

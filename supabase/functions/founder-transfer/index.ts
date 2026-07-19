@@ -107,9 +107,13 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
     return handleRunDue(req, admin, stripeApi, deps, json);
   }
 
-  // MASTER SWITCH FIRST (§6.3): disabled → feature_unavailable for every action.
-  const { data: enabled, error: switchErr } = await admin.rpc('founder_transfer_enabled');
-  if (switchErr) { logError('founder-transfer', null, switchErr.message, { stage: 'master_switch' }); return json({ error: 'feature_unavailable' }, 503); }
+  // MASTER SWITCH FIRST (§6.3/§6.8): disabled → feature_unavailable. The standing
+  // buyback rides its OWN switch (founder_buyback), independent of the transfer switch —
+  // so it can light without transfers, and stays dark by default (LAW 1).
+  const isBuybackAction = action === 'buyback_start' || action === 'buyback_confirm' || action === 'buyback_status';
+  const switchRpc = isBuybackAction ? 'founder_buyback_enabled' : 'founder_transfer_enabled';
+  const { data: enabled, error: switchErr } = await admin.rpc(switchRpc);
+  if (switchErr) { logError('founder-transfer', null, switchErr.message, { stage: 'master_switch', switch: switchRpc }); return json({ error: 'feature_unavailable' }, 503); }
   if (enabled !== true) return json({ error: 'feature_unavailable' }, 503);
 
   // AUTH (JWT-verified) — every action is authed.
@@ -349,6 +353,70 @@ export async function handleFounderTransfer(req: Request, deps: Deps = {}): Prom
         if (rErr) throw new Error(rErr.message);
         if (!r?.ok) return json({ error: 'cannot_reelect', reason: r?.reason ?? 'unknown' }, 409);
         return json({ ok: true });
+      }
+
+      // ── buyback_status: the affordance's availability + the caller's open buybacks ─
+      // Reaching here means the buyback master switch is ON (gated above), so the panel
+      // renders the affordance. Returns any not-yet-paid buyback the caller has.
+      case 'buyback_status': {
+        const { data: rows } = await admin.from('founder_seat_buybacks')
+          .select('id, state, amount_cents, payout_form, created_at')
+          .eq('user_id', user.id).in('state', ['pending_payout', 'releasing', 'held', 'failed']);
+        return json({ ok: true, available: true, buybacks: Array.isArray(rows) ? rows : [] });
+      }
+
+      // ── buyback_start (outgoing): anomaly checks → issue+email the buyback code ────
+      case 'buyback_start': {
+        // Must hold a normal seat (something to sell back) and be in no live case.
+        const { data: seat, error: seatErr } = await admin.from('founder_seats')
+          .select('seat_id, security_status').eq('holder_user_id', user.id).maybeSingle();
+        if (seatErr) throw new Error(seatErr.message);
+        if (!seat) return json({ error: 'not_a_founder' }, 403);
+        if (seat.security_status !== 'normal') return json({ error: 'seat_locked' }, 409);
+        const { data: locked } = await admin.rpc('has_active_transfer_lock', { p_user: user.id });
+        if (locked === true) return json({ error: 'live_case' }, 409);
+        // Anomaly pre-check: credentials changed within 7 days (mirror initiate — a
+        // buyback releases the seat + pays out, so it holds on a recent credential change).
+        try {
+          const { data: got } = await admin.auth.admin.getUserById(user.id);
+          const updatedAt = got?.user?.updated_at ? new Date(got.user.updated_at).getTime() : 0;
+          if (updatedAt && Date.now() - updatedAt < 7 * 24 * 3600 * 1000) {
+            return json({ error: 'security_hold', reason: 'recent_credential_change' }, 403);
+          }
+        } catch (e) {
+          logError('founder-transfer', user.id, (e as Error)?.message ?? 'getUserById failed', { stage: 'buyback_anomaly' });
+        }
+        const { data: ch, error: chErr } = await admin.rpc('issue_buyback_challenge', { p_user: user.id });
+        if (chErr) throw new Error(chErr.message);
+        if (ch?.ok) {
+          await sendTransferEmail(email,
+            'Confirm selling your SettlementForge Founder seat',
+            `Your code to confirm selling your Founder seat back to SettlementForge is: ${ch.code}\n\nIt expires in 10 minutes. If you did not request this, ignore this email and nothing will change.`,
+            deps.emailDispatch);
+        }
+        return json({ ok: true, challenge_issued: Boolean(ch?.ok) });
+      }
+
+      // ── buyback_confirm (outgoing): verify code → release seat → tier leg + email ──
+      case 'buyback_confirm': {
+        const code = typeof payload.code === 'string' ? payload.code : '';
+        const payoutForm = payload.payout_form === 'account_credits' ? 'account_credits' : 'connect_cash';
+        if (!code) return json({ error: 'a code is required' }, 400);
+        const { data: v, error: vErr } = await admin.rpc('verify_buyback_challenge', { p_user: user.id, p_code: code });
+        if (vErr) throw new Error(vErr.message);
+        if (!v?.ok) return json({ error: 'bad_code', reason: v?.reason ?? 'bad_code' }, 400);
+        // Seat release + lineage + is_founder=false + the buyback row (dial amount). The
+        // RPC also refuses a live case / non-normal seat (defence in depth vs buyback_start).
+        const { data: bb, error: bErr } = await admin.rpc('claim_founder_seat_buyback', { p_user: user.id, p_payout_form: payoutForm });
+        if (bErr) throw new Error(bErr.message);
+        if (!bb?.ok) return json({ error: 'cannot_buyback', reason: bb?.reason ?? 'unknown' }, 409);
+        // THE 6.5 SUBSCRIBED-EX-FOUNDER TIER LOGIC (the edge leg, mirroring finalize).
+        await runExFounderTierLeg(admin, user.id, deps);
+        await sendTransferEmail(email,
+          'Your SettlementForge Founder seat buyback is confirmed',
+          'Your Founder seat has been sold back to SettlementForge and returns to the pool. Your payout will follow at the payout form you elected. Thank you.',
+          deps.emailDispatch);
+        return json({ ok: true, buyback_id: bb.buyback_id, amount_cents: bb.amount_cents, payout_form: bb.payout_form });
       }
 
       // ── payout_onboarding (outgoing, ≥ cooling): Connect Express — KEY-INERT ───────
@@ -594,6 +662,30 @@ async function runFinalizeEdgeLeg(admin: AnyClient, c: { id: string; from_user: 
     'Your SettlementForge Founder seat transfer has completed and the seat is now yours. Your Founder benefits are active on your next sign-in.', deps.emailDispatch);
 }
 
+/** THE 6.5 SUBSCRIBED-EX-FOUNDER TIER LEG for a seat BUYBACK (§6.8/M-10). Mirrors the
+ *  from-user half of runFinalizeEdgeLeg: is_founder is already false (the RPC), so this
+ *  downgrades tier ONLY if the holder has no live Cartographer subscription (a subscribed
+ *  ex-founder keeps premium). Each step idempotent + log-don't-throw. NO credit movement. */
+async function runExFounderTierLeg(admin: AnyClient, userId: string, deps: Deps): Promise<void> {
+  let subscribed = false;
+  try {
+    const { data: prof } = await admin.from('profiles').select('stripe_subscription_id').eq('id', userId).maybeSingle();
+    subscribed = Boolean(prof?.stripe_subscription_id);
+  } catch (e) { logError('founder-transfer', userId, (e as Error)?.message ?? 'profile read failed', { stage: 'buyback_leg:profile' }); }
+  if (!subscribed) {
+    try { await admin.rpc('handle_premium_downgrade', { target_user: userId }); }
+    catch (e) { logError('founder-transfer', userId, (e as Error)?.message ?? 'downgrade failed', { stage: 'buyback_leg:downgrade' }); }
+  }
+  try {
+    await admin.auth.admin.updateUserById(userId, {
+      user_metadata: subscribed ? { is_founder: false } : { tier: 'free', is_founder: false },
+    });
+  } catch (e) { logError('founder-transfer', userId, (e as Error)?.message ?? 'auth mirror failed', { stage: 'buyback_leg:auth' }); }
+  // deps reserved for a future buyback-side notification seam; the confirmation email is
+  // sent by the caller (buyback_confirm) so a payout-side reuse stays email-free.
+  void deps;
+}
+
 // ── THE PAYOUT LIMB (§6.6/M-8) ──────────────────────────────────────────────────
 // Must match create-checkout's CREDIT_AMOUNTS['credits_25'] (the §4.4 rate denominator).
 const CREDITS_25 = 25;
@@ -704,15 +796,79 @@ async function sweepReleasePayouts(admin: AnyClient, stripeApi: typeof stripe, d
   return released;
 }
 
-// ── The stewardship limb (§6.8/M-10) plugs its buyback release + sweeps here. Stubs
-//    until that slice lands.
-// deno-lint-ignore no-unused-vars
+// ── The stewardship limb (§6.8/M-10) ────────────────────────────────────────────
+/** Release due STANDING-BUYBACK payouts (§6.8). Mirrors sweepReleasePayouts: claims one
+ *  at a time (claim_due_buyback_payout), runs the SHARED performPayout (idempotencyKey
+ *  buyback-<id>; account_credits dedups on buyback_id), maps the outcome to the buyback's
+ *  state ('released' → 'paid'). Connect absent → parked 'held' (LAW 1). */
 async function sweepReleaseBuybacks(admin: AnyClient, stripeApi: typeof stripe, deps: Deps, nowIso: string): Promise<number> {
-  return 0; // M-10: the standing-buyback payouts ride the same performPayout machinery.
+  const connectOn = deps.connectEnabled?.() ?? Boolean(Deno.env.get('STRIPE_CONNECT_ENABLED'));
+  let released = 0;
+  for (let i = 0; i < 200; i += 1) {
+    const { data: claim } = await admin.rpc('claim_due_buyback_payout');
+    if (!claim?.ok) break;
+    const r = await performPayout(admin, stripeApi, {
+      fromUser: claim.from_user, form: claim.payout_form, amountCents: claim.payout_amount_cents,
+      connectAccountId: claim.connect_account_id ?? null,
+      refKey: 'buyback_id', refId: claim.buyback_id,
+      idemKey: `buyback-${claim.buyback_id}`, eventKey: `buyback:${claim.buyback_id}`,
+      kind: 'seat_buyback', description: 'Founder seat buyback payout',
+    }, connectOn, nowIso);
+    // performPayout returns 'released' | 'held' | 'failed'; the buyback state uses 'paid'.
+    const state = r.outcome === 'released' ? 'paid' : r.outcome;
+    await admin.from('founder_seat_buybacks')
+      .update({
+        state, updated_at: nowIso,
+        ...(r.outcome === 'released' ? { resolved_at: nowIso } : {}),
+        ...(r.transferId ? { stripe_transfer_id: r.transferId } : {}),
+      })
+      .eq('id', claim.buyback_id);
+    if (r.outcome === 'released') released += 1;
+  }
+  return released;
 }
-// deno-lint-ignore no-unused-vars
-async function sweepStewardship(admin: AnyClient, deps: Deps, nowIso: string): Promise<number> {
-  return 0; // M-10: dormancy nudge (18mo) + abandonment (5y/90d/3 notices) sweeps.
+
+/** The dormancy nudge (18mo) + abandonment (5y/90d/3 notices) sweeps (§6.8). The DB RPCs
+ *  own the time logic + stamps (claim-once); this leg only emails the results (seam-inert
+ *  until Wave E). Returns the count of stewardship actions taken. */
+async function sweepStewardship(admin: AnyClient, deps: Deps, _nowIso: string): Promise<number> {
+  let actions = 0;
+  // Dormancy nudges — email BOTH exits (nominate a transfer · take the buyback).
+  const { data: nudges } = await admin.rpc('sweep_seat_dormancy_nudges');
+  if (Array.isArray(nudges)) {
+    for (const n of nudges) {
+      const to = await lookupEmail(admin, n.user_id);
+      await sendTransferEmail(to,
+        'Your SettlementForge Founder seat has been quiet',
+        `Your Founder seat (#${n.seat_id}) has been inactive for a while. Nothing is required — your lifetime seat stays yours. If you would like to pass it on, you can nominate a transfer, or sell it back to SettlementForge, any time from Account → Subscription.`,
+        deps.emailDispatch);
+      actions += 1;
+    }
+  }
+  // Abandonment sweep — notices while in-window; a confirmation when a seat escheats.
+  const { data: aband } = await admin.rpc('sweep_seat_abandonment');
+  if (Array.isArray(aband)) {
+    for (const a of aband) {
+      if (a.action === 'notice') {
+        const to = await lookupEmail(admin, a.user_id);
+        await sendTransferEmail(to,
+          'Action needed: your SettlementForge Founder seat',
+          `We have not seen activity on the account holding Founder seat #${a.seat_id} for a long time. To keep your seat, simply sign in. If we do not hear from you, the seat will return to SettlementForge and its stated value will be held for you as a claimable credit — contact support any time.`,
+          deps.emailDispatch);
+        actions += 1;
+      } else if (a.action === 'escheated') {
+        const to = await lookupEmail(admin, a.user_id);
+        await sendTransferEmail(to,
+          'Your SettlementForge Founder seat has returned to the pool',
+          'After an extended period of inactivity and repeated notices, your Founder seat has returned to SettlementForge. Its stated value is held for you as a claimable credit — contact support to arrange it.',
+          deps.emailDispatch);
+        actions += 1;
+      } else {
+        actions += 1; // 'cleared' — no email; a sign-in aborted the notice.
+      }
+    }
+  }
+  return actions;
 }
 
 serve((req) => handleFounderTransfer(req));

@@ -19,6 +19,7 @@ vi.mock('../../src/lib/supabase.js', () => ({
 const {
   fetchTransferStatus, initiateTransfer, confirmInitiate, nomineeConfirm,
   abortTransfer, reelectPayout, payoutOnboarding,
+  fetchBuybackStatus, buybackStart, buybackConfirm,
 } = await import('../../src/lib/founderTransferClient.js');
 
 /** An invoke error carrying a JSON body on .context (the supabase-js shape). */
@@ -47,6 +48,31 @@ describe('fetchTransferStatus (fail-closed, never throws)', () => {
   test('a malformed body still yields an empty case list', async () => {
     h.result = { data: { cases: 'not-an-array' }, error: null };
     expect((await fetchTransferStatus()).cases).toEqual([]);
+  });
+});
+
+describe('the standing buyback (§6.8, independent switch)', () => {
+  test('fetchBuybackStatus maps available + open buybacks on success', async () => {
+    h.result = { data: { ok: true, available: true, buybacks: [{ id: 'bb1', state: 'pending_payout' }] }, error: null };
+    const out = await fetchBuybackStatus();
+    expect(out.available).toBe(true);
+    expect(out.buybacks).toHaveLength(1);
+    expect(h.calls[0].body).toEqual({ action: 'buyback_status' });
+  });
+
+  test('a dark buyback switch (503) → {available:false, buybacks:[]}, no throw', async () => {
+    h.result = { data: null, error: invokeError({ error: 'feature_unavailable' }, 503) };
+    expect(await fetchBuybackStatus()).toEqual({ available: false, buybacks: [] });
+  });
+
+  test('buybackStart sends the action and buybackConfirm maps the payout form', async () => {
+    h.result = { data: { ok: true, challenge_issued: true }, error: null };
+    await buybackStart();
+    expect(h.calls[0].body).toEqual({ action: 'buyback_start' });
+    h.result = { data: { ok: true, buyback_id: 'bb1', amount_cents: 2500 }, error: null };
+    const out = await buybackConfirm({ code: '424242', payoutForm: 'account_credits' });
+    expect(out.buyback_id).toBe('bb1');
+    expect(h.calls[1].body).toEqual({ action: 'buyback_confirm', code: '424242', payout_form: 'account_credits' });
   });
 });
 
