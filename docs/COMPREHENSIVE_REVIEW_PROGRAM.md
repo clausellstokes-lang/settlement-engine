@@ -1153,6 +1153,20 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛⭐⭐ OWNER RULING (2026-07-19 morning) — THE ROUND 3 LOOP (supersedes the
+single-pass ROUND 3):** verbatim intent recorded in THE_REMAINING_ARCHITECTURE
+§4 (rewritten this date). The shape: after THE COMPOSITE assembles, run
+complete-resurvey → adversarially-verified fixes in REPEATED CYCLES until
+materially no fixes remain and every achievable dimension grades A+ — never
+stopping to wait for a push; the owner walk runs alongside non-blocking; owner
+gates survive every cycle; unreachable-at-this-stage A+ ceilings are named,
+never silently regraded. MANAGER'S RECORDED ASSUMPTIONS (each vetoable): (1)
+taste/owner-queue items stay OUT of the loop's fix authority (they await the
+walk); (2) A+ grading uses the established standards (A_PLUS_ROADMAP + the
+depth standard's five columns + THE EIGHT CROWNS); (3) the loop works within
+dormancy discipline — golden regens remain pre-signed at THE ONE REGEN only.
+Convergence = one clean cycle + one confirming cycle, both zero must-fix and
+zero achievable grade gaps.
 **⬛⭐ THE BURN-DOWN COMPLETE (2026-07-19, deep-craft @ 78f51611, 7 commits).**
 THE FINAL FOUR: borderRadius 1043→982 · boxShadow 112→108 · rgba 264→260 ·
 tinted 235→232 (every drop same-commit, tolerance-0) + rawColor BUDGET locked

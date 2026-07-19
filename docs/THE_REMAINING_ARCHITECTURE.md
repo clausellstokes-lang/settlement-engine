@@ -337,8 +337,37 @@ BEFORE pushing review-fixes, either `git lfs track "marketing/assets/**"` + migr
 or move masters out of git (Desktop archive) keeping only optimized derivatives —
 ⛔OWNER choice; default (recorded): move masters out, commit the removal.
 
-## §4 ROUND 3 — the resurvey + fix program (the commission verbatim)
-- ENTRY: deep wave folded; owner walk passed; push current.
+## §4 THE ROUND 3 LOOP — the convergence program (⬛ OWNER RULING 2026-07-19,
+verbatim intent: "The round 3 should go after the composite… a complete and
+utter resurvey followed by fixes… everything fixed exhaustively and
+comprehensively… objectively better and not just maximally safe… absolutely
+perfect, A+ grade throughout where possible at this stage. When you are done…
+do not simply stop the program and wait for me to push… create a loop cycle of
+complete exhaustive review cycle to fixes until there is materially no more
+fixes to be made and every dimension that can be made into A+ is made into an
+A+ at this stage, rinse and repeat.")
+- ENTRY: THE COMPOSITE ASSEMBLED (the deep-wave fold complete). The owner walk
+  runs ALONGSIDE, NON-BLOCKING (walk feedback = rulings, folded into the next
+  cycle's intake); pushes continue per Ruling #7 as backup; NOTHING in the loop
+  waits on a push.
+- THE CYCLE (repeat until convergence): (1) FULL RESURVEY — fan-out across every
+  dimension (correctness · cohesion/counterparts · experience/immersion vs THE
+  EIGHT CROWNS · substance benchmarks · performance/eager · security/abuse · AI
+  cost-efficiency · content/voice · a11y · game-feel) + an A+ GRADE per
+  dimension with the gap named; (2) findings ADVERSARIALLY VERIFIED (2-of-3
+  refuters) before any fix; (3) FIX WAVES — one commit per cluster, bold-over-
+  safe WITHIN the constitution (byte-identity/dormancy/pins/ratchets are what
+  boldness is proven WITH), full gate per wave; (4) cycle ledger row + grade
+  table. CONVERGENCE: a cycle yielding ZERO verified must-fix findings AND zero
+  achievable grade improvements triggers ONE confirming cycle; if that is also
+  clean, the loop CLOSES with a completion row. Dimensions whose A+ is
+  structurally unreachable at this stage (needs real users / the soak / launch)
+  carry their ceiling NAMED, never silently regraded.
+- OWNER GATES SURVIVE EVERY CYCLE: no deploy · no db push · no golden regen
+  (THE ONE REGEN stays pre-signed and separate) · no budget raises · no
+  paid-surface behavior changes beyond frozen designs · taste/parked items stay
+  in the owner queue. Limit strikes and the Fable boundary do NOT end the loop —
+  the ledger carries cycle state; any successor continues per START_HERE §6b.
 - The commission (ledger, 2026-07-08 row): "comprehensively and exhaustively read,
   review, and analyze the entire code and codebase... Claude Opus Ultracode to verify
   findings and implement fixes... choose objectively better with risk every time...
