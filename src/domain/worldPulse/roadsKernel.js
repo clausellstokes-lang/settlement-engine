@@ -56,6 +56,7 @@ import { warFrontsInto, warFrontsFrom } from './warFrontReads.js';
 import { ladderGoalOf } from '../townMap/ladderRead.js';
 import { npcLadderActive } from './npcLadderKernel.js';
 import { CORRUPTIBLE_FLAWS } from '../corruption.js';
+import { corruptionWebActive } from './corruptionWeb.js';
 
 /**
  * @typedef {Object} RoadsAdvanceResult
@@ -413,6 +414,8 @@ function advanceLitRoads(args) {
 
   /** @type {Array<Record<string, unknown>>} */
   const newsEntries = [];
+  /** @type {Array<{ captorId: string, homeId: string, npcKey: string }>} §10 conversion deposits */
+  const returnedCaptiveDeposits = [];
   /** @type {Record<string, Record<string, unknown>>} the surviving/advanced missions */
   const missions = {};
 
@@ -462,6 +465,13 @@ function advanceLitRoads(args) {
       // ARRIVE HOME — resolve: drop the mission, mirror cleared below. A released captive was
       // already announced by the ransom-paid beat (§9), so its arrival is silent (no double
       // news); an ordinary returning traveller mints the return beat.
+      // §10 CONVERSION: a released captive who WILL convert deposits the returned-captive channel
+      // on arriving home (seated at home = the foreign-patron shape). Gated on the web being LIT
+      // (dark ⇒ no channel ⇒ the release resolves clean). The web mints through its OWN gates,
+      // COVERT, no news — the roads supply a channel, the web does everything else.
+      if (m.releasedFromRansom && m.willConvert && corruptionWebActive(worldState)) {
+        returnedCaptiveDeposits.push({ captorId: str(m.captorId), homeId, npcKey: str(m.npcKey) });
+      }
       if (!m.releasedFromRansom) {
         const s = freshSettlement(homeId);
         const seed = `return.${mid}`;
@@ -840,6 +850,32 @@ function advanceLitRoads(args) {
       ? setSpatialLedger(nextWorldState, 'roads', persisted)
       : dropSpatialLedger(nextWorldState, 'roads');
     changed = true;
+  }
+
+  // ── §10 RETURNED-CAPTIVE CHANNEL LEDGER — carry prior (pruning vanished/already-converted
+  //    captives) + the new deposits. The corruption web's creation pass consumes it. ──
+  const priorReturned = asObject(getSpatialLedger(worldState, 'roadsReturnedCaptives'));
+  if (Object.keys(priorReturned).length || returnedCaptiveDeposits.length) {
+    const npcStates = asObject(asObject(worldState).npcStates);
+    const nextReturned = {};
+    for (const key of Object.keys(priorReturned).sort(cmp)) {
+      const r = asObject(priorReturned[key]);
+      const nk = str(r.npcKey);
+      if (!liveKeys.has(nk)) continue; // the captive vanished ⇒ drop the channel
+      if (asObject(npcStates[nk]).corruption === true) continue; // the web already minted ⇒ done
+      nextReturned[key] = r;
+    }
+    for (const d of returnedCaptiveDeposits) {
+      nextReturned[`${d.captorId}|${d.homeId}|${d.npcKey}`] = { captorId: d.captorId, homeId: d.homeId, npcKey: d.npcKey, tick: now2 };
+    }
+    const prevRet = JSON.stringify(Object.keys(priorReturned).length ? priorReturned : null);
+    const nextRet = JSON.stringify(Object.keys(nextReturned).length ? sortKeys(nextReturned) : null);
+    if (prevRet !== nextRet) {
+      nextWorldState = Object.keys(nextReturned).length
+        ? setSpatialLedger(nextWorldState, 'roadsReturnedCaptives', sortKeys(nextReturned))
+        : dropSpatialLedger(nextWorldState, 'roadsReturnedCaptives');
+      changed = true;
+    }
   }
 
   return { settlementUpdates: nextUpdates, worldState: nextWorldState, changed, newsEntries };

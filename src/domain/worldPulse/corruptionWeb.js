@@ -129,6 +129,9 @@ export const CORRUPTION_WEB_TUNING = Object.freeze({
   CHANNEL_RIVAL: 0.4,
   CHANNEL_CRIMINAL: 0.7,
   CHANNEL_SMUGGLE: 0.5,
+  /** THE ROADS §10: a RETURNED CAPTIVE is a quality-boosted channel — a captor's former
+   *  hostage, home again carrying the leash. A strong conduit (the captor already broke them). */
+  CHANNEL_RETURNED_CAPTIVE: 0.6,
   /** The E1 obligation channel-quality BOOST ceiling: a fully-indebted target (a
    *  decade of the patron's "generous" gifts) multiplies the recruiting weight by up
    *  to (1 + this) — "the patron who has been generous recruits cheap" (§2). 0 when the
@@ -265,15 +268,43 @@ function smugglePairs(worldState) {
 }
 
 /**
+ * THE ROADS §10 — the returned-captive channels the roads mover deposits (spatialLedgers
+ * .roadsReturnedCaptives): a former hostage home again as the captor's covert conduit. Returns
+ * the unordered pair set (folded into rawChannelQuality like smuggle) + a DIRECTIONAL pin map
+ * (`${captorId}|${homeId}` → npcKey) so the web's target-NPC pick is pinned to the returned
+ * captive. Absent ledger ⇒ empty ⇒ byte-neutral (the corruption-web dormancy golden holds). Pure.
+ * @param {any} worldState
+ * @returns {{ pairs: Set<string>, pinned: Map<string, string> }}
+ */
+function returnedCaptiveChannels(worldState) {
+  /** @type {Set<string>} */
+  const pairs = new Set();
+  /** @type {Map<string, string>} */
+  const pinned = new Map();
+  const ledger = asObject(getSpatialLedger(worldState, 'roadsReturnedCaptives'));
+  for (const key of Object.keys(ledger).sort(compareCodepoint)) {
+    const r = asObject(ledger[key]);
+    const captor = String(r.captorId ?? '');
+    const home = String(r.homeId ?? '');
+    const npcKey = String(r.npcKey ?? '');
+    if (!captor || !home || captor === home) continue;
+    pairs.add(captor < home ? `${captor}|${home}` : `${home}|${captor}`);
+    if (npcKey) pinned.set(`${captor}|${home}`, npcKey);
+  }
+  return { pairs, pinned };
+}
+
+/**
  * The raw channel quality (0..1) a patron holds toward a target — the MAX over its live
  * channels: a hostile/rival EDGE, a criminal_corridor CHANNEL, or an active SMUGGLE path.
  * 0 ⇒ NO channel ⇒ the patron cannot recruit here (the hard §2 gate). Pure.
  * @param {WebSnapshot} snapshot
  * @param {Set<string>} smuggle  the unordered smuggle-pair set (smugglePairs)
  * @param {string} patronId @param {string} targetId
+ * @param {Set<string>} [returned]  the unordered returned-captive pair set (THE ROADS §10)
  * @returns {number}
  */
-export function rawChannelQuality(snapshot, smuggle, patronId, targetId) {
+export function rawChannelQuality(snapshot, smuggle, patronId, targetId, returned = new Set()) {
   const p = String(patronId);
   const t = String(targetId);
   if (p === t) return 0;
@@ -300,6 +331,7 @@ export function rawChannelQuality(snapshot, smuggle, patronId, targetId) {
   }
   const pairKey = p < t ? `${p}|${t}` : `${t}|${p}`;
   if (smuggle.has(pairKey)) quality = Math.max(quality, CORRUPTION_WEB_TUNING.CHANNEL_SMUGGLE);
+  if (returned.has(pairKey)) quality = Math.max(quality, CORRUPTION_WEB_TUNING.CHANNEL_RETURNED_CAPTIVE); // THE ROADS §10
   return clamp01(quality);
 }
 
@@ -375,8 +407,8 @@ export function officialPay01(worldState, snapshot, targetId) {
  * @param {string} patronId @param {string} targetId
  * @returns {{ weight: number, channel01: number, obligation01: number, secrecy01: number, pay01: number }}
  */
-export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId) {
-  const channel01 = rawChannelQuality(snapshot, smuggle, patronId, targetId);
+export function recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId, returned = new Set()) {
+  const channel01 = rawChannelQuality(snapshot, smuggle, patronId, targetId, returned);
   if (channel01 <= 0) return { weight: 0, channel01: 0, obligation01: 0, secrecy01: 0, pay01: 0 };
   const obligation01 = obligationDebt01(worldState, targetId, patronId);
   const secrecy01 = targetSecrecy01(worldState, targetId);
@@ -554,6 +586,7 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
 
   const existingByPatron = foreignAssetsByPatron(snapshot);
   const smuggle = smugglePairs(worldState);
+  const { pairs: returned, pinned: returnedPins } = returnedCaptiveChannels(worldState); // THE ROADS §10
   /** @type {CorruptionWebResult['deferrals']} */
   const deferrals = [];
 
@@ -576,7 +609,7 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
     let best = null;
     for (const targetId of targetIds) {
       if (targetId === patronId || heldTargets.has(targetId)) continue;
-      const { weight } = recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId);
+      const { weight } = recruitmentWeight(snapshot, worldState, smuggle, patronId, targetId, returned);
       if (weight <= 0) continue;
       if (!best || weight > best.weight) best = { targetId, weight };
     }
@@ -604,8 +637,10 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
       continue;
     }
 
-    // MINT: the deterministic target-NPC pick (the seedBetrayalTraitor template).
-    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now);
+    // MINT: the deterministic target-NPC pick (the seedBetrayalTraitor template) — PINNED to
+    // the returned captive when a roads §10 channel keys this (patron→target) pair.
+    const pin = returnedPins.get(`${patronId}|${best.targetId}`) || null;
+    const minted = mintAssetInto(nextNpcStates, snapshot, best.targetId, patronId, now, pin);
     if (!minted) {
       deferrals.push({ patronId, targetId: best.targetId, reason: 'no_eligible_npc' });
       continue;
@@ -636,9 +671,10 @@ export function advanceCorruptionWeb({ snapshot, worldState, rng = null, tick, n
  * @param {Record<string, unknown>} npcStates
  * @param {WebSnapshot} snapshot
  * @param {string} targetSid @param {string} patronId @param {number} tick
+ * @param {string|null} [pinnedNpcKey]  THE ROADS §10 — pin the pick to the returned captive
  * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
  */
-function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick) {
+function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick, pinnedNpcKey = null) {
   const item = snapshot?.byId?.get?.(targetSid);
   const npcs = Array.isArray(item?.settlement?.npcs) ? item.settlement.npcs : [];
   if (!npcs.length) return null;
@@ -650,6 +686,9 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick) {
     .filter((c) => c.flaw && c.npc.corrupt !== true && c.npc.ousted !== true
       && asObject(npcStates[npcId(targetSid, c.npc, c.index)]).corruption !== true);
   if (!eligible.length) return null;
+  // THE ROADS §10: pin the pick to the returned captive when it is eligible; else the default.
+  const pinnedC = pinnedNpcKey ? eligible.find((c) => npcId(targetSid, c.npc, c.index) === pinnedNpcKey) : null;
+  if (pinnedC) return mintLeashOnto(npcStates, targetSid, pinnedC, patronId, tick);
   eligible.sort((a, b) => {
     const rank = (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(b.npc.importance)] || 0)
       - (/** @type {Record<string, number>} */ (IMPORTANCE_RANK)[String(a.npc.importance)] || 0);
@@ -658,7 +697,17 @@ function mintAssetInto(npcStates, snapshot, targetSid, patronId, tick) {
     const bn = String(b.npc.name || '');
     return an < bn ? -1 : an > bn ? 1 : 0;
   });
-  const chosen = eligible[0];
+  return mintLeashOnto(npcStates, targetSid, eligible[0], patronId, tick);
+}
+
+/**
+ * Write the foreign_settlement leash onto the chosen NPC's npcStates (the covert conversion).
+ * Shared by the default importance-pick and THE ROADS §10 pinned-captive pick. Pure.
+ * @param {Record<string, unknown>} npcStates @param {string} targetSid
+ * @param {{ npc: any, index: number }} chosen @param {string} patronId @param {number} tick
+ * @returns {{ npcStates: Record<string, unknown>, npcKey: string } | null}
+ */
+function mintLeashOnto(npcStates, targetSid, chosen, patronId, tick) {
   const id = npcId(targetSid, chosen.npc, chosen.index);
   const st = asObject(npcStates[id]);
   if (!npcStates[id]) return null; // no ensured state to attach to (ensureNpcStates ran first)
