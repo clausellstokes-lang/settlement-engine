@@ -645,12 +645,24 @@ A+ at this stage, rinse and repeat.")
   "the walkthrough is pure visual aesthetics but the soak and tuning are the
   core machine. Changing the visibility is always easier than the
   interconnected machine we have underneath"). The tail order is now:
-  loop convergence → THE PUSH → soak (machine 2) → tuning → THE ONE REGEN →
-  THE WALK → THE VERY END. (AMENDED same day, owner: "walk after the one
-  regen" — the owner walks the FULLY-LIT world, every flag on, the final
+  loop convergence → PUSH #1 → soak (machine 2) → tuning → THE ONE REGEN →
+  THE WALK → PUSH #2 → THE VERY END. (AMENDED same day, owner: "walk after the
+  one regen" — the owner walks the FULLY-LIT world, every flag on, the final
   product as users will meet it. Walk-driven fixes are render-layer by nature
   — golden-neutral — so post-regen fixes never force a re-regen; they gate
   THE VERY END instead.)
+  ⬛ TWO PUSHES — MANDATORY (owner ruling 2026-07-19: "there has to be one more
+  push after the one regen"). PUSH #1 (at convergence) ships the DARK,
+  soak-ready composite to origin so machine 2 can PULL it for the soak — it is
+  a backup/transfer push, NOT the deploy. THE ONE REGEN then MUTATES committed
+  code (flips the flags in DEFAULT_SIMULATION_RULES + re-mints every shifted
+  golden), and the walk adds render-layer fix commits on top — none of which
+  exist at PUSH #1. Therefore PUSH #2 (after the regen AND the walk) carries the
+  flag-lit, golden-re-minted, walk-corrected state to origin — it is the state
+  THE VERY END's batch-2 LIT deploy actually ships. Skipping PUSH #2 would
+  deploy stale pre-regen dark code. Both pushes are ⛔owner (any push is
+  owner-gated); PUSH #2's full gate must be 100% green (the regen's re-mint
+  closes the parked-golden reds) before it fires.
 - ⬛ 2026-07-19 OWNER RULING (SOAK_PLAN_R2 §5 is the authority): THREE LEVELS
   (CERT-30 / CENTURY-100 / CENTURY-300, all PASS criteria at each) + the COMBINATORIAL
   MANDATE (tick-path toggle matrix: L1 factorial where affordable, L2 all-on +

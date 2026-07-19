@@ -1134,6 +1134,17 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — TWO PUSHES, NOT ONE ("there has to be one more push
+after the one regen").** The tail has TWO pushes: PUSH #1 at loop convergence ships the
+DARK soak-ready composite to origin (so machine 2 pulls it for the soak — a
+backup/transfer push, not the deploy); THE ONE REGEN then MUTATES committed code (lights
+the DEFAULT_SIMULATION_RULES flags + re-mints every shifted golden) and the walk adds
+render-layer fix commits — NONE of which exist at PUSH #1 — so PUSH #2 (after regen + walk)
+carries the flag-lit, re-minted, walk-corrected state that THE VERY END's batch-2 LIT
+deploy actually ships. Skipping #2 would deploy stale pre-regen dark code. Both are ⛔owner;
+PUSH #2's full gate must be 100% green (the regen closes the parked-golden reds). Charter
+§5 tail amended (this commit). Final tail: convergence → PUSH#1 → soak → tuning → ONE
+REGEN → WALK → PUSH#2 → THE VERY END.
 **⬛⭐⭐ THE COHERENCE MATRIX IS PRE-COMPUTED (2026-07-19) — docs/COHERENCE_MATRIX_R3.md
 committed (this commit).** The 16-agent workflow (15 rows + synthesis, 3.3M subagent
 tokens) classified all 105 system-pairs from BOTH endpoints against aad6265e: COHERENT 74
