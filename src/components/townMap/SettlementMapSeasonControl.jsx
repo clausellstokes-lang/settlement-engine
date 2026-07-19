@@ -10,7 +10,7 @@
  * byte-identical dormancy (the map follows the live season again).
  */
 import { SEASON_OVERRIDE_IDS, readSeasonOverride, withSeasonOverride } from '../../domain/townMap/mapEdits.js';
-import { BORDER, CARD, FS, INK, MUTED, R, sans } from '../theme.js';
+import { BORDER, CARD, FS, INK, MUTED, sans } from '../theme.js';
 
 /** Display labels for the bounded season vocabulary. */
 const LABELS = { spring: 'Spring', summer: 'Summer', autumn: 'Autumn', winter: 'Winter' };
@@ -37,7 +37,9 @@ export default function SettlementMapSeasonControl({ mapEdits, onCommit }) {
         onChange={(e) => onCommit(withSeasonOverride(mapEdits, e.target.value === 'auto' ? null : e.target.value))}
         style={{
           fontFamily: sans, fontSize: FS.sm, color: INK, background: CARD,
-          border: `1px solid ${BORDER}`, borderRadius: R?.sm ?? 4, padding: '3px 6px',
+          // Flat select (the composite kill-list reconciliation — the WorldMapToolbar
+          // C5-a·iii select precedent): radius struck, rule frame kept.
+          border: `1px solid ${BORDER}`, padding: '3px 6px',
         }}
       >
         <option value="auto">Auto</option>
