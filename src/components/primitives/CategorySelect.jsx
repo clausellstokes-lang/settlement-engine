@@ -50,8 +50,8 @@ export default function CategorySelect({
           placeholder="New category name…"
           style={{ ...style, flex: 1 }}
         />
-        <button type="button" onClick={commit} style={{ padding: '4px 9px', border: `1px solid ${GOLD}`, borderRadius: 4, background: 'transparent', color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, cursor: 'pointer' }}>Add</button>
-        <button type="button" onClick={() => { setAdding(false); setText(''); }} style={{ padding: '4px 9px', border: `1px solid ${BORDER}`, borderRadius: 4, background: 'transparent', color: MUTED, fontFamily: sans, fontSize: FS.xs, cursor: 'pointer' }}>Cancel</button>
+        <button type="button" onClick={commit} style={{ padding: '4px 9px', border: `1px solid ${GOLD}`, background: 'transparent', color: GOLD, fontFamily: sans, fontSize: FS.xs, fontWeight: 700, cursor: 'pointer' }}>Add</button>
+        <button type="button" onClick={() => { setAdding(false); setText(''); }} style={{ padding: '4px 9px', border: `1px solid ${BORDER}`, background: 'transparent', color: MUTED, fontFamily: sans, fontSize: FS.xs, cursor: 'pointer' }}>Cancel</button>
       </div>
     );
   }

@@ -97,8 +97,6 @@ export default function LockedDestination({
         padding: 32,
         background: `linear-gradient(135deg, ${PARCH_GRAD_HI}, ${PARCH})`,
         border: `1px solid ${BORDER}`,
-        borderRadius: 12,
-        boxShadow: '0 6px 24px rgba(27,20,8,0.10)',
         fontFamily: sans,
       }}
     >
@@ -107,7 +105,6 @@ export default function LockedDestination({
         padding: '3px 10px',
         background: SLATE_DIM,
         color: SLATE,
-        borderRadius: 4,
         fontSize: FS.xxs, fontWeight: 800,
         letterSpacing: '0.14em', textTransform: 'uppercase',
       }}>
@@ -136,8 +133,6 @@ export default function LockedDestination({
           padding: 8,
           background: swatch.white,
           border: `1px solid ${BORDER}`,
-          borderRadius: 6,
-          boxShadow: '0 4px 16px rgba(27,20,8,0.08)',
           position: 'relative',
           overflow: 'hidden',
         }}>
@@ -150,13 +145,11 @@ export default function LockedDestination({
               objectFit: 'cover', objectPosition: 'top',
               opacity: 0.55,
               filter: 'saturate(0.7)',
-              borderRadius: 4,
             }}
           />
           <div style={{
             position: 'absolute', inset: 8,
             background: `linear-gradient(to bottom, transparent 30%, ${PARCH} 90%)`,
-            borderRadius: 4,
             pointerEvents: 'none',
           }} />
         </div>
@@ -172,10 +165,9 @@ export default function LockedDestination({
           style={{
             padding: '10px 18px',
             background: SLATE, color: swatch.white,
-            border: 'none', borderRadius: 4,
+            border: 'none',
             fontSize: FS.md, fontWeight: 700, fontFamily: sans,
             cursor: 'pointer',
-            boxShadow: '0 2px 8px rgba(123,79,207,0.35)',
           }}
         >
           {ctaLabel}

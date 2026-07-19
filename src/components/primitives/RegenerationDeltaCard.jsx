@@ -31,7 +31,7 @@ import { FS, swatch } from '../theme.js';
 const COLORS = Object.freeze({
   bg:        '#fffbf5',
   border:    '#d2bd96',
-  headerBg:  'rgba(160,118,42,0.10)',
+  headerBg:  swatch['#FAF8F4'],
   ink:       '#1c1409',
   muted:     '#9c8068',
   gold:      '#a0762a',
@@ -42,7 +42,7 @@ const COLORS = Object.freeze({
   canon:     '#1a4a20',   // forest — preserved canon
   hook:      '#a0762a',   // gold — opportunities
   risk:      '#8b1a1a',   // red — risks
-  broken:    'rgba(196,128,60,0.12)',
+  broken:    swatch['#FAF8F4'],
   brokenBdr: 'rgba(196,128,60,0.4)',
 });
 
@@ -73,8 +73,6 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
         margin: '8px 18px',
         background: COLORS.bg,
         border: `1px solid ${COLORS.border}`,
-        borderRadius: 6,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
         overflow: 'hidden',
         fontFamily: 'Nunito, sans-serif',
       }}
@@ -116,7 +114,7 @@ export function RegenerationDeltaCard({ delta, onDismiss }) {
             title="Dismiss this delta summary. Run another regenerate to recompute."
             style={{
               background: 'none', border: `1px solid ${COLORS.border}`,
-              borderRadius: 3, cursor: 'pointer',
+              cursor: 'pointer',
               fontSize: FS.xxs, fontWeight: 700, color: COLORS.muted,
               padding: '2px 7px',
             }}
@@ -221,7 +219,6 @@ function Section({ title, items, color, describe, detail }) {
         listStyle: 'none', margin: 0, padding: 0,
         background: swatch['#FAF6EE'],
         border: `1px solid ${COLORS.border}`,
-        borderRadius: 4,
       }}>
         {items.map((item, idx) => (
           <li
@@ -255,7 +252,6 @@ function BrokenDependenciesRow({ items }) {
         padding: '6px 9px',
         background: COLORS.broken,
         border: `1px solid ${COLORS.brokenBdr}`,
-        borderRadius: 4,
         fontSize: FS.xs, color: swatch['#7A4F0F'], lineHeight: 1.5,
       }}
     >
