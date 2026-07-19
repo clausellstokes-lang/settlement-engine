@@ -92,10 +92,17 @@ const CEILINGS = Object.freeze({
   // pass): borderRadius 1075→1073. The patron/cult assignment card + its select
   // both de-rounded to a rule-framed dedication plate (wrapStyle :7 + selectStyle
   // :4 struck), and the SaaS AI-content violet accent became the votive gold.
-  borderRadius: 1073,   // the rounded-card tell — plates are rule-framed, not rounded
-  boxShadow: 115,       // print has no z-axis — depth is ink, never elevation
-  rgbaLiterals: 270,    // off-palette translucent washes — ink tones come from the ramp
-  tintedCallouts: 246,  // the tinted callout box — replaced by rubric-headed clerk's notes
+  // Lowered again (C4c-c, THE PREVIEW INSTRUMENT PLATE — CascadePreviewPanel):
+  // borderRadius 1073→1072, boxShadow 115→114, rgba 270→269, tintedCallouts
+  // 246→236. The cascade preview's five tinted callout washes (VIOLET/AMBER/
+  // GREEN/BLUE/RED _BG — 5 const decls + 5 accentBg usages = 10 tinted lines)
+  // became rule-framed impact lines in the two rationed rubric tones (gold
+  // apparatus / oxblood critical); the ImpactRow radius and the panel's z-axis
+  // drop-shadow (with its rgba) were struck (depth is a rule, not elevation).
+  borderRadius: 1072,   // the rounded-card tell — plates are rule-framed, not rounded
+  boxShadow: 114,       // print has no z-axis — depth is ink, never elevation
+  rgbaLiterals: 269,    // off-palette translucent washes — ink tones come from the ramp
+  tintedCallouts: 236,  // the tinted callout box — replaced by rubric-headed clerk's notes
 });
 
 const PATTERNS = Object.freeze({

@@ -19,37 +19,38 @@
 import { useMemo } from 'react';
 import { useStore } from '../../store/index.js';
 import { previewCascade } from '../../domain/pendingEdits.js';
-import { sans, serif_, FS, SP, R, swatch, PARCH, GOLD_DEEP } from '../theme.js';
+import { sans, serif_, FS, SP, swatch, PARCH, GOLD_DEEP } from '../theme.js';
+import { INK as OINK } from '../../design/organic/ink.js';
+import { RUBRIC } from '../../design/organic/rubrication.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { X } from 'lucide-react';
 import useDialogFocusTrap from '../primitives/useDialogFocusTrap.js';
 
-const VIOLET = swatch['#7B4FCF'];
-const VIOLET_BG = swatch['#EBE2FA'];
-const AMBER = swatch['#D08020'];
-const AMBER_BG = swatch['#FBEAD0'];
-const GREEN = swatch['#4A7A3A'];
-const GREEN_BG = swatch['#E2EEDB'];
-const BLUE = swatch['#2A5A7A'];
-const BLUE_BG = swatch['#E0E8F0'];
-const RED = swatch['#A23434'];
-const RED_BG = swatch['#F4DEDE'];
+// THE PREVIEW INSTRUMENT PLATE (Deep Craft — the dossier's instrument register):
+// the cascade preview reads as a rule-framed plate of labeled impact lines, not
+// tinted SaaS callout washes stacked in a shadowed panel. Print has no z-axis —
+// the plate edge is a rule, never elevation. The apparatus speaks in TWO rationed
+// rubric tones (both contrast-PINNED as text on parchment): the gold entry mark
+// for the informational lines, the oxblood for the critical Warning line. The
+// category is carried by each line's title word, never colour alone.
+const APPARATUS = RUBRIC.entry;   // informational impact lines — the gold entry apparatus
+const CRITICAL = RUBRIC.rubric;   // the Warning line — oxblood, the critical voice
+const RULE = OINK.hairline;       // the feint ledger rule between lines (decorative)
 const INK = swatch['#1B1408'];
 const BORDER = swatch['#E8D9B0'];
 
-function ImpactRow({ accent, accentBg, title, body }) {
+function ImpactRow({ accent, title, body }) {
   return (
     <div style={{
       padding: SP.sm,
-      background: accentBg,
       borderLeft: `3px solid ${accent}`,
-      borderRadius: R.sm,
+      borderBottom: `1px solid ${RULE}`,
       fontSize: FS.xs,
-      color: swatch['#3A2F18'],
+      color: OINK.body,
       lineHeight: 1.5,
     }}>
-      <b style={{ color: accent }}>{title}</b>{' '}
+      <b style={{ color: accent, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{title}</b>{' '}
       {body}
     </div>
   );
@@ -117,7 +118,6 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           width: 'min(400px, 100vw)',
           background: PARCH,
           borderLeft: `1px solid ${BORDER}`,
-          boxShadow: '-12px 0 32px rgba(0,0,0,0.25)',
           display: 'flex', flexDirection: 'column',
           fontFamily: sans,
         }}
@@ -162,8 +162,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
 
           {preview.summaryLines.length > 0 && (
             <ImpactRow
-              accent={GREEN}
-              accentBg={GREEN_BG}
+              accent={APPARATUS}
               title="Structure"
               body={summaryText}
             />
@@ -172,8 +171,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           <div style={{ height: SP.sm }} />
 
           <ImpactRow
-            accent={AMBER}
-            accentBg={AMBER_BG}
+            accent={APPARATUS}
             title="Downstream"
             body={
               `${preview.downstreamCounts.npcs ?? 0} NPCs, ` +
@@ -187,8 +185,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           {preview.narrativeImpact !== 'none' && (
             <>
               <ImpactRow
-                accent={VIOLET}
-                accentBg={VIOLET_BG}
+                accent={APPARATUS}
                 title="Narrative"
                 body={
                   preview.narrativeImpact === 'regenerate-needed'
@@ -203,8 +200,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           {linkedSaves > 0 && (
             <>
               <ImpactRow
-                accent={BLUE}
-                accentBg={BLUE_BG}
+                accent={APPARATUS}
                 title="Linked saves"
                 body={`${linkedSaves} ${linkedSaves === 1 ? 'save links' : 'saves link'} to this settlement and may be flagged for review.`}
               />
@@ -215,8 +211,7 @@ export default function CascadePreviewPanel({ onClose, onCommit }) {
           {preview.warnings.map((w, i) => (
             <div key={i} style={{ marginBottom: SP.sm }}>
               <ImpactRow
-                accent={RED}
-                accentBg={RED_BG}
+                accent={CRITICAL}
                 title="Warning"
                 body={w}
               />
