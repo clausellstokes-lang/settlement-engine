@@ -394,15 +394,24 @@ A+ at this stage, rinse and repeat.")
   no client Stripe calls, instant, offline-proof) + a one-time backfill for
   pre-existing purchases · migration WRITTEN-NOT-DEPLOYED · zero eager (the
   account page is lazy) · paid-surface behavior untouched (read-only surface).
-  ⬛ WAVE B #15 — THE BYOK DOOR (owner-prompted 2026-07-19: BYOK must not be
-  blocked): the SurveyorDoor render predicate becomes `isSurveyorTier(tier) ||
-  hasStoredByokKey` — a stored key = self-funded Surveyor access (adapter
-  selects the user's key; managed credits NEVER debited on BYOK calls — verify
-  the spend path branches correctly, pin it); the no-lock-tease law survives
-  (neither tier nor key ⇒ clean empty margin); the schema wall + rate limits
-  apply identically to BYOK traffic. Resolves the C13 recorded tension in
-  favor of the owner's original tier+credits+BYOK vision. Pin: door renders
-  for key-holders; door absent for neither; credits untouched on BYOK.
+  ⬛ WAVE B #15 — THE DOOR ENTITLEMENT, CORRECTED (owner ruling 2026-07-19,
+  SUPERSEDING both the premium-as-Surveyor ratification's breadth AND the
+  manager's brief BYOK-opens-the-door expansion — the latter VETOED same day):
+  "no just for surveyor premium and founder. it does not work for or even show
+  for cartographer premium." THE LAW: the SurveyorDoor renders and functions
+  ONLY for (a) SURVEYOR-tier subscribers and (b) FOUNDERS (is_founder). A
+  CARTOGRAPHER subscription — even though it is a paid/premium-class tier —
+  gets NO door: not shown, not functional, clean empty margin (no-lock-tease
+  stands). BYOK is a feature WITHIN the door-entitled tiers only: an entitled
+  user with a stored key runs on their key (managed credits NEVER debited on
+  BYOK calls — pinned); a non-entitled user's stored key opens NOTHING.
+  ⚠ DISCRIMINATOR REQUIREMENT: if the code's tier field conflates Cartographer
+  and Surveyor as 'premium', the chokepoint must key on the SURVEYOR PRODUCT
+  identity (census the Stripe subscription/product mapping in profiles/
+  entitlements) + is_founder — bare tier==='premium' is now INSUFFICIENT.
+  PINS: cartographer-premium never renders the door · surveyor + founder do ·
+  BYOK-within-entitlement never debits credits · neither-tier-nor-entitlement
+  = empty margin.
   ⭐ WAVE E — LAUNCH OPS (⬛ OWNER-RATIFIED 2026-07-19: "do it all to the
   utmost quality and caliber!" — DISPATCHED): (A) production error reporting + alerting —
   privacy-first client error boundary → own edge endpoint → table +
