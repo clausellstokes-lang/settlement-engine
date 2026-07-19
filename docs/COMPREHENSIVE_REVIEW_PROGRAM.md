@@ -1153,6 +1153,15 @@ soak needs only THE PUSH; if the deploy also moves early it ships DARK (eight fl
 the dormancy-proven configuration) with ONE REGEN + the lit deploy as batch 2; the §8
 carve-outs (⛔legal · ⛔support-email MX) still gate whichever deploy goes PUBLIC first.
 THE_REMAINING_ARCHITECTURE §5/§8 annotated same date.
+**⬛ OWNER RULING (2026-07-19) — THE MASTER FORK: "bg and journey" — BOTH.** The C2
+leg derivation encodes BOTH candidate masters for comparison at the taste walk:
+bg.mp4 (marketing/website/public/bg.mp4, 76.3 MB, 30.25s ⇒ 5.042s legs — the film
+the microsite plays, already all-keyframe per the BRAND-landing doctrine) AND
+settlementforge-journey-scrub.mp4 (Desktop archive, 20.7 MB, 15.042s ⇒ 2.507s
+legs — the playbook's named master). Output sets land in derived-legs/bg/ and
+derived-legs/journey/ (separate subdirs, no collision); the walk picks which set
+C2 ships. ffmpeg unblocked same day: owner installed Homebrew 6.0.11 (their
+password step); manager runs brew install ffmpeg + both encodes + verification.
 **⬛⭐ THE LADDER FACTION-KEY BUG RETIRED (2026-07-19, claude/the-ladder @ 14e8a2fa).**
 The ROUND 3 pre-stocked item, pulled forward to an idle worktree and CONFIRMED on
 genuine generator data: all six real factions keyed `fac.unknown` and — worse than
