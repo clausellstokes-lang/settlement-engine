@@ -18,6 +18,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
+import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
+import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -137,5 +139,69 @@ describe('#21 viewModel — entity-anchor ids + lineage + magicProfile + collect
       expect(bands.has(h.priority), `hook priority is a band string, got ${h.priority}`).toBe(true);
       expect(sources.has(h.source), `hook source is a mapped group key, got ${h.source}`).toBe(true);
     }
+  });
+});
+
+describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / occupation)', () => {
+  it('renders the lineage subsection with cause tags when power.lineage is present', () => {
+    const lineageVm = {
+      ...vm,
+      power: { ...vm.power, lineage: [
+        { government: 'The Old Council', cause: 'conquest', tick: 12, by: 'Iron Legion' },
+      ] },
+    };
+    const on = joined(PowerStructure({ settlement, vm: lineageVm }));
+    expect(on, 'a settlement with regime history prints RULE & SUCCESSION').toContain('RULE & SUCCESSION');
+    expect(on, 'the prior government is named').toContain('The Old Council');
+    expect(on, 'the conquest cause is humanized into a tag').toContain('Conquest');
+  });
+
+  it('renders the OCCUPIED banner off the live-world occupation flag', () => {
+    const occVm = {
+      ...vm,
+      power: { ...vm.power, lineage: [] },
+      liveWorld: { occupied: { occupier: 'The Iron Legion', sinceTick: 7 } },
+    };
+    const on = joined(PowerStructure({ settlement, vm: occVm }));
+    expect(on, 'a live occupation lights the OCCUPIED banner').toContain('OCCUPIED');
+    expect(on, 'naming the occupier').toContain('The Iron Legion');
+  });
+
+  it('self-gates to nothing with no lineage and no occupation (byte-identical off-state)', () => {
+    const offVm = { ...vm, power: { ...vm.power, lineage: [] }, liveWorld: null };
+    expect(joined(PowerStructure({ settlement, vm: offVm })), 'no regime history ⇒ no subsection')
+      .not.toContain('RULE & SUCCESSION');
+  });
+});
+
+describe('#19 ViabilityAssessment — MAGIC LEGALITY subsection (liveWorld && magicProfile-gated)', () => {
+  it('renders the legality facets for a live campaign export with functioning magic', () => {
+    const liveVm = {
+      ...vm,
+      liveWorld: { occupied: null },
+      viability: { ...vm.viability, magicProfile: {
+        exists: true, legality: 'restricted', availability: 'common', institutionalControl: 'guild',
+        lines: ['Availability: common.', 'Legality: restricted.'],
+      } },
+    };
+    const on = joined(ViabilityAssessment({ settlement, vm: liveVm }));
+    expect(on, 'a live magical export surfaces MAGIC LEGALITY').toContain('MAGIC LEGALITY');
+    expect(on, 'and prints the summarized legality lines').toContain('Legality: restricted.');
+  });
+
+  it('self-gates off a non-campaign export even with a magic profile present', () => {
+    const noLive = { ...vm, liveWorld: null, viability: { ...vm.viability, magicProfile: {
+      exists: true, legality: 'restricted', availability: 'common', institutionalControl: 'guild', lines: ['x'],
+    } } };
+    expect(joined(ViabilityAssessment({ settlement, vm: noLive })), 'no liveWorld ⇒ no MAGIC LEGALITY block')
+      .not.toContain('MAGIC LEGALITY');
+  });
+
+  it('self-gates off a dead-magic world even on a live campaign export', () => {
+    const deadMagic = { ...vm, liveWorld: { occupied: null }, viability: { ...vm.viability, magicProfile: {
+      exists: false, legality: null, availability: null, institutionalControl: null, lines: [],
+    } } };
+    expect(joined(ViabilityAssessment({ settlement, vm: deadMagic })), 'dead magic ⇒ no MAGIC LEGALITY block')
+      .not.toContain('MAGIC LEGALITY');
   });
 });

@@ -23,9 +23,32 @@ import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
+import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
+import { factionIdFromName } from '../../lib/entities.js';
+
+/**
+ * Render a conflict/tension party as a link to its faction card when the party
+ * name resolves to an in-doc faction (by the canonical faction id), else plain
+ * text. Structured-only: the resolution is id-keyed, not a prose scan.
+ *
+ * @param {object} props
+ * @param {*} props.party      The raw party value (string or {name}).
+ * @param {object} [props.index]  vm.entityIndex.
+ * @param {object} [props.style]  Style merged onto the rendered node.
+ * @returns {object|null}
+ */
+function PartyRef({ party, index, style }) {
+  const name = label(party);
+  if (!name) return null;
+  const id = factionIdFromName(name);
+  const resolves = !!(index && id && index.resolve?.(id));
+  if (resolves) return <EntityRef id={id} index={index} type="faction" fallback={name} style={style} />;
+  return <Text style={style}>{name}</Text>;
+}
 
 export function PowerStructure({ settlement, narrativeMode, vm }) {
   const p = vm.power;
+  const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
 
   return (
@@ -132,7 +155,7 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
         FACTIONS
       </Text>
       {p.factions.map((f, i) => (
-        <FactionCard key={`f-${i}`} faction={f} index={i} />
+        <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} />
       ))}
 
       {/* ── Tensions ──────────────────────────────────────────────── */}
@@ -168,7 +191,9 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
               {t.parties?.length > 0 && (
                 <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 1 }}>
                   {t.parties.map((p, pi) => (
-                    <Tag key={`tp-${i}-${pi}`} tone="muted">{label(p)}</Tag>
+                    <Tag key={`tp-${i}-${pi}`} tone="muted">
+                      <PartyRef party={p} index={index} />
+                    </Tag>
                   ))}
                 </View>
               )}
@@ -211,7 +236,16 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
               <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
                 {c.intensity && <Pill tone={severityTone(c.intensity)}>{humanize(c.intensity)}</Pill>}
                 <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, marginLeft: c.intensity ? 6 : 0, flex: 1 }}>
-                  {Array.isArray(c.parties) ? c.parties.map(label).filter(Boolean).join(' vs ') : 'Conflict'}
+                  {Array.isArray(c.parties) && c.parties.length > 0
+                    ? c.parties
+                        .filter(p => label(p))
+                        .map((p, pi) => (
+                          <Text key={`cp-${i}-${pi}`}>
+                            {pi > 0 ? ' vs ' : ''}
+                            <PartyRef party={p} index={index} style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }} />
+                          </Text>
+                        ))
+                    : 'Conflict'}
                 </Text>
               </View>
               {c.issue && (
@@ -246,15 +280,65 @@ export function PowerStructure({ settlement, narrativeMode, vm }) {
           ))}
         </View>
       )}
+
+      {/* ── Rule & Succession (self-gating: regime lineage / conquest) ──── */}
+      <RuleAndSuccession lineage={p.lineage} occupied={vm?.liveWorld?.occupied || null} />
     </PageChrome>
   );
 }
 
-function FactionCard({ faction, index }) {
+/**
+ * Rule & Succession — the regime lineage (`previousGovernments`) with conquest
+ * provenance, plus the live occupation flag. Renders NOTHING when there's no
+ * lineage and no live occupation (byte-identical off-state for a settlement that
+ * has never changed hands).
+ */
+function RuleAndSuccession({ lineage, occupied }) {
+  if ((!lineage || lineage.length === 0) && !occupied) return null;
+  return (
+    <View style={{ marginTop: space.sm }} wrap={false}>
+      <HairRule />
+      <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
+        RULE &amp; SUCCESSION
+      </Text>
+      {occupied && (
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 3 }}>
+          <Tag tone="bad">OCCUPIED</Tag>
+          <Text style={{ ...type.body, fontSize: pt['9'], color: palette.bad, marginLeft: 4, flex: 1 }}>
+            Held under {occupied.occupier} by right of conquest
+            {occupied.sinceTick != null ? ` (since tick ${occupied.sinceTick})` : ''}.
+          </Text>
+        </View>
+      )}
+      {(lineage || []).map((g, i) => (
+        <View key={`lin-${i}`} style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 2 }}>
+          <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, flex: 1 }}>
+            {g.government || 'Prior government'}
+          </Text>
+          {g.cause && (
+            <Tag tone={g.cause === 'conquest' ? 'bad' : g.cause === 'coup' ? 'warn' : 'muted'}>
+              {humanize(g.cause)}
+            </Tag>
+          )}
+          {g.tick != null && (
+            <Text style={{ ...type.caption, color: palette.faint, fontSize: pt['7.5'], marginLeft: 4 }}>
+              tick {g.tick}
+            </Text>
+          )}
+        </View>
+      ))}
+    </View>
+  );
+}
+
+function FactionCard({ faction, index, entityIndex }) {
   const f = faction;
   const accent = factionColors[f.category] || (f.isGoverning ? palette.gold : palette.muted);
+  // Phase-D: this card is the anchor TARGET for any faction id reference.
+  const anchor = anchorTarget(entityIndex, f.id);
   return (
     <View
+      id={anchor}
       style={{
         marginBottom: 6,
         padding: 6,
