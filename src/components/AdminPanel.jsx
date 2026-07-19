@@ -15,6 +15,7 @@ import { supabase } from '../lib/supabase.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
 import AdminAnalyticsPanel from './admin/AdminAnalyticsPanel.jsx';
+import AdminClientErrorsPanel from './admin/AdminClientErrorsPanel.jsx';
 import AdminTrendsPanel from './admin/AdminTrendsPanel.jsx';
 import AdminUsersPanel from './admin/AdminUsersPanel.jsx';
 import SupportQueuePanel from './admin/SupportQueuePanel.jsx';
@@ -199,6 +200,13 @@ export default function AdminPanel({ onBack }) {
 
         <Section title="Analytics">
           <AdminAnalyticsPanel />
+        </Section>
+
+        {/* Client errors — the production crash sink (client_error_events, 081)
+            grouped by signature, with the always-visible last-hour alert banner
+            (report_client_error_alert, 156). Read-only, service-role-gated. */}
+        <Section title="Client Errors">
+          <AdminClientErrorsPanel />
         </Section>
 
         {/* Simulation tuning — read-only diagnostics over the live campaigns'

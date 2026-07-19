@@ -381,6 +381,20 @@ export async function handleAdminActions(
         return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });
       }
 
+      // ── Client error reports (migration 156). Same posture as
+      // get_analytics_dashboard: the privilege gate above already enforced
+      // developer/admin/owner, and the edge function assembles NO SQL — it calls
+      // the two fixed SECURITY DEFINER reads over client_error_events (081).
+      // Returns the grouped-by-signature rows PLUS the last-hour alert summary
+      // that drives the always-visible over-threshold banner in the panel.
+      case "get_client_error_dashboard": {
+        const { data, error } = await adminClient.rpc("report_client_errors", { p_from: pFrom, p_to: pTo });
+        if (error) return adminFail(error, 500);
+        const { data: alertData } = await adminClient.rpc("report_client_error_alert");
+        const alert = Array.isArray(alertData) ? (alertData[0] ?? null) : (alertData ?? null);
+        return json({ success: true, rows: data || [], alert, refreshedAt: new Date().toISOString() });
+      }
+
       // ── Trends panel (migration 040). Same posture as get_analytics_dashboard:
       // the privilege gate above already enforced developer/admin/owner, and the
       // edge function assembles NO SQL — it forwards scalar args to fixed report
