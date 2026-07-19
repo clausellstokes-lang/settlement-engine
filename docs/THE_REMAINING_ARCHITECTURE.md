@@ -545,7 +545,14 @@ A+ at this stage, rinse and repeat.")
   have desynced write/read keys); 3 sites fixed, classification consumers verified
   N/A via factionArchetype; real-shape pin 9/9 revert-proven; dormancy byte-identity
   green. The traditions faction.power seam now waits only on the folds. ·
-  AI-adapter API-shape check (owner Q 2026-07-19 answered: NO plugin/MCP needed —
+  THE DOWNGRADE-TRANSITION AUDIT (owner-commissioned 2026-07-19: every tiered
+  feature must STOP responsibly on Founder→Surveyor→Cartographer→Wanderer
+  downgrade — no gate a bug lets users circumvent; no owned artifact
+  irresponsibly destroyed) — adversarial 5-lens audit dispatched; the PRINCIPLE
+  = capabilities-stop-server-side / artifacts-preserved; confirmed findings are
+  PRE-LOOP completion fixes (correctness+security); owner-ambiguous grandfather
+  cases (beyond-cap realm view-vs-lock · worn minted skin keep-vs-revert ·
+  founder voluntary-downgrade existence) surface to the queue · AI-adapter API-shape check (owner Q 2026-07-19 answered: NO plugin/MCP needed —
   the Messages API + the schema wall IS the integration; verify the adapters use
   PROMPT CACHING on the stable grounding prefixes [managed-credit cost] +
   tool-forced structured outputs where the wall parses JSON; an official
