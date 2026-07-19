@@ -322,4 +322,30 @@ describe('Illustrated ground-dress legibility (WCAG 1.4.11 — 3:1 graphics on t
     // and no re-skin lens names it either (only the illustrated lens dresses the ground)
     for (const id of TOWN_MAP_STYLE_IDS) expect(resolveTownMapStyle(id).opacity.dress).toBeUndefined();
   });
+
+  // IT-3 — the SEASON + STATE marks (snow fleck / bare tree / harvest stubble / parched crack /
+  // siege ring / scar grain / rebirth scaffold) are the SAME engraver's register: all-ink, so the
+  // discriminator is PATTERN, never colour (colourblind-safe by construction), and each clears the
+  // 3:1 graphics floor at the ink strength. The accessible lens stays dress-free EVEN WITH a full
+  // season+state context (byte-identical, a11y-safe) — the dormancy law holds at the dress fields.
+  test('every SEASON + STATE mark carries only the ink (pattern, not colour, is the channel)', () => {
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-season' }));
+    const cats = [...new Set((model.districts || []).map((d) => d.category))];
+    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
+    for (const dress of [{ season: 'winter' }, { season: 'autumn' }, { season: 'summer', severity: 'drought' }, full]) {
+      const ops = groundDressOps(model, ILLUSTRATED_STYLE_ID, dress);
+      expect(ops.length).toBeGreaterThan(0);
+      for (const o of ops) {
+        if (o.stroke != null) expect(o.stroke).toBe(il.palette.ink);
+        if (o.fill != null) expect(o.fill).toBe(il.palette.ink);
+      }
+    }
+  });
+
+  test('the accessible lens renders ZERO dress even WITH a full season+state context', () => {
+    const model = buildTownMapModel(makeTownFixture({ tier: 'city', terrain: 'coastal', walls: true, water: true, seed: 'dress-acc2' }));
+    const cats = [...new Set((model.districts || []).map((d) => d.category))];
+    const full = { season: 'winter', severity: 'hard_winter', state: { besieged: true, scarLevel: 1, rebuiltCategories: cats } };
+    expect(groundDressOps(model, 'accessible', full)).toEqual([]);
+  });
 });

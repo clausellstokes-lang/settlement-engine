@@ -36,7 +36,14 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 /** @typedef {{ anchor: string, dx: number, dy: number }} MapEditPin */
 /** @typedef {{ showLabels?: boolean, showLegend?: boolean }} MapEditLegendPrefs */
 /** @typedef {{ x: number, y: number, label: string, audience: 'dm'|'player' }} MapAnnotation */
-/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[], bespokeStyles?: Record<string, unknown> }} MapEdits */
+/** @typedef {{ layoutVariant?: number, pins?: MapEditPin[], legendPrefs?: MapEditLegendPrefs, styleLens?: string, layoutLawVersion?: number, annotations?: MapAnnotation[], bespokeStyles?: Record<string, unknown>, seasonOverride?: string }} MapEdits */
+
+/** IT-3 SEASON OVERRIDE — the bounded season a DM can PIN on a map ("this is the winter map"),
+ *  independent of the live world clock. The 4-4-5 calendar's four quarters; null (absent) is the
+ *  default ⇒ the map follows the live season (or is seasonless with no campaign). A denylist-safe,
+ *  cosmetic-class key (checked ∉ PRIVATE_KEY_RE by the naming-trap test), the exact styleLens shape.
+ *  @type {ReadonlyArray<'spring'|'summer'|'autumn'|'winter'>} */
+export const SEASON_OVERRIDE_IDS = Object.freeze(['spring', 'summer', 'autumn', 'winter']);
 
 // The full set of schema keys the container may ever carry — the naming-guard
 // test asserts NONE match PRIVATE_KEY_RE (so a future public projection cannot
@@ -68,7 +75,7 @@ import { coerceStyleId, DEFAULT_STYLE_ID } from '../../design/townMapStyles.js';
 // reach a public projection. This is why only the CONTAINER key joins the schema list below (the
 // collection's dynamic ids + role fields are not — and cannot be — a fixed vocabulary).
 export const MAP_EDITS_SCHEMA_KEYS = Object.freeze([
-  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', 'bespokeStyles', // container
+  'layoutVariant', 'pins', 'legendPrefs', 'styleLens', 'layoutLawVersion', 'annotations', 'bespokeStyles', 'seasonOverride', // container
   'anchor', 'dx', 'dy',                    // pin
   'showLabels', 'showLegend',              // legendPrefs
   'x', 'y', 'label', 'audience',           // annotation
@@ -167,6 +174,16 @@ export function readStyleLens(edits) {
  * @returns {number} */
 export function readLayoutLawVersion(edits) {
   return edits && Number(edits.layoutLawVersion) === 2 ? 2 : DEFAULT_LAYOUT_LAW_VERSION;
+}
+
+/** The DM's PINNED season override (IT-3), or `null` when unset/invalid — the map then follows
+ * the live world clock. A value outside the bounded 4-quarter vocabulary coerces to null (the
+ * dormancy default). Read-only; the renderer's resolveMapDress prefers this over the live season.
+ * @param {MapEdits | null | undefined} edits
+ * @returns {'spring'|'summer'|'autumn'|'winter'|null} */
+export function readSeasonOverride(edits) {
+  const v = edits && typeof edits.seasonOverride === 'string' ? edits.seasonOverride : '';
+  return SEASON_OVERRIDE_IDS.includes(/** @type {any} */ (v)) ? /** @type {any} */ (v) : null;
 }
 
 /**
@@ -279,6 +296,12 @@ export function normalizeMapEdits(edits) {
   const bespokeStyles = readBespokeStyles(edits);
   if (Object.keys(bespokeStyles).length > 0) out.bespokeStyles = bespokeStyles;
 
+  // seasonOverride: kept ONLY for a valid pinned season (absent / invalid ⇒ omitted ⇒
+  // byte-identical dormancy — clearing the pin returns the blob to no-edit, the exact styleLens
+  // pattern). This is what pins the season-override law: an absent marker follows the live clock.
+  const seasonOverride = readSeasonOverride(edits);
+  if (seasonOverride) out.seasonOverride = seasonOverride;
+
   return Object.keys(out).length > 0 ? out : null;
 }
 
@@ -361,6 +384,17 @@ export function withLegendPref(edits, key, value) {
 export function withStyleLens(edits, lens) {
   const base = normalizeMapEdits(edits) || {};
   return normalizeMapEdits({ ...base, styleLens: coerceStyleId(lens) });
+}
+
+/** PIN (or clear) the season override (IT-3): a DM fixes "this is the winter map", independent
+ * of the live world clock. Passing a value OUTSIDE the bounded vocabulary (or null / '') CLEARS
+ * the pin ⇒ byte-identical dormancy (the map follows the live season again — the exact styleLens
+ * flip-back). Non-destructive: season is display-only, so no edit is ever lost by re-pinning.
+ * @param {MapEdits | null | undefined} edits @param {string | null} season @returns {MapEdits | null} */
+export function withSeasonOverride(edits, season) {
+  const base = normalizeMapEdits(edits) || {};
+  const next = SEASON_OVERRIDE_IDS.includes(/** @type {any} */ (season)) ? /** @type {any} */ (season) : null;
+  return normalizeMapEdits({ ...base, seasonOverride: next });
 }
 
 /** THE OPT-IN REDRAW (VERSIONING LAW): switch a settlement's map to a layout-law

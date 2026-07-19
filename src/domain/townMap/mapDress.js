@@ -30,6 +30,7 @@
 import { seasonalSeverityFor } from '../worldPulse/seasons.js';
 import { settlementWarStatus } from '../display/warStatus.js';
 import { fabricScarsOf, fabricRebirthsOf } from './fabricRead.js';
+import { readMapEdits, readSeasonOverride } from './mapEdits.js';
 
 /** The bounded season vocabulary (the 4-4-5 calendar's four quarters). */
 const SEASONS = Object.freeze(new Set(['spring', 'summer', 'autumn', 'winter']));
@@ -76,17 +77,21 @@ function resolveMapState(settlement, worldState, regionalGraph) {
 
 /**
  * Resolve the season + state portrait for a settlement's map. PURE. Returns `null` when there
- * is nothing to paint (no live season AND no state) ⇒ the caller passes null ⇒ seasonless base
- * bytes (the dormancy law). `regionalGraph` (optional) is needed only for the siege read — a
- * surface without it (the thumbnail) still gets scars + rebirth (settlement-only reads).
- * @param {{ id?: string|number, urbanFabric?: unknown } | null | undefined} settlement
+ * is nothing to paint (no season AND no state) ⇒ the caller passes null ⇒ seasonless base bytes
+ * (the dormancy law). The season is the DM's PINNED override (settlement.mapEdits.seasonOverride,
+ * IT3-c) when set, else the live world clock — so a pinned map paints its season even with no
+ * campaign (severity still derives from the live year when a worldState is present). `regionalGraph`
+ * (optional) is needed only for the siege read — a surface without it (the thumbnail) still gets
+ * scars + rebirth (settlement-only reads).
+ * @param {{ id?: string|number, urbanFabric?: unknown, mapEdits?: unknown } | null | undefined} settlement
  * @param {{ calendar?: { season?: string, year?: number } | null, rngSeed?: string } | null | undefined} worldState
  * @param {any} [regionalGraph]
  * @returns {import('./groundDress.js').MapDress | null}
  */
 export function resolveMapDress(settlement, worldState, regionalGraph = null) {
   const calendar = worldState && typeof worldState === 'object' ? worldState.calendar : null;
-  const season = normSeason(calendar ? calendar.season : null);
+  // The PINNED override (IT3-c) wins over the live season; absent ⇒ follow the world clock.
+  const season = readSeasonOverride(readMapEdits(settlement)) || normSeason(calendar ? calendar.season : null);
   const state = resolveMapState(settlement, worldState, regionalGraph);
   if (!season && !state) return null;
 

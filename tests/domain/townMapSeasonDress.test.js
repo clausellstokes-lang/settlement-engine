@@ -219,6 +219,30 @@ describe('state dress (IT3-b) — resolveMapDress wires the reads', () => {
   });
 });
 
+describe('season override (IT3-c) — the pin wins over the live clock', () => {
+  it('a mapEdits.seasonOverride overrides the live calendar season', () => {
+    const settlement = { id: 's9', mapEdits: { seasonOverride: 'winter' } };
+    const worldState = { rngSeed: 'x', calendar: { season: 'summer', year: 2 } };
+    expect(resolveMapDress(settlement, worldState).season).toBe('winter');   // pin wins
+    // severity still derives from the LIVE year (the pin fixes the season LABEL, not the year)
+    expect(resolveMapDress(settlement, worldState).severity)
+      .toBe(seasonalSeverityFor('x', 2, 's9'));
+  });
+
+  it('a pinned season paints even with NO campaign (severity null)', () => {
+    const settlement = { id: 's9', mapEdits: { seasonOverride: 'autumn' } };
+    const d = resolveMapDress(settlement, null);
+    expect(d).not.toBeNull();
+    expect(d.season).toBe('autumn');
+    expect(d.severity).toBeNull();
+  });
+
+  it('an absent / invalid override falls back to the live clock (dormancy)', () => {
+    expect(resolveMapDress({ id: 's9', mapEdits: { seasonOverride: 'nonsense' } }, { calendar: { season: 'summer', year: 1 } }).season).toBe('summer');
+    expect(resolveMapDress({ id: 's9' }, null)).toBeNull();  // no pin, no clock ⇒ seasonless
+  });
+});
+
 describe('state dress (IT3-b) — BOUNDED (full stack ≤ DRESS_CAP)', () => {
   it('the worst season + siege + scars + all-classes rebuilt stays ≤ DRESS_CAP on every seed', () => {
     let worst = { label: '', ops: 0 };

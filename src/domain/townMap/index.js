@@ -47,6 +47,8 @@ export {
   readLayoutLawVersion,
   readAnnotations,
   readBespokeStyles,
+  readSeasonOverride,
+  SEASON_OVERRIDE_IDS,
   normalizeMapEdits,
   withPinNudge,
   withLayoutVariant,
@@ -57,6 +59,7 @@ export {
   withAnnotation,
   withoutAnnotationAt,
   withBespokeStyles,
+  withSeasonOverride,
   newSettlementMapEdits,
 } from './mapEdits.js';
 // SM-4 — the deterministic DRAW projection (model → primitive ops → SVG string),

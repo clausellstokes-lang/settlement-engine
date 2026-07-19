@@ -23,7 +23,19 @@ import { buildTownMapDrawList, buildTownMapSvg } from '../../src/domain/townMap/
 import { GOLDEN_CONFIGS, V2_GOLDEN_CONFIGS } from '../fixtures/townMapFixtures.js';
 
 const MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'illustrated-town-golden.json');
+const SEASON_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'illustrated-town-season-golden.json');
 const UPDATE = process.env.UPDATE_ILLUSTRATED_GOLDEN === '1';
+
+// IT-3 seasonal variants — the season/severity contexts pinned over the same seed corpus. These
+// are ADDITIVE (a NEW fixture); the seasonless base above is NEVER re-minted, so its byte-identity
+// IS the dormancy proof at golden strength. Each variant is an explicit dress context (not the
+// resolver) so this pins the season DRESS output directly.
+const SEASON_VARIANTS = [
+  { key: 'winter', dress: { season: 'winter' } },
+  { key: 'winter-hard', dress: { season: 'winter', severity: 'hard_winter' } },
+  { key: 'autumn', dress: { season: 'autumn' } },
+  { key: 'summer-drought', dress: { season: 'summer', severity: 'drought' } },
+];
 
 // A tier-spanning v1 subset (thorp / hamlet / town / city / metropolis / village) so the
 // illustrated lens is pinned over V1 geometry too, not only the v2 engine.
@@ -90,6 +102,56 @@ describe('GOLDEN — illustrated town (v2 corpus + v1 subset) → bytes', () => 
   it('the illustrated lens carries NO legacy 16×16 building rects (glyphs replaced them)', () => {
     for (const ops of illustratedOutputs()) {
       expect(ops.some((o) => o.t === 'rect' && o.w === 16 && o.h === 16 && o.rx === 3)).toBe(false);
+    }
+  });
+});
+
+/** The per-config seasonal draw lists (v2 corpus + v1 subset × the season variants). */
+function seasonOutputs() {
+  const rows = [];
+  for (const { settlement, mapEdits } of V2_GOLDEN_CONFIGS) {
+    const model = buildTownMapModel(settlement, mapEdits);
+    for (const v of SEASON_VARIANTS) rows.push(buildTownMapDrawList(model, 'illustrated', v.dress));
+  }
+  for (const { settlement } of V1_SUBSET) {
+    const model = buildTownMapModel(settlement);
+    for (const v of SEASON_VARIANTS) rows.push(buildTownMapDrawList(model, 'illustrated', v.dress));
+  }
+  return rows;
+}
+
+describe('GOLDEN — illustrated town SEASONAL variants (additive; the base stays byte-identical)', () => {
+  it('the seasonal corpus hashes to the committed manifest', () => {
+    const outputs = seasonOutputs();
+    const hash = hashOf(outputs);
+    let totalOps = 0;
+    for (const ops of outputs) totalOps += ops.length;
+    const record = { hash, configs: outputs.length, totalOps, bytes: JSON.stringify(outputs).length };
+    if (UPDATE) {
+      mkdirSync(dirname(SEASON_MANIFEST), { recursive: true });
+      writeFileSync(SEASON_MANIFEST, JSON.stringify(record, Object.keys(record).sort(), 2) + '\n');
+    }
+    expect(
+      existsSync(SEASON_MANIFEST),
+      'illustrated-town-season-golden.json missing — mint: UPDATE_ILLUSTRATED_GOLDEN=1 npx vitest run tests/property/illustratedTownGolden.test.js',
+    ).toBe(true);
+    const pinned = JSON.parse(readFileSync(SEASON_MANIFEST, 'utf-8'));
+    expect(hash).toBe(pinned.hash);
+    expect(record.configs).toBe(pinned.configs);
+    expect(record.totalOps).toBe(pinned.totalOps);
+  });
+
+  it('is reproducible — a second seasonal build hashes identically', () => {
+    expect(hashOf(seasonOutputs())).toBe(hashOf(seasonOutputs()));
+  });
+
+  it('every seasonal variant DIFFERS from the seasonless base (the dress actually paints)', () => {
+    for (const { settlement, mapEdits } of V2_GOLDEN_CONFIGS.slice(0, 4)) {
+      const model = buildTownMapModel(settlement, mapEdits);
+      const base = JSON.stringify(buildTownMapDrawList(model, 'illustrated'));
+      for (const v of SEASON_VARIANTS) {
+        expect(JSON.stringify(buildTownMapDrawList(model, 'illustrated', v.dress)), `${v.key} == base`).not.toBe(base);
+      }
     }
   });
 });

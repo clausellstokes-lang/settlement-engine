@@ -75,6 +75,9 @@ import SettlementMapLandform from './SettlementMapLandform.jsx';
 // the exports use), mounted under the interactive layers whose fills go transparent.
 import SettlementMapGrid from './SettlementMapGrid.jsx';
 import SettlementMapIllustratedUnderlay from './SettlementMapIllustratedUnderlay.jsx';
+// IT3-c — the DM season-override control (a lazy leaf; the pane is max-lines-capped so this
+// stays out-of-file, mounted only in illustrated edit mode).
+import SettlementMapSeasonControl from './SettlementMapSeasonControl.jsx';
 // DOOR 2 — THE TABLE LAYER (fog of war). The pane threads three leaves: the map-space overlay
 // (+ the reveal-brush capture), the wiring hook (optimistic mirror + persist + controller), and
 // the DM chrome (controls + lazy player view + handout export). Kept out-of-file so the pane
@@ -708,6 +711,10 @@ export default function SettlementMapPane({ settlement, canEdit = false, saveId 
           />
         </div>
       )}
+
+      {/* ── IT3-c THE SEASON OVERRIDE — a DM pins the illustrated map's season (self-contained
+          lazy leaf; only in illustrated EDIT mode, writing a persisted mapEdits key). ── */}
+      {illustrated && editing && <SettlementMapSeasonControl mapEdits={mapEdits} onCommit={commitEdits} />}
 
       {/* ── SM-5 THE LEGIBILITY DRAWER — a left-edge "Read" drawer surfacing the
           surveyor's read (+ change view + roads out, added in their deliverables).
