@@ -24,7 +24,7 @@ import Button from '../primitives/Button.jsx';
 import Segmented from '../primitives/Segmented.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
-import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea } from './surveyorPanelKit.jsx';
+import { MoneyLine, RefusalNote, MusingsBlock, Eyebrow, PromptArea, ProposalSlipLine } from './surveyorPanelKit.jsx';
 
 const cost = getSurveyorAiCost('styleOverhaul');
 const CANDIDATE_LENS = '__candidate__';
@@ -150,6 +150,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
       {style && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
           <Eyebrow>Live preview · flip back to a base lens anytime</Eyebrow>
+          <ProposalSlipLine />
           <Segmented options={lensOptions} value={lens} onChange={setLens} size="sm" ariaLabel="Preview lens" />
           {previewSvg ? (
             <div
@@ -185,7 +186,7 @@ export default function StyleOverhaulPanel({ initialPrompt = '' }) {
               placeholder="Name this style"
               style={{ flex: 1, minWidth: 120, fontSize: FS.sm, fontFamily: sans, border: `1px solid ${BORDER}`, borderRadius: R.sm, padding: `4px ${SP.sm}px` }}
             />
-            <Button variant="aiSolid" size="sm" disabled={!styleName.trim()} onClick={accept}>Accept & save</Button>
+            <Button variant="primary" size="sm" disabled={!styleName.trim()} onClick={accept}>Accept & save</Button>
             <Button variant="ghost" size="sm" onClick={decline}>Decline</Button>
           </div>
 

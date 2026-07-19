@@ -12,13 +12,13 @@ import { useState, useCallback } from 'react';
 import { Check, Pencil, X } from 'lucide-react';
 import { useStore } from '../../store/index.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, sans, SP, R, FS } from '../theme.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, GREEN, VIOLET, sans, SP, R, FS } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import Badge from '../primitives/Badge.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import {
-  MoneyLine, RefusalNote, MusingsBlock, FieldLabelBadge, Eyebrow, PromptArea,
+  MoneyLine, RefusalNote, MusingsBlock, FieldLabelBadge, Eyebrow, PromptArea, ProposalSlipLine,
 } from './surveyorPanelKit.jsx';
 
 const BUCKET_LABEL = {
@@ -44,7 +44,7 @@ function DraftEntryCard({ entry: e, index, decision, onDecide }) {
     <div
       data-testid={`content-entry-${index}`}
       style={{
-        border: `1px solid ${action === 'reject' ? BORDER : GOLD}`, borderRadius: R.md,
+        border: `1px solid ${action === 'reject' ? BORDER : action === 'approve' ? GOLD : VIOLET}`, borderRadius: R.md,
         padding: SP.sm, background: action === 'reject' ? CARD_ALT : '#fff',
         opacity: action === 'reject' ? 0.6 : 1, display: 'flex', flexDirection: 'column', gap: 6,
       }}
@@ -162,6 +162,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
       {draft && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: SP.sm, borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm }}>
           <Eyebrow>Review each entry · approve, edit, or reject</Eyebrow>
+          <ProposalSlipLine />
           {entries.length === 0 && <p style={{ margin: 0, fontSize: FS.sm, color: MUTED }}>Nothing landed in a registered content type.</p>}
           {entries.map((e, i) => (
             <DraftEntryCard key={i} entry={e} index={i} decision={decisions[i]} onDecide={decide} />
@@ -181,7 +182,7 @@ export default function CustomContentPanel({ initialPrompt = '' }) {
             </div>
           )}
 
-          <Button variant="aiSolid" size="sm" disabled={!anyApproved} onClick={applyApproved}>
+          <Button variant="primary" size="sm" disabled={!anyApproved} onClick={applyApproved}>
             Add approved to my content
           </Button>
 

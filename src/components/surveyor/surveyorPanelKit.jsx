@@ -9,7 +9,8 @@
  */
 
 import { Sparkles } from 'lucide-react';
-import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, sans, serif_, SP, R, FS } from '../theme.js';
+import { t } from '../../copy/index.js';
+import { INK, BODY, MUTED, BORDER, CARD_ALT, GOLD, RED, GREEN, VIOLET_DEEP, sans, serif_, SP, R, FS } from '../theme.js';
 import Badge from '../primitives/Badge.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -124,6 +125,20 @@ export function MusingsBlock({ musings }) {
         </p>
       ))}
     </div>
+  );
+}
+
+/**
+ * THE DRAFT-SLIP REGISTER (C13 owner ruling): every AI proposal surface carries this
+ * small-cap line — the proposal is a DRAFT document in the slate register; accept is
+ * the gold STAMP (the existing accept handlers, unchanged); decline files it away.
+ * The line's copy is the owner's ruling text VERBATIM (copy registry surveyorDoor.proposed).
+ */
+export function ProposalSlipLine() {
+  return (
+    <span data-testid="proposal-slip-line" className="sf-smallcap" style={{ fontSize: FS.xs, color: VIOLET_DEEP, fontFamily: sans }}>
+      {t('surveyorDoor.proposed')}
+    </span>
   );
 }
 
