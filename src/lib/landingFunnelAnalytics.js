@@ -16,6 +16,11 @@
  *   - 'fixture_forge' — the "Forge this exact town" determinism control was
  *                       clicked. Carries the fixture's CONSTANT seed (the same
  *                       value for every visitor — provenance, not user data).
+ *   - 'journey_stop'  — the viewer reached a stop of the Welcome travel-and-stop
+ *                       film (funnel depth). Carries the coarse stop index (0-6,
+ *                       the six growth tiers + the desk); deduped once per stop
+ *                       per session so scroll-jitter never re-counts. Enriches the
+ *                       ONE existing funnel event — no new eager event name.
  *
  * PRIVACY: coarse enums / constants only — never a settlement name, prose,
  * coordinate, or anything user-entered (the analytics props-hygiene lint bans
@@ -48,4 +53,24 @@ export function trackLandingView() {
  */
 export function trackLandingFixtureForge({ seed } = {}) {
   emit({ feature: 'fixture_forge', seed: seed ?? null });
+}
+
+/**
+ * The viewer reached a stop of the Welcome journey film (funnel depth). Deduped
+ * once per stop index per session (best-effort: on any storage error we skip the
+ * guard and still fire). Stop 0 is the initial view (trackLandingView covers it),
+ * so only stops >= 1 emit.
+ * @param {number} stop  coarse stop index (1-6 fire; 0 is the initial view).
+ */
+export function trackLandingJourneyStop(stop) {
+  const i = Number(stop) | 0;
+  if (i < 1) return;
+  try {
+    if (typeof sessionStorage !== 'undefined') {
+      const key = `sf_journey_stop_${i}`;
+      if (sessionStorage.getItem(key) === '1') return;
+      sessionStorage.setItem(key, '1');
+    }
+  } catch { /* storage unavailable — fall through and fire */ }
+  emit({ feature: 'journey_stop', stop: i });
 }
