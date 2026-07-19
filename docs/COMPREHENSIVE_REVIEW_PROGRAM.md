@@ -1134,6 +1134,18 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛ OWNER RULING (2026-07-19) — THE FALLBACK ORDER: Supabase Pro + Stripe Connect
+both BUILD-WITH-FALLBACKS; launch blocks on neither.** DESIGN_MONEY_WAVE amended in
+place: (1) THE PAYOUT ELECTION — outgoing holders (transfers AND buybacks) elect
+'connect_cash' or 'account_credits' ($49.50 of AI credits via system_grant_credits,
+'seat_payout' delivery key, same due-runner claim-once); with Connect absent at launch
+the credits form is the immediate option and cash parks at 'held' (re-electable) —
+transfers can FULLY LIGHT on legal sign-off alone, which stays the un-fallback-able hard
+gate; credits form has zero money-transmission surface. (2) PRE-PRO POSTURE — M-9's
+session gate was already plan-independent (nothing degrades user-visibly); the runbook
+gains the pre-Pro checklist: custom SMTP for auth mail (free-tier sender rate limits —
+no Pro needed), manual backup cadence, uptime-probe-as-pause-keepalive. §12 terms payout
+line rewritten to the elected-form language for the legal consult.
 **⬛⭐ OWNER RULING (2026-07-19, "build it all!") — THE ROADS WAVE IS ORDERED.** The
 full journeys-with-stakes design builds, pre-loop, as a dark engine wave: mission-purposed
 NPC travel drawing purposes from EXISTING calendars/ledgers (traditions observances ·

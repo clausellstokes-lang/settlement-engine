@@ -558,7 +558,23 @@ destination: connect_account_id, metadata:{case_id}}, {idempotencyKey:
 `payout-${case_id}`}) → 'released' + stripe_transfer_id + money_events
 (seat_transfer_payout). Failure → 'failed' + loud log (operator surface).
 Connect DISABLED or no connected account at due time → 'held' + a monthly
-reminder through the seam. The Stripe idempotency key makes the
+reminder through the seam.
+  THE PAYOUT ELECTION (owner fallback ruling 2026-07-19 — transfers must be
+  able to FULLY LIGHT without Connect): at initiate, the outgoing holder
+  elects payout form — 'connect_cash' (default when Connect is live) or
+  'account_credits': $49.50 delivered as AI credits at payout-due time via
+  system_grant_credits(user, round(4950 / the §4.4 rate), 'seat_payout',
+  {case_id}) — same due-runner claim-once, 'seat_payout' joins the
+  delivery-key CASE per 116 discipline, money_events row keeps kind
+  seat_transfer_payout with metadata {form:'credits'}. When Connect is ABSENT
+  (pre-approval launch), 'account_credits' is the only immediate option;
+  'connect_cash' elections park at 'held' and the election is re-openable
+  from the account panel while parked. The buyback (§6.8) gains the SAME
+  election. The credits form has NO money-transmission surface (credits are
+  the company's own product) — legal reviews both forms in the §12 bundle.
+  Schema: payout_form text NOT NULL default 'connect_cash' check in
+  ('connect_cash','account_credits') on founder_transfer_cases AND
+  founder_seat_buybacks. The Stripe idempotency key makes the
 claim-crash-replay window double-payout-proof: a re-run re-sends the SAME
 transfer request.
 6.7 CLAWBACK / DISPUTE INTERPLAY (slice M-7):
@@ -779,7 +795,8 @@ flake-isolation protocol; every JUDGMENT labeled vetoable in slice reports)
   d) chargeback matrix (cooling/pre-payout/post-payout — each executed).
 - M-8 THE PAYOUT LIMB: Connect onboarding + release. Commits: a)
   payout_onboarding (key-inert refusal test) · b) release claim + idempotent
-  transfer + held/failed paths · c) runbook §11 finalization. DONE-WHEN: with
+  transfer + held/failed paths + the credits-election limb (seat_payout
+  delivery-key + grant-once test) · c) runbook §11 finalization. DONE-WHEN: with
   keys absent every Connect call refuses cleanly and payout_status parks at
   'held'/'scheduled'; double-release proven impossible (claim + idem-key test).
 - M-9 SINGLE SESSION: 161 + gate + client. Commits: a) migration + RPC probes
@@ -861,6 +878,19 @@ is safe on day one — no money surface lights)
 8. Supabase Pro (this week, owner): AFTER purchase, enable "enforce single
    session per user" in the dashboard — defense-in-depth at the refresh layer;
    our gate is already enforcing at the request layer either way.
+4b/5b. FALLBACK POSTURES (owner ruling 2026-07-19 — launch blocks on NEITHER):
+   - CONNECT NOT APPROVED BY LAUNCH: transfers may still FULLY activate
+     (steps 4 → 6, skipping 5): the payout election runs credits-only; cash
+     elections park at 'held' and release when the platform lands. LEGAL
+     SIGN-OFF (step 4) remains the hard gate regardless — no fallback for it.
+   - SUPABASE PRO NOT PURCHASED BY LAUNCH: nothing blocks — the M-9 session
+     gate is plan-independent by design (step 8 is defense-in-depth only).
+     PRE-PRO POSTURE checklist: custom SMTP configured in the Supabase
+     dashboard for auth emails (the free built-in sender is heavily
+     rate-limited; Wave E's PRODUCTION_EMAIL_RUNBOOK covers setup — no Pro
+     needed) · manual backup cadence per DATA_BACKUP_RUNBOOK until Pro's
+     daily backups · the Wave E uptime probe doubles as the free-tier
+     inactivity-pause keepalive · run step 8's toggle after purchase.
 9. Auto-reload needs no owner key beyond the existing Stripe secret +
    STRIPE_PRICE_CREDITS_25 (already live) — it lights per-user on consent.
    Wave E mail-seam keys light the notification emails when that lane lands.
@@ -899,8 +929,10 @@ TERMS BUNDLE (drafted for counsel; encode the four ratified amendments):
   remains unresponsive to repeated notices over a further ninety (90) days, is
   deemed abandoned and returns to the company; $49.50 is held for the former
   holder as a claimable credit.
-- Payouts to outgoing holders are made via Stripe Connect 14-30 days after
-  transfer completion and require the holder to complete Stripe onboarding.
+- Payouts to outgoing holders are made 14-30 days after transfer completion,
+  at the holder's election: in cash via Stripe Connect (requires completing
+  Stripe onboarding), or as SettlementForge service credits of equal stated
+  value ($49.50).
 - The company may pause, reverse, or refuse a transfer for security, fraud, or
   chargeback reasons, per the process rules above.
 - ONE CONCURRENT SESSION: SettlementForge accounts are individual licenses
