@@ -1134,6 +1134,12 @@ law for every phase — recomposition never rewrite; functional parity per surfa
 existing behavioral tests stay green UNTOUCHED (rewriting a pin to match reduced behavior
 = violation); INSTRUMENT-EXEMPT is the pressure valve; on any conflict FUNCTIONALITY WINS
 and the conflict is reported. Relayed mid-flight to the running lane.
+**⬛⭐ THE CONTINUITY ORDER (owner, 2026-07-18): "if i run out of fable,
+automatically switch and continue all the work with opus 4.8 ultracode fast.
+don't wait on me."** — Recorded in START_HERE §6b: an Opus 4.8 successor (fast,
+ultracode) inherits full standing authority at the model boundary with NO pause;
+resumes per START_HERE §5; delegation + vetoable-record duty + ⛔owner gates all
+carry verbatim. The program never stops at a quota line.
 **⬛⭐⭐ T-2 + IT-4 LANDED (2026-07-18) — culture OCCURS and skins are WEARABLE.**
 T-2 (claude/traditions @ 63c37358, 3 commits): the tick-time mover DARK behind
 traditionsEnabled — first-lit mint proven byte-identical to the T-1 preview;

@@ -85,6 +85,17 @@ classes are owner-only (push→already authorized as backup; PR-merge, deploys,
 the index — hazards, rulings, gotchas). If you are NOT Claude: everything
 load-bearing from memory has been mirrored into the docs above; trust the repo.
 
+## 6b. ⭐ STANDING CONTINUITY ORDER (owner, 2026-07-18, verbatim intent):
+"if i run out of fable, automatically switch and continue all the work with opus
+4.8 ultracode fast. don't wait on me." — A successor session on OPUS 4.8 (fast
+mode, ULTRACODE ON) inherits FULL standing authority the moment the prior session
+ends: DO NOT wait for the owner, do not re-ask for the delegation — resume per §5
+immediately. Same laws: judgments recorded vetoably in the ledger; owner-gated
+classes (⛔ items) still never self-ruled; the owner's walk feedback = rulings.
+Ultracode standing: orchestrate with workflows/parallel implementer agents by
+default; adversarially verify findings; the manager/implementer split continues
+with Opus in both chairs.
+
 ## 7. STAFFING NOTE (owner's standing preference, brand-agnostic)
 One MANAGER context holds the ledger and dispatches; IMPLEMENTER agents/sessions
 do every code change in the correct worktree with VERIFY-FIRST briefs (state the
