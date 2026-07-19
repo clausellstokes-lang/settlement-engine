@@ -12,7 +12,7 @@
 import { describe, it, expect } from 'vitest';
 import { createPRNG } from '../../src/kernel/prng.js';
 import {
-  advanceTraditions, successScore, outcomeForDraw, TRADITION_OUTCOME,
+  advanceTraditions, successScore, outcomeForDraw, TRADITION_OUTCOME, fairTradePulse,
 } from '../../src/domain/worldPulse/traditionsKernel.js';
 
 const NOW = '2026-01-01T00:00:00.000Z';
@@ -200,6 +200,51 @@ describe('§5 effects — write-bounded economy + legitimacy', () => {
     expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.FAILURE);
     expect(out.updated.economicState.prosperity).toBe('Moderate'); // 4 → 3
     expect(out.updated.powerStructure.publicLegitimacy.score).toBe(52); // 55 → 52
+  });
+});
+
+describe('§16 (Wave C) — the fair trade-lane pulse', () => {
+  const fairRec = (o = {}) => makeRec({ id: 'tradition.ashford.fair', coreMotif: { element: 'harvest', act: 'fair' }, name: 'The Harvest Fair', scaleBand: 4, ...o });
+  const onRoute = (route) => ({ ...town({ prosperity: 'Comfortable', legit: 55 }), config: { tradeRouteAccess: route } });
+
+  it('fairTradePulse: a fair GOOD-or-better on a trade lane earns +1; else 0', () => {
+    const fair = fairRec();
+    const feast = makeRec({ coreMotif: { element: 'harvest', act: 'feast' } });
+    // fires: fair, GOOD-or-better, connective route (major crossroads / standard road)
+    expect(fairTradePulse(fair, onRoute('crossroads'), TRADITION_OUTCOME.TRIUMPH)).toBe(1);
+    expect(fairTradePulse(fair, onRoute('road'), TRADITION_OUTCOME.GOOD)).toBe(1);
+    // does NOT fire: modest/troubled/failure, isolated route, non-fair act, no route
+    expect(fairTradePulse(fair, onRoute('road'), TRADITION_OUTCOME.MODEST)).toBe(0);
+    expect(fairTradePulse(fair, onRoute('isolated'), TRADITION_OUTCOME.TRIUMPH)).toBe(0);
+    expect(fairTradePulse(feast, onRoute('road'), TRADITION_OUTCOME.TRIUMPH)).toBe(0);
+    expect(fairTradePulse(fair, town({}), TRADITION_OUTCOME.TRIUMPH)).toBe(0); // no config ⇒ no lane
+  });
+
+  it('a fair TRIUMPH on a trade lane steps prosperity +2 (standard +1 AND the trade pulse +1)', () => {
+    const rec = fairRec();
+    const settlement = onRoute('road');
+    const seed = findSeed(TRADITION_OUTCOME.TRIUMPH, rec, settlement);
+    const out = runTick({ settlement, recs: [rec], rngSeed: seed, weeks: 9 });
+    expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.TRIUMPH);
+    expect(out.updated.economicState.prosperity).toBe('Wealthy'); // rank 4 → 6 (Comfortable → Wealthy)
+  });
+
+  it('a fair GOOD on a trade lane steps prosperity +1 (the trade pulse alone; GOOD normally 0)', () => {
+    const rec = fairRec();
+    const settlement = onRoute('crossroads');
+    const seed = findSeed(TRADITION_OUTCOME.GOOD, rec, settlement);
+    const out = runTick({ settlement, recs: [rec], rngSeed: seed, weeks: 9 });
+    expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.GOOD);
+    expect(out.updated.economicState.prosperity).toBe('Prosperous'); // rank 4 → 5
+  });
+
+  it('BYTE-IDENTITY: an ISOLATED fair triumph steps prosperity +1 only (no trade lane)', () => {
+    const rec = fairRec();
+    const settlement = onRoute('isolated');
+    const seed = findSeed(TRADITION_OUTCOME.TRIUMPH, rec, settlement);
+    const out = runTick({ settlement, recs: [rec], rngSeed: seed, weeks: 9 });
+    expect(out.ledger[0].lastOutcome).toBe(TRADITION_OUTCOME.TRIUMPH);
+    expect(out.updated.economicState.prosperity).toBe('Prosperous'); // 4 → 5 (the standard step only)
   });
 });
 
