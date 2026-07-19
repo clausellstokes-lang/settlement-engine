@@ -26,12 +26,25 @@ import {
   resolveTownMapStyle, DEFAULT_STYLE_ID,
   FURNITURE_KINDS, HAZARD_GLYPHS, ANCHOR_GLYPHS, CONTRAST_LEVELS,
 } from './townMapStyles.js';
+import { GLYPH_SET_IDS } from './townGlyphs/index.js';
 
 const HEX_RE = /^#[0-9a-fA-F]{3,8}$/;
 const _furnitureSet = new Set(FURNITURE_KINDS);
 const _hazardSet = new Set(HAZARD_GLYPHS);
 const _anchorSet = new Set(ANCHOR_GLYPHS);
 const _contrastSet = new Set(CONTRAST_LEVELS);
+// THE GENRE DOOR (IT-4): a bespoke skin may SELECT a registered glyph set (never author geometry) —
+// bounded to the SHIPPED vocabulary. `'medieval'` ships; a genre pack adds its id to GLYPH_SET_IDS.
+const _glyphSetIds = new Set(GLYPH_SET_IDS);
+// A skin's default SEASON leaning ("dress character") — the four bounded quarters, or null (no
+// bias ⇒ the map follows the live world clock). Consumed by groundDress as a fallback season.
+const _seasonBiasIds = new Set(['spring', 'summer', 'autumn', 'winter']);
+// The ILLUSTRATED lens's dress/shadow roles — NOT in the parchment base, so a bespoke skin naming
+// them must be allowed EXPLICITLY (else mergeRoleMap drops them as unknown roles). Bounded numerics:
+// stroke.dress rides STROKE_MAX; opacity.{dress,shadow,roofFill} ride 0..1. This lets the AI compose
+// a full glyph-reskin (palette + glyphSet + dress character) — still SELECT-only, never generative.
+const _strokeExtraRoles = new Set(['dress']);
+const _opacityExtraRoles = new Set(['dress', 'shadow', 'roofFill']);
 
 /** Bounds for numeric fields (defense against a runaway weight/scale). Stroke ≥ 0; opacity
  *  0..1; rasterScale a small integer-ish; grid step / token px bounded. */
@@ -57,9 +70,12 @@ export function validateBespokeStyle(candidate, meta = {}) {
   const c = (candidate && typeof candidate === 'object' && !Array.isArray(candidate)) ? candidate : {};
 
   // The known top-level fields — anything else is dropped (arbitrary SVG/geometry/substance).
+  // IT-4 adds `glyphSet` (select a registered glyph library) + `seasonBias` (a bounded default
+  // season) — the genre-door + dress-character reskin fields.
   const KNOWN = new Set([
     'id', 'label', 'background', 'contrast', 'hazardGlyph', 'anchorGlyph',
     'furniture', 'functional', 'rasterScale', 'palette', 'district', 'stroke', 'opacity',
+    'glyphSet', 'seasonBias',
   ]);
   for (const k of Object.keys(c)) {
     if (!KNOWN.has(k)) violations.push({ field: k, reason: 'unsupported_field' });
@@ -104,12 +120,27 @@ export function validateBespokeStyle(candidate, meta = {}) {
     });
   }
 
-  // Role maps — only KNOWN roles (keys present in the parchment base) with valid values
-  // override; an unknown role or a bad value is dropped-and-listed.
+  // Role maps — only KNOWN roles (keys present in the parchment base, PLUS the illustrated
+  // dress/shadow roles for stroke/opacity) with valid values override; an unknown role or a bad
+  // value is dropped-and-listed.
   const palette = mergeRoleMap(base.palette, c.palette, isHex, 'palette', violations);
   const district = mergeRoleMap(base.district, c.district, isHex, 'district', violations);
-  const stroke = mergeRoleMap(base.stroke, c.stroke, (v) => isFiniteNum(v) && v >= 0 && v <= STROKE_MAX, 'stroke', violations);
-  const opacity = mergeRoleMap(base.opacity, c.opacity, (v) => isFiniteNum(v) && v >= 0 && v <= 1, 'opacity', violations);
+  const stroke = mergeRoleMap(base.stroke, c.stroke, (v) => isFiniteNum(v) && v >= 0 && v <= STROKE_MAX, 'stroke', violations, _strokeExtraRoles);
+  const opacity = mergeRoleMap(base.opacity, c.opacity, (v) => isFiniteNum(v) && v >= 0 && v <= 1, 'opacity', violations, _opacityExtraRoles);
+
+  // glyphSet + seasonBias — SELECT-only bounded top-level fields (THE GENRE DOOR + dress character).
+  // Absent ⇒ OMITTED (no key) so the resolved shape stays byte-stable + dormant (a re-skin without
+  // a glyphSet is still a valid style); an invalid value is dropped + listed (never a default set).
+  let glyphSet;
+  if (c.glyphSet !== undefined) {
+    if (_glyphSetIds.has(/** @type {string} */ (c.glyphSet))) glyphSet = c.glyphSet;
+    else violations.push({ field: 'glyphSet', reason: 'not_in_vocab' });
+  }
+  let seasonBias;
+  if (c.seasonBias !== undefined) {
+    if (_seasonBiasIds.has(/** @type {string} */ (c.seasonBias))) seasonBias = c.seasonBias;
+    else violations.push({ field: 'seasonBias', reason: 'not_in_vocab' });
+  }
 
   const id = typeof meta.id === 'string' && meta.id ? meta.id
     : (typeof c.id === 'string' && c.id ? c.id : 'bespoke');
@@ -120,22 +151,29 @@ export function validateBespokeStyle(candidate, meta = {}) {
     __resolved: true,
     id, label, background, contrast, hazardGlyph, anchorGlyph,
     furniture, functional, rasterScale, palette, district, stroke, opacity,
+    // Conditional — a key is present ONLY when the candidate named a valid value, so a plain
+    // re-skin stays byte-identical in shape to the pre-IT-4 resolved style (the dormancy law).
+    ...(glyphSet !== undefined ? { glyphSet } : {}),
+    ...(seasonBias !== undefined ? { seasonBias } : {}),
   }));
   return { ok: true, style, violations };
 }
 
 /**
- * Merge a candidate role map over a base map: only KNOWN roles (keys in base) with values
- * passing `valid` override; unknown roles / bad values are dropped and listed. Pure.
+ * Merge a candidate role map over a base map: only KNOWN roles (keys in base, OR in `extraRoles` —
+ * the illustrated dress/shadow roles that are not on the parchment base) with values passing `valid`
+ * override; unknown roles / bad values are dropped and listed. Pure.
+ * @param {Set<string>} [extraRoles]  additional accepted role keys beyond the base map's own
  */
-function mergeRoleMap(base, cand, valid, field, violations) {
+function mergeRoleMap(base, cand, valid, field, violations, extraRoles) {
   if (!cand || typeof cand !== 'object' || Array.isArray(cand)) {
     if (cand !== undefined) violations.push({ field, reason: 'not_object' });
     return base;
   }
   const out = { ...base };
   for (const [role, value] of Object.entries(cand)) {
-    if (!Object.prototype.hasOwnProperty.call(base, role)) { violations.push({ field: `${field}.${role}`, reason: 'unknown_role' }); continue; }
+    const known = Object.prototype.hasOwnProperty.call(base, role) || (extraRoles ? extraRoles.has(role) : false);
+    if (!known) { violations.push({ field: `${field}.${role}`, reason: 'unknown_role' }); continue; }
     if (!valid(value)) { violations.push({ field: `${field}.${role}`, reason: 'invalid_value' }); continue; }
     out[role] = value;
   }
@@ -147,9 +185,13 @@ function mergeRoleMap(base, cand, valid, field, violations) {
  * fixed vocabulary (furniture / glyphs / contrast) + the role keys the renderer reads + the
  * four base lens ids (the house design language the AI composes WITHIN, never from nothing).
  * Pure. The edge grounds the compiler on it; the client's validateBespokeStyle is the wall.
+ * IT-4 additions (the RESKIN vocabulary): `glyphSets` (the genre door — registered glyph libraries a
+ * skin may SELECT), `seasonBias` (a bounded default-season leaning; null ⇒ follow the live clock),
+ * and the illustrated dress/shadow ROLES appended to stroke/opacity, so the composer can propose a
+ * full glyph-reskin (palette + glyph set + dress character) through the existing accept→mint path.
  * @returns {{ furniture: string[], hazardGlyphs: string[], anchorGlyphs: string[],
- *   contrast: string[], baseLenses: string[], roles: { palette: string[], district: string[],
- *   stroke: string[], opacity: string[] } }}
+ *   contrast: string[], baseLenses: string[], glyphSets: string[], seasonBias: Array<string|null>,
+ *   roles: { palette: string[], district: string[], stroke: string[], opacity: string[] } }}
  */
 export function buildStyleVocabulary() {
   const base = resolveTownMapStyle(DEFAULT_STYLE_ID);
@@ -159,11 +201,15 @@ export function buildStyleVocabulary() {
     anchorGlyphs: [...ANCHOR_GLYPHS],
     contrast: [...CONTRAST_LEVELS],
     baseLenses: ['parchment', 'watercolor', 'darkFantasy', 'vtt'],
+    glyphSets: [...GLYPH_SET_IDS],
+    seasonBias: [null, 'spring', 'summer', 'autumn', 'winter'],
     roles: {
       palette: Object.keys(base.palette),
       district: Object.keys(base.district),
-      stroke: Object.keys(base.stroke),
-      opacity: Object.keys(base.opacity),
+      // The dress/shadow roles the illustrated lens reads are appended so a bespoke skin can tune
+      // the ground-dress density + the NW-light hatch/roof weight (bounded numerics, THE WALL).
+      stroke: [...Object.keys(base.stroke), 'dress'],
+      opacity: [...Object.keys(base.opacity), 'dress', 'shadow', 'roofFill'],
     },
   };
 }

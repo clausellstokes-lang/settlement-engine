@@ -94,6 +94,7 @@ export const TOWN_MAP_LENS_IDS = Object.freeze([...TOWN_MAP_STYLE_IDS, ILLUSTRAT
  * @property {Record<string, number>} stroke
  * @property {Record<string, number>} opacity
  * @property {string} [glyphSet]  a registered glyph-set id (the illustrated lens); absent ⇒ legacy rects
+ * @property {'spring'|'summer'|'autumn'|'winter'} [seasonBias]  a bespoke skin's default-season leaning (IT-4); absent ⇒ follow the live clock
  * @property {boolean} [__resolved]
  */
 

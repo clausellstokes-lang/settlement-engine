@@ -37,6 +37,8 @@ import { SHADOW_DIR } from '../../design/townGlyphs/glyphCompiler.js';
 
 const VIEW = 1000;
 const R = Math.round;
+/** The four bounded seasons a bespoke skin may bias toward (IT-4 seasonBias fallback). */
+const SEASON_BIAS = new Set(['spring', 'summer', 'autumn', 'winter']);
 /** Round an opacity/weight to 2 decimals — a stable, machine-identical serialization
  *  (the SVG `num()` prints the shortest round-trip; rounding keeps season-muted values
  *  clean like 0.3, never a float tail). @param {number} v */
@@ -514,7 +516,12 @@ export function groundDressOps(model, styleArg = DEFAULT_STYLE_ID, dress = null)
 
   const ink = style.palette.ink;
   // SEASON CONTEXT — bounded reads off the optional dress; absent ⇒ null ⇒ seasonless.
-  const season = dress && typeof dress.season === 'string' ? dress.season : null;
+  const liveSeason = dress && typeof dress.season === 'string' ? dress.season : null;
+  // SKIN SEASON BIAS (IT-4): a bespoke skin may carry a default-season leaning (its "dress
+  // character"). It is a FALLBACK ONLY — the live world clock (dress.season) always wins — and is
+  // bounded to the four quarters. A base lens carries no seasonBias ⇒ null ⇒ byte-identical dormancy.
+  const styleBias = (typeof style.seasonBias === 'string' && SEASON_BIAS.has(style.seasonBias)) ? style.seasonBias : null;
+  const season = liveSeason || styleBias;
   const severity = dress && typeof dress.severity === 'string' ? dress.severity : null;
   const state = dress && dress.state && typeof dress.state === 'object' ? dress.state : null;
   // Fold season+severity into the seed so a town's winter texture differs from its summer;

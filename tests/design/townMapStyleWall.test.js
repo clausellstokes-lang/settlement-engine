@@ -114,4 +114,70 @@ describe('townMapStyleWall — the design corpus descriptor', () => {
     expect(v.roles.stroke).toContain('river');
     expect(v.roles.opacity).toContain('waterFill');
   });
+
+  it('IT-4: advertises the RESKIN vocabulary — glyphSets (genre door), seasonBias, dress/shadow roles', () => {
+    const v = buildStyleVocabulary();
+    expect(v.glyphSets).toContain('medieval');                 // the genre door
+    expect(v.seasonBias).toEqual([null, 'spring', 'summer', 'autumn', 'winter']);
+    expect(v.roles.stroke).toContain('dress');                 // the AI can tune the ground-dress ink
+    expect(v.roles.opacity).toEqual(expect.arrayContaining(['dress', 'shadow', 'roofFill']));
+  });
+});
+
+describe('townMapStyleWall — IT-4 reskin fields (glyphSet + seasonBias + dress/shadow roles)', () => {
+  it('accepts a registered glyphSet + a valid seasonBias + bounded dress/shadow roles', () => {
+    const { style, violations } = validateBespokeStyle({
+      label: 'Full Reskin',
+      glyphSet: 'medieval',                                    // ∈ GLYPH_SET_IDS → kept
+      seasonBias: 'autumn',                                    // ∈ vocab → kept
+      opacity: { dress: 0.6, shadow: 0.2, roofFill: 0.1 },     // illustrated roles → kept
+      stroke: { dress: 1.2 },                                  // illustrated role → kept
+    });
+    expect(style.glyphSet).toBe('medieval');
+    expect(style.seasonBias).toBe('autumn');
+    expect(style.opacity.dress).toBe(0.6);
+    expect(style.opacity.shadow).toBe(0.2);
+    expect(style.opacity.roofFill).toBe(0.1);
+    expect(style.stroke.dress).toBe(1.2);
+    expect(violations).toEqual([]);
+  });
+
+  it('REJECTS an unregistered glyphSet, an out-of-vocab seasonBias, out-of-range dress, and a stroke non-role', () => {
+    const { style, violations } = validateBespokeStyle({
+      glyphSet: 'cyberpunk',            // not registered / not in GLYPH_SET_IDS → dropped
+      seasonBias: 'monsoon',            // not a quarter → dropped
+      opacity: { dress: 2 },            // > 1 → dropped (out of range)
+      stroke: { shadow: 3 },            // 'shadow' is an OPACITY role, not a stroke role → unknown_role
+    });
+    expect(style.glyphSet).toBeUndefined();       // no default set is ever invented
+    expect(style.seasonBias).toBeUndefined();
+    expect(style.opacity.dress).toBeUndefined();  // stayed off (no parchment default for it)
+    expect(style.stroke.shadow).toBeUndefined();
+    const fields = violations.map((x) => x.field);
+    expect(fields).toContain('glyphSet');
+    expect(fields).toContain('seasonBias');
+    expect(fields).toContain('opacity.dress');
+    expect(fields).toContain('stroke.shadow');
+  });
+
+  it('a geometry-shaped glyph field (raw path data) NEVER survives — SELECT-only, never generative', () => {
+    const { style, violations } = validateBespokeStyle({
+      glyphSet: 'medieval',
+      glyphs: { church: { strokes: [{ d: 'M0 0 L1 1' }] } },   // raw AUTHORED geometry → dropped
+      glyphGeometry: '<path d="M0 0"/>',                        // arbitrary → dropped
+    });
+    expect(style.glyphSet).toBe('medieval');                    // the SELECT survives…
+    expect(style.glyphs).toBeUndefined();                       // …the AUTHORED geometry never does
+    expect(style.glyphGeometry).toBeUndefined();
+    expect(violations.map((x) => x.field)).toEqual(expect.arrayContaining(['glyphs', 'glyphGeometry']));
+    expect(JSON.stringify(style)).not.toContain('path');
+  });
+
+  it('a plain re-skin (no glyphSet/seasonBias) resolves to the SAME key shape as before (dormancy)', () => {
+    const { style } = validateBespokeStyle({ background: '#0a0a12', label: 'Plain' });
+    expect(style.glyphSet).toBeUndefined();
+    expect(style.seasonBias).toBeUndefined();
+    expect(Object.keys(style)).not.toContain('glyphSet');
+    expect(Object.keys(style)).not.toContain('seasonBias');
+  });
 });
