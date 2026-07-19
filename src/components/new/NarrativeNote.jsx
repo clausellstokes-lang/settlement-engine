@@ -21,8 +21,8 @@ export function NarrativeNote({ note }) {
     <div style={{
       marginBottom: 14,
       background: swatch['#FAF8F4'],
-      border: '1px solid #c8b89a',
-      borderLeft: '3px solid #5A6E82',
+      border: `1px solid ${swatch['#C8B89A']}`,
+      borderLeft: `3px solid ${swatch['#5A6E82']}`,
       overflow: 'hidden',
       fontFamily: sans,
     }}>

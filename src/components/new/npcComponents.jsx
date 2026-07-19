@@ -186,7 +186,7 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
               display:'inline-flex',alignItems:'center',justifyContent:'center',
               width:22,height:22,flexShrink:0,
               background: isPinned ? swatch['#F0EBFF'] : 'transparent',
-              border: `1px solid ${isPinned ? '#c8a8e8' : 'transparent'}`,
+              border: `1px solid ${isPinned ? pinColor : 'transparent'}`,
               color: isPinned ? pinColor : '#b8a898',
               cursor:'pointer',
               transition:'all 0.15s',
@@ -213,16 +213,16 @@ function NPCInlineCard({ npc, _relationships=[], pinnedIds, onTogglePin }) {
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',
                   ...(compromiseLc?.tone === 'muted'
-                    ? { color:swatch.inkMag3, border:'1px solid #b8a878' }
+                    ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
                     : compromiseLc?.tone === 'exposed'
-                      ? { color:swatch.inkMag3, border:'1px solid #b09860' }
-                      : { color:swatch.danger, border:'1px solid #d0a0a0' }),
+                      ? { color:swatch.inkMag3, border:`1px solid ${swatch.inkMag3}` }
+                      : { color:swatch.danger, border:`1px solid ${swatch.danger}` }),
                   padding:'1px 6px',
                 }}>{(compromiseLc?.badge) || 'Compromised'}</span>
               ) : (
                 <span style={{
                   fontWeight:800,letterSpacing:'0.04em',textTransform:'uppercase',color:swatch.inkMag3,
-                  border:'1px solid #b09860',padding:'1px 6px',
+                  border:`1px solid ${swatch.inkMag3}`,padding:'1px 6px',
                 }}>Exposed</span>
               )}
               {npc.corrupt && npc.corruptTies?.criminalInstitution && (
