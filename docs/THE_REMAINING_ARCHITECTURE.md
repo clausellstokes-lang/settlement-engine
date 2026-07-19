@@ -124,6 +124,16 @@ files, desktop fine-pointer only w/ stills fallback, taste-gate toggle). Masters
 ~/Desktop/settlementforge-marketing-masters/. ⚠ taste call at the walk: the
 8-second thorp segment's playback rate. Integrates with PipelineReveal (its
 THEATER-ONCE disposition stands — the film is the theater's backdrop).
+⬛ OWNER AMENDMENT (same day, THE PERFORMANCE FALLBACK): generation is actually
+<50ms — the wait is DELIBERATE THEATER. So the conductor has TWO MODES:
+(1) THEATER MODE (default): the film plays the scripted per-tier cadence (the
+owner's psychological pacing — the step timings are the driver, not real work).
+(2) REALITY MODE (fallback): if real completion has NOT arrived when the theater
+script would end (perf regression, slow device, network — the realm/FMG boot is
+network-bound and thus reality-native), the conductor switches to ACTUAL-progress
+scrubbing: the film slows/holds at the last chapter boundary short of arrival and
+plays its final leg only on true completion. THE UNIFYING LAW: the film may NEVER
+finish before the real artifact exists — arrival is the only thing that ends it.
 
 ### Slice C2 — THE WELCOME: the Survey of One Settlement (THE FILM RULING)
 ⬛ OWNER RULING 2026-07-18 ("i want the microsite animation for my welcome page…
