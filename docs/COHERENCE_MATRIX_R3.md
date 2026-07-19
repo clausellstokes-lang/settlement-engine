@@ -79,3 +79,35 @@ read, war saw coherence). Full list in the journal synthesis.
 
 Convergence (per the mandate) = zero must-fix findings AND zero gate-passing coherence gaps
 left unbuilt (built, or explicitly deferred-with-rationale above).
+
+## DEFERRED FEATURES — need NEW machinery (recorded, NOT loop-scheduled)
+These are MISSING_NO_FOUNDATION pairs: a coupling logic/intent wants, but which cannot be
+built from existing state on both sides — each needs a new subsystem/attribute, so each is
+a FUTURE FEATURE (owner-commissioned), outside the loop's four gates. Recorded here so they
+are found, not re-discovered. Two are ALREADY deliberately deferred by their own design docs.
+
+1. **beliefs×migration — a demographic belief axis.** BeliefRecord is power-oriented (readiness/
+   strength/alliance/faith-lean); no slot for "City X is emptying out." Build = a new belief axis
+   fed transitively (migration→rumor→belief, after the migration→rumor loop-build). DOES: observers
+   can believe (rightly or wrongly) a settlement is declining and act on it.
+2. **beliefs×traditions — a cultural belief axis.** Same shape: no slot for a settlement's cultural/
+   observance state, so a rival's fog-of-war can't be stale about culture (still "believing" an old
+   rite persists after politics rededicated it). Build = a new cultural belief attribute. DOES:
+   cultural reputation becomes a believable, spoofable diplomatic fact.
+3. **informationStatecraft×ladder — per-NPC credibility.** Credibility (W-DOCTRINE-2's proven-liar
+   stock) is settlement/observer-scoped. Build = per-NPC credibility attribution. DOES: an NPC
+   caught in a LIE takes a personal ladder-standing hit (mirrors corruption-exposure stigma); his
+   future claims are discounted personally — character-level reputation.
+4. **generosity×roads — third-party ransom payer.** Ransom is hard-wired to the captive's OWN
+   settlement. Build = a payer≠home path + an obligation/gratitude write into the generosity ledger.
+   DOES: ransoming/rescuing someone else's captive as a favor-economy move (place a freed rival in
+   your debt; earn an ally's credit). [PENDING-ROADS-FOLD]
+5. **generosity×rumor/intel — the intel SELL lane (ALREADY DEFERRED by design).**
+   informationStatecraft.js:1179 parks the SELL verb for "future wiring / the DM-verb path,"
+   explicitly warning against "a constant whisper-war hum." Build = a mover/DM-verb subsystem to
+   trade intelligence as a good. DOES: information-as-currency (gift/sell an enemy's movements to an
+   ally). NOTE: deliberately deferred, not merely unbuilt — respect the anti-noise caution.
+6. **naval/sea-lanes×roads — maritime journeys (ALREADY DEFERRED by DESIGN_THE_ROADS).** Build = a
+   sea leg-type on MissionRec, a sea-aware currentHopOf, sea-specific hazards (pirates/storms/
+   blockades, not patrolling armies). DOES: envoys, embassies, and captives travel by sea — opens
+   roads to maritime realms. [PENDING-ROADS-FOLD]
