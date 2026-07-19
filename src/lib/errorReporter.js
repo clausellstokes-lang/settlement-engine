@@ -26,6 +26,48 @@ function safe(fn) {
   }
 }
 
+// ── Dedup + per-session sampling cap ─────────────────────────────────────────
+// A render-loop crash or a rejection fired every frame must not flood the sink.
+// The server side is rate-limited per IP (log-client-error: 60/min), but that is
+// a storage-bill backstop, not noise control — a single tab in a crash loop can
+// still emit hundreds of identical reports inside one minute. So we gate the
+// NETWORK send (never the local console) two ways, both in-session and in-memory
+// only (no storage, no PII): send each distinct signature at most once, and never
+// more than MAX_REPORTS_PER_SESSION reports total.
+const MAX_REPORTS_PER_SESSION = 25;
+const sentSignatures = new Set();
+let sentCount = 0;
+
+/**
+ * Compact, stable per-error signature (dedup key only — computed client-side,
+ * never sent). Derived from kind + message + the first stack frame, hashed with
+ * FNV-1a into base36 so two crashes from the same site collapse to one report.
+ * @param {{kind?:string,message?:string,stack?:string}} payload
+ * @returns {string}
+ */
+function signatureOf(payload) {
+  return safe(() => {
+    const firstFrame =
+      String(payload.stack || '')
+        .split('\n')
+        .map((l) => l.trim())
+        .find((l) => /\bat\b|@/.test(l)) || '';
+    const basis = `${payload.kind}\n${payload.message}\n${firstFrame}`;
+    let h = 0x811c9dc5;
+    for (let i = 0; i < basis.length; i++) {
+      h ^= basis.charCodeAt(i);
+      h = Math.imul(h, 0x01000193);
+    }
+    return (h >>> 0).toString(36);
+  }) || '';
+}
+
+/** Test-only reset of the in-session dedup/cap state. No-op cost in production. */
+export function __resetErrorReporterState() {
+  sentSignatures.clear();
+  sentCount = 0;
+}
+
 /**
  * Report a client error. Always logs; POSTs only when an endpoint is set.
  * @param {unknown} error
@@ -48,6 +90,13 @@ export function reportError(error, context = {}) {
   console.error('[error]', payload.kind, payload.message);
 
   if (!ENDPOINT) return;
+
+  // Dedup + cap the network send (see MAX_REPORTS_PER_SESSION above).
+  const sig = signatureOf(payload);
+  if (sig && sentSignatures.has(sig)) return;
+  if (sentCount >= MAX_REPORTS_PER_SESSION) return;
+  if (sig) sentSignatures.add(sig);
+  sentCount += 1;
 
   const body = safe(() => JSON.stringify(payload));
   if (!body) return;
